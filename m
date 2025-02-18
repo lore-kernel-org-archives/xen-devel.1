@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C47B9C02198
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:56:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.891827.1300841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55620C02198
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:58:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.891838.1300851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkP0q-0002tU-1s; Tue, 18 Feb 2025 14:55:52 +0000
+	id 1tkP3T-0005Ed-EG; Tue, 18 Feb 2025 14:58:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 891827.1300841; Tue, 18 Feb 2025 14:55:52 +0000
+Received: by outflank-mailman (output) from mailman id 891838.1300851; Tue, 18 Feb 2025 14:58:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkP0p-0002tN-Va; Tue, 18 Feb 2025 14:55:51 +0000
-Received: by outflank-mailman (input) for mailman id 891827;
- Tue, 18 Feb 2025 14:55:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=X4Dy=VJ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tkP0o-0002ry-LB
- for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:55:50 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 70da06a0-ee08-11ef-9aa7-95dc52dad729;
- Tue, 18 Feb 2025 15:55:49 +0100 (CET)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-abb75200275so437892366b.3
- for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:55:49 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abb99fd1983sm411292866b.108.2025.02.18.06.55.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Feb 2025 06:55:48 -0800 (PST)
+	id 1tkP3T-0005EW-Bk; Tue, 18 Feb 2025 14:58:35 +0000
+Received: by outflank-mailman (input) for mailman id 891838;
+ Tue, 18 Feb 2025 14:58:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=v6LV=VJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tkOgq-0006F6-6e
+ for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:35:12 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8e7ef3c7-ee05-11ef-9896-31a8f345e629;
+ Tue, 18 Feb 2025 15:35:10 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5dc89df7eccso10276403a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:35:10 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-abb952c7364sm450691866b.18.2025.02.18.06.35.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Feb 2025 06:35:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,156 +46,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 70da06a0-ee08-11ef-9aa7-95dc52dad729
+X-Inumbo-ID: 8e7ef3c7-ee05-11ef-9896-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1739890549; x=1740495349; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=3CaBfu5tjaIr7h06pH+Vr5s4jHvi+DeI7NX0QLXgr3c=;
-        b=dufaBQ68HOcjpiJ/nbTWp7O0gBT46HIrAX4HzytozMONwDzb+cCHZU17mr8FHw/II5
-         gWoKSmI5PGqAeKJpMi+Ykc4Xkhnbrgw+5IZhe94ruV+26hiXwe3qZF+YtzxSNCz75wgw
-         V6R6+zAU44S5dgUczFJaCdVkPjibkHS+sgQAaQ41zmN9+M3Fm2k+yZk3gwhe1icHu3OK
-         ttHG+OLTN9Z5Ai1Vkr6mtbBHYxOXqqRv4Vk+gIjim/Zi1qzP0zY9gOIRYdpirDrvlb+h
-         TQyiOert6J2cYOZeM0pV3R022SK4zLdE33UFhxChI7HFp4s5RRzp418mH+KAZZWpHUS/
-         Qs4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739890549; x=1740495349;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1739889310; x=1740494110; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3CaBfu5tjaIr7h06pH+Vr5s4jHvi+DeI7NX0QLXgr3c=;
-        b=UzKWWjwsrMLmH0wG4nVd+CxqiHL+meWyGGakQrkgkHR6dj2gBleLA4uvE5cVDDW+Zx
-         60rJzOKsFT1PppJZ6TYksjFqt6rpMfHpH3fgBYmrdnofbtAgCE0ZRTlykKq946/jZDJz
-         dhDC+ZeszOIntBjyyyRNfYL2YFOvYX55XueHmeJU4+LxaU+oVnD9pD+grHtMzEa7bVsi
-         lfGFajy6ZgiFn+toGAlCZwME7klOu4LP/9b/Zc3KBLypJn934+S87QIOpWoVKJpyFo4j
-         YbuRshO5MzB2gP/q/13h9zU8ZnfzN2NN/z2O4CCbR9lJUy4r2b35JKXySzCj6cmF3B4l
-         4Rkw==
-X-Forwarded-Encrypted: i=1; AJvYcCXe96pYPuPgBZ4wDTppk7N7NLYsNSmH7+ylwtTPxLvOOiVfm+rDQJTN6SU2Ol5JP0FdwrtHP721DCw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywc05B5eu/QTisjCkqvo33dRUkiJbYwknALDLrh+0WnTkcF8Euj
-	eMcfkAjR8QOueylT9GhYXdL69VWQHQJ+ReS1baxdudHc5db0dVwzzDCBEjYjfA==
-X-Gm-Gg: ASbGncsGDd8lylfPNx328RV6KK6VP6Rya7OlF+SAF5635UVV/hL2DQIcf/FGVHUA7zE
-	RtlWdag8QRuvu8mZma9J1umJriObGW7OCWOduJek75el3sVnKwx5Wz7s92WnTcDrai8nwexniVn
-	ymCXn6Q7Iml667eG8xTb952McUe5uyAL2Fcuhy5w70peKxACSQEPIKYrdMsW4MgR4cD0gk9yIAm
-	FI4venByOsYP/xZGS1TRZJQBcRUff6x1FzcvnqmrJqtN6oX9f4ZZ2IVqbwpwh9Qu2YVpDSs7i3M
-	hzcLE4PaZZTQKJP28NQ3/JiueCsNZtp1hh6492NZ38BfDuBXSRW/2E7eL8fwErsR/7p6s0ghqZE
-	l
-X-Google-Smtp-Source: AGHT+IEKf+wWX2pgr9oepBM13ph/9PNuNZJUB8ZbQukIM1R2DSh3Mkl06b0MuLqpSQJ5+M7z9e1nlw==
-X-Received: by 2002:a17:906:4116:b0:ab7:ea59:2120 with SMTP id a640c23a62f3a-abb70a7c980mr1231592566b.10.1739890548718;
-        Tue, 18 Feb 2025 06:55:48 -0800 (PST)
-Message-ID: <77bcd512-eea4-4098-bfe8-c7442cdf4fe9@suse.com>
-Date: Tue, 18 Feb 2025 15:55:47 +0100
+        bh=QWQsofR/OwYu0UntOR2i7CjQrmM6vERZ5SxhIV+/oQs=;
+        b=U4nKR4DkIT3zNZf84AnWijmuzeYqAl31/JWzI/7ba5Hc/OsF3DHvgKCG7T5i7NL56g
+         PPRNiNazRyaDh3D3QpwqflVlBDZsDgsU8g6YVdPfVkZxxI6EukreGeQns5y69AEfjw8c
+         rlQ2zB5oMi8K8nKzy2xJmJqXcjCal1Xzmq5wY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739889310; x=1740494110;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QWQsofR/OwYu0UntOR2i7CjQrmM6vERZ5SxhIV+/oQs=;
+        b=Nv3rhk3+qzYavT2GITKMDRm9Y/nQgYp1zjWDCmOQoWlPNoMia5Di01wgn1Hhk8eZOV
+         z8LXdKZ8ga4d40pDB71UE9qY10EBtHBM8d224e8+kSaJfjKglZoSouXACKMcSUpP94JJ
+         7dv4lCKyNUg6KGu51c0WsUR3iMvv+rwZo+lcUyykhWYc6WIgXYycZSAKx7WYbtXbBlfH
+         xWfU4KxqS9csiUAyi59XWLKa7tWGeCsia7GMDlxTy7OeT5S6ae9kBLwwc9/iSR1Qq4zI
+         qhsKW8TBOfpAOqWZh/zoKJbOjvcWVgVa1wjMlleXG478Z4Lpw+uw5/e9okTRj4YNOEAF
+         PEBg==
+X-Gm-Message-State: AOJu0Yxjyo3Zrm/zUbjZq2yp8753598sh1E/xJeqbkD/ow5b+BK2Pa54
+	toBHoAFV9BM7f7PPH9mLRozcidylfvZg70Y2gfBSKw+att70GssAnNljiSWmFhCc0JGwcMgnnfB
+	P
+X-Gm-Gg: ASbGncu+eYcIubuOQjs63bT4/0+XCrLVjg6oBGXclGGSJniA+rGwhaOXs00JF/KC5Z5
+	cwPWs+cSLQjyW1FJuFIFnn90xWxBpMlNiWF6AKJ4liCkDbPiGNOCsb3hTy7oWlaP+0PYnc3YPKB
+	l/AJFut7/H3f4WiyctUJ/v1y4fD1k34+d1P+ljJkmse5qLR/o2LC7N1n4H1R4LZlCcPTzLF6rjF
+	MbUO06yd2Ut3ZqZLLyP9tP1ryQeBsWZAvzXjr0QFbWtdwU1TDNfm6+jzOxE2Vt3SLtP9qFKvtV+
+	cdn/2WspFSuBsoMUkl1g
+X-Google-Smtp-Source: AGHT+IFdki87Kb70og2rfQkffNBKPkMfweUZa4yACA4+AB+FPxgpdQXCGMHoZ1di5iaJp/yiwTq1tw==
+X-Received: by 2002:a17:906:3117:b0:ab7:b356:62e0 with SMTP id a640c23a62f3a-abb711c3ef2mr1262258466b.53.1739889309751;
+        Tue, 18 Feb 2025 06:35:09 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 1/2] x86/emul: dump unhandled memory accesses for PVH dom0
+Date: Tue, 18 Feb 2025 15:35:03 +0100
+Message-ID: <20250218143504.77638-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20250218143504.77638-1-roger.pau@citrix.com>
+References: <20250218143504.77638-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/11] xen/x86: introduce "cpufreq=amd-cppc" xen
- cmdline
-To: "Penny, Zheng" <penny.zheng@amd.com>
-Cc: "Huang, Ray" <Ray.Huang@amd.com>, "Andryuk, Jason"
- <Jason.Andryuk@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- "Orzel, Michal" <Michal.Orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20250206083255.1296363-1-Penny.Zheng@amd.com>
- <20250206083255.1296363-4-Penny.Zheng@amd.com>
- <ed8af131-7f1b-47db-8d28-553977a4f3cd@suse.com>
- <DM4PR12MB8451A3D08427CDD412AA650DE1FB2@DM4PR12MB8451.namprd12.prod.outlook.com>
- <f9dccb9b-24e9-416f-bfd7-787b8df4b617@suse.com>
- <DM4PR12MB84519F089FBB09112A16D438E1FA2@DM4PR12MB8451.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <DM4PR12MB84519F089FBB09112A16D438E1FA2@DM4PR12MB8451.namprd12.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18.02.2025 05:24, Penny, Zheng wrote:
->> -----Original Message-----
->> From: Jan Beulich <jbeulich@suse.com>
->> Sent: Monday, February 17, 2025 6:34 PM
->>
->> On 17.02.2025 11:17, Penny, Zheng wrote:
->>>> -----Original Message-----
->>>> From: Jan Beulich <jbeulich@suse.com>
->>>> Sent: Tuesday, February 11, 2025 8:09 PM
->>>>
->>>> On 06.02.2025 09:32, Penny Zheng wrote:
->>>>> @@ -131,6 +131,15 @@ static int __init cf_check
->>>>> setup_cpufreq_option(const
->>>> char *str)
->>>>>              if ( arg[0] && arg[1] )
->>>>>                  ret = hwp_cmdline_parse(arg + 1, end);
->>>>>          }
->>>>> +        else if ( choice < 0 && !cmdline_strcmp(str, "amd-cppc") )
->>>>> +        {
->>>>> +            xen_processor_pmbits |= XEN_PROCESSOR_PM_CPPC;
->>>>> +            cpufreq_controller = FREQCTL_xen;
->>>>> +            cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_amd_cppc;
->>>>
->>>> While apparently again a pre-existing problem, the risk of array
->>>> overrun will become more manifest with this addition: People may
->>>> plausibly want to pass a universal option to Xen on all their instances:
->>>> "cpufreq=hwp,amd-cppc,xen". I think this wants taking care of in a prereq patch,
->> i.e.
->>>> before you further extend it. Here you will then further want to bump
->>>> cpufreq_xen_opts[]'es dimension, to account for the now sensible three-fold
->> option.
->>>>
->>>
->>> Correct me if I'm wrong, We are missing dealing the scenario which looks like the
->> following:
->>> "cpufreq=amd-cppc,hwp,verbose".
->>
->> Not so much this one (can it even overflow). It's "cpufreq=amd-cppc,hwp,xen"
->> that I'm concerned about (or, prior to your change something redundant like
->> "cpufreq=hwp,hwp,xen").
-> 
-> I misunderstood before, sorry
-> What is the appropriate behavior when user passes an option to Xen, like "cpufreq=amd-cppc,hwp,xen" ?
-> FWIT, amd-cppc and hwp are incompatible options.
+A PV dom0 can map any host memory as long as it's allowed by the IO
+capability range in d->iomem_caps.  On the other hand, a PVH dom0 has no
+way to populate MMIO region onto it's p2m, so it's limited to what Xen
+initially populates on the p2m based on the host memory map and the enabled
+device BARs.
 
-Sure, but as said people may want to use something like this uniformly on
-all their systems, be them AMD or Intel ones. IOW ...
+Introduce a new debug build only printk that reports attempts by dom0 to
+access addresses not populated on the p2m, and not handled by any emulator.
+This is for information purposes only, but might allow getting an idea of
+what MMIO ranges might be missing on the p2m.
 
-> Send the error info to tell them you shall choose either of them, amd-cppc, or hwp, or xen?
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/x86/hvm/emulate.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-... no, I don't think this should be an error.
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index 0d90cc4598be..08b9493e6d88 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -337,6 +337,9 @@ static int hvmemul_do_io(
+         /* If there is no suitable backing DM, just ignore accesses */
+         if ( !s )
+         {
++            if ( is_mmio && is_hardware_domain(currd) )
++                gdprintk(XENLOG_DEBUG, "unhandled memory %s %#lx size %u\n",
++                         dir ? "read from" : "write to", addr, size);
+             rc = hvm_process_io_intercept(&null_handler, &p);
+             vio->req.state = STATE_IOREQ_NONE;
+         }
+-- 
+2.46.0
 
-> If user wants to add fall back scheme, when amd-cppc is hardware unavailable, we fall back to xen. user shall
-> use ";", not "," to add, like "cpufreq=amd-cppc;xen"
-
-Well, I didn't closely check whether the separator is to be semicolon or
-comma. Things is that people may want to use one single command line
-option across all their systems, old or new, Intel or AMD. Hence they may
-want to ask to use HWP is available, CPPC is available, or fall back to
-what we have had for ages. Yet they will also need to have a way to
-express that they want only HWP and CPPC to be tried, without falling
-back to the legacy driver. Hence we may not automatically fall back to
-that if "amp-cppc" was passed, but is unavailable.
-
-Jan
 
