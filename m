@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 672F1C02198
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:42:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.891748.1300792 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9825CC02198
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:44:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.891762.1300802 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOno-0003si-Uw; Tue, 18 Feb 2025 14:42:24 +0000
+	id 1tkOpk-0004pi-8R; Tue, 18 Feb 2025 14:44:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 891748.1300792; Tue, 18 Feb 2025 14:42:24 +0000
+Received: by outflank-mailman (output) from mailman id 891762.1300802; Tue, 18 Feb 2025 14:44:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOno-0003sb-R1; Tue, 18 Feb 2025 14:42:24 +0000
-Received: by outflank-mailman (input) for mailman id 891748;
- Tue, 18 Feb 2025 14:42:23 +0000
+	id 1tkOpk-0004pb-5o; Tue, 18 Feb 2025 14:44:24 +0000
+Received: by outflank-mailman (input) for mailman id 891762;
+ Tue, 18 Feb 2025 14:44:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=X4Dy=VJ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tkOnn-0003rp-PI
- for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:42:23 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=v6LV=VJ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tkOgo-000673-4n
+ for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:35:10 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90230c54-ee06-11ef-9aa7-95dc52dad729;
- Tue, 18 Feb 2025 15:42:22 +0100 (CET)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aba868c6e88so644510766b.2
- for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:42:22 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abba19bd1dbsm334370366b.30.2025.02.18.06.42.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Feb 2025 06:42:21 -0800 (PST)
+ id 8de899e9-ee05-11ef-9aa7-95dc52dad729;
+ Tue, 18 Feb 2025 15:35:09 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-abb9709b5b5so435498566b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Feb 2025 06:35:09 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aba532322e6sm1067364666b.1.2025.02.18.06.35.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Feb 2025 06:35:08 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +46,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90230c54-ee06-11ef-9aa7-95dc52dad729
+X-Inumbo-ID: 8de899e9-ee05-11ef-9aa7-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1739889742; x=1740494542; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=R8U8mVBR/ipnqPv8z2dWqe9XwRmmOsN1flMsOo2wpqI=;
-        b=Djdkr62D3un5ry72Q76yXt9Q4m1PZ/FPbp93JzVLHfVfblTvrrVlEUMBEqMapquP4U
-         gzpUVbui0QGy7rVdvYmdF3PAcbszAsmjwzB5NsENtoEgTEqhJgUZSYWSa49vO1VSnVHY
-         VfOLVNnD3Ymg0wNmWDEQnq7D5gk108UMD9Bmr3KgATf7ERq30fSVH9uZAYUp/fHDLMsz
-         V6+/FhQuBKOi3SHERwUJvIjNVzxde9oDCAKtF4XPjfCdmzd7/hc/4BLxX7fsKRxfkQHf
-         B7/KUi868ekpHYCz38u3FT91P3J5Hl+I8pm/bO5io+wHSJV8pKnNv9E2Jh2HLai8OZSi
-         eIhQ==
+        d=citrix.com; s=google; t=1739889309; x=1740494109; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=a0U7Kjm0K8i5rqhLPLXCHGParQ+uCx4LOB3GCQNbl50=;
+        b=h9njrex9+pctM76Ft+lnTIINxV7glmEDK/aXxDtoLHIQS9tUzvWTkrmr1UHFCmNSsI
+         5PbeFz9yngX52H/t/gVoVIrSjjYHUEDfXX6dwefkX41JYv+fwBsWv3W+6nRjqw5M5rbc
+         N8NDyXUvRtsL94E/V7hrjQizmaq/V1AR0yIIY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739889742; x=1740494542;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1739889309; x=1740494109;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=R8U8mVBR/ipnqPv8z2dWqe9XwRmmOsN1flMsOo2wpqI=;
-        b=weT3xeObJgDZx8z2xpAcwz6WDrs4FUFAJT2JVR8p9gKNTn0lUm3yDNRGqdTNY6XzAG
-         A7NATNb6gI6Wy85FcZ21tXdP25PsB0b5sYtdNAIyp8zL9j3Mo81qYxpFqmllw7X6tnyn
-         47cEkwbrTQ4kMg6jFKOquF5MNWb6d4nPtTp1nAOVGJU3J3B5el6ks8wHKbnBn4RHodg3
-         BTHnGFHYvkJdU1onQ1yYV2ZcxsQMTtIrZfq/c615w8YbVCiS4K23DkwMlZ4d52y4etIc
-         7Cej7v842AY2VMDf2b8ndFOAmEce2Bc8dHMWqPKYGBqFjkhh2GSs5iX1isdsK52P6GkY
-         f0RQ==
-X-Gm-Message-State: AOJu0Yxrpr2e2Ubm44aDpCB15nWRcH0SUXVBj/93mwTLu1NIqE2web5h
-	d8c+UBRUucskYCvv5vKqZdit3e2AIlUZAxMHiv2M5kZ2CMRygw+y9u4x0I9Nqw==
-X-Gm-Gg: ASbGnctAPM16KtNEvKvfmG46lm28VbhxTfQBoVmVeQehLYzKyD+mAmGR2REIq4AOUc6
-	6fO61WZQoiFk/oYOJbtuvUggiRJxYbMpcA3wp/+N5UHxpiIH7sAmBV9H9Zxvddac3rcdHdVFqz4
-	7O2hzB2Tq9LCOVqW4V3IAdxJG5gj9mQZWz23xUDON6dEghQRn8pwk72PFgZ0HvZciG7fKQPjPI9
-	G0yqjtXK+rM3ztwHluqC3zG9XXeBbbNPIAPsX+NphnOlvE2f+zPpL7INV83rdxfBAtdWC3SoczN
-	9QOs4TI77SDvgXS1JyMpj6K28Q+YhufJT6KFv4En7qeZM+hXqiGbngkxkoYSpm1S7aWw+oIoenN
-	g
-X-Google-Smtp-Source: AGHT+IG4ABxAFwzNSfmHfdtf8Eqtdqrf/68cfur4344lVd44rBMY6tPvRtlK8e3zvDY1KKUYwrdCiw==
-X-Received: by 2002:a17:907:7f27:b0:abb:6e95:b272 with SMTP id a640c23a62f3a-abb70bbf64fmr1495652166b.30.1739889742174;
-        Tue, 18 Feb 2025 06:42:22 -0800 (PST)
-Message-ID: <799c5a1b-d083-4b93-be44-a204a8b845f8@suse.com>
-Date: Tue, 18 Feb 2025 15:42:21 +0100
+        bh=a0U7Kjm0K8i5rqhLPLXCHGParQ+uCx4LOB3GCQNbl50=;
+        b=H86u1D/fqdrB3QId2nbpJ2OKGqrFqzzM9q07thjMDKRH2ZjmfgE4oeCEW7zFRJ4DRP
+         qfCX/5Uxixg3NDR/VX/m/zcF2gscMQPHeHiT4o/yGrQ0jZHDsvOFnDyarv1vNfSbQEpO
+         F5uLIXOXTcFzVfDlGTIV7qyyyiwOzrhTT0w+Ov25XBqA8Hy8J8OjcKL+pXjqtyK5z8Wt
+         vwk9+9oXQjeHdUfCgl6DW8BRXVinFXn+0/FiF7GCMZ8872+DDbTMVMFGoMH+iOZOQowD
+         s27YWDUrkd2JTWaWbUrSMFmFUo8mSucVX6Yl22NNn61roidNmOPrX7VUyBIzMc6mxLbI
+         6mkw==
+X-Gm-Message-State: AOJu0YyIkjLk9xWBwQduZSdss/HgeOkYnBYBCVx9A77gpzc1nzBXYnFG
+	zwDZmV4Y5C268ZBcYI24ttvz0UJPv0GRUGRSrlUXxEKIod/gUlFB/P/BbWyvWECKClydo+wAdce
+	R
+X-Gm-Gg: ASbGncufnrSQS6J7rsd9w+hFgZBTGQAvU3Hu2bVdYEQVe7gHClvlK0q/f8gczy2ASMh
+	nSW09ahJZGAQ9RvnlQAnKktRdZ2TyZRIYoPNJmGMItbh5fihqr0XhWyayLpQEXsCHfJtVCj9IfE
+	89lMojv3pP1UNJjSlcXxzNJYouY7iceRklzAvi+ObXxKrU2SYcxzZ0rgg2AvvPvLOCzLKPTR79Y
+	mrDvR6AH4oAXslBJ/r6vdHBFf8+tHnGjcA22H66b+wTESJ58XkaLg0fC7ft6U4+5DASFIaEr7Xo
+	4gweu1xmp1K9v/rygPSL
+X-Google-Smtp-Source: AGHT+IHdrtJ2xa/8ov1UzyOSXbGF88cZhYnlkSM6oB7eHtgMeotHcTAD2palVsJs6b7cUy/CjmTARA==
+X-Received: by 2002:a17:907:86a1:b0:ab7:cc43:c51e with SMTP id a640c23a62f3a-abb70cbbcf2mr1273738466b.13.1739889308602;
+        Tue, 18 Feb 2025 06:35:08 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 0/2] x86/pvh: workaround missing MMIO regions in dom0 p2m
+Date: Tue, 18 Feb 2025 15:35:02 +0100
+Message-ID: <20250218143504.77638-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/svm: Separate STI and VMRUN instructions in
- svm_asm_do_resume()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20250217161241.537168-1-andrew.cooper3@citrix.com>
- <20250218143739.623451-1-andrew.cooper3@citrix.com>
-Content-Language: en-US
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250218143739.623451-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18.02.2025 15:37, Andrew Cooper wrote:
-> There is a corner case in the VMRUN instruction where its INTR_SHADOW state
-> leaks into guest state if a VMExit occurs before the VMRUN is complete.  An
-> example of this could be taking #NPF due to event injection.
-> 
-> Xen can safely execute STI anywhere between CLGI and VMRUN, as CLGI blocks
-> external interrupts too.  However, an exception (while fatal) will appear to
-> be in an irqs-on region (as GIF isn't considered), so position the STI after
-> the speculation actions but prior to the GPR pops.
-> 
-> Link: https://lore.kernel.org/all/CADH9ctBs1YPmE4aCfGPNBwA10cA8RuAk2gO7542DjMZgs4uzJQ@mail.gmail.com/
-> Fixes: 66b245d9eaeb ("SVM: limit GIF=0 region")
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> v2:
->  * Move after the speculation actions.
-> 
-> Emailed out just for completeness.  I've queued it in my for-4.21 branch.
+Hello,
 
-It'll want backporting, so I wonder if we should persuade Oleksii into
-taking it for 4.20.
+The aim of this series is to provide a workaround for better handling
+missing MMIO regions in a PVH dom0 p2m.  Xen doesn't know the complete
+host memory layout, as it's not able to parse any information from
+dynamic ACPI tables.  Hence the p2m built for a PVH dom0 might be
+missing some MMIO regions only described in ACPI.
 
-Jan
+Since a PVH dom0 has no way to request the mapping of such regions (and
+adding one would also require dom0 kernel modifications) instead provide
+an option for Xen to add those MMIO regions as part of handling p2m
+page-faults.  The option is currently off by default.
+
+Thanks, Roger.
+
+Roger Pau Monne (2):
+  x86/emul: dump unhandled memory accesses for PVH dom0
+  x86/dom0: attempt to fixup p2m page-faults for PVH dom0
+
+ CHANGELOG.md                           | 10 ++++
+ docs/misc/xen-command-line.pandoc      | 16 +++++-
+ xen/arch/x86/dom0_build.c              |  5 ++
+ xen/arch/x86/hvm/emulate.c             | 73 ++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/hvm/emulate.h |  3 ++
+ 5 files changed, 106 insertions(+), 1 deletion(-)
+
+-- 
+2.46.0
+
 
