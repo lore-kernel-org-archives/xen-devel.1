@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61B0DC02198
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:30:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.891542.1300612 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A33EC021AD
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Feb 2025 14:30:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.891547.1300628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOcY-00088O-JW; Tue, 18 Feb 2025 14:30:46 +0000
+	id 1tkOca-00006N-8b; Tue, 18 Feb 2025 14:30:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 891542.1300612; Tue, 18 Feb 2025 14:30:46 +0000
+Received: by outflank-mailman (output) from mailman id 891547.1300628; Tue, 18 Feb 2025 14:30:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkOcY-00088F-Fe; Tue, 18 Feb 2025 14:30:46 +0000
-Received: by outflank-mailman (input) for mailman id 891542;
- Tue, 18 Feb 2025 14:30:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tkOcZ-00005G-VP; Tue, 18 Feb 2025 14:30:47 +0000
+Received: by outflank-mailman (input) for mailman id 891547;
+ Tue, 18 Feb 2025 14:30:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=n6Eg=VJ=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1tkOYM-0001OR-RC
- for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:26:26 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55534e39-ee04-11ef-9896-31a8f345e629;
- Tue, 18 Feb 2025 15:26:25 +0100 (CET)
+ id 1tkOYI-0001OJ-Pn
+ for xen-devel@lists.xenproject.org; Tue, 18 Feb 2025 14:26:22 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 52063533-ee04-11ef-9aa7-95dc52dad729;
+ Tue, 18 Feb 2025 15:26:19 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C7BC21F458;
- Tue, 18 Feb 2025 14:25:59 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 956DE2117D;
+ Tue, 18 Feb 2025 14:25:54 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3F3EF132C7;
- Tue, 18 Feb 2025 14:25:59 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 030AE13A82;
+ Tue, 18 Feb 2025 14:25:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id WD8jDneYtGdXYQAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 18 Feb 2025 14:25:59 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id AE4IO3GYtGdXYQAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 18 Feb 2025 14:25:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,46 +54,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55534e39-ee04-11ef-9896-31a8f345e629
+X-Inumbo-ID: 52063533-ee04-11ef-9aa7-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1739888759; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1739888754; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8R2M5LLAHXFZEddSmuQRHiKZmmsqVdbAGGQy7ynxW6M=;
-	b=w9+dDV2yKjDKG30GvShHhT6bjrZcmnbxOLq5GW/YKWGl5J34WqAEiyi9u/gfW0vLzq79h/
-	7K5M70mNPtzpN1Z0/js+qnM0PpLTQWHygW88sAVYiZOUN9eDqkUb5BnGElu4oEH5Oozz1C
-	poUj+ERN3cKzQFDXhyZTRECfJ3/xJvA=
+	bh=H87ez1S6KJcEkfmzimTOXbDAX95sonbmvpFLLDicFno=;
+	b=qokRGPKdZF+9AyCcwmNiDkOhMQZcR6Lsz5dfhzeXs1SmPLjGYCpH3P4oSjMazszps/XUIC
+	OB0mHbnkvbUrnnPa/emksa6p7sd0Y0vVzs0YkqQ6vLPCSE3wyf5cV0/3fFGzcUnlligX2z
+	vb8ixr8wbbZ9yYJkkvG8v3fm9FsEhEo=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1739888759;
+	s=susede2_ed25519; t=1739888754;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8R2M5LLAHXFZEddSmuQRHiKZmmsqVdbAGGQy7ynxW6M=;
-	b=GVJ5QuIq+0riqDLILiCPDkGqrHhDIxgtG39tDlazbcJDJ7yMBxit+TQZjvH1fAwGfTLRYL
-	AgW4k/VSr8aoUUCQ==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=w9+dDV2y;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=GVJ5QuIq
+	bh=H87ez1S6KJcEkfmzimTOXbDAX95sonbmvpFLLDicFno=;
+	b=PvWX5od+TWGTG3zlcRaw+9A22tSIDw0HLwqfByhFpvAifa+PvYbAf3S8Bdo8aAVeGKFiJA
+	b+MJjE+9uukIWOAA==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=qokRGPKd;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=PvWX5od+
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1739888759; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1739888754; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8R2M5LLAHXFZEddSmuQRHiKZmmsqVdbAGGQy7ynxW6M=;
-	b=w9+dDV2yKjDKG30GvShHhT6bjrZcmnbxOLq5GW/YKWGl5J34WqAEiyi9u/gfW0vLzq79h/
-	7K5M70mNPtzpN1Z0/js+qnM0PpLTQWHygW88sAVYiZOUN9eDqkUb5BnGElu4oEH5Oozz1C
-	poUj+ERN3cKzQFDXhyZTRECfJ3/xJvA=
+	bh=H87ez1S6KJcEkfmzimTOXbDAX95sonbmvpFLLDicFno=;
+	b=qokRGPKdZF+9AyCcwmNiDkOhMQZcR6Lsz5dfhzeXs1SmPLjGYCpH3P4oSjMazszps/XUIC
+	OB0mHbnkvbUrnnPa/emksa6p7sd0Y0vVzs0YkqQ6vLPCSE3wyf5cV0/3fFGzcUnlligX2z
+	vb8ixr8wbbZ9yYJkkvG8v3fm9FsEhEo=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1739888759;
+	s=susede2_ed25519; t=1739888754;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8R2M5LLAHXFZEddSmuQRHiKZmmsqVdbAGGQy7ynxW6M=;
-	b=GVJ5QuIq+0riqDLILiCPDkGqrHhDIxgtG39tDlazbcJDJ7yMBxit+TQZjvH1fAwGfTLRYL
-	AgW4k/VSr8aoUUCQ==
+	bh=H87ez1S6KJcEkfmzimTOXbDAX95sonbmvpFLLDicFno=;
+	b=PvWX5od+TWGTG3zlcRaw+9A22tSIDw0HLwqfByhFpvAifa+PvYbAf3S8Bdo8aAVeGKFiJA
+	b+MJjE+9uukIWOAA==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
 	mripard@kernel.org,
@@ -114,17 +114,20 @@ Cc: dri-devel@lists.freedesktop.org,
 	intel-xe@lists.freedesktop.org,
 	xen-devel@lists.xenproject.org,
 	Thomas Zimmermann <tzimmermann@suse.de>,
-	Zack Rusin <zack.rusin@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Subject: [PATCH v3 22/25] drm/vmwgfx: Compute dumb-buffer sizes with drm_mode_size_dumb()
-Date: Tue, 18 Feb 2025 15:23:45 +0100
-Message-ID: <20250218142542.438557-23-tzimmermann@suse.de>
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+	Rob Clark <robdclark@gmail.com>,
+	Abhinav Kumar <quic_abhinavk@quicinc.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>
+Subject: [PATCH v3 13/25] drm/msm: Compute dumb-buffer sizes with drm_mode_size_dumb()
+Date: Tue, 18 Feb 2025 15:23:36 +0100
+Message-ID: <20250218142542.438557-14-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250218142542.438557-1-tzimmermann@suse.de>
 References: <20250218142542.438557-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C7BC21F458
+X-Rspamd-Queue-Id: 956DE2117D
 X-Spamd-Result: default: False [-1.51 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -135,76 +138,96 @@ X-Spamd-Result: default: False [-1.51 / 50.00];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
 	MX_GOOD(-0.01)[];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:email,suse.de:dkim,suse.de:mid];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org,suse.de,linaro.org,gmail.com,quicinc.com,poorly.run,somainline.org];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:email,suse.de:dkim,suse.de:mid,linaro.org:email];
 	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[suse.de:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLqtkr6cif1ebgurukgmwdm7xc)];
 	FREEMAIL_ENVRCPT(0.00)[gmail.com]
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Rspamd-Action: no action
 
 Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
-and buffer size. No alignment required.
+and buffer size. Alignment is specified in bytes, but the hardware
+requires the scanline pitch to be a multiple of 32 pixels. Therefore
+compute the byte size of 32 pixels in the given color mode and align
+the pitch accordingly. This replaces the existing code in the driver's
+align_pitch() helper.
+
+v3:
+- clarify pitch alignment in commit message (Dmitry)
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Zack Rusin <zack.rusin@broadcom.com>
-Cc: Zack Rusin <zack.rusin@broadcom.com>
-Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Rob Clark <robdclark@gmail.com>
+Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Sean Paul <sean@poorly.run>
+Cc: Marijn Suijten <marijn.suijten@somainline.org>
 ---
- drivers/gpu/drm/vmwgfx/vmwgfx_surface.c | 21 ++++-----------------
- 1 file changed, 4 insertions(+), 17 deletions(-)
+ drivers/gpu/drm/msm/msm_gem.c | 27 +++++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-index 5721c74da3e0..a3fbd4148f73 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-@@ -34,6 +34,7 @@
- #include "vmw_surface_cache.h"
- #include "device_include/svga3d_surfacedefs.h"
+diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
+index ebc9ba66efb8..a956905f1ef2 100644
+--- a/drivers/gpu/drm/msm/msm_gem.c
++++ b/drivers/gpu/drm/msm/msm_gem.c
+@@ -11,8 +11,10 @@
+ #include <linux/dma-buf.h>
+ #include <linux/pfn_t.h>
  
 +#include <drm/drm_dumb_buffers.h>
- #include <drm/ttm/ttm_placement.h>
+ #include <drm/drm_prime.h>
+ #include <drm/drm_file.h>
++#include <drm/drm_fourcc.h>
  
- #define SVGA3D_FLAGS_64(upper32, lower32) (((uint64_t)upper32 << 32) | lower32)
-@@ -2291,23 +2292,9 @@ int vmw_dumb_create(struct drm_file *file_priv,
- 	 * contents is going to be rendered guest side.
- 	 */
- 	if (!dev_priv->has_mob || !vmw_supports_3d(dev_priv)) {
--		int cpp = DIV_ROUND_UP(args->bpp, 8);
--
--		switch (cpp) {
--		case 1: /* DRM_FORMAT_C8 */
--		case 2: /* DRM_FORMAT_RGB565 */
--		case 4: /* DRM_FORMAT_XRGB8888 */
--			break;
--		default:
--			/*
--			 * Dumb buffers don't allow anything else.
--			 * This is tested via IGT's dumb_buffers
--			 */
--			return -EINVAL;
--		}
--
--		args->pitch = args->width * cpp;
--		args->size = ALIGN(args->pitch * args->height, PAGE_SIZE);
-+		ret = drm_mode_size_dumb(dev, args, 0, 0);
-+		if (ret)
-+			return ret;
+ #include <trace/events/gpu_mem.h>
  
- 		ret = vmw_gem_object_create_with_handle(dev_priv, file_priv,
- 							args->size, &args->handle,
+@@ -700,8 +702,29 @@ void msm_gem_unpin_iova(struct drm_gem_object *obj,
+ int msm_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 		struct drm_mode_create_dumb *args)
+ {
+-	args->pitch = align_pitch(args->width, args->bpp);
+-	args->size  = PAGE_ALIGN(args->pitch * args->height);
++	u32 fourcc;
++	const struct drm_format_info *info;
++	u64 pitch_align;
++	int ret;
++
++	/*
++	 * Adreno needs pitch aligned to 32 pixels. Compute the number
++	 * of bytes for a block of 32 pixels at the given color format.
++	 * Use the result as pitch alignment.
++	 */
++	fourcc = drm_driver_color_mode_format(dev, args->bpp);
++	if (fourcc == DRM_FORMAT_INVALID)
++		return -EINVAL;
++	info = drm_format_info(fourcc);
++	if (!info)
++		return -EINVAL;
++	pitch_align = drm_format_info_min_pitch(info, 0, SZ_32);
++	if (!pitch_align || pitch_align > U32_MAX)
++		return -EINVAL;
++	ret = drm_mode_size_dumb(dev, args, pitch_align, 0);
++	if (ret)
++		return ret;
++
+ 	return msm_gem_new_handle(dev, file, args->size,
+ 			MSM_BO_SCANOUT | MSM_BO_WC, &args->handle, "dumb");
+ }
 -- 
 2.48.1
 
