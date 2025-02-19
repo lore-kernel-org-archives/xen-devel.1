@@ -4,40 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8DD6C021B0
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2025 15:08:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.893102.1302042 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB523C021AA
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2025 15:10:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.893124.1302052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tklg2-00030k-Qs; Wed, 19 Feb 2025 15:07:54 +0000
+	id 1tkliA-0004UP-EC; Wed, 19 Feb 2025 15:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 893102.1302042; Wed, 19 Feb 2025 15:07:54 +0000
+Received: by outflank-mailman (output) from mailman id 893124.1302052; Wed, 19 Feb 2025 15:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tklg2-00030d-O8; Wed, 19 Feb 2025 15:07:54 +0000
-Received: by outflank-mailman (input) for mailman id 893102;
- Wed, 19 Feb 2025 15:06:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tkliA-0004UI-8b; Wed, 19 Feb 2025 15:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 893124;
+ Wed, 19 Feb 2025 15:10:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xn/j=VK=nvidia.com=joelagnelf@srs-se1.protection.inumbo.net>)
- id 1tkleT-0001vy-K2
- for xen-devel@lists.xenproject.org; Wed, 19 Feb 2025 15:06:17 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20603.outbound.protection.outlook.com
- [2a01:111:f403:240a::603])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0dab6e7f-eed3-11ef-9896-31a8f345e629;
- Wed, 19 Feb 2025 16:06:12 +0100 (CET)
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by IA1PR12MB9029.namprd12.prod.outlook.com (2603:10b6:208:3f0::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Wed, 19 Feb
- 2025 15:05:50 +0000
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%5]) with mapi id 15.20.8445.017; Wed, 19 Feb 2025
- 15:05:50 +0000
+ <SRS0=GJ0s=VK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1tkli8-00048S-8r
+ for xen-devel@lists.xenproject.org; Wed, 19 Feb 2025 15:10:04 +0000
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [2a00:1450:4864:20::132])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 971c18c0-eed3-11ef-9aa8-95dc52dad729;
+ Wed, 19 Feb 2025 16:10:01 +0100 (CET)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-545316f80beso3838878e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Feb 2025 07:10:01 -0800 (PST)
+Received: from [172.24.85.51] ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-545304defb0sm1543957e87.6.2025.02.19.07.09.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Feb 2025 07:10:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,294 +46,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0dab6e7f-eed3-11ef-9896-31a8f345e629
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cKAsFn867LSBUrRDJRgLFFcPuio7g1kVjax6/5B3BxnD0mNuzin6h5zIkyj+1kkBfP20/PYEZl78XAAuVXtV/8JhTTv8Ye2FTDBOcX1At7bF/CKblzCwCvqUdClYox/JR/+k9mfHJTS9zIwl5GGUkPkRIfW8dQODkLBuMPM2JL/BkhGOcyy5ZWRkr2+bH2sAKpYZi2qXMLICJhcYOFmtzJQ6JrPLhB8kXWtWoJViYO/+2fm1xH9xaSt37BuzaPrOXw+6uDkpQmTeaRhbjSW+Xr7KiVGPhF4a9NkeMh79IS4/u8HisN5cyzQFHYZUHvaAKmBPHw+Sm8NL7oglePKu8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A1iOID2bcXBamzPTPoVujjbZLDwoclMiI2auzlDjDSo=;
- b=I85RKatiZQHPpuolBakFVS11n8M3WGNuWjC+VksaKcPWHqrkYJM8oeL4MqgHhIyrYgvTmAjGfFcV8lSgBNvC70BFUwH5lD///njvN8vD4fqauGvGJl2zSNQH++yWxug118rdBLMHz2v0DbKyvPqu574bdY6d4oA4TfsAR6bCWfWL+QXrccxYu/1PSDASPA8Zj/lC19a7vTnImjdxHU5WmmjtwWSIEzrOuKzrDYS7Dz79SaIJ7joZBJI0XNc+5/6FzY63RRzsWPLNGWSiEkKaQxK6ohMTm3oRjCw+zqJ5wNct5jWFZMWP1tS1YxkHFNpsfU8P3A+QoRBpPx03gvbUDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A1iOID2bcXBamzPTPoVujjbZLDwoclMiI2auzlDjDSo=;
- b=Fj9DPHjtaPs3OTzO7PDyEwIr0fW8Gz9vCl1el9BDTe4MuD2iQ/7s2ibQICNGHSs09onYv1adA2uEnZ9LwXDupyWfUm7FAqLlZ8L/DVr8nBNyrzfX/9apfbw3PBgxKhAIvecBFLDQc4o4vm0dr9nDpgVpjSlaPZUw2OvPjFwvzlP6F6DD6No/P64jZTWnYkvNCoGWGwHvPDIdn13+8OFpb9WfS+ZfxneL+1k8L9L+S/5yGitdkFCRhfxa/7kfhRcUZ+ZYBFK6rOvOxI8u+N7KtMVNe9Ym20kF9X5iC2DlKWQsFNZljEd+vHtQR0P9Bj0IhMVbZQeCOJjgTRDx7hvzIg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Date: Wed, 19 Feb 2025 10:05:47 -0500
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: Valentin Schneider <vschneid@redhat.com>
-Cc: Jann Horn <jannh@google.com>, linux-kernel@vger.kernel.org,
-	x86@kernel.org, virtualization@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, loongarch@lists.linux.dev,
-	linux-riscv@lists.infradead.org, linux-perf-users@vger.kernel.org,
-	xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
-	linux-arch@vger.kernel.org, rcu@vger.kernel.org,
-	linux-hardening@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org, bpf@vger.kernel.org,
-	bcm-kernel-feedback-list@broadcom.com,
-	Juergen Gross <jgross@suse.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.amakhalov@broadcom.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Huacai Chen <chenhuacai@kernel.org>,
-	WANG Xuerui <kernel@xen0n.name>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	"Liang, Kan" <kan.liang@linux.intel.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Andy Lutomirski <luto@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Jason Baron <jbaron@akamai.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joel@joelfernandes.org>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang1211@gmail.com>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	Clark Williams <williams@redhat.com>,
-	Yair Podemsky <ypodemsk@redhat.com>,
-	Tomas Glozar <tglozar@redhat.com>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	Dietmar Eggemann <dietmar.eggemann@arm.com>,
-	Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-	Kees Cook <kees@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@infradead.org>,
-	Shuah Khan <shuah@kernel.org>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
-	Samuel Holland <samuel.holland@sifive.com>,
-	Rong Xu <xur@google.com>,
-	Nicolas Saenz Julienne <nsaenzju@redhat.com>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Yosry Ahmed <yosryahmed@google.com>,
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
-	Jinghao Jia <jinghao7@illinois.edu>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Tiezhu Yang <yangtiezhu@loongson.cn>
-Subject: Re: [PATCH v4 29/30] x86/mm, mm/vmalloc: Defer
- flush_tlb_kernel_range() targeting NOHZ_FULL CPUs
-Message-ID: <20250219145302.GA480110@joelnvbox>
-References: <20250114175143.81438-1-vschneid@redhat.com>
- <20250114175143.81438-30-vschneid@redhat.com>
- <CAG48ez1Mh+DOy0ysOo7Qioxh1W7xWQyK9CLGNU9TGOsLXbg=gQ@mail.gmail.com>
- <xhsmh34hhh37q.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
- <CAG48ez3H8OVP1GxBLdmFgusvT1gQhwu2SiXbgi8T9uuCYVK52w@mail.gmail.com>
- <xhsmhzfjpfkky.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <xhsmhzfjpfkky.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
-X-ClientProxiedBy: MN2PR18CA0005.namprd18.prod.outlook.com
- (2603:10b6:208:23c::10) To SN7PR12MB8059.namprd12.prod.outlook.com
- (2603:10b6:806:32b::7)
+X-Inumbo-ID: 971c18c0-eed3-11ef-9aa8-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1739977801; x=1740582601; darn=lists.xenproject.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cV+iLjtQoPiHWdI11LiSzY9mdu10N+iNs7QPJ5g+5no=;
+        b=bsM2tahhyQvWDUA3QZHDyO1wSy8YMQA1GpIZmt9LYV2obtfWIB2TslWkv6MAZOmTJI
+         8JshEllUxJK35e/791d3tLaI6Adp034b3aq/PaqHuJ933thEg1BsbCcRL/wbw6wGfB9K
+         I2Xg0dAX2eIhpAelQoTECZNkz6C1y5zRvzpKi04Zt1JJAbRZFluAk4g7yCpp9NUFJjRF
+         Df9Ce3nX39quUaZw3hsZ9l5tCLaPgL6dzkvIrcgQVrixHK0HQYII3kmI0aAt/O5L8wU3
+         GgpQxC6cXB3ufWWbI+lFJGRrNXrvLqW9tKOmR4wEWiuDX88bfc0AGgvHAc/3Gluy53gA
+         o1Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739977801; x=1740582601;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=cV+iLjtQoPiHWdI11LiSzY9mdu10N+iNs7QPJ5g+5no=;
+        b=r8XhLurALnzIhowLmIYGSFMXFHS4bYakOPX2rc8oKY/AEcNKKw1Z5MutHeun6snD30
+         wkC2hk2MCj/O9UX8/A1UepjN6DRd5bB+BoS+gKYrDvIPfHlFrL6dcW/QPomlcRLAJ73J
+         XrX8fTSiXfGxpJDq1DWplbCIQv5Jo2Ni5GvTjrPhRo40lfXut2Y3/8A5D6PYWvq95iaj
+         eCIaveswh6MiBPb7xm0U+ZZrlLXrZmbAjbByuICX92bh4pSAFCK5LlHY+uWPFL8jMFX6
+         SUOZ54n5R4dImQy+97wXagJ/nkLOTbZQ+95yVgCjS0ifrg1yzoEVRt0Mrdd3ghQfv3WR
+         2X/Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWLHDzBotBnKD37fRkcCKGgHITLNVHeDXb7Lf0kiOM0nngxul5pC5d6+KzudcC0A7A3pf9dcvNGaSU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxUi1v+o77ZEGvH0+kjGlk6dY9uP23pbvxUr0R9ZhU+bwo+E7tQ
+	9jHr+BUM20KJ4w9JqDioVBJ2DhuiTAobq7PLJESz23lzwjsuw5I5
+X-Gm-Gg: ASbGncvfjhipBCstFL60tkUVXnjNb5L1Zd6cbUNbJGXX+PmQTv8MBLQDvgNr2BsR3f5
+	RfPxHd6S6ZkA1XTLXdyOnZF/X5YzhlcjbCfchQuT/YHE/LwAj3rn/91rFszyN5jzgRLey/nMRgF
+	jd/E4uXQ+gzbeaka6xXdJgLR/QCVYbLRPxlaStb3VY6Rc69GXMyG/LzJ0+1LZSjZsyPWYQ2aZfr
+	5QceaNUjPQvIuYLakQWSvP9u4JvfYJFmROUMt/8Uf9zbunUrpdSbiGB5Z7o7r0G25Di6E6E2G2A
+	ccxDlX1sLodSVfAkeh6Pu9af
+X-Google-Smtp-Source: AGHT+IErzFERwBFSkTc/W5KJ+FtIKMRnNiynlXDG+qA939cwvcWYuEPiU24qbUoj70hfbE08WjOYww==
+X-Received: by 2002:a05:6512:2398:b0:545:59f:47a6 with SMTP id 2adb3069b0e04-5452fe2eb14mr6507791e87.22.1739977800605;
+        Wed, 19 Feb 2025 07:10:00 -0800 (PST)
+Content-Type: multipart/alternative;
+ boundary="------------75hjluwMocpQXT3GpWyCI3yD"
+Message-ID: <c7004601-a10d-4a82-9bb6-7cebf4eff08a@gmail.com>
+Date: Wed, 19 Feb 2025 16:09:59 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|IA1PR12MB9029:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c25bda2-da56-4557-f687-08dd50f6e56c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|7416014|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?NkhIL1FkR2JpVzRHUFVNR1R2VzhJRGMwTW1xdlRCU0JVMk4rZ091MnNnQjZ4?=
- =?utf-8?B?NXdkclVldTdJY1NjTnBjYUNDOG1MUjF3em8vR0lOcFJsWTFGL0xhS1BqbDVY?=
- =?utf-8?B?S0xTdERaaFFGekFheFN5YjRrU2Z5ZURTSXBmRXcyK0tpTUxvaTBDNmk1Sjh1?=
- =?utf-8?B?WjdIalJ1cURXYlBwMzM2V2k4SG5JRG9uT0M4bjdBMlJna0J3S2JCWVFmYW9V?=
- =?utf-8?B?V1Joa1JHUEJ0eFJvdjRJenlPbVRDNFRDajF4SFMxRWNOVEljeFA1RVgvVHpR?=
- =?utf-8?B?K0xFMVExdHZXKzk3bFFBTkk1OVo2TzRQUm42S3BiU3ZJK0pBNDRaRlEzbVBm?=
- =?utf-8?B?Z3B3NmtTbk5LaHpkMDNuRnMxRjIzRFl6OFVkT1lsSG1aQnRVcHJUVWdXSXlU?=
- =?utf-8?B?TDFmZTczTmlVTndTQ2I5WnhMdklDbU5FcFZscmNVMXhqcUUvcU5RRm9ENmxL?=
- =?utf-8?B?ck0zeHZLcUIyMERLUFNaQWd4UTVmWHorc3FzNFl3dGl1ZjEwWjRBclozcGlB?=
- =?utf-8?B?NDVtTTcxeGhWUDNtTnZrTE5JVjJpSXpxVko2c2IwcVR1eUV3MG1zb3Byb3hV?=
- =?utf-8?B?Ynk3a3gzZWcwS2oyVitMVWdRVS8xMU1mcUtkUlVTbXk2QktyVm9GV01DU0VS?=
- =?utf-8?B?K1MyUkhHR0FQaE5sV1RsUEhkeEpISnJ1T0xGRndxc3dkaTZDZFZRWGZkNmdO?=
- =?utf-8?B?NXNxenNjLy9YdjJTa05ITThxVkdReGUrdHhOdkZOTjZLWXJHNmE2Z3N1VXJ1?=
- =?utf-8?B?bmhUUGpzR3dsaVB3a3NQMWp6MCtnTFdjM3c0OUN3ZllHekpFMkl6RHh6STE4?=
- =?utf-8?B?ZjdOTGE0Mjk1RHdHLzNZM245VDlScFd4WkZKYW5VQ2x3dlg5WGNwNTExTDd3?=
- =?utf-8?B?ZUU0VmlZYXo5dUNOMjMzUDlRR25EbVEyMnhJQlhLR201emphN0hab0xGSStN?=
- =?utf-8?B?ZHEwOVVzQVB1UjQwTTE3QkRqUDg4RU9LOEgwZkZ0VUR2LzRMNHB6anhDNldB?=
- =?utf-8?B?QTFkWUVudFhHcE9lZlFGS0JXdHZnUGtuNC8rRHFkSExJdHpXbzZIMUNxcDVq?=
- =?utf-8?B?ZGl3bVh0cDVKRzl0QnZyZENZM2xuNmJxSVFXT0lDdzRScW8vWjlEblp3RERI?=
- =?utf-8?B?ZU9hZ0EwZDFlNFk5K0xvalVQMFo3OWtGcmNyVG04dFE2MEltbU5qNUtsMDBy?=
- =?utf-8?B?OTY2NUZKWkFxZXBvT3YxTWw3a2o2R3ExL2l3VFlYZjdHT1BQeThJdElicHcx?=
- =?utf-8?B?dlphMDNCVGtnQ1FKbjFkRHJEdFlEQWtQV2lzbVZMbVpGWmsyaDVzVlVteVYv?=
- =?utf-8?B?RnhXc3JQdjc5MWJGWDlUSzRMQXcyYklEQnh2YkxkNGtVVFdhTnkzVU44OGNk?=
- =?utf-8?B?dXMvNHZBdjI5bFBjb1RYemJCMmFvT1NrWFl3YThnU2VwZG10TFM1ZFdTZ0lj?=
- =?utf-8?B?VXlLK1dNUXh4YzE1TTZnbi9jQ1JxUEhHbzViblBtblJxRWpHcEMyMzNacmFl?=
- =?utf-8?B?TmVOdVlpMlpjbndPY0hqNkJaV20xaU9wazRqM21hZWlUUXM0TE9XU2twQm4v?=
- =?utf-8?B?aWFzWnhkZS9ITTNETkVtQUQ3ZlJFdm43RU9OYlRGaTJJTWorVHZTR3Q0YUlK?=
- =?utf-8?B?dUlyOVFyN2ZOSTZKeHdWUnUyU2w3alI0ZkdKdTJkcG5FTjJpTkJwVTlVWE1L?=
- =?utf-8?B?VDlyTU5JSXdIZFJDa1JMWTYvRkFGZkUwb1ZXQWs2bkRTaWpScVB6RjltdnFD?=
- =?utf-8?B?TDJBMktqM2tnRjRJekxNL2FIUW5SUDVEZkQvQ29qSnR3amppbzNZVG9FanFi?=
- =?utf-8?B?OEI5Z24rSTN1dll0ZTJZWFc4Wk03eUd4by9KR2VEci9Nci9NRWdzTk1xZmpW?=
- =?utf-8?Q?DKrgDoGj60ipC?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR12MB8059.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dG5QQjRJRTdQMXJBS3BQOUNjU21LdWw5SzdyRFlQakRERlFib3JuclBOOERN?=
- =?utf-8?B?UWc3U0VTUFlLVVFGMFFGUEpyWWlRZTlUc0xieDAwbHYrblkvTys1dnVCZ0l1?=
- =?utf-8?B?Y1pnWUI3Q0pSY1ZaL1htNThQekg2UCtTMEhTZ0MvWjliYlRtVXVPejRybnd3?=
- =?utf-8?B?Q1RRdi9aV0ZxVjMwdUdVWEZ1ajFYak9ZdFlINU12WDFqN043SXhtSFFnVVpo?=
- =?utf-8?B?NWNXeXJwSWd4RkxsYlUxa3FtSVNZRkpjT0RjMmlyck9QVDI2ZnZaQ2hoMHEz?=
- =?utf-8?B?OUVQNVBsTnk3VjFoUVp2bmszNjRSTWVxdVIxdlZNbE5QL1U3S09PaU5BaDRE?=
- =?utf-8?B?RERBTjNJS25INVFYSGRhVzYvUHRBMlVVRHgwRU85QitiUjI0cTJ0RzN3eU9s?=
- =?utf-8?B?Q2FkTDY1ZEtzRHIxRk9Bd2R1SUJzaW1uek10Tm1BcXlyamFYVW4zV05WMnVw?=
- =?utf-8?B?YzZtTThnelZDTmwxSGgwOWt3dy8zcVl3NEhTQi9iV1NpK1hUdndObEsrT0lq?=
- =?utf-8?B?Y0VjNXBuYU5tRU5LRnBhRkpVV25EQzlBL0FxdU5MeHVPRndQa05ZaUliTmN4?=
- =?utf-8?B?QVkwdGswQkxZb0lxUHV5RGwxdXNUNTlGNjcyRTdER0x1TEN2TXF0aGNPTWJ6?=
- =?utf-8?B?aWUzTjFjWGNBMEszeUVLQmdhZ3FVdm85amgxSGloZWVZRDd1WFZwNXhKMTdt?=
- =?utf-8?B?SEp0S0wvcS9kb2cvdWVnKzVyUjk3N1dIaWUycVZjWU84Q3E0S00zYUZxWkNZ?=
- =?utf-8?B?VC84UGlEdE1qTTZMQnUzWlJzbE5KTjlLL3cwWi8zUFAvNWFzb09HWjR0Yzln?=
- =?utf-8?B?ZXM1Q2RwUmhmR2puUHpuTWI1WUV4NFh0VG1VSTBYZUg0ckcxeGljZll6d2tQ?=
- =?utf-8?B?c0lEUkZRSFpSdWg3WEJZbm9XQndiZ0hIallnODFjVGxnQ3RHTTN5WGFmdmxX?=
- =?utf-8?B?M1JhL28vV3NBYmk0TmhjMkZZQklYRW4vWWd4aC9YaktXUWxUQW83ME9MRkxn?=
- =?utf-8?B?dDZ5a1JIVmUrOWZRNmd2VnFHY1h4KzRKKyszcmh3MElmbHpTYlpzQmZmZlRr?=
- =?utf-8?B?QUgrS0NMN1Z6Q2RDV3NRWUwwWnQ0elZMQlVBWSt2VDE4RHBSM293TmtEdlNQ?=
- =?utf-8?B?MVFnZldMVWJTMTNLY3FBZWRvM0NnQ3phSzlWM3U4dVlKZkNlU1o2Z0Fnc0JO?=
- =?utf-8?B?ZjR3T3VNZ2ZTNHJUUkVaamNnRHhvU3VyRVM2ZitrRlIxV1hIbEpBUFptRUtU?=
- =?utf-8?B?OWF5R0tPUEdZRWFuWGtOUEVmSUpUclVSV3lVMXpVdlpHVWhSeGdxRkd1RFMx?=
- =?utf-8?B?VUgzUVZ5d3gwQlhPK2FTZmU5SUVCSi9EMXNkZGNaditxRzc0SER2SkEwRDEw?=
- =?utf-8?B?RDVhWHlJUEtaNmp1eHlUVVNSZWllTmh5TGJYcm8wNU5ua3kya1dTL2V2Q3Nj?=
- =?utf-8?B?YnorRUw5UmM4K3MrbEVJRTdhZGFoNkdtVmRwRlpDUmxrYnNTSVlXbStuOGVZ?=
- =?utf-8?B?c0luRGpqYXdDRHozcW5wYlI0bkNYUXhUZnJrR0NHMzFWY3hjM3FidEtYQUJQ?=
- =?utf-8?B?Ri9GV3pMQ3RsVUVZSmF4SGhGOHExMjY0ajRyaGs2MTBkQ0h0Nzc3QlNlVVhw?=
- =?utf-8?B?UmdoYkd0U0RwNVBWeHZ3S3VaeWUwNDZxSkhmcUI4U2RDdVVGZHlKcXU0VGRy?=
- =?utf-8?B?QzhlcVlCclJZU3RmU0lMV04wOVhUWVhvMDZtYXE5TGdoRUJlV245dERQNnFQ?=
- =?utf-8?B?OE1XUk1CaWRhNHhzSllPNkxBRytSTE9hcmNCeXVTSGhvQjRhenJ2OGdFMU9C?=
- =?utf-8?B?KytoQlpNUkg4RnhHZm4zOXh6MWNtTWw0T1ZlMUdFdnEwVXZ5WGtkUDFRS3pH?=
- =?utf-8?B?clM4Z1hweG5lSGdhTnlhUUlzZEQzWWEvejlvOTliS0xtR2ppK3p6QWZsTE1O?=
- =?utf-8?B?MFBCVEExTWRhbXRPNWFmM3JaazcxSFVSODFIc2N4Znl0UVZEbGkwQXBhdnZ3?=
- =?utf-8?B?Zk9RMU8wdTZrbSsvOTlvajc0VmpTOGxwb1U3NzBTczV0QjlpYU1ia0hoaHNU?=
- =?utf-8?B?QWJYT1M0MjZrMUpNYjFRR0ZBMWthYlhmcUNES1lwdEUvZkZSUUpjMjJhUUxC?=
- =?utf-8?Q?f37H3uFx36Kce1SweEEnpii7O?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c25bda2-da56-4557-f687-08dd50f6e56c
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2025 15:05:49.9907
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vENyi1BqIDH2Vmt4z2lQDPuELFOWe5ymrHLk0eJ/9UyBz/j89j0TliQZuvZyk7Hk6bMN/M4gsP9X/jwzE3I/VQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB9029
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for 4.20? v4 3/3] xen/riscv: update mfn calculation in
+ pt_mapping_level()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1739363240.git.oleksii.kurochko@gmail.com>
+ <38093d9843afbba9dda7326ee6e8cc3c99343cf6.1739363240.git.oleksii.kurochko@gmail.com>
+ <2cee5ebc-cae7-4da8-9b7d-bb55cc907570@suse.com>
+ <d398d595-74b3-424a-bab9-992653cdca95@gmail.com>
+ <701e841d-6dd7-45a8-b56b-c67dd04dd3a5@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <701e841d-6dd7-45a8-b56b-c67dd04dd3a5@suse.com>
 
-On Fri, Jan 17, 2025 at 05:53:33PM +0100, Valentin Schneider wrote:
-> On 17/01/25 16:52, Jann Horn wrote:
-> > On Fri, Jan 17, 2025 at 4:25 PM Valentin Schneider <vschneid@redhat.com> wrote:
-> >> On 14/01/25 19:16, Jann Horn wrote:
-> >> > On Tue, Jan 14, 2025 at 6:51 PM Valentin Schneider <vschneid@redhat.com> wrote:
-> >> >> vunmap()'s issued from housekeeping CPUs are a relatively common source of
-> >> >> interference for isolated NOHZ_FULL CPUs, as they are hit by the
-> >> >> flush_tlb_kernel_range() IPIs.
-> >> >>
-> >> >> Given that CPUs executing in userspace do not access data in the vmalloc
-> >> >> range, these IPIs could be deferred until their next kernel entry.
-> >> >>
-> >> >> Deferral vs early entry danger zone
-> >> >> ===================================
-> >> >>
-> >> >> This requires a guarantee that nothing in the vmalloc range can be vunmap'd
-> >> >> and then accessed in early entry code.
-> >> >
-> >> > In other words, it needs a guarantee that no vmalloc allocations that
-> >> > have been created in the vmalloc region while the CPU was idle can
-> >> > then be accessed during early entry, right?
-> >>
-> >> I'm not sure if that would be a problem (not an mm expert, please do
-> >> correct me) - looking at vmap_pages_range(), flush_cache_vmap() isn't
-> >> deferred anyway.
-> >
-> > flush_cache_vmap() is about stuff like flushing data caches on
-> > architectures with virtually indexed caches; that doesn't do TLB
-> > maintenance. When you look for its definition on x86 or arm64, you'll
-> > see that they use the generic implementation which is simply an empty
-> > inline function.
-> >
-> >> So after vmapping something, I wouldn't expect isolated CPUs to have
-> >> invalid TLB entries for the newly vmapped page.
-> >>
-> >> However, upon vunmap'ing something, the TLB flush is deferred, and thus
-> >> stale TLB entries can and will remain on isolated CPUs, up until they
-> >> execute the deferred flush themselves (IOW for the entire duration of the
-> >> "danger zone").
-> >>
-> >> Does that make sense?
-> >
-> > The design idea wrt TLB flushes in the vmap code is that you don't do
-> > TLB flushes when you unmap stuff or when you map stuff, because doing
-> > TLB flushes across the entire system on every vmap/vunmap would be a
-> > bit costly; instead you just do batched TLB flushes in between, in
-> > __purge_vmap_area_lazy().
-> >
-> > In other words, the basic idea is that you can keep calling vmap() and
-> > vunmap() a bunch of times without ever doing TLB flushes until you run
-> > out of virtual memory in the vmap region; then you do one big TLB
-> > flush, and afterwards you can reuse the free virtual address space for
-> > new allocations again.
-> >
-> > So if you "defer" that batched TLB flush for CPUs that are not
-> > currently running in the kernel, I think the consequence is that those
-> > CPUs may end up with incoherent TLB state after a reallocation of the
-> > virtual address space.
-> >
-> 
-> Ah, gotcha, thank you for laying this out! In which case yes, any vmalloc
-> that occurred while an isolated CPU was NOHZ-FULL can be an issue if said
-> CPU accesses it during early entry;
+This is a multi-part message in MIME format.
+--------------75hjluwMocpQXT3GpWyCI3yD
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-So the issue is:
 
-CPU1: unmappes vmalloc page X which was previously mapped to physical page
-P1.
+On 2/19/25 4:05 PM, Jan Beulich wrote:
+> On 19.02.2025 15:46, Oleksii Kurochko wrote:
+>> On 2/19/25 12:28 PM, Jan Beulich wrote:
+>>> On 12.02.2025 17:50, Oleksii Kurochko wrote:
+>>>> +    else
+>>>>        {
+>>>> -        rc = pt_next_level(alloc_tbl, &table, offsets[level]);
+>>>> -        if ( rc == XEN_TABLE_MAP_NOMEM )
+>>>> +        pte_t *table;
+>>>> +        unsigned int level = HYP_PT_ROOT_LEVEL;
+>>>> +        /* convenience aliases */
+>>> Nit: Style.
+>>   From the 'Comments' section of CODING_STYLE, I see that the comment should start
+>> with capital letter. Do you mean that?
+> In the (earlier) reply to "xen/riscv: identify specific ISA supported by cpu"
+> I said precisely that. I didn't think I'd need to repeat it here. So yes.
 
-CPU2: does a whole bunch of vmalloc and vfree eventually crossing some lazy
-threshold and sending out IPIs. It then goes ahead and does an allocation
-that maps the same virtual page X to physical page P2.
+Of course, it was enough. The problem was that I started to read and answer to this patch
+series first and went to another (where you wrote that) one after.
 
-CPU3 is isolated and executes some early entry code before receving said IPIs
-which are supposedly deferred by Valentin's patches.
+Anyway thank you for clarifying.
 
-It does not receive the IPI becuase it is deferred, thus access by early
-entry code to page X on this CPU results in a UAF access to P1.
+~ Oleksii
 
-Is that the issue?
+--------------75hjluwMocpQXT3GpWyCI3yD
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-thanks,
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2/19/25 4:05 PM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:701e841d-6dd7-45a8-b56b-c67dd04dd3a5@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 19.02.2025 15:46, Oleksii Kurochko wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">On 2/19/25 12:28 PM, Jan Beulich wrote:
+</pre>
+        <blockquote type="cite">
+          <pre wrap="" class="moz-quote-pre">On 12.02.2025 17:50, Oleksii Kurochko wrote:
+</pre>
+          <blockquote type="cite">
+            <pre wrap="" class="moz-quote-pre">+    else
+      {
+-        rc = pt_next_level(alloc_tbl, &amp;table, offsets[level]);
+-        if ( rc == XEN_TABLE_MAP_NOMEM )
++        pte_t *table;
++        unsigned int level = HYP_PT_ROOT_LEVEL;
++        /* convenience aliases */
+</pre>
+          </blockquote>
+          <pre wrap="" class="moz-quote-pre">Nit: Style.
+</pre>
+        </blockquote>
+        <pre wrap="" class="moz-quote-pre">
+ From the 'Comments' section of CODING_STYLE, I see that the comment should start
+with capital letter. Do you mean that?
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+In the (earlier) reply to "xen/riscv: identify specific ISA supported by cpu"
+I said precisely that. I didn't think I'd need to repeat it here. So yes.</pre>
+    </blockquote>
+    <pre>Of course, it was enough. The problem was that I started to read and answer to this patch
+series first and went to another (where you wrote that) one after.
 
- - Joel
+Anyway thank you for clarifying.
 
+~ Oleksii
+</pre>
+    <blockquote type="cite"
+      cite="mid:701e841d-6dd7-45a8-b56b-c67dd04dd3a5@suse.com">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------75hjluwMocpQXT3GpWyCI3yD--
 
