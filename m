@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C59C021B0
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2025 14:06:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.892990.1301921 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC29AC021AA
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2025 14:18:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.893001.1301943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkki2-0004xl-NR; Wed, 19 Feb 2025 14:05:54 +0000
+	id 1tkkuI-0007Ar-16; Wed, 19 Feb 2025 14:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 892990.1301921; Wed, 19 Feb 2025 14:05:54 +0000
+Received: by outflank-mailman (output) from mailman id 893001.1301943; Wed, 19 Feb 2025 14:18:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tkki2-0004xe-Ku; Wed, 19 Feb 2025 14:05:54 +0000
-Received: by outflank-mailman (input) for mailman id 892990;
- Wed, 19 Feb 2025 14:05:53 +0000
+	id 1tkkuH-0007Ak-SK; Wed, 19 Feb 2025 14:18:33 +0000
+Received: by outflank-mailman (input) for mailman id 893001;
+ Wed, 19 Feb 2025 14:18:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=EceQ=VK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tkki1-0004xY-LP
- for xen-devel@lists.xenproject.org; Wed, 19 Feb 2025 14:05:53 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
+ (envelope-from <SRS0=Z+C6=VK=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tkkuG-00079l-Cw
+ for xen-devel@lists.xenproject.org; Wed, 19 Feb 2025 14:18:32 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [2a07:de40:b251:101:10:150:64:1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a0f4a404-eeca-11ef-9aa8-95dc52dad729;
- Wed, 19 Feb 2025 15:05:52 +0100 (CET)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5dee1626093so1746089a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 19 Feb 2025 06:05:52 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e07f390626sm2379692a12.30.2025.02.19.06.05.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Feb 2025 06:05:51 -0800 (PST)
+ id 65181e20-eecc-11ef-9aa8-95dc52dad729;
+ Wed, 19 Feb 2025 15:18:31 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 17D6A216E2;
+ Wed, 19 Feb 2025 14:18:27 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A65FC137DB;
+ Wed, 19 Feb 2025 14:18:26 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id /dQ7JTLotWdLGgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 19 Feb 2025 14:18:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,232 +54,324 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0f4a404-eeca-11ef-9aa8-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1739973952; x=1740578752; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=0SYzosHLT6MkhwNtlqcGWLK0Z2qzAtwePu5mHAsTSjk=;
-        b=RLkoyjt2Y8u44hd+NZIWo2anYCAEMjDV9b4LiRVq+OxQdHcWcNJCM6LPExCKASe7z8
-         KvhNHmA6foUxHYnqTtQ7qz0KwRJYTNms7PCePRR3OABxTzeEXBfIUHO4a8BgyBZr5xWu
-         TJduqTri7SYYiWr82EDJOZucSjm4syYSbuXMk8WwcO+Ir2sdOpGrnx75x68VKbRQQlhN
-         Jc19IvIiHVRfmHIEtKOsZYyE031gOPQBxsLFQ0ylQleWWe9U408+X369yh3tXEEm5XgO
-         USnZvjUWi4fjsa9hjq7Z7t0ncoR1JXj6OByZGPl3eHo3/kG00vm2nEJbRKXJwABKr6AB
-         BPiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739973952; x=1740578752;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0SYzosHLT6MkhwNtlqcGWLK0Z2qzAtwePu5mHAsTSjk=;
-        b=KLzi2U/Z+dq8nPjBRMPoJt6ipmkagIf0DxCBcCZlVV1sLq8fdwQ6br0rxLVwVUbDMm
-         Dmrij4vDjC/dIL4I0LGiJU2YDUHlqIS3Bcvx3/X7nKLSuW3QHZi/VNGqbUFiQ0Cimwxl
-         FDduO6KIEA1bd9BAqkYAxmCx/h5BzrUf8cYyE2ow1QgleTtcbASyTZN0txtmHnEwmd10
-         OWZFXbQNF8S3rydGYgPtbgfuGUbFZDGYD7ajOuH06sv9R/4QdO4G5CuEGSgpxrXdTUfU
-         wMKJd2y06USlLa9QxCEwg1ZetDIM2Vye/0QiN+LXvYf8ICDawuYeaUfK6zCKLIX/YRJO
-         cDng==
-X-Forwarded-Encrypted: i=1; AJvYcCX5pRFXbDRg35eOsFc7g2m1QJtGrre+eNFteSlc8OZAZtTdCj+y58xMxqbNjlr66gOdEHpaElFmTBI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzLSeWwRkRasaP2JgpnHMsPsyjH8jNuulHawdt2/8Iwzp9yig+1
-	LKojodpS90+YsG97x1CHWW2aBzwY5TV3HRN8hoJOpYB42TBoqBVimC5Q/Hx1PTx2Rvt+yXcdrQQ
-	=
-X-Gm-Gg: ASbGncu4iJxcLy37nex+M2UEH0XnIdi6cFChi9+mBD75frudweR01hGfblW/0Ye5n3K
-	Rg8PdUj52NweNhG8mmDGzwim+bEstRnf0XeMojsJCalpHywPY1nNpQYAuuwPH/HkGn8oGP3mv+b
-	wkJxEFAraQ2KhLJMhhhpHxCUn+s2t5QIhbVLATpxoNUO4iAR9dZRKsJtDOUxxhky0YIKkkYqxmZ
-	VZnBMkKOt8PT5mGJdppgJbQa8VxVLSkmg14A+RAaVXDZbnJnne7EzStfoXqxGQs8blF8HdXaXG0
-	2Q2m1vwqhXbVQFcmoHJych2HvJAi0hNrtLLJrix57MyMa5YIMuZIoxU2ABzEtIiJHMOxNWuYMz4
-	9
-X-Google-Smtp-Source: AGHT+IFyT3wfkv/3JfVY+rGXPweisHj85PjtgLC73CZQ3GBTrTYxHz9Si5j1f8zM+3141vH3r+jeqA==
-X-Received: by 2002:a05:6402:4402:b0:5e0:2cd5:eb40 with SMTP id 4fb4d7f45d1cf-5e088db2766mr4049903a12.9.1739973951750;
-        Wed, 19 Feb 2025 06:05:51 -0800 (PST)
-Message-ID: <fd81810c-80de-40c9-8324-9e5bbdaaff11@suse.com>
-Date: Wed, 19 Feb 2025 15:05:50 +0100
+X-Inumbo-ID: 65181e20-eecc-11ef-9aa8-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1739974708; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GIHaPxbqqDmZAc48GzFuZRKqCUFbN6wrxN6iWc0P5C0=;
+	b=AWWMiTmPk6LZgjc0u9w/q/8WAPetSsfI8YrCnYeN5kM2Y39MaXQ3YVpzVsK37D/LS4JVPc
+	svSMZs1OXn/td0x5h+3jrnM+7XxIKs+edAR0brMdvqo0fd9ITGPEa1auNeufLA/5iByHTJ
+	uqVXDwxUEv8JtEnv1cuYscfjOIku+rk=
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1739974707; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GIHaPxbqqDmZAc48GzFuZRKqCUFbN6wrxN6iWc0P5C0=;
+	b=tDC8xgjNLE0Iq6woM0R8Iy/WzsGUVLFBb+1SlhbxsDPOkY/zjFU8slRGqfxKUaxsNPH16d
+	u0TDRGB2A8pWTguRqxMiXWzhkZ8tsXrWePCC6XgRRWzfbi9eAppa6xDod2wN2ziCEV2JRI
+	39LP5+WloopMMP4psKG0OHy9c0nFIt8=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: oleksii.kurochko@gmail.com,
+	Juergen Gross <jgross@suse.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 1/2] xen/list: avoid UB in list iterators
+Date: Wed, 19 Feb 2025 15:18:17 +0100
+Message-ID: <20250219141818.8789-2-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250219141818.8789-1-jgross@suse.com>
+References: <20250219141818.8789-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] code style: Format ns16550 driver
-To: Oleksandr Andrushchenko <andr2000@gmail.com>
-Cc: sstabellini@kernel.org, Artem_Mygaiev@epam.com, Luca.Fancellu@arm.com,
- roger.pau@citrix.com, marmarek@invisiblethingslab.com,
- andrew.cooper3@citrix.com, anthony.perard@vates.tech,
- xen-devel@lists.xenproject.org
-References: <20250216102108.2665222-1-andr2000@gmail.com>
- <20250216102108.2665222-2-andr2000@gmail.com>
- <5ed54fcf-d4fd-4ec0-8c40-1e50d9b16ae2@suse.com>
- <6f133e51-17b5-4edf-8db3-5c9b91028898@gmail.com>
- <b1b07d0a-06e7-4509-bb21-d5d6ac849252@suse.com>
- <85fa3476-c360-4049-9376-ef342883b864@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <85fa3476-c360-4049-9376-ef342883b864@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-1.30 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[citrix.com:email,suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo];
+	FREEMAIL_CC(0.00)[gmail.com,suse.com,citrix.com,vates.tech,amd.com,xen.org,kernel.org];
+	TAGGED_RCPT(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	TO_DN_SOME(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com]
 
-On 19.02.2025 14:52, Oleksandr Andrushchenko wrote:
-> On 19.02.25 15:18, Jan Beulich wrote:
->> On 19.02.2025 13:39, Oleksandr Andrushchenko wrote:
->>> On 17.02.25 12:20, Jan Beulich wrote:
->>>> On 16.02.2025 11:21, Oleksandr Andrushchenko wrote:
->>>>> @@ -248,8 +249,9 @@ static int cf_check ns16550_tx_ready(struct serial_port *port)
->>>>>        if ( ns16550_ioport_invalid(uart) )
->>>>>            return -EIO;
->>>>>    
->>>>> -    return ( (ns_read_reg(uart, UART_LSR) &
->>>>> -              uart->lsr_mask ) == uart->lsr_mask ) ? uart->fifo_size : 0;
->>>>> +    return ((ns_read_reg(uart, UART_LSR) & uart->lsr_mask) == uart->lsr_mask)
->>>>> +               ? uart->fifo_size
->>>>> +               : 0;
->>>> Indentation of the ? and : lines is clearly wrong here? What is the tool
->>>> doing?
->>> There are number of options that have influence on this formatting:
->>> AllowShortBlocksOnASingleLine [4]
->>> BreakBeforeTernaryOperators [5]
->>> AlignOperands [6]
->>>
->>> I was not able to tweak these options to have the previous form.
->> Right, sticking to the original form (with just the stray blanks zapped)
->> would of course be best. Yet again - the tool is doing more transformations
->> despite there not being any need. If, however, it does so, then one of my
->> expectations would be that the ? and : are properly indented:
->>
->>      return ((ns_read_reg(uart, UART_LSR) & uart->lsr_mask) == uart->lsr_mask)
->>             ? uart->fifo_size
->>             : 0;
-> This only differs from what the tool is doing by the fact it applies
-> the following rule: *IndentWidth: 4*, e.g. it has indented your construct
-> by 4 spaces, see [1]. Which, IMO, is acceptable change.
+The list_for_each_entry*() iterators are testing for having reached the
+end of the list in a way which relies on undefined behavior: the
+iterator (being a pointer to the struct of a list element) is advanced
+and only then tested to have reached not the next element, but the list
+head. This results in the list head being addressed via a list element
+pointer, which is undefined, in case the list elements have a higher
+alignment than the list head.
 
-I don't view this as acceptable. It falls in the same class then as
+Avoid that by testing for the end of the list before advancing the
+iterator. In case of having reached the end of the list, set the
+iterator to NULL and use that for stopping the loop. This has the
+additional advantage of not leaking the iterator pointing to something
+which isn't a list element past the loop.
 
-    ns_write_reg(uart,
-                 UART_FCR,
-                 UART_FCR_ENABLE | UART_FCR_CLRX | UART_FCR_CLTX |
-                     UART_FCR_TRG14);
+There is one case in the Xen code where the iterator is used after
+the loop: it is tested to be non-NULL to indicate the loop has run
+until reaching the end of the list. This case is modified to use the
+iterator being NULL for indicating the end of the list has been
+reached.
 
-that I also commented on in my initial reply.
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+No proper Fixes: tag, as this bug predates Xen's git and mercurial
+history.
+V2:
+- fix one use case (Jan Beulich)
+- let list_is_first() return bool, rename parameter (Jan Beulich)
+- paranthesize iterator when used as non-NULL test (Jan Beulich)
+- avoid dereferencing NULL in the safe iterators (Jan Beulich)
+---
+ xen/drivers/passthrough/x86/hvm.c |   3 +-
+ xen/include/xen/list.h            | 110 +++++++++++++++++++-----------
+ 2 files changed, 73 insertions(+), 40 deletions(-)
 
->> or
->>
->>      return ((ns_read_reg(uart, UART_LSR) & uart->lsr_mask) == uart->lsr_mask)
->>             ? uart->fifo_size : 0;
->>
->> or
->>
->>      return ((ns_read_reg(uart, UART_LSR) & uart->lsr_mask) == uart->lsr_mask
->>              ? uart->fifo_size
->>              : 0);
->>
->> (not going to list more variants which are all okay).
->>
->> In any event, a fundamental requirement of mine is that such a tool would
->> only apply adjustments when and where style is actively violated. I.e. in
->> the case here:
->>
->>     return ((ns_read_reg(uart, UART_LSR) &
->>              uart->lsr_mask) == uart->lsr_mask) ? uart->fifo_size : 0;
->>
->> That's not overly neat wrapping, but in line with our style. If the other
->> form was demanded going forward, I'd be curious how you'd verbally
->> describe the requirement in ./CODING_STYLE.
-> I believe this can be stated around the fact that we need to indent,
-> e.g. apply the same rule as for other constructs already in use
+diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
+index f5faff7a49..213dd60340 100644
+--- a/xen/drivers/passthrough/x86/hvm.c
++++ b/xen/drivers/passthrough/x86/hvm.c
+@@ -639,12 +639,11 @@ int pt_irq_destroy_bind(
+             {
+                 list_del(&girq->list);
+                 xfree(girq);
+-                girq = NULL;
+                 break;
+             }
+         }
+ 
+-        if ( girq )
++        if ( !girq )
+         {
+             write_unlock(&d->event_lock);
+             return -EINVAL;
+diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
+index 62169f4674..d90b3f6f0d 100644
+--- a/xen/include/xen/list.h
++++ b/xen/include/xen/list.h
+@@ -291,6 +291,17 @@ static inline void list_move_tail(struct list_head *list,
+     list_add_tail(list, head);
+ }
+ 
++/**
++ * list_is_first - tests whether @entry is the first entry in list @head
++ * @entry: the entry to test
++ * @head: the head of the list
++ */
++static inline bool list_is_first(const struct list_head *entry,
++                                 const struct list_head *head)
++{
++    return entry->prev == head;
++}
++
+ /**
+  * list_is_last - tests whether @list is the last entry in list @head
+  * @list: the entry to test
+@@ -440,7 +451,19 @@ static inline void list_splice_init(struct list_head *list,
+   */
+ #define list_next_entry(pos, member) \
+         list_entry((pos)->member.next, typeof(*(pos)), member)
+- 
++
++/**
++  * list_next_entry_or_null - get the next element in list
++  * @pos:        the type * to cursor
++  * @member:     the name of the struct list_head within the struct.
++  *
++  * Note that if the end of the list is reached, it returns NULL.
++  */
++#define list_next_entry_or_null(head, pos, member)                 \
++        ((!(pos) || list_is_last(&(pos)->member, head))            \
++         ? NULL                                                    \
++         : list_entry((pos)->member.next, typeof(*(pos)), member))
++
+ /**
+   * list_prev_entry - get the prev element in list
+   * @pos:        the type * to cursor
+@@ -449,6 +472,18 @@ static inline void list_splice_init(struct list_head *list,
+ #define list_prev_entry(pos, member) \
+         list_entry((pos)->member.prev, typeof(*(pos)), member)
+ 
++/**
++  * list_prev_entry_or_null - get the prev element in list
++  * @pos:        the type * to cursor
++  * @member:     the name of the struct list_head within the struct.
++  *
++  * Note that if the start of the list is reached, it returns NULL.
++  */
++#define list_prev_entry_or_null(head, pos, member)                 \
++        ((!(pos) || list_is_first(&(pos)->member, head))           \
++         ? NULL                                                    \
++         : list_entry((pos)->member.prev, typeof(*(pos)), member))
++
+ /**
+  * list_for_each    -    iterate over a list
+  * @pos:    the &struct list_head to use as a loop cursor.
+@@ -492,10 +527,10 @@ static inline void list_splice_init(struct list_head *list,
+  * @head:   the head for your list.
+  * @member: the name of the list_struct within the struct.
+  */
+-#define list_for_each_entry(pos, head, member)                          \
+-    for ((pos) = list_entry((head)->next, typeof(*(pos)), member);      \
+-         &(pos)->member != (head);                                      \
+-         (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
++#define list_for_each_entry(pos, head, member)                            \
++    for ( (pos) = list_first_entry_or_null(head, typeof(*(pos)), member); \
++          (pos);                                                          \
++          (pos) = list_next_entry_or_null(head, pos, member) )
+ 
+ /**
+  * list_for_each_entry_reverse - iterate backwards over list of given type.
+@@ -503,10 +538,10 @@ static inline void list_splice_init(struct list_head *list,
+  * @head:   the head for your list.
+  * @member: the name of the list_struct within the struct.
+  */
+-#define list_for_each_entry_reverse(pos, head, member)                  \
+-    for ((pos) = list_entry((head)->prev, typeof(*(pos)), member);      \
+-         &(pos)->member != (head);                                      \
+-         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
++#define list_for_each_entry_reverse(pos, head, member)                   \
++    for ( (pos) = list_last_entry_or_null(head, typeof(*(pos)), member); \
++          (pos);                                                         \
++          (pos) = list_prev_entry_or_null(head, pos, member) )
+ 
+ /**
+  * list_prepare_entry - prepare a pos entry for use in
+@@ -530,10 +565,10 @@ static inline void list_splice_init(struct list_head *list,
+  * Continue to iterate over list of given type, continuing after
+  * the current position.
+  */
+-#define list_for_each_entry_continue(pos, head, member)                   \
+-    for ((pos) = list_entry((pos)->member.next, typeof(*(pos)), member);  \
+-         &(pos)->member != (head);                                        \
+-         (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
++#define list_for_each_entry_continue(pos, head, member)        \
++    for ( (pos) = list_next_entry_or_null(head, pos, member);  \
++          (pos);                                               \
++          (pos) = list_next_entry_or_null(head, pos, member) )
+ 
+ /**
+  * list_for_each_entry_from - iterate over list of given type from the
+@@ -544,9 +579,8 @@ static inline void list_splice_init(struct list_head *list,
+  *
+  * Iterate over list of given type, continuing from current position.
+  */
+-#define list_for_each_entry_from(pos, head, member)                     \
+-    for (; &(pos)->member != (head);                                    \
+-         (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
++#define list_for_each_entry_from(pos, head, member)            \
++    for ( ; (pos); (pos) = list_next_entry_or_null(head, pos, member) )
+ 
+ /**
+  * list_for_each_entry_safe - iterate over list of given type safe
+@@ -556,11 +590,11 @@ static inline void list_splice_init(struct list_head *list,
+  * @head:   the head for your list.
+  * @member: the name of the list_struct within the struct.
+  */
+-#define list_for_each_entry_safe(pos, n, head, member)                  \
+-    for ((pos) = list_entry((head)->next, typeof(*(pos)), member),      \
+-         (n) = list_entry((pos)->member.next, typeof(*(pos)), member);  \
+-         &(pos)->member != (head);                                      \
+-         (pos) = (n), (n) = list_entry((n)->member.next, typeof(*(n)), member))
++#define list_for_each_entry_safe(pos, n, head, member)                     \
++    for ( (pos) = list_first_entry_or_null(head, typeof(*(pos)), member),  \
++          (n) = (pos) ? list_next_entry_or_null(head, pos, member) : NULL; \
++          (pos);                                                           \
++          (pos) = (n), (n) = list_next_entry_or_null(head, n, member) )
+ 
+ /**
+  * list_for_each_entry_safe_continue
+@@ -572,11 +606,11 @@ static inline void list_splice_init(struct list_head *list,
+  * Iterate over list of given type, continuing after current point,
+  * safe against removal of list entry.
+  */
+-#define list_for_each_entry_safe_continue(pos, n, head, member)           \
+-    for ((pos) = list_entry((pos)->member.next, typeof(*(pos)), member),  \
+-         (n) = list_entry((pos)->member.next, typeof(*(pos)), member);    \
+-         &(pos)->member != (head);                                        \
+-         (pos) = (n), (n) = list_entry((n)->member.next, typeof(*(n)), member))
++#define list_for_each_entry_safe_continue(pos, n, head, member)            \
++    for ( (pos) = list_next_entry_or_null(head, pos, member),              \
++          (n) = (pos) ? list_next_entry_or_null(head, pos, member) : NULL; \
++          (pos);                                                           \
++          (pos) = (n), (n) = list_next_entry_or_null(head, n, member) )
+ 
+ /**
+  * list_for_each_entry_safe_from
+@@ -589,9 +623,9 @@ static inline void list_splice_init(struct list_head *list,
+  * removal of list entry.
+  */
+ #define list_for_each_entry_safe_from(pos, n, head, member)             \
+-    for ((n) = list_entry((pos)->member.next, typeof(*(pos)), member);  \
+-         &(pos)->member != (head);                                      \
+-         (pos) = (n), (n) = list_entry((n)->member.next, typeof(*(n)), member))
++    for ( (n) = list_next_entry_or_null(head, pos, member);             \
++          (pos);                                                        \
++          (pos) = (n), (n) = list_next_entry_or_null(head, n, member) )
+ 
+ /**
+  * list_for_each_entry_safe_reverse
+@@ -603,11 +637,11 @@ static inline void list_splice_init(struct list_head *list,
+  * Iterate backwards over list of given type, safe against removal
+  * of list entry.
+  */
+-#define list_for_each_entry_safe_reverse(pos, n, head, member)          \
+-    for ((pos) = list_entry((head)->prev, typeof(*(pos)), member),      \
+-         (n) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
+-         &(pos)->member != (head);                                      \
+-         (pos) = (n), (n) = list_entry((n)->member.prev, typeof(*(n)), member))
++#define list_for_each_entry_safe_reverse(pos, n, head, member)             \
++    for ( (pos) = list_last_entry_or_null(head, typeof(*(pos)), member),   \
++          (n) = (pos) ? list_prev_entry_or_null(head, pos, member) : NULL; \
++          (pos);                                                           \
++          (pos) = (n), (n) = list_prev_entry_or_null(head, n, member) )
+ 
+ /**
+  * list_for_each_rcu - iterate over an rcu-protected list
+@@ -655,10 +689,10 @@ static inline void list_splice_init(struct list_head *list,
+  * the _rcu list-mutation primitives such as list_add_rcu()
+  * as long as the traversal is guarded by rcu_read_lock().
+  */
+-#define list_for_each_entry_rcu(pos, head, member)                      \
+-    for ((pos) = list_entry((head)->next, typeof(*(pos)), member);      \
+-         &rcu_dereference(pos)->member != (head);                       \
+-         (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
++#define list_for_each_entry_rcu(pos, head, member)                        \
++    for ( (pos) = list_first_entry_or_null(head, typeof(*(pos)), member); \
++          rcu_dereference(pos);                                           \
++          (pos) = list_next_entry_or_null(head, pos, member) )
+ 
+ /**
+  * list_for_each_continue_rcu
+-- 
+2.43.0
 
-Except here the tool didn't merely adjust indentation, but moved tokens
-between lines.
-
->>>>> @@ -275,9 +277,10 @@ static void pci_serial_early_init(struct ns16550 *uart)
->>>>>    #ifdef NS16550_PCI
->>>>>        if ( uart->bar && uart->io_base >= 0x10000 )
->>>>>        {
->>>>> -        pci_conf_write16(PCI_SBDF(0, uart->ps_bdf[0], uart->ps_bdf[1],
->>>>> -                                  uart->ps_bdf[2]),
->>>>> -                         PCI_COMMAND, PCI_COMMAND_MEMORY);
->>>>> +        pci_conf_write16(
->>>>> +            PCI_SBDF(0, uart->ps_bdf[0], uart->ps_bdf[1], uart->ps_bdf[2]),
->>>>> +            PCI_COMMAND,
->>>>> +            PCI_COMMAND_MEMORY);
->>>>>            return;
->>>>>        }
->>>> Hmm, transforming a well-formed block into another well-formed one. No
->>>> gain? (Same again further down.)
->>> No, gain from human point of view
->>> But there is a gain that it is now formatted automatically.
->> See above: I'd first like to see a written, textual description for all these
->> requirements. After all it needs to be possible for a human to write code
->> that the tool then wouldn't try to re-arrange. Which in turn requires that
->> the restrictions / constraints on the layout are spelled out.
-> Agree, the existing coding style document will require some extension:
-> at least clarifications and addition of the rules not described yet.
->>   I'm not looking
->> forward to pass all my patches through such a tool. I can write style-
->> conforming code pretty well, with - of course - occasional oversights,
-> Which the tool will allow not to have for less accurate developers
-
-I fear I don't understand this reply of yours.
-
->>   right
->> now. And that in multiple projects all with different styles. I expect to be
->> in the position to do so also going forward. This, imo, requires that there
->> be left some room for variations. Which in turn requires that the tool would
->> leave alone anything that is not in conflict with the written down or defacto
->> style.
-> Not sure it is possible with any tool at all: it just makes the changes
-> without distinguishing what can be skipped or not even if it does not
-> violate the rules. It will always seek to improve or "improve" the
-> code
-
-Which by now I view as the core problem.
-
->>>>> @@ -1706,7 +1704,7 @@ static void __init ns16550_parse_port_config(
->>>>>        if ( !parse_namevalue_pairs(str, uart) )
->>>>>            return;
->>>>>    
->>>>> - config_parsed:
->>>>> +config_parsed:
->>>> This is a no-go - ./CODING_STYLE specifically says why this isn't appropriate.
->>> Yes, it can't formatted as we wish. This is controlled with IndentGotoLabels [10]
->>> and is a binary option, which leaves no means to disable it as both true and
->>> false will re-format the code
->>>
->>> true:false:
->>> intf(){vs.intf(){
->>> if(foo()){if(foo()){
->>> label1:label1:
->>> bar();bar();
->>> }}
->>> label2:label2:
->>> return1;return1;
->>> }}
->> If there was some indentation meant to be in that blob, it was all lost,
->> I'm afraid.
-> Yes, sorry about that. The sample I was trying to put can be found at [2]
-
-Funny, even with the setting "true" label2 there is unindented. We demand that
-all labels be indented, even when - contextually - at function scope. (Nor do
-we demand that labels be indented according to their - contextual - scope.)
-
-Jan
 
