@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC07EC021B3
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Feb 2025 19:50:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.894556.1303269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA4AC021B3
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Feb 2025 20:09:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.894564.1303279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tlZ1i-0001Ls-LH; Fri, 21 Feb 2025 19:49:34 +0000
+	id 1tlZKI-00049r-4U; Fri, 21 Feb 2025 20:08:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 894556.1303269; Fri, 21 Feb 2025 19:49:34 +0000
+Received: by outflank-mailman (output) from mailman id 894564.1303279; Fri, 21 Feb 2025 20:08:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tlZ1i-0001Ll-Hj; Fri, 21 Feb 2025 19:49:34 +0000
-Received: by outflank-mailman (input) for mailman id 894556;
- Fri, 21 Feb 2025 19:49:33 +0000
+	id 1tlZKI-00049k-15; Fri, 21 Feb 2025 20:08:46 +0000
+Received: by outflank-mailman (input) for mailman id 894564;
+ Fri, 21 Feb 2025 20:08:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VJx0=VM=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1tlZ1h-0001Lf-3Y
- for xen-devel@lists.xenproject.org; Fri, 21 Feb 2025 19:49:33 +0000
+ id 1tlZKG-00049Y-OU
+ for xen-devel@lists.xenproject.org; Fri, 21 Feb 2025 20:08:44 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f60f284d-f08c-11ef-9aa9-95dc52dad729;
- Fri, 21 Feb 2025 20:49:30 +0100 (CET)
+ id a5d78a40-f08f-11ef-9aa9-95dc52dad729;
+ Fri, 21 Feb 2025 21:08:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 0EFD78286F3D;
- Fri, 21 Feb 2025 13:49:28 -0600 (CST)
+ by mail.rptsys.com (Postfix) with ESMTP id A4B258287311;
+ Fri, 21 Feb 2025 14:08:42 -0600 (CST)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 5UWPqfgAmz6P; Fri, 21 Feb 2025 13:49:26 -0600 (CST)
+ with ESMTP id IoAusBhSdU3V; Fri, 21 Feb 2025 14:08:42 -0600 (CST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id C0005828730B;
- Fri, 21 Feb 2025 13:49:26 -0600 (CST)
+ by mail.rptsys.com (Postfix) with ESMTP id 06C2E8286E9D;
+ Fri, 21 Feb 2025 14:08:42 -0600 (CST)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id W0RVlvDtYPfT; Fri, 21 Feb 2025 13:49:26 -0600 (CST)
-Received: from [10.11.0.2] (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 425168286F3D;
- Fri, 21 Feb 2025 13:49:26 -0600 (CST)
+ with ESMTP id 1xvBLXcQI7-X; Fri, 21 Feb 2025 14:08:41 -0600 (CST)
+Received: from raptor-ewks-026.2lan (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id 14A2D8287FBD;
+ Fri, 21 Feb 2025 14:08:40 -0600 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,46 +53,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f60f284d-f08c-11ef-9aa9-95dc52dad729
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com C0005828730B
+X-Inumbo-ID: a5d78a40-f08f-11ef-9aa9-95dc52dad729
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 06C2E8286E9D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1740167366; bh=VUArGeclCLVk4pSDwM9nqJbEGsokynjq+ZOdNKxce4s=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=P5uq0JV4KwnDnp+3aD9hyMggVbnCRA6HcyEkLChVi+6KN1qXe8cETkRxwLueVxFJA
-	 5eh50VBVWF8FW3qzioOQpxd/DIg8p9FGBI4NroWT0JhfK6VWLeJknLS4d4oKkYxWts
-	 INCvhUhOk6CtyJx+Ruzjx/pyFWWvUqmEaXosgwwE=
+	t=1740168522; bh=wn8lAIb9qnZLpvYqwlQ9gH9RYtSwITlSk1VLzVXXQWE=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=E4u8YjjEFSWsgg/qa7TT05uHV5Xtiyuq54A/qovGAWQfr/hDl4tlPKVyD8cwpFhRv
+	 aD8faB4NTfq9JOH5kNkjgy60FFiL3SRxM6wQR8gRvwnNNdGp9eW4rjCYBNC2E4d6UC
+	 JG6VdPkjKGjaVKTccD+A0MnaH/ti+vqrc4Hh8t5I=
 X-Virus-Scanned: amavisd-new at rptsys.com
-Message-ID: <a6b4533a-b879-4af1-926c-6e8a48ade4b0@raptorengineering.com>
-Date: Fri, 21 Feb 2025 13:49:25 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] [BROKEN] PPC: Activate UBSAN in testing
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250208000256.431883-1-andrew.cooper3@citrix.com>
- <20250208000256.431883-5-andrew.cooper3@citrix.com>
-Content-Language: en-US
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
-Cc: Timothy Pearson <tpearson@raptorengineering.com>
-In-Reply-To: <20250208000256.431883-5-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+To: xen-devel@lists.xenproject.org
+Cc: tpearson@raptorengineering.com,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH 1/2] xen/ppc: Fix opal.c's misaligned DT reads to avoid tripping UBSAN
+Date: Fri, 21 Feb 2025 14:08:36 -0600
+Message-Id: <f0b1f299d793c4302ee1b4c6a9c99057f924d4f4.1740168326.git.sanastasio@raptorengineering.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1740168326.git.sanastasio@raptorengineering.com>
+References: <cover.1740168326.git.sanastasio@raptorengineering.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hi Andrew,
+Fix two misaligned reads from the FDT in the opal setup code to avoid
+tripping UBSAN failures. Without this change, UBSAN-enabled builds on
+PPC will fail on boot before the serial console is even initialized.
 
-On 2/7/25 6:02 PM, Andrew Cooper wrote:
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Shawn Anastasio <sanastasio@raptorengineering.com>
-> 
-> This compiles, but something is up with the console and nothing useful comes
-> out.
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ xen/arch/ppc/opal.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
 
-I tracked this down to ubsan tripping due to an unaligned access in
-opal.c, before the serial console is set up. I'll be sending a patch set
-soon to the ML with the fix for this to enable ubsan on PPC.
+diff --git a/xen/arch/ppc/opal.c b/xen/arch/ppc/opal.c
+index 1183b7d5ef..3d0e4daf27 100644
+--- a/xen/arch/ppc/opal.c
++++ b/xen/arch/ppc/opal.c
+@@ -34,8 +34,9 @@ static void opal_putchar(char c)
+ void __init boot_opal_init(const void *fdt)
+ {
+     int opal_node;
+-    const __be64 *opal_base;
+-    const __be64 *opal_entry;
++    const __be64 *opal_base_p;
++    const __be64 *opal_entry_p;
++    __be64 opal_base, opal_entry;
+ 
+     if ( fdt_check_header(fdt) < 0 )
+     {
+@@ -54,17 +55,20 @@ void __init boot_opal_init(const void *fdt)
+         die();
+     }
+ 
+-    opal_base = fdt_getprop(fdt, opal_node, "opal-base-address", NULL);
+-    opal_entry = fdt_getprop(fdt, opal_node, "opal-entry-address", NULL);
+-    if ( !opal_base || !opal_entry )
++    opal_base_p = fdt_getprop(fdt, opal_node, "opal-base-address", NULL);
++    opal_entry_p = fdt_getprop(fdt, opal_node, "opal-entry-address", NULL);
++    if ( !opal_base_p || !opal_entry_p )
+     {
+         early_printk("Failed to get opal-base-address/opal-entry-address "
+                      "property from DT!\n");
+         die();
+     }
+ 
+-    opal.base = be64_to_cpu(*opal_base);
+-    opal.entry = be64_to_cpu(*opal_entry);
++    memcpy(&opal_base, opal_base_p, sizeof(opal_base));
++    memcpy(&opal_entry, opal_entry_p, sizeof(opal_entry));
++
++    opal.base = be64_to_cpu(opal_base);
++    opal.entry = be64_to_cpu(opal_entry);
+ 
+     early_printk_init(opal_putchar);
+ 
+-- 
+2.30.2
 
-Thanks,
-Shawn
 
