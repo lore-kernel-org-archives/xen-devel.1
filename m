@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F16C021B3
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Feb 2025 12:05:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.894421.1303119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CFB8C021B3
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Feb 2025 12:30:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.894434.1303138 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tlRm7-0000P0-PW; Fri, 21 Feb 2025 12:04:59 +0000
+	id 1tlSB8-0004n1-Uw; Fri, 21 Feb 2025 12:30:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 894421.1303119; Fri, 21 Feb 2025 12:04:59 +0000
+Received: by outflank-mailman (output) from mailman id 894434.1303138; Fri, 21 Feb 2025 12:30:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tlRm7-0000Ot-Ma; Fri, 21 Feb 2025 12:04:59 +0000
-Received: by outflank-mailman (input) for mailman id 894421;
- Fri, 21 Feb 2025 12:04:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tlSB8-0004mu-Rn; Fri, 21 Feb 2025 12:30:50 +0000
+Received: by outflank-mailman (input) for mailman id 894434;
+ Fri, 21 Feb 2025 12:30:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RQ+l=VM=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tlRm6-0000On-MZ
- for xen-devel@lists.xenproject.org; Fri, 21 Feb 2025 12:04:58 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 11011950-f04c-11ef-9896-31a8f345e629;
- Fri, 21 Feb 2025 13:04:56 +0100 (CET)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5dec817f453so3359623a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 21 Feb 2025 04:04:56 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dece2709ffsm13534400a12.60.2025.02.21.04.04.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 04:04:55 -0800 (PST)
+ <SRS0=7TFm=VM=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tlSB8-0004mk-FS
+ for xen-devel@lists.xenproject.org; Fri, 21 Feb 2025 12:30:50 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ae54fa5e-f04f-11ef-9aa9-95dc52dad729;
+ Fri, 21 Feb 2025 13:30:49 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4398e3dfc66so17760015e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Feb 2025 04:30:49 -0800 (PST)
+Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-439b0371c67sm15801955e9.34.2025.02.21.04.30.47
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 Feb 2025 04:30:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,138 +48,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 11011950-f04c-11ef-9896-31a8f345e629
+X-Inumbo-ID: ae54fa5e-f04f-11ef-9aa9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1740139496; x=1740744296; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=i08e+qkuMbbKyfrlPRaWhMw+Bo9ejH/m6+4gwa9q9ro=;
-        b=Lk4GdQ0GmIaa8jUkyPlr17JATGCHLgQBL71254ADhKd5jbrhG4cejnpR3nXkFBRoBB
-         L9gvGi6IZlgyiuMBkq4nxMdNekgJfTFNc4G4OQ3OV46DQ9Ao6E/7TtsGhLS7Yg+FYRRh
-         +8GBxWLYqvL090bAAY5j3w0gowwbaP6laJh0w=
+        d=citrix.com; s=google; t=1740141048; x=1740745848; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Os+9Iy+AgZAp4Q80x0RKseiptTUr8EADufut3MTGsm0=;
+        b=eGYVYrtgffMd/cGjUh18XWzbu5eav0n76XoFpW5FdtPYr091HDBjiR9kgAonZgkcvd
+         te0DcRgGGqJX/m+siJD2hPPLgYlMj1EPA9MmV95Zc2OWaMdXJGpfv9Ub+VKReQXdgw5s
+         Iyil3WH/Xif6PSgnnfbufSSCLmLWdb4eEJ/bw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740139496; x=1740744296;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1740141048; x=1740745848;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=i08e+qkuMbbKyfrlPRaWhMw+Bo9ejH/m6+4gwa9q9ro=;
-        b=EcRhsIC3rMTh32jtXs6NXiZRjy1mji2+1hTXaxZuvKln4PNnNet1Efjk/giBwL9dwL
-         kEUALaJJWrG6ckmUGnF6lZ8ErBdUyUKLCeYp2ceDtca/YBRhplfCW09/CmgvPrfIuSq9
-         bmCGPHV14nn4HKtd6/ddJkQgRCN8iqw4X4feZEfwukqhVAeV8LOd7z6i38KQYL8pvoh1
-         76MORTnVdc7ZwQ2dwSvfl3tPx7Wo7MsanB96Xc3u6+/qsEz+DFVNQLEaZKaFy4XzRZIM
-         FCpZoKCNS/tWSh7MxDl3Osu3vAuxoMbEAdsp1ML+Jt+aNRJIY9Gt7sl5k/3L9V1OiByL
-         HQXg==
-X-Gm-Message-State: AOJu0Yx5vVHXsZK0FTD/e/L0yMOllC57xXuL8tcCL7N4pF2VqUbiOxSM
-	4aRkzTXaU0NzA8P826czoL/8czTPepTqcaEjyOEoY9SowqAI0wNTbs1h4zxeXSqIxSdth/hcC1z
-	a
-X-Gm-Gg: ASbGncsJfX2yQDMHovtgAT9MM1MWNItSwpgLoFyA45RVu0CN6SnVihbbamZaHd+JEOl
-	7s/phfFinpELntZBXOcee4t4YJvIcUCidgdWzV4eJUrQ49bvjTRJWFrMshtAex3FcRmUrZ2kkjJ
-	fHQZfvvD4AXIdCmeDm/hRj0R0XIsST0mil3Wt0Vt6jMtRPWpaRtZ5s4sYmgKgSsBDndDp2N/YlF
-	lpxFGhK28jD7YbkJRWLDPbeihdGkVD3xDC7X5ze5UT02A/1luWnUELFMzXPkUN/scnyCL3HbQty
-	nnqUs2eKJvx20yK2ROcOWqizZPLy+ZE=
-X-Google-Smtp-Source: AGHT+IEcZK48Snm7Cb3+Za0NQrCqEASzzwp5lSAXgo9iiFc9dEGfXyvJl3nwpakmjEkqbGK5yy9KJA==
-X-Received: by 2002:a05:6402:35d1:b0:5dc:c9ce:b01b with SMTP id 4fb4d7f45d1cf-5e0b70e8f6cmr2023158a12.8.1740139495653;
-        Fri, 21 Feb 2025 04:04:55 -0800 (PST)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/msr: expose MSR_FAM10H_MMIO_CONF_BASE on AMD
-Date: Fri, 21 Feb 2025 13:04:17 +0100
-Message-ID: <20250221120417.20431-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.46.0
+        bh=Os+9Iy+AgZAp4Q80x0RKseiptTUr8EADufut3MTGsm0=;
+        b=tbdTexjMR6uAqtjXw/i6EsbJqw7zQ2tJWuZYyUMQ2zqP1Jy00I/i7n2zzg/AfpTNaW
+         3hcFfTgjqQTLRaQCxAq/IRP4zKSc0B+V46dAbawenj167kEQJbWK6uXp2VhgniVyGP5D
+         YlVysJ5aMtEqVnjzaRDl84UyBLblixgN0QLy6f05soikpMV15/IfHGyVKLSb9SziFDEM
+         rQWEyUv0jM5+aQ4aDvc7QiovtffCkoP4LOloPxtIxzlbHfHBD5R9812v+vX2jvEOROUI
+         +WGzKCRCBemDh/vvnF245Ao10ogaRyGY+K4PkSQy0Mp7an6R+35+aTwNwSGm/aro7RY4
+         6Izg==
+X-Gm-Message-State: AOJu0YyRsg+qE2YpWYM5jz2JTHru6Bt6xr8QEH4usdbBScxUABE2W30T
+	2tYH9lXIBS4FoVQtb12YtycOxJJODVQA24EcEcC/2E1P827PjTZspVbnnYaf5fzJkcXyz9aV5LN
+	4
+X-Gm-Gg: ASbGncskgU6FzRUC33yV4ZTVMOKc1XMDMKRf3DPFj1M9+rrAJHNpmI0OxxnR4eskcK2
+	rissaZEG8CX0SQ++lRJcCfeDzqwtrsxYhxxeThoXxST39eyyd7YudeLHBNFhgG6fJ+5AXUxGI7K
+	i5yZ3BHsHW2olOYqFhdYMDI2KDzFKkc2j9EjGufeZ//yO8ZDo8bJq9MZz/Ghkf+18UyatzdMCLS
+	7RMaSAf7ATacBPTaURwT07DkOf0yZWVy2pKbKbZ5En5aqcOJTT85jFb3wCll4+AqEqNUrdhU31O
+	vm9QBWi9FyPr3bSoyDIFFlVSLq0FAG8k4G0+ApImn/xQpz57HG/xxkaXp2O5C+phWQ==
+X-Google-Smtp-Source: AGHT+IGz6rm3ZoPy5RAn1srvabu6bS+sAZIf+e5WKh0ckL7cxHKi9UDQWoLroCgMWy7GUa36mRofyQ==
+X-Received: by 2002:a05:600c:4f91:b0:439:98b0:f8db with SMTP id 5b1f17b1804b1-439ae1f1903mr30713225e9.16.1740141048261;
+        Fri, 21 Feb 2025 04:30:48 -0800 (PST)
+Message-ID: <ae4ea824-e2a8-4963-a830-748f3a421e7d@citrix.com>
+Date: Fri, 21 Feb 2025 12:30:47 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.20] eclair: mark R16.6 as clean
+To: xen-devel@lists.xenproject.org
+References: <alpine.DEB.2.22.394.2502201354410.1791669@ubuntu-linux-20-04-desktop>
+ <60a5d6be-ba39-468c-9e4f-dc363f0d80f4@gmail.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <60a5d6be-ba39-468c-9e4f-dc363f0d80f4@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-The MMIO_CONF_BASE reports the base of the MCFG range on AMD systems.
-Currently Linux is unconditionally attempting to read the MSR without a
-safe MSR accessor, and since Xen doesn't allow access to it Linux reports
-the following error:
+On 21/02/2025 11:52 am, Oleksii Kurochko wrote:
+>
+>
+> On 2/20/25 10:54 PM, Stefano Stabellini wrote:
+>> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+>> ---
+>> This is possible thanks to "resolve the last 3 MISRA R16.6 violations"
+>> being committed.
+>>
+>> Requesting a release ack. Successful pipeline:
+>> https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/1681379131
+> Release-Acked-By: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-unchecked MSR access error: RDMSR from 0xc0010058 at rIP: 0xffffffff8101d19f (xen_do_read_msr+0x7f/0xa0)
-Call Trace:
- <TASK>
- ? ex_handler_msr+0x11e/0x150
- ? fixup_exception+0x81/0x300
- ? exc_general_protection+0x138/0x410
- ? asm_exc_general_protection+0x22/0x30
- ? xen_do_read_msr+0x7f/0xa0
- xen_read_msr+0x1e/0x30
- amd_get_mmconfig_range+0x2b/0x80
- quirk_amd_mmconfig_area+0x28/0x100
- ? quirk_system_pci_resources+0x2b/0x150
- pnp_fixup_device+0x39/0x50
- __pnp_add_device+0xf/0x150
- pnp_add_device+0x3d/0x100
- ? __pfx_pnpacpi_allocated_resource+0x10/0x10
- ? __pfx_pnpacpi_allocated_resource+0x10/0x10
- ? acpi_walk_resources+0xbb/0xd0
- pnpacpi_add_device_handler+0x1f9/0x280
- acpi_ns_get_device_callback+0x104/0x1c0
- ? _raw_spin_unlock_irqrestore+0x18/0x20
- ? down_timeout+0x3a/0x60
- ? _raw_spin_lock_irqsave+0x14/0x40
- acpi_ns_walk_namespace+0x1d0/0x260
- ? _raw_spin_unlock_irqrestore+0x18/0x20
- ? __pfx_acpi_ns_get_device_callback+0x10/0x10
- acpi_get_devices+0x8a/0xb0
- ? __pfx_pnpacpi_add_device_handler+0x10/0x10
- ? __pfx_pnpacpi_init+0x10/0x10
- pnpacpi_init+0x50/0x80
- do_one_initcall+0x46/0x2e0
- kernel_init_freeable+0x1da/0x2f0
- ? __pfx_kernel_init+0x10/0x10
- kernel_init+0x16/0x1b0
- ret_from_fork+0x30/0x50
- ? __pfx_kernel_init+0x10/0x10
- ret_from_fork_asm+0x1b/0x30
- </TASK>
-
-Fix by allowing access to the MSR on AMD systems, returning 0 for
-unprivileged domains (MMIO configuration space disabled), and the native
-value for the hardware domain.
-
-The non hardware domain logic will need to be adjusted if in the future we
-expose an MCFG region to such domains.
-
-Write attempts to the MSR will still result in #GP for all domain types.
-
-Fixes: 84e848fd7a16 ('x86/hvm: disallow access to unknown MSRs')
-Fixes: 322ec7c89f66 ('x86/pv: disallow access to unknown MSRs')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/msr.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 289cf10b783a..c588c9131337 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -245,6 +245,21 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
-         *val = 0;
-         break;
- 
-+    case MSR_FAM10H_MMIO_CONF_BASE:
-+        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-+            goto gp_fault;
-+
-+        /*
-+         * Report MMIO configuration space is disabled unconditionally for
-+         * domUs, as the emulated chipset doesn't support ECAM.  For dom0
-+         * return the hardware value.
-+         */
-+        *val = 0;
-+        if ( is_hardware_domain(d) && rdmsr_safe(msr, *val) )
-+            goto gp_fault;
-+
-+        break;
-+
-     case MSR_VIRT_SPEC_CTRL:
-         if ( !cp->extd.virt_ssbd )
-             goto gp_fault;
--- 
-2.46.0
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
