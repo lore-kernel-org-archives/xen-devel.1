@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21EF2C021BB
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Feb 2025 16:07:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.895263.1303853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD50C021BB
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Feb 2025 16:07:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.895267.1303894 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmazD-0003oz-Hb; Mon, 24 Feb 2025 16:07:15 +0000
+	id 1tmazH-0004k5-05; Mon, 24 Feb 2025 16:07:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 895263.1303853; Mon, 24 Feb 2025 16:07:15 +0000
+Received: by outflank-mailman (output) from mailman id 895267.1303894; Mon, 24 Feb 2025 16:07:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmazD-0003os-F6; Mon, 24 Feb 2025 16:07:15 +0000
-Received: by outflank-mailman (input) for mailman id 895263;
- Mon, 24 Feb 2025 16:07:13 +0000
+	id 1tmazG-0004ju-Rk; Mon, 24 Feb 2025 16:07:18 +0000
+Received: by outflank-mailman (input) for mailman id 895267;
+ Mon, 24 Feb 2025 16:07:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=48j1=VP=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tmazB-0003oc-JR
- for xen-devel@lists.xenproject.org; Mon, 24 Feb 2025 16:07:13 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+ id 1tmazF-0003oc-89
+ for xen-devel@lists.xenproject.org; Mon, 24 Feb 2025 16:07:17 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 68428f64-f2c9-11ef-9aae-95dc52dad729;
- Mon, 24 Feb 2025 17:07:12 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43998deed24so43811935e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 24 Feb 2025 08:07:12 -0800 (PST)
+ id 6a74cff7-f2c9-11ef-9aae-95dc52dad729;
+ Mon, 24 Feb 2025 17:07:16 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43aac0390e8so5807535e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Feb 2025 08:07:16 -0800 (PST)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02d6837sm109356675e9.13.2025.02.24.08.07.10
+ 5b1f17b1804b1-439b02d6837sm109356675e9.13.2025.02.24.08.07.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 08:07:11 -0800 (PST)
+ Mon, 24 Feb 2025 08:07:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,117 +47,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68428f64-f2c9-11ef-9aae-95dc52dad729
+X-Inumbo-ID: 6a74cff7-f2c9-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1740413231; x=1741018031; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EcpIhIHKCIrpTwqtCwPu0fiKrCCeqwA5dji6sqDibh0=;
-        b=oXdED/ql8Al/8X4jfRCq9m4UHKvXNbRLOGsdAyAVS8ExvggTLwtTDpH/O16hEiv7ye
-         jDoLm4cfMGAZx2iPbSi1Nls6+d5zfKHPsziZRlgISw58eGw4xtGjk4VHY3mfOI+uZmGB
-         LTFZKuc9vXJ9R8/oeMZX9VcjLaKcsMa5rqRbo=
+        d=citrix.com; s=google; t=1740413235; x=1741018035; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mFJsQ/EffrIUlzYFRF2KwYzGjP98dz2R+aov7nCV9uM=;
+        b=ZAtgZNzxQkzSGNdQxm3L8xZ5Xiq5xTynAKoyMOHvIBlBpThsf8zUjwc5wj8xKjuxi7
+         RCsRUAw+PlennP7M5Fxv0pLsws0bqvnsfoHcLdKwkq7VGpq65hQ4PExQAsy6nkVQam76
+         zBg6ujf7vaWS4e0skHRf/RExk3eYBie7lzLDg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740413231; x=1741018031;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EcpIhIHKCIrpTwqtCwPu0fiKrCCeqwA5dji6sqDibh0=;
-        b=DBoYE6ClaU/nouPrwFcaMmwiNAOXIA4qwnTQafSvn9tDcWswhcV3WQl/vADOslJObx
-         b2Fj7wFNiPhyWZI3PevB5002kZN9QxB+HKVHlTcPhSyxyTiFOPptHrbA56gGUKMsGFir
-         sq2C1tYQt1F2QRmeIe8TThXsfYEcO79Zzpqcy3Rw1vY0hRqkQCb0f65cYOzfXq2tOduG
-         cLZ6f7izK8I46Ze55r7/PF2w0MCH/3P8Mq+NdEpoJR6NQ1U1P0J7IXqIkc/WeofSSaF0
-         Qdf38nYQrK3eCTOO0S54JLTSCNh9LwZPWu0Ww0gVDPikawi84zDwCaWfPqhTDRaFlbK0
-         gjNg==
-X-Gm-Message-State: AOJu0Ywl6F5z1u64YfmM/pqq3XVPDTl9ytYr/0fspJ6tAVf2OWK2G3L/
-	jqzQAbKlW4LMBAVOT8OZ1h+8l9Z571Yrr4WhWov2WiMsY1yyAibnlB7fZMUPtcsTGgsoXZepJIR
-	l
-X-Gm-Gg: ASbGncuU/x7yEeIA0fU+hRUgzarpE3czr7Qol10phURJLEbqh0L3Y3obAu/jyTzXGYg
-	Dy1Z2ON4UY+sX0jIWHw5IjvvNmDMZai8dJfmPRZgOufCZRHrJJ6dLoqUGWzaCvy7BDH+v4NkQOL
-	rwogqSXvoSrvKeSuRrwbb7YJDvimt5HoqKQoy2JY4+4rKKuVRw6JS6VHhJWFlJfmQkIrtRDZxZC
-	HsVpxv/Ti+VQhpsP1d0IzpI69VRR0O4RYDlK3SF+RlknLtdwwVITmgNMDC1nQ9t8Up07HEHDt5B
-	Eg9VOcd6444SyU275Me651o/HcSQc80rNrXKy/O5H9BdfxdrQMsOmSIiunuIF3DUlxOQYotw/Ar
-	W09jKBw==
-X-Google-Smtp-Source: AGHT+IGB2PPm3jbmoN4+9TyqP/ZjjyND4301n1J+egccwFKqSmjeQkMCFK/nc3oh+ZiMImZlTDaieg==
-X-Received: by 2002:a05:600c:350a:b0:439:9b82:d6b2 with SMTP id 5b1f17b1804b1-439aeb34f86mr134142235e9.16.1740413231389;
-        Mon, 24 Feb 2025 08:07:11 -0800 (PST)
+        d=1e100.net; s=20230601; t=1740413235; x=1741018035;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mFJsQ/EffrIUlzYFRF2KwYzGjP98dz2R+aov7nCV9uM=;
+        b=WY8HeJBY9sn/2Xb57KNqV+7l3iLKoj1gpG8aQoW5mZYeuLMAZsp0UNOVUqBAQ1D3zm
+         wqgNzD/hSBlyAnZPGRg59QDLY08Abm4AIXvnDYpLChfgRiKQ00atZ78A1Z2reobl1KdA
+         gjxmqynESKxNMERlgoZX9oI9C3xYf0kLiWS1682PVLdMISRwv9PyYLwyW8nWBELv9cOe
+         bCufVBC0l0+LNSO/Lf+oLMRznQ3pO1dEtq607/k30tA3kMcrS567Zys5xFbXebuPzBZP
+         1SLqZHgRWH81+XjkPaOGt82ZaXzepH+ks2NGNcsjjXzByy0L1M6cXYRPU5PByyldplGE
+         SmYg==
+X-Gm-Message-State: AOJu0YyzdxqwzYn1lvC6jy22mBNNWghZdTxUXIEcrZhfEGytSwMhuFIz
+	bdCmt1H2Nkog8LTNWcSG+L10eFloqZEiV65pnOLPME4UN+1DNA70ceiZ17S7Vs/W7GMx7JsGsiB
+	e
+X-Gm-Gg: ASbGncsATn8N+D0Q6+Y9ciBinQbQyCY531v7bkKxTgCESFQufX7LqqrLeJi/jxVF4+m
+	zThAV6YwFRaw6UisGtm6d5RsdhpxzwT/6GPMfBtqxJfkV589ShHx078THeiVVWjAK6qroSZ7Ps4
+	aWUea2+Y4yGxxadMqrSldsQps8ICyp14Dgsxp5VgPlee/lK+x0HZcn41WD3xzrIDP40anhxGg3W
+	BLb4SD4qL+yiFB1xPHkf7ynyFFXwU9Nm6ONEB9CJEsZCP3iYtbd9ooUExPfchOpDNn2cxfOYp+C
+	qMOZsNeuJa0wxBPhelF7fue5hdHYTc067fefohI4NIlryJFjmhKS29i20nMRq5DuTpFpAYSpP/M
+	UHIMQBw==
+X-Google-Smtp-Source: AGHT+IE79iRkP1Na06GcO9H0r52YMm4ebPcOdyybCXvdOn4EIo5vYoznFQISQZZO1mtfuO3r+rB14w==
+X-Received: by 2002:a05:600c:3150:b0:439:955d:7adb with SMTP id 5b1f17b1804b1-439ae222a7amr143397645e9.30.1740413235159;
+        Mon, 24 Feb 2025 08:07:15 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 0/8] x86/IDT: Generate the IDT at build time
-Date: Mon, 24 Feb 2025 16:05:01 +0000
-Message-Id: <20250224160509.1117847-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/8] x86/IDT: Rename idt_table[] to bsp_idt[]
+Date: Mon, 24 Feb 2025 16:05:05 +0000
+Message-Id: <20250224160509.1117847-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250224160509.1117847-1-andrew.cooper3@citrix.com>
+References: <20250224160509.1117847-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is a chunk of the FRED work split out because it's pretty self contained.
+Having variables named idt_table[] and idt_tables[] is not ideal.
 
-It's mostly cleanup/refactoring, although patch
+Use X86_IDT_VECTORS and remove IDT_ENTRIES.  State the size of bsp_idt[] in
+idt.h so that load_system_tables() and cpu_smpboot_alloc() can use sizeof()
+rather than opencoding the calculation.
 
-traps.c is already overly large and going to get larger with FRED, so I'm
-splitting traps-init.c out of it, as the two have reasonably-different logic.
-That's implemented in this series but not used in anger in this series.
+Move the variable into a new traps-init.c, to make a start at splitting
+traps.c in half.
 
-Testing, including Eclair:
+No functional change.
 
-  https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1684170631
-  https://cirrus-ci.com/build/6590097610506240
-
-(Qubes ADL was offline at this time, but has passed on prior runs.  Also Zen3p
-passing is good enough to prove the changes.)
-
-Andrew Cooper (8):
-  x86: Sort includes in various files
-  x86/IDT: Collect IDT related content idt.h
-  x86/IDT: Rename X86_NR_VECTORS to X86_IDT_VECTORS
-  x86/IDT: Rename idt_table[] to bsp_idt[]
-  x86/IDT: Make idt_tables[] be per_cpu(idt)
-  x86/IDT: Generate bsp_idt[] at build time
-  x86/IDT: Don't rewrite bsp_idt[] at boot time
-  x86/traps: Convert pv_trap_init() to being an initcall
-
- xen/arch/x86/Makefile                   |   1 +
- xen/arch/x86/acpi/power.c               |  19 +--
- xen/arch/x86/cpu/common.c               |  23 ++--
- xen/arch/x86/crash.c                    |  41 +++---
- xen/arch/x86/domain.c                   |  87 ++++++------
- xen/arch/x86/hvm/svm/svm.c              |   5 +-
- xen/arch/x86/hvm/vlapic.c               |   4 +-
- xen/arch/x86/hvm/vmx/intr.c             |   4 +-
- xen/arch/x86/hvm/vmx/vmcs.c             |  30 +++--
- xen/arch/x86/hvm/vmx/vmx.c              |   6 +-
- xen/arch/x86/include/asm/desc.h         |  76 -----------
- xen/arch/x86/include/asm/gen-idt.h      | 121 +++++++++++++++++
- xen/arch/x86/include/asm/gen-idt.lds.h  |  27 ++++
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |   4 +-
- xen/arch/x86/include/asm/idt.h          | 109 +++++++++++++++
- xen/arch/x86/include/asm/irq.h          |   4 +-
- xen/arch/x86/include/asm/processor.h    |  37 ------
- xen/arch/x86/include/asm/pv/traps.h     |   4 -
- xen/arch/x86/include/asm/x86-defns.h    |   2 +-
- xen/arch/x86/io_apic.c                  |   2 +-
- xen/arch/x86/irq.c                      |  12 +-
- xen/arch/x86/machine_kexec.c            |  13 +-
- xen/arch/x86/mm.c                       |  58 ++++----
- xen/arch/x86/pv/callback.c              |   4 +-
- xen/arch/x86/pv/domain.c                |   4 +-
- xen/arch/x86/pv/traps.c                 |  19 +--
- xen/arch/x86/setup.c                    |  84 ++++++------
- xen/arch/x86/smpboot.c                  |  37 +++---
- xen/arch/x86/traps-init.c               |   7 +
- xen/arch/x86/traps.c                    | 169 +++++++-----------------
- xen/arch/x86/x86_64/entry.S             | 106 ++++++++-------
- xen/arch/x86/x86_64/traps.c             |  28 ++--
- xen/arch/x86/xen.lds.S                  |   2 +
- 33 files changed, 625 insertions(+), 524 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/gen-idt.h
- create mode 100644 xen/arch/x86/include/asm/gen-idt.lds.h
- create mode 100644 xen/arch/x86/include/asm/idt.h
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/Makefile          |  1 +
+ xen/arch/x86/cpu/common.c      |  2 +-
+ xen/arch/x86/include/asm/idt.h |  3 +--
+ xen/arch/x86/pv/traps.c        |  4 ++--
+ xen/arch/x86/smpboot.c         |  2 +-
+ xen/arch/x86/traps-init.c      |  9 +++++++++
+ xen/arch/x86/traps.c           | 14 +++++---------
+ 7 files changed, 20 insertions(+), 15 deletions(-)
  create mode 100644 xen/arch/x86/traps-init.c
 
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index b35fd5196ce2..9dc941a0943e 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -65,6 +65,7 @@ obj-y += spec_ctrl.o
+ obj-y += srat.o
+ obj-y += string.o
+ obj-y += time.o
++obj-y += traps-init.o
+ obj-y += traps.o
+ obj-$(CONFIG_INTEL) += tsx.o
+ obj-y += usercopy.o
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 1540ab0007a0..e8b355ebcf36 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -831,7 +831,7 @@ void load_system_tables(void)
+ 	};
+ 	const struct desc_ptr idtr = {
+ 		.base = (unsigned long)idt_tables[cpu],
+-		.limit = (IDT_ENTRIES * sizeof(idt_entry_t)) - 1,
++		.limit = sizeof(bsp_idt) - 1,
+ 	};
+ 
+ 	/*
+diff --git a/xen/arch/x86/include/asm/idt.h b/xen/arch/x86/include/asm/idt.h
+index 4ef52050a11b..29d1a7dfbc63 100644
+--- a/xen/arch/x86/include/asm/idt.h
++++ b/xen/arch/x86/include/asm/idt.h
+@@ -29,8 +29,7 @@ typedef union {
+     };
+ } idt_entry_t;
+ 
+-#define IDT_ENTRIES 256
+-extern idt_entry_t idt_table[];
++extern idt_entry_t bsp_idt[X86_IDT_VECTORS];
+ extern idt_entry_t *idt_tables[];
+ 
+ /*
+diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
+index 77b034e4dc73..4aeb6cab5238 100644
+--- a/xen/arch/x86/pv/traps.c
++++ b/xen/arch/x86/pv/traps.c
+@@ -148,12 +148,12 @@ void __init pv_trap_init(void)
+ {
+ #ifdef CONFIG_PV32
+     /* The 32-on-64 hypercall vector is only accessible from ring 1. */
+-    _set_gate(idt_table + HYPERCALL_VECTOR,
++    _set_gate(bsp_idt + HYPERCALL_VECTOR,
+               SYS_DESC_irq_gate, 1, entry_int82);
+ #endif
+ 
+     /* Fast trap for int80 (faster than taking the #GP-fixup path). */
+-    _set_gate(idt_table + LEGACY_SYSCALL_VECTOR, SYS_DESC_irq_gate, 3,
++    _set_gate(bsp_idt + LEGACY_SYSCALL_VECTOR, SYS_DESC_irq_gate, 3,
+               &entry_int80);
+ 
+     open_softirq(NMI_SOFTIRQ, nmi_softirq);
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index f3d60d5bae35..dc65f9e45269 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -1080,7 +1080,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+         idt_tables[cpu] = alloc_xenheap_pages(0, memflags);
+     if ( idt_tables[cpu] == NULL )
+         goto out;
+-    memcpy(idt_tables[cpu], idt_table, IDT_ENTRIES * sizeof(idt_entry_t));
++    memcpy(idt_tables[cpu], bsp_idt, sizeof(bsp_idt));
+     disable_each_ist(idt_tables[cpu]);
+ 
+     for ( stub_page = 0, i = cpu & ~(STUBS_PER_PAGE - 1);
+diff --git a/xen/arch/x86/traps-init.c b/xen/arch/x86/traps-init.c
+new file mode 100644
+index 000000000000..b172ea933607
+--- /dev/null
++++ b/xen/arch/x86/traps-init.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Configuration of event handling for all CPUs.
++ */
++#include <asm/idt.h>
++#include <asm/page.h>
++
++idt_entry_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
++    bsp_idt[X86_IDT_VECTORS];
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index a8a4fdaeb59c..f7965b3ffa50 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -102,10 +102,6 @@ DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, compat_gdt);
+ DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, compat_gdt_l1e);
+ #endif
+ 
+-/* Master table, used by CPU0. */
+-idt_entry_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+-    idt_table[IDT_ENTRIES];
+-
+ /* Pointer to the IDT of every CPU. */
+ idt_entry_t *idt_tables[NR_CPUS] __read_mostly;
+ 
+@@ -2084,7 +2080,7 @@ void asmlinkage do_entry_CP(struct cpu_user_regs *regs)
+ static void __init noinline __set_intr_gate(unsigned int n,
+                                             uint32_t dpl, void *addr)
+ {
+-    _set_gate(&idt_table[n], SYS_DESC_irq_gate, dpl, addr);
++    _set_gate(&bsp_idt[n], SYS_DESC_irq_gate, dpl, addr);
+ }
+ 
+ static void __init set_swint_gate(unsigned int n, void *addr)
+@@ -2150,10 +2146,10 @@ void __init init_idt_traps(void)
+     set_intr_gate (X86_EXC_CP,  entry_CP);
+ 
+     /* Specify dedicated interrupt stacks for NMI, #DF, and #MC. */
+-    enable_each_ist(idt_table);
++    enable_each_ist(bsp_idt);
+ 
+     /* CPU0 uses the master IDT. */
+-    idt_tables[0] = idt_table;
++    idt_tables[0] = bsp_idt;
+ 
+     this_cpu(gdt) = boot_gdt;
+     if ( IS_ENABLED(CONFIG_PV32) )
+@@ -2211,13 +2207,13 @@ void __init trap_init(void)
+         if ( autogen_entrypoints[vector] )
+         {
+             /* Found autogen entry: check we won't clobber an existing trap. */
+-            ASSERT(idt_table[vector].b == 0);
++            ASSERT(bsp_idt[vector].b == 0);
+             set_intr_gate(vector, autogen_entrypoints[vector]);
+         }
+         else
+         {
+             /* No entry point: confirm we have an existing trap in place. */
+-            ASSERT(idt_table[vector].b != 0);
++            ASSERT(bsp_idt[vector].b != 0);
+         }
+     }
+ 
 -- 
 2.39.5
 
