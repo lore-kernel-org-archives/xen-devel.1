@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B89C021B2
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 11:40:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.895709.1304387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997CBC021B2
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 11:41:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.895731.1304397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmtIw-0007Uy-GP; Tue, 25 Feb 2025 11:40:50 +0000
+	id 1tmtJI-0000KM-OA; Tue, 25 Feb 2025 11:41:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 895709.1304387; Tue, 25 Feb 2025 11:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 895731.1304397; Tue, 25 Feb 2025 11:41:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmtIw-0007Uo-DM; Tue, 25 Feb 2025 11:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 895709;
- Tue, 25 Feb 2025 11:40:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tmtJI-0000KF-KU; Tue, 25 Feb 2025 11:41:12 +0000
+Received: by outflank-mailman (input) for mailman id 895731;
+ Tue, 25 Feb 2025 11:41:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wvcP=VQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tmtIu-00066u-OJ
- for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 11:40:48 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5aabd93f-f36d-11ef-9897-31a8f345e629;
- Tue, 25 Feb 2025 12:40:47 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-38f2f783e4dso4683745f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 03:40:47 -0800 (PST)
+ id 1tmtI1-0002yH-EY
+ for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 11:39:53 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3a4c33f9-f36d-11ef-9aae-95dc52dad729;
+ Tue, 25 Feb 2025 12:39:52 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43aac0390e8so11863175e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 03:39:52 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02ce740sm137411855e9.4.2025.02.25.03.40.46
+ 5b1f17b1804b1-43ab156a199sm23037925e9.39.2025.02.25.03.39.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Feb 2025 03:40:46 -0800 (PST)
+ Tue, 25 Feb 2025 03:39:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5aabd93f-f36d-11ef-9897-31a8f345e629
+X-Inumbo-ID: 3a4c33f9-f36d-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1740483646; x=1741088446; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1740483592; x=1741088392; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=103JF9XcPrdRjYfu4uKdsEuP2Y/h+9+4HyktI+TGsw8=;
-        b=VCySyXQnOMAeU0f5F3/WExsaH9OtpJCb7ClmXEB7CJtnsADsAOC5AtBjthSDhZJNoW
-         rNfzssugGgjEQRxLTupNZhwadL/GnoMFB2DnTU+0WOBD56Q/1LwwF89Yy7ipJWXD0sPQ
-         kEbFmj+chnTtewBRWWXHLocWDoEldA8bqQcfCJh9e6c97Ee0bhLtjVfbA6PlklOz/Hhr
-         ti/wzs2WrM9r2z9a1de3TSZNBsyJ0j7p3tE9qUxNYFqs+OcwGxrS8nn+VTE1S228eZki
-         Sufujcd9Dnbkv0q1NVj9KzQdARRr8/gXgXn8x7/iuoQ87AwTdNpFGKnNVtljL7YSw+kA
-         iR5A==
+        bh=YTW4tUcMEeYNCm7ZKKGx4hPpDCz3H5iQewiKwcDe8Qg=;
+        b=fgEKdDA3Etc3Zbz78H11Wf+ZVDH2YEDljja5A59U6TjGo0kfoZuxbXj5bUnyAaqTk5
+         hLGkvwAK0Qm1v6eZaXXJFkuwXzD9aJjZr37lx2S3B+/NmWpfXcxuJBKWBW5qsVm8IORW
+         muwDtbl3CMp0BdQ0u8hDQ9fHrkDFs3GiwRp3kEubFqu8Me8mjKhgd5LHF/RNbMror5Wf
+         53tRRgVRM9/Uwtnz1MYtvkPgXokBwnwte2rpdusFmCXjXC8keH/nXRZ+k1umbsC8Wi4L
+         tusHOGIaM3Mw8+iMitBtcpfJhfkQhBqqAlWKJFuyJHUCNT+rC1U28J6Z3wbCGclMdsk5
+         ckJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740483646; x=1741088446;
+        d=1e100.net; s=20230601; t=1740483592; x=1741088392;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=103JF9XcPrdRjYfu4uKdsEuP2Y/h+9+4HyktI+TGsw8=;
-        b=QWj40v9R3/i3CHyDL4CSt1CUF8jPZReKgIzfZUXoiuR7AkVjsiuzKqSHBGE92q+MM0
-         gcLWKwAKS78vB6zKA7wWR5G7kxTChkT7IbVKJoFbYcwYe0zS7XdTtEYGUubcqjBSRw9W
-         sNgztiYde3bLgjwA+V/DAAjoJa0RondYXcA4TDlgB2iNOrdAGmrG9R8LQqdxIXs0gfx6
-         5IMozETzhk2fBh4gOnXn3JuAAJOpe4xoVHz7crhWsXcxZt3MN/85xIOGCiCbFS4dtbke
-         R+fcDN5WvIhZMtwrF17Z7X9DfK2HjoqWYtLQ26eY7KFmxhJKbry++cbbHIU1CH+/Oe/M
-         iTgQ==
-X-Gm-Message-State: AOJu0YxE3SiT0hBdE9kuFVN22GP1hzhQ00VAlgj8bIhAGk9fZP31GBEZ
-	CsedXfV0tWk4egsz/P+b8GAAG1n72yy9TGu1N1f24TJCtM6sPURADiiF2tTNu570S0IyVNlHK3s
+        bh=YTW4tUcMEeYNCm7ZKKGx4hPpDCz3H5iQewiKwcDe8Qg=;
+        b=pyVUvXjH16+//o6ygP7E4nteI6FBcfH28+Jdq5ThzjP90skJAc4oXmw68mOBgxXseV
+         P5kNXmzaIGuHcFhZNW6LXIvkmdEV6UsbA52S46UT2sfLyCeHBvaTugrtq8Pqha6r3z2n
+         r9SGG5dD35+wVknkxnLOv1nOCU69/gvZ9as02h49GimXpzvWxjMTfQbosG/axCIzvLn7
+         00PcRxwffjzrvWICR+SM7VL/6dDhZH86iOs+sVw5du+U+RJMCx/Q7pLfshddtrmVkihg
+         g6SiyKmuecb2EtV+kdp3LbFYUKKHZsXoIRzxvpluh3g3csm4uJkdnb/L1i/TJ539/SjQ
+         7JzA==
+X-Gm-Message-State: AOJu0YwDkaIXk33BIKL7KoEQKvzteX9dxQ2mg6dcj8dEvVXxUYzOCYf0
+	zHqhH3OZWwac53Xs93jAnFa5S9Cx7N2e33EeVRj7cB+7j4Q/k6YWdWZQhBUaKWcLKy8OUYkKVbI
 	=
-X-Gm-Gg: ASbGncuI14MIwIj92oCPU4uq9EOHMdt9DYPCBERPy6UVLignit9mDCwJlYeZTG96nI+
-	Aph3G6AIkdVZZHoAhlCy1LLoStcYC3Mn0a8h2I9v+SoFyvWxaaWTVUC31IXQCX7bDNKReQXv7cO
-	fU0G9kXp5vzSl1Ar9v4Q3MTnIPcbvCapPnhZ+67uYTCOJRQrBsGfW0Cy/IDKr5wpvgMTd+1DiyW
-	HipOk6+Zo5RhEmFyehOt0m7/6aNfc2fEtl+A+8KHagb8xiJFRG3TzPeEKp0X4ZCM9s2fob2swG7
-	ZnkQn06GmcaFoGjt7TIG0wMxkidN9BD12YcuSidtuC1bNgBgCfbm6DVup6ujZWk6ZjcWIj20ESl
-	kkP76xnB0i0M=
-X-Google-Smtp-Source: AGHT+IG2FAzhQDQrONs7lDcpy0cXXVblKlyVjrPi8b8HDi1ROWY6qQwGi92DqMpQDtNj3mBSR4ugBw==
-X-Received: by 2002:a05:6000:2c6:b0:38f:23ed:2c7 with SMTP id ffacd0b85a97d-38f6e95af22mr16015589f8f.14.1740483646526;
-        Tue, 25 Feb 2025 03:40:46 -0800 (PST)
-Message-ID: <7f9c88d3-7b1e-4ade-a1c3-e127b0416c89@suse.com>
-Date: Tue, 25 Feb 2025 12:40:45 +0100
+X-Gm-Gg: ASbGncsr9teO4TSMnDa3dmD/DJzuEPCdWC8z5nVP6KDhDS6FpdengwZIIsr+MnJo0OP
+	/+C1/ybuokyJIurOFAliSEMECybEn4w3we7CAw81piR7b5D1tjv7XTyqxHcplY2zIqoQkFgnWH6
+	d1UEOi0YkZHc/wIvu61tiJmc01y64KCqVM5a3EHeAcZ/poIRS7vceU7Lu3xfcax+teFrpZqwcZK
+	1X+jdn8K1uj+/RJjcyjq/3mTeEBXd/D5lGRMZXmLuGVo05/l1vQVKYgCgN+2ReXIbq2WK9D8vQ5
+	Nt7pkzFnrwQ6wi35N1UST0mGEVrenAC0vPpjZadLCIneTeUmICDPYUVe6ugeo7goMin5YTY7Cvv
+	jpy6DZxFGU4g=
+X-Google-Smtp-Source: AGHT+IHdLVMUsozeU3HwST5JE+KQHGUlLbbb3yNRnRrtybFgKwVMEvGmc8jfpcovkbzkhqs8oAFtUQ==
+X-Received: by 2002:a05:600c:19c9:b0:439:9a5b:87d4 with SMTP id 5b1f17b1804b1-439ae1f3a3dmr137983165e9.13.1740483592218;
+        Tue, 25 Feb 2025 03:39:52 -0800 (PST)
+Message-ID: <9c956657-4498-412c-b28b-c0005c105f1a@suse.com>
+Date: Tue, 25 Feb 2025 12:39:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 09/11] VMX: convert vmx_vmentry_control
+Subject: [PATCH v4 07/11] VMX: convert vmx_tertiary_exec_control
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -129,7 +129,7 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 v4: Re-base.
-v2: New.
+v3: New.
 
 --- a/xen/arch/x86/hvm/vmx/vmcs.c
 +++ b/xen/arch/x86/hvm/vmx/vmcs.c
@@ -137,100 +137,86 @@ v2: New.
  
  /* Dynamic (run-time adjusted) execution control flags. */
  struct vmx_caps __ro_after_init vmx_caps;
--u32 vmx_vmentry_control __read_mostly;
+-uint64_t vmx_tertiary_exec_control __read_mostly;
+ u32 vmx_vmexit_control __read_mostly;
+ u32 vmx_vmentry_control __read_mostly;
  u64 vmx_ept_vpid_cap __read_mostly;
- static uint64_t __read_mostly vmx_vmfunc;
- 
 @@ -261,7 +260,6 @@ static int vmx_init_vmcs_config(bool bsp
+ {
+     u32 vmx_basic_msr_low, vmx_basic_msr_high, min, opt;
      struct vmx_caps caps = {};
+-    uint64_t _vmx_tertiary_exec_control = 0;
      u64 _vmx_ept_vpid_cap = 0;
      u64 _vmx_misc_cap = 0;
--    u32 _vmx_vmentry_control;
-     u64 _vmx_vmfunc = 0;
-     bool mismatch = false;
+     u32 _vmx_vmexit_control;
+@@ -365,7 +363,7 @@ static int vmx_init_vmcs_config(bool bsp
+         uint64_t opt = (TERTIARY_EXEC_VIRT_SPEC_CTRL |
+                         TERTIARY_EXEC_EPT_PAGING_WRITE);
  
-@@ -483,7 +481,7 @@ static int vmx_init_vmcs_config(bool bsp
-     min = 0;
-     opt = (VM_ENTRY_LOAD_GUEST_PAT | VM_ENTRY_LOAD_GUEST_EFER |
-            VM_ENTRY_LOAD_BNDCFGS);
--    _vmx_vmentry_control = adjust_vmx_controls(
-+    caps.vmentry_control = adjust_vmx_controls(
-         "VMEntry Control", min, opt, MSR_IA32_VMX_ENTRY_CTLS, &mismatch);
- 
-     if ( mismatch )
-@@ -494,7 +492,6 @@ static int vmx_init_vmcs_config(bool bsp
+-        _vmx_tertiary_exec_control = adjust_vmx_controls2(
++        caps.tertiary_exec_control = adjust_vmx_controls2(
+             "Tertiary Exec Control", 0, opt,
+             MSR_IA32_VMX_PROCBASED_CTLS3, &mismatch);
+     }
+@@ -497,7 +495,6 @@ static int vmx_init_vmcs_config(bool bsp
+     {
          /* First time through. */
          vmx_caps = caps;
+-        vmx_tertiary_exec_control  = _vmx_tertiary_exec_control;
          vmx_ept_vpid_cap           = _vmx_ept_vpid_cap;
--        vmx_vmentry_control        = _vmx_vmentry_control;
-         vmx_caps.basic_msr = ((uint64_t)vmx_basic_msr_high << 32) |
-                              vmx_basic_msr_low;
-         vmx_vmfunc                 = _vmx_vmfunc;
+         vmx_vmexit_control         = _vmx_vmexit_control;
+         vmx_vmentry_control        = _vmx_vmentry_control;
 @@ -534,7 +531,7 @@ static int vmx_init_vmcs_config(bool bsp
-             vmx_caps.vmexit_control, caps.vmexit_control);
+             vmx_caps.secondary_exec_control, caps.secondary_exec_control);
          mismatch |= cap_check(
-             "VMEntry Control",
--            vmx_vmentry_control, _vmx_vmentry_control);
-+            vmx_caps.vmentry_control, caps.vmentry_control);
+             "Tertiary Exec Control",
+-            vmx_tertiary_exec_control, _vmx_tertiary_exec_control);
++            vmx_caps.tertiary_exec_control, caps.tertiary_exec_control);
          mismatch |= cap_check(
-             "EPT and VPID Capability",
-             vmx_ept_vpid_cap, _vmx_ept_vpid_cap);
-@@ -1094,7 +1091,7 @@ static int construct_vmcs(struct vcpu *v
- {
-     struct domain *d = v->domain;
-     uint32_t vmexit_ctl = vmx_caps.vmexit_control;
--    u32 vmentry_ctl = vmx_vmentry_control;
-+    u32 vmentry_ctl = vmx_caps.vmentry_control;
-     int rc = 0;
+             "VMExit Control",
+             vmx_vmexit_control, _vmx_vmexit_control);
+@@ -1113,7 +1110,7 @@ static int construct_vmcs(struct vcpu *v
+         v->arch.hvm.vmx.exec_control |= CPU_BASED_RDTSC_EXITING;
  
-     vmx_vmcs_enter(v);
-@@ -2216,7 +2213,6 @@ int __init vmx_vmcs_init(void)
+     v->arch.hvm.vmx.secondary_exec_control = vmx_caps.secondary_exec_control;
+-    v->arch.hvm.vmx.tertiary_exec_control  = vmx_tertiary_exec_control;
++    v->arch.hvm.vmx.tertiary_exec_control  = vmx_caps.tertiary_exec_control;
+ 
+     /*
+      * Disable features which we don't want active by default:
+@@ -2222,7 +2219,6 @@ int __init vmx_vmcs_init(void)
           * Make sure all dependent features are off as well.
           */
          memset(&vmx_caps, 0, sizeof(vmx_caps));
--        vmx_vmentry_control        = 0;
+-        vmx_tertiary_exec_control  = 0;
+         vmx_vmexit_control         = 0;
+         vmx_vmentry_control        = 0;
          vmx_ept_vpid_cap           = 0;
-         vmx_vmfunc                 = 0;
-     }
 --- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
 +++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -235,7 +235,6 @@ void vmx_vmcs_reload(struct vcpu *v);
- #define VM_ENTRY_LOAD_GUEST_PAT         0x00004000
- #define VM_ENTRY_LOAD_GUEST_EFER        0x00008000
- #define VM_ENTRY_LOAD_BNDCFGS           0x00010000
--extern u32 vmx_vmentry_control;
+@@ -265,13 +265,12 @@ extern u32 vmx_vmentry_control;
+ #define TERTIARY_EXEC_GUEST_PAGING_VERIFY       BIT(3, UL)
+ #define TERTIARY_EXEC_IPI_VIRT                  BIT(4, UL)
+ #define TERTIARY_EXEC_VIRT_SPEC_CTRL            BIT(7, UL)
+-extern uint64_t vmx_tertiary_exec_control;
  
- #define SECONDARY_EXEC_VIRTUALIZE_APIC_ACCESSES 0x00000001U
- #define SECONDARY_EXEC_ENABLE_EPT               0x00000002U
+ #define cpu_has_vmx_virt_spec_ctrl \
+-     (vmx_tertiary_exec_control & TERTIARY_EXEC_VIRT_SPEC_CTRL)
++     (vmx_caps.tertiary_exec_control & TERTIARY_EXEC_VIRT_SPEC_CTRL)
+ 
+ #define cpu_has_vmx_ept_paging_write \
+-     (vmx_tertiary_exec_control & TERTIARY_EXEC_EPT_PAGING_WRITE)
++     (vmx_caps.tertiary_exec_control & TERTIARY_EXEC_EPT_PAGING_WRITE)
+ 
+ #define VMX_EPT_EXEC_ONLY_SUPPORTED                         0x00000001
+ #define VMX_EPT_WALK_LENGTH_4_SUPPORTED                     0x00000040
 @@ -303,6 +302,7 @@ struct vmx_caps {
+     uint32_t pin_based_exec_control;
+     uint32_t cpu_based_exec_control;
      uint32_t secondary_exec_control;
-     uint64_t tertiary_exec_control;
-     uint32_t vmexit_control;
-+    uint32_t vmentry_control;
++    uint64_t tertiary_exec_control;
  };
  extern struct vmx_caps vmx_caps;
  
-@@ -344,10 +344,10 @@ extern struct vmx_caps vmx_caps;
-      (vmx_caps.cpu_based_exec_control & CPU_BASED_MONITOR_TRAP_FLAG))
- #define cpu_has_vmx_pat \
-     (IS_ENABLED(CONFIG_INTEL_VMX) && \
--     vmx_vmentry_control & VM_ENTRY_LOAD_GUEST_PAT)
-+     (vmx_caps.vmentry_control & VM_ENTRY_LOAD_GUEST_PAT))
- #define cpu_has_vmx_efer \
-     (IS_ENABLED(CONFIG_INTEL_VMX) && \
--     vmx_vmentry_control & VM_ENTRY_LOAD_GUEST_EFER)
-+     (vmx_caps.vmentry_control & VM_ENTRY_LOAD_GUEST_EFER))
- #define cpu_has_vmx_unrestricted_guest \
-     (IS_ENABLED(CONFIG_INTEL_VMX) && \
-      (vmx_caps.secondary_exec_control & SECONDARY_EXEC_UNRESTRICTED_GUEST))
-@@ -387,7 +387,7 @@ extern struct vmx_caps vmx_caps;
- #define cpu_has_vmx_mpx \
-     (IS_ENABLED(CONFIG_INTEL_VMX) && \
-      (vmx_caps.vmexit_control & VM_EXIT_CLEAR_BNDCFGS) && \
--     (vmx_vmentry_control & VM_ENTRY_LOAD_BNDCFGS))
-+     (vmx_caps.vmentry_control & VM_ENTRY_LOAD_BNDCFGS))
- #define cpu_has_vmx_xsaves \
-     (IS_ENABLED(CONFIG_INTEL_VMX) && \
-      (vmx_caps.secondary_exec_control & SECONDARY_EXEC_XSAVES))
 
 
