@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A958C021BE
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 22:23:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.895983.1304655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C32C021B2
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 22:31:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.895996.1304675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tn3KL-000680-6d; Tue, 25 Feb 2025 22:22:57 +0000
+	id 1tn3SM-0007xc-8N; Tue, 25 Feb 2025 22:31:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 895983.1304655; Tue, 25 Feb 2025 22:22:57 +0000
+Received: by outflank-mailman (output) from mailman id 895996.1304675; Tue, 25 Feb 2025 22:31:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tn3KL-00067t-3C; Tue, 25 Feb 2025 22:22:57 +0000
-Received: by outflank-mailman (input) for mailman id 895983;
- Tue, 25 Feb 2025 22:22:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tn3SM-0007xV-4u; Tue, 25 Feb 2025 22:31:14 +0000
+Received: by outflank-mailman (input) for mailman id 895996;
+ Tue, 25 Feb 2025 22:31:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MqP+=VQ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tn3KJ-00067n-Ht
- for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 22:22:55 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e01c4f1-f3c7-11ef-9897-31a8f345e629;
- Tue, 25 Feb 2025 23:22:53 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43948021a45so53713755e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 14:22:53 -0800 (PST)
+ id 1tn3SK-0007iP-7h
+ for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 22:31:12 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 37065794-f3c8-11ef-9aae-95dc52dad729;
+ Tue, 25 Feb 2025 23:31:11 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-439950a45daso38857915e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 14:31:11 -0800 (PST)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43aba5871f4sm1230085e9.39.2025.02.25.14.22.50
+ 5b1f17b1804b1-43aba532d33sm1561315e9.15.2025.02.25.14.31.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2025 14:22:50 -0800 (PST)
+ Tue, 25 Feb 2025 14:31:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,217 +47,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e01c4f1-f3c7-11ef-9897-31a8f345e629
+X-Inumbo-ID: 37065794-f3c8-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1740522172; x=1741126972; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eayIU0m1ZC4RCNc5zh9jKwjRL5F17ZNM5e8xgM6GYcE=;
-        b=Cg3C7Drh8RhsG1BbAhnl6TFZqBSMC015/F3io7IMOZPaV6tp1HX00HT/38pDHVL81S
-         5rC9JnnxdvYqe5j1M4SiG7DOkddnYBWFnFMdEvPLIQ3mEB+N8iHzXeMBw6BoVz1jljhn
-         gSHgokT6JBZMpLeVYIR0U1PV2ML/COGaDC9Gg=
+        d=citrix.com; s=google; t=1740522671; x=1741127471; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2Fkj7PIxDfVF3eAOzL41OOsZ3g02DzrICaIejNCr/tw=;
+        b=e15GyjBvsKRMuO1hzJsnbQlVc369IzJJEOp7Aal8lTB7u5lbFFIdbyuvjUo4dsvUbT
+         CbnFKgobsUIO0JGjIZe6EWP/tQTFXfabPmb03T97Dgu0CbQEECVYG/BNdlIYTS2NvuvY
+         J2al9DHCmNCv8Wh75XAl7DwYrBZ4vyBTtgOwc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740522172; x=1741126972;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eayIU0m1ZC4RCNc5zh9jKwjRL5F17ZNM5e8xgM6GYcE=;
-        b=pTB8yGkFUUbYTaY/ondl2QEL5fwZ1a5byiQwcZ1Tr6CNU3RfaRjJxnpkTB+eLYJDKy
-         EPStgV8xzq9hYu0kAGkGk72bvZ0lKprz1iSuhg15u2iBt+9UeD4SlEIwKrrFLrUggnqr
-         K4YK+wnxbrsl54cWECZDaKV4KSC+DUOWwXg63pb0Ocuh88EpmUpjz6S7lMTsqQmt87Br
-         qy6MmjGodpqweFY1gnbsBhNmPzKzDHMZ+Gk9eo3U8i+IcHgZnLUzKqj32g0BwRysWUiK
-         h6X0eYkN7sR26kVHDFV2lgGkJ+L/rW6iep/LCzKEu7AwtLfnarcmEk8hBm/r1KmwGUkr
-         09Tg==
-X-Gm-Message-State: AOJu0YzjTuFHAXd1L7ZciWfv1jWwkAnFQAlByOcqL/lJHBEcu7CfWa+M
-	9OlsAMBfTvaGZaJwdbmlpp9HZZ0q+JTMvzA5vxiQsS6Cl7YFlTB8eqcbdUv2LOKBc2bLUlhoNr9
+        d=1e100.net; s=20230601; t=1740522671; x=1741127471;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2Fkj7PIxDfVF3eAOzL41OOsZ3g02DzrICaIejNCr/tw=;
+        b=QZlqFbYw7bAY86EGMgKg5i1Hee279owY7STsdDP0txM6ICNPdGWTq2AAqngPfdG+4Z
+         ePnUwj/KaSaCHFAriQbnJxvYdBsnzDHeL7kq/cwUeVkwPUes7qnCMPVHOxuOCJ5qXads
+         geO6iUZzOLdUBlTHx9m4PCdxoEPei2oz1U/DiwavL85MRGLsyRzFB4r4lT3G09X9E2cy
+         LjfWacqMPaxYx0zpF+/Y64SvTD3yS8cJC9Z7310JBp64xA2ZmxGXmXPcGr91BCs+MEpN
+         fsmUgid6rm75cbzwPtSp9RCkT0cYtAURNO8+zsbxy76UFLg6oiC6XVYXkKYUYoZ3yZiv
+         sLYw==
+X-Gm-Message-State: AOJu0Yz8uR5VuWAvjhghz1Bpk2IUpG0X4zwWOm5ONnmdobcsThSaXmTH
+	M971vZM5xkr2C1cRqOdi/Lk2b6P6peJsNHj51HrJ37QCqlYXFaIzoeoIXVOq5mbBHaX9EkoBZlQ
 	4
-X-Gm-Gg: ASbGncvVJy+wFZr7RZUwpbdCGuQ/0EZ5B4rVgMCoGMSmali8/B4yXBBT7p5Zy3nVxLY
-	SQ15EMtDawGQUbGNDqA16ACaLNcHwhb26+lcZoglrdyMnaOI5I4SvxVq6FF505Km4mk2MAt6FfZ
-	GMbyhnNi8CCxc9uxWcuzgxE1nQWWvA0Wwmq8h9HrUegAwjaB+KjOK2piyKxQ3/IIDpHya0gnNXV
-	rivPHTbeOm7kb0x8DfJChoUk/WGIAh+QcyzCISNM+02FPrVaCFW8O5aBdmyUBS5ObdbD2CfpLWs
-	orjC0bBLS3dChqG66kkdAuGijhorlqPxhdmMZe7mLBhVePUjT8byxcEdUrMaE0IohTmPDqPJbTr
-	OD2fI0g==
-X-Google-Smtp-Source: AGHT+IFBdnL2DxIj7e0MpoMI0w3MkCe6eA5ifob3FdR1wVzpLn18fRTn0RUFDmLgfOXPTtD+zElPQg==
-X-Received: by 2002:a05:600c:4450:b0:43a:b0b5:b0 with SMTP id 5b1f17b1804b1-43ab8fd062bmr9361265e9.4.1740522171688;
-        Tue, 25 Feb 2025 14:22:51 -0800 (PST)
+X-Gm-Gg: ASbGncvE4W3Ab0EN/nadZbz1quDSVhwjDMW4fXDTcJWbs2ZuJV4qApDyg25LXsVttB1
+	nT2zRaz3pyI3HMCc61v3fgGlexDyfOdzxdekgM5sue27J4i7wAoMVHRYUcPCup+AOAis1fK6dEG
+	2+55aqMfMV98XKkiBrfKfcsnMyjS4X1VTackD6zmIlEgT7afhYCPvbhxupOXdUSHYthKbhSZV5f
+	DyaJsH2p8aNt191x/UuRI2Kv66XbbkY5ud2e0uziRRRcNANpmXf5knNmhh9Ex6yinn3fCP3Rvxa
+	NKe07G0G9wAzoAjFCbnJH5BB1DCZy0HPZU9/t28Haz90njqaM1bvwp9yL7neb4+S+rkUSxIMTV5
+	DU1tinA==
+X-Google-Smtp-Source: AGHT+IGgzgKhjyv8Qm2BP9+QaUI5xtZwUepEZX75ASg0Q9pPgwuh497t4wYNo2ahmQ8s/UzZOrm7XA==
+X-Received: by 2002:a5d:4acb:0:b0:38f:3a89:fdb1 with SMTP id ffacd0b85a97d-390cc60d30emr2548760f8f.30.1740522670644;
+        Tue, 25 Feb 2025 14:31:10 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [PATCH] xen/bsearch: Split out of lib.h into it's own header
-Date: Tue, 25 Feb 2025 22:20:48 +0000
-Message-Id: <20250225222048.1181435-1-andrew.cooper3@citrix.com>
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 2/2] x86/ucode: Drop the ucode=nmi option
+Date: Tue, 25 Feb 2025 22:29:05 +0000
+Message-Id: <20250225222905.1182374-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250225222905.1182374-1-andrew.cooper3@citrix.com>
+References: <20250225222905.1182374-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There are currently two users, and lib.h is included everywhere.
+This option is active by default, and despite what the documentation suggests
+about choosing ucode=no-nmi, it only controls whether the primary threads move
+into NMI context.
 
-No functional change.
+Sibling threads unconditionally move into NMI context, which is confirmed by
+an in-code comment.
+
+Not discussed is the fact that the BSP never enters NMI context, which works
+only by luck (AMD CPUs, where we reload on sibling threads too, has working
+in-core rendezvous and doesn't require NMI cover on the primary thread for
+safety).  This does want addressing, but requires more untangling first.
+
+Overall, `ucode=no-nmi` is a misleading and pretty useless option.  Drop it,
+and simplify the two users.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
+CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
 
-This will marginally improve compile times, but mostly it's about splitting up
-lib.h
+Despite the reasonably large diff in primary_thread_fn(), it's mostly just
+unindenting the block, and dropping the final call to primary_thread_work()
+which is made dead by this change.
 ---
- xen/arch/arm/io.c             |  1 +
- xen/arch/arm/vgic/vgic-mmio.c |  1 +
- xen/include/xen/bsearch.h     | 50 +++++++++++++++++++++++++++++++++++
- xen/include/xen/lib.h         | 43 ------------------------------
- 4 files changed, 52 insertions(+), 43 deletions(-)
- create mode 100644 xen/include/xen/bsearch.h
+ docs/misc/xen-command-line.pandoc |  8 ++-----
+ xen/arch/x86/cpu/microcode/core.c | 38 +++++++++++--------------------
+ 2 files changed, 15 insertions(+), 31 deletions(-)
 
-diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
-index 96c740d5636c..653428e16c1f 100644
---- a/xen/arch/arm/io.c
-+++ b/xen/arch/arm/io.c
-@@ -7,6 +7,7 @@
-  * Copyright (c) 2011 Citrix Systems.
-  */
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 47674025249a..9702c36b8c39 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -2721,10 +2721,10 @@ performance.
+    Alternatively, selecting `tsx=1` will re-enable TSX at the users own risk.
  
-+#include <xen/bsearch.h>
- #include <xen/ioreq.h>
- #include <xen/lib.h>
- #include <xen/spinlock.h>
-diff --git a/xen/arch/arm/vgic/vgic-mmio.c b/xen/arch/arm/vgic/vgic-mmio.c
-index bd4caf7fc326..4ad350c21c8b 100644
---- a/xen/arch/arm/vgic/vgic-mmio.c
-+++ b/xen/arch/arm/vgic/vgic-mmio.c
-@@ -13,6 +13,7 @@
-  */
+ ### ucode
+-> `= List of [ <integer>, scan=<bool>, nmi=<bool> ]`
++> `= List of [ <integer>, scan=<bool ]`
  
- #include <xen/bitops.h>
-+#include <xen/bsearch.h>
- #include <xen/lib.h>
- #include <xen/sched.h>
- #include <asm/new_vgic.h>
-diff --git a/xen/include/xen/bsearch.h b/xen/include/xen/bsearch.h
-new file mode 100644
-index 000000000000..544fe83e2cfc
---- /dev/null
-+++ b/xen/include/xen/bsearch.h
-@@ -0,0 +1,50 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef XEN_BSEARCH_H
-+#define XEN_BSEARCH_H
-+
-+#include <xen/types.h>
-+
-+/*
-+ * bsearch - binary search an array of elements
-+ * @key: pointer to item being searched for
-+ * @base: pointer to first element to search
-+ * @num: number of elements
-+ * @size: size of each element
-+ * @cmp: pointer to comparison function
-+ *
-+ * This function does a binary search on the given array.  The
-+ * contents of the array should already be in ascending sorted order
-+ * under the provided comparison function.
-+ *
-+ * Note that the key need not have the same type as the elements in
-+ * the array, e.g. key could be a string and the comparison function
-+ * could compare the string with the struct's name field.  However, if
-+ * the key and elements in the array are of the same type, you can use
-+ * the same comparison function for both sort() and bsearch().
-+ */
-+#ifndef BSEARCH_IMPLEMENTATION
-+extern gnu_inline
-+#endif
-+void *bsearch(const void *key, const void *base, size_t num, size_t size,
-+              int (*cmp)(const void *key, const void *elt))
-+{
-+    size_t start = 0, end = num;
-+    int result;
-+
-+    while ( start < end )
-+    {
-+        size_t mid = start + (end - start) / 2;
-+
-+        result = cmp(key, base + mid * size);
-+        if ( result < 0 )
-+            end = mid;
-+        else if ( result > 0 )
-+            start = mid + 1;
-+        else
-+            return (void *)base + mid * size;
-+    }
-+
-+    return NULL;
-+}
-+
-+#endif /* XEN_BSEARCH_H */
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index 130f96791f75..7060b5d5b658 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -159,49 +159,6 @@ void cf_check dump_execstate(const struct cpu_user_regs *regs);
+     Applicability: x86
+-    Default: `scan` is selectable via Kconfig, `nmi=true`
++    Default: `scan` is selectable via Kconfig
  
- void init_constructors(void);
+ Controls for CPU microcode loading.
  
--/*
-- * bsearch - binary search an array of elements
-- * @key: pointer to item being searched for
-- * @base: pointer to first element to search
-- * @num: number of elements
-- * @size: size of each element
-- * @cmp: pointer to comparison function
-- *
-- * This function does a binary search on the given array.  The
-- * contents of the array should already be in ascending sorted order
-- * under the provided comparison function.
-- *
-- * Note that the key need not have the same type as the elements in
-- * the array, e.g. key could be a string and the comparison function
-- * could compare the string with the struct's name field.  However, if
-- * the key and elements in the array are of the same type, you can use
-- * the same comparison function for both sort() and bsearch().
-- */
--#ifndef BSEARCH_IMPLEMENTATION
--extern gnu_inline
--#endif
--void *bsearch(const void *key, const void *base, size_t num, size_t size,
--              int (*cmp)(const void *key, const void *elt))
--{
--    size_t start = 0, end = num;
--    int result;
+@@ -2758,10 +2758,6 @@ When booting xen.efi natively, the concept of multiboot modules doesn't exist.
+ Instead, in the [EFI configuration file](efi.html), `ucode=<filename>` can be
+ used to identify a file as a raw container (option 1 above).
+ 
+-'nmi' determines late loading is performed in NMI handler or just in
+-stop_machine context. In NMI handler, even NMIs are blocked, which is
+-considered safer. The default value is `true`.
 -
--    while ( start < end )
+ ### unrestricted_guest (Intel)
+ > `= <boolean>`
+ 
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index c8e14ed9b10c..4898920b9c52 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -82,9 +82,6 @@ struct patch_with_flags {
+     const struct microcode_patch *patch;
+ };
+ 
+-/* By default, ucode loading is done in NMI handler */
+-static bool ucode_in_nmi = true;
+-
+ /* Protected by microcode_mutex */
+ static struct microcode_patch *microcode_cache;
+ 
+@@ -123,9 +120,7 @@ static int __init cf_check parse_ucode(const char *s)
+         if ( !ss )
+             ss = strchr(s, '\0');
+ 
+-        if ( (val = parse_boolean("nmi", s, ss)) >= 0 )
+-            ucode_in_nmi = val;
+-        else if ( (val = parse_boolean("scan", s, ss)) >= 0 )
++        if ( (val = parse_boolean("scan", s, ss)) >= 0 )
+         {
+             if ( ucode_mod_forced )
+                 printk(XENLOG_WARNING
+@@ -297,12 +292,10 @@ static int cf_check microcode_nmi_callback(
+         return 0;
+ 
+     /*
+-     * Primary threads load ucode in NMI handler on if ucode_in_nmi is true.
+-     * Secondary threads are expected to stay in NMI handler regardless of
+-     * ucode_in_nmi.
++     * The BSP doesn't enter NMI context for microcode loading, as it's the
++     * entity organising the rendezvous.
+      */
+-    if ( cpu == cpumask_first(&cpu_online_map) ||
+-         (!ucode_in_nmi && primary_cpu) )
++    if ( cpu == cpumask_first(&cpu_online_map) )
+         return 0;
+ 
+     if ( primary_cpu )
+@@ -343,22 +336,17 @@ static int primary_thread_fn(const struct microcode_patch *patch,
+     if ( !wait_for_state(LOADING_CALLIN) )
+         return -EBUSY;
+ 
+-    if ( ucode_in_nmi )
 -    {
--        size_t mid = start + (end - start) / 2;
+-        self_nmi();
 -
--        result = cmp(key, base + mid * size);
--        if ( result < 0 )
--            end = mid;
--        else if ( result > 0 )
--            start = mid + 1;
--        else
--            return (void *)base + mid * size;
--    }
--
--    return NULL;
--}
--
- #endif /* __ASSEMBLY__ */
+-        /*
+-         * Wait for ucode loading is done in case that the NMI does not arrive
+-         * synchronously, which may lead to a not-yet-updated error is returned
+-         * below.
+-         */
+-        if ( unlikely(!wait_for_state(LOADING_EXIT)) )
+-            ASSERT_UNREACHABLE();
++    self_nmi();
  
- #endif /* __LIB_H__ */
+-        return this_cpu(loading_err);
+-    }
++    /*
++     * Wait for ucode loading is done in case that the NMI does not arrive
++     * synchronously, which may lead to a not-yet-updated error is returned
++     * below.
++     */
++    if ( unlikely(!wait_for_state(LOADING_EXIT)) )
++        ASSERT_UNREACHABLE();
+ 
+-    return primary_thread_work(patch, flags);
++    return this_cpu(loading_err);
+ }
+ 
+ static int control_thread_fn(const struct microcode_patch *patch,
 -- 
 2.39.5
 
