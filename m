@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31238C021B2
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 11:40:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.895694.1304357 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 478E6C021B2
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 11:40:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.895699.1304368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmtIP-00067A-Kx; Tue, 25 Feb 2025 11:40:17 +0000
+	id 1tmtIi-0006cE-Tw; Tue, 25 Feb 2025 11:40:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 895694.1304357; Tue, 25 Feb 2025 11:40:17 +0000
+Received: by outflank-mailman (output) from mailman id 895699.1304368; Tue, 25 Feb 2025 11:40:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tmtIP-000673-HQ; Tue, 25 Feb 2025 11:40:17 +0000
-Received: by outflank-mailman (input) for mailman id 895694;
- Tue, 25 Feb 2025 11:40:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tmtIi-0006c7-PR; Tue, 25 Feb 2025 11:40:36 +0000
+Received: by outflank-mailman (input) for mailman id 895699;
+ Tue, 25 Feb 2025 11:40:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wvcP=VQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tmtIO-00066u-LL
- for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 11:40:16 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 47569899-f36d-11ef-9897-31a8f345e629;
- Tue, 25 Feb 2025 12:40:14 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-388cae9eb9fso2881033f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 03:40:14 -0800 (PST)
+ id 1tmtHa-0002yH-57
+ for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 11:39:26 +0000
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 29b9dde5-f36d-11ef-9aae-95dc52dad729;
+ Tue, 25 Feb 2025 12:39:25 +0100 (CET)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38f488f3161so2980564f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 03:39:25 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390cd86cca1sm1990957f8f.24.2025.02.25.03.40.13
+ ffacd0b85a97d-390cd86cca1sm1988689f8f.24.2025.02.25.03.39.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Feb 2025 03:40:13 -0800 (PST)
+ Tue, 25 Feb 2025 03:39:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47569899-f36d-11ef-9897-31a8f345e629
+X-Inumbo-ID: 29b9dde5-f36d-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1740483614; x=1741088414; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1740483564; x=1741088364; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=mjdsrvYcKbS0IupcXcbfAMDfAYGI8EXf5PWUxNV1fao=;
-        b=YgCUi9SLVewzseeWMvoEPstJ52hg62fsQXTbCMzvL8MykRFS2zZppRETr/Fh4X+T2s
-         GRG6qb/zQr+Zj5CuR3lpMDsFXvdJhKXplje78ZSC7+LgOOwqe1uEF8AGMNCT7hLpACF4
-         yXAYmvooFRIrqmNfrYsVWkyen25Uw1naFTG2wJ7u2UeKizg6uoSM4eDWXm7oet9S3qXU
-         B1pH/d4lgqirVM+/M8I+z2hZEshd3ir/+y1EHap3g3k/ovVcy4H0Fc+EDX8hyc840XVD
-         UGqUbSomHNJKgT5FM9ECpCtvn0ej7i4E0J0WDu+2omgXoraYv2oy+uSbFTdwv9h7LnfD
-         zjlg==
+        bh=kvNtan6HIHBpRNJGMzv9mjkqb85FcLGIsPKTiKpkSvY=;
+        b=S3hmDTUvqJaWTfUeLoRRV4KKm/cOkDMoeQRd4ZfRUp8gnp30bU0kr+jP4b6wOPpKwV
+         jVLxcwAJhGMHRUM0K79HE/rrSeJrpT7/oju1fMESSUI5Y8hFBKUQN4L7ltMvng3TAxjt
+         fKFPR9y/CSKII7s3V+pRjKLIHYopB82QgLZMPxOk7nr3kueVaRYxdUGoK4d2GQ13EV6a
+         7XA4wIFV75FuYIY3tTfXja+WpOaV/HRX/kZ+sclmmHx1hLxmjeorWvXXtTzcFqZOb+yj
+         bUeV7Kt43bzcyc/1IIliJTH5jDcH7DcYWpBycR28J0Apt7opBt9Q0IFh/S4KZdJ4X5MM
+         DGUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740483614; x=1741088414;
+        d=1e100.net; s=20230601; t=1740483564; x=1741088364;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mjdsrvYcKbS0IupcXcbfAMDfAYGI8EXf5PWUxNV1fao=;
-        b=aqVdXgv9MGbxKtf1/bqKbvJ3B6h++KP9oGe8/Jk359SARiKmYXPVogLjY9tMNLAgd8
-         AChdcqFu6ek9sd+5NKeBDsm2g/6V/pqlSWfGEl11zlmSjqpnmVR6BoclTV6VwDd/f5DX
-         8Nk5zIfwsmUJ+6xbFpjCisyjf/5JCRvcy+rbdcfVvtZf4ypQmeu8tiDB3drAAL8SyoVo
-         GVjz4+x5i/j9EpOSQAXZSm90OPXD0KGkeNawFH7UUmhc6Q9xlgBL9n92+UEe11ql0YJw
-         eWgBaJXNaWxej4aFoQCC5AedwLx4GnAQjfi4XO7A+ft6ILQWXlR+4ROd/7C/fHRSYU2B
-         N/bQ==
-X-Gm-Message-State: AOJu0YxZz8habx4ptBb7je8sVLB9qwzI6iVjPnRvrDjUqehc41HSelK/
-	pf1GN+17EToI+J95dvxE9icfQVihEB9kyYdVg+Mdf6paJgH1fObNdaVkRGpd3sNexmlbZxoe4UQ
+        bh=kvNtan6HIHBpRNJGMzv9mjkqb85FcLGIsPKTiKpkSvY=;
+        b=R7V3Vap2P574rjdPCq76kNHUV0ExKVWwQ9gvXjoTfRoLPPWrszcyxrTd/ekKojOzk4
+         X4HX32WbtGVjHJqZNgPiIrs28/k9lUMw06y8No7fbOXesX+dSbseV/2cPFGBePYo5q/r
+         +WLhUFclNGQOo/fRBF4pqmQYXr8W3/yU4Yl+NcMyrU3ekyNmJt65zhQ2mKi7Gz8XqOJL
+         D18WBL5HT10i9RbsOgEYH5WVJGdW0oZu+3TGPQl+Y2xaLNiXB0cJ4UByQDzBN864K46p
+         DYFPSz64Sr036uVHpMtDrgPMU2UnM8HUYZMN8tzVqL6puIaXIq2S/Ohfev++zXWJ40TC
+         IBeQ==
+X-Gm-Message-State: AOJu0YzERPPNMsf1T68BFZrxzGjTETFXheJE0sZJBt6XlD3C2s+T4E8J
+	Gb6/8bHKf2+N9pEyCgPUEirgCIQARBKaf9nE5Vk/Uml9soOz1SXjqEGgW6gC/X25OUi5OB2XCkc
 	=
-X-Gm-Gg: ASbGncudOKN3dRdpN4nXLbW+w0y8htRKk9H32gHiVfjA9NH8FQmhF1z299cziu3R0gs
-	SlTevTVnONiC5rNC/HzDxQfLfV9WWHZshSJ1wqQ6fccniw9SYYRbJeWNre2flybQLUyYK4pr82p
-	XUzWrpLwiZe+K+9Zd8xpXwZ+n9/mqFmpWuQhuM1/jajM46+Trr7x7kSclnEO23nhobmN0OS0tBB
-	9Ndk3tHlEyw1y8sbOHNR6O6XxZjXXYEN/jvVjlY6ljQp48fa+sy0L1fh7Z2vxV2NUi0TlX2oCE0
-	sZX1Go1e6TTbQZVbOezM1g4yg0RjKYhrsmCnAr/fzshWxbrd5OCCnROAZmKIofGijQl4Jxx1jkq
-	zSFJS94PZQ9E=
-X-Google-Smtp-Source: AGHT+IFt89i5r2V9tX7MHUL32UXkZxA7ioHDMKodKPH8keCwOxpCP+9bcoBMwk6SWdapBsvOWxoHwQ==
-X-Received: by 2002:a5d:47a3:0:b0:38d:b610:190b with SMTP id ffacd0b85a97d-390cc63cc18mr2309744f8f.46.1740483614069;
-        Tue, 25 Feb 2025 03:40:14 -0800 (PST)
-Message-ID: <bc911dde-7673-4116-b6ec-53c332453f94@suse.com>
-Date: Tue, 25 Feb 2025 12:40:13 +0100
+X-Gm-Gg: ASbGncuZPyjYYYMBLX5fevZQ5gx7GSndmGU7dWAh/HHKGXVQzxLso083mRCRzgLvLXv
+	AWQVEzsdQRenVvrkYi/onu6vunaOzUYB4Ti/q52s7Ol22fRskZkh7H025Vtf4fWwExncGda9H/M
+	e8gQ/NyTfWt99yQKFYpQ/a83HBaUXDlt37Ifir0uTOQ8262A/fYEz1fvyjn6Fqj/CGUS54gwJLp
+	d6U4CVDzmmbc01Q76Ibr7SiHemUSEP/xPc1jw8nS+2bD7TBRJ63gF1e2GVtWrCWhSqJLOB3q4cM
+	Iy+8j+6seNbo9v3gBUk6MDz5RSSFIuYcCd59xUBj0lLqcUjX2gjXRYwd57f+bA33w72g2/kcWYx
+	PiXwpMpw6ouA=
+X-Google-Smtp-Source: AGHT+IEFMNPKc3Sav1tQkGhOzBM8I0/QgxLhgHxzE7hmEWHmkb6djRe7GH0tPjefLSyCPrr8HQgtaA==
+X-Received: by 2002:a05:6000:1541:b0:38d:d767:364 with SMTP id ffacd0b85a97d-38f70789915mr12699292f8f.13.1740483564393;
+        Tue, 25 Feb 2025 03:39:24 -0800 (PST)
+Message-ID: <b21b40b0-f2c5-4ccd-bb0a-125569d5803d@suse.com>
+Date: Tue, 25 Feb 2025 12:39:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 08/11] VMX: convert vmx_vmexit_control
+Subject: [PATCH v4 06/11] VMX: convert vmx_secondary_exec_control
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -137,98 +137,283 @@ v2: New.
  
  /* Dynamic (run-time adjusted) execution control flags. */
  struct vmx_caps __ro_after_init vmx_caps;
--u32 vmx_vmexit_control __read_mostly;
+-u32 vmx_secondary_exec_control __read_mostly;
+ uint64_t vmx_tertiary_exec_control __read_mostly;
+ u32 vmx_vmexit_control __read_mostly;
  u32 vmx_vmentry_control __read_mostly;
- u64 vmx_ept_vpid_cap __read_mostly;
- static uint64_t __read_mostly vmx_vmfunc;
 @@ -262,7 +261,6 @@ static int vmx_init_vmcs_config(bool bsp
+ {
+     u32 vmx_basic_msr_low, vmx_basic_msr_high, min, opt;
      struct vmx_caps caps = {};
+-    u32 _vmx_secondary_exec_control = 0;
+     uint64_t _vmx_tertiary_exec_control = 0;
      u64 _vmx_ept_vpid_cap = 0;
      u64 _vmx_misc_cap = 0;
--    u32 _vmx_vmexit_control;
-     u32 _vmx_vmentry_control;
-     u64 _vmx_vmfunc = 0;
-     bool mismatch = false;
-@@ -445,7 +443,7 @@ static int vmx_init_vmcs_config(bool bsp
-     opt = (VM_EXIT_SAVE_GUEST_PAT | VM_EXIT_LOAD_HOST_PAT |
-            VM_EXIT_LOAD_HOST_EFER | VM_EXIT_CLEAR_BNDCFGS);
-     min |= VM_EXIT_IA32E_MODE;
--    _vmx_vmexit_control = adjust_vmx_controls(
-+    caps.vmexit_control = adjust_vmx_controls(
-         "VMExit Control", min, opt, MSR_IA32_VMX_EXIT_CTLS, &mismatch);
+@@ -357,7 +355,7 @@ static int vmx_init_vmcs_config(bool bsp
+                    SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY |
+                    SECONDARY_EXEC_VIRTUALIZE_X2APIC_MODE;
  
-     /*
-@@ -496,7 +494,6 @@ static int vmx_init_vmcs_config(bool bsp
+-        _vmx_secondary_exec_control = adjust_vmx_controls(
++        caps.secondary_exec_control = adjust_vmx_controls(
+             "Secondary Exec Control", min, opt,
+             MSR_IA32_VMX_PROCBASED_CTLS2, &mismatch);
+     }
+@@ -373,7 +371,7 @@ static int vmx_init_vmcs_config(bool bsp
+     }
+ 
+     /* The IA32_VMX_EPT_VPID_CAP MSR exists only when EPT or VPID available */
+-    if ( _vmx_secondary_exec_control & (SECONDARY_EXEC_ENABLE_EPT |
++    if ( caps.secondary_exec_control & (SECONDARY_EXEC_ENABLE_EPT |
+                                         SECONDARY_EXEC_ENABLE_VPID) )
+     {
+         rdmsrl(MSR_IA32_VMX_EPT_VPID_CAP, _vmx_ept_vpid_cap);
+@@ -395,7 +393,7 @@ static int vmx_init_vmcs_config(bool bsp
+         if ( !(_vmx_ept_vpid_cap & VMX_EPT_MEMORY_TYPE_WB) ||
+              !(_vmx_ept_vpid_cap & VMX_EPT_WALK_LENGTH_4_SUPPORTED) ||
+              !(_vmx_ept_vpid_cap & VMX_EPT_INVEPT_ALL_CONTEXT) )
+-            _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_EPT;
++            caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_EPT;
+ 
+         /*
+          * the CPU must support INVVPID all context invalidation, because we
+@@ -404,14 +402,14 @@ static int vmx_init_vmcs_config(bool bsp
+          * Or we just don't use VPID.
+          */
+         if ( !(_vmx_ept_vpid_cap & VMX_VPID_INVVPID_ALL_CONTEXT) )
+-            _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VPID;
++            caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VPID;
+ 
+         /* EPT A/D bits is required for PML */
+         if ( !(_vmx_ept_vpid_cap & VMX_EPT_AD_BIT) )
+-            _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_PML;
++            caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_PML;
+     }
+ 
+-    if ( _vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT )
++    if ( caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT )
+     {
+         /*
+          * To use EPT we expect to be able to clear certain intercepts.
+@@ -424,25 +422,25 @@ static int vmx_init_vmcs_config(bool bsp
+         if ( must_be_one & (CPU_BASED_INVLPG_EXITING |
+                             CPU_BASED_CR3_LOAD_EXITING |
+                             CPU_BASED_CR3_STORE_EXITING) )
+-            _vmx_secondary_exec_control &=
++            caps.secondary_exec_control &=
+                 ~(SECONDARY_EXEC_ENABLE_EPT |
+                   SECONDARY_EXEC_UNRESTRICTED_GUEST);
+     }
+ 
+     /* PML cannot be supported if EPT is not used */
+-    if ( !(_vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT) )
+-        _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_PML;
++    if ( !(caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT) )
++        caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_PML;
+ 
+     /* Turn off opt_ept_pml if PML feature is not present. */
+-    if ( !(_vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_PML) )
++    if ( !(caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_PML) )
+         opt_ept_pml = false;
+ 
+-    if ( (_vmx_secondary_exec_control & SECONDARY_EXEC_PAUSE_LOOP_EXITING) &&
++    if ( (caps.secondary_exec_control & SECONDARY_EXEC_PAUSE_LOOP_EXITING) &&
+           ple_gap == 0 )
+     {
+         if ( !vmx_caps.pin_based_exec_control )
+             printk(XENLOG_INFO "Disable Pause-Loop Exiting.\n");
+-        _vmx_secondary_exec_control &= ~ SECONDARY_EXEC_PAUSE_LOOP_EXITING;
++        caps.secondary_exec_control &= ~ SECONDARY_EXEC_PAUSE_LOOP_EXITING;
+     }
+ 
+     min = VM_EXIT_ACK_INTR_ON_EXIT;
+@@ -457,7 +455,7 @@ static int vmx_init_vmcs_config(bool bsp
+      * delivery" and "acknowledge interrupt on exit" is set. For the latter
+      * is a minimal requirement, only check the former, which is optional.
+      */
+-    if ( !(_vmx_secondary_exec_control & SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY) )
++    if ( !(caps.secondary_exec_control & SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY) )
+         caps.pin_based_exec_control &= ~PIN_BASED_POSTED_INTERRUPT;
+ 
+     if ( iommu_intpost &&
+@@ -469,7 +467,7 @@ static int vmx_init_vmcs_config(bool bsp
+     }
+ 
+     /* The IA32_VMX_VMFUNC MSR exists only when VMFUNC is available */
+-    if ( _vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS )
++    if ( caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS )
+     {
+         rdmsrl(MSR_IA32_VMX_VMFUNC, _vmx_vmfunc);
+ 
+@@ -479,12 +477,12 @@ static int vmx_init_vmcs_config(bool bsp
+          * Or we just don't use VMFUNC.
+          */
+         if ( !(_vmx_vmfunc & VMX_VMFUNC_EPTP_SWITCHING) )
+-            _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VM_FUNCTIONS;
++            caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VM_FUNCTIONS;
+     }
+ 
+     /* Virtualization exceptions are only enabled if VMFUNC is enabled */
+-    if ( !(_vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS) )
+-        _vmx_secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS;
++    if ( !(caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS) )
++        caps.secondary_exec_control &= ~SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS;
+ 
+     min = 0;
+     opt = (VM_ENTRY_LOAD_GUEST_PAT | VM_ENTRY_LOAD_GUEST_EFER |
+@@ -499,7 +497,6 @@ static int vmx_init_vmcs_config(bool bsp
+     {
          /* First time through. */
          vmx_caps = caps;
+-        vmx_secondary_exec_control = _vmx_secondary_exec_control;
+         vmx_tertiary_exec_control  = _vmx_tertiary_exec_control;
          vmx_ept_vpid_cap           = _vmx_ept_vpid_cap;
--        vmx_vmexit_control         = _vmx_vmexit_control;
-         vmx_vmentry_control        = _vmx_vmentry_control;
-         vmx_caps.basic_msr = ((uint64_t)vmx_basic_msr_high << 32) |
-                              vmx_basic_msr_low;
+         vmx_vmexit_control         = _vmx_vmexit_control;
 @@ -534,7 +531,7 @@ static int vmx_init_vmcs_config(bool bsp
-             vmx_caps.tertiary_exec_control, caps.tertiary_exec_control);
+             vmx_caps.cpu_based_exec_control, caps.cpu_based_exec_control);
          mismatch |= cap_check(
-             "VMExit Control",
--            vmx_vmexit_control, _vmx_vmexit_control);
-+            vmx_caps.vmexit_control, caps.vmexit_control);
+             "Secondary Exec Control",
+-            vmx_secondary_exec_control, _vmx_secondary_exec_control);
++            vmx_caps.secondary_exec_control, caps.secondary_exec_control);
          mismatch |= cap_check(
-             "VMEntry Control",
-             vmx_vmentry_control, _vmx_vmentry_control);
-@@ -1096,7 +1093,7 @@ void nocall vmx_asm_vmexit_handler(void)
- static int construct_vmcs(struct vcpu *v)
- {
-     struct domain *d = v->domain;
--    u32 vmexit_ctl = vmx_vmexit_control;
-+    uint32_t vmexit_ctl = vmx_caps.vmexit_control;
-     u32 vmentry_ctl = vmx_vmentry_control;
-     int rc = 0;
+             "Tertiary Exec Control",
+             vmx_tertiary_exec_control, _vmx_tertiary_exec_control);
+@@ -1115,7 +1112,7 @@ static int construct_vmcs(struct vcpu *v
+     if ( d->arch.vtsc && !cpu_has_vmx_tsc_scaling )
+         v->arch.hvm.vmx.exec_control |= CPU_BASED_RDTSC_EXITING;
  
-@@ -2219,7 +2216,6 @@ int __init vmx_vmcs_init(void)
+-    v->arch.hvm.vmx.secondary_exec_control = vmx_secondary_exec_control;
++    v->arch.hvm.vmx.secondary_exec_control = vmx_caps.secondary_exec_control;
+     v->arch.hvm.vmx.tertiary_exec_control  = vmx_tertiary_exec_control;
+ 
+     /*
+@@ -2225,7 +2222,6 @@ int __init vmx_vmcs_init(void)
           * Make sure all dependent features are off as well.
           */
          memset(&vmx_caps, 0, sizeof(vmx_caps));
--        vmx_vmexit_control         = 0;
+-        vmx_secondary_exec_control = 0;
+         vmx_tertiary_exec_control  = 0;
+         vmx_vmexit_control         = 0;
          vmx_vmentry_control        = 0;
-         vmx_ept_vpid_cap           = 0;
-         vmx_vmfunc                 = 0;
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1060,7 +1060,7 @@ static void load_shadow_control(struct v
-     nvmx_update_pin_control(v, vmx_caps.pin_based_exec_control);
-     vmx_update_cpu_exec_control(v);
-     vmx_update_secondary_exec_control(v);
--    nvmx_update_exit_control(v, vmx_vmexit_control);
-+    nvmx_update_exit_control(v, vmx_caps.vmexit_control);
-     nvmx_update_entry_control(v);
-     vmx_update_exception_bitmap(v);
-     nvmx_update_apic_access_address(v);
 --- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
 +++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -227,7 +227,6 @@ void vmx_vmcs_reload(struct vcpu *v);
- #define VM_EXIT_LOAD_HOST_EFER          0x00200000
- #define VM_EXIT_SAVE_PREEMPT_TIMER      0x00400000
- #define VM_EXIT_CLEAR_BNDCFGS           0x00800000
--extern u32 vmx_vmexit_control;
+@@ -258,7 +258,6 @@ extern u32 vmx_vmentry_control;
+ #define SECONDARY_EXEC_TSC_SCALING              0x02000000U
+ #define SECONDARY_EXEC_BUS_LOCK_DETECTION       0x40000000U
+ #define SECONDARY_EXEC_NOTIFY_VM_EXITING        0x80000000U
+-extern u32 vmx_secondary_exec_control;
  
- #define VM_ENTRY_IA32E_MODE             0x00000200
- #define VM_ENTRY_SMM                    0x00000400
-@@ -303,6 +302,7 @@ struct vmx_caps {
+ #define TERTIARY_EXEC_LOADIWKEY_EXITING         BIT(0, UL)
+ #define TERTIARY_EXEC_ENABLE_HLAT               BIT(1, UL)
+@@ -303,15 +302,16 @@ struct vmx_caps {
+     uint64_t basic_msr;
+     uint32_t pin_based_exec_control;
      uint32_t cpu_based_exec_control;
-     uint32_t secondary_exec_control;
-     uint64_t tertiary_exec_control;
-+    uint32_t vmexit_control;
++    uint32_t secondary_exec_control;
  };
  extern struct vmx_caps vmx_caps;
  
-@@ -386,7 +386,7 @@ extern struct vmx_caps vmx_caps;
-      (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_PML))
+ #define cpu_has_wbinvd_exiting \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_WBINVD_EXITING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_WBINVD_EXITING))
+ #define cpu_has_vmx_virtualize_apic_accesses \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_VIRTUALIZE_APIC_ACCESSES)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_VIRTUALIZE_APIC_ACCESSES))
+ #define cpu_has_vmx_tpr_shadow \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+      (vmx_caps.cpu_based_exec_control & CPU_BASED_TPR_SHADOW))
+@@ -329,16 +329,16 @@ extern struct vmx_caps vmx_caps;
+      (vmx_caps.cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS))
+ #define cpu_has_vmx_ept \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_EPT))
+ #define cpu_has_vmx_dt_exiting \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_DESCRIPTOR_TABLE_EXITING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_DESCRIPTOR_TABLE_EXITING))
+ #define cpu_has_vmx_rdtscp \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_RDTSCP)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_RDTSCP))
+ #define cpu_has_vmx_vpid \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VPID)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VPID))
+ #define cpu_has_monitor_trap_flag \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+      (vmx_caps.cpu_based_exec_control & CPU_BASED_MONITOR_TRAP_FLAG))
+@@ -350,56 +350,56 @@ extern struct vmx_caps vmx_caps;
+      vmx_vmentry_control & VM_ENTRY_LOAD_GUEST_EFER)
+ #define cpu_has_vmx_unrestricted_guest \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_UNRESTRICTED_GUEST)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_UNRESTRICTED_GUEST))
+ #define vmx_unrestricted_guest(v)               \
+     ((v)->arch.hvm.vmx.secondary_exec_control & \
+      SECONDARY_EXEC_UNRESTRICTED_GUEST)
+ #define cpu_has_vmx_ple \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_PAUSE_LOOP_EXITING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_PAUSE_LOOP_EXITING))
+ #define cpu_has_vmx_invpcid \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_INVPCID)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_INVPCID))
+ #define cpu_has_vmx_apic_reg_virt \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_APIC_REGISTER_VIRT)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_APIC_REGISTER_VIRT))
+ #define cpu_has_vmx_virtual_intr_delivery \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY))
+ #define cpu_has_vmx_virtualize_x2apic_mode \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_VIRTUALIZE_X2APIC_MODE)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_VIRTUALIZE_X2APIC_MODE))
+ #define cpu_has_vmx_posted_intr_processing \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+      (vmx_caps.pin_based_exec_control & PIN_BASED_POSTED_INTERRUPT))
+ #define cpu_has_vmx_vmcs_shadowing \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VMCS_SHADOWING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VMCS_SHADOWING))
+ #define cpu_has_vmx_vmfunc \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VM_FUNCTIONS))
+ #define cpu_has_vmx_virt_exceptions \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS))
+ #define cpu_has_vmx_pml \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_ENABLE_PML)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_ENABLE_PML))
  #define cpu_has_vmx_mpx \
      (IS_ENABLED(CONFIG_INTEL_VMX) && \
--     (vmx_vmexit_control & VM_EXIT_CLEAR_BNDCFGS) && \
-+     (vmx_caps.vmexit_control & VM_EXIT_CLEAR_BNDCFGS) && \
+      (vmx_vmexit_control & VM_EXIT_CLEAR_BNDCFGS) && \
       (vmx_vmentry_control & VM_ENTRY_LOAD_BNDCFGS))
  #define cpu_has_vmx_xsaves \
      (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_XSAVES)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_XSAVES))
+ #define cpu_has_vmx_tsc_scaling \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_TSC_SCALING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_TSC_SCALING))
+ #define cpu_has_vmx_bus_lock_detection \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_BUS_LOCK_DETECTION)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_BUS_LOCK_DETECTION))
+ #define cpu_has_vmx_notify_vm_exiting \
+     (IS_ENABLED(CONFIG_INTEL_VMX) && \
+-     vmx_secondary_exec_control & SECONDARY_EXEC_NOTIFY_VM_EXITING)
++     (vmx_caps.secondary_exec_control & SECONDARY_EXEC_NOTIFY_VM_EXITING))
+ 
+ #define VMCS_RID_TYPE_MASK              0x80000000U
+ 
 
 
