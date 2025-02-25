@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9169C021B2
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 22:31:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.895997.1304680 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E105C021B2
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Feb 2025 22:32:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.896020.1304695 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tn3SM-00080N-HV; Tue, 25 Feb 2025 22:31:14 +0000
+	id 1tn3TN-0000lD-Oo; Tue, 25 Feb 2025 22:32:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 895997.1304680; Tue, 25 Feb 2025 22:31:14 +0000
+Received: by outflank-mailman (output) from mailman id 896020.1304695; Tue, 25 Feb 2025 22:32:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tn3SM-0007yz-By; Tue, 25 Feb 2025 22:31:14 +0000
-Received: by outflank-mailman (input) for mailman id 895997;
- Tue, 25 Feb 2025 22:31:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tn3TN-0000l6-Lj; Tue, 25 Feb 2025 22:32:17 +0000
+Received: by outflank-mailman (input) for mailman id 896020;
+ Tue, 25 Feb 2025 22:32:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MqP+=VQ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tn3SK-0007wd-IL
- for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 22:31:12 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3675954e-f3c8-11ef-9897-31a8f345e629;
- Tue, 25 Feb 2025 23:31:10 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-38f406e9f80so5641697f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 14:31:10 -0800 (PST)
+ id 1tn3TM-0007iP-Ui
+ for xen-devel@lists.xenproject.org; Tue, 25 Feb 2025 22:32:17 +0000
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [2a00:1450:4864:20::42b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5d79a710-f3c8-11ef-9aae-95dc52dad729;
+ Tue, 25 Feb 2025 23:32:16 +0100 (CET)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-38dcac27bcbso177718f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Feb 2025 14:32:16 -0800 (PST)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43aba532d33sm1561315e9.15.2025.02.25.14.31.07
+ ffacd0b85a97d-390cd8e7322sm3724378f8f.64.2025.02.25.14.32.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2025 14:31:08 -0800 (PST)
+ Tue, 25 Feb 2025 14:32:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,197 +47,395 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3675954e-f3c8-11ef-9897-31a8f345e629
+X-Inumbo-ID: 5d79a710-f3c8-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1740522670; x=1741127470; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=j6k0r0buy4PFVFnjhXbZhLrrEk2+FHrptJRXGWnFanI=;
-        b=FSwakNvbZQa8oieaZR+UtxQmIC5/m2hMeWo5OUmHnGFWZCJwOX2oDJdwcOh32WoZfN
-         98I8sRqiKxCPgoLOehCRQu3lfWMH1yqoD8X3YGv0kMFv+PEPmAU/9uN5t+7rPDW4aRvV
-         9mNCMnTazV3zYb/QE+6qWG++IJd192wmfDi8g=
+        d=citrix.com; s=google; t=1740522735; x=1741127535; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=EJvEgOKJFmhOHYKbUSsUNmrGfAdUBBvhqavn40IDmlA=;
+        b=MdfmyupDGXWJg7wTx/FjG/x1cGAKJDnXBkRhf5Y3IXIyn+/JCBkUSq4HbgkLJEf6fy
+         QzNeaVYuOy+exfEjMdrQ/Sc/GvJ6L1D+9hky9ukcD+lc26K+YQcqycsdJxEceDhyGXEl
+         fjQWtrS4JbdcImEx2kENCFvg/SEwvrtAJAYL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740522670; x=1741127470;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=j6k0r0buy4PFVFnjhXbZhLrrEk2+FHrptJRXGWnFanI=;
-        b=j4JqctxU54cEOQxd3If0ayhQ2wBVtzl/3cGpEyjiMXDAaQLORFKEL5QSR7YlYTggBl
-         quVt3NuViPZGgRXhaxDFZlolVK6yD4jWsbAuxbKfdmbnVPlTT30ecG0xy3sJUPCX738X
-         atBlebgoamf7HWhiEqrSNz5HgBrYB54MolVzEr6ZbHYEBMe4sKb2Sh+p6hTho9ATITuw
-         0oPZB9K0O0c5K8qyo1NqVb/epgFrghbkjICKpNqMRz5JKnk5DFiLk3Te2u4dlz2I407s
-         ahrm11Sk9RBY8vTMKOXulCrWLprw2Z/bzB656Q3oVUbTDhraVZkAXsA167PyfGiXndAM
-         JQaA==
-X-Gm-Message-State: AOJu0YzJtiEQizVxQmfbKpl9H2qU0DPYmEF7CH1ubJEMpGh74ySFx489
-	4UhwExHaILvp1N+vhaAq1hx/zyK4zotMU+wlwA5IdWC0dsWeKsI6F7bN96mTSRUyzU14w3Ql5hP
-	T
-X-Gm-Gg: ASbGncuio9XwfvCxbkXnNMEeNgJYsmAU7hrfJQyBH6wqhPx3tPzezXRZPIvSuWDxlNf
-	hW5YUaSv68RSOWAjx0sHEgY9paDN87wms2Z4UzVwee6kD/WGnBLwouUiKbUqC2242MhyXoOTacr
-	9KVbcu342Iz58JQOtfmuvv94sW3Q7uZBf6vF4vjSsF+zyvD+ch56aE3gTCq0G84HRlv9VrVTsNb
-	BP3gXzk95X2uXJqaYi6M4HZpcwrMZo3XH6SHF3C1f065UPnEisGKDImSc+VeoWBjUq9DUlyH0DG
-	vr+gtsopBWM/M7osBxQ9/TP3khjFfJL2i2zcR3pQMRVlhW2je23qdpcWcey2xnMoxD/5V+25zzg
-	27mtipw==
-X-Google-Smtp-Source: AGHT+IGpJOI6/YFaPSiDY+PbZCjyF0007EHzLhP2bR379Ljx/pd/4K9fn/HDqg+N+q8PH4b3rSeHRQ==
-X-Received: by 2002:a5d:5f4e:0:b0:38f:4a0b:e764 with SMTP id ffacd0b85a97d-390d4f4306cmr857624f8f.28.1740522669724;
-        Tue, 25 Feb 2025 14:31:09 -0800 (PST)
+        d=1e100.net; s=20230601; t=1740522735; x=1741127535;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EJvEgOKJFmhOHYKbUSsUNmrGfAdUBBvhqavn40IDmlA=;
+        b=ePqkCAPsdcgbPRB6TKdxtFRFtFoNFS8UxVNL/M6+NhT/Gd3loglkEYRHbc6dCNeQhO
+         evQ1aOEyU6Uorp/1FLP/3G3WDvxd3jdHC194ZAocLhqKKlzVTtyk32b4ny+0FLkCE+5r
+         t/vuPgLC/YID3TnJQNh5/VCbYhyyc06ywwrgh7AhCOmYfevMQxe1bCxv69Bj67adoA3N
+         xyI162GgE2grQnAy1zLYdqx+SNc2eUq73dUjmnaPYisP9uF4djkzXpWtnOSZXgH8AHeK
+         z+I/Yb1O5O/38I9AIUYdKRmwuMXka/gOp0WBfvXXglGDeZx7t9qXRv7tp2wcg+wuPEzE
+         s/2A==
+X-Gm-Message-State: AOJu0Yzpy7R5naiFX9gZo/Lvt0Enx5hRP2kGz9Mxs38N9gHrv1fE9vTt
+	hfCy6rkvuCUtgscbSD60baR6sU9k2KD49+tMCc5IJ+jBcIoBacabMfo4PF3/7vY0hTs/qdauKZ2
+	W
+X-Gm-Gg: ASbGnctJ+Vk0P0VBajbxBaQFSJ0hc2eIatNUGCo56YNqwvbL4V/16tpMpNxlBWBCItV
+	w5TURGi6vuq0mhVGFz6KtHhmiNylvVt+v0ktIzqXwbMtoTa0Zd6VlMLkHiHidUTNBiaPRkSXIv0
+	fNcVSNGXnMIUEXEmW3yvEHgTUmcVIkO61873OTVHDnfu7XJQmtc55EaotBbrl1rG5Pp8RObwgef
+	OdMGppus7k4CvLZnslOVzxpBR5nurLD7d3iQsQMaJLhKycS1fEciVczsTx/BSHlzgXaSXOyi2Q6
+	f+HHdhQ+wZ9aFk8ifF/i/7OCjuAILiyE+oGShVUn1sxvwQbhHr5MmIQwg4BgurbmOCo81JixdJy
+	ZIQBtwQ==
+X-Google-Smtp-Source: AGHT+IHwLEzxy+3Vwdpcyyd9LJlu7ZHC0dM/W6We1gbLUWQwCYV6A9+YL1jBVm5VpDWIY3iu0M829g==
+X-Received: by 2002:a05:6000:1862:b0:38d:b349:2db2 with SMTP id ffacd0b85a97d-38f6f515313mr14262651f8f.22.1740522733666;
+        Tue, 25 Feb 2025 14:32:13 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/2] x86/ucode: Adjust parse_ucode() to match other list handling
-Date: Tue, 25 Feb 2025 22:29:04 +0000
-Message-Id: <20250225222905.1182374-2-andrew.cooper3@citrix.com>
+Subject: [PATCH] x86/traps: Move cpuid_hypervisor_leaves() into cpuid.c
+Date: Tue, 25 Feb 2025 22:31:37 +0000
+Message-Id: <20250225223137.1183313-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250225222905.1182374-1-andrew.cooper3@citrix.com>
-References: <20250225222905.1182374-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-parse_ucode() is abnormal compared to similar parsing elsewhere in Xen.
+It's out of place in traps.c, and only has a single caller.  Make it static
+inside cpuid.c.
 
-Invert the ucode_mod_forced check with respect to the "scan" and integer
-handling, so we can warn the user when we've elected to ignore the parameters,
-and yield -EINVAL for any unrecognised list element.
-
-Rewrite the ucode= command line docs for clarity.
-
-No practical change.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- docs/misc/xen-command-line.pandoc | 56 ++++++++++++++++++-------------
- xen/arch/x86/cpu/microcode/core.c | 22 ++++++++----
- 2 files changed, 47 insertions(+), 31 deletions(-)
+ xen/arch/x86/cpuid.c                 | 136 +++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/processor.h |   2 -
+ xen/arch/x86/traps.c                 | 136 ---------------------------
+ 3 files changed, 136 insertions(+), 138 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 0c6225391d55..47674025249a 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2721,34 +2721,42 @@ performance.
-    Alternatively, selecting `tsx=1` will re-enable TSX at the users own risk.
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index 2a777436ee27..8dc68945f7ae 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -1,6 +1,8 @@
+ #include <xen/sched.h>
+ #include <xen/types.h>
++#include <xen/version.h>
  
- ### ucode
--> `= List of [ <integer> | scan=<bool>, nmi=<bool> ]`
-+> `= List of [ <integer>, scan=<bool>, nmi=<bool> ]`
++#include <public/arch-x86/cpuid.h>
+ #include <public/hvm/params.h>
  
-     Applicability: x86
-     Default: `scan` is selectable via Kconfig, `nmi=true`
- 
--Controls for CPU microcode loading. For early loading, this parameter can
--specify how and where to find the microcode update blob. For late loading,
--this parameter specifies if the update happens within a NMI handler.
--
--'integer' specifies the CPU microcode update blob module index. When positive,
--this specifies the n-th module (in the GrUB entry, zero based) to be used
--for updating CPU micrcode. When negative, counting starts at the end of
--the modules in the GrUB entry (so with the blob commonly being last,
--one could specify `ucode=-1`). Note that the value of zero is not valid
--here (entry zero, i.e. the first module, is always the Dom0 kernel
--image). Note further that use of this option has an unspecified effect
--when used with xen.efi (there the concept of modules doesn't exist, and
--the blob gets specified via the `ucode=<filename>` config file/section
--entry; see [EFI configuration file description](efi.html)).
--
--'scan' instructs the hypervisor to scan the multiboot images for an cpio
--image that contains microcode. Depending on the platform the blob with the
--microcode in the cpio name space must be:
--  - on Intel: kernel/x86/microcode/GenuineIntel.bin
--  - on AMD  : kernel/x86/microcode/AuthenticAMD.bin
--When using xen.efi, the `ucode=<filename>` config file setting takes
--precedence over `scan`. The default value for `scan` is set with
--`CONFIG_UCODE_SCAN_DEFAULT`.
-+Controls for CPU microcode loading.
-+
-+In order to load microcode at boot, Xen needs to find a suitable update
-+amongst the modules provided by the bootloader.  Two kinds of microcode update
-+are supported:
-+
-+ 1. Raw microcode containers.  The format of the container is CPU vendor
-+    specific.
-+
-+ 2. CPIO archive.  This is Linux's preferred mechanism, and involves having
-+    the raw containers expressed as files
-+    (e.g. `kernel/x86/microcode/{GenuineIntel,AuthenticAMD}.bin`) in a CPIO
-+    archive, typically prepended to the initrd.
-+
-+The `<integer>` and `scan=` options are mutually exclusive and select between
-+these two options.  They are also invalid in EFI boots (see below).
-+
-+ *  The `<integer>` option nominates a specific multiboot module as a raw
-+    container (option 1 above).  Valid options start from 1 (module 0 is
-+    always the dom0 kernel).  A negative number may be used, and will
-+    back-reference from the end of the module list.  i.e. `ucode=-1` will
-+    nominate the final multiboot module.
-+
-+ *  The `scan=` option causes Xen to search all modules in order to find the
-+    first CPIO archive containing the appropriate file (option 2 above).  The
-+    default for this option can be chosen at build time via
-+    `CONFIG_UCODE_SCAN_DEFAULT`.
-+
-+When booting xen.efi natively, the concept of multiboot modules doesn't exist.
-+Instead, in the [EFI configuration file](efi.html), `ucode=<filename>` can be
-+used to identify a file as a raw container (option 1 above).
- 
- 'nmi' determines late loading is performed in NMI handler or just in
- stop_machine context. In NMI handler, even NMIs are blocked, which is
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index de00c22b4bd6..c8e14ed9b10c 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -113,11 +113,6 @@ void __init microcode_set_module(unsigned int idx)
-     ucode_mod_forced = 1;
+ #include <asm/cpu-policy.h>
+@@ -32,6 +34,140 @@ bool recheck_cpu_features(unsigned int cpu)
+     return okay;
  }
  
--/*
-- * The format is '[<integer>|scan=<bool>, nmi=<bool>]'. Both options are
-- * optional. If the EFI has forced which of the multiboot payloads is to be
-- * used, only nmi=<bool> is parsed.
-- */
- static int __init cf_check parse_ucode(const char *s)
- {
-     const char *ss;
-@@ -130,13 +125,24 @@ static int __init cf_check parse_ucode(const char *s)
- 
-         if ( (val = parse_boolean("nmi", s, ss)) >= 0 )
-             ucode_in_nmi = val;
--        else if ( !ucode_mod_forced ) /* Not forced by EFI */
-+        else if ( (val = parse_boolean("scan", s, ss)) >= 0 )
-         {
--            if ( (val = parse_boolean("scan", s, ss)) >= 0 )
-+            if ( ucode_mod_forced )
-+                printk(XENLOG_WARNING
-+                       "Ignoring ucode=%.*s setting; overridden by EFI\n",
-+                       (int)(ss - s), s);
-+            else
-             {
-                 opt_scan = val;
-                 opt_mod_idx = 0;
-             }
-+        }
-+        else if ( isdigit(s[0]) || s[0] == '-' )
++static void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
++                                    uint32_t subleaf, struct cpuid_leaf *res)
++{
++    const struct domain *d = v->domain;
++    const struct cpu_policy *p = d->arch.cpu_policy;
++    uint32_t base = is_viridian_domain(d) ? 0x40000100 : 0x40000000;
++    uint32_t idx  = leaf - base;
++    unsigned int limit = is_viridian_domain(d) ? p->hv2_limit : p->hv_limit;
++
++    if ( limit == 0 )
++        /* Default number of leaves */
++        limit = XEN_CPUID_MAX_NUM_LEAVES;
++    else
++        /* Clamp toolstack value between 2 and MAX_NUM_LEAVES. */
++        limit = min(max(limit, 2u), XEN_CPUID_MAX_NUM_LEAVES + 0u);
++
++    if ( idx > limit )
++        return;
++
++    switch ( idx )
++    {
++    case 0:
++        res->a = base + limit; /* Largest leaf */
++        res->b = XEN_CPUID_SIGNATURE_EBX;
++        res->c = XEN_CPUID_SIGNATURE_ECX;
++        res->d = XEN_CPUID_SIGNATURE_EDX;
++        break;
++
++    case 1:
++        res->a = (xen_major_version() << 16) | xen_minor_version();
++        break;
++
++    case 2:
++        res->a = 1;            /* Number of hypercall-transfer pages */
++                               /* MSR base address */
++        res->b = is_viridian_domain(d) ? 0x40000200 : 0x40000000;
++        if ( is_pv_domain(d) ) /* Features */
++            res->c |= XEN_CPUID_FEAT1_MMU_PT_UPDATE_PRESERVE_AD;
++        break;
++
++    case 3: /* Time leaf. */
++        switch ( subleaf )
 +        {
-+            if ( ucode_mod_forced )
-+                printk(XENLOG_WARNING
-+                       "Ignoring ucode=%.*s setting; overridden by EFI\n",
-+                       (int)(ss - s), s);
-             else
-             {
-                 const char *q;
-@@ -151,6 +157,8 @@ static int __init cf_check parse_ucode(const char *s)
-                     opt_scan = false;
-             }
-         }
-+        else
-+            rc = -EINVAL;
++        case 0: /* features */
++            res->a = ((d->arch.vtsc << 0) |
++                      (!!host_tsc_is_safe() << 1) |
++                      (!!boot_cpu_has(X86_FEATURE_RDTSCP) << 2));
++            res->b = d->arch.tsc_mode;
++            res->c = d->arch.tsc_khz;
++            res->d = d->arch.incarnation;
++            break;
++
++        case 1: /* scale and offset */
++        {
++            uint64_t offset;
++
++            if ( !d->arch.vtsc )
++                offset = d->arch.vtsc_offset;
++            else
++                /* offset already applied to value returned by virtual rdtscp */
++                offset = 0;
++            res->a = offset;
++            res->b = offset >> 32;
++            res->c = d->arch.vtsc_to_ns.mul_frac;
++            res->d = d->arch.vtsc_to_ns.shift;
++            break;
++        }
++
++        case 2: /* physical cpu_khz */
++            res->a = cpu_khz;
++            break;
++        }
++        break;
++
++    case 4: /* HVM hypervisor leaf. */
++        if ( !is_hvm_domain(d) || subleaf != 0 )
++            break;
++
++        if ( cpu_has_vmx_apic_reg_virt )
++            res->a |= XEN_HVM_CPUID_APIC_ACCESS_VIRT;
++
++        /*
++         * We want to claim that x2APIC is virtualized if APIC MSR accesses
++         * are not intercepted. When all three of these are true both rdmsr
++         * and wrmsr in the guest will run without VMEXITs (see
++         * vmx_vlapic_msr_changed()).
++         */
++        if ( cpu_has_vmx_virtualize_x2apic_mode &&
++             cpu_has_vmx_apic_reg_virt &&
++             cpu_has_vmx_virtual_intr_delivery )
++            res->a |= XEN_HVM_CPUID_X2APIC_VIRT;
++
++        /*
++         * 1) Xen 4.10 and older was broken WRT grant maps requesting a DMA
++         * mapping, and forgot to honour the guest's request.
++         * 2) 4.11 (and presumably backports) fixed the bug, so the map
++         * hypercall actually did what the guest asked.
++         * 3) To work around the bug, guests must bounce buffer all DMA that
++         * would otherwise use a grant map, because it doesn't know whether the
++         * DMA is originating from an emulated or a real device.
++         * 4) This flag tells guests it is safe not to bounce-buffer all DMA to
++         * work around the bug.
++         */
++        res->a |= XEN_HVM_CPUID_IOMMU_MAPPINGS;
++
++        /* Indicate presence of vcpu id and set it in ebx */
++        res->a |= XEN_HVM_CPUID_VCPU_ID_PRESENT;
++        res->b = v->vcpu_id;
++
++        /* Indicate presence of domain id and set it in ecx */
++        res->a |= XEN_HVM_CPUID_DOMID_PRESENT;
++        res->c = d->domain_id;
++
++        /*
++         * Per-vCPU event channel upcalls are implemented and work
++         * correctly with PIRQs routed over event channels.
++         */
++        res->a |= XEN_HVM_CPUID_UPCALL_VECTOR;
++
++        break;
++
++    case 5: /* PV-specific parameters */
++        if ( is_hvm_domain(d) || subleaf != 0 )
++            break;
++
++        res->b = flsl(get_upper_mfn_bound()) + PAGE_SHIFT;
++        break;
++
++    default:
++        ASSERT_UNREACHABLE();
++        break;
++    }
++}
++
+ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
+                  uint32_t subleaf, struct cpuid_leaf *res)
+ {
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index d247ef8dd226..4f176bc575ef 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -472,8 +472,6 @@ struct stubs {
+ DECLARE_PER_CPU(struct stubs, stubs);
+ unsigned long alloc_stub_page(unsigned int cpu, unsigned long *mfn);
  
-         s = ss + 1;
-     } while ( *ss );
+-void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+-                             uint32_t subleaf, struct cpuid_leaf *res);
+ int guest_rdmsr_xen(const struct vcpu *v, uint32_t idx, uint64_t *val);
+ int guest_wrmsr_xen(struct vcpu *v, uint32_t idx, uint64_t val);
+ 
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index dca11a613dbd..91af814badf7 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -34,7 +34,6 @@
+ #include <xen/domain_page.h>
+ #include <xen/symbols.h>
+ #include <xen/iocap.h>
+-#include <xen/version.h>
+ #include <xen/kexec.h>
+ #include <xen/trace.h>
+ #include <xen/paging.h>
+@@ -65,7 +64,6 @@
+ #include <asm/mc146818rtc.h>
+ #include <asm/hpet.h>
+ #include <asm/vpmu.h>
+-#include <public/arch-x86/cpuid.h>
+ #include <public/hvm/params.h>
+ #include <asm/cpuid.h>
+ #include <xsm/xsm.h>
+@@ -1053,140 +1051,6 @@ int guest_wrmsr_xen(struct vcpu *v, uint32_t idx, uint64_t val)
+     }
+ }
+ 
+-void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+-                             uint32_t subleaf, struct cpuid_leaf *res)
+-{
+-    const struct domain *d = v->domain;
+-    const struct cpu_policy *p = d->arch.cpu_policy;
+-    uint32_t base = is_viridian_domain(d) ? 0x40000100 : 0x40000000;
+-    uint32_t idx  = leaf - base;
+-    unsigned int limit = is_viridian_domain(d) ? p->hv2_limit : p->hv_limit;
+-
+-    if ( limit == 0 )
+-        /* Default number of leaves */
+-        limit = XEN_CPUID_MAX_NUM_LEAVES;
+-    else
+-        /* Clamp toolstack value between 2 and MAX_NUM_LEAVES. */
+-        limit = min(max(limit, 2u), XEN_CPUID_MAX_NUM_LEAVES + 0u);
+-
+-    if ( idx > limit )
+-        return;
+-
+-    switch ( idx )
+-    {
+-    case 0:
+-        res->a = base + limit; /* Largest leaf */
+-        res->b = XEN_CPUID_SIGNATURE_EBX;
+-        res->c = XEN_CPUID_SIGNATURE_ECX;
+-        res->d = XEN_CPUID_SIGNATURE_EDX;
+-        break;
+-
+-    case 1:
+-        res->a = (xen_major_version() << 16) | xen_minor_version();
+-        break;
+-
+-    case 2:
+-        res->a = 1;            /* Number of hypercall-transfer pages */
+-                               /* MSR base address */
+-        res->b = is_viridian_domain(d) ? 0x40000200 : 0x40000000;
+-        if ( is_pv_domain(d) ) /* Features */
+-            res->c |= XEN_CPUID_FEAT1_MMU_PT_UPDATE_PRESERVE_AD;
+-        break;
+-
+-    case 3: /* Time leaf. */
+-        switch ( subleaf )
+-        {
+-        case 0: /* features */
+-            res->a = ((d->arch.vtsc << 0) |
+-                      (!!host_tsc_is_safe() << 1) |
+-                      (!!boot_cpu_has(X86_FEATURE_RDTSCP) << 2));
+-            res->b = d->arch.tsc_mode;
+-            res->c = d->arch.tsc_khz;
+-            res->d = d->arch.incarnation;
+-            break;
+-
+-        case 1: /* scale and offset */
+-        {
+-            uint64_t offset;
+-
+-            if ( !d->arch.vtsc )
+-                offset = d->arch.vtsc_offset;
+-            else
+-                /* offset already applied to value returned by virtual rdtscp */
+-                offset = 0;
+-            res->a = offset;
+-            res->b = offset >> 32;
+-            res->c = d->arch.vtsc_to_ns.mul_frac;
+-            res->d = d->arch.vtsc_to_ns.shift;
+-            break;
+-        }
+-
+-        case 2: /* physical cpu_khz */
+-            res->a = cpu_khz;
+-            break;
+-        }
+-        break;
+-
+-    case 4: /* HVM hypervisor leaf. */
+-        if ( !is_hvm_domain(d) || subleaf != 0 )
+-            break;
+-
+-        if ( cpu_has_vmx_apic_reg_virt )
+-            res->a |= XEN_HVM_CPUID_APIC_ACCESS_VIRT;
+-
+-        /*
+-         * We want to claim that x2APIC is virtualized if APIC MSR accesses
+-         * are not intercepted. When all three of these are true both rdmsr
+-         * and wrmsr in the guest will run without VMEXITs (see
+-         * vmx_vlapic_msr_changed()).
+-         */
+-        if ( cpu_has_vmx_virtualize_x2apic_mode &&
+-             cpu_has_vmx_apic_reg_virt &&
+-             cpu_has_vmx_virtual_intr_delivery )
+-            res->a |= XEN_HVM_CPUID_X2APIC_VIRT;
+-
+-        /*
+-         * 1) Xen 4.10 and older was broken WRT grant maps requesting a DMA
+-         * mapping, and forgot to honour the guest's request.
+-         * 2) 4.11 (and presumably backports) fixed the bug, so the map
+-         * hypercall actually did what the guest asked.
+-         * 3) To work around the bug, guests must bounce buffer all DMA that
+-         * would otherwise use a grant map, because it doesn't know whether the
+-         * DMA is originating from an emulated or a real device.
+-         * 4) This flag tells guests it is safe not to bounce-buffer all DMA to
+-         * work around the bug.
+-         */
+-        res->a |= XEN_HVM_CPUID_IOMMU_MAPPINGS;
+-
+-        /* Indicate presence of vcpu id and set it in ebx */
+-        res->a |= XEN_HVM_CPUID_VCPU_ID_PRESENT;
+-        res->b = v->vcpu_id;
+-
+-        /* Indicate presence of domain id and set it in ecx */
+-        res->a |= XEN_HVM_CPUID_DOMID_PRESENT;
+-        res->c = d->domain_id;
+-
+-        /*
+-         * Per-vCPU event channel upcalls are implemented and work
+-         * correctly with PIRQs routed over event channels.
+-         */
+-        res->a |= XEN_HVM_CPUID_UPCALL_VECTOR;
+-
+-        break;
+-
+-    case 5: /* PV-specific parameters */
+-        if ( is_hvm_domain(d) || subleaf != 0 )
+-            break;
+-
+-        res->b = flsl(get_upper_mfn_bound()) + PAGE_SHIFT;
+-        break;
+-
+-    default:
+-        ASSERT_UNREACHABLE();
+-        break;
+-    }
+-}
+-
+ void asmlinkage do_invalid_op(struct cpu_user_regs *regs)
+ {
+     u8 bug_insn[2];
 -- 
 2.39.5
 
