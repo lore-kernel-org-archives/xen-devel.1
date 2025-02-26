@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994FFC021BF
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Feb 2025 12:49:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.896502.1305232 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C6EC021B8
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Feb 2025 12:53:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.896510.1305248 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnGqM-0000XB-IK; Wed, 26 Feb 2025 12:48:54 +0000
+	id 1tnGuc-00028I-Ed; Wed, 26 Feb 2025 12:53:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 896502.1305232; Wed, 26 Feb 2025 12:48:54 +0000
+Received: by outflank-mailman (output) from mailman id 896510.1305248; Wed, 26 Feb 2025 12:53:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnGqM-0000X4-Fd; Wed, 26 Feb 2025 12:48:54 +0000
-Received: by outflank-mailman (input) for mailman id 896502;
- Wed, 26 Feb 2025 12:48:53 +0000
+	id 1tnGuc-00026S-9x; Wed, 26 Feb 2025 12:53:18 +0000
+Received: by outflank-mailman (input) for mailman id 896510;
+ Wed, 26 Feb 2025 12:53:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J4Ti=VR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tnGqL-0000Wy-B1
- for xen-devel@lists.xenproject.org; Wed, 26 Feb 2025 12:48:53 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1tnGub-00021N-4X
+ for xen-devel@lists.xenproject.org; Wed, 26 Feb 2025 12:53:17 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 07fa2365-f440-11ef-9aae-95dc52dad729;
- Wed, 26 Feb 2025 13:48:52 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43995b907cfso42623215e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 04:48:52 -0800 (PST)
+ id a507602a-f440-11ef-9aae-95dc52dad729;
+ Wed, 26 Feb 2025 13:53:15 +0100 (CET)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-38f403edb4eso4014047f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 04:53:15 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43aba571274sm20336025e9.31.2025.02.26.04.48.51
+ 5b1f17b1804b1-43aba52bc54sm21596905e9.5.2025.02.26.04.53.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 04:48:51 -0800 (PST)
+ Wed, 26 Feb 2025 04:53:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 07fa2365-f440-11ef-9aae-95dc52dad729
+X-Inumbo-ID: a507602a-f440-11ef-9aae-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1740574131; x=1741178931; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1740574395; x=1741179195; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=hhVICk/b+tlx8/JJ+m84IpHaH81/qZ+bAY/NiHq0HS0=;
-        b=RlM2bkFsd0DCIXNYcC2Qcy3ZQDjsXXQuEjpFnraduQlxvODkAQD+jB0Lco2odjjKjx
-         aFzh16X2eZdhHRS1gN+l2HkaCsN6jkovp5u6EID4ohgrFU8t5zJVSZc/fLeaefDTdwjN
-         3mklfpyQj8DSAW0pTG0JwcWd6Mvh6LtwLEmKc0vnmzsYS2EwsvDLhinazXxMj7KRhlgw
-         69WABRXZABB9opOkFxMWiolD+aDG/2eYeVtljovJHa8pDsQZVFOeV4Aiy2UArgHEOay1
-         C7Od2mUYXp794rg+xuynlhqM6GGJbnJ3vUrL5frBlvMXjJYrDO14JyIJzJOuaca9JrgB
-         Zs1w==
+        bh=Lf0Z1KE7YfIXt4PpykkUhVby1xb/rEwBGs/nUitjkFw=;
+        b=CJbMZb1q5+mq+KDZCA0RrKBJ7iAHSwwEKbK9JytZCC+PVUOGVSTsWE+nPDHjjdnj7p
+         U1YPo/HDZDygrakacQ8k4pcbZL1TAK8sBI+T93BAOmloTwcli4Xpoe93tGqEYzj5IA4R
+         sJ+FeuQ8GfDpHFJ3GdmwojUKAU/h/duz5rh+jQki115S03PwF0e25wAP2IrlJ9btxeq7
+         gYhVn8wdT26N30QI91kgHMSDOgCsbWF/F1hq9QKVEjS0uN2ZDacgg4ov4BZOyg2KYRDu
+         Kp3a2+XYJEoVNDhWj3DpgfPyLV2fk36xINq1c/mxBFai/P2mFnuoW1WMS3mDITpwLLIV
+         FHHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740574131; x=1741178931;
+        d=1e100.net; s=20230601; t=1740574395; x=1741179195;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hhVICk/b+tlx8/JJ+m84IpHaH81/qZ+bAY/NiHq0HS0=;
-        b=ejPCs+xTq5TNr3yrk0/tqxBMrhHXvYsMlFCKGVXfTSooZ+8GUKPJBXSziXHrmZAGqq
-         CvSliV2zb3FWzwX9wqHszoOcw7X3r+DErU5SlQBJlbQ1wVN5DuPa9xEilS+Cec62GX8I
-         AOG7hRHOgG9Bi3H4PqjVBOy/4kWD7AN9JtyHNm1REwXnEocpsfbajb/4Qlwzlh9t2saE
-         Yz6NnY/IsKf+jbYHEzNjzQgcwEoidOKmEsK2SVtQVViQ3+q/b6w4UVArV2x0MVwG7U78
-         6cGZ77VX9FTN0sOKta5kN4lyaARjsQHzTWmbELM2xyfBihu9MrL3FTw3jEhKEqAVFD5o
-         XZeA==
-X-Forwarded-Encrypted: i=1; AJvYcCWJ/r462ntitOxN5f4bdDlEiKkK9AhtrLzie+gySdXJ7J7mE5U4KtTbO0G90HyJaQI66vDBhd3dWX0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxpsRhY9w0LYAabSPx1xma00/qAe+iVYX/QB2ZpnzJ54vQa3iC8
-	0sKjtKwo/ZRdZdQXW1nKY/rKjbl38nj3DKDHc1Zb3Pmy8lhlPZTgMeX+02NERw==
-X-Gm-Gg: ASbGncvLyrJUdQjj9VF4fOS/LKqEznrQPIxKJMvosXYvBDVb8nyr/TAJZ4FUjbzTwIe
-	WufXEFyd+a/UAe69HK/Q0wZjs0WQj7k/1U3aSORkw4yJadXT61/nrC+dqsl45DlHx8FDsHg3UpF
-	aAHfrzut3FtsNB4aoUepeAJV7dRaGYX/g/8DrM14GVLs6OdT70DWyCNGkZdkWj+GIxM+DkrTP31
-	S/VMCeyy8I2xJ1Y6sjR252O6zL04lYaUuHnCkBG5YuDMckt5a92gYoR7133gccOwifMlwYPfAdk
-	BD/cK5agwBgof8vCR6Jgrf/yjvr/XEaoZXHjxLzV6n7jplH/z9MiZyGdajDCJy6R0X/zBLmlBDC
-	YHRoVb7M9uoU=
-X-Google-Smtp-Source: AGHT+IHe8cNmOzn9+LwWla7CnY9Xs/K1XwSAxX6dOTPpqY3rFvNmP5HKlC131MpBrHCHE6nw9zTyEQ==
-X-Received: by 2002:a05:600c:4ecf:b0:439:a88f:8538 with SMTP id 5b1f17b1804b1-43ab0f277efmr65763695e9.5.1740574131599;
-        Wed, 26 Feb 2025 04:48:51 -0800 (PST)
-Message-ID: <46bc8ff4-f33a-4736-b1c9-00dfdec554b7@suse.com>
-Date: Wed, 26 Feb 2025 13:48:50 +0100
+        bh=Lf0Z1KE7YfIXt4PpykkUhVby1xb/rEwBGs/nUitjkFw=;
+        b=hx9xSEsa57WJoC4qecPJxUQ66mdZDRXdODwYKlO/2sDnw2bQLmEf3/6nPdIrNR/O8C
+         zl8B5+lOXbWwnAk0uKhWN/9fLfRB4CbccdeGTSNDO/SFiMYLuSDQvLcfHTfFNHVuJ1TX
+         c1yt0lzIDjfT/gbHBt5pGa5dRGI+P7nWN+rEvfNxltuqptqq0h7whorJ/Pwt24Iygv8K
+         RIj6ESA+SOHv8SOWvY1RtXmpD8H1NOPBeK7ZprY4fP3g3ZkyR8aGnMRjUlkoMsOoNyqA
+         okjj12V027tsjGnnhtZGv+M9xLNfdYuUi34osraO3vsDXLM2MeeI9PVoGXZ9vD1gHRBO
+         LJ8Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUDWvGsheHuUULcsDj+aJWKBnSdo8Z6VYQqpdOkPt2Q7t8v3Hgyl0RQ9sE8Zr74UANv2G3ViGWzsxE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzx+BA9uT1HKHN7LajL3e6wumszZ0fJaP56BCHejYOQ6lzEPEO3
+	cDQdrejMXPKuo8Hu3+SxfDWaM3qsmXEJZq2ExkjliVyulQoPMoAI0UvY3qX5fA==
+X-Gm-Gg: ASbGncv5RuM1hm5RFuoQmrkWZXMCWOuxXrGkiRCVw+qiHjm3eiUD+SplfqG23/vazZv
+	mEK5PqPymmZ0VVNznHGeUXq3nMWr4aRzUTDlTwHhhUiBrH6eYsBcizvr2vPuw8OQbxAyMAcPXuJ
+	ojCXZyk/ZDmzjuYRVrlKMw8Q5kYBZMgzmvx/YDXyhC4uqJFGzE3dZjuOk9jPhSE1wMeJzEuK3wN
+	mjtkfOoRaTVk+q4KK4K8e2k2Wzntdw5QHaky0dwLjdyQ0JPMPuweXTxhBZW7pzuKgKaIc4kmnJE
+	9yYUUzV0hfJD1q+4BL/SUZzk4qFtnd1jvmTGvfuLND4kA6LZIHdS0sYITR1ei8VxssEViFHMh5h
+	IjebJO/2mTDw=
+X-Google-Smtp-Source: AGHT+IE7AUQ3uL5ah3lgDzra0oKQjTDpqZw+R7iqlO0f8ugPrpTJHiH1njBEy5Sp1rwIlRW+xqxAsQ==
+X-Received: by 2002:a05:6000:1fad:b0:390:dfbb:640 with SMTP id ffacd0b85a97d-390dfbb06dbmr115612f8f.45.1740574395153;
+        Wed, 26 Feb 2025 04:53:15 -0800 (PST)
+Message-ID: <51550031-77f0-44c0-89f5-2a1a53384794@suse.com>
+Date: Wed, 26 Feb 2025 13:53:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/8] x86/IDT: Don't rewrite bsp_idt[] at boot time
+Subject: Re: [PATCH 8/8] x86/traps: Convert pv_trap_init() to being an
+ initcall
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
 References: <20250224160509.1117847-1-andrew.cooper3@citrix.com>
- <20250224160509.1117847-8-andrew.cooper3@citrix.com>
+ <20250224160509.1117847-9-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -120,21 +121,13 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250224160509.1117847-8-andrew.cooper3@citrix.com>
+In-Reply-To: <20250224160509.1117847-9-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 24.02.2025 17:05, Andrew Cooper wrote:
-> Now that bsp_idt[] is constructed at build time, we do not need to manually
-> initialise it in init_idt_traps() and trap_init().
-> 
-> The only edit needed to the bsp_idt[] is to switch from the early #PF handler
-> to the normal one, and this can be done using _update_gate_addr_lower() as we
-> do on the kexec path for NMI and #MC.
-> 
-> This in turn allows us to drop set_{intr,swint}_gate() and the underlying
-> infrastructure.  It also lets us drop autogen_entrypoints[] and that
-> underlying infrastructure.
+> With most of pv_trap_init() being done at build time, opening of NMI_SOFTIRQ
+> can be a regular initcall, simplifying trap_init().
 > 
 > No functional change.
 > 
@@ -142,9 +135,5 @@ On 24.02.2025 17:05, Andrew Cooper wrote:
 
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-The switching around of the #PF handler is of course getting in the way of
-moving bsp_idt[] into .rodata.
-
-Jan
 
 
