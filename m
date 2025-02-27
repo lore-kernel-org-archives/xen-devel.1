@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24834C021B8
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Feb 2025 23:56:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897304.1305994 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DCEAC021B8
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:19:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897365.1306019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnRFm-0002H1-3t; Wed, 26 Feb 2025 23:55:50 +0000
+	id 1tnTUS-0005qh-EM; Thu, 27 Feb 2025 02:19:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897304.1305994; Wed, 26 Feb 2025 23:55:50 +0000
+Received: by outflank-mailman (output) from mailman id 897365.1306019; Thu, 27 Feb 2025 02:19:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnRFm-0002Gu-19; Wed, 26 Feb 2025 23:55:50 +0000
-Received: by outflank-mailman (input) for mailman id 897304;
- Wed, 26 Feb 2025 23:55:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tnTUS-0005qa-BD; Thu, 27 Feb 2025 02:19:08 +0000
+Received: by outflank-mailman (input) for mailman id 897365;
+ Thu, 27 Feb 2025 02:19:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GPjD=VR=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tnRFk-0002Go-4p
- for xen-devel@lists.xenproject.org; Wed, 26 Feb 2025 23:55:48 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31e5fd0a-f49d-11ef-9897-31a8f345e629;
- Thu, 27 Feb 2025 00:55:45 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43984e9cc90so9416575e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 15:55:45 -0800 (PST)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43b7a27ab2asm4460035e9.32.2025.02.26.15.55.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 15:55:43 -0800 (PST)
+ <SRS0=lX4z=VS=flex--seanjc.bounces.google.com=3mMu_ZwYKCXMjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@srs-se1.protection.inumbo.net>)
+ id 1tnTUR-0005qU-4S
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:07 +0000
+Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
+ [2607:f8b0:4864:20::1049])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 379a80a3-f4b1-11ef-9aaf-95dc52dad729;
+ Thu, 27 Feb 2025 03:19:06 +0100 (CET)
+Received: by mail-pj1-x1049.google.com with SMTP id
+ 98e67ed59e1d1-2fc1e7efdffso1555127a91.0
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,169 +42,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31e5fd0a-f49d-11ef-9897-31a8f345e629
+X-Inumbo-ID: 379a80a3-f4b1-11ef-9aaf-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1740614145; x=1741218945; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=zBB27sS1ONpB3Axog98rPbBYWzFb91ipmx5Xt7wfKng=;
-        b=sqNnbW1dT4RjaNAKRVv25A1sPsZ7+gyJeC8KyOxm2dEQn9vdPbFJ9nUqeP6WlUbXzl
-         ThAIfd3OTCHLPBwf+FV8YOFqpHQ7etkRz857IeMvUChzMM9sm/O9T6yR1DHS1QaP2K0v
-         xsJY+qko/A0ZACYyFpiIxVgpvkVyxG+1EGo6k=
+        d=google.com; s=20230601; t=1740622744; x=1741227544; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=KtBuHiug8RyBl7zdSfnpeCyQMsoAneIAJhrbW8v3FfQ=;
+        b=sDnw7K4bSJVwxcxE1AGL4Cq8/I8xw+JtpPE872WF3UwovWowaXDkJbFwLYX1Ph9h/d
+         PKlcONKNynffqUen+AFSLhVY+pG/m/0rfmHEZx2U2oPKkbmFx8Bz0XHdpPvcShLsQtS4
+         vOQ8JFRrzGKeO1evwjfk8dcBdvOt5xcbuieCLfyR1hx+MLDcS5+aep0N1A3mJy+5DEnb
+         hOijyzNgrd68T/Y7g91fVfJecrbOgQK2lCas9CuaOoSUjhlw6LvK00dvpQV4KSO8V1Ft
+         yqH2JIfig8nBw9xNOTdsxu+CPa5DBfYM4q8zHCbotJZBBHlDLh5DOTUTDstdGTqJi6Rv
+         rmgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740614145; x=1741218945;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1740622744; x=1741227544;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zBB27sS1ONpB3Axog98rPbBYWzFb91ipmx5Xt7wfKng=;
-        b=blGjQeMQYsxEdl/yX17EonA843c98Ak3jFwbnW+zPPFVyIg2GNWkaeZOY/Wn98M9T4
-         WmpAxNt70E4eI8nsqEqP5PvdwUgU33uYVsPcFk2GMxs/KpqT3NivEMFmLX1aKVHmPKEs
-         LH56dWGwKwuIl/4sD1ReJeBQIfBrrPMdcGyY0rw9ezbTD8zZ0iWpKpYhGtRygpPsKqCG
-         R/kwqIQw32yiSH1CKs4QaYQCb7jTqbJZaZgPDvsAm1bl88BWXlD+dsPfaYmWNVoCEKDO
-         fI1eB3XN0o+qUeynFKLc9j6Tq1vZ1xpQpl1RnTiIyWbvQIao14Lp6EnRtwwwGaN37Qii
-         jV3A==
-X-Forwarded-Encrypted: i=1; AJvYcCVV5WE+Sxpb76AD4ghfuTn5v+Mfvzkg2uJPxwBMKIH4LeDectx3N+oaWRMoQ86Bp1bTSWqm4ZtkbB4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzFk7VRACc8GLykOVUVzHB0X/jiBOsWKz9PK9AJEFg6yOLqaOzD
-	wGI/pRJCOooz3owwSGtTcZw9QxeoDWKoMGMvAQ0AM9fRhDCFK6H7o+Lx33zNkg2AnD/JI2dwJZ/
-	V
-X-Gm-Gg: ASbGnctsWZl8oTDFVBhaRRKSvbnYPe9835QTU5zLvwbvXIUwATKit2R3cegf5Sk6Aeq
-	A7mrleqtPUPH2WLIYljlkpmudIwfllLdiFdjt0x3vASw4yzcgZIeZYWSPK5Q/OEUh/UelCUCA9u
-	CUEQT9lQbCF4R0UNFxSLRvN7iL39mK7xkrvwfICS/NABN4kDZyHCJCz7k4gAaiUxJultOjUGVTi
-	p1/FRuxsC+5ICIiOvb5SheRnv4xTDbSOXrzXKH8hok3OLUH89IioyfodgfLGQ3a0ZvQ2LoYGhnn
-	w7Ho7sVd1EdmJm0TE1yIjWhiBRF33NvIl4RL8kf9Q5Eu82w1spEG2qy6/7TJWyoYJQ==
-X-Google-Smtp-Source: AGHT+IHQtKRUgXrPB6t/OjZpYQJwz3MLU3D0PiWpDDRSpMJAdnLh6ZU+9tiwitbLFhrt2oz6PsnETg==
-X-Received: by 2002:a05:600c:3586:b0:439:98fd:a4b6 with SMTP id 5b1f17b1804b1-43ba133ca60mr32025e9.15.1740614145156;
-        Wed, 26 Feb 2025 15:55:45 -0800 (PST)
-Message-ID: <6c19be7d-eb79-41e6-a86e-97b9f1e5b97b@citrix.com>
-Date: Wed, 26 Feb 2025 23:55:42 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] RISCV/bitops: Use Zbb to provide arch-optimised bitops
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250226172050.1300771-1-andrew.cooper3@citrix.com>
- <f22e1d84-45a4-4d9d-a2e0-3b880b8d7704@gmail.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <f22e1d84-45a4-4d9d-a2e0-3b880b8d7704@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+        bh=KtBuHiug8RyBl7zdSfnpeCyQMsoAneIAJhrbW8v3FfQ=;
+        b=F1CbQoZqGEoSSniSzPUV5pXvCq0oSJ22jJF3EG+ppgbNrNStJaNZi6V8Eq2XLk7EP/
+         jIMwvVX7PFG3kVaUo+pFOmcI3wSEdFMqSGfjIAOWIJEQ2Mwgp722hXQBB1kc+DiGZUpy
+         0bT/hSwxpkIe02uCnZ/xG6Yqd8oUMCnqZxJn8a/hlM/C45Aez/hUVa2NyFiq8x0lK2vq
+         ACcVmLMbBs7PKlvhoAOfUWS2IzahFAqefHUsu4JL3ZdalgUfM+K7xFt/RH1Ns2oDDO0B
+         rB7EHQqowy0YUNP3WYArUn9PkfRkgbFbm1akQ2jv7qTGjFy0FA7lEcrFKUiZmX0kqZdk
+         4/MQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVGM5K+mHScQJykqy0PaMOwKRwL+UUczh/+Lw29ifvOYMxFmLtTquaBAV/AEFTw52NVyrE1SONn4GE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yze6hd7tRDVBiH9sjASw7h7wN+aQFkpEUiUFZ88Dzh3dpq/C2Gi
+	G+q0VPOYBDWsy6txLE+BBOs5GLJeyIyN8yWflLgtdi9xIeHtjxZrUHtETW2PfeCbDioiS1qw1Fk
+	K5g==
+X-Google-Smtp-Source: AGHT+IEZuLrSoCpVWZXJcy9TmAp9qIs68IJxs5ZGUPBqjbzVn9jX2mg4vMG9kljqKgFFkZhvGqcDyGJTu1M=
+X-Received: from pjbsn14.prod.google.com ([2002:a17:90b:2e8e:b0:2fc:15bf:92f6])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:1f8e:b0:2ee:b8ac:73b0
+ with SMTP id 98e67ed59e1d1-2fe68acd43fmr15933009a91.2.1740622744544; Wed, 26
+ Feb 2025 18:19:04 -0800 (PST)
+Reply-To: Sean Christopherson <seanjc@google.com>
+Date: Wed, 26 Feb 2025 18:18:17 -0800
+In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
+Mime-Version: 1.0
+References: <20250227021855.3257188-1-seanjc@google.com>
+X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
+Message-ID: <20250227021855.3257188-2-seanjc@google.com>
+Subject: [PATCH v2 01/38] x86/tsc: Add a standalone helpers for getting TSC
+ info from CPUID.0x15
+From: Sean Christopherson <seanjc@google.com>
+To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Sean Christopherson <seanjc@google.com>, Juergen Gross <jgross@suse.com>, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Ajay Kaher <ajay.kaher@broadcom.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
+	Peter Zijlstra <peterz@infradead.org>, Daniel Lezcano <daniel.lezcano@linaro.org>, 
+	John Stultz <jstultz@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev, 
+	kvm@vger.kernel.org, virtualization@lists.linux.dev, 
+	linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On 26/02/2025 9:01 pm, Oleksii Kurochko wrote:
->
->
-> On 2/26/25 6:20 PM, Andrew Cooper wrote:
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> ---
->> CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> Depends on "xen/riscv: make zbb as mandatory"
->> ---
->>  xen/arch/riscv/include/asm/bitops.h | 7 +++++++
->>  1 file changed, 7 insertions(+)
->>
->> diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
->> index d22eec1e87c7..df3df93520c5 100644
->> --- a/xen/arch/riscv/include/asm/bitops.h
->> +++ b/xen/arch/riscv/include/asm/bitops.h
->> @@ -125,6 +125,13 @@ static inline void clear_bit(int nr, volatile void *p)
->>  #undef NOT
->>  #undef __AMO
->>  
->> +#define arch_ffs(x)     ((x) ? 1 + __builtin_ctz(x) : 0)
->> +#define arch_ffsl(x)    ((x) ? 1 + __builtin_ctzl(x) : 0)
->> +#define arch_fls(x)     ((x) ? 32 - __builtin_clz(x) : 0)
->> +#define arch_flsl(x)    ((x) ? BITS_PER_LONG - __builtin_clzl(x) : 0)
->> +
->> +#define arch_heightl(x) __builtin_popcountl(x)
->> +
->>  #endif /* ASM__RISCV__BITOPS_H */
->>  
->>  /*
-> LGRM: Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Extract retrieval of TSC frequency information from CPUID into standalone
+helpers so that TDX guest support and kvmlock can reuse the logic.  Provide
+a version that includes the multiplier math as TDX in particular does NOT
+want to use native_calibrate_tsc()'s fallback logic that derives the TSC
+frequency based on CPUID.0x16 when the core crystal frequency isn't known.
 
-Thanks.  This form is much easier than making alternatives for it.
+Opportunsitically drop native_calibrate_tsc()'s "== 0" and "!= 0" check
+in favor of the kernel's preferred style.
 
-> Thanks.
->> base-commit: 7cf163879c5add0a4f7f9c987b61f04f8f7051b1
->> prerequisite-patch-id: 9ee1f7ebf5d34b1c565ee2d3d4fb319164bb8bcd
->> prerequisite-patch-id: 8a05c87c8d051a3ac0820887f676bbd318e4ae88
->> prerequisite-patch-id: 6b56e42d130d8b5ee39457b6760b05cc6e16b049
->> prerequisite-patch-id: c139f1f5741d695cd5e5aa6be904edcb61b73885
->> prerequisite-patch-id: 99f8b701000e9ee11060934e627a988ddf9aaaa7
-> Could you please tell me how do you generate this one?
+No functional change intended.
 
-In gitconfig,
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ arch/x86/include/asm/tsc.h |  9 +++++
+ arch/x86/kernel/tsc.c      | 67 +++++++++++++++++++++++++-------------
+ 2 files changed, 53 insertions(+), 23 deletions(-)
 
-[format]
-        useAutoBase = "whenAble"
+diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
+index 94408a784c8e..a4d84f721775 100644
+--- a/arch/x86/include/asm/tsc.h
++++ b/arch/x86/include/asm/tsc.h
+@@ -28,6 +28,15 @@ static inline cycles_t get_cycles(void)
+ }
+ #define get_cycles get_cycles
+ 
++struct cpuid_tsc_info {
++	unsigned int denominator;
++	unsigned int numerator;
++	unsigned int crystal_khz;
++	unsigned int tsc_khz;
++};
++extern int cpuid_get_tsc_info(struct cpuid_tsc_info *info);
++extern int cpuid_get_tsc_freq(struct cpuid_tsc_info *info);
++
+ extern void tsc_early_init(void);
+ extern void tsc_init(void);
+ extern void mark_tsc_unstable(char *reason);
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 34dec0b72ea8..93713eb81f52 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -655,46 +655,67 @@ static unsigned long quick_pit_calibrate(void)
+ 	return delta;
+ }
+ 
++int cpuid_get_tsc_info(struct cpuid_tsc_info *info)
++{
++	unsigned int ecx_hz, edx;
++
++	memset(info, 0, sizeof(*info));
++
++	if (boot_cpu_data.cpuid_level < CPUID_LEAF_TSC)
++		return -ENOENT;
++
++	/* CPUID 15H TSC/Crystal ratio, plus optionally Crystal Hz */
++	cpuid(CPUID_LEAF_TSC, &info->denominator, &info->numerator, &ecx_hz, &edx);
++
++	if (!info->denominator || !info->numerator)
++		return -ENOENT;
++
++	/*
++	 * Note, some CPUs provide the multiplier information, but not the core
++	 * crystal frequency.  The multiplier information is still useful for
++	 * such CPUs, as the crystal frequency can be gleaned from CPUID.0x16.
++	 */
++	info->crystal_khz = ecx_hz / 1000;
++	return 0;
++}
++
++int cpuid_get_tsc_freq(struct cpuid_tsc_info *info)
++{
++	if (cpuid_get_tsc_info(info) || !info->crystal_khz)
++		return -ENOENT;
++
++	info->tsc_khz = info->crystal_khz * info->numerator / info->denominator;
++	return 0;
++}
++
+ /**
+  * native_calibrate_tsc - determine TSC frequency
+  * Determine TSC frequency via CPUID, else return 0.
+  */
+ unsigned long native_calibrate_tsc(void)
+ {
+-	unsigned int eax_denominator, ebx_numerator, ecx_hz, edx;
+-	unsigned int crystal_khz;
++	struct cpuid_tsc_info info;
+ 
+ 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
+ 		return 0;
+ 
+-	if (boot_cpu_data.cpuid_level < CPUID_LEAF_TSC)
++	if (cpuid_get_tsc_info(&info))
+ 		return 0;
+ 
+-	eax_denominator = ebx_numerator = ecx_hz = edx = 0;
+-
+-	/* CPUID 15H TSC/Crystal ratio, plus optionally Crystal Hz */
+-	cpuid(CPUID_LEAF_TSC, &eax_denominator, &ebx_numerator, &ecx_hz, &edx);
+-
+-	if (ebx_numerator == 0 || eax_denominator == 0)
+-		return 0;
+-
+-	crystal_khz = ecx_hz / 1000;
+-
+ 	/*
+ 	 * Denverton SoCs don't report crystal clock, and also don't support
+ 	 * CPUID_LEAF_FREQ for the calculation below, so hardcode the 25MHz
+ 	 * crystal clock.
+ 	 */
+-	if (crystal_khz == 0 &&
+-			boot_cpu_data.x86_vfm == INTEL_ATOM_GOLDMONT_D)
+-		crystal_khz = 25000;
++	if (!info.crystal_khz && boot_cpu_data.x86_vfm == INTEL_ATOM_GOLDMONT_D)
++		info.crystal_khz = 25000;
+ 
+ 	/*
+ 	 * TSC frequency reported directly by CPUID is a "hardware reported"
+ 	 * frequency and is the most accurate one so far we have. This
+ 	 * is considered a known frequency.
+ 	 */
+-	if (crystal_khz != 0)
++	if (info.crystal_khz)
+ 		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
+ 
+ 	/*
+@@ -702,15 +723,15 @@ unsigned long native_calibrate_tsc(void)
+ 	 * clock, but we can easily calculate it to a high degree of accuracy
+ 	 * by considering the crystal ratio and the CPU speed.
+ 	 */
+-	if (crystal_khz == 0 && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
++	if (!info.crystal_khz && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
+ 		unsigned int eax_base_mhz, ebx, ecx, edx;
+ 
+ 		cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
+-		crystal_khz = eax_base_mhz * 1000 *
+-			eax_denominator / ebx_numerator;
++		info.crystal_khz = eax_base_mhz * 1000 *
++			info.denominator / info.numerator;
+ 	}
+ 
+-	if (crystal_khz == 0)
++	if (!info.crystal_khz)
+ 		return 0;
+ 
+ 	/*
+@@ -727,10 +748,10 @@ unsigned long native_calibrate_tsc(void)
+ 	 * lapic_timer_period here to avoid having to calibrate the APIC
+ 	 * timer later.
+ 	 */
+-	lapic_timer_period = crystal_khz * 1000 / HZ;
++	lapic_timer_period = info.crystal_khz * 1000 / HZ;
+ #endif
+ 
+-	return crystal_khz * ebx_numerator / eax_denominator;
++	return info.crystal_khz * info.numerator / info.denominator;
+ }
+ 
+ static unsigned long cpu_khz_from_cpuid(void)
+-- 
+2.48.1.711.g2feabab25a-goog
 
-or --base=auto on a git format-patch command.
-
-This is a poor example.  Those prereq ids are:
-
-* 307e136282d8 - (HEAD -> riscv-isa) RISCV/bitops: Use Zbb to provide
-arch-optimised bitops (7 hours ago) <Andrew Cooper>
-* 519dcd50e4cd - xen/riscv: make zbb as mandatory (12 hours ago)
-<Oleksii Kurochko>
-* c9bf2a9ac22c - xen/riscv: identify specific ISA supported by cpu (12
-hours ago) <Oleksii Kurochko>
-* 9014de63aa14 - automation: drop debian:11-riscv64 container (12 hours
-ago) <Oleksii Kurochko>
-* 5febb98d11f3 - xen/riscv: drop CONFIG_RISCV_ISA_RV64G (12 hours ago)
-<Oleksii Kurochko>
-* 5a7c9fd746af - xen/README: add compiler and binutils versions for
-RISCV-64 (12 hours ago) <Oleksii Kurochko>
-* 7cf163879c5a - (xenbits/staging, xenbits/master, upstream/staging,
-upstream/master, origin/staging, origin/master, origin/HEAD, staging,
-pending, master) PPC: Activate UBSAN in testing (12 hours ago) <Andrew
-Cooper>
-
-as I pulled your series in locally.
-
-~Andrew
 
