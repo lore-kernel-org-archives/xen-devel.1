@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E951C021B8
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:19:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897373.1306084 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F7CC021B8
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:19:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897369.1306060 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUc-0007PU-IA; Thu, 27 Feb 2025 02:19:18 +0000
+	id 1tnTUX-0006mF-EU; Thu, 27 Feb 2025 02:19:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897373.1306084; Thu, 27 Feb 2025 02:19:18 +0000
+Received: by outflank-mailman (output) from mailman id 897369.1306060; Thu, 27 Feb 2025 02:19:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUc-0007OY-9e; Thu, 27 Feb 2025 02:19:18 +0000
-Received: by outflank-mailman (input) for mailman id 897373;
- Thu, 27 Feb 2025 02:19:17 +0000
+	id 1tnTUX-0006l2-AQ; Thu, 27 Feb 2025 02:19:13 +0000
+Received: by outflank-mailman (input) for mailman id 897369;
+ Thu, 27 Feb 2025 02:19:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UJj9=VS=flex--seanjc.bounces.google.com=3o8u_ZwYKCX4ugcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@srs-se1.protection.inumbo.net>)
- id 1tnTUb-0005qU-9Z
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:17 +0000
+ <SRS0=Jlms=VS=flex--seanjc.bounces.google.com=3ncu_ZwYKCXgoaWjfYckkcha.Ykitaj-Zarahheopo.tajlnkfaYp.knc@srs-se1.protection.inumbo.net>)
+ id 1tnTUV-0005qU-Ph
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:11 +0000
 Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
  [2607:f8b0:4864:20::1049])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3e0f5d37-f4b1-11ef-9aaf-95dc52dad729;
- Thu, 27 Feb 2025 03:19:16 +0100 (CET)
+ id 3ac0d216-f4b1-11ef-9aaf-95dc52dad729;
+ Thu, 27 Feb 2025 03:19:11 +0100 (CET)
 Received: by mail-pj1-x1049.google.com with SMTP id
- 98e67ed59e1d1-2fc0bc05c00so1507791a91.2
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:16 -0800 (PST)
+ 98e67ed59e1d1-2fe8c5dbdb0so1061021a91.3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,48 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e0f5d37-f4b1-11ef-9aaf-95dc52dad729
+X-Inumbo-ID: 3ac0d216-f4b1-11ef-9aaf-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622755; x=1741227555; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1740622750; x=1741227550; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=YtBqucRQyVVjFtgUlGbh/U8C9xbSv2L/3t5kwpG/0fs=;
-        b=KNAtg8tWo9X0AQhlg9SQSFD7Smjra3pgMsgkpywJh/syOPi4T9+huMzm15Qo6yDnhH
-         3bTNGPwswFMm4WA25KlTnQ6nTW18mDBAcE/ViZkKmdntJRMSfgqfZXvFYlQk6PVY6kQz
-         sgQy4xp4oa8scPieu0OCUs9zUzhEG3mMTtFEEleI8earuM0vgL4WyXTa29oydcc/1bON
-         c7rSIvYbb1JlC1m6HZoiUVTDH5fR3ywA8TYzOf+B5j/elscpDzA0agxc++3gZAQYSz8v
-         IxceItMwRzrEIUHDjzYOIugNsDg9U/SnAiwbsOCBUfPCbrh+fOvjkrGO3W+wuId0nvQV
-         e9yA==
+        bh=HbJ/1jLoPDWkVBe7cDWaMugTDenciqtu5nrTgQ9Zvm0=;
+        b=I7QL8ZPwWO1oqFZxwYCoc80EI0hRHQqQbAlsZ79RHZP5h7pHY2rgFVbPQbgWEr5n2r
+         VBHeP2JmEdCC1wP2RlLyeUNUmG2ZWz0kIEQF0Jrozm3YRPMN6ugck3l1JAbT5Nrk65j5
+         lbMkvC+eBphKxw4kW74TJZVinvGV12zcXK1ZlmCaXZ2sNP5EKPkmVHY0irhQaZ6+O1Pi
+         bdxYUekTWNQYZuS6H+em1PmOYf3+G99dxPinYNYerXNRCBsCsZA8glWKkA/wF4hI5Q5M
+         EH9cutti+f40rGyoABf9BbIeB8uZdOExG6JmI6C+09ubVTb2MobHlPKVf1N+4I9ka87w
+         FeXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622755; x=1741227555;
+        d=1e100.net; s=20230601; t=1740622750; x=1741227550;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=YtBqucRQyVVjFtgUlGbh/U8C9xbSv2L/3t5kwpG/0fs=;
-        b=b3mm7snRTqbO+ZJO0pndztJTJEyM8H2aq47sOfJqFzZQsLNRvL4wliUQDR9eDs/HZn
-         Ca9TuP1W4CXthI7+OXoP5xIVdRoYToHUs49XpkcFqY4h2pGl6aZq3m6s5NotKhlmGIf3
-         FEip2oSMQHN70Hd3z2RTYCjyruPHtFhznDP+st3Zwk2uE2TlYc7T5pr6csREz3tWiZVD
-         O/s7H0BV34bXkOcxg9yvO2PYZdL5RXrYXjW784qcb+r1Xn3frdrEe8pk78I3UWDUlxX7
-         rsEOuyaDs/lALyVhdLGismdlmiTb5qfiS/TLCML6d3/LbyncGiJ/LRjIlofSs+Y/bhz3
-         RPwA==
-X-Forwarded-Encrypted: i=1; AJvYcCWSddeo1xTdiZzmF8K2MGuhusacUqxHWVss+i13ZoyOxCND/xPAxxKwAJmURtuCveSB24glFszolv0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzKcbGmPcpzX/KDEu9i14Tm8Z6ocCSJKs1UvRMkrGvKhXvueoQV
-	tiJVHlaXY31tJn0+GJflYy1YzR3nuwoJdOqeFLzcTjnN6jPio9lHFS75ktIukZO3lm3UwvvuLbK
-	5oA==
-X-Google-Smtp-Source: AGHT+IH9Y0SwBcAS02xHNq+a4IakpnWSLKqVw4P68iCQM2m6waYT1AwLAOPZPnrjzYdSpJiao+kBYkSTr34=
-X-Received: from pjb4.prod.google.com ([2002:a17:90b:2f04:b0:2ef:78ff:bc3b])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:2dc8:b0:2fa:ba3:5457
- with SMTP id 98e67ed59e1d1-2fe68ae6c4fmr17520974a91.17.1740622755379; Wed, 26
- Feb 2025 18:19:15 -0800 (PST)
+        bh=HbJ/1jLoPDWkVBe7cDWaMugTDenciqtu5nrTgQ9Zvm0=;
+        b=shn+Fk10sgtbEI6KnY45MQOD3np4lq7E6vwlHRqEonToNQpZiaWzBn39U08aMLbZ+P
+         QkbCa6QvAE0Mfld7TPqmv9mvfUsiH3B0fHlSY0tIVqarZ0L7QLqWj+USsHOXHkrHqXng
+         H2AIyMM1oJFfRkbRLCPOVEjHUmQRtTj+IUxK8+sE1GVm/hltjHjKsI1AyBDCtZzfwT4e
+         /g91B/H9wMR8ck33bpJ+z1+3q2gwTIwfnSSHQerzggKVFMhRRapMYQW4soEmh+8TyC3p
+         uT5wL/02FtUmB7fOmf+YUOQD5Cu3JxPPSgdWm6nsuz0E5TYaYEkxTcgttSu7MHgZUTCd
+         5tAw==
+X-Forwarded-Encrypted: i=1; AJvYcCWEQ5lMELySa5Ls5j4RSozENyYOmOpiOKZNk9OLrgq0RjgRgArkEQv0xxpKJeGWu5hfgaiALDzWP+M=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YztioBU/Tw3TsPVdvvVBwT9AVEMPdNobpkn6gKou74gh9whY0SU
+	XGQKDpr3/R+U/oRCnnvGDlrk2wGwMnb0MRxSJhVUhduekj3zftVpXSqXui9sgpv2eKHVECE+1lp
+	G2w==
+X-Google-Smtp-Source: AGHT+IFmgEsUJJ1z3bRk5Nf8mtm9mdRWiQdO+4qbvCwBd/hyjI3jP5eNnlt+3d6bfd4x/QDsZrTqSfxiFQY=
+X-Received: from pjbsw3.prod.google.com ([2002:a17:90b:2c83:b0:2fa:15aa:4d2b])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:56cc:b0:2f1:2fa5:1924
+ with SMTP id 98e67ed59e1d1-2fe7e39f2afmr7133368a91.26.1740622749803; Wed, 26
+ Feb 2025 18:19:09 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:23 -0800
+Date: Wed, 26 Feb 2025 18:18:20 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-8-seanjc@google.com>
-Subject: [PATCH v2 07/38] x86/acrn: Mark TSC frequency as known when using
- ACRN for calibration
+Message-ID: <20250227021855.3257188-5-seanjc@google.com>
+Subject: [PATCH v2 04/38] x86/sev: Mark TSC as reliable when configuring
+ Secure TSC
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -100,27 +100,49 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Mark the TSC frequency as known when using ACRN's PV CPUID information.
-Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sense,
-the TSC freq is explicitly provided by the hypervisor.
+Move the code to mark the TSC as reliable from sme_early_init() to
+snp_secure_tsc_init().  The only reader of TSC_RELIABLE is the aptly
+named check_system_tsc_reliable(), which runs in tsc_init(), i.e.
+after snp_secure_tsc_init().
 
+This will allow consolidating the handling of TSC_KNOWN_FREQ and
+TSC_RELIABLE when overriding the TSC calibration routine.
+
+Cc: Tom Lendacky <thomas.lendacky@amd.com>
+Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/kernel/cpu/acrn.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/x86/coco/sev/core.c      | 2 ++
+ arch/x86/mm/mem_encrypt_amd.c | 3 ---
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-index c1506cb87d8c..2da3de4d470e 100644
---- a/arch/x86/kernel/cpu/acrn.c
-+++ b/arch/x86/kernel/cpu/acrn.c
-@@ -29,6 +29,7 @@ static void __init acrn_init_platform(void)
- 	/* Install system interrupt handler for ACRN hypervisor callback */
- 	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
+diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
+index 684cef70edc1..e6ce4ca72465 100644
+--- a/arch/x86/coco/sev/core.c
++++ b/arch/x86/coco/sev/core.c
+@@ -3288,6 +3288,8 @@ void __init snp_secure_tsc_init(void)
+ 		return;
  
-+	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	tsc_register_calibration_routines(acrn_get_tsc_khz,
- 					  acrn_get_tsc_khz);
+ 	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++
+ 	rdmsrl(MSR_AMD64_GUEST_TSC_FREQ, tsc_freq_mhz);
+ 	snp_tsc_freq_khz = (unsigned long)(tsc_freq_mhz * 1000);
+ 
+diff --git a/arch/x86/mm/mem_encrypt_amd.c b/arch/x86/mm/mem_encrypt_amd.c
+index b56c5c073003..774f9677458f 100644
+--- a/arch/x86/mm/mem_encrypt_amd.c
++++ b/arch/x86/mm/mem_encrypt_amd.c
+@@ -541,9 +541,6 @@ void __init sme_early_init(void)
+ 	 * kernel mapped.
+ 	 */
+ 	snp_update_svsm_ca();
+-
+-	if (sev_status & MSR_AMD64_SNP_SECURE_TSC)
+-		setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
  }
+ 
+ void __init mem_encrypt_free_decrypted_mem(void)
 -- 
 2.48.1.711.g2feabab25a-goog
 
