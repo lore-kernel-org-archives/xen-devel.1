@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A2FFC021B8
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:26:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897578.1306330 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92825C021B8
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:26:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897611.1306340 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTbW-0005uC-9o; Thu, 27 Feb 2025 02:26:26 +0000
+	id 1tnTbn-0007Qh-I5; Thu, 27 Feb 2025 02:26:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897578.1306330; Thu, 27 Feb 2025 02:26:26 +0000
+Received: by outflank-mailman (output) from mailman id 897611.1306340; Thu, 27 Feb 2025 02:26:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTbW-0005u1-5b; Thu, 27 Feb 2025 02:26:26 +0000
-Received: by outflank-mailman (input) for mailman id 897578;
- Thu, 27 Feb 2025 02:26:24 +0000
+	id 1tnTbn-0007QW-EA; Thu, 27 Feb 2025 02:26:43 +0000
+Received: by outflank-mailman (input) for mailman id 897611;
+ Thu, 27 Feb 2025 02:26:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OOxu=VS=flex--seanjc.bounces.google.com=3r8u_ZwYKCYo6so1xqu22uzs.q20Bs1-rs9szzw676.Bs1352xsq7.25u@srs-se1.protection.inumbo.net>)
- id 1tnTUo-0005qU-Db
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:30 +0000
-Received: from mail-pj1-x104a.google.com (mail-pj1-x104a.google.com
- [2607:f8b0:4864:20::104a])
+ <SRS0=/a/g=VS=flex--seanjc.bounces.google.com=3xcu_ZwYKCaASEANJCGOOGLE.COMXEN-DEVELLISTS.XENPROJECT.ORG@srs-se1.protection.inumbo.net>)
+ id 1tnTVB-0005qU-GT
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:53 +0000
+Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
+ [2607:f8b0:4864:20::1049])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 45571ecb-f4b1-11ef-9aaf-95dc52dad729;
- Thu, 27 Feb 2025 03:19:29 +0100 (CET)
-Received: by mail-pj1-x104a.google.com with SMTP id
- 98e67ed59e1d1-2fc43be27f8so1570831a91.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:29 -0800 (PST)
+ id 529c7166-f4b1-11ef-9aaf-95dc52dad729;
+ Thu, 27 Feb 2025 03:19:51 +0100 (CET)
+Received: by mail-pj1-x1049.google.com with SMTP id
+ 98e67ed59e1d1-2fc0bc05afdso1130504a91.0
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,48 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45571ecb-f4b1-11ef-9aaf-95dc52dad729
+X-Inumbo-ID: 529c7166-f4b1-11ef-9aaf-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622767; x=1741227567; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1740622790; x=1741227590; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=cUIL6SYLHU+yTwrAtTegZ21noDNMwlKuhwHKs3VPMSg=;
-        b=bpkIl56Hgd9ZObF8Ur3HqS1ANUSqe2kP2SO9AipsYonh45flBgG0KX0UAw11OxVeFY
-         4bG+UeElb7DtRs3fzp7UYCazs5af0x89OpwsQug7+V6/dQ0w6pBdFGpAbr1/ft5S8ooE
-         wjUtSIqLCm5xVp07b2nUqlBdxa3lSRdCXx0/aEbj45U2SUUEzZLhoJUcF6zGAzCGViIg
-         lPmoloxmwHXIav28bK9TwynRfAd0sCgBTxvsHd1WChlZZJwIC/zquHnJHUKdKzN3Tmn7
-         7jKtg5AseKvziOviX5HjXVAYHOh2bEnfNrFM+J8oEbNoH6QO2C2qVMGvRzfaa2c1YXX1
-         eNlg==
+        bh=QzXAit3+eiuwe2E434PEIcPVDj3bfcCBW02+u03qap4=;
+        b=jOs9cCCVzGV/8vYkXZYZYFtS7XhUN5G9gvf0y2CpkxdjepZ+8zvrKbymut8LypWtaU
+         WMAOvlpysiX2wiUraFjYLAEqcZYlbunKQ2bPBv483AZdPHJKdoTwiCoM8hfK6eCDY0KC
+         w4+d4pVT29XYoEe/L9B+nCORBfZSERsqDnPNk/lnhx8O7aAy68MC1FxFuVFlRtYsMvFo
+         B0mVe2Zzmsn3OK5XPIeADmWco6CwppLoG56VNUgRt0LC2ZLRAOVfLvh0aW72nRSFvomV
+         oUG3er57sTQkaL0vJScxfBNh9ZTu7Vb9+ioEP/lWFb9SIFdKm1jpkeVlL/2g5GOhLCYe
+         whSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622767; x=1741227567;
+        d=1e100.net; s=20230601; t=1740622790; x=1741227590;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=cUIL6SYLHU+yTwrAtTegZ21noDNMwlKuhwHKs3VPMSg=;
-        b=FytxsfMaWf6QA/eYpw3/bWRa2ghs9PPMz2807uEi5H7wsfh4+ac5Bl3SifYPOI8edq
-         l+RGzmcdHS9DXgN7ThWNlGoQbgfOExjF3jwiPeDvzFaU8E/vujfCf8321CkdWOsq83ST
-         7m7bMvBz+rg8gLLXixvIPnPaJbc+6oxtalePCYMUrprUulMX6b6Rhnna4nxE5jp3zSGY
-         QwEHOrS3S05uvRY85f8up32ImdRw2lrKZCYkv643/myQ4tavWXZvmQo3xpxHgbNOAtBL
-         eeNgC0UnnTf16rOO55j+HCG0gHnYUhKfXZIGYfQd/zJy56h4j4pN+vKcGhATIb065Z5C
-         +xEA==
-X-Forwarded-Encrypted: i=1; AJvYcCUxqThM6v+XYntyhT5y4xfY9JIX7EcBnLzCpBqZXIHeWAn8ghBhpVqVpfS8JvfcmKzc7aMZOfs3c/A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywu5ZrYr2p0S5gC3VLXXjGq9UjcdOB6UtobpN9ZMuBVsc0q/ryL
-	e6ykpkrzgL61efVdSBCSHjZ/kN2XTe0hjJGW2TeNYgNJikaDOyXH3dQLj0w/ArBARSvU4zRCaD0
-	GBg==
-X-Google-Smtp-Source: AGHT+IHyh9LqedkCKW+Gv/tYRFdHEhi/V70ldbMXUa2l8chtlUNDSfd68q5Rf4dBrz6sq443DVBJXoiGfdY=
-X-Received: from pja6.prod.google.com ([2002:a17:90b:5486:b0:2ef:95f4:4619])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:1d44:b0:2f6:f32e:90ac
- with SMTP id 98e67ed59e1d1-2fe7e2fe521mr9393579a91.11.1740622767576; Wed, 26
- Feb 2025 18:19:27 -0800 (PST)
+        bh=QzXAit3+eiuwe2E434PEIcPVDj3bfcCBW02+u03qap4=;
+        b=EwMqwS7tUbCo/A4A58kiqF5+yId9prBY3sEZk0BoLM95sVlYmraYIaCKtXWQ6wxbxi
+         GgNwETnb3TIaZdREC1GvvcmUUDUHStTb5fDQVTO+KJKctC39m18f0xlZ7+IdWHkuQk5t
+         5SSA0dEWeGzkSe0xx7KRo0qcp/KD8iQHKKFOC+YWkWWQIeUkIAbDpQXKvBjqScFkejV1
+         HqO3nlu/p/AyySNylfyztxuUBSvtOBYPsQAijsv4sK6V+lV2V3BKdzGpkKKXuuzWdlJ9
+         g0iaPO3ucx20EgTVu1eR22pbhH7h73+gHtAc/GwWc5eNRq1D01pprkDQjJbBTyaagPWG
+         n1CA==
+X-Forwarded-Encrypted: i=1; AJvYcCXjiwdj8EQxFMjGCQ9F/mf/eNO+PWFhNlyNLUEMwHFfU94yNagywog+NdT+RoV0XuVB8JD+ozy5YDw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxPkgf+2+SRhFU1KcrULSdFrccPLyqoJQOadrG7aCdbrXVZNg9R
+	TFUiY4Z7wws0X/lfxHewpnx7kALO0QFgZWvi9k7BNtqOa7g7I30BLD1oYT9x9ZtW9gwBb+KF4j7
+	plA==
+X-Google-Smtp-Source: AGHT+IEy19UXAGhpZ6BooyEkiFGbgvHpy57ZvxRHzoGzPaLhW9PSe6CovWEb42HIAZDNRdCcii7axkfnXfc=
+X-Received: from pjbsh13.prod.google.com ([2002:a17:90b:524d:b0:2ee:53fe:d0fc])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:5385:b0:2f5:63a:449c
+ with SMTP id 98e67ed59e1d1-2fe68cf4000mr14888818a91.28.1740622789852; Wed, 26
+ Feb 2025 18:19:49 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:30 -0800
+Date: Wed, 26 Feb 2025 18:18:43 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-15-seanjc@google.com>
-Subject: [PATCH v2 14/38] x86/kvmclock: Move sched_clock save/restore helpers
- up in kvmclock.c
+Message-ID: <20250227021855.3257188-28-seanjc@google.com>
+Subject: [PATCH v2 27/38] x86/kvmclock: Enable kvmclock on APs during onlining
+ if kvmclock isn't sched_clock
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -100,156 +100,190 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Move kvmclock's sched_clock save/restore helper "up" so that they can
-(eventually) be referenced by kvm_sched_clock_init().
+In anticipation of making x86_cpuinit.early_percpu_clock_init(), i.e.
+kvm_setup_secondary_clock(), a dedicated sched_clock hook that will be
+invoked if and only if kvmclock is set as sched_clock, ensure APs enable
+their kvmclock during CPU online.  While a redundant write to the MSR is
+technically ok, skip the registration when kvmclock is sched_clock so that
+it's somewhat obvious that kvmclock *needs* to be enabled during early
+bringup when it's being used as sched_clock.
 
-No functional change intended.
+Plumb in the BSP's resume path purely for documentation purposes.  Both
+KVM (as-a-guest) and timekeeping/clocksource hook syscore_ops, and it's
+not super obvious that using KVM's hooks would be flawed.  E.g. it would
+work today, because KVM's hooks happen to run after/before timekeeping's
+hooks during suspend/resume, but that's sheer dumb luck as the order in
+which syscore_ops are invoked depends entirely on when a subsystem is
+initialized and thus registers its hooks.
+
+Opportunsitically make the registration messages more precise to help
+debug issues where kvmclock is enabled too late.
+
+Opportunstically WARN in kvmclock_{suspend,resume}() to harden against
+future bugs.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/kernel/kvmclock.c | 108 ++++++++++++++++++-------------------
- 1 file changed, 54 insertions(+), 54 deletions(-)
+ arch/x86/include/asm/kvm_para.h |  2 ++
+ arch/x86/kernel/kvm.c           | 24 +++++++++++-------
+ arch/x86/kernel/kvmclock.c      | 44 +++++++++++++++++++++++++++------
+ 3 files changed, 53 insertions(+), 17 deletions(-)
 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index aae6fba21331..c78db52ae399 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -70,6 +70,25 @@ static int kvm_set_wallclock(const struct timespec64 *now)
- 	return -ENODEV;
+diff --git a/arch/x86/include/asm/kvm_para.h b/arch/x86/include/asm/kvm_para.h
+index 8708598f5b8e..42d90bf8fde9 100644
+--- a/arch/x86/include/asm/kvm_para.h
++++ b/arch/x86/include/asm/kvm_para.h
+@@ -120,6 +120,8 @@ static inline long kvm_sev_hypercall3(unsigned int nr, unsigned long p1,
+ #ifdef CONFIG_KVM_GUEST
+ enum kvm_guest_cpu_action {
+ 	KVM_GUEST_BSP_SUSPEND,
++	KVM_GUEST_BSP_RESUME,
++	KVM_GUEST_AP_ONLINE,
+ 	KVM_GUEST_AP_OFFLINE,
+ 	KVM_GUEST_SHUTDOWN,
+ };
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 866b061ee0d9..5f093190df17 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -461,18 +461,24 @@ static void kvm_guest_cpu_offline(enum kvm_guest_cpu_action action)
+ 	kvmclock_cpu_action(action);
  }
  
-+static void kvm_register_clock(char *txt)
++static int __kvm_cpu_online(unsigned int cpu, enum kvm_guest_cpu_action action)
 +{
-+	struct pvclock_vsyscall_time_info *src = this_cpu_hvclock();
-+	u64 pa;
++	unsigned long flags;
 +
-+	if (!src)
-+		return;
-+
-+	pa = slow_virt_to_phys(&src->pvti) | 0x01ULL;
-+	wrmsrl(msr_kvm_system_time, pa);
-+	pr_debug("kvm-clock: cpu %d, msr %llx, %s", smp_processor_id(), pa, txt);
-+}
-+
-+static void kvmclock_disable(void)
-+{
-+	if (msr_kvm_system_time)
-+		native_write_msr(msr_kvm_system_time, 0, 0);
-+}
-+
- static u64 kvm_clock_read(void)
- {
- 	u64 ret;
-@@ -90,6 +109,30 @@ static noinstr u64 kvm_sched_clock_read(void)
- 	return pvclock_clocksource_read_nowd(this_cpu_pvti()) - kvm_sched_clock_offset;
- }
- 
-+static void kvm_save_sched_clock_state(void)
-+{
-+	/*
-+	 * Stop host writes to kvmclock immediately prior to suspend/hibernate.
-+	 * If the system is hibernating, then kvmclock will likely reside at a
-+	 * different physical address when the system awakens, and host writes
-+	 * to the old address prior to reconfiguring kvmclock would clobber
-+	 * random memory.
-+	 */
-+	kvmclock_disable();
++	local_irq_save(flags);
++	kvmclock_cpu_action(action);
++	kvm_guest_cpu_init();
++	local_irq_restore(flags);
++	return 0;
 +}
 +
 +#ifdef CONFIG_SMP
-+static void kvm_setup_secondary_clock(void)
-+{
-+	kvm_register_clock("secondary cpu clock");
-+}
-+#endif
 +
-+static void kvm_restore_sched_clock_state(void)
-+{
-+	kvm_register_clock("primary cpu clock, resume");
-+}
-+
- static inline void kvm_sched_clock_init(bool stable)
+ static int kvm_cpu_online(unsigned int cpu)
  {
- 	kvm_sched_clock_offset = kvm_clock_read();
-@@ -102,6 +145,17 @@ static inline void kvm_sched_clock_init(bool stable)
- 		sizeof(((struct pvclock_vcpu_time_info *)NULL)->system_time));
+-	unsigned long flags;
+-
+-	local_irq_save(flags);
+-	kvm_guest_cpu_init();
+-	local_irq_restore(flags);
+-	return 0;
++	return __kvm_cpu_online(cpu, KVM_GUEST_AP_ONLINE);
  }
  
-+void kvmclock_cpu_action(enum kvm_guest_cpu_action action)
-+{
-+	/*
-+	 * Don't disable kvmclock on the BSP during suspend.  If kvmclock is
-+	 * being used for sched_clock, then it needs to be kept alive until the
-+	 * last minute, and restored as quickly as possible after resume.
-+	 */
-+	if (action != KVM_GUEST_BSP_SUSPEND)
-+		kvmclock_disable();
-+}
-+
- /*
-  * If we don't do that, there is the possibility that the guest
-  * will calibrate under heavy load - thus, getting a lower lpj -
-@@ -161,60 +215,6 @@ static struct clocksource kvm_clock = {
- 	.enable	= kvm_cs_enable,
- };
+-#ifdef CONFIG_SMP
+-
+ static DEFINE_PER_CPU(cpumask_var_t, __pv_cpu_mask);
  
--static void kvm_register_clock(char *txt)
--{
--	struct pvclock_vsyscall_time_info *src = this_cpu_hvclock();
--	u64 pa;
--
--	if (!src)
--		return;
--
--	pa = slow_virt_to_phys(&src->pvti) | 0x01ULL;
--	wrmsrl(msr_kvm_system_time, pa);
--	pr_debug("kvm-clock: cpu %d, msr %llx, %s", smp_processor_id(), pa, txt);
--}
--
--static void kvmclock_disable(void)
--{
--	if (msr_kvm_system_time)
--		native_write_msr(msr_kvm_system_time, 0, 0);
--}
--
--static void kvm_save_sched_clock_state(void)
--{
--	/*
--	 * Stop host writes to kvmclock immediately prior to suspend/hibernate.
--	 * If the system is hibernating, then kvmclock will likely reside at a
--	 * different physical address when the system awakens, and host writes
--	 * to the old address prior to reconfiguring kvmclock would clobber
--	 * random memory.
--	 */
--	kvmclock_disable();
--}
--
--static void kvm_restore_sched_clock_state(void)
--{
--	kvm_register_clock("primary cpu clock, resume");
--}
--
--void kvmclock_cpu_action(enum kvm_guest_cpu_action action)
--{
+ static bool pv_tlb_flush_supported(void)
+@@ -737,7 +743,7 @@ static int kvm_suspend(void)
+ 
+ static void kvm_resume(void)
+ {
+-	kvm_cpu_online(raw_smp_processor_id());
++	__kvm_cpu_online(raw_smp_processor_id(), KVM_GUEST_BSP_RESUME);
+ 
+ #ifdef CONFIG_ARCH_CPUIDLE_HALTPOLL
+ 	if (kvm_para_has_feature(KVM_FEATURE_POLL_CONTROL) && has_guest_poll)
+diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
+index 0ce23f862cbd..76884dfc77f4 100644
+--- a/arch/x86/kernel/kvmclock.c
++++ b/arch/x86/kernel/kvmclock.c
+@@ -52,6 +52,7 @@ static struct pvclock_vsyscall_time_info *hvclock_mem;
+ DEFINE_PER_CPU(struct pvclock_vsyscall_time_info *, hv_clock_per_cpu);
+ EXPORT_PER_CPU_SYMBOL_GPL(hv_clock_per_cpu);
+ 
++static bool kvmclock_is_sched_clock;
+ static bool kvmclock_suspended;
+ 
+ /*
+@@ -128,7 +129,7 @@ static void kvm_save_sched_clock_state(void)
+ #ifdef CONFIG_SMP
+ static void kvm_setup_secondary_clock(void)
+ {
+-	kvm_register_clock("secondary cpu clock");
++	kvm_register_clock("secondary cpu, sched_clock setup");
+ }
+ #endif
+ 
+@@ -140,25 +141,51 @@ static void kvm_restore_sched_clock_state(void)
+ 
+ static void kvmclock_suspend(struct clocksource *cs)
+ {
++	if (WARN_ON_ONCE(kvmclock_is_sched_clock))
++		return;
++
+ 	kvmclock_suspended = true;
+ 	kvmclock_disable();
+ }
+ 
+ static void kvmclock_resume(struct clocksource *cs)
+ {
++	if (WARN_ON_ONCE(kvmclock_is_sched_clock))
++		return;
++
+ 	kvmclock_suspended = false;
+ 	kvm_register_clock("primary cpu, clocksource resume");
+ }
+ 
+ void kvmclock_cpu_action(enum kvm_guest_cpu_action action)
+ {
 -	/*
 -	 * Don't disable kvmclock on the BSP during suspend.  If kvmclock is
 -	 * being used for sched_clock, then it needs to be kept alive until the
 -	 * last minute, and restored as quickly as possible after resume.
 -	 */
 -	if (action != KVM_GUEST_BSP_SUSPEND)
--		kvmclock_disable();
--}
--
--#ifdef CONFIG_SMP
--static void kvm_setup_secondary_clock(void)
--{
--	kvm_register_clock("secondary cpu clock");
--}
--#endif
--
- static void __init kvmclock_init_mem(void)
- {
- 	unsigned long ncpus;
++	switch (action) {
++		/*
++		 * The BSP's clock is managed via clocksource suspend/resume,
++		 * to ensure it's enabled/disabled when timekeeping needs it
++		 * to be, e.g. before reading wallclock (which uses kvmclock).
++		 */
++	case KVM_GUEST_BSP_SUSPEND:
++	case KVM_GUEST_BSP_RESUME:
++		break;
++	case KVM_GUEST_AP_ONLINE:
++		/*
++		 * Secondary CPUs use dedicated sched_clock hooks to enable
++		 * kvmclock early during bringup, there's nothing to be done
++		 * when during CPU online.
++		 */
++		if (kvmclock_is_sched_clock)
++			break;
++		kvm_register_clock("secondary cpu, online");
++		break;
++	case KVM_GUEST_AP_OFFLINE:
++	case KVM_GUEST_SHUTDOWN:
+ 		kvmclock_disable();
++		break;
++	default:
++		WARN_ON_ONCE(1);
++		break;
++	}
+ }
+ 
+ /*
+@@ -313,6 +340,7 @@ static void __init kvm_sched_clock_init(bool stable)
+ 	kvm_sched_clock_offset = kvm_clock_read();
+ 	__paravirt_set_sched_clock(kvm_sched_clock_read, stable,
+ 				   kvm_save_sched_clock_state, kvm_restore_sched_clock_state);
++	kvmclock_is_sched_clock = true;
+ 
+ 	/*
+ 	 * The BSP's clock is managed via dedicated sched_clock save/restore
+@@ -356,7 +384,7 @@ void __init kvmclock_init(void)
+ 		msr_kvm_system_time, msr_kvm_wall_clock);
+ 
+ 	this_cpu_write(hv_clock_per_cpu, &hv_clock_boot[0]);
+-	kvm_register_clock("primary cpu clock");
++	kvm_register_clock("primary cpu, online");
+ 	pvclock_set_pvti_cpu0_va(hv_clock_boot);
+ 
+ 	if (kvm_para_has_feature(KVM_FEATURE_CLOCKSOURCE_STABLE_BIT)) {
 -- 
 2.48.1.711.g2feabab25a-goog
 
