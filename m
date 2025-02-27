@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A9FC19776
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:19:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897370.1306070 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C6FC19776
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:20:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897367.1306040 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUZ-00073L-MR; Thu, 27 Feb 2025 02:19:15 +0000
+	id 1tnTUV-0006JE-WF; Thu, 27 Feb 2025 02:19:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897370.1306070; Thu, 27 Feb 2025 02:19:15 +0000
+Received: by outflank-mailman (output) from mailman id 897367.1306040; Thu, 27 Feb 2025 02:19:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUZ-000738-JK; Thu, 27 Feb 2025 02:19:15 +0000
-Received: by outflank-mailman (input) for mailman id 897370;
- Thu, 27 Feb 2025 02:19:14 +0000
+	id 1tnTUV-0006J7-Sf; Thu, 27 Feb 2025 02:19:11 +0000
+Received: by outflank-mailman (input) for mailman id 897367;
+ Thu, 27 Feb 2025 02:19:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WFyt=VS=flex--seanjc.bounces.google.com=3n8u_ZwYKCXoqcYlhaemmejc.amkvcl-bctcjjgqrq.vclnpmhcar.mpe@srs-se1.protection.inumbo.net>)
- id 1tnTUY-00063X-Lx
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:14 +0000
+ <SRS0=2ipX=VS=flex--seanjc.bounces.google.com=3msu_ZwYKCXUlXTgcVZhhZeX.VhfqXg-WXoXeeblml.qXgikhcXVm.hkZ@srs-se1.protection.inumbo.net>)
+ id 1tnTUU-00063X-99
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:10 +0000
 Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
  [2607:f8b0:4864:20::1049])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3bdf564a-f4b1-11ef-9898-31a8f345e629;
- Thu, 27 Feb 2025 03:19:13 +0100 (CET)
+ id 38b008da-f4b1-11ef-9898-31a8f345e629;
+ Thu, 27 Feb 2025 03:19:07 +0100 (CET)
 Received: by mail-pj1-x1049.google.com with SMTP id
- 98e67ed59e1d1-2fe86c01f4aso1065320a91.2
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:13 -0800 (PST)
+ 98e67ed59e1d1-2fc4dc34291so1060409a91.3
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,47 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3bdf564a-f4b1-11ef-9898-31a8f345e629
+X-Inumbo-ID: 38b008da-f4b1-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622752; x=1741227552; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1740622746; x=1741227546; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=JV0vL5ay0SjXSCwSvRRqMw5uYQ06F8yr+AS2fSIuB98=;
-        b=pWLcT2rKPGHuSwHWKRkTx2avZ+yfI2qcUh53fODALnArzXGoBp2/gmbd1urtjXQd7i
-         TeHStqrHY4xxn0RC+AZUrXI+dGErIt+pIym/XjWy+XT9TVn+3kV38bjeFykHwd2lt0ff
-         fCuiILxwOtlVbSfzhD+/G2TQsP25fiAAUTVE14+8vDsD4bxIhyXIWSwWL/QfH/zEaM3j
-         mobB1K+4B3N3ggameCADMSbRKPGaNYnufliuSvjX3fQ5PUiThE3996Wak+MUdqh9kO4j
-         +LQ6xnEiWwmi9FjR0HB0JwDM0t66xUkHBHHM+i7q6S1AG4+EfXHk1FUg4d/6SAJURn8/
-         RXFA==
+        bh=Dwfv1w4tsOCmi3NCgULhIMD4IZcsOFfau2ULDYaMRLg=;
+        b=N1qfhRChPdcad4Avh2DERSe+cjhEEl7TUjETVBdCtu8HuwYGn+OGofPczp6jyG0XG5
+         qWONUxxJOcY/ZM8xSR7cXuAb+fKheA4B53nwqWZKe9pgoFc7z7dOSknTVrIUz9NaUDlf
+         NQSFhl49AxbqZgsI2DbjbCpr8+3JJnDRf1z+3ay9bMPFrTaLJpAkKFSLiw9w1aeF4q2V
+         Uc+N6H0E1gK7KNiRwrzCQ/j/M3SE8/84GgI3jWnrpdZY6XvyCOICovIUbkqFolxH/OH7
+         vvFEKngbFmGw2x+vk2fqjyt0Mo/DRGHPczUOfQps9Ahvh0N8RUR+qC+VMoKkzublphFI
+         pJCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622752; x=1741227552;
+        d=1e100.net; s=20230601; t=1740622746; x=1741227546;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JV0vL5ay0SjXSCwSvRRqMw5uYQ06F8yr+AS2fSIuB98=;
-        b=nZQ/MS2/hy04fPYk3ONX0Msty4s3+f5DZN+S/jo+2wA99tTJzGze7yyHSAbhF1ak/i
-         0njdgxscZkOqKxkpbOyVG/UGJJsqOrFak+/6EVsAoWavehXRfJ539nEjuFIu+XNJWVq3
-         LF7a9LpUV/y9jPnAZ8RUKOA+S09cEz3zmW79UL6E0mbswla9T75nAJgvCd7iApVs4jiu
-         kmDpycyYnzoqJugZ/07R2s8r7+0TjZz34eEnjDR3vRD72MDIWDNEu5inTcYaW70Pq6JA
-         XspSAeJv/QqgW5YTLcF6iVLlH0d7tN0D1l3nTuiyxai26JAVRXOBNNTk8pY4bCP+Alr9
-         gF4Q==
-X-Forwarded-Encrypted: i=1; AJvYcCXDnanQS/k7nhziVQ460TpZrTEn6qfY1BxJI4zroFyllPN6jkO7NbnpfW9y+1MNH4wgsPUITd0Exhk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YybD9IFfG+F/1q8bFPBPX/Z7Z4pPXBbIRHskvRnHgqPnZbQI5I+
-	Y+PDWlXBqeugGYdPPoHdJV93CvtPsQFKTt4TgHiDdeiAmoGHpNaDUU30DOrfVXeoOZ+XE78f6YB
-	o3Q==
-X-Google-Smtp-Source: AGHT+IEvNph7CiMpObG1u+jVz8JxqMtO0a8+Wef5S19XtPgcpuEdHq4SZt8ZBvsmjyd64opTzInKcYcJX7E=
-X-Received: from pjbsw14.prod.google.com ([2002:a17:90b:2c8e:b0:2fc:11a0:c546])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:3b48:b0:2fc:9967:acd8
- with SMTP id 98e67ed59e1d1-2fe7e3b327fmr9422757a91.33.1740622751672; Wed, 26
- Feb 2025 18:19:11 -0800 (PST)
+        bh=Dwfv1w4tsOCmi3NCgULhIMD4IZcsOFfau2ULDYaMRLg=;
+        b=tTy7M2VTH35fWjiEgUatkdGZwu1i4qjm2//1MjNHKMal/Akjq/9g60qRfdZ267q5LF
+         ib1hMFxKOW9tXGwehO3zno8nGf/ewVXQCKJbnwx6CMUMfGxXBGDKoecD92fiBwPrfb3C
+         egW5rohMLZ0ewKItjmQkrx35xIrEPrbyYmV1eRfyjpt5QGBVz4Bx5vqjfG0KHNksAjQL
+         auO5X9KbRMg+24R6PZGT2V/dTFuNQw35PVryt6biaRFC1f1DZe6rfjsL/ni0sOJNx088
+         CjLTaNmLrK+98z3mHkOz6iZSabZkkZz6qrJPPsKL3bUbBW0jZtm0bPfVGof+AbSyFOHy
+         uWFQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX11zNIkKgYzwpthKLwbWC3s4W82QYAkNTe5OLdVvrDJ9zCgW7LEPlDkbnbeLQnZAPwZVPxPmeZKiQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzdKN4I2h7lV4Xtve0komaWpLzeVMSV376cw3LziQo0+OmsoZYB
+	C/6YGrbjsvvQFRWA9OvRiy3gjEflUkwI2W7Vls9b2z5+PCyQuhRDTpoz0sHVuE4WPYXTMXm39wf
+	z8w==
+X-Google-Smtp-Source: AGHT+IH6wZ/mGewjHTQw2W+siQpDLDG/G2QvagXg40e21ebxNRSjKEBR8DQxe4UjV6eqsE0kkd3QFpygjvI=
+X-Received: from pjbsn14.prod.google.com ([2002:a17:90b:2e8e:b0:2fc:15bf:92f6])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:1d83:b0:2fc:3264:3666
+ with SMTP id 98e67ed59e1d1-2fce7b221c3mr36215820a91.30.1740622746375; Wed, 26
+ Feb 2025 18:19:06 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:21 -0800
+Date: Wed, 26 Feb 2025 18:18:18 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-6-seanjc@google.com>
-Subject: [PATCH v2 05/38] x86/sev: Move check for SNP Secure TSC support to tsc_early_init()
+Message-ID: <20250227021855.3257188-3-seanjc@google.com>
+Subject: [PATCH v2 02/38] x86/tsc: Add standalone helper for getting CPU
+ frequency from CPUID
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -99,49 +100,99 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Move the check on having a Secure TSC to the common tsc_early_init() so
-that it's obvious that having a Secure TSC is conditional, and to prepare
-for adding TDX to the mix (blindly initializing *both* SNP and TDX TSC
-logic looks especially weird).
+Extract the guts of cpu_khz_from_cpuid() to a standalone helper that
+doesn't restrict the usage to Intel CPUs.  This will allow sharing the
+core logic with kvmclock, as (a) CPUID.0x16 may be enumerated alongside
+kvmclock, and (b) KVM generally doesn't restrict CPUID based on vendor.
 
 No functional change intended.
 
-Cc: Tom Lendacky <thomas.lendacky@amd.com>
-Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/coco/sev/core.c | 3 ---
- arch/x86/kernel/tsc.c    | 3 ++-
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ arch/x86/include/asm/tsc.h |  1 +
+ arch/x86/kernel/tsc.c      | 37 +++++++++++++++++++++++--------------
+ 2 files changed, 24 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
-index e6ce4ca72465..dab386f782ce 100644
---- a/arch/x86/coco/sev/core.c
-+++ b/arch/x86/coco/sev/core.c
-@@ -3284,9 +3284,6 @@ void __init snp_secure_tsc_init(void)
- {
- 	unsigned long long tsc_freq_mhz;
+diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
+index a4d84f721775..c3a14df46327 100644
+--- a/arch/x86/include/asm/tsc.h
++++ b/arch/x86/include/asm/tsc.h
+@@ -36,6 +36,7 @@ struct cpuid_tsc_info {
+ };
+ extern int cpuid_get_tsc_info(struct cpuid_tsc_info *info);
+ extern int cpuid_get_tsc_freq(struct cpuid_tsc_info *info);
++extern int cpuid_get_cpu_freq(unsigned int *cpu_khz);
  
--	if (!cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC))
--		return;
--
- 	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
- 
+ extern void tsc_early_init(void);
+ extern void tsc_init(void);
 diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index d65e85929d3e..6a011cd1ff94 100644
+index 93713eb81f52..bb4619148161 100644
 --- a/arch/x86/kernel/tsc.c
 +++ b/arch/x86/kernel/tsc.c
-@@ -1563,7 +1563,8 @@ void __init tsc_early_init(void)
- 	if (is_early_uv_system())
- 		return;
+@@ -688,6 +688,24 @@ int cpuid_get_tsc_freq(struct cpuid_tsc_info *info)
+ 	return 0;
+ }
  
--	snp_secure_tsc_init();
-+	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC))
-+		snp_secure_tsc_init();
++int cpuid_get_cpu_freq(unsigned int *cpu_khz)
++{
++	unsigned int eax_base_mhz, ebx, ecx, edx;
++
++	*cpu_khz = 0;
++
++	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
++		return -ENOENT;
++
++	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
++
++	if (!eax_base_mhz)
++		return -ENOENT;
++
++	*cpu_khz = eax_base_mhz * 1000;
++	return 0;
++}
++
+ /**
+  * native_calibrate_tsc - determine TSC frequency
+  * Determine TSC frequency via CPUID, else return 0.
+@@ -723,13 +741,8 @@ unsigned long native_calibrate_tsc(void)
+ 	 * clock, but we can easily calculate it to a high degree of accuracy
+ 	 * by considering the crystal ratio and the CPU speed.
+ 	 */
+-	if (!info.crystal_khz && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
+-		unsigned int eax_base_mhz, ebx, ecx, edx;
+-
+-		cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
+-		info.crystal_khz = eax_base_mhz * 1000 *
+-			info.denominator / info.numerator;
+-	}
++	if (!info.crystal_khz && !cpuid_get_cpu_freq(&cpu_khz))
++		info.crystal_khz = cpu_khz * info.denominator / info.numerator;
  
- 	if (!determine_cpu_tsc_frequencies(true))
- 		return;
+ 	if (!info.crystal_khz)
+ 		return 0;
+@@ -756,19 +769,15 @@ unsigned long native_calibrate_tsc(void)
+ 
+ static unsigned long cpu_khz_from_cpuid(void)
+ {
+-	unsigned int eax_base_mhz, ebx_max_mhz, ecx_bus_mhz, edx;
++	unsigned int cpu_khz;
+ 
+ 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
+ 		return 0;
+ 
+-	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
++	if (cpuid_get_cpu_freq(&cpu_khz))
+ 		return 0;
+ 
+-	eax_base_mhz = ebx_max_mhz = ecx_bus_mhz = edx = 0;
+-
+-	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx_max_mhz, &ecx_bus_mhz, &edx);
+-
+-	return eax_base_mhz * 1000;
++	return cpu_khz;
+ }
+ 
+ /*
 -- 
 2.48.1.711.g2feabab25a-goog
 
