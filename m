@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A979CC19776
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:20:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897383.1306131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A66C021B8
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:25:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897452.1306145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUk-0000bs-Gd; Thu, 27 Feb 2025 02:19:26 +0000
+	id 1tnTaf-0004p5-BV; Thu, 27 Feb 2025 02:25:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897383.1306131; Thu, 27 Feb 2025 02:19:26 +0000
+Received: by outflank-mailman (output) from mailman id 897452.1306145; Thu, 27 Feb 2025 02:25:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUk-0000bB-6F; Thu, 27 Feb 2025 02:19:26 +0000
-Received: by outflank-mailman (input) for mailman id 897383;
- Thu, 27 Feb 2025 02:19:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tnTaf-0004oA-6e; Thu, 27 Feb 2025 02:25:33 +0000
+Received: by outflank-mailman (input) for mailman id 897452;
+ Thu, 27 Feb 2025 02:25:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2l1a=VS=flex--seanjc.bounces.google.com=3qsu_ZwYKCYU1njwslpxxpun.lxv6nw-mn4nuur121.6nwy0xsnl2.x0p@srs-se1.protection.inumbo.net>)
- id 1tnTUi-0005qU-GS
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:24 +0000
-Received: from mail-pj1-x104a.google.com (mail-pj1-x104a.google.com
- [2607:f8b0:4864:20::104a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 422f8eb7-f4b1-11ef-9aaf-95dc52dad729;
- Thu, 27 Feb 2025 03:19:23 +0100 (CET)
-Received: by mail-pj1-x104a.google.com with SMTP id
- 98e67ed59e1d1-2fce2954a10so1535179a91.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:23 -0800 (PST)
+ <SRS0=i3lw=VS=flex--seanjc.bounces.google.com=3zsu_ZwYKCakbNJWSLPXXPUN.LXVgNW-MNeNUURbcb.gNWYaXSNLc.XaP@srs-se1.protection.inumbo.net>)
+ id 1tnTVJ-00063X-Iv
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:20:01 +0000
+Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
+ [2607:f8b0:4864:20::1049])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 57d499a2-f4b1-11ef-9898-31a8f345e629;
+ Thu, 27 Feb 2025 03:20:00 +0100 (CET)
+Received: by mail-pj1-x1049.google.com with SMTP id
+ 98e67ed59e1d1-2fe870bc003so993596a91.1
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:20:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,47 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 422f8eb7-f4b1-11ef-9aaf-95dc52dad729
+X-Inumbo-ID: 57d499a2-f4b1-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622762; x=1741227562; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1740622798; x=1741227598; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=yPGNLLFa/vXB2a0UM8EIYJpWd3IhBx8wcQJSj3RCAHc=;
-        b=B/dey7IAOjVMKUiMDXw/wfJVZDWrZfZQUbhf/yuGxaTxUrlK9I56kfgXiWXt47VMGV
-         ZAvKpaAQZOcABMA91ame9QQ6OJJA/XuzZjsbCI1bB2ABAzFYQaPAi7sjGvQ5mr9tIHQ6
-         5+5Y1LD3ayWjKF6nrpUMV3iPn75qh3bcDUGP4i0dSQtD6/IyTrZ8HGOaLVcU5oDMA8Z/
-         naJhyQEbHi/7m2WyEW6Hxx5Mro0EavAlcE97zYmuus5M9NJkHC0kdgw0gy+spkW1+cPv
-         FA1VeI/WGMtt4Lnx5hQEFMhiCtxv6wNhZpX2P+bxgv7Vs5hddFXfti5Pr081zp1114pZ
-         Zm6w==
+        bh=LZJJLySVHQgVgABAB7C0XZjDtBlLYwz9ES+Z1vP/8LE=;
+        b=3YPN1FNhKSXnlzOxt6Xjm0bBGCTIyOASokGc5GWGO5cGMuroXWZo27cm1agedkNm0v
+         25bObTBqK3lsKKvPtcz2NbvvUcncBwOT/jEzrzi9ueVXUqzvqBsUoWbhTrkuGhzXHAg+
+         u6hyjXV2m3Nq3PkhnXp0fspzvEhkENptpCakt2k1JI6X8n7Oxr96oteggWp26POL6Yvb
+         E76TxfhFDhOC+xZLvhY41UyH3D8OXdYDMQjxpdmzVEie3XAJV81lliE/TMQAqiMWS3z7
+         vWidnVoj5f30+4vSM+jhvqKXKtTzyWeu40Q0uRiYEGxRMIlc+Vo8RTUIeKUaS6fngx8S
+         VX9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622762; x=1741227562;
+        d=1e100.net; s=20230601; t=1740622798; x=1741227598;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yPGNLLFa/vXB2a0UM8EIYJpWd3IhBx8wcQJSj3RCAHc=;
-        b=AM/+8yvv1KMX+81tY5t8KeroiRBCr67YnyyrPL/pkR09NY4T9EIZh1uZLXuyqvf9JJ
-         kXjxEpcKC+XWODsAaaswI+3Zdm8Etuk2XIfgmSGXi5qlHMLWohM2MLaisdC8upvmuus9
-         mIBTeUKnJ//nXjlfHYom2L5lXITIb8cFo/Py+lE2zQSlYKx01CHhRTyuPgouxsOcOkWX
-         vTxQb3sEOHpB+RoUpGzgYtzGHyJY206V906rIXE6qCzOfgJnBlN5ziC/rkptkVyIsfUa
-         7qONIBsYh2YaH6hrbJF+TsUpULzGiHJHwZ2DtZG1xbZewsIsmfdr0JKY9qwBqyWLpRRc
-         BbWg==
-X-Forwarded-Encrypted: i=1; AJvYcCXC+piLYOW4u2C6h9cPGnT998aSpfqIpBtUymA/ewptwtPJbu3t05GROrveDFLbwbzaQfhjhtX0l88=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwdUOUq00pNyBGf2FHSsrSgpT6RmYebG9DHRa34T0OsdcRJeR7t
-	bXRCQUnUyfYgv3KG1Y0B73v4QgpSyvMjGZ42FqZH+Dgb9dQiKPUbbFkRwVXnhKTSU4eIbHKmnoR
-	3LQ==
-X-Google-Smtp-Source: AGHT+IGTG4bhtwk6xF9NkwSwRr4MZ0JMu1OW/uXbFyNTNSUBj4feLwfxPugt+I59qi4711mZsSVJuOvx1D0=
-X-Received: from pjbqn3.prod.google.com ([2002:a17:90b:3d43:b0:2ea:5469:76c2])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90a:fa14:b0:2fe:84d6:cdfc
- with SMTP id 98e67ed59e1d1-2fe84d6cf88mr6952534a91.35.1740622762299; Wed, 26
- Feb 2025 18:19:22 -0800 (PST)
+        bh=LZJJLySVHQgVgABAB7C0XZjDtBlLYwz9ES+Z1vP/8LE=;
+        b=l1cDNYBZo4yJlJo9j9OlguNOrpc6Fmi1bwlYGfnNeOHPHEqj7GwpCY+1GYztpS8mxB
+         YRFDGRsR57DVk1d+v8sUMfuje4QMp6UJtk8xgfEozNFPvnTR0moh0U/YXzWkNJMtdjlF
+         o4wFc/LA5FQl/d7DkFHTcP7ZnzdshKm2vPCyq5aOul2tOtSzSQUU8bCh07ssJAVqIiji
+         bohUC/Nexg3aY20jq73TFkvMVD2lJVxTgoBXmSfWb9OAWz3Y44vgdvMwAxTVXkR9J9kH
+         05Z1+hJxNMcjTpUE8Wth08Jmx1XlptFTVs9M9QNofDN41ErTJNZG8EwPnjemPhAJnB4x
+         QQlw==
+X-Forwarded-Encrypted: i=1; AJvYcCVb9c0WAjt3aIiNi+N1lotTcGcSnAfiFr6cU6iHr2HhilUu4JT8cY2P/4cDqyvvG22jCTkiGaP9Ny0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwEsB805hooLv1UWv1qbZiCt6jkOIlKKeRgvhuR3ZhKN59nCk+v
+	7+IiOMRC7lWRpjlHaUPRJ3NQnvYO9VZqNfnLxT+mLXeoYbbliE/KzNeowOUQlhub7Lr9hrbldE+
+	hAw==
+X-Google-Smtp-Source: AGHT+IGhmfOgzOy0w88MLax4aQJq7WSM6/RTmeD/HK48z8QB3SAzs8w4kTiAhr4wwBRMQkXZhflq/qsZ2GU=
+X-Received: from pjtq6.prod.google.com ([2002:a17:90a:c106:b0:2fc:11a0:c53f])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:570c:b0:2fa:2c61:3e5a
+ with SMTP id 98e67ed59e1d1-2fea12c36b0mr2515446a91.10.1740622798574; Wed, 26
+ Feb 2025 18:19:58 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:27 -0800
+Date: Wed, 26 Feb 2025 18:18:48 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-12-seanjc@google.com>
-Subject: [PATCH v2 11/38] x86/kvmclock: Setup kvmclock for secondary CPUs iff CONFIG_SMP=y
+Message-ID: <20250227021855.3257188-33-seanjc@google.com>
+Subject: [PATCH v2 32/38] x86/tsc: Rejects attempts to override TSC
+ calibration with lesser routine
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -99,39 +100,42 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Gate kvmclock's secondary CPU code on CONFIG_SMP, not CONFIG_X86_LOCAL_APIC.
-Originally, kvmclock piggybacked PV APIC ops to setup secondary CPUs.
-When that wart was fixed by commit df156f90a0f9 ("x86: Introduce
-x86_cpuinit.early_percpu_clock_init hook"), the dependency on a local APIC
-got carried forward unnecessarily.
+When registering a TSC frequency calibration routine, sanity check that
+the incoming routine is as robust as the outgoing routine, and reject the
+incoming routine if the sanity check fails.
+
+Because native calibration routines only mark the TSC frequency as known
+and reliable when they actually run, the effective progression of
+capabilities is: None (native) => Known and maybe Reliable (PV) =>
+Known and Reliable (CoCo).  Violating that progression for a PV override
+is relatively benign, but messing up the progression when CoCo is
+involved is more problematic, as it likely means a trusted source of
+information (hardware/firmware) is being discarded in favor of a less
+trusted source (hypervisor).
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/kernel/kvmclock.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/kernel/tsc.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index b898b95a7d50..80d1a06609c8 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -186,7 +186,7 @@ static void kvm_restore_sched_clock_state(void)
- 	kvm_register_clock("primary cpu clock, resume");
- }
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index be58df4fef66..ebcfaf7dcd38 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -1309,8 +1309,13 @@ void tsc_register_calibration_routines(unsigned long (*calibrate_tsc)(void),
  
--#ifdef CONFIG_X86_LOCAL_APIC
-+#ifdef CONFIG_SMP
- static void kvm_setup_secondary_clock(void)
- {
- 	kvm_register_clock("secondary cpu clock");
-@@ -324,7 +324,7 @@ void __init kvmclock_init(void)
+ 	if (properties & TSC_FREQUENCY_KNOWN)
+ 		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++	else if (WARN_ON(boot_cpu_has(X86_FEATURE_TSC_KNOWN_FREQ)))
++		return;
++
+ 	if (properties & TSC_RELIABLE)
+ 		setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++	else if (WARN_ON(boot_cpu_has(X86_FEATURE_TSC_RELIABLE)))
++		return;
  
- 	x86_platform.get_wallclock = kvm_get_wallclock;
- 	x86_platform.set_wallclock = kvm_set_wallclock;
--#ifdef CONFIG_X86_LOCAL_APIC
-+#ifdef CONFIG_SMP
- 	x86_cpuinit.early_percpu_clock_init = kvm_setup_secondary_clock;
- #endif
- 	x86_platform.save_sched_clock_state = kvm_save_sched_clock_state;
+ 	x86_platform.calibrate_tsc = calibrate_tsc;
+ 	if (calibrate_cpu)
 -- 
 2.48.1.711.g2feabab25a-goog
 
