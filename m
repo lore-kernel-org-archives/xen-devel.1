@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 528DFC19F32
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:25:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897460.1306174 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8392EC021B8
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:25:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897470.1306190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTaq-0005xn-75; Thu, 27 Feb 2025 02:25:44 +0000
+	id 1tnTav-0006mE-Fk; Thu, 27 Feb 2025 02:25:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897460.1306174; Thu, 27 Feb 2025 02:25:44 +0000
+Received: by outflank-mailman (output) from mailman id 897470.1306190; Thu, 27 Feb 2025 02:25:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTaq-0005xQ-2F; Thu, 27 Feb 2025 02:25:44 +0000
-Received: by outflank-mailman (input) for mailman id 897460;
- Thu, 27 Feb 2025 02:25:42 +0000
+	id 1tnTav-0006lw-Bv; Thu, 27 Feb 2025 02:25:49 +0000
+Received: by outflank-mailman (input) for mailman id 897470;
+ Thu, 27 Feb 2025 02:25:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=P3Qo=VS=flex--seanjc.bounces.google.com=3ucu_ZwYKCZQG2yB704CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-se1.protection.inumbo.net>)
- id 1tnTV2-0005qU-FT
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:44 +0000
-Received: from mail-pl1-x64a.google.com (mail-pl1-x64a.google.com
- [2607:f8b0:4864:20::64a])
+ <SRS0=gOoK=VS=flex--seanjc.bounces.google.com=30Mu_ZwYKCasdPLYUNRZZRWP.NZXiPY-OPgPWWTded.iPYacZUPNe.ZcR@srs-se1.protection.inumbo.net>)
+ id 1tnTVK-0005qU-BD
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:20:02 +0000
+Received: from mail-pj1-x104a.google.com (mail-pj1-x104a.google.com
+ [2607:f8b0:4864:20::104a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b84a399-f4b1-11ef-9aaf-95dc52dad729;
- Thu, 27 Feb 2025 03:19:39 +0100 (CET)
-Received: by mail-pl1-x64a.google.com with SMTP id
- d9443c01a7336-2217a4bfcc7so6991145ad.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:39 -0800 (PST)
+ id 58d77496-f4b1-11ef-9aaf-95dc52dad729;
+ Thu, 27 Feb 2025 03:20:01 +0100 (CET)
+Received: by mail-pj1-x104a.google.com with SMTP id
+ 98e67ed59e1d1-2fe98fad333so1066307a91.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:20:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,47 +42,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b84a399-f4b1-11ef-9aaf-95dc52dad729
+X-Inumbo-ID: 58d77496-f4b1-11ef-9aaf-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622778; x=1741227578; darn=lists.xenproject.org;
+        d=google.com; s=20230601; t=1740622800; x=1741227600; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fan7xWhbYPUjoe6Gj73DFLAXBBtIUty3w4hEBXyAFt4=;
-        b=uN1liozK+r1vGE8azzH9vy6u2FEILmjHx3OBBoSxV9e0UnzrgzYrTI6vSQf9glFgO8
-         A/EURcOmx+94RDs3lDvDnN6KsVJkEu80deNqWvEUxBGE8ZFVi7XQdYgWHOr7vF313LMO
-         za3D08j/hyJEVu18Jes8duXg019uPbI464JqU445eJ/FhDW12NN6FR7J2RbFoR3bAszY
-         V9ppLjv6VzAHnbu7d9duLOO+CXk0BE4xP4E0xq4a/2xVcOhPhuNPGGK2cb2LzBppYaKX
-         JNGvHnnYgEpRWvqkDBTVfqQ5yaM7VDFQuKjswcwhzytpoeiIa0/DsB79eWgWLS5BGMz+
-         e+Ng==
+        bh=SUWURP6DS00BmWQuQkka/ewYMygd0uN/XlEQWE3xarE=;
+        b=1SwvhmWWtXw3Y02jVM9OXi2DMHZlOTX4lVGk580BiDJ/dZX7fDCIwYBIVS3mdltBb+
+         g/62CiA95WoicGEGR5sAjmaunnDYtD0NDoS6W7LxbGW6m1l4FF8rZz2+hPtPL08F84xd
+         psacq1srYs4V1EL+lT1/4wmpGvrkCBJTXsmeIx4AiftR0/Y/lype2h2D89nGZYzSINbJ
+         L5XuKQpLxGrQb3GAV5WTOPXHHelAAro9bYe7wV9pYAzvo/ZDPusMGl2zjBe5k18WeLkf
+         BLYhrXBQnckWYYgZDF8khDtvAGYoUc1XE18YgGvaaKJUmAcWRcjOOVtoow7h3MQhw7BS
+         p1Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622778; x=1741227578;
+        d=1e100.net; s=20230601; t=1740622800; x=1741227600;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Fan7xWhbYPUjoe6Gj73DFLAXBBtIUty3w4hEBXyAFt4=;
-        b=JSoODSdzGou92nXSt5S1/e2WtiNhjdboL2nlSZpni6eLTpApF9plVZWUU+ZlS5/G1Q
-         P9q1yx7bd0qPNPe8C4V5ebNCRXBiVpsIDFfbqiVLMXTjt/SeihPCp9q/nQVoDxskfu5D
-         BSfusUYZJTHwwtsn3hS9wWjYGPEVsF/NDzQesIoXbN25v/IddeD2yBg89gndvv/GmWPP
-         p5UPi1jdRmRTrgFsGKuL6d1VN6JpmsyfYK7MH/zP1mGBE50CYkTnbqUcNkhNb8/jOaA2
-         eWOWDb9b8HdSQYtoMgQaIJIA6uUi3JbCpsyz8QazXfkPuT3GG4Eo8eOFkvh1GeA9F+uc
-         M2Og==
-X-Forwarded-Encrypted: i=1; AJvYcCVzoa1ix3Um0RKLufwkfTErtiuedd6FGHhr1TZ2q1LBF7hFspiMrc5Ryx/HR2mHPwJe7bc0j3C4gqA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz8xjbvYmZtC3qLbIsSwdM4vwScX4ntSTchnzjLzUBkRg0gptz2
-	RIrpnPHeShCheBXNM08AgQwanacDJnlT9w19nQU/a4LVc0T52iU05Ucwk8bigTjT0UH+t2QEz8P
-	E4g==
-X-Google-Smtp-Source: AGHT+IEIDOZ4TbuvBdNqbq0BRf/iBYYL2tXyd/xxECXyr6rznFcwd1mvvnFfD4EHjsDge5bCz6C8+YGYPK0=
-X-Received: from plbje3.prod.google.com ([2002:a17:903:2643:b0:223:4e55:d29a])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:e80d:b0:220:f5d7:6405
- with SMTP id d9443c01a7336-221a0edbfc3mr358957175ad.16.1740622777972; Wed, 26
- Feb 2025 18:19:37 -0800 (PST)
+        bh=SUWURP6DS00BmWQuQkka/ewYMygd0uN/XlEQWE3xarE=;
+        b=JK3oLNRQGC7oFhiscrR/yBiz7DvT78cVv1YgtQPKwLQn6bB6pluUxY5ruLYJXdQAL+
+         4f4TmHSaNzpeuzZnu88nvpQrxBke9txCB3ixFHfFMoxe8WXD719blpSgcSfjQ4CHrX+T
+         YVx8JFpMb1crYay1cVOODmpNoXnxPF5Guc9Kt6OO54fLoSyE15gJpZDaVXjnDQmN25g9
+         dHEDVTYjhSI4GCoj2eH8YwEJrnM/FB9JSeMpeSL5G5/+yNUZNYMmraDwEBF/Zo1Avn46
+         cQJrhDUfbTGQ5UjfHl+wDj7z2F6vF7C0vmvC3AqTTszrxoJ5H/5OncesD3Z/9uC8MGOY
+         y+IA==
+X-Forwarded-Encrypted: i=1; AJvYcCVJgNtI712FRPty8INGVHuEmIqiMuepl5jNzemvIR/lsrzmIp3oNPX1RXGzW2sEwPCa70DMRA9JSeM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyKlkQ0mfD/G6iaI+wzYjd3u0HsuksRPP4fvdAqwA2ery3CvWaB
+	SU+aS1wTda+64ZwbqRYBTr7vWECCag8Er8TYsJSzLBrCwDvOTRsUotTTZ500ig0q7uAaj+ludS5
+	rUA==
+X-Google-Smtp-Source: AGHT+IEaJegSwuz7gp17gUBIq0YV/a5p90hmpWu2RxMMtE/LMlRmTHKg61dycPOdBb/l8JsfSEdKtOPrkAY=
+X-Received: from pjboh8.prod.google.com ([2002:a17:90b:3a48:b0:2fc:2b96:2d4b])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:4fcf:b0:2f8:34df:5652
+ with SMTP id 98e67ed59e1d1-2fce78beb41mr33366155a91.21.1740622800327; Wed, 26
+ Feb 2025 18:20:00 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:36 -0800
+Date: Wed, 26 Feb 2025 18:18:49 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-21-seanjc@google.com>
-Subject: [PATCH v2 20/38] x86/xen/time: Mark xen_setup_vsyscall_time_info() as __init
+Message-ID: <20250227021855.3257188-34-seanjc@google.com>
+Subject: [PATCH v2 33/38] x86/kvmclock: Mark TSC as reliable when it's
+ constant and nonstop
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -99,28 +100,82 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Annotate xen_setup_vsyscall_time_info() as being used only during kernel
-initialization; it's called only by xen_time_init(), which is already
-tagged __init.
+Mark the TSC as reliable if the hypervisor (KVM) has enumerated the TSC
+as constant and nonstop, and the admin hasn't explicitly marked the TSC
+as unstable.  Like most (all?) virtualization setups, any secondary
+clocksource that's used as a watchdog is guaranteed to be less reliable
+than a constant, nonstop TSC, as all clocksources the kernel uses as a
+watchdog are all but guaranteed to be emulated when running as a KVM
+guest.  I.e. any observed discrepancies between the TSC and watchdog will
+be due to jitter in the watchdog.
+
+This is especially true for KVM, as the watchdog clocksource is usually
+emulated in host userspace, i.e. reading the clock incurs a roundtrip
+cost of thousands of cycles.
+
+Marking the TSC reliable addresses a flaw where the TSC will occasionally
+be marked unstable if the host is under moderate/heavy load.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/xen/time.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/kvmclock.c | 29 ++++++++++++++++-------------
+ 1 file changed, 16 insertions(+), 13 deletions(-)
 
-diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
-index 3179f850352d..13e5888c4501 100644
---- a/arch/x86/xen/time.c
-+++ b/arch/x86/xen/time.c
-@@ -441,7 +441,7 @@ void xen_restore_time_memory_area(void)
- 	xen_sched_clock_offset = xen_clocksource_read() - xen_clock_value_saved;
- }
+diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
+index ce676e735ced..b924b19e8f0f 100644
+--- a/arch/x86/kernel/kvmclock.c
++++ b/arch/x86/kernel/kvmclock.c
+@@ -362,6 +362,7 @@ static void __init kvm_sched_clock_init(bool stable)
  
--static void xen_setup_vsyscall_time_info(void)
-+static void __init xen_setup_vsyscall_time_info(void)
+ void __init kvmclock_init(void)
  {
- 	struct vcpu_register_time_memory_area t;
- 	struct pvclock_vsyscall_time_info *ti;
++	enum tsc_properties tsc_properties = TSC_FREQUENCY_KNOWN;
+ 	bool stable = false;
+ 
+ 	if (!kvm_para_available() || !kvmclock)
+@@ -400,18 +401,6 @@ void __init kvmclock_init(void)
+ 			 PVCLOCK_TSC_STABLE_BIT;
+ 	}
+ 
+-	kvm_sched_clock_init(stable);
+-
+-	tsc_register_calibration_routines(kvm_get_tsc_khz, kvm_get_tsc_khz,
+-					  TSC_FREQUENCY_KNOWN);
+-
+-	x86_platform.get_wallclock = kvm_get_wallclock;
+-	x86_platform.set_wallclock = kvm_set_wallclock;
+-#ifdef CONFIG_SMP
+-	x86_cpuinit.early_percpu_clock_init = kvm_setup_secondary_clock;
+-#endif
+-	kvm_get_preset_lpj();
+-
+ 	/*
+ 	 * X86_FEATURE_NONSTOP_TSC is TSC runs at constant rate
+ 	 * with P/T states and does not stop in deep C-states.
+@@ -422,8 +411,22 @@ void __init kvmclock_init(void)
+ 	 */
+ 	if (boot_cpu_has(X86_FEATURE_CONSTANT_TSC) &&
+ 	    boot_cpu_has(X86_FEATURE_NONSTOP_TSC) &&
+-	    !check_tsc_unstable())
++	    !check_tsc_unstable()) {
+ 		kvm_clock.rating = 299;
++		tsc_properties = TSC_FREQ_KNOWN_AND_RELIABLE;
++	}
++
++	kvm_sched_clock_init(stable);
++
++	tsc_register_calibration_routines(kvm_get_tsc_khz, kvm_get_tsc_khz,
++					  tsc_properties);
++
++	x86_platform.get_wallclock = kvm_get_wallclock;
++	x86_platform.set_wallclock = kvm_set_wallclock;
++#ifdef CONFIG_SMP
++	x86_cpuinit.early_percpu_clock_init = kvm_setup_secondary_clock;
++#endif
++	kvm_get_preset_lpj();
+ 
+ 	clocksource_register_hz(&kvm_clock, NSEC_PER_SEC);
+ 	pv_info.name = "KVM";
 -- 
 2.48.1.711.g2feabab25a-goog
 
