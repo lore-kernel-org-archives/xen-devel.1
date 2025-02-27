@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C6FC19776
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:20:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.897367.1306040 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 230BAC19776
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Feb 2025 02:20:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.897371.1306081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUV-0006JE-WF; Thu, 27 Feb 2025 02:19:12 +0000
+	id 1tnTUc-0007MX-6f; Thu, 27 Feb 2025 02:19:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 897367.1306040; Thu, 27 Feb 2025 02:19:11 +0000
+Received: by outflank-mailman (output) from mailman id 897371.1306081; Thu, 27 Feb 2025 02:19:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tnTUV-0006J7-Sf; Thu, 27 Feb 2025 02:19:11 +0000
-Received: by outflank-mailman (input) for mailman id 897367;
- Thu, 27 Feb 2025 02:19:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tnTUc-0007MQ-0d; Thu, 27 Feb 2025 02:19:18 +0000
+Received: by outflank-mailman (input) for mailman id 897371;
+ Thu, 27 Feb 2025 02:19:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2ipX=VS=flex--seanjc.bounces.google.com=3msu_ZwYKCXUlXTgcVZhhZeX.VhfqXg-WXoXeeblml.qXgikhcXVm.hkZ@srs-se1.protection.inumbo.net>)
- id 1tnTUU-00063X-99
- for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:10 +0000
-Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
- [2607:f8b0:4864:20::1049])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38b008da-f4b1-11ef-9898-31a8f345e629;
- Thu, 27 Feb 2025 03:19:07 +0100 (CET)
-Received: by mail-pj1-x1049.google.com with SMTP id
- 98e67ed59e1d1-2fc4dc34291so1060409a91.3
- for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:07 -0800 (PST)
+ <SRS0=8Uu1=VS=flex--seanjc.bounces.google.com=3ocu_ZwYKCXwxjfsohlttlqj.htr2js-ij0jqqnxyx.2jsuwtojhy.twl@srs-se1.protection.inumbo.net>)
+ id 1tnTUZ-0005qU-VV
+ for xen-devel@lists.xenproject.org; Thu, 27 Feb 2025 02:19:15 +0000
+Received: from mail-pl1-x649.google.com (mail-pl1-x649.google.com
+ [2607:f8b0:4864:20::649])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3d0b7bca-f4b1-11ef-9aaf-95dc52dad729;
+ Thu, 27 Feb 2025 03:19:15 +0100 (CET)
+Received: by mail-pl1-x649.google.com with SMTP id
+ d9443c01a7336-220e04e67e2so10180855ad.2
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Feb 2025 18:19:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,48 +42,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38b008da-f4b1-11ef-9898-31a8f345e629
+X-Inumbo-ID: 3d0b7bca-f4b1-11ef-9aaf-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1740622746; x=1741227546; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=Dwfv1w4tsOCmi3NCgULhIMD4IZcsOFfau2ULDYaMRLg=;
-        b=N1qfhRChPdcad4Avh2DERSe+cjhEEl7TUjETVBdCtu8HuwYGn+OGofPczp6jyG0XG5
-         qWONUxxJOcY/ZM8xSR7cXuAb+fKheA4B53nwqWZKe9pgoFc7z7dOSknTVrIUz9NaUDlf
-         NQSFhl49AxbqZgsI2DbjbCpr8+3JJnDRf1z+3ay9bMPFrTaLJpAkKFSLiw9w1aeF4q2V
-         Uc+N6H0E1gK7KNiRwrzCQ/j/M3SE8/84GgI3jWnrpdZY6XvyCOICovIUbkqFolxH/OH7
-         vvFEKngbFmGw2x+vk2fqjyt0Mo/DRGHPczUOfQps9Ahvh0N8RUR+qC+VMoKkzublphFI
-         pJCA==
+        d=google.com; s=20230601; t=1740622753; x=1741227553; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:reply-to:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yramOYZYSvDmgSz8M8zEvByRhd31043Cze2FYqM0HuQ=;
+        b=yblITf8yRGWXe63wTFOCFb9Dsu0I7Tt4DfGmxd5B+W/jefrV+XhwBI91lTrM28Oy6S
+         g2RXqDSuRSPxy6mhvOAduy9must7/L9/QInYFypbxB8XqNvF+URdSuycgS6LRBzYVB1D
+         P9faqfDYYIFCca5tCwvxdkkWUERPmXtBliR4e+/Dsfr3ILLqKXUj5oFWI0Px8jUzRj1A
+         dK2M9YEr8En9DgCHy7mCYObuHfBcG1sEekkTPQcJ2UCyGBy3JLpD0w4s7GT73Hr2eHKf
+         xDbPfiWMitG9fTmgi4d33NsC9x9tPoM6Uwfo0zch5JrZdDgLt5TSt2/sIaRQHcecmot9
+         PLvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740622746; x=1741227546;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Dwfv1w4tsOCmi3NCgULhIMD4IZcsOFfau2ULDYaMRLg=;
-        b=tTy7M2VTH35fWjiEgUatkdGZwu1i4qjm2//1MjNHKMal/Akjq/9g60qRfdZ267q5LF
-         ib1hMFxKOW9tXGwehO3zno8nGf/ewVXQCKJbnwx6CMUMfGxXBGDKoecD92fiBwPrfb3C
-         egW5rohMLZ0ewKItjmQkrx35xIrEPrbyYmV1eRfyjpt5QGBVz4Bx5vqjfG0KHNksAjQL
-         auO5X9KbRMg+24R6PZGT2V/dTFuNQw35PVryt6biaRFC1f1DZe6rfjsL/ni0sOJNx088
-         CjLTaNmLrK+98z3mHkOz6iZSabZkkZz6qrJPPsKL3bUbBW0jZtm0bPfVGof+AbSyFOHy
-         uWFQ==
-X-Forwarded-Encrypted: i=1; AJvYcCX11zNIkKgYzwpthKLwbWC3s4W82QYAkNTe5OLdVvrDJ9zCgW7LEPlDkbnbeLQnZAPwZVPxPmeZKiQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzdKN4I2h7lV4Xtve0komaWpLzeVMSV376cw3LziQo0+OmsoZYB
-	C/6YGrbjsvvQFRWA9OvRiy3gjEflUkwI2W7Vls9b2z5+PCyQuhRDTpoz0sHVuE4WPYXTMXm39wf
-	z8w==
-X-Google-Smtp-Source: AGHT+IH6wZ/mGewjHTQw2W+siQpDLDG/G2QvagXg40e21ebxNRSjKEBR8DQxe4UjV6eqsE0kkd3QFpygjvI=
-X-Received: from pjbsn14.prod.google.com ([2002:a17:90b:2e8e:b0:2fc:15bf:92f6])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:1d83:b0:2fc:3264:3666
- with SMTP id 98e67ed59e1d1-2fce7b221c3mr36215820a91.30.1740622746375; Wed, 26
- Feb 2025 18:19:06 -0800 (PST)
+        d=1e100.net; s=20230601; t=1740622753; x=1741227553;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:reply-to:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=yramOYZYSvDmgSz8M8zEvByRhd31043Cze2FYqM0HuQ=;
+        b=voiL6hXyITG8QDTV3Q44BqViCwH4GqbERmHNtREKjWlUHtefVhCy35SzNRhXjUozEH
+         h4EHoG7SCqbo2rKLgWoSWPIvwjKTCPyouZoaGNnTHRDqWOcOmpUNaxEOBIKFasJzddik
+         9VehfdvErm+quJ9gLoncwdkbE4jOGZ2GFG1IU0Sq4/EC5GAT4P5WRWxhvSQtdQ4WYuJB
+         +JioAicLrAsN/VaomXQsgiz56tMs770IJeTM7z4GyaATHQndIWqP9TPmx0dhzu+ptwfJ
+         IRKRpP3UdGtd92tZhJkE1D61nQBKFd0bmXUaz/AV4XKNY6MAnamD/CsoSlLf80KNjcwa
+         cHnA==
+X-Forwarded-Encrypted: i=1; AJvYcCVkZxaHpfB9mD7I8Pb8uZi+AndweijEWVCvOlPkzAkyvDoWrgOkML7jI/Ki61g55e6ma0jFyi77h8s=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwcxmTCN6GRavLlw49kwAk4NiIIMlPrG6BoJUwC4M4AEiTJGhxs
+	SPd8R5Oj5e2uUoVhok2UjRA8YRsGRqC07SIcY+e+cQnJO3yjNMtVtghamH/BvOnAiNZpfNtkXKF
+	+ZA==
+X-Google-Smtp-Source: AGHT+IEj/1REcONxv6g8r36LvNpCxOj7lRlC5Gm8UGTSETJJJpMqJ2Q+yEo6DBGNGx6TMjORq5yBRC/aLmE=
+X-Received: from pfbf4.prod.google.com ([2002:a05:6a00:ad84:b0:730:94db:d304])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:dacc:b0:220:d6ac:b5a3
+ with SMTP id d9443c01a7336-22320214b94mr83920905ad.51.1740622753535; Wed, 26
+ Feb 2025 18:19:13 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Wed, 26 Feb 2025 18:18:18 -0800
+Date: Wed, 26 Feb 2025 18:18:22 -0800
 In-Reply-To: <20250227021855.3257188-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20250227021855.3257188-1-seanjc@google.com>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-Message-ID: <20250227021855.3257188-3-seanjc@google.com>
-Subject: [PATCH v2 02/38] x86/tsc: Add standalone helper for getting CPU
- frequency from CPUID
+Message-ID: <20250227021855.3257188-7-seanjc@google.com>
+Subject: [PATCH v2 06/38] x86/tdx: Override PV calibration routines with
+ CPUID-based calibration
 From: Sean Christopherson <seanjc@google.com>
 To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
 	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -99,101 +100,149 @@ Cc: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
 	linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org, 
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Extract the guts of cpu_khz_from_cpuid() to a standalone helper that
-doesn't restrict the usage to Intel CPUs.  This will allow sharing the
-core logic with kvmclock, as (a) CPUID.0x16 may be enumerated alongside
-kvmclock, and (b) KVM generally doesn't restrict CPUID based on vendor.
+When running as a TDX guest, explicitly override the TSC frequency
+calibration routine with CPUID-based calibration instead of potentially
+relying on a hypervisor-controlled PV routine.  For TDX guests, CPUID.0x15
+is always emulated by the TDX-Module, i.e. the information from CPUID is
+more trustworthy than the information provided by the hypervisor.
 
-No functional change intended.
+To maintain backwards compatibility with TDX guest kernels that use native
+calibration, and because it's the least awful option, retain
+native_calibrate_tsc()'s stuffing of the local APIC bus period using the
+core crystal frequency.  While it's entirely possible for the hypervisor
+to emulate the APIC timer at a different frequency than the core crystal
+frequency, the commonly accepted interpretation of Intel's SDM is that APIC
+timer runs at the core crystal frequency when that latter is enumerated via
+CPUID:
 
+  The APIC timer frequency will be the processor=E2=80=99s bus clock or cor=
+e
+  crystal clock frequency (when TSC/core crystal clock ratio is enumerated
+  in CPUID leaf 0x15).
+
+If the hypervisor is malicious and deliberately runs the APIC timer at the
+wrong frequency, nothing would stop the hypervisor from modifying the
+frequency at any time, i.e. attempting to manually calibrate the frequency
+out of paranoia would be futile.
+
+Deliberately leave the CPU frequency calibration routine as is, since the
+TDX-Module doesn't provide any guarantees with respect to CPUID.0x16.
+
+Opportunistically add a comment explaining that CoCo TSC initialization
+needs to come after hypervisor specific initialization.
+
+Cc: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/include/asm/tsc.h |  1 +
- arch/x86/kernel/tsc.c      | 37 +++++++++++++++++++++++--------------
- 2 files changed, 24 insertions(+), 14 deletions(-)
+ arch/x86/coco/tdx/tdx.c    | 30 +++++++++++++++++++++++++++---
+ arch/x86/include/asm/tdx.h |  2 ++
+ arch/x86/kernel/tsc.c      |  8 ++++++++
+ 3 files changed, 37 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
-index a4d84f721775..c3a14df46327 100644
---- a/arch/x86/include/asm/tsc.h
-+++ b/arch/x86/include/asm/tsc.h
-@@ -36,6 +36,7 @@ struct cpuid_tsc_info {
- };
- extern int cpuid_get_tsc_info(struct cpuid_tsc_info *info);
- extern int cpuid_get_tsc_freq(struct cpuid_tsc_info *info);
-+extern int cpuid_get_cpu_freq(unsigned int *cpu_khz);
- 
- extern void tsc_early_init(void);
- extern void tsc_init(void);
-diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 93713eb81f52..bb4619148161 100644
---- a/arch/x86/kernel/tsc.c
-+++ b/arch/x86/kernel/tsc.c
-@@ -688,6 +688,24 @@ int cpuid_get_tsc_freq(struct cpuid_tsc_info *info)
- 	return 0;
+diff --git a/arch/x86/coco/tdx/tdx.c b/arch/x86/coco/tdx/tdx.c
+index 32809a06dab4..42cdaa98dc5e 100644
+--- a/arch/x86/coco/tdx/tdx.c
++++ b/arch/x86/coco/tdx/tdx.c
+@@ -8,6 +8,7 @@
+ #include <linux/export.h>
+ #include <linux/io.h>
+ #include <linux/kexec.h>
++#include <asm/apic.h>
+ #include <asm/coco.h>
+ #include <asm/tdx.h>
+ #include <asm/vmx.h>
+@@ -1063,9 +1064,6 @@ void __init tdx_early_init(void)
+=20
+ 	setup_force_cpu_cap(X86_FEATURE_TDX_GUEST);
+=20
+-	/* TSC is the only reliable clock in TDX guest */
+-	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
+-
+ 	cc_vendor =3D CC_VENDOR_INTEL;
+=20
+ 	/* Configure the TD */
+@@ -1122,3 +1120,29 @@ void __init tdx_early_init(void)
+=20
+ 	tdx_announce();
  }
- 
-+int cpuid_get_cpu_freq(unsigned int *cpu_khz)
++
++static unsigned long tdx_get_tsc_khz(void)
 +{
-+	unsigned int eax_base_mhz, ebx, ecx, edx;
++	struct cpuid_tsc_info info;
 +
-+	*cpu_khz = 0;
++	if (WARN_ON_ONCE(cpuid_get_tsc_freq(&info)))
++		return 0;
 +
-+	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
-+		return -ENOENT;
++	lapic_timer_period =3D info.crystal_khz * 1000 / HZ;
 +
-+	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
-+
-+	if (!eax_base_mhz)
-+		return -ENOENT;
-+
-+	*cpu_khz = eax_base_mhz * 1000;
-+	return 0;
++	return info.tsc_khz;
 +}
 +
- /**
-  * native_calibrate_tsc - determine TSC frequency
-  * Determine TSC frequency via CPUID, else return 0.
-@@ -723,13 +741,8 @@ unsigned long native_calibrate_tsc(void)
- 	 * clock, but we can easily calculate it to a high degree of accuracy
- 	 * by considering the crystal ratio and the CPU speed.
- 	 */
--	if (!info.crystal_khz && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
--		unsigned int eax_base_mhz, ebx, ecx, edx;
--
--		cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
--		info.crystal_khz = eax_base_mhz * 1000 *
--			info.denominator / info.numerator;
--	}
-+	if (!info.crystal_khz && !cpuid_get_cpu_freq(&cpu_khz))
-+		info.crystal_khz = cpu_khz * info.denominator / info.numerator;
- 
- 	if (!info.crystal_khz)
- 		return 0;
-@@ -756,19 +769,15 @@ unsigned long native_calibrate_tsc(void)
- 
- static unsigned long cpu_khz_from_cpuid(void)
- {
--	unsigned int eax_base_mhz, ebx_max_mhz, ecx_bus_mhz, edx;
-+	unsigned int cpu_khz;
- 
- 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
- 		return 0;
- 
--	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
-+	if (cpuid_get_cpu_freq(&cpu_khz))
- 		return 0;
- 
--	eax_base_mhz = ebx_max_mhz = ecx_bus_mhz = edx = 0;
--
--	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx_max_mhz, &ecx_bus_mhz, &edx);
--
--	return eax_base_mhz * 1000;
-+	return cpu_khz;
- }
- 
- /*
--- 
++void __init tdx_tsc_init(void)
++{
++	/* TSC is the only reliable clock in TDX guest */
++	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++
++	/*
++	 * Override the PV calibration routines (if set) with more trustworthy
++	 * CPUID-based calibration.  The TDX module emulates CPUID, whereas any
++	 * PV information is provided by the hypervisor.
++	 */
++	tsc_register_calibration_routines(tdx_get_tsc_khz, NULL);
++}
+diff --git a/arch/x86/include/asm/tdx.h b/arch/x86/include/asm/tdx.h
+index b4b16dafd55e..621fbdd101e2 100644
+--- a/arch/x86/include/asm/tdx.h
++++ b/arch/x86/include/asm/tdx.h
+@@ -53,6 +53,7 @@ struct ve_info {
+ #ifdef CONFIG_INTEL_TDX_GUEST
+=20
+ void __init tdx_early_init(void);
++void __init tdx_tsc_init(void);
+=20
+ void tdx_get_ve_info(struct ve_info *ve);
+=20
+@@ -72,6 +73,7 @@ void __init tdx_dump_td_ctls(u64 td_ctls);
+ #else
+=20
+ static inline void tdx_early_init(void) { };
++static inline void tdx_tsc_init(void) { }
+ static inline void tdx_safe_halt(void) { };
+=20
+ static inline bool tdx_early_handle_ve(struct pt_regs *regs) { return fals=
+e; }
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 6a011cd1ff94..472d6c71d3a5 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -32,6 +32,7 @@
+ #include <asm/topology.h>
+ #include <asm/uv/uv.h>
+ #include <asm/sev.h>
++#include <asm/tdx.h>
+=20
+ unsigned int __read_mostly cpu_khz;	/* TSC clocks / usec, not used here */
+ EXPORT_SYMBOL(cpu_khz);
+@@ -1563,8 +1564,15 @@ void __init tsc_early_init(void)
+ 	if (is_early_uv_system())
+ 		return;
+=20
++	/*
++	 * Do CoCo specific "secure" TSC initialization *after* hypervisor
++	 * platform initialization so that the secure variant can override the
++	 * hypervisor's PV calibration routine with a more trusted method.
++	 */
+ 	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC))
+ 		snp_secure_tsc_init();
++	else if (boot_cpu_has(X86_FEATURE_TDX_GUEST))
++		tdx_tsc_init();
+=20
+ 	if (!determine_cpu_tsc_frequencies(true))
+ 		return;
+--=20
 2.48.1.711.g2feabab25a-goog
 
 
