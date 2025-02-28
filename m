@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC8D0C282D0
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:18:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.898957.1307422 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C39A7C282C6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:18:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.898959.1307443 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34J-0003ww-RR; Fri, 28 Feb 2025 16:18:31 +0000
+	id 1to34M-0004Rj-An; Fri, 28 Feb 2025 16:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 898957.1307422; Fri, 28 Feb 2025 16:18:31 +0000
+Received: by outflank-mailman (output) from mailman id 898959.1307443; Fri, 28 Feb 2025 16:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34J-0003wp-O2; Fri, 28 Feb 2025 16:18:31 +0000
-Received: by outflank-mailman (input) for mailman id 898957;
- Fri, 28 Feb 2025 16:18:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1to34M-0004RO-6P; Fri, 28 Feb 2025 16:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 898959;
+ Fri, 28 Feb 2025 16:18:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5/q7=VT=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1to34I-0003Uh-Mw
- for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:30 +0000
+ id 1to34K-0003Ub-Pf
+ for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:32 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a50d68a6-f5ef-11ef-9898-31a8f345e629;
- Fri, 28 Feb 2025 17:18:28 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id a6cfefb0-f5ef-11ef-9aaf-95dc52dad729;
+ Fri, 28 Feb 2025 17:18:31 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 775F3176A;
- Fri, 28 Feb 2025 08:18:43 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 70E2C150C;
+ Fri, 28 Feb 2025 08:18:46 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EC9B53F5A1;
- Fri, 28 Feb 2025 08:18:26 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 449E23F5A1;
+ Fri, 28 Feb 2025 08:18:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,146 +44,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a50d68a6-f5ef-11ef-9898-31a8f345e629
+X-Inumbo-ID: a6cfefb0-f5ef-11ef-9aaf-95dc52dad729
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>,
-	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH 2/9] arm/mpu: Implement virt/maddr conversion in MPU system
-Date: Fri, 28 Feb 2025 16:18:10 +0000
-Message-Id: <20250228161817.3342443-3-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 4/9] arm/mpu: Provide access to the MPU region from the C code
+Date: Fri, 28 Feb 2025 16:18:12 +0000
+Message-Id: <20250228161817.3342443-5-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250228161817.3342443-1-luca.fancellu@arm.com>
 References: <20250228161817.3342443-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Penny Zheng <Penny.Zheng@arm.com>
+Implement some utility function in order to access the MPU regions
+from the C world.
 
-virt_to_maddr and maddr_to_virt are used widely in Xen code. So
-even there is no VMSA in MPU system, we keep the interface in MPU to
-don't change the existing common code.
-
-In order to do that, move the virt_to_maddr() definition to mmu/mm.h,
-instead for maddr_to_virt() it's more difficult to isolate it under mmu/
-so it will be protected by #ifdef CONFIG_MMU.
-
-Finally implement virt_to_maddr() and maddr_to_virt() for MPU systems
-under mpu/mm.h, the MPU version of virt/maddr conversion is simple since
-VA==PA.
-
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/mm.h     | 13 +++++++------
- xen/arch/arm/include/asm/mmu/mm.h |  7 +++++++
- xen/arch/arm/include/asm/mpu/mm.h | 27 +++++++++++++++++++++++++++
- 3 files changed, 41 insertions(+), 6 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/mpu/mm.h
+ xen/arch/arm/include/asm/arm64/mpu.h |   1 +
+ xen/arch/arm/include/asm/mpu/mm.h    |  29 ++++++
+ xen/arch/arm/mpu/mm.c                | 130 ++++++++++++++++++++++++++-
+ 3 files changed, 159 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index a0d8e5afe977..e7767cdab493 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -16,8 +16,10 @@
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index 38dbf5b2255a..c63a9e6e5455 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -9,6 +9,7 @@
+ #define MPU_REGION_SHIFT  6
+ #define MPU_REGION_ALIGN  (_AC(1, UL) << MPU_REGION_SHIFT)
+ #define MPU_REGION_MASK   (~(MPU_REGION_ALIGN - 1))
++#define MPU_REGION_RES0   (0xFFFULL << 52)
  
- #if defined(CONFIG_MMU)
- # include <asm/mmu/mm.h>
--#elif !defined(CONFIG_MPU)
--# error "Unknown memory management layout"
-+#elif defined(CONFIG_MPU)
-+# include <asm/mpu/mm.h>
-+#else
-+#error "Unknown memory management layout"
- #endif
- 
- /* Align Xen to a 2 MiB boundary. */
-@@ -261,10 +263,7 @@ static inline void __iomem *ioremap_wc(paddr_t start, size_t len)
- /* Page-align address and convert to frame number format */
- #define paddr_to_pfn_aligned(paddr)    paddr_to_pfn(PAGE_ALIGN(paddr))
- 
--#define virt_to_maddr(va) ({                                        \
--    vaddr_t va_ = (vaddr_t)(va);                                    \
--    (paddr_t)((va_to_par(va_) & PADDR_MASK & PAGE_MASK) | (va_ & ~PAGE_MASK)); \
--})
-+#if defined(CONFIG_MMU)
- 
- #ifdef CONFIG_ARM_32
- /**
-@@ -310,6 +309,8 @@ static inline void *maddr_to_virt(paddr_t ma)
- }
- #endif
- 
-+#endif /* CONFIG_MMU */
-+
- /*
-  * Translate a guest virtual address to a machine address.
-  * Return the fault information if the translation has failed else 0.
-diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
-index f5a00558c47b..5ff2071133ee 100644
---- a/xen/arch/arm/include/asm/mmu/mm.h
-+++ b/xen/arch/arm/include/asm/mmu/mm.h
-@@ -2,6 +2,8 @@
- #ifndef __ARM_MMU_MM_H__
- #define __ARM_MMU_MM_H__
- 
-+#include <asm/page.h>
-+
- /* Non-boot CPUs use this to find the correct pagetables. */
- extern uint64_t init_ttbr;
- 
-@@ -14,6 +16,11 @@ extern unsigned long directmap_base_pdx;
- 
- #define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
- 
-+#define virt_to_maddr(va) ({                                                   \
-+    vaddr_t va_ = (vaddr_t)(va);                                               \
-+    (paddr_t)((va_to_par(va_) & PADDR_MASK & PAGE_MASK) | (va_ & ~PAGE_MASK)); \
-+})
-+
- /*
-  * Print a walk of a page table or p2m
-  *
+ #define NUM_MPU_REGIONS_SHIFT   8
+ #define NUM_MPU_REGIONS         (_AC(1, UL) << NUM_MPU_REGIONS_SHIFT)
 diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-new file mode 100644
-index 000000000000..57f1e558fd44
---- /dev/null
+index 57f1e558fd44..1287a0f625b5 100644
+--- a/xen/arch/arm/include/asm/mpu/mm.h
 +++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
+@@ -5,6 +5,12 @@
+ 
+ #include <xen/macros.h>
+ 
++#if defined(CONFIG_ARM_64)
++# include <asm/arm64/mpu.h>
++#else
++# error "unknown ARM variant"
++#endif
 +
-+#ifndef __ARM_MPU_MM__
-+#define __ARM_MPU_MM__
-+
-+#include <xen/macros.h>
-+
-+#define virt_to_maddr(va) ({  \
-+    (paddr_t)va;              \
-+})
-+
-+/* On MPU systems there is no translation, ma == va. */
-+static inline void *maddr_to_virt(paddr_t ma)
+ #define virt_to_maddr(va) ({  \
+     (paddr_t)va;              \
+ })
+@@ -15,6 +21,29 @@ static inline void *maddr_to_virt(paddr_t ma)
+     return _p(ma);
+ }
+ 
++/* Utility function to be used whenever MPU regions are modified */
++static inline void context_sync_mpu(void)
 +{
-+    return _p(ma);
++    /*
++     * ARM DDI 0600B.a, C1.7.1
++     * Writes to MPU registers are only guaranteed to be visible following a
++     * Context synchronization event and DSB operation.
++     */
++    dsb(sy);
++    isb();
 +}
 +
-+#endif /* __ARM_MPU_MM__ */
++/*
++ * The following API require context_sync_mpu() after being used to modifiy MPU
++ * regions:
++ *  - write_protection_region
++ */
++
++/* Reads the MPU region with index 'sel' from the HW */
++extern void read_protection_region(pr_t *pr_read, uint8_t sel);
++/* Writes the MPU region with index 'sel' to the HW */
++extern void write_protection_region(const pr_t *pr_write, uint8_t sel);
++
+ #endif /* __ARM_MPU_MM__ */
+ 
+ /*
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 3ca609ff80cc..bb8e0c546e7b 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -8,11 +8,139 @@
+  *
+  */
+ 
+-#include <asm/arm64/mpu.h>
++#include <asm/mpu/mm.h>
++#include <asm/sysregs.h>
+ 
+ /* EL2 Xen MPU memory region mapping table. */
+ pr_t xen_mpumap[MAX_MPU_REGIONS];
+ 
++/* The following are needed for the case generator with num==0 */
++#define PRBAR0_EL2 PRBAR_EL2
++#define PRLAR0_EL2 PRLAR_EL2
++
++#define GENERATE_WRITE_PR_REG_CASE(num, pr)                                 \
++    case num:                                                               \
++    {                                                                       \
++        WRITE_SYSREG(pr->prbar.bits & ~MPU_REGION_RES0, PRBAR##num##_EL2);  \
++        WRITE_SYSREG(pr->prlar.bits & ~MPU_REGION_RES0, PRLAR##num##_EL2);  \
++        break;                                                              \
++    }
++
++#define GENERATE_READ_PR_REG_CASE(num, pr)                      \
++    case num:                                                   \
++    {                                                           \
++        pr->prbar.bits = READ_SYSREG(PRBAR##num##_EL2);         \
++        pr->prlar.bits = READ_SYSREG(PRLAR##num##_EL2);         \
++        break;                                                  \
++    }
++
++static void prepare_selector(uint8_t sel)
++{
++    uint8_t pr_sel = READ_SYSREG(PRSELR_EL2) & 0xF0U;
++
++    /*
++     * {read,write}_protection_region works using the direct access to the 0..15
++     * regions, so in order to save the isb() overhead, change the PRSELR_EL2
++     * only when needed, so when the upper 4 bits of the selector will change.
++     */
++    sel &= 0xF0U;
++    if ( pr_sel != sel )
++    {
++        WRITE_SYSREG(sel, PRSELR_EL2);
++        isb();
++    }
++}
 +
 +/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
++ * Armv8-R AArch64 at most supports 255 MPU protection regions.
++ * See section G1.3.18 of the reference manual for Armv8-R AArch64,
++ * PRBAR<n>_EL2 and PRLAR<n>_EL2 provide access to the EL2 MPU region
++ * determined by the value of 'n' and PRSELR_EL2.REGION as
++ * PRSELR_EL2.REGION<7:4>:n(n = 0, 1, 2, ... , 15)
++ * For example to access regions from 16 to 31 (0b10000 to 0b11111):
++ * - Set PRSELR_EL2 to 0b1xxxx
++ * - Region 16 configuration is accessible through PRBAR_EL2 and PRLAR_EL2
++ * - Region 17 configuration is accessible through PRBAR1_EL2 and PRLAR1_EL2
++ * - Region 18 configuration is accessible through PRBAR2_EL2 and PRLAR2_EL2
++ * - ...
++ * - Region 31 configuration is accessible through PRBAR15_EL2 and PRLAR15_EL2
 + */
++/*
++ * Read EL2 MPU Protection Region.
++ *
++ * @pr_read: mpu protection region returned by read op.
++ * @sel: mpu protection region selector
++ */
++void read_protection_region(pr_t *pr_read, uint8_t sel)
++{
++    /*
++     * Before accessing EL2 MPU region register PRBAR_EL2/PRLAR_EL2,
++     * make sure PRSELR_EL2 is set, as it determines which MPU region
++     * is selected.
++     */
++    prepare_selector(sel);
++
++    switch ( sel & 0xFU )
++    {
++        GENERATE_READ_PR_REG_CASE(0, pr_read);
++        GENERATE_READ_PR_REG_CASE(1, pr_read);
++        GENERATE_READ_PR_REG_CASE(2, pr_read);
++        GENERATE_READ_PR_REG_CASE(3, pr_read);
++        GENERATE_READ_PR_REG_CASE(4, pr_read);
++        GENERATE_READ_PR_REG_CASE(5, pr_read);
++        GENERATE_READ_PR_REG_CASE(6, pr_read);
++        GENERATE_READ_PR_REG_CASE(7, pr_read);
++        GENERATE_READ_PR_REG_CASE(8, pr_read);
++        GENERATE_READ_PR_REG_CASE(9, pr_read);
++        GENERATE_READ_PR_REG_CASE(10, pr_read);
++        GENERATE_READ_PR_REG_CASE(11, pr_read);
++        GENERATE_READ_PR_REG_CASE(12, pr_read);
++        GENERATE_READ_PR_REG_CASE(13, pr_read);
++        GENERATE_READ_PR_REG_CASE(14, pr_read);
++        GENERATE_READ_PR_REG_CASE(15, pr_read);
++    default:
++        BUG(); /* Can't happen */
++    }
++}
++
++/*
++ * Write EL2 MPU Protection Region.
++ *
++ * @pr_write: const mpu protection region passed through write op.
++ * @sel: mpu protection region selector
++ */
++void write_protection_region(const pr_t *pr_write, uint8_t sel)
++{
++    /*
++     * Before accessing EL2 MPU region register PRBAR_EL2/PRLAR_EL2,
++     * make sure PRSELR_EL2 is set, as it determines which MPU region
++     * is selected.
++     */
++    prepare_selector(sel);
++
++    switch ( sel & 0xFU )
++    {
++        GENERATE_WRITE_PR_REG_CASE(0, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(1, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(2, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(3, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(4, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(5, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(6, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(7, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(8, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(9, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(10, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(11, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(12, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(13, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(14, pr_write);
++        GENERATE_WRITE_PR_REG_CASE(15, pr_write);
++    default:
++        BUG(); /* Can't happen */
++    }
++}
++
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.34.1
 
