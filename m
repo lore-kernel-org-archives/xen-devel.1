@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C86FCC282C6
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:19:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.898961.1307463 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483F3C282C1
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:19:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.898964.1307480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34P-000506-7v; Fri, 28 Feb 2025 16:18:37 +0000
+	id 1to34Q-0005RA-Uc; Fri, 28 Feb 2025 16:18:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 898961.1307463; Fri, 28 Feb 2025 16:18:37 +0000
+Received: by outflank-mailman (output) from mailman id 898964.1307480; Fri, 28 Feb 2025 16:18:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34P-0004zu-2g; Fri, 28 Feb 2025 16:18:37 +0000
-Received: by outflank-mailman (input) for mailman id 898961;
- Fri, 28 Feb 2025 16:18:35 +0000
+	id 1to34Q-0005QO-O9; Fri, 28 Feb 2025 16:18:38 +0000
+Received: by outflank-mailman (input) for mailman id 898964;
+ Fri, 28 Feb 2025 16:18:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5/q7=VT=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1to34N-0003Ub-4o
- for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:35 +0000
+ id 1to34P-0003Ub-Qg
+ for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:37 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id a8493c80-f5ef-11ef-9aaf-95dc52dad729;
- Fri, 28 Feb 2025 17:18:34 +0100 (CET)
+ id a9d59500-f5ef-11ef-9aaf-95dc52dad729;
+ Fri, 28 Feb 2025 17:18:36 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ED1F9150C;
- Fri, 28 Feb 2025 08:18:48 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7F35B176A;
+ Fri, 28 Feb 2025 08:18:51 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CAF073F5A1;
- Fri, 28 Feb 2025 08:18:32 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5CFC93F5A1;
+ Fri, 28 Feb 2025 08:18:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a8493c80-f5ef-11ef-9aaf-95dc52dad729
+X-Inumbo-ID: a9d59500-f5ef-11ef-9aaf-95dc52dad729
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,156 +52,117 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 6/9] arm/mpu: Provide a constructor for pr_t type
-Date: Fri, 28 Feb 2025 16:18:14 +0000
-Message-Id: <20250228161817.3342443-7-luca.fancellu@arm.com>
+Subject: [PATCH 8/9] arm/mpu: Implement early_fdt_map support in MPU systems
+Date: Fri, 28 Feb 2025 16:18:16 +0000
+Message-Id: <20250228161817.3342443-9-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250228161817.3342443-1-luca.fancellu@arm.com>
 References: <20250228161817.3342443-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide a function that creates a pr_t object from a memory
-range and some attributes.
+Implement early_fdt_map() function, that is responsible to map the
+device tree blob in the early stages of the boot process, since at
+this stage the MPU C data structure are not yet initialised, it is
+using low level APIs to write into the MPU registers at a fixed
+MPU region number.
+
+The MPU memory management is designed to work on pages of PAGE_SIZE
+in order to reuse helpers and macros already available on the Xen
+memory management system.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/arm64/mpu.h | 15 ++++++
- xen/arch/arm/include/asm/mpu/mm.h    |  3 ++
- xen/arch/arm/mpu/mm.c                | 73 ++++++++++++++++++++++++++++
- 3 files changed, 91 insertions(+)
+ xen/arch/arm/mpu/Makefile |  1 +
+ xen/arch/arm/mpu/setup.c  | 72 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+ create mode 100644 xen/arch/arm/mpu/setup.c
 
-diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
-index 3a09339818a0..dce77da60110 100644
---- a/xen/arch/arm/include/asm/arm64/mpu.h
-+++ b/xen/arch/arm/include/asm/arm64/mpu.h
-@@ -17,6 +17,21 @@
- 
- #define MAX_MPU_REGIONS         NUM_MPU_REGIONS_MASK
- 
-+/* Access permission attributes. */
-+/* Read/Write at EL2, No Access at EL1/EL0. */
-+#define AP_RW_EL2 0x0
-+
+diff --git a/xen/arch/arm/mpu/Makefile b/xen/arch/arm/mpu/Makefile
+index b18cec483671..04df0b2ee760 100644
+--- a/xen/arch/arm/mpu/Makefile
++++ b/xen/arch/arm/mpu/Makefile
+@@ -1 +1,2 @@
+ obj-y += mm.o
++obj-y += setup.init.o
+diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
+new file mode 100644
+index 000000000000..290baaca9fd7
+--- /dev/null
++++ b/xen/arch/arm/mpu/setup.c
+@@ -0,0 +1,72 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Excute never.
-+ * Stage 1 EL2 translation regime.
-+ * XN[1] determines whether execution of the instruction fetched from the MPU
-+ * memory region is permitted.
-+ * Stage 2 EL1/EL0 translation regime.
-+ * XN[0] determines whether execution of the instruction fetched from the MPU
-+ * memory region is permitted.
++ * xen/arch/arm/mpu/setup.c
++ *
++ * MPU system boot code for Armv8-R AArch64.
++ *
 + */
-+#define XN_ENABLED     0x2
 +
- #ifndef __ASSEMBLY__
- 
- /* Protection Region Base Address Register */
-diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index 1287a0f625b5..e234f6c26193 100644
---- a/xen/arch/arm/include/asm/mpu/mm.h
-+++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -44,6 +44,9 @@ extern void read_protection_region(pr_t *pr_read, uint8_t sel);
- /* Writes the MPU region with index 'sel' to the HW */
- extern void write_protection_region(const pr_t *pr_write, uint8_t sel);
- 
-+/* Creates a pr_t entry for the MPU data structure */
-+extern pr_t pr_of_xenaddr(paddr_t base, paddr_t limit, unsigned attr);
++#include <xen/bootfdt.h>
++#include <xen/init.h>
++#include <xen/libfdt/libfdt.h>
++#include <xen/mm.h>
 +
- #endif /* __ARM_MPU_MM__ */
- 
- /*
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index bb8e0c546e7b..fb94f5d1d93d 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -9,6 +9,7 @@
-  */
- 
- #include <asm/mpu/mm.h>
-+#include <asm/page.h>
- #include <asm/sysregs.h>
- 
- /* EL2 Xen MPU memory region mapping table. */
-@@ -141,6 +142,78 @@ void write_protection_region(const pr_t *pr_write, uint8_t sel)
-     }
- }
- 
-+/*
-+ * Standard entry for building up the structure of MPU memory region(pr_t).
-+ * It is equivalent to mfn_to_xen_entry in MMU system.
-+ * Base and limit refer to exclusive range [start, limit].
-+ */
-+pr_t pr_of_xenaddr(paddr_t base, paddr_t limit, unsigned attr)
++/* Needs to be kept in sync with the regions programmed in arm64/mpu/head.S */
++#define EARLY_FDT_MAP_REGION_NUMBER 6
++
++void * __init early_fdt_map(paddr_t fdt_paddr)
 +{
-+    prbar_t prbar;
-+    prlar_t prlar;
-+    pr_t region;
++    /* Map at least a page containing the DTB address, exclusive range */
++    paddr_t base_paddr = round_pgdown(fdt_paddr);
++    paddr_t end_paddr = round_pgup(fdt_paddr + sizeof(struct fdt_header));
++    unsigned int flags = PAGE_HYPERVISOR_RO;
++    void *fdt_virt = (void *)fdt_paddr; /* virt == paddr for MPU */
++    pr_t fdt_region;
 +
-+    /* Build up value for PRBAR_EL2. */
-+    prbar = (prbar_t) {
-+        .reg = {
-+            .ap = AP_RW_EL2,  /* Read/Write at EL2, no access at EL1/EL0. */
-+            .xn = XN_ENABLED, /* No need to execute outside .text */
-+        }};
++    /*
++     * Check whether the physical FDT address is set and meets the minimum
++     * alignment requirement. Since we are relying on MIN_FDT_ALIGN to be at
++     * least 8 bytes so that we always access the magic and size fields
++     * of the FDT header after mapping the first chunk, double check if
++     * that is indeed the case.
++     */
++    BUILD_BUG_ON(MIN_FDT_ALIGN < 8);
++    if ( !fdt_paddr || fdt_paddr % MIN_FDT_ALIGN )
++        return NULL;
 +
-+    switch ( attr )
++    /* Map the device tree blob header  */
++    fdt_region = pr_of_xenaddr(base_paddr, end_paddr, PAGE_AI_MASK(flags));
++    fdt_region.prbar.reg.ap = PAGE_AP_MASK(flags);
++    fdt_region.prbar.reg.xn = PAGE_XN_MASK(flags);
++
++    write_protection_region(&fdt_region, EARLY_FDT_MAP_REGION_NUMBER);
++    context_sync_mpu();
++
++    if ( fdt_magic(fdt_virt) != FDT_MAGIC )
++        return NULL;
++
++    end_paddr = round_pgup(fdt_paddr + fdt_totalsize(fdt_virt));
++
++    /*
++     * If the mapped range is not enough, map the rest of the DTB, pr_get_limit
++     * returns an inclusive address of the range, hence the increment.
++     */
++    if ( end_paddr > (pr_get_limit(&fdt_region) + 1) )
 +    {
-+    case MT_NORMAL_NC:
-+        /*
-+         * ARM ARM: Overlaying the shareability attribute (DDI
-+         * 0406C.b B3-1376 to 1377)
-+         *
-+         * A memory region with a resultant memory type attribute of normal,
-+         * and a resultant cacheability attribute of Inner non-cacheable,
-+         * outer non-cacheable, must have a resultant shareability attribute
-+         * of outer shareable, otherwise shareability is UNPREDICTABLE.
-+         *
-+         * On ARMv8 sharability is ignored and explicitly treated as outer
-+         * shareable for normal inner non-cacheable, outer non-cacheable.
-+         */
-+        prbar.reg.sh = LPAE_SH_OUTER;
-+        break;
-+    case MT_DEVICE_nGnRnE:
-+    case MT_DEVICE_nGnRE:
-+        /*
-+         * Shareability is ignored for non-normal memory, Outer is as
-+         * good as anything.
-+         *
-+         * On ARMv8 sharability is ignored and explicitly treated as outer
-+         * shareable for any device memory type.
-+         */
-+        prbar.reg.sh = LPAE_SH_OUTER;
-+        break;
-+    default:
-+        /* Xen mappings are SMP coherent */
-+        prbar.reg.sh = LPAE_SH_INNER;
++        pr_set_limit(&fdt_region, end_paddr);
++
++        write_protection_region(&fdt_region, EARLY_FDT_MAP_REGION_NUMBER);
++        context_sync_mpu();
 +    }
 +
-+    /* Build up value for PRLAR_EL2. */
-+    prlar = (prlar_t) {
-+        .reg = {
-+            .ns = 0,        /* Hyp mode is in secure world */
-+            .ai = attr,
-+            .en = 1,        /* Region enabled */
-+        }};
-+
-+    /* Build up MPU memory region. */
-+    region = (pr_t) {
-+        .prbar = prbar,
-+        .prlar = prlar,
-+    };
-+
-+    /* Set base address and limit address. */
-+    pr_set_base(&region, base);
-+    pr_set_limit(&region, limit);
-+
-+    return region;
++    return fdt_virt;
 +}
 +
- /*
-  * Local variables:
-  * mode: C
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.34.1
 
