@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DCDC282D1
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 20:08:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.899111.1307572 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F46C282C6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 20:08:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.899117.1307603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to6ee-0006c5-LA; Fri, 28 Feb 2025 20:08:16 +0000
+	id 1to6ej-0007Qn-P2; Fri, 28 Feb 2025 20:08:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 899111.1307572; Fri, 28 Feb 2025 20:08:16 +0000
+Received: by outflank-mailman (output) from mailman id 899117.1307603; Fri, 28 Feb 2025 20:08:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to6ee-0006bY-IQ; Fri, 28 Feb 2025 20:08:16 +0000
-Received: by outflank-mailman (input) for mailman id 899111;
- Fri, 28 Feb 2025 20:08:15 +0000
+	id 1to6ej-0007Pt-Jw; Fri, 28 Feb 2025 20:08:21 +0000
+Received: by outflank-mailman (input) for mailman id 899117;
+ Fri, 28 Feb 2025 20:08:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2kAP=VT=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1to6ed-0005OT-Fm
- for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 20:08:15 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ id 1to6ei-0005OT-BL
+ for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 20:08:20 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bda37603-f60f-11ef-9898-31a8f345e629;
- Fri, 28 Feb 2025 21:08:14 +0100 (CET)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abbec6a0bfeso391566366b.2
- for <xen-devel@lists.xenproject.org>; Fri, 28 Feb 2025 12:08:14 -0800 (PST)
+ id c0006bce-f60f-11ef-9898-31a8f345e629;
+ Fri, 28 Feb 2025 21:08:17 +0100 (CET)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aaf0f1adef8so487880566b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Feb 2025 12:08:17 -0800 (PST)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf1d1a84b7sm267586566b.19.2025.02.28.12.08.11
+ a640c23a62f3a-abf1d1a84b7sm267586566b.19.2025.02.28.12.08.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2025 12:08:12 -0800 (PST)
+ Fri, 28 Feb 2025 12:08:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,143 +46,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bda37603-f60f-11ef-9898-31a8f345e629
+X-Inumbo-ID: c0006bce-f60f-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740773293; x=1741378093; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1740773297; x=1741378097; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9Jop1hBaJ3pnNk3H9uIqCEBRmmCVkB6BdhpXsgr1UDY=;
-        b=IlDiEQcZE9nhIsrQPQ01U/Wg/zkm2p7DKLm1mZ1Z8Ns3DRRl8L7lPrdHJnyP1Yz5V3
-         yuXDS00tT8HPJX5N/XspE1K6/7TUAwH9bvVBKJd6JYE2fr5YSqy+MKNT+jUbo/xJfW2k
-         7Qn1tzuNvCtbFt6VldOymtJGVT+5InNcp0H1FTggNVmD39ThmTSZIPHXdWhi2tf5odq/
-         fzIElhZCvxszReQ58q0vexTvkMZi1eoMyivmmFZ83GcSALhCqwG3UKofaCLZzNRYq/qp
-         vSGQ0IfqgdZv2s+WYNT4aghCLK3kr5AWSy14hrzT0ueG1nmiEtaqcM8YBAwW3KFl9o3M
-         sTvw==
+        bh=I0ad6jhwpwcRJBhT3VG+8OUVGsufT7ZaP0GbwgV+mRc=;
+        b=YtQw6oqb7yZIvfpvBX/EzQtIfXo+w2dKNwXNW0CbOnrtHrr3qiiQAbU55rx5wkdKeY
+         W+T09QGF+JGvoWKlZeAZC4DcWQUegmjO3cWZP41nkN1dzLwYRb21telMH8PIZ74eM3Ga
+         Tl4Qa+TkODx+NuyOyBmBn+nVtV98Bfxihk6qLggMwfiMrtWpBrva2/HOSbLxbFIZMGPv
+         3phcmfQX5XPB4kz7Aci+9jmov1ynihWPf86j4uwMPwHu0nqtV8MQ4xjfLUlrXYRahmD6
+         xxjQ1uaN5C0Y2VLV/WgYh4I0vGJP0UXhrrXcDKOYj5J0unvOp1kVjuRETaXIhiBdX6Ab
+         Mn0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740773293; x=1741378093;
+        d=1e100.net; s=20230601; t=1740773297; x=1741378097;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9Jop1hBaJ3pnNk3H9uIqCEBRmmCVkB6BdhpXsgr1UDY=;
-        b=Knp997cJw1GZMVR4w/6UBCROkTdrluIbZ4fGmBjNJOH5KxQ9FiHwAk0yS6sfumjbCF
-         4GTCqxDAlDNXlXy3AG/07dvHV4ntnxNeK3piViKAfNfI4L6GyCYCwvUaVzFu7w3aSD7r
-         QuXnZmaml97RVRyY7Ok37mS0D7pj18FRNihrOPtimiFEV4oI8XUVvtnevyzL7m2sOH96
-         B2WfZVCGPKUhd5IMJva1tPEwb9AplGF17lZnTM/wfQSRlL7wprQc1Iya5GOSXo6fKehx
-         z8MfDoYGOHMLnJwNycFEIVfLvzcLcIfnQvYPdtFjR39KGbkgqara6BQMRISLrlPdOXQW
-         uwEQ==
-X-Gm-Message-State: AOJu0YxN1N8MjwT24IQNTBip3HrLT990zSxcHa0rZPwoj+s5ulw9TDx7
-	n1ordv12HmEecEra+8Lp/K0Bl/e9UIhb1myd9dhRoTbIfL5vCpftcQoF2A==
-X-Gm-Gg: ASbGncvVmw/tGYZzohKrdXd0l2afXr/URZAmf/hYsAUH+BGPle+m6BIvyGlQedsS2yy
-	wpLLn8tMivUpTfbi0Jx+wANI0A3B9Qj8ONkcGnQdgP+tYBpvaahwOSB9FAKFm1ivdD7GZ8g9saA
-	CGj7udadnlOAUlp/F5L4Ppe8st87uy5q864hSQb3pT/Wpi+B9qtnITRMWxycD2sNbpHX8Fiys0/
-	YZLDg9IzFKwjctm80KHlPyw2zsv5F0Zopa9e1/posySzFe3CvAP9iEX2EMRU6nsk021t1hhnRz+
-	cREAKni8juenFBdx61epGcq1Wsc=
-X-Google-Smtp-Source: AGHT+IGZJUtBwtWiR5R7fDgmYa24CEBFv5BD0O0AC7XrGL+dNTz4PtKsfMCvms3phO+qDJ/5vcQQvA==
-X-Received: by 2002:a17:907:3d88:b0:abc:919:a989 with SMTP id a640c23a62f3a-abf2682e053mr475604166b.48.1740773292936;
-        Fri, 28 Feb 2025 12:08:12 -0800 (PST)
+        bh=I0ad6jhwpwcRJBhT3VG+8OUVGsufT7ZaP0GbwgV+mRc=;
+        b=XNWadI/unzg6rv37DosPTJojQOYLN2No7MY384fY8wTY0AhWY+ZbXXHh/8GbQU8iRW
+         TqsXxuBJ4LcENsfmBGJdNcJtMcslqb5uZKSHlkqa10MNmtfWj2s0rAtmjvX3NlMgp/dR
+         KQpaR/t08U+iNV4kwR4uvWYOzt2eVVf9EG1MtkA3TwEc0RcPmXZTyY74bsTIouihgJTR
+         GjHY1M+7WBfU0gpzE46dEiJKH7NpxJCx+6aZZQo8JOKSGAtAAMrtFI2EFZu5XGzqVRBK
+         UGfl5bL3dNXQ2LkB3zF5dCv2XOlEyD1TTd8UqLmpQEyaBQhcDeqj58Kz++UDgb/99xdi
+         5Lcw==
+X-Gm-Message-State: AOJu0YyDUvvtiXQ5+2MyyYeOgQ2SzhCbQcUyFNPe3UpFifBarmIRJPfV
+	jSCK/3e+tlR2w8G4Dmdx88MCG7fQBXD5lSkyfLS8RhZDG4PU173Pf657XQ==
+X-Gm-Gg: ASbGncu8W15xAvEJkkasiT0HBxD3d3pzewJeLaR0Z/vnLSaD0d71of02p3A2ADtfNjY
+	OeJjP34FhCBnweaxOqkFl4qQxBAFMu7ryA96YywfK0IBb+C9f47dB5yzT6ovTHNIaBdxQhfUqeF
+	Qkcn2Z2+AFQbF9owspVaxQD5dMLBP0OSW1j+DSl6Qu5RstQYpnbWdckxNsDgzOGtFjtIHrLProH
+	LePFEjn9BUpsv+5LmeuQrEOUYitibmN4YvqWTjW0Z7FUgCb8xzwlzZ5FnfpZfOyAlzA9v7qlhvL
+	9oyLgeTRkXKzyJZ4q+bhaXNxEy4=
+X-Google-Smtp-Source: AGHT+IG8VtXzNLqpAWR0oV+hViXGiXfJTaKvGPZjehMEzBp7Le/PfQKujtcjTv9erG23UKg74tMnfA==
+X-Received: by 2002:a17:907:988:b0:abe:f613:bd0b with SMTP id a640c23a62f3a-abf261d3bcamr554690966b.32.1740773296903;
+        Fri, 28 Feb 2025 12:08:16 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v8 3/6] xen/riscv: drop CONFIG_RISCV_ISA_RV64G
-Date: Fri, 28 Feb 2025 21:07:41 +0100
-Message-ID: <335dcb9923a06631cbfb6656e262a560f17a4522.1740764258.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v8 6/6] RISCV/bitops: Use Zbb to provide arch-optimised bitops
+Date: Fri, 28 Feb 2025 21:07:44 +0100
+Message-ID: <f9434e260e12fe1cdd8ae984b3aadc4678179549.1740764258.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1740764258.git.oleksii.kurochko@gmail.com>
 References: <cover.1740764258.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-'G' stands for "imafd_zicsr_zifencei".
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Extensions 'f' and 'd' aren't really needed for Xen, and allowing floating
-point registers to be used can lead to crashes.
-
-Extensions 'i', 'm', 'a', 'zicsr', and 'zifencei' are necessary for the
-operation of Xen, which is why they are used explicitly (unconditionally)
-in -march.
-
-Drop "Base ISA" choice from riscv/Kconfig as it is always empty.
-
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V8:
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+Changes in v8:
+- New patch. It was taken from https://lore.kernel.org/xen-devel/50cd2332-11b7-4b64-85ea-489c416098f9@citrix.com/T/#t
+  with applying the comments:
+  - Introduce BITS_PER_INT.
+  - s/arch_heightl/arch_hweightl
 ---
-Changes in V7:
- - For better readability use += instead of := for riscv-march-* in arch.mk.
- - Drop spaces from riscv-march-y by usage of subst macros.
- - Drop "Base ISA" choice as it is empty now.
- - Update the commit message.
----
-Changes in V6:
- - new patch.
----
- xen/arch/riscv/Kconfig | 18 ------------------
- xen/arch/riscv/arch.mk |  8 +++++---
- 2 files changed, 5 insertions(+), 21 deletions(-)
+ xen/arch/riscv/include/asm/bitops.h | 7 +++++++
+ xen/arch/riscv/include/asm/config.h | 4 ++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index fa95cd0a42..d882e0a059 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -23,24 +23,6 @@ endmenu
+diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
+index d22eec1e87..72a4a8c155 100644
+--- a/xen/arch/riscv/include/asm/bitops.h
++++ b/xen/arch/riscv/include/asm/bitops.h
+@@ -125,6 +125,13 @@ static inline void clear_bit(int nr, volatile void *p)
+ #undef NOT
+ #undef __AMO
  
- menu "ISA Selection"
++#define arch_ffs(x)     ((x) ? 1 + __builtin_ctz(x) : 0)
++#define arch_ffsl(x)    ((x) ? 1 + __builtin_ctzl(x) : 0)
++#define arch_fls(x)     ((x) ? BITS_PER_INT - __builtin_clz(x) : 0)
++#define arch_flsl(x)    ((x) ? BITS_PER_LONG - __builtin_clzl(x) : 0)
++
++#define arch_hweightl(x) __builtin_popcountl(x)
++
+ #endif /* ASM__RISCV__BITOPS_H */
  
--choice
--	prompt "Base ISA"
--	default RISCV_ISA_RV64G if RISCV_64
--	help
--	  This selects the base ISA extensions that Xen will target.
--
--config RISCV_ISA_RV64G
--	bool "RV64G"
--	help
--	  Use the RV64I base ISA, plus
--	  "M" for multiply/divide,
--	  "A" for atomic instructions,
--	  “F”/"D" for  {single/double}-precision floating-point instructions,
--	  "Zicsr" for control and status register access,
--	  "Zifencei" for instruction-fetch fence.
--
--endchoice
--
- config RISCV_ISA_C
- 	bool "Compressed extension"
- 	default y
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 17827c302c..3034da76cb 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -6,10 +6,12 @@ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
- riscv-abi-$(CONFIG_RISCV_32) := -mabi=ilp32
- riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
+ /*
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 826e5c7172..7141bd9e46 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -119,6 +119,7 @@
+ #define HYPERVISOR_VIRT_START XEN_VIRT_START
  
--riscv-march-$(CONFIG_RISCV_ISA_RV64G) := rv64g
--riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
-+riscv-march-$(CONFIG_RISCV_64) := rv64
-+riscv-march-y += ima
-+riscv-march-$(CONFIG_RISCV_ISA_C) += c
-+riscv-march-y += _zicsr_zifencei
+ #if defined(CONFIG_RISCV_64)
++# define INT_BYTEORDER 2
+ # define LONG_BYTEORDER 3
+ # define ELFSIZE 64
+ # define MAX_VIRT_CPUS 128u
+@@ -126,6 +127,9 @@
+ # error "Unsupported RISCV variant"
+ #endif
  
--riscv-generic-flags := $(riscv-abi-y) -march=$(riscv-march-y)
-+riscv-generic-flags := $(riscv-abi-y) -march=$(subst $(space),,$(riscv-march-y))
- 
- # check-extension: Check whether extenstion is supported by a compiler and
- #                  an assembler.
++#define BYTES_PER_INT  (1 << INT_BYTEORDER)
++#define BITS_PER_INT  (BYTES_PER_INT << 3)
++
+ #define BYTES_PER_LONG (1 << LONG_BYTEORDER)
+ #define BITS_PER_LONG  (BYTES_PER_LONG << 3)
+ #define POINTER_ALIGN  BYTES_PER_LONG
 -- 
 2.48.1
 
