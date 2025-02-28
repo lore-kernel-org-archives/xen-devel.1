@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8ADC282C1
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:18:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.898956.1307413 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A1FC282C1
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Feb 2025 16:18:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.898960.1307449 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34I-0003ie-K8; Fri, 28 Feb 2025 16:18:30 +0000
+	id 1to34M-0004Ve-PM; Fri, 28 Feb 2025 16:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 898956.1307413; Fri, 28 Feb 2025 16:18:30 +0000
+Received: by outflank-mailman (output) from mailman id 898960.1307449; Fri, 28 Feb 2025 16:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1to34I-0003iX-GH; Fri, 28 Feb 2025 16:18:30 +0000
-Received: by outflank-mailman (input) for mailman id 898956;
- Fri, 28 Feb 2025 16:18:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1to34M-0004UX-Gz; Fri, 28 Feb 2025 16:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 898960;
+ Fri, 28 Feb 2025 16:18:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5/q7=VT=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1to34H-0003Uh-H6
- for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:29 +0000
+ id 1to34L-0003Ub-M6
+ for xen-devel@lists.xenproject.org; Fri, 28 Feb 2025 16:18:33 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a40d06af-f5ef-11ef-9898-31a8f345e629;
- Fri, 28 Feb 2025 17:18:27 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id a78a906d-f5ef-11ef-9aaf-95dc52dad729;
+ Fri, 28 Feb 2025 17:18:33 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CACEA1515;
- Fri, 28 Feb 2025 08:18:41 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A9EA7176A;
+ Fri, 28 Feb 2025 08:18:47 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A8D893F5A1;
- Fri, 28 Feb 2025 08:18:25 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 87CE23F5A1;
+ Fri, 28 Feb 2025 08:18:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a40d06af-f5ef-11ef-9898-31a8f345e629
+X-Inumbo-ID: a78a906d-f5ef-11ef-9aaf-95dc52dad729
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,51 +52,70 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/9] arm/mpu: Add HYPERVISOR_VIRT_START and avoid a check in xen.lds.S
-Date: Fri, 28 Feb 2025 16:18:09 +0000
-Message-Id: <20250228161817.3342443-2-luca.fancellu@arm.com>
+Subject: [PATCH 5/9] arm/mpu: Introduce utility functions for the pr_t type
+Date: Fri, 28 Feb 2025 16:18:13 +0000
+Message-Id: <20250228161817.3342443-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250228161817.3342443-1-luca.fancellu@arm.com>
 References: <20250228161817.3342443-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The define HYPERVISOR_VIRT_START is required by the common code,
-even if MPU system doesn't use virtual memory, define it in
-mpu/layout.h in order to reuse existing code.
-
-Disable a check in the linker script for arm for !MMU systems.
+Introduce few utility function to manipulate and handle the
+pr_t type.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/mpu/layout.h | 2 ++
- xen/arch/arm/xen.lds.S                | 2 ++
- 2 files changed, 4 insertions(+)
+ xen/arch/arm/include/asm/arm64/mpu.h | 36 ++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mpu/layout.h b/xen/arch/arm/include/asm/mpu/layout.h
-index d6d397f4c2ac..248e55f8882d 100644
---- a/xen/arch/arm/include/asm/mpu/layout.h
-+++ b/xen/arch/arm/include/asm/mpu/layout.h
-@@ -22,6 +22,8 @@
-  */
- #define XEN_VIRT_START         _AT(paddr_t, XEN_START_ADDRESS)
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index c63a9e6e5455..3a09339818a0 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -50,6 +50,42 @@ typedef struct {
+     prlar_t prlar;
+ } pr_t;
  
-+#define HYPERVISOR_VIRT_START  XEN_VIRT_START
++/* Set base address of MPU protection region(pr_t). */
++static inline void pr_set_base(pr_t *pr, paddr_t base)
++{
++    pr->prbar.reg.base = (base >> MPU_REGION_SHIFT);
++}
 +
- #endif /* __ARM_MPU_LAYOUT_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-index bbccff1a0350..4342e54422a7 100644
---- a/xen/arch/arm/xen.lds.S
-+++ b/xen/arch/arm/xen.lds.S
-@@ -239,4 +239,6 @@ ASSERT(IS_ALIGNED(__bss_start,      POINTER_ALIGN), "__bss_start is misaligned")
- ASSERT(IS_ALIGNED(__bss_end,        POINTER_ALIGN), "__bss_end is misaligned")
- /* To simplify the logic in head.S, we want to _end to be page aligned */
- ASSERT(IS_ALIGNED(_end,             PAGE_SIZE), "_end is not page aligned")
-+#ifdef CONFIG_MMU
- ASSERT((_end - _start) <= XEN_VIRT_SIZE, "Xen is too big")
-+#endif
++/* Set limit address of MPU protection region(pr_t). */
++static inline void pr_set_limit(pr_t *pr, paddr_t limit)
++{
++    pr->prlar.reg.limit = ((limit - 1) >> MPU_REGION_SHIFT);
++}
++
++/*
++ * Access to get base address of MPU protection region(pr_t).
++ * The base address shall be zero extended.
++ */
++static inline paddr_t pr_get_base(pr_t *pr)
++{
++    return (paddr_t)(pr->prbar.reg.base << MPU_REGION_SHIFT);
++}
++
++/*
++ * Access to get limit address of MPU protection region(pr_t).
++ * The limit address shall be concatenated with 0x3f.
++ */
++static inline paddr_t pr_get_limit(pr_t *pr)
++{
++    return (paddr_t)((pr->prlar.reg.limit << MPU_REGION_SHIFT)
++                     | ~MPU_REGION_MASK);
++}
++
++static inline bool region_is_valid(pr_t *pr)
++{
++    return pr->prlar.reg.en;
++}
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* __ARM64_MPU_H__ */
 -- 
 2.34.1
 
