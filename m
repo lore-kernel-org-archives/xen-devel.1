@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A107AC021B8
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Mar 2025 05:32:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.899313.1307683 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00750C021B8
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Mar 2025 11:43:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.899374.1307723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1toFSY-0006n0-JO; Sat, 01 Mar 2025 05:32:22 +0000
+	id 1toLFA-0000dN-He; Sat, 01 Mar 2025 11:42:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 899313.1307683; Sat, 01 Mar 2025 05:32:22 +0000
+Received: by outflank-mailman (output) from mailman id 899374.1307723; Sat, 01 Mar 2025 11:42:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1toFSY-0006ml-Do; Sat, 01 Mar 2025 05:32:22 +0000
-Received: by outflank-mailman (input) for mailman id 899313;
- Sat, 01 Mar 2025 05:32:21 +0000
+	id 1toLFA-0000dB-Ee; Sat, 01 Mar 2025 11:42:56 +0000
+Received: by outflank-mailman (input) for mailman id 899374;
+ Sat, 01 Mar 2025 11:42:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=FVjp=VU=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
- id 1toFSX-0006mf-1n
- for xen-devel@lists.xenproject.org; Sat, 01 Mar 2025 05:32:21 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ <SRS0=Tn84=VU=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
+ id 1toLF9-0000De-H1
+ for xen-devel@lists.xenproject.org; Sat, 01 Mar 2025 11:42:55 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8a3aec55-f65e-11ef-9ab0-95dc52dad729;
- Sat, 01 Mar 2025 06:32:18 +0100 (CET)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 43B7F61160;
- Sat,  1 Mar 2025 05:32:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 322F8C4CEDD;
- Sat,  1 Mar 2025 05:32:16 +0000 (UTC)
+ id 5029b041-f692-11ef-9ab0-95dc52dad729;
+ Sat, 01 Mar 2025 12:42:54 +0100 (CET)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-54957f0c657so1103483e87.0
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Mar 2025 03:42:54 -0800 (PST)
+Received: from a2klaptop.localdomain ([185.199.97.5])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5494d7ac5aasm529435e87.120.2025.03.01.03.42.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 01 Mar 2025 03:42:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,120 +47,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a3aec55-f65e-11ef-9ab0-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1740807136;
-	bh=hPXdQ/hFIPpJkdJk70/Oo9SCb0ot1PV7JSm65Zo7Cqg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=yZynGDlYwSbyoqFxsYZl1iByokf6rG0lkNQ74A4dx6zWUHiE8rkNPKdaqpLCM49Bn
-	 Uzrt/PWQSzWLM/oTxXcz3PcYxelzJVyoeGwpXCciRubcatryZJoBOlZTenvMi71GVA
-	 2W0TdbFnLPo/0syo4YdyI4XV80EkIo0CIlMPU25o=
-Date: Fri, 28 Feb 2025 20:19:47 -0800
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Harshvardhan Jha <harshvardhan.j.jha@oracle.com>
-Cc: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
-	Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>,
-	Salvatore Bonaccorso <carnil@debian.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Sasha Levin <sashal@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
-	Radoslav =?iso-8859-1?Q?Bod=F3?= <radoslav.bodo@igalileo.cz>,
-	regressions@lists.linux.dev, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Subject: Re: [6.1.y] Regression from b1e6e80a1b42 ("xen/swiotlb: add
- alignment check for dma buffers") when booting with Xen and mpt3sas_cm0
- _scsih_probe failures
-Message-ID: <2025022853-undivided-scribing-70dd@gregkh>
-References: <Z6d-l2nCO1mB4_wx@eldamar.lan>
- <fd650c88-9888-46bc-a448-9c1ddcf2b066@oracle.com>
- <Z6ukbNnyQVdw4kh0@eldamar.lan>
- <716f186d-924a-4f2c-828a-2080729abfe9@oracle.com>
- <6d7ed6bf-f8ad-438a-a368-724055b4f04c@suse.com>
- <2025021548-amiss-duffel-9dcf@gregkh>
- <74e74dde-0703-4709-96b8-e1615d40f19c@suse.com>
- <2025021533-grime-luminous-d598@gregkh>
- <e01c39ad-6f5e-449a-b24a-db3b7984030e@oracle.com>
+X-Inumbo-ID: 5029b041-f692-11ef-9ab0-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1740829373; x=1741434173; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8FflU+Os5qjZCptb7/2Oo5l7bXlBx0KY0qkevSMYIvQ=;
+        b=nNJGd8/tc8v5FQsHxsl2CHKeshLlwoMmfgneUh/UkQkJr8J1d7PkdAu/M1CZcGfxF9
+         feFvdK5QxV/qFJZp0NyvNNlWLSmJCjubz0Tskjd3FuVC7bcn7QI1rRi5hCuP6CDspkPS
+         huu4ybxLaX8uN6AzqbPBuq+Nshi3LBgjbbWMCPgzpdn0UAn3VRmRAUdTm565js1YrU/1
+         b8Xm1BqgaLKRZRm8LlI2XW72XeIbgQLuI0krmRyQDJPlJxpA+OhJWU8bLuMs74myuGUm
+         DhoTBGBNpoG2WfrJ7WfFnVKe91e214RDIfV/eiBKm6ALxHHjW50vlKKXNvIlqx6zpO0i
+         cQCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740829373; x=1741434173;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8FflU+Os5qjZCptb7/2Oo5l7bXlBx0KY0qkevSMYIvQ=;
+        b=X6pNKdQl3LosZrZMSidgJ390gNPWTsJZR1wekEaMx2L6cD0tUFDuDBCh/t1XK+lJdd
+         YXo91YgZ1bDiayT7YdPwZJe1yLfYZzPVSQYF2pIB4lUH23pqP0F5wkSur7U8vkorS9HF
+         WOAvdv8EhwBE4lcxF8f0L5QM60bi4mj4EhZ5c3HVMPhRCD/dR6UjRKAAdgjZygrms80y
+         /IXTjLkPMW6xUHNEQ1ZGdsr3jmlOOZA4mPjJlrjUHEcfM/Od55Z5VaTZw8m50MjfQkte
+         GtmQU4zJqzq5z3J5LF1DsZwtdX5hH1mFq9LZGQsMZcoCNDKAHrSz/hptCCMYMvCC2h4M
+         5b0Q==
+X-Gm-Message-State: AOJu0YwhMqVIPlKwyfJWuE3Q3txjQPdcrLgOPzbLoQnJG5y2oEDPCp0X
+	gaNP75INkqJ6khoRbVcI1JhbOzyeHSvZs+h1EmUQVGnSy7J2WuY3mpBdXfhv
+X-Gm-Gg: ASbGnctjtYl2cwmH5oPtzKMK640QUX8qInzQHIOrSPlJOOfOqC+hzBCbGWQayQdPUOj
+	DUOnv5HcAnNEiYDOJ9+RkdVG8Yod6cwYI0OBv8TkfwCDN85PA8o+A4D0QiW0VTPCty1TP1l66tU
+	ufluCtjDv9v709bueIh3HXi0vtLT677YqQNfJqDS1kDEwzBo+Vv78cXuYG9IhslRXGcE3FwNRZQ
+	nhCc4/WaZXzG55RJzfUH0d0Wugy4k+8HmT90VaiUQ0o85j1pKFblECH0lU+krSs6X5fgo7OFO9j
+	LQ976pC9ZdR4fo0aS3KiPL8LHL++c1biYlF345NbwMvI/iT+1VyXZw==
+X-Google-Smtp-Source: AGHT+IHrO/PxJz1la6A2/UtF7kPd60s0hPMesf4wO9jK5XIhnmwC35ZO2bjPxQp/XuyLw1uhicpL0Q==
+X-Received: by 2002:a05:6512:398e:b0:545:2cb2:8b25 with SMTP id 2adb3069b0e04-5494c323717mr2711013e87.14.1740829373290;
+        Sat, 01 Mar 2025 03:42:53 -0800 (PST)
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: andr2000@gmail.com,
+	sstabellini@kernel.org,
+	Artem_Mygaiev@epam.com,
+	jbeulich@suse.com,
+	Luca.Fancellu@arm.com,
+	roger.pau@citrix.com,
+	marmarek@invisiblethingslab.com,
+	andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech
+Subject: [PATCH 3/4] [EXAMPLE] Changes done by clang-format to the previous commit
+Date: Sat,  1 Mar 2025 13:42:41 +0200
+Message-Id: <20250301114242.93650-4-andr2000@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250301114242.93650-1-andr2000@gmail.com>
+References: <20250301114242.93650-1-andr2000@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <e01c39ad-6f5e-449a-b24a-db3b7984030e@oracle.com>
 
-On Fri, Feb 28, 2025 at 01:50:12PM +0530, Harshvardhan Jha wrote:
-> 
-> On 15/02/25 8:25 PM, Greg KH wrote:
-> > On Sat, Feb 15, 2025 at 02:39:46PM +0100, Jürgen Groß wrote:
-> >> On 15.02.25 13:34, Greg KH wrote:
-> >>> On Sat, Feb 15, 2025 at 12:47:57PM +0100, Jürgen Groß wrote:
-> >>>> On 12.02.25 16:12, Harshit Mogalapalli wrote:
-> >>>>> Hi Salvatore,
-> >>>>>
-> >>>>> On 12/02/25 00:56, Salvatore Bonaccorso wrote:
-> >>>>>> Hi Harshit,
-> >>>>>>
-> >>>>>> On Sun, Feb 09, 2025 at 01:45:38AM +0530, Harshit Mogalapalli wrote:
-> >>>>>>> Hi Salvatore,
-> >>>>>>>
-> >>>>>>> On 08/02/25 21:26, Salvatore Bonaccorso wrote:
-> >>>>>>>> Hi Juergen, hi all,
-> >>>>>>>>
-> >>>>>>>> Radoslav Bodó reported in Debian an issue after updating our kernel
-> >>>>>>>> from 6.1.112 to 6.1.115. His report in full is at:
-> >>>>>>>>
-> >>>>>>>> https://bugs.debian.org/1088159
-> >>>>>>>>
-> >>>>>>> Note:
-> >>>>>>> We have seen this on 5.4.y kernel: More details here:
-> >>>>>>> https://lore.kernel.org/all/9dd91f6e-1c66-4961-994e-dbda87d69dad@oracle.com/
-> >>>>>> Thanks for the pointer, so looking at that thread I suspect the three
-> >>>>>> referenced bugs in Debian are in the end all releated. We have one as
-> >>>>>> well relating to the megasas_sas driver, this one for the mpt3sas
-> >>>>>> driver and one for the i40e driver).
-> >>>>>>
-> >>>>>> AFAICS, there is not yet a patch which has landed upstream which I can
-> >>>>>> redirect to a affected user to test?
-> >>>>>>
-> >>>>> Konrad pointed me at this thread: https://lore.kernel.org/
-> >>>>> all/20250211120432.29493-1-jgross@suse.com/
-> >>>>>
-> >>>>> This has some fixes, but not landed upstream yet.
-> >>>> Patches are upstream now. In case you still experience any problems, please
-> >>>> speak up.
-> >>> What specific commits should be backported here?
-> >> Those are:
-> >>
-> >> e93ec87286bd1fd30b7389e7a387cfb259f297e3
-> >> 85fcb57c983f423180ba6ec5d0034242da05cc54
-> > Ugh, neither of them were marked for stable inclusion, why not?  Anyway,
-> > I'll go queue them up after this round of kernels is released hopefully
-> > tomorrow, but next time, please follow the stable kernel rules if you
-> > know you want a patch included in a tree.
-> 
-> 
-> Hi,
-> 
-> I see these patches in 6.12 now and upon manually checking these patches
-> cleanly apply till 6.6 kernel so I guess they will be eventually back
-> ported till there?
+This patch is the result of the:
 
-They are already in the following released kernels:
-	6.1.129 6.6.79 6.12.16 6.13.4 6.14-rc3
+$ git-clang-format --style=file --verbose HEAD~1
+Running clang-format on the following files:
+    tools/xl/xl_info.c
+    xen/drivers/char/ns16550.c
+old tree: dceb97b3ef3c80cbb9c29311a7f5783df2f69127
+new tree: a8d36f8f45c3ee0d75e674ecda102ffc6a0a0ef3
+changed files:
+    xen/drivers/char/ns16550.c
 
-and the first one is in the stable queues for 5.15, 5.10, and 5.4.  The
-second one is not because as you mention:
+It is seen that only xen/ part of the patch was touched. The result can
+still be manually adjusted before committing.
 
-> 6.1 and older kernels have conflicts while cherry
-> picking these commits which makes it harder to verify them as the test
-> machine I have runs on a much older kernel(5.4) unfortunately. If it
-> could be at least be brought back till 5.15, testing this would become
-> much easier.
+Signed-off-by: Oleksandr Andrushchenko <andr2000@gmail.com>
+---
+ xen/drivers/char/ns16550.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-The commit does not apply cleanly there.  If you need/want it there,
-please provide a working and tested backport.
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 53586f110008..4d79ef2b08bc 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -340,7 +340,9 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
+         if ( divisor )
+             uart->baud = uart->clock_hz / (divisor << 4);
+         else
+-            printk(XENLOG_ERR "Automatic baud rate determination was requested,"  " but a baud rate was not set up\n");
++            printk(
++                XENLOG_ERR
++                "Automatic baud rate determination was requested," " but a baud rate was not set up\n");
+     }
+     ns_write_reg(uart, UART_LCR, lcr);
+ 
+@@ -348,8 +350,9 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
+     ns_write_reg(uart, UART_MCR, UART_MCR_DTR | UART_MCR_RTS);
+ 
+     /* Enable and clear the FIFOs. Set a large trigger threshold. */
+-    ns_write_reg(uart, UART_FCR, UART_FCR_ENABLE | UART_FCR_CLRX |
+-                 UART_FCR_CLTX | UART_FCR_TRG14);
++    ns_write_reg(uart, UART_FCR,
++                 UART_FCR_ENABLE | UART_FCR_CLRX | UART_FCR_CLTX |
++                     UART_FCR_TRG14);
+ }
+ 
+ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
+-- 
+2.25.1
 
-thanks,
-
-greg k-h
 
