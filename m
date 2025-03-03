@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91847C282D0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B58FC282D3
 	for <xen-devel@archiver.kernel.org>; Mon,  3 Mar 2025 08:57:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.899951.1307875 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.899953.1307895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp1bk-0003E0-9K; Mon, 03 Mar 2025 08:57:04 +0000
+	id 1tp1bl-0003g9-Qp; Mon, 03 Mar 2025 08:57:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 899951.1307875; Mon, 03 Mar 2025 08:57:04 +0000
+Received: by outflank-mailman (output) from mailman id 899953.1307895; Mon, 03 Mar 2025 08:57:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp1bk-0003Dt-6O; Mon, 03 Mar 2025 08:57:04 +0000
-Received: by outflank-mailman (input) for mailman id 899951;
- Mon, 03 Mar 2025 08:57:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tp1bl-0003g2-Ms; Mon, 03 Mar 2025 08:57:05 +0000
+Received: by outflank-mailman (input) for mailman id 899953;
+ Mon, 03 Mar 2025 08:57:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kv9T=VW=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1tp1bi-0003Dd-PL
- for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 08:57:02 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20615.outbound.protection.outlook.com
- [2a01:111:f403:2415::615])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 75c21fb9-f80d-11ef-9898-31a8f345e629;
- Mon, 03 Mar 2025 09:56:57 +0100 (CET)
-Received: from BL0PR0102CA0047.prod.exchangelabs.com (2603:10b6:208:25::24) by
- BL1PR12MB5970.namprd12.prod.outlook.com (2603:10b6:208:399::21) with
+ id 1tp1bj-0003Dc-Lr
+ for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 08:57:03 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061f.outbound.protection.outlook.com
+ [2a01:111:f403:2414::61f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 78df5126-f80d-11ef-9ab2-95dc52dad729;
+ Mon, 03 Mar 2025 09:57:03 +0100 (CET)
+Received: from MN0P221CA0010.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:52a::23)
+ by DM4PR12MB5817.namprd12.prod.outlook.com (2603:10b6:8:60::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.25; Mon, 3 Mar
- 2025 08:56:54 +0000
-Received: from BL6PEPF0001AB4F.namprd04.prod.outlook.com
- (2603:10b6:208:25:cafe::b1) by BL0PR0102CA0047.outlook.office365.com
- (2603:10b6:208:25::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.24; Mon, 3 Mar
+ 2025 08:56:59 +0000
+Received: from BL02EPF0001A100.namprd03.prod.outlook.com
+ (2603:10b6:208:52a:cafe::7c) by MN0P221CA0010.outlook.office365.com
+ (2603:10b6:208:52a::23) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8489.28 via Frontend Transport; Mon,
- 3 Mar 2025 08:56:54 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB4F.mail.protection.outlook.com (10.167.242.73) with Microsoft
+ 3 Mar 2025 08:56:58 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0001A100.mail.protection.outlook.com (10.167.242.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Mon, 3 Mar 2025 08:56:53 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8511.15 via Frontend Transport; Mon, 3 Mar 2025 08:56:58 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 3 Mar
- 2025 02:56:53 -0600
+ 2025 02:56:57 -0600
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Mon, 3 Mar 2025 02:56:51 -0600
+ via Frontend Transport; Mon, 3 Mar 2025 02:56:56 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,105 +61,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75c21fb9-f80d-11ef-9898-31a8f345e629
+X-Inumbo-ID: 78df5126-f80d-11ef-9ab2-95dc52dad729
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FG+R3DVYvG0g4HRAEjw1l/jKBTwqKgMzrYRhHCO3+mXONoc7DecLOvo8o4dcoZtLBhrSzfLhiJvitI96Nf05tWZF3Z6tjylmhdJGj1pTF5/jqJGSB5f+E8RfPlGM0DfC9LZ55q9HoHvGAjEDCDYV4a+QJZcyPvBbdcf9EAFkoaNPjDlaYzJXW03+EI8cB1cmJT8jbWsuahcVrM6oPZNd/PH+dEuTkkZOFEdsZ32t8t3Fxy8qnMxx9nd8dEk/rbmX9BNNdnZLYrHy4qYoBfreUUM2qYCchs+IxuNSbvp9hZLgCeJFnof+yqsYSVxEDvl/3vMr9jwdXphG17BPt906Lg==
+ b=bVeYnvzewCGbDnShfsZytjwi3dG7GNDBUwZgVCWXgni8NKbdjHgNg6xAmUZZewDYNjEnlkbkcTzpFTdBtsKNFfHZh8rJCTu2w27e+hY+cLUS0frDiDjk2bK4vzUZLuCpKMEtK/MIkeU6uw8rC8v3blCkzhuILXpKW0lpSvYVM31i9YM9on4KkLX8vGwFq3Y50+t4os95QnwqZZPxZ31Ul6nQaCbfxx+WzA1LyMQbSCCC73ZY2LgE2UIF3nfk6FVmlW7GEizLG2V62IbJcFtwiSiXiv5Pshl4ALCc7voEPiMvWWI5AEIkzLNYWnFVat3TTd6VthhEyMx8oIiQ6354Iw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=egJCmJhxu99LSlaa1eiDPpwpjCInS8hyXWJ2fmuGQGU=;
- b=nqhv7M38MFGf+bNqHOn/F8cnHIpZ8p/fbNzE4wQuU7hAKzNE3uNZ+y6G5cdQxWN5SgG0mDy4wRH48LtsWD1AzeB1Ap5Wb+sOYEQ+vzQycJgByB/1kbs8yFVCKaTigW4TTFYekPgwhnDlr1+3rkdUFcyzknPr6C8q/uDREgaVsIK8rpR39VNkgINNHCDuX4DGQFQRLY1faaDg4Np0LaxvaOtTcvDsiZ0xhP8YH89FF46Fmf485Bq3gcE58Zn8YunKaGc98KkcjZicw/+He81pBptmqTXMcrj9VcDpCtgRBIUTK5L8NpT17kcprn/6YyAqtORO8t2sP+w5s6vEc2ZIKA==
+ bh=yQmOEy7gXJx+DP+I6vy84CUACXTTBew/gftEYl44aIE=;
+ b=qsJMYM3qp4NfI22CWqJTd3z15VU2m5OKXWPAE7wh+XFi5gv2ehGIddrgi/M9fTlrU+cJ/gO88skqbnhJwRqB3Tqoo3zNPpFVpsNqLCFh0AmTlAYEjIzsHKHVw0VI+9wG8+opkaCAV6WmpYxMweIChU59VhZ2K9uQOQhLy2xyOiCXILuFtagGzaC0GoFv3uRzwATaIP9YbphdZ+++PKA8XdJy5XhX28K2qfkPqdHWiO3ypnM8RmaLBqr/N34gJhdM3hy8u95+sTpHoDWIPvCAk88JDSGdvmF1CuvqBfXV3CssjcDvv5v1eQM6GhGgdczvUjiU2Zg7V5IDHvwEXHCVQw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=egJCmJhxu99LSlaa1eiDPpwpjCInS8hyXWJ2fmuGQGU=;
- b=48pNeFWU3i80kqdZD1yVZHOYJJektReH9jD0I0bdonGoT4HOaKh8ehPEtdKUPr88jsufubh9mk+BZmHbVYqYopXCEGEgrlp9ehNT7Y/gMQS+4kNj/pgioNCdr10eHL3PLilI0Wl68CfNIxqn2NvEyRidibHwhRtRJgO5gBliUZc=
+ bh=yQmOEy7gXJx+DP+I6vy84CUACXTTBew/gftEYl44aIE=;
+ b=ArIFeSMh+v+GLQJduuw5/HcihjeTRL22zqWvYJ1gX3NLi7V8FMHxezCbIxptCkDnv7dpwJpfKk9joF1DBtDqri1MaxJPh2a0tfZTi+TH5BjX+QdyMZ201kw0p2EFRIGMd1wc/0X4oFlrIyg+Xqvvnhx3O6VI+6Rp6Xx9scvyc2Y=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 0/4] xen/arm: misc tiny fixes
-Date: Mon, 3 Mar 2025 09:56:46 +0100
-Message-ID: <20250303085650.74098-1-michal.orzel@amd.com>
+Subject: [PATCH 3/4] xen/arm: static-shmem: Drop unused size_cells
+Date: Mon, 3 Mar 2025 09:56:49 +0100
+Message-ID: <20250303085650.74098-4-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250303085650.74098-1-michal.orzel@amd.com>
+References: <20250303085650.74098-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
+Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4F:EE_|BL1PR12MB5970:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c8fe7a8-2436-43f2-98d4-08dd5a315840
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A100:EE_|DM4PR12MB5817:EE_
+X-MS-Office365-Filtering-Correlation-Id: 22eb8960-63a2-4a9a-e0b0-08dd5a315b04
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014;
+	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?H1MT74qaAVgUxXtoR1IyN3dt/K3Y29pvT9OEwPCv5lFU5WeN07+RJ/R/m6nQ?=
- =?us-ascii?Q?Olt0AMjjTLZiJcD6zbJx+k8oz1wd9iIIJRmoVZndNm2RnytPZ9RSIkv32W7z?=
- =?us-ascii?Q?V+aU8La6kPDJpblPuoTIckcwcDWR/Q08bTdPF+c97R71Nns0rBlfwnDO2WH6?=
- =?us-ascii?Q?TKV78PqQHxaVXbaFL08PDmqrDnqmQ9Fy9OqIRT3bgqOvFTqPFr/GEY0WAAYv?=
- =?us-ascii?Q?Iig0yrUXrWMCtqKSVoaIsh+WCSyIwyz+EjmxozR5kUrjbmZL6vFZTB7D0vrP?=
- =?us-ascii?Q?dMGkDj8bXSrjj043hIGOezxTezZfDN9fGP1aTme5thPh3Z6L2o6NzBsOI6wT?=
- =?us-ascii?Q?GFm3YpBg+tRAsrfWPs3kll5WXDHNLFammkfbZGIY2eZL32Rf9v7SiC6jEDe7?=
- =?us-ascii?Q?tKRnYCijKHQ2GXvRs1+M50WerDn07HPh8p7YbHmsGscv7UWWZQltMlxgZ5/t?=
- =?us-ascii?Q?2fRxLJhiuwjJmYIpT+FUV1cZwqJa9NdUEB+MEp0IyXnmMRLv/2mjCXYtPbaH?=
- =?us-ascii?Q?hAWp3Vspxsl+eGtfqS8k3OCNYuruLKWOtVak2BowN//JOxvDvUG3ZeqOIQJ4?=
- =?us-ascii?Q?BYjs3C8zDxZ28Ck6w3v6BxBn1C8Q3/1T+FzZWnYUMESdGj2B/INH5fjGSJjk?=
- =?us-ascii?Q?ajMFkYOsU29VOsV3xbBafDm1yYPohG3rgCThkQsWYakDVVJJ6+Qt+N4fzGN1?=
- =?us-ascii?Q?20Oeu02G7tVO5KqVhPQIyeRni4EaIJwI7XEFx//T2As3i7gXt71pkJVNaQmA?=
- =?us-ascii?Q?KWJmpS20CdIl3dIQ6jijvup5kmNiG4WnhHp/tFDO9vJP3Hm0fUMY66LRANDW?=
- =?us-ascii?Q?+l8DNbpND7NEFzuc83ijt9hVqjOI+cKhPaPy1kFn2pkD2OLzwWXQwWCDqnZM?=
- =?us-ascii?Q?oAdZXNguYVz58zY2dfe6viDlXxxh/XJKgtCAZrRQcG1vv7S0xKRBfikiEQc+?=
- =?us-ascii?Q?mZsNfbt7N7Aeij5pwQ1aLmgBNIgOY+p7tx7IJHy6F5hs6DAfK74gwEET/zfv?=
- =?us-ascii?Q?UxngdS0v4A5hfoK6WY1evrSAwDMYGBUDxU4RKWJGcdVyOjsS0ksbqMyhBzVa?=
- =?us-ascii?Q?OvAeMqrIsaujLSY1bY7cfOJ0igIBHbzo8YsIA5lnqPPPXRrV6wQfPB94Uroo?=
- =?us-ascii?Q?E+SqkgOIGChwfJIh5gMxRu3d7GEuaDYMDL448inmQXDHnOJ70TVscCFzioOI?=
- =?us-ascii?Q?FVdSUcixWIMNG3TBz2rtpI+jmw9LEtMZ6P2n34EYkchHhCMb+G027a+bhg6A?=
- =?us-ascii?Q?HSyGn1et+boN/qnLFZn7nnmhikU/LlTI03hghPWXNYnRCUm9g3OOLueIVE+W?=
- =?us-ascii?Q?t2NqBVcahavdRIiFwRSYN9WuAqXoIohUmeSC2BPWZ+MLdCl335EP+xh7je4p?=
- =?us-ascii?Q?f52oMsmokFaB0r3LiwXpW8DQmD1NIKxA2IhDhtAGgATq13aEW0x/XcnkyEQO?=
- =?us-ascii?Q?fJWFMpkIc1rxmLi3NWb/jNCQA+pWUUjkwKWxR6GPfOjbz+vWCexM79y8bmez?=
- =?us-ascii?Q?KsLUBYPO+Ibq/LE=3D?=
+	=?us-ascii?Q?SGqCdXH1UqBB/Qwtjk8ysa3bd6STpxF4sMRjT2HZ6HrqIZnqWDKSzX5tUET0?=
+ =?us-ascii?Q?vlJrnUAvp3sPy4LWUTHB6T8CoDIAmn/b/Nu3nTcLKEYP1LR1ppAe83pa7LWb?=
+ =?us-ascii?Q?DBXCgogiFoy3gFAHWO9jlfmX8aqQfn8q7qyL9lIwiojoRp8LsVgFkHftt+XU?=
+ =?us-ascii?Q?X5H6whBIsjL7SsbNZjXnUWAIhg5VM3llmDSYW3Aw9Na6BQHW7bxUiQ5FyI3u?=
+ =?us-ascii?Q?yhtjAFCc3shWMq5QT3S3KavZCUqeHsmn5w2j+4ySCSyNp3cpNeuLI+DfEsHE?=
+ =?us-ascii?Q?MDvHSs6/k8pYiXz9viAAtlmu2XNnOAIh/1LRSPHhwleoOyvlS6F4l0kUv+Wv?=
+ =?us-ascii?Q?LV0QEP9errSOvXrHorzmJ8p+fyPwiyQ1bWy4/UJohLvOchcWHv2GeSMfn83E?=
+ =?us-ascii?Q?81i9DcXqFjVX7IA2mTAV66mZT+CuSnMpJrdFj/apKntZjPkw04tzuoJYSkAc?=
+ =?us-ascii?Q?5v2/f5GCKAWXP+Gqv7Z7d6Zx7El+MU1g8IIyb65x8mg7Qd0uh95Ag1NY2Nm9?=
+ =?us-ascii?Q?Ck+SFkLpE8zrw62tADghvvIACEr6beTa6qsqEMtOe1FQSvx3LcwYKtKx+N5y?=
+ =?us-ascii?Q?2pqWFsAS2lUfqWLybwouuRI5E2WtQdRQzwRrgXcGWYkkLYy2CzMCE/iS9OT1?=
+ =?us-ascii?Q?gfSE922JjbQaNagvDi+5nCQk1bWC8ixstV5eJUp+pPYTk/Y5FyCH1+tQHmUr?=
+ =?us-ascii?Q?1kN1OxedYhrQq6+JdiJ+PPnV390c29rDPbVDrbJO3ov3eeGPcC9uu1nZ5TsB?=
+ =?us-ascii?Q?XsQa4szxfqq1AaCnx7FG/sx+PEhkDNOW2g0UQ4vfKcpCRDrAADkA3Plv992g?=
+ =?us-ascii?Q?Q/wcFDTA3ePWuGiLMwlxXSY5sVV69GPfjyBm4Ak2iI6jLptIpv2jOr+GBDT5?=
+ =?us-ascii?Q?aC65qdOMREW+pZmyHp2JurtvI4En3SsEoQRc+CCgIhOPjkuAglKqkNQ9hG7Q?=
+ =?us-ascii?Q?7XnnODr561pFDn3hwQqv9UKXuUqUbVHeLx6oAoXln1SJzr631tpKu8JtFUWh?=
+ =?us-ascii?Q?vOdkxKaoIEhEOtumpfFHv6pqXtaKhONst+KA6JwiTY7S0/53WLH944Scu0Wg?=
+ =?us-ascii?Q?eRTMW0AG02NekDPnfLDTLlsV8Kbs2Da2kiQ8GE10IcL7B17BvbarxeDBsZkX?=
+ =?us-ascii?Q?IQU3uNWj2gB4ZS9bsgnJ/IhloLQasZowSZ4nXW3lgqRvJ62xTuAePirAhv5l?=
+ =?us-ascii?Q?NfvLCTQAOeqNalv93THJ39qf9M1W0OETY0Yr2ddAgXm9S0gTXNg2aQNfASpF?=
+ =?us-ascii?Q?oysIuDvRzpvMTWsiQ5tIDoeEeukBsxjXbkBI+lsI2zfzi3hM+MkxUOs1Mqv1?=
+ =?us-ascii?Q?mO1aRzBruqIr96u2/pIyyiZL7K4SqM66SFL2EzzEowyxeJCJMW1AW0Pnz2OY?=
+ =?us-ascii?Q?2DNAyz9II+9lDtqHy/qvSe0RAyW1Frc4QA5TthzLeZWJCEIO8eughHBOSQuH?=
+ =?us-ascii?Q?hGfuZhJW/LuoBiz1pxgGYtythEK/ogJI4QI2Odc8WxcSzUuts43IKtIAMq04?=
+ =?us-ascii?Q?YxGDgALGzgGe0ko=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 08:56:53.6691
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 08:56:58.2953
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c8fe7a8-2436-43f2-98d4-08dd5a315840
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22eb8960-63a2-4a9a-e0b0-08dd5a315b04
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB4F.namprd04.prod.outlook.com
+	BL02EPF0001A100.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5970
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5817
 
-Series of unconnected, tiny patches accumulated recently.
+Value stored in size_cells is never read because we're only interested
+in retrieving gbase address of shmem region for which we only need
+address cells.
 
-Michal Orzel (4):
-  xen/arm: dm: Bail out if padding != 0 for XEN_DMOP_set_irq_level
-  xen/arm: Check return code from fdt_finish_reservemap()
-  xen/arm: static-shmem: Drop unused size_cells
-  xen/arm: Don't blindly print hwdom in generic panic messages
-
- xen/arch/arm/dm.c           | 2 +-
- xen/arch/arm/domain_build.c | 8 +++++---
- xen/arch/arm/kernel.c       | 4 ++--
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
  xen/arch/arm/static-shmem.c | 3 +--
- 4 files changed, 9 insertions(+), 8 deletions(-)
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
+diff --git a/xen/arch/arm/static-shmem.c b/xen/arch/arm/static-shmem.c
+index 8f87154c3587..c74fa13d4847 100644
+--- a/xen/arch/arm/static-shmem.c
++++ b/xen/arch/arm/static-shmem.c
+@@ -302,7 +302,7 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+         const struct membank *boot_shm_bank;
+         const struct dt_property *prop;
+         const __be32 *cells;
+-        uint32_t addr_cells, size_cells;
++        uint32_t addr_cells;
+         paddr_t gbase, pbase, psize;
+         int ret = 0;
+         unsigned int i;
+@@ -338,7 +338,6 @@ int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+          * pbase is optional.
+          */
+         addr_cells = dt_n_addr_cells(shm_node);
+-        size_cells = dt_n_size_cells(shm_node);
+         prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
+         BUG_ON(!prop);
+         cells = (const __be32 *)prop->value;
 -- 
 2.25.1
 
