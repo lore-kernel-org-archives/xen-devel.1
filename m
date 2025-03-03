@@ -4,44 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3781AC282C5
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Mar 2025 08:53:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.899941.1307864 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FBFC282C5
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Mar 2025 08:57:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.899952.1307881 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp1Xn-0002Ft-O6; Mon, 03 Mar 2025 08:52:59 +0000
+	id 1tp1bk-0003HA-Ha; Mon, 03 Mar 2025 08:57:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 899941.1307864; Mon, 03 Mar 2025 08:52:59 +0000
+Received: by outflank-mailman (output) from mailman id 899952.1307881; Mon, 03 Mar 2025 08:57:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp1Xn-0002Fm-L9; Mon, 03 Mar 2025 08:52:59 +0000
-Received: by outflank-mailman (input) for mailman id 899941;
- Mon, 03 Mar 2025 08:52:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8eIf=VW=redhat.com=david@srs-se1.protection.inumbo.net>)
- id 1tp1Xm-0001Dj-Ny
- for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 08:52:58 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e67fc786-f80c-11ef-9898-31a8f345e629;
- Mon, 03 Mar 2025 09:52:57 +0100 (CET)
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-687-C-bCpjm-MzmIWUy8hFaF0A-1; Mon, 03 Mar 2025 03:52:52 -0500
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4388eee7073so21868125e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 03 Mar 2025 00:52:52 -0800 (PST)
-Received: from ?IPV6:2003:cb:c734:9600:af27:4326:a216:2bfb?
- (p200300cbc7349600af274326a2162bfb.dip0.t-ipconnect.de.
- [2003:cb:c734:9600:af27:4326:a216:2bfb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43b8d6bc3fcsm122643735e9.0.2025.03.03.00.52.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Mar 2025 00:52:50 -0800 (PST)
+	id 1tp1bk-0003GS-D7; Mon, 03 Mar 2025 08:57:04 +0000
+Received: by outflank-mailman (input) for mailman id 899952;
+ Mon, 03 Mar 2025 08:57:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Kv9T=VW=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1tp1bi-0003Dc-NB
+ for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 08:57:02 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:200a::61d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 777991d9-f80d-11ef-9ab2-95dc52dad729;
+ Mon, 03 Mar 2025 09:57:01 +0100 (CET)
+Received: from BL0PR0102CA0025.prod.exchangelabs.com (2603:10b6:207:18::38) by
+ SJ0PR12MB6759.namprd12.prod.outlook.com (2603:10b6:a03:44b::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.25; Mon, 3 Mar
+ 2025 08:56:56 +0000
+Received: from BL6PEPF0001AB4D.namprd04.prod.outlook.com
+ (2603:10b6:207:18:cafe::b5) by BL0PR0102CA0025.outlook.office365.com
+ (2603:10b6:207:18::38) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8489.20 via Frontend Transport; Mon,
+ 3 Mar 2025 08:56:55 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4D.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8511.15 via Frontend Transport; Mon, 3 Mar 2025 08:56:55 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 3 Mar
+ 2025 02:56:54 -0600
+Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
+ SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
+ via Frontend Transport; Mon, 3 Mar 2025 02:56:53 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,205 +61,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e67fc786-f80c-11ef-9898-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1740991976;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=L2Teo9Rbchbz42+Q6lAs3ttlkWMO9/zXQmWUHGDFFeQ=;
-	b=MvR+cGPavUsl3/jZDJh1Rh1PIvLsQCP03A6RihuXRMrIkjjAZek80A8iKCIBrSI5qXBSzE
-	rDU6CSLl5LX+mjnz2S1i7gEEnfhMa1PmTGAB2xzE0B+nHjh8b4bvXotEJYBMnOskmVMS3P
-	VHzFzpMFHZXlBei1szpvTEgVC7fQ+04=
-X-MC-Unique: C-bCpjm-MzmIWUy8hFaF0A-1
-X-Mimecast-MFC-AGG-ID: C-bCpjm-MzmIWUy8hFaF0A_1740991971
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740991971; x=1741596771;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=L2Teo9Rbchbz42+Q6lAs3ttlkWMO9/zXQmWUHGDFFeQ=;
-        b=S9GQG8TkcfEsRIA8JMJFZJaNBthy0Q+uxm9FtGtyfMpik05GS4qDCnMo68Lgn+884D
-         8jl+UrE+8iV8iJMPqSDZPLZ4YO12raVXvkmzGqjfpyNCpWcsVq7bOaQ8hiHdbF/SvrRv
-         lUL6pRXGVZfmZ/Zwo3/N/u+dmTB6LQjIwAJAZ4kgMUJohB/dReSkg14ToU0bY6YtSQNX
-         8an4jOSKU3Q7686rIwB7wHl5bSmhUOvqVxqU4a8Fn3IQodFcsMcqM+ryIxrVetTMGqMH
-         N1jxyoCbvyoz0vNLywDkOQM0AmIDiMSNR4JjzphfVMbQwgR7s912kHWidolgs26r7+zg
-         lP1w==
-X-Forwarded-Encrypted: i=1; AJvYcCWXXAfvJwmPMVeQQmgna2K76mi30BQi+fFpJ/RXZnc2po3vs+Q7ARq+xRAfwgPsMIKQHQPFwIFsT2A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz6/FRZjFg+gw48vzRyMawo4chYCfCDmlMdWvLRYGHHEf4cajSW
-	WeDXzQCBqxc/m7WhjbapXY4o6AC9MMA2n3y+y/hzesV/aaOZHkZAnZxLoMzI3appwN2JuEcVpuz
-	ruI0DargVXMzGFyPu9GtoLWCEZDrJITw8zjwyTgTZjniGPQ7v9Axj3312NPCfLdHS
-X-Gm-Gg: ASbGncuyrVftgqcq87ozBJaBRKVyo2JHTjZRa083YZKKTLthDEwvdv84M4wGuvXJUNQ
-	8kSyWeLPFw3beO1UNadZWF172l5ZgRd1+Ge6JomkQo43BKq2VEm9h6Haei/xII+PaR1vIXSBCp1
-	7oBQ7LIQAKhDaBWi/Q51DaNcyzczjVUik6SnXxKJGPLmkUy1Q3VME+1L0CL4d5QeinmHAqDybuw
-	CgnoMBloyg0RoLtuWrqGdEeXXssFuIa3Rfqer9vLZSoOkb4A7r6eNEUCy5ii8Aj6M+tVpIs2W5C
-	cu39exGQxNa7PsGg4efDHxNnY4zqX1Z66lXURXb+tyw6A8b7ZY/rbZPni1fm3+hei1ZB1CWCI+I
-	5gkArE5wJJGq1TNWSVXRzHRUQI5MW1VqBNOs6SvLBDoo=
-X-Received: by 2002:a05:600c:1c9f:b0:434:9e17:190c with SMTP id 5b1f17b1804b1-43ba6188e94mr94869005e9.0.1740991971264;
-        Mon, 03 Mar 2025 00:52:51 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHlTwiOKza9n0r0V0jJ5URyFDI8eh36wv7IjAnT7iFLb3kZ3OtN1WSRH/ph1nyV3LFOLXmlUQ==
-X-Received: by 2002:a05:600c:1c9f:b0:434:9e17:190c with SMTP id 5b1f17b1804b1-43ba6188e94mr94868805e9.0.1740991970936;
-        Mon, 03 Mar 2025 00:52:50 -0800 (PST)
-Message-ID: <a9e21c14-d390-4119-ad93-b23e6ccbac15@redhat.com>
-Date: Mon, 3 Mar 2025 09:52:49 +0100
+X-Inumbo-ID: 777991d9-f80d-11ef-9ab2-95dc52dad729
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vEYjS1c+JWtBfF765rbGRaNCNN7onW5C78ja+aJgZfEhyWXzZ3Puz5LAGJuwPBrEzssT1rJfTkgmcBC/wHxiykw+KARlqNgA4Ke5A8mkydoU1sq3Yw9cUAEqh97NNSVgnd2UCIsusWkoGiALPm6UHOT81KPiorQGEN9a6+tSXQr08th98ERgQoXlVNMTPjtnHzVxcneWbhJD9pPXMtwt+uWZorczExwdcGRnpwDlbaS4WxpwYaE4fGMyXVE318YZdSAnzr17i8GloHteo/har2NeKpDalKpDRHROVDtQsnPmfvl/lSQJJJ+IUoJcG4Axwu5FqITOUC68c979dd02rg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QNJtj4GaA/ZHBC8mq/llWZAHZbNtifMc8lhwMOPIjDA=;
+ b=LAitw6zphPQyLjqY1LTSF47Zpw9Ja9EhJDjDipFeLWJmhOkNzlw5M1sdLF/Gtxvpy7cIKCl6mx43Gxf7grvgtkKadH6nsF2iv1/H0nMo79ocVylXX6WNLYsImDEh7X/1kY3Be51fTGRqzO2pTAQYtZhbhi+KgTuqyDNT7fsZL5v4Qod+7v2AncUIiFv5h3WXdESRlCE8HHt1nlrDYv9owTdpaje6udHIiPhZ81xE/PgEylcbDzudWf5T5tAmQsHIPT0k7vU6/h/i8Kyd45T5A899Bx2syq524Jp020hyTBsKhQJvxmJhaNCkVM9Wnt7xkahsgn9IxJ6yqYvq9ibXWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QNJtj4GaA/ZHBC8mq/llWZAHZbNtifMc8lhwMOPIjDA=;
+ b=Ct75Kiq2lj5xjqljnVLQCCVRUiqCQ+kGqnxCZlb4FYzg7FWoWkisI4LQeLzv5a3b9g0GWbu4sZyJ5JTUg/jbhWU41wRDKJ6DJuwRag9sPX5bX79S0zh3VDMsPoBtu5G2CURgILwcCiJlBjww/JrZOnLSt4JN5VbOYNopv/qrn5E=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 1/4] xen/arm: dm: Bail out if padding != 0 for XEN_DMOP_set_irq_level
+Date: Mon, 3 Mar 2025 09:56:47 +0100
+Message-ID: <20250303085650.74098-2-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250303085650.74098-1-michal.orzel@amd.com>
+References: <20250303085650.74098-1-michal.orzel@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] mm: Fix lazy mmu docs and usage
-From: David Hildenbrand <david@redhat.com>
-To: Ryan Roberts <ryan.roberts@arm.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- "David S. Miller" <davem@davemloft.net>,
- Andreas Larsson <andreas@gaisler.com>, Juergen Gross <jgross@suse.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H. Peter Anvin" <hpa@zytor.com>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- Catalin Marinas <catalin.marinas@arm.com>
-Cc: linux-mm@kvack.org, sparclinux@vger.kernel.org,
- xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-References: <20250302145555.3236789-1-ryan.roberts@arm.com>
- <20250302145555.3236789-2-ryan.roberts@arm.com>
- <5418a661-dbd0-46e9-8ef7-b1c5a34acce3@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <5418a661-dbd0-46e9-8ef7-b1c5a34acce3@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Tpv313W1E65ElnzQsY90QfiHRetdgtoNAse6-aAXzw4_1740991971
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4D:EE_|SJ0PR12MB6759:EE_
+X-MS-Office365-Filtering-Correlation-Id: eafa3283-0eea-4c06-b2a0-08dd5a315937
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?LZ3V5Mu62SEglpJqaxZzBKB7VbTR6rm2Yo/4NKdNeKV1GpwAUiSRZVEdJAbg?=
+ =?us-ascii?Q?rPELB7MTpFaTjrNmkPB7p9KaL2hINJO3Rmb9xnwQVJsSJFYNFzPD8ebQrJpj?=
+ =?us-ascii?Q?uKXBCOXwjLud2W5ilqh10VoNnP+wSkfwv6h22+BPUap+5tHStrgRfGPpm3cU?=
+ =?us-ascii?Q?FBcFKWCGscbmNq2/AzZIS/wCaXUjej0KYwvz9qx+kKfR6Qp1yrgIa30fSzUh?=
+ =?us-ascii?Q?VZs4HSyFhMIkdHclNtg3oIMvKapc6buxHyvM1UGMuXO3+aFhevjN8EeKx8W5?=
+ =?us-ascii?Q?QHC0oErKYTvmzVnvyfdJntstoxb06cFCk02WpdxB68QG8OCO6bN/ZudCwn7o?=
+ =?us-ascii?Q?QB5LnINlRRrw46v9768vJEp++SnBmGqwRVfG0oB5gfa2orWu5jlzR5VuaPzT?=
+ =?us-ascii?Q?WhmNl1sBtm6Rlt7crsWg2EB+uo8BOmmkdKO28CQKp8NCq+cFnooc0RQxwH98?=
+ =?us-ascii?Q?44eiiTPebc2V6rfuYqmXMnrmOm294wmXrMOfal15NYhAPiUOwFFJdiWD/vxh?=
+ =?us-ascii?Q?27fbi+UJvQ6plyfTyXjtcVLO0oYFFUwYRo+wTNrhGYmnMi2yG75kroSZf5y6?=
+ =?us-ascii?Q?WlX+PKezteetgNR1FAdjcIO9e9GQvodxu3Sa7LjoPAFlQKXPTX4tGcnMFH2O?=
+ =?us-ascii?Q?1s6gBWuDqyZLzfwmZGaPa7W2tj/Cdfee3NiIC/NEvhy0zuxpT9h3l4v9EtT9?=
+ =?us-ascii?Q?yunXfeBPtHHXzIvCPQcv0RzeFeLmDxaCtE9+gmwqWyMrnH428uPc/Dfvf4Wi?=
+ =?us-ascii?Q?aJiERPqEu6D5eH8ZXIXJNEC97cI0AexzrlZ4nhh7CICMNkpKRWchTfLUEcXw?=
+ =?us-ascii?Q?CXTWxsnuAP082yhGWaD/2byrLfNCJ2jQyVqD4VN1a/p2W62tLij/tAO0bRdm?=
+ =?us-ascii?Q?m4mZObhXl7nIdqpa4A8ZkSpg/8aKtB3swPJdrrjSuqEvIMHiAxe3MDQOkUbm?=
+ =?us-ascii?Q?yOZTuGKU6LAso41A8yZbeEpj147cBGo5UqL6BINGgOnisZwOr8DZxXj3Wynq?=
+ =?us-ascii?Q?Gcjc8/1grSNXoXqUm/IzFWGSaSjqXbcyllF1myytQ4lFSxQIcurN/USikHPU?=
+ =?us-ascii?Q?2WWgwd9+0iVooII9zLyC02X0Kt0hbC5R4MuhSNlUJlkMkDFYtNNLglhBSUmF?=
+ =?us-ascii?Q?QKOo2nGyJ53MEgdNyRThdGh29ky2cKx5sTsdQexv0lDHpa3nk/bF1GtVTG9w?=
+ =?us-ascii?Q?8LIt259br5mrup3IyfW9iGdDgUUOtlZbyNMlBprfHPVFUTqIeLPs+I0Fnz4D?=
+ =?us-ascii?Q?b+xZk3pvIIgL95g4+iwosnlZJpeMsm4jleJJZHtEr1pBe22Yxex0ltoBTgEo?=
+ =?us-ascii?Q?o7i/355xTeLY5JhncYGu75SculAKo8iPN/6p/s+KaU860QZy6OIwt5AczyD8?=
+ =?us-ascii?Q?x1oAstZUzT0VKwkNf/wsRffFO+vPVJ4wksCYRgSBcndWFhcj5h8UPaZoJZ+R?=
+ =?us-ascii?Q?lhdFy9XSTH+ss9yzuZ7+K0Pahhe2MzuxQAdUOkPlhsJUmgJhS3WsFxySdVAw?=
+ =?us-ascii?Q?S5Uqc3SDp3BUEmg=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 08:56:55.2729
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eafa3283-0eea-4c06-b2a0-08dd5a315937
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL6PEPF0001AB4D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6759
 
-On 03.03.25 09:49, David Hildenbrand wrote:
-> On 02.03.25 15:55, Ryan Roberts wrote:
->> The docs, implementations and use of arch_[enter|leave]_lazy_mmu_mode()
->> is a bit of a mess (to put it politely). There are a number of issues
->> related to nesting of lazy mmu regions and confusion over whether the
->> task, when in a lazy mmu region, is preemptible or not. Fix all the
->> issues relating to the core-mm. Follow up commits will fix the
->> arch-specific implementations. 3 arches implement lazy mmu; powerpc,
->> sparc and x86.
->>
->> When arch_[enter|leave]_lazy_mmu_mode() was first introduced by commit
->> 6606c3e0da53 ("[PATCH] paravirt: lazy mmu mode hooks.patch"), it was
->> expected that lazy mmu regions would never nest and that the appropriate
->> page table lock(s) would be held while in the region, thus ensuring the
->> region is non-preemptible. Additionally lazy mmu regions were only used
->> during manipulation of user mappings.
->>
->> Commit 38e0edb15bd0 ("mm/apply_to_range: call pte function with lazy
->> updates") started invoking the lazy mmu mode in apply_to_pte_range(),
->> which is used for both user and kernel mappings. For kernel mappings the
->> region is no longer protected by any lock so there is no longer any
->> guarantee about non-preemptibility. Additionally, for RT configs, the
->> holding the PTL only implies no CPU migration, it doesn't prevent
->> preemption.
->>
->> Commit bcc6cc832573 ("mm: add default definition of set_ptes()") added
->> arch_[enter|leave]_lazy_mmu_mode() to the default implementation of
->> set_ptes(), used by x86. So after this commit, lazy mmu regions can be
->> nested. Additionally commit 1a10a44dfc1d ("sparc64: implement the new
->> page table range API") and commit 9fee28baa601 ("powerpc: implement the
->> new page table range API") did the same for the sparc and powerpc
->> set_ptes() overrides.
->>
->> powerpc couldn't deal with preemption so avoids it in commit
->> b9ef323ea168 ("powerpc/64s: Disable preemption in hash lazy mmu mode"),
->> which explicitly disables preemption for the whole region in its
->> implementation. x86 can support preemption (or at least it could until
->> it tried to add support nesting; more on this below). Sparc looks to be
->> totally broken in the face of preemption, as far as I can tell.
->>
->> powewrpc can't deal with nesting, so avoids it in commit 47b8def9358c
->> ("powerpc/mm: Avoid calling arch_enter/leave_lazy_mmu() in set_ptes"),
->> which removes the lazy mmu calls from its implementation of set_ptes().
->> x86 attempted to support nesting in commit 49147beb0ccb ("x86/xen: allow
->> nesting of same lazy mode") but as far as I can tell, this breaks its
->> support for preemption.
->>
->> In short, it's all a mess; the semantics for
->> arch_[enter|leave]_lazy_mmu_mode() are not clearly defined and as a
->> result the implementations all have different expectations, sticking
->> plasters and bugs.
->>
->> arm64 is aiming to start using these hooks, so let's clean everything up
->> before adding an arm64 implementation. Update the documentation to state
->> that lazy mmu regions can never be nested, must not be called in
->> interrupt context and preemption may or may not be enabled for the
->> duration of the region.
->>
->> Additionally, update the way arch_[enter|leave]_lazy_mmu_mode() is
->> called in pagemap_scan_pmd_entry() to follow the normal pattern of
->> holding the ptl for user space mappings. As a result the scope is
->> reduced to only the pte table, but that's where most of the performance
->> win is. While I believe there wasn't technically a bug here, the
->> original scope made it easier to accidentally nest or, worse,
->> accidentally call something like kmap() which would expect an immediate
->> mode pte modification but it would end up deferred.
->>
->> arch-specific fixes to conform to the new spec will proceed this one.
->>
->> These issues were spotted by code review and I have no evidence of
->> issues being reported in the wild.
->>
-> 
-> All looking good to me!
-> 
-> Acked-by: David Hildenbrand <david@redhat.com>
-> 
+XEN_DMOP_set_irq_level operation requires elements of pad array (being
+member of xen_dm_op_set_irq_level structure) to be 0. While handling the
+hypercall we validate this. If one of the elements is not zero, we set
+rc to -EINVAL. At this point we should stop further DM handling and bail
+out propagating the error to the caller. However, instead of goto the
+code uses break which has basically no meaningful effect. The rc value
+is never read and the code continues with the hypercall processing ending
+up (possibly) with the interrupt injection. Fix it.
 
-... but I do wonder if the set_ptes change should be split from the 
-pagemap change.
+Fixes: 5d752df85f2c ("xen/dm: Introduce xendevicemodel_set_irq_level DM op")
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
+ xen/arch/arm/dm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/xen/arch/arm/dm.c b/xen/arch/arm/dm.c
+index 773a0a259272..fdb3d967ec98 100644
+--- a/xen/arch/arm/dm.c
++++ b/xen/arch/arm/dm.c
+@@ -93,7 +93,7 @@ int dm_op(const struct dmop_args *op_args)
+             if ( data->pad[i] )
+             {
+                 rc = -EINVAL;
+-                break;
++                goto out;
+             }
+         }
+ 
 -- 
-Cheers,
-
-David / dhildenb
+2.25.1
 
 
