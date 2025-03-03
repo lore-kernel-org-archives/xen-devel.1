@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12627C282D1
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Mar 2025 14:16:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.900334.1308286 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D77C282CD
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Mar 2025 14:18:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.900364.1308294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp6aY-0005wJ-5n; Mon, 03 Mar 2025 14:16:10 +0000
+	id 1tp6cK-0007f3-Jp; Mon, 03 Mar 2025 14:18:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 900334.1308286; Mon, 03 Mar 2025 14:16:10 +0000
+Received: by outflank-mailman (output) from mailman id 900364.1308294; Mon, 03 Mar 2025 14:18:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tp6aX-0005vw-Uw; Mon, 03 Mar 2025 14:16:09 +0000
-Received: by outflank-mailman (input) for mailman id 900334;
- Mon, 03 Mar 2025 14:16:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tp6cK-0007ew-H3; Mon, 03 Mar 2025 14:18:00 +0000
+Received: by outflank-mailman (input) for mailman id 900364;
+ Mon, 03 Mar 2025 14:18:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jm5g=VW=arm.com=ryan.roberts@srs-se1.protection.inumbo.net>)
- id 1tp6aW-0005Dw-JC
- for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 14:16:08 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 0c137a29-f83a-11ef-9898-31a8f345e629;
- Mon, 03 Mar 2025 15:16:06 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4F7BE106F;
- Mon,  3 Mar 2025 06:16:20 -0800 (PST)
-Received: from e125769.cambridge.arm.com (e125769.cambridge.arm.com
- [10.1.196.27])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2C3CA3F66E;
- Mon,  3 Mar 2025 06:16:04 -0800 (PST)
+ <SRS0=2B8f=VW=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tp6cK-0007eo-4o
+ for xen-devel@lists.xenproject.org; Mon, 03 Mar 2025 14:18:00 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4f24b9cb-f83a-11ef-9ab2-95dc52dad729;
+ Mon, 03 Mar 2025 15:17:59 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43bbc8b7c65so12654585e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Mar 2025 06:17:59 -0800 (PST)
+Received: from andrew-laptop.. ([46.149.103.9])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e47a5b96sm14550595f8f.29.2025.03.03.06.17.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Mar 2025 06:17:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,115 +47,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c137a29-f83a-11ef-9898-31a8f345e629
-From: Ryan Roberts <ryan.roberts@arm.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Andreas Larsson <andreas@gaisler.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	"Matthew Wilcox (Oracle)" <willy@infradead.org>,
-	Catalin Marinas <catalin.marinas@arm.com>
-Cc: Ryan Roberts <ryan.roberts@arm.com>,
-	linux-mm@kvack.org,
-	sparclinux@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	David Hildenbrand <david@redhat.com>
-Subject: [PATCH v2 5/5] Revert "x86/xen: allow nesting of same lazy mode"
-Date: Mon,  3 Mar 2025 14:15:39 +0000
-Message-ID: <20250303141542.3371656-6-ryan.roberts@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250303141542.3371656-1-ryan.roberts@arm.com>
-References: <20250303141542.3371656-1-ryan.roberts@arm.com>
+X-Inumbo-ID: 4f24b9cb-f83a-11ef-9ab2-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1741011478; x=1741616278; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ypSk08+aHnwtdeHOMqWqXrHn1qNJpa1wyymfXrKI3Ck=;
+        b=eFVa9A5upqKlbn0qMfqiSXROAz945YhZSpSJ2rEK7W9Xn/60uOavrty4djv0jIEz4G
+         NC1TuPmRc/Y/wUVja52/jcTqx6ZIsY8RTTXZrFnxMmdE/gv5nvmCaVhQxJPtXncDUvmb
+         0dVOx+Ur3xWEg9kpncxfMMincjvk9j4QtGEEw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741011478; x=1741616278;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ypSk08+aHnwtdeHOMqWqXrHn1qNJpa1wyymfXrKI3Ck=;
+        b=NFDPDU/UozwJr3D6Mvll9RxO32EAboyQrJsrbJq9dT2sDCBUsi3c9jJAbVmBmj0A3/
+         0Hh0KNbqQdXUqvTp0zdmjSdZWlbOuIH82wJbyuC1qdd4UXvraVEDhy2nBNUGiVT+dux7
+         Q5LOAplX5+b7+rl5oLh+6fcjRuWf0swJerWRXmPibkBwn8XOkOeRC1bu4GVOGuAx/IrP
+         kwaBgElDGuDBxBcTeRE14HkDR82pCAiroJIXbkGDYXY+hVmoIcK0W7kGJSMlQvSjaRbA
+         n/pUSGgxwyXKwIBZrrWg6cvGAEcckb0ZKSE/8IDzrAeiM4QW5lsYSYtbZBy0d8HNfvY3
+         byVA==
+X-Gm-Message-State: AOJu0YxT6ewVJvAECUopomYN2lez8VuNjPkjqr+JWliFtRbzLOyrA8SK
+	+3oxuMehrsQcmyoAoI3SXCFowFPNMCEB0gelGGzfqspxtM0NvRaZBEx2k/WjfstVJ565J6YzlcQ
+	T
+X-Gm-Gg: ASbGncs3LPv95L58l4u7vDw66ox+eAQkdU01TVW/b1v4t9SjcfCqvCgWh9PsCtGxv6Q
+	Vklzd90gm/SwsRInI+ePYCzYSZ7GD6uhK0ngAaNfHRIs9Et6h/0ZtFkbrNENI2Ij9m88RJZgmmh
+	BUfkR/BGQQRVNU7XOnVCTydZwYdcseubBmJ6zg6kkhdscNgan3MxYr1sHH8sJV/Cm9EePBz0TOo
+	vbZG3FDvGFq+S9G7MAnK6aNJy/azpN7fMXLM8w2qFsStVOtoxxBZvYNJRSDeIbV07l6kF8qxcKJ
+	2rPbB2EHHUFPS0C6a9dk1zF6kwyYzRGfD99euuHC5wLHSO7pVOwEX+0=
+X-Google-Smtp-Source: AGHT+IEo9FDe8ah0+sBuzifdD9+kjC/0RjtrBGwqBvzFcDNhGMA9iZlnL/RAfCAdWcvWLju3pqgL4A==
+X-Received: by 2002:a05:6000:118c:b0:390:e2a3:cb5b with SMTP id ffacd0b85a97d-390eca06e2emr10851276f8f.41.1741011478501;
+        Mon, 03 Mar 2025 06:17:58 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH 0/2] Set release date
+Date: Mon,  3 Mar 2025 14:17:52 +0000
+Message-Id: <20250303141754.26452-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Commit 49147beb0ccb ("x86/xen: allow nesting of same lazy mode") was
-added as a solution for a core-mm code change where
-arch_[enter|leave]_lazy_mmu_mode() started to be called in a nested
-manner; see commit bcc6cc832573 ("mm: add default definition of
-set_ptes()").
+Release paperwork.
 
-However, now that we have fixed the API to avoid nesting, we no longer
-need this capability in the x86 implementation.
+Andrew Cooper (2):
+  CHANGELOG.md: Set release date for 4.20
+  SUPPORT.md: Define support lifetime
 
-Additionally, from code review, I don't believe the fix was ever robust
-in the case of preemption occurring while in the nested lazy mode. The
-implementation usually deals with preemption by calling
-arch_leave_lazy_mmu_mode() from xen_start_context_switch() for the
-outgoing task if we are in the lazy mmu mode. Then in
-xen_end_context_switch(), it restarts the lazy mode by calling
-arch_enter_lazy_mmu_mode() for an incoming task that was in the lazy
-mode when it was switched out. But arch_leave_lazy_mmu_mode() will only
-unwind a single level of nesting. If we are in the double nest, then
-it's not fully unwound and per-cpu variables are left in a bad state.
+ CHANGELOG.md |  2 +-
+ SUPPORT.md   | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-So the correct solution is to remove the possibility of nesting from the
-higher level (which has now been done) and remove this x86-specific
-solution.
-
-Acked-by: David Hildenbrand <david@redhat.com>
-Signed-off-by: Ryan Roberts <ryan.roberts@arm.com>
----
- arch/x86/include/asm/xen/hypervisor.h | 15 ++-------------
- arch/x86/xen/enlighten_pv.c           |  1 -
- 2 files changed, 2 insertions(+), 14 deletions(-)
-
-diff --git a/arch/x86/include/asm/xen/hypervisor.h b/arch/x86/include/asm/xen/hypervisor.h
-index a9088250770f..bd0fc69a10a7 100644
---- a/arch/x86/include/asm/xen/hypervisor.h
-+++ b/arch/x86/include/asm/xen/hypervisor.h
-@@ -72,18 +72,10 @@ enum xen_lazy_mode {
- };
- 
- DECLARE_PER_CPU(enum xen_lazy_mode, xen_lazy_mode);
--DECLARE_PER_CPU(unsigned int, xen_lazy_nesting);
- 
- static inline void enter_lazy(enum xen_lazy_mode mode)
- {
--	enum xen_lazy_mode old_mode = this_cpu_read(xen_lazy_mode);
--
--	if (mode == old_mode) {
--		this_cpu_inc(xen_lazy_nesting);
--		return;
--	}
--
--	BUG_ON(old_mode != XEN_LAZY_NONE);
-+	BUG_ON(this_cpu_read(xen_lazy_mode) != XEN_LAZY_NONE);
- 
- 	this_cpu_write(xen_lazy_mode, mode);
- }
-@@ -92,10 +84,7 @@ static inline void leave_lazy(enum xen_lazy_mode mode)
- {
- 	BUG_ON(this_cpu_read(xen_lazy_mode) != mode);
- 
--	if (this_cpu_read(xen_lazy_nesting) == 0)
--		this_cpu_write(xen_lazy_mode, XEN_LAZY_NONE);
--	else
--		this_cpu_dec(xen_lazy_nesting);
-+	this_cpu_write(xen_lazy_mode, XEN_LAZY_NONE);
- }
- 
- enum xen_lazy_mode xen_get_lazy_mode(void);
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 5e57835e999d..919e4df9380b 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -99,7 +99,6 @@ struct tls_descs {
- };
- 
- DEFINE_PER_CPU(enum xen_lazy_mode, xen_lazy_mode) = XEN_LAZY_NONE;
--DEFINE_PER_CPU(unsigned int, xen_lazy_nesting);
- 
- enum xen_lazy_mode xen_get_lazy_mode(void)
- {
 -- 
-2.43.0
+2.34.1
 
 
