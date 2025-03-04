@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A9BC282C6
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 02:18:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.900768.1308746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF6C8C021B8
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 04:18:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.900783.1308767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpHrM-0004r1-3K; Tue, 04 Mar 2025 02:18:16 +0000
+	id 1tpJiw-00078Q-Ls; Tue, 04 Mar 2025 04:17:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 900768.1308746; Tue, 04 Mar 2025 02:18:16 +0000
+Received: by outflank-mailman (output) from mailman id 900783.1308767; Tue, 04 Mar 2025 04:17:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpHrM-0004qu-0H; Tue, 04 Mar 2025 02:18:16 +0000
-Received: by outflank-mailman (input) for mailman id 900768;
- Tue, 04 Mar 2025 02:18:13 +0000
+	id 1tpJiw-00078H-IQ; Tue, 04 Mar 2025 04:17:42 +0000
+Received: by outflank-mailman (input) for mailman id 900783;
+ Tue, 04 Mar 2025 04:17:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TCLV=VX=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1tpHrJ-0004qh-Qm
- for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 02:18:13 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20606.outbound.protection.outlook.com
- [2a01:111:f403:2009::606])
+ <SRS0=Wix9=VX=outlook.com=mhklinux@srs-se1.protection.inumbo.net>)
+ id 1tpJiv-0006sI-OF
+ for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 04:17:41 +0000
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazolkn190120000.outbound.protection.outlook.com
+ [2a01:111:f403:d102::])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eaa1b2d4-f89e-11ef-9898-31a8f345e629;
- Tue, 04 Mar 2025 03:18:10 +0100 (CET)
-Received: from BL1PR12MB5849.namprd12.prod.outlook.com (2603:10b6:208:384::18)
- by SJ2PR12MB8874.namprd12.prod.outlook.com (2603:10b6:a03:540::11)
+ id 9ba799a2-f8af-11ef-9898-31a8f345e629;
+ Tue, 04 Mar 2025 05:17:40 +0100 (CET)
+Received: from SN6PR02MB4157.namprd02.prod.outlook.com (2603:10b6:805:33::23)
+ by PH8PR02MB10184.namprd02.prod.outlook.com (2603:10b6:510:224::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.23; Tue, 4 Mar
- 2025 02:18:06 +0000
-Received: from BL1PR12MB5849.namprd12.prod.outlook.com
- ([fe80::b77f:9333:3a5a:d285]) by BL1PR12MB5849.namprd12.prod.outlook.com
- ([fe80::b77f:9333:3a5a:d285%6]) with mapi id 15.20.8489.025; Tue, 4 Mar 2025
- 02:18:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.26; Tue, 4 Mar
+ 2025 04:17:34 +0000
+Received: from SN6PR02MB4157.namprd02.prod.outlook.com
+ ([fe80::cedd:1e64:8f61:b9df]) by SN6PR02MB4157.namprd02.prod.outlook.com
+ ([fe80::cedd:1e64:8f61:b9df%3]) with mapi id 15.20.8489.025; Tue, 4 Mar 2025
+ 04:17:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,185 +49,339 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eaa1b2d4-f89e-11ef-9898-31a8f345e629
+X-Inumbo-ID: 9ba799a2-f8af-11ef-9898-31a8f345e629
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nOi7ZWGcvjKK9N6caXlkhQJvu+3VUbI4+33zelT5oMbrUwXrEnlTMO21IlkMQ+c1FPmw0KmF4TOOA4NzfyBwlv2HEcg1UZpKHyTlgSaem6IcqOuP2WPM+HBxIX2OgM41vEjq8YTLhP8I7ja7knys4YgFOi79YGXJA0ARJjSBM+GXZF0C7/yfBerdz4qRPkMIw5e4F1z4PUPsm1HVIv++NBXY9Ps8FsE4dxJBUMmJoQA+VWTp+vvAzm+g33sRD69dy/PUoHpcCSfVru3ynWrkMUxy/wjblvfTdSIF9LXwfT25LcL/W714AZ525ktlpBak70vL+f7wX6Gq1IGOMkybOA==
+ b=Q+9vSrW6m/jq6Mgmmw3La5w8YI6ug2CcmD7Kxjtj3SSsSb3ZG0HsgXOGVZgx7dEEOyy8QTSXmtogWtlJ5irNj5PkDQ/FRi+J9fyWyTW7hQOvfhVSFMSG3fs1fEq4cBusO1zimfQSUa41E5pA1OPrGdJkHnz6ebvm96Y9T1Pmucx1C6Xr70yxVHo1+AJG2O7VrkLHzA6f1/hUS8xRi0Zpm3vWN1d7kOwNboQPoJhHdPrTV3uEBwig9fGS+mZ5xO0Ukf6PvIuLBfeLEquypR/NOTC3SqH6mYfzz1t60JrfrzAUx9coOH23A+838xIIWXP1YLI40Sk+8X04Zf8vf44xAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=93XWpMAil8kZw/FJjXP+kEHfUlyZc3CtscelPwBcgc0=;
- b=hz9lCo04rmLJCJaJgyGBxo5yTP1o7QHN/2ObIcUD5N9TSgxmUWSg5hPtppVotUD/INNP/0XN8L8/N5O/sN6LjPxkVc4ct9OQDhp+IyMEA1Y6Mc/mm0EqfzejDBbI1wilounSiSCz3eVbbLXtSlQxogFpNrUmEa7R595RFQcuBSumFtew7Z7IhBbabShEKldtzXvKlUtBkq26iEnX4ytGtyFZmeyAHHq54aFGPYnS+pRNLckqz2/p3tj1IV+UfJ21U9BodLj6JW3vXNXAZDlQJOi3V1CTttSiIdWfHiwKMGK3gSZ1o9OQUcetn4mBs/QxmKD47t1C/2aM3wk5tyMEfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=LrGoVYrdi7142gbmYXSYWHcV3PqtPgswisv++7BxFlY=;
+ b=pdfBLNvhjwTIsSpic8OLtc/SThk5zqywdXoKsR47bSs0JMUuyWsrrF1on8Mh1McNpX7mcP6l3UUm5VtX6C60qJ8vBiJ1SSAsleLOq3ZRjE/9jmEE9P1JWjbzrs6P0qdseHXvdh8YcPG2/9IeatUrqVa8JU9JHVdGZByDNGn//vboGKLjnbnytReIPgoaZfxc+Q33qnElUPoDXCJbxm7TIBgSHcnYbgTZ+3nUQEK/RHwSRjAs3VvIeXhUnV4HC8+HrrQVc0bBZdjIxXRbJUHAl/Xo/TeJC1Uxs6j627Z1q3NQk2inWouVCtg4w9l/BUpv8ussNg8E3o7KKCFcxvy6eQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=93XWpMAil8kZw/FJjXP+kEHfUlyZc3CtscelPwBcgc0=;
- b=iJxZ97tfB2pXrq9Y65sVWctWwMOYN9YjbVA74wH8AL7XY1rLIzXorpG8bZFITU1qScdsmkHx9QEB9C0nW9a43IW8TcHwbkiVbPSecfegPkHueTW9/eT/O1M4WA6n5kFYsSEka48UG3bcCcw6fY2iIRYljRCyUuKu922c/XOT9I8=
-From: "Chen, Jiqian" <Jiqian.Chen@amd.com>
-To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien
- Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Oleksii
- Kurochko <oleksii.kurochko@gmail.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, "Orzel, Michal" <Michal.Orzel@amd.com>, "Huang,
- Ray" <Ray.Huang@amd.com>, "Chen, Jiqian" <Jiqian.Chen@amd.com>
-Subject: Re: [PATCH v9] vpci: Add resizable bar support
-Thread-Topic: [PATCH v9] vpci: Add resizable bar support
-Thread-Index: AQHbhmvKPUvcbBS+pUu7/6jYBR9mPrNhfwoAgAFQkYA=
-Date: Tue, 4 Mar 2025 02:18:06 +0000
+ bh=LrGoVYrdi7142gbmYXSYWHcV3PqtPgswisv++7BxFlY=;
+ b=SM9T+uMzY6H9naSANfqbM2Dv166hl6Fi06Rg3no06ZT94bxDMD3P13ogcenMDLqAORbzreyTf2Iud+9dVwC+mr3priV9NOpHm0XsgCDu6xa2ypKnOqPIGYF7nIHu3+bMg59S6a15JHnQN4hX2vzUjQtew5TPnf5MPUUNYFmcUP+1TntwOofobSXQsNlql3M47hfml9q9k9A19NuPY6EFQXD7fglkNUw5VM6xdrF/6cbYYJxjwwZ2zXfkGYFNJ/pqYBWdNYU25F+Xehu4S5QIXL+ALYJ6djKfY+8E/XUX8bzsruZ0ozorafDIdYqRnpEaZ5yvrpFibt8+eMy9jQpwtw==
+From: Michael Kelley <mhklinux@outlook.com>
+To: Sean Christopherson <seanjc@google.com>, Thomas Gleixner
+	<tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org"
+	<x86@kernel.org>, "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+	Paolo Bonzini <pbonzini@redhat.com>, Juergen Gross <jgross@suse.com>, "K. Y.
+ Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei
+ Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Ajay Kaher
+	<ajay.kaher@broadcom.com>, Jan Kiszka <jan.kiszka@siemens.com>, Andy
+ Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Daniel
+ Lezcano <daniel.lezcano@linaro.org>, John Stultz <jstultz@google.com>
+CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>, "virtualization@lists.linux.dev"
+	<virtualization@lists.linux.dev>, "linux-hyperv@vger.kernel.org"
+	<linux-hyperv@vger.kernel.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, Tom Lendacky <thomas.lendacky@amd.com>,
+	Nikunj A Dadhania <nikunj@amd.com>
+Subject: RE: [PATCH v2 08/38] clocksource: hyper-v: Register sched_clock
+ save/restore iff it's necessary
+Thread-Topic: [PATCH v2 08/38] clocksource: hyper-v: Register sched_clock
+ save/restore iff it's necessary
+Thread-Index: AQHbiL6AMb8zjFoj30eFPeRrju6/drNiX0lQ
+Date: Tue, 4 Mar 2025 04:17:34 +0000
 Message-ID:
- <BL1PR12MB58491E4C192B282406782B8EE7C82@BL1PR12MB5849.namprd12.prod.outlook.com>
-References: <20250224032433.1879630-1-Jiqian.Chen@amd.com>
- <Z8W4NFdcK1kuAH5q@macbook.local>
-In-Reply-To: <Z8W4NFdcK1kuAH5q@macbook.local>
+ <SN6PR02MB41576973AC66F8515F6C81F0D4C82@SN6PR02MB4157.namprd02.prod.outlook.com>
+References: <20250227021855.3257188-1-seanjc@google.com>
+ <20250227021855.3257188-9-seanjc@google.com>
+In-Reply-To: <20250227021855.3257188-9-seanjc@google.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
 X-MS-TNEF-Correlator:
-x-ms-exchange-imapappendstamp: BL1PR12MB5849.namprd12.prod.outlook.com
- (15.20.8489.024)
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BL1PR12MB5849:EE_|SJ2PR12MB8874:EE_
-x-ms-office365-filtering-correlation-id: 10196f6e-d553-4824-2adf-08dd5ac2cd1c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700018;
+x-ms-traffictypediagnostic: SN6PR02MB4157:EE_|PH8PR02MB10184:EE_
+x-ms-office365-filtering-correlation-id: 8a00d464-a659-48c9-d777-08dd5ad37d61
+x-microsoft-antispam:
+ BCL:0;ARA:14566002|19110799003|8060799006|15080799006|12121999004|461199028|8062599003|41001999003|12091999003|11031999003|102099032|3412199025|440099028;
 x-microsoft-antispam-message-info:
- =?utf-8?B?YkJoQWZkU0VNSGVrQVZWV3RDQThOV2RORVFqSHBPV1BqTVdrRDBpVm9ub3Y4?=
- =?utf-8?B?OVplVU44aUpMelBBdHd2ZVZNWFcrb2NQa2V0Q25LNXUyenRvMTh1WjRiTEcr?=
- =?utf-8?B?ODdoUll6WlRTdkM5ZDBxblBSa3prL3lLb3d1TENhZmtPdSt1cjFpZ1FMT2Zu?=
- =?utf-8?B?cW4wd2lLQXdldlRTOUdBSW9HajZQNEJNSnI4ak9ZWW1MU2c0dW1aTFpXYmdH?=
- =?utf-8?B?SVZTNkpGRy9jckxpZlJ5c1diN1dxKzJtM3Fkd1hibmQzazVZS0tNZXgzcExB?=
- =?utf-8?B?ODh4eGpVdndmNnlYMkZZREs4Q1NiWVV3cFdsYmxhd2VVK2RuL3Z5Tlcvb3ZV?=
- =?utf-8?B?cC9zblJZKzYwM1NsVkRNR2J3Y0IyTkZaeHoyMDdzV3RiNXZmb01LQzR2WFBZ?=
- =?utf-8?B?US9ENExhaVg1VHFnbFozWU5KQ1B0OE95TVI4ZnI3Qmc1cWFYVjFSRXpJbjdT?=
- =?utf-8?B?M29Tb01NcktNY24vRW9MQ0dmWkxKWnZ5WTBlVWdMaGY1UzVaK01NUFZBcU5p?=
- =?utf-8?B?ekNwV0hsNUpnTVljODZwdmcyNnZDQ1BQSEFCbENINDhYeGhheTgrSEJ6RTF5?=
- =?utf-8?B?Yno0cWpoN1B4WjlEd2dCYmd3bE5LWEV4M3o2enFDdE1RQ1k4R1BZaS9hS3hz?=
- =?utf-8?B?VXNPNmZOWmwzREsrL3ptWnRsUVNmSmxaZmk1cDBMMVZxVDVPOERvR0NOc2s4?=
- =?utf-8?B?Ymh6YWxrZ2gwZU1OMzV4RHVOQkJaaWNQQW1EQWcvd3dORkMwTkpzdmltNnJL?=
- =?utf-8?B?VEFuQmZhQndtSTVwV0ptWWRqcFdSOU1LckNJb05ZK2RyWndnVE9XLzM0elVx?=
- =?utf-8?B?cXJoSXVWYWwzU3phSkNWdFFxQ2hOTXd0UGYyUi9rakVXNzFtQ1BFSnNPV1RD?=
- =?utf-8?B?OEZmeml2S1lPWEVDb0dLQ0V1b05KTXhBb2YyQ0lpQTlZUGg3Yy9WVEN1aU95?=
- =?utf-8?B?YzhBL3hjVEp4UDF3YlUzR1hhRUNMcVROckNud2t3emFYdnZXekt5NUhpZU5Y?=
- =?utf-8?B?dEhMOXZjTHB6RUR0MUQ5Q2lZYkUxZFpmYlNzRnJTdHpxVnBnSW9GbGJzVDFF?=
- =?utf-8?B?MWxuLzgyR0xtUDI1dnJMYUtTSnl0d3dJcmNpNUNJdDIwaVoyVytzN1AyWnM4?=
- =?utf-8?B?SWw1T2V5YXlKUFJmeWgrVFNsT21YU0lYWFE3YWYwQnZ5bm1YdU5vanBQNlhr?=
- =?utf-8?B?OEpUOGZzYXJ0ZWs1NGVPdVdUS3R0Vmp3UTBlS3JaZmVlYW5hUGowWnRnc3Vh?=
- =?utf-8?B?RU5UQ00rOWdpL0VQUFZGUVRibWE5SDFGMXNzbGpicjNWUFV4YVJrbW9OVVo4?=
- =?utf-8?B?eGJhbS9rMXpJaThGYWhhd3lwQ0tjcFBubGE3VEs1Zk5qVHgxTkVXU29DWktG?=
- =?utf-8?B?Y2lYWVJ3cFBaQTNncHZjWjh3M2Y4OFdBcUloSXRNdGNyVUwzblExbTJCa2xB?=
- =?utf-8?B?OHh6RGZZb1pJWDJwS0hXRkhlR2Vic2orN1ZhUTRLQXlZc0pVT2t0a2NmSE0z?=
- =?utf-8?B?ZGJNN3pYQXhqZU5uVS9qKzVLWklHZ3J3ZXJlWktpK2Y5ZDZCWDM2K1UvSGpJ?=
- =?utf-8?B?UnZmWGVBaWdqdDNzL3NPSUF1V0RtL3ZEMXI2ZzUyZjdlSmU3QVc4azFTdDcx?=
- =?utf-8?B?OTIzMUlvc25hV2hpRHFPbjNUSXYvM0orZnRYU3ZGb3AySHBhMXNmdWovRXYw?=
- =?utf-8?B?aUNXbzFpSjUwbzVoc3RsYXI1MkJyVUxjY2doZHJSL2tFekdVUmQ2VFgvS1pQ?=
- =?utf-8?B?MlNuRE8rSzdQWnNicVVFZGRsWjRpaU9xVnZIN1BKaVM1RC9wUHFtVU9EYS9w?=
- =?utf-8?B?Zk9IdWRZZS9ucVdJb1U1Zi80UnA5c2lSNU9KUWVMMHE0enRSUTlIVnNLZ1lG?=
- =?utf-8?B?d2trK1FEbkVteStJbkNXVXZiUEw1aStsK0tyNDRma1NmREw2R05qZlM1UTBO?=
- =?utf-8?Q?qzhInWOzIg7qZck/X2nPTvb3y/rM2+7Z?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR12MB5849.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+ =?us-ascii?Q?UXxQzQu1Ppaciv70DUxod7xJrhQOk30qWkRXdHaoVHxXGEFxEW3Itor4+Gu5?=
+ =?us-ascii?Q?+40GKv2UYBO27oPufjRVWc4llVEumKqRxov/VD7e2k3x9pTL16/anoEDhC4y?=
+ =?us-ascii?Q?ybuP0TbORr+p31KG/rQbxHGjF1CcWJdsJzT3Z9MCf3t4oKaInyfCCGf3Ol7D?=
+ =?us-ascii?Q?UG6ZfdkLrwhoZDPbMDciOPGf9wUgS7K7O8e8Ayxr+SlBnaUAuMxbvJI6vQf9?=
+ =?us-ascii?Q?l5aCiVBu2ZcUOSKyWsaCRWllGzOVSROvAquwXIsIfWGzFBnJiI4lC3W+nR8t?=
+ =?us-ascii?Q?jR+utHZQmomJD0jAwQ0H9R6kE7iciNtDoHURt0+XvGaMk3Rz6/iD36mKqcve?=
+ =?us-ascii?Q?/tL0iU+h+jWXtaKBdyQFXc3JgjOv38hQMhpeqHggQK1LcqH9H4sYMWZjTF/Q?=
+ =?us-ascii?Q?EU4zLx0zzj/5paCAliKrVEtQ1VZAzAW+sVDVCRrFJDXhrxUOH+LZGnbZKqhI?=
+ =?us-ascii?Q?lhbOOw/47ZrrXpOOKqu0+F0xntbnZJWvNCLfzZu9NvZVJmS10XffsQ6ksUdN?=
+ =?us-ascii?Q?5UuK8gYDWsg2aLa2RowWwMKW7gYRjLoVQcCAwZfxUNxi0GUa0DAzsAiKKM4H?=
+ =?us-ascii?Q?z/TGTgmR2TRD80YFcX1AkDCLHAKWPnMfAcB9p/GyFf8gG0IeyP5w70+t6dDH?=
+ =?us-ascii?Q?cM1gMNhMxLmQUki+X4FbTPf83JjB9LizUMjO8unYSZd56jjq+1+PgbScrwl9?=
+ =?us-ascii?Q?lo6ZQLReuFNm7Hpzbi/pGCM5RGG/qcX4QcddrHpzQ3sOhRjWnC/slCU6pycz?=
+ =?us-ascii?Q?rvKBrMGHH0D8FaDidZGIrZ969o4qVOWjys74zRQ5a54CS1L9N/aQt2Bkk33c?=
+ =?us-ascii?Q?QQey75d/rjgP0TXhqyPGOgxAhwXL3Qwso1hDHtH1c9Si/brF9CX/TsRop4TY?=
+ =?us-ascii?Q?xH1Qch6rOQjfHCF6a+4hOkNTTH7qez0bkmtMFN+VY/LkG/34PiNc/1aRXY0q?=
+ =?us-ascii?Q?4U1nksEOKg96/otMkO0pkvWqmCoPG7rbhkwg749cPfZU6NU9Fh4rZc0CbVXw?=
+ =?us-ascii?Q?T8RF8/2YlNSlmJsQU2wxmcfngf9gv65Hq/fsqP2utIfoNq5ssiBIXZLdeDrk?=
+ =?us-ascii?Q?my3of+8XwfSxjNQpEVca3plq5m8+Pugk6Ep82JqN0KgD2+AEu6JeJuY4o4N+?=
+ =?us-ascii?Q?mZ8o0XLfdg9uQ0bgLDx+y73rdqC01o36ZQtJdZ/Q11Y/7q7PUvlZoVU=3D?=
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?M0ZKTmZCdTdNSDhhV3RzNnppVno4c3BQcFc1c1ZMRjQyQTVXNXg1V3JuNUVn?=
- =?utf-8?B?cUNzUGFiU1pkaUwwMVZMUkFFczA2UVhZQkpmTDhBaVduNEprUUdXU0V5TVdG?=
- =?utf-8?B?UmJYczZDSEpjQktTYU5hMDFsdzlucTN6eWVDb05vM2NtUjhFV21wK256dk91?=
- =?utf-8?B?TjVhbUJyQ0Y5dVk4U2d1ejBYbys0NFdkYXpreXp1SjFwcEFBWDRDbWZLaXNT?=
- =?utf-8?B?SmhoZkJEL3d4SEd3ZnZxQ2RpY3VvMnF1eVV1djdRSmk1bW84T2F3T0tMMW9m?=
- =?utf-8?B?aGMyamp2NVpsOTkzYWQ2ajMxckZxaVpjNnlKK3ZVczdTVjAzL2pxZUdHbks3?=
- =?utf-8?B?cjlJY1NDM0I3b1A0RHdpaXptNVJxTk80VWNqTmtIZlBrYlYyMzRnVlZyZkg4?=
- =?utf-8?B?UnhiTHVhaHk0NzdpTzV4bXU3bFFqNDM5blFLUXVwK0Q0WlNoemt6cEl5WnlK?=
- =?utf-8?B?QU5Ud2FPVmpZTVNHOFlXTnJpTHdMN25GNllLR1pYWWFSNzQxT3o5MDVRVzlM?=
- =?utf-8?B?Q2NhN3lXVWRPVWJNSEVVY2RWMFUyNkNIdjhia1J0K3ovT1RHd1hmcE5PSjNP?=
- =?utf-8?B?cHF6aTVIcnpobU5seU5VVEhOdFIzMEo5QmZWakNSZGJYZ2dWTUdzRk1XeDIr?=
- =?utf-8?B?THBvV1FyZVo2NnJsUFBGekk3Z29VZjArUVY0L2VqSXoxTnh0NEdDR28yNURB?=
- =?utf-8?B?TjVsVWszdzNiRHBRcG02ZlJxVHVIQ1lOYnZaZldkdjJ4cmdPUzhOcStaU0Jl?=
- =?utf-8?B?UnhLNnJtSTFTYkIyWUFZNHpjUzZINkZ3a2hTejVWMDlqdStJMDVMbUlVNy9o?=
- =?utf-8?B?ZE1CMU1JRHd0U1pqYnkxbHhyTEZvdSs3Z2t3Z1QrZGtvd1I0WWR6ZUpBVW44?=
- =?utf-8?B?NjJzaEdseS9WU0ZmQWF6RlpXWlp0Y08rdFpFOGR6NWJkODlsaHVwZzdoZnFF?=
- =?utf-8?B?VkUvUDZvWEo5eGNHS01UQmtUS2k5V01qZ293VThKVVJZY1NCU0tKdzdXYkZp?=
- =?utf-8?B?Y3dtbWowaC9HSlJneUhZZkdWNDRyTzZJK01jUjc3Umc3VjdxRWlrSS85WXlu?=
- =?utf-8?B?ZmNVN0lJNzFJdXQ5Njh0Q2VZR2ljOEtEVS9nNisxbEs0elZib1Zoc3kxTldo?=
- =?utf-8?B?Yjh3a0xlaCtmL3FiYnRsWW9qaCsvYnJvdEdWVWpaQ01LOTZmN3V2ZjFyQURn?=
- =?utf-8?B?eDhybG1xSUFQMnRJL0h1aWN1dktWVjhQYyt2KzhWdVp4NVNuMTF3cG1HMERQ?=
- =?utf-8?B?dkNuM0pncEZ4dGdKeXY5MWpKRFJGdXNVMHBudEpaV3BveFJXbkRoWTZneWFR?=
- =?utf-8?B?OCtFTU53N1VZYlpIZnkyaXd3QTZvZ2llWTVRNXBvK09INjJGVzhnR2tvbHNy?=
- =?utf-8?B?Wk9FKzBPSVhZRzBmanl6MHRkZi9ENTF1VktUb2xEYVZRMWF0TlhyQjlQWWtW?=
- =?utf-8?B?R25kRHBKVzF6RU5KZnZvMTlZRmhoMXphOTdVV2NrdGRweTJML1JNNDVKRk5Y?=
- =?utf-8?B?S2lFOEpxSUdiRUltTkFrNCtISk5nRk9RNmw1elhiSFZHbTJYUmw5UGZoaXBX?=
- =?utf-8?B?YTc1b0g0aGxLaUM2d0tWaDVaOTJnR2tVSFdwUUdBQkJMcEpqd1k0czE3aHZp?=
- =?utf-8?B?aWpaT0prcGVQbW9DdTEvVnppd3RaY3BFaXVvYmlzU01pMHBBRVNkdTZDRkR3?=
- =?utf-8?B?VEEyMFVZWndZbUJ6blkwQTBOSDVSMlpoT2Nidnc2cEVjMXpLSWVscW9uQnlY?=
- =?utf-8?B?US85alJCcXp1b2hSVy9TQnd1ck1GYjg2Zy81OXJ4Uy93NFA2SXphTzQvci9T?=
- =?utf-8?B?YzRIUXpId0xidlZKcG0xVUdVbm9tRTJ0UDhrM3FLOVlDb2hxTm9BU3YyRHlm?=
- =?utf-8?B?ZThWdnVzVXBaQ0xSR3o3cXVuODk1d1hpSnZzZHNqUjZGckJSd3hHZWhxSFhJ?=
- =?utf-8?B?aWFBeGJNNDk5Yy8yVUdkam51SWdRNjh1YjlaSDlMejlncUZ2ZG4zQTVGbFkz?=
- =?utf-8?B?K24reWROektXNlEyQ0t5MDUxS3dyUlRTTm1yNERyNXA4L3hpRTFzZ0JhWUcx?=
- =?utf-8?B?N0R1UGxTOWF6c2FVRk1tWUFUY0xQUEhvTEdnY21vZjhkYUZLbTBmUWZDZWJN?=
- =?utf-8?Q?UDDY=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C9D72235AF09614EA7FD14B1FB687627@amdcloud.onmicrosoft.com>
-Content-Transfer-Encoding: base64
+ =?us-ascii?Q?+PVSgNAnAPstqaZlNv4HpYFOJVXTxr9Uhfv/qOvrtlxf/8mPwrNxQXQQE+Ld?=
+ =?us-ascii?Q?+gjDdR9tpAkGPLp42rzeTkb3aXs95HdxS2vln4OVDUhkaR3OpOZ4YMSQT2Fl?=
+ =?us-ascii?Q?NV8p+2Ejhzll5aH/BsgBq3ow8G5wGtNDNNzdrbxfJ/SP7g/44xwi4ukvMVdF?=
+ =?us-ascii?Q?ciXMFqzfLH+Giwya+PjMit1zQEMnE60ZtIhphb3EAElbO+fK9NVzaXqQtbZC?=
+ =?us-ascii?Q?+T1LssVVd5aZydawILWdLLPnbPQ/kVarLbxRBZcdZj/ioiA6m6taxR5iPs9z?=
+ =?us-ascii?Q?ybJw+kg7tf9ZeVaiB0/dSoV851cMFlVc/LXg3gqGpUOas3LkH+gi+tHwXRBU?=
+ =?us-ascii?Q?SJ6bxN2gnTBRiahOHa/JPTfAK5kxxhuBlHBnkW4r0JHcYy6Fe/1XV9fnDW33?=
+ =?us-ascii?Q?JIj9zoHgtCjgZ7VYkUBmnIKYh18QKMkBrEiBi/lW5vti9PdO9QJr0mtQSqcB?=
+ =?us-ascii?Q?aBmVmCsZGXsiOmutv8qotzGL/nuHkHma97ZqRR0W0SetTxAC0tVavvlnwvbU?=
+ =?us-ascii?Q?OZg1o/QFsqdLK9eyHQrgfUAmOHOyFDe1UC8gw4WUbjeVg6KoHtgIheFqQ9cY?=
+ =?us-ascii?Q?1T0lTm5lqKTaWfX9Fjitul+uRyiWRalYjNFqmKMpqHDOBGMWwE22meGRhZtw?=
+ =?us-ascii?Q?uwTtYalHdhnq6BphNMtrlYSHCpmQSvd7x2pX2n9CAippKRn3sifP8Sp+04Tv?=
+ =?us-ascii?Q?6ysrvDucXr+79QJnzi7fcjTOpK68SU6VLBJcz84pmclJi6uSMOp51E8Lq1F2?=
+ =?us-ascii?Q?O4F5hqUU6xjogo+l0gISD0jgx0lGdc8o+tNf7NwAQIZ9G0t1O1owqdg+CHYx?=
+ =?us-ascii?Q?PjLQbcc5PzcyAXjVZQvTWb6v0lJm1ZdeNGq8YjUID0ykB1A1f+Uzb735IhAm?=
+ =?us-ascii?Q?HTV1T8HfaaqTj7ztry9QOQguI10tEroPkN6ol5sKVpt9RkJKHV5/D6PZtrj9?=
+ =?us-ascii?Q?Ojpw4jBG1SObKHN901ssOpBHZBI0d/N260+6rKyeKOGUwMftbgPTvSNB2TD1?=
+ =?us-ascii?Q?sOsiAio5yD70fQPW5cn+SXbkX2qe3pHE3sGMyM3p4MfaySmO8/zUi2HJKqFK?=
+ =?us-ascii?Q?PCVs1kZFbD+ezLLDxAVYrJTbWt/G9UDa/ihWPCHPH0UmkGOYAohejEVTnX0G?=
+ =?us-ascii?Q?wHXptv29y5qqtqkv0o2BYBSARsrhHFXF5V2SNjcLePBOmy68QukAon4fpnwh?=
+ =?us-ascii?Q?dMf5mDo0sKX02CCaHdIFyXPCBsB+wjFNrFy1NbtJDKDQzQA3Q6cIAUf+drw?=
+ =?us-ascii?Q?=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
+X-OriginatorOrg: outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5849.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 10196f6e-d553-4824-2adf-08dd5ac2cd1c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2025 02:18:06.7751
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR02MB4157.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a00d464-a659-48c9-d777-08dd5ad37d61
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2025 04:17:34.4122
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ESxOC9TZn595zBA9symprqP/gNi7KNHoHnzS0nodki4uG9uxcq2cE3sTDUvPDHVNkY7q/FDBO8zLJuZgiS5cBw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8874
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR02MB10184
 
-T24gMjAyNS8zLzMgMjI6MDksIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6DQo+IE9uIE1vbiwgRmVi
-IDI0LCAyMDI1IGF0IDExOjI0OjMzQU0gKzA4MDAsIEppcWlhbiBDaGVuIHdyb3RlOg0KPj4gU29t
-ZSBkZXZpY2VzLCBsaWtlIEFNREdQVSwgc3VwcG9ydCByZXNpemFibGUgYmFyIGNhcGFiaWxpdHks
-DQo+PiBidXQgdnBjaSBvZiBYZW4gZG9lc24ndCBzdXBwb3J0IHRoaXMgZmVhdHVyZSwgc28gdGhl
-eSBmYWlsDQo+PiB0byByZXNpemUgYmFycyBhbmQgdGhlbiBjYXVzZSBwcm9iaW5nIGZhaWx1cmUu
-DQo+Pg0KPj4gQWNjb3JkaW5nIHRvIFBDSWUgc3BlYywgZWFjaCBiYXIgdGhhdCBzdXBwb3J0cyBy
-ZXNpemluZyBoYXMNCj4+IHR3byByZWdpc3RlcnMsIFBDSV9SRUJBUl9DQVAgYW5kIFBDSV9SRUJB
-Ul9DVFJMLiBTbywgYWRkDQo+PiBoYW5kbGVycyB0byBzdXBwb3J0IHJlc2l6aW5nIHRoZSBzaXpl
-IG9mIEJBUnMuDQo+Pg0KPj4gTm90ZSB0aGF0IFhlbiB3aWxsIG9ubHkgdHJhcCBQQ0lfUkVCQVJf
-Q1RSTCwgYXMgUENJX1JFQkFSX0NBUA0KPj4gaXMgcmVhZC1vbmx5IHJlZ2lzdGVyIGFuZCB0aGUg
-aGFyZHdhcmUgZG9tYWluIGFscmVhZHkgZ2V0cw0KPj4gYWNjZXNzIHRvIGl0IHdpdGhvdXQgbmVl
-ZGluZyBhbnkgc2V0dXAuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogSmlxaWFuIENoZW4gPEppcWlh
-bi5DaGVuQGFtZC5jb20+DQo+IA0KPiBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9n
-ZXIucGF1QGNpcnRyaXguY29tPg0KPiANCj4gSnVzdCBvbmUgcXVlc3Rpb24gYmVsb3cgYWJvdXQg
-YSBjb3NtZXRpYyBhZGp1c3RtZW50Lg0KPiANCj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94
-ZW4vcGNpX3JlZ3MuaCBiL3hlbi9pbmNsdWRlL3hlbi9wY2lfcmVncy5oDQo+PiBpbmRleCAyNTBi
-YTEwNmRiZDMuLjJmMWQwZDYzZTk2MiAxMDA2NDQNCj4+IC0tLSBhL3hlbi9pbmNsdWRlL3hlbi9w
-Y2lfcmVncy5oDQo+PiArKysgYi94ZW4vaW5jbHVkZS94ZW4vcGNpX3JlZ3MuaA0KPj4gQEAgLTQ1
-OSw2ICs0NTksNyBAQA0KPj4gICNkZWZpbmUgUENJX0VYVF9DQVBfSURfQVJJCTE0DQo+PiAgI2Rl
-ZmluZSBQQ0lfRVhUX0NBUF9JRF9BVFMJMTUNCj4+ICAjZGVmaW5lIFBDSV9FWFRfQ0FQX0lEX1NS
-SU9WCTE2DQo+PiArI2RlZmluZSBQQ0lfRVhUX0NBUF9JRF9SRUJBUgkyMQkvKiBSZXNpemFibGUg
-QkFSICovDQo+PiAgDQo+PiAgLyogQWR2YW5jZWQgRXJyb3IgUmVwb3J0aW5nICovDQo+PiAgI2Rl
-ZmluZSBQQ0lfRVJSX1VOQ09SX1NUQVRVUwk0CS8qIFVuY29ycmVjdGFibGUgRXJyb3IgU3RhdHVz
-ICovDQo+PiBAQCAtNTQxLDYgKzU0MiwyMCBAQA0KPj4gICNkZWZpbmUgIFBDSV9WTkRSX0hFQURF
-Ul9SRVYoeCkJKCgoeCkgPj4gMTYpICYgMHhmKQ0KPj4gICNkZWZpbmUgIFBDSV9WTkRSX0hFQURF
-Ul9MRU4oeCkJKCgoeCkgPj4gMjApICYgMHhmZmYpDQo+PiAgDQo+PiArLyogUmVzaXphYmxlIEJB
-UnMgKi8NCj4+ICsjZGVmaW5lIFBDSV9SRUJBUl9DQVAobikJKDQgKyA4ICogKG4pKQkvKiBjYXBh
-YmlsaXR5IHJlZ2lzdGVyICovDQo+PiArI2RlZmluZSAgUENJX1JFQkFSX0NBUF9TSVpFU19NQVNL
-CTB4RkZGRkZGRjBVCS8qIHN1cHBvcnRlZCBCQVIgc2l6ZXMgaW4gQ0FQICovDQo+PiArI2RlZmlu
-ZSBQQ0lfUkVCQVJfQ1RSTChuKQkoOCArIDggKiAobikpCS8qIGNvbnRyb2wgcmVnaXN0ZXIgKi8N
-Cj4+ICsjZGVmaW5lICBQQ0lfUkVCQVJfQ1RSTF9CQVJfSURYCQkweDAwMDAwMDA3CS8qIEJBUiBp
-bmRleCAqLw0KPj4gKyNkZWZpbmUgIFBDSV9SRUJBUl9DVFJMX05CQVJfTUFTSwkweDAwMDAwMEUw
-CS8qICMgb2YgcmVzaXphYmxlIEJBUnMgKi8NCj4+ICsjZGVmaW5lICBQQ0lfUkVCQVJfQ1RSTF9C
-QVJfU0laRQkweDAwMDAzRjAwCS8qIEJBUiBzaXplICovDQo+PiArI2RlZmluZSAgUENJX1JFQkFS
-X0NUUkxfU0laRVNfTUFTSwkweEZGRkYwMDAwVQkvKiBzdXBwb3J0ZWQgQkFSIHNpemVzIGluIENU
-UkwgKi8NCj4+ICsNCj4+ICsjZGVmaW5lIFBDSV9SRUJBUl9DVFJMX1NJWkVfQklBUwkyMA0KPj4g
-KyNkZWZpbmUgUENJX1JFQkFSX0NUUkxfU0laRSh2KSBcDQo+PiArICAgICgxVUxMIDw8IChNQVNL
-X0VYVFIodiwgUENJX1JFQkFSX0NUUkxfQkFSX1NJWkUpIFwNCj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAgKyBQQ0lfUkVCQVJfQ1RSTF9TSVpFX0JJQVMpKQ0KPiANCj4gSSB0aGluayB0aGlzIGNv
-dWxkIGZpdCBvbiBhIHNpbmdsZSBsaW5lIGlmIHRoZSBpbmRlbnQgd2FzIGp1c3QgNA0KPiBzcGFj
-ZXMuICBXb3VsZCB5b3UgbWluZCBtZSBhZGp1c3RpbmcgaXQgYXQgY29tbWl0IGlmIGl0IGZpdHM/
-DQpDZXJ0YWlubHkgbm90LCBwbGVhc2UgYWRqdXN0IGl0IGlmIGl0IGZpdHMsIHRoYW5rIHlvdSB2
-ZXJ5IG11Y2ghDQoNCj4gDQo+IFRoYW5rcywgUm9nZXIuDQoNCi0tIA0KQmVzdCByZWdhcmRzLA0K
-SmlxaWFuIENoZW4uDQo=
+From: Sean Christopherson <seanjc@google.com> Sent: Wednesday, February 26,=
+ 2025 6:18 PM
+>=20
+> Register the Hyper-V timer callbacks or saving/restoring its PV sched_clo=
+ck
+
+s/or/for/
+
+> if and only if the timer is actually being used for sched_clock.
+> Currently, Hyper-V overrides the save/restore hooks if the reference TSC
+> available, whereas the Hyper-V timer code only overrides sched_clock if
+> the reference TSC is available *and* it's not invariant.  The flaw is
+> effectively papered over by invoking the "old" save/restore callbacks as
+> part of save/restore, but that's unnecessary and fragile.
+
+The Hyper-V specific terminology here isn't quite right.  There is a
+PV "Hyper-V timer", but it is loaded by the guest OS with a specific value
+and generates an interrupt when that value is reached.  In Linux, it is use=
+d
+for clockevents, but it's not a clocksource and is not used for sched_clock=
+.
+The correct Hyper-V term is "Hyper-V reference counter" (or "refcounter"
+for short).  The refcounter behaves like the TSC -- it's a monotonically
+increasing value that is read-only, and can serve as the sched_clock.
+
+And yes, both the Hyper-V timer and Hyper-V refcounter code is in a
+source file with a name containing "timer" but not "refcounter". But
+that seems to be the pattern for many of the drivers in
+drivers/clocksource. :-)
+
+>=20
+> To avoid introducing more complexity, and to allow for additional cleanup=
+s
+> of the PV sched_clock code, move the save/restore hooks and logic into
+> hyperv_timer.c and simply wire up the hooks when overriding sched_clock
+> itself.
+>=20
+> Note, while the Hyper-V timer code is intended to be architecture neutral=
+,
+> CONFIG_PARAVIRT is firmly x86-only, i.e. adding a small amount of x86
+> specific code (which will be reduced in future cleanups) doesn't
+> meaningfully pollute generic code.
+
+I'm good with this approach.
+
+>=20
+> Signed-off-by: Sean Christopherson <seanjc@google.com>
+
+Modulo the terminology used in the commit message,
+
+Reviewed-by: Michael Kelley <mhklinux@outlook.com>
+Tested-by: Michael Kelley <mhklinux@outlook.com>
+
+> ---
+>  arch/x86/kernel/cpu/mshyperv.c     | 58 ------------------------------
+>  drivers/clocksource/hyperv_timer.c | 50 ++++++++++++++++++++++++++
+>  2 files changed, 50 insertions(+), 58 deletions(-)
+>=20
+> diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyper=
+v.c
+> index aa60491bf738..174f6a71c899 100644
+> --- a/arch/x86/kernel/cpu/mshyperv.c
+> +++ b/arch/x86/kernel/cpu/mshyperv.c
+> @@ -223,63 +223,6 @@ static void hv_machine_crash_shutdown(struct pt_regs=
+ *regs)
+>  	hyperv_cleanup();
+>  }
+>  #endif /* CONFIG_CRASH_DUMP */
+> -
+> -static u64 hv_ref_counter_at_suspend;
+> -static void (*old_save_sched_clock_state)(void);
+> -static void (*old_restore_sched_clock_state)(void);
+> -
+> -/*
+> - * Hyper-V clock counter resets during hibernation. Save and restore clo=
+ck
+> - * offset during suspend/resume, while also considering the time passed
+> - * before suspend. This is to make sure that sched_clock using hv tsc pa=
+ge
+> - * based clocksource, proceeds from where it left off during suspend and
+> - * it shows correct time for the timestamps of kernel messages after res=
+ume.
+> - */
+> -static void save_hv_clock_tsc_state(void)
+> -{
+> -	hv_ref_counter_at_suspend =3D hv_read_reference_counter();
+> -}
+> -
+> -static void restore_hv_clock_tsc_state(void)
+> -{
+> -	/*
+> -	 * Adjust the offsets used by hv tsc clocksource to
+> -	 * account for the time spent before hibernation.
+> -	 * adjusted value =3D reference counter (time) at suspend
+> -	 *                - reference counter (time) now.
+> -	 */
+> -	hv_adj_sched_clock_offset(hv_ref_counter_at_suspend -
+> hv_read_reference_counter());
+> -}
+> -
+> -/*
+> - * Functions to override save_sched_clock_state and restore_sched_clock_=
+state
+> - * functions of x86_platform. The Hyper-V clock counter is reset during
+> - * suspend-resume and the offset used to measure time needs to be
+> - * corrected, post resume.
+> - */
+> -static void hv_save_sched_clock_state(void)
+> -{
+> -	old_save_sched_clock_state();
+> -	save_hv_clock_tsc_state();
+> -}
+> -
+> -static void hv_restore_sched_clock_state(void)
+> -{
+> -	restore_hv_clock_tsc_state();
+> -	old_restore_sched_clock_state();
+> -}
+> -
+> -static void __init x86_setup_ops_for_tsc_pg_clock(void)
+> -{
+> -	if (!(ms_hyperv.features & HV_MSR_REFERENCE_TSC_AVAILABLE))
+> -		return;
+> -
+> -	old_save_sched_clock_state =3D x86_platform.save_sched_clock_state;
+> -	x86_platform.save_sched_clock_state =3D hv_save_sched_clock_state;
+> -
+> -	old_restore_sched_clock_state =3D x86_platform.restore_sched_clock_stat=
+e;
+> -	x86_platform.restore_sched_clock_state =3D hv_restore_sched_clock_state=
+;
+> -}
+>  #endif /* CONFIG_HYPERV */
+>=20
+>  static uint32_t  __init ms_hyperv_platform(void)
+> @@ -635,7 +578,6 @@ static void __init ms_hyperv_init_platform(void)
+>=20
+>  	/* Register Hyper-V specific clocksource */
+>  	hv_init_clocksource();
+> -	x86_setup_ops_for_tsc_pg_clock();
+>  	hv_vtl_init_platform();
+>  #endif
+>  	/*
+> diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyp=
+erv_timer.c
+> index f00019b078a7..86a55167bf5d 100644
+> --- a/drivers/clocksource/hyperv_timer.c
+> +++ b/drivers/clocksource/hyperv_timer.c
+> @@ -534,10 +534,60 @@ static __always_inline void hv_setup_sched_clock(vo=
+id
+> *sched_clock)
+>  	sched_clock_register(sched_clock, 64, NSEC_PER_SEC);
+>  }
+>  #elif defined CONFIG_PARAVIRT
+> +static u64 hv_ref_counter_at_suspend;
+> +static void (*old_save_sched_clock_state)(void);
+> +static void (*old_restore_sched_clock_state)(void);
+> +
+> +/*
+> + * Hyper-V clock counter resets during hibernation. Save and restore clo=
+ck
+> + * offset during suspend/resume, while also considering the time passed
+> + * before suspend. This is to make sure that sched_clock using hv tsc pa=
+ge
+> + * based clocksource, proceeds from where it left off during suspend and
+> + * it shows correct time for the timestamps of kernel messages after res=
+ume.
+> + */
+> +static void save_hv_clock_tsc_state(void)
+> +{
+> +	hv_ref_counter_at_suspend =3D hv_read_reference_counter();
+> +}
+> +
+> +static void restore_hv_clock_tsc_state(void)
+> +{
+> +	/*
+> +	 * Adjust the offsets used by hv tsc clocksource to
+> +	 * account for the time spent before hibernation.
+> +	 * adjusted value =3D reference counter (time) at suspend
+> +	 *                - reference counter (time) now.
+> +	 */
+> +	hv_adj_sched_clock_offset(hv_ref_counter_at_suspend -
+> hv_read_reference_counter());
+> +}
+> +/*
+> + * Functions to override save_sched_clock_state and restore_sched_clock_=
+state
+> + * functions of x86_platform. The Hyper-V clock counter is reset during
+> + * suspend-resume and the offset used to measure time needs to be
+> + * corrected, post resume.
+> + */
+> +static void hv_save_sched_clock_state(void)
+> +{
+> +	old_save_sched_clock_state();
+> +	save_hv_clock_tsc_state();
+> +}
+> +
+> +static void hv_restore_sched_clock_state(void)
+> +{
+> +	restore_hv_clock_tsc_state();
+> +	old_restore_sched_clock_state();
+> +}
+> +
+>  static __always_inline void hv_setup_sched_clock(void *sched_clock)
+>  {
+>  	/* We're on x86/x64 *and* using PV ops */
+>  	paravirt_set_sched_clock(sched_clock);
+> +
+> +	old_save_sched_clock_state =3D x86_platform.save_sched_clock_state;
+> +	x86_platform.save_sched_clock_state =3D hv_save_sched_clock_state;
+> +
+> +	old_restore_sched_clock_state =3D x86_platform.restore_sched_clock_stat=
+e;
+> +	x86_platform.restore_sched_clock_state =3D hv_restore_sched_clock_state=
+;
+>  }
+>  #else /* !CONFIG_GENERIC_SCHED_CLOCK && !CONFIG_PARAVIRT */
+>  static __always_inline void hv_setup_sched_clock(void *sched_clock) {}
+> --
+> 2.48.1.711.g2feabab25a-goog
+>=20
+
 
