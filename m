@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFDADC021B8
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 16:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901332.1309290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BA4C021B8
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 17:40:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901367.1309328 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpVKj-000418-L2; Tue, 04 Mar 2025 16:41:29 +0000
+	id 1tpWFF-0005sa-8z; Tue, 04 Mar 2025 17:39:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901332.1309290; Tue, 04 Mar 2025 16:41:29 +0000
+Received: by outflank-mailman (output) from mailman id 901367.1309328; Tue, 04 Mar 2025 17:39:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpVKj-000411-I7; Tue, 04 Mar 2025 16:41:29 +0000
-Received: by outflank-mailman (input) for mailman id 901332;
- Tue, 04 Mar 2025 16:41:28 +0000
+	id 1tpWFF-0005sT-6R; Tue, 04 Mar 2025 17:39:53 +0000
+Received: by outflank-mailman (input) for mailman id 901367;
+ Tue, 04 Mar 2025 17:39:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kFsD=VX=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tpVKi-00040v-9R
- for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 16:41:28 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ <SRS0=esJf=VX=flex--seanjc.bounces.google.com=35DrHZwYKCbstfbokdhpphmf.dpnyfo-efwfmmjtut.yfoqspkfdu.psh@srs-se1.protection.inumbo.net>)
+ id 1tpWFD-0005sN-Uq
+ for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 17:39:52 +0000
+Received: from mail-pl1-x649.google.com (mail-pl1-x649.google.com
+ [2607:f8b0:4864:20::649])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 83eaf9ed-f917-11ef-9ab4-95dc52dad729;
- Tue, 04 Mar 2025 17:41:26 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aaee2c5ee6eso850703266b.1
- for <xen-devel@lists.xenproject.org>; Tue, 04 Mar 2025 08:41:27 -0800 (PST)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac1e02f9660sm262903466b.71.2025.03.04.08.41.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 08:41:26 -0800 (PST)
+ id abde0fcb-f91f-11ef-9ab4-95dc52dad729;
+ Tue, 04 Mar 2025 18:39:50 +0100 (CET)
+Received: by mail-pl1-x649.google.com with SMTP id
+ d9443c01a7336-22367f4e9b9so80309475ad.0
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Mar 2025 09:39:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,132 +42,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83eaf9ed-f917-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: abde0fcb-f91f-11ef-9ab4-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741106486; x=1741711286; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=quF0aTMLufYAfyxmEa9FNXzjukK1F9FdjpvMWthr0f0=;
-        b=WTSOzQjag8Brr+gRrQXmWWtZP+o9iw2crCd5JV7LbIzdYIGcIjLG8IgPZ3UpBPMvkr
-         iypsP9Yxpb/ZrRiXZUA688JbS7GMioV+MxTeijt2oKME+oVci9YF6Y7cwSONyHTvvFKf
-         3rVPY70VmesXPiMZP7X1+T4p+BHvKJQ/0Or3c=
+        d=google.com; s=20230601; t=1741109989; x=1741714789; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=TI3FoVeE0Ra2glCU+l7ZrrB58ecOTFnnVt+cs3oYhCA=;
+        b=rVvLSfFe7LIWkFjAIGNRd3UmHQJh3vfhzuobUvZZBOgFqPuxTuAd/2nJB+RwG4UlWZ
+         9lt5vfSFHnnvAyjHR6oB8VWWzM/aXaPMyZNoe5yAVrwXOb/qeOC4lRD0/mumfDSfA2NP
+         JsmXmJh0UCaj/8BBud4ZCKpW3yYI7CfkK/dKeFKa1X8bIxpT7KVlV02pJJZvu/kgPXt1
+         ZOKaBsUY9INoFn4+vthQBN8NR+QgxC2zbt6IDuA5FVh44mavD3vOcrlma0aJ/ckJx9Xu
+         cukT7MaMRlz8yk5S5oMbS1aPdwRb07/9f+ieVo2wFMZw3xp1+b07PvXhRoUAMf9OYFy+
+         gNpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741106486; x=1741711286;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=quF0aTMLufYAfyxmEa9FNXzjukK1F9FdjpvMWthr0f0=;
-        b=t8AUgYFMMNE5nwqSjLH1kYYpEXknaU3G1eK35QnAokvv5buSWqGBg1O9KQPS9cBklv
-         8TAgZM7IkucLAKV/PjcJOlc1o+pfs/Bi5tPkd4jY5poiHfwuE3P303YMDvZFZqPJcCZ2
-         2CE1PZfR5LCQ51LzG3BNwyrrnpm5q0IbKUD2yT2Ou0TokqRoxTMK5l8zJSrDYd9OSdFE
-         r3UQil9VGUq2GiTZ1PnE7+rMMQm07guqVqUBtEdtIoQb1udGB+vwDFJe+sjgQllmXkaD
-         eIfZEAkVn8VMWS3fQ+ALISNh+PBJqUywZq3Q3YP7YFL0xdznlNC8iWKHBD3Z00Y3gs3H
-         JWpQ==
-X-Gm-Message-State: AOJu0YyPSVdG/gfLRvh1BhJearorftExJkUpc9gtrPrAC3ee42cE6VIh
-	q23/akr0oJZKlpM6aiAoGbdf+ziwbvd2lJP96YLTo4g4Yk4tAIHfSvnNYF5Lf5U=
-X-Gm-Gg: ASbGnctAmhKd/IoZ0Lx6oOZN9iMZMDk6greWsRBFsotYWMbOuYs/QqGSEZS/zCEuyei
-	6GYYHg3dBaIVQQ4QHmYD9IQqda+H9Wf9h5oI7cQlQTYA0PbeGQyDaTOTc5lohtvZXmWMZH0WjNV
-	9yuQBvtX4MLOuHcBNtKGpVm3yMIaxcwzoYYAwC6cCfJOIA7NQH4+tcEmHznafQ+tHdr2Bv4lcD/
-	bflOl+/S15U/arUX5aIhQP23YULERSSM/cXQEWnN2/O/42t9KsFjISTqknnTn1XijoFDy1HMF+f
-	Foc6WuyohwymoH/vQTPhnDs0TZU3l/E8h10erVd8mp6pwHBR5w==
-X-Google-Smtp-Source: AGHT+IHzTa5Ds9k+mnxSRztBV6tN5kUD76OcqXCK8tZ3djFyVtf8aprioBXkxg426oyeFs03ZLxZ9Q==
-X-Received: by 2002:a17:907:c48c:b0:ac2:8db:7057 with SMTP id a640c23a62f3a-ac208db8caemr63118866b.3.1741106486392;
-        Tue, 04 Mar 2025 08:41:26 -0800 (PST)
-Date: Tue, 4 Mar 2025 17:41:25 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>
-Subject: Re: [RFC PATCH] xen/amd-iommu: Add interrupt remapping quirk for
- ath11k
-Message-ID: <Z8ctNa9WFwYxnKuE@macbook.local>
-References: <20250226211125.43625-1-jason.andryuk@amd.com>
- <Z8A9LYjgr92IignP@macbook.local>
- <9be05453-ab39-4b70-9675-b9df47e870b2@amd.com>
- <Z8GDpJ8G8qMz4uYD@macbook.local>
- <09a8e9dd-2839-49d5-9fff-d2c12c0dd3ed@amd.com>
- <Z8bUqTKSJ8rpMX8R@macbook.local>
- <3bd7ff2b-5f26-496b-a067-c6c1f79e7515@amd.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <3bd7ff2b-5f26-496b-a067-c6c1f79e7515@amd.com>
+        d=1e100.net; s=20230601; t=1741109989; x=1741714789;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=TI3FoVeE0Ra2glCU+l7ZrrB58ecOTFnnVt+cs3oYhCA=;
+        b=hfScL8QhwtcQcTeJglslf0SdGQf5vUxh7fTAzjgMyHOk6gVddo6PYo3q/eym4dccDi
+         BphXf2jqXvwTUrgRjf0xQV3fvIoI9KTZ4pBXNWHgheLEmr3Fmd1tssTMsEX5E/ZNaTqN
+         jfK7BK3lEoHect8pJ435ayogMFiBzXZJUTphIPRn0KPIZGluu+ZFr1t+8kt61BtXHJbV
+         Cm9kd9fv0VNaWU0PqJv24xfGYu6CYX8d8xPl7ffkfd61PX5S3e15mO0MYOfmzWlytvBp
+         qPSNPISAHN6ws/m7JVe989HU2rv/Q5RUmfTEC4U1oQ3ABDMfkfDEkCO3crnDHmu/5yx3
+         lizQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXHU2wehnEnkV+oF3YK3FwsVBOUf5sjztVKGQPLqzwE/a7qSRrLHHmbQb92vEwCECe8Uvtg9/ObM8o=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyxCgaWjAFrtd620DMZLl4oCULNFkO+YCiyajcu9xp6g/SbEq3Q
+	x5Rd82N5a3oZp5tUGBmwV7/OcKw+PDXfmaDSWmHuIkUoWnB4mDwFHByGMQbHGelXopi1r+BUhTM
+	D2g==
+X-Google-Smtp-Source: AGHT+IGZddoSY2oyJ60dCyqtZiF8YnS+v36sYEMEslkao7NI/8RRXlf38IKWdXRybiMidO4JcJg+/iNohU8=
+X-Received: from pfbfw3.prod.google.com ([2002:a05:6a00:61c3:b0:730:76c4:7144])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:734b:b0:1ee:d418:f758
+ with SMTP id adf61e73a8af0-1f2f4cdb421mr28532451637.17.1741109988705; Tue, 04
+ Mar 2025 09:39:48 -0800 (PST)
+Date: Tue, 4 Mar 2025 09:39:47 -0800
+In-Reply-To: <SN6PR02MB41576973AC66F8515F6C81F0D4C82@SN6PR02MB4157.namprd02.prod.outlook.com>
+Mime-Version: 1.0
+References: <20250227021855.3257188-1-seanjc@google.com> <20250227021855.3257188-9-seanjc@google.com>
+ <SN6PR02MB41576973AC66F8515F6C81F0D4C82@SN6PR02MB4157.namprd02.prod.outlook.com>
+Message-ID: <Z8c641D3AuWNXGVB@google.com>
+Subject: Re: [PATCH v2 08/38] clocksource: hyper-v: Register sched_clock
+ save/restore iff it's necessary
+From: Sean Christopherson <seanjc@google.com>
+To: Michael Kelley <mhklinux@outlook.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "x86@kernel.org" <x86@kernel.org>, 
+	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Juergen Gross <jgross@suse.com>, "K. Y. Srinivasan" <kys@microsoft.com>, 
+	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Ajay Kaher <ajay.kaher@broadcom.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
+	Peter Zijlstra <peterz@infradead.org>, Daniel Lezcano <daniel.lezcano@linaro.org>, 
+	John Stultz <jstultz@google.com>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, 
+	"virtualization@lists.linux.dev" <virtualization@lists.linux.dev>, 
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Tom Lendacky <thomas.lendacky@amd.com>, 
+	Nikunj A Dadhania <nikunj@amd.com>
+Content-Type: text/plain; charset="us-ascii"
 
-On Tue, Mar 04, 2025 at 10:15:21AM -0500, Jason Andryuk wrote:
-> On 2025-03-04 05:23, Roger Pau Monné wrote:
-> > On Fri, Feb 28, 2025 at 03:25:52PM -0500, Jason Andryuk wrote:
-> > > On 2025-02-28 04:36, Roger Pau Monné wrote:
-> > > > On Thu, Feb 27, 2025 at 01:28:11PM -0500, Jason Andryuk wrote:
-> > > > > On 2025-02-27 05:23, Roger Pau Monné wrote:
-> > > > > > On Wed, Feb 26, 2025 at 04:11:25PM -0500, Jason Andryuk wrote:
-> > > > > > > To work around this, we can, for per-device IRTs, program the hardware
-> > > > > > > to use the guest data & associated IRTE.  The address doesn't matter
-> > > > > > > since the IRTE handles that, and the Xen address & vector can be used as
-> > > > > > > expected.
-> > > > > > 
-> > > > > > All this work on AMD because when interrupt remapping is enabled all
-> > > > > > MSIs are handled by the remapping table, while on Intel there's still
-> > > > > > a bit in the MSI address field to signal whether the MSI is using a
-> > > > > > remapping entry, or is using the "compatibility" format (iow: no
-> > > > > > remapping).
-> > > > > 
-> > > > > So, on Intel, if the guest hands the device the MSI address, it can decided
-> > > > > to bypass remapping?
-> > > > > 
-> > > > > Thanks for providing insight into the Intel inner workings.  That's why I am
-> > > > > asking.
-> > > > 
-> > > > Yes, sorry, I'm afraid I don't have any good solution for Intel, at
-> > > > least not anything similar to what you propose to do on AMD-Vi.  I
-> > > > guess we could take a partial solution for AMD-Vi only, but it's
-> > > > sub-optimal from Xen perspective to have a piece of hardware working
-> > > > fine on AMD and not on Intel.
-> > > 
-> > > I only need AMD to work ;)
-> > > 
-> > > But yeah, I thought I should make an effort to get both working.
+On Tue, Mar 04, 2025, Michael Kelley wrote:
+> From: Sean Christopherson <seanjc@google.com> Sent: Wednesday, February 26, 2025 6:18 PM
 > > 
-> > Kind of tangential to this approach.  Do you know which register(s)
-> > are used to store the non-architectural MSI address and data fields?
-> > 
-> > I'm wondering if it simply would be easier to introduce a quirk for
-> > this device in vPCI (and possibly QEMU?) that intercepts writes to the
-> > out of band MSI registers.  That should work for both Intel and AMD,
-> > but would have the side effect that Xen would need to intercept
-> > accesses to at least a full page, and possibly forward accesses to
-> > adjacent registers.
+> > Register the Hyper-V timer callbacks or saving/restoring its PV sched_clock
 > 
-> From the QEMU part of the vfio hack:
-> * We therefore come up with a really crude quirk that looks for values
-> * written to the ATH11K_PCI_WINDOW (defined in Linux driver as starting
-> * at 0x80000 with an 18-bit mask, ie. 256k) that match the guest MSI
-> * address.  When found we replace the data with the host physical
-> * address and set a cookie to match the MSI data write, again replacing
-> * with the host value and clearing the cookie.
+> s/or/for/
 > 
-> https://lore.kernel.org/ath11k/20240812170045.1584000-1-alex.williamson@redhat.com/
+> > if and only if the timer is actually being used for sched_clock.
+> > Currently, Hyper-V overrides the save/restore hooks if the reference TSC
+> > available, whereas the Hyper-V timer code only overrides sched_clock if
+> > the reference TSC is available *and* it's not invariant.  The flaw is
+> > effectively papered over by invoking the "old" save/restore callbacks as
+> > part of save/restore, but that's unnecessary and fragile.
 > 
-> This is inside BAR0, AIUI.  I'm guessing, but I think the driver puts them
-> into a command ring, so it's not a fixed location.  The large area, and
-> since we won't normally intercept BAR access, made me not want to pursue
-> this.
+> The Hyper-V specific terminology here isn't quite right.  There is a
+> PV "Hyper-V timer", but it is loaded by the guest OS with a specific value
+> and generates an interrupt when that value is reached.  In Linux, it is used
+> for clockevents, but it's not a clocksource and is not used for sched_clock.
+> The correct Hyper-V term is "Hyper-V reference counter" (or "refcounter"
+> for short).  The refcounter behaves like the TSC -- it's a monotonically
+> increasing value that is read-only, and can serve as the sched_clock.
+> 
+> And yes, both the Hyper-V timer and Hyper-V refcounter code is in a
+> source file with a name containing "timer" but not "refcounter". But
+> that seems to be the pattern for many of the drivers in
+> drivers/clocksource. :-)
 
-Oh, I see, it's not a fixed register, but something like a command
-queue.  Great, that makes it way worse to deal with.  It would also
-imply that Xen would need to possibly map the whole 256k ring in order
-to forward requests to the hardware.
+Heh, wading through misleading naming is basically a right of passage in the kernel.
 
-I would like for a solution that covers both Intel and AMD, but I
-don't have the card myself to test or develop any of those solutions,
-so I think having a solution that works on AMD is likely better than
-having no solution at all.  Whoever wants to use the card on Intel
-will have to come up with a solution there.
-
-Thanks, Roger.
+Thanks for the reviews and testing!  I'll fixup all the changelogs.
 
