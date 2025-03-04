@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC784C282C6
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 14:10:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901160.1309147 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA02C282D2
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 14:40:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901179.1309157 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpSxl-0005ib-7V; Tue, 04 Mar 2025 14:09:37 +0000
+	id 1tpTRr-0006Dj-Gc; Tue, 04 Mar 2025 14:40:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901160.1309147; Tue, 04 Mar 2025 14:09:37 +0000
+Received: by outflank-mailman (output) from mailman id 901179.1309157; Tue, 04 Mar 2025 14:40:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpSxl-0005iU-4P; Tue, 04 Mar 2025 14:09:37 +0000
-Received: by outflank-mailman (input) for mailman id 901160;
- Tue, 04 Mar 2025 14:09:36 +0000
+	id 1tpTRr-0006Dc-DS; Tue, 04 Mar 2025 14:40:43 +0000
+Received: by outflank-mailman (input) for mailman id 901179;
+ Tue, 04 Mar 2025 14:40:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/Z5M=VX=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tpSxj-0005iN-VM
- for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 14:09:36 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
+ id 1tpTRq-0006DV-5w
+ for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 14:40:42 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c2c8441-f902-11ef-9ab4-95dc52dad729;
- Tue, 04 Mar 2025 15:09:33 +0100 (CET)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-390dd35c78dso3668326f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 04 Mar 2025 06:09:33 -0800 (PST)
+ id a4fb3e74-f906-11ef-9ab4-95dc52dad729;
+ Tue, 04 Mar 2025 15:40:40 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-439a4fc2d65so61332905e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Mar 2025 06:40:40 -0800 (PST)
 Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390e4848252sm17937562f8f.69.2025.03.04.06.09.32
+ ffacd0b85a97d-390e47b7dcfsm18131038f8f.55.2025.03.04.06.40.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Mar 2025 06:09:32 -0800 (PST)
+ Tue, 04 Mar 2025 06:40:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c2c8441-f902-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: a4fb3e74-f906-11ef-9ab4-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741097373; x=1741702173; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741099240; x=1741704040; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=aTJN0h9Uin/WBU/IdFVCuueJG3VRjSRdBcUhoLoOg6w=;
-        b=KU4OpW85xCKhx9nsgkdjLY/UU5Dk+otf7VVypGsEq6dFHiA7nSwGUHPkQiM48JPsm6
-         vbRCgfHv9zY0YdQjfPqc9TCJgTBlsCYgZ7vsMmFi/6VH7WZFy9S3lK/6RedzTxFuaTxm
-         vSdoCMP9n0+NiXvKtQB5DJYIriBVvvJ/E6m+8=
+        bh=wz3CGKRznTPHEVLLxfje4HZ3E3fMWbD5uwjqAe6IQok=;
+        b=Xf8r/XGCyqnQuyTOrmd9LWrOpUGXlvWpvO9idgGbIK6/FUIgi/15wm1FHMyJ7IPhoX
+         0BKz5DiZNLL6je2AIEW9mo7Z9iccvWJYtXR0XcGJROQbrJ36QcHa1OyAj12VidZ7fQkh
+         xFdCVZC4mPyEgeqDaLg4xgW2JWLX2YLxSDjH8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741097373; x=1741702173;
+        d=1e100.net; s=20230601; t=1741099240; x=1741704040;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aTJN0h9Uin/WBU/IdFVCuueJG3VRjSRdBcUhoLoOg6w=;
-        b=GkHaExf7fos+Qg/FLKwtzrne2dld+5sryTUW8zG5LSw62lON2RAoVHPbFSal/j3R9Z
-         Rn1Jn/q78yXNG7qNf6reY89Yu236qa5mbZl2gNoPEyhplswsaHJPBa0Oqsi7Hd7cI14H
-         6hr9I9NUSyujonqK1mKvpK+FOyagTYBTy9DpsPEd6bL4Rn5KNUC+RCGjy/t3JyA/KsBD
-         UqDMA0uJCcoiBGUfSCzK884Tn7EAUqh2+Jv186LWcqWqCkltBB9FzvHtFDy5vc3vuRvm
-         N4QtFOgTCtTe6zo2aUbGAjgjEkp0L26WUer1bQ7+64qFG2A4yWH1jf7tvkcprErMnSBd
-         jOVg==
-X-Gm-Message-State: AOJu0Yzm8bBBppwyWk6NaZVJYt3yH2V6GuDbA2yWOAO5J2zxA1gBm9sp
-	7KhPICDAqaY/4ycBHaNNxuaejERzDJo5r/mBPNXwnYzRUG6Nl3I6hj1UJX5Vhqc=
-X-Gm-Gg: ASbGnctabxnaq3wJF+Sc22CMq6JDxfs4P0ud686yDAzkJhfojXNjkmaR+xGQK3y+uHk
-	5nBI9Ee9zA3Ao0Rz7wPu24KukLx9DfkNMH3tWoisOUYNTcXLI+D4euDN2H4Yq33Uuw6xylbLtkf
-	pwxBEod5aaX0PCpZfedBgnEmbASOL/35u3QNAeXugebFqgdzGjxRqAmyfkOsu7OcXd1bhvNICfo
-	dNfzvbanK1ZpU3qQJjDHRR0KVlkZM0KRtRxFc8JOiHnlltBSDdKBDlo1PtjrlCA6laqdFOfplGs
-	sgXLpMy9Cc1bH1cUr/mfBtjbRzvHKjsBvHV6K+3V4km6R0hBbj82ZUW25G55nJ0pIXuqL2Y+Epk
-	Q+14k3AFk
-X-Google-Smtp-Source: AGHT+IHZkwPcxsdBKPSXYxLlaLBUx97Bc9hz9RWy0cW1y4QMSeZnEmFiE09A0gElo+j/AMnGg533aQ==
-X-Received: by 2002:a5d:64c7:0:b0:38d:ba8e:7327 with SMTP id ffacd0b85a97d-3911560528dmr3160653f8f.8.1741097372994;
-        Tue, 04 Mar 2025 06:09:32 -0800 (PST)
-Message-ID: <8a3f97d9-a7f8-4358-86c2-74dada636b1d@citrix.com>
-Date: Tue, 4 Mar 2025 14:09:31 +0000
+        bh=wz3CGKRznTPHEVLLxfje4HZ3E3fMWbD5uwjqAe6IQok=;
+        b=JC6m+UlG6Oc8YVmEsqvdiHJ99I5bC954h2Ef/9hd9kku7qn18cHFLIVdCOCqy4cxmR
+         OVRfUu+6PDSZs+pJFaMZcpsgMyEPKKD7HG+W0TktRCBpj8DIvdNryKZGfa1G1+mkPehI
+         HXFutEuXAwZmNZQyDVKn2bnkzPKfPKPvZJDYQcti8QipNyETaTjr1O+wyP7Ro2/N8cPE
+         +bVNlPaZcKuDUcsMjztx0xfhiXU3TzGOyaHlXz2qLsk4pIntn6N8cw8TsNTA01dtfrD9
+         WCSlWLbAJtfMa9pS0Ccn6EzuzD3iVBhv3HfJeOQleDKx5DTAmf+pkqEFodKhajq9N07h
+         pSdQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXEn/W7vvoHcy8IWAXp8lqNtPi2GvhRo4QUZqoNJtYU66CjasYPcQs+OehMGQOftWOuT57WNS6QtZw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzUr2R6m5Fb2Kn1zXQzSl0gC99sR/wr2rgWnMaevUjq4aBaHwNh
+	nRUAZAfJeZFLWCbSM1bxrZ62U1UZmDLqAIS0WeKD7vlFZh4Ag7yHRULyb3vsvnU=
+X-Gm-Gg: ASbGnctEKyENvERxdtGZ1wskt2ScsUBu3h3zjbEah3aIdmbNc2lJCu3us12pFFsVQ4l
+	/C6PAg7TITymBJQ/kdqhFq8wqzxR32lWBmBbvQiRwLTDJFjl3gECuB+nBLu4JT1EDMcsjFHWN4g
+	0vP30C4G28MpybFrvYDwosODKFH5JPGWaP1Fu7+Bzl1PFLixrQyfzj3uFU71jmY/fRNSu0EmB5/
+	raELj8R1ZIzu6vC9j/jeG8dpfyCLaWqbFVSusgjQMBBWKG7AztJgr7itjEx325+mMVjcHlxaEWc
+	NhVZSWn3P//Nm+OT/wefaHDD/A9v/lt2GKNYwIjx9roz+Og583Zml16Akkcgvailcf1NLo3nkHp
+	qYdLNlJMz
+X-Google-Smtp-Source: AGHT+IGdbHCCNdHhnLlKXzniAgyUitnFAWdIs5/Zy++dwKS6y0X/ZLqWl0CGLhev+/+nR4ZFb/dKBQ==
+X-Received: by 2002:a05:600c:4b17:b0:43b:bfb7:e099 with SMTP id 5b1f17b1804b1-43bbfb7e424mr91599455e9.29.1741099240084;
+        Tue, 04 Mar 2025 06:40:40 -0800 (PST)
+Message-ID: <0981f331-8489-4327-93a3-d063bb00362d@citrix.com>
+Date: Tue, 4 Mar 2025 14:40:39 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2 3/6] CI: Refresh the Debian 12 arm64 container
-To: Stefano Stabellini <stefano.stabellini@amd.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1730743077.git.javi.merino@cloud.com>
- <ad9bcd46c85e738eccb2c51b42ae7d9d0d02fc5d.1730743077.git.javi.merino@cloud.com>
- <alpine.DEB.2.22.394.2411061615590.89051@ubuntu-linux-20-04-desktop>
+Subject: Re: [PATCH 5/8] x86/IDT: Make idt_tables[] be per_cpu(idt)
+To: Jan Beulich <jbeulich@suse.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20250224160509.1117847-1-andrew.cooper3@citrix.com>
+ <20250224160509.1117847-6-andrew.cooper3@citrix.com>
+ <59e8952f-d49b-46de-ab57-07536a1028c0@suse.com>
+ <6d81b7b7-5317-4e49-8b39-1e3810d244d7@citrix.com>
+ <1d4aa263-3a9b-4968-9b16-3dc3dcdc4b0c@suse.com>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -137,120 +140,67 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <alpine.DEB.2.22.394.2411061615590.89051@ubuntu-linux-20-04-desktop>
+In-Reply-To: <1d4aa263-3a9b-4968-9b16-3dc3dcdc4b0c@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 06/11/2024 4:23 pm, Stefano Stabellini wrote:
-> On Wed, 6 Nov 2024, Javi Merino wrote:
->> Rework the container to use heredocs for readability and use
->> apt-get --no-install-recommends to keep the size down.  Rename the job
->> to debian-12-arm64-* to follow the naming scheme of all the other CI
->> jobs.
+On 25/02/2025 4:33 pm, Jan Beulich wrote:
+> On 25.02.2025 16:40, Andrew Cooper wrote:
+>> On 25/02/2025 9:07 am, Jan Beulich wrote:
+>>> On 24.02.2025 17:05, Andrew Cooper wrote:
+>>>> --- a/xen/arch/x86/cpu/common.c
+>>>> +++ b/xen/arch/x86/cpu/common.c
+>>>> @@ -819,6 +819,7 @@ void load_system_tables(void)
+>>>>  	 * support using ARRAY_SIZE against per-cpu variables.
+>>>>  	 */
+>>>>  	struct tss_page *tss_page = &this_cpu(tss_page);
+>>>> +        idt_entry_t *idt = this_cpu(idt);
+>>> Nit: Tab indentation here.
+>> Yeah, I noticed that only after sending the email.  Other parts of the
+>> FRED series vastly changes this function.
 >>
->> This reduces the size of the debian:12-arm64v8 from 2.25GB down to 1.62GB.
+>>>> @@ -830,7 +831,7 @@ void load_system_tables(void)
+>>>>  		.limit = LAST_RESERVED_GDT_BYTE,
+>>>>  	};
+>>>>  	const struct desc_ptr idtr = {
+>>>> -		.base = (unsigned long)idt_tables[cpu],
+>>>> +		.base = (unsigned long)idt,
+>>>>  		.limit = sizeof(bsp_idt) - 1,
+>>>>  	};
+>>> Coming back to the comment on the earlier patch: Now that you touch all
+>>> of the idt_tables[] uses anyway, ...
+>>>
+>>>> @@ -30,7 +31,7 @@ typedef union {
+>>>>  } idt_entry_t;
+>>>>  
+>>>>  extern idt_entry_t bsp_idt[X86_IDT_VECTORS];
+>>>> -extern idt_entry_t *idt_tables[];
+>>>> +DECLARE_PER_CPU(idt_entry_t *, idt);
+>>> ... this probably really ought to become
+>>>
+>>> DECLARE_PER_CPU(idt_entry_t (*)[X86_IDT_VECTORS], idt);
+>>>
+>>> ?
+>> I'm afraid this doesn't compile.
 >>
->> The container is left running the builds and tests as root to avoid
->> breaking the xilinx runners.
+>> arch/x86/crash.c:66:17: error: passing argument 1 of ‘set_ist’ from
+>> incompatible pointer type [-Werror=incompatible-pointer-types]
+>> ...
+>> note: expected ‘volatile idt_entry_t *’ but argument is of type
+>> ‘idt_entry_t (*)[256]’
 >>
->> Signed-off-by: Javi Merino <javi.merino@cloud.com>
->
-> Hi Javi,
->
-> I generated a new dependency diff, this time it should be correct, see
-> the diff appended below. Most of the differences are not concerning,
-> but I have a couple of questions.
+>> Similarly {en,dis}able_each_ist() and _set_gate_lower().
+> Well, did you adjust the use sites? As said in the respective comment on
+> patch 4, that'll be necessary (to account for the abstract extra level of
+> indirection; generated code ought to not change).
 
-Javi has moved elsewhere, so I guess I'm picking this up.
+Having spent even more time, I'm giving up and rejecting this suggestion.
 
->
->
->> --- /tmp/1a	2024-11-06 16:12:09.235734221 +0000
->> +++ /tmp/2a	2024-11-06 16:12:15.203659831 +0000
->> @@ -1,36 +1,32 @@
->>  acpica-tools
->> -bcc
->> -bin86
->>  bison
->>  build-essential
->>  busybox-static
->> +ca-certificates
->>  checkpolicy
->> -clang
->>  cpio
->>  curl
->>  device-tree-compiler
->>  expect
->> +file
->>  flex
->> -git
->> -libaio-dev
-> I think this one might be needed to build QEMU but given that we don't
-> have any build jobs building QEMU on ARM today anymore, it could be
-> removed. We are going to add a new build job to build QEMU on ARM at
-> some point soon but we can add any relevant dependency back at that
-> time.
+Some can be made to compile.  Some I can't make compile, and the result
+is a good demonstration of why exotic types like this don't get common use.
 
-Deps can be added back when (if) they're needed.  It's far easier to do
-it this way around, than the other.
-
-There's more that can be stripped, I think.
-
-Without QEMU, we can drop libglib2.0-dev, libpixman-1-dev.
-
-acpica-tools seems like an x86-ism to me.
-
-
-I am surprised at the addition of "file".  It's listed as needed for the
-test phase, but if it wasn't present before, how did things work?
-
-That said, I really would prefer to strip out all the test container
-stuff and get that working through artefacts, which will reduce test time.
-
->> +git-core
->> +golang-go
->> +libbz2-dev
->> +libext2fs-dev
->>  libfdt-dev
->> -libfindlib-ocaml-dev
->>  libglib2.0-dev
->>  liblzma-dev
->> -libncurses5-dev
->> -libnl-3-dev
-> I think it is the same for these two
-
-curses is for xentop.  nl-3 is for `xl colo` and surely not needed.
-
->
->
->> +liblzo2-dev
->>  libpixman-1-dev
->>  libyajl-dev
->> -markdown
->> -nasm
->> +libzstd-dev
->> +ocaml-findlib
->>  ocaml-nox
->> -pandoc
-> The removal of pandoc and markdown both concerns me. Wouldn't this cause
-> the documents under docs/ not to be built anymore?
-
-This is intentional, because they're huge.  I'm going to do docs builds
-separately, including wiring up -Werror.
-
->
->
->>  pkg-config
->>  python3-dev
->>  python3-setuptools
->> -transfig
->>  u-boot-qemu
->>  u-boot-tools
->>  uuid-dev
->>  wget
->> -zlib1g-dev
-
-zlib wants to say.  It's part of the xenguest dombuilder.
+If you want to try once this series is in, then feel free, but the
+result is not pretty.
 
 ~Andrew
 
