@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F12EC282D2
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 04:18:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.900782.1308757 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB338C282C6
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Mar 2025 04:18:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.900786.1308778 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpJin-0006sY-9v; Tue, 04 Mar 2025 04:17:33 +0000
+	id 1tpJj4-0007Sa-To; Tue, 04 Mar 2025 04:17:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 900782.1308757; Tue, 04 Mar 2025 04:17:33 +0000
+Received: by outflank-mailman (output) from mailman id 900786.1308778; Tue, 04 Mar 2025 04:17:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpJin-0006sR-6X; Tue, 04 Mar 2025 04:17:33 +0000
-Received: by outflank-mailman (input) for mailman id 900782;
- Tue, 04 Mar 2025 04:17:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tpJj4-0007SR-PB; Tue, 04 Mar 2025 04:17:50 +0000
+Received: by outflank-mailman (input) for mailman id 900786;
+ Tue, 04 Mar 2025 04:17:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wix9=VX=outlook.com=mhklinux@srs-se1.protection.inumbo.net>)
- id 1tpJil-0006sI-SQ
- for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 04:17:32 +0000
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azolkn19010010.outbound.protection.outlook.com [52.103.10.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94f80245-f8af-11ef-9898-31a8f345e629;
- Tue, 04 Mar 2025 05:17:28 +0100 (CET)
+ id 1tpJj3-0007N1-7t
+ for xen-devel@lists.xenproject.org; Tue, 04 Mar 2025 04:17:49 +0000
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazolkn190100000.outbound.protection.outlook.com
+ [2a01:111:f403:d003::])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a0da6e59-f8af-11ef-9ab3-95dc52dad729;
+ Tue, 04 Mar 2025 05:17:48 +0100 (CET)
 Received: from SN6PR02MB4157.namprd02.prod.outlook.com (2603:10b6:805:33::23)
  by PH8PR02MB10184.namprd02.prod.outlook.com (2603:10b6:510:224::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.26; Tue, 4 Mar
- 2025 04:17:22 +0000
+ 2025 04:17:44 +0000
 Received: from SN6PR02MB4157.namprd02.prod.outlook.com
  ([fe80::cedd:1e64:8f61:b9df]) by SN6PR02MB4157.namprd02.prod.outlook.com
  ([fe80::cedd:1e64:8f61:b9df%3]) with mapi id 15.20.8489.025; Tue, 4 Mar 2025
- 04:17:22 +0000
+ 04:17:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94f80245-f8af-11ef-9898-31a8f345e629
+X-Inumbo-ID: a0da6e59-f8af-11ef-9ab3-95dc52dad729
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vYaxWVCncCXTII5UOkm0kIDzJXsgk6sYqPh57IoGMMxQgfv9xw6bKUXHw6MEkeytD1fgWTyE9G1sjfTpNBjfBD0JIjuy5xx1iRwN02efwPige9gEHCaipqG92plwS5AFz99GKD1/iVmmJwEACqd404Phck5OuLCrUFAMMVDs4UXfqAi2e4tN7K4Yxo1w2HrtvScrNYAEdCWyd8Kz2IpmF4uVtrEbGAIKsqzbK8AXE+KIL4bQnEfNTOXLVArpfwaZhFjAJinr8jXztvGaz3gCyY6zSJy7bopSnnHUGQFkyckZYDqB3BzG8fSdMIMXwKLiIhTYFbdhHpLioYEBmYjjrA==
+ b=WDdx1EybfDls8xXCnPTmD4Fbz/WbTsZKIG+xZtHVIbaMLP/wwWYJF35qdA8dE+tEcXqxsgBVCpk6iVfCvxhSSzxD4cuwRCjqoCR12hrJMVGf2QAPY11OltgfBiRh8R18gdSAzLIVZkTQlGLUrtIxQVXIEEeFcmXicSLNetq2j9Wa7usqnhsxuGS1qZubcOG1ZwjLoDUKpJaqBkpg2h/uExLK/4l6L2ZFw1f/wWJYApFh9+mAALW1Jiq1wL+oTK1vC273FWq4B9HTzH9KoDe3C4v3/fRkgxAlNo2g15DjfUrGWsE0RyVJ6qBG/rI6ha1urDzBWyfg2mqPkaqy+fXsCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kqRClfs4rHwkXJCbcoLWbHt7kxv4Q2TM/yrd6z2vGVc=;
- b=W20FfDnYowjNaaBZtFAh9WRnMkvU1ONpc/3K6uf+kEzXDNlEtSHqFPX3Ls72geZjSL+CX51j+znlo037dDVZc3dqsDk+dQAGbuyTL/LJmYi/kjpz9keW9oDVEyNDhtIYQd8t0HacGdWzdTn5HF7FPGzugfjLU7G70KCpOgN25nQTC7BVlR2maarkV6OB1ty+rl8cyKhOx90mUis6FD13NRL4QadFmZnCD3H7vW238GYn2WqmEJqLHAtsKmvO7TeyiakiouFzr827DTlv29P0n4lGuJcgjlVm2woAwboAUPProG+QnVxuMOBqOEAPbKo2L0Kh381G9jlLkW6FRu7Diw==
+ bh=NnbmzQtwxWaXauuYu03NCwHr8OAzWgd5jc3assWJuGU=;
+ b=Cs2hjbXi2PHOJpc/w/nip4mCrB87v3G0/a+bsTMD+UUa798HMvvo8EIQxaLIdp+IbU17uYBhJ9aPaHjS9tK63cXZBxXSTig7SstVhxLaNirH7YDafOHqMUPrn+i+T0cTRTgRemopYfW1J+1IvgDL+WFwt0I8u1Il8O77c7OmYfkkAA0QNIQiaSskHaBbHZZ2d129Yu66nIHNeX3MoGnLlp9uUqoBSTjEFfAQy2R2qwySLnluv0h8iSNaZ+1SecfRQ83q8uH7l5DE01HkE3hYLQ/3A9qRZL8hBGVkEeOdgSXRjjZRrbIBU8pTMctpSNsjmmyLXiT77E7MHJRZW11WiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kqRClfs4rHwkXJCbcoLWbHt7kxv4Q2TM/yrd6z2vGVc=;
- b=U/mE/iZQqz0TH3t4WsPwoxDDmJvB8CdO2SBWYPEU5xaPdLh6Rh+Ac6A7iEeUkW9N3tMrlLH4ikQVccxM91MDRAcf3irqrvAwAwqWasibtZwgxEUbZ8yrlDX92sq37KSkwERQMDlhjpi0jS227mz9YjLGIa82GMirH6sjtYK4zU0Fgsf8TgwCj/ni8JNvGZAi9JmNQzyMTo4UXOY+tmAGyPgH5+3zLO9KaWKdC957LY7H5PBfWFvSTkGCZoI1q55enphNVQKizOtzrm9glTjb4Hna+/iGOrMnFcHn11bEAYqfoXAJgEr9ScGrRuh2YxEr6ULyK10ZngUuNJ02cNkdSQ==
+ bh=NnbmzQtwxWaXauuYu03NCwHr8OAzWgd5jc3assWJuGU=;
+ b=ieWKOV3iq3FSPhWsLbSZ2JCj2MpJ1QghVoT+yimVWG10KpG2IWXRKAmnYe6s33++YjbAxQth1F756Q5u4ky910lYipZZhJKJ2W4UgYENHUSd+m3VxlNAyzrXoEo/XeX/98gmqGfXYGsaWB91zw66yzcRw7CytXoWPVmomUnjoJZuOmZNpw6TN6Lt4BfCAvQmo9iKZ90fDoj1+SmtTPLR+qVht2vnMm4b8Fh73qNyqXuV7HNUrkMLGc0dl+FKyQBJca7slgOJa8lHxytYfz0uOfv9dIUX690tB6R285TV79Krnyz2NDRmD53e+mmNQDxU0H7xwhodNUJfvs7OAKgabQ==
 From: Michael Kelley <mhklinux@outlook.com>
 To: Sean Christopherson <seanjc@google.com>, Thomas Gleixner
 	<tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
@@ -81,69 +82,70 @@ CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
 	<linux-hyperv@vger.kernel.org>, "xen-devel@lists.xenproject.org"
 	<xen-devel@lists.xenproject.org>, Tom Lendacky <thomas.lendacky@amd.com>,
 	Nikunj A Dadhania <nikunj@amd.com>
-Subject: RE: [PATCH v2 03/38] x86/tsc: Add helper to register CPU and TSC freq
- calibration routines
-Thread-Topic: [PATCH v2 03/38] x86/tsc: Add helper to register CPU and TSC
- freq calibration routines
-Thread-Index: AQHbiL80axP959hlHU2Wqtf1uuWY5rNiXsPw
-Date: Tue, 4 Mar 2025 04:17:22 +0000
+Subject: RE: [PATCH v2 09/38] clocksource: hyper-v: Drop wrappers to
+ sched_clock save/restore helpers
+Thread-Topic: [PATCH v2 09/38] clocksource: hyper-v: Drop wrappers to
+ sched_clock save/restore helpers
+Thread-Index: AQHbiL6NEBnuOVASRUeGjQZiFuc7YrNiYO4w
+Date: Tue, 4 Mar 2025 04:17:43 +0000
 Message-ID:
- <SN6PR02MB41579F676A4F30B1421A0376D4C82@SN6PR02MB4157.namprd02.prod.outlook.com>
+ <SN6PR02MB41578BB5ACCB9370E2D31EA4D4C82@SN6PR02MB4157.namprd02.prod.outlook.com>
 References: <20250227021855.3257188-1-seanjc@google.com>
- <20250227021855.3257188-4-seanjc@google.com>
-In-Reply-To: <20250227021855.3257188-4-seanjc@google.com>
+ <20250227021855.3257188-10-seanjc@google.com>
+In-Reply-To: <20250227021855.3257188-10-seanjc@google.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
 X-MS-TNEF-Correlator:
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: SN6PR02MB4157:EE_|PH8PR02MB10184:EE_
-x-ms-office365-filtering-correlation-id: 256c2bec-8b45-41fe-fc3a-08dd5ad37673
+x-ms-office365-filtering-correlation-id: e51e694c-fb3c-4bd2-7323-08dd5ad3830b
 x-microsoft-antispam:
- BCL:0;ARA:14566002|19110799003|8060799006|15080799006|461199028|8062599003|41001999003|102099032|3412199025|440099028;
+ BCL:0;ARA:14566002|19110799003|8060799006|15080799006|12121999004|461199028|8062599003|12091999003|11031999003|102099032|3412199025|440099028;
 x-microsoft-antispam-message-info:
- =?us-ascii?Q?S0zfeu77VqqkIQL1LKS9qo9rbeB+e8P5djta9XwmrTXXp4h9igAMJmQ3A4sD?=
- =?us-ascii?Q?IRoMRLA5fMpPripeXv2vzoALKYDkmdJwKXDI7xClhvDOk9LEMVyvy40SFeC9?=
- =?us-ascii?Q?P9UMVnLW3j0psfUuGTzpCJzBUU8f5jR9CBlIwSlP8qw9KJslsUjLBLunjPag?=
- =?us-ascii?Q?3jsSFIYr8sRVi5e1sqozYk31m7I8DG+DpkHW5Jb8zh0kjYbQejfhlB2auS9H?=
- =?us-ascii?Q?9b00UyCkJxsoHCoCsFwiul5Rw3VvJb0i+AXTmAf0pvtnoNNgLZ6HUPpTgrGf?=
- =?us-ascii?Q?I2YDrl0ZNUdjwD9womHeT+6O+5VhLL66l4MtgRaiWs+1opg5YDVEIr8PNQ5O?=
- =?us-ascii?Q?uPrKflaxPlHKQDyAEVuX7/dIo9iQi/Q48zZHskeYdRL49rhSyi0yLuCnknG+?=
- =?us-ascii?Q?22Fr53r7vts74hdPIofrWfJNXanrkLAbrdiFo8XcKM/UakrA+ZPNXylOO3RE?=
- =?us-ascii?Q?uQEAJmaZBBw0bzw/XCVJ686n1gUGpKjwxpqKee/ppxbGtalbp1ggPJFDL1pu?=
- =?us-ascii?Q?TATNvIn4sV5+ioRPrXCmLd+V8BsdYrx88AS29G267diTYPqcxvPNd53Nv1Ik?=
- =?us-ascii?Q?yeHbxPaSh5s0dCERP//wsoYCeuJUmN653ADDDimllycFhMCer2GdxvNOsOnj?=
- =?us-ascii?Q?9xMfkyqz3p5Y5wwAOHbiZ0In3vsWiH5XbNbQhJTk7UU5fSp0AZQtapdv8FZY?=
- =?us-ascii?Q?BJjECOg8lXSbD3OlcbK8906g7MPjaH2HXWIJU1EiNO8FoxLDwot1WdGS3/me?=
- =?us-ascii?Q?vYjQ/Nv2m2BHZNJxXpT/l8KIdujHwjR67sJDmghqnK4zGvih3Wq9Rzt60NA/?=
- =?us-ascii?Q?A3OHv5fPB18iRhOw86r8RVQpxbgSBZuY+L5TpQZPvn9pa3wV2HtipQUW7yi1?=
- =?us-ascii?Q?5NcBs7Y4itOcNwySHh07nkhBhtBa0cu8QfpIV+I5Z7IpCkPPdXgm4Lnkezud?=
- =?us-ascii?Q?aUN+hz0BUsOFl/yhwa7/dXATJU714MLhBR0g3YL0VroQTJS5H4UyHwYVwOsg?=
- =?us-ascii?Q?Gjbf4FHlRS0ZSIhII66k+t0/PIPIWFRv2SUPsJWhfE6aP97eJqRKoB1kDwCO?=
- =?us-ascii?Q?ZfNLG2X/XpwGFjB0fCfsw296tV1Mew=3D=3D?=
+ =?us-ascii?Q?Attvru50E2On2cgXL8bCLE8XNoXcAPJgkv1tgH+XMfQzJnMbfLqn21v27Dho?=
+ =?us-ascii?Q?0qVBmhwHMSnuSe8u3+2QlrPSm0M6k87iZBGW40EK4U5yU2ocbye9Cp54fe+Q?=
+ =?us-ascii?Q?SPxKnxcRyl9OPnOLY37ec/g6sKIik6eZLzBqeegf0/wIcn8wmwd4q8FtG/Zp?=
+ =?us-ascii?Q?sv5d5eY0QFBv8/eVDLuKR4hDcHC172GICxz+y9m6ULcnY5MSZb4kjTl1rYMd?=
+ =?us-ascii?Q?8dPpKco93mQaBBLcutEAVxh+zVqRFsrCsMgsoC0/SByzEOje/2Nl2e6ZEGCM?=
+ =?us-ascii?Q?ImNpk89v4KwKmTsN3rJGaa79nhegmdPdQrxO+Ey+Posq0U1PAK8g+LpqwCMf?=
+ =?us-ascii?Q?W71vNwzW/BXzXc1/IcWvzsog/bjUQkeNPbGePtkwoQ+e4mlge66Ou/tbdxjq?=
+ =?us-ascii?Q?UMA0eT3Ih6oEPhtmeJFooOwQpGZ4sHTu1T9uisfr8RIhkvXgiztRZkOLp+Jk?=
+ =?us-ascii?Q?RExr9qwUDEYvq6jcPvCKyWeFbFbQ39gWpPM8UjvCusrL9/3/mtoS8pgvmpdh?=
+ =?us-ascii?Q?p+sxMaTnklwsfr8dGaZ/J++NJFaf3xIfMAoFI3n1F9mKKyWn6CnJ6ia71EPB?=
+ =?us-ascii?Q?4sKri8eAFAEpaScUptyoTb+fmYwmwGke1wSzvKCGapZ7ZD0ZI78pkN41bVUD?=
+ =?us-ascii?Q?YUD9ZJ/C4xTms3I0Lms9s1SB6ttQOJCK3XCgZ7dgb1etyYVALnhqglnshFn+?=
+ =?us-ascii?Q?dJAi69UBh7MEFlphJKq1pvv9J0vokLQCQRnxH7QwAEOBG4XsYRh5pI5cs+4m?=
+ =?us-ascii?Q?7La+Rf5h7clUQ0YmqqcSGnAh7iMDkuxsFBW5MCioXkXaWVc3FLLpnEMcUB+E?=
+ =?us-ascii?Q?2RpgX07GBq782lSiMN8SV2vWDsSAu+GWP4AWej6q7xnqDBEXDDy7xQy0TEuH?=
+ =?us-ascii?Q?HOOUoCnj6pDtnAV+LnxDcGuFvd0s5z3vmynJKKRq8lGpAnVPZuUXw4OTa6TB?=
+ =?us-ascii?Q?egX5+QR9uC9wHgHBBXC+A5lv3LUoJN5y9sUkNInL6hK8gNK+R7Hwf44XYCcx?=
+ =?us-ascii?Q?P5vIfsAXmTdAY6wGM07xE7c3YBZ0Tu5Ts8KjHbN/1fHEa+z/Vr2c4P4q/NNP?=
+ =?us-ascii?Q?vD0zgmYSuiPKa4aofGJn+OD7dPW+cw/15DVY9sq0/ZLERB+Jjza7QLeu+7ss?=
+ =?us-ascii?Q?FPyCGd3X1JB0VmR0Z7PKHm43unswrNMToQ=3D=3D?=
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?us-ascii?Q?MFm2fnpYv+YbSElqhHP7G7yII5hW41sxxZMPrZ4BZONQZz/xgwUHYuxk0s+5?=
- =?us-ascii?Q?ayKb9HNOoNGe/z0H7VSvdhOPpE+oiTC6I2ZGxvSTqZqBukrjmKLoPGp3t5wN?=
- =?us-ascii?Q?JqJRr791ylftKtAi/nlePVHC/njUyHizICjkGrrN+ojmg5LwLM6pD5A8a4XM?=
- =?us-ascii?Q?fmS+9pH9A01hr6sgIZ4G0i7w56Sfa6zNwL+N8eRQ9uk2rRN50lO+siX9chli?=
- =?us-ascii?Q?glKsKFP2o/rHuwYRoMd+R/k7O8AVlAcEOXlvizgbJD0IrgK1HKWRw4laZiPQ?=
- =?us-ascii?Q?fO9uxJRA/w6ofd3LbqydNpl7oHri8MG9X1GlFGtHXIFgIwttXx7pL8Abdr+t?=
- =?us-ascii?Q?NL9+QoOzg2CvJa+lX5x6J+SHOS+Bb3L//bVDHi9G0XJojqhXMN2QX4lLFRlj?=
- =?us-ascii?Q?QrURPQAu4P17R8rVdwrW+7K6T3xxxhPACR8d7lsr+hrQnJBSIK4A6x/ySz42?=
- =?us-ascii?Q?Qv3graqkcsgFswegQMAc+J80uiKLWl0tzKm6D5hK9uLcgFUVi1gUs7hqwsyV?=
- =?us-ascii?Q?2AOBw755sU+gEIjeTAQeTYg14r2S6fFFYNmN0fZyAX7dZTpzdrCBfuK+Lw5U?=
- =?us-ascii?Q?4vZ6a2ueU8J3EcB2Ketd933FztbLR3r5sN3GskOjELRy+LZf5hvkHcLElGAJ?=
- =?us-ascii?Q?sJTNfD8pdSLacvJ5ng9Pbbr0YjM1yp2m5Y8d46uUtUtXNuHh0DcfCQ5gC+81?=
- =?us-ascii?Q?raiZZ9QzTxqImoiykes3VXqc8UfEpkMsrt3cajus/Ec7HPrqWScfkEgqgzlM?=
- =?us-ascii?Q?0PxXhBPV+t9dWcktP4WZZFwr2+OmchNfI1o+bafpOKvzfXoACI89a5KRinWl?=
- =?us-ascii?Q?s7mYU0J54Qc7RyrsIJUQmL4ITParvZBQC90KIx0eciMzKTDRy0n+T8qVSxDB?=
- =?us-ascii?Q?UxgzLxlCJiUgzIw34dt+Iv6tNA/l1XNxJN66tXKkp+LGLZ4uu8FZ8KfnXJc8?=
- =?us-ascii?Q?F8qAylfq2Sd/PfS0kn2STIlsnrpaCV/z2o9RfGZWgjndd9efWAWozYGg3RIT?=
- =?us-ascii?Q?4yiGtfKfruNrWiyvRVwHmT4vIPsA30OZrnvjGZLAlcDIVlT7uiJI2vDJIwmw?=
- =?us-ascii?Q?RNsOyyg0DpVSwsaNvRf2kTqCtJ1VUnus82571Gz2GSB5Fn+l5SfMsivtumkd?=
- =?us-ascii?Q?eHCkR250o2po5ykHJ5LkKroRE+NXlRLzcnGNpjisdNjXL4o4qRXWJrVUNKP9?=
- =?us-ascii?Q?ptsCXjOVFNaPruULAFLBOzj9pnOX9mURYprEov3A6xORJqkDjd1CuvTW8Ks?=
+ =?us-ascii?Q?em5ySggkszJx6T4jxj8gNGQ/cfQY3i8vWIoc3CnxwU2CfxsEcIcOWoKTCsZt?=
+ =?us-ascii?Q?NPDiiv6RsPwcNFhz81aNuDEVZc2BRAJFqoDpjy2MmzjjSc1F7CYbVo3YIiJN?=
+ =?us-ascii?Q?J95mTkUe6HYBKQJGjHNNYP7g/HG9ggt/4ea8M5QhuD80xr/4RLq+rjrZyHIo?=
+ =?us-ascii?Q?A/kKz1aiDeu4eBK5pOFkX7dRULzozHtqUFsd4vgZD2PHYjvmhx+eAu8u+uO3?=
+ =?us-ascii?Q?ikf9SKBBi+c4grz/JQp/eZJbieVW2NqTpM0EX1z98kjmxSRCQdgi567Kd/Py?=
+ =?us-ascii?Q?bsUiTOZdcCcoMJPzaPKwKk7/cck0z4Kga3HCqxlgiB7REt1X6nSPYaBmVcho?=
+ =?us-ascii?Q?xxM006b5w3gc2P4ZD4H2lfuSG+Y5YMgEtlldUf17sD3Pay0DbUdMynd+GTgf?=
+ =?us-ascii?Q?QvZzuutJZGzz8PtBt43Q/MAYO9uVklgUkLUWGJrDJQYFoUYF6tXklIFfzEoc?=
+ =?us-ascii?Q?hiLFDYuKc3ANpwloy8C4fFAXQx+yFt5qToCSbFCifuLTp/dzeDf1JV85SHk9?=
+ =?us-ascii?Q?b5GjZljwWl19AZtGsj/PBNf6FZI7wDWPoUEqZM691O4kcIj4DHGoKNlyhMfS?=
+ =?us-ascii?Q?wNkumqhmCl8R2Z367s0jM//itboTSD+l7u/CX+HFuY1eTF/gfLRfVn+Dk8ad?=
+ =?us-ascii?Q?Z8U8BfjnU0ASKHj/OvVr3aBKwd+iWzcqbNv09sWMiF0osTor6gdhcncM271/?=
+ =?us-ascii?Q?qNCh50qveTORwOdLcxxLaJxrY7onJvBNjcPuMdLly9wS/JRvWS2RLu8Tb55g?=
+ =?us-ascii?Q?U1z+DgLM0cRKXllAD3iv4AsoFzhIGsaT6hK6/vRQtrxgzGqYsYQ/A1hRbvOh?=
+ =?us-ascii?Q?rUnKUfxWE8U7mdfnIFv2NE2S2LY8zzu6Imdd/jHkYDy9Pka5Ihxf4tSAYxZL?=
+ =?us-ascii?Q?pq3TkVpT38Il3cX7g1N4oPVXLdfNonlBKb/OHF1Gcwi1pRNGwyGr9H/9FEje?=
+ =?us-ascii?Q?06qfVzVed+KlwXBZAtXsJosTkBGtQ1FdlAMfoWZQzKvwdJZ66VVAdJ7jbOoL?=
+ =?us-ascii?Q?Hm2A9f+VHERt8RmqIUgklV8iF3bSS8YO0jyG3XppqKwyzJS7bHHpo+aG/LNM?=
+ =?us-ascii?Q?YAQT7SFbTAomfowihLZRPY97Pm14W6K0bpzdLMKkJd2EusSAjiywgEF4JB61?=
+ =?us-ascii?Q?ZzqjlMrZ/an1RXoNIVbQyZBlIRVAXqjzbYMj4ZChf9O3QUqxwVmxmv7EZYNB?=
+ =?us-ascii?Q?LHVvhEUriwX7J492bUeQYMzjXCdYK0s+aOvnEGtgGtvqatEgy0x9UVzINwY?=
  =?us-ascii?Q?=3D?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
@@ -152,8 +154,8 @@ X-OriginatorOrg: outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR02MB4157.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 256c2bec-8b45-41fe-fc3a-08dd5ad37673
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2025 04:17:22.8096
+X-MS-Exchange-CrossTenant-Network-Message-Id: e51e694c-fb3c-4bd2-7323-08dd5ad3830b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2025 04:17:43.9329
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
@@ -163,197 +165,112 @@ X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR02MB10184
 From: Sean Christopherson <seanjc@google.com> Sent: Wednesday, February 26,=
  2025 6:18 PM
 >=20
-> Add a helper to register non-native, i.e. PV and CoCo, CPU and TSC
-> frequency calibration routines.  This will allow consolidating handling
-> of common TSC properties that are forced by hypervisor (PV routines),
-> and will also allow adding sanity checks to guard against overriding a
-> TSC calibration routine with a routine that is less robust/trusted.
->=20
-> Make the CPU calibration routine optional, as Xen (very sanely) doesn't
-> assume the CPU runs as the same frequency as the TSC.
->=20
-> Wrap the helper in an #ifdef to document that the kernel overrides
-> the native routines when running as a VM, and to guard against unwanted
-> usage.  Add a TODO to call out that AMD_MEM_ENCRYPT is a mess and doesn't
-> depend on HYPERVISOR_GUEST because it gates both guest and host code.
+> Now that all of the Hyper-V timer sched_clock code is located in a single
+
+Again, "Hyper-V refcounter", not "Hyper-V timer".
+
+> file, drop the superfluous wrappers for the save/restore flows.
 >=20
 > No functional change intended.
 >=20
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
-> ---
->  arch/x86/coco/sev/core.c       |  4 ++--
->  arch/x86/include/asm/tsc.h     |  4 ++++
->  arch/x86/kernel/cpu/acrn.c     |  4 ++--
->  arch/x86/kernel/cpu/mshyperv.c |  3 +--
->  arch/x86/kernel/cpu/vmware.c   |  4 ++--
->  arch/x86/kernel/jailhouse.c    |  4 ++--
->  arch/x86/kernel/kvmclock.c     |  4 ++--
->  arch/x86/kernel/tsc.c          | 17 +++++++++++++++++
->  arch/x86/xen/time.c            |  2 +-
->  9 files changed, 33 insertions(+), 13 deletions(-)
->=20
-> diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
-> index 82492efc5d94..684cef70edc1 100644
-> --- a/arch/x86/coco/sev/core.c
-> +++ b/arch/x86/coco/sev/core.c
-> @@ -3291,6 +3291,6 @@ void __init snp_secure_tsc_init(void)
->  	rdmsrl(MSR_AMD64_GUEST_TSC_FREQ, tsc_freq_mhz);
->  	snp_tsc_freq_khz =3D (unsigned long)(tsc_freq_mhz * 1000);
->=20
-> -	x86_platform.calibrate_cpu =3D securetsc_get_tsc_khz;
-> -	x86_platform.calibrate_tsc =3D securetsc_get_tsc_khz;
-> +	tsc_register_calibration_routines(securetsc_get_tsc_khz,
-> +					  securetsc_get_tsc_khz);
->  }
-> diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
-> index c3a14df46327..9318c74e8d13 100644
-> --- a/arch/x86/include/asm/tsc.h
-> +++ b/arch/x86/include/asm/tsc.h
-> @@ -40,6 +40,10 @@ extern int cpuid_get_cpu_freq(unsigned int *cpu_khz);
->=20
->  extern void tsc_early_init(void);
->  extern void tsc_init(void);
-> +#if defined(CONFIG_HYPERVISOR_GUEST) || defined(CONFIG_AMD_MEM_ENCRYPT)
-> +extern void tsc_register_calibration_routines(unsigned long (*calibrate_=
-tsc)(void),
-> +					      unsigned long (*calibrate_cpu)(void));
-> +#endif
->  extern void mark_tsc_unstable(char *reason);
->  extern int unsynchronized_tsc(void);
->  extern int check_tsc_unstable(void);
-> diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-> index 2c5b51aad91a..c1506cb87d8c 100644
-> --- a/arch/x86/kernel/cpu/acrn.c
-> +++ b/arch/x86/kernel/cpu/acrn.c
-> @@ -29,8 +29,8 @@ static void __init acrn_init_platform(void)
->  	/* Install system interrupt handler for ACRN hypervisor callback */
->  	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
->=20
-> -	x86_platform.calibrate_tsc =3D acrn_get_tsc_khz;
-> -	x86_platform.calibrate_cpu =3D acrn_get_tsc_khz;
-> +	tsc_register_calibration_routines(acrn_get_tsc_khz,
-> +					  acrn_get_tsc_khz);
->  }
->=20
->  static bool acrn_x2apic_available(void)
-> diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyper=
-v.c
-> index f285757618fc..aa60491bf738 100644
-> --- a/arch/x86/kernel/cpu/mshyperv.c
-> +++ b/arch/x86/kernel/cpu/mshyperv.c
-> @@ -478,8 +478,7 @@ static void __init ms_hyperv_init_platform(void)
->=20
->  	if (ms_hyperv.features & HV_ACCESS_FREQUENCY_MSRS &&
->  	    ms_hyperv.misc_features & HV_FEATURE_FREQUENCY_MSRS_AVAILABLE) {
-> -		x86_platform.calibrate_tsc =3D hv_get_tsc_khz;
-> -		x86_platform.calibrate_cpu =3D hv_get_tsc_khz;
-> +		tsc_register_calibration_routines(hv_get_tsc_khz, hv_get_tsc_khz);
->  		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
->  	}
->=20
 
-For the Hyper-V guest code,
+Modulo the terminology in the commit message,
 
 Reviewed-by: Michael Kelley <mhklinux@outlook.com>
 Tested-by: Michael Kelley <mhklinux@outlook.com>
 
-
-> diff --git a/arch/x86/kernel/cpu/vmware.c b/arch/x86/kernel/cpu/vmware.c
-> index 00189cdeb775..d6f079a75f05 100644
-> --- a/arch/x86/kernel/cpu/vmware.c
-> +++ b/arch/x86/kernel/cpu/vmware.c
-> @@ -416,8 +416,8 @@ static void __init vmware_platform_setup(void)
->  		}
+> ---
+>  drivers/clocksource/hyperv_timer.c | 34 +++++-------------------------
+>  include/clocksource/hyperv_timer.h |  2 --
+>  2 files changed, 5 insertions(+), 31 deletions(-)
 >=20
->  		vmware_tsc_khz =3D tsc_khz;
-> -		x86_platform.calibrate_tsc =3D vmware_get_tsc_khz;
-> -		x86_platform.calibrate_cpu =3D vmware_get_tsc_khz;
-> +		tsc_register_calibration_routines(vmware_get_tsc_khz,
-> +						  vmware_get_tsc_khz);
->=20
->  #ifdef CONFIG_X86_LOCAL_APIC
->  		/* Skip lapic calibration since we know the bus frequency. */
-> diff --git a/arch/x86/kernel/jailhouse.c b/arch/x86/kernel/jailhouse.c
-> index cd8ed1edbf9e..b0a053692161 100644
-> --- a/arch/x86/kernel/jailhouse.c
-> +++ b/arch/x86/kernel/jailhouse.c
-> @@ -209,8 +209,6 @@ static void __init jailhouse_init_platform(void)
->  	x86_init.mpparse.parse_smp_cfg		=3D jailhouse_parse_smp_config;
->  	x86_init.pci.arch_init			=3D jailhouse_pci_arch_init;
->=20
-> -	x86_platform.calibrate_cpu		=3D jailhouse_get_tsc;
-> -	x86_platform.calibrate_tsc		=3D jailhouse_get_tsc;
->  	x86_platform.get_wallclock		=3D jailhouse_get_wallclock;
->  	x86_platform.legacy.rtc			=3D 0;
->  	x86_platform.legacy.warm_reset		=3D 0;
-> @@ -220,6 +218,8 @@ static void __init jailhouse_init_platform(void)
->=20
->  	machine_ops.emergency_restart		=3D jailhouse_no_restart;
->=20
-> +	tsc_register_calibration_routines(jailhouse_get_tsc, jailhouse_get_tsc)=
-;
-> +
->  	while (pa_data) {
->  		mapping =3D early_memremap(pa_data, sizeof(header));
->  		memcpy(&header, mapping, sizeof(header));
-> diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-> index 5b2c15214a6b..b898b95a7d50 100644
-> --- a/arch/x86/kernel/kvmclock.c
-> +++ b/arch/x86/kernel/kvmclock.c
-> @@ -320,8 +320,8 @@ void __init kvmclock_init(void)
->  	flags =3D pvclock_read_flags(&hv_clock_boot[0].pvti);
->  	kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
->=20
-> -	x86_platform.calibrate_tsc =3D kvm_get_tsc_khz;
-> -	x86_platform.calibrate_cpu =3D kvm_get_tsc_khz;
-> +	tsc_register_calibration_routines(kvm_get_tsc_khz, kvm_get_tsc_khz);
-> +
->  	x86_platform.get_wallclock =3D kvm_get_wallclock;
->  	x86_platform.set_wallclock =3D kvm_set_wallclock;
->  #ifdef CONFIG_X86_LOCAL_APIC
-> diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-> index bb4619148161..d65e85929d3e 100644
-> --- a/arch/x86/kernel/tsc.c
-> +++ b/arch/x86/kernel/tsc.c
-> @@ -1294,6 +1294,23 @@ static void __init check_system_tsc_reliable(void)
->  		tsc_disable_clocksource_watchdog();
+> diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyp=
+erv_timer.c
+> index 86a55167bf5d..5a52d0acf31f 100644
+> --- a/drivers/clocksource/hyperv_timer.c
+> +++ b/drivers/clocksource/hyperv_timer.c
+> @@ -471,17 +471,6 @@ static void resume_hv_clock_tsc(struct clocksource *=
+arg)
+>  	hv_set_msr(HV_MSR_REFERENCE_TSC, tsc_msr.as_uint64);
 >  }
 >=20
-> +/*
-> + * TODO: Disentangle AMD_MEM_ENCRYPT and make SEV guest support depend o=
-n
-> + *	 HYPERVISOR_GUEST.
-> + */
-> +#if defined(CONFIG_HYPERVISOR_GUEST) || defined(CONFIG_AMD_MEM_ENCRYPT)
-> +void tsc_register_calibration_routines(unsigned long (*calibrate_tsc)(vo=
-id),
-> +				       unsigned long (*calibrate_cpu)(void))
-> +{
-> +	if (WARN_ON_ONCE(!calibrate_tsc))
-> +		return;
+> -/*
+> - * Called during resume from hibernation, from overridden
+> - * x86_platform.restore_sched_clock_state routine. This is to adjust off=
+sets
+> - * used to calculate time for hv tsc page based sched_clock, to account =
+for
+> - * time spent before hibernation.
+> - */
+> -void hv_adj_sched_clock_offset(u64 offset)
+> -{
+> -	hv_sched_clock_offset -=3D offset;
+> -}
+> -
+>  #ifdef HAVE_VDSO_CLOCKMODE_HVCLOCK
+>  static int hv_cs_enable(struct clocksource *cs)
+>  {
+> @@ -545,12 +534,14 @@ static void (*old_restore_sched_clock_state)(void);
+>   * based clocksource, proceeds from where it left off during suspend and
+>   * it shows correct time for the timestamps of kernel messages after res=
+ume.
+>   */
+> -static void save_hv_clock_tsc_state(void)
+> +static void hv_save_sched_clock_state(void)
+>  {
+> +	old_save_sched_clock_state();
 > +
-> +	x86_platform.calibrate_tsc =3D calibrate_tsc;
-> +	if (calibrate_cpu)
-> +		x86_platform.calibrate_cpu =3D calibrate_cpu;
-> +}
-> +#endif
-> +
->  /*
->   * Make an educated guess if the TSC is trustworthy and synchronized
->   * over all CPUs.
-> diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
-> index 96521b1874ac..9e2e900dc0c7 100644
-> --- a/arch/x86/xen/time.c
-> +++ b/arch/x86/xen/time.c
-> @@ -566,7 +566,7 @@ static void __init xen_init_time_common(void)
->  	static_call_update(pv_steal_clock, xen_steal_clock);
->  	paravirt_set_sched_clock(xen_sched_clock);
->=20
-> -	x86_platform.calibrate_tsc =3D xen_tsc_khz;
-> +	tsc_register_calibration_routines(xen_tsc_khz, NULL);
->  	x86_platform.get_wallclock =3D xen_get_wallclock;
+>  	hv_ref_counter_at_suspend =3D hv_read_reference_counter();
 >  }
 >=20
+> -static void restore_hv_clock_tsc_state(void)
+> +static void hv_restore_sched_clock_state(void)
+>  {
+>  	/*
+>  	 * Adjust the offsets used by hv tsc clocksource to
+> @@ -558,23 +549,8 @@ static void restore_hv_clock_tsc_state(void)
+>  	 * adjusted value =3D reference counter (time) at suspend
+>  	 *                - reference counter (time) now.
+>  	 */
+> -	hv_adj_sched_clock_offset(hv_ref_counter_at_suspend -
+> hv_read_reference_counter());
+> -}
+> -/*
+> - * Functions to override save_sched_clock_state and restore_sched_clock_=
+state
+> - * functions of x86_platform. The Hyper-V clock counter is reset during
+> - * suspend-resume and the offset used to measure time needs to be
+> - * corrected, post resume.
+> - */
+> -static void hv_save_sched_clock_state(void)
+> -{
+> -	old_save_sched_clock_state();
+> -	save_hv_clock_tsc_state();
+> -}
+> +	hv_sched_clock_offset -=3D (hv_ref_counter_at_suspend -
+> hv_read_reference_counter());
+>=20
+> -static void hv_restore_sched_clock_state(void)
+> -{
+> -	restore_hv_clock_tsc_state();
+>  	old_restore_sched_clock_state();
+>  }
+>=20
+> diff --git a/include/clocksource/hyperv_timer.h b/include/clocksource/hyp=
+erv_timer.h
+> index d48dd4176fd3..a4c81a60f53d 100644
+> --- a/include/clocksource/hyperv_timer.h
+> +++ b/include/clocksource/hyperv_timer.h
+> @@ -38,8 +38,6 @@ extern void hv_remap_tsc_clocksource(void);
+>  extern unsigned long hv_get_tsc_pfn(void);
+>  extern struct ms_hyperv_tsc_page *hv_get_tsc_page(void);
+>=20
+> -extern void hv_adj_sched_clock_offset(u64 offset);
+> -
+>  static __always_inline bool
+>  hv_read_tsc_page_tsc(const struct ms_hyperv_tsc_page *tsc_pg,
+>  		     u64 *cur_tsc, u64 *time)
 > --
 > 2.48.1.711.g2feabab25a-goog
 >=20
