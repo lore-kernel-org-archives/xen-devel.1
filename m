@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 446C3C19F32
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:34:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.902050.1310007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DDAC282D3
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:34:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.902065.1310018 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpl8p-0005E7-O0; Wed, 05 Mar 2025 09:34:15 +0000
+	id 1tpl9A-0005rR-1R; Wed, 05 Mar 2025 09:34:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 902050.1310007; Wed, 05 Mar 2025 09:34:15 +0000
+Received: by outflank-mailman (output) from mailman id 902065.1310018; Wed, 05 Mar 2025 09:34:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpl8p-0005E0-Kv; Wed, 05 Mar 2025 09:34:15 +0000
-Received: by outflank-mailman (input) for mailman id 902050;
- Wed, 05 Mar 2025 09:34:14 +0000
+	id 1tpl99-0005rE-Sp; Wed, 05 Mar 2025 09:34:35 +0000
+Received: by outflank-mailman (input) for mailman id 902065;
+ Wed, 05 Mar 2025 09:34:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0bc7=VY=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1tpknV-0006ew-9e
- for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:13 +0000
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [2a00:1450:4864:20::232])
+ id 1tpknY-0006ew-AT
+ for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:16 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eae9feb7-f9a1-11ef-9898-31a8f345e629;
- Wed, 05 Mar 2025 10:12:09 +0100 (CET)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-30795988ebeso70455221fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:09 -0800 (PST)
+ id ed12a1a3-f9a1-11ef-9898-31a8f345e629;
+ Wed, 05 Mar 2025 10:12:13 +0100 (CET)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5495078cd59so5447662e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:13 -0800 (PST)
 Received: from EPUAKYIW02F7.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.07
+ 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 01:12:08 -0800 (PST)
+ Wed, 05 Mar 2025 01:12:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eae9feb7-f9a1-11ef-9898-31a8f345e629
+X-Inumbo-ID: ed12a1a3-f9a1-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741165929; x=1741770729; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1741165933; x=1741770733; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3W14MD7/86/g9aWL0OyKxo1c/Lcp0Ms013eqB7XEj1s=;
-        b=Z3yWu9J4a+us/cE2M+nyFs/v8dcHXtvQP4niHtf1nC4Q85MHU+tSU3U7Zqb8j3f3WT
-         U7ZNlYxs6G+S6yzjq33Y7/OJaXU6jKUWtDb+w+cZg+ux2P6bv1dkTDkFgAm+mViwQo/m
-         TO1gNgOV+A6wdDMZrJt4tOyWtStsXy0j9YqPd46Rg41rzZ++EUgkBCVYA5ck54pOCB4L
-         hbU1pGRilNR7o6f09B/G3MzMk34F1sXnO+fTkA7AIPJeeuImhMNL5HAi519hVeP0md92
-         slUxW7Ksc9NonMSrI7hxIfFlbmK/dMXYJApYNNQO71qu5jraC+rn7cKvOswqijKdkscZ
-         jtww==
+        bh=l2TmN1BzAMOulOXirn8ZPb+RBDTzjlvF9BdHXNBPEhs=;
+        b=Bw0Bbwab6Nn7l8N5/AbxGThhI/5BSttUFcUvamw6o4PnBw372zJl5q/Ftm8hJn+YkI
+         qlNATeOw1iPmJUr0WSW6pf/7qmErGR6biBe/Hfi4pEdpPYiEf5CnANzqnplqlreu0J0x
+         i+TnqxPIBM1q0wjSz4jVJ7tr8u5YmNeAXyqhlmkmkLArI2P5Oy0hPlhvNx5pw0bQIxtd
+         jqNUSSsCTNzNSuaigon3wasGvoxnFaZISzvu+Z9sxD5e2G45JdYKhVzI4iXkMR413VLC
+         sP7gBkAm0sDgE6JJgPALS/V41yzs8wSIcKC5pAJX+FpubSi8wtnLOBk6frgF/GJyrqYZ
+         NIew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741165929; x=1741770729;
+        d=1e100.net; s=20230601; t=1741165933; x=1741770733;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3W14MD7/86/g9aWL0OyKxo1c/Lcp0Ms013eqB7XEj1s=;
-        b=gtvWRKrMX5aOnDpsNmwFhQsJopf5/flmH2rCmRm5noxSYQURXujxe4M+exXARZ+pOU
-         phxXvwVQLqHoJ3k7hl4dDbI0gR4zH9qESov/cauDabYwEVni+/N/iuMvd90kvCuQicDB
-         2dyL1aH5lKtnvFgKkPj5SAjeUO5eKmOtRmgCGfs7//nZTm5aIXBliHWUuf/vd+5yadpp
-         C4tk3JnOvTCcGPoxQxhumT/5h2JJF7w3UgiiAp5I5KHqW6+m2S9qnmjoYJd7ZOfAPQ1u
-         hGnlQQPt6C4tJX9Izw6I31PC0O1SSesvYOEvyy2Ff0K0ozuqTO6nYuGtHs2k9SOQ7lBj
-         mMdA==
-X-Gm-Message-State: AOJu0Yx6qAQa+vG5jyFNsHMjk3UKfheUp81Y4Y22gbutwg5ddHGmhh0V
-	qkQJufnHcn05eB1Lrwnkln8FFEUPdWnysuyZTu0gVy/0ljRa40bx4shuRMfi
-X-Gm-Gg: ASbGncsLG8AEuedvg+P8CbkqW7tG9nyvDocwkCJSyVmEXWO70AwQOz9QmTBeazF7AYI
-	UwA3dMmfduvejOuaPp8AoT7HnhFojyBbl8ue8gZJ+O69071LRehU2QyHXJeyrsxI54yzxXsTdfF
-	mN4gg/OU3X8EI8FECACLA5UhttO5Aq+d8pcUGzWOMw7BzzpoaONL0yP7+Plo5gV1sd6bK64Kfp7
-	2Ud+2VBkU5O4+MKp6raL/haLI20lDaj5ENQJsSrnciatozyGB+6XWhc06vTEd08lxpftOnL3W2Q
-	ndp80wlzjndbJu9AUKZZAidDzbBnr/VdBVKjwDPFZxqqCt1QGg==
-X-Google-Smtp-Source: AGHT+IHQsJOO4SuJsHrELM1lWwUKSgDLp7NtfJ0oyLHVNFhvpstCp9DJaI/6CvympNyJ+jpwD5UDHQ==
-X-Received: by 2002:a05:6512:3e06:b0:546:2f7a:38c4 with SMTP id 2adb3069b0e04-5497d335a4bmr910471e87.13.1741165928655;
-        Wed, 05 Mar 2025 01:12:08 -0800 (PST)
+        bh=l2TmN1BzAMOulOXirn8ZPb+RBDTzjlvF9BdHXNBPEhs=;
+        b=pM9lRNWYwiTjUEvQRMwcNeH+4KEsAFLLn8LfXp/rfPBRHZF+LYxaPwFGhooEbTWrnX
+         tZf491sDelIDyVmyTZdeak5s+yihECIp1Ev1kb836Y5vMuIcUEsYBW82aLWgwil0kjFN
+         Os41wtvafxQLKne9G43w5wO2NVSzmgPDvRNnDKawDkerbr9pykmOEKx1DC3gbpDzYE8Z
+         rajgXddkER8N5pFz3hWaEyB2mF+f69VDcghf4ry8mKHc/okWOJuYfdat/Hm+b9fTXMiY
+         WQiAsXRwO2FINIQjYglX+k8gQ4iQDsyD9Zo9xNVnneBRo2cySz9BWSukiBfAI0NTl2CA
+         2f8w==
+X-Gm-Message-State: AOJu0Yz33CXb2SDeUbcgN6Zw5n8zI0qlNyLyhog9ihw1SNsoc3ZjDN6l
+	Ht1MBj8ODoBkaB7sXk8SA+0A60TOOFemussuOXLgUWGG6PQm+V/6E7BAJTFR
+X-Gm-Gg: ASbGncseUd71bNplJrfQnHYaVvrVh9PXYZyCeDDn5sZGIV5lvU3ltsa+chaW+cWSuJy
+	cElU55U11K2/EWAVFbLtY641IM+WM7Jz/DVGU5R8r25/10ziocS3doffNC1zPazyX8ngspI3JQ0
+	hBH76d88mH4sPgtAOjBu+qlmNvSmmCKSzUpmmL95t0kxMqRQ1c89INOXd3/bjED5N9cnxGLSs+i
+	+r3usU1YF/bSpWBIb+xNtmQ6S6V76/fmbJ6FSIO22FxwkRnHW3fZbFL402voW+TLzRnO+dwfTCu
+	H3SoJbTA6VVpA9Qg1TkpiLqeICTr0mH/NREJXRBQ9TgrIlGAMQ==
+X-Google-Smtp-Source: AGHT+IEawaJ5thoARcmiuSdGY6fIkdNnAu5jE7n/R2L8GjsZ4boHnU4722Pq87bdX6owRtzPi9cjgA==
+X-Received: by 2002:a05:6512:3d90:b0:545:576:cbca with SMTP id 2adb3069b0e04-5497d3305b7mr807982e87.8.1741165932532;
+        Wed, 05 Mar 2025 01:12:12 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
@@ -93,9 +93,9 @@ Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
 	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
 	Mykyta Poturai <mykyta_poturai@epam.com>,
 	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH 11/16] xen/arm: Implement PSCI system suspend
-Date: Wed,  5 Mar 2025 11:11:19 +0200
-Message-ID: <b80f0559048638bfe1a934f2d256331db733ed3e.1741164138.git.xakep.amatop@gmail.com>
+Subject: [PATCH 14/16] xen/arm: Resume memory management on Xen resume
+Date: Wed,  5 Mar 2025 11:11:22 +0200
+Message-ID: <2ef15cb605f987eb087c5496d123c47c01cc0ae7.1741164138.git.xakep.amatop@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1741164138.git.xakep.amatop@gmail.com>
 References: <cover.1741164138.git.xakep.amatop@gmail.com>
@@ -104,41 +104,20 @@ Content-Transfer-Encoding: 8bit
 
 From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-The implementation consists of:
--Adding PSCI system suspend call as new PSCI function
--Trapping PSCI system_suspend HVC
--Implementing PSCI system suspend call (virtual interface that allows
- guests to suspend themselves), but currently it is only partially
- implemented, so suspend/resume will correctly work only for dom0
+The MMU needs to be enabled in the resume flow before the context
+can be restored (we need to be able to access the context data by
+virtual address in order to restore it). The configuration of system
+registers prior to branching to the routine that sets up the page
+tables is copied from xen/arch/arm/arm64/head.S.
+After the MMU is enabled, the content of TTBR0_EL2 is changed to
+point to init_ttbr (page tables used at runtime).
 
-The PSCI system suspend should be called by a guest from its boot
-VCPU. Non-boot VCPUs of the guest should be hot-unplugged using PSCI
-CPU_OFF call prior to issuing PSCI system suspend. Interrupts that
-are left enabled by the guest are assumed to be its wake-up interrupts.
-Therefore, a wake-up interrupt triggers the resume of the guest. Guest
-should resume regardless of the state of Xen (suspended or not).
-
-When a guest calls PSCI system suspend the respective domain will be
-suspended if the following conditions are met:
-1) Given resume entry point is not invalid
-2) Other (if any) VCPUs of the calling guest are hot-unplugged
-
-If the conditions above are met the calling domain is labeled as
-suspended and the calling VCPU is blocked. If nothing else wouldn't
-be done the suspended domain would resume from the place where it
-called PSCI system suspend. This is expected if processing of the PSCI
-system suspend call fails. However, in the case of success the calling
-guest should resume (continue execution after the wake-up) from the entry
-point which is given as the first argument of the PSCI system suspend
-call. In addition to the entry point, the guest expects to start within
-the environment whose state matches the state after reset. This means
-that the guest should find reset register values, MMU disabled, etc.
-Thereby, the context of VCPU should be 'reset' (as if the system is
-comming out of reset), the program counter should contain entry point,
-which is 1st argument, and r0/x0 should contain context ID which is 2nd
-argument of PSCI system suspend call. The context of VCPU is set
-accordingly when the PSCI system suspend is processed, so that nothing
-needs to be done on resume/wake-up path.
+At boot the init_ttbr variable is updated when a secondary CPU is
+hotplugged. In the scenario where there is only one physical CPU in
+the system, the init_ttbr would not be initialized for the use in
+resume flow. To get the variable initialized in all scenarios in this
+patch we add that the boot CPU updates init_ttbr after it sets the
+page tables for runtime.
 
 Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
 Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
@@ -146,240 +125,76 @@ Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
 Changes in V3:
-Dropped all domain flags and related code (which touched common functions like
-vcpu_unblock), keeping only the necessary changes for Xen suspend/resume, i.e.
-suspend/resume is now fully supported only for the hardware domain.
-Proper support for domU suspend/resume will be added in a future patch.
-This patch does not yet include VCPU context reset or domain context
-restoration in VCPU.
----
- xen/arch/arm/Makefile                 |  1 +
- xen/arch/arm/include/asm/domain.h     |  3 ++
- xen/arch/arm/include/asm/perfc_defn.h |  1 +
- xen/arch/arm/include/asm/psci.h       |  2 +
- xen/arch/arm/include/asm/suspend.h    | 18 +++++++
- xen/arch/arm/suspend.c                | 67 +++++++++++++++++++++++++++
- xen/arch/arm/vpsci.c                  | 32 +++++++++++++
- 7 files changed, 124 insertions(+)
- create mode 100644 xen/arch/arm/include/asm/suspend.h
- create mode 100644 xen/arch/arm/suspend.c
+- updated commit message
+- instead of using create_page_tables, enable_mmu, and mmu_init_secondary_cpu,
+  the existing function enable_secondary_cpu_mm is now used
+- prepare_secondary_mm (previously init_secondary_pagetables in the previous
+  patch series) is now called at the end of start_xen instead of
+  setup_pagetables. Calling it in the previous location caused a crash
+- add early printk init during resume
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 43ab5e8f25..70d4b5daf8 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -53,6 +53,7 @@ obj-y += smpboot.o
- obj-$(CONFIG_STATIC_EVTCHN) += static-evtchn.init.o
- obj-$(CONFIG_STATIC_MEMORY) += static-memory.init.o
- obj-$(CONFIG_STATIC_SHM) += static-shmem.init.o
-+obj-$(CONFIG_SYSTEM_SUSPEND) += suspend.o
- obj-y += sysctl.o
- obj-y += time.o
- obj-y += traps.o
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-index 50b6a4b009..8b1bdf3d74 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -233,6 +233,9 @@ struct arch_vcpu
-     struct vtimer virt_timer;
-     bool   vtimer_initialized;
+Changes in V2:
+- moved hyp_resume to head.S to place it near the rest of the start code
+- simplified the code in hyp_resume by using existing functions such as
+  check_cpu_mode, cpu_init, create_page_tables, and enable_mmu
+---
+ xen/arch/arm/arm64/head.S | 23 +++++++++++++++++++++++
+ xen/arch/arm/setup.c      |  8 ++++++++
+ 2 files changed, 31 insertions(+)
+
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 3522c497c5..fab2812e54 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -564,6 +564,29 @@ END(efi_xen_start)
+ #ifdef CONFIG_SYSTEM_SUSPEND
  
-+    register_t suspend_ep;
-+    register_t suspend_cid;
+ FUNC(hyp_resume)
++        msr   DAIFSet, 0xf           /* Disable all interrupts */
 +
-     /*
-      * The full P2M may require some cleaning (e.g when emulation
-      * set/way). As the action can take a long time, it requires
-diff --git a/xen/arch/arm/include/asm/perfc_defn.h b/xen/arch/arm/include/asm/perfc_defn.h
-index 3ab0391175..5049563718 100644
---- a/xen/arch/arm/include/asm/perfc_defn.h
-+++ b/xen/arch/arm/include/asm/perfc_defn.h
-@@ -33,6 +33,7 @@ PERFCOUNTER(vpsci_system_reset,        "vpsci: system_reset")
- PERFCOUNTER(vpsci_cpu_suspend,         "vpsci: cpu_suspend")
- PERFCOUNTER(vpsci_cpu_affinity_info,   "vpsci: cpu_affinity_info")
- PERFCOUNTER(vpsci_features,            "vpsci: features")
-+PERFCOUNTER(vpsci_system_suspend,      "vpsci: system_suspend")
- 
- PERFCOUNTER(vcpu_kick,                 "vcpu: notify other vcpu")
- 
-diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
-index 4780972621..48a93e6b79 100644
---- a/xen/arch/arm/include/asm/psci.h
-+++ b/xen/arch/arm/include/asm/psci.h
-@@ -47,10 +47,12 @@ void call_psci_system_reset(void);
- #define PSCI_0_2_FN32_SYSTEM_OFF          PSCI_0_2_FN32(8)
- #define PSCI_0_2_FN32_SYSTEM_RESET        PSCI_0_2_FN32(9)
- #define PSCI_1_0_FN32_PSCI_FEATURES       PSCI_0_2_FN32(10)
-+#define PSCI_1_0_FN32_SYSTEM_SUSPEND      PSCI_0_2_FN32(14)
- 
- #define PSCI_0_2_FN64_CPU_SUSPEND         PSCI_0_2_FN64(1)
- #define PSCI_0_2_FN64_CPU_ON              PSCI_0_2_FN64(3)
- #define PSCI_0_2_FN64_AFFINITY_INFO       PSCI_0_2_FN64(4)
-+#define PSCI_1_0_FN64_SYSTEM_SUSPEND      PSCI_0_2_FN64(14)
- 
- /* PSCI v0.2 affinity level state returned by AFFINITY_INFO */
- #define PSCI_0_2_AFFINITY_LEVEL_ON      0
-diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-new file mode 100644
-index 0000000000..745377dbcf
---- /dev/null
-+++ b/xen/arch/arm/include/asm/suspend.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++        tlbi  alle2
++        dsb   sy                     /* Ensure completion of TLB flush */
++        isb
 +
-+#ifndef __ASM_ARM_SUSPEND_H__
-+#define __ASM_ARM_SUSPEND_H__
++        ldr   x0, =start
++        adr   x19, start             /* x19 := paddr (start) */
++        sub   x20, x19, x0           /* x20 := phys-offset */
 +
-+int32_t domain_suspend(register_t epoint, register_t cid);
-+
++        /* Initialize the UART if earlyprintk has been enabled. */
++#ifdef CONFIG_EARLY_PRINTK
++        bl    init_uart
 +#endif
++        PRINT_ID("- Xen resuming -\r\n")
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-new file mode 100644
-index 0000000000..27fab8c999
---- /dev/null
-+++ b/xen/arch/arm/suspend.c
-@@ -0,0 +1,67 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++        bl    check_cpu_mode
++        bl    cpu_init
 +
-+#include <xen/sched.h>
-+#include <asm/cpufeature.h>
-+#include <asm/event.h>
-+#include <asm/psci.h>
-+#include <asm/suspend.h>
-+#include <asm/platform.h>
-+#include <public/sched.h>
++        ldr   lr, =mmu_resumed
++        b     enable_secondary_cpu_mm
 +
-+static void vcpu_suspend_prepare(register_t epoint, register_t cid)
-+{
-+    struct vcpu *v = current;
-+
-+    v->arch.suspend_ep = epoint;
-+    v->arch.suspend_cid = cid;
-+}
-+
-+int32_t domain_suspend(register_t epoint, register_t cid)
-+{
-+    struct vcpu *v;
-+    struct domain *d = current->domain;
-+    bool is_thumb = epoint & 1;
-+
-+    dprintk(XENLOG_DEBUG,
-+            "Dom%d suspend: epoint=0x%"PRIregister", cid=0x%"PRIregister"\n",
-+            d->domain_id, epoint, cid);
-+
-+    /* THUMB set is not allowed with 64-bit domain */
-+    if ( is_64bit_domain(d) && is_thumb )
-+        return PSCI_INVALID_ADDRESS;
-+
-+    /* TODO: care about locking here */
-+    /* Ensure that all CPUs other than the calling one are offline */
-+    for_each_vcpu ( d, v )
-+    {
-+        if ( v != current && is_vcpu_online(v) )
-+            return PSCI_DENIED;
-+    }
-+
-+    /*
-+     * Prepare the calling VCPU for suspend (save entry point into pc and
-+     * context ID into r0/x0 as specified by PSCI SYSTEM_SUSPEND)
-+     */
-+    vcpu_suspend_prepare(epoint, cid);
-+
-+    /* Disable watchdogs of this domain */
-+    watchdog_domain_suspend(d);
-+
-+    /*
-+     * The calling domain is suspended by blocking its last running VCPU. If an
-+     * event is pending the domain will resume right away (VCPU will not block,
-+     * but when scheduled in it will resume from the given entry point).
-+     */
-+    vcpu_block_unless_event_pending(current);
-+
-+    return PSCI_SUCCESS;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
-index d1615be8a6..96eef06c18 100644
---- a/xen/arch/arm/vpsci.c
-+++ b/xen/arch/arm/vpsci.c
-@@ -7,6 +7,7 @@
- #include <asm/vgic.h>
- #include <asm/vpsci.h>
- #include <asm/event.h>
-+#include <asm/suspend.h>
++mmu_resumed:
+         b .
+ END(hyp_resume)
  
- #include <public/sched.h>
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index ffcae900d7..3a89ac436b 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -508,6 +508,14 @@ void asmlinkage __init start_xen(unsigned long fdt_paddr)
+     for_each_domain( d )
+         domain_unpause_by_systemcontroller(d);
  
-@@ -197,6 +198,15 @@ static void do_psci_0_2_system_reset(void)
-     domain_shutdown(d,SHUTDOWN_reboot);
- }
- 
-+static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
-+{
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+    return domain_suspend(epoint, cid);
-+#else
-+    return PSCI_NOT_SUPPORTED;
++    /*
++     * It is called to initialize init_ttbr.
++     * Without this call, Xen gets stuck after resuming.
++     */
++    prepare_secondary_mm(0);
 +#endif
-+}
 +
- static int32_t do_psci_1_0_features(uint32_t psci_func_id)
- {
-     /* /!\ Ordered by function ID and not name */
-@@ -214,6 +224,8 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
-     case PSCI_0_2_FN32_SYSTEM_OFF:
-     case PSCI_0_2_FN32_SYSTEM_RESET:
-     case PSCI_1_0_FN32_PSCI_FEATURES:
-+    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
-+    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
-     case ARM_SMCCC_VERSION_FID:
-         return 0;
-     default:
-@@ -344,6 +356,26 @@ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid)
-         return true;
-     }
- 
-+    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
-+    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
-+    {
-+        register_t epoint = PSCI_ARG(regs,1);
-+        register_t cid = PSCI_ARG(regs,2);
-+        register_t ret;
-+
-+        perfc_incr(vpsci_system_suspend);
-+        /* Set the result to PSCI_SUCCESS if the call fails.
-+         * Otherwise preserve the context_id in x0. For now
-+         * we don't support the case where the system is suspended
-+         * to a shallower level and PSCI_SUCCESS is returned to the
-+         * caller.
-+         */
-+        ret = do_psci_1_0_system_suspend(epoint, cid);
-+        if ( ret != PSCI_SUCCESS )
-+            PSCI_SET_RESULT(regs, ret);
-+        return true;
-+    }
-+
-     default:
-         return false;
-     }
+     /* Switch on to the dynamically allocated stack for the idle vcpu
+      * since the static one we're running on is about to be freed. */
+     memcpy(idle_vcpu[0]->arch.cpu_info, get_cpu_info(),
 -- 
 2.43.0
 
