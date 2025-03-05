@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B725C19F32
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:13:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901883.1309897 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E069C19F32
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:14:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901920.1309906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknW-0001Hu-4j; Wed, 05 Mar 2025 09:12:14 +0000
+	id 1tpkpn-0004Xe-0U; Wed, 05 Mar 2025 09:14:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901883.1309897; Wed, 05 Mar 2025 09:12:14 +0000
+Received: by outflank-mailman (output) from mailman id 901920.1309906; Wed, 05 Mar 2025 09:14:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknV-0001Gw-S2; Wed, 05 Mar 2025 09:12:13 +0000
-Received: by outflank-mailman (input) for mailman id 901883;
- Wed, 05 Mar 2025 09:12:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0bc7=VY=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1tpknT-0006ev-Sd
- for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:11 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ebabc915-f9a1-11ef-9ab4-95dc52dad729;
- Wed, 05 Mar 2025 10:12:11 +0100 (CET)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-549490e290dso5158117e87.2
- for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:11 -0800 (PST)
-Received: from EPUAKYIW02F7.. ([95.67.15.120])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 01:12:09 -0800 (PST)
+	id 1tpkpm-0004XX-Ts; Wed, 05 Mar 2025 09:14:34 +0000
+Received: by outflank-mailman (input) for mailman id 901920;
+ Wed, 05 Mar 2025 09:14:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2gZc=VY=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tpkpl-0004XL-U5
+ for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:14:33 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3f6101a9-f9a2-11ef-9898-31a8f345e629;
+ Wed, 05 Mar 2025 10:14:32 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43bd5644de8so2504335e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:14:32 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e4796517sm20107667f8f.5.2025.03.05.01.14.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Mar 2025 01:14:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,363 +47,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebabc915-f9a1-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: 3f6101a9-f9a2-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741165930; x=1741770730; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7vRDesRQb/Nxhcf66JbLCYMstts9xs0Oaigt+qqhPzM=;
-        b=ESjib+ijtuRtIkop52jBXTWP/vZdjuq1LbSSb1bzrDHb3gXFQvmlqL9guzkqGVBYzY
-         kXmsuGEREScjkGdZzXQtstSaLfSTpsPPIOsaShYoB5cDsIJIejMfwPrSgTvjjenMQgxn
-         okmqnTMvIJiDB30DhXA2ScJ1PFz/hWHT/NM8hsEvVIOnmL9yqzkfaiCv27IADyWiAxGX
-         +4KVOspvBB5lgawJUJ86izoHwHQ9v6Rj2tOwI77qYT5H4sXwFUOXxfPRWRonq9ABPg38
-         pnDIJ8IdlOIMv4gntyNvcopOjaPJr2l3twfNzUI8Q35vlykHTvuRZRh0J86LON0mXj8R
-         n7lg==
+        d=suse.com; s=google; t=1741166071; x=1741770871; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=gl9jSiB7evpe8ejmAOLUI0imnKWEgep+b1ZE6Io+mN8=;
+        b=cypdZq2ZNamYFnpXKFU9vstO4RuC7t8vYpsQzVugezWFFaDKIpf+VTby79bs65aaMw
+         8UW6qdhNQXU+yst7SAyBU9tkPBLDhDqXpjn1q10BUXQh6uzGyHTsmrBvFuqFyLqzCP41
+         FZ+iF2XepdZ1WGw/79Rz8vscCMBv+MTOiCywHAt1NCF2ScjtCe5xysyyqZt0OV0En0PI
+         r8frDpEL963iKvegBlpCggzuydpCe8N1XjUdDX4I5bUVBIJ97n/yVuVeOyzLXS//e7Nx
+         MNHqPMx/aAnpajn/r0pmR+kgTroQ0/yNHaMmLZV3WOfKZiJ1GXqcQGTmhcxEbsKdCdMa
+         du7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741165930; x=1741770730;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=7vRDesRQb/Nxhcf66JbLCYMstts9xs0Oaigt+qqhPzM=;
-        b=G1EdZXq4Gtqq0NaL8HczTcVS0TUT5RhtSeHQz6CVvXQtKpOyQAjDtK0DJtxGvxk5LT
-         etGTEqjEBKwJ4q5q/aZj+qhGb6vdH75W8mBZ+Zyyrk1/lG3BvKK/YHHppGpQHks9RAEx
-         Iy4thdXDOus/BxGEByueTs8y+uucdqMQdsHtD21vIx4RCbj864vsglzWoMI5MmjjkvWO
-         m0rE/vLgpqcb+HlBFoKZUVn57A9Iz9tzjjpZd25JU47DZ7Caz90guGYtW4yE3M/yxmCA
-         0lq4gTcvliiQJZeeam3gIbOAXBBdjmbl/CMU7VBKi76Y21uZTa+ZrUO4Eh7+j4S5NztN
-         7MKg==
-X-Gm-Message-State: AOJu0Yzk+dHKtN38TaKQXyBCVoZgVGWaAJ9XKkvLJTSLEtfjhleQwocW
-	PU2oFZBH7+MkkKY79r3SY/ZWqWr7UNZr5dbUAoCghrvnj6xQ5gRgML8Bi/oE
-X-Gm-Gg: ASbGncthnCbAeb7lEf/HqdFWt5PXIlfMzUobZJAjSbz1RkVV3Gb2skFwL646vvWNzDl
-	S+L0nkGROS976xt8RpV30LBgpU7M3ZBRrwBsZsNVu6VPnYYWSsOt6UHIOzANGFOaYkaFHfA0DtH
-	U59K6mR+hUuOM2g7+LcOa45AgwBqF0kaMlKFU2XC1IsQ/VykoFUzLp/PJZzYSM3m6A4Kpf1dAjL
-	1CauwSTKd5UO6xmLBhHTPE6jzZqDoAnvOLRYpdiyqJwqLAjr9JNapghFLF1tkU89n8a9oZ0BWVS
-	bL1BYdNAn0oJu2Uhocp0Yn1gc8pC9n7ELD2yPImRfLV05PCTVA==
-X-Google-Smtp-Source: AGHT+IGgw7tZ/KupAA7aqLgKd7RgPJr1KdPD7ZGpud0YGWY6QTwxlrBZ7x7v9bHnysTCB2vsApcPRQ==
-X-Received: by 2002:a05:6512:3e1a:b0:545:1082:91a1 with SMTP id 2adb3069b0e04-5497d32f7bamr789411e87.7.1741165929631;
-        Wed, 05 Mar 2025 01:12:09 -0800 (PST)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>,
-	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH 12/16] xen/arm: Trigger Xen suspend when hardware domain completes suspend
-Date: Wed,  5 Mar 2025 11:11:20 +0200
-Message-ID: <ff5da2f2bc2210bcb2133749591ea01114391173.1741164138.git.xakep.amatop@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1741164138.git.xakep.amatop@gmail.com>
-References: <cover.1741164138.git.xakep.amatop@gmail.com>
+        d=1e100.net; s=20230601; t=1741166071; x=1741770871;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:cc
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=gl9jSiB7evpe8ejmAOLUI0imnKWEgep+b1ZE6Io+mN8=;
+        b=Pg/Y06fTCG80U7xe738QZQoZ5K4daLYIdurNXQUd128AUfLRl1NiEYicm6dzG6O6BA
+         BXBIDVk1h15utSGS3c+MFGWsbCb4XT6F7EFzg+HAtB3nZJaIGNCDrsPPIl1pJFmtZWXs
+         xOP2sZdKiVoal9i0mIhscn4GZUCdgN8WQXjYVxYaEvc9AM0EI1g1vKuf7MmbsLDJoXsv
+         a4yLEZMzPAxzyTQ7X7ZKKZxDNdqPPsBFJn2d4Srcp4cgtkmcbUzIQX06igsFLQLUJKt4
+         ri7WYYOZzHPzSboy3j0dGL1lQTbQHwn/0NlFM8zRf2+sTSNuzjaJIwBqZancYRfwesDL
+         eWAw==
+X-Gm-Message-State: AOJu0Ywt3EM2NF3K6RQqZg4Jos0W7+Ct/+3qN4M5WZ33NBG2szYZppS4
+	81foX4hQpiuYSG0hDGLPm0ZYZEHrIvWQXmeQBgwYbwrfEsc8j3t9nqJYO5iMlUWjXQFybki2GD8
+	=
+X-Gm-Gg: ASbGncsHolRpmMwUc+ocRqTHqa1w8XWsl4XJk0YtMTkxMWHTZoFwcIgZzwY+qAvEvao
+	4b8px+d9IbgVqenFYfqMtn/LTKUNBuADtd2OlMrVy4CoSnf/L6Xg9gmQJjBCCe4oFZBizb7S697
+	cTyCL64czF0ILz4PgrM1NKRm+Bbvmt8ksyozygsud8XipZAiso5OHj7PFoDlfWcRxLI3l3t5V9P
+	F3CN1nmhcPUoYcoUH3ift+V+cB++MhnHyd3E6iSeZ2pM/BNiCJImHYy/7lpIynBzcdCqKBpWmMT
+	F9PrepeenwWih+d9bbvjdyUoCbwbUcLc0ownImpl/HtyyUkZu8RBzvkXpVQBQU9kNR8vDbSZMFL
+	2W77zGgjP36pyfYXmxxOdWvYSyBBb7g==
+X-Google-Smtp-Source: AGHT+IHBfq20PBP2dtkvSFOcOZu3Tq1rwLWCB4cQNsQQjg/3YlZkXp0mSlL/b9+yapE+gJTc2TA0sQ==
+X-Received: by 2002:a05:600c:4ed2:b0:439:9d75:9e92 with SMTP id 5b1f17b1804b1-43bd29d239bmr13733335e9.28.1741166071134;
+        Wed, 05 Mar 2025 01:14:31 -0800 (PST)
+Message-ID: <41e7c2ff-ee66-4269-9771-fc274e7a051d@suse.com>
+Date: Wed, 5 Mar 2025 10:14:34 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/public: remove some unused defines from xs_wire.h
+To: Juergen Gross <jgross@suse.com>
+References: <20250305085646.26472-1-jgross@suse.com>
+Content-Language: en-US
+Cc: xen-devel@lists.xenproject.org
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250305085646.26472-1-jgross@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+On 05.03.2025 09:56, Juergen Gross wrote:
+> xs_wire.h contains some defines XS_WRITE_* which seem to be leftovers
+> from some decades ago. They haven't been used in the Xen tree since at
+> least Xen 2.0 and they make no sense anyway.
+> 
+> Remove them, as they seem not to be related to any Xen interface we
+> have today.
 
-When hardware domain finalizes its suspend procedure the suspend of Xen
-is triggered by calling system_suspend(). Hardware domain finalizes the
-suspend from its boot core (VCPU#0), which could be mapped to any physical
-CPU, i.e. the system_suspend() function could be executed by any physical
-CPU. Since Xen suspend procedure has to be run by the boot CPU
-(non-boot CPUs will be disabled at some point in suspend procedure),
-system_suspend() execution has to continue on CPU#0.
+How sure are you/we that there are no out-of-tree uses of them? They
+aren't in e.g. a __XEN_TOOLS__ protected region after all. (I don't
+mind their removal, but in public headers I think we need to be
+double careful.)
 
-When the system_suspend() returns 0, it means that the system was
-suspended and it is coming out of the resume procedure. Regardless
-of the system_suspend() return value, after this function returns
-Xen is fully functional, and its state, including all devices and data
-structures, matches the state prior to calling system_suspend().
-The status is returned by system_suspend() for debugging/logging
-purposes and function prototype compatibility.
-
-This patch also introduces some state changes in peripherals and CPUs
-during suspend/resume. Specifically, it:
-  - disable/enable non-boot physical CPUs, freeze/thaw domains;
-  - suspend/resume the timer, GIC, console, IOMMU, and hardware domain.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-Changes introduced in V3:
- Merged changes from other commits into this one (stashed changes):
-  - disabled/enabled non-boot physical CPUs and froze/thawed domains;
-  - suspended/resumed the timer, GIC, console, IOMMU, and hardware domain.
----
- xen/arch/arm/suspend.c | 233 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 233 insertions(+)
-
-diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-index 27fab8c999..fa81be5a4f 100644
---- a/xen/arch/arm/suspend.c
-+++ b/xen/arch/arm/suspend.c
-@@ -1,6 +1,9 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
- #include <xen/sched.h>
-+#include <xen/cpu.h>
-+#include <xen/console.h>
-+#include <xen/iommu.h>
- #include <asm/cpufeature.h>
- #include <asm/event.h>
- #include <asm/psci.h>
-@@ -8,6 +11,210 @@
- #include <asm/platform.h>
- #include <public/sched.h>
- 
-+/* Reset values of VCPU architecture specific registers */
-+static void vcpu_arch_reset(struct vcpu *v)
-+{
-+    v->arch.ttbr0 = 0;
-+    v->arch.ttbr1 = 0;
-+    v->arch.ttbcr = 0;
-+
-+    v->arch.csselr = 0;
-+    v->arch.cpacr = 0;
-+    v->arch.contextidr = 0;
-+    v->arch.tpidr_el0 = 0;
-+    v->arch.tpidrro_el0 = 0;
-+    v->arch.tpidr_el1 = 0;
-+    v->arch.vbar = 0;
-+    v->arch.dacr = 0;
-+    v->arch.par = 0;
-+#if defined(CONFIG_ARM_32)
-+    v->arch.mair0 = 0;
-+    v->arch.mair1 = 0;
-+    v->arch.amair0 = 0;
-+    v->arch.amair1 = 0;
-+#else
-+    v->arch.mair = 0;
-+    v->arch.amair = 0;
-+#endif
-+    /* Fault Status */
-+#if defined(CONFIG_ARM_32)
-+    v->arch.dfar = 0;
-+    v->arch.ifar = 0;
-+    v->arch.dfsr = 0;
-+#elif defined(CONFIG_ARM_64)
-+    v->arch.far = 0;
-+    v->arch.esr = 0;
-+#endif
-+
-+    v->arch.ifsr  = 0;
-+    v->arch.afsr0 = 0;
-+    v->arch.afsr1 = 0;
-+
-+#ifdef CONFIG_ARM_32
-+    v->arch.joscr = 0;
-+    v->arch.jmcr = 0;
-+#endif
-+
-+    v->arch.teecr = 0;
-+    v->arch.teehbr = 0;
-+}
-+
-+/*
-+ * This function sets the context of current VCPU to the state which is expected
-+ * by the guest on resume. The expected VCPU state is:
-+ * 1) pc to contain resume entry point (1st argument of PSCI SYSTEM_SUSPEND)
-+ * 2) r0/x0 to contain context ID (2nd argument of PSCI SYSTEM_SUSPEND)
-+ * 3) All other general purpose and system registers should have reset values
-+ */
-+static void vcpu_resume(struct vcpu *v)
-+{
-+
-+    struct vcpu_guest_context ctxt;
-+
-+    /* Make sure that VCPU guest regs are zeroed */
-+    memset(&ctxt, 0, sizeof(ctxt));
-+
-+    /* Set non-zero values to the registers prior to copying */
-+    ctxt.user_regs.pc64 = (u64)v->arch.suspend_ep;
-+
-+    /* TODO: test changes on 32-bit domain */
-+    if ( is_32bit_domain(v->domain) )
-+    {
-+        ctxt.user_regs.r0_usr = v->arch.suspend_cid;
-+        ctxt.user_regs.cpsr = PSR_GUEST32_INIT;
-+
-+        /* Thumb set is allowed only for 32-bit domain */
-+        if ( v->arch.suspend_ep & 1 )
-+        {
-+            ctxt.user_regs.cpsr |= PSR_THUMB;
-+            ctxt.user_regs.pc64 &= ~(u64)1;
-+        }
-+    }
-+#ifdef CONFIG_ARM_64
-+    else
-+    {
-+        ctxt.user_regs.x0 = v->arch.suspend_cid;
-+        ctxt.user_regs.cpsr = PSR_GUEST64_INIT;
-+    }
-+#endif
-+    ctxt.sctlr = SCTLR_GUEST_INIT;
-+    ctxt.flags = VGCF_online;
-+
-+    /* Reset architecture specific registers */
-+    vcpu_arch_reset(v);
-+
-+    /* Initialize VCPU registers */
-+    domain_lock(v->domain);
-+    arch_set_info_guest(v, &ctxt);
-+    domain_unlock(v->domain);
-+    watchdog_domain_resume(v->domain);
-+}
-+
-+/* Xen suspend. Note: data is not used (suspend is the suspend to RAM) */
-+static long system_suspend(void *data)
-+{
-+    int status;
-+    unsigned long flags;
-+
-+    BUG_ON(system_state != SYS_STATE_active);
-+
-+    system_state = SYS_STATE_suspend;
-+    freeze_domains();
-+
-+    /*
-+     * Non-boot CPUs have to be disabled on suspend and enabled on resume
-+     * (hotplug-based mechanism). Disabling non-boot CPUs will lead to PSCI
-+     * CPU_OFF to be called by each non-boot CPU. Depending on the underlying
-+     * platform capabilities, this may lead to the physical powering down of
-+     * CPUs. Tested on Xilinx Zynq Ultrascale+ MPSoC (including power down of
-+     * each non-boot CPU).
-+     */
-+    status = disable_nonboot_cpus();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_nonboot_cpus;
-+    }
-+
-+    time_suspend();
-+
-+    local_irq_save(flags);
-+    status = gic_suspend();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_irqs;
-+    }
-+
-+    printk("Xen suspending...\n");
-+    console_start_sync();
-+
-+    status = console_suspend();
-+    if ( status )
-+    {
-+        dprintk(XENLOG_ERR, "Failed to suspend the console, err=%d\n", status);
-+        system_state = SYS_STATE_resume;
-+        goto resume_console;
-+    }
-+
-+    status = iommu_suspend();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_console;
-+    }
-+
-+    /*
-+     * Enable identity mapping before entering suspend to simplify
-+     * the resume path
-+     */
-+    update_boot_mapping(true);
-+
-+    system_state = SYS_STATE_resume;
-+    update_boot_mapping(false);
-+
-+    iommu_resume();
-+
-+resume_console:
-+    console_resume();
-+
-+    gic_resume();
-+
-+resume_irqs:
-+    local_irq_restore(flags);
-+
-+    time_resume();
-+
-+resume_nonboot_cpus:
-+    /*
-+     * The rcu_barrier() has to be added to ensure that the per cpu area is
-+     * freed before a non-boot CPU tries to initialize it (_free_percpu_area()
-+     * has to be called before the init_percpu_area()). This scenario occurs
-+     * when non-boot CPUs are hot-unplugged on suspend and hotplugged on resume.
-+     */
-+    rcu_barrier();
-+    enable_nonboot_cpus();
-+    thaw_domains();
-+    system_state = SYS_STATE_active;
-+
-+    /*
-+     * The hardware domain owns most of the devices and may be part of the
-+     * suspend/resume path. Since the hardware domain suspend is tied to
-+     * the host suspend, it makes sense to resume it at the same time,
-+     * i.e. after host resumes.
-+     */
-+    vcpu_resume(hardware_domain->vcpu[0]);
-+    /*
-+     * The resume of hardware domain should always follow Xen's resume.
-+     * This is done by unblocking the first vCPU of Dom0.
-+     */
-+    vcpu_unblock(hardware_domain->vcpu[0]);
-+
-+    printk("Resume (status %d)\n", status);
-+
-+    return status;
-+}
-+
- static void vcpu_suspend_prepare(register_t epoint, register_t cid)
- {
-     struct vcpu *v = current;
-@@ -21,6 +228,7 @@ int32_t domain_suspend(register_t epoint, register_t cid)
-     struct vcpu *v;
-     struct domain *d = current->domain;
-     bool is_thumb = epoint & 1;
-+    int status;
- 
-     dprintk(XENLOG_DEBUG,
-             "Dom%d suspend: epoint=0x%"PRIregister", cid=0x%"PRIregister"\n",
-@@ -54,6 +262,31 @@ int32_t domain_suspend(register_t epoint, register_t cid)
-      */
-     vcpu_block_unless_event_pending(current);
- 
-+    /* If this was dom0 the whole system should suspend: trigger Xen suspend */
-+    if ( is_hardware_domain(d) )
-+    {
-+        /*
-+         * system_suspend should be called when Dom0 finalizes the suspend
-+         * procedure from its boot core (VCPU#0). However, Dom0's VCPU#0 could
-+         * be mapped to any PCPU (this function could be executed by any PCPU).
-+         * The suspend procedure has to be finalized by the PCPU#0 (non-boot
-+         * PCPUs will be disabled during the suspend).
-+         */
-+        status = continue_hypercall_on_cpu(0, system_suspend, NULL);
-+        /*
-+         * If an error happened, there is nothing that needs to be done here
-+         * because the system_suspend always returns in fully functional state
-+         * no matter what the outcome of suspend procedure is. If the system
-+         * suspended successfully the function will return 0 after the resume.
-+         * Otherwise, if an error is returned it means Xen did not suspended,
-+         * but it is still in the same state as if the system_suspend was never
-+         * called. We dump a debug message in case of an error for debugging/
-+         * logging purpose.
-+         */
-+        if ( status )
-+            dprintk(XENLOG_ERR, "Failed to suspend, errno=%d\n", status);
-+    }
-+
-     return PSCI_SUCCESS;
- }
- 
--- 
-2.43.0
-
+Jan
 
