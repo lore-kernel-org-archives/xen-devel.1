@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1976DC282D3
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:13:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901878.1309879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B725C19F32
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:13:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901883.1309897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknT-0000en-DS; Wed, 05 Mar 2025 09:12:11 +0000
+	id 1tpknW-0001Hu-4j; Wed, 05 Mar 2025 09:12:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901878.1309879; Wed, 05 Mar 2025 09:12:11 +0000
+Received: by outflank-mailman (output) from mailman id 901883.1309897; Wed, 05 Mar 2025 09:12:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknT-0000cg-4e; Wed, 05 Mar 2025 09:12:11 +0000
-Received: by outflank-mailman (input) for mailman id 901878;
- Wed, 05 Mar 2025 09:12:09 +0000
+	id 1tpknV-0001Gw-S2; Wed, 05 Mar 2025 09:12:13 +0000
+Received: by outflank-mailman (input) for mailman id 901883;
+ Wed, 05 Mar 2025 09:12:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0bc7=VY=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1tpknR-0006ev-0q
- for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:09 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
+ id 1tpknT-0006ev-Sd
+ for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:11 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ea07c654-f9a1-11ef-9ab4-95dc52dad729;
- Wed, 05 Mar 2025 10:12:08 +0100 (CET)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5496bc2e261so3041218e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:08 -0800 (PST)
+ id ebabc915-f9a1-11ef-9ab4-95dc52dad729;
+ Wed, 05 Mar 2025 10:12:11 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-549490e290dso5158117e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:11 -0800 (PST)
 Received: from EPUAKYIW02F7.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.06
+ 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 01:12:06 -0800 (PST)
+ Wed, 05 Mar 2025 01:12:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea07c654-f9a1-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: ebabc915-f9a1-11ef-9ab4-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741165928; x=1741770728; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1741165930; x=1741770730; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4/8kyy/e+kyBcwvFFlXXM+fJPKdq7qtfTXyKQk0fSJ8=;
-        b=WunxoxaipK6FYHudkuN7MbHOUXK6wlUt5o6uDuT7FFSJLOUc5JgDrJTkaebMyCgNGS
-         f0nOMEqfab5RQrZYco9iryeHABzqJ2LFkUDIjPE69ihKgE6cb1ja2Z56WwXxE0jyiOCz
-         G3o+WKKsIbQI2jXtwsbpSoGLXWe1FvYW8PN/+/4DNyONQV5JGNuotJvd9TpovW8fvcKF
-         zbeLBHOfPv0gLuJH+H0xRdo4JKNUrx5m0mpc+7gjedNOt1LUqshlbDnBVKCBPYDT0FhQ
-         sWLS9kakWX7D12/gqYGA6+flP4fgNxnP/P+hMWiuFxno3f2PfHJlHl5RP2r1d/HetYTq
-         5XoQ==
+        bh=7vRDesRQb/Nxhcf66JbLCYMstts9xs0Oaigt+qqhPzM=;
+        b=ESjib+ijtuRtIkop52jBXTWP/vZdjuq1LbSSb1bzrDHb3gXFQvmlqL9guzkqGVBYzY
+         kXmsuGEREScjkGdZzXQtstSaLfSTpsPPIOsaShYoB5cDsIJIejMfwPrSgTvjjenMQgxn
+         okmqnTMvIJiDB30DhXA2ScJ1PFz/hWHT/NM8hsEvVIOnmL9yqzkfaiCv27IADyWiAxGX
+         +4KVOspvBB5lgawJUJ86izoHwHQ9v6Rj2tOwI77qYT5H4sXwFUOXxfPRWRonq9ABPg38
+         pnDIJ8IdlOIMv4gntyNvcopOjaPJr2l3twfNzUI8Q35vlykHTvuRZRh0J86LON0mXj8R
+         n7lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741165928; x=1741770728;
+        d=1e100.net; s=20230601; t=1741165930; x=1741770730;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4/8kyy/e+kyBcwvFFlXXM+fJPKdq7qtfTXyKQk0fSJ8=;
-        b=imo+zg6bIYWKPewl9mp2miXO3QLY3QOV7F2sC8Keqy4/FJFZRQ98VFB3JTXtd9NqHL
-         lxd/4kVhCCjGEj7AA7synb7dl+D0RimcyCQcXoFSQof02JD2CLaVtbch0dzxydIic37U
-         J5Ql+4AosHYKCDcCG39xHbjCCt6qj9fwoIcn+tBUHyOAkrUsu1ijavjj0KLxTfC8aeoq
-         w+ZemMi2nwnsIEmJGGS6yx7uZ0kssZg0pvqHYB/MVBzLQNS+/dOTfZuU8Lp0gYheCvBD
-         zWwo61kgslWa6/RSu4QXl6K6PSKS3lxeW9apm0IWVGXUybtS2CMwfmtNFvT/ETFNl3Tb
-         vscw==
-X-Gm-Message-State: AOJu0YykOebJKau0OxbVWuKvXwbi95QyTP50v7TYKX3R2jCyWf70NEom
-	FG3GJqHOQWVWNcpktgTTJ6rZCc/iUPxNzL2Ng2eyV5tqwLat1Vk1/ybBFI7E
-X-Gm-Gg: ASbGncvYD8rhZtTQyJ0dzikWRQV52xes5yi3nr0rGZnnHHOOe+9emG+9lSupwGYMGf1
-	wmcLKTJ1jWTB1empylWUcIVkg462Mf7+5C2mIR60AN/xQl/2RB9lXxd7qGqMDqU4pzPykU0fV26
-	DhJKZQZ2bZxiXl3TeWHU5Xw5V7j6m2JrdxBpuoAjU4X1WIIX1Pl46TBQcsb/evbllQHYKGpPq5n
-	6X6goKKXzEo19+dbn/DVicXC9shcq3Br09xmDi2qSIyylq4pessB3FfADy1yfju6WclHXFsUxH+
-	OscfWwZZZJOh3IF/EyJHIVUt+KdNxqAetTajk7Zp6YjEs9WgkA==
-X-Google-Smtp-Source: AGHT+IFW+lziWbHd1pIz+0JjTnkeWoKJRDeU1VuvnilEd64flrtnOsLy0B3LNUJx4k/lQIaKCBhqMQ==
-X-Received: by 2002:a05:6512:1596:b0:549:74a7:12d6 with SMTP id 2adb3069b0e04-5497d357da3mr752284e87.26.1741165927466;
-        Wed, 05 Mar 2025 01:12:07 -0800 (PST)
+        bh=7vRDesRQb/Nxhcf66JbLCYMstts9xs0Oaigt+qqhPzM=;
+        b=G1EdZXq4Gtqq0NaL8HczTcVS0TUT5RhtSeHQz6CVvXQtKpOyQAjDtK0DJtxGvxk5LT
+         etGTEqjEBKwJ4q5q/aZj+qhGb6vdH75W8mBZ+Zyyrk1/lG3BvKK/YHHppGpQHks9RAEx
+         Iy4thdXDOus/BxGEByueTs8y+uucdqMQdsHtD21vIx4RCbj864vsglzWoMI5MmjjkvWO
+         m0rE/vLgpqcb+HlBFoKZUVn57A9Iz9tzjjpZd25JU47DZ7Caz90guGYtW4yE3M/yxmCA
+         0lq4gTcvliiQJZeeam3gIbOAXBBdjmbl/CMU7VBKi76Y21uZTa+ZrUO4Eh7+j4S5NztN
+         7MKg==
+X-Gm-Message-State: AOJu0Yzk+dHKtN38TaKQXyBCVoZgVGWaAJ9XKkvLJTSLEtfjhleQwocW
+	PU2oFZBH7+MkkKY79r3SY/ZWqWr7UNZr5dbUAoCghrvnj6xQ5gRgML8Bi/oE
+X-Gm-Gg: ASbGncthnCbAeb7lEf/HqdFWt5PXIlfMzUobZJAjSbz1RkVV3Gb2skFwL646vvWNzDl
+	S+L0nkGROS976xt8RpV30LBgpU7M3ZBRrwBsZsNVu6VPnYYWSsOt6UHIOzANGFOaYkaFHfA0DtH
+	U59K6mR+hUuOM2g7+LcOa45AgwBqF0kaMlKFU2XC1IsQ/VykoFUzLp/PJZzYSM3m6A4Kpf1dAjL
+	1CauwSTKd5UO6xmLBhHTPE6jzZqDoAnvOLRYpdiyqJwqLAjr9JNapghFLF1tkU89n8a9oZ0BWVS
+	bL1BYdNAn0oJu2Uhocp0Yn1gc8pC9n7ELD2yPImRfLV05PCTVA==
+X-Google-Smtp-Source: AGHT+IGgw7tZ/KupAA7aqLgKd7RgPJr1KdPD7ZGpud0YGWY6QTwxlrBZ7x7v9bHnysTCB2vsApcPRQ==
+X-Received: by 2002:a05:6512:3e1a:b0:545:1082:91a1 with SMTP id 2adb3069b0e04-5497d32f7bamr789411e87.7.1741165929631;
+        Wed, 05 Mar 2025 01:12:09 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
@@ -93,9 +93,9 @@ Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
 	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
 	Mykyta Poturai <mykyta_poturai@epam.com>,
 	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH 10/16] xen/arm: Implement GIC suspend/resume functions (gicv2 only)
-Date: Wed,  5 Mar 2025 11:11:18 +0200
-Message-ID: <c9f441e6668c8ee25cdcce5ba705b39637a2f791.1741164138.git.xakep.amatop@gmail.com>
+Subject: [PATCH 12/16] xen/arm: Trigger Xen suspend when hardware domain completes suspend
+Date: Wed,  5 Mar 2025 11:11:20 +0200
+Message-ID: <ff5da2f2bc2210bcb2133749591ea01114391173.1741164138.git.xakep.amatop@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1741164138.git.xakep.amatop@gmail.com>
 References: <cover.1741164138.git.xakep.amatop@gmail.com>
@@ -104,268 +104,305 @@ Content-Transfer-Encoding: 8bit
 
 From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-System suspend may lead to a state where GIC would be powered down.
-Therefore, Xen should save/restore the context of GIC on suspend/resume.
-Note that the context consists of states of registers which are
-controlled by the hypervisor. Other GIC registers which are accessible
-by guests are saved/restored on context switch.
-Tested on Xilinx Ultrascale+ MPSoC with (and without) powering down
-the GIC.
+When hardware domain finalizes its suspend procedure the suspend of Xen
+is triggered by calling system_suspend(). Hardware domain finalizes the
+suspend from its boot core (VCPU#0), which could be mapped to any physical
+CPU, i.e. the system_suspend() function could be executed by any physical
+CPU. Since Xen suspend procedure has to be run by the boot CPU
+(non-boot CPUs will be disabled at some point in suspend procedure),
+system_suspend() execution has to continue on CPU#0.
+
+When the system_suspend() returns 0, it means that the system was
+suspended and it is coming out of the resume procedure. Regardless
+of the system_suspend() return value, after this function returns
+Xen is fully functional, and its state, including all devices and data
+structures, matches the state prior to calling system_suspend().
+The status is returned by system_suspend() for debugging/logging
+purposes and function prototype compatibility.
+
+This patch also introduces some state changes in peripherals and CPUs
+during suspend/resume. Specifically, it:
+  - disable/enable non-boot physical CPUs, freeze/thaw domains;
+  - suspend/resume the timer, GIC, console, IOMMU, and hardware domain.
 
 Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
 Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-changes in v3:
-- drop asserts, return error code instead
-- cover the code with CONFIG_SYSTEM_SUSPEND
-
-changes in v2:
-- minor fixes after review
+Changes introduced in V3:
+ Merged changes from other commits into this one (stashed changes):
+  - disabled/enabled non-boot physical CPUs and froze/thawed domains;
+  - suspended/resumed the timer, GIC, console, IOMMU, and hardware domain.
 ---
- xen/arch/arm/gic-v2.c          | 142 +++++++++++++++++++++++++++++++++
- xen/arch/arm/gic.c             |  29 +++++++
- xen/arch/arm/include/asm/gic.h |  12 +++
- 3 files changed, 183 insertions(+)
+ xen/arch/arm/suspend.c | 233 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 233 insertions(+)
 
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index 02043c0d4b..868e1a5026 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1098,6 +1098,139 @@ static int gicv2_iomem_deny_access(struct domain *d)
-     return iomem_deny_access(d, mfn, mfn + nr);
- }
+diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+index 27fab8c999..fa81be5a4f 100644
+--- a/xen/arch/arm/suspend.c
++++ b/xen/arch/arm/suspend.c
+@@ -1,6 +1,9 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+/* GICv2 registers to be saved/restored on system suspend/resume */
-+struct gicv2_context {
-+    /* GICC context */
-+    uint32_t gicc_ctlr;
-+    uint32_t gicc_pmr;
-+    uint32_t gicc_bpr;
-+    /* GICD context */
-+    uint32_t gicd_ctlr;
-+    uint32_t *gicd_isenabler;
-+    uint32_t *gicd_isactiver;
-+    uint32_t *gicd_ipriorityr;
-+    uint32_t *gicd_itargetsr;
-+    uint32_t *gicd_icfgr;
-+};
-+
-+static struct gicv2_context gicv2_context;
-+
-+static int gicv2_suspend(void)
+ #include <xen/sched.h>
++#include <xen/cpu.h>
++#include <xen/console.h>
++#include <xen/iommu.h>
+ #include <asm/cpufeature.h>
+ #include <asm/event.h>
+ #include <asm/psci.h>
+@@ -8,6 +11,210 @@
+ #include <asm/platform.h>
+ #include <public/sched.h>
+ 
++/* Reset values of VCPU architecture specific registers */
++static void vcpu_arch_reset(struct vcpu *v)
 +{
-+    unsigned int i;
++    v->arch.ttbr0 = 0;
++    v->arch.ttbr1 = 0;
++    v->arch.ttbcr = 0;
 +
-+    if ( !gicv2_context.gicd_isenabler )
-+        return -ENOMEM;
++    v->arch.csselr = 0;
++    v->arch.cpacr = 0;
++    v->arch.contextidr = 0;
++    v->arch.tpidr_el0 = 0;
++    v->arch.tpidrro_el0 = 0;
++    v->arch.tpidr_el1 = 0;
++    v->arch.vbar = 0;
++    v->arch.dacr = 0;
++    v->arch.par = 0;
++#if defined(CONFIG_ARM_32)
++    v->arch.mair0 = 0;
++    v->arch.mair1 = 0;
++    v->arch.amair0 = 0;
++    v->arch.amair1 = 0;
++#else
++    v->arch.mair = 0;
++    v->arch.amair = 0;
++#endif
++    /* Fault Status */
++#if defined(CONFIG_ARM_32)
++    v->arch.dfar = 0;
++    v->arch.ifar = 0;
++    v->arch.dfsr = 0;
++#elif defined(CONFIG_ARM_64)
++    v->arch.far = 0;
++    v->arch.esr = 0;
++#endif
 +
-+    /* Save GICC configuration */
-+    gicv2_context.gicc_ctlr = readl_gicc(GICC_CTLR);
-+    gicv2_context.gicc_pmr = readl_gicc(GICC_PMR);
-+    gicv2_context.gicc_bpr = readl_gicc(GICC_BPR);
++    v->arch.ifsr  = 0;
++    v->arch.afsr0 = 0;
++    v->arch.afsr1 = 0;
 +
-+    /* Save GICD configuration */
-+    gicv2_context.gicd_ctlr = readl_gicd(GICD_CTLR);
++#ifdef CONFIG_ARM_32
++    v->arch.joscr = 0;
++    v->arch.jmcr = 0;
++#endif
 +
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ )
-+        gicv2_context.gicd_isenabler[i] = readl_gicd(GICD_ISENABLER + i * 4);
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ )
-+        gicv2_context.gicd_isactiver[i] = readl_gicd(GICD_ISACTIVER + i * 4);
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
-+        gicv2_context.gicd_ipriorityr[i] = readl_gicd(GICD_IPRIORITYR + i * 4);
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
-+        gicv2_context.gicd_itargetsr[i] = readl_gicd(GICD_ITARGETSR + i * 4);
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 16); i++ )
-+        gicv2_context.gicd_icfgr[i] = readl_gicd(GICD_ICFGR + i * 4);
-+
-+    return 0;
++    v->arch.teecr = 0;
++    v->arch.teehbr = 0;
 +}
 +
-+static void gicv2_resume(void)
++/*
++ * This function sets the context of current VCPU to the state which is expected
++ * by the guest on resume. The expected VCPU state is:
++ * 1) pc to contain resume entry point (1st argument of PSCI SYSTEM_SUSPEND)
++ * 2) r0/x0 to contain context ID (2nd argument of PSCI SYSTEM_SUSPEND)
++ * 3) All other general purpose and system registers should have reset values
++ */
++static void vcpu_resume(struct vcpu *v)
 +{
-+    unsigned int i;
 +
-+    if ( !gicv2_context.gicd_isenabler )
-+        return;
++    struct vcpu_guest_context ctxt;
 +
-+    /* Disable CPU interface and distributor */
-+    writel_gicc(0, GICC_CTLR);
-+    writel_gicd(0, GICD_CTLR);
++    /* Make sure that VCPU guest regs are zeroed */
++    memset(&ctxt, 0, sizeof(ctxt));
 +
-+    /* Restore GICD configuration */
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ ) {
-+        writel_gicd(0xffffffff, GICD_ICENABLER + i * 4);
-+        writel_gicd(gicv2_context.gicd_isenabler[i], GICD_ISENABLER + i * 4);
++    /* Set non-zero values to the registers prior to copying */
++    ctxt.user_regs.pc64 = (u64)v->arch.suspend_ep;
++
++    /* TODO: test changes on 32-bit domain */
++    if ( is_32bit_domain(v->domain) )
++    {
++        ctxt.user_regs.r0_usr = v->arch.suspend_cid;
++        ctxt.user_regs.cpsr = PSR_GUEST32_INIT;
++
++        /* Thumb set is allowed only for 32-bit domain */
++        if ( v->arch.suspend_ep & 1 )
++        {
++            ctxt.user_regs.cpsr |= PSR_THUMB;
++            ctxt.user_regs.pc64 &= ~(u64)1;
++        }
 +    }
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ ) {
-+        writel_gicd(0xffffffff, GICD_ICACTIVER + i * 4);
-+        writel_gicd(gicv2_context.gicd_isactiver[i], GICD_ISACTIVER + i * 4);
++#ifdef CONFIG_ARM_64
++    else
++    {
++        ctxt.user_regs.x0 = v->arch.suspend_cid;
++        ctxt.user_regs.cpsr = PSR_GUEST64_INIT;
 +    }
++#endif
++    ctxt.sctlr = SCTLR_GUEST_INIT;
++    ctxt.flags = VGCF_online;
 +
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
-+        writel_gicd(gicv2_context.gicd_ipriorityr[i], GICD_IPRIORITYR + i * 4);
++    /* Reset architecture specific registers */
++    vcpu_arch_reset(v);
 +
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
-+        writel_gicd(gicv2_context.gicd_itargetsr[i], GICD_ITARGETSR + i * 4);
-+
-+    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 16); i++ )
-+        writel_gicd(gicv2_context.gicd_icfgr[i], GICD_ICFGR + i * 4);
-+
-+    /* Make sure all registers are restored and enable distributor */
-+    writel_gicd(gicv2_context.gicd_ctlr | GICD_CTL_ENABLE, GICD_CTLR);
-+
-+    /* Restore GIC CPU interface configuration */
-+    writel_gicc(gicv2_context.gicc_pmr, GICC_PMR);
-+    writel_gicc(gicv2_context.gicc_bpr, GICC_BPR);
-+
-+    /* Enable GIC CPU interface */
-+    writel_gicc(gicv2_context.gicc_ctlr | GICC_CTL_ENABLE | GICC_CTL_EOI,
-+                GICC_CTLR);
++    /* Initialize VCPU registers */
++    domain_lock(v->domain);
++    arch_set_info_guest(v, &ctxt);
++    domain_unlock(v->domain);
++    watchdog_domain_resume(v->domain);
 +}
 +
-+static void gicv2_alloc_context(struct gicv2_context *gc)
++/* Xen suspend. Note: data is not used (suspend is the suspend to RAM) */
++static long system_suspend(void *data)
 +{
-+    uint32_t n = gicv2_info.nr_lines;
++    int status;
++    unsigned long flags;
 +
-+    gc->gicd_isenabler = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 32));
-+    if ( !gc->gicd_isenabler )
-+        goto err_free;
++    BUG_ON(system_state != SYS_STATE_active);
 +
-+    gc->gicd_isactiver = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 32));
-+    if ( !gc->gicd_isactiver )
-+        goto err_free;
++    system_state = SYS_STATE_suspend;
++    freeze_domains();
 +
-+    gc->gicd_itargetsr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 4));
-+    if ( !gc->gicd_itargetsr )
-+        goto err_free;
-+
-+    gc->gicd_ipriorityr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 4));
-+    if ( !gc->gicd_ipriorityr )
-+        goto err_free;
-+
-+    gc->gicd_icfgr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 16));
-+    if ( !gc->gicd_icfgr )
-+        goto err_free;
-+
-+    return;
-+
-+ err_free:
-+    xfree(gc->gicd_icfgr);
-+    xfree(gc->gicd_ipriorityr);
-+    xfree(gc->gicd_itargetsr);
-+    xfree(gc->gicd_isactiver);
-+    xfree(gc->gicd_isenabler);
-+
-+    memset(gc, 0, sizeof(*gc));
-+}
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- #ifdef CONFIG_ACPI
- static unsigned long gicv2_get_hwdom_extra_madt_size(const struct domain *d)
- {
-@@ -1302,6 +1435,11 @@ static int __init gicv2_init(void)
- 
-     spin_unlock(&gicv2.lock);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    /* Allocate memory to be used for saving GIC context during the suspend */
-+    gicv2_alloc_context(&gicv2_context);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
-     return 0;
- }
- 
-@@ -1345,6 +1483,10 @@ const static struct gic_hw_operations gicv2_ops = {
-     .map_hwdom_extra_mappings = gicv2_map_hwdom_extra_mappings,
-     .iomem_deny_access   = gicv2_iomem_deny_access,
-     .do_LPI              = gicv2_do_LPI,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend             = gicv2_suspend,
-+    .resume              = gicv2_resume,
-+#endif /* CONFIG_SYSTEM_SUSPEND */
- };
- 
- /* Set up the GIC */
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index acf61a4de3..1c974cf0f5 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -422,6 +422,35 @@ int gic_iomem_deny_access(struct domain *d)
-     return gic_hw_ops->iomem_deny_access(d);
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+int gic_suspend(void)
-+{
-+    /* Must be called by boot CPU#0 with interrupts disabled */
-+    ASSERT(!local_irq_is_enabled());
-+    ASSERT(!smp_processor_id());
-+
-+    if ( !gic_hw_ops->suspend || !gic_hw_ops->resume )
-+        return -ENOSYS;
-+
-+    return gic_hw_ops->suspend();
-+}
-+
-+void gic_resume(void)
-+{
 +    /*
-+     * Must be called by boot CPU#0 with interrupts disabled after gic_suspend
-+     * has returned successfully.
++     * Non-boot CPUs have to be disabled on suspend and enabled on resume
++     * (hotplug-based mechanism). Disabling non-boot CPUs will lead to PSCI
++     * CPU_OFF to be called by each non-boot CPU. Depending on the underlying
++     * platform capabilities, this may lead to the physical powering down of
++     * CPUs. Tested on Xilinx Zynq Ultrascale+ MPSoC (including power down of
++     * each non-boot CPU).
 +     */
-+    ASSERT(!local_irq_is_enabled());
-+    ASSERT(!smp_processor_id());
-+    ASSERT(gic_hw_ops->resume);
++    status = disable_nonboot_cpus();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_nonboot_cpus;
++    }
 +
-+    gic_hw_ops->resume();
++    time_suspend();
++
++    local_irq_save(flags);
++    status = gic_suspend();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_irqs;
++    }
++
++    printk("Xen suspending...\n");
++    console_start_sync();
++
++    status = console_suspend();
++    if ( status )
++    {
++        dprintk(XENLOG_ERR, "Failed to suspend the console, err=%d\n", status);
++        system_state = SYS_STATE_resume;
++        goto resume_console;
++    }
++
++    status = iommu_suspend();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_console;
++    }
++
++    /*
++     * Enable identity mapping before entering suspend to simplify
++     * the resume path
++     */
++    update_boot_mapping(true);
++
++    system_state = SYS_STATE_resume;
++    update_boot_mapping(false);
++
++    iommu_resume();
++
++resume_console:
++    console_resume();
++
++    gic_resume();
++
++resume_irqs:
++    local_irq_restore(flags);
++
++    time_resume();
++
++resume_nonboot_cpus:
++    /*
++     * The rcu_barrier() has to be added to ensure that the per cpu area is
++     * freed before a non-boot CPU tries to initialize it (_free_percpu_area()
++     * has to be called before the init_percpu_area()). This scenario occurs
++     * when non-boot CPUs are hot-unplugged on suspend and hotplugged on resume.
++     */
++    rcu_barrier();
++    enable_nonboot_cpus();
++    thaw_domains();
++    system_state = SYS_STATE_active;
++
++    /*
++     * The hardware domain owns most of the devices and may be part of the
++     * suspend/resume path. Since the hardware domain suspend is tied to
++     * the host suspend, it makes sense to resume it at the same time,
++     * i.e. after host resumes.
++     */
++    vcpu_resume(hardware_domain->vcpu[0]);
++    /*
++     * The resume of hardware domain should always follow Xen's resume.
++     * This is done by unblocking the first vCPU of Dom0.
++     */
++    vcpu_unblock(hardware_domain->vcpu[0]);
++
++    printk("Resume (status %d)\n", status);
++
++    return status;
 +}
 +
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- static int cpu_gic_callback(struct notifier_block *nfb,
-                             unsigned long action,
-                             void *hcpu)
-diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
-index 541f0eeb80..a706303008 100644
---- a/xen/arch/arm/include/asm/gic.h
-+++ b/xen/arch/arm/include/asm/gic.h
-@@ -280,6 +280,12 @@ extern int gicv_setup(struct domain *d);
- extern void gic_save_state(struct vcpu *v);
- extern void gic_restore_state(struct vcpu *v);
+ static void vcpu_suspend_prepare(register_t epoint, register_t cid)
+ {
+     struct vcpu *v = current;
+@@ -21,6 +228,7 @@ int32_t domain_suspend(register_t epoint, register_t cid)
+     struct vcpu *v;
+     struct domain *d = current->domain;
+     bool is_thumb = epoint & 1;
++    int status;
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+/* Suspend/resume */
-+extern int gic_suspend(void);
-+extern void gic_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- /* SGI (AKA IPIs) */
- enum gic_sgi {
-     GIC_SGI_EVENT_CHECK,
-@@ -395,6 +401,12 @@ struct gic_hw_operations {
-     int (*iomem_deny_access)(struct domain *d);
-     /* Handle LPIs, which require special handling */
-     void (*do_LPI)(unsigned int lpi);
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    /* Save GIC configuration due to the system suspend */
-+    int (*suspend)(void);
-+    /* Restore GIC configuration due to the system resume */
-+    void (*resume)(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
- };
+     dprintk(XENLOG_DEBUG,
+             "Dom%d suspend: epoint=0x%"PRIregister", cid=0x%"PRIregister"\n",
+@@ -54,6 +262,31 @@ int32_t domain_suspend(register_t epoint, register_t cid)
+      */
+     vcpu_block_unless_event_pending(current);
  
- extern const struct gic_hw_operations *gic_hw_ops;
++    /* If this was dom0 the whole system should suspend: trigger Xen suspend */
++    if ( is_hardware_domain(d) )
++    {
++        /*
++         * system_suspend should be called when Dom0 finalizes the suspend
++         * procedure from its boot core (VCPU#0). However, Dom0's VCPU#0 could
++         * be mapped to any PCPU (this function could be executed by any PCPU).
++         * The suspend procedure has to be finalized by the PCPU#0 (non-boot
++         * PCPUs will be disabled during the suspend).
++         */
++        status = continue_hypercall_on_cpu(0, system_suspend, NULL);
++        /*
++         * If an error happened, there is nothing that needs to be done here
++         * because the system_suspend always returns in fully functional state
++         * no matter what the outcome of suspend procedure is. If the system
++         * suspended successfully the function will return 0 after the resume.
++         * Otherwise, if an error is returned it means Xen did not suspended,
++         * but it is still in the same state as if the system_suspend was never
++         * called. We dump a debug message in case of an error for debugging/
++         * logging purpose.
++         */
++        if ( status )
++            dprintk(XENLOG_ERR, "Failed to suspend, errno=%d\n", status);
++    }
++
+     return PSCI_SUCCESS;
+ }
+ 
 -- 
 2.43.0
 
