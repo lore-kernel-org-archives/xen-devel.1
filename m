@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04BAC19F32
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:12:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901869.1309826 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F597C282D3
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:12:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901866.1309792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknL-0007bd-JS; Wed, 05 Mar 2025 09:12:03 +0000
+	id 1tpknH-0006iW-K0; Wed, 05 Mar 2025 09:11:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901869.1309826; Wed, 05 Mar 2025 09:12:03 +0000
+Received: by outflank-mailman (output) from mailman id 901866.1309792; Wed, 05 Mar 2025 09:11:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknL-0007bR-G8; Wed, 05 Mar 2025 09:12:03 +0000
-Received: by outflank-mailman (input) for mailman id 901869;
- Wed, 05 Mar 2025 09:12:02 +0000
+	id 1tpknH-0006hf-GL; Wed, 05 Mar 2025 09:11:59 +0000
+Received: by outflank-mailman (input) for mailman id 901866;
+ Wed, 05 Mar 2025 09:11:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0bc7=VY=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1tpknK-0006ew-1n
- for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:02 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
+ id 1tpknG-0006ew-CS
+ for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:11:58 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e54738f8-f9a1-11ef-9898-31a8f345e629;
- Wed, 05 Mar 2025 10:12:00 +0100 (CET)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5496301c6afso692341e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:00 -0800 (PST)
+ id e2b81052-f9a1-11ef-9898-31a8f345e629;
+ Wed, 05 Mar 2025 10:11:56 +0100 (CET)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5495078cd59so5447378e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:11:56 -0800 (PST)
 Received: from EPUAKYIW02F7.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.11.58
+ 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.11.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 01:11:59 -0800 (PST)
+ Wed, 05 Mar 2025 01:11:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,188 +47,283 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e54738f8-f9a1-11ef-9898-31a8f345e629
+X-Inumbo-ID: e2b81052-f9a1-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741165920; x=1741770720; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wRks+rWb+OIlYB2/kwqZs9XahqYYzmw08LLO1JIt0RI=;
-        b=WMyptCCFjqVPIuWB/xIruCHKPgSbX71PCVBIDyabxTmopwHQycsh4L2nMG603GrHAA
-         QcvBQwmftH3Ti6INQVhV7nW/gHwivU9eCao8KJTqLBQ7PDIbWIhxUABIBIlPl/Q3BfoP
-         t7GvbJuFZcwaRHpwoGFt3AiOjbXD0LMJE3y4bKmZAY2x1BTlcFMgpr9c4LIDEoJFLjC9
-         fx6rIt1jBMA1WSQ3joNcxmQZegrAvcCu0fXGptYRgxgZUaa8O7jkfKdYCY6ve9O3nawg
-         WCw8Ug6cwYLZYKMPJZdlIv0ZD2Xq4anDR/B6QGsx4s73yvT/AQ2Oe1i7/swPSPQMh8QT
-         WSog==
+        d=gmail.com; s=20230601; t=1741165915; x=1741770715; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LEJ+ewCk5ZTsC4h3KIII2AfTInBLPsRgNesFUNdRhA8=;
+        b=XmB1CAfUGYCLP4asxcaDV+AIZnqCeGh9c2U68tlR9zHXe+SreNzVEtoHSwK8NRCI5K
+         rqliaTolehAp8EYJIb+F/G0hgDhfVH1VrcPm6IwmaBAi+0AOhagdDOpi1z1TRoMdGL0u
+         pERA9KRD2aCRa0Vp8k1HCaaaFlfsffk8/X2PZxnOhafJ6nNNr+5AULnVx95ZZw48Yu1K
+         Oqcgnh5/VBaA4XmkoPVDyBR7T0cfeoFUjTxma0SPBio557IRt8sKFMMPKkseADezBcFV
+         EYn+BMyfXVNkmSBiGKLxi6Y4NvWW+RRmThs4saOb5yd3tpa9V8mC/AReXKUdlJMbZw8n
+         xaUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741165920; x=1741770720;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wRks+rWb+OIlYB2/kwqZs9XahqYYzmw08LLO1JIt0RI=;
-        b=ufDX2NvZOcUEmOHlNJsJyzU0SF3jhqidqTfG2cqiBKCT8J1cyNQddUN/2r86wDEryo
-         7X5EbCA0Tm6bVcJn/ohpLgHQ0gGbBtCpdCJEp27s889pSUiO16tBA6dV56nPbaiQbzYb
-         axrXfZdIlNq1ETmJF2jk2KaAt5/rM6fAI1zSQHZqgmJoOUXYeomEknHjdFTl2VV0CGoH
-         pK72RB2KMKbj4RJXwW+UbhZheTlZMzwgDX+LIu0XlfU4EMu3+G9sD+ZoAH3sm9Ucp0AP
-         jQ1Q0S72omgmfhel0FaF/PsPiu0m+8J1L4DxfLGfE306838nV3PhbHG5zgi9dUYeFdNm
-         apcg==
-X-Gm-Message-State: AOJu0YxKrKWeSXbudYjwNpyXIXsokAbHIeSBh6PV2okN2ch62ly6BjXL
-	ZVJYs810NZKDwS3bGFf233jb368VMZ1fk0J1du3WeKApF/f1IopMgORCL+AI
-X-Gm-Gg: ASbGnctgkqp59TxQL/dy+Se9vbC9yYtR+0IWzE1QF4QtHsJJLA0xQC7QmT2qgGuVj/6
-	FOGN03IvgGiS4HB1gsjjHyEgrVqFY15dHrCma3egIA2aBfyUXuIqDxDBsv/20PWFwEmcAK1Gt/d
-	r+9uTFj87B0X/e6JmGV8a/ztTn0qFXAEPAv4w05itrMEGqSp9eMTkBWEyTC22DRmoihDmYK2p6E
-	r2mZd02BQWBVJSH1nx3GNCotDvdNZ+RxZW3LTJEd5ZPe4s9ZjSRzp21dvoUNzh3cMqAb5IUgoxR
-	hJYX3QRtZnUSpFUHK4WlxkCHcGwvj6AS4y1ZkdG5vP+E9xqIaA==
-X-Google-Smtp-Source: AGHT+IEcZGdsEAbkUwhCCTEVH6cqDWPFh5mffdCfKlFAQCELmtoZxqoKEfiRPyfvNPZRr9np5hHkIw==
-X-Received: by 2002:a05:6512:10c9:b0:549:7394:2ccc with SMTP id 2adb3069b0e04-5497d590109mr680411e87.26.1741165919444;
-        Wed, 05 Mar 2025 01:11:59 -0800 (PST)
+        d=1e100.net; s=20230601; t=1741165915; x=1741770715;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LEJ+ewCk5ZTsC4h3KIII2AfTInBLPsRgNesFUNdRhA8=;
+        b=NznHqM3NgzT0Lr2ut9Z/1sou+R0G56LhfXxICj45dZddGY0KqKOpsgVlwJkkpZu1s6
+         XXAE0gPlr0gvS8wjD3FwdYl8AeW/xcdEi2THCroSKnbjay0gpzRnwQXcLlyB5mk/7nJu
+         mRFcl9IMM4v56KClXFIQEz5e8xESBjYW1AZMxKMjMVy/xFiFwTg9An7D5cXMiKd3s5Zm
+         al7ta9DBDjKKT61STt+7hO4rmGhf0ViNQVFy5NZ1YXbIYaHSwXpT30HIWntzJTsiN548
+         9i6Bg7fgH0lbkAn3AgdZDkbqoEuretDI/XMpfxOwsaTSqe/7SF8DzYnsXzPy61DZHBVe
+         OuKA==
+X-Gm-Message-State: AOJu0Yyl7IR0KeMVbh8Stx4Lzu7t+VLEowMmQPvBVKSs+9NYNlOd4LQc
+	igmbJpo9K+smmuZBvRrrIvgNeAph6NwNQz+YjYTollu1LhR7c0MqxSNeIiX4
+X-Gm-Gg: ASbGnctCYmK94SPMUANJnm7GgXJM5AM+ic3NHhtMHYkVPxP82sN3G492y6iF7GQvPMS
+	BmvYCEdWzkvnU39bSVrEH94NmnPQqjGjbmTpJkYN5ekUTWnf0veLJB2ubvF71puaV6R5ZTEin5Z
+	G3g5/yGryKL3bJMvbKU4RxYS4vjHgGkNzx+KkDkW6s+Nh5X95ceWycNeLnh+ciuzumX7VGwjPui
+	1BBjtmz32joFnDdMp7DekxSdgpW6YV1y9gLolaNdTBU40StEfjJE5a7ptPYHECnJ1/G0SxvjRYt
+	WyjQI2wWDgNn8kn+9NqqCglhgSBPtHKN4w8bHYPFcFq41Lh1zQ==
+X-Google-Smtp-Source: AGHT+IEcD4nTgk8YL1I3NFmMRdVB+e1X/El3bdT1f0iXJeyTNmwDL7bL1fH+nT7mNFvH+Zw1GvGK8A==
+X-Received: by 2002:a05:6512:33d1:b0:545:2efc:7458 with SMTP id 2adb3069b0e04-5497d377827mr726453e87.39.1741165914831;
+        Wed, 05 Mar 2025 01:11:54 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH 04/16] xen/cpu: prevent disable_nonboot_cpus crash on ARM64
-Date: Wed,  5 Mar 2025 11:11:12 +0200
-Message-ID: <e6cc20510acf49d90c08007a2308ef3dcaccc368.1741164138.git.xakep.amatop@gmail.com>
+	Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	George Dunlap <gwd@xenproject.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH 00/16] Suspend to RAM support for Xen on arm64
+Date: Wed,  5 Mar 2025 11:11:08 +0200
+Message-ID: <cover.1741164138.git.xakep.amatop@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1741164138.git.xakep.amatop@gmail.com>
-References: <cover.1741164138.git.xakep.amatop@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If we call disable_nonboot_cpus on ARM64 with system_state set
-to SYS_STATE_suspend, the following assertion will be triggered:
+This is V1 series from Mirela Simonovic. Ported to 4.16 and with added changes
+suggested here
+https://lore.kernel.org/all/CAKPH-NjmaZENb8gT=+FobrAycRF01_--6GuRA2ck9Di5wiudhA@mail.gmail.com
 
-```
-(XEN) [   25.582712] Disabling non-boot CPUs ...
-(XEN) [   25.587032] Assertion '!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1)' failed at common/xmalloc_tlsf.c:714
-[...]
-(XEN) [   25.975069] Xen call trace:
-(XEN) [   25.978353]    [<00000a000022e098>] xfree+0x130/0x1a4 (PC)
-(XEN) [   25.984314]    [<00000a000022e08c>] xfree+0x124/0x1a4 (LR)
-(XEN) [   25.990276]    [<00000a00002747d4>] release_irq+0xe4/0xe8
-(XEN) [   25.996152]    [<00000a0000278588>] time.c#cpu_time_callback+0x44/0x60
-(XEN) [   26.003150]    [<00000a000021d678>] notifier_call_chain+0x7c/0xa0
-(XEN) [   26.009717]    [<00000a00002018e0>] cpu.c#cpu_notifier_call_chain+0x24/0x48
-(XEN) [   26.017148]    [<00000a000020192c>] cpu.c#_take_cpu_down+0x28/0x34
-(XEN) [   26.023801]    [<00000a0000201944>] cpu.c#take_cpu_down+0xc/0x18
-(XEN) [   26.030281]    [<00000a0000225c5c>] stop_machine.c#stopmachine_action+0xbc/0xe4
-(XEN) [   26.038057]    [<00000a00002264bc>] tasklet.c#do_tasklet_work+0xb8/0x100
-(XEN) [   26.045229]    [<00000a00002268a4>] do_tasklet+0x68/0xb0
-(XEN) [   26.051018]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x194
-(XEN) [   26.057585]    [<00000a0000277e30>] start_secondary+0x21c/0x220
-(XEN) [   26.063978]    [<00000a0000361258>] 00000a0000361258
-```
+This is V2 series form Mykyta Poturai:
+https://marc.info/?l=xen-devel&m=166514782207736&w=2
 
-This happens because before invoking take_cpu_down via the stop_machine_run
-function on the target CPU, stop_machine_run requests
-the STOPMACHINE_DISABLE_IRQ state on that CPU. Releasing memory in
-the release_irq function then triggers the assertion:
+This series introduces support for suspend-to-RAM (referred to as "suspend"
+in the following text) for Xen on ARM64. The primary focus of this patch series
+is to add Xen system suspend support. Previous patch series raised many
+questions regarding VCPU context restoration, so the necessary changes will be
+addressed in the next part of this series.
+As part of these changes, all domain flags and related code (which affected
+common functions like vcpu_unblock) have been removed, keeping only the
+essential modifications for Xen suspend/resume. Suspend/resume is now fully
+supported only for the hardware domain. Proper support for domU suspend/resume
+will be added in the next part of this patch series.
 
-/*
- * Heap allocations may need TLB flushes which may require IRQs to be
- * enabled (except when only 1 PCPU is online).
- */
-#define ASSERT_ALLOC_CONTEXT()
+The implementation is aligned with the design specification that has been
+proposed on xen-devel list:
+https://lists.xenproject.org/archives/html/xen-devel/2017-12/msg01574.html
 
-This patch introduces a new tasklet to perform the CPU_DYING call chain for
-a particular CPU. However, we cannot call take_cpu_down from the tasklet
-because the __cpu_disable function disables local IRQs, causing the system
-to crash inside spin_lock_irq, which is called after the tasklet function
-invocation inside do_tasklet_work:
+At a high-level the series contains:
+1) Support for suspending guests via virtual PSCI SYSTEM_SUSPEND call
+2) Support for resuming a guest on an interrupt targeted to that guest
+3) Support for suspending Xen after dom0 finalizes the suspend
+4) Support for resuming Xen on an interrupt that is targeted to a guest
 
-void _spin_lock_irq(spinlock_t *lock)
-{
-    ASSERT(local_irq_is_enabled());
+--------------------------------------------------------------------------------
+TODO:
+1) Add VCPU context reset/restore for non-hardware domains.
+2) Implement xl suspend/resume for Arm (should it follow the x86 approach?).
+3) Support suspend/resume for GICv3.
+4) Add suspend support for Arm32.
 
-To resolve this, take_cpu_down is split into two parts. The first part triggers
-the CPU_DYING call chain, while the second part, __cpu_disable, is invoked from
-stop_machine_run.
+--------------------------------------------------------------------------------
+In more details:
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-This patch was introduced in patch series V3.
----
- xen/common/cpu.c | 43 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
+*** About suspending/resuming guests
 
-diff --git a/xen/common/cpu.c b/xen/common/cpu.c
-index f09af0444b..99d4c0c579 100644
---- a/xen/common/cpu.c
-+++ b/xen/common/cpu.c
-@@ -48,6 +48,10 @@ const unsigned long cpu_bit_bitmap[BITS_PER_LONG+1][BITS_TO_LONGS(NR_CPUS)] = {
- 
- static DEFINE_RWLOCK(cpu_add_remove_lock);
- 
-+#ifdef CONFIG_ARM_64
-+static DEFINE_PER_CPU(struct tasklet, cpu_down_tasklet);
-+#endif
-+
- bool get_cpu_maps(void)
- {
-     return read_trylock(&cpu_add_remove_lock);
-@@ -101,6 +105,14 @@ static void cf_check _take_cpu_down(void *unused)
-     __cpu_disable();
- }
- 
-+#ifdef CONFIG_ARM_64
-+static int cf_check cpu_disable_stop_machine(void *unused)
-+{
-+    __cpu_disable();
-+    return 0;
-+}
-+#endif
-+
- static int cf_check take_cpu_down(void *arg)
- {
-     _take_cpu_down(arg);
-@@ -128,6 +140,14 @@ int cpu_down(unsigned int cpu)
- 
-     if ( system_state < SYS_STATE_active || system_state == SYS_STATE_resume )
-         on_selected_cpus(cpumask_of(cpu), _take_cpu_down, NULL, true);
-+#ifdef CONFIG_ARM_64
-+    else if ( system_state == SYS_STATE_suspend )
-+    {
-+        tasklet_schedule_on_cpu(&per_cpu(cpu_down_tasklet, cpu), cpu);
-+        if ( (err = stop_machine_run(cpu_disable_stop_machine, NULL, cpu)) < 0 )
-+            goto fail;
-+    }
-+#endif
-     else if ( (err = stop_machine_run(take_cpu_down, NULL, cpu)) < 0 )
-         goto fail;
- 
-@@ -247,3 +267,26 @@ void enable_nonboot_cpus(void)
- 
-     cpumask_clear(&frozen_cpus);
- }
-+
-+#ifdef CONFIG_ARM_64
-+
-+static void cf_check cpu_down_t_action(void *unused)
-+{
-+    cpu_notifier_call_chain(smp_processor_id(), CPU_DYING, NULL, true);
-+}
-+
-+static int __init init_cpu_down_tasklet(void)
-+{
-+    unsigned int cpu;
-+
-+    for_each_possible_cpu(cpu) {
-+        struct tasklet *t = &per_cpu(cpu_down_tasklet, cpu);
-+
-+        tasklet_init(t, cpu_down_t_action, NULL);
-+    }
-+
-+    return 0;
-+}
-+__initcall(init_cpu_down_tasklet);
-+
-+#endif /* CONFIG_ARM_64 */
+The patches included in this series allow PSCI compliant guests that have
+support for suspend to RAM (e.g. echo mem > /sys/power/state in Linux) to
+suspend and resume on top of Xen without any EL1 code changes.
+
+During their suspend procedure guests will hot-unplug their secondary CPUs,
+triggering Xen's virtual CPU_OFF PSCI implementation, and then finalize the
+suspend from their boot CPU, triggering Xen's virtual SYSTEM_SUSPEND PSCI.
+Guests will save/restore their own EL1 context on suspend/resume.
+
+A guest is expected to leave enabled interrupts that are considered to be its
+wake-up sources. Those interrupts will be able to wake up the guest. This holds
+regardless of the state of the underlying software layers, i.e. whether Xen gets
+suspended or not doesn't affect the ability of the guest to wake up.
+
+First argument of SYSTEM_SUSPEND PSCI call is a resume entry point, from which
+the guest assumes to start on resume. On resume, guests assume to be running in
+an environment whose state matches the CPU state after reset, e.g. with reset
+register values, MMU disabled, etc. To ensure this, Xen has to 'reset' the
+VCPU context and save the resume entry point into program counter before the
+guest's VCPU gets scheduled in on resume. This is done when the guest resumes.
+Xen also needs to take care that the guest's view of GIC and timer gets saved.
+Also, while a guest is suspended its watchdogs are paused, in order to avoid
+watchdog triggered shutdown of a guest that has been asleep for a period of time
+that is longer than the watchdog period.
+
+After this point, from Xen's point of view a suspended guest has one VCPU
+blocked, waiting for an interrupt. When such an interrupt comes, Xen will
+unblock the VCPU of the suspended domain, which results in the guest
+resuming.
+
+*** About suspending/resuming Xen
+
+Xen starts its own suspend procedure once dom0 is suspended. Dom0 is
+considered to be the decision maker for EL1 and EL2.
+On suspend, Xen will first freeze all domains. Then, Xen disables physical
+secondary CPUs, which leads to physical CPU_OFF to be called by each secondary
+CPU. After that Xen finalizes the suspend from the boot CPU.
+
+This consists of suspending the timer, i.e. suppressing its interrupts (we don't
+want to be woken up by a timer, there is no VCPU ready to be scheduled). Then
+the state of GIC is saved, console is suspended, and CPU context is saved. The
+saved context tells where Xen needs to continue execution on resume.
+Since Xen will resume with MMU disabled, the first thing to do in resume is to
+resume memory management in order to be able to access the context that needs to
+be restored (we know virtual address of the context data). Finally Xen calls
+SYSTEM_SUSPEND PSCI to the EL3.
+
+When resuming, all the steps done in suspend need to be reverted. This is
+completed by unblocking dom0's VCPU, because we always want the dom0 to
+resume,
+regardless of the target domain whose interrupt woke up Xen.
+
+*** Handling of unprivileged guests during Xen suspend/resume
+
+Any domU that is not suspended when dom0 suspends will be frozen, domUs that are
+already suspended remain suspended. On resume the suspended domUs still remain
+suspended (unless their wake interrupt caused Xen to wake) while the
+others will be thawed.
+
+For more details please refer to patches or the design specification:
+https://lists.xenproject.org/archives/html/xen-devel/2017-12/msg01574.html
+
+--------------------------------------------------------------------------------
+CHANGELOG
+
+In this cover letter and in the commit messages within the changelog section:
+- patch series V1 refers to https://marc.info/?l=xen-devel&m=154202231501850&w=2
+- patch series V2 refers to https://marc.info/?l=xen-devel&m=166514782207736&w=2
+
+Changes introduced in V3:
+- drop all domain flags and related code (which touched common functions like
+  vcpu_unblock), keeping only the necessary changes for Xen suspend/resume,
+  i.e. suspend/resume is now fully supported only for the hardware domain.
+  Proper support for domU suspend/resume will be added in a future patch.
+  This patch does not yet include VCPU context reset or domain context
+  restoration in VCPU.
+- add checks before calling IOMMU suspend/resume. These functions may be
+  unimplemented, so check that they exist before calling to prevent crashes
+- prevent disable_nonboot_cpus crash on ARM64. If we call disable_nonboot_cpus
+  on ARM64 with system_state set to SYS_STATE_suspend, the ASSERT_ALLOC_CONTEXT
+  assertion will be triggered
+- drop commit "timer: don't migrate timers during suspend" (see comment
+  https://marc.info/?l=xen-devel&m=167036477229741&w=2). There is no freeze of
+  dom0 on the latest master
+- drop the commit introduced in patch series V2: "xen: don't free percpu areas
+  during suspend." This commit was ported from x86 code, but in the new master,
+  the percpu CPU state change notification call chain has become common, so
+  there is no reason to port this code. The remaining part, which does not
+  belong to the aforementioned patch, "don't initialize percpu on resume," has
+  been introduced in a new separate commit
+- introduce system suspend config option and covered code related to
+  suspend/resume with it
+- implement suspend/resume calls for SCIF driver (it was needed for test
+  purpose, code has been tested on R-Car H3 Starter Kit board)
+- the next commits had been appended with "xen/arm: Trigger Xen suspend when
+  hardware domain completes suspend":
+  -- xen/arm: Disable/enable non-boot physical CPUs on suspend/resume
+  -- xen/arm: Add rcu_barrier() before enabling non-boot CPUs on resume
+  -- xen/arm: Suspend/resume GIC on system suspend/resume
+  -- xen/arm: Resume Dom0 after Xen resumes
+  -- xen/arm: Suspend/resume console on Xen suspend/resume
+- add iommu suspend/resume calls to system suspend/resume
+- return PSCI_NOT_SUPPORTED instead of 1 in case when we call SYSTEM_SUSPEND
+  on ARM32
+- add checking of PSCI version for SYSTEM_SUSPEND call
+- instead of using create_page_tables, enable_mmu, and mmu_init_secondary_cpu,
+  the existing function enable_secondary_cpu_mm is now used
+- prepare_secondary_mm (previously init_secondary_pagetables in the previous
+  patch series) is now called at the end of start_xen instead of
+  setup_pagetables. Calling it in the previous location caused a crash
+- add early printk init during resume
+
+
+Changes introduced in V2:
+- drop commit "xen/arm: Move code that initializes VCPU context into a separate
+  function" (see comment https://marc.info/?l=xen-devel&m=154202861704014&w=2)
+- introduce a separate struct for watchdog timers (see comment
+  https://marc.info/?l=xen-devel&m=154203624106684&w=2)
+- don't initialize percpu on resume, it was a part of "xen: don't free percpu
+  areas during suspend"
+- drop the call to watchdog_domain_resume from ctxt_switch_to; drop suspended
+  field from timer structure introduced for watchdog timer in prev series
+- mov hyp_resume to head.S to place it near the rest of the start code
+- simplify the code in hyp_resume by using existing functions such as
+  check_cpu_mode, cpu_init, create_page_tables, and enable_mmu
+- a lot of changes related to reseting/restoring VCPU context of suspended domU
+
+Mirela Simonovic (9):
+  xen/x86: Move freeze/thaw_domains into common files
+  xen/arm: introduce a separate struct for watchdog timers
+  xen/arm: add suspend and resume timer helpers
+  xen/arm: Implement GIC suspend/resume functions (gicv2 only)
+  xen/arm: Implement PSCI system suspend
+  xen/arm: Trigger Xen suspend when hardware domain completes suspend
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call (physical interface)
+  xen/arm: Resume memory management on Xen resume
+  xen/arm: Save/restore context on suspend/resume
+
+Mykola Kvach (6):
+  xen/cpu: prevent disable_nonboot_cpus crash on ARM64
+  xen/percpu: don't initialize percpu on resume
+  xen/arm: Introduce system suspend config option
+  xen/char: implement suspend/resume calls for SCIF driver
+  xen/arm: add watchdog domain suspend/resume helpers
+  CHANGELOG: Mention Xen suspend/resume to RAM feature on arm64
+
+Mykyta Poturai (1):
+  iommu: Add checks before calling iommu suspend/resume
+
+ CHANGELOG.md                          |   2 +
+ xen/arch/arm/Kconfig                  |  11 +
+ xen/arch/arm/Makefile                 |   1 +
+ xen/arch/arm/arm64/head.S             | 117 ++++++++++
+ xen/arch/arm/gic-v2.c                 | 142 ++++++++++++
+ xen/arch/arm/gic.c                    |  29 +++
+ xen/arch/arm/include/asm/domain.h     |   3 +
+ xen/arch/arm/include/asm/gic.h        |  12 +
+ xen/arch/arm/include/asm/perfc_defn.h |   1 +
+ xen/arch/arm/include/asm/psci.h       |   3 +
+ xen/arch/arm/include/asm/suspend.h    |  41 ++++
+ xen/arch/arm/include/asm/time.h       |   5 +
+ xen/arch/arm/psci.c                   |  19 ++
+ xen/arch/arm/setup.c                  |   8 +
+ xen/arch/arm/suspend.c                | 320 ++++++++++++++++++++++++++
+ xen/arch/arm/time.c                   |  26 +++
+ xen/arch/arm/vpsci.c                  |  32 +++
+ xen/arch/x86/acpi/power.c             |  29 ---
+ xen/common/cpu.c                      |  43 ++++
+ xen/common/domain.c                   |  30 +++
+ xen/common/keyhandler.c               |   2 +-
+ xen/common/percpu.c                   |   3 +-
+ xen/common/sched/core.c               |  50 +++-
+ xen/drivers/char/scif-uart.c          |  31 ++-
+ xen/drivers/passthrough/iommu.c       |   4 +-
+ xen/include/xen/sched.h               |  15 +-
+ xen/include/xen/watchdog.h            |   6 +
+ 27 files changed, 945 insertions(+), 40 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/suspend.h
+ create mode 100644 xen/arch/arm/suspend.c
+
 -- 
 2.43.0
 
