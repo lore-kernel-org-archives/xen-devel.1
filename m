@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC9CC19F32
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:12:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.901865.1309787 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8758C282D9
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Mar 2025 09:12:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.901874.1309853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknH-0006fJ-DS; Wed, 05 Mar 2025 09:11:59 +0000
+	id 1tpknP-0008FW-KE; Wed, 05 Mar 2025 09:12:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 901865.1309787; Wed, 05 Mar 2025 09:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 901874.1309853; Wed, 05 Mar 2025 09:12:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tpknH-0006fC-AC; Wed, 05 Mar 2025 09:11:59 +0000
-Received: by outflank-mailman (input) for mailman id 901865;
- Wed, 05 Mar 2025 09:11:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tpknP-0008Eh-Ck; Wed, 05 Mar 2025 09:12:07 +0000
+Received: by outflank-mailman (input) for mailman id 901874;
+ Wed, 05 Mar 2025 09:12:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0bc7=VY=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1tpknG-0006ev-3k
- for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:11:58 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e332cbbe-f9a1-11ef-9ab4-95dc52dad729;
- Wed, 05 Mar 2025 10:11:56 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5439a6179a7so699978e87.1
- for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:11:56 -0800 (PST)
+ id 1tpknO-0006ew-7y
+ for xen-devel@lists.xenproject.org; Wed, 05 Mar 2025 09:12:06 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e7d6b355-f9a1-11ef-9898-31a8f345e629;
+ Wed, 05 Mar 2025 10:12:04 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-548430564d9so6960606e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Mar 2025 01:12:04 -0800 (PST)
 Received: from EPUAKYIW02F7.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.11.54
+ 2adb3069b0e04-5495de028fasm1078264e87.139.2025.03.05.01.12.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 01:11:55 -0800 (PST)
+ Wed, 05 Mar 2025 01:12:02 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,91 +47,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e332cbbe-f9a1-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: e7d6b355-f9a1-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741165916; x=1741770716; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1741165924; x=1741770724; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=T4XeS6zSJeG9q0Ti33wawxAjOhOjZ//siv8AXi1AOtk=;
-        b=Z8vLOxk0alHGLFrHOvC37xN7nbmefMIoy5VBD1VsFQ0ZW+0c5g/hLZeZ4KqGHvrODa
-         7Idymw9++kxCYSaXg9gL6M6bD1c8Nait3O4LgeNTckmiNwY+z38gl8MIX76Bi7EYjENj
-         HkPc8Qq41/+QIPd+EBtzP3Xe2Ic+dYcsXKZygX20RzPbNF7gO4XyHfLZ2zcepKDkNyZP
-         SdAgOXkVHY+co4pDqvgwl/klSDOld17favVvm6/uM8Ny0q1rJjncC+7SB5Q8hB7acug4
-         JNTkunHtOkCN4H5erizeJozS5mtPZjibzcxgwWZSRZoreNRaqzLPWDtk3G7GQ2KnCfEP
-         lLqA==
+        bh=Hk7OlNvHyGrBIxhedAYhMR4TCL3M3B56gPlyju/+iaE=;
+        b=cDCjt77bN2Pk28HYeWZzKju7Rb0gQh0LFmo0f45du8Zrm9CSkcbMMnKpZQTgeQUNEw
+         SMPAiaJI9FyxPoWIw/zixgqPTHXW7fgKcI6nw/NrKCOd+kDXqH+t4AX5WuXca5dXNHMx
+         pXowUOwCyNIYPAYLAek39kK8EDhDwTSZpkKZBrJY6Fw+8K3X20qGR1wSw4s7cnGpDUjS
+         njzeUKPF/OohHaYKIRUSIMlN5PBeGaEhNCLjWicRXi9wvXOJwWVshbpR6u/jerfOoyN/
+         KsOIlgf90AYv3NGv4HbXBvTbZQUUxAb/2QFj4mpkfhErX3GyvcvpaWm0NoyGGBBAg+t3
+         SBmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741165916; x=1741770716;
+        d=1e100.net; s=20230601; t=1741165924; x=1741770724;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=T4XeS6zSJeG9q0Ti33wawxAjOhOjZ//siv8AXi1AOtk=;
-        b=SDk7Mf/C8RbkUpjsL96BKRuhixJQA2tptjvfCzrw+6yX4EfoOmv5lCyo6H1PVUHmq5
-         +7gl5rI1jJIKw0rgOf0dmtYJcVQpz8LBfyXEPxtdWd+3yIGd36Coqc7c+4IgIWF46mKp
-         BnKHCGQhqaz/S9BoEMbDYXOkF1TO6sUlcKOnjuLtRGvYrh8Og7aDPhxPe1dA5b8MX652
-         AyXHpoa4//yiNQPQlEiy1ipUrA8eQEcQjlEEahjt5nWTMZS5iYLpSav4Qg4hKs+k1Ez4
-         hj85Osatqnm8I1EKd0jd/seWG3JAYXk09fRbtN6xMoeHwRSgWTkxnYuP65MmMVAL5V2n
-         kSDg==
-X-Gm-Message-State: AOJu0YzvtqQuWXuOJM6FRtD/TNmhpqIgZmUSP/tZE3eTT73nTD9NH/bh
-	pciTVBjFNCyoZSMakmwTSCSDcOFVDnWSYjaQT1aH1uOlNnGrwM9qmBnLEi14
-X-Gm-Gg: ASbGncvoWE5N+9WdPwSgTr2+u5CfL5hRpARPTEjDmEWCNCzGoJNdZzdRVyfKvhdFXu2
-	QC/G51cZnHZABGEOjkyOdkHb93cyreTH89f6OwmZvzbnV9SKipNhsJUxf/wHTmPN6ANdTZCOlVV
-	iTezDqhU/rYUIcvKb8gwK6eitQWfGhjYfcVv9B+oymDBPlkkAhCoRjyQEzQ2Lu/wJUe+P6DFGYs
-	1Ik3pEQVLeKq8Ka/rpWvS6AKJjz8UMgmUs90xMGpvf+1bLl1JCZ8DYV7vPh9DtnJTi5TcisXvnh
-	2QZ/oUPcAaxYnHVNLMHRvAgTWeIEUy5a/uYiX1ctVE1dSThcAA==
-X-Google-Smtp-Source: AGHT+IEzx2tmF8LmO96xz1ViG48Q/RJ5BOIdUTEsOdaxihp23QmKd6/iDjkSj80OOC0AXdfcpBahIQ==
-X-Received: by 2002:a05:6512:1248:b0:545:81b:1516 with SMTP id 2adb3069b0e04-5497d375b4amr794923e87.15.1741165915541;
-        Wed, 05 Mar 2025 01:11:55 -0800 (PST)
+        bh=Hk7OlNvHyGrBIxhedAYhMR4TCL3M3B56gPlyju/+iaE=;
+        b=A6ihjZ1ZEHosMdkpGA0qHfLS3+Gg1CjIvFAK3vmxV43LfjhvxYUqsEVH13HYduJQqN
+         sy970NyGQ/E764ALcXVDWUNfpAM79/REgxngbZdpiNRpdkBFqNkUe12Smad+3gUYE+MD
+         VLhGKTPwzfX02R+vWn9541W3GIOvOTnlTfKmSC5SZUxW6/IWUPzGyA/0tnlzR9P6PUBM
+         HoTjdXUuohK36Dv4E4A+mZlTOKOoe4awXl/cXncUI0qI43ZruA7r+Jz/8Cpme6t0IcM+
+         CPIHEG4epO9vuH8s9xKqGOJathV3oNafb+1wvpiSwxis/CFbMynge0lEZnXOZih8mIgc
+         TPAg==
+X-Gm-Message-State: AOJu0Yxtw9ll/0samTbMc25iSHFAw57X10Pl0PcGC/1LxkZphjhDypP7
+	0nBaHbGBlAQRQUDv38rAZJiEa9RUciG+md/2guh+vP+D5n9LfIzAO/awOqIz
+X-Gm-Gg: ASbGnctCVBZL86rywC6SqXELoa1edValxEscJmB7EOZpzvg+l1nbzxN3z1CBUkdZxAP
+	ZyufRqrmlu/pFtKzdPf4KGz60AdNxqUgP4FY7XMuHhGWki9oH3Mlkx363s5UCnBmNrhQ81a8R07
+	0iqvQYfr9d2O+oiLhTHeJgVR+iUXOElucNKN9CUk2r3FCOcmHwRR6Uz/K0hPYw+Iu+p/xR/MUPe
+	6nCNc2wl42PSRZC4wKV5fPAilOj/QBXTPz+N1EaF1cUaYxVjrcz3tTxYlLbprsov70eSItGCZ+c
+	/67Wv+MfTA8BgncIeftSyS0dWWoGeiiiFJDv+LhSCYm8wdPq0w==
+X-Google-Smtp-Source: AGHT+IEIUNIyqIxvynpuLuIPXWu5ZNrVatGILJqxFJ5qgs7gjphHV9/kq2qqAOMcHFIgr20BAbiaZg==
+X-Received: by 2002:a05:6512:3b11:b0:549:7c13:e895 with SMTP id 2adb3069b0e04-5497d380d02mr820547e87.47.1741165923806;
+        Wed, 05 Mar 2025 01:12:03 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mykyta Poturai <mykyta_poturai@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH 01/16] iommu: Add checks before calling iommu suspend/resume
-Date: Wed,  5 Mar 2025 11:11:09 +0200
-Message-ID: <5694f2b73e808ebdc5d5b60a31cfad2b24f0e9d8.1741164138.git.xakep.amatop@gmail.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH 07/16] xen/char: implement suspend/resume calls for SCIF driver
+Date: Wed,  5 Mar 2025 11:11:15 +0200
+Message-ID: <503edd5fb277699aaeb87507bb39fbb52e81f168.1741164138.git.xakep.amatop@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1741164138.git.xakep.amatop@gmail.com>
 References: <cover.1741164138.git.xakep.amatop@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mykyta Poturai <mykyta_poturai@epam.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-These functions may be unimplemented, so check that they exist before
-calling to prevent crashes.
+The changes have been tested only on the Renesas R-Car-H3 Starter Kit board.
 
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Introduced in patch series V3.
----
- xen/drivers/passthrough/iommu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/drivers/char/scif-uart.c | 31 ++++++++++++++++++++++++++++++-
+ 1 file changed, 30 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 16aad86973..55b33c9719 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -613,7 +613,7 @@ int __init iommu_setup(void)
- 
- int iommu_suspend(void)
- {
--    if ( iommu_enabled )
-+    if ( iommu_enabled && iommu_get_ops() && iommu_get_ops()->suspend )
-         return iommu_call(iommu_get_ops(), suspend);
- 
-     return 0;
-@@ -621,7 +621,7 @@ int iommu_suspend(void)
- 
- void iommu_resume(void)
- {
--    if ( iommu_enabled )
-+    if ( iommu_enabled && iommu_get_ops() && iommu_get_ops()->resume )
-         iommu_vcall(iommu_get_ops(), resume);
+diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
+index 757793ca45..e166fb0f36 100644
+--- a/xen/drivers/char/scif-uart.c
++++ b/xen/drivers/char/scif-uart.c
+@@ -139,7 +139,7 @@ static void scif_uart_interrupt(int irq, void *data)
+     }
  }
  
+-static void __init scif_uart_init_preirq(struct serial_port *port)
++static void scif_uart_init_preirq(struct serial_port *port)
+ {
+     struct scif_uart *uart = port->uart;
+     const struct port_params *params = uart->params;
+@@ -271,6 +271,33 @@ static void scif_uart_stop_tx(struct serial_port *port)
+     scif_writew(uart, SCIF_SCSCR, scif_readw(uart, SCIF_SCSCR) & ~SCSCR_TIE);
+ }
+ 
++static void scif_uart_suspend(struct serial_port *port)
++{
++    struct scif_uart *uart = port->uart;
++
++    scif_uart_stop_tx(port);
++
++    /* Wait until last bit has been transmitted. */
++    while ( !(scif_readw(uart, SCIF_SCFSR) & SCFSR_TEND) );
++
++    /* Disable TX/RX parts and all interrupts */
++    scif_writew(uart, SCIF_SCSCR, 0);
++
++    /* Reset TX/RX FIFOs */
++    scif_writew(uart, SCIF_SCFCR, SCFCR_RFRST | SCFCR_TFRST);
++}
++
++static void scif_uart_resume(struct serial_port *port)
++{
++    struct scif_uart *uart = port->uart;
++
++    scif_uart_init_preirq(port);
++
++    /* Enable TX/RX and Error Interrupts  */
++    scif_writew(uart, SCIF_SCSCR, scif_readw(uart, SCIF_SCSCR) |
++                SCSCR_TIE | SCSCR_RIE | SCSCR_REIE);
++}
++
+ static struct uart_driver __read_mostly scif_uart_driver = {
+     .init_preirq  = scif_uart_init_preirq,
+     .init_postirq = scif_uart_init_postirq,
+@@ -281,6 +308,8 @@ static struct uart_driver __read_mostly scif_uart_driver = {
+     .start_tx     = scif_uart_start_tx,
+     .stop_tx      = scif_uart_stop_tx,
+     .vuart_info   = scif_vuart_info,
++    .suspend      = scif_uart_suspend,
++    .resume       = scif_uart_resume,
+ };
+ 
+ static const struct dt_device_match scif_uart_dt_match[] __initconst =
 -- 
 2.43.0
 
