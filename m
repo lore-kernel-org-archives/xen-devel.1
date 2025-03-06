@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DA9C282D1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 14:58:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.903669.1311640 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90971C28B23
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 14:58:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.903671.1311661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCfZ-0003ZM-Lk; Thu, 06 Mar 2025 14:57:53 +0000
+	id 1tqCfb-00042I-6H; Thu, 06 Mar 2025 14:57:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 903669.1311640; Thu, 06 Mar 2025 14:57:53 +0000
+Received: by outflank-mailman (output) from mailman id 903671.1311661; Thu, 06 Mar 2025 14:57:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCfZ-0003ZF-J6; Thu, 06 Mar 2025 14:57:53 +0000
-Received: by outflank-mailman (input) for mailman id 903669;
- Thu, 06 Mar 2025 14:57:52 +0000
+	id 1tqCfb-00042D-2P; Thu, 06 Mar 2025 14:57:55 +0000
+Received: by outflank-mailman (input) for mailman id 903671;
+ Thu, 06 Mar 2025 14:57:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bSAR=VZ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tqCfY-0003Ye-8V
- for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:57:52 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
+ id 1tqCfZ-0003Ye-U6
+ for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:57:53 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5f72d3b3-fa9b-11ef-9898-31a8f345e629;
- Thu, 06 Mar 2025 15:57:50 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5dee07e51aaso1404598a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Mar 2025 06:57:50 -0800 (PST)
+ id 60ae5c41-fa9b-11ef-9898-31a8f345e629;
+ Thu, 06 Mar 2025 15:57:52 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-abf615d5f31so149569966b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Mar 2025 06:57:52 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac239736806sm107856366b.114.2025.03.06.06.57.48
+ a640c23a62f3a-ac2399d7da1sm108296266b.174.2025.03.06.06.57.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 06:57:48 -0800 (PST)
+ Thu, 06 Mar 2025 06:57:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,47 +46,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f72d3b3-fa9b-11ef-9898-31a8f345e629
+X-Inumbo-ID: 60ae5c41-fa9b-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741273069; x=1741877869; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741273071; x=1741877871; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=H7pow39J9Fqm1i6O6VXYZWww5I3btdSW6Ay9WFCMqtw=;
-        b=rfkBSziw1v1FTEDZQ7iBZGUJlVlcf0rSThsFM02l/2Kr1u4l2OL0SRlXCUqY+Xe1LZ
-         FPHtZ4RWGqZys6H1Ctk5WxUEczlHCeTmGcKUaZ33ky94WFNmyqGAcCAfP1kaCJiHWrQg
-         rCuowRGw26+W+h7Hbq4rtUqBnrdMq3kJP5Yms=
+        bh=B0ajY6/Y8/keQc8NjGLWYTwjQvi4qUcVQxavVZsdDtc=;
+        b=OSKIIfMV3Se6Dj1GgHVLdxoPO8T9oLTTV6PFQFMVEzBh5dkd2JAeLY7bVvLI4pmnfk
+         5V0RNZSk2B43ZASSIpZswAooAQws10lRZ6RU7Aqp3sgxqhfYOsm9pphIhU0+JDGbk+uU
+         xCPIY3W6+nUjsDKaYndU+MCUrOY+yBuRkl8Rk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741273069; x=1741877869;
+        d=1e100.net; s=20230601; t=1741273071; x=1741877871;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=H7pow39J9Fqm1i6O6VXYZWww5I3btdSW6Ay9WFCMqtw=;
-        b=EjMWK0DOSk9ZJBivjf2BTxLp9smH7jrk4vCnLHUj7X9OsGXjzNuZcGZwytxpCrGDGW
-         UizGBNeWaWXQH2xpAex4a6wyDXs5HJI64vQIMmDpdcx4A9CwkCZvmZWXTUS0hUzQ6ALa
-         kZAcMEMuEUaujbkaEUX0Yevhc5zCUcJ20OcaOw71iSVSRYbBz7QhXEKPOoUlp8yGXzLa
-         qN+16NVYCz/Szh7/kHp8QFoUyAka+4gSM8SpVQNebwA/DDZ+ip2o+gWRH8uXm0JjjNzw
-         EDMs49MawpMACacH78LWvDAYk5feebWcMrACE7lbzpIddRLmiOCBV2ydHEN7ADQU4K0d
-         o/uA==
-X-Gm-Message-State: AOJu0Yzo0jO4RqRvCEPr5f1QdkoTHmwA2acwolSKO77LwKHXqo6qxItZ
-	6V2yYlyW9pJMcIZKiIMgdU6nVmmpCjpIcMuOZ2f35oIB///TRG6C/hF48UwUmLaSLIYDGehyoEt
-	W
-X-Gm-Gg: ASbGncvlCad4YC4w4Qu1BhATls8lFoB8PsnEj2gMm6fEvrSa/ZS2JFSTsnvDQZs67Oy
-	VLtOrSbCgmSopbVYxA3h3+lWiaGHBhgNSLWK+tnjLK4IzxUwXYK4bzyl7LoPFODj9n73Nrsdk3L
-	lc6W6XeCFrkv7pqcTwZGVNP9ZEe0v1JBiGOb0JokRTuZ9PaeuP/wHTU1j+RIo5HPaW6B9G9iNNg
-	WcaOUokh4nk/2gjyb1DcHdHOLUi554d19x/JzxvPW+aa4ghMkzGt/fZTHaAJz6LfNBfmcjmP2ym
-	g+SBrlzWiITjmxx5NtpP+fhJVchS8UwFveKmjMQOSyYY4E6bhg==
-X-Google-Smtp-Source: AGHT+IG4mF3y+mP2g16zoYYgZihbJs/9r+0n2H/r6BcnwQ4z1OO4c95bb6eKQRmnnXveCwH5993pYw==
-X-Received: by 2002:a17:907:8b97:b0:ac1:d8a9:f853 with SMTP id a640c23a62f3a-ac20e1db11amr826930266b.48.1741273068824;
-        Thu, 06 Mar 2025 06:57:48 -0800 (PST)
+        bh=B0ajY6/Y8/keQc8NjGLWYTwjQvi4qUcVQxavVZsdDtc=;
+        b=UrfD86Op3FzO4P5q3vn+W6vKIEIDzMUBb7FVjb021UvFgEMBZldm/M3SCTpHEw+Ofp
+         RsxL2sj6SJiqxyk3+sg3UE6ry1sWxmCXg2qxJ38L4UCLyuuB14rF6wSNr2/P6gAJs7gA
+         86sxCfRH6+mPwYvqMk6O/rUDOwq+xPHG3whgYODdtw2zcOwWot4MCkHXqHggWNBpC4j3
+         3UVG3YB7YyXVkbGar622LgOIgpmA/mjkmmrkg7slJgCmcfGxyjWOQ+3xnynzC/kdkqJm
+         +k3wB7OCY+j5kPqhk19sjhjgHDemUNFm1C8ASbXiorLFN3c8qYnw/+5BGtgZnKklwMdY
+         4Efg==
+X-Gm-Message-State: AOJu0YyKIzkN3Fhhxd8R+UE0E8VXaJbMIdqQb8tcy/0cmDq4PC/HbdUj
+	baRaMmDlYWCOx8NeZDBbohEKjCdR0svbg4A/Jc5vA4jh6LLo05Ev0l8ahDKt4Q8zSLDuv65EtaQ
+	V
+X-Gm-Gg: ASbGncsPxaVMYcbEk+PCSgSIR14h+oziq24tnf0fvlCCN1rFa1PzzbEPvBpZTl5pXeT
+	cmXVv5xRQCd3+LM8HSf3Aj81FRCTC6bOCDMDRDsSqfNDWHmnqe7hNCCUWRvb7Hk/FjbySrgGvKw
+	F+UuJNAScDWkimUk1LyQ1wCJaO+k/gjsE/pAlQVhmFqXjOlW/oSXflPivctfbhj3pqMG0rT5VRv
+	RV8wXqrZaPfhi2G1e1TCfdnoIHhHSrGOtJlzYBmiW3EyHfGYXz4jEgEtdn8tFxqvjOJtYYscZcd
+	sAMVRsqp5pFDG2SqJrg9UXvrc7kmVrhFCUjx8ZSWLIxCU6smiw==
+X-Google-Smtp-Source: AGHT+IE2B7p5OoJyNXIoaN0PqeztgJP7eTf3Cgh/ZrhNPresO+mqR0S9cIopnm16cGFXVTLk4TB4bA==
+X-Received: by 2002:a17:907:971c:b0:ac1:e881:89aa with SMTP id a640c23a62f3a-ac20d849e84mr720030066b.5.1741273071290;
+        Thu, 06 Mar 2025 06:57:51 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 1/3] x86/apic: remove delivery and destination mode fields from drivers
-Date: Thu,  6 Mar 2025 15:57:31 +0100
-Message-ID: <20250306145733.99927-2-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH v2 3/3] x86/msi: prevent MSI entry re-writes of the same data
+Date: Thu,  6 Mar 2025 15:57:33 +0100
+Message-ID: <20250306145733.99927-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250306145733.99927-1-roger.pau@citrix.com>
 References: <20250306145733.99927-1-roger.pau@citrix.com>
@@ -94,168 +95,176 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All local APIC drivers use physical destination and fixed delivery modes,
-remove the fields from the genapic struct and simplify the logic.
+Attempt to reduce the MSI entry writes, and the associated checking whether
+memory decoding and MSI-X is enabled for the PCI device, when the MSI data
+hasn't changed.
 
-No functional change intended.
+When using Interrupt Remapping the MSI entry will contain an index into
+the remapping table, and it's in such remapping table where the MSI vector
+and destination CPU is stored.  As such, when using interrupt remapping,
+changes to the interrupt affinity shouldn't result in changes to the MSI
+entry, and the MSI entry update can be avoided.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/genapic/bigsmp.c      |  2 --
- xen/arch/x86/genapic/default.c     |  2 --
- xen/arch/x86/genapic/x2apic.c      |  4 ----
- xen/arch/x86/include/asm/genapic.h |  5 -----
- xen/arch/x86/io_apic.c             | 16 ++++++++--------
- xen/arch/x86/msi.c                 | 11 +++--------
- 6 files changed, 11 insertions(+), 29 deletions(-)
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>
+---
+Changes since v1:
+ - Add more comments.
+ - Simplify dma_msi_set_affinity().
+---
+ xen/arch/x86/include/asm/msi.h      |  5 +++-
+ xen/arch/x86/msi.c                  | 45 ++++++++++++++++++++---------
+ xen/drivers/passthrough/vtd/iommu.c | 11 +++----
+ 3 files changed, 39 insertions(+), 22 deletions(-)
 
-diff --git a/xen/arch/x86/genapic/bigsmp.c b/xen/arch/x86/genapic/bigsmp.c
-index b2e721845275..ddb3a0b5d727 100644
---- a/xen/arch/x86/genapic/bigsmp.c
-+++ b/xen/arch/x86/genapic/bigsmp.c
-@@ -46,8 +46,6 @@ static int __init cf_check probe_bigsmp(void)
+diff --git a/xen/arch/x86/include/asm/msi.h b/xen/arch/x86/include/asm/msi.h
+index 378b85ee947b..4301c58c7c4d 100644
+--- a/xen/arch/x86/include/asm/msi.h
++++ b/xen/arch/x86/include/asm/msi.h
+@@ -124,7 +124,8 @@ struct msi_desc {
+     int irq;
+     int remap_index;         /* index in interrupt remapping table */
  
- const struct genapic __initconst_cf_clobber apic_bigsmp = {
- 	APIC_INIT("bigsmp", probe_bigsmp),
--	.int_delivery_mode = dest_Fixed,
--	.int_dest_mode = 0, /* physical delivery */
- 	.init_apic_ldr = init_apic_ldr_phys,
- 	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
- 	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
-diff --git a/xen/arch/x86/genapic/default.c b/xen/arch/x86/genapic/default.c
-index 59c79afdb8fa..16e1875f6378 100644
---- a/xen/arch/x86/genapic/default.c
-+++ b/xen/arch/x86/genapic/default.c
-@@ -16,8 +16,6 @@
- /* should be called last. */
- const struct genapic __initconst_cf_clobber apic_default = {
- 	APIC_INIT("default", NULL),
--	.int_delivery_mode = dest_Fixed,
--	.int_dest_mode = 0, /* physical delivery */
- 	.init_apic_ldr = init_apic_ldr_flat,
- 	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
- 	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
-diff --git a/xen/arch/x86/genapic/x2apic.c b/xen/arch/x86/genapic/x2apic.c
-index c277f4f79b0a..74a6d808ac30 100644
---- a/xen/arch/x86/genapic/x2apic.c
-+++ b/xen/arch/x86/genapic/x2apic.c
-@@ -140,8 +140,6 @@ static void cf_check send_IPI_mask_x2apic_cluster(
+-    struct msi_msg msg;      /* Last set MSI message */
++    /* Last set MSI message in remappable format if applicable */
++    struct msi_msg msg;
+ };
  
- static const struct genapic __initconst_cf_clobber apic_x2apic_phys = {
-     APIC_INIT("x2apic_phys", NULL),
--    .int_delivery_mode = dest_Fixed,
--    .int_dest_mode = 0 /* physical delivery */,
-     .init_apic_ldr = init_apic_ldr_phys,
-     .vector_allocation_cpumask = vector_allocation_cpumask_phys,
-     .cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
-@@ -163,8 +161,6 @@ static const struct genapic __initconst_cf_clobber apic_x2apic_mixed = {
-      * The following fields are exclusively used by external interrupts and
-      * hence are set to use Physical destination mode handlers.
-      */
--    .int_delivery_mode = dest_Fixed,
--    .int_dest_mode = 0 /* physical delivery */,
-     .vector_allocation_cpumask = vector_allocation_cpumask_phys,
-     .cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
+ /*
+@@ -236,6 +237,8 @@ struct arch_msix {
+ };
  
-diff --git a/xen/arch/x86/include/asm/genapic.h b/xen/arch/x86/include/asm/genapic.h
-index cf36d48f3b07..04d3f1de7a1f 100644
---- a/xen/arch/x86/include/asm/genapic.h
-+++ b/xen/arch/x86/include/asm/genapic.h
-@@ -23,9 +23,6 @@ struct genapic {
- 	const char *name;
- 	int (*probe)(void);
- 
--	/* Interrupt delivery parameters ('physical' vs. 'logical flat'). */
--	int int_delivery_mode;
--	int int_dest_mode;
- 	void (*init_apic_ldr)(void);
- 	const cpumask_t *(*vector_allocation_cpumask)(int cpu);
- 	unsigned int (*cpu_mask_to_apicid)(const cpumask_t *cpumask);
-@@ -37,8 +34,6 @@ struct genapic {
- 	.name = aname, \
- 	.probe = aprobe
- 
--#define INT_DELIVERY_MODE (genapic.int_delivery_mode)
--#define INT_DEST_MODE (genapic.int_dest_mode)
- #define TARGET_CPUS ((const typeof(cpu_online_map) *)&cpu_online_map)
- #define init_apic_ldr() alternative_vcall(genapic.init_apic_ldr)
- #define cpu_mask_to_apicid(mask) ({ \
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index 776dd57720a2..60b39827c851 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -1080,8 +1080,8 @@ static void __init setup_IO_APIC_irqs(void)
-              */
-             memset(&entry,0,sizeof(entry));
- 
--            entry.delivery_mode = INT_DELIVERY_MODE;
--            entry.dest_mode = INT_DEST_MODE;
-+            entry.delivery_mode = dest_Fixed;
-+            entry.dest_mode = 0;
-             entry.mask = 0;                /* enable IRQ */
- 
-             idx = find_irq_entry(apic,pin,mp_INT);
-@@ -1150,10 +1150,10 @@ static void __init setup_ExtINT_IRQ0_pin(unsigned int apic, unsigned int pin, in
-      * We use logical delivery to get the timer IRQ
-      * to the first CPU.
-      */
--    entry.dest_mode = INT_DEST_MODE;
-+    entry.dest_mode = 0;
-     entry.mask = 0;					/* unmask IRQ now */
-     SET_DEST(entry, logical, cpu_mask_to_apicid(TARGET_CPUS));
--    entry.delivery_mode = INT_DELIVERY_MODE;
-+    entry.delivery_mode = dest_Fixed;
-     entry.polarity = 0;
-     entry.trigger = 0;
-     entry.vector = vector;
-@@ -2338,8 +2338,8 @@ int io_apic_set_pci_routing (int ioapic, int pin, int irq, int edge_level, int a
- 
-     memset(&entry,0,sizeof(entry));
- 
--    entry.delivery_mode = INT_DELIVERY_MODE;
--    entry.dest_mode = INT_DEST_MODE;
-+    entry.delivery_mode = dest_Fixed;
-+    entry.dest_mode = 0;
-     entry.trigger = edge_level;
-     entry.polarity = active_high_low;
-     entry.mask  = 1;
-@@ -2473,8 +2473,8 @@ int ioapic_guest_write(unsigned long physbase, unsigned int reg, u32 val)
-      * The guest does not know physical APIC arrangement (flat vs. cluster).
-      * Apply genapic conventions for this platform.
-      */
--    rte.delivery_mode = INT_DELIVERY_MODE;
--    rte.dest_mode     = INT_DEST_MODE;
-+    rte.delivery_mode = dest_Fixed;
-+    rte.dest_mode     = 0;
- 
-     irq = apic_pin_2_gsi_irq(apic, pin);
-     if ( irq < 0 )
+ void early_msi_init(void);
++
++/* If cpu_mask is NULL msg->dest32 is used as the destination APIC ID. */
+ void msi_compose_msg(unsigned vector, const cpumask_t *cpu_mask,
+                      struct msi_msg *msg);
+ void __msi_set_enable(pci_sbdf_t sbdf, int pos, int enable);
 diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index bf5b71822ea9..6c11d76015fb 100644
+index 8efe41b1526c..3c9fdc9b7bf5 100644
 --- a/xen/arch/x86/msi.c
 +++ b/xen/arch/x86/msi.c
-@@ -174,18 +174,13 @@ void msi_compose_msg(unsigned vector, const cpumask_t *cpu_mask, struct msi_msg
- 
-     msg->address_hi = MSI_ADDR_BASE_HI;
-     msg->address_lo = MSI_ADDR_BASE_LO |
--                      (INT_DEST_MODE ? MSI_ADDR_DESTMODE_LOGIC
--                                     : MSI_ADDR_DESTMODE_PHYS) |
--                      ((INT_DELIVERY_MODE != dest_LowestPrio)
--                       ? MSI_ADDR_REDIRECTION_CPU
--                       : MSI_ADDR_REDIRECTION_LOWPRI) |
-+                      MSI_ADDR_DESTMODE_PHYS |
-+                      MSI_ADDR_REDIRECTION_CPU |
-                       MSI_ADDR_DEST_ID(msg->dest32);
- 
-     msg->data = MSI_DATA_TRIGGER_EDGE |
-                 MSI_DATA_LEVEL_ASSERT |
--                ((INT_DELIVERY_MODE != dest_LowestPrio)
--                 ? MSI_DATA_DELIVERY_FIXED
--                 : MSI_DATA_DELIVERY_LOWPRI) |
-+                MSI_DATA_DELIVERY_FIXED |
-                 MSI_DATA_VECTOR(vector);
+@@ -152,11 +152,13 @@ static bool msix_memory_decoded(const struct pci_dev *dev, unsigned int pos)
  }
  
+ /*
+- * MSI message composition
++ * MSI message composition.
++ * If cpu_mask is NULL msg->dest32 is used as the destination APIC ID.
+  */
+ void msi_compose_msg(unsigned vector, const cpumask_t *cpu_mask, struct msi_msg *msg)
+ {
+-    memset(msg, 0, sizeof(*msg));
++    msg->address = 0;
++    msg->data = 0;
+ 
+     if ( vector < FIRST_DYNAMIC_VECTOR )
+         return;
+@@ -186,8 +188,6 @@ void msi_compose_msg(unsigned vector, const cpumask_t *cpu_mask, struct msi_msg
+ 
+ static int write_msi_msg(struct msi_desc *entry, struct msi_msg *msg)
+ {
+-    entry->msg = *msg;
+-
+     if ( iommu_intremap != iommu_intremap_off )
+     {
+         int rc;
+@@ -198,6 +198,20 @@ static int write_msi_msg(struct msi_desc *entry, struct msi_msg *msg)
+             return rc;
+     }
+ 
++    /*
++     * Avoid updating the MSI entry if the address and data fields haven't
++     * changed.  When using interrupt remapping changing the MSI affinity
++     * shouldn't change the interrupt remapping table index, and hence the MSI
++     * address and data fields should remain the same.
++     */
++    if ( entry->msg.address == msg->address && entry->msg.data == msg->data )
++    {
++        entry->msg.dest32 = msg->dest32;
++        return 0;
++    }
++
++    entry->msg = *msg;
++
+     switch ( entry->msi_attrib.type )
+     {
+     case PCI_CAP_ID_MSI:
+@@ -243,21 +257,15 @@ static int write_msi_msg(struct msi_desc *entry, struct msi_msg *msg)
+ void cf_check set_msi_affinity(struct irq_desc *desc, const cpumask_t *mask)
+ {
+     struct msi_msg msg;
+-    unsigned int dest;
+     struct msi_desc *msi_desc = desc->msi_desc;
+ 
+-    dest = set_desc_affinity(desc, mask);
+-    if ( dest == BAD_APICID || !msi_desc )
++    msg.dest32 = set_desc_affinity(desc, mask);
++    if ( msg.dest32 == BAD_APICID || !msi_desc )
+         return;
+ 
+     ASSERT(spin_is_locked(&desc->lock));
+ 
+-    msg = msi_desc->msg;
+-    msg.data &= ~MSI_DATA_VECTOR_MASK;
+-    msg.data |= MSI_DATA_VECTOR(desc->arch.vector);
+-    msg.address_lo &= ~MSI_ADDR_DEST_ID_MASK;
+-    msg.address_lo |= MSI_ADDR_DEST_ID(dest);
+-    msg.dest32 = dest;
++    msi_compose_msg(desc->arch.vector, NULL, &msg);
+ 
+     write_msi_msg(msi_desc, &msg);
+ }
+@@ -1402,7 +1410,16 @@ int pci_restore_msi_state(struct pci_dev *pdev)
+         }
+         type = entry->msi_attrib.type;
+ 
+-        msg = entry->msg;
++        /*
++         * Instead of re-writing the current MSI message, regenerate it and
++         * force a write, as that's simpler than adding support for writing
++         * already translated messages.
++         */
++        msg.dest32 = entry->msg.dest32;
++        /* Pass NULL as the cpu mask to use the value in msg.dest32. */
++        msi_compose_msg(desc->arch.vector, NULL, &msg);
++        /* Zero the cached message to unconditionally trigger a re-write. */
++        entry->msg = (typeof(entry->msg)){};
+         write_msi_msg(entry, &msg);
+ 
+         for ( i = 0; ; )
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index a1927d9f126d..e03e9dfbc595 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1183,22 +1183,19 @@ static void cf_check dma_msi_set_affinity(
+     struct irq_desc *desc, const cpumask_t *mask)
+ {
+     struct msi_msg msg;
+-    unsigned int dest;
+     unsigned long flags;
+     struct vtd_iommu *iommu = desc->action->dev_id;
+ 
+-    dest = set_desc_affinity(desc, mask);
+-    if (dest == BAD_APICID){
++    msg.dest32 = set_desc_affinity(desc, mask);
++    if ( msg.dest32 == BAD_APICID )
++    {
+         dprintk(XENLOG_ERR VTDPREFIX, "Set iommu interrupt affinity error!\n");
+         return;
+     }
+ 
+     msi_compose_msg(desc->arch.vector, NULL, &msg);
+-    msg.dest32 = dest;
+     if (x2apic_enabled)
+-        msg.address_hi = dest & 0xFFFFFF00;
+-    ASSERT(!(msg.address_lo & MSI_ADDR_DEST_ID_MASK));
+-    msg.address_lo |= MSI_ADDR_DEST_ID(dest);
++        msg.address_hi = msg.dest32 & 0xFFFFFF00;
+     iommu->msi.msg = msg;
+ 
+     spin_lock_irqsave(&iommu->register_lock, flags);
 -- 
 2.48.1
 
