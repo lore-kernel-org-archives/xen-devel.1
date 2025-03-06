@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20D6C28B25
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E087FC28B26
 	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 14:58:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.903668.1311630 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.903670.1311644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCfW-0003Ku-E4; Thu, 06 Mar 2025 14:57:50 +0000
+	id 1tqCfZ-0003cC-TQ; Thu, 06 Mar 2025 14:57:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 903668.1311630; Thu, 06 Mar 2025 14:57:50 +0000
+Received: by outflank-mailman (output) from mailman id 903670.1311644; Thu, 06 Mar 2025 14:57:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCfW-0003Kn-BJ; Thu, 06 Mar 2025 14:57:50 +0000
-Received: by outflank-mailman (input) for mailman id 903668;
- Thu, 06 Mar 2025 14:57:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tqCfZ-0003ba-QD; Thu, 06 Mar 2025 14:57:53 +0000
+Received: by outflank-mailman (input) for mailman id 903670;
+ Thu, 06 Mar 2025 14:57:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bSAR=VZ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tqCfV-0003Kh-VS
- for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:57:49 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e7006ee-fa9b-11ef-9ab4-95dc52dad729;
- Thu, 06 Mar 2025 15:57:48 +0100 (CET)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5e5b56fc863so1040226a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 06 Mar 2025 06:57:48 -0800 (PST)
+ id 1tqCfY-0003Ye-Tn
+ for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:57:52 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 60063f9f-fa9b-11ef-9898-31a8f345e629;
+ Thu, 06 Mar 2025 15:57:51 +0100 (CET)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ac202264f9cso142640466b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Mar 2025 06:57:51 -0800 (PST)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-5e5c766a5bcsm1047165a12.52.2025.03.06.06.57.46
+ a640c23a62f3a-ac2397366b0sm108721266b.95.2025.03.06.06.57.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 06:57:47 -0800 (PST)
+ Thu, 06 Mar 2025 06:57:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,79 +46,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e7006ee-fa9b-11ef-9ab4-95dc52dad729
+X-Inumbo-ID: 60063f9f-fa9b-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741273067; x=1741877867; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=R9okKGy1Ukh5/aWvO8oi8GhhT5BkRrsj5qYA0OFbWio=;
-        b=W1YE89Csxx4CnAPuvNwk1aWPLQpIZbe0c29rHAsjnO0olPLrYotlmhS9noZcmxfqgB
-         sXd1fkVU3OLhkrfOgGo+m4A1yk16zRQdC7nl5hLX6jlLensP/KQDTzHYJPNDKzvSf/Bz
-         nHJUMLBzpdy+1RkMh18H6XIgO0RtOvkqCXcIw=
+        d=citrix.com; s=google; t=1741273070; x=1741877870; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vNP8vm8lWdnrLbuaqz+aHqlLq12YGejtAmi/o97vgI4=;
+        b=TJdmp6Zu2lFXbVJPlBCUJK3UujvTS4qKcLTax0etcuECMKZcTocI2ytum4Lcz+lefG
+         hSrk2PlVB05Uvq7kzDGgr0M7OxamurAdQCDRGCWFkw+xUWbI5ym3+mdif2bTHt9eFath
+         hzGqjBzYfZvE/abCID7GfBiy0avKXlhiPSd+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741273067; x=1741877867;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=R9okKGy1Ukh5/aWvO8oi8GhhT5BkRrsj5qYA0OFbWio=;
-        b=bqnygNlG1ELHwcZ6nzhYoIrSMqRFLvkvWzqVsnEnP7ikxBh+nugtN7AbOFFy+b4COJ
-         31YSozPDyhZUTcy8/BxGkr9C4geNJlHlcMXK9dAS0azMEJ7yw4bfBXLrqYYQTqCgwKbA
-         U0YWNSoSMfP19A/kVNYDR9CCybFWofOa5ZD4UjPygF/xN446NJfSgIbvVMQQafoZP3gy
-         YVnpmS4SDaynYHEeUwsyHLYua3qhnoA/bEp2dviz3Es7Cqlg+5Ze2y2bPQ/MJrDdM75s
-         k4Jsnq9Z22Ye2WuS8wMg+F02swQ8GmNpe6TSJbTeZwyYXugAdl56LrKz3cxzIEljm4cR
-         XCKA==
-X-Gm-Message-State: AOJu0YzCbAK6K8KRXni+Leqfw3t+GgvP99EMdmxJvmTRAgagfpnchwn1
-	gr+d4k8wITXLT2+ZkoAGJs15XYnCktfToKP0d8MKT5gmKReXzWAFZngKBsyWDTnhgn9DsNi1EiG
-	/
-X-Gm-Gg: ASbGnctk609D51JzDPjzLBpKzeQF0ttZIvLXrUP+50Ii05rGNFmZLMzyd8zONQFRzAH
-	i2HJPnyg1nHmZCSEcLOLCxDkAevrL5iNoNy87Oxgwzel7XPTL/ZOwzPbjubHuozBCs/1ft7FgMr
-	BXq9ow4w0iM54c51Zspt+49nBUGzHWadQsh+3czl43NJCaiR+Yf9w5J7N8bd8jV8+MCWGmkZO21
-	XSlu/dGRWgQ6B1tuyA8zXkkxUXNPM5oaDxFqetuTM/IUqaB4qJdZnCRanyNIJYaC/9NTgTcccPa
-	5Js9hEtUyQvvUmVM0uL9bg4E0z0kS+wmgddZwfH+gP/eVQ4NHw==
-X-Google-Smtp-Source: AGHT+IEkz9hMV9atqNruizRKMDeVwQ7L2bHip7C6XoVxwsBwbg9VwJKZy+YkOStro/VgiJnBf6+bVw==
-X-Received: by 2002:a05:6402:4405:b0:5e5:bfab:51e with SMTP id 4fb4d7f45d1cf-5e5bfab11aamr4759004a12.0.1741273067589;
-        Thu, 06 Mar 2025 06:57:47 -0800 (PST)
+        d=1e100.net; s=20230601; t=1741273070; x=1741877870;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vNP8vm8lWdnrLbuaqz+aHqlLq12YGejtAmi/o97vgI4=;
+        b=jdSISu1sUrXdTAmk5CDL7X4S8naIi8rUY1RFa/BDWN57u3yM7JwAZxXZreXMXvH6bm
+         9RoV58fpuQKJaW5YFy58smqLnoWQkicGUScpvXGHxQlUy5n8O17DzpULSg9hI+lRa3S5
+         m/2WDTAMOsi4+L4tADiCZg5fAgXHrDhsymkLjTHAeLN/2YIH4nEmKkwqYcL4i6Hzn2l9
+         QppPfsCuOIxPAq1lVC2Z3Xxg0KEzuRE8eDiT0uIRGsD+BrYucBHRWzuTXRd7mie5s8sO
+         jWj6bRvN4S+5CXMDYTHjZ8wkIF16b2Ahv+Kzs0zMcS88mZqbq7t3W5uL1OEacZ3QgGH3
+         4VXA==
+X-Gm-Message-State: AOJu0YwYSEdoHh3/8nNbWCQVTyewLMkXSBFghJjH4t08cLvX4Vsl6y8J
+	fozrjJY0hU/f6fXLBJaVNxpHZ5xcAjjGFxGX2MYuM0NFFG8n8aUoxTUFZdCo7NEbNfqLanVKFvH
+	1
+X-Gm-Gg: ASbGncuuN+lN0kKKONbC/V5GzkJBLuptNuuKm4Y62XzMMNeaMdurhLKfZQ7fbK4cgv5
+	RH7MR0hLnDSNUDoqGnkqnXANTfVVPplyDK8p2Ck2052yERtCXWcszva44mq2RyliIzzqLctUkNw
+	SCkI5/jLqzPOMY06qisUYg3QL7bSaBfhIqWj/dPu9etLMpRYnj7qel9Mpn03IdBoRULr4AxgZUI
+	khF9w0WKDPXRksRlJ1JozwgHqKJV3VT2M/SOty5wAbVGdAbOj0+gMMwZ3J9hkFMjAiGp2xIsL6M
+	njHMDvTRGNZmMgg1ceGeii5qsC+e/MuT/I/JKloHrelYS7u2qw==
+X-Google-Smtp-Source: AGHT+IG0pm1OZ77YuKmjL3LH/3H8U9L5m9NV2t1kaq5tZs3yxKMeA8gmbqAImUfjwe6gxUaizZysVw==
+X-Received: by 2002:a17:907:7ea6:b0:ac1:e00c:a561 with SMTP id a640c23a62f3a-ac20dac2c06mr781304266b.18.1741273070145;
+        Thu, 06 Mar 2025 06:57:50 -0800 (PST)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v2 0/3] x86/pci: reduce PCI accesses
-Date: Thu,  6 Mar 2025 15:57:30 +0100
-Message-ID: <20250306145733.99927-1-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 2/3] x86/msi: don't use cached address and data fields in msi_desc for dump_msi()
+Date: Thu,  6 Mar 2025 15:57:32 +0100
+Message-ID: <20250306145733.99927-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250306145733.99927-1-roger.pau@citrix.com>
+References: <20250306145733.99927-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+Instead compose a dummy MSI message just for the purpose of getting the
+delivery attributes, which are the same for all messages.  Note that the
+previous usage of the cached MSI message wasn't fetching the hardware MSI
+fields either.
 
-First patch is not really related, but it's some cleanup I've found
-while looking at the other fixes.  Patch 2 switched dump_msi() to not
-rely on the cached MSI message, and finally patch 3 changes the logic to
-prevent re-writing the same MSI message.
+No functional change intended.
 
-Patches 1 and 2 are new in this version, and have no changelog.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/msi.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
 
-Thanks, Roger.
-
-Roger Pau Monne (3):
-  x86/apic: remove delivery and destination mode fields from drivers
-  x86/msi: don't use cached address and data fields in msi_desc for
-    dump_msi()
-  x86/msi: prevent MSI entry re-writes of the same data
-
- xen/arch/x86/genapic/bigsmp.c       |  2 -
- xen/arch/x86/genapic/default.c      |  2 -
- xen/arch/x86/genapic/x2apic.c       |  4 --
- xen/arch/x86/include/asm/genapic.h  |  5 --
- xen/arch/x86/include/asm/msi.h      |  5 +-
- xen/arch/x86/io_apic.c              | 16 +++----
- xen/arch/x86/msi.c                  | 73 ++++++++++++++++++-----------
- xen/drivers/passthrough/vtd/iommu.c | 11 ++---
- 8 files changed, 62 insertions(+), 56 deletions(-)
-
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index 6c11d76015fb..8efe41b1526c 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -1454,6 +1454,16 @@ void __init early_msi_init(void)
+ static void cf_check dump_msi(unsigned char key)
+ {
+     unsigned int irq;
++    struct msi_msg msg = {};
++    uint32_t addr, data;
++
++    /*
++     * Compose a dummy msg message for the purpose of getting the delivery
++     * attributes.
++     */
++    msi_compose_msg(FIRST_DYNAMIC_VECTOR, NULL, &msg);
++    addr = msg.address_lo;
++    data = msg.data;
+ 
+     printk("MSI information:\n");
+ 
+@@ -1461,7 +1471,7 @@ static void cf_check dump_msi(unsigned char key)
+     {
+         struct irq_desc *desc = irq_to_desc(irq);
+         const struct msi_desc *entry;
+-        u32 addr, data, dest32;
++        uint32_t dest32;
+         signed char mask;
+         struct msi_attrib attr;
+         unsigned long flags;
+@@ -1495,8 +1505,6 @@ static void cf_check dump_msi(unsigned char key)
+             break;
+         }
+ 
+-        data = entry->msg.data;
+-        addr = entry->msg.address_lo;
+         dest32 = entry->msg.dest32;
+         attr = entry->msi_attrib;
+         if ( entry->msi_attrib.type )
+@@ -1512,8 +1520,7 @@ static void cf_check dump_msi(unsigned char key)
+             mask = '?';
+         printk(" %-6s%4u vec=%02x%7s%6s%3sassert%5s%7s"
+                " dest=%08x mask=%d/%c%c/%c\n",
+-               type, irq,
+-               (data & MSI_DATA_VECTOR_MASK) >> MSI_DATA_VECTOR_SHIFT,
++               type, irq, desc->arch.vector,
+                data & MSI_DATA_DELIVERY_LOWPRI ? "lowest" : "fixed",
+                data & MSI_DATA_TRIGGER_LEVEL ? "level" : "edge",
+                data & MSI_DATA_LEVEL_ASSERT ? "" : "de",
 -- 
 2.48.1
 
