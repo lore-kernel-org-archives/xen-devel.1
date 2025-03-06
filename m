@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC59C28B23
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 08:41:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.903106.1311065 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D16C282DE
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 08:41:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.903109.1311075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tq6mS-0003mC-KK; Thu, 06 Mar 2025 08:40:36 +0000
+	id 1tq6mW-00049I-TK; Thu, 06 Mar 2025 08:40:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 903106.1311065; Thu, 06 Mar 2025 08:40:36 +0000
+Received: by outflank-mailman (output) from mailman id 903109.1311075; Thu, 06 Mar 2025 08:40:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tq6mS-0003m4-HR; Thu, 06 Mar 2025 08:40:36 +0000
-Received: by outflank-mailman (input) for mailman id 903106;
- Thu, 06 Mar 2025 08:40:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tq6mW-000493-Pp; Thu, 06 Mar 2025 08:40:40 +0000
+Received: by outflank-mailman (input) for mailman id 903109;
+ Thu, 06 Mar 2025 08:40:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jWYO=VZ=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1tq6mQ-00031D-SQ
- for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 08:40:34 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2062b.outbound.protection.outlook.com
- [2a01:111:f403:240a::62b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a9e1cd9e-fa66-11ef-9898-31a8f345e629;
- Thu, 06 Mar 2025 09:40:33 +0100 (CET)
-Received: from CH5P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::6)
- by CH2PR12MB4277.namprd12.prod.outlook.com (2603:10b6:610:ae::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.16; Thu, 6 Mar
- 2025 08:40:28 +0000
+ id 1tq6mV-0002me-7F
+ for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 08:40:39 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20619.outbound.protection.outlook.com
+ [2a01:111:f403:2009::619])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id adf85bdd-fa66-11ef-9ab4-95dc52dad729;
+ Thu, 06 Mar 2025 09:40:38 +0100 (CET)
+Received: from CH5P220CA0006.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::29)
+ by SA3PR12MB8438.namprd12.prod.outlook.com (2603:10b6:806:2f6::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.29; Thu, 6 Mar
+ 2025 08:40:34 +0000
 Received: from CH1PEPF0000AD7B.namprd04.prod.outlook.com
- (2603:10b6:610:1ef:cafe::78) by CH5P220CA0011.outlook.office365.com
- (2603:10b6:610:1ef::6) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:610:1ef:cafe::c2) by CH5P220CA0006.outlook.office365.com
+ (2603:10b6:610:1ef::29) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.19 via Frontend Transport; Thu,
- 6 Mar 2025 08:40:28 +0000
+ 6 Mar 2025 08:40:34 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CH1PEPF0000AD7B.mail.protection.outlook.com (10.167.244.58) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Thu, 6 Mar 2025 08:40:28 +0000
+ 15.20.8511.15 via Frontend Transport; Thu, 6 Mar 2025 08:40:34 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Thu, 6 Mar 2025 02:40:25 -0600
+ 15.1.2507.39; Thu, 6 Mar 2025 02:40:32 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a9e1cd9e-fa66-11ef-9898-31a8f345e629
+X-Inumbo-ID: adf85bdd-fa66-11ef-9ab4-95dc52dad729
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uk7aVPNrTtGtcazS/ioVo/VS3XGTgflA0p+GinXfkS4tbRtbnviRHQEhnoy6qYPR02L9nD5kvxsDoJgnJ4ykwx3lD8zCvzXlsK8x0K8RHmi/+H2kozMDnb0HRg3Ug8EbCpiyxTH6Lc7nAHkLR+NYCAM9N9YywCJMW5/4vKzLMXla1YsArIGjhWL+r+zCc4XZT44I0CmmA9CjhhIGpzVoH+J7FnCZnjLXFSda67PKiLaafAkoJn4rWgWWjstKKNq0D8Mj07VVrfOdeTgnD8opqj7VR4jlEG/I6eEpOF90L9Jfso+kRK3ZA/Hb2mGYyOXXTelHg+d2gRIzUNu3eZtTLQ==
+ b=jiGkm58SIq3A3nnw6v6N5KFzImrZEmlVc120q/g042Eqj2qXDjS3V0c7fBCSjbK9Lt5x7LlZlwWd2Dpl3lWyTu8lrhrDa+QDD9CRUPFcVEMKdX/nPj6TFmLXYoX+3ltSAVplFD6e1q+354Bs+rht1CT82nanRY/E3WtujiZoX0J5iTBSoqbYHo6Cpqj/JoTkQ6Ee5rPwRJQ1JwjZnNmS7pmHIwFgVm3a0DvCzcATlAQwURwY9oEhwxSCRFeYYnMoWNw856UTpPnEm4Jlk1DJLVqOV755Jk/WpjW+g9vWF6FuI90dmq0nXqHhMu7sJ4en9ZLt2fotG/bERRF1l0O+uA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UZp2+G1TYgiDs8/3pvuGjDp7277SjubF6dG/247ETo4=;
- b=wSeMZLK+JnxG7ufz2TZsKhLanXQGhxBhjrVxTeXVNMNZuEIjQzkwG4dfbJN8bgyp0JDnLQnDetNTevxWpzgLqxyfE6+rA0eCefJYrXQ1E9ImnlNWW2muMq3JH//5NM8rfi7gM5BW9QEqsspb3nsXXY+bwcbRoWuCr8A0TM00fbWXfOVI95pX4YAg9aQ+dN6VNu65sOcdb1D7OOVy5XiQ5rDFobH6KUKsV7a8owV84SOlnNGNNfYcuEt6ujNONo6yFZO2xjac+MQmzPs5wf9j0BTwsOXo+MW/AWr7KKpup8wqwCXqK8qoeCjiEBuLmuWto2RehdoqfvywASVftTnWww==
+ bh=kSdlpwHNaFj5OS2imbtjum5c5CmmJOs5A2Jk0nNrpsQ=;
+ b=WR4ei67p+3Kq6Wp4SuMfFVx+v9y4WBbnhNQFkbvXl7CbDtp35t4Y+DRAeQXO907XbfA47yR+Pqvzh3rq/gXoezW72PlCs2S18bKgSWvcDAAqc5Cj0hDja/h3qP1MXcMDZE8ZeCbg+UXKrzE8359ekM2ofI6jGoU+5YcMFlCTXKFyrBtZoCocm9YH6CHfl+gvd9ijUIYI3hb2xOZfXMwwBwmkTGKte3l9yzfjbt3YqJVmzcS/KgvHdqagMGDw3VeRWOOux8v//dIdpc4QiQa/W1ggVCXl0TCZW8CLAcHZUiVSrFjv6PcKrgjx6+EK2vobpJLGeb5liGkSNP/AatYenw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UZp2+G1TYgiDs8/3pvuGjDp7277SjubF6dG/247ETo4=;
- b=hSh9taaFY9+XcZL0FOERFVxS0B3ELwd96sZAcbUaZ1JTaF1ZRdpENHHOycOfAZ3A/v61jBsJwL/QZLTOmN/MHfNwJiUupta4pBMzsvu6ecL1ffy4Ag23xtouYAIoaYxTM5fPtVxWLNChE7C8Q2eAsbN09QPVwsbBQ5ddN+eJeyc=
+ bh=kSdlpwHNaFj5OS2imbtjum5c5CmmJOs5A2Jk0nNrpsQ=;
+ b=uFz02SrxFqG2q+00nXev7OH9gITS5DQAraXLXZU5azZ9T6JqnPeXzwvxbEcHhL73nSjRPuIdWCCHN2G4fpYMg6sTZrMbAD9QYGH4T412dujZU07WyreHC1qGHGAzWG0jKKfUzYB9VKkuA+WQuQwbCvEDsWQ3HU7G5ifrVZgNVm8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -84,12 +84,10 @@ From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 04/15] xen/cpufreq: move XEN_PROCESSOR_PM_xxx to internal header
-Date: Thu, 6 Mar 2025 16:39:38 +0800
-Message-ID: <20250306083949.1503385-5-Penny.Zheng@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 07/15] xen/cpufreq: fix core frequency calculation for AMD Family 1Ah CPUs
+Date: Thu, 6 Mar 2025 16:39:41 +0800
+Message-ID: <20250306083949.1503385-8-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250306083949.1503385-1-Penny.Zheng@amd.com>
 References: <20250306083949.1503385-1-Penny.Zheng@amd.com>
@@ -101,152 +99,124 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7B:EE_|CH2PR12MB4277:EE_
-X-MS-Office365-Filtering-Correlation-Id: 538ca215-dead-41e5-0613-08dd5c8a8c17
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7B:EE_|SA3PR12MB8438:EE_
+X-MS-Office365-Filtering-Correlation-Id: 05d509fc-7ace-409e-4f05-08dd5c8a8fed
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
+	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?9y7d66izbhqYTbk/WBgwZf5vgni82nYIeKNafKmpDszIQbXtz0tafC5UV/Vo?=
- =?us-ascii?Q?PwdH8XhF91oO157FtOmfbXJt9r245lcxMv2AjMt14c5gxysh2IPDh6S9yFIi?=
- =?us-ascii?Q?EKFO1+oFET+SsPlgJUIa6LHX4wpwzAGMnLBdUHkfhd7EJCz4MeUltsk61uJj?=
- =?us-ascii?Q?WtvTPIST3daSEHDzEGwEp1xncQWDeIxrkkou3zW+gWwRVOOKWwQllzngn7ho?=
- =?us-ascii?Q?oLKEkQyAjY+5YpWgxDneax+sPnqwMbarOio0dHcNy0FaA3l0+9nq5shgnIlk?=
- =?us-ascii?Q?ij/NtKlaEBi0Jy7Tv35q8/Y7sLaNydvyNNljrQs9MP6NmAM6a1zT+2f0KQfx?=
- =?us-ascii?Q?RuJGTA4AzmxF5hmbIdxT/GWtgv0yvM+Itnz3bVGd981ON7ZYZVg3vgDordqT?=
- =?us-ascii?Q?SbciPwxZgVrG1/BBUNC6Y6PjmIYpxdmDftMN3DHAg8xSUl3KtyeReF6vEH1n?=
- =?us-ascii?Q?d0hB5gbkj4hDyLgFdfgQbeabJtTjXslllmMcY6WTYB5zCreTaDnV0lNPO9Vq?=
- =?us-ascii?Q?USoilxU02r4DvJq+lqavDYn1f8S3VvhZ27vIQxuryJsnknHUKFUla/orfo89?=
- =?us-ascii?Q?BbeReaqAk5evBNrej9OQiaNHrHIV7o4+VsM7PKTtGD84ou0ySDpCVT7lPAZe?=
- =?us-ascii?Q?59Q4cJoORNAh6I553hMQVbaaYw6C4Fkl6D9ZwaDv+dYXyWidfbuQ1GevcsN8?=
- =?us-ascii?Q?HRHSrSlZDceoeZrjEhqKmIUUXfeuhc3Dog0rBNnLsXx/RkInv86HyAhjt9D+?=
- =?us-ascii?Q?N5U4TYw8lds6qrjJGBsw/sTTzkE5wRlkz19/YOVorfJlPfR19U/BcOtWCGbK?=
- =?us-ascii?Q?dQ+pXU+lu8pC/WQouoU4PaeMhXqajedlKPFSoIidVfcmnJR2SRbOVLEZ+s10?=
- =?us-ascii?Q?Co6m5KWGpj/ZMKn8Wp9PFLSEKRb++6X3d81H5p7R1sfrjk4DSWYCa+KNuqAP?=
- =?us-ascii?Q?ggXHMljxMF52q+PSiewDSExjTb37/0yT7Q37U/X3kX8XQ1ZtC8TmURnxp75i?=
- =?us-ascii?Q?vcyqf2uIea+7YWvgS9z7VzXWfsBTdAlMvHeuuGERRsTEmOrLNTrIBVi9BGBb?=
- =?us-ascii?Q?BYGzInIWDQK2ptQfc9tf/GvVZni2+jUfqGPC7qQWc1pXvBP9y+6h9s+lKRAX?=
- =?us-ascii?Q?FzxbaZ6DoPK53XLfR/hNJi242NQZRfJ9m1vVQh6S1fX0fXh1XdupLATNLPEW?=
- =?us-ascii?Q?5PcdAsJz2z9G/cp7f58ygIKDGlZ0Dnsizes7SpTtjyVRSaiv1yn1PBuFyDoF?=
- =?us-ascii?Q?ZJRku9WGJR6hrWqmV20+odB866mxbYyMHcTyyMMEnFgHz4c7kqRv0/VmpC/b?=
- =?us-ascii?Q?szB+E9tf9+jTINzG13mh6qbrqhH9o9esGR9JogiAWedH4a6Wc1QKU/bfAh97?=
- =?us-ascii?Q?10iXfRWVGuazeoM5d3IlW5pBnnkEsVUcuWCyuXtv0UxvE4wjIBLWgRkWYTUs?=
- =?us-ascii?Q?pyX0+yDhJIUn57zszqA28IZWuIXysv1nkMicFCc2Gz20KtXwYrFzOB86ndbS?=
- =?us-ascii?Q?vYDEUljGbv1FICE=3D?=
+	=?us-ascii?Q?pr41rT1nieL4lrsw+V4JYD9MPfYoHWN3eArCKJkJxOlHZPIdWyf7H+3JRYRt?=
+ =?us-ascii?Q?vIT5/jJR1a6NVLSxeRIVEVXY0E4DmgmOQFjz7IoCTuvqARouBaTQKltZJJJF?=
+ =?us-ascii?Q?jl3MtJSlUjxkrkZo7dKcNPkh5z/ScLCjLduOr5BwXzo1d/diD2344OLpxJJy?=
+ =?us-ascii?Q?A46kGYfGF6zjq9f/tHNX9pLGN0afPZw2hjFos4HyKmXrYlgN8ULKVqs4DIgZ?=
+ =?us-ascii?Q?Y5UxR9XE3rbVeOXHQtQJuCV4WjE+uCdE7lKIFhqSgMKuX8uZxs56Dj5XopKe?=
+ =?us-ascii?Q?XhM4vkcIlZu7jW7P8R8Bn90xQRmPZtT0AKilQtwLpGRRIAD4vaSBgglnSoth?=
+ =?us-ascii?Q?+e5g7R2Is89me+p2WHkse9Ar+sz+v+X6+fSRMENnju4E4XI/OFaVJrcpaKZM?=
+ =?us-ascii?Q?mjrPast2ifERKCkOnz9wCan2805WntrqIx3SZM4QrpVBYpZ/k6Y6zig1xJVu?=
+ =?us-ascii?Q?0O0NtkNbk9JYrGo8PzA4ZiXb2CXGn5g4CL1cIwL9MwO1jfsvrrbmomilRI9d?=
+ =?us-ascii?Q?Pmd+Aq2OdqRBnT9g8pq35T0PUCaAf2/Nma51/K2+PVNF2HtomnABNNeGjS9U?=
+ =?us-ascii?Q?uHCcogdYax9XtQ98uJbUUg9O1DpD8i5+rz+tWLqt6hpQInSYKVDfGNQLDnKg?=
+ =?us-ascii?Q?bfAfKfLVVqiRG4A5emuE4j8/sbi40qKxxx1ozLVJ43w7/ESw8Dlea3m/nQZK?=
+ =?us-ascii?Q?lNxETwnTSxgJQcRb7QC5ODtEw0Ag4uJyqqMgyahe+b3OEP1w33CNO4OVRrE0?=
+ =?us-ascii?Q?nqkA3XMqz2sL9hgbjHYFtQSfmH6FC/kA+v6kQy64TOmgzpPhQLAH1Gnirqsw?=
+ =?us-ascii?Q?c69GvADM5svZIhu8BijIbsMFteEn2ZDV7GTIT6w/eaolqTGU1p84/kJvvWla?=
+ =?us-ascii?Q?FtQyiIonLTSB/FiFQrb10y+TdZpGlTY9rF8fcybxD/FQ5/moQkVSSI1YIaRB?=
+ =?us-ascii?Q?E2swfR+0hE8Uvpsst9DHjeAfT66Nxgg0Fyj7vzf28kIyQaj9NtLo/e+aGr/h?=
+ =?us-ascii?Q?XGykxa1llovmX8FPrRF1OzZ7iBZWpvmXbpnoD+i8na9S95ZJdRxJgonZrMMp?=
+ =?us-ascii?Q?LykzqBP6q/KxvRDj2DIQ/OH6caxY/EkqqiihrmjnJ9QV/b/W9YvtMHb5NTL9?=
+ =?us-ascii?Q?lU3kHSdNkCbi7c90UvHr+qOdhELbfjsCkQ+gtXz/TUAbFt9VPcnclLjru6cN?=
+ =?us-ascii?Q?q4A8LAFfyydB7o2McD1S5xlU9eRR4s9+K/aRYFE82aV9t1BH92vUmt3Ep3xo?=
+ =?us-ascii?Q?oVrzFihMs0xYJ0L/PRMG5LB6trdnkG5tuHRgkOQk1Vsbj/N5fI1y8lRlDrSB?=
+ =?us-ascii?Q?mCoOX8sg7Do190ngjVp8WNe9k0si5yu+aSEQbLKd2B4N9oGbJ29ckHJItjja?=
+ =?us-ascii?Q?LLNMS9M+KoRFreQReAzl8c6BatEcJvzG9xaTWHS5mqMyD7fhAprxhan5cXf1?=
+ =?us-ascii?Q?77nywQiCf/8vlHdQFQ+MAL9GF37nq/Gt/yjtZ8V0OHlJJT6NXQI3anEOMGmQ?=
+ =?us-ascii?Q?MVcZb8mEiwjiKvo=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2025 08:40:28.1102
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2025 08:40:34.5477
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 538ca215-dead-41e5-0613-08dd5c8a8c17
+X-MS-Exchange-CrossTenant-Network-Message-Id: 05d509fc-7ace-409e-4f05-08dd5c8a8fed
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	CH1PEPF0000AD7B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4277
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8438
 
-XEN_PROCESSOR_PM_xxx are used to set xen_processor_pmbits only, which is
-a Xen-internal variable only. Although PV Dom0 passed these bits in si->flags,
-they haven't been used anywhere.
-So this commit moves XEN_PROCESSOR_PM_xxx back to internal header
-"acpi/cpufreq/processor_perf.h"
+This commit fixes core frequency calculation for AMD Family 1Ah CPUs, due to
+a change in the PStateDef MSR layout in AMD Family 1Ah+.
+In AMD Family 1Ah+, Core current operating frequency in MHz is calculated as
+follows:
+CoreCOF = Core::X86::Msr::PStateDef[CpuFid[11:0]] * 5MHz
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
 v2 -> v3:
 - new commit
 ---
- xen/arch/x86/pv/dom0_build.c              | 1 -
- xen/arch/x86/setup.c                      | 1 +
- xen/common/domain.c                       | 1 +
- xen/include/acpi/cpufreq/processor_perf.h | 5 +++++
- xen/include/public/platform.h             | 5 -----
- xen/include/public/xen.h                  | 1 -
- 6 files changed, 7 insertions(+), 7 deletions(-)
+ xen/arch/x86/cpu/amd.c | 27 ++++++++++++++++++++-------
+ 1 file changed, 20 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 96e28c7b6a..a62948b0e8 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -886,7 +886,6 @@ static int __init dom0_construct(struct boot_info *bi, struct domain *d)
-         si->flags    = SIF_PRIVILEGED | SIF_INITDOMAIN;
-     if ( !vinitrd_start && initrd_len )
-         si->flags   |= SIF_MOD_START_PFN;
--    si->flags       |= MASK_INSR(xen_processor_pmbits, SIF_PM_MASK);
-     si->pt_base      = vpt_start;
-     si->nr_pt_frames = nr_pt_pages;
-     si->mfn_list     = vphysmap_start;
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 8ebe5a9443..5101b381fe 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -62,6 +62,7 @@
- #include <asm/prot-key.h>
- #include <asm/pv/domain.h>
- #include <asm/trampoline.h>
-+#include <acpi/cpufreq/cpufreq.h>
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 597b0f073d..7fb1d76798 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -572,12 +572,24 @@ static void amd_get_topology(struct cpuinfo_x86 *c)
+                                                           : c->cpu_core_id);
+ }
  
- /* opt_nosmp: If true, secondary processors are ignored. */
- static bool __initdata opt_nosmp;
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 0c4cc77111..05cfa1d885 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -43,6 +43,7 @@
- #include <xsm/xsm.h>
- #include <xen/trace.h>
- #include <asm/setup.h>
-+#include <acpi/cpufreq/cpufreq.h>
- 
- #ifdef CONFIG_X86
- #include <asm/guest.h>
-diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
-index 12b6e6b826..33edf112a0 100644
---- a/xen/include/acpi/cpufreq/processor_perf.h
-+++ b/xen/include/acpi/cpufreq/processor_perf.h
-@@ -5,6 +5,11 @@
- #include <public/sysctl.h>
- #include <xen/acpi.h>
- 
-+/* ability bits */
-+#define XEN_PROCESSOR_PM_CX 1
-+#define XEN_PROCESSOR_PM_PX 2
-+#define XEN_PROCESSOR_PM_TX 4
++static uint64_t amd_parse_freq(const struct cpuinfo_x86 *c, uint64_t value)
++{
++	ASSERT(c->x86 <= 0x1A);
 +
- #define XEN_CPPC_INIT 0x40000000U
- #define XEN_PX_INIT   0x80000000U
++	if (c->x86 < 0x17)
++		return (((value & 0x3f) + 0x10) * 100) >> ((value >> 6) & 7);
++	else if (c->x86 <= 0x19)
++		return ((value & 0xff) * 25 * 8) / ((value >> 8) & 0x3f);
++	else
++		return (value & 0xfff) * 5;
++}
++
+ void amd_log_freq(const struct cpuinfo_x86 *c)
+ {
+ 	unsigned int idx = 0, h;
+ 	uint64_t hi, lo, val;
  
-diff --git a/xen/include/public/platform.h b/xen/include/public/platform.h
-index 07f4b72014..24cc5812ed 100644
---- a/xen/include/public/platform.h
-+++ b/xen/include/public/platform.h
-@@ -353,11 +353,6 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_getidletime_t);
+-	if (c->x86 < 0x10 || c->x86 > 0x19 ||
++	if (c->x86 < 0x10 || c->x86 > 0x1A ||
+ 	    (c != &boot_cpu_data &&
+ 	     (!opt_cpu_info || (c->apicid & (c->x86_num_siblings - 1)))))
+ 		return;
+@@ -658,19 +670,20 @@ void amd_log_freq(const struct cpuinfo_x86 *c)
+ 	if (!(lo >> 63))
+ 		return;
  
- #define XENPF_set_processor_pminfo      54
+-#define FREQ(v) (c->x86 < 0x17 ? ((((v) & 0x3f) + 0x10) * 100) >> (((v) >> 6) & 7) \
+-		                     : (((v) & 0xff) * 25 * 8) / (((v) >> 8) & 0x3f))
+ 	if (idx && idx < h &&
+ 	    !rdmsr_safe(0xC0010064 + idx, val) && (val >> 63) &&
+ 	    !rdmsr_safe(0xC0010064, hi) && (hi >> 63))
+ 		printk("CPU%u: %lu (%lu ... %lu) MHz\n",
+-		       smp_processor_id(), FREQ(val), FREQ(lo), FREQ(hi));
++		       smp_processor_id(),
++		       amd_parse_freq(c, val),
++		       amd_parse_freq(c, lo), amd_parse_freq(c, hi));
+ 	else if (h && !rdmsr_safe(0xC0010064, hi) && (hi >> 63))
+ 		printk("CPU%u: %lu ... %lu MHz\n",
+-		       smp_processor_id(), FREQ(lo), FREQ(hi));
++		       smp_processor_id(),
++		       amd_parse_freq(c, lo), amd_parse_freq(c, hi));
+ 	else
+-		printk("CPU%u: %lu MHz\n", smp_processor_id(), FREQ(lo));
+-#undef FREQ
++		printk("CPU%u: %lu MHz\n", smp_processor_id(),
++		       amd_parse_freq(c, lo));
+ }
  
--/* ability bits */
--#define XEN_PROCESSOR_PM_CX	1
--#define XEN_PROCESSOR_PM_PX	2
--#define XEN_PROCESSOR_PM_TX	4
--
- /* cmd type */
- #define XEN_PM_CX   0
- #define XEN_PM_PX   1
-diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
-index e051f989a5..941d288ec1 100644
---- a/xen/include/public/xen.h
-+++ b/xen/include/public/xen.h
-@@ -877,7 +877,6 @@ typedef struct start_info start_info_t;
- #define SIF_MOD_START_PFN (1<<3)  /* Is mod_start a PFN? */
- #define SIF_VIRT_P2M_4TOOLS (1<<4) /* Do Xen tools understand a virt. mapped */
-                                    /* P->M making the 3 level tree obsolete? */
--#define SIF_PM_MASK       (0xFF<<8) /* reserve 1 byte for xen-pm options */
- 
- /*
-  * A multiboot module is a package containing modules very similar to a
+ void cf_check early_init_amd(struct cpuinfo_x86 *c)
 -- 
 2.34.1
 
