@@ -4,56 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56614C282D1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 14:48:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.903655.1311622 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DA9C282D1
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Mar 2025 14:58:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.903669.1311640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCW3-0008Py-ID; Thu, 06 Mar 2025 14:48:03 +0000
+	id 1tqCfZ-0003ZM-Lk; Thu, 06 Mar 2025 14:57:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 903655.1311622; Thu, 06 Mar 2025 14:48:03 +0000
+Received: by outflank-mailman (output) from mailman id 903669.1311640; Thu, 06 Mar 2025 14:57:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqCW3-0008Pr-Dn; Thu, 06 Mar 2025 14:48:03 +0000
-Received: by outflank-mailman (input) for mailman id 903655;
- Thu, 06 Mar 2025 14:48:01 +0000
+	id 1tqCfZ-0003ZF-J6; Thu, 06 Mar 2025 14:57:53 +0000
+Received: by outflank-mailman (input) for mailman id 903669;
+ Thu, 06 Mar 2025 14:57:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0N12=VZ=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tqCW1-0008Pl-An
- for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:48:01 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20624.outbound.protection.outlook.com
- [2a01:111:f403:2405::624])
+ <SRS0=bSAR=VZ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tqCfY-0003Ye-8V
+ for xen-devel@lists.xenproject.org; Thu, 06 Mar 2025 14:57:52 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc4c046e-fa99-11ef-9898-31a8f345e629;
- Thu, 06 Mar 2025 15:47:55 +0100 (CET)
-Received: from SN1PR12CA0113.namprd12.prod.outlook.com (2603:10b6:802:21::48)
- by SJ2PR12MB7846.namprd12.prod.outlook.com (2603:10b6:a03:4c9::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.19; Thu, 6 Mar
- 2025 14:47:51 +0000
-Received: from SA2PEPF00003AEA.namprd02.prod.outlook.com
- (2603:10b6:802:21:cafe::ff) by SN1PR12CA0113.outlook.office365.com
- (2603:10b6:802:21::48) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.19 via Frontend Transport; Thu,
- 6 Mar 2025 14:47:51 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF00003AEA.mail.protection.outlook.com (10.167.248.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Thu, 6 Mar 2025 14:47:50 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 08:47:50 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 08:47:49 -0600
-Received: from [172.20.156.222] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 6 Mar 2025 08:47:49 -0600
+ id 5f72d3b3-fa9b-11ef-9898-31a8f345e629;
+ Thu, 06 Mar 2025 15:57:50 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5dee07e51aaso1404598a12.3
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Mar 2025 06:57:50 -0800 (PST)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ a640c23a62f3a-ac239736806sm107856366b.114.2025.03.06.06.57.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Mar 2025 06:57:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,167 +46,217 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc4c046e-fa99-11ef-9898-31a8f345e629
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mIq/nyWOEztUz2mFyxpzwbmjrUg27dlz5Vid32FnlLOkFsY1HsGwZVzxz8f3EWviiAd6TkznMmcGT36SlcXOIaTkwnQMxAK9WLRdd/eU9STxGhPDxQqv79WN6H0SOCcwdNEcTNIJX1vhSdoEDYP1WdgZqV4iU3dp5N6jhrOZjsBp+g5FWZR9SnsY0vIgQNm3ECtm786e8zObVrFbAbXRcjQdn+xHle23E3OsZHq5Xejvq3H496TuFzRjZ+FvUhJyN4Fb86BRHDABp0fPIg8i5fnzcUFoMuaP+2Z01OtyEu3z8l/cPgZxNnIZe4BWtk/vECyaIGthd42nJ/WYpnQo0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1heS64KgZ3r02jYamtEMX/Puq01EbLbBLG4OpDXOigY=;
- b=Y00MNGhu80DIVvgesQSI7WvmopQNOku3ExyD08r085voeRAWVYnurNcO6oaxEg84NFWm2pe0XchqPu4Vucsw6kboNl/CET8HBbxEKdrrY/tTD2ry9yIxShRsLBvIQbObaaVSRmisz3NZIG9iV5Yh4zuRSNtB00RMhoTkmyFAy5EziPUUsqxvDInuXh1SPt2JEHAYRybSeHM4iwdrcU/AGnuBhaJBO1epPhsjSMllY5N98XpTnxfbAQ0RidV8qatI91uv5JYbE+5O7+fjJhaYiGPkIHGAjcoUkOjH+Dn98ZEbVjI7x8921YG1/c8tcn5277eIsHO0fhjl/NbCkMqtCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1heS64KgZ3r02jYamtEMX/Puq01EbLbBLG4OpDXOigY=;
- b=M6zaiK25SooZgtYNjd1q3VIK+PGPdUJa8VYR2wcmE2Fu96nPvaLkVKONemV5ILIk7oX7ZVWnO2Web+7/oHpRy7Y4khizlu92lm260AubcqzwcG8H3o9PbNyX5WScJAc60EgAOh4CvEHj01+uQ7a3bbp84DnIpJ+niXoL2SygkBU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <4ea050fa-7525-4ad2-9802-1f70480d04ca@amd.com>
-Date: Thu, 6 Mar 2025 09:47:51 -0500
+X-Inumbo-ID: 5f72d3b3-fa9b-11ef-9898-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1741273069; x=1741877869; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=H7pow39J9Fqm1i6O6VXYZWww5I3btdSW6Ay9WFCMqtw=;
+        b=rfkBSziw1v1FTEDZQ7iBZGUJlVlcf0rSThsFM02l/2Kr1u4l2OL0SRlXCUqY+Xe1LZ
+         FPHtZ4RWGqZys6H1Ctk5WxUEczlHCeTmGcKUaZ33ky94WFNmyqGAcCAfP1kaCJiHWrQg
+         rCuowRGw26+W+h7Hbq4rtUqBnrdMq3kJP5Yms=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741273069; x=1741877869;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=H7pow39J9Fqm1i6O6VXYZWww5I3btdSW6Ay9WFCMqtw=;
+        b=EjMWK0DOSk9ZJBivjf2BTxLp9smH7jrk4vCnLHUj7X9OsGXjzNuZcGZwytxpCrGDGW
+         UizGBNeWaWXQH2xpAex4a6wyDXs5HJI64vQIMmDpdcx4A9CwkCZvmZWXTUS0hUzQ6ALa
+         kZAcMEMuEUaujbkaEUX0Yevhc5zCUcJ20OcaOw71iSVSRYbBz7QhXEKPOoUlp8yGXzLa
+         qN+16NVYCz/Szh7/kHp8QFoUyAka+4gSM8SpVQNebwA/DDZ+ip2o+gWRH8uXm0JjjNzw
+         EDMs49MawpMACacH78LWvDAYk5feebWcMrACE7lbzpIddRLmiOCBV2ydHEN7ADQU4K0d
+         o/uA==
+X-Gm-Message-State: AOJu0Yzo0jO4RqRvCEPr5f1QdkoTHmwA2acwolSKO77LwKHXqo6qxItZ
+	6V2yYlyW9pJMcIZKiIMgdU6nVmmpCjpIcMuOZ2f35oIB///TRG6C/hF48UwUmLaSLIYDGehyoEt
+	W
+X-Gm-Gg: ASbGncvlCad4YC4w4Qu1BhATls8lFoB8PsnEj2gMm6fEvrSa/ZS2JFSTsnvDQZs67Oy
+	VLtOrSbCgmSopbVYxA3h3+lWiaGHBhgNSLWK+tnjLK4IzxUwXYK4bzyl7LoPFODj9n73Nrsdk3L
+	lc6W6XeCFrkv7pqcTwZGVNP9ZEe0v1JBiGOb0JokRTuZ9PaeuP/wHTU1j+RIo5HPaW6B9G9iNNg
+	WcaOUokh4nk/2gjyb1DcHdHOLUi554d19x/JzxvPW+aa4ghMkzGt/fZTHaAJz6LfNBfmcjmP2ym
+	g+SBrlzWiITjmxx5NtpP+fhJVchS8UwFveKmjMQOSyYY4E6bhg==
+X-Google-Smtp-Source: AGHT+IG4mF3y+mP2g16zoYYgZihbJs/9r+0n2H/r6BcnwQ4z1OO4c95bb6eKQRmnnXveCwH5993pYw==
+X-Received: by 2002:a17:907:8b97:b0:ac1:d8a9:f853 with SMTP id a640c23a62f3a-ac20e1db11amr826930266b.48.1741273068824;
+        Thu, 06 Mar 2025 06:57:48 -0800 (PST)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 1/3] x86/apic: remove delivery and destination mode fields from drivers
+Date: Thu,  6 Mar 2025 15:57:31 +0100
+Message-ID: <20250306145733.99927-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250306145733.99927-1-roger.pau@citrix.com>
+References: <20250306145733.99927-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tools/init-dom0less: Fix cpus > 1 and xenstore entries
-To: "Orzel, Michal" <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@vates.tech>
-References: <20250305215832.98162-1-jason.andryuk@amd.com>
- <dc076e36-f58b-43c9-b9ec-ea5d636a0efa@amd.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <dc076e36-f58b-43c9-b9ec-ea5d636a0efa@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AEA:EE_|SJ2PR12MB7846:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18f8564c-240b-4313-6a0f-08dd5cbdde59
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?MkEvYmoxOWxQRk1mOWc2S3g5czEzYlo2Ti9BT0s3d2hlazAxRUdSL3NJd3ZY?=
- =?utf-8?B?ZXVKaG5JVThKemZ1dUNsY3lUa2RKcWxwdWlUeWtxa01vRU1kYU92QWZYWXI2?=
- =?utf-8?B?cWQyOURUMGg3MTN5MjlySGpISkJUcUVJTjB3cE5PUk1tMzFzV3hXbE1tN2Rx?=
- =?utf-8?B?RGthaFdVQnVxRkRFYytqUkRhM1lDY3o1eW5mbjRycGk5VW9WZ2FSVVlnUFdx?=
- =?utf-8?B?cFNhUzhXd1M5Nm15MVNWRHdhL25TSnA3b2R4ZkVxa052MnBtZXpYdnNFa1BR?=
- =?utf-8?B?T2RqUzNQYmdYcFN5d1lSN3Q1dGlBcHBRdTRxQ2VnRlN0UHd4TzZCc1VZbDVN?=
- =?utf-8?B?SHZLWkc2QzhlcHZaMTNnRVJLbDlpa0EvZ0gzSCtvQnlzVEpIWTlFdXBqWEpj?=
- =?utf-8?B?QzBsbTd1WThGL1g5NCs3cENBWDg5cDByTUREZVpHeWtvc2x6R256VjBUbnJ5?=
- =?utf-8?B?Zk9aRVd2Zm83RlhnT01nOU5RQVhwNGpxR0srSkRpTUZ0LzZNWENjTkgyeW1S?=
- =?utf-8?B?ek9ZWFo4anQ3Sk9CbWJ4VldZK2xCbnJtcVZyNkxrT0VXVEE1NDNoRGxISmlY?=
- =?utf-8?B?Y1Y1S3JlOVE0bS9qYTFzb0h2QWVCMG5kSmJiS09QYXpEaDRKekpOdGN5QlJl?=
- =?utf-8?B?eU8wQnBROXNVVTJpcHdDaWphR3duTkRXSi8zVlZQZEw3clF5eHJoc1ZuYVJh?=
- =?utf-8?B?RDU0aitwWjlnRmJQMlBXa1NLRFNVSmp5WTlvOW91K1FYYnN4T1B3ajZ5alE5?=
- =?utf-8?B?Z3BIUk9tMW8zZzA2MTdjc3VpQVV1M3Y1LzVyalZmNitxZnpDMWV1bjFzaEda?=
- =?utf-8?B?STlNeHVOR0tNcTBSdmIzMXNtYmJxbzVaTnRYcjJ3TTBZdWl0Zzc0UzI1bndD?=
- =?utf-8?B?NW1KU3FQSmhjUlpLNUtWMEdDSTlBbWhHdkJoSXAzMjEzU05MMlE2OVpIRDlE?=
- =?utf-8?B?NmEvTEZ4Yy9Ub3FiaWtWU2oySVZVWmlhRW4yTEV5bGk5TXE1NmU5ZDN5akp3?=
- =?utf-8?B?WVA0UDJwYUhCVUVjMjlrUDUzZllHSEJGaWJEczBTVWpoSWRhN3FzWFoxRlZT?=
- =?utf-8?B?U3RSeDhNUUlwQW4zRmtXOHFURFo0eEVSZlVDTlVKZmNVMjBrbFJOR2VNVlc3?=
- =?utf-8?B?RVdFUGx6cWEzQlUvVllkb0VRK2xQNkFpbUpXdjNlM0VIZGpUYUZoWjgzVjZ0?=
- =?utf-8?B?SkVBbUFqS29yZzF5VG9GUWtqamxTRlRjR292NUNnUFhtRXZ2bnFlTEY4UWxr?=
- =?utf-8?B?Z1NldmRjc3ZvYkZlQ0tMb3FjTHJqSmdEbk5KOW43K251c2pyK2QxMFNHM2xv?=
- =?utf-8?B?UmtXeVlYR0hGY1ZTWk5LL0pwSjhqQ0tZNjlETmErM29XTGk2SGp5SmNVSDVz?=
- =?utf-8?B?ZWlFWkpwM0RYM3p1RDIrY0N1SFhXMkJXVlVwUllWRjhxb0puTGFSS1hGUzl2?=
- =?utf-8?B?NVZ1QTBwbTRUbFc5TXFWdHhQTkZjTGtuT3JjSWgwYS92L2tvZ2FrOTc3OGNZ?=
- =?utf-8?B?Um1WMHp2NU1COGJRNnJlT0Q4R0V3YmxnN25OeFRqVnVyd1EwSTNYekNWRkJV?=
- =?utf-8?B?OHRzbzFzME1URmdvNkptMStjKzREcFQ0RWljNHFVZlIyN00xd3F6YWcreVJ5?=
- =?utf-8?B?dHNkekdGVzlCVVY0OUdTVVFGZXAweklHdXZuK3Z0dmZEMS95cnJhYzB2V055?=
- =?utf-8?B?aHpwK20wTUZ2N2tSODhnNVBVeDRtRFZvKytwNDlWQU0xTXd2czFTVkRGV21q?=
- =?utf-8?B?eGQ3WngvMldSNExockh5Vk1UUTF2VHFCT3JVaDJ2bnI2MmhXdDdrMHVveWNN?=
- =?utf-8?B?WThsclFHTVNHMVdmSWlKU2ZSbHFWR3hrbDNMVXY4MUFvdkIvVVpYaWw2SFB6?=
- =?utf-8?B?M1VnT2VFQURFcHpYNTg2NTlrYVdBSUJTMHpFY0JyMGZMb1JSckhsK1l3aDFM?=
- =?utf-8?B?LzlJT0lqRSthUlJEWlEyT2FNY2tzSzU2Vlk4ZnVndUxueEEwSUdRU20vRVBG?=
- =?utf-8?Q?a/qr7CNNFNONOIC5kBxTxErVQS4z6Y=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2025 14:47:50.4517
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18f8564c-240b-4313-6a0f-08dd5cbdde59
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00003AEA.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7846
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2025-03-06 05:29, Orzel, Michal wrote:
-> 
-> 
-> On 05/03/2025 22:58, Jason Andryuk wrote:
->>
->>
->> The trailing / in the path is incorrect and generates an error when
->> writing to xenstore:
->> Checking domid: 1
->> Init dom0less domain: 1
->> init-dom0less: writing to xenstore: No error information
->>
->> init-dom0less exits without finishing initialization.
->>
->> vcpu_max_id is an inclusive value, so it should be included in the
->> loop's range to include all vcpus.  Without this, no xenstore entries
->> are created for a 1 vcpu domain.
->>
->> Finally, use vcpu_online, the count of online vcpus, to determine online
->> vs. offline.  info->cpupool is a cpupool id and not a bitmask.
->>
->> Fixes: ec53e0c4ea ("tools: add example application to initialize dom0less PV drivers")
->> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->> ---
->>   tools/helpers/init-dom0less.c | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/tools/helpers/init-dom0less.c b/tools/helpers/init-dom0less.c
->> index 17579fe2e8..c569a890a0 100644
->> --- a/tools/helpers/init-dom0less.c
->> +++ b/tools/helpers/init-dom0less.c
->> @@ -182,13 +182,13 @@ retry_transaction:
->>       if (!do_xs_write_dom(xsh, t, domid, "vm", vm_val_str)) goto err;
->>       if (!do_xs_write_dom(xsh, t, domid, "name", dom_name_str)) goto err;
->>       if (!do_xs_write_dom(xsh, t, domid, "cpu", "")) goto err;
->> -    for (i = 0; i < info->vcpu_max_id; i++) {
->> -        rc = snprintf(cpu_str, STR_MAX_LENGTH, "cpu/%u/availability/", i);
->> +    for (i = 0; i <= info->vcpu_max_id; i++) {
->> +        rc = snprintf(cpu_str, STR_MAX_LENGTH, "cpu/%u/availability", i);
-> Up until this point:
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-> 
-> That said...
-> 
->>           if (rc < 0 || rc >= STR_MAX_LENGTH)
->>               goto err;
->>           rc = -EIO;
->>           if (!do_xs_write_dom(xsh, t, domid, cpu_str,
->> -                             (info->cpupool & (1 << i)) ? "online" : "offline"))
->> +                             i < info->vcpu_online ? "online" : "offline"))
-> I struggle with this one. Let's say that a dom0less domU starts with 4 vCPUs and
-> later on (before executing init-dom0less from dom0), decides to kill it's 2nd
-> vCPU. So domU is running vCPU{0,2,3}. With your patch, after executing the
-> script, the 4th vCPU will have its availability set to offline and domU will get
-> notified to kill its 4th vCPU. That does not sound right...
+All local APIC drivers use physical destination and fixed delivery modes,
+remove the fields from the genapic struct and simplify the logic.
 
-You are correct.
+No functional change intended.
 
-With xl create, cpus 0..vcpus-1 are marked online and vcpus...maxvcpus-1 
-are marked offline.  I was trying to match that.  To online or offline 
-cpus, xl vcpu-set keeps them densely packed, 0..$m.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/genapic/bigsmp.c      |  2 --
+ xen/arch/x86/genapic/default.c     |  2 --
+ xen/arch/x86/genapic/x2apic.c      |  4 ----
+ xen/arch/x86/include/asm/genapic.h |  5 -----
+ xen/arch/x86/io_apic.c             | 16 ++++++++--------
+ xen/arch/x86/msi.c                 | 11 +++--------
+ 6 files changed, 11 insertions(+), 29 deletions(-)
 
-I think libxl_list_vcpu() should give the needed information to set 
-these correctly.  I'll try that.
+diff --git a/xen/arch/x86/genapic/bigsmp.c b/xen/arch/x86/genapic/bigsmp.c
+index b2e721845275..ddb3a0b5d727 100644
+--- a/xen/arch/x86/genapic/bigsmp.c
++++ b/xen/arch/x86/genapic/bigsmp.c
+@@ -46,8 +46,6 @@ static int __init cf_check probe_bigsmp(void)
+ 
+ const struct genapic __initconst_cf_clobber apic_bigsmp = {
+ 	APIC_INIT("bigsmp", probe_bigsmp),
+-	.int_delivery_mode = dest_Fixed,
+-	.int_dest_mode = 0, /* physical delivery */
+ 	.init_apic_ldr = init_apic_ldr_phys,
+ 	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
+ 	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
+diff --git a/xen/arch/x86/genapic/default.c b/xen/arch/x86/genapic/default.c
+index 59c79afdb8fa..16e1875f6378 100644
+--- a/xen/arch/x86/genapic/default.c
++++ b/xen/arch/x86/genapic/default.c
+@@ -16,8 +16,6 @@
+ /* should be called last. */
+ const struct genapic __initconst_cf_clobber apic_default = {
+ 	APIC_INIT("default", NULL),
+-	.int_delivery_mode = dest_Fixed,
+-	.int_dest_mode = 0, /* physical delivery */
+ 	.init_apic_ldr = init_apic_ldr_flat,
+ 	.vector_allocation_cpumask = vector_allocation_cpumask_phys,
+ 	.cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
+diff --git a/xen/arch/x86/genapic/x2apic.c b/xen/arch/x86/genapic/x2apic.c
+index c277f4f79b0a..74a6d808ac30 100644
+--- a/xen/arch/x86/genapic/x2apic.c
++++ b/xen/arch/x86/genapic/x2apic.c
+@@ -140,8 +140,6 @@ static void cf_check send_IPI_mask_x2apic_cluster(
+ 
+ static const struct genapic __initconst_cf_clobber apic_x2apic_phys = {
+     APIC_INIT("x2apic_phys", NULL),
+-    .int_delivery_mode = dest_Fixed,
+-    .int_dest_mode = 0 /* physical delivery */,
+     .init_apic_ldr = init_apic_ldr_phys,
+     .vector_allocation_cpumask = vector_allocation_cpumask_phys,
+     .cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
+@@ -163,8 +161,6 @@ static const struct genapic __initconst_cf_clobber apic_x2apic_mixed = {
+      * The following fields are exclusively used by external interrupts and
+      * hence are set to use Physical destination mode handlers.
+      */
+-    .int_delivery_mode = dest_Fixed,
+-    .int_dest_mode = 0 /* physical delivery */,
+     .vector_allocation_cpumask = vector_allocation_cpumask_phys,
+     .cpu_mask_to_apicid = cpu_mask_to_apicid_phys,
+ 
+diff --git a/xen/arch/x86/include/asm/genapic.h b/xen/arch/x86/include/asm/genapic.h
+index cf36d48f3b07..04d3f1de7a1f 100644
+--- a/xen/arch/x86/include/asm/genapic.h
++++ b/xen/arch/x86/include/asm/genapic.h
+@@ -23,9 +23,6 @@ struct genapic {
+ 	const char *name;
+ 	int (*probe)(void);
+ 
+-	/* Interrupt delivery parameters ('physical' vs. 'logical flat'). */
+-	int int_delivery_mode;
+-	int int_dest_mode;
+ 	void (*init_apic_ldr)(void);
+ 	const cpumask_t *(*vector_allocation_cpumask)(int cpu);
+ 	unsigned int (*cpu_mask_to_apicid)(const cpumask_t *cpumask);
+@@ -37,8 +34,6 @@ struct genapic {
+ 	.name = aname, \
+ 	.probe = aprobe
+ 
+-#define INT_DELIVERY_MODE (genapic.int_delivery_mode)
+-#define INT_DEST_MODE (genapic.int_dest_mode)
+ #define TARGET_CPUS ((const typeof(cpu_online_map) *)&cpu_online_map)
+ #define init_apic_ldr() alternative_vcall(genapic.init_apic_ldr)
+ #define cpu_mask_to_apicid(mask) ({ \
+diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
+index 776dd57720a2..60b39827c851 100644
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -1080,8 +1080,8 @@ static void __init setup_IO_APIC_irqs(void)
+              */
+             memset(&entry,0,sizeof(entry));
+ 
+-            entry.delivery_mode = INT_DELIVERY_MODE;
+-            entry.dest_mode = INT_DEST_MODE;
++            entry.delivery_mode = dest_Fixed;
++            entry.dest_mode = 0;
+             entry.mask = 0;                /* enable IRQ */
+ 
+             idx = find_irq_entry(apic,pin,mp_INT);
+@@ -1150,10 +1150,10 @@ static void __init setup_ExtINT_IRQ0_pin(unsigned int apic, unsigned int pin, in
+      * We use logical delivery to get the timer IRQ
+      * to the first CPU.
+      */
+-    entry.dest_mode = INT_DEST_MODE;
++    entry.dest_mode = 0;
+     entry.mask = 0;					/* unmask IRQ now */
+     SET_DEST(entry, logical, cpu_mask_to_apicid(TARGET_CPUS));
+-    entry.delivery_mode = INT_DELIVERY_MODE;
++    entry.delivery_mode = dest_Fixed;
+     entry.polarity = 0;
+     entry.trigger = 0;
+     entry.vector = vector;
+@@ -2338,8 +2338,8 @@ int io_apic_set_pci_routing (int ioapic, int pin, int irq, int edge_level, int a
+ 
+     memset(&entry,0,sizeof(entry));
+ 
+-    entry.delivery_mode = INT_DELIVERY_MODE;
+-    entry.dest_mode = INT_DEST_MODE;
++    entry.delivery_mode = dest_Fixed;
++    entry.dest_mode = 0;
+     entry.trigger = edge_level;
+     entry.polarity = active_high_low;
+     entry.mask  = 1;
+@@ -2473,8 +2473,8 @@ int ioapic_guest_write(unsigned long physbase, unsigned int reg, u32 val)
+      * The guest does not know physical APIC arrangement (flat vs. cluster).
+      * Apply genapic conventions for this platform.
+      */
+-    rte.delivery_mode = INT_DELIVERY_MODE;
+-    rte.dest_mode     = INT_DEST_MODE;
++    rte.delivery_mode = dest_Fixed;
++    rte.dest_mode     = 0;
+ 
+     irq = apic_pin_2_gsi_irq(apic, pin);
+     if ( irq < 0 )
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index bf5b71822ea9..6c11d76015fb 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -174,18 +174,13 @@ void msi_compose_msg(unsigned vector, const cpumask_t *cpu_mask, struct msi_msg
+ 
+     msg->address_hi = MSI_ADDR_BASE_HI;
+     msg->address_lo = MSI_ADDR_BASE_LO |
+-                      (INT_DEST_MODE ? MSI_ADDR_DESTMODE_LOGIC
+-                                     : MSI_ADDR_DESTMODE_PHYS) |
+-                      ((INT_DELIVERY_MODE != dest_LowestPrio)
+-                       ? MSI_ADDR_REDIRECTION_CPU
+-                       : MSI_ADDR_REDIRECTION_LOWPRI) |
++                      MSI_ADDR_DESTMODE_PHYS |
++                      MSI_ADDR_REDIRECTION_CPU |
+                       MSI_ADDR_DEST_ID(msg->dest32);
+ 
+     msg->data = MSI_DATA_TRIGGER_EDGE |
+                 MSI_DATA_LEVEL_ASSERT |
+-                ((INT_DELIVERY_MODE != dest_LowestPrio)
+-                 ? MSI_DATA_DELIVERY_FIXED
+-                 : MSI_DATA_DELIVERY_LOWPRI) |
++                MSI_DATA_DELIVERY_FIXED |
+                 MSI_DATA_VECTOR(vector);
+ }
+ 
+-- 
+2.48.1
 
-Thanks for taking a look.
-
--Jason
 
