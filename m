@@ -4,56 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A46C28B28
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Mar 2025 00:16:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.905464.1313286 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB64C28B25
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Mar 2025 00:40:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.905494.1313304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqhre-00020H-BX; Sat, 08 Mar 2025 00:16:26 +0000
+	id 1tqiEu-0000Cx-37; Sat, 08 Mar 2025 00:40:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 905464.1313286; Sat, 08 Mar 2025 00:16:26 +0000
+Received: by outflank-mailman (output) from mailman id 905494.1313304; Sat, 08 Mar 2025 00:40:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tqhre-0001yp-4P; Sat, 08 Mar 2025 00:16:26 +0000
-Received: by outflank-mailman (input) for mailman id 905464;
- Sat, 08 Mar 2025 00:16:24 +0000
+	id 1tqiEt-0000Cq-Vi; Sat, 08 Mar 2025 00:40:27 +0000
+Received: by outflank-mailman (input) for mailman id 905494;
+ Sat, 08 Mar 2025 00:40:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MIyW=V3=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1tqhrc-0001rU-R1
- for xen-devel@lists.xenproject.org; Sat, 08 Mar 2025 00:16:24 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20623.outbound.protection.outlook.com
- [2a01:111:f403:2412::623])
+ <SRS0=7c++=V3=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1tqiEs-0000Ck-FN
+ for xen-devel@lists.xenproject.org; Sat, 08 Mar 2025 00:40:26 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8e66e51e-fbb2-11ef-9898-31a8f345e629;
- Sat, 08 Mar 2025 01:16:20 +0100 (CET)
-Received: from PH7PR10CA0001.namprd10.prod.outlook.com (2603:10b6:510:23d::23)
- by SA1PR12MB6894.namprd12.prod.outlook.com (2603:10b6:806:24d::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.22; Sat, 8 Mar
- 2025 00:16:14 +0000
-Received: from CO1PEPF000044F9.namprd21.prod.outlook.com
- (2603:10b6:510:23d:cafe::25) by PH7PR10CA0001.outlook.office365.com
- (2603:10b6:510:23d::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.19 via Frontend Transport; Sat,
- 8 Mar 2025 00:16:14 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044F9.mail.protection.outlook.com (10.167.241.199) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8558.0 via Frontend Transport; Sat, 8 Mar 2025 00:16:13 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 7 Mar
- 2025 18:16:12 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 7 Mar
- 2025 18:16:12 -0600
-Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Fri, 7 Mar 2025 18:16:11 -0600
+ id e9ae1425-fbb5-11ef-9898-31a8f345e629;
+ Sat, 08 Mar 2025 01:40:21 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id A25E25C4ABA;
+ Sat,  8 Mar 2025 00:38:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34355C4CED1;
+ Sat,  8 Mar 2025 00:40:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,106 +44,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e66e51e-fbb2-11ef-9898-31a8f345e629
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y/nW+jAmZRSb4D51rOTPYBhvhe5Kn7GTCQ91LW3ut6zR97Sz8kZ84bHMRPNNFimE4OBO+t2QXlAc14yBdYCVkIJq1nkeAmeUDNigO8drjtsoBJVj45DuVwLwDqtaEOFrg0SSKAHCK4lNY2AFZM63rvH9gvjI3HTb5QPbm5LjsbboFWCPmiUUZIBXAsS2wLvBkH4jXDHU0EGDzdw/Lh6Lgeazo8KJ9CCKkBR87PRX1ERSVBcckY1U7+V56g/gcyiLZCg+KS5e4NpXEF6328go73jbGNtPNQVKeqx/aVjp558I0LxOiEI6N9gBkNYHoOt+8Ks4ZE6gl9CyEoAIAArxnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OVbyUMe/ZD9zRIAvR8guy+m7+oje+qEheIUUpEhekXU=;
- b=jMWJtFGuYZYr/9wKulocGB3AcWipRUj977Kd3+1bBRElX6PkimilCus9J5IgoSPjpPGtx4f+9kSjD0A9GSijNMwO5PQ18ENr9hHyDco61d0KPZJTAGCmADDkHd1fbIDLdiQmasFJ6yLopa5oyymCIgjUc3jvP17/+waqp9Qo4kWaqUzJNZpg874z3KnoRAI2DMEAR44n9bh9nN/91PWUVZ2pA/onudioQiyagY0HOY9YXL00SbwLqgTBg7Vjf2fQcAo9XRUWOjx8ym3NQ8pj0Q/YDO3f2teAN83fzNChvjQVhRUpbyQYGEu0FtYUAb1/bckWWrpm1HpxzopEV99SWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OVbyUMe/ZD9zRIAvR8guy+m7+oje+qEheIUUpEhekXU=;
- b=h0bpCtIoDa6SZb/lg09EJvIrDrxI0hNm4lK/VE2nZywV4A0I5qzelOCClyfCxuyA1OOv2aDj7ddqDsQ4+Hv6QO+103uH3t9lBDGJi+RjAa7G9/kC3nvU5OB6iLqE9TymaIpayY0ykwaUMZxPpOHXBO9yhBGB2FiJ+Nla1Rsczlw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jason Andryuk <jason.andryuk@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
-	<jason.andryuk@amd.com>, Anthony PERARD <anthony.perard@vates.tech>, "Juergen
- Gross" <jgross@suse.com>
-Subject: [PATCH v2 0/2] tools: Fix PVH dom0 passthrough with legacy irq
-Date: Fri, 7 Mar 2025 19:17:09 -0500
-Message-ID: <20250308001711.18746-1-jason.andryuk@amd.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: e9ae1425-fbb5-11ef-9898-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1741394419;
+	bh=sOvqEJwEZSzFsZtvgel1LGoHafNyDQKD1Uufc0hgZk4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=nOirclNAR90x62tUo18PHbJ2illWTctbQcFmrqOmq7DXF942h7SYzd7BIEjv9CU5K
+	 tUNsyFina5awEALQF6dsZ+1dmj/BV9oEnt4ZQS2JIK7WrR3gmWx2uaYLmYyLn9myAP
+	 znXx/CpU1Fqins9pogYPA/KWDlml+DyaM7VuBZomDJV2IWC8Fr/Jwp3zCd6X40VOk5
+	 TiHWTjNJu6oxupaxeHPjmcCmjCEAHcobrqWRiCwVkXgxjgSMs1qTiVaj9Km2+FaGbj
+	 gYNk38NkZ+9KK7Tlexk7Tt3dH6ujVm49wNmjgbNinqwJMhIwkxGe1nvxFyt7MxTkfn
+	 krk8ljiDeXVeQ==
+Date: Fri, 7 Mar 2025 16:40:13 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Jason Andryuk <jason.andryuk@amd.com>
+cc: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH 04/23] xen/arm: dom0less use domid 0 for hwdom
+In-Reply-To: <ba5b9675-fa62-4872-b969-e5ecc917a087@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2503071450480.2600338@ubuntu-linux-20-04-desktop>
+References: <20250306220343.203047-1-jason.andryuk@amd.com> <20250306220343.203047-5-jason.andryuk@amd.com> <4ee02463-c413-4afc-add6-d7bf3915dd5a@xen.org> <734d9fdf-a201-4a46-9739-26a474683b10@amd.com> <39540c8b-e43d-4315-bc34-a61ac6cb1d70@xen.org>
+ <ba5b9675-fa62-4872-b969-e5ecc917a087@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F9:EE_|SA1PR12MB6894:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9b8df83-8ae7-41a2-eb55-08dd5dd66f8f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?FuB2sQHpqfGzZ0dJl8zDEJj8VWxQ2TdgCvkaxVcpXv0veOCcuTiEiFjO9kV4?=
- =?us-ascii?Q?BtY7Aw7jqsoxNZCmgSnO3EfuQ+/HAWHR69jJ/Sl6hZQCVbzKHEEanKpTEjhK?=
- =?us-ascii?Q?5qZhadusR8Br511jX8c49+olniY1QV0alY3NF0K4IFAubv8k0hIU8CoO44dl?=
- =?us-ascii?Q?rOf6TRhpk9qQSP2zSq1uUY0oGg8jWghvQVe1Q7iGm/SaFl7FPXtMlb5fcm8d?=
- =?us-ascii?Q?1OIEqckB79dSsp1XXWJWYQtfBeWFzXvW7ePYYFRwuBgNrU59P37auNZakGhS?=
- =?us-ascii?Q?3UQ0k5DM7DTnG7LrA0FLVdQIW5tQRDbaM9z9JzyWm+/l42DNF9e+x6sWX4sd?=
- =?us-ascii?Q?G7X9DbzzVp7xsXJeFwp12FBFjLWUUkPUdOd1s7DvrP4mpb9OuvLHwH5ZfAiq?=
- =?us-ascii?Q?+yiGmvrXErnt+HGthU8ca/gmLQqqzz1G2B5Wbepm1hvcwKepAgniNoPO2EFT?=
- =?us-ascii?Q?HTPO9jSb0jLdmmz2CkDXgLuyEV+RaL0jm4nbIKjT11z9KX2oHQCr1Dg7vzbI?=
- =?us-ascii?Q?LYoUEGe0eFzJ0U2O8wZ623v1hCQxFSzZVHak2TnadHcGh46TldBvjrcm4Bd0?=
- =?us-ascii?Q?PJmMrWKEPPMh1LerSGgATW9d5mGMowc7ELiTFP7YgTtXjM3PlwYk8TivlRsj?=
- =?us-ascii?Q?Gtusv7edTYx7TZIfA62wWbo2WafTEEV8C4NA42+6JTaPhOsNOw+dp4b7+Xht?=
- =?us-ascii?Q?WyZiO18Gft+sUrQgOOPghCS3+JjX1MCD1JKMvSWuV0EGbQHm7Hi2X3bTA1pS?=
- =?us-ascii?Q?9IpnLRuGPqK3hqWnHVG+/UgX9O0iwyVNzQODjYwB8dxVMoiGNmUj4FBXxaK9?=
- =?us-ascii?Q?aZP7GIknSd9gHkmbyWLML5jVJeCZDWkEgj3pJNUbid61ROiY4bSQ2FBaoM9T?=
- =?us-ascii?Q?FYk4ZrUKUOYwNP5rhksNtGuCmT3/63vA3L52xYEnCh+XIiQgoMg2E3YnDO9o?=
- =?us-ascii?Q?8s89zP/8/H/ygR+sfY0MUwBO39QLgiA+g5/0l3efxe0xGzLiYpEVozl1NIpj?=
- =?us-ascii?Q?321CNykPAbVQ4uBG1D6QMnQWotBbJM0yBZ4mPhZPWqZoBMCVK5an25fZ9xRO?=
- =?us-ascii?Q?GmIhVPF9Xmvb7uuoBRrYzKmjD1YYEvTy8KuZf/rwON/CgpvTTVT6D82X935W?=
- =?us-ascii?Q?pN9y+WWkH7AF/NNVvm4h3IEvSM1Kntf38mh83+05WxryN8iBnMzh3c6T/Hgi?=
- =?us-ascii?Q?b4ceO7+9Tgm094RYcB7xlYfMN5BqmIB7dmwpC+vyPS9fgZDRkyVL5h1bHaaQ?=
- =?us-ascii?Q?T6xCIGlfIF4Uc0TdRIePNe+uONwq5cxKr0YRImA4QGvNpnhhTcqMmcX1vLkn?=
- =?us-ascii?Q?1eE4j07RG+XTj4oZlNrO+oR58nnUud5bJt94rNGuzgIyAADntbweJMvepFQi?=
- =?us-ascii?Q?bAonqyBSZ78eMfOg2xe1t6MTeCdDzuB8LP+ugYI4MHBvSNwV1Qw9oS2k8UYw?=
- =?us-ascii?Q?zraz6f529JPgDyOAt2YfyzVFR84o2uXu?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2025 00:16:13.1003
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9b8df83-8ae7-41a2-eb55-08dd5dd66f8f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000044F9.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6894
+Content-Type: multipart/mixed; BOUNDARY="8323329-556157648-1741388131=:2600338"
+Content-ID: <alpine.DEB.2.22.394.2503071456300.2600338@ubuntu-linux-20-04-desktop>
 
-A PCI device may not have a legacy IRQ assigned.  This series allows
-passthrough of such a device to a guest.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-It relies on a Linux change to xen-pciback to also handle missing legacy
-IRQs:
-https://lore.kernel.org/xen-devel/20250226200134.29759-1-jason.andryuk@amd.com/T/#u
+--8323329-556157648-1741388131=:2600338
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.22.394.2503071456301.2600338@ubuntu-linux-20-04-desktop>
 
-Jason Andryuk (2):
-  tools/ctrl: Silence missing GSI in xc_pcidev_get_gsi()
-  tools/libxl: Skip missing PCI GSIs
+On Fri, 7 Mar 2025, Jason Andryuk wrote:
+> On 2025-03-07 16:01, Julien Grall wrote:
+> > Hi Jason,
+> > 
+> > On 07/03/2025 16:03, Jason Andryuk wrote:
+> > > On 2025-03-07 03:31, Julien Grall wrote:
+> > > > Hi,
+> > > > 
+> > > > On 06/03/2025 22:03, Jason Andryuk wrote:
+> > > > > Assign domid 0 to the hwdom.  Normally, dom0less does not use domid 0.
+> > > > 
+> > > > A few years ago, we went to great length to avoid making the assumption
+> > > > that the hardware domain is domid 0. See all the calls to
+> > > > "is_hardware_domain()". So I am reluctant to force the domain ID to 0.
+> > > 
+> > > I was disappointed when it didn't "just work".
+> > > 
+> > > > > 
+> > > > > This fixes using the Xen console which assumes domid 0 to use the
+> > > > > hypercall interface.
+> > > > 
+> > > > I had a brief look at drivers/char/console.c and I can't find any place
+> > > > assuming "domid 0". Do you have any pointer?
+> > > 
+> > > As Jan pointed out, Denis Mukhin's patch removed the domid 0 assumption.
+> > >   This was developed without this patch when it mattered.
+> > > 
+> > > I tested before posting without this patch (and with Denis's), and again
+> > > now, and I didn't get a hwdom login.  Turns out xenstored was assuming
+> > > domid 0.  Changing that with --master-domid gets to the login prompt.
+> > 
+> > Hmmm, I am not sure --master-domid should point to the hardware domain.
+> > Instead, it feels like it should be the control domain because it needs to
+> > manage the VMs so needs to create any nodes in Xenstore.
+> 
+> --master-domid encompasses "the domid where xenstored is running" (which
+> really xenstored should figure out itself), and is needed for xenstored to
+> start.
+> 
+> There is an additional --priv-domid, which can point at the control domain.
+> 
+> > > 
+> > > Still, there are now other userspace errors.  xen-init-dom0 hardcodes
+> > > domid 0 which doesn't exist. 
+> > 
+> > I am confused. Why would you call xen-init-dom0 in a domain that is meant to
+> > be the hardware domain rather than dom0?
+> 
+> I was using domid 0 :)  Also, it's called by default in xencommons and sets up
+> the cpupools.
+> 
+> > > init-dom0less only initializes non- introduced domains, so hwdom doesn't
+> > > get its "domid" xenstore node populated.  That leads to other errors.
+> >  > > So I think with Denis's patch, this isn't strictly needed.  It does
+> > help
+> > > existing toolstack code work today.
+> > 
+> > I don't think the toolstack is ready for a split between control/ hardware
+> > domain. That said, shouldn't the toolstack run in the control domain? Same
+> > for xenstored (unless you have a xenstored domain)?
+> 
+> Yes, maybe running control and xenstore together is better.  I came from the
+> perspective of dom0less with a hardware/control split, the toolstack is less
+> important.
+> 
+> But in general, it's all intertwined.  You have to start somewhere untangling.
+> 
+> Running xenstored in the hardware domain, and leaving hardware domain at domid
+> 0 seemed like a good way to keep most things working while splitting out the
+> hardware/control permissions.
 
- tools/libs/ctrl/xc_linux.c   | 11 ++++++++---
- tools/libs/light/libxl_x86.c | 10 ++++++++--
- 2 files changed, 16 insertions(+), 5 deletions(-)
+In my opinion, there are reasons for placing xenstored in the control
+domain and also reasons for placing it in the hardware domain. I think
+this is the kind of policy decision I would leave to the user.
 
--- 
-2.34.1
+In an embedded environment where safety is a concern, it also depends on
+whether the user wants to keep xenstore only between non-safe VMs, in
+which case I would put it in the hardware domain so that the control
+domain is fully isolated and protected. xenstore could be a source of
+interference.
 
+Or whether the user wants to use xenstore also for safe VMs, in which
+case they are likely to reimplement xenstored in a way that is safety
+certified and as part of a safety certified OS such as Zephyr. In this
+type of configuration, it would make sense to have xenstored in the
+control domain.
+
+I would suggest to make the location of xenstored configurable, and only
+provide a sensible default when the user doesn't explicitly say. With
+the state of the codebase and protocols that we have today, I think we
+are not ready for a xenstore free-from-interference implementation, so
+it would be safer to leave xenstored in the hardware domain as default,
+but we should make also the other configurations possible.
+
+This is the first patch series aimed at untangling the whole thing,
+so not everything can be done here. For example, if the location of
+Xenstore is not configurable in this series, it may still be OK. We
+just need to be careful in the docs and interfaces not to bake it into
+an assumption.
+
+I would also say the same for domid == 0: while it would be ideal to
+avoid relying on domid == 0 for the hardware domain, we don't have to
+resolve everything immediately. This series already achieves a
+significant improvement by separating the hardware domain from the
+control domain, which is valuable in itself.
+--8323329-556157648-1741388131=:2600338--
 
