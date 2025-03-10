@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25196C282DE
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Mar 2025 15:26:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.906661.1314070 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4C6C282EC
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Mar 2025 15:43:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.906687.1314079 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trf0r-0005VU-Cl; Mon, 10 Mar 2025 15:25:53 +0000
+	id 1trfHG-0001GL-N0; Mon, 10 Mar 2025 15:42:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 906661.1314070; Mon, 10 Mar 2025 15:25:53 +0000
+Received: by outflank-mailman (output) from mailman id 906687.1314079; Mon, 10 Mar 2025 15:42:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trf0r-0005VL-8f; Mon, 10 Mar 2025 15:25:53 +0000
-Received: by outflank-mailman (input) for mailman id 906661;
- Mon, 10 Mar 2025 15:25:51 +0000
+	id 1trfHG-0001GE-KE; Mon, 10 Mar 2025 15:42:50 +0000
+Received: by outflank-mailman (input) for mailman id 906687;
+ Mon, 10 Mar 2025 15:42:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mVaD=V5=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
- id 1trf0p-00055B-RR
- for xen-devel@lists.xenproject.org; Mon, 10 Mar 2025 15:25:51 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ <SRS0=B6N5=V5=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1trfHF-0001G5-2K
+ for xen-devel@lists.xenproject.org; Mon, 10 Mar 2025 15:42:49 +0000
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [2607:f8b0:4864:20::632])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f32d9110-fdc3-11ef-9ab8-95dc52dad729;
- Mon, 10 Mar 2025 16:25:51 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac2963dc379so169174466b.2
- for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 08:25:51 -0700 (PDT)
-Received: from localhost.localdomain ([66.81.170.107])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac2a65c7f7esm147674966b.117.2025.03.10.08.25.49
+ id 4ff5c233-fdc6-11ef-9ab8-95dc52dad729;
+ Mon, 10 Mar 2025 16:42:46 +0100 (CET)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-22359001f1aso106556925ad.3
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 08:42:46 -0700 (PDT)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ d9443c01a7336-224109ddbf2sm79534945ad.18.2025.03.10.08.42.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 08:25:50 -0700 (PDT)
+ Mon, 10 Mar 2025 08:42:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +46,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f32d9110-fdc3-11ef-9ab8-95dc52dad729
+X-Inumbo-ID: 4ff5c233-fdc6-11ef-9ab8-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1741620350; x=1742225150; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5ECj5KBJOzWkUhWTB7OBmw/GJyhyE2uyUhy/7AFkvkQ=;
-        b=HRS8pQHO+bD84zRcWnobYd47MP1pRTWE6RfSXA6vxDF/Z5pNvyGLvHZUyCiK1iJk19
-         o/K2Nvzm6F05xGrWcoxRtJ3D578Gbge8kNh6YVKTTlA1XD2U+Bdauabl135FyyqI8OLe
-         z6DB04rgVBCLs7xjqhzYGX2AKyDO23rlnC4Co=
+        d=citrix.com; s=google; t=1741621365; x=1742226165; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=On0kVqxDo+Wcr67gdF9MF+rNkvzHcv2wGO4dJ9QaaCI=;
+        b=juu1t8uvP4/5pot9v5pPjQkwTINLWsU7uPnWWY/3xJUiiUVrSrQbnXhjrxaFygasJp
+         J7wgkUd7Q+RYp5UO9BvtHEDL2h5BkIKyi+iTj9QZTDhGSQuvj5mYYszRhOBl2QlNzPGD
+         OoUDP0Ukifi43I2XxuaSW9/hgHzfr2Y1PBVzU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741620350; x=1742225150;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5ECj5KBJOzWkUhWTB7OBmw/GJyhyE2uyUhy/7AFkvkQ=;
-        b=keMpnHu6AvHIe4pkSqOXpVekxbTI7mdAGc0o2ruI5lGL0g3fuyuX0bmporqmmdJDAP
-         00va7rZgRR57WKSs7omyxyEhXSn9Pe48uPuwa2vnNAOpEmvHmcUSt3zSzsoc8wwOLPbL
-         dj6ZK541OHvRt+ltZFnzWiqrx4gebP+D8vck7ne8dbkSlTBxSu2MbzvVX64r15BfNmr3
-         kpLbheFYfvHNAdHjlN4LlIi5uuUVG8/aPK3le/RJD8qPseCzyVkb2HZEQayB6P9joi2K
-         vb4eLwVBGHTRs1Oac4k6GPAt2zsTBaJ5vHk72hhZGyfj3/9n0vUwfPXHSe1Umj2X6uCy
-         rXzw==
-X-Gm-Message-State: AOJu0YxXuBQr0jIvOr6r9OVN/s3H9t5ArYr/9BPESRiwXjAKp5POuKnj
-	R1CAfZorWH/1OLEUedKihF4bCuTn5iM+ruvFntoa4JsQEl+f3EsGQtLrS0wcc+v1SYMF1AvpsNI
-	pOWQ=
-X-Gm-Gg: ASbGncvYxZ6zO6Y59tvDeW4DDFbBOOENw13DJN9Lq+Syxiftios4Daxlb/ML7GOc+mt
-	lKUM4GjDD5+cj7d63j7+/W55Dbuh8qXQ9WotbI41y2V8T/rLj2t63i8L6ti6gOpessLbFTxS3iB
-	DinMV9C1Vk3xWEjxqs2NiFRBRbi8hHxhmKGXFFpd/xtB3ZQ10lJTgeuZXY/p+PlNQurd2/VL2Tb
-	GGdrO8QV/LBWofRHm2k63B9UN70MoshB64Qy6YeVAezLJIGLfCSOtlx1gaYxLZ0Sw0mw8kl1K2K
-	6kGoUIV13T1OZFbqBASdQmwTfFPu3de8yDOqtgt1E37SwEyEiJO3CfzQjGGJFq2FVmg=
-X-Google-Smtp-Source: AGHT+IHX24V4+oPGtLkU+XSmymuu523TxytSnviC3JXJHb3y8YjqKF7iY9bjrnT6GqlDgQrPwI4q2A==
-X-Received: by 2002:a05:6402:5106:b0:5e5:2d5c:4f32 with SMTP id 4fb4d7f45d1cf-5e5e24bb560mr34243804a12.28.1741620350494;
-        Mon, 10 Mar 2025 08:25:50 -0700 (PDT)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH] tools: Mark ACPI SDTs as NVS in the PVH build path
-Date: Mon, 10 Mar 2025 15:25:23 +0000
-Message-ID: <20250310152523.81181-1-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1741621365; x=1742226165;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=On0kVqxDo+Wcr67gdF9MF+rNkvzHcv2wGO4dJ9QaaCI=;
+        b=mlEsRn0/6LKbZIeWMMAWfM9w/3i6rclL9gvaGtiY2EgOR7T2qwlr/mFnhvZtvSk+iM
+         8In0oIHMtYB1mXv6E7jw+wWZh9vfoMscQru97lxTHtxqesNUMw/NBYaLh2dQhuSKPuAP
+         QkI3XxJ4aP0/0P4HgSm65777dsO1wiPHM/5yjnpm9kGx4xve9cODDLMUNdkI0RFDpwdR
+         jef+jHGgzNq+qGc7c2X8D4yEh2ci12TY6rLE5Hv0cETvhaFnrnKHJJbqWpXuf954HGQA
+         cihILIJyeSZusldL3MA9SDG1Ti5Q9uU/sPxTEOjSmJQyQAkaj/G7E6z/STLTcWNj4TWc
+         SSjw==
+X-Forwarded-Encrypted: i=1; AJvYcCUJ9bnxHwUegVA6e+3pc5ZGtRonh8nRHwWORSg1WiZx9jW48Mgi/rpVV/90S+q4dIierJhoh4jUs1M=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxozfL3whgZa0ZOoEm/03u6Guq7s5Dk+JmU5LihxGK1sG0vmgJA
+	IHqPGoDxnLs/FYh6dwR2vpXpYgqW6Vqu/WmVIQHVH7Ni7jy13Z/rq/zz0Wy41iE=
+X-Gm-Gg: ASbGnct00I5nMeZwzSWunB5wEYc7Y0PtyuhWsVjakRHTsi1sWhb8jx1phsIWUaIX9OV
+	fKXF89Qg9Z2q4ua2js7IuO2MefnXtrc1Owwl/KMdw9XexHE/i1MOQU5Jf8lBTVzV/l0ziUYfWJt
+	Ba7IgEibJfrcukbwf8OCjZ0BD6NYGq0/iamQx7uqworQESSc+KfxuMCFoCK091eUj/v60zmB8lC
+	gQOj4V13WCtRQT/HdZVdiu7DYGQjfZ1i4+7abNnHUH6dphE+fb/yjGkBKP3pJUD2EDvhlITuB1K
+	7S3ah6leDwHr3niuorVOLIKCsSc6+sgryTuiHhgLo5aQOphklx3JhcNNJ42w9LmLtQ==
+X-Google-Smtp-Source: AGHT+IHjFe6dDuLqlhwItMU1i9wCzI1O4A9ra3UYH7d1CtRs8AnYfXVPGz0WZ/D9SIqAJx48E8PDAw==
+X-Received: by 2002:a17:902:e845:b0:223:635d:3e38 with SMTP id d9443c01a7336-2242888a9a3mr233132265ad.15.1741621365181;
+        Mon, 10 Mar 2025 08:42:45 -0700 (PDT)
+Date: Mon, 10 Mar 2025 16:42:39 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 2/2] x86/iommu: avoid MSI address and data writes if
+ IRT index hasn't changed
+Message-ID: <Z88Ib1ewzugJmepe@macbook.local>
+References: <20250310095535.46033-1-roger.pau@citrix.com>
+ <20250310095535.46033-3-roger.pau@citrix.com>
+ <507eef19-92ff-44ca-bd0a-86299949c03b@suse.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <507eef19-92ff-44ca-bd0a-86299949c03b@suse.com>
 
-Commit cefeffc7e583 marked ACPI tables as NVS in the hvmloader path
-because SeaBIOS may otherwise just mark it as RAM. There is, however,
-yet another reason to do it even in the PVH path. Xen's incarnation of
-AML relies on having access to some ACPI tables (e.g: _STA of Processor
-objects relies on reading the processor online bit in its MADT entry)
+On Mon, Mar 10, 2025 at 11:51:09AM +0100, Jan Beulich wrote:
+> On 10.03.2025 10:55, Roger Pau Monne wrote:
+> > Attempt to reduce the MSI entry writes, and the associated checking whether
+> > memory decoding and MSI-X is enabled for the PCI device, when the MSI data
+> > hasn't changed.
+> > 
+> > When using Interrupt Remapping the MSI entry will contain an index into
+> > the remapping table, and it's in such remapping table where the MSI vector
+> > and destination CPU is stored.  As such, when using interrupt remapping,
+> > changes to the interrupt affinity shouldn't result in changes to the MSI
+> > entry, and the MSI entry update can be avoided.
+> > 
+> > Signal from the IOMMU update_ire_from_msi hook whether the MSI data or
+> > address fields have changed, and thus need writing to the device registers.
+> > Such signaling is done by returning 1 from the function.  Otherwise
+> > returning 0 means no update of the MSI fields, and thus no write
+> > required.
+> > 
+> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> 
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> with two purely cosmetic suggestions and an only loosely related question below.
+> 
+> > --- a/xen/arch/x86/hvm/vmx/vmx.c
+> > +++ b/xen/arch/x86/hvm/vmx/vmx.c
+> > @@ -415,7 +415,9 @@ static int cf_check vmx_pi_update_irte(const struct vcpu *v,
+> >  
+> >      ASSERT_PDEV_LIST_IS_READ_LOCKED(msi_desc->dev->domain);
+> >  
+> > -    return iommu_update_ire_from_msi(msi_desc, &msi_desc->msg);
+> > +    rc = iommu_update_ire_from_msi(msi_desc, &msi_desc->msg);
+> > +
+> > +    return rc < 0 ? rc : 0;
+> 
+> Only tangential here, but: Why does this function have a return type of
+> non-void, when neither caller cares?
 
-This is problematic if the OS tries to reclaim ACPI memory for page
-tables as it's needed for runtime and can't be reclaimed after the OSPM
-is up and running.
+I'm afraid there's more wrong in vmx_pi_update_irte() that I've just
+spotted afterwards.
 
-Fixes: de6d188a519f("hvmloader: flip "ACPI data" to "ACPI NVS" type for ACPI table region)"
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
-I really, really, really dislike this idea of accessing the MADT from
-AML. In time I'll try to implement something to stop doing it, but for
-the time being I find it preferable to align libxl to hvmloader rather
-than trying to restrict what's reclaimable and what isn't.
----
- tools/firmware/hvmloader/e820.c | 4 ++++
- tools/libs/light/libxl_x86.c    | 2 +-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+vmx_pi_update_irte() passes to iommu_update_ire_from_msi() the
+msi_desc->msg field, but that field is supposed to always contain the
+non-translated MSI data, as you correctly pointed out in v1 it's
+consumed by dump_msi().  vmx_pi_update_irte() using msi_desc->msg to
+store the translated MSI effectively breaks dump_msi().
 
-diff --git a/tools/firmware/hvmloader/e820.c b/tools/firmware/hvmloader/e820.c
-index c490a0bc790c..86d39544e887 100644
---- a/tools/firmware/hvmloader/e820.c
-+++ b/tools/firmware/hvmloader/e820.c
-@@ -210,6 +210,10 @@ int build_e820_table(struct e820entry *e820,
-      * space reuse by an ACPI unaware / buggy bootloader, option ROM, etc.
-      * before an ACPI OS takes control. This is possible due to the fact that
-      * ACPI NVS memory is explicitly described as non-reclaimable in ACPI spec.
-+     *
-+     * Furthermore, Xen relies on accessing ACPI tables from within the AML
-+     * code exposed to guests. So Xen's ACPI tables are not, in general,
-+     * reclaimable.
-      */
- 
-     if ( acpi_enabled )
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index a3164a3077fe..265da8072a59 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -742,7 +742,7 @@ static int domain_construct_memmap(libxl__gc *gc,
-             e820[nr].addr = dom->acpi_modules[i].guest_addr_out & ~(page_size - 1);
-             e820[nr].size = dom->acpi_modules[i].length +
-                 (dom->acpi_modules[i].guest_addr_out & (page_size - 1));
--            e820[nr].type = E820_ACPI;
-+            e820[nr].type = E820_NVS;
-             nr++;
-         }
-     }
--- 
-2.48.1
+Also vmx_pi_update_irte() relies on the IRT index never changing, as
+otherwise it's missing any logic to update the MSI registers.
 
+I will fix that in a pre-patch.
+
+> 
+> > --- a/xen/drivers/passthrough/amd/iommu_intr.c
+> > +++ b/xen/drivers/passthrough/amd/iommu_intr.c
+> > @@ -492,7 +492,7 @@ static int update_intremap_entry_from_msi_msg(
+> >                 get_ivrs_mappings(iommu->seg)[alias_id].intremap_table);
+> >      }
+> >  
+> > -    return 0;
+> > +    return !fresh ? 0 : 1;
+> >  }
+> 
+> Simply
+> 
+>     return fresh;
+> 
+> ?
+> 
+> > @@ -546,7 +546,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
+> >      rc = update_intremap_entry_from_msi_msg(iommu, bdf, nr,
+> >                                              &msi_desc->remap_index,
+> >                                              msg, &data);
+> > -    if ( !rc )
+> > +    if ( rc > 0 )
+> >      {
+> >          for ( i = 1; i < nr; ++i )
+> >              msi_desc[i].remap_index = msi_desc->remap_index + i;
+> > --- a/xen/drivers/passthrough/vtd/intremap.c
+> > +++ b/xen/drivers/passthrough/vtd/intremap.c
+> > @@ -506,6 +506,7 @@ static int msi_msg_to_remap_entry(
+> >      unsigned int index, i, nr = 1;
+> >      unsigned long flags;
+> >      const struct pi_desc *pi_desc = msi_desc->pi_desc;
+> > +    bool alloc = false;
+> >  
+> >      if ( msi_desc->msi_attrib.type == PCI_CAP_ID_MSI )
+> >          nr = msi_desc->msi.nvec;
+> > @@ -529,6 +530,7 @@ static int msi_msg_to_remap_entry(
+> >          index = alloc_remap_entry(iommu, nr);
+> >          for ( i = 0; i < nr; ++i )
+> >              msi_desc[i].remap_index = index + i;
+> > +        alloc = true;
+> >      }
+> >      else
+> >          index = msi_desc->remap_index;
+> > @@ -601,7 +603,7 @@ static int msi_msg_to_remap_entry(
+> >      unmap_vtd_domain_page(iremap_entries);
+> >      spin_unlock_irqrestore(&iommu->intremap.lock, flags);
+> >  
+> > -    return 0;
+> > +    return alloc ? 1 : 0;
+> >  }
+> 
+> Like above, simply
+> 
+>     return alloc;
+> 
+> ?
+
+I wasn't sure whether this was overloading the boolean type and
+possibly breaking some MISRA rule.  I can adjust.
+
+Thanks, Roger.
 
