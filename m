@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF63C282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 20:47:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909244.1316223 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D65FC282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 20:59:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909271.1316245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6Vd-0006PD-GA; Tue, 11 Mar 2025 20:47:29 +0000
+	id 1ts6hG-0005JH-PQ; Tue, 11 Mar 2025 20:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909244.1316223; Tue, 11 Mar 2025 20:47:29 +0000
+Received: by outflank-mailman (output) from mailman id 909271.1316245; Tue, 11 Mar 2025 20:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6Vd-0006P6-DJ; Tue, 11 Mar 2025 20:47:29 +0000
-Received: by outflank-mailman (input) for mailman id 909244;
- Tue, 11 Mar 2025 20:47:28 +0000
+	id 1ts6hG-0005JA-L3; Tue, 11 Mar 2025 20:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 909271;
+ Tue, 11 Mar 2025 20:59:29 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ts6Vc-0006P0-Sp
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 20:47:28 +0000
+ (envelope-from <julien@xen.org>) id 1ts6hE-0005J4-Vq
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 20:59:29 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1ts6Vc-00EieD-1v;
- Tue, 11 Mar 2025 20:47:28 +0000
+ (envelope-from <julien@xen.org>) id 1ts6hE-00Eiub-2G;
+ Tue, 11 Mar 2025 20:59:28 +0000
 Received: from [2a02:8012:3a1:0:9c08:78f4:b949:88f8]
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1ts6Vc-004mH9-0Z;
- Tue, 11 Mar 2025 20:47:28 +0000
+ (envelope-from <julien@xen.org>) id 1ts6hE-004nch-0F;
+ Tue, 11 Mar 2025 20:59:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,15 +44,14 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=tLFA7kKQvzEQR9IfzGpLKmS7eFJ87zudw2MVTlSWs9k=; b=B28xG44ehYEjbpycfEoz07LS0e
-	YojRfG1sdGGAdeQILKPDmzT0EpBnMm0YFD7nEh797dTOH5onwZz2gT+mm9LAC96JFsbQgLThs+GeQ
-	WEshotycIslsEq4bZhuep4ql2QUPfV+3SzMSZEoMO8TdjrqnSKbGzaVFNbUCrmKNnHtU=;
-Message-ID: <30681b52-0d81-47d9-959f-90238863b88e@xen.org>
-Date: Tue, 11 Mar 2025 20:47:24 +0000
+	bh=ytqT0XbvtxFADS1Rg3eUrTjTyGQ2eIkAHFMOiAgmQcA=; b=0KdDlNEVbVgEsvoF8UukEZ92wo
+	NPhvTVmsrN8Pyxx7aGi3vyIFO8RMtSGNpEIUfNQirpqJghJoR/nRPFhHLcmOIep3BzT6M6pvM2Ma0
+	3tOVrg9SjmTWJo8G/yPqRGK2i0WkOWZCr3F7DBdNMiLSTkgsmWsFqJF7paPdzPdYycpo=;
+Message-ID: <c5ccb703-45eb-4fb1-842c-75317354afad@xen.org>
+Date: Tue, 11 Mar 2025 20:59:24 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/16] xen/cpu: prevent disable_nonboot_cpus crash on
- ARM64
+Subject: Re: [PATCH 05/16] xen/percpu: don't initialize percpu on resume
 Content-Language: en-GB
 To: Mykola Kvach <xakep.amatop@gmail.com>, xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -60,69 +59,84 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- Mykola Kvach <mykola_kvach@epam.com>
+ Mykyta Poturai <mykyta_poturai@epam.com>,
+ Mykola Kvach <mykola_kvach@epam.com>, Juergen Gross <jgross@suse.com>
 References: <cover.1741164138.git.xakep.amatop@gmail.com>
- <e6cc20510acf49d90c08007a2308ef3dcaccc368.1741164138.git.xakep.amatop@gmail.com>
+ <e44b56f18fe5e1c7f1d6cd9d33ba84cf0e26b440.1741164138.git.xakep.amatop@gmail.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <e6cc20510acf49d90c08007a2308ef3dcaccc368.1741164138.git.xakep.amatop@gmail.com>
+In-Reply-To: <e44b56f18fe5e1c7f1d6cd9d33ba84cf0e26b440.1741164138.git.xakep.amatop@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+
+(+ Juergen)
 
 Hi Mykola,
 
 On 05/03/2025 09:11, Mykola Kvach wrote:
-> If we call disable_nonboot_cpus on ARM64 with system_state set
-> to SYS_STATE_suspend, the following assertion will be triggered:
+> Invocation of the CPU_UP_PREPARE notification
+> on ARM64 during resume causes a crash:
 > 
-> ```
-> (XEN) [   25.582712] Disabling non-boot CPUs ...
-> (XEN) [   25.587032] Assertion '!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1)' failed at common/xmalloc_tlsf.c:714
+> (XEN) [  315.807606] Error bringing CPU1 up: -16
+> (XEN) [  315.811926] Xen BUG at common/cpu.c:258
 > [...]
-> (XEN) [   25.975069] Xen call trace:
-> (XEN) [   25.978353]    [<00000a000022e098>] xfree+0x130/0x1a4 (PC)
-> (XEN) [   25.984314]    [<00000a000022e08c>] xfree+0x124/0x1a4 (LR)
-> (XEN) [   25.990276]    [<00000a00002747d4>] release_irq+0xe4/0xe8
-> (XEN) [   25.996152]    [<00000a0000278588>] time.c#cpu_time_callback+0x44/0x60
-> (XEN) [   26.003150]    [<00000a000021d678>] notifier_call_chain+0x7c/0xa0
-> (XEN) [   26.009717]    [<00000a00002018e0>] cpu.c#cpu_notifier_call_chain+0x24/0x48
-> (XEN) [   26.017148]    [<00000a000020192c>] cpu.c#_take_cpu_down+0x28/0x34
-> (XEN) [   26.023801]    [<00000a0000201944>] cpu.c#take_cpu_down+0xc/0x18
-> (XEN) [   26.030281]    [<00000a0000225c5c>] stop_machine.c#stopmachine_action+0xbc/0xe4
-> (XEN) [   26.038057]    [<00000a00002264bc>] tasklet.c#do_tasklet_work+0xb8/0x100
-> (XEN) [   26.045229]    [<00000a00002268a4>] do_tasklet+0x68/0xb0
-> (XEN) [   26.051018]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x194
-> (XEN) [   26.057585]    [<00000a0000277e30>] start_secondary+0x21c/0x220
-> (XEN) [   26.063978]    [<00000a0000361258>] 00000a0000361258
-> ```
+> (XEN) [  316.142765] Xen call trace:
+> (XEN) [  316.146048]    [<00000a0000202264>] enable_nonboot_cpus+0x128/0x1ac (PC)
+> (XEN) [  316.153219]    [<00000a000020225c>] enable_nonboot_cpus+0x120/0x1ac (LR)
+> (XEN) [  316.160391]    [<00000a0000278180>] suspend.c#system_suspend+0x4c/0x1a0
+> (XEN) [  316.167476]    [<00000a0000206b70>] domain.c#continue_hypercall_tasklet_handler+0x54/0xd0
+> (XEN) [  316.176117]    [<00000a0000226538>] tasklet.c#do_tasklet_work+0xb8/0x100
+> (XEN) [  316.183288]    [<00000a0000226920>] do_tasklet+0x68/0xb0
+> (XEN) [  316.189077]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x194
+> (XEN) [  316.195644]    [<00000a0000277638>] shutdown.c#halt_this_cpu+0/0x14
+> (XEN) [  316.202383]    [<0000000000000008>] 0000000000000008
 > 
-> This happens because before invoking take_cpu_down via the stop_machine_run
-> function on the target CPU, stop_machine_run requests
-> the STOPMACHINE_DISABLE_IRQ state on that CPU. Releasing memory in
-> the release_irq function then triggers the assertion:
+> Freeing per-CPU areas and setting __per_cpu_offset to INVALID_PERCPU_AREA
+> only occur when !park_offline_cpus and system_state is not SYS_STATE_suspend.
+> On ARM64, park_offline_cpus is always false, so setting __per_cpu_offset to
+> INVALID_PERCPU_AREA depends solely on the system state.
 > 
-> /*
->   * Heap allocations may need TLB flushes which may require IRQs to be
->   * enabled (except when only 1 PCPU is online).
->   */
-> #define ASSERT_ALLOC_CONTEXT()
+> If the system is suspended, this area is not freed, and during resume, an error
+> occurs in init_percpu_area, causing a crash because INVALID_PERCPU_AREA is not
+> set and park_offline_cpus remains 0:
 > 
-> This patch introduces a new tasklet to perform the CPU_DYING call chain for
-> a particular CPU. However, we cannot call take_cpu_down from the tasklet
-> because the __cpu_disable function disables local IRQs, causing the system
-> to crash inside spin_lock_irq, which is called after the tasklet function
-> invocation inside do_tasklet_work:
+>      if ( __per_cpu_offset[cpu] != INVALID_PERCPU_AREA )
+>          return park_offline_cpus ? 0 : -EBUSY;
 > 
-> void _spin_lock_irq(spinlock_t *lock)
-> {
->      ASSERT(local_irq_is_enabled());
-> 
-> To resolve this, take_cpu_down is split into two parts. The first part triggers
-> the CPU_DYING call chain, while the second part, __cpu_disable, is invoked from
-> stop_machine_run.
+> It appears that the same crash can occur on x86 if park_offline_cpus is set
+> to 0 during Xen suspend.
 
-Rather than modifying common code, have you considered allocating from 
-the IRQ action from the percpu area? This would also reduce the number 
-of possible failure when bringup up a pCPU.
+I am rather confused. Looking at the x86 code, it seems 
+park_offline_cpus is cleared for AMD platforms. So are you saying the 
+suspend/resume doesn't work on AMD?
+
+I am also CCing Juergen because he originally add the check to the 
+system_state in 2019. Maybe he will remember why CPU_UP_PREPARE was not 
+changed.
+
+> 
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> ---
+> These changes were introduced in V2 inside
+> "xen: don't free percpu areas during suspend" patch.
+> ---
+>   xen/common/percpu.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/common/percpu.c b/xen/common/percpu.c
+> index e4e8b7bcab..83dca7edd6 100644
+> --- a/xen/common/percpu.c
+> +++ b/xen/common/percpu.c
+> @@ -74,7 +74,8 @@ static int cf_check cpu_percpu_callback(
+>       switch ( action )
+>       {
+>       case CPU_UP_PREPARE:
+> -        rc = init_percpu_area(cpu);
+> +        if ( system_state != SYS_STATE_resume )
+> +            rc = init_percpu_area(cpu);
+>           break;
+>   
+>       case CPU_UP_CANCELED:
 
 Cheers,
 
