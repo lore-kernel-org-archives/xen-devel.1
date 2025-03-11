@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8138C282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 20:17:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909086.1316151 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9134C282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 20:21:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909106.1316162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts62N-0000Os-Rw; Tue, 11 Mar 2025 20:17:15 +0000
+	id 1ts665-0002Ui-B9; Tue, 11 Mar 2025 20:21:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909086.1316151; Tue, 11 Mar 2025 20:17:15 +0000
+Received: by outflank-mailman (output) from mailman id 909106.1316162; Tue, 11 Mar 2025 20:21:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts62N-0000Ol-PF; Tue, 11 Mar 2025 20:17:15 +0000
-Received: by outflank-mailman (input) for mailman id 909086;
- Tue, 11 Mar 2025 20:17:13 +0000
+	id 1ts665-0002U1-52; Tue, 11 Mar 2025 20:21:05 +0000
+Received: by outflank-mailman (input) for mailman id 909106;
+ Tue, 11 Mar 2025 20:21:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=isYZ=V6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ts62L-0000Of-SN
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 20:17:13 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
+ <SRS0=EQfW=V6=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
+ id 1ts5kG-0007Uu-KQ
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 19:58:32 +0000
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [2607:f8b0:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cee29f4b-feb5-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 21:17:08 +0100 (CET)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-39129fc51f8so4681759f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 13:17:08 -0700 (PDT)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912c0e222dsm19075319f8f.72.2025.03.11.13.17.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 13:17:07 -0700 (PDT)
+ id 31f0f0a3-feb3-11ef-9898-31a8f345e629;
+ Tue, 11 Mar 2025 20:58:27 +0100 (CET)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-223a7065ff8so18598585ad.0
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 12:58:27 -0700 (PDT)
+Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-736a6e5c13asm9646981b3a.157.2025.03.11.12.58.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Mar 2025 12:58:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,137 +46,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cee29f4b-feb5-11ef-9898-31a8f345e629
+X-Inumbo-ID: 31f0f0a3-feb3-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741724228; x=1742329028; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=da4t1uU9hY6xerZJCoOF6RZuZ45wNLb8GcrSLMZ7rYU=;
-        b=XVJv0YvQHbIRHowhDUkPqN19o3WppvmCJNQzJ+PmSYrw+ue1qGZS8gOUB0Gl3IkfDM
-         HpaWXbK+8cNdI3Fl16He/WDWJcmO3Zsdv0WS/tVZW3vzbZf4Pw2MBpU+h3HBlLeTen1C
-         WeehNjcuuMauVugIPKbyJAcHxDzPbFwccywJc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741724228; x=1742329028;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1741723105; x=1742327905; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=da4t1uU9hY6xerZJCoOF6RZuZ45wNLb8GcrSLMZ7rYU=;
-        b=VsA76iUDS4hC6jUFf+3ki6BTR0eEghnmVmRUzSb2lkfDP3d3nbepUR35ah0hgqpgzh
-         BixPwHWrqN8tez/S7ZMJh32nPh5VW8zK/1d2Ra6Kv7p8D9QHFfVrC9nzGwgOtQAabHmy
-         Di8Yn3LThkF0TggBlwq7ZzY2G0jclhkcNkpNh93WZscOV+0iFVXAopUBYBRT0KKOq17u
-         /18jSxkzofk5n077ZyeroSrcTMu+SSMVXrOb9L/96ICYEzg74DND5VvqMSfCdcJOr2JK
-         4S9dIwMsqQhhBgb/BmskuJc6SIzm+LWkfSc74+3LlUPSSlcfnvHWxpLYi+ZH3t2Jwpc/
-         0eqA==
-X-Gm-Message-State: AOJu0YzN9E1yhNUaRWY1vdf/gZE1mYQTYfgu1BgfDbc23o1HKRc3MLVs
-	4Dd+I59Yt0+Mz4JAXzqxIILklhQrS2h0rrs9asXR+nI4D9gCqn5ER40X/QO4/pk=
-X-Gm-Gg: ASbGncslBxxVMKIjBpy5Off58uR1iq3JX3ZsxNri8Ldr+K94JlEyTAFPdCNLldRIYcX
-	zqqc2BwZ/op4HUChetNMQZ/pDr84gRngk1v80rZUUNhaxzj7Gs/u+v+OI1dP6odVeGua2lz7H98
-	s+9PHkck+gIGWN/u+NBPhR9d6xRuxUUrLr/1YmLcc5hifWiGnu5DmypXM9HkWoX8J1tg5ObHRov
-	O0aR5mRWfc60bdbB6yXc+lhpMwuNNRBidTh101oKaF6oDd5yfY323yBLTFgA4B7a5UnNwXKagHJ
-	ItWudSbHZyV3y6fWsOyohWhXmefw68Ihq1eKoQA2iAR5ZOa37OAY0Fm+wd6X+PW4ESl8Q/WDmb3
-	KrJhjhvMg
-X-Google-Smtp-Source: AGHT+IGuS1GfO+XenCRYXvQ5sLmaWbCOo3aLpe988exkpKNNS9hykVycnWPuA9L1mgrNkaeY6/nx8Q==
-X-Received: by 2002:a5d:47c1:0:b0:391:2bcc:11f2 with SMTP id ffacd0b85a97d-39132d2ac45mr13516401f8f.1.1741724228093;
-        Tue, 11 Mar 2025 13:17:08 -0700 (PDT)
-Message-ID: <cbf75ca2-5370-457b-9aff-399d605028be@citrix.com>
-Date: Tue, 11 Mar 2025 20:17:06 +0000
+        bh=Q89mBu4b5JYOE58WB93/V2zR/jXmfpOvKMtRO3aXK0o=;
+        b=dsdnGNSEYje4UEjJnscMMBnu65Bd60XmcOVP67m7D7ORX2nLRiliplijRaZ2VOSF8N
+         foGeNBdFsIwbwpdVLtFPrNwPgfnFII72zWtp7d3QEvYve7np82C+URjq3XEZsUBybJG7
+         iv3G6V/06ra4lJODBjrcH8J15nlSQduFhQoXU6SfKsfZm8uYNg+FfGOrWZpVmFlzF8nM
+         q6bOUH8ufsEmw1CWmGiikwHKuz1R5KCDtyrK2iDZN1vMwCqCCaopM361tri93MogrBlg
+         Zf1a5eZUXpq0+7pvwZ8kuQe91OdhrtCQVzhVmk+h0Fp1Ksh+BY9zT6FkPE61CZ68OenJ
+         hS1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741723105; x=1742327905;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Q89mBu4b5JYOE58WB93/V2zR/jXmfpOvKMtRO3aXK0o=;
+        b=nxw79/3YsLMmMCp5/1AWhPZ7247joxd2wv4ZZlHVUz5OWwG2UKLvARf1N3I9gI/JJ/
+         xXfcaC7EudjH4WgXiPijd1GV9Rkfa3cX1MktQyzfGFMO0/lzjyXZpf9m5/h8KW8B9T/T
+         5hrxX6w4pptPc8nXVPs76qen+89Y2obNSyvKPgfKI0kPZGMmf9r5V+im5Lfb0AhF0LjK
+         Ywhkkwgi62ATdr0bbpPcgM+keno4GMNjkUcT2LZODo8qD6QEBbtHbieEQ52fQF8ahV+V
+         dm3BqmQmwLNvSPucErRxbkX6z5h8zlcAasCJ+xn1lqcUlxsIzx6GFvK6eFZ14ctrX4U5
+         PWuA==
+X-Forwarded-Encrypted: i=1; AJvYcCXve8DV3H/JO8oYp/kbcTor8J5UWQmvEzadWICx24PPg46f8X3yyjMiXeVEUtryqX3xG8ADxgsu2xA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxawJpc9JVY/zs99epblXo4Evhl8BjOQbOoWdctHS+9u/z4Pb7G
+	BWH543MQ96mwKUuoZskn5E9+erwfPmYl9BDuQ09XdLxIx4X0tg7YKhb5OnfNfkE=
+X-Gm-Gg: ASbGncush5SozhbASmrH4bOxL3tuLbI+9BVNRrgDaXZuhMhh5yRqeD1UWUG1be8wUVd
+	ZPK35mqgr1vkr11f96qcZ87ZWO07ErIUqGONgKdiatfH7L/gUD9w2t4Vb3x9VG43Fqaxp+UX5i+
+	KiQCICaxkAXsjOFoaBsXtYzx+hU1s++iUJp7H7uAM2G/+WqrgxJMD8g8U1E2nPNiDHXCFzN/+eP
+	IR4U78cq1e2zGVDc45gkNOoD93gcCJ6nnLTgQdMn1ZrWb7BmXXBFB4jAMttsjWedbgtxKJa/2W2
+	jrdTsNBR3Zjd0PzSwKiypc+WdfZb+ACiv1a7s6FammsG
+X-Google-Smtp-Source: AGHT+IGPxcxao/HSElseyaTLTAghrvJ2csxsBfbQ4Udwa0eEZtZIt5xFFqgWZBrC6WgJmJp7FceqHA==
+X-Received: by 2002:a05:6a00:4b4a:b0:736:5c8e:baaa with SMTP id d2e1a72fcca58-736aa9bc0e9mr26082176b3a.2.1741723105679;
+        Tue, 11 Mar 2025 12:58:25 -0700 (PDT)
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: David Hildenbrand <david@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	xen-devel@lists.xenproject.org,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Weiwei Li <liwei1518@gmail.com>,
+	kvm@vger.kernel.org,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Paul Durrant <paul@xen.org>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	manos.pitsidianakis@linaro.org,
+	Peter Xu <peterx@redhat.com>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	alex.bennee@linaro.org,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	qemu-riscv@nongnu.org,
+	qemu-ppc@nongnu.org,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 13/17] system/physmem: compilation unit is now common to all targets
+Date: Tue, 11 Mar 2025 12:57:59 -0700
+Message-Id: <20250311195803.4115788-14-pierrick.bouvier@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
+References: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MISRA: Rephrase the deviation for Directive 4.10
-To: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>
-References: <20250304235701.2770842-1-andrew.cooper3@citrix.com>
- <alpine.DEB.2.22.394.2503041616560.1303386@ubuntu-linux-20-04-desktop>
- <08bb0c67-f5c4-401d-be63-5c20d0297b59@xen.org>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <08bb0c67-f5c4-401d-be63-5c20d0297b59@xen.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 11/03/2025 7:48 pm, Julien Grall wrote:
-> Hi,
->
-> On 05/03/2025 00:17, Stefano Stabellini wrote:
->> On Tue, 4 Mar 2025, Andrew Cooper wrote:
->>> The use of "legitimately" mixes the concepts of "it was designed to
->>> do this"
->>> and "it was correct to do this".
->>>
->>> The latter in particular can go stale.  "intended" is a better way
->>> of phrasing
->>> this.
->>>
->>> No functional change.
->>>
->>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>
-> > Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ system/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks.
+diff --git a/system/meson.build b/system/meson.build
+index c83d80fa248..9d0b0122e54 100644
+--- a/system/meson.build
++++ b/system/meson.build
+@@ -2,7 +2,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+   'arch_init.c',
+   'ioport.c',
+   'memory.c',
+-  'physmem.c',
+ )])
+ 
+ system_ss.add(files(
+@@ -15,6 +14,7 @@ system_ss.add(files(
+   'dma-helpers.c',
+   'globals.c',
+   'memory_mapping.c',
++  'physmem.c',
+   'qdev-monitor.c',
+   'qtest.c',
+   'rtc.c',
+-- 
+2.39.5
 
->
-> Going through my email, I noticed this patch was not committed. I
-> wonder if there was any reason?
-
-Urgh, it was supposed to go in ahead of 3da2149cf4dc6 ("x86/IDT:
-Generate bsp_idt[] at build time") which uses the new format.
-
-Also ahead of XSN-2, although the part needing this has been deferred
-for the meantime.
-
-But eclair is still non-blocking on D4.10, hence why staging is happy.
-
-I'll pick this up in my next sweep.
-
-~Andrew
 
