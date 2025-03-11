@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 672B4C282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 12:07:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.908020.1315185 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BD1C282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 12:07:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.908022.1315206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tryO6-0005aI-HN; Tue, 11 Mar 2025 12:07:10 +0000
+	id 1tryOD-00065N-2p; Tue, 11 Mar 2025 12:07:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 908020.1315185; Tue, 11 Mar 2025 12:07:10 +0000
+Received: by outflank-mailman (output) from mailman id 908022.1315206; Tue, 11 Mar 2025 12:07:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tryO6-0005a7-EU; Tue, 11 Mar 2025 12:07:10 +0000
-Received: by outflank-mailman (input) for mailman id 908020;
- Tue, 11 Mar 2025 12:07:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tryOC-00065E-Sr; Tue, 11 Mar 2025 12:07:16 +0000
+Received: by outflank-mailman (input) for mailman id 908022;
+ Tue, 11 Mar 2025 12:07:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=siat=V6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tryO4-0005a1-T9
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 12:07:08 +0000
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [2607:f8b0:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 57903bae-fe71-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 13:07:03 +0100 (CET)
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-223a7065ff8so4184405ad.0
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 05:07:03 -0700 (PDT)
+ id 1tryOC-000646-3w
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 12:07:16 +0000
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [2607:f8b0:4864:20::635])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5e034700-fe71-11ef-9ab9-95dc52dad729;
+ Tue, 11 Mar 2025 13:07:14 +0100 (CET)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-22401f4d35aso94273635ad.2
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 05:07:14 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-22410aa8b83sm95765925ad.241.2025.03.11.05.06.59
+ d2e1a72fcca58-736cbe3fb3fsm5116665b3a.83.2025.03.11.05.07.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 05:07:00 -0700 (PDT)
+ Tue, 11 Mar 2025 05:07:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,76 +46,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57903bae-fe71-11ef-9898-31a8f345e629
+X-Inumbo-ID: 5e034700-fe71-11ef-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741694821; x=1742299621; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=t4y83HIIB3mMQLsS32XTY2zN9q/797IMVEGVxmTtEcw=;
-        b=VVFtbQfErdG5Lnu1XCCrLdxLRCnJeRChAMtXCQ+JY8X4JEGGQfsCT7NbMMb+cuaxAt
-         Af55qsTDD/Irn04QNUtWxmYXUHknq0UXBsLuGVH313TxTwAxlHwdRUr+xeh4msLgVSmy
-         Jy1xfYevQZQ+JsvEamI3wXCEj3ifZHrRCgoCE=
+        d=citrix.com; s=google; t=1741694832; x=1742299632; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JTL0ZfXPTekNOVwpdMmR6t4znYMHoG7CKcBB5SY41+I=;
+        b=V/ZJpDsvgg0iOpKUsy3j9Bi6qJdmVYGFjt98zK9G3Q6RiZFLjL2CF9ezQSU0Aqg5b/
+         HspOFSiDx9DmAAYBGhUrR3AeLIlBv+gpAvp5O9ZYVbCWYZ2GLOG3Oo0LqsO40Lvu/eW4
+         Q4e8tw0sNaniGan7lpLOezkBwa9F4/3HxE4X0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741694821; x=1742299621;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=t4y83HIIB3mMQLsS32XTY2zN9q/797IMVEGVxmTtEcw=;
-        b=vcEbLtFgLCg60cEuPUtpH4zN5me9xY0+YXG5Xcn0l1SlN2gRV08YVfSajsNcxF3UNM
-         XnbU1hZjR3xZxUB2E/loSNpFOjcx4MOw6qlj6nUVqcj0LIgOgduG1Lj/D4TrkVMkSGRJ
-         54NpSjVK61F6VP0iFG7oMlRl1N0zcIwCdS1Sw4Tr8fNlRc0CfyZ2OLPsOhnAbsHFZ6zQ
-         Z9YcArDSidD45quvI0212oFXpVJyQ9MoULWMSFZR4jVPDwRSJXtouqk1fcDqH5r5RNhh
-         0TAkrbWiEKj+KeTe5gXS6sDbBFNVxyXNp3QfMK6HQ+LQ1qWI/dP/5jwztr2ma6zXqBJq
-         90pw==
-X-Gm-Message-State: AOJu0YwTSg+9f+jURabXxB0iepMA4zWKNQJbbWbNuL6t6Och7DvaAa1p
-	dH2k3kSpWXsAJ4EikxrIWgvi9hy1WAJWXDf07l2a4dpW35lmGQwKBnZrPqd4+/KNVD60D29Lrma
-	h
-X-Gm-Gg: ASbGncspfYetSuvE6LgEPhO03Cl3AE4qvl13ZQxOwSzBWSOX2QFKCHI9x9HGvj3BOQh
-	OBzA6DzlQOMtA3y2klyfXWCgx8ja0rqIkFR4x1CTITwpc9DDUhNO/xL+HXHi3Q8Vs+slGXj4P4e
-	uAcUl9glK/+g62NKuH3HpSzdmN0yyLhOeuG0Wmet4Zn0yOsJ9402OwXeZ13CGJWPzbD6keq+LeR
-	rck2d9VIlQjc+zhvJBGPRMjdf0i9xodPmKaaPxEJQfRC5WwT0ClEFuiJLWTqa8uJ0cEivUqW+BK
-	oprWI/acvU/uDx+Z3q+KTI3JUheSoh/BB8GPZMNBchSKqBj4/loedoQ=
-X-Google-Smtp-Source: AGHT+IG7kexaPwSjg1r85EBBfAulHDp473EZw8sSzI5+X7MB9NxcylaxuLaol60b2UYOLehD0wMLuA==
-X-Received: by 2002:a17:902:f686:b0:224:5a8:ba29 with SMTP id d9443c01a7336-22428ad1f1dmr268339265ad.43.1741694821021;
-        Tue, 11 Mar 2025 05:07:01 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741694832; x=1742299632;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JTL0ZfXPTekNOVwpdMmR6t4znYMHoG7CKcBB5SY41+I=;
+        b=IEG/nMHWlfdbdO1gGV3W3KWvm7vobhp+IK0VDaWDvrElPUmNB22nl1Jau/CTh5mjUp
+         q9etcBdN83hLn86s3Zh6lRyoGUtELBENky25UZZwJDri55I2J4Q2d3mOYrckSzZs5tFT
+         vCkjHR/f7ISa4ltIgUJGI0x9TB7Gpy9mCA2EOt9nUqDQIjIYkJxapJKN//ne0Orlf5xb
+         ySrNH7yxclv9WhzdniQwe303smGka6ffi7pWsnzj8MxM66DYXrVTiJjU+wvKWrkjWqsJ
+         Q1hxljkpq30Pyf554TgarB9pHfuzrRWhNTILpzRNswd5yRr7nqPOyo5JXxjc48FA0QzR
+         aYZQ==
+X-Gm-Message-State: AOJu0Yx9r2WStf/7UMrZ4tZR5O/iazBkhpifMzXINybQw/L+XcIHp4pE
+	9TkhQTP0Bytz943gk7WzqowEUdQ6ksKG7It0d7UjvhkB3sDxQ168Ds+JBPvJq3/1n7sSg02IYzB
+	T
+X-Gm-Gg: ASbGnct0ZNFzDLjNH6T4t0t4W3EMLm7SfgpFC499o5g5/wDceTi7pB/j+BxphOXTVHm
+	Ie9QEHF5SVH8JTdB9+hivQ1iU08r1oc2vSIKFihP8dA6jRE+QlA6T7ZbEbfTI0hojrHrBJJA+C6
+	r5SnK7n3HLmsT8B5hXWeJrTY9hsfCJGmaosKRfPcRQm0XQagbD3gjW36NPbnq+2M5d/FbQpsYgm
+	CQInig7eC7k4JZYMGStdETio8VkkG2Jc87bLWggGxZbdk4tdQWqxKRpjdBW6yIAq3JumjajUxcx
+	2OXi9cb80do9kl4owZgBbG2sX0eCAecR/txRxQL8hioFGMvMpVvpTg0=
+X-Google-Smtp-Source: AGHT+IF84n5Crz4rbJ97n8u9t0N/OS3tqDTWlQm9iV1Ar93eP3SlCpQjtGofhTyf01f6SjEMXq3r0w==
+X-Received: by 2002:a05:6a00:244e:b0:730:9801:d3e2 with SMTP id d2e1a72fcca58-736eb7d87f5mr5847293b3a.8.1741694831988;
+        Tue, 11 Mar 2025 05:07:11 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v4 0/3] x86/pci: reduce PCI accesses
-Date: Tue, 11 Mar 2025 13:06:49 +0100
-Message-ID: <20250311120652.61366-1-roger.pau@citrix.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v4 2/3] x86/hvm: check return code of hvm_pi_update_irte when binding
+Date: Tue, 11 Mar 2025 13:06:51 +0100
+Message-ID: <20250311120652.61366-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250311120652.61366-1-roger.pau@citrix.com>
+References: <20250311120652.61366-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+Consume the return code from hvm_pi_update_irte(), and propagate the error
+back to the caller if hvm_pi_update_irte() fails.
 
-Patches 1 and 2 are new bugfixes in this version.  Patch 3 is still
-mostly as v3, just with the extra logic to ensure vmx_pi_update_irte()
-correctness.
+Fixes: 35a1caf8b6b5 ('pass-through: update IRTE according to guest interrupt config changes')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v3:
+ - New in this version.
+---
+ xen/drivers/passthrough/x86/hvm.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-Thanks, Roger.
-
-Roger Pau Monne (3):
-  x86/vmx: fix posted interrupts usage of msi_desc->msg field
-  x86/hvm: check return code of hvm_pi_update_irte when binding
-  x86/iommu: avoid MSI address and data writes if IRT index hasn't
-    changed
-
- xen/arch/x86/hpet.c                      |  6 +++++-
- xen/arch/x86/hvm/vmx/vmx.c               | 20 +++++++++++++++++++-
- xen/arch/x86/include/asm/msi.h           |  2 +-
- xen/arch/x86/msi.c                       | 11 ++++++-----
- xen/drivers/passthrough/amd/iommu_intr.c |  4 ++--
- xen/drivers/passthrough/vtd/intremap.c   |  4 +++-
- xen/drivers/passthrough/x86/hvm.c        | 10 +++++++++-
- xen/include/xen/iommu.h                  |  6 ++++++
- 8 files changed, 51 insertions(+), 12 deletions(-)
-
+diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
+index f5faff7a499a..47de6953fdf8 100644
+--- a/xen/drivers/passthrough/x86/hvm.c
++++ b/xen/drivers/passthrough/x86/hvm.c
+@@ -381,7 +381,15 @@ int pt_irq_create_bind(
+ 
+         /* Use interrupt posting if it is supported. */
+         if ( iommu_intpost )
+-            hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi.gvec);
++        {
++            rc = hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi.gvec);
++
++            if ( rc )
++            {
++                pt_irq_destroy_bind(d, pt_irq_bind);
++                return rc;
++            }
++        }
+ 
+         if ( pt_irq_bind->u.msi.gflags & XEN_DOMCTL_VMSI_X86_UNMASKED )
+         {
 -- 
 2.48.1
 
