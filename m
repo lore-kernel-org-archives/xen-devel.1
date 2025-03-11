@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B167BC282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 11:56:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.907961.1315155 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECAE0C282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 11:59:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.907993.1315165 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tryDn-0000nK-0q; Tue, 11 Mar 2025 11:56:31 +0000
+	id 1tryGd-0002wm-Ea; Tue, 11 Mar 2025 11:59:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 907961.1315155; Tue, 11 Mar 2025 11:56:30 +0000
+Received: by outflank-mailman (output) from mailman id 907993.1315165; Tue, 11 Mar 2025 11:59:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tryDm-0000nD-U2; Tue, 11 Mar 2025 11:56:30 +0000
-Received: by outflank-mailman (input) for mailman id 907961;
- Tue, 11 Mar 2025 11:56:30 +0000
+	id 1tryGd-0002wf-Bz; Tue, 11 Mar 2025 11:59:27 +0000
+Received: by outflank-mailman (input) for mailman id 907993;
+ Tue, 11 Mar 2025 11:59:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1WQE=V6=gmail.com=gragst.linux@srs-se1.protection.inumbo.net>)
- id 1trxbS-00061U-VN
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 11:16:54 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=EmiY=V6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tryGc-0002wZ-F4
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 11:59:26 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55919bee-fe6a-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 12:16:52 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-549967c72bcso3886836e87.3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 04:16:52 -0700 (PDT)
-Received: from epuakyiw0a98.kyiv.epam.com (ll-74.141.223.85.sovam.net.ua.
- [85.223.141.74]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5498ae45fa8sm1755729e87.52.2025.03.11.04.16.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 04:16:46 -0700 (PDT)
+ id 4657556d-fe70-11ef-9898-31a8f345e629;
+ Tue, 11 Mar 2025 12:59:24 +0100 (CET)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-38f403edb4eso2930745f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 04:59:24 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3912c01cd31sm18004294f8f.52.2025.03.11.04.59.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Mar 2025 04:59:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,155 +47,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55919bee-fe6a-11ef-9898-31a8f345e629
+X-Inumbo-ID: 4657556d-fe70-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741691812; x=1742296612; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/wR0JYxxte1bhZ8sh6yCrPXhqI+ZP9qFcPRuW8qo1VM=;
-        b=VRIxBeqnnSnOMqrsVvtW87EAOkAaj8ai0xFDS3Hez5Z01U6CENTNVfCIus4YXyQOJf
-         sRPDygVn/LO+a38q6tab9l5W99RY1f5BamezobjjIVJ4Pnlsqr8mWOHp7nJWR/64C9cr
-         PNGOH6Q94RzZfHoFL1mdbbEuTzmyYygmmkPQAWtr5bFKfSoXtLCG21G8p+ZXSrzsqAHU
-         CtnrYjsVa8wAOp+ADXrgNxLVe2NAKHVITL+//wWT1z0q9lI1z+5awIuDr9zyCP4aXufQ
-         Ex/PMgP5+E6yIFkpc53K/JW/QBu/QrTpZBpE1vmFptRVRtDiTAgnIvHH4j+SIHOx8Rsq
-         W6xw==
+        d=suse.com; s=google; t=1741694364; x=1742299164; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=hERjAomuy6L7tseKyGREGYCTqyHWIvjuFAPqa/xMCh4=;
+        b=QdKAwQxx2Yz4Vgu+nHDnuhpRRl7yZZr9Y6avtw5Zii/ILqbGN27aBNJM94KOwaVejZ
+         pUTgx+M4vwwd+GvHd3LSSV7nDY6mtfGsac+D0COyqCkCYb+ONnJNZfvq56og4UcnkB96
+         jesbOBW7i4aaV875q7jZcAxf/q8l0BJi4ZQLau3MMwxi7VcBRaeruoxkmfdnysFbI0vz
+         /di662gw7JjB7vCTzScPlLz+L8pkXU/xJjsRXK2b1r0bfKPdYtgJ8ep7duyY15f+1luu
+         EAQ08UroXb9C/kHc+cw0iRz83h6xcgErXdSydH851WoUkAMlwMPilYGH/kwckcrd+7td
+         S2qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741691812; x=1742296612;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/wR0JYxxte1bhZ8sh6yCrPXhqI+ZP9qFcPRuW8qo1VM=;
-        b=RDkliEj7AOjan9O/ARRtlk7bkTklsbPxlmEEwQoSYg7Dlhtpom9Uv3wFpq7uLA3OIa
-         Fl5VlEI38y13yDIiJHFiXZ9et0ROudchtnDbIVIzBArdp9dbh807mFDifh039R3lu12/
-         VvFTtPtJQgpmIbVDs+dT534J0HwzHYRlL0l7lKpITGKYWgTU1+UzaRt5yKlD6t7o/76I
-         rscqwRotdhZzHsUi0WOrhVrZNmPXHkH9HVH0MxMEqSN/8znTfO/ZTF8DOZ3+Xu8dARZ2
-         miq9navycPVbiPHWcK9px8l45zYTgnhW0MrcxCEDg77r1fPdMAlVJzYOdSyFotHHN6qm
-         uvVg==
-X-Gm-Message-State: AOJu0YxnKcypI23fRi9gt2y7zd8vtSYOCBDQ6BrkhAKp1P7WpxPyadB0
-	aLU1LfNx0AAf31P8pvo/Q7aGGv1hbM/uGKaSI8eREgrKm5dC/vpQOM9eSQ==
-X-Gm-Gg: ASbGnctVCO1RFCpTdz+bERLs+LOOXfxp4QSymzpjBwvw1GGqQUHaTyt7DCBbieiE1cl
-	JwcoKhL7xe9La6tcEj1ksFFKnKdcLoDuV5vjZ+bByJvkOmhCxAxEJ5kGrRumwR8CtKdmXKs1ZN1
-	4xRaSo8gyuFIOAJA4rZtM8lr3B9uvdiK4tCW8qz5cShZ3GtLv8o1DXYAppmQ+raYKros1WBfzDB
-	IAv97IIn6NeV0yaqlLBLrxjOt2b4lw7VWSuFWx1HulffdNwCzj3+FhXGl1LC4PVVFe241OecKhy
-	Lv7pNY1xkn7TBzTpHXqybr/xM8wmGofu2uFcnBXdFj0UdD1kFW73QCoHO7GJImFiFKdfy30oK6n
-	yiDQH3JAaRyEy2sdPO8zGmhppwhJVG9ju/jraLw==
-X-Google-Smtp-Source: AGHT+IG26J7NKqoiAtVdI7Uj/LA73Tb1+MkPu25XYvQn8u3Jxdn5WZsSviRv1ozk/kK+Fu6pEBCesQ==
-X-Received: by 2002:a05:6512:b14:b0:545:c89:2bc9 with SMTP id 2adb3069b0e04-549910cb4a9mr6523148e87.43.1741691807076;
-        Tue, 11 Mar 2025 04:16:47 -0700 (PDT)
-From: Grygorii Strashko <gragst.linux@gmail.com>
-X-Google-Original-From: Grygorii Strashko <grygorii_strashko@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	"Roger Pau Monne" <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [RFC PATCH v3 6/7] xen/arm: Export host device-tree to hypfs
-Date: Tue, 11 Mar 2025 13:16:17 +0200
-Message-Id: <20250311111618.1850927-7-grygorii_strashko@epam.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250311111618.1850927-1-grygorii_strashko@epam.com>
-References: <20250311111618.1850927-1-grygorii_strashko@epam.com>
+        d=1e100.net; s=20230601; t=1741694364; x=1742299164;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hERjAomuy6L7tseKyGREGYCTqyHWIvjuFAPqa/xMCh4=;
+        b=lMoYsvMuxteen/QvvZ7fwzNerRD0tFPslNJe2KSrgmGjGpRl3BWsb9SR9RZExvI0av
+         qBxhq2KShR5GvbK2XKTfixeTwrIyMN6FljYqe1SQT/4jTQTlgCqKebRCmKS+tjJbo2LB
+         //kGwIadANxicy8FH5FL1K+XZvM79fCIHlgCpWLeumEXusYk0aoTi4BVgfFadj1FEu/h
+         p+6uXazaBYByCCc/hzEDFu9UwnUaB5pUiNxHL2ugO7Y1JvPXdgrc9Bl0F9N+7fwXEKcp
+         Sq0lhuQsEkplLlGm644uhw6rQXzzOOZ+Tki2IXm+IODjnG6jtXGqPZcWpxl/dz4gYnXJ
+         gKRQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUiPvmmeL4bHCQkWcxE9ff/L53I30ZrRmvQr0K1MaHMQeIFn2D4xXolYxxEpOyKQZ/Dlhyvk2DgssE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzcHeuLfttclQqi5fQ5RcR/PmFKglQZ2zRlbKHhZ7GpWs8fcLsn
+	/iE8jP7vhVntBDC3qZoRo1lybIM3EKG+up5s0wosiblmZpJKtGjQONajB4Kmlw==
+X-Gm-Gg: ASbGnctmmr3EO5drAlctR4TSte+dJ57u+9cOPGX9NOwMyP3rYE0gQVGhmo+fli9Oun5
+	2sV9Wpp7OHUN581H1kLOCwjGD8KvzsHAjFhgWIUwVjymA0/sGOAg2e8q7awyXkBZcftVfsxaoFQ
+	8GOMeNnPDEU6Kk3LIsCXQcSm/TloKk9D3Ulw+48PNtTlRsFA7CcOfSRM1+j+RqhD1Ug6czeeQ+Z
+	zt0WkFvh367tsUOh51QVgDiRRU7qw3SsTK8H35GVEDWTouxta3r/hjshcpdIfaGHzVzKaYdE/fh
+	6/SPMVDGiuere+oULKRCJtqFN2Fx+D5jmC915DWkSNQA7YP/ks6flEDccRe3M19x4j5tNsSCGZB
+	kJpfAfj0kUBGIFL8QWb6gvSPcBJdFBw==
+X-Google-Smtp-Source: AGHT+IF/+zvCgqnz54MKha9rjmWTbzhz7I+uiHmK9RnlJizGEWHlGU5FUJEMNKwCgNAD9dFNBaWh/g==
+X-Received: by 2002:a5d:6d8a:0:b0:390:e655:f998 with SMTP id ffacd0b85a97d-39132d6f17bmr13936800f8f.26.1741694363716;
+        Tue, 11 Mar 2025 04:59:23 -0700 (PDT)
+Message-ID: <ebef450c-280e-43a4-9a48-e4d1f754ba03@suse.com>
+Date: Tue, 11 Mar 2025 12:59:22 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] xen: mem_access: conditionally compile vm_event.c
+ & monitor.c
+To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <tamas@tklengyel.com>,
+ Ayan Kumar Halder <ayan.kumar.halder@amd.com>, xen-devel@lists.xenproject.org
+References: <cover.1741687645.git.Sergiy_Kibrik@epam.com>
+ <e37da57b94fd3bd4f314e6fbd7b6b94aee4b4607.1741687645.git.Sergiy_Kibrik@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <e37da57b94fd3bd4f314e6fbd7b6b94aee4b4607.1741687645.git.Sergiy_Kibrik@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+On 11.03.2025 11:27, Sergiy Kibrik wrote:
+> From: Stefano Stabellini <stefano.stabellini@amd.com>
+> 
+> Extend coverage of CONFIG_VM_EVENT option and make the build of VM events
+> and monitoring support optional. Also make MEM_PAGING option depend on VM_EVENT
+> to document that mem_paging is relying on vm_event.
+> This is to reduce code size on Arm when this option isn't enabled.
+> 
+> CC: Jan Beulich <jbeulich@suse.com>
+> CC: Tamas K Lengyel <tamas@tklengyel.com>
+> Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 
-If enabled, host device-tree will be exported to hypfs and can be
-accessed through /devicetree path.
-Exported device-tree has the same format, as the device-tree
-exported to the sysfs by the Linux kernel.
-This is useful when XEN toolstack needs an access to the host device-tree.
+Please can tags be kept in chronological order? It's impossible to review
+a patch that wasn't first signed-off on by the author(s).
 
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
----
- xen/arch/arm/Kconfig           | 16 ++++++++++++++++
- xen/arch/arm/Makefile          |  1 +
- xen/arch/arm/host_dtb_export.c | 28 ++++++++++++++++++++++++++++
- 3 files changed, 45 insertions(+)
- create mode 100644 xen/arch/arm/host_dtb_export.c
+> ---
+> changes in v3:
+>  - add dependency MEM_PAGING -> VM_EVENT
+>  - monitor_domctl() stub returns -EOPNOTSUPP
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index a26d3e11827c..fa51244e2706 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -125,6 +125,22 @@ config DOM0LESS_BOOT
- 	  Xen boot without the need of a control domain (Dom0), which could be
- 	  present anyway.
- 
-+config HOST_DTB_EXPORT
-+	bool "Export host device tree to hypfs if enabled"
-+	depends on ARM && HYPFS && !ACPI
-+	help
-+
-+	  Export host device-tree to hypfs so toolstack can have an access for the
-+	  host device tree from Dom0. If you unsure say N.
-+
-+config HOST_DTB_MAX_SIZE
-+	int "Max host dtb export size"
-+	depends on HOST_DTB_EXPORT
-+	default 8192
-+	help
-+
-+	  Maximum size of the host device-tree exported to hypfs.
-+
- config GICV3
- 	bool "GICv3 driver"
- 	depends on !NEW_VGIC
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 43ab5e8f2550..1518592deb64 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -20,6 +20,7 @@ obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-build.init.o
- obj-y += domain.o
- obj-y += domain_build.init.o
- obj-y += domctl.o
-+obj-$(CONFIG_HOST_DTB_EXPORT) += host_dtb_export.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
- obj-y += efi/
- obj-y += gic.o
-diff --git a/xen/arch/arm/host_dtb_export.c b/xen/arch/arm/host_dtb_export.c
-new file mode 100644
-index 000000000000..c9beb2803883
---- /dev/null
-+++ b/xen/arch/arm/host_dtb_export.c
-@@ -0,0 +1,28 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Export host FDT to the hypfs
-+ *
-+ * Copyright (C) 2024 EPAM Systems
-+ */
-+
-+#include <xen/device_tree.h>
-+#include <xen/hypfs.h>
-+#include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
-+
-+static HYPFS_VARSIZE_INIT(dt_prop, XEN_HYPFS_TYPE_BLOB,
-+        "devicetree", CONFIG_HOST_DTB_MAX_SIZE,
-+        &hypfs_leaf_ro_funcs);
-+
-+static int __init host_dtb_export_init(void)
-+{
-+    ASSERT(dt_host && (dt_host->sibling == NULL));
-+
-+    dt_prop.u.content = device_tree_flattened;
-+    dt_prop.e.size = fdt_totalsize(device_tree_flattened);
-+    hypfs_add_leaf(&hypfs_root, &dt_prop, true);
-+
-+    return 0;
-+}
-+
-+__initcall(host_dtb_export_init);
--- 
-2.34.1
+Seeing this, i.e. ...
 
+> --- a/xen/include/xen/monitor.h
+> +++ b/xen/include/xen/monitor.h
+> @@ -27,8 +27,17 @@
+>  struct domain;
+>  struct xen_domctl_monitor_op;
+>  
+> +#ifdef CONFIG_VM_EVENT
+>  int monitor_domctl(struct domain *d, struct xen_domctl_monitor_op *mop);
+>  void monitor_guest_request(void);
+> +#else
+> +static inline int monitor_domctl(struct domain *d,
+> +                                 struct xen_domctl_monitor_op *mop)
+> +{
+> +    return -EOPNOTSUPP;
+
+... this, why ...
+
+> @@ -88,7 +85,18 @@ void vm_event_cancel_slot(struct domain *d, struct vm_event_domain *ved);
+>  void vm_event_put_request(struct domain *d, struct vm_event_domain *ved,
+>                            vm_event_request_t *req);
+>  
+> +#ifdef CONFIG_VM_EVENT
+> +/* Clean up on domain destruction */
+> +void vm_event_cleanup(struct domain *d);
+>  int vm_event_domctl(struct domain *d, struct xen_domctl_vm_event_op *vec);
+> +#else
+> +static inline void vm_event_cleanup(struct domain *d) {}
+> +static inline int vm_event_domctl(struct domain *d,
+> +                                  struct xen_domctl_vm_event_op *vec)
+> +{
+> +    return -EINVAL;
+
+... is it EINVAL here?
+
+Jan
 
