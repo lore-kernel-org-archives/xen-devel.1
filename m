@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9644C28B2F
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 16:05:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.908627.1315744 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5290C282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 16:05:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.908640.1315761 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts26e-0004Ly-9d; Tue, 11 Mar 2025 16:05:24 +0000
+	id 1ts26s-0004og-UB; Tue, 11 Mar 2025 16:05:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 908627.1315744; Tue, 11 Mar 2025 16:05:24 +0000
+Received: by outflank-mailman (output) from mailman id 908640.1315761; Tue, 11 Mar 2025 16:05:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts26e-0004Lr-6e; Tue, 11 Mar 2025 16:05:24 +0000
-Received: by outflank-mailman (input) for mailman id 908627;
- Tue, 11 Mar 2025 16:05:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ts26s-0004oW-Og; Tue, 11 Mar 2025 16:05:38 +0000
+Received: by outflank-mailman (input) for mailman id 908640;
+ Tue, 11 Mar 2025 16:05:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JHpu=V6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1ts26c-0004LY-W7
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 16:05:22 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a2009fd3-fe92-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 17:05:21 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ac2ab99e16eso394393766b.0
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 09:05:20 -0700 (PDT)
-Received: from [192.168.1.5] (user-109-243-64-225.play-internet.pl.
- [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac2397358b8sm946097266b.109.2025.03.11.09.05.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 09:05:19 -0700 (PDT)
+ <SRS0=NX78=V6=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
+ id 1ts1x0-0007cO-Kx
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 15:55:26 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3ef8ea1e-fe91-11ef-9ab9-95dc52dad729;
+ Tue, 11 Mar 2025 16:55:25 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 7CD8E1F452;
+ Tue, 11 Mar 2025 15:54:57 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E30DA134A0;
+ Tue, 11 Mar 2025 15:54:56 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id oEspNtBc0GdUdQAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 11 Mar 2025 15:54:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,171 +54,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a2009fd3-fe92-11ef-9898-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741709120; x=1742313920; darn=lists.xenproject.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UzHd6iMMLXuYYCM1EzL52RSbRwWbnidC35UGy6Zl3PA=;
-        b=O1lDBPoOnrNV39a0ABAq1dNM/HhbBfvA+FbNLqepapspGXThzMtpKC5bX1VwtTnLGA
-         pLLO8H9S5uuExLLTsCjFByLeqmeqO9FZZl2yqZpdaGusN1LCZ44CIGNBdRo+vQYyZfUH
-         OiwPdoKc0OxMty9br001gKqJ0H9egnO3zR5XpLxQKBGzOsWcUJk44+sjUs/uocBL8G8U
-         Ia/RAxbc0bHK92IDtnE2c8CTpzEYJDCi8gbZEJnvEKUn0S0zY6i4hoc1NzaXbntuOQp3
-         U5MPSINHruZ1Z/sb85tEpE/PDHgDHA80SXiWR8c22JHxzm4gwrCcDjJHd/jXaTsE+Fck
-         zOkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741709120; x=1742313920;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=UzHd6iMMLXuYYCM1EzL52RSbRwWbnidC35UGy6Zl3PA=;
-        b=fNWhjB18uhYmd631yoJbyB9AU6TYAz5vO5AkdPbdjVf+bn72+pDfbQJXzmConPcI6w
-         rRbrW9ri+AwgCTtihkmemYW/q8kpTY/tDSjgpDpc/DZ52JtwCpVYSDGe+I+3B+yjTjsB
-         o3FqLQzeLNnzklZmZAcnDWNTqQbKUCwWZ2/QyUw0Dp1n5Hf6ilA5jLO2VjQgQgJIp8Uf
-         Y7hPGQiNsEOx9gbl70vg+Pro6AVd+XRpyDt+BQnxoEhJiw16E0z7JMuJ6X26D/eaRNMm
-         bJez66LUohzGZnNPhbOyFHZFP/Dkvx8vzh7DRgM4rCENz5Tc8KOsHwm+ZcJWGyvRkqkB
-         m88A==
-X-Forwarded-Encrypted: i=1; AJvYcCWTQzsfu08+SCuCR7aJ34VRtHGol+/z2n9MO6/kTOL343Bh+MbKZwi5oZ3qHFCT7Gx8+t7EhgnbCfg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxKMpPJfaeRtnLY7mzfiPqZ3aMhlMGLlOBMSR1leWxVV02fcW20
-	kv/+h7M+qPE5GALZ2I8K6AnQX2v3H9hTCXd9NncEiZiQHDLYzvjD
-X-Gm-Gg: ASbGncsk5wvzUEwo9hGq3sg2scL0uJ8aM+iTMi/EWIrwZQHJWbaixnnzsUn18oOs/wo
-	vm1ICUBcebyF2GC3lDc8NTOs9TBj3/guW86OjjaXZGQAtEZeHMzJDAWPiOa0+It4UJCSB1kXoYG
-	2nSHZxsPvZPJlfYjVz20xbwCKv8wPcpaocIWW2NLeffc61u9XRMPMQwr5jZgWCIWXQwgvGShnoP
-	tcf0GGUKJkcW/3wsJ0GVXhYMVS80m7zNEJuHA/eV2lMC4dI+bb1HrspKoxK87o6qGRGY8awp2f0
-	6FexHwGcU0wsd3so797fvzHo4E/Te0Qq3DCS0/x8rK1p7iQsRvW+qMe518TxR5M27g1gs8CAEcR
-	X5VNyVudPLCIArGgaxxVi
-X-Google-Smtp-Source: AGHT+IHPtH2YCe19JU0eMdlCRjXCcXvn7E3iKMqnC6VjbOd3ze9nqHs2bFU0fKZU3q0Gv+40cxVuZg==
-X-Received: by 2002:a17:906:3a85:b0:ac2:7adb:ee3b with SMTP id a640c23a62f3a-ac27adbf21emr1301703066b.1.1741709119385;
-        Tue, 11 Mar 2025 09:05:19 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------5lscqloy2ZpsvI6lomN0fsQK"
-Message-ID: <5b22cfc5-f796-46bc-8cc4-090ab66d88b5@gmail.com>
-Date: Tue, 11 Mar 2025 17:05:18 +0100
+X-Inumbo-ID: 3ef8ea1e-fe91-11ef-9ab9-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1741708497; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Y2QvY6PVclanBPN/7E5Tf5uByFFYe3OXaJ8iZr7ZrX8=;
+	b=2Pn7PJ2erySVEjfwNvLRkBYt07s+rg12O+wHz5Kx8n9OJ4WW2HOxkYf/OMOxfhdB1XJ7h5
+	+uSJXyzsnpxLT4idjsuZyWyDqBbx4zDzq7/4gewGRBb00dc6rnulW9wHINERup9rI3MchY
+	bPgR5ip6GxUBKWhTeBPaZt4f5GuJK5g=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1741708497;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Y2QvY6PVclanBPN/7E5Tf5uByFFYe3OXaJ8iZr7ZrX8=;
+	b=G9+zCNxDECef7LxTOmra0fbhNMbTZjVoaNkDoL7lLArKtpIcQIfa2clFEm/eAGymus64VK
+	nPDfD+mTu5UqnLBQ==
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=2Pn7PJ2e;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=G9+zCNxD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1741708497; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Y2QvY6PVclanBPN/7E5Tf5uByFFYe3OXaJ8iZr7ZrX8=;
+	b=2Pn7PJ2erySVEjfwNvLRkBYt07s+rg12O+wHz5Kx8n9OJ4WW2HOxkYf/OMOxfhdB1XJ7h5
+	+uSJXyzsnpxLT4idjsuZyWyDqBbx4zDzq7/4gewGRBb00dc6rnulW9wHINERup9rI3MchY
+	bPgR5ip6GxUBKWhTeBPaZt4f5GuJK5g=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1741708497;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Y2QvY6PVclanBPN/7E5Tf5uByFFYe3OXaJ8iZr7ZrX8=;
+	b=G9+zCNxDECef7LxTOmra0fbhNMbTZjVoaNkDoL7lLArKtpIcQIfa2clFEm/eAGymus64VK
+	nPDfD+mTu5UqnLBQ==
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: simona@ffwll.ch,
+	airlied@gmail.com,
+	mripard@kernel.org,
+	maarten.lankhorst@linux.intel.com,
+	geert@linux-m68k.org,
+	tomi.valkeinen@ideasonboard.com
+Cc: dri-devel@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org,
+	freedreno@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-samsung-soc@vger.kernel.org,
+	nouveau@lists.freedesktop.org,
+	virtualization@lists.linux.dev,
+	spice-devel@lists.freedesktop.org,
+	linux-renesas-soc@vger.kernel.org,
+	linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	intel-xe@lists.freedesktop.org,
+	xen-devel@lists.xenproject.org,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Dave Airlie <airlied@redhat.com>,
+	Gerd Hoffmann <kraxel@redhat.com>
+Subject: [PATCH v4 16/25] drm/qxl: Compute dumb-buffer sizes with drm_mode_size_dumb()
+Date: Tue, 11 Mar 2025 16:47:20 +0100
+Message-ID: <20250311155120.442633-17-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250311155120.442633-1-tzimmermann@suse.de>
+References: <20250311155120.442633-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] xen/riscv: add H extenstion to -march
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Milan Djokic <milandjokic1995@gmail.com>,
- Slavisa Petrovic <Slavisa.Petrovic@rt-rk.com>, xen-devel@lists.xenproject.org
-References: <32ebe4032b7968157d5cadbc2f6aa1d9f2d363c9.1741707803.git.oleksii.kurochko@gmail.com>
- <c55c4f19-21e2-4115-b7f6-ba4752cc2e56@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <c55c4f19-21e2-4115-b7f6-ba4752cc2e56@suse.com>
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 7CD8E1F452
+X-Spamd-Result: default: False [-1.51 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLqtkr6cif1ebgurukgmwdm7xc),to(RLbwen1niosrcqbxsafh1)];
+	ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[suse.de:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
 
-This is a multi-part message in MIME format.
---------------5lscqloy2ZpsvI6lomN0fsQK
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
+and buffer size. No alignment required.
 
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_dumb.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
 
-On 3/11/25 4:48 PM, Jan Beulich wrote:
-> On 11.03.2025 16:45, Oleksii Kurochko wrote:
->> --- a/xen/arch/riscv/arch.mk
->> +++ b/xen/arch/riscv/arch.mk
->> @@ -9,7 +9,8 @@ riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
->>   riscv-march-$(CONFIG_RISCV_64) := rv64
->>   riscv-march-y += ima
->>   riscv-march-$(CONFIG_RISCV_ISA_C) += c
->> -riscv-march-y += _zicsr_zifencei_zbb
->> +h-extension-name := $(call cc-ifversion,-lt,1301, hh, h)
-> Instead of a version check, did you consider probing the compiler? With the
-> hard-coded version, how are things going to work with Clang?
+diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_dumb.c
+index 17df5c7ccf69..1200946767ce 100644
+--- a/drivers/gpu/drm/qxl/qxl_dumb.c
++++ b/drivers/gpu/drm/qxl/qxl_dumb.c
+@@ -23,6 +23,8 @@
+  *          Alon Levy
+  */
+ 
++#include <drm/drm_dumb_buffers.h>
++
+ #include "qxl_drv.h"
+ #include "qxl_object.h"
+ 
+@@ -35,14 +37,13 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
+ 	struct qxl_device *qdev = to_qxl(dev);
+ 	struct qxl_bo *qobj;
+ 	struct drm_gem_object *gobj;
+-	uint32_t handle;
+ 	int r;
+ 	struct qxl_surface surf;
+-	uint32_t pitch, format;
++	u32 format;
+ 
+-	pitch = args->width * ((args->bpp + 1) / 8);
+-	args->size = pitch * args->height;
+-	args->size = ALIGN(args->size, PAGE_SIZE);
++	r = drm_mode_size_dumb(dev, args, 0, 0);
++	if (r)
++		return r;
+ 
+ 	switch (args->bpp) {
+ 	case 16:
+@@ -57,20 +58,18 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
+ 
+ 	surf.width = args->width;
+ 	surf.height = args->height;
+-	surf.stride = pitch;
++	surf.stride = args->pitch;
+ 	surf.format = format;
+ 	surf.data = 0;
+ 
+ 	r = qxl_gem_object_create_with_handle(qdev, file_priv,
+ 					      QXL_GEM_DOMAIN_CPU,
+ 					      args->size, &surf, &gobj,
+-					      &handle);
++					      &args->handle);
+ 	if (r)
+ 		return r;
+ 	qobj = gem_to_qxl_bo(gobj);
+ 	qobj->is_dumb = true;
+ 	drm_gem_object_put(gobj);
+-	args->pitch = pitch;
+-	args->handle = handle;
+ 	return 0;
+ }
+-- 
+2.48.1
 
-Initially, it was implemented using:
-
-+$(h-extension-name)-insn := "hfence.gvma"
-+$(call check-extension,$(h-extension-name))
-
-with
-
-+h-extension-name := $(call cc-ifversion,-lt,1301, hh, h)
-
-But it seems that we still need this hard-coded version for h-extension-name
-because of this behavior that h extensions should be longer then single letter
-for some compilers.
-
-Probably, we could consider option to check "hfence.gvma" twice:
-h-insn := "hfence.gvma"
-$(call check-extension,h)
-
-hh-insn := "hfence.gvma"
-$(call check-extension,hh)
-
-And filter-out/skip the second check-extension if the previous one check succeeded.
-But it looks a weird.
-
-~ Oleksii
-
-
-
---------------5lscqloy2ZpsvI6lomN0fsQK
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 3/11/25 4:48 PM, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:c55c4f19-21e2-4115-b7f6-ba4752cc2e56@suse.com">
-      <pre wrap="" class="moz-quote-pre">On 11.03.2025 16:45, Oleksii Kurochko wrote:
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">--- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -9,7 +9,8 @@ riscv-abi-$(CONFIG_RISCV_64) := -mabi=lp64
- riscv-march-$(CONFIG_RISCV_64) := rv64
- riscv-march-y += ima
- riscv-march-$(CONFIG_RISCV_ISA_C) += c
--riscv-march-y += _zicsr_zifencei_zbb
-+h-extension-name := $(call cc-ifversion,-lt,1301, hh, h)
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-Instead of a version check, did you consider probing the compiler? With the
-hard-coded version, how are things going to work with Clang?</pre>
-    </blockquote>
-    <pre>Initially, it was implemented using:</pre>
-    <pre>+$(h-extension-name)-insn := "hfence.gvma"
-+$(call check-extension,$(h-extension-name))</pre>
-    <pre>with</pre>
-    <pre>+h-extension-name := $(call cc-ifversion,-lt,1301, hh, h)</pre>
-    <pre>But it seems that we still need this hard-coded version for h-extension-name
-because of this behavior that h extensions should be longer then single letter
-for some compilers.
-
-Probably, we could consider option to check "hfence.gvma" twice:
-h-insn := "hfence.gvma"
-$(call check-extension,h)
-
-hh-insn := "hfence.gvma"
-$(call check-extension,hh)
-
-And filter-out/skip the second check-extension if the previous one check succeeded.
-But it looks a weird.
-
-~ Oleksii
-
-
-
-</pre>
-  </body>
-</html>
-
---------------5lscqloy2ZpsvI6lomN0fsQK--
 
