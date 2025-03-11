@@ -4,52 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40411C28B2E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 09:04:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.907437.1314681 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F7FC282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 09:18:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.907468.1314701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trvXL-000126-9L; Tue, 11 Mar 2025 09:04:31 +0000
+	id 1trvkN-0003k9-Nt; Tue, 11 Mar 2025 09:17:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 907437.1314681; Tue, 11 Mar 2025 09:04:31 +0000
+Received: by outflank-mailman (output) from mailman id 907468.1314701; Tue, 11 Mar 2025 09:17:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trvXL-00011y-5u; Tue, 11 Mar 2025 09:04:31 +0000
-Received: by outflank-mailman (input) for mailman id 907437;
- Tue, 11 Mar 2025 09:04:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1trvkN-0003k2-LL; Tue, 11 Mar 2025 09:17:59 +0000
+Received: by outflank-mailman (input) for mailman id 907468;
+ Tue, 11 Mar 2025 09:17:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5FZT=V6=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1trvXJ-0000na-Pp
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 09:04:29 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20605.outbound.protection.outlook.com
- [2a01:111:f403:2406::605])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d5b43dfa-fe57-11ef-9ab9-95dc52dad729;
- Tue, 11 Mar 2025 10:04:28 +0100 (CET)
-Received: from SN6PR08CA0035.namprd08.prod.outlook.com (2603:10b6:805:66::48)
- by CH3PR12MB8073.namprd12.prod.outlook.com (2603:10b6:610:126::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.26; Tue, 11 Mar
- 2025 09:04:21 +0000
-Received: from SA2PEPF000015CB.namprd03.prod.outlook.com
- (2603:10b6:805:66:cafe::fa) by SN6PR08CA0035.outlook.office365.com
- (2603:10b6:805:66::48) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.26 via Frontend Transport; Tue,
- 11 Mar 2025 09:04:21 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF000015CB.mail.protection.outlook.com (10.167.241.201) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Tue, 11 Mar 2025 09:04:20 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Mar
- 2025 04:04:20 -0500
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Tue, 11 Mar 2025 04:04:18 -0500
+ <SRS0=QaIb=V6=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1trvkN-0003jv-0r
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 09:17:59 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b6c06ff7-fe59-11ef-9898-31a8f345e629;
+ Tue, 11 Mar 2025 10:17:54 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43cf05f0c3eso14340985e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 02:17:54 -0700 (PDT)
+Received: from localhost ([66.81.170.107]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43cf27f8ef3sm78672445e9.11.2025.03.11.02.17.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Mar 2025 02:17:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,149 +46,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5b43dfa-fe57-11ef-9ab9-95dc52dad729
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y3lmWCBI1SfwzKnPhDhYbys+TwSBiZBEvoEWI7Nzl8s8AVSJzY1ZEl4D2Q2tpt1lEQ2lRuM5AHf17lFwXakfeQq8GbpWtXuCjIZRs8VC3JpANkombCoApGLLbGc7GlsdY6jtA+aqontJimmZG9i7mGHILvfP+vfIIUXdOdn4jx+0/NcKgXkf6b9sH9Zuxtr8/SpqgxG6W8h8UZO22jKGwF4Y5A9Lc1YRdaeLKEOt0wsrUiA8iDObRIaEYDucgNmZ/ajhAAaGPPjxKHYdSv+nhMZfPso5d8cv237ade78dxNbMN7uAtHudC9/9hcuAhxMcFqYGTyfsLgodNu2su3Fuw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=80brAO46bmDac1yCYoJVXqrH6nv3qcWOTeS80rNdmTU=;
- b=ajwZdNd4WmkXInHzTKoDYRN7hGVJdpyCCindVlAZJxtoVgEp0WZ0hyX3Fg1eDrxyVinKd/ortq95PdJbvh2fcdk3zYLRZuybIkA6U8MNC+YUwqQNjWqYKOMJFp984NCnlbCYaZORfk0tZbVA/XnLf5hW9MI3PSXSVh+jkyhXWtJ3pZkH8Z0GqD/TUhkK+kWmWQCaQScUZKO/vFxRqDbTaJVz1Z6lWJ88ezqFyFQJKge36hhmlGP3maNVKeLKNS4xeqQyDsoSzR2CpABlFVWFkcAm+F/ym1CWPtGfBizCBfeMzy91cMBjg5HIgAVvRjxrrXEF1K0CUVXqweVc2YYyNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=80brAO46bmDac1yCYoJVXqrH6nv3qcWOTeS80rNdmTU=;
- b=hbk75kEkMLj54z4Hx8m793xM0kWOih85m8BKgM1OLXlPLtvei+D1CPpYZ8GzzkWXuHUFGditEb1vUPQFyYExCYajZ9ua29K0rGGNufhYe3MYmP2sz9YqcYk8+OFvPbq4/A1BEYcvR5Clm57VXuWC85BXsCw4oKKO0pw5xFf64IM=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
-	"Bertrand Marquis" <bertrand.marquis@arm.com>
-Subject: [PATCH 2/2] tools/arm: Reject configuration with incorrect nr_spis value
-Date: Tue, 11 Mar 2025 10:04:09 +0100
-Message-ID: <20250311090409.122577-3-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250311090409.122577-1-michal.orzel@amd.com>
-References: <20250311090409.122577-1-michal.orzel@amd.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CB:EE_|CH3PR12MB8073:EE_
-X-MS-Office365-Filtering-Correlation-Id: a40a0a1f-a7ff-42cd-292c-08dd607bb632
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?KQ/+PtggQAdTEuhWmxhbXx5iO6Dojx/XPEHrVsv8K4qfVuPWANMzG+c+BuI5?=
- =?us-ascii?Q?W7TLHDqimEwQoSyAFHWK6tnopcmz3xBZXN+C3f9FE0yIr6BM8FdO2efIt08Q?=
- =?us-ascii?Q?MJPDDV2SKRmlpJViNVeUEKBMWGnwEC/7pC/29GCPgzhI85kgsiOZCBS/Id/4?=
- =?us-ascii?Q?bukVAgdXiB+kG5ZhbuJLIMpGT8UxiQO7KAWrnStlB9suFv3I0bmKk1Glq0Nt?=
- =?us-ascii?Q?KpULsMPEK9Zqg80rYSX/9GngNyG3RMghFAxBNsQ/mE5XSWPegLlriQ9kyB86?=
- =?us-ascii?Q?j1P2mggxSRkNEG8uRNkfhpNjVhql5e7SngxrYjD5PCIr4NrshEl1HIhQ7TsE?=
- =?us-ascii?Q?HQzVlyvItcPcKvPu/pEFhvhgIdOyAOLG6JQ6iV6h+Cg34M2a0twPlAkapc/O?=
- =?us-ascii?Q?Zu6NwjP+q2qaNBqK4NOupy1303XMHfIYPrye7fit/tJ996SahnFbyJbSdpbR?=
- =?us-ascii?Q?oIQFiEjBzY3ND9CQlUE12ELLK9rPlxDtSMIBbqjPnXw6tMkDj1RCdC2FBm2f?=
- =?us-ascii?Q?s8hVfEGalFWtcApR5SJvaI7NfMFFLa1gXRhsDlEtEy0FKGalSsedi2uqfjQA?=
- =?us-ascii?Q?H4+2xEpW8cHmFd7818qCrOUvLiZpnRpj05HFNqOMfC0u3agOaMRMDade1gfJ?=
- =?us-ascii?Q?a8zwCzFTk4TvPheQ8Dr8glSlQ8S8HH3RfukZxKXH8boL9j/uNKFtkPql9469?=
- =?us-ascii?Q?OlgDRFXjjBGpiu+7mfqp3Q6suNidAxlrImAcWkslY1+UYfxgynhllCJVq8fe?=
- =?us-ascii?Q?M3bH/a/7IIDwHF9si5Rh1qitMH+NqY/DRPmYBL3tFe8wUiYCV2I6QGwpgew4?=
- =?us-ascii?Q?fL/HISPDsjlv/y10M6j0nrD/Ae6SXkd0NxtBYKHA1hRs7OCfZdU3l33oQVpc?=
- =?us-ascii?Q?lVzvsGc27sRRb4Sz5BLN3XqFScA1+y34xoobJ2b9UtVn1VvUp2CTlGR24GuE?=
- =?us-ascii?Q?/VYQPepN0RGiE2t3dwhucQuJLe2VZaPfFglJA+eBF8ee3NEBJkaHaIrkp3bB?=
- =?us-ascii?Q?zJrezpMGtggfZI14ocDFptFISFwjJC0aEODzoKTdWQkq34EhNU340eDuM4V2?=
- =?us-ascii?Q?RFF1wWa/Ogm3UC7icDYR1Gq44q+8/QN/e9jIClfu4bkoXtSqPG3rUtXnF7pz?=
- =?us-ascii?Q?7NHguBzQqQafCCV6EAgSnBtCkZpBtXxblIBsv9bV5SnrmSmm/uYE9IH0WiQi?=
- =?us-ascii?Q?zJTuPFMSI8RkMW25cxgBefASneDXUxWD4n8Le8n2e00osrHcUlHjbAdVSfbT?=
- =?us-ascii?Q?yZlT+awUaACAe944y8aZK6/1hiFRSuXgT1LG2Y9DbWsDDlnYZ/cUQmFOaOZf?=
- =?us-ascii?Q?zzzPMqlUhL+HVJv5FwlTmyKPusJbVSlQuqUax6aI3cfuJFeqmAZ1wU2vXs54?=
- =?us-ascii?Q?Awsu1ddIx6lipSt1tJzZZOlKqHMiim3G5Uz/HsxdOoic+XffQUpJvB//I1sT?=
- =?us-ascii?Q?jwVfVReuq2Z6VfhkavwM3ZXjKfv2H6uHDCE9z6TOahwuQyWSnUkxNYX/lYiE?=
- =?us-ascii?Q?IvMEmrWggWT2wik=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2025 09:04:20.9369
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a40a0a1f-a7ff-42cd-292c-08dd607bb632
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF000015CB.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8073
+X-Inumbo-ID: b6c06ff7-fe59-11ef-9898-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1741684674; x=1742289474; darn=lists.xenproject.org;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0dzrzcyd8GjsfaBoKtl9Wiw+PcOdfc4AoYsq7TuoxVg=;
+        b=EMvt49TXYNOPTbxvXEpNlgmLKyBm5V/HW8sXPWRm6BEoU43lZDO2KwwJ+BNajG8YMa
+         3fDSiBfZUTvRtqmFyKnE14JHOt4iL3UStlF2reemtxDvIfw5XGZ7RbxQH4gAVuLiJb5c
+         sVNHkueNbxl+MSE817/E7sy8auimRjw7plg/A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741684674; x=1742289474;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=0dzrzcyd8GjsfaBoKtl9Wiw+PcOdfc4AoYsq7TuoxVg=;
+        b=NkJ9kaU+2+iwoTcZmAxTQqxBWh+MlzrOjLJREONjsGC2p0Z/3oi+w5JfzgmrBCy+dq
+         X3MFZGoMuK2s5Csz+nojYO8CpNN/GE8t0SXfaqfjjqon5wk9ru4cqQnGkO4SnjUzQxxn
+         H202S2SKeZWLOVlWMd1dMbH3UEAPnhHO2WW/84Q7U9fS5N2N++NyPnibTZHysq7ol3KM
+         bTyISXafpDafLKnaObmlOwM1q2SRXzmLiKD8EoV+RQTVU7Wfs/50hBgzEWxPyF/jwsS2
+         vYQ9JD39mT8BIFmvl8L/eWj4J8wOmEKYBUFgKWeRbXTy37GI6fFAnSUppRwBhZsZU1Su
+         yELA==
+X-Forwarded-Encrypted: i=1; AJvYcCXjG61WfV0+Qz06qvuXnpijxLGe7zkLOOIjh/utrPIwDyTRIgRPjAH7WPTw8DmYxc4aD3JtX88g1TU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwyvAEzx77R/CBaJbehkjKh54cQPl8kQX+00G4Xwyp24g0nHHtz
+	NsSaA/xrGfoyGgM0gW/rHt6ZNGcw8+iBTfbeEo+He3UISUJ1V4eryd4YJUvGOof9hpwIBuRMswD
+	6X0k=
+X-Gm-Gg: ASbGncsPWqRXQs8qFK6hsDLpZ+owywIpG+Edj3l/bRtSh2SvZKlDpH8sBgQQ6S7yWjj
+	32djRAGAaBR32Wb/oldtFEiK70YgStX4vqx724px3SJIC6/wPD+haOUaRuIKm+GA7U8v3+4/CFR
+	M6SwtHpY/ok5p+B1eQx+SIgIBNEwPB3Kw/mEmcb/fOl57goJTcM2frqHf/YtB1gAkvT/iqUAdDK
+	7hVfgXLK1oEdLVfGjoUe2bgBXi2ORJrNtBgnPB8n2fK5gHUcc9PUaw5fEhy9TfH3GM1RWBBEXZf
+	GYVqpLkxLcp1/PDLhm5hBV+HPeuYhbDkbhCe2q4Tkl8T8X+gVF8=
+X-Google-Smtp-Source: AGHT+IG2adtEzPJsUBOh3ZFuOSLZfOKqlIR2xFoxwrtMpZSO3oFAgkcovhJZOzgowr/MtDwzRgKI9w==
+X-Received: by 2002:a05:600c:470c:b0:43c:f050:fed3 with SMTP id 5b1f17b1804b1-43cf051022dmr92439915e9.11.1741684673845;
+        Tue, 11 Mar 2025 02:17:53 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 11 Mar 2025 09:17:52 +0000
+Message-Id: <D8DBOSSN37VY.1VN43MHCQ5AGR@cloud.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>,
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, "Anthony PERARD"
+ <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>,
+ <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] tools: Mark ACPI SDTs as NVS in the PVH build path
+From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
+To: "Jan Beulich" <jbeulich@suse.com>
+X-Mailer: aerc 0.18.2
+References: <20250310152523.81181-1-alejandro.vallejo@cloud.com>
+ <5f207284-d206-417a-b963-c922119abe33@suse.com>
+In-Reply-To: <5f207284-d206-417a-b963-c922119abe33@suse.com>
 
-If the calculated value for nr_spis by the toolstack is bigger than the
-value provided by the user, we silently ignore the latter. This is not
-consistent with the approach we have in Xen on Arm when we try to reject
-incorrect configuration. Also, the documentation for nr_spis is
-incorrect as it mentions 991 as the number of max SPIs, where it should
-be 960 i.e. (1020 - 32) rounded down to the nearest multiple of 32.
+On Tue Mar 11, 2025 at 8:30 AM GMT, Jan Beulich wrote:
+> On 10.03.2025 16:25, Alejandro Vallejo wrote:
+> > Commit cefeffc7e583 marked ACPI tables as NVS in the hvmloader path
+> > because SeaBIOS may otherwise just mark it as RAM. There is, however,
+> > yet another reason to do it even in the PVH path. Xen's incarnation of
+> > AML relies on having access to some ACPI tables (e.g: _STA of Processor
+> > objects relies on reading the processor online bit in its MADT entry)
+> >=20
+> > This is problematic if the OS tries to reclaim ACPI memory for page
+> > tables as it's needed for runtime and can't be reclaimed after the OSPM
+> > is up and running.
+> >=20
+> > Fixes: de6d188a519f("hvmloader: flip "ACPI data" to "ACPI NVS" type for=
+ ACPI table region)"
+> > Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> > ---
+> > I really, really, really dislike this idea of accessing the MADT from
+> > AML.
+>
+> I think this isn't Xen's invention, but something I've seen in various
+> systems' AML.
+>
 
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- docs/man/xl.cfg.5.pod.in     | 13 +++++--------
- tools/libs/light/libxl_arm.c |  6 ++++++
- 2 files changed, 11 insertions(+), 8 deletions(-)
+Do you mean ACPI hotplug? I don't think I've ever seen a real system with
+support for it. I don't suppose you remember any specifically? I'd be quite
+interested to have a look at their ACPI dumps.
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 8e1422104e50..7339c44efd54 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -3083,14 +3083,11 @@ interval of colors (such as "0-4").
- =item B<nr_spis="NR_SPIS">
- 
- An optional integer parameter specifying the number of SPIs (Shared
--Peripheral Interrupts) to allocate for the domain. Max is 991 SPIs. If
--the value specified by the `nr_spis` parameter is smaller than the
--number of SPIs calculated by the toolstack based on the devices
--allocated for the domain, or the `nr_spis` parameter is not specified,
--the value calculated by the toolstack will be used for the domain.
--Otherwise, the value specified by the `nr_spis` parameter will be used.
--The number of SPIs should match the highest interrupt ID that will be
--assigned to the domain.
-+Peripheral Interrupts) to allocate for the domain. Max is 960 SPIs. If
-+the `nr_spis` parameter is not specified, the value calculated by the toolstack
-+will be used for the domain. Otherwise, the value specified by the `nr_spis`
-+parameter will be used. The number of SPIs should match the highest interrupt
-+ID that will be assigned to the domain.
- 
- =back
- 
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 5a9db5e85f6f..ee9154298f2a 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -181,6 +181,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
- 
-     LOG(DEBUG, "Configure the domain");
- 
-+    if (nr_spis > d_config->b_info.arch_arm.nr_spis) {
-+        LOG(ERROR, "Provided nr_spis value is too small (required %u)\n",
-+            nr_spis);
-+        return ERROR_FAIL;
-+    }
-+
-     config->arch.nr_spis = max(nr_spis, d_config->b_info.arch_arm.nr_spis);
-     LOG(DEBUG, " - Allocate %u SPIs", config->arch.nr_spis);
- 
--- 
-2.25.1
+> > In time I'll try to implement something to stop doing it, but for
+> > the time being I find it preferable to align libxl to hvmloader rather
+> > than trying to restrict what's reclaimable and what isn't.
+> > ---
+> >  tools/firmware/hvmloader/e820.c | 4 ++++
+> >  tools/libs/light/libxl_x86.c    | 2 +-
+> >  2 files changed, 5 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/tools/firmware/hvmloader/e820.c b/tools/firmware/hvmloader=
+/e820.c
+> > index c490a0bc790c..86d39544e887 100644
+> > --- a/tools/firmware/hvmloader/e820.c
+> > +++ b/tools/firmware/hvmloader/e820.c
+> > @@ -210,6 +210,10 @@ int build_e820_table(struct e820entry *e820,
+> >       * space reuse by an ACPI unaware / buggy bootloader, option ROM, =
+etc.
+> >       * before an ACPI OS takes control. This is possible due to the fa=
+ct that
+> >       * ACPI NVS memory is explicitly described as non-reclaimable in A=
+CPI spec.
+> > +     *
+> > +     * Furthermore, Xen relies on accessing ACPI tables from within th=
+e AML
+> > +     * code exposed to guests. So Xen's ACPI tables are not, in genera=
+l,
+> > +     * reclaimable.
+> >       */
+> > =20
+> >      if ( acpi_enabled )
+> > diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.=
+c
+> > index a3164a3077fe..265da8072a59 100644
+> > --- a/tools/libs/light/libxl_x86.c
+> > +++ b/tools/libs/light/libxl_x86.c
+> > @@ -742,7 +742,7 @@ static int domain_construct_memmap(libxl__gc *gc,
+> >              e820[nr].addr =3D dom->acpi_modules[i].guest_addr_out & ~(=
+page_size - 1);
+> >              e820[nr].size =3D dom->acpi_modules[i].length +
+> >                  (dom->acpi_modules[i].guest_addr_out & (page_size - 1)=
+);
+> > -            e820[nr].type =3D E820_ACPI;
+> > +            e820[nr].type =3D E820_NVS;
+>
+> This likely needs a comment then, too.
 
+Fair enough. Let me send a v2 with that.
+
+>
+> Jan
+
+Cheers,
+Alejandro
 
