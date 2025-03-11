@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B333BC282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 16:20:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.908728.1315824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4798AC282EC
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 16:24:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.908766.1315864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts2Kk-00028H-Cu; Tue, 11 Mar 2025 16:19:58 +0000
+	id 1ts2OJ-0005ar-NV; Tue, 11 Mar 2025 16:23:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 908728.1315824; Tue, 11 Mar 2025 16:19:58 +0000
+Received: by outflank-mailman (output) from mailman id 908766.1315864; Tue, 11 Mar 2025 16:23:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts2Kk-00028A-AH; Tue, 11 Mar 2025 16:19:58 +0000
-Received: by outflank-mailman (input) for mailman id 908728;
- Tue, 11 Mar 2025 16:19:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ts2OJ-0005ak-KG; Tue, 11 Mar 2025 16:23:39 +0000
+Received: by outflank-mailman (input) for mailman id 908766;
+ Tue, 11 Mar 2025 16:23:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JHpu=V6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1ts2Kj-000284-BM
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 16:19:57 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ab953e31-fe94-11ef-9ab9-95dc52dad729;
- Tue, 11 Mar 2025 17:19:56 +0100 (CET)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e5b56fc863so8299625a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 09:19:56 -0700 (PDT)
-Received: from fedora.. (user-109-243-64-225.play-internet.pl.
- [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c74a9303sm8706016a12.42.2025.03.11.09.19.54
+ <SRS0=siat=V6=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1ts2OI-0005ae-80
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 16:23:38 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2ee41d3f-fe95-11ef-9898-31a8f345e629;
+ Tue, 11 Mar 2025 17:23:36 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so414726266b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 09:23:36 -0700 (PDT)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ a640c23a62f3a-ac29f5d2638sm368012966b.160.2025.03.11.09.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 09:19:54 -0700 (PDT)
+ Tue, 11 Mar 2025 09:23:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,172 +46,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab953e31-fe94-11ef-9ab9-95dc52dad729
+X-Inumbo-ID: 2ee41d3f-fe95-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741709995; x=1742314795; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eutEi8DtefvdnHN/K0N5ySijtm5ejHaJfNHDmk6hb8k=;
-        b=TCAWFU9JUMVmz7PyiPjZeaqqNgygIulzy6sRcGNOJYOZ5VJQEPUxpHKj633L9z1waz
-         n9/RvQvLP5qr4aNsbdmpMjRDV/bam70nva3zZNPFzFTgAhn3xkIvPNOkZbUQ04LuVgWW
-         ABokBLSpWLlMFS/4/afw/iG+/+TzrPvUF8Be0LavXt9gVASwea1xRS/H5WrTJSNYvQEd
-         Uts3iFMIJ146b6h56Ul8olxWyDmzMazVjAnGI8bq6KGxqhC6NF3bGJIjCs5k5YCKW7CV
-         /OmM4eEDqH3ZpGcT6olHT2Ynurx0MONRdABLVFdJrnK5Apkaco3vSA7/AqvH6YZp3xt4
-         nY6A==
+        d=citrix.com; s=google; t=1741710216; x=1742315016; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=WpPpXJmI/SEixnjKAFHqu4EO/svQtAxWHpGumrSnDJA=;
+        b=N9WT9Hq+MdsAEFcCV9wd+LElpWIM+PBv7lLH1GVo6fiu81maSoTJ1fctQgjlCRNrWb
+         SntckVMpOwNwArOwHIbBcAS6cvObW7AhLW21aY2+MHLAzclruegsDmiQaGkHlQi8QI+w
+         3/tfwxMREQD7Y0aphzctrnIvlqCMNwK6xRCvc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741709995; x=1742314795;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eutEi8DtefvdnHN/K0N5ySijtm5ejHaJfNHDmk6hb8k=;
-        b=b+5yyDoXw+AvVQklsFzJGKbTrctVCjHoKbvtCwMNcWHXk34BUWqY/NzjMmWQJwp8s1
-         iC/rCmNuUFrIMUZ3trPS0CNipq/gyPhrc+pZw6WMcVd2sywgVmab7aBRI/VzamCaXaNZ
-         +6RTK4u63OzMK8TQ4uNXG9L22x/ggRAplGKYpilj+VY0cFDdwqqWXX2M3RxID5TNFmRw
-         KfSxvHhdktz8jOjUekfce+VuAyGIykKFenJeGs/sBc6PxLKg1IwMM3rq6o6wM9AaylOy
-         slparx1PSJmv39E7hSWOO/b4xp4d3LiTht/XhD029lstvTJF+6fPD7AyPw4SUGDRzy5T
-         sPBA==
-X-Gm-Message-State: AOJu0YzeeeaJJH0DOA4mJod9BNjThoc8pW1sZU3zHiVFc25RH/jeVqGw
-	bBtUuIxytHla65KDU4A9f6Ucqfko0s/cpwqqcuhtwccY+MfEI6WhAmRgFg==
-X-Gm-Gg: ASbGncvbJMUccvVa+Z5oQg/qQhl69oK58E7cUXqirF6pw3DRulTMKXCuPwpaMWxiYPz
-	SCIMBC1DA0WaTL5olynziGcZVIivx+bH63OzIU0etAXistu/9I1cPBunnrn6fB1+qyin05NA9DW
-	QF1mthV70kWal8EVMJSCHv+7J0Klk5HRnlovzgZ4EN6zgqB+yvSGZ+jk/v/Szf6u+o1+XlOqhCw
-	p8n5gZcDg6X7WqnSeWyeFBpQZ1iF8g+cW9oRMwDPmaHdCUdR+o+payyl0lDUBa9qIxJQ6ihbalj
-	PvfckCUpyfxyspplMQUh8SYsSXP00OTXuDD7QgbcMxF1FEUom8uyCDdORDpsmtYBi4l9Z1n/M/H
-	Az+tVJuKLMUxuzw==
-X-Google-Smtp-Source: AGHT+IGy2UcnK2t2Zgs9j4q0VYO97EFeJHHVkvo8W3sRflsOZXxmoM5Ql0X3YH+HTGnpTgJ+WYNuOA==
-X-Received: by 2002:a05:6402:1e88:b0:5de:dd6b:a7b0 with SMTP id 4fb4d7f45d1cf-5e75de57dd4mr5191318a12.1.1741709994973;
-        Tue, 11 Mar 2025 09:19:54 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
+        d=1e100.net; s=20230601; t=1741710216; x=1742315016;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=WpPpXJmI/SEixnjKAFHqu4EO/svQtAxWHpGumrSnDJA=;
+        b=NivLlEfOrZ218wCXqhtjPBI9o5SB7wTPJbF2vVjChgr1kjGfRlpdIn4qXQehpLrjHY
+         AcF5UVibvmKjMD05aSOJsj/iPO/SqQ8amb9gdUc88W4Yo+/34i7hzHb6mFr2E93+KCm3
+         FWHgMFE12Daf2xBd1OrWplxvR9s8WlkqlNp5KZgdiGQMg+praAUtBO9UIFr7CLusIGHQ
+         JgLqFBIkeLbOz5kCINylnD3SpMNV0IK+AtoeMgc+fy5FkZjcyL/WI89FKp3AnvWIuD5N
+         7uKTFLbQQn2J4GKoyiUkYA5tfEWeHHJsMuEn3360RklOiWLoINlg8gX8Dmg3aZ1bQQ1I
+         ObWQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXMKCSinX1cNHYVv3Mx+HuoA1Jk7SwYmJYC940beRthhptJA4IVeNMbRTrI5P6CjZnJNdCqGyv8xpo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz4irT7nbKk3oiu0UoHqpS0/6GE0GuZPZ7Ov96DopU21DnstOmJ
+	uqBwGm6L8IsaWnMilYKyZeYUhobb0Yk1/Go8JWizKxAhHJRNDIrhv7sjww1ONKU=
+X-Gm-Gg: ASbGncthuZRvhPyyOsv++tvTRGCv/EEjv3BojdnTMBCoHpyqFk8mNWO92Uj6XFGvh0M
+	BN7B1bm3p7cCH2iS7sWG3nGc9m6trmiicvOTsqUuzcfI9YRu42mRgqH1CILiW9uuQFAGc0GWaSr
+	Uqw2pmaWy894Ohf24ohxz7VCOulcmBKtPnAd0I0C+GF7x/YoNQqBDKUe0IMbWgys2HPl8OXzHZC
+	Q8ndMMlhUPoEmmBkQWtTBy4iQodfhbhgGLAJ5gwvCwMsmy62z4n60wgK6EqNOiObDSLWJSxSEpJ
+	G6pMorwJvv6mG957vXX/we19i0EOra1YYPiPCmLPnXXzHoLKyCtAvw8=
+X-Google-Smtp-Source: AGHT+IGkL1bWY+gYf1DyJ8T9mQDt5ejbNf64OwD2+bljX3Ityn2Ukf9maOhjHfig6Q/ow1BM/70Gow==
+X-Received: by 2002:a17:907:7e9d:b0:ac2:b415:6768 with SMTP id a640c23a62f3a-ac2b4156827mr649972966b.48.1741710215643;
+        Tue, 11 Mar 2025 09:23:35 -0700 (PDT)
+Date: Tue, 11 Mar 2025 17:23:34 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	xen-devel@lists.xenproject.org,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/4] xen/riscv: introduce preinit_xen_time()
-Date: Tue, 11 Mar 2025 17:19:48 +0100
-Message-ID: <3152c755e31367370f3e1d955253a9d4fc095f68.1741709885.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.48.1
+Subject: Re: [PATCH v2] xen/page_alloc: Simplify domain_adjust_tot_pages
+Message-ID: <Z9BjhklU61maFKjo@macbook.local>
+References: <20250304111000.9252-1-alejandro.vallejo@cloud.com>
+ <Z9AwsrDBELe2UREz@macbook.local>
+ <D8DITFXFKM32.2H5OOI4GVUAZ1@cloud.com>
+ <Z9BZ-V8fWHOAwMJ7@macbook.local>
+ <de418de2-b059-4f1e-92b0-42a236208b14@suse.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <de418de2-b059-4f1e-92b0-42a236208b14@suse.com>
 
-preinit_xen_time() does two things:
-1. Parse timebase-frequency properpy of /cpus node to initialize
-   cpu_khz variable.
-2. Initialize boot_count with the current time counter value.
+On Tue, Mar 11, 2025 at 04:45:04PM +0100, Jan Beulich wrote:
+> On 11.03.2025 16:42, Roger Pau Monné wrote:
+> > On Tue, Mar 11, 2025 at 02:53:04PM +0000, Alejandro Vallejo wrote:
+> >> On Tue Mar 11, 2025 at 12:46 PM GMT, Roger Pau Monné wrote:
+> >>> On Tue, Mar 04, 2025 at 11:10:00AM +0000, Alejandro Vallejo wrote:
+> >>>> The logic has too many levels of indirection and it's very hard to
+> >>>> understand it its current form. Split it between the corner case where
+> >>>> the adjustment is bigger than the current claim and the rest to avoid 5
+> >>>> auxiliary variables.
+> >>>>
+> >>>> Add a functional change to prevent negative adjustments from
+> >>>> re-increasing the claim. This has the nice side effect of avoiding
+> >>>> taking the heap lock here on every free.
+> >>>>
+> >>>> While at it, fix incorrect field name in nearby comment.
+> >>>>
+> >>>> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> >>>
+> >>> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+> >>
+> >> Thanks.
+> >>
+> >>> I think it would be nice to also ensure that once the domain is
+> >>> finished building (maybe when it's unpaused for the first
+> >>> time?) d->outstanding_pages is set to 0.  IMO the claim system was
+> >>> designed to avoid races during domain building, and shouldn't be used
+> >>> once the domain is already running.
+> >>>
+> >>> Thanks, Roger.
+> >>
+> >> As a matter of implementation that's already the case by toolstack being "nice"
+> >> and unconditionally clearing claims after populating the physmap.
+> > 
+> > I see.  Another option would be to refuse the unpause a domain if it
+> > still has pending claims.  However I don't know how that will work out
+> > with all possible toolstacks.
+> > 
+> >> However, I agree the hypervisor should do it on its own. I didn't find a
+> >> suitable place for it. 
+> > 
+> > You could do it in arch_domain_creation_finished().
+> 
+> Except that better wouldn't be arch-specific.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/Makefile           |  1 +
- xen/arch/riscv/include/asm/time.h |  2 ++
- xen/arch/riscv/setup.c            |  2 ++
- xen/arch/riscv/stubs.c            |  2 --
- xen/arch/riscv/time.c             | 38 +++++++++++++++++++++++++++++++
- 5 files changed, 43 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/riscv/time.c
+Sorry, I should better have said: you could do it at the same place
+where arch_domain_creation_finished() gets called in
+domain_unpause_by_systemcontroller().
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index b0c8270a99..82016a957a 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -9,6 +9,7 @@ obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
- obj-y += stubs.o
-+obj-y += time.o
- obj-y += traps.o
- obj-y += vm_event.o
- 
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-index fc1572e9b4..f288fe1e5c 100644
---- a/xen/arch/riscv/include/asm/time.h
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -19,6 +19,8 @@ static inline cycles_t get_cycles(void)
-     return csr_read(CSR_TIME);
- }
- 
-+void preinit_xen_time(void);
-+
- #endif /* ASM__RISCV__TIME_H */
- 
- /*
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index b0e587678e..836ad16fed 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -126,6 +126,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
- 
-     riscv_fill_hwcap();
- 
-+    preinit_xen_time();
-+
-     printk("All set up\n");
- 
-     machine_halt();
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index 5951b0ce91..caa133de84 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -27,8 +27,6 @@ nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
- 
- /* time.c */
- 
--unsigned long __ro_after_init cpu_khz;  /* CPU clock frequency in kHz. */
--
- s_time_t get_s_time(void)
- {
-     BUG_ON("unimplemented");
-diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
-new file mode 100644
-index 0000000000..210df6ba28
---- /dev/null
-+++ b/xen/arch/riscv/time.c
-@@ -0,0 +1,38 @@
-+#include <xen/device_tree.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/sections.h>
-+
-+unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
-+unsigned long __read_mostly boot_count;
-+
-+static __initdata struct dt_device_node *timer;
-+
-+/* Set up the timer on the boot CPU (early init function) */
-+static void __init preinit_dt_xen_time(void)
-+{
-+    static const struct dt_device_match  __initconst timer_ids[] =
-+    {
-+        DT_MATCH_PATH("/cpus"),
-+        { /* sentinel */ },
-+    };
-+    u32 rate;
-+
-+    timer = dt_find_matching_node(NULL, timer_ids);
-+    if ( !timer )
-+        panic("Unable to find a compatible timer in the device tree\n");
-+
-+    dt_device_set_used_by(timer, DOMID_XEN);
-+
-+    if ( !dt_property_read_u32(timer, "timebase-frequency", &rate) )
-+        panic("Unable to find clock frequency.\n");
-+
-+    cpu_khz = rate / 1000;
-+}
-+
-+void __init preinit_xen_time(void)
-+{
-+    preinit_dt_xen_time();
-+
-+    boot_count = get_cycles();
-+}
--- 
-2.48.1
-
+Thanks, Roger.
 
