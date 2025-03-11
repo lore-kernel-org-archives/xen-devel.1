@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16131C28B2E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 21:13:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909295.1316264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E2EC28B2E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 21:13:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909301.1316323 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6uB-0008VT-12; Tue, 11 Mar 2025 21:12:51 +0000
+	id 1ts6uG-0001Xc-PM; Tue, 11 Mar 2025 21:12:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909295.1316264; Tue, 11 Mar 2025 21:12:50 +0000
+Received: by outflank-mailman (output) from mailman id 909301.1316323; Tue, 11 Mar 2025 21:12:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6uA-0008VM-US; Tue, 11 Mar 2025 21:12:50 +0000
-Received: by outflank-mailman (input) for mailman id 909295;
- Tue, 11 Mar 2025 21:12:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ts6uG-0001XB-Lc; Tue, 11 Mar 2025 21:12:56 +0000
+Received: by outflank-mailman (input) for mailman id 909301;
+ Tue, 11 Mar 2025 21:12:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=isYZ=V6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ts6u9-0008V9-Ov
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 21:12:49 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95198016-febd-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 22:12:47 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-390e3b3d3f4so2962155f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 14:12:47 -0700 (PDT)
+ id 1ts6uF-0008Uq-Eb
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 21:12:55 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 995413d1-febd-11ef-9ab9-95dc52dad729;
+ Tue, 11 Mar 2025 22:12:54 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cf628cb14so1463345e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 14:12:54 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912bfdfba9sm19480872f8f.39.2025.03.11.14.12.45
+ ffacd0b85a97d-3912bfdfba9sm19480872f8f.39.2025.03.11.14.12.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 14:12:45 -0700 (PDT)
+ Tue, 11 Mar 2025 14:12:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,89 +47,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95198016-febd-11ef-9898-31a8f345e629
+X-Inumbo-ID: 995413d1-febd-11ef-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741727567; x=1742332367; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I1kFjBuIASLmCG10NTTQBJ4txzWJ0ch7ykueDsSbR6s=;
-        b=hUp6vESAfuEDbKKuMpq8lS+qh/Ew8K3x3SaJcUFxY7UHTtiI8VQJRxMeFtAsvWi3IX
-         zQ3RTEIx+wnD7Lv6E8Gf3A8xpnBuIpiCGT9ubY70iZ3ID4ZpIHqxp9McChkrpwPwoZS8
-         EhO0ScoHXMklfsvMzZTob6YE+P2mD4i+Akthk=
+        d=citrix.com; s=google; t=1741727574; x=1742332374; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NAtTpo8KH5ZdCgDPrWpHEeo3BLVM30dQttgId7v1Tq0=;
+        b=p8OjYOowWQgfPjVC0rfrPG4rSUM1ul8Qwv8SixxBguaUSx9ifZaSvyTQLQ6Jf3jDo0
+         35mVXhP1oqJVqQQ/lf/jKT6p5IutAs+Crg4uSsChPbRCndlxsLECakcNUZ8c9/IkFmrU
+         8oZ1QDOnnqhy/1XG9m5D7j8+Yr1Qpc2KSyzOs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741727567; x=1742332367;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I1kFjBuIASLmCG10NTTQBJ4txzWJ0ch7ykueDsSbR6s=;
-        b=NWqF8non1wl3OldFO2l8Ax9v9R21TmIrHXsjJ6B5UG2FBL0vVo/nvQOUI4AvbUf3yl
-         nIafWB6IjkknpdJrepNaf0XQ1NCuzVp77kkvaJpevYwP87GkaDGbyFRcaXApSdnt1okR
-         /3piULFdOlZtIB1I4cWOydkn+qlRNmjcsbi9cL1PSgeTonVry7W3rzVFgMSZHW6ASORy
-         PCBV0C0G72aaGtjXK2DrRybn2ySsbj046IdgMbPIda88RUh6DvLpQLHoEjB7BSpFj1Jz
-         zGjNUKXClBjfAQ8XO3LTVZuxxjVN/E4mRolKDgM/6Impg9LOirhZy8gVhS62zoFE7pjf
-         6IFQ==
-X-Gm-Message-State: AOJu0YyHpGUm3Ao7BbDIjkAOS+diQX9GHp5hRUQ8h44TnTXTtYE5ux2r
-	nQnTtemlzv4uPsc1hYo5M+iEntM5N8u4I0Gw9LkZiX4Sx0NZJ1pjvN6k7Fm8QvcRBmI4Qe3rTcj
-	K
-X-Gm-Gg: ASbGncv7wZZy9wHROKamXN2faDqRHRWnYYCJ+LTXBcX9sgd28gdLhFH/MWbrcjAqa3+
-	NUGs86qp5vxbxmEb/BMucb+4BgxMDYFums8JBgOSZBSPbjOMCpnh8yAjeladPNEXVFBB4o8CuWR
-	402YeL5p+cGXo6qDBPtaV7InAispbPl+ivQk5HIHSIIHk7oLKqHIYq2t/5u0YW5H5kqIl6asetb
-	pI26sOaUMDLYJ+BFne8xVzulE9vvUMzcZL40WoJ3kZL2X0yGyC8gPuULw8F3Jf+uarJaRM2k4Il
-	d42pGjF3ewsjHdtZxRPiRn2q2U0Eb1iD7wC3iAxC6r6B1G5WeqEPMSgkhgqIU6RLgieO5E6O/+g
-	rbKwzvc/NSnvYUunrmyXZIPM5
-X-Google-Smtp-Source: AGHT+IHvE0opfp4owT/k0/vfZ+AgBORwYV/A9YG+T57Es3Dxs3szSsgH+FC84OzC47NHVbYMkMJc0g==
-X-Received: by 2002:a5d:6d8c:0:b0:391:952:c728 with SMTP id ffacd0b85a97d-39132d77544mr12612565f8f.4.1741727566870;
-        Tue, 11 Mar 2025 14:12:46 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741727574; x=1742332374;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=NAtTpo8KH5ZdCgDPrWpHEeo3BLVM30dQttgId7v1Tq0=;
+        b=e3TFIiS0l6vYdCNSjrXrzUnE1w48jvOMqGbVThYpWPReNQRQbns6VTP0EqMoyTmS+7
+         IEu72sG7PD4mtpsfDQL2P636lR4WDSQFx+pd6HmuiUjggnAqusKkoj0Bc/QOd8v6CkN5
+         y/8XTe70ILc4LdntDX4FH/ILj15S/NDs02Nq8yAWtguNPYvFvym8+ApW/oJOAslytgKO
+         1AhvMdq6rASWvkE8LMVYs+uySJw8rnRSbhucJXreVHj4Tk5yFFPvgsQJrL7LuXBBqOnb
+         pPASFVPIjfdZ2QhN0S2yXQGWx3eWKt44T3o2ya+rlMn+D0TgmhXTDqGgx1bbLhHX86Rw
+         mmTA==
+X-Gm-Message-State: AOJu0YyvUr8y2cuYgdO3gvAF6pdwq/y9DbaUXZHu20hUUju+NJB3KXvd
+	Tvqmy7FoKzTSkA3xFggZAK3rGy2hvBwCsxB8BnRQr49iHq3Uhu6mzVw8kvpAKMxxZk5Pm1b8Ob4
+	n
+X-Gm-Gg: ASbGncsFXvYs9cPCu6kfYa/EvfRqSWROBiT5U+leF7sYqmWyem58e3rWnhHv/twMZra
+	X7HqXGpJnVWrdYtqINEoB25rZDPBjuGnq29hZyU4QjlpgtyDXnodpW1j56FVPRgjy7XaZEm19Rf
+	WAhiryLtQBJbFe57tcO1ECZ1rYtaIijxZJaoCqPkRBKR0mkGuXfPROzFWrYnfT8t0ufMEDfavjL
+	MBmsRVl2tNv+6WPfDbByeMyw2EFVP692a/8PldMnsBxKcDU09VQPKYBBU+rby+7l8c8mI8s7CDc
+	ZOUsDLn1El2plHwgaR2DdtG4pMJEMvkXx3WL+ImFGoQUhIZvV9g0pe5YmrwXndewMZvnqvWNFAK
+	VTTkSt8xFx4NhOsdCWaPNUgyc
+X-Google-Smtp-Source: AGHT+IHsWfSRfuAMivDIwLvlJJIaz7ykB32KoN0VA83oPOE7JV3fL2q8AIh/7qFxYjs79LGwjeHuaA==
+X-Received: by 2002:a5d:5f82:0:b0:38d:b12f:60d1 with SMTP id ffacd0b85a97d-3926d5ef561mr5495427f8f.26.1741727574005;
+        Tue, 11 Mar 2025 14:12:54 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 0/8] x86: Drop the vm86 segments selectors from struct cpu_user_regs
-Date: Tue, 11 Mar 2025 21:10:35 +0000
-Message-Id: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 7/8] x86/public: Split the struct cpu_user_regs type
+Date: Tue, 11 Mar 2025 21:10:42 +0000
+Message-Id: <20250311211043.3629696-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
+References: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is the next chunk of work in order to support FRED.
+In order to support FRED, we're going to have to remove the {ds..gs} fields
+from struct cpu_user_regs, meaning that it is going to have to become a
+different type to the structure embedded in vcpu_guest_context_u.
 
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1711534693
-https://cirrus-ci.com/build/6031265616363520
+struct cpu_user_regs is a name used in common Xen code (i.e. needs to stay
+using this name), so renaming the public struct to be guest_user_regs in Xen's
+view only.
 
-Andrew Cooper (8):
-  x86/regs: Fold x86_64/regs.h into it's single includer
-  x86/traps: Rework register state printing to use a struct
-  x86/traps: Avoid OoB accesses to print the data selectors
-  Revert "x86/traps: 'Fix' safety of read_registers() in #DF path"
-  x86/domctl: Stop using XLAT_cpu_user_regs()
-  x86/pv: Store the data segment selectors outside of cpu_user_regs
-  x86/public: Split the struct cpu_user_regs type
-  x86: Drop the vm86 segments selectors from struct cpu_user_regs
+Introduce a brand hew cpu-user-regs.h, currently containing a duplicate
+structure.  This removes the need for current.h to include public/xen.h, and
+highlights a case where the emulator was picking up cpu_user_regs
+transitively.
 
- xen/arch/x86/cpu/common.c                |  10 +-
- xen/arch/x86/domain.c                    |  96 ++++++++++++------
- xen/arch/x86/domctl.c                    |  42 +++++++-
- xen/arch/x86/include/asm/cpu-user-regs.h |  65 +++++++++++++
- xen/arch/x86/include/asm/current.h       |  11 ++-
- xen/arch/x86/include/asm/domain.h        |   2 +
- xen/arch/x86/include/asm/hvm/hvm.h       |   4 -
- xen/arch/x86/include/asm/regs.h          |  28 ++++--
- xen/arch/x86/include/asm/x86_64/regs.h   |  28 ------
- xen/arch/x86/pv/dom0_build.c             |   6 +-
- xen/arch/x86/traps.c                     |   2 +-
- xen/arch/x86/x86_64/asm-offsets.c        |   2 +-
- xen/arch/x86/x86_64/traps.c              | 119 +++++++++++++----------
- xen/arch/x86/x86_emulate/private.h       |   2 +
- xen/include/public/arch-x86/xen-x86_32.h |   8 ++
- xen/include/public/arch-x86/xen-x86_64.h |   8 ++
- xen/include/public/arch-x86/xen.h        |   6 ++
- xen/include/xlat.lst                     |   2 -
- 18 files changed, 301 insertions(+), 140 deletions(-)
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+
+Jan: Is this what you intended?
+
+cpu_user_regs_t and the guest handle don't seem to be used anywhere.  I'm
+tempted to exclude them from Xen builds.
+---
+ xen/arch/x86/include/asm/cpu-user-regs.h | 69 ++++++++++++++++++++++++
+ xen/arch/x86/include/asm/current.h       |  3 +-
+ xen/arch/x86/x86_emulate/private.h       |  2 +
+ xen/include/public/arch-x86/xen-x86_32.h |  8 +++
+ xen/include/public/arch-x86/xen-x86_64.h |  8 +++
+ xen/include/public/arch-x86/xen.h        |  6 +++
+ 6 files changed, 95 insertions(+), 1 deletion(-)
  create mode 100644 xen/arch/x86/include/asm/cpu-user-regs.h
- delete mode 100644 xen/arch/x86/include/asm/x86_64/regs.h
 
+diff --git a/xen/arch/x86/include/asm/cpu-user-regs.h b/xen/arch/x86/include/asm/cpu-user-regs.h
+new file mode 100644
+index 000000000000..845b41a22ef2
+--- /dev/null
++++ b/xen/arch/x86/include/asm/cpu-user-regs.h
+@@ -0,0 +1,69 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#ifndef X86_CPU_USER_REGS_H
++#define X86_CPU_USER_REGS_H
++
++#define DECL_REG_LOHI(which) union { \
++    uint64_t r ## which ## x; \
++    uint32_t e ## which ## x; \
++    uint16_t which ## x; \
++    struct { \
++        uint8_t which ## l; \
++        uint8_t which ## h; \
++    }; \
++}
++#define DECL_REG_LO8(name) union { \
++    uint64_t r ## name; \
++    uint32_t e ## name; \
++    uint16_t name; \
++    uint8_t name ## l; \
++}
++#define DECL_REG_LO16(name) union { \
++    uint64_t r ## name; \
++    uint32_t e ## name; \
++    uint16_t name; \
++}
++#define DECL_REG_HI(num) union { \
++    uint64_t r ## num; \
++    uint32_t r ## num ## d; \
++    uint16_t r ## num ## w; \
++    uint8_t r ## num ## b; \
++}
++
++struct cpu_user_regs
++{
++    DECL_REG_HI(15);
++    DECL_REG_HI(14);
++    DECL_REG_HI(13);
++    DECL_REG_HI(12);
++    DECL_REG_LO8(bp);
++    DECL_REG_LOHI(b);
++    DECL_REG_HI(11);
++    DECL_REG_HI(10);
++    DECL_REG_HI(9);
++    DECL_REG_HI(8);
++    DECL_REG_LOHI(a);
++    DECL_REG_LOHI(c);
++    DECL_REG_LOHI(d);
++    DECL_REG_LO8(si);
++    DECL_REG_LO8(di);
++    uint32_t error_code;
++    uint32_t entry_vector;
++    DECL_REG_LO16(ip);
++    uint16_t cs, _pad0[1];
++    uint8_t  saved_upcall_mask;
++    uint8_t  _pad1[3];
++    DECL_REG_LO16(flags); /* rflags.IF == !saved_upcall_mask */
++    DECL_REG_LO8(sp);
++    uint16_t ss, _pad2[3];
++    uint16_t es, _pad3[3];
++    uint16_t ds, _pad4[3];
++    uint16_t fs, _pad5[3];
++    uint16_t gs, _pad6[3];
++};
++
++#undef DECL_REG_HI
++#undef DECL_REG_LO16
++#undef DECL_REG_LO8
++#undef DECL_REG_LOHI
++
++#endif /* X86_CPU_USER_REGS_H */
+diff --git a/xen/arch/x86/include/asm/current.h b/xen/arch/x86/include/asm/current.h
+index bcec328c9875..243d17ef79fd 100644
+--- a/xen/arch/x86/include/asm/current.h
++++ b/xen/arch/x86/include/asm/current.h
+@@ -9,7 +9,8 @@
+ 
+ #include <xen/percpu.h>
+ #include <xen/page-size.h>
+-#include <public/xen.h>
++
++#include <asm/cpu-user-regs.h>
+ 
+ /*
+  * Xen's cpu stacks are 8 pages (8-page aligned), arranged as:
+diff --git a/xen/arch/x86/x86_emulate/private.h b/xen/arch/x86/x86_emulate/private.h
+index ef4745f56e27..dde4d3e3ccef 100644
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -10,6 +10,8 @@
+ 
+ # include <xen/bug.h>
+ # include <xen/kernel.h>
++
++# include <asm/cpu-user-regs.h>
+ # include <asm/endbr.h>
+ # include <asm/msr-index.h>
+ # include <asm/x86-vendors.h>
+diff --git a/xen/include/public/arch-x86/xen-x86_32.h b/xen/include/public/arch-x86/xen-x86_32.h
+index 9e3bf06b121e..cd21438ab12b 100644
+--- a/xen/include/public/arch-x86/xen-x86_32.h
++++ b/xen/include/public/arch-x86/xen-x86_32.h
+@@ -114,6 +114,10 @@
+ #define __DECL_REG_LO16(name) uint32_t e ## name
+ #endif
+ 
++#ifdef __XEN__
++#define cpu_user_regs guest_user_regs
++#endif
++
+ struct cpu_user_regs {
+     __DECL_REG_LO8(b);
+     __DECL_REG_LO8(c);
+@@ -139,6 +143,10 @@ struct cpu_user_regs {
+ typedef struct cpu_user_regs cpu_user_regs_t;
+ DEFINE_XEN_GUEST_HANDLE(cpu_user_regs_t);
+ 
++#ifdef __XEN__
++#undef cpu_user_regs
++#endif
++
+ #undef __DECL_REG_LO8
+ #undef __DECL_REG_LO16
+ 
+diff --git a/xen/include/public/arch-x86/xen-x86_64.h b/xen/include/public/arch-x86/xen-x86_64.h
+index 43f6e3d22001..4388e20eaf49 100644
+--- a/xen/include/public/arch-x86/xen-x86_64.h
++++ b/xen/include/public/arch-x86/xen-x86_64.h
+@@ -159,6 +159,10 @@ struct iret_context {
+ #define __DECL_REG_HI(num)    uint64_t r ## num
+ #endif
+ 
++#ifdef __XEN__
++#define cpu_user_regs guest_user_regs
++#endif
++
+ struct cpu_user_regs {
+     __DECL_REG_HI(15);
+     __DECL_REG_HI(14);
+@@ -192,6 +196,10 @@ struct cpu_user_regs {
+ typedef struct cpu_user_regs cpu_user_regs_t;
+ DEFINE_XEN_GUEST_HANDLE(cpu_user_regs_t);
+ 
++#ifdef __XEN__
++#undef cpu_user_regs
++#endif
++
+ #undef __DECL_REG
+ #undef __DECL_REG_LOHI
+ #undef __DECL_REG_LO8
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
+index fc2487986642..3b0fd05432f4 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -173,7 +173,13 @@ struct vcpu_guest_context {
+ #define _VGCF_online                   5
+ #define VGCF_online                    (1<<_VGCF_online)
+     unsigned long flags;                    /* VGCF_* flags                 */
++
++#ifdef __XEN__
++    struct guest_user_regs user_regs;       /* User-level CPU registers     */
++#else
+     struct cpu_user_regs user_regs;         /* User-level CPU registers     */
++#endif
++
+     struct trap_info trap_ctxt[256];        /* Virtual IDT                  */
+     unsigned long ldt_base, ldt_ents;       /* LDT (linear address, # ents) */
+     unsigned long gdt_frames[16], gdt_ents; /* GDT (machine frames, # ents) */
 -- 
 2.39.5
 
