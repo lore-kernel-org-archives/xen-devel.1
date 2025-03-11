@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46733C28B2F
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 04:09:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.907015.1314309 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77360C28B2E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 04:09:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.907016.1314312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trqvP-0000ff-Vb; Tue, 11 Mar 2025 04:09:03 +0000
+	id 1trqvQ-0000iq-4q; Tue, 11 Mar 2025 04:09:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 907015.1314309; Tue, 11 Mar 2025 04:09:03 +0000
+Received: by outflank-mailman (output) from mailman id 907016.1314312; Tue, 11 Mar 2025 04:09:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trqvP-0000fY-SE; Tue, 11 Mar 2025 04:09:03 +0000
-Received: by outflank-mailman (input) for mailman id 907015;
+	id 1trqvQ-0000hU-2A; Tue, 11 Mar 2025 04:09:04 +0000
+Received: by outflank-mailman (input) for mailman id 907016;
  Tue, 11 Mar 2025 04:09:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EQfW=V6=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1trqvO-0000fJ-2e
+ id 1trqvO-0000fJ-Ks
  for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 04:09:02 +0000
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [2607:f8b0:4864:20::1030])
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [2607:f8b0:4864:20::635])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ee12b85-fe2e-11ef-9ab8-95dc52dad729;
- Tue, 11 Mar 2025 05:09:00 +0100 (CET)
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-300f92661fcso1724700a91.3
- for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 21:09:00 -0700 (PDT)
+ id 902e64e9-fe2e-11ef-9ab8-95dc52dad729;
+ Tue, 11 Mar 2025 05:09:02 +0100 (CET)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-223fb0f619dso93349925ad.1
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 21:09:02 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.08.57
+ 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.08.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 21:08:58 -0700 (PDT)
+ Mon, 10 Mar 2025 21:09:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ee12b85-fe2e-11ef-9ab8-95dc52dad729
+X-Inumbo-ID: 902e64e9-fe2e-11ef-9ab8-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1741666138; x=1742270938; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1741666141; x=1742270941; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
-        b=QSIGkaZavC1QxSA5/aRCC2Kcj7KeBDlPtwOnycoI0r7AYlC80dxWIbJpzvaK4j7wW/
-         kt2QkXrON1Eofzn6w7+bcPM9LJxw8sLpXcNDYpOIsIqJqk42Ocp+xprtTHrqz9CuzpeI
-         dnz3ipftSgd4uFJhBpXwY9gLN1J9IUMwiSRUDJD478QdqbHMXn1CUS58mBp+aW4EXw0s
-         fEdWbE5/ANUfUbKVsMbZRimldT6Vb4hiTREG2qLaWcfjcugKQbgTunlpkMNQPKAb3+hx
-         Sdfc5Jy9C7HaXHR5MYh53ajOwVj9UMPo1bp/qfQ14SMIrXeJPp1QsntB5c4kcN8MbUfi
-         N95A==
+        bh=KTcsPgfp4qWHKI5IiGC/xRJnn7HmZtcbIn5ZIF7f/ys=;
+        b=cSbNj25mA5HsZT5KVjKrE0TLwJV6j9DrVK5wgfTSbC3nASEmC8LQqvS2O/Ni9rsnc+
+         G0OF8otUYOSUnS3iZ8OBiHGh9bXN8DigRl3bg5a1AhbB7Q6dj//F3fgm+TF5NgupOF1w
+         rPWd5nIhor0AnwVchF639ppfnmvjoLZmaeYDA5O/heas/6U+bbCjmAEPIP610qjjgk99
+         zgzLiJKyeuMly6na50OJVHd8zvFRnNtda+YmDzzDyWshND7By7iUcQzlnnvy6DrtAPKl
+         SQ523UA4F4wMh21d/cgUlplO2+9EoLPMPda/HrbDpGVT4sgCvUAiaSsE72DVMH+p7B/p
+         VFkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741666138; x=1742270938;
+        d=1e100.net; s=20230601; t=1741666141; x=1742270941;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
-        b=LVkNPbDqb+2feCCAuHGfZQTZEtSaaG56HAfqWmKQQ53ONrZDAA46D6ROVdFyHG46nI
-         rj6AqGSplTvcLMYO/lLR5k06kp28P4TsHIH4qcqTrWe2Gdz7Iks8OdOJJdYj2/hlwuDe
-         //2x/1gu50jMqn7kvWzwzIj7qNTgbZReDR1cLwzr/NgFhbxHfPLxxjmBaPz/ePpG2sS+
-         7ncsGFEKyZF3DO2s9CBJIrM7EKe+Gvz1UXxqh5UGuxyGcfbdh8ld/qiXDLEh/j7PcY92
-         qhIT84USkdaRcDbqDH5z5aknZPK5ga6FsEiJZQUydZD6t+4dd/rzg7nwYC2wPtz2iFV5
-         /EYA==
-X-Forwarded-Encrypted: i=1; AJvYcCUbn69sO2+PeavTPJAfi/qtokfI7NiLXYsUN6EcOGHbyQXPW+tlehD3y6mZBmxrCXGo+FtNxQn8WG8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxuzqIYVUs4uNUP3bSrK051pYD+qHzenIqXCwtuNdBXb7F5r3ZF
-	4jSefw6UpO+EvqhrBJ0GIQ2ahXCQsElmVgXSBKfJLjDqwQcFxUB7hDqdvwUpqYc=
-X-Gm-Gg: ASbGnct43PpZZt79HiliiFv4/qd1BgZVSfNc9pOtrnAndlQDJB8OSV03GNdntm1ixxG
-	X1TM/lbABhtHa+zN5DnP4w6STSu735B6sh5R9UoZQWKL+xJMfugeGRdB6S7/tL7UeIejWcoXVaR
-	xfNe1rqpglcASX8w9R0ip3fWepDosSrk40g2dIWII4QvuT8d/rBMObixfJWOhVGLKroYRWf9O+4
-	NNvKhC2NWcBGelGjCkgY0NUK4xAQKzxbyyDTZkuJRRAcEUtT03qt8BjjfT2WqmctK6rdk4xwicx
-	7a5zIPm/849ZAIdBvh4aOzOPYk+LyskWGftrHiyxiXkq
-X-Google-Smtp-Source: AGHT+IEzBJ4Y504tWVEKTLiAl14rUz4i3nUGGoyaKrgK43oaArjDd5np2LA5f1JQHmiuxtYBHKlEDg==
-X-Received: by 2002:a05:6a21:b97:b0:1f5:889c:3cdb with SMTP id adf61e73a8af0-1f5889c6dc7mr5899820637.8.1741666138527;
-        Mon, 10 Mar 2025 21:08:58 -0700 (PDT)
+        bh=KTcsPgfp4qWHKI5IiGC/xRJnn7HmZtcbIn5ZIF7f/ys=;
+        b=KfwbGOq1OLAp6nTkU3+yORFIVW/IZ4VScFCgZWs/zn0/Pha/Yu0arDZ4gybRfj4AwU
+         5FYkr+l/7XEGnYE8iYnheAghxJsXbvT5aon7IXseryx9FDjOQlywTNYmYeJo5vI7lsLO
+         83TXZTchAgZySSVpOHPG/IfRd5eUEC9Np4eqxtG5sEmAYmdEdhZHQuLsrM9pC1SOaf4l
+         Ce29AIAYHaMZzvotcKH2vjKnpYAwm4py3mSbnEIoNHhRPL/j+eB1O0frYah7CLfdPYIn
+         gZ6EacdfZJp+SyXF6TCpmQOkqNUaejA96/sseLPdzQPe5qmoH6FpTHQpCKZ1porm3J7Z
+         tkLg==
+X-Forwarded-Encrypted: i=1; AJvYcCXDFQQK66w1OC6jAKgNdYILvAw80J7JkRM+MBWvSh2n9kd/yfRvaqDDa4h26+1kbLAKigbCSBJLbZY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxrKOa3q93fEyzPZFLiK8IInFz0LxB73Jg0I1L7Dkx7OuwZpOsh
+	n+C9M/G9gC8hIDUL6ZeWeJs/sxWVynQKKU3ufIEQAUfyW6asTz56ZP/UtkHDdYE=
+X-Gm-Gg: ASbGnctW4VlWONDzIbCw7Dk/rzOoydnpXKFcxDHMhstF0mjbHSNmPuoS7a1WYiz+BpE
+	NcJEMjNOLYXLbnic2iNucdj1HlAx7eH+XEuA+wclRr+b/7xkzXBNUo6SYP03/wkBYacasH3XMFY
+	s9ozY7RoQ5sZpa/Bft+IeQvFPRwZlJfB/aaflBzfeRhnMMox8CaLWgaKXADiXwG+U0Ez/ldVofe
+	TEGn9qqNrHyT7Hft8zveWaml/+IcYRAyDfXk6RUKH+V4iXk+p+VqZCeKfDzZgAG5xykvNf9RSFF
+	bSjY3cXlOM9nC71e6BOqjPlcqVFKEqgW2tLZOgBLNocx+RC2Y1V7CyQ=
+X-Google-Smtp-Source: AGHT+IFvmMV6FR9w9HRJlmca+n7Q/Lcb7qpOce3I31boqIZsCEXwR+2F1i3uigVa31tDctZYbS6W9g==
+X-Received: by 2002:a05:6a21:6b18:b0:1ee:c7c8:ca4 with SMTP id adf61e73a8af0-1f58cbef8a4mr4223140637.36.1741666140734;
+        Mon, 10 Mar 2025 21:09:00 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>,
@@ -108,58 +108,77 @@ Cc: Paul Durrant <paul@xen.org>,
 	Daniel Henrique Barboza <danielhb413@gmail.com>,
 	Anthony PERARD <anthony@xenproject.org>,
 	Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 01/16] exec/tswap: target code can use TARGET_BIG_ENDIAN instead of target_words_bigendian()
-Date: Mon, 10 Mar 2025 21:08:23 -0700
-Message-Id: <20250311040838.3937136-2-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 03/16] exec/memory_ldst: extract memory_ldst declarations from cpu-all.h
+Date: Mon, 10 Mar 2025 21:08:25 -0700
+Message-Id: <20250311040838.3937136-4-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+They are now accessible through exec/memory.h instead, and we make sure
+all variants are available for common or target dependent code.
+
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/tswap.h | 11 ++++++-----
- cpu-target.c         |  1 +
- 2 files changed, 7 insertions(+), 5 deletions(-)
+ include/exec/cpu-all.h         | 12 ------------
+ include/exec/memory_ldst.h.inc |  4 ----
+ 2 files changed, 16 deletions(-)
 
-diff --git a/include/exec/tswap.h b/include/exec/tswap.h
-index ecd4faef015..2683da0adb7 100644
---- a/include/exec/tswap.h
-+++ b/include/exec/tswap.h
-@@ -13,13 +13,14 @@
- /**
-  * target_words_bigendian:
-  * Returns true if the (default) endianness of the target is big endian,
-- * false otherwise. Note that in target-specific code, you can use
-- * TARGET_BIG_ENDIAN directly instead. On the other hand, common
-- * code should normally never need to know about the endianness of the
-- * target, so please do *not* use this function unless you know very well
-- * what you are doing!
-+ * false otherwise. Common code should normally never need to know about the
-+ * endianness of the target, so please do *not* use this function unless you
-+ * know very well what you are doing!
-  */
- bool target_words_bigendian(void);
-+#ifdef COMPILING_PER_TARGET
-+#define target_words_bigendian()  TARGET_BIG_ENDIAN
-+#endif
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index e56c064d46f..0e8205818a4 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -44,18 +44,6 @@
  
- /*
-  * If we're in target-specific code, we can hard-code the swapping
-diff --git a/cpu-target.c b/cpu-target.c
-index cae77374b38..519b0f89005 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -155,6 +155,7 @@ void cpu_abort(CPUState *cpu, const char *fmt, ...)
-     abort();
- }
+ #include "exec/hwaddr.h"
  
-+#undef target_words_bigendian
- bool target_words_bigendian(void)
+-#define SUFFIX
+-#define ARG1         as
+-#define ARG1_DECL    AddressSpace *as
+-#define TARGET_ENDIANNESS
+-#include "exec/memory_ldst.h.inc"
+-
+-#define SUFFIX       _cached_slow
+-#define ARG1         cache
+-#define ARG1_DECL    MemoryRegionCache *cache
+-#define TARGET_ENDIANNESS
+-#include "exec/memory_ldst.h.inc"
+-
+ static inline void stl_phys_notdirty(AddressSpace *as, hwaddr addr, uint32_t val)
  {
-     return TARGET_BIG_ENDIAN;
+     address_space_stl_notdirty(as, addr, val,
+diff --git a/include/exec/memory_ldst.h.inc b/include/exec/memory_ldst.h.inc
+index 92ad74e9560..7270235c600 100644
+--- a/include/exec/memory_ldst.h.inc
++++ b/include/exec/memory_ldst.h.inc
+@@ -19,7 +19,6 @@
+  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#ifdef TARGET_ENDIANNESS
+ uint16_t glue(address_space_lduw, SUFFIX)(ARG1_DECL,
+     hwaddr addr, MemTxAttrs attrs, MemTxResult *result);
+ uint32_t glue(address_space_ldl, SUFFIX)(ARG1_DECL,
+@@ -34,7 +33,6 @@ void glue(address_space_stl, SUFFIX)(ARG1_DECL,
+     hwaddr addr, uint32_t val, MemTxAttrs attrs, MemTxResult *result);
+ void glue(address_space_stq, SUFFIX)(ARG1_DECL,
+     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
+-#else
+ uint8_t glue(address_space_ldub, SUFFIX)(ARG1_DECL,
+     hwaddr addr, MemTxAttrs attrs, MemTxResult *result);
+ uint16_t glue(address_space_lduw_le, SUFFIX)(ARG1_DECL,
+@@ -63,9 +61,7 @@ void glue(address_space_stq_le, SUFFIX)(ARG1_DECL,
+     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
+ void glue(address_space_stq_be, SUFFIX)(ARG1_DECL,
+     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
+-#endif
+ 
+ #undef ARG1_DECL
+ #undef ARG1
+ #undef SUFFIX
+-#undef TARGET_ENDIANNESS
 -- 
 2.39.5
 
