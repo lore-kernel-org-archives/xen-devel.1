@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7CFC282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 21:13:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909296.1316271 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B43C28B2E
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 21:13:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909300.1316314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6uB-0000Am-Eh; Tue, 11 Mar 2025 21:12:51 +0000
+	id 1ts6uF-0001HQ-Es; Tue, 11 Mar 2025 21:12:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909296.1316271; Tue, 11 Mar 2025 21:12:51 +0000
+Received: by outflank-mailman (output) from mailman id 909300.1316314; Tue, 11 Mar 2025 21:12:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts6uB-00007E-7c; Tue, 11 Mar 2025 21:12:51 +0000
-Received: by outflank-mailman (input) for mailman id 909296;
- Tue, 11 Mar 2025 21:12:50 +0000
+	id 1ts6uF-0001G3-B0; Tue, 11 Mar 2025 21:12:55 +0000
+Received: by outflank-mailman (input) for mailman id 909300;
+ Tue, 11 Mar 2025 21:12:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=isYZ=V6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ts6uA-0008V9-LN
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 21:12:50 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
+ id 1ts6uE-0008V9-Ao
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 21:12:54 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95e918ae-febd-11ef-9898-31a8f345e629;
- Tue, 11 Mar 2025 22:12:49 +0100 (CET)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-39149bccb69so2419490f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 14:12:49 -0700 (PDT)
+ id 9810a7ff-febd-11ef-9898-31a8f345e629;
+ Tue, 11 Mar 2025 22:12:52 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3912c09bea5so4964100f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 14:12:52 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912bfdfba9sm19480872f8f.39.2025.03.11.14.12.47
+ ffacd0b85a97d-3912bfdfba9sm19480872f8f.39.2025.03.11.14.12.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 14:12:47 -0700 (PDT)
+ Tue, 11 Mar 2025 14:12:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,48 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95e918ae-febd-11ef-9898-31a8f345e629
+X-Inumbo-ID: 9810a7ff-febd-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741727568; x=1742332368; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741727572; x=1742332372; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MYYWoFXQadYNqg3ppNES3f8YOcne8bmt2zBhfPE0KsI=;
-        b=NQ7ppZ5BoMP+56b3zvvq0pg9IntpOq2H7hwB9NAWZHQgz9Vev0XfpO+inCeHB/FD5Q
-         zgNjofAmDPEnnlOuu5w+LRA3sFAZ5T5xj/9UleERfO84m7FYCcQ5LmNf1Z8b+vsbuKoj
-         9EVOA3/9AHmOibF/D7j7KuX4aN/Ou7MHC8loA=
+        bh=791cAS5w7eCNK6kjj4DpqvEK5as6CjUXwYOSWlAUoo8=;
+        b=DiBDAtE0btf+fc+DUbZocqpDQ5yZ5Yk5j6w5FVJqD9dZJdUZEmYNdLuTCY1jw50Tlr
+         xB7nRip7lXsYjykgiLu+udV47il03txlkVnonlFqRMn/K5PwQ6u37Q2HNtmJo31Neezf
+         rhVpfPhhDuDoqma5Xco/3sQifYkCwWkZuYQyw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741727568; x=1742332368;
+        d=1e100.net; s=20230601; t=1741727572; x=1742332372;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MYYWoFXQadYNqg3ppNES3f8YOcne8bmt2zBhfPE0KsI=;
-        b=NmygXvVXZ5hdakzcLs+Lx7gqPw4hRbZ6a2ayj7LQe2LfZUGq+OechiYj0d8JupEZnW
-         p+h3ooUyWl6c7Ca0whSOH82Lx4XSidiwwOFthbmYLfZIN24mPJ/YCPjF8MvwZkoX7kKI
-         TJp+psLXh4EdGywgoBd7EnBYJqwbzOroS82og7+mExVLyXsDgp1IUILmg3+FQJaW8BJO
-         UNS0CkJvGPSioqkfqd+dwmk6+d91fiCiHvEIkwJV/YUIXFATqAbN+pc5b/8vvIxXZUSy
-         EbGAAhMV/kFcFUHtRD387eZ3WaCzdhQPDNOca3BKXHgzcgVRJqOLXggWe27uLL2tvQ0H
-         TGWQ==
-X-Gm-Message-State: AOJu0YxtNDVnCCwP3tqQuMAV3qb2J4L/3z8iW2d79SP1bhrgAPQqcOnz
-	nzredl4bMW+mOakCqwJhBbYTOGXBjpLKbmHcFxAX3ufHxz8FqPJdwP3w1kpnnyeaI84TZ4xto6d
-	z
-X-Gm-Gg: ASbGncuq/HjRfF9g/5MlXIP+HnUiK2yOr8RySPFuzLJIAs2GEh/W1xnUqN+vqD229P7
-	Iv75CmxDw5mPgfpAhzjeY1nutTt17KEJTDiNZhx9ToZgOI2sxb22yfi6gWWIJLKpoF66LwCUJ62
-	wRYurEYT3W/nAh9mYcwxEm3gY44sURqckAyZtezO9Wz6pgqWRjifj6SoNPNu6jd2/UQUbS1lpiK
-	KT7Y2vUTa6meqzASa2D53RGI4gYzF6NR8QzHRmGbUzcsrJkTwKO207K0rMnIoxGkDGnrwes2Lo3
-	fQykMhNvmVoY49Gdo+ML2r3pWAaCBwayWXQ6kkYS8SrseUrk+Y8NDxAlCHZVHyrOB0QzTdYrs59
-	FvuC/aCDeVUiKLTRaH5pvF3cpcxpIvPz40vU=
-X-Google-Smtp-Source: AGHT+IFZgdnQQjNxx8ghjAcICekZILUDfTG+OshKCf0R9bGe78OIZA2mDQRW7kigxJY2ri5dUHihpg==
-X-Received: by 2002:a05:6000:4011:b0:38d:badf:9df5 with SMTP id ffacd0b85a97d-392641bfd05mr5345571f8f.17.1741727568219;
-        Tue, 11 Mar 2025 14:12:48 -0700 (PDT)
+        bh=791cAS5w7eCNK6kjj4DpqvEK5as6CjUXwYOSWlAUoo8=;
+        b=LQEIBb2sYQkXO9FS5yynHExeibAYnd89MDG+PizpnRJe7o8tHe9tGSsEddXXfylS6B
+         Phch/8HKKe+4PHNHE5ts82InF1RGYU2WYVqp7eLOyYp56h/+LVmU9lURXcPg5JCjuzq2
+         4yrhdrn/YyAjoE7/FRdHK9xVHhvOuHMjTXU9bWX/iTWYv/0d3eucMffpJ66N/NvNRA+H
+         OBRHV9KVTbjWEzZ/vmAMxrnDFxNPMqfAvWXBL2v65CVuKEvG0BmgDJyByXHUApNWestF
+         H4UhsFEdBCmdvQjo37BkUB5j4nWoOESZgTSjfsUkSUKNqdhD0bYPZNyZ9Hc7zNZCsyPh
+         8Qxw==
+X-Gm-Message-State: AOJu0Yx9Utq8rhYNFW7wRy2dXyO/zqCMOoXLHh4YD5GfJXQA27j9NHqJ
+	8U4drf2ny4ZbyppQRHzX1iI6FUkEdSQBE+jziGvdCRENM0pq10kZEmGaYPW0P+oOoqupF0tLhzH
+	8
+X-Gm-Gg: ASbGncugRHOhKVgvoFNjGJFANkkYcM3FOfIEXekj0LUXtYixfO2EzBp3Ds+IX+jCsVQ
+	XEHm975RYrXa/8aUZmHT3asrvWHm43DxSLL+MdNbe50OOuApj1thwFf64JNTi/buaBrHorluvgs
+	IMda4E/O2VGdBrLH7akH52nSt8+v+KUfbQbPoLyckfq5Y3NcnICNUdBObl0/OIoHZuBRRB5IC6x
+	uCoEOPPZn4vPdhwDzwE+jLDO3Emfv07BWDdHpd0X4qwvkotQGrZ/yIcQXWKRuw6VG/bjdCn8mIq
+	eMbbjj81n2HWWTUygsyFaEapwJlPIy7qLZkAYhgMgCG+iglSGKqwvN5vPaTw/hiurpuXOXNB09P
+	j6TKPML2xfog96wZ5u/Jb3XK7
+X-Google-Smtp-Source: AGHT+IH1rPMqHv3ArDgFC97Dc4ohFM/1rzWaP3B8txp72HirToLrO2N2PadTRsHbohho/nhVlJ116g==
+X-Received: by 2002:a5d:6d06:0:b0:391:4231:414 with SMTP id ffacd0b85a97d-3926beec139mr6844639f8f.40.1741727571883;
+        Tue, 11 Mar 2025 14:12:51 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 1/8] x86/regs: Fold x86_64/regs.h into it's single includer
-Date: Tue, 11 Mar 2025 21:10:36 +0000
-Message-Id: <20250311211043.3629696-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/8] x86/domctl: Stop using XLAT_cpu_user_regs()
+Date: Tue, 11 Mar 2025 21:10:40 +0000
+Message-Id: <20250311211043.3629696-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
 References: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
@@ -96,82 +96,164 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+In order to support FRED, we're going to have to remove the {ds..gs} fields
+from struct cpu_user_regs, meaning that it is going to have to become a
+different type to the structure embedded in vcpu_guest_context_u.
+
+In both arch_{get,set}_info_guest(), expand the memcpy()/XLAT_cpu_user_regs()
+to copy the fields individually.  This will allow us to eventually make them
+different types.
+
+No practical change.  The compat cases are identical, while the non-compat
+cases no longer copy _pad fields.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/include/asm/regs.h        | 21 ++++++++++++++++++-
- xen/arch/x86/include/asm/x86_64/regs.h | 28 --------------------------
- 2 files changed, 20 insertions(+), 29 deletions(-)
- delete mode 100644 xen/arch/x86/include/asm/x86_64/regs.h
 
-diff --git a/xen/arch/x86/include/asm/regs.h b/xen/arch/x86/include/asm/regs.h
-index ddf5e14e5719..4f2f06b60161 100644
---- a/xen/arch/x86/include/asm/regs.h
-+++ b/xen/arch/x86/include/asm/regs.h
-@@ -2,7 +2,26 @@
- #ifndef __X86_REGS_H__
- #define __X86_REGS_H__
+Should we really be copying error_code/entry_vector?  They're already listed
+as explicitly private fields, and I don't think anything good can come of
+providing/consuming them.
+---
+ xen/arch/x86/domain.c | 42 ++++++++++++++++++++++++++++++++++++++++--
+ xen/arch/x86/domctl.c | 42 ++++++++++++++++++++++++++++++++++++++++--
+ xen/include/xlat.lst  |  2 --
+ 3 files changed, 80 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index a42fa5480593..bc0816c71495 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -1196,7 +1196,26 @@ int arch_set_info_guest(
  
--#include <asm/x86_64/regs.h>
-+#define ring_0(r)    (((r)->cs & 3) == 0)
-+#define ring_1(r)    (((r)->cs & 3) == 1)
-+#define ring_2(r)    (((r)->cs & 3) == 2)
-+#define ring_3(r)    (((r)->cs & 3) == 3)
+     if ( !compat )
+     {
+-        memcpy(&v->arch.user_regs, &c.nat->user_regs, sizeof(c.nat->user_regs));
++        v->arch.user_regs.rbx               = c.nat->user_regs.rbx;
++        v->arch.user_regs.rcx               = c.nat->user_regs.rcx;
++        v->arch.user_regs.rdx               = c.nat->user_regs.rdx;
++        v->arch.user_regs.rsi               = c.nat->user_regs.rsi;
++        v->arch.user_regs.rdi               = c.nat->user_regs.rdi;
++        v->arch.user_regs.rbp               = c.nat->user_regs.rbp;
++        v->arch.user_regs.rax               = c.nat->user_regs.rax;
++        v->arch.user_regs.error_code        = c.nat->user_regs.error_code;
++        v->arch.user_regs.entry_vector      = c.nat->user_regs.entry_vector;
++        v->arch.user_regs.rip               = c.nat->user_regs.rip;
++        v->arch.user_regs.cs                = c.nat->user_regs.cs;
++        v->arch.user_regs.saved_upcall_mask = c.nat->user_regs.saved_upcall_mask;
++        v->arch.user_regs.rflags            = c.nat->user_regs.rflags;
++        v->arch.user_regs.rsp               = c.nat->user_regs.rsp;
++        v->arch.user_regs.ss                = c.nat->user_regs.ss;
++        v->arch.user_regs.es                = c.nat->user_regs.es;
++        v->arch.user_regs.ds                = c.nat->user_regs.ds;
++        v->arch.user_regs.fs                = c.nat->user_regs.fs;
++        v->arch.user_regs.gs                = c.nat->user_regs.gs;
 +
-+#define guest_kernel_mode(v, r)                                 \
-+    (!is_pv_32bit_vcpu(v) ?                                     \
-+     (ring_3(r) && ((v)->arch.flags & TF_kernel_mode)) :        \
-+     (ring_1(r)))
+         if ( is_pv_domain(d) )
+             memcpy(v->arch.pv.trap_ctxt, c.nat->trap_ctxt,
+                    sizeof(c.nat->trap_ctxt));
+@@ -1204,7 +1223,26 @@ int arch_set_info_guest(
+ #ifdef CONFIG_COMPAT
+     else
+     {
+-        XLAT_cpu_user_regs(&v->arch.user_regs, &c.cmp->user_regs);
++        v->arch.user_regs.ebx               = c.cmp->user_regs.ebx;
++        v->arch.user_regs.ecx               = c.cmp->user_regs.ecx;
++        v->arch.user_regs.edx               = c.cmp->user_regs.edx;
++        v->arch.user_regs.esi               = c.cmp->user_regs.esi;
++        v->arch.user_regs.edi               = c.cmp->user_regs.edi;
++        v->arch.user_regs.ebp               = c.cmp->user_regs.ebp;
++        v->arch.user_regs.eax               = c.cmp->user_regs.eax;
++        v->arch.user_regs.error_code        = c.cmp->user_regs.error_code;
++        v->arch.user_regs.entry_vector      = c.cmp->user_regs.entry_vector;
++        v->arch.user_regs.eip               = c.cmp->user_regs.eip;
++        v->arch.user_regs.cs                = c.cmp->user_regs.cs;
++        v->arch.user_regs.saved_upcall_mask = c.cmp->user_regs.saved_upcall_mask;
++        v->arch.user_regs.eflags            = c.cmp->user_regs.eflags;
++        v->arch.user_regs.esp               = c.cmp->user_regs.esp;
++        v->arch.user_regs.ss                = c.cmp->user_regs.ss;
++        v->arch.user_regs.es                = c.cmp->user_regs.es;
++        v->arch.user_regs.ds                = c.cmp->user_regs.ds;
++        v->arch.user_regs.fs                = c.cmp->user_regs.fs;
++        v->arch.user_regs.gs                = c.cmp->user_regs.gs;
 +
-+#define permit_softint(dpl, v, r) \
-+    ((dpl) >= (guest_kernel_mode(v, r) ? 1 : 3))
+         if ( is_pv_domain(d) )
+         {
+             for ( i = 0; i < ARRAY_SIZE(c.cmp->trap_ctxt); ++i )
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 3044f706de1c..7ab9e9176b58 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1399,7 +1399,26 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+         c(flags |= VGCF_online);
+     if ( !compat )
+     {
+-        memcpy(&c.nat->user_regs, &v->arch.user_regs, sizeof(c.nat->user_regs));
++        c.nat->user_regs.rbx               = v->arch.user_regs.rbx;
++        c.nat->user_regs.rcx               = v->arch.user_regs.rcx;
++        c.nat->user_regs.rdx               = v->arch.user_regs.rdx;
++        c.nat->user_regs.rsi               = v->arch.user_regs.rsi;
++        c.nat->user_regs.rdi               = v->arch.user_regs.rdi;
++        c.nat->user_regs.rbp               = v->arch.user_regs.rbp;
++        c.nat->user_regs.rax               = v->arch.user_regs.rax;
++        c.nat->user_regs.error_code        = v->arch.user_regs.error_code;
++        c.nat->user_regs.entry_vector      = v->arch.user_regs.entry_vector;
++        c.nat->user_regs.rip               = v->arch.user_regs.rip;
++        c.nat->user_regs.cs                = v->arch.user_regs.cs;
++        c.nat->user_regs.saved_upcall_mask = v->arch.user_regs.saved_upcall_mask;
++        c.nat->user_regs.rflags            = v->arch.user_regs.rflags;
++        c.nat->user_regs.rsp               = v->arch.user_regs.rsp;
++        c.nat->user_regs.ss                = v->arch.user_regs.ss;
++        c.nat->user_regs.es                = v->arch.user_regs.es;
++        c.nat->user_regs.ds                = v->arch.user_regs.ds;
++        c.nat->user_regs.fs                = v->arch.user_regs.fs;
++        c.nat->user_regs.gs                = v->arch.user_regs.gs;
 +
-+/* Check for null trap callback handler: Is the EIP null? */
-+#define null_trap_bounce(v, tb) \
-+    (!is_pv_32bit_vcpu(v) ? ((tb)->eip == 0) : (((tb)->cs & ~3) == 0))
+         if ( is_pv_domain(d) )
+             memcpy(c.nat->trap_ctxt, v->arch.pv.trap_ctxt,
+                    sizeof(c.nat->trap_ctxt));
+@@ -1407,7 +1426,26 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+ #ifdef CONFIG_COMPAT
+     else
+     {
+-        XLAT_cpu_user_regs(&c.cmp->user_regs, &v->arch.user_regs);
++        c.cmp->user_regs.ebx               = v->arch.user_regs.ebx;
++        c.cmp->user_regs.ecx               = v->arch.user_regs.ecx;
++        c.cmp->user_regs.edx               = v->arch.user_regs.edx;
++        c.cmp->user_regs.esi               = v->arch.user_regs.esi;
++        c.cmp->user_regs.edi               = v->arch.user_regs.edi;
++        c.cmp->user_regs.ebp               = v->arch.user_regs.ebp;
++        c.cmp->user_regs.eax               = v->arch.user_regs.eax;
++        c.cmp->user_regs.error_code        = v->arch.user_regs.error_code;
++        c.cmp->user_regs.entry_vector      = v->arch.user_regs.entry_vector;
++        c.cmp->user_regs.eip               = v->arch.user_regs.eip;
++        c.cmp->user_regs.cs                = v->arch.user_regs.cs;
++        c.cmp->user_regs.saved_upcall_mask = v->arch.user_regs.saved_upcall_mask;
++        c.cmp->user_regs.eflags            = v->arch.user_regs.eflags;
++        c.cmp->user_regs.esp               = v->arch.user_regs.esp;
++        c.cmp->user_regs.ss                = v->arch.user_regs.ss;
++        c.cmp->user_regs.es                = v->arch.user_regs.es;
++        c.cmp->user_regs.ds                = v->arch.user_regs.ds;
++        c.cmp->user_regs.fs                = v->arch.user_regs.fs;
++        c.cmp->user_regs.gs                = v->arch.user_regs.gs;
 +
-+/* Number of bytes of on-stack execution state to be context-switched. */
-+/* NB. Segment registers and bases are not saved/restored on x86/64 stack. */
-+#define CTXT_SWITCH_STACK_BYTES (offsetof(struct cpu_user_regs, es))
+         if ( is_pv_domain(d) )
+         {
+             for ( i = 0; i < ARRAY_SIZE(c.cmp->trap_ctxt); ++i )
+diff --git a/xen/include/xlat.lst b/xen/include/xlat.lst
+index 3c7b6c6830a9..6d6c6cfab251 100644
+--- a/xen/include/xlat.lst
++++ b/xen/include/xlat.lst
+@@ -34,8 +34,6 @@
+ ?	pmu_intel_ctxt			arch-x86/pmu.h
+ ?	pmu_regs			arch-x86/pmu.h
  
- #define guest_mode(r)                                                         \
- ({                                                                            \
-diff --git a/xen/arch/x86/include/asm/x86_64/regs.h b/xen/arch/x86/include/asm/x86_64/regs.h
-deleted file mode 100644
-index 171cf9a2e217..000000000000
---- a/xen/arch/x86/include/asm/x86_64/regs.h
-+++ /dev/null
-@@ -1,28 +0,0 @@
--#ifndef _X86_64_REGS_H
--#define _X86_64_REGS_H
+-!	cpu_user_regs			arch-x86/xen-@arch@.h
 -
--#include <xen/types.h>
--#include <public/xen.h>
--
--#define ring_0(r)    (((r)->cs & 3) == 0)
--#define ring_1(r)    (((r)->cs & 3) == 1)
--#define ring_2(r)    (((r)->cs & 3) == 2)
--#define ring_3(r)    (((r)->cs & 3) == 3)
--
--#define guest_kernel_mode(v, r)                                 \
--    (!is_pv_32bit_vcpu(v) ?                                     \
--     (ring_3(r) && ((v)->arch.flags & TF_kernel_mode)) :        \
--     (ring_1(r)))
--
--#define permit_softint(dpl, v, r) \
--    ((dpl) >= (guest_kernel_mode(v, r) ? 1 : 3))
--
--/* Check for null trap callback handler: Is the EIP null? */
--#define null_trap_bounce(v, tb) \
--    (!is_pv_32bit_vcpu(v) ? ((tb)->eip == 0) : (((tb)->cs & ~3) == 0))
--
--/* Number of bytes of on-stack execution state to be context-switched. */
--/* NB. Segment registers and bases are not saved/restored on x86/64 stack. */
--#define CTXT_SWITCH_STACK_BYTES (offsetof(struct cpu_user_regs, es))
--
--#endif
+ ?	cpu_offline_action		arch-x86/xen-mca.h
+ ?	mc				arch-x86/xen-mca.h
+ !	mc_fetch			arch-x86/xen-mca.h
 -- 
 2.39.5
 
