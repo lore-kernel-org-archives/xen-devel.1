@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77360C28B2E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 04:09:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.907016.1314312 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5229AC28B2F
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 04:09:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.907019.1314349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trqvQ-0000iq-4q; Tue, 11 Mar 2025 04:09:04 +0000
+	id 1trqvY-0001f3-1J; Tue, 11 Mar 2025 04:09:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 907016.1314312; Tue, 11 Mar 2025 04:09:04 +0000
+Received: by outflank-mailman (output) from mailman id 907019.1314349; Tue, 11 Mar 2025 04:09:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1trqvQ-0000hU-2A; Tue, 11 Mar 2025 04:09:04 +0000
-Received: by outflank-mailman (input) for mailman id 907016;
- Tue, 11 Mar 2025 04:09:02 +0000
+	id 1trqvX-0001eu-U0; Tue, 11 Mar 2025 04:09:11 +0000
+Received: by outflank-mailman (input) for mailman id 907019;
+ Tue, 11 Mar 2025 04:09:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EQfW=V6=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1trqvO-0000fJ-Ks
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 04:09:02 +0000
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [2607:f8b0:4864:20::635])
+ id 1trqvW-0000fJ-72
+ for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 04:09:10 +0000
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [2607:f8b0:4864:20::631])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 902e64e9-fe2e-11ef-9ab8-95dc52dad729;
- Tue, 11 Mar 2025 05:09:02 +0100 (CET)
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-223fb0f619dso93349925ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 21:09:02 -0700 (PDT)
+ id 94ba1b05-fe2e-11ef-9ab8-95dc52dad729;
+ Tue, 11 Mar 2025 05:09:09 +0100 (CET)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-22580c9ee0aso23111055ad.2
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Mar 2025 21:09:09 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.08.59
+ 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.09.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 21:09:00 -0700 (PDT)
+ Mon, 10 Mar 2025 21:09:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 902e64e9-fe2e-11ef-9ab8-95dc52dad729
+X-Inumbo-ID: 94ba1b05-fe2e-11ef-9ab8-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1741666141; x=1742270941; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1741666148; x=1742270948; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KTcsPgfp4qWHKI5IiGC/xRJnn7HmZtcbIn5ZIF7f/ys=;
-        b=cSbNj25mA5HsZT5KVjKrE0TLwJV6j9DrVK5wgfTSbC3nASEmC8LQqvS2O/Ni9rsnc+
-         G0OF8otUYOSUnS3iZ8OBiHGh9bXN8DigRl3bg5a1AhbB7Q6dj//F3fgm+TF5NgupOF1w
-         rPWd5nIhor0AnwVchF639ppfnmvjoLZmaeYDA5O/heas/6U+bbCjmAEPIP610qjjgk99
-         zgzLiJKyeuMly6na50OJVHd8zvFRnNtda+YmDzzDyWshND7By7iUcQzlnnvy6DrtAPKl
-         SQ523UA4F4wMh21d/cgUlplO2+9EoLPMPda/HrbDpGVT4sgCvUAiaSsE72DVMH+p7B/p
-         VFkQ==
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=l9OL+HSsU20FBz6Rn+inDNzpv7yBRsst2fq1x6gPUv2lonFCNnmadQObLUFsNBP4E9
+         4+vDgwYL1PC86BlPawV1hY7T2C5MLZ6p+jY+Kck9LsL5t59b9bwHCJRo2CB64/WlRCDo
+         KIylmdgHX6MhhxkQv9l5Xfomx+45hdpqIdZQ23lBr+0S5eQzyGbsFl5eOi7U35iEz8a/
+         HW8gkRZwDE3M0T/J/Zi0WxBQEBGeSspwHbLfoIX6E0zPdxF9hsYBoBUJ0ISLFIO5Wf7v
+         V7/Rlv1mj96fiUGKKyg8WCbX0UZ6nvEYXQADJoD8tGDFvOysPw5ZA3MhJJydfQAA2+Yd
+         vU8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741666141; x=1742270941;
+        d=1e100.net; s=20230601; t=1741666148; x=1742270948;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=KTcsPgfp4qWHKI5IiGC/xRJnn7HmZtcbIn5ZIF7f/ys=;
-        b=KfwbGOq1OLAp6nTkU3+yORFIVW/IZ4VScFCgZWs/zn0/Pha/Yu0arDZ4gybRfj4AwU
-         5FYkr+l/7XEGnYE8iYnheAghxJsXbvT5aon7IXseryx9FDjOQlywTNYmYeJo5vI7lsLO
-         83TXZTchAgZySSVpOHPG/IfRd5eUEC9Np4eqxtG5sEmAYmdEdhZHQuLsrM9pC1SOaf4l
-         Ce29AIAYHaMZzvotcKH2vjKnpYAwm4py3mSbnEIoNHhRPL/j+eB1O0frYah7CLfdPYIn
-         gZ6EacdfZJp+SyXF6TCpmQOkqNUaejA96/sseLPdzQPe5qmoH6FpTHQpCKZ1porm3J7Z
-         tkLg==
-X-Forwarded-Encrypted: i=1; AJvYcCXDFQQK66w1OC6jAKgNdYILvAw80J7JkRM+MBWvSh2n9kd/yfRvaqDDa4h26+1kbLAKigbCSBJLbZY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxrKOa3q93fEyzPZFLiK8IInFz0LxB73Jg0I1L7Dkx7OuwZpOsh
-	n+C9M/G9gC8hIDUL6ZeWeJs/sxWVynQKKU3ufIEQAUfyW6asTz56ZP/UtkHDdYE=
-X-Gm-Gg: ASbGnctW4VlWONDzIbCw7Dk/rzOoydnpXKFcxDHMhstF0mjbHSNmPuoS7a1WYiz+BpE
-	NcJEMjNOLYXLbnic2iNucdj1HlAx7eH+XEuA+wclRr+b/7xkzXBNUo6SYP03/wkBYacasH3XMFY
-	s9ozY7RoQ5sZpa/Bft+IeQvFPRwZlJfB/aaflBzfeRhnMMox8CaLWgaKXADiXwG+U0Ez/ldVofe
-	TEGn9qqNrHyT7Hft8zveWaml/+IcYRAyDfXk6RUKH+V4iXk+p+VqZCeKfDzZgAG5xykvNf9RSFF
-	bSjY3cXlOM9nC71e6BOqjPlcqVFKEqgW2tLZOgBLNocx+RC2Y1V7CyQ=
-X-Google-Smtp-Source: AGHT+IFvmMV6FR9w9HRJlmca+n7Q/Lcb7qpOce3I31boqIZsCEXwR+2F1i3uigVa31tDctZYbS6W9g==
-X-Received: by 2002:a05:6a21:6b18:b0:1ee:c7c8:ca4 with SMTP id adf61e73a8af0-1f58cbef8a4mr4223140637.36.1741666140734;
-        Mon, 10 Mar 2025 21:09:00 -0700 (PDT)
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=eRP0f+zmPJVL1O86BW+LiDv7Ed7dvJ5z11tsAb8oMq1wwAQyjicIepVETKH62LGIgH
+         ZATWu+8yCrgLFX8Soo/SBG2BvxkVtu6xgE4rMMLrxJhYw8FvQtI+tzmZdUa+ssrmemYT
+         kLaDGc+rX7BdqLhcJZc/hrMxFupaksFcje9c1P/VMllppGf2e87PMlXHoCTQUCxdQUid
+         2umFEr/1IBSwFnRjC8pSMRKlsy8OdUdhwHwqpFWZZDG93TSIrp/4UG6wBaJseKzkQhIb
+         MnI4MQpt8zN0yNzzVc24r1cIW3HAu8A1Ut22ML9BErq5SiVbNCg7OSV16rIuNEhWYHY+
+         MtHQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUTyq2WOHoPQcFbaIEYDNf33l5RMOmj1okYMXo6+G/drM3tA2+o6OkHTHcr9HRZtZhTlQHaiHpgZLk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywr3P1jaqGDF5OFnOsSlIx+YO/TSrevhX8YTIVjAk4Yg71Lg5X6
+	I3xH7uElR5OCFsXYz391kdGUr6brD4t+ISMY6xbKYmn7KcNfHIOkf745gFd6dKI3uG/Y3WhO9fB
+	GpuE=
+X-Gm-Gg: ASbGncscz4tWZkcpF58g8L6YnCi3efCiRhs+88+TGHwMQo8A1PWyDdcJCi4dLVgswdC
+	zOfZ/L7K8QEeNLypt78e5zNC7Ry2RJV1DOsY8dm0cvDW4skOWsOWvB9evcd66Vn0F3KH4mq8zQr
+	JJ4imROe7S0ptp3cUkfLtTx/rKRamHdseIR0Id+xv+E0udXJdBUXgbTvwTEWp5D2jNNvnH5W1dT
+	EqpSaQj4Y7NzDjvCh9fCQ6qRU/CBub7tOu4Nlg4BuKvEbva8zt9YVkQZcXVAgpf94BGz2+/GVUD
+	1mvPoZ5H9De3z8G0fwqpSSWMmZN5Q+NG+/g/ONl7xW2Z
+X-Google-Smtp-Source: AGHT+IHS2PJ+/kxwhPkSsqZSy1Lcoi2dOdo4gLmR9Sx1nH5mZxTPaitClYNterYld+kjauOZ34q9lw==
+X-Received: by 2002:a05:6a21:164a:b0:1f5:60fb:8d9 with SMTP id adf61e73a8af0-1f560fb098fmr15311166637.33.1741666148378;
+        Mon, 10 Mar 2025 21:09:08 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>,
@@ -108,77 +109,43 @@ Cc: Paul Durrant <paul@xen.org>,
 	Daniel Henrique Barboza <danielhb413@gmail.com>,
 	Anthony PERARD <anthony@xenproject.org>,
 	Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 03/16] exec/memory_ldst: extract memory_ldst declarations from cpu-all.h
-Date: Mon, 10 Mar 2025 21:08:25 -0700
-Message-Id: <20250311040838.3937136-4-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 10/16] system/kvm: make kvm_flush_coalesced_mmio_buffer() accessible for common code
+Date: Mon, 10 Mar 2025 21:08:32 -0700
+Message-Id: <20250311040838.3937136-11-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-They are now accessible through exec/memory.h instead, and we make sure
-all variants are available for common or target dependent code.
+This function is used by system/physmem.c will be turn into common code
+in next commit.
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/cpu-all.h         | 12 ------------
- include/exec/memory_ldst.h.inc |  4 ----
- 2 files changed, 16 deletions(-)
+ include/system/kvm.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
-index e56c064d46f..0e8205818a4 100644
---- a/include/exec/cpu-all.h
-+++ b/include/exec/cpu-all.h
-@@ -44,18 +44,6 @@
+diff --git a/include/system/kvm.h b/include/system/kvm.h
+index ab17c09a551..21da3b8b052 100644
+--- a/include/system/kvm.h
++++ b/include/system/kvm.h
+@@ -210,11 +210,11 @@ bool kvm_arm_supports_user_irq(void);
+ int kvm_on_sigbus_vcpu(CPUState *cpu, int code, void *addr);
+ int kvm_on_sigbus(int code, void *addr);
  
- #include "exec/hwaddr.h"
- 
--#define SUFFIX
--#define ARG1         as
--#define ARG1_DECL    AddressSpace *as
--#define TARGET_ENDIANNESS
--#include "exec/memory_ldst.h.inc"
+-#ifdef COMPILING_PER_TARGET
+-#include "cpu.h"
 -
--#define SUFFIX       _cached_slow
--#define ARG1         cache
--#define ARG1_DECL    MemoryRegionCache *cache
--#define TARGET_ENDIANNESS
--#include "exec/memory_ldst.h.inc"
--
- static inline void stl_phys_notdirty(AddressSpace *as, hwaddr addr, uint32_t val)
- {
-     address_space_stl_notdirty(as, addr, val,
-diff --git a/include/exec/memory_ldst.h.inc b/include/exec/memory_ldst.h.inc
-index 92ad74e9560..7270235c600 100644
---- a/include/exec/memory_ldst.h.inc
-+++ b/include/exec/memory_ldst.h.inc
-@@ -19,7 +19,6 @@
-  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-  */
+ void kvm_flush_coalesced_mmio_buffer(void);
  
--#ifdef TARGET_ENDIANNESS
- uint16_t glue(address_space_lduw, SUFFIX)(ARG1_DECL,
-     hwaddr addr, MemTxAttrs attrs, MemTxResult *result);
- uint32_t glue(address_space_ldl, SUFFIX)(ARG1_DECL,
-@@ -34,7 +33,6 @@ void glue(address_space_stl, SUFFIX)(ARG1_DECL,
-     hwaddr addr, uint32_t val, MemTxAttrs attrs, MemTxResult *result);
- void glue(address_space_stq, SUFFIX)(ARG1_DECL,
-     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
--#else
- uint8_t glue(address_space_ldub, SUFFIX)(ARG1_DECL,
-     hwaddr addr, MemTxAttrs attrs, MemTxResult *result);
- uint16_t glue(address_space_lduw_le, SUFFIX)(ARG1_DECL,
-@@ -63,9 +61,7 @@ void glue(address_space_stq_le, SUFFIX)(ARG1_DECL,
-     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
- void glue(address_space_stq_be, SUFFIX)(ARG1_DECL,
-     hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result);
--#endif
- 
- #undef ARG1_DECL
- #undef ARG1
- #undef SUFFIX
--#undef TARGET_ENDIANNESS
++#ifdef COMPILING_PER_TARGET
++#include "cpu.h"
++
+ /**
+  * kvm_update_guest_debug(): ensure KVM debug structures updated
+  * @cs: the CPUState for this cpu
 -- 
 2.39.5
 
