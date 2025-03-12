@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74836C28B28
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 23:08:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.910909.1317492 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F3FC28B28
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 23:10:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.910918.1317503 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsVBE-0000lt-MI; Wed, 12 Mar 2025 23:08:04 +0000
+	id 1tsVCy-0001Jx-0U; Wed, 12 Mar 2025 23:09:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 910909.1317492; Wed, 12 Mar 2025 23:08:04 +0000
+Received: by outflank-mailman (output) from mailman id 910918.1317503; Wed, 12 Mar 2025 23:09:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsVBE-0000lm-Jl; Wed, 12 Mar 2025 23:08:04 +0000
-Received: by outflank-mailman (input) for mailman id 910909;
- Wed, 12 Mar 2025 23:08:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tsVCx-0001Jp-Tj; Wed, 12 Mar 2025 23:09:51 +0000
+Received: by outflank-mailman (input) for mailman id 910918;
+ Wed, 12 Mar 2025 23:09:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=K94u=V7=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1tsVBD-0000lg-4P
- for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 23:08:03 +0000
+ id 1tsVCw-0001Jb-TG
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 23:09:50 +0000
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d8587ddb-ff96-11ef-9ab9-95dc52dad729;
- Thu, 13 Mar 2025 00:08:01 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 18279701-ff97-11ef-9898-31a8f345e629;
+ Thu, 13 Mar 2025 00:09:48 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id AF8F2A444BA;
- Wed, 12 Mar 2025 23:02:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB808C4CEDD;
- Wed, 12 Mar 2025 23:07:58 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 04D39A42660;
+ Wed, 12 Mar 2025 23:04:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD49DC4CEDD;
+ Wed, 12 Mar 2025 23:09:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,40 +43,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d8587ddb-ff96-11ef-9ab9-95dc52dad729
+X-Inumbo-ID: 18279701-ff97-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741820880;
-	bh=C9xFQnThTri1CCCoHT8jtv7NIWyf7pS+k1Bbw39vy7A=;
+	s=k20201202; t=1741820987;
+	bh=XxvHmP3PKnMjISWZrgSBT28edtn3wk/uXTxXBDS/nT8=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=Ohsm9LJ18dU2BfBP3qNVqa9k+0/hiihG/aQxfhr4tN/iReTc7V63tDTYVCVL99ImE
-	 iMThezanbHARPWTgE6Mvf8hj4IRlAoDdWyCYnh1stem52ONQGw8C0bC6u1kurXmTfG
-	 +pq3jkLO0E2aog/QylzDPNnKbguFT1X4P1TN0r3tNyCvr7qAb0iGAuCGQpf325I5FH
-	 7262bYVKGJuC+a9k1O14sqMfS24rxiD0l06hoMxQPMMM2fuJz3Izjlcp88vbI8wv6i
-	 bakWxPRQvWtixwhpr7qNQLiaACK5yeGV3f4UZNkwMUlrFhFHHbFkxm3lRFgSiqlG3f
-	 h2DwsUW4pw3dQ==
-Date: Wed, 12 Mar 2025 16:07:57 -0700 (PDT)
+	b=HebTx8StVY4z1LRuWtzchEo9GK3TSZC4k1xFyyP3rGjRiOUcAZmFCRqU6RPekNo0w
+	 lltjK/vx+bmKGtiCAjK7LoaMd6n1QlAE5vkqq+op7KPbJsNETRYLDdr9izuujvpm0y
+	 qnX62E5bVsvKmodGEX0tpBJSoabnVA2kCe/BdVRII8wNdUihMNk8hmH0NRnC1k5/L4
+	 eTdkgxrunKnZA0HO0MoLNh3yqQdBxCKi5sI7X/Bnfz9vgOTTHRGr53y2lEcxph2quu
+	 tByw+oMDSaN9qMMBAPgaRuZfXpf93hz0P5xSwAKd9r4MKcGs3hSamzDu/Bn6EkK4Uh
+	 ZxM8tVq4xhitQ==
+Date: Wed, 12 Mar 2025 16:09:43 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Penny Zheng <Penny.Zheng@amd.com>
 cc: xen-devel@lists.xenproject.org, ray.huang@amd.com, 
+    Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, 
+    George Dunlap <gwd@xenproject.org>, 
     Andrew Cooper <andrew.cooper3@citrix.com>, 
     Anthony PERARD <anthony.perard@vates.tech>, 
     Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
     Julien Grall <julien@xen.org>, 
     =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
     Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v1 04/19] xen/sysctl: make CONFIG_TRACEBUFFER depend on
- CONFIG_SYSCTL
-In-Reply-To: <20250312040632.2853485-5-Penny.Zheng@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2503121607520.3477110@ubuntu-linux-20-04-desktop>
-References: <20250312040632.2853485-1-Penny.Zheng@amd.com> <20250312040632.2853485-5-Penny.Zheng@amd.com>
+Subject: Re: [PATCH v1 05/19] xen/sysctl: wrap around XEN_SYSCTL_sched_id
+In-Reply-To: <20250312040632.2853485-6-Penny.Zheng@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2503121609270.3477110@ubuntu-linux-20-04-desktop>
+References: <20250312040632.2853485-1-Penny.Zheng@amd.com> <20250312040632.2853485-6-Penny.Zheng@amd.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Wed, 12 Mar 2025, Penny Zheng wrote:
-> Users could only access trace buffers via hypercal XEN_SYSCTL_tbuf_op,
-> so this commit makes CONFIG_TRACEBUFFER depend on CONFIG_SYSCTL
+> The following function shall be wrapped:
+> - scheduler_id
 > 
 > Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 
@@ -84,21 +85,47 @@ Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 
 > ---
->  xen/common/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  xen/common/sched/core.c | 2 ++
+>  xen/include/xen/sched.h | 7 +++++++
+>  2 files changed, 9 insertions(+)
 > 
-> diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-> index 72e1d7ea97..c5f4192b60 100644
-> --- a/xen/common/Kconfig
-> +++ b/xen/common/Kconfig
-> @@ -513,6 +513,7 @@ config DTB_FILE
->  config TRACEBUFFER
->  	bool "Enable tracing infrastructure" if EXPERT
->  	default y
-> +	depends on SYSCTL
->  	help
->  	  Enable tracing infrastructure and pre-defined tracepoints within Xen.
->  	  This will allow live information about Xen's execution and performance
+> diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+> index d6296d99fd..ea452d8b3e 100644
+> --- a/xen/common/sched/core.c
+> +++ b/xen/common/sched/core.c
+> @@ -2052,11 +2052,13 @@ long do_set_timer_op(s_time_t timeout)
+>      return 0;
+>  }
+>  
+> +#ifdef CONFIG_SYSCTL
+>  /* scheduler_id - fetch ID of current scheduler */
+>  int scheduler_id(void)
+>  {
+>      return operations.sched_id;
+>  }
+> +#endif
+>  
+>  /* Adjust scheduling parameter for a given domain. */
+>  long sched_adjust(struct domain *d, struct xen_domctl_scheduler_op *op)
+> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+> index 559d201e0c..9bdeb85aa4 100644
+> --- a/xen/include/xen/sched.h
+> +++ b/xen/include/xen/sched.h
+> @@ -849,7 +849,14 @@ int  sched_init_domain(struct domain *d, unsigned int poolid);
+>  void sched_destroy_domain(struct domain *d);
+>  long sched_adjust(struct domain *d, struct xen_domctl_scheduler_op *op);
+>  long sched_adjust_global(struct xen_sysctl_scheduler_op *op);
+> +#ifdef CONFIG_SYSCTL
+>  int  scheduler_id(void);
+> +#else
+> +static inline int scheduler_id(void)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +#endif
+>  
+>  /*
+>   * sched_get_id_by_name - retrieves a scheduler id given a scheduler name
 > -- 
 > 2.34.1
 > 
