@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD94C28B28
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 13:53:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.910340.1317119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B33EC28B28
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 13:53:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.910343.1317143 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsMWL-0007xX-4o; Wed, 12 Mar 2025 13:53:17 +0000
+	id 1tsMWN-0000DI-M2; Wed, 12 Mar 2025 13:53:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 910340.1317119; Wed, 12 Mar 2025 13:53:17 +0000
+Received: by outflank-mailman (output) from mailman id 910343.1317143; Wed, 12 Mar 2025 13:53:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsMWK-0007wX-UH; Wed, 12 Mar 2025 13:53:16 +0000
-Received: by outflank-mailman (input) for mailman id 910340;
- Wed, 12 Mar 2025 13:53:15 +0000
+	id 1tsMWN-0000CS-HY; Wed, 12 Mar 2025 13:53:19 +0000
+Received: by outflank-mailman (input) for mailman id 910343;
+ Wed, 12 Mar 2025 13:53:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FzNf=V7=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1tsMWJ-0006ux-EH
- for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 13:53:15 +0000
+ id 1tsMWL-0006ux-O1
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 13:53:17 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 57e1c12b-ff49-11ef-9ab9-95dc52dad729;
- Wed, 12 Mar 2025 14:53:14 +0100 (CET)
+ id 596329fd-ff49-11ef-9ab9-95dc52dad729;
+ Wed, 12 Mar 2025 14:53:17 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C05D8152B;
- Wed, 12 Mar 2025 06:53:24 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 544F3152B;
+ Wed, 12 Mar 2025 06:53:27 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 100F63F5A1;
- Wed, 12 Mar 2025 06:53:12 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97F2C3F5A1;
+ Wed, 12 Mar 2025 06:53:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57e1c12b-ff49-11ef-9ab9-95dc52dad729
+X-Inumbo-ID: 596329fd-ff49-11ef-9ab9-95dc52dad729
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,114 +52,76 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 05/10] arm/mpu: Introduce frame_table, virt_to_page, maddr_to_virt
-Date: Wed, 12 Mar 2025 13:52:53 +0000
-Message-Id: <20250312135258.1815706-6-luca.fancellu@arm.com>
+Subject: [PATCH 07/10] arm/mpu: Implement stubs for ioremap_attr on MPU
+Date: Wed, 12 Mar 2025 13:52:55 +0000
+Message-Id: <20250312135258.1815706-8-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250312135258.1815706-1-luca.fancellu@arm.com>
 References: <20250312135258.1815706-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce variables and functions used in the common Arm code by
-MPU memory management subsystem, provide struct page_info and
-the MPU implementation for helpers and macros used in the common
-arm code.
-
-Moving virt_to_page helper to mmu/mpu part is not easy as it needs
-visibility of 'struct page_info', so protect it with CONFIG_MMU
-and provide the MPU variant in the #else branch.
-
-Introduce FRAMETABLE_NR that is required for 'pdx_group_valid' in
-pdx.c.
+Implement ioremap_attr() stub for MPU system; the
+implementation of ioremap() is the same between MMU
+and MPU system, and it relies on ioremap_attr(), so
+move the definition from mmu/pt.c to arm/mm.c.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/mm.h         | 18 ++++++++++++++++++
- xen/arch/arm/include/asm/mpu/layout.h |  3 +++
- xen/arch/arm/include/asm/mpu/mm.h     |  3 +++
- xen/arch/arm/mpu/mm.c                 |  4 ++++
- 4 files changed, 28 insertions(+)
+ xen/arch/arm/mm.c     | 5 +++++
+ xen/arch/arm/mmu/pt.c | 5 -----
+ xen/arch/arm/mpu/mm.c | 6 ++++++
+ 3 files changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index e7767cdab493..c96d33aceaf0 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -341,6 +341,8 @@ static inline uint64_t gvirt_to_maddr(vaddr_t va, paddr_t *pa,
- #define virt_to_mfn(va)     __virt_to_mfn(va)
- #define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
- 
-+#ifdef CONFIG_MMU
-+
- /* Convert between Xen-heap virtual addresses and page-info structures. */
- static inline struct page_info *virt_to_page(const void *v)
- {
-@@ -355,6 +357,22 @@ static inline struct page_info *virt_to_page(const void *v)
-     return frame_table + pdx - frametable_base_pdx;
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index a56e20ba2bdc..5a52f0c623e5 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -395,6 +395,11 @@ unsigned long get_upper_mfn_bound(void)
+     return max_page - 1;
  }
  
-+#else /* !CONFIG_MMU */
-+
-+/* Convert between virtual address to page-info structure. */
-+static inline struct page_info *virt_to_page(const void *v)
++void *ioremap(paddr_t pa, size_t len)
 +{
-+    unsigned long pdx;
-+
-+    pdx = paddr_to_pdx(virt_to_maddr(v));
-+    ASSERT(pdx >= frametable_base_pdx);
-+    ASSERT(pdx < frametable_pdx_end);
-+
-+    return frame_table + pdx - frametable_base_pdx;
++    return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
 +}
 +
-+#endif /* CONFIG_MMU */
-+
- static inline void *page_to_virt(const struct page_info *pg)
- {
-     return mfn_to_virt(mfn_x(page_to_mfn(pg)));
-diff --git a/xen/arch/arm/include/asm/mpu/layout.h b/xen/arch/arm/include/asm/mpu/layout.h
-index 248e55f8882d..c46b634c9c15 100644
---- a/xen/arch/arm/include/asm/mpu/layout.h
-+++ b/xen/arch/arm/include/asm/mpu/layout.h
-@@ -3,6 +3,9 @@
- #ifndef __ARM_MPU_LAYOUT_H__
- #define __ARM_MPU_LAYOUT_H__
- 
-+#define FRAMETABLE_SIZE   GB(32)
-+#define FRAMETABLE_NR     (FRAMETABLE_SIZE / sizeof(*frame_table))
-+
- #define XEN_START_ADDRESS CONFIG_XEN_START_ADDRESS
- 
  /*
-diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index 57f1e558fd44..2219c9979548 100644
---- a/xen/arch/arm/include/asm/mpu/mm.h
-+++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -5,6 +5,9 @@
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index da28d669e796..11cb1c66dac8 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -223,11 +223,6 @@ void *ioremap_attr(paddr_t start, size_t len, unsigned int attributes)
+     return ptr + offs;
+ }
  
- #include <xen/macros.h>
- 
-+extern struct page_info *frame_table;
-+extern unsigned long frametable_pdx_end;
-+
- #define virt_to_maddr(va) ({  \
-     (paddr_t)va;              \
- })
+-void *ioremap(paddr_t pa, size_t len)
+-{
+-    return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
+-}
+-
+ static int create_xen_table(lpae_t *entry)
+ {
+     mfn_t mfn;
 diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index a11e017d8a96..4036dd62eeeb 100644
+index 4036dd62eeeb..b196661a2312 100644
 --- a/xen/arch/arm/mpu/mm.c
 +++ b/xen/arch/arm/mpu/mm.c
-@@ -3,6 +3,10 @@
- #include <xen/lib.h>
- #include <xen/init.h>
- #include <xen/sizes.h>
-+#include <xen/mm.h>
-+
-+struct page_info *frame_table;
-+unsigned long __read_mostly frametable_pdx_end;
+@@ -18,6 +18,12 @@ static void __init __maybe_unused build_assertions(void)
+     BUILD_BUG_ON(PAGE_SIZE != SZ_4K);
+ }
  
- static void __init __maybe_unused build_assertions(void)
- {
++void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int flags)
++{
++    BUG_ON("unimplemented");
++    return NULL;
++}
++
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.34.1
 
