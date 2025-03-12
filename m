@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3737EC28B2E
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 17:47:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.910634.1317346 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095E0C28B2E
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 17:48:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.910630.1317314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsQAv-0007pF-A7; Wed, 12 Mar 2025 17:47:25 +0000
+	id 1tsQAs-00077H-E7; Wed, 12 Mar 2025 17:47:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 910634.1317346; Wed, 12 Mar 2025 17:47:25 +0000
+Received: by outflank-mailman (output) from mailman id 910630.1317314; Wed, 12 Mar 2025 17:47:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsQAv-0007nh-38; Wed, 12 Mar 2025 17:47:25 +0000
-Received: by outflank-mailman (input) for mailman id 910634;
- Wed, 12 Mar 2025 17:47:23 +0000
+	id 1tsQAs-000778-B8; Wed, 12 Mar 2025 17:47:22 +0000
+Received: by outflank-mailman (input) for mailman id 910630;
+ Wed, 12 Mar 2025 17:47:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5o35=V7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tsQAt-0006eC-PX
- for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 17:47:23 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1tsQAr-0006eC-3o
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 17:47:21 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0d80f95d-ff6a-11ef-9ab9-95dc52dad729;
- Wed, 12 Mar 2025 18:47:23 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43d0359b1fcso1246365e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 12 Mar 2025 10:47:23 -0700 (PDT)
+ id 0bdfa7d0-ff6a-11ef-9ab9-95dc52dad729;
+ Wed, 12 Mar 2025 18:47:20 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43d07ca6a80so406795e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Mar 2025 10:47:20 -0700 (PDT)
 Received: from andrewcoop.eng.citrite.net (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0a8d0b79sm27333805e9.36.2025.03.12.10.47.21
+ 5b1f17b1804b1-43d0a8d0b79sm27333805e9.36.2025.03.12.10.47.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 10:47:21 -0700 (PDT)
+ Wed, 12 Mar 2025 10:47:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d80f95d-ff6a-11ef-9ab9-95dc52dad729
+X-Inumbo-ID: 0bdfa7d0-ff6a-11ef-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741801642; x=1742406442; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741801639; x=1742406439; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/ZxpY1j+tYKf6h6cwDyqwsZP3HXNRy5CWzq/bv6KU6I=;
-        b=kHq6kx/bMnSVc3AHtqOnznsh1Cm1uCwLN22KrucR9Y0CpTSkzf9xv3J13uo8EGFtxg
-         vn4W7dMESG1Evrd4mKkYTBZKq1pnHhUNkXmAJ5bG/1ZVZLg6jesocSGU14or50DEw4B/
-         +NNEPV8wK6BhaAsJbPdikbNglMiQyxZozvBF4=
+        bh=sjnR5X/bvG/Rmeh84cSnx/kY2mYzKC0sb4JiHUky2ww=;
+        b=UGjGwvGO3CJPXz+G38z5DEqYsPLyr3u4G1Yj76J6Rjt2JRcbhaP+SAVDUFBHhpLyuW
+         J4j5c4AM7w7N2q/QbjFyb5abIY+0ffBhu3wXXF8GI/7Dim5AV6zRWKL3UwYyHJg+IdVC
+         im2AIFm+Q7SGfNkR7kNxntkjhsDN6FTfYPHgY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741801642; x=1742406442;
+        d=1e100.net; s=20230601; t=1741801639; x=1742406439;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/ZxpY1j+tYKf6h6cwDyqwsZP3HXNRy5CWzq/bv6KU6I=;
-        b=Ux7FZ+/sCEKkgAAc6eJHZJAkHRgp7NKN+Ecv5vCbJzktgq35FdfZQUVFxER3riF7RQ
-         o/XlcFpTfXM+OvpNaOgJ8PCyESbyylSChro/406SZQS3mXEGIhj0DoHL/mjdbD+M/C5Q
-         JnQmyPfJND0kmltzmMbfb5VT7j7Y+PanoJmeYLsIWXUAFWnhl87URFSIw7GpNF2f1H7D
-         ok+nbHLWnhOGE5r1TG6hBWG8ov+xcFQQfcBQo5kaKw6t6sb0kIzcj6S+IRnz79ipgKHI
-         emTvHrsd4+R7/RxZYPRKVh4u3kja2mqwoq8Ou3eeOnWkRrzP91CZg08CFiet5v0GkQ03
-         MRrA==
-X-Gm-Message-State: AOJu0YyN7RCfk6hs8PJ2WgnGrNOEAdw3hHMRua7xugZSCb10engRV6vS
-	arPs0lDTWzVUoUlpzycDXJFe9F43z8z+VmZE+zXcLqWSUH61zs2vHwbuWGkEW5eLh9jnAEYnPns
-	w
-X-Gm-Gg: ASbGncteVHRcVWAGSnRZ7OcZsLGbPYaXkoK355jDgPKYkdEd+JhM+YvUMufDXfR5/q5
-	wzvvrFGHNxVmB2fBqOPYkD7yPDa3c3Ll1QKgJd4s6PnmO87xXqhpzsVYSJj26SmvaKhjALcrrHa
-	ya1XBn92NEN59Fm8NNhM3CQo80nKFMQpMfsPs1qBHz4hMQdtsmM20sOCuZtOJns9oJZ8QoI0Tdf
-	MPJ7BfsA42QW6AiDEva5EVOyNGZwLWKJmzfjzsUcqdLbEyfHShbBQrnoKQxyyMUttMHlX/ZpD3J
-	GR1lxTZPWTTHPXC1aocDeh6n5E38lpo5RDUxYRn3iqE+UhPVPp1H9eVV8GLqxPjBUHqrHPC8nrW
-	wm4Ig5jdpF6LTiCeXiEEJN034iYDz4SBUZ90=
-X-Google-Smtp-Source: AGHT+IFOZgz21JTkr53wf6nAyfUuR8xGMtR4kI57Y4nBotlAubxbKXRNoHNCn66WKMXoJaECwuxQTA==
-X-Received: by 2002:a05:600c:512a:b0:439:8878:5029 with SMTP id 5b1f17b1804b1-43d16192475mr4024405e9.2.1741801642295;
-        Wed, 12 Mar 2025 10:47:22 -0700 (PDT)
+        bh=sjnR5X/bvG/Rmeh84cSnx/kY2mYzKC0sb4JiHUky2ww=;
+        b=fb2bgusWYiuPEGlyE32upsr0wUDKZL00ND91vwEOUiuLAWFqanAR3/iCWBKn3zNnFb
+         H3E004jvPPg2R4zZlVJOxbZog+zzlo/2gESCuhks+/veLC2TYb3YltOjiNT7Gnk+vi57
+         VcAxifKX+PtxktHpUgcxXYvKW5VcRb/h6UdgJyha9EULMX4MiiTtGbvXOv9UZ+PPbVqL
+         IQmRmtkbtrI1hhGfvJ0wDwJaGBJa52/CirXyUVlwQ9zziCWad4qX4yUE2vmoYbhcZnk5
+         KekUPrCHpOTePS2n8fs4Fj+sjjQOgY8wHWLcBfQoudyRsEszcUj+k9Fg90YosWsylmvz
+         nwtA==
+X-Gm-Message-State: AOJu0YyzYVMnf/VjHJqCc0ck5Vh8IxZO71OILyTm9j5+O/hCrZ6nqhga
+	IT61r6wxcuJzfKD1lS5haGBYheaRjJqQPMUfaeDTPud6C+bnOTwWlb5dv/iEuQylxY4/BKIryDm
+	T
+X-Gm-Gg: ASbGnctrIZyW5KZQWqpwAtugD9gdlj89W1MJOZm6+k1IxoDqJP9XsRAdj8kMMwDZJM5
+	T0fQi+OPDF3Crndt8c/DurCLjVgWqprDVcR1VZsVmURXRTSaYBqgggxQ5YBqccLt0B0meZ/RAR2
+	pVGvIqgSSTZbItLnRmxrs0SqqE7E1QxeRDtHqbR3/6YEuNMXp3M0SsFoMmHrj9+5JeaLD7wRzVj
+	WJ5DAWQPAewor02kqXOZI5hUzgGwDVdZwudyry+8lQ/DXywPxcbF1zHWcWTSQI9ivRzQL5gM0Cp
+	vlDAs1iCqYnll5tWioykE0O1gGWQREVUNAlBVlDhMYueuXBJ5ccjkGqejWFpfecs8wkYqZS774E
+	EIPyOaAUUl/MHoYRgH18t3A+S
+X-Google-Smtp-Source: AGHT+IERj70emN4JXV0Hed5t9quWPL7b6/6L7k1RqZgYBZc+Z+cuxtIHpttWzPQyPqsdoOb8vClk2w==
+X-Received: by 2002:a05:600c:3b13:b0:43d:b3:f95 with SMTP id 5b1f17b1804b1-43d00b313bemr87216185e9.28.1741801639477;
+        Wed, 12 Mar 2025 10:47:19 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -94,9 +94,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 5/8] xen/arch: Strip out tlb-clock stubs for non-implementors
-Date: Wed, 12 Mar 2025 17:45:10 +0000
-Message-Id: <20250312174513.4075066-7-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/8] xen: Sort includes
+Date: Wed, 12 Mar 2025 17:45:07 +0000
+Message-Id: <20250312174513.4075066-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250312174513.4075066-1-andrew.cooper3@citrix.com>
 References: <20250312174513.4075066-1-andrew.cooper3@citrix.com>
@@ -104,13 +104,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Now that there's a common stub implementation TLB clocks, there's no need for
-architectures to provide their own.
+... needing later adjustment.  Drop types.h when it's clearly not needed.
 
-Repeatedly zeroing page->tlbflush_timestamp is no use, so provide an even more
-empty common stub for page_set_tlbflush_timestamp().
-
-No practical change.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -125,99 +121,148 @@ CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
- xen/arch/arm/include/asm/flushtlb.h   | 14 --------------
- xen/arch/ppc/include/asm/flushtlb.h   | 14 --------------
- xen/arch/riscv/include/asm/flushtlb.h | 14 --------------
- xen/include/xen/tlb-clock.h           |  1 +
- 4 files changed, 1 insertion(+), 42 deletions(-)
+ xen/arch/arm/mmu/setup.c   |  2 +-
+ xen/arch/x86/alternative.c | 12 ++++++------
+ xen/arch/x86/livepatch.c   |  8 ++++----
+ xen/common/memory.c        |  4 +++-
+ xen/common/page_alloc.c    |  5 ++---
+ xen/include/xen/mm.h       |  6 +++---
+ 6 files changed, 19 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/flushtlb.h b/xen/arch/arm/include/asm/flushtlb.h
-index e45fb6d97b02..6f69a5bdc8c2 100644
---- a/xen/arch/arm/include/asm/flushtlb.h
-+++ b/xen/arch/arm/include/asm/flushtlb.h
-@@ -3,20 +3,6 @@
+diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
+index 30afe9778194..f6119ccacf15 100644
+--- a/xen/arch/arm/mmu/setup.c
++++ b/xen/arch/arm/mmu/setup.c
+@@ -12,8 +12,8 @@
+ #include <xen/sizes.h>
+ #include <xen/vmap.h>
  
- #include <xen/cpumask.h>
+-#include <asm/setup.h>
+ #include <asm/fixmap.h>
++#include <asm/setup.h>
  
--/*
-- * Filter the given set of CPUs, removing those that definitely flushed their
-- * TLB since @page_timestamp.
-- */
--/* XXX lazy implementation just doesn't clear anything.... */
--static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp) {}
--
--#define tlbflush_current_time()                 (0)
--
--static inline void page_set_tlbflush_timestamp(struct page_info *page)
--{
--    page->tlbflush_timestamp = tlbflush_current_time();
--}
--
- #if defined(CONFIG_ARM_32)
- # include <asm/arm32/flushtlb.h>
- #elif defined(CONFIG_ARM_64)
-diff --git a/xen/arch/ppc/include/asm/flushtlb.h b/xen/arch/ppc/include/asm/flushtlb.h
-index afcb74078368..f89037bd4543 100644
---- a/xen/arch/ppc/include/asm/flushtlb.h
-+++ b/xen/arch/ppc/include/asm/flushtlb.h
-@@ -4,20 +4,6 @@
+ /* Override macros from asm/page.h to make them work with mfn_t */
+ #undef mfn_to_virt
+diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
+index 1ba35cb9ede9..46b04c9cb83d 100644
+--- a/xen/arch/x86/alternative.c
++++ b/xen/arch/x86/alternative.c
+@@ -4,18 +4,18 @@
+  */
  
- #include <xen/cpumask.h>
+ #include <xen/delay.h>
+-#include <xen/types.h>
++#include <xen/init.h>
++#include <xen/livepatch.h>
++
++#include <asm/alternative.h>
+ #include <asm/apic.h>
+ #include <asm/endbr.h>
++#include <asm/nmi.h>
++#include <asm/nops.h>
+ #include <asm/processor.h>
+-#include <asm/alternative.h>
+-#include <xen/init.h>
+ #include <asm/setup.h>
+ #include <asm/system.h>
+ #include <asm/traps.h>
+-#include <asm/nmi.h>
+-#include <asm/nops.h>
+-#include <xen/livepatch.h>
  
--/*
-- * Filter the given set of CPUs, removing those that definitely flushed their
-- * TLB since @page_timestamp.
-- */
--/* XXX lazy implementation just doesn't clear anything.... */
--static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp) {}
--
--#define tlbflush_current_time()                 (0)
--
--static inline void page_set_tlbflush_timestamp(struct page_info *page)
--{
--    page->tlbflush_timestamp = tlbflush_current_time();
--}
--
- /* Flush specified CPUs' TLBs */
- void arch_flush_tlb_mask(const cpumask_t *mask);
+ #define MAX_PATCH_LEN (255-1)
  
-diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
-index 51c8f753c51e..23739a22fb2a 100644
---- a/xen/arch/riscv/include/asm/flushtlb.h
-+++ b/xen/arch/riscv/include/asm/flushtlb.h
-@@ -20,20 +20,6 @@ static inline void flush_tlb_range_va(vaddr_t va, size_t size)
-     sbi_remote_sfence_vma(NULL, va, size);
- }
+diff --git a/xen/arch/x86/livepatch.c b/xen/arch/x86/livepatch.c
+index bdca355dc6cc..5158e91f7e6e 100644
+--- a/xen/arch/x86/livepatch.c
++++ b/xen/arch/x86/livepatch.c
+@@ -5,14 +5,14 @@
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
++#include <xen/livepatch.h>
++#include <xen/livepatch_elf.h>
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
+-#include <xen/vmap.h>
+-#include <xen/livepatch_elf.h>
+-#include <xen/livepatch.h>
+ #include <xen/sched.h>
+-#include <xen/vm_event.h>
+ #include <xen/virtual_region.h>
++#include <xen/vm_event.h>
++#include <xen/vmap.h>
  
--/*
-- * Filter the given set of CPUs, removing those that definitely flushed their
-- * TLB since @page_timestamp.
-- */
--/* XXX lazy implementation just doesn't clear anything.... */
--static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp) {}
--
--#define tlbflush_current_time() (0)
--
--static inline void page_set_tlbflush_timestamp(struct page_info *page)
--{
--    BUG_ON("unimplemented");
--}
--
- /* Flush specified CPUs' TLBs */
- void arch_flush_tlb_mask(const cpumask_t *mask);
+ #include <asm/endbr.h>
+ #include <asm/fixmap.h>
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 8ca4e1a8425b..61a94b23abae 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -25,12 +25,14 @@
+ #include <xen/sched.h>
+ #include <xen/sections.h>
+ #include <xen/trace.h>
+-#include <xen/types.h>
++
+ #include <asm/current.h>
+ #include <asm/hardirq.h>
+ #include <asm/p2m.h>
+ #include <asm/page.h>
++
+ #include <public/memory.h>
++
+ #include <xsm/xsm.h>
  
-diff --git a/xen/include/xen/tlb-clock.h b/xen/include/xen/tlb-clock.h
-index 796c0be7fbef..467f6d64a6ca 100644
---- a/xen/include/xen/tlb-clock.h
-+++ b/xen/include/xen/tlb-clock.h
-@@ -44,6 +44,7 @@ static inline void accumulate_tlbflush(
-     bool *need_tlbflush, const struct page_info *page,
-     uint32_t *tlbflush_timestamp) {}
- static inline void filtered_flush_tlb_mask(uint32_t tlbflush_timestamp) {}
-+static inline void page_set_tlbflush_timestamp(struct page_info *page) {}
+ #ifdef CONFIG_X86
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 5f9c9305ef37..bc029ea797a2 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -133,7 +133,6 @@
+ #include <xen/param.h>
+ #include <xen/perfc.h>
+ #include <xen/pfn.h>
+-#include <xen/types.h>
+ #include <xen/sched.h>
+ #include <xen/sections.h>
+ #include <xen/softirq.h>
+@@ -144,14 +143,14 @@
+ #include <asm/flushtlb.h>
+ #include <asm/page.h>
  
- #endif /* !CONFIG_HAS_TLB_CLOCK*/
- #endif /* XEN_TLB_CLOCK_H */
+-#include <public/sysctl.h>
+ #include <public/sched.h>
++#include <public/sysctl.h>
+ 
+ #ifdef CONFIG_X86
+ #include <asm/guest.h>
+ #include <asm/p2m.h>
+-#include <asm/setup.h> /* for highmem_start only */
+ #include <asm/paging.h>
++#include <asm/setup.h>
+ #else
+ #define p2m_pod_offline_or_broken_hit(pg) 0
+ #define p2m_pod_offline_or_broken_replace(pg) BUG_ON(pg)
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 16f733281af3..45000cc3f64b 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -63,11 +63,11 @@
+ 
+ #include <xen/bug.h>
+ #include <xen/compiler.h>
+-#include <xen/mm-frame.h>
+-#include <xen/types.h>
+ #include <xen/list.h>
+-#include <xen/spinlock.h>
++#include <xen/mm-frame.h>
+ #include <xen/perfc.h>
++#include <xen/spinlock.h>
++
+ #include <public/memory.h>
+ 
+ struct page_info;
 -- 
 2.39.5
 
