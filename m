@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6AD5C282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Mar 2025 23:37:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909539.1316462 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D34D9C282EC
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 00:09:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909569.1316480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts99c-00043n-85; Tue, 11 Mar 2025 23:36:56 +0000
+	id 1ts9ew-000188-2V; Wed, 12 Mar 2025 00:09:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909539.1316462; Tue, 11 Mar 2025 23:36:56 +0000
+Received: by outflank-mailman (output) from mailman id 909569.1316480; Wed, 12 Mar 2025 00:09:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts99c-00043g-5Q; Tue, 11 Mar 2025 23:36:56 +0000
-Received: by outflank-mailman (input) for mailman id 909539;
- Tue, 11 Mar 2025 23:36:54 +0000
+	id 1ts9ev-000181-Vi; Wed, 12 Mar 2025 00:09:17 +0000
+Received: by outflank-mailman (input) for mailman id 909569;
+ Wed, 12 Mar 2025 00:09:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=isYZ=V6=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ts99a-00043Y-GK
- for xen-devel@lists.xenproject.org; Tue, 11 Mar 2025 23:36:54 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
+ <SRS0=5o35=V7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ts9ev-00017v-9V
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 00:09:17 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b3dc1478-fed1-11ef-9898-31a8f345e629;
- Wed, 12 Mar 2025 00:36:49 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3914aba1ce4so2067922f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 16:36:49 -0700 (PDT)
+ id 3b5ee39e-fed6-11ef-9898-31a8f345e629;
+ Wed, 12 Mar 2025 01:09:15 +0100 (CET)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3914bc3e01aso1474078f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 17:09:14 -0700 (PDT)
 Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912bee262esm19298021f8f.0.2025.03.11.16.36.46
+ 5b1f17b1804b1-43d0a75aa22sm4327685e9.19.2025.03.11.17.09.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 16:36:47 -0700 (PDT)
+ Tue, 11 Mar 2025 17:09:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b3dc1478-fed1-11ef-9898-31a8f345e629
+X-Inumbo-ID: 3b5ee39e-fed6-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741736208; x=1742341008; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741738154; x=1742342954; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QE6JOMNccSR32yRQAyfqaeBa0yFpZt5itSd6nBN2X2g=;
-        b=eQS2t+akVDonDDqoP2LES+v5U7K9AIA0jIXGM2suFK6zLIfFRqTsW5oboedvBcKPbH
-         dbKmO9eJ3MsuEh77BwqJzhmnvjncWS1940HNg/tXFzbYwyrGzo/NnHTE56yYRRWQEHDz
-         6bozFlxbC2Huaog7ejq1ZaJUoM6jGhSM0PAdY=
+        bh=k5fCRA7OjOK2jCllStXp5TswRGXu8t0slsR5JE7Bhx8=;
+        b=LHpoNQD8NC7m0Y2FQ+Um9H1F7ENmv17dYLXUSNXLZ0Bjg+uB2Fng9V4Ws32cM+BR/q
+         bEHypTOIPrpSeOy2cKMGw0nbnbfekRXQ8eokplIAsR09biKgqD6D1r/JjRrdq023BoBM
+         4ad5TZAHmwTXl5+wyHKI8nyLFQpw1PWsgN9F4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741736208; x=1742341008;
+        d=1e100.net; s=20230601; t=1741738154; x=1742342954;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=QE6JOMNccSR32yRQAyfqaeBa0yFpZt5itSd6nBN2X2g=;
-        b=DM/jlH0dgHZ5C+2y1+oIN56QSLyt235jYVrmayf+K9uWiy/x1gP8A5/7MbP1GC6SrE
-         EPEzbLN3kXrPpZqg9N/2Q2DFcQuvuyAF/JAyu/sF/7C0Grpigx9bPjiixlxizx4dED5J
-         held7KQVwh0c8NL9AU3wulZy2jWACGT6iETVkMxZzRoeN8nGSEmL6a3LnENvsryiGEpm
-         vFATDonym/pYVYCw4eDO776h/I5vOigP0E5Fczx+PpwzQPjOiAH8jhdpGvbwHNu8T8Z6
-         Md1bNRZGWnLrTbjwYGwcflrvw8q1FukUtfyFRiMa3ZWkLK7PE6CctF/tCOtKv4JVOokA
-         zW6g==
-X-Gm-Message-State: AOJu0Yy5vRY8nt8RIKwBWaoiCXueQS8mcWQQS/NaZmSmir2YcKen26d/
-	BW6BXYz0WmjcNLbqjAxzkHRLuOEIA2W7WUIkiIpEt9LGZ6gmbjJVjsO6VAnnQPcCLwnVTDdPx9w
-	3
-X-Gm-Gg: ASbGnct8Y7hTx7rMZvy+ILk2hu81TUnn3tAJ7r4bYveesEjSKcfH213kgZxqvQKVQPq
-	iyQuLsGi1NwYeeb9YSEtEodEh1AWH8tnYWBLvz+1atNR59r2ZUGd0ZgV8kPl0AzlU1GCWCpF+vn
-	IdiNm9fEWVObs42ZhOSLtESOWvJYbbTT6PxSM4nvdyp+L+YIENipMLzq4nV2mMAh05rPR+u4wcO
-	doXEwLzMSdYdnn/eTgSaJmkmVwKC8RHxSnxTmZYSfOyd1gXjTKaWfgfN0faUZ8SqmQT0rNyC6y5
-	GF8dsKp5KKii0xVagnQbyLfMU50J0nd5sZSGqZAhpN0FUVkVAoMmqNcBNH31eE0J9+2J8jSdovy
-	AcPTlzKY0
-X-Google-Smtp-Source: AGHT+IFvIZTswHu61twpGYiO2y/o9XmbZfKb8LCbQexZp9W6XVke4HgMyKmUx6iTwetCSG2wnYnkng==
-X-Received: by 2002:adf:a29a:0:b0:391:3aaf:1d57 with SMTP id ffacd0b85a97d-3913aaf1e5dmr9798764f8f.18.1741736208225;
-        Tue, 11 Mar 2025 16:36:48 -0700 (PDT)
-Message-ID: <79b3e775-5996-4d31-80cf-0f29d56d9633@citrix.com>
-Date: Tue, 11 Mar 2025 23:36:45 +0000
+        bh=k5fCRA7OjOK2jCllStXp5TswRGXu8t0slsR5JE7Bhx8=;
+        b=jd/M0Lx9fIHkrdutON4b81XVxYt1h4gOazyYWO1YHD/vGNxx6uDOx7G6FKcNmSzjq7
+         lz2XpnCqs+Xm7apUSmsUk2GwklbBq+ijzWwrPtWAsUVa4NSqfoOtbFn0gGR0SlsLkKiq
+         B3HrH58sTDVZCp0jQpe2Hp9I7wqdAgoCzVfSo4xBZoY0Y2TYFzgbO96nSJWa7IY5Gfcj
+         wWbzIXyBYNQtIaZ9ci+Rdy015eY83hxZHnKmPSgGYClFzE8TSIVs+9VprwcCkR2rk2vX
+         51fxWk0gh6utMDzVbqGIQiwXovYlRKwfd/RV4Cb0sFTEz6sNWzVIE8vSivFc56wOVdRU
+         nuMw==
+X-Gm-Message-State: AOJu0Yz/5nWvgvGM0dsd81Dx4VILFwJDP2/8cSoOXxC8QtE+nNsbCFJR
+	2S/xVQoIWJ2K59XJDHFow3h1NBj7MWOWwctq7BIro79L813IbC6nbzp/LFLv3pJLKDs9930X278
+	Z
+X-Gm-Gg: ASbGncsYk1hnJYdHpqCs2Xz9BXc7fK9SLap1XcsLeN6svTWGM89qLvqprrbnT8eZLz7
+	MEUKn8DjK2d8/M9U5+uc+dt33b+ls4lrjLid/Dv9pPMz/m87SP6KnKXPsjl2dkXS56QQ9vc5fXA
+	dmhiYfKdV2hLB0muMxa5LDtM790zAX1KF5/5nfDj+LsOH9rnFkaJTO3Y2nb4IbOd/csc+SEaAem
+	WPGj5GSCZ7eU5OukRJEykh8b3Xlf6o26IJCy5bKwBYFgjSQHeJw4bMUim4tIRN3k86hHA5Ib5nP
+	Pugg3rq0xGqezSTShWFpgkbFwFz2JfdxESKiR2RUp/NKZRQm/RhgPFHpdLmGgYxKKSPLgMtB/xa
+	vplrjVoYCbM4KURYkpKs=
+X-Google-Smtp-Source: AGHT+IF1L/aSYwrz3iapiNiBu7y9OGqFHxBLpVRAT4ZJKsSu0RVkfgMvwFlkLappEwlfFfxtTfUrcQ==
+X-Received: by 2002:a5d:5f45:0:b0:390:f832:383f with SMTP id ffacd0b85a97d-39132d05b37mr14721565f8f.2.1741738153815;
+        Tue, 11 Mar 2025 17:09:13 -0700 (PDT)
+Message-ID: <807487c5-6dbc-4fcd-a157-327335b3fd08@citrix.com>
+Date: Wed, 12 Mar 2025 00:09:12 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] x86/IDT: Fix IDT generation for INT $0x80
@@ -93,6 +93,7 @@ Cc: Luca Fancellu <luca.fancellu@arm.com>, Jan Beulich <JBeulich@suse.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 References: <20250311212248.3630583-1-andrew.cooper3@citrix.com>
  <cdae37d8-a01d-412c-a48b-f4e27d7d898e@citrix.com>
+ <79b3e775-5996-4d31-80cf-0f29d56d9633@citrix.com>
 Content-Language: en-GB
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
@@ -137,50 +138,54 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <cdae37d8-a01d-412c-a48b-f4e27d7d898e@citrix.com>
+In-Reply-To: <79b3e775-5996-4d31-80cf-0f29d56d9633@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 11/03/2025 9:27 pm, Andrew Cooper wrote:
-> On 11/03/2025 9:22 pm, Andrew Cooper wrote:
->> When PV is enabled, entry_int80 needs to be DPL3, not DPL0.
->>
->> This causes the XSA-259 PoC to fail with:
->>
->>   --- Xen Test Framework ---
->>   Environment: PV 64bit (Long mode 4 levels)
->>   XSA-259 PoC
->>   Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
->>   Test result: ERROR
->>
->> (Clearly I have a bug in XTF's rendering of the error code too.)
+On 11/03/2025 11:36 pm, Andrew Cooper wrote:
+> On 11/03/2025 9:27 pm, Andrew Cooper wrote:
+>> On 11/03/2025 9:22 pm, Andrew Cooper wrote:
+>>> When PV is enabled, entry_int80 needs to be DPL3, not DPL0.
+>>>
+>>> This causes the XSA-259 PoC to fail with:
+>>>
+>>>   --- Xen Test Framework ---
+>>>   Environment: PV 64bit (Long mode 4 levels)
+>>>   XSA-259 PoC
+>>>   Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
+>>>   Test result: ERROR
+>>>
+>>> (Clearly I have a bug in XTF's rendering of the error code too.)
+> Nope, it's a QEMU bug.  Under QEMU, we get:
+>
+> --- Xen Test Framework ---
+> Environment: PV 64bit (Long mode 4 levels)
+> XSA-259 PoC
+> (XEN) [    3.982447] *** #GP/IDT ec 00000802
+> (XEN) [    3.982668] *** #GP/IDT ec 00000802, not permitted
+> (XEN) [    3.982849] *** #GP inject ec 00000802
+> Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
+> Test result: ERROR
+>
+>
+> On real hardware:
+>
+> (d1) --- Xen Test Framework ---
+> (d1) Environment: PV 64bit (Long mode 4 levels)
+> (d1) XSA-259 PoC
+> (XEN) *** #GP/IDT ec 00000402
+> (XEN) *** #GP/IDT ec 00000402, not permitted
+> (XEN) *** #GP inject ec 00000402
+> (d1) Success: Not vulnerable to XSA-259
+> (d1) Test result: SUCCESS
+>
+> So it's by chance that Luca's testing even picked up this failure.  The
+> XSA-259 PoC can't distinguish between the #GP INT emulation path and the
+> INT80 fastpath's error path which injects #GP.
 
-Nope, it's a QEMU bug.  Under QEMU, we get:
+And a patch submitted.
 
---- Xen Test Framework ---
-Environment: PV 64bit (Long mode 4 levels)
-XSA-259 PoC
-(XEN) [    3.982447] *** #GP/IDT ec 00000802
-(XEN) [    3.982668] *** #GP/IDT ec 00000802, not permitted
-(XEN) [    3.982849] *** #GP inject ec 00000802
-Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
-Test result: ERROR
-
-
-On real hardware:
-
-(d1) --- Xen Test Framework ---
-(d1) Environment: PV 64bit (Long mode 4 levels)
-(d1) XSA-259 PoC
-(XEN) *** #GP/IDT ec 00000402
-(XEN) *** #GP/IDT ec 00000402, not permitted
-(XEN) *** #GP inject ec 00000402
-(d1) Success: Not vulnerable to XSA-259
-(d1) Test result: SUCCESS
-
-So it's by chance that Luca's testing even picked up this failure.  The
-XSA-259 PoC can't distinguish between the #GP INT emulation path and the
-INT80 fastpath's error path which injects #GP.
+https://lore.kernel.org/qemu-devel/20250312000603.3666083-1-andrew.cooper3@citrix.com/T/#u
 
 ~Andrew
 
