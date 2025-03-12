@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D34D9C282EC
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 00:09:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909569.1316480 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CF3C282EC
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 00:10:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909559.1316496 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts9ew-000188-2V; Wed, 12 Mar 2025 00:09:18 +0000
+	id 1ts9fr-0002Yd-Lj; Wed, 12 Mar 2025 00:10:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909569.1316480; Wed, 12 Mar 2025 00:09:18 +0000
+Received: by outflank-mailman (output) from mailman id 909559.1316496; Wed, 12 Mar 2025 00:10:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts9ev-000181-Vi; Wed, 12 Mar 2025 00:09:17 +0000
-Received: by outflank-mailman (input) for mailman id 909569;
- Wed, 12 Mar 2025 00:09:17 +0000
+	id 1ts9fr-0002Xf-El; Wed, 12 Mar 2025 00:10:15 +0000
+Received: by outflank-mailman (input) for mailman id 909559;
+ Wed, 12 Mar 2025 00:07:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5o35=V7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ts9ev-00017v-9V
- for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 00:09:17 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=SEQM=V7=redhat.com=npache@srs-se1.protection.inumbo.net>)
+ id 1ts9dY-00013p-4W
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 00:07:52 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3b5ee39e-fed6-11ef-9898-31a8f345e629;
- Wed, 12 Mar 2025 01:09:15 +0100 (CET)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3914bc3e01aso1474078f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 11 Mar 2025 17:09:14 -0700 (PDT)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0a75aa22sm4327685e9.19.2025.03.11.17.09.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 17:09:13 -0700 (PDT)
+ id 07a42816-fed6-11ef-9898-31a8f345e629;
+ Wed, 12 Mar 2025 01:07:48 +0100 (CET)
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-223-vkQ8710FPFOYX9_CxAjz-Q-1; Tue,
+ 11 Mar 2025 20:07:42 -0400
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2CA19195608F; Wed, 12 Mar 2025 00:07:38 +0000 (UTC)
+Received: from h1.redhat.com (unknown [10.22.88.56])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 3CA451955F0F; Wed, 12 Mar 2025 00:07:30 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,145 +54,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b5ee39e-fed6-11ef-9898-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741738154; x=1742342954; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=k5fCRA7OjOK2jCllStXp5TswRGXu8t0slsR5JE7Bhx8=;
-        b=LHpoNQD8NC7m0Y2FQ+Um9H1F7ENmv17dYLXUSNXLZ0Bjg+uB2Fng9V4Ws32cM+BR/q
-         bEHypTOIPrpSeOy2cKMGw0nbnbfekRXQ8eokplIAsR09biKgqD6D1r/JjRrdq023BoBM
-         4ad5TZAHmwTXl5+wyHKI8nyLFQpw1PWsgN9F4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741738154; x=1742342954;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=k5fCRA7OjOK2jCllStXp5TswRGXu8t0slsR5JE7Bhx8=;
-        b=jd/M0Lx9fIHkrdutON4b81XVxYt1h4gOazyYWO1YHD/vGNxx6uDOx7G6FKcNmSzjq7
-         lz2XpnCqs+Xm7apUSmsUk2GwklbBq+ijzWwrPtWAsUVa4NSqfoOtbFn0gGR0SlsLkKiq
-         B3HrH58sTDVZCp0jQpe2Hp9I7wqdAgoCzVfSo4xBZoY0Y2TYFzgbO96nSJWa7IY5Gfcj
-         wWbzIXyBYNQtIaZ9ci+Rdy015eY83hxZHnKmPSgGYClFzE8TSIVs+9VprwcCkR2rk2vX
-         51fxWk0gh6utMDzVbqGIQiwXovYlRKwfd/RV4Cb0sFTEz6sNWzVIE8vSivFc56wOVdRU
-         nuMw==
-X-Gm-Message-State: AOJu0Yz/5nWvgvGM0dsd81Dx4VILFwJDP2/8cSoOXxC8QtE+nNsbCFJR
-	2S/xVQoIWJ2K59XJDHFow3h1NBj7MWOWwctq7BIro79L813IbC6nbzp/LFLv3pJLKDs9930X278
-	Z
-X-Gm-Gg: ASbGncsYk1hnJYdHpqCs2Xz9BXc7fK9SLap1XcsLeN6svTWGM89qLvqprrbnT8eZLz7
-	MEUKn8DjK2d8/M9U5+uc+dt33b+ls4lrjLid/Dv9pPMz/m87SP6KnKXPsjl2dkXS56QQ9vc5fXA
-	dmhiYfKdV2hLB0muMxa5LDtM790zAX1KF5/5nfDj+LsOH9rnFkaJTO3Y2nb4IbOd/csc+SEaAem
-	WPGj5GSCZ7eU5OukRJEykh8b3Xlf6o26IJCy5bKwBYFgjSQHeJw4bMUim4tIRN3k86hHA5Ib5nP
-	Pugg3rq0xGqezSTShWFpgkbFwFz2JfdxESKiR2RUp/NKZRQm/RhgPFHpdLmGgYxKKSPLgMtB/xa
-	vplrjVoYCbM4KURYkpKs=
-X-Google-Smtp-Source: AGHT+IF1L/aSYwrz3iapiNiBu7y9OGqFHxBLpVRAT4ZJKsSu0RVkfgMvwFlkLappEwlfFfxtTfUrcQ==
-X-Received: by 2002:a5d:5f45:0:b0:390:f832:383f with SMTP id ffacd0b85a97d-39132d05b37mr14721565f8f.2.1741738153815;
-        Tue, 11 Mar 2025 17:09:13 -0700 (PDT)
-Message-ID: <807487c5-6dbc-4fcd-a157-327335b3fd08@citrix.com>
-Date: Wed, 12 Mar 2025 00:09:12 +0000
+X-Inumbo-ID: 07a42816-fed6-11ef-9898-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1741738067;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ceDeMBe52N2seuUa756T2OuNElv+sx4xmpEJqAZFNJ0=;
+	b=ZA625eOmgzmi/qVEmreX+Of5XknsZbrx9v9HYLM2bBfRxHjNLMpkTIOxLdDhhEwjHdC9P/
+	FYqvhMsklJql6XiqJPlz5bnnVIHcjGm7aMIPvX4go8q7w0ZnjIaowlKC4uSVmgIU7HT/l/
+	Z75IbqeNuZS0bOislCEbadalJCNd1LA=
+X-MC-Unique: vkQ8710FPFOYX9_CxAjz-Q-1
+X-Mimecast-MFC-AGG-ID: vkQ8710FPFOYX9_CxAjz-Q_1741738058
+From: Nico Pache <npache@redhat.com>
+To: linux-hyperv@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	xen-devel@lists.xenproject.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org,
+	cgroups@vger.kernel.org
+Cc: kys@microsoft.com,
+	haiyangz@microsoft.com,
+	wei.liu@kernel.org,
+	decui@microsoft.com,
+	jerrin.shaji-george@broadcom.com,
+	bcm-kernel-feedback-list@broadcom.com,
+	arnd@arndb.de,
+	gregkh@linuxfoundation.org,
+	mst@redhat.com,
+	david@redhat.com,
+	jasowang@redhat.com,
+	xuanzhuo@linux.alibaba.com,
+	eperezma@redhat.com,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	akpm@linux-foundation.org,
+	hannes@cmpxchg.org,
+	mhocko@kernel.org,
+	roman.gushchin@linux.dev,
+	shakeel.butt@linux.dev,
+	muchun.song@linux.dev,
+	nphamcs@gmail.com,
+	yosry.ahmed@linux.dev,
+	kanchana.p.sridhar@intel.com,
+	alexander.atanasov@virtuozzo.com
+Subject: [RFC 1/5] meminfo: add a per node counter for balloon drivers
+Date: Tue, 11 Mar 2025 18:06:56 -0600
+Message-ID: <20250312000700.184573-2-npache@redhat.com>
+In-Reply-To: <20250312000700.184573-1-npache@redhat.com>
+References: <20250312000700.184573-1-npache@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/IDT: Fix IDT generation for INT $0x80
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Luca Fancellu <luca.fancellu@arm.com>, Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20250311212248.3630583-1-andrew.cooper3@citrix.com>
- <cdae37d8-a01d-412c-a48b-f4e27d7d898e@citrix.com>
- <79b3e775-5996-4d31-80cf-0f29d56d9633@citrix.com>
-Content-Language: en-GB
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <79b3e775-5996-4d31-80cf-0f29d56d9633@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
-On 11/03/2025 11:36 pm, Andrew Cooper wrote:
-> On 11/03/2025 9:27 pm, Andrew Cooper wrote:
->> On 11/03/2025 9:22 pm, Andrew Cooper wrote:
->>> When PV is enabled, entry_int80 needs to be DPL3, not DPL0.
->>>
->>> This causes the XSA-259 PoC to fail with:
->>>
->>>   --- Xen Test Framework ---
->>>   Environment: PV 64bit (Long mode 4 levels)
->>>   XSA-259 PoC
->>>   Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
->>>   Test result: ERROR
->>>
->>> (Clearly I have a bug in XTF's rendering of the error code too.)
-> Nope, it's a QEMU bug.  Under QEMU, we get:
->
-> --- Xen Test Framework ---
-> Environment: PV 64bit (Long mode 4 levels)
-> XSA-259 PoC
-> (XEN) [    3.982447] *** #GP/IDT ec 00000802
-> (XEN) [    3.982668] *** #GP/IDT ec 00000802, not permitted
-> (XEN) [    3.982849] *** #GP inject ec 00000802
-> Error: Unexpected fault 0x800d0802, #GP[IDT[256]]
-> Test result: ERROR
->
->
-> On real hardware:
->
-> (d1) --- Xen Test Framework ---
-> (d1) Environment: PV 64bit (Long mode 4 levels)
-> (d1) XSA-259 PoC
-> (XEN) *** #GP/IDT ec 00000402
-> (XEN) *** #GP/IDT ec 00000402, not permitted
-> (XEN) *** #GP inject ec 00000402
-> (d1) Success: Not vulnerable to XSA-259
-> (d1) Test result: SUCCESS
->
-> So it's by chance that Luca's testing even picked up this failure.  The
-> XSA-259 PoC can't distinguish between the #GP INT emulation path and the
-> INT80 fastpath's error path which injects #GP.
+Add NR_BALLOON_PAGES counter to track memory used by balloon drivers and
+expose it through /proc/meminfo and other memory reporting interfaces.
 
-And a patch submitted.
+Signed-off-by: Nico Pache <npache@redhat.com>
+---
+ fs/proc/meminfo.c      | 2 ++
+ include/linux/mmzone.h | 1 +
+ mm/memcontrol.c        | 1 +
+ mm/show_mem.c          | 4 +++-
+ mm/vmstat.c            | 1 +
+ 5 files changed, 8 insertions(+), 1 deletion(-)
 
-https://lore.kernel.org/qemu-devel/20250312000603.3666083-1-andrew.cooper3@citrix.com/T/#u
+diff --git a/fs/proc/meminfo.c b/fs/proc/meminfo.c
+index 8ba9b1472390..83be312159c9 100644
+--- a/fs/proc/meminfo.c
++++ b/fs/proc/meminfo.c
+@@ -162,6 +162,8 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
+ 	show_val_kb(m, "Unaccepted:     ",
+ 		    global_zone_page_state(NR_UNACCEPTED));
+ #endif
++	show_val_kb(m, "Balloon:        ",
++		    global_node_page_state(NR_BALLOON_PAGES));
+ 
+ 	hugetlb_report_meminfo(m);
+ 
+diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
+index 9540b41894da..71d3ff19267a 100644
+--- a/include/linux/mmzone.h
++++ b/include/linux/mmzone.h
+@@ -223,6 +223,7 @@ enum node_stat_item {
+ #ifdef CONFIG_HUGETLB_PAGE
+ 	NR_HUGETLB,
+ #endif
++	NR_BALLOON_PAGES,
+ 	NR_VM_NODE_STAT_ITEMS
+ };
+ 
+diff --git a/mm/memcontrol.c b/mm/memcontrol.c
+index 4de6acb9b8ec..182b44646bfa 100644
+--- a/mm/memcontrol.c
++++ b/mm/memcontrol.c
+@@ -1377,6 +1377,7 @@ static const struct memory_stat memory_stats[] = {
+ #ifdef CONFIG_HUGETLB_PAGE
+ 	{ "hugetlb",			NR_HUGETLB			},
+ #endif
++	{ "nr_balloon_pages",		NR_BALLOON_PAGES		},
+ 
+ 	/* The memory events */
+ 	{ "workingset_refault_anon",	WORKINGSET_REFAULT_ANON		},
+diff --git a/mm/show_mem.c b/mm/show_mem.c
+index 43afb56abbd3..6af13bcd2ab3 100644
+--- a/mm/show_mem.c
++++ b/mm/show_mem.c
+@@ -260,6 +260,7 @@ static void show_free_areas(unsigned int filter, nodemask_t *nodemask, int max_z
+ 			" pagetables:%lukB"
+ 			" sec_pagetables:%lukB"
+ 			" all_unreclaimable? %s"
++			" Balloon:%lukB"
+ 			"\n",
+ 			pgdat->node_id,
+ 			K(node_page_state(pgdat, NR_ACTIVE_ANON)),
+@@ -285,7 +286,8 @@ static void show_free_areas(unsigned int filter, nodemask_t *nodemask, int max_z
+ #endif
+ 			K(node_page_state(pgdat, NR_PAGETABLE)),
+ 			K(node_page_state(pgdat, NR_SECONDARY_PAGETABLE)),
+-			str_yes_no(pgdat->kswapd_failures >= MAX_RECLAIM_RETRIES));
++			str_yes_no(pgdat->kswapd_failures >= MAX_RECLAIM_RETRIES),
++			K(node_page_state(pgdat, NR_BALLOON_PAGES)));
+ 	}
+ 
+ 	for_each_populated_zone(zone) {
+diff --git a/mm/vmstat.c b/mm/vmstat.c
+index 16bfe1c694dd..d3b11891a942 100644
+--- a/mm/vmstat.c
++++ b/mm/vmstat.c
+@@ -1276,6 +1276,7 @@ const char * const vmstat_text[] = {
+ #ifdef CONFIG_HUGETLB_PAGE
+ 	"nr_hugetlb",
+ #endif
++	"nr_balloon_pages",
+ 	/* system-wide enum vm_stat_item counters */
+ 	"nr_dirty_threshold",
+ 	"nr_dirty_background_threshold",
+-- 
+2.48.1
 
-~Andrew
 
