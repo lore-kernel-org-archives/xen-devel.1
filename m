@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CBC2C282EC
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 00:10:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.909567.1316520 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64052C28B2F
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Mar 2025 00:10:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.909563.1316509 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts9ft-0002y5-1o; Wed, 12 Mar 2025 00:10:17 +0000
+	id 1ts9fs-0002mL-BZ; Wed, 12 Mar 2025 00:10:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 909567.1316520; Wed, 12 Mar 2025 00:10:16 +0000
+Received: by outflank-mailman (output) from mailman id 909563.1316509; Wed, 12 Mar 2025 00:10:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ts9fs-0002vm-PE; Wed, 12 Mar 2025 00:10:16 +0000
-Received: by outflank-mailman (input) for mailman id 909567;
- Wed, 12 Mar 2025 00:08:18 +0000
+	id 1ts9fs-0002kg-42; Wed, 12 Mar 2025 00:10:16 +0000
+Received: by outflank-mailman (input) for mailman id 909563;
+ Wed, 12 Mar 2025 00:08:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SEQM=V7=redhat.com=npache@srs-se1.protection.inumbo.net>)
- id 1ts9dy-00013p-CI
- for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 00:08:18 +0000
+ id 1ts9dk-00013p-3r
+ for xen-devel@lists.xenproject.org; Wed, 12 Mar 2025 00:08:04 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 187a1367-fed6-11ef-9898-31a8f345e629;
- Wed, 12 Mar 2025 01:08:16 +0100 (CET)
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 0fdaf5b4-fed6-11ef-9898-31a8f345e629;
+ Wed, 12 Mar 2025 01:08:02 +0100 (CET)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-687-a_RbZen0O8GYnddRn1Kahg-1; Tue,
- 11 Mar 2025 20:08:11 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-681-DsGHc5fiN22ggfCluAAvjA-1; Tue,
+ 11 Mar 2025 20:07:56 -0400
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 942B7180AF4C; Wed, 12 Mar 2025 00:08:07 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 58D9B1955BC1; Wed, 12 Mar 2025 00:07:53 +0000 (UTC)
 Received: from h1.redhat.com (unknown [10.22.88.56])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B44AA1955DDD; Wed, 12 Mar 2025 00:08:00 +0000 (UTC)
+ id 91DF71955DDD; Wed, 12 Mar 2025 00:07:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 187a1367-fed6-11ef-9898-31a8f345e629
+X-Inumbo-ID: 0fdaf5b4-fed6-11ef-9898-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1741738095;
+	s=mimecast20190719; t=1741738081;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=dGPxM9RdXtkX+Els8nvXOJm60GkYwZd/fztNUeVaxvI=;
-	b=BAXKzrVa2UcUeyKCZ60+1DRsaTld9aBR8Qpq5KfsblfeaYGCE8RjDZTpHax+2gM57G9mlM
-	SISiVEsYhVcPpbjqFECaXls9LejjtX6Jpp1Huwc3nMFdfX/bP1wnDHpXx+UGrKgtdFdKXV
-	zQU9O7yKEE754tkHDlmc87rKkMa9ZeI=
-X-MC-Unique: a_RbZen0O8GYnddRn1Kahg-1
-X-Mimecast-MFC-AGG-ID: a_RbZen0O8GYnddRn1Kahg_1741738088
+	bh=vPsYu1/Zt9JxInUUfAbvJhaRjTUPwV0c8VAQrmxs/V8=;
+	b=iFC4UXK3vhAtOQN71LGaPaE2gbEyL6Ace7aQAAw89ENB0h+rnBsGvAAqNJ8gF3mIYtsHQb
+	2c78LkH/3nWwweB6OinJKMqkSUjrPyTn6rtcUN5CG7BbI2GOo2dIht8BT8bspzZfqcNGQO
+	7/1m3scQp6LRvpo1cVlTRqJVJh06Yuo=
+X-MC-Unique: DsGHc5fiN22ggfCluAAvjA-1
+X-Mimecast-MFC-AGG-ID: DsGHc5fiN22ggfCluAAvjA_1741738073
 From: Nico Pache <npache@redhat.com>
 To: linux-hyperv@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -101,9 +101,9 @@ Cc: kys@microsoft.com,
 	yosry.ahmed@linux.dev,
 	kanchana.p.sridhar@intel.com,
 	alexander.atanasov@virtuozzo.com
-Subject: [RFC 5/5] xen: balloon: update the NR_BALLOON_PAGES state
-Date: Tue, 11 Mar 2025 18:07:00 -0600
-Message-ID: <20250312000700.184573-6-npache@redhat.com>
+Subject: [RFC 3/5] hv_balloon: update the NR_BALLOON_PAGES state
+Date: Tue, 11 Mar 2025 18:06:58 -0600
+Message-ID: <20250312000700.184573-4-npache@redhat.com>
 In-Reply-To: <20250312000700.184573-1-npache@redhat.com>
 References: <20250312000700.184573-1-npache@redhat.com>
 MIME-Version: 1.0
@@ -111,35 +111,33 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 
 Update the NR_BALLOON_PAGES counter when pages are added to or
-removed from the Xen balloon.
+removed from the Hyper-V balloon.
 
 Signed-off-by: Nico Pache <npache@redhat.com>
 ---
- drivers/xen/balloon.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/hv/hv_balloon.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
-index 163f7f1d70f1..65d4e7fa1eb8 100644
---- a/drivers/xen/balloon.c
-+++ b/drivers/xen/balloon.c
-@@ -157,6 +157,8 @@ static void balloon_append(struct page *page)
- 		list_add(&page->lru, &ballooned_pages);
- 		balloon_stats.balloon_low++;
+diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
+index fec2f18679e3..2b4080e51f97 100644
+--- a/drivers/hv/hv_balloon.c
++++ b/drivers/hv/hv_balloon.c
+@@ -1192,6 +1192,7 @@ static void free_balloon_pages(struct hv_dynmem_device *dm,
+ 		__ClearPageOffline(pg);
+ 		__free_page(pg);
+ 		dm->num_pages_ballooned--;
++		mod_node_page_state(page_pgdat(pg), NR_BALLOON_PAGES, -1);
+ 		adjust_managed_page_count(pg, 1);
  	}
-+	inc_node_page_state(page, NR_BALLOON_PAGES);
-+
- 	wake_up(&balloon_wq);
  }
+@@ -1221,6 +1222,7 @@ static unsigned int alloc_balloon_pages(struct hv_dynmem_device *dm,
+ 			return i * alloc_unit;
  
-@@ -179,6 +181,8 @@ static struct page *balloon_retrieve(bool require_lowmem)
- 		balloon_stats.balloon_low--;
+ 		dm->num_pages_ballooned += alloc_unit;
++		mod_node_page_state(page_pgdat(pg), NR_BALLOON_PAGES, alloc_unit);
  
- 	__ClearPageOffline(page);
-+	dec_node_page_state(page, NR_BALLOON_PAGES);
-+
- 	return page;
- }
- 
+ 		/*
+ 		 * If we allocatted 2M pages; split them so we
 -- 
 2.48.1
 
