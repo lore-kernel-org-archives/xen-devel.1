@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F865C282DE
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 06:43:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.911197.1317684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB22C282DE
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 06:52:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.911241.1317693 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tscHS-0006fk-GJ; Thu, 13 Mar 2025 06:42:58 +0000
+	id 1tscQP-0008Kk-D8; Thu, 13 Mar 2025 06:52:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 911197.1317684; Thu, 13 Mar 2025 06:42:58 +0000
+Received: by outflank-mailman (output) from mailman id 911241.1317693; Thu, 13 Mar 2025 06:52:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tscHS-0006fd-BE; Thu, 13 Mar 2025 06:42:58 +0000
-Received: by outflank-mailman (input) for mailman id 911197;
- Thu, 13 Mar 2025 05:14:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tscQP-0008Kd-A3; Thu, 13 Mar 2025 06:52:13 +0000
+Received: by outflank-mailman (input) for mailman id 911241;
+ Thu, 13 Mar 2025 06:52:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+a2O=WA=samsung.com=anuj20.g@srs-se1.protection.inumbo.net>)
- id 1tsatT-0005Lm-TL
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 05:14:08 +0000
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f495bd73-ffc9-11ef-9898-31a8f345e629;
- Thu, 13 Mar 2025 06:13:56 +0100 (CET)
-Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20250313051351epoutp0360b76a551a7d63bf808c8d1942858cff~sRNOxAcUO0801908019epoutp03N;
- Thu, 13 Mar 2025 05:13:51 +0000 (GMT)
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas5p2.samsung.com (KnoxPortal) with ESMTP id
- 20250313051351epcas5p259ea25a093c959df9d8be994a07591ec~sRNOZ1lku1821918219epcas5p24;
- Thu, 13 Mar 2025 05:13:51 +0000 (GMT)
-Received: from epsmgec5p1-new.samsung.com (unknown [182.195.38.175]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4ZCwdT3d8sz4x9Pt; Thu, 13 Mar
- 2025 05:13:49 +0000 (GMT)
-Received: from epcas5p3.samsung.com ( [182.195.41.41]) by
- epsmgec5p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 73.65.29212.D8962D76; Thu, 13 Mar 2025 14:13:49 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas5p3.samsung.com (KnoxPortal) with ESMTPA id
- 20250313040150epcas5p347f94dac34fd2946dea51049559ee1de~sQOWNZ2Q31805718057epcas5p3J;
- Thu, 13 Mar 2025 04:01:50 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20250313040150epsmtrp1a7eed40ae47eb292a7062f705876c591~sQOWL7WLG1044810448epsmtrp1N;
- Thu, 13 Mar 2025 04:01:50 +0000 (GMT)
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- E8.6E.18729.EA852D76; Thu, 13 Mar 2025 13:01:50 +0900 (KST)
-Received: from localhost.localdomain (unknown [107.99.41.245]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20250313040144epsmtip1810106b581625acc2fb4d4139e6c1a76~sQORBWe191683316833epsmtip1n;
- Thu, 13 Mar 2025 04:01:44 +0000 (GMT)
+ <SRS0=UDpV=WA=boeing.com=Anderson.Choi@srs-se1.protection.inumbo.net>)
+ id 1tscQN-0008KX-UG
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 06:52:12 +0000
+Received: from ewa-mbsout-02.mbs.boeing.net (ewa-mbsout-02.mbs.boeing.net
+ [130.76.20.195]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ad90563c-ffd7-11ef-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 07:52:09 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by ewa-mbsout-02.mbs.boeing.net (8.15.2/8.15.2/DOWNSTREAM_MBSOUT) with SMTP id
+ 52D6q4Fq039436; Wed, 12 Mar 2025 23:52:05 -0700
+Received: from XCH16-03-01.nos.boeing.com (xch16-03-01.nos.boeing.com
+ [137.137.111.10])
+ by ewa-mbsout-02.mbs.boeing.net (8.15.2/8.15.2/8.15.2/UPSTREAM_MBSOUT) with
+ ESMTPS id 52D6pr6g039369
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Wed, 12 Mar 2025 23:51:53 -0700
+Received: from XCH16-07-06.nos.boeing.com (137.137.111.39) by
+ XCH16-03-01.nos.boeing.com (137.137.111.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Wed, 12 Mar 2025 23:51:52 -0700
+Received: from XCH19-EDGE-Q02.nos.boeing.com (130.76.23.14) by
+ XCH16-07-06.nos.boeing.com (137.137.111.39) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44 via Frontend Transport; Wed, 12 Mar 2025 23:51:52 -0700
+Received: from USG02-BN3-obe.outbound.protection.office365.us (23.103.199.149)
+ by boeing.com (130.76.23.14) with Microsoft SMTP Server
+ (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 12 Mar
+ 2025 23:51:50 -0700
+Received: from BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:19b::17)
+ by SA1P110MB1038.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:171::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.37; Thu, 13 Mar
+ 2025 06:51:49 +0000
+Received: from BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM
+ ([fe80::394b:7a34:da07:485d]) by BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM
+ ([fe80::394b:7a34:da07:485d%6]) with mapi id 15.20.8489.033; Thu, 13 Mar 2025
+ 06:51:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,369 +69,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f495bd73-ffc9-11ef-9898-31a8f345e629
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com 20250313051351epoutp0360b76a551a7d63bf808c8d1942858cff~sRNOxAcUO0801908019epoutp03N
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1741842831;
-	bh=9Jmp5ZLIsyH8yuGTLV+R5+QG3R9RVCY2zlygWNpZ2tE=;
-	h=From:To:Cc:Subject:Date:References:From;
-	b=hNErEb6SN3cmVmZJ10VUrqkwy++BcWjx47Uo9UVTj83RDc1tAV3yuQQfjTzlac8my
-	 AaSdViZdJopy4+rEh6F4vzhf0xvVNS5QTjWCmtEQvVdg+R3tRcd6EmmXBt3TeqisGv
-	 m5iEG3kQ2yPOBKUfqeQhrnnpLdPo9QymdXyRYIr8=
-X-AuditID: b6c32a50-801fa7000000721c-cc-67d2698d9fec
-From: Anuj Gupta <anuj20.g@samsung.com>
-To: Jens Axboe <axboe@kernel.dk>, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-	Jack Wang <jinpu.wang@ionos.com>, "Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>, Paolo Bonzini
-	<pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr
-	Tyshchenko <oleksandr_tyshchenko@epam.com>, Maxim Levitsky
-	<maximlevitsky@gmail.com>, Alex Dubov <oakad@yahoo.com>, Ulf Hansson
-	<ulf.hansson@linaro.org>, Richard Weinberger <richard@nod.at>, Zhihao Cheng
-	<chengzhihao1@huawei.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
-	Vignesh Raghavendra <vigneshr@ti.com>, Sven Peter <sven@svenpeter.dev>,
-	Janne Grunau <j@jannau.net>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Keith
-	Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg
-	<sagi@grimberg.me>, James Smart <james.smart@broadcom.com>, Chaitanya
-	Kulkarni <kch@nvidia.com>, "James E.J. Bottomley"
-	<James.Bottomley@HansenPartnership.com>, "Martin K. Petersen"
-	<martin.petersen@oracle.com>
-Cc: Anuj Gupta <anuj20.g@samsung.com>, linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org, virtualization@lists.linux.dev,
-	xen-devel@lists.xenproject.org, linux-mmc@vger.kernel.org,
-	linux-mtd@lists.infradead.org, asahi@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-nvme@lists.infradead.org,
-	linux-scsi@vger.kernel.org
-Subject: [PATCH] block: remove unused parameter
-Date: Thu, 13 Mar 2025 09:23:18 +0530
-Message-Id: <20250313035322.243239-1-anuj20.g@samsung.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: ad90563c-ffd7-11ef-9ab9-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=boeing.com;
+	s=boeing-s1912; t=1741848725;
+	bh=SsIpSQRIgi5CFieI6zDT5nb8o4DTTGNAzd8wdVzGX9A=;
+	h=From:To:CC:Subject:Date:From;
+	b=S1dD4SGF1p8rqxQco0bGgJxRZcID/U7uY6vc2Sg6SOOHMs5m/xyVs5Pm2UEcSyNHE
+	 WdmkqyyzCLKQ9FOFYEc7O7CL2R89hzst+Plm+Q2pfAovpe7/Vx2aGoY8shYyOnoTj2
+	 Pfn6RGsbp1jcTFwiPT9qkaBDbX+no7qpq0Bckj3j/MCwtKWubUWILP93q6Jt7irjLd
+	 KQw+QZoslM/ZBgc3910arRjROYR3vO6yzAzeF5rgSvDBeC4DhYby0rGfEHror1dB4N
+	 lfT06obpPk8rKGJILo06MCnM7ZnDn+SbTcn/cvxhsVpfsDv3lkBZbNcXfgsZjLS3Gy
+	 7SJzFBLumJC3A==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
+ b=kbyhGnlNy3ZjsTUtpf6HN4NsydaAp04oJ13IARrL/PO2V0LmeUTo0yVFDu6uHGcWWjoJ/0MTljE0q3N5ENNwaMW72TnGj11tUHojHzU5OM3GM/q6+Slbxy2ugcG1iIf08+YAJ6/8bJGCLSr6Ks4VZjTw9i9q2xTlbeN5aZWvtJmQYU/UQaeTMzA8CaYNZWN7HfUJBhpPJFDeGo2J/MyL+Ewo/ErrxqLQk1IeD/aYP9LVIhbA5WCPlAgSFm/8IhpAfOAHW5R2C5fSWzGpjJn6VKMiy6YtG6vFyCDzfOU1Rn+X0l7LXmfuGnkTK9+OKThMkaTf7JABswNtRRNrWuceXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector5401;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SsIpSQRIgi5CFieI6zDT5nb8o4DTTGNAzd8wdVzGX9A=;
+ b=sqG+yJWpAQyIijGp0DLKBQFhtuUsiZVJz2YL0RlHzj7Hra5LlhZdIwJqXTaTeRWaqaCAMVPhOwqjmHEqXDQm6hXd1SIB6J4XdutJMPmQnmjimexxeeS1XcazHQHOBzpyGZTZNRN2LYHOYBx81ziBIocdUZ/Q9UeYpxY2OoEcaXTIFQ3qONhPnZu8ch1jp0viiyZEEKQtbpxHwochyAf7++T4OX/m6zoxMqlAgvIYgxBlb2n9XhUJm5396NISgWRg+E9eS+EEdZMlUjvv3I/4VhrnQItucq44SKKmeXNvcDswrPNBK/kuMgLlBrJQXwxVf8ZrXr5Ucsv6JY5fH1pXPA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=boeing.com; dmarc=pass action=none header.from=boeing.com;
+ dkim=pass header.d=boeing.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=boeing.onmicrosoft.com; s=selector1-boeing-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SsIpSQRIgi5CFieI6zDT5nb8o4DTTGNAzd8wdVzGX9A=;
+ b=I7j3PgWFO29fe1DjPmtHVk9f2I0KCXh7uhImT7NeiKxcg/mZ4g2BU/tFper/fTGnIV5Fj1nsQTVc31rJosqCB/X+fok0L75Ks8hYUSoLjtAaHQa1crKQyAEdE45pXC/h8N7/EPCczKJ08tYf98+Pzavh73rCyojKsMTCV3cGf4k=
+From: "Choi, Anderson" <Anderson.Choi@boeing.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: "nathan.studer@dornerworks.com" <nathan.studer@dornerworks.com>,
+        "stewart@stew.dk" <stewart@stew.dk>,
+        "Weber (US), Matthew L"
+	<matthew.l.weber3@boeing.com>,
+        "Whitehead (US), Joshua C"
+	<joshua.c.whitehead@boeing.com>
+Subject: Discussion on unexpected behavior of ARINC653 scheduler
+Thread-Topic: Discussion on unexpected behavior of ARINC653 scheduler
+Thread-Index: AduT5GPU8k+LryI1RQGgVtY2Yt6hPw==
+Date: Thu, 13 Mar 2025 06:51:49 +0000
+Message-ID: <BN0P110MB214836659525A1FEB86C407C90D3A@BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=boeing.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN0P110MB2148:EE_|SA1P110MB1038:EE_
+x-ms-office365-filtering-correlation-id: 294f07f9-634d-41e8-5a78-08dd61fb87ab
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?LfPCqj9uzRbihleVn6HR/Pfh0lCaTW/ph1U0wK2+YIjV+xjxuIRAg3dgQJ1G?=
+ =?us-ascii?Q?oINvM1Xr2za0CwGd3i3hahIkrGK2P29axaM+d2w5xfOV41WZUQKDVFF3HwmP?=
+ =?us-ascii?Q?FD0GkhlmuFoTiJZkGt+XoI6VEAPkx0AbXwpwnE8LnCW25tphHvHF6M/TFtT4?=
+ =?us-ascii?Q?jpNH3c7HrLZ5ggPT9iTqH9ac0KMeR08odxA6+ozeA9r6uHet+FMJYnvno/bq?=
+ =?us-ascii?Q?7r1ZAc6N83Hg25YoCCqCA4aadc1VAoqXUmZizFYX8xx/KJpAtlhCH06Jg8NX?=
+ =?us-ascii?Q?AfoeognlYEwMbgXb/O/M5n8ZS0nUC+6BDfX16woA/mPOHYEFWgklAlyn/k7a?=
+ =?us-ascii?Q?EyhfWznbwQN0GvKTGKlNP+DTYAeZAJg/8YCDcdrOwQnTznKcRhmfgu81Xpoy?=
+ =?us-ascii?Q?kWk7SgHFSrfJoKEB+CU4f+bg/O/kEmn0OGHJm9C/drP3J8f69NX2Hzja3iei?=
+ =?us-ascii?Q?JwrO6acx3rSnlJm6teYqGl7qbjtz/RPcLC/Bk/mdW2TYnEtDgy6Nxjdl7J8b?=
+ =?us-ascii?Q?3ounb34kg9iaEsInlh3NMBIeMRut7s0kQUyzkcNbWf/9Vlrg3o9qixQo/D2g?=
+ =?us-ascii?Q?BiNIuU+jDFe2eE4EJfSYTQ2J2XTdzU//LmNQH0jB6lFnJR0Nuuv/f9N2UFLa?=
+ =?us-ascii?Q?3ixK4gMCGtxpatWp0JMG4BV3Vt9UrVGCVB+Gt9z8Hfne596cQsOtf3WnQaXn?=
+ =?us-ascii?Q?NxhmRtHMxz/nw4he+6Y+i/2zn7OxtMXVbY4A6tJOtJ92XP/NOX+rV+bjWkmH?=
+ =?us-ascii?Q?sylXIFukM9Told1UpkgCf2e0EA8oyVoWW5B4mtlmaQJ90ohrQ8R0BKjXZzhu?=
+ =?us-ascii?Q?eXHTvF9g0n0ibWnIRnlOaegb7AAGCU3zXnEpWreXmsKX4GgmE30bC9vGPXh6?=
+ =?us-ascii?Q?n3RNmIu2Q51tB2LYEWg3FCvcRmnC8zG1tRkZ/kubOTbsphyJmffVxXCCSdVP?=
+ =?us-ascii?Q?8cVvH5XrS6s6h/mFSu2WjxrGBCry3E2KP8drBElgDO7OYMwgB32k5b+3vFYu?=
+ =?us-ascii?Q?PZWY4QA9I25PM8FkL+cMtALcyvOdQD/8uo+OgjZc7sALboMBhKsp7v4c1psM?=
+ =?us-ascii?Q?iQq0sOG2yUQazOQwMh2Fn3AyJKdVSdP0CcSyLx3kzjv5W87JkKZkMoS+b/hs?=
+ =?us-ascii?Q?zVBXy+ndD/dUTLmp6ms/9NVbFdYvbjEavHG3HbWl17z7nXopECqPqVxNIUhN?=
+ =?us-ascii?Q?1Gc2VXwry9rRCxZBG422vwIlKF5XNNQpEYqQwLiRDUBGqTLjJjQHu8RzQYby?=
+ =?us-ascii?Q?8VeM+pAkoCnuo3CGsFUOnYW8CGg6oxhwzrahgo//u+674W+BLyrbniwtl35n?=
+ =?us-ascii?Q?n18QT5NmFHUK8DutlIoY/FWyPyhnPqAh8W+U3/CDmiCj0LNWeVfT/iWjHEUZ?=
+ =?us-ascii?Q?d18ioUshucKwQtXU+lynUmP3aYljfTH3wF8CubXfocVYAa4NODeDriGAAVMJ?=
+ =?us-ascii?Q?usCTITnWpIMLY0shV010RF2EhqAApev8?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?2ojmGiYTBvY0QsHGKqRcHM3fBKxb1GtjnVjdZZVOG0h3I4LR6vTSel+k02/R?=
+ =?us-ascii?Q?QRLGtx5NwqzPhuZSBaaNq+/8hgO5+QwKHhKShVWv+k/cZDdzrpE0aBsOYxCI?=
+ =?us-ascii?Q?3rLdGj+KquVR4zfmylsADd5lbqHWUHrZMJSNbtfoJzLOk1yP5R0fndtCxfH0?=
+ =?us-ascii?Q?3XjDPEev5gKTHY9F6oUkeWLD0jJIB73g4xV2WUxEsIwhMrJ49CLoDJowfbVX?=
+ =?us-ascii?Q?82+N0TB5I1WbY432sYhcrs9vbLwlb/fRC0ZdRltLvYdzFDznzEXCAeahkeda?=
+ =?us-ascii?Q?VQQsH1hGqWAfM6qsIebqk6QIPW/Mf9KmmtCvvac3CbZie9W9hevW2ZhfCHIQ?=
+ =?us-ascii?Q?w4YReo/pkcVku9QpRrtWFhimPcFlbNpGEyORUdgqRcgwkRIW0hgkxwTULhJZ?=
+ =?us-ascii?Q?3Dsy07kMKj++5lHwwVQLsnkELHbvQdwVn06gKzMTLcGuzawrnieVKIoSW5lK?=
+ =?us-ascii?Q?Z1wC3YAgVhhk+Knj8zGmEzwhmrc1sY3WULO0mG46yQpU4uI/I00USsuSYqln?=
+ =?us-ascii?Q?o2bb0Pz9LMZZrg1wnx2VjfxQYFac9jjJIf1GzQ7Q/YNTHUTWoX9dYE3hXhTJ?=
+ =?us-ascii?Q?w32N/zFfeVxipc/qL/SOpQ6yjuKara9TxWZPiypuF0C3hqF8g84GDS8B0Qw7?=
+ =?us-ascii?Q?laphtTjeFgCW5catg0Znl5pn9jDqzmFa+7uZUNUQhT/ZOTous3O8Kd79/BvC?=
+ =?us-ascii?Q?L2cPZECa4XwA/w0PmH+bhypqAFTfk2pQu534O9IT5OqFu04kCi0uTuHVLwo3?=
+ =?us-ascii?Q?+abOm0lSGZ881SrbQ+nWINOH9GRL895OsyrNUwkCbA0iKDemY5B99aFy2PUK?=
+ =?us-ascii?Q?7sXVBK/d25FCTl4ve67+YORzGLkgjhDJb8wqD1c5sKdvVIXIXkdchgKLlUGo?=
+ =?us-ascii?Q?eCP5ND8Q6Thl3R5AKiy6d3B5JIZHyQlgV/71qevn6/9YZAHi6LnltL/mu43I?=
+ =?us-ascii?Q?X09P1Da+r0dx3ZoybIqbtiipUtmnU7OrQZXavENCA2+w6v6EHTW7aAXQMam6?=
+ =?us-ascii?Q?lLvyyig8ari8nX5t2oRXrfVeBBK7bxId6H9kmwaw8B0dJNB+xcu0fmm9hLtv?=
+ =?us-ascii?Q?OoTiDQleASshugowGUb26IA6ri+G/F0CBovXN3trYFmnvV3ktvo9LUxLzk9X?=
+ =?us-ascii?Q?qXBgeTUHxeH32aWb8fnJkNjWAKSa3O4PiQswlbDaH4cU6VLTdpE54TxMCsll?=
+ =?us-ascii?Q?MypuKIshMjNtBw0t31OrO8LPNjNJAKCFmaYD+drjzQUW1wZYDpfQmBvKv1Zc?=
+ =?us-ascii?Q?FXg6xJfcomBBw2SroB72YUDF77ZCimc6XbG+L/G2vgWsG+IxeyQVrVPFKNn4?=
+ =?us-ascii?Q?IZLRrSyG+FxwymZDyyNtenhJkuvz8K9f4z6zaWmP1xPB7YUxvrOr/LV7H6oe?=
+ =?us-ascii?Q?e8rs+OFE2rtPBYX0uVDkINd5gDlJUqCEQN+Kb1MrH1uO/silafTDi0eaNGNx?=
+ =?us-ascii?Q?giK80Wi2pvNVJ1OWOCWQhs7TrugxaYJVFPLJ9VCnazVDc8sQb7S5Eeo75gBN?=
+ =?us-ascii?Q?Fto0ENFQGKcQd0oo0eNEmrV8KIN8O8gZ9hxk?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA01TeVCUZRye9/v2ghFaEeIdksBNJSxglzheSMrK8ps0hxFNh8GBHfhaCNhd
-	dhdCmojh8ABhETRlOdqII1gDXBBZDs0FOYc7KK4UhCJAQFAX2IBYdy3/e57n/T2/650fAzcb
-	plsxQvgSUsTnhrFoxpTqRnt7h9SQPh5b3m6BqjrSAIpPX8fR6oApUoxJaagsuxNDD3NL6Ki6
-	o4KOShT3MFT+kw+6IWWguh8eY6iobxlDOUPO6JHyMgVlqAcBmhqQYUj5cJCKGobfQv21OTTU
-	tCkFqC6+iI6+L5qio5TfamiouGUDQ3Nt+XTUeO42FW2uzVDReLMCRytaLRXdqd6gokzVHEDX
-	un+korLZBQpSlPmj2YxNKvpnZBNDLT+fRJudi3R071YJFWmqMjE0GI8O2BN5178mZPc7acRs
-	ZjogRgtVgFDJxuhE9x83KMR3Ge00IrHpEZXomBvFiF9+jcOJ/s5IQll6gUaMDtbTCNW4B1FZ
-	8C0xXZkFvK19Q/cHk9wgUmRL8gMFQSF8nhfrsI//R/6ubmyOA8cDubNs+dxw0ot18Ii3wych
-	YVvLZdlGccMityRvrljMcnpvv0gQKSFtgwViiReLFAaFCV2EjmJuuDiSz3PkkxJPDpvt7LoV
-	GBAa3LyYjwuTP4+emxzC40AmkQyMGJDpAgu66qjJwJhhxqwHsODBHZqeLAE40rBoIM8ArK1P
-	oyQDxnPLvNpHrzcA2Jxwha4nywDmPZvBdHlpTDvY9FcS0D2YM8eMYGpVHaYjOHMMgyW9T2m6
-	qB1MJ5i7nErTpaUw98BhdYRONmF6wt9bByj6Bm1gVp+Grte3w7asyec6vqUn3MzGdTkhM9kY
-	Pq68D/SGg3B0KQ3T4x1wpqWKrsdW8G/pWQPmwZX+KUOMECY03zZ434dJ7VJc1w/OtIfltU56
-	2RpeaS/D9HVNYap20mA1gTV5LzALnivJMWAIG7riDJiAhfJEoEtpxjwNNUOx6cBG9tI0spem
-	kf1fWA7wUmBFCsXhPDLQVchx4JNf/fezgYJwJXh+ZPu8a4CiYt1RDTAGUAPIwFnmJgqvHp6Z
-	SRD3TAwpEviLIsNIsRq4bq34Em5lESjYulK+xJ/j4sF2cXNzc/F4x43DsjRJUCXyzJg8roQM
-	JUkhKXrhwxhGVnGYsttz+Y3sTbKHBV5Xm6/GJg1GkwPmKiCXdjufONSa0v7nkyfa+UMXPvbT
-	SPHtCbeWYk/2vKbdfalj+k3BivW2iVOrnndDj7LbrK7u9Q0pdteqC0Z7C86qul7Z9cWHp6qP
-	fNkb4XKebyObkAY9tZxq6+LbT2QfT+UtXR1j9322993izLZPnRaz3ccfrPmsa/3g0HzkWl3E
-	RQfzo9tOFEpPbyy+/YGcZ6SUx6wu2DCWm2NNQ1Lsyh0br48Vli4HNB5rtz9ju9papMxdulyR
-	FHU++rhmZKN8jyX7sGLX3eiAV9dUKoupcKdvGo9F3RzI33mg1n36mmYwZsHPrnJV47uzJGt0
-	dzOLIg7mcvbhIjH3X+zuQzrtBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0xTdxjG+Z97WdADdOEAk2kzQsBR6TaTV7MxYrLl+IFEUx2OZYFGzoqR
-	S9cC22AqMJ0CqSBdJlTYvFGFOhjYAS1j03IrMoIDYQOqGykExm0omVxq21nZEr+9z+/3JM+X
-	l8EDTpEhzJGMLEGdoUiTUL5Ec4ckLLr+0KAyxuQKAlPfWQSFZS4c1oY3gfF+KQX1F/oxcFTX
-	0tDc9z0NtcYuDBquy6GxlIG2Sw8xMAwuY1A1+hosNH1FQLl1BMHUsB6DJscICe1j22HIUkVB
-	p6cUQVuhgYZvDVM0lPzWSsG1HjcG872Xaeg4/RMJnvVZEia6jTisOp0k/NzsJkFnnkdQMXCF
-	hPq5vwkw1ifBXLmHhCfjHgx6vksAT/8SDV0ttSSsmHQYjBRCXCT/zY08Xv9HP8XP6coQb68x
-	I96sv0/zAw8aCf7r8jsUf7JzgeT75u0Yf+tePs4P9WfzTXVFFG8f+ZHizRO7+JtXT/AzNyvR
-	vi2Jvm+mCGlHcgT1jthk39Tupcu4qvi9T+cnR/F8pOOLEcNw7BvcolVejHyZALYNce2lNqIY
-	iZ5yjrvzlwFt3IFcrXua3ig9RJxl5SLmFRQbwXVOn0JeIWb/EXFVLi3mDTg7jXFnxm9T3lYg
-	u4OrXtZS3jmCDefGrB97sR+7m/vdNvzf2stc5eAKvcH9ud7KyWccf8q/+OECXoY26Z9T+ufU
-	RYTVoWBBpUlXpmtkKlmG8IlUo0jXZGcopYcz05vQs0+JimxFLXVLUivCGGRFHINLxH7Gt+4q
-	A/xSFJ/lCurMJHV2mqCxolCGkAT5Bc1oUwJYpSJLOCoIKkH9v8UYUUg+NjS7c82TvCiPrCyx
-	+4eZ8ra4XqwoaR3T7G3Rnl7YtuoMP2cT1eRmhTR8aInziR8XH7j+iv9azrHNNT4FO+fWH2OH
-	o+M9itcdvdWTRVWxWtfVCvKx9oT4rCNTbk5IXPtyr8ge9YLqjKl9/yN/54EZmf5z/J2xsKnk
-	ocTzPX/umt5TvSAL3JObquo6f3J7aKZt8dE1lSwYOZeN63yr4+1j3QU5YZ6Uu5eOU9LVmNCG
-	6IJ1S7whoeWDiYO6zS99JFbKHefcq3nB4bExE6/+Opz37u7bdXZbxOz+g2IiqPEX51Zp0q0H
-	DdlPOopi9/UedY8et8jKEuOMPgOSexFb29+nbijHJYQmVSGLwtUaxb96QmhXmAMAAA==
-X-CMS-MailID: 20250313040150epcas5p347f94dac34fd2946dea51049559ee1de
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: REQ_APPROVE
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250313040150epcas5p347f94dac34fd2946dea51049559ee1de
-References: <CGME20250313040150epcas5p347f94dac34fd2946dea51049559ee1de@epcas5p3.samsung.com>
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN0P110MB2148.NAMP110.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 294f07f9-634d-41e8-5a78-08dd61fb87ab
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Mar 2025 06:51:49.6704
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: bcf48bba-4d6f-4dee-a0d2-7df59cc36629
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1P110MB1038
+X-OriginatorOrg: boeing.com
+X-TM-AS-GCONF: 00
 
-request_queue param is not used by blk_rq_map_sg and __blk_rq_map_sg.
-remove it.
+We are observing an incorrect or unexpected behavior with ARINC653 schedule=
+r when we set up multiple ARINC653 CPU pools and assign a different number =
+of domains to each CPU pool.
 
-Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
----
- block/blk-merge.c                   | 4 ++--
- block/bsg-lib.c                     | 2 +-
- drivers/block/mtip32xx/mtip32xx.c   | 2 +-
- drivers/block/rnbd/rnbd-clt.c       | 2 +-
- drivers/block/sunvdc.c              | 2 +-
- drivers/block/virtio_blk.c          | 2 +-
- drivers/block/xen-blkfront.c        | 2 +-
- drivers/memstick/core/ms_block.c    | 2 +-
- drivers/memstick/core/mspro_block.c | 4 +---
- drivers/mmc/core/queue.c            | 2 +-
- drivers/mtd/ubi/block.c             | 2 +-
- drivers/nvme/host/apple.c           | 2 +-
- drivers/nvme/host/fc.c              | 2 +-
- drivers/nvme/host/pci.c             | 2 +-
- drivers/nvme/host/rdma.c            | 3 +--
- drivers/nvme/target/loop.c          | 2 +-
- drivers/scsi/scsi_lib.c             | 2 +-
- include/linux/blk-mq.h              | 9 ++++-----
- 18 files changed, 22 insertions(+), 26 deletions(-)
+Here's the test configuration to reproduce the issue.
 
-diff --git a/block/blk-merge.c b/block/blk-merge.c
-index 1d1589c35297..fdd4efb54c6c 100644
---- a/block/blk-merge.c
-+++ b/block/blk-merge.c
-@@ -551,8 +551,8 @@ static inline struct scatterlist *blk_next_sg(struct scatterlist **sg,
-  * Map a request to scatterlist, return number of sg entries setup. Caller
-  * must make sure sg can hold rq->nr_phys_segments entries.
-  */
--int __blk_rq_map_sg(struct request_queue *q, struct request *rq,
--		struct scatterlist *sglist, struct scatterlist **last_sg)
-+int __blk_rq_map_sg(struct request *rq, struct scatterlist *sglist,
-+		    struct scatterlist **last_sg)
- {
- 	struct req_iterator iter = {
- 		.bio	= rq->bio,
-diff --git a/block/bsg-lib.c b/block/bsg-lib.c
-index 93523d8f8195..9ceb5d0832f5 100644
---- a/block/bsg-lib.c
-+++ b/block/bsg-lib.c
-@@ -219,7 +219,7 @@ static int bsg_map_buffer(struct bsg_buffer *buf, struct request *req)
- 	if (!buf->sg_list)
- 		return -ENOMEM;
- 	sg_init_table(buf->sg_list, req->nr_phys_segments);
--	buf->sg_cnt = blk_rq_map_sg(req->q, req, buf->sg_list);
-+	buf->sg_cnt = blk_rq_map_sg(req, buf->sg_list);
- 	buf->payload_len = blk_rq_bytes(req);
- 	return 0;
- }
-diff --git a/drivers/block/mtip32xx/mtip32xx.c b/drivers/block/mtip32xx/mtip32xx.c
-index 95361099a2dc..0d619df03fa9 100644
---- a/drivers/block/mtip32xx/mtip32xx.c
-+++ b/drivers/block/mtip32xx/mtip32xx.c
-@@ -2056,7 +2056,7 @@ static void mtip_hw_submit_io(struct driver_data *dd, struct request *rq,
- 	unsigned int nents;
- 
- 	/* Map the scatter list for DMA access */
--	nents = blk_rq_map_sg(hctx->queue, rq, command->sg);
-+	nents = blk_rq_map_sg(rq, command->sg);
- 	nents = dma_map_sg(&dd->pdev->dev, command->sg, nents, dma_dir);
- 
- 	prefetch(&port->flags);
-diff --git a/drivers/block/rnbd/rnbd-clt.c b/drivers/block/rnbd/rnbd-clt.c
-index 82467ecde7ec..15627417f12e 100644
---- a/drivers/block/rnbd/rnbd-clt.c
-+++ b/drivers/block/rnbd/rnbd-clt.c
-@@ -1010,7 +1010,7 @@ static int rnbd_client_xfer_request(struct rnbd_clt_dev *dev,
- 	 * See queue limits.
- 	 */
- 	if ((req_op(rq) != REQ_OP_DISCARD) && (req_op(rq) != REQ_OP_WRITE_ZEROES))
--		sg_cnt = blk_rq_map_sg(dev->queue, rq, iu->sgt.sgl);
-+		sg_cnt = blk_rq_map_sg(rq, iu->sgt.sgl);
- 
- 	if (sg_cnt == 0)
- 		sg_mark_end(&iu->sgt.sgl[0]);
-diff --git a/drivers/block/sunvdc.c b/drivers/block/sunvdc.c
-index 282f81616a78..2b33fb5b949b 100644
---- a/drivers/block/sunvdc.c
-+++ b/drivers/block/sunvdc.c
-@@ -485,7 +485,7 @@ static int __send_request(struct request *req)
- 	}
- 
- 	sg_init_table(sg, port->ring_cookies);
--	nsg = blk_rq_map_sg(req->q, req, sg);
-+	nsg = blk_rq_map_sg(req, sg);
- 
- 	len = 0;
- 	for (i = 0; i < nsg; i++)
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 6a61ec35f426..a3df4d49bd46 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -226,7 +226,7 @@ static int virtblk_map_data(struct blk_mq_hw_ctx *hctx, struct request *req,
- 	if (unlikely(err))
- 		return -ENOMEM;
- 
--	return blk_rq_map_sg(hctx->queue, req, vbr->sg_table.sgl);
-+	return blk_rq_map_sg(req, vbr->sg_table.sgl);
- }
- 
- static void virtblk_cleanup_cmd(struct request *req)
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index edcd08a9dcef..5babe575c288 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -751,7 +751,7 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
- 	id = blkif_ring_get_request(rinfo, req, &final_ring_req);
- 	ring_req = &rinfo->shadow[id].req;
- 
--	num_sg = blk_rq_map_sg(req->q, req, rinfo->shadow[id].sg);
-+	num_sg = blk_rq_map_sg(req, rinfo->shadow[id].sg);
- 	num_grant = 0;
- 	/* Calculate the number of grant used */
- 	for_each_sg(rinfo->shadow[id].sg, sg, num_sg, i)
-diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
-index 5b617c1f6789..f4398383ae06 100644
---- a/drivers/memstick/core/ms_block.c
-+++ b/drivers/memstick/core/ms_block.c
-@@ -1904,7 +1904,7 @@ static void msb_io_work(struct work_struct *work)
- 
- 		/* process the request */
- 		dbg_verbose("IO: processing new request");
--		blk_rq_map_sg(msb->queue, req, sg);
-+		blk_rq_map_sg(req, sg);
- 
- 		lba = blk_rq_pos(req);
- 
-diff --git a/drivers/memstick/core/mspro_block.c b/drivers/memstick/core/mspro_block.c
-index 634d343b6bdb..c9853d887d28 100644
---- a/drivers/memstick/core/mspro_block.c
-+++ b/drivers/memstick/core/mspro_block.c
-@@ -627,9 +627,7 @@ static int mspro_block_issue_req(struct memstick_dev *card)
- 	while (true) {
- 		msb->current_page = 0;
- 		msb->current_seg = 0;
--		msb->seg_count = blk_rq_map_sg(msb->block_req->q,
--					       msb->block_req,
--					       msb->req_sg);
-+		msb->seg_count = blk_rq_map_sg(msb->block_req, msb->req_sg);
- 
- 		if (!msb->seg_count) {
- 			unsigned int bytes = blk_rq_cur_bytes(msb->block_req);
-diff --git a/drivers/mmc/core/queue.c b/drivers/mmc/core/queue.c
-index ab662f502fe7..3ba62f825b84 100644
---- a/drivers/mmc/core/queue.c
-+++ b/drivers/mmc/core/queue.c
-@@ -523,5 +523,5 @@ unsigned int mmc_queue_map_sg(struct mmc_queue *mq, struct mmc_queue_req *mqrq)
- {
- 	struct request *req = mmc_queue_req_to_req(mqrq);
- 
--	return blk_rq_map_sg(mq->queue, req, mqrq->sg);
-+	return blk_rq_map_sg(req, mqrq->sg);
- }
-diff --git a/drivers/mtd/ubi/block.c b/drivers/mtd/ubi/block.c
-index 2836905f0152..39cc0a6a4d37 100644
---- a/drivers/mtd/ubi/block.c
-+++ b/drivers/mtd/ubi/block.c
-@@ -199,7 +199,7 @@ static blk_status_t ubiblock_read(struct request *req)
- 	 * and ubi_read_sg() will check that limit.
- 	 */
- 	ubi_sgl_init(&pdu->usgl);
--	blk_rq_map_sg(req->q, req, pdu->usgl.sg);
-+	blk_rq_map_sg(req, pdu->usgl.sg);
- 
- 	while (bytes_left) {
- 		/*
-diff --git a/drivers/nvme/host/apple.c b/drivers/nvme/host/apple.c
-index a060f69558e7..a437eee741e1 100644
---- a/drivers/nvme/host/apple.c
-+++ b/drivers/nvme/host/apple.c
-@@ -525,7 +525,7 @@ static blk_status_t apple_nvme_map_data(struct apple_nvme *anv,
- 	if (!iod->sg)
- 		return BLK_STS_RESOURCE;
- 	sg_init_table(iod->sg, blk_rq_nr_phys_segments(req));
--	iod->nents = blk_rq_map_sg(req->q, req, iod->sg);
-+	iod->nents = blk_rq_map_sg(req, iod->sg);
- 	if (!iod->nents)
- 		goto out_free_sg;
- 
-diff --git a/drivers/nvme/host/fc.c b/drivers/nvme/host/fc.c
-index b9929a5a7f4e..1b5ad1173bc7 100644
---- a/drivers/nvme/host/fc.c
-+++ b/drivers/nvme/host/fc.c
-@@ -2571,7 +2571,7 @@ nvme_fc_map_data(struct nvme_fc_ctrl *ctrl, struct request *rq,
- 	if (ret)
- 		return -ENOMEM;
- 
--	op->nents = blk_rq_map_sg(rq->q, rq, freq->sg_table.sgl);
-+	op->nents = blk_rq_map_sg(rq, freq->sg_table.sgl);
- 	WARN_ON(op->nents > blk_rq_nr_phys_segments(rq));
- 	freq->sg_cnt = fc_dma_map_sg(ctrl->lport->dev, freq->sg_table.sgl,
- 				op->nents, rq_dma_dir(rq));
-diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index 950289405ef2..a0b1c57067aa 100644
---- a/drivers/nvme/host/pci.c
-+++ b/drivers/nvme/host/pci.c
-@@ -812,7 +812,7 @@ static blk_status_t nvme_map_data(struct nvme_dev *dev, struct request *req,
- 	if (!iod->sgt.sgl)
- 		return BLK_STS_RESOURCE;
- 	sg_init_table(iod->sgt.sgl, blk_rq_nr_phys_segments(req));
--	iod->sgt.orig_nents = blk_rq_map_sg(req->q, req, iod->sgt.sgl);
-+	iod->sgt.orig_nents = blk_rq_map_sg(req, iod->sgt.sgl);
- 	if (!iod->sgt.orig_nents)
- 		goto out_free_sg;
- 
-diff --git a/drivers/nvme/host/rdma.c b/drivers/nvme/host/rdma.c
-index 86a2891d9bcc..b5a0295b5bf4 100644
---- a/drivers/nvme/host/rdma.c
-+++ b/drivers/nvme/host/rdma.c
-@@ -1476,8 +1476,7 @@ static int nvme_rdma_dma_map_req(struct ib_device *ibdev, struct request *rq,
- 	if (ret)
- 		return -ENOMEM;
- 
--	req->data_sgl.nents = blk_rq_map_sg(rq->q, rq,
--					    req->data_sgl.sg_table.sgl);
-+	req->data_sgl.nents = blk_rq_map_sg(rq, req->data_sgl.sg_table.sgl);
- 
- 	*count = ib_dma_map_sg(ibdev, req->data_sgl.sg_table.sgl,
- 			       req->data_sgl.nents, rq_dma_dir(rq));
-diff --git a/drivers/nvme/target/loop.c b/drivers/nvme/target/loop.c
-index a9d112d34d4f..a5c41144667c 100644
---- a/drivers/nvme/target/loop.c
-+++ b/drivers/nvme/target/loop.c
-@@ -162,7 +162,7 @@ static blk_status_t nvme_loop_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		}
- 
- 		iod->req.sg = iod->sg_table.sgl;
--		iod->req.sg_cnt = blk_rq_map_sg(req->q, req, iod->sg_table.sgl);
-+		iod->req.sg_cnt = blk_rq_map_sg(req, iod->sg_table.sgl);
- 		iod->req.transfer_len = blk_rq_payload_bytes(req);
- 	}
- 
-diff --git a/drivers/scsi/scsi_lib.c b/drivers/scsi/scsi_lib.c
-index f1cfe0bb89b2..0d29470e86b0 100644
---- a/drivers/scsi/scsi_lib.c
-+++ b/drivers/scsi/scsi_lib.c
-@@ -1149,7 +1149,7 @@ blk_status_t scsi_alloc_sgtables(struct scsi_cmnd *cmd)
- 	 * Next, walk the list, and fill in the addresses and sizes of
- 	 * each segment.
- 	 */
--	count = __blk_rq_map_sg(rq->q, rq, cmd->sdb.table.sgl, &last_sg);
-+	count = __blk_rq_map_sg(rq, cmd->sdb.table.sgl, &last_sg);
- 
- 	if (blk_rq_bytes(rq) & rq->q->limits.dma_pad_mask) {
- 		unsigned int pad_len =
-diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
-index fa2a76cc2f73..f2eff998913d 100644
---- a/include/linux/blk-mq.h
-+++ b/include/linux/blk-mq.h
-@@ -1165,14 +1165,13 @@ static inline unsigned short blk_rq_nr_discard_segments(struct request *rq)
- 	return max_t(unsigned short, rq->nr_phys_segments, 1);
- }
- 
--int __blk_rq_map_sg(struct request_queue *q, struct request *rq,
--		struct scatterlist *sglist, struct scatterlist **last_sg);
--static inline int blk_rq_map_sg(struct request_queue *q, struct request *rq,
--		struct scatterlist *sglist)
-+int __blk_rq_map_sg(struct request *rq, struct scatterlist *sglist,
-+		struct scatterlist **last_sg);
-+static inline int blk_rq_map_sg(struct request *rq, struct scatterlist *sglist)
- {
- 	struct scatterlist *last_sg = NULL;
- 
--	return __blk_rq_map_sg(q, rq, sglist, &last_sg);
-+	return __blk_rq_map_sg(rq, sglist, &last_sg);
- }
- void blk_dump_rq_flags(struct request *, char *);
- 
--- 
-2.25.1
+[Test environment]
+Yocto release : 5.05
+Xen release : 4.19 (hash =3D 026c9fa29716b0ff0f8b7c687908e71ba29cf239)
+Target machine : QEMU ARM64
+Number of physical CPUs : 4
 
+[CPU pool configuration files]
+cpupool_arinc0.cfg
+- name=3D "Pool-arinc0"
+- sched=3D"arinc653"
+- cpus=3D["2"]
+
+cpupool_arinc1.cfg
+- name=3D"Pool-arinc1"
+- sched=3D"arinc653"
+- cpus=3D["3]
+
+[Domain configuration files]
+Common domain configurations are applied to each domx.cfg file.
+- kernel =3D "/usr/lib/xen/images/zImage"
+- ramdisk =3D "/usr/lib/xen/images/rootfs.cpio.gz"
+- extra =3D "root=3D/dev/loop0 rw nohlt"
+- memory =3D 512
+
+dom1.cfg
+- vcpus =3D 1
+- pool =3D "Pool-arinc0"
+
+dom2.cfg / dom3.cfg / dom4.cfg=20
+- vcpus =3D 1
+- pool =3D "Pool-arinc1"
+
+$ xl cpupool-cpu-remove Pool-0 2,3
+$ xl cpupool-create -f cpupool_arinc0.cfg
+$ xl cpupool-create -f cpupool_arinc1.cfg
+$ xl create dom1.cfg
+$ xl create dom2.cfg
+$ xl create dom3.cfg
+$ xl create dom4.cfg
+
+[ARINC653 scheduler setup]
+$ a653_sched -P Pool-arinc0 dom1:100
+$ a653_sched -P Pool-arinc1 dom2:100 dom3:100 dom4:100
+
+It seems there's a corner condition in using the global variables "sched_in=
+dex" and "next_switch_time" when multiple ARINC653 cpupools are running on =
+different physical CPUs
+
+The variables sched_index and next_switch_time are defined as static at xen=
+/common/sched/arinc653.c as shown below.
+
+static void cf_check
+a653sched_do_schedule(
+    const struct scheduler *ops,
+    struct sched_unit *prev,
+    s_time_t now,
+    bool tasklet_work_scheduled)
+{
+    struct sched_unit *new_task =3D NULL;
+    static unsigned int sched_index =3D 0;    <=3D=3D
+    static s_time_t next_switch_time;       <=3D=3D
+
+First, a race condition against the global variables sched_index and next_s=
+witch_time is observed.
+They can be accessed concurrently on different physical CPUs but they are n=
+ot correctly protected since each CPU pool uses its own scheduler-private s=
+pinlock.
+Technically, it's identical to using a local spinlock.
+
+Spinlock is held here (line# 522) and,
+spin_lock_irqsave(&sched_priv->lock, flags);
+
+released here (line# 577),
+spin_unlock_irqrestore(&sched_priv->lock, flags);
+
+Second, even if it's properly protected, global sched_index and global next=
+_switch_time can't be used for ARINC653 CPU pools with the asymmetric numbe=
+r of domains and with the different runtime and major frames.
+Domains in the ARINC653 cpupool are organized in the schedule array and the=
+ next domain to run is determined using the global variable sched_index.
+Since sched_index is set to 0 whenever the major frame of one ARINC653 CPU =
+pool is completed, the domains that belong to lengthier ARINC653 CPU pool a=
+nd are accessed with higher sched_index can be never scheduled.
+
+We think this can be corrected by using a per-cpupool sched_index and next_=
+switch_time and would be happy to provide a patch implementing this fix if =
+this is the correct approach.
+
+Can I get your advice on this subject?
+
+Should you have any questions about the description, please let me know.
+
+Kindly understand my description might not be clear enough as I'm not a nat=
+ive English speaker.
+
+Regards,
+Anderson
 
