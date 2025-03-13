@@ -4,37 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D6DC282DE
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 04:00:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.911171.1317663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA0AC282DE
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 06:30:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.911217.1317673 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsZjD-0004IL-TK; Thu, 13 Mar 2025 03:59:27 +0000
+	id 1tsc5L-0001W7-BX; Thu, 13 Mar 2025 06:30:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 911171.1317663; Thu, 13 Mar 2025 03:59:27 +0000
+Received: by outflank-mailman (output) from mailman id 911217.1317673; Thu, 13 Mar 2025 06:30:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tsZjD-0004IE-Pw; Thu, 13 Mar 2025 03:59:27 +0000
-Received: by outflank-mailman (input) for mailman id 911171;
- Thu, 13 Mar 2025 03:59:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tsc5L-0001W0-8X; Thu, 13 Mar 2025 06:30:27 +0000
+Received: by outflank-mailman (input) for mailman id 911217;
+ Thu, 13 Mar 2025 06:30:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=js1q=WA=intel.com=lkp@srs-se1.protection.inumbo.net>)
- id 1tsZjB-0004I8-Uq
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 03:59:26 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 896de0f9-ffbf-11ef-9898-31a8f345e629;
- Thu, 13 Mar 2025 04:59:19 +0100 (CET)
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Mar 2025 20:59:17 -0700
-Received: from lkp-server02.sh.intel.com (HELO a4747d147074) ([10.239.97.151])
- by fmviesa009.fm.intel.com with ESMTP; 12 Mar 2025 20:59:12 -0700
-Received: from kbuild by a4747d147074 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1tsZij-00096K-1j;
- Thu, 13 Mar 2025 03:59:01 +0000
+ (envelope-from <SRS0=PjYM=WA=lst.de=hch@srs-se1.protection.inumbo.net>)
+ id 1tsc5K-0001Vu-0D
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 06:30:26 +0000
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a5623dfc-ffd4-11ef-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 07:30:24 +0100 (CET)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id DBF1768C4E; Thu, 13 Mar 2025 07:30:19 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,127 +40,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 896de0f9-ffbf-11ef-9898-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1741838360; x=1773374360;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=cYwKWE3qx6aAxxggYpyZsccNMSnGdzKXacMIEiXDO/w=;
-  b=Ah+qiOtYPxCbVH5r1cPmipzBw+A75LVf48ll/KZUFzkh40RDaD6+8kKj
-   NS3Hwie4tSVsto0QKg1jDGT94sGXpAdBxj1xy6zn7BlfvwaQwdbuMSCEI
-   cDXCfHGXfkIQ+G0BjCL26GLdD9N8J3baXV5iKvJfltBsRa/a3lDHByPMQ
-   mBTU8Lo/v5ssohiVzZy+U/FZTJpTk5ThRG1HXzh+Puj2KMOayWtW+BdPu
-   XvBukeaqQeQeHAL6IjW/NLKDylpQV3MoVXvfagK/K7BQe6hV4UPczL+2G
-   Z7UnWMjCgTvXsvDEmSBkbIkkkfVkurEv7Xj9dxx5Fl1bnOaWWKBrIVVOQ
-   A==;
-X-CSE-ConnectionGUID: V2Vm3EoMTy60BywgVmBl7A==
-X-CSE-MsgGUID: KjhTUhDMRPadX4r+57yWww==
-X-IronPort-AV: E=McAfee;i="6700,10204,11371"; a="68294339"
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; 
-   d="scan'208";a="68294339"
-X-CSE-ConnectionGUID: Jk/rBPr/R+CE+fsVXvv0Hg==
-X-CSE-MsgGUID: rCVWNuURQ4Kucu2VbRCsgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; 
-   d="scan'208";a="121530505"
-Date: Thu, 13 Mar 2025 11:58:50 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, simona@ffwll.ch,
-	airlied@gmail.com, mripard@kernel.org,
-	maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
-	tomi.valkeinen@ideasonboard.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
-	freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-	imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
-	nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
-	spice-devel@lists.freedesktop.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
-	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Biju Das <biju.das.jz@bp.renesas.com>
-Subject: Re: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes
- with drm_mode_size_dumb()
-Message-ID: <202503131309.ZzS9Tova-lkp@intel.com>
-References: <20250311155120.442633-19-tzimmermann@suse.de>
+X-Inumbo-ID: a5623dfc-ffd4-11ef-9ab9-95dc52dad729
+Date: Thu, 13 Mar 2025 07:30:19 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Anuj Gupta <anuj20.g@samsung.com>
+Cc: Jens Axboe <axboe@kernel.dk>, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+	Jack Wang <jinpu.wang@ionos.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Maxim Levitsky <maximlevitsky@gmail.com>,
+	Alex Dubov <oakad@yahoo.com>, Ulf Hansson <ulf.hansson@linaro.org>,
+	Richard Weinberger <richard@nod.at>,
+	Zhihao Cheng <chengzhihao1@huawei.com>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Sven Peter <sven@svenpeter.dev>, Janne Grunau <j@jannau.net>,
+	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
+	James Smart <james.smart@broadcom.com>,
+	Chaitanya Kulkarni <kch@nvidia.com>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+	virtualization@lists.linux.dev, xen-devel@lists.xenproject.org,
+	linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
+	asahi@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org
+Subject: Re: [PATCH] block: remove unused parameter
+Message-ID: <20250313063019.GB9789@lst.de>
+References: <CGME20250313040150epcas5p347f94dac34fd2946dea51049559ee1de@epcas5p3.samsung.com> <20250313035322.243239-1-anuj20.g@samsung.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250311155120.442633-19-tzimmermann@suse.de>
+In-Reply-To: <20250313035322.243239-1-anuj20.g@samsung.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-Hi Thomas,
+Looks good:
 
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on next-20250311]
-[also build test ERROR on v6.14-rc6]
-[cannot apply to drm-exynos/exynos-drm-next rockchip/for-next tegra/for-next drm-xe/drm-xe-next linus/master v6.14-rc6 v6.14-rc5 v6.14-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-dumb-buffers-Sanitize-output-on-errors/20250311-235818
-base:   next-20250311
-patch link:    https://lore.kernel.org/r/20250311155120.442633-19-tzimmermann%40suse.de
-patch subject: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
-config: i386-buildonly-randconfig-003-20250313 (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202503131309.ZzS9Tova-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:10:
-   In file included from include/drm/drm_atomic.h:31:
-   In file included from include/drm/drm_crtc.h:32:
-   In file included from include/drm/drm_modes.h:33:
-   In file included from include/drm/drm_connector.h:32:
-   In file included from include/drm/drm_util.h:36:
-   In file included from include/linux/kgdb.h:19:
-   In file included from include/linux/kprobes.h:28:
-   In file included from include/linux/ftrace.h:13:
-   In file included from include/linux/kallsyms.h:13:
-   In file included from include/linux/mm.h:2296:
-   include/linux/vmstat.h:507:36: warning: arithmetic between different enumeration types ('enum node_stat_item' and 'enum lru_list') [-Wenum-enum-conversion]
-     507 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip "nr_"
-         |                               ~~~~~~~~~~~ ^ ~~~
->> drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: error: call to undeclared function 'drm_mode_size_dumb'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-      80 |         ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-         |               ^
-   drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: note: did you mean 'drm_mode_set_name'?
-   include/drm/drm_modes.h:530:6: note: 'drm_mode_set_name' declared here
-     530 | void drm_mode_set_name(struct drm_display_mode *mode);
-         |      ^
-   1 warning and 1 error generated.
-
-
-vim +/drm_mode_size_dumb +80 drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-
-    70	
-    71	/* -----------------------------------------------------------------------------
-    72	 * Frame buffer
-    73	 */
-    74	
-    75	int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
-    76				 struct drm_mode_create_dumb *args)
-    77	{
-    78		int ret;
-    79	
-  > 80		ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-    81		if (ret)
-    82			return ret;
-    83	
-    84		return drm_gem_dma_dumb_create_internal(file, dev, args);
-    85	}
-    86	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
