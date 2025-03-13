@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5D8C35FF3
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 16:37:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.912873.1319043 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824DBC282DE
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 16:39:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.912882.1319062 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tslYb-0008LP-DQ; Thu, 13 Mar 2025 16:37:17 +0000
+	id 1tslaX-0000lD-1Y; Thu, 13 Mar 2025 16:39:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 912873.1319043; Thu, 13 Mar 2025 16:37:17 +0000
+Received: by outflank-mailman (output) from mailman id 912882.1319062; Thu, 13 Mar 2025 16:39:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tslYb-0008LI-9Q; Thu, 13 Mar 2025 16:37:17 +0000
-Received: by outflank-mailman (input) for mailman id 912873;
- Thu, 13 Mar 2025 16:37:15 +0000
+	id 1tslaW-0000kz-Uq; Thu, 13 Mar 2025 16:39:16 +0000
+Received: by outflank-mailman (input) for mailman id 912882;
+ Thu, 13 Mar 2025 16:39:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7Xn0=WA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tslYZ-0008Js-FS
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 16:37:15 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=UNRr=WA=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
+ id 1tslaV-0000Wy-Ru
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 16:39:15 +0000
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [2607:f8b0:4864:20::102c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6b8cfaa2-0029-11f0-9ab9-95dc52dad729;
- Thu, 13 Mar 2025 17:37:14 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3912fdddf8fso1534631f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 09:37:14 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d18a2aac5sm25715755e9.28.2025.03.13.09.37.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Mar 2025 09:37:13 -0700 (PDT)
+ id b2ef7577-0029-11f0-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 17:39:15 +0100 (CET)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2fee05829edso2501371a91.3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 09:39:15 -0700 (PDT)
+Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-30119265938sm4020084a91.39.2025.03.13.09.39.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Mar 2025 09:39:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +46,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b8cfaa2-0029-11f0-9ab9-95dc52dad729
+X-Inumbo-ID: b2ef7577-0029-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1741883834; x=1742488634; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=GU5LSbric0lnhcBmKC+wsweM0DvBMW9A2WFSbsMM9/M=;
-        b=RDcgkREtAafARdm5YcBb7z7HMOs0L31BKNzNHyoLYLTJY7NNThEO/LjkgCj4x9eZRL
-         MmcvIyp9FVP4mWno1AGC2JTbe2cilpCJUce1o6bV8utdKHGQqP7U8iDmYWn0ae/e9X2F
-         G2jAQPkv0GLFPrqV5Ir3jGvsKv2vuaPDXVo84hLkJV2UTIBbYGpfIbgg+C7UQkWl0Vka
-         lWtbiqQMT6PPGWFLnN2TN0QtpTf68fXP4gmmHJs3KwVuxEVawf90XBk9+6QSr+rRPwEY
-         rGgtQT+gTw+P/bZ+BGDHGB8QtLSapdvMnIHjbREuVmViDLzy7FKutGVS3LrV3tj9AC+/
-         BBRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741883834; x=1742488634;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1741883954; x=1742488754; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GU5LSbric0lnhcBmKC+wsweM0DvBMW9A2WFSbsMM9/M=;
-        b=YJDnMRHQ5AyieikwTdL7kL4d7/sZmYWEIqp08ZiOF5VoMpU2qTlguJr8shOBLyzrPI
-         BZbP04kNre7ZL52IbOihDL4hvYVmslF4fJHeSCJNHaROKaxZ0OwTfELqKWieGApcG57b
-         me/JFf2kkhzY0SVOj4LtQvbcP+ujacU1fpGocDKeZq/HTUm5AlAPZNy8zk496xbNo3nH
-         iwpFXfKhCKzoQla3grJFc5dpankLZLRZOkakNwoIVefj3+ggiD5X1IxM0FWIuT3+m9pK
-         DF0RtkaXj8ilM874lfUxA1DeRGFSDxbh9LQhg4YYdztPP0VUGKkKtPu10T6CNp81P/ko
-         xCeg==
-X-Forwarded-Encrypted: i=1; AJvYcCUlI1JNVPrcsHVUrZgVGbYeu2xG1mb3KQRd9MWYTdh3hf+vrTOWU6RDs2dFSpGso4cuxAl0qOJNgZQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzp3gDJ/rZonKTCmikw343J7NMMnUqmdGeVWTIzT9E+EMgvu9QD
-	iH6vbEJL/hfG7SHAodiTfsjfOvVvFtKcvKlouX4VUkVMqRnG9al/9a4FVTz1AQ==
-X-Gm-Gg: ASbGnctfqxCq9nZPk12f+scaUKaC8CW6vLVYpKXIWCEzoeYH6EViUVhSc0KFEQooi9v
-	+eoR66CKwHphCVB7Jsvb6C+/H/aRb/6zFZkPy8irfkC2g965mI/jFua7FUJ/HBiqtjjNv6e43dd
-	SABgeFnYWaEtO5It3gkO1SGgLRrkdQjOuMM9db+RbYmgqKqBkdJjW8JEzCir9fpoIRc31YidmkZ
-	f3aYt/+vt8rprPqNkRdqDwmJD+XLEVOYyX9eODOV0cScCE46Ldc1c6KSK9H+5uc0W8R21H1mVpX
-	iHeAErCKi32HeCI6YFup09QGzEK3RTEaCvsQ/xmmIsQ2011DrDL/f70XeLdFS8KCO8Otrc7w8CY
-	9cVndnksACMGSzovEPYbhui36PMezpQ==
-X-Google-Smtp-Source: AGHT+IF6/xvzPGYHnVQpeZvWvFgAou1GzRntVfILa7CtsaqfoWVM1++c0QzcBBACUIHe6tgRuOfpKw==
-X-Received: by 2002:a5d:6d83:0:b0:38d:d166:d44 with SMTP id ffacd0b85a97d-395b9a1c648mr2775630f8f.23.1741883834270;
-        Thu, 13 Mar 2025 09:37:14 -0700 (PDT)
-Message-ID: <61b762d0-d513-4d02-80ac-50fa12a725f3@suse.com>
-Date: Thu, 13 Mar 2025 17:37:12 +0100
+        bh=fjQjYNlvDIsMbe7+veFF5h4s6vvln32m8yANkT1fS5Y=;
+        b=q+TIxJJPFQpJ80hjqKuu01SX5jj4bMVSKl8AIGqJR+uufkpGZJfomwHzeh9rhl0zfh
+         x+KBPurnJpt7AwbCU8L5k995dU69/OOFSwN+ce/4XtCSoSorot6dyNf+h1rYQklO+QhE
+         neLfOPXNsKiTxnvl/Mp0ncrz/97hrZZfyAGenE5tuUfcGfRU2SzcIQOlyX8+Cjdjp/Yr
+         24h6BiSF+oajyj0BC8VnZrXcFL6mYaZjya23TC2VauBXalfjgOAGmpgAFLcpLNKrrPrk
+         3XPcdpyBBAAT/RLUMtdax3JJBU+ut32gCDrnBRehxpgLKxFJv5OdDSmrgunb/EqK6QSo
+         TuZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741883954; x=1742488754;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fjQjYNlvDIsMbe7+veFF5h4s6vvln32m8yANkT1fS5Y=;
+        b=H7P/tzqZMmfctHCKNJN2bFTNzmk7GBMHj8ixYL0x/F7QSxnAmKJpyJwXluVXRqV0HQ
+         tjMCZvYk1tmz7DrzKEvjzpIZ2sp63f03xzINEEC/IsNDabJNN6pup5F2ILTQYz3X/GSC
+         KiLJNbodwvxeuG+4LdVMiWahccTOmHoJtFqvtWQeOjCGEzMFlv4dcadlyKsQvNI4qI71
+         GOvxSLBQsoSIwDtusLjuKfOTs2/qWw1Hf9Xs2v10yc83dCIYAFx2aFsOHCpeAN9Yf2O/
+         Cg6UVcBtYBAkUzVPYVhJ24j99uawJPKhwIHQMw6Sj5ONp+jBcaelGQnYHn9N5LQrwuh8
+         MTzA==
+X-Forwarded-Encrypted: i=1; AJvYcCW6KwUQmK1RsN2KCV/K6P8oVkQOhJEKuyH9yiKw425NFbupoa8sEhUKaKjZMPmF9npbvuXC08m9ZkE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyiD8mSIFHeSkJHHmYqwFTDIdrzqfs0y3NPlQf3G8+L5eA2GU4b
+	cmNenAMVuMMhOxD8DVCTxeGD2KIqRGDmhi2D3TmDKARNkjEuv+7B863p0cU4sv8=
+X-Gm-Gg: ASbGnctrieV/8PnQ7Ha9zNj7qm9yB5gMT7FQ74c0JLNQObvt08qWysrDuyVHb9maINF
+	1dwjiJY47AjtShujsJR/+/UxnviHG69cf0PVuwe0vAQ3bSG9D1bgEdej6BViho3bJp/yYWdh2rS
+	4qLqIp1xSYccGJJta0WUeIV2IDJpeK/n7a4DQC9KN14St7Io6eiBrB0+eUPE+TnnEjIpq3fpuSV
+	Fi6U1uhM4qZ8bfU9Uej4i/0cxt3rxqRe+NFbyr1Zf1adbI1lV0I3HU/Lm6h1w/J/WXLLwRv1cXI
+	cK45bld2swSZhDm6jSp7+etTCC01eKa4ByCOxIVuyqnp
+X-Google-Smtp-Source: AGHT+IGAE0wRrFnOgUSptf/ZCGVy3gy2ROtBxgIz+VJH5KWtqtjx8oj2KP2h7DP6p39QjbuO2M6/IQ==
+X-Received: by 2002:a17:90b:264c:b0:2fe:6942:3710 with SMTP id 98e67ed59e1d1-3014e821305mr250112a91.3.1741883953849;
+        Thu, 13 Mar 2025 09:39:13 -0700 (PDT)
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Paul Durrant <paul@xen.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	xen-devel@lists.xenproject.org,
+	Peter Xu <peterx@redhat.com>,
+	alex.bennee@linaro.org,
+	manos.pitsidianakis@linaro.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	qemu-ppc@nongnu.org,
+	Richard Henderson <richard.henderson@linaro.org>,
+	kvm@vger.kernel.org,
+	David Hildenbrand <david@redhat.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Weiwei Li <liwei1518@gmail.com>,
+	qemu-riscv@nongnu.org,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v4 02/17] exec/tswap: implement {ld,st}.*_p as functions instead of macros
+Date: Thu, 13 Mar 2025 09:38:48 -0700
+Message-Id: <20250313163903.1738581-3-pierrick.bouvier@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
+References: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] trace: convert init_trace_bufs() to constructor
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
- <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <e1e556c4-ed71-41f7-acfc-b7fa866a0d3e@suse.com>
- <6ff81326-762c-46ec-a06a-254ba166433b@citrix.com>
- <b59ea14e-0bce-4c3e-b1fb-021b53af1780@suse.com>
- <d597523c-aa3a-4682-824f-e6e2f8ce753a@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <d597523c-aa3a-4682-824f-e6e2f8ce753a@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 13.03.2025 17:28, Andrew Cooper wrote:
-> On 13/03/2025 2:19 pm, Jan Beulich wrote:
->> On 13.03.2025 14:58, Andrew Cooper wrote:
->>> On 13/03/2025 1:38 pm, Jan Beulich wrote:
->>> I'm tempted to ack this on the basis that it is an improvement, but a /*
->>> TODO this is all mad, please fix */ wouldn't go amiss either.
->> I understand you like adding such comments; I, however, at least
->> sometimes (e.g.) don't. Especially without at least outlining what
->> would need doing. Just saying "this is all mad" doesn't really help
->> very much.
-> 
-> I was being somewhat flippant.  But a /* TODO, try and make this a
-> presmp_initcall() to improve alloc_trace_bufs() */ would be fine.
+Defining functions allows to use them from common code, by not depending
+on TARGET_BIG_ENDIAN.
+Remove previous macros from exec/cpu-all.h.
+By moving them out of cpu-all.h, we'll be able to break dependency on
+cpu.h for memory related functions coming in next commits.
 
-Okay, added (to the existing comment).
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ include/exec/cpu-all.h | 25 ---------------
+ include/exec/tswap.h   | 70 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 70 insertions(+), 25 deletions(-)
 
-Jan
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index 8cd6c00cf89..e56c064d46f 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -38,31 +38,6 @@
+ #define BSWAP_NEEDED
+ #endif
+ 
+-/* Target-endianness CPU memory access functions. These fit into the
+- * {ld,st}{type}{sign}{size}{endian}_p naming scheme described in bswap.h.
+- */
+-#if TARGET_BIG_ENDIAN
+-#define lduw_p(p) lduw_be_p(p)
+-#define ldsw_p(p) ldsw_be_p(p)
+-#define ldl_p(p) ldl_be_p(p)
+-#define ldq_p(p) ldq_be_p(p)
+-#define stw_p(p, v) stw_be_p(p, v)
+-#define stl_p(p, v) stl_be_p(p, v)
+-#define stq_p(p, v) stq_be_p(p, v)
+-#define ldn_p(p, sz) ldn_be_p(p, sz)
+-#define stn_p(p, sz, v) stn_be_p(p, sz, v)
+-#else
+-#define lduw_p(p) lduw_le_p(p)
+-#define ldsw_p(p) ldsw_le_p(p)
+-#define ldl_p(p) ldl_le_p(p)
+-#define ldq_p(p) ldq_le_p(p)
+-#define stw_p(p, v) stw_le_p(p, v)
+-#define stl_p(p, v) stl_le_p(p, v)
+-#define stq_p(p, v) stq_le_p(p, v)
+-#define ldn_p(p, sz) ldn_le_p(p, sz)
+-#define stn_p(p, sz, v) stn_le_p(p, sz, v)
+-#endif
+-
+ /* MMU memory access macros */
+ 
+ #if !defined(CONFIG_USER_ONLY)
+diff --git a/include/exec/tswap.h b/include/exec/tswap.h
+index 2683da0adb7..84060a49994 100644
+--- a/include/exec/tswap.h
++++ b/include/exec/tswap.h
+@@ -80,4 +80,74 @@ static inline void tswap64s(uint64_t *s)
+     }
+ }
+ 
++/* Return ld{word}_{le,be}_p following target endianness. */
++#define LOAD_IMPL(word, args...)                    \
++do {                                                \
++    if (target_words_bigendian()) {                 \
++        return glue(glue(ld, word), _be_p)(args);   \
++    } else {                                        \
++        return glue(glue(ld, word), _le_p)(args);   \
++    }                                               \
++} while (0)
++
++static inline int lduw_p(const void *ptr)
++{
++    LOAD_IMPL(uw, ptr);
++}
++
++static inline int ldsw_p(const void *ptr)
++{
++    LOAD_IMPL(sw, ptr);
++}
++
++static inline int ldl_p(const void *ptr)
++{
++    LOAD_IMPL(l, ptr);
++}
++
++static inline uint64_t ldq_p(const void *ptr)
++{
++    LOAD_IMPL(q, ptr);
++}
++
++static inline uint64_t ldn_p(const void *ptr, int sz)
++{
++    LOAD_IMPL(n, ptr, sz);
++}
++
++#undef LOAD_IMPL
++
++/* Call st{word}_{le,be}_p following target endianness. */
++#define STORE_IMPL(word, args...)           \
++do {                                        \
++    if (target_words_bigendian()) {         \
++        glue(glue(st, word), _be_p)(args);  \
++    } else {                                \
++        glue(glue(st, word), _le_p)(args);  \
++    }                                       \
++} while (0)
++
++
++static inline void stw_p(void *ptr, uint16_t v)
++{
++    STORE_IMPL(w, ptr, v);
++}
++
++static inline void stl_p(void *ptr, uint32_t v)
++{
++    STORE_IMPL(l, ptr, v);
++}
++
++static inline void stq_p(void *ptr, uint64_t v)
++{
++    STORE_IMPL(q, ptr, v);
++}
++
++static inline void stn_p(void *ptr, int sz, uint64_t v)
++{
++    STORE_IMPL(n, ptr, sz, v);
++}
++
++#undef STORE_IMPL
++
+ #endif  /* TSWAP_H */
+-- 
+2.39.5
+
 
