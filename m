@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6802CC282DE
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 15:27:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.912480.1318723 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F0BC282EC
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 15:30:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.912491.1318732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tskSp-0004U0-DM; Thu, 13 Mar 2025 15:27:15 +0000
+	id 1tskWB-000639-Py; Thu, 13 Mar 2025 15:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 912480.1318723; Thu, 13 Mar 2025 15:27:15 +0000
+Received: by outflank-mailman (output) from mailman id 912491.1318732; Thu, 13 Mar 2025 15:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tskSp-0004Tt-98; Thu, 13 Mar 2025 15:27:15 +0000
-Received: by outflank-mailman (input) for mailman id 912480;
- Thu, 13 Mar 2025 15:27:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7Xn0=WA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tskSn-0004Tn-V2
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 15:27:13 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a27a1242-001f-11f0-9898-31a8f345e629;
- Thu, 13 Mar 2025 16:27:12 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso7512925e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 08:27:12 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0a8c5cbfsm56258725e9.30.2025.03.13.08.27.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Mar 2025 08:27:10 -0700 (PDT)
+	id 1tskWB-000632-NQ; Thu, 13 Mar 2025 15:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 912491;
+ Thu, 13 Mar 2025 15:30:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4VEl=WA=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1tskWB-00062w-1L
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 15:30:43 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20605.outbound.protection.outlook.com
+ [2a01:111:f403:2418::605])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1f0608b0-0020-11f0-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 16:30:41 +0100 (CET)
+Received: from MN2PR01CA0045.prod.exchangelabs.com (2603:10b6:208:23f::14) by
+ CY8PR12MB7489.namprd12.prod.outlook.com (2603:10b6:930:90::11) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8534.28; Thu, 13 Mar 2025 15:30:31 +0000
+Received: from BN1PEPF00006003.namprd05.prod.outlook.com
+ (2603:10b6:208:23f:cafe::6c) by MN2PR01CA0045.outlook.office365.com
+ (2603:10b6:208:23f::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.25 via Frontend Transport; Thu,
+ 13 Mar 2025 15:30:31 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8534.20 via Frontend Transport; Thu, 13 Mar 2025 15:30:31 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 13 Mar
+ 2025 10:30:30 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 13 Mar
+ 2025 10:30:30 -0500
+Received: from [172.19.213.155] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Thu, 13 Mar 2025 10:30:29 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +65,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a27a1242-001f-11f0-9898-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1741879631; x=1742484431; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=alBDaBhSc5c+ErX7HU9SuN15fStMCIq+BlkRU6K+X5Y=;
-        b=TrBzCHIh/Cp4/V/WWk8pk+/4BXgN9QuRCMBY3PotltRUo0qoZyyzbPrmRVoQG8J2WH
-         drCsDyWh/j621thh1t/BGH/cmRzacMLnry3Q19IRkGUwPoEiZQTm9rRpFrc+VJX3lQuR
-         cQbhb3cKKfE1ANHlx8ZCersezHERdxx4M7B/7hYV4x20qrDQztyDpXTX4bgo3lj9OYnh
-         bl9pV3EYoxLlbUO2HrUl4nwina6fxyI0G6n1UNiTwDQLLI8JdlPKrDHQ/RYhB1oXQYgO
-         dG+fx0McoMLvONRmlabGPZyd+yPwS23iL66odXmp22R7lDM2cDjCzxOu2k5kWnLIOJRd
-         Bfxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741879631; x=1742484431;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=alBDaBhSc5c+ErX7HU9SuN15fStMCIq+BlkRU6K+X5Y=;
-        b=OaoaZ1RTthE3z9UkjXpnufhRDQoHtSNpVSPBwJK3EADGocC7qmgJ2ROwkSSxygy8Qe
-         oQoR+NsPQN+vMHRvvOEBfaw5EcRW+ucIuvYQJKYEafgHTkn6aVfF25r2C0IpIbqi/FVl
-         U8dVFO3GHf8PRFZnIK/5zLY/M2t/81oe1cj8C8qw7QuvqFAm5NoR1MRGbekgmq8KImKy
-         l9tS6a7bd/Oteru8KtMxOcu6yCje6rq/+p7XoT9I8/WHVpplkfs7DtK7RXS81bhBYCt0
-         cY9JC696lH1X9/j9RQpRuT0ThHDj+nExRnLB5D9valCwU6oR6IJC698yL0mBu6qU3c/M
-         uEUg==
-X-Forwarded-Encrypted: i=1; AJvYcCUo4Ovt7K+qSGPc90Geg/it3wW6sbVf60jVLbUNPd0krF0Nvn6u9AV01W+NbHa4oWc95Ohjp42AGk4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzCVBcDfKiI46LXiVekZrLezqVQooLJg7fs81uB7gLVaXgKlQyq
-	EX55pmylZW+KCendc9UYIyEKVSBYIl1ILi6GGAn80l5xsf7a0+sY2XQSqtGSMg==
-X-Gm-Gg: ASbGncvQ3uI7+qbb3lqteS9SByr9IMpstVcNsRjGOS2Nt3rl9PE41TI3lOaRJ1vP4Rq
-	DtfY8RcgWVjwCCai5saXdCWaKC6s5execON0dcuK5Stzm2WfNg6C1n88s7NHI6/IT8A3NIY1V67
-	TPhKO4lbUDCqtx82uTALIBpuw871+IAjgjc5kjPCrqbg8U16su7jTLaKRa/77UdMMOmyP6KoPTE
-	IYdjAf1jG8SGvZU1GoSMHdRX+GdpAnNyyzuNnGMBNVg7bnJITjRjT+f3aUdFU/hVlM2JIHXqvzr
-	oSKXoXNx189sYsYaOjXxE9FuDQR9a/C0W4Mq9UFYUccKrkIJvSzhQ+GOaGKjcLyj5NDWqSTxn2E
-	JmXiJHcDQ2kStu5Hzd+0sR8HXDufujA==
-X-Google-Smtp-Source: AGHT+IGmVR/TOUzIToShXO3FgHWt/dMtni1Ow7ibAk/O4+8qKajuB70IkZVHEqGGzP4DAiOOJSO7/Q==
-X-Received: by 2002:a05:600c:1c8f:b0:43c:ec28:d301 with SMTP id 5b1f17b1804b1-43d1d8eb09cmr380555e9.26.1741879631321;
-        Thu, 13 Mar 2025 08:27:11 -0700 (PDT)
-Message-ID: <ddbf31ae-5877-4df2-a6c7-8b0251ce2b01@suse.com>
-Date: Thu, 13 Mar 2025 16:27:09 +0100
+X-Inumbo-ID: 1f0608b0-0020-11f0-9ab9-95dc52dad729
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RNiQo8CZqrC9wTJ3W2T43kbm28oqHbZV/suLoKfv5ZUoYYRb0hx7Qb/3Ahufv1xSDeyFONsCWphNfaV3r7WMGTHG8UO9TssknMaVR23droqCh+C2Gac0NMmoiH+tVvGhPrYQ1nfmdmdwwAddlw/e7SiuvfrnnLvhMVzRui1pZXUNrTNRgi5IuR8mD+Gtnuuzg2XgRRFxZeYwxbvOHe/clyQe46gAlKevToc9NLkl0HnktxEejSDo75RPBzelf+kwQaYYVmluuYvnTJFopnKe96WLpfZvLGHxtFx+Dxdh9q0yj5n9xQAuObqNxXgJJ6c20A6C6gx7+EEVtaGVjUnV6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ParMocr6+498F722CTkMfikeu39QUp8mT/Hj60qfjoQ=;
+ b=DWByrKFBBARzoQPQnejklE4mQQSYDQKpsaFuoClQe1RT1U+xXgbDTHyB35CA5GZCZAkSEWUqHA+LjmrZeJN6xQck/WHC8CjIUv8XTFVPL6mDPiqxNG5iN3YunFVM6l2MKAKesCo55C0gXtxxf8S+qcjjGdC5Nnkq/WpsVsxLPLY4jv8fB3DnI37wSVzI1NEDgzAqfKXK2GQBe47oxdMJad0uoetZ9s8yxvDujdfmfFJTGpwnDakR2/H8qY6sB76LCQIKopgiuwfrL3fGahAQU88Lado40WpXCopyh0h3sVNrnzjFqI4+g1jJWzC+iLJ+fesn33XrEuKUfSUqDHz3Gw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ParMocr6+498F722CTkMfikeu39QUp8mT/Hj60qfjoQ=;
+ b=niP1q6YzmtGMYxSBwatJBkXov866eMpKT4nZ7ateZ7jIZnbljXlxUB/eO0lMoyX2DfRuK4eyXZMRasCRXDKQBee57ZGGHejVveKcpzaPlzzEgr/20Jkn0u6lCGhbo11b5DmaEJIxIKCzuzsOGlNWXcZithGewQtYS2TQKtmfh0Y=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <1d3ac61a-1acf-46b3-91bc-1dcb8bab1559@amd.com>
+Date: Thu, 13 Mar 2025 11:30:28 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/16] xen/arm: introduce a separate struct for watchdog
- timers
-To: Mykola Kvach <xakep.amatop@gmail.com>
-Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
- George Dunlap <gwd@xenproject.org>, Mykyta Poturai
- <mykyta_poturai@epam.com>, Mykola Kvach <mykola_kvach@epam.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1741164138.git.xakep.amatop@gmail.com>
- <18a8a86ca0c1b884278d635fb18b3b53e062f10e.1741164138.git.xakep.amatop@gmail.com>
+Subject: Re: [RFC PATCH] xen/amd-iommu: Add interrupt remapping quirk for
+ ath11k
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Xenia
+ Ragiadakou" <xenia.ragiadakou@amd.com>
+References: <20250226211125.43625-1-jason.andryuk@amd.com>
+ <Z8A9LYjgr92IignP@macbook.local>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <18a8a86ca0c1b884278d635fb18b3b53e062f10e.1741164138.git.xakep.amatop@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <Z8A9LYjgr92IignP@macbook.local>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|CY8PR12MB7489:EE_
+X-MS-Office365-Filtering-Correlation-Id: 40f32691-bd9a-4df1-fb21-08dd6243fd92
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?aUgrSy9rLzZJMEhZa0NvL0FEcjRTbVkvL1JzTkpuaU1jc0cxQmlNZmVUaXF1?=
+ =?utf-8?B?ZktOY0F3VWMreGhIWlFDbzRRT0lnR1hOUGdld2M5SWFFNFg4K3AwbnhWU1Nq?=
+ =?utf-8?B?MHR4ZFhjU1V0ZzB4WkxvMU5iQTdqWGRaMkpjcnZjZGh5T2E4Wk9QMExQbDhF?=
+ =?utf-8?B?bzlPSmoxRTh2VGdvU0t4bnQvNGo4cXp6M01NMFhoczBhQ2pqOXFjQkkwVDh5?=
+ =?utf-8?B?YkE5ZWNiZlRPZGhpaTI2RmtWMmhWcERVYmRQLzM0eEwrQkk1Szg0U25WOHl2?=
+ =?utf-8?B?am12WFVZZVg2VjB1TTBGaFg4TFBLT0Z2VDloMC9rRkoyYmx4MXA4VDBTWUNM?=
+ =?utf-8?B?L2JJOXJEZExyY0RCY3pQQ1RlOHpIVTJuSmJQNW42ZzZkZlgvc3JKeTdoajFW?=
+ =?utf-8?B?WGpGMW9tbGtHVFFIa3BDVmtrd3BpREVlemd3WTRGTzJYWFVDanhNeDVqRzk1?=
+ =?utf-8?B?aVZTbGFsbGFKM1hpME9ZMmJtcmQ0cFRhVVBWN3hXSEhLVGE2UnloTExQVVFs?=
+ =?utf-8?B?R2dlKzEvYU9ENUsxTFE3QXpLQTdtdHpIV1FsZGdvemhkc0xqZFova1E5djNJ?=
+ =?utf-8?B?SWVwR205Wk9vNGZiWGlMRHcyTHlXMHN4d2Y1TzZPeVN0M25lU0poZ0tTYk9L?=
+ =?utf-8?B?TkQyMk1VTHhqd3RuRDJvZXV5dk81UXlNdXgzTE9DU1A0SUFqQlFUTVNtL2F0?=
+ =?utf-8?B?ZXZuNks2ZEZRV2djalJmWXNyQVkvWDJvenphQUNLOUFkSStHa2xBOFNHMWU3?=
+ =?utf-8?B?WnFRV1o3RUZKVjNUdVBaS0JLSjd6Z0NVeEllN2hJRzlacFJYL0ZJQTkwMVl2?=
+ =?utf-8?B?VFp6Y2NpRTk1YzFIZ1pyWFljcHlWMFU4QzIwL2tTY3pxQ2d0SUplZzNkaHY2?=
+ =?utf-8?B?NG94VVRHQm1ObkFodjVsRmNYSGs4elpDVGxnanBJODJ0N2dESll6ZjZlOUp5?=
+ =?utf-8?B?ODZ4UHdmVnhmU3piQklyV2liaXBVUS9wWG1rVjR0RTdTTWQ2YW9TbUJsa3Nk?=
+ =?utf-8?B?TE1wUjNqc2FGV1RIVTB5NFdXa2tZTjFNMGJOTzBpNVZEUG1STmRLUnU5Wngw?=
+ =?utf-8?B?RUR5YmtRWG5ydnBRU0Vsa3pvOTJBemluQTJDbXd5ZEhPQXlPNDhlYXZERGxM?=
+ =?utf-8?B?SFVkemVwOXRIVmd2OW9uU0F2ejIrS2Q1UU8yRSs3QzVJNHhHdklPLys5bStl?=
+ =?utf-8?B?UDF3TVJYci9UbUk3bUw1YUJ3SmNQaEMrZm5aUFZERmFSam5Qa0Vuc1NJQzcv?=
+ =?utf-8?B?b2tUR0VVUFZ6OTZIcXRoZHpPVzRtZ0VvcURnWVJYVFFocElvcHoydm9YNGdV?=
+ =?utf-8?B?TTVrZXhiL3E3WWZBUmtDaEpuNnk3eiszRzBXYUg4eTY2RFZBZ1FpR3RnbVo4?=
+ =?utf-8?B?S2hjdmh2S2xVLzZwR0RJWS9YemwyNkVVUkN1dzFnS0NlMHhmRmpYTDVGR3ZT?=
+ =?utf-8?B?aWtYL09QRnd6YXZXRG54Wjk4WThUdmRXR2F4ZVJtUjBjcWIxQmRoTjl5WWpP?=
+ =?utf-8?B?Ukp6RGJOd2h3a1NpaERyaU9RcSsyTTFNS0RSbkpPd3k2NXVyZDVNZEhjTDhs?=
+ =?utf-8?B?MnZFZHZ2cE9xL3dwdW02amJ6ZUlmMnBmMlpldzE5a0Mxa1lpUDNkOXpqWHVL?=
+ =?utf-8?B?S2VjRThpYjJNUGxyd3BIWTcxNGpGR2JOL3laSmsvenFlSGU2amplNHRGYTRT?=
+ =?utf-8?B?V3ZCc2NLa1BMdENxSmluMkpNT1pUMFhDNHFMRStuTjJsK3QxNmpwSGNjSURQ?=
+ =?utf-8?B?enNjdGM0dVFzSjVnK0QyelhUWEtjYXhMa29qVW1nbTYrOWhCTEdSRG1VTUJV?=
+ =?utf-8?B?UmdDQk1NSmprcnVDek9aM2hBeWJhbGh3Y2NYaElGb252OWJPOXFHNWdkWG03?=
+ =?utf-8?B?a2lZUHByT29qbGl1MDFpYkIzc1lJRDlHbFRlWkNaWGh4cEJ6cE5JMDM1aTBw?=
+ =?utf-8?B?Z210SURGNHVuR3IrdTU2NlViTitSZnU2UG1BWFlMcEROMmQzMkRyd2N0d2F3?=
+ =?utf-8?B?YURqU29NYWVnPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2025 15:30:31.2765
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40f32691-bd9a-4df1-fb21-08dd6243fd92
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00006003.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7489
 
-On 05.03.2025 10:11, Mykola Kvach wrote:
-> From: Mirela Simonovic <mirela.simonovic@aggios.com>
+On 2025-02-27 05:23, Roger Pau Monné wrote:
+> On Wed, Feb 26, 2025 at 04:11:25PM -0500, Jason Andryuk wrote:
+>>
+>> The ath11k device supports and tries to enable 32 MSIs.  Linux in PVH
+>> dom0 and HVM domU fails enabling 32 and falls back to just 1, so that is
+>> all that has been tested.
 > 
-> Introduce a separate struct for watchdog timers. It is needed to properly
-> implement the suspend/resume actions for the watchdog timers. To be able
-> to restart watchdog timer after suspend we need to remember their
-> frequency somewhere. To not bloat the struct timer a new struct
-> watchdog_timer is introduced, containing the original timer and the last
-> set timeout.
-> 
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> DYK why it fails to enable 32?
 
-A From: with no corresponding S-o-b: is potentially problematic. You also
-can't simply add one with her agreement, though.
+In Linux msi_capability_init()
 
-> ---
-> This commit was introduced in patch series V2.
+         /* Reject multi-MSI early on irq domain enabled architectures */
+         if (nvec > 1 && !pci_msi_domain_supports(dev, 
+MSI_FLAG_MULTI_PCI_MSI, ALLOW_LEGACY))
+                 return 1;
 
-Yet, btw, the whole series isn't tagged with a version.
+MSI_FLAG_MULTI_PCI_MSI is only set for AMD and Intel interrupt 
+remapping, and Xen PVH and HVM don't have either of those.  They are 
+using "VECTOR", so this check fails.
 
-> --- a/xen/common/keyhandler.c
-> +++ b/xen/common/keyhandler.c
-> @@ -305,7 +305,7 @@ static void cf_check dump_domains(unsigned char key)
->          for ( i = 0 ; i < NR_DOMAIN_WATCHDOG_TIMERS; i++ )
->              if ( test_bit(i, &d->watchdog_inuse_map) )
->                  printk("    watchdog %d expires in %d seconds\n",
-> -                       i, (u32)((d->watchdog_timer[i].expires - NOW()) >> 30));
-> +                       i, (u32)((d->watchdog_timer[i].timer.expires - NOW()) >> 30));
-
-I realize you mean to just do a mechanical replacement here, yet the use of
-u32 is not only against our style (should be uint32_t then), but it's also
-not clear to me that this subtraction can't ever yield a negative result.
-Hence the use of %d looks more correct to me than the cast to an unsigned
-type.
-
-In any event the already long line now grows too long and hence needs
-wrapping.
-
-> @@ -569,7 +570,7 @@ struct domain
->  #define NR_DOMAIN_WATCHDOG_TIMERS 2
->      spinlock_t watchdog_lock;
->      uint32_t watchdog_inuse_map;
-> -    struct timer watchdog_timer[NR_DOMAIN_WATCHDOG_TIMERS];
-> +    struct watchdog_timer watchdog_timer[NR_DOMAIN_WATCHDOG_TIMERS];
-
-An alternative would be to have a separate array for the timeout values.
-This would also save some space, seeing that on 64-bit arches you
-introduce 32 bits of tail padding in the struct.
-
-If we go the struct watchdog_timer route, may I at least suggest to rename
-the field to just "watchdog", so things like &d->watchdog_timer[i].timer
-don't say "timer" twice?
-
-> --- a/xen/include/xen/watchdog.h
-> +++ b/xen/include/xen/watchdog.h
-> @@ -8,6 +8,12 @@
->  #define __XEN_WATCHDOG_H__
->  
->  #include <xen/types.h>
-> +#include <xen/timer.h>
-> +
-> +struct watchdog_timer {
-> +    struct timer timer;
-> +    uint32_t timeout;
-
-This wants a brief comment mentioning the granularity.
-
-Jan
+Regards,
+Jason
 
