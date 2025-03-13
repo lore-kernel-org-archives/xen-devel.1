@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E054CC282DE
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 16:40:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.912952.1319162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEFB7C282DE
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 16:41:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.912968.1319173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tslbp-0007Hf-TJ; Thu, 13 Mar 2025 16:40:37 +0000
+	id 1tslc9-0008Jr-5R; Thu, 13 Mar 2025 16:40:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 912952.1319162; Thu, 13 Mar 2025 16:40:37 +0000
+Received: by outflank-mailman (output) from mailman id 912968.1319173; Thu, 13 Mar 2025 16:40:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tslbp-0007HY-QH; Thu, 13 Mar 2025 16:40:37 +0000
-Received: by outflank-mailman (input) for mailman id 912952;
- Thu, 13 Mar 2025 16:40:37 +0000
+	id 1tslc9-0008Jk-1x; Thu, 13 Mar 2025 16:40:57 +0000
+Received: by outflank-mailman (input) for mailman id 912968;
+ Thu, 13 Mar 2025 16:40:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UNRr=WA=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1tslap-0000Wy-Pp
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 16:39:35 +0000
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [2607:f8b0:4864:20::102f])
+ id 1tslaf-0000Wy-NO
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 16:39:25 +0000
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [2607:f8b0:4864:20::634])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bc73c532-0029-11f0-9ab9-95dc52dad729;
- Thu, 13 Mar 2025 17:39:31 +0100 (CET)
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2ff6cf448b8so2680806a91.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 09:39:31 -0700 (PDT)
+ id b854ee65-0029-11f0-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 17:39:24 +0100 (CET)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2254e0b4b79so33218475ad.2
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 09:39:24 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30119265938sm4020084a91.39.2025.03.13.09.39.28
+ 98e67ed59e1d1-30119265938sm4020084a91.39.2025.03.13.09.39.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 09:39:29 -0700 (PDT)
+ Thu, 13 Mar 2025 09:39:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc73c532-0029-11f0-9ab9-95dc52dad729
+X-Inumbo-ID: b854ee65-0029-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1741883970; x=1742488770; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1741883963; x=1742488763; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
-        b=xlbH1Yhq02FPeTsM5C0Lq7XD3XZ61XmRDMPhzJsKLdXg6acKnQB4WYrkEO+QAPT1h7
-         gJm+UI3kHUbhCtuC/GC7vq3rt8ivYxCJtZmmbArxwAf0hXV8p74ksYukuheboI8eGPvK
-         7HSEbWsHiba/SX17rfhGJb5XhriS2b/irwi6WaRikLXaSV2s60euflfLbKzL/ILORmUN
-         jFILBkZuZ5oHKYdR3ZyI5IP9sXMnKsIh5rKtxCFcg5KjcXAD6zTIDLSszZAk8TZJglu8
-         1w07HPAQqQTjdFpbTzw8itvsScZouSnwK2qp1f+2L53oidmx8AhJ3AMQXH+ZnUE+2XhW
-         t0pw==
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=Pm7oW0p9MOxprCME69CgtVTfDnw4FA8rQ/HTzhFn3XMxplPt/BDl6nVjtA1jrNzu5p
+         1+5BXXgm9lAnSx16vtPJAGcCllfZTd+jU/Et/fYeG+r4/MA9f4Nx43e79Vu6hDhKEi74
+         Rvc4DKUSaNIos86Zi6JlKOfbGjtC/SZqQz8zRK4LMbCTSoffqfwQx9bBHjq8oaFiD+Yj
+         pZvUC3ctXseoSasoObzJwDG5viI9ivSjDKJGDgfq1tnoWjRg1KLxgfU2xi8RXhdjf5cP
+         ICqR6C/7rEXqgD4t4Ye0mmA78998kt4dP7eO3R1ogZFWqrDEVv3KZzk6tNUX208eJqvw
+         /09w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741883970; x=1742488770;
+        d=1e100.net; s=20230601; t=1741883963; x=1742488763;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
-        b=EGAmGMYYyLajicQh4gmYks4eRdiGHEZWJVQgEs048NAgcTOd0zggKZlEBWSZ9dJdxf
-         ZJf7HuheDa+vW9XVJuiUg2o5x+hzI/mdUNODs5xVMSsn3c8FAZrZmyqD8nlV2XpmmZI6
-         OA68eqOUEvRBS6SgOD5LW6UachTLUNsZ6GUyCaTQZg7w50f4VLjH4rCWqv6Z9kvJmsHZ
-         4B3KHfuG53gQY3K3cHUsLws6F8SI7SqqQ9WuflWEeqBz292QI1fb+UNog/MBSl3XZs2f
-         MngNAJatnzJgt+jPjJYPbcIATXvlGyzkByGbvCLuoijFzHsFUoQRYb+EQJ6b2uUjmFbP
-         uH0Q==
-X-Forwarded-Encrypted: i=1; AJvYcCW8Nu0rh6UTVm7jap8nOsds0EvtqtmPqpstgH/o+j/a2LssvC87bvkJKbZR8mhBhXAjKa/rGjWQwOw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyrjNsBhoCOeUaIDO+eK7MBgkQIila+qcjAIEl0KreHWrtVIZ0D
-	gTt8+SUws4fa1rMPwJIFXnf+sfjjifYPjJs52kg8bNnAK514cQo9dXgTe9E0JMA=
-X-Gm-Gg: ASbGncus0OrevZz6D98efq8DUKWUUDsNmNSmCCnFhH7PWr6gdrZN7hcisEWcTSK1I4O
-	ccV97aFgfFib8BVO15BzWf28OQInOIf4TdWumK97wEVM+Lh/K2sWz/loPgjvXgVCcocZli9LfrH
-	Ap18GZJhB/HXz4ttMDo8Uv1tFsSStiDypStjFlSinsv47Bl1RGW+0Ox9jhrWhFYjHWtBzA1pgjH
-	cIVDifynKtizlcuOYMCZX+G8+QmbazA5Iatp39lZCnAp/1DXuvhGKP1kxjNLia/NQfujtn13ILA
-	Jj3jOq+B4CKzKelqZdrKRiI8eblBuzyxGEcNap9/7O48
-X-Google-Smtp-Source: AGHT+IHRyNfs/2JPL1rq+dZtoKg0Gk6ovyIhkaylwgSPQTAI/HYpqKgruBLvp53+c1fVanolW+jjbw==
-X-Received: by 2002:a17:90b:51d1:b0:2fe:a614:5cf7 with SMTP id 98e67ed59e1d1-3014e815c62mr251908a91.3.1741883969872;
-        Thu, 13 Mar 2025 09:39:29 -0700 (PDT)
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=veWgchPav7V57eti4aRmeK18rg4Oxh5lDg/xsTruD5INQ8poOpz9StxOUamfAY3xtp
+         QVCBztGYBH3ZiXSI9ZObOyz5oZJ82tCbTU1YIEXPSTR939dBaR1irjAU0F1Vb9Dwaxn6
+         AjPOE9DTq5AD1UkMBFAuhFM4ZVHh5HBV8tDfp4XnOIg2ysSv8Ic94do731ACtj9sRPay
+         xb+SepH7ymXKnklsv39GeVj32DO27styObFZhHuMI7JvR7upS8zWZg20ikRVeMRAjsc3
+         doHS7Qxivvmunka++MlujwFBEDacWG771uP1w6Gl0F69jhU36fsRYA7afMkonQXRN3Ao
+         evYA==
+X-Forwarded-Encrypted: i=1; AJvYcCXUrtK2geJw/8zfxqBHJMQ9yXo0yPXC9m2h+Kau3PeRkFA7Dxa/+7PW94bLow/wD5lgCdw1qIbeBGo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxOKcfsxDX7cYhPY88Gr4pxsAfkplhJ3SX0Mr8F2yNSn7TzrWZu
+	8it7XiBIr28zSvZrgtUYow+w4QXwxKWdB9a42459DZzVpejXo8T9pna9R28sVzk=
+X-Gm-Gg: ASbGncs7udeE79uDRTMU01zbtrlfKhz1BqVikAwwrdQTzCb3DeijLW4vq6o+YqAEaM8
+	HUss3b2xqPQ7wAnXEQCZByxMXF3emrdiDkAgIcO9O64qo6mrpz3whRz5Uvxfbc2xM9Z+AP1VyWV
+	mgMAz6qXzP+eGhxbWNRYNqkQd0jVtRdkFNFZrG+uJHchC4bjQBqgUXwkeYes8H0UYczzYnbV0u7
+	VRKduUpf+7bL5VB4YZRjYVvKgHZnsrq5e6LKFptUVQAyuafSQiqBYyo8iA51SfC9eD+1gvgCWXB
+	gD1cc/pd3+2CP8N5pYTuhtLaYaQb41XH/lFBuDMW26AyhPLm5ox1AX4=
+X-Google-Smtp-Source: AGHT+IFA5iTR0M+uWE9BgHbKNSK5QhTOV/p9oDq/Jx41glVxwyMkriyoe5Nv+AlfRyMJQR/e/whMeQ==
+X-Received: by 2002:a17:902:d4c8:b0:224:1074:638e with SMTP id d9443c01a7336-225dd8ec5f6mr2405345ad.52.1741883962943;
+        Thu, 13 Mar 2025 09:39:22 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>,
@@ -108,91 +108,43 @@ Cc: Paul Durrant <paul@xen.org>,
 	Daniel Henrique Barboza <danielhb413@gmail.com>,
 	Nicholas Piggin <npiggin@gmail.com>,
 	Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v4 16/17] system/memory: make compilation unit common
-Date: Thu, 13 Mar 2025 09:39:02 -0700
-Message-Id: <20250313163903.1738581-17-pierrick.bouvier@linaro.org>
+Subject: [PATCH v4 10/17] system/kvm: make kvm_flush_coalesced_mmio_buffer() accessible for common code
+Date: Thu, 13 Mar 2025 09:38:56 -0700
+Message-Id: <20250313163903.1738581-11-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
 References: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+This function is used by system/physmem.c will be turn into common code
+in next commit.
+
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- system/memory.c    | 17 +++++------------
- system/meson.build |  2 +-
- 2 files changed, 6 insertions(+), 13 deletions(-)
+ include/system/kvm.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/system/memory.c b/system/memory.c
-index 4c829793a0a..eddd21a6cdb 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -353,15 +353,6 @@ static void flatview_simplify(FlatView *view)
-     }
- }
+diff --git a/include/system/kvm.h b/include/system/kvm.h
+index ab17c09a551..21da3b8b052 100644
+--- a/include/system/kvm.h
++++ b/include/system/kvm.h
+@@ -210,11 +210,11 @@ bool kvm_arm_supports_user_irq(void);
+ int kvm_on_sigbus_vcpu(CPUState *cpu, int code, void *addr);
+ int kvm_on_sigbus(int code, void *addr);
  
--static bool memory_region_big_endian(MemoryRegion *mr)
--{
--#if TARGET_BIG_ENDIAN
--    return mr->ops->endianness != DEVICE_LITTLE_ENDIAN;
--#else
--    return mr->ops->endianness == DEVICE_BIG_ENDIAN;
--#endif
--}
+-#ifdef COMPILING_PER_TARGET
+-#include "cpu.h"
 -
- static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
- {
-     if ((op & MO_BSWAP) != devend_memop(mr->ops->endianness)) {
-@@ -563,7 +554,7 @@ static MemTxResult access_with_adjusted_size(hwaddr addr,
-     /* FIXME: support unaligned access? */
-     access_size = MAX(MIN(size, access_size_max), access_size_min);
-     access_mask = MAKE_64BIT_MASK(0, access_size * 8);
--    if (memory_region_big_endian(mr)) {
-+    if (devend_big_endian(mr->ops->endianness)) {
-         for (i = 0; i < size; i += access_size) {
-             r |= access_fn(mr, addr + i, value, access_size,
-                         (size - access_size - i) * 8, access_mask, attrs);
-@@ -2584,7 +2575,8 @@ void memory_region_add_eventfd(MemoryRegion *mr,
-     unsigned i;
+ void kvm_flush_coalesced_mmio_buffer(void);
  
-     if (size) {
--        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
-+        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
-+        adjust_endianness(mr, &mrfd.data, mop);
-     }
-     memory_region_transaction_begin();
-     for (i = 0; i < mr->ioeventfd_nb; ++i) {
-@@ -2619,7 +2611,8 @@ void memory_region_del_eventfd(MemoryRegion *mr,
-     unsigned i;
- 
-     if (size) {
--        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
-+        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
-+        adjust_endianness(mr, &mrfd.data, mop);
-     }
-     memory_region_transaction_begin();
-     for (i = 0; i < mr->ioeventfd_nb; ++i) {
-diff --git a/system/meson.build b/system/meson.build
-index bd82ef132e7..4f44b78df31 100644
---- a/system/meson.build
-+++ b/system/meson.build
-@@ -2,7 +2,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
-   'arch_init.c',
-   'ioport.c',
-   'globals-target.c',
--  'memory.c',
- )])
- 
- system_ss.add(files(
-@@ -15,6 +14,7 @@ system_ss.add(files(
-   'dma-helpers.c',
-   'globals.c',
-   'memory_mapping.c',
-+  'memory.c',
-   'physmem.c',
-   'qdev-monitor.c',
-   'qtest.c',
++#ifdef COMPILING_PER_TARGET
++#include "cpu.h"
++
+ /**
+  * kvm_update_guest_debug(): ensure KVM debug structures updated
+  * @cs: the CPUState for this cpu
 -- 
 2.39.5
 
