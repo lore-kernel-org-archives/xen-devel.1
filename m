@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693C0C282EC
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 15:32:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.912506.1318753 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4B89C282EC
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Mar 2025 15:32:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.912509.1318773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tskXu-00087t-GA; Thu, 13 Mar 2025 15:32:30 +0000
+	id 1tskXz-0000DF-Vb; Thu, 13 Mar 2025 15:32:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 912506.1318753; Thu, 13 Mar 2025 15:32:30 +0000
+Received: by outflank-mailman (output) from mailman id 912509.1318773; Thu, 13 Mar 2025 15:32:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tskXu-00087m-CG; Thu, 13 Mar 2025 15:32:30 +0000
-Received: by outflank-mailman (input) for mailman id 912506;
- Thu, 13 Mar 2025 15:32:29 +0000
+	id 1tskXz-0000CR-Ro; Thu, 13 Mar 2025 15:32:35 +0000
+Received: by outflank-mailman (input) for mailman id 912509;
+ Thu, 13 Mar 2025 15:32:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=a3gq=WA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tskXt-0007tP-9d
- for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 15:32:29 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
+ id 1tskXx-0007tP-QN
+ for xen-devel@lists.xenproject.org; Thu, 13 Mar 2025 15:32:33 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5f55f0ef-0020-11f0-9ab9-95dc52dad729;
- Thu, 13 Mar 2025 16:32:28 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5dc89df7eccso1813155a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 08:32:28 -0700 (PDT)
+ id 61b9e35e-0020-11f0-9ab9-95dc52dad729;
+ Thu, 13 Mar 2025 16:32:32 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso1920581a12.3
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Mar 2025 08:32:32 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-5e8169b896csm843516a12.44.2025.03.13.08.32.27
+ 4fb4d7f45d1cf-5e81692e64asm825684a12.4.2025.03.13.08.32.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 08:32:27 -0700 (PDT)
+ Thu, 13 Mar 2025 08:32:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,39 +46,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f55f0ef-0020-11f0-9ab9-95dc52dad729
+X-Inumbo-ID: 61b9e35e-0020-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741879948; x=1742484748; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1741879951; x=1742484751; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vReGhqfBJ4uK8Q3JcoYxiqLwitDEZqAnuu3xoPEvPbI=;
-        b=q9FMDkoJEYR/KqH60ERIN8GNpQ0E7yUidjn1jPAEPWu7FMI2HTgfm+4HIvmKj1+ZiB
-         oSeLrppwgWQn+rQ2lM3uQzzrXBVVzbpy/yHcHsc9lI5nwERkaqJfGZKCFPzRiuHjbt4P
-         QaP0P4GUsD17lQgmLQO028ceRCDYY8632AuyM=
+        bh=tIV0lbRrLZFbQdSx0BrVvPIuenqWUkKeEWZTK4TAOBs=;
+        b=qNPNh6cilg4xvwrSXRfw/4wWiKbZySsu3sStveUIMMyHFrFoFGBTzF8uXa6Bo1/NPP
+         kRQIm+m+W+0nJE8Q9qBi9FxqLZrlSAnQsPw9gr49ZJ7tgzZL0lLiYAFtfcmaocXsTGhB
+         tktFoa5ZquA0BfF7QbvR05CrI0+f0PluJ9c3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741879948; x=1742484748;
+        d=1e100.net; s=20230601; t=1741879951; x=1742484751;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vReGhqfBJ4uK8Q3JcoYxiqLwitDEZqAnuu3xoPEvPbI=;
-        b=ZZerKUHWne9/Tc80/N1D8lVke5Vo0/ExnUlbIIme5Sb8Yl3e1ZlmGciS7olUs41ipb
-         AfySwLqEcS0d0wG7Ra+AAUtJCTxEj/iUYKMdXa4DP1QAfEzFIdCEb+XxJqK2Qf3jMegq
-         NwlGro8j0qWZgIobkFeigVCwqlKSMDE/izlpPMn7WU9uCg96mcwXb7NPxImzAY6iWAyq
-         ar9EYbYwQlfUx8nY2W8pIZzd8M5emOCOsarZwQanyi9fsVRPt4rJ1+dXL6IDtRwMVJOn
-         n2AI64QXYkHHDjpU5MGOHS8InvL+T89wpeCFurfhKV7Mh2ZVdFGq+AdcubGPWRGAMyY2
-         XlQg==
-X-Gm-Message-State: AOJu0YxsQNRbUvA5SML+Pt2uyGI6zSH4/8HO9ebwqpCKxfWGcuUkwh+T
-	JCUdbR7ssOdV1G5Pv1/gkir/u+nNORcf6UmmghJSTVzmANV+rpo6ehZkjBMsqUYe0WH/ERn/Lra
-	5
-X-Gm-Gg: ASbGncvDpm1Z7d8OxeDXRTDO8029hgvmi0XcM5yj1Ei4/dBDsmzhpRsojY/sSoNlGEG
-	KNsm9q8mSkhoaQok2vETehpMJUzyVVJg0eEo4JAytSEkUSJHsiuNvAEXBKnmMNcE1VXy8vjEony
-	RnS4xiLJG2iOSDS88eEGWTs3HZIh+v1c2OfpM+0MA6BoI8y7pG7ermKNfA5C+3DgQ0cIt5w4+kK
-	FjNIDC+gFeSfEfJU66nyBlLAuKU0BVDdz+KxuMvdOIPW4Rhrmfy9hakZbmO1eA4msJw1+34iahq
-	rS6p0U5PX+kpTjT4/U1YQhYk6My1rxPnz4uZsdOD6dK3kEa2Gg==
-X-Google-Smtp-Source: AGHT+IFbfEhj6MgxTlKULwwo1Wwd0a5nmj7+MHvWMfzojnaK99p1HyYC4BL4AwHBleG+iqcEYcl8SA==
-X-Received: by 2002:a05:6402:2550:b0:5e1:8604:9a2d with SMTP id 4fb4d7f45d1cf-5e5e229949amr31872827a12.4.1741879947944;
-        Thu, 13 Mar 2025 08:32:27 -0700 (PDT)
+        bh=tIV0lbRrLZFbQdSx0BrVvPIuenqWUkKeEWZTK4TAOBs=;
+        b=hzIi/C+KJ6DV4brZWidMb54q1+498KVChuy/XxFLoELWMiFN7BcwITApXkpQIFFqOU
+         MjagyabE5kjF7FtkpcoxK32FWkbzmN+8n0sbtsyaJc49pcJHGP9X7Ew9mwbu8V5bt/Qq
+         sVy1QA/whIDQJsAmPXeVVdwV1G433BZO5PFxw3MebGplNezvmZ43sxDym2GGdOxk4o+e
+         DYiTI6Fk+xUvs4rS0QNsZ9Xi5pgiRIPVrYnXD0b/6kuhX/00Is4gln7Z++c04XTodHC0
+         3izqFsgvT9y1gKZaJTVKJPx3Oy2p2M/291dW5V4hRlrcMTv8TJzJLI15cIAaSWgGPXOA
+         Mz+Q==
+X-Gm-Message-State: AOJu0YxwS1ile/xUzrK9Ez0lvrS2brCslQe7IbSoNkRLUbo2qNM+piVd
+	7WG35F/BXUwi6rlCTueUM6A45yyUKThI6RdQ9gJNmpUQlA0nQNUaicanCV6zvg3KNwIMvAimw3x
+	f
+X-Gm-Gg: ASbGnct5DvN/jkVJgGam5KrGo0bQv4XJ9WBVGQunz1kjyrx/UcSMvZDDOPukhaY58Cl
+	GLkWoUfq1UvgoPsj2H0gWskWvxSTKS4LmMGUKZ2qkkfpPaboMokpME4Ey53/7mdYvc/qXDj0I19
+	EM+b9kYDnqOdG1e2eNdK/YIl/Xd5NIw9WaDY0LemRUvc4zFvQgTG92fPNOFPzpQDugbg3+OgINE
+	t4rFIJt5DN2v3CThwqrHi95ELrPOzUnEDHLCMIXoZJ6TkELQVK1heQ5in9p4JD8wV8qHSpstOzC
+	dEAtoxe0NeEWre1PARJ+f2RVbOjUjgiTCmNOQhGIvSGACiwNdA==
+X-Google-Smtp-Source: AGHT+IGSp33R1eWJEtY9rFEEoNQDrBjGvY13L37whLkeE+FLQVs6my06EgT5NpY7mSqCs6pPUI4sUg==
+X-Received: by 2002:a05:6402:42c4:b0:5e4:d192:2373 with SMTP id 4fb4d7f45d1cf-5e5e22bf631mr31125520a12.10.1741879951520;
+        Thu, 13 Mar 2025 08:32:31 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 1/7] xen/ubsan: provide helper for clang's -fsanitize=function
-Date: Thu, 13 Mar 2025 16:30:23 +0100
-Message-ID: <20250313153029.93347-2-roger.pau@citrix.com>
+Subject: [PATCH 4/7] xen/ubsan: expand pointer overflow message printing
+Date: Thu, 13 Mar 2025 16:30:26 +0100
+Message-ID: <20250313153029.93347-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250313153029.93347-1-roger.pau@citrix.com>
 References: <20250313153029.93347-1-roger.pau@citrix.com>
@@ -98,58 +98,40 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-clang's -fsanitize=function relies on the presence of
-__ubsan_handle_function_type_mismatch() to print the detection of indirect
-calls of a function through a function pointer of the wrong type.
-
-Implement the helper, inspired on the llvm ubsan lib implementation.
+Add messages about operations against the NULL pointer, or that result in
+a NULL pointer.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/common/ubsan/ubsan.c | 16 ++++++++++++++++
- xen/common/ubsan/ubsan.h |  5 +++++
- 2 files changed, 21 insertions(+)
+ xen/common/ubsan/ubsan.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/xen/common/ubsan/ubsan.c b/xen/common/ubsan/ubsan.c
-index e99370322b44..7ebe4bfc14dc 100644
+index 7ebe4bfc14dc..20aa0cb598e1 100644
 --- a/xen/common/ubsan/ubsan.c
 +++ b/xen/common/ubsan/ubsan.c
-@@ -546,3 +546,19 @@ void __ubsan_handle_invalid_builtin(struct invalid_builtin_data *data)
+@@ -517,9 +517,18 @@ void __ubsan_handle_pointer_overflow(struct pointer_overflow_data *data,
+ 
+ 	ubsan_prologue(&data->location, &flags);
+ 
+-	pr_err("pointer operation %s %p to %p\n",
+-	       base > result ? "overflowed" : "underflowed",
+-	       _p(base), _p(result));
++	if (!base && !result)
++		pr_err("applying zero offset to null pointer\n");
++	else if (!base && result)
++		pr_err("applying non-zero offset %p to null pointer\n",
++			_p(result));
++	else if (base && !result)
++		pr_err("applying non-zero offset to non-null pointer %p produced null pointer\n",
++			_p(base));
++	else
++		pr_err("pointer operation %s %p to %p\n",
++			base > result ? "overflowed" : "underflowed",
++			_p(base), _p(result));
  
  	ubsan_epilogue(&flags);
  }
-+
-+void __ubsan_handle_function_type_mismatch(
-+	struct function_type_mismatch_data *data, unsigned long val)
-+{
-+	unsigned long flags;
-+
-+	if (suppress_report(&data->location))
-+		return;
-+
-+	ubsan_prologue(&data->location, &flags);
-+
-+	pr_err("call to function %ps through pointer to incorrect function type %s\n",
-+		(void *)val, data->type->type_name);
-+
-+	ubsan_epilogue(&flags);
-+}
-diff --git a/xen/common/ubsan/ubsan.h b/xen/common/ubsan/ubsan.h
-index 9c7f3b9b6c07..8987f9d45397 100644
---- a/xen/common/ubsan/ubsan.h
-+++ b/xen/common/ubsan/ubsan.h
-@@ -95,6 +95,11 @@ enum {
- 	kind_clz,
- };
- 
-+struct function_type_mismatch_data {
-+	struct source_location location;
-+	struct type_descriptor *type;
-+};
-+
- #if defined(CONFIG_ARCH_SUPPORTS_INT128) && defined(__SIZEOF_INT128__)
- typedef __int128 s_max;
- typedef unsigned __int128 u_max;
 -- 
 2.48.1
 
