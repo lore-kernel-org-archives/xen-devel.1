@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA7BC28B30
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 21:38:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915460.1320989 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE91C282EC
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 21:38:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915467.1321009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttCje-000831-4G; Fri, 14 Mar 2025 21:38:30 +0000
+	id 1ttCjo-0000DH-Mi; Fri, 14 Mar 2025 21:38:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915460.1320989; Fri, 14 Mar 2025 21:38:30 +0000
+Received: by outflank-mailman (output) from mailman id 915467.1321009; Fri, 14 Mar 2025 21:38:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttCje-00082u-1T; Fri, 14 Mar 2025 21:38:30 +0000
-Received: by outflank-mailman (input) for mailman id 915460;
- Fri, 14 Mar 2025 21:38:28 +0000
+	id 1ttCjo-0000D6-JT; Fri, 14 Mar 2025 21:38:40 +0000
+Received: by outflank-mailman (input) for mailman id 915467;
+ Fri, 14 Mar 2025 21:38:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=TLrw=WB=redhat.com=npache@srs-se1.protection.inumbo.net>)
- id 1ttCjc-000827-43
- for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 21:38:28 +0000
+ id 1ttCjn-000827-0i
+ for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 21:38:39 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a8c77410-011c-11f0-9ab9-95dc52dad729;
- Fri, 14 Mar 2025 22:38:26 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id afae4e99-011c-11f0-9ab9-95dc52dad729;
+ Fri, 14 Mar 2025 22:38:37 +0100 (CET)
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-116-ltqb4lcePE69hcWXSe8vYA-1; Fri,
- 14 Mar 2025 17:38:21 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-511-Q0pkQj-lPNqdUoh8sMEMxQ-1; Fri,
+ 14 Mar 2025 17:38:31 -0400
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 28885180034D; Fri, 14 Mar 2025 21:38:17 +0000 (UTC)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5CFF81955E95; Fri, 14 Mar 2025 21:38:28 +0000 (UTC)
 Received: from h1.redhat.com (unknown [10.22.80.88])
  by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B05D41944DC5; Fri, 14 Mar 2025 21:38:11 +0000 (UTC)
+ id CD5E61943582; Fri, 14 Mar 2025 21:38:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a8c77410-011c-11f0-9ab9-95dc52dad729
+X-Inumbo-ID: afae4e99-011c-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1741988304;
+	s=mimecast20190719; t=1741988316;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Syhhy4ulIUlWqTYydvlvGA6nZmvGM1l/r4DiZeh/SB8=;
-	b=CtrgY4pF4HK/xRtrdtzhwGvSyf7wQ/oSw54uAhsMrYwEmcYlgu7v4FNzbG0DkIwXAT2y23
-	eYTrTmo5jmEukZiJPMa0Uo7sOfOERvRaw8FfrcUhCryxsrH/OdW29LGgNc0xRVjhXdCHUP
-	ubZKdCEBQ04dF9O1X9kDSGUH3UoGtMs=
-X-MC-Unique: ltqb4lcePE69hcWXSe8vYA-1
-X-Mimecast-MFC-AGG-ID: ltqb4lcePE69hcWXSe8vYA_1741988298
+	bh=vPsYu1/Zt9JxInUUfAbvJhaRjTUPwV0c8VAQrmxs/V8=;
+	b=A9nT4vhKfJj3q8lQGPsvhX8OI8PnZInfBCF3sWHrkXxFfEwpogB0uH2iyBHtA4fkbRg12C
+	0M4Uh35PdUbUlAMGZ/Y+5k7yL4SLrfxQEOICh5EdnDK7y+g69scarrxpn8kBPIxrzsKFr+
+	SkHcmidXZGC+LZWdESjltunOe5+hfaY=
+X-MC-Unique: Q0pkQj-lPNqdUoh8sMEMxQ-1
+X-Mimecast-MFC-AGG-ID: Q0pkQj-lPNqdUoh8sMEMxQ_1741988308
 From: Nico Pache <npache@redhat.com>
 To: linux-hyperv@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
@@ -95,85 +95,43 @@ Cc: alexander.atanasov@virtuozzo.com,
 	kanchana.p.sridhar@intel.com,
 	llong@redhat.com,
 	shakeel.butt@linux.dev
-Subject: [PATCH v2 1/4] meminfo: add a per node counter for balloon drivers
-Date: Fri, 14 Mar 2025 15:37:54 -0600
-Message-ID: <20250314213757.244258-2-npache@redhat.com>
+Subject: [PATCH v2 3/4] hv_balloon: update the NR_BALLOON_PAGES state
+Date: Fri, 14 Mar 2025 15:37:56 -0600
+Message-ID: <20250314213757.244258-4-npache@redhat.com>
 In-Reply-To: <20250314213757.244258-1-npache@redhat.com>
 References: <20250314213757.244258-1-npache@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-Add NR_BALLOON_PAGES counter to track memory used by balloon drivers and
-expose it through /proc/meminfo and other memory reporting interfaces.
+Update the NR_BALLOON_PAGES counter when pages are added to or
+removed from the Hyper-V balloon.
 
 Signed-off-by: Nico Pache <npache@redhat.com>
 ---
- fs/proc/meminfo.c      | 2 ++
- include/linux/mmzone.h | 1 +
- mm/show_mem.c          | 4 +++-
- mm/vmstat.c            | 1 +
- 4 files changed, 7 insertions(+), 1 deletion(-)
+ drivers/hv/hv_balloon.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/proc/meminfo.c b/fs/proc/meminfo.c
-index 8ba9b1472390..83be312159c9 100644
---- a/fs/proc/meminfo.c
-+++ b/fs/proc/meminfo.c
-@@ -162,6 +162,8 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
- 	show_val_kb(m, "Unaccepted:     ",
- 		    global_zone_page_state(NR_UNACCEPTED));
- #endif
-+	show_val_kb(m, "Balloon:        ",
-+		    global_node_page_state(NR_BALLOON_PAGES));
- 
- 	hugetlb_report_meminfo(m);
- 
-diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
-index 9540b41894da..71d3ff19267a 100644
---- a/include/linux/mmzone.h
-+++ b/include/linux/mmzone.h
-@@ -223,6 +223,7 @@ enum node_stat_item {
- #ifdef CONFIG_HUGETLB_PAGE
- 	NR_HUGETLB,
- #endif
-+	NR_BALLOON_PAGES,
- 	NR_VM_NODE_STAT_ITEMS
- };
- 
-diff --git a/mm/show_mem.c b/mm/show_mem.c
-index 43afb56abbd3..6af13bcd2ab3 100644
---- a/mm/show_mem.c
-+++ b/mm/show_mem.c
-@@ -260,6 +260,7 @@ static void show_free_areas(unsigned int filter, nodemask_t *nodemask, int max_z
- 			" pagetables:%lukB"
- 			" sec_pagetables:%lukB"
- 			" all_unreclaimable? %s"
-+			" Balloon:%lukB"
- 			"\n",
- 			pgdat->node_id,
- 			K(node_page_state(pgdat, NR_ACTIVE_ANON)),
-@@ -285,7 +286,8 @@ static void show_free_areas(unsigned int filter, nodemask_t *nodemask, int max_z
- #endif
- 			K(node_page_state(pgdat, NR_PAGETABLE)),
- 			K(node_page_state(pgdat, NR_SECONDARY_PAGETABLE)),
--			str_yes_no(pgdat->kswapd_failures >= MAX_RECLAIM_RETRIES));
-+			str_yes_no(pgdat->kswapd_failures >= MAX_RECLAIM_RETRIES),
-+			K(node_page_state(pgdat, NR_BALLOON_PAGES)));
+diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
+index fec2f18679e3..2b4080e51f97 100644
+--- a/drivers/hv/hv_balloon.c
++++ b/drivers/hv/hv_balloon.c
+@@ -1192,6 +1192,7 @@ static void free_balloon_pages(struct hv_dynmem_device *dm,
+ 		__ClearPageOffline(pg);
+ 		__free_page(pg);
+ 		dm->num_pages_ballooned--;
++		mod_node_page_state(page_pgdat(pg), NR_BALLOON_PAGES, -1);
+ 		adjust_managed_page_count(pg, 1);
  	}
+ }
+@@ -1221,6 +1222,7 @@ static unsigned int alloc_balloon_pages(struct hv_dynmem_device *dm,
+ 			return i * alloc_unit;
  
- 	for_each_populated_zone(zone) {
-diff --git a/mm/vmstat.c b/mm/vmstat.c
-index 16bfe1c694dd..d3b11891a942 100644
---- a/mm/vmstat.c
-+++ b/mm/vmstat.c
-@@ -1276,6 +1276,7 @@ const char * const vmstat_text[] = {
- #ifdef CONFIG_HUGETLB_PAGE
- 	"nr_hugetlb",
- #endif
-+	"nr_balloon_pages",
- 	/* system-wide enum vm_stat_item counters */
- 	"nr_dirty_threshold",
- 	"nr_dirty_background_threshold",
+ 		dm->num_pages_ballooned += alloc_unit;
++		mod_node_page_state(page_pgdat(pg), NR_BALLOON_PAGES, alloc_unit);
+ 
+ 		/*
+ 		 * If we allocatted 2M pages; split them so we
 -- 
 2.48.1
 
