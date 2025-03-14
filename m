@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEDAC35FF1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:39:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915041.1320679 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 396C0C282EC
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:41:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915059.1320688 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt8zd-0008EO-91; Fri, 14 Mar 2025 17:38:45 +0000
+	id 1tt92Q-0001jd-Pb; Fri, 14 Mar 2025 17:41:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915041.1320679; Fri, 14 Mar 2025 17:38:45 +0000
+Received: by outflank-mailman (output) from mailman id 915059.1320688; Fri, 14 Mar 2025 17:41:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt8zd-0008EH-6H; Fri, 14 Mar 2025 17:38:45 +0000
-Received: by outflank-mailman (input) for mailman id 915041;
- Fri, 14 Mar 2025 17:38:43 +0000
+	id 1tt92Q-0001jW-Mq; Fri, 14 Mar 2025 17:41:38 +0000
+Received: by outflank-mailman (input) for mailman id 915059;
+ Fri, 14 Mar 2025 17:41:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vXxa=WB=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tt8zb-0008EB-ST
- for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:38:43 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
+ <SRS0=Zh9v=WB=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
+ id 1tt8tB-0000Ih-Rq
+ for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:32:05 +0000
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [2607:f8b0:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2bca6d1e-00fb-11f0-9ab9-95dc52dad729;
- Fri, 14 Mar 2025 18:38:42 +0100 (CET)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e5491eb379so3480399a12.3
- for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:38:42 -0700 (PDT)
-Received: from [192.168.1.10] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e816ad394fsm2281185a12.58.2025.03.14.10.38.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Mar 2025 10:38:40 -0700 (PDT)
+ id 3e033356-00fa-11f0-9ab9-95dc52dad729;
+ Fri, 14 Mar 2025 18:32:04 +0100 (CET)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-22398e09e39so51807585ad.3
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:32:03 -0700 (PDT)
+Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.32.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Mar 2025 10:32:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,143 +46,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bca6d1e-00fb-11f0-9ab9-95dc52dad729
+X-Inumbo-ID: 3e033356-00fa-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1741973921; x=1742578721; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=0Hpl4cnxJekM6FfThiai/zXx2e+8FHnMQX9KX/EA43M=;
-        b=ovriCOQQFM0gcLQihmGamdbY8Fa0Hcm5kCSMaD8L6WnLOFrhfdTCC579FbC901CTXP
-         nf+RoE1IuGDfuQnDQBBcfb9ymCeKXLKAOnBF459UGNhJlQSNVat0io2UPW0KbfrxS53Z
-         y1YVWPTJ1Czm9SpaYqyKVYp625MFFoX0bpfkE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741973921; x=1742578721;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1741973522; x=1742578322; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0Hpl4cnxJekM6FfThiai/zXx2e+8FHnMQX9KX/EA43M=;
-        b=BrUX8RHxOXVGGUG4hzYKpDLgshkFodM3Si1yYCmdlQYLAJ2xHD1yzB2skxk+AOMv/0
-         Y8EDsJba+1KrWaQN2aOVT9CY2DZhKLTlJ1wbpMDIIqKcuLBvEwTXl+VeE90IKbLb73KA
-         Mr6gMgd0NS/byztWyp8K+Fd1/fvURn+2zZmuAz7EYzZ5aqxSTy/uyU7spQ2P1M7ZbGXH
-         HK3ocooZuBfY6URQ93TLGNsPMWWM+mdujPzbl4NRKbd7R+Ic9TvhENWsZAHReC/f6Ezb
-         xGFRRdo+smGZEGM7K9bWtJhf5TW1ZfDPwPflxcVK+Tyq8bkbl3dBKkUA3XFI3wgEDwJn
-         Gwxw==
-X-Forwarded-Encrypted: i=1; AJvYcCV58yYLVdj0fj3TcWgPrDhii915DT70SkgQTNOuGnGTxYFbX8g7NgdsthnAxojFraImdI8K+fX07zk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzgOnf5vFdwYtNZ9YwPAp6vdmtV7/62PIgLpRMuxTML6Yn5wnOQ
-	dEjyMl2tLd6I6tSKJgMqFc4wGGeNMk4glwN/FBTs6ZqKbgF9Ygtm7iktZinbStM=
-X-Gm-Gg: ASbGnctmw61nC+f3lKIXeFT66lPfP/qYoS7XlSymOlsk//xmhOhFraXbRIubwL4ky0A
-	rr/+fEn2Tvr4Cs9K2ACbGxygpJ4ACU77Fx8vk56aCozuKQicuFOGRN5874H9ZToW7nDbCk4o3tv
-	fP1Ntg/5CO1fbrRX5XrbKGqJCIiiUvsvYETBBWX7Q6mEsZwi5nYiOYa3c7PR1H8QHDMTYbMkU6a
-	+HFR6wIyKBJzwg1K/CRt4e9s1mF3om7pXqc2wRRsBJMpjRul86q0aviIxM4FXdSHarSeBAehMBK
-	4Jdq+b+a7rRgV3UQYkacylplZ/GQaqgyS+t8/fgcseSHnliULuir8K1k2Yx6c9dR7gaDGyFXqVJ
-	8rvm3t+SZ
-X-Google-Smtp-Source: AGHT+IHuMJzFPdxHT1lX8H7MOJc+B3zP2VTHngVCjVPqPXY4kEQg95WAJY20qc2mfqobNynUfwUAuA==
-X-Received: by 2002:a05:6402:5210:b0:5e5:bde4:7575 with SMTP id 4fb4d7f45d1cf-5e89f24e3b1mr3892430a12.1.1741973921524;
-        Fri, 14 Mar 2025 10:38:41 -0700 (PDT)
-Message-ID: <6ad08678-372f-4ce0-822c-96f97475594b@citrix.com>
-Date: Fri, 14 Mar 2025 17:38:38 +0000
+        bh=ipPAyCMNYKQgJ+e1Pj22cNEjWMul6XXi9iVGdQZJ7Rc=;
+        b=RVxT1nJMAeHp6753vqOl+3FN9eP7M9RUNM9SSPBPY/r+fC2/eRLJLx4LN6svDeBH+O
+         s7WUzAqctoB1/r0bJTBIMtZxTdxWMXnFTFzKKAA2cdcZCn5ttaz1m2MDyxVDV757kLDD
+         qyi/98WyCQ6cX0vMSVeIfJltc4cg0Qv37S+kqoh9FOPSYu4QBHNNxdMetSkRWJU69C6C
+         qN1wHGPbyu5cQifSVIMaXFaMHIoU4oZq+EeZtQ/iRHU/juII9xy0mIhYt2fEuwFresZx
+         rikkgzMZhjQlB1Z8e4WttmviteGQaHPt4JTANIKzCJA7R8abIAH8/J8pCjKv85JD/X9K
+         xQqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741973522; x=1742578322;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ipPAyCMNYKQgJ+e1Pj22cNEjWMul6XXi9iVGdQZJ7Rc=;
+        b=K4Qjbps2bwarcEsIBb4f7XCXELKO17V6Cihw1mTMbqeKZKQDCnSDpm6vYvN04PjEYI
+         sMq0A4v36ysRD7bGKwwabUiVu7Kh9Hj2lPV/piDfmGXZcDkZz7OuJAjJUcxJtNOJxnil
+         ZwkAqDtFdenhvkQL2Ui+sdiiRLUGATBADkpMrEQl6IkT6Jl5w158T+KtESX7fS6pquBe
+         02KiTY0bM/aJMDUOFiauegN4S+/wU0JqNHTIzfnZZSizQl+FSUcuIqBAD8RfCLwMwzWw
+         nUcDSgcIEle2X2lGx+QMUTPw9PyCEczw14VDPv5J4YlgaF3qMEp6KZSTfyEtR9d3nOhg
+         67kQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU0Dgq+NHUiYdnEYIsrRihUqMCRsx64uIX2qSWlYvMgyp6dFXYKP75VGY+eiZjhANrB+CNN9codyDM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YycBeEmiDAeacVegtvwAlY9lmp4xGjrXIk7OPivaignQHcXSI68
+	Xz25groSQbtQfN5bXOJL2QXyBG82NaumutVeBrCU78mHRVs/RDg413dTMxBI1bw=
+X-Gm-Gg: ASbGncs+kUx0LBjT8rWI7XgFlX4iWliU2/exC2FTVk92gFJhw/vQX3ap7J/v7aSklTa
+	Y7IQuEqTSBCzrCnTUWzEuM5vTX/EIF6Mnol2cSPxKTd5Kowh6+OvnCkiu9GWGhTnme7UvaL+jrJ
+	CFAiO/umN4GPLSiv7s4dvyEzMS94qxV/arkp5GyQEWHCVSjxBJUhBmlsDn4mR2e/6D59gA5tEak
+	419gbZqP4uLyjrUWFgZEVU5NfVJ4UuOHe7cnjUjX24xBrfz4QyEb6SQDS6tVCvuOK5q7l33hzaw
+	E4EzefmCgPrK/NHgiJmUeM/QjLAnHTnon5QUPJ79J4iE
+X-Google-Smtp-Source: AGHT+IEtHSmevJ6R5avE3bKBZZosO5sZ+P9hAoOgJtZ8OftQtbIF6mLlVq94OOMFZzJGHDBT5BJrHg==
+X-Received: by 2002:a05:6a21:6d88:b0:1f5:7873:3053 with SMTP id adf61e73a8af0-1f5c12ec5b1mr4773946637.29.1741973522470;
+        Fri, 14 Mar 2025 10:32:02 -0700 (PDT)
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Paul Durrant <paul@xen.org>,
+	Peter Xu <peterx@redhat.com>,
+	alex.bennee@linaro.org,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	David Hildenbrand <david@redhat.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	qemu-riscv@nongnu.org,
+	manos.pitsidianakis@linaro.org,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Weiwei Li <liwei1518@gmail.com>,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v5 15/17] include/exec/memory: move devend functions to memory-internal.h
+Date: Fri, 14 Mar 2025 10:31:37 -0700
+Message-Id: <20250314173139.2122904-16-pierrick.bouvier@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
+References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/3] make build of vm_event/mem_access/monitor optional
-To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, xen-devel@lists.xenproject.org
-Cc: Doug Goldstein <cardoe@cardoe.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Tamas K Lengyel <tamas@tklengyel.com>,
- Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1741772330.git.Sergiy_Kibrik@epam.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <cover.1741772330.git.Sergiy_Kibrik@epam.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 14/03/2025 5:19 am, Sergiy Kibrik wrote:
-> This series aims to provide a possibility to build Xen without mem_access and
-> related features. It is already largely covered by corresponding
-> CONFIG_MEM_ACCESS option, yet there're still some parts remaining.
-> Hopefully this would help to reduce dead code a bit.
->
-> As coverage of MEM_ACCESS config option begins to extend beyond actual
-> mem_access code it has been suggested to rename it into VM_EVENT, as a more
-> general option controlling mem_access, vm_event and monitor code.
->
-> v3 series:
-> https://lore.kernel.org/xen-devel/cover.1741687645.git.Sergiy_Kibrik@epam.com/
->   -Sergiy
->
->
-> Sergiy Kibrik (2):
->   xen: kconfig: rename MEM_ACCESS -> VM_EVENT
->   x86:monitor: control monitor.c build with CONFIG_VM_EVENT option
->
-> Stefano Stabellini (1):
->   xen: mem_access: conditionally compile vm_event.c & monitor.c
+Only system/physmem.c and system/memory.c use those functions, so we can
+move then to internal header.
 
-I've taken this as it's been going on for long enough.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ include/exec/memory-internal.h | 19 +++++++++++++++++++
+ include/exec/memory.h          | 18 ------------------
+ 2 files changed, 19 insertions(+), 18 deletions(-)
 
-I've folded a few fixes.  Please be aware of these in the future.
+diff --git a/include/exec/memory-internal.h b/include/exec/memory-internal.h
+index b729f3b25ad..c75178a3d6b 100644
+--- a/include/exec/memory-internal.h
++++ b/include/exec/memory-internal.h
+@@ -43,5 +43,24 @@ void address_space_dispatch_free(AddressSpaceDispatch *d);
+ 
+ void mtree_print_dispatch(struct AddressSpaceDispatch *d,
+                           MemoryRegion *root);
++
++/* returns true if end is big endian. */
++static inline bool devend_big_endian(enum device_endian end)
++{
++    QEMU_BUILD_BUG_ON(DEVICE_HOST_ENDIAN != DEVICE_LITTLE_ENDIAN &&
++                      DEVICE_HOST_ENDIAN != DEVICE_BIG_ENDIAN);
++
++    if (end == DEVICE_NATIVE_ENDIAN) {
++        return target_words_bigendian();
++    }
++    return end == DEVICE_BIG_ENDIAN;
++}
++
++/* enum device_endian to MemOp.  */
++static inline MemOp devend_memop(enum device_endian end)
++{
++    return devend_big_endian(end) ? MO_BE : MO_LE;
++}
++
+ #endif
+ #endif
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index 70177304a92..a3bb0542bf6 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -3138,24 +3138,6 @@ address_space_write_cached(MemoryRegionCache *cache, hwaddr addr,
+ MemTxResult address_space_set(AddressSpace *as, hwaddr addr,
+                               uint8_t c, hwaddr len, MemTxAttrs attrs);
+ 
+-/* returns true if end is big endian. */
+-static inline bool devend_big_endian(enum device_endian end)
+-{
+-    QEMU_BUILD_BUG_ON(DEVICE_HOST_ENDIAN != DEVICE_LITTLE_ENDIAN &&
+-                      DEVICE_HOST_ENDIAN != DEVICE_BIG_ENDIAN);
+-
+-    if (end == DEVICE_NATIVE_ENDIAN) {
+-        return target_words_bigendian();
+-    }
+-    return end == DEVICE_BIG_ENDIAN;
+-}
+-
+-/* enum device_endian to MemOp.  */
+-static inline MemOp devend_memop(enum device_endian end)
+-{
+-    return devend_big_endian(end) ? MO_BE : MO_LE;
+-}
+-
+ /*
+  * Inhibit technologies that require discarding of pages in RAM blocks, e.g.,
+  * to manage the actual amount of memory consumed by the VM (then, the memory
+-- 
+2.39.5
 
-In EXTRA_RANDCONFIG in patch 1, the CONFIG items are sorted, so the
-rename caused a resorting to be needed.
-
-In patch 3, extra comments on the #else and #endif, before more content
-gets added.
-
-~Andrew
 
