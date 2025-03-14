@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C2CC282EC
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:44:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915142.1320729 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E37C282EC
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:44:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915156.1320739 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt958-00054n-QN; Fri, 14 Mar 2025 17:44:26 +0000
+	id 1tt95O-0005d7-5G; Fri, 14 Mar 2025 17:44:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915142.1320729; Fri, 14 Mar 2025 17:44:26 +0000
+Received: by outflank-mailman (output) from mailman id 915156.1320739; Fri, 14 Mar 2025 17:44:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt958-00054g-NO; Fri, 14 Mar 2025 17:44:26 +0000
-Received: by outflank-mailman (input) for mailman id 915142;
- Fri, 14 Mar 2025 17:44:25 +0000
+	id 1tt95O-0005d0-2c; Fri, 14 Mar 2025 17:44:42 +0000
+Received: by outflank-mailman (input) for mailman id 915156;
+ Fri, 14 Mar 2025 17:44:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zh9v=WB=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1tt8tC-0000xy-4O
- for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:32:06 +0000
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [2607:f8b0:4864:20::629])
+ id 1tt8tI-0000xy-5G
+ for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:32:12 +0000
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [2607:f8b0:4864:20::636])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c86e576-00fa-11f0-9899-31a8f345e629;
- Fri, 14 Mar 2025 18:32:01 +0100 (CET)
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-225a28a511eso43038985ad.1
- for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:32:01 -0700 (PDT)
+ id 3eb861af-00fa-11f0-9899-31a8f345e629;
+ Fri, 14 Mar 2025 18:32:05 +0100 (CET)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-225d66a4839so27413145ad.1
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:32:05 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.59
+ 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.32.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 10:31:59 -0700 (PDT)
+ Fri, 14 Mar 2025 10:32:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c86e576-00fa-11f0-9899-31a8f345e629
+X-Inumbo-ID: 3eb861af-00fa-11f0-9899-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1741973520; x=1742578320; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1741973524; x=1742578324; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cOa15ppvF5kxsldjPkSIJYe5T0c824L9GaUvR3via0Q=;
-        b=IWAagrMlOK8AmQpFhjvRXFSmBR8zSB/lyokNU6vYmg1G/4pGaIMDV6mhAyoYWHTDGx
-         Vnr2TC17ao0KgQ6Efw7sxwVLuwmoaC3n5TpMCpAEdY0dtcclTHzLDgzb9Rb924xyiBrh
-         cQAliMa1ZXtXF4bmbhhz3Ug0CUodzSs6JVjfd+JwUJoi8dkG/2MgGA6lSBW3WUECunl8
-         zDE6AM/9SoeH0vBRXl9WU0jGqZ0FSrRV+HzHN/KnQWrTREzCQKJuAoUbwUav22jyPbwt
-         ujdIrTCLwK8Bxao+xBUFzmq/XZLDdBG8GX8mCYOd0VqtCFn2f9W0oYhN3mHtoZVafHHe
-         ywkA==
+        bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
+        b=caI3rs+otVvKwdYgVP5CABrao6jK8ZQ4qsXSHgTDeZVHflhBu1lzgdBXe4Lg4RXQ5A
+         M41IXQcZXrBLJB8OvaNtOQZ+UZCDN8k6Bub1l7Yd5EH7XHqVODJPnO06KSFRWtJBjoy8
+         4GbrRFGUN/Pftvj8aniUDgbewPtRWzB4eTWO+++QEQ6N6eDmnbhD/nE5/S/LTQ4+I/9v
+         6TRbr9bBscERKRtaNi+gCnfpzxnqGR5qo8c3Nbsm56Ew/UaSzrBOfpilrkBNcUzXJHDw
+         zdS4XDWIEM7KLzP/XpJ5pajJHdD03PAVMJKpE6AMJTkeg70fal5gGTYQsdD//Nr2xd/b
+         t7ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741973520; x=1742578320;
+        d=1e100.net; s=20230601; t=1741973524; x=1742578324;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cOa15ppvF5kxsldjPkSIJYe5T0c824L9GaUvR3via0Q=;
-        b=FPCuJ5zP7T9BmqBgkR6MQ6WOZqfhteZTn5lM18Z9ydo06hRk83eoU/fyhA1+YY9Xol
-         Pkh2yI6QWUeLiQQUzXqpCcFTgUJsEnS+Ih+DRx2l0bgOLqHxInZrotwJOlbwcVR3k54A
-         jLGe7DPQnpkStHrTauDOQOw6Et53h8K99kvx4HXRWDO3WouijylQFdO0Pr4x4v/Lbk6H
-         SKxMu2BI3Huposc2z/h6KtngV7RSOZ5bLlRciNHHLwNEdzicln7f+YFfhrVp/fh9rth+
-         HZx77Kxl5wtBEYM82Bh7w0TO/DSR0x0UBduqNZxT+AfFQ8wxnff/FBZSi49tk2nSxOt9
-         4JKA==
-X-Forwarded-Encrypted: i=1; AJvYcCUrOsKqkR3Ji4BbYarCetAwwCjg2LLDx/dVDlSkPhAPUPvAnKYPbpesJL4xMtxnIu/5l8Oj2OVm3Y0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzK2pFV8ZMk0FXrCLRUsCqzwyxTJvtOiE6HultAH5VKg8Tpv52Y
-	Nt6M0vW/JtWzL75/0PAS+eAV6GNmCdSBXVFSgk8TY7NAiAlVAYfJWmA+UXW1ol0=
-X-Gm-Gg: ASbGncu6Ak5Qlqzr5N4Khhnaba+BXOHD+aGaXTSpiGoKtTW0IdBRIxgEYWk9TOIVsIG
-	ZU4Q1Qkjb2lq7QD18sgoxQiGR75VR2j4p74vojVT92UfcxV6EW+cQ4XZW8tmIYje5f3v2pC5qa6
-	xZ8JepjZgyh3QxX2w9Sww5mLejtw3khk7EF4LIqzRxdX/XnAj/Yv7BnHN36Bt/SsXGtC9f4j73O
-	41+fsKkPequJveba4viYvmbPssrqbhZitCMNagjb/FjfG/T6wFg37+LWxkuF4zplr3CR2/gln6N
-	/yflgWVRHe7ayoe/ykvkW1CycJsiAfwrGNyrLFm1UkZMt6/vYyLzKUQ=
-X-Google-Smtp-Source: AGHT+IFlQhNJcOD04DdXfXRzIQFpLw7YnyShzSPUUYA1tOEz0vWyEbVCk22Q9xZ8telIqsQxDa+sSQ==
-X-Received: by 2002:a05:6a21:4a8c:b0:1f0:e42e:fb1d with SMTP id adf61e73a8af0-1f5c1326a41mr6196288637.36.1741973520104;
-        Fri, 14 Mar 2025 10:32:00 -0700 (PDT)
+        bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
+        b=Pqzt605BO7PgypEJH1dr5yXVekwjJ/nLweebbWM1MiYU49gUvifPWTz9IQzWeCs0Tv
+         EGHtgkqKRgQagTeFhgUt55XUsLh0cPOzOPMcTWQYuyrzYAcwwlfn6ii010h8/7rbzLWC
+         f3yow7nML7hY7asdKKDuF1U0ImlJ/KTvvr/YZRY+ST8zC41+NzVQgjFtotwSqQM+ldal
+         74ArdOm+Dmsjua2PoSDr+bmL9wOLpfaExDFbFziHHjCSLk3Szcw6Z4ub+NP04ZnDRVam
+         ahLa4DfGYiorx6+l9JWq8eh+6es+4HOyXbP1jKyLciddDKenVJ+7LBgIBbZtVwQkpSun
+         Rt4g==
+X-Forwarded-Encrypted: i=1; AJvYcCU+TwnzkuWPR5xiq0kTUnjTjYt2p8nftX+F5jw/rop0PxtrVzWBlY88pu6/222h5DwItSvTEGhsFGM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzK0IRrmoqvuGfVdy7ig7SgMYqiuhDXe7oDqOr8fNKLjw5qY3B9
+	YU0C3Sa77lZd52OxYv61EyWx9TurJWwYloMVKqyhK3LtU3Sxwf9SlD6G1KeDcG4=
+X-Gm-Gg: ASbGncsM1eJGIt92tX4FHYUoYsMaTTdp32ES+hkus3V2ocmpIhxJXDYosbaFdNQVkzj
+	syKqajqievP4wEP4+Ehr9jA66rzjSGEheiv2KVxtPws4v7h9aPrLZ0P53mjoINbIR6ExCdwJvYy
+	FYHR0R1COZsr1AkR3RPtiDv0IZJHJ84RMCr4jqoyZSa01AiOmY1UvUbBYcJK5TKoZcnX9nX7bhC
+	peXNG+OsHuow7xro6KTuceMCMkXWfVa6uFzLzKCzYN4qI6VXLlNkAqlUiE3AfaB/kqQ0muH269W
+	eQURxi0CIXuxYjrMnhKr1b3wYwGBPQeKw6xQ+tEOKOc4D24AHK33c/g=
+X-Google-Smtp-Source: AGHT+IFTScYSX7clzsDQUywbpsrF2iPQsXcqATUvOkRpCep5DuIqTnkqpSfhY4o7FVAe26d7sGjRdg==
+X-Received: by 2002:a05:6a21:1583:b0:1e1:a449:ff71 with SMTP id adf61e73a8af0-1f5c279ef94mr4638551637.1.1741973523678;
+        Fri, 14 Mar 2025 10:32:03 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org,
@@ -108,9 +108,9 @@ Cc: qemu-ppc@nongnu.org,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Weiwei Li <liwei1518@gmail.com>,
 	Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v5 13/17] system/physmem: compilation unit is now common to all targets
-Date: Fri, 14 Mar 2025 10:31:35 -0700
-Message-Id: <20250314173139.2122904-14-pierrick.bouvier@linaro.org>
+Subject: [PATCH v5 16/17] system/memory: make compilation unit common
+Date: Fri, 14 Mar 2025 10:31:38 -0700
+Message-Id: <20250314173139.2122904-17-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
@@ -120,29 +120,79 @@ Content-Transfer-Encoding: 8bit
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- system/meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ system/memory.c    | 17 +++++------------
+ system/meson.build |  2 +-
+ 2 files changed, 6 insertions(+), 13 deletions(-)
 
+diff --git a/system/memory.c b/system/memory.c
+index 4c829793a0a..eddd21a6cdb 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -353,15 +353,6 @@ static void flatview_simplify(FlatView *view)
+     }
+ }
+ 
+-static bool memory_region_big_endian(MemoryRegion *mr)
+-{
+-#if TARGET_BIG_ENDIAN
+-    return mr->ops->endianness != DEVICE_LITTLE_ENDIAN;
+-#else
+-    return mr->ops->endianness == DEVICE_BIG_ENDIAN;
+-#endif
+-}
+-
+ static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
+ {
+     if ((op & MO_BSWAP) != devend_memop(mr->ops->endianness)) {
+@@ -563,7 +554,7 @@ static MemTxResult access_with_adjusted_size(hwaddr addr,
+     /* FIXME: support unaligned access? */
+     access_size = MAX(MIN(size, access_size_max), access_size_min);
+     access_mask = MAKE_64BIT_MASK(0, access_size * 8);
+-    if (memory_region_big_endian(mr)) {
++    if (devend_big_endian(mr->ops->endianness)) {
+         for (i = 0; i < size; i += access_size) {
+             r |= access_fn(mr, addr + i, value, access_size,
+                         (size - access_size - i) * 8, access_mask, attrs);
+@@ -2584,7 +2575,8 @@ void memory_region_add_eventfd(MemoryRegion *mr,
+     unsigned i;
+ 
+     if (size) {
+-        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
++        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
++        adjust_endianness(mr, &mrfd.data, mop);
+     }
+     memory_region_transaction_begin();
+     for (i = 0; i < mr->ioeventfd_nb; ++i) {
+@@ -2619,7 +2611,8 @@ void memory_region_del_eventfd(MemoryRegion *mr,
+     unsigned i;
+ 
+     if (size) {
+-        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
++        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
++        adjust_endianness(mr, &mrfd.data, mop);
+     }
+     memory_region_transaction_begin();
+     for (i = 0; i < mr->ioeventfd_nb; ++i) {
 diff --git a/system/meson.build b/system/meson.build
-index eec07a94513..bd82ef132e7 100644
+index bd82ef132e7..4f44b78df31 100644
 --- a/system/meson.build
 +++ b/system/meson.build
-@@ -3,7 +3,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+@@ -2,7 +2,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+   'arch_init.c',
    'ioport.c',
    'globals-target.c',
-   'memory.c',
--  'physmem.c',
+-  'memory.c',
  )])
  
  system_ss.add(files(
-@@ -16,6 +15,7 @@ system_ss.add(files(
+@@ -15,6 +14,7 @@ system_ss.add(files(
    'dma-helpers.c',
    'globals.c',
    'memory_mapping.c',
-+  'physmem.c',
++  'memory.c',
+   'physmem.c',
    'qdev-monitor.c',
    'qtest.c',
-   'rtc.c',
 -- 
 2.39.5
 
