@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D63C282EC
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:48:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915204.1320778 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E517AC282EC
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Mar 2025 17:51:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915220.1320789 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt98s-0000FR-Al; Fri, 14 Mar 2025 17:48:18 +0000
+	id 1tt9BM-00022D-Qz; Fri, 14 Mar 2025 17:50:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915204.1320778; Fri, 14 Mar 2025 17:48:18 +0000
+Received: by outflank-mailman (output) from mailman id 915220.1320789; Fri, 14 Mar 2025 17:50:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tt98s-0000FK-7c; Fri, 14 Mar 2025 17:48:18 +0000
-Received: by outflank-mailman (input) for mailman id 915204;
- Fri, 14 Mar 2025 17:48:16 +0000
+	id 1tt9BM-000226-OJ; Fri, 14 Mar 2025 17:50:52 +0000
+Received: by outflank-mailman (input) for mailman id 915220;
+ Fri, 14 Mar 2025 17:50:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zh9v=WB=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1tt8t8-0000xy-31
- for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:32:02 +0000
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [2607:f8b0:4864:20::630])
+ id 1tt8tE-0000xy-4i
+ for xen-devel@lists.xenproject.org; Fri, 14 Mar 2025 17:32:08 +0000
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [2607:f8b0:4864:20::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3bde3c3a-00fa-11f0-9899-31a8f345e629;
- Fri, 14 Mar 2025 18:32:00 +0100 (CET)
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2232aead377so53470325ad.0
- for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:32:00 -0700 (PDT)
+ id 3d3af37e-00fa-11f0-9899-31a8f345e629;
+ Fri, 14 Mar 2025 18:32:02 +0100 (CET)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-22113560c57so48295505ad.2
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Mar 2025 10:32:02 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.57
+ 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.32.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 10:31:58 -0700 (PDT)
+ Fri, 14 Mar 2025 10:32:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3bde3c3a-00fa-11f0-9899-31a8f345e629
+X-Inumbo-ID: 3d3af37e-00fa-11f0-9899-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1741973519; x=1742578319; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1741973521; x=1742578321; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WZK4IDfbpcoj/UHXYNBc9hj61CH/qnmJNHrSERoWz24=;
-        b=DtvnofA2cwOvKQdqOYyIlZHF9OU+ooy98NIk34RWvL72bnlq6SScyRvYNa5xUcCYg1
-         3xmdFi6aeSAs/E30H9bNxVREj9QN1flnnEmqTQKduPcEGh/oXtJldFVNbn2U3xV9aob/
-         EtUpN48K7uIHVwAaMz1EkOSb8IagOTKrRhK9Dp6uKrP0VBdNg+HQaeGdQhFo6IjgrRk8
-         +K+bFjHgY+eUHR62SYcj4HE0yPNTiGa9xJWrVwb4Ck7Y1eY/0+LSv0VuuNzFTvTDkT76
-         i5z65eClMSGZBLIsvJ6dpcB1KZiyIgIEoRE6Eobuc2HrVBY+rjS2RfReBxJ2fZoj2TB/
-         30Cg==
+        bh=0vI16NHb2tKWbIxjnq/SoVUTdY/Lep770BkCc47k0Rc=;
+        b=eLhi9ASUnkQSDHrVRruCp4aY65MBDbjFSUxhDau/jAY0dmG67kOl5um9BggkoDDvep
+         qz6f82MgXvqvevm2I/F1pLpb78hZtuIpotUNYuFUKyh/c4AEEwxwR2vHoQL3g2YodYrP
+         LZ9rfrWVaJuOfDZApwxfEPVwmCNV/iGLwWfcpHyDfaDNBFVojg/WTon5ze2FCDpnCAF0
+         /Vc2O4+CsoJYgOIVHJBzMO/4frUKaf0k1QSAIAuzhE3LmmqW1x8pRVLwvvWvtesuVP1v
+         ZPs7zNwtMXDcS/hzXBf9gOD35fcJtWfaYuv8MkpCXMc1zNbiR0vSD/+1Y1e9R0N/0YOA
+         5Xkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741973519; x=1742578319;
+        d=1e100.net; s=20230601; t=1741973521; x=1742578321;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=WZK4IDfbpcoj/UHXYNBc9hj61CH/qnmJNHrSERoWz24=;
-        b=w2XHGqBQUCBkZ4O0WBuonsmoIhr1cIIrvHfAKgrxFcD6M4aq7gQ09XdOT8mKhdPzQm
-         IHKrdlA0Tahz83m1r5g2yoY7zrKRM4iWFdeL9AkTq9hjcrrxk4j9ZNqFpSu/05GOaCHj
-         73DCkl6u3bVFaM2bUHcaVZSFRG8/O/v0mb3H78the8Q2gHRQ/JNVG7hDUxSKrj9cTZ0R
-         sXaQtYWgcGmuxlydvnOj+oihrCfaTuq2tLxte/Uwlj2nb3ENK5QpNED2uJAfN8o2pRGB
-         J/toQuCSAT/SU38mC/cJXU3xW+IIcMSkSDIK66Zr+DfFtRLGNS/jffleMLoib43tnTGi
-         XT3g==
-X-Forwarded-Encrypted: i=1; AJvYcCXKEiEBZRgkpEQMXOpdCcJ8Eo36TwhmpNT+DVnIJw7WOa8rJFi7XFUBR+2UDm+txgYgHPljLXPlwVg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwARH0aOQTqBG13J/2MYcotMv1Yodava9Q823WnsF5OOKPFK/nN
-	9e8DSHj6TZMRwbtAJnOtE+iQVCzS/mgoVqn0Ym5kfxdpnCBdedfm7fgm7Xj4NYo=
-X-Gm-Gg: ASbGncsrEFWodoEwL8jtrM2cUVMtMatI2Ege+Sv3icW3WeF/TEPwNQdjCM5FFbehg71
-	qww84B+pRXxgp8XHa+WZMKYryKG7prBksg12jvoxRp8kSF3BBpjKVgFGg59WUyb9Fsp5WPyMpo7
-	VIJM6Q9RuOxeiiTflj1OgeOkgNdKJOZvcYJ0RFQKY+lLajYhYHYfsULhCczpuNtnsVRt78Rn/mg
-	fO58xoCc4je5yUxyc0W4LbTUJFVz3AJgaOmbS3hDN+iMam56cE7W5Utuwtyq2waSK/e1YImjehg
-	A1gGbbDxFXWYCJ2AMQaMHge0hmTU5gPCrUoGY3hvpC3P
-X-Google-Smtp-Source: AGHT+IFO+PDwMeyLa4EGhItdNdod3PivHdGg2tuOsQqj5N7me/+24tmsBkj8Jw+BltKmizpirWlssg==
-X-Received: by 2002:a05:6a00:b4e:b0:736:533b:f6fa with SMTP id d2e1a72fcca58-737223bf5e7mr3790179b3a.13.1741973518933;
-        Fri, 14 Mar 2025 10:31:58 -0700 (PDT)
+        bh=0vI16NHb2tKWbIxjnq/SoVUTdY/Lep770BkCc47k0Rc=;
+        b=JwdlmsFh1ymOkU9N/abqyDoB0r5W3BM97VujJKKJCPuNQfGDeryGhOo0XWKXvpZewr
+         r3ZXc6uL56gO1gMJJaafEp12Xj9p87CNYrjd7n8/ECqh1dVJ7eTcabZz93jjuHshoTAC
+         ezybPaLAg0SRSSwf+ZDgRh6azsQ0nAOgwVMzWMu8WIh0Qy5qiMuDd8bTGiytFTxtSX5/
+         CLPxWXZCQq3KoczLBrC/D19auC2jLVy+H//hPja1iY48MCFMuZE47tRMQgg+pqemfH6o
+         KcOvfYJOwVCdpWQgEyI+qEg6Ug69UCV2FErf8Dr2k/vJ8IAqyZe6Zb1ZAWrM0RQGq977
+         CgZw==
+X-Forwarded-Encrypted: i=1; AJvYcCVXyTqPYdA3CHu8UIjwH+FyQE2u4knDrtqgbz9bSZxbVqzCFh8Q7MTuhHWOJyy37tYNRHo0D6j3Q7E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx0y3IAGxv4lJ5J91uLcLYEaTSCI3J5tIORT74d3jAWiMeWJsIo
+	PTQe8SzXE0stQerEIs+/l7B09MpvEPR+e6S3t+X6OVwTWREZzhZAn0atM2dPVoI=
+X-Gm-Gg: ASbGncsze2Bn0w7C+JxnKxMlUc4Peo474lBzacK0SV+OaPL6CUfalhPhkF2J+YFQG3j
+	ppkkfFlDc4tYk6C4kpr/HTXJj2JAmQ8ycbEbwn6vNoK4xxu3uwE/Hh5k5OvhL5X0/73ZH+Zoqie
+	0U79a4zViOiVFnBJsTSNyfYx8S/89MY/N1WJ57GrBo1EXq6YgU9zTb4ZTiSplYg4J1OqnoIHhEz
+	puxzX6hicuskORua0ezntav3y/Mw8lnEle62xRftIK8stp1/EIydW0ZNdm7dYTPu5cI8lP5qb9k
+	/ueH7m0JlxEpZ5nnKMM3mEqtOUIA8TW7hDNB7yvOVC4n
+X-Google-Smtp-Source: AGHT+IG6cCxvjsVBwzL07VH+mus/++8may6iqII6GPehxKvNj4VKnHVcl4393YyfiqPTiVq1ksSu0w==
+X-Received: by 2002:a05:6a20:9c8d:b0:1ee:efa5:6573 with SMTP id adf61e73a8af0-1f5c113f552mr5261243637.8.1741973521265;
+        Fri, 14 Mar 2025 10:32:01 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org,
@@ -107,104 +107,57 @@ Cc: qemu-ppc@nongnu.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Weiwei Li <liwei1518@gmail.com>,
-	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v5 12/17] hw/xen: add stubs for various functions
-Date: Fri, 14 Mar 2025 10:31:34 -0700
-Message-Id: <20250314173139.2122904-13-pierrick.bouvier@linaro.org>
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v5 14/17] include/exec/memory: extract devend_big_endian from devend_memop
+Date: Fri, 14 Mar 2025 10:31:36 -0700
+Message-Id: <20250314173139.2122904-15-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Those symbols are used by system/physmem.c, and are called only if
-xen_enabled() (which happens only if CONFIG_XEN is set and xen is
-available).
+we'll use it in system/memory.c.
 
-So we can crash the stubs in case those are called, as they are linked
-only when CONFIG_XEN is not set.
-
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
-Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/xen/xen_stubs.c | 51 ++++++++++++++++++++++++++++++++++++++++++++++
- hw/xen/meson.build |  3 +++
- 2 files changed, 54 insertions(+)
- create mode 100644 hw/xen/xen_stubs.c
+ include/exec/memory.h | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
-new file mode 100644
-index 00000000000..5e565df3929
---- /dev/null
-+++ b/hw/xen/xen_stubs.c
-@@ -0,0 +1,51 @@
-+/*
-+ * Various stubs for xen functions
-+ *
-+ * Those functions are used only if xen_enabled(). This file is linked only if
-+ * CONFIG_XEN is not set, so they should never be called.
-+ *
-+ * Copyright (c) 2025 Linaro, Ltd.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "system/xen.h"
-+#include "system/xen-mapcache.h"
-+
-+void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
-+                   struct MemoryRegion *mr, Error **errp)
-+{
-+    g_assert_not_reached();
-+}
-+
-+bool xen_mr_is_memory(MemoryRegion *mr)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void xen_invalidate_map_cache_entry(uint8_t *buffer)
-+{
-+    g_assert_not_reached();
-+}
-+
-+ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
-+{
-+    g_assert_not_reached();
-+}
-+
-+uint8_t *xen_map_cache(MemoryRegion *mr,
-+                       hwaddr phys_addr,
-+                       hwaddr size,
-+                       ram_addr_t ram_addr_offset,
-+                       uint8_t lock,
-+                       bool dma,
-+                       bool is_write)
-+{
-+    g_assert_not_reached();
-+}
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index 4a486e36738..a1850e76988 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -9,6 +9,9 @@ system_ss.add(when: ['CONFIG_XEN_BUS'], if_true: files(
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index 069021ac3ff..70177304a92 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -3138,16 +3138,22 @@ address_space_write_cached(MemoryRegionCache *cache, hwaddr addr,
+ MemTxResult address_space_set(AddressSpace *as, hwaddr addr,
+                               uint8_t c, hwaddr len, MemTxAttrs attrs);
  
- system_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-   'xen-operations.c',
-+),
-+if_false: files(
-+  'xen_stubs.c',
- ))
+-/* enum device_endian to MemOp.  */
+-static inline MemOp devend_memop(enum device_endian end)
++/* returns true if end is big endian. */
++static inline bool devend_big_endian(enum device_endian end)
+ {
+     QEMU_BUILD_BUG_ON(DEVICE_HOST_ENDIAN != DEVICE_LITTLE_ENDIAN &&
+                       DEVICE_HOST_ENDIAN != DEVICE_BIG_ENDIAN);
  
- xen_specific_ss = ss.source_set()
+-    bool big_endian = (end == DEVICE_NATIVE_ENDIAN
+-                       ? target_words_bigendian()
+-                       : end == DEVICE_BIG_ENDIAN);
+-    return big_endian ? MO_BE : MO_LE;
++    if (end == DEVICE_NATIVE_ENDIAN) {
++        return target_words_bigendian();
++    }
++    return end == DEVICE_BIG_ENDIAN;
++}
++
++/* enum device_endian to MemOp.  */
++static inline MemOp devend_memop(enum device_endian end)
++{
++    return devend_big_endian(end) ? MO_BE : MO_LE;
+ }
+ 
+ /*
 -- 
 2.39.5
 
