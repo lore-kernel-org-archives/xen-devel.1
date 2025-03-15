@@ -4,29 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D465C282EC
-	for <xen-devel@archiver.kernel.org>; Sat, 15 Mar 2025 01:03:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915632.1321108 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C8AC282EC
+	for <xen-devel@archiver.kernel.org>; Sat, 15 Mar 2025 01:06:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915647.1321119 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttFwA-00029p-Bz; Sat, 15 Mar 2025 01:03:38 +0000
+	id 1ttFyx-0002j9-NU; Sat, 15 Mar 2025 01:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915632.1321108; Sat, 15 Mar 2025 01:03:38 +0000
+Received: by outflank-mailman (output) from mailman id 915647.1321119; Sat, 15 Mar 2025 01:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttFwA-00029i-8m; Sat, 15 Mar 2025 01:03:38 +0000
-Received: by outflank-mailman (input) for mailman id 915632;
- Sat, 15 Mar 2025 01:03:37 +0000
+	id 1ttFyx-0002j2-KY; Sat, 15 Mar 2025 01:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 915647;
+ Sat, 15 Mar 2025 01:06:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ms5H=WC=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1ttFw8-00029c-WA
- for xen-devel@lists.xenproject.org; Sat, 15 Mar 2025 01:03:36 +0000
-Received: from mail-40134.protonmail.ch (mail-40134.protonmail.ch
- [185.70.40.134]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 52a7b87e-0139-11f0-9ab9-95dc52dad729;
- Sat, 15 Mar 2025 02:03:36 +0100 (CET)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3z59=WC=linux-foundation.org=akpm@srs-se1.protection.inumbo.net>)
+ id 1ttFyw-0002it-Ct
+ for xen-devel@lists.xenproject.org; Sat, 15 Mar 2025 01:06:30 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b96acdfa-0139-11f0-9ab9-95dc52dad729;
+ Sat, 15 Mar 2025 02:06:29 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id D1D8A5C57AE;
+ Sat, 15 Mar 2025 01:04:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50731C4CEE3;
+ Sat, 15 Mar 2025 01:06:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +43,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52a7b87e-0139-11f0-9ab9-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1742000614; x=1742259814;
-	bh=SmSCL0+qlM06wlDwsoQvN6LfGsCVuGRAQpA59YIyAGA=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=g3etPs9mdOtL1+uFK9tNof1jsu935KtiwSU4/zPurc7+yS5NQyIC+A1s+bbUbv4o4
-	 +h9RlNZik6aoZeXsFxVw1IlGjkFRlYx6uGc1nDfEN78MsxH1+0SXD+VEco69iQdAhU
-	 cqyYx1Mt9c5Ry7jLB+cFu6hlN+fQE7RebZoSnTnYhA1SuKDGM46e4PprEXcfpSaoOH
-	 MbALDq875LflCApeogGMA5LoYJGOrloLrN5j2bdDwSg7HP0M/mzyrYHPJYpEizbwWR
-	 Xo6ahYeKBzZtyEMlOaauhID9mGIC+gRb75+F6yoHjKvPzgifwv82ZDqE4VBjQiPVh5
-	 DudG5wanlMoXQ==
-Date: Sat, 15 Mar 2025 01:03:33 +0000
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-From: Denis Mukhin <dmkhn@proton.me>
-Cc: xen-devel@lists.xenproject.org, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: Re: [PATCH] x86/irq: use NR_ISAIRQS instead of open-coded value
-Message-ID: <ZSWlbJjcQuPrvCTcjHEmH0uZyQ34tfGY1EAiIm_nFCWJIEhebSUiCNRGnFWhSZczh-rhJy8ZgyKe-pvFljjLoTGRUYN1qkvMK0yQX_pySL4=@proton.me>
-In-Reply-To: <94879059-1a38-45e3-ab3a-4f8eacd885cf@citrix.com>
-References: <20250314011528.2608217-1-dmukhin@ford.com> <94879059-1a38-45e3-ab3a-4f8eacd885cf@citrix.com>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: c4661984fceb90cd563f82b971f31e522528bfff
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: b96acdfa-0139-11f0-9ab9-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+	s=korg; t=1742000787;
+	bh=9oWnsRrteEppsIdl5wrmRTiQSvICywXOfyVLBTYkPCI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=hiDkEE6J0GX+v0+CdESRoz6zAHZRHQZ72O5QKVYZ5LGWrjOEvbGY+IX/tGmhLRq9z
+	 4EoNAziY4xo2uHV9ZoPku2B4MfYlNMovYNZdeyRXjA2Jx/wWHrU4V1izR9ldGxdxtk
+	 4iph9jC++nXZzJojFvQ59UmAE6u4XbopROzZAjq0=
+Date: Fri, 14 Mar 2025 18:06:25 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Nico Pache <npache@redhat.com>
+Cc: linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+ linux-mm@kvack.org, virtualization@lists.linux.dev,
+ alexander.atanasov@virtuozzo.com, muchun.song@linux.dev,
+ roman.gushchin@linux.dev, mhocko@kernel.org, kys@microsoft.com,
+ haiyangz@microsoft.com, wei.liu@kernel.org, decui@microsoft.com,
+ jgross@suse.com, sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
+ mst@redhat.com, david@redhat.com, yosry.ahmed@linux.dev,
+ hannes@cmpxchg.org, nphamcs@gmail.com, chengming.zhou@linux.dev,
+ kanchana.p.sridhar@intel.com, llong@redhat.com, shakeel.butt@linux.dev
+Subject: Re: [PATCH v2 1/4] meminfo: add a per node counter for balloon
+ drivers
+Message-Id: <20250314180625.8c3a2a5a990a132a7b0b9072@linux-foundation.org>
+In-Reply-To: <20250314213757.244258-2-npache@redhat.com>
+References: <20250314213757.244258-1-npache@redhat.com>
+	<20250314213757.244258-2-npache@redhat.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Friday, March 14th, 2025 at 2:14 AM, Andrew Cooper <andrew.cooper3@citri=
-x.com> wrote:
+On Fri, 14 Mar 2025 15:37:54 -0600 Nico Pache <npache@redhat.com> wrote:
 
->=20
->=20
-> On 14/03/2025 1:20 am, dmkhn@proton.me wrote:
->=20
-> > Replace the open-coded value 16 with the NR_ISAIRQS symbol to enhance
-> > readability.
-> >=20
-> > No functional changes.
-> >=20
-> > Signed-off-by: Denis Mukhin dmukhin@ford.com
->=20
->=20
-> There are currently very few uses of NR_ISAIRQS, and you're about
-> tripling that.
->=20
-> Please could you do a prep patch renaming to NR_IRS_IRQS first for
-> legibility?
+> Add NR_BALLOON_PAGES counter to track memory used by balloon drivers and
+> expose it through /proc/meminfo and other memory reporting interfaces.
+> 
+> ...
+>
+> --- a/fs/proc/meminfo.c
+> +++ b/fs/proc/meminfo.c
+> @@ -162,6 +162,8 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
+>  	show_val_kb(m, "Unaccepted:     ",
+>  		    global_zone_page_state(NR_UNACCEPTED));
+>  #endif
+> +	show_val_kb(m, "Balloon:        ",
+> +		    global_node_page_state(NR_BALLOON_PAGES));
 
-Posted here:
-  https://lore.kernel.org/xen-devel/20250315010033.2917197-2-dmukhin@ford.c=
-om/
-
-Thanks!
-
->=20
-> ~Andrew
+Please update Documentation/filesystems/proc.rst for this.
 
