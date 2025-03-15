@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2124C282EC
-	for <xen-devel@archiver.kernel.org>; Sat, 15 Mar 2025 01:10:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915660.1321128 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48769C282EC
+	for <xen-devel@archiver.kernel.org>; Sat, 15 Mar 2025 01:20:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915675.1321138 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttG31-0004ap-Aw; Sat, 15 Mar 2025 01:10:43 +0000
+	id 1ttGC0-0006II-4q; Sat, 15 Mar 2025 01:20:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915660.1321128; Sat, 15 Mar 2025 01:10:43 +0000
+Received: by outflank-mailman (output) from mailman id 915675.1321138; Sat, 15 Mar 2025 01:20:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttG31-0004ai-7w; Sat, 15 Mar 2025 01:10:43 +0000
-Received: by outflank-mailman (input) for mailman id 915660;
- Sat, 15 Mar 2025 01:10:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ttGC0-0006IB-2G; Sat, 15 Mar 2025 01:20:00 +0000
+Received: by outflank-mailman (input) for mailman id 915675;
+ Sat, 15 Mar 2025 01:19:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ms5H=WC=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1ttFuh-0000Y2-6J
- for xen-devel@lists.xenproject.org; Sat, 15 Mar 2025 01:02:07 +0000
-Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
- [79.135.106.31]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1cadd952-0139-11f0-9899-31a8f345e629;
- Sat, 15 Mar 2025 02:02:05 +0100 (CET)
+ id 1ttGBy-0006I5-1p
+ for xen-devel@lists.xenproject.org; Sat, 15 Mar 2025 01:19:58 +0000
+Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
+ [79.135.106.30]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9b2b3e7a-013b-11f0-9ab9-95dc52dad729;
+ Sat, 15 Mar 2025 02:19:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,213 +38,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1cadd952-0139-11f0-9899-31a8f345e629
+X-Inumbo-ID: 9b2b3e7a-013b-11f0-9ab9-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1742000524; x=1742259724;
-	bh=tsh50c2cyRTBr90Y+fG7b639MStHK6HWLHBjeB3Y/kE=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=fCP9qSXhrnKFiyw5uN14OhOgJFa9rXBG3YOR14OVqZq2A3wtInF8FaXidx0rZswF/
-	 4l4OLqk6WMCz7Y66CuzoAF5vjfatd+WPzZEMepYu1/NJyun4n9GPgKDM7zogY61399
-	 1yCsOsuFmcBOsDuJY4DY69fKvnckB6KMbzHWzisAqZv+S1cSIMmWDSh3mFglCDLD8r
-	 oCFNf3AnZaPof6C2DUwj3ljNU/TbxFqVx/ubrAjSvzTEcbPiykgVe5EgXuNipTB6Qu
-	 nq+YsRjRE8gBmxPbmdjIWwdaXeenmESYxhdF0iQU+C1t/0a5nDXURbWVEl3b7sr4ly
-	 J/ChopIzQg+iw==
-Date: Sat, 15 Mar 2025 01:01:59 +0000
-To: Jan Beulich <jbeulich@suse.com>
-From: Denis Mukhin <dmkhn@proton.me>
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] x86/irq: use NR_ISAIRQS instead of open-coded value
-Message-ID: <IeEQHciWHQiUOKSFJsgfi8PjmC35rlySSbp2Qt8TtCcu5b17O1-PeMIP-mxhT8dV0ipocTkxGzhpHNQXr_kwDnxQnxaMPkdz9xrJ5KZZJIY=@proton.me>
-In-Reply-To: <2f365e4a-1d01-4f1c-85b4-25be22545822@suse.com>
-References: <20250314011528.2608217-1-dmukhin@ford.com> <2f365e4a-1d01-4f1c-85b4-25be22545822@suse.com>
+	s=protonmail; t=1742001595; x=1742260795;
+	bh=pc23NTk5/ewe+F6KDRl7Ey05pFOa38NB6VbcqzfQMeo=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
+	 List-Unsubscribe:List-Unsubscribe-Post;
+	b=RL5GYqQcYIwSoLuQzcrmZpIssMheLs23WyUwWOeTrVYZYgwQ69rSDWjy6MCuM6FYx
+	 4oHPsSufTpfXiqEC4fZzOkRaHok63Lvw44rKXjBK2xWy8zRk9ubqkQrErMItS3bNbS
+	 Jjk7Kef4cb7YsEPvR1kMVn3pl/RJg/8GojKKXwEYw2021YP+t2Lfg5GqJCBfb1zpH9
+	 nkpTxmI/hPrY8Huj75RcA4GKVreqvCjIhNdHZXTx29NVaUICTB8jmKS/RZgY5R0CS0
+	 DWCuV2r8A7y0ywV81UWf5YLJfEamOguRIt6cgzFsSydn74mXIGJzucV8PUeUknig89
+	 PT+JL56QPMOhA==
+Date: Sat, 15 Mar 2025 01:19:49 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v3] x86/hvm: add HVM-specific Kconfig
+Message-ID: <20250315011945.2927542-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 31c45b9d40aa06da1d2077b27d6f6631ca809a0b
+X-Pm-Message-ID: 73b44169211124f2bb66d79362226426fc484003
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Friday, March 14th, 2025 at 1:51 AM, Jan Beulich <jbeulich@suse.com> wro=
-te:
+Add a separate menu for configuring HVM build-time settings to better
+organize HVM-specific options.
 
->=20
->=20
-> On 14.03.2025 02:20, dmkhn@proton.me wrote:
->=20
-> > Replace the open-coded value 16 with the NR_ISAIRQS symbol to enhance
-> > readability.
-> >=20
-> > No functional changes.
-> >=20
-> > Signed-off-by: Denis Mukhin dmukhin@ford.com
-> > ---
-> > xen/arch/x86/hvm/dm.c | 2 +-
-> > xen/arch/x86/hvm/irq.c | 17 +++++++++--------
-> > xen/arch/x86/hvm/vlapic.c | 10 +++++-----
-> > xen/arch/x86/hvm/vpic.c | 4 ++--
-> > xen/arch/x86/include/asm/irq.h | 2 +-
-> > xen/arch/x86/io_apic.c | 12 ++++++------
-> > xen/arch/x86/irq.c | 6 +++---
-> > 7 files changed, 27 insertions(+), 26 deletions(-)
-> >=20
-> > diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-> > index a1f7a4d30a..36d47664e9 100644
-> > --- a/xen/arch/x86/hvm/dm.c
-> > +++ b/xen/arch/x86/hvm/dm.c
-> > @@ -90,7 +90,7 @@ static int set_pci_intx_level(struct domain *d, uint1=
-6_t domain,
-> > static int set_isa_irq_level(struct domain *d, uint8_t isa_irq,
-> > uint8_t level)
-> > {
-> > - if ( isa_irq > 15 )
-> > + if ( isa_irq >=3D NR_ISAIRQS )
-> > return -EINVAL;
-> >=20
-> > switch ( level )
-> > diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-> > index 1eab44defc..1f7d8ca43e 100644
-> > --- a/xen/arch/x86/hvm/irq.c
-> > +++ b/xen/arch/x86/hvm/irq.c
-> > @@ -209,7 +209,7 @@ int hvm_isa_irq_assert(struct domain *d, unsigned i=
-nt isa_irq,
-> > unsigned int gsi =3D hvm_isa_irq_to_gsi(isa_irq);
-> > int vector =3D -1;
-> >=20
-> > - ASSERT(isa_irq <=3D 15);
-> > + ASSERT(isa_irq < NR_ISAIRQS);
-> >=20
-> > spin_lock(&d->arch.hvm.irq_lock);
-> >=20
-> > @@ -231,7 +231,7 @@ void hvm_isa_irq_deassert(
-> > struct hvm_irq *hvm_irq =3D hvm_domain_irq(d);
-> > unsigned int gsi =3D hvm_isa_irq_to_gsi(isa_irq);
-> >=20
-> > - ASSERT(isa_irq <=3D 15);
-> > + ASSERT(isa_irq < NR_ISAIRQS);
-> >=20
-> > spin_lock(&d->arch.hvm.irq_lock);
-> >=20
-> > @@ -266,12 +266,12 @@ static void hvm_set_callback_irq_level(struct vcp=
-u *v)
-> > if ( asserted && (hvm_irq->gsi_assert_count[gsi]++ =3D=3D 0) )
-> > {
-> > vioapic_irq_positive_edge(d, gsi);
-> > - if ( gsi <=3D 15 )
-> > + if ( gsi < NR_ISAIRQS )
-> > vpic_irq_positive_edge(d, gsi);
-> > }
-> > else if ( !asserted && (--hvm_irq->gsi_assert_count[gsi] =3D=3D 0) )
-> > {
-> > - if ( gsi <=3D 15 )
-> > + if ( gsi < NR_ISAIRQS )
-> > vpic_irq_negative_edge(d, gsi);
-> > }
-> > break;
-> > @@ -328,7 +328,7 @@ int hvm_set_pci_link_route(struct domain *d, u8 lin=
-k, u8 isa_irq)
-> > u8 old_isa_irq;
-> > int i;
-> >=20
-> > - if ( (link > 3) || (isa_irq > 15) )
-> > + if ( (link > 3) || (isa_irq >=3D NR_ISAIRQS) )
-> > return -EINVAL;
-> >=20
-> > spin_lock(&d->arch.hvm.irq_lock);
-> > @@ -440,7 +440,8 @@ void hvm_set_callback_via(struct domain *d, uint64_=
-t via)
-> > {
-> > case HVMIRQ_callback_gsi:
-> > gsi =3D hvm_irq->callback_via.gsi;
-> > - if ( (--hvm_irq->gsi_assert_count[gsi] =3D=3D 0) && (gsi <=3D 15) )
-> > + if ( (--hvm_irq->gsi_assert_count[gsi] =3D=3D 0) &&
-> > + (gsi < NR_ISAIRQS) )
-> > vpic_irq_negative_edge(d, gsi);
-> > break;
-> > case HVMIRQ_callback_pci_intx:
-> > @@ -464,7 +465,7 @@ void hvm_set_callback_via(struct domain *d, uint64_=
-t via)
-> > (hvm_irq->gsi_assert_count[gsi]++ =3D=3D 0) )
-> > {
-> > vioapic_irq_positive_edge(d, gsi);
-> > - if ( gsi <=3D 15 )
-> > + if ( gsi < NR_ISAIRQS )
-> > vpic_irq_positive_edge(d, gsi);
-> > }
-> > break;
-> > @@ -764,7 +765,7 @@ static int cf_check irq_check_link(const struct dom=
-ain *d,
-> > return -EINVAL;
-> >=20
-> > for ( link =3D 0; link < ARRAY_SIZE(pci_link->route); link++ )
-> > - if ( pci_link->route[link] > 15 )
-> > + if ( pci_link->route[link] >=3D NR_ISAIRQS )
-> > {
-> > printk(XENLOG_G_ERR
-> > "HVM restore: PCI-ISA link %u out of range (%u)\n",
->=20
->=20
-> Up to here I agree with the adjustments made, but ...
->=20
-> > --- a/xen/arch/x86/hvm/vlapic.c
-> > +++ b/xen/arch/x86/hvm/vlapic.c
-> > @@ -123,7 +123,7 @@ static void vlapic_error(struct vlapic *vlapic, uns=
-igned int err_bit)
-> > * will end up back here. Break the cycle by only injecting LVTERR
-> > * if it will succeed, and folding in RECVILL otherwise.
-> > */
-> > - if ( (lvterr & APIC_VECTOR_MASK) >=3D 16 )
-> > + if ( (lvterr & APIC_VECTOR_MASK) >=3D NR_ISAIRQS )
-> > inj =3D true;
-> > else
-> > set_bit(ilog2(APIC_ESR_RECVILL), &vlapic->hw.pending_esr);
-> > @@ -136,7 +136,7 @@ static void vlapic_error(struct vlapic *vlapic, uns=
-igned int err_bit)
-> >=20
-> > bool vlapic_test_irq(const struct vlapic *vlapic, uint8_t vec)
-> > {
-> > - if ( unlikely(vec < 16) )
-> > + if ( unlikely(vec < NR_ISAIRQS) )
-> > return false;
-> >=20
-> > if ( hvm_funcs.test_pir &&
-> > @@ -150,7 +150,7 @@ void vlapic_set_irq(struct vlapic *vlapic, uint8_t =
-vec, uint8_t trig)
-> > {
-> > struct vcpu *target =3D vlapic_vcpu(vlapic);
-> >=20
-> > - if ( unlikely(vec < 16) )
-> > + if ( unlikely(vec < NR_ISAIRQS) )
-> > {
-> > vlapic_error(vlapic, ilog2(APIC_ESR_RECVILL));
-> > return;
-> > @@ -523,7 +523,7 @@ void vlapic_ipi(
-> > struct vlapic *target =3D vlapic_lowest_prio(
-> > vlapic_domain(vlapic), vlapic, short_hand, dest, dest_mode);
-> >=20
-> > - if ( unlikely((icr_low & APIC_VECTOR_MASK) < 16) )
-> > + if ( unlikely((icr_low & APIC_VECTOR_MASK) < NR_ISAIRQS) )
-> > vlapic_error(vlapic, ilog2(APIC_ESR_SENDILL));
-> > else if ( target )
-> > vlapic_accept_irq(vlapic_vcpu(target), icr_low);
-> > @@ -531,7 +531,7 @@ void vlapic_ipi(
-> > }
-> >=20
-> > case APIC_DM_FIXED:
-> > - if ( unlikely((icr_low & APIC_VECTOR_MASK) < 16) )
-> > + if ( unlikely((icr_low & APIC_VECTOR_MASK) < NR_ISAIRQS) )
-> > {
-> > vlapic_error(vlapic, ilog2(APIC_ESR_SENDILL));
-> > break;
->=20
->=20
-> ... the 16 here has a different origin (in the local APIC spec). Changes
-> further down look okay again.
+HVM options will now appear in a dedicated sub-menu in the menuconfig
+tool.
 
-Sorry for that, I did not verify with the spec.
+Also, make AMD_SVM config dependent on AMD config and INTEL_VMX on INTEL
+respectively.
 
-Thanks!
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes v2->v3:
+- dropped menu around AMD_SVM and INTEL_VMX
+- rebased, resolved merge conflict for MEM_PAGING - it depends on VM_EVENT
+---
+ xen/arch/x86/Kconfig     | 75 +---------------------------------------
+ xen/arch/x86/hvm/Kconfig | 73 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 74 insertions(+), 74 deletions(-)
+ create mode 100644 xen/arch/x86/hvm/Kconfig
 
->=20
-> Jan
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index f086799594..18efdb2e31 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -107,42 +107,7 @@ config PV_LINEAR_PT
+=20
+          If unsure, say Y.
+=20
+-config HVM
+-=09bool "HVM support"
+-=09depends on !PV_SHIM_EXCLUSIVE
+-=09default !PV_SHIM
+-=09select COMPAT
+-=09select IOREQ_SERVER
+-=09select MEM_ACCESS_ALWAYS_ON
+-=09help
+-=09  Interfaces to support HVM domains.  HVM domains require hardware
+-=09  virtualisation extensions (e.g. Intel VT-x, AMD SVM), but can boot
+-=09  guests which have no specific Xen knowledge.
+-
+-=09  This option is needed if you want to run HVM or PVH domains.
+-
+-=09  If unsure, say Y.
+-
+-config AMD_SVM
+-=09bool "AMD-V" if EXPERT
+-=09depends on HVM
+-=09default y
+-=09help
+-=09  Enables virtual machine extensions on platforms that implement the
+-=09  AMD Virtualization Technology (AMD-V).
+-=09  If your system includes a processor with AMD-V support, say Y.
+-=09  If in doubt, say Y.
+-
+-config INTEL_VMX
+-=09bool "Intel VT-x" if EXPERT
+-=09depends on HVM
+-=09default y
+-=09select ARCH_VCPU_IOREQ_COMPLETION
+-=09help
+-=09  Enables virtual machine extensions on platforms that implement the
+-=09  Intel Virtualization Technology (Intel VT-x).
+-=09  If your system includes a processor with Intel VT-x support, say Y.
+-=09  If in doubt, say Y.
++source "arch/x86/hvm/Kconfig"
+=20
+ config XEN_SHSTK
+ =09bool "Supervisor Shadow Stacks"
+@@ -201,25 +166,6 @@ config BIGMEM
+=20
+ =09  If unsure, say N.
+=20
+-config HVM_FEP
+-=09bool "HVM Forced Emulation Prefix support (UNSUPPORTED)" if UNSUPPORTED
+-=09default DEBUG
+-=09depends on HVM
+-=09help
+-
+-=09  Compiles in a feature that allows HVM guest to arbitrarily
+-=09  exercise the instruction emulator.
+-
+-=09  This feature can only be enabled during boot time with
+-=09  appropriate hypervisor command line option. Please read
+-=09  hypervisor command line documentation before trying to use
+-=09  this feature.
+-
+-=09  This is strictly for testing purposes, and not appropriate
+-=09  for use in production.
+-
+-=09  If unsure, say N.
+-
+ config TBOOT
+ =09bool "Xen tboot support (UNSUPPORTED)"
+ =09depends on INTEL && UNSUPPORTED
+@@ -348,14 +294,6 @@ config HYPERV_GUEST
+=20
+ endif
+=20
+-config MEM_PAGING
+-=09bool "Xen memory paging support (UNSUPPORTED)" if UNSUPPORTED
+-=09depends on HVM && VM_EVENT
+-
+-config MEM_SHARING
+-=09bool "Xen memory sharing support (UNSUPPORTED)" if UNSUPPORTED
+-=09depends on HVM
+-
+ config REQUIRE_NX
+ =09bool "Require NX (No eXecute) support"
+ =09help
+@@ -372,17 +310,6 @@ config REQUIRE_NX
+ =09  was unavailable. However, if enabled, Xen will no longer boot on
+ =09  any CPU which is lacking NX support.
+=20
+-config ALTP2M
+-=09bool "Alternate P2M support" if EXPERT
+-=09depends on INTEL_VMX
+-=09default y
+-=09help
+-=09  Alternate-p2m allows a guest to manage multiple p2m guest physical
+-=09  "memory views" (as opposed to a single p2m).
+-=09  Useful for memory introspection.
+-
+-=09  If unsure, stay with defaults.
+-
+ config UCODE_SCAN_DEFAULT
+ =09bool "Scan for microcode by default"
+ =09help
+diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+new file mode 100644
+index 0000000000..2def0f98e2
+--- /dev/null
++++ b/xen/arch/x86/hvm/Kconfig
+@@ -0,0 +1,73 @@
++menuconfig HVM
++=09bool "HVM support"
++=09depends on !PV_SHIM_EXCLUSIVE
++=09default !PV_SHIM
++=09select COMPAT
++=09select IOREQ_SERVER
++=09select MEM_ACCESS_ALWAYS_ON
++=09help
++=09  Interfaces to support HVM domains.  HVM domains require hardware
++=09  virtualisation extensions (e.g. Intel VT-x, AMD SVM), but can boot
++=09  guests which have no specific Xen knowledge.
++
++=09  This option is needed if you want to run HVM or PVH domains.
++
++=09  If unsure, say Y.
++
++if HVM
++
++config AMD_SVM
++=09bool "AMD-V" if AMD && EXPERT
++=09default y
++=09help
++=09  Enables virtual machine extensions on platforms that implement the
++=09  AMD Virtualization Technology (AMD-V).
++=09  If your system includes a processor with AMD-V support, say Y.
++=09  If in doubt, say Y.
++
++config INTEL_VMX
++=09bool "Intel VT-x" if INTEL && EXPERT
++=09default y
++=09select ARCH_VCPU_IOREQ_COMPLETION
++=09help
++=09  Enables virtual machine extensions on platforms that implement the
++=09  Intel Virtualization Technology (Intel VT-x).
++=09  If your system includes a processor with Intel VT-x support, say Y.
++=09  If in doubt, say Y.
++
++config HVM_FEP
++=09bool "HVM Forced Emulation Prefix support (UNSUPPORTED)" if UNSUPPORTED
++=09default DEBUG
++=09help
++=09  Compiles in a feature that allows HVM guest to arbitrarily
++=09  exercise the instruction emulator.
++
++=09  This feature can only be enabled during boot time with
++=09  appropriate hypervisor command line option. Please read
++=09  hypervisor command line documentation before trying to use
++=09  this feature.
++
++=09  This is strictly for testing purposes, and not appropriate
++=09  for use in production.
++
++=09  If unsure, say N.
++
++config ALTP2M
++=09bool "Alternate P2M support" if EXPERT
++=09depends on INTEL_VMX
++=09default y
++=09help
++=09  Alternate-p2m allows a guest to manage multiple p2m guest physical
++=09  "memory views" (as opposed to a single p2m).
++=09  Useful for memory introspection.
++
++=09  If unsure, stay with defaults.
++
++config MEM_PAGING
++=09bool "Xen memory paging support (UNSUPPORTED)" if UNSUPPORTED
++=09depends on VM_EVENT
++
++config MEM_SHARING
++=09bool "Xen memory sharing support (UNSUPPORTED)" if UNSUPPORTED
++
++endif
+--=20
+2.34.1
+
+
 
