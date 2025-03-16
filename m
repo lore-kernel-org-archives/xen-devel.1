@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8B4C28B30
-	for <xen-devel@archiver.kernel.org>; Sun, 16 Mar 2025 10:09:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.915996.1321189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02966C282DE
+	for <xen-devel@archiver.kernel.org>; Sun, 16 Mar 2025 10:09:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.915998.1321208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttkvW-0004Zz-DX; Sun, 16 Mar 2025 10:09:02 +0000
+	id 1ttkvb-00054h-29; Sun, 16 Mar 2025 10:09:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 915996.1321189; Sun, 16 Mar 2025 10:09:02 +0000
+Received: by outflank-mailman (output) from mailman id 915998.1321208; Sun, 16 Mar 2025 10:09:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ttkvW-0004Zs-9h; Sun, 16 Mar 2025 10:09:02 +0000
-Received: by outflank-mailman (input) for mailman id 915996;
- Sun, 16 Mar 2025 10:09:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ttkva-00054Y-Um; Sun, 16 Mar 2025 10:09:06 +0000
+Received: by outflank-mailman (input) for mailman id 915998;
+ Sun, 16 Mar 2025 10:09:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tZWB=WD=gmail.com=sultanovandriy@srs-se1.protection.inumbo.net>)
- id 1ttkvU-0004ZD-Ve
- for xen-devel@lists.xenproject.org; Sun, 16 Mar 2025 10:09:00 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ad50ce06-024e-11f0-9899-31a8f345e629;
- Sun, 16 Mar 2025 11:08:58 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso11677695e9.0
- for <xen-devel@lists.xenproject.org>; Sun, 16 Mar 2025 03:08:58 -0700 (PDT)
+ id 1ttkvZ-0004LN-62
+ for xen-devel@lists.xenproject.org; Sun, 16 Mar 2025 10:09:05 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b0b49b71-024e-11f0-9aba-95dc52dad729;
+ Sun, 16 Mar 2025 11:09:04 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so5798415e9.0
+ for <xen-devel@lists.xenproject.org>; Sun, 16 Mar 2025 03:09:04 -0700 (PDT)
 Received: from localhost.localdomain
  (cpc92320-cmbg19-2-0-cust1786.5-4.cable.virginm.net. [82.13.70.251])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1ffc4173sm73909045e9.20.2025.03.16.03.08.56
+ 5b1f17b1804b1-43d1ffc4173sm73909045e9.20.2025.03.16.03.09.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Mar 2025 03:08:57 -0700 (PDT)
+ Sun, 16 Mar 2025 03:09:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,111 +48,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad50ce06-024e-11f0-9899-31a8f345e629
+X-Inumbo-ID: b0b49b71-024e-11f0-9aba-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742119737; x=1742724537; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1742119744; x=1742724544; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OQLTn/XenpIx0boi8H9Y1QqNDqCLS4K8C+EwtPClR+I=;
-        b=PiWX9Rr6sexLAOF40PNvULOXf9twiX3ACVpWXmObfMXGkBq+0od9SPazACosunpjSi
-         Wk/qqSsVuH1ULBbxtdZmL1Kg2gDKhNn15z1mcqUoNeKlhfJCzn+EkK4aIGfiG3hbXkjW
-         Xm6xJGKwyC/LE4iqJjBuF+t9IVTe5YAQfjnFRAqhi5svebK1bX3m6NjucYAl/A7VPcdA
-         hj9drwd5mmUXUXY4b7U8YWxmBJQkdxa9Vo1ZKdroJWaBMCKpz9cSKyxoEsI657N6M2sq
-         IwOMuOLAd1+OB/vEcbMcHQ9xrvNeAUy/dAf7YkT5dRKxvB3HoBWXcBNIA2be0HfQBA25
-         uleA==
+        bh=mEVyYuoMYyc0LPAkEpFNbjkJvih0jmG/eGzoOUR4EB0=;
+        b=PHVTCBsqx9qF7q+3kljMwdmb1oFx9a8Neibi48TPOkdGh4kpzrPcbNq6yIIpZXHQrG
+         Qwwutmm1LzO+Si5EkVxokWRAUcqh2v5J/BQ9UtMFx1Dyi8f29FIpr7nPu40QJZeN4e4o
+         I4BxT05ePWpf2Gpcv53McJvMhbFqRiZJglJS1nFL812NBMD+hkOvsDDb4nBI8Wcp/K6H
+         VRUiavjLodOQUwQehTF9hmW9ebeqEJc2JVjFcYrfZcElkb04fOr9pkLtUsSDnRSnBzNL
+         u7gjeqbtd6oXUEOQUPQ0G4mjfC8KwkEUa7nWTITjq5zmg7bzE5joTnoCPtsn+u3MVB5R
+         ECOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742119737; x=1742724537;
+        d=1e100.net; s=20230601; t=1742119744; x=1742724544;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OQLTn/XenpIx0boi8H9Y1QqNDqCLS4K8C+EwtPClR+I=;
-        b=ncWTMT5xlMEsrC3e4/hKm19grs5xSd5udFgLmg3KNst5KIfmYGpKiiMHLFskyfO3/N
-         ww0jmJCa3MUMDYKXZunsaLnnVu7AxeCNaZkAYpy0EX6ilTkFnoIcIQanFqYvgji/aA2P
-         WQIHCsfi97+Oz/idHUnhBBEL0r0TEyecQ9KC3y4gfTcry49qhYQe26+NbhXj2jYYYvJp
-         SIzBBuUBE3AAAykBlFkhreycyeL6lFpGhmK0U/OpaZn/BIT6KeeIFbg9OW7fMpIn0oNd
-         Dg/CfRRtP51HKOO8dhSiGxBsyTOjxUjaJgmRxlJMQyXBy7nRsHOCW9vcQe47TWS2Wjec
-         7YBw==
-X-Gm-Message-State: AOJu0Yxy4hlgg5D5aTAoPYrk75I+VxUN681UDFFbkAZ/Tk3hPcfSBihQ
-	Es5Ph1jKSJ7mmBF+qR1ZwT8JpMMDp9jV4BCRBpxiksbkj8PAzUFWBchJNB6i
-X-Gm-Gg: ASbGncs74WCWoz8TsEz6CRgVJS8A7820I4dk2kJqj2XF5v/qKNzGcaSm5oJfJq/tZjG
-	vk3THUHqpc1iG5nPSnM22mYPjrjFijqf3h2DhOl1ok6/MIZtA9XfiEqJw7KECObJ+g+ZBmbpFZF
-	Y6b/UP8WoiMVN/gytY1iZ87ieA9r7P2nCpSm359qcFXCvqeQJ7X0YFcoo+oRdeJNKu4xqZkJGU2
-	qJyU5idijvu/2tUMs+Acq7oi3NwHtv6okvxaF25WvozjbVrmgW21xhy0rukWoUD8Jh3Hw8zwiVR
-	u1qmjDy77a93ISCveRcgFhjR0kG3iMoQ642iFaH5JbLY1fuaJzVS83uoeN4l7sU53WnWBqBTCc7
-	IbRZtvhPUeLCgjOGeUFj4T1pYnXjE0XqcvHkXzc8bvQpE
-X-Google-Smtp-Source: AGHT+IGWulxFYD5zs1t2I9sftuvJCisLqiiX2mMGAKhh8yZDRX72uVzJE3LerTkhP8odzl82fAxtLw==
-X-Received: by 2002:a05:600c:46c8:b0:43c:ebc4:36a5 with SMTP id 5b1f17b1804b1-43d1ec6946cmr102089345e9.7.1742119737341;
-        Sun, 16 Mar 2025 03:08:57 -0700 (PDT)
+        bh=mEVyYuoMYyc0LPAkEpFNbjkJvih0jmG/eGzoOUR4EB0=;
+        b=Xh6RuggRkMVWaLvyk7VqBq+VRKSZnEg2Ys1+yFOZvRhOH6lTE4nmdmjbIbZHIPMICU
+         5RKO4F3CXREET49ACQjj1xYfBQkT5HnFpZfaGnZ1BlUnzg7g8fkfwQGCn0/VGSlFWxZA
+         yzvxiAtseXUkRghVrc89pIe6M69zXgqAOa1I9O3+WH//9/CZvDX6neZQ1Sw5NEM3I9a1
+         0tdks8aH1FGk9w2CWOZ7HigwdS4ermVHngK82Edliz0XUEH9KVjvpkg17iDEF+b1SarJ
+         R8U0qVaFAM7ejZ158oG4cLIIsi3tIcTi5FBPWs85kJmyTspjxHVNknAa+R3mVG/Ek+ub
+         Hd1w==
+X-Gm-Message-State: AOJu0YxM4Gd/4hYF210CixH76HUM/vDnbb36t0eXNP11tpEDeW2QPaBi
+	Loz0gNhXpREXQwK4QozYOhNgkYuGePPHCa6lUkRcGIfv4EwJ8P+talRW8Tk2
+X-Gm-Gg: ASbGnctjJSOwUjk2rPmHU4ThJi8B7tD/ziVnHCToAysye/vBJnsHTkxJ0D68OWE3ztR
+	F7T7UeVZk6ps1CM+sJWkIUgYmtq2jjocEzLgt3DrcaCAj6huG+fhGB2BrxfFDewNrbCBOYW+eAK
+	w+ZWonLCpAmlG11TCedxYYqVEEkqTK0qEn/aTFVmgAOZB1cJVGzNHYpB3s89+wZRV6gsqpnFfh5
+	YzwyZ27WAUiB26bzdparC1dSvMMFKx+4FFLh2NSWt+6a0vhETVZ16Ud+NTxRtuXW42XKZo48mQD
+	qmCB+em4dUj75U4DhQyrt6Lw/Fpic02hA1wIHGO2a4DqX8NVguBqgT0X4I6sYiVePZXGLRZY5r3
+	CYLn9QJkDeK1bFaEG5gJtbXGC95HLhL49DT0lbecS3O8r
+X-Google-Smtp-Source: AGHT+IHyOcmeSsZsAVwMVUQJfvSxbiBZNZbirfOYIi+P6G4xXpaB7sjruggr1LHhU+CHOdNTuw1SlA==
+X-Received: by 2002:a05:600c:3151:b0:439:9434:4f3b with SMTP id 5b1f17b1804b1-43d1f1fc173mr88356915e9.8.1742119743366;
+        Sun, 16 Mar 2025 03:09:03 -0700 (PDT)
 From: Andrii Sultanov <sultanovandriy@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrii Sultanov <sultanovandriy@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/3] drivers: Change amd_iommu struct to contain pci_sbdf_t, simplify code
-Date: Sun, 16 Mar 2025 10:08:49 +0000
-Message-ID: <73295790a1df8f4f1406a8e86e7c81a98cb1d3e6.1742063500.git.sultanovandriy@gmail.com>
+Subject: [PATCH v2 3/3] drivers: Make ioapic_sbdf and hpet_sbdf contain pci_sbdf_t
+Date: Sun, 16 Mar 2025 10:08:51 +0000
+Message-ID: <3dfb3e32d06f204f9eb2087ea0d570140c95feda.1742063500.git.sultanovandriy@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1742063500.git.sultanovandriy@gmail.com>
 References: <cover.1742063500.git.sultanovandriy@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Following on from 250d87dc3ff9 ("x86/msi: Change __msi_set_enable() to
-take pci_sbdf_t"), struct amd_iommu has its seg and bdf fields
-backwards with relation to pci_sbdf_t. Swap them around, and simplify the
-expressions regenerating an sbdf_t from seg+bdf.
+Following a similar change to amd_iommu struct, make two more structs
+take pci_sbdf_t directly instead of seg and bdf separately. This lets us
+drop several conversions from the latter to the former and simplifies
+several comparisons and assignments.
 
-Bloat-o-meter reports:
-add/remove: 0/0 grow/shrink: 6/11 up/down: 135/-327 (-192)
-Function                                     old     new   delta
-_einittext                                 22028   22092     +64
-amd_iommu_prepare                            853     897     +44
-_hvm_dpci_msi_eoi                            157     168     +11
-__mon_lengths                               2928    2936      +8
-_invalidate_all_devices                      133     138      +5
-amd_iommu_get_reserved_device_memory         521     524      +3
-amd_iommu_domain_destroy                      46      43      -3
-build_info                                   752     744      -8
-amd_iommu_add_device                         856     844     -12
-amd_iommu_msi_enable                          33      20     -13
-update_intremap_entry_from_msi_msg           879     859     -20
-amd_iommu_get_supported_ivhd_type             86      54     -32
-amd_iommu_detect_one_acpi                    918     886     -32
-iterate_ivrs_mappings                        169     129     -40
-flush_command_buffer                         460     417     -43
-set_iommu_interrupt_handler                  421     377     -44
-enable_iommu                                1745    1665     -80
-
-Resolves: https://gitlab.com/xen-project/xen/-/issues/198
-
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Andrii Sultanov <sultanovandriy@gmail.com>
 
 ---
+
+This particular commit does not have any effect on code size:
+add/remove: 0/0 grow/shrink: 2/6 up/down: 96/-96 (0)
+Function                                     old     new   delta
+_einittext                                 22092   22156     +64
+_hvm_dpci_msi_eoi                            133     165     +32
+amd_iommu_detect_one_acpi                    876     868      -8
+iov_supports_xt                              275     264     -11
+amd_iommu_read_ioapic_from_ire               344     332     -12
+amd_setup_hpet_msi                           237     224     -13
+amd_iommu_ioapic_update_ire                  575     555     -20
+amd_iommu_get_supported_ivhd_type             86      54     -32
+
+So we don't have to take it - but imho it significantly simplifies
+source code and makes it more readable.
+
 Changes in V2:
 * Split single commit into several patches
-* Added the commit title of the referenced patch
-* Dropped brackets around &(iommu->sbdf) and &(sbdf)
+* Change the format specifier to %pp in amd_iommu_ioapic_update_ire
 ---
- xen/drivers/passthrough/amd/iommu.h        | 10 ++++++++--
- xen/drivers/passthrough/amd/iommu_cmd.c    |  4 ++--
- xen/drivers/passthrough/amd/iommu_detect.c |  2 +-
- xen/drivers/passthrough/amd/iommu_init.c   | 23 ++++++++++------------
- xen/drivers/passthrough/amd/iommu_map.c    |  2 +-
- 5 files changed, 22 insertions(+), 19 deletions(-)
+ xen/drivers/passthrough/amd/iommu.h      | 17 ++++++++--
+ xen/drivers/passthrough/amd/iommu_intr.c | 40 +++++++++++-------------
+ 2 files changed, 34 insertions(+), 23 deletions(-)
 
 diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
-index 00e81b4b2a..a30c8c97ea 100644
+index a9e64b8304..6903b1bc5d 100644
 --- a/xen/drivers/passthrough/amd/iommu.h
 +++ b/xen/drivers/passthrough/amd/iommu.h
-@@ -77,8 +77,14 @@ struct amd_iommu {
-     struct list_head list;
-     spinlock_t lock; /* protect iommu */
+@@ -268,7 +268,13 @@ int cf_check amd_setup_hpet_msi(struct msi_desc *msi_desc);
+ void cf_check amd_iommu_dump_intremap_tables(unsigned char key);
  
--    u16 seg;
--    u16 bdf;
+ extern struct ioapic_sbdf {
+-    u16 bdf, seg;
 +    union {
 +        struct {
 +            uint16_t bdf;
@@ -160,126 +147,147 @@ index 00e81b4b2a..a30c8c97ea 100644
 +        };
 +        pci_sbdf_t sbdf;
 +    };
-+
-     struct msi_desc msi;
+     u8 id;
+     bool cmdline;
+     u16 *pin_2_idx;
+@@ -279,7 +285,14 @@ unsigned int ioapic_id_to_index(unsigned int apic_id);
+ unsigned int get_next_ioapic_sbdf_index(void);
  
-     u16 cap_offset;
-diff --git a/xen/drivers/passthrough/amd/iommu_cmd.c b/xen/drivers/passthrough/amd/iommu_cmd.c
-index 83c525b84f..d7162e36d6 100644
---- a/xen/drivers/passthrough/amd/iommu_cmd.c
-+++ b/xen/drivers/passthrough/amd/iommu_cmd.c
-@@ -85,7 +85,7 @@ static void flush_command_buffer(struct amd_iommu *iommu,
-             threshold |= threshold << 1;
-             printk(XENLOG_WARNING
-                    "AMD IOMMU %pp: %scompletion wait taking too long\n",
--                   &PCI_SBDF(iommu->seg, iommu->bdf),
-+                   &iommu->sbdf,
-                    timeout_base ? "iotlb " : "");
-             timeout = 0;
-         }
-@@ -95,7 +95,7 @@ static void flush_command_buffer(struct amd_iommu *iommu,
-     if ( !timeout )
-         printk(XENLOG_WARNING
-                "AMD IOMMU %pp: %scompletion wait took %lums\n",
--               &PCI_SBDF(iommu->seg, iommu->bdf),
-+               &iommu->sbdf,
-                timeout_base ? "iotlb " : "",
-                (NOW() - start) / 10000000);
- }
-diff --git a/xen/drivers/passthrough/amd/iommu_detect.c b/xen/drivers/passthrough/amd/iommu_detect.c
-index cede44e651..8567da2b24 100644
---- a/xen/drivers/passthrough/amd/iommu_detect.c
-+++ b/xen/drivers/passthrough/amd/iommu_detect.c
-@@ -231,7 +231,7 @@ int __init amd_iommu_detect_one_acpi(
-     rt = pci_ro_device(iommu->seg, bus, PCI_DEVFN(dev, func));
-     if ( rt )
-         printk(XENLOG_ERR "Could not mark config space of %pp read-only (%d)\n",
--               &PCI_SBDF(iommu->seg, iommu->bdf), rt);
-+               &iommu->sbdf, rt);
- 
-     list_add_tail(&iommu->list, &amd_iommu_head);
-     rt = 0;
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index bb25b55c85..ea930426be 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -409,9 +409,7 @@ static void iommu_reset_log(struct amd_iommu *iommu,
- 
- static void amd_iommu_msi_enable(struct amd_iommu *iommu, int flag)
+ extern struct hpet_sbdf {
+-    u16 bdf, seg, id;
++    union {
++        struct {
++            uint16_t bdf;
++            uint16_t seg;
++        };
++        pci_sbdf_t sbdf;
++    };
++    uint16_t id;
+     enum {
+         HPET_NONE,
+         HPET_CMDL,
+diff --git a/xen/drivers/passthrough/amd/iommu_intr.c b/xen/drivers/passthrough/amd/iommu_intr.c
+index 4d7dc2fdb4..e31ab12b60 100644
+--- a/xen/drivers/passthrough/amd/iommu_intr.c
++++ b/xen/drivers/passthrough/amd/iommu_intr.c
+@@ -323,7 +323,8 @@ void cf_check amd_iommu_ioapic_update_ire(
+     unsigned int apic, unsigned int pin, uint64_t rte)
  {
--    pci_sbdf_t sbdf = { .seg = iommu->seg, .bdf = iommu->bdf };
--
--    __msi_set_enable(sbdf, iommu->msi.msi_attrib.pos, flag);
-+    __msi_set_enable(iommu->sbdf, iommu->msi.msi_attrib.pos, flag);
- }
+     struct IO_APIC_route_entry new_rte;
+-    int seg, bdf, rc;
++    pci_sbdf_t sbdf;
++    int rc;
+     struct amd_iommu *iommu;
+     unsigned int idx;
  
- static void cf_check iommu_msi_unmask(struct irq_desc *desc)
-@@ -752,12 +750,11 @@ static bool __init set_iommu_interrupt_handler(struct amd_iommu *iommu)
-     }
+@@ -335,20 +336,18 @@ void cf_check amd_iommu_ioapic_update_ire(
+     new_rte.raw = rte;
  
-     pcidevs_lock();
--    iommu->msi.dev = pci_get_pdev(NULL, PCI_SBDF(iommu->seg, iommu->bdf));
-+    iommu->msi.dev = pci_get_pdev(NULL, iommu->sbdf);
-     pcidevs_unlock();
-     if ( !iommu->msi.dev )
+     /* get device id of ioapic devices */
+-    bdf = ioapic_sbdf[idx].bdf;
+-    seg = ioapic_sbdf[idx].seg;
+-    iommu = find_iommu_for_device(PCI_SBDF(seg, bdf));
++    sbdf = ioapic_sbdf[idx].sbdf;
++    iommu = find_iommu_for_device(sbdf);
+     if ( !iommu )
      {
--        AMD_IOMMU_WARN("no pdev for %pp\n",
--                       &PCI_SBDF(iommu->seg, iommu->bdf));
-+        AMD_IOMMU_WARN("no pdev for %pp\n", &iommu->sbdf);
-         return 0;
+-        AMD_IOMMU_WARN("failed to find IOMMU for IO-APIC @ %04x:%04x\n",
+-                       seg, bdf);
++        AMD_IOMMU_WARN("failed to find IOMMU for IO-APIC @ %pp\n", &sbdf);
+         __ioapic_write_entry(apic, pin, true, new_rte);
+         return;
      }
  
-@@ -779,7 +776,7 @@ static bool __init set_iommu_interrupt_handler(struct amd_iommu *iommu)
-         hw_irq_controller *handler;
-         u16 control;
+     /* Update interrupt remapping entry */
+     rc = update_intremap_entry_from_ioapic(
+-             bdf, iommu, &new_rte,
++             sbdf.bdf, iommu, &new_rte,
+              &ioapic_sbdf[idx].pin_2_idx[pin]);
  
--        control = pci_conf_read16(PCI_SBDF(iommu->seg, iommu->bdf),
-+        control = pci_conf_read16(iommu->sbdf,
-                                   iommu->msi.msi_attrib.pos + PCI_MSI_FLAGS);
+     if ( rc )
+@@ -369,7 +368,8 @@ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
+     unsigned int offset;
+     unsigned int val = __io_apic_read(apic, reg);
+     unsigned int pin = (reg - 0x10) / 2;
+-    uint16_t seg, bdf, req_id;
++    pci_sbdf_t sbdf;
++    uint16_t req_id;
+     const struct amd_iommu *iommu;
+     union irte_ptr entry;
  
-         iommu->msi.msi.nvec = 1;
-@@ -843,22 +840,22 @@ static void amd_iommu_erratum_746_workaround(struct amd_iommu *iommu)
-          (boot_cpu_data.x86_model > 0x1f) )
-         return;
+@@ -381,12 +381,11 @@ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
+     if ( offset >= INTREMAP_MAX_ENTRIES )
+         return val;
  
--    pci_conf_write32(PCI_SBDF(iommu->seg, iommu->bdf), 0xf0, 0x90);
--    value = pci_conf_read32(PCI_SBDF(iommu->seg, iommu->bdf), 0xf4);
-+    pci_conf_write32(iommu->sbdf, 0xf0, 0x90);
-+    value = pci_conf_read32(iommu->sbdf, 0xf4);
+-    seg = ioapic_sbdf[idx].seg;
+-    bdf = ioapic_sbdf[idx].bdf;
+-    iommu = find_iommu_for_device(PCI_SBDF(seg, bdf));
++    sbdf = ioapic_sbdf[idx].sbdf;
++    iommu = find_iommu_for_device(sbdf);
+     if ( !iommu )
+         return val;
+-    req_id = get_intremap_requestor_id(seg, bdf);
++    req_id = get_intremap_requestor_id(sbdf.seg, sbdf.bdf);
+     entry = get_intremap_entry(iommu, req_id, offset);
  
-     if ( value & (1 << 2) )
-         return;
+     if ( !(reg & 1) )
+@@ -515,15 +514,15 @@ int cf_check amd_iommu_msi_msg_update_ire(
+     struct msi_desc *msi_desc, struct msi_msg *msg)
+ {
+     struct pci_dev *pdev = msi_desc->dev;
+-    int bdf, seg, rc;
++    pci_sbdf_t sbdf;
++    int rc;
+     struct amd_iommu *iommu;
+     unsigned int i, nr = 1;
+     u32 data;
  
-     /* Select NB indirect register 0x90 and enable writing */
--    pci_conf_write32(PCI_SBDF(iommu->seg, iommu->bdf), 0xf0, 0x90 | (1 << 8));
-+    pci_conf_write32(iommu->sbdf, 0xf0, 0x90 | (1 << 8));
+-    bdf = pdev ? pdev->sbdf.bdf : hpet_sbdf.bdf;
+-    seg = pdev ? pdev->seg : hpet_sbdf.seg;
++    sbdf = pdev ? pdev->sbdf : hpet_sbdf.sbdf;
  
--    pci_conf_write32(PCI_SBDF(iommu->seg, iommu->bdf), 0xf4, value | (1 << 2));
-+    pci_conf_write32(iommu->sbdf, 0xf4, value | (1 << 2));
-     printk(XENLOG_INFO
-            "AMD-Vi: Applying erratum 746 workaround for IOMMU at %pp\n",
--           &PCI_SBDF(iommu->seg, iommu->bdf));
-+           &iommu->sbdf);
+-    iommu = _find_iommu_for_device(PCI_SBDF(seg, bdf));
++    iommu = _find_iommu_for_device(sbdf);
+     if ( IS_ERR_OR_NULL(iommu) )
+         return PTR_ERR(iommu);
  
-     /* Clear the enable writing bit */
--    pci_conf_write32(PCI_SBDF(iommu->seg, iommu->bdf), 0xf0, 0x90);
-+    pci_conf_write32(iommu->sbdf, 0xf0, 0x90);
- }
+@@ -532,7 +531,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
  
- static void enable_iommu(struct amd_iommu *iommu)
-diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
-index dde393645a..ea68edc0f2 100644
---- a/xen/drivers/passthrough/amd/iommu_map.c
-+++ b/xen/drivers/passthrough/amd/iommu_map.c
-@@ -730,7 +730,7 @@ int cf_check amd_iommu_get_reserved_device_memory(
-              * the same alias ID.
-              */
-             if ( bdf != req && ivrs_mappings[req].iommu &&
--                 func(0, 0, PCI_SBDF(seg, req).sbdf, ctxt) )
-+                 func(0, 0, sbdf.sbdf, ctxt) )
-                 continue;
+     if ( msi_desc->remap_index >= 0 && !msg )
+     {
+-        update_intremap_entry_from_msi_msg(iommu, bdf, nr,
++        update_intremap_entry_from_msi_msg(iommu, sbdf.bdf, nr,
+                                            &msi_desc->remap_index,
+                                            NULL, NULL);
  
-             if ( global == pending )
+@@ -543,7 +542,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
+     if ( !msg )
+         return 0;
+ 
+-    rc = update_intremap_entry_from_msi_msg(iommu, bdf, nr,
++    rc = update_intremap_entry_from_msi_msg(iommu, sbdf.bdf, nr,
+                                             &msi_desc->remap_index,
+                                             msg, &data);
+     if ( rc > 0 )
+@@ -660,8 +659,7 @@ bool __init cf_check iov_supports_xt(void)
+         if ( idx == MAX_IO_APICS )
+             return false;
+ 
+-        if ( !find_iommu_for_device(PCI_SBDF(ioapic_sbdf[idx].seg,
+-                                             ioapic_sbdf[idx].bdf)) )
++        if ( !find_iommu_for_device(ioapic_sbdf[idx].sbdf) )
+         {
+             AMD_IOMMU_WARN("no IOMMU for IO-APIC %#x (ID %x)\n",
+                            apic, IO_APIC_ID(apic));
+@@ -690,7 +688,7 @@ int __init cf_check amd_setup_hpet_msi(struct msi_desc *msi_desc)
+         return -ENODEV;
+     }
+ 
+-    iommu = find_iommu_for_device(PCI_SBDF(hpet_sbdf.seg, hpet_sbdf.bdf));
++    iommu = find_iommu_for_device(hpet_sbdf.sbdf);
+     if ( !iommu )
+         return -ENXIO;
+ 
 -- 
 2.48.1
 
