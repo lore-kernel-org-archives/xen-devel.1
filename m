@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186BFC35FF8
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 18:34:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.917743.1322608 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0BB0C28B28
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 18:34:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.917746.1322626 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuFIL-000808-Cz; Mon, 17 Mar 2025 18:34:37 +0000
+	id 1tuFIP-0000As-1Y; Mon, 17 Mar 2025 18:34:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 917743.1322608; Mon, 17 Mar 2025 18:34:37 +0000
+Received: by outflank-mailman (output) from mailman id 917746.1322626; Mon, 17 Mar 2025 18:34:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuFIL-0007zx-90; Mon, 17 Mar 2025 18:34:37 +0000
-Received: by outflank-mailman (input) for mailman id 917743;
- Mon, 17 Mar 2025 18:34:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tuFIO-00009y-UX; Mon, 17 Mar 2025 18:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 917746;
+ Mon, 17 Mar 2025 18:34:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=q3WP=WE=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
- id 1tuFIJ-0006VW-UQ
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 18:34:35 +0000
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [2607:f8b0:4864:20::636])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 79546c03-035e-11f0-9aba-95dc52dad729;
- Mon, 17 Mar 2025 19:34:35 +0100 (CET)
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-225b5448519so88590925ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 11:34:35 -0700 (PDT)
+ id 1tuFIN-0006uj-Fx
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 18:34:39 +0000
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [2607:f8b0:4864:20::635])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7ab0f316-035e-11f0-9899-31a8f345e629;
+ Mon, 17 Mar 2025 19:34:37 +0100 (CET)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-225df540edcso61414345ad.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 11:34:37 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711695a2esm8188770b3a.144.2025.03.17.11.34.33
+ d2e1a72fcca58-73711695a2esm8188770b3a.144.2025.03.17.11.34.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 11:34:33 -0700 (PDT)
+ Mon, 17 Mar 2025 11:34:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79546c03-035e-11f0-9aba-95dc52dad729
+X-Inumbo-ID: 7ab0f316-035e-11f0-9899-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1742236474; x=1742841274; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1742236476; x=1742841276; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Rp8GQC6vA5rTxSSazblnkjuLZPjrJAYUOFg9uGM493s=;
-        b=WQrZry/u3rQFy/srQzn32K/ERX5LuRjJF4kpNxsflRdD+XgMBmhJ5o13VKlOMUm+lI
-         bqkHZ5QtNa5J6BFculxpo/y3jRqO0kgZHFIC79vwW+MqoS0qstav23EWa1IGYZ8zATMT
-         U1lA7qxU9+WeQGs2VirkUzFil9it4K7llOSRpYs4ohvZ2COMpMMXH8DwInn3cFUqFZaL
-         6LVrg3PUqlbKr3jhzOqJFAOK3DF57Texajvb+BbHk1+UxBoFh4Sr9yMxQMRNwPtM2cni
-         W31REbR2q+9i/gkQpETlsPt5BEyCunyqtkzgOgz5zGjtboJVJBjo0GR3UsdPZNdlEzjz
-         BwIg==
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=csDciEVVSKkjB1deLTNlS7WgymgexcpHBIWmRcsdBAdiGh3Rdy0JFNmKi+VSvRInl8
+         pmHKwDeeYzwMq38fGbwFjZ0eqWsXi4/UqnBZhKep+wBbjOgKySfeQITvRnMGJTMKIzTu
+         Se60MNJPp0WCBZa4LN6KHU2NuQcyZCMKwF5BilSfM5Mtk1TaHeGCgsH9iCXyr5DHWp1Z
+         YmduxqPG664074PVFXovR0UXQe/AhYZiXvTdtdsyhAS98Nc0QnovsfNU9B00kGEMSxgM
+         Ks3hMB2AhCJN8IxuY4QJ7Ql/fz3PWXHbYOQU/5O41sMdUmmNTfK6Dl9Xcs19XUHYlIT3
+         c20g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742236474; x=1742841274;
+        d=1e100.net; s=20230601; t=1742236476; x=1742841276;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Rp8GQC6vA5rTxSSazblnkjuLZPjrJAYUOFg9uGM493s=;
-        b=BhXRhHUm3JalkfH2a2LPXgzKDjMQdyHtf4NXpfvfG2XH3aQ6CD5aNQZbl5f4DIV5SF
-         +F/9JeHmVXIkiXMKOoN7PTWhDZxGG1Mep2A4r/j7NNAIg2wrQRobKKFTA84hBg4Mvznm
-         g5HBHgIpD2uLtXm52KAKxF8MfM+Ms7bwPucGaz6r/q/rmmBo8NWWtLGkQS+j47y7x4SY
-         UrB+LntQLa65/PT1gmhrTrSUMECEs4FTnvgpXCrBvm+4QMJEEywiso7Fi0KFp3jn1Qyj
-         YStJWIP9HM2ylcILOLkmF209jLmTngYjY8ztHJemSdcXkm2Zh9X4t6vtokOaoMVw+TkL
-         Ck1w==
-X-Forwarded-Encrypted: i=1; AJvYcCXpPjYMZDaDzur8oM9kNNC1nqWQPYUplDr5aZxSXle1jee/wwBrw9bqwTvSpuVy1DRktO/+knA8PO8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxiacCP2X/o1ztXfrB+6AofPTdFQAt1O9tpRIqborpcNwOsjp0q
-	tgL8WhUz73LZYM+mTaSj+FboJhMkuM8kxIVvvsaTEvg3K/GTEGptjDDmpNTEm74=
-X-Gm-Gg: ASbGnctJYDKLBAHPfCYJ1msXZALxldSFNCFqbawfLLKduwgczO42MuujZ2leCUEftTk
-	TiMq35Yq9ub5M1PUJ9Ghzi7Tx/opDqAzgKUnV1pwzw50pUgXwQM0FptU/mqpZ+zdFAsaNVgXGZ0
-	7wUM2vvodzpdoPdIxBR7ATbk4o/E9SPEf6mVl2/akeM+jqQj8IsDbYbc0L16h0MdCXWzyTejmZ4
-	xDizWwGsX0n/djC1vVLxBHPnOjsKVdANy2Iv4A2P2BTk/T5qcbVkEg1tG+I3XCUtNwDYGZXCfpf
-	yUJ8MGHjEwXpea4yG7u8mEKhg2io2EE0vuplyETueWwN
-X-Google-Smtp-Source: AGHT+IHGRjUHfsZhtfemIo+dlcyT/9a20csro4vrsnSjWHRpRL87+9vnxPcq6naL2TxBdu+3gDVtPg==
-X-Received: by 2002:a05:6a00:9a7:b0:736:6ac4:d204 with SMTP id d2e1a72fcca58-73722375218mr14371340b3a.11.1742236473962;
-        Mon, 17 Mar 2025 11:34:33 -0700 (PDT)
+        bh=BsftdeZcZ0LsVJ43Vlgc1kB7SrUHDvnjwuIeYSteybs=;
+        b=jI5oDMAUu6xWQ0DV/7wFmcPM/J84/nbaxRCKa5ZFYp265cTEk4sdfW4+LkR0rvJVZl
+         TfrUDmr22K+V3uFVp+73ShuculGvfdGvVksj/ZcyxLR0KMl3Ba8+6FW6I34VZdw1hqCV
+         XI9lUYKXehjnGZ/Cd5edSjt2kgZB+xppFSZmls5bTMt91YB2XYhlnFHc4apWhi8LrMlX
+         tRSYVoI4bT1f21I2lVAbQS0x7sg8m4OAhlw3qK84dfPaZS+9XgKn9ageeferaZ8MaSrm
+         SB8wepm3GgspHDaI+OaIK4oBrTy5gjhGze1ulsOZu5f0bVbfBSl79Ae2OvvzMEHDjfsA
+         xiLA==
+X-Forwarded-Encrypted: i=1; AJvYcCWNlbc4itPKr3ZoCebtqMVSol+IZBj8uoX6kt5aZSUVa2P20tOFMDHAYMkTocienFouPuKHUqSfcww=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxp7NOlunBKKy97hhkwaCZIoDGJ016F7OBXqtEooCQo36zFKfy6
+	PVSJnlLa3ujnqI/+plimJ6mnMLTZ1/g2uP+ac/pWSbL5sbJsP1hgspP1c94OVQ4=
+X-Gm-Gg: ASbGncsopieuK9upLq/udyfhBS8MbrxTsnikuVIM4bAkpol7XxpaDRNzj+tvE2TAbLE
+	fL27lrTbd+9cablRkPkcjVBO+I3dSQzIgUmkWgh3d5wBbW66QvjUgJhXj8g6fo1nRn/EJ6mvpQ8
+	kkAxKy7whztO8Oq5lsAGHEUjDjh1P07TxYHIRIxKEq7bPWAXk+V9tSVWhXcnHNblVy/LXsvpp4a
+	KRXnSp/P8LE9t093RxCR/PhnxGlPeyJA4HlC/B2DZylrUaOrbicakobauEfcRGq2tWMgJs1iPrQ
+	z+KEXC/AnADvRqg6z1CWlJQyMZ/JNYjCgR/8ciBjNdS1
+X-Google-Smtp-Source: AGHT+IFrc3E9fUAh+z3i68X6oJdtySmjNUcFSLSYjTurJl9vG25uO/0RkrUhFSmr8bwDc6/U+8pjrQ==
+X-Received: by 2002:a05:6a00:3b8e:b0:736:b400:b58f with SMTP id d2e1a72fcca58-7375752916dmr715700b3a.0.1742236476193;
+        Mon, 17 Mar 2025 11:34:36 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>,
@@ -108,36 +108,43 @@ Cc: Paul Durrant <paul@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Nicholas Piggin <npiggin@gmail.com>,
 	Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v6 08/18] exec/memory-internal: remove dependency on cpu.h
-Date: Mon, 17 Mar 2025 11:34:07 -0700
-Message-Id: <20250317183417.285700-9-pierrick.bouvier@linaro.org>
+Subject: [PATCH v6 10/18] system/kvm: make kvm_flush_coalesced_mmio_buffer() accessible for common code
+Date: Mon, 17 Mar 2025 11:34:09 -0700
+Message-Id: <20250317183417.285700-11-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
 References: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Needed so compilation units including it can be common.
+This function is used by system/physmem.c will be turn into common code
+in next commit.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/memory-internal.h | 2 --
- 1 file changed, 2 deletions(-)
+ include/system/kvm.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/include/exec/memory-internal.h b/include/exec/memory-internal.h
-index 100c1237ac2..b729f3b25ad 100644
---- a/include/exec/memory-internal.h
-+++ b/include/exec/memory-internal.h
-@@ -20,8 +20,6 @@
- #ifndef MEMORY_INTERNAL_H
- #define MEMORY_INTERNAL_H
+diff --git a/include/system/kvm.h b/include/system/kvm.h
+index ab17c09a551..21da3b8b052 100644
+--- a/include/system/kvm.h
++++ b/include/system/kvm.h
+@@ -210,11 +210,11 @@ bool kvm_arm_supports_user_irq(void);
+ int kvm_on_sigbus_vcpu(CPUState *cpu, int code, void *addr);
+ int kvm_on_sigbus(int code, void *addr);
  
+-#ifdef COMPILING_PER_TARGET
 -#include "cpu.h"
 -
- #ifndef CONFIG_USER_ONLY
- static inline AddressSpaceDispatch *flatview_to_dispatch(FlatView *fv)
- {
+ void kvm_flush_coalesced_mmio_buffer(void);
+ 
++#ifdef COMPILING_PER_TARGET
++#include "cpu.h"
++
+ /**
+  * kvm_update_guest_debug(): ensure KVM debug structures updated
+  * @cs: the CPUState for this cpu
 -- 
 2.39.5
 
