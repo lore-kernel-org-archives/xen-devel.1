@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5ACBC282EC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 09:31:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.916430.1321519 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C8DC35FF3
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 09:34:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.916443.1321529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu6ob-00069Y-U1; Mon, 17 Mar 2025 09:31:21 +0000
+	id 1tu6rD-0006pQ-Dh; Mon, 17 Mar 2025 09:34:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 916430.1321519; Mon, 17 Mar 2025 09:31:21 +0000
+Received: by outflank-mailman (output) from mailman id 916443.1321529; Mon, 17 Mar 2025 09:34:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu6ob-00069R-RG; Mon, 17 Mar 2025 09:31:21 +0000
-Received: by outflank-mailman (input) for mailman id 916430;
- Mon, 17 Mar 2025 09:31:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tu6rD-0006pJ-B5; Mon, 17 Mar 2025 09:34:03 +0000
+Received: by outflank-mailman (input) for mailman id 916443;
+ Mon, 17 Mar 2025 09:34:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UoSe=WE=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tu6oa-00069H-Vu
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 09:31:20 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 954b0ccb-0312-11f0-9aba-95dc52dad729;
- Mon, 17 Mar 2025 10:31:20 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43cfe63c592so21160655e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 02:31:19 -0700 (PDT)
+ id 1tu6rC-0006pD-FI
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 09:34:02 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f5140de2-0312-11f0-9899-31a8f345e629;
+ Mon, 17 Mar 2025 10:34:00 +0100 (CET)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3913d129c1aso3338262f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 02:34:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fdda38esm102064425e9.8.2025.03.17.02.31.18
+ ffacd0b85a97d-395cb7eb93csm14186074f8f.86.2025.03.17.02.33.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 02:31:18 -0700 (PDT)
+ Mon, 17 Mar 2025 02:33:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,53 +47,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 954b0ccb-0312-11f0-9aba-95dc52dad729
+X-Inumbo-ID: f5140de2-0312-11f0-9899-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1742203879; x=1742808679; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eqTn9SlbWqmKbsnWuP4d6KGrlH+4EhECJcrr0N6jYow=;
-        b=LxISZB2wdVMYm5bZ8d1wN5Swy3nxf3akttOM8TstJx4g2G1EM1XWPIdWnsPVLarb9C
-         3Abnuqm1rnL9JbqynPl9kF4HBn3Pq+CIjRyrqX3ZBEQF49XCm1w3A9Ex8fXnrPtGC6mZ
-         auebNM0lezzhi/aViuA6oAFMW05g2TXwIB/Yyk+F+2fjvXiCQ1oZtP7gR36Ezn0Q4bCQ
-         EKf+S7/jog+vPOfRjtHDfy+N41rLKEVbpQ/lI4hIHfUySZ3UZlqP3yyqAeQt49X2jLV6
-         mLf4+JXdJ9nj8iAFsSjS8FamjdSEPJeCYDBqYlmuEeSi81Z5/yDlHIJwKLepmFLw91Yf
-         rMyQ==
+        d=suse.com; s=google; t=1742204040; x=1742808840; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Niy/iHLD1cx+NjomfId6TbUa9e9Rx6SiUHj9X5fnXqE=;
+        b=agsoFqj55cUqwel/gTI30MloJvXwKZ574MyGrMrIMF1JpeOqXpP0SdDE4u9yWYzIcN
+         U7Vo5JT4Yu/eRQdCh+MIf0cpjQHdT9AOB3C/4igO38D2ljpPlCwSgL071BEKzmkobB+6
+         iWym9ST9Sx9LQTvAYd+LukVJD7J1RY1Mj5Q0Y/zbZTV2B1e0w5xXk1UDXsLoqOKrgiPx
+         iRUACoBOGKhkqA0CUY7tSqEGIckAE21uU7Z0hNLYIJ28WtXBtnCSpGRLD1gCfpnVBpgZ
+         1gNFuqQsz+R5EW4NifYMXcvIn4Sua5bgVb/e0Ng3Z67g1uMsnOpLUKV55828g85BUhlN
+         tRhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742203879; x=1742808679;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=eqTn9SlbWqmKbsnWuP4d6KGrlH+4EhECJcrr0N6jYow=;
-        b=jIt897XHN6D1Q6xUiHvwARYimrDq6GczgUtiHUEbG4NFRgSfgDonPW1PKUvTP8ooc2
-         phr4mC3FvK78XThQ0SVA+TiUgaunrX1Y4P9isi2o04BqI+l+rLnNhgeN7uvJlIJrj6GV
-         WWQWB0cT44EkIMNjxxM6KJMgEAQWjeiqCb4kInJVkYOBrFC21OfxCQqFxsdWPuXPViHL
-         3V2E/nrkxsX6iZSmI+LM8IOWC1RjvzVKJdH39GnngSjgDXd6EBpa6LVtEbUY+pnOqwa4
-         sP+UcVP7s3ec0oGTZF7/9E9ushNW3l1HvzXYe79RFCGITN32/IXIZndSP4y4bea925j+
-         rx0A==
-X-Gm-Message-State: AOJu0Yx2VNjyParI88bKN4GEJBWJp7g0NgcZKXf9ZYgy2LsdJv4QzPkX
-	7sKdG1WGStTwVD4YbqKSjXPt2LwY4VL9+OYb8cy/xMV3bs9yPQtL2QQtpnNALIV+lktv4ClXKXs
-	=
-X-Gm-Gg: ASbGnct8dbleA5X7/N362DpmaTBU0PbksWgg3nss6V8Y72ljA5ZuobQlbmq9fJbBckE
-	oggIfdI1SRg9Kr5ZnVT4nESpL9pz2uPWF+8eFfk/g9t7Ykkbvf+bVBuia/GdyUzfX1iyToNCd27
-	ig5oMcU9qchNF0PGxFOC1bC2i4hsLVZMqWzh8D1rhE83VO0veK7wiB3H7i2kgv2nVglB7TkExjy
-	Ux2FAmvrSkh+CcphGan+dppe9MfoUGRz4j52pLp+V2RFDq4XwpfsYiBh9okvCkKeFnNjceAX3IS
-	49/W8HRKj5BgTHwnEDvnoobDPMsbhwi0mwAEWKMP+XH4idkLuZtlukUWrqFMxhLGLUhzmRhiJyW
-	2bb+4Q8x8tpwxrL+w4ecQjS3ERWiFTA==
-X-Google-Smtp-Source: AGHT+IEflcSP6QKlz//iSUJVHJG7dyKMTBXYKMW565jwlDZ+gL4q0yeTffghuLyzIN2SLcthrXlLSg==
-X-Received: by 2002:a05:600c:3ba9:b0:43c:f44c:72a6 with SMTP id 5b1f17b1804b1-43d1ec72f4cmr119688425e9.2.1742203879226;
-        Mon, 17 Mar 2025 02:31:19 -0700 (PDT)
-Message-ID: <d8c08c22-ee70-4c06-8fcd-ad44fc0dc58f@suse.com>
-Date: Mon, 17 Mar 2025 10:31:21 +0100
+        d=1e100.net; s=20230601; t=1742204040; x=1742808840;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Niy/iHLD1cx+NjomfId6TbUa9e9Rx6SiUHj9X5fnXqE=;
+        b=GX4xbwho6ajgQny65WR8ZRDbmzrxgqJ/yVqRedwtAy4pV2h3tOUavnFixr6CZV/QHD
+         YD+3e35TdlfbBzoWIfiXhlB+BP/J0BDKy20gRzDoJXBm+V+JgrM1f+JkYnozFcXUeAZV
+         vzX/BC98t+BTIVXgVUSKLqL6uzo7f/RNyGLaYoLrOq9vsQqAFDeQFj4vDa9x36lhVS01
+         wjdzi82OApbfayiO9mTiIeF09+z/4GjTyQOaadFqwuoFFRjNG+AxmE/xlXRmbEuNgQkU
+         iIzZPHoEOwM/kAQd1frXFXD/iDr0kAooNHy3RAwFW4kna3JjSkkeqx78N6xY8CogHoga
+         4lPw==
+X-Forwarded-Encrypted: i=1; AJvYcCUgyq30Qp+zrii4MVPbVNo6Irs05GnSWCApMr2hBt3y3mIkaF2tqFKIJgeyeI+6Zd6LHN6Xs7YjR5E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx8gmlYfkuHI4q9cyUvXAOkelCs4N5mzGLtzUdG5l9Lhxlfie+D
+	c4yWOhCcSbxlNf8NXQi2t3cgAazoWuA0bBsVwtISRlmsFyzzjjEVYbaXDQzG3Q==
+X-Gm-Gg: ASbGncsNPqtqob+gi2Fd+gT2aFEqrSxeCcg6x+UWeXYTA6zIVALxErOK/WPt5jq21M0
+	HlOOr+6svKbPAG6vLqzdwATT8dLuhkvAb9tlY3mP2mTmAM9so12J0yqAXfXfVDt+zwjUvBiPZ3v
+	dpiTEaZFnIKGZTyNPdm33CqneWPrHYtQL1RXHmFzMm/Iqi+IpzCnDZSFK6IDpRYxskkQk4VJFXI
+	0mMOOimoNTai6miqqLpgM5aRpMcSs54fK+1AF9UDNbPBNhun8rXExFnYrrqgXEHj6ywd+Wenbqi
+	bR1GKgLLzbRqgv+KUSD24H2khx4zNeJIbGPtxYou3yEPqahbmiIDPYNbDqDhCxAZQgzEhWg+Fln
+	Rwn+Xt3UCD77LI9ug9pTywoz5VEo0Q2MRzJWWrKsD
+X-Google-Smtp-Source: AGHT+IFb2BeFimz5AU7AvoauIQdOqnvm+ypGUqm9kPA1VAlQ1Xr6GxXM99seSLsYIqxzekwEz9JyGA==
+X-Received: by 2002:a5d:6d81:0:b0:391:1199:22b5 with SMTP id ffacd0b85a97d-395b758f9afmr13811568f8f.10.1742204039941;
+        Mon, 17 Mar 2025 02:33:59 -0700 (PDT)
+Message-ID: <e62767b6-caa0-4ede-8549-f6421e2db94a@suse.com>
+Date: Mon, 17 Mar 2025 10:34:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/7] xen: introduce Kconfig HAS_PAGING_MEMPOOL
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Wei Chen <Wei.Chen@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20250316192445.2376484-1-luca.fancellu@arm.com>
+ <20250316192445.2376484-7-luca.fancellu@arm.com>
+ <763a55dc-79ff-4176-9286-17a144bd8da7@suse.com>
+ <B33096DB-1CFC-41CE-8906-FA4AC7708FF9@arm.com>
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Nathan Studer <nathan.studer@dornerworks.com>,
- Stewart Hildebrand <stewart@stew.dk>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] arinc653: move next_switch_time access under lock
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -117,43 +130,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <B33096DB-1CFC-41CE-8906-FA4AC7708FF9@arm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Even before its recent movement to the scheduler's private data
-structure it looks to have been wrong to update the field under lock,
-but then read it with the lock no longer held.
+On 17.03.2025 10:29, Luca Fancellu wrote:
+>> On 17 Mar 2025, at 08:41, Jan Beulich <jbeulich@suse.com> wrote:
+>> On 16.03.2025 20:24, Luca Fancellu wrote:
+>>> --- a/xen/common/Kconfig
+>>> +++ b/xen/common/Kconfig
+>>> @@ -74,6 +74,9 @@ config HAS_KEXEC
+>>> config HAS_LLC_COLORING
+>>> bool
+>>>
+>>> +config HAS_PAGING_MEMPOOL
+>>> + bool
+>>
+>> Imo this is too little of a change outside of Arm-specific code here. Just
+>> go grep for "paging_mempool" to see what pretty obviously wants to fall
+>> under that new control. There may be more stuff. The stubs for
+>> arch_{get,set}_paging_mempool_size() likely also want to live in a header,
+>> perhaps even one in asm-generic/.
+> 
+> I’m wondering, since we already have arch_{get,set}_paging_mempool_size
+> architecture specific, I believe this config needs to be ARCH_PAGING_MEMPOOL
+> and needs to provide stubs inside include/xen/domain.h in a similar way of how
+> ARCH_MAP_DOMAIN_PAGE is done.
+> 
+> What do you think?
 
-Coverity-ID: 1644500
-Fixes: 9f0c658baedc ("arinc: add cpu-pool support to scheduler")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-The Fixes: tag references where the locking was added; I can't exclude
-there was an issue here already before that.
+Imo both routes are possible. I'm not sure we have a clear preference when
+looking at the code base as a whole.
 
---- a/xen/common/sched/arinc653.c
-+++ b/xen/common/sched/arinc653.c
-@@ -579,6 +579,9 @@ a653sched_do_schedule(
-      */
-     BUG_ON(now >= sched_priv->next_major_frame);
- 
-+    prev->next_time = sched_priv->next_switch_time - now;
-+
-+    /* Return the amount of time the next domain has to run. */
-     spin_unlock_irqrestore(&sched_priv->lock, flags);
- 
-     /* Tasklet work (which runs in idle UNIT context) overrides all else. */
-@@ -590,11 +593,7 @@ a653sched_do_schedule(
-          && (sched_unit_master(new_task) != cpu) )
-         new_task = IDLETASK(cpu);
- 
--    /*
--     * Return the amount of time the next domain has to run and the address
--     * of the selected task's UNIT structure.
--     */
--    prev->next_time = sched_priv->next_switch_time - now;
-+    /* Also return the address of the selected task's UNIT structure. */
-     prev->next_task = new_task;
-     new_task->migrated = false;
- 
+Jan
 
