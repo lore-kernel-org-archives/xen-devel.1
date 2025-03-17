@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B80C35FF3
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 17:54:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.917629.1322506 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEFE1C282EC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 18:34:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.917736.1322548 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuEfG-0003p2-Sj; Mon, 17 Mar 2025 17:54:14 +0000
+	id 1tuFID-0006Vn-J9; Mon, 17 Mar 2025 18:34:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 917629.1322506; Mon, 17 Mar 2025 17:54:14 +0000
+Received: by outflank-mailman (output) from mailman id 917736.1322548; Mon, 17 Mar 2025 18:34:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuEfG-0003ov-Pf; Mon, 17 Mar 2025 17:54:14 +0000
-Received: by outflank-mailman (input) for mailman id 917629;
- Mon, 17 Mar 2025 17:54:14 +0000
+	id 1tuFID-0006Vc-EH; Mon, 17 Mar 2025 18:34:29 +0000
+Received: by outflank-mailman (input) for mailman id 917736;
+ Mon, 17 Mar 2025 18:34:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=o++3=WE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tuEfG-0003op-3I
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 17:54:14 +0000
-Received: from fout-a6-smtp.messagingengine.com
- (fout-a6-smtp.messagingengine.com [103.168.172.149])
+ <SRS0=q3WP=WE=linaro.org=pierrick.bouvier@srs-se1.protection.inumbo.net>)
+ id 1tuFIC-0006VW-OI
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 18:34:28 +0000
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [2607:f8b0:4864:20::636])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d4e59536-0358-11f0-9aba-95dc52dad729;
- Mon, 17 Mar 2025 18:54:12 +0100 (CET)
-Received: from phl-compute-03.internal (phl-compute-03.phl.internal
- [10.202.2.43])
- by mailfout.phl.internal (Postfix) with ESMTP id D309B1382D0B;
- Mon, 17 Mar 2025 13:54:10 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Mon, 17 Mar 2025 13:54:10 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 17 Mar 2025 13:54:08 -0400 (EDT)
+ id 749a4835-035e-11f0-9aba-95dc52dad729;
+ Mon, 17 Mar 2025 19:34:27 +0100 (CET)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-225fbdfc17dso32761415ad.3
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 11:34:27 -0700 (PDT)
+Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73711695a2esm8188770b3a.144.2025.03.17.11.34.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Mar 2025 11:34:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,308 +46,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d4e59536-0358-11f0-9aba-95dc52dad729
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1742234050;
-	 x=1742320450; bh=uCxLtV6bJMyPwGJxXetVHcNVvxPwSuJyVJ+25evTvzA=; b=
-	n+fkrovhQksDRM+eqbEOheI0HMSv8+GgnrFyIaLzJuXUz2Z/g+lsDrG9zetYgG9T
-	5MXUNnbmZeCBgzBh/r2aBXXog/10ISeHvegisobDz7ITn0nTsGy408NLlv/X274w
-	13z9HNM8S7wcen+/rrgHuDbjGS9jOWb2HBV+ozjVKUQd0EUsiPmYeMEDG1zdEerG
-	05Q3iFYIXdV7wBBs6yryMGNLiTx5ipR9saw7gdPhJCc4IsjjXIrI9kLowyTGU5Ae
-	iG7E5gqhJ30a/JLp/7zs+xYxRphqTr3GKVPGVepE6QyCV9GgFP5PUfeUVZkj0RAx
-	/+5UZAOdWEkAXPsKcJqz3w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1742234050; x=1742320450; bh=uCxLtV6bJMyPwGJxXetVHcNVvxPwSuJyVJ+
-	25evTvzA=; b=O2QicdSPGJUGbAAfw8pK+Y2xj9/5W790lH3tT9l6ZnosRzwLTJ/
-	YQDmwOwn8FBFOuDMOY6kt1xGK2b4lsk5wYZfLTXkR6B34R8Rdpx9OmkoMJ1+27Cw
-	j1phABQdCcv2OTVExU+s6yxIPbcuwAe1uNEvoGbWyuQVRl7CMKTCjTa+iMUYbqjD
-	7Js0GtLSvO40Eczq+CaBq4DDJbaBLBgWypQBzfrN8BJcAffrkgKXfrEiptX+ktK8
-	wJDqCkL2daDzGN6T4sWsxduzudmtA/Y23lUiQv4FvhH33DlkOLF6kceA9jDVRbWC
-	OkyrWDa0V7MBeUZ0yeCoU7ochdZ8S06qqrg==
-X-ME-Sender: <xms:wmHYZ5THSdO41SgpxvJwN7yUrtwLzbdERsxv27Q6hLGFiyZ7-7-rPQ>
-    <xme:wmHYZywOH9zXwt0PqmdMdQL4n4-N1vOXW0xOOYug7G3UXqkPtxepra54038XxZgLw
-    gAKNAnCDyj-Lw>
-X-ME-Received: <xmr:wmHYZ-3o5M8iTC8koqucmYkllusagloCfUcPFHZLmMBSWPYM-UIr8UFafP0yYzBSPJz2ln3rJgXdx6XFA3uvd70ifP0anh-6Zw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddugedtudejucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepveeujeetgeelleetudeuvefhtefgffejvedtvdfgieevheethe
-    elgeeuledvjeevnecuffhomhgrihhnpehgihhtlhgrsgdrtghomhenucevlhhushhtvghr
-    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeelpdhmohgu
-    vgepshhmthhpohhuthdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtg
-    homhdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhm
-    pdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghpth
-    htohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhr
-    tghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomhdprhgtphhtthhopegtrghrug
-    hovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepohhlvghkshhiihdrkhhurhhotghh
-    khhosehgmhgrihhlrdgtohhmpdhrtghpthhtohepgigrkhgvphdrrghmrghtohhpsehgmh
-    grihhlrdgtohhmpdhrtghpthhtohepmhihkhihthgrpghpohhtuhhrrghisegvphgrmhdr
-    tghomh
-X-ME-Proxy: <xmx:wmHYZxCHG7O0X6PoO5SgHY08VQgl51k4OWwgZdgjDjIX1Z5F6iMxYQ>
-    <xmx:wmHYZyimFJ2UYUJ9Vvdi-iz_zZ-zQHNI8YdrihloWhROckLTniFA8Q>
-    <xmx:wmHYZ1pL2cyCHj22nn0WiH8HwwDUdbnF-IOPRkjJ3rf4c3WIm0b5Gw>
-    <xmx:wmHYZ9iCzWfHbdHriNI0h03x12Mw5fGwwK-Cy9iZ9IZG5cU3gjFgOw>
-    <xmx:wmHYZ9OLYAEHmmcUHa3e-gYfRKOS3sxkO6W1qoFK8jqx7K2zYlu_45Zn>
-Feedback-ID: i1568416f:Fastmail
-Date: Mon, 17 Mar 2025 18:54:06 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+X-Inumbo-ID: 749a4835-035e-11f0-9aba-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1742236466; x=1742841266; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
+        b=WO1hDLydXsc7OZ7t5g4FthRZtjra2wRWu8Ilq6KjPNb4fEABSgywqUVgt9d9UsKfvr
+         m+s8yBmlWacZ/u6QdmeOdH/LuNsxQ5d3dCCpILT6JlOMh9BoFE4/OW/50ZoncrP5rRJM
+         Kn10rrIVBR2kf3AUVX8tqYBaitD8wyPeVyo69hMW/mFR+zHtxnTXQfL1oEQdBj1A7mJ3
+         AYbTRConn83QsN+VmqvkU1P3SOkmCFWSEDaeDSJVK+ehgWyhcnd+tNJT+twuXrTK2AsW
+         OLu4kz5bUMcch7Syp/PBdwcnMZkkivI4vkWkCigG2qbi5rZZXApk4su4eeYXKf9zMcz1
+         g8PA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742236466; x=1742841266;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
+        b=bMPzKM0s7d1H6gvugjt2yw4EGGVmptef9VRSk+nIy9zKsiDDJBHhkfavUCTcp7IM6v
+         ePsvQUMy5oaYS0E3pCDhdj/lWFG4i/Y7OPMjKA6tC2vZuB4B4UXyQ5SCRHfleuJ3CFC/
+         r5DVjC5vqXQ/WNJjFd3Y3kdJ0Plnl6p6UH75+sgUT+3iF3xq4WDo2ksaArTgyuT7l/zJ
+         7N7mtknqdWBkoXSM5OEPHkTcQMKBQUpNLi2Wv7kFn6gNT6J27WriPiFRcIlgme1ODZpn
+         JgQJ0nD5e5I8Lv6qdBEIgXVBuT5i87ldC8SFivYTwyQjwIvciwQojjDMpqCU4N1yHBI5
+         VJWQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX7SH21ftS/5reg36w6aF68XhKpqsEiFccyzvKoH3peYkjJ9lDgKjIZ2tRwc76243+pIXo5eCK7Fbg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywb0PPYPyPIfnb+y4E4BFglq9p3mBWqbiVjcbIjaLaqgndgeedS
+	AYW6jD5O5etE2SOQwevwZ9lY6Tgpaw3i9i2ioLL0JsXNg9VNzLlIRWJ9X5ViTQA=
+X-Gm-Gg: ASbGncuA775tYZmbu9tnkiA4IKZXRCDbZWjUQ3f5VIoTPbnJqBO1xQ+Sf9xD1m0yE3R
+	D92GEqdlv3zcrPJXmTULuL4zxvsUGjs78RhvD+Z8v5V0vIcXwPl5LBia+3Ih4K/QJMhLMkFHkKM
+	0B+HWUYDRCF2tcvxzWGMt09gEFNfR6mpVY1Y1p2MT6KSpfIN2JE0kd5scquDTDy8k+K2BeQS77V
+	7IVNqOc1qKbSN06RWgCzMV2rZTFKBpIX2TS5AUqU15CxfJlG/N3o7DNZoShlfOTYWrmUvb4msq9
+	WNd06w4DS/nDem63fWW7cybxMQnJZBP/pB3Qz4JxJTfR
+X-Google-Smtp-Source: AGHT+IEMdkhHnCOZBQ+9EV0uYxPSw6/JcOSk+BrsDVDiw8khDcGewsFrIqa6c3AgQ8Es/TqwcULwNA==
+X-Received: by 2002:a05:6a00:139f:b0:736:9e40:13b1 with SMTP id d2e1a72fcca58-737224726e5mr14180634b3a.23.1742236465994;
+        Mon, 17 Mar 2025 11:34:25 -0700 (PDT)
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org,
+	David Hildenbrand <david@redhat.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	qemu-riscv@nongnu.org,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	alex.bennee@linaro.org,
+	manos.pitsidianakis@linaro.org,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	qemu-ppc@nongnu.org,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Weiwei Li <liwei1518@gmail.com>,
+	kvm@vger.kernel.org,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Peter Xu <peterx@redhat.com>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Anthony PERARD <anthony@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Mykola Kvach <xakep.amatop@gmail.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Subject: Re: S3 regression on AMD in 4.20
-Message-ID: <Z9hhvr7p13RGcNCY@mail-itl>
-References: <20250314030628.96166-1-marmarek@invisiblethingslab.com>
- <alpine.DEB.2.22.394.2503141417540.3477110@ubuntu-linux-20-04-desktop>
- <Z9SsYF0pYTkZXg9I@mail-itl>
- <Z9TBaEeUcVrjaACL@mail-itl>
- <fd27f66c-12ce-4f94-8cc3-a8fbc18694a4@citrix.com>
- <Z9hGH0GLq-I1cKzt@macbook.local>
- <Z9hPaLVVhqAK5H0K@mail-itl>
- <Z9hdTCMKxF98wHJw@macbook.local>
+	Nicholas Piggin <npiggin@gmail.com>,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v6 01/18] exec/tswap: target code can use TARGET_BIG_ENDIAN instead of target_words_bigendian()
+Date: Mon, 17 Mar 2025 11:34:00 -0700
+Message-Id: <20250317183417.285700-2-pierrick.bouvier@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
+References: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="/m/0VADQETNGl60o"
-Content-Disposition: inline
-In-Reply-To: <Z9hdTCMKxF98wHJw@macbook.local>
+Content-Transfer-Encoding: 8bit
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ include/exec/tswap.h | 11 ++++++-----
+ cpu-target.c         |  1 +
+ 2 files changed, 7 insertions(+), 5 deletions(-)
 
---/m/0VADQETNGl60o
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 17 Mar 2025 18:54:06 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Mykola Kvach <xakep.amatop@gmail.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Subject: Re: S3 regression on AMD in 4.20
+diff --git a/include/exec/tswap.h b/include/exec/tswap.h
+index ecd4faef015..2683da0adb7 100644
+--- a/include/exec/tswap.h
++++ b/include/exec/tswap.h
+@@ -13,13 +13,14 @@
+ /**
+  * target_words_bigendian:
+  * Returns true if the (default) endianness of the target is big endian,
+- * false otherwise. Note that in target-specific code, you can use
+- * TARGET_BIG_ENDIAN directly instead. On the other hand, common
+- * code should normally never need to know about the endianness of the
+- * target, so please do *not* use this function unless you know very well
+- * what you are doing!
++ * false otherwise. Common code should normally never need to know about the
++ * endianness of the target, so please do *not* use this function unless you
++ * know very well what you are doing!
+  */
+ bool target_words_bigendian(void);
++#ifdef COMPILING_PER_TARGET
++#define target_words_bigendian()  TARGET_BIG_ENDIAN
++#endif
+ 
+ /*
+  * If we're in target-specific code, we can hard-code the swapping
+diff --git a/cpu-target.c b/cpu-target.c
+index cae77374b38..519b0f89005 100644
+--- a/cpu-target.c
++++ b/cpu-target.c
+@@ -155,6 +155,7 @@ void cpu_abort(CPUState *cpu, const char *fmt, ...)
+     abort();
+ }
+ 
++#undef target_words_bigendian
+ bool target_words_bigendian(void)
+ {
+     return TARGET_BIG_ENDIAN;
+-- 
+2.39.5
 
-On Mon, Mar 17, 2025 at 06:35:08PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Mon, Mar 17, 2025 at 05:35:51PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Mon, Mar 17, 2025 at 04:56:15PM +0100, Roger Pau Monn=C3=A9 wrote:
-> > > On Sat, Mar 15, 2025 at 12:02:50AM +0000, Andrew Cooper wrote:
-> > > > On 14/03/2025 11:53 pm, Marek Marczykowski-G=C3=B3recki wrote:
-> > > > > On Fri, Mar 14, 2025 at 11:23:28PM +0100, Marek Marczykowski-G=C3=
-=B3recki wrote:
-> > > > >> On Fri, Mar 14, 2025 at 02:19:19PM -0700, Stefano Stabellini wro=
-te:
-> > > > >>> On Fri, 14 Mar 2025, Marek Marczykowski-G=C3=B3recki wrote:
-> > > > >>>> This is AMD Zen2 (Ryzen 5 4500U specifically), in a HP Probook=
- 445 G7.
-> > > > >>>>
-> > > > >>>> This one has working S3, so add a test for it here.
-> > > > >>>>
-> > > > >>>> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invis=
-iblethingslab.com>
-> > > > >>>> ---
-> > > > >>>> Cc: Jan Beulich <jbeulich@suse.com>
-> > > > >>>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-> > > > >>>>
-> > > > >>>> The suspend test added here currently fails on staging[1], but=
- passes on
-> > > > >>>> staging-4.19[2]. So the regression wants fixing before committ=
-ing this
-> > > > >>>> patch.
-> > > > >>>>
-> > > > >>>> [1] https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/=
-9408437140
-> > > > >>>> [2] https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/=
-9408943441
-> > > > >>> We could commit the patch now without the s3 test.
-> > > > >>>
-> > > > >>> I don't know what the x86 maintainers think about fixing the su=
-spend
-> > > > >>> bug, but one idea would be to run a bisection between 4.20 and =
-4.19.
-> > > > >> I'm on it already, but it's annoying. Lets convert this thread to
-> > > > >> discussion about the issue:
-> > > > >>
-> > > > >> So, I bisected it between staging-4.19 and master. The breakage =
-is
-> > > > >> somewhere between (inclusive):
-> > > > >> eb21ce14d709 x86/boot: Rewrite EFI/MBI2 code partly in C
-> > > > >> and
-> > > > >> 47990ecef286 x86/boot: Improve MBI2 structure check
-> > > > >>
-> > > > >> But, the first one breaks booting on this system and it remains =
-broken
-> > > > >> until the second commit (or its parent) - at which point S3 is a=
-lready
-> > > > >> broken. So, there is a range of 71 commits that may be responsib=
-le...
-> > > > >>
-> > > > >> But then, based on a matrix chat and Jan's observation I've tried
-> > > > >> reverting f75780d26b2f "xen: move per-cpu area management into c=
-ommon
-> > > > >> code" just on top of 47990ecef286, and that fixed suspend.
-> > > > >> Applying "xen/percpu: don't initialize percpu on resume" on top =
-of
-> > > > >> 47990ecef286 fixes suspend too.
-> > > > >> But applying it on top of master
-> > > > >> (91772f8420dfa2fcfe4db68480c216db5b79c512 specifically) does not=
- fix it,
-> > > > >> but the failure mode is different than without the patch - syste=
-m resets
-> > > > >> on S3 resume, with no crash message on the serial console (even =
-with
-> > > > >> sync_console), instead of hanging.
-> > > > >> And one more data point: reverting f75780d26b2f on top of master=
- is the
-> > > > >> same as applying "xen/percpu: don't initialize percpu on resume"=
- on
-> > > > >> master - system reset on S3 resume.
-> > > > >> So, it looks like there are more issues...
-> > > > > Another bisection round and I have the second culprit:
-> > > > >
-> > > > >     8e60d47cf011 x86/iommu: avoid MSI address and data writes if =
-IRT index hasn't changed
-> > > > >
-> > > > > With master+"xen/percpu: don't initialize percpu on resume"+rever=
-t of
-> > > > > 8e60d47cf011 suspend works again on this AMD system.
-> > > >=20
-> > > > That's not surprising in the slightest.
-> > > >=20
-> > > > Caching hardware values in Xen isn't safe across S3, which QubesOS =
-has
-> > > > found time and time again, and for which we still have outstanding =
-bugs.
-> > > >=20
-> > > > S3 turns most of the system off.=C2=A0 RAM gets preserved, but devi=
-ces and
-> > > > plenty of internal registers don't.
-> > >=20
-> > > I think I've spotted the issue.  enable_iommu() called on resume
-> > > (ab)uses set_msi_affinity() to force an MSI register write, as it's
-> > > previous behavior was to unconditionally propagate the values.  With
-> > > my change it would no longer perform such writes on resume.
-> > >=20
-> > > I think the patch below should help.
-> >=20
-> > It doesn't, I still got reboot on resume, with no crash message on
-> > serial (even with sync_console).
->=20
-> There was an error with the previous patch, and it's also a bug in the
-> original patch.  Could you give a try to the updated patch below?
->=20
-> Sorry for bothering you, but ATM I haven't found a way to trigger
-> this myself.
-
-This one does fix the issue :)
-
-
-> Thanks, Roger.
-> ---
-> commit 70ea4301d5ca663ac6d850658b3fe832950ec363
-> Author: Roger Pau Monne <roger.pau@citrix.com>
-> Date:   Mon Mar 17 15:40:11 2025 +0100
->=20
->     x86/msi: always propagate MSI writes when not in active system mode
->    =20
->     Relax the limitation on MSI register writes, and only apply it when t=
-he
->     system is in active state.  For example AMD IOMMU drivers rely on usi=
-ng
->     set_msi_affinity() to force an MSI register write on resume from
->     suspension.
->    =20
->     The original patch intention was to reduce the number of MSI register
->     writes when the system is in active state.  Leave the other states to
->     always perform the writes, as it's safer given the existing code, and=
- it's
->     expected to not make a difference performance wise.
->    =20
->     For such propagation to work even when the IRT index is not updated t=
-he MSI
->     message must be adjusted in all success cases for AMD IOMMU, not just=
- when
->     the index has been newly allocated.
->    =20
->     Reported-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
->     Fixes: ('8e60d47cf011 x86/iommu: avoid MSI address and data writes if=
- IRT index hasn't changed')
->     Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
->=20
-> diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-> index 163ccf874720..8bb3bb18af61 100644
-> --- a/xen/arch/x86/msi.c
-> +++ b/xen/arch/x86/msi.c
-> @@ -189,6 +189,15 @@ static int write_msi_msg(struct msi_desc *entry, str=
-uct msi_msg *msg,
->  {
->      entry->msg =3D *msg;
-> =20
-> +    if ( unlikely(system_state !=3D SYS_STATE_active) )
-> +        /*
-> +         * Always propagate writes when not in the 'active' state.  The
-> +         * optimization to avoid the MSI address and data registers writ=
-e is
-> +         * only relevant for runtime state, and drivers on resume (at le=
-ast)
-> +         * rely on set_msi_affinity() to update the hardware state.
-> +         */
-> +        force =3D true;
-> +
->      if ( iommu_intremap !=3D iommu_intremap_off )
->      {
->          int rc;
-> diff --git a/xen/drivers/passthrough/amd/iommu_intr.c b/xen/drivers/passt=
-hrough/amd/iommu_intr.c
-> index 9abdc38053d7..08766122b421 100644
-> --- a/xen/drivers/passthrough/amd/iommu_intr.c
-> +++ b/xen/drivers/passthrough/amd/iommu_intr.c
-> @@ -546,7 +546,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
->      rc =3D update_intremap_entry_from_msi_msg(iommu, bdf, nr,
->                                              &msi_desc->remap_index,
->                                              msg, &data);
-> -    if ( rc > 0 )
-> +    if ( rc >=3D 0 )
->      {
->          for ( i =3D 1; i < nr; ++i )
->              msi_desc[i].remap_index =3D msi_desc->remap_index + i;
->=20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---/m/0VADQETNGl60o
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmfYYb4ACgkQ24/THMrX
-1yz2fQf/bLQY+KCwcoNSjKa50QaAC1jBiMpe5XW5Ela97fIpl8pFY2CRGAqaGbZL
-oQdfIOsHjYKzV05On8X0OyS7CczUDudnhTPIyAjOZ2ho07eN0klx2qbi7LmmzuiI
-a87yzIX+/FpzVlTzSnRDZuDcUB3PFE/+WmP8pBR16B6KFgX5nRPoWgCKuJBOCY21
-jHmKSgIglFCkiQt95NOCvz2MjAcHC8t3HqRGZnydnAXogTJHn3e2IwTsck+XjU+V
-ym5akGo3W0oRFDpU7uKo+xgSp0IfOF9GnrYhZLpYXEJFzYnIO8wncBdFNsCCLrb5
-FJkUnkveJexilZPsNsieqTL8t4i4Vg==
-=0VSu
------END PGP SIGNATURE-----
-
---/m/0VADQETNGl60o--
 
