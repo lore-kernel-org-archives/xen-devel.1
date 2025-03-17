@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69713C282EC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 05:41:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.916172.1321309 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65956C35FF3
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 07:19:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.916187.1321319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu3E1-00012k-Tq; Mon, 17 Mar 2025 05:41:21 +0000
+	id 1tu4kz-0000xS-7S; Mon, 17 Mar 2025 07:19:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 916172.1321309; Mon, 17 Mar 2025 05:41:21 +0000
+Received: by outflank-mailman (output) from mailman id 916187.1321319; Mon, 17 Mar 2025 07:19:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu3E1-00012d-QF; Mon, 17 Mar 2025 05:41:21 +0000
-Received: by outflank-mailman (input) for mailman id 916172;
- Mon, 17 Mar 2025 05:41:20 +0000
+	id 1tu4kz-0000xL-48; Mon, 17 Mar 2025 07:19:29 +0000
+Received: by outflank-mailman (input) for mailman id 916187;
+ Mon, 17 Mar 2025 07:19:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sT4H=WE=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1tu3E0-00012X-Jc
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 05:41:20 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20623.outbound.protection.outlook.com
- [2a01:111:f403:2412::623])
+ <SRS0=EnY3=WE=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
+ id 1tu4ky-0000xF-HO
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 07:19:28 +0000
+Received: from fforwardh-b4-smtp.messagingengine.com
+ (fforwardh-b4-smtp.messagingengine.com [202.12.124.199])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 71a63f3e-02f2-11f0-9899-31a8f345e629;
- Mon, 17 Mar 2025 06:41:17 +0100 (CET)
-Received: from SA0PR11CA0017.namprd11.prod.outlook.com (2603:10b6:806:d3::22)
- by SJ1PR12MB6268.namprd12.prod.outlook.com (2603:10b6:a03:455::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Mon, 17 Mar
- 2025 05:41:12 +0000
-Received: from SA2PEPF00003AEA.namprd02.prod.outlook.com
- (2603:10b6:806:d3:cafe::29) by SA0PR11CA0017.outlook.office365.com
- (2603:10b6:806:d3::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.33 via Frontend Transport; Mon,
- 17 Mar 2025 05:41:12 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF00003AEA.mail.protection.outlook.com (10.167.248.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Mon, 17 Mar 2025 05:41:11 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 17 Mar
- 2025 00:41:09 -0500
+ id 27cce7e0-0300-11f0-9899-31a8f345e629;
+ Mon, 17 Mar 2025 08:19:26 +0100 (CET)
+Received: from phl-compute-06.internal (phl-compute-06.phl.internal
+ [10.202.2.46])
+ by mailfforwardh.stl.internal (Postfix) with ESMTP id 6698E174029F;
+ Mon, 17 Mar 2025 03:19:24 -0400 (EDT)
+Received: from phl-frontend-02 ([10.202.2.161])
+ by phl-compute-06.internal (MEProxy); Mon, 17 Mar 2025 03:19:24 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 17 Mar 2025 03:19:23 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,127 +47,255 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71a63f3e-02f2-11f0-9899-31a8f345e629
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Uy/bEdxoprmy8wHIefmrQf80hGcC2asdSXO+HuAk+1bBfwHCXX+P6UR6hyqRA8qEr2BmOlKjKJqYMiJLqaOu+Z8yDclKpNwfliwxxjlkQW/FHyqAc17jKQFkp05rIICg93NgAGFcBEtJGolSqwaofBt6GhF+T/jlrP0306yswgiI56lld2QVPLj1Z3VUPNfKRaX+s49NwY1nptO8ZzoN/YwhgRK5FzM401Ln9X4w5yx1QesiADct/J1g1w4TjpBKLKWDP8hTw+n+TmSkqQTOK8WVchwlsW2dYabk9snCcxVoED6V04HWVjGV23VHSxOC/sEGy5hYMdSj1yu4+huCog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jBepBcTFggXypd9FVSWSsyJvz9VTo53NKGsEo5eF2NM=;
- b=Gu6Leff1NpxfPMm7gMazK6Xd7QXnjo67R0Y06M6hE9bVJ872P/gx0zD9AM71wV/9Y+6dA/hR6AVS8YLqlTjZkvzlIOlCBbcVWgiR4Fhbe6kuatu52h46HLGkIwTFJraj9HYdsbB2XQnCsriVHAhQK6s465/+mMFF0MXHsMcdu6JGbley3KkOO1cXScxhkafVi2EYA1eaxjVFyPOW9YXEhtakXBe5J7Kvg89x9BSHnBH7UAGYanuODgxfMTiDvH2m1Dhw6RCcDf5pHrnmYbzK8MrATHjdMJQElD63f5VHvhZlXsGcFCRTQ78vFTJMhZQ8HQkA3nFJngIVfS1vX0HOLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jBepBcTFggXypd9FVSWSsyJvz9VTo53NKGsEo5eF2NM=;
- b=GTiiPSVY0P6CrmsDu1Hn+BCWhu9uo6yCAbQBXi8J8rDZ4RrV34WuPA+eNuQk+j/i77YyEhBRP0cDYvKy7+921DazPzPdwmQPrMY/6YwAhr545IQmjEsWKhk7R6dBRHTGNMc+3ZJTQk+4LPEgnfZWka+5fpYvDaQUzik6iMaDasw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Community Manager <community.manager@xenproject.org>, Oleksii Kurochko
-	<oleksii.kurochko@gmail.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Huang Rui <ray.huang@amd.com>, Jiqian Chen
-	<Jiqian.Chen@amd.com>
-Subject: [PATCH v2] CHANGELOG.md: Mention PCI passthrough for HVM domUs
-Date: Mon, 17 Mar 2025 13:40:33 +0800
-Message-ID: <20250317054033.2659644-1-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 27cce7e0-0300-11f0-9899-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1742195964; x=1742282364; bh=sPu8+6eEudw5U5gDAhN6T1GTyZngizfhufi
+	p1TCOUzs=; b=a2ci3NCdNda5KQ9iqNol4v8JSB82yzvXdbM6bYe1R9AOZnzX/za
+	rhWXp5T0JDx19eww78N8/GqWWddK3jD5ZMQVW7EoWeXoiq2DLLRymvxft9pghsA3
+	eMomQZyK8Sm9KSkPBkNzAdAwZwneN5B7eN3zifkh+f2YRKOKV/GCr1GTa0jCIL/h
+	i2ugKoXjgBg71H8hEcWfmzHlHd3RYk3FDo7whaZGszJtcEqzfMHVvHy+g+dD26Ff
+	ygt4f8bvlm1BxkIC4c70Nr2ulVpuiAdoTQy/xUhanA86bxyi76hplkNZASUlZcF5
+	YKZrWc/bANHBmNT19yQpQTWLMYh9JmBNtpQ==
+X-ME-Sender: <xms:-8zXZyW6yt1YmjLCsLWlFWiME6XBvRAqfYN48lP0v4wS4o7IL1-V_g>
+    <xme:-8zXZ-mboIrjrFukEFmGU5IxJ1V-ByuDikprwKU4yMKkfmDMol5Kk0xSZbsPLAxtb
+    BHY4nAGJAnKtXfKRbs>
+X-ME-Received: <xmr:-8zXZ2YQohJJ6Cf2h3GaqYBVOPnkuTK0jndMjPkUVa_XodFFkvmkjxKboT1POuReBjR9oL6xGMfsYP23bHWh6Or-76lQFT-uvwUTh4ZY2rFaYQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddufeekledtucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
+    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
+    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttden
+    ucfhrhhomhepufgvrhhgihihucfmihgsrhhikhcuoefuvghrghhihigpmfhisghrihhkse
+    gvphgrmhdrtghomheqnecuggftrfgrthhtvghrnhepffffvdeifeeijefhheefuedvvedt
+    heffjeeiveehgfettedvgedujefgudejgedvnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepshgrkhhisgesuggrrhhkshhtrghrrdhsihhtvgdp
+    nhgspghrtghpthhtohepiedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnh
+    dquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohep
+    shgvrhhgihihpghkihgsrhhikhesvghprghmrdgtohhmpdhrtghpthhtohepjhgsvghulh
+    hitghhsehsuhhsvgdrtghomhdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfees
+    tghithhrihigrdgtohhmpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrd
+    gtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:-8zXZ5ULqGBkjZlmgWbbYMSWEUEIdTzRuxfeZOyNqlyczIZEu4oWzg>
+    <xmx:-8zXZ8mQlEHLvghzYWCpLITAFj9FAF1csJIzJfq_sM7sOOrdjpeg0g>
+    <xmx:-8zXZ-fXiK7uCkMZMUO2ibIsOiJdbizB4XJjjBS9cTEoNJWJojV91A>
+    <xmx:-8zXZ-EIzw_2y5BUrN7HetKRsI9qd8ySPufB6sLVgiv_GA7Py0Y9nA>
+    <xmx:-8zXZ6m6PRNrKIWRUcsQydINTp8ZbjbZu2PAnvTAxdBcyXlBOpGI-A>
+    <xmx:_MzXZ7u4wiOIgtiZm_DLoUcezyxBYLg6u0J_aLSmr6WXdVuUqyMU03aWU8sb>
+Feedback-ID: i5dfb0d4a:Fastmail
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1] x86: make Viridian support optional
+Date: Mon, 17 Mar 2025 09:19:19 +0200
+Message-Id: <20250317071919.3766976-1-Sergiy_Kibrik@epam.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AEA:EE_|SJ1PR12MB6268:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7e440444-cae6-4fb1-b44b-08dd65165339
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?jRAP8FWu3hwN/I1flpUhDfa3ZiA4JCbGmctPafBrcCcj7cFRF8q3NsD54uxH?=
- =?us-ascii?Q?BqHsxnZm+axGit62dn1MitZ3lrpXgYR2hpU+xqiZeZmc339ezJBfdAV68yu/?=
- =?us-ascii?Q?dZVC24i1jgiz5f9wWIjxDrrqaDB58S6sf3Ul8AETv1TvwPFVJrlTys6VYmMf?=
- =?us-ascii?Q?NeGcQpuND47nyc4ZR3Mj5akU7NVrnglQJhacv4/RDJ4CJHx/kJS7WyMPK530?=
- =?us-ascii?Q?aErC1XUWkiaUb8v8WMzfYoaChfug+m5ArLiU1R52fFYPfdZpFkicRg7A1HFx?=
- =?us-ascii?Q?F/PREq9ItOG0SZUjGHOeMQvilkQY+XOlACtrAgGkFOz5xbYTU4oXHDCNfIk1?=
- =?us-ascii?Q?nUImnAtukJBlZbJU3snjCeD7TpONoQ2uGY4Kg9gxU2hct3hyRYg2WRwnk+Yl?=
- =?us-ascii?Q?aw9tQCuyUHOgNhQqVNJ1E2E1/U0GifGe4FkjHjICdl9e+pNrdRqUmu7Uyvwv?=
- =?us-ascii?Q?GVrEGhnQr3BZEbq3SwcZOnl3T9No2/Ud+4IBN/c6LSSUW80P1sDoH1UBW9c5?=
- =?us-ascii?Q?J6rDLCUrFLcHiShFy/xu0WPX4WVgqK5X8ilvnHZLjyCo/nZ1BAtlB5J4N+HI?=
- =?us-ascii?Q?NbSoWbu5ljkdbM4FAYTfQ95rjxgn+AFGFpdUt/laNLgTYYSGdVWBbePlNmd7?=
- =?us-ascii?Q?x1mIuogoY8/tAi8s9vQW1d6r3xnkj8mXlPXNZlTXb16P2VMB3VMxk5OSuw4e?=
- =?us-ascii?Q?J2O+MrWZ6GGxa/DMCe50IKGTs6GAxpQ/JlQcrTswFG4n/Q3o1s2JqCEM4ijC?=
- =?us-ascii?Q?RnMqzJ25NZd+xopWfOav1Iq7nPETc1XPOWLOb6OlJp/O6G7ePLz8OTFikkZt?=
- =?us-ascii?Q?jF4eT7Er/v6SD9zQRd9ntPoGWfvYiZoNGueeS5SY4Wz82xSi0f9hf9XpLryq?=
- =?us-ascii?Q?a5XCTj6X3RRIM5XAkQu3lt+sBk3iPt9B2eHvVPd+D6w1coufGw2vpzTyy9rq?=
- =?us-ascii?Q?dOWcgQaLjR033haAOdO79ylBl2+qI27bJrE2swsQtwnBfllf3+Jp/1+7cOSN?=
- =?us-ascii?Q?GOUD1k1klneGkZaBGVbS+At3Ww2z3xDJY+vZuMdtM/ky7GItjAD3vwFr6X9J?=
- =?us-ascii?Q?qa0a7xONoFY51qRLNPj0a1Jlu6tCTwwBV/CTLnV448AJ7Y2O5t3TzJDXupVF?=
- =?us-ascii?Q?bBh+ve+OJqk8IButdwFZRdp6bz04Nn0Cs94hwLM7oaO1qpNw5edNrdhZeooL?=
- =?us-ascii?Q?9B/tWHiY+V6/5HlFUskJY7PhwqVdv+68vs7klPltP+KJ4sfbjQ/awKR+uXkm?=
- =?us-ascii?Q?LiQEkMUmL8XzH1kAgwHcI1cw7ML5UZynAvhS60jyRBbM/cdSp3T2i78E1mp6?=
- =?us-ascii?Q?LasQ9dQ3vCfCJkvnm0cXpAVLXkd1JKP0ZtThbQq5rl6VfMJmDsX13y7uO2EJ?=
- =?us-ascii?Q?zWnFufMauA55iMklOIpnr9o6HpmlebCNI3GFpYr6xbJUkRP33Q3yjZtZD2Cf?=
- =?us-ascii?Q?waIpJHLEeew=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2025 05:41:11.5829
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e440444-cae6-4fb1-b44b-08dd65165339
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00003AEA.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6268
 
-PCI passthrough is already supported for HVM domUs when dom0 is PVH
-on x86. The last related patch on Qemu side was merged after Xen4.20
-release. So mention this feature in Xen4.21 entry.
+Add config option HVM_VIRIDIAN that covers viridian code within HVM.
+Calls to viridian functions guarded by is_viridian_domain() and related macros.
+Having this option may be beneficial by reducing code footprint for systems
+that are not using Hyper-V.
 
-But SR-IOV is not yet supported on PVH dom0, add a note for it.
-
-Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 ---
-iHi all,
-v1->v2 changes:
-* Changed to note SR-IOV is not supported on PVH dom0.
-* Added A-B of Oleksii.
-* Dependent patches https://lore.kernel.org/xen-devel/20250308001711.18746-1-jason.andryuk@amd.com/ were already merged.
+ xen/arch/x86/Kconfig                  |  5 +++++
+ xen/arch/x86/hvm/Makefile             |  2 +-
+ xen/arch/x86/hvm/hvm.c                | 27 ++++++++++++++++++---------
+ xen/arch/x86/hvm/vlapic.c             | 11 +++++++----
+ xen/arch/x86/include/asm/hvm/domain.h |  4 ++--
+ xen/arch/x86/include/asm/hvm/hvm.h    |  3 ++-
+ xen/arch/x86/include/asm/hvm/vcpu.h   |  3 ++-
+ 7 files changed, 37 insertions(+), 18 deletions(-)
 
-Best regards,
-Jiqian Chen.
----
- CHANGELOG.md | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 7201c484f899..9a5919585d43 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-  - On x86:
-    - Option to attempt to fixup p2m page-faults on PVH dom0.
-    - Resizable BARs is supported for PVH dom0.
-+   - Support PCI passthrough for HVM domUs when dom0 is PVH (note SR-IOV
-+     capability usage is not yet supported on PVH dom0).
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 6e41bc0fb4..34f9b79d98 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -348,6 +348,11 @@ config HYPERV_GUEST
  
- ### Removed
+ endif
  
++config HVM_VIRIDIAN
++	bool "Viridian enlightenments support" if EXPERT
++	depends on HVM
++	default y
++
+ config MEM_PAGING
+ 	bool "Xen memory paging support (UNSUPPORTED)" if UNSUPPORTED
+ 	depends on HVM
+diff --git a/xen/arch/x86/hvm/Makefile b/xen/arch/x86/hvm/Makefile
+index 4c1fa5c6c2..6cc2e74fc4 100644
+--- a/xen/arch/x86/hvm/Makefile
++++ b/xen/arch/x86/hvm/Makefile
+@@ -1,6 +1,6 @@
+ obj-$(CONFIG_AMD_SVM) += svm/
+ obj-$(CONFIG_INTEL_VMX) += vmx/
+-obj-y += viridian/
++obj-$(CONFIG_HVM_VIRIDIAN) += viridian/
+ 
+ obj-y += asid.o
+ obj-y += dm.o
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 2f31180b6f..4f51d0f66c 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -695,9 +695,12 @@ int hvm_domain_initialise(struct domain *d,
+     if ( hvm_tsc_scaling_supported )
+         d->arch.hvm.tsc_scaling_ratio = hvm_default_tsc_scaling_ratio;
+ 
+-    rc = viridian_domain_init(d);
+-    if ( rc )
+-        goto fail2;
++    if ( is_viridian_domain(d) )
++    {
++        rc = viridian_domain_init(d);
++        if ( rc )
++            goto fail2;
++    }
+ 
+     rc = alternative_call(hvm_funcs.domain_initialise, d);
+     if ( rc != 0 )
+@@ -733,7 +736,8 @@ void hvm_domain_relinquish_resources(struct domain *d)
+     if ( hvm_funcs.nhvm_domain_relinquish_resources )
+         alternative_vcall(hvm_funcs.nhvm_domain_relinquish_resources, d);
+ 
+-    viridian_domain_deinit(d);
++    if ( is_viridian_domain(d) )
++        viridian_domain_deinit(d);
+ 
+     ioreq_server_destroy_all(d);
+ 
+@@ -1637,9 +1641,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
+          && (rc = nestedhvm_vcpu_initialise(v)) < 0 ) /* teardown: nestedhvm_vcpu_destroy */
+         goto fail5;
+ 
+-    rc = viridian_vcpu_init(v);
+-    if ( rc )
+-        goto fail6;
++    if ( is_viridian_domain(v->domain) )
++    {
++        rc = viridian_vcpu_init(v);
++        if ( rc )
++            goto fail6;
++    }
+ 
+     rc = ioreq_server_add_vcpu_all(d, v);
+     if ( rc != 0 )
+@@ -1669,13 +1676,15 @@ int hvm_vcpu_initialise(struct vcpu *v)
+  fail2:
+     hvm_vcpu_cacheattr_destroy(v);
+  fail1:
+-    viridian_vcpu_deinit(v);
++    if ( is_viridian_domain(v->domain) )
++        viridian_vcpu_deinit(v);
+     return rc;
+ }
+ 
+ void hvm_vcpu_destroy(struct vcpu *v)
+ {
+-    viridian_vcpu_deinit(v);
++    if ( is_viridian_domain(v->domain) )
++        viridian_vcpu_deinit(v);
+ 
+     ioreq_server_remove_vcpu_all(v->domain, v);
+ 
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 065b2aab5b..b8236dade0 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -426,7 +426,8 @@ void vlapic_EOI_set(struct vlapic *vlapic)
+      * priority vector and then recurse to handle the lower priority
+      * vector.
+      */
+-    bool missed_eoi = viridian_apic_assist_completed(v);
++    bool missed_eoi = has_viridian_apic_assist(v->domain) ?
++                          viridian_apic_assist_completed(v) : false;
+     int vector;
+ 
+  again:
+@@ -442,7 +443,7 @@ void vlapic_EOI_set(struct vlapic *vlapic)
+      * NOTE: It is harmless to call viridian_apic_assist_clear() on a
+      *       recursion, even though it is not necessary.
+      */
+-    if ( !missed_eoi )
++    if ( has_viridian_apic_assist(v->domain) && !missed_eoi )
+         viridian_apic_assist_clear(v);
+ 
+     vlapic_clear_vector(vector, &vlapic->regs->data[APIC_ISR]);
+@@ -1360,7 +1361,8 @@ int vlapic_has_pending_irq(struct vcpu *v)
+      * If so, we need to emulate the EOI here before comparing ISR
+      * with IRR.
+      */
+-    if ( viridian_apic_assist_completed(v) )
++    if ( has_viridian_apic_assist(v->domain) &&
++         viridian_apic_assist_completed(v) )
+         vlapic_EOI_set(vlapic);
+ 
+     isr = vlapic_find_highest_isr(vlapic);
+@@ -1373,7 +1375,8 @@ int vlapic_has_pending_irq(struct vcpu *v)
+     if ( isr >= 0 &&
+          (irr & 0xf0) <= (isr & 0xf0) )
+     {
+-        viridian_apic_assist_clear(v);
++        if ( has_viridian_apic_assist(v->domain) )
++            viridian_apic_assist_clear(v);
+         return -1;
+     }
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/domain.h b/xen/arch/x86/include/asm/hvm/domain.h
+index 333501d5f2..bc52504cdd 100644
+--- a/xen/arch/x86/include/asm/hvm/domain.h
++++ b/xen/arch/x86/include/asm/hvm/domain.h
+@@ -110,9 +110,9 @@ struct hvm_domain {
+ 
+     /* hypervisor intercepted msix table */
+     struct list_head       msixtbl_list;
+-
++#ifdef CONFIG_HVM_VIRIDIAN
+     struct viridian_domain *viridian;
+-
++#endif
+     /*
+      * TSC value that VCPUs use to calculate their tsc_offset value.
+      * Used during initialization and save/restore.
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index 963e820113..1bbeece117 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -507,7 +507,8 @@ hvm_get_cpl(struct vcpu *v)
+     (has_hvm_params(d) ? (d)->arch.hvm.params[HVM_PARAM_VIRIDIAN] : 0)
+ 
+ #define is_viridian_domain(d) \
+-    (is_hvm_domain(d) && (viridian_feature_mask(d) & HVMPV_base_freq))
++    (is_hvm_domain(d) && IS_ENABLED(CONFIG_HVM_VIRIDIAN) && \
++                         (viridian_feature_mask(d) & HVMPV_base_freq))
+ 
+ #define is_viridian_vcpu(v) \
+     is_viridian_domain((v)->domain)
+diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
+index 196fed6d5d..bac35ec47a 100644
+--- a/xen/arch/x86/include/asm/hvm/vcpu.h
++++ b/xen/arch/x86/include/asm/hvm/vcpu.h
+@@ -171,8 +171,9 @@ struct hvm_vcpu {
+ 
+     /* Pending hw/sw interrupt (.vector = -1 means nothing pending). */
+     struct x86_event     inject_event;
+-
++#ifdef CONFIG_HVM_VIRIDIAN
+     struct viridian_vcpu *viridian;
++#endif
+ };
+ 
+ #endif /* __ASM_X86_HVM_VCPU_H__ */
 -- 
-2.34.1
+2.25.1
 
 
