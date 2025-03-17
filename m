@@ -4,35 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A27C282EC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 20:08:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.918100.1322898 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4358DC282EC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 22:38:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.918181.1322908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuGkd-0007zk-9c; Mon, 17 Mar 2025 20:07:55 +0000
+	id 1tuJ5n-0006WI-Nw; Mon, 17 Mar 2025 22:37:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 918100.1322898; Mon, 17 Mar 2025 20:07:55 +0000
+Received: by outflank-mailman (output) from mailman id 918181.1322908; Mon, 17 Mar 2025 22:37:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuGkd-0007zW-5u; Mon, 17 Mar 2025 20:07:55 +0000
-Received: by outflank-mailman (input) for mailman id 918100;
- Mon, 17 Mar 2025 20:07:54 +0000
+	id 1tuJ5n-0006WB-Ku; Mon, 17 Mar 2025 22:37:55 +0000
+Received: by outflank-mailman (input) for mailman id 918181;
+ Mon, 17 Mar 2025 22:37:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Q9Sv=WE=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1tuGkc-00063P-1N
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 20:07:54 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 798e3c1e-036b-11f0-9899-31a8f345e629;
- Mon, 17 Mar 2025 21:07:38 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B91BE152B;
- Mon, 17 Mar 2025 13:07:46 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E8E073F7BD;
- Mon, 17 Mar 2025 13:07:36 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=oAQD=WE=redhat.com=npache@srs-se1.protection.inumbo.net>)
+ id 1tuJ5m-0006W5-1Z
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 22:37:54 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 73c18d6e-0380-11f0-9899-31a8f345e629;
+ Mon, 17 Mar 2025 23:37:49 +0100 (CET)
+Received: from mail-io1-f70.google.com (mail-io1-f70.google.com
+ [209.85.166.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-299-QoMxqy4uOoGdsveaQ1UC_A-1; Mon, 17 Mar 2025 18:37:46 -0400
+Received: by mail-io1-f70.google.com with SMTP id
+ ca18e2360f4ac-85b48bd978cso522778039f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 15:37:46 -0700 (PDT)
+Received: from ?IPV6:2601:282:c100:48a0::aa6? ([2601:282:c100:48a0::aa6])
+ by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f263702075sm2481735173.6.2025.03.17.15.37.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Mar 2025 15:37:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,66 +51,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 798e3c1e-036b-11f0-9899-31a8f345e629
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 1/7] arm/mpu: Add HYPERVISOR_VIRT_START and avoid a check in xen.lds.S
-Date: Mon, 17 Mar 2025 20:07:21 +0000
-Message-Id: <20250317200727.798696-2-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250317200727.798696-1-luca.fancellu@arm.com>
-References: <20250317200727.798696-1-luca.fancellu@arm.com>
+X-Inumbo-ID: 73c18d6e-0380-11f0-9899-31a8f345e629
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1742251067;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uz73BbCUaqtdYR+gICGbN6AT48ejOu9pXaDANWFGjaE=;
+	b=ilPt7IndygqbBshLqzD5ifIlAiiXL2llL20DqGIeAUseDUjYcNUT6jvl1lTGCrrloRQcDn
+	NoIXScGv5+YWL2+nlgCZdChG8l1XdzkePwi+GSVbjHzoqlcER4ca1zutIGUyra+PQOIG/o
+	YrNS2OeE3JuWuIQP7unqJGmiJu3aC+s=
+X-MC-Unique: QoMxqy4uOoGdsveaQ1UC_A-1
+X-Mimecast-MFC-AGG-ID: QoMxqy4uOoGdsveaQ1UC_A_1742251066
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742251066; x=1742855866;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:from:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uz73BbCUaqtdYR+gICGbN6AT48ejOu9pXaDANWFGjaE=;
+        b=aaY4ji4dl+9cMipj/cObI1ojpdaPpNtPXcl/YQ+1OtZa53HBbGbGBpRBCrNUcCKNDc
+         wOKMsB+OltRp3msshNkfcCLJs7qENgMtDfb1mKgJcw2BCSqxiqgirE3t/+lMCUXwH6jh
+         cuLXv5YHzbBXqlx9YFURQmX/sLQjKGvOdMYq5cFjK23NmqL04V4C52kZeYED9TZySiKR
+         Nwz1T0XDzZub+1Y6qLmBCExxOu3I4Mxeaf0JPt/FBlp32AE+HH5rzTggs4TmSWwureGW
+         AGPY6ht+1skOfzIcNjer+XxMCmMGkmX0fw0DaM54lhR40WvFf/fMltmN7qLsB3n8/3Iz
+         NHeA==
+X-Forwarded-Encrypted: i=1; AJvYcCVIx058gfggcxyclBqMnZjbZX3AnCwpwzu6Ifne6aXSKi9RO3dkaeY8UkTB/nIUhNw/jfwGHbCl8Zo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyD9wqxbxnYP5zVlVD4sQm/0xBszMOlvXWWIFvKTY188q5RnSvA
+	1NLpjCcAb+WSY0iZt1ow92PjytnLvxvlyw06CAsqB0sZOiavGggp+7ePRAxEc2o+OPWrklDrGCl
+	Rj/vdYFZ9bQxH+q0U0o5WBYEF3XRTGdo5cQAe1iSa8SSZn5KzT3OHW5Ao7MyerUV0
+X-Gm-Gg: ASbGncunDWcHR1YxTta74AHXxaIF+4wwRlmlIGPqNI7G957cUMaLU+sVU6kKgYqB/l6
+	A6ynh5WEj4HI3W7x+lDp6gekRPfsm1iOut7jTM2H2xMkmb/lbffvTSAf2g2wt/i/5sORysxweJO
+	g1llaCK74h8fVA7oY1T5FCWzGqPDCM2lDERtNSaHpEu+G48KTpur4/gyyC/1Jub+TyAl/xR2kEV
+	Ncfbnw6NkD4L7BYDlE75oN1ezIaRPBHyevHUdcBiUQdFU5iDiMtDbKCpKN+DylSpjOiDSFMpQbZ
+	OaLkw5rGbX1amsMhA0Ds
+X-Received: by 2002:a05:6602:4084:b0:85b:59f3:2ed3 with SMTP id ca18e2360f4ac-85dc4832c03mr1654237639f.8.1742251065758;
+        Mon, 17 Mar 2025 15:37:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFXMhXDdQ9jMsi3nNSx90SCr5dH1/wJp5bRT/DRCJ6UEq4at0o5Rp4a0vN5yQf18mlko59M2g==
+X-Received: by 2002:a05:6602:4084:b0:85b:59f3:2ed3 with SMTP id ca18e2360f4ac-85dc4832c03mr1654234539f.8.1742251065465;
+        Mon, 17 Mar 2025 15:37:45 -0700 (PDT)
+Message-ID: <a0315ccf-f244-460e-8643-fd7388724fe5@redhat.com>
+Date: Mon, 17 Mar 2025 16:37:43 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Nico Pache <npache@redhat.com>
+Subject: Re: [PATCH v2 1/4] meminfo: add a per node counter for balloon
+ drivers
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+ linux-mm@kvack.org, virtualization@lists.linux.dev,
+ alexander.atanasov@virtuozzo.com, muchun.song@linux.dev,
+ roman.gushchin@linux.dev, mhocko@kernel.org, kys@microsoft.com,
+ haiyangz@microsoft.com, wei.liu@kernel.org, decui@microsoft.com,
+ jgross@suse.com, sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
+ mst@redhat.com, david@redhat.com, yosry.ahmed@linux.dev, hannes@cmpxchg.org,
+ nphamcs@gmail.com, chengming.zhou@linux.dev, kanchana.p.sridhar@intel.com,
+ llong@redhat.com, shakeel.butt@linux.dev
+References: <20250314213757.244258-1-npache@redhat.com>
+ <20250314213757.244258-2-npache@redhat.com>
+ <20250314180625.8c3a2a5a990a132a7b0b9072@linux-foundation.org>
+In-Reply-To: <20250314180625.8c3a2a5a990a132a7b0b9072@linux-foundation.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: sWnZrCtUR6INzbdF3bIirAcr-Umvk4MJzAcKHyVI4Yc_1742251066
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, en-ZM
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The define HYPERVISOR_VIRT_START is required by the common code,
-even if MPU system doesn't use virtual memory, define it in
-mpu/layout.h in order to reuse existing code.
 
-Disable a check in the linker script for arm for !MMU systems.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+On 3/14/25 7:06 PM, Andrew Morton wrote:
+> On Fri, 14 Mar 2025 15:37:54 -0600 Nico Pache <npache@redhat.com> wrote:
+> 
+>> Add NR_BALLOON_PAGES counter to track memory used by balloon drivers and
+>> expose it through /proc/meminfo and other memory reporting interfaces.
+>>
+>> ...
+>>
+>> --- a/fs/proc/meminfo.c
+>> +++ b/fs/proc/meminfo.c
+>> @@ -162,6 +162,8 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
+>>  	show_val_kb(m, "Unaccepted:     ",
+>>  		    global_zone_page_state(NR_UNACCEPTED));
+>>  #endif
+>> +	show_val_kb(m, "Balloon:        ",
+>> +		    global_node_page_state(NR_BALLOON_PAGES));
+> 
+> Please update Documentation/filesystems/proc.rst for this.
+
+@Andrew
+
+Can you please squash the following?
+
+From b1b379a32752e64c60b5e3b6365c93db8e1daf9f Mon Sep 17 00:00:00 2001
+From: Nico Pache <npache@redhat.com>
+Date: Mon, 17 Mar 2025 16:07:18 -0600
+Subject: [PATCH] Documentation: document Balloon Meminfo entry
+
+Add a Balloon entry to the Meminfo documention.
+
+Signed-off-by: Nico Pache <npache@redhat.com>
 ---
-v3 changes:
- - no changes
-v2 changes:
- - Add Michal R-by
----
- xen/arch/arm/include/asm/mpu/layout.h | 2 ++
- xen/arch/arm/xen.lds.S                | 2 ++
- 2 files changed, 4 insertions(+)
+ Documentation/filesystems/proc.rst | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mpu/layout.h b/xen/arch/arm/include/asm/mpu/layout.h
-index d6d397f4c2ac..248e55f8882d 100644
---- a/xen/arch/arm/include/asm/mpu/layout.h
-+++ b/xen/arch/arm/include/asm/mpu/layout.h
-@@ -22,6 +22,8 @@
-  */
- #define XEN_VIRT_START         _AT(paddr_t, XEN_START_ADDRESS)
- 
-+#define HYPERVISOR_VIRT_START  XEN_VIRT_START
-+
- #endif /* __ARM_MPU_LAYOUT_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-index bbccff1a0350..4342e54422a7 100644
---- a/xen/arch/arm/xen.lds.S
-+++ b/xen/arch/arm/xen.lds.S
-@@ -239,4 +239,6 @@ ASSERT(IS_ALIGNED(__bss_start,      POINTER_ALIGN), "__bss_start is misaligned")
- ASSERT(IS_ALIGNED(__bss_end,        POINTER_ALIGN), "__bss_end is misaligned")
- /* To simplify the logic in head.S, we want to _end to be page aligned */
- ASSERT(IS_ALIGNED(_end,             PAGE_SIZE), "_end is not page aligned")
-+#ifdef CONFIG_MMU
- ASSERT((_end - _start) <= XEN_VIRT_SIZE, "Xen is too big")
-+#endif
+diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
+index 09f0aed5a08b..2868bb74f76e 100644
+--- a/Documentation/filesystems/proc.rst
++++ b/Documentation/filesystems/proc.rst
+@@ -1060,6 +1060,7 @@ Example output. You may not have all of these fields.
+     FilePmdMapped:         0 kB
+     CmaTotal:              0 kB
+     CmaFree:               0 kB
++    Balloon:               0 kB
+     HugePages_Total:       0
+     HugePages_Free:        0
+     HugePages_Rsvd:        0
+@@ -1228,6 +1229,8 @@ CmaTotal
+               Memory reserved for the Contiguous Memory Allocator (CMA)
+ CmaFree
+               Free remaining memory in the CMA reserves
++Balloon
++              Memory returned to Host by VM Balloon Drivers
+ HugePages_Total, HugePages_Free, HugePages_Rsvd, HugePages_Surp, Hugepagesize,
+Hugetlb
+               See Documentation/admin-guide/mm/hugetlbpage.rst.
+ DirectMap4k, DirectMap2M, DirectMap1G
 -- 
-2.34.1
+2.48.1
+> 
 
 
