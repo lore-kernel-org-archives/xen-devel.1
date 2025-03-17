@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F00C28B30
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 12:15:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.916659.1321710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB66C35FF3
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Mar 2025 12:16:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.916670.1321719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu9NK-0000J2-E4; Mon, 17 Mar 2025 12:15:22 +0000
+	id 1tu9O9-0000mu-L7; Mon, 17 Mar 2025 12:16:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 916659.1321710; Mon, 17 Mar 2025 12:15:22 +0000
+Received: by outflank-mailman (output) from mailman id 916670.1321719; Mon, 17 Mar 2025 12:16:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tu9NK-0000Iv-9N; Mon, 17 Mar 2025 12:15:22 +0000
-Received: by outflank-mailman (input) for mailman id 916659;
- Mon, 17 Mar 2025 12:15:21 +0000
+	id 1tu9O9-0000mn-Hl; Mon, 17 Mar 2025 12:16:13 +0000
+Received: by outflank-mailman (input) for mailman id 916670;
+ Mon, 17 Mar 2025 12:16:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UoSe=WE=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tu9NJ-0000Ip-2a
- for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 12:15:21 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ id 1tu9O8-0000mc-9G
+ for xen-devel@lists.xenproject.org; Mon, 17 Mar 2025 12:16:12 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7dc78427-0329-11f0-9899-31a8f345e629;
- Mon, 17 Mar 2025 13:15:18 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso20255915e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 05:15:18 -0700 (PDT)
+ id 9c8b7192-0329-11f0-9899-31a8f345e629;
+ Mon, 17 Mar 2025 13:16:10 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43ce70f9afbso20263035e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Mar 2025 05:16:10 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c7df3537sm14880293f8f.8.2025.03.17.05.15.17
+ 5b1f17b1804b1-43d2010e0bfsm102256145e9.36.2025.03.17.05.16.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 05:15:17 -0700 (PDT)
+ Mon, 17 Mar 2025 05:16:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7dc78427-0329-11f0-9899-31a8f345e629
+X-Inumbo-ID: 9c8b7192-0329-11f0-9899-31a8f345e629
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1742213718; x=1742818518; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1742213770; x=1742818570; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=D+iY/t+aG1F0v/mba54n10zeHBRwBrhrkn1rRM7r+GU=;
-        b=S//U63nAvk1bwXhKWitrQkTV7m6fFlGuz6BtD9GuflY9jGLI5JdmlSlxz91mFCDMTO
-         Au4zhcngkENHgXN7cQBIGmVNq4qzJCVNRXQ2j/N1VzBtlCQANNC6WveYR47MsMS1IztL
-         kZDbHY525SMmh/KOZL83vmsYrZI22GEDZiQfxBBhSajtMyyrxkKOt40q6rqz7AFY9aIg
-         2+eyWKFgePlls93e75IG0tlQ3jN0zg9odoXLysQp76FTytMpMf5u9u5VwNdoDi0ieB5P
-         /a+NUzC7OsPsEH+ZDxVLQRsC2yGfqzvR/fA5D0NS4Mu2Ump9v0UGjH425W7niPOzOl1c
-         V7IQ==
+        bh=FlLIlBvWAdx5vS5mvjL2/43jQPhKhQrFXVQWoVPlX/8=;
+        b=KmdZrs0yJrpp08J66IxgxmHmctZkGXFSWLd66/glRnkNHDMYsnxcU5t0pl0y/PIWz4
+         EztF8xaP0BAnBbvLzwNNXBdtn/8NFju/PIZoHOTbw9g6l3zXmFMnezUdA3rJsXE5wvtx
+         uslc+v9z3g7ZfhUOjPWj+zozi62wrZCrPsP1+wSkhhHWsqGfrYnZrQAeorDraLeqQtCZ
+         utlP3ZWDL/ASDRyluoYwL2Y7TRXCAZycOJYa2VlGGB1GTBckY7qW90+6XInyYe7K8/XJ
+         28SvwcAeSc/NUmLcJzRBL7b5I4BUSzSvAHiPWGGUtRVtq2VTh2vB6WSnuVuDhWfoZfre
+         84lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742213718; x=1742818518;
+        d=1e100.net; s=20230601; t=1742213770; x=1742818570;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=D+iY/t+aG1F0v/mba54n10zeHBRwBrhrkn1rRM7r+GU=;
-        b=M46FSrejxcQhT+lIDpCtjW6S5P9QJL05zjuFtyhqzkFvCJtUeWvlRg9L0xgDEJjAOV
-         c/GGcSYa1c7Y3qAlKqAjZ4qQXw+VvEMdJq9Rj2/l+/Kamd4EGQD9B2588gsooKCz5NDP
-         32B9Fd/RDgkYU4sQo4GoQrxtElygHmPJT1XNm0yIXvjV4vFIJdODUcn4pW0r0Wa9n3FF
-         9ybfFMIolidilopLLUN5kP51wfOkDmQb7uujrOExZiE4Nq3wKqC4/kAswDdxDnAtarhJ
-         9T3bEGz3EtSl8DrZt9qlUFxENOjbn3NOmlCLF7/WF1LhGC8PqsTJ1lA5MCY/VCyFkzAh
-         wsvg==
-X-Forwarded-Encrypted: i=1; AJvYcCXSEPQlnCH1hCnriG/2yxHlGBQ/OmBCW+kMs9QyzreBRTV7tW7MaUQ5OQp0MV1xCbaaRITM62mnNgU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxgdB+gC76OSTLFpBbH6tK6teYxwt1ZdrP4HmUNofku2h3TTE1E
-	D7V7RNxJYVOVACYbd+VXktwl6Htai9I2QDA/eNPRLw15SxgXnHizLHAJxCVQvg==
-X-Gm-Gg: ASbGncsbH3aNp6IxgBqD8U1s9tzAUBOhc+iUcym9aBcWX0cD41bFHZa+a/FCXx/deX9
-	1OcJEkBYjRLenhWNkkTyghKCW3O/5B5qKGHWGxmI6Lpmdrf5Fe83py7b8cnnhqBIULNFmJZ62bZ
-	KTgyV1KFv9EB0PW/OeyiUrTGiAHdRO6N4s99PrNQg3vXAK95twlVEJK3n2aoX7/dMMREoyLaPxh
-	qlbFrXMWIVij5es88Ra0Z87kTjVNcYW5bUBxtP6EzaBKMzmebXVHtfOep4gQCLQaVg8Kj4d0+ED
-	EZCv0TTPhI6T1k49oBq+MS2poIGuMKHWtmrw5YZZhAeFJwXZmZKc2l0MSFj50c4TUE2t+n2zo1V
-	rji1MsIeoCR4QdLO5awzInuRkM5SKXQ==
-X-Google-Smtp-Source: AGHT+IGNNlGNGfPeBV6DyJQAz73rllUQWPjm05YwM09BynYpp4xDjMT3rulqdpcupzDWsKbZUeWjeQ==
-X-Received: by 2002:a05:600c:190e:b0:43c:f513:9585 with SMTP id 5b1f17b1804b1-43d1ec808ebmr131458115e9.13.1742213718186;
-        Mon, 17 Mar 2025 05:15:18 -0700 (PDT)
-Message-ID: <8edba542-9844-409e-bbf0-5ff1c9287a10@suse.com>
-Date: Mon, 17 Mar 2025 13:15:17 +0100
+        bh=FlLIlBvWAdx5vS5mvjL2/43jQPhKhQrFXVQWoVPlX/8=;
+        b=TCGpBTMB9tryau09Fq9SiJaYR35FP3qW2byerIaieRfStZkK9pLE/TA3R2yZw6NIe8
+         mhYULtAEqOFJcNJWSeeccwYEEEZXxvUTKNKXP5ONNwiZtY1huJ1sgHyqG7QuJStoA7N6
+         wvbQGqrdLnTgZlyQUW6Vf2oaDLDACRkNn0G+Bd517j03Hj+mGpKiL+u/rs0XO2iO2stg
+         6Lp8tY2rBy8SP+IcUjn33qrTH/MjbfhWR5Z3PgJozct5zBDFQk6V0uHqc1Op0jqcavbu
+         TPw0u5YJOxj03FNjl/ugI+FQgXFr3epKgAQbmFedP+/eaXYNSJTt9H3NhhDP8xk166MZ
+         dvhQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVckjQ62kVvlYxwGYVXVw4NBhnrVMU0txjb3gNZ8v3yLubFL12sLaf3WY2srHzy5ZgS0qMZT7PkCv4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz6Fg7+JX+4TwFi7hIZN3ZZfB50m9v46/JosP9EnIB/ipsVVNLB
+	yWoXNNMg7klK+lCCopO+Il1+T6xavB+eeV82Q6RsRrP2kSh4k9P2J+2EDc9ccA==
+X-Gm-Gg: ASbGncsVplp4xHBTi81QfoTE2jNs/OGEbq4H9xDw8psRrpHzG3NC8KFTIAjvQVB/U52
+	uf2x9VDrC3kSvH/GX+IX43U97fZB3Ns/Ov5UAS7P4F8SkB58W68Ey8XF9Iu2zjuoDPFTOXslk80
+	eBsF3eTUP0uJFGzY4jyjPUuMM3pNnHVdYVQSpImU1gcTo5RzmtwTNow+3fca1fq5WqXci8ZBT6d
+	Tvl0cOMN6JA6VxbEEmK2Yryz+H0C0adcbAfUVzt+8/U3KuzsifqKc5nAb2Y9sC6nAIDG/2YO5FA
+	iukY+2FfGk8hFMR+HLtZsKGoRAzh1ydbGT6JUbTOw4gjCX/DvEIMZEHjBg5ykmL6v/me5gpA5xh
+	4UZenDR0mCX6GuaU/fqJj+lR30e535A==
+X-Google-Smtp-Source: AGHT+IFmeUJnDfiEIfCxtFN4sPn0sgOlmnQ9WdRtjut325l8qsRw9cucDNda5H7u11GetsfIaj8TGQ==
+X-Received: by 2002:a05:600c:548e:b0:43c:eacc:9d8c with SMTP id 5b1f17b1804b1-43d1eccf5b2mr125210245e9.24.1742213769955;
+        Mon, 17 Mar 2025 05:16:09 -0700 (PDT)
+Message-ID: <a046ae35-8663-4357-aaef-34a97f1b1584@suse.com>
+Date: Mon, 17 Mar 2025 13:16:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/8] x86/public: Split the struct cpu_user_regs type
+Subject: Re: [PATCH 8/8] x86: Drop the vm86 segments selectors from struct
+ cpu_user_regs
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
 References: <20250311211043.3629696-1-andrew.cooper3@citrix.com>
- <20250311211043.3629696-8-andrew.cooper3@citrix.com>
+ <20250311211043.3629696-9-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -120,117 +121,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250311211043.3629696-8-andrew.cooper3@citrix.com>
+In-Reply-To: <20250311211043.3629696-9-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 11.03.2025 22:10, Andrew Cooper wrote:
-> In order to support FRED, we're going to have to remove the {ds..gs} fields
-> from struct cpu_user_regs, meaning that it is going to have to become a
-> different type to the structure embedded in vcpu_guest_context_u.
+> The data segment registers are part of the on-stack IRET frame when
+> interrupting Virtual 8086 mode, but this ceased being relevant for Xen in
+> commit 5d1181a5ea5e ("xen: Remove x86_32 build target.") in 2012.
 > 
-> struct cpu_user_regs is a name used in common Xen code (i.e. needs to stay
-> using this name), so renaming the public struct to be guest_user_regs in Xen's
-> view only.
+> With all other cleanup in place, delete the fields so we can introduce FRED
+> support which uses this space for different data.
 > 
-> Introduce a brand hew cpu-user-regs.h, currently containing a duplicate
-> structure.  This removes the need for current.h to include public/xen.h, and
-> highlights a case where the emulator was picking up cpu_user_regs
-> transitively.
+> Everywhere which used the es field as an offset in cpu_user_regs needs
+> adjusting.  However, they'll change again for FRED, so no cleanup is performed
+> at this juncture.
 > 
-> No functional change.
+> This also undoes the OoB Read workaround in show_registers(), which can now
+> switch back to being simple structure copy.
+> 
+> No functional change, but a lot of rearranging of stack and struct layout
+> under the hood.
 > 
 > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Albeit, besides a few remarks, a suggestion below.
 
-> Jan: Is this what you intended?
-
-Yes.
-
-> cpu_user_regs_t and the guest handle don't seem to be used anywhere.  I'm
-> tempted to exclude them from Xen builds.
-
-I concur. We can always re-expose them should they be needed somewhere.
-
-> --- /dev/null
-> +++ b/xen/arch/x86/include/asm/cpu-user-regs.h
-> @@ -0,0 +1,69 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +#ifndef X86_CPU_USER_REGS_H
-> +#define X86_CPU_USER_REGS_H
-> +
-> +#define DECL_REG_LOHI(which) union { \
-> +    uint64_t r ## which ## x; \
-> +    uint32_t e ## which ## x; \
-> +    uint16_t which ## x; \
-> +    struct { \
-> +        uint8_t which ## l; \
-> +        uint8_t which ## h; \
-> +    }; \
-> +}
-> +#define DECL_REG_LO8(name) union { \
-> +    uint64_t r ## name; \
-> +    uint32_t e ## name; \
-> +    uint16_t name; \
-> +    uint8_t name ## l; \
-> +}
-> +#define DECL_REG_LO16(name) union { \
-> +    uint64_t r ## name; \
-> +    uint32_t e ## name; \
-> +    uint16_t name; \
-> +}
-> +#define DECL_REG_HI(num) union { \
-> +    uint64_t r ## num; \
-> +    uint32_t r ## num ## d; \
-> +    uint16_t r ## num ## w; \
-> +    uint8_t r ## num ## b; \
-> +}
-
-Can we try to avoid repeating these here? The #undef-s in the public header are
-to keep external consumers' namespaces reasonably tidy. In Xen, since we don't
-otherwise use identifiers of these names, can't we simply #ifdef-out those
-#undef-s, and then not re-introduce the same (less the two underscores) here?
-Granted we then need to include the public header here, but I think that's a
-fair price to pay to avoid the redundancy.
-
-> +struct cpu_user_regs
-> +{
-> +    DECL_REG_HI(15);
-> +    DECL_REG_HI(14);
-> +    DECL_REG_HI(13);
-> +    DECL_REG_HI(12);
-> +    DECL_REG_LO8(bp);
-> +    DECL_REG_LOHI(b);
-> +    DECL_REG_HI(11);
-> +    DECL_REG_HI(10);
-> +    DECL_REG_HI(9);
-> +    DECL_REG_HI(8);
-> +    DECL_REG_LOHI(a);
-> +    DECL_REG_LOHI(c);
-> +    DECL_REG_LOHI(d);
-> +    DECL_REG_LO8(si);
-> +    DECL_REG_LO8(di);
-> +    uint32_t error_code;
-> +    uint32_t entry_vector;
-> +    DECL_REG_LO16(ip);
-> +    uint16_t cs, _pad0[1];
-> +    uint8_t  saved_upcall_mask;
-> +    uint8_t  _pad1[3];
-> +    DECL_REG_LO16(flags); /* rflags.IF == !saved_upcall_mask */
-> +    DECL_REG_LO8(sp);
-> +    uint16_t ss, _pad2[3];
-> +    uint16_t es, _pad3[3];
-> +    uint16_t ds, _pad4[3];
-> +    uint16_t fs, _pad5[3];
-> +    uint16_t gs, _pad6[3];
-
-I had to peek ahead at the last patch to figure why you introduce these 4 fields
-(plus their padding) here, just to remove them again. Personally I think it would
-be neater if both were folded; nevertheless I'd like to leave this entirely to
-you.
-
-Jan
 
