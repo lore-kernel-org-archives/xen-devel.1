@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D48CC28B28
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Mar 2025 17:05:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.919557.1323986 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A9BC28B2F
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Mar 2025 17:36:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.919604.1324006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuaNq-00073D-Im; Tue, 18 Mar 2025 17:05:42 +0000
+	id 1tuarP-000613-TO; Tue, 18 Mar 2025 17:36:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 919557.1323986; Tue, 18 Mar 2025 17:05:42 +0000
+Received: by outflank-mailman (output) from mailman id 919604.1324006; Tue, 18 Mar 2025 17:36:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuaNq-000734-G0; Tue, 18 Mar 2025 17:05:42 +0000
-Received: by outflank-mailman (input) for mailman id 919557;
- Tue, 18 Mar 2025 17:05:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tuarP-00060w-Qd; Tue, 18 Mar 2025 17:36:15 +0000
+Received: by outflank-mailman (input) for mailman id 919604;
+ Tue, 18 Mar 2025 17:36:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wPrW=WF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tuaNp-0006Pm-9C
- for xen-devel@lists.xenproject.org; Tue, 18 Mar 2025 17:05:41 +0000
-Received: from fhigh-b4-smtp.messagingengine.com
- (fhigh-b4-smtp.messagingengine.com [202.12.124.155])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 30309306-041b-11f0-9899-31a8f345e629;
- Tue, 18 Mar 2025 18:05:27 +0100 (CET)
-Received: from phl-compute-12.internal (phl-compute-12.phl.internal
- [10.202.2.52])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 497362540103;
- Tue, 18 Mar 2025 13:05:26 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-12.internal (MEProxy); Tue, 18 Mar 2025 13:05:26 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Mar 2025 13:05:23 -0400 (EDT)
+ <SRS0=mYbn=WF=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1tuarO-00060R-LD
+ for xen-devel@lists.xenproject.org; Tue, 18 Mar 2025 17:36:14 +0000
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [2607:f8b0:4864:20::634])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7c5a6872-041f-11f0-9abb-95dc52dad729;
+ Tue, 18 Mar 2025 18:36:13 +0100 (CET)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2241053582dso17555595ad.1
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Mar 2025 10:36:13 -0700 (PDT)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ d2e1a72fcca58-73711559fbdsm10188371b3a.59.2025.03.18.10.36.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Mar 2025 10:36:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,102 +46,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30309306-041b-11f0-9899-31a8f345e629
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm1; t=1742317526; x=1742403926; bh=K/vRlO1enD
-	NjEvveV4JCXN7QZlebJcyisGWMcWmbG/Y=; b=s7pK/1mttGJfTpJupFga8zJAoi
-	hf4PWUR1m4k2o+473Xi20GHQJ69ww7G88Jf+w+FNS1UZ6kHYSBBZlvFrbMdL9u1E
-	fxG7Bj94xfJ2niL01FHGPAGZzM8842LvlDbSFWCf81uLwtGFRoZhHK7E95RQC9h5
-	jBywye4JEtePzNumtBy1/PrMxEhhosgkR0eoYz9AJQCSS8FSm4L5erDhNodB3R/d
-	SoLDQ2P6yhGr3iwHzH7DDe6z7eYtRm+ETiYrfAn6yB4bNRnDeA5GL7+gs5nhI9Lz
-	HHJzKk7GY5+F3jkg8U4dbgjzbySQEial0Sbn2lcOX1oHznEUDa1MgaMNPw1g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1742317526; x=
-	1742403926; bh=K/vRlO1enDNjEvveV4JCXN7QZlebJcyisGWMcWmbG/Y=; b=U
-	+2HQgUkkDFtZHyQm7EkCuudx+U5wq76Av9DywBrmkKv/WiwRNe76dL6r6YDgb6MW
-	rOlKkkas1J3xreZ15orDcxb1ZvukJW4hvD26NZLtRVN7mj3D0O5o6AgvAVf+1/vI
-	wN+CWNxp7qYhxl/AVRUkoEHNnDBgGjPT1d8CM8JZhUX7VZFgORv/zJg3GkmTgfnP
-	Du66hW5BXLOsvUyWVpff+QLjcVnXGPbyU0vcacbcezm8BgD5WBMsyGZBG5sAhSwE
-	XSwsG+xhVvlX9eJu9aY4yh+/gyZUb7Z90FqaUQnmh61HVP6APHThr199ksb/ZJNe
-	ErW+okHbySd3h16S+BcLw==
-X-ME-Sender: <xms:1afZZwUnWIy0PdBSdpfL5yKZ_fBYhbBwiK7VxiNtAmuHeQkeA35I3Q>
-    <xme:1afZZ0k3KYs0rGQZ1NOMaxjGz-X2_Qc5AkYrKdNc6IHBSWOA54y4S0Om7oxMwXEZI
-    A7--ii7GbAg4g>
-X-ME-Received: <xmr:1afZZ0Z45IQEmoAzLJkyS0wZNiOuuHumisNiOxhskwxAjmQl_ofPyPhkgTDEdCJq5jF0OHoRoyB4mmDY8PxIOcrUbPbUbDuLXcFpAzGOM-4l3Xg_j3Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddugedvleelucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
-    tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
-    cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
-    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
-    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopedutddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohep
-    gigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpth
-    htohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdp
-    rhgtphhtthhopehfrhgvuggvrhhitgdrphhivghrrhgvthesqhhusggvshdqohhsrdhorh
-    hgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdp
-    rhgtphhtthhopegrnhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtg
-    hpthhtohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhgs
-    vghulhhitghhsehsuhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigvnhdroh
-    hrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-X-ME-Proxy: <xmx:1afZZ_WFwbKkgHJPQFRc5qkl4M945Gopu5LB9CouIoU1bZIT7D7-LA>
-    <xmx:1afZZ6nr3ypztMIC429DuNVcp4fqISxRpE2l5n7YAfqnY7Yug_WCUA>
-    <xmx:1afZZ0fJw73SeMSp8xFVCq4xH_BkLuRGtPc7otaFn97t7jqt6-8pNg>
-    <xmx:1afZZ8EOREXq6poBRgPQWpIhRQW1ODkHNb5fOTKyegYPwudiG9M-ig>
-    <xmx:1qfZZze6rFtviWd4r3EiA4PnhJ6FpuNBjRwx-rzW55NXg_9P57Hh7kLY>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+X-Inumbo-ID: 7c5a6872-041f-11f0-9abb-95dc52dad729
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1742319371; x=1742924171; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uUEaJN3qk40R1uwMWELSbGR36i1jo84C4OMy7cnNyV8=;
+        b=hG1fMqZze26zORus0LgCQMTROFWgcJROkpR3hPnC92xyeCsCYPu6b9R8aKnkDIoh0B
+         nX0sjqwEC7BvwMy7qCrA7F40gwXfVUbAqodfbMwsIDEEzZ9wsvheVzq7Ex9mu2t7g0uf
+         vaE+7Esk3aKyA1i4l7sU/VmjAxpvKd2dXOEBE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742319371; x=1742924171;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uUEaJN3qk40R1uwMWELSbGR36i1jo84C4OMy7cnNyV8=;
+        b=A4scnvx3G8qsAd7bikcK667hCPCV4EQzkaSl4oer/v2gCO9g3GMXWK6qprjmFl7Rql
+         zUG0CSUgN0cnBVausNAD4FXGSVCYPlt0OxoybN26dKHMzYiXY+X2Od8swCLT65Ho/2b/
+         DfQbs01RWsI/G9dkFpdAixHOzaNYnIYEdBZGMyjkjKFlKayk5GqUS91tbYoyqkeG0zM6
+         RNt8SNPbNQf44PNhr2EDMgVP1p0HWUy0sbRUDDqTqlW4ZUMpAuQ+iN2wNy6mDgtK25si
+         rsKgCOoo9cLQYYp+SD+FpSRjE10b5fKyj4hX9N7B4vvvfU3PFHbdhifU3cstZ/4vxM3v
+         O2xw==
+X-Gm-Message-State: AOJu0Yx6NB5gSWCaj+KJFwihHnlZuUSvjaphh0+rjTwUsbb6R09VATCt
+	m9walrolgnfNZEVhvUTchPqEsKp/Us9E8dyc+b6zHYGGSMa7Ca0jdXrHekT2J55u7i5lqu7TCNx
+	X
+X-Gm-Gg: ASbGncvTCo+OTiuvSrMHIEkULD7jGKq0MSjTuWslX7kcSf6JZrdiuWDVnebgUZDm9XU
+	lzoFQLMpeI8wrL2D1YUlAP5QwqedmOWqnGfR11sd15H3h2/roiivrRnLwUtWUaX+17ECwVm2IA0
+	F/2NDNVMZfL42wFAAxgde3yIbft3x85MaD5Jz3LqL023tbA2bR+cvXytogIG9cMil+RNdptp+pB
+	ZzUsTHocD/OQaSaule/CG6s2+TN2OdKyTCpYQfHGLgFe6VRlecTd3fdWdabpDwOevG+Uy9pqLiU
+	s4QRLJWAYpWxP2+qEJTuInEVqjzqQSrfoY1QryGF8iPYCCNanqts36rHXFhk
+X-Google-Smtp-Source: AGHT+IH2R6siyXGAz8aZjbViKwajC/tho9oLL/4Wb2zYe1yWYtyAyqk9V90VPcsDu6vuIALGOLdFcw==
+X-Received: by 2002:a05:6a21:682:b0:1ee:ef0b:7bf7 with SMTP id adf61e73a8af0-1f5c118e79cmr23419070637.19.1742319371488;
+        Tue, 18 Mar 2025 10:36:11 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	=?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?= <frederic.pierret@qubes-os.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/2] docs/xen-headers: use alphabetical sorting for @incontents
-Date: Tue, 18 Mar 2025 18:01:56 +0100
-Message-ID: <09f34b27d576d1067cc38eaa202aebebb0478cff.1742317309.git-series.marmarek@invisiblethingslab.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 2/7] x86/mkelf32: account for offset when detecting note segment placement
+Date: Tue, 18 Mar 2025 18:35:42 +0100
+Message-ID: <20250318173547.59475-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.a5cb9c3a17249fc067ab501818c3a3e6c7c229cf.1742317309.git-series.marmarek@invisiblethingslab.com>
-References: <cover.a5cb9c3a17249fc067ab501818c3a3e6c7c229cf.1742317309.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <20250318173547.59475-1-roger.pau@citrix.com>
+References: <20250318173547.59475-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Frédéric Pierret (fepitre) <frederic.pierret@qubes-os.org>
+mkelf32 attempt to check that the program header defined NOTE segment falls
+inside of the LOAD segment, as the build-id should be loaded for Xen at
+runtime to check.
 
-It makes the build reproducible with fileordering flags
+However the current code doesn't take into account the LOAD program header
+segment offset when calculating overlap with the NOTE segment.  This
+results in incorrect detection, and the following build error:
 
-Signed-off-by: Frédéric Pierret (fepitre) <frederic.pierret@qubes-os.org>
+arch/x86/boot/mkelf32 --notes xen-syms ./.xen.elf32 0x200000 \
+               `nm xen-syms | sed -ne 's/^\([^ ]*\) . __2M_rwdata_end$/0x\1/p'`
+Expected .note section within .text section!
+Offset 4244776 not within 2910364!
+
+When xen-syms has the following program headers:
+
+Program Header:
+    LOAD off    0x0000000000200000 vaddr 0xffff82d040200000 paddr 0x0000000000200000 align 2**21
+         filesz 0x00000000002c689c memsz 0x00000000003f7e20 flags rwx
+    NOTE off    0x000000000040c528 vaddr 0xffff82d04040c528 paddr 0x000000000040c528 align 2**2
+         filesz 0x0000000000000024 memsz 0x0000000000000024 flags r--
+
+Account for the program header offset of the LOAD segment when checking
+whether the NOTE segments is contained within.
+
+Fixes: a353cab905af ('build_id: Provide ld-embedded build-ids')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- docs/xen-headers | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/x86/boot/mkelf32.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/docs/xen-headers b/docs/xen-headers
-index 8c434d77e20e..98ffe814500b 100755
---- a/docs/xen-headers
-+++ b/docs/xen-headers
-@@ -331,7 +331,7 @@ sub output_index () {
- <h2>Starting points</h2>
- <ul>
- END
--    foreach my $ic (sort { $a->{Seq} <=> $b->{Seq} or $a->{Title} cmp $b->{Title} } @incontents) {
-+    foreach my $ic (sort { $a->{Href} cmp $b->{Href} } @incontents) {
-         $o .= "<li><a href=\"$ic->{Href}\">$ic->{Title}</a></li>\n";
-     }
-     $o .= "</ul>\n";
+diff --git a/xen/arch/x86/boot/mkelf32.c b/xen/arch/x86/boot/mkelf32.c
+index 5f9e7e440e84..91742162bbb1 100644
+--- a/xen/arch/x86/boot/mkelf32.c
++++ b/xen/arch/x86/boot/mkelf32.c
+@@ -358,7 +358,8 @@ int main(int argc, char **argv)
+         note_sz = in64_phdr.p_memsz;
+         note_base = in64_phdr.p_vaddr - note_base;
+ 
+-        if ( in64_phdr.p_offset > dat_siz || offset > in64_phdr.p_offset )
++        if ( in64_phdr.p_offset > (offset + dat_siz) ||
++             offset > in64_phdr.p_offset )
+         {
+             fprintf(stderr, "Expected .note section within .text section!\n" \
+                     "Offset %"PRId64" not within %d!\n",
 -- 
-git-series 0.9.1
+2.48.1
+
 
