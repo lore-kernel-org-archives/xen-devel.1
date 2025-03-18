@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C9FC282EC
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Mar 2025 17:05:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.919551.1323966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E616CC28B2F
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Mar 2025 17:05:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.919553.1323975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuaNc-0006RH-48; Tue, 18 Mar 2025 17:05:28 +0000
+	id 1tuaNg-0006ge-Ao; Tue, 18 Mar 2025 17:05:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 919551.1323966; Tue, 18 Mar 2025 17:05:28 +0000
+Received: by outflank-mailman (output) from mailman id 919553.1323975; Tue, 18 Mar 2025 17:05:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tuaNc-0006RA-1P; Tue, 18 Mar 2025 17:05:28 +0000
-Received: by outflank-mailman (input) for mailman id 919551;
- Tue, 18 Mar 2025 17:05:26 +0000
+	id 1tuaNg-0006gV-7m; Tue, 18 Mar 2025 17:05:32 +0000
+Received: by outflank-mailman (input) for mailman id 919553;
+ Tue, 18 Mar 2025 17:05:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wPrW=WF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1tuaNa-0006Qw-JD
- for xen-devel@lists.xenproject.org; Tue, 18 Mar 2025 17:05:26 +0000
-Received: from fout-b4-smtp.messagingengine.com
- (fout-b4-smtp.messagingengine.com [202.12.124.147])
+ id 1tuaNf-0006Qw-0C
+ for xen-devel@lists.xenproject.org; Tue, 18 Mar 2025 17:05:31 +0000
+Received: from fhigh-b4-smtp.messagingengine.com
+ (fhigh-b4-smtp.messagingengine.com [202.12.124.155])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e6ee38f-041b-11f0-9abb-95dc52dad729;
- Tue, 18 Mar 2025 18:05:24 +0100 (CET)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 623CA114015D;
- Tue, 18 Mar 2025 13:05:23 -0400 (EDT)
+ id 31b5fe93-041b-11f0-9abb-95dc52dad729;
+ Tue, 18 Mar 2025 18:05:30 +0100 (CET)
+Received: from phl-compute-08.internal (phl-compute-08.phl.internal
+ [10.202.2.48])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id D876A25401B1;
+ Tue, 18 Mar 2025 13:05:28 -0400 (EDT)
 Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Tue, 18 Mar 2025 13:05:23 -0400
+ by phl-compute-08.internal (MEProxy); Tue, 18 Mar 2025 13:05:29 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Mar 2025 13:05:22 -0400 (EDT)
+ 18 Mar 2025 13:05:26 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,76 +47,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e6ee38f-041b-11f0-9abb-95dc52dad729
+X-Inumbo-ID: 31b5fe93-041b-11f0-9abb-95dc52dad729
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
-	 t=1742317523; x=1742403923; bh=CzLALV+Svxnq3j5ei54OhOCfOqGIDwd6
-	+fde85qlpdI=; b=Bctijby77xifVqnZBq+a+E6ppC84OlE4mQ+xMfvxeTk+RUCX
-	ugI9c+/Iv9oqR3Wju+pIASPoEp6FqXQdIRD+vxp3DAWnqhoLkHoUzagGGMv5k5oU
-	8WtBq+cUoop1Fv417me6hFhX6nd68De4M1z+T6++Si4Fi2v2Qz4goQ+YzDyCcQ6Y
-	Hnr5Qf333p0pKA1pkcs8bKpSwR3M5Bcxfk/qqwWJ44bl6i8nb3oY/D69rMuefNvT
-	LGATKBKBQB2dLgbsXGDdY8S1nNLGrEZmK9RnwmxNTlWURNre3swD4H+64b2ZpXgB
-	HW7zX+DHxfhiNa+UzXZcDydy3IAWqIOx7kfEvw==
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm1; t=1742317528; x=1742403928; bh=2RHWRfuiJA
+	Z+lCbEby7WMUQD0Se/UCEJJv5nwKDm3aU=; b=JlqMQKNrDdqCdAvV0YJPLcAIYg
+	RANOsKmRJTtvhr0MaKzDJOpIupOTr8DioVF6pclVqkrxCUxSyYXhqnOn5b9AzfqL
+	41o4s9EkgHKrI9gm0nbIByQkWYQws0a0FrJVFkSi4vPnkBXb8y7D+Rvu1mik5kIJ
+	/se7rgHKYz8dOEgaYFltzdT4inK4MnFdRThcjRodSBa5W5cMsaUyJnOxx7RetDfU
+	lb1+k9lgoGOt9L0vyfeH6eMyvScOrXDt1qql5F3JRSuRmFhnbBbzFexGQ4xl/yJL
+	U5rCTvXF/68cU3r5JdeQ3gyTvJY+S2c3kzOZr6hOizUoZqovSlg9+iy6keig==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1742317523; x=1742403923; bh=CzLALV+Svxnq3j5ei54OhOCfOqGI
-	Dwd6+fde85qlpdI=; b=cJmynHo9YUtiiptfCKjbQYMpHBw+dSxGL7DA5kRh+oKV
-	GfeTXemzBHfBqJUjNFQwkH3NCzwxSTDiBmnkRvSL3M87xXoa3XT/944kn5kFpIb5
-	YO+uSA3/iXFV+hu/vdCYyoEBt/47Hq3g1jR+lQMT9PqC4G8znjL9t4wqAWXHAuFC
-	rx8l7XFtTk1OkO0YoDKCqmpCWLDMqGiiu8cfN6IezT64QZ2XI9PqUmjqxAelC9N9
-	Vu3DflTbZ10mPdOTOLlDV9gbRGwETNbNT210t2xO/qBMFkdbnFOStP6vzB8IQrZf
-	QXU6EUS+gvX6hzzo1/+RyuhG1o6GJX5NyFY56gTKgg==
-X-ME-Sender: <xms:0qfZZ5CzcYq8SY6kjlJrSTagkb0I_SLubXiB82I2kYWCnTDcEKSCqg>
-    <xme:0qfZZ3jwcspsJ3T2PgKfuGEzSIYI7VCQh5YImanyJVtViI-eg9QMGV6Tnsuf-zvnG
-    X1pn2XgAljrnA>
-X-ME-Received: <xmr:0qfZZ0mL_CwBhQtRe6l1HE24-ikPPVYOCNQ6-IiSMiD-y3xte3rfXMTNx-a54q6glsw54SD43Al4PKztSJ8vGcjZ_OuECtXhJLV-Thomz1KHGiBRdkA>
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1742317528; x=
+	1742403928; bh=2RHWRfuiJAZ+lCbEby7WMUQD0Se/UCEJJv5nwKDm3aU=; b=b
+	x1fz+dahNmiVkmLgDPMk4ZGZ3rtM4nbLO+x2hXwdaeWTrI4+ANdS96tM+898nOzq
+	KCQUjBs/XR2RN5TUNPTt6mCF1yu037rqRn+hT2i0yCGyERC+sMRaWhtgtb4HIbVv
+	abl7N4SVw7s4YL2SCiGIOnJXomkI4oobtA+p/pUiWgm5mbq0SRasf8LAHefvSMRA
+	0gYwFKqSMWp0VXqtF9/W/KXJGMUstDPD8aVjMViN2mezGaGJ1ix/BEVhOycZzKhF
+	dSPiOHXqKEOFg4pJ5p4cEZcyJ5v8q0ZwfAGZbbYBYDREcqUhDeEPnDy4VpgjZbJA
+	i1tUNyBF+0ltsydLJEMsw==
+X-ME-Sender: <xms:2KfZZ-RuTDd5-bmY7Z8Jh_1Z-zyqS0k2L02W3mEg4rE6kkt_PBPTRw>
+    <xme:2KfZZzwrUnG8uhcioJHIJz2ocit7HHIt9hS1nmMnzZGXMUhS-qQl67ryTSSbVtVfc
+    -Mt_mRE7eDXgA>
+X-ME-Received: <xmr:2KfZZ72ohO0unVv6Diw5SHvX2HeT5er1oKgPsA2FiRvpuWZZqHb60LOez4Yn0AUAZA5U0dCH-Bz0JdZ-e9gNUSoyNQNhHZiVlbpC03TTecrdKjPAEr0>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddugedvleelucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucenucfjughrpefhvf
-    evufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiih
-    khhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsihgslhgvth
-    hhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepleekhfduleetleelleet
-    teevfeefteffkeetteejheelgfegkeelgeehhfdthedvnecuvehluhhsthgvrhfuihiivg
-    eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgs
-    lhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepvddpmhhouggvpehsmh
-    htphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhho
-    jhgvtghtrdhorhhgpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvth
-    hhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:06fZZzxQ2gbNZL7lcvN3hqbwnggg--qQHiS_bHy-lI0FCSI69A2VIw>
-    <xmx:06fZZ-TVnUq7l4a_d7enQD8FdT825IXprzaP3hNsDOg4YE4WxVIO0A>
-    <xmx:06fZZ2aGdfowJiMWCm5eV-aJwKE0dfUQBLYk62M9X5q81obqDzUMGA>
-    <xmx:06fZZ_RubwdpRXj2abkZOrPrKC9Sm3cGlBOToJYaNkdRh7eTbyeEeA>
-    <xmx:06fZZ5c78Og4EVqG17BkofntKxK6hbAsmqWMeyuSsQPiuax0R7y1BUJ_>
+    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
+    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
+    tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
+    cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
+    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
+    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
+    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
+    hmpdhnsggprhgtphhtthhopedutddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohep
+    gigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpth
+    htohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdp
+    rhgtphhtthhopehfrhgvuggvrhhitgdrphhivghrrhgvthesqhhusggvshdqohhsrdhorh
+    hgpdhrtghpthhtoheprghnthhhohhnhidrphgvrhgrrhgusehvrghtvghsrdhtvggthhdp
+    rhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtg
+    hpthhtohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhgs
+    vghulhhitghhsehsuhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigvnhdroh
+    hrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
+X-ME-Proxy: <xmx:2KfZZ6ASNQq2lfRMHM7pAYhxY6zlbi7DmG5gr8Axp3YS6Gxhf5cp5g>
+    <xmx:2KfZZ3hyGC_Wg0wWCkF3tDfXnmkkWNQevefvneM4Rh7xFANKzyELeA>
+    <xmx:2KfZZ2opxxuu3ITiziDK-paoo2m2WOH2Y6VdGxF48flFP5mCEnYj3w>
+    <xmx:2KfZZ6hvV0_jOh7-eVTf4B49csziGn2AIsQL6PdAow4G_ORhpvmbsw>
+    <xmx:2KfZZ8aS4JS5iPbh8vsTCex2w88jnaaTilAlV4KWJfHp7MfIpz5QnUEV>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v1 0/2] Improve reproducibility of build artifacts
-Date: Tue, 18 Mar 2025 18:01:55 +0100
-Message-ID: <cover.a5cb9c3a17249fc067ab501818c3a3e6c7c229cf.1742317309.git-series.marmarek@invisiblethingslab.com>
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	=?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?= <frederic.pierret@qubes-os.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 2/2] Strip build path directories in tools, xen and xen/arch/x86
+Date: Tue, 18 Mar 2025 18:01:57 +0100
+Message-ID: <0370c0eb1fd9ac00acab016792132fa0b943d384.1742317309.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.a5cb9c3a17249fc067ab501818c3a3e6c7c229cf.1742317309.git-series.marmarek@invisiblethingslab.com>
+References: <cover.a5cb9c3a17249fc067ab501818c3a3e6c7c229cf.1742317309.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Few patches from qubes patch queue that improve reproducible builds.
+From: Frédéric Pierret (fepitre) <frederic.pierret@qubes-os.org>
 
-Frédéric Pierret (fepitre) (2):
-  docs/xen-headers: use alphabetical sorting for @incontents
-  Strip build path directories in tools, xen and xen/arch/x86
+Ensure to have a realpath for XEN_ROOT else it fails to substitute
+properly pathes in strings sections
 
- docs/xen-headers      | 2 +-
+Signed-off-by: Frédéric Pierret (fepitre) <frederic.pierret@qubes-os.org>
+[use cc-option-add]
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
  tools/Rules.mk        | 2 ++
  xen/Makefile          | 2 ++
  xen/arch/x86/Makefile | 1 +
- 4 files changed, 6 insertions(+), 1 deletion(-)
+ 3 files changed, 5 insertions(+)
 
-base-commit: 77be740e8182fa6b31291a8ae983d253187e9b50
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 6bd636709ff7..9ed0336c07d5 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -169,6 +169,8 @@ endif
+ CFLAGS-$(CONFIG_X86_32) += $(call cc-option,$(CC),-mno-tls-direct-seg-refs)
+ CFLAGS += $(CFLAGS-y)
+ 
++$(call cc-option-add CFLAGS,CC,-ffile-prefix-map=$(XEN_ROOT)=.)
++
+ CFLAGS += $(EXTRA_CFLAGS_XEN_TOOLS)
+ 
+ INSTALL_PYTHON_PROG = \
+diff --git a/xen/Makefile b/xen/Makefile
+index 58fafab33d6f..0d79e259a33e 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -411,6 +411,8 @@ ifneq ($(CONFIG_CC_IS_CLANG),y)
+ CFLAGS += -Wa,--strip-local-absolute
+ endif
+ 
++$(call cc-option-add CFLAGS,CC,-ffile-prefix-map=$(XEN_ROOT)=.)
++
+ AFLAGS += -D__ASSEMBLY__
+ 
+ $(call cc-option-add,AFLAGS,CC,-Wa$$(comma)--noexecstack)
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index f59c9665fdd0..70d0653257d7 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -137,6 +137,7 @@ $(TARGET): $(TARGET)-syms $(efi-y) $(obj)/boot/mkelf32
+ 	mv $(TMP) $(TARGET)
+ 
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
++$(call cc-option-add CFLAGS-$(XEN_BUILD_EFI),CC,-ffile-prefix-map=$(XEN_ROOT)=.)
+ 
+ $(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
 -- 
 git-series 0.9.1
 
