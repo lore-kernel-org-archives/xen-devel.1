@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EBD1C36001
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Mar 2025 15:59:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.922809.1326627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBBD2C35FFF
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Mar 2025 15:59:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.922812.1326648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvIIh-0004Yv-2k; Thu, 20 Mar 2025 15:59:19 +0000
+	id 1tvIIj-00054B-O0; Thu, 20 Mar 2025 15:59:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 922809.1326627; Thu, 20 Mar 2025 15:59:19 +0000
+Received: by outflank-mailman (output) from mailman id 922812.1326648; Thu, 20 Mar 2025 15:59:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvIIg-0004Yl-VJ; Thu, 20 Mar 2025 15:59:18 +0000
-Received: by outflank-mailman (input) for mailman id 922809;
- Thu, 20 Mar 2025 15:59:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1tvIIj-00053N-Hs; Thu, 20 Mar 2025 15:59:21 +0000
+Received: by outflank-mailman (input) for mailman id 922812;
+ Thu, 20 Mar 2025 15:59:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vaXX=WH=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tvIIe-0004Bj-PX
- for xen-devel@lists.xenproject.org; Thu, 20 Mar 2025 15:59:16 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4639a056-05a4-11f0-9ea0-5ba50f476ded;
- Thu, 20 Mar 2025 16:59:16 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cf628cb14so14414285e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 20 Mar 2025 08:59:16 -0700 (PDT)
+ id 1tvIIi-0004A4-Ov
+ for xen-devel@lists.xenproject.org; Thu, 20 Mar 2025 15:59:20 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 47d9f98a-05a4-11f0-9ffa-bf95429c2676;
+ Thu, 20 Mar 2025 16:59:18 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43ce70f9afbso10025615e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Mar 2025 08:59:18 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d4fceafacsm1851225e9.6.2025.03.20.08.59.14
+ 5b1f17b1804b1-43d4fceafacsm1851225e9.6.2025.03.20.08.59.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 08:59:14 -0700 (PDT)
+ Thu, 20 Mar 2025 08:59:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,39 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4639a056-05a4-11f0-9ea0-5ba50f476ded
+X-Inumbo-ID: 47d9f98a-05a4-11f0-9ffa-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1742486355; x=1743091155; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=L/8OKxq5tdUvL+relQi7wdXNnmHOUxgp/8lJVL44Vxo=;
-        b=T1H6exlkhnFbiyyvi0+rwBhszk3FOodw1074+EwmRbnvN+XVuFNmPu2zuTZ8/PzxZd
-         N16a/Uk/4yUGLnl6LHKGqnXd0HkO8AtH7Ps+lpFXvv3hHtKy66IHVN4j5PNXuB9s0U6Z
-         ZlpYeP5MolwnQcLfQz/8EODxTFapbYXWOfLFI=
+        d=citrix.com; s=google; t=1742486358; x=1743091158; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CqKr1+6WMiT6VQWQ8sqIJpeUTlqKAraO1MHdveiEfFc=;
+        b=srA3nCfaTz+icGths8Bh6BMN1CngKEtQpdnCebnRbdW/VPUvzkgbL7KoffEfzi+l8f
+         z+PkSWGDypRNnazg9gpUkkqLk/ejTn6ddjWPh9OHm8iEjxOd7wweNtvNRvQIs/POjprA
+         pgqjvx2eChHDwVSp/34GyKxnhm2F1/rteaFPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742486355; x=1743091155;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=L/8OKxq5tdUvL+relQi7wdXNnmHOUxgp/8lJVL44Vxo=;
-        b=ecJWNVn3x58530loxz0mQ8a1AweWsAY3nWh8Va1lfc7f8Av2hI1exmEOprbx/cjdR+
-         g9IJv+l7U7d4Beqpp/Nvckh8nehBrdQ0qLm03vS2CwjKTftgnWpH0o2n42UkNPtGrf8Z
-         3ZARcHUTK/OjqfbdQIvnL8ekhV3PSkRnihK7w2EF8FKQuOLG5qn2Dau5A56j03S68O9/
-         BpFoQpKGJ9eqdsfH2jrm+uQ6Nn69aBUAwi5JrNkFkwNFZ41sBghn9mzZheSBe1TeITEt
-         5r1rA14BTSY+Ohl5mziJ/u3+9u1VcLn/yc0JmwSy7SRdUwntKQ0rkQWlBzLBmB/3m85j
-         Kwbw==
-X-Gm-Message-State: AOJu0YwzY+DKhNzqJhP6mMapCfPMdv0mlgtKp7oycvMJ7i1EYjKSj2Uq
-	UUcmFpfvspBlLrYpBjun2z0TcbAOB7VvsHjP2ZQ1oWCB8XL6KeTIhHmn22OCGrKyBXuS4vJPkDH
-	a
-X-Gm-Gg: ASbGncssvtg8dylzAhhILYSm35W5p+D+VmDXQVJVbjUe/AesTegkM2xiJRSl2AfVmXS
-	nqG5yYMzYigIOpM6neAfNiD0yQknhAbIhB0H/FUPYIHgAQttzZchHQGL9opihBrACiPYPZBeTqe
-	ox4iqueJ+NgA1PTCic233H/C5IAEMaDe8n52OVIEISU0QGZ+ycPfD4xfFKE6heROU1aa2DmpQBb
-	MjWWi06mqMZ0COBPLo9nnpnVPD/y73CTN3Lf+priY/+d4ISGe7OfqP77Upv4X68bi/NmJSScus1
-	LWScpjhx0rv6G2RxDxsWFsyQpCQl7iVwllluMlhjMV3Uu4FAO/kF3BGKvsO8PfRDLKi/64pGZ7Y
-	lwS+Aqxknx+9scwT0Cg==
-X-Google-Smtp-Source: AGHT+IE0OO4lw9CtCSW5Bt/ILRqTBLYjpT8yYEqT37jaA57URTYo6Twixus+lsjEx0/QoleZVGNTGQ==
-X-Received: by 2002:a05:600c:1e8f:b0:43b:c7f0:6173 with SMTP id 5b1f17b1804b1-43d502e4332mr627565e9.4.1742486355196;
-        Thu, 20 Mar 2025 08:59:15 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1742486358; x=1743091158;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CqKr1+6WMiT6VQWQ8sqIJpeUTlqKAraO1MHdveiEfFc=;
+        b=wcz9kc06sWmpVMoVNxUaIhR0Fdonar6J1+pprQkR7H1nuydCUAu9B+pAivGLCDtZHJ
+         SF8YCNve9t6qSoKtO6TM1W1adyh+FhfScEOXEBb6/8cVdaNC7meFwYJMwNuCwNEDlsnK
+         qVsnLcqhbeN3vM8jfkP0PsiqVAt83gjggjljCESZ+6Uh7mKLK7R50JaAhEStL27jHW+O
+         P25AAhIZ+iJj375SsppeYIF3YFAFamjOGbc/b/3yQTggK/9cgnXAqtw1lmFbG+MDzFTv
+         UmqojOUBG+b+jyWzvKgbo+fTfipSkID2iNbw2fD5qgDeTdhdz3TwQh2uL7eeQkSiB34w
+         XCDw==
+X-Gm-Message-State: AOJu0YxqWUTs6d+zqt15OjrwnT3s+Acf7efLrC1SvR8bQsAhdcwRgB+1
+	OoNi1U0aHyLFWf1Htn8jKHEs4mqYjN5+FwF58ZQtnVLFzEXxCLxGzCF7aHfG1MB13qTCWqE4eYb
+	W
+X-Gm-Gg: ASbGncvfsG/UbIOO3KkuAC3tKG/JF1IxbNPDNYKtsTlBzAuIwsfCl37T8kVJzgxA9k7
+	ZsOVKtlLCZpPqOv+HPbJCkVDp2MSm7Tb7isyYV6im6CD/RAWKR/2egFuvz4sKw+K7boqjiQ9CTn
+	IZlW5dSQvilGnXDmqFqvWYVqZ+B281TmyBA9Mfu5YkiawYWMiQId91WHM1RQAsONJW48sUOY6Tr
+	EuTefYM9ExiIs/swWX6ASZG6C6yReG1bKiTP3RhRxCJxSei99PJayEtoVBaZEY+CzRuexlnSWKC
+	KmfdkUe21hqNvAf5ToiPkTxMLIpoCUd50kd5EQdP3msrbTt3lz0TXKAe9pnf3Ocgble0lDmjb3J
+	tYPL9tnBxdD6dTZ4qaA==
+X-Google-Smtp-Source: AGHT+IGl7hl1J9Z6W4cQgz9a5i+9874CFR/qeNiO5UNvyybeqNmui/7cxUExbIfbQXPYDDmtCTT5Pw==
+X-Received: by 2002:a05:600c:46ca:b0:43c:fee3:2bce with SMTP id 5b1f17b1804b1-43d495ab6c7mr35669675e9.26.1742486357922;
+        Thu, 20 Mar 2025 08:59:17 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,34 +91,43 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH RESEND 0/3] Xen: CI changes for new toolchain baseline
-Date: Thu, 20 Mar 2025 15:59:05 +0000
-Message-Id: <20250320155908.43885-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/3] CHANGELOG: Minimum toolchain requirements
+Date: Thu, 20 Mar 2025 15:59:08 +0000
+Message-Id: <20250320155908.43885-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250320155908.43885-1-andrew.cooper3@citrix.com>
+References: <20250320155908.43885-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Prep work to allow us to start making changes based on the toolchain
-requirements.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ CHANGELOG.md | 3 +++
+ 1 file changed, 3 insertions(+)
 
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1726628670
-https://cirrus-ci.com/build/5232741505040384
-
-Andrew Cooper (3):
-  CI: Update build tests based on new minimum toolchain requirements
-  Xen: Update compiler checks
-  CHANGELOG: Minimum toolchain requirements
-
- CHANGELOG.md                         |  3 ++
- automation/build/centos/7.dockerfile | 72 ----------------------------
- automation/gitlab-ci/build.yaml      | 30 ++++--------
- xen/include/xen/compiler.h           | 16 ++-----
- 4 files changed, 17 insertions(+), 104 deletions(-)
- delete mode 100644 automation/build/centos/7.dockerfile
-
-
-base-commit: 6e5fed7cb67c9f84653cdbd3924b8a119ef653be
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 9a5919585d43..4e333e608a96 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ ## [4.21.0 UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
+ 
+ ### Changed
++ - The minimum toolchain requirements have been increased to either:
++   - GCC 5.1 and Binutils 2.25, or
++   - Clang/LLVM 11
+ 
+ ### Added
+  - On x86:
 -- 
 2.39.5
 
