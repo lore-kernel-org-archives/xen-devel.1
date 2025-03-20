@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50A0C35FFF
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Mar 2025 15:32:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.922631.1326517 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E0CC28B30
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Mar 2025 15:38:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.922682.1326547 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvHt1-0000O0-Gt; Thu, 20 Mar 2025 15:32:47 +0000
+	id 1tvHyj-00034Y-NI; Thu, 20 Mar 2025 15:38:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 922631.1326517; Thu, 20 Mar 2025 15:32:47 +0000
+Received: by outflank-mailman (output) from mailman id 922682.1326547; Thu, 20 Mar 2025 15:38:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvHt1-0000Np-EA; Thu, 20 Mar 2025 15:32:47 +0000
-Received: by outflank-mailman (input) for mailman id 922631;
- Thu, 20 Mar 2025 15:32:46 +0000
+	id 1tvHyj-00034R-KK; Thu, 20 Mar 2025 15:38:41 +0000
+Received: by outflank-mailman (input) for mailman id 922682;
+ Thu, 20 Mar 2025 15:38:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vaXX=WH=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1tvHt0-0007l8-5Y
- for xen-devel@lists.xenproject.org; Thu, 20 Mar 2025 15:32:46 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=B8C5=WH=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1tvHyi-00033h-Hn
+ for xen-devel@lists.xenproject.org; Thu, 20 Mar 2025 15:38:40 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 91862c8d-05a0-11f0-9ffa-bf95429c2676;
- Thu, 20 Mar 2025 16:32:44 +0100 (CET)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3913cf69784so785764f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 20 Mar 2025 08:32:44 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d43f556afsm51545035e9.19.2025.03.20.08.32.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 08:32:43 -0700 (PDT)
+ id 64a44a44-05a1-11f0-9ffa-bf95429c2676;
+ Thu, 20 Mar 2025 16:38:38 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cfecdd8b2so8125385e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Mar 2025 08:38:38 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d43f55750sm53304375e9.21.2025.03.20.08.38.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Mar 2025 08:38:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,78 +47,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91862c8d-05a0-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: 64a44a44-05a1-11f0-9ffa-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1742484763; x=1743089563; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=L/8OKxq5tdUvL+relQi7wdXNnmHOUxgp/8lJVL44Vxo=;
-        b=FVvMZ/zc+40vav7yn4lT7d8+V4n592o55XBp4lkQGbLBSBjwzTYZbyDWbx0hQ4IT6k
-         i0a1LPutuuHrEbpcflc5lMcvTqEd0z78e9DBxho95rIuBk2/jW1/VQgZeslf3tGx5lPT
-         DEyemr+zzVgLg24tyADwUw/RzCVLcUEUor5Oo=
+        d=suse.com; s=google; t=1742485118; x=1743089918; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=E0Lci+ECUilnN130JGQy/jV/GSrjNp8lwsMlq7ZZ150=;
+        b=JJ7C7om9gws0GAXh5VYsVIliTB9vRF/l18ky3m7Lyz5dSBTIC9umn49Rqrn7cYEYN7
+         W1eilZv4FmMxzFePSL8/L73eF0gc8J8CWLW8wYExkYjhR1drr7xlxufkk536O8c1yqGl
+         kr1oD9R802F5pJCWPunozWo1+si+tmgxwptNsXMlFSTOOcI5FyTkhHbEnkj1CygjE5Eg
+         JLkQZWZ0fMuG+cOWyEgcqKdy7PxtOOBKoYgH2y2jwsKOV4XN+VJ5HfmZxO/SQvuVqk1Z
+         0PdRCBnJLUz+RD4OqzQVTsMzLrt2UvloYH6qDy47jvrP6ovUFBTkENDotn8dJWkUiiAZ
+         Ovuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742484763; x=1743089563;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=L/8OKxq5tdUvL+relQi7wdXNnmHOUxgp/8lJVL44Vxo=;
-        b=J8sPxq01iduVDWkniwWGPWe/Md6dq/bmbZ4yNanFKS56KEaoNqYeRcdRCjVIwthP3n
-         OYc4nPdHdTu0UbqlYMvGPF2D2l6GMjva9ZZKY0H+RdYO8P9ssA+uJ3CaquTkIlqQVQ+C
-         NgIOY+UjeWq8iOSP5phVdtW8hCEjijmBIjitNVq+lK5WP5D+ra61Z3g47DN8cd1P+F0J
-         6dIkDxagAToS1n50u2LrEfwUkZlalBaKlyoobQFiD0tOiVgosd3aAMDTwbwBCVHduYm6
-         XWBB9ICMY4vXaxFbPIguqH5OaadblvtkSGuDcPD4dBOEwbWKwHqEpvNtM2D1w55Tz/pf
-         3WKw==
-X-Gm-Message-State: AOJu0YyWx2P04ry2iVpV0CLq4HEe7+uUHaUZ4p0hP0M8Pn8MRpxsSXhN
-	pbeki44s7Wg958vQQnyskcG0uMobf0RXPKDAxozoqT9G4T+sWlQB62wFmci+Ni90ecgZsPaDmKw
-	c
-X-Gm-Gg: ASbGncubyZViU0Z3ySU4Fssw8vcfg3p6ZHzwQaMT0RQn2MSQ8PuS90KLps6DXXy2Kwr
-	pKFKGUwgz9A6ow7IO9SoVX2IoUUDhfgGmZjuk1YuvKAQBc+Pq9b9wYx/7g11e1E9FtZDM4Scvu/
-	XNO1r/WZWhzm2k5gSq/K+fBMHUosPmW7ptkQKt4usgPhndlrjFmNbAkQSsJ2nLVkM/0RtJGcBoz
-	0/9+IYr1YLcifm6mFSPqaDN3X3XTalnjgYObFatViyS58sjMCDwN+or3SI4fm657ihXY1ZLXyxL
-	tDrtuIr1TvheSVXjFDjc0XscwSRNQwbLuqmhML4PmteJ+q7J5f0ONL9HtUYgozPtTdpLibpUByv
-	fyXolJ4Lvbx1fd//YfutN80tH90Qv
-X-Google-Smtp-Source: AGHT+IHMsztN2psHN4+fMHqrXpoGBIaJKeXm+cOLJf0uja+D+GkIFTwd7Y99M+rXWlWcEmQqKJseNQ==
-X-Received: by 2002:a5d:47aa:0:b0:391:158f:3d59 with SMTP id ffacd0b85a97d-399739c23afmr8225419f8f.15.1742484763546;
-        Thu, 20 Mar 2025 08:32:43 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 0/3] Xen: CI changes for new toolchain baseline
-Date: Thu, 20 Mar 2025 15:32:38 +0000
-Message-Id: <20250320153241.43809-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1742485118; x=1743089918;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=E0Lci+ECUilnN130JGQy/jV/GSrjNp8lwsMlq7ZZ150=;
+        b=Zi0BQnLGp6K/Sd0zDCN9I2GAI36pJBfrNixSta2xpZ6SRCZqp1nC1HMyKMQR7luU7n
+         vNrZwMV7krib6njJ02WRqnQkGQ9Jx9WitEjacxvG/IZiqVzTKrVv5zFZDPm9xHogGYKR
+         8k1eFfl5MmvKN7uj3dlcEkzz8vEzL7YSh3gDtPtX6KeW+AfbS5uSzeczIy8Tpp+1G6Sm
+         wngbi0YOHZB7aiPOlwVYpL6FCznqiLas6+Qu867xGnvOV5PEKfMPa3MSvsgV46aUGaNk
+         itbEasXmuam1Ah/DJhkHHtLaqjWPzKLxYgYe2rubetgySxir84lVDDbFYqGj1zNCk3nC
+         Gndw==
+X-Forwarded-Encrypted: i=1; AJvYcCXy72L4iQXOXlB2NfaED6h22G3GSKBVgMRyuQVBhIiye9MPlKtEYwml2bfcBYav/wsCjHttYNvlwLg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxxnJeSJyIKgm4X4REJ0vlFrFs/9Ak9ExjWkLthn155O2IRdH4q
+	5RbFX7u1mHDuBbuAR+/6o/0SJP7mGkhs30C/A5h0U+yEj8Wu+rkYUbUn8CbTUw==
+X-Gm-Gg: ASbGncsun+tT8NHr+gC3LwcGN87j+UHJGD2u3yqRjy7+0/hdKbhchpfT0+WFNNvYRyt
+	34J+l+M4A+7t1sG1YBCveZt7pOlwoHAJY3RDgtAISd3EARsRlzc0cG7ozXh5W7/d1dXo/6Z6Xm6
+	D8wyybXBX68hNzY1MpGAtLSjYSl7UBiGUpiAE/JCuC0wr65faZEc+IrE/hQ7KwoE5LjX4itRcZV
+	prmICjp+cLkgl9WvqPFYEi5JYiBtn74QRb9DEGmhkdWzcU2iEmHtTQzc0AGLP1NlCSfLCi4vVdw
+	w2NpTPdoqOGD6H0+U2FRF/0rpHTGO1hrVydjYctkd+E6rQQQdu9RbN1beQHPP5ogQVybkoit4aJ
+	z5WTv2gpTUFACGd0hKCFmQDfry9l04670ROsIhNTg
+X-Google-Smtp-Source: AGHT+IFsnJyVxtUWIf6hr4zEEimZ+UMjG5EBAW4/Jf4WNMg3qE2kK3IWR4ZtelwR6DYrxUuOnTuOvg==
+X-Received: by 2002:a05:600c:1f8b:b0:43c:fdbe:43be with SMTP id 5b1f17b1804b1-43d495abc53mr26314395e9.27.1742485117925;
+        Thu, 20 Mar 2025 08:38:37 -0700 (PDT)
+Message-ID: <4c3820ef-9d4b-4968-88c9-b6210de80b46@suse.com>
+Date: Thu, 20 Mar 2025 16:38:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH v1 3/4] x86:hvm: guard calls to nestedhvm routines
+To: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1742465624.git.Sergiy_Kibrik@epam.com>
+ <bd3edffaee9ecdccfbf35f70bf502a1fa00f36de.1742465624.git.Sergiy_Kibrik@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <bd3edffaee9ecdccfbf35f70bf502a1fa00f36de.1742465624.git.Sergiy_Kibrik@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Prep work to allow us to start making changes based on the toolchain
-requirements.
+On 20.03.2025 11:38, Sergiy Kibrik wrote:
+> Check whether nested HVM is enabled for domain before calling nestedhvm_vcpu_*()
+> and other not already guarded nestedhvm functions.
+> 
+> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+> ---
+>  xen/arch/x86/hvm/hvm.c      | 6 ++++--
+>  xen/arch/x86/hvm/svm/asid.c | 2 +-
+>  xen/arch/x86/hvm/svm/svm.c  | 6 +++---
+>  3 files changed, 8 insertions(+), 6 deletions(-)
 
-https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/1726628670
-https://cirrus-ci.com/build/5232741505040384
+Afaics common and VMX code have quite a few more references to
+nestedhvm_vcpu_in_guestmode(), without nestedhvm_enabled(). Are they all
+fine to keep as is, while the respective adjustments here are strictly
+necessary? In fact I wonder whether (a) nestedhvm_vcpu_in_guestmode()
+couldn't be made constant-false when nested is build-time disabled,
+which ought to eliminate the need for those changes below. Or whether
+(b) nestedhvm_vcpu_in_guestmode() wouldn't better include a
+nestedhvm_enabled() check.
 
-Andrew Cooper (3):
-  CI: Update build tests based on new minimum toolchain requirements
-  Xen: Update compiler checks
-  CHANGELOG: Minimum toolchain requirements
+> --- a/xen/arch/x86/hvm/svm/asid.c
+> +++ b/xen/arch/x86/hvm/svm/asid.c
+> @@ -30,7 +30,7 @@ void svm_asid_handle_vmrun(void)
+>      struct vcpu *curr = current;
+>      struct vmcb_struct *vmcb = curr->arch.hvm.svm.vmcb;
+>      struct hvm_vcpu_asid *p_asid =
+> -        nestedhvm_vcpu_in_guestmode(curr)
+> +        ( nestedhvm_enabled(curr->domain) && nestedhvm_vcpu_in_guestmode(curr) )
 
- CHANGELOG.md                         |  3 ++
- automation/build/centos/7.dockerfile | 72 ----------------------------
- automation/gitlab-ci/build.yaml      | 30 ++++--------
- xen/include/xen/compiler.h           | 16 ++-----
- 4 files changed, 17 insertions(+), 104 deletions(-)
- delete mode 100644 automation/build/centos/7.dockerfile
+Nit: No blanks inside parentheses like these. (There's no real need for
+parentheses here in the first place.)
 
-
-base-commit: 6e5fed7cb67c9f84653cdbd3924b8a119ef653be
--- 
-2.39.5
-
+Jan
 
