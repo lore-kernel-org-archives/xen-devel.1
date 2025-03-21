@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50591C35FFF
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Mar 2025 09:30:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.923516.1327055 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A0E6C36002
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Mar 2025 09:31:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.923589.1327084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvYi6-0002UQ-O1; Fri, 21 Mar 2025 09:30:38 +0000
+	id 1tvYin-00052o-6d; Fri, 21 Mar 2025 09:31:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 923516.1327055; Fri, 21 Mar 2025 09:30:38 +0000
+Received: by outflank-mailman (output) from mailman id 923589.1327084; Fri, 21 Mar 2025 09:31:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvYi6-0002SQ-II; Fri, 21 Mar 2025 09:30:38 +0000
-Received: by outflank-mailman (input) for mailman id 923516;
- Fri, 21 Mar 2025 09:30:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=T84i=WI=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
- id 1tvYeH-0005bg-N3
- for xen-devel@lists.xenproject.org; Fri, 21 Mar 2025 09:26:41 +0000
-Received: from fforwardh-a4-smtp.messagingengine.com
- (fforwardh-a4-smtp.messagingengine.com [103.168.172.199])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 978a9adb-0636-11f0-9ffa-bf95429c2676;
- Fri, 21 Mar 2025 10:26:39 +0100 (CET)
-Received: from phl-compute-12.internal (phl-compute-12.phl.internal
- [10.202.2.52])
- by mailfforwardh.phl.internal (Postfix) with ESMTP id 60CA92920461;
- Fri, 21 Mar 2025 05:26:38 -0400 (EDT)
-Received: from phl-frontend-02 ([10.202.2.161])
- by phl-compute-12.internal (MEProxy); Fri, 21 Mar 2025 05:26:38 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 21 Mar 2025 05:26:37 -0400 (EDT)
+	id 1tvYin-00052h-3X; Fri, 21 Mar 2025 09:31:21 +0000
+Received: by outflank-mailman (input) for mailman id 923589;
+ Fri, 21 Mar 2025 09:31:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1wue=WI=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1tvYdN-0005O8-AB
+ for xen-devel@lists.xenproject.org; Fri, 21 Mar 2025 09:25:45 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [2a07:de40:b251:101:10:150:64:1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7716d137-0636-11f0-9ea1-5ba50f476ded;
+ Fri, 21 Mar 2025 10:25:44 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 4A04421D71;
+ Fri, 21 Mar 2025 09:25:44 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 10EE3139AA;
+ Fri, 21 Mar 2025 09:25:44 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id LdmYApgw3WdQGQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 21 Mar 2025 09:25:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,266 +54,271 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 978a9adb-0636-11f0-9ffa-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1742549198; x=1742635598; bh=hO7IRmLDcYkvvmp6ohPmSYI/1jBCpI+cMwA
-	XGITLp2o=; b=y3kKORQROBxUgtQWY1WgelJbkge19MFansDVx3gl/LW5T5L1DL2
-	y576CvmnGygfkDsliJh95f51p3t3S6rIWHrvec36YilqPTzUM0lj64+9P2Xl7QUO
-	sZjCShykC4cXynmZNGzfVFcFGcra1UrJ8znIBT1ju90iMtv6HEGjNGUE+tb+djE8
-	yBkEJMHCMOwiqyK+JzCVZxuurXLBp5nyaCjiRmLGvbbkJu+SuxlceEVebBoWRFYi
-	BemZvphFr/PFzJsD7nvLU146LXjx0lDxqPA/LpLgyRNVY9ZqQORrlDFBNzHPso3L
-	f4Vkaoz/XNYAqBx7eYxtxBOTYoUmV/btLaw==
-X-ME-Sender: <xms:zTDdZ5QD5wtIwYIzIedmVuEtpdb21mXJDP_-VygKqyc0o3U2t_YMBA>
-    <xme:zTDdZyya-YoBTXCCg3mHMvQ1JCO52yPK1OQHNUtzZiqHpZmteFVfpclWDxSyTL8Tg
-    aHnhOs7HR0BvdPRkpA>
-X-ME-Received: <xmr:zTDdZ-2Euqzg5oDkzJjrWiJd2VAoxqb05OmXaY7F_3jda8HuBBuxFFV6tQcL36t8BKzuyYUeni0wUVWHopd6emYytZAj52JokpD8Y6Bl5qufaA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduhedtjeefucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttden
-    ucfhrhhomhepufgvrhhgihihucfmihgsrhhikhcuoefuvghrghhihigpmfhisghrihhkse
-    gvphgrmhdrtghomheqnecuggftrfgrthhtvghrnhepffffvdeifeeijefhheefuedvvedt
-    heffjeeiveehgfettedvgedujefgudejgedvnecuvehluhhsthgvrhfuihiivgeptdenuc
-    frrghrrghmpehmrghilhhfrhhomhepshgrkhhisgesuggrrhhkshhtrghrrdhsihhtvgdp
-    nhgspghrtghpthhtohepjedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnh
-    dquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohep
-    shgvrhhgihihpghkihgsrhhikhesvghprghmrdgtohhmpdhrtghpthhtoheprghnughrvg
-    ifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopehrohhgvghrrdhp
-    rghusegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvg
-    hrnhgvlhdrohhrghdprhgtphhtthhopegrlhgvjhgrnhgurhhordhvrghllhgvjhhosegt
-    lhhouhgurdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomh
-X-ME-Proxy: <xmx:zTDdZxDzNnSGGd25JSDb2ASXhg0snkv3PFw-8ejQ40uAGZWMWnrQMg>
-    <xmx:zTDdZyiiyQhYHZSYECJXRQw5pnQNF4ZXodi6o6pw1VrLjGq4RTqQOQ>
-    <xmx:zTDdZ1qXUJNCDcpy89w15rEAALQj6Dd5cVbiT5n-ue8ieeOb2U1q2A>
-    <xmx:zTDdZ9je4CbbbVreUEghsze5UIrd8V1d5T44AwxjgOluPpr-7Y-wMA>
-    <xmx:zTDdZ9S-xV33KfDHJnSPG1kME-BbSbRG9pw2RmAaXUOfUpdZRaTm4A>
-    <xmx:zjDdZ9V1LJ5yQZd73Rjx8B2hPXeV1iRQffsgHB6T3HPvG6TLt8b0AEeGbxsO>
-Feedback-ID: id5ffd314:Fastmail
-From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2] x86: make Viridian support optional
-Date: Fri, 21 Mar 2025 11:26:33 +0200
-Message-Id: <20250321092633.3982645-1-Sergiy_Kibrik@epam.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 7716d137-0636-11f0-9ea1-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1742549144; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Uw6HD4PFeDL/Du0d7ozu2XDJH6Lx8FoCcaVCEavvgsw=;
+	b=T8bNVE7BC+niMVLplTgoyt2dkyN3fAdaEfAlpfAl/HojQhGS/LVzEO4bKYXydfEvftUhYO
+	4k8pXP4fHkll6f8mOucqCJx4CP+I2SmVc8Mb8oDSExJHiY/hf9PyS6ZHzuI2rsOM0GeBgj
+	JGIm570vSzUO++jiolhm92AXIio8haM=
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1742549144; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Uw6HD4PFeDL/Du0d7ozu2XDJH6Lx8FoCcaVCEavvgsw=;
+	b=T8bNVE7BC+niMVLplTgoyt2dkyN3fAdaEfAlpfAl/HojQhGS/LVzEO4bKYXydfEvftUhYO
+	4k8pXP4fHkll6f8mOucqCJx4CP+I2SmVc8Mb8oDSExJHiY/hf9PyS6ZHzuI2rsOM0GeBgj
+	JGIm570vSzUO++jiolhm92AXIio8haM=
+From: Juergen Gross <jgross@suse.com>
+To: minios-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org
+Cc: samuel.thibault@ens-lyon.org,
+	Juergen Gross <jgross@suse.com>
+Subject: [MINI-OS PATCH 09/12] mm: change set_readonly() to change_readonly()
+Date: Fri, 21 Mar 2025 10:24:48 +0100
+Message-ID: <20250321092451.17309-10-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250321092451.17309-1-jgross@suse.com>
+References: <20250321092451.17309-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[]
 
-Add config option HVM_VIRIDIAN that covers viridian code within HVM.
-Calls to viridian functions guarded by is_viridian_domain() and related macros.
-Having this option may be beneficial by reducing code footprint for systems
-that are not using Hyper-V.
+Rename set_readonly() to change_readonly() and add a parameter
+specifying whether it should set the kernel to readonly or to writable.
+At the same time move the boundary setting from the only caller into
+the function itself, avoiding the need to use the same boundaries in
+future, when it will be called to set the kernel to writable again.
+Make the function globally visible in order to allow calling it from
+kexec coding later.
 
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-CC: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-CC: Jan Beulich <jbeulich@suse.com>
+Merge clear_bootstrap() into change_readonly() and undo its setting of
+page 0 to invalid when setting the kernel writable.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-changes in v2:
- - changed title in Kconfig & add help text
- - moved Kconfig changes to arch/x86/hvm/Kconfig
- - address review comments
----
- xen/arch/x86/hvm/Kconfig              | 10 ++++++++++
- xen/arch/x86/hvm/Makefile             |  2 +-
- xen/arch/x86/hvm/hvm.c                | 27 ++++++++++++++++++---------
- xen/arch/x86/hvm/vlapic.c             | 11 +++++++----
- xen/arch/x86/include/asm/hvm/domain.h |  2 ++
- xen/arch/x86/include/asm/hvm/hvm.h    |  3 ++-
- xen/arch/x86/include/asm/hvm/vcpu.h   |  2 ++
- 7 files changed, 42 insertions(+), 15 deletions(-)
+ arch/x86/mm.c | 111 +++++++++++++++++++++++++++-----------------------
+ include/mm.h  |   3 ++
+ 2 files changed, 64 insertions(+), 50 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
-index 2def0f98e2..9cdcc0d3cd 100644
---- a/xen/arch/x86/hvm/Kconfig
-+++ b/xen/arch/x86/hvm/Kconfig
-@@ -63,6 +63,16 @@ config ALTP2M
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index a71eb192..f4419d95 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -405,17 +405,19 @@ static void build_pagetable(unsigned long *start_pfn, unsigned long *max_pfn)
+  */
+ extern struct shared_info shared_info;
  
- 	  If unsure, stay with defaults.
- 
-+config HVM_VIRIDIAN
-+	bool "Hyper-V enlighnments for guests" if EXPERT
-+	default y
-+	help
-+	  Support optimizations for Hyper-V guests such as faster hypercalls,
-+	  efficient timer and interrupt handling, and enhanced paravirtualized
-+	  I/O. This is to improve performance and compatibility of Windows VMs.
-+
-+	  If unsure, say Y.
-+
- config MEM_PAGING
- 	bool "Xen memory paging support (UNSUPPORTED)" if UNSUPPORTED
- 	depends on VM_EVENT
-diff --git a/xen/arch/x86/hvm/Makefile b/xen/arch/x86/hvm/Makefile
-index 4c1fa5c6c2..6cc2e74fc4 100644
---- a/xen/arch/x86/hvm/Makefile
-+++ b/xen/arch/x86/hvm/Makefile
-@@ -1,6 +1,6 @@
- obj-$(CONFIG_AMD_SVM) += svm/
- obj-$(CONFIG_INTEL_VMX) += vmx/
--obj-y += viridian/
-+obj-$(CONFIG_HVM_VIRIDIAN) += viridian/
- 
- obj-y += asid.o
- obj-y += dm.o
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 5950f3160f..529068e80c 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -695,9 +695,12 @@ int hvm_domain_initialise(struct domain *d,
-     if ( hvm_tsc_scaling_supported )
-         d->arch.hvm.tsc_scaling_ratio = hvm_default_tsc_scaling_ratio;
- 
--    rc = viridian_domain_init(d);
--    if ( rc )
--        goto fail2;
-+    if ( is_viridian_domain(d) )
-+    {
-+        rc = viridian_domain_init(d);
-+        if ( rc )
-+            goto fail2;
-+    }
- 
-     rc = alternative_call(hvm_funcs.domain_initialise, d);
-     if ( rc != 0 )
-@@ -733,7 +736,8 @@ void hvm_domain_relinquish_resources(struct domain *d)
-     if ( hvm_funcs.nhvm_domain_relinquish_resources )
-         alternative_vcall(hvm_funcs.nhvm_domain_relinquish_resources, d);
- 
--    viridian_domain_deinit(d);
-+    if ( is_viridian_domain(d) )
-+        viridian_domain_deinit(d);
- 
-     ioreq_server_destroy_all(d);
- 
-@@ -1637,9 +1641,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
-          && (rc = nestedhvm_vcpu_initialise(v)) < 0 ) /* teardown: nestedhvm_vcpu_destroy */
-         goto fail5;
- 
--    rc = viridian_vcpu_init(v);
--    if ( rc )
--        goto fail6;
-+    if ( is_viridian_domain(d) )
-+    {
-+        rc = viridian_vcpu_init(v);
-+        if ( rc )
-+            goto fail6;
-+    }
- 
-     rc = ioreq_server_add_vcpu_all(d, v);
-     if ( rc != 0 )
-@@ -1669,13 +1676,15 @@ int hvm_vcpu_initialise(struct vcpu *v)
-  fail2:
-     hvm_vcpu_cacheattr_destroy(v);
-  fail1:
--    viridian_vcpu_deinit(v);
-+    if ( is_viridian_domain(d) )
-+        viridian_vcpu_deinit(v);
-     return rc;
- }
- 
- void hvm_vcpu_destroy(struct vcpu *v)
- {
--    viridian_vcpu_deinit(v);
-+    if ( is_viridian_domain(v->domain) )
-+        viridian_vcpu_deinit(v);
- 
-     ioreq_server_remove_vcpu_all(v->domain, v);
- 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 065b2aab5b..3d76ce3f0d 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -426,7 +426,8 @@ void vlapic_EOI_set(struct vlapic *vlapic)
-      * priority vector and then recurse to handle the lower priority
-      * vector.
-      */
--    bool missed_eoi = viridian_apic_assist_completed(v);
-+    bool missed_eoi = has_viridian_apic_assist(v->domain) &&
-+                      viridian_apic_assist_completed(v);
-     int vector;
- 
-  again:
-@@ -442,7 +443,7 @@ void vlapic_EOI_set(struct vlapic *vlapic)
-      * NOTE: It is harmless to call viridian_apic_assist_clear() on a
-      *       recursion, even though it is not necessary.
-      */
--    if ( !missed_eoi )
-+    if ( has_viridian_apic_assist(v->domain) && !missed_eoi )
-         viridian_apic_assist_clear(v);
- 
-     vlapic_clear_vector(vector, &vlapic->regs->data[APIC_ISR]);
-@@ -1360,7 +1361,8 @@ int vlapic_has_pending_irq(struct vcpu *v)
-      * If so, we need to emulate the EOI here before comparing ISR
-      * with IRR.
-      */
--    if ( viridian_apic_assist_completed(v) )
-+    if ( has_viridian_apic_assist(v->domain) &&
-+         viridian_apic_assist_completed(v) )
-         vlapic_EOI_set(vlapic);
- 
-     isr = vlapic_find_highest_isr(vlapic);
-@@ -1373,7 +1375,8 @@ int vlapic_has_pending_irq(struct vcpu *v)
-     if ( isr >= 0 &&
-          (irr & 0xf0) <= (isr & 0xf0) )
-     {
--        viridian_apic_assist_clear(v);
-+        if ( has_viridian_apic_assist(v->domain) )
-+            viridian_apic_assist_clear(v);
-         return -1;
-     }
- 
-diff --git a/xen/arch/x86/include/asm/hvm/domain.h b/xen/arch/x86/include/asm/hvm/domain.h
-index 333501d5f2..07eec231f0 100644
---- a/xen/arch/x86/include/asm/hvm/domain.h
-+++ b/xen/arch/x86/include/asm/hvm/domain.h
-@@ -111,7 +111,9 @@ struct hvm_domain {
-     /* hypervisor intercepted msix table */
-     struct list_head       msixtbl_list;
- 
-+#ifdef CONFIG_HVM_VIRIDIAN
-     struct viridian_domain *viridian;
-+#endif
- 
-     /*
-      * TSC value that VCPUs use to calculate their tsc_offset value.
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 963e820113..a836b2f4de 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -507,7 +507,8 @@ hvm_get_cpl(struct vcpu *v)
-     (has_hvm_params(d) ? (d)->arch.hvm.params[HVM_PARAM_VIRIDIAN] : 0)
- 
- #define is_viridian_domain(d) \
--    (is_hvm_domain(d) && (viridian_feature_mask(d) & HVMPV_base_freq))
-+    (IS_ENABLED(CONFIG_HVM_VIRIDIAN) && \
-+    is_hvm_domain(d) && (viridian_feature_mask(d) & HVMPV_base_freq))
- 
- #define is_viridian_vcpu(v) \
-     is_viridian_domain((v)->domain)
-diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
-index 196fed6d5d..4c5a76a707 100644
---- a/xen/arch/x86/include/asm/hvm/vcpu.h
-+++ b/xen/arch/x86/include/asm/hvm/vcpu.h
-@@ -172,7 +172,9 @@ struct hvm_vcpu {
-     /* Pending hw/sw interrupt (.vector = -1 means nothing pending). */
-     struct x86_event     inject_event;
- 
-+#ifdef CONFIG_HVM_VIRIDIAN
-     struct viridian_vcpu *viridian;
-+#endif
+-struct set_readonly_par {
++struct change_readonly_par {
+     unsigned long etext;
+ #ifdef CONFIG_PARAVIRT
+     unsigned int count;
+ #endif
++    bool readonly;
  };
  
- #endif /* __ASM_X86_HVM_VCPU_H__ */
+-static int set_readonly_func(unsigned long va, unsigned int lvl, bool is_leaf,
+-                             pgentry_t *pte, void *par)
++static int change_readonly_func(unsigned long va, unsigned int lvl,
++                                bool is_leaf, pgentry_t *pte, void *par)
+ {
+-    struct set_readonly_par *ro = par;
++    struct change_readonly_par *ro = par;
++    pgentry_t newval;
+ 
+     if ( !is_leaf )
+         return 0;
+@@ -429,9 +431,11 @@ static int set_readonly_func(unsigned long va, unsigned int lvl, bool is_leaf,
+         return 0;
+     }
+ 
++    newval = ro->readonly ? (*pte & ~_PAGE_RW) : (*pte | _PAGE_RW);
++
+ #ifdef CONFIG_PARAVIRT
+     mmu_updates[ro->count].ptr = virt_to_mach(pte);
+-    mmu_updates[ro->count].val = *pte & ~_PAGE_RW;
++    mmu_updates[ro->count].val = newval;
+     ro->count++;
+ 
+     if ( ro->count == L1_PAGETABLE_ENTRIES )
+@@ -442,7 +446,7 @@ static int set_readonly_func(unsigned long va, unsigned int lvl, bool is_leaf,
+          ro->count = 0;
+     }
+ #else
+-    *pte &= ~_PAGE_RW;
++    *pte = newval;
+ #endif
+ 
+     return 0;
+@@ -463,23 +467,6 @@ static void tlb_flush(void)
+ }
+ #endif
+ 
+-static void set_readonly(void *text, void *etext)
+-{
+-    struct set_readonly_par setro = { .etext = (unsigned long)etext };
+-    unsigned long start_address = PAGE_ALIGN((unsigned long)text);
+-
+-    printk("setting %p-%p readonly\n", text, etext);
+-    walk_pt(start_address, setro.etext, set_readonly_func, &setro);
+-
+-#ifdef CONFIG_PARAVIRT
+-    if ( setro.count &&
+-         HYPERVISOR_mmu_update(mmu_updates, setro.count, NULL, DOMID_SELF) < 0)
+-        BUG();
+-#endif
+-
+-    tlb_flush();
+-}
+-
+ /*
+  * get the PTE for virtual address va if it exists. Otherwise NULL.
+  */
+@@ -508,6 +495,51 @@ static pgentry_t *get_pgt(unsigned long va)
+     return tab;
+ }
+ 
++void change_readonly(bool readonly)
++{
++    struct change_readonly_par ro = {
++        .etext = (unsigned long)&_erodata,
++        .readonly = readonly,
++    };
++    unsigned long start_address = PAGE_ALIGN((unsigned long)&_text);
++#ifdef CONFIG_PARAVIRT
++    pte_t nullpte = { };
++    int rc;
++#else
++    pgentry_t *pgt = get_pgt((unsigned long)&_text);
++#endif
++
++    if ( readonly )
++    {
++#ifdef CONFIG_PARAVIRT
++        if ( (rc = HYPERVISOR_update_va_mapping(0, nullpte, UVMF_INVLPG)) )
++            printk("Unable to unmap NULL page. rc=%d\n", rc);
++#else
++        *pgt = 0;
++        invlpg((unsigned long)&_text);
++#endif
++    }
++    else
++    {
++#ifdef CONFIG_PARAVIRT
++        /* No kexec support with PARAVIRT. */
++        BUG();
++#else
++        *pgt = L1_PROT;
++#endif
++    }
++
++    printk("setting %p-%p readonly\n", &_text, &_erodata);
++    walk_pt(start_address, ro.etext, change_readonly_func, &ro);
++
++#ifdef CONFIG_PARAVIRT
++    if ( ro.count &&
++         HYPERVISOR_mmu_update(mmu_updates, ro.count, NULL, DOMID_SELF) < 0)
++        BUG();
++#endif
++
++    tlb_flush();
++}
+ 
+ /*
+  * return a valid PTE for a given virtual address. If PTE does not exist,
+@@ -789,31 +821,6 @@ int unmap_frames(unsigned long va, unsigned long num_frames)
+ }
+ EXPORT_SYMBOL(unmap_frames);
+ 
+-/*
+- * Clear some of the bootstrap memory
+- */
+-static void clear_bootstrap(void)
+-{
+-#ifdef CONFIG_PARAVIRT
+-    pte_t nullpte = { };
+-    int rc;
+-#else
+-    pgentry_t *pgt;
+-#endif
+-
+-    /* Use first page as the CoW zero page */
+-    memset(&_text, 0, PAGE_SIZE);
+-    mfn_zero = virt_to_mfn((unsigned long) &_text);
+-#ifdef CONFIG_PARAVIRT
+-    if ( (rc = HYPERVISOR_update_va_mapping(0, nullpte, UVMF_INVLPG)) )
+-        printk("Unable to unmap NULL page. rc=%d\n", rc);
+-#else
+-    pgt = get_pgt((unsigned long)&_text);
+-    *pgt = 0;
+-    invlpg((unsigned long)&_text);
+-#endif
+-}
+-
+ #ifdef CONFIG_PARAVIRT
+ void p2m_chk_pfn(unsigned long pfn)
+ {
+@@ -884,8 +891,12 @@ void arch_init_mm(unsigned long* start_pfn_p, unsigned long* max_pfn_p)
+     printk("    max_pfn: %lx\n", max_pfn);
+ 
+     build_pagetable(&start_pfn, &max_pfn);
+-    clear_bootstrap();
+-    set_readonly(&_text, &_erodata);
++
++    /* Prepare page 0 as CoW page. */
++    memset(&_text, 0, PAGE_SIZE);
++    mfn_zero = virt_to_mfn((unsigned long)&_text);
++
++    change_readonly(true);
+ 
+     *start_pfn_p = start_pfn;
+     *max_pfn_p = max_pfn;
+diff --git a/include/mm.h b/include/mm.h
+index 5775c3e1..0a16d56c 100644
+--- a/include/mm.h
++++ b/include/mm.h
+@@ -25,6 +25,7 @@
+ #ifndef _MM_H_
+ #define _MM_H_
+ 
++#include <stdbool.h>
+ #if defined(__i386__)
+ #include <xen/arch-x86_32.h>
+ #elif defined(__x86_64__)
+@@ -92,4 +93,6 @@ extern unsigned long heap, brk, heap_mapped, heap_end;
+ int free_physical_pages(xen_pfn_t *mfns, int n);
+ void fini_mm(void);
+ 
++void change_readonly(bool readonly);
++
+ #endif /* _MM_H_ */
 -- 
-2.25.1
+2.43.0
 
 
