@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A69C36000
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Mar 2025 09:31:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.923593.1327090 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60232C36000
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Mar 2025 09:31:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.923601.1327112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvYin-00054m-He; Fri, 21 Mar 2025 09:31:21 +0000
+	id 1tvYit-0005op-US; Fri, 21 Mar 2025 09:31:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 923593.1327090; Fri, 21 Mar 2025 09:31:21 +0000
+Received: by outflank-mailman (output) from mailman id 923601.1327112; Fri, 21 Mar 2025 09:31:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tvYin-00054E-BU; Fri, 21 Mar 2025 09:31:21 +0000
-Received: by outflank-mailman (input) for mailman id 923593;
- Fri, 21 Mar 2025 09:31:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tvYit-0005oe-RT; Fri, 21 Mar 2025 09:31:27 +0000
+Received: by outflank-mailman (input) for mailman id 923601;
+ Fri, 21 Mar 2025 09:31:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1wue=WI=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1tvYde-0005bg-No
- for xen-devel@lists.xenproject.org; Fri, 21 Mar 2025 09:26:02 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8108a1a8-0636-11f0-9ffa-bf95429c2676;
- Fri, 21 Mar 2025 10:26:01 +0100 (CET)
+ id 1tvYd6-0005O8-KR
+ for xen-devel@lists.xenproject.org; Fri, 21 Mar 2025 09:25:28 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6d0ecaf8-0636-11f0-9ea1-5ba50f476ded;
+ Fri, 21 Mar 2025 10:25:27 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id EAAA721D79;
- Fri, 21 Mar 2025 09:26:00 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6B06B1FB6B;
+ Fri, 21 Mar 2025 09:25:27 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C18DF139AA;
- Fri, 21 Mar 2025 09:26:00 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3F8B4139AA;
+ Fri, 21 Mar 2025 09:25:27 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 6dHYLagw3WdpGQAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 21 Mar 2025 09:26:00 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id /TMLDocw3WcrGQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 21 Mar 2025 09:25:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,43 +54,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8108a1a8-0636-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: 6d0ecaf8-0636-11f0-9ea1-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1742549161; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1742549127; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r/E0X4kSUTS2znnNR4n/sGL9TrcJRaZCvVETFzkF9nM=;
-	b=B9L4X8b0LyO+EsipPNlntdT73kCehyLOksZWhkXn2oV7P0F+Ved1AuISyTTvnPNcGtyWjG
-	8XlL+RXUSya0e5McIEbkE4PW3GrS5sJrP/asVGdHmreh428P0qqcwpiILMGhYRw6cSEf1u
-	0+BBYX1DtoyacMRW0LuCzS0HBjP1ghg=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=PYWAJsv9
+	bh=nAlkrmGl4CD2FgQ6p1TiH9XT/Lw2GB/CTlhJ+Z/qIes=;
+	b=ucu+XUwaJKwhDdvrXJ1uGJw2Z7/vvxmQpFIshVqrXsnV/u/CZfeo67OOHOmzUf1NJmFqjX
+	1ZT7sxHhlAnimSgU6qt8yNML8QR15/piuNAQmO68+bpSWO9InahZWxr9MkELS4yWchdFcS
+	RLkrJcegzN7Hu85iCPqhveVtE+rDaQU=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=ucu+XUwa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1742549160; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1742549127; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r/E0X4kSUTS2znnNR4n/sGL9TrcJRaZCvVETFzkF9nM=;
-	b=PYWAJsv9HFIHul3JqVAaDZ1tmb5ZgFhgRrgUYP2DuA6/twlMt+En73LQytp0UgOGc6Mzxc
-	LtT4+HIzyCyzFix3Ejf73UZ82Qj/Reu/G/fumaSqvhhEzQuTPXWkBk6rktYD9NWuKgkLRj
-	UVfkiTgNh/NBiRdXICFFtp8hYFF+m74=
+	bh=nAlkrmGl4CD2FgQ6p1TiH9XT/Lw2GB/CTlhJ+Z/qIes=;
+	b=ucu+XUwaJKwhDdvrXJ1uGJw2Z7/vvxmQpFIshVqrXsnV/u/CZfeo67OOHOmzUf1NJmFqjX
+	1ZT7sxHhlAnimSgU6qt8yNML8QR15/piuNAQmO68+bpSWO9InahZWxr9MkELS4yWchdFcS
+	RLkrJcegzN7Hu85iCPqhveVtE+rDaQU=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 12/12] kexec: do the final kexec step
-Date: Fri, 21 Mar 2025 10:24:51 +0100
-Message-ID: <20250321092451.17309-13-jgross@suse.com>
+Subject: [MINI-OS PATCH 06/12] kexec: reserve memory below boundary
+Date: Fri, 21 Mar 2025 10:24:45 +0100
+Message-ID: <20250321092451.17309-7-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250321092451.17309-1-jgross@suse.com>
 References: <20250321092451.17309-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: EAAA721D79
+X-Rspamd-Queue-Id: 6B06B1FB6B
 X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
@@ -105,8 +105,8 @@ X-Spamd-Result: default: False [-3.01 / 50.00];
 	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	TO_DN_SOME(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
 	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
 	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:dkim,suse.com:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
@@ -118,57 +118,173 @@ X-Spamd-Result: default: False [-3.01 / 50.00];
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Rspamd-Action: no action
 
-With all kexec preparations done, activate the new kernel.
+In order to support kexec any memory used during copying the new
+kernel to its final destination must not overlap with the destination
+area.
+
+In order to achieve that add a new interface allowing to mark all
+allocatable memory below a specific physical address as not available.
+
+This is done by walking through all chunks of the buddy allocator and
+removing the chunks (or chunk parts) below the boundary. The removed
+chunks are put into a list in order to be able to undo the operation
+in case kexec is failing before doing any unrecoverable system
+modifications.
+
+Any pages freed located below the boundary need to go directly into
+the list of reserved pages instead of the free pool.
+
+Call the new function from kexec code.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- kexec.c | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+ include/mm.h |  5 +++
+ kexec.c      |  5 +++
+ mm.c         | 89 +++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 98 insertions(+), 1 deletion(-)
 
+diff --git a/include/mm.h b/include/mm.h
+index 4fc364ff..5775c3e1 100644
+--- a/include/mm.h
++++ b/include/mm.h
+@@ -57,6 +57,11 @@ unsigned long alloc_pages(int order);
+ void free_pages(void *pointer, int order);
+ #define free_page(p)    free_pages(p, 0)
+ 
++#ifdef CONFIG_KEXEC
++void reserve_memory_below(unsigned long boundary);
++void unreserve_memory_below(void);
++#endif
++
+ static __inline__ int get_order(unsigned long size)
+ {
+     int order;
 diff --git a/kexec.c b/kexec.c
-index 2db876e8..85b09959 100644
+index 7e559994..68457711 100644
 --- a/kexec.c
 +++ b/kexec.c
-@@ -169,6 +169,7 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
- {
-     int ret;
-     unsigned long *func;
-+    void *kexec_page;
+@@ -175,6 +175,11 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
  
-     ret = analyze_kernel(kernel, kernel_size);
-     if ( ret )
-@@ -192,6 +193,13 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
-     if ( ret )
-         goto err;
+     kexec_set_param_loc(cmdline);
  
-+    kexec_page = (void *)alloc_page();
-+    if ( !kexec_page )
++    reserve_memory_below(kexec_last_addr);
++
++    /* Error exit. */
++    unreserve_memory_below();
++
+     return ENOSYS;
+ }
+ EXPORT_SYMBOL(kexec);
+diff --git a/mm.c b/mm.c
+index a5d3f5e5..9236db58 100644
+--- a/mm.c
++++ b/mm.c
+@@ -230,6 +230,84 @@ static void init_page_allocator(unsigned long min, unsigned long max)
+     mm_alloc_bitmap_remap();
+ }
+ 
++#ifdef CONFIG_KEXEC
++static chunk_head_t *reserved_chunks;
++static unsigned long boundary_pfn;
++
++static void free_pages_below(void *pointer, unsigned int order)
++{
++    unsigned long pfn_s, pfn;
++    chunk_head_t *ch = pointer;
++
++    pfn_s = virt_to_pfn(ch);
++
++    if ( pfn_s + (1UL << order) <= boundary_pfn )
 +    {
-+        ret = ENOMEM;
-+        goto err;
++        /* Put complete chunk into reserved list. */
++        ch->level = order;
++        ch->next = reserved_chunks;
++        reserved_chunks = ch;
 +    }
++    else
++    {
++        /* Put pages below boundary into reserved list. */
++        for ( pfn = pfn_s; pfn < boundary_pfn; pfn++ )
++        {
++            chunk_head_t *ch_res = pfn_to_virt(pfn);
 +
-     for ( func = __kexec_array_start; func < __kexec_array_end; func++ )
-     {
-         ret = ((kexeccall_t)(*func))(false);
-@@ -204,10 +212,15 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
-         }
-     }
- 
--    /* Error exit. */
--    ret = ENOSYS;
-+    /* Activate the new kernel. */
-+    do_kexec(kexec_page);
++            ch_res->level = 0;
++            ch_res->next = reserved_chunks;
++            reserved_chunks = ch_res;
++        }
 +
-+    /* do_kexec() shouldn't return, crash. */
-+    BUG();
++        /* Return pages above boundary to free pool again. */
++        for ( ; pfn < pfn_s + (1UL << order); pfn++ )
++            free_pages(pfn_to_virt(pfn), 0);
++    }
++}
++
++void reserve_memory_below(unsigned long boundary)
++{
++    unsigned long pfn;
++    unsigned int order;
++    chunk_head_t *ch;
++
++    ASSERT(!boundary_pfn);
++    boundary_pfn = PHYS_PFN(boundary);
++
++    for ( order = 0; order < FREELIST_SIZE; order++ )
++    {
++        for ( ch = free_list[order].next; !FREELIST_EMPTY(ch); ch = ch->next )
++        {
++            pfn = virt_to_pfn(ch);
++            if ( pfn >= boundary_pfn )
++                continue;
++
++            /* Dequeue from this level, at least parts will be reserved. */
++            dequeue_elem(ch);
++            /* Mark all as allocated, pieces above boundary will be returned. */
++            map_alloc(pfn, 1UL << ch->level);
++
++            free_pages_below(ch, ch->level);
++        }
++    }
++}
++
++void unreserve_memory_below(void)
++{
++    chunk_head_t *ch;
++
++    boundary_pfn = 0;
++
++    while ( reserved_chunks )
++    {
++        ch = reserved_chunks;
++        reserved_chunks = ch->next;
++        free_pages(ch, ch->level);
++    }
++}
++#endif /* CONFIG_KEXEC */
++
+ /* Allocate 2^@order contiguous pages. Returns a VIRTUAL address. */
+ unsigned long alloc_pages(int order)
+ {
+@@ -279,10 +357,19 @@ EXPORT_SYMBOL(alloc_pages);
+ void free_pages(void *pointer, int order)
+ {
+     chunk_head_t *freed_ch, *to_merge_ch;
++    unsigned long pfn = virt_to_pfn(pointer);
+     unsigned long mask;
  
-  err:
-+    if ( kexec_page )
-+        free_page(kexec_page);
-     change_readonly(true);
-     unreserve_memory_below();
-     kexec_move_used_pages_undo();
++#ifdef CONFIG_KEXEC
++    if ( pfn < boundary_pfn )
++    {
++        free_pages_below(pointer, order);
++        return;
++    }
++#endif
++
+     /* First free the chunk */
+-    map_free(virt_to_pfn(pointer), 1UL << order);
++    map_free(pfn, 1UL << order);
+ 
+     /* Create free chunk */
+     freed_ch = (chunk_head_t *)pointer;
 -- 
 2.43.0
 
