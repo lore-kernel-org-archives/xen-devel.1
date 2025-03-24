@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26CD4C36002
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 15:01:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.925729.1328610 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56397C36002
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 15:09:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.925741.1328618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twjIQ-0005nl-DM; Mon, 24 Mar 2025 15:00:58 +0000
+	id 1twjQH-0007VL-7m; Mon, 24 Mar 2025 15:09:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 925729.1328610; Mon, 24 Mar 2025 15:00:58 +0000
+Received: by outflank-mailman (output) from mailman id 925741.1328618; Mon, 24 Mar 2025 15:09:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twjIQ-0005ne-9S; Mon, 24 Mar 2025 15:00:58 +0000
-Received: by outflank-mailman (input) for mailman id 925729;
- Mon, 24 Mar 2025 15:00:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=sMR0=WL=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1twjIO-0005nC-Nh
- for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 15:00:56 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c9726234-08c0-11f0-9ea2-5ba50f476ded;
- Mon, 24 Mar 2025 16:00:55 +0100 (CET)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso3908919f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Mar 2025 08:00:55 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9a325csm11102025f8f.22.2025.03.24.08.00.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 08:00:53 -0700 (PDT)
+	id 1twjQH-0007VE-4z; Mon, 24 Mar 2025 15:09:05 +0000
+Received: by outflank-mailman (input) for mailman id 925741;
+ Mon, 24 Mar 2025 15:09:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=r2bg=WL=epam.com=grygorii_strashko@srs-se1.protection.inumbo.net>)
+ id 1twjQF-0007V8-U6
+ for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 15:09:04 +0000
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20612.outbound.protection.outlook.com
+ [2a01:111:f403:260e::612])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id eb1573b1-08c1-11f0-9ffa-bf95429c2676;
+ Mon, 24 Mar 2025 16:09:01 +0100 (CET)
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com (2603:10a6:20b:5e4::22)
+ by AS8PR03MB8345.eurprd03.prod.outlook.com (2603:10a6:20b:509::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Mon, 24 Mar
+ 2025 15:08:58 +0000
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593]) by AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593%4]) with mapi id 15.20.8534.040; Mon, 24 Mar 2025
+ 15:08:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,206 +49,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c9726234-08c0-11f0-9ea2-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1742828455; x=1743433255; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Mo6fJp0F1IUzlxDssU48NBjXGfBgXt0V9xAp/4jm5ko=;
-        b=UCOGc8ambIdbB/doPphwbXxCCpLRDSI5PUHfuuX0FYFgQFy8k68scZESKukbieVf12
-         FXnUlKwkAcKgozugDbtF3Po8rEnEIAe3VIEZ5BcfcfWuQ3buWHQobS/Sy/YAio9ltNLp
-         H/w6E1ezvyTFx1Rcume4D/Ae5Hh6ufTYMMGAcbTJjBx6xqOR11ELzAYDlnGR0igDFD0b
-         ko8XA/cpmR7eT9o+0k4JySNUnJSwIRKI7bxyAejGmlMfzRDipWlagrqeCo1GGaISxKYl
-         RzsXOjoN8GaXWOqdQDFbihY18pSICj54Nq9ftgAeIDRIvgZ6liYySC4ZjjHc2mAQrgT2
-         BoFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742828455; x=1743433255;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Mo6fJp0F1IUzlxDssU48NBjXGfBgXt0V9xAp/4jm5ko=;
-        b=t6w6iAMVwLvle9p3THNPFvgFKNiQDcKvD2BWyCp6GO4bbZt4JqGZ3vtxrFXeiUOleo
-         DLlmZB90yQ3ngLxpMHw0St0i4GVcsiZeDdzDpAsbgHtq1qzvPBneuaOUbF5IB3DLeL/G
-         4qwV6E34aKb9LJiNDjPwUxJRX1b/cLi5MQmeY8hslKDtxKXdNbTafkV4D4fCCaKgD49t
-         rq+9tfpEI5HL44/LGPaofh+hT0t0wcRkOtanvF2vsrmGFdUoH+U0pVc5cr2fYqOHWQVJ
-         VIY80Iwp8Lie0WOF6HiJA6ymRaKM2UeDanUy+Unc/pKvYe6njJHsL3dF0LLc5I4efb59
-         rG1g==
-X-Forwarded-Encrypted: i=1; AJvYcCXne/iK+AMGD3PrtcI+zxEgFEoyNbbW/TY/R2RqgsSi+IO8inMTm1yw5LqS2z8W0HzFCYXbOYG1bEU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxbdLnhpHrfdr/P7QEbhXD9pghvv9mtH0B4gl9Dj+B7xcQ1AvrI
-	35aexyAjv7R8fb8FJomuOknP/MU/LygOez7VqA6rJOOdAhXK9p1aB0hIWA3SgQ==
-X-Gm-Gg: ASbGncvlWsVI7xM0XT6XKguoChgNNSZe0Gr1nJ4+UEG9cutDbBEBeja33X0OXYMEa8O
-	nZl7yUWt6eFH37PSWYYnKB98L7I7q5v+0rRJCVm3mdqxzz3rd0k9Yo0lTX7KwcMzNXnz/+x0Trr
-	p5o1lozdOox7Q9kFgv6/QNwamP/vYwxlGEQmwgrJ2hPBeA987eFJplI3q5ONsdarXVFc5d/xfWh
-	XcR4bucjz1OpTtNoF9GBoqAXZiF7sI1iMtjrdr/2RTpd6iEO3FuVzoPprIoVmCVWyPjtHK5RIqY
-	AseACqn8bqmoZMbrF5HI9IaNDfQgImV1FKrGTo+ONR2H1vlf6747JTSsd1dtPusUvqFEgXBGYuY
-	kpTcF4C6lrM9x84k5TZ3nihOCAzyJEGCQwqnvX7tK
-X-Google-Smtp-Source: AGHT+IHSqvE5hHTODYEZMXbwzReS0+oeBEjvyujnkoyyOB3JC8ySCMbYz0opUeTvVDjymTpxxQNPUA==
-X-Received: by 2002:a5d:5885:0:b0:391:48d4:bd02 with SMTP id ffacd0b85a97d-3997f914a95mr11920743f8f.29.1742828453429;
-        Mon, 24 Mar 2025 08:00:53 -0700 (PDT)
-Message-ID: <80963bfa-a19e-49a7-8de2-0d8508af450f@suse.com>
-Date: Mon, 24 Mar 2025 16:00:52 +0100
-MIME-Version: 1.0
+X-Inumbo-ID: eb1573b1-08c1-11f0-9ffa-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KijUCaEoEzQqqj16CnWR3gCl1oeJJd7KLffb8a8r1IVi7f7pvZTsqMbICVvou7BXmN4tEGW0JUei9uXdxqr/tazXLbfbOlOfFJGzPPuF8NpSbL3Kl3A6SqNc7x/lmkpTZWc87sOnTSxfPgxVpD/7vXDsLS936kh2EHpt13/Wa+NGSyOlDv7jqCF40zoj4ExRgHkKkTzdpwsL/qBD2mJEKimVEGACgwFJXaAaHewMKoi2IQqI4Hb7eyQDB1LAOefDpSdJeESQBKsZ1kyyffw9FhY6mhBn4xT1TQrnsPBQcuV21wXo/ntcY7Ud9onl8ML6f+fnyjuLDFMEnPx1cDUqhQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cJcZU64s8E+8JKTrBjH9ibM8YLIeg7Sn3n/8HzJVY/o=;
+ b=R1jYieDAIm05+bpYsWEllGcpmQ6/ud2Nd7xq0/xcomDLOGoJcrS2f2qq07HfDJGrV9nxMaY9tCYSflU3xcrrzHD7duV7B93IXj/jNWLQB9Nlpfa8qatEn/haf59OudXmXYeS4ChlID37SAXH5bxKXDNTj+eZ7gBnXQk9DgQjBMlSujJ5lDdKCqu6bEgTmYHhJfaHy946vhRSIAWjQjsbyz9KqYGYbRkb1jD+4muBUYBKbF4BMd7vvwrYPWIQ6GkvaitoaspfMaaLzxrp/FkowRUB5W0eDxDmuyZ0B1A2AjtIX7qfEJz1Nz2aNgkQMAp5wlqqvxOI0bQiYvjLyOXelA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cJcZU64s8E+8JKTrBjH9ibM8YLIeg7Sn3n/8HzJVY/o=;
+ b=fdNI9eauZU86hU2UMpd5vy3+u1ozqN8+evcT6IaVf47fEbnQo93kXAaKE8m7p0QSbLMvQu1YdTkKz4gDfcGSpa4QiZ+xRt+IDtJwrE6BGeZBG/Sd4lXuGONekgctBUtlhSDxR+3WW1i83lDqO6ofR/YgIjXRZ8Qd1ujsURfcDksa0ofXDwr/C0d5/SCfQFmtuN/tAtaDHBWdnz+gAQvEA0AGztFQ6w83OxX74h7SoqeivwyBn8QIqMcr1IxWNC9O93/zPzcRQBgSagfuNmLX/3CghOf96B4hG7OyKALpHjerN3rnpqEwcI14ubmK/aQwpE3rRPNyiniYR9xgJIQ9Rw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+Message-ID: <c55d6b80-89d3-4f2f-873c-e77de10d606b@epam.com>
+Date: Mon, 24 Mar 2025 17:08:55 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/15] xen/cpufreq: refactor cmdline "cpufreq=xxx"
-To: Penny Zheng <Penny.Zheng@amd.com>
-Cc: ray.huang@amd.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20250306083949.1503385-1-Penny.Zheng@amd.com>
- <20250306083949.1503385-4-Penny.Zheng@amd.com>
+Subject: Re: [RFC PATCH v3 2/7] xen/arm: scmi-smc: update to be used under sci
+ subsystem
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ Grygorii Strashko <gragst.linux@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Orzel <michal.orzel@amd.com>, Roger Pau Monne <roger.pau@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Juergen Gross <jgross@suse.com>
+References: <20250311111618.1850927-1-grygorii_strashko@epam.com>
+ <20250311111618.1850927-3-grygorii_strashko@epam.com>
+ <alpine.DEB.2.22.394.2503131540530.3477110@ubuntu-linux-20-04-desktop>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250306083949.1503385-4-Penny.Zheng@amd.com>
-Content-Type: text/plain; charset=UTF-8
+From: Grygorii Strashko <grygorii_strashko@epam.com>
+In-Reply-To: <alpine.DEB.2.22.394.2503131540530.3477110@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0143.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:96::17) To AS2PR03MB8907.eurprd03.prod.outlook.com
+ (2603:10a6:20b:5e4::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR03MB8907:EE_|AS8PR03MB8345:EE_
+X-MS-Office365-Filtering-Correlation-Id: 783cdd59-978f-4841-7305-08dd6ae5cd2b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7416014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SEphWituOFd2Y0s4aDBRZjhaREFIRUhzcGJiQ1dudFhxNmF1T01EL0xESlJK?=
+ =?utf-8?B?NlZCSVRGT1FYQi9JTlYvTENPZ1ZTQWR3cWhuRlZoOVQ2TEdQUGo1VGNEOE9j?=
+ =?utf-8?B?bHVhWWpiaUZCSmhiNTkveVBYWEhEU1UxUTVmWHZtTk9naTNMeHVEdnpYWXRr?=
+ =?utf-8?B?SW82a2RnMEtSb1pkWWpHVHRFVDZBczBTQW5STnkrbGVyQVYxNm5oeGU4ektT?=
+ =?utf-8?B?RThjKzF6N2pveEZxRis0VXlMZ1NpQ20vMFhOaFdrOFNJb2RqM0NydlpJMjB1?=
+ =?utf-8?B?Sno2VUVRa0xTNmpveVEvNHoyZ3dSSHJJa3FlUTlnK0ptbWdpT2JOTmo1aGZi?=
+ =?utf-8?B?WThSZE1HWXBXYVRPRWVLTW53OWx1YUk2VWtDSUxIWXFXNU1tb0JuRzUwNmZI?=
+ =?utf-8?B?VTFka3ZRTFM0Q0RPbDRIQTFGWDZqT21yc3d3cUs5cllIM2JPV2VuYWtoVXBE?=
+ =?utf-8?B?UU53Q0hzQTltbjFPbmp1ODJCWTZ3V0xUb3FkL1locFlyWWRpbXdKV05jMis3?=
+ =?utf-8?B?c0Z0Vnl1MkplWExUeUlqNksvZHh4S0lISHVrUnFFS01wUWdvNmNXNGYrWlJq?=
+ =?utf-8?B?ZDBPS04zSS9tMU1GZmY0czQwbFFobHdqb2VHWUY5bGp4Z3Q2eWdlUjdIdjA3?=
+ =?utf-8?B?SmFXOWhIVzZLS21ZOFFKVHh4bm8yZCtNMFhhVlppQnhIci9PVzExTDRuMllx?=
+ =?utf-8?B?OUlJZkFieXJSQkFBVzR0TmlSVG5YNUJlMzZtMGgwMDNiT1pOQVVrSFdCRnV5?=
+ =?utf-8?B?Nm9ieHlqNEFSdnM5dzR4d3NmTEcrcC8zYlFiM3pIS3pSWUMxWTFjbHhkMlFB?=
+ =?utf-8?B?T2Nmb0FQSWZlWUlIZFF2QVhHUFIwc1VMa2gxamh3U3Rwb1dlTjFwK0R4RXhj?=
+ =?utf-8?B?UlJQd0wyZENHbEt2c2kvNWNZSlZPSTJFREc5K1dZazNGRG1Ib1JNK2h3alVV?=
+ =?utf-8?B?bW5MeE9hRFRYd2EzaktwMWE4bWJPT2JXS1ovRHhZNDBsMnd5dkU5S0dFdW9Z?=
+ =?utf-8?B?di9od3kxdEd6N2hEdktmVXlIOTBIbDNmc0dhcTRXcm9NeUZkK1FaVGx4RkQ3?=
+ =?utf-8?B?ZHpPeWM0UUpGTlQrRHc4WE5JUG5Jc1FodU1IcU5tdGd1VG1FZ0pqM0NqaVE3?=
+ =?utf-8?B?OCtVMzJ5amNvMFhyNzgwOFk3OEpwYW5DTk55WXVsbXBxSzhMOXQ1Q09FWkZZ?=
+ =?utf-8?B?bExvNW9jWm9zamg3RzJYSlpBNktrOGZNNkZkdjcrUzVzaE1zQjBhN1JjbW80?=
+ =?utf-8?B?a0ljVmI1Mk15S1BJdWJOYm9NdXUvTUZhY3dWU29TM0txQklteTdmUjZuMmdU?=
+ =?utf-8?B?LzdFSzY0SkZ2dllDSk1iZHVOc0RvTE1zMzRDMVBKYTkxSlhaVStneUM1SFFD?=
+ =?utf-8?B?a0VwcnBkaEVqQ1pGdWcxYmJUbTBLY2IrQTI0aTJENy9TcG50MGw1bDFFN0dG?=
+ =?utf-8?B?aTB2VDBzNzFYaktYRW85T3dHbEY2eFBQeFRVbmx3ZEFydHdmNkpueGt2T1dp?=
+ =?utf-8?B?b2JQejBILzVJZEk5TGJmemZDRnBhMkZpWjNXYXF2eW9xL2tKY1AwREgrZndD?=
+ =?utf-8?B?RkRtQ1VwRTFvNVRxVEhobkY0NG9lck50bWx3QjJKbFJoMU9WLzNpU0tLTnI1?=
+ =?utf-8?B?eS9wczJLcnFReXJXZ1p5SnBqTjg4d3kzTGZyOERzWXFVcjNEM0xIQmR5dXVU?=
+ =?utf-8?B?Nk5XcXFBRUdvSGVYbEtPMURlWWtVWmMxOXJBemUza3pFdVJPRFdHbkFDWTVG?=
+ =?utf-8?B?bFZQVmFBeWpPcmFaWEFROXc5SG52VFRoc3BTWmE2NGlDL0VmSmNkT3h0eUNM?=
+ =?utf-8?B?aHI0bkpIZ3d5dlBuMEJFbEpGUFNja3ZCU0o5YzJ4dDB6ZWltWWs5TVhvbmdZ?=
+ =?utf-8?Q?t0TzntNjdtJOG?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB8907.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7416014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UlRHQ3Q0UVN5N1pwRDd2NjllYjlHQ3VLUDRrczg4bXZFZUV0dUwzVERCRG5i?=
+ =?utf-8?B?ZWlmRk0vTjVSNU1xN3VPUGtUR1pwdzJ5dlFweDZwQlh2b0VhWWI3MkgrS3dZ?=
+ =?utf-8?B?elJIZ0c2N2s3Uld3Um1ad1NCU2o0bVB4Zm9CbWQyNWRmdlF0VFdDQ0JVR2tX?=
+ =?utf-8?B?SEZ5eWxLS21qdVN2UHZ3SzhMQXJKbzczbTA2UlR1ZG9QV1RPbElQR3BIZEda?=
+ =?utf-8?B?SWdhQ1VKZno3UjhQRlNiNEVocDFYZTFZc3dpQ1h4Z0cxQVpULzJYVzlkQVB2?=
+ =?utf-8?B?RkN6Tk83c2RnY3Y3L3dUcVRtTGFQend5dW1PaFZCVGo3eTFSZ00xOWlkQjd6?=
+ =?utf-8?B?NGhScWROUGpQMzF5Qk9uRHNyekNvTkNkRnkzUEoxa0NYSkdIZjYrMFpTNFJS?=
+ =?utf-8?B?NDJrQVhMMGZJYUZ5YnZyeG5WOTd3bFlYLzNYSWcwbURHSXdYM1FZQVYyTTFm?=
+ =?utf-8?B?M2RNeHVkYWpvcVZ0ZnBIbzRKNDVmWXZaUDBSUTRZMlE0eXR4dFNFdVNYLzhE?=
+ =?utf-8?B?Vld6dDlNSnhnUUQ5VDRnUDlST1RKUHJpSk1qVjhWamt6K3N2eE8rR3NJNTRM?=
+ =?utf-8?B?dERBRllnVHV1b0FxNU0xeFM4bU9IYUlSYmU4VDkzZC9QSUxFcThLcWtKQVpa?=
+ =?utf-8?B?dDV5d0lPaFhoeUVSUDdoTGdzQi9BY09ZM0ZJWFhPaVI5cXRtbk5KNkdBblRM?=
+ =?utf-8?B?ZVJpS1o4YUdwNER2RkRGL0NqL21UNnNNN1FMU3NINHcyT2paTEhEL0pJR3Vh?=
+ =?utf-8?B?dTAvdzE5N2huMU9UdkpsQ2xJM3lOaG9pUE0yMGJmUG1iNDlzbC9XR2FxV0hZ?=
+ =?utf-8?B?TFlrWVA3clFCbTdpTVVzZnFuRityYnU3MXdTN3JTaEtIRkZEaWdxeEtodTRM?=
+ =?utf-8?B?TjNKM2FPSHV1N1hHYUtKUXQzck41azB2b3IvZUthL2VrREQyUnhmK1Z0SHlz?=
+ =?utf-8?B?VHh1MWttcVZSZC9DS2YzbzZVQVVyT0NjZ1daeFdFZnIrTWtvQTQ4RWdQUHJ2?=
+ =?utf-8?B?QnQyVkpCb2FIWUtsT2wzdUs4VXVRc2RMVFFQcUsweG4xOVV2b01WM2JEWDhI?=
+ =?utf-8?B?N244Wkl0cS9RUXk4cFlRNWJEOGxmUGx5VGtOaFg5UXd5empFMGlsQUpMYVlj?=
+ =?utf-8?B?N0ozNVNPRzY1ZnFhK0Y4Y3piUlBSb0JVRG9BNjBHOWQrSGxFb3p2Unh2Q0lw?=
+ =?utf-8?B?Nmt0ZFRPTFVPZ1FVWUZSK3o3U0FLTE84ZUMyQlRDdm5wQ2JZandFcWtNMm9Z?=
+ =?utf-8?B?VDh4cFdmZ3R3MWExWXI2a3VoeUhqNzZjMmJoY0d5VG55OUx0NHRNRVdJbUJS?=
+ =?utf-8?B?aVNRZWZpVTl4K29uUTdGVUtUZmlNS24wc1NFejhCZXRORGk1QUpTbzdJT0RQ?=
+ =?utf-8?B?Ym1nbExVL21hK1VDMnVnY3ZKUWRJUld3alRMRGo5VFJOSE5UdmE0OHlCbmZ3?=
+ =?utf-8?B?V1pRZ1ExbmtUa3pJQ1lodHNiK3dJSjFOcmlxaTBtWVMxWkR4eWc2L3JpZTVS?=
+ =?utf-8?B?SGVndjBkdFFPb2ZYZytXVmZFUlpDdVk2a3NQUnRzUDhkVEp3eGJVMExXVFZ1?=
+ =?utf-8?B?MTdBcGliUW1Ld3hXeFB1QUhIVm4xK1dRSDd0bzFxT3pQdmlhbFNpMzRYbTRI?=
+ =?utf-8?B?RVMzYUJQL085ZVgvMiszWDF5b1BrOS9ZRlh1RzRBNjdNZEpnNWVCalFNRkU0?=
+ =?utf-8?B?aTYwamtveHBCSWYzL0wrelQweGtjUDdnWGdaR2VoTjVlc2x2a3NWdXQzajdG?=
+ =?utf-8?B?bDdlbUpnUUpGZEhFUk1DU21UR3ZpbUFDS1RXdU83WmpwajVZS1lVeEdTUVNF?=
+ =?utf-8?B?ZUFUS2VRSXM3azdvQlIyTGRtcTRtN1pPdklQSVRQSnJjZW02YVZHZmpoc1Nq?=
+ =?utf-8?B?a3JZRmFjV3hFRDJXMy9UQ2hiME9NbHRWMDZ3VitDcUViVXFsa1dGTC9wMHpU?=
+ =?utf-8?B?azFkTkdmQ1dwTXBOanU4MUpLSjArRzNWQ0dLdWF5cHlEbWVwR1BKclI5ZkNr?=
+ =?utf-8?B?Y21RSFhXMU5YUldrMDA0bTJMT0xsbmVSaldQRFhwRnJqODI2dGJ0Ykg3d2pD?=
+ =?utf-8?B?MWtMM00zQlBrU3J5ZmFndkF3czg2SzF0NHB0VkZ4bU5YT3h1VXhKRDNvdm1s?=
+ =?utf-8?B?dE9CcUhXYThYaXllbWUyT1R0UlV6N0RvZG5ZbW9pMXdoOVRIQmJnUUNXYTF2?=
+ =?utf-8?B?bUE9PQ==?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 783cdd59-978f-4841-7305-08dd6ae5cd2b
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB8907.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2025 15:08:58.0383
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WY7ttWbcUgmtrozMM2F+BoV6Q04dUPqpKGKo4nWymHBiaVcKuZBuuDVYidKX3oDaKUsaOEVvqwUdpyVaIzaep8Twz8l1W2PA3tTC9MyzgVU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB8345
 
-On 06.03.2025 09:39, Penny Zheng wrote:
-> This commit includes the following modification:
-> - Introduce helper function cpufreq_cmdline_parse_xen and
-> cpufreq_cmdline_parse_hwp to tidy the different parsing path
-> - Add helper cpufreq_opts_contain to ignore user redundant setting,
-> like "cpufreq=hwp;hwp;xen"
-> - Doc refinement
+Hi Stefano,
 
-See my earlier comment as to wording to avoid. In descriptions and comments
-it would also be nice if function names could be followed by () (and array
-names then be followed by []) to clearly identify the nature of such
-identifiers.
+On 14.03.25 01:48, Stefano Stabellini wrote:
+> On Tue, 11 Mar 2025, Grygorii Strashko wrote:
+>> The introduced SCI (System Control Interface) subsystem provides unified
+>> interface to integrate in Xen SCI drivers which adds support for ARM
+>> firmware (EL3, SCP) based software interfaces (like SCMI) that are used in
+>> system management. The SCI subsystem allows to add drivers for different FW
+>> interfaces or have different drivers for the same FW interface (for example,
+>> SCMI with different transports).
+>>
+>> This patch updates SCMI over SMC calls handling layer, introduced by
+>> commit 3e322bef8bc0 ("xen/arm: firmware: Add SCMI over SMC calls handling
+>> layer"), to be SCI driver:
+>> - convert to DT device;
+>> - convert to SCI Xen interface.
+>>
+>> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+>> ---
+>>   xen/arch/arm/firmware/Kconfig                | 13 ++-
+>>   xen/arch/arm/firmware/scmi-smc.c             | 93 +++++++++++---------
+>>   xen/arch/arm/include/asm/firmware/scmi-smc.h | 41 ---------
+>>   xen/arch/arm/vsmc.c                          |  5 +-
+>>   xen/include/public/arch-arm.h                |  1 +
+>>   5 files changed, 64 insertions(+), 89 deletions(-)
+>>   delete mode 100644 xen/arch/arm/include/asm/firmware/scmi-smc.h
+>>
+>> diff --git a/xen/arch/arm/firmware/Kconfig b/xen/arch/arm/firmware/Kconfig
+>> index fc7918c7fc56..02d7b600317f 100644
 
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -535,7 +535,8 @@ choice of `dom0-kernel` is deprecated and not supported by all Dom0 kernels.
->    processor to autonomously force physical package components into idle state.
->    The default is enabled, but the option only applies when `hwp` is enabled.
->  
-> -There is also support for `;`-separated fallback options:
-> +User could use `;`-separated options to support universal options which they
-> +would like to try on any agnostic platform, *but* under priority order, like
->  `cpufreq=hwp;xen,verbose`.  This first tries `hwp` and falls back to `xen` if
->  unavailable.  Note: The `verbose` suboption is handled globally.  Setting it
->  for either the primary or fallback option applies to both irrespective of where
+[...]
 
-What does "support" here mean? I fear I can't even suggest what else to use,
-as I don't follow what additional information you mean to add here. Is a
-change here really needed?
+>>   
+>>   /*
+>>    * Local variables:
+>> diff --git a/xen/arch/arm/include/asm/firmware/scmi-smc.h b/xen/arch/arm/include/asm/firmware/scmi-smc.h
+>> deleted file mode 100644
+>> index 6b1a164a400e..000000000000
+>> --- a/xen/arch/arm/include/asm/firmware/scmi-smc.h
+>> +++ /dev/null
+>> @@ -1,41 +0,0 @@
+>> -/* SPDX-License-Identifier: GPL-2.0-only */
+>> -/*
+>> - * xen/arch/arm/include/asm/firmware/scmi-smc.h
+>> - *
+>> - * ARM System Control and Management Interface (SCMI) over SMC
+>> - * Generic handling layer
+>> - *
+>> - * Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>> - * Copyright 2024 NXP
+>> - */
+>> -
+>> -#ifndef __ASM_SCMI_SMC_H__
+>> -#define __ASM_SCMI_SMC_H__
+>> -
+>> -#include <xen/types.h>
+>> -
+>> -struct cpu_user_regs;
+>> -
+>> -#ifdef CONFIG_SCMI_SMC
+>> -
+>> -bool scmi_handle_smc(struct cpu_user_regs *regs);
+>> -
+>> -#else
+>> -
+>> -static inline bool scmi_handle_smc(struct cpu_user_regs *regs)
+>> -{
+>> -    return false;
+>> -}
+>> -
+>> -#endif /* CONFIG_SCMI_SMC */
+>> -
+>> -#endif /* __ASM_SCMI_H__ */
+>> -
+>> -/*
+>> - * Local variables:
+>> - * mode: C
+>> - * c-file-style: "BSD"
+>> - * c-basic-offset: 4
+>> - * indent-tabs-mode: nil
+>> - * End:
+>> - */
+>> diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
+>> index 51b3c0297314..b33c69a1c22a 100644
+>> --- a/xen/arch/arm/vsmc.c
+>> +++ b/xen/arch/arm/vsmc.c
+>> @@ -21,7 +21,6 @@
+>>   #include <asm/traps.h>
+>>   #include <asm/vpsci.h>
+>>   #include <asm/platform.h>
+>> -#include <asm/firmware/scmi-smc.h>
+>>   
+>>   /* Number of functions currently supported by Hypervisor Service. */
+>>   #define XEN_SMCCC_FUNCTION_COUNT 3
+>> @@ -233,7 +232,7 @@ static bool handle_sip(struct cpu_user_regs *regs)
+>>       if ( platform_smc(regs) )
+>>           return true;
+>>   
+>> -    return scmi_handle_smc(regs);
+>> +    return sci_handle_call(regs);
+> 
+> Is this change...
+> 
+> 
+>>   }
+>>   
+>>   /*
+>> @@ -301,8 +300,6 @@ static bool vsmccc_handle_call(struct cpu_user_regs *regs)
+>>               break;
+>>           case ARM_SMCCC_OWNER_SIP:
+>>               handled = handle_sip(regs);
+>> -            if ( !handled )
+>> -                handled = sci_handle_call(regs);
+> 
+> the one allowing this to be removed? 
 
-> --- a/xen/drivers/cpufreq/cpufreq.c
-> +++ b/xen/drivers/cpufreq/cpufreq.c
-> @@ -71,6 +71,46 @@ unsigned int __initdata cpufreq_xen_cnt = 1;
->  
->  static int __init cpufreq_cmdline_parse(const char *s, const char *e);
->  
-> +static bool __init cpufreq_opts_contain(enum cpufreq_xen_opt option)
-> +{
-> +    unsigned int count = cpufreq_xen_cnt;
-> +
-> +    while ( count )
-> +    {
-> +        if ( cpufreq_xen_opts[--count] == option )
-> +            return true;
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +static int __init cpufreq_cmdline_parse_xen(const char *arg, const char *end)
-> +{
-> +    int ret = 0;
-> +
-> +    xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
-> +    cpufreq_controller = FREQCTL_xen;
-> +    cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_xen;
-> +    ret = 0;
+Yes, it's just switch from API introduced by commit 3e322bef8bc0 ("xen/arm:
+firmware: Add SCMI over SMC calls handling layer") to more generic SCI API.
 
-ret was already set to 0 by the initializer.
+>Are we sure all possible SCIs are SIPs?
 
-> +    if ( arg[0] && arg[1] )
-> +        ret = cpufreq_cmdline_parse(arg + 1, end);
-> +
-> +    return ret;
-> +}
-> +
-> +static int __init cpufreq_cmdline_parse_hwp(const char *arg, const char *end)
-> +{
-> +    int ret = 0;
-> +
-> +    xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
-> +    cpufreq_controller = FREQCTL_xen;
-> +    cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_hwp;
-> +    if ( arg[0] && arg[1] )
-> +        ret = hwp_cmdline_parse(arg + 1, end);
-> +
-> +    return ret;
-> +}
+Yes, as I see it, for sure for SCMI.
+SCI is platform specific and so SiP.
 
-For both of the helpers may I suggest s/parse/process/ or some such
-("handle" might be another possible term to use), as themselves they
-don't do any parsing?
+> 
+> 
+>>               break;
+>>           case ARM_SMCCC_OWNER_TRUSTED_APP ... ARM_SMCCC_OWNER_TRUSTED_APP_END:
+>>           case ARM_SMCCC_OWNER_TRUSTED_OS ... ARM_SMCCC_OWNER_TRUSTED_OS_END:
+>> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+>> index 55eed9992c9d..095b1a23e30c 100644
+>> --- a/xen/include/public/arch-arm.h
+>> +++ b/xen/include/public/arch-arm.h
+>> @@ -328,6 +328,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+>>   #define XEN_DOMCTL_CONFIG_TEE_FFA       2
+>>   
+>>   #define XEN_DOMCTL_CONFIG_ARM_SCI_NONE      0
+>> +#define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC  1
+>>   
+>>   struct xen_arch_domainconfig {
+>>       /* IN/OUT */
+>> -- 
+>> 2.34.1
+>>
 
-In the end I'm also not entirely convinced that we need these two almost
-identical helpers (with a 3rd likely appearing in a later patch).
-
-> @@ -112,25 +152,13 @@ static int __init cf_check setup_cpufreq_option(const char *str)
->          if ( cpufreq_xen_cnt == ARRAY_SIZE(cpufreq_xen_opts) )
->              return -E2BIG;
->  
-> -        if ( choice > 0 || !cmdline_strcmp(str, "xen") )
-> -        {
-> -            xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
-> -            cpufreq_controller = FREQCTL_xen;
-> -            cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_xen;
-> -            ret = 0;
-> -            if ( arg[0] && arg[1] )
-> -                ret = cpufreq_cmdline_parse(arg + 1, end);
-> -        }
-> +        if ( (choice > 0 || !cmdline_strcmp(str, "xen")) &&
-> +             !cpufreq_opts_contain(CPUFREQ_xen) )
-> +            ret = cpufreq_cmdline_parse_xen(arg, end);
->          else if ( IS_ENABLED(CONFIG_INTEL) && choice < 0 &&
-> -                  !cmdline_strcmp(str, "hwp") )
-> -        {
-> -            xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
-> -            cpufreq_controller = FREQCTL_xen;
-> -            cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_hwp;
-> -            ret = 0;
-> -            if ( arg[0] && arg[1] )
-> -                ret = hwp_cmdline_parse(arg + 1, end);
-> -        }
-> +                  !cmdline_strcmp(str, "hwp") &&
-> +                  !cpufreq_opts_contain(CPUFREQ_hwp) )
-> +            ret = cpufreq_cmdline_parse_hwp(arg, end);
->          else
->              ret = -EINVAL;
-
-Hmm, if I'm not mistaken the example "cpufreq=hwp;hwp;xen" would lead us
-to this -EINVAL then. That's not quite "ignore" as the description says.
-
-Jan
+-- 
+Best regards,
+-grygorii
 
