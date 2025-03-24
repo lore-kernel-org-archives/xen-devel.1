@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1BEC36002
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 15:19:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.925700.1328642 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACC7C3600B
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 15:23:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.925773.1328651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twja7-0002Od-AT; Mon, 24 Mar 2025 15:19:15 +0000
+	id 1twjdi-00053n-Qg; Mon, 24 Mar 2025 15:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 925700.1328642; Mon, 24 Mar 2025 15:19:15 +0000
+Received: by outflank-mailman (output) from mailman id 925773.1328651; Mon, 24 Mar 2025 15:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twja7-0002OW-7c; Mon, 24 Mar 2025 15:19:15 +0000
-Received: by outflank-mailman (input) for mailman id 925700;
- Mon, 24 Mar 2025 14:29:53 +0000
+	id 1twjdi-00053g-O0; Mon, 24 Mar 2025 15:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 925773;
+ Mon, 24 Mar 2025 15:22:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7Dtg=WL=kernel.org=da.gomez@srs-se1.protection.inumbo.net>)
- id 1twioL-00059L-EF
- for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 14:29:53 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ <SRS0=BTZL=WL=cloud.com=alejandro.vallejo@srs-se1.protection.inumbo.net>)
+ id 1twjdh-00053Z-H2
+ for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 15:22:57 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7165b765-08bc-11f0-9ffa-bf95429c2676;
- Mon, 24 Mar 2025 15:29:50 +0100 (CET)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D03FF43AD5;
- Mon, 24 Mar 2025 14:29:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83974C4CEDD;
- Mon, 24 Mar 2025 14:29:48 +0000 (UTC)
+ id dc15ee4b-08c3-11f0-9ffa-bf95429c2676;
+ Mon, 24 Mar 2025 16:22:55 +0100 (CET)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3913958ebf2so3664346f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Mar 2025 08:22:55 -0700 (PDT)
+Received: from localhost (0545937c.skybroadband.com. [5.69.147.124])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3997f9957d9sm11182127f8f.9.2025.03.24.08.22.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Mar 2025 08:22:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,187 +47,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7165b765-08bc-11f0-9ffa-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1742826589;
-	bh=YCl0Xb8LGqIfcEjzkA/NTLRkDnLwd92Deb1BZs32/AY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Qys4fsVHHw1FlqG0Qz2G7Vw7QrDXZuoQXgZdcRPLI3U9zqp77nl5KORDkQJIuiLfe
-	 Qi7gzUyfWrPhWru22hVqfnUsj+kXy+1BQFE756ixfKuM+trN2YXXQE2pb99NNMwm8x
-	 SWij92hGdCaUPz+36wQThm9zANEfrHMvviGv5wDRMok7QLIStZtujBi/qnX1ItxpvY
-	 pCeaRFTNmuSLbyOgIwSZ3cEQyyYgNL4VrUA2at+OQdtGQJYmqUJMVB4vi2uDn09hYQ
-	 RmcNKopa+W+JoNgRW+CRakpUrOtrqKJjowvGwbIP0GuuWMXlvNwGSdxX++T1hkO3f7
-	 HZ9IfUeyk3Duw==
-Date: Mon, 24 Mar 2025 15:29:46 +0100
-From: Daniel Gomez <da.gomez@kernel.org>
-To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: Bjorn Helgaas <helgaas@kernel.org>, 
-	Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, 
-	linux-pci@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>
-Subject: Re: [PATCH v3 3/3] PCI/MSI: Convert pci_msi_ignore_mask to per MSI
- domain flag
-Message-ID: <qn7fzggcj6qe6r6gdbwcz23pzdz2jx64aldccmsuheabhmjgrt@tawf5nfwuvw7>
-References: <20250320210741.GA1099701@bhelgaas>
- <846c80f8-b80f-49fd-8a50-3fe8a473b8ec@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <846c80f8-b80f-49fd-8a50-3fe8a473b8ec@suse.com>
+X-Inumbo-ID: dc15ee4b-08c3-11f0-9ffa-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1742829775; x=1743434575; darn=lists.xenproject.org;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3VEWUjyrDkZUiiqHrR1WsWydWDqhe+XwfFtaz1hrJS8=;
+        b=f93wmTXX0+27qa2dFT3AJwh6xL4mi5g5nwOlq9JILiHl7GrAkzchoCFgXR7GYMds1r
+         2xy8HjsXmYbqQAbXZnzLxI6SqiiDGaSml/q2VqigqB5PPHRM2IL490c9ziMwkjAmLenQ
+         9KscvZNCTKtkIeI8HltkhBsrE4LUuHvUl7CWA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742829775; x=1743434575;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=3VEWUjyrDkZUiiqHrR1WsWydWDqhe+XwfFtaz1hrJS8=;
+        b=kUt42AipBiKgUIRJpdLdon59IqQM6NJJr81k+rrXuZiPKc+tFUZW/euffODtYkJ9jn
+         Ap3xk6tHjUggwo8An7CuHl0ZvbwxRywMlFNAhs7Bll8Ev1/TNrAzTPMOq/Mm2XLrnVCi
+         qtALVeBwH3ph+dP0rbhpPJWlgxpvabb9CggbafxK3fMfTxXBG/VvqGn9ygYo+mE72qSQ
+         m4Pk5x3vAhzvO//zMBcJtMoRn3yEuoJkOkv+RFkFf+cZJaCeDVzPg3biUC1HzLnNxD4L
+         FEUWTjB6kWVss4OPH6OS0J0zaYDfW8k0MtDDVcD4QCDI+xHZGAfnbuJUw0t7ZjbuZv/7
+         j7UQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXewvu9RkrkYXL9Sns1FkQD7lTrJwy9dccEbzHI6J0dda+c1m67jp6of/qXPxJIjM1BXCQ6Y0cngoo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxWtLVNwSkipspuNVQAqaQvpkEW7fZ6pYQIhndfaRpehIjBCj1I
+	N7Dw6o+jP44K0iFtLdyA7JSfnzaVqDDhlDtAxUQh5r6WCwRb72PhP2WApjg+ZRU=
+X-Gm-Gg: ASbGnctcrOfCuS9nb5l0KZxgkUzuogDhDFc4ko9Aq3eiarN9aqo3K40FqFea7mq3X75
+	92Eb+cOrgb+y27Mjbp1+Lc2XjYD3yZEkEMrPmebbtjdUyo+6wqnJoV/e8K0fJE4RKBlcQJtR9nZ
+	5TiGlSXIKU0GUwDvWeMYIgkYLcYmUSgzb1Pi5or06hjNezLYk6g+rZXDS/hPG4SK18mmWHwFO4p
+	3r1kop8wX0DBea7pzY6BugtNdrWV2hdZZHugYZO1tkCQ7BRrouYq3qyyvbkONGBqyaeKvVoZn3U
+	F55EPBOK86aBrQL2jV/vYZUyBQdQ4zqVB+zhW14EQ78dRRzNH6VYgC9jLhareSVCW5VrlsVVroY
+	=
+X-Google-Smtp-Source: AGHT+IFuDv5gKbkgFW3LKVNBP9IeNcu3pY40SmZuc2Ym+OBrdI2rIHLo3vLpQlkGy8KpqcIcXsvzgA==
+X-Received: by 2002:a05:6000:1f87:b0:391:2ba9:4c59 with SMTP id ffacd0b85a97d-3997f93988amr12349288f8f.43.1742829774791;
+        Mon, 24 Mar 2025 08:22:54 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 24 Mar 2025 15:22:53 +0000
+Message-Id: <D8OLLCXYKINR.3HD274I110XCF@cloud.com>
+Subject: Re: [PATCH] tools/arm: Fix nr_spis handling v2
+From: "Alejandro Vallejo" <alejandro.vallejo@cloud.com>
+To: "Orzel, Michal" <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>
+Cc: "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross"
+ <jgross@suse.com>, "Luca Fancellu" <luca.fancellu@arm.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, "Julien Grall" <julien@xen.org>,
+ "Bertrand Marquis" <bertrand.marquis@arm.com>
+X-Mailer: aerc 0.18.2
+References: <20250318090013.100823-1-michal.orzel@amd.com>
+ <D8KAQ3MH52YA.1G12M32NDFRJW@cloud.com>
+ <17608388-b900-45d2-bb74-8eec04ab1f76@amd.com>
+In-Reply-To: <17608388-b900-45d2-bb74-8eec04ab1f76@amd.com>
 
+On Mon Mar 24, 2025 at 1:08 PM GMT, Michal Orzel wrote:
+>
+>
+> On 19/03/2025 15:01, Alejandro Vallejo wrote:
+> >=20
+> > Doesn't this regenerate the golang bindings?
+> FYI, it does not. The bindings are already there for NrSpis and default v=
+alue is
+> does not result in a change (for verification I checked max_grant_frames =
+that
+> uses LIBXL_MAX_GRANT_DEFAULT).
+>
+> ~Michal
 
-Hi,
+Oh, good then. Though it does raise the (completely separate) question of h=
+ow
+correct those bindings might be if they ignore the IDL's default values... =
+:/
 
-On Fri, Mar 21, 2025 at 09:00:09AM +0100, Jürgen Groß wrote:
-> On 20.03.25 22:07, Bjorn Helgaas wrote:
-> > On Wed, Feb 19, 2025 at 10:20:57AM +0100, Roger Pau Monne wrote:
-> > > Setting pci_msi_ignore_mask inhibits the toggling of the mask bit for both
-> > > MSI and MSI-X entries globally, regardless of the IRQ chip they are using.
-> > > Only Xen sets the pci_msi_ignore_mask when routing physical interrupts over
-> > > event channels, to prevent PCI code from attempting to toggle the maskbit,
-> > > as it's Xen that controls the bit.
-> > > 
-> > > However, the pci_msi_ignore_mask being global will affect devices that use
-> > > MSI interrupts but are not routing those interrupts over event channels
-> > > (not using the Xen pIRQ chip).  One example is devices behind a VMD PCI
-> > > bridge.  In that scenario the VMD bridge configures MSI(-X) using the
-> > > normal IRQ chip (the pIRQ one in the Xen case), and devices behind the
-> > > bridge configure the MSI entries using indexes into the VMD bridge MSI
-> > > table.  The VMD bridge then demultiplexes such interrupts and delivers to
-> > > the destination device(s).  Having pci_msi_ignore_mask set in that scenario
-> > > prevents (un)masking of MSI entries for devices behind the VMD bridge.
-> > > 
-> > > Move the signaling of no entry masking into the MSI domain flags, as that
-> > > allows setting it on a per-domain basis.  Set it for the Xen MSI domain
-> > > that uses the pIRQ chip, while leaving it unset for the rest of the
-> > > cases.
-> > > 
-> > > Remove pci_msi_ignore_mask at once, since it was only used by Xen code, and
-> > > with Xen dropping usage the variable is unneeded.
-> > > 
-> > > This fixes using devices behind a VMD bridge on Xen PV hardware domains.
-> > > 
-> > > Albeit Devices behind a VMD bridge are not known to Xen, that doesn't mean
-> > > Linux cannot use them.  By inhibiting the usage of
-> > > VMD_FEAT_CAN_BYPASS_MSI_REMAP and the removal of the pci_msi_ignore_mask
-> > > bodge devices behind a VMD bridge do work fine when use from a Linux Xen
-> > > hardware domain.  That's the whole point of the series.
-> > > 
-> > > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> > > Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
-> > > Acked-by: Juergen Gross <jgross@suse.com>
-> > 
-> > Acked-by: Bjorn Helgaas <bhelgaas@google.com>
-> > 
-> > I assume you'll merge this series via the Xen tree.  Let me know if
-> > otherwise.
-> 
-> I've pushed the series to the linux-next branch of the Xen tree.
-> 
-> 
-> Juergen
-
-This patch landed in latest next-20250324 tag causing this crash:
-
-[    0.753426] BUG: kernel NULL pointer dereference, address: 0000000000000002
-[    0.753921] #PF: supervisor read access in kernel mode
-[    0.754286] #PF: error_code(0x0000) - not-present page
-[    0.754656] PGD 0 P4D 0
-[    0.754842] Oops: Oops: 0000 [#1]
-[    0.755080] CPU: 0 UID: 0 PID: 1 Comm: swapper Not tainted 6.14.0-rc7-next-20250324 #1 NONE
-[    0.755691] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
-[    0.756349] RIP: 0010:msix_prepare_msi_desc+0x39/0x80
-[    0.756390] Code: 20 c7 46 04 01 00 00 00 8b 56 4c 89 d0 0d 01 01 00 00 66 89 46 4c 8b 8f 64 02 00 00 89 4e 50 48 8b 8f 70 06 00 00 48 89 4e 58 <41> f6 40 02 40 75 2a c1 ea 02 bf 80 00 00 00 21 fa 25 7f ff ff ff
-[    0.756390] RSP: 0000:ffff8881002a76e0 EFLAGS: 00010202
-[    0.756390] RAX: 0000000000000101 RBX: ffff88810074d000 RCX: ffffc9000002e000
-[    0.756390] RDX: 0000000000000000 RSI: ffff8881002a7710 RDI: ffff88810074d000
-[    0.756390] RBP: ffff8881002a7710 R08: 0000000000000000 R09: ffff8881002a76b4
-[    0.756390] R10: 000000701000c001 R11: ffffffff82a3dc01 R12: 0000000000000000
-[    0.756390] R13: 0000000000000005 R14: 0000000000000000 R15: 0000000000000002
-[    0.756390] FS:  0000000000000000(0000) GS:0000000000000000(0000) knlGS:0000000000000000
-[    0.756390] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    0.756390] CR2: 0000000000000002 CR3: 0000000002a3d001 CR4: 00000000003706b0
-[    0.756390] Call Trace:
-[    0.756390]  <TASK>
-[    0.756390]  ? __die_body+0x1b/0x60
-[    0.756390]  ? page_fault_oops+0x2d0/0x310
-[    0.756390]  ? exc_page_fault+0x59/0xc0
-[    0.756390]  ? asm_exc_page_fault+0x22/0x30
-[    0.756390]  ? msix_prepare_msi_desc+0x39/0x80
-[    0.756390]  ? msix_capability_init+0x172/0x2c0
-[    0.756390]  ? __pci_enable_msix_range+0x1a8/0x1d0
-[    0.756390]  ? pci_alloc_irq_vectors_affinity+0x7c/0xf0
-[    0.756390]  ? vp_find_vqs_msix+0x187/0x400
-[    0.756390]  ? vp_find_vqs+0x2f/0x250
-[    0.756390]  ? snprintf+0x3e/0x50
-[    0.756390]  ? vp_modern_find_vqs+0x13/0x60
-[    0.756390]  ? init_vq+0x184/0x1e0
-[    0.756390]  ? vp_get_status+0x20/0x20
-[    0.756390]  ? virtblk_probe+0xeb/0x8d0
-[    0.756390]  ? __kernfs_new_node+0x122/0x160
-[    0.756390]  ? vp_get_status+0x20/0x20
-[    0.756390]  ? virtio_dev_probe+0x171/0x1c0
-[    0.756390]  ? really_probe+0xc2/0x240
-[    0.756390]  ? driver_probe_device+0x1d/0x70
-[    0.756390]  ? __driver_attach+0x96/0xe0
-[    0.756390]  ? driver_attach+0x20/0x20
-[    0.756390]  ? bus_for_each_dev+0x7b/0xb0
-[    0.756390]  ? bus_add_driver+0xe6/0x200
-[    0.756390]  ? driver_register+0x5e/0xf0
-[    0.756390]  ? virtio_blk_init+0x4d/0x90
-[    0.756390]  ? add_boot_memory_block+0x90/0x90
-[    0.756390]  ? do_one_initcall+0xe2/0x250
-[    0.756390]  ? xas_store+0x4b/0x4b0
-[    0.756390]  ? number+0x13b/0x260
-[    0.756390]  ? ida_alloc_range+0x36a/0x3b0
-[    0.756390]  ? parameq+0x13/0x90
-[    0.756390]  ? parse_args+0x10f/0x2a0
-[    0.756390]  ? do_initcall_level+0x83/0xb0
-[    0.756390]  ? do_initcalls+0x43/0x70
-[    0.756390]  ? rest_init+0x80/0x80
-[    0.756390]  ? kernel_init_freeable+0x70/0xb0
-[    0.756390]  ? kernel_init+0x16/0x110
-[    0.756390]  ? ret_from_fork+0x30/0x40
-[    0.756390]  ? rest_init+0x80/0x80
-[    0.756390]  ? ret_from_fork_asm+0x11/0x20
-[    0.756390]  </TASK>
-[    0.756390] Modules linked in:
-[    0.756390] CR2: 0000000000000002
-[    0.756390] ---[ end trace 0000000000000000 ]---
-[    0.756390] RIP: 0010:msix_prepare_msi_desc+0x39/0x80
-[    0.756390] Code: 20 c7 46 04 01 00 00 00 8b 56 4c 89 d0 0d 01 01 00 00 66 89 46 4c 8b 8f 64 02 00 00 89 4e 50 48 8b 8f 70 06 00 00 48 89 4e 58 <41> f6 40 02 40 75 2a c1 ea 02 bf 80 00 00 00 21 fa 25 7f ff ff ff
-[    0.756390] RSP: 0000:ffff8881002a76e0 EFLAGS: 00010202
-[    0.756390] RAX: 0000000000000101 RBX: ffff88810074d000 RCX: ffffc9000002e000
-[    0.756390] RDX: 0000000000000000 RSI: ffff8881002a7710 RDI: ffff88810074d000
-[    0.756390] RBP: ffff8881002a7710 R08: 0000000000000000 R09: ffff8881002a76b4
-[    0.756390] R10: 000000701000c001 R11: ffffffff82a3dc01 R12: 0000000000000000
-[    0.756390] R13: 0000000000000005 R14: 0000000000000000 R15: 0000000000000002
-[    0.756390] FS:  0000000000000000(0000) GS:0000000000000000(0000) knlGS:0000000000000000
-[    0.756390] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    0.756390] CR2: 0000000000000002 CR3: 0000000002a3d001 CR4: 00000000003706b0
-[    0.756390] note: swapper[1] exited with irqs disabled
-[    0.782774] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009
-[    0.783560] Kernel Offset: disabled
-[    0.783909] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009 ]---
-
-
-msix_prepare_msi_desc+0x39/0x80:
-msix_prepare_msi_desc at drivers/pci/msi/msi.c:616
- 611            desc->nvec_used                         = 1;
- 612            desc->pci.msi_attrib.is_msix            = 1;
- 613            desc->pci.msi_attrib.is_64              = 1;
- 614            desc->pci.msi_attrib.default_irq        = dev->irq;
- 615            desc->pci.mask_base                     = dev->msix_base;
->616<           desc->pci.msi_attrib.can_mask           = !(info->flags & MSI_FLAG_NO_MASK) &&
- 617                                                      !desc->pci.msi_attrib.is_virtual;
- 618
- 619            if (desc->pci.msi_attrib.can_mask) {
- 620                    void __iomem *addr = pci_msix_desc_addr(desc);
- 621
-
-Reverting patch 3 fixes the issue.
-
-Daniel
+Cheers,
+Alejandro
 
