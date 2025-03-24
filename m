@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 019EEC36008
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 09:15:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.925114.1327989 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9113C36008
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Mar 2025 09:15:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.925116.1327999 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twdtu-0000we-7l; Mon, 24 Mar 2025 09:15:18 +0000
+	id 1twdu0-0001Et-G4; Mon, 24 Mar 2025 09:15:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 925114.1327989; Mon, 24 Mar 2025 09:15:18 +0000
+Received: by outflank-mailman (output) from mailman id 925116.1327999; Mon, 24 Mar 2025 09:15:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1twdtu-0000wX-57; Mon, 24 Mar 2025 09:15:18 +0000
-Received: by outflank-mailman (input) for mailman id 925114;
- Mon, 24 Mar 2025 09:15:16 +0000
+	id 1twdu0-0001Em-Cj; Mon, 24 Mar 2025 09:15:24 +0000
+Received: by outflank-mailman (input) for mailman id 925116;
+ Mon, 24 Mar 2025 09:15:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xDgH=WL=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1twdts-0000ZM-L1
- for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 09:15:16 +0000
+ id 1twdty-0000ZM-N7
+ for xen-devel@lists.xenproject.org; Mon, 24 Mar 2025 09:15:22 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 7fa64b73-0890-11f0-9ea2-5ba50f476ded;
- Mon, 24 Mar 2025 10:15:16 +0100 (CET)
+ id 833fe8a0-0890-11f0-9ea2-5ba50f476ded;
+ Mon, 24 Mar 2025 10:15:22 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E3CB71A2D;
- Mon, 24 Mar 2025 02:15:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E37861CDD;
+ Mon, 24 Mar 2025 02:15:27 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.81.213])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3145B3F63F;
- Mon, 24 Mar 2025 02:15:13 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0A4453F63F;
+ Mon, 24 Mar 2025 02:15:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,159 +44,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7fa64b73-0890-11f0-9ea2-5ba50f476ded
+X-Inumbo-ID: 833fe8a0-0890-11f0-9ea2-5ba50f476ded
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Subject: [PATCH v3 1/5] xen/arm: Create tee command line parameter
-Date: Mon, 24 Mar 2025 10:14:32 +0100
-Message-ID: <e8e930e8de1524f04d9e46139742cc9b27c91d6d.1742570590.git.bertrand.marquis@arm.com>
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v3 4/5] xen/arm: ffa: Add indirect message between VM
+Date: Mon, 24 Mar 2025 10:14:35 +0100
+Message-ID: <4a9867855093453eaad4f548df8e92162176eed9.1742570590.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1742570590.git.bertrand.marquis@arm.com>
 References: <cover.1742570590.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new command line parameter "tee=" to be used to explicitly select
-what tee mediator is to be used by Xen and fail if it does not exist
-or the probe function for it failed.
-
-Without specifying which tee is to be used, Xen will use the first one
-for which the probe function succeeds which depends on the order of the
-mediator list which depends on the compiler.
-Using the command line argument, it is now possible to explicit request
-a specific TEE mediator and panic on boot if it is not available.
+Add support for indirect messages between VMs.
+This is only enabled if CONFIG_FFA_VM_TO_VM is selected.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
 Changes in v3:
-- Properly classify tee as arm specific (Jan)
+- Move vm to vm indirect message handling in a sub function to simplify
+  lock handling and make implementation easier to read
 Changes in v2:
-- Patch introduced to add a command line selection of the TEE
+- Switch ifdef to IS_ENABLED
 ---
- docs/misc/xen-command-line.pandoc  | 14 ++++++++++++++
- xen/arch/arm/include/asm/tee/tee.h |  4 ++++
- xen/arch/arm/tee/tee.c             | 31 ++++++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
+ xen/arch/arm/tee/ffa_msg.c | 96 ++++++++++++++++++++++++++++++++++----
+ 1 file changed, 88 insertions(+), 8 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 89db6e83be66..0c2ff542a138 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2651,6 +2651,20 @@ Specify the per-cpu trace buffer size in pages.
- 
- Flag to enable TSC deadline as the APIC timer mode.
- 
-+### tee (arm)
-+> `= <string>`
-+
-+Specify the TEE mediator to be probed and use.
-+
-+The default behaviour is to probe all supported TEEs supported by Xen and use
-+the first one successfully probed. When this parameter is passed, Xen will
-+probe only the TEE mediator passed as argument and boot will fail if this
-+mediator is not properly probed or if the requested TEE is not supported by
-+Xen.
-+
-+This parameter can be set to `optee` of `ffa` if the corresponding mediators
-+are compiled in.
-+
- ### tevt_mask
- > `= <integer>`
- 
-diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/asm/tee/tee.h
-index 0169fd746bcd..15d664e28dce 100644
---- a/xen/arch/arm/include/asm/tee/tee.h
-+++ b/xen/arch/arm/include/asm/tee/tee.h
-@@ -55,6 +55,9 @@ struct tee_mediator_desc {
-     /* Printable name of the TEE. */
-     const char *name;
- 
-+    /* Command line name of the TEE (to be used with tee= cmdline option) */
-+    const char *cmdline_name;
-+
-     /* Mediator callbacks as described above. */
-     const struct tee_mediator_ops *ops;
- 
-@@ -77,6 +80,7 @@ void tee_free_domain_ctx(struct domain *d);
- static const struct tee_mediator_desc __tee_desc_##_name __used     \
- __section(".teemediator.info") = {                                  \
-     .name = _namestr,                                               \
-+    .cmdline_name = #_name,                                         \
-     .ops = _ops,                                                    \
-     .tee_type = _type                                               \
+diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
+index ee594e737fc7..c21083b5e68f 100644
+--- a/xen/arch/arm/tee/ffa_msg.c
++++ b/xen/arch/arm/tee/ffa_msg.c
+@@ -88,6 +88,72 @@ out:
+                  resp.a7 & mask);
  }
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 3f65e45a7892..066b5ba40f9d 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -19,12 +19,17 @@
- #include <xen/errno.h>
- #include <xen/init.h>
- #include <xen/types.h>
-+#include <xen/param.h>
  
- #include <asm/tee/tee.h>
- 
- extern const struct tee_mediator_desc _steemediator[], _eteemediator[];
- static const struct tee_mediator_desc __read_mostly *cur_mediator;
- 
-+/* Select the TEE mediator using a name on command line. */
-+static char __initdata opt_mediator[16] = "";
-+string_param("tee", opt_mediator);
++static int32_t ffa_msg_send2_vm(uint16_t dst_id,
++                                const struct ffa_part_msg_rxtx *src_msg)
++{
++    struct domain *dst_d;
++    struct ffa_ctx *dst_ctx;
++    struct ffa_part_msg_rxtx *dst_msg;
++    int err;
++    int32_t ret;
 +
- /*
-  * TODO: Add function to alter Dom0 DTB, so we can properly describe
-  * present TEE.
-@@ -81,14 +86,40 @@ static int __init tee_init(void)
- {
-     const struct tee_mediator_desc *desc;
- 
-+    if ( strcmp(opt_mediator, "") )
-+        printk(XENLOG_INFO "TEE Mediator %s selected from command line\n",
-+               opt_mediator);
++    if ( dst_id == 0 )
++        /* FF-A ID 0 is the hypervisor, this is not valid */
++        return FFA_RET_INVALID_PARAMETERS;
 +
-+    /*
-+     * When a specific TEE is selected using the 'tee=' command line
-+     * argument, we panic if the probe fails or if the requested TEE is not
-+     * supported.
-+     */
-     for ( desc = _steemediator; desc != _eteemediator; desc++ )
-     {
-+        if ( strcmp(opt_mediator, "") &&
-+             strncmp(opt_mediator, desc->cmdline_name, sizeof(opt_mediator)) )
-+            continue;
++    /* This is also checking that dest is not src */
++    err = rcu_lock_live_remote_domain_by_id(dst_id - 1, &dst_d);
++    if ( err )
++        return FFA_RET_INVALID_PARAMETERS;
 +
-         if ( desc->ops->probe() )
-         {
-             printk(XENLOG_INFO "Using TEE mediator for %s\n", desc->name);
-             cur_mediator = desc;
-             return 0;
-         }
-+        else if ( strcmp(opt_mediator, "") )
-+        {
-+            panic("TEE mediator %s from command line probe failed\n",
-+                  opt_mediator);
-+            return -EFAULT;
-+        }
++    if ( dst_d->arch.tee == NULL )
++    {
++        ret = FFA_RET_INVALID_PARAMETERS;
++        goto out_unlock;
 +    }
 +
-+    if ( strcmp(opt_mediator, "") )
++    dst_ctx = dst_d->arch.tee;
++    if ( !dst_ctx->guest_vers )
 +    {
-+        panic("TEE Mediator %s from command line not supported\n",
-+              opt_mediator);
-+        return -EINVAL;
++        ret = FFA_RET_INVALID_PARAMETERS;
++        goto out_unlock;
++    }
++
++    /* we need to have enough space in the destination buffer */
++    if ( dst_ctx->page_count * FFA_PAGE_SIZE <
++            (sizeof(struct ffa_part_msg_rxtx) + src_msg->msg_size) )
++    {
++        ret = FFA_RET_NO_MEMORY;
++        goto out_unlock;
++    }
++
++    /* This also checks that destination has set a Rx buffer */
++    ret = ffa_rx_acquire(dst_d);
++    if ( ret )
++        goto out_unlock;
++
++    dst_msg = dst_ctx->rx;
++
++    /* prepare destination header */
++    dst_msg->flags = 0;
++    dst_msg->reserved = 0;
++    dst_msg->msg_offset = sizeof(struct ffa_part_msg_rxtx);
++    dst_msg->send_recv_id = src_msg->send_recv_id;
++    dst_msg->msg_size = src_msg->msg_size;
++
++    memcpy(dst_ctx->rx + sizeof(struct ffa_part_msg_rxtx),
++           ((void *)src_msg) + src_msg->msg_offset, src_msg->msg_size);
++
++    /* receiver rx buffer will be released by the receiver*/
++
++out_unlock:
++    rcu_unlock_domain(dst_d);
++    if ( !ret )
++        ffa_raise_rx_buffer_full(dst_d);
++
++    return ret;
++}
++
+ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
+ {
+     struct domain *src_d = current->domain;
+@@ -96,9 +162,6 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
+     uint16_t dst_id, src_id;
+     int32_t ret;
+ 
+-    if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( !spin_trylock(&src_ctx->tx_lock) )
+         return FFA_RET_BUSY;
+ 
+@@ -106,10 +169,10 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
+     src_id = src_msg->send_recv_id >> 16;
+     dst_id = src_msg->send_recv_id & GENMASK(15,0);
+ 
+-    if ( src_id != ffa_get_vm_id(src_d) || !FFA_ID_IS_SECURE(dst_id) )
++    if ( src_id != ffa_get_vm_id(src_d) )
+     {
+         ret = FFA_RET_INVALID_PARAMETERS;
+-        goto out_unlock_tx;
++        goto out;
      }
  
-     return 0;
+     /* check source message fits in buffer */
+@@ -118,13 +181,30 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs)
+          src_msg->msg_offset < sizeof(struct ffa_part_msg_rxtx) )
+     {
+         ret = FFA_RET_INVALID_PARAMETERS;
+-        goto out_unlock_tx;
++        goto out;
+     }
+ 
+-    ret = ffa_simple_call(FFA_MSG_SEND2,
++    if ( FFA_ID_IS_SECURE(dst_id) )
++    {
++        /* Message for a secure partition */
++        if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
++        {
++            ret = FFA_RET_NOT_SUPPORTED;
++            goto out;
++        }
++
++        ret = ffa_simple_call(FFA_MSG_SEND2,
+                           ((uint32_t)ffa_get_vm_id(src_d)) << 16, 0, 0, 0);
++    }
++    else if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++    {
++        /* Message for a VM */
++        ret = ffa_msg_send2_vm(dst_id, src_msg);
++    }
++    else
++        ret = FFA_RET_INVALID_PARAMETERS;
+ 
+-out_unlock_tx:
++out:
+     spin_unlock(&src_ctx->tx_lock);
+     return ret;
+ }
 -- 
 2.47.1
 
