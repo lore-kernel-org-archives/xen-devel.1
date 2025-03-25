@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC1BC36008
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Mar 2025 17:37:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.926815.1329646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60AF1C36008
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Mar 2025 17:41:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.926851.1329691 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tx8D6-0000RN-5q; Tue, 25 Mar 2025 17:37:08 +0000
+	id 1tx8H5-0004HV-QM; Tue, 25 Mar 2025 17:41:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 926815.1329646; Tue, 25 Mar 2025 17:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 926851.1329691; Tue, 25 Mar 2025 17:41:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tx8D6-0000RG-28; Tue, 25 Mar 2025 17:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 926815;
- Tue, 25 Mar 2025 17:37:06 +0000
+	id 1tx8H5-0004Gn-MO; Tue, 25 Mar 2025 17:41:15 +0000
+Received: by outflank-mailman (input) for mailman id 926851;
+ Tue, 25 Mar 2025 17:41:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ogJ6=WM=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tx8D4-0000Qx-8u
- for xen-devel@lists.xenproject.org; Tue, 25 Mar 2025 17:37:06 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ <SRS0=+BiV=WM=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tx8H4-00045y-Aj
+ for xen-devel@lists.xenproject.org; Tue, 25 Mar 2025 17:41:14 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c4a6873d-099f-11f0-9ea3-5ba50f476ded;
- Tue, 25 Mar 2025 18:37:05 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ab771575040so11426666b.1
- for <xen-devel@lists.xenproject.org>; Tue, 25 Mar 2025 10:37:05 -0700 (PDT)
-Received: from fedora.. (user-109-243-64-225.play-internet.pl.
- [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac3efb65871sm897012066b.96.2025.03.25.10.37.03
+ id 58ce70f9-09a0-11f0-9ea3-5ba50f476ded;
+ Tue, 25 Mar 2025 18:41:13 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43d04dc73b7so62128485e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 25 Mar 2025 10:41:13 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d4fdbd0a9sm158386185e9.38.2025.03.25.10.41.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 10:37:03 -0700 (PDT)
+ Tue, 25 Mar 2025 10:41:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,116 +47,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4a6873d-099f-11f0-9ea3-5ba50f476ded
+X-Inumbo-ID: 58ce70f9-09a0-11f0-9ea3-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742924224; x=1743529024; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1742924473; x=1743529273; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3gOQ8U3cpa7RAOGnJUwoO2nwCYBfxpYAKHyGklE8Ip4=;
-        b=aLiWBSLnrsHISMhIq0osqsP7U6f8A5Cmf/Ady0QGf25GRa6e9oF7zEmoEbZzoBRRza
-         sjTkBLaWCFdDA5mgGdHNvUxswEXrE1K36PglrcHFK2KxPZHKMRG3HW7HPThAijrwkPR4
-         RoeNiiXq3e7pxt5zbP4nODUb5ej5uyo3cwBP2kXEXg35eoQCV5RkqBepDwrwSydzt9bt
-         8WQdY1YjLEneWrkMLqEzc63oLwR5LVbWWcHoK1FrFTrVWg0F3gk3PS+1IdHCstnk9UH3
-         Pfv9MUblV1o3OpdQCIdtpJQvxfYoK14sfBF33WsgYwdhoer1wEunrgVKilspYbHcRRu1
-         JYww==
+        bh=39zuQsNX+5s9i10elnMfxeTcLe1AG54UNFOTJvkzFeQ=;
+        b=jDm1GHfuQGstW/K4HYt68g2TJFwvM4PWt7EMgzQWk5w/80EVKcmtrrmfVOoglq6AUe
+         FG4TVGB5qifj8lEG5J+clTrTLEOvJ95VImjk6bYUtREkPL/wo/LZxtrkzagy6Qq3tGe3
+         uR6f86GpmQbadcs1w3LAX1IiWkSfc/LCYE3g0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742924224; x=1743529024;
+        d=1e100.net; s=20230601; t=1742924473; x=1743529273;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3gOQ8U3cpa7RAOGnJUwoO2nwCYBfxpYAKHyGklE8Ip4=;
-        b=sBswTeHSjwotxKfticvhBN+9OchwV1TVlWrIXpgW73qsE9G7qm+9/BL7XHnzVrM4f/
-         nfM012ClmvK/GML+/Qn4xFWBRUgaUWCNd8cDnfjr1QPI8n0kqqZ/diiA61d1q7Yp+Wbw
-         bFTTkV+ESqXaqf2trqg3xPmxXoX6GOfen9mgThhT0lfA6rZBsUqR9K4PRYjj09cHVj0W
-         +ZGmtI8Lf5x/qpY8kgtn/t6l6xc6pPDeY+MSAKolPdo+HySoTCggNY5wR9oaK1sTE0XB
-         HgUlugHb6vIMWGj82hKNOPwubx06CMRA2j8dTT+brOBaX1YKirRb+iv23MRd+hyim3rr
-         guFw==
-X-Gm-Message-State: AOJu0YwTAS7gGAt0ToiS6GNbL2hGsq9w2TmV2WWfa1wl9iT4S1SbeaQL
-	JH7oWRGU9vfww+xXtLMh1/SBpS/8g/7gWqlkUN9MMTHkeKyYWcrwLSxYXA==
-X-Gm-Gg: ASbGncsEqlas/zX8pf83KkIS7u9mL6k6msDwQr3/DObNcn/VQG+u6tgno8Ai3pb7EDb
-	9LJoYyN2Gf37SYn48+yGK+ws6mas8HYmhgR49r1jW/vR7u8N+3RrWd3jx7rqOe6gjymS4vGxIhK
-	CmG0sSXx0RhbklfzUvUBU0j7iUAgcV0ISJFM4jbVcW2Og6D3l5lRPHmZjz+MQP3J+JNt+97SO5h
-	JpQBnjxB0dKlghg1gtV8Xf9I/ma1HQdZyqCCjXDHRdvlPE8HrEefQMU6ONS5uYIx0HnswiCgBbO
-	Cqr6VVnsWkp8WnVdVVEgWSGUnhz14f3xK1NxicvyNGSuxMWBbwK6IzoQ+WqyulXZ0CM789nLPHl
-	FtqIsC0Nj/BKDBQ==
-X-Google-Smtp-Source: AGHT+IGSNMLfyWyHsdvuXtC0d/YEBZrwaj+iwhePtkAh3ElgyY76m3+nDlVpHDJic/oA99k50+JABg==
-X-Received: by 2002:a17:907:724a:b0:ac6:b80b:2331 with SMTP id a640c23a62f3a-ac6e08f984cmr59383866b.4.1742924224234;
-        Tue, 25 Mar 2025 10:37:04 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 2/4] automation: select APLIC and IMSIC to handle both wired interrupts and MSIs
-Date: Tue, 25 Mar 2025 18:36:58 +0100
-Message-ID: <f809b23b55c073997feac22665abb66a83633faa.1742918184.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <1a04711f46a1c0a7cdf709abc37f143747215495.1742918184.git.oleksii.kurochko@gmail.com>
-References: <1a04711f46a1c0a7cdf709abc37f143747215495.1742918184.git.oleksii.kurochko@gmail.com>
+        bh=39zuQsNX+5s9i10elnMfxeTcLe1AG54UNFOTJvkzFeQ=;
+        b=i+GI/axR/i5EPIk55+Tn0FBkls4mpEp/8qOJijwBqRttLD5td0sFT0GTMEFDh9sdGC
+         v8A9FmtcZyphEkmUBJsOCrO+OcQZy9x95BU9LpM+EbFrpK02wrun2jblPSIxp16WjUrT
+         gO7pVDnjsUfM7osr7dE1Gt/zAIiBeZ5tfsLgS1aZSoXkkgkG8wr1vUH9/mJ5ivfeRvwr
+         jt/NPFN5abdUJQnhZCzyOINMkLxZgYOsW7xcMm8u3BAEEs8e9viA2jfhLJZBy/yQ2pPO
+         HF3Sqqck37/TgVSSymqTSIQfhY4X532xH8QJQ2AkaIyPChg9hrIK+Q1mmH21K4IoJnQW
+         a9OA==
+X-Gm-Message-State: AOJu0YwnLYiIE2/zJmu10D0d4ZFRqwXqxwWkHcS565+HkdvTetYiskGH
+	MuUn/Z44oIdN9F9op4zGQmRCiDm5DwIIK+vQxb2uwkVPQigkxHFZHSrpeIAHD2FP/lzw4avHV89
+	cQbQ=
+X-Gm-Gg: ASbGnctnLGjn54pwjiEl876isY4szBFllePrhdjm1Tx3p7dQ96p7ROueGlW4mUKShPz
+	6AUbcEIMf/c7D3viWaA6IHbIYTBmFpUgr1r9SGjdPZ1gDSiX2AOlSRHRJy80/siAfgC4rWp7w78
+	//wLm/em8RFJVMlUxQ+nEI5EAM/QOwxURAkktJNmJ98QxKLvERhvXppZE82mJo1CfPPrtnP7PRH
+	Aufan8ViTTUuPz1NTS+4gKHBf2xK+sAEAIqCGaOHbTPHHbkYfxg+jQei75xKPUiJmYmS9D036H1
+	HKd/26DJNGnaMNFAeFuxN2seuOFvV5lVHA/vcuhJeZSpbXIjDVwu5s5Lyi4fn62kLsIz3cMcgs9
+	I3ybRb38yjFOVw57RZw==
+X-Google-Smtp-Source: AGHT+IEcr5Ypu2eA71qKcEz4MS9slSJvj8G8O1faoSHHalixmW5/AiBaSDWbwNspqBwt7JbzAdaqJw==
+X-Received: by 2002:a05:600c:8488:b0:43c:f5fe:5c26 with SMTP id 5b1f17b1804b1-43d6dc2e933mr38171095e9.4.1742924473028;
+        Tue, 25 Mar 2025 10:41:13 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	=?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>
+Subject: [PATCH 1/2] x86/hvm: Rearrange the logic in hvmemul_{read,write}_cr()
+Date: Tue, 25 Mar 2025 17:41:08 +0000
+Message-Id: <20250325174109.267974-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250325174109.267974-1-andrew.cooper3@citrix.com>
+References: <20250325174109.267974-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-By default, the `aia` option is set to "none" which selects the SiFive PLIC for
-handling wired interrupts. However, since PLIC is now considered obsolete and
-will not be supported by Xen now, APLIC and IMSIC are selected instead to manage
-both wired interrupts and MSIs.
+In hvmemul_read_cr(), make the TRACE()/X86EMUL_OKAY path common in preparation
+for adding a %cr8 case.  Use a local 'val' variable instead of always
+operating on a deferenced pointer.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+In both, calculate curr once.
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Petr Beneš <w1benny@gmail.com>
 
-Tests results:
-  https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/1734636979
-
-Based on the source code of Qemu the support of AIA should be present from 7.0.0:
-   28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
-
-```
-$ git tag --contains 28d8c281200f20a060c456c81fd1564f3d119fda
-staging-mjt-test
-trivial-patches-pull-request
-v7.0.0
-v7.0.0-rc0
-v7.0.0-rc1
-v7.0.0-rc2
-v7.0.0-rc3
-v7.0.0-rc4
-v7.1.0
-...
-```
-
-And in Xen's GitLab CI it is used 7.2.11:
-```
-$ CONTAINER_NO_PULL=1 CONTAINER=bookworm-riscv64 ./automation/scripts/containerize 
-*** Launching container ...   
-user@6a1d1f0077fe:/build$ qemu-system-riscv64 --version
-QEMU emulator version 7.2.11 (Debian 1:7.2+dfsg-7+deb12u6)
-Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
-```
-
+v2:
+ * New
 ---
-Changes in v2:
- - Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
- automation/scripts/qemu-smoke-riscv64.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/x86/hvm/emulate.c | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/automation/scripts/qemu-smoke-riscv64.sh b/automation/scripts/qemu-smoke-riscv64.sh
-index 8f755d0a6a..b2e112c942 100755
---- a/automation/scripts/qemu-smoke-riscv64.sh
-+++ b/automation/scripts/qemu-smoke-riscv64.sh
-@@ -6,7 +6,7 @@ set -ex -o pipefail
- rm -f smoke.serial
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index dbf6b5543adf..172ed55bd5e7 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2273,23 +2273,30 @@ static int cf_check hvmemul_write_io(
  
- export TEST_CMD="qemu-system-riscv64 \
--    -M virt \
-+    -M virt,aia=aplic-imsic \
-     -smp 1 \
-     -nographic \
-     -m 2g \
+ static int cf_check hvmemul_read_cr(
+     unsigned int reg,
+-    unsigned long *val,
++    unsigned long *_val,
+     struct x86_emulate_ctxt *ctxt)
+ {
++    struct vcpu *curr = current;
++    unsigned long val;
++
+     switch ( reg )
+     {
+     case 0:
+     case 2:
+     case 3:
+     case 4:
+-        *val = current->arch.hvm.guest_cr[reg];
+-        TRACE(TRC_HVM_CR_READ64, reg, *val, *val >> 32);
+-        return X86EMUL_OKAY;
+-    default:
++        val = curr->arch.hvm.guest_cr[reg];
+         break;
++
++    default:
++        return X86EMUL_UNHANDLEABLE;
+     }
+ 
+-    return X86EMUL_UNHANDLEABLE;
++    TRACE(TRC_HVM_CR_READ64, reg, val, val >> 32);
++
++    *_val = val;
++
++    return X86EMUL_OKAY;
+ }
+ 
+ static int cf_check hvmemul_write_cr(
+@@ -2297,6 +2304,7 @@ static int cf_check hvmemul_write_cr(
+     unsigned long val,
+     struct x86_emulate_ctxt *ctxt)
+ {
++    struct vcpu *curr = current;
+     int rc;
+ 
+     TRACE(TRC_HVM_CR_WRITE64, reg, val, val >> 32);
+@@ -2307,13 +2315,13 @@ static int cf_check hvmemul_write_cr(
+         break;
+ 
+     case 2:
+-        current->arch.hvm.guest_cr[2] = val;
++        curr->arch.hvm.guest_cr[2] = val;
+         rc = X86EMUL_OKAY;
+         break;
+ 
+     case 3:
+     {
+-        bool noflush = hvm_pcid_enabled(current) && (val & X86_CR3_NOFLUSH);
++        bool noflush = hvm_pcid_enabled(curr) && (val & X86_CR3_NOFLUSH);
+ 
+         if ( noflush )
+             val &= ~X86_CR3_NOFLUSH;
 -- 
-2.48.1
+2.39.5
 
 
