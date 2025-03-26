@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5910FC36008
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Mar 2025 15:51:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.928039.1330797 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1006C3600B
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Mar 2025 16:05:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.928051.1330818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txT2N-00060M-AK; Wed, 26 Mar 2025 15:51:27 +0000
+	id 1txTFM-0001hP-Qr; Wed, 26 Mar 2025 16:04:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 928039.1330797; Wed, 26 Mar 2025 15:51:27 +0000
+Received: by outflank-mailman (output) from mailman id 928051.1330818; Wed, 26 Mar 2025 16:04:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txT2N-00060F-7j; Wed, 26 Mar 2025 15:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 928039;
- Wed, 26 Mar 2025 15:51:25 +0000
+	id 1txTFM-0001hI-NT; Wed, 26 Mar 2025 16:04:52 +0000
+Received: by outflank-mailman (input) for mailman id 928051;
+ Wed, 26 Mar 2025 16:04:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=16MU=WN=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1txT2L-000609-HB
- for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 15:51:25 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=7Vdm=WN=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1txTFL-0001Sq-WB
+ for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 16:04:52 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2bb96f21-0a5a-11f0-9ea3-5ba50f476ded;
- Wed, 26 Mar 2025 16:51:24 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cf680d351so6735045e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 26 Mar 2025 08:51:24 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9ef23esm17076793f8f.81.2025.03.26.08.51.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Mar 2025 08:51:23 -0700 (PDT)
+ id 0c831113-0a5c-11f0-9ea3-5ba50f476ded;
+ Wed, 26 Mar 2025 17:04:51 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D3EB21F391;
+ Wed, 26 Mar 2025 16:04:50 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7F2B11374A;
+ Wed, 26 Mar 2025 16:04:50 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id fPuLHaIl5Gf0aAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 26 Mar 2025 16:04:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,96 +54,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bb96f21-0a5a-11f0-9ea3-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743004284; x=1743609084; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qKijxke+AzpWn/noJtkVwwHiLuyFBHz6vFTC2DadQ2M=;
-        b=MiRptaj6nyzweGXS0ubrbF/8FOwzTg5totStpyzPx1q5CFLyLWvPDEUlkw3LH5njSc
-         n2uZd6BW+JNTiPv9U8nULCrB0BfHSFyo1nZYBYv6jquw0ivvpHSto/hscnamZQLc00g5
-         1+6BVLqe7UKVSWjtjUvE8jt/8ql3oGiNgWlk8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743004284; x=1743609084;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qKijxke+AzpWn/noJtkVwwHiLuyFBHz6vFTC2DadQ2M=;
-        b=B8/zXnlQJpEVenMCC0W62YblqvfllYcIhw/eODH6R/1L4hXeOYjJGOGqJrZ7IIm6Ol
-         IdSRvWDrlOY3y+FQqMub5vanYhJxWhTRITmOG/nqXpoXrMIJdPydW763Zzfj9l7tR/0y
-         wSz8HobWr+ZElSeMTYujflwh31ncGuWlyFkKBmGupqJMpDPwOMM9i+7bnlclrJxVGvIF
-         WjHNeLaaLhy8BBR+K6EtQHaq6/XvWZSLm9PlQpRKgCHuaytrvZGljSYS74KYkzEfwnLY
-         1Cf/dbAyXVypGNbQxHUXEwXZ3SVDCXoCc++OP0zC5UHD11XHgSucZltOi9SKAwoOO9nM
-         JzMg==
-X-Gm-Message-State: AOJu0YzrVawagHyMAzUpI4o9tFN+WTj7m+uXNNcMJKLGdX40BH4Nd1ya
-	2TXsQ7z46qsuALIKUcJOF3F2c+P+57oJLI2u8J03QXku4J6/MqO5WEriF+lbuoQ0sHF6jzAffJg
-	vtdE=
-X-Gm-Gg: ASbGncsLrc+8bcTyfSo3LuT+UPpWKE5LNgeyI3ZqNuuyBhUzWnDlJVzrWZYCWkx6AzN
-	KBW80NKlhmqRa3CDsrKVEs7u5bcDfUuHmyKUlzRk4LmUQaQtrlfZB75oCwC0ckmLGGkOxRjR2dE
-	S1DU/lVjJNwPnuBx0+R67ycNnGX2W9OOb5MuVOWXfKX1L4Me9jfGG+BYYRhi6O5Y1K7oWqOkncf
-	RXontjhudpXlCQ1XqYeiNFwNOqP0lxNY/LpjRZ+fFln92Dc/rKfafRFViLvkBUN0fzn+6cnpy4o
-	2r5f3Ouwp8fnPTzQbq3OJ4OxGiQomayXnV5LhrARWFTzvPcr/qGLcRQkKfp3K/8kQ2eQD1E+UaE
-	FVJi/9inOOqyO+/EMxg==
-X-Google-Smtp-Source: AGHT+IFlTNkdKsVI29te81xBexb3cl6+MmL7h4BMYQCLGUeF6htMKF1fxWFoqnR3D2YelCt7eAQhqg==
-X-Received: by 2002:a05:600c:6c9:b0:439:91c7:895a with SMTP id 5b1f17b1804b1-43d775be4b3mr29222435e9.7.1743004283672;
-        Wed, 26 Mar 2025 08:51:23 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+X-Inumbo-ID: 0c831113-0a5c-11f0-9ea3-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1743005091; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=76i+/SKsEEHaJ6yk2WS1+eCvnz0Uet3AVyzi+W0nPmE=;
+	b=lc7ISap1qr60d3IkB+rP89ZMQVVczERMCvfFTFvEUjZF1yFOBRPG9San4+Bwd5rhjQCrRU
+	Eu4PTMeNtVGJTWBV6Xs+OYRjIGloU/TiuFsgHodS4NgT1aBdHCOf9tXokd0jXi4dHoeVFp
+	WpgeZvTc76oUb4upmkHnc+2XEhWsQIY=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=OBllyPoq
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1743005090; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=76i+/SKsEEHaJ6yk2WS1+eCvnz0Uet3AVyzi+W0nPmE=;
+	b=OBllyPoqtfr36dk/GCUYk0V7W32FfU6lwoY1tm6wgGo4J33I08dBfiC7hjZFyCG1wUo5BS
+	/jm3FB4C/L7aFvWpmX3xhhKS/QKnnROtYN6rBVqA3o7ZtTQbnY2JKvXX2oiZjNAv/Zu+0B
+	PVtq9VKd75037lnxu4MJADIpJIm+WF8=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH] ARM/vgic: Fix out-of-bounds accesses in vgic_mmio_write_sgir()
-Date: Wed, 26 Mar 2025 15:51:21 +0000
-Message-Id: <20250326155121.364658-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 1/6] SUPPORT.md: make Linux based stubdom fully supported
+Date: Wed, 26 Mar 2025 17:04:35 +0100
+Message-ID: <20250326160442.19706-2-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250326160442.19706-1-jgross@suse.com>
+References: <20250326160442.19706-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: D3EB21F391
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-1.51 / 50.00];
+	BAYES_HAM(-3.00)[99.98%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FREEMAIL_CC(0.00)[suse.com,gmail.com,xenproject.org,citrix.com,vates.tech,amd.com,xen.org,kernel.org];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid,suse.com:email];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	DKIM_TRACE(0.00)[suse.com:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 
-The switch() statement is over bits 24:25 (unshifted) of the guest provided
-value.  This makes case 0x3: dead, and not an implementation of the 4th
-possible state.
+All patches needed for running with a Linux stubdom device model are
+in the tree and QubesOS is using and testing Linux stubdoms nowadays.
 
-A guest which writes (3<<24)|(ff<<16) to this register will skip the early
-exit, then enter bitmap_for_each() with targets not bound by nr_vcpus.
+Switch support from "Tech Preview" to "Supported".
 
-If the guest has fewer than 8 vCPUs, bitmap_for_each() will read off the end
-of d->vcpu[] and use the resulting vcpu pointer to ultimately derive irq, and
-perform an out-of-bounds write.
-
-Fix this by changing case 0x3 to default.
-
-Fixes: 08c688ca6422 ("ARM: new VGIC: Add SGIR register handler")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
+ CHANGELOG.md | 1 +
+ SUPPORT.md   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-This vgic driver is explicity not security supported, hence no XSA.
----
- xen/arch/arm/vgic/vgic-mmio-v2.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/arm/vgic/vgic-mmio-v2.c b/xen/arch/arm/vgic/vgic-mmio-v2.c
-index 670b335db2c3..7d1391ac9b48 100644
---- a/xen/arch/arm/vgic/vgic-mmio-v2.c
-+++ b/xen/arch/arm/vgic/vgic-mmio-v2.c
-@@ -104,7 +104,8 @@ static void vgic_mmio_write_sgir(struct vcpu *source_vcpu,
-     case GICD_SGI_TARGET_SELF:                    /* this very vCPU only */
-         targets = (1U << source_vcpu->vcpu_id);
-         break;
--    case 0x3:                                     /* reserved */
-+
-+    default:
-         return;
-     }
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 9a5919585d..b03e2c73d7 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ ## [4.21.0 UNRELEASED](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
+ 
+ ### Changed
++ - Linux based device model stubdomains are now fully supported.
+ 
+ ### Added
+  - On x86:
+diff --git a/SUPPORT.md b/SUPPORT.md
+index 91cb6f8ed2..ed4412f0af 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -260,7 +260,7 @@ Go (golang) bindings for libxl
+ 
+ Support for running qemu-xen device model in a linux stubdomain.
+ 
+-    Status: Tech Preview
++    Status: Supported
+ 
+ ## Xenstore
  
 -- 
-2.39.5
+2.43.0
 
 
