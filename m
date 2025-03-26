@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B31DCC36008
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Mar 2025 06:01:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.927065.1329896 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E5AC36008
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Mar 2025 06:01:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.927090.1329916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txJov-00060N-Le; Wed, 26 Mar 2025 06:00:57 +0000
+	id 1txJp1-0006kz-At; Wed, 26 Mar 2025 06:01:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 927065.1329896; Wed, 26 Mar 2025 06:00:57 +0000
+Received: by outflank-mailman (output) from mailman id 927090.1329916; Wed, 26 Mar 2025 06:01:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txJov-000604-IU; Wed, 26 Mar 2025 06:00:57 +0000
-Received: by outflank-mailman (input) for mailman id 927065;
- Wed, 26 Mar 2025 06:00:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1txJp1-0006kq-78; Wed, 26 Mar 2025 06:01:03 +0000
+Received: by outflank-mailman (input) for mailman id 927090;
+ Wed, 26 Mar 2025 06:01:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hi9g=WN=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1txJi7-00083W-5n
- for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 05:53:55 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20627.outbound.protection.outlook.com
- [2a01:111:f403:2418::627])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b299e4d8-0a06-11f0-9ea3-5ba50f476ded;
- Wed, 26 Mar 2025 06:53:53 +0100 (CET)
-Received: from MW4PR02CA0008.namprd02.prod.outlook.com (2603:10b6:303:16d::27)
- by DS5PPF4A654669B.namprd12.prod.outlook.com (2603:10b6:f:fc00::64b)
+ id 1txJiQ-0008HQ-KQ
+ for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 05:54:14 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20621.outbound.protection.outlook.com
+ [2a01:111:f403:2412::621])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bd294f7f-0a06-11f0-9ffa-bf95429c2676;
+ Wed, 26 Mar 2025 06:54:12 +0100 (CET)
+Received: from MW4P220CA0027.NAMP220.PROD.OUTLOOK.COM (2603:10b6:303:115::32)
+ by CY8PR12MB8363.namprd12.prod.outlook.com (2603:10b6:930:7a::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Wed, 26 Mar
- 2025 05:53:48 +0000
-Received: from SJ5PEPF000001EF.namprd05.prod.outlook.com
- (2603:10b6:303:16d:cafe::18) by MW4PR02CA0008.outlook.office365.com
- (2603:10b6:303:16d::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.42 via Frontend Transport; Wed,
- 26 Mar 2025 05:53:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Wed, 26 Mar
+ 2025 05:54:08 +0000
+Received: from SJ5PEPF000001EC.namprd05.prod.outlook.com
+ (2603:10b6:303:115:cafe::24) by MW4P220CA0027.outlook.office365.com
+ (2603:10b6:303:115::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.43 via Frontend Transport; Wed,
+ 26 Mar 2025 05:54:07 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001EF.mail.protection.outlook.com (10.167.242.203) with Microsoft
+ SJ5PEPF000001EC.mail.protection.outlook.com (10.167.242.200) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Wed, 26 Mar 2025 05:53:47 +0000
+ 15.20.8534.20 via Frontend Transport; Wed, 26 Mar 2025 05:54:07 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 26 Mar 2025 00:53:44 -0500
+ 15.1.2507.39; Wed, 26 Mar 2025 00:54:04 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b299e4d8-0a06-11f0-9ea3-5ba50f476ded
+X-Inumbo-ID: bd294f7f-0a06-11f0-9ffa-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qw/2TDlIAmX8vAjNkEUJJg3+l7NxXMbZRppyZngjfQmsmpyr86RTEN1l1/u/2ql3BWvy6LBUJjuAeEspS51Ahi0s11ej+O8mGs7IeMIUHHCAQqPTCvw6q7fJg26tyLG54K4wIyI+xqqjsuZiGjUlLVPqm5JdOH70nY1sy7/31YhcgtRzJA+EaaFFfb8KputwYBuX7iR3NiNv0UDkz6aTg1AphUR34gSN7kwcclf9fiYqcTXZPajgnVbsmbT6qwz+EIsNDGGJEsD3Ih2Othv6e8GSbN41lA7LGSmMVIGOBi8X9yV8P06VNQd/Q2x11GO0brTdoeVX0hTsBGelmCndNw==
+ b=UHLXg3q/yNGN4jx2CJFDrP4BVSdIYc64w4lJ3979yONSbUb/4rEDcAXgfyVMJsOhgKJuNGDPv0RRTbE0VkMC4Vb0yjYtkFCwzpzyqyT1IUWClh2eaWbBo1qSNeMZw8ii4f2wHbKJufQlf3JA3GaWZB40+OC5Yz3vDuzKiJBOD+8KTO+XPApy9Ik8J0N1yRWcHjo3yLg8jjDqI0+adTE3qEeVH++Opl4f5rxojpQKATlW6WEyOCulZGYWMwfrO3yDtGaYUM1nPiXvOsfz2OuaYKHm9g7M/4/y5PFvitXTVK91f81X7PCwgHPnr18/ucrW01zIYo0XrsIobDCJmVr11Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ls8xh2qqh/fyLlnJCiGMP2CfPjJruCFbtQS8G3Ssl28=;
- b=ag5OPIHW3lEjYhubpD0eI5pjgCNTj75D+8BoAU2ttKh6qJ5aVHGIc6Uu6fHNlFCmohuhm4nds+wzJW4XUx1siLQuNOlWBfbjwX8hA8Z3mX1zzAanAWvwwCTj/YgZLzbSQNAqOZvnqSnJz0VypY+OmGLmXK6uscsslofQ1odvm/OA8kNKy+SUQ0ECeEHtBS4rRl5PRzrtu8YLXNGD4ETKBQrl7uxvze4EzJy0NGEyaqzmsAkbEZ3C6uT5TKUowJL2PHn9Hdd3tGCVx6QoH0PuJc6CqK8MmexdOSs5IlTo/a5JP7b2+TJAuX63yLlPboQW5GmutBZTa4WxYLPGYfnqrA==
+ bh=gqCQBy/NPdR47E/oqD+gJgPZnc9PR5ehQnPBjBa07EM=;
+ b=Ebav8g3iqP6K2Z+Ko4/LZtP/SeRe+/TXkgqG6nYArkV/Y5tJ6Ws4AMKHHnfdV62RmMeAwPsw0+5dy9plr7Ka6TNCjgKgUYk5D+/IViBsl2nRa/Reww6/XHOohPOqymCvyjkl7/UfjJjM7cAZT4bffn86I4M2yq7cYuQ8po4pyqf6JKa8oqEP9/4BHe4YE3D2RkEKiJ1xnxTjXjNc2XqyDvFWUMyPUo0p0Dx5QcQ7Gz5Ejmx9YF2vfxERheOpT1fBxH0IVTfPMDTKCL4NT8bjmGe4tA3zZ6liK9A4KBVebBeHcqr+BGWJhfrdfwS3Ag0v2EjxsLsiNG540op/Jfr0SA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ls8xh2qqh/fyLlnJCiGMP2CfPjJruCFbtQS8G3Ssl28=;
- b=Wj4izfFkHdp5pGv9OmBcJMXqINU027xE8Z1Dsq0ygK1KiS6kZMiwBH9BOyDyZ1tC98awh3efux6gO2SwLNzqQmkGd5VyS5R94lVfxexvYK+ZaVf+GQ2scJvYN7Djp7H37U3T5VCRi9NOqMgG6UTA2vlJrZ1+m8I4w6tgC5o3Zqo=
+ bh=gqCQBy/NPdR47E/oqD+gJgPZnc9PR5ehQnPBjBa07EM=;
+ b=B4Utn5DFDvs/LO2zpLMb80WZoQmRg95zarxuHGIOTD0nPTRVMAP94Tafd61VSEO7hj7VSUrTrt5lndt4V9UkktN5FYhsh71+Kq4S36RTwzdLpqahsyiP1U2CBivn5dba1YGTZtCbndq+NAOfE+o6PlxS+gpIJoAXIvRYA0fFSyM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,14 +82,14 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 10/19] xen/sysctl: introduce CONFIG_PM_STATS
-Date: Wed, 26 Mar 2025 13:50:44 +0800
-Message-ID: <20250326055053.3313146-11-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 16/19] xen/sysctl: make CONFIG_COVERAGE depend on CONFIG_SYSCTL
+Date: Wed, 26 Mar 2025 13:50:50 +0800
+Message-ID: <20250326055053.3313146-17-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250326055053.3313146-1-Penny.Zheng@amd.com>
 References: <20250326055053.3313146-1-Penny.Zheng@amd.com>
@@ -101,286 +101,79 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EF:EE_|DS5PPF4A654669B:EE_
-X-MS-Office365-Filtering-Correlation-Id: ea751f2c-8eb1-4e53-4a1c-08dd6c2a93af
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EC:EE_|CY8PR12MB8363:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6e683c2d-66a2-45c6-a7f8-08dd6c2a9f4e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?kuuBpY8PvlYfsHPP+aSZNzwwKb4oYVGig87GP+yR8wi12WURWs90AbNPYYti?=
- =?us-ascii?Q?Tcw/IesKv3K96tc05ewFIyHPD9XjdqjfMI58poA90CO8y+MylVxu1y6GVZlo?=
- =?us-ascii?Q?JQ2X/LUGsHu0qJuyKD4p4OXUT75+UadAd0MumtLNpui0oD3J9vWtT4junQ+n?=
- =?us-ascii?Q?tz/b6KNSvcIXE+l9sU96FtCZYQfSmYYQQvBz0U5/Bs2pMwB1ZQ94cbdN6eV8?=
- =?us-ascii?Q?t7YGU5DB2lbCctbodjemLQxYjbdnV+ljW3xJuG2QfWMryvvUizxH2aqzKZ9f?=
- =?us-ascii?Q?MHUlBNBYgWphAyFg6gHsshM8bZrxYj8v/Vrj5wUJa7oTY6UwCCjsiRsErBzQ?=
- =?us-ascii?Q?O6AlyQH7EeD9JZ7L4K3FM6KLdTBu18XtmWf1UnOaH0Vxh3t1pQBjNbL3OM+o?=
- =?us-ascii?Q?HctdgpVF4WdWFiW0BreAPssdjxKthWAFLiw+PpS0laIkbJ8/hYURwt6BErmv?=
- =?us-ascii?Q?M6ThYi5Ri5n8I7YSTNI8v2oP/e4VVBoPNKJDaFyfNJuuv42ELamzPjJRo8c4?=
- =?us-ascii?Q?Mgj2yPOaE4bYWmkF5Y0j2AGzWit/Mv+myFFv73b6dbWzvxJMTnhRa4N06Cme?=
- =?us-ascii?Q?eg1/RkqyxXR4lQjxHmJkmjq8K5A4vddmbLXOXaRWJmNOWhofIQZ1dDrmRTuh?=
- =?us-ascii?Q?Q2zFlzsvR1AvX9iWsRt3K9mPeHMXEmWEkgkyPbwJvve+T6+Fqn27u22l4DAL?=
- =?us-ascii?Q?O4HWlsNy6Juf+4ICX2qQG4BDkY5N89NVmWb5nWSDEvA+Q9ZZHX9LsJ/nfnDL?=
- =?us-ascii?Q?iKNYbTJRheDCPuWR+oVSYxPn1AAdF1dRHtM0ROTW9s4KFzbQ4uoahblZmz4E?=
- =?us-ascii?Q?Pq3OSuamx649EW2zaerv6DXOb761tNU/HJ53r0/Nc41uTO6JYwwIXePDvGtu?=
- =?us-ascii?Q?BCdi4iMTUQ78ZmPJ/4ye1AnYyXo0X3c4WIj9fHegpjuZTPr6NfJxzLydPdkK?=
- =?us-ascii?Q?gZhv+gsvcIvBCU+5IU9Ve9VGPcp8Nht8UoS480qy8IXHPGjXy74qOjAduERm?=
- =?us-ascii?Q?JgqE2r8jgSdmv3MnqydW2lmc57ukWwwRM8uRtxnceneIm7PTFm3Jfq+ON+yT?=
- =?us-ascii?Q?hQFsVyluOmL6U6D0YqTXhOlxY6v4xI5Y9ntFjwTByYlwgjOKcaTmtwrVBPLH?=
- =?us-ascii?Q?EQ1FxpsIT8xb3zBHCr6geNxPeIo1lMfIWapu2TRXdqBeooqtZLVrtNK8Xfo/?=
- =?us-ascii?Q?TfVpjhYJTEsrF4X3ZUwk2hDGTAGwcncXe91exfwTcZLvNP9Uofs/DC2/Unp8?=
- =?us-ascii?Q?BehCq4VELDMAv4fFzChlEUgKGbkHR6UsSjnkEi4R3B6bk+XzRtDlIgfF07vy?=
- =?us-ascii?Q?Z4MSoXIA/7xfbXk2olJg85KeAZLsq+LGFrpZWfN5sXRCX/8dNFT0rU51vNWA?=
- =?us-ascii?Q?/PumQhQZTGxZkLTn/i8lAlTv4CDWDuAIw/7iYpbIUUWBSqrtTs3WPwfRn7On?=
- =?us-ascii?Q?9UnBiWpO+2Cl0KguoVGNe1bdTe4wwVtefUcogBZsBXrMKGGycRjOnhVwQgml?=
- =?us-ascii?Q?DDZq6W+YNpSljS0=3D?=
+	=?us-ascii?Q?HNHQlFrHA51tKR9JgbDtSu0m45QIJ3TXezgJ9i+ClB5eg9KZuepTfMKo5hwg?=
+ =?us-ascii?Q?M+boYcwV4FrhwR8zSzPY/uGpzKLcH+yBkERb6BjMYcQAhonLrMZBWIF7tuOA?=
+ =?us-ascii?Q?pO6B82FfK02OZWB+jamaaRwBwvSikGQv8vr3jPIKb2IyEPXzHQ0HGC0bZBTD?=
+ =?us-ascii?Q?qWsibGZY8iYjVMbZrQsf86SPSamtLX2XAOjVJFoCh3QXkvMHnZODCx+6MubO?=
+ =?us-ascii?Q?D6v7/b2VcANb/M0M4CG9oHRgdw215tMZzPSq6AnM+WgmlCPJnL8CdMBSJyGt?=
+ =?us-ascii?Q?8Kiiqu9Zi8dXeMVw02Gfj82FrDVymgEdFVAoisZNbT1J56GMnFwkA4iGRwzy?=
+ =?us-ascii?Q?abgndeIJo6GKIEELvPnNKxa0vuj2dqs/fG1B5s9UW2TA7YPvPxOMpxUWyCw7?=
+ =?us-ascii?Q?duudVj2y5BhQT/a5ZL0KdohGr3CLlSSvB80KRJw7svxURNEhj2h/oxCim2Nc?=
+ =?us-ascii?Q?bqc6+YGGBpw30QImEXMrH1ZxBL+5PChtwNvoibxYu4P2NkFQvHdQsQDDqLnd?=
+ =?us-ascii?Q?WSSgZssJtyv51UiP8U6F9ZFI1r4FcAuTniCFK/+fMpVh8W7MyIwKG00yHdpq?=
+ =?us-ascii?Q?X5StiJmzzJsn5dAtofaKJbJU9zSPNvb1jNnJAzHHpkth60G1WlRawqLDrFUO?=
+ =?us-ascii?Q?23x1pJf1HBQsqM0z28Mn92I75xCFJ9GxCCNl4O4i0vc9V4A6m8rmOCjsh+LZ?=
+ =?us-ascii?Q?az9WOqADCTvHo9GoiUyz/grDm36iNcNnyZqomoIhL7MiDGjsG5MHvc9aTzri?=
+ =?us-ascii?Q?dOgB3yOPKvtDYvMPx9s/0DeI1sfSG4Aitx3FtfGG3093SfjhLZ7djjzlkush?=
+ =?us-ascii?Q?XsGPnPp51emJ/HvgNSfUQEwRiKoVi2ssZd9ZunC7EpsPB8Hqr6bUO5OXV3RQ?=
+ =?us-ascii?Q?+X2A/q1iRBcx/54qK4RIYvvn0en6JOCKYGvYaVrwpTaPK+Zeylk/qtsKlG5s?=
+ =?us-ascii?Q?ADXpemEpQoXZidVPD1cTKTXlC+Zn6MctBPbz37+SlBzGa6NAsZNIEPS40oSA?=
+ =?us-ascii?Q?bByj/jQXmkZGj3l2wzRvKkbGIUWcPAejQiwMaw3vbeE2zOGSza4Osryka6N7?=
+ =?us-ascii?Q?o/EEIJa4yNselJqQIQ/b2qpyKWacDWScFsXnqMxcap6oUCsO1wp/M8iDjruJ?=
+ =?us-ascii?Q?9cs+LIhytl//niugGIMxSHgtw8Qayfnb3gv8LAg+QK7NK4ledQVfyp2zOD36?=
+ =?us-ascii?Q?s6JAvl9roBXbzM8yuAFMw969e7OJ8SYUAsa81dQjlzflm8tb1YfF2Fyco7B0?=
+ =?us-ascii?Q?jEzAGXdRLSyjbimq3L/3JLYq7mBZPgUwM7EaqlyEdm7+W3wI5KVgHyg9TeS6?=
+ =?us-ascii?Q?417CTvzHbQ2YSQsEe1lEklePz3Mb4KAJLX3L5j+rgr+70x02kEY/mrK1n/ik?=
+ =?us-ascii?Q?n5TIR5eCLng/aJwsav9aMUf10E1G6hbMOVAUI5lo0kOpXNVAeZo076ykTq1M?=
+ =?us-ascii?Q?im2pAkXfKEO9EAvQRCWCwAjeTskVty7QYYbQ8iXyGtDpARg/sWAXliSqh/2U?=
+ =?us-ascii?Q?+GrKo3xARh69p2E=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2025 05:53:47.7080
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2025 05:54:07.2230
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea751f2c-8eb1-4e53-4a1c-08dd6c2a93af
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6e683c2d-66a2-45c6-a7f8-08dd6c2a9f4e
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001EF.namprd05.prod.outlook.com
+	SJ5PEPF000001EC.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPF4A654669B
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8363
 
-We intend to introduce CONFIG_PM_STATS for wrapping all operations
-regarding performance management statistics.
-The major codes reside in xen/drivers/acpi/pmstat.c, including two main
-pm-related sysctl op: do_get_pm_info() and do_pm_op().
-So This commit also makes CONFIG_PM_STATS depend on CONFIG_SYSCTL
+All coverage-related op shall be wrapped around with CONFIG_SYSCTL,
+so this commit makes CONFIG_COVERAGE depend on CONFIG_SYSCTL.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 v1 -> v2:
-- rename to CONFIG_PM_STATS
-- fix indention and stray semicolon
-- make code movements into a new commit
-- No need to wrap inline functions and declarations
+- commit message refactor
 ---
- xen/arch/x86/acpi/cpu_idle.c                 |  2 ++
- xen/arch/x86/acpi/cpufreq/hwp.c              |  6 ++++++
- xen/arch/x86/acpi/cpufreq/powernow.c         |  4 ++++
- xen/common/Kconfig                           |  5 +++++
- xen/common/sysctl.c                          |  4 ++--
- xen/drivers/acpi/Makefile                    |  2 +-
- xen/drivers/cpufreq/cpufreq_misc_governors.c |  2 ++
- xen/drivers/cpufreq/cpufreq_ondemand.c       |  2 ++
- xen/include/acpi/cpufreq/processor_perf.h    | 14 ++++++++++++++
- 9 files changed, 38 insertions(+), 3 deletions(-)
+---
+ xen/Kconfig.debug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index 420198406d..b537ac4cd6 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -1487,6 +1487,7 @@ static void amd_cpuidle_init(struct acpi_processor_power *power)
-         vendor_override = -1;
- }
+diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+index f7cc5ffaab..84d26b3f46 100644
+--- a/xen/Kconfig.debug
++++ b/xen/Kconfig.debug
+@@ -37,7 +37,7 @@ config SELF_TESTS
  
-+#ifdef CONFIG_PM_STATS
- uint32_t pmstat_get_cx_nr(unsigned int cpu)
- {
-     return processor_powers[cpu] ? processor_powers[cpu]->count : 0;
-@@ -1606,6 +1607,7 @@ int pmstat_reset_cx_stat(unsigned int cpu)
- {
-     return 0;
- }
-+#endif /* CONFIG_PM_STATS */
- 
- void cpuidle_disable_deep_cstate(void)
- {
-diff --git a/xen/arch/x86/acpi/cpufreq/hwp.c b/xen/arch/x86/acpi/cpufreq/hwp.c
-index d5fa3d47ca..98e9d46890 100644
---- a/xen/arch/x86/acpi/cpufreq/hwp.c
-+++ b/xen/arch/x86/acpi/cpufreq/hwp.c
-@@ -466,6 +466,7 @@ static int cf_check hwp_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-     return 0;
- }
- 
-+#ifdef CONFIG_PM_STATS
- /*
-  * The SDM reads like turbo should be disabled with MSR_IA32_PERF_CTL and
-  * PERF_CTL_TURBO_DISENGAGE, but that does not seem to actually work, at least
-@@ -508,6 +509,7 @@ static int cf_check hwp_cpufreq_update(unsigned int cpu, struct cpufreq_policy *
- 
-     return per_cpu(hwp_drv_data, cpu)->ret;
- }
-+#endif /* CONFIG_PM_STATS */
- 
- static const struct cpufreq_driver __initconst_cf_clobber
- hwp_cpufreq_driver = {
-@@ -516,9 +518,12 @@ hwp_cpufreq_driver = {
-     .target = hwp_cpufreq_target,
-     .init   = hwp_cpufreq_cpu_init,
-     .exit   = hwp_cpufreq_cpu_exit,
-+#ifdef CONFIG_PM_STATS
-     .update = hwp_cpufreq_update,
-+#endif
- };
- 
-+#ifdef CONFIG_PM_STATS
- int get_hwp_para(unsigned int cpu,
-                  struct xen_cppc_para *cppc_para)
- {
-@@ -639,6 +644,7 @@ int set_hwp_para(struct cpufreq_policy *policy,
- 
-     return hwp_cpufreq_target(policy, 0, 0);
- }
-+#endif /* CONFIG_PM_STATS */
- 
- int __init hwp_register_driver(void)
- {
-diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
-index 69364e1855..08494d0902 100644
---- a/xen/arch/x86/acpi/cpufreq/powernow.c
-+++ b/xen/arch/x86/acpi/cpufreq/powernow.c
-@@ -49,6 +49,7 @@ static void cf_check transition_pstate(void *pstate)
-     wrmsrl(MSR_PSTATE_CTRL, *(unsigned int *)pstate);
- }
- 
-+#ifdef CONFIG_PM_STATS
- static void cf_check update_cpb(void *data)
- {
-     struct cpufreq_policy *policy = data;
-@@ -77,6 +78,7 @@ static int cf_check powernow_cpufreq_update(
- 
-     return 0;
- }
-+#endif /* CONFIG_PM_STATS */
- 
- static int cf_check powernow_cpufreq_target(
-     struct cpufreq_policy *policy,
-@@ -324,7 +326,9 @@ powernow_cpufreq_driver = {
-     .target = powernow_cpufreq_target,
-     .init   = powernow_cpufreq_cpu_init,
-     .exit   = powernow_cpufreq_cpu_exit,
-+#ifdef CONFIG_PM_STATS
-     .update = powernow_cpufreq_update
-+#endif
- };
- 
- unsigned int __init powernow_register_driver(void)
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 5b55ca6eaa..426fa8fcc2 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -557,4 +557,9 @@ config SYSCTL
- 	  to reduce Xen footprint.
- endmenu
- 
-+config PM_STATS
-+	bool "Enable Performance Management Statistics"
-+	depends on ACPI && HAS_CPUFREQ && SYSCTL
-+	default y
-+
- endmenu
-diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index 4602d84203..c17f1b3dec 100644
---- a/xen/common/sysctl.c
-+++ b/xen/common/sysctl.c
-@@ -176,7 +176,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         op->u.availheap.avail_bytes <<= PAGE_SHIFT;
-         break;
- 
--#if defined (CONFIG_ACPI) && defined (CONFIG_HAS_CPUFREQ)
-+#ifdef CONFIG_PM_STATS
-     case XEN_SYSCTL_get_pmstat:
-         ret = do_get_pm_info(&op->u.get_pmstat);
-         break;
-@@ -186,7 +186,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         if ( ret == -EAGAIN )
-             copyback = 1;
-         break;
--#endif
-+#endif /* CONFIG_PM_STATS */
- 
-     case XEN_SYSCTL_page_offline_op:
-     {
-diff --git a/xen/drivers/acpi/Makefile b/xen/drivers/acpi/Makefile
-index 2fc5230253..a32a505e30 100644
---- a/xen/drivers/acpi/Makefile
-+++ b/xen/drivers/acpi/Makefile
-@@ -5,7 +5,7 @@ obj-$(CONFIG_X86) += apei/
- obj-bin-y += tables.init.o
- obj-$(CONFIG_ACPI_NUMA) += numa.o
- obj-y += osl.o
--obj-$(CONFIG_HAS_CPUFREQ) += pmstat.o
-+obj-$(CONFIG_PM_STATS) += pmstat.o
- 
- obj-$(CONFIG_X86) += hwregs.o
- obj-$(CONFIG_X86) += reboot.o
-diff --git a/xen/drivers/cpufreq/cpufreq_misc_governors.c b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-index 0327fad23b..c3877e9f0a 100644
---- a/xen/drivers/cpufreq/cpufreq_misc_governors.c
-+++ b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-@@ -64,6 +64,7 @@ static int cf_check cpufreq_governor_userspace(
-     return ret;
- }
- 
-+#ifdef CONFIG_PM_STATS
- int write_userspace_scaling_setspeed(unsigned int cpu, unsigned int freq)
- {
-     struct cpufreq_policy *policy;
-@@ -80,6 +81,7 @@ int write_userspace_scaling_setspeed(unsigned int cpu, unsigned int freq)
- 
-     return __cpufreq_driver_target(policy, freq, CPUFREQ_RELATION_L);
- }
-+#endif /* CONFIG_PM_STATS */
- 
- static bool __init cf_check
- cpufreq_userspace_handle_option(const char *name, const char *val)
-diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
-index 06cfc88d30..de10e03ca4 100644
---- a/xen/drivers/cpufreq/cpufreq_ondemand.c
-+++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
-@@ -57,6 +57,7 @@ static struct dbs_tuners {
- 
- static DEFINE_PER_CPU(struct timer, dbs_timer);
- 
-+#ifdef CONFIG_PM_STATS
- int write_ondemand_sampling_rate(unsigned int sampling_rate)
- {
-     if ( (sampling_rate > MAX_SAMPLING_RATE / MICROSECS(1)) ||
-@@ -93,6 +94,7 @@ int get_cpufreq_ondemand_para(uint32_t *sampling_rate_max,
- 
-     return 0;
- }
-+#endif /* CONFIG_PM_STATS */
- 
- static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
- {
-diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
-index 941e177b6d..b4b3ed7964 100644
---- a/xen/include/acpi/cpufreq/processor_perf.h
-+++ b/xen/include/acpi/cpufreq/processor_perf.h
-@@ -9,9 +9,23 @@
- 
- unsigned int powernow_register_driver(void);
- unsigned int get_measured_perf(unsigned int cpu, unsigned int flag);
-+#ifdef CONFIG_PM_STATS
- void cpufreq_statistic_update(unsigned int cpu, uint8_t from, uint8_t to);
- int  cpufreq_statistic_init(unsigned int cpu);
- void cpufreq_statistic_exit(unsigned int cpu);
-+#else
-+static inline void cpufreq_statistic_update(unsigned int cpu, uint8_t from,
-+                                            uint8_t to)
-+{
-+}
-+static inline int cpufreq_statistic_init(unsigned int cpu)
-+{
-+    return 0;
-+}
-+static inline void cpufreq_statistic_exit(unsigned int cpu)
-+{
-+}
-+#endif /* CONFIG_PM_STATS */
- 
- int  cpufreq_limit_change(unsigned int cpu);
- 
+ config COVERAGE
+ 	bool "Code coverage support"
+-	depends on !LIVEPATCH
++	depends on !LIVEPATCH && SYSCTL
+ 	select SUPPRESS_DUPLICATE_SYMBOL_WARNINGS if !ENFORCE_UNIQUE_SYMBOLS
+ 	help
+ 	  Enable code coverage support.
 -- 
 2.34.1
 
