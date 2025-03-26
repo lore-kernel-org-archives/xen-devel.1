@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D6DC3600E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C595BC3600D
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Mar 2025 05:53:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.927012.1329856 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.927003.1329796 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txJhx-0001Cb-6K; Wed, 26 Mar 2025 05:53:45 +0000
+	id 1txJhj-00083k-Ch; Wed, 26 Mar 2025 05:53:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 927012.1329856; Wed, 26 Mar 2025 05:53:45 +0000
+Received: by outflank-mailman (output) from mailman id 927003.1329796; Wed, 26 Mar 2025 05:53:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txJhw-0001CJ-Vf; Wed, 26 Mar 2025 05:53:44 +0000
-Received: by outflank-mailman (input) for mailman id 927012;
- Wed, 26 Mar 2025 05:53:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1txJhj-00083c-7g; Wed, 26 Mar 2025 05:53:31 +0000
+Received: by outflank-mailman (input) for mailman id 927003;
+ Wed, 26 Mar 2025 05:53:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hi9g=WN=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1txJhv-0008HQ-Sc
- for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 05:53:43 +0000
+ id 1txJhi-00083W-8F
+ for xen-devel@lists.xenproject.org; Wed, 26 Mar 2025 05:53:30 +0000
 Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2062c.outbound.protection.outlook.com
- [2a01:111:f403:2417::62c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac0ff53c-0a06-11f0-9ffa-bf95429c2676;
- Wed, 26 Mar 2025 06:53:42 +0100 (CET)
-Received: from SJ0PR05CA0182.namprd05.prod.outlook.com (2603:10b6:a03:330::7)
- by PH8PR12MB7231.namprd12.prod.outlook.com (2603:10b6:510:225::9)
+ (mail-dm6nam12on20609.outbound.protection.outlook.com
+ [2a01:111:f403:2417::609])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a2d20c6e-0a06-11f0-9ea3-5ba50f476ded;
+ Wed, 26 Mar 2025 06:53:27 +0100 (CET)
+Received: from MW4PR03CA0319.namprd03.prod.outlook.com (2603:10b6:303:dd::24)
+ by SA1PR12MB9003.namprd12.prod.outlook.com (2603:10b6:806:389::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Wed, 26 Mar
- 2025 05:53:38 +0000
-Received: from SJ5PEPF000001EA.namprd05.prod.outlook.com
- (2603:10b6:a03:330:cafe::13) by SJ0PR05CA0182.outlook.office365.com
- (2603:10b6:a03:330::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.42 via Frontend Transport; Wed,
- 26 Mar 2025 05:53:38 +0000
+ 2025 05:53:24 +0000
+Received: from SJ5PEPF000001EE.namprd05.prod.outlook.com
+ (2603:10b6:303:dd:cafe::9b) by MW4PR03CA0319.outlook.office365.com
+ (2603:10b6:303:dd::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.24 via Frontend Transport; Wed,
+ 26 Mar 2025 05:53:24 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001EA.mail.protection.outlook.com (10.167.242.198) with Microsoft
+ SJ5PEPF000001EE.mail.protection.outlook.com (10.167.242.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Wed, 26 Mar 2025 05:53:37 +0000
+ 15.20.8534.20 via Frontend Transport; Wed, 26 Mar 2025 05:53:23 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 26 Mar 2025 00:53:33 -0500
+ 15.1.2507.39; Wed, 26 Mar 2025 00:53:20 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac0ff53c-0a06-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: a2d20c6e-0a06-11f0-9ea3-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AgP3jQfmGdZm3e1SMjdtX3qt/GooDXYTpzRwACFE2opwbTlqHumG4ZZ6qKmitiAtEeViwdRzkUrqVCWbaer/IK+whQX/u7aap5sUNmdWOMzWFBOV1ZgeJaXclgyCiYj6qct4fnmjmvT8UPOoFFHqfE4jyleIcicKFabblPwMlKJIzkWNnG3gLsnNrIc5rS1SlqzgWARSmbgF7JFLvXD3cYJI3VKCgnou+RoDhhLbPNw0I1fWqpWhhX3bpPZTh3ufGR7RApWPLb5JiBR5jKJ1lsjfQGT8CC8PmajTCRgLxYkF3KuwviRs8A+NvGtsEzocdVw+HpSprt0pay5HO5F3xw==
+ b=YlNlGhFxyHq+1TKPB/v9OE/kqYS+LdXBSgsGrafM0LfZLDsV+lFgb4i005zzg85PgeATD3Xst/KAD/fzy6oFvj5kWCCRz8lPNMky3wUap0Xe+qTpGt1c11VZuAfnejE3/OdRbVvZTyYEYII6oIyAKRanclEM7ucqsrTSsk4Es0eUAxqlIiyW2MAYIAvSJoWBDnHNohx6lWpCSSCzgiyyuf9Uslea6ThyhK7flKL0hnJxfi/O+QoJd9c+on04wrA4zNp8wbcfINlO2zISYW54TC5Pi7S1TEwjSyvPDJb4Hx01Lpr3Gz6MR+jKP1tASEHsamdhmYGWo4DZG8BFVBsVzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fahbkFRvYWnR+Kb+Lv/kbd/si9rp9S/2unBDtYoWV0A=;
- b=xB7BYrUPbQ5P9StqAK37G7QITlh+6wilB1F96rIWjSQdoTco90YT7w8HxMY6ar90WVFDhoX8HG0V5Q2corORzfJ+YtEcvOQvfcaX7kB7cBwlGCJ/q7L15yC+BSIsgx6utZsO71J5D6tykOC+N98jz96Zr2zbg8YCeQQZOk8nyXe7r1x5zIouiTljkJTeTCMujGRFbajiZzBo+2f1DoLt9Tu8gOV3pl5O7x6bsji2ul4b36yNaMAdnHBxFl851CCjerBsF7y7tO2l67HTHsfKgFrAlbMiEBxIl6kVBljhf/QRFhEEcGy2o6ky3vBGOXRiGWEiMfz/3U/tfuGEW3QRYg==
+ bh=VEUNrZ24fL1X6hFJd6qKufpxkZa+ZPL+BfQnNJ7pegc=;
+ b=DM379p/Gd/ofjGG0NnVWIUPI0vTxeTBwLUlee/AYobb9oz+bxdEPDfwsF5faJS4GAoVRj1y2vQYQF5f61VGmCLWw+dHycF5j1t1zkyKis/aFmeWeuwK0s0i/B+f/Mdy6wNZ8WMoi1Cgg5jg/nL5ir39wn1LKMuCbri1Ie/bYieIkkKnJXmh5lR/e88vKj3V9m1wqfHw8is82rbb0A7gih785Wv+GFYHmbIQbK5gPR5Q43UnmEpfswL/VhgC97KHALEVAktboGWxl4rIKTt8Rv1boGa6y7Fp2WQ92RlYAeqLbc7glCuHw0vkBcV0sYDE0k42XZMWZiInM2ki6tgV3+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fahbkFRvYWnR+Kb+Lv/kbd/si9rp9S/2unBDtYoWV0A=;
- b=1NYXS5pk1htU7lbD8AdItE7oIOFI/QlCteGP5IgMEcgxILxTWfpWXtILi9KLaP3b28g6UxR3hPRiX/RyLvNsSwdPup8lVqMOxILbjFdSwqe6XT2u1N8JSK7u7PZQ4oIS324ZJzcOZk1IHYBBm2NaY4rEU75lcoPbWe6+B78erzQ=
+ bh=VEUNrZ24fL1X6hFJd6qKufpxkZa+ZPL+BfQnNJ7pegc=;
+ b=WNKpJWA2XQh/AK0v2NeTsHd/5vivnUCeRImVwHCbzaROFo0vu8jDAoQvXqeU3a7o2hz2lX48SpXZkQUzupMeDHbM0vYLJnq4edvs2MenfGr6ZnItRiPASaK/mI9UZQhiN8rSX385NKnVvyrPajx8bYEx5pgTCZARfXXzWjhVed0=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,16 +82,14 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Dario Faggioli
-	<dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap
-	<gwd@xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	"Jan Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [PATCH v2 06/19] xen/sysctl: wrap around XEN_SYSCTL_sched_id
-Date: Wed, 26 Mar 2025 13:50:40 +0800
-Message-ID: <20250326055053.3313146-7-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 01/19] xen/x86: remove "depends on !PV_SHIM_EXCLUSIVE"
+Date: Wed, 26 Mar 2025 13:50:35 +0800
+Message-ID: <20250326055053.3313146-2-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250326055053.3313146-1-Penny.Zheng@amd.com>
 References: <20250326055053.3313146-1-Penny.Zheng@amd.com>
@@ -103,98 +101,137 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EA:EE_|PH8PR12MB7231:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0698e460-d0c8-4e53-a1f2-08dd6c2a8dac
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|SA1PR12MB9003:EE_
+X-MS-Office365-Filtering-Correlation-Id: ec9dbe34-ba53-4195-df8d-08dd6c2a856f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|7416014|82310400026|1800799024;
+	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?W+r8FRfO73ZSThMeRSZnMQ29VbsTKmdt/kJzRhZRUnrBdJNU+9xhGmNd3Y23?=
- =?us-ascii?Q?REk6w6VzalQK0BiHv9R42zIYpOKRcVhrwPo/UicAoIPX7ny8CWI70wxoTaZa?=
- =?us-ascii?Q?NrnVBXmPWfoVVgid5nkvitKzZR3K04jvJaUOXUpuWZ1Z7I6ElM9bthUBCnoh?=
- =?us-ascii?Q?2xtZgwjwd661eFJEmKkiacgq32DXx+zKh+AjqMGlHijHo8OI2Ozg0Y8xbl9w?=
- =?us-ascii?Q?uo8mpEFACwgriAHingO3B1o9YyXbAWGYlnTTzLjdB+VPezz552ykEIzcbtfr?=
- =?us-ascii?Q?GcHCPwP+XN9lDcujTBcVb6UhEh9908Nf9S9XbutO7cqLVjMTPY9YnPDw3Zet?=
- =?us-ascii?Q?aU4Dla6qeFvE0jRAQxMbsBgf+8LKg9Nanw18BW9Cdg52RnmNy1zI1+uaGk05?=
- =?us-ascii?Q?7XSKysxAp+CsKTEXwDGmCuoU6GisD3+sAfVnte3rnBkFdQhxyqIYU63pppAl?=
- =?us-ascii?Q?4iwgh3+WATeUX7G3ssUSgHS0iXk5cVnlMwrRyHawPgArpzeT+TCnJ9BCgqaW?=
- =?us-ascii?Q?RSQQAjHzZC5843Y8OHZ0XFq6b/ZhkyzGAS7LNSkxNWXrmcX0OaARAA2/Ht40?=
- =?us-ascii?Q?W7Npd5see8y8UdM+Fmg/eh1VgTCPlBQhBRMr67ERNHbgYawQef3yYQEiPb7a?=
- =?us-ascii?Q?8jHn17fWcWaps6rxjw6iBZToUVUGFYhbzGwl9Ux24/qO/fUP4tH+nM4mKnRC?=
- =?us-ascii?Q?DXbpihM4gOdmYbmtxSQkHSJQ/+25Liia8vkJu3elKALR7J8c2EHZTzrLIjc1?=
- =?us-ascii?Q?QRA8GtF5goXcLcw4GoPaEEJVNb/vYwmqxUEGaWcmY4yp/z/KqR2TupI0y4rS?=
- =?us-ascii?Q?tQYMArbDGfE2DPnyX3SzOVwTrCCc5ADwD0ESUnlItMQ0wjaIJ6evnPCS4Do+?=
- =?us-ascii?Q?We8Yt8hhUdQGua6Ybf9hfJ07DRFP5k1RlVb76G29lat04gd/n9CcT6Y/MH6e?=
- =?us-ascii?Q?shYtUo+UTQdZE15o53Jn1FjhbvMlQFH0QUpycVtgZR0eMLcoiduMhOwheul7?=
- =?us-ascii?Q?W+FKULURbImzHdu87PbpJsjjAqXL8GIyJyWbCpWKbjG8+A5rM8ZUEqj7QqC1?=
- =?us-ascii?Q?MDXj4DzO0rxsw4yK3NvyakOuUT4EDz/4tTtnIc10pvSczs0RCOZqGrg+IBxg?=
- =?us-ascii?Q?8M2RfkBoBRZEYIlxw5oey7ibi0SnHj0JUBmneaAiSw+sBgCCNluSDOpLHtN4?=
- =?us-ascii?Q?lC37LwQSIKJnX8RETH6GlE+gNNHRyej+9u+MSfOeP6Vb/m/WkktQo3aETgX4?=
- =?us-ascii?Q?eRmw0gaj+6vB3X2YFXJYh+pXKOTlBxSoUNe5yVjXLr5unpEXfApQrB3fege9?=
- =?us-ascii?Q?fstd09asnSXdV2hXT6Dj6q26g+tHAsr6NS718kXSRhHgorodpFMQbgN3Na7m?=
- =?us-ascii?Q?jyW2nXOAHY/ZoSyNJLsZJ3ngXF2uz0so5gGjQHJw3hZ0iCYHDM/qgh45eydA?=
- =?us-ascii?Q?sjOwfQJ+UFOnKxoIJGCQTycFeLvkMy3FumiCbNq9N0IQCTXaJuy9wVJxuelc?=
- =?us-ascii?Q?5xejYatc09h57zA=3D?=
+	=?us-ascii?Q?iqTELoYUCl12nII7u79c6OFqw5jK7hMRG4XrADzzQtC3oF/xvH+ztTvC++wX?=
+ =?us-ascii?Q?ZchI1PS/LzIn+QcvifvDSg+ca0oqkYNXfBF2tCCrzRKWFBc6Pi3BWyuKD2XB?=
+ =?us-ascii?Q?Y+yAdJX7f+OKdCVVceqyN/mOx2xQOkdJjIS3vfICKweq8ZIpjT2E+fybfhfp?=
+ =?us-ascii?Q?RigB6UP1f8U+luQyY7zgI3zpc0mie7Wx5hyk8WUtVSKmofCxsztpWd1qRg6P?=
+ =?us-ascii?Q?4TOGfUg0XnBvtTELB8OUW1RGM3zxFuALDzSvEjCzY7Lssn/oGLUPbtjqK5Go?=
+ =?us-ascii?Q?/MBFXXE4nZSS852SeY391cFEjgqklPaBnLPQZzqhTkDA5BYAY1hMns1gWAiM?=
+ =?us-ascii?Q?yLFt2gULnG0Zgx4W8wFxbgFfxkwGAbod9ZkEN5/scwd79aZ39bo5Pe7g8spC?=
+ =?us-ascii?Q?3iN9+NsztHw3p9u3N5OJ0Rc26bk7k8CqMxNX98BzJSv4kSUbsgy2OvYWGZJj?=
+ =?us-ascii?Q?bRuIcbvrwxw8qiIbsfuDxLliEBQD7aq2x9MFIs2cCMCWmHlnoUJuzImfCyGm?=
+ =?us-ascii?Q?N8Lxmo5BOz5Zi5JuOpOC9HKIc74/DJoIbyg4ORFwb3xc7FGNAfglMexgBqtj?=
+ =?us-ascii?Q?RHwecmlv1nsyn2RheqOeihjwkz2SI3kAq8x1pTiepwxbiUOy1lk4wAaQ2U2O?=
+ =?us-ascii?Q?UeZ8RaB7PwEPVtKs29jZotK+nqr9EVFG3lDYwT164lMy2Xa1VjW1g/IFqjsU?=
+ =?us-ascii?Q?d4ufa8ze19s4Wy5g03U9VXquSZTpjDVf1dcmSDfYqRYpKG9fjOiafVjdx9nf?=
+ =?us-ascii?Q?CDcqpKFFpLaQqeQn+7MO+S38mILAeY433oy0H7dLKErwoxgeKt+YxfO1EZXE?=
+ =?us-ascii?Q?78ZM62VxN1QUr72XaATEcJhA9O8I1vyHGIggauby82PO5t1QIVwXjpIqC7TL?=
+ =?us-ascii?Q?PKzMTJx6zkfUTIEIixkNaJK0PWDfcy+GDsk187JL13LB1qOCOw8Zd1hx+PLQ?=
+ =?us-ascii?Q?kFxvYItGDUMkLYWbT5ToqHZXIatpfyEFaOlayVb50AtEVS6sBxL9C/KFj8UY?=
+ =?us-ascii?Q?AjPkkYnVeB3lU9zuM8C94I6WNnXx+dR7a/6NHxWq00uUTOGAfDA0qkTbdkkX?=
+ =?us-ascii?Q?7ZuRgYdNXCDZKllSIzmCPTDlvWWrtV5WVgV7um8Ewnq1DanMB0/47lnbDL32?=
+ =?us-ascii?Q?A4eBxls7LbMNOjE1+i+8XOw97peoHrE3m0bRLisa3eFgUaLBYGeYvfOb3Vv7?=
+ =?us-ascii?Q?U7TsjBEiuv/JbXXNgJ9qCfGwV0SoTvsbWmmYSkreVG2kbvPyqbr6nJ5YdAZX?=
+ =?us-ascii?Q?jUXoMBJX9sh7hf/CdYMYD9cdz8avrnjwWZLDuv60cRByiA0ShcfTdXFv9HT+?=
+ =?us-ascii?Q?H6JlrrjdPVaUmgacRfXcqb44uQgoUXl0bR3u9IyJ5ub7TxO4Kk/M/C02/6os?=
+ =?us-ascii?Q?ey3++/pRowy3zzVQyHVILxCGfgO1QO8P5CjUw5nSuvZf7hwlHdTO+WQogRE5?=
+ =?us-ascii?Q?4m5BQa0CHi8=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(7416014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2025 05:53:37.6399
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2025 05:53:23.8356
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0698e460-d0c8-4e53-a1f2-08dd6c2a8dac
+X-MS-Exchange-CrossTenant-Network-Message-Id: ec9dbe34-ba53-4195-df8d-08dd6c2a856f
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001EA.namprd05.prod.outlook.com
+	SJ5PEPF000001EE.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7231
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB9003
 
-The following function shall be wrapped:
-- scheduler_id
+We intend to remove all "depends on !PV_SHIM_EXCLUSIVE" (also the functionally
+equivalent "if !...") in Kconfig file, since negative dependancy will badly
+affect allyesconfig.
+This commit is based on "x86: provide an inverted Kconfig control for
+shim-exclusive mode"[1]
 
+[1] https://lists.xen.org/archives/html/xen-devel/2023-03/msg00040.html
+
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/common/sched/core.c | 2 ++
- xen/common/sysctl.c     | 2 ++
- 2 files changed, 4 insertions(+)
+ xen/arch/x86/Kconfig      | 6 ++----
+ xen/arch/x86/hvm/Kconfig  | 1 -
+ xen/drivers/video/Kconfig | 4 ++--
+ 3 files changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 9043414290..13fdf57e57 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -2069,11 +2069,13 @@ long do_set_timer_op(s_time_t timeout)
-     return 0;
- }
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 18efdb2e31..1e5df84b25 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -137,7 +137,6 @@ config XEN_IBT
  
-+#ifdef CONFIG_SYSCTL
- /* scheduler_id - fetch ID of current scheduler */
- int scheduler_id(void)
- {
-     return operations.sched_id;
- }
-+#endif
+ config SHADOW_PAGING
+ 	bool "Shadow Paging"
+-	default !PV_SHIM_EXCLUSIVE
+ 	depends on PV || HVM
+ 	help
  
- /* Adjust scheduling parameter for a given domain. */
- long sched_adjust(struct domain *d, struct xen_domctl_scheduler_op *op)
-diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index dfc87a2846..c3646517bc 100644
---- a/xen/common/sysctl.c
-+++ b/xen/common/sysctl.c
-@@ -72,10 +72,12 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         ret = tb_control(&op->u.tbuf_op);
-         break;
+@@ -169,7 +168,6 @@ config BIGMEM
+ config TBOOT
+ 	bool "Xen tboot support (UNSUPPORTED)"
+ 	depends on INTEL && UNSUPPORTED
+-	default !PV_SHIM_EXCLUSIVE
+ 	select CRYPTO
+ 	help
+ 	  Allows support for Trusted Boot using the Intel(R) Trusted Execution
+@@ -279,10 +277,11 @@ config PV_SHIM_EXCLUSIVE
+ 	  Build Xen in a way which unconditionally assumes PV_SHIM mode.  This
+ 	  option is only intended for use when building a dedicated PV Shim
+ 	  firmware, and will not function correctly in other scenarios.
++	  Features, like tboot, shadow page, VGA, HVM, Hyper-V Guest, etc,
++	  are unavailable in shim-exclusive mode.
  
-+#ifdef CONFIG_SYSCTL
-     case XEN_SYSCTL_sched_id:
-         op->u.sched_id.sched_id = scheduler_id();
-         break;
+ 	  If unsure, say N.
  
-+#endif /* CONFIG_SYSCTL */
-     case XEN_SYSCTL_getdomaininfolist:
-     { 
-         struct domain *d;
+-if !PV_SHIM_EXCLUSIVE
+ 
+ config HYPERV_GUEST
+ 	bool "Hyper-V Guest"
+@@ -292,7 +291,6 @@ config HYPERV_GUEST
+ 
+ 	  If unsure, say N.
+ 
+-endif
+ 
+ config REQUIRE_NX
+ 	bool "Require NX (No eXecute) support"
+diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+index 2def0f98e2..b903764bda 100644
+--- a/xen/arch/x86/hvm/Kconfig
++++ b/xen/arch/x86/hvm/Kconfig
+@@ -1,6 +1,5 @@
+ menuconfig HVM
+ 	bool "HVM support"
+-	depends on !PV_SHIM_EXCLUSIVE
+ 	default !PV_SHIM
+ 	select COMPAT
+ 	select IOREQ_SERVER
+diff --git a/xen/drivers/video/Kconfig b/xen/drivers/video/Kconfig
+index 245030beea..66ee1e7c9c 100644
+--- a/xen/drivers/video/Kconfig
++++ b/xen/drivers/video/Kconfig
+@@ -3,10 +3,10 @@ config VIDEO
+ 	bool
+ 
+ config VGA
+-	bool "VGA support" if !PV_SHIM_EXCLUSIVE
++	bool "VGA support"
+ 	select VIDEO
+ 	depends on X86
+-	default y if !PV_SHIM_EXCLUSIVE
++	default y
+ 	help
+ 	  Enable VGA output for the Xen hypervisor.
+ 
 -- 
 2.34.1
 
