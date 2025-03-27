@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CA0C3600B
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Mar 2025 08:37:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.928677.1331350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D8D8C3600E
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Mar 2025 08:37:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.928679.1331360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txijn-0006G5-4R; Thu, 27 Mar 2025 08:37:19 +0000
+	id 1txijv-0006Wm-FR; Thu, 27 Mar 2025 08:37:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 928677.1331350; Thu, 27 Mar 2025 08:37:19 +0000
+Received: by outflank-mailman (output) from mailman id 928679.1331360; Thu, 27 Mar 2025 08:37:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txijn-0006Fy-1d; Thu, 27 Mar 2025 08:37:19 +0000
-Received: by outflank-mailman (input) for mailman id 928677;
- Thu, 27 Mar 2025 08:37:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1txijv-0006Wf-C8; Thu, 27 Mar 2025 08:37:27 +0000
+Received: by outflank-mailman (input) for mailman id 928679;
+ Thu, 27 Mar 2025 08:37:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yWE1=WO=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1txijl-0006Fq-8I
- for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 08:37:17 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20606.outbound.protection.outlook.com
- [2a01:111:f403:2613::606])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af4a6f75-0ae6-11f0-9ffa-bf95429c2676;
- Thu, 27 Mar 2025 09:37:15 +0100 (CET)
-Received: from AS4P189CA0068.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:659::23)
- by VI1PR08MB10076.eurprd08.prod.outlook.com (2603:10a6:800:1bd::5)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 1txijt-0006VH-5Z
+ for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 08:37:25 +0000
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on2060d.outbound.protection.outlook.com
+ [2a01:111:f403:2608::60d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b4b5ca8d-0ae6-11f0-9ea3-5ba50f476ded;
+ Thu, 27 Mar 2025 09:37:24 +0100 (CET)
+Received: from AM6P192CA0106.EURP192.PROD.OUTLOOK.COM (2603:10a6:209:8d::47)
+ by DB9PR08MB6523.eurprd08.prod.outlook.com (2603:10a6:10:256::9) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
- 2025 08:37:11 +0000
-Received: from AMS0EPF000001AE.eurprd05.prod.outlook.com
- (2603:10a6:20b:659:cafe::97) by AS4P189CA0068.outlook.office365.com
- (2603:10a6:20b:659::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.43 via Frontend Transport; Thu,
- 27 Mar 2025 08:37:11 +0000
+ 2025 08:37:19 +0000
+Received: from AMS1EPF0000004C.eurprd04.prod.outlook.com
+ (2603:10a6:209:8d:cafe::80) by AM6P192CA0106.outlook.office365.com
+ (2603:10a6:209:8d::47) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.44 via Frontend Transport; Thu,
+ 27 Mar 2025 08:37:17 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AMS0EPF000001AE.mail.protection.outlook.com (10.167.16.154) with
+ AMS1EPF0000004C.mail.protection.outlook.com (10.167.16.137) with
  Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.20
- via Frontend Transport; Thu, 27 Mar 2025 08:37:10 +0000
-Received: ("Tessian outbound d933a9851b56:v604");
- Thu, 27 Mar 2025 08:37:09 +0000
-Received: from L80ddd225d425.1
+ via Frontend Transport; Thu, 27 Mar 2025 08:37:17 +0000
+Received: ("Tessian outbound 9438376ed1d3:v604");
+ Thu, 27 Mar 2025 08:37:16 +0000
+Received: from Lc40efc3c96a8.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- A22862E3-4892-4495-8738-FC8A1918B29A.1; 
- Thu, 27 Mar 2025 08:37:04 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ 8231CFA6-F90A-4401-B875-1A0276B6A03F.1; 
+ Thu, 27 Mar 2025 07:37:37 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
  by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- L80ddd225d425.1 (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 27 Mar 2025 08:37:04 +0000
+ Lc40efc3c96a8.1 (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 27 Mar 2025 07:37:37 +0000
 Received: from DB9PR08MB6588.eurprd08.prod.outlook.com (2603:10a6:10:25a::24)
- by AS2PR08MB9975.eurprd08.prod.outlook.com (2603:10a6:20b:62c::16)
+ by DB9PR08MB6537.eurprd08.prod.outlook.com (2603:10a6:10:250::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
- 2025 08:37:01 +0000
+ 2025 07:37:36 +0000
 Received: from DB9PR08MB6588.eurprd08.prod.outlook.com
  ([fe80::a8fc:ea0d:baf1:23a]) by DB9PR08MB6588.eurprd08.prod.outlook.com
  ([fe80::a8fc:ea0d:baf1:23a%7]) with mapi id 15.20.8534.043; Thu, 27 Mar 2025
- 08:37:01 +0000
+ 07:37:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,14 +74,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af4a6f75-0ae6-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: b4b5ca8d-0ae6-11f0-9ea3-5ba50f476ded
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=pLl/m+/vETEnEtI3Y1nXgSKEdNve8eHeay7y9OMqfNZQWtL3IgLmdIrw2D0c1DPgGwLASBTFUwU9tzcmMyILIY8AXZ+wCftVpE0ORdznI3ogss2Slj64vXpcaps4Xs7U0snE7GL80x7vFEqo25E7uOOpiIjfu0ATtiwRlTXOQbIx7njA5pCiTbvPw3n8JTjD4O7wWvqXrcHA/AlDsyJdOtwSF+/0A5a6/1uVytgy3Uvc6SJ0cV21vNbh8Wyhv50qU2yBGtrdWoYtGHNSztAGZvhVvn/xJbi/vvqGgpcA5NyjN+TfUmslduYQmEqTXGCoGIF7K2VmN7THSFpn7LgBkw==
+ b=ofElv2620GUfTNdnKP8stqPRw+CjJLw0/YbjCLjzq+WrNtMtGYBmrYnsR3R7fkFETqcnXWcRI4AUE1jGZNVh3Vty+/AugrVU799vjAQ0oldPsoYN+ySlB2S4BYagdiGDOB7atCayINiqAlOp8RC6Jt9n5Mp1XdWg0iYAlvAJt09O29s1xubaZJ/k4QKfaGpfKDEHKTx6tOLd0k3NvHO8u4r3fo4vOwqavzNXyUa9YOhQZdC/eQ6vNe9cF5BjHW5gmbfjsSdmrizU27MdcqeYOJdf1AoNNNE/igY4c5Fhazip/U43iXtV6jWdDWWfIJbIfxczpUZXcthg4w/QuXkpRw==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EmkhyCtEOEhLBaybFLIZ4HYsv7SNKTd41UY4xdvR9Jg=;
- b=pFIxAkJu+0EeN3AFNWO+10kuXYlQ/wugh7m8WBxOain80dIM8LtikNHwjYtk6HyC78GwcvplHQ7+2TCr8iSc859GODsvYKsBJu2CM5lhKZmKFDZtc0disk0paqtf9JxxmGrWC7NlyNPL5720Du+C6T0eeQpDHvV933o99c9Z4AkC3x1nBbZTFzjsmI69KIRUV0mO65RAjrUljrZZBP4kW9nrXtzeecdKwDIGLCtrdZIVJvYvELVa+w5OJTqEXsGlseTAe0I1EObJuZl40Tcoh1kdXqhi7t1OHAawdyqV5SRm7wqib8ksktCWUrPc/N7XJbVWWNDXNVsoBAmMg34nJg==
+ bh=VkyD2JXru2Xhnvj+qDTrrFneFhQPrL5ZrbVGl1voIVU=;
+ b=n3sdQo6sigxfii2HUGJT52Rj3P/xK8Lfj7pSJJLZfrCJ89bnqxKtsHldGsYLUELnbCaj50gS6bkJGwMi/OewEBJ7VO3j+xBY90EhHA9Z3w4qeWlTIxOEgQ6KxwarRWaPclS1pUhr1awsNY5EtOtjR+PcWo5dlF29d5OhdImFslAQApmopqQlK/nyNddnK/m95jEw4rDnx1gAd6IVMW0Sz88yg405nd4GVobKk6hnbgxDCPQKkajGhI4IXLcUx+WZSupOYeb0+ln5n/rjmkH+IOpgk1wQXWoXtqQD5dV5MMy2jKswWlfeMv4XRsRxxVHZeRJrOtGZb28350aayyRKBg==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -90,8 +90,8 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EmkhyCtEOEhLBaybFLIZ4HYsv7SNKTd41UY4xdvR9Jg=;
- b=fLwdcxYmqp3qDi3IEm5Pmojc8NptgBLaj4e3vzJCyZtwkekt0hkj/KRQTCbdFzVHq9HCYSoL/OMXAJ4Qcy30JHvR3yZgUTemEXxWVKjAwxwdsijjwOsOkbn6/3/GlqCPvxYXW2jC3L9GFbDLw4FOMPRQJAqwEih4r5AC5OpB6s4=
+ bh=VkyD2JXru2Xhnvj+qDTrrFneFhQPrL5ZrbVGl1voIVU=;
+ b=UgW3CN8T6Ds6XMYaPS3Ps1bC4KUJau07dhWC34sauu5tJhhZn3Ux2tQBw0NnVUQhzTIL/cOXFmNEhaBuOFmPez2ReE0bXcHRIAMcQtk8EfXxi69X6qXFJJ/RdlBskRjgpU8pTfJtwnqKCkxqPnfqWZ7S/CrOOLSUaLGOAVp7MTQ=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -100,38 +100,40 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 9dd22a9587c78bdf
-X-TessianGatewayMetadata: t8VbQh+CzfATGhViFjBASE53oaIa6n/gdVVnFNBt7/Hc2LmwFGxKGAT37g6iHlQzB9Qf57KBif/9Ni3dTmQykwbf8Mx7PrUkoy13abgbeezMAdU7VTN8pUe7enuDKRZ3AgKtxG+1hGXzgFVRLnuYtR4Nevhgv/PXg2o/2Cv6nuw=
+X-CR-MTA-CID: 69309f74a353c43e
+X-TessianGatewayMetadata: 8j/yuIeBSR5P2MfeE39hzyzllNtaT69TlwIXZjUQRnsB1JAjJm73WKkxE7GIjq+yrGeelQ6VVTw56M3Ep2dzaDkFKvCdPhMsqkS4jSbksJ3oK2qt77dHLYrCRLJJJMTa2REs+pv8+fEUt9qREtKT7des3+73UA+C8Wh7VTjSDg4=
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TDLJjxnj8zptLmZ8T+tmmgBrLlm1xxNhiETScdf+G821hiL5NcoeH0K6giFVnXUrKMt2FoiIX2HXP8cCZN5nur25M81eGdh2h4K8cWOHHgrhq1srq8HjQrJlJTMmLNiyQDMik0qUkssFh2xE018MEKD6Jysor6yPdHoC4SNkOca6updsfv5vPDRbYyKyqMt+SjSuA0LiGy+Y7JiLqd+s+PoHeUWadrSMcJ7YYWjvudb+9Oa29fIEEZMjb7kReUHBryzgtm6NxpBiSJPja4QZv1h5GOisLjU4Rdgg5qWroCFW3qV4bXaPXsYX1J+Nv6TxVz/05x3+8VZMoWubi/72oA==
+ b=mFjn+lUqfpt5sFh+DBV+MSD0O2vCU2wAGPlpYuzTN3Qtr2uyqklCFz3dQ9uQQqcGZCyyJ0lSKHdkU2v72qqx4i6DImyDsazhMNY1JJRqSgxAGzW0vsj4x609AcjC/B9OKKqiLPi6nhRAYYkHKWPbo5BnQyz1oluSxbuVXLYhkoKRDKUmJCt9vNYEtEU7JYfHBH4lJrv/COr13aJ67g3TX6B7XIsUv8Lt+qApOx2A+faRfnYBCZXvVpeMRdc+4zPWwzOyS3NcMj0vRiBL65NX5FHkg5gf3eD6lTBNoR9OuPybusuk0SKIlMGS8BIoNHq8SDJrNcdcnFuYv25Ja0j5gg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EmkhyCtEOEhLBaybFLIZ4HYsv7SNKTd41UY4xdvR9Jg=;
- b=kdI0HDUdkg8fHmPdWClVJE7Glx0CMhTKnDqrwoiMPAxmKgjfwKfypuJx2WHbDoPPmFdrc21fxb9gAinpRcDbxWwPLKrAkFI1/RuezXWYPqE3zVJAO1Zr7YnKjnsZ/KwnZRcMOqaFCxu6fnMtats8oHu47AKr/mnvLvFYfwTjz7DhT7ZpU4YlHrmXbA4Y6pY4RQaWV17U6QviiWJFP5yWvA2TGAp3Lvv9TO2ZSz/jS7m0RVpI6fVn0DacOaK2VPLEed1KCJhOw7zqBn3nWdf8SCK44pdUxbgOip40I8bhtyE5RfAm6W7NKR8IBMW2SG0mYqthz8QnApZBnJ3jq7DJaw==
+ bh=VkyD2JXru2Xhnvj+qDTrrFneFhQPrL5ZrbVGl1voIVU=;
+ b=N4xXFv2xrWCycX+loS5EsdHDeACyboxW1mM15koU7YObAp331dClU0s7cIad0SsfeuSTBhh1lhSukjeTxHXleSrJDwexOpVyM72+mF5arUOTC8hBOnFC9YKSHbKQ9lX+kpTL49sIQmVl/2uQN24Ee2iNYZ4HUgKmIeguE2sjxIOBvyYrNQDdk08dpdQtzErvlJgeW6C65S5S0pU/q+ILksU/Qasfq4/3sBIEoiTJu7MnLqh0VTmQS7BBJM3iUmKJErDwwCX4q/iWlUDBvy5wcZ4aN/seuEt1NgmJSkzDsbB0rg7pVNwORqBy87hnsslX2gbv3f4otRIsiBxTBwusOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EmkhyCtEOEhLBaybFLIZ4HYsv7SNKTd41UY4xdvR9Jg=;
- b=fLwdcxYmqp3qDi3IEm5Pmojc8NptgBLaj4e3vzJCyZtwkekt0hkj/KRQTCbdFzVHq9HCYSoL/OMXAJ4Qcy30JHvR3yZgUTemEXxWVKjAwxwdsijjwOsOkbn6/3/GlqCPvxYXW2jC3L9GFbDLw4FOMPRQJAqwEih4r5AC5OpB6s4=
+ bh=VkyD2JXru2Xhnvj+qDTrrFneFhQPrL5ZrbVGl1voIVU=;
+ b=UgW3CN8T6Ds6XMYaPS3Ps1bC4KUJau07dhWC34sauu5tJhhZn3Ux2tQBw0NnVUQhzTIL/cOXFmNEhaBuOFmPez2ReE0bXcHRIAMcQtk8EfXxi69X6qXFJJ/RdlBskRjgpU8pTfJtwnqKCkxqPnfqWZ7S/CrOOLSUaLGOAVp7MTQ=
 From: Bertrand Marquis <Bertrand.Marquis@arm.com>
 To: Julien Grall <julien@xen.org>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"jens.wiklander@linaro.org" <jens.wiklander@linaro.org>, Volodymyr Babchuk
-	<volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH v4 5/5] xen/arm: ffa: Enable VM to VM without firmware
-Thread-Topic: [PATCH v4 5/5] xen/arm: ffa: Enable VM to VM without firmware
-Thread-Index: AQHbnMQpJ/OSxu9MyEmYd5oQRaZ927OGF78AgACVfQA=
-Date: Thu, 27 Mar 2025 08:37:01 +0000
-Message-ID: <8742853A-E32D-4BA5-AA4D-C69A2FCAEE85@arm.com>
+	"jens.wiklander@linaro.org" <jens.wiklander@linaro.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Subject: Re: [PATCH v4 1/5] xen/arm: Create tee command line parameter
+Thread-Topic: [PATCH v4 1/5] xen/arm: Create tee command line parameter
+Thread-Index: AQHbnMQmQgteIfltyEaLKiSPxnHrbrOGCSIAgACTgIA=
+Date: Thu, 27 Mar 2025 07:37:35 +0000
+Message-ID: <CC7C3E7D-5F07-4567-92BA-BC84A3F395FC@arm.com>
 References: <cover.1742824138.git.bertrand.marquis@arm.com>
- <0f5cf498c3c511ed192e8b7b7d0f4987e00e5c0d.1742824138.git.bertrand.marquis@arm.com>
- <6727ece4-d589-4ab4-9172-07dd6a7f2b44@xen.org>
-In-Reply-To: <6727ece4-d589-4ab4-9172-07dd6a7f2b44@xen.org>
+ <a22e5375df48d16cb4c0b3d80dde8593522b3ddd.1742824138.git.bertrand.marquis@arm.com>
+ <4dc98a8b-ea82-41a7-9a10-1184208884fc@xen.org>
+In-Reply-To: <4dc98a8b-ea82-41a7-9a10-1184208884fc@xen.org>
 Accept-Language: en-GB, en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -140,170 +142,283 @@ x-mailer: Apple Mail (2.3826.400.131.1.6)
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 x-ms-traffictypediagnostic:
-	DB9PR08MB6588:EE_|AS2PR08MB9975:EE_|AMS0EPF000001AE:EE_|VI1PR08MB10076:EE_
-X-MS-Office365-Filtering-Correlation-Id: adcfeac2-e8c6-46ae-ec4d-08dd6d0a90ae
+	DB9PR08MB6588:EE_|DB9PR08MB6537:EE_|AMS1EPF0000004C:EE_|DB9PR08MB6523:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b344f2e-90de-44c0-328e-08dd6d0a9509
 x-checkrecipientrouted: true
 nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
+ BCL:0;ARA:13230040|1800799024|366016|7416014|376014|38070700018;
 X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?HAnEJwrqdRmN/gP84qJLuidvhaKbQ7jFDhZSFsgioaXPUKy1KqSGlvp7TalY?=
- =?us-ascii?Q?tqY1IF1G4nsvnizlKroaNINiMnxwg86hLNXMzMlPca6HrXuj/er86NIurlrp?=
- =?us-ascii?Q?5mQNaCOHcw3TMf+jQlWN+sumpjb27jcUd8+oiF2G1iuXwEipU9pGGSSbKxzO?=
- =?us-ascii?Q?XK1iYR2/McoVslWV0Kf/OG8ZzRuWNP6+JoE1WxMv9NuCCL3z82b0Xfyd9LV5?=
- =?us-ascii?Q?j80CHeXgkUi7C+Ry7BPMTo3XW9brX8BaDtuuqpqg4VNLusvB09DbEmCHKg7x?=
- =?us-ascii?Q?UFrEze9WJsL+kMu6QZk3XGKogQchZe3ChSVXBw1h4L1Bd51IFJtSqrX0JsTm?=
- =?us-ascii?Q?tSIfxtwsQ/eOS7LBln8wtdru9yMmApEVY+bnEjxr47Hgd2jJ6uxbW6G2LirY?=
- =?us-ascii?Q?Q35t02XDmyduELd3sqqYT6ZUnAuI3Fa+TDsTDfnHTtYPSosn8z7hp7QSk/hh?=
- =?us-ascii?Q?WrmK1ctwrCV0Junx5qa/CMs5q47rQQ1iRWy0TpR/S7TPzfHDh/mvu6O3Ad2T?=
- =?us-ascii?Q?T477nEup9TJ9TzK22oo3H+ilO+QcQP7b07XA88ou+fUU9YUVA9MwTNLpxKPB?=
- =?us-ascii?Q?q7pqqpe1kFMHdYqQdOlaxgu8zvShit22JzFhKdoMW46TMkbyKVaNhs2KKckO?=
- =?us-ascii?Q?7CTemx3evpeAY8tPabeZ+J3sU9Pwv60u6EEehEggCERqraBptdR09lZM8ctb?=
- =?us-ascii?Q?Is/Jl4LfsUfTNMB6mvGAv+2w1OocL7wFz8FcSch5WrQYAf2GzhTxvigHv7DR?=
- =?us-ascii?Q?VlatZLLFtdYIuuPrwtSGzeMbXGHyFsovbeesV1yrjup3tXM0YthoLGdDEnYq?=
- =?us-ascii?Q?yfjRZU1CoQUj1J17MLYKfhE0Qqwooqg1IWdhA0oH9jgzNbREnfVI51wYyvEo?=
- =?us-ascii?Q?x8xlgo0ip6CY7JS37p2unJ3vqRsEj2Tq9tipmWSDdrMKBW7zdgA2aapatFc3?=
- =?us-ascii?Q?SAw1p+90Rk8N+7ijbDOfwrxGrH022m6Yj8coup6/nUZEC4XJCSwXORqHWGDm?=
- =?us-ascii?Q?tsgUgDlPI96lTQdQ1bwAV06DXM6WbE25mkpgicdc1oyS7jdFE2+xOwEKQJCT?=
- =?us-ascii?Q?m5Ye8T7TFEsPcLLdE+ECE4sFiPVaRZLU9LsNuxpKY5+b8XYn37ezeApuXGwg?=
- =?us-ascii?Q?fGiZXnl5mKCFuz4VaGn52YVwTH/cnoVpvXPwSrnZjVMDzyp9iA/sgmMYJkTI?=
- =?us-ascii?Q?Axdp4IhwXNGSSOcdVsCrm4LRKMZqVPHQ/2CWFyTzFbX/vmi0F/XbeH4Il+X5?=
- =?us-ascii?Q?l9pjYpDj6x11iHEBAr/gzrC6+rbINSdUWu6dhmh8/ArHFWmy7nq9ltDA3rUH?=
- =?us-ascii?Q?cd0lCMRHu+wguULV9rQRwO9ElSxuDYdMkfI6MndklGTiONTHBeFcfErolC1w?=
- =?us-ascii?Q?kbGP0Y/n9HaSU92YnF690caOlfzzrb0Kxyptb/LYMb/pFnWs3aK7VS9SwSvi?=
- =?us-ascii?Q?BGtrwqP8k/LUbjfZ6q0ZKlWOrC36J0iY?=
+ =?iso-8859-1?Q?ugNS16GMlgZL1u0A94hJiMuQNbk95RWhKd0kCPcfI7+X0KYVDeAditvIz0?=
+ =?iso-8859-1?Q?a7e7Mx1Ih1+gIJFoZCD9sHNZwheDl2xt0GfAtNTf1aCZj7oUs93a39Ypzz?=
+ =?iso-8859-1?Q?Nk1MlMdPuQpQsqiSKs9VmDPPRDh0O4ZQOp8S0kOoFn505dlNJwBAlTRdq2?=
+ =?iso-8859-1?Q?LcW2KFqxtPSmJG3g9n0KacBNBNn685l6b/aMqoClndw6MumZuxeCVvC8BR?=
+ =?iso-8859-1?Q?hz6f1a6/xI5TXyjbbnFjLpyfhnco29XbNmqyUWlridx8af5sq9r9XzQqCr?=
+ =?iso-8859-1?Q?3LLAQ8SQEFxIHRUtvjkunIoFAm0HkkD1KfiVxnTHNJNjZa3boJdWSTbOpb?=
+ =?iso-8859-1?Q?nYeMtZsXXY3w8tfHbpKf+wnN50C8y8tNKBWR8m6S7SxTqS0DvNkNtAIMAl?=
+ =?iso-8859-1?Q?j4MQTHVZ5+BnT+b2KGrGSdei6tbkGhfW9fhMwZinyddgK6XU+CSou5mf3w?=
+ =?iso-8859-1?Q?yGpYanjLKwyvgCo4+dHO1rTk64l/P6X221KE1uZguXBo8rBtcal6WyhPCX?=
+ =?iso-8859-1?Q?Qgf0RlG2a6IZE9kQtkwPrFtc7WSxvNMJRVjR5H9jYPTaHITsfXvxs+eJzy?=
+ =?iso-8859-1?Q?NlXZGJIA1dPgWa3pNH+crfzz0//uBEBbS1UrEKt6TowbysqruNt1xITLb/?=
+ =?iso-8859-1?Q?OCam5QK4Ia6dTuq4jX6mkOLG92/82SGquAY/kSFl5M8iixaGUfVVBjA+uS?=
+ =?iso-8859-1?Q?yrC6v4DVY3zrCJ8lBoOf08Plr7U7AVL2jYa13KVeRqB6bsmWuHXzKURPob?=
+ =?iso-8859-1?Q?LkMiNqMKVbKdY2LgsaViDceYkvVDlIjT7u7Z05grlTorXiUx6s0oJ5Pahy?=
+ =?iso-8859-1?Q?mjWxeU2bnVMqYh/nsYL5HVuvR5zY9Wb41QK3fE2c6eJGbCV75645TowOkB?=
+ =?iso-8859-1?Q?B38daYnFj14c4ND54+2Lh689cy4GsiGRxtS+arkElncbfYO9OWCAL1fI1t?=
+ =?iso-8859-1?Q?xI+lHNUoMLz71874dLopMbbirz+bSg9oR2SlH6dVzQAYL/twWx0viCMJUm?=
+ =?iso-8859-1?Q?nvwKUOe581rit8fSMa21E8iKnNLAymaPo1dL7ealURiN/lZ08XRttSZzEb?=
+ =?iso-8859-1?Q?1XlVDoyo7eG/DXKDOnZxCHC8hX0+bqoTBcfCk3e8DrvAfFn9Y8QDBJv9nk?=
+ =?iso-8859-1?Q?YOMGYI0RLfeyQ36aSOr8rEi/BaAUZkjHjMv4RkcKV9PNBEPqVBsj4Zc27C?=
+ =?iso-8859-1?Q?61oyLQpUjfyTeDUoYwZxvVNuKZ6NwWk7fdWR2wn7NkSdkywRmWNl8D5oVf?=
+ =?iso-8859-1?Q?55TVkHWXY9LW15Oe3R7HjTIO7Jl8M9lMcWpGcaz8+wd9kJ2J3cnVNvMsHr?=
+ =?iso-8859-1?Q?FdkFcqUXfyon1rlGMbmgpy5XqhzlBs/sEa11PMC/YdK+a3YNnRwbiolyKS?=
+ =?iso-8859-1?Q?d0WNTmEgiS5NKHAcFbnZBwus/aGtOwPDhmtew3G+6A/V6FKy89e6vhlHKX?=
+ =?iso-8859-1?Q?q6IduVyMz3qyz7B4Jff7XwgCRlXPVm+6QJVNAqwb6NAb+SqaQPtmBkaL6H?=
+ =?iso-8859-1?Q?29j1Ps/S1ZjctEmCDB8zsn?=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB6588.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <9F007AD0F61C3746914F475CEDCCCE2E@eurprd08.prod.outlook.com>
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB6588.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(38070700018);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <5F143D0EDA76E042843320DF76F25AF1@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9975
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6537
 Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 X-EOPAttributedMessage: 0
 X-MS-Exchange-SkipListedInternetSender:
  ip=[2603:10a6:10:25a::24];domain=DB9PR08MB6588.eurprd08.prod.outlook.com
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AMS0EPF000001AE.eurprd05.prod.outlook.com
+ AMS1EPF0000004C.eurprd04.prod.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	876f0d17-22e6-410f-f01d-08dd6d0a8b7d
+	16d40701-a651-4485-8db4-08dd6d023e43
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|35042699022|1800799024|36860700013|376014|14060799003|82310400026;
+	BCL:0;ARA:13230040|14060799003|376014|35042699022|82310400026|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?dJpciHAmvkg8WN9Ca4jNs3aq36hsy5OTO5ZC/8JJr/+XgCGsSksK/XauZqgR?=
- =?us-ascii?Q?vuUYq2CvbRdfTq2lWK4QfeywEGclNQayORmypwy3yokRPF3eWYvphKhMNdIE?=
- =?us-ascii?Q?BO4E1Yca2W2MDiUfXeDI4U/F0VFT6DmM5X284fXAd/KHM1mRaz/ULSLZwWH6?=
- =?us-ascii?Q?1T5KBy+L2SR6SLOGulTadddRuFtrXtwwPNY+sNc4yrL5RONSbBHjA04+gJ1E?=
- =?us-ascii?Q?fSoOM0UXJNHxTEI1lj+NDxxpVSG42iqDxwNE2Y4O+JVzSaWvSkV1iLzn/iY/?=
- =?us-ascii?Q?pNf5hOQaaB9LrJqN+mQBSvRcbpsyg4dkQypIMkCOFxPEC1qF8eDOPUQkxWUK?=
- =?us-ascii?Q?TOEMTTGpHcw9c3OtjJYAKNTlDhG2A3nMfTzwhNQ45W8PFpsYQLQICxxlGNlH?=
- =?us-ascii?Q?pleLnKpBqbcg/8m97KqoW6Gy4QIbU2LFO3IlaSp4w4MtJg0rOLoOFngsk5dv?=
- =?us-ascii?Q?ZWL4UUYT6c3+K0tgbCf57lDwBIhnZLpnxKh7skkXuZRiXAQKaVDWYqsyjNJD?=
- =?us-ascii?Q?ODLM8bG1Fel9xTVOvJCzOCSJW0IBAurl8CU9lr/Rck8V+owo/HYTQNtCVAvY?=
- =?us-ascii?Q?9qwyR686L99W0kpmZNNFicUE26hFUeVYDbtlvrI9FTB+y8Aqzm0bWYmkPmiY?=
- =?us-ascii?Q?G6rZ1P6Dazkly0D87JDoQg7gmAv6ovPE9K3Dme2IMKtyIKO9yDVHE367+TL4?=
- =?us-ascii?Q?G7r0fjvkZbPvuSFnSjdsLZYXWkNWeoRDjhzAIWt5mxnO57vmcOvFKCb3/sid?=
- =?us-ascii?Q?3JmWT94KSEkLxE17IVOtc5fQIIvJPbGVl6ubD2+KxDkc2ZIy+F7yifKCx4bW?=
- =?us-ascii?Q?S0yMn+RSPb8mvGrpLBjraq5oW/6iGuGKBypi+Si++DIoKjNMDsf0yKR8Pjre?=
- =?us-ascii?Q?tcjKeXrOop+93NkS+l4jhMBaAdstoLQXlUsJ5mOjBnBPKMHvw0DMJAqB5HXn?=
- =?us-ascii?Q?1OhjxsuJDKbym/bJ1R0zGLlTxkabKOYT6SwkgammQfyH2w9Kod2PkdbCNGcm?=
- =?us-ascii?Q?WOYqrkyBM/l9Tov/AEICKLSIthIwkZ5MutpoETiLD2bmryb4JPxKN1TLM1OE?=
- =?us-ascii?Q?5eaPhshz36T4soSd4PDCk2irl1kEmdQOoRsCsaaxz+65589V8hPDTRdXdtPS?=
- =?us-ascii?Q?OuXegcnaFvKYdYJ2lVuIl7pg2t45pRQdnKyCccmsAgFRpZMVKeta4MMabDUU?=
- =?us-ascii?Q?Zv+znH9c0pQUkjmRddlQieUzm3EENImGAUb94j/lpAU81iaWPQsKQonaDhqS?=
- =?us-ascii?Q?U61qYz3YkYBgci1VSsnolf4SLo0A8VITJNn5suhKFb//QATBgUkLvwZvYYK+?=
- =?us-ascii?Q?gIvyNyVjc07WDH6WKgxPvGI5zUskZm0z19AUHP/XeteOOZXdHqRl9QOB80lv?=
- =?us-ascii?Q?f6iAE3L3RiHPT6KjUTIk0CJ4iQssa6Oz2JDGYktPmic56+p5Zl2l3Cnnc1Nu?=
- =?us-ascii?Q?wd/mPMeFaRTML2BWkJDsIj1I+9YR1uaVfvDgYpwfMrUCXkv65DHFdeTPkwxG?=
- =?us-ascii?Q?43DwxourituZMF8=3D?=
+	=?iso-8859-1?Q?C89lQkQQKAzhJlMex25IW28Q4HVaLeaPtO8FYYrLyWLga5q26xaw3oXtEJ?=
+ =?iso-8859-1?Q?lkf66PiTiyLE4aNjvpARNiy4njMoCJtNFshCuJwAvLKlZO3tLzkfKWatFw?=
+ =?iso-8859-1?Q?uktg3CQQbrJs6oaX6Sl0gYHLr3xRUA/6RdldLIFMqyup2DUKzHi4BgTvKd?=
+ =?iso-8859-1?Q?UrwwmXVqZEEe3adUsG0dUHt1A7fKTodnPPSMvyH4W2TgSfCulqpraqmj7z?=
+ =?iso-8859-1?Q?3svV0IRCFtJUVYttzAe0y6sZwSZtCMcVwxy9IecuihBXuADKzQKbtB2Ee0?=
+ =?iso-8859-1?Q?hHjqlXKvgV+9ammMF1Qs+7NDZa7IVMg/KXoFPERovmFn5SLmHSn/y2wXrn?=
+ =?iso-8859-1?Q?Ra0KUgkZyQ2RWC027SBFI0Oi/obrKoE22lMcP2OGpe9ofwB2GhTp6pYobf?=
+ =?iso-8859-1?Q?L1m3zzlWAzccTbJiVJi7fUhCcLI36Cqs62ConpTuDHPv5cYNe3XoFfyhGc?=
+ =?iso-8859-1?Q?yuIxsoua1UE3g/O1BcxP/62c01teKoUZvhgI6IcMXmugfyow/uIuZFHuaD?=
+ =?iso-8859-1?Q?+RFc9ql3WsQxxMl9yTTpduvW49/Zf0PQXiFwTK0lZSdC1nSKn0HoHbDvc6?=
+ =?iso-8859-1?Q?h8ZzEBSfXNCaRqE6ISZANoyP67LWFF+mLTZdTKcgL4laogOj+Io8cFn5M/?=
+ =?iso-8859-1?Q?pDFWYmxBpeXruF3dt4fy3xbBg2mGI4LSudzXWl6g/l4KyhvTMnDVGaj+OO?=
+ =?iso-8859-1?Q?sl952pBKOKScFixhkVi85l5hS0IKuqyQrlTJ+Lbhd1YdZaS6Mor6yGTbHy?=
+ =?iso-8859-1?Q?v4AlF2N4cHhG0M+lOMlbVdOf+7wfVGLPUvoe87Qy7Q6CrV/TrSKLnURPXM?=
+ =?iso-8859-1?Q?HAxKq1ACRvTutwd/eCADYcK3MW+2PIuSqgg/Rqy79CtjsmaPtmvSrFyAGd?=
+ =?iso-8859-1?Q?rb8Epcusa1iX8j4Podqq3vHqjXIPnecfKDdtxiXbOz0gyVIq5L5n6XL9YZ?=
+ =?iso-8859-1?Q?EEGnamtQYJ+b7pEj646UK009K7zgfY5fKkNlm5jytyIaC1wSZcQJt0sD7z?=
+ =?iso-8859-1?Q?OxqbYcCI0aC9QGSSTtqtVJFPE2BYhUz/x0nXJQaxYOUWhC/k9SBgk+gu1K?=
+ =?iso-8859-1?Q?lFRmRWNhHnC1LY/badTQ+QpiyAbYZAgeC+2RxAF9QHB25jrk4cXXdVwdr+?=
+ =?iso-8859-1?Q?WiuWzGb8KeLIiMTrF93x19Hok4vPKKLalsJWPmL+U02fZBfkipkJhYMH/b?=
+ =?iso-8859-1?Q?ENCzabX211Pru9hx2RZQiOHb6YZe318vaA2CRr7c/1x8Z4UX4UDdRPQmGo?=
+ =?iso-8859-1?Q?Wp75wf4YUEnKbDHJT+E2zTPSz+QNlHjmvD8sZiwXTRPewN3whYLu5HkiYg?=
+ =?iso-8859-1?Q?RJiM7AmRkaeyhvV5l3coV2qwBuQwQbjY5yCzfWzUGkPoEMGpJpAGb/A/Ru?=
+ =?iso-8859-1?Q?0up+E7HtLH2wBfbIQuYAGp1XTyVuey6BuCH21OeH6rgdP0dZVp7xxVutyx?=
+ =?iso-8859-1?Q?SNeA3HIawfwiMP1fJqai7bfY+UMgMCu5Dv81CCwAYMyIsSiDWVHRfu+DUx?=
+ =?iso-8859-1?Q?R5omf8HxAQsnq+M9L9F1IMPZitlgQBxfDDOeOKoWqYa44fMOSSJtujcyjx?=
+ =?iso-8859-1?Q?aLHjEq0cTjIHSpZtqTtZ7hsJl86E?=
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:64aa7808-outbound-1.mta.getcheckrecipient.com;CAT:NONE;SFS:(13230040)(35042699022)(1800799024)(36860700013)(376014)(14060799003)(82310400026);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:64aa7808-outbound-1.mta.getcheckrecipient.com;CAT:NONE;SFS:(13230040)(14060799003)(376014)(35042699022)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 08:37:10.0024
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 08:37:17.3361
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: adcfeac2-e8c6-46ae-ec4d-08dd6d0a90ae
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b344f2e-90de-44c0-328e-08dd6d0a9509
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	AMS0EPF000001AE.eurprd05.prod.outlook.com
+	AMS1EPF0000004C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB10076
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6523
 
 Hi Julien,
 
-> On 27 Mar 2025, at 00:41, Julien Grall <julien@xen.org> wrote:
+> On 26 Mar 2025, at 23:49, Julien Grall <julien@xen.org> wrote:
 >=20
 > Hi Bertrand,
 >=20
-> On 24/03/2025 13:53, Bertrand Marquis wrote:
->> When VM to VM support is activated and there is no suitable FF-A support
->> in the firmware, enable FF-A support for VMs to allow using it for VM to
->> VM communications.
+> On 24/03/2025 13:52, Bertrand Marquis wrote:
+>> Add a new command line parameter "tee=3D" to be used to explicitly selec=
+t
+>> what tee mediator is to be used by Xen and fail if it does not exist
+>> or the probe function for it failed.
+>> Without specifying which tee is to be used, Xen will use the first one
+>> for which the probe function succeeds which depends on the order of the
+>> mediator list which depends on the compiler.
+>> Using the command line argument, it is now possible to explicit request
+>> a specific TEE mediator and panic on boot if it is not available.
+>> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+>> ---
+>> Changes in v4:
+>> - None
+>> Changes in v3:
+>> - Properly classify tee as arm specific (Jan)
+>> Changes in v2:
+>> - Patch introduced to add a command line selection of the TEE
+>> ---
+>>  docs/misc/xen-command-line.pandoc  | 14 ++++++++++++++
+>>  xen/arch/arm/include/asm/tee/tee.h |  4 ++++
+>>  xen/arch/arm/tee/tee.c             | 31 ++++++++++++++++++++++++++++++
+>>  3 files changed, 49 insertions(+)
+>> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-l=
+ine.pandoc
+>> index 89db6e83be66..0c2ff542a138 100644
+>> --- a/docs/misc/xen-command-line.pandoc
+>> +++ b/docs/misc/xen-command-line.pandoc
+>> @@ -2651,6 +2651,20 @@ Specify the per-cpu trace buffer size in pages.
+>>    Flag to enable TSC deadline as the APIC timer mode.
+>>  +### tee (arm)
+>> +> `=3D <string>`
+>> +
+>> +Specify the TEE mediator to be probed and use.
+>> +
+>> +The default behaviour is to probe all supported TEEs supported by Xen a=
+nd use
 >=20
-> tee/ and the callbacks associated are meant to be used for mediatiors. My=
- current interpretation ist this is only meant to interpose between a guest=
- and physical resources. Here you are extending the meaning to "virtual TEE=
-". I am sort of ok with that but ...
+>=20
+> typo: I think there is one too many "supported". Maybe keep the one after=
+ TEEs?
 
-I see what you mean but FF-A will not only be used to communicate with TEE =
-(even if the primary use case right now is this one, including have it in a=
- VM instead of the secure world).
+ack
 
 >=20
->> If there is OP-TEE running in the secure world and using the non FF-A
->> communication system, having CONFIG_FFA_VM_TO_VM could be non functional
->> (if optee is probed first) or OP-TEE could be non functional (if FF-A is
->> probed first) so it is not recommended to activate the configuration
->> option for such systems.
+>> +the first one successfully probed. When this parameter is passed, Xen w=
+ill
+>> +probe only the TEE mediator passed as argument and boot will fail if th=
+is
+>> +mediator is not properly probed or if the requested TEE is not supporte=
+d by
+>> +Xen.
+>> +
+>> +This parameter can be set to `optee` of `ffa` if the corresponding medi=
+ators
 >=20
-> ... this part is concerning me. You should be able to build with CONFIG_F=
-FA_VM_TO_VM and still boot when OP-TEE is present on the system. This is no=
-t too critical now as this is tech preview but this is definitely a blocker=
- for making FFA supported. Can this be mentioned at the top of the ffa.c fi=
-le (which already contains existing blocker)?
+> typo: s/of/or/
 
-OP-TEE supports FF-A and in fact should be switched to using it by default =
-as it allows it to run in parallel of other TEEs in the secure world or hav=
-e FF-A compliant SPs running on top of OP-TEE.
-More and more you will see FF-A popping up as a recommended (or required) p=
-art of the firmware features.
-
-So the only reason to use OP-TEE without FF-A is if you have an old OP-TEE =
-in which case your firmware will not support FF-A and using it between VMs =
-is probably not required.
+ack
 
 >=20
-> Also, given this would expose a fully virtual TEE, we should be able to h=
-ave a system where you have some VMs talking FFA and some using the physica=
-l OPTEE (or another TEE). Whether we want to support it is a different ques=
-tion but this design would prevent it. Is this intended?
+>> +are compiled in.
+>> +
+>>  ### tevt_mask
+>>  > `=3D <integer>`
+>>  diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/=
+asm/tee/tee.h
+>> index 0169fd746bcd..15d664e28dce 100644
+>> --- a/xen/arch/arm/include/asm/tee/tee.h
+>> +++ b/xen/arch/arm/include/asm/tee/tee.h
+>> @@ -55,6 +55,9 @@ struct tee_mediator_desc {
+>>      /* Printable name of the TEE. */
+>>      const char *name;
+>>  +    /* Command line name of the TEE (to be used with tee=3D cmdline op=
+tion) */
+>> +    const char *cmdline_name;
+>> +
+>>      /* Mediator callbacks as described above. */
+>>      const struct tee_mediator_ops *ops;
+>>  @@ -77,6 +80,7 @@ void tee_free_domain_ctx(struct domain *d);
+>>  static const struct tee_mediator_desc __tee_desc_##_name __used     \
+>>  __section(".teemediator.info") =3D {                                  \
+>>      .name =3D _namestr,                                               \
+>> +    .cmdline_name =3D #_name,                                         \
+>>      .ops =3D _ops,                                                    \
+>>      .tee_type =3D _type                                               \
+>>  }
+>> diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
+>> index 3f65e45a7892..066b5ba40f9d 100644
+>> --- a/xen/arch/arm/tee/tee.c
+>> +++ b/xen/arch/arm/tee/tee.c
+>> @@ -19,12 +19,17 @@
+>>  #include <xen/errno.h>
+>>  #include <xen/init.h>
+>>  #include <xen/types.h>
+>> +#include <xen/param.h>
+>=20
+> Coding style: The includes are order. So this wants to be moved before xe=
+n/types.h
 
-Right now i would say this is definitely not something we need as part of t=
-he tech preview as anybody using this feature in Xen would use an OP-TEE wi=
-th FF-A support.
-But from Xen point of view, we should (if we can) support running on old sy=
-stems with an existing OP-TEE but still use FF-A between VMs.
-This has some consequences on how the tee mediator and FF-A support is desi=
-gned and I will definitely give it some thoughts (primary idea would be to =
-decouple FF-A with secure as mediator to FF-A between VMs somehow).
+ack
 
-For the review side of things, am I right to understand from your comments =
-that this ok for now as tech-preview ?
+>=20
+>>    #include <asm/tee/tee.h>
+>>    extern const struct tee_mediator_desc _steemediator[], _eteemediator[=
+];
+>>  static const struct tee_mediator_desc __read_mostly *cur_mediator;
+>>  +/* Select the TEE mediator using a name on command line. */
+>> +static char __initdata opt_mediator[16] =3D "";
+>> +string_param("tee", opt_mediator);
+>> +
+>>  /*
+>>   * TODO: Add function to alter Dom0 DTB, so we can properly describe
+>>   * present TEE.
+>> @@ -81,14 +86,40 @@ static int __init tee_init(void)
+>>  {
+>>      const struct tee_mediator_desc *desc;
+>>  +    if ( strcmp(opt_mediator, "") )
+>=20
+> You are using 'strcmp(opt_mediator, "")' several time in the code. This s=
+hould never changed, so can we introduce a boolean within the function to i=
+ndicate whether opt_mediator is set?
+
+Very good point, I will do that.
+
+>=20
+>> +        printk(XENLOG_INFO "TEE Mediator %s selected from command line\=
+n",
+>> +               opt_mediator);
+>> +
+>> +    /*
+>> +     * When a specific TEE is selected using the 'tee=3D' command line
+>> +     * argument, we panic if the probe fails or if the requested TEE is=
+ not
+>> +     * supported.
+>> +     */
+>>      for ( desc =3D _steemediator; desc !=3D _eteemediator; desc++ )
+>>      {
+>> +        if ( strcmp(opt_mediator, "") &&
+>> +             strncmp(opt_mediator, desc->cmdline_name, sizeof(opt_media=
+tor)) )
+> > +            continue;> +
+>>          if ( desc->ops->probe() )
+>>          {
+>>              printk(XENLOG_INFO "Using TEE mediator for %s\n", desc->nam=
+e);
+>>              cur_mediator =3D desc;
+>>              return 0;
+>>          }
+>> +        else if ( strcmp(opt_mediator, "") )
+>> +        {
+>> +            panic("TEE mediator %s from command line probe failed\n",
+>> +                  opt_mediator);
+>> +            return -EFAULT;
+>> +        }
+>> +    }
+>> +
+>> +    if ( strcmp(opt_mediator, "") )
+>> +    {
+>> +        panic("TEE Mediator %s from command line not supported\n",
+>> +              opt_mediator);
+>> +        return -EINVAL;
+>>      }
+>>        return 0;
+
+Thanks a lot for the review.
 
 Cheers
 Bertrand
-
 
 >=20
 > Cheers,
 >=20
 > --=20
 > Julien Grall
->=20
+
 
 
