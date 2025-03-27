@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD71C3600B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E7DC36010
 	for <xen-devel@archiver.kernel.org>; Thu, 27 Mar 2025 00:41:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.928332.1331050 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.928335.1331079 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txbIz-0002Gq-Ht; Thu, 27 Mar 2025 00:41:09 +0000
+	id 1txbJ2-0002xJ-Bm; Thu, 27 Mar 2025 00:41:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 928332.1331050; Thu, 27 Mar 2025 00:41:09 +0000
+Received: by outflank-mailman (output) from mailman id 928335.1331079; Thu, 27 Mar 2025 00:41:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txbIz-0002Gj-Eh; Thu, 27 Mar 2025 00:41:09 +0000
-Received: by outflank-mailman (input) for mailman id 928332;
- Thu, 27 Mar 2025 00:41:08 +0000
+	id 1txbJ2-0002x5-8Z; Thu, 27 Mar 2025 00:41:12 +0000
+Received: by outflank-mailman (input) for mailman id 928335;
+ Thu, 27 Mar 2025 00:41:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QKAi=WO=epam.com=Volodymyr_Babchuk@srs-se1.protection.inumbo.net>)
- id 1txbIy-0002GY-Pt
- for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 00:41:08 +0000
+ id 1txbJ1-0002GY-2z
+ for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 00:41:11 +0000
 Received: from DU2PR03CU002.outbound.protection.outlook.com
  (mail-northeuropeazlp170120003.outbound.protection.outlook.com
  [2a01:111:f403:c200::3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 246860e6-0aa4-11f0-9ea3-5ba50f476ded;
- Thu, 27 Mar 2025 01:40:55 +0100 (CET)
+ id 2ca53e0b-0aa4-11f0-9ea3-5ba50f476ded;
+ Thu, 27 Mar 2025 01:41:08 +0100 (CET)
 Received: from DU5PR03MB10441.eurprd03.prod.outlook.com (2603:10a6:10:516::14)
  by PAXPR03MB7698.eurprd03.prod.outlook.com (2603:10a6:102:204::23)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
- 2025 00:40:52 +0000
+ 2025 00:40:53 +0000
 Received: from DU5PR03MB10441.eurprd03.prod.outlook.com
  ([fe80::eeb8:470:6260:e5f4]) by DU5PR03MB10441.eurprd03.prod.outlook.com
  ([fe80::eeb8:470:6260:e5f4%5]) with mapi id 15.20.8534.043; Thu, 27 Mar 2025
- 00:40:52 +0000
+ 00:40:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 246860e6-0aa4-11f0-9ea3-5ba50f476ded
+X-Inumbo-ID: 2ca53e0b-0aa4-11f0-9ea3-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sfk02un9q02B/0bumb1FtN8NhEaRvwUbfW5xeYZkif62bPg7NRJEYRbVncc5RK4dz+S4IZVEE47dloblcnwvnUei8abGD52jRtDe5xn6kjb/v+OcGlmJ2OjJPlkUIsX1YBMW3ohLSOP5rQfR3SblBQU3AqmTNA35EGqkB/5aXuXEbht+Uy1tii06F9J//vTdi3gucnEDOoh8mpe9Cwm6RKtPA6YQmM1qC324yWDZJwiIoMwywYbcO+/nZaXPivNdWuyaYc4BVdmVSK2aQi+GtpZQY499PtW/i3ucurrGirpbTmfpxUQtqnlKMcANcN7dkz9OyK3xUuy09qUWjCm6GA==
+ b=P0eKmNW5+C4LCYhzi72QR6kHQ8mS6yP+quXeRTBxQuyWgxm85gA7xozF9y9cWJboSgChIwi0ag/sr+Oi7E25ZT+dOB/4n4U640EoWUowd86wIEluAx94DeRVfgaE30+2iev0bL6yGFbTFHdzDXE9EEVf61r4OTWXsEkzrOsgllTuyL2g0k43U26bTRfUW0ENvJLeso9M5HfVjX3Tsa63IUHF+1yRcY2ReYsIvGtnxWhw9ySGGxdNi4fMQeToim1fCceE37Zf4I2+2PqkMTZj5vBa82EOtPkws5MEkFo+yYjSWSHaqI565ZdJ7B8R0G6W/UwZqRck6/xHogENpTsVDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WgZ4V7ISrw3XQT0QFrJB9/7oXTXJD1n7cCtmvAUHZFA=;
- b=Te1t/vFqL04muuuh3qEQ1hue+n3WDeun5vUlG4AGu0givAww+SJsQHjgpF0qtionKiADqUhLLLSuMMqQB2b+pSxXyVj3koGiD56z1iFkFgRzhKDEQ/DjsB5vSGdrjzKN74xsTDQZXgjz3sZ6ebw7luY34F/hTpKWhtwMi/XRtSPMRJiEu6deU87sZToPQH5sX2ZSlZsR+EMn9zlSoKGTA/sLct4Jf82bNyqhArneYYbEFqMS95fdX7mXsE0VmEqNtziGt8ROkiOYhVcmUkA+Ps3FmvdQpXLVwBt++uS9k209dsLua8ABEjbVgeYa4rCqGmQtHr3+iquhE+rKkXch8A==
+ bh=1K3MmhtzYn9ZPBR2hv+3NHFuXqvZWBepKWcFj7+iASY=;
+ b=E4irhX1N3iYRgA4aq7SygNw5egIiiGo8lK9gwzGsERBxZL4mu9V6FlAFxR3dXmWim/xfwCT5I1A3phviho0nZXQ3jwuBDWRHRhlmTBvvSsDLD5h0vyZVm9YSZmN4leTe7M0Zgw680/DbEIMW5+rQUZAnUrOHYJJU/vPrIZt59v37sgiZFzqnryGi50jiq4bv4ujgFlJqeibwbifGllo0SO88GSOU4aBEXVrZ6udvdNc5KVQ6HV58Dyh2d5+CY/7XZkckdkpjbZBHQPVOqOPq2SXZdbSyf4RSLgTss291yBaFtT6VRTGEMHyb7K1HZX6ZRa7IFVHzjpwYXcaBdvTo3A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WgZ4V7ISrw3XQT0QFrJB9/7oXTXJD1n7cCtmvAUHZFA=;
- b=J3Y0sQJIvoS2QgyVhDAAhgeIAad5uPthb2KyRRZJzp++ckZKQBgXq474c49QxjHFwnbIeTrN3+K/idylP0aurfbrsAK/bVWoA+LTapytGUOmCf9hq044lv0i5/Cwf3rGuSAEp+nDMiJLu4O8ExxPfzxTFs1IwiDgJlsyMpWf1A1LVZkfWHFCEDLP7Zq7MRWQYAMt0oDQSwDRT8E5/Dr7kj0hGc89NBEhmNfP+8ttWlqIcq/A0og2Mj5lYfGA3Rr28KK/KVprMrei2fPXzFxEbQMq1urn/utAM4MyDUkxfKnFfECFuPF2FMM/WhOBtPMoIZPf+mxYWf2E3c9xoluOAQ==
+ bh=1K3MmhtzYn9ZPBR2hv+3NHFuXqvZWBepKWcFj7+iASY=;
+ b=CwHr016ns5O9HMiQkVqIGKurQc6UPLyReLY7Ylss2+NyKfkCkm1O8dwG7SW96nrj7Cwx0f4MZC1/dPWgwC2Pueq7X9ijuyxBYwJADj5wSXkXqZDq4tcZ1SOMdU/H7lCtnwzAZV5D0ZijUfFI1S48ahxii8k2SMj1/Jv8ynmak1pbkvWmdCIHXWMIbffcwUxKpcGTogOJFJcVK2uJeoEr8iAxcjnAXbqKAUO6AOhMm4HdfkYIqNicqTqanonmjPdHDz+FNK+guSY+pLpIRXSMv1aRo2/vZ7MfzZ/BmAbGmgtQB8OHr55fYx8epkIkZpx9+dS+UrT1IT4m/R2aCMl4XA==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
@@ -71,11 +71,11 @@ CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
 	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
  Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/3] xen: gcov: add support for gcc 14.1
-Thread-Topic: [PATCH v1 1/3] xen: gcov: add support for gcc 14.1
-Thread-Index: AQHbnrDjP18EuEhGMUmNMUBtvyYXWw==
-Date: Thu, 27 Mar 2025 00:40:50 +0000
-Message-ID: <20250327004044.2014048-2-volodymyr_babchuk@epam.com>
+Subject: [PATCH v1 3/3] xen: debug: gcov: add condition coverage support
+Thread-Topic: [PATCH v1 3/3] xen: debug: gcov: add condition coverage support
+Thread-Index: AQHbnrDjCZFHUEqigkeOtdvfE9127A==
+Date: Thu, 27 Mar 2025 00:40:51 +0000
+Message-ID: <20250327004044.2014048-4-volodymyr_babchuk@epam.com>
 References: <20250327004044.2014048-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20250327004044.2014048-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -87,69 +87,69 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: DU5PR03MB10441:EE_|PAXPR03MB7698:EE_
-x-ms-office365-filtering-correlation-id: f3434dca-824f-4c8d-83cb-08dd6cc80729
+x-ms-office365-filtering-correlation-id: e981628e-2b7d-4a61-1853-08dd6cc807ae
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?7SZWFgr11MOvpwUtJJO93+hrhCT1LvGCnWdjp4eaE1KoUiQcxldfiPzOVH?=
- =?iso-8859-1?Q?XDXeCbikZtVvVeAPOlR57ZlMCEE65kyZqY4Q+fQKFAmOVrPBBATgsS1PP0?=
- =?iso-8859-1?Q?Pvd2HmOpqrPFNRHuIRrT59hWTuopBvZmIFoiAUgIRegYYjYvuJBm581Kgl?=
- =?iso-8859-1?Q?qBWrFliP21oKQ7qJgY5zq4ipHTClPLR6oRJ27ybBi+AcAlJSm8JJ9qQouc?=
- =?iso-8859-1?Q?ZDInE3kKcka1M6LUmQ9BAa314De1CH/HWv78/kzG5km/R+p2IxBGRtUwTD?=
- =?iso-8859-1?Q?d0JYLl4cCLbwhQkMnYYnoh2lyCps4gE7+6/vvsOEd4ECRbJg/rgfzKx5SB?=
- =?iso-8859-1?Q?BEliIvkYrgWIch1Rw/k1WLs7i0pnvrBRKUE7/2AvvORri+AalCzFF8wDvo?=
- =?iso-8859-1?Q?9LspZeXfVxJmQzd9TlsNlUNmKVjtdpMAQ1K6qHRq/xVZinhQaKtJ/v7l6K?=
- =?iso-8859-1?Q?B87yVZ1h9hZIp3NqgrNix/14U+lGY918b+chUPinVbRGDsTcf0uiB5sZgt?=
- =?iso-8859-1?Q?2UaNsxRmXcUWitQwioL6MVpej/+wMauOmnDU/yZn5lJk1i53WStO0x91aa?=
- =?iso-8859-1?Q?CrTVA+3sBCJg3HYSUDunvSBB5hom2ISkJ2bqnueCLC4ezmub5zXwfutvkV?=
- =?iso-8859-1?Q?IR4rycV26jLaicFZirRTOowyet2AK/ua6xRD4t0qIl+6XrOp7O81At1fST?=
- =?iso-8859-1?Q?FHT29xlvPsLN7PwVtvMDIzhXJrQJFRVNhV4jqHwElwoBxexuoWV5nmKRXY?=
- =?iso-8859-1?Q?BibqSKKjwkNR8HFVj9JSHxVu2f7tm0ymfvb43rAjnl3GMSqL/KD9KfjUtu?=
- =?iso-8859-1?Q?A0gB+hHGQpku8e3CJmKOh9T0ipBw0YUf5LZFU9WL/SAL9iKyjeJqrF5Jv9?=
- =?iso-8859-1?Q?ObbDTfe14k9/f1/YVSDb9fCml6iY49HpioZGmjIQ42mg0UNrdrH5lMjT6n?=
- =?iso-8859-1?Q?vvdf9N1g06p5ZTLIzmMDx1PRM9BiZYrwOzDwXm3CFFYYOlBeREOF/xlCeO?=
- =?iso-8859-1?Q?1A9q5CU8HYzjsZuIG5WKPNQAKc4x0dQ9NUMp+Y4vMd2HfgE1ojyPC8Fh0X?=
- =?iso-8859-1?Q?prpGeUpLrTtj/e5xlTRjfLyXusU00D2yDTHsBpP/e5kEDhK53ILe1EWWUQ?=
- =?iso-8859-1?Q?iIBd8AdFA2F/xOQ978eH7/wfM6Jmco2DkMDTd7ik2bByG26xReCtGR7TYC?=
- =?iso-8859-1?Q?9dQXswdkselyl6b+QQ3FIHV5bFpNIJ4P0g2QD+vJhR+QbiRR0ta8B3BO3c?=
- =?iso-8859-1?Q?/F9WH35Fye68YgUQlvzESJts3Evu9un1s1LqxPcnpynqxN7yZg3ElEIqBh?=
- =?iso-8859-1?Q?FRW3teDv9R+8PsNp8fJuSPNe54RWr8ej8QI/oV+6JgUMli9MRQIgx095do?=
- =?iso-8859-1?Q?xWQllCFSqdhCcNe7RJOH9+hddw+3sdTJgGswS0Q6tuPHHMn9rHu8V3K109?=
- =?iso-8859-1?Q?ZqmZ94oTHcIJgBw/g0OCgFV+HJHeUUnanUO1Q/JEci5vRHn7DqZd8LILrH?=
- =?iso-8859-1?Q?3vo+CGAVsYJOI6mVk1CQJS?=
+ =?iso-8859-1?Q?XqcutFNOr8lCnB9q3OF0kBXg1SBCaEqgjInoEn+GEAMqk1RJtfMId6RpdR?=
+ =?iso-8859-1?Q?MhRUHbDjKxXHLUt7WKvjVk0CYweRTEHmVuGPnIaTbFyRmE2aEqPAbb9U9l?=
+ =?iso-8859-1?Q?v7Fu3cY3j8ojbEQJaN0g4Xr0r5agKZue+ntzPs6/anU0Nx5aylIXP/nGdJ?=
+ =?iso-8859-1?Q?FqSG7xnxhsl7HHJnJzY7gOlV33kjIenix0oi7o6+1myuwv/6fEfjEx4xwL?=
+ =?iso-8859-1?Q?y+3sAAw3VB3RqXH6Wj8s2warTCLHYfAQunQptEJzfb2V6fwaGyMKeQMTDT?=
+ =?iso-8859-1?Q?wY/h9ha0KA9jr9yp/l/iLSzZdOuVyWZ5rXcnyIJfQL5EtBA2PfSBSvXNvg?=
+ =?iso-8859-1?Q?Zh9PfiuQiNDGC5/jvJ1S4IqO10LxwCYRoU9eVprNcBvxY5DCCnYtwotYxX?=
+ =?iso-8859-1?Q?QnY1OygbYH56rb/vxOkxgd46OF0UpCNbLNCA02Y1eNpy9Yc4mCKymANZxm?=
+ =?iso-8859-1?Q?lH5TDOu06XBKOfv9yaTmpeG+YHn+ICIWeqhdXNtq+g67LudpecJ0PN6IN0?=
+ =?iso-8859-1?Q?Lv+lhoCXcU7QPtaozuDYLYSDJLvN8HcSw1AYO6Ydo0cvg27rbGYQueg0QH?=
+ =?iso-8859-1?Q?0kGO7l5klcnEGG0n25tlNaK3WHxE3uEGdUukNSFp4iYp9CQPC+L0Xy7v5o?=
+ =?iso-8859-1?Q?an5Ku/f4KUw8Gw8ASc9jG0M6ivCxdj3aQvnONqDLkCUcNiF1qaGD5ATPvj?=
+ =?iso-8859-1?Q?YazKD3XB3N0VENwZpu7Fiz4WIcUgDh3OaaLta8GIYtU5M5nncgNaDJsIIv?=
+ =?iso-8859-1?Q?BRLXT5vNf/POj83UV4cxdEtjCDWQmh1eCKRGyxsmXG/uhkAB4+JUNQQsAv?=
+ =?iso-8859-1?Q?Cx6WXuQ4SrKqRUlVCPKqeLixTtClpJubN3lfeIfYbpkbzYvciBbBHujC2X?=
+ =?iso-8859-1?Q?y60PwwGpNXU//0nWOUuxZ+FU3R1T9VFd1tqBs7hGLjVvgn6CJw+s9vg1o1?=
+ =?iso-8859-1?Q?hRVAcb4DSIluWbACUeuiW6HnF7Kr0kykBLT38NVwmDwHdaQLEqR5hqUBi0?=
+ =?iso-8859-1?Q?drl39hoxS6nXwrOwcgwIiSZG0e+5fIW1SgXILbqtI47hjjTsdoE9rbcmst?=
+ =?iso-8859-1?Q?BlX2kquRw54g4oLXkTLEgDtv5fwyjXLuyFgz2tFZ4L03ZK0iaghxFMg0rr?=
+ =?iso-8859-1?Q?HNf1eOHbua08NCbhIb0qEBz5OnmorClibA1ts9qBnFB21v6m3AyWGf5VTD?=
+ =?iso-8859-1?Q?ZsUTzqILF8s3A9x2eriZdyDeu4X4htB/QlaCQaW6fPXdZSI/zvTUiyEhg6?=
+ =?iso-8859-1?Q?dytyyICBuUU6HAma42cSyO0IE/l2Ay0+aN9xsYhP5Qa130ZPdK7cP0N0zw?=
+ =?iso-8859-1?Q?jKFAXPGFVBACEQ3a1ourbTOfdL0Zqh6L+tt+sTwsrtEvDUdgBO9w+uBgNV?=
+ =?iso-8859-1?Q?lBSKC7VvYRQWCctmWiVKOQVb5ZdDMAk/8ANua1rHpo1mBUh6xizOBoNwP7?=
+ =?iso-8859-1?Q?HrTRMbNfanOvMfjgxNQq82oZAtdJc2qsJhEmFAJVNJL5sMA02ryjlpgfkj?=
+ =?iso-8859-1?Q?ZUHKs2BxgllNCsMWh1tK/2?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU5PR03MB10441.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?eDjJpTc/W9EoFkAVqUOoxve5c4H1SqoOE0cOkJBZnHOEok9V58uqqumlMi?=
- =?iso-8859-1?Q?aPz4WboEJ+599oZQkZ+ENID7pH8CNxVYTwXp9jliA4RHZG5wWjEJ0Ibzoa?=
- =?iso-8859-1?Q?isd0Eqvpup2iohAFMO923+l6BrNEf6y90LUa5qA2efz3vkXXueIzy3EpOs?=
- =?iso-8859-1?Q?wMBnwVN4Pg2LtFYPIn0RDJfW5Z66rIYfTzVeB9wRTFRO8n284JwClSHz/a?=
- =?iso-8859-1?Q?jj5AYofrag++xKLcC0u55c0Zgyr/7SWQh4MwxhwRvg2LrXgkJWXLLZEyWb?=
- =?iso-8859-1?Q?wAgYJvVvnCyF/7mCJ7PFlQB8UX/X7838/6ju/d+Yo7puJ05G230KeH+brg?=
- =?iso-8859-1?Q?jSpv86SzqOeOPpOg5Zc2a58zGhnWf75RzPARHlKDryfsrREjFN6G9lvR6+?=
- =?iso-8859-1?Q?c9bCI8Kib5URYx2HVSUsEIKaJTDoZOVCHHxwwOcgNOOlldB/W5VmobECVa?=
- =?iso-8859-1?Q?hbG9ymY2l5DK1Y9V1oeMvHOB9YM0c54yyyiZUT/7o6fNNSFygVHOX3jxqh?=
- =?iso-8859-1?Q?KDj2l9NH7eqg1gIkfTKD2RK9tuX+SN8p3UTN7hUmRvKb8o4EXk5SBzO2ix?=
- =?iso-8859-1?Q?U3Y5w6isbD87kKtzdJZsy5J6QGtW89FFaRIeRC4forzu+DulnWAHv0xvuO?=
- =?iso-8859-1?Q?WPt5o44rw9WBrs89CVlA3tqqvZeU83QpMVxI3aGAI5clrHQ5+uIw7vHvpK?=
- =?iso-8859-1?Q?FiRnddGeNjVNz61oHfoV9/qabar5tzHAPqh9DR0CVnp9x8wD1VnpE6yA0W?=
- =?iso-8859-1?Q?/u5t38GWdKHAVVGj9VT1pRYtdmMiPjGFxkaPnnJXHgIzQA1jfI2S5B8jCN?=
- =?iso-8859-1?Q?4h2RfFH/+dGtdk2072m7fz0Z8DCBnCCy81Iv6rNdsmr5ZEwZytonAWBCS+?=
- =?iso-8859-1?Q?Tmaue3ERYrXw3oTXmzvzGz5J/I/aLjFLSPbSC0QV1MQcGBv/Ekw6K7wYcb?=
- =?iso-8859-1?Q?1UL/F95ZK807Y8WbgrDXpN7Ss7oNiVUuwX9Pcjz6BKv+ldzfthDHNYKGa+?=
- =?iso-8859-1?Q?8cEzgeYpL6ThxuxnawUDpTyjlahw/9XlHhr1paLzN2I4WuALSYqOUpI7bc?=
- =?iso-8859-1?Q?aREWcjJM3YvWM/83rQmKvJK+a372DLc2V8KOsc94suK09dInLlM91jONd6?=
- =?iso-8859-1?Q?wxE3FWFBz6ynR6DN3aStm3Q7yrWiwStGhFGKcwW+Pz/Wwbe3+bJ4xYryTG?=
- =?iso-8859-1?Q?HmO/w25UUe/r+4RISMhbi3FkI1Rpre+hTDgOlNpyXrtlqNgFNMJn7gqDtM?=
- =?iso-8859-1?Q?uB6L16bfSfkAVQP6paaqnyOqpuHnz3D+PHcNH93v2x1+lzIOZq6mVeRECf?=
- =?iso-8859-1?Q?+M5kJMSMIC84RJq9cnZVtX7n24v5zI0WqaRanZMJmVIgYb4R3XnghpyMkx?=
- =?iso-8859-1?Q?Syr7RuM1gvG+7GBTJQ1cwNk0t6qRi5yAiinUBxHaBqDDpjMaT6re207c0e?=
- =?iso-8859-1?Q?JrCpB3ZpD9B67YSaJ63boZB6SODVQbXTErh4nVBpRFOkSGsNbf5wKp1ok7?=
- =?iso-8859-1?Q?VuUSbL+mslnQPfASccSLiKMKVuALv3iP7PSH/F1GvTvf8bn1d9qyusoInW?=
- =?iso-8859-1?Q?Gfcv7Jyug9PswovfdA+BtEPZwceJSqwVwY5oYIBgApG0TpLlxPC6naWjwi?=
- =?iso-8859-1?Q?MsdL47+pmY0UYJBVTjdQKSKNJQheoMHHCipQOkNOcvLuOxmQv7d6bW9A?=
+ =?iso-8859-1?Q?3HD0dS3IcOHR3wGnRHVbkCylCnAI40CEpAw+M8rFfYaViWC7lBlqWE9kGb?=
+ =?iso-8859-1?Q?DxOnY2BI12IuXUUUGlYUyhVPZEjpw8gLNNGmG9kYP0vv8hsI9e3+GCatZ6?=
+ =?iso-8859-1?Q?+Sg0LIhejHBdZqyPNxoyMFjEJL8HRO34igEdk6AWnkKKO0hcVR0b15uCmb?=
+ =?iso-8859-1?Q?kYdSlF0x0T8/5u4qgpbjlqvD+P6yUG3fWXPRAUpntE8dXm7VaVNjzXVkjC?=
+ =?iso-8859-1?Q?krshUEW+8jllt6oA7C36NUt8ghFhLgW99D6Pw4XMUl0ohc8fuNgmMb7mVL?=
+ =?iso-8859-1?Q?UW3sJOCmEyaMpiF5bkfZ0QaAM7Y/SZ0dbTwKBHJZH+jAag7LOME7qhl1GQ?=
+ =?iso-8859-1?Q?kM7VbpwF+QRzIxETIUmqo1vOT7R9hB/A41sv5z9Vvw5hAEGflV+FKw03Kz?=
+ =?iso-8859-1?Q?W3GMRCjTo/UsPhgLjtlu3IbGDoaEhHpfP3ZSkEdZgESeLixHA69g01YHWK?=
+ =?iso-8859-1?Q?gmsu45Z+4oarU+G9mMaHT+g4hmMTZ5U70jrfhDqdkSYfhCNAk8AcofvWc0?=
+ =?iso-8859-1?Q?pqD3HMEcWJNacLWmWUHsnDN0K6+JgeRxvxeSa1QMe713m9L17U0Mao/djL?=
+ =?iso-8859-1?Q?IauAzOBhQ5AJ5EUD3VP8Sd7KjRXes47g142w3FSmr+FrZQuQ1IIL755k9a?=
+ =?iso-8859-1?Q?OqHkeX1SjgD+JtIcx68V9c7F+RJH7Ny8Q+3I1iBB9gt4scTDtSk1nT8gy4?=
+ =?iso-8859-1?Q?G9e0AIU20LG9t3P/Nc1j2b+A2YDTm9NVLmSWWDw051JfLaix1786WQplPI?=
+ =?iso-8859-1?Q?nwbtcaF6owq2REKLsMfbHKwWM4MnaWigg8bE1BR5w0MJOgVpNoi3pZ31yZ?=
+ =?iso-8859-1?Q?rM9/jIOLGv2MCvfRU7uM3q/pJ2d4Vt5E6plwCBLEOjYCiqBfQOWJPZR6b1?=
+ =?iso-8859-1?Q?QFTiHyoS25hTr574mBoIsVupjFuVuEI4NEtDgv/NX/bdOt/cQnVu2I62hU?=
+ =?iso-8859-1?Q?PKvrMyb1pVcWCDPfeysSYXOtQhz2R5wlQULFU5EZ3XijCOkvgTKD8jNywt?=
+ =?iso-8859-1?Q?ut7KUry34lz8LmCWMBv5jTShgtdwT6fGnT22jXr+2nx9KGGkMRxPs6kLG8?=
+ =?iso-8859-1?Q?qBfR//Jf2D9tbc1H260SEBnVE31utpydlWtSTGHK62Ee5waFDfhYr0VtY4?=
+ =?iso-8859-1?Q?11/8O9uUyBfhBb/Vv9kKIjcepVAr6g1/7daAfE8aSVIqLV3p3aCzwYCGO2?=
+ =?iso-8859-1?Q?wwnA9Fg26Rt0sSU60fzgLsSA77XHQXCnfaej5rNI6XIPpAWmUNIX0BrmYD?=
+ =?iso-8859-1?Q?bcpfr4WWFf0txIEVfnzqVXJtx+fbq3kxy5D9I2NBezjDVoND3PM2BgWo4L?=
+ =?iso-8859-1?Q?17e9+T0N3SY+LufFks/2FYQd/V8ae3jYlRmzQTw5uGIIMnbeKH6UsBT7dD?=
+ =?iso-8859-1?Q?M574ZBoiYOiotAT+/3FpTOzN2yxWkkXIvB7FqLXg847kgZssH+vEGEmc/+?=
+ =?iso-8859-1?Q?yRqbWyBCMDTx6/JbaObBvT7y0dMQJKbTY+r0uJfhdpxyBrV/ZiwhFnGcbZ?=
+ =?iso-8859-1?Q?9/M7Z1uARrGfTDDR2MXC6mAlNdt1F/a0c32b51+X+xf13ySw82ojmwawGW?=
+ =?iso-8859-1?Q?mDTSxC/yFDyw6+/2kSk7DZXZ/35S7dkdiqDkuBQwgVn/m08armkyzvEdhD?=
+ =?iso-8859-1?Q?qNfEmlX4VrT/PtDfFNm/M5uKUW2jNxkRdepCvg6Dx6fRRS6Jto34Byqg?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -157,58 +157,80 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DU5PR03MB10441.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3434dca-824f-4c8d-83cb-08dd6cc80729
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2025 00:40:50.8011
+X-MS-Exchange-CrossTenant-Network-Message-Id: e981628e-2b7d-4a61-1853-08dd6cc807ae
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2025 00:40:51.3936
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: cZUE4Hb4TvfbNrSKWP+sWGJ84sMLmYR5VzqfVCHXudpm55degvfhpkJLD1HnNR4B8O8FdYU3AiOCWibb9es85m23HYKFEDqer7NJbWaN7IQ=
+X-MS-Exchange-CrossTenant-userprincipalname: KbEtfYveFGKTRPZWx907UQNvClYJ8zTk5ijuklFQmHhlHjifHqbQgCK1m2mnlfaxUjN0p9Vl7NaS95XP4D8u3t6obT77EKoRIu2KB3bmWug=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR03MB7698
 
-GCC 14.1 has 9 gcov counters and also can call new merge function
-__gcov_merge_ior(), so we need a new stub for it.
+Condition coverage, also known as MC/DC (modified condition/decision
+coverage) is a coverage metric that tracks separate outcomes in
+boolean expressions.
+
+This patch adds CONFIG_CONDITION_COVERAGE option to enable MC/DC for
+GCC. Clang is not supported right now.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
- xen/common/coverage/gcc_4_7.c   | 4 +++-
- xen/common/coverage/gcov_base.c | 5 +++++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ xen/Kconfig.debug             | 9 +++++++++
+ xen/Rules.mk                  | 3 +++
+ xen/common/coverage/gcc_4_7.c | 4 ++++
+ 3 files changed, 16 insertions(+)
 
+diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+index f7cc5ffaab..7f758d221b 100644
+--- a/xen/Kconfig.debug
++++ b/xen/Kconfig.debug
+@@ -44,6 +44,15 @@ config COVERAGE
+=20
+ 	  If unsure, say N here.
+=20
++config CONDITION_COVERAGE
++	bool "Condition coverage support"
++	depends on COVERAGE && !CC_IS_CLANG
++	help
++	  Enable condition coverage support. Used for collecting MC/DC
++	  (Modified Condition/Decision Coverage) metrics.
++
++	  If unsure, say N here.
++
+ config DEBUG_LOCK_PROFILE
+ 	bool "Lock Profiling"
+ 	select DEBUG_LOCKS
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index d759cccee3..0a2933cffa 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -138,6 +138,9 @@ ifeq ($(CONFIG_CC_IS_CLANG),y)
+     COV_FLAGS :=3D -fprofile-instr-generate -fcoverage-mapping
+ else
+     COV_FLAGS :=3D -fprofile-arcs -ftest-coverage
++ifeq ($(CONFIG_CONDITION_COVERAGE),y)
++    COV_FLAGS +=3D -fcondition-coverage
++endif
+ endif
+=20
+ # Reset COV_FLAGS in cases where an objects has another one as prerequisit=
+e
 diff --git a/xen/common/coverage/gcc_4_7.c b/xen/common/coverage/gcc_4_7.c
-index 1c20e35ee5..e3ce69dc2e 100644
+index e3ce69dc2e..d10a16c9a8 100644
 --- a/xen/common/coverage/gcc_4_7.c
 +++ b/xen/common/coverage/gcc_4_7.c
-@@ -28,8 +28,10 @@
- #define GCOV_COUNTERS 10
- #elif GCC_VERSION < 100000
- #define GCOV_COUNTERS 9
--#else
-+#elif GCC_VERSION < 140100
- #define GCOV_COUNTERS 8
-+#else
-+#define GCOV_COUNTERS 9
+@@ -43,6 +43,10 @@
+ #define GCOV_UNIT_SIZE 4
  #endif
 =20
- #define GCOV_TAG_FUNCTION_LENGTH        3
-diff --git a/xen/common/coverage/gcov_base.c b/xen/common/coverage/gcov_bas=
-e.c
-index d0c6d0a3f9..742034e039 100644
---- a/xen/common/coverage/gcov_base.c
-+++ b/xen/common/coverage/gcov_base.c
-@@ -56,6 +56,11 @@ void __gcov_merge_delta(gcov_type *counters, unsigned in=
-t n_counters)
-     /* Unused. */
- }
-=20
-+void __gcov_merge_ior(gcov_type *counters, unsigned int n_counters)
-+{
-+    /* Unused. */
-+}
++#if defined(CONFIG_CONDITION_COVERAGE) && (GCC_VERSION < 140100)
++#error "GCC 14.1 or never is required to generate conditional coverage dat=
+a"
++#endif
 +
- /*
-  * Local variables:
-  * mode: C
+ static struct gcov_info *gcov_info_head;
+=20
+ /**
 --=20
 2.48.1
 
