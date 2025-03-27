@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16A4C3600B
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Mar 2025 11:43:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.929086.1331716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E548C3600B
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Mar 2025 11:45:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.929098.1331725 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txldl-0004Ps-68; Thu, 27 Mar 2025 11:43:17 +0000
+	id 1txlfQ-00052N-Gj; Thu, 27 Mar 2025 11:45:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 929086.1331716; Thu, 27 Mar 2025 11:43:17 +0000
+Received: by outflank-mailman (output) from mailman id 929098.1331725; Thu, 27 Mar 2025 11:45:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1txldl-0004Pi-3L; Thu, 27 Mar 2025 11:43:17 +0000
-Received: by outflank-mailman (input) for mailman id 929086;
- Thu, 27 Mar 2025 11:43:15 +0000
+	id 1txlfQ-00052G-E4; Thu, 27 Mar 2025 11:45:00 +0000
+Received: by outflank-mailman (input) for mailman id 929098;
+ Thu, 27 Mar 2025 11:44:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=U7fn=WO=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1txldj-0004Fn-7N
- for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 11:43:15 +0000
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [2607:f8b0:4864:20::634])
+ <SRS0=uFzh=WO=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1txlfP-00052A-AN
+ for xen-devel@lists.xenproject.org; Thu, 27 Mar 2025 11:44:59 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aa54ba9b-0b00-11f0-9ea3-5ba50f476ded;
- Thu, 27 Mar 2025 12:43:14 +0100 (CET)
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-22622ddcc35so24559835ad.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Mar 2025 04:43:14 -0700 (PDT)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-227811da9dbsm126788935ad.179.2025.03.27.04.43.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Mar 2025 04:43:12 -0700 (PDT)
+ id e8cb684a-0b00-11f0-9ea3-5ba50f476ded;
+ Thu, 27 Mar 2025 12:44:58 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5499659e669so876641e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Mar 2025 04:44:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,142 +42,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aa54ba9b-0b00-11f0-9ea3-5ba50f476ded
+X-Inumbo-ID: e8cb684a-0b00-11f0-9ea3-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743075793; x=1743680593; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=P5rX326vMt/Axc/TQkWmgoCc2dVeRmgvPE8s/wnC/VY=;
-        b=jhejgIACcaXk6e188pJGJWG0rSGJn7VOYQ/WElGjWkCduqmaEsEqKnu6Hv3gKZ9x9Y
-         UFf314ciyAmH8mbR9E8lZPf8qCf4jjfpvxfIns1b9/w2y4MT57N26VPBTLuNd/CJHd3f
-         GQ94+62q/fEMY9bnZ5itnlg3rz0lHr8B84wOY=
+        d=gmail.com; s=20230601; t=1743075898; x=1743680698; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IoZMJ9gzYnrJjo5j6EOySURaQ1LdtStF5y244u8/3pM=;
+        b=QWu6ClxI0I36tVuEwFOMVaYrmqKyYfDSfXwskJV+mYfaCFT9Xxtj9B7a0fJ/x0iNIg
+         hOupgWfgJxVWbfKvkrSpRrxYaubF2XUr4u5Z1wU0xyUzKQwSqzD+h36pHmJs5fnOJEHo
+         uNexQ3BeGKTGCJPShErJJOtCRfDkN0QUlQp7CdT5PMljbavTXOFO5y30Ajy3eHkBvYjf
+         BwHVC/BT8QQFpzXcpmPx4DLkw7EbDPel/0DKGQkH/C+63cuvEOul54yqeDop6h4k2kf5
+         auDm7V/YtF2Qe7eEbEDkrBPsKixiSLZjLd/wkHaPPnAIee6yCh5IGpfztV1Qz8x9PgiU
+         jHUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743075793; x=1743680593;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=P5rX326vMt/Axc/TQkWmgoCc2dVeRmgvPE8s/wnC/VY=;
-        b=cWFezEGZTHkC/mf5qwVO5A9MONXVxGvjMLycG6MqPL4kMYiv5obAExUEkjt4t4FfdG
-         GJ5qEKr1x95QiDprp3te3G7wg+GujOtvocC9wjzlRWkws1xbt58/hp1Ay8Pr7y8ir9rS
-         9DBjdsc9NvLRO+xzT5EUPSC6KNw5Sd+8WUm4aFAE4DshEpbI4V3qUosBrVZFlWul7Ck8
-         LlNoloXnCnTPD/MoVGguoG6GOS7C2ak4EmssKA+LhUp4GcLb/lmwN/Zuons5syP8yabN
-         I912VAcrZL6X4kSbGmlZVWZyg2XAhcM9WkhuGyw0Ejl3W7s7w/rR3fCanBS6J+BKB5dp
-         H69w==
-X-Gm-Message-State: AOJu0YzdiGnYhgC9QchDlH0kM3je5DxnjbhXplWLo7MieSuMyTsdEGyF
-	qT7gDYuaqCIqZUsbuz5Wll1vv/sFlCUFnCxhol75/+C/rNvA6TKs2dHUCWXfYknURgVNYFjaYnl
-	0
-X-Gm-Gg: ASbGncs+7IwZOFmB5FPBIzx+kfMj3dvuFb9GenJn8bI8xKWyXVXqr9q9RFKjB+vct49
-	Ww5vbtppSdp4qQeXQkBvlaSfYhXOgH/DL4ft9mVjs0ZpyQoflBtieb1t+MieNW0kcigBZtuf1Wz
-	5kEhUnxs5ThDwt1SPU3YKDAWhvGu09lyNC4RmShclPRGUc5XClkRwOdqsd6JK049OH0IlC3G56/
-	P3fYi/Lx4H1WGeyC7vH41iz/L3ovG93+NR2QNgDeDfwuEv5wxCY9QzgNOVXxob6cS42/l0YnAyc
-	VPq5p+jvFeXo34iceE7Pfyb0iupRd2f8ePGXDpgFJ6ZZN/6yPQ==
-X-Google-Smtp-Source: AGHT+IF8NkAvSQUkveGwCTT/MOBv3KhOK/3az4xErymcdNzD7U/5s0X0IfxTEmEfUsd2T0bIsgEcCQ==
-X-Received: by 2002:a17:902:f684:b0:224:584:6f04 with SMTP id d9443c01a7336-228048b1ecfmr32609175ad.18.1743075792603;
-        Thu, 27 Mar 2025 04:43:12 -0700 (PDT)
-Date: Thu, 27 Mar 2025 12:43:07 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2] x86/P2M: synchronize fast and slow paths of
- p2m_get_page_from_gfn()
-Message-ID: <Z-U5y3jaw1FeRO_X@macbook.local>
-References: <b590b590-764a-4dfe-9e13-975122790329@suse.com>
- <Z-UToaPviR7b73iG@macbook.local>
- <307f7c6e-bb31-4c0a-890e-a21b7a4e178f@suse.com>
- <Z-UquDQHtnFMJ4se@macbook.local>
- <17ddf002-8305-4c14-8fbc-3c3be418bba2@suse.com>
+        d=1e100.net; s=20230601; t=1743075898; x=1743680698;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IoZMJ9gzYnrJjo5j6EOySURaQ1LdtStF5y244u8/3pM=;
+        b=eiHQqQki7dHZSmaDgdraUtKVFCBy4Mb3fmsLjLiKiqHKjoKkij/nI1RMdl5bbYk/XC
+         P0yQttlhGYXCHlkFNn0PHddRWUqUjJAzRMPhYN2HRvRT+8Bgy0cFtVrFU/ksw2jqWQG+
+         yw/zMKqfIfQo29yopo7klPYofRKYxN8C91VN0FQuJYUbmDaKY8a7ZV1LQzNv2kJSqRaX
+         pI98fTq3dH6ZD7veJZkKTbOqaEhn70Fni2gOabqbwUHn+7zpfYWL4Dv93e+tZUry86Rm
+         kEjcgOEaifOborRB0M2oFIhutG9U7d/1bvXNP/HNRFfySexH0o/TrnurJOXKNUhGfMgc
+         bZdQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWDSOcaJI5rmyGhotz6zsbiwwx7c/vhlCJijNpag2LFY2k0UYW0mGm9HxCF0KPu42te84+H8OjvrZU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz1UY6z79U1AfYXhKxEPy0ZMyBCDrWFwOqBZDGpSlR7g3cb3/NZ
+	hPckb4gVOCDoaQ+G2hwMIYlFyggciHbz0aeEKdrp1aRs6mvZP8zvOGhWkvmeJiGNoJcMJUeGe1H
+	+Xg3XJ0o8lueELfTLU0rijSpx0I0=
+X-Gm-Gg: ASbGncs3fpblQfyN3T1jH/hjhbzpTQqbxxAKSF52UzRL7XTRo/1J1wVEeV9ZXkPK0NZ
+	KKKW/fnk9q81kNDc5dMyO4zWtgbtYK7ZLowV8Dhu6kYcCBmNl7caCCYypMalgV99vFkl2OIWPbW
+	1W2YgCEBtS+GIw2W0XpFi0sZ3GkQM2hMjBkg4=
+X-Google-Smtp-Source: AGHT+IF+BfG0fzTwmjGMDa/i+59/Q9ou4SeFW8RGEc77dYAr09td64vA3lQ4FrM7HXbHB5DoqK0h7VzPmZhOsTxk1Fk=
+X-Received: by 2002:a05:6512:ace:b0:545:2cb6:af31 with SMTP id
+ 2adb3069b0e04-54b011d5b21mr1554497e87.15.1743075897630; Thu, 27 Mar 2025
+ 04:44:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <17ddf002-8305-4c14-8fbc-3c3be418bba2@suse.com>
+References: <20250327052241.202167-1-xakep.amatop@gmail.com> <a0334340-6dc9-4526-ab00-1d9bbb290de2@suse.com>
+In-Reply-To: <a0334340-6dc9-4526-ab00-1d9bbb290de2@suse.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Thu, 27 Mar 2025 13:44:46 +0200
+X-Gm-Features: AQ5f1JpWm7Upcy5a8hmLICDizW4hPvJi-71zOLtjL_UGTwBdxgtbSkk2r1tMxK8
+Message-ID: <CAGeoDV8kLCYO-GQw=SNF0YA4TAnQ7ppCidvR9sy99FiCD_fx9Q@mail.gmail.com>
+Subject: Re: [PATCH] xen/percpu: don't initialize percpu on resume
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Mykyta Poturai <mykyta_poturai@epam.com>, 
+	Mykola Kvach <mykola_kvach@epam.com>, xen-devel@lists.xenproject.org, 
+	Marek Marczykowski <marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 27, 2025 at 11:54:09AM +0100, Jan Beulich wrote:
-> On 27.03.2025 11:38, Roger Pau Monné wrote:
-> > On Thu, Mar 27, 2025 at 10:24:02AM +0100, Jan Beulich wrote:
-> >> On 27.03.2025 10:00, Roger Pau Monné wrote:
-> >>> On Tue, Mar 25, 2025 at 08:17:04AM +0100, Jan Beulich wrote:
-> >>>> Handling of both grants and foreign pages was different between the two
-> >>>> paths.
-> >>>>
-> >>>> While permitting access to grants would be desirable, doing so would
-> >>>> require more involved handling; undo that for the time being. In
-> >>>> particular the page reference obtained would prevent the owning domain
-> >>>> from changing e.g. the page's type (after the grantee has released the
-> >>>> last reference of the grant). Instead perhaps another reference on the
-> >>>> grant would need obtaining. Which in turn would require determining
-> >>>> which grant that was.
-> >>>>
-> >>>> Foreign pages in any event need permitting on both paths.
-> >>>
-> >>> I've been wondering about this, and AFAICT the PV equivalent of this
-> >>> function (the tail of get_page_from_gfn()) is much more limited in
-> >>> that it just allows access to domain owned RAM or MMIO that has a
-> >>> backing page (I expect mostly for the low 1MB?).
-> >>>
-> >>> However for HVM domains we allow to take references to foreign mapped
-> >>> pages and taking references to MMIO pages is not permitted.
-> >>>
-> >>> Should the tail of get_page_from_gfn() also be adjusted to make use of
-> >>> the newly introduced get_page_from_mfn_and_type(), thus unifying the
-> >>> logic for both PV and HVM?
-> >>
-> >> There's no (proper) use of P2M types in PV, so I don't think using this
-> >> function is viable for PV. In particular we'd never observe p2m_foreign
-> >> in PV, if I'm not mistaken.
-> > 
-> > Indeed, p2m types are just occasionally faked for PV, like in
-> > get_page_from_gfn().
-> > 
-> >>> Could possibly be done in a separate change, I'm just trying to
-> >>> understand why we have this seemingly different handling for PV vs
-> >>> HVM.
-> >>
-> >> The difference is because access to foreign pages was hacked in to work
-> >> for PVH in a much different (and imo yet more hacky) way than it was
-> >> made work far longer ago for PV. The crucial part of that is in
-> >> get_page_from_l1e(), so get_page_from_gfn() isn't that relevant there
-> >> (I think).
-> > 
-> > OK.  I'm kind of surprised we need foreign handling for HVM and not
-> > for PV in get_page_from_gfn(), as even with specific handling of
-> > foreign pages in get_page_from_l1e(), the former is used in a lot of
-> > places that don't seem obviously tied or gated to a call to
-> > get_page_from_l1e().
-> > 
-> > For example the XEN_DOMCTL_getpageframeinfo3 usage of
-> > get_page_from_gfn() will have different results when used against a
-> > foreign page depending on whether the caller is a PV or an HVM
-> > domain.
-> 
-> Which imo is an unintended side effect of how foreign page support was added
-> to p2m_get_page_from_gfn(). Considering what XEN_DOMCTL_getpageframeinfo3 is
-> used for, I don't think foreign pages were intended to ever be observed there.
-> A guest controlling another guest isn't assumed to be migrated, aiui.
-> 
-> I expect more uses of get_page_from_gfn() can be found where foreign pages
-> better wouldn't have "success" returned. Yet any of this is mere fallout from
-> some callers apparently needing that case to work, and hence why logic was
-> hacked into there. Maybe get_page_from_gfn() should take another P2M_FOREIGN
-> flag, which only callers caring about foreign pages would set?
-> 
-> Imo none of this is directly relevant for the patch at hand here - fast and
-> slow paths differing is a problem no matter what. In fact I'm surprised no
-> issues were ever reported that could be attributed back to that anomaly.
+On Thu, Mar 27, 2025 at 10:27=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wr=
+ote:
+>
+> On 27.03.2025 06:22, Mykola Kvach wrote:
+> > Invocation of the CPU_UP_PREPARE notification
+> > on ARM64 during resume causes a crash:
+> >
+> > (XEN) [  315.807606] Error bringing CPU1 up: -16
+> > (XEN) [  315.811926] Xen BUG at common/cpu.c:258
+> > [...]
+> > (XEN) [  316.142765] Xen call trace:
+> > (XEN) [  316.146048]    [<00000a0000202264>] enable_nonboot_cpus+0x128/=
+0x1ac (PC)
+> > (XEN) [  316.153219]    [<00000a000020225c>] enable_nonboot_cpus+0x120/=
+0x1ac (LR)
+> > (XEN) [  316.160391]    [<00000a0000278180>] suspend.c#system_suspend+0=
+x4c/0x1a0
+> > (XEN) [  316.167476]    [<00000a0000206b70>] domain.c#continue_hypercal=
+l_tasklet_handler+0x54/0xd0
+> > (XEN) [  316.176117]    [<00000a0000226538>] tasklet.c#do_tasklet_work+=
+0xb8/0x100
+> > (XEN) [  316.183288]    [<00000a0000226920>] do_tasklet+0x68/0xb0
+> > (XEN) [  316.189077]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x=
+194
+> > (XEN) [  316.195644]    [<00000a0000277638>] shutdown.c#halt_this_cpu+0=
+/0x14
+> > (XEN) [  316.202383]    [<0000000000000008>] 0000000000000008
+> >
+> > Freeing per-CPU areas and setting __per_cpu_offset to INVALID_PERCPU_AR=
+EA
+> > only occur when !park_offline_cpus and system_state is not SYS_STATE_su=
+spend.
+> > On ARM64, park_offline_cpus is always false, so setting __per_cpu_offse=
+t to
+> > INVALID_PERCPU_AREA depends solely on the system state.
+> >
+> > If the system is suspended, this area is not freed, and during resume, =
+an error
+> > occurs in init_percpu_area, causing a crash because INVALID_PERCPU_AREA=
+ is not
+> > set and park_offline_cpus remains 0:
+> >
+> >     if ( __per_cpu_offset[cpu] !=3D INVALID_PERCPU_AREA )
+> >         return park_offline_cpus ? 0 : -EBUSY;
+> >
+> > It appears that the same crash can occur on x86 if park_offline_cpus is=
+ set
+> > to 0 during Xen suspend.
+>
+> Oh, also - it's not "appears"; iirc Marek meanwhile confirmed the misbeha=
+vior on
+> x86 AMD hardware.
 
-Sorry, indeed, I didn't meant to imply that your patch caused any of
-this.  It's just weirdness that I've observed while looking into this,
-and couldn't explain myself.  I think the change is fine, but I find
-this slight behavior differences between PV and HVM confusing to say
-the least.
+I've updated this line in the commit message.
 
-IOW: I'm unsure why foreign pages need to be handled here
-for HVM and not for PV.  As you say this is probably due to the
-different implementation of foreign pages in PV vs HVM.  In any case,
-such diverging behavior should be fixed in a separate patch (if it
-does need fixing in hte first place).
+>
+> Jan
 
-Thanks, Roger.
+~Mykola
 
