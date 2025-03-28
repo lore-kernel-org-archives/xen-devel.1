@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A962BC36011
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Mar 2025 16:58:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.930971.1333471 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 993F4C36013
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Mar 2025 16:58:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.930973.1333493 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tyD2X-00017T-8Q; Fri, 28 Mar 2025 16:58:41 +0000
+	id 1tyD2Y-0001hs-Kw; Fri, 28 Mar 2025 16:58:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 930971.1333471; Fri, 28 Mar 2025 16:58:41 +0000
+Received: by outflank-mailman (output) from mailman id 930973.1333493; Fri, 28 Mar 2025 16:58:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tyD2X-000162-1Z; Fri, 28 Mar 2025 16:58:41 +0000
-Received: by outflank-mailman (input) for mailman id 930971;
- Fri, 28 Mar 2025 16:58:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tyD2Y-0001hh-Hw; Fri, 28 Mar 2025 16:58:42 +0000
+Received: by outflank-mailman (input) for mailman id 930973;
+ Fri, 28 Mar 2025 16:58:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QVst=WP=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1tyD2W-00011j-A6
- for xen-devel@lists.xenproject.org; Fri, 28 Mar 2025 16:58:40 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e4ebf8f6-0bf5-11f0-9ffa-bf95429c2676;
- Fri, 28 Mar 2025 17:58:38 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5e686d39ba2so61350a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 28 Mar 2025 09:58:38 -0700 (PDT)
+ id 1tyD2X-00011d-GG
+ for xen-devel@lists.xenproject.org; Fri, 28 Mar 2025 16:58:41 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e65dbb7e-0bf5-11f0-9ea4-5ba50f476ded;
+ Fri, 28 Mar 2025 17:58:41 +0100 (CET)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5eb5ecf3217so4399092a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Mar 2025 09:58:40 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-225.play-internet.pl.
  [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5edc16aae90sm1665004a12.15.2025.03.28.09.58.36
+ 4fb4d7f45d1cf-5edc16aae90sm1665004a12.15.2025.03.28.09.58.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 09:58:37 -0700 (PDT)
+ Fri, 28 Mar 2025 09:58:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,117 +47,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4ebf8f6-0bf5-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: e65dbb7e-0bf5-11f0-9ea4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743181118; x=1743785918; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1743181120; x=1743785920; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4CAhYZhOHWtuWy4tfyt8Ohp6UA9zEMu8kkCq/AbgncY=;
-        b=BZPTS1jI5D/rdoCXWYtOpRX9S5O/HZmkeGDwxmbJOohl8NRQXSZbzY8drVi+KebAxA
-         skNYVayMMchm/2W5ymGe7TvIFIWwDMgnkWGtiJ/C402tDI8N2P2GwTHJ8NQnXhjgIfrL
-         KfnkAj2qyDRoHJ/lJ5eZwSN96IRi4/LorYKPf/oNX7uyymqSmc/w8D2mDNvO8DyKwvsw
-         HqeNg7Gc4V6YEofZ/nfMoQTm07gAHbEJyIDJdiTblY5Nsa/BCV5DBOrNJv/KFEG9Gs0k
-         hZqWux3+HEUt+gfoQFgCIXPM+u6iDVFwV/rjsW7V2GBZIC3hw3yVLdW/237qytAw75tt
-         JkpQ==
+        bh=3F8SefbWZUmJrgPRZAQY4Ulx3HIoSvhY6ydZ1zkGaiQ=;
+        b=f8OzuAZVA7KxXw+Gp7JPkW2JdlqEzyIgJOU3bwnmJK+S2UTapH+N0b6Nc6KSEB9XZp
+         hATe1VF7sf1yUupQSFpdZLHh536fq5rk6MK107IYYjqoi3t3TDQIgEf8UtsWVMuu55LB
+         Kei5Y4wQTyxuAaXdrtohPV7Pe+BctyQnSOlgRMA1L8BHlOVX6DNuqnkcL8UEmMq4LElE
+         BEWTLZYISg0xKWUCaeI1r8cGQ1C4b4v/ESGpYxdbVzsznM3RPf+RpA8EkRzBMo9xgPKX
+         bkzYhGLzl64bbGQoOale7AncHhQGth+eJD4UWP3gOLTxPZFIS6YXL3trMixqvpksh4wy
+         CEVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743181118; x=1743785918;
+        d=1e100.net; s=20230601; t=1743181120; x=1743785920;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4CAhYZhOHWtuWy4tfyt8Ohp6UA9zEMu8kkCq/AbgncY=;
-        b=EtXb1ktDWwSCYFbh9bkYO3sTjlrMR02oEJRmITFaci73jLIPf+VSYOhQupYkpa7Dzu
-         8SINPMKsKK9CqjJrQcFoMada8VmZ/gFs4PORznmy6bikDbu43gElr5Me3Kdxs5uQtkBr
-         5dy5KPn7VhcQuDCpAiqrKTUkZaTb1YHGDlcRdylGNyoGGsvjh5eOyupeDS3zvGfNScbf
-         G3RzNriddQWdbQO6B8b1PwLc1p3hLWbHKmq5GZ8l+jOycU2AkxzqEkXcYQPCy/z+XjL0
-         MVK2kjANnTrdebbrHKXfBrYzaRLJaoATvilU16E+35esHgxEduMQpaXAAjKEorIvdgmp
-         2Wgg==
-X-Gm-Message-State: AOJu0YyxoIjbs2vwO1rsr0617+2ohzqew9rf9qxbyABkf0niQr5VOqVy
-	++yNawC4iMyOs1zZF8PLfPcifkkYaZNwn0aDZ8IAKQhnk4kWtg8z8jd5gw==
-X-Gm-Gg: ASbGncuhDK/CTqy7eoepgQi4fRKkt2ZnTWJttWR1QjJ0Nm5u3G99AUleDxTxR+xqU3s
-	WOFnwJUZ1PHXl3F3rOyce/qCf2ycc3pd1ZTRCbIyiIkcpspX7pDyzFn++HmbR0VYUA3EyWAqPXK
-	fKbJyPmfEP9jeDE80Rcl2zftR+fvwMLsLvogwItsdMLwn3/rNV6pAqyJRVqjF9bXl2E7RLQgXWk
-	N/Yi2/WIF+wYarjJ4RbunPM1vrV5+J1tlHA3hTamrju1kHdqjxitTYHV9pIJzANpdLIeZb6lmqO
-	7x+N9x5jHWAripd9ayP8ILziA4A28EBdH3BjctIohcB3Y+J8s6lNoi/GXLJgk3+4Q5eWxOoRA9R
-	a4vzyTOFdN6x08PUgjrNXsOl7
-X-Google-Smtp-Source: AGHT+IE1JMZb8jOcKsPR6IBjufgEsc/7vBhUd/tnkFR7SWMVKvFqEVCOFe2tzaLDmHDWLTEDzHp1UA==
-X-Received: by 2002:a05:6402:13d3:b0:5e6:1a97:7d09 with SMTP id 4fb4d7f45d1cf-5ed8e496922mr8874452a12.16.1743181117356;
-        Fri, 28 Mar 2025 09:58:37 -0700 (PDT)
+        bh=3F8SefbWZUmJrgPRZAQY4Ulx3HIoSvhY6ydZ1zkGaiQ=;
+        b=OxHRJa6ZLE6RF+uhz0kQQlnS39g0cs0rwYgCx2aVXhos9DtEhpoZo+ZppRxntK4DU8
+         6ATw3cq6ioOaNCrS7T/E/AOcYUtfuLNY/J64xnV85wKOEOcBw44/H0ZfDeuenVnfJIL4
+         rWxbhKpE0BeWAKYQb3+etu36+Pt4TAc6RFL4gmymOmlZA5LnJLxpo9izceTxxlDsnowM
+         JAgU/BOzcy+foMPjLPlpiV/VyMBFNdU5DPyStU3LI7uMTaQE7TLJd0v+toUZxivHCTWK
+         ZOs1c3Gv3ZdkMdcs/KpQDcKpjbkEReorkGquQDmOIghL8tlsm0U19c3iNDdiVt7wfTwY
+         0Pkg==
+X-Gm-Message-State: AOJu0YzH1kxVytf92qtoc3lXIKeIIeoIrRCBDK4F91CycR/d419Lh58w
+	jAT7rQLdF+gAzz4lJ/t5qmdUarOtOAbfiLBa9NFFgAzZ+G303sZNqGCWEA==
+X-Gm-Gg: ASbGncuGBlXhkzOvYJ1Kha7YcMT2ps6VLHFeAn7MBWguxzEudFj5XXULHIKh4CxOF/O
+	YD8rT30Y1sT/nhcQsI/EoWqaZRFHAgTu75L/m9/aIVSH6lse5f9WsFQ3xUXHazNr2UbauUjlOYA
+	UWC8Eh869NXfrzRb+iyRh7u4ypWB95dVQK10jFE30vUDN16P772EwntR+dGeDi9Vg+1gs7ArucF
+	odlB71FSnMGhqRrlt8EJnKRUVFu2gyB+kiPU3YXVtEJP7yho/TUTWdgh4T3JtGUi/WlAEJhItua
+	kFMGLdrEojNpfRVoTH2MxTx2psEHVKZIzhBjoXE36qmqUXeW69NV2jxQDawuLBOys7+4owXZVab
+	Qe+JAhhPTM/2LdA==
+X-Google-Smtp-Source: AGHT+IFMk2+7VOHOfkNZXBVL6jGpGNPstwNgNOtiIRIFyqbaWJvvmMA3HwW/LNlNGuaTtc5SOVaf9w==
+X-Received: by 2002:a05:6402:5106:b0:5e7:b015:c636 with SMTP id 4fb4d7f45d1cf-5ed8e25550dmr9349717a12.6.1743181119936;
+        Fri, 28 Mar 2025 09:58:39 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 2/4] automation: select APLIC and IMSIC to handle both wired interrupts and MSIs
-Date: Fri, 28 Mar 2025 17:58:30 +0100
-Message-ID: <e1124922c590043c71bb22d8264284439c80b711.1743165791.git.oleksii.kurochko@gmail.com>
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 4/4] xen/riscv: introduce intc_preinit()
+Date: Fri, 28 Mar 2025 17:58:32 +0100
+Message-ID: <3bce47b0cd1984dcc9a283051e717f0cfec7c146.1743165791.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <4ddde60347edf6740fbc69b5739d099616f5b5ff.1743165791.git.oleksii.kurochko@gmail.com>
 References: <4ddde60347edf6740fbc69b5739d099616f5b5ff.1743165791.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-By default, the `aia` option is set to "none" which selects the SiFive PLIC for
-handling wired interrupts. However, since PLIC is now considered obsolete and
-will not be supported by Xen now, APLIC and IMSIC are selected instead to manage
-both wired interrupts and MSIs.
+Currently, only the device tree method is available to locate and perform
+pre-initialization steps for the interrupt controller (at the moment, only
+one interrupt controller is going to be supported). When `acpi_disabled`
+is true, the system will scan for a node with the "interrupt-controller"
+property and then call `device_init()` to validate if it is an expected
+interrupt controller and if yes then save this node for further usage.
+
+If `acpi_disabled` is false, the system will panic, as ACPI support is not
+yet implemented for RISC-V.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-
-Tests results:
-  https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/1734636979
-
-Based on the source code of Qemu the support of AIA should be present from 7.0.0:
-   28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
-
-```
-$ git tag --contains 28d8c281200f20a060c456c81fd1564f3d119fda
-staging-mjt-test
-trivial-patches-pull-request
-v7.0.0
-v7.0.0-rc0
-v7.0.0-rc1
-v7.0.0-rc2
-v7.0.0-rc3
-v7.0.0-rc4
-v7.1.0
-...
-```
-
-And in Xen's GitLab CI it is used 7.2.11:
-```
-$ CONTAINER_NO_PULL=1 CONTAINER=bookworm-riscv64 ./automation/scripts/containerize 
-*** Launching container ...   
-user@6a1d1f0077fe:/build$ qemu-system-riscv64 --version
-QEMU emulator version 7.2.11 (Debian 1:7.2+dfsg-7+deb12u6)
-Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
-```
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
- - Nothing changed. Only rebase.
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v2:
- - Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+ - Update the commit message.
 ---
- automation/scripts/qemu-smoke-riscv64.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/riscv/Makefile           |  1 +
+ xen/arch/riscv/include/asm/intc.h |  2 ++
+ xen/arch/riscv/intc.c             | 14 ++++++++++++++
+ xen/arch/riscv/setup.c            |  3 +++
+ 4 files changed, 20 insertions(+)
+ create mode 100644 xen/arch/riscv/intc.c
 
-diff --git a/automation/scripts/qemu-smoke-riscv64.sh b/automation/scripts/qemu-smoke-riscv64.sh
-index 8f755d0a6a..b2e112c942 100755
---- a/automation/scripts/qemu-smoke-riscv64.sh
-+++ b/automation/scripts/qemu-smoke-riscv64.sh
-@@ -6,7 +6,7 @@ set -ex -o pipefail
- rm -f smoke.serial
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index dd5fd25c7d..0c6c4a38a3 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -2,6 +2,7 @@ obj-y += aplic.o
+ obj-y += cpufeature.o
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-y += entry.o
++obj-y += intc.o
+ obj-y += mm.o
+ obj-y += pt.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index ff9bb33896..52ba196d87 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -17,4 +17,6 @@ struct intc_info {
+     const struct dt_device_node *node;
+ };
  
- export TEST_CMD="qemu-system-riscv64 \
--    -M virt \
-+    -M virt,aia=aplic-imsic \
-     -smp 1 \
-     -nographic \
-     -m 2g \
++void intc_preinit(void);
++
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+new file mode 100644
+index 0000000000..4061a3c457
+--- /dev/null
++++ b/xen/arch/riscv/intc.c
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/acpi.h>
++#include <xen/device_tree.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++
++void __init intc_preinit(void)
++{
++    if ( acpi_disabled )
++        intc_dt_preinit();
++    else
++        panic("ACPI interrupt controller preinit() isn't implemented\n");
++}
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 836ad16fed..4e416f6e44 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -16,6 +16,7 @@
+ #include <asm/cpufeature.h>
+ #include <asm/early_printk.h>
+ #include <asm/fixmap.h>
++#include <asm/intc.h>
+ #include <asm/sbi.h>
+ #include <asm/setup.h>
+ #include <asm/smp.h>
+@@ -128,6 +129,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     preinit_xen_time();
+ 
++    intc_preinit();
++
+     printk("All set up\n");
+ 
+     machine_halt();
 -- 
 2.49.0
 
