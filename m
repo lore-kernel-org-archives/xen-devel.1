@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93533C28B20
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Mar 2025 13:08:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.930628.1333222 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A33C28B20
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Mar 2025 13:44:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.930665.1333302 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ty9RZ-00046H-Lf; Fri, 28 Mar 2025 13:08:17 +0000
+	id 1tyA0q-0006pc-Kb; Fri, 28 Mar 2025 13:44:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 930628.1333222; Fri, 28 Mar 2025 13:08:17 +0000
+Received: by outflank-mailman (output) from mailman id 930665.1333302; Fri, 28 Mar 2025 13:44:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ty9RZ-00046A-Iz; Fri, 28 Mar 2025 13:08:17 +0000
-Received: by outflank-mailman (input) for mailman id 930628;
- Fri, 28 Mar 2025 13:08:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hnye=WP=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ty9RX-00045z-Vu
- for xen-devel@lists.xenproject.org; Fri, 28 Mar 2025 13:08:15 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b4f80bed-0bd5-11f0-9ffa-bf95429c2676;
- Fri, 28 Mar 2025 14:08:14 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43d07ca6a80so11365085e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 28 Mar 2025 06:08:14 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b66285bsm2551978f8f.21.2025.03.28.06.08.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Mar 2025 06:08:13 -0700 (PDT)
+	id 1tyA0q-0006na-Cq; Fri, 28 Mar 2025 13:44:44 +0000
+Received: by outflank-mailman (input) for mailman id 930665;
+ Fri, 28 Mar 2025 13:44:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=IZL4=WP=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1tyA0o-0005Dp-QC
+ for xen-devel@lists.xenproject.org; Fri, 28 Mar 2025 13:44:42 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cd4c8ec6-0bda-11f0-9ea3-5ba50f476ded;
+ Fri, 28 Mar 2025 14:44:42 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so18660525e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Mar 2025 06:44:42 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d8314f5c6sm73339085e9.40.2025.03.28.06.44.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 06:44:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +47,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4f80bed-0bd5-11f0-9ffa-bf95429c2676
+X-Inumbo-ID: cd4c8ec6-0bda-11f0-9ea3-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1743167294; x=1743772094; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=LuNzUf0P8JvICLW6X4s4ZHyXRZ1RNFridA2jUgFwvCQ=;
-        b=bkyP8Ktxl5QFlRQIFk9zEv43AqTlo5Y8BE+pETb9g3UtSGssjbgbpX2ybLfuLLl/UJ
-         Dpkp72x2EYJwNlhWylJCwJp/RGrrfvUR2bCl5VI+Avx3diVyKlG9lIvwUMDujpCCwFlP
-         EREGAkumH/YbXyPKfx8jpAxsbzJ/XLCMOVX7YDHCL2TU8B0zGUGjTPpUknBReSQ7i3dT
-         tB/1L4FHmp09A0WnYDxVbZn1bP7h6bsmZGdZA5PmRuSyLBMHVdoTWwLxKCh6fBXzmR35
-         IW36aotr4Q36w24VKZK5cu7/Rj3njrkqfjzu6es8PqpiFrpOg35apW/jY+MuE4n20U+n
-         Eeyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743167294; x=1743772094;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1743169482; x=1743774282; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LuNzUf0P8JvICLW6X4s4ZHyXRZ1RNFridA2jUgFwvCQ=;
-        b=dxZBdAioAGBMX3hQ3ngXT/Jz6jKEP1g+SMU5OEP1zR9s9XxQIrSFdlIW0xf8przmGv
-         ZyQJ8BSN5JgH7N6PBPawwE2zA/UiTxSajCDn528yIY57elwAwXZ3HTMBrLBTozJtyCyZ
-         uDBXi5vCpTPeXlPdGJRRqNGtjv+Nb4lTyupXMeXc+jjiDi0T28XweY8/ODPiLJMB2E0W
-         z9Br6MhQY10yiIBc4utRQpK6W+QxglhiLMHlgWHWM7bzT6R0UE/q6ctJS7sS39mq9UE+
-         PvuGCkOqE3KL0OAt1ra1XMDvypThe8EKB1N64jo9p5yiVmNLwoi9xpjMLTp/bpGZI2WP
-         L0NQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXzrFnQgQN7R1Bx2DxFcZFpdWZVk54trHadH90h6E4QZ6sYnZnadu1S1hYr86QRSQhnGhtfRXxD3ws=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywsj2FBCKuh2AcMFvCgoOZsrpQxusAzNgXRNFlKU/p2mLno9ujX
-	whUFlx04gyYZt0VPvcuZIZLVJihxymuV7oRjvRqUU4VWnBwJ6n8GxI4Q3ax+EQ==
-X-Gm-Gg: ASbGncvdR33Y/yNK+dgtH5BKtlCi/k2ukjDVzkubOBJootWY8vXWeOjOD//MMPlP34H
-	RXCS9uwc+ECx/GHnGCYhPGXPbMLynUeVUWrTfeFy3bDNEtPS0aHvHhsEh98PxhMyb9UKoYDQ70q
-	0O6tu2ojgTD3RFmAY+iPjFP7b04ak37Ztmvc+XNzgZ4hKK2jPWhpMvhDyWtbYNvm5JKqSrq4IVb
-	4OIt/rc1hEPSMGHxakgu2fNK7YMAGJfsUmroe4hjMkUfPr8kPLdB9MPeK6zZ/LVDNgVoGgqzj72
-	pzvpIC0Lg73HX1oAM6kQrXE+gjW++BqfM5snkyyyrNkkzcCdGtE7FWDmWfoZRB9DGxvLGg6BcJ9
-	Ldc1N9sLH7BYjOSpC3lqYlcdCI0laiA==
-X-Google-Smtp-Source: AGHT+IHTqvKyeyygpwXbYabt4WaaE4srqHQ7Dbc9JKNMfDDRTo6eao0W7wdmthDuNL6v45vfJI4P0w==
-X-Received: by 2002:a05:600c:444f:b0:43d:4e9:27ff with SMTP id 5b1f17b1804b1-43d84f947fcmr82147715e9.7.1743167293516;
-        Fri, 28 Mar 2025 06:08:13 -0700 (PDT)
-Message-ID: <e0593169-240e-4a10-84ec-2528ccf1aa82@suse.com>
-Date: Fri, 28 Mar 2025 14:08:11 +0100
+        bh=xv/5+f+BWzji1CB1SXmZ+OaK7UeEkWaO0hHsnfSGUeo=;
+        b=CxwXeqxN2FYKt8GImqt1zE0dvtvlr0eGblr59YUvgjbBa45l5y5EMUPxVLeQkoOol5
+         81PDFsntsKHRTl6ZCW5Zkb+JQwofXDQvcQkyILOzaQ8zX9fLzKhbU+rghiPa3NJTK1PN
+         500P1ccGLkJf5bJIq5gnKQc/jy1HMffLY+q1E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743169482; x=1743774282;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xv/5+f+BWzji1CB1SXmZ+OaK7UeEkWaO0hHsnfSGUeo=;
+        b=ZNaQCXxtkjIKVToFbj740rBk6OF7R6ZEEeQNTY/Yi8gpF+9c+BQJCwa7DxCxZ5Jbvn
+         joSemzEjRB8Ktsjzw20ljgTqziJg3CPPLNLgi1APZzVoKumBiX5gzb6f3FzxyOSsTWYt
+         sFQpntiKmngn2+eJCC72jJ1gcBK6+3Ok7JHsv23bjABHT26AncS8LUoxWGH2oGcwLWlI
+         MHZ7GqmY1PvmoZh2QpXgjeL3fBX12vjMDoXlkc7Mu/yRrj57Yq9eVv69w6q/3ByZgMjM
+         xwEtQ3qiT+RINNyMgsIQARktqBxnD8AJE3hxFw6QjQlQDlEsyvCqD1ob17QNLddo+m86
+         6z4w==
+X-Gm-Message-State: AOJu0YyldTvL2wE2jL6VyqzRsKvx9/uM9NUloLxWbd1M1n7sdVwC9Ej6
+	ki/aF65LiF2v0xidWUwYShjGRfxX0ds4f4n6CUlUdrzfF2HRoRkyPLVXJq8z5aNNnqlfvHeGIzi
+	T+h0=
+X-Gm-Gg: ASbGnctEDASsK5lBpqSHWC2Zd3Q/JGgxAOmC9C4IyMRL9lVSdkV22H06lamBF6mTEVV
+	8ao1FqakdLejME4XH96CScR3ELVkqaCpsclJ82OQquFRSTns+Fx6FDp8DlKjnLbthbLPjLbZIod
+	Twby5MQTfI83tnmN4vU7BniEDP/ds+4U1mvcExpzs7mpKST0Z1Imu4oZQ+U1A9B7g1tY/wNJHib
+	CD6xBz0Q8zglUGAfAQP4UZS671GH8g3zMUZ+evqWTe6o+U03kcNFE4VaunZuYpw6+3w9YVO9eAg
+	usrK362FlIOwWH9+9ueRu9a8dItbBYfuTVX+UfT8waxSdvPOxq+sRnIsZ1+igQB25WZ9tPGQr+n
+	1kpAC8/XKSmpwxFAHMA==
+X-Google-Smtp-Source: AGHT+IFe8F1Ghmv2+iYN3jy64ZhwzbMwIzbrHZkvQTMw2sExavxGXaR+RYLUFdw+YWQIFJ5rh045Bw==
+X-Received: by 2002:a5d:5f95:0:b0:391:b93:c971 with SMTP id ffacd0b85a97d-39c0c136bc9mr2658967f8f.20.1743169481653;
+        Fri, 28 Mar 2025 06:44:41 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Lin Liu <lin.liu@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v5 08/16] xen/decompressors: Use new byteorder infrastructure
+Date: Fri, 28 Mar 2025 13:44:19 +0000
+Message-Id: <20250328134427.874848-9-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250328134427.874848-1-andrew.cooper3@citrix.com>
+References: <20250328134427.874848-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] xen: debug: gcov: add condition coverage support
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20250328121902.2134020-1-volodymyr_babchuk@epam.com>
- <20250328121902.2134020-4-volodymyr_babchuk@epam.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250328121902.2134020-4-volodymyr_babchuk@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 28.03.2025 13:19, Volodymyr Babchuk wrote:
-> Condition coverage, also known as MC/DC (modified condition/decision
-> coverage) is a coverage metric that tracks separate outcomes in
-> boolean expressions.
-> 
-> This patch adds CONFIG_CONDITION_COVERAGE option to enable MC/DC for
-> GCC. Clang is not supported right now.
-> 
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-> 
-> ---
-> 
-> Changes in v2:
->  - Move gcc version check from .c file to Rules.mk (I can't find
->    an easy way to check GCC version at Kconfig level)
+From: Lin Liu <lin.liu@citrix.com>
 
-Yet all of this could be avoided if, as indicated before, you checked for
-acceptance of the command line option rather than a particular gcc version.
+unaligned.h already inlcudes byteorder.h, so most can simply be dropped.
 
-Jan
+No functional change.
+
+Signed-off-by: Lin Liu <lin.liu@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Shawn Anastasio <sanastasio@raptorengineering.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+CC: Lin Liu <lin.liu@citrix.com>
+
+v5:
+ * New
+---
+ tools/libs/guest/xg_dom_decompress_unsafe_zstd.c | 3 +--
+ xen/common/lz4/defs.h                            | 1 -
+ xen/common/lzo.c                                 | 1 -
+ xen/common/unlzo.c                               | 1 -
+ xen/common/xz/private.h                          | 1 -
+ 5 files changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+index ff45732a3616..319816a390eb 100644
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
++++ b/tools/libs/guest/xg_dom_decompress_unsafe_zstd.c
+@@ -30,9 +30,8 @@ typedef uint64_t __be64;
+ 
+ #undef ERROR
+ 
+-#define __BYTEORDER_HAS_U64__
+ #define __TYPES_H__ /* xen/types.h guard */
+-#include "../../xen/include/xen/byteorder/little_endian.h"
++#include "../../xen/include/xen/byteorder.h"
+ #include "../../xen/include/xen/unaligned.h"
+ #include "../../xen/include/xen/xxhash.h"
+ #include "../../xen/lib/xxhash64.c"
+diff --git a/xen/common/lz4/defs.h b/xen/common/lz4/defs.h
+index e477806634c1..b697a06c00d7 100644
+--- a/xen/common/lz4/defs.h
++++ b/xen/common/lz4/defs.h
+@@ -12,7 +12,6 @@
+ #define COMMON_LZ4_DEFS_H
+ 
+ #ifdef __XEN__
+-#include <asm/byteorder.h>
+ #include <xen/unaligned.h>
+ #else
+ 
+diff --git a/xen/common/lzo.c b/xen/common/lzo.c
+index 07b4017812dc..0393ec5c4472 100644
+--- a/xen/common/lzo.c
++++ b/xen/common/lzo.c
+@@ -68,7 +68,6 @@
+ 
+ #ifdef __XEN__
+ #include <xen/lib.h>
+-#include <asm/byteorder.h>
+ #include <xen/unaligned.h>
+ #else
+ #define get_unaligned_le16(_p) (*(u16 *)(_p))
+diff --git a/xen/common/unlzo.c b/xen/common/unlzo.c
+index acb8dff600fc..d52c1c92548d 100644
+--- a/xen/common/unlzo.c
++++ b/xen/common/unlzo.c
+@@ -33,7 +33,6 @@
+ #include <xen/lzo.h>
+ 
+ #ifdef __XEN__
+-#include <asm/byteorder.h>
+ #include <xen/unaligned.h>
+ #else
+ 
+diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
+index a63379994fd6..3dce124fa743 100644
+--- a/xen/common/xz/private.h
++++ b/xen/common/xz/private.h
+@@ -12,7 +12,6 @@
+ 
+ #ifdef __XEN__
+ #include <xen/kernel.h>
+-#include <asm/byteorder.h>
+ #include <xen/unaligned.h>
+ #else
+ 
+-- 
+2.39.5
+
 
