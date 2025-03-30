@@ -4,52 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F2C8C36013
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Mar 2025 18:04:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.931681.1333910 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC34C36010
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Mar 2025 20:09:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.931738.1333924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tyx0p-0005pZ-71; Sun, 30 Mar 2025 18:03:59 +0000
+	id 1tyyxZ-0008NK-KK; Sun, 30 Mar 2025 20:08:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 931681.1333910; Sun, 30 Mar 2025 18:03:59 +0000
+Received: by outflank-mailman (output) from mailman id 931738.1333924; Sun, 30 Mar 2025 20:08:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tyx0p-0005oT-1k; Sun, 30 Mar 2025 18:03:59 +0000
-Received: by outflank-mailman (input) for mailman id 931681;
- Sun, 30 Mar 2025 18:03:57 +0000
+	id 1tyyxZ-0008ND-Hp; Sun, 30 Mar 2025 20:08:45 +0000
+Received: by outflank-mailman (input) for mailman id 931738;
+ Sun, 30 Mar 2025 20:08:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bHYC=WR=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1tyx0n-0004t7-IK
- for xen-devel@lists.xenproject.org; Sun, 30 Mar 2025 18:03:57 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2060d.outbound.protection.outlook.com
- [2a01:111:f403:240a::60d])
+ <SRS0=QTQ+=WR=desiato.srs.infradead.org=BATV+07442bf8be34e4cbe263+7889+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1tyyxX-0008N5-6a
+ for xen-devel@lists.xenproject.org; Sun, 30 Mar 2025 20:08:43 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5394a04c-0d91-11f0-9ea7-5ba50f476ded;
- Sun, 30 Mar 2025 20:03:48 +0200 (CEST)
-Received: from BN0PR02CA0016.namprd02.prod.outlook.com (2603:10b6:408:e4::21)
- by IA1PR12MB7613.namprd12.prod.outlook.com (2603:10b6:208:42a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Sun, 30 Mar
- 2025 18:03:41 +0000
-Received: from BN2PEPF0000449F.namprd02.prod.outlook.com
- (2603:10b6:408:e4:cafe::2b) by BN0PR02CA0016.outlook.office365.com
- (2603:10b6:408:e4::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.46 via Frontend Transport; Sun,
- 30 Mar 2025 18:03:41 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF0000449F.mail.protection.outlook.com (10.167.243.150) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Sun, 30 Mar 2025 18:03:40 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 30 Mar
- 2025 13:03:40 -0500
-Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via
- Frontend Transport; Sun, 30 Mar 2025 13:03:39 -0500
+ id c61896d1-0da2-11f0-9ea7-5ba50f476ded;
+ Sun, 30 Mar 2025 22:08:41 +0200 (CEST)
+Received: from [172.31.31.142] (helo=[127.0.0.1])
+ by desiato.infradead.org with esmtpsa (Exim 4.98.1 #2 (Red Hat Linux))
+ id 1tyywj-00000006YOK-0o2k; Sun, 30 Mar 2025 20:07:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,164 +42,277 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5394a04c-0d91-11f0-9ea7-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mus82b9+mjbuAzK6OLFi2gdeGzqiPtL8fxeLoVwBjhCB0F+QpVcZT5QBOgBl2rUpCZwYAvyLOfPyeiBh6CdP6dfHq2YBKjl2kDS3OB/whky3J7vW/JuAItalJWo6CU5MbLCWQQeI079N94M9+KA32w/2I/4LgGkM2j5m55e5S/xelIHQdi+Chc05zwOsxEpyaDxUNozGBYJBsnnUrgA3PAIKjhon7D5kRCodTm71LYrA1YySjS9B7AwmiY3WpObcd/1eaHAJAGT3+DuH9TK1rCWfwoAjxC9d9XcCjcCkL20lSi8czaD7KHB02LcRlgZE2gBQCJxSNexrjr79SfwfBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h8fjVeA4EQb7WyZPH3MXGgH/cncLv1FaG6lrBgZSm1k=;
- b=LAhNT18DYfvsXrMUpiKkgpvopnNUx0ncMmDZ4ejXB31jsUTFWUxh+RPGomjYPujX0BpsUv7ozlsHC3xa/HGAL13xwSbAZj4cpYft0Ks1jOdVs2QRPqo1fOLL738gBhfZoVnb/PTWljFAAR2MTNjrv0FR361Wclzp/sgCmp/TQ1EhtOlgYlke6Lhh1ksYgnp/Iqi0A9cFH8aQqNDlIG/BrWqqv0V2C9pw36uNyPZOnmU4Fbhh6ivEq71o03UgGQjn1YQKWhpPBVsA/+uPQU3CYUb/CNWHD+jETUgjtGxIMM4vwvhQ6NCYL4Jv5MAil3LHnYLqM5Tc2oYTLI65OQPDEg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h8fjVeA4EQb7WyZPH3MXGgH/cncLv1FaG6lrBgZSm1k=;
- b=L52BSY1em1NczGBi6aqNWcn4cDmGOGfgidexZdPwWfvK6m9gmYk2Xg+6vNq0kE5ja6bNwDRDruDrwL66ocev2EFZHax86VOioW15OsInbFS373VPTgMZ07hml34vhWXQKdK+NPHtpZfVqSM3tuTmQcj/zWNSEnccqp8eT0OMRx4=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 1/5] xen/arm32: Move MM specific registers to enable_mmu
-Date: Sun, 30 Mar 2025 19:03:04 +0100
-Message-ID: <20250330180308.2551195-2-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250330180308.2551195-1-ayan.kumar.halder@amd.com>
-References: <20250330180308.2551195-1-ayan.kumar.halder@amd.com>
+X-Inumbo-ID: c61896d1-0da2-11f0-9ea7-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
+	:MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:
+	Sender:Reply-To:Content-ID:Content-Description;
+	bh=S3gcKsBiQT1kzFJwB2tZ1/M+Cre0DyC/LdUvo66QFrU=; b=NyU9U1EaUuVnxvHkZUIJg+dn3Q
+	iphTWNVHpmIirhtFC3wci7jMyQJ6sFBjLs2WOHYIXi0f4o4QQ/ZQZpXpFHypCCe0g7xehARLIw4rJ
+	9hywBKQ+X5QIzeDy7XdLRb7oJMLGd6eGwnn8L9UdVS25PI7HvmfYZXX0deS0jR23UUeV3NXmsMApI
+	+ehvnqOWluZv5G48sOrrTzaWFNF6Flk+KGoutnVO324SmPbDXHuS9VHmFgiueaXZrA1kPce1PujLI
+	729y4032fWcrQ0zzXeu6qph/ZRJpP5MjljQWhhUukl0S2KbnhUEuIE3I2fmsmZ/D55zHl1FOSXb+6
+	TjF7oIGw==;
+Date: Sun, 30 Mar 2025 21:07:52 +0100
+From: David Woodhouse <dwmw2@infradead.org>
+To: linuxppc-dev@lists.ozlabs.org, "Michael S. Tsirkin" <mst@redhat.com>
+CC: Claire Chang <tientzu@chromium.org>, Rob Herring <robh+dt@kernel.org>,
+ mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>,
+ Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com,
+ jgross@suse.com, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>, heikki.krogerus@linux.intel.com,
+ peterz@infradead.org, benh@kernel.crashing.org, grant.likely@arm.com,
+ paulus@samba.org, mingo@kernel.org, sstabellini@kernel.org,
+ Saravana Kannan <saravanak@google.com>, xypron.glpk@gmx.de,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+ xen-devel@lists.xenproject.org, Thierry Reding <treding@nvidia.com>,
+ linux-devicetree <devicetree@vger.kernel.org>,
+ Nicolas Boichat <drinkcat@chromium.org>,
+ Dan Williams <dan.j.williams@intel.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Greg KH <gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>,
+ lkml <linux-kernel@vger.kernel.org>,
+ "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+ Jim Quinlan <james.quinlan@broadcom.com>,
+ Robin Murphy <robin.murphy@arm.com>, hch@infradead.org,
+ Jason Wang <jasowang@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ =?ISO-8859-1?Q?Eugenio_P=E9rez?= <eperezma@redhat.com>,
+ virtualization@lists.linux.dev, graf@amazon.de
+Subject: Re: Using Restricted DMA for virtio-pci
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20250330125637-mutt-send-email-mst@kernel.org>
+References: <20210209062131.2300005-1-tientzu@chromium.org> <979b6a34ca5724ced1d4871b58bf227065d7da57.camel@infradead.org> <20250321142947-mutt-send-email-mst@kernel.org> <d1382a6ee959f22dc5f6628d8648af77f4702418.camel@infradead.org> <8e7084b04e5c0456c0ff32ea131a199c6af763cd.camel@infradead.org> <20250330093532-mutt-send-email-mst@kernel.org> <09fc164ebcfd893ffd67d1b224d6e1c5e5772ee0.camel@infradead.org> <20250330125637-mutt-send-email-mst@kernel.org>
+Message-ID: <2C097209-A7C1-4B0B-A505-3B32BE21505A@infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: ayan.kumar.halder@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF0000449F:EE_|IA1PR12MB7613:EE_
-X-MS-Office365-Filtering-Correlation-Id: ab7244cc-19ba-4514-3b60-08dd6fb5340d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|34020700016|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?FCIx6vYTTxQp9alDw6jTNubJTzB6Y23K+S/oN8U3TS/oqO6OXvzpZAFPkVUv?=
- =?us-ascii?Q?gqDHVUNc4GxmhyBYOMRNRwDjK0sATrWMg75vF9xiOiK44PfA63jPY8Wgjbkv?=
- =?us-ascii?Q?eJsE48sSGCiRBvrHo57nWVp5C6oN9UiX+PtzoQ7X18hEJAEfNnhfTggRqZ3Y?=
- =?us-ascii?Q?eutMmrW7Nl+L70xTH4zOhn86VEDUweFlA4yDYNoCpmiMo44xLd0HqESdCVaS?=
- =?us-ascii?Q?pisESGzbTuAMJqUMgLaD3VaPpkZT8PmG+MBNzNgzI3Peg49ShYQsdeXGNjaE?=
- =?us-ascii?Q?YYoq0Amb3HvMo/H7htG+Q1hdxlUrTAH18Y5In+27qnFfHfuKVSvYq16TA9Lm?=
- =?us-ascii?Q?HuW2MdjQCjM1P4tn+yNOArGAJ1eIe99sgtjEYlUIbfvIuv1V1PY0V2FCH4s+?=
- =?us-ascii?Q?hacFRBonmMIo7TEJxXwyfKvWTxW+amZVIIaBCCRY9wb1OUKtJ/IB1vLImU2a?=
- =?us-ascii?Q?vf3nqaEyokohOM1PE3uf6KTNqjMhnBr/zF/cK5GKOOzcb4u36nUu+c0pgMCg?=
- =?us-ascii?Q?ClHWS5aCB/QzwKZNM+xhqvG2NwQvrW+RiSNkK6SY9/MC6UatNAZZAWjBI3/N?=
- =?us-ascii?Q?jBkligr/vuSg6VqNyto5Ro+QrOzAUTcL3iWwe4PSFXDxF9+eYABjuhce3Avh?=
- =?us-ascii?Q?BnadJ8F3q02vCgm3Tn50X9EMCDT7zsyPmfhscdSNUjXiAkh5EcfcpJCjnxH+?=
- =?us-ascii?Q?Cp0gwYtdHs/uT8PaCBTCVC0NTv2cj83XiY8WZdnz/ODQe7E8MmqLWEEKUTQ7?=
- =?us-ascii?Q?tvus6u7OpcR/IjuZpr1fLecuXxDVoXCfzE/0om1Q+TdHaQ4EjNGxdcp0ym8G?=
- =?us-ascii?Q?Q9DyA1rQOGoSD5xPEUoHfgGv+nPW70pj9eKnZcIAMkLSAlvYsT+4arwZgJuY?=
- =?us-ascii?Q?a6NynlQy+JmqwO3fuFTvl5UhJvu8SjFS0BkiaD0O4WeNF1ZmObYpsSEyBsB2?=
- =?us-ascii?Q?4iTHZnBeIXWtfy0GkzqL9cjq1xgs3thejOglZLF1Xhgaob9jn+sHWTCkh6iO?=
- =?us-ascii?Q?pLR3DR2bWwkvDzYl2wEiFQ7k1mDkOXtufgkP3TUXvHOLno7kVh479IGLhEom?=
- =?us-ascii?Q?478CcuX+o17KkCyD/94zlDzXQX+X3+ihxf87Y2A7lLJyRg7F1t2qEtr0W0g3?=
- =?us-ascii?Q?FUDeuc6HzNksJ7K4KtCPyjZHdPlEiohBUHxQMJdewcYPLs4CiSAQc95/3VKC?=
- =?us-ascii?Q?B5Gu2pZkv9e3Xz/KB4xfTOt6HkllR+EDUpYWUYud8EmdYYA7Ahm/74EQhBH7?=
- =?us-ascii?Q?ZRfDR9CWbGHxECZn05w+khUMi2QH7HbFCpEvWYwh7FDurR/4MwUAwv4zo9mH?=
- =?us-ascii?Q?UTIDHu1hJARTRl8m5P13WJlewCW/T5ejLs2K9H7AJHYLNJjIUOwK5hNat0ki?=
- =?us-ascii?Q?AXEilD9jlyk1bYIptT5ZqDnRzR+C3ZWzoYm6jnwV1d69Ue8OC73jgVazHuyl?=
- =?us-ascii?Q?rL1ZHG9BCEqpPpRCDmCIH/Htb+WA0VWi65G51ILlD5nkHnoZ+XdKRA=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(34020700016)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2025 18:03:40.9055
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab7244cc-19ba-4514-3b60-08dd6fb5340d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF0000449F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7613
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-All the memory management specific registers are initialized in enable_mmu.
+On 30 March 2025 17:59:13 BST, "Michael S=2E Tsirkin" <mst@redhat=2Ecom> wr=
+ote:
+>On Sun, Mar 30, 2025 at 04:07:56PM +0100, David Woodhouse wrote:
+>> On Sun, 2025-03-30 at 09:42 -0400, Michael S=2E Tsirkin wrote:
+>> > On Fri, Mar 28, 2025 at 05:40:41PM +0000, David Woodhouse wrote:
+>> > > On Fri, 2025-03-21 at 18:42 +0000, David Woodhouse wrote:
+>> > > > >=20
+>> > > > > I don't mind as such (though I don't understand completely), bu=
+t since
+>> > > > > this is changing the device anyway, I am a bit confused why you=
+ can't
+>> > > > > just set the VIRTIO_F_ACCESS_PLATFORM feature bit?=C2=A0 This f=
+orces DMA API
+>> > > > > which will DTRT for you, will it not?
+>> > > >=20
+>> > > > That would be necessary but not sufficient=2E =2E=2E=2E
+>> >=20
+>> > could you explain pls?
+>>=20
+>> There was more to that in the previous email which I elided for this
+>> followup=2E
+>>=20
+>> https://lore=2Ekernel=2Eorg/all/d1382a6ee959f22dc5f6628d8648af77f470241=
+8=2Ecamel@infradead=2Eorg/
+>>=20
+>> > > My first cut at a proposed spec change looks something like this=2E=
+ I'll
+>> > > post it to the virtio-comment list once I've done some corporate
+>> > > bureaucracy and when the list stops sending me python tracebacks in
+>> > > response to my subscribe request=2E
+>> >=20
+>> > the linux foundation one does this? maybe poke at the admins=2E
+>> >=20
+>> > > In the meantime I'll hack up some QEMU and guest Linux driver suppo=
+rt
+>> > > to match=2E
+>> > >=20
+>> > > diff --git a/content=2Etex b/content=2Etex
+>> > > index c17ffa6=2E=2E1e6e1d6 100644
+>> > > --- a/content=2Etex
+>> > > +++ b/content=2Etex
+>> > > @@ -773,6 +773,9 @@ \chapter{Reserved Feature Bits}\label{sec:Reser=
+ved Feature Bits}
+>> > > =C2=A0Currently these device-independent feature bits are defined:
+>> > > =C2=A0
+>> > > =C2=A0\begin{description}
+>> > > +=C2=A0 \item[VIRTIO_F_SWIOTLB (27)] This feature indicates that th=
+e device
+>> > > +=C2=A0 provides a memory region which is to be used for bounce buf=
+fering,
+>> > > +=C2=A0 rather than permitting direct memory access to system memor=
+y=2E
+>> > > =C2=A0=C2=A0 \item[VIRTIO_F_INDIRECT_DESC (28)] Negotiating this fe=
+ature indicates
+>> > > =C2=A0=C2=A0 that the driver can use descriptors with the VIRTQ_DES=
+C_F_INDIRECT
+>> > > =C2=A0=C2=A0 flag set, as described in \ref{sec:Basic Facilities of=
+ a Virtio
+>> > > @@ -885,6 +888,10 @@ \chapter{Reserved Feature Bits}\label{sec:Rese=
+rved Feature Bits}
+>> > > =C2=A0VIRTIO_F_ACCESS_PLATFORM is not offered, then a driver MUST p=
+ass only physical
+>> > > =C2=A0addresses to the device=2E
+>> > > =C2=A0
+>> > > +A driver SHOULD accept VIRTIO_F_SWIOTLB if it is offered, and it M=
+UST
+>> > > +then pass only addresses within the Software IOTLB bounce buffer t=
+o the
+>> > > +device=2E
+>> > > +
+>> > > =C2=A0A driver SHOULD accept VIRTIO_F_RING_PACKED if it is offered=
+=2E
+>> > > =C2=A0
+>> > > =C2=A0A driver SHOULD accept VIRTIO_F_ORDER_PLATFORM if it is offer=
+ed=2E
+>> > > @@ -921,6 +928,10 @@ \chapter{Reserved Feature Bits}\label{sec:Rese=
+rved Feature Bits}
+>> > > =C2=A0A device MAY fail to operate further if VIRTIO_F_ACCESS_PLATF=
+ORM is not
+>> > > =C2=A0accepted=2E
+>> > > =C2=A0
+>> > > +A device MUST NOT offer VIRTIO_F_SWIOTLB if its transport does not
+>> > > +provide a Software IOTLB bounce buffer=2E
+>> > > +A device MAY fail to operate further if VIRTIO_F_SWIOTLB is not ac=
+cepted=2E
+>> > > +
+>> > > =C2=A0If VIRTIO_F_IN_ORDER has been negotiated, a device MUST use
+>> > > =C2=A0buffers in the same order in which they have been available=
+=2E
+>> > > =C2=A0
+>> > > diff --git a/transport-pci=2Etex b/transport-pci=2Etex
+>> > > index a5c6719=2E=2E23e0d57 100644
+>> > > --- a/transport-pci=2Etex
+>> > > +++ b/transport-pci=2Etex
+>> > > @@ -129,6 +129,7 @@ \subsection{Virtio Structure PCI Capabilities}\=
+label{sec:Virtio Transport Option
+>> > > =C2=A0\item ISR Status
+>> > > =C2=A0\item Device-specific configuration (optional)
+>> > > =C2=A0\item PCI configuration access
+>> > > +\item SWIOTLB bounce buffer
+>> > > =C2=A0\end{itemize}
+>> > > =C2=A0
+>> > > =C2=A0Each structure can be mapped by a Base Address register (BAR)=
+ belonging to
+>> > > @@ -188,6 +189,8 @@ \subsection{Virtio Structure PCI Capabilities}\=
+label{sec:Virtio Transport Option
+>> > > =C2=A0#define VIRTIO_PCI_CAP_SHARED_MEMORY_CFG 8
+>> > > =C2=A0/* Vendor-specific data */
+>> > > =C2=A0#define VIRTIO_PCI_CAP_VENDOR_CFG=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 9
+>> > > +/* Software IOTLB bounce buffer */
+>> > > +#define VIRTIO_PCI_CAP_SWIOTLB=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 10
+>> > > =C2=A0\end{lstlisting}
+>> > > =C2=A0
+>> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Any other value is=
+ reserved for future use=2E
+>> > > @@ -744,6 +747,36 @@ \subsubsection{Vendor data capability}\label{s=
+ec:Virtio
+>> > > =C2=A0The driver MUST qualify the \field{vendor_id} before
+>> > > =C2=A0interpreting or writing into the Vendor data capability=2E
+>> > > =C2=A0
+>> > > +\subsubsection{Software IOTLB bounce buffer capability}\label{sec:=
+Virtio
+>> > > +Transport Options / Virtio Over PCI Bus / PCI Device Layout /
+>> > > +Software IOTLB bounce buffer capability}
+>> > > +
+>> > > +The optional Software IOTLB bounce buffer capability allows the
+>> > > +device to provide a memory region which can be used by the driver
+>> > > +driver for bounce buffering=2E This allows a device on the PCI
+>> > > +transport to operate without DMA access to system memory addresses=
+=2E
+>> > > +
+>> > > +The Software IOTLB region is referenced by the
+>> > > +VIRTIO_PCI_CAP_SWIOTLB capability=2E Bus addresses within the refe=
+renced
+>> > > +range are not subject to the requirements of the VIRTIO_F_ORDER_PL=
+ATFORM
+>> > > +capability, if negotiated=2E
+>> >=20
+>> >=20
+>> > why not? an optimization?
+>> > A mix of swiotlb and system memory might be very challenging from POV
+>> > of ordering=2E
+>>=20
+>> Conceptually, these addresses are *on* the PCI device=2E If the device =
+is
+>> accessing addresses which are local to it, they aren't subject to IOMMU
+>> translation/filtering because they never even make it to the PCI bus as
+>> memory transactions=2E
+>>=20
+>> >=20
+>> > > +
+>> > > +\devicenormative{\paragraph}{Software IOTLB bounce buffer capabili=
+ty}{Virtio
+>> > > +Transport Options / Virtio Over PCI Bus / PCI Device Layout /
+>> > > +Software IOTLB bounce buffer capability}
+>> > > +
+>> > > +Devices which present the Software IOTLB bounce buffer capability
+>> > > +SHOULD also offer the VIRTIO_F_SWIOTLB feature=2E
+>> > > +
+>> > > +\drivernormative{\paragraph}{Software IOTLB bounce buffer capabili=
+ty}{Virtio
+>> > > +Transport Options / Virtio Over PCI Bus / PCI Device Layout /
+>> > > +Software IOTLB bounce buffer capability}
+>> > > +
+>> > > +The driver SHOULD use the offered buffer in preference to passing =
+system
+>> > > +memory addresses to the device=2E
+>> >=20
+>> > Even if not using VIRTIO_F_SWIOTLB? Is that really necessary?
+>>=20
+>> That part isn't strictly necessary, but I think it makes sense, for
+>> cases where the SWIOTLB support is an *optimisation* even if it isn't
+>> strictly necessary=2E
+>>=20
+>> Why might it be an "optimisation"? Well=2E=2E=2E if we're thinking of a=
+ model
+>> like pKVM where the VMM can't just arbitrarily access guest memory,
+>> using the SWIOTLB is a simple way to avoid that (by using the on-board
+>> memory instead, which *can* be shared with the VMM)=2E
+>>=20
+>> But if we want to go to extra lengths to support unenlightened guests,
+>> an implementation might choose to just *disable* the memory protection
+>> if the guest doesn't negotiate VIRTIO_F_SWIOTLB, instead of breaking
+>> that guest=2E
+>>=20
+>> Or it might have a complicated emulation/snooping of virtqueues in the
+>> trusted part of the hypervisor so that it knows which addresses the
+>> guest has truly *asked* the VMM to access=2E (And yes, of course that's
+>> what an IOMMU is for, but when have you seen hardware companies design
+>> a two-stage IOMMU which supports actual PCI passthrough *and* get it
+>> right for the hypervisor to 'snoop' on the stage1 page tables to
+>> support emulated devices too=2E=2E=2E=2E)
+>>=20
+>> Ultimately I think it was natural to advertise the location of the
+>> buffer with the VIRTIO_PCI_CAP_SWIOTLB capability and then to have the
+>> separate VIRTIO_F_SWIOTLB for negotiation=2E=2E=2E leaving the obvious
+>> question of what a device should do if it sees one but *not* the other=
+=2E
+>>=20
+>> Obviously you can't have VIRTIO_F_SWIOTLB *without* there actually
+>> being a buffer advertised with VIRTIO_PCI_CAP_SWIOTLB (or its
+>> equivalent for other transports)=2E But the converse seemed reasonable =
+as
+>> a *hint* even if the use of the SWIOTLB isn't mandatory=2E
+>
+>OK but I feel it's more work than you think, so we really need
+>a better reason than just "why not"=2E
+>
+>For example, it's not at all clear to me how the ordering is
+>going to work if buffers are in memory but the ring is swiotlb
+>or the reverse=2E Ordering will all be messed up=2E
 
-Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-Changes from -
+Maybe=2E Although by the time the driver has *observed* the data written t=
+o the swiotlb on the device's BAR, it has had to cross the same PCI bus=2E
 
-v1 - HTCR and HMAIR{0,1} are not set together with the other memory management
-registers in enable_mmu()
+But sure, we could require all-or-nothing=2E Or require that the SWIOTLB o=
+nly be used if the driver negotiates VIRTIO_F_SWIOTLB=2E
 
-Similar changes are to be done in arm64 as well. I prefer to do that in a
-separate patch so that all the arm32 changes are kept together in this series.
-
-v2 - Added Michal's R-b.
-
- xen/arch/arm/arm32/head.S     | 14 --------------
- xen/arch/arm/arm32/mmu/head.S | 15 +++++++++++++++
- 2 files changed, 15 insertions(+), 14 deletions(-)
-
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index 4ff5c220bc..50da179f81 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -218,20 +218,6 @@ cpu_init:
-         add   pc, r1, r10                   /* Call paddr(init func) */
- 
- cpu_init_done:
--        /* Set up memory attribute type tables */
--        mov_w r0, MAIR0VAL
--        mov_w r1, MAIR1VAL
--        mcr   CP32(r0, HMAIR0)
--        mcr   CP32(r1, HMAIR1)
--
--        /*
--         * Set up the HTCR:
--         * PT walks use Inner-Shareable accesses,
--         * PT walks are write-back, write-allocate in both cache levels,
--         * Full 32-bit address space goes through this table.
--         */
--        mov_w r0, (TCR_RES1|TCR_SH0_IS|TCR_ORGN0_WBWA|TCR_IRGN0_WBWA|TCR_T0SZ(0))
--        mcr   CP32(r0, HTCR)
- 
-         mov_w r0, HSCTLR_SET
-         mcr   CP32(r0, HSCTLR)
-diff --git a/xen/arch/arm/arm32/mmu/head.S b/xen/arch/arm/arm32/mmu/head.S
-index 1e2bbf0c82..8fa74bd556 100644
---- a/xen/arch/arm/arm32/mmu/head.S
-+++ b/xen/arch/arm/arm32/mmu/head.S
-@@ -279,6 +279,21 @@ ENDPROC(create_page_tables)
- enable_mmu:
-         PRINT("- Turning on paging -\r\n")
- 
-+        /* Set up memory attribute type tables */
-+        mov_w r0, MAIR0VAL
-+        mov_w r1, MAIR1VAL
-+        mcr   CP32(r0, HMAIR0)
-+        mcr   CP32(r1, HMAIR1)
-+
-+        /*
-+         * Set up the HTCR:
-+         * PT walks use Inner-Shareable accesses,
-+         * PT walks are write-back, write-allocate in both cache levels,
-+         * Full 32-bit address space goes through this table.
-+         */
-+        mov_w r0, (TCR_RES1|TCR_SH0_IS|TCR_ORGN0_WBWA|TCR_IRGN0_WBWA|TCR_T0SZ(0))
-+        mcr   CP32(r0, HTCR)
-+
-         /*
-          * The state of the TLBs is unknown before turning on the MMU.
-          * Flush them to avoid stale one.
--- 
-2.25.1
+Even in the latter case we can still allow for SWIOTLB to either be a requ=
+irement or a hint, purely down to whether the device *allows* the driver no=
+t to negotiate `VIRTIO_F_SWIOTLB`=2E
 
 
