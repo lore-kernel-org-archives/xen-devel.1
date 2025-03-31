@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1399EC36016
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A352C3DA4A
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Mar 2025 08:24:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.932000.1334237 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.931995.1334201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzARF-00038g-Uz; Mon, 31 Mar 2025 08:24:10 +0000
+	id 1tzARC-0002Pk-PJ; Mon, 31 Mar 2025 08:24:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 932000.1334237; Mon, 31 Mar 2025 08:24:09 +0000
+Received: by outflank-mailman (output) from mailman id 931995.1334201; Mon, 31 Mar 2025 08:24:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzARF-000370-IW; Mon, 31 Mar 2025 08:24:09 +0000
-Received: by outflank-mailman (input) for mailman id 932000;
- Mon, 31 Mar 2025 08:24:07 +0000
+	id 1tzARC-0002Ow-IW; Mon, 31 Mar 2025 08:24:06 +0000
+Received: by outflank-mailman (input) for mailman id 931995;
+ Mon, 31 Mar 2025 08:24:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=orDG=WS=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1tzARD-0001uf-QN
- for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 08:24:07 +0000
+ id 1tzARB-0001uf-4O
+ for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 08:24:05 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8126a2b5-0e09-11f0-9ffb-bf95429c2676;
- Mon, 31 Mar 2025 10:24:04 +0200 (CEST)
+ id 7f97ae52-0e09-11f0-9ffb-bf95429c2676;
+ Mon, 31 Mar 2025 10:24:02 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 52V8Mp0A3171319
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 52V8Mp033171319
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 31 Mar 2025 01:23:18 -0700
+ Mon, 31 Mar 2025 01:23:04 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8126a2b5-0e09-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 52V8Mp0A3171319
+X-Inumbo-ID: 7f97ae52-0e09-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 52V8Mp033171319
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025032001; t=1743409400;
-	bh=K1q53eo/E11QGaBNCmuuiEewoEjYIhJFKtCNyzdMWfk=;
+	s=2025032001; t=1743409386;
+	bh=5yXzAEblnWuewwiM+2a2MBWdk0hE50lz5zB2BZNESnk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fYJJM8Xj8oLRQMrpq1oZ9Rnts/L5sB1pkc/gbLLiuGLqwOG9qwxAGu/4BG68QY0E9
-	 wfBdSwh4eQvvh2/Y3Z6WaX7t7pE5x/AyF9EYYVoeYUsrgjy5aQsLhKl3r8wbyqsS8o
-	 qh1pRd13tdt4PmpmLxqluvo/m8RcpuW2x76HH/JRrb1yV8WiUIE4hCpEtDNED/Yh+6
-	 sNVHvloh/CyqgKztI+Tc3MQqU27RJiZ6HQl+pwJmYWKADo2kfVmQTIr7agdhUDKEDb
-	 anOJ6HwZplUeZ1KVIk1BWCIusZV2JYQ1KiyYhKxPqQ6qOrnhQXCF8X6edaiE7NigVe
-	 yW2IFXjim5dUQ==
+	b=gZFEitNCvpKZCut95fXZKAqZjYVexIRqqCsmMBp2CZW5W/F+F8YdgBRq7Jas48oEm
+	 jA/8QUCfk2D6k8vYesJGOnrzZv+XWetZsr8GnENjabojFMIx710C0/l2qUvpne52/U
+	 BKRmW6qbXZJEaaZotvS+ZyspM+SBZxcPiUz0OolK8l3PTAJGgcrhaoBd8FoI0axiFO
+	 UYJY19A43VO/nzu4JfIPKLbCPKuIQ+Fm3xRSaESxcKaXZ3m3Z/51sVm6ksmFV/kMOP
+	 i/pGDQotEM9rWQRUfcKCF7CHn9HUUQ60/HHqfKDisSlMtrPlhTUBKsDUSIOgBvisE7
+	 KhHjRSIG4ujjQ==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
         linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
@@ -72,81 +72,113 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         tony.luck@intel.com, pbonzini@redhat.com, vkuznets@redhat.com,
         seanjc@google.com, luto@kernel.org, boris.ostrovsky@oracle.com,
         kys@microsoft.com, haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v1 10/15] KVM: VMX: Use WRMSRNS or its immediate form when available
-Date: Mon, 31 Mar 2025 01:22:46 -0700
-Message-ID: <20250331082251.3171276-11-xin@zytor.com>
+Subject: [RFC PATCH v1 03/15] x86/msr: Simplify pmu_msr_{read,write}()
+Date: Mon, 31 Mar 2025 01:22:39 -0700
+Message-ID: <20250331082251.3171276-4-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250331082251.3171276-1-xin@zytor.com>
 References: <20250331082251.3171276-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Xin Li (Intel) <xin@zytor.com>
----
- arch/x86/include/asm/msr-index.h |  6 ++++++
- arch/x86/kvm/vmx/vmenter.S       | 28 ++++++++++++++++++++++++----
- 2 files changed, 30 insertions(+), 4 deletions(-)
+Remove calling native_{read,write}_msr{_safe}() in pmu_msr_{read,write}(),
+and have them return false to let their caller to do that instead.
 
-diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
-index e6134ef2263d..04244c3ba374 100644
---- a/arch/x86/include/asm/msr-index.h
-+++ b/arch/x86/include/asm/msr-index.h
-@@ -1226,4 +1226,10 @@
- 						* a #GP
- 						*/
- 
-+/* Instruction opcode for WRMSRNS supported in binutils >= 2.40 */
-+#define ASM_WRMSRNS		_ASM_BYTES(0x0f,0x01,0xc6)
+Refactor pmu_msr_write() to take the input MSR value in an u64 argument,
+replacing the current dual u32 arguments.
+
+Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Sign-off-by: Xin Li (Intel) <xin@zytor.com>
+---
+ arch/x86/xen/enlighten_pv.c |  6 +++++-
+ arch/x86/xen/pmu.c          | 27 ++++-----------------------
+ arch/x86/xen/xen-ops.h      |  4 ++--
+ 3 files changed, 11 insertions(+), 26 deletions(-)
+
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index dcc2041f8e61..2bfe57469ac3 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1133,6 +1133,8 @@ static void set_seg(unsigned int which, unsigned int low, unsigned int high,
+ static void xen_do_write_msr(unsigned int msr, unsigned int low,
+ 			     unsigned int high, int *err)
+ {
++	u64 val;
 +
-+/* Instruction opcode for the immediate form RDMSR/WRMSRNS */
-+#define ASM_WRMSRNS_RAX		_ASM_BYTES(0xc4,0xe7,0x7a,0xf6,0xc0)
+ 	switch (msr) {
+ 	case MSR_FS_BASE:
+ 		set_seg(SEGBASE_FS, low, high, err);
+@@ -1159,7 +1161,9 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
+ 		break;
+ 
+ 	default:
+-		if (!pmu_msr_write(msr, low, high, err)) {
++		val = (u64)high << 32 | low;
 +
- #endif /* _ASM_X86_MSR_INDEX_H */
-diff --git a/arch/x86/kvm/vmx/vmenter.S b/arch/x86/kvm/vmx/vmenter.S
-index f6986dee6f8c..9fae43723c44 100644
---- a/arch/x86/kvm/vmx/vmenter.S
-+++ b/arch/x86/kvm/vmx/vmenter.S
-@@ -64,6 +64,29 @@
- 	RET
- .endm
++		if (!pmu_msr_write(msr, val)) {
+ 			if (err)
+ 				*err = native_write_msr_safe(msr, low, high);
+ 			else
+diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
+index f06987b0efc3..1364cd3fb3ef 100644
+--- a/arch/x86/xen/pmu.c
++++ b/arch/x86/xen/pmu.c
+@@ -313,37 +313,18 @@ static bool pmu_msr_chk_emulated(unsigned int msr, uint64_t *val, bool is_read,
+ 	return true;
+ }
  
-+/*
-+ * Write EAX to MSR_IA32_SPEC_CTRL.
-+ *
-+ * Choose the best WRMSR instruction based on availability.
-+ *
-+ * Replace with 'wrmsrns' and 'wrmsrns %rax, $MSR_IA32_SPEC_CTRL' once binutils support them.
-+ */
-+.macro WRITE_EAX_TO_MSR_IA32_SPEC_CTRL
-+	ALTERNATIVE_2 __stringify(mov $MSR_IA32_SPEC_CTRL, %ecx;		\
-+				  xor %edx, %edx;				\
-+				  mov %edi, %eax;				\
-+				  ds wrmsr),					\
-+		      __stringify(mov $MSR_IA32_SPEC_CTRL, %ecx;		\
-+				  xor %edx, %edx;				\
-+				  mov %edi, %eax;				\
-+				  ASM_WRMSRNS),					\
-+		      X86_FEATURE_WRMSRNS,					\
-+		      __stringify(xor %_ASM_AX, %_ASM_AX;			\
-+				  mov %edi, %eax;				\
-+				  ASM_WRMSRNS_RAX; .long MSR_IA32_SPEC_CTRL),	\
-+		      X86_FEATURE_MSR_IMM
-+.endm
-+
- .section .noinstr.text, "ax"
+-bool pmu_msr_read(unsigned int msr, uint64_t *val, int *err)
++bool pmu_msr_read(u32 msr, u64 *val, int *err)
+ {
+ 	bool emulated;
  
- /**
-@@ -123,10 +146,7 @@ SYM_FUNC_START(__vmx_vcpu_run)
- 	movl PER_CPU_VAR(x86_spec_ctrl_current), %esi
- 	cmp %edi, %esi
- 	je .Lspec_ctrl_done
--	mov $MSR_IA32_SPEC_CTRL, %ecx
--	xor %edx, %edx
--	mov %edi, %eax
--	wrmsr
-+	WRITE_EAX_TO_MSR_IA32_SPEC_CTRL
+-	if (!pmu_msr_chk_emulated(msr, val, true, &emulated))
+-		return false;
+-
+-	if (!emulated) {
+-		*val = err ? native_read_msr_safe(msr, err)
+-			   : native_read_msr(msr);
+-	}
+-
+-	return true;
++	return pmu_msr_chk_emulated(msr, val, true, &emulated) && emulated;
+ }
  
- .Lspec_ctrl_done:
+-bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err)
++bool pmu_msr_write(u32 msr, u64 val)
+ {
+-	uint64_t val = ((uint64_t)high << 32) | low;
+ 	bool emulated;
+ 
+-	if (!pmu_msr_chk_emulated(msr, &val, false, &emulated))
+-		return false;
+-
+-	if (!emulated) {
+-		if (err)
+-			*err = native_write_msr_safe(msr, low, high);
+-		else
+-			native_write_msr(msr, low, high);
+-	}
+-
+-	return true;
++	return pmu_msr_chk_emulated(msr, &val, false, &emulated) && emulated;
+ }
+ 
+ static unsigned long long xen_amd_read_pmc(int counter)
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index 63c13a2ccf55..4a0a1d73d8b8 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -274,8 +274,8 @@ void xen_pmu_finish(int cpu);
+ static inline void xen_pmu_init(int cpu) {}
+ static inline void xen_pmu_finish(int cpu) {}
+ #endif
+-bool pmu_msr_read(unsigned int msr, uint64_t *val, int *err);
+-bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err);
++bool pmu_msr_read(u32 msr, u64 *val, int *err);
++bool pmu_msr_write(u32 msr, u64 val);
+ int pmu_apic_update(uint32_t reg);
+ unsigned long long xen_read_pmc(int counter);
  
 -- 
 2.49.0
