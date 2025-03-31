@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B321C36011
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Mar 2025 08:32:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.932132.1334337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C86D0C3600C
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Mar 2025 08:33:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.932168.1334352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzAZO-0004nz-Lp; Mon, 31 Mar 2025 08:32:34 +0000
+	id 1tzAZw-0005wQ-VS; Mon, 31 Mar 2025 08:33:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 932132.1334337; Mon, 31 Mar 2025 08:32:34 +0000
+Received: by outflank-mailman (output) from mailman id 932168.1334352; Mon, 31 Mar 2025 08:33:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzAZO-0004ns-JG; Mon, 31 Mar 2025 08:32:34 +0000
-Received: by outflank-mailman (input) for mailman id 932132;
- Mon, 31 Mar 2025 08:32:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tzAZw-0005wJ-SH; Mon, 31 Mar 2025 08:33:08 +0000
+Received: by outflank-mailman (input) for mailman id 932168;
+ Mon, 31 Mar 2025 08:33:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AhU9=WS=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1tzAZN-0004lf-2K
- for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 08:32:33 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aaccd875-0e0a-11f0-9ffb-bf95429c2676;
- Mon, 31 Mar 2025 10:32:22 +0200 (CEST)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3914aba1ce4so3594583f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 31 Mar 2025 01:32:22 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b658b7bsm10498203f8f.20.2025.03.31.01.32.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Mar 2025 01:32:21 -0700 (PDT)
+ (envelope-from <SRS0=orDG=WS=zytor.com=xin@srs-se1.protection.inumbo.net>)
+ id 1tzARM-0001u1-2H
+ for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 08:24:16 +0000
+Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7f911e82-0e09-11f0-9ea7-5ba50f476ded;
+ Mon, 31 Mar 2025 10:24:01 +0200 (CEST)
+Received: from terminus.zytor.com (terminus.zytor.com
+ [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 52V8Mp003171319
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Mon, 31 Mar 2025 01:22:57 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +43,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aaccd875-0e0a-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1743409942; x=1744014742; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=/b/Cs611Mh6/gXDl87oYUcMNL7Lf8HGsE13sxc3pGO0=;
-        b=C3LVilVpJ8zb3D/kNTfFSQzEc5zdcdGejT79NLK75F660zgrt3t+jWB/p3vZtBnyCy
-         Ua23QjU3FA0AQqedZ/SZFAhtkqVox5ilINYYGAw4y+GC0HgWTp1vmWi/lseyWDp4Y16M
-         8jGMhVe3IWuEJRcEWwcmlISY9I4Erc1oDwLjhYowETQ6K5OSkU9VrZG4sfRTm5mgEfCv
-         vVm6XwcheuseHIubnKxn9oPnMtLCgsfktT+euQoqyJ/WopE9+QGxRBevlN65bYgA2Xqm
-         hDUhK6FvYXkq4bnjCYliX+2XsASYYOUTe3c/4oktOznBD05/grFesGLgrbawmXt/eP4N
-         eKmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743409942; x=1744014742;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/b/Cs611Mh6/gXDl87oYUcMNL7Lf8HGsE13sxc3pGO0=;
-        b=TM7uNFAI06MBpqyRxxqVV9OxerCe8yGVuLk9XUImmREfWgAD/D36JT1dMFmYZsGaK+
-         rWS7iqiiY/0++Df5c57ZZi4GRUgk8u09kK5cVdrQDFdl2lzuSJ0YBA8pBw7Dfi4Wosy3
-         g5X1+LgdbC8/8/E7JsbEJ0kYuQ644bYdh+jgmk6sVnKi+2BQN4CVf4foWZYFgbaFgSAT
-         WkEXRHk3TtMAnNEso1pe47LbX4BVMuNgUjGWJFftkyowpOOYKi71hytDfVF+FJLL3QzP
-         JAISODwitmlPF5VF4ly/uhIllNeM1XDs+ZT0NnPcXtc4hFOaoj0XgPMO/C79ZQFfuUnb
-         6yag==
-X-Forwarded-Encrypted: i=1; AJvYcCXb4+0PQz12LuLL+uzvCjTx3aA/M0pb45T1UQKR/MioQte9aZUSKhHG74s+aaIs+zFhJG01KbXh+p0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyHIxa6riL9f3Cmt5m/XZMc8xajxVCf4BSJd9juVuzIgI3FJ30E
-	13tf3QUsNudek4ho3NO57atsjZx/WtqlXB75v/GfWisXeXmO54lySXRToR0nGg==
-X-Gm-Gg: ASbGncsEO1Xrkx/GLsAoZN5rzzymU7w9mjY4/hjFqngtlXuZIwZlA+w9AyJ9S/2nBjF
-	brBchUNY7z90L8fyIMeZpTphAK8TBW0xBu9sigh85NzuvKx2QZrQzje38LRheeBhsBW8axs/VwT
-	vk7VhOFEsNjolBrejAwnJjUjRtkHuGKGI0wbdFuJTShywgezUMIPVjgyyaTFbZXet/9slxvwFIH
-	7UuzCCKTbodkdYCSkrrdXDOkRXpgrKA6rIDtuhmOpHFamkvQgW7393dldKs8AlDqueAbGDQAvdH
-	xizar2Hx/jIM7S5ZHH47I0PkDnz2yEMSEK7V/T4Du0Fnd08JmHDVlTckdlSX8fpjAra4EoINxDL
-	RBMtdWXIKajrzIkc62EcDNqZ9kIpJDA==
-X-Google-Smtp-Source: AGHT+IHEAG5Lz7hGdnH6CpVBaiFFM+WWs8LDkpKYznIA05U4jqWrGKPcf3vVORlDHdxFbetrhsH2tw==
-X-Received: by 2002:a5d:47c3:0:b0:39c:e0e:b191 with SMTP id ffacd0b85a97d-39c120c8e0amr4979564f8f.7.1743409942227;
-        Mon, 31 Mar 2025 01:32:22 -0700 (PDT)
-Message-ID: <c79d76e2-3e6d-4c2a-a240-ee36daa559e0@suse.com>
-Date: Mon, 31 Mar 2025 10:32:23 +0200
+X-Inumbo-ID: 7f911e82-0e09-11f0-9ea7-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 52V8Mp003171319
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025032001; t=1743409380;
+	bh=c4mcztnFt3iWZUjta5DXg4eheqI37Lh6HqidwU3OGSY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=OnHXAiC9aSEzd0WpdrjoHSGZ04PCiEeIv62hkaEXPnx8evimLF7vpw0m7zz3VzHAt
+	 hDuVc4dghG43y+jsV+a7Qfx20Ng9DHzGpu8XsE0uIkomgEmFYL/K1tnjvzIxsjKA4M
+	 Jmbxizi87C0PeKt7ohivxxIv0jnlvkyUQ9sNKdDbevgpXy1tk7W9PyoTsHjecZxvs2
+	 aVQVkmqox4yIzWpZCAHpOgStdzq0qcj13XEqjfbZbCPUeEsVftd405OaQn09xyGuCx
+	 rSayuzUgrw2M+BWzbnfHvv62mRW+cXcdQf8/qP5CIkCNwAjzjH0U7W5kYlhj6Xy0BH
+	 xAje3DGcgV+zw==
+From: "Xin Li (Intel)" <xin@zytor.com>
+To: linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
+        linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+        linux-edac@vger.kernel.org, kvm@vger.kernel.org,
+        xen-devel@lists.xenproject.org, linux-ide@vger.kernel.org,
+        linux-pm@vger.kernel.org, bpf@vger.kernel.org, llvm@lists.linux.dev
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        jgross@suse.com, andrew.cooper3@citrix.com, peterz@infradead.org,
+        acme@kernel.org, namhyung@kernel.org, mark.rutland@arm.com,
+        alexander.shishkin@linux.intel.com, jolsa@kernel.org,
+        irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
+        wei.liu@kernel.org, ajay.kaher@broadcom.com,
+        alexey.amakhalov@broadcom.com, bcm-kernel-feedback-list@broadcom.com,
+        tony.luck@intel.com, pbonzini@redhat.com, vkuznets@redhat.com,
+        seanjc@google.com, luto@kernel.org, boris.ostrovsky@oracle.com,
+        kys@microsoft.com, haiyangz@microsoft.com, decui@microsoft.com
+Subject: [RFC PATCH v1 00/15] MSR refactor with new MSR instructions support
+Date: Mon, 31 Mar 2025 01:22:36 -0700
+Message-ID: <20250331082251.3171276-1-xin@zytor.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 03/16] xen: Implement common byte{order,swap}.h
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Lin Liu <lin.liu@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- "Daniel P . Smith" <dpsmith@apertussolutions.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250328134427.874848-1-andrew.cooper3@citrix.com>
- <20250328134427.874848-4-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250328134427.874848-4-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 28.03.2025 14:44, Andrew Cooper wrote:
-> From: Lin Liu <lin.liu@citrix.com>
-> 
-> The current swab??() infrastructure is unecesserily complicated, and can be
-> repated entirely with compiler builtins.
-> 
-> All supported compilers provide __BYTE_ORDER__ and __builtin_bswap??().
-> 
-> Nothing in Xen cares about the values of __{BIG,LITTLE}_ENDIAN; just that one
-> of them is defined.  Therefore, centralise their definitions in xen/config.h
+Obviously the existing MSR code and the pv_ops MSR access APIs need some
+love: https://lore.kernel.org/lkml/87y1h81ht4.ffs@tglx/
 
-And even if we cared somewhere, __ORDER_{BIG,LITTLE}_ENDIAN__ supply them
-just fine.
+hpa has started a discussion about how to refactor it last October:
+https://lore.kernel.org/lkml/7a4de623-ecda-4369-a7ae-0c43ef328177@zytor.com/
 
-> Signed-off-by: Lin Liu <lin.liu@citrix.com>
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+The consensus so far is to utilize the alternatives mechanism to eliminate
+the Xen MSR access overhead on native systems and enable new MSR instructions
+based on their availability.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-with two nits taken care of:
+To achieve this, a code refactor is necessary.  Initially, the MSR API usage
+needs to be unified and simplified, which is addressed by patches 1 through 7.
 
-> --- /dev/null
-> +++ b/xen/include/xen/byteorder.h
-> @@ -0,0 +1,44 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +#ifndef XEN_BYTEORDER_H
-> +#define XEN_BYTEORDER_H
-> +
-> +#include <xen/byteswap.h>
-> +#include <xen/types.h>
+Patches 8 and 9 introduce basic support for immediate form MSR instructions,
+while patch 10 employs the immediate form WRMSRNS in VMX.
 
-It's stdint.h that's needed here, not types.h?
+Finally, patches 11 to 15 leverage the alternatives mechanism to read and
+write MSR.
 
-> +#if defined(__LITTLE_ENDIAN)
-> +
-> +# define cpu_to_le64(x) (uint64_t)(x)
-> +# define le64_to_cpu(x) (uint64_t)(x)
-> +# define cpu_to_le32(x) (uint32_t)(x)
-> +# define le32_to_cpu(x) (uint32_t)(x)
-> +# define cpu_to_le16(x) (uint16_t)(x)
-> +# define le16_to_cpu(x) (uint16_t)(x)
 
-(Not just) for Misra these all need another pair of parentheses around the
-entire expressions.
+H. Peter Anvin (Intel) (1):
+  x86/extable: Implement EX_TYPE_FUNC_REWIND
 
-> +# define cpu_to_be64(x) bswap64(x)
-> +# define be64_to_cpu(x) bswap64(x)
-> +# define cpu_to_be32(x) bswap32(x)
-> +# define be32_to_cpu(x) bswap32(x)
-> +# define cpu_to_be16(x) bswap16(x)
-> +# define be16_to_cpu(x) bswap16(x)
-> +
-> +#elif defined(__BIG_ENDIAN)
-> +
-> +# define cpu_to_le64(x) bswap64(x)
-> +# define le64_to_cpu(x) bswap64(x)
-> +# define cpu_to_le32(x) bswap32(x)
-> +# define le32_to_cpu(x) bswap32(x)
-> +# define cpu_to_le16(x) bswap16(x)
-> +# define le16_to_cpu(x) bswap16(x)
-> +
-> +# define cpu_to_be64(x) (uint64_t)(x)
-> +# define be64_to_cpu(x) (uint64_t)(x)
-> +# define cpu_to_be32(x) (uint32_t)(x)
-> +# define be32_to_cpu(x) (uint32_t)(x)
-> +# define cpu_to_be16(x) (uint16_t)(x)
-> +# define be16_to_cpu(x) (uint16_t)(x)
+Xin Li (Intel) (14):
+  x86/msr: Replace __wrmsr() with native_wrmsrl()
+  x86/msr: Replace __rdmsr() with native_rdmsrl()
+  x86/msr: Simplify pmu_msr_{read,write}()
+  x86/msr: Let pv_cpu_ops.write_msr{_safe}() take an u64 instead of two
+    u32
+  x86/msr: Replace wrmsr(msr, low, 0) with wrmsrl(msr, value)
+  x86/msr: Remove MSR write APIs that take the MSR value in two u32
+    arguments
+  x86/msr: Remove pmu_msr_{read,write}()
+  x86/cpufeatures: Add a CPU feature bit for MSR immediate form
+    instructions
+  x86/opcode: Add immediate form MSR instructions to x86-opcode-map
+  KVM: VMX: Use WRMSRNS or its immediate form when available
+  x86/msr: Use the alternatives mechanism to write MSR
+  x86/msr: Use the alternatives mechanism to read MSR
+  x86/extable: Add support for the immediate form MSR instructions
+  x86/msr: Move the ARGS macros after the MSR read/write APIs
 
-Same here, even if Eclair likely wouldn't spot this right now.
+ arch/x86/coco/sev/core.c                   |   2 +-
+ arch/x86/events/amd/brs.c                  |   4 +-
+ arch/x86/hyperv/hv_apic.c                  |   6 +-
+ arch/x86/hyperv/hv_vtl.c                   |   4 +-
+ arch/x86/hyperv/ivm.c                      |   2 +-
+ arch/x86/include/asm/apic.h                |   4 +-
+ arch/x86/include/asm/asm.h                 |   6 +
+ arch/x86/include/asm/cpufeatures.h         |  19 +-
+ arch/x86/include/asm/extable_fixup_types.h |   1 +
+ arch/x86/include/asm/fred.h                |   2 +-
+ arch/x86/include/asm/mshyperv.h            |   2 +-
+ arch/x86/include/asm/msr-index.h           |   6 +
+ arch/x86/include/asm/msr.h                 | 664 ++++++++++++++++-----
+ arch/x86/include/asm/paravirt.h            |  64 --
+ arch/x86/include/asm/paravirt_types.h      |  11 -
+ arch/x86/include/asm/switch_to.h           |   2 +-
+ arch/x86/kernel/cpu/amd.c                  |   2 +-
+ arch/x86/kernel/cpu/common.c               |  10 +-
+ arch/x86/kernel/cpu/mce/core.c             |   6 +-
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c  |  12 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c     |   2 +-
+ arch/x86/kernel/cpu/scattered.c            |   1 +
+ arch/x86/kernel/cpu/umwait.c               |   4 +-
+ arch/x86/kernel/kvm.c                      |   2 +-
+ arch/x86/kernel/kvmclock.c                 |   2 +-
+ arch/x86/kernel/paravirt.c                 |   4 -
+ arch/x86/kvm/svm/svm.c                     |  15 +-
+ arch/x86/kvm/vmx/vmenter.S                 |  28 +-
+ arch/x86/kvm/vmx/vmx.c                     |   4 +-
+ arch/x86/lib/x86-opcode-map.txt            |   5 +-
+ arch/x86/mm/extable.c                      | 186 ++++--
+ arch/x86/mm/mem_encrypt_identity.c         |   4 +-
+ arch/x86/xen/enlighten_pv.c                | 110 ++--
+ arch/x86/xen/pmu.c                         |  43 +-
+ arch/x86/xen/xen-asm.S                     |  89 +++
+ arch/x86/xen/xen-ops.h                     |  12 +-
+ drivers/ata/pata_cs5535.c                  |  12 +-
+ drivers/ata/pata_cs5536.c                  |   6 +-
+ drivers/cpufreq/acpi-cpufreq.c             |   2 +-
+ drivers/cpufreq/e_powersaver.c             |   2 +-
+ drivers/cpufreq/powernow-k6.c              |   8 +-
+ tools/arch/x86/lib/x86-opcode-map.txt      |   5 +-
+ 42 files changed, 896 insertions(+), 479 deletions(-)
 
-Jan
+
+base-commit: 8fc8ae1aeed6dc895bf35a4797c6e770574f4612
+-- 
+2.49.0
+
 
