@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABB3C3600C
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Mar 2025 13:45:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.932498.1334614 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE5DC3600B
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Mar 2025 13:47:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.932518.1334624 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzFSS-00033M-Ff; Mon, 31 Mar 2025 13:45:44 +0000
+	id 1tzFUJ-0003f3-Pf; Mon, 31 Mar 2025 13:47:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 932498.1334614; Mon, 31 Mar 2025 13:45:44 +0000
+Received: by outflank-mailman (output) from mailman id 932518.1334624; Mon, 31 Mar 2025 13:47:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzFSS-00033F-CO; Mon, 31 Mar 2025 13:45:44 +0000
-Received: by outflank-mailman (input) for mailman id 932498;
- Mon, 31 Mar 2025 13:43:36 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <cody.zuschlag@xenproject.org>) id 1tzFQO-0002X9-75
- for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 13:43:36 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <cody.zuschlag@xenproject.org>) id 1tzFQO-002NFa-08
- for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 13:43:36 +0000
-Received: from mail-oi1-f176.google.com ([209.85.167.176])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <cody.zuschlag@xenproject.org>) id 1tzFQN-00CBu0-38
- for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 13:43:35 +0000
-Received: by mail-oi1-f176.google.com with SMTP id
- 5614622812f47-3f8ae3ed8f4so2673063b6e.3
- for <xen-devel@lists.xenproject.org>; Mon, 31 Mar 2025 06:43:35 -0700 (PDT)
+	id 1tzFUJ-0003ew-Mu; Mon, 31 Mar 2025 13:47:39 +0000
+Received: by outflank-mailman (input) for mailman id 932518;
+ Mon, 31 Mar 2025 13:47:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=qpMN=WS=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1tzFUI-0003el-KI
+ for xen-devel@lists.xenproject.org; Mon, 31 Mar 2025 13:47:38 +0000
+Received: from fout-a2-smtp.messagingengine.com
+ (fout-a2-smtp.messagingengine.com [103.168.172.145])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b422a85b-0e36-11f0-9ea7-5ba50f476ded;
+ Mon, 31 Mar 2025 15:47:37 +0200 (CEST)
+Received: from phl-compute-04.internal (phl-compute-04.phl.internal
+ [10.202.2.44])
+ by mailfout.phl.internal (Postfix) with ESMTP id D33881384427;
+ Mon, 31 Mar 2025 09:47:35 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-04.internal (MEProxy); Mon, 31 Mar 2025 09:47:35 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 31 Mar 2025 09:47:34 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,130 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Type:To:Subject:Message-ID:Date:
-	From:MIME-Version; bh=U6qntZH4mdHrvVfd8V5RWLnYFbv2gICkmPcx9GEkEmw=; b=tO/4iuf
-	ztX/Y13jP1QXtyUgm3VLe8b/Fw45vTmlnjxX6HbQ91RHxRIxXb5tD40gMzoeLivtRoiWQA65wgm0t
-	UY8dsyVzdmK8l2Rug3lT5B4Kba3Y9/NhcJaICzr4IhWhW15fZtYWVtnTDM/wRHxvmiljiPGD0Tlue
-	G1+TVCy6WA=;
-X-Gm-Message-State: AOJu0Yy9bhTYJuxlM8d6kaSpW9KTK2VnGEIvQ278ih39lvioLnhPUF1j
-	CYP2nG0iWlNjmRP5J0kGjQxtOmQFGjqWysB8exaHq/HGAY1QrRa1MQDAlRehbDGAhbbGQSq2WLk
-	4uNVemQm9jycztH76s2mQf4ufxls=
-X-Google-Smtp-Source: AGHT+IH6Wpb3qaMS6HGNZV5xTMlMMBwBymRW3fZuo7k+z+cDIsS7fzhnMYuLLgSC5jP/TbRF/FfDK2zHh8fKzDqjVNQ=
-X-Received: by 2002:a05:6808:2f07:b0:3fb:85cc:9f27 with SMTP id
- 5614622812f47-3ff0f3f2fb9mr4901549b6e.0.1743428615435; Mon, 31 Mar 2025
- 06:43:35 -0700 (PDT)
+X-Inumbo-ID: b422a85b-0e36-11f0-9ea7-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1743428855;
+	 x=1743515255; bh=Ph8eoYDLnFBfOsiI9tRFHRvss0NVnFq52pllNfkSYT8=; b=
+	Chne1J98qukWXil8IsIOPvtXtOuUvuHv1Dl+E1BsL6Yc9QpOlc9aVpB1Ihn4FuJf
+	vA36tgtNdgd7Wl6cpg00vBIwzjnM/Eceal84vG5ske6bGdpg4nQRHDbWw8vLlu/d
+	6R4BxlcXR/fGoSCiWiXAUsUMFr/FR/ZEy2I86ZJcT/uZBPOfW/gEJ9jpm2cqHPK6
+	L7yoDmqicb+RILQisbbud+hJQufJjyu5hmKwVQ/V2kvayYP/CBPjGfMjAQ73+ccd
+	pJrSDbPCA1l99MR6A7QxzvzUJrAltSzS9Lg18cLg9JnUBo44NXD7Syw7NHJDdssM
+	FpcdutLF8YrK0XuD5gW+UA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1743428855; x=1743515255; bh=Ph8eoYDLnFBfOsiI9tRFHRvss0NVnFq52pl
+	lNfkSYT8=; b=GtGwKZpZ9zGfsoMxg5oLWXazHNXRzh5FyfxGjWV2BFu+qAqvCxr
+	NZLSDoV6AZ8sH+ZC4Op1/9QsHP8qvVzoFMhIC9LWP5T9xH7vh51sAtrBab1OFji8
+	I20JGTt4yqMoUpxfw/+CriMYy2wQkFWVGfow+UGyQcBK8RB2aOCoZMz9FBXbL+LJ
+	20UHZAN+9DVcvIy0fQcxpQDcZJryymbtpVfGlTbpJGhmXo3AW8/2dmY0GTn/DfMC
+	LCMRTvehgdFawWNSz+qAkqqesl4Qow0eSbINHfgDglFkDLoqSoGBbeX4pni6WiSn
+	4PSD3OmzgAehJf0bAJjz0RQc+dOqjeM1faA==
+X-ME-Sender: <xms:95zqZ7v4vZbXWydbeNnCkSbqpwJkKxKgKkhDGoZWeNlVpKwbegglaQ>
+    <xme:95zqZ8cFtZqU9q4q0I2o-fgsNScH0MzsuuH3SVEuP_DeoqtglAb3nG0_AQxJNflGb
+    z0deJhKQOUuZA>
+X-ME-Received: <xmr:95zqZ-yXGF_BJrAYV-Fj6XRNLGTzNr3pbwsFvb-EbnaDu-JI3TWccMaHm65IqVq_mEdhp0SeDDdqOgQEp8eGh12l4aftbXPbUQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukedttdekucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
+    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
+    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
+    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
+    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
+    ggftrfgrthhtvghrnhepveeujeetgeelleetudeuvefhtefgffejvedtvdfgieevheethe
+    elgeeuledvjeevnecuffhomhgrihhnpehgihhtlhgrsgdrtghomhenucevlhhushhtvghr
+    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeeipdhmohgu
+    vgepshhmthhpohhuthdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghith
+    hrihigrdgtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdho
+    rhhgpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtg
+    htrdhorhhgpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomhdprhgtphht
+    thhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtoheprhhoghgvrhdrph
+    gruhestghithhrihigrdgtohhm
+X-ME-Proxy: <xmx:95zqZ6MjapCWqYXseM2cnngpGefLyfRVXpLSiQLsIznNVf9XJxomIA>
+    <xmx:95zqZ79ivUmFvM92qawNssUEaxEb-t0Z4eSxMvJqrwz_Gmin-umG_g>
+    <xmx:95zqZ6VBVbfwWN_FReX5dmIcQIckxg36RyhVU3Sw1d3-GTU13gpnbw>
+    <xmx:95zqZ8fCALXScu_IFY9ZfnQ7GCDO4q7MdbdlxVSb5uyIbMiKKTcA7g>
+    <xmx:95zqZ7wCV0KaN-AyFQwhbOLimR0OTwC-AVgEFv0CpxSmu9SYe5oEMcLF>
+Feedback-ID: i1568416f:Fastmail
+Date: Mon, 31 Mar 2025 15:47:32 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] ci: add yet another HW runner
+Message-ID: <Z-qc9Cw5xQq1m4tw@mail-itl>
+References: <20250314030628.96166-1-marmarek@invisiblethingslab.com>
+ <alpine.DEB.2.22.394.2503141417540.3477110@ubuntu-linux-20-04-desktop>
+ <Z-qVyLPnEllLKR7B@mail-itl>
+ <655f5f07-ebbb-46ca-9c56-e7ad4c6e5cdd@citrix.com>
 MIME-Version: 1.0
-From: Cody Zuschlag <cody.zuschlag@xenproject.org>
-Date: Mon, 31 Mar 2025 15:43:24 +0200
-X-Gmail-Original-Message-ID: <CAJbE=KxbXVUOCHr36wbkyYH9aN2ip_6A2OtpqDR13kLA8ejrBA@mail.gmail.com>
-X-Gm-Features: AQ5f1JrjQTIDYY9m5DLL8xM_Xgybf0fJ-hSUGO92jDtdOAt7g08WWoyVVQ_d3GM
-Message-ID: <CAJbE=KxbXVUOCHr36wbkyYH9aN2ip_6A2OtpqDR13kLA8ejrBA@mail.gmail.com>
-Subject: [ANNOUNCE] Call for agenda items for April 3, 2025 Community Call @
- 15:00 UTC
-To: xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="0000000000005083860631a39bec"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="Wy1CuuroPgg+0/xb"
+Content-Disposition: inline
+In-Reply-To: <655f5f07-ebbb-46ca-9c56-e7ad4c6e5cdd@citrix.com>
 
---0000000000005083860631a39bec
-Content-Type: text/plain; charset="UTF-8"
+
+--Wy1CuuroPgg+0/xb
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Date: Mon, 31 Mar 2025 15:47:32 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] ci: add yet another HW runner
 
-Hi everyone,
+On Mon, Mar 31, 2025 at 02:45:05PM +0100, Andrew Cooper wrote:
+> On 31/03/2025 2:16 pm, Marek Marczykowski-G=C3=B3recki wrote:
+> > On Fri, Mar 14, 2025 at 02:19:19PM -0700, Stefano Stabellini wrote:
+> >> On Fri, 14 Mar 2025, Marek Marczykowski-G=C3=B3recki wrote:
+> >>> This is AMD Zen2 (Ryzen 5 4500U specifically), in a HP Probook 445 G7.
+> >>>
+> >>> This one has working S3, so add a test for it here.
+> >>>
+> >>> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethi=
+ngslab.com>
+> >>> ---
+> >>> Cc: Jan Beulich <jbeulich@suse.com>
+> >>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+> >>>
+> >>> The suspend test added here currently fails on staging[1], but passes=
+ on
+> >>> staging-4.19[2]. So the regression wants fixing before committing this
+> >>> patch.
+> >> We could commit the patch now without the s3 test.
+> >>
+> >> I don't know what the x86 maintainers think about fixing the suspend
+> >> bug, but one idea would be to run a bisection between 4.20 and 4.19.
+> > This passes on staging now:
+> > https://gitlab.com/xen-project/people/marmarek/xen/-/pipelines/17446827=
+89
+> >
+> > So, the patch is good to commit as is.
+>=20
+> adl and zen3p both have SUT_ADDR.=C2=A0 zen2 inherits test-2.testnet from=
+ adl.
+>=20
+> Presumably it wants to be test-1.testnet to match it's qubes-hw tag ?
 
-We=E2=80=99re getting ready for April=E2=80=99s Xen Project Community Call =
-on *Thursday, 3
-April 2025* at *15:00 UTC* (4 pm UK time). We=E2=80=99d love for you to joi=
-n. Feel
-free to just observe or jump in! This call is a great opportunity to see
-what the community is working on, align our various efforts, and share
-updates. Everyone is welcome!
+Indeed, yes. Right now it's used only for "tools-tests", not added for
+this runner, but it wants to be consistent anyway.
 
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-*Preparation:*
+--Wy1CuuroPgg+0/xb
+Content-Type: application/pgp-signature; name=signature.asc
 
-   - Add any proposed agenda items or missing action items:
-   https://cryptpad.fr/pad/#/2/pad/edit/Hy5rqmmTsf+7LKDN2X9vbmIH/
-   - If any action items have been resolved or are no longer relevant, feel
-   free to remove them from the doc.
+-----BEGIN PGP SIGNATURE-----
 
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmfqnPQACgkQ24/THMrX
+1yxKDwf/XpWOs3ZUurIfiLdGPSZSDealj9rkz/8mzutsKXlXXOg2DGUUIa1xJ8Lo
+u55Z9MrL6VWtM5DZbauclGL/KWwVwN7GnNZeTKQOeUZZ/eu/M9hUiBwQVV7ROt3r
+HKQZk8GiHcxQNDMIb0mfOoYxaW1pCr72TYJ/nETsHWpZvM22rHmzsUymeNskw/Kt
+kRyJwvCntx0857B2bYFKrIDy0E/btUu9iaLU2Vz9q1kwZUdiiImvwj8IuChA/7/G
+zEfrLhTzAXtDmd9ybgN7tfQ910VvXcooSYQYV7lbD0Mx0jt8KtLwd8KnBqOFhHsl
+kRDHddDrNJ9koyMzpUje+i0xLwNzLg==
+=Cy+q
+-----END PGP SIGNATURE-----
 
-*Call Details:*
-
-   - *Date:* Thursday, 3 April 2025
-   - *Time:* 15:00 UTC (agenda begins at 15:05 UTC)
-      - Find your local timezone here
-      <https://www.worldtimebuddy.com/?qm=3D1&lid=3D100,2653941,2988507,536=
-8361,5128581&h=3D2988507&date=3D2025-4-3&sln=3D17-17.5&hf=3D0&c=3D1067>
-   - *Link to Join the Call:* https://meet.jit.si/XenProjectCommunityCall
-
-
-We plan to open the meeting room at 15:00 UTC, but to allow time for
-switching between meetings and handling any technical issues, we=E2=80=99ll
-officially start discussing the agenda at 15:05 UTC.
-
-
-*Want to be CC=E2=80=99d on future calls?*
-
-Add or remove yourself from our Sign-up Sheet
-<https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/>.
-
-
-
-
-See you Thursday!
-
-
-Cody Zuschlag
-Xen Project - Community Manager
-
---0000000000005083860631a39bec
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi everyone,</div><div>
-
-
-
-
-
-<p class=3D"gmail-p1">We=E2=80=99re getting ready for April=E2=80=99s Xen P=
-roject Community Call on <span class=3D"gmail-s1"><b>Thursday, 3 April 2025=
-</b></span> at <span class=3D"gmail-s1"><b>15:00 UTC</b></span> (4 pm UK ti=
-me). We=E2=80=99d love for you to join. Feel free to just observe or jump i=
-n! This call is a great opportunity to see what the community is working on=
-, align our various efforts, and share updates. Everyone is welcome!</p><p =
-class=3D"gmail-p1"><br></p></div><div><b>Preparation:</b></div><div><ul><li=
->Add any proposed agenda items or missing action items:=C2=A0<a href=3D"htt=
-ps://cryptpad.fr/pad/#/2/pad/edit/Hy5rqmmTsf+7LKDN2X9vbmIH/">https://cryptp=
-ad.fr/pad/#/2/pad/edit/Hy5rqmmTsf+7LKDN2X9vbmIH/</a></li><li>If any action =
-items have been resolved or are no longer relevant, feel free to remove the=
-m from the doc.=C2=A0</li></ul></div><div><b><br></b></div><div><b>Call Det=
-ails:</b></div><div><ul><li><b>Date:</b> Thursday, 3 April 2025</li><li><b>=
-Time:</b> 15:00 UTC (agenda begins at 15:05 UTC)</li><ul><li><a href=3D"htt=
-ps://www.worldtimebuddy.com/?qm=3D1&amp;lid=3D100,2653941,2988507,5368361,5=
-128581&amp;h=3D2988507&amp;date=3D2025-4-3&amp;sln=3D17-17.5&amp;hf=3D0&amp=
-;c=3D1067">Find your local timezone here</a></li></ul><li><b>Link to Join t=
-he Call:</b>=C2=A0<a href=3D"https://meet.jit.si/XenProjectCommunityCall">h=
-ttps://meet.jit.si/XenProjectCommunityCall</a></li></ul></div><div>
-
-
-
-
-
-<p class=3D"gmail-p1"><br></p><p class=3D"gmail-p1">We plan to open the mee=
-ting room at 15:00 UTC, but to allow time for switching between meetings an=
-d handling any technical issues, we=E2=80=99ll officially start discussing =
-the agenda at 15:05 UTC.</p>
-<p class=3D"gmail-p3"><b><br></b></p><p class=3D"gmail-p3"><b>Want to be CC=
-=E2=80=99d on future calls?</b><b></b></p>
-<p class=3D"gmail-p1">Add or remove yourself from our <a href=3D"https://cr=
-yptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/">Sign-up Sheet</a>.</p=
-><p class=3D"gmail-p1"><br></p><ul></ul><div>See you Thursday!</div><br></d=
-iv><div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_=
-signature"><div dir=3D"ltr"><img src=3D"https://ci3.googleusercontent.com/m=
-ail-sig/AIorK4x5nkRDCOFJDJAv9aMXdZ0mghItsp3D36JrwBCQtitBSW_0NeDS6mBmJ2F4vZV=
-E2oBOqnY6IaJUrl12"><br><div>Cody Zuschlag</div><div>Xen Project - Community=
- Manager</div></div></div></div></div>
-
---0000000000005083860631a39bec--
+--Wy1CuuroPgg+0/xb--
 
