@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDBBC36017
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 00:53:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.933295.1335275 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3443BC3600C
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 00:53:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.933297.1335297 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzPrz-00012s-CB; Tue, 01 Apr 2025 00:52:47 +0000
+	id 1tzPs4-0001XU-0R; Tue, 01 Apr 2025 00:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 933295.1335275; Tue, 01 Apr 2025 00:52:47 +0000
+Received: by outflank-mailman (output) from mailman id 933297.1335297; Tue, 01 Apr 2025 00:52:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzPrz-00012l-99; Tue, 01 Apr 2025 00:52:47 +0000
-Received: by outflank-mailman (input) for mailman id 933295;
- Tue, 01 Apr 2025 00:52:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tzPs3-0001XG-RK; Tue, 01 Apr 2025 00:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 933297;
+ Tue, 01 Apr 2025 00:52:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Dnoa=WT=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1tzPrw-00012a-GM
- for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 00:52:45 +0000
-Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
- [79.135.106.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d7e3286-0e93-11f0-9ffb-bf95429c2676;
- Tue, 01 Apr 2025 02:52:41 +0200 (CEST)
+ id 1tzPs1-0001Vj-P0
+ for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 00:52:49 +0000
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a1db7de8-0e93-11f0-9ea7-5ba50f476ded;
+ Tue, 01 Apr 2025 02:52:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,61 +38,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d7e3286-0e93-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: a1db7de8-0e93-11f0-9ea7-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1743468760; x=1743727960;
-	bh=GFqthro3iq6tf+JDFaLzzXcjIdmu4fT0hxT+wTrVwBk=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=QFhMeFhIKw4VC9zjG3iF8PSy/PFNYiNAVIGDcC+het2nmyYd6qAfeJLPWD4C3aP0H
-	 2B9yrrvCDG1iKVKmtOhtIEAgiHdQ8gPg1tBX7QnzMDpHTteZaF+pVObR1mzCSMkh4m
-	 UNEJH8F1PSbFp71G8ckpYTTtX3JsQ3bn3JNotqxBpc1GlrcWLc688uOXH6FKLaVd9p
-	 Sdw+5hIOfjyJR5w3f6MFLIhbbqBiqy7LScOF0/YYWEoa8pG8BZYAwX8sgWAzzO30H0
-	 /mvJyjm2J4DrofsIZ/tG18ZQPVu784vmrPhsoWhknyyALSwybwSpLpQggEUMITOXZT
-	 5jHXXg3IG+upA==
-Date: Tue, 01 Apr 2025 00:52:33 +0000
+	s=protonmail; t=1743468767; x=1743727967;
+	bh=xy+Rn46fun91syrPY3ZLIJ9vjLWYFH0FTIVp7v5cQ80=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=blLYzK2HVp83a/yMjTd34LOlCYWV9fKn0Mlr1SvjJ3Fgv/Wp1zTxe8VdImo16FpKe
+	 FvtLBxjk1is9hPlWfOd6UyfkFf8HNwKHgddseVdlQ6ST/MvN6M3x/jzYUojxYoX8yF
+	 Hzv6QRfzg3iAj82X3B473JD/abkIuXQnwKlCB9fZfJFuPvuEFfIIJhc9FsIQpuJF37
+	 MScUtCRHDpB4UttOvYKus9kuO4OIWCgMa2MNC0WRA5vDSFCKQIwQS/BIrIbs5P2BMA
+	 lcrsNQBZGqvcB8fuKQfGS02+TrLEOfwan6/YcMYyI5Ng9s4LzVwf7Inu2gVarz9HU/
+	 oSWoffrJY7P1A==
+Date: Tue, 01 Apr 2025 00:52:42 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v1 0/3] xen/domain: updates to hardware emulation flags
-Message-ID: <20250401005224.461325-1-dmukhin@ford.com>
+Subject: [PATCH v1 2/3] x86/domain: add helpers to simplify emulation flags management
+Message-ID: <20250401005224.461325-3-dmukhin@ford.com>
+In-Reply-To: <20250401005224.461325-1-dmukhin@ford.com>
+References: <20250401005224.461325-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 744bf75cc58d419b653e38a1aaca5637be21d919
+X-Pm-Message-ID: 2433a0764aebe7bc34d954ffd0da932cc05b0f2c
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The patch series introduces use of d->arch.emulation_flags for non-x86
-platforms (patch 1) and hooks emulation_flags to 'q' keyhandler for
-debugging. emulation_flags on non-x86 systems will be used in the follow
-on virtual UARTs clean up series.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Also, series adds helper macros (patch 2) which are used in re-write of
-emulation_flags_ok() on x86 (patch 3, depends on patch 2).
+Introduce XEN_X86_EMU_BASELINE and XEN_X86_EMU_OPTIONAL to simplify
+d->arch.emulation_flags management in the code.
 
-Originally, the code was part of [1], part of NS16550 emulator v3 series.
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+ tools/python/xen/lowlevel/xc/xc.c | 4 +---
+ xen/include/public/arch-x86/xen.h | 7 +++++++
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
-[1] https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-6-c5d36b3=
-1d66c@ford.com/
-[2] Link to CI run: https://gitlab.com/xen-project/people/dmukhin/xen/-/pip=
-elines/1745622772
-
-Denis Mukhin (3):
-  xen/domain: introduce non-x86 hardware emulation flags
-  x86/domain: add helpers to simplify emulation flags management
-  xen/domain: rewrite emulation_flags_ok()
-
- tools/python/xen/lowlevel/xc/xc.c   |  4 +---
- xen/arch/arm/include/asm/domain.h   |  2 ++
- xen/arch/ppc/include/asm/domain.h   |  2 ++
- xen/arch/riscv/include/asm/domain.h |  2 ++
- xen/arch/x86/domain.c               | 29 +++++++++++------------------
- xen/arch/x86/include/asm/domain.h   |  2 +-
- xen/common/keyhandler.c             |  1 +
- xen/include/public/arch-x86/xen.h   |  7 +++++++
- 8 files changed, 27 insertions(+), 22 deletions(-)
-
+diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowlevel/=
+xc/xc.c
+index 9feb12ae2b..2c01d47575 100644
+--- a/tools/python/xen/lowlevel/xc/xc.c
++++ b/tools/python/xen/lowlevel/xc/xc.c
+@@ -159,9 +159,7 @@ static PyObject *pyxc_domain_create(XcObject *self,
+=20
+ #if defined (__i386) || defined(__x86_64__)
+     if ( config.flags & XEN_DOMCTL_CDF_hvm )
+-        config.arch.emulation_flags =3D XEN_X86_EMU_ALL &
+-                                      ~(XEN_X86_EMU_VPCI |
+-                                        XEN_X86_EMU_USE_PIRQ);
++        config.arch.emulation_flags =3D XEN_X86_EMU_BASELINE;
+ #elif defined (__arm__) || defined(__aarch64__)
+     config.arch.gic_version =3D XEN_DOMCTL_CONFIG_GIC_NATIVE;
+ #else
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x8=
+6/xen.h
+index fc24879866..55802720f8 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -290,6 +290,13 @@ struct xen_arch_domainconfig {
+                                      XEN_X86_EMU_VGA | XEN_X86_EMU_IOMMU |=
+   \
+                                      XEN_X86_EMU_PIT | XEN_X86_EMU_USE_PIR=
+Q |\
+                                      XEN_X86_EMU_VPCI)
++
++#define XEN_X86_EMU_OPTIONAL        (XEN_X86_EMU_VPCI | \
++                                     XEN_X86_EMU_USE_PIRQ)
++
++#define XEN_X86_EMU_BASELINE        (XEN_X86_EMU_ALL & ~XEN_X86_EMU_OPTION=
+AL)
++
++    /* Hardware emulation flags. */
+     uint32_t emulation_flags;
+=20
+ /*
 --=20
 2.34.1
 
