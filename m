@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDB15C3601B
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:09:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.934110.1335916 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA23DC3601C
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:09:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.934115.1335952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbMQ-0000QL-8m; Tue, 01 Apr 2025 13:08:58 +0000
+	id 1tzbMT-0001FH-PZ; Tue, 01 Apr 2025 13:09:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 934110.1335916; Tue, 01 Apr 2025 13:08:58 +0000
+Received: by outflank-mailman (output) from mailman id 934115.1335952; Tue, 01 Apr 2025 13:09:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbMQ-0000QC-5G; Tue, 01 Apr 2025 13:08:58 +0000
-Received: by outflank-mailman (input) for mailman id 934110;
- Tue, 01 Apr 2025 13:08:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1tzbMT-0001Do-J8; Tue, 01 Apr 2025 13:09:01 +0000
+Received: by outflank-mailman (input) for mailman id 934115;
+ Tue, 01 Apr 2025 13:09:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oF/L=WT=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tzbMP-0000Od-8u
- for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:08:57 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 76ee7198-0efa-11f0-9ffb-bf95429c2676;
- Tue, 01 Apr 2025 15:08:55 +0200 (CEST)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e6f4b3ebe5so10105035a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:08:55 -0700 (PDT)
+ id 1tzbMT-0008KU-0K
+ for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:09:01 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7a42de4d-0efa-11f0-9ea7-5ba50f476ded;
+ Tue, 01 Apr 2025 15:09:00 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac2a089fbbdso991083966b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:09:00 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac719278d40sm758430666b.43.2025.04.01.06.08.47
+ a640c23a62f3a-ac71961f9b9sm761161266b.114.2025.04.01.06.08.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 06:08:47 -0700 (PDT)
+ Tue, 01 Apr 2025 06:08:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,49 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76ee7198-0efa-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 7a42de4d-0efa-11f0-9ea7-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743512934; x=1744117734; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1743512940; x=1744117740; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NsEpEdsMppdQXfKAAy8KJLkcIZ3dN80EvB2RdrH7vDo=;
-        b=TvDoznc4sPuIsNPC+8tzsVYHSzRFgVmjwpFGZMTiRg2vleHRbsvNuKel5vgbh+pTwj
-         8RKxRZj1C90M75lrlYxnfDyoMY8boKCWhHWegcwHq18xxN3XWPx3qfb1YNYshENmR4RW
-         az5w8NAcBOlUlyvIdk4RunMQp2WEopyeTNOg0=
+        bh=EPf0H0iWY3C1zaNGO1+8PzDu8ltCUQ9Xi40SfByzm4E=;
+        b=K8UwQuVbMzyrzUXvk2qATMdJKPjMEWnpIfMw67Xnr+gmVqQYDulAd1LCY39VZfQbNx
+         yuIela0a++A9gmIrfNFb7cyK+Th1NaoqVtoRO9nfE8fLYtgrOkJh4nkUVmdY/WONkhj6
+         3s80bTl517LlLwGTvzozHo9MpmAdV6W4otF0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743512934; x=1744117734;
+        d=1e100.net; s=20230601; t=1743512940; x=1744117740;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NsEpEdsMppdQXfKAAy8KJLkcIZ3dN80EvB2RdrH7vDo=;
-        b=N5Byvf8iw3Ii90N6h6ZPFTKZh5HxiYnehH1QmtG4f35OCIE/fayRbqnWByRqGIvmrx
-         QpgPug7CL6tu+ygUqa+RToXCR178XAmunHlfoqloJtx+qE5j6deE56D7hJ4yjsHJp8IU
-         npl8dLsldp5rVg7gHgGqTJxhPzVFqcnWuNEiED59rU39ZsmpkleTahlzYp9iPosUiqK5
-         DVVcZZhwlafLg/6xPBrq6Mhn5cE6MxNsp3S9caWaYtlnpDCBXPDVV5dULGWsQnj4gXzm
-         aAWcv8G122BM//DDv8O37sapFkpy3jdYQ+R/Ivf2eC6U1yWPIV/tsRVuqo8Sv5I/X3al
-         1L3A==
-X-Gm-Message-State: AOJu0YySjyILldvr9ItkD/aF0KvW/q38K/J4YGzcwgpkLsfNjlKiEigT
-	3nhP019VA8LAKdi+xBi8g/rg0whpgiESJQR6JBcQkOK/G2KJVV69Mr2ZyGjcwT6/VrDtfGHUarp
-	c
-X-Gm-Gg: ASbGnct/WyIoYzuwqza8cVoaHzLkjXhlqVqVuToQyJEndshQJTiSCLn1wXNaducuECB
-	jcQSAbu00h8+bk+yQiUoVDU2F/mJiADLZxlxYMrVaHk8OCgkwCP6KElLaMXMKj3HrT7DG7bOKea
-	/smZlmz+9dGb4R7kp1/+uTYmYRdgj/hEk3dje2DNR+guwKGZLWnJjFHuh03Sffw38/8vHqUk2yv
-	tLRioINJfBn4E9nLdVI2dIBQSaRTnd6w/aSxZU6qE96TQbSs8Pn3EddqjJNJTsvrl+hx2EwK7lu
-	JBJoDEPFUnGlIRYTOMd0/PReNzLi/EEwUwEXu21ZzDj0STDGAA==
-X-Google-Smtp-Source: AGHT+IEjNM0hl1ZuDEUz8kinw6uldqxQXFDuinCrTlRAbXXd1L6CBSNezmpIgEeTcYwhFpI/avEATA==
-X-Received: by 2002:a17:907:3e1d:b0:ac3:3f11:2955 with SMTP id a640c23a62f3a-ac738bae5ffmr1213282666b.39.1743512928140;
-        Tue, 01 Apr 2025 06:08:48 -0700 (PDT)
+        bh=EPf0H0iWY3C1zaNGO1+8PzDu8ltCUQ9Xi40SfByzm4E=;
+        b=a27K0dLBHNtozf7oyLJjotsUyu6LFwZMgXCYE1Qh7/XGmAuEUZGFFdCNIoPVPI9+8o
+         U2AD3wzBFl/BELrrvlDapOhvUdvhAYIJburuRDdMdlQ4rxjWcye8l3Yll8ej79jwiGOg
+         eFbg+A3mgtJTTuLPpsy0LIqmv/g0FMaKOWv8dXZ8rZSxbIPQfgqBjHVkcfdQHPLPZpS1
+         BwDkiJWLRA00EUUFuwy5iYYn3+9pRXLwcK+XKoqNTUEV1tkHUY9Tgt2B6+Y5mKx2CgR1
+         Wos4/7MpqzkCD/pXuKr+nFAw0GiHr3CIVcFEQ+W12uHRx/HgfFz5AF5BeHRp5VSEDICQ
+         3zxQ==
+X-Gm-Message-State: AOJu0YwULyxcufj97cjfrcnpCfCgXE2uCpTVsIWt7xZZH/BsAJDMl0f3
+	AFdijWPJWbDPV8A3ZeCjQi88A/z7QtL7HWF9BegAuGhOILLTC9Y4hFl1NAWP2nohwTwiL99yZys
+	2
+X-Gm-Gg: ASbGnctUAr79TCkHC4H5yHX7DFVpY3w0GgT/5tHrk+1dF+ewgkteC0XD8GBoERoAip8
+	VYawBmohJ3ODrvJ1htdCuLzwtPQymNH3Pvc2S8M+5F3B1O5HI2bhGhrsV4z8eS0ITW+BcUENNbJ
+	hRCprbrK6EOgVANnhbR0LJMJz3XJ5pyAdP/RJtGfrq9nxMkxpmsh2/LhKVCXHcsNgyve2fELsE6
+	ZtpNjADJvXJlOR81H+rhO4GmIYvhSTTG0bDl5oUz78LhNwcQ1uufh9ofpZ9xA11OwEAOxQQFY9g
+	LDmEqeUYUtfEju655bysTNR4NZDuKV9kL4HEYiW6OXPf8bum1g==
+X-Google-Smtp-Source: AGHT+IHY/qPLexqKDJxO4g24fcXOb0HmgauV7SPAPnQfLmH6qR3xT3USyAbirTGkx2VpSSrw64zi3w==
+X-Received: by 2002:a17:907:1c97:b0:ac6:e42a:fb4c with SMTP id a640c23a62f3a-ac71ec04f5cmr1466839766b.9.1743512939707;
+        Tue, 01 Apr 2025 06:08:59 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 02/11] x86/mkreloc: fix obtaining PE image base address
-Date: Tue,  1 Apr 2025 15:08:31 +0200
-Message-ID: <20250401130840.72119-3-roger.pau@citrix.com>
+Subject: [PATCH v2 07/11] x86/efi: discard multiboot related entry code for PE binary
+Date: Tue,  1 Apr 2025 15:08:36 +0200
+Message-ID: <20250401130840.72119-8-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250401130840.72119-1-roger.pau@citrix.com>
 References: <20250401130840.72119-1-roger.pau@citrix.com>
@@ -96,56 +94,65 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The base address is in the pe32_opt_hdr, not after it.
+The multiboot and PVH entry points are not used in the PE binary, hence
+discard them in the linker script when doing a PE build.
 
-Previous to commit f7f42accbbbb the base was read standalone (as the first
-field of pe32_opt_hdr).  However with the addition of reading the full
-contents of pe32_opt_hdr, such read will also fetch the base.  The current
-attempt to read the base after pe32_opt_hdr is bogus, and could only work
-if the file cursor is repositioned using lseek(), but there's no need for
-that as the data is already fetched in pe32_opt_hdr.
+That removes some relocations that otherwise appear due to the entry point
+code in head.S not being position independent.
 
-Fixes: f7f42accbbbb ('x86/efi: Use generic PE/COFF structures')
+No functional change intended.
+
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/efi/mkreloc.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+We could also place the entry points in it's own isolated section and skip
+such section for relocations generation in mkreloc, but it seems best to
+just remove the code if it's unused.
+---
+ xen/arch/x86/boot/head.S | 3 ++-
+ xen/arch/x86/xen.lds.S   | 2 ++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/efi/mkreloc.c b/xen/arch/x86/efi/mkreloc.c
-index 375cb79d6959..1a6cfc845cba 100644
---- a/xen/arch/x86/efi/mkreloc.c
-+++ b/xen/arch/x86/efi/mkreloc.c
-@@ -35,7 +35,6 @@ static unsigned int load(const char *name, int *handle,
-     struct mz_hdr mz_hdr;
-     struct pe_hdr pe_hdr;
-     struct pe32_opt_hdr pe32_opt_hdr;
--    uint32_t base;
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 81473578fe84..774894954e44 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -151,7 +151,7 @@ vga_text_buffer:
+ efi_platform:
+         .byte   0
  
-     if ( in < 0 ||
-          read(in, &mz_hdr, sizeof(mz_hdr)) != sizeof(mz_hdr) )
-@@ -55,7 +54,6 @@ static unsigned int load(const char *name, int *handle,
-     if ( lseek(in, mz_hdr.peaddr, SEEK_SET) < 0 ||
-          read(in, &pe_hdr, sizeof(pe_hdr)) != sizeof(pe_hdr) ||
-          read(in, &pe32_opt_hdr, sizeof(pe32_opt_hdr)) != sizeof(pe32_opt_hdr) ||
--         read(in, &base, sizeof(base)) != sizeof(base) ||
-          /*
-           * Luckily the image size field lives at the
-           * same offset for both formats.
-@@ -73,11 +71,12 @@ static unsigned int load(const char *name, int *handle,
-     {
-     case PE_OPT_MAGIC_PE32:
-         *width = 32;
--        *image_base = base;
-+        *image_base = pe32_opt_hdr.image_base;
-         break;
-     case PE_OPT_MAGIC_PE32PLUS:
-         *width = 64;
--        *image_base = ((uint64_t)base << 32) | pe32_opt_hdr.data_base;
-+        *image_base = ((uint64_t)pe32_opt_hdr.image_base << 32) |
-+                      pe32_opt_hdr.data_base;
-         break;
-     default:
-         fprintf(stderr, "%s: Wrong PE file format\n", name);
+-        .section .init.text, "ax", @progbits
++        .section .init.multiboot, "ax", @progbits
+ 
+ early_error: /* Here to improve the disassembly. */
+ 
+@@ -709,6 +709,7 @@ trampoline_setup:
+         /* Jump into the relocated trampoline. */
+         lret
+ 
++        .section .init.text, "ax", @progbits
+ ENTRY(trampoline_start)
+ #include "trampoline.S"
+ ENTRY(trampoline_end)
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index ad908539f38a..1191bf4e2ddd 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -63,6 +63,7 @@ SECTIONS
+   . = __image_base__;
+   /DISCARD/ : {
+     *(.text.header)
++    *(.init.multiboot)
+   }
+ #endif
+ 
+@@ -208,6 +209,7 @@ SECTIONS
+        _sinittext = .;
+        *(.init.text)
+        *(.text.startup)
++       *(.init.multiboot)
+        _einittext = .;
+        /*
+         * Here are the replacement instructions. The linker sticks them
 -- 
 2.48.1
 
