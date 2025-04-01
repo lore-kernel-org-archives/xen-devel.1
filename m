@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DCAC36014
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:12:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.934190.1335996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F551C36018
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:12:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.934201.1336007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbPV-00074x-5X; Tue, 01 Apr 2025 13:12:09 +0000
+	id 1tzbPb-0007h5-Fu; Tue, 01 Apr 2025 13:12:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 934190.1335996; Tue, 01 Apr 2025 13:12:09 +0000
+Received: by outflank-mailman (output) from mailman id 934201.1336007; Tue, 01 Apr 2025 13:12:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbPV-00074q-24; Tue, 01 Apr 2025 13:12:09 +0000
-Received: by outflank-mailman (input) for mailman id 934190;
- Tue, 01 Apr 2025 13:12:08 +0000
+	id 1tzbPb-0007gq-98; Tue, 01 Apr 2025 13:12:15 +0000
+Received: by outflank-mailman (input) for mailman id 934201;
+ Tue, 01 Apr 2025 13:12:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oF/L=WT=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tzbMe-0008KU-BX
- for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:09:12 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
+ id 1tzbMY-0008KU-L5
+ for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:09:06 +0000
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [2a00:1450:4864:20::536])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7fdb7702-0efa-11f0-9ea7-5ba50f476ded;
- Tue, 01 Apr 2025 15:09:10 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac29fd22163so926513066b.3
- for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:09:09 -0700 (PDT)
+ id 7d87fe32-0efa-11f0-9ea7-5ba50f476ded;
+ Tue, 01 Apr 2025 15:09:06 +0200 (CEST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5edc07c777eso5614074a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:09:06 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac71927b7cfsm754553366b.49.2025.04.01.06.09.08
+ 4fb4d7f45d1cf-5edc16d5077sm7044407a12.32.2025.04.01.06.09.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 06:09:08 -0700 (PDT)
+ Tue, 01 Apr 2025 06:09:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,47 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7fdb7702-0efa-11f0-9ea7-5ba50f476ded
+X-Inumbo-ID: 7d87fe32-0efa-11f0-9ea7-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743512949; x=1744117749; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1743512945; x=1744117745; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NMjGk2rTj1yEkoZ9b/TWFB91n+XjEue7/7KXBnaUhCc=;
-        b=eiSNgyT0eOS3FieQZdky1f+9BRhQrxOKnQ7VP8FlX+hyyQADbPxb0bqEhX9kdW050R
-         OJON/U1vHojc3kVREzLpS03v3OQq10aozH3JR6w+/dY0mbR7+1ga/OmzDNhomKHzOjJa
-         rKEYTKqlu6kQuF2rLK9n6Mh62+pxMXl1oOdaw=
+        bh=TZxBOQSFyBxeOjrMoPK4/0WOsmdYg4n3s13OFZoBbPU=;
+        b=YiCO8ulVsFFFvFuU6WtuBxTveEgQd1mmsQ7Hll5Tag/ki+HU/HC/WNSUfAkf2rMr7w
+         ID1LngUaHVfoYuuel6vFaOyk+J3L9ZowlBcnDjWgo/ds+yeyKcYQdzGOPUWX6VpVkn7t
+         9rpNOkyDBya8ixHmoC2N3VxgmrpKyrKPrOMqY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743512949; x=1744117749;
+        d=1e100.net; s=20230601; t=1743512945; x=1744117745;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NMjGk2rTj1yEkoZ9b/TWFB91n+XjEue7/7KXBnaUhCc=;
-        b=g1YGYNxqKO946VpdjP5JezL1i6w3IaLDkHue74OoBopArXwKcW+r+HGH7oVqXkz+m5
-         iN4xzYTcTL5DQ/D6jQ6ShMR/bGEt+BZCJCNPQeYwJVSBTvmx/w866XFhXDuejPo5Pg3p
-         L7ZtHsdDBfTKEX40dac6cZX6QM7810/0zId1JR3KLxIzgijI4RERQAZWeF+jph8xA9/c
-         gkoj1NdXGh8l8ERmKofjKItiZPRAhX/kU+yuZSIO/OrNo89rX88OAtCKBGQJrJaVoOP5
-         3dm9h9P2YmBIgHlfGsF2l8jhND6K8iICAmZitTYeA2aUkrsnffxhl4lPrSKYgv5Wch0C
-         YqCg==
-X-Gm-Message-State: AOJu0Yww7d1JdyAfg6N6lF06ojK+OcI5X3nRWsiJP2h9NxwSGcTdPUiY
-	+QwlPEOEtDaO8wTUZmbjjZlBGJ+fwQrAtQ2ucxU96wRuLZQqvJSoVwtX5kIDoScFgbgxs7wP4Nx
-	a
-X-Gm-Gg: ASbGnctdV94zyQs0k9VXpvGwCEKr/UmVAL/eq90fpnlkUZImxBDji1ozzkUeS+TiLze
-	fUsyhJ0ANe6cTL2BLC5Wg26Sqpv9jiksYo2b4hRyT7okWGsZdB6Syz3vSTZf+LEQp1J7X/AgLCI
-	P2K+rJhsNcbdRxVWseHLt6JCGjU1x6R3Ais6zhOaCZwuIhLWowKYl3ja3C6X95sfyis24xK87fo
-	CjxcP8b0ny1Vd9ebpzfF+usZJ9rvHX8M8rOyvAGs+GdOVVibJdLchOwItnlCsI3f2Zyuja1NCW6
-	TDxZLv6coyyonqgwgVhjRZY2sFc4PKCwwFeHEyFWYD02ZdAiRw==
-X-Google-Smtp-Source: AGHT+IFCculQFVIsAPIfraVZnCR3LJEGuoFKSvhvYzJv0ILOugajihhVFyqaE+eW8Eh1agmb3b2qsQ==
-X-Received: by 2002:a17:906:7955:b0:abf:4bde:51b1 with SMTP id a640c23a62f3a-ac738a4bf32mr1077303566b.21.1743512948972;
-        Tue, 01 Apr 2025 06:09:08 -0700 (PDT)
+        bh=TZxBOQSFyBxeOjrMoPK4/0WOsmdYg4n3s13OFZoBbPU=;
+        b=Ix1qikTl+TAp15IxTHfCXJiChcaPweQwtml083pOjHjURqdIGjvizw316E38r8JqBa
+         xMzlC08Dwh+9EU3FUuVM7tE0+0FkqIALSxlFQFI+rV4vFu5NRriBWQR6rlXXmtyLJwjQ
+         sWe58UZsMavZaqO/UK/4EATF20JDYodPNmzIs8tavEcLesgoyu8PJOJFhMyy+4H4tOmo
+         J/f7gep9oSMFUDmu8L1qbg78I2KJLJsEfk0r557v19L0oPKak9NccP8+HPZbVNWBQgbN
+         M3+GHc93iivTguLGIt5LNexzqVJcw4Ux9Jym5PO+W+VBllVILY/ih3cZV3dm7OiAZPi0
+         DAoA==
+X-Gm-Message-State: AOJu0Yze5qh7NP083mgsmRpTAysleNpiNP5/jJJCG6LKWe2IBU9mCumG
+	l2CzPfac4+7kKy7WA2z/wg9Nhv1rpFPtaBsvkNkgmrYT+nQL31ztSr0uSZUqXw5sYbfmn2Y90om
+	X
+X-Gm-Gg: ASbGncurXRwsOHt+EE/NrpteXEIIZKndn6OWLC1jSuJtqKfMLIV80nNSUytLyPhWfmB
+	I/B/Mr6sED+fcH5gqAvaJNTE3yL3ceiskyrIHo1g8A9QW851Gr8Ekx6ssdZW8F7G+Kug4E/vc/r
+	S52PUNW2LZMYefeQ2voe8f+CY8+WJENwGRFoxZC+hoQAf5MNFv42g2+Gew+PP2r8XVmrWIAZQUg
+	40NWNJcM/mbxVoZL7P/WhYsiv+wq5Q8bViwlVmaWpl/1QBCpNGzmMvWbuXsnG1UvUrzsEukmLm2
+	P+FNXTgx1hvENKJOHn2lOZREVuAxHrWRnOFoICM6eL3WkihyNA==
+X-Google-Smtp-Source: AGHT+IE/BKGYvhgZRW5pouc3MtVys3s9WDTS+gmscGkaRwz0gTdBrRfVUs0dYAvq+MEuHWARTmvC6g==
+X-Received: by 2002:a05:6402:2b8b:b0:5ed:994c:7e75 with SMTP id 4fb4d7f45d1cf-5edfd9f7c9emr10260312a12.24.1743512940814;
+        Tue, 01 Apr 2025 06:09:00 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 11/11] automation/x86: add a xen.efi test with a strict NX OVMF build
-Date: Tue,  1 Apr 2025 15:08:40 +0200
-Message-ID: <20250401130840.72119-12-roger.pau@citrix.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 08/11] x86/boot: place trampoline code in a non-execute section
+Date: Tue,  1 Apr 2025 15:08:37 +0200
+Message-ID: <20250401130840.72119-9-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250401130840.72119-1-roger.pau@citrix.com>
 References: <20250401130840.72119-1-roger.pau@citrix.com>
@@ -94,106 +94,43 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Such OVMF build does honor the PE sections attributes, and will not blindly
-create all section mappings with read-write-execute permissions.
+The trampoline code is never executed in the position placed by the
+loader.  It's first copied to the low 1MB, and always executed from
+there.
 
-Strict NX build is only available in the Fedora edk2-experimental
-package, so add the required dependencies to run a QEMU EFI job on the
-Fedora 41 container and use it for the test.
+Move the trampoline code from being in .init.text section into
+.init.data, so it's not in an executable section.  This allows applying
+the relocations safely against a non-executable (and thus non-read only)
+section, and then copy the relocated trampoline to the low 1MB.  Note
+that the trampoline code is placed on an .init section, so zapped after
+boot has finished.
+
+No functional change intended.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- automation/build/fedora/41-x86_64.dockerfile |  5 +++++
- automation/gitlab-ci/test.yaml               |  9 ++++++++
- automation/scripts/qemu-smoke-x86-64-efi.sh  | 22 ++++++++++++++++----
- 3 files changed, 32 insertions(+), 4 deletions(-)
+An alternative approach is to apply the relocations after having copied the
+trampoline to the low 1MB, but that still generates relocations in mkreloc,
+which is not helpful for the goal of having no relocations applied to
+read-execute code sections.  This approach however places code in a data
+section, which might cause issues when debugging it.
+---
+ xen/arch/x86/boot/head.S | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/automation/build/fedora/41-x86_64.dockerfile b/automation/build/fedora/41-x86_64.dockerfile
-index 8032a2098632..84f366ac0643 100644
---- a/automation/build/fedora/41-x86_64.dockerfile
-+++ b/automation/build/fedora/41-x86_64.dockerfile
-@@ -65,6 +65,11 @@ RUN <<EOF
-         glib2-devel
-         pixman-devel
-         ninja-build
-+
-+        # EFI Strict NX test
-+        qemu-system-x86
-+        edk2-experimental
-+        expect
-     )
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 774894954e44..f5a2d08d0d0e 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -709,7 +709,7 @@ trampoline_setup:
+         /* Jump into the relocated trampoline. */
+         lret
  
-     dnf -y --setopt=install_weak_deps=False install "${DEPS[@]}"
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 225eb4399807..dec14420ab62 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -593,6 +593,15 @@ qemu-smoke-x86-64-gcc-efi:
-   needs:
-     - debian-12-x86_64-gcc-debug
- 
-+qemu-smoke-x86-64-gcc-efi-strictnx:
-+  extends: .qemu-smoke-x86-64
-+  variables:
-+    CONTAINER: fedora:41-x86_64
-+  script:
-+    - ./automation/scripts/qemu-smoke-x86-64-efi.sh pv strict 2>&1 | tee ${LOGFILE}
-+  needs:
-+    - debian-12-x86_64-gcc-debug
-+
- qemu-smoke-riscv64-gcc:
-   extends: .qemu-riscv64
-   script:
-diff --git a/automation/scripts/qemu-smoke-x86-64-efi.sh b/automation/scripts/qemu-smoke-x86-64-efi.sh
-index 7572722be6e5..fbb662f1a756 100755
---- a/automation/scripts/qemu-smoke-x86-64-efi.sh
-+++ b/automation/scripts/qemu-smoke-x86-64-efi.sh
-@@ -4,6 +4,7 @@ set -ex -o pipefail
- 
- # variant should be either pv or pvh
- variant=$1
-+mode=$2
- 
- # Clone and build XTF
- git clone https://xenbits.xen.org/git-http/xtf.git
-@@ -14,6 +15,19 @@ case $variant in
-     *)   k=test-pv64-example     extra= ;;
- esac
- 
-+case $mode in
-+    strict)
-+        ovmf_code=/usr/share/edk2/experimental/OVMF_CODE_4M.secboot.strictnx.qcow2
-+        ovmf_vars=/usr/share/edk2/ovmf/OVMF_VARS_4M.qcow2
-+        ovmf_format=qcow2
-+        ;;
-+    *)
-+        ovmf_code=/usr/share/OVMF/OVMF_CODE.fd
-+        ovmf_vars=/usr/share/OVMF/OVMF_VARS.fd
-+        ovmf_format=raw
-+        ;;
-+esac
-+
- mkdir -p boot-esp/EFI/BOOT
- cp binaries/xen.efi boot-esp/EFI/BOOT/BOOTX64.EFI
- cp xtf/tests/example/$k boot-esp/EFI/BOOT/kernel
-@@ -27,13 +41,13 @@ options=loglvl=all console=com1 noreboot console_timestamps=boot $extra
- kernel=kernel
- EOF
- 
--cp /usr/share/OVMF/OVMF_CODE.fd OVMF_CODE.fd
--cp /usr/share/OVMF/OVMF_VARS.fd OVMF_VARS.fd
-+cp $ovmf_code OVMF_CODE.fd
-+cp $ovmf_vars OVMF_VARS.fd
- 
- rm -f smoke.serial
- export TEST_CMD="qemu-system-x86_64 -nographic -M q35,kernel-irqchip=split \
--        -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
--        -drive if=pflash,format=raw,file=OVMF_VARS.fd \
-+        -drive if=pflash,format=${ovmf_format},readonly=on,file=OVMF_CODE.fd \
-+        -drive if=pflash,format=${ovmf_format},file=OVMF_VARS.fd \
-         -drive file=fat:rw:boot-esp,media=disk,index=0,format=raw \
-         -m 512 -monitor none -serial stdio"
- 
+-        .section .init.text, "ax", @progbits
++        .section .init.data, "aw", @progbits
+ ENTRY(trampoline_start)
+ #include "trampoline.S"
+ ENTRY(trampoline_end)
 -- 
 2.48.1
 
