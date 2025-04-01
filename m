@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D913AC3601E
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:09:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.934113.1335946 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614FCC36010
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Apr 2025 13:12:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.934184.1335981 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbMT-0001B7-BB; Tue, 01 Apr 2025 13:09:01 +0000
+	id 1tzbPM-0006Uc-Qx; Tue, 01 Apr 2025 13:12:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 934113.1335946; Tue, 01 Apr 2025 13:09:01 +0000
+Received: by outflank-mailman (output) from mailman id 934184.1335981; Tue, 01 Apr 2025 13:12:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1tzbMT-0001AK-6t; Tue, 01 Apr 2025 13:09:01 +0000
-Received: by outflank-mailman (input) for mailman id 934113;
- Tue, 01 Apr 2025 13:08:59 +0000
+	id 1tzbPM-0006TW-La; Tue, 01 Apr 2025 13:12:00 +0000
+Received: by outflank-mailman (input) for mailman id 934184;
+ Tue, 01 Apr 2025 13:11:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oF/L=WT=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1tzbMR-0000Od-9G
- for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:08:59 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
+ id 1tzbMf-0000Od-KR
+ for xen-devel@lists.xenproject.org; Tue, 01 Apr 2025 13:09:13 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 78222bfe-0efa-11f0-9ffb-bf95429c2676;
- Tue, 01 Apr 2025 15:08:57 +0200 (CEST)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5eb92df4fcbso10046686a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:08:57 -0700 (PDT)
+ id 7f3c5ade-0efa-11f0-9ffb-bf95429c2676;
+ Tue, 01 Apr 2025 15:09:08 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac2bdea5a38so907883266b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Apr 2025 06:09:08 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-5edc16aae9esm7227853a12.11.2025.04.01.06.08.55
+ a640c23a62f3a-ac719223e4dsm763101066b.24.2025.04.01.06.09.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 06:08:55 -0700 (PDT)
+ Tue, 01 Apr 2025 06:09:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,49 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78222bfe-0efa-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 7f3c5ade-0efa-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743512936; x=1744117736; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1743512947; x=1744117747; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6J5IWMe9fuG9cz0NbV8d3wevTadFVymZS2btgRyX9fc=;
-        b=E1z28gwBLqGYK9HtjIdkgSxq5pBONngrJu1ubGuZsPiJlWs9XZlIRv9wHrHFRygPZ2
-         LctCd+SsPSv2frdWb/3SYOZq2nbifRJZgRLnN19Ql6WsBBYRQ/MGkq8g2y4yuAEVkz4o
-         N/UDrjwKl5BqxRFZaww11LJrboolLH8fBFhbA=
+        bh=0LTQkhLhC9QAjpitQrbO7ny5f+6pVlhp14370Lqax5o=;
+        b=t/Ui8srvOTYkPt3TB9gdcPzITc1WARf0mT4nefjh/e3Eoli69wcAxNIngVMCqiDtQa
+         ORzg4Afr8dPi8omud4jaGXG2uZNXuFNfZHOLuFXkpzTVol8an2R2MQrd1hvknPoeXivs
+         s0kVlhSaD5Lh/EUAFOEnkimpgLD/tHNft/dn8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743512936; x=1744117736;
+        d=1e100.net; s=20230601; t=1743512947; x=1744117747;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6J5IWMe9fuG9cz0NbV8d3wevTadFVymZS2btgRyX9fc=;
-        b=Z6YNc/5SOCm9XSu2jiU6TofpDp/rxG4lX/wdvJn3637GjkFFaxiO0xeX+wmt6IO5ap
-         7l4Q5HyuxU61MVmIqgsC57eg0g0TTfpJpy3pSKjHigMr5hZmKerQisr9hAi0PcsMPTlX
-         2IdgRTHC7A1ag6RcuuJIJ1AArACA+1hT4Gi/ScqjOZqDSNafpemlC/yrA/iBCdfB8+L5
-         yhwiKXA5P9fVy+W3ZjVT5Hn6fCCI860o6vRmk+lRU8ziEpAr2oeB2i/5gYxDFTWFcomJ
-         2yp2SSGEHTrWMkvXtZGZv5N244NFTol6UYC+nBjrBFHD04+IlHTzRlej069cFQe+I1p7
-         qIgg==
-X-Gm-Message-State: AOJu0Yxfb3Anqsj0ku7C1TWo9dXw9YttheO4Wd+MC6iqR28yWAVwU4lq
-	7sKxnBLx2DJaZSivBoLhnPSQAaJmym9D9U9rBCIpyHhRHmO8QbBYwJp46uwZhZLzJ3SbmGDaDum
-	L
-X-Gm-Gg: ASbGncsJmL4RlXPTbrj4zc1zaENzUyihkIlpX7uhS45vXHxJHIagwO5nPLG0dlyObxo
-	fM94mK6dq/BnzyDbu2u0t4ocbF3qdAVVtDyH8VCvWYuLiZi/lhkKmz44DT8E6Kundi5x7hRVg2l
-	XNRvBLN4qpStNRyi9wnpPses4m3eC8FG8Ul4UVDezRi7h3IP3SMDUsr9eAU++MGvrS39ODJO80i
-	QY5kdgogeYl/sPvVA28Jv8dzj/k8c2lCSL9xPOtROXeJ0SJEMN4uEyw1KQmiVf+vjLCOzlADzZ1
-	rYVIiY4mRDxTeTzvC3zwgfk06+oS/FCAf2/H+flTnoD8iLVW9OOhAusvepXX
-X-Google-Smtp-Source: AGHT+IFlaBZQNfY0LTeE/fILoefvlfJB50Sqda8agd9IG5gVxT9iBNOHCfoQMcaMzWfevyEFGUdD9Q==
-X-Received: by 2002:a05:6402:24a4:b0:5e7:8501:8c86 with SMTP id 4fb4d7f45d1cf-5edfd6fdbdemr12939174a12.22.1743512936181;
-        Tue, 01 Apr 2025 06:08:56 -0700 (PDT)
+        bh=0LTQkhLhC9QAjpitQrbO7ny5f+6pVlhp14370Lqax5o=;
+        b=vt3uJi3o5fDoRyZyqpjOBg1wbmOtzY7LMaitmWXBjoML+30Cn48JzXIxjakwe88T0/
+         WR4CKwC3z2be2dsqWhu8QV9KHj8KJNA6MwS8J7aqImu+tXj6C7OISiIbten7J+ZrwwHN
+         dt3C2SMmL29zruOXBaD5EzBmP83RgcRsAJ4jJjbpAkPlzq+fFU0fqeDCoD/YYs/fNJsT
+         YlFCOnNIC19j6FY4s26+B/CIvQW/a2tpv1CwCXC6cB9c3tW9R7GGYy0BtAwqbobzjpVQ
+         J+/ClvKvkF7b6Zb/r0RhmL/PcARMbZOJbEFKwsqxF/RZ5VsGjFckVYyruNC//1B3Hx8c
+         CmXg==
+X-Gm-Message-State: AOJu0YwjvgSUuvvaGpnOxNVdU9MGhTk2PiRwIHm/JgOFpp+hVjpjGIG9
+	ztcpu+eBk6g7JkwV62NL5e9AjTAq0v/JuiizeJuTdvrpvGxGJUXk8cnBg8h0YsDxHHA1Tb5tUGS
+	X
+X-Gm-Gg: ASbGncsAA8xddCIUju/A+HdGlY5P4BqAxVCijOKkDp2zlYgsMxYyNhyfB53t6bRar6Q
+	NczaO6caqr4KpzFyNKGwa+wuljojoDamt0fJiS+milsMVTYznPqcPeN8BmPSa4YQTTieRBQ2wN/
+	TCri/B0iB0Cn+MtLGd0Apgp2AGDtmZ+Y95m7QyoP3BAKHP3TG4tUypas35+GFNl1GvdyWahgg+Q
+	TxrO0gjqZoBY3Q29hxs+AAIgwkOO9q4kVtKod+k5kVcheb8Dvjdirmb9vwKd6MYCKnt5rCUdrlp
+	XaSLaYA5ve/J9pWFMh3FD5Kzhg/Biu5YUFSN9Qd3ymsWBy2SCw==
+X-Google-Smtp-Source: AGHT+IG1AIAtLq4CiN9qMplBG9p/hjmatcs3t1KrHTBJAC7KcEg/Oo4Z4AuluQw1FWKNeNMhFndeBg==
+X-Received: by 2002:a17:907:97c2:b0:abf:63fa:43d4 with SMTP id a640c23a62f3a-ac738bbe89bmr1018652166b.44.1743512947558;
+        Tue, 01 Apr 2025 06:09:07 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 04/11] x86/mkreloc: print the linear address of relocations to read-only sections
-Date: Tue,  1 Apr 2025 15:08:33 +0200
-Message-ID: <20250401130840.72119-5-roger.pau@citrix.com>
+Subject: [PATCH v2 10/11] x86/efi: do not merge all .init sections
+Date: Tue,  1 Apr 2025 15:08:39 +0200
+Message-ID: <20250401130840.72119-11-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250401130840.72119-1-roger.pau@citrix.com>
 References: <20250401130840.72119-1-roger.pau@citrix.com>
@@ -96,33 +94,74 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Expand the warning message about relocations generated against read-only
-sections, so it also contains the linear address of the offending
-relocation, like:
+As a result of having no relocations against text sections, there's no need
+for a single .init section that's read-write-execute, as .init.text is no
+longer modified.
 
-Warning: relocation to r/o section .text:00000048 @ 0xffff82d040200048
+Remove the bodge and fallback to the layout used by ELF images with an
+.init.text and .init.data section.
+
+The resulting PE sections are:
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .text         00193f6b  ffff82d040200000  ffff82d040200000  00000480  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       0008a010  ffff82d040400000  ffff82d040400000  00194400  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .buildid      00000035  ffff82d04048a010  ffff82d04048a010  0021e420  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .init.text    00049e70  ffff82d040600000  ffff82d040600000  0021e460  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  4 .init.data    000560a8  ffff82d040800000  ffff82d040800000  002682e0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+[...]
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/efi/mkreloc.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Changes since v1:
+ - Align .init.text.
+ - Clarify commit message.
+---
+ xen/arch/x86/xen.lds.S | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/efi/mkreloc.c b/xen/arch/x86/efi/mkreloc.c
-index cc106bd875ba..fa50314ae945 100644
---- a/xen/arch/x86/efi/mkreloc.c
-+++ b/xen/arch/x86/efi/mkreloc.c
-@@ -270,8 +270,9 @@ static void diff_sections(const unsigned char *ptr1, const unsigned char *ptr2,
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 1191bf4e2ddd..852aa135a76c 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -201,11 +201,7 @@ SECTIONS
+   __2M_init_start = .;         /* Start of 2M superpages, mapped RWX (boot only). */
+   . = ALIGN(PAGE_SIZE);             /* Init code and data */
+   __init_begin = .;
+-#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
+-  DECL_SECTION(.init) {
+-#else
+   DECL_SECTION(.init.text) {
+-#endif
+        _sinittext = .;
+        *(.init.text)
+        *(.text.startup)
+@@ -218,12 +214,15 @@ SECTIONS
+         */
+        *(.altinstr_replacement)
  
-         if ( !(sec->flags & IMAGE_SCN_MEM_WRITE) )
-             fprintf(stderr,
--                    "Warning: relocation to r/o section %s:%08" PRIxFAST32 "\n",
--                    get_name(sec->name), i - disp);
-+                    "Warning: relocation to r/o section %s:%08" PRIxFAST32 " @ %p\n",
-+                    get_name(sec->name), i - disp,
-+                    (void *)(base + sec->rva + i - disp));
+-#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
+-       . = ALIGN(SMP_CACHE_BYTES);
+-#else
+   } PHDR(text)
+-  DECL_SECTION(.init.data) {
++#ifdef EFI
++  /*
++   * Align to prevent the data section from re-using the tail of an RX mapping
++   * from the previous text section.
++   */
++  . = ALIGN(SECTION_ALIGN);
+ #endif
++  DECL_SECTION(.init.data) {
+        *(.init.bss.stack_aligned)
  
-         printf("\t.word (%u << 12) | 0x%03" PRIxFAST32 "\n",
-                reloc, sec->rva + i - disp - rva);
+        . = ALIGN(POINTER_ALIGN);
 -- 
 2.48.1
 
