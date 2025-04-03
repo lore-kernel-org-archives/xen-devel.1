@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFDB6C3601E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D5AC369A0
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 18:23:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.937055.1338147 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.937045.1338116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0PDo-0001gw-A6; Thu, 03 Apr 2025 18:23:24 +0000
+	id 1u0PDZ-0000gN-F4; Thu, 03 Apr 2025 18:23:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 937055.1338147; Thu, 03 Apr 2025 18:23:24 +0000
+Received: by outflank-mailman (output) from mailman id 937045.1338116; Thu, 03 Apr 2025 18:23:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0PDo-0001gn-4W; Thu, 03 Apr 2025 18:23:24 +0000
-Received: by outflank-mailman (input) for mailman id 937055;
- Thu, 03 Apr 2025 18:23:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u0PDZ-0000fz-Bk; Thu, 03 Apr 2025 18:23:09 +0000
+Received: by outflank-mailman (input) for mailman id 937045;
+ Thu, 03 Apr 2025 18:23:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Em9L=WV=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1u0PDn-0001N1-FJ
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 18:23:23 +0000
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7974f18-10b8-11f0-9ffb-bf95429c2676;
- Thu, 03 Apr 2025 20:23:19 +0200 (CEST)
+ id 1u0PDW-0000KX-Ux
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 18:23:07 +0000
+Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
+ [79.135.106.30]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id af87bf9a-10b8-11f0-9eaa-5ba50f476ded;
+ Thu, 03 Apr 2025 20:23:05 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,95 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7974f18-10b8-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: af87bf9a-10b8-11f0-9eaa-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1743704598; x=1743963798;
-	bh=FAnFU2EE55zpL6ceZQ70EasVphCLs90kdKWYj30AMlo=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=Fu9WAITLaHRFhN2dgRC4aZ+EaSzjlopic2qS6JU9L7+AuoWmTa/OBxhbrYfv0/R2w
-	 KzrQ6LO2pdS9QWg+LJALdAjcXwfyBJGgiAG4j8UkZ+ntlEjyN4k/ympVP1NfjRgZTm
-	 YkD7JWuTZoJPLs77h991CWBYVr4jnn1p54n5THLIQ250RzA3ZPzfDdCH7GFTOKtUXs
-	 ala24sSxS9ctUz34WqesHMED9pAGYB8Ind6m1Y473krIrjS7sUMoaFcWF7KUfOildr
-	 UTnJDwOGk81/qG4Od9XdBoyhSIQCZbdv5WWeyDSfZBzVopUjbmsGH/LEF/QgXaNQHG
-	 yL9hmMUerT0ow==
-Date: Thu, 03 Apr 2025 18:23:13 +0000
+	s=protonmail; t=1743704583; x=1743963783;
+	bh=4s46GxMWhgvHm0rgQ170PYzaHXK6NdimNxre7vDtwbA=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
+	 List-Unsubscribe:List-Unsubscribe-Post;
+	b=hcCkmAN0K7QWL9/QTiLfzme/Vp8SxO3wPugckz1mCAGoW3KcGvCvN2ztCX3i+nlhe
+	 RZipxVpoicJ+BuwT+53cgzpH9U72hTfbJa5qEchfsTsEcZsxlINGG37QN3KNUHJ9jC
+	 XKklu2Qytvsp2/dJT3FzURU+IUw4umejq90h1rdM6wl4oVoQzl6moaPbUk+d93ppcW
+	 Pj+TRJIjrmGND5h6DitUU8WdHhkkArc/cbn0nOsmLegCLsVjf6EbC97x3Yh+olkH/f
+	 8R9g7i9eXSy8xPP36xUyq+0IekYgJwsYcMZ/BNkNXTYc1ECvm0ioVBu/cK/U8dDBcy
+	 eo27uCGGaApRA==
+Date: Thu, 03 Apr 2025 18:22:58 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v2 3/6] x86/asm: remove HAVE_AS_INVPCID
-Message-ID: <20250403182250.3329498-4-dmukhin@ford.com>
-In-Reply-To: <20250403182250.3329498-1-dmukhin@ford.com>
-References: <20250403182250.3329498-1-dmukhin@ford.com>
+Subject: [PATCH v2 0/6] x86/asm: cleanups after toolchain baseline upgrade
+Message-ID: <20250403182250.3329498-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: f6f51d824233c96d4937b9d9c830236c66c51944
+X-Pm-Message-ID: d9d3b846cb5f0f8ce1df0778aed580181b1fd1d9
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-From: Denis Mukhin <dmukhin@ford.com>
+Patches 1-5 remove various workarounds under HAVE_AS_XXX for older compiler=
+s,
+as the minimally required GCC 5.1 / Binutils 2.25, and Clang 11 natively
+support instructions worked around in the hypervisor code.
 
-The new toolchain baseline knows the invpcid instruction,
-no need to carry the workaround in the code.
+Patch 6 cleans up error handling in VMX asm wrappers using `asm goto`.
 
-Resolves: https://gitlab.com/xen-project/xen/-/work_items/209
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
- xen/arch/x86/arch.mk               |  1 -
- xen/arch/x86/include/asm/invpcid.h | 12 +-----------
- 2 files changed, 1 insertion(+), 12 deletions(-)
+[1] Link to v1: https://lore.kernel.org/xen-devel/20250401222105.79309-1-dm=
+ukhin@ford.com/
+[2] CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/17510=
+06178=20
 
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index 6d2876b1a8..dcc8c3c330 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -16,7 +16,6 @@ $(call as-option-add,CFLAGS,CC,"xsaveopt (%rax)",-DHAVE_A=
-S_XSAVEOPT)
- $(call as-option-add,CFLAGS,CC,"rdseed %eax",-DHAVE_AS_RDSEED)
- $(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
- $(call as-option-add,CFLAGS,CC,".equ \"x\"$(comma)1",-DHAVE_AS_QUOTED_SYM)
--$(call as-option-add,CFLAGS,CC,"invpcid (%rax)$(comma)%rax",-DHAVE_AS_INVP=
-CID)
- $(call as-option-add,CFLAGS,CC,"movdiri %rax$(comma)(%rax)",-DHAVE_AS_MOVD=
-IR)
- $(call as-option-add,CFLAGS,CC,"enqcmd (%rax)$(comma)%rax",-DHAVE_AS_ENQCM=
-D)
-=20
-diff --git a/xen/arch/x86/include/asm/invpcid.h b/xen/arch/x86/include/asm/=
-invpcid.h
-index bf5c30313a..e116a34a6c 100644
---- a/xen/arch/x86/include/asm/invpcid.h
-+++ b/xen/arch/x86/include/asm/invpcid.h
-@@ -5,9 +5,6 @@
-=20
- extern bool use_invpcid;
-=20
--#define INVPCID_OPCODE ".byte 0x66, 0x0f, 0x38, 0x82\n"
--#define MODRM_ECX_01   ".byte 0x01\n"
--
- static inline void invpcid(unsigned int pcid, unsigned long addr,
-                            unsigned int type)
- {
-@@ -17,16 +14,9 @@ static inline void invpcid(unsigned int pcid, unsigned l=
-ong addr,
-         uint64_t addr;
-     } desc =3D { .pcid =3D pcid, .addr =3D addr };
-=20
--    asm volatile (
--#ifdef HAVE_AS_INVPCID
--                  "invpcid %[desc], %q[type]"
-+    asm volatile ( "invpcid %[desc], %q[type]"
-                   : /* No output */
-                   : [desc] "m" (desc), [type] "r" (type)
--#else
--                  INVPCID_OPCODE MODRM_ECX_01
--                  : /* No output */
--                  : "a" (type), "c" (&desc)
--#endif
-                   : "memory" );
- }
-=20
+Denis Mukhin (6):
+  x86/vmx: remove HAVE_AS_{EPT,VMX}, GAS_VMX_OP() and *_OPCODE
+  x86/msr: remove HAVE_AS_FSGSBASE
+  x86/asm: remove HAVE_AS_INVPCID
+  x86/emulate: remove HAVE_AS_SSE4_2
+  x86/emulate: remove HAVE_AS_RDRAND and HAVE_AS_RDSEED
+  x86/vmx: rework VMX wrappers to use `asm goto()`
+
+ xen/arch/x86/arch.mk                   |   9 +-
+ xen/arch/x86/hvm/vmx/vmcs.c            |   2 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h | 236 ++++++++-----------------
+ xen/arch/x86/include/asm/invpcid.h     |  12 +-
+ xen/arch/x86/include/asm/msr.h         |  22 ---
+ xen/arch/x86/x86_emulate/0fc7.c        |  15 +-
+ xen/arch/x86/x86_emulate/x86_emulate.c |   7 +-
+ 7 files changed, 87 insertions(+), 216 deletions(-)
+
 --=20
 2.34.1
 
