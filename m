@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F27EC369A4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41885C369A1
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 11:07:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.936484.1337784 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.936473.1337704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0IPV-0007Hx-Ny; Thu, 03 Apr 2025 11:07:01 +0000
+	id 1u0IPJ-0005Cq-N7; Thu, 03 Apr 2025 11:06:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 936484.1337784; Thu, 03 Apr 2025 11:07:01 +0000
+Received: by outflank-mailman (output) from mailman id 936473.1337704; Thu, 03 Apr 2025 11:06:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0IPV-0007HY-IU; Thu, 03 Apr 2025 11:07:01 +0000
-Received: by outflank-mailman (input) for mailman id 936484;
- Thu, 03 Apr 2025 11:07:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u0IPJ-0005Cj-Jf; Thu, 03 Apr 2025 11:06:49 +0000
+Received: by outflank-mailman (input) for mailman id 936473;
+ Thu, 03 Apr 2025 11:06:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X4pi=WV=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u0IPU-0005Qy-BR
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 11:07:00 +0000
+ id 1u0IPI-0005Cd-QN
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 11:06:48 +0000
 Received: from fout-a5-smtp.messagingengine.com
  (fout-a5-smtp.messagingengine.com [103.168.172.148])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2b67f71-107b-11f0-9ffb-bf95429c2676;
- Thu, 03 Apr 2025 13:06:58 +0200 (CEST)
-Received: from phl-compute-11.internal (phl-compute-11.phl.internal
- [10.202.2.51])
- by mailfout.phl.internal (Postfix) with ESMTP id 1223B13801AD;
- Thu,  3 Apr 2025 07:06:58 -0400 (EDT)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bb2a0096-107b-11f0-9eaa-5ba50f476ded;
+ Thu, 03 Apr 2025 13:06:46 +0200 (CEST)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfout.phl.internal (Postfix) with ESMTP id 2F9DA1380212;
+ Thu,  3 Apr 2025 07:06:45 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-11.internal (MEProxy); Thu, 03 Apr 2025 07:06:58 -0400
+ by phl-compute-12.internal (MEProxy); Thu, 03 Apr 2025 07:06:45 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 3 Apr 2025 07:06:56 -0400 (EDT)
+ 3 Apr 2025 07:06:44 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,98 +47,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2b67f71-107b-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: bb2a0096-107b-11f0-9eaa-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1743678418; x=1743764818; bh=KrMIkNcsW4
-	7Spr5nyS0BqxsgMbL82nPdur/bMGMqzD4=; b=oimuvXJ+tZDKFivKoPdqtW/P34
-	x2ik28wIjpVi5YJd1GdNSBsXkMOfgIDzWdCHPVJFlTdlbsVxfcmbsaf8MuBv5I8v
-	ZjyZHeg4viCnYSo8C3KpAJHovdppzgy052di0nVqzY6HH61z+NTgDj3UQGhD9wbr
-	RWrnyLUldRcz9cP1bo8CDU/Iw0q8pnF4LNLBXeNTGuC0bHwk8ywaRXR3SdkQfY/+
-	7lHqSPHULdtdyyBSBhXwiyoo3FX71qQNH4jZr2gXibfML4kq28s84o5MuTlZuAkR
-	eE8Yvf+IWTggfqGBggmnGHWHXpAlGWEoHb27N3dJ1GRQtf4JHtES8Ix+vIGQ==
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
+	 t=1743678405; x=1743764805; bh=hcPUC6lyGcOBvjwSAqWIcFQ6cB01R6VL
+	ke5S96EY+H0=; b=LKucaZ8vQoWMtuHVE3tJNQedV8TnKv8dNrcZFfAcAvk2lLD3
+	zjr2SsD1xNrtF/OykYFOmjInQh/FvbkFQThyQSC0UUkDC4t4YkmBxTpZE+8cNNgO
+	krJPmQmjvTmT4X4fO2PVy8EJbc2eQF30p+e+0x+XKd8R3jKRMbp2l5iasVlWZKtj
+	iL476iqq5h4MNM7Hhspujyuw+Y1g/nUj2ahI6c7F+n+r7Y0zhlNW5doyVz2jGn/s
+	j8lRhtLIjk6VAv3iFsNpIEaxOi8yxa6/MX40J5xdUwmc0nQ2Vf9H4Bukk6qRtT/P
+	L+9PZ8ffJo1yqPe/ikjtgk7nlzYjsRhf79NZeA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1743678418; x=
-	1743764818; bh=KrMIkNcsW47Spr5nyS0BqxsgMbL82nPdur/bMGMqzD4=; b=d
-	u+CAcQkErFKKQxxFBB/ZMyPyVp0JrfzG8aa+zY6LEZKHibG8hqAFce4ggsBfaQCi
-	UAn9w7CIyjTxOCSyrtuBfSNzteP+8cooKD9nASGWL+42xVNeesyt7/WuGlMEZwBP
-	oAzKJs7UyyUL9EOAQNmY7e2HoR42+PCwO3hWn3R100mKp7CMeApMGJabe7Flljeo
-	sbjDfRNMeK0MDyaAOYHl0e4JXymH2YkdbGF4AKMFFgh4reN9HC4VikIa1S+dF/sg
-	zZ2bPSLSIBhxqthseU3N2nJSn43zaaY9NJmwAhuKVMSIGpcq8I2VSV8hJZh5rEb+
-	eOjWKR8BEoZy7Z9zvQPCA==
-X-ME-Sender: <xms:0WvuZ8_8svdEPTMi8DQ17yUp1LYj3LgFlfvtTfyUbYWJELHJcLfjAQ>
-    <xme:0WvuZ0u6IR_YcSUfZ0DSkuNuz96u8kB3s5xBA-iMmH6ZQtXnAvq2C4OM17oCeuNWB
-    jDIANxLlIvDlQ>
-X-ME-Received: <xmr:0WvuZyAMQE3J1g-87tBo46rlOlRu_tbYQdhIzAA2Rak6NMDCBzv7tBMzDjbSe8rMObCVkZOga2JS8SfmL-7ECl_-8xzkZyl-pI8dfbzztUcgQ9-yAAw>
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm2; t=1743678405; x=1743764805; bh=hcPUC6lyGcOBvjwSAqWIcFQ6cB01
+	R6VLke5S96EY+H0=; b=WA4SciCuuXtoKTSXjQ0/Fi3foS/FQkisBNm9dU20+i8F
+	eE3/ieo0QchhyRa1kjhZ9StaZDzROQgWS4LeQ6NqBk4/k5Xo0rkaaGs+jfITr8dc
+	aRQIevvTPBKQkTcxdSfaAxckrTEa4A0igiLMBGHwJJF98Vp/HDRhHeuyPos2RqMA
+	cf05oYCHZ1AdL7IdlLHm/TaRNCE6nMcSjkXUztbYGIU8EtKEnNJqUEQ3JoEc7I3W
+	Ji6WWIkhJIeDN0JiI+pUJM7BrCzfIU0g6KsPoSeFzCXd7HUBpo9WM0NNBrvcDUmI
+	MZCbh73Q2WZ/JUDUbpQnepQ/B7jycB/Wanhi7xWoGw==
+X-ME-Sender: <xms:xGvuZ4qVaiaNJEuRPFl7aH6JIE-O0J3kkU0VytwWvWQUDuOWgi0fEw>
+    <xme:xGvuZ-rD6exUdMM6oDQWng4S72iRnWMT1aTHl62tgdNT_LLuOXaNJynA_Eg9wvsou
+    YAaS2RVCuNkeg>
+X-ME-Received: <xmr:xGvuZ9P-pGSErAfUjtOyegH9BqgV3deh01EMOK022-zsPxDtj1CY5zd3YbKiNv2q1GxTluCmSEOgYLkk_gA1KbGZSRE5TackSRUyw20IUhEevbUezaI>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukeekfeelucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
-    tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
-    cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
-    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
-    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopeehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
-    vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
-    hopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtohep
-    mhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtph
-    htthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsggv
-    lhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:0WvuZ8dVjaEo9lVpv6FkhFV9aIUPF0MdE_M51u7z0Cs5YnzXEbSuvA>
-    <xmx:0WvuZxMU9qWDrLzbLmFvYYR1-iuV2lWSt3MVM2IpOhg1s3JQn93kQg>
-    <xmx:0WvuZ2k6Ojzo2whvXTTSVJYgJXpKtGOX2M74yXOvGteffV8DRkzPrQ>
-    <xmx:0WvuZzvGrk6phQ7aCPjEfaWRoZ5z5mwFS86tpQDxBfr53CesPFP0VQ>
-    <xmx:0mvuZ2Vt4t1zwjz1sOLhbgG2_bmjD1JvzON5cCwf1VK4q861yN13F3mk>
+    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofggtgfgsehtkeertdertdej
+    necuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoe
+    hmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucgg
+    tffrrghtthgvrhhnpeelkefhudelteelleelteetveeffeetffekteetjeehlefggeekle
+    eghefhtdehvdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhr
+    ohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpd
+    hnsggprhgtphhtthhopeefpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeigvghn
+    qdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhope
+    grnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtohepmhgr
+    rhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:xGvuZ_59mUAXsy7RIWJZlFJ-dJWxwiqEfvy03fo0uS3B83ogtEbm3A>
+    <xmx:xGvuZ36d-A6NrZx3CcvyoQSb3xvXerS-YIDYEDR1daSe8lmEN3D7Aw>
+    <xmx:xGvuZ_jeaLIvKPXTSh64dowAO5WlIurtl5AweY0FmuY88hbAQAaISw>
+    <xmx:xGvuZx5RNz62-UZoZvKXnWtlaAXzs8HVKEcTL_XLeJPVV1bB1s_moQ>
+    <xmx:xWvuZwVMieYau97ZYyoeSOeCbLu3sognyqqiWFcTaGzAbSnH7FWgenRZ>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 09/11] ci: adjust resolving network interface into PCI device
-Date: Thu,  3 Apr 2025 13:04:44 +0200
-Message-ID: <bc4788cfc6217be3b900e4ab4c019eb3b7e34f0a.1743678257.git-series.marmarek@invisiblethingslab.com>
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 00/11] Several CI cleanups and improvements, plus yet another new runner
+Date: Thu,  3 Apr 2025 13:04:35 +0200
+Message-ID: <cover.59b4d1e66776c1e577aa5dd5460605dc6c240613.1743678257.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.59b4d1e66776c1e577aa5dd5460605dc6c240613.1743678257.git-series.marmarek@invisiblethingslab.com>
-References: <cover.59b4d1e66776c1e577aa5dd5460605dc6c240613.1743678257.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Change how PCI device lookup is done to handle also USB devices, in
-which case get the USB controller. Instead of taking basename of the
-'device' symlink, resolve the full path (example:
-/sys/devices/pci0000:00/0000:00:09.0/usb4/4-7/4-7:1.0) and take the
-first part after pci0000:00. Theoretically it could be a bridge, but VM
-has flat PCI topology.
+Some of those patches are collected from my stubdomain test series, others are
+made while getting the new runner working. All of the cleanups can be applied
+independently, but most if not all are needed for the final patch adding new
+runner.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- automation/scripts/qubes-x86-64.sh | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+As usual, besides the patches, somebody need to click on "hal9012" runner in
+the relevant projects.
 
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 6d2c170d1ee1..dc8013750f5f 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -110,7 +110,8 @@ timeout 30s udhcpc -i \"\$interface\"
- pingip=\$(ip -o -4 r show default|cut -f 3 -d ' ')
- ping -c 10 \"\$pingip\"
- echo domU started
--pcidevice=\$(basename \$(readlink /sys/class/net/\$interface/device))
-+pcidevice=\$(realpath /sys/class/net/\$interface/device |
-+             sed 's#.*pci0000:00/\\([^/]*\\).*#\\1#')
- lspci -vs \$pcidevice
- "
-         if [ -n "$PCIDEV_INTR" ]; then
+Marek Marczykowski-Górecki (11):
+  ci: prevent grub unpacking initramfs
+  ci: increase timeout for hw tests
+  ci: enable XHCI console in Xen debug build on Alpine
+  ci: include domU kernel messages in the console output log
+  ci: increase verbosity of starting a domain
+  ci: consistently use DOCKER_CMD in makefiles
+  ci: wait for the network interface in PCI passthrough tests
+  ci: switch test kernel from 6.1.19 to 6.12.21
+  ci: adjust resolving network interface into PCI device
+  ci: add AMD Zen 4 HW runner
+  [DO NOT MERGE] container
+
+ automation/build/Makefile                            |  4 +-
+ automation/gitlab-ci/build.yaml                      |  5 +-
+ automation/gitlab-ci/test.yaml                       | 58 ++++++++++++-
+ automation/scripts/qemu-alpine-x86_64.sh             |  2 +-
+ automation/scripts/qemu-smoke-dom0-arm32.sh          |  2 +-
+ automation/scripts/qemu-smoke-dom0-arm64.sh          |  2 +-
+ automation/scripts/qubes-x86-64.sh                   | 14 +--
+ automation/tests-artifacts/Makefile                  |  4 +-
+ automation/tests-artifacts/kernel/6.1.19.dockerfile  | 41 +---------
+ automation/tests-artifacts/kernel/6.12.21.dockerfile | 43 ++++++++++-
+ 10 files changed, 119 insertions(+), 56 deletions(-)
+ delete mode 100644 automation/tests-artifacts/kernel/6.1.19.dockerfile
+ create mode 100644 automation/tests-artifacts/kernel/6.12.21.dockerfile
+
+base-commit: 35910ed65f1d188774ce90ba9898ca33f7a9fe4d
 -- 
 git-series 0.9.1
 
