@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A94C3601A
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 17:58:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.937030.1338105 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B5CC3600C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 18:23:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.937052.1338135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0Op8-0001Tl-HX; Thu, 03 Apr 2025 17:57:54 +0000
+	id 1u0PDm-0001QL-08; Thu, 03 Apr 2025 18:23:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 937030.1338105; Thu, 03 Apr 2025 17:57:54 +0000
+Received: by outflank-mailman (output) from mailman id 937052.1338135; Thu, 03 Apr 2025 18:23:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0Op8-0001Te-F1; Thu, 03 Apr 2025 17:57:54 +0000
-Received: by outflank-mailman (input) for mailman id 937030;
- Thu, 03 Apr 2025 17:57:53 +0000
+	id 1u0PDl-0001QB-TI; Thu, 03 Apr 2025 18:23:21 +0000
+Received: by outflank-mailman (input) for mailman id 937052;
+ Thu, 03 Apr 2025 18:23:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JbNy=WV=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u0Op7-0001TY-Q0
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 17:57:53 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 274ae536-10b5-11f0-9ffb-bf95429c2676;
- Thu, 03 Apr 2025 19:57:48 +0200 (CEST)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43cfe574976so8308105e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Apr 2025 10:57:48 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec16a3aefsm28059365e9.21.2025.04.03.10.57.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 10:57:46 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Em9L=WV=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1u0PDk-0001N1-6t
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 18:23:20 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b4e5688a-10b8-11f0-9ffb-bf95429c2676;
+ Thu, 03 Apr 2025 20:23:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,128 +38,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 274ae536-10b5-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1743703067; x=1744307867; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QMLfFfEVVO6Pdzym9UcJtEbdmrCa6bNJDvfvnZ9B4rs=;
-        b=jYDdcba7n6rKBREApevDsBg4hGk89e6bYmNHE35tiWq5T2QPkB4d0rhSD3uDBakRB5
-         Izb6oyjDnsPVaNJoc+uEFvbV1Ky9V6c6lUffcBLaJS/521Dh/4nmjCSfAxoZmun7S4wo
-         FiDGADVaMuccBBJN41Q1d1PTThUpIJ2L4alrY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743703067; x=1744307867;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QMLfFfEVVO6Pdzym9UcJtEbdmrCa6bNJDvfvnZ9B4rs=;
-        b=SdTIu/wNliK4BBp45Lk+/l1EwITn8bu6llY4Y7+EQ2FTRyhyZtorhn3g2YOo5oCBU1
-         Ixxe95z6S7JU9MRaOMEhsA9IuACRfmIf3HClYMXMvjVUq7FmRCieS9YBvPaL3cXPD0XI
-         Hnp6BMRQbUU4oUrOqmz3njFfU7osnlgSTnVVR6RxsQ2UWmSDQAwpTVUmCvDj20UTa7Jm
-         qHKgp8JCYNNWdtZGeFuk0CQ6SW/o0XXlsXiFhFQ38WpQZVEpiPfKjme9wh8Y31rMAHje
-         YGsDcGwQqtLRJ0VR3PB8hFF+6RedoHOnut8/OJMtWLe1dBU0naoW9iUOPvRsS+ns7Ykd
-         corg==
-X-Gm-Message-State: AOJu0YzZVAqMTFtX3MiBn7guaUcmrxRDI6gV6QxHL/fpShNJNDrH9jnM
-	N0upu0sBdNHRAG664p6kjahbyz5OpWgErqE84P90FgoBU2cpgM9k1D2s6snlB7IoWXTMFlLDqw/
-	s7gg=
-X-Gm-Gg: ASbGncuk14rruRzT8EHaizpUeo+cQjJW27xzrwQFTnU6xpuRCbEnG7rgr7cCcYjsLZa
-	dVitqWqCf0GJvEjZLtjgqf+0mbv6zgXNJTZBNjEqrCMgJJFbrZNYBKQLaauRqNEIoDOQS/J6Ro3
-	Es8VbvJP3ljZT0uqzmjYYOYC7+0XrADfC4AaqJsWAdTgJPKoPXA3FNGF7kZZvC0hWya6EsdQlS5
-	PafxIE5tTKuffa9iikZOnHb1LX0Xt71PgaMy49qzZPsTUZFB1UpzzK8GxGYw5h+Zda7R3oGRnOP
-	ZS3D0jLUEfCMSKnHzC+TjaT/qf/B/DbdQC0IfWRJmeM21DWcNyXhA24i97oQk6/6YoF8VsVXCVU
-	5UQ1QuTX2JwNkvsZPQw==
-X-Google-Smtp-Source: AGHT+IGfwMp+56Qs1OEYK4UnorKSjvuglUgtfooOg4rsz6ozzUVwuSjlcQgNtunhGdOYmxeFSyNEdw==
-X-Received: by 2002:a05:600c:348b:b0:43b:b756:f0a9 with SMTP id 5b1f17b1804b1-43ecf85dd6bmr663715e9.11.1743703067501;
-        Thu, 03 Apr 2025 10:57:47 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH] x86/amd: Convert wrmsr_amd_safe() to use asm goto()
-Date: Thu,  3 Apr 2025 18:57:44 +0100
-Message-Id: <20250403175744.1538469-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: b4e5688a-10b8-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1743704593; x=1743963793;
+	bh=DAdmSxgvTyBN49WAdVm4Ym611V3JMucvy190nmerm+Q=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=Ht7/I1mJ/Y7K0M92SngQbabwHstOiBsqvjCe57WBxgMmdCKeNE6BfGqVyHeOVfAcK
+	 5XruK6qxcqnEwUtVT1xp759lPbE/m7y3TYxp6U/m9annLLuNvulyUTLOdLOU1Z0NUW
+	 f5dYdnoCkFX5Ch8HDdvU12NEyTD7WzyBRv4OeeR2Fz8VnO4xzwRNj6jOLfv4U8V7Kk
+	 iY4zALiVDHmkPhiwAcXmtb/ThtSFmu61wUna7WW/sDZT7JlPdlHD1yD0GGChDuzNE3
+	 Qixfkv+/26+TFS4lp6j8j2yKxlOa13xtNSUM3CJAN+3nGWfyTWL9B11v2z9ek7fsag
+	 sS4OGBBnFuxEA==
+Date: Thu, 03 Apr 2025 18:23:09 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v2 2/6] x86/msr: remove HAVE_AS_FSGSBASE
+Message-ID: <20250403182250.3329498-3-dmukhin@ford.com>
+In-Reply-To: <20250403182250.3329498-1-dmukhin@ford.com>
+References: <20250403182250.3329498-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: f6e30f0fc17d05541119b496f78e8cadb4330eed
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Bloat-o-meter reports:
+From: Denis Mukhin <dmukhin@ford.com>
 
-  add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-29 (-29)
-  Function                                     old     new   delta
-  _probe_mask_msr                               99      94      -5
-  init_amd                                    2418    2394     -24
+The new toolchain baseline knows the {rd,wr}{f,g}sbase instructions,
+no need to carry the workaround in the code.
 
-but that's because .fixup doesn't contain sized/typed symbols.  This also
-drops two "mov -EFAULT, %reg; jmp ...;" sequences too.  The net saving is -50.
-
-wrmsr_amd_safe()'s return value is only checked against 0 (if at all), and
-because of this, the compiler can now avoid manifesting 0/-EFAULT entirely,
-and the %[fault] label simply lands on the right basic block.
-
-Convert to Xen style while rewriting.
-
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Resolves: https://gitlab.com/xen-project/xen/-/work_items/207
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+ xen/arch/x86/arch.mk           |  1 -
+ xen/arch/x86/include/asm/msr.h | 22 ----------------------
+ 2 files changed, 23 deletions(-)
 
-Slightly RFC.  We use -EIO elsewhere for this purpose, and nothing in this
-logic cares.
-
-I was pleasently surprised by the manifestation of -EFAULT going away
-entirely.  I expect converting wrmsr_safe() is going to be far greater win.
-
-Converting rdmsr_amd_safe() (and friends) is going to be much harder, because
-they have outputs, which GCCs before this year cannot do safely (there was a
-serious bug, found and backported).
-
-I think I'm going to port Linux's CC_HAS_ASM_GOTO_OUTPUT infrastructure, so we
-can at least provide a better wrapper on new-enough toolchains.
----
- xen/arch/x86/cpu/amd.c | 22 ++++++++++------------
- 1 file changed, 10 insertions(+), 12 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 597b0f073d55..ce4e1df71064 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -74,21 +74,19 @@ static inline int rdmsr_amd_safe(unsigned int msr, unsigned int *lo,
- }
- 
- static inline int wrmsr_amd_safe(unsigned int msr, unsigned int lo,
--				 unsigned int hi)
-+                                 unsigned int hi)
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index e9fa1c92d7..6d2876b1a8 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -12,7 +12,6 @@ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ $(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+ $(call as-option-add,CFLAGS,CC,"crc32 %eax$(comma)%eax",-DHAVE_AS_SSE4_2)
+ $(call as-option-add,CFLAGS,CC,"rdrand %eax",-DHAVE_AS_RDRAND)
+-$(call as-option-add,CFLAGS,CC,"rdfsbase %rax",-DHAVE_AS_FSGSBASE)
+ $(call as-option-add,CFLAGS,CC,"xsaveopt (%rax)",-DHAVE_AS_XSAVEOPT)
+ $(call as-option-add,CFLAGS,CC,"rdseed %eax",-DHAVE_AS_RDSEED)
+ $(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
+diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.=
+h
+index 549d40b404..0d3b1d6374 100644
+--- a/xen/arch/x86/include/asm/msr.h
++++ b/xen/arch/x86/include/asm/msr.h
+@@ -152,11 +152,7 @@ static inline unsigned long __rdfsbase(void)
  {
--	int err;
-+    asm goto ( "1: wrmsr\n\t"
-+               _ASM_EXTABLE(1b, %l[fault])
-+               :
-+               : "c" (msr), "a" (lo), "d" (hi), "D" (0x9c5a203a)
-+               :
-+               : fault );
- 
--	asm volatile("1: wrmsr\n2:\n"
--		     ".section .fixup,\"ax\"\n"
--		     "3: movl %6,%0\n"
--		     "   jmp 2b\n"
--		     ".previous\n"
--		     _ASM_EXTABLE(1b, 3b)
--		     : "=r" (err)
--		     : "c" (msr), "a" (lo), "d" (hi), "D" (0x9c5a203a),
--		       "0" (0), "i" (-EFAULT));
-+    return 0;
- 
--	return err;
-+ fault:
-+    return -EFAULT;
+     unsigned long base;
+=20
+-#ifdef HAVE_AS_FSGSBASE
+     asm volatile ( "rdfsbase %0" : "=3Dr" (base) );
+-#else
+-    asm volatile ( ".byte 0xf3, 0x48, 0x0f, 0xae, 0xc0" : "=3Da" (base) );
+-#endif
+=20
+     return base;
  }
- 
- static void wrmsr_amd(unsigned int msr, uint64_t val)
--- 
-2.39.5
+@@ -165,31 +161,19 @@ static inline unsigned long __rdgsbase(void)
+ {
+     unsigned long base;
+=20
+-#ifdef HAVE_AS_FSGSBASE
+     asm volatile ( "rdgsbase %0" : "=3Dr" (base) );
+-#else
+-    asm volatile ( ".byte 0xf3, 0x48, 0x0f, 0xae, 0xc8" : "=3Da" (base) );
+-#endif
+=20
+     return base;
+ }
+=20
+ static inline void __wrfsbase(unsigned long base)
+ {
+-#ifdef HAVE_AS_FSGSBASE
+     asm volatile ( "wrfsbase %0" :: "r" (base) );
+-#else
+-    asm volatile ( ".byte 0xf3, 0x48, 0x0f, 0xae, 0xd0" :: "a" (base) );
+-#endif
+ }
+=20
+ static inline void __wrgsbase(unsigned long base)
+ {
+-#ifdef HAVE_AS_FSGSBASE
+     asm volatile ( "wrgsbase %0" :: "r" (base) );
+-#else
+-    asm volatile ( ".byte 0xf3, 0x48, 0x0f, 0xae, 0xd8" :: "a" (base) );
+-#endif
+ }
+=20
+ static inline unsigned long read_fs_base(void)
+@@ -253,15 +237,9 @@ static inline void write_gs_shadow(unsigned long base)
+     if ( read_cr4() & X86_CR4_FSGSBASE )
+     {
+         asm volatile ( "swapgs\n\t"
+-#ifdef HAVE_AS_FSGSBASE
+                        "wrgsbase %0\n\t"
+                        "swapgs"
+                        :: "r" (base) );
+-#else
+-                       ".byte 0xf3, 0x48, 0x0f, 0xae, 0xd8\n\t"
+-                       "swapgs"
+-                       :: "a" (base) );
+-#endif
+     }
+     else
+         wrmsrl(MSR_SHADOW_GS_BASE, base);
+--=20
+2.34.1
+
 
 
