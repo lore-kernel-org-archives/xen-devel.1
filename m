@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D01DC3601B
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 21:46:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.937344.1338384 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15936C36014
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 21:46:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.937342.1338368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0SOH-0001KP-PD; Thu, 03 Apr 2025 21:46:25 +0000
+	id 1u0SOG-00012k-4Z; Thu, 03 Apr 2025 21:46:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 937344.1338384; Thu, 03 Apr 2025 21:46:25 +0000
+Received: by outflank-mailman (output) from mailman id 937342.1338368; Thu, 03 Apr 2025 21:46:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0SOH-0001JN-G8; Thu, 03 Apr 2025 21:46:25 +0000
-Received: by outflank-mailman (input) for mailman id 937344;
- Thu, 03 Apr 2025 21:46:23 +0000
+	id 1u0SOG-00012d-1G; Thu, 03 Apr 2025 21:46:24 +0000
+Received: by outflank-mailman (input) for mailman id 937342;
+ Thu, 03 Apr 2025 21:46:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GOX3=WV=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1u0SOF-0000LK-TR
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 21:46:23 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20601.outbound.protection.outlook.com
- [2a01:111:f403:2413::601])
+ id 1u0SOE-0000LK-ET
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 21:46:22 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20615.outbound.protection.outlook.com
+ [2a01:111:f403:2409::615])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 147d7775-10d5-11f0-9eaa-5ba50f476ded;
- Thu, 03 Apr 2025 23:46:23 +0200 (CEST)
-Received: from DM5PR07CA0083.namprd07.prod.outlook.com (2603:10b6:4:ad::48) by
- MN2PR12MB4317.namprd12.prod.outlook.com (2603:10b6:208:1d0::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8583.42; Thu, 3 Apr
- 2025 21:46:17 +0000
-Received: from CY4PEPF0000EE33.namprd05.prod.outlook.com
- (2603:10b6:4:ad:cafe::9a) by DM5PR07CA0083.outlook.office365.com
- (2603:10b6:4:ad::48) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.26 via Frontend Transport; Thu,
- 3 Apr 2025 21:46:17 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE33.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ id 13887f1b-10d5-11f0-9eaa-5ba50f476ded;
+ Thu, 03 Apr 2025 23:46:20 +0200 (CEST)
+Received: from BN9PR03CA0975.namprd03.prod.outlook.com (2603:10b6:408:109::20)
+ by CH2PR12MB4040.namprd12.prod.outlook.com (2603:10b6:610:ac::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.50; Thu, 3 Apr
+ 2025 21:46:12 +0000
+Received: from BN1PEPF0000468D.namprd05.prod.outlook.com
+ (2603:10b6:408:109:cafe::7d) by BN9PR03CA0975.outlook.office365.com
+ (2603:10b6:408:109::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.25 via Frontend Transport; Thu,
+ 3 Apr 2025 21:46:12 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF0000468D.mail.protection.outlook.com (10.167.243.138) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:46:16 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:46:12 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 3 Apr
- 2025 16:46:15 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 3 Apr
- 2025 16:46:15 -0500
+ 2025 16:46:11 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 3 Apr 2025 16:46:14 -0500
+ Transport; Thu, 3 Apr 2025 16:46:10 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,194 +61,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 147d7775-10d5-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: 13887f1b-10d5-11f0-9eaa-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bi3TKmb2ZVV0gFmmBE++K8J38yYMqI/4A1nNKq/CtknxNOjWVzvyuCDKE21mj3qpqOmqoh8zfK7S+XKmCuXkHkjZo5BtZOdam51cnJjl/OdjS9/SMmViKF9MHOCor5u8xsJSUWu3vqGI+QfL4/ELTD0L25Lf0jA22aRa2i1ahaP/40DlCr8xkllRZ4C6zelSvuOeRMlXl8xZXM2xoKTUXlB/FsHCL35Z0jlsapoNSW6mIrZF6o0cSpr9jR9QzbU/guPI8nros7lGhIRnND5nlcXOHx9GeZX+FxiLPtKLpUF3+pnaKIdwkAEVmlra+UEWOSuRSSSF6BzjXtPMVAbJLQ==
+ b=uHC64li2N7s842xsH/lbTDyHbbIz55gm6oYoaeZbJmwl6nm/1DGysckuF7Htr8etaSqN8hZNPjVPMI81A5JAXheXJht087QbkwLwpDLCo8nz9b/Yd8I0iO/Ku7+85cjJXRg7//QCz0CZ0AywX+cP2TxOdwbwzGQVaPZGT+TU1uMhETYjczchQlUB/QUX9LuvnJU4c4JFPjmWVb0IWeclvhA91b7bWtNS19FepRMfCDS4+9DpLN79E+gUm6lkwWZPC63BqX8BD9WfWANkY/8widvYvgn6cXAhnd6YoA8pwGLym0DMRpnsCakPhJ+sF5FILW3dmJ0XCPASpyZw4lIvPA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bDZ6ycYxk9xxKPtvyYcRGvn928vyhygmCRK5DaBoq88=;
- b=D19CGhBMBslc4yAWUZrFnxa2rzFAROdj3mULwjdvSNR5YgmMMEN93rGOLVzG6Iavm6tesrExZgeOAUJ1mHW+4Pn9qrbMv3q3pml0Nw5DD0pEYTiyJIrDKggrUNM5TWxsU2OTD34TKliXkyawMJbcX1UZIj/BCCewZ16h4tMIHC7ew/2NTAYpznb7np/XLQuDKfpeejGaxiUH21EwlMhHoSDRXLsba7YDLvf8tPqswX1xwaJEbQgUCLg6S31Md6iyALVTWY7q3bh1IKZJ73T6nQsXBs9Vcj00dcYjMO6bRM3K1nrCdzelQfWG8+ezUivmWN8ex+MT4epKUmwBOZQSmw==
+ bh=XQHFzDKnNDGytpctVWKmIThcFF4nssmMh+JtL5p8sGY=;
+ b=P0XbcjGVXtmzs00eMWKThYxeySUVYVT3r07Ew/kTXZYIRPf2MqyUuH5L9rPEtI77eWZyIyAk/o7sVdqlB6aO4EvVCWBpe0DTfK77AgSQio8O5wvQVNwR8hPAYPmimb9H5tH+iO0CIQhvxdxjNCLD3gRLTOs7cSmEmsuL7L/aD6SbKf3fnI8BbtIFevpVKMEhJZtWpGOSqYpyO0S3WXK9FlTnsDJLCLawALYEaFZ3/Q49rB1x9WY2Si3304wKpVovMDI2hXlQe18t/0BqQ1+uq2OJhmomalVHCVeEBAEWIOoYmfy4qAX3mXjgHX6NNKEXseWPXdskNoAdQp/z831ONA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bDZ6ycYxk9xxKPtvyYcRGvn928vyhygmCRK5DaBoq88=;
- b=TIS/TqpXqQiarBZ9GnCYzPUMmytz0FW5r8e9uN6aRuI8toZY3Wp7sXpmtSs39PznYemS2Wj+LQc/sj1213W0JPVEmG1q/CZr0wNK3QUCFKmNLdFW0OEQfr5ClbyiQH1V7HnZvugcScOpyASsw9LmyIT2BDUBn7eEn/G5wQwWnCg=
+ bh=XQHFzDKnNDGytpctVWKmIThcFF4nssmMh+JtL5p8sGY=;
+ b=b5yleN2PIgXfP/oNEhEUa3UikGEOqq4GbD6cFvwlX+VgBtdWa6h6Qd4lHFGIIg2a6J/5GpA2jXq7QViQLCjahFv7Y07J0zw9UCpdCBIjxjJv26Bj/rAHMlNRjdAsD2OEFEdr68MdXAFajdvAszVo7VEfPsX7q5tXvbaHL4h+QUM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Stefano Stabellini
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
  Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
  Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>
-Subject: [PATCH v3 4/7] xen/arm: dom0less seed xenstore grant table entry
-Date: Thu, 3 Apr 2025 17:46:05 -0400
-Message-ID: <20250403214608.152954-5-jason.andryuk@amd.com>
+	<roger.pau@citrix.com>, Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH v3 1/7] xen: introduce hardware domain create flag
+Date: Thu, 3 Apr 2025 17:46:02 -0400
+Message-ID: <20250403214608.152954-2-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250403214608.152954-1-jason.andryuk@amd.com>
 References: <20250403214608.152954-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE33:EE_|MN2PR12MB4317:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6f45ce8e-6443-4fbb-6f18-08dd72f8f67d
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468D:EE_|CH2PR12MB4040:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6e5f4112-6fb5-4a54-fef1-08dd72f8f3ba
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
+	BCL:0;ARA:13230040|376014|36860700013|7416014|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?+QVFhIc8y6KHLo9MkDExt5onxisWyr5FiSgy9P1rB7fmD6lHNeFMNjKKVnxc?=
- =?us-ascii?Q?eUY0OhmG/slu3Niz1stgCmufBmUALHDli8vT6W/JH4nUguhwoLPvTn3Z0inX?=
- =?us-ascii?Q?RJtLLVqjAAUDX1DDTFFnGlo9IlFPvFkTW9mzhyD08Z2QtufjdE8SdTyKxIzs?=
- =?us-ascii?Q?369Le7lBTtSY39iJX+2XOkU8eQcs3VhA+P+Xv+ycw/p6tPcS2B3eLkCwEo+b?=
- =?us-ascii?Q?+47u6Xil3PQCG4S7sKQXLcDyTkIyOjk3dk3uExiYvkkikXiRRoSzFwczuQNE?=
- =?us-ascii?Q?kaeIXiy5Kn5FscTz+wYl6BvNpmLsdbSP9//A+ny5LktxeiP83J1tc2nMSxD4?=
- =?us-ascii?Q?A9FXvEikleu5Kr60BG13btgUXDahwMG0ZihvvQaHuKz6DxXlhKwTEA9w5V+Z?=
- =?us-ascii?Q?cmwePP0lcHtp7uBuqLNVwUEldZCP/o5TTAAw/lGNp2CxXvaKEP8y7smBwLHv?=
- =?us-ascii?Q?topAs9W8WE2qu5V1eienBIrVQJWeduHdsYYIThRBPAqecDvUh4ER76OVwFeY?=
- =?us-ascii?Q?pKZY9Y85831ZLtPPEnuKozVGB5bFKQzPqVdINaBRWzsRDiCXMlrQU4lGvbKx?=
- =?us-ascii?Q?pu/40Snfx6K1FlwQx0DAdaom06dQyj6u0hoiZvVROMzDV/Ne98IDHasZXDjl?=
- =?us-ascii?Q?xGHBos40TOgaGU3XtEEXgVQsorXYvuqBJqknldxbRVMTS1jAqnHtXYy4fsVW?=
- =?us-ascii?Q?/zL77lJ3Lu4CCimY8f0IVDC6dSDfAPjiWCWgmAThFuGahegLyPYAgU4YrSvb?=
- =?us-ascii?Q?c93O8i8NlTb5zFE2MliCdAuNOxbLxlVBlqU/0EMHm/xQjXKKu2BpKYvAdA5P?=
- =?us-ascii?Q?d2lbgn4fDX/i1RG0NZfbnHwNSLSOOvDt7uHeMDSkpzVau8GrdHJzAt4hKQ30?=
- =?us-ascii?Q?+KFNRaSu/dFQ6mENeryojYbigi0eehjXlCyyz6S9YmudRdTTXaiWeiqnytG3?=
- =?us-ascii?Q?hdAfj1QI1LDJjAIE11D4tyyt6XY0mcD5UXHYa2Kk+/4/qs5nbLN4ZDHQkpB/?=
- =?us-ascii?Q?Z1XNgn008hD4x6qR9ES3rcXU7iZ+0qO7hYMb4romjaqFabwVr5sGLiX2y6MG?=
- =?us-ascii?Q?mT2dLiFnIWyvyr5dcy1N1hSfZkuqd5h+2HSyd6xOX+QH2YQxJAKWUncSjTkI?=
- =?us-ascii?Q?q0pIoKf7nj6JJcbIcvVHZnqC2bwJYunNkYxTKCvPlNL02KC9zYESxV6Upqoq?=
- =?us-ascii?Q?lMsijYZxe29FgTATbI0e0z3EdR41e74QoHDHktSpq0/Mr9ca1zlfJU+TMQJC?=
- =?us-ascii?Q?GWEePRv/Auwz7ZBNi1/QfZr90R6z85Wp2ZqVmOOKLoFv/8V3s6hL+85GPxkY?=
- =?us-ascii?Q?WkE69ZEa+SQIits4uqJKxy4wmLU53Cj/4L1WIBeEfepIDCJh5fYCUdcu+irM?=
- =?us-ascii?Q?r/xPBuQhQBOZLglMqa96mt6J0OcX2LXuZKxAFaOBa9YG8d+U8oayqylN3pTr?=
- =?us-ascii?Q?GJjwNeANLRmRJKu8O22MgM9kGmTOu+1TdWZ/npeDGcwa2OaJ2VoTbokgYo+S?=
- =?us-ascii?Q?Omk3GaHwbEnJzI4=3D?=
+	=?us-ascii?Q?+raaxEOxIh3uGbT2FD2VIPon+vOmGhEcSD0dhi0EQ7gnSiFG/YXgkPSX1WZB?=
+ =?us-ascii?Q?dDffEyCULEJbCwUCzpTtsqYnFi/c5q3cf6J/9+7W/Gc5J70LO+4dLyWNvgnY?=
+ =?us-ascii?Q?JDTUdnyASH0L4RAtikQBiJEUJFw7BWPGywkcPLgfucsj+qA673DEnDF3V+Bv?=
+ =?us-ascii?Q?GbF2EpEPTUZBMZzbEH+X5dLLAppA+L8sutwXcHxsYk+k8d9YNXeuzRQgQ4hZ?=
+ =?us-ascii?Q?GmGjQxvdvoWs9NMGYA13ouoOTHCKAr/nKq5QeuD8vLdkChDXwlSOt9cs6DsU?=
+ =?us-ascii?Q?IxmekKHaMGBLMqregqIIIJge8w6N3KcJ8q8S+0Cbfxw2fZP6Q/EeFdLJjPNv?=
+ =?us-ascii?Q?0YlLmkIkoqLmuSJxQ3nFT9bbm8cn3gEnZ8XgnzPzi9f1lyfO1HHbFxpsNT3P?=
+ =?us-ascii?Q?FejzsgdyP3NW4YervMP6iTQlXiQlNdiyPg4Tgj9wlmScT6r6fal66ewXtjVA?=
+ =?us-ascii?Q?KkPj/MgOI4Cd8LSyrSo+ambnF7BqazwILDjX4j4VMYGyHtHjNoTA3fl+DUsw?=
+ =?us-ascii?Q?fKab9NqPcdF/XgT/RaOacO+sV5fVukUB1tASSiIIY9g9Ywsj3xuGN7mhHcA5?=
+ =?us-ascii?Q?4Ua0GpqiyQwbKTU+Rh8ZYlgHkJjqK9OsqovfuTlOc+5MK0Q4YDtyZP8l/7cM?=
+ =?us-ascii?Q?vrn20VQiz0w3gp0DZdMIqH4ldAI5+oG1pVHt0EHoC58zpCc4JZvXy9ItSQOi?=
+ =?us-ascii?Q?igD19ZKes2gpAjbJKIQ99fXbXo2LDk87UacQo5/Xjkx5SFUWR8Asl+8yjT/b?=
+ =?us-ascii?Q?MIbyXXg7pLrpevSG1ztkSvRpwZ6r8RZeekEsEfYAa0MLtv/ip0rfBU59c4Q5?=
+ =?us-ascii?Q?H70B9aeHitoOVHo0Ezb8Gt2zWsHuPxE4Iz8zHR91ie64R5gxda32CF/s+Lw3?=
+ =?us-ascii?Q?vT4+GcVzAPoQVzSrQwSVykCBs3lt2LuQByPgODgMAd8/mFPeoJEpReIPl/vs?=
+ =?us-ascii?Q?S6QtDvQYteUrKytfAMB5Jtdij5/sbQLk8HCcvwwSefmTq69Bj3Bd85FM3TOA?=
+ =?us-ascii?Q?/gmhFZB5CNWBZgIa5xvY2+7csvZDYfza7eaXvhJ6AP+VCLcQAOk/69osPZYb?=
+ =?us-ascii?Q?zNU5RwHE4daqw3czLYOl45p7YbYvXCKMHEHNHA4oRuT2IEtK5PcVuJQtKJqp?=
+ =?us-ascii?Q?Ufnhiki+Ku4FvUB5XWNmynycM5xd0DHirNYb7AanIv/yKIcpvhxVcTRLqD7U?=
+ =?us-ascii?Q?kZdgG8xemEAwtuTr123t/5bbFiyRSrXU9g79P8hCEAmwEwABdZGyZ5VuV1S1?=
+ =?us-ascii?Q?d6XH2FInCarjYlGszs2f4Vv5qGrzU70iqKEIRK/Taz6y32jnyr0Ef4uzZdzs?=
+ =?us-ascii?Q?Vu5r6i8971v6iUaesRja4D/c4R6XJgQDhvt0AzblyRQETs4rGMryY1iK5d/9?=
+ =?us-ascii?Q?UcrT/3Qs8Tx6gckXB7Ef+dNkCRvMT3nnLdiJ35AT4wPbPhz58+FDVncQ2c3S?=
+ =?us-ascii?Q?wTuxLwGVDxQzMy6sngv/fHncJnT2gp/UMb6/TyqvY1YU2N5zZeUVjw=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(7416014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:46:16.7631
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:46:12.2637
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f45ce8e-6443-4fbb-6f18-08dd72f8f67d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6e5f4112-6fb5-4a54-fef1-08dd72f8f3ba
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE33.namprd05.prod.outlook.com
+	BN1PEPF0000468D.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4317
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4040
 
-xenstored maps other domains' xenstore pages.  Currently this relies on
-init-dom0less or xl to seed the grants from Dom0.  With split
-hardware/control/xenstore domains, this is problematic since we don't
-want the hardware domain to be able to map other domains' resources
-without their permission.  Instead have the hypervisor seed the grant
-table entry for every dom0less domain.  The grant is then accessible as
-normal.
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-C xenstored uses grants, so it can map the xenstore pages from a
-non-dom0 xenstore domain.  OCaml xenstored uses foreign mappings, so it
-can only run from a privileged domain (dom0).
+Add and use a new internal create domain flag to specify the hardware
+domain.  This removes the hardcoding of domid 0 as the hardware domain.
 
+This allows more flexibility with domain creation.
+
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 v3:
-Expand commit message about C vs. OCaml xenstored.
-Remove __init and flags from gnttab_seed_entry()
-Change frame to uint32_t
-ASSERT gfn fits in a uint32_t
-Rebase on mem paging changes
+Or-in CDF_hardware for late hwdom case
+Add Jan's R-b
 
 v2:
-Tweak commit message
-Mark gnttab_seed_entry() __init and put inside CONFIG_DOM0LESS_BOOT
-Add ASSERT(!d->creation_finished) and ASSERT(gt->gt_version == 1);
-const struct domain & struct grant_table
+() around binary &
+Only allow late_hwdom for dom0
 ---
- xen/arch/arm/dom0less-build.c |  6 ++++++
- xen/common/grant_table.c      | 14 ++++++++++++++
- xen/include/xen/grant_table.h |  7 +++++++
- 3 files changed, 27 insertions(+)
+ xen/arch/arm/domain_build.c | 2 +-
+ xen/arch/x86/setup.c        | 3 ++-
+ xen/common/domain.c         | 7 ++++++-
+ xen/include/xen/domain.h    | 2 ++
+ 4 files changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index bb8cc3be43..284190d54f 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -788,6 +788,12 @@ static void __init initialize_domU_xenstore(void)
-         rc = alloc_xenstore_evtchn(d);
-         if ( rc < 0 )
-             panic("%pd: Failed to allocate xenstore_evtchn\n", d);
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 634333cdde..b8f282ff10 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2369,7 +2369,7 @@ void __init create_dom0(void)
+         .max_maptrack_frames = -1,
+         .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
+     };
+-    unsigned int flags = CDF_privileged;
++    unsigned int flags = CDF_privileged | CDF_hardware;
+     int rc;
+ 
+     /* The vGIC for DOM0 is exactly emulating the hardware GIC */
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index d70abb7e0c..67d399c469 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1018,7 +1018,8 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+ 
+     /* Create initial domain.  Not d0 for pvshim. */
+     domid = get_initial_domain_id();
+-    d = domain_create(domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
++    d = domain_create(domid, &dom0_cfg,
++                      pv_shim ? 0 : CDF_privileged | CDF_hardware);
+     if ( IS_ERR(d) )
+         panic("Error creating d%u: %ld\n", domid, PTR_ERR(d));
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 585fd726a9..da74f815f4 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -820,13 +820,18 @@ struct domain *domain_create(domid_t domid,
+     d->is_privileged = flags & CDF_privileged;
+ 
+     /* Sort out our idea of is_hardware_domain(). */
+-    if ( domid == 0 || domid == hardware_domid )
++    if ( (flags & CDF_hardware) || domid == hardware_domid )
+     {
+         if ( hardware_domid < 0 || hardware_domid >= DOMID_FIRST_RESERVED )
+             panic("The value of hardware_dom must be a valid domain ID\n");
+ 
++        /* late_hwdom is only allowed for dom0. */
++        if ( hardware_domain && hardware_domain->domain_id )
++            return ERR_PTR(-EINVAL);
 +
-+        if ( gfn != ~0ULL )
-+        {
-+            ASSERT(gfn <= UINT_MAX);
-+            gnttab_seed_entry(d, GNTTAB_RESERVED_XENSTORE, xs_domid, gfn);
-+        }
+         old_hwdom = hardware_domain;
+         hardware_domain = d;
++        flags |= CDF_hardware;
      }
- }
  
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 6c77867f8c..e75ff98aff 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -4346,6 +4346,20 @@ static void gnttab_usage_print(struct domain *rd)
-         printk("no active grant table entries\n");
- }
+     TRACE_TIME(TRC_DOM0_DOM_ADD, d->domain_id);
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index a34daa7d10..e10baf2615 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -53,6 +53,8 @@ domid_t get_initial_domain_id(void);
+ #else
+ #define CDF_staticmem            0
+ #endif
++/* This is the hardware domain.  Only 1 allowed. */
++#define CDF_hardware             (1U << 3)
  
-+#ifdef CONFIG_DOM0LESS_BOOT
-+void __init gnttab_seed_entry(const struct domain *d, unsigned int idx,
-+                              domid_t be_domid, uint32_t frame)
-+{
-+    const struct grant_table *gt = d->grant_table;
-+
-+    ASSERT(!d->creation_finished);
-+    ASSERT(gt->gt_version == 1);
-+    shared_entry_v1(gt, idx).flags = GTF_permit_access;
-+    shared_entry_v1(gt, idx).domid = be_domid;
-+    shared_entry_v1(gt, idx).frame = frame;
-+}
-+#endif
-+
- static void cf_check gnttab_usage_print_all(unsigned char key)
- {
-     struct domain *d;
-diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
-index 50edfecfb6..936a52ff10 100644
---- a/xen/include/xen/grant_table.h
-+++ b/xen/include/xen/grant_table.h
-@@ -45,6 +45,10 @@ void grant_table_destroy(
-     struct domain *d);
- void grant_table_init_vcpu(struct vcpu *v);
- 
-+/* Seed a gnttab entry for Hyperlaunch/dom0less. */
-+void gnttab_seed_entry(const struct domain *d, unsigned int idx,
-+                       domid_t be_domid, uint32_t frame);
-+
- /*
-  * Check if domain has active grants and log first 10 of them.
-  */
-@@ -85,6 +89,9 @@ static inline void grant_table_destroy(struct domain *d) {}
- 
- static inline void grant_table_init_vcpu(struct vcpu *v) {}
- 
-+static inline void gnttab_seed_entry(struct domain *d, int idx,
-+                                     domid_t be_domid, uint32_t frame) {}
-+
- static inline void grant_table_warn_active_grants(struct domain *d) {}
- 
- static inline int gnttab_release_mappings(struct domain *d) { return 0; }
+ #define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+ #define is_domain_using_staticmem(d) ((d)->cdf & CDF_staticmem)
 -- 
 2.49.0
 
