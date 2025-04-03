@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0778C3601B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1232EC369A2
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 11:07:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.936477.1337730 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.936474.1337714 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0IPQ-0005iI-1n; Thu, 03 Apr 2025 11:06:56 +0000
+	id 1u0IPP-0005SN-0r; Thu, 03 Apr 2025 11:06:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 936477.1337730; Thu, 03 Apr 2025 11:06:55 +0000
+Received: by outflank-mailman (output) from mailman id 936474.1337714; Thu, 03 Apr 2025 11:06:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0IPP-0005fN-QQ; Thu, 03 Apr 2025 11:06:55 +0000
-Received: by outflank-mailman (input) for mailman id 936477;
- Thu, 03 Apr 2025 11:06:55 +0000
+	id 1u0IPO-0005SE-US; Thu, 03 Apr 2025 11:06:54 +0000
+Received: by outflank-mailman (input) for mailman id 936474;
+ Thu, 03 Apr 2025 11:06:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X4pi=WV=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u0IPP-0005Qy-0o
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 11:06:55 +0000
-Received: from fout-a5-smtp.messagingengine.com
- (fout-a5-smtp.messagingengine.com [103.168.172.148])
+ id 1u0IPN-0005Qy-Q9
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 11:06:53 +0000
+Received: from fhigh-a8-smtp.messagingengine.com
+ (fhigh-a8-smtp.messagingengine.com [103.168.172.159])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id be8a615c-107b-11f0-9ffb-bf95429c2676;
- Thu, 03 Apr 2025 13:06:52 +0200 (CEST)
-Received: from phl-compute-01.internal (phl-compute-01.phl.internal
- [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id 056C613801CB;
- Thu,  3 Apr 2025 07:06:51 -0400 (EDT)
+ id bcb955e4-107b-11f0-9ffb-bf95429c2676;
+ Thu, 03 Apr 2025 13:06:48 +0200 (CEST)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 05F62114028B;
+ Thu,  3 Apr 2025 07:06:48 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Thu, 03 Apr 2025 07:06:51 -0400
+ by phl-compute-12.internal (MEProxy); Thu, 03 Apr 2025 07:06:48 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 3 Apr 2025 07:06:49 -0400 (EDT)
+ 3 Apr 2025 07:06:46 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be8a615c-107b-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: bcb955e4-107b-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1743678411; x=1743764811; bh=CG3r5e95Ow
-	X8jqQD81Gk2i2+rrH9WMNFIvnRfMaYPhM=; b=UkUJYwB6XZ3wti06ChW1j3lX3b
-	zaVgy+WhVt6eVzuNHpgIXer3+/f4uiy6O0TtrSQ0GLeANu5bPljHfU0mFu4xN7kP
-	dsec6Q11zbUpI/m9CpSgaGlPkBQCgdOep63HDvqaADP/YTEr3QL8y/zvObzWo4UR
-	n/uj2gyb+rMNFQrPJUCEj/VR1x9TV/ej3+H0qXEt3I9PycLW+j9s1yiPNW/pPf6D
-	IPV6m74JURYINk7L9wMZbACXyv5Df2iOy266deSGeacyyKKsVGpNFTLkLICHyydP
-	fNN4PqymoTrfAqbKZXvRMON+4ZD/Nd55jxp1FGPSQBmDe1mPZ5jE8XOn/OzQ==
+	:subject:to:to; s=fm2; t=1743678408; x=1743764808; bh=rC8r2721qS
+	JvlhwPgxIAo1RX9Y0qBL31QSD1MwC1V0w=; b=KIHPBMMoRiuv47uLFhv6Qh5Eqq
+	3a81cqTnRut72JOgfHGS2NTAsXCknnI1i0+7s2obhloqtmqzkrM3ecanbPeUsscf
+	2G5mSliGENbFXUs3LVp254j5EkkAvRLDC6BapDfDGDXR0betQ7HvqAvvbD0/AU1y
+	nfQHFSKJE8I+oGWDUJwreYc+97ZmKThDKbNM31eyEkXXaqWxUKhRZj2hZjaDAe4u
+	ioyz8HGh7fYff2POZ4TDe7JelLnKoGp1IELyScubvnnfQ7XTNLhEpQgdaUcujzsx
+	Yb8VG5cWD132pGGBCDjMmUJjGyPW1+mI3noCzsZtGO2vUhF2OC//fOtIxVWQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1743678411; x=
-	1743764811; bh=CG3r5e95OwX8jqQD81Gk2i2+rrH9WMNFIvnRfMaYPhM=; b=N
-	M4QyWUPRGbUMrbwjA/eErPIySIfv+t2RZjcQq5sx0Fw5L7vtc8NIWcA7gKCjDf7p
-	PfMhnRyWeJADUSP5Z4la6YZvhiGlPn2G1iOfYGq9MXMXao8Hv12Ltv6hKTvynt0R
-	0mCuVefGCQ/B4KPVW/AIjpQ1S8fgRnfg5aZlDILJKCiGvd4PnugWKfTBtNSHIJJW
-	bMBptpH+pVO5tfIB14QwMEqgzj9KEL0nY9vXUhhIABVhAMrqq3iOkj8jIVcEIC8/
-	j4it7sGgyPOlzXcCNa5M3389TQvNbj6ONoGbX8vfqZJBDCmlFoh5nqz7e5MzCq+M
-	oJNgGNkAlRVZP/bg1FZ0A==
-X-ME-Sender: <xms:ymvuZxbBiFeoWUdU3LNQIB1Mz_cAJ48sb48TpPbPcMiIOj606DqxeQ>
-    <xme:ymvuZ4YW8n54m04vZyB6wz71ixS9VcnwwgW-2cztKHAEcKNzhg2QmF2-cW-75SrXc
-    xIAWrDsjweP0g>
-X-ME-Received: <xmr:ymvuZz9TOHzeqglbI9WyzM2BLJtlTVSVFCuGNeN0zJK9-7i9ws_HuFS0ZIEx8FWRqTeZkazjz8eeUkS5OBbdNLZLBmj3y1rMquO-yymrlAIDS0LYJq0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukeekgedtucetufdoteggodetrf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1743678408; x=
+	1743764808; bh=rC8r2721qSJvlhwPgxIAo1RX9Y0qBL31QSD1MwC1V0w=; b=u
+	8O0YrckO7WiIQTAekB2PobwoZDwjEFljRymGje+Pgg4FOVsrX0h/D8q/CWGYkXiB
+	6ak/mWtT2KkjF1PTVKg4PibIaZnBMGXJQX4Uk21w78TcUUG6IUSKdwFucIPgSBs6
+	q/Qc6TxMAFq2j3oqyhp2k+57cAmHDwNR8kSFlW3JWIPni2W53qMqcKAXRv2nTfzA
+	MxG56LGqaVtqf0eNpFLgtJ2bh0M8Ha+vvjHTPGmDcB4Jn2/pBTymB3ESP9Pf14zS
+	l3V4oZzaSJN6mfKFaQW5CYAUQv5NziR+H9j7dF4LBL4qdXy5xFOEMBqks1We1lYQ
+	ZB6dSrFaPNzIVLEfqSfwQ==
+X-ME-Sender: <xms:x2vuZ1pJoOQtu1bp51PU_ar0MOx8qBbNMXn5fN457stPaE9JHEOuVw>
+    <xme:x2vuZ3ozFE2t_iaOydQ9eaLd7NeCXAr5MZyyZKWw_MWgHNxi2C62_XFuijwNYbOr0
+    8A2q7l6H_CDEA>
+X-ME-Received: <xmr:x2vuZyPfsS9MmfEPKC277E_8jnnYI-j736ogHmttqjupRLVlXn9Jr6MI5fNEESg3n2lqWOTzKFkdMnkH_hKMUjyD1TDwVOvG_EHe3N0VkIEHMzbgXIA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukeekfeelucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
     gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
@@ -91,11 +91,11 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukeekgedtucetufdote
     mhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtph
     htthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsggv
     lhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:ymvuZ_p3vSM6EZ-8A35jN_78NLx96J-PpVXv0W4ZHYGlUHCe0TcUgw>
-    <xmx:ymvuZ8p1MhQeLntKWHjNMjj0jm4LlAznhOSuxGHLBtAjOuhK1qcp5A>
-    <xmx:ymvuZ1Q_bjJZga_-X1fUIF5sJJW8YzKXUAwnfS69Ul7gkN_lQw84QQ>
-    <xmx:ymvuZ0oA5DH3x7vCajT0pp4v7b_DAWg8ooBQKef7Qg_kocOod7uJUw>
-    <xmx:y2vuZ6gBkeK3yFGM344NM0yyGCjOpIVnXRjUXPxGYUxdIZ7zikPwSjMq>
+X-ME-Proxy: <xmx:x2vuZw7gXHAGANP8NmtGriSzYuYyQhjPfqnACoO42Fz2zGy_lW726Q>
+    <xmx:x2vuZ06-AzbUzANtiNT7XjdXT_mxfCYIPYR092WR7p_oA2Fda4bSkA>
+    <xmx:x2vuZ4i3YPE7r7RJc7yApKWiLp1SlfmONO0uX5H7kMIk-sKYKQyTQA>
+    <xmx:x2vuZ27mDz_Vc3AhoAfpcewaMR5ZJ0FPLl1XqTq0XERVlfLycZPxBQ>
+    <xmx:x2vuZ3ybpn17BkRHoVFeVNd7NBTuKHHXeWn4ZVdLjRtuQHzIX9URaGkO>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -103,9 +103,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 04/11] ci: include domU kernel messages in the console output log
-Date: Thu,  3 Apr 2025 13:04:39 +0200
-Message-ID: <8902a1274707600b1fe38d41d11ac28627f386b7.1743678257.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 02/11] ci: increase timeout for hw tests
+Date: Thu,  3 Apr 2025 13:04:37 +0200
+Message-ID: <7578489af5c7df525d4c82231b68bbb7d955d2b4.1743678257.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.59b4d1e66776c1e577aa5dd5460605dc6c240613.1743678257.git-series.marmarek@invisiblethingslab.com>
 References: <cover.59b4d1e66776c1e577aa5dd5460605dc6c240613.1743678257.git-series.marmarek@invisiblethingslab.com>
@@ -113,24 +113,35 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+It appears as sometimes it takes more time for Xen even start booting,
+mostly due to firmware and fetching large boot files by grub. In some
+jobs the current timeout is pretty close to the actual time needed, and
+sometimes (rarely for now) test fails due to timeout expiring in the
+middle of dom0 booting. This will be happening more often if the
+initramfs will grow (and with more complex tests).
+This has been observed on some dom0pvh-hvm jobs, at least on runners hw3
+and hw11.
+
+Increase the timeout by yet another 60s (up to 180s now).
+
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- automation/scripts/qubes-x86-64.sh | 2 ++
- 1 file changed, 2 insertions(+)
+ automation/scripts/qubes-x86-64.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 771c77d6618b..d316c17e0c9f 100755
+index 8e78b7984e98..771c77d6618b 100755
 --- a/automation/scripts/qubes-x86-64.sh
 +++ b/automation/scripts/qubes-x86-64.sh
-@@ -175,6 +175,8 @@ if [ -n "$domU_check" ]; then
-     rm var/run
-     echo "#!/bin/sh
- 
-+echo 8 > /proc/sys/kernel/printk
-+
- ${domU_check}
- " > etc/local.d/xen.start
-     chmod +x etc/local.d/xen.start
+@@ -17,7 +17,7 @@ test_variant=$1
+ ### defaults
+ extra_xen_opts=
+ wait_and_wakeup=
+-timeout=120
++timeout=180
+ domU_type="pvh"
+ domU_vif="'bridge=xenbr0',"
+ domU_extra_config=
 -- 
 git-series 0.9.1
 
