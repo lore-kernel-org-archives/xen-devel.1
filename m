@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E559C3600C
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 21:46:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.937345.1338398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2BD4C3600C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Apr 2025 21:48:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.937373.1338408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0SOK-0001qn-7r; Thu, 03 Apr 2025 21:46:28 +0000
+	id 1u0SQZ-00042h-KZ; Thu, 03 Apr 2025 21:48:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 937345.1338398; Thu, 03 Apr 2025 21:46:28 +0000
+Received: by outflank-mailman (output) from mailman id 937373.1338408; Thu, 03 Apr 2025 21:48:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0SOK-0001qZ-2v; Thu, 03 Apr 2025 21:46:28 +0000
-Received: by outflank-mailman (input) for mailman id 937345;
- Thu, 03 Apr 2025 21:46:26 +0000
+	id 1u0SQZ-00042a-HW; Thu, 03 Apr 2025 21:48:47 +0000
+Received: by outflank-mailman (input) for mailman id 937373;
+ Thu, 03 Apr 2025 21:48:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GOX3=WV=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1u0SOI-0000LE-0t
- for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 21:46:26 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20602.outbound.protection.outlook.com
- [2a01:111:f403:2009::602])
+ <SRS0=GAK9=WV=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1u0SQX-00042O-Hd
+ for xen-devel@lists.xenproject.org; Thu, 03 Apr 2025 21:48:45 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20615.outbound.protection.outlook.com
+ [2a01:111:f403:2415::615])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 162cdd88-10d5-11f0-9ffb-bf95429c2676;
- Thu, 03 Apr 2025 23:46:24 +0200 (CEST)
-Received: from DM5PR07CA0063.namprd07.prod.outlook.com (2603:10b6:4:ad::28) by
- IA0PPF8FC6E1236.namprd12.prod.outlook.com (2603:10b6:20f:fc04::bda)
+ id 69624f55-10d5-11f0-9ffb-bf95429c2676;
+ Thu, 03 Apr 2025 23:48:43 +0200 (CEST)
+Received: from BL1PR13CA0238.namprd13.prod.outlook.com (2603:10b6:208:2bf::33)
+ by SJ0PR12MB6992.namprd12.prod.outlook.com (2603:10b6:a03:483::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8583.43; Thu, 3 Apr
- 2025 21:46:20 +0000
-Received: from CY4PEPF0000EE33.namprd05.prod.outlook.com
- (2603:10b6:4:ad:cafe::50) by DM5PR07CA0063.outlook.office365.com
- (2603:10b6:4:ad::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.25 via Frontend Transport; Thu,
- 3 Apr 2025 21:46:19 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 3 Apr
+ 2025 21:48:38 +0000
+Received: from BL6PEPF00022574.namprd02.prod.outlook.com
+ (2603:10b6:208:2bf:cafe::c8) by BL1PR13CA0238.outlook.office365.com
+ (2603:10b6:208:2bf::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.17 via Frontend Transport; Thu,
+ 3 Apr 2025 21:48:37 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE33.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ BL6PEPF00022574.mail.protection.outlook.com (10.167.249.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:46:19 +0000
+ 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:48:36 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 3 Apr
- 2025 16:46:17 -0500
-Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ 2025 16:48:36 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 3 Apr 2025 16:46:16 -0500
+ Transport; Thu, 3 Apr 2025 16:48:35 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,134 +61,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 162cdd88-10d5-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 69624f55-10d5-11f0-9ffb-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SiTviR1Xx0CZQD0VY+KQWh47Q8sD7Xp/aXXO0fQnXcT74HfLIRA7cHij/H1thr9Rp2vEFZBVnxF+gnludMGAo6xtErHyfptvscvqclaVaVuX6O8Yo78rsFkkrwGE0geRG20yfguHEJBr4QLao8BttnGQJkJ/eBm8Bo8HAHHSpXTZYLpMp5epOsZk+tY+3IGEFESYubkM491eSkjTHh1j/e3gwYdbrEfKA/q8KpCWFO3uwMjizinhGNZLRJ0GsMx4Ua8vnD7tLGqbQGO2XxDQX4Ei23Ima1eF22bytmQhjqKSWD7R6bCdmeEZVNvcT8t8jEsH3BwwRaNCvcJ+WX/7lg==
+ b=KG6Fs4bZCpGpUSR+Lo6hOAKRu24ulJMccpKoY3p186VXmmFXKwgIR0+XpHvEbKOsZ9O5ihsos5WcfHsFYC9onTrumLy9cBz5K4lhIsqm26CfZUqFzXlxFmCJyqpPMMrHQDYhvu1+YPf15FlCHB/nX8kj+MaVbt9lWj5m6tfK1VdTVlU6RgB3InSmcQDPICUZDkSUilBAENMUhnrx6PQunzknQP9qvw+jaHzYYN2P9WofzD6WCMwljASzeWjFOAuJWlqkbVihb+95ub07LVY5bBu7XzCAiHZJe3kt5j5PLkLe1KzdscjEIiYmsObXIvAqB/u1OOBuGai2GHkW3zcVwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WdsPqj84Hib8NMMJalt8pI/N2yD+bj+m4mgWcFIdJM4=;
- b=nurlZ8CqZbwbcb8d0GCUwSYtk0uEZNIfXkO2bEyOd+zRGe3VJKWlOBYFE1oZZxxdVyoJ2z6hg7JyuzBZrmTLKEU31wrRSVtFw30na5zZtrGgX508TCjCIDr3ZizQYhpOvKv5TrSpU+76Q3Vrcd4coG/hch+6U/g9/YnIDdwDlw76y4+ZEXH88/rOxRTRVziUbTivr3y9v9fW6DiNDZVViIJKDvJWP3jj3HWCGj2pgEdCBb3YK7MR6N3O1z2m8tyMNZumm6HSUQAyi9qGICr7l9VIapP9YyFURrNYLHmrXHiO8jt5Bz/tTiaoYJyksDbsoPvApNdvh9Np5oyYZ9Vnvg==
+ bh=U7WpMxzStKRb4yl90BOglzDn0Ex8GUy7QeVdyk5lpYk=;
+ b=Lx0GfmGFTs9dT8EQ5ZfD/PUN4QojrvSJqPGTDE88pnjiM9mz6MDo++o7WQjC09OvaPvbzKu/sjm2etthGXPK4D4AG+H9gU5VNcmhTnUczLZwHXNsic/iSQyjuf7IfQ9xRTQXzQJaX5mm+FSqJ5UJH5wqs6QnVe+WQXxw9GQ8s3lFznV4xVSDVj3R2WPfKRB/caDBKouxnjjEgY1KlrKx4CizgaqtQZz9yJqMwZbZ8Wa8xRA4d/WTtX8cwG5N5kvFIWPJ23yXPPcgKqJbBQYV3GU9aeuN3FA2+i7ielmQdwEp4ULRy0dDUxdKby8rpoLF2ZIbwUu4qGipQKXD5QFfMg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WdsPqj84Hib8NMMJalt8pI/N2yD+bj+m4mgWcFIdJM4=;
- b=FY7SBnF0Dytfvluu/DD/PO+NOXr0lsMbt16g6nYevHtbuYW+DyoRyt3ERnwf8zCbLr+w93j0DfM1B3D9STz84rLZD8l4SlyPLyMr6SXhEa2kb5lyx1ET4onbUn6YjxaoVGrnGEN+zaSp8uQUEXgl/S+K3kajO35cbyZUq5os62M=
+ bh=U7WpMxzStKRb4yl90BOglzDn0Ex8GUy7QeVdyk5lpYk=;
+ b=WVL+xB2kxv6KbRDYdiOdLfZaFA2JIxXz4ltn2+JXIrF6kC3eATIn03uot/R7Cy36z//AAtqK9GHWwll12Yue3jaA6iImgwruXUGhpJVwRxoRwIamHempPiKe/6DvLMIvM3PMXRoUWKcbTHJsUJBaHAU8ddqFOcyajrohZdIlwv8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Jason Andryuk <jason.andryuk@amd.com>
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 6/7] xen/arm: dom0less use has_dtb local variable
-Date: Thu, 3 Apr 2025 17:46:07 -0400
-Message-ID: <20250403214608.152954-7-jason.andryuk@amd.com>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Dario Faggioli
+	<dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap
+	<gwd@xenproject.org>
+Subject: [PATCH] sched/null: avoid another crash after failed domU creation
+Date: Thu, 3 Apr 2025 17:48:19 -0400
+Message-ID: <20250403214829.128294-1-stewart.hildebrand@amd.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250403214608.152954-1-jason.andryuk@amd.com>
-References: <20250403214608.152954-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+Received-SPF: None (SATLEXMB03.amd.com: stewart.hildebrand@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE33:EE_|IA0PPF8FC6E1236:EE_
-X-MS-Office365-Filtering-Correlation-Id: 43a04bde-3635-4d8a-0e00-08dd72f8f821
+X-MS-TrafficTypeDiagnostic: BL6PEPF00022574:EE_|SJ0PR12MB6992:EE_
+X-MS-Office365-Filtering-Correlation-Id: 769195ac-9595-4434-b8f7-08dd72f949ad
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?ng294MpNCQwzdsijiCh1CsstudgxCEnpjk21l/C+ij0twjG8YPW51d7iBITJ?=
- =?us-ascii?Q?9oZSEe3OgGfVJoippoRDnrcbEAU2gDbpNZnTCmjPV6R554lEtUPQ5eqDkN3D?=
- =?us-ascii?Q?gNVlCsouacESu+7sOsAP1UNF+OqnVx/zvE8bWkR5OavqApcU76BTWPjyFr7S?=
- =?us-ascii?Q?CuK/HLBA3SMBoLdIuQmihgT+dwg3TDFUBJhfxXKSph8CQ2m5c6OeSYXemkBz?=
- =?us-ascii?Q?qXpgQ9MJhLIpEyujAYmYFVTcQISo9/89OFcFeySNQEIrKGqbKeqdirZqDMCM?=
- =?us-ascii?Q?2o+c1IK8zctdq6nQWkhEL1waznT8p38chocHyTiF1EUNBlciay26zSwWY4je?=
- =?us-ascii?Q?UkCPkvfQf8moNk09rmBgDzJBK9fLi6wZxbkHO6CDk8g1sT+ztD40Ujrb9Q49?=
- =?us-ascii?Q?NRQCd66HibzlTJzM9MKW2GzxGeL80ZbtpOXXAh62r/5ZhrGrmArYEZP+v21F?=
- =?us-ascii?Q?uDY8mhPvZpeHVXDAPHzu0ObwhEcLsuFXDjxAdYb/XR7AZ4uHveDFZ0YoL3Pi?=
- =?us-ascii?Q?1gGtFxM+TFvimNr4o8VrON+l2bPYhq+aQgPp427Kr2YSKQ770c3XfFsvacqB?=
- =?us-ascii?Q?s/nUNM5CkrejxAz2hMqbBzXWClJoz95e1+05IeEQ8b5ktaVn6vkx6HYfKFGh?=
- =?us-ascii?Q?t1x+WE/pNAXxxlx9kSPe8peFq24FMp208rYubTYkwcKJ7DUB72e20sznDwv2?=
- =?us-ascii?Q?P7d5kNRy+wDhFw8oyWlTlwnxpIsmtF2sJJj35wvX8lo106+V1hQaFkawp4h4?=
- =?us-ascii?Q?2IXknQj12AtN1WrpS6hE+zfyhXTET41L6Qyi3PAKkXkqOKiFVI4oQW4jkT04?=
- =?us-ascii?Q?orYXt1+A3iYcRQeaX9xEoLVN/XKiOptqVsWr7JuY10oR7McVQMEAnTwVEuvt?=
- =?us-ascii?Q?8fnXPkZhc1YSBFbl+Z6i1Kyhr/BN7qRh4b76Imk5xE0v8trSJjujNlwUUl7B?=
- =?us-ascii?Q?invfxNXMjCASGSgyXOP6JtNaDydsEK1AZILlze8HS6R0NGL08HuAmG+m/UnU?=
- =?us-ascii?Q?GFhyMrXmzfe8zkvQBTc4LkvoD9a7BS63KSz5f3RyiMvFDZTKD/iDn4lGFQed?=
- =?us-ascii?Q?HOjEBn3LSXNB5cDTYGxxB7o1Gh61GVOM0Zjz7bZzWI4dXq/TwfrrRJ9HKFbc?=
- =?us-ascii?Q?+fKwLy9JZqqbma6YvRarUzph2KVow/ESgk/mQQs0bdfajt9C5RF/+FVEmLXe?=
- =?us-ascii?Q?OP2pDjUDBel04V3++ZQvn08hnpvHxIQ/0RGBINf+xd187jWmdGQizaZIk6zi?=
- =?us-ascii?Q?O+qj/saeUporpYTdb8/hVyFTHxLReRDaD9fB+fPa+dIQbqK8AiXAGMYQ7x5I?=
- =?us-ascii?Q?SCJQCgKyLDEoOP8AC01J6rS2ZibvI2DlrK7tys2stn4D0DSam3wyHBXDnPYR?=
- =?us-ascii?Q?/bXvtomohqjjUdEgcwrRGpuMSsHLLj4mJ0jP0i/VuZvvTl7QRize78D//m7h?=
- =?us-ascii?Q?w+sZ+C2QsTstrm4rDa+KhW3V4EMoxqoDh4Yg/7vvslOva4lHbRT5Iifv2Kjq?=
- =?us-ascii?Q?FLaRKGb9aZtn1pA=3D?=
+	=?us-ascii?Q?mcaGAWjjs7fn/M5jmYK1F48PjHBotXB6+y47Nut/NvotRM4mrDwYMqw5PhWj?=
+ =?us-ascii?Q?N9spcYf/TiDKyNLqWpZ376eXvICUfFBSUBi4Zfs8MSZM+boDv5XmX9UkWtH4?=
+ =?us-ascii?Q?waFjns03Ox4iW95123NWWyLmcAMcxcGCS4q8z5cvvhquvUeqWNgFZT9PrBNb?=
+ =?us-ascii?Q?c97gFrd0rVRRds2WCYDKk9QY9l9u97qUExmLvOQ2MjaYEJTkVt9hLiaqYiBD?=
+ =?us-ascii?Q?/fs23qRBfxOW5xq1NC6gqgAKdN0evdIvti7a/PZWH8xrwtQR39E0pvMHrDPo?=
+ =?us-ascii?Q?kglGFDYolXWkdhL9pDy0GJekTchGI5RxqPZXtkIks9oRzo10SfpcPHX/g4E6?=
+ =?us-ascii?Q?033p6MuOVhhXOaU4u3SSv0AF8OgGV93LB3Vdd+C/VtGeZPApoS2pVizc341F?=
+ =?us-ascii?Q?UYmI/KCOa7qIIh3GL9Tr2Lu15LOPsNcdQZ+d3f3E+zcLDYvd4wl2dEfTtULW?=
+ =?us-ascii?Q?6/qz961AGNJQVKAvXakW4LNh8YbfoBv+z1zTjQN1L35mtZPC1aS7QWr+MOEe?=
+ =?us-ascii?Q?t0UPvHdzCVegEZoF/HIgphyOlRScan0X1JuwJZ7k5l34JP2trjG2bpF23BiL?=
+ =?us-ascii?Q?1h7DSuL8YhRXAuzqopo0IM1DM49yVQr4Z4a9iItcWEBtNV6RuB56ukOY5IXt?=
+ =?us-ascii?Q?/Ljhdy5aZdAeJwiTcTs0VcNBWX1TA1MjZgQhU/BsXkgYsc1P5oikmggViLn8?=
+ =?us-ascii?Q?R0SnP+itAkPYFpjmcrhC+o5d3dNJmAVCObD1+6kJjemrk3KP1Xn6N2cdNUC2?=
+ =?us-ascii?Q?eOEPVVkej5Lm5h31Op4F6/DwarPOnmANFAuYGUVSiFkHni3lgiu3sJdLvba7?=
+ =?us-ascii?Q?LPJautjnP7NixZB99Rxwpk11dky3r3Y+d5cElPgwPW6ZCLKO/vFIUtC5OsfD?=
+ =?us-ascii?Q?dgOiZnksvMgO6a12sKaEdXZsO6qUwGptAZr3EDEWGGTvqijYl5vVE9e0diPb?=
+ =?us-ascii?Q?o7QXEaBA5PfMWWeyeHifzETin8+HVfxJ4X6FjIUO8z/UnCtxmU0yrNbX9rAC?=
+ =?us-ascii?Q?RrRvlv4XGsHRt4g8DqixEp4rJmlzpJtLc+SGgS9SON1pqP09fOlz1yUbOusq?=
+ =?us-ascii?Q?wvyLkkx2fp9009LQlKr8tA5e0e1WXnAMmfQoTKuElG1LC89QEzk2TPqyOo5k?=
+ =?us-ascii?Q?7GJ4N7SN2VLcAr7ql+8sx765amDIngStnZ7MwXVA0DlM2+87JSRRsRp0OiRu?=
+ =?us-ascii?Q?fGuqQ6ETZEMh8vRru7HWVF2MyzgZGJSsDsUXcd0rEy0lMb+68/rF9hosEoVJ?=
+ =?us-ascii?Q?eiUCSQAoB8SCXZktR8LTfbHNez6QpVkDipzWGYs0DUuva2xEvE5k52Y5R8ET?=
+ =?us-ascii?Q?xUn2p65MOh0tCLRad+EMJd8beZ/cDUJPQXQFdEOC9QYR9FuJaIZNRBzJzTAO?=
+ =?us-ascii?Q?SXLIxzteDGhjFRvIIOj5/E51M7Xx18XV9t34k1VtE36jYfcA//BwrTIMf4J5?=
+ =?us-ascii?Q?GoK/B3MR9LsNMQveHOak23e708zAbM/DP6jl5kL6trS6DF5AesMr0Fc7ffTe?=
+ =?us-ascii?Q?cyJm+5MJm0lw+1+W7yMAIpfd4V4JJ+N7M3JD?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:46:19.5443
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:48:36.4554
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 43a04bde-3635-4d8a-0e00-08dd72f8f821
+X-MS-Exchange-CrossTenant-Network-Message-Id: 769195ac-9595-4434-b8f7-08dd72f949ad
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EE33.namprd05.prod.outlook.com
+	BL6PEPF00022574.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF8FC6E1236
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6992
 
-Store the result of finding a "multiboot,device-tree" node.  This will
-simplity adding hardware domain checks.
+The following sequence of events may lead a debug build of Xen to crash
+when using the null scheduler:
 
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+1. domain creation (e.g. d1) failed due to bad configuration
+2. complete_domain_destroy() was deferred
+3. domain creation (e.g. d2) succeeds
+
+At this point, d2 is running, while the zombie d1 is not fully cleaned
+up:
+
+(XEN) Online Cpus: 0-3
+(XEN) Cpupool 0:
+(XEN) Cpus: 0-3
+(XEN) Scheduling granularity: cpu, 1 CPU per sched-resource
+(XEN) Scheduler: null Scheduler (null)
+(XEN)   cpus_free = 3
+(XEN) Domain info:
+(XEN)   Domain: 0
+(XEN)     1: [0.0] pcpu=0
+(XEN)     2: [0.1] pcpu=1
+(XEN)   Domain: 1
+(XEN)     3: [1.0] pcpu=2
+(XEN)   Domain: 2
+(XEN)     4: [2.0] pcpu=2
+
+4. complete_domain_destroy() gets called for d1 and triggers the
+following:
+
+(XEN) Xen call trace:
+(XEN)    [<00000a0000322ed4>] null.c#unit_deassign+0x2d8/0xb70 (PC)
+(XEN)    [<00000a000032457c>] null.c#null_unit_remove+0x670/0xba8 (LR)
+(XEN)    [<00000a000032457c>] null.c#null_unit_remove+0x670/0xba8
+(XEN)    [<00000a0000336404>] sched_destroy_vcpu+0x354/0x8fc
+(XEN)    [<00000a0000227324>] domain.c#complete_domain_destroy+0x11c/0x49c
+(XEN)    [<00000a000029fbd0>] rcupdate.c#rcu_do_batch+0x94/0x3d0
+(XEN)    [<00000a00002a10c0>] rcupdate.c#__rcu_process_callbacks+0x160/0x5f4
+(XEN)    [<00000a00002a1e60>] rcupdate.c#rcu_process_callbacks+0xcc/0x1b0
+(XEN)    [<00000a00002a3460>] softirq.c#__do_softirq+0x1f4/0x3d8
+(XEN)    [<00000a00002a37c4>] do_softirq+0x14/0x1c
+(XEN)    [<00000a0000465260>] traps.c#check_for_pcpu_work+0x30/0xb8
+(XEN)    [<00000a000046bb08>] leave_hypervisor_to_guest+0x28/0x198
+(XEN)    [<00000a0000409c84>] entry.o#guest_sync_slowpath+0xac/0xd8
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 0:
+(XEN) Assertion 'npc->unit == unit' failed at common/sched/null.c:383
+(XEN) ****************************************
+
+Fix by skipping unit_deassign() when the unit to be removed does not
+match the pcpu's currently assigned unit.
+
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 ---
-v3:
-New
+See c2eae2614c8f ("sched/null: avoid crash after failed domU creation")
 
-Could be squashed into the next patch, but this helps make the next one
-cleaner.
+Another consequence of deferring complete_domain_destroy() is that
+eventually domains may fail to be scheduled by the null scheduler,
+despite domains/vcpus having previously been running on available pcpus
+have been destroyed.
+
+(XEN) common/sched/null.c:639: WARNING: d4v0 not assigned to any CPU!
+
+... but that is a problem for another day. After all, I'm not sure how
+common of a use case dynamic domain creation & destruction really is for
+the null scheduler.
 ---
- xen/arch/arm/dom0less-build.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ xen/common/sched/null.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 284190d54f..a72961dfb4 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -1031,6 +1031,7 @@ void __init create_domUs(void)
-             .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
-         };
-         unsigned int flags = 0U;
-+        bool has_dtb = false;
-         uint32_t val;
-         int rc;
+diff --git a/xen/common/sched/null.c b/xen/common/sched/null.c
+index 7e31440e5b84..c8e327e3cdd0 100644
+--- a/xen/common/sched/null.c
++++ b/xen/common/sched/null.c
+@@ -557,7 +557,7 @@ static void cf_check null_unit_remove(
  
-@@ -1065,9 +1066,10 @@ void __init create_domUs(void)
-              !strcmp(dom0less_iommu, "enabled") )
-             iommu = true;
+     cpu = sched_unit_master(unit);
+     npc = get_sched_res(cpu)->sched_priv;
+-    if ( npc->unit )
++    if ( npc->unit == unit )
+         unit_deassign(prv, unit);
  
--        if ( iommu_enabled &&
--             (iommu || dt_find_compatible_node(node, NULL,
--                                               "multiboot,device-tree")) )
-+        if ( dt_find_compatible_node(node, NULL, "multiboot,device-tree") )
-+            has_dtb = true;
-+
-+        if ( iommu_enabled && (iommu || has_dtb) )
-             d_cfg.flags |= XEN_DOMCTL_CDF_iommu;
- 
-         if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
+  out:
+
+base-commit: befc384d21784affa3daf2abc85b02500e4dc545
 -- 
 2.49.0
 
