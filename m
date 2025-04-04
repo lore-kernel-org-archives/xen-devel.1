@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C522C3600C
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Apr 2025 01:13:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.937714.1338618 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2EDC3600C
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Apr 2025 01:15:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.937725.1338629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0Vc9-0001L5-9t; Fri, 04 Apr 2025 01:12:57 +0000
+	id 1u0VeW-0001tr-MQ; Fri, 04 Apr 2025 01:15:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 937714.1338618; Fri, 04 Apr 2025 01:12:57 +0000
+Received: by outflank-mailman (output) from mailman id 937725.1338629; Fri, 04 Apr 2025 01:15:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u0Vc9-0001Ky-66; Fri, 04 Apr 2025 01:12:57 +0000
-Received: by outflank-mailman (input) for mailman id 937714;
- Fri, 04 Apr 2025 01:12:55 +0000
+	id 1u0VeW-0001tk-Hk; Fri, 04 Apr 2025 01:15:24 +0000
+Received: by outflank-mailman (input) for mailman id 937725;
+ Fri, 04 Apr 2025 01:15:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8oGR=WW=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u0Vc7-0001Kc-Ny
- for xen-devel@lists.xenproject.org; Fri, 04 Apr 2025 01:12:55 +0000
+ id 1u0VeU-0001te-Pw
+ for xen-devel@lists.xenproject.org; Fri, 04 Apr 2025 01:15:22 +0000
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id edac53ff-10f1-11f0-9eaa-5ba50f476ded;
- Fri, 04 Apr 2025 03:12:51 +0200 (CEST)
+ id 47567873-10f2-11f0-9eaa-5ba50f476ded;
+ Fri, 04 Apr 2025 03:15:21 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id B7653A4351E;
- Fri,  4 Apr 2025 01:07:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DFEAC4CEE3;
- Fri,  4 Apr 2025 01:12:49 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 46233A46B00;
+ Fri,  4 Apr 2025 01:09:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39FB9C4CEE3;
+ Fri,  4 Apr 2025 01:15:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: edac53ff-10f1-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: 47567873-10f2-11f0-9eaa-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1743729170;
-	bh=jwnXwt4wQtNBkUetU0ySAwwrAE6n7F/J5GjR4hoY78o=;
+	s=k20201202; t=1743729320;
+	bh=FbBa4aH3GdEj0Z9j43PW5UAv5HSqCDZ39OYJX5bd9co=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=KHzsYAD7Kfnb9CYtrnYOKnt/SDm8m2PXlWb37kX8z5zSDJI1mvHLEmN/gv+edE5+4
-	 Pyp2jSE34vgofslmELN01uEnfoT1kWrfWsVmSDeoyAEU7b129pJh/VVVWUv6VbNzMB
-	 KPiCeK4Ghe4RkuIkd526Zu7j46IrfKYZ5x52GDj6M/IsqxlNzZReEC4jU8WqmiDxAM
-	 i8Ba+WtU/zEe3l3kY1B5qFscLCMgXooXqUbM+SYZZiv4xKkcF+MSUrThPE/o1YTkHC
-	 MdfFGsBjUKZuDxyuDo6cFzPwZjX8TnkFYv/w8ahOiC6UN89pRJM0EO4EZIdfNqFvEe
-	 mfizUmQYHwPvw==
-Date: Thu, 3 Apr 2025 18:12:48 -0700 (PDT)
+	b=inzbANL0MFG6zeL8roIMzitIEXCBIpfNgcxnIVZxKz9sX1F4PNL8T/ETq7PA7kcZR
+	 7yqk3OnU/WtWgNcTQR7qj8lczYTgmVnQQzA56f6qsdeaQS77GNwu+w5f3/N+PccTao
+	 J7ge6f+HQthPCuDdmAFSEX3hfz+r3gLubCrg2TeWZcZ22CMYLboucyErU0jNZKjK4p
+	 2aMjKHLARbpVaMt/sev6zmSs4Y3d5H8hPKKSu4XDWRhKGauV3rvtEb0h5m+XhjVoH2
+	 yC5si7NauWvp0fY9Joc02/SD9pGFxYJNJw/t6Qg1RYkyetx3jDlaqTyA9/Fm+KpCqZ
+	 2g8/n2Su+BNEg==
+Date: Thu, 3 Apr 2025 18:15:18 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Jason Andryuk <jason.andryuk@amd.com>
@@ -62,60 +62,35 @@ cc: xen-devel@lists.xenproject.org,
     Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
     Bertrand Marquis <bertrand.marquis@arm.com>, 
     Michal Orzel <michal.orzel@amd.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v3 6/7] xen/arm: dom0less use has_dtb local variable
-In-Reply-To: <20250403214608.152954-7-jason.andryuk@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2504031812420.3529306@ubuntu-linux-20-04-desktop>
-References: <20250403214608.152954-1-jason.andryuk@amd.com> <20250403214608.152954-7-jason.andryuk@amd.com>
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Jan Beulich <jbeulich@suse.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v3 7/7] xen/arm: Add capabilities to dom0less
+In-Reply-To: <20250403214608.152954-8-jason.andryuk@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2504031815100.3529306@ubuntu-linux-20-04-desktop>
+References: <20250403214608.152954-1-jason.andryuk@amd.com> <20250403214608.152954-8-jason.andryuk@amd.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Thu, 3 Apr 2025, Jason Andryuk wrote:
-> Store the result of finding a "multiboot,device-tree" node.  This will
-> simplity adding hardware domain checks.
+> Add a capabilities property to dom0less to allow building a
+> disaggregated system.  Only a single hardware domain and single xenstore
+> domain can be specified.  Multiple control domains are possible.
+> 
+> Introduce bootfdt.h to contain these constants.
+> 
+> When using the hardware or xenstore capabilities, adjust the grant and
+> event channel limits similar to dom0.
+> 
+> For a hardware domain, disallow specifying "vpl011", "nr_spis",
+> "multiboot,device-tree" and "passthrough" nodes.  Also, require an IOMMU
+> when not direct-mapped,
 > 
 > Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-> ---
-> v3:
-> New
-> 
-> Could be squashed into the next patch, but this helps make the next one
-> cleaner.
-> ---
->  xen/arch/arm/dom0less-build.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-> index 284190d54f..a72961dfb4 100644
-> --- a/xen/arch/arm/dom0less-build.c
-> +++ b/xen/arch/arm/dom0less-build.c
-> @@ -1031,6 +1031,7 @@ void __init create_domUs(void)
->              .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
->          };
->          unsigned int flags = 0U;
-> +        bool has_dtb = false;
->          uint32_t val;
->          int rc;
->  
-> @@ -1065,9 +1066,10 @@ void __init create_domUs(void)
->               !strcmp(dom0less_iommu, "enabled") )
->              iommu = true;
->  
-> -        if ( iommu_enabled &&
-> -             (iommu || dt_find_compatible_node(node, NULL,
-> -                                               "multiboot,device-tree")) )
-> +        if ( dt_find_compatible_node(node, NULL, "multiboot,device-tree") )
-> +            has_dtb = true;
-> +
-> +        if ( iommu_enabled && (iommu || has_dtb) )
->              d_cfg.flags |= XEN_DOMCTL_CDF_iommu;
->  
->          if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
-> -- 
-> 2.49.0
-> 
 
