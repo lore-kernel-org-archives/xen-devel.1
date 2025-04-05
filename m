@@ -4,37 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA1F6C36010
-	for <xen-devel@archiver.kernel.org>; Sat,  5 Apr 2025 15:57:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.938964.1339326 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4AF8C36010
+	for <xen-devel@archiver.kernel.org>; Sat,  5 Apr 2025 18:34:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.938998.1339341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u15t0-0002Yn-AK; Sat, 05 Apr 2025 15:56:46 +0000
+	id 1u18LE-0004SC-8H; Sat, 05 Apr 2025 18:34:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 938964.1339326; Sat, 05 Apr 2025 15:56:46 +0000
+Received: by outflank-mailman (output) from mailman id 938998.1339341; Sat, 05 Apr 2025 18:34:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u15t0-0002Yg-6d; Sat, 05 Apr 2025 15:56:46 +0000
-Received: by outflank-mailman (input) for mailman id 938964;
- Sat, 05 Apr 2025 15:56:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u18LE-0004RG-2O; Sat, 05 Apr 2025 18:34:04 +0000
+Received: by outflank-mailman (input) for mailman id 938998;
+ Sat, 05 Apr 2025 18:17:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=f13i=WX=intel.com=lkp@srs-se1.protection.inumbo.net>)
- id 1u15sy-0002Ya-3v
- for xen-devel@lists.xenproject.org; Sat, 05 Apr 2025 15:56:44 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8eaafa9b-1236-11f0-9eaa-5ba50f476ded;
- Sat, 05 Apr 2025 17:56:40 +0200 (CEST)
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Apr 2025 08:56:37 -0700
-Received: from lkp-server01.sh.intel.com (HELO b207828170a5) ([10.239.97.150])
- by fmviesa002.fm.intel.com with ESMTP; 05 Apr 2025 08:56:34 -0700
-Received: from kbuild by b207828170a5 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1u15sl-00028B-2b;
- Sat, 05 Apr 2025 15:56:31 +0000
+ (envelope-from <SRS0=SaW9=WX=atlas.cz=arkamar@srs-se1.protection.inumbo.net>)
+ id 1u184w-0000Fo-To
+ for xen-devel@lists.xenproject.org; Sat, 05 Apr 2025 18:17:14 +0000
+Received: from gmmr-3.centrum.cz (gmmr-3.centrum.cz [46.255.225.205])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2eac0911-124a-11f0-9ffb-bf95429c2676;
+ Sat, 05 Apr 2025 20:17:07 +0200 (CEST)
+Received: from gmmr-1.centrum.cz (envoy-stl.cent [10.32.56.18])
+ by gmmr-3.centrum.cz (Postfix) with ESMTP id 9ED62202136A
+ for <xen-devel@lists.xenproject.org>; Sat,  5 Apr 2025 20:17:06 +0200 (CEST)
+Received: from gmmr-1.centrum.cz (localhost [127.0.0.1])
+ by gmmr-1.centrum.cz (Postfix) with ESMTP id 9BE90138
+ for <xen-devel@lists.xenproject.org>; Sat,  5 Apr 2025 20:17:06 +0200 (CEST)
+Received: from antispam35.centrum.cz (antispam35.cent [10.30.208.35])
+ by gmmr-1.centrum.cz (Postfix) with ESMTP id 9A761EB
+ for <xen-devel@lists.xenproject.org>; Sat,  5 Apr 2025 20:17:06 +0200 (CEST)
+Received: from unknown (HELO gm-smtp10.centrum.cz) ([46.255.225.77])
+ by antispam35.centrum.cz with ESMTP; 05 Apr 2025 20:17:06 +0200
+Received: from localhost.localdomain (nat-86.starnet.cz [178.255.168.86])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by gm-smtp10.centrum.cz (Postfix) with ESMTPSA id 310E3809119F;
+ Sat,  5 Apr 2025 20:17:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,83 +55,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8eaafa9b-1236-11f0-9eaa-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1743868600; x=1775404600;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=l2vXHFW49XxHHHkNIgLn8Ijs9q+hx64EoXxG3KaCq3g=;
-  b=bTJwob7nfmcezGpI/XnfocvFA8s45pXU/9unHG//B902Vn69W79zhenO
-   i+kSHvtIxHVLfLU2141NJlAFglMkH4U5oEQpwJsa/hjJ9lNRpKW2iicjq
-   RdaO1DRAGGQXTujicjiulpInspi18x58yihbqONVel1KPflFUKBYVndCy
-   kJuOO3Y/UTkrUCIRTfkughRSNxq3iyVRiuNEtkBXorxh52cX/GkpG6IpI
-   7kiEdB9UtMgWLmzriUIrYdfW2YJHGChLLzO7FgsHVmmK6Wo0DLM1iwHPG
-   s09YZDs1m4k/0ivxZIkwKy+lKOu7S7YyDm/XiTo/BrPqGHbU7tEXK+U+8
-   g==;
-X-CSE-ConnectionGUID: RE0ZIY/qTpmP43r5pKAY0A==
-X-CSE-MsgGUID: 86FZwmt0Ro63kvNG25r5yw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11395"; a="56670394"
-X-IronPort-AV: E=Sophos;i="6.15,191,1739865600"; 
-   d="scan'208";a="56670394"
-X-CSE-ConnectionGUID: Tx+rfS8cSc6qdurkrXso9w==
-X-CSE-MsgGUID: /Bwu7ftWSsW9TUWtnRsVkw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,191,1739865600"; 
-   d="scan'208";a="150766546"
-Date: Sat, 5 Apr 2025 23:55:56 +0800
-From: kernel test robot <lkp@intel.com>
-To: Roger Pau Monne <roger.pau@citrix.com>, Juergen Gross <jgross@suse.com>,
-	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: Re: [PATCH v2] x86/xen: fix balloon target initialization for PVH
- dom0
-Message-ID: <202504052301.dMtJILzp-lkp@intel.com>
-References: <20250404133459.16125-1-roger.pau@citrix.com>
+X-Inumbo-ID: 2eac0911-124a-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=atlas.cz; s=mail;
+	t=1743877026; bh=yXYouCERO6MiAmq3afNjHMwOXCEudhdkAGgF935HzVA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=m7j3ccAWICyhF2V6BIxEhxdLHkMFmmKEDwEdUP17RP7ZKZyrC314v9WFf5a4BgxVj
+	 1hIqsadQTDCegMvkDqU1Azibz3NeqfDotLujTAkg1+sLIWfvwB9gfHSsMkaVg57KNu
+	 mB4pU1uRDBw/tWDS0XhEtPRX0mphO4x0B+6JzfxY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=atlas.cz; s=mail;
+	t=1743877026; bh=yXYouCERO6MiAmq3afNjHMwOXCEudhdkAGgF935HzVA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=m7j3ccAWICyhF2V6BIxEhxdLHkMFmmKEDwEdUP17RP7ZKZyrC314v9WFf5a4BgxVj
+	 1hIqsadQTDCegMvkDqU1Azibz3NeqfDotLujTAkg1+sLIWfvwB9gfHSsMkaVg57KNu
+	 mB4pU1uRDBw/tWDS0XhEtPRX0mphO4x0B+6JzfxY=
+X-CSE-ConnectionGUID: LpEm3r6RQEeORUl2pCsA1Q==
+X-CSE-MsgGUID: V+tuc1VnQXy8xc/kD1A2Hg==
+X-ThreatScanner-Verdict: Negative
+X-IPAS-Result: =?us-ascii?q?A2FFAACUcvFn/03h/y5aGQEBAQEBAQEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?RIBAQEBAQEBAQEBAQFACYFKgzSBcYRVkXKLeYYzjVoODwEBAQEBAQEBAQkuF?=
+ =?us-ascii?q?gQBAYR9CgKLKic4EwECBAEBAQEDAgMBAQEBAQEBAQENAQEGAQEBAQEBBgYBA?=
+ =?us-ascii?q?oEdhTVTgluECAIBAwEiDwFGEBgNAiYCAicvGYMCgjABAzGtdYEyGgJl3HACS?=
+ =?us-ascii?q?QVVZIEpgRouAYhPAYR8cIR3QoINgRWCeW+EG3WDDoJpBINIhA+CEB14hSQEE?=
+ =?us-ascii?q?ldrhW+CRoogSIEFHANZLAFVEw0KCwcFgWwDNQwLLhUyRTgdgXyDeIU6ghGCB?=
+ =?us-ascii?q?IkZhFotT4NzHUADCxgNSBEsNxQbBj0BbgeWaoQXAVgBNExbCsgOhCWETZUEh?=
+ =?us-ascii?q?3caM5dSHgOSZJh+pEuEaIF+gX8zIjCDIlIZjjwWFst+djwCBwEKAQEDCYI7j?=
+ =?us-ascii?q?S4zgUsBAQ?=
+IronPort-PHdr: A9a23:S/RxYBzQ3qIVxP3XCzJ4zVBlVkEcU1XcAAcZ59Idhq5Udez7ptK+Z
+ xaZva0m1Q6UBd6TwskHotSVmpioYXYH75eFvSJKW713fDhBpOMo2icNO4q7M3D9N+PgdCcgH
+ c5PBxdP9nC/NlVJSo6lPwWB6nK94iQPFRrhKAF7Ovr6GpLIj8Swyuu+54Dfbx9HiTezf79+N
+ gm6oRneusULhYZvKro9xxXUqXZUZupawn9lKl2Ukxvg/Mm74YRt8z5Xu/Iv9s5AVbv1cqElR
+ rFGDzooLn446tTzuRfMVQWA6WIQX3sZnBRVGwTK4w30UZn3sivhq+pywzKaMtHsTbA1Qjut8
+ aFmQwL1hSgdNj459GbXitFsjK9evRmsqQBzz5LSbYqIMvd1Y6HTcs4ARWdZXshfSTJMDJ6yY
+ YUMCOQOP+hYoIbhqFUBtha+GQqhCfnzxjJSmnP736s32PkhHwHc2wwgGsoDvm7Ko9XpLqcZT
+ O+6w7POzTDdbPNdxDDw55LSchAiu/6MWKh/cdDKxEY1CwPFik+fqZf/MzyJ1+UAqm6W5PdvW
+ uyzkWAosR1xoiSxycc2jInEnp8ZxkzL+Ct53Yo4Id22RVNnbNCkH5VduCKXOop5T84tQ29lu
+ zg3xLIFtJO5ciUHyZQqyhHCZ/GEcYWF4w/vWeWXLDxlh3xlYKqyihmz/ES61OHxVsm53ExUo
+ iZbktTArHIA2h7L5sSaSPZw/V2t1SiP2g3T8O1IPEE5mKnBJ5Miw7M9kIcYv17ZES/sgkr2i
+ bebdkAj+ue19evqeq7mppqAN49sjQH+L7gultS/AesmNggOWHCW+eu51LH65k35RalKjuUrn
+ qXFqpzVOdoUpqilAw9Pz4Yj7gyzACun0dgAnHkHKkxKeA6fgoXmOlzCOu70APe/jli2jjtn2
+ fDLMqfjD5jPNnTDla3ufbd5605S0gozytVf6opOBbEbI/L8QErxu8bCDhIiKQO03+LnB89m1
+ o8ERW2OA7eVMLnOvl+Q+uIvP+6MaZcPtzbnKPgq/fvugmUjmVIGZ6apwZ8XZ2qjHvh8P0qYY
+ GLggs0dHmcSogo+UOvqhUWNUDNQZnu/RKE86S8hCIKgE4jDQpqhgLub3Ce0BpFWfHxJCkiQE
+ Xf0cIWJQ+sMaC2WIs5uiTEEUbmhS4k81RGyrg/6zLxnLuvb+yECqJ3sysB55/fPmhEq6Tx0E
+ 8Od3nmCTm5qmGMEXiI5075hoUNjzleOyqx4g/1DFdxP/PNFSAg7OoDaz+xiEdDyXQDBccmVR
+ 1a6WNmmBisxTt0pz98Uf0l9A8mijgzE3yeyB78VlrqLBIE7867F3Hj+Odx9y3DY26kllFQmX
+ MRPOnO8hqJl9AjcGZTJk0OHmKaub6gc2zTN9GibwWqUoE5YSBJwUbnCXX0HfUvWsc726VjGT
+ 7CwErknLARBxtCYKqdQad3mk09GRPH9N9TaeW6xnH2wBRmQyrOKd4XlY38d0znFCEgYjwAT+
+ m6LOAkmCii8oGLeDTluGEr3bU3j/+Zwtm+1Q1MywVLCU0o007uz5w5QhvGGTf4X9qwLtT1nq
+ DhuGlu5mdXMBImuvQ1kKZ1Rfcl13l5BdmGR4wVnPZWlJrpKj0Iaeh8xtFG4hEY/MZlJjcV/9
+ CBi9wF1M6/NiDt8
+IronPort-Data: A9a23:AGCduqqg9G+79LRaHD6DMrB1sDVeBmItZBIvgKrLsJaIsI4StFCzt
+ garIBmAaanZZGWhedoiPNyx/UNQuJeEyIIySAQ4+C03HysTo+PIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkjk7wdOWn9D8kiPzgqoPUUIbsIjp2SRJvVBAvgBdin/9RqoNziLBVOSvU0
+ T/Ji5OZYQLNNwJcaDpOtvrf8E435pwehRtB1rAATaEW1LPhvyZNZH4vDfnZB2f1RIBSAtm7S
+ 47rpJml/nnU9gsaEdislLD2aCUiGtY+6iDT4pb+c/HKbilq/kTe4I5iXBYvQRs/ZwGyojxE4
+ I4lWaqYEl51Y/KWyIzxZDEDe812FfUuFLYquhFTu+TLp6HNWyOEL/mDkCjalGDXkwp6KTgmy
+ BAWFNwCRjSbquft2uyBc8Rhof4eKJPzF5g240g1mFk1Dd5+KXzCa6rPoMRdwC9p3oZFEPDCf
+ dccLzF9BPjCS0ERfA1KVdRkxrru2SaXnz5w8Tp5oYI++WvayQVr+LHxNNPOPNeYLSlQth/B/
+ juZoTWpWHn2MvShiiaY+SuSgNb/jHPrU8UROOSRrN5l1Qj7Kms7TUd+uUGAifCjiUe7Ush3I
+ lAQ8zFoprpa3Fz7EPH+Uge+rXrCuQQTM/JMHOkqwAWMzLfI+QGfB3hCQjMpQMwrsoo6SCIn0
+ neNnsj1Hnp/vbuNU3Wf+7yI6zSoNkA9KW4EeD9BTgYf5dTniJ88gwiJTdt5FqOxyNrvFlnY2
+ CyDpiwzr6scgNRN1Kih+13DxTW2qfD0ohUduluRBD/4qFkjOcj6OORE9GTm0BqJF67BJnHpg
+ ZTOs5H2ADwmZX1VqBGwfQ==
+IronPort-HdrOrdr: A9a23:8IBfqa2G0WoSlVYuorbpqwqjBL8kLtp133Aq2lEZdPWaSKClfq
+ eV7ZMmPH7P+VIssR4b9+xoVJPrfZqYz+8X3WBzB8bGYOCFggqVxehZhOOI/9SjIVydygc378
+ hdmsZFZeEYdWIbsfrH
+X-Talos-CUID: 9a23:iuJwBW04JW5cSWvYzDqqX7xfPtgIdybHkk3pDkKfM1ttEqW+UnbJwfYx
+X-Talos-MUID: 9a23:4BZRfQVd+lILu7jq/AGvmCxpbflu2pS/WFAG1pYq4uDeFSMlbg==
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.15,191,1739833200"; 
+   d="scan'208";a="110176982"
+From: =?UTF-8?q?Petr=20Van=C4=9Bk?= <arkamar@atlas.cz>
+To: linux-kernel@vger.kernel.org
+Cc: Thomas Gleixner <tglx@linutronix.de>,
+	x86@kernel.org,
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Petr=20Van=C4=9Bk?= <arkamar@atlas.cz>,
+	stable@vger.kernel.org
+Subject: [PATCH 1/1] x86/cpu/topology: Don't limit CPUs to 1 for Xen PV guests due to disabled APIC
+Date: Sat,  5 Apr 2025 20:16:50 +0200
+Message-ID: <20250405181650.22827-2-arkamar@atlas.cz>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250405181650.22827-1-arkamar@atlas.cz>
+References: <20250405181650.22827-1-arkamar@atlas.cz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250404133459.16125-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Roger,
+Xen PV guests in DomU have APIC disabled by design, which causes
+topology_apply_cmdline_limits_early() to limit the number of possible
+CPUs to 1, regardless of the configured number of vCPUs.
 
-kernel test robot noticed the following build errors:
+This is a regression introduced in version 6.9 in commit 7c0edad3643f
+("x86/cpu/topology: Rework possible CPU management") which added an
+early check that limits CPUs if apic_is_disabled, without accounting for
+the fact that Xen PV guests always disable APIC even when SMP is
+supported.
 
-[auto build test ERROR on xen-tip/linux-next]
-[also build test ERROR on tip/x86/core linus/master v6.14 next-20250404]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+This patch fixes the issue by skipping the apic_is_disabled check for
+Xen PV guests, allowing them to boot with the full set of configured vCPUs.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Roger-Pau-Monne/x86-xen-fix-balloon-target-initialization-for-PVH-dom0/20250404-214218
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git linux-next
-patch link:    https://lore.kernel.org/r/20250404133459.16125-1-roger.pau%40citrix.com
-patch subject: [PATCH v2] x86/xen: fix balloon target initialization for PVH dom0
-config: x86_64-buildonly-randconfig-003-20250405 (https://download.01.org/0day-ci/archive/20250405/202504052301.dMtJILzp-lkp@intel.com/config)
-compiler: clang version 20.1.2 (https://github.com/llvm/llvm-project 58df0ef89dd64126512e4ee27b4ac3fd8ddf6247)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250405/202504052301.dMtJILzp-lkp@intel.com/reproduce)
+Fixes: 7c0edad3643f ("x86/cpu/topology: Rework possible CPU management")
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: x86@kernel.org
+Cc: xen-devel@lists.xenproject.org
+Cc: stable@vger.kernel.org # 6.9+
+Signed-off-by: Petr Vaněk <arkamar@atlas.cz>
+---
+ arch/x86/kernel/cpu/topology.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202504052301.dMtJILzp-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
->> ld.lld: error: undefined symbol: xen_released_pages
-   >>> referenced by balloon.c
-   >>>               drivers/xen/balloon.o:(balloon_init) in archive vmlinux.a
-   >>> referenced by balloon.c
-   >>>               drivers/xen/balloon.o:(balloon_init) in archive vmlinux.a
-
+diff --git a/arch/x86/kernel/cpu/topology.c b/arch/x86/kernel/cpu/topology.c
+index 01456236a6dd..10aa7f471ec9 100644
+--- a/arch/x86/kernel/cpu/topology.c
++++ b/arch/x86/kernel/cpu/topology.c
+@@ -428,8 +428,13 @@ void __init topology_apply_cmdline_limits_early(void)
+ {
+ 	unsigned int possible = nr_cpu_ids;
+ 
+-	/* 'maxcpus=0' 'nosmp' 'nolapic' */
+-	if (!setup_max_cpus || apic_is_disabled)
++	/* 'maxcpus=0' 'nosmp' 'nolapic'
++	 *
++	 * The apic_is_disabled check is ignored for Xen PV domains because Xen
++	 * disables ACPI in unprivileged PV DomU guests, which would otherwise limit
++	 * CPUs to 1, even if multiple vCPUs were configured.
++	 */
++	if (!setup_max_cpus || (!xen_pv_domain() && apic_is_disabled))
+ 		possible = 1;
+ 
+ 	/* 'possible_cpus=N' */
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.48.1
+
 
