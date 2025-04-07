@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA388C369A2
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:41:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.939988.1339926 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C19C3601E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:45:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.940053.1339936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1ln2-0006U7-9K; Mon, 07 Apr 2025 12:41:24 +0000
+	id 1u1lqp-0008AB-PR; Mon, 07 Apr 2025 12:45:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 939988.1339926; Mon, 07 Apr 2025 12:41:24 +0000
+Received: by outflank-mailman (output) from mailman id 940053.1339936; Mon, 07 Apr 2025 12:45:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1ln2-0006U0-6K; Mon, 07 Apr 2025 12:41:24 +0000
-Received: by outflank-mailman (input) for mailman id 939988;
- Mon, 07 Apr 2025 12:41:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u1lqp-0008A4-Mm; Mon, 07 Apr 2025 12:45:19 +0000
+Received: by outflank-mailman (input) for mailman id 940053;
+ Mon, 07 Apr 2025 12:45:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uyK1=WZ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u1lgk-0006Bg-Mt
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:54 +0000
-Received: from fout-a8-smtp.messagingengine.com
- (fout-a8-smtp.messagingengine.com [103.168.172.151])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b34af22e-13ac-11f0-9eaa-5ba50f476ded;
- Mon, 07 Apr 2025 14:34:51 +0200 (CEST)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 068031380191;
- Mon,  7 Apr 2025 08:34:51 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Mon, 07 Apr 2025 08:34:51 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Apr 2025 08:34:48 -0400 (EDT)
+ <SRS0=D+me=WZ=bounce.vates.tech=bounce-md_30504962.67f3c8da.v1-bb4178fe5553441b82bd7ecf1dfbf6a3@srs-se1.protection.inumbo.net>)
+ id 1u1lqo-00089y-Gn
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:45:18 +0000
+Received: from mail186-2.suw21.mandrillapp.com
+ (mail186-2.suw21.mandrillapp.com [198.2.186.2])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 276e9eec-13ae-11f0-9ffb-bf95429c2676;
+ Mon, 07 Apr 2025 14:45:16 +0200 (CEST)
+Received: from pmta10.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail186-2.suw21.mandrillapp.com (Mailchimp) with ESMTP id 4ZWTSq03z1zS62H97
+ for <xen-devel@lists.xenproject.org>; Mon,  7 Apr 2025 12:45:15 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ bb4178fe5553441b82bd7ecf1dfbf6a3; Mon, 07 Apr 2025 12:45:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +44,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b34af22e-13ac-11f0-9eaa-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744029291; x=1744115691; bh=jMZW7cjlhb
-	wKeY8FRDYgXIB8LyVP8OV7s9HHJqBF9Wg=; b=dL6SG/2YcZgs20yDd3hxbLWgQE
-	Y4aXUSJi81P6jTXRint3WorBkzfT4p+D8sVz82EHnt+ueFGoHVj7tKFJGZWQSn84
-	76K/Udk9yEgsDpIrOecxWk5EzlwnbSzf3M0HaH1TcYkcpjwWqTScjMl7si71Ofy6
-	Pd45IwFfEYZKTTmw98ruUD3SeM7cFkqBxHzXyztD88h9zyLNNzHEzxqNxHQS3rYV
-	iydriVIJ5yUzV9gJwqnDKrdvE/uJs+oY7dLu4pgNe4d45b7hml5pnoRXr0b9ZhDE
-	krxuc23rgTlzhfhH1lWnp2CJRIfWteKJ478/36by7eQ/DP2GAfyLJltRTgKQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029291; x=
-	1744115691; bh=jMZW7cjlhbwKeY8FRDYgXIB8LyVP8OV7s9HHJqBF9Wg=; b=E
-	+tLdzZY9IyC8LYABSwPwc1XCsHNVi/Jn4ASt0wR5miNyC3PyXPL1ijnXfLhVQMTi
-	sz2yDDZGyGEkhcpTvE9UWTiXTBMHmgwkmQVhDGzvr+PNPcz8hSDwO19zhNNWlKKl
-	wwlovYkpN9OwbrgkuRE8LAreeliB03p0HoJ0r0gdz6JD79x4QE4QhBTrnlw+wdVs
-	mLUMPwc6eOjVh+7hEPLCeHojMOsfONRdW7oC2YWS6I2Pbuy0ZTt5ptnuVRmiQe2l
-	xboRJdbMKOegqG7891ke+et+ZgPi9UjgB4XavjdE9q7NrnIRmXq6hgMnboRzQsrw
-	9O+WcLKV4Ourz8DFrWekw==
-X-ME-Sender: <xms:asbzZ3Gr5z87wFwRaq_GsiD6rIg7geBVIH4FOQQG6scozGo3a46Y0Q>
-    <xme:asbzZ0WhzavLKanw_Y4ZxWZWnQfmLAkCo2t5tIu7q0CB1d5tK7PDunxpEIYqso5fJ
-    uF147Tv5lOeIQ>
-X-ME-Received: <xmr:asbzZ5IAbl5pJwFTXOnOEkeUtoQJjji5JkD7_X1RnVPwZ94mFd21WFNuxPOSy0K6q7uNi5NZqDJF-2RxCABCWIZoS5ruCEf6M4Qe-N8sL91R28RAcoM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvdduucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
-    tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
-    cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
-    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhl
-    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopeelpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
-    vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
-    hopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhr
-    tghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoh
-    eprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopegr
-    nhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtohepmhhitg
-    hhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehs
-    uhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigvnhdrohhrghdprhgtphhtth
-    hopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-X-ME-Proxy: <xmx:asbzZ1HW1HCQLF_99ChT3tVQryx-tegyvgePHuR2tNxGKf_dUEevuw>
-    <xmx:asbzZ9XKG1AJdT8sOyM7MKky-jpUy6gm9eV_BAXd0Vmz9y_n1G3TCA>
-    <xmx:asbzZwNXU0fV4Z5YEj76Kc9LNjf6V94H71obs3ZgrexnFgD2lC9gRA>
-    <xmx:asbzZ81PCoLXm2D5WNaFf7u7Hd5ABcnBuxxF9Gwr8bWSwRPspHjWRg>
-    <xmx:a8bzZ-iPe607niAeds0FbxlCYb6FXafHgD-HAreAexpLthFAYeH7ylCb>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH test-artifacts v2 13/12] scripts: add rc_verbose=yes to /etc/rc.conf
-Date: Mon,  7 Apr 2025 14:31:13 +0200
-Message-ID: <20250407123448.1520451-1-marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
-References: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
+X-Inumbo-ID: 276e9eec-13ae-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1744029915; x=1744299915;
+	bh=xl0p93gFDyv4jF0UdvNAEBv/3oOUUM+v4jusW7PLYlU=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=jGOQCRTzc0EjOTZW00Lp/P2LURf9I9ra5HBQlNuFew/Rzs/y1iwjVgUMuvhk+nydq
+	 PHCDM+lFs+YOcT7sm91myHWfHHLF7Oiu3pEpSYOR7G5nKBuuq4367GOPyZoVXwY/Bk
+	 3OOU5TE/cCnbrLe/3349fqxj4W5tvxa8rxjwHe2bhKYTF80xV4qXPmUiY1o8YnjtN4
+	 qIqzVqtwlDNZGM/BgQ1t+ge1K/0FULzlKYk9rJkiNGdTUvncZXb3HZLY6Ag5XneiLi
+	 QaJxI6mjBLNfgXIsoaN9cY1DVkTk//y51JNBLF7rV9x439mtYpFpxnDmqDoYlHu4OJ
+	 2P9yAKO+RI+3g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1744029915; x=1744290415; i=anthony.perard@vates.tech;
+	bh=xl0p93gFDyv4jF0UdvNAEBv/3oOUUM+v4jusW7PLYlU=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=m5MO8W/mFHZ8Mn2iYSpNZtcXXgw6BRkgKxBhVfwHETGsq+aafyAizf0QTsCTM6mn9
+	 FN7bqwUStbu4P6D3cqRO6Q/VTdSeh4foQmTuJ07KnJFepuD9jlFSdQF3VNruqU5ChF
+	 gumlUn9aupSYcmCN1qQa+fp/ryfkWSJIyIWyBnkh2RzSqTM3dVKip4qfGVQV/ophgs
+	 ct8lN7mRnuoW9Ry3bpwu5uV+r1QkKirTBkKbJ8DjyigjVEgkzahjpVJNMPabTtQrqF
+	 NBJlISz2h8m7og0IhmaoX2wYAl7jic+IW/fNZm+7PQ1p6BtkgjXVJSl5k+O78a5mF9
+	 hKpi1qjs/UlmQ==
+From: "Anthony PERARD" <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20Ping:=20[PATCH]=20libxc/PM:=20correct=20(not=20just)=20error=20handling=20in=20xc=5Fget=5Fcpufreq=5Fpara()?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1744029913861
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Juergen Gross" <jgross@suse.com>, xen-devel@lists.xenproject.org
+Message-Id: <Z_PI2UNn2C4GKqYw@l14>
+References: <df676738-19e7-47e6-977f-25d6d13ccc50@suse.com> <e0028d85-668a-464b-aac5-ac8a79ea9bf5@suse.com>
+In-Reply-To: <e0028d85-668a-464b-aac5-ac8a79ea9bf5@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.bb4178fe5553441b82bd7ecf1dfbf6a3?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250407:md
+Date: Mon, 07 Apr 2025 12:45:14 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-This is done in every single test job, so do it at the initrd build
-time.
+On Mon, Apr 07, 2025 at 01:38:24PM +0200, Jan Beulich wrote:
+> On 27.03.2025 14:32, Jan Beulich wrote:
+> > From their introduction all xc_hypercall_bounce_pre() uses, when they
+> > failed, would properly cause exit from the function including cleanup,
+> > yet without informing the caller of the failure. Purge the unlock_1
+> > label for being both pointless and mis-named.
+> > 
+> > An earlier attempt to switch to the usual split between return value and
+> > errno wasn't quite complete.
+> > 
+> > HWP work made the cleanup of the "available governors" array
+> > conditional, neglecting the fact that the condition used may not be the
+> > condition that was used to allocate the buffer (as the structure field
+> > is updated upon getting back EAGAIN). Throughout the function, use the
+> > local variable being introduced to address that.
+> > 
+> > Fixes: 4513025a8790 ("libxc: convert sysctl interfaces over to hypercall buffers")
+> > Amends: 73367cf3b4b4 ("libxc: Fix xc_pm API calls to return negative error and stash error in errno")
+> > Fixes: 31e264c672bc ("pmstat&xenpm: Re-arrage for cpufreq union")
+> > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> May I ask for an ack or comments towards what needs changing?
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- scripts/x86_64-rootfs-alpine.sh | 1 +
- 1 file changed, 1 insertion(+)
+Calling xc_get_cpufreq_para with:
 
-diff --git a/scripts/x86_64-rootfs-alpine.sh b/scripts/x86_64-rootfs-alpine.sh
-index f8b04c5..b70b3a5 100755
---- a/scripts/x86_64-rootfs-alpine.sh
-+++ b/scripts/x86_64-rootfs-alpine.sh
-@@ -50,6 +50,7 @@ echo "ttyS0" >> /etc/securetty
- echo "hvc0" >> /etc/securetty
- echo "ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100" >> /etc/inittab
- echo "hvc0::respawn:/sbin/getty -L hvc0 115200 vt100" >> /etc/inittab
-+echo "rc_verbose=yes" >> /etc/rc.conf
- echo > /etc/modules
- passwd -d "root" root
- 
+    user_para = {
+        .cpu_num = 0,
+        .freq_num = 0,
+        .gov_num = 9,
+    };
+
+seems broken. It's looks like the `scaling_available_governors` bounce
+buffer is going to be used without been allocated properly handled, with
+this patch.
+
+Cheers,
+
 -- 
-2.48.1
+
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
 
