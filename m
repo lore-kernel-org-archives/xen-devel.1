@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB77C3601E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 09:14:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.939431.1339551 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8A4C36010
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 09:14:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.939434.1339572 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1iZ6-0004tz-3I; Mon, 07 Apr 2025 09:14:48 +0000
+	id 1u1iZ9-0005YC-KA; Mon, 07 Apr 2025 09:14:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 939431.1339551; Mon, 07 Apr 2025 09:14:48 +0000
+Received: by outflank-mailman (output) from mailman id 939434.1339572; Mon, 07 Apr 2025 09:14:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1iZ5-0004rl-RL; Mon, 07 Apr 2025 09:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 939431;
- Mon, 07 Apr 2025 09:14:46 +0000
+	id 1u1iZ9-0005Xg-Cd; Mon, 07 Apr 2025 09:14:51 +0000
+Received: by outflank-mailman (input) for mailman id 939434;
+ Mon, 07 Apr 2025 09:14:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=U9Ey=WZ=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1u1iZ4-0003xy-N7
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 09:14:46 +0000
+ id 1u1iZ7-0003xy-Fd
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 09:14:49 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id bf90f20c-1390-11f0-9eaa-5ba50f476ded;
- Mon, 07 Apr 2025 11:14:46 +0200 (CEST)
+ id c11750d6-1390-11f0-9eaa-5ba50f476ded;
+ Mon, 07 Apr 2025 11:14:48 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B8B181BF3;
- Mon,  7 Apr 2025 02:14:46 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4A8181424;
+ Mon,  7 Apr 2025 02:14:49 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 85D1A3F59E;
- Mon,  7 Apr 2025 02:14:44 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 184E03F59E;
+ Mon,  7 Apr 2025 02:14:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf90f20c-1390-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: c11750d6-1390-11f0-9eaa-5ba50f476ded
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,65 +52,113 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 5/7] arm/mpu: Introduce MPU memory mapping flags
-Date: Mon,  7 Apr 2025 10:14:28 +0100
-Message-Id: <20250407091430.2342709-6-luca.fancellu@arm.com>
+Subject: [PATCH v2 7/7] arm/mpu: Implement setup_mpu for MPU system
+Date: Mon,  7 Apr 2025 10:14:30 +0100
+Message-Id: <20250407091430.2342709-8-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250407091430.2342709-1-luca.fancellu@arm.com>
 References: <20250407091430.2342709-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce the MPU memory mapping flags in asm/page.h.
+Implement the function setup_mpu that will logically track the MPU
+regions defined by hardware registers, start introducing data
+structures and functions to track the status from the C world.
+
+The xen_mpumap_mask bitmap is used to track which MPU region are
+enabled at runtime.
+
+This function is called from setup_mm() which full implementation
+will be provided in a later stage.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/page.h | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ xen/arch/arm/include/asm/arm64/mpu.h |  2 ++
+ xen/arch/arm/mpu/mm.c                | 49 +++++++++++++++++++++++++++-
+ 2 files changed, 50 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/page.h b/xen/arch/arm/include/asm/page.h
-index 69f817d1e68a..22f7d2c6cb30 100644
---- a/xen/arch/arm/include/asm/page.h
-+++ b/xen/arch/arm/include/asm/page.h
-@@ -62,6 +62,7 @@
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index 7cf8d355a1af..ff5a957bf085 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -6,6 +6,8 @@
+ #ifndef __ARM_ARM64_MPU_H__
+ #define __ARM_ARM64_MPU_H__
  
- #define MAIRVAL (MAIR1VAL << 32 | MAIR0VAL)
- 
-+#ifdef CONFIG_MMU
++#define PRENR_MASK  GENMASK(31, 0)
++
  /*
-  * Layout of the flags used for updating the hypervisor page tables
-  *
-@@ -90,6 +91,30 @@
- #define _PAGE_CONTIG_BIT    8
- #define _PAGE_CONTIG        (1U << _PAGE_CONTIG_BIT)
+  * Excute never.
+  * Stage 1 EL2 translation regime.
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 2c5820a44f13..fe05c8097155 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -14,6 +14,17 @@
  
-+#else /* !CONFIG_MMU */
+ struct page_info *frame_table;
+ 
++/* Maximum number of supported MPU memory regions by the EL2 MPU. */
++uint8_t __ro_after_init max_xen_mpumap;
 +
 +/*
-+ * Layout of the flags used for updating MPU memory region attributes
-+ * [0:2] Memory attribute Index
-+ * [3:4] Execute Never
-+ * [5:6] Access Permission
-+ * [7]   Region Present
++ * Bitmap xen_mpumap_mask is to record the usage of EL2 MPU memory regions.
++ * Bit 0 represents MPU memory region 0, bit 1 represents MPU memory
++ * region 1, ..., and so on.
++ * If a MPU memory region gets enabled, set the according bit to 1.
 + */
-+#define _PAGE_AI_BIT            0
-+#define _PAGE_XN_BIT            3
-+#define _PAGE_AP_BIT            5
-+#define _PAGE_PRESENT_BIT       7
-+#define _PAGE_AI                (7U << _PAGE_AI_BIT)
-+#define _PAGE_XN                (2U << _PAGE_XN_BIT)
-+#define _PAGE_RO                (2U << _PAGE_AP_BIT)
-+#define _PAGE_PRESENT           (1U << _PAGE_PRESENT_BIT)
-+#define PAGE_AI_MASK(x)         (((x) >> _PAGE_AI_BIT) & 0x7U)
-+#define PAGE_XN_MASK(x)         (((x) >> _PAGE_XN_BIT) & 0x3U)
-+#define PAGE_AP_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x3U)
-+#define PAGE_RO_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x2U)
++DECLARE_BITMAP(xen_mpumap_mask, MAX_MPU_REGIONS);
 +
-+#endif /* CONFIG_MMU */
+ /* EL2 Xen MPU memory region mapping table. */
+ pr_t xen_mpumap[MAX_MPU_REGIONS];
+ 
+@@ -224,9 +235,45 @@ pr_t pr_of_xenaddr(paddr_t base, paddr_t limit, unsigned attr)
+     return region;
+ }
+ 
++/*
++ * The code in this function needs to track the regions programmed in
++ * arm64/mpu/head.S
++ */
++static void __init setup_mpu(void)
++{
++    register_t prenr;
++    unsigned int i = 0;
 +
- /*
-  * _PAGE_DEVICE and _PAGE_NORMAL are convenience defines. They are not
-  * meant to be used outside of this header.
++    /*
++     * MPUIR_EL2.Region[0:7] identifies the number of regions supported by
++     * the EL2 MPU.
++     */
++    max_xen_mpumap = (uint8_t)(READ_SYSREG(MPUIR_EL2) & NUM_MPU_REGIONS_MASK);
++
++    /* PRENR_EL2 has the N bit set if the N region is enabled, N < 32 */
++    prenr = (READ_SYSREG(PRENR_EL2) & PRENR_MASK);
++
++    /*
++     * Set the bitfield for regions enabled in assembly boot-time.
++     * This code works under the assumption that the code in head.S has
++     * allocated and enabled regions below 32 (N < 32).
++     */
++    while ( prenr > 0 )
++    {
++        if (prenr & 0x1)
++        {
++            set_bit(i, xen_mpumap_mask);
++            read_protection_region(&xen_mpumap[i], i);
++        }
++
++        prenr >>= 1;
++        i++;
++    }
++}
++
+ void __init setup_mm(void)
+ {
+-    BUG_ON("unimplemented");
++    setup_mpu();
+ }
+ 
+ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
 -- 
 2.34.1
 
