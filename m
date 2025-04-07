@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F41C3601E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:35:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.939853.1339885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 880C5C36010
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:40:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.939901.1339896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgj-0000Uw-N1; Mon, 07 Apr 2025 12:34:53 +0000
+	id 1u1lmI-0004H8-Af; Mon, 07 Apr 2025 12:40:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 939853.1339885; Mon, 07 Apr 2025 12:34:53 +0000
+Received: by outflank-mailman (output) from mailman id 939901.1339896; Mon, 07 Apr 2025 12:40:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgj-0000UY-ID; Mon, 07 Apr 2025 12:34:53 +0000
-Received: by outflank-mailman (input) for mailman id 939853;
- Mon, 07 Apr 2025 12:34:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u1lmI-0004H1-82; Mon, 07 Apr 2025 12:40:38 +0000
+Received: by outflank-mailman (input) for mailman id 939901;
+ Mon, 07 Apr 2025 12:40:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uyK1=WZ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u1lgh-0006u9-IM
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:51 +0000
-Received: from fout-a8-smtp.messagingengine.com
- (fout-a8-smtp.messagingengine.com [103.168.172.151])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1e75ccd-13ac-11f0-9ffb-bf95429c2676;
- Mon, 07 Apr 2025 14:34:49 +0200 (CEST)
-Received: from phl-compute-02.internal (phl-compute-02.phl.internal
- [10.202.2.42])
- by mailfout.phl.internal (Postfix) with ESMTP id AC8171380334;
- Mon,  7 Apr 2025 08:34:48 -0400 (EDT)
+ id 1u1lge-0006Bg-LU
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:48 +0000
+Received: from fhigh-a4-smtp.messagingengine.com
+ (fhigh-a4-smtp.messagingengine.com [103.168.172.155])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b02659ec-13ac-11f0-9eaa-5ba50f476ded;
+ Mon, 07 Apr 2025 14:34:46 +0200 (CEST)
+Received: from phl-compute-08.internal (phl-compute-08.phl.internal
+ [10.202.2.48])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id B8382114013D;
+ Mon,  7 Apr 2025 08:34:45 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-02.internal (MEProxy); Mon, 07 Apr 2025 08:34:48 -0400
+ by phl-compute-08.internal (MEProxy); Mon, 07 Apr 2025 08:34:45 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Apr 2025 08:34:47 -0400 (EDT)
+ 7 Apr 2025 08:34:44 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,63 +47,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1e75ccd-13ac-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: b02659ec-13ac-11f0-9eaa-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744029288; x=1744115688; bh=RayiXMebKB
-	VQZ9cR/fh1HsEVnIaXaoIq2vJJNpeCIXQ=; b=hI9fbPYGdd8sBUDcXodPNV+mMP
-	Npw9lz4vw0/wBUzEBG4Jv+d1tGIWSoOYbcyFQ6xVuHAapxbMbuXkEEPeStFdVfkV
-	WvGmQpquqEKp8vtwZv1801XhE+9gvWpQLV3gew97EzBGE574TDti0Xa/PEslNSHE
-	OaLEbdspUfs6YKgxdlpGsQ0EPyUd2i0RwPyWvzCT6kdYmdJ6nR0mKXjv2oX1FESJ
-	LHiUh579rXo+MRwJUaScN56CSNaW0KpaG4KrhOdSaOUl6ElM9HxZLNY02k5+r8pN
-	VQaDhHIkvXeUP1EhRl4BQMtABROeHbPZdrcKFa3FGy7NCZOxxIXaDiLWmpzA==
+	:subject:to:to; s=fm2; t=1744029285; x=1744115685; bh=bBr+eZXUOc
+	ukuCDFZbX2ITRA0wCf4Pu2nOyRJufUmqM=; b=oLWxl48stmB4k9m+WEpoU33GhF
+	w5K9tlQCQO4SwpqU7z8mSv8sWGk0dyVaRRbTR9n8J19ecBh9nkaLjAGumQaPIPOd
+	4JhuzRxBzR196XBGlwSaWnPcpu55LAQID0230FMKw6z3MJs2+nw0TdzkkmTj52Al
+	gLYGo9nxhNBvqqj/lU3E6zj5yHYltizGrDoyWP5TWkm7iksOIb+soPGUT8LvF2iF
+	bJ+lnoqfa82joim6XPbAbHayCHDftxlJoChO3BRgWilf9Rp9jTAMmkT7Y8aF1aVn
+	dA2rbIXowY8W952+Hu4yjvirqWRf/hnpX84H/aB6nT5lbxymDG6FNS05asPA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029288; x=
-	1744115688; bh=RayiXMebKBVQZ9cR/fh1HsEVnIaXaoIq2vJJNpeCIXQ=; b=g
-	wO3332R7XyaioCHDeCbr9O9woMKViFedyqd69o5sJLFZuyszSL5zzg2tsLcAKY0D
-	TW95S0BB6Ort8ap8LnYqtDXGk/szlN0GvvyGyhIuuidYblxMCnX2mp4X/pnMIMGV
-	r26ebRjNA3pwaMd54xEByYkc/gSSTs/o4/7X0XM2BX+BgGoPwGM9rEkGi4jKgF9k
-	LRu6xLmYtIltr1HtojXhaSQCf0WDuP6VBUjxpJPicY3xHUaCRorVeBIx8uKT6kwF
-	penSKHF5eIS4uFWXd2W/eByJGYDhuwF/5naeLZqHk1EdFE1+uSQ0Nt5BjUW0XScE
-	PM2nEpNJbCmmVzTGf/5jA==
-X-ME-Sender: <xms:aMbzZ1dF3pVyWzlv-KKYm_Vl0SeI6aC_fgCzdlLnJC92cbEfh2eEPA>
-    <xme:aMbzZzPMGSgdrMedIdlt78gGRDLtCCSAHXZNax4yG7sGZhdBp6zzvNCy2EOfKZ59L
-    jlo40C1CfMroA>
-X-ME-Received: <xmr:aMbzZ-gb1rApHOmpZoqcjFauNjX9ePZI1LP5SydFy0j_k7e9yimkUZ8TzHiLsSbRk93AhRHDZj6Pyn7IVgwsbPE8qidhHsC6e7Iv-EU2L8knWTbBfWU>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029285; x=
+	1744115685; bh=bBr+eZXUOcukuCDFZbX2ITRA0wCf4Pu2nOyRJufUmqM=; b=D
+	0vKijYuWx66E1hKtUlss0mwfEJr6lbwgCYSHUWhmE8s2lJ1qzYGdpFWh0ziR4a1C
+	pOUOpqMq7Jbv0NNqdqrWg3xcUpXNqoAF0VE3XtIeZviQkBr3HlSi9hXOneIq+irA
+	pXk3eOyPdODzg5fGR/9puu9oacaeFswa2UMg10fNykpk40YObnYKyKgWK9+GDCNb
+	wH9Ai8toEPSzFfUizuqJ0IY3hD1oq9/fBppuLZTLuY7UI7vK9b+kFXm1YnF/3Fy/
+	G42bOUXVOC8U3d8DlePQf12HCZqzigkN3RpaE7FRCvC80VcIbWoKrGGdq615LBBm
+	BpKP+yiDHe/eLHl+yImIw==
+X-ME-Sender: <xms:ZcbzZ4FGtUqphP5AD0j0vpE6rdZRzRZo3PdnrRm2ocbGovnelAbN-w>
+    <xme:ZcbzZxUHadEmNU03T6V854vqT6t9fNF8xhOTZbb5_bnz-UBWRfci9VzAtiFbkFcJs
+    qRHotGfEcM2Gw>
+X-ME-Received: <xmr:ZcbzZyI60TrZTcjx9WiwkG_JX3RzppDFo4h3OIOxw9v0PPDzC3RLCEuf13PJOy-0gu4wKF3DCvVkKVBbv_laofU2iZowcf8k8GifF3_w_mSCq4ci3-o>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvddtucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
     gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
     tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
     cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
-    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
-    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopeegpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
-    vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
-    hopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhr
-    tghpthhtoheptggrrhguohgvsegtrghrughovgdrtghomhdprhgtphhtthhopehsshhtrg
-    gsvghllhhinhhisehkvghrnhgvlhdrohhrgh
-X-ME-Proxy: <xmx:aMbzZ--9_9ZbRnPq6R076mRfCMBErcOReqhWbHP0k8KfbvxBE9Yvrg>
-    <xmx:aMbzZxtdIOb3JTASiT0Rxm3bRoLjg_rygIyIKG1oE5pbbMqwHIQMCg>
-    <xmx:aMbzZ9GCOM-97aGOaaZjBAeWxtYke11tN3gmyucdC-O3QuwjzVTrhA>
-    <xmx:aMbzZ4MK4Ul6maBIQnUtLQtSFGxPRJlj-dP-saGC-KIYZHjUWyxwQA>
-    <xmx:aMbzZw0jJwjM0KBao6qxTqzauAjJlD8vZwT04piMDP0eGbDsZpQFzQ51>
+    ucggtffrrghtthgvrhhnpeffiedtgeevffetledvgefhhfevgffhfeekleehueejjeegvd
+    dvgfffjeeutddvleenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgv
+    rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinh
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepgedpmhho
+    uggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgi
+    gvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhs
+    ihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinh
+    hisehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtrghrughovgestggrrhguohgvrdgt
+    ohhm
+X-ME-Proxy: <xmx:ZcbzZ6G4i11ORz5KBXPDZD6zqWyZ76reLrbToSyNItpuCrnMZM2h7g>
+    <xmx:ZcbzZ-UGDmvR9qIgPr_Pwf3aDbhRbxAAX6e98bcDPIRjxPd0D2jfbg>
+    <xmx:ZcbzZ9NJLaEif4eLIZ0iMERazV0sZczWB0Ddhs-z_08moO0AqIRGUA>
+    <xmx:ZcbzZ12SvcvVrPyATOcPjoJRceDnge_wU86yqO3cfkNRiCuJB-QtPg>
+    <xmx:ZcbzZ3fZnEF2zkIHwtGonrNd6rpqcm9LBKMBKf1IGSTDRFVBsrIgKYlp>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 12/12] CI: save toolstack artifact as cpio.gz
-Date: Mon,  7 Apr 2025 14:31:12 +0200
-Message-ID: <ded706422ea35898ac4f9c64cf41e11795347bb0.1744028549.git-series.marmarek@invisiblethingslab.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v2 10/12] CI: add AMD Zen 4 HW runner
+Date: Mon,  7 Apr 2025 14:31:10 +0200
+Message-ID: <3f825b4bc78916fc537d8bde4a5e49931106bffc.1744028549.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
 References: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
@@ -111,167 +112,127 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This avoids the need to re-compress it in every test job.
+This is AMD Ryzen 5 7640U in Framework Laptop AMD.
+It has several things different than the other runners.
+First of all, the console is using XHCI debug capability.
+And then, this system doesn't have normal wired ethernet. But is has one
+on USB, and this one is used for booting. For this, enable
+CONFIG_USB_RTL8152 in the Linux build.
+
+Include some basic tests, plus PCI passthrough.
+
+This machine doesn't support S3. S0ix pretends to be working with
+Qubes's dom0 (kernel + userspace), but it hangs on suspend with Alpine
+used in test. But even when it doesn't hang, it doesn't really reach
+deep sleep, so skip this test for now here.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-New in v2
----
- automation/scripts/build                          | 2 +-
- automation/scripts/qemu-alpine-x86_64.sh          | 2 +-
- automation/scripts/qemu-smoke-dom0-arm64.sh       | 2 +-
- automation/scripts/qemu-smoke-dom0less-arm64.sh   | 2 +-
- automation/scripts/qubes-x86-64.sh                | 4 +++-
- automation/scripts/xilinx-smoke-dom0-x86_64.sh    | 4 ++--
- automation/scripts/xilinx-smoke-dom0less-arm64.sh | 2 +-
- 7 files changed, 10 insertions(+), 8 deletions(-)
+Requires containers rebuild, especially tests-artifacts/kernel/6.12.21.
 
-diff --git a/automation/scripts/build b/automation/scripts/build
-index 522efe774ef3..365534895047 100755
---- a/automation/scripts/build
-+++ b/automation/scripts/build
-@@ -108,7 +108,7 @@ else
-     # Note: Some smoke tests depending on finding binaries/xen on a full build
-     # even though dist/ contains everything, while some containers don't even
-     # build Xen
--    cp -r dist binaries/
-+    (cd dist/install; find | cpio -o -H newc | gzip) > binaries/toolstack.cpio.gz
-     cp -r tools/tests binaries/
-     collect_xen_artefacts
- fi
-diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
-index 9b47b662c3f2..81e8ff24327a 100755
---- a/automation/scripts/qemu-alpine-x86_64.sh
-+++ b/automation/scripts/qemu-alpine-x86_64.sh
-@@ -35,7 +35,6 @@ mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--cp -ar ../dist/install/* .
- mkdir -p root etc/local.d
- mv ../initrd-domU.cpio.gz ./root/initrd.cpio.gz
- cp ../bzImage ./root
-@@ -61,6 +60,7 @@ xl -vvv create -c /root/test.cfg
- chmod +x etc/local.d/xen.start
- # rebuild Dom0 rootfs
- cp ../initrd.cpio.gz ../xen-rootfs.cpio.gz
-+cat ../toolstack.cpio.gz >> ../xen-rootfs.cpio.gz
- find . |cpio -H newc -o|gzip >> ../xen-rootfs.cpio.gz
- cd ../..
+Do not apply yet, until issues found by those tests are fixed. That
+would be at least third issue found using this system, so lets have it
+in CI.
+---
+ automation/gitlab-ci/test.yaml                       | 56 +++++++++++++-
+ automation/tests-artifacts/kernel/6.12.21.dockerfile |  2 +-
+ 2 files changed, 58 insertions(+)
+
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index a13dd040bd26..feb2dd10ab30 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -188,6 +188,16 @@
+   tags:
+     - qubes-hw11
  
-diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
-index 533b286528f1..2e5246f2c9b6 100755
---- a/automation/scripts/qemu-smoke-dom0-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
-@@ -33,7 +33,6 @@ mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--cp -ar ../dist/install/* .
- mkdir -p etc/local.d root
- mv ../initrd-domU.cpio.gz ./root/initrd.cpio.gz
- cp ../Image ./root
-@@ -56,6 +55,7 @@ xl -vvv create -c /root/test.cfg
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
- cp ../initrd.cpio.gz ../xen-rootfs.cpio.gz
-+cat ../toolstack.cpio.gz >> ../xen-rootfs.cpio.gz
- find . |cpio -H newc -o|gzip >> ../xen-rootfs.cpio.gz
- cd ../..
++.zen4-x86-64:
++  extends: .adl-x86-64
++  variables:
++    PCIDEV: "c3:00.4"
++    PCIDEV_INTR: "MSI-X"
++    CONSOLE_OPTS: "console=xhci dbgp=xhci@pcic1:00.3,share=yes"
++    SUT_ADDR: test-12.testnet
++  tags:
++    - qubes-hw12
++
+ # Test jobs
+ build-each-commit-gcc:
+   extends: .test-jobs-common
+@@ -479,6 +489,52 @@ zen3p-tools-tests-pvh-x86-64-gcc-debug:
+     - *x86-64-test-needs
+     - alpine-3.18-gcc-debug
  
-diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-index 70085e26c139..93f4fb410690 100755
---- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-@@ -121,7 +121,6 @@ mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--cp -ar ../binaries/dist/install/* .
- mkdir -p etc/local.d
- 
- echo "#!/bin/bash
-@@ -142,6 +141,7 @@ ${dom0_check}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
- cp ../binaries/initrd.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+cat ../binaries/toolstack.cpio.gz >> ../binaries/dom0-rootfs.cpio.gz
- find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 399d72e0600d..4fe59fce8999 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -195,7 +195,6 @@ mkdir proc
- mkdir run
- mkdir sys
- mkdir -p etc/local.d
--cp -ar ../binaries/dist/install/* .
- cp -ar ../binaries/tests .
- cp -a ../automation/scripts/run-tools-tests tests/
- 
-@@ -231,8 +230,10 @@ else
- fi
- 
- chmod +x etc/local.d/xen.start
-+mkdir -p etc/xen
- echo "$domU_config" > etc/xen/domU.cfg
- 
-+mkdir -p etc/default
- echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
- echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
- mkdir -p var/log/xen/console
-@@ -242,6 +243,7 @@ if [ -n "$domU_check" ]; then
- fi
- # take base initrd and append test-specific files
- cp ../binaries/initrd.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+cat ../binaries/toolstack.cpio.gz >> ../binaries/dom0-rootfs.cpio.gz
- find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
-diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-index 6b9f0e4a8dc7..ea0f952975c7 100755
---- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-@@ -115,8 +115,7 @@ rm -rf rootfs
- mkdir -p rootfs
- cd rootfs
- mkdir boot proc run srv sys
--cp -ar ../binaries/dist/install/* .
--mkdir -p etc/local.d
-+mkdir -p etc/local.d etc/xen etc/default
- echo "#!/bin/bash
- set -x
- export LD_LIBRARY_PATH=/usr/local/lib
-@@ -134,6 +133,7 @@ cp ../binaries/bzImage boot/vmlinuz
- cp ../binaries/domU-rootfs-overlay.cpio.gz boot/initrd-domU-overlay
- copy_dom0_files
- cp ../binaries/initrd.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+cat ../binaries/toolstack.cpio.gz >> ../binaries/dom0-rootfs.cpio.gz
- find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
-diff --git a/automation/scripts/xilinx-smoke-dom0less-arm64.sh b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-index 81be60e2026e..dbb955df0478 100755
---- a/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-@@ -63,7 +63,6 @@ mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--cp -ar ../binaries/dist/install/* .
- 
- mkdir -p etc/local.d
- echo "#!/bin/bash
-@@ -77,6 +76,7 @@ ${dom0_check}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
- cp ../binaries/initrd.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+cat ../binaries/toolstack.cpio.gz >> ../binaries/dom0-rootfs.cpio.gz
- find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
++zen4-smoke-x86-64-gcc-debug:
++  extends: .zen4-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh 2>&1 | tee ${LOGFILE}
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
++zen4-smoke-x86-64-dom0pvh gcc-debug:
++  extends: .zen4-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh dom0pvh 2>&1 | tee ${LOGFILE}
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
++zen4-pci-hvm-x86-64-gcc-debug:
++  extends: .zen4-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh pci-hvm 2>&1 | tee ${LOGFILE}
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
++zen4-tools-tests-pv-x86-64-gcc-debug:
++  extends: .zen4-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh tools-tests-pv 2>&1 | tee ${LOGFILE}
++  artifacts:
++    reports:
++      junit: tests-junit.xml
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
++zen4-tools-tests-pvh-x86-64-gcc-debug:
++  extends: .zen4-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh tools-tests-pvh 2>&1 | tee ${LOGFILE}
++  artifacts:
++    reports:
++      junit: tests-junit.xml
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.18-gcc-debug
++
+ qemu-smoke-dom0-arm64-gcc:
+   extends: .qemu-arm64
+   script:
+diff --git a/automation/tests-artifacts/kernel/6.12.21.dockerfile b/automation/tests-artifacts/kernel/6.12.21.dockerfile
+index d7d34031cab5..4e0a68ec61eb 100644
+--- a/automation/tests-artifacts/kernel/6.12.21.dockerfile
++++ b/automation/tests-artifacts/kernel/6.12.21.dockerfile
+@@ -19,6 +19,7 @@ RUN apt-get update && \
+         flex \
+         bison \
+         libelf-dev \
++        libssl-dev \
+         && \
+     apt-get autoremove -y && \
+     apt-get clean && \
+@@ -33,6 +34,7 @@ RUN curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"$LINUX_VERSI
+     scripts/config --enable BRIDGE && \
+     scripts/config --enable IGC && \
+     scripts/config --enable TUN && \
++    scripts/config --enable USB_RTL8152 && \
+     cp .config .config.orig && \
+     cat .config.orig | grep XEN | grep =m |sed 's/=m/=y/g' >> .config && \
+     make -j$(nproc) bzImage && \
 -- 
 git-series 0.9.1
 
