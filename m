@@ -4,48 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE888C36010
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 18:57:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.940937.1340544 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B870DC36010
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 19:02:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.941011.1340594 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1rer-00070X-Gl; Mon, 07 Apr 2025 18:57:21 +0000
+	id 1u1rk3-0004Br-1r; Mon, 07 Apr 2025 19:02:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 940937.1340544; Mon, 07 Apr 2025 18:57:21 +0000
+Received: by outflank-mailman (output) from mailman id 941011.1340594; Mon, 07 Apr 2025 19:02:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1rer-0006yC-D2; Mon, 07 Apr 2025 18:57:21 +0000
-Received: by outflank-mailman (input) for mailman id 940937;
- Mon, 07 Apr 2025 18:57:20 +0000
+	id 1u1rk2-0004Bk-V3; Mon, 07 Apr 2025 19:02:42 +0000
+Received: by outflank-mailman (input) for mailman id 941011;
+ Mon, 07 Apr 2025 19:02:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=D4Wy=WZ=ti.com=afd@srs-se1.protection.inumbo.net>)
- id 1u1req-0006qC-5X
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 18:57:20 +0000
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (envelope-from <SRS0=wFJZ=WZ=arndb.de=arnd@srs-se1.protection.inumbo.net>)
+ id 1u1rk1-0004Be-L0
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 19:02:41 +0000
+Received: from fout-a5-smtp.messagingengine.com
+ (fout-a5-smtp.messagingengine.com [103.168.172.148])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1fa8f5a9-13e2-11f0-9eaa-5ba50f476ded;
- Mon, 07 Apr 2025 20:57:19 +0200 (CEST)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 537Iurh2454879
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 7 Apr 2025 13:56:53 -0500
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 537Iurf7025521
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 7 Apr 2025 13:56:53 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
- Apr 2025 13:56:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 7 Apr 2025 13:56:53 -0500
-Received: from fllvsmtp8.itg.ti.com ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 537Iup49094348;
- Mon, 7 Apr 2025 13:56:52 -0500
+ id df93462c-13e2-11f0-9eaa-5ba50f476ded;
+ Mon, 07 Apr 2025 21:02:39 +0200 (CEST)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfout.phl.internal (Postfix) with ESMTP id DB938138134B;
+ Mon,  7 Apr 2025 15:02:37 -0400 (EDT)
+Received: from phl-imap-11 ([10.202.2.101])
+ by phl-compute-12.internal (MEProxy); Mon, 07 Apr 2025 15:02:37 -0400
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 2F08D2220073; Mon,  7 Apr 2025 15:02:37 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,61 +47,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1fa8f5a9-13e2-11f0-9eaa-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1744052213;
-	bh=1hB+Rsl8dEIP80gJg1dRpUGGywa9yjHgvJWWFP9MDZc=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=ilAhbRuQvUr5o5N86CHRjPzz8/cXGDJJ0lrVBSpJVYkgfA8BdUNF1Pvu3skNKv/lc
-	 ceS9y8Zl5/7f00qk9/NnQ6KSuo26ZtbCFqPmzdyYuYSmG30Kz7isxhXfgkty85nW5u
-	 G7Xn0UGNuXQFxjnif9VQFoyOmRv8Bz1iQ5ApA06A=
-From: Andrew Davis <afd@ti.com>
-To: Arnd Bergmann <arnd@arndb.de>, Andre Przywara <andre.przywara@arm.com>,
-        Russell King <linux@armlinux.org.uk>, Daniel Mack <daniel@zonque.org>,
-        Haojian Zhuang <haojian.zhuang@gmail.com>,
-        Robert Jarzmik
-	<robert.jarzmik@free.fr>,
-        Alexey Charkov <alchark@gmail.com>,
-        Krzysztof
- Kozlowski <krzk@kernel.org>,
-        Stefano Stabellini <sstabellini@kernel.org>
-CC: <linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-        <xen-devel@lists.xenproject.org>, Andrew Davis <afd@ti.com>
-Subject: [PATCH v5 2/5] ARM: pxa: Switch to new sys-off handler API
-Date: Mon, 7 Apr 2025 13:56:47 -0500
-Message-ID: <20250407185650.411887-3-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+X-Inumbo-ID: df93462c-13e2-11f0-9eaa-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1744052557;
+	 x=1744138957; bh=bCo1qyJ6rZTiBfA+a51RdFo714rHFIPWspJfKngp7mU=; b=
+	IpoS32TM2GnPNE8jNWp6Yxp5PoAZZ1OMYqFmOP/lmXEjsxbNamh0lZ6yrpD2dVKA
+	WWCQweWeVuhzc2Pg+9QRByz5/uvT/HZFFnnbBmTXTbLIQICIPl1CSxG+3fkV4CKB
+	8LRFcmpLsPg2E8Gpz24O/EEnrNGZMU2MAOsutpv+5xWiaDbNXmr62KdUIaQixDeQ
+	tjuey6T7gZuL6Bo10i6c2EZyVYK1+2NKjiDOqEfrQRRg3wN61TeisjQ6oWMmkHey
+	eN93pUPLtd0cDZUzYNzDSKXBIV16Oq/S1kZAR1NHg4bzgLTxdz3mi5p/l4vayKCF
+	Urjo5NqY4U6twx007ihGuQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744052557; x=
+	1744138957; bh=bCo1qyJ6rZTiBfA+a51RdFo714rHFIPWspJfKngp7mU=; b=D
+	Lkd2VJ7beZ5HHqDsQ69haYdUKdbhUW+vTzPtKMLui8vsiN6c4aYYQRsPeB8wTqVH
+	la+9NpAwsbslNrHrISasLf4EfN2/VTZCQhMolxHV2e4gMQKdSgfI7bdryGkZLEUv
+	kfRdnQ7rmk18ZCRjTPWOic/G71fPAEkHrJqzsiRtwfHudOcV9pqG1t209zuQmE2t
+	ZJRJcdIF8huxbtRBGvh4KTY+YBqTwz7MSS3il8zgo0G55eXGe5YL5HOe9xvmJUpW
+	YzUddTCmWDZCUP2S2+1Bm44irlAGBOBKuzdc3xhiNmlgwqJ6uzumj/4bv7TIlE71
+	Oqs9ed3kNfsARPKR8F40g==
+X-ME-Sender: <xms:TSH0Z3QKE0m2joPGDvtjPwxtKcFqHlhBx5FzewDaUBacNWue_5v7pA>
+    <xme:TSH0Z4zHZbuNI-fk5frE4xc_deIbcX55RkINwLJnm1PCdJGFN9PXamLCgUY8hQJho
+    64Lq_GHYAYdHo3WHz8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtleekucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
+    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
+    gvnhhtshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertder
+    tddtnecuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnug
+    gsrdguvgeqnecuggftrfgrthhtvghrnhephfdthfdvtdefhedukeetgefggffhjeeggeet
+    fefggfevudegudevledvkefhvdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrg
+    hmpehmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvgdpnhgspghrtghpthhtohep
+    uddvpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegrnhgurhgvrdhprhiihiifrg
+    hrrgesrghrmhdrtghomhdprhgtphhtthhopehlihhnuhigsegrrhhmlhhinhhugidrohhr
+    ghdruhhkpdhrtghpthhtoheprhhosggvrhhtrdhjrghriihmihhksehfrhgvvgdrfhhrpd
+    hrtghpthhtoheprghltghhrghrkhesghhmrghilhdrtghomhdprhgtphhtthhopehhrgho
+    jhhirghnrdiihhhurghnghesghhmrghilhdrtghomhdprhgtphhtthhopehkrhiikheskh
+    gvrhhnvghlrdhorhhgpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghl
+    rdhorhhgpdhrtghpthhtoheplhhinhhugidqrghrmhdqkhgvrhhnvghlsehlihhsthhsrd
+    hinhhfrhgruggvrggurdhorhhgpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishht
+    shdrgigvnhhprhhojhgvtghtrdhorhhg
+X-ME-Proxy: <xmx:TSH0Z80WDpD9n7QYR6u06DYm7i-oCpVlSUDHOOTFSl2Doc_16VEgNw>
+    <xmx:TSH0Z3BPWw4u6xEYbpDDusC3mTnWnkIL6Q2Ui596DKGEn1dWCpl7sQ>
+    <xmx:TSH0Zwg3w70j6V51hHBnHO1aAGRspv6bll-Ld8ZdSy2exAP4xSLCIg>
+    <xmx:TSH0Z7o61lvIp-0iMWrlAHHPrn-sjT0O_REA_Kzy-5lQGQOLO8DfFQ>
+    <xmx:TSH0ZwtbPXSiP36-fUYJ42TP6UKSmhyfmOU7arb2HfwqrRW6bUUo3x5T>
+Feedback-ID: i56a14606:Fastmail
+X-Mailer: MessagingEngine.com Webmail Interface
+MIME-Version: 1.0
+X-ThreadId: T689809fba064b46a
+Date: Mon, 07 Apr 2025 21:02:15 +0200
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Andrew Davis" <afd@ti.com>, "Andre Przywara" <andre.przywara@arm.com>,
+ "Russell King" <linux@armlinux.org.uk>, "Daniel Mack" <daniel@zonque.org>,
+ "Haojian Zhuang" <haojian.zhuang@gmail.com>,
+ "Robert Jarzmik" <robert.jarzmik@free.fr>,
+ "Alexey Charkov" <alchark@gmail.com>,
+ "Krzysztof Kozlowski" <krzk@kernel.org>,
+ "Stefano Stabellini" <sstabellini@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Message-Id: <d4a4f00f-ef52-4635-bd81-659e8dcf9fde@app.fastmail.com>
 In-Reply-To: <20250407185650.411887-1-afd@ti.com>
 References: <20250407185650.411887-1-afd@ti.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v5 0/5] Switch more ARM plats to sys-off handler API
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 7bit
 
-Kernel now supports chained power-off handlers. Use
-register_platform_power_off() that registers a platform level power-off
-handler. Legacy pm_power_off() will be removed once all drivers and archs
-are converted to the new sys-off API.
+On Mon, Apr 7, 2025, at 20:56, Andrew Davis wrote:
+> Hello all,
+>
+> Continuing the quest to remove the legacy pm_power_off() global
+> function handler. Remove uses from arch/arm/ using the helper
+> register_platform_power_off().
+>
+> These have been sent for several cycles without feedback, not
+> sure if there are anymore active platform maintainers who
+> can take these individually, maybe these remaining could
+> go in directly though the arm-soc tree?
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- arch/arm/mach-pxa/spitz.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Sure, can you send them to soc@lists.linux.dev in a few
+days, with any final Acks you may get? That way it ends up
+in patchwork and I can trivially pick them up.
 
-diff --git a/arch/arm/mach-pxa/spitz.c b/arch/arm/mach-pxa/spitz.c
-index 33533e35720f8..c0b1f7e6be874 100644
---- a/arch/arm/mach-pxa/spitz.c
-+++ b/arch/arm/mach-pxa/spitz.c
-@@ -1096,7 +1096,7 @@ static void __init spitz_init(void)
- 		software_node_register(&spitz_scoop_2_gpiochip_node);
- 
- 	init_gpio_reset(SPITZ_GPIO_ON_RESET, 1, 0);
--	pm_power_off = spitz_poweroff;
-+	register_platform_power_off(spitz_poweroff);
- 
- 	PMCR = 0x00;
- 
--- 
-2.39.2
+Since it's only a few one-line changes that all do the
+same thing, you can also combine them into a single patch.
 
+     Arnd
 
