@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A74C369A4
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:34:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.939839.1339846 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35999C3601E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:34:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.939835.1339816 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgY-0007Nj-A1; Mon, 07 Apr 2025 12:34:42 +0000
+	id 1u1lgU-0006eR-5M; Mon, 07 Apr 2025 12:34:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 939839.1339846; Mon, 07 Apr 2025 12:34:42 +0000
+Received: by outflank-mailman (output) from mailman id 939835.1339816; Mon, 07 Apr 2025 12:34:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgY-0007Lu-3p; Mon, 07 Apr 2025 12:34:42 +0000
-Received: by outflank-mailman (input) for mailman id 939839;
- Mon, 07 Apr 2025 12:34:40 +0000
+	id 1u1lgU-0006dJ-1b; Mon, 07 Apr 2025 12:34:38 +0000
+Received: by outflank-mailman (input) for mailman id 939835;
+ Mon, 07 Apr 2025 12:34:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uyK1=WZ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u1lgW-0006Bg-J6
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:40 +0000
+ id 1u1lgS-0006Bg-PH
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:36 +0000
 Received: from fout-a8-smtp.messagingengine.com
  (fout-a8-smtp.messagingengine.com [103.168.172.151])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ac2a63e2-13ac-11f0-9eaa-5ba50f476ded;
- Mon, 07 Apr 2025 14:34:39 +0200 (CEST)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 11CAE138022F;
- Mon,  7 Apr 2025 08:34:39 -0400 (EDT)
+ id a9ca7a15-13ac-11f0-9eaa-5ba50f476ded;
+ Mon, 07 Apr 2025 14:34:35 +0200 (CEST)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfout.phl.internal (Postfix) with ESMTP id 15A0E1380319;
+ Mon,  7 Apr 2025 08:34:35 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Mon, 07 Apr 2025 08:34:39 -0400
+ by phl-compute-12.internal (MEProxy); Mon, 07 Apr 2025 08:34:35 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Apr 2025 08:34:37 -0400 (EDT)
+ 7 Apr 2025 08:34:33 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac2a63e2-13ac-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: a9ca7a15-13ac-11f0-9eaa-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744029279; x=1744115679; bh=c4BIOHpfm5
-	N25C8N14eGKLLGzXXxmXcsg7/1yxitfro=; b=Z2jtKVmM9/pxC7PxIFKGQqHXPK
-	deoMJIFSi3Nlshndr4guwwlDPu8I5AYWL8gMKJulK0A3B6/IwitSpbDjm8+RRTp8
-	8S4V7CQ6fL4dppug1ICFNPMTHMqQqHWJD7dxFtqZVRvLSOe47OghBABcl/XStUhY
-	XUtnY/O3OucrGKU7pumRLfoggbaYJbfKYp/LAMtcwxTN8EFucvRiISbyLtvWBown
-	a6ILw6kvj0U8UzmLcZM5BkR4Sv3FBGpSGVheiTeCNhyrbtIUoNXRxy7uc303jAqk
-	VE/Mkhx/8xTDVSjEE0LDBDPCbeafsH9tvp8jVwaA2+HRQRWAQpMfbfxsW4kQ==
+	:subject:to:to; s=fm2; t=1744029275; x=1744115675; bh=+20xCEO7XU
+	Y0EaVPTnWYODVDi1jG/CkQA6sU2Q2/xLY=; b=FymF1YgbTKW61bNzVVxaQnYkEK
+	n/fSN+4JUSe1VkjvITxqbLU7kHOTiYcYEYBWoj6+UrU14E04vPsd9A7vsqVopBbM
+	bvclcFrtS+K5CgOeI2qgw2P5SbQ2izDjM9RX8u47W/4cY1XwCTENlZDn54MutXmW
+	nOWPsxt1u37o+4qPuET6YQHEnQq9JF7RQ/nB1BOCwJactys48gnwdQ9vHM7BetKv
+	H2LkKDLSITajTzbmDQDxwliVdiD/EjRtJJE/ruW+ddhXHL98thUnk0RVYAstjqao
+	zrW4eWX2OihHgTeVY5zxL64chqkg1slZKcT+nGTkkVAZQkPt0yeioBdA3Z0Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029279; x=
-	1744115679; bh=c4BIOHpfm5N25C8N14eGKLLGzXXxmXcsg7/1yxitfro=; b=F
-	GUKvJUXJAnAShjgtxuNOPc2qfQGK672ruDdACyrsacAlj4Rl5fZpg11uVRR43LRc
-	cfVXK8pcrqYkPz4lAsyuZKxxSNXQbDE/Q/BVkJteuDUTSkB5V5w8ouZCyULHj/5s
-	cvjmp+345I2Hxs55vfD43dJh/htR7Z9RS3Jim//bocWUfY8GPSvJXg3sxuyQHjQe
-	Bb8H6l8/N8oHoEeStWU4/toVrY07xs7yNJW5+SPZSklbHg5ihcpdqQ9JowVZ8DdU
-	fuEvjqH8mPcrfEQmhKHP9vE+SSzSrWZurCTGpdkv/c8Qc7qi1PtYasJze26aVvkZ
-	ay3bL+6SPhqIheAlNXovQ==
-X-ME-Sender: <xms:XsbzZxBZE9t5DgnEpICCU51iMIQ4pWKbuKudyLq_5UWCOycE5Ob45Q>
-    <xme:XsbzZ_hn9-v54JDAgE7Bjcoxkxh8Ow8f7ggzPcEWvPw88Q5AqnsoZLSHS4U38bAUM
-    vxxBUMLRgR_Yg>
-X-ME-Received: <xmr:XsbzZ8lswJ-lkdYIGkXL3XtbxyWkTwLu5OD8kg6fjqwt2d6g6EIhnrm1uyz5OJXSOKzCy7DVA-ZIrGSTSq7o9euN_n8bX-5rhcJ7GDENkOH-s0a-JP4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvdduucetufdoteggodetrf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029275; x=
+	1744115675; bh=+20xCEO7XUY0EaVPTnWYODVDi1jG/CkQA6sU2Q2/xLY=; b=T
+	KEtl3cmhp3xqKubJjsrt4rTApBH+VuZfMY7KH1wx4emi+G/Iejf+9emT1QB8ZupM
+	TAl9lK7KlUXLMHfQtbVjtCKqy09uaMbC71VEtxry2U13mxM83utwbC119Cos0R07
+	J3nS/AzfBVSUSnjtv/jc+CxeqHeoprg4SUde4Kvg+6U74ujueyVMqak+m6wSIhPb
+	urygUaVDrlZHw/1Iet6k+VshYaeoG5wifjzeI+X3RANwwrh8llv+fi7RQaImivU5
+	QDV+ueANpBIO4LRIpWW9hTFuVAt2aqorSPaDzgddBVGyRqM9hbrOL3iO/zytqHRS
+	GBvrA3VXPMOVzNYTsApMQ==
+X-ME-Sender: <xms:WsbzZ3IhkJx9boJlYADfEfbTclMKJ7S2BYTwvvVoaunWy1KSht9iQw>
+    <xme:WsbzZ7LFeCBm82eZpqSs8QGqZL6HMNrTyIE8KB7UiQKarjVTV9mzfX70sev027Ngk
+    txp-axeQRdccQ>
+X-ME-Received: <xmr:WsbzZ_twguiajtYlIsnZ12N4-xZIiR_qU7fZLBFYRfxscp2NW0S40i0lpzHvZPn8DeYh8hhFoW0cDQmOr9lTvHD1Y0BHo3bAtdl7kZjlLjBIA11uVsg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvddtucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
     gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
@@ -90,20 +90,20 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvdduucetufdote
     hopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhr
     tghpthhtoheptggrrhguohgvsegtrghrughovgdrtghomhdprhgtphhtthhopehsshhtrg
     gsvghllhhinhhisehkvghrnhgvlhdrohhrgh
-X-ME-Proxy: <xmx:XsbzZ7xT2sLeYs3rJ-xKcRn5edVBlkSbGLx1jrLI0peWNqkQntkfbA>
-    <xmx:XsbzZ2RTxJOBfDAV3m6afvoLW1K1fNP_dSlwJHU9KMSR1ZBcTH8XHg>
-    <xmx:XsbzZ-b1mWYI2XCq_6klGn3O_YhKbUeInF87LkmEg-ndZKaDBhjXQw>
-    <xmx:XsbzZ3ToH5l1DsQQhfNyaw3EATvi8Xe_1Fh9KoxSSwONCHV7dTrILA>
-    <xmx:X8bzZ-aVe4OkAw2eFRDuZRo2gxOyjdDQssmxkuoBo0cuYB-SfZyC5H-P>
+X-ME-Proxy: <xmx:WsbzZwYJU0fzMOiaCbwTi_0Y19qAQ_3_tKiLUwWxOHvULcceA-y3Xw>
+    <xmx:WsbzZ-b_QbqTsK98qeZVxQT1HwEMsJr254a4GVprRZYOHAkc2-irkA>
+    <xmx:WsbzZ0A18XY42bdkPn1sbQtlTI42AuiRIVSDYHAB-5NatTBpfnQ46w>
+    <xmx:WsbzZ8a9KGT7xW9XRy2G9xMgXUX_Zc76KioOe2AQ325s7-4EyQgDUQ>
+    <xmx:W8bzZ4i6MGpUQur_7SG3Xhxh5CvR7BLenp70uv9W_hDbmmgZPFXwe86z>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 05/12] CI: increase verbosity of starting a domain
-Date: Mon,  7 Apr 2025 14:31:05 +0200
-Message-ID: <a5d32188862ff2c55a5f9ed4b134e655c3b1381d.1744028549.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v2 02/12] CI: switch qubes runners to use console.exp
+Date: Mon,  7 Apr 2025 14:31:02 +0200
+Message-ID: <33fe66669f6ca9fb7573d69d9f9fefeb653fe503.1744028549.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
 References: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
@@ -111,104 +111,166 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-And start collecting qemu log earlier, so it isn't lost in case of a
-timeout during domain startup.
+It appears as sometimes it takes more time for Xen even start booting,
+mostly due to firmware and fetching large boot files by grub. In some
+jobs the current timeout is pretty close to the actual time needed, and
+sometimes (rarely for now) test fails due to timeout expiring in the
+middle of dom0 booting. This will be happening more often if the
+initramfs will grow (and with more complex tests).
+This has been observed on some dom0pvh-hvm jobs, at least on runners hw3
+and hw11.
+
+Switch to using expect (console.exp) for more robust test output
+handling. This allows waiting separately for Xen starting to boot and
+then for the test to complete. For now, set both of those to 120s, which
+pessimistically bumps timeout for the whole test to 240s (from 120s).
+
+Some messages use regex, use 'expect -re' for all of them for
+consistency, even though not all strictly need that (yet).
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
 Changes in v2:
-- adjust xilinx-smoke-dom0-x86_64.sh too
----
- automation/scripts/qemu-alpine-x86_64.sh       | 2 +-
- automation/scripts/qemu-smoke-dom0-arm32.sh    | 2 +-
- automation/scripts/qemu-smoke-dom0-arm64.sh    | 2 +-
- automation/scripts/qubes-x86-64.sh             | 4 ++--
- automation/scripts/xilinx-smoke-dom0-x86_64.sh | 4 ++--
- 5 files changed, 7 insertions(+), 7 deletions(-)
+- replace previous "ci: increase timeout for hw tests" with changing how
+  console is interacted with
 
-diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
-index 1ff689b577e3..17e2141d625e 100755
---- a/automation/scripts/qemu-alpine-x86_64.sh
-+++ b/automation/scripts/qemu-alpine-x86_64.sh
-@@ -56,7 +56,7 @@ bash /etc/init.d/xencommons start
+This needs a containers rebuild.
+---
+ automation/build/alpine/3.18-arm64v8.dockerfile |  1 +-
+ automation/scripts/console.exp                  | 23 ++++++--
+ automation/scripts/qubes-x86-64.sh              | 52 ++++--------------
+ 3 files changed, 32 insertions(+), 44 deletions(-)
+
+diff --git a/automation/build/alpine/3.18-arm64v8.dockerfile b/automation/build/alpine/3.18-arm64v8.dockerfile
+index 19fe46f8418f..b8482d5bf43f 100644
+--- a/automation/build/alpine/3.18-arm64v8.dockerfile
++++ b/automation/build/alpine/3.18-arm64v8.dockerfile
+@@ -48,3 +48,4 @@ RUN apk --no-cache add \
+   # qubes test deps
+   openssh-client \
+   fakeroot \
++  expect \
+diff --git a/automation/scripts/console.exp b/automation/scripts/console.exp
+index 31ce97b91b63..d1689fa5bf7f 100755
+--- a/automation/scripts/console.exp
++++ b/automation/scripts/console.exp
+@@ -28,21 +28,34 @@ if {[info exists env(UBOOT_CMD)]} {
+     send "$env(UBOOT_CMD)\r"
+ }
  
- xl list
++if {[info exists env(BOOT_MSG)]} {
++    expect -re "$env(BOOT_MSG)"
++}
++
++if {[info exists env(WAKEUP_CMD)]} {
++    expect -re "$env(SUSPEND_MSG)"
++
++    # keep it suspended a bit, then wakeup
++    sleep 30
++
++    system "$env(WAKEUP_CMD)"
++}
++
+ if {[info exists env(LOG_MSG)]} {
+     expect {
+-        "$env(PASSED)" {
+-            expect "$env(LOG_MSG)"
++        -re "$env(PASSED)" {
++            expect -re "$env(LOG_MSG)"
+             exit 0
+         }
+-        "$env(LOG_MSG)" {
+-            expect "$env(PASSED)"
++        -re "$env(LOG_MSG)" {
++            expect -re "$env(PASSED)"
+             exit 0
+         }
+     }
+ }
  
--xl create -c /root/test.cfg
-+xl -vvv create -c /root/test.cfg
- 
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
-diff --git a/automation/scripts/qemu-smoke-dom0-arm32.sh b/automation/scripts/qemu-smoke-dom0-arm32.sh
-index e1cd83880928..0c60a66e25e3 100755
---- a/automation/scripts/qemu-smoke-dom0-arm32.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm32.sh
-@@ -21,7 +21,7 @@ echo "#!/bin/bash
- 
- xl list
- 
--xl create -c /root/test.cfg
-+xl -vvv create -c /root/test.cfg
- 
- " > ./root/xen.start
- echo "bash /root/xen.start" >> ./etc/init.d/xen-watchdog
-diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
-index 4d22a124df11..8774a8701232 100755
---- a/automation/scripts/qemu-smoke-dom0-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
-@@ -52,7 +52,7 @@ bash /etc/init.d/xencommons start
- 
- xl list
- 
--xl create -c /root/test.cfg
-+xl -vvv create -c /root/test.cfg
- 
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
+ expect {
+-    "$env(PASSED)" {
++    -re "$env(PASSED)" {
+         exit 0
+     }
+ }
 diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 7bf42d2e3d31..17fcbd8fa7db 100755
+index 8e78b7984e98..0eac410f4168 100755
 --- a/automation/scripts/qubes-x86-64.sh
 +++ b/automation/scripts/qubes-x86-64.sh
-@@ -122,7 +122,6 @@ echo \"${passed}\"
- "
+@@ -1,6 +1,6 @@
+ #!/bin/sh
  
-         dom0_check="
--tail -F /var/log/xen/qemu-dm-domU.log &
- until grep -q \"^domU Welcome to Alpine Linux\" /var/log/xen/console/guest-domU.log; do
-     sleep 1
- done
-@@ -222,7 +221,8 @@ if [ -n "$domU_check" ]; then
-     echo "
- # get domU console content into test log
- tail -F /var/log/xen/console/guest-domU.log 2>/dev/null | sed -e \"s/^/(domU) /\" &
--xl create /etc/xen/domU.cfg
-+tail -F /var/log/xen/qemu-dm-domU.log 2>/dev/null | sed -e \"s/^/(qemu-dm) /\" &
-+xl -vvv create /etc/xen/domU.cfg
- ${dom0_check}
- " >> etc/local.d/xen.start
- else
-diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-index f70cfdc1552a..7834ffbe0593 100755
---- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-@@ -49,7 +49,7 @@ ifconfig xenbr0 up
- ifconfig xenbr0 192.168.0.1
- # get domU console content into test log
- tail -F /var/log/xen/console/guest-domU.log 2>/dev/null | sed -e \"s/^/(domU) /\" &
--xl create /etc/xen/domU.cfg
-+xl -vvv create /etc/xen/domU.cfg
- set +x
- until grep -q \"${DOMU_MSG}\" /var/log/xen/console/guest-domU.log; do
-     sleep 1
-@@ -75,7 +75,7 @@ done | argo-exec -p 28333 -d 0 -- /bin/echo
- "
-     DOM0_CMD="
- insmod /root/xen-argo.ko
--xl create /etc/xen/domU.cfg
-+xl -vvv create /etc/xen/domU.cfg
- argo-exec -l -p 28333 -- /bin/echo
- "
- copy_dom0_files ()
+-set -ex
++set -ex -o pipefail
+ 
+ # One of:
+ #  - ""             PV dom0,  PVH domU
+@@ -263,52 +263,26 @@ cp -f binaries/xen $TFTP/xen
+ cp -f binaries/bzImage $TFTP/vmlinuz
+ cp -f binaries/dom0-rootfs.cpio.gz $TFTP/initrd-dom0
+ 
+-# start logging the serial; this gives interactive console, don't close its
+-# stdin to not close it; the 'cat' is important, plain redirection would hang
+-# until somebody opens the pipe; opening and closing the pipe is used to close
+-# the console
+-mkfifo /tmp/console-stdin
+-cat /tmp/console-stdin |\
+-ssh $CONTROLLER console | tee smoke.serial | sed 's/\r//' &
+-
+ # start the system pointing at gitlab-ci predefined config
+ ssh $CONTROLLER gitlabci poweron
+-trap "ssh $CONTROLLER poweroff; : > /tmp/console-stdin" EXIT
++trap "ssh $CONTROLLER poweroff" EXIT
+ 
+ if [ -n "$wait_and_wakeup" ]; then
+-    # wait for suspend or a timeout
+-    until grep "$wait_and_wakeup" smoke.serial || [ $timeout -le 0 ]; do
+-        sleep 1;
+-        : $((--timeout))
+-    done
+-    if [ $timeout -le 0 ]; then
+-        echo "ERROR: suspend timeout, aborting"
+-        exit 1
+-    fi
+-    # keep it suspended a bit, then wakeup
+-    sleep 30
+-    ssh $CONTROLLER wake
++    export SUSPEND_MSG="$wait_and_wakeup"
++    export WAKEUP_CMD="ssh $CONTROLLER wake"
+ fi
+ 
+-set +x
+-until grep "^Welcome to Alpine Linux" smoke.serial || [ $timeout -le 0 ]; do
+-    sleep 1;
+-    : $((--timeout))
+-done
+-set -x
+-
+-tail -n 100 smoke.serial
+-
+-if [ $timeout -le 0 ]; then
+-    echo "ERROR: test timeout, aborting"
+-    exit 1
+-fi
++export PASSED="${passed}"
++export BOOT_MSG="Latest ChangeSet: "
++export LOG_MSG="\nWelcome to Alpine Linux"
++export TEST_CMD="ssh $CONTROLLER console"
++export TEST_LOG="smoke.serial"
++export TEST_TIMEOUT="$timeout"
++./automation/scripts/console.exp | sed 's/\r\+$//'
++TEST_RESULT=$?
+ 
+ if [ -n "$retrieve_xml" ]; then
+     nc -w 10 "$SUT_ADDR" 8080 > tests-junit.xml </dev/null
+ fi
+ 
+-sleep 1
+-
+-(grep -q "^Welcome to Alpine Linux" smoke.serial && grep -q "${passed}" smoke.serial) || exit 1
+-exit 0
++exit "$TEST_RESULT"
 -- 
 git-series 0.9.1
 
