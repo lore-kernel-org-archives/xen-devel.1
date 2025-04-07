@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C42EC36010
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:34:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.939834.1339800 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E09A9C369A2
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Apr 2025 12:34:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.939837.1339832 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgT-0006Dt-0e; Mon, 07 Apr 2025 12:34:37 +0000
+	id 1u1lgX-0006xZ-2U; Mon, 07 Apr 2025 12:34:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 939834.1339800; Mon, 07 Apr 2025 12:34:36 +0000
+Received: by outflank-mailman (output) from mailman id 939837.1339832; Mon, 07 Apr 2025 12:34:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u1lgS-0006DZ-RL; Mon, 07 Apr 2025 12:34:36 +0000
-Received: by outflank-mailman (input) for mailman id 939834;
- Mon, 07 Apr 2025 12:34:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u1lgW-0006w0-NO; Mon, 07 Apr 2025 12:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 939837;
+ Mon, 07 Apr 2025 12:34:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uyK1=WZ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u1lgR-0006Bg-P0
- for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:35 +0000
+ id 1u1lgW-0006u9-03
+ for xen-devel@lists.xenproject.org; Mon, 07 Apr 2025 12:34:40 +0000
 Received: from fhigh-a4-smtp.messagingengine.com
  (fhigh-a4-smtp.messagingengine.com [103.168.172.155])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a901fac5-13ac-11f0-9eaa-5ba50f476ded;
- Mon, 07 Apr 2025 14:34:34 +0200 (CEST)
-Received: from phl-compute-01.internal (phl-compute-01.phl.internal
- [10.202.2.41])
- by mailfhigh.phl.internal (Postfix) with ESMTP id BC3C8114021E;
- Mon,  7 Apr 2025 08:34:33 -0400 (EDT)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aa96952e-13ac-11f0-9ffb-bf95429c2676;
+ Mon, 07 Apr 2025 14:34:37 +0200 (CEST)
+Received: from phl-compute-12.internal (phl-compute-12.phl.internal
+ [10.202.2.52])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 5F731114016D;
+ Mon,  7 Apr 2025 08:34:36 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Mon, 07 Apr 2025 08:34:33 -0400
+ by phl-compute-12.internal (MEProxy); Mon, 07 Apr 2025 08:34:36 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Apr 2025 08:34:32 -0400 (EDT)
+ 7 Apr 2025 08:34:35 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,35 +47,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a901fac5-13ac-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: aa96952e-13ac-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744029273; x=1744115673; bh=+wUYsjtUJc
-	5L9TuaQNNpMAeWAX2i+xchkoztHrK6MYY=; b=lWRgvKlNUc5fC8p1j2EqJMioOq
-	557asKPjMRf6woeRU5dYUzQXGhUJlgZHdFBwZaks1spVsQsSIO31qVuWwlSRft1N
-	4fF5g0fCA5g2BH6gwmzvwUIN6H3af8TEYn/OsWKJgIZnfsDGQ0B7R5F+N4tNSL7R
-	FCYfcz33fdUNL4EPuSzYDzbxDxcjzPuDObQWEazNe7Ysk0yWAxnE8FtDiMdmcjsd
-	JCwcQgmJFpE05Sm+pLnHU7tJ/G6NWCg+o0m98sEGpyGIP1vpmWZ/zc02H7OGNilU
-	ETd+HXTrIzPJa2oNdsslRmnkzVexsJMeM463M/H3JOaE9ftNgixY4GUsg82w==
+	:subject:to:to; s=fm2; t=1744029276; x=1744115676; bh=oUzAo8IKhM
+	cypBS9tzrQd/MdWccuAy4m3Q9jZgmqj4k=; b=Qj5q/13Fgj5Aono7HNX6PRJbEf
+	hTweD2CbsxHB5a4t6RVDNrdnsnvL9qYQ0+HRtDBqUBP58tbFtk3k+y3V6La2FJic
+	GdGoBsQT6RtRA0ZFt5WVI2xt8edBQHYYUByU+aPo14f8lWFaNg3ZY7RcE3iWFYtn
+	U3l3qhLme0cKd5RbepbA0IPKLrX+bGZ8GSR+JPw0jN+w6XnSGGirRG4K5UWNZ7Gh
+	cUXG8Rn3F7W8FEFFM0PpXvqaqg+ErDbVich3xWCAtkKQ2s20L4cZztmw9S6FTQ/b
+	o3jg6pW8JU69+U6SKl3ewGXQ9LazYG5Q7/WMmxwS0aHI0C/Nb76rPUpVBo0Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029273; x=
-	1744115673; bh=+wUYsjtUJc5L9TuaQNNpMAeWAX2i+xchkoztHrK6MYY=; b=d
-	MZUZqIxH5rVFbors4D4p2cUljYYxfWMV/o1PnDinl0eszsg6Z7uhFoAS+x9Wa0fi
-	UDIhpumbQBPBa/ix1CXLV63zm6hK4LYVBRYd9q6CWXGVtKIEZkXVEaI1Vyzt8KaN
-	W2wboIY5oqvjeAGrXMgzXqntI2ecIo1SZlTQbsEwZhda5o5VwOtyvKcW++xw5EQ3
-	T512dmLV5jqa69Ost32t+dym7vKkb+sxKtWxgvErTOtUlO6tJoV1UW4JE2pbjYKc
-	hrajpNJ8K9M1Z1R0PhKTXE9rcmE9EKwj3DPSBBk5+tLfdQh83PND+GJFAnLm8evK
-	1NU3cAwAvf3zAYNt+nGMg==
-X-ME-Sender: <xms:WcbzZ0UiSmwvnMiDj0G4W9KNUv5E-wpT-Ky80JpPnIHeXnBcaOU4Fg>
-    <xme:WcbzZ4mx7GuRGSpCIVQH3jdfSdP9NWaRGRAQ24BeOVtGKkK3gFuhH1DDgdlgBO81c
-    zx9I_HCDq9dxQ>
-X-ME-Received: <xmr:WcbzZ4YF9QphVa8JzwoJ6kGtc-ljTg6agzuiE6QtxMNo-fesvHgX2GPHQuK9VO3BQXdWfhSV8D4hKvCoQiDnhOZBcf298PrUbr6xhXQdEipECIITSQQ>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744029276; x=
+	1744115676; bh=oUzAo8IKhMcypBS9tzrQd/MdWccuAy4m3Q9jZgmqj4k=; b=W
+	dNFDrzT87NMqkaD6glQO9gujVR3+bAwtw9rXLW+MWJ+dwJtKDgjpj2UyYQtoPDLk
+	FFGCHHcfX5u69IItIKMdglTIOphgN3L4d0nzTglWbZmXiuIUBb9zDu7r7QbusWl1
+	OXhUHD67siwaWl40z02MkkhKAum8qHlRUXzzKwXe74dFnhr+v0mSJgZmaJRPqmKY
+	1nTylKhaiUouN/SRlZL5FKRBECvj3UsXc/N+jqh75VZAgToUEOX8+Rdhl5pl+Ggj
+	z4XamcNul09mAE0WPhJA66pIxrbHnapPlCcE3wPBkzfxIMCKIPw3z+IGY3f7RiGZ
+	aCLulCYPOph4tLCVXfdmQ==
+X-ME-Sender: <xms:XMbzZz7xzgwN6Hx1o9AzlphsbeK09guW7UAdH0EuIZ_hLXpucx4TIg>
+    <xme:XMbzZ46H-NE4otK9Ug9zsQHhrMPqYy3IphuPlsOobmB-lVjPu1cKr7gAi-McWwRiw
+    S4GIuzbEreK5A>
+X-ME-Received: <xmr:XMbzZ6ej48LzaiCBSGb31GUyB5JyWcCxfB7Je00Xma1WdGiuOV8-F7QauR6AODCqRo0Lp3MiYp3jYnoip93gxpGSPBfLYlk0lm_Ufnahp6rsxmvq6n8>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvddtucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
@@ -83,27 +83,27 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtddtvddtucetufdote
     tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
     cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
     ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
+    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhl
     fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
     hmpdhnsggprhgtphhtthhopeegpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
     vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
     hopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhr
     tghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoh
     eptggrrhguohgvsegtrghrughovgdrtghomh
-X-ME-Proxy: <xmx:WcbzZzUqtV36b9frU0yRqDwJtoNwNZdbDM8vQZ41bh7dpj7QWW24jA>
-    <xmx:WcbzZ-laLsU_w8ASuPOU66Gk7zgiMoxQlZ2BODC2h7OOmSgEI6uQ4A>
-    <xmx:WcbzZ4enHPiqvPBdAd5KDpAGh8OI3lRrjq05aoUoi5eHgXghV4xZlw>
-    <xmx:WcbzZwEwyFdgWBW2OYQ4spUFuBbeI03SgwkRxMRUB3778V_gxf3o-A>
-    <xmx:WcbzZ7vNw_ydtepHh4OQAL9_w4-1WqDB7331GZyhEbvR3NEqX2vQlMoc>
+X-ME-Proxy: <xmx:XMbzZ0IkzHStgvvqnqHtak-7tKS-B--S1hoxXmM2tAdtPub64vIyFA>
+    <xmx:XMbzZ3KAmggM5VSVQr9_ZiN3Cpm9dNstgqFUMGJoRaCAXR5z45uNyQ>
+    <xmx:XMbzZ9y4LT-Woh6xnv1JqwHUbSV4rYYtbH9x2OqO_naGb7bMieaW2Q>
+    <xmx:XMbzZzLv-p8WAvt63q-d7cqZy2jqkmPvunCO3m6hZevbBFI3IqJIDQ>
+    <xmx:XMbzZ9RjoVRvVKmQjgubiGSMRvDiVObKD6YPP4c30-fzwYg7ow2J1O7s>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v2 01/12] CI: prevent grub unpacking initramfs
-Date: Mon,  7 Apr 2025 14:31:01 +0200
-Message-ID: <e401356ec4741ad3a818a84b0d132510eff0f84a.1744028549.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v2 03/12] CI: enable XHCI console in Xen debug build on Alpine
+Date: Mon,  7 Apr 2025 14:31:03 +0200
+Message-ID: <318a25de10a4ec992d5e42b1f920354b720988ba.1744028549.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
 References: <cover.7da1777882774486a13e6f39ff4a2096f6b7901e.1744028549.git-series.marmarek@invisiblethingslab.com>
@@ -111,28 +111,26 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It fails on larger initramfs (~250MB one) and sometimes even smaller
-depending on memory size/memory map, let Linux do it.
+This build is used for hardware tests, and some runners use XHCI console
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- automation/scripts/qubes-x86-64.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ automation/gitlab-ci/build.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index f27296445901..8e78b7984e98 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -248,7 +248,7 @@ CONTROLLER=control@thor.testnet
- echo "
- multiboot2 (http)/gitlab-ci/xen $CONSOLE_OPTS loglvl=all guest_loglvl=all dom0_mem=4G console_timestamps=boot $extra_xen_opts
- module2 (http)/gitlab-ci/vmlinuz console=hvc0 root=/dev/ram0 earlyprintk=xen
--module2 (http)/gitlab-ci/initrd-dom0
-+module2 --nounzip (http)/gitlab-ci/initrd-dom0
- " > $TFTP/grub.cfg
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 2513908b059b..169bebe3c775 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -341,6 +341,7 @@ alpine-3.18-gcc-debug:
+       CONFIG_ARGO=y
+       CONFIG_UBSAN=y
+       CONFIG_UBSAN_FATAL=y
++      CONFIG_XHCI=y
  
- echo "#!ipxe
+ debian-12-x86_64-gcc-debug:
+   extends: .gcc-x86-64-build-debug
 -- 
 git-series 0.9.1
 
