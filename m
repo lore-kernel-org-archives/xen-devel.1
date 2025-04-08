@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10472C369A4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA20C369A5
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Apr 2025 15:57:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.942502.1341658 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.942499.1341633 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2BKL-00054s-05; Tue, 08 Apr 2025 15:57:29 +0000
+	id 1u2BKJ-0004Z9-45; Tue, 08 Apr 2025 15:57:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 942502.1341658; Tue, 08 Apr 2025 15:57:28 +0000
+Received: by outflank-mailman (output) from mailman id 942499.1341633; Tue, 08 Apr 2025 15:57:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2BKK-00054C-Oe; Tue, 08 Apr 2025 15:57:28 +0000
-Received: by outflank-mailman (input) for mailman id 942502;
- Tue, 08 Apr 2025 15:57:28 +0000
+	id 1u2BKI-0004Z2-Vo; Tue, 08 Apr 2025 15:57:26 +0000
+Received: by outflank-mailman (input) for mailman id 942499;
+ Tue, 08 Apr 2025 15:57:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f4Vq=W2=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1u2BKK-0004Yq-2s
- for xen-devel@lists.xenproject.org; Tue, 08 Apr 2025 15:57:28 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ id 1u2BKH-0004Yq-Vv
+ for xen-devel@lists.xenproject.org; Tue, 08 Apr 2025 15:57:26 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2abb371a-1492-11f0-9ffb-bf95429c2676;
- Tue, 08 Apr 2025 17:57:26 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-abbd96bef64so1115126066b.3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Apr 2025 08:57:26 -0700 (PDT)
+ id 2938fcf9-1492-11f0-9ffb-bf95429c2676;
+ Tue, 08 Apr 2025 17:57:23 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5efe8d9ebdfso246226a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Apr 2025 08:57:23 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-225.play-internet.pl.
  [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7c018556bsm929934566b.156.2025.04.08.08.57.24
+ a640c23a62f3a-ac7c018556bsm929934566b.156.2025.04.08.08.57.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 08:57:24 -0700 (PDT)
+ Tue, 08 Apr 2025 08:57:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2abb371a-1492-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 2938fcf9-1492-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744127846; x=1744732646; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4hi1xjODCV/sXPERE+O05f5Q95fvnC5BVyDMZVpi670=;
-        b=X/Pk5RkKEXtsxMOxRQrqB/hhe2XGq7K5S6nOokSU4rNfzYgH3lNUvC7uZbsFQ8MniX
-         H8Gd9gjKhPWhCZDydOV5tfT7AYmsMiCCXwcRByo4uexz7I7W6ntqIKilbUQ1DcS6OTXy
-         xX3bBxYm4eJf2I3Hw1B1zEb0w0Mm8sB/WJ7rxrHja5Sa3q55UIr0CzHhtmOo46M8Q3D5
-         pGj8zEaUvea5MUPoVLRns3Mu5jHVjKcJxZAo4sPoep5aPSKPq59BcFYa9eMNZ6EisnZK
-         zjHQnptWgbPHcxSROGP9AZZRQMi7PwhzkezCPBwHZ6BmLxqxBpzKG/FVJLbeaoF9A1pc
-         nuIQ==
+        d=gmail.com; s=20230601; t=1744127843; x=1744732643; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hGK/pd0Edv8PV4fHOKEHNDaRM88s+8JEHBygT/2/ZnI=;
+        b=G6W8fXy3jJXcxMHLw7PicMLqzSpxQ9QPBiSXn0svqqniHX+M5bTJxvVQYjCo3uLGlj
+         OoxhrHdEJT3k4JoqlfL9nAgWLupNZ/KeTKzAc4zmeFjOGBe040KP9yWwcSaEystjAQ8X
+         6dACL3Ij1sFVIJuLYvR5tTgrZOwVJw6MCNJxzyI7zBiam7d3Yz9B2FdOrPZHJkUkUkuZ
+         bagTgO2W7JwqH4rp7/C+mUu632scQO2vW51TIOJkyXWKC1n1BnG/1xPMpEYGT3RmxAj/
+         3vxIEZfJobo/LfQT++bT+jDAfcxNHjoCjZ44CgsLxT3qbzAzJbbJzZIjCdh4X1caD/io
+         CW7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744127846; x=1744732646;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4hi1xjODCV/sXPERE+O05f5Q95fvnC5BVyDMZVpi670=;
-        b=K5Dq8RpMjdHSkrwPWsCFt9OB+mWgwlB3G8GETyacMqCdorlHnrDtD3RSCkIyhzWy0w
-         9+ZBH3MhNj+iFEheDxfdBJoxVp1gp6+pVnB/LCQEPltfthAMnTMODFwQCscxMHPqCCFJ
-         r2ZjDgMNST4S0OcWCpplKRl+sg5V+BgMPCSWrmGn25YYNcDghJGAQQxM8KBOVyC0sJn0
-         ww+UiLLHUuebzWyV8iyp/tNgMk2WonLtze/VMbj4r2SaPliIV1cQDNGXWWCnLG2v0nqB
-         I4+vXzNTYryfT8fefVoVJJLt/7BTSNDczrpEegPN6WjBxXZHmZFfRUF8C/EtFLdBbO1L
-         G5KQ==
-X-Gm-Message-State: AOJu0Yyhe1U2+gbxjZI85+pKZf7d5hndaqKcpz4GKWziMz+QDP04J1KE
-	ncLqzS6+CNcwoImBVFEuBKsfMkWT9Ng5JMnaatU+B4yDXmSJ8AILU+fgJA==
-X-Gm-Gg: ASbGncvx1+FvwLShhn6V1J97guv8p4IPgRbp7h2PPXQj4KbN259JBF9mxl9E+1FYVKZ
-	nInMPEp4/C2hVYHU022rVwa8FXu9oNPvwV+YYcGc3KQtQEf4MiUJDnODFfP+0ap5cRP5PmXtt3x
-	uQftVtf08Hj8k7gtWnICN83QapJoGDOEhRg/C77EGn2+wQszZECorVEZ1O82g2DrMoiRCBckHbX
-	bvWn6/yI6og6r9PkDq6bOAhwnQP3iryrWQuFbn3TlcsMVokJVRbKOfMv+s7HwgewgvZ/aQcPKSx
-	mtl3vnBm7PfQ6L1dFfREF5VwZQTzMznxMMfvWZCXQwSWuqqFDptgiXBoAx0usoL7cafd05PZINi
-	QGKmMnHXZKIzJTg==
-X-Google-Smtp-Source: AGHT+IGPZLQUmzRVvlQPHpMLUPk5BR/JAj1Ppc1lOSe7dGvIQ+x4G3kqQ5tkLmaV6Dmf0Dg7h9DOjQ==
-X-Received: by 2002:a17:907:7e88:b0:ac6:bf3d:bf45 with SMTP id a640c23a62f3a-ac7d19671efmr1737640366b.36.1744127845398;
-        Tue, 08 Apr 2025 08:57:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1744127843; x=1744732643;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=hGK/pd0Edv8PV4fHOKEHNDaRM88s+8JEHBygT/2/ZnI=;
+        b=IZR2Ye88UqV2quZFhT/LQyEUbWoodCDM2lbSPMMzYNpIh09ICijQfpq/6tCeupu8f0
+         jlotWqZjF8GMeJE29+Juhbhwfhdk+I5RiDUN4blogBc++SDl09qGiMCddZoBWVHkF0lo
+         CCWrQQOkU5Il+Wa0KAH1x0caJ1cgNRgADtaHuApvn9O7OIWR2BR5yku9LPYXxh6HVrIg
+         2cfHyLVUsx5p2ZtXJ1QhtJI+dtAfAMIb5d5RRXPV8mgkk4Y9gPyarl3ZFX22RCSlPuW9
+         EMFSUxcnPou+FfsWMW8KHjwYQf/CqS3dEN+EpwAtXbJoRm9vyTSIqL1jBzs1XQTNc2NG
+         StUg==
+X-Gm-Message-State: AOJu0YwWUHAdbcz79H56wskVZMu+2arUe9fARfzfP9+cWLOISRExFZXh
+	dqawjuj1W9BCJB8kUOk5iZ+35JDSN6dngGnlaI5Is+pYTmleNjs57LCLYQ==
+X-Gm-Gg: ASbGncu1A2ad7+zAM19hM8aQhJ7y9HNM9aZOf76o50E2YcrETAdyJ7RvHn0a9u5mJiE
+	IG2t60vZxLTLgVT4v5Ee+jXyzX2QuZqmiKhjEMQlf6jK5q2C6Op2xwuUzOxJw8+wR9BB4J9hHKz
+	89OPRj0y7TlmwMozY08CElhPQfj8LZa71mSUNEi7Mm3mayHCkayUXfz5Sq4u5UHpwH7ehs0bmrx
+	hpJs0/5FcDT0B2uWQBfQEVinvXIgbOAmb49Mhi3y/Qxdgz6fmemxObCSldRIVUgCW1qivfbKvrt
+	aS+AOifPHXOjlyC/WAvx0vtVVj9icgkRHmNN5JLwb0JUiGpsSwgggLyJmEFJ5i3gIcOl50gOKDI
+	fu1LS57wPjxN8nA==
+X-Google-Smtp-Source: AGHT+IG2gp7gehYxCTfOrG7Vsn7O44crfVb0NR9e3btxUtDnUUSFZMbkCnvSa0VwOaGdRlNdPY6MxQ==
+X-Received: by 2002:a17:906:6945:b0:ac7:e366:1eab with SMTP id a640c23a62f3a-ac7e36621dfmr1163933266b.48.1744127842847;
+        Tue, 08 Apr 2025 08:57:22 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,111 +95,69 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 02/14] xen/riscv: introduce smp_clear_cpu_maps()
-Date: Tue,  8 Apr 2025 17:57:06 +0200
-Message-ID: <ce3460b3857cca9e6f3072a8ddd50b31cb46b855.1744126720.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 00/14] riscv: introduce basic UART support and interrupts for hypervisor mode
+Date: Tue,  8 Apr 2025 17:57:04 +0200
+Message-ID: <cover.1744126720.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1744126720.git.oleksii.kurochko@gmail.com>
-References: <cover.1744126720.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Initialize cpu_{possible, online, present}_map by using smp_clear_cpu_maps().
+The patch series introduces basic UART support (in interrupt mode) and support of
+interrupts for hypervisor mode.
 
-Drop DEFINE_PER_CPU(unsigned int, cpu_id) from stubs.c as this variable isn't
-expected to be used in RISC-V at all.
+To implement this the following has been added:
+- APLIC and IMISC initialization.
+- Introduce of intc_hw_operations abstraction.
+- Introduce some APLIC and IMSIC operations.
+- Introduce init_IRQ(), platform_get_irq() and setup_irq() functions.
+- Update do_trap() handler to handle IRQ_S_EXT.
+- Introduce some other functions such as: get_s_time(), smp_clear_cpu_maps(),
+  ioremap().
+- Enable UART. 
 
-Move declaration of cpu_{possible,online,present}_map from stubs.c to smpboot.c
-as now smpboot.c is now introduced.
-Other defintions keep in stubs.c as they are not initialized and not needed, at
-the moment.
+Oleksii Kurochko (14):
+  xen/riscv: implement get_s_time()
+  xen/riscv: introduce smp_clear_cpu_maps()
+  xen/riscv: introduce ioremap()
+  xen/riscv: introduce init_IRQ()
+  xen/riscv: introduce platform_get_irq()
+  xen/riscv: riscv_of_processor_hartid() implementation
+  xen/riscv: Introduce intc_hw_operations abstraction
+  xen/riscv: imsic_init() implementation
+  xen/riscv: aplic_init() implementation
+  xen/riscv: implementation of aplic and imsic operations
+  xen/riscv: add external interrupt handling for hypervisor mode
+  xen/riscv: implement setup_irq()
+  xen/riscv: initialize interrupt controller
+  xen/riscv: add basic UART support
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/Makefile          |  1 +
- xen/arch/riscv/include/asm/smp.h |  2 ++
- xen/arch/riscv/setup.c           |  2 ++
- xen/arch/riscv/smpboot.c         | 15 +++++++++++++++
- xen/arch/riscv/stubs.c           |  6 ------
- 5 files changed, 20 insertions(+), 6 deletions(-)
+ xen/arch/riscv/Kconfig             |  13 +
+ xen/arch/riscv/Makefile            |   3 +
+ xen/arch/riscv/aplic.c             | 302 +++++++++++++++++++++++
+ xen/arch/riscv/imsic.c             | 374 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/aplic.h |  89 +++++++
+ xen/arch/riscv/include/asm/imsic.h |  88 +++++++
+ xen/arch/riscv/include/asm/intc.h  |  31 +++
+ xen/arch/riscv/include/asm/irq.h   |  37 ++-
+ xen/arch/riscv/include/asm/smp.h   |   5 +
+ xen/arch/riscv/include/asm/time.h  |   6 +
+ xen/arch/riscv/intc.c              |  58 +++++
+ xen/arch/riscv/irq.c               | 223 +++++++++++++++++
+ xen/arch/riscv/pt.c                |  19 ++
+ xen/arch/riscv/setup.c             |  23 ++
+ xen/arch/riscv/smpboot.c           |  83 +++++++
+ xen/arch/riscv/stubs.c             |  16 --
+ xen/arch/riscv/time.c              |   7 +
+ xen/arch/riscv/traps.c             |  18 ++
+ xen/drivers/char/Kconfig           |   1 -
+ 19 files changed, 1378 insertions(+), 18 deletions(-)
+ create mode 100644 xen/arch/riscv/imsic.c
+ create mode 100644 xen/arch/riscv/include/asm/aplic.h
+ create mode 100644 xen/arch/riscv/include/asm/imsic.h
+ create mode 100644 xen/arch/riscv/irq.c
  create mode 100644 xen/arch/riscv/smpboot.c
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 0c6c4a38a3..f551bf32a2 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -10,6 +10,7 @@ obj-y += sbi.o
- obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
-+obj-y += smpboot.o
- obj-y += stubs.o
- obj-y += time.o
- obj-y += traps.o
-diff --git a/xen/arch/riscv/include/asm/smp.h b/xen/arch/riscv/include/asm/smp.h
-index 5e170b57b3..188c033718 100644
---- a/xen/arch/riscv/include/asm/smp.h
-+++ b/xen/arch/riscv/include/asm/smp.h
-@@ -26,6 +26,8 @@ static inline void set_cpuid_to_hartid(unsigned long cpuid,
- 
- void setup_tp(unsigned int cpuid);
- 
-+void smp_clear_cpu_maps(void);
-+
- #endif
- 
- /*
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 4e416f6e44..7f68f3f5b7 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -72,6 +72,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
- 
-     remove_identity_mapping();
- 
-+    smp_clear_cpu_maps();
-+
-     set_processor_id(0);
- 
-     set_cpuid_to_hartid(0, bootcpu_id);
-diff --git a/xen/arch/riscv/smpboot.c b/xen/arch/riscv/smpboot.c
-new file mode 100644
-index 0000000000..0f4dcc28e1
---- /dev/null
-+++ b/xen/arch/riscv/smpboot.c
-@@ -0,0 +1,15 @@
-+#include <xen/cpumask.h>
-+#include <xen/init.h>
-+
-+cpumask_t cpu_online_map;
-+cpumask_t cpu_present_map;
-+cpumask_t cpu_possible_map;
-+
-+void __init smp_clear_cpu_maps(void)
-+{
-+    cpumask_clear(&cpu_possible_map);
-+    cpumask_clear(&cpu_online_map);
-+    cpumask_set_cpu(0, &cpu_possible_map);
-+    cpumask_set_cpu(0, &cpu_online_map);
-+    cpumask_copy(&cpu_present_map, &cpu_possible_map);
-+}
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index 83416d3350..fdcf91054e 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -11,12 +11,6 @@
- 
- /* smpboot.c */
- 
--cpumask_t cpu_online_map;
--cpumask_t cpu_present_map;
--cpumask_t cpu_possible_map;
--
--/* ID of the PCPU we're running on */
--DEFINE_PER_CPU(unsigned int, cpu_id);
- /* XXX these seem awfully x86ish... */
- /* representing HT siblings of each logical CPU */
- DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
 -- 
 2.49.0
 
