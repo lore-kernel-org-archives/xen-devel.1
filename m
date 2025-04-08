@@ -4,38 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EEDCC369A4
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Apr 2025 16:04:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.942706.1341792 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60E6DC369A5
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Apr 2025 16:08:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.942726.1341802 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2BRM-0008Pz-Do; Tue, 08 Apr 2025 16:04:44 +0000
+	id 1u2BUN-0000aJ-Rp; Tue, 08 Apr 2025 16:07:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 942706.1341792; Tue, 08 Apr 2025 16:04:44 +0000
+Received: by outflank-mailman (output) from mailman id 942726.1341802; Tue, 08 Apr 2025 16:07:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2BRM-0008Ps-A8; Tue, 08 Apr 2025 16:04:44 +0000
-Received: by outflank-mailman (input) for mailman id 942706;
- Tue, 08 Apr 2025 16:04:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u2BUN-0000aC-OF; Tue, 08 Apr 2025 16:07:51 +0000
+Received: by outflank-mailman (input) for mailman id 942726;
+ Tue, 08 Apr 2025 16:07:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=83+A=W2=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u2BRL-0008Pf-Go
- for xen-devel@lists.xenproject.org; Tue, 08 Apr 2025 16:04:43 +0000
-Received: from fout-b8-smtp.messagingengine.com
- (fout-b8-smtp.messagingengine.com [202.12.124.151])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2b403b58-1493-11f0-9ffb-bf95429c2676;
- Tue, 08 Apr 2025 18:04:37 +0200 (CEST)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 099621140157;
- Tue,  8 Apr 2025 12:04:36 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Tue, 08 Apr 2025 12:04:36 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 8 Apr 2025 12:04:34 -0400 (EDT)
+ <SRS0=Wtyq=W2=linux.ibm.com=agordeev@srs-se1.protection.inumbo.net>)
+ id 1u2BUM-0000a6-GE
+ for xen-devel@lists.xenproject.org; Tue, 08 Apr 2025 16:07:50 +0000
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9d8d1929-1493-11f0-9eaa-5ba50f476ded;
+ Tue, 08 Apr 2025 18:07:49 +0200 (CEST)
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5388e1Pf025362;
+ Tue, 8 Apr 2025 16:07:36 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 45vnvq4kme-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 08 Apr 2025 16:07:36 +0000 (GMT)
+Received: from m0356516.ppops.net (m0356516.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 538G192m023979;
+ Tue, 8 Apr 2025 16:07:35 GMT
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 45vnvq4kmc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 08 Apr 2025 16:07:35 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 538CaKov013932;
+ Tue, 8 Apr 2025 16:07:34 GMT
+Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 45ufunkd24-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 08 Apr 2025 16:07:34 +0000
+Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
+ [10.20.54.100])
+ by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 538G7WPl33554826
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 8 Apr 2025 16:07:32 GMT
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id BBF2220043;
+ Tue,  8 Apr 2025 16:07:32 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id A5C8320040;
+ Tue,  8 Apr 2025 16:07:32 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
+ by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Tue,  8 Apr 2025 16:07:32 +0000 (GMT)
+Received: by tuxmaker.boeblingen.de.ibm.com (Postfix, from userid 55669)
+ id 4BAA7E15A1; Tue, 08 Apr 2025 18:07:32 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,155 +77,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b403b58-1493-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1744128275;
-	 x=1744214675; bh=R4L8EzoFCm0xNbStA2PIJxzS/K2nJQ66lVrRqUi1F5c=; b=
-	RhqlTWGI+qMmOedVugIX/GeuhhSOl8c+vYZ94bmBtMbWedcx0MDB68zDT+V4L6aZ
-	Bv2pni6nkDX7H10cM4w2ATDmssjda/BwAmFm+Elr8yWdQjFEbQMo5mpcHnLVspiW
-	vdVhppa7jgXl5xZigtCzI80kQY+mtNzl24JvNcCs5RX27xGQqXKL6M1LU5J+cvqq
-	aGGNTEfu11J27A2JSYuaMw1mjLk9oDBc3QmxmNsCnugfaMwLdpTAuSwLBYZSKFgH
-	cAkpS4si+JYL5QlgJOs9ubqXQkpx7KSL3+k7qs0ew/KorwZoaFCb4LYD3iJCJ80z
-	lCg6lHOvrXYq6BHO7F5J2A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1744128275; x=1744214675; bh=R4L8EzoFCm0xNbStA2PIJxzS/K2nJQ66lVr
-	RqUi1F5c=; b=t0HoWI3df8loc0WD5+zgqMbBuAjl4dBKEM1wGfMo40QrBEGIoyg
-	W6FHgu2vNiTM+xS7hObwxL37QzJkwy5NEgDabJCUk8QYWNeghOZQwKv62LJioABk
-	+yoRu9W3cFIYFhsmQbwb3Iuh2GYETDWtb76enfuaA+/gGhq5s21h9A5nnChgJST6
-	LPfcorpDsmCv7dXUFRBdT+YNEUxN3+01adBUXjShkPQYeMW9Cb4jxh6kgwSP3JhG
-	MO4SuHgEWbjxcKChIqIA9zBhLxAwCsSttnURvuWgsQQGiGlm6fitan/yU5sl8zM4
-	pDumKPilcpm+Da4symipGhBR9Ik3sPOjZWA==
-X-ME-Sender: <xms:E0n1Z2temu0sOCqAACKlmJZXyt2OezrEN5biOdaGZJ_Yc6p4q6Q_xw>
-    <xme:E0n1Z7dxKPh79Z6cyGboeBv-x-i-o5RHHMTioWeEmnu-DECdoDrCaSDfAnYfg-4Si
-    epYKbX_LGmp6g>
-X-ME-Received: <xmr:E0n1Zxwtd33xcOdQZdNhBVp5tRx_7K9tvxLjKoTFbDwx8JAN1uICLNp58gvou4Qk0q18ZGpdh1712aIBNVfmK6TAoNd3lAvQdw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtdefheefucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepieeluddvkeejueekhfffteegfeeiffefjeejvdeijedvgfejhe
-    etuddvkeffudeinecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghr
-    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeeipdhmohgu
-    vgepshhmthhpohhuthdprhgtphhtthhopehjsggvuhhlihgthhesshhushgvrdgtohhmpd
-    hrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgt
-    phhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthhopegrnh
-    hthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtohepjhhgrhho
-    shhssehsuhhsvgdrtghomhdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrd
-    igvghnphhrohhjvggtthdrohhrgh
-X-ME-Proxy: <xmx:E0n1ZxPJ-KARzX3kAkhdvnAJ87l0gKN68pGTaO5VZoYXe_PyYFh18g>
-    <xmx:E0n1Z29zXCKxWBw9AhKkeB8ZUsABcJgT06t2GcBmAmc6tG-pS9XftA>
-    <xmx:E0n1Z5V8Td7p-cbZ5Mr0L7xNLjyySqGaDWH3ZOnsC5qJ8GDpjsLCzQ>
-    <xmx:E0n1Z_d65cbUILQKAPlOott_5L0v3qiXI2SkoqFlivDonBF4u4PnRw>
-    <xmx:E0n1ZyhuuRcAfNkEIfI3rRf7NW4sAEQ159PIUL6utIDRHb-DuT2_1SDT>
-Feedback-ID: i1568416f:Fastmail
-Date: Tue, 8 Apr 2025 17:28:53 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] libxl+hvmloader: extend IGD check part 2
-Message-ID: <Z_VJEPQaFuebdH3V@mail-itl>
-References: <20250408132333.1524246-2-marmarek@invisiblethingslab.com>
- <7c8cfe6d-6d61-44e5-b1ba-8a7795424977@suse.com>
+X-Inumbo-ID: 9d8d1929-1493-11f0-9eaa-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=pp1; bh=CGQhd4fZt/lPh+ygm
+	PdHCsaE3Xf5iXCG6Bx4it5RIf0=; b=YCQQ+9vPjGdrkuyMR0sX9ZdoBzz5OGLWG
+	Q10fUuKgJYsSC2+P1N/Wwgsp1VEqrCXtjLkOYClRURt5V9mdFdmv7IXxtkxq3MDs
+	j8UsptDFv8dpLYZdz+WDeMOkLTB4xU/6RTuNq+RE2kahacHg8Qh3ovTdBJ86geYt
+	ENGIxAALZVml2Dasm66zoaezHpG4uE5uJaxrIqy2HlOlFLYTumETwzPShL2sbo20
+	i7LcQ4svL/x5R3ptcW5VrnBMR3xWrActkYzv7FtLij4tzggT5jv8eCjnzzKbtbUl
+	7UeyVUxkgPI3r+IbiiyDVlXcoEfZqjTNOi5kvTU431AfYvkpz7a2A==
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>
+Cc: Hugh Dickins <hughd@google.com>, Nicholas Piggin <npiggin@gmail.com>,
+        Guenter Roeck <linux@roeck-us.net>, Juergen Gross <jgross@suse.com>,
+        Jeremy Fitzhardinge <jeremy@goop.org>, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, kasan-dev@googlegroups.com,
+        sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org,
+        stable@vger.kernel.org
+Subject: [PATCH v2 1/3] kasan: Avoid sleepable page allocation from atomic context
+Date: Tue,  8 Apr 2025 18:07:30 +0200
+Message-ID: <2d9f4ac4528701b59d511a379a60107fa608ad30.1744128123.git.agordeev@linux.ibm.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1744128123.git.agordeev@linux.ibm.com>
+References: <cover.1744128123.git.agordeev@linux.ibm.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="3jsD0fORVQM/ufCO"
-Content-Disposition: inline
-In-Reply-To: <7c8cfe6d-6d61-44e5-b1ba-8a7795424977@suse.com>
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: LtzH8ivnniEqxi-8CvOTdzmx58H27VfG
+X-Proofpoint-ORIG-GUID: DdE36rmI5XQZ4C_Epq-fHX139ivWx26P
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-08_06,2025-04-08_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 spamscore=0
+ mlxscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0 mlxlogscore=866
+ malwarescore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2502280000 definitions=main-2504080110
 
+apply_to_page_range() enters lazy MMU mode and then invokes
+kasan_populate_vmalloc_pte() callback on each page table walk
+iteration. The lazy MMU mode may only be entered only under
+protection of the page table lock. However, the callback can
+go into sleep when trying to allocate a single page.
 
---3jsD0fORVQM/ufCO
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 8 Apr 2025 17:28:53 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] libxl+hvmloader: extend IGD check part 2
+Change __get_free_page() allocation mode from GFP_KERNEL to
+GFP_ATOMIC to avoid scheduling out while in atomic context.
 
-On Tue, Apr 08, 2025 at 04:11:36PM +0200, Jan Beulich wrote:
-> On 08.04.2025 15:23, Marek Marczykowski-G=C3=B3recki wrote:
-> > --- a/tools/firmware/hvmloader/pci.c
-> > +++ b/tools/firmware/hvmloader/pci.c
-> > @@ -173,6 +173,7 @@ void pci_setup(void)
-> >          switch ( class )
-> >          {
-> >          case 0x0300:
-> > +        case 0x0380:
-> >              /* If emulated VGA is found, preserve it as primary VGA. */
-> >              if ( (vendor_id =3D=3D 0x1234) && (device_id =3D=3D 0x1111=
-) )
-> >              {
->=20
-> Unlike here, where vendor IDs are subsequently checked (and the sole ques=
-tion
-> that arises is whether any of the combinations can actually come as Displ=
-ay
-> rather than VGA), ...
->=20
-> > --- a/tools/libs/light/libxl_pci.c
-> > +++ b/tools/libs/light/libxl_pci.c
-> > @@ -2575,7 +2575,8 @@ int libxl__grant_vga_iomem_permission(libxl__gc *=
-gc, const uint32_t domid,
-> > =20
-> >          if (sysfs_dev_get_class(gc, pci, &pci_device_class))
-> >              continue;
-> > -        if (pci_device_class !=3D 0x030000) /* VGA class */
-> > +        if (pci_device_class !=3D 0x030000 && /* VGA class */
-> > +                pci_device_class !=3D 0x038000) /* Display class */
-> >              continue;
->=20
-> ... there's no such checking here, and instead very much VGA-specific thi=
-ngs
-> are being done then. Is that really in line with permitting Display class
-> devices here as well?
+Cc: stable@vger.kernel.org
+Fixes: 3c5c3cfb9ef4 ("kasan: support backing vmalloc space with real shadow memory")
+Signed-off-by: Alexander Gordeev <agordeev@linux.ibm.com>
+---
+ mm/kasan/shadow.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Well, it was necessary to get IGD passthrough working. But I think
-upstream Xen still doesn't have all the pieces here. Specifically,
-Qubes's version includes (a variant of)
-https://lore.kernel.org/xen-devel/87d74a21bde95cfc7c53fad56bf8f0e47724953e.=
-1592171394.git.gorbak25@gmail.com/T/#m8644141760ee36d691434dfaf550311104929=
-29b
-and that adds here access not only to the video memory, but also vbios,
-which was needed to get it working.
+diff --git a/mm/kasan/shadow.c b/mm/kasan/shadow.c
+index 88d1c9dcb507..edfa77959474 100644
+--- a/mm/kasan/shadow.c
++++ b/mm/kasan/shadow.c
+@@ -301,7 +301,7 @@ static int kasan_populate_vmalloc_pte(pte_t *ptep, unsigned long addr,
+ 	if (likely(!pte_none(ptep_get(ptep))))
+ 		return 0;
+ 
+-	page = __get_free_page(GFP_KERNEL);
++	page = __get_free_page(GFP_ATOMIC);
+ 	if (!page)
+ 		return -ENOMEM;
+ 
+-- 
+2.45.2
 
-Anyway, this code is reachable only if gfx_passthrou is enabled and
-currently this option is specific to IGD.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---3jsD0fORVQM/ufCO
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmf1SRAACgkQ24/THMrX
-1yxGkQf/QuecTfYIWj/xJgaJrChpKnUcd07c0yPSjGGqVIqm7mWEC1IsAbzF1ZDC
-YjHkaDu32Ti1irhpsgdMl1bn3Z5yL3rJ/yXE+3YD5172zwPnOtAHCjEBuGeiJRpN
-Wc6UsFJV2FdUTD3CC2Oy7RKwMhJUVBazZcDPj/ZM/3RqkrztI0SF1eWKkZQ49QdK
-LZPEZ+nzfm0uO1vM6vWSkXYtgaCiJNpGM7fQdJdMnGuZtEyj+3doYLzOVKuSbTXq
-a8E717PFb+L23fICM1wEvvvulLmjipWB0oHdRBri0tk6TWdJWqu+kjuVbdPdiNGt
-Zmltn0/+RnucwXc2cwhdovuaTvtUDA==
-=jwPs
------END PGP SIGNATURE-----
-
---3jsD0fORVQM/ufCO--
 
