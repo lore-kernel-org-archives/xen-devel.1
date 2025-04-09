@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E7FC369A5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A927C36002
 	for <xen-devel@archiver.kernel.org>; Wed,  9 Apr 2025 06:46:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.943387.1342190 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.943384.1342170 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2PCd-0005PX-Gk; Wed, 09 Apr 2025 06:46:27 +0000
+	id 1u2PCX-0004oO-Qa; Wed, 09 Apr 2025 06:46:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 943387.1342190; Wed, 09 Apr 2025 06:46:27 +0000
+Received: by outflank-mailman (output) from mailman id 943384.1342170; Wed, 09 Apr 2025 06:46:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2PCd-0005PG-B2; Wed, 09 Apr 2025 06:46:27 +0000
-Received: by outflank-mailman (input) for mailman id 943387;
- Wed, 09 Apr 2025 06:46:25 +0000
+	id 1u2PCX-0004oH-NW; Wed, 09 Apr 2025 06:46:21 +0000
+Received: by outflank-mailman (input) for mailman id 943384;
+ Wed, 09 Apr 2025 06:46:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3VhX=W3=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1u2PCb-0004jx-DY
- for xen-devel@lists.xenproject.org; Wed, 09 Apr 2025 06:46:25 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20620.outbound.protection.outlook.com
- [2a01:111:f403:2416::620])
+ id 1u2PCW-0004jx-L7
+ for xen-devel@lists.xenproject.org; Wed, 09 Apr 2025 06:46:20 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2060d.outbound.protection.outlook.com
+ [2a01:111:f403:2407::60d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5a0bd2f3-150e-11f0-9eaa-5ba50f476ded;
- Wed, 09 Apr 2025 08:46:24 +0200 (CEST)
-Received: from BN9P220CA0030.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::35)
- by CY3PR12MB9554.namprd12.prod.outlook.com (2603:10b6:930:109::19)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 577e340c-150e-11f0-9eaa-5ba50f476ded;
+ Wed, 09 Apr 2025 08:46:19 +0200 (CEST)
+Received: from BN9P220CA0024.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::29)
+ by DM6PR12MB4434.namprd12.prod.outlook.com (2603:10b6:5:2ad::12) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.21; Wed, 9 Apr
- 2025 06:46:21 +0000
+ 2025 06:46:15 +0000
 Received: from BN2PEPF00004FBA.namprd04.prod.outlook.com
- (2603:10b6:408:13e:cafe::f) by BN9P220CA0030.outlook.office365.com
- (2603:10b6:408:13e::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.22 via Frontend Transport; Wed,
- 9 Apr 2025 06:46:21 +0000
+ (2603:10b6:408:13e:cafe::a6) by BN9P220CA0024.outlook.office365.com
+ (2603:10b6:408:13e::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.19 via Frontend Transport; Wed,
+ 9 Apr 2025 06:46:15 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  BN2PEPF00004FBA.mail.protection.outlook.com (10.167.243.180) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.22 via Frontend Transport; Wed, 9 Apr 2025 06:46:21 +0000
+ 15.20.8606.22 via Frontend Transport; Wed, 9 Apr 2025 06:46:15 +0000
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 9 Apr
- 2025 01:46:18 -0500
+ 2025 01:46:10 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a0bd2f3-150e-11f0-9eaa-5ba50f476ded
+X-Inumbo-ID: 577e340c-150e-11f0-9eaa-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ksd9NBKnC2DpIdQt7wmhlmectJGksMJIPnIXO+HSBBsQhuFDZ8Us+SD+Wa7LV7evidrgndjDqy8GfR8l62+P2r0USMgP+3VedRAun2WIon/HV960vyhRuzEnYjPINjnwwXTPSFApkLGfEw+R5S6R5m+de9uFzGGYEE3sidlD0scr92RyQJmXxDNtczyEF5L3Hz7UJ3uHjJEqfLOcXzszlRCJsGvKwb319DLnqxr2p1tXsNWD4MKBge167GBgXEuGkLqvRxGqgVtPkuhGqvmtOO9T3MmOEcxjtrbT8zktBCSQUf+YuOW+Jh9YtkPMW3AdwFgNMqRHQRUj8cuqw+nf+Q==
+ b=txhPBfNYIBbe13GDpw7zgBwecUN8YKIrCbv0ewT1GJ74d8xnWnnJDWeg1ABO+AjIl4Kw4kBs+nePcnoFuhJYUxF+jarHAgQ+QC+jvCTzLY9WP8jtL9yz3GNEeng07ngEGTgl8/AHzEkez/rqJ4cj9T97b66DphY1rjzaPNnt738TPVAn7amcvYvL276+RE/eclcc+1L7LBfos9cILGT9YInpZ0m1goJGpvB0QEOb6bkgluc46ENsw0GWoF9LvS5vhLklGMHFXhGYNcoSdkxF7OYzYJR8Uy8SsO2HzjaoxHxBDfBBerENKf+ZxVIcvBI3JGGkJCAuw4W4R7a8QEL+lQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=F4Ti2Z/GvBJAwx+bvK2L7kcEL+RfV9q/pK8cHYDjclg=;
- b=IW5Ln5v8KnXrTBy7hUsXpy2FY8o+O2YxvTEBZq7K7waIRBKH1lvUWxgMRu55OKvzdAqNDjUP8ojVteulIl2j7KPNg3KD18yWctfn6j+GKb/Qv7Osf6pipwhHSo4ukAb/dRI+bn2OJMGQlSSEStjdrSUTP3RIjTK4Z5xN3GgEmgr5n2ilN3JJRK2jHnUTSaD5XznzUunO+U3Hbsv5GJVhB/N9vI/UmrJ1fQnZn1t2BooDbKPLZhmL/dYFkBGADJOClX3q2Vw1hImwvO1q4VMxxTKs0Bsj+ON9mD0C5q3Bk8yKF3GIgSm2vEpft4ivode8hDYHFaSmuqBrLhWW1BP5Hw==
+ bh=3K+lOO8/HCLmhhfH2l4Onp6abTn+2M6qeZACn+U2biw=;
+ b=NRjohrHf6r3+WROaYI/sLlYekaDd2+KRbCsZctWATkTjUOz8uwv/28AK3kMiye0g85YcmLu7c4944mErf2q5vZAnYkvgDG3Xfkmyv3gp+l7CC1kDGxpktlbMICzOkhTbTEKzCfTJI7o6UrJ3jNAcmf3tvrEJOYcXJWNoFvBiXCDG9kWBvP+ipaFFvzUeTyUa70MtRZfSwOOupO0dacaoorWh6DA4b4EPPqdRH81l+gfWeMdZFePPtLDGWYijcMmL1WyIBmabL0PUHLaptse/RUGhgqWe7qU5etK5/uYtvPhKpfoe9k53J4OGklp3/RKx6OAtMGcsaDs3Mn/A319exg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F4Ti2Z/GvBJAwx+bvK2L7kcEL+RfV9q/pK8cHYDjclg=;
- b=nO5BAZIRSBytL9k9lf8NbJyxsB1d6anIHDE+gYclVEuAHehfmoOu4WXTreyWinskL6R9mavxUPCDx5UXFHNCXL7N83R9PkPRJWCwzbGCNAhZrBvowhrO3m6JjTSgUs01DYQeJdUqafTtrV7Q/IwoLitmVWS75p5wDbldQDb3e2U=
+ bh=3K+lOO8/HCLmhhfH2l4Onp6abTn+2M6qeZACn+U2biw=;
+ b=m67U1eWhgB/+mrxKLLHxOCR9i808TUBlbLHbH02vnY4mHnEUw2n/flBlbx+qeI16BYBGNcJAt1NzTuHBynIpXcno6u+yCSXp24FaIZPBN1uaEL87QG+ZflCgjyBdcvDcs/4T0AswMK7Fs0lAjTsybq0ip2KaL7x+RtLHLg6N2js=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,12 +82,14 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Jiqian Chen <Jiqian.Chen@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>, "Jan
- Beulich" <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 8/8] vpci/msix: Add function to clean MSIX resources
-Date: Wed, 9 Apr 2025 14:45:28 +0800
-Message-ID: <20250409064528.405573-9-Jiqian.Chen@amd.com>
+CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 4/8] vpci: Hide capability when it fails to initialize
+Date: Wed, 9 Apr 2025 14:45:24 +0800
+Message-ID: <20250409064528.405573-5-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250409064528.405573-1-Jiqian.Chen@amd.com>
 References: <20250409064528.405573-1-Jiqian.Chen@amd.com>
@@ -99,239 +101,457 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBA:EE_|CY3PR12MB9554:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7ae12941-be2c-4c6e-b3f1-08dd77323d12
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBA:EE_|DM6PR12MB4434:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e69c30c-7b73-42ca-8d8a-08dd773239a0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
+	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?TlVqZklKSzVGTmkrcXN2M3gyeDhzOHRQRElKRzRBN1NhR05FZnp2c3BvYUJo?=
- =?utf-8?B?UUZQZFNybHdxRC9JTXBlMGIxanhac05keXJoY2dmcFVOK0VEdnZWTWRXbkRk?=
- =?utf-8?B?ZkdmRExxSEtzQis5OW5LcmpQSHo0WjJhRXpUbXJiUHFwdjBPQlFJcVU3UnRF?=
- =?utf-8?B?aVNCM0poZ2drREdOY2t0WW1DSUVoWTQrMzVFQVUwdFpEVDZpUGpjWERXaTRw?=
- =?utf-8?B?KzBZM1d1SkhVcXl3anljOGdadUJyYStoNVgyUWFhcTNHL0UwcEw0UjNUeUJq?=
- =?utf-8?B?ZGxtVmZqbXNKYUNwVVljcGFJclVrcmtWb0JTV3IxTmwxNUtyVFZseGM3YXp6?=
- =?utf-8?B?UlcreUdVU1dlU3RuUlJBQnF2V0E1QUNlemE1eVhPQ1BVYTVvSFlIbHFXa3NB?=
- =?utf-8?B?eUQxdGg5NmxpMWIwMXc2MlZhZ1pFK3JzRit4WE5NTmcxaWw3QTBoeTJGTXN5?=
- =?utf-8?B?S0VFOG9ua1g1S1MzRlplVEd4UHBjd0E5aUttbGZqUHp5ZU13TG1DcUhJdm9V?=
- =?utf-8?B?ay9RVnU2VHNZOWNUN3FKb3FSVEwrRXZsT01Zdzc1N0dKSW9QajJjNHVsejFV?=
- =?utf-8?B?b2ZKVjE3a2g3S1JiSHV1UHF4dUNmSXZiR3UrNGM0a2lQb3ovN1R3cHl2YjNt?=
- =?utf-8?B?OXlwOW9CdGFzWXYzSVZIcWtxcGw0TWE2WU9sczh2eVJCbENST05iWlJReU9B?=
- =?utf-8?B?cVNkV0diNVk3cXZGZEdreFV4Z21nV21oQnptaVp1REtZdzdPQ1B6N2FoQk5j?=
- =?utf-8?B?dXdDU2h1bUlxT1BVWVZEL3FIbjNDK1pwaWVsVG1jU0RiNEZMS0hhQkI0T3Vm?=
- =?utf-8?B?UHRPN0dlYzNGQmc1VTRDd2lBckt0dzA1aHVXYmRod3FMbTZySnE0SzIxY2ZX?=
- =?utf-8?B?SElCRVdoNFI5TzNQOHJyQVVLRkNzWFpzd3RESjN5SzFaQ2psd3k0RmxYTDVS?=
- =?utf-8?B?QUJsY3FZcG1qVzdYaGtDRENIQ3RiR2N3UVFHdk5HMU9Pam9wZUM4a1dLcHZp?=
- =?utf-8?B?NEVybTYvV3UwTnA4RVFWRzRpZlBYaFFMaFZhRjNvaU82ZUpiQlFVbVlkRGpa?=
- =?utf-8?B?THRCTXNNMmVFWVhOMitZdDVOMklHMXI3cG4zbUdvang3dGhsNGRjeXVMazdH?=
- =?utf-8?B?aG56QjJ1amFpamN5U2ppTUU4OC9QcGt0RVhhUUsvOTliS2pLUk1zOEJmY1Yx?=
- =?utf-8?B?bzdSWUt0MnRFL1NvMk5aWGlRd2JkZDJwOXh4YVJoT0VRenB4b2IyZ0l2cUVU?=
- =?utf-8?B?aFZEbmw2SldzVlYzNjJhVmRwWHdDaUYvYiswRmVnenRZaHdTZUJZQklVeW1n?=
- =?utf-8?B?UDJuN0xxVW5OM0YvNGNqZ1BOOE93S3IrUlZEVGI2cUhNVnM1RUJOYzRoay83?=
- =?utf-8?B?MExxT1VMeTQrZmF2UGZYNmppNWZhWFVabVVNRmhBenFhcm5VY3c0cmVPRjFG?=
- =?utf-8?B?ZkRzakVHU044dE5TdVg3VFFsdU5kUlFoQkx4Y1lYRDBOOUJmSDN0QXg4K3JB?=
- =?utf-8?B?NlZBWFRVSEkxMlI2TU8zSytpSmxhU21RRXc0cVR2U3R6YXpERjIycTdZcXpv?=
- =?utf-8?B?aWN2REcyTEFqQUlyLzdtTDk3bEl6LytzNGhhak92NjZKcTZBQUM1SmZlblUr?=
- =?utf-8?B?WW1STUlydDZZNUhRQlJ6T1FRd3AxTlB4UU83cjVwSmRXNXVWaUxhekx3cVlQ?=
- =?utf-8?B?TkgvL0tFajJLYWFVTEo1TW9qSmROa0xRbk5rQlVZMDl6dlExR1NOMHBsV2FK?=
- =?utf-8?B?bkRBRTAxZzZEZkVxZWNEUTVZb0Zpa3Z3djhWOW5LYUZ2T0FWc0N0L0NhTjc2?=
- =?utf-8?B?S0ZxeE40Qi9nVVJNcnFYVzBQZWkxN1Ria1lJNkkweERzMEVLbWFoVW4vMlA2?=
- =?utf-8?B?aTBvRmNLaGdDNnFTQ2lLUm0rUFNGLzY3cFNFa3RGbHpQcmlZaFcwd2Q3L1NP?=
- =?utf-8?B?K09yd3p1Q2x0LzA1WGxZRUpuYVhtYVF3cVNaeHUxVTl6THF0bzYwUlcyN1hl?=
- =?utf-8?Q?1KHR9aglyJKcWy+dZLok0IzNSIup3A=3D?=
+	=?utf-8?B?YjlGdVlGMjlpR3BGcmZDbXRsUUoxRjdXV2hYZ0FZQUZOSEhvSlp1WTNmZzdt?=
+ =?utf-8?B?cUJZRXNWMG4rdzRqNUlNaURVbWlXeXVOZldRR0tLUy83UzB5SHRuT1FPc2pL?=
+ =?utf-8?B?WnJRcjhBT2hrYnFqWVBYb0pMZ28zQVZyTm1vdzV2RjhTQzhGSWtxQmJGQjZK?=
+ =?utf-8?B?NXY0Z3F6Q3hJTmZVWlFiT09xVWZHbDRyL0tBT3d1UnUvU2NpT2MvOWVad3gv?=
+ =?utf-8?B?Q2V3OGJNNGkxeGVkMlR1a2ZRK2N4ZHBIYzUwOVJ0S29ldXAyOVVlaFRtcjk5?=
+ =?utf-8?B?MWhHUUxaa2lhTXdnV3V4cUZVejFMNHB4Uk9EUHdtd2pYSXNXcVoxNTZBS29h?=
+ =?utf-8?B?d0lPUnBuczRkYk9WMXhvNVJtR3YzUjdMU3hvZERKeFAzajRwT1VLcnhKbm9z?=
+ =?utf-8?B?cWJEZHVhMEU5dUJnb0x6cm9TSnlnU0lDYlJ1Q0ZjaFBWK3VNSFUwVFFtbDBF?=
+ =?utf-8?B?T3MvSVZIK3o5b1kwMnA3dzlOQzFqeDFjVVo4NlVsRDhOYWxGQU8wcDBZRkJv?=
+ =?utf-8?B?eGNxOG1DMlZBRHh4cExFK1lTbzFhZW4rNTI1VmZXd3FDU3lSN1BFZjFveE8x?=
+ =?utf-8?B?Nm1WZmE0MFdlZWpodkd1TlBFZmNSOGxReHFTcW1xbWY0L0lXRlRkbjk3R01a?=
+ =?utf-8?B?M05RZ0xzWFhjT1R1TnNyRlBPN3JXMkViM1QxZEdQckpRYXhyQ1VmRjBvR2hC?=
+ =?utf-8?B?bFVBR2NKaktQYTFhejJVUENCTlU0OVFIOFptMFlLT1JXU1BPSWtRbU1BZnJw?=
+ =?utf-8?B?K0k0NVVacDdFN3NuMVl4aDdIWjBOdWJOWXBTcE1KQnlHdUNmYWhCenpMNHhS?=
+ =?utf-8?B?V2U5TFdUcU42bVJ6TWxCV1V0OTE3bmplbFVrQWxiVHJUb3F3ZCtjVE9rajJQ?=
+ =?utf-8?B?MTNENkFzZFJnZzN3Zkllbmt1cUZrSFREOUtQbHZsUDhGaEpFeHJPOVpOKzZG?=
+ =?utf-8?B?U0ZIZVBTUnpka2k2WUNJYks3SHNsTURWUjM4blBncUEwemE0MnlLN1FILzZK?=
+ =?utf-8?B?ZzM5QVZkUjdpamhDR2h3elJXTDR5WTFteVNMcHJUWmV1dDRjL1FYcFJDRCtu?=
+ =?utf-8?B?cmc1RzlMa3FkVEJuVUVNc1BXbGdwQ2xFK0g5ZG9ZMWRlT3RiaWkwWmdDdXBr?=
+ =?utf-8?B?V042RkVaOUxLdEU0YytHbC9UZGkxd3I2ZUI1UUl5WTA2SUNjVjRkcnNjMmJ0?=
+ =?utf-8?B?MkpjQ0ZGSEx4MkdPc0piS2xaOVoxMXN5M2Q5Rk1NQXpDODNRb0xacDdZdXpS?=
+ =?utf-8?B?N2xIT3plZFkyNUYvSitvdWxJTHpIVmxiQlU2RkRoVFlPMmNLOUpBUkVzQjhJ?=
+ =?utf-8?B?dFJqR3F6US9sZzg4M1N1S1VJVmc0YmhWelltR2pHZTYxMDJWc1Byb20vbnV6?=
+ =?utf-8?B?Z3o3bnVtUGFQYzJXSmVHVlpEeEhoV0xLYXluUEErcUZrY0I2Tit6NUxMSHdi?=
+ =?utf-8?B?bTNXQUxiQVhURVdwdWw3ZGRLZk14T1hkZG1aWHF1aVdKOGRPZzJsWE40cEYv?=
+ =?utf-8?B?eXlWS095Z0JueFdGK2QvNmZCZEk2UHVrYzhLWklaMTI2enVwNmJxeldLTnZz?=
+ =?utf-8?B?VXZMZVRHU25adGRGSTU1aUhhcnk0elBIWjJoTXh1bXNhRitOZWZ2dEl4MFBW?=
+ =?utf-8?B?aEprVWFBRk5SdSs4ZDJFbUNvdFBUaUNEaEVmbmVIY3FpZTZRM00xcjhNSzFZ?=
+ =?utf-8?B?NXdieGZWRHVwbXptZi9UUFpJQnNwMWRoV0VFQm90ZXhDeUhSY29YNG0zczBW?=
+ =?utf-8?B?Z0FCZUlRK1dsQlJwVGVkbTBMK25GZS94bkhzbU41QmdreDlkQjRJWTVCZTBN?=
+ =?utf-8?B?all4L3lFYkZSU3pwRVlJL2lwaHROL2NvTGNFR3d4K2IreS9FWTRneEYvMmNV?=
+ =?utf-8?B?RDhMblV3a05veGJqcHBkSlE5QXJaaG1KUHFidGozWmk1N3c5S3NyaWJQYUVM?=
+ =?utf-8?B?a2FuWXZwbWlFclk1bkZGUHBJZWpnczUzNVpGVjdiNzdwQUl0R1R1REVvS2hQ?=
+ =?utf-8?Q?ajXinbHdx2xMQNCoIwcShULTWASljM=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2025 06:46:21.2715
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2025 06:46:15.4903
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ae12941-be2c-4c6e-b3f1-08dd77323d12
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e69c30c-7b73-42ca-8d8a-08dd773239a0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	BN2PEPF00004FBA.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9554
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4434
 
-When init_msix() fails, it needs to clean all MSIX resources.
-So, add a new function fini_msix() to do that.
+When vpci fails to initialize a capability of a device, it just
+return error instead of catching and processing exception. That
+makes the entire device unusable.
 
-And to unregister the mmio handler of vpci_msix_table_ops, add
-a new function.
+So, refactor REGISTER_VPCI_INIT to contain more capability specific
+information, and use new functions to hide capability when
+initialization fails in vpci_assign_device().
+
+Those new functions remove the failed legacy/extended capability
+from the emulated legacy/extended capability list.
+
+What's more, change the definition of init_header() since it is
+not a capability and it is needed for all devices' PCI config space.
+
+Note: call vpci_make_msix_hole() in the end of init_msix() since the
+change of sequence of init_header() and init_msix().
 
 Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 ---
-cc: Jan Beulich <jbeulich@suse.com>
-cc: Andrew Cooper <andrew.cooper3@citrix.com>
 cc: "Roger Pau Monné" <roger.pau@citrix.com>
+cc: Andrew Cooper <andrew.cooper3@citrix.com>
+cc: Anthony PERARD <anthony.perard@vates.tech>
+cc: Michal Orzel <michal.orzel@amd.com>
+cc: Jan Beulich <jbeulich@suse.com>
+cc: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <sstabellini@kernel.org>
 ---
 v1->v2 changes:
-new patch.
+* Removed the "priorities" of initializing capabilities since it isn't used anymore.
+* Added new function vpci_capability_mask() and vpci_ext_capability_mask() to remove failed capability from list.
+* Called vpci_make_msix_hole() in the end of init_msix().
 
 Best regards,
 Jiqian Chen.
 ---
- xen/arch/x86/hvm/intercept.c      | 44 ++++++++++++++++++++++
- xen/arch/x86/include/asm/hvm/io.h |  3 ++
- xen/drivers/vpci/msix.c           | 61 ++++++++++++++++++++++++++++---
- 3 files changed, 103 insertions(+), 5 deletions(-)
+ xen/drivers/vpci/header.c  |   3 +-
+ xen/drivers/vpci/msi.c     |   2 +-
+ xen/drivers/vpci/msix.c    |   8 +-
+ xen/drivers/vpci/rebar.c   |   2 +-
+ xen/drivers/vpci/vpci.c    | 175 +++++++++++++++++++++++++++++++------
+ xen/include/xen/pci_regs.h |   1 +
+ xen/include/xen/vpci.h     |  26 ++++--
+ xen/include/xen/xen.lds.h  |   2 +-
+ 8 files changed, 179 insertions(+), 40 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/intercept.c b/xen/arch/x86/hvm/intercept.c
-index da22c386763e..5eacf51d4d2c 100644
---- a/xen/arch/x86/hvm/intercept.c
-+++ b/xen/arch/x86/hvm/intercept.c
-@@ -276,6 +276,50 @@ void register_mmio_handler(struct domain *d,
-     handler->mmio.ops = ops;
- }
- 
-+void unregister_mmio_handler(struct domain *d,
-+                             const struct hvm_mmio_ops *ops)
-+{
-+    unsigned int i, count = d->arch.hvm.io_handler_count;
-+
-+    ASSERT(d->arch.hvm.io_handler);
-+
-+    if ( !count )
-+        return;
-+
-+    for ( i = 0; i < count; i++ )
-+        if ( d->arch.hvm.io_handler[i].type == IOREQ_TYPE_COPY &&
-+             d->arch.hvm.io_handler[i].mmio.ops == ops )
-+            break;
-+
-+    if ( i == count )
-+        return;
-+
-+    for ( ; i < count - 1; i++ )
-+    {
-+        struct hvm_io_handler *curr = &d->arch.hvm.io_handler[i];
-+        struct hvm_io_handler *next = &d->arch.hvm.io_handler[i + 1];
-+
-+        curr->type = next->type;
-+        curr->ops = next->ops;
-+        if ( next->type == IOREQ_TYPE_COPY )
-+        {
-+            curr->portio.port = 0;
-+            curr->portio.size = 0;
-+            curr->portio.action = 0;
-+            curr->mmio.ops = next->mmio.ops;
-+        }
-+        else
-+        {
-+            curr->mmio.ops = 0;
-+            curr->portio.port = next->portio.port;
-+            curr->portio.size = next->portio.size;
-+            curr->portio.action = next->portio.action;
-+        }
-+    }
-+
-+    d->arch.hvm.io_handler_count--;
-+}
-+
- void register_portio_handler(struct domain *d, unsigned int port,
-                              unsigned int size, portio_action_t action)
- {
-diff --git a/xen/arch/x86/include/asm/hvm/io.h b/xen/arch/x86/include/asm/hvm/io.h
-index 565bad300d20..018d2745fd99 100644
---- a/xen/arch/x86/include/asm/hvm/io.h
-+++ b/xen/arch/x86/include/asm/hvm/io.h
-@@ -75,6 +75,9 @@ bool hvm_mmio_internal(paddr_t gpa);
- void register_mmio_handler(struct domain *d,
-                            const struct hvm_mmio_ops *ops);
- 
-+void unregister_mmio_handler(struct domain *d,
-+                             const struct hvm_mmio_ops *ops);
-+
- void register_portio_handler(
-     struct domain *d, unsigned int port, unsigned int size,
-     portio_action_t action);
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 6537374c79a0..60654d4f6d0b 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -703,6 +703,54 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index 6833d456566b..51a67d76ad8a 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -848,7 +848,7 @@ static int vpci_init_ext_capability_list(struct pci_dev *pdev)
      return 0;
  }
  
-+static void fini_msix(struct pci_dev *pdev)
+-static int cf_check init_header(struct pci_dev *pdev)
++int vpci_init_header(struct pci_dev *pdev)
+ {
+     uint16_t cmd;
+     uint64_t addr, size;
+@@ -1044,7 +1044,6 @@ static int cf_check init_header(struct pci_dev *pdev)
+     pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
+     return rc;
+ }
+-REGISTER_VPCI_INIT(init_header, VPCI_PRIORITY_MIDDLE);
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
+index 66e5a8a116be..ca89ae9b9c22 100644
+--- a/xen/drivers/vpci/msi.c
++++ b/xen/drivers/vpci/msi.c
+@@ -270,7 +270,7 @@ static int cf_check init_msi(struct pci_dev *pdev)
+ 
+     return 0;
+ }
+-REGISTER_VPCI_INIT(init_msi, VPCI_PRIORITY_LOW);
++REGISTER_VPCI_LEGACY_CAP(PCI_CAP_ID_MSI, init_msi);
+ 
+ void vpci_dump_msi(void)
+ {
+diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
+index 6bd8c55bb48e..6537374c79a0 100644
+--- a/xen/drivers/vpci/msix.c
++++ b/xen/drivers/vpci/msix.c
+@@ -751,9 +751,13 @@ static int cf_check init_msix(struct pci_dev *pdev)
+     pdev->vpci->msix = msix;
+     list_add(&msix->next, &d->arch.hvm.msix_tables);
+ 
+-    return 0;
++    spin_lock(&pdev->vpci->lock);
++    rc = vpci_make_msix_hole(pdev);
++    spin_unlock(&pdev->vpci->lock);
++
++    return rc
+ }
+-REGISTER_VPCI_INIT(init_msix, VPCI_PRIORITY_HIGH);
++REGISTER_VPCI_LEGACY_CAP(PCI_CAP_ID_MSIX, init_msix);
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/vpci/rebar.c b/xen/drivers/vpci/rebar.c
+index 793937449af7..79858e5dc92f 100644
+--- a/xen/drivers/vpci/rebar.c
++++ b/xen/drivers/vpci/rebar.c
+@@ -118,7 +118,7 @@ static int cf_check init_rebar(struct pci_dev *pdev)
+ 
+     return 0;
+ }
+-REGISTER_VPCI_INIT(init_rebar, VPCI_PRIORITY_LOW);
++REGISTER_VPCI_EXTEND_CAP(PCI_EXT_CAP_ID_REBAR, init_rebar);
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 1e6aa5d799b9..f1f125bfdab1 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -35,9 +35,25 @@ struct vpci_register {
+     uint32_t rsvdz_mask;
+ };
+ 
++static int vpci_register_cmp(const struct vpci_register *r1,
++                             const struct vpci_register *r2)
 +{
-+    struct vpci *vpci = pdev->vpci;
++    /* Return 0 if registers overlap. */
++    if ( r1->offset < r2->offset + r2->size &&
++         r2->offset < r1->offset + r1->size )
++        return 0;
++    if ( r1->offset < r2->offset )
++        return -1;
++    if ( r1->offset > r2->offset )
++        return 1;
 +
-+    if ( !vpci->msix )
-+        return;
-+
-+    list_del(&vpci->msix->next);
-+    if ( list_empty(&pdev->domain->arch.hvm.msix_tables) )
-+        unregister_mmio_handler(pdev->domain, &vpci_msix_table_ops);
-+
-+    /* Remove any MSIX regions if present. */
-+    for ( unsigned int i = 0;
-+          vpci->msix && i < ARRAY_SIZE(vpci->msix->tables);
-+          i++ )
-+    {
-+        unsigned long start = PFN_DOWN(vmsix_table_addr(pdev->vpci, i));
-+        unsigned long end = PFN_DOWN(vmsix_table_addr(pdev->vpci, i) +
-+                                     vmsix_table_size(pdev->vpci, i) - 1);
-+
-+        for ( unsigned int j = 0; j < ARRAY_SIZE(vpci->header.bars); j++ )
-+        {
-+            int rc;
-+            const struct vpci_bar *bar = &vpci->header.bars[j];
-+
-+            if ( rangeset_is_empty(bar->mem) )
-+                continue;
-+
-+            rc = rangeset_remove_range(bar->mem, start, end);
-+            if ( rc )
-+            {
-+                gprintk(XENLOG_WARNING,
-+                       "%pp: failed to remove MSIX table [%lx, %lx]: %d\n",
-+                        &pdev->sbdf, start, end, rc);
-+                return;
-+            }
-+        }
-+    }
-+
-+    for ( unsigned int i = 0; i < ARRAY_SIZE(vpci->msix->table); i++ )
-+        if ( vpci->msix->table[i] )
-+            iounmap(vpci->msix->table[i]);
-+
-+    vpci_remove_registers(vpci, msix_control_reg(pdev->msix_pos), 2);
-+    xfree(vpci->msix);
-+    vpci->msix = NULL;
++    ASSERT_UNREACHABLE();
++    return 0;
 +}
 +
- static int cf_check init_msix(struct pci_dev *pdev)
+ #ifdef __XEN__
+-extern vpci_register_init_t *const __start_vpci_array[];
+-extern vpci_register_init_t *const __end_vpci_array[];
++extern vpci_capability_t *const __start_vpci_array[];
++extern vpci_capability_t *const __end_vpci_array[];
+ #define NUM_VPCI_INIT (__end_vpci_array - __start_vpci_array)
+ 
+ #ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
+@@ -83,6 +99,133 @@ static int assign_virtual_sbdf(struct pci_dev *pdev)
+ 
+ #endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
+ 
++static void vpci_capability_mask(struct pci_dev *pdev,
++                                 const unsigned int cap)
++{
++    const unsigned int size = 1;
++    const unsigned int offset = pci_find_cap_offset(pdev->sbdf, cap);
++    const struct vpci_register r = { .offset = offset, .size = size };
++    struct vpci_register *rm;
++    struct vpci *vpci = pdev->vpci;
++
++    spin_lock(&vpci->lock);
++    list_for_each_entry ( rm, &vpci->handlers, node )
++    {
++        int cmp = vpci_register_cmp(&r, rm);
++
++        if ( !cmp && rm->offset == offset && rm->size == size )
++        {
++            struct vpci_register *pre = list_entry(rm->node.prev,
++                                                   struct vpci_register,
++                                                   node);
++            struct vpci_register *next = list_entry(rm->node.next,
++                                                    struct vpci_register,
++                                                    node);
++
++            pre->private = next->private;
++
++            /* PCI_CAP_LIST_ID register of current capability */
++            list_del(&rm->node);
++            /* PCI_CAP_LIST_NEXT register of current capability */
++            list_del(&next->node);
++            spin_unlock(&vpci->lock);
++
++            xfree(rm);
++            xfree(next);
++            return;
++        }
++        if ( cmp <= 0 )
++            break;
++    }
++    spin_unlock(&vpci->lock);
++}
++
++static void vpci_ext_capability_mask(struct pci_dev *pdev,
++                                     const unsigned int cap)
++{
++    const unsigned int size = 4;
++    const unsigned int offset = pci_find_ext_capability(pdev->sbdf, cap);
++    const struct vpci_register r = { .offset = offset, .size = size };
++    struct vpci_register *rm;
++    struct vpci *vpci = pdev->vpci;
++
++    spin_lock(&vpci->lock);
++    list_for_each_entry ( rm, &vpci->handlers, node )
++    {
++        int cmp = vpci_register_cmp(&r, rm);
++
++        if ( !cmp && rm->offset == offset && rm->size == size )
++        {
++            struct vpci_register *pre;
++            u32 pre_header, header = (u32)(uintptr_t)rm->private;
++
++            if ( offset == 0x100U && PCI_EXT_CAP_NEXT(header) == 0 )
++            {
++                rm->private = (void *)(uintptr_t)0;
++                spin_unlock(&vpci->lock);
++                return;
++            }
++            else if ( offset == 0x100U )
++            {
++                pre = rm;
++                rm = list_entry(rm->node.next, struct vpci_register, node);
++                pre->private = rm->private;
++            }
++            else
++            {
++                pre = list_entry(rm->node.prev, struct vpci_register, node);
++                pre_header = (u32)(uintptr_t)pre->private;
++                pre->private =
++                    (void *)(uintptr_t)((pre_header & !PCI_EXT_CAP_NEXT_MASK) |
++                                        (header & PCI_EXT_CAP_NEXT_MASK));
++            }
++            list_del(&rm->node);
++            spin_unlock(&vpci->lock);
++            xfree(rm);
++            return;
++        }
++        if ( cmp <= 0 )
++            break;
++    }
++    spin_unlock(&vpci->lock);
++}
++
++static void vpci_init_capabilities(struct pci_dev *pdev)
++{
++    for ( unsigned int i = 0; i < NUM_VPCI_INIT; i++ )
++    {
++        const vpci_capability_t *capability = __start_vpci_array[i];
++        const unsigned int cap = capability->id;
++        const bool is_ext = capability->is_ext;
++        unsigned int pos;
++        int rc;
++
++        if ( !is_hardware_domain(pdev->domain) && is_ext )
++            continue;
++
++        if ( is_ext )
++            pos = pci_find_ext_capability(pdev->sbdf, cap);
++        else
++            pos = pci_find_cap_offset(pdev->sbdf, cap);
++
++        if ( !pos )
++            continue;
++
++        rc = capability->init(pdev);
++
++        if ( rc )
++        {
++            printk(XENLOG_WARNING "%pd %pp: %s cap %u init fail rc=%d, mask it\n",
++                   pdev->domain, &pdev->sbdf,
++                   is_ext ? "extended" : "legacy", cap, rc);
++            if ( is_ext )
++                vpci_ext_capability_mask(pdev, cap);
++            else
++                vpci_capability_mask(pdev, cap);
++        }
++    }
++}
++
+ void vpci_deassign_device(struct pci_dev *pdev)
  {
-     struct domain *d = pdev->domain;
-@@ -726,10 +774,7 @@ static int cf_check init_msix(struct pci_dev *pdev)
-     rc = vpci_add_register(pdev->vpci, control_read, control_write,
-                            msix_control_reg(msix_offset), 2, msix);
-     if ( rc )
+     unsigned int i;
+@@ -128,7 +271,6 @@ void vpci_deassign_device(struct pci_dev *pdev)
+ 
+ int vpci_assign_device(struct pci_dev *pdev)
+ {
+-    unsigned int i;
+     const unsigned long *ro_map;
+     int rc = 0;
+ 
+@@ -159,12 +301,11 @@ int vpci_assign_device(struct pci_dev *pdev)
+         goto out;
+ #endif
+ 
+-    for ( i = 0; i < NUM_VPCI_INIT; i++ )
 -    {
--        xfree(msix);
--        return rc;
+-        rc = __start_vpci_array[i](pdev);
+-        if ( rc )
+-            break;
 -    }
-+        goto fail;
- 
-     msix->max_entries = max_entries;
-     msix->pdev = pdev;
-@@ -755,7 +800,13 @@ static int cf_check init_msix(struct pci_dev *pdev)
-     rc = vpci_make_msix_hole(pdev);
-     spin_unlock(&pdev->vpci->lock);
- 
--    return rc
-+    if ( !rc )
-+        return 0;
++    rc = vpci_init_header(pdev);
++    if ( rc )
++        goto out;
 +
-+ fail:
-+    fini_msix(pdev);
-+
-+    return rc;
++    vpci_init_capabilities(pdev);
+ 
+  out: __maybe_unused;
+     if ( rc )
+@@ -174,22 +315,6 @@ int vpci_assign_device(struct pci_dev *pdev)
  }
- REGISTER_VPCI_LEGACY_CAP(PCI_CAP_ID_MSIX, init_msix);
+ #endif /* __XEN__ */
  
+-static int vpci_register_cmp(const struct vpci_register *r1,
+-                             const struct vpci_register *r2)
+-{
+-    /* Return 0 if registers overlap. */
+-    if ( r1->offset < r2->offset + r2->size &&
+-         r2->offset < r1->offset + r1->size )
+-        return 0;
+-    if ( r1->offset < r2->offset )
+-        return -1;
+-    if ( r1->offset > r2->offset )
+-        return 1;
+-
+-    ASSERT_UNREACHABLE();
+-    return 0;
+-}
+-
+ /* Dummy hooks, writes are ignored, reads return 1's */
+ static uint32_t cf_check vpci_ignored_read(
+     const struct pci_dev *pdev, unsigned int reg, void *data)
+diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
+index 27b4f44eedf3..5fe6653fded4 100644
+--- a/xen/include/xen/pci_regs.h
++++ b/xen/include/xen/pci_regs.h
+@@ -449,6 +449,7 @@
+ #define PCI_EXT_CAP_ID(header)		((header) & 0x0000ffff)
+ #define PCI_EXT_CAP_VER(header)		(((header) >> 16) & 0xf)
+ #define PCI_EXT_CAP_NEXT(header)	(((header) >> 20) & 0xffc)
++#define PCI_EXT_CAP_NEXT_MASK		0xFFC00000U
+ 
+ #define PCI_EXT_CAP_ID_ERR	1
+ #define PCI_EXT_CAP_ID_VC	2
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 807401b2eaa2..5016ded64d89 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -13,11 +13,11 @@ typedef uint32_t vpci_read_t(const struct pci_dev *pdev, unsigned int reg,
+ typedef void vpci_write_t(const struct pci_dev *pdev, unsigned int reg,
+                           uint32_t val, void *data);
+ 
+-typedef int vpci_register_init_t(struct pci_dev *dev);
+-
+-#define VPCI_PRIORITY_HIGH      "1"
+-#define VPCI_PRIORITY_MIDDLE    "5"
+-#define VPCI_PRIORITY_LOW       "9"
++typedef struct {
++    unsigned int id;
++    bool is_ext;
++    int (*init)(struct pci_dev *pdev);
++} vpci_capability_t;
+ 
+ #define VPCI_ECAM_BDF(addr)     (((addr) & 0x0ffff000) >> 12)
+ 
+@@ -29,9 +29,19 @@ typedef int vpci_register_init_t(struct pci_dev *dev);
+  */
+ #define VPCI_MAX_VIRT_DEV       (PCI_SLOT(~0) + 1)
+ 
+-#define REGISTER_VPCI_INIT(x, p)                \
+-  static vpci_register_init_t *const x##_entry  \
+-               __used_section(".data.vpci." p) = (x)
++#define REGISTER_VPCI_CAP(cap, x, ext) \
++  static vpci_capability_t x##_t = { \
++        .id = (cap), \
++        .init = (x), \
++        .is_ext = (ext), \
++  }; \
++  static vpci_capability_t *const x##_entry  \
++               __used_section(".data.vpci.") = &(x##_t)
++
++#define REGISTER_VPCI_LEGACY_CAP(cap, x) REGISTER_VPCI_CAP(cap, x, false)
++#define REGISTER_VPCI_EXTEND_CAP(cap, x) REGISTER_VPCI_CAP(cap, x, true)
++
++int __must_check vpci_init_header(struct pci_dev *pdev);
+ 
+ /* Assign vPCI to device by adding handlers. */
+ int __must_check vpci_assign_device(struct pci_dev *pdev);
+diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+index 16a9b1ba03db..c73222112dd3 100644
+--- a/xen/include/xen/xen.lds.h
++++ b/xen/include/xen/xen.lds.h
+@@ -187,7 +187,7 @@
+ #define VPCI_ARRAY               \
+        . = ALIGN(POINTER_ALIGN); \
+        __start_vpci_array = .;   \
+-       *(SORT(.data.vpci.*))     \
++       *(.data.vpci.*)     \
+        __end_vpci_array = .;
+ #else
+ #define VPCI_ARRAY
 -- 
 2.34.1
 
