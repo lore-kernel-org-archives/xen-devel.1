@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DBDC3601E
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 12:09:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.945519.1343709 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10829C3601E
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 12:13:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.945536.1343719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2qip-0002Px-CT; Thu, 10 Apr 2025 12:09:31 +0000
+	id 1u2qmR-0005fe-Rd; Thu, 10 Apr 2025 12:13:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 945519.1343709; Thu, 10 Apr 2025 12:09:31 +0000
+Received: by outflank-mailman (output) from mailman id 945536.1343719; Thu, 10 Apr 2025 12:13:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2qip-0002Pq-9t; Thu, 10 Apr 2025 12:09:31 +0000
-Received: by outflank-mailman (input) for mailman id 945519;
- Thu, 10 Apr 2025 12:09:29 +0000
+	id 1u2qmR-0005fX-P6; Thu, 10 Apr 2025 12:13:15 +0000
+Received: by outflank-mailman (input) for mailman id 945536;
+ Thu, 10 Apr 2025 12:13:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=S0bf=W4=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u2qin-0002PR-L4
- for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 12:09:29 +0000
-Received: from fout-b2-smtp.messagingengine.com
- (fout-b2-smtp.messagingengine.com [202.12.124.145])
+ <SRS0=ged3=W4=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1u2qf8-00077g-1Q
+ for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 12:05:42 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2062f.outbound.protection.outlook.com
+ [2a01:111:f403:2414::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a3838602-1604-11f0-9ffb-bf95429c2676;
- Thu, 10 Apr 2025 14:09:23 +0200 (CEST)
-Received: from phl-compute-11.internal (phl-compute-11.phl.internal
- [10.202.2.51])
- by mailfout.stl.internal (Postfix) with ESMTP id 14F5F11401D4;
- Thu, 10 Apr 2025 08:09:22 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-11.internal (MEProxy); Thu, 10 Apr 2025 08:09:22 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 10 Apr 2025 08:09:20 -0400 (EDT)
+ id 1b5a3a77-1604-11f0-9ffb-bf95429c2676;
+ Thu, 10 Apr 2025 14:05:35 +0200 (CEST)
+Received: from CH5P220CA0016.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::22)
+ by IA0PR12MB7699.namprd12.prod.outlook.com (2603:10b6:208:431::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.21; Thu, 10 Apr
+ 2025 12:05:29 +0000
+Received: from CH3PEPF00000015.namprd21.prod.outlook.com
+ (2603:10b6:610:1ef:cafe::10) by CH5P220CA0016.outlook.office365.com
+ (2603:10b6:610:1ef::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.24 via Frontend Transport; Thu,
+ 10 Apr 2025 12:05:29 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH3PEPF00000015.mail.protection.outlook.com (10.167.244.120) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8655.0 via Frontend Transport; Thu, 10 Apr 2025 12:05:28 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Apr
+ 2025 07:05:27 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,156 +58,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3838602-1604-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1744286961;
-	 x=1744373361; bh=PZEgb330gVH7BSPCy/LRDnWpvZBO+8QSuPUnDifhoOI=; b=
-	hxetcrME6n8V5x5WPAT2PN2HRiHVgCgxgqrLHCSuPIlTfCxz4gY1DhbEjYXlpkFY
-	h58eYgdYSAwOX2RymLU5cB2LsWErTf3Y1Z1prFXFU/rEZQQeRH8jM+mEbhD1ackx
-	WaLWRX4LtPJ5IElrZPLYq0S/ipndhiI7BSRJSq3EdEudahoqbajjrn30NRO/IE9g
-	juXEygtnfvSafbzai4TdMo1cPFbqdxew+fPAM83tDySdNpnouPOu+X08zvCJUDLB
-	JrWAZOWBPId1ZxoaudAhl8eVCoQa7Lf/fOnM3+4xWwjy38jSnpcFhZiOu3uuJlrs
-	gJG3bDXfobF7EupOuCjA/w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1744286961; x=1744373361; bh=PZEgb330gVH7BSPCy/LRDnWpvZBO+8QSuPU
-	nDifhoOI=; b=Vvdj5Ja2S0KfNcahYILg5QG537UBuBFKdhRW7iDmFQ151Sai9ue
-	ABpGLpxXTZ1KCFQadXiMErtRHW41iDOw2POCDz3FnbrmTV3yb9ZhtmpPyC0WKgr9
-	rBX90gQ75FkBnE58Pkjx/OTzhUbVWzVLnOil09UyhoYU6ZqTVaW5zU5IctwaHXwJ
-	IaJ7yWTq2cDbbcXt43pYbPF7HbwYbxR6Drld/E16bi0NtQSJAMnPIrodgGxIeztO
-	IgxVrOPI0OSi7gJmr3WNiCCWjxgXDRUo+cuWQ//3Z1mawBx2kTQ6DVp8USyZ19Ns
-	DWTg11F+TaxNBO45RTBwJlquHfwAQ20ffcQ==
-X-ME-Sender: <xms:8bT3Z4esBlj6zAq-LtLUW2rLN8AYbp4bCc3i46RN7WknT6VhUKA3YQ>
-    <xme:8bT3Z6PbQuByUGMuny3Jc-c-8XfmNETdyLQQYtxSQM5_jp-5c2Y-_qRp-lzWNvqnJ
-    kdJXw6HwLIBHA>
-X-ME-Received: <xmr:8bT3Z5hOcFnU4JlFPpjiC5BhfG6zVp_Z1PrxGhSCAd-AUbnxg191WTMxQKviBX67u-L0lK2bzoQ1NONguVdc_ZcZf6LTpiTQfQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvtdekkeejucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepieeluddvkeejueekhfffteegfeeiffefjeejvdeijedvgfejhe
-    etuddvkeffudeinecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghr
-    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeeipdhmohgu
-    vgepshhmthhpohhuthdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghith
-    hrihigrdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhp
-    rhhojhgvtghtrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrd
-    gtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhr
-    tghpthhtohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtoheprg
-    hnthhhohhnhidrphgvrhgrrhgusehvrghtvghsrdhtvggthh
-X-ME-Proxy: <xmx:8bT3Z99ycYTMckaibyVdoWslBxOGdu4kRrZIJXao5GVPy1xnJFZ8pw>
-    <xmx:8bT3Z0sHWtWVRtaUiqWyy9hfR-6cCHRj1hh2uKQ14LJ4_44kMVt7CQ>
-    <xmx:8bT3Z0EZ7f1E48KAuOaHXfjOlsm3ECTxsn-86rBRzcLi6Q08RQlsKA>
-    <xmx:8bT3ZzO4LTuTWj6PhBUt916kwp-mxglFWe9Xaxphe0X7VVmdX1d1_g>
-    <xmx:8bT3Z_sGI2AVkjsIjXbr91t4gHYJUCw_Nd4mnQd2gYRDXG0hmGCS5dxP>
-Feedback-ID: i1568416f:Fastmail
-Date: Thu, 10 Apr 2025 14:09:17 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH 3/6] Adjust Linux build script to work with other major
- versions
-Message-ID: <Z_e07sow3o0bv-W9@mail-itl>
-References: <20250410114628.2060072-1-andrew.cooper3@citrix.com>
- <20250410114628.2060072-4-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 1b5a3a77-1604-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aOsIVm+97c7inmwJR9keJbWcg2EzNN25y7vBR2qMcQiisiITd6dtb1PVy3PATOoymR9V5sc9RMyWr257WvxQc6ECyV4AV0xHmkZC+WJJizpNq73rxcRtFNjQvlAY0ngeXrvKGK1amMGbwE9ZqAp7FIoH6C03YPOOmEgopg8cArzOEShugOF/cG3xwpnzq+Le6sTMyoP6Rej46HbcReFZQe60n3X4624EEDeG7OB9+B1mMSCyHj23BFORh7YwugFKoXdslhgN6GcgHH8yvYLWwpqnwKfajhmaiPzSh3eVI/szgyP7I5ZSMvjob4fcfF5mVqdRulsab9mjIhSzCKLR8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7TAN7IA2M8DdftQopZKJP3lG7D4zowg6G8xdf5FOIAE=;
+ b=RU343dnc4koTImZ+O08m80Pg7kyIs7kQeLmHcrJX6m6x6SZ4Pjfs9t4SySmmoEx4V0SAeI0zqKOryZkOWfd0qqX3+zFDN7Ha7OfeUTIdt0IG97gXk8CFgCYmz1gZCr9K059t4kbDak1nSZdNyy2W1CJGrmx2UFrsg2/+6ynAYrLi1NPQmTpckTaAyAHqBL44pcHqi2PKqcw0BEYVDkB5i+aKhsMPD80jIFCKKcWxlx0dCia/o3nrau0n5b0/uJvCwrDtUbxklyGkl2e0DOAf4x1jh5RuCjvEgjNmn3RX7YuTCtL4c4uFo6cSeWe5VExzZks74olvCw2Mfj8CbQ0Jsw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=proton.me smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7TAN7IA2M8DdftQopZKJP3lG7D4zowg6G8xdf5FOIAE=;
+ b=puMy7Ug7XQeW6iOEgd8cOehnXNP8bi9S+8WV7+A0Si/45pK+qt6pm2chCoI5XKvvUfSaQbt25VkMlgH9baj6QTRg4gKXmjQmjlwDR9QoB6RNe4jS3VPV1fx35nbjIZutmrbEFLt5S2hacklYLJRaXr1Ev4JMNdQwXWWZrtbTfFQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="3cyWOqAS0erRWFr1"
-Content-Disposition: inline
-In-Reply-To: <20250410114628.2060072-4-andrew.cooper3@citrix.com>
-
-
---3cyWOqAS0erRWFr1
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 10 Apr 2025 14:09:17 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH 3/6] Adjust Linux build script to work with other major
- versions
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 10 Apr 2025 13:05:25 +0100
+Message-ID: <D92Y1FMJSC3L.ULV8TKJ956D2@amd.com>
+CC: <xen-devel@lists.xenproject.org>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, Jason Andryuk <jason.andryuk@amd.com>, "Xenia
+ Ragiadakou" <xenia.ragiadakou@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v3 04/16] kconfig: introduce option to independently
+ enable libfdt
+From: Alejandro Vallejo <agarciav@amd.com>
+To: Denis Mukhin <dmkhn@proton.me>
+X-Mailer: aerc 0.20.1
+References: <20250408160802.49870-1-agarciav@amd.com>
+ <20250408160802.49870-5-agarciav@amd.com>
+ <7UJZ7DNBvYS92pCcplKug_7DNUY5QJtWUdcN_CWIUsdcumUN4dOXsQka1nGQ5dQwgSSmHBJXJGJo9EGByjmq-eeNR0VyNftIPnKZHcWUrZw=@proton.me>
+In-Reply-To: <7UJZ7DNBvYS92pCcplKug_7DNUY5QJtWUdcN_CWIUsdcumUN4dOXsQka1nGQ5dQwgSSmHBJXJGJo9EGByjmq-eeNR0VyNftIPnKZHcWUrZw=@proton.me>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000015:EE_|IA0PR12MB7699:EE_
+X-MS-Office365-Filtering-Correlation-Id: 604f0074-ca1c-4ad2-4e89-08dd7827fc6d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?d3ZoOUwxWWdiVlU3ZEJtMmxyVnNzM2VXRnVZRDF2OENTQWFyQXR4eW9hcFRj?=
+ =?utf-8?B?WnpjYlFIWjg1TnhvaHNvNXNPMEVFQmhycXRTWExQeHN2N29YQ0E5ZkRjOXpt?=
+ =?utf-8?B?UW8xWnZzek52S0xSVkY0eVhrWTc0UGJqOWhTck04N3R2TVVwMVlWZTB1T1J6?=
+ =?utf-8?B?TW44RG5TOVZrU1JGNGdSNkZxajI0OTY0UWVpUmp6c1A4eXZIek03KzhZL3hV?=
+ =?utf-8?B?MjladzZYUFEzT3Jtcmt1cEVVaXhieWppVlR6dzdxSWtwcm43S0xVUFV0WTJZ?=
+ =?utf-8?B?TEhINzlLWFZ5d08xdEpoSmdNWUI4eGpWUU1tRzROZ3l3OGd1VThSLzFEY0tu?=
+ =?utf-8?B?Z3JwMURWRnZFKzZRMTQ3S0NUWWtKc2tFRmJ4OW5LMTRqdjlmR1FWU0dMb3Fs?=
+ =?utf-8?B?bWNJcFFTRzZGa1lnWmc4ZVV2SDNISnQ0bGRsNnNKV0JQVVMwVUtkOVFhV0Jn?=
+ =?utf-8?B?VWc2WmdGWlZKZzh1VXRWNVJYU3Y1YjhSNkNxd0tuYURtVy8yM3hHQmlUeEwz?=
+ =?utf-8?B?eUx5MVBtZVpTV0RpQW45UWRhWEZRNDQxTS9SaE1laldWVndKNy9SM1ZycWV3?=
+ =?utf-8?B?M3JMcm91bTdhK24rQVhFdTl4QW0xRTQ1Z1BDTDhYbDV0d3BkdlpKY2pQTnVz?=
+ =?utf-8?B?L2tJeFZmcmlqUGJqMENSaDN4T3FIMzB5MVN3WVRDOHUwcE9MOTFZVWd5emtI?=
+ =?utf-8?B?dzEzd1hNdURFbncxRkZUZjJTSHU4QlVTZUxnbEdWZVJHRUswcXBpaVJhRlNU?=
+ =?utf-8?B?QmFoSkxzMFJHV2s4ekEzaDV0RUZMblF1ck41T3h2dzN1MWdNMXdJK0ZiTUxz?=
+ =?utf-8?B?dUpSVHIvOFVUOWozL3JJUWRZM2VSdVBvTFlOS0E2SGVzQ29EdEZ5bWNCbnFO?=
+ =?utf-8?B?bHRkNmUrVit4a1NVZTFqenp4blJraXAwaG1xTFFHWkljdWQxaUFxbitPNFVv?=
+ =?utf-8?B?b2NFWkFTdDBnOG4zMmxPYzYreXUxUE84N1FRZFE2R29wMHA0SlAwWEpxemtP?=
+ =?utf-8?B?bXIyOGF5bWdGU01CWXNSWjlvNGU3YnVWWitERmlzNVE2YkJsSFNmS0JrczlZ?=
+ =?utf-8?B?bVpHZDNCR2lMT29KUkhYdVd6ZnFDeVBXaE5QRXdnTzFnUjhaQjc5bDhDK3JN?=
+ =?utf-8?B?V0x3bVRwSXFIeUI5MnN2U2ZTUHMzaDNLQnBGZDNybndaQXBZak5RYlpjUUd1?=
+ =?utf-8?B?UXVML1BidzQzd21pcG51RDhEanIwdGVwSDFmOHZ5YVdVS2M4S1JYZnVEVjV6?=
+ =?utf-8?B?d0xmOGluTWRIOEdFV3ZCcVlqQVdGaTc5c0hjc3p2aGZVREg3RWxRZThmeXly?=
+ =?utf-8?B?bFI0RStCL1ViQm93Q3ZHeFFpYVFncFJtWHVZUnRLenZ5RkpUanZjUnQrSFZZ?=
+ =?utf-8?B?aTk0Y21ta2JDNDBURUI4VHBWSHZtRGdHUndoaEhwL1loeStETUFWS0Jyc0JY?=
+ =?utf-8?B?Q1duUUgvcWgzWWlDYXRvNXJlUDJxTkdRUWRVYXA2eHc2akhjclRQb1g2NkM5?=
+ =?utf-8?B?M0d0ZG0yeTBrZGxTdURSTlYrWTZsSXFXeC9DZUlqYkNpS1dVZkFIWFhwSk9N?=
+ =?utf-8?B?ZGpMK3JXbE9wS3J1YnpFa0JDZmwyR0ZHeU9YeHdudkpDbldnODI1YmdDbDQw?=
+ =?utf-8?B?aWNkTE4raWpRdndoZmcvU0ozV28xbm93WlpEeko2REtqenRheE0xME8xd2ha?=
+ =?utf-8?B?V1ZwUk9ZT2hTTjFaNmlJQ0xOdDhhblZSWjBGU3JNRUlvNzRERWUxU1d3YTll?=
+ =?utf-8?B?SjNQOUE4T3hYMFNRS2xuL0NGc2NSYWNLbTBUNDg1dHhoRHhLeU5qUFVoSllm?=
+ =?utf-8?B?Y1RINzBWMjRzdW1oczhCRGJxeElxZUltWEwxeUhUWmRXNDdpRHNHK2tmMC91?=
+ =?utf-8?B?VHA5Vnp6bXpvU0VhUDlWTjB6bnhhZFhmRDY4Wk9tVzVwc3R3NG5oejcyNUxQ?=
+ =?utf-8?B?bEFaMGo2a3hpaEQ2b2p5ZjRNZzIvN2w3RDJSWmVLejcySEF6VmZZT2NrWjd0?=
+ =?utf-8?B?UnY4YXZkZDNRPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 12:05:28.9933
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 604f0074-ca1c-4ad2-4e89-08dd7827fc6d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH3PEPF00000015.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7699
 
-On Thu, Apr 10, 2025 at 12:46:25PM +0100, Andrew Cooper wrote:
-> Simply the tar expression, as 'tar xf' can figure out the compression
-> automatically.
->=20
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On Wed Apr 9, 2025 at 7:57 PM BST, Denis Mukhin wrote:
+> On Tuesday, April 8th, 2025 at 9:07 AM, Alejandro Vallejo <agarciav@amd.c=
+om> wrote:
+>
+>>=20
+>>=20
+>> From: "Daniel P. Smith" dpsmith@apertussolutions.com
+>>=20
+>>=20
+>> Currently, the inclusion of libfdt is controlled by the CONFIG_HAS_DEVIC=
+E_TREE
+>> kconfig flag. This flag also changes behavior in a few places, such as b=
+oot
+>> module processing for XSM. To support the ability to include libfdt with=
+out
+>> changing these behaviors, introduce CONFIG_LIBFDT. The inclusion of
+>> libfdt is then moved under CONFIG_LIBFDT.
+>>=20
+>> Signed-off-by: Daniel P. Smith dpsmith@apertussolutions.com
+>>=20
+>> Signed-off-by: Jason Andryuk jason.andryuk@amd.com
+>
+> Reviewed-by: Denis Mukhin <dmukhin@ford.com>
 
-Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.c=
-om>
+Thanks
 
-> ---
-> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-> CC: Anthony PERARD <anthony.perard@vates.tech>
->=20
-> v2:
->  * Use 'tar xf'
-> ---
->  scripts/x86_64-kernel-linux.sh | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/scripts/x86_64-kernel-linux.sh b/scripts/x86_64-kernel-linux=
-=2Esh
-> index 2a816f0b3204..5ed5608628bc 100755
-> --- a/scripts/x86_64-kernel-linux.sh
-> +++ b/scripts/x86_64-kernel-linux.sh
-> @@ -11,9 +11,10 @@ WORKDIR=3D"${PWD}"
->  COPYDIR=3D"${WORKDIR}/binaries/"
-> =20
->  # Build Linux
-> +MAJOR=3D${LINUX_VERSION%%.*}
->  curl -fsSLO \
-> -    https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"${LINUX_VERSION}=
-".tar.xz
-> -tar xJf linux-"${LINUX_VERSION}".tar.xz
-> +    https://cdn.kernel.org/pub/linux/kernel/v"${MAJOR}".x/linux-"${LINUX=
-_VERSION}".tar.xz
-> +tar xf linux-"${LINUX_VERSION}".tar.xz
->  cd linux-"${LINUX_VERSION}"
->  make ARCH=3Dx86 defconfig
->  make ARCH=3Dx86 xen.config
-> --=20
-> 2.39.5
->=20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---3cyWOqAS0erRWFr1
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmf3tO4ACgkQ24/THMrX
-1yxI7Af+OVkmKGKJ6zOctC1A2aKkc5h2u0Bm/WVvT3dQE+DLCqmu0TQqTOEIy3H9
-ArLEkAxhsZus0EEunhMRQcBE8vLdVoiKH7gsmbumkAGQ0g0fttn4GrzQJ9teLD8k
-dEHneRZvXEfXkunc4O9CZpNehAmZTBIros3gaXdZc8UWO2szHgXSqLwzXDeJSPiR
-8Ii6logeY30QWs0OMkSSsx6+iQn0YUCrpyvFyKG/gTNhHerH0mJz2F0NHmp9hzqC
-Kh+IuHcg8lg8ZhP9VvUspfqwykK7LV1VKjAZA4xaH99PVPToW9/sspoOpn7EGfro
-xvYWdb9YQLPEcMl7Flnu+9iIAq65nA==
-=x4ZY
------END PGP SIGNATURE-----
-
---3cyWOqAS0erRWFr1--
+Cheers,
+Alejandro
 
