@@ -4,31 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59572C3601E
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 14:40:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.945809.1343919 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90870C3601E
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 14:51:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.945825.1343929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2t4Y-0000NJ-DJ; Thu, 10 Apr 2025 14:40:06 +0000
+	id 1u2tEv-0004JZ-G4; Thu, 10 Apr 2025 14:50:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 945809.1343919; Thu, 10 Apr 2025 14:40:06 +0000
+Received: by outflank-mailman (output) from mailman id 945825.1343929; Thu, 10 Apr 2025 14:50:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2t4Y-0000N1-Af; Thu, 10 Apr 2025 14:40:06 +0000
-Received: by outflank-mailman (input) for mailman id 945809;
- Thu, 10 Apr 2025 14:40:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u2tEv-0004JS-DZ; Thu, 10 Apr 2025 14:50:49 +0000
+Received: by outflank-mailman (input) for mailman id 945825;
+ Thu, 10 Apr 2025 14:50:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HBao=W4=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u2t4W-00008e-Ts
- for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 14:40:04 +0000
-Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id acb3aad9-1619-11f0-9ffb-bf95429c2676;
- Thu, 10 Apr 2025 16:39:59 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1744295991582414.3715086638133;
- Thu, 10 Apr 2025 07:39:51 -0700 (PDT)
+ <SRS0=ged3=W4=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1u2tEu-0004JM-9j
+ for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 14:50:48 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062b.outbound.protection.outlook.com
+ [2a01:111:f403:200a::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2e6081b3-161b-11f0-9eac-5ba50f476ded;
+ Thu, 10 Apr 2025 16:50:46 +0200 (CEST)
+Received: from BL1PR13CA0026.namprd13.prod.outlook.com (2603:10b6:208:256::31)
+ by IA1PR12MB8585.namprd12.prod.outlook.com (2603:10b6:208:451::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.21; Thu, 10 Apr
+ 2025 14:50:39 +0000
+Received: from BL6PEPF00020E63.namprd04.prod.outlook.com
+ (2603:10b6:208:256:cafe::37) by BL1PR13CA0026.outlook.office365.com
+ (2603:10b6:208:256::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.11 via Frontend Transport; Thu,
+ 10 Apr 2025 14:50:39 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF00020E63.mail.protection.outlook.com (10.167.249.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8632.13 via Frontend Transport; Thu, 10 Apr 2025 14:50:39 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Apr
+ 2025 09:50:35 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,124 +58,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acb3aad9-1619-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1744295995; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=NMjP3rkufgynvpZUbJzCIdtfuo/imKAT5E8tNC9u7Lkjk4fh9r3UwMpRgD8aagB4gKx2MJwtF1kbAnqjRLSZKXfrqKxanFMNUO10Ai6Rc2tQO33huwmvaZRO63+1Ch++Q+lq/5sQfPYdD9iNdaz4dygTuNT6YIU3jgti/Kb0wVA=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1744295995; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=5i6ZFNs8a3Tv/IjM9WDLbZHH5zlDLh4uruTrAMJE62k=; 
-	b=RsJvrVaZ1NTfphr4zqkudxIXQ+vichrRdRls8N/RnEpYp1VK+RyPdjigFTFSLeumyl51DVMOb2L3gNJrjMv6plckFk8cyWrZDrrUxktZ+4NuSy09ultgR0/pNENqHTIUiKQQsQHT2GTWj2H3cvl7JzDS9NPCuNeL7Pie18Q36m8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1744295995;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=5i6ZFNs8a3Tv/IjM9WDLbZHH5zlDLh4uruTrAMJE62k=;
-	b=W07tV1ZzOb5H4YbwoXLKrb58eyM+SSP0ETH3Ek3SmYb1Lh1EiBTpWhhiprVdQ+Y9
-	oJiUIdjbX/TvPQv1JlA0oYTwZ9RqkBh1Ule/5Qwj28hwmkGEIqvLw88UsNacCDA5XbU
-	1GV4ygXpS1TA2MgkvjV5KSTmBNKR9Z7xUuh0TFi4=
-Message-ID: <acb31eec-38ef-4e35-be71-9a6579a46159@apertussolutions.com>
-Date: Thu, 10 Apr 2025 10:39:50 -0400
+X-Inumbo-ID: 2e6081b3-161b-11f0-9eac-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Y5HWmD8eDZCrG2dVHdu+OM+LLe19TzzXomynDtsfUX1gWtYg4BjQe1DvoTmMNnspTzmZUg/IsFooWE+ZMlTzjMZseYjVUIplyusQrpwnxTtQHfnlOQBbNinESQqAH34CPMC4i8ZPo7RENgHTfUJayA9inlOjJ0t+zrsSyZp7+BBkhM3J3KwJ21ED5CczfxOrBuSWORuPFku/YMDJX2248QwqEXHo7hdmLrw2gmsWj4xBCglxx2i2TdZZhc29UC1XvwWzhR2f931iPzpv4t8DZ4mjQIEJWW+P/2qrH/D9FoQaJFZcM5SyAtwLd4Hfuley1fY98DDAfr1oxm+1BecoxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BsZCMLM8fuXEze6eAp5yW+8gSJPL3qLdf1XtYTjFS8Q=;
+ b=seHar2if7gGGnNWAUiE2BLIJ64LzsWoHSjTtS9+lPQHqQe3jt8YD983Rg4rvtvisoCP15rwTG7OWxvzWMdzjayNaT+akwOfcbkfiY2UK0pTkMn0Ilowu7qzoXuIdFVlwoRTUua8wIHHcTk5h0nwHWfAy5KgxLcUlnhC7LMR+w+0PXdzyRMLJ8Pfwfk63L4+t8Vvw5mmGFoS8moQqBfLIogHDkptV7+bRTmrm6ig9BYVWKtpE/CUFHp/TaMTZrENoI6AOPCUAi8lNY2kaJFczKiCF5LgIlFJZRfDXxTfdvHaBpIF1HAhk7DxwMq+UX/DzreOZQHen6oVKmDgbRXebJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BsZCMLM8fuXEze6eAp5yW+8gSJPL3qLdf1XtYTjFS8Q=;
+ b=iPDJ54jEfJPOwyAq6UNuzETW2e3t8rA2V+B5uRBCczJdSJXFTURBVvBKeCsKYJojgaW9oyENmp/kW1Mn9+2CKoJQ9TBfLvU7NhnL6FMJFBM80ZgWMBG9RaSYYaxqSWx4MPSX9KWF7dY+C1ht+chKmbWr+8lKBUw9lDrHtVZQbjE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/EFI: sanitize DLL characteristics in binary
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>
-References: <90354241-4ebb-4d52-809c-0af788d2b860@suse.com>
-Content-Language: en-US
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
- 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
-In-Reply-To: <90354241-4ebb-4d52-809c-0af788d2b860@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ZohoMailClient: External
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 10 Apr 2025 15:50:31 +0100
+Message-ID: <D931JU067Z8D.318WN4K98QS8Z@amd.com>
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Jason Andryuk
+	<jason.andryuk@amd.com>, Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+	"Stefano Stabellini" <sstabellini@kernel.org>, Michal Orzel
+	<michal.orzel@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+	<xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 07/16] x86/hyperlaunch: initial support for
+ hyperlaunch device tree
+From: Alejandro Vallejo <agarciav@amd.com>
+To: Jan Beulich <jbeulich@suse.com>
+X-Mailer: aerc 0.20.1
+References: <20250408160802.49870-1-agarciav@amd.com>
+ <20250408160802.49870-8-agarciav@amd.com>
+ <04fcb576-7a6f-48d9-abb5-72f5fd728013@suse.com>
+In-Reply-To: <04fcb576-7a6f-48d9-abb5-72f5fd728013@suse.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF00020E63:EE_|IA1PR12MB8585:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89246d51-4dad-410e-1dc1-08dd783f0f5d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|376014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?K0RGN0V1NmNDUGlmMk9DaC8yQnh0QzFOYmdDN0tNT0hhSGhHWGl2Yk9iRzRC?=
+ =?utf-8?B?d1BKeFh5NlJ5bEpjbVpXVVJuV3pycDNCY0ZxTVdYUzRSSzJyOXcvVGNsQ0Fs?=
+ =?utf-8?B?V1MvQXE1SXkvTXNRNjJrSnQyaXZDRXQyUFIrejVDejh4YzBJdnExT3ZkUkh6?=
+ =?utf-8?B?WjJRYU11cFY5MEFnM1E2aS96b3NSZGpDTVJkZHNmaEpETjk0YkFITUhmY2ly?=
+ =?utf-8?B?NXVpNnRuRHJrZGc5eXBuS0E1N29qZnR3TngwcE1RQm8wMER5d1kvOHdvVjR0?=
+ =?utf-8?B?ODIreUpmQ2FPUXJtSFlJa3JiWXZ1Q0VYY2hKWEdQNWowMHYwTGdTRTFhWWJo?=
+ =?utf-8?B?TmNBb293WVZGdDF0ZzdmSExVWld5ZnNabGRCTVdWVkpwRnZHQjEvcWJIYkZ0?=
+ =?utf-8?B?ODA3SFVxS0tVcm9WVFhVQzI1ZEtENU42a3V1TGJ2Z2l2dThZdmkvQ1g0NzND?=
+ =?utf-8?B?eWtiYytYc0JncStIdi9RV0h6a3RjODduRG1LdEx3b1lPMUdSYlBtR1lSTXlM?=
+ =?utf-8?B?TFR5NkI3N2lsd2ZPNUpLbmMyUUhHWWJTeGludGNGMGU0MFFwcXRhVjdhZ1d5?=
+ =?utf-8?B?d3RZS08yMDE2bGpIN21NbGljRUFEK0R0c0ovM3pzWS9LRU5HM2trVGZFVWY0?=
+ =?utf-8?B?UHNidTR2cVFlc0F5ZkZjWi92SERzeHhXMmJ0d0tLVngzT21NdWcvd2MrbW9m?=
+ =?utf-8?B?cG1HTDRSdVAybDhiYTBGeWlteHhlS0xvVEFWRGEvNTZjZEx6NDFJTnhKcDBB?=
+ =?utf-8?B?TSt6ckdjZjd2WmRKYjZiaVBlVHpIZ1ZVZG9vNk9aaXNaY0dZaGFXRklkOFRL?=
+ =?utf-8?B?akVkamdHZ1dTeXAzcVBtaldMdEdwekhwSHBUNkdtT2ZMZzdaenE2endZTVFy?=
+ =?utf-8?B?Yk53RGw2L2E0U3RZWXk3aVF0eVNEQzA1TG9jaEtTV0JzUmFJSGpIQ0t5OHcy?=
+ =?utf-8?B?UTk1YjYvaVVUbjhJR1N6UXp2ajVtM282VlZ6NWhKcEcwMVpzMUdoRFJ0bTlP?=
+ =?utf-8?B?VWxWYnM5K25pRitBbUw3d1lBUTB4YnZvdURWUS9nZVQzaEJPRDIwbUpFUXc3?=
+ =?utf-8?B?NURvUE5QUFJaYU90N0NEc2x4aU5OTnV2TTJENjRHUVNOS2pwZWhNMDA5UzVG?=
+ =?utf-8?B?aEoyUTVqLzJFYjg1SVhuc1pDckM3UmJpOUtqK2VtTGtBNUdYTEF3RkZqLzRG?=
+ =?utf-8?B?L1lKd2p4VjNyNEppS2d0S2ExRUlWYXpHSXBjM1BCMFB2cGRzajdPWHMxcWVJ?=
+ =?utf-8?B?MkRyQ2FkSktkWlVyaXJPamF2ZnBTb3RnOXZENWFYQ0h4Y0w5bzBIcURwRElp?=
+ =?utf-8?B?Y3JwRENIbXhORGlHdXU1UUR1bmpCeHBSNGpMZ3VOcGx0ZHg2WUQ3cENMazdi?=
+ =?utf-8?B?YmxpbkgzdU1uZ2NpcUdpUmNPNVJEQkJzelNUM1VudkQzQVQ5eGViTHFWM1dv?=
+ =?utf-8?B?TU9POWVOd0NiV3lmV1Z0UndycFBkRzNZeWxQakR0Z3BqMlBTMXM1aUtraG4x?=
+ =?utf-8?B?dFNlMjJqK2tMU1IwSGZ4dVBRT2JyN05MZklZRzY0VFNCQkwwV1Ezd0ZuT21p?=
+ =?utf-8?B?VnhrTCtYSVBVSTIzOXppV2NWOHYxY2FJcjVFeEdpRU1zblRQRUZwZFc3YVdZ?=
+ =?utf-8?B?cVlBYThXWDB5cDVVNmFia01pQlRPdWZud25CU1A4U0YvdjBnZldtU2hWazRv?=
+ =?utf-8?B?ejdpc0NOQmhMRUZDQmorWWJaTEp6OU42NFcrNENCMW5KNG4wV2FVS0s5TWti?=
+ =?utf-8?B?TTlkUnRmVmNXdmZOWmMyQlNHeGlMUklpUXJCZEo3T0lWa2Jlc3pnNDZEUkhV?=
+ =?utf-8?B?NUNFUzMyUXR4eXcvSFowcWpVOVFsZ3NSVWxuTzFvVk5pTmUvMzFESjY2OTdm?=
+ =?utf-8?B?YnlLU3plQ3JQbzB4dDBNZWhmL2xoOTNFUXZJdkdkazRHRDRCUlhNdFo0Uk1y?=
+ =?utf-8?B?Y2JzYm9HK3I0SmlZaXRmV21DeEdrNC9tTkZQU25QeGpZMUtPNTVCQjRLK1dy?=
+ =?utf-8?Q?Aksmn0uDROVsLrxqaA3rsZehyiiwFg=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 14:50:39.2043
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89246d51-4dad-410e-1dc1-08dd783f0f5d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL6PEPF00020E63.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8585
 
-On 4/2/25 04:51, Jan Beulich wrote:
-> In GNU ld --disable-reloc-section implies --disable-dynamicbase (and
-> also --disable-high-entropy-va, just fyi). Therefore to yield
-> functionally identical binaries independent of whether mkreloc needs to
-> come into play, add --dynamicbase as well.
-> 
-> GNU ld further defaults to --high-entropy-va (along with --dynamicbase
-> and --nxcompat) unless "Cygwin-like". This seems wrong to me; that
-> default should be dependent upon "MinGW-like" instead; for the purpose
-> of building EFI binaries with a PE32+-capable ELF linker neither
-> "Cygwin-like" nor "MinGW-like" ought to be true. We certainly don't mean
-> to have this bit set in the DLL characteristics, so suppress its
-> setting.
-> 
-> Sadly while --high-entropy-va is supported by GNU ld 2.25,
-> --disable-high-entropy-va was introduced only in 2.36. Luckily the
-> defaulting to --high-entropy-va was also only introduced in 2.36. Plus
-> --disable-reloc-section was introduced precisely there, too. Hence
-> leverage the probing we do as to base relocation generation, to also
-> determine whether to pass --disable-high-entropy-va.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> I remain uncertain about the applicability of DLL characteristics to
-> non-DLLs, i.e. images without IMAGE_FILE_DLL set; current MS doc says
-> nothing either way. Yet producing consistent binaries still seems
-> desirable, even if the field wasn't to be used by loaders.
-> 
-> --- a/xen/arch/x86/arch.mk
-> +++ b/xen/arch/x86/arch.mk
-> @@ -113,6 +113,7 @@ efi-nr-fixups := $(shell LC_ALL=C $(OBJD
->   
->   ifeq ($(efi-nr-fixups),2)
->   MKRELOC := :
-> +EFI_LDFLAGS += --disable-high-entropy-va
->   else
->   MKRELOC := arch/x86/efi/mkreloc
->   # If the linker produced fixups but not precisely two of them, we need to
-> @@ -123,6 +124,8 @@ EFI_LDFLAGS += --disable-reloc-section
->   endif
->   endif
->   
-> +EFI_LDFLAGS += --dynamicbase
-> +
->   endif # $(XEN_BUILD_PE)
->   
->   export XEN_BUILD_EFI XEN_BUILD_PE
+On Thu Apr 10, 2025 at 11:10 AM BST, Jan Beulich wrote:
+> On 08.04.2025 18:07, Alejandro Vallejo wrote:
+>> --- a/xen/arch/x86/domain-builder/core.c
+>> +++ b/xen/arch/x86/domain-builder/core.c
+>> @@ -44,6 +44,21 @@ void __init builder_init(struct boot_info *bi)
+>>              break;
+>>          }
+>>      }
+>> +
+>> +    if ( bi->hyperlaunch_enabled )
+>> +    {
+>
+> Not knowing what else if going to appear here and in what shape, could th=
+e
+> if() here be avoided by making case blocks in the earlier switch setting
+> the field to false (which is kind of redundant anyway with it starting ou=
+t
+> false) use "return" instead of "break"? The the setting of the field to
+> true could also be centralized below the switch().
 
-Seems straightforward, will rely on your knowledge of binutils that 
-there are no unattended effects from the flags.
+Looking ahead in the patchlist, not much. There's an else clause for
+non-hyperlaunch with code picked from setup.c . It could very well stay
+there and prevent core.c from being included at all, removing the if
+guards here as well when the file is no longer included.
 
-Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+>
+>> --- a/xen/arch/x86/domain-builder/fdt.c
+>> +++ b/xen/arch/x86/domain-builder/fdt.c
+>> @@ -13,6 +13,36 @@
+>> =20
+>>  #include "fdt.h"
+>> =20
+>> +static int __init find_hyperlaunch_node(const void *fdt)
+>> +{
+>> +    int hv_node =3D fdt_path_offset(fdt, "/chosen/hypervisor");
+>> +
+>> +    if ( hv_node >=3D 0 )
+>> +    {
+>> +        /* Anything other than zero indicates no match */
+>> +        if ( fdt_node_check_compatible(fdt, hv_node, "hypervisor,xen") =
+)
+>> +            return -ENODATA;
+>> +        else
+>> +            return hv_node;
+>
+> Could I talk you into omitting such unnecessary "else"?
+
+Yes, sure.
+
+>
+>> @@ -20,7 +50,41 @@ int __init has_hyperlaunch_fdt(const struct boot_info=
+ *bi)
+>> =20
+>>      if ( !fdt || fdt_check_header(fdt) < 0 )
+>>          ret =3D -EINVAL;
+>> +    else
+>> +        ret =3D find_hyperlaunch_node(fdt);
+>> +
+>> +    bootstrap_unmap();
+>> +
+>> +    return ret < 0 ? ret : 0;
+>> +}
+>> +
+>> +int __init walk_hyperlaunch_fdt(struct boot_info *bi)
+>> +{
+>> +    int ret =3D 0, hv_node, node;
+>> +    const void *fdt =3D bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_I=
+DX]);
+>> +
+>> +    if ( unlikely(!fdt) )
+>> +        return -EINVAL;
+>> +
+>> +    hv_node =3D find_hyperlaunch_node(fdt);
+>> +    if ( hv_node < 0 )
+>> +    {
+>> +        ret =3D hv_node;
+>> +        goto err_out;
+>> +    }
+>> +
+>> +    fdt_for_each_subnode(node, fdt, hv_node)
+>> +    {
+>> +        ret =3D fdt_node_check_compatible(fdt, node, "xen,domain");
+>> +        if ( ret =3D=3D 0 )
+>> +            bi->nr_domains++;
+>> +    }
+>> +
+>> +    /* Until multi-domain construction is added, throw an error */
+>> +    if ( !bi->nr_domains || bi->nr_domains > 1 )
+>
+> Simply "!=3D 1"?
+
+That would be simpler, yes :)
+
+It's all temporary until the restriction is lifted later on, but will do.
+
+>
+>> --- a/xen/arch/x86/domain-builder/fdt.h
+>> +++ b/xen/arch/x86/domain-builder/fdt.h
+>> @@ -11,11 +11,16 @@ struct boot_info;
+>> =20
+>>  #ifdef CONFIG_DOMAIN_BUILDER
+>>  int has_hyperlaunch_fdt(const struct boot_info *bi);
+>> +int walk_hyperlaunch_fdt(struct boot_info *bi);
+>>  #else
+>>  static inline int __init has_hyperlaunch_fdt(const struct boot_info *bi=
+)
+>>  {
+>>      return -EINVAL;
+>>  }
+>> +static inline int __init walk_hyperlaunch_fdt(struct boot_info *bi)
+>> +{
+>> +    return -EINVAL;
+>> +}
+>
+> There's no need for this stub (nor the has_hyperlaunch_fdt() one, as I
+> notice only now) - even with present arrangements calling code is guarded
+> such that DCE will take care of eliminating the call, and hence having a
+> declaration suffices.
+>
+> Jan
+
+There's some refactoring to do for other helpers later on, but sure. It
+should be fine.
+
+Cheers,
+Alejandro
 
