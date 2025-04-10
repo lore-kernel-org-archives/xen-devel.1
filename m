@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF01AC369A6
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 11:34:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.945309.1343520 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C800C369A6
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 11:47:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.945329.1343555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2qAi-0000e1-7P; Thu, 10 Apr 2025 11:34:16 +0000
+	id 1u2qNE-0004CS-Vb; Thu, 10 Apr 2025 11:47:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 945309.1343520; Thu, 10 Apr 2025 11:34:16 +0000
+Received: by outflank-mailman (output) from mailman id 945329.1343555; Thu, 10 Apr 2025 11:47:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2qAi-0000du-3d; Thu, 10 Apr 2025 11:34:16 +0000
-Received: by outflank-mailman (input) for mailman id 945309;
- Thu, 10 Apr 2025 11:34:15 +0000
+	id 1u2qNE-0004Bc-QQ; Thu, 10 Apr 2025 11:47:12 +0000
+Received: by outflank-mailman (input) for mailman id 945329;
+ Thu, 10 Apr 2025 11:47:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=w6Mj=W4=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1u2qAh-0000do-68
- for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 11:34:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=C125=W4=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1u2qND-0003vN-Dz
+ for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 11:47:11 +0000
 Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
  [2a00:1450:4864:20::42b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ba82cf6b-15ff-11f0-9eac-5ba50f476ded;
- Thu, 10 Apr 2025 13:34:14 +0200 (CEST)
+ id 8927a9f4-1601-11f0-9eac-5ba50f476ded;
+ Thu, 10 Apr 2025 13:47:10 +0200 (CEST)
 Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3914a5def6bso342819f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 10 Apr 2025 04:34:14 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d893f0cfdsm4532477f8f.76.2025.04.10.04.34.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 04:34:13 -0700 (PDT)
+ ffacd0b85a97d-399749152b4so290956f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Apr 2025 04:47:10 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39d893776dfsm4651418f8f.33.2025.04.10.04.47.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Apr 2025 04:47:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba82cf6b-15ff-11f0-9eac-5ba50f476ded
+X-Inumbo-ID: 8927a9f4-1601-11f0-9eac-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1744284853; x=1744889653; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=8mtSKzI1eVCkaJ8jsv6S3EYIIKgVlqbJ4upesSKU8bo=;
-        b=KIx/lcRhazWGFdfwIMREw4SuHUFbiBYaDUORRZ+OKVLvrmrW2LHuK4CQ3VK/RZB+7L
-         kpZXMe+T8fxCxw46u54+xcj+JWrgwCX1tpN9sIM1EuiypFED1b+kpW/qRwURs3eSJF+0
-         Uwp/DwGbh1vl7r5T5HwdQizX154OG/U88WCL4M1NXxvMARyfOC5Ks3HOOYw+nvkzHNkn
-         GKA/GgfxJZVTp+aD3U4RGEaTO7fl2Jky9HzxG4QObs4CFUHMnslL3OCIjJOAA0PLyBBi
-         wLVlUy5SxdosGUEdyfHYVZGAlUSQicJOzhXPsoziPVniZdaDPAf0Pwor00qW1YQp8Uej
-         U6/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744284853; x=1744889653;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1744285629; x=1744890429; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8mtSKzI1eVCkaJ8jsv6S3EYIIKgVlqbJ4upesSKU8bo=;
-        b=Y2BvlqVCgd0gnHMOgwPgJbS9b71h+7qvDAUKt1JYJ7WWZWoqkvA3cI+IcpgEECWOsT
-         ZBSY1T+BkKcHSMd8XhfUoU9jE7VvKLEbN3fGEesJ9n8vvvR5bfKD6/Q6ZXqvT73Fy/j9
-         j2KouHzdloCuBbb+D5j86YxCc3FIRIqFkSuqq6omEID1PrvF7V8pS2hA7XfaBSSzfbIk
-         plnyLuzahMcDdDOnpwu05ps980Tfi7MxXHBmfTQHJviNa9JuKknokpX4eCcwWPMxIwds
-         wsJ4xLWsVt4wdAfR+AUd3XFHrGSE8KQ6H7q7LLpP71iAvb274qRT89FkXQm/2XAr4B4x
-         51Zg==
-X-Forwarded-Encrypted: i=1; AJvYcCXTIpxaZJblD6AJu/1ZQEz2tAU6GgL2+gbacwxZkdyoNxIC5nVwsRhB4yDsZKIHxnb41vdhwAUkz2c=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzoPbA8QehhP017L8eimwMcPIgmiZzHrywxVYRoibC7IN2TLrLO
-	milztxST7K4sN6x+Rqr5tk1miQ27Ok0uqE5PE7bk5G44IHADMVf6PtoU/SlHoQ==
-X-Gm-Gg: ASbGncua/eilbXIWKnbVzJofNhW7uI7VjROrfy+l6p0INF+QfzWy/uTxDzLHxf/2ZE+
-	QQoHi/XvLBLwVu62iDrlsrSoWhp7MgZodnjDYm/FlIgiGN5/ucRMgdoYHwB7qbJRu/A2fw9hof5
-	qVsFOCpH2AlioKm8tnG+g3tlaN9cB1nXFQuwMBGc8Hy6RfNNpd9xn0Wb4ZK2Sdbkq7M66DpcXRs
-	WquBunf0h2z6ftV+HPZkd45TPouc5wG2Dd69Ap8B+eLHmUZZFZJmD0CrXdoetNygbfgS7W4wuxW
-	eSM7pDL2Oj7RYq+x78jUhMJX9Z1E6HISBCUpt8IPAkLmvQ66udS2j9no3guL6npJjY99OYpQAfv
-	/oCU7AmrRWoDtfQ77sjilJSkyohJNholU5Xbo
-X-Google-Smtp-Source: AGHT+IELhU0OHZY2Qu9h0BPjpv8J779mQ9CAtKrupUKs/uzWJ6XqSwJWR0+id5BLNZHY87qKQbEbuw==
-X-Received: by 2002:a5d:598d:0:b0:390:fbcf:56be with SMTP id ffacd0b85a97d-39d8f22a482mr1897398f8f.0.1744284853429;
-        Thu, 10 Apr 2025 04:34:13 -0700 (PDT)
-Message-ID: <b3018b0d-e0e8-440e-9f02-363a7bd0378f@suse.com>
-Date: Thu, 10 Apr 2025 13:34:11 +0200
+        bh=KDlRltBQlDK5HzUxWDgj0k+9YEzjv0UHHKFuSv9/huI=;
+        b=BnEQQgntFcg9KYbjHgUJf3zo1L2aGy6ioxbFXHrXdef8Du29ZnYQ/cA1ulO+1MNhlC
+         xmVyPKwr5UaOvwXrPDqu+dDlD63N3L50cXc++go6/eI2Hwdx5pOiWPeQrWgJMqN//9BW
+         8EooCouxK1eOqxeUVzpNT3lwmkH1gHPQc5o5I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744285629; x=1744890429;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KDlRltBQlDK5HzUxWDgj0k+9YEzjv0UHHKFuSv9/huI=;
+        b=Je5KUPmTFjRG+G7iFOpUweu6O1lFfGfdPPUuOE61+EhtiF7Ky3t4oR4FKAKmYqw51Y
+         3AfQmk9UIXEeD8cOZv70znDyAa9Q9kiLwvdJwbfOmcFzB5GtJbpJVv0/4C3+220nd1sx
+         SKX41VyonoMGaouQ48HlzfIb8aZPylzpk9mAksaToJroD3Xvx1Jdgo2ewCfRF0MBJM4E
+         xxukJIOX/XhsUrn++kywqf8m9y42axHYmgaCkUacaSO1PxDr8a5HEriTyyrjsKVTL4hN
+         c9FDSnEHuOEXME7MvyoPaoH3XTs6ms7YdIAR4/45XMD6glog+kXKe08mi4IyfmNnBAML
+         xgJg==
+X-Gm-Message-State: AOJu0YwbqdQzWQPIQ6dcodDplHE+Uu+gKa+NqglIRiQQbVQWspWmt3DL
+	KlxaROy+aTk6w6aOGOVffYtKsXE2RDta2shz5062M7Vwc4pKa9W5KmwfO7eVmbDzptaRha+rGRF
+	oUlQ=
+X-Gm-Gg: ASbGncsj1VtNeJoGbdw24vWzTL5rCtesg7oeWZglCg5J9fyHjuadStlriqXsre2XcFB
+	YuXNQLzm0qejWFtfC2lTqSNrsXqj19TT2cVOKRTeYsbPr7v3h37waUt9E11stVuA6tONNi3mKBf
+	MNmIUFU157m/Noe1q+lmXZhJfZoZUFhwRcVudsJ8T8iWxXDOLVWywfvU5b3gYfN6+xaNQqu42pf
+	o2LT1cu6oyNfg4UI2PQAucIIkNjBzKt3pG1YgIG66+z0wQQTtSiKz/7nI+IClJ63PNu9Ugxiu9C
+	qTkPS9a5cb1rzjiRvVA8Tgv9M4oL4YmlT73sEu+yeWfYVae/Kheu7yJtLTfCNHfS0g0l/iJpAbf
+	6YlmUjviJh4AJaA==
+X-Google-Smtp-Source: AGHT+IEi369RxGSg/Usod6vfW65JYGq/Nc8vCcbbU/LfGgo17meuZmZCJuIfe2wKsSey9HbCPSbN6Q==
+X-Received: by 2002:a05:6000:2a8:b0:391:48d4:bcf2 with SMTP id ffacd0b85a97d-39d8f276117mr1993700f8f.12.1744285629150;
+        Thu, 10 Apr 2025 04:47:09 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 5/6] Infrastructure for arm64 linux builds
+Date: Thu, 10 Apr 2025 12:46:27 +0100
+Message-Id: <20250410114628.2060072-6-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250410114628.2060072-1-andrew.cooper3@citrix.com>
+References: <20250410114628.2060072-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/16] x86/hyperlaunch: locate dom0 initrd with
- hyperlaunch
-To: Alejandro Vallejo <agarciav@amd.com>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Jason Andryuk <jason.andryuk@amd.com>,
- Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Michal Orzel <michal.orzel@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <20250408160802.49870-1-agarciav@amd.com>
- <20250408160802.49870-12-agarciav@amd.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250408160802.49870-12-agarciav@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 08.04.2025 18:07, Alejandro Vallejo wrote:
-> --- a/xen/arch/x86/domain-builder/fdt.c
-> +++ b/xen/arch/x86/domain-builder/fdt.c
-> @@ -195,6 +195,35 @@ static int __init process_domain_node(
->                   !((char *)__va(bd->kernel->cmdline_pa))[0] )
->                  bd->kernel->fdt_cmdline = fdt_get_prop_offset(
->                      fdt, node, "bootargs", &bd->kernel->cmdline_pa);
-> +
-> +            continue;
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
 
-With this ...
+v2:
+ * Drop musl-dev.  It's brought in by build-base.
+ * Include findutils to fix build warnings.
+---
+ .gitlab-ci.yml                            |  7 ++++++
+ containerize                              |  1 +
+ images/alpine/3.18-arm64-build.dockerfile | 27 +++++++++++++++++++++++
+ scripts/build-linux.sh                    | 10 +++++++++
+ 4 files changed, 45 insertions(+)
+ create mode 100644 images/alpine/3.18-arm64-build.dockerfile
 
-> +        }
-> +        else if ( fdt_node_check_compatible(fdt, node,
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index a8e56b165ed6..6faa85d8dd7c 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -16,6 +16,13 @@ stages:
+     exclude:
+       - binaries/.gitignore
+ 
++.arm64-artifacts:
++  extends: .artifacts
++  tags:
++    - arm64
++  variables:
++    CONTAINER: alpine:3.18-arm64-build
++
+ .x86_64-artifacts:
+   extends: .artifacts
+   tags:
+diff --git a/containerize b/containerize
+index fd488cc57596..7abeb119ff6a 100755
+--- a/containerize
++++ b/containerize
+@@ -24,6 +24,7 @@ die() {
+ #
+ BASE="registry.gitlab.com/xen-project/hardware/test-artifacts"
+ case "_${CONTAINER}" in
++    _alpine-3.18-arm64-build) CONTAINER="${BASE}/alpine:3.18-arm64-build" ;;
+     _alpine-x86_64-rootfs) CONTAINER="${BASE}/alpine:x86_64-rootfs" ;;
+     _alpine-x86_64-build|_) CONTAINER="${BASE}/alpine:x86_64-build" ;;
+ esac
+diff --git a/images/alpine/3.18-arm64-build.dockerfile b/images/alpine/3.18-arm64-build.dockerfile
+new file mode 100644
+index 000000000000..b6d9bd1af531
+--- /dev/null
++++ b/images/alpine/3.18-arm64-build.dockerfile
+@@ -0,0 +1,27 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/arm64/v8 alpine:3.18
++LABEL maintainer.name="The Xen Project" \
++      maintainer.email="xen-devel@lists.xenproject.org"
++
++RUN apk --no-cache add bash
++
++RUN bash -ex <<EOF
++      adduser -D user --shell bash
++
++      DEPS=(# Base environment
++            build-base
++            curl
++
++            # Linux build deps
++            bison
++            findutils
++            flex
++            openssl-dev
++            perl
++      )
++
++      apk add --no-cache "\${DEPS[@]}"
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/scripts/build-linux.sh b/scripts/build-linux.sh
+index c78cd6ca46da..652fdba7b9d1 100755
+--- a/scripts/build-linux.sh
++++ b/scripts/build-linux.sh
+@@ -21,6 +21,7 @@ cd linux-"${LINUX_VERSION}"
+ make defconfig
+ ./scripts/config --enable BRIDGE
+ ./scripts/config --enable IGC
++./scripts/config --enable IPV6
+ ./scripts/config --enable TUN
+ 
+ case $UNAME in
+@@ -32,6 +33,10 @@ case $UNAME in
+             | grep '=m' \
+             | sed 's/=m/=y/g' >> .config
+         ;;
++
++    aarch64)
++        ./scripts/config --enable XEN_NETDEV_BACKEND
++        ;;
+ esac
+ 
+ make olddefconfig
+@@ -41,4 +46,9 @@ case $UNAME in
+         make -j$(nproc) bzImage
+         cp arch/x86/boot/bzImage "${COPYDIR}"
+         ;;
++
++    aarch64)
++        make -j$(nproc) Image
++        cp arch/arm64/boot/Image "${COPYDIR}"
++        ;;
+ esac
+-- 
+2.39.5
 
-... no need for "else" here?
-
-> +                                            "multiboot,ramdisk") == 0 )
-> +        {
-> +            int idx;
-> +
-> +            if ( bd->module )
-> +            {
-> +                printk(XENLOG_ERR "Duplicate ramdisk module for domain %s)\n",
-
-Stray ')' in the string literal.
-
-> +                       name);
-> +                continue;
-> +            }
-> +
-> +            idx = fdt_read_multiboot_module(fdt, node, address_cells,
-> +                                            size_cells,bi);
-> +            if ( idx < 0 )
-> +            {
-> +                printk("  failed processing ramdisk module for domain %s\n",
-> +                       name);
-> +                return -EINVAL;
-> +            }
-
-Along the lines of what Denis has said - please be consistent about log
-messages: XENLOG_* or not, preferably no capital at the start, initial
-blank padding. May apply elsewhere in the series as well.
-
-> +            printk("  ramdisk: boot module %d\n", idx);
-> +            bi->mods[idx].type = BOOTMOD_RAMDISK;
-> +            bd->module = &bi->mods[idx];
-
-The field's named "module" now, but that now ends up inconsistent with
-naming used elsewhere, as is pretty noticeable here.
-
-> +            continue;
-
-This isn't strictly needed, is it, ...
-
->          }
->      }
-
-... considering we're at the bottom of the loop?
-
-Jan
 
