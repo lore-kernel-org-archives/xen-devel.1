@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CABD0C3601E
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 21:37:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.946383.1344300 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 960AFC369A8
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Apr 2025 21:37:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.946386.1344330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2zaY-0008Oi-1j; Thu, 10 Apr 2025 21:37:34 +0000
+	id 1u2zaa-0000gs-Op; Thu, 10 Apr 2025 21:37:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 946383.1344300; Thu, 10 Apr 2025 21:37:33 +0000
+Received: by outflank-mailman (output) from mailman id 946386.1344330; Thu, 10 Apr 2025 21:37:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u2zaX-0008OQ-O0; Thu, 10 Apr 2025 21:37:33 +0000
-Received: by outflank-mailman (input) for mailman id 946383;
- Thu, 10 Apr 2025 21:37:32 +0000
+	id 1u2zaa-0000fW-IW; Thu, 10 Apr 2025 21:37:36 +0000
+Received: by outflank-mailman (input) for mailman id 946386;
+ Thu, 10 Apr 2025 21:37:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=C125=W4=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u2zaW-0008Ll-Kz
- for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 21:37:32 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
+ id 1u2zaZ-0008Ll-BQ
+ for xen-devel@lists.xenproject.org; Thu, 10 Apr 2025 21:37:35 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 014a5587-1654-11f0-9ffb-bf95429c2676;
- Thu, 10 Apr 2025 23:37:30 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-391342fc0b5so918158f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Apr 2025 14:37:30 -0700 (PDT)
+ id 02b045b5-1654-11f0-9ffb-bf95429c2676;
+ Thu, 10 Apr 2025 23:37:32 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cfdc2c8c9so7402785e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Apr 2025 14:37:32 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eae9780a0sm100427f8f.50.2025.04.10.14.37.29
+ ffacd0b85a97d-39eae9780a0sm100427f8f.50.2025.04.10.14.37.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 14:37:29 -0700 (PDT)
+ Thu, 10 Apr 2025 14:37:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 014a5587-1654-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 02b045b5-1654-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744321049; x=1744925849; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1744321052; x=1744925852; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=O2OaDotK41umOfviUF7yzwa9T5+3+M0L5HXJtNxyImc=;
-        b=JrHY9+U5xL4pu6u594H5EYi3nz5Qc7KgskW5cRuI+ck+s+XVusw7WEUlZ3HjHcCJab
-         M9dwx5lkhES0NreQgU3xNLFGADguD4QHbFxFadiqpPZuvuBNC4bSleXEu0NvgdQEvhR5
-         tX97ZOqStpllLvLwYtujIPoYL5+IVzuma0NNA=
+        bh=D17IkUr2my28TpWIQRZBF41FCJbDL7Htbn47+p4/2zc=;
+        b=vhNfjnP5ImEyjm0pw4c1eSVvtqhQnW41BdsiXgU8ezXc2A6zBRnVJsbTk+4XGsthcX
+         6z6dLQs4zLv1W80bkmqD2ULEHNxXqxD/gaUmqIGMyVnXQocbwEm7oH22emSRxf6tf4+M
+         Vwdc9AA6YPGO2wm9wL/CA82SCELzAMXd/fS5k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744321049; x=1744925849;
+        d=1e100.net; s=20230601; t=1744321052; x=1744925852;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=O2OaDotK41umOfviUF7yzwa9T5+3+M0L5HXJtNxyImc=;
-        b=Sd+NviK+7HHWNYRviBQILK1+460oXF/zXKJH1kYZo5hg7wevbBAwiJSM9yaZd4yGKj
-         /yzqgojHlG4jC7T8UAj4Cn/8EcMPBuuIAxLgb9F8Ko6xcbEj1kqznr3QB9nKckD9rNjd
-         oAtyNOEL+N6vFva1N25z6GAWohe4nM1QMFSXNoNwY1Bj4uT+/sKZ7lY5sXug8nRa3ICl
-         mzuVk6b0c6duFVrHtBK7zApXMNnAVBtng2EZl+mw6Ef3e04invGSoksD8j4EnF/HvfnP
-         qF4jBlF8qKqlmZEJ6BliFVx61+L7KnlLBaPGKAkS96IwhtVsq60dc46v7Q6A7Frmjftu
-         c5QQ==
-X-Gm-Message-State: AOJu0YzWC0eWVRrCx09r8L9W7FY5zxINid/UzL+wGK65cy5mkKlzGgkj
-	EYTnp4KZCLPuIc2pHnX8+H73WGv1t/tebqjYbqi3Kj4QlwuF76Mbm51d7UNh/Q1CESJUVmh6ikw
-	1P1M=
-X-Gm-Gg: ASbGncssj4ItsVIH97bNAj5760cvSwkdYSPCBvAgNa3YQEKdoCw7f573/+d1HtKjykD
-	exi7ZcuCmqDyHOhMpxeyTn4oKejj226AHKHzaBJCht3HxylIvDFUOemPgo8xS6yW0eEA3YnWwIC
-	US+Tk2fdbhZQQjrk3hwfX5BXQDuGEOvqIYosuu93XJKLT7ObumS2iYomgS/JOF5ow7npJKFez/N
-	6jwZmfj5vud20mclfdxvYS+iPQSrO4oDSWC0CjWEFTctLFaanXkQUFc494bSlJrQYTWGdkzpsBX
-	KvrlaWsT5ILOoQTCQ4N1ZvYtnmVtGhBCg/s/q8Pqdim1L3Hl9Srqck1Ukcyy3kDddKkP91XQVM2
-	yi+Ckoo/DW0tCrNBTUwfL7/DX
-X-Google-Smtp-Source: AGHT+IHeXj2OwodjCDoZRm/Aihv9FR+qeh0A5wNYoJt5fKTkBgxWEgmIyOPfWZO/cOugQ6jv+yb/oQ==
-X-Received: by 2002:a05:6000:401f:b0:391:3f4f:a172 with SMTP id ffacd0b85a97d-39eaaed1ebbmr163260f8f.49.1744321049617;
-        Thu, 10 Apr 2025 14:37:29 -0700 (PDT)
+        bh=D17IkUr2my28TpWIQRZBF41FCJbDL7Htbn47+p4/2zc=;
+        b=EPtej3waveKS4GWagWqWJaPPqZT+roZT25LVT88pPloOYIUv3EbEYxEHkPvd65IL4H
+         SbH9vyIIWK3o9wtvbWF/7MjXCm5Z9svSQoo5pQmdPFukdqEhLk8Jy7dp4qhi4021yHPA
+         H267NJk3bVo4lBnsu1M2PtsRSsElA4/mqtqoA8nR4FNZDatCAx4Ks1lqjwj00gx26MuC
+         ac2VJJaJIMIKIDFrKwRLGEl/15r1o/8CMIxGxeTjqQz0heE5DuXhMhiyjmn3pOHOb2c7
+         NkiLYCihaJcVO1AJy23tslCJPDSdRVVVHZTxwFP0T6dRHvFzX8hLKunXssaMWTEH1Bm0
+         OPdA==
+X-Gm-Message-State: AOJu0YyZSQC8e/cZWTt9M1cbhgNjv9p8lF6KMh7xup6jr20sF0ZAXoje
+	xW0vfdFW56utB04NacNKEd/hZwOBfnpcdHr3GfN3A7EfixAEpMsSO/hyw9H2/yVBO2MmD6QloYl
+	6CGE=
+X-Gm-Gg: ASbGncvw78GOH6MB+Xy+UULJRRCNEi9tJNm1UxqGzv3WLBzI/1vIaSAuYX4kSL25L0L
+	eYEkSPoyn0BSs9h7rUex+5J87o8mxXefWEzvXb3rVWu7Zl4VOBVmE1q8SqJjxZ+5d4yiyM7qhv5
+	d0iO1wVtIE/BBBpSRuPNMtOhLqz+aLVGD8ngpBLYWaDE04oAgWKlUecVleR1On32yxOx1E2P17P
+	QWU9g1XFRBeojURFu9O+O34cZZ04hIHX0sq5Bp9SL228I0ijG+hgGyT4KXuDQ/DbwN9quCkdF3q
+	L/0M0Xa9ipV+TC5bYjkRpqO1fpJhRfVi3R94sov/eT3mvbldTpxLrFZucRhlqVvt0Kn7yT8brwx
+	Pz4VKi/6MXn7feVtyAYtPBOW4
+X-Google-Smtp-Source: AGHT+IGIRZp3olHSsqY0SZOnyMzgDnMNtHsCxFHClUqNFDdZOJQ2BXNkvwtbK3pG1jKln6avwVSFnQ==
+X-Received: by 2002:a05:600c:5249:b0:43d:7588:6687 with SMTP id 5b1f17b1804b1-43f3a93f621mr1098065e9.12.1744321052014;
+        Thu, 10 Apr 2025 14:37:32 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -91,9 +91,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jason Andryuk <jason.andryuk@amd.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 1/4] Rename and adjust x86 containers
-Date: Thu, 10 Apr 2025 22:37:21 +0100
-Message-Id: <20250410213724.2098383-2-andrew.cooper3@citrix.com>
+Subject: [PATCH XEN 4/4] CI: Switch to new argo artefact
+Date: Thu, 10 Apr 2025 22:37:24 +0100
+Message-Id: <20250410213724.2098383-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250410213724.2098383-1-andrew.cooper3@citrix.com>
 References: <20250410213724.2098383-1-andrew.cooper3@citrix.com>
@@ -101,15 +101,11 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Insert the Alpine version as we'll need a newer version in due course, and
-rename 'rootfs' to 'base' as the container really is not a rootfs on it's own.
+xen-argo.ko has moved into the standard location.  In the short term, simply
+unpack argo.cpio.gz, but this can be simply concatinated with the base rootfs
+when it is constructed in a more convenient way.
 
-In base, add bash.  It's added later by the rootfs generation anyway, but this
-way we can write the generation script in bash too.
-
-In build, group and sort the packages.  Drop the ones we don't need, or are
-pulled in by dependencies.  Include diffutils, findutils and gawk to avoid
-warnings in the kernel build.
+No practical change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -120,136 +116,58 @@ CC: Doug Goldstein <cardoe@cardoe.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Jason Andryuk <jason.andryuk@amd.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- .gitlab-ci.yml                                |  4 +--
- containerize                                  |  4 +--
- images/alpine/3.18-x86_64-base.dockerfile     |  6 ++++
- ...ockerfile => 3.18-x86_64-build.dockerfile} | 32 ++++++++++++-------
- images/alpine/x86_64-rootfs.dockerfile        |  4 ---
- 5 files changed, 30 insertions(+), 20 deletions(-)
- create mode 100644 images/alpine/3.18-x86_64-base.dockerfile
- rename images/alpine/{x86_64-build.dockerfile => 3.18-x86_64-build.dockerfile} (54%)
- delete mode 100644 images/alpine/x86_64-rootfs.dockerfile
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 670f9621e26d..fb997cc62162 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -28,7 +28,7 @@ stages:
-   tags:
-     - x86_64
-   variables:
--    CONTAINER: alpine:x86_64-build
-+    CONTAINER: alpine:3.18-x86_64-build
- 
- #
- # ARM64 artifacts
-@@ -62,7 +62,7 @@ x86_64-rootfs-alpine-3.18:
-   script:
-     - . scripts/x86_64-rootfs-alpine.sh
-   variables:
--    CONTAINER: alpine:x86_64-rootfs
-+    CONTAINER: alpine:3.18-x86_64-base
- 
- x86_64-argo-linux-6.6.56:
-   extends: .x86_64-artifacts
-diff --git a/containerize b/containerize
-index 7abeb119ff6a..c23f55ead737 100755
---- a/containerize
-+++ b/containerize
-@@ -25,8 +25,8 @@ die() {
- BASE="registry.gitlab.com/xen-project/hardware/test-artifacts"
- case "_${CONTAINER}" in
-     _alpine-3.18-arm64-build) CONTAINER="${BASE}/alpine:3.18-arm64-build" ;;
--    _alpine-x86_64-rootfs) CONTAINER="${BASE}/alpine:x86_64-rootfs" ;;
--    _alpine-x86_64-build|_) CONTAINER="${BASE}/alpine:x86_64-build" ;;
-+    _alpine-3.18-x86_64-base) CONTAINER="${BASE}/alpine:3.18-x86_64-base" ;;
-+    _alpine-3.18-x86_64-build|_) CONTAINER="${BASE}/alpine:3.18-x86_64-build" ;;
- esac
- 
- # Use this variable to control whether root should be used
-diff --git a/images/alpine/3.18-x86_64-base.dockerfile b/images/alpine/3.18-x86_64-base.dockerfile
-new file mode 100644
-index 000000000000..a8cb274d5821
---- /dev/null
-+++ b/images/alpine/3.18-x86_64-base.dockerfile
-@@ -0,0 +1,6 @@
-+# syntax=docker/dockerfile:1
-+FROM --platform=linux/amd64 alpine:3.18
-+LABEL maintainer.name="The Xen Project"
-+LABEL maintainer.email="xen-devel@lists.xenproject.org"
-+
-+RUN apk --no-cache add bash
-diff --git a/images/alpine/x86_64-build.dockerfile b/images/alpine/3.18-x86_64-build.dockerfile
-similarity index 54%
-rename from images/alpine/x86_64-build.dockerfile
-rename to images/alpine/3.18-x86_64-build.dockerfile
-index 98969a5be1da..eac0cda4fed3 100644
---- a/images/alpine/x86_64-build.dockerfile
-+++ b/images/alpine/3.18-x86_64-build.dockerfile
-@@ -1,31 +1,39 @@
- # syntax=docker/dockerfile:1
- FROM --platform=linux/amd64 alpine:3.18
--LABEL maintainer.name="The Xen Project" \
--      maintainer.email="xen-devel@lists.xenproject.org"
-+LABEL maintainer.name="The Xen Project"
-+LABEL maintainer.email="xen-devel@lists.xenproject.org"
- 
- RUN apk --no-cache add bash
- 
--RUN bash -ex <<EOF
-+RUN <<EOF
-+#!/bin/bash
-+      set -eu
-+
-       adduser -D user --shell /bin/bash
- 
--      DEPS=(
--            musl-dev
-+      DEPS=(# Base environment
-             build-base
--            libc6-compat
--            linux-headers
--            bash
--            git
-             curl
--            flex
-+            git
-+
-+            # Linux build deps
-             bison
-+            diffutils
-             elfutils-dev
-+            findutils
-+            flex
-+            gawk
-+            linux-headers
-+            openssl-dev
-+            perl
-+
-+            # Argo build deps
-             autoconf
-             automake
-             libtool
--            openssl-dev
-       )
- 
--      apk add --no-cache "\${DEPS[@]}"
-+      apk add --no-cache "${DEPS[@]}"
- EOF
- 
- USER user
-diff --git a/images/alpine/x86_64-rootfs.dockerfile b/images/alpine/x86_64-rootfs.dockerfile
-deleted file mode 100644
-index b912e9c1600d..000000000000
---- a/images/alpine/x86_64-rootfs.dockerfile
-+++ /dev/null
-@@ -1,4 +0,0 @@
--# syntax=docker/dockerfile:1
--FROM --platform=linux/amd64 alpine:3.18
--LABEL maintainer.name="The Xen Project" \
--      maintainer.email="xen-devel@lists.xenproject.org"
--- 
-2.39.5
+https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/9690063969
 
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 59a2de28c864..9a533eedb941 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -240,14 +240,11 @@ xilinx-smoke-dom0-x86_64-gcc-debug-argo:
+   needs:
+     - alpine-3.18-gcc-debug
+     - project: xen-project/hardware/test-artifacts
+-      job: x86_64-kernel-linux-6.6.56
++      job: linux-6.6.56-x86_64
+       ref: master
+     - project: xen-project/hardware/test-artifacts
+       job: x86_64-rootfs-alpine-3.18
+       ref: master
+-    - project: xen-project/hardware/test-artifacts
+-      job: x86_64-argo-linux-6.6.56
+-      ref: master
+ 
+ adl-smoke-x86-64-gcc-debug:
+   extends: .adl-x86-64
+diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+index 7834ffbe0593..e97702f22827 100755
+--- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
++++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+@@ -66,7 +66,7 @@ then
+     PASS_MSG="TEST: Message from DOMU"
+     XEN_CMD_EXTRA="argo=1,mac-permissive=1"
+     DOMU_CMD="
+-insmod /root/xen-argo.ko
++insmod /lib/modules/\$(uname -r)/updates/xen-argo.ko
+ until false
+ do
+   echo \"${PASS_MSG}\"
+@@ -74,15 +74,13 @@ do
+ done | argo-exec -p 28333 -d 0 -- /bin/echo
+ "
+     DOM0_CMD="
+-insmod /root/xen-argo.ko
++insmod /lib/modules/\$(uname -r)/updates/xen-argo.ko
+ xl -vvv create /etc/xen/domU.cfg
+ argo-exec -l -p 28333 -- /bin/echo
+ "
+ copy_dom0_files ()
+ {
+-    cp "${WORKDIR}/binaries/xen-argo.ko" "root/"
+-    cp -ar "${WORKDIR}/binaries/lib/"* "usr/local/lib/"
+-    cp "${WORKDIR}/binaries/argo-exec" "usr/local/bin/"
++    zcat ${WORKDIR}/binaries/argo.cpio.gz | cpio -idv
+ }
+ copy_domU_files () { copy_dom0_files; }
+ else
 
