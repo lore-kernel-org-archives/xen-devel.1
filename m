@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F015C369B6
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 20:33:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.947821.1345448 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A927C369A2
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 20:37:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.947868.1345479 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3L4D-0008Vt-Ai; Fri, 11 Apr 2025 20:33:37 +0000
+	id 1u3L7v-0003HC-Mw; Fri, 11 Apr 2025 20:37:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 947821.1345448; Fri, 11 Apr 2025 20:33:37 +0000
+Received: by outflank-mailman (output) from mailman id 947868.1345479; Fri, 11 Apr 2025 20:37:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3L4D-0008Tt-28; Fri, 11 Apr 2025 20:33:37 +0000
-Received: by outflank-mailman (input) for mailman id 947821;
- Fri, 11 Apr 2025 20:33:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u3L7v-0003H5-Jl; Fri, 11 Apr 2025 20:37:27 +0000
+Received: by outflank-mailman (input) for mailman id 947868;
+ Fri, 11 Apr 2025 20:37:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5hfk=W5=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u3L4B-0007Qw-Ot
- for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 20:33:35 +0000
-Received: from fout-a8-smtp.messagingengine.com
- (fout-a8-smtp.messagingengine.com [103.168.172.151])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d295e74-1714-11f0-9eae-5ba50f476ded;
- Fri, 11 Apr 2025 22:33:34 +0200 (CEST)
-Received: from phl-compute-04.internal (phl-compute-04.phl.internal
- [10.202.2.44])
- by mailfout.phl.internal (Postfix) with ESMTP id F1B8E13801E9;
- Fri, 11 Apr 2025 16:33:33 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Fri, 11 Apr 2025 16:33:33 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 11 Apr 2025 16:33:32 -0400 (EDT)
+ <SRS0=cS7z=W5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1u3L7u-0003Gz-Fv
+ for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 20:37:26 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c65037a9-1714-11f0-9ffb-bf95429c2676;
+ Fri, 11 Apr 2025 22:37:24 +0200 (CEST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so21656695e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Apr 2025 13:37:24 -0700 (PDT)
+Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f2075fc99sm99736345e9.29.2025.04.11.13.37.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 11 Apr 2025 13:37:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,425 +47,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d295e74-1714-11f0-9eae-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744403613; x=1744490013; bh=NDEEL3vnp9
-	1rUswoHWj1DPTJJmgLP0WDQTpqGrFuTCo=; b=kDr5k72ygdLZCZkGX7ib57cawd
-	jFCLdCRzjtEby7UUs4vdGQytO6iQQz+mO/k61F/J2XicAPHt7EIn794JVZqr8xX9
-	zxh3LM0err2uZOgfwZbAEKNnz/u2C/xG6aGDKoEvCXP3LjtgClb+VLGJCIFIIEPI
-	+rfteppAPMpQ3MSHrcr7ZhXVCqliYzIYuGI2d9Ha+oiQe/QYJ/JevRE25O34qRMw
-	Ay7tOPjYViC5SArZHCaN1xYjontoeXGXCuaWZbI/3VgmIk0OFjIqAmunCrKQJNuH
-	9j0iiQM/YQX6GVLyipfcn5L7TLI7d7NDrJ7E+45Pxgpu2KRxUBET8R4mLNKg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744403613; x=
-	1744490013; bh=NDEEL3vnp91rUswoHWj1DPTJJmgLP0WDQTpqGrFuTCo=; b=k
-	TOUJzB6jUQX+DE6z7ysaEoJTXOVXLu6PGb3ZJojqunCUhwdOMOavxGLBSltSlGjH
-	H1XeQXkUwwQoNxZCRs2HZRi1JDTCtjf59/V39+FFZvDUoZRib2DDEwhM1gVLcttf
-	ohA9q6ppMPRXaBvL5z0LegG6aQgIsPNXbvBEPHXnR9sExcLMJD91kzoBmL+XCqSL
-	zDgx07wFwP6r3sj4g9dh6/I6kqcY+jOrTrnba6n6QRsJWoIH6qNv35p4VLWCx2cD
-	mCaqaVfV+LouCkqqWmaL8ERynQUYU7qCMgSJbLlu9EYmxB94bVacWSHpoosiLFhe
-	Yye181zqP0iSHKTHGo9RQ==
-X-ME-Sender: <xms:nXz5Z27MgfV_VUA-vHbpzN9x48v00dGIhHnA2eBGvr3d8tH5JpNlZw>
-    <xme:nXz5Z_76TEfeIwTNwBywBkO3afB15F98r18Chc9bYQPyaltZ-Rrhe07Zc_JqrOFtn
-    SDGgglPATPs9Q>
-X-ME-Received: <xmr:nXz5Z1dqzyKZgGEcaSUoJ_rGiXtewpY4GQT_BM0tI4i1gv9Xey0D6pEXyVN2uUQDr8nVkQooc0-vhmzkabhjJywSjpoXyWSoZjyjjp927PmAy9jpebM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvuddvjeekucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertder
-    tdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkih
-    cuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeen
-    ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
-    duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
-    fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopeehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
-    vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
-    hopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtohep
-    mhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtph
-    htthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsggv
-    lhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:nXz5ZzLd8ep7RWYaQ11PwFnTIza0278CdV7CCSgKYurmJVAcFFJABw>
-    <xmx:nXz5Z6LeEdiOaIC0zViTy-iqErRS1_3KZpFlvk_npEnlFLYC9Jiehw>
-    <xmx:nXz5Z0zz30c1A8UG8qyK6blP6kT-rwqtKc7uLpv_U0bEVmIpFz5pWA>
-    <xmx:nXz5Z-JwnnM2L4Ptugp9t1IMCIvlnc36lGyEpHuuByyTQ8ybuYkwNg>
-    <xmx:nXz5Z2CVRlq1bGXxLXnrMMHtSPRbfuZ_aBCfuByq1YFSb_lYvL8GZbun>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 5/7] CI: avoid repacking initrd as part of the test job
-Date: Fri, 11 Apr 2025 22:32:17 +0200
-Message-ID: <c7bd8aa95e8bd85f3e42ed4f07d69444f5435e25.1744403499.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.146eb3617cc9cf442dd4fc7a0a8950fb1bc191c8.1744403499.git-series.marmarek@invisiblethingslab.com>
-References: <cover.146eb3617cc9cf442dd4fc7a0a8950fb1bc191c8.1744403499.git-series.marmarek@invisiblethingslab.com>
+X-Inumbo-ID: c65037a9-1714-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1744403844; x=1745008644; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=BldrPVfIQESeMIsapKQksSXRFPvAdGURowrke8ew/hQ=;
+        b=lg4/9otxwtXpIYiIjJUsP1AaDLiLcPAixfZdvj+wahCslPJM5FvWUvPHgg18On0ID+
+         7HJ3T4rjS5o0hujX7gwZo5FSWtYCuzdJ8ZvDMvvX0l/61GnY3ZtZXGJvXmlZquCcq7+s
+         cyw9Xu4eTqRLd/odnWbUD9z9ILy/D7k6iXVEs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744403844; x=1745008644;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BldrPVfIQESeMIsapKQksSXRFPvAdGURowrke8ew/hQ=;
+        b=NeUQL00VzOlqZNQgs1Jnv76B+TlWb9fVC5KISynmtzhomFz/82fIGV6agWpwjwwrRE
+         S4LB1uAHcuVbu89brOYiuG4vN00+7/hBQ9yKJxQqMhyQm8if1CjRDnH9K0dQZDz8eAde
+         ZzVc7kuDlfTNrP9B44ohbQplPhUfx6uRh/aoJSNOCPqkM6Z/c9d59zzgj0wzOdslWwo/
+         hwKoMs1Kv+z6953D6oBGxxWo3GTwgr9TQPRXKVtio0PIY8zrA3p51R5r9+/i86GXdIkf
+         My5k0M8Q14wBssrbm5FQ0GlUXEr3bw65KMIj1xyWpxWe4LXnNfoPqCdFVMQLaauMTI58
+         Cy8g==
+X-Forwarded-Encrypted: i=1; AJvYcCVRL6IwmYx1HYbCeqolNsvAcVjSRqd3XIjLrpw1OyqLn4bjHl7xGwLSYhBjyXEl/cX+FnsmEvuo7K0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwouvsXj8QR34Awl2jDY/XCiiD84IYyiYDcCD8JdHiXgVtPcajn
+	33Lggi9j9UzWk8e+HnDW4omCK44AZBi5yXMuCdWi27ZMWEWqbNmezXzd66bH9Y4=
+X-Gm-Gg: ASbGncvz7ea5kTX3fGP6txfeS9omPbOnOsW3X12b/sOIq/Z2DLZb0juEH6h2cdKqCmf
+	xsNJsImY9LiXOuMXaJY6f/WcdVqEW85OrTauhAxieHlFj/1U/RQzoqTUghVgwEwWPw6A4qRD1j4
+	pTlRRGhWIIRN0DwZ+9yISRGmP2SnaT8Lpv22MqPtmld2/FQd+9gVjtKVaoIhl7uea91acCvgX12
+	EHmORXg0SGPeYYexUc4mMyaGmZx2//9Znk0vxNyl8IhfD5qvP+UOjf+PV7zIlTgJodLwLv1Yw25
+	U/K2cY7EWPrbYxKC7hKv2ERYKomBHyUz6dXOHSQaKVqur8iTRWx3idc9eamLHpnSpEEX7A4IyEO
+	VvNjhmw==
+X-Google-Smtp-Source: AGHT+IH0QL9ucguHRKkteX//RYL6CZhIksBdPwm28e/uI1U15yPd0MwmCGPPFqt6ygOJ+MbiagncUw==
+X-Received: by 2002:a05:600c:4e13:b0:43d:4686:5cfb with SMTP id 5b1f17b1804b1-43f3a9add63mr42820185e9.27.1744403843830;
+        Fri, 11 Apr 2025 13:37:23 -0700 (PDT)
+Message-ID: <76cbff87-3afd-43f1-a1e0-716a14074a32@citrix.com>
+Date: Fri, 11 Apr 2025 21:37:22 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/7] CI: wait for Xen to start before waiting for test
+ to complete
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, xen-devel@lists.xenproject.org
+Cc: Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.146eb3617cc9cf442dd4fc7a0a8950fb1bc191c8.1744403499.git-series.marmarek@invisiblethingslab.com>
+ <3f1ef15b54a84573576e647314ec61ea43d4e3af.1744403499.git-series.marmarek@invisiblethingslab.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <3f1ef15b54a84573576e647314ec61ea43d4e3af.1744403499.git-series.marmarek@invisiblethingslab.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The prerequisite for this is building rootfs.cpio.gz, not only
-initrd.tar.gz. That's a change in the test-artifacts repository in the
-"Rootfs generation" series from Andrew.
+On 11/04/2025 9:32 pm, Marek Marczykowski-Górecki wrote:
+> Add additional stage in console output parsing - wait for first message
+> from Xen. The message is defined via BOOT_MSG variable. This has two
+> effects:
+> - distinguishes failing Xen to load at all from later test failures
+> - resets timeout when Xen starts loading
+>
+> The latter is especially relevant for hardware tests where firmware +
+> network boot may take some time before Xen starts booting. The two-stage
+> timeout is more robust solution than increasing the overall timeout.
+> The issue has been observed on some dom0pvh-hvm jobs, at least on
+> runners hw3 and hw11. This patch is a first stage before qubes-x86-64.sh
+> is switched to use expect in the next stage.
+>
+> While at it, consistently use 'expect -re' for all matches. This
+> especially allows matching newlines ("\n"), which will become relevant
+> in the next patch. And document variables used in console.exp.
+>
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-Having that, do not repack the whole initrd, but only pack modified
-files and rely on Linux handling of concatenated archives.
-This allows packing just test-related files (which includes the whole
-toolstack), instead of the whole initrd.
-
-DomU initrd handling is a bit more complicated thing. It's sent to the
-target host as part of the dom0 initrd. For now include prepared domU
-initrd as a whole in dom0's rootfs "overlay", which means compressing it
-(again) each job (this takes 3s). This can be later improved by
-splitting domU initrd into two parts (base + overlay) and concatenate
-them in target dom0 already. For this to be useful, test-artifacts would
-need to provide pre-made double-cpio version too (rootfs.cpio.gz wrapper
-in yet another cpio.gz as boot/domU-initrd).
-
-Since full initrd is not unpacked now when preparing domU (and dom0)
-rootfs, a couple of minor changes are needed to how they are prepared.
-This includes creating whole etc/issue file, instead of modifying
-existing one, and a need to create a couple directories.
-
-Finally, move adding "rc_verbose=yes" to /etc/rc.conf to initrd
-building.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Changes in v3:
-- adjust for Andrew's version of cpio rootfs artifacts
-- don't require double-cpio archive for domU initrd, instead add it via
-  dom0 initrd as plain cpio to avoid re-compressing the same thing
-New in v2
-
-Jobs xilinx-* are untested, as I don't have necessary access.
----
- automation/gitlab-ci/test.yaml                    |  6 +++--
- automation/scripts/qemu-alpine-x86_64.sh          |  9 +++-----
- automation/scripts/qemu-smoke-dom0-arm64.sh       |  7 ++----
- automation/scripts/qemu-smoke-dom0less-arm64.sh   |  7 ++----
- automation/scripts/qubes-x86-64.sh                | 18 +++++++---------
- automation/scripts/xilinx-smoke-dom0-x86_64.sh    | 15 ++++++-------
- automation/scripts/xilinx-smoke-dom0less-arm64.sh | 14 +++++-------
- 7 files changed, 35 insertions(+), 41 deletions(-)
-
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 59a2de28c864..3e02bf0e4d21 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -11,7 +11,9 @@
-   - project: xen-project/hardware/test-artifacts
-     job: linux-6.6.86-arm64
-     ref: master
--  - alpine-3.18-arm64-rootfs-export
-+  - project: xen-project/hardware/test-artifacts
-+    job: alpine-3.18-arm64-rootfs
-+    ref: master
-   - qemu-system-aarch64-6.0.0-arm64-export
- 
- .arm32-test-needs: &arm32-test-needs
-@@ -22,7 +24,7 @@
-     job: linux-6.6.56-x86_64
-     ref: master
-   - project: xen-project/hardware/test-artifacts
--    job: x86_64-rootfs-alpine-3.18
-+    job: alpine-3.18-x86_64-rootfs
-     ref: master
- 
- .qemu-arm64:
-diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
-index 89bdb4df7dac..6e0a67b4018c 100755
---- a/automation/scripts/qemu-alpine-x86_64.sh
-+++ b/automation/scripts/qemu-alpine-x86_64.sh
-@@ -28,16 +28,15 @@ cd initrd
- find . | cpio --create --format='newc' | gzip > ../initrd.cpio.gz
- cd ..
- 
--# initrd.tar.gz is Dom0 rootfs
-+# Dom0 rootfs - overlay on top of rootfs.cpio.gz
- mkdir -p rootfs
- cd rootfs
--tar xvzf ../initrd.tar.gz
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
- cp -ar ../dist/install/* .
-+mkdir -p root etc/local.d
- mv ../initrd.cpio.gz ./root
- cp ../bzImage ./root
- echo "name=\"test\"
-@@ -60,9 +59,9 @@ xl -vvv create -c /root/test.cfg
- 
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
- # rebuild Dom0 rootfs
--find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
-+cp ../rootfs.cpio.gz ../xen-rootfs.cpio.gz
-+find . |cpio -H newc -o|gzip >> ../xen-rootfs.cpio.gz
- cd ../..
- 
- cat >> binaries/pxelinux.0 << EOF
-diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
-index 51d037b0003e..86047ccd9e7b 100755
---- a/automation/scripts/qemu-smoke-dom0-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
-@@ -29,13 +29,12 @@ cd ..
- 
- mkdir -p rootfs
- cd rootfs
--tar xvzf ../initrd.tar.gz
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
- cp -ar ../dist/install/* .
-+mkdir -p etc/local.d root
- mv ../initrd.cpio.gz ./root
- cp ../Image ./root
- echo "name=\"test\"
-@@ -56,8 +55,8 @@ xl -vvv create -c /root/test.cfg
- 
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
--find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
-+cp ../rootfs.cpio.gz ../xen-rootfs.cpio.gz
-+find . |cpio -H newc -o|gzip >> ../xen-rootfs.cpio.gz
- cd ../..
- 
- # XXX QEMU looks for "efi-virtio.rom" even if it is unneeded
-diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-index f72d20936181..b095a5008e30 100755
---- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
-+++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
-@@ -117,13 +117,12 @@ cd ..
- # DOM0 rootfs
- mkdir -p rootfs
- cd rootfs
--tar xzf ../binaries/initrd.tar.gz
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
- cp -ar ../binaries/dist/install/* .
-+mkdir -p etc/local.d
- 
- echo "#!/bin/bash
- 
-@@ -142,8 +141,8 @@ xl network-attach 1 type=vif
- ${dom0_check}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
--find . | cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
-+cp ../binaries/rootfs.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
- # ImageBuilder
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index dd88a1398f2b..99c2ece304f0 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -167,13 +167,11 @@ if [ -n "$domU_check" ]; then
-     # DomU
-     mkdir -p rootfs
-     cd rootfs
--    # fakeroot is needed to preserve device nodes in rootless podman container
--    fakeroot -s ../fakeroot-save tar xzf ../binaries/initrd.tar.gz
-     mkdir proc
-     mkdir run
-     mkdir srv
-     mkdir sys
--    rm var/run
-+    mkdir -p etc/local.d
-     echo "#!/bin/sh
- 
- echo 8 > /proc/sys/kernel/printk
-@@ -181,26 +179,25 @@ echo 8 > /proc/sys/kernel/printk
- ${domU_check}
- " > etc/local.d/xen.start
-     chmod +x etc/local.d/xen.start
--    echo "rc_verbose=yes" >> etc/rc.conf
-     echo "domU Welcome to Alpine Linux 3.18
- Kernel \r on an \m (\l)
- 
- " > etc/issue
--    find . | fakeroot -i ../fakeroot-save cpio -H newc -o | gzip > ../binaries/domU-rootfs.cpio.gz
-+    cp ../binaries/rootfs.cpio.gz ../binaries/domU-rootfs.cpio.gz
-+    find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
-     cd ..
-     rm -rf rootfs
- fi
- 
--# DOM0 rootfs
-+# DOM0 rootfs - this will be an overlay over alpine's initrd
- mkdir -p rootfs
- cd rootfs
--fakeroot -s ../fakeroot-save tar xzf ../binaries/initrd.tar.gz
- mkdir boot
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
-+mkdir -p etc/local.d
- cp -ar ../binaries/dist/install/* .
- cp -ar ../binaries/tests .
- cp -a ../automation/scripts/run-tools-tests tests/
-@@ -237,7 +234,6 @@ fi
- chmod +x etc/local.d/xen.start
- echo "$domU_config" > etc/xen/domU.cfg
- 
--echo "rc_verbose=yes" >> etc/rc.conf
- echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
- echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
- mkdir -p var/log/xen/console
-@@ -245,7 +241,9 @@ cp ../binaries/bzImage boot/vmlinuz
- if [ -n "$domU_check" ]; then
-     cp ../binaries/domU-rootfs.cpio.gz boot/initrd-domU
- fi
--find . | fakeroot -i ../fakeroot-save cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
-+# take base initrd and append test-specific files
-+cp ../binaries/rootfs.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
- 
-diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-index 4db249530823..52a0e05e3f1b 100755
---- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-@@ -80,6 +80,7 @@ argo-exec -l -p 28333 -- /bin/echo
- "
- copy_dom0_files ()
- {
-+    mkdir -p root usr/local/lib
-     cp "${WORKDIR}/binaries/xen-argo.ko" "root/"
-     cp -ar "${WORKDIR}/binaries/lib/"* "usr/local/lib/"
-     cp "${WORKDIR}/binaries/argo-exec" "usr/local/bin/"
-@@ -92,9 +93,8 @@ fi
- # Set up domU rootfs.
- mkdir -p rootfs
- cd rootfs
--tar xzf ../binaries/initrd.tar.gz
- mkdir proc run srv sys
--rm var/run
-+mkdir -p etc/local.d
- echo "#!/bin/sh
- set -x
- export LD_LIBRARY_PATH=/usr/local/lib
-@@ -102,23 +102,22 @@ PATH=/usr/local/bin:/usr/local/sbin:\$PATH
- ${DOMU_CMD}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
- echo "domU Welcome to Alpine Linux 3.18
- Kernel \r on an \m (\l)
- 
- " > etc/issue
- copy_domU_files
--find . | cpio -H newc -o | gzip > ../binaries/domU-rootfs.cpio.gz
-+cp ../binaries/initrd.cpio.gz ../binaries/domU-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
- cd ..
- rm -rf rootfs
- 
- # Set up dom0 rootfs.
- mkdir -p rootfs
- cd rootfs
--tar xzf ../binaries/initrd.tar.gz
- mkdir boot proc run srv sys
--rm var/run
- cp -ar ../binaries/dist/install/* .
-+mkdir -p etc/local.d
- echo "#!/bin/bash
- set -x
- export LD_LIBRARY_PATH=/usr/local/lib
-@@ -127,14 +126,14 @@ ${DOM0_CMD}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
- echo "${DOMU_CFG}${DOMU_CFG_EXTRA}" > etc/xen/domU.cfg
--echo "rc_verbose=yes" >> etc/rc.conf
- echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
- echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
- mkdir -p var/log/xen/console
- cp ../binaries/bzImage boot/vmlinuz
- cp ../binaries/domU-rootfs.cpio.gz boot/initrd-domU
- copy_dom0_files
--find . | cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
-+cp ../binaries/rootfs.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
- # Load software into TFTP server directory.
-diff --git a/automation/scripts/xilinx-smoke-dom0less-arm64.sh b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-index 3e1fcf6bf93c..97190d0cbb9c 100755
---- a/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
-@@ -41,33 +41,31 @@ fi
- # DomU
- mkdir -p rootfs
- cd rootfs
--tar xzf ../binaries/initrd.tar.gz
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
-+mkdir -p etc/local.d
- echo "#!/bin/sh
- 
- ${domU_check}
- /bin/sh" > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
--find . | cpio -H newc -o | gzip > ../binaries/domU-rootfs.cpio.gz
-+cp ../binaries/rootfs.cpio.gz ../binaries/domU-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
- cd ..
- rm -rf rootfs
- 
- # DOM0 rootfs
- mkdir -p rootfs
- cd rootfs
--tar xzf ../binaries/initrd.tar.gz
- mkdir proc
- mkdir run
- mkdir srv
- mkdir sys
--rm var/run
- cp -ar ../binaries/dist/install/* .
- 
-+mkdir -p etc/local.d
- echo "#!/bin/bash
- 
- export LD_LIBRARY_PATH=/usr/local/lib
-@@ -78,8 +76,8 @@ bash /etc/init.d/xencommons start
- ${dom0_check}
- " > etc/local.d/xen.start
- chmod +x etc/local.d/xen.start
--echo "rc_verbose=yes" >> etc/rc.conf
--find . | cpio -H newc -o | gzip > ../binaries/dom0-rootfs.cpio.gz
-+cp ../binaries/rootfs.cpio.gz ../binaries/dom0-rootfs.cpio.gz
-+find . | cpio -H newc -o | gzip >> ../binaries/dom0-rootfs.cpio.gz
- cd ..
- 
- 
--- 
-git-series 0.9.1
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
