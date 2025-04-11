@@ -4,37 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24416C36010
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 10:54:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.947031.1344779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 777F6C36010
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 11:05:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.947116.1344818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3C1e-0000b0-Tu; Fri, 11 Apr 2025 10:54:22 +0000
+	id 1u3CC1-00072G-4A; Fri, 11 Apr 2025 11:05:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 947031.1344779; Fri, 11 Apr 2025 10:54:22 +0000
+Received: by outflank-mailman (output) from mailman id 947116.1344818; Fri, 11 Apr 2025 11:05:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3C1e-0000at-Qr; Fri, 11 Apr 2025 10:54:22 +0000
-Received: by outflank-mailman (input) for mailman id 947031;
- Fri, 11 Apr 2025 10:54:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u3CC1-000729-1a; Fri, 11 Apr 2025 11:05:05 +0000
+Received: by outflank-mailman (input) for mailman id 947116;
+ Fri, 11 Apr 2025 11:05:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=U3ez=W5=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1u3C1d-00006G-No
- for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 10:54:21 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51f9e349-16c3-11f0-9ffb-bf95429c2676;
- Fri, 11 Apr 2025 12:54:20 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-39c30d9085aso1117000f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 11 Apr 2025 03:54:20 -0700 (PDT)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-39eaf43cc72sm1683094f8f.67.2025.04.11.03.54.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 03:54:18 -0700 (PDT)
+ <SRS0=Klsp=W5=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1u3CBz-000723-Mo
+ for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 11:05:03 +0000
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2060e.outbound.protection.outlook.com
+ [2a01:111:f403:2408::60e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d00bb013-16c4-11f0-9ead-5ba50f476ded;
+ Fri, 11 Apr 2025 13:05:02 +0200 (CEST)
+Received: from MN2PR01CA0059.prod.exchangelabs.com (2603:10b6:208:23f::28) by
+ SJ0PR12MB6965.namprd12.prod.outlook.com (2603:10b6:a03:448::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.22; Fri, 11 Apr
+ 2025 11:04:57 +0000
+Received: from BN1PEPF00004682.namprd03.prod.outlook.com
+ (2603:10b6:208:23f:cafe::ef) by MN2PR01CA0059.outlook.office365.com
+ (2603:10b6:208:23f::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.26 via Frontend Transport; Fri,
+ 11 Apr 2025 11:04:41 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF00004682.mail.protection.outlook.com (10.167.243.88) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8655.12 via Frontend Transport; Fri, 11 Apr 2025 11:04:57 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
+ 2025 06:04:56 -0500
+Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via
+ Frontend Transport; Fri, 11 Apr 2025 06:04:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,379 +61,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51f9e349-16c3-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744368859; x=1744973659; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8jkOKV9f4wIs23OL1gwfLbIIZcMjYz7cTYPK8gN12NE=;
-        b=HAxexIbzVJONbPT6WhLGRJZqjcsoEoXWiDR6ucwG1e92JA6vYiJcgqgdrvsGVx3gyv
-         ONA3ymr6fUfIaKV6xmZIHwO6RGTu+BK/KZn4cIh1t0XCdVtLigtN2PcXYrUuhPWozATd
-         exBuiuhq1OzfahzNVVQARM4Z2cObSlP5f1zFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744368859; x=1744973659;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8jkOKV9f4wIs23OL1gwfLbIIZcMjYz7cTYPK8gN12NE=;
-        b=iJZrHJLtkECOYqZvFRBtqlucfDP+MM//ehviayw5VDzH3qW9EhqL40u/VFxKVxUwlM
-         SPMnGHOCIXHu9tlOUoyodLtwb9PfdYOdK6owZMpiIK2Gwm63OzQVcxKJ//G1orHVjUCi
-         WlOcnpXJYPNYysYk0hbONCxyoBOyjjzF0g0WpdCOYpK94b1fJN8+fsFEk6B07t2iKLFP
-         hY/FvrwNVvSYeDBC+4ll/64enJafxFnQEVMMPC/WJiATM1RDhXVs4ltVmJagZRPwBGtP
-         bRXTzJaqKvyF50NRZ6yK0vbTNJ5o4uTCBNC83cI0F1QUg3dilqkv9affAIfRgr48kmQx
-         SQJA==
-X-Gm-Message-State: AOJu0Yz50dfYnrR4XAyDU4EKIIUzmoEQCUBfw6hg9I6elmIEbvn0m4ev
-	Mt7bUeQN2kHW7STK/44CpqV0jWC7F9DEkE6gEMwk7zwQSOVE+DlXP3gn05H99YJOZdQUQcBmvC0
-	7
-X-Gm-Gg: ASbGncv6Z2rcx9SMGzzSqlNrnu9zNqJimtSO/OexE7wiU/tLuSb/huMse/YuUnUaL5D
-	+qG0noyzpgeDfqTePP45+VVi13tjY6o8N3Lv0ycQ0mnTl95vi8u13jFjuJ/Sfao3ITRV6OQ0LFe
-	qBaZsFVeFuYBAPmbyCBkcsN/G5e54fw8n0uMS8HWZY9FZMaNDs70AAUU6JIx0TLB4pc2xBxhBM/
-	SyjxnYK/evd0Krg6tZugA4W4Vdn8sEPU1oM3TrwCQi7z+ucojjRVmV8jHva84OslCtdjh2RnxEJ
-	UXcWavqRVBCzqRoHng60Z2oeV6B5RJiZSz5Sw62m05OkCNQMl7cxhpVP
-X-Google-Smtp-Source: AGHT+IEalTEBHnBqdw6GEGhLxDVi54GZZQNzRPx8BV3uHkoWl8+oFfZLmR2QsPzNm7+zvZ5QyNA7zw==
-X-Received: by 2002:a05:6000:144e:b0:39c:1f11:ead with SMTP id ffacd0b85a97d-39ea5213077mr1863723f8f.26.1744368859090;
-        Fri, 11 Apr 2025 03:54:19 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 2/5] xen/io: provide helpers for multi size MMIO accesses
-Date: Fri, 11 Apr 2025 12:54:08 +0200
-Message-ID: <20250411105411.22334-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250411105411.22334-1-roger.pau@citrix.com>
-References: <20250411105411.22334-1-roger.pau@citrix.com>
+X-Inumbo-ID: d00bb013-16c4-11f0-9ead-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ID7jKB3wTRI9+0re0J/VZA79zJpt2djKK3fp4gnPGrpKpudB+waSt9j1mco72eIN1glUycLFKfyJz+Ivu7+qr+nlo+r71IEU0Qv1w1F2+nVscFNDzHH92RZpYFSsmcyeEjPSgQsKeGK22joOEzWlOXJ3+Cuj/sfpZVDrrZrDt5EPtEfNo39doquUEtDwXeQla15R0NgVHlF3i1czbLbeUp/d0pucN0se/MtFQNADSfqXAs/cx79p22ov9tlhoGv9OWJ3snwEtLi+e1WyfhgM5b1yEO5gN+EfJDNCYU8o4Is5AWzcGIypnbYHCxNEfXXV3k9G8rtP5VgmVp3741Ovnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rFIkJwYuwnWVubFR6mN69sqIH1vPnXPwpwqVmMm4Rbg=;
+ b=Iq37tZWaHKSURQndZ8BeprrbO1+MsRzDWdVCAmCnGq6f4W38msqiFAr9f7cS2PROKKFrV3yaVg3hfw3kIlHQPRLL2Ux0X6gNR/liS8N4Oi60I4mvrRwQQSZtUWBjp43ayC6Z25LwUQKozykam48CyYltXfj5HIjDcgqZWg/SVD/OC09rmKPDw5MuwlzbdcKc6dHLDSRMfC9vcSZtNLdp67ebADOWid+S9inLhIFYuOyvGG/dotYdhdWPpY3ucRVYXJWxlzIGh0YlglzF4YSyjR7IvdecrK+Hf+x0Ac92j4rYvUOvekSvzolN14lU9JdaCs/qm5bKssJ2oRVhSQ9kBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rFIkJwYuwnWVubFR6mN69sqIH1vPnXPwpwqVmMm4Rbg=;
+ b=Fj/xRkHFKIfYH2EjCnh6upy1ARqlfXlBHzCOseXTBEL5m5UMiAWuCtK9vMfnZwM08lSbzwh9FKj4G193Ca3gl3ur43E40hcjlJs/tHgX56y6jmRB4grS/1woVZblu67mZaQH5euT06ieu367xMVTJHdUp1c88dsEmrul+dYb8mw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 0/3] Enable early bootup of Armv8-R AArch32 systems
+Date: Fri, 11 Apr 2025 12:04:49 +0100
+Message-ID: <20250411110452.3748186-1-ayan.kumar.halder@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: ayan.kumar.halder@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004682:EE_|SJ0PR12MB6965:EE_
+X-MS-Office365-Filtering-Correlation-Id: 481061e5-5648-4350-73de-08dd78e8b22c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?sGBPchBAjSD7qzcd+7v+MD4Z31VbHF6rAlAtwWthJ8OotRu3okmhIRsYYUrs?=
+ =?us-ascii?Q?iuuUQHMK7X2sZ5lRkf0nk5WDUr7VPMMrWGFSRy5nEvY4uxSSTQ8yS3f8GLWV?=
+ =?us-ascii?Q?je/7JBheT4b7HSlEtY1QHBbYfKfOAvdiFXrmXWiH29dcObtuIRMXOwdTx4Re?=
+ =?us-ascii?Q?FbyqCvK6pBGYnJc8V5SaHDqVua0Q3gU/+QIPBMsIdq26jmitIz9iMRiNR9Ho?=
+ =?us-ascii?Q?h/NeoQU/LtBUpk2lTyZ8OYuKnvbuT1/XmEom0LU76Kucb3rv/HNGu7v492Hh?=
+ =?us-ascii?Q?/DAXUzvnejGIZpg1VjXDAIA2+HHTQ5u2uy5sLS18XhCLOeExkXM/PJLdeV/a?=
+ =?us-ascii?Q?eXIG8BEEfSAOD6IYEvm6zDNrG/QJ03g/QGT1qXrXsIT3q/yV2BZVsFuckVWz?=
+ =?us-ascii?Q?jSzXxZyTk2SrymYPgnN4zZ7j3jQRAL7T7xdCUjq6S913oTxIkfYgVQrJoo6/?=
+ =?us-ascii?Q?TYSCLUoQsfPF9eSkn51vkXDcVaJaGTgI6KDQFlWkykXmWOo1EU8AZJTmzDj5?=
+ =?us-ascii?Q?8t1pPegQfxhe5fuyJ4qYcMyQBWFI1Gdnq47i0YUSHPBK/OYT4BOhHGlq3oZl?=
+ =?us-ascii?Q?RViPaB2hT8MhHzI0OCJYyOrYiFz6UXMWtlQzeEVKZM/ofvVX4CkT++QrFhtG?=
+ =?us-ascii?Q?7L7HT/3h7YA7O1/IbFtzGhQe/xIB+KVu01J93z1/naJmcH8m0L9/9HQHoUaA?=
+ =?us-ascii?Q?KKtvMSvS2sJ1FgBlf+dzF3fzPxzxoTcVyHm0gdutUphRoPOoBEZwpcNObP+o?=
+ =?us-ascii?Q?XeUIucwRQGhkdd8hLYbUTImearMcyd0PjLu+KVjFszSO/77Zg4nkBmhFdGz3?=
+ =?us-ascii?Q?aJxMa6hb2cdw+fKcX6KMdMXunsQMlhcaRqM7R6ni3AeTiISYgaAfYXv8O7MF?=
+ =?us-ascii?Q?lrJY1ufE2/V2Z9Hq19r5E0+FtNaszejVFPL/FktOx56X5yiH3LGHb7GdLeTb?=
+ =?us-ascii?Q?ZCyLjLMz7eCX4ZavYakTKqDW0zApR7AHbCHa2zwY6XXTcjNWRoSijh+GRLr9?=
+ =?us-ascii?Q?USR5kDKXqipE232syQdsTyRt7mP/ldicEa0UgV7E05oI1rppt151XCTZxf3E?=
+ =?us-ascii?Q?3+ifMCzZKT0jyepKdzovR1jXJb0iDhHi7DMNPdkPfLWAfq8Pk1U2ZE9PZmiz?=
+ =?us-ascii?Q?eJyvY89NIa+RWZ1A5b8dEVgrsPdQs6JzvT/1CarPxSwUnWXbtPjnTwrDink7?=
+ =?us-ascii?Q?rxCcPTE2B/NF6PmH5yto4eTmVxNC1WQ9NYaNLUDO6HAbe1zayljVpFy5vocR?=
+ =?us-ascii?Q?OLUI47D7o8hvXzArbfM07BXe5Y7HVE5tCR/CRcrVg3PyZAGpCS9XPWQRkOGF?=
+ =?us-ascii?Q?5+A8BzGE/q9/U3C3bhNrtMywGkKO3MYM9Li25oat85P2sx24NILVrRQ/0A4d?=
+ =?us-ascii?Q?WTtky3lgy2ybKIBwZUP0IBveQnyCd65DMODvCcMWZ91RSK8/MESfrqjW+ERk?=
+ =?us-ascii?Q?YhrFNsaNWDdW9Y80FQjlHZXp0mUk0UikQ/AeHHmO1UCEjBnu15jzWhsGp8IP?=
+ =?us-ascii?Q?ar4j94lmx8GKRKUHFulZqYhweJjLiAG3NIR8?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 11:04:57.3013
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 481061e5-5648-4350-73de-08dd78e8b22c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00004682.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6965
 
-Several handlers have the same necessity of reading from an MMIO region
-using 1, 2, 4 or 8 bytes accesses.  So far this has been open-coded in the
-function itself.  Instead provide a new handler that encapsulates the
-accesses.
+Enable early booting of Armv8-R AArch32 based systems.
 
-Since the added helpers are not architecture specific, introduce a new
-generic io.h header.
+Added Luca's R-b in all the patches.
 
-No functional change intended.
+Ayan Kumar Halder (3):
+  xen/arm: Move some of the functions to common file
+  xen/arm32: Create the same boot-time MPU regions as arm64
+  xen/arm32: mpu: Stubs to build MPU for arm32
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/vmsi.c | 47 ++----------------------------
- xen/arch/x86/mm.c       | 32 +++++----------------
- xen/drivers/vpci/msix.c | 47 ++----------------------------
- xen/include/xen/io.h    | 63 +++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 76 insertions(+), 113 deletions(-)
- create mode 100644 xen/include/xen/io.h
+ xen/arch/arm/arm32/Makefile              |   1 +
+ xen/arch/arm/arm32/mpu/Makefile          |   3 +
+ xen/arch/arm/arm32/mpu/head.S            | 104 +++++++++++++++++++++++
+ xen/arch/arm/arm32/mpu/p2m.c             |  19 +++++
+ xen/arch/arm/arm32/mpu/smpboot.c         |  26 ++++++
+ xen/arch/arm/arm64/mpu/head.S            |  78 +----------------
+ xen/arch/arm/include/asm/arm32/sysregs.h |   9 ++
+ xen/arch/arm/include/asm/arm64/sysregs.h |  13 +++
+ xen/arch/arm/include/asm/cpregs.h        |   2 +
+ xen/arch/arm/include/asm/mm.h            |   9 +-
+ xen/arch/arm/include/asm/mmu/mm.h        |   7 ++
+ xen/arch/arm/include/asm/mpu/cpregs.h    |  27 ++++++
+ xen/arch/arm/include/asm/mpu/mm.h        |   5 ++
+ xen/arch/arm/include/asm/mpu/regions.inc |  79 +++++++++++++++++
+ xen/arch/arm/mpu/Makefile                |   1 +
+ xen/arch/arm/mpu/domain_page.c           |  45 ++++++++++
+ 16 files changed, 343 insertions(+), 85 deletions(-)
+ create mode 100644 xen/arch/arm/arm32/mpu/Makefile
+ create mode 100644 xen/arch/arm/arm32/mpu/head.S
+ create mode 100644 xen/arch/arm/arm32/mpu/p2m.c
+ create mode 100644 xen/arch/arm/arm32/mpu/smpboot.c
+ create mode 100644 xen/arch/arm/include/asm/mpu/cpregs.h
+ create mode 100644 xen/arch/arm/include/asm/mpu/regions.inc
+ create mode 100644 xen/arch/arm/mpu/domain_page.c
 
-diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
-index fd83abb929ec..61b89834d97d 100644
---- a/xen/arch/x86/hvm/vmsi.c
-+++ b/xen/arch/x86/hvm/vmsi.c
-@@ -24,6 +24,7 @@
-  * Will be merged it with virtual IOAPIC logic, since most is the same
- */
- 
-+#include <xen/io.h>
- #include <xen/types.h>
- #include <xen/mm.h>
- #include <xen/xmalloc.h>
-@@ -304,28 +305,7 @@ static void adjacent_read(
- 
-     hwaddr = fix_to_virt(fixmap_idx) + PAGE_OFFSET(address);
- 
--    switch ( len )
--    {
--    case 1:
--        *pval = readb(hwaddr);
--        break;
--
--    case 2:
--        *pval = readw(hwaddr);
--        break;
--
--    case 4:
--        *pval = readl(hwaddr);
--        break;
--
--    case 8:
--        *pval = readq(hwaddr);
--        break;
--
--    default:
--        ASSERT_UNREACHABLE();
--        break;
--    }
-+    *pval = read_mmio(hwaddr, len);
- }
- 
- static void adjacent_write(
-@@ -344,28 +324,7 @@ static void adjacent_write(
- 
-     hwaddr = fix_to_virt(fixmap_idx) + PAGE_OFFSET(address);
- 
--    switch ( len )
--    {
--    case 1:
--        writeb(val, hwaddr);
--        break;
--
--    case 2:
--        writew(val, hwaddr);
--        break;
--
--    case 4:
--        writel(val, hwaddr);
--        break;
--
--    case 8:
--        writeq(val, hwaddr);
--        break;
--
--    default:
--        ASSERT_UNREACHABLE();
--        break;
--    }
-+    write_mmio(hwaddr, val, len);
- }
- 
- static int cf_check msixtbl_read(
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 1cf236516789..989e62e7ce6f 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -95,6 +95,7 @@
- #include <xen/guest_access.h>
- #include <xen/hypercall.h>
- #include <xen/init.h>
-+#include <xen/io.h>
- #include <xen/iocap.h>
- #include <xen/ioreq.h>
- #include <xen/irq.h>
-@@ -116,7 +117,6 @@
- #include <asm/flushtlb.h>
- #include <asm/guest.h>
- #include <asm/idt.h>
--#include <asm/io.h>
- #include <asm/io_apic.h>
- #include <asm/ldt.h>
- #include <asm/mem_sharing.h>
-@@ -5102,7 +5102,7 @@ static void __iomem *subpage_mmio_map_page(
- static void subpage_mmio_write_emulate(
-     mfn_t mfn,
-     unsigned int offset,
--    const void *data,
-+    unsigned long data,
-     unsigned int len)
- {
-     struct subpage_ro_range *entry;
-@@ -5115,7 +5115,6 @@ static void subpage_mmio_write_emulate(
- 
-     if ( test_bit(offset / MMIO_RO_SUBPAGE_GRAN, entry->ro_elems) )
-     {
-- write_ignored:
-         gprintk(XENLOG_WARNING,
-                 "ignoring write to R/O MMIO 0x%"PRI_mfn"%03x len %u\n",
-                 mfn_x(mfn), offset, len);
-@@ -5131,26 +5130,7 @@ static void subpage_mmio_write_emulate(
-         return;
-     }
- 
--    addr += offset;
--    switch ( len )
--    {
--    case 1:
--        writeb(*(const uint8_t*)data, addr);
--        break;
--    case 2:
--        writew(*(const uint16_t*)data, addr);
--        break;
--    case 4:
--        writel(*(const uint32_t*)data, addr);
--        break;
--    case 8:
--        writeq(*(const uint64_t*)data, addr);
--        break;
--    default:
--        /* mmio_ro_emulated_write() already validated the size */
--        ASSERT_UNREACHABLE();
--        goto write_ignored;
--    }
-+    write_mmio(addr + offset, data, len);
- }
- 
- #ifdef CONFIG_HVM
-@@ -5185,18 +5165,20 @@ int cf_check mmio_ro_emulated_write(
-     struct x86_emulate_ctxt *ctxt)
- {
-     struct mmio_ro_emulate_ctxt *mmio_ro_ctxt = ctxt->data;
-+    unsigned long data = 0;
- 
-     /* Only allow naturally-aligned stores at the original %cr2 address. */
-     if ( ((bytes | offset) & (bytes - 1)) || !bytes ||
--         offset != mmio_ro_ctxt->cr2 )
-+         offset != mmio_ro_ctxt->cr2 || bytes > sizeof(data) )
-     {
-         gdprintk(XENLOG_WARNING, "bad access (cr2=%lx, addr=%lx, bytes=%u)\n",
-                 mmio_ro_ctxt->cr2, offset, bytes);
-         return X86EMUL_UNHANDLEABLE;
-     }
- 
-+    memcpy(&data, p_data, bytes);
-     subpage_mmio_write_emulate(mmio_ro_ctxt->mfn, PAGE_OFFSET(offset),
--                               p_data, bytes);
-+                               data, bytes);
- 
-     return X86EMUL_OKAY;
- }
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 6bd8c55bb48e..6455f2a03a01 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -17,6 +17,7 @@
-  * License along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
-+#include <xen/io.h>
- #include <xen/sched.h>
- #include <xen/vpci.h>
- 
-@@ -344,28 +345,7 @@ static int adjacent_read(const struct domain *d, const struct vpci_msix *msix,
-         return X86EMUL_OKAY;
-     }
- 
--    switch ( len )
--    {
--    case 1:
--        *data = readb(mem + PAGE_OFFSET(addr));
--        break;
--
--    case 2:
--        *data = readw(mem + PAGE_OFFSET(addr));
--        break;
--
--    case 4:
--        *data = readl(mem + PAGE_OFFSET(addr));
--        break;
--
--    case 8:
--        *data = readq(mem + PAGE_OFFSET(addr));
--        break;
--
--    default:
--        ASSERT_UNREACHABLE();
--        break;
--    }
-+    *data = read_mmio(mem + PAGE_OFFSET(addr), len);
-     spin_unlock(&vpci->lock);
- 
-     return X86EMUL_OKAY;
-@@ -493,28 +473,7 @@ static int adjacent_write(const struct domain *d, const struct vpci_msix *msix,
-         return X86EMUL_OKAY;
-     }
- 
--    switch ( len )
--    {
--    case 1:
--        writeb(data, mem + PAGE_OFFSET(addr));
--        break;
--
--    case 2:
--        writew(data, mem + PAGE_OFFSET(addr));
--        break;
--
--    case 4:
--        writel(data, mem + PAGE_OFFSET(addr));
--        break;
--
--    case 8:
--        writeq(data, mem + PAGE_OFFSET(addr));
--        break;
--
--    default:
--        ASSERT_UNREACHABLE();
--        break;
--    }
-+    write_mmio(mem + PAGE_OFFSET(addr), data, len);
-     spin_unlock(&vpci->lock);
- 
-     return X86EMUL_OKAY;
-diff --git a/xen/include/xen/io.h b/xen/include/xen/io.h
-new file mode 100644
-index 000000000000..5c360ce9dee2
---- /dev/null
-+++ b/xen/include/xen/io.h
-@@ -0,0 +1,63 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Generic helpers for doing MMIO accesses.
-+ *
-+ * Copyright (c) 2025 Cloud Software Group
-+ */
-+#ifndef XEN_IO_H
-+#define XEN_IO_H
-+
-+#include <xen/bug.h>
-+
-+#include <asm/io.h>
-+
-+static inline uint64_t read_mmio(const volatile void __iomem *mem,
-+                                 unsigned int size)
-+{
-+    switch ( size )
-+    {
-+    case 1:
-+        return readb(mem);
-+
-+    case 2:
-+        return readw(mem);
-+
-+    case 4:
-+        return readl(mem);
-+
-+    case 8:
-+        return readq(mem);
-+    }
-+
-+    ASSERT_UNREACHABLE();
-+    return ~0UL;
-+}
-+
-+static inline void write_mmio(volatile void __iomem *mem, uint64_t data,
-+                              unsigned int size)
-+{
-+    switch ( size )
-+    {
-+    case 1:
-+        writeb(data, mem);
-+        break;
-+
-+    case 2:
-+        writew(data, mem);
-+        break;
-+
-+    case 4:
-+        writel(data, mem);
-+        break;
-+
-+    case 8:
-+        writeq(data, mem);
-+        break;
-+
-+    default:
-+        ASSERT_UNREACHABLE();
-+        break;
-+    }
-+}
-+
-+#endif /* XEN_IO_H */
 -- 
-2.48.1
+2.25.1
 
 
