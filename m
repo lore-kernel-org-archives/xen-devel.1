@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D56C3ABA2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7CADC3ABA0
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 14:57:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.947480.1345159 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.947475.1345110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3Foj-0008Af-Op; Fri, 11 Apr 2025 14:57:17 +0000
+	id 1u3Foc-0006sf-D2; Fri, 11 Apr 2025 14:57:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 947480.1345159; Fri, 11 Apr 2025 14:57:17 +0000
+Received: by outflank-mailman (output) from mailman id 947475.1345110; Fri, 11 Apr 2025 14:57:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3Foj-0008AX-KK; Fri, 11 Apr 2025 14:57:17 +0000
-Received: by outflank-mailman (input) for mailman id 947480;
- Fri, 11 Apr 2025 14:57:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u3Foc-0006sW-81; Fri, 11 Apr 2025 14:57:10 +0000
+Received: by outflank-mailman (input) for mailman id 947475;
+ Fri, 11 Apr 2025 14:57:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TlgU=W5=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1u3Foh-0006eX-DP
- for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 14:57:15 +0000
+ id 1u3Foa-0006ed-L3
+ for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 14:57:08 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 40881b03-16e5-11f0-9ffb-bf95429c2676;
- Fri, 11 Apr 2025 16:57:13 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 3cbb0f05-16e5-11f0-9ead-5ba50f476ded;
+ Fri, 11 Apr 2025 16:57:07 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B98AC153B;
- Fri, 11 Apr 2025 07:57:12 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 59369153B;
+ Fri, 11 Apr 2025 07:57:06 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 15BFD3F59E;
- Fri, 11 Apr 2025 07:57:11 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4C1753F59E;
+ Fri, 11 Apr 2025 07:57:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,112 +44,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40881b03-16e5-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 3cbb0f05-16e5-11f0-9ead-5ba50f476ded
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 6/7] arm/mpu: Implement early_fdt_map support in MPU systems
-Date: Fri, 11 Apr 2025 15:56:54 +0100
-Message-Id: <20250411145655.140667-7-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>
+Subject: [PATCH v3 1/7] arm/mpu: Introduce MPU memory region map structure
+Date: Fri, 11 Apr 2025 15:56:49 +0100
+Message-Id: <20250411145655.140667-2-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250411145655.140667-1-luca.fancellu@arm.com>
 References: <20250411145655.140667-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implement early_fdt_map() function, that is responsible to map the
-device tree blob in the early stages of the boot process, since at
-this stage the MPU C data structure are not yet initialised, it is
-using low level APIs to write into the MPU registers at a fixed
-MPU region number.
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-The MPU memory management is designed to work on pages of PAGE_SIZE
-in order to reuse helpers and macros already available on the Xen
-memory management system.
+Introduce pr_t typedef which is a structure having the prbar
+and prlar members, each being structured as the registers of
+the aarch64 armv8-r architecture.
 
+Introduce the array 'xen_mpumap' that will store a view of
+the content of the MPU regions.
+
+Introduce MAX_MPU_REGIONS macro that uses the value of
+NUM_MPU_REGIONS_MASK just for clarity, because using the
+latter as number of elements of the xen_mpumap array might
+be misleading.
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/mpu/setup.c | 54 ++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 52 insertions(+), 2 deletions(-)
+ xen/arch/arm/include/asm/arm64/mpu.h | 44 ++++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/mpu.h       |  5 ++++
+ xen/arch/arm/mpu/mm.c                |  4 +++
+ 3 files changed, 53 insertions(+)
+ create mode 100644 xen/arch/arm/include/asm/arm64/mpu.h
 
-diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
-index b4da77003f47..5969065250d4 100644
---- a/xen/arch/arm/mpu/setup.c
-+++ b/xen/arch/arm/mpu/setup.c
-@@ -1,17 +1,67 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+new file mode 100644
+index 000000000000..4d2bd7d7877f
+--- /dev/null
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -0,0 +1,44 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * mpu.h: Arm Memory Protection Unit definitions for aarch64.
++ */
++
++#ifndef __ARM_ARM64_MPU_H__
++#define __ARM_ARM64_MPU_H__
++
++#ifndef __ASSEMBLY__
++
++/* Protection Region Base Address Register */
++typedef union {
++    struct __packed {
++        unsigned long xn:2;       /* Execute-Never */
++        unsigned long ap:2;       /* Acess Permission */
++        unsigned long sh:2;       /* Sharebility */
++        unsigned long base:46;    /* Base Address */
++        unsigned long pad:12;
++    } reg;
++    uint64_t bits;
++} prbar_t;
++
++/* Protection Region Limit Address Register */
++typedef union {
++    struct __packed {
++        unsigned long en:1;     /* Region enable */
++        unsigned long ai:3;     /* Memory Attribute Index */
++        unsigned long ns:1;     /* Not-Secure */
++        unsigned long res:1;    /* Reserved 0 by hardware */
++        unsigned long limit:46; /* Limit Address */
++        unsigned long pad:12;
++    } reg;
++    uint64_t bits;
++} prlar_t;
++
++/* MPU Protection Region */
++typedef struct {
++    prbar_t prbar;
++    prlar_t prlar;
++} pr_t;
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* __ARM_ARM64_MPU_H__ */
+\ No newline at end of file
+diff --git a/xen/arch/arm/include/asm/mpu.h b/xen/arch/arm/include/asm/mpu.h
+index d4ec4248b62b..e148c705b82c 100644
+--- a/xen/arch/arm/include/asm/mpu.h
++++ b/xen/arch/arm/include/asm/mpu.h
+@@ -6,6 +6,10 @@
+ #ifndef __ARM_MPU_H__
+ #define __ARM_MPU_H__
  
-+#include <xen/bootfdt.h>
- #include <xen/bug.h>
- #include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
++#if defined(CONFIG_ARM_64)
++# include <asm/arm64/mpu.h>
++#endif
++
+ #define MPU_REGION_SHIFT  6
+ #define MPU_REGION_ALIGN  (_AC(1, UL) << MPU_REGION_SHIFT)
+ #define MPU_REGION_MASK   (~(MPU_REGION_ALIGN - 1))
+@@ -13,6 +17,7 @@
+ #define NUM_MPU_REGIONS_SHIFT   8
+ #define NUM_MPU_REGIONS         (_AC(1, UL) << NUM_MPU_REGIONS_SHIFT)
+ #define NUM_MPU_REGIONS_MASK    (NUM_MPU_REGIONS - 1)
++#define MAX_MPU_REGIONS         NUM_MPU_REGIONS_MASK
+ 
+ #endif /* __ARM_MPU_H__ */
+ 
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 07c8959f4ee9..f83ce04fef8a 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -7,9 +7,13 @@
  #include <xen/mm.h>
-+#include <xen/pfn.h>
+ #include <xen/sizes.h>
  #include <xen/types.h>
 +#include <asm/mpu.h>
-+#include <asm/page.h>
- #include <asm/setup.h>
  
-+/* Needs to be kept in sync with the regions programmed in arm64/mpu/head.S */
-+#define EARLY_FDT_MAP_REGION_NUMBER 6
+ struct page_info *frame_table;
+ 
++/* EL2 Xen MPU memory region mapping table. */
++pr_t xen_mpumap[MAX_MPU_REGIONS];
 +
- void __init setup_pagetables(void) {}
- 
- void * __init early_fdt_map(paddr_t fdt_paddr)
+ static void __init __maybe_unused build_assertions(void)
  {
--    BUG_ON("unimplemented");
--    return NULL;
-+    /* Map at least a page containing the DTB address, exclusive range */
-+    paddr_t base_paddr = round_pgdown(fdt_paddr);
-+    paddr_t end_paddr = round_pgup(fdt_paddr + sizeof(struct fdt_header));
-+    unsigned int flags = PAGE_HYPERVISOR_RO;
-+    void *fdt_virt = (void *)fdt_paddr; /* virt == paddr for MPU */
-+    pr_t fdt_region;
-+
-+    /*
-+     * Check whether the physical FDT address is set and meets the minimum
-+     * alignment requirement. Since we are relying on MIN_FDT_ALIGN to be at
-+     * least 8 bytes so that we always access the magic and size fields
-+     * of the FDT header after mapping the first chunk, double check if
-+     * that is indeed the case.
-+     */
-+    BUILD_BUG_ON(MIN_FDT_ALIGN < 8);
-+    if ( !fdt_paddr || fdt_paddr % MIN_FDT_ALIGN )
-+        return NULL;
-+
-+    /* Map the device tree blob header  */
-+    fdt_region = pr_of_xenaddr(base_paddr, end_paddr, PAGE_AI_MASK(flags));
-+    fdt_region.prbar.reg.ap = PAGE_AP_MASK(flags);
-+    fdt_region.prbar.reg.xn = PAGE_XN_MASK(flags);
-+
-+    write_protection_region(&fdt_region, EARLY_FDT_MAP_REGION_NUMBER);
-+    context_sync_mpu();
-+
-+    if ( fdt_magic(fdt_virt) != FDT_MAGIC )
-+        return NULL;
-+
-+    end_paddr = round_pgup(fdt_paddr + fdt_totalsize(fdt_virt));
-+
-+    /*
-+     * If the mapped range is not enough, map the rest of the DTB, pr_get_limit
-+     * returns an inclusive address of the range, hence the increment.
-+     */
-+    if ( end_paddr > (pr_get_limit(&fdt_region) + 1) )
-+    {
-+        pr_set_limit(&fdt_region, end_paddr);
-+
-+        write_protection_region(&fdt_region, EARLY_FDT_MAP_REGION_NUMBER);
-+        context_sync_mpu();
-+    }
-+
-+    return fdt_virt;
- }
- 
- /*
+     /*
 -- 
 2.34.1
 
