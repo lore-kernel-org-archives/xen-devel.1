@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7C8C369B4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1683DC369A2
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 20:33:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.947825.1345469 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.947818.1345419 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3L4I-0000mt-5w; Fri, 11 Apr 2025 20:33:42 +0000
+	id 1u3L4B-0007tv-Ax; Fri, 11 Apr 2025 20:33:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 947825.1345469; Fri, 11 Apr 2025 20:33:42 +0000
+Received: by outflank-mailman (output) from mailman id 947818.1345419; Fri, 11 Apr 2025 20:33:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3L4I-0000m7-0Z; Fri, 11 Apr 2025 20:33:42 +0000
-Received: by outflank-mailman (input) for mailman id 947825;
- Fri, 11 Apr 2025 20:33:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u3L4B-0007tn-7M; Fri, 11 Apr 2025 20:33:35 +0000
+Received: by outflank-mailman (input) for mailman id 947818;
+ Fri, 11 Apr 2025 20:33:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5hfk=W5=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1u3L4H-0007Qw-54
- for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 20:33:41 +0000
-Received: from fhigh-a3-smtp.messagingengine.com
- (fhigh-a3-smtp.messagingengine.com [103.168.172.154])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 40332cdc-1714-11f0-9eae-5ba50f476ded;
- Fri, 11 Apr 2025 22:33:39 +0200 (CEST)
-Received: from phl-compute-03.internal (phl-compute-03.phl.internal
- [10.202.2.43])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 09AAF1140174;
- Fri, 11 Apr 2025 16:33:39 -0400 (EDT)
+ id 1u3L49-0007cp-GK
+ for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 20:33:33 +0000
+Received: from fout-a8-smtp.messagingengine.com
+ (fout-a8-smtp.messagingengine.com [103.168.172.151])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3addbbba-1714-11f0-9ffb-bf95429c2676;
+ Fri, 11 Apr 2025 22:33:31 +0200 (CEST)
+Received: from phl-compute-04.internal (phl-compute-04.phl.internal
+ [10.202.2.44])
+ by mailfout.phl.internal (Postfix) with ESMTP id 15B6913801E9;
+ Fri, 11 Apr 2025 16:33:30 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-03.internal (MEProxy); Fri, 11 Apr 2025 16:33:39 -0400
+ by phl-compute-04.internal (MEProxy); Fri, 11 Apr 2025 16:33:30 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 11 Apr 2025 16:33:37 -0400 (EDT)
+ 11 Apr 2025 16:33:28 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,35 +47,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40332cdc-1714-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: 3addbbba-1714-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1744403619; x=1744490019; bh=O7uX55ccR6
-	xGebFg3kRT0d2q6xGT5L2tU3KLCLv0anQ=; b=cQEJQzb3kbjuie54zfZlH5Ie7F
-	FKXpp6x3zCkZmMgsb7wITuQjJF2w0ydVItdjUs6LHHVbbR6Z6NgiLTPqUkKuCI/G
-	LJOvuZV/iQRdIRRLPHj6J3BEYTN73A9ipamSEA388Hx8aJE1b3ox4oH+Kn1qDea1
-	Ahd/CZFOV2U+kCmZkzBQcdmnfucW+IXMe1SvDGp9hS/TOsJnJAuybi6OAUXqHcGB
-	6a7UWonucr6R9NYFB2goHg16O5iLFBXYpamN8dgNZ9GApn1q27QFRTrmtwXxMN66
-	DByEwIUPbNxo9gDZxKzo4JGY90D1UzLxod6Uth3gjny31mPXFt4OTjZypcBg==
+	:subject:to:to; s=fm2; t=1744403610; x=1744490010; bh=qNI+VqSEj0
+	KVeZX4bXAfU5HaNIGKRMphh1Sp3jCnRHA=; b=BzyxJe66q6LlGJmm3GY41iiNJ3
+	9sHcabf5OYpHCrLeqFcfBCC8G2XK3rPSindGoQHvzfIzzAH2ktjdDbnp+lZ+7Y/d
+	MIfOgGCI6pQLXpN/0r7fDhEYPbVyG9ZOBWPEzLbyEWTwn1K2eFiM30r4gvbxJlT0
+	AOBnRrmxu/YRGPL2Kp4o7LcjmZ2pa2cUOnxiggQO1dOI5MOekLDhuWcRfVy0VQka
+	BcZkYq/TzYlfWM+eTllOr+TlV+d2iyIip1zQCbkPsndzrCcLb7QZ5s4IKz84rRXV
+	qv4+VRD91dsUQWEEsT6ZI+RMewgFLueubTfQtLsnO3h3TUm2vkaLW9TuxlTA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744403619; x=
-	1744490019; bh=O7uX55ccR6xGebFg3kRT0d2q6xGT5L2tU3KLCLv0anQ=; b=J
-	L6hwZjYnoJCqLj/gK5ic24i/dHlnCb95yDQggUSJvZhF+gJpSv1FxAN0dw6xLcac
-	TrL+pLcp1pPgch5DhYDJDed+JnrOH7uxh0k42eMlt0U+jBEbFU/ZhDVtuFivp8Oi
-	e5aYFWHazfIXERSwmt8dgQgQfhIydzP5aSluo3ZxBxnkp5DfLA5gfe5NpkvibSQo
-	J8Ca6rUg7ye+ysnry2Em2iMcIg6nj1B2pC0j2jlPHjwcw96Wd2rykzcRA8dhwXZw
-	y/BljCgpRCznBejHC8Y/r/lLtHf9pPvOU8+C9g5V7kmSaRV+g718bRQ6IgfhtkxP
-	zKoEb6EZeOQ6EWiBulEPA==
-X-ME-Sender: <xms:onz5Z37G-EMqnQdPDANM-bQcSBSEe_k4Jh0HWPUv21JHmB5PUy1ZEw>
-    <xme:onz5Z87TX_tOJl4Qxq-nI7ccdScynFVJyaXUehTKV1GWgDeCE_WgMLNktbaY6iuIU
-    AyxdoOAq_VpbQ>
-X-ME-Received: <xmr:onz5Z-eaYP3CKPiMU6nIr0oSqz5bKgmXeiMevEHOz-4oHOydcv72qQ2jLGv3LSnMW0M3u79SV1M3Vw8Ru36xcCEvNVOWMMqCc6Y9fS-Mbt9QAyzNr2s>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1744403610; x=
+	1744490010; bh=qNI+VqSEj0KVeZX4bXAfU5HaNIGKRMphh1Sp3jCnRHA=; b=I
+	454Pl5J2bzBUXqCPqP+lZG4QXpDjlTyV2R2Ea9dupk/m7lRYdimfdg6FezRyVknT
+	N8h1BMGXdwNKQM6OyO+6tdp+wucisHMrMzG2OgA6TP+mvRms2kcSmox5uKVheswz
+	38ahlpFmeLVlXUy+OVwPLB+mi098bxF29a02ao7NzVeUaZtTthKeVuWMWR3MygQR
+	2+9lz+Y96QoYeMjk6HPZvcv0+6DLr0fajM3Yagdj+JguTJLERMOoo+xfAAeFX1ue
+	vMKrsQBp8vfjcZOjvbi/z6L7fG+hDIZ5KqE2yiaS9YcCT/Ai4Z2i7iM7jPwxD5mT
+	b9DHZNMb5s+VBUNtiC00g==
+X-ME-Sender: <xms:mXz5Z5dIXIdIkKMEKchJoGgc4fuQlQpGpV7yenHyVRLSAzq4v_LQCg>
+    <xme:mXz5Z3OurLDurYMjs7dQOgLUy-8hxS_IWSElbpYe-cFeu3JiwJEMut1zMTfAzb025
+    vJZYaJJXi6DGw>
+X-ME-Received: <xmr:mXz5ZyjxpeGeCFokwI4f2YPsnIsKY6Z1em2nRunXr-q8QQDPvOhpgo3nknBtodisa-II_O0ayGexU7KQqUKrQuBr0TfFJoxRJMbDu4LJOq_aivksnZ0>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvuddvjeekucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
     pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
@@ -85,34 +85,27 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvuddvjeekucetufdote
     ucggtffrrghtthgvrhhnpefgueduhefgvdefheehudejheefudevueeghfekhfehleegve
     duteeuiedugffgffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
     fhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
-    hmpdhnsggprhgtphhtthhopeelpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
+    hmpdhnsggprhgtphhtthhopeehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeig
     vghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtth
     hopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtohep
     mhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtph
-    htthhopegrnhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthht
-    ohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhgsvghulh
-    hitghhsehsuhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigvnhdrohhrghdp
-    rhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthhope
-    hsshhtrggsvghllhhinhhisehkvghrnhgvlhdrohhrgh
-X-ME-Proxy: <xmx:onz5Z4LqJBG9JVWXq7Yj9XNyuXeDziNGw_b9ormXeBfWftLT33AHyg>
-    <xmx:onz5Z7JphJ-ZGTE3RpJQ2avDhdnVEvywS4TxtBKQnc2XimG8sDphKA>
-    <xmx:onz5ZxyJVS_am1gpGqtkZbQPnT1tTrtllSjUeyD3SA8jkK8_ARD8VA>
-    <xmx:onz5Z3IaCCFlz4SOWc0X1cB7tCmXznaNKloi1ZX6DyrPAYQ94LjoaA>
-    <xmx:o3z5Z1bOBApZCmsldbRV2zbuuEPnQo8Ne7bSbBXD6Zieh7GdnorUoil2>
+    htthhopegtrghrughovgestggrrhguohgvrdgtohhmpdhrtghpthhtohepshhsthgrsggv
+    lhhlihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:mXz5Zy8KFXC8Z6Hrq4Rhx5tgN-lLVDwTBKQ9nnmMoViACbstvsia7w>
+    <xmx:mXz5Z1tUswHM1Ox_pW-9PkZFUz07_-dAcktpQVDY64p0JIyhCWxn_w>
+    <xmx:mXz5ZxFJ7wWhPK_YU-7vAGjdLaTduAb4gUYy0VUT_AUEzinz1ee0Gw>
+    <xmx:mXz5Z8Pz0A4nEUj7ubuOYgGeKwXFMRiqdnHBn5Nrf2f6VjahAgy-Aw>
+    <xmx:mnz5Z02xPCAQGXHsgi5ZpPlmLIOPklXeMcLwd-1B4pN5uoFAeWl2Q47N>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH test-artifacts v3 8/7] Enable CONFIG_USB_RTL8152 in kernel for hw12 runner
-Date: Fri, 11 Apr 2025 22:32:20 +0200
-Message-ID: <20250411203336.585215-1-marmarek@invisiblethingslab.com>
+Subject: [PATCH v3 2/7] CI: fix waiting for final test message
+Date: Fri, 11 Apr 2025 22:32:14 +0200
+Message-ID: <ad1db17ffa1883b1aa21a8480e4fb628a6d0c929.1744403499.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.146eb3617cc9cf442dd4fc7a0a8950fb1bc191c8.1744403499.git-series.marmarek@invisiblethingslab.com>
 References: <cover.146eb3617cc9cf442dd4fc7a0a8950fb1bc191c8.1744403499.git-series.marmarek@invisiblethingslab.com>
@@ -120,26 +113,43 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It uses this USB network interface.
+Expect normally discards initial part of its buffer after matching the
+patter, before looking for the next one. If both PASSED and LOG_MSG
+happen to be in the buffer at the same time, depending on their order,
+only one will be matched and the waiting for the other will timeout.
+Example expect -d output of this happening (parts eclipsed for brevity):
+
+    expect: does "\r\r\r\nWelcome to Alpine Linux 3.18\r\r\r\n...\r\r\r\r\n(domU) + echo 'pci test passed'\r\r\r\r\n(domU) pci test passed\r\r\r\r..." (spawn_id exp4) match regular expression "pci test passed"? Gate "pci test passed"? gate=yes re=yes
+    ...
+    Gate keeper glob pattern for '\nWelcome to Alpine Linux' is '
+    Welcome to Alpine Linux'. Activating booster.
+    expect: does "'\r\r\r\r\n(domU) pci test passed\r\r\r\r\n(domU)  [ ok ]\r\r\r\r\n(domU)  [ ok ]\r\r\r\r\n(domU) \r\r\r\r\r\n(domU) domU Welcome to Alpine Linux 3.18\r\r\r\r\n(domU) \rKernel 6.6.56 on an x86_64 (/dev/hvc0)\r\r\r\r\n(domU) \r\r\r\r\r\n" (spawn_id exp4) match regular expression "\nWelcome to Alpine Linux"? Gate "\nWelcome to Alpine Linux"? gate=no
+
+Fix this by using -notransfer flag to keep matched part in the buffer.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- scripts/build-linux.sh | 1 +
- 1 file changed, 1 insertion(+)
+ automation/scripts/console.exp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/scripts/build-linux.sh b/scripts/build-linux.sh
-index 49b5ebe..af684d6 100755
---- a/scripts/build-linux.sh
-+++ b/scripts/build-linux.sh
-@@ -32,6 +32,7 @@ case $UNAME in
-             | grep 'XEN' \
-             | grep '=m' \
-             | sed 's/=m/=y/g' >> .config
-+        ./scripts/config --enable USB_RTL8152
-         ;;
- 
-     aarch64)
+diff --git a/automation/scripts/console.exp b/automation/scripts/console.exp
+index c27f893dfba7..834a08db1b95 100755
+--- a/automation/scripts/console.exp
++++ b/automation/scripts/console.exp
+@@ -48,11 +48,11 @@ if {[info exists env(BOOT_MSG)]} {
+ if {[info exists env(LOG_MSG)]} {
+     expect {
+         -re "$env(PASSED)" {
+-            expect -re "$env(LOG_MSG)"
++            expect -notransfer -re "$env(LOG_MSG)"
+             exit 0
+         }
+         -re "$env(LOG_MSG)" {
+-            expect -re "$env(PASSED)"
++            expect -notransfer -re "$env(PASSED)"
+             exit 0
+         }
+     }
 -- 
-2.48.1
-
+git-series 0.9.1
 
