@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF23C369B4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5527C369B5
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Apr 2025 14:57:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.947476.1345115 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.947479.1345144 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3Foc-0006xf-Mr; Fri, 11 Apr 2025 14:57:10 +0000
+	id 1u3Fog-0007eZ-HS; Fri, 11 Apr 2025 14:57:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 947476.1345115; Fri, 11 Apr 2025 14:57:10 +0000
+Received: by outflank-mailman (output) from mailman id 947479.1345144; Fri, 11 Apr 2025 14:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u3Foc-0006vk-JU; Fri, 11 Apr 2025 14:57:10 +0000
-Received: by outflank-mailman (input) for mailman id 947476;
- Fri, 11 Apr 2025 14:57:10 +0000
+	id 1u3Fog-0007dp-9y; Fri, 11 Apr 2025 14:57:14 +0000
+Received: by outflank-mailman (input) for mailman id 947479;
+ Fri, 11 Apr 2025 14:57:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TlgU=W5=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1u3Foc-0006ed-3s
- for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 14:57:10 +0000
+ id 1u3Foe-0006ed-V7
+ for xen-devel@lists.xenproject.org; Fri, 11 Apr 2025 14:57:12 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 3e2581e2-16e5-11f0-9ead-5ba50f476ded;
- Fri, 11 Apr 2025 16:57:09 +0200 (CEST)
+ id 3fc02e63-16e5-11f0-9ead-5ba50f476ded;
+ Fri, 11 Apr 2025 16:57:12 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E4935106F;
- Fri, 11 Apr 2025 07:57:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 79CA2106F;
+ Fri, 11 Apr 2025 07:57:11 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3DF393F59E;
- Fri, 11 Apr 2025 07:57:08 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C5B303F59E;
+ Fri, 11 Apr 2025 07:57:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e2581e2-16e5-11f0-9ead-5ba50f476ded
+X-Inumbo-ID: 3fc02e63-16e5-11f0-9ead-5ba50f476ded
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -52,74 +52,65 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 3/7] arm/mpu: Introduce utility functions for the pr_t type
-Date: Fri, 11 Apr 2025 15:56:51 +0100
-Message-Id: <20250411145655.140667-4-luca.fancellu@arm.com>
+Subject: [PATCH v3 5/7] arm/mpu: Introduce MPU memory mapping flags
+Date: Fri, 11 Apr 2025 15:56:53 +0100
+Message-Id: <20250411145655.140667-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250411145655.140667-1-luca.fancellu@arm.com>
 References: <20250411145655.140667-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce few utility function to manipulate and handle the
-pr_t type.
+Introduce the MPU memory mapping flags in asm/page.h.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- xen/arch/arm/include/asm/mpu.h | 40 ++++++++++++++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
+ xen/arch/arm/include/asm/page.h | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mpu.h b/xen/arch/arm/include/asm/mpu.h
-index 59ff22c804c1..6971507457fb 100644
---- a/xen/arch/arm/include/asm/mpu.h
-+++ b/xen/arch/arm/include/asm/mpu.h
-@@ -20,6 +20,46 @@
- #define NUM_MPU_REGIONS_MASK    (NUM_MPU_REGIONS - 1)
- #define MAX_MPU_REGIONS         NUM_MPU_REGIONS_MASK
+diff --git a/xen/arch/arm/include/asm/page.h b/xen/arch/arm/include/asm/page.h
+index 69f817d1e68a..22f7d2c6cb30 100644
+--- a/xen/arch/arm/include/asm/page.h
++++ b/xen/arch/arm/include/asm/page.h
+@@ -62,6 +62,7 @@
  
-+#ifndef __ASSEMBLY__
-+
-+/* Set base address of MPU protection region(pr_t). */
-+static inline void pr_set_base(pr_t *pr, paddr_t base)
-+{
-+    pr->prbar.reg.base = (base >> MPU_REGION_SHIFT);
-+}
-+
-+/* Set limit address of MPU protection region(pr_t). */
-+static inline void pr_set_limit(pr_t *pr, paddr_t limit)
-+{
-+    pr->prlar.reg.limit = ((limit - 1) >> MPU_REGION_SHIFT);
-+}
-+
-+/*
-+ * Access to get base address of MPU protection region(pr_t).
-+ * The base address shall be zero extended.
-+ */
-+static inline paddr_t pr_get_base(pr_t *pr)
-+{
-+    return (paddr_t)(pr->prbar.reg.base << MPU_REGION_SHIFT);
-+}
-+
-+/*
-+ * Access to get limit address of MPU protection region(pr_t).
-+ * The limit address shall be concatenated with 0x3f.
-+ */
-+static inline paddr_t pr_get_limit(pr_t *pr)
-+{
-+    return (paddr_t)((pr->prlar.reg.limit << MPU_REGION_SHIFT)
-+                     | ~MPU_REGION_MASK);
-+}
-+
-+static inline bool region_is_valid(pr_t *pr)
-+{
-+    return pr->prlar.reg.en;
-+}
-+
-+#endif /* __ASSEMBLY__ */
-+
- #endif /* __ARM_MPU_H__ */
+ #define MAIRVAL (MAIR1VAL << 32 | MAIR0VAL)
  
++#ifdef CONFIG_MMU
  /*
+  * Layout of the flags used for updating the hypervisor page tables
+  *
+@@ -90,6 +91,30 @@
+ #define _PAGE_CONTIG_BIT    8
+ #define _PAGE_CONTIG        (1U << _PAGE_CONTIG_BIT)
+ 
++#else /* !CONFIG_MMU */
++
++/*
++ * Layout of the flags used for updating MPU memory region attributes
++ * [0:2] Memory attribute Index
++ * [3:4] Execute Never
++ * [5:6] Access Permission
++ * [7]   Region Present
++ */
++#define _PAGE_AI_BIT            0
++#define _PAGE_XN_BIT            3
++#define _PAGE_AP_BIT            5
++#define _PAGE_PRESENT_BIT       7
++#define _PAGE_AI                (7U << _PAGE_AI_BIT)
++#define _PAGE_XN                (2U << _PAGE_XN_BIT)
++#define _PAGE_RO                (2U << _PAGE_AP_BIT)
++#define _PAGE_PRESENT           (1U << _PAGE_PRESENT_BIT)
++#define PAGE_AI_MASK(x)         (((x) >> _PAGE_AI_BIT) & 0x7U)
++#define PAGE_XN_MASK(x)         (((x) >> _PAGE_XN_BIT) & 0x3U)
++#define PAGE_AP_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x3U)
++#define PAGE_RO_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x2U)
++
++#endif /* CONFIG_MMU */
++
+ /*
+  * _PAGE_DEVICE and _PAGE_NORMAL are convenience defines. They are not
+  * meant to be used outside of this header.
 -- 
 2.34.1
 
