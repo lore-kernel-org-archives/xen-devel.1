@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA9FC369A2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 19:09:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.951149.1347322 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A6BC369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 19:09:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.950969.1347317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4PAs-00025q-Ja; Mon, 14 Apr 2025 19:08:54 +0000
+	id 1u4PAs-00022f-BR; Mon, 14 Apr 2025 19:08:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 951149.1347322; Mon, 14 Apr 2025 19:08:54 +0000
+Received: by outflank-mailman (output) from mailman id 950969.1347317; Mon, 14 Apr 2025 19:08:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4PAs-00025i-G6; Mon, 14 Apr 2025 19:08:54 +0000
-Received: by outflank-mailman (input) for mailman id 951149;
- Mon, 14 Apr 2025 18:34:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=aOmN=XA=nppct.ru=sdl@srs-se1.protection.inumbo.net>)
- id 1u4Odw-0000NA-UA
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 18:34:54 +0000
-Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25321077-195f-11f0-9ffb-bf95429c2676;
- Mon, 14 Apr 2025 20:34:49 +0200 (CEST)
-Received: from mail.nppct.ru (localhost [127.0.0.1])
- by mail.nppct.ru (Postfix) with ESMTP id 8FFA31C0E8B
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 21:34:38 +0300 (MSK)
-Received: from mail.nppct.ru ([127.0.0.1])
- by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id nm-4p_ZHJHya for <xen-devel@lists.xenproject.org>;
- Mon, 14 Apr 2025 21:34:34 +0300 (MSK)
-Received: from localhost.localdomain (unknown [87.249.24.51])
- by mail.nppct.ru (Postfix) with ESMTPSA id 9EB5A1C08C3;
- Mon, 14 Apr 2025 21:34:15 +0300 (MSK)
+	id 1u4PAs-00022Y-7t; Mon, 14 Apr 2025 19:08:54 +0000
+Received: by outflank-mailman (input) for mailman id 950969;
+ Mon, 14 Apr 2025 17:13:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=rghC=XA=gmail.com=francescolavra.fl@srs-se1.protection.inumbo.net>)
+ id 1u4NMw-0006cg-US
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 17:13:15 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bfc1808e-1953-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 19:13:14 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43edb40f357so39128505e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 10:13:14 -0700 (PDT)
+Received: from ?IPv6:2001:b07:5d29:f42d:74f6:abb7:53c9:817c?
+ ([2001:b07:5d29:f42d:74f6:abb7:53c9:817c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f204c500bsm191180875e9.0.2025.04.14.10.13.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Apr 2025 10:13:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,75 +48,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25321077-195f-11f0-9ffb-bf95429c2676
-Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
-	reason="pass (just generated, assumed good)" header.d=nppct.ru
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
-	content-transfer-encoding:mime-version:x-mailer:message-id:date
-	:date:subject:subject:to:from:from; s=dkim; t=1744655674; x=
-	1745519675; bh=s2YUvKONZpYv6BeESkipXTOMCM3/ZgRQk8zLNK4GcdM=; b=M
-	OaTYnc/HQEO/PMwboMK+lWs/8VUDiRjPLpHBrTI0m5QUvdCVdVaHL6PpSvBrHl2e
-	VbtW5TkXXKB1aM+938SKNRlF4bPYmG2QpIBRwC7X2pxzmJZCVZO43fk8Zs5XiBPP
-	7Y3G33QkaVxLWCueFHo3aOPy2U9BsdtmG+rsQ/Gdc4=
-X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
-From: Alexey Nepomnyashih <sdl@nppct.ru>
-To: Juergen Gross <jgross@suse.com>
-Cc: Alexey Nepomnyashih <sdl@nppct.ru>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	John Fastabend <john.fastabend@gmail.com>,
-	xen-devel@lists.xenproject.org,
-	netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	bpf@vger.kernel.org,
-	lvc-project@linuxtesting.org,
-	stable@vger.kernel.org
-Subject: [PATCH] xen-netfront: handle NULL returned by xdp_convert_buff_to_frame()
-Date: Mon, 14 Apr 2025 18:34:01 +0000
-Message-ID: <20250414183403.265943-1-sdl@nppct.ru>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: bfc1808e-1953-11f0-9eae-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744650793; x=1745255593; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:in-reply-to:date
+         :cc:to:from:subject:message-id:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AhLhCv09lRa1OLV+bmnI0sicXwTDVpYEF9Itb4YCx/Y=;
+        b=O3OHAtCaMkPn20hIvxWUWumklbC1k4Tpb5SGk1WrH3tAB2fVpOefuvROSkx2soZ1Qy
+         q8ETJ1YL+n4mdB1bXC7Ifcaol8rnZJsUl33m4J4w8/s44wGbGs+Hwf+rnPHP4a/GWr5v
+         HLaF2Z66wEqrDRVqIP0rtd4onE6R7ba9qoRXBocrOb88hMNVkI4ihTAwct8/aXM1ybia
+         KgT8vGuTKm5TLZY3U2Z1cH8dx90Up+DZcpEKH7kPQ9IoDUHaSH+McxoxJWKu8PnwFU4E
+         eY9jLDsf+lRMKKBsMhZIAc7o4INVoHwF1A4mYtZhpl6mkJUZCOwdz/IhatmTtGE3OkC7
+         s6yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744650793; x=1745255593;
+        h=mime-version:user-agent:content-transfer-encoding:in-reply-to:date
+         :cc:to:from:subject:message-id:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=AhLhCv09lRa1OLV+bmnI0sicXwTDVpYEF9Itb4YCx/Y=;
+        b=NaYhgxSawpkQmFsfWY7BWCQUMpqNEHgLAaKMoqeFVpy9gt44Fl1jvLyKT315dJZrK5
+         nHLMJKKp5z4w1bsR/EncYnlhrWsD3VlWFeb2HenT62+/BZcNUp1KoIsP0Z+5xBgt5VNj
+         hBfCmBFZENimmmjx5FO+pGTCct6XCjnKbMWqSm3auN+0Exk1O0ww94eY5D8dLura0Xd1
+         Q/bgsV+6+ViEH4b7VlGWbrwE9cPqVmy5E/HOB/2CMf5UHOwIa6IryY5Jk4CAdTac1I8Y
+         +g5R143Xcdo8opmCrrCXrtwhoQBioRR2d2KFoKXQwU+BE4D1cDqPkAtV5D4Gvv1BM/Nv
+         NL6w==
+X-Forwarded-Encrypted: i=1; AJvYcCVoffCMmWJUEJ4TRxF7TUYLOUY7msmlJzIsqq3pY1Ew/c89K45xztJszUD+Bo5yTugz90+91yt8R1c=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwVvUeX/l5LygwkXZM0Lh3cu1VxWJqH2MY+NRMT3r2nNpi1a8Pw
+	DabYe1iGWGlHnyfjjqkkIHe0WBPcgM8PgwHhnL2ONv0WRyYBGRTb
+X-Gm-Gg: ASbGncvFVW/R4up7E+OUxOR3YC4AxTz2fL2mtMc1kkb9ibskw8l8X2Ps8nnW0V6DbgY
+	GFZ0KTTYZEC0BvDy5V2ZEvmn+rl1ColKic/2iP+1e54a/i4ZhT1Bs5aj6YdWsHR33loYKTShNAQ
+	Lh0mOeBfdOwn+aUYm6I21/nUp3IOiWadbYDPwQEWknGPufR3sLzxNgMEjdW3AJm4E5E/4cErpjn
+	Ql9qZjB04zlSiPR4RF5qV+0sSTMueCPzdHK58MVYpeztTszFqZkAnkIhOkigQDI+lfpDrgjuliM
+	AZ2s709naDqhMI21Qtqz2iiuS1Tl4CkVt6PPJ1alUSuvYFYdpSeLWZdJLl/zcIALnDwP0nvwDDW
+	n2S4/HRPc0hXhYXmT3wJJbg==
+X-Google-Smtp-Source: AGHT+IFaPusiZQT0QiFcyLJp0TXK65g3+z16rgMNv9l2dKvCZ0RLPJLCBzoBrYTr6CV/HfnsWx9kLw==
+X-Received: by 2002:a05:600c:8519:b0:43d:300f:fa51 with SMTP id 5b1f17b1804b1-43f3a93ebb3mr115773795e9.9.1744650792986;
+        Mon, 14 Apr 2025 10:13:12 -0700 (PDT)
+Message-ID: <0f4f2ed70829fffb2eb816e34e26be22681705a5.camel@gmail.com>
+Subject: Re: [RFC PATCH v1 13/15] x86/msr: Use the alternatives mechanism to
+ read MSR
+From: Francesco Lavra <francescolavra.fl@gmail.com>
+To: xin@zytor.com
+Cc: acme@kernel.org, adrian.hunter@intel.com, ajay.kaher@broadcom.com, 
+ alexander.shishkin@linux.intel.com, alexey.amakhalov@broadcom.com, 
+ andrew.cooper3@citrix.com, bcm-kernel-feedback-list@broadcom.com, 
+ boris.ostrovsky@oracle.com, bp@alien8.de, bpf@vger.kernel.org, 
+ dave.hansen@linux.intel.com, decui@microsoft.com, haiyangz@microsoft.com, 
+ hpa@zytor.com, irogers@google.com, jgross@suse.com, jolsa@kernel.org, 
+ kan.liang@linux.intel.com, kvm@vger.kernel.org, kys@microsoft.com, 
+ linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+ linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-perf-users@vger.kernel.org, linux-pm@vger.kernel.org,
+ llvm@lists.linux.dev,  luto@kernel.org, mark.rutland@arm.com,
+ mingo@redhat.com, namhyung@kernel.org,  pbonzini@redhat.com,
+ peterz@infradead.org, seanjc@google.com, tglx@linutronix.de, 
+ tony.luck@intel.com, virtualization@lists.linux.dev, vkuznets@redhat.com, 
+ wei.liu@kernel.org, x86@kernel.org, xen-devel@lists.xenproject.org
+Date: Mon, 14 Apr 2025 19:13:09 +0200
+In-Reply-To: <20250331082251.3171276-14-xin@zytor.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-The function xdp_convert_buff_to_frame() may return NULL if it fails
-to correctly convert the XDP buffer into an XDP frame due to memory
-constraints, internal errors, or invalid data. Failing to check for NULL
-may lead to a NULL pointer dereference if the result is used later in
-processing, potentially causing crashes, data corruption, or undefined
-behavior.
+On 2025-03-31 at 8:22, Xin Li (Intel) wrote:
+> diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
+> index e672632b1cc0..6e7a9daa03d4 100644
+> --- a/arch/x86/xen/xen-asm.S
+> +++ b/arch/x86/xen/xen-asm.S
+> @@ -399,3 +399,37 @@ SYM_CODE_END(xen_entry_SYSCALL_compat)
+>  	RET
+>  SYM_FUNC_END(asm_xen_write_msr)
+>  EXPORT_SYMBOL_GPL(asm_xen_write_msr)
+> +
+> +/*
+> + * The prototype of the Xen C code:
+> + * 	struct { u64 val, bool done } xen_do_read_msr(u32 msr)
+> + */
+> +SYM_FUNC_START(asm_xen_read_msr)
+> +	ENDBR
+> +	FRAME_BEGIN
+> +	XEN_SAVE_CALLEE_REGS_FOR_MSR
+> +	mov %ecx, %edi		/* MSR number */
+> +	call xen_do_read_msr
+> +	test %dl, %dl		/* %dl=3D1, i.e., ZF=3D0, meaning
+> successfully done */
+> +	XEN_RESTORE_CALLEE_REGS_FOR_MSR
+> +	jnz 2f
+> +
+> +1:	rdmsr
+> +	_ASM_EXTABLE_FUNC_REWIND(1b, -5, FRAME_OFFSET /
+> (BITS_PER_LONG / 8))
+> +	shl $0x20, %rdx
+> +	or %rdx, %rax
+> +	/*
+> +	 * The top of the stack points directly at the return
+> address;
+> +	 * back up by 5 bytes from the return address.
+> +	 */
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
-
-Cc: stable@vger.kernel.org # v5.9+
-Fixes: 6c5aa6fc4def ("xen networking: add basic XDP support for xen-netfront")
-Signed-off-by: Alexey Nepomnyashih <sdl@nppct.ru>
----
- drivers/net/xen-netfront.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 8425226c09f0..e99561de3cda 100644
---- a/drivers/net/xen-netfront.c
-+++ b/drivers/net/xen-netfront.c
-@@ -987,6 +987,10 @@ static u32 xennet_run_xdp(struct netfront_queue *queue, struct page *pdata,
- 	case XDP_TX:
- 		get_page(pdata);
- 		xdpf = xdp_convert_buff_to_frame(xdp);
-+		if (unlikely(!xdpf)) {
-+			trace_xdp_exception(queue->info->netdev, prog, act);
-+			break;
-+		}
- 		err = xennet_xdp_xmit(queue->info->netdev, 1, &xdpf, 0);
- 		if (unlikely(!err))
- 			xdp_return_frame_rx_napi(xdpf);
--- 
-2.43.0
-
+This works only if this function has been called directly (e.g. via
+`call asm_xen_write_msr`), but doesn't work with alternative call types
+(like indirect calls). Not sure why one might want to use an indirect
+call to invoke asm_xen_write_msr, but this creates a hidden coupling
+between caller and callee.
+I don't have a suggestion on how to get rid of this coupling, other
+than setting ipdelta in _ASM_EXTABLE_FUNC_REWIND() to 0 and adjusting
+the _ASM_EXTABLE_TYPE entries at the call sites to consider the
+instruction that follows the function call (instead of the call
+instruction) as the faulting instruction (which seems pretty ugly, at
+least because what follows the function call could be an instruction
+that might itself fault). But you may want to make this caveat explicit
+in the comment.
 
