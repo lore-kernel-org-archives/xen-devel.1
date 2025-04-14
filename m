@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F356C369B2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 10:19:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949555.1346081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69805C369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 10:36:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949646.1346131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Gty-00066R-4v; Mon, 14 Apr 2025 10:18:54 +0000
+	id 1u4HAQ-0006fk-OO; Mon, 14 Apr 2025 10:35:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949555.1346081; Mon, 14 Apr 2025 10:18:54 +0000
+Received: by outflank-mailman (output) from mailman id 949646.1346131; Mon, 14 Apr 2025 10:35:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Gty-00066I-29; Mon, 14 Apr 2025 10:18:54 +0000
-Received: by outflank-mailman (input) for mailman id 949555;
- Mon, 14 Apr 2025 10:18:52 +0000
+	id 1u4HAQ-0006fd-LG; Mon, 14 Apr 2025 10:35:54 +0000
+Received: by outflank-mailman (input) for mailman id 949646;
+ Mon, 14 Apr 2025 10:35:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KxE1=XA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u4Gtw-0005Nh-OX
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 10:18:52 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ <SRS0=JTEa=XA=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1u4HAP-0006fX-57
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 10:35:53 +0000
+Received: from fhigh-b3-smtp.messagingengine.com
+ (fhigh-b3-smtp.messagingengine.com [202.12.124.154])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dca5438c-1919-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 12:18:51 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cfa7e7f54so25789315e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 03:18:51 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233a2f08sm171340495e9.12.2025.04.14.03.18.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 03:18:50 -0700 (PDT)
+ id 3bb3cde2-191c-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 12:35:51 +0200 (CEST)
+Received: from phl-compute-11.internal (phl-compute-11.phl.internal
+ [10.202.2.51])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 3A543254020A;
+ Mon, 14 Apr 2025 06:35:49 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-11.internal (MEProxy); Mon, 14 Apr 2025 06:35:49 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 14 Apr 2025 06:35:47 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,151 +47,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dca5438c-1919-11f0-9eae-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744625931; x=1745230731; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hY27kwUeC0aHdjJMCw3sLatm4tQzjVnnxCoVdjVXbD0=;
-        b=B6IuDxLqou4Xy83jA7+GhRD9EuQos3td7i2HrQAztXP74wgvwLWPYmz8pXjndN37dQ
-         tZuhYgZF2PtsC8L9aj7z6toOUewfzI/M2LWt9ICBAvjsdGTt6x4OO2LwT+rXX3YEwiSC
-         bURjqhBsTSqr+FsMf5XpHMdd5ZaiXgFurx9wo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744625931; x=1745230731;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hY27kwUeC0aHdjJMCw3sLatm4tQzjVnnxCoVdjVXbD0=;
-        b=UJ2dtenEzsFrftLfydNgjVTgu6ygeKlgTslNP0pUWGsM3dTgPr+O/QP2TjQvnauPbL
-         1tvq9N171WqLL4z8/8BJ/WyUiIOvsOpDEwDr557EuZrjlkU3EBRQYcrGSb+t8Eir0T+c
-         vUs/HQ0QMZzi/P80bq/7iXuHccDfmgaMMUtCQ00YKA62mfOKEGayyZFzOjcQhfAfu3D5
-         f/19exDh9glR4v0FPjAPc6Keg3Xg96fmc4psnxpHETKtseADEEF9oHijzm+MRvHZfHP2
-         e160CnhG0BM5BQK63h1/LzXs7GT9v0ysOsg70n/QjMfVbl7sklDxln9KrUMaIWJeZBG8
-         miKg==
-X-Gm-Message-State: AOJu0YzHdasUu8BYCAqJL8HNbEtU8KlcAVXV1oI5Au1H8hcdmeyMyoHr
-	F1MkmeJCMAa02wO2kBL/mLG098IM7hiaWYR3e6ymOSEZAranVYvms0ZepXYSNET94ZZzx1K8SdP
-	m9FU=
-X-Gm-Gg: ASbGncsXFZSsChUSgmKlRY4oCxMu5uVKD1n3yzOnfY4wPb2EIQO0tNPAWyUiD5L+D0J
-	2Ljz5KOnywYWDJext8hBPT296Py6EsAPHPkaE0+HmC6AWItbE24qRWZZ1UG/Jn/VTv8CUrBqm21
-	0xDKBZ2/OpPcxEH/DW5bk5YQph4AFTOtTu5RSpJr/VykGfWvhs6jRPGSILnuv6re/Z3KG8QxTeb
-	6UF+HF5G5ncL6COiH007jtt/52IPyOs65IBPPfE2Vj9eJpTF5OtrFrke+0cG8HE5SxobA7SY3pV
-	EgMyQSO1mbSYtedwC9SiAZo18Us0xaI9gaM0VVrHTWqrlN1nM4qtfj6OCiMN29YMuKKEFFpiKX4
-	mefKF/BwW1IlI9pzk3YNKai8V
-X-Google-Smtp-Source: AGHT+IHlhWTC657aAMaj6w7SXwH//jsWWtI2psvQ130N/dELSD5E/ipKReX8rEgxNL5sTAFtLI/UVA==
-X-Received: by 2002:a7b:ce90:0:b0:43b:c592:7e16 with SMTP id 5b1f17b1804b1-43f337c2b5bmr112863215e9.3.1744625930811;
-        Mon, 14 Apr 2025 03:18:50 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Denis Mukhin <dmukhin@ford.com>,
+X-Inumbo-ID: 3bb3cde2-191c-11f0-9eae-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1744626949;
+	 x=1744713349; bh=DAX49eePCx3O4CfAqAUMUViHZ27+XcqSMrm4WvzhXs0=; b=
+	BYi3S5gvMrZBTeEnBW9LFXCSMVZQy6Lr3QOfpsRaQGtc5cslmVcGIPMrZD0kV+Om
+	JRFI4iUMogN+8xR0nf8LD9tyGY3P+3k27g4kxX/U/0wuq9xJcBtzBt9dlzzl8ETY
+	Jbe2rd3rnPXwIwL3HiVzCkR2QtLtWYySgk7fwjCYDyN4hGhQ/Zqs2pvnxUlr584c
+	HjX8mz1K4hX3u3lDgABSjncaT+w63RJgvBKl1jlNSDkNXs5wlfD7fimAse40tE8e
+	FvBQHuc1+ptLukMOmsYKZAedsaR5bh6DbkRyrwNwBb/105j/kgI3fICip4z/fXhS
+	b6VjHdEpS7A0b51Sg5Y68g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1744626949; x=1744713349; bh=DAX49eePCx3O4CfAqAUMUViHZ27+XcqSMrm
+	4WvzhXs0=; b=lJ8zC3gMWi4nv+MRfmm4rn/PoNsp4q2j4TuCPQk4+pHKjqFJjk0
+	OKnEaO4IFHCvM9XCBidYWIvHAJCeKt8FIu1KUbSy9bnnrqscxLNSw5Z1H8F2gq29
+	bsOw+l5FO9c6tCvISwhTwVqk/m8mE39a80etIS9tJSU/KYbom4pzOrtS6tNGmvqO
+	Y7de8ZfQVBCRh5ZzK0KqAIuJmJubkPbd/sDzA/MTtcHegrLYfACR7U7zUB/tfGy4
+	AGQY7cOig6++ePA5tTpQgCyA0k7dv4OLXVkhAr09o4krurokbYRfscPZNVOGO/3a
+	wKC99xv9wrZDH+Cd7UDpn9gOdtS3YTT2+bg==
+X-ME-Sender: <xms:BOX8Z8KXtu5OskKmAFA6GjGn3Kl1X_lBkckS0xQP1fiek-gQ-JBM9w>
+    <xme:BOX8Z8IF5RrF-0S_HK8gVGuu-PklzwZFaSCWcGVUj6Se6zpVbBf5nNQ6tHDZYZvhk
+    3ZeOchXpVgNug>
+X-ME-Received: <xmr:BOX8Z8sX6LhUXgJLtOsJhmKhhT-u3LxjLWLEw4BxtpXwRVRnxXQJoPdiaZnq_l-4EJigM-xYURzTrAcQJtn0hOiXA72mhqWL3g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvddtfedvucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
+    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
+    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
+    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
+    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
+    ggftrfgrthhtvghrnhepgfduleetfeevhfefheeiteeliefhjefhleduveetteekveettd
+    dvgeeuteefjedunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
+    rhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+    dpnhgspghrtghpthhtohepkedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoheprghn
+    ughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopeigvghnqd
+    guvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhopegr
+    nhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtohepshhsth
+    grsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepmhhitghhrghlrdho
+    rhiivghlsegrmhgurdgtohhmpdhrtghpthhtoheptggrrhguohgvsegtrghrughovgdrtg
+    homhdprhgtphhtthhopehjrghsohhnrdgrnhgurhihuhhksegrmhgurdgtohhmpdhrtghp
+    thhtohepughpshhmihhthhesrghpvghrthhushhsohhluhhtihhonhhsrdgtohhm
+X-ME-Proxy: <xmx:BOX8Z5bvOX75lk6zqZ88CCQ9D7XCfs8p-dFlZVLizajLv1Q7hx6bMA>
+    <xmx:BOX8ZzaLd_oNiQEqRoyMmQEdCmOJAYlnHJmJkBEeyKh9kMsRkRIwbA>
+    <xmx:BOX8Z1Bmp7YXDsTcGCoVWF15PhLVNutNCOws05xo5jvGLfBzRhg2MA>
+    <xmx:BOX8Z5YBkE_XU4tfHG5bHwCTtMAc6DhPeTIv7SkuTqfysU97EcY6GA>
+    <xmx:BeX8ZxwLDoYPhhKSeUZ0WJwP7ndyELP58FVuxXnhboJ4GUbXM93XklGt>
+Feedback-ID: i1568416f:Fastmail
+Date: Mon, 14 Apr 2025 12:35:44 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2 3/7] Rework rootfs generation to make a cpio archive
-Date: Mon, 14 Apr 2025 11:18:39 +0100
-Message-Id: <20250414101843.2348330-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250414101843.2348330-1-andrew.cooper3@citrix.com>
+	Jason Andryuk <jason.andryuk@amd.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH v2 2/7] Overhaul how Argo is built and packged
+Message-ID: <Z_zlAKOMjbrw_5bS@mail-itl>
 References: <20250414101843.2348330-1-andrew.cooper3@citrix.com>
+ <20250414101843.2348330-3-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="/LQ66Il45QxuqqrP"
+Content-Disposition: inline
+In-Reply-To: <20250414101843.2348330-3-andrew.cooper3@citrix.com>
 
-Rename the script as we're going to use it for ARM64 shortly, and have it take
-a tar or cpio parameter to determine the output format.
 
-Turn it into a proper bash script, and provide the cpio form under the new
-artefact naming scheme.
+--/LQ66Il45QxuqqrP
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 14 Apr 2025 12:35:44 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH v2 2/7] Overhaul how Argo is built and packged
 
-No functional change.
+On Mon, Apr 14, 2025 at 11:18:38AM +0100, Andrew Cooper wrote:
+> --- a/scripts/build-linux.sh
+> +++ b/scripts/build-linux.sh
+> @@ -8,7 +8,7 @@ fi
+>  set -ex -o pipefail
+> =20
+>  WORKDIR=3D"${PWD}"
+> -COPYDIR=3D"${WORKDIR}/binaries/"
+> +COPYDIR=3D"${WORKDIR}/binaries"
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Denis Mukhin <dmukhin@ford.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Is this change intentional? It has worse failure mode if "binaries" dir
+wouldn't exist for some reason...
 
-v2:
- * Use -print0
- * Don't dedup $PATHS.  It's going to change between cpio and tar in
-   subsequent patches.
----
- .gitlab-ci.yml                                |  9 +++++++-
- ...6_64-rootfs-alpine.sh => alpine-rootfs.sh} | 21 +++++++++++++++++--
- 2 files changed, 27 insertions(+), 3 deletions(-)
- rename scripts/{x86_64-rootfs-alpine.sh => alpine-rootfs.sh} (71%)
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 790a6d9f9896..b7d187168df2 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -42,6 +42,13 @@ linux-6.6.86-arm64:
- #
- # x86_64 artifacts
- #
-+alpine-3.18-x86_64-rootfs:
-+  extends: .x86_64-artifacts
-+  script:
-+    - ./scripts/alpine-rootfs.sh cpio
-+  variables:
-+    CONTAINER: alpine:3.18-x86_64-base
-+
- linux-6.6.56-x86_64:
-   extends: .x86_64-artifacts
-   script: ./scripts/build-linux.sh
-@@ -62,7 +69,7 @@ x86_64-kernel-linux-6.6.56:
- x86_64-rootfs-alpine-3.18:
-   extends: .x86_64-artifacts
-   script:
--    - . scripts/x86_64-rootfs-alpine.sh
-+    - ./scripts/alpine-rootfs.sh tar
-   variables:
-     CONTAINER: alpine:3.18-x86_64-base
- 
-diff --git a/scripts/x86_64-rootfs-alpine.sh b/scripts/alpine-rootfs.sh
-similarity index 71%
-rename from scripts/x86_64-rootfs-alpine.sh
-rename to scripts/alpine-rootfs.sh
-index b70b3a54ede5..75e2f8648ce5 100755
---- a/scripts/x86_64-rootfs-alpine.sh
-+++ b/scripts/alpine-rootfs.sh
-@@ -1,4 +1,9 @@
-+#!/bin/bash
-+
-+set -eu
-+
- WORKDIR="${PWD}"
-+COPYDIR="${WORKDIR}/binaries"
- 
- apk update
- 
-@@ -56,5 +61,17 @@ passwd -d "root" root
- 
- # Create rootfs
- cd /
--tar cvzf "${WORKDIR}/binaries/initrd.tar.gz" \
--    bin dev etc home init lib mnt opt root sbin usr var
-+case $1 in
-+    cpio)
-+        PATHS="bin dev etc home init lib mnt opt root sbin usr var"
-+        find $PATHS -print0 | cpio -0 -H newc -o | gzip > "${COPYDIR}/rootfs.cpio.gz"
-+
-+        # Print the contents for the build log
-+        zcat "${COPYDIR}/rootfs.cpio.gz" | cpio -tv
-+        ;;
-+
-+    tar)
-+        PATHS="bin dev etc home init lib mnt opt root sbin usr var"
-+        tar cvzf "${COPYDIR}/initrd.tar.gz" $PATHS
-+        ;;
-+esac
--- 
-2.39.5
+--/LQ66Il45QxuqqrP
+Content-Type: application/pgp-signature; name=signature.asc
 
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmf85QAACgkQ24/THMrX
+1yzCaAf/VCOS8gB09Qij6p0ubfIc5gZZPtu0pGc8NJfIOKGQaQ7JgIZXHHyvJl85
+fTX+0pphIDVKJOe74+EDUgvftThE4DhzmWjZm8Qjj0WpdHeSxoDPy1v4tiE7Q3UF
+aTixYrqnT+rtnSdbdJDagjxdzy1hF/jOXnJkineos6nwKGEhaoJk1XuwSqm+M+aV
+ZbUcXEPAdRaUVEwE+NPX7mNdkMptwLQL6Tm5torlvAcLjNCe06BTo3/cMYRJG0eT
+lxtz5Ybq63GOPfqp1+jU26mq29gIjoAmtDsMnJ6mRdsvWV7+ITTXcZ8n3BacT+up
+bHqQ5Jy/fWzPxI0BcfiN6Qv5tjzBPg==
+=llb9
+-----END PGP SIGNATURE-----
+
+--/LQ66Il45QxuqqrP--
 
