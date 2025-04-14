@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976DAC369BC
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 13:30:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.950215.1346594 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A82C369A2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 13:31:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.950225.1346604 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4JtB-0008Rg-6U; Mon, 14 Apr 2025 13:30:17 +0000
+	id 1u4Jtp-0000zb-Ek; Mon, 14 Apr 2025 13:30:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 950215.1346594; Mon, 14 Apr 2025 13:30:17 +0000
+Received: by outflank-mailman (output) from mailman id 950225.1346604; Mon, 14 Apr 2025 13:30:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4JtB-0008RZ-3W; Mon, 14 Apr 2025 13:30:17 +0000
-Received: by outflank-mailman (input) for mailman id 950215;
- Mon, 14 Apr 2025 13:30:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u4Jtp-0000zQ-CK; Mon, 14 Apr 2025 13:30:57 +0000
+Received: by outflank-mailman (input) for mailman id 950225;
+ Mon, 14 Apr 2025 13:30:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SLdQ=XA=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1u4Jt9-0008RR-Mz
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 13:30:15 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9828928e-1934-11f0-9ffb-bf95429c2676;
- Mon, 14 Apr 2025 15:30:13 +0200 (CEST)
+ id 1u4Jqm-0005dp-20
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 13:27:48 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [2600:3c0a:e001:78e:0:1991:8:25])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 40c743f1-1934-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 15:27:47 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id B78EA614BD;
- Mon, 14 Apr 2025 13:29:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E59F4C4CEE9;
- Mon, 14 Apr 2025 13:30:10 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 3445E43D97;
+ Mon, 14 Apr 2025 13:27:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4C27C4CEE9;
+ Mon, 14 Apr 2025 13:27:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9828928e-1934-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 40c743f1-1934-11f0-9eae-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744637412;
-	bh=MM1HcIrsCsuD7/pRkw4M1fx7Lt6v9Lafl9o4yzNx0YI=;
+	s=k20201202; t=1744637266;
+	bh=l/yHk582AK4bFUjbv7xQMGDY1aE4V/qkqvcLDCRbGaQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Fvj7LxQ38qE0XlL1bfG5zv3oXhfBN2WgnmuHK1zA16vIntFoOYiz5sJvhMxUhdjmK
-	 8lUfMmhvMfc0wbqdTd7kW/GvTaADRU7dUo9pTzTgLFf4Na4kxxMUgVoJ2k7gl2fNyv
-	 JheqPQ92waJAnf4lLGx+mfXpJBmjlk4h/oVZktnEDWMIosiQJzH2y8mep7SF3Gq3A0
-	 SQ7K3CwdHYGiOcYlZ8jICd1kwplPV8k4F7IpjEi7nMjUhOrt7chDId4Sh0iHTgnmmM
-	 +pqmDl5iMK6r5bx3Yjdt3E6O5MKmOUgMzlFO74sahrvZ+ISC8hZCuWNCFUX0+2v81W
-	 h43iRY/k1z8Sg==
+	b=Z2L9lq3upqVI+SAI17zW0a2ntUNGZv0kQhs3tOeVXAaigbfeKB33pFawJWZKXxeg2
+	 v/heFzy8VosVo1JS4t4MDRrCRbmbF6KSdS5kkJ0MCD2kqZoVS1sJmJD2kAO3YmvCDv
+	 HC1MJzq3YuRPTjrZc906aNGS28lpAHZB4epAVTMLlON+giRJ9mFBiC+5vpFznTEPRB
+	 lmNFILTayYMTS2bzM9faSqUWPri8YIpXEmKFR6t06SxEy43i1v06/JXBzdm34K+WOd
+	 WxDI7BtY1r+3xdhytQFdeVvv1JM+E4upHBVQezYqpNN8FCvHGPj6Eg6ut4NDBYknPD
+	 I7rnuijhwO/8w==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -63,16 +64,16 @@ Cc: Jason Andryuk <jason.andryuk@amd.com>,
 	Sasha Levin <sashal@kernel.org>,
 	sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 6.6 06/24] xen: Change xen-acpi-processor dom0 dependency
-Date: Mon, 14 Apr 2025 09:29:39 -0400
-Message-Id: <20250414132957.680250-6-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.13 07/34] xen: Change xen-acpi-processor dom0 dependency
+Date: Mon, 14 Apr 2025 09:27:01 -0400
+Message-Id: <20250414132729.679254-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250414132957.680250-1-sashal@kernel.org>
-References: <20250414132957.680250-1-sashal@kernel.org>
+In-Reply-To: <20250414132729.679254-1-sashal@kernel.org>
+References: <20250414132729.679254-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.6.87
+X-stable-base: Linux 6.13.11
 Content-Transfer-Encoding: 8bit
 
 From: Jason Andryuk <jason.andryuk@amd.com>
@@ -95,10 +96,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index d43153fec18ea..af5c214b22069 100644
+index f7d6f47971fdf..24f485827e039 100644
 --- a/drivers/xen/Kconfig
 +++ b/drivers/xen/Kconfig
-@@ -278,7 +278,7 @@ config XEN_PRIVCMD_IRQFD
+@@ -278,7 +278,7 @@ config XEN_PRIVCMD_EVENTFD
  
  config XEN_ACPI_PROCESSOR
  	tristate "Xen ACPI processor"
