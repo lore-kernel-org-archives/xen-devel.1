@@ -4,39 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A6BC369B2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 19:09:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.950969.1347317 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EFBC369A2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 19:09:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.951228.1347337 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4PAs-00022f-BR; Mon, 14 Apr 2025 19:08:54 +0000
+	id 1u4PBD-0002s2-SB; Mon, 14 Apr 2025 19:09:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 950969.1347317; Mon, 14 Apr 2025 19:08:54 +0000
+Received: by outflank-mailman (output) from mailman id 951228.1347337; Mon, 14 Apr 2025 19:09:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4PAs-00022Y-7t; Mon, 14 Apr 2025 19:08:54 +0000
-Received: by outflank-mailman (input) for mailman id 950969;
- Mon, 14 Apr 2025 17:13:15 +0000
+	id 1u4PBD-0002rs-PC; Mon, 14 Apr 2025 19:09:15 +0000
+Received: by outflank-mailman (input) for mailman id 951228;
+ Mon, 14 Apr 2025 19:09:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rghC=XA=gmail.com=francescolavra.fl@srs-se1.protection.inumbo.net>)
- id 1u4NMw-0006cg-US
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 17:13:15 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ <SRS0=32Qc=XA=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1u4PBC-0002ZC-1O
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 19:09:14 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bfc1808e-1953-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 19:13:14 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43edb40f357so39128505e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 10:13:14 -0700 (PDT)
-Received: from ?IPv6:2001:b07:5d29:f42d:74f6:abb7:53c9:817c?
- ([2001:b07:5d29:f42d:74f6:abb7:53c9:817c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f204c500bsm191180875e9.0.2025.04.14.10.13.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 10:13:12 -0700 (PDT)
+ id f363b820-1963-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 21:09:12 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id ADCD34EE3C14;
+ Mon, 14 Apr 2025 21:09:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,117 +42,241 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bfc1808e-1953-11f0-9eae-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744650793; x=1745255593; darn=lists.xenproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:in-reply-to:date
-         :cc:to:from:subject:message-id:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AhLhCv09lRa1OLV+bmnI0sicXwTDVpYEF9Itb4YCx/Y=;
-        b=O3OHAtCaMkPn20hIvxWUWumklbC1k4Tpb5SGk1WrH3tAB2fVpOefuvROSkx2soZ1Qy
-         q8ETJ1YL+n4mdB1bXC7Ifcaol8rnZJsUl33m4J4w8/s44wGbGs+Hwf+rnPHP4a/GWr5v
-         HLaF2Z66wEqrDRVqIP0rtd4onE6R7ba9qoRXBocrOb88hMNVkI4ihTAwct8/aXM1ybia
-         KgT8vGuTKm5TLZY3U2Z1cH8dx90Up+DZcpEKH7kPQ9IoDUHaSH+McxoxJWKu8PnwFU4E
-         eY9jLDsf+lRMKKBsMhZIAc7o4INVoHwF1A4mYtZhpl6mkJUZCOwdz/IhatmTtGE3OkC7
-         s6yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744650793; x=1745255593;
-        h=mime-version:user-agent:content-transfer-encoding:in-reply-to:date
-         :cc:to:from:subject:message-id:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=AhLhCv09lRa1OLV+bmnI0sicXwTDVpYEF9Itb4YCx/Y=;
-        b=NaYhgxSawpkQmFsfWY7BWCQUMpqNEHgLAaKMoqeFVpy9gt44Fl1jvLyKT315dJZrK5
-         nHLMJKKp5z4w1bsR/EncYnlhrWsD3VlWFeb2HenT62+/BZcNUp1KoIsP0Z+5xBgt5VNj
-         hBfCmBFZENimmmjx5FO+pGTCct6XCjnKbMWqSm3auN+0Exk1O0ww94eY5D8dLura0Xd1
-         Q/bgsV+6+ViEH4b7VlGWbrwE9cPqVmy5E/HOB/2CMf5UHOwIa6IryY5Jk4CAdTac1I8Y
-         +g5R143Xcdo8opmCrrCXrtwhoQBioRR2d2KFoKXQwU+BE4D1cDqPkAtV5D4Gvv1BM/Nv
-         NL6w==
-X-Forwarded-Encrypted: i=1; AJvYcCVoffCMmWJUEJ4TRxF7TUYLOUY7msmlJzIsqq3pY1Ew/c89K45xztJszUD+Bo5yTugz90+91yt8R1c=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwVvUeX/l5LygwkXZM0Lh3cu1VxWJqH2MY+NRMT3r2nNpi1a8Pw
-	DabYe1iGWGlHnyfjjqkkIHe0WBPcgM8PgwHhnL2ONv0WRyYBGRTb
-X-Gm-Gg: ASbGncvFVW/R4up7E+OUxOR3YC4AxTz2fL2mtMc1kkb9ibskw8l8X2Ps8nnW0V6DbgY
-	GFZ0KTTYZEC0BvDy5V2ZEvmn+rl1ColKic/2iP+1e54a/i4ZhT1Bs5aj6YdWsHR33loYKTShNAQ
-	Lh0mOeBfdOwn+aUYm6I21/nUp3IOiWadbYDPwQEWknGPufR3sLzxNgMEjdW3AJm4E5E/4cErpjn
-	Ql9qZjB04zlSiPR4RF5qV+0sSTMueCPzdHK58MVYpeztTszFqZkAnkIhOkigQDI+lfpDrgjuliM
-	AZ2s709naDqhMI21Qtqz2iiuS1Tl4CkVt6PPJ1alUSuvYFYdpSeLWZdJLl/zcIALnDwP0nvwDDW
-	n2S4/HRPc0hXhYXmT3wJJbg==
-X-Google-Smtp-Source: AGHT+IFaPusiZQT0QiFcyLJp0TXK65g3+z16rgMNv9l2dKvCZ0RLPJLCBzoBrYTr6CV/HfnsWx9kLw==
-X-Received: by 2002:a05:600c:8519:b0:43d:300f:fa51 with SMTP id 5b1f17b1804b1-43f3a93ebb3mr115773795e9.9.1744650792986;
-        Mon, 14 Apr 2025 10:13:12 -0700 (PDT)
-Message-ID: <0f4f2ed70829fffb2eb816e34e26be22681705a5.camel@gmail.com>
-Subject: Re: [RFC PATCH v1 13/15] x86/msr: Use the alternatives mechanism to
- read MSR
-From: Francesco Lavra <francescolavra.fl@gmail.com>
-To: xin@zytor.com
-Cc: acme@kernel.org, adrian.hunter@intel.com, ajay.kaher@broadcom.com, 
- alexander.shishkin@linux.intel.com, alexey.amakhalov@broadcom.com, 
- andrew.cooper3@citrix.com, bcm-kernel-feedback-list@broadcom.com, 
- boris.ostrovsky@oracle.com, bp@alien8.de, bpf@vger.kernel.org, 
- dave.hansen@linux.intel.com, decui@microsoft.com, haiyangz@microsoft.com, 
- hpa@zytor.com, irogers@google.com, jgross@suse.com, jolsa@kernel.org, 
- kan.liang@linux.intel.com, kvm@vger.kernel.org, kys@microsoft.com, 
- linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org, 
- linux-ide@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-perf-users@vger.kernel.org, linux-pm@vger.kernel.org,
- llvm@lists.linux.dev,  luto@kernel.org, mark.rutland@arm.com,
- mingo@redhat.com, namhyung@kernel.org,  pbonzini@redhat.com,
- peterz@infradead.org, seanjc@google.com, tglx@linutronix.de, 
- tony.luck@intel.com, virtualization@lists.linux.dev, vkuznets@redhat.com, 
- wei.liu@kernel.org, x86@kernel.org, xen-devel@lists.xenproject.org
-Date: Mon, 14 Apr 2025 19:13:09 +0200
-In-Reply-To: <20250331082251.3171276-14-xin@zytor.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+X-Inumbo-ID: f363b820-1963-11f0-9eae-5ba50f476ded
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1744657751;
+	b=DEEUJizZ1LpqiHDWEfCdkn5b0ma6TCTmdB37RV/7MSwV1pOWwgt0G7RDQzfsx97k4niF
+	 r42KqYPz9/IXVNh5rW0cLRQPI52eu7yzfr2qo6fM5GDVEs1paGx1mWz2zYLmlbhF5CQSv
+	 yul9heuL8pJOrrBqwnDn6VbXtOzypobTATBy0H19EML+UCf8s8CkbVM9EVORdhYZp0UiQ
+	 JyMpEtUcYS71ncHakg6x9/chjQ4OHu1lW6Tmb9PckasfeYrCSj6j389jgCtzu4Qa9PE73
+	 7nnSFkF07ycUjFg7AIXyN4fsUBA3d4UkAanIOK3mY9q/GNNTefNGtpIOtdjigdh1DSSQv
+	 Ehteim3bxcPH8Rx/pnddPV8G3+o3y8MHtXWeRY8vcTU/exNmCI/fDmGqrty1p1o6aZPuJ
+	 3R6f99vwBqXLPC0fVuyq6eTIYklUgF0OG/5+JLPAeyqar1vWh06vvnicq7I5DB/dGtznP
+	 wmGsjgK6J3jKCrFgqrD6Qbf3xraBCu/lbw9dFMmCY5AKwPFZSVLAT8QE2HlLl4nzyCdjh
+	 MbEQx1TKz1aL46hZ1mFWmWCDMKfFVMKtMrR0mG/jWYnFcajs1ceZqeovvuPN4rUw3Rc57
+	 2OCMPTImaoJTYLdQC6s/Pa5FTwYY4+Nh8IkuWtj11Va9iRO1hLJjzgO1SRsKZck=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1744657751;
+	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
+	 References:Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=obLVzBishn44rrIqlR8qQtY8ZY5QviDNYe9TAS8H07I=;
+	b=m0BrZGig+SDdWgV3E92xSsUvdWzWzfxaT6AIuFG9G2N8IdJNpMQ862aisCI3sd5eIeNa
+	 TXIg2gjQG6voaWpspPA17PquO4bj6I/DJaRZx6S/f7kY8fN4vbaYSSw1mJj8D4yDkVq7d
+	 r9ClE9eUOIPj7/08wgd3xRvRO9mb3+0BOguCePo8/qP2016lAzP7z5nGtrU39iiyTEt9R
+	 V4Ud1jyau7zmoMaPgaWFo6mXYo/WCJBspuQXL+y2dQ1c+P/MshtH8+EL2rtVdhHHBanod
+	 Q85k4DT2SU/g1VRwCsHnOeBJZHmvy3QTcsErbzYOcIkcvPEfzVDfOoi4x4SilJ4K1rQhE
+	 phSNsRDBFy2Z/xTrYlZXeKHwelTSmVbx6YUwiJ0LnWbiDcdW32OZoPEFAU9vCYq5S4S1P
+	 nQvGrY1eKmUVPHDfQ78gd2MgYh6zc2L/Gc8f7eIAyUD7fEFIp9qj8KT1HART9+H86aTWM
+	 PBDiVBDGvyr6QSJYX1YSUoDfJP1hqhF3iqVE/8erHtM3kArrAXyJ6DdOrPZ3V1MidMhR1
+	 H6pIhia6di1XszUO/LTUfcHNChLyfZUnbQHWXxASm/bbWRhFYE+6rM/BuNFJB2zVDDoMA
+	 Xi83y4ozjv0AaGeMG56e0nZT00Nn1JHv0KSwlEYrqYaIZEOospFY51vQVUXhIwI=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1744657751; bh=zHqx5XqrXub69fFu0ibfCDExIyovSoUMYjXFUxNl16I=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=cRujBOvsy3cciOgpyK8AlbzlGICNjiwm+O+d+MOrut/XY0DpDg+dNpn9xYndBx0JN
+	 vltcR5EP3NmQ5ENc1M51OFdLVfkUvMSkb8Rupwbpfn/tM582GbUYKUuVlNgbFnRjoj
+	 eW1AJTN6FZD2DtkWNbuUjfo/S8Kz/vSFnuviooG/BR7O/SzbPXkz6M99YJpBaPOKvG
+	 JIcRP8FXJ5SEOAlup/HbuOvCkk27mXpthu5wqdfE2NwKmUEftnYc+kwetvHJYx+/Xt
+	 NqrsKUEc1eRrb6bBqwBfj9wLLtbTfsTmZKX4OuH41pugKGiPHMsOct6Zy6vAaeQrPY
+	 AL1emHux+RAqg==
 MIME-Version: 1.0
+Date: Mon, 14 Apr 2025 21:09:11 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alejandro Vallejo <agarciav@amd.com>, Jason Andryuk
+ <jason.andryuk@amd.com>, Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Michal Orzel
+ <michal.orzel@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ xen-devel@lists.xenproject.org, consulting@bugseng.com
+Subject: Re: [PATCH v3 08/16] x86/hyperlaunch: Add helpers to locate multiboot
+ modules
+In-Reply-To: <3d2aa870-a1cb-4e33-841d-aee7b6b6db83@suse.com>
+References: <20250408160802.49870-1-agarciav@amd.com>
+ <20250408160802.49870-9-agarciav@amd.com>
+ <fe282aa0-fe2d-49b8-a2aa-325c9825304b@suse.com>
+ <D96EI9O4XII2.195QNQNT1T3FG@amd.com>
+ <3d2aa870-a1cb-4e33-841d-aee7b6b6db83@suse.com>
+Message-ID: <a9bc6ee3736774558301dda06fb959a0@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2025-03-31 at 8:22, Xin Li (Intel) wrote:
-> diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
-> index e672632b1cc0..6e7a9daa03d4 100644
-> --- a/arch/x86/xen/xen-asm.S
-> +++ b/arch/x86/xen/xen-asm.S
-> @@ -399,3 +399,37 @@ SYM_CODE_END(xen_entry_SYSCALL_compat)
->  	RET
->  SYM_FUNC_END(asm_xen_write_msr)
->  EXPORT_SYMBOL_GPL(asm_xen_write_msr)
-> +
-> +/*
-> + * The prototype of the Xen C code:
-> + * 	struct { u64 val, bool done } xen_do_read_msr(u32 msr)
-> + */
-> +SYM_FUNC_START(asm_xen_read_msr)
-> +	ENDBR
-> +	FRAME_BEGIN
-> +	XEN_SAVE_CALLEE_REGS_FOR_MSR
-> +	mov %ecx, %edi		/* MSR number */
-> +	call xen_do_read_msr
-> +	test %dl, %dl		/* %dl=3D1, i.e., ZF=3D0, meaning
-> successfully done */
-> +	XEN_RESTORE_CALLEE_REGS_FOR_MSR
-> +	jnz 2f
-> +
-> +1:	rdmsr
-> +	_ASM_EXTABLE_FUNC_REWIND(1b, -5, FRAME_OFFSET /
-> (BITS_PER_LONG / 8))
-> +	shl $0x20, %rdx
-> +	or %rdx, %rax
-> +	/*
-> +	 * The top of the stack points directly at the return
-> address;
-> +	 * back up by 5 bytes from the return address.
-> +	 */
+On 2025-04-14 17:05, Jan Beulich wrote:
+> On 14.04.2025 15:37, Alejandro Vallejo wrote:
+>> On Thu Apr 10, 2025 at 11:42 AM BST, Jan Beulich wrote:
+>>> On 08.04.2025 18:07, Alejandro Vallejo wrote:
+>>>> +/*
+>>>> + * Locate a multiboot module given its node offset in the FDT.
+>>>> + *
+>>>> + * The module location may be given via either FDT property:
+>>>> + *     * reg = <address, size>
+>>>> + *         * Mutates `bi` to append the module.
+>>>> + *     * module-index = <idx>
+>>>> + *         * Leaves `bi` unchanged.
+>>>> + *
+>>>> + * @param fdt           Pointer to the full FDT.
+>>>> + * @param node          Offset for the module node.
+>>>> + * @param address_cells Number of 4-octet cells that make up an 
+>>>> "address".
+>>>> + * @param size_cells    Number of 4-octet cells that make up a 
+>>>> "size".
+>>>> + * @param bi[inout]     Xen's representation of the boot 
+>>>> parameters.
+>>>> + * @return              -EINVAL on malformed nodes, otherwise
+>>>> + *                      index inside `bi->mods`
+>>>> + */
+>>>> +int __init fdt_read_multiboot_module(const void *fdt, int node,
+>>>> +                                     int address_cells, int 
+>>>> size_cells,
+>>>> +                                     struct boot_info *bi)
+>>> 
+>>> Functions without callers and non-static ones without declarations 
+>>> are
+>>> disliked by Misra.
+>> 
+>> Can't do much about it if I want them to stand alone in a single 
+>> patch.
+>> Otherwise the following ones become quite unwieldy to look at. All I 
+>> can
+>> say is that this function becomes static and with a caller on the next
+>> patch.
+> 
+> Which means you need to touch this again anyway. Perhaps we need a 
+> Misra
+> deviation for __maybe_unused functions / data, in which case you could
+> use that here and strip it along with making the function static. 
+> Cc-ing
+> Bugseng folks.
+> 
 
-This works only if this function has been called directly (e.g. via
-`call asm_xen_write_msr`), but doesn't work with alternative call types
-(like indirect calls). Not sure why one might want to use an indirect
-call to invoke asm_xen_write_msr, but this creates a hidden coupling
-between caller and callee.
-I don't have a suggestion on how to get rid of this coupling, other
-than setting ipdelta in _ASM_EXTABLE_FUNC_REWIND() to 0 and adjusting
-the _ASM_EXTABLE_TYPE entries at the call sites to consider the
-instruction that follows the function call (instead of the call
-instruction) as the faulting instruction (which seems pretty ugly, at
-least because what follows the function call could be an instruction
-that might itself fault). But you may want to make this caveat explicit
-in the comment.
+There is already an exception for __maybe_unused on labels (Rule 2.6). 
+In principle it could be easily extended to encompass unused functions 
+(which are verified by another rule), with a suitable rationale.
+
+>>>> +    /* Otherwise location given as a `reg` property. */
+>>>> +    prop = fdt_get_property(fdt, node, "reg", NULL);
+>>>> +
+>>>> +    if ( !prop )
+>>>> +    {
+>>>> +        printk("  No location for multiboot,module\n");
+>>>> +        return -EINVAL;
+>>>> +    }
+>>>> +    if ( fdt_get_property(fdt, node, "module-index", NULL) )
+>>>> +    {
+>>>> +        printk("  Location of multiboot,module defined multiple 
+>>>> times\n");
+>>>> +        return -EINVAL;
+>>>> +    }
+>>>> +
+>>>> +    ret = read_fdt_prop_as_reg(prop, address_cells, size_cells, 
+>>>> &addr, &size);
+>>>> +
+>>>> +    if ( ret < 0 )
+>>>> +    {
+>>>> +        printk("  Failed reading reg for multiboot,module\n");
+>>>> +        return -EINVAL;
+>>>> +    }
+>>>> +
+>>>> +    idx = bi->nr_modules + 1;
+>>> 
+>>> This at least looks like an off-by-one. If the addition of 1 is 
+>>> really
+>>> intended, I think it needs commenting on.
+>> 
+>> Seems to be, yes. The underlying array is a bit bizarre. It's sizes as
+>> MAX_NR_BOOTMODS + 1, with the first one being the DTB itself. I guess
+>> the intent was to take it into account, but bi->nr_modules is
+>> initialised to the number of multiboot modules, so it SHOULD be 
+>> already
+>> taking it into account.
+>> 
+>> Also, the logic for bounds checking seems... off (because of the + 1 I
+>> mentioned before). Or at least confusing, so I've moved to using
+>> ARRAY_SIZE(bi->mods) rather than explicitly comparing against
+>> MAX_NR_BOOTMODS.
+>> 
+>> The array is MAX_NR_BOOTMODS + 1 in length, so it's just more 
+>> cognitive
+>> load than I'm comfortable with.
+> 
+> If I'm not mistaken the +1 is inherited from the modules array we had 
+> in
+> the past, where we wanted 1 extra slot for Xen itself. Hence before you
+> move to using ARRAY_SIZE() everywhere it needs to really be clear what
+> the +1 here is used for.
+> 
+>>>> --- a/xen/include/xen/libfdt/libfdt-xen.h
+>>>> +++ b/xen/include/xen/libfdt/libfdt-xen.h
+>>>> @@ -13,6 +13,63 @@kkk
+>>>> 
+>>>>  #include <xen/libfdt/libfdt.h>
+>>>> 
+>>>> +static inline int __init fdt_cell_as_u32(const fdt32_t *cell)
+>>> 
+>>> Why plain int here, but ...
+>>> 
+>>>> +{
+>>>> +    return fdt32_to_cpu(*cell);
+>>>> +}
+>>>> +
+>>>> +static inline uint64_t  __init fdt_cell_as_u64(const fdt32_t *cell)
+>>> 
+>>> ... a fixed-width and unsigned type here? Question is whether the 
+>>> former
+>>> helper is really warranted.
+>>> 
+>>> Also nit: Stray double blank.
+>>> 
+>>>> +{
+>>>> +    return ((uint64_t)fdt32_to_cpu(cell[0]) << 32) | 
+>>>> fdt32_to_cpu(cell[1]);
+>>> 
+>>> That is - uniformly big endian?
+>> 
+>> These helpers are disappearing, so it doesn't matter. This is 
+>> basically
+>> an open coded:
+>> 
+>>   fdt64_to_cpu(*(const fdt64_t *)fdt32)
+>> 
+>> And, yes. DTBs are standardised as having big-endian properties, for
+>> better or worse :/
+>> 
+>>> 
+>>>> +}
+>>> 
+>>> Marking such relatively generic inline functions __init is also 
+>>> somewhat
+>>> risky.
+>> 
+>> They were originally in domain-builder/fdt.c and moved here as a 
+>> result
+>> of a request to have them on libfdt. libfdt proved to be somewhat
+>> annoying because it would be hard to distinguish accessors for the
+>> flattened and the unflattened tree.
+>> 
+>> I'd personally have them in domain-builder instead, where they are 
+>> used.
+>> Should they be needed somewhere else, we can always fator them out
+>> somewhere else.
+>> 
+>> Thoughts?
+> 
+> As long as they're needed only by domain-builder, it's probably fine to 
+> have
+> them just there.
+> 
+> Jan
+
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
