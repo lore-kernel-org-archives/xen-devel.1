@@ -4,49 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8923C369B4
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 07:54:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949306.1345891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA778C369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 08:12:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949343.1345901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Edl-0002Zl-8b; Mon, 14 Apr 2025 07:54:01 +0000
+	id 1u4Evh-0001Zq-0M; Mon, 14 Apr 2025 08:12:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949306.1345891; Mon, 14 Apr 2025 07:54:01 +0000
+Received: by outflank-mailman (output) from mailman id 949343.1345901; Mon, 14 Apr 2025 08:12:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Edl-0002Ze-5n; Mon, 14 Apr 2025 07:54:01 +0000
-Received: by outflank-mailman (input) for mailman id 949306;
- Mon, 14 Apr 2025 07:53:59 +0000
+	id 1u4Evg-0001Zj-Tm; Mon, 14 Apr 2025 08:12:32 +0000
+Received: by outflank-mailman (input) for mailman id 949343;
+ Mon, 14 Apr 2025 08:12:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KQal=XA=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u4ES3-0008Gw-3V
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 07:41:55 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060e.outbound.protection.outlook.com
- [2a01:111:f403:2415::60e])
+ <SRS0=XA/R=XA=epam.com=grygorii_strashko@srs-se1.protection.inumbo.net>)
+ id 1u4Evf-0001Za-N7
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 08:12:31 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20629.outbound.protection.outlook.com
+ [2a01:111:f403:2612::629])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ec23c13b-1903-11f0-9ffb-bf95429c2676;
- Mon, 14 Apr 2025 09:41:49 +0200 (CEST)
-Received: from CH2PR12CA0019.namprd12.prod.outlook.com (2603:10b6:610:57::29)
- by SA3PR12MB9107.namprd12.prod.outlook.com (2603:10b6:806:381::7)
+ id 352da751-1908-11f0-9ffb-bf95429c2676;
+ Mon, 14 Apr 2025 10:12:29 +0200 (CEST)
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com (2603:10a6:20b:5e4::22)
+ by DU0PR03MB8343.eurprd03.prod.outlook.com (2603:10a6:10:3a4::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Mon, 14 Apr
- 2025 07:41:46 +0000
-Received: from CH1PEPF0000AD75.namprd04.prod.outlook.com
- (2603:10b6:610:57:cafe::d6) by CH2PR12CA0019.outlook.office365.com
- (2603:10b6:610:57::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.34 via Frontend Transport; Mon,
- 14 Apr 2025 07:41:46 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH1PEPF0000AD75.mail.protection.outlook.com (10.167.244.54) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Mon, 14 Apr 2025 07:41:45 +0000
-Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
- SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 14 Apr 2025 02:41:44 -0500
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.31; Mon, 14 Apr
+ 2025 08:12:26 +0000
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593]) by AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593%4]) with mapi id 15.20.8632.030; Mon, 14 Apr 2025
+ 08:12:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,191 +49,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec23c13b-1903-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 352da751-1908-11f0-9ffb-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LV4oHoIy4XA5W/IVSY2nzHMNSDtRTRdPHytgDiv2MdvCJDSG/VRyul04877HHx941tO81UU1PvoirNGjCL4OFIE/Vfnc0MpeJJO1D2h/qRoUlB58JJcNmTpXqqPWpxeBc8CtpzYmuohJYiKgupkcTDPWmLb6eOaXaow4zb3BpLpKQ9TEpWrnn12ReDZweINj7y1C0rltseatBjMXaz80HcYJijkE+5qDSSOGnWHwYItvGZO3v/p0gKCh88WcfcNIceuTt4/1W1XRNpQg7ZpyWni0hmK1nYwLhL5SjYf8SF3ibOiytSMOgeUj/O5OawIrcd+TSkMoXTAxnRzD8gifiQ==
+ b=bm1Nz2B/kc1OtIud9IGp//wJoeXD8W4L6IAC6Upf0fLXInfe0JFA0j1OmUiXqCt2vbQUoH9DZ0HmFvt1O9xTzLmMFgwKMEIhPsv4Ou1TGL1MjblBATbVw7BMaqTxfwQd03yrlCJhsu2RpP4XThJhJ/POgasuDx5c7kMNUgj6ueF8R93orcSkQUorJbZ/RtXZGHzIImLFueaQ1LOUZi4g/09Z0bU4naFv91YMoQxPGaO/ECflPqywsDlZgKBtchrEjWL7oWFX1w+GWx01zULOTiQWWe5XjOCeL9CSRmIfoM1KedQGWYf3/66kyRhU3ZxkBe+TP5TVpFdiaowWgKzHRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=c6ebRFKv3vX7UzG38NrYOBnsfCX/PInAR8PHDAJ1f2o=;
- b=jZ9FFT5o9t+52v2Xw+xgb39Go0yLLn/nAWEDaNWF9p4PR7iBYAmaxsXht4do8ry74g4oZ0nKFsyG+T/zgUyoCMhgHbWCk515V05pe/jyGktgSw4iaFdKi5tnJc3NM/KLlOVoG+vOO+n8BAmV7YHYpuiMP9Kz+fwsyKMpRIJFTKVzW8SpyHI/68fel/z+WqAdX2YTWaZmbPD2CEAVSifB2PXZguqXB8ijGXdO2k7b3aQ/+cQWoC/kpmYAGhUyix6fNeCzuqj8GnpV/b9QWUxb2xj4s3sYqmgFcYmMhXY+vdHjta01s1pHwbCfkEFNNElzVZBpp1Tm4durXQUxuZdaZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=jjqsOGtN0AX9PhuCyH7NEGIpTjCWtuA4RAzjPTtEQZE=;
+ b=wdq9+1/UfFjAXLZi2WFGaLGsT3B6I5BTMQ/vWNGZLg9jqLc1m3MjZ43EJjHp3tPBxj16FT4kWHgQyDH1Bs5F5obyzyW6iXs7IiNreAxKxKc0NqOlPD5xFr4P+BAzz7M//MWKFQjfgEUSBA629WOkKDhQ78uyXtQtOzmqegC8gvNTphvKfg362PD8KvjGV3ACqIb1uzz/gVkGN+aG84uq4XxptyHqLlyxOTNatMBBff19P72J8pnbyzf34FPFHm5qP7OC+7tO76IK43r5YmtejzwVDloVwF+o6EqqySy+enTIpmwxPIQLC7dfKQ0ZJw7zwT8KhOmQ4Tojo1PbB6FXkA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=c6ebRFKv3vX7UzG38NrYOBnsfCX/PInAR8PHDAJ1f2o=;
- b=gCxzIAeTHBAvEiL+g5fp8stE6ELCo82Bwzk8TVqZ5u3ZKy+Cly00pBT+DrH4ksW3bqE1d7MGowBPTnAmDGzmhYXe2WmSrXD0388FMRuruGCK+otMRFR+kMCV/JakHaORNxDcZo0eGrKirjw/tWii4I/aNXlYsXgpKqRg1MsXC7U=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v4 12/15] tools/xenpm: Print CPPC parameters for amd-cppc driver
-Date: Mon, 14 Apr 2025 15:40:53 +0800
-Message-ID: <20250414074056.3696888-13-Penny.Zheng@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250414074056.3696888-1-Penny.Zheng@amd.com>
-References: <20250414074056.3696888-1-Penny.Zheng@amd.com>
+ bh=jjqsOGtN0AX9PhuCyH7NEGIpTjCWtuA4RAzjPTtEQZE=;
+ b=lYKb0P9M4nu+/bNNubfJKFRxy04wKVDRzcK62FMiNTwFMYS+8Qz8nf1EyJKjeCnfXPRa6lV8IQu3kyW37HMP7UEn4/10rDw0AN6fRRcjXD1xfFTznrP0vlH9pDBXDfr4pwHlB4avSyN1bLgE2CPZWBPnnKDPVb8VO9LA4sRuZPc5yP+oRqrlRnr+cqBuB1MNep1wZKDdf6vgLNYgtq7ivLIdaOoWamxY23z/q4Eaq8vZZw9Pb1bggErIB36Dk8DTmhLQA60lU67zC1aU3L1JkRhyzkjgAcCub6mKsOp0BKv/kTwc3gk9M4L3M64pODKvJLeBAGBVaQuR4GHZJQutiA==
+From: Grygorii Strashko <grygorii_strashko@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>
+CC: Grygorii Strashko <grygorii_strashko@epam.com>
+Subject: [ImageBuilder] uboot-script-gen: fix arm64 xen u-boot image
+ generation
+Thread-Topic: [ImageBuilder] uboot-script-gen: fix arm64 xen u-boot image
+ generation
+Thread-Index: AQHbrRT0Xiz3Rqv37EutLWpfpuPiGw==
+Date: Mon, 14 Apr 2025 08:12:25 +0000
+Message-ID: <20250414081223.1763630-1-grygorii_strashko@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS2PR03MB8907:EE_|DU0PR03MB8343:EE_
+x-ms-office365-filtering-correlation-id: f8bb22bd-13bf-42e1-cbee-08dd7b2c176c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?VFz2jeVEpFdczghH1BJsMdR2pXIHhvbrAVfWzSlIcDtkqdxYhcIqSf+ZxN?=
+ =?iso-8859-1?Q?pwfUuiKOO6H+Agf8/vrnIjfVDPtzURWLQENidHzTdr232AjXCOlYAaFMmt?=
+ =?iso-8859-1?Q?pYYpW/da8gVLr79lo75IhYg+UATPQbfReatvUVKIxM42H6dmsoFGK/nwsH?=
+ =?iso-8859-1?Q?XOC5r8Na30fzHIib9rvB30ELUiEteTJmJQ3t36hPeUbWIY0Y2dDqGcSAxf?=
+ =?iso-8859-1?Q?K4B6SHfZVsZEttGNd/As75ojRwcZsif2TanaI3cyuLkbuyM3Yq0tJ4cX8u?=
+ =?iso-8859-1?Q?8POftkS1cEQ3RDMlrpnE3C2ws3rDNOvf9x3dN8YoQl1LqijqRE5BVfsSmb?=
+ =?iso-8859-1?Q?NX/BibeB5PTwtfE/YTYP6o69ttBHoQs+l50KSBSTxJ7Imy4yHvkHDa6UqV?=
+ =?iso-8859-1?Q?w7Q6gXQWrnbEljEDcqoVW2sd1ysSEfS8yLOsugQLdG06xBKXpOQZAEGQRG?=
+ =?iso-8859-1?Q?fu/KI52c2RAJldItIpPo2SixeU+ecZb/y0frACPoa32/Q9JRI88M9Rd1Ry?=
+ =?iso-8859-1?Q?xjWqLEe6dcjcvl95sPijC4xYJCKpZE+JmDfur/9usC9PNzmQVCX9P/7rHY?=
+ =?iso-8859-1?Q?IRX+iragGDbDX6Zod9X/DX8VGE+9IBjWSyobjp+YdDhiw+A1MwoALHuKYy?=
+ =?iso-8859-1?Q?fP4MRiYZI1K1/QPGAibJ3c2Fp5jfYS+U9mZCi638msCG8JHABr0kJhogpT?=
+ =?iso-8859-1?Q?yvGSiYfU00PsIbpuAPdBCfg5419yqUSHKatpdN81vKcURiPT8+ClBtIOW/?=
+ =?iso-8859-1?Q?DkGc1ZEy40+Fc0sjGnKu0+1MIkFxpy7oCQPBR6CC+VFQjTLy5c8YCDKcQk?=
+ =?iso-8859-1?Q?Yn01wvxejfwnONmy5kau7c0GE8j/adZeBEppQGsXueAXoN2ZGapaQaKtao?=
+ =?iso-8859-1?Q?G9Pdw9Mzc+6+KUaegETs7++AsVLl0GvRH26mYDjUpMg9evEGtjD3kn7/kc?=
+ =?iso-8859-1?Q?slC5rYpDi3YvKGOvAx/4lJxXoVFPY7nOusD3d/ibQTBcbDXSWAOGs+UcYP?=
+ =?iso-8859-1?Q?keyLoYroZVyFiQpwFhR1cQrJaBlXhQvHlt6gIDsczYzLsULzJJDxgchaVS?=
+ =?iso-8859-1?Q?ERl8oYEFKEICEMztuy2LLbDaAnL8G2lfnJscP1Hkh/aQ2MV8WccyQNsTx8?=
+ =?iso-8859-1?Q?xkhGAOyduJFPrD9CiwGK4gke0S/FhGHGUHS7W8lIXkESATmciRatfgfcdt?=
+ =?iso-8859-1?Q?SbqSFTKwPh9uBNS2tx7eN9fySURtJrYCfA5r58/gSC270MzNqyhi2V6Ec4?=
+ =?iso-8859-1?Q?tMMbY79sjk8+/je6PIfHKOCvGlStJbtofKDIDkka/ngqUU6QkxUrDlLPe/?=
+ =?iso-8859-1?Q?a7iZvHtjTO6HT8F+lZMVKB4DlN7kYaBPPSN0MUjg0ohmMew2psv9y4UHxV?=
+ =?iso-8859-1?Q?M3Fd/tSAdfC/cQB0JzsDB5e0zmnAuuImK3Wix3kcvy0wcTqd9akoVYFYoe?=
+ =?iso-8859-1?Q?6LteKe3wQNkx05sGe8fRJvWHmArjk9IDBIrtkqWuFjNEtBctfhbgCxhyyt?=
+ =?iso-8859-1?Q?uJRonrvzdX+KepOvEI0HfgKn4jf8KkQxOwwcy210enNw=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB8907.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?14b5dxHAxzyqCZDOVxwzb7ztsScNs2TydYe5F5/52M+YsCZHoScA5gbREE?=
+ =?iso-8859-1?Q?LwKXD8Jj3M2uGFwLuFfIxE2oC8uH9Yk4A/oM7a4xFpLrVfOQk25VI0IRXh?=
+ =?iso-8859-1?Q?pEkj56xx2Yesh7qlfqbY6wJJrDoC2Ckyo/hdyKzm2ZgpHG243f1V5pggBv?=
+ =?iso-8859-1?Q?o4jEZl8cQT1UFywYuyLwj9z0ZlwFYdOVRpcXtHcBQT1geriZdGbpylKMNl?=
+ =?iso-8859-1?Q?N+3M9mMYe7k3HREY5gTcxOUCnkfEOVE2Hg4EMD+sbuX0zDBtGjHdz2l9m+?=
+ =?iso-8859-1?Q?hFGUB18DelKsVR70+IaKyF69aSFbgLopZzfdx5Z/yXnXvwBVL433u3OTdE?=
+ =?iso-8859-1?Q?HWTWHvl9h0p/mW3yDOFL68O9vB7gp1Qp33oJjLWqDb47hwdkE7uJdLx3Ny?=
+ =?iso-8859-1?Q?RqkwnR2xRcyWAyAsc+dfkBN/sIuZuybVsf3Pro1X9yHFthHK2fYbvtvX/R?=
+ =?iso-8859-1?Q?XpswtOhQApb35FIULlsz4AG5kCv+Ee5qpW7o9rek3HFUBsbYRUGmeIr2yO?=
+ =?iso-8859-1?Q?GEFBdWT616IzkkX6t3ZMaXcMHNfBoi+MU8HQSoinnxWdMzoMjTNof9GkQX?=
+ =?iso-8859-1?Q?c1kgKVHc1BbFTJ0dAjI6c4fJyaBVteC54TcTVRx8ipdPh9BwMUsoAbogef?=
+ =?iso-8859-1?Q?eVs+GjHjDk8jEos521vtsj0xykva1xfCZ5PER6e5ITZoCbSOflogyJsIoe?=
+ =?iso-8859-1?Q?DECUWV4RH/ToFzlkAQ5HKUV6kPLV7EZKiuCx7BSN1vkKyYxBD/mNPevS/V?=
+ =?iso-8859-1?Q?LAcp3prG0J1lZxeYK9Agz9XyHPB3ydQ7dfjrfBu9fz9uh1nkjDxPewYmvZ?=
+ =?iso-8859-1?Q?P+DCY2/WwW7RZPiVypEhzvJTiPo7ou5P4GoZ9/Kg/D9ofxXyQ1qzFwJN/3?=
+ =?iso-8859-1?Q?6f9erNJrA2HzdX7h9Srt7gHUr7IlJUK+uClRMjxoQYKmMw2sN1qp6eW8h1?=
+ =?iso-8859-1?Q?wz5U078/ZEguA6ySeV539is5eVvdLHANgMzXQIaYNiJaqenyJpKzp384DH?=
+ =?iso-8859-1?Q?21uFZ+ZEDi5ga0LDU1/ru/zrsdKYe7Vzew8OVimogiGPETAee0MfD/HQC2?=
+ =?iso-8859-1?Q?VPg7+6rVNIZ9OS0hEvs/hMG81vMKRZthf9xGYoZKxuhixP9i7U2/xyPV1L?=
+ =?iso-8859-1?Q?QND9mvKO/r9xBHjAN4LEMNQCzO7KlB+kK9YUIvuI+Ifdxq0u8CGcikyXUI?=
+ =?iso-8859-1?Q?4BeiBrK8BVLAbfUPw2mXvMJcPMVHwSE9mpsXVUulEHy3JdI99Ih1BA6BuV?=
+ =?iso-8859-1?Q?+RIsk1ID3Cj7ORxTFjaIZam9x+gK/FFxy99cvkiOf02W8tUti0jRzjx8tq?=
+ =?iso-8859-1?Q?mJ6RQCixPduwUOV1GFJ1YkbP/CKuqqo6z7E5RY9WfF1tov2c6RjwTmo/0c?=
+ =?iso-8859-1?Q?odrbSSXI/rtHb9wfZ1QLir6M1Ny0RFBZl4tsyJvm+Lryxq8wbadHLv3N9U?=
+ =?iso-8859-1?Q?pf0FP2/gWQblrJWxciseaIhkJycBi7TNiTunbuByYvzVVljkBqZGONz22X?=
+ =?iso-8859-1?Q?KRxWsJ2IKeJsFu/Qv5s5HI8n3dmUi7VvxnZGIifMys1ixhlYYX8YCXilFZ?=
+ =?iso-8859-1?Q?SBvRYoT55ljd2kX6WngHZ4lvJqf2aP5Mgum1Hg25Cd7FEKNCtrVaxA6/2j?=
+ =?iso-8859-1?Q?7AQVP7p+CRMlTW5BAfuLU7+Q3dVAJd1saoiOIIFkyaqe+shLb9wcPBRw?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD75:EE_|SA3PR12MB9107:EE_
-X-MS-Office365-Filtering-Correlation-Id: e6007686-9095-4eee-f880-08dd7b27ced4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?5HOpSKDEB7qgtsV5DQTYhVatmpPKT4s4Ni0Em7KSV6OpFJwEGfWkykZTT+CR?=
- =?us-ascii?Q?MnjBdFaGnbRyQuLaJ9beoiuhF3V11HePOEduSrrLtAHHlhXRlDQF5oYyVUir?=
- =?us-ascii?Q?wqWzbSEQYjiU1ed3Mz1qrA2JbgVg7ZcaUjIzTWyFVnFsvW/t/3vTSo2GK/L6?=
- =?us-ascii?Q?WQaGZOgeUP3eGm26oz+Ke1a9whwWKmWURpwm8Lvk+Wtg75DgBmEBkbpHQX7Z?=
- =?us-ascii?Q?qg7bJTZ1dcbBHxMrbphMk6ZUh1Tc9Eatfbay34MxFsWLuFKEnCRNHTtQCnJc?=
- =?us-ascii?Q?zMu4jcgx5qWjNSmU8sU3URU4S3IDmQh30m8nE57HzywEBI3k4FZqi2+StPBY?=
- =?us-ascii?Q?oQ1BN9/Z01DAj3JByYT9D6gL3Fu4K8ISuL5cuexxn87hXOy4j0XL8DeRHYb+?=
- =?us-ascii?Q?fxBSnIUdYWc5eEv+rN8MC5ZQ+z5/9Lgseecwy9AcopwHxAQibZVkP/+7AoFA?=
- =?us-ascii?Q?TRK2qKmSq+CT1s+I/MB+jsteFVvH4rOs92VO336Zo8xDI10SsgOo4POmhjYL?=
- =?us-ascii?Q?jdoJQHN5C1s8NJEF63ro2cG64MYUl24Xp5l24xLoBas7DZDara+ohZ22kVd4?=
- =?us-ascii?Q?L3kaBdkGxGc1pOi5Rj4ziNJQafb7HlFCV8DXI3Amsgyuq11C71e6p3BiwJBM?=
- =?us-ascii?Q?fTL/NGOfN6OaMGtStfrf0BfAGUyOk2FR58RGuLqRsisERvJqWrAIx9bUyVRi?=
- =?us-ascii?Q?/z38GTeeXhEme3CVeLrgx50Cs1ZiG+JK/l68E+F8VApuVOT8u4LVlRijZpM1?=
- =?us-ascii?Q?0hF/9pc2RqRYYg+/bsudzom/XV4I27Gl1mUmxncDqldkVvWRhIZQvYwTUzSr?=
- =?us-ascii?Q?booUWKjRn0o1a4GM/Ab6FdFMomH+5iQTOIN/UGqcuiGD7C1ZNy1HctZ8FjQn?=
- =?us-ascii?Q?Nz5DTsiBv6zSqxFZj+iR5bh4Onqwsrx+bI+Sn6t2//5YOD3m0GIq3R8Zpq9M?=
- =?us-ascii?Q?IH2esvkugzC8252fljbgkOWKM4zPoA558UsHnxYcILULF8TYBsJM+5ZxnPaU?=
- =?us-ascii?Q?dp3m/OIGM2o0tPR76u0vDE6jo4JswqRIH+ABakjuPbvD3e9YTJDMcyIdWrUc?=
- =?us-ascii?Q?/NeM7vw2ZP5cF+Ig0GDJ6+CmGG4aHfqa9bOFuhpzCzzD1ySjthEzDeg9SfUb?=
- =?us-ascii?Q?8e22Jqs/q2ZQRNx/8BKIkxzziIl1OHmI4KFGzo/a2ymrjjiFy50JAC0GXGWR?=
- =?us-ascii?Q?+0vcmWkqL8tkUlkLjDvOZWtexdj5poeV6Ue+DO0EJpo9lQx8Z+SBKik+bfRz?=
- =?us-ascii?Q?6QaZUD2bCDM+aQYeUZv1fJHgdy3A8qbb82Z10SaXauEdq2IWvMXTizfDFMBu?=
- =?us-ascii?Q?vQRBhx2DTclVQaSLGoprVDVZnqK0W6DIJIfYFL3B9UzmCjl+zeUEYbC6WICu?=
- =?us-ascii?Q?raS+KcR+zsVFCkrQjE2/x2OKq5VR1wQ3fbmrPKUIlWpH3m67Y5i2RFkHHlok?=
- =?us-ascii?Q?fpOtZpATsF7gHDohisShVCjiYM/LDZ97SQxbV15a2DfYAK8WRP6I7MDbuNc9?=
- =?us-ascii?Q?gnd0ZNZHFV2E+J7dCuPmKJbkcfQ9qdFwHce0?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 07:41:45.9858
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB8907.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8bb22bd-13bf-42e1-cbee-08dd7b2c176c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2025 08:12:25.8095
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6007686-9095-4eee-f880-08dd7b27ced4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD75.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9107
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ECYDlsvUOTmDrHQJLnfdJFBMTkKAvWBOKZOMFfOr27GMrjgbO9L9gsjzvvAkO+fscE57oPqVBtyeavPUgTwUgb+H0H5GvVQBhovStJgpGaA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB8343
 
-HWP, amd-cppc, amd-cppc-epp are all the implementation
-of ACPI CPPC (Collaborative Processor Performace Control),
-so we introduce cppc_mode flag to print CPPC-related para.
+From: Grygorii Strashko <grygorii_strashko@epam.com>
 
-And HWP and amd-cppc-epp are both governor-less driver,
-so we introduce hw_auto flag to bypass governor-related print.
+The current code in generate_uboot_images() does not detect arm64 properly
+and always generates ARM u-boot image. This causes Xen boot issues.
 
-Validation check on `xenpm get-cpufreq-para` shall also consider
-CPPC scenario.
+Fix it by searching for "ARM64" for AArch64 binary detection.
 
-Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+- mkimage -l xen.ub
+Before:
+Image Type:   ARM Linux Kernel Image (uncompressed)
+
+After:
+Image Type:   AArch64 Linux Kernel Image (uncompressed)
+
+Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
 ---
-v3 -> v4:
-- Include validation check fix here
----
- tools/misc/xenpm.c        | 18 ++++++++++++++----
- xen/drivers/acpi/pmstat.c |  7 ++++---
- 2 files changed, 18 insertions(+), 7 deletions(-)
+ scripts/uboot-script-gen | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index db658ebadd..29fffebebd 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -790,9 +790,18 @@ static unsigned int calculate_activity_window(const xc_cppc_para_t *cppc,
- /* print out parameters about cpu frequency */
- static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
+diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
+index a9f698f00fd1..c4d26caf5e0e 100755
+--- a/scripts/uboot-script-gen
++++ b/scripts/uboot-script-gen
+@@ -815,13 +815,13 @@ function linux_config()
+=20
+ generate_uboot_images()
  {
--    bool hwp = strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) == 0;
-+    bool cppc_mode = false, hw_auto = false;
-     int i;
- 
-+    if ( !strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_EPP_DRIVER_NAME) )
-+        cppc_mode = true;
-+
-+    if ( !strcmp(p_cpufreq->scaling_driver, XEN_HWP_DRIVER_NAME) ||
-+         !strcmp(p_cpufreq->scaling_driver, XEN_AMD_CPPC_EPP_DRIVER_NAME) )
-+        hw_auto = true;
-+
-     printf("cpu id               : %d\n", cpuid);
- 
-     printf("affected_cpus        :");
-@@ -800,7 +809,7 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
-         printf(" %d", p_cpufreq->affected_cpus[i]);
-     printf("\n");
- 
--    if ( hwp )
-+    if ( hw_auto )
-         printf("cpuinfo frequency    : base [%"PRIu32"] max [%"PRIu32"]\n",
-                p_cpufreq->cpuinfo_min_freq,
-                p_cpufreq->cpuinfo_max_freq);
-@@ -812,7 +821,7 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
- 
-     printf("scaling_driver       : %s\n", p_cpufreq->scaling_driver);
- 
--    if ( hwp )
-+    if ( cppc_mode )
-     {
-         const xc_cppc_para_t *cppc = &p_cpufreq->u.cppc_para;
- 
-@@ -838,7 +847,8 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
-                cppc->desired,
-                cppc->desired ? "" : " hw autonomous");
-     }
+-    local arch=3D$(file -L $XEN | grep "ARM")
++    local arch=3D$(file -L $XEN | grep -o "ARM64")
+=20
+     if test "$arch"
+     then
+-        arch=3Darm
 -    else
-+
-+    if ( !hw_auto )
-     {
-         if ( p_cpufreq->gov_num )
-             printf("scaling_avail_gov    : %s\n",
-diff --git a/xen/drivers/acpi/pmstat.c b/xen/drivers/acpi/pmstat.c
-index 767594908c..0e90ffcc19 100644
---- a/xen/drivers/acpi/pmstat.c
-+++ b/xen/drivers/acpi/pmstat.c
-@@ -201,7 +201,7 @@ static int get_cpufreq_para(struct xen_sysctl_pm_op *op)
-     pmpt = processor_pminfo[op->cpuid];
-     policy = per_cpu(cpufreq_cpu_policy, op->cpuid);
- 
--    if ( !pmpt || !pmpt->perf.states ||
-+    if ( !pmpt || ((pmpt->init & XEN_PX_INIT) && !pmpt->perf.states) ||
-          !policy || !policy->governor )
-         return -EINVAL;
- 
-@@ -461,9 +461,10 @@ int do_pm_op(struct xen_sysctl_pm_op *op)
-     switch ( op->cmd & PM_PARA_CATEGORY_MASK )
-     {
-     case CPUFREQ_PARA:
--        if ( !(xen_processor_pmbits & XEN_PROCESSOR_PM_PX) )
-+        if ( !(xen_processor_pmbits & (XEN_PROCESSOR_PM_PX |
-+                                       XEN_PROCESSOR_PM_CPPC)) )
-             return -ENODEV;
--        if ( !pmpt || !(pmpt->init & XEN_PX_INIT) )
-+        if ( !pmpt || !(pmpt->init & (XEN_PX_INIT | XEN_CPPC_INIT)) )
-             return -EINVAL;
-         break;
-     }
--- 
+         arch=3Darm64
++    else
++        arch=3Darm
+     fi
+=20
+     mkimage -A $arch -T kernel -C none -a $memaddr -e $memaddr -d $XEN "$X=
+EN".ub
+--=20
 2.34.1
-
 
