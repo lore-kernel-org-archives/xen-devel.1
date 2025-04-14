@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2B4C369B2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 13:27:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.950179.1346565 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB3BC369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 13:28:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.950191.1346574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Jq4-0005qG-9N; Mon, 14 Apr 2025 13:27:04 +0000
+	id 1u4JrK-0006PV-IJ; Mon, 14 Apr 2025 13:28:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 950179.1346565; Mon, 14 Apr 2025 13:27:04 +0000
+Received: by outflank-mailman (output) from mailman id 950191.1346574; Mon, 14 Apr 2025 13:28:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Jq4-0005q9-6E; Mon, 14 Apr 2025 13:27:04 +0000
-Received: by outflank-mailman (input) for mailman id 950179;
- Mon, 14 Apr 2025 13:27:03 +0000
+	id 1u4JrK-0006PO-FE; Mon, 14 Apr 2025 13:28:22 +0000
+Received: by outflank-mailman (input) for mailman id 950191;
+ Mon, 14 Apr 2025 13:28:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SLdQ=XA=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1u4Jq3-0005dp-Dd
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 13:27:03 +0000
+ id 1u4JrJ-0006PB-07
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 13:28:21 +0000
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 25c374d5-1934-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 15:27:02 +0200 (CEST)
+ id 542670ae-1934-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 15:28:19 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 63F9E43D97;
- Mon, 14 Apr 2025 13:26:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A5AFC4CEE9;
- Mon, 14 Apr 2025 13:26:58 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id AD3C149E69;
+ Mon, 14 Apr 2025 13:28:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9B62C4CEE9;
+ Mon, 14 Apr 2025 13:28:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25c374d5-1934-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: 542670ae-1934-11f0-9eae-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744637220;
+	s=k20201202; t=1744637298;
 	bh=NWePQQGyiJB1lF8JMRapZucVYoCavkai+t/0v9AbqlY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=l+pxZj910uDVMYGVoXgeSt6ylbUY2TEQVHUEb0poqS0RrjNHnstveM/2So0R1d1QF
-	 TqEdiAif+GwmH7FAL8v5pWJCYWsXfA+GeDj1Rpj/GlK4p3rBKLx7gOK9Unsl1WCdiC
-	 0XESDuSesw3wtUtcBnn6kG/fdZBYAphtr1/eJhPCdHSm9xGGUtoJmGxifrZ3Jvuw0e
-	 YA3NUvcqL84xwspG4Wy8faJkSkW8W/E0/lCkKLH62V/r2VzvXHusDoiYsf5Pnwwl5f
-	 0JraiCnW+Jd2W/ZtJISR9EanNsAdLGcfN1uQgpgdVAnd2ilMWRgIhWQ9xKEvx3uRHb
-	 jDHOzP6SHRvcg==
+	b=ge36wmR4yAi4AGHlHJiT12u649BnPzG41SbaeLyp5lMpauvYH3agePKI2QgRPLFcL
+	 glKgTBcE6PVVp5n9cKV8EMasgQxKPWvpz2xQeLeCXuoqMnUFwChHAZeF39a4nSmIqm
+	 anLxLW9kQoasM4vyvcBthmlBryYgIIL+qKQCOhFFvxrNa/gfUhT0qtqQ+VmLhjHzYH
+	 jTHqZoSH5jJdBV7fPD4eBvUkB2szjimsw9lQ5VYmu9vXergWvET80TWWgbPvqwYrVP
+	 TNCIxa6ug+nDuAylo6swrONWdZFlg/wdF/6Y0BTDKy5WSaX15kRA80r42CDUCH4gOJ
+	 /jPSutK9+I/Sg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -67,17 +67,17 @@ Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	dave.hansen@linux.intel.com,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 6.14 21/34] x86/xen: disable CPU idle and frequency drivers for PVH dom0
-Date: Mon, 14 Apr 2025 09:25:57 -0400
-Message-Id: <20250414132610.677644-21-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.13 21/34] x86/xen: disable CPU idle and frequency drivers for PVH dom0
+Date: Mon, 14 Apr 2025 09:27:15 -0400
+Message-Id: <20250414132729.679254-21-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250414132610.677644-1-sashal@kernel.org>
-References: <20250414132610.677644-1-sashal@kernel.org>
+In-Reply-To: <20250414132729.679254-1-sashal@kernel.org>
+References: <20250414132729.679254-1-sashal@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.14.2
+X-stable-base: Linux 6.13.11
 Content-Transfer-Encoding: 8bit
 
 From: Roger Pau Monne <roger.pau@citrix.com>
