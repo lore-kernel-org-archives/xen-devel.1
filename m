@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A114FC369BC
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 15:57:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.950717.1347007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E3DC369A2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 15:57:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.950722.1347027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4MB7-0001h5-6g; Mon, 14 Apr 2025 15:56:57 +0000
+	id 1u4MBB-0002Ml-I5; Mon, 14 Apr 2025 15:57:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 950717.1347007; Mon, 14 Apr 2025 15:56:57 +0000
+Received: by outflank-mailman (output) from mailman id 950722.1347027; Mon, 14 Apr 2025 15:57:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4MB7-0001gr-2Q; Mon, 14 Apr 2025 15:56:57 +0000
-Received: by outflank-mailman (input) for mailman id 950717;
- Mon, 14 Apr 2025 15:56:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u4MBB-0002Ls-79; Mon, 14 Apr 2025 15:57:01 +0000
+Received: by outflank-mailman (input) for mailman id 950722;
+ Mon, 14 Apr 2025 15:57:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YdIb=XA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1u4MB5-0008LI-Mv
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 15:56:55 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 159654b7-1949-11f0-9ffb-bf95429c2676;
- Mon, 14 Apr 2025 17:56:53 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ac298c8fa50so726759766b.1
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 08:56:53 -0700 (PDT)
+ id 1u4MBA-0008KQ-FT
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 15:57:00 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 189d5def-1949-11f0-9eae-5ba50f476ded;
+ Mon, 14 Apr 2025 17:56:58 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ac289147833so904669066b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 08:56:58 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-225.play-internet.pl.
  [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acaa1cb4288sm951760866b.96.2025.04.14.08.56.51
+ a640c23a62f3a-acaa1ccd1b9sm940683166b.147.2025.04.14.08.56.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 08:56:51 -0700 (PDT)
+ Mon, 14 Apr 2025 08:56:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,1005 +47,249 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 159654b7-1949-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 189d5def-1949-11f0-9eae-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744646212; x=1745251012; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ACPMjXk9mJ90kJc+Qerlr9VRihJ7jzc3C4qF/ym8lGA=;
-        b=ZDcLvQi51+oNWUGqKFUxk84BS3lpt79kTyeDZTsgP/eZYZwKC9NakAYbVy1WKHgyjo
-         Vqs9RdnZVLsLwZ+NdqieRo5+13NIaIODcsASK+HYl4VSQ/4/YLh37OBVBqkAFl0XgaO1
-         5qyeKe54otU+lIIAbQNuzFSrXCj0JW54qLSt7YR4n8A7lPklKusdfFblrtL8cxuvgTbb
-         DVKVTl0TEz+NP3EzKoTBYKTvIBjDh3CQXo7p0JHA5N2IQtWCUFwBKaD/vaGfixfqP8lp
-         aGvP/QcQCU3sH4rhjU5mMb09PPNwJi8zPyo/H4kXOBpJSNuISsrXk7oi6Ql/hDk3ZvB9
-         c/8g==
+        d=gmail.com; s=20230601; t=1744646218; x=1745251018; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=A9dXdGg45Qgc2Gjf4NhwJNWU+j8wV5npfJCoRjaHCxk=;
+        b=jK7bcnWRVzMMOMq9QCufySD9P440+j6GfzJLdMYuLdhN/w4i/ZgWMzmqxeVZebcLlV
+         wUDFX3B0X6K/o19UzB4vFWBzInbo52W21in71KIOzc/gyb1vj352dOEVmRjbJegRT+n4
+         AABYBxS2JD7lTlTsXm+JJZhxq8jJt+VQqMJuQluoV5BHR3HTVC5jkz9gxgrxBPwrTVJI
+         OrciBXUcc4XLEOg5OMvxJrPgyxPZo6dWTm2BG++EoJfFSLM3qY1Gzbgrj/h2ieYwCatE
+         slf+PpHm+iboWQLaXFmeO3uiBnDyUwhR7TBQdx9mxIu+TJbrAAcYObTjdlREPxbzse0f
+         ffNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744646212; x=1745251012;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ACPMjXk9mJ90kJc+Qerlr9VRihJ7jzc3C4qF/ym8lGA=;
-        b=MJLprTmFgLt2F6FS6/ADr+Ug/9akhKYXw+enmBplx5QCYtMkl+q9iC+QjLdCabyzGi
-         BIb3FUTpHT4e/skhemVjwKvcv6pNxNpdWk1Tpj95fmsLwfOkcT8n9Ym8xe/lD4dlq1hl
-         mIIRNeqVH8bc0BJyGxAcmKQnqnzW/zLynSoaeBf85yobLCuTw6yr8W2tHQkKUTMf60j/
-         mmgWVAdBFlVBXrdtBWe1TFFP3Gr6qZcllBkHvan/Vl49AY3Gp47Gf4aCUuAnUqck4Pea
-         tmVQp65oafSnV68O04yBAW3JoqieBCs97K2da12DW6tWa2JVtJF4asEiPx9I+8ikaJbJ
-         xlDw==
-X-Gm-Message-State: AOJu0YwYDx3wqrvtYt7cdYZhFarIJ68XZ7EN7KtQeVY89V1MlVbYUGYc
-	iRV1RCmTItJGoDVTREqJNsGeIJCFqslBUCo4+bRsXyT0XVzj7Ztv75XcUA==
-X-Gm-Gg: ASbGncvOK39ClHER4S0Cp+t9dLAG0r2XF1ibwVqEfnVKvbMfB1AT6viYC5+BrW2arif
-	cH0oRzU5h9yPqM3lYCCnlHqUagGlruJ93Jk4VzmMZzklfiedfJJrc7L92TBeQubwxGxx+E2JdJc
-	p/TNBLKhWJdmAzDu8iPqrBs9pv4bs7gmf0bGNBK+On1JCGIJeWaXtTs2+oXGwHEfuEDJUS0hjc+
-	B0KyMrwUfg7twvfE+J0sDaCcjgavL3e6cMq3GRrcPddDZSpLA5HyIL1s+Ek8TI9NcO/vuAqLXNb
-	hIsbBcqABEhdU3BXadkYY5GkOIgI9+2ZJvmUClu9yG+DVD1512izZZefbD2UKNyd4jK8+bIjtiu
-	t24Q8C04lXA==
-X-Google-Smtp-Source: AGHT+IF3SjysRv98H53A6BxgnPvW1cPNx51aBxIe/73BMU9A3UizkVh7JtB2ITkhTVvrKw0+c17kzQ==
-X-Received: by 2002:a17:906:cec5:b0:aca:d63b:3ebe with SMTP id a640c23a62f3a-acad63b4519mr961042466b.21.1744646212270;
-        Mon, 14 Apr 2025 08:56:52 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1744646218; x=1745251018;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=A9dXdGg45Qgc2Gjf4NhwJNWU+j8wV5npfJCoRjaHCxk=;
+        b=E9BGUQLrEmERRGUDf+66RjYczp8K/PXRBhfnxeRPc76mtk6ygWzSYuslqAS1hAQCiB
+         Hdpa40zUMzsO6uDTKIMhvP9ycWK64jCpSeHN7Tokgry2395tsDg2SH1MXt1djpvphNxE
+         D/RNDgFnElqq9NvA0wtAAnZHZzPY9ddpXOhkJ3pTryZWLN9yRNcfLmDfzSIFqgSRLwPU
+         PGPfM9HW6FDNr1f8XjYcB8O9a149eFHxOTqqGjn1LZcedppyV1qG/DlgcT1YgWClOw5N
+         b7n04gtr2gAmHnsAKzXYcl9Wgx4je++QGGCr5gFyrAHvfCymC2bx5YUXmDsOSwSVK7G9
+         i8cg==
+X-Gm-Message-State: AOJu0YzKZF3mg324l8HAzG3Evlmmbn71KoAdlkm7iqlNCH95OD7nnax3
+	YxzJS97dFb4musIk1TzV7l/p8WMatlVvO2bf+XH2SE79qPIBwUrcbRSotg==
+X-Gm-Gg: ASbGncu/7gTrOvaW7f3iGqbuEuhwW5oockbyUWg/ClR+vqFuxxwhrInmrDuYzjAFG3S
+	quDDyjMGIgqnBu73l6tQ41dWfhSYXXX0DOh/Zm330lP0itLR9CfP1/NglOaLEq1+GBzwmY9Jsg/
+	/qMF2lksE6qVNORZEvtv57cqiShw7xPKydpPsFKHgVeHL5SJ7ZVT6zcFasv04iaJzXRwRZ35902
+	2WItYDYXPjMIaiNij8vohWmpnMTGLZnIh2Y5uTS/JQ7hRBQW1n4+G5O+uh3jZtKMf0c3MClne/4
+	MBaE4TiU3zH8x3l+XB/ip0tf8teIc0D19KHFZSgsK2+ZZ8bCQo1+xV4kNEBHRx+Aq8hOGRh5Cc3
+	sdfUprs925noM765p/6LB
+X-Google-Smtp-Source: AGHT+IG7LNmuW/Yp9UP6y6R5BPBbgVvTdhwjobuPssvWJbi3/z8wGJC59MjSEDdsiv8yZqQ1pA9zqA==
+X-Received: by 2002:a17:906:c44b:b0:aca:d66d:cd0d with SMTP id a640c23a62f3a-acad66dcdd4mr913946266b.30.1744646217516;
+        Mon, 14 Apr 2025 08:56:57 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 7/8] xen/common: dom0less: introduce common domain-build.c
-Date: Mon, 14 Apr 2025 17:56:40 +0200
-Message-ID: <9dbf651ce177a7292f80879373e86a51305f216e.1744626032.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4] xen/riscv: Increase XEN_VIRT_SIZE
+Date: Mon, 14 Apr 2025 17:56:54 +0200
+Message-ID: <0815b65aa0b526b85c737f5923148b119cc4104f.1744639515.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1744626032.git.oleksii.kurochko@gmail.com>
-References: <cover.1744626032.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some functions of Arm's domain_build.c could be reused by dom0less or other
-features connected to domain construction/build.
+A randconfig job failed with the following issue:
+  riscv64-linux-gnu-ld: Xen too large for early-boot assumptions
 
-The following functions are moved to common:
-- get_allocation_size().
-- allocate_domheap_memory().
-- guest_map_pages().
-- allocate_bank_memory().
-- add_hwdom_free_regions().
-- find_unallocated_memory().
-- allocate_memory().
-- dtb_load().
-- initrd_load().
+The reason is that enabling the UBSAN config increased the size of
+the Xen binary.
 
-Prototype of dtb_load() and initrd_load() is updated to recieve a pointer
-to copy_to_guest_phys() as some archs require
-copy_to_guest_phys_fluch_dcache().
+Increase XEN_VIRT_SIZE to reserve enough space, allowing both UBSAN
+and GCOV to be enabled together, with some slack for future growth.
 
-Update arm/include/asm/Makefile to generate  domain-build.h for Arm as it is
-used by domain-build.c.
+Additionally, add checks to verify that XEN_VIRT_START is 1GB-aligned
+and XEN_VIRT_SIZE is 2MB-aligned to reduce the number of page tables
+needed for the initial mapping. In the future, when 2MB mappings are
+used for .text (rx), .rodata (r), and .data (rw), this will also help
+reduce TLB pressure.
 
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Change in v2:
- - Use xen/fdt-domain-build.h instead of asm/domain_build.h.
+Changes in v4:
+ - Move is_init_section() to xen/sections.h. Add const for
+   declaration of `p` variable inside is_init_section() and
+   for the cast.
+ - Update the comment above ASSERT() with .init* section range:
+   s/[__init_begin, __init_end]/[__init_begin, __init_end).
+ - Update ASSERT condition:
+   s/"system_state != SYS_STATE_active"/"system_state < SYS_STATE_active".
+ - Drop MB after XEN_VIRT_SIZE in the comment above PGTBL_INITIAL_COUNT
+   as XEN_VIRT_SIZE expands to MB(16).
+ - Fix typos:
+   s/separetely/separately
+   s/indenity/identity
+ - Add lost L0 table for identity mapping to PGTBL_INITIAL_COUNT.
+ - Move checks to alignment checks of XEN_VIRT_SIZE and XEN_VIRT_SIZE
+   closer to the definition of PGTBL_INITIAL_COUNT.
+ - Update the commit message.
 ---
- xen/arch/arm/domain_build.c           | 397 +------------------------
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/domain-build.c | 404 ++++++++++++++++++++++++++
- xen/include/xen/fdt-domain-build.h    |  33 ++-
- 4 files changed, 439 insertions(+), 396 deletions(-)
- create mode 100644 xen/common/device-tree/domain-build.c
+Changes in v3:
+ - Add ASSERT which checks .init* sections range. When Xen ends boot
+   init* sections are going to be released.
+ - Introduce is_init_section() macros.
+ - Correct fixmap end address in RISCV-64 layour table.
+ - Update ASSERT() which checks that `va` is in Xen virtual address
+   range and drop BUILD_BUG_ON() as it isn't necessary anymore with
+   the way how the ASSERT() looks now.
+ - Add ASSERT() which checks that XEN_VIRT_START is 1gb aligned and
+   add ASSERT() which checks that XEN_VIRT_SIZE is 2mb aligned.
+   It helps us to reduce an amount of PGTBL_INITIAL_COUNT.
+ - Update PGTBL_INITIAL_COUNT and the comment above.
+ - Update the commit message.
+---
+Changes in v2:
+ - Incerease XEN_VIRT_SIZE to 16 Mb to cover also the case if 2M mappings will
+   be used for .text (rx), .rodata(r), and .data (rw).
+ - Update layout table in config.h.
+ - s/xen_virt_starn_vpn/xen_virt_start_vpn
+ - Update BUILD_BUG_ON(... != MB(8)) check to "... > GB(1)".
+ - Update definition of PGTBL_INITIAL_COUNT and the comment above.
+---
+ xen/arch/riscv/include/asm/config.h |  8 ++++----
+ xen/arch/riscv/include/asm/mm.h     | 15 ++++++++++++---
+ xen/arch/riscv/mm.c                 | 28 +++++++++++++++++++---------
+ xen/include/xen/sections.h          |  4 ++++
+ 4 files changed, 39 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 75f048f58c..86fcaefa26 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -119,18 +119,6 @@ struct vcpu *__init alloc_dom0_vcpu0(struct domain *dom0)
-     return vcpu_create(dom0, 0);
- }
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 7141bd9e46..5eba626f27 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -41,11 +41,11 @@
+  * Start addr          | End addr         | Slot       | area description
+  * ============================================================================
+  *                   .....                 L2 511          Unused
+- *  0xffffffffc0a00000  0xffffffffc0bfffff L2 511          Fixmap
++ *  0xffffffffc1800000  0xffffffffc19fffff L2 511          Fixmap
+  *                   ..... ( 2 MB gap )
+- *  0xffffffffc0400000  0xffffffffc07fffff L2 511          FDT
++ *  0xffffffffc1200000  0xffffffffc15fffff L2 511          FDT
+  *                   ..... ( 2 MB gap )
+- *  0xffffffffc0000000  0xffffffffc01fffff L2 511          Xen
++ *  0xffffffffc0000000  0xffffffffc0ffffff L2 511          Xen
+  *                   .....                 L2 510          Unused
+  *  0x3200000000        0x7f7fffffff       L2 200-509      Direct map
+  *                   .....                 L2 199          Unused
+@@ -78,7 +78,7 @@
  
--unsigned int __init get_allocation_size(paddr_t size)
--{
--    /*
--     * get_order_from_bytes returns the order greater than or equal to
--     * the given size, but we need less than or equal. Adding one to
--     * the size pushes an evenly aligned size into the next order, so
--     * we can then unconditionally subtract 1 from the order which is
--     * returned.
--     */
--    return get_order_from_bytes(size + 1) - 1;
--}
--
- /*
-  * Insert the given pages into a memory bank, banks are ordered by address.
-  *
-@@ -417,98 +405,6 @@ static void __init allocate_memory_11(struct domain *d,
-     }
- }
+ #define GAP_SIZE                MB(2)
  
--bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
--                                    alloc_domheap_mem_cb cb, void *extra)
--{
--    unsigned int max_order = UINT_MAX;
--
--    while ( tot_size > 0 )
--    {
--        unsigned int order = get_allocation_size(tot_size);
--        struct page_info *pg;
--
--        order = min(max_order, order);
--
--        pg = alloc_domheap_pages(d, order, 0);
--        if ( !pg )
--        {
--            /*
--             * If we can't allocate one page, then it is unlikely to
--             * succeed in the next iteration. So bail out.
--             */
--            if ( !order )
--                return false;
--
--            /*
--             * If we can't allocate memory with order, then it is
--             * unlikely to succeed in the next iteration.
--             * Record the order - 1 to avoid re-trying.
--             */
--            max_order = order - 1;
--            continue;
--        }
--
--        if ( !cb(d, pg, order, extra) )
--            return false;
--
--        tot_size -= (1ULL << (PAGE_SHIFT + order));
--    }
--
--    return true;
--}
--
--static bool __init guest_map_pages(struct domain *d, struct page_info *pg,
--                                   unsigned int order, void *extra)
--{
--    gfn_t *sgfn = (gfn_t *)extra;
--    int res;
--
--    BUG_ON(!sgfn);
--    res = guest_physmap_add_page(d, *sgfn, page_to_mfn(pg), order);
--    if ( res )
--    {
--        dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
--        return false;
--    }
--
--    *sgfn = gfn_add(*sgfn, 1UL << order);
--
--    return true;
--}
--
--bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
--                                 paddr_t tot_size)
--{
--    struct membanks *mem = kernel_info_get_mem(kinfo);
--    struct domain *d = kinfo->d;
--    struct membank *bank;
--
--    /*
--     * allocate_bank_memory can be called with a tot_size of zero for
--     * the second memory bank. It is not an error and we can safely
--     * avoid creating a zero-size memory bank.
--     */
--    if ( tot_size == 0 )
--        return true;
--
--    bank = &mem->bank[mem->nr_banks];
--    bank->start = gfn_to_gaddr(sgfn);
--    bank->size = tot_size;
--
--    /*
--     * Allocate pages from the heap until tot_size is zero and map them to the
--     * guest using guest_map_pages, passing the starting gfn as extra parameter
--     * for the map operation.
--     */
--    if ( !allocate_domheap_memory(d, tot_size, guest_map_pages, &sgfn) )
--        return false;
--
--    mem->nr_banks++;
--    kinfo->unassigned_mem -= bank->size;
--
--    return true;
--}
--
- /*
-  * When PCI passthrough is available we want to keep the
-  * "linux,pci-domain" in sync for every host bridge.
-@@ -899,226 +795,6 @@ int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
-     return 0;
- }
+-#define XEN_VIRT_SIZE           MB(2)
++#define XEN_VIRT_SIZE           MB(16)
  
--static int __init add_hwdom_free_regions(unsigned long s_gfn,
--                                         unsigned long e_gfn, void *data)
--{
--    struct membanks *free_regions = data;
--    paddr_t start, size;
--    paddr_t s = pfn_to_paddr(s_gfn);
--    paddr_t e = pfn_to_paddr(e_gfn);
--    unsigned int i, j;
--
--    if ( free_regions->nr_banks >= free_regions->max_banks )
--        return 0;
--
--    /*
--     * Both start and size of the free region should be 2MB aligned to
--     * potentially allow superpage mapping.
--     */
--    start = (s + SZ_2M - 1) & ~(SZ_2M - 1);
--    if ( start > e )
--        return 0;
--
--    /*
--     * e is actually "end-1" because it is called by rangeset functions
--     * which are inclusive of the last address.
--     */
--    e += 1;
--    size = (e - start) & ~(SZ_2M - 1);
--
--    /* Find the insert position (descending order). */
--    for ( i = 0; i < free_regions->nr_banks ; i++ )
--        if ( size > free_regions->bank[i].size )
--            break;
--
--    /* Move the other banks to make space. */
--    for ( j = free_regions->nr_banks; j > i ; j-- )
--    {
--        free_regions->bank[j].start = free_regions->bank[j - 1].start;
--        free_regions->bank[j].size = free_regions->bank[j - 1].size;
--    }
--
--    free_regions->bank[i].start = start;
--    free_regions->bank[i].size = size;
--    free_regions->nr_banks++;
--
--    return 0;
--}
--
--/*
-- * Find unused regions of Host address space which can be exposed to domain
-- * using the host memory layout. In order to calculate regions we exclude every
-- * region passed in mem_banks from the Host RAM.
-- */
--static int __init find_unallocated_memory(const struct kernel_info *kinfo,
--                                          const struct membanks *mem_banks[],
--                                          unsigned int nr_mem_banks,
--                                          struct membanks *free_regions,
--                                          int (*cb)(unsigned long s_gfn,
--                                                    unsigned long e_gfn,
--                                                    void *data))
--{
--    const struct membanks *mem = bootinfo_get_mem();
--    struct rangeset *unalloc_mem;
--    paddr_t start, end;
--    unsigned int i, j;
--    int res;
--
--    ASSERT(domain_use_host_layout(kinfo->d));
--
--    unalloc_mem = rangeset_new(NULL, NULL, 0);
--    if ( !unalloc_mem )
--        return -ENOMEM;
--
--    /* Start with all available RAM */
--    for ( i = 0; i < mem->nr_banks; i++ )
--    {
--        start = mem->bank[i].start;
--        end = mem->bank[i].start + mem->bank[i].size;
--        res = rangeset_add_range(unalloc_mem, PFN_DOWN(start),
--                                 PFN_DOWN(end - 1));
--        if ( res )
--        {
--            printk(XENLOG_ERR "Failed to add: %#"PRIpaddr"->%#"PRIpaddr"\n",
--                   start, end);
--            goto out;
--        }
--    }
--
--    /* Remove all regions listed in mem_banks */
--    for ( i = 0; i < nr_mem_banks; i++ )
--        for ( j = 0; j < mem_banks[i]->nr_banks; j++ )
--        {
--            start = mem_banks[i]->bank[j].start;
--
--            /* Shared memory banks can contain INVALID_PADDR as start */
--            if ( INVALID_PADDR == start )
--                continue;
--
--            end = mem_banks[i]->bank[j].start + mem_banks[i]->bank[j].size;
--            res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
--                                        PFN_DOWN(end - 1));
--            if ( res )
--            {
--                printk(XENLOG_ERR
--                       "Failed to add: %#"PRIpaddr"->%#"PRIpaddr", error %d\n",
--                       start, end, res);
--                goto out;
--            }
--        }
--
--    start = 0;
--    end = (1ULL << p2m_ipa_bits) - 1;
--    res = rangeset_report_ranges(unalloc_mem, PFN_DOWN(start), PFN_DOWN(end),
--                                 cb, free_regions);
--    if ( res )
--        free_regions->nr_banks = 0;
--    else if ( !free_regions->nr_banks )
--        res = -ENOENT;
--
--out:
--    rangeset_destroy(unalloc_mem);
--
--    return res;
--}
--
--void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
--{
--    struct membanks *mem = kernel_info_get_mem(kinfo);
--    unsigned int i, nr_banks = GUEST_RAM_BANKS;
--    struct membanks *hwdom_free_mem = NULL;
--
--    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
--           /* Don't want format this as PRIpaddr (16 digit hex) */
--           (unsigned long)(kinfo->unassigned_mem >> 20), d);
--
--    mem->nr_banks = 0;
--    /*
--     * Use host memory layout for hwdom. Only case for this is when LLC coloring
--     * is enabled.
--     */
--    if ( is_hardware_domain(d) )
--    {
--        struct membanks *gnttab = membanks_xzalloc(1, MEMORY);
--        /*
--         * Exclude the following regions:
--         * 1) Remove reserved memory
--         * 2) Grant table assigned to hwdom
--         */
--        const struct membanks *mem_banks[] = {
--            bootinfo_get_reserved_mem(),
--            gnttab,
--        };
--
--        if ( !gnttab )
--            goto fail;
--
--        gnttab->nr_banks = 1;
--        gnttab->bank[0].start = kinfo->gnttab_start;
--        gnttab->bank[0].size = kinfo->gnttab_size;
--
--        hwdom_free_mem = membanks_xzalloc(NR_MEM_BANKS, MEMORY);
--        if ( !hwdom_free_mem )
--            goto fail;
--
--        if ( find_unallocated_memory(kinfo, mem_banks, ARRAY_SIZE(mem_banks),
--                                     hwdom_free_mem, add_hwdom_free_regions) )
--            goto fail;
--
--        nr_banks = hwdom_free_mem->nr_banks;
--        xfree(gnttab);
--    }
--
--    for ( i = 0; kinfo->unassigned_mem > 0 && nr_banks > 0; i++, nr_banks-- )
--    {
--        paddr_t bank_start, bank_size;
--
--        if ( is_hardware_domain(d) )
--        {
--            bank_start = hwdom_free_mem->bank[i].start;
--            bank_size = hwdom_free_mem->bank[i].size;
--        }
--        else
--        {
--            const uint64_t bankbase[] = GUEST_RAM_BANK_BASES;
--            const uint64_t banksize[] = GUEST_RAM_BANK_SIZES;
--
--            if ( i >= GUEST_RAM_BANKS )
--                goto fail;
--
--            bank_start = bankbase[i];
--            bank_size = banksize[i];
--        }
--
--        bank_size = MIN(bank_size, kinfo->unassigned_mem);
--        if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(bank_start), bank_size) )
--            goto fail;
--    }
--
--    if ( kinfo->unassigned_mem )
--        goto fail;
--
--    for( i = 0; i < mem->nr_banks; i++ )
--    {
--        printk(XENLOG_INFO "%pd BANK[%d] %#"PRIpaddr"-%#"PRIpaddr" (%ldMB)\n",
--               d,
--               i,
--               mem->bank[i].start,
--               mem->bank[i].start + mem->bank[i].size,
--               /* Don't want format this as PRIpaddr (16 digit hex) */
--               (unsigned long)(mem->bank[i].size >> 20));
--    }
--
--    xfree(hwdom_free_mem);
--    return;
--
--  fail:
--    panic("Failed to allocate requested domain memory."
--          /* Don't want format this as PRIpaddr (16 digit hex) */
--          " %ldKB unallocated. Fix the VMs configurations.\n",
--          (unsigned long)kinfo->unassigned_mem >> 10);
--}
--
- static int __init handle_pci_range(const struct dt_device_node *dev,
-                                    uint64_t addr, uint64_t len, void *data)
- {
-@@ -2058,75 +1734,6 @@ static int __init prepare_dtb_hwdom(struct domain *d, struct kernel_info *kinfo)
-     return -EINVAL;
- }
- 
--static void __init dtb_load(struct kernel_info *kinfo)
--{
--    unsigned long left;
--
--    printk("Loading %pd DTB to 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
--           kinfo->d, kinfo->dtb_paddr,
--           kinfo->dtb_paddr + fdt_totalsize(kinfo->fdt));
--
--    left = copy_to_guest_phys_flush_dcache(kinfo->d, kinfo->dtb_paddr,
--                                           kinfo->fdt,
--                                           fdt_totalsize(kinfo->fdt));
--
--    if ( left != 0 )
--        panic("Unable to copy the DTB to %pd memory (left = %lu bytes)\n",
--              kinfo->d, left);
--    xfree(kinfo->fdt);
--}
--
--static void __init initrd_load(struct kernel_info *kinfo)
--{
--    const struct bootmodule *mod = kinfo->initrd_bootmodule;
--    paddr_t load_addr = kinfo->initrd_paddr;
--    paddr_t paddr, len;
--    int node;
--    int res;
--    __be32 val[2];
--    __be32 *cellp;
--    void __iomem *initrd;
--
--    if ( !mod || !mod->size )
--        return;
--
--    paddr = mod->start;
--    len = mod->size;
--
--    printk("Loading %pd initrd from %"PRIpaddr" to 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
--           kinfo->d, paddr, load_addr, load_addr + len);
--
--    /* Fix up linux,initrd-start and linux,initrd-end in /chosen */
--    node = fdt_path_offset(kinfo->fdt, "/chosen");
--    if ( node < 0 )
--        panic("Cannot find the /chosen node\n");
--
--    cellp = (__be32 *)val;
--    dt_set_cell(&cellp, ARRAY_SIZE(val), load_addr);
--    res = fdt_setprop_inplace(kinfo->fdt, node, "linux,initrd-start",
--                              val, sizeof(val));
--    if ( res )
--        panic("Cannot fix up \"linux,initrd-start\" property\n");
--
--    cellp = (__be32 *)val;
--    dt_set_cell(&cellp, ARRAY_SIZE(val), load_addr + len);
--    res = fdt_setprop_inplace(kinfo->fdt, node, "linux,initrd-end",
--                              val, sizeof(val));
--    if ( res )
--        panic("Cannot fix up \"linux,initrd-end\" property\n");
--
--    initrd = ioremap_wc(paddr, len);
--    if ( !initrd )
--        panic("Unable to map the %pd initrd\n", kinfo->d);
--
--    res = copy_to_guest_phys_flush_dcache(kinfo->d, load_addr,
--                                          initrd, len);
--    if ( res != 0 )
--        panic("Unable to copy the initrd in the %pd memory\n", kinfo->d);
--
--    iounmap(initrd);
--}
--
- /*
-  * Allocate the event channel PPIs and setup the HVM_PARAM_CALLBACK_IRQ.
-  * The allocated IRQ will be found in d->arch.evtchn_irq.
-@@ -2219,8 +1826,8 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
-      */
-     kernel_load(kinfo);
-     /* initrd_load will fix up the fdt, so call it before dtb_load */
--    initrd_load(kinfo);
--    dtb_load(kinfo);
-+    initrd_load(kinfo, copy_to_guest_phys_flush_dcache);
-+    dtb_load(kinfo, copy_to_guest_phys_flush_dcache);
- 
-     memset(regs, 0, sizeof(*regs));
- 
-diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
-index e88a4d5799..831b91399b 100644
---- a/xen/common/device-tree/Makefile
-+++ b/xen/common/device-tree/Makefile
-@@ -1,6 +1,7 @@
- obj-y += bootfdt.init.o
- obj-y += bootinfo.init.o
- obj-y += device-tree.o
-+obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.o
- obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-build.o
- obj-$(CONFIG_OVERLAY_DTB) += dt-overlay.o
- obj-y += intc.o
-diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
-new file mode 100644
-index 0000000000..69257a15ba
---- /dev/null
-+++ b/xen/common/device-tree/domain-build.c
-@@ -0,0 +1,404 @@
-+#include <xen/bootfdt.h>
-+#include <xen/fdt-domain-build.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/mm.h>
-+#include <xen/sched.h>
-+#include <xen/sizes.h>
-+#include <xen/types.h>
-+#include <xen/vmap.h>
-+
-+#include <asm/p2m.h>
-+
-+bool __init allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-+                                    alloc_domheap_mem_cb cb, void *extra)
-+{
-+    unsigned int max_order = UINT_MAX;
-+
-+    while ( tot_size > 0 )
-+    {
-+        unsigned int order = get_allocation_size(tot_size);
-+        struct page_info *pg;
-+
-+        order = min(max_order, order);
-+
-+        pg = alloc_domheap_pages(d, order, 0);
-+        if ( !pg )
-+        {
-+            /*
-+             * If we can't allocate one page, then it is unlikely to
-+             * succeed in the next iteration. So bail out.
-+             */
-+            if ( !order )
-+                return false;
-+
-+            /*
-+             * If we can't allocate memory with order, then it is
-+             * unlikely to succeed in the next iteration.
-+             * Record the order - 1 to avoid re-trying.
-+             */
-+            max_order = order - 1;
-+            continue;
-+        }
-+
-+        if ( !cb(d, pg, order, extra) )
-+            return false;
-+
-+        tot_size -= (1ULL << (PAGE_SHIFT + order));
-+    }
-+
-+    return true;
-+}
-+
-+static bool __init guest_map_pages(struct domain *d, struct page_info *pg,
-+                                   unsigned int order, void *extra)
-+{
-+    gfn_t *sgfn = (gfn_t *)extra;
-+    int res;
-+
-+    BUG_ON(!sgfn);
-+    res = guest_physmap_add_page(d, *sgfn, page_to_mfn(pg), order);
-+    if ( res )
-+    {
-+        dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
-+        return false;
-+    }
-+
-+    *sgfn = gfn_add(*sgfn, 1UL << order);
-+
-+    return true;
-+}
-+
-+bool __init allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-+                                 paddr_t tot_size)
-+{
-+    struct membanks *mem = kernel_info_get_mem(kinfo);
-+    struct domain *d = kinfo->d;
-+    struct membank *bank;
-+
-+    /*
-+     * allocate_bank_memory can be called with a tot_size of zero for
-+     * the second memory bank. It is not an error and we can safely
-+     * avoid creating a zero-size memory bank.
-+     */
-+    if ( tot_size == 0 )
-+        return true;
-+
-+    bank = &mem->bank[mem->nr_banks];
-+    bank->start = gfn_to_gaddr(sgfn);
-+    bank->size = tot_size;
-+
-+    /*
-+     * Allocate pages from the heap until tot_size is zero and map them to the
-+     * guest using guest_map_pages, passing the starting gfn as extra parameter
-+     * for the map operation.
-+     */
-+    if ( !allocate_domheap_memory(d, tot_size, guest_map_pages, &sgfn) )
-+        return false;
-+
-+    mem->nr_banks++;
-+    kinfo->unassigned_mem -= bank->size;
-+
-+    return true;
-+}
-+
-+static int __init add_hwdom_free_regions(unsigned long s_gfn,
-+                                         unsigned long e_gfn, void *data)
-+{
-+    struct membanks *free_regions = data;
-+    paddr_t start, size;
-+    paddr_t s = pfn_to_paddr(s_gfn);
-+    paddr_t e = pfn_to_paddr(e_gfn);
-+    unsigned int i, j;
-+
-+    if ( free_regions->nr_banks >= free_regions->max_banks )
-+        return 0;
-+
-+    /*
-+     * Both start and size of the free region should be 2MB aligned to
-+     * potentially allow superpage mapping.
-+     */
-+    start = (s + SZ_2M - 1) & ~(SZ_2M - 1);
-+    if ( start > e )
-+        return 0;
-+
-+    /*
-+     * e is actually "end-1" because it is called by rangeset functions
-+     * which are inclusive of the last address.
-+     */
-+    e += 1;
-+    size = (e - start) & ~(SZ_2M - 1);
-+
-+    /* Find the insert position (descending order). */
-+    for ( i = 0; i < free_regions->nr_banks ; i++ )
-+        if ( size > free_regions->bank[i].size )
-+            break;
-+
-+    /* Move the other banks to make space. */
-+    for ( j = free_regions->nr_banks; j > i ; j-- )
-+    {
-+        free_regions->bank[j].start = free_regions->bank[j - 1].start;
-+        free_regions->bank[j].size = free_regions->bank[j - 1].size;
-+    }
-+
-+    free_regions->bank[i].start = start;
-+    free_regions->bank[i].size = size;
-+    free_regions->nr_banks++;
-+
-+    return 0;
-+}
-+
-+/*
-+ * Find unused regions of Host address space which can be exposed to domain
-+ * using the host memory layout. In order to calculate regions we exclude every
-+ * region passed in mem_banks from the Host RAM.
-+ */
-+int __init find_unallocated_memory(const struct kernel_info *kinfo,
-+                                   const struct membanks *mem_banks[],
-+                                   unsigned int nr_mem_banks,
-+                                   struct membanks *free_regions,
-+                                   int (*cb)(unsigned long s_gfn,
-+                                             unsigned long e_gfn,
-+                                             void *data))
-+{
-+    const struct membanks *mem = bootinfo_get_mem();
-+    struct rangeset *unalloc_mem;
-+    paddr_t start, end;
-+    unsigned int i, j;
-+    int res;
-+
-+    ASSERT(domain_use_host_layout(kinfo->d));
-+
-+    unalloc_mem = rangeset_new(NULL, NULL, 0);
-+    if ( !unalloc_mem )
-+        return -ENOMEM;
-+
-+    /* Start with all available RAM */
-+    for ( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        start = mem->bank[i].start;
-+        end = mem->bank[i].start + mem->bank[i].size;
-+        res = rangeset_add_range(unalloc_mem, PFN_DOWN(start),
-+                                 PFN_DOWN(end - 1));
-+        if ( res )
-+        {
-+            printk(XENLOG_ERR "Failed to add: %#"PRIpaddr"->%#"PRIpaddr"\n",
-+                   start, end);
-+            goto out;
-+        }
-+    }
-+
-+    /* Remove all regions listed in mem_banks */
-+    for ( i = 0; i < nr_mem_banks; i++ )
-+        for ( j = 0; j < mem_banks[i]->nr_banks; j++ )
-+        {
-+            start = mem_banks[i]->bank[j].start;
-+
-+            /* Shared memory banks can contain INVALID_PADDR as start */
-+            if ( INVALID_PADDR == start )
-+                continue;
-+
-+            end = mem_banks[i]->bank[j].start + mem_banks[i]->bank[j].size;
-+            res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
-+                                        PFN_DOWN(end - 1));
-+            if ( res )
-+            {
-+                printk(XENLOG_ERR
-+                       "Failed to add: %#"PRIpaddr"->%#"PRIpaddr", error %d\n",
-+                       start, end, res);
-+                goto out;
-+            }
-+        }
-+
-+    start = 0;
-+    end = (1ULL << p2m_ipa_bits) - 1;
-+    res = rangeset_report_ranges(unalloc_mem, PFN_DOWN(start), PFN_DOWN(end),
-+                                 cb, free_regions);
-+    if ( res )
-+        free_regions->nr_banks = 0;
-+    else if ( !free_regions->nr_banks )
-+        res = -ENOENT;
-+
-+out:
-+    rangeset_destroy(unalloc_mem);
-+
-+    return res;
-+}
-+
-+void __init allocate_memory(struct domain *d, struct kernel_info *kinfo)
-+{
-+    struct membanks *mem = kernel_info_get_mem(kinfo);
-+    unsigned int i, nr_banks = GUEST_RAM_BANKS;
-+    struct membanks *hwdom_free_mem = NULL;
-+
-+    printk(XENLOG_INFO "Allocating mappings totalling %ldMB for %pd:\n",
-+           /* Don't want format this as PRIpaddr (16 digit hex) */
-+           (unsigned long)(kinfo->unassigned_mem >> 20), d);
-+
-+    mem->nr_banks = 0;
-+    /*
-+     * Use host memory layout for hwdom. Only case for this is when LLC coloring
-+     * is enabled.
-+     */
-+    if ( is_hardware_domain(d) )
-+    {
-+        struct membanks *gnttab = xzalloc_flex_struct(struct membanks, bank, 1);
-+        /*
-+         * Exclude the following regions:
-+         * 1) Remove reserved memory
-+         * 2) Grant table assigned to hwdom
-+         */
-+        const struct membanks *mem_banks[] = {
-+            bootinfo_get_reserved_mem(),
-+            gnttab,
-+        };
-+
-+        if ( !gnttab )
-+            goto fail;
-+
-+        gnttab->nr_banks = 1;
-+        gnttab->bank[0].start = kinfo->gnttab_start;
-+        gnttab->bank[0].size = kinfo->gnttab_size;
-+
-+        hwdom_free_mem = xzalloc_flex_struct(struct membanks, bank,
-+                                             NR_MEM_BANKS);
-+        if ( !hwdom_free_mem )
-+            goto fail;
-+
-+        hwdom_free_mem->max_banks = NR_MEM_BANKS;
-+
-+        if ( find_unallocated_memory(kinfo, mem_banks, ARRAY_SIZE(mem_banks),
-+                                     hwdom_free_mem, add_hwdom_free_regions) )
-+            goto fail;
-+
-+        nr_banks = hwdom_free_mem->nr_banks;
-+        xfree(gnttab);
-+    }
-+
-+    for ( i = 0; kinfo->unassigned_mem > 0 && nr_banks > 0; i++, nr_banks-- )
-+    {
-+        paddr_t bank_start, bank_size;
-+
-+        if ( is_hardware_domain(d) )
-+        {
-+            bank_start = hwdom_free_mem->bank[i].start;
-+            bank_size = hwdom_free_mem->bank[i].size;
-+        }
-+        else
-+        {
-+            const uint64_t bankbase[] = GUEST_RAM_BANK_BASES;
-+            const uint64_t banksize[] = GUEST_RAM_BANK_SIZES;
-+
-+            if ( i >= GUEST_RAM_BANKS )
-+                goto fail;
-+
-+            bank_start = bankbase[i];
-+            bank_size = banksize[i];
-+        }
-+
-+        bank_size = MIN(bank_size, kinfo->unassigned_mem);
-+        if ( !allocate_bank_memory(kinfo, gaddr_to_gfn(bank_start), bank_size) )
-+            goto fail;
-+    }
-+
-+    if ( kinfo->unassigned_mem )
-+        goto fail;
-+
-+    for( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        printk(XENLOG_INFO "%pd BANK[%d] %#"PRIpaddr"-%#"PRIpaddr" (%ldMB)\n",
-+               d,
-+               i,
-+               mem->bank[i].start,
-+               mem->bank[i].start + mem->bank[i].size,
-+               /* Don't want format this as PRIpaddr (16 digit hex) */
-+               (unsigned long)(mem->bank[i].size >> 20));
-+    }
-+
-+    xfree(hwdom_free_mem);
-+    return;
-+
-+  fail:
-+    panic("Failed to allocate requested domain memory."
-+          /* Don't want format this as PRIpaddr (16 digit hex) */
-+          " %ldKB unallocated. Fix the VMs configurations.\n",
-+          (unsigned long)kinfo->unassigned_mem >> 10);
-+}
-+
-+/* Copy data to guest physical address, then clean the region. */
-+typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
-+                                               paddr_t gpa,
-+                                               void *buf,
-+                                               unsigned int len);
-+
-+void __init dtb_load(struct kernel_info *kinfo,
-+                     copy_to_guest_phys_cb copy_to_guest)
-+{
-+    unsigned long left;
-+
-+    printk("Loading %pd DTB to 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
-+           kinfo->d, kinfo->dtb_paddr,
-+           kinfo->dtb_paddr + fdt_totalsize(kinfo->fdt));
-+
-+    left = copy_to_guest(kinfo->d, kinfo->dtb_paddr,
-+                         kinfo->fdt,
-+                         fdt_totalsize(kinfo->fdt));
-+
-+    if ( left != 0 )
-+        panic("Unable to copy the DTB to %pd memory (left = %lu bytes)\n",
-+              kinfo->d, left);
-+    xfree(kinfo->fdt);
-+}
-+
-+void __init initrd_load(struct kernel_info *kinfo,
-+                        copy_to_guest_phys_cb copy_to_guest)
-+{
-+    const struct bootmodule *mod = kinfo->initrd_bootmodule;
-+    paddr_t load_addr = kinfo->initrd_paddr;
-+    paddr_t paddr, len;
-+    int node;
-+    int res;
-+    __be32 val[2];
-+    __be32 *cellp;
-+    void __iomem *initrd;
-+
-+    if ( !mod || !mod->size )
-+        return;
-+
-+    paddr = mod->start;
-+    len = mod->size;
-+
-+    printk("Loading %pd initrd from %"PRIpaddr" to 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
-+           kinfo->d, paddr, load_addr, load_addr + len);
-+
-+    /* Fix up linux,initrd-start and linux,initrd-end in /chosen */
-+    node = fdt_path_offset(kinfo->fdt, "/chosen");
-+    if ( node < 0 )
-+        panic("Cannot find the /chosen node\n");
-+
-+    cellp = (__be32 *)val;
-+    dt_set_cell(&cellp, ARRAY_SIZE(val), load_addr);
-+    res = fdt_setprop_inplace(kinfo->fdt, node, "linux,initrd-start",
-+                              val, sizeof(val));
-+    if ( res )
-+        panic("Cannot fix up \"linux,initrd-start\" property\n");
-+
-+    cellp = (__be32 *)val;
-+    dt_set_cell(&cellp, ARRAY_SIZE(val), load_addr + len);
-+    res = fdt_setprop_inplace(kinfo->fdt, node, "linux,initrd-end",
-+                              val, sizeof(val));
-+    if ( res )
-+        panic("Cannot fix up \"linux,initrd-end\" property\n");
-+
-+    initrd = ioremap_wc(paddr, len);
-+    if ( !initrd )
-+        panic("Unable to map the hwdom initrd\n");
-+
-+    res = copy_to_guest(kinfo->d, load_addr,
-+                        initrd, len);
-+    if ( res != 0 )
-+        panic("Unable to copy the initrd in the hwdom memory\n");
-+
-+    iounmap(initrd);
-+}
-diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
-index 41454e75ca..0af2b927fc 100644
---- a/xen/include/xen/fdt-domain-build.h
-+++ b/xen/include/xen/fdt-domain-build.h
-@@ -5,6 +5,7 @@
- #include <xen/bootfdt.h>
- #include <xen/device_tree.h>
- #include <xen/fdt-kernel.h>
-+#include <xen/mm.h>
+ #define BOOT_FDT_VIRT_START     (XEN_VIRT_START + XEN_VIRT_SIZE + GAP_SIZE)
+ #define BOOT_FDT_VIRT_SIZE      MB(4)
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 4035cd400a..ef8b35d7c2 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -9,6 +9,7 @@
+ #include <xen/mm-frame.h>
+ #include <xen/pdx.h>
+ #include <xen/pfn.h>
++#include <xen/sections.h>
  #include <xen/types.h>
  
- #if __has_include(<asm/domain_build.h>)
-@@ -32,7 +33,37 @@ int make_memory_node(const struct kernel_info *kinfo, int addrcells,
-                      int sizecells, const struct membanks *mem);
- int make_timer_node(const struct kernel_info *kinfo);
- 
--unsigned int get_allocation_size(paddr_t size);
+ #include <asm/page-bits.h>
+@@ -43,13 +44,21 @@ static inline void *maddr_to_virt(paddr_t ma)
+  */
+ static inline unsigned long virt_to_maddr(unsigned long va)
+ {
++    const unsigned long xen_size = (unsigned long)(_end - _start);
++    const unsigned long xen_virt_start = _AC(XEN_VIRT_START, UL);
++    const unsigned long xen_virt_end = xen_virt_start + xen_size - 1;
 +
-+static inline int get_allocation_size(paddr_t size)
-+{
+     if ((va >= DIRECTMAP_VIRT_START) &&
+         (va <= DIRECTMAP_VIRT_END))
+         return directmapoff_to_maddr(va - directmap_virt_start);
+ 
+-    BUILD_BUG_ON(XEN_VIRT_SIZE != MB(2));
+-    ASSERT((va >> (PAGETABLE_ORDER + PAGE_SHIFT)) ==
+-           (_AC(XEN_VIRT_START, UL) >> (PAGETABLE_ORDER + PAGE_SHIFT)));
++    ASSERT((va >= xen_virt_start) && (va <= xen_virt_end));
++
 +    /*
-+     * get_order_from_bytes returns the order greater than or equal to
-+     * the given size, but we need less than or equal. Adding one to
-+     * the size pushes an evenly aligned size into the next order, so
-+     * we can then unconditionally subtract 1 from the order which is
-+     * returned.
-+     */
-+    return get_order_from_bytes(size + 1) - 1;
-+}
-+
-+typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
-+                                               paddr_t gpa,
-+                                               void *buf,
-+                                               unsigned int len);
-+
-+void initrd_load(struct kernel_info *kinfo,
-+                 copy_to_guest_phys_cb copy_to_guest);
-+
-+void dtb_load(struct kernel_info *kinfo,
-+              copy_to_guest_phys_cb copy_to_guest);
-+
-+int find_unallocated_memory(const struct kernel_info *kinfo,
-+                            const struct membanks *mem_banks[],
-+                            unsigned int nr_mem_banks,
-+                            struct membanks *free_regions,
-+                            int (*cb)(unsigned long s_gfn,
-+                                      unsigned long e_gfn,
-+                                      void *data));
++    * The .init* sections will be freed when Xen completes booting,
++    * so the [__init_begin, __init_end) range must be excluded.
++    */
++    ASSERT((system_state < SYS_STATE_active) || !is_init_section(va));
  
- #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
+     /* phys_offset = load_start - XEN_VIRT_START */
+     return phys_offset + va;
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index f2bf279bac..ee30ed7ff5 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -31,20 +31,30 @@ unsigned long __ro_after_init phys_offset; /* = load_start - XEN_VIRT_START */
+ #define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
  
+ /*
+- * It is expected that Xen won't be more then 2 MB.
++ * It is expected that Xen won't be more then XEN_VIRT_SIZE.
+  * The check in xen.lds.S guarantees that.
+- * At least 3 page tables (in case of Sv39 ) are needed to cover 2 MB.
+- * One for each page level table with PAGE_SIZE = 4 Kb.
+  *
+- * One L0 page table can cover 2 MB(512 entries of one page table * PAGE_SIZE).
++ * Root page table is shared with the initial mapping and is declared
++ * separately. (look at stage1_pgtbl_root)
+  *
+- * It might be needed one more page table in case when Xen load address
+- * isn't 2 MB aligned.
++ * An amount of page tables between root page table and L0 page table
++ * (in the case of Sv39 it covers L1 table):
++ *   (CONFIG_PAGING_LEVELS - 2) are needed for an identity mapping and
++ *   the same amount are needed for Xen.
+  *
+- * CONFIG_PAGING_LEVELS page tables are needed for the identity mapping,
+- * except that the root page table is shared with the initial mapping
++ * An amount of L0 page tables:
++ *   (512 entries of one L0 page table covers 2MB == 1<<XEN_PT_LEVEL_SHIFT(1))
++ *   XEN_VIRT_SIZE >> XEN_PT_LEVEL_SHIFT(1) are needed for Xen and
++ *   one L0 is needed for identity mapping.
+  */
+-#define PGTBL_INITIAL_COUNT ((CONFIG_PAGING_LEVELS - 1) * 2 + 1)
++#define PGTBL_INITIAL_COUNT ((CONFIG_PAGING_LEVELS - 2) * 2 + \
++                             (XEN_VIRT_SIZE >> XEN_PT_LEVEL_SHIFT(1)) + 1)
++
++/* Changing these checks can require an update of PGTBL_INITIAL_COUNT */
++_Static_assert(IS_ALIGNED(XEN_VIRT_START, GB(1)),
++               "XEN_VIRT_START should be 1gb aligned");
++_Static_assert(IS_ALIGNED(XEN_VIRT_SIZE, MB(2)),
++               "XEN_VIRT_SIZE should be 2mb aligned");
+ 
+ pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+ stage1_pgtbl_root[PAGETABLE_ENTRIES];
+diff --git a/xen/include/xen/sections.h b/xen/include/xen/sections.h
+index f2fac8d7fa..fe49d7d0e6 100644
+--- a/xen/include/xen/sections.h
++++ b/xen/include/xen/sections.h
+@@ -7,6 +7,10 @@
+ 
+ /* SAF-0-safe */
+ extern char __init_begin[], __init_end[];
++#define is_init_section(p) ({                           \
++    const char *p_ = (const char *)(unsigned long)(p);  \
++    (p_ >= __init_begin) && (p_ < __init_end);          \
++})
+ 
+ /*
+  * Some data is expected to be written rarely (if at all).
 -- 
 2.49.0
 
