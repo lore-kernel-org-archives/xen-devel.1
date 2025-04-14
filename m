@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E683FC369B5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 11:09:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949713.1346210 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDF6C369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 11:09:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949715.1346230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Hgd-00012A-Vb; Mon, 14 Apr 2025 11:09:11 +0000
+	id 1u4Hgg-0001Zv-KS; Mon, 14 Apr 2025 11:09:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949713.1346210; Mon, 14 Apr 2025 11:09:11 +0000
+Received: by outflank-mailman (output) from mailman id 949715.1346230; Mon, 14 Apr 2025 11:09:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Hgd-00011r-Rz; Mon, 14 Apr 2025 11:09:11 +0000
-Received: by outflank-mailman (input) for mailman id 949713;
- Mon, 14 Apr 2025 11:09:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u4Hgg-0001Zi-Fk; Mon, 14 Apr 2025 11:09:14 +0000
+Received: by outflank-mailman (input) for mailman id 949715;
+ Mon, 14 Apr 2025 11:09:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KxE1=XA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u4Hgc-0000MU-Dj
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 11:09:10 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3718eb5-1920-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 13:09:09 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so36430705e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 04:09:09 -0700 (PDT)
+ id 1u4Hgf-0000MT-Pa
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 11:09:13 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e4ca6409-1920-11f0-9ffb-bf95429c2676;
+ Mon, 14 Apr 2025 13:09:12 +0200 (CEST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43ce70f9afbso45295115e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 04:09:12 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f205ecb8dsm176820405e9.7.2025.04.14.04.09.08
+ 5b1f17b1804b1-43f205ecb8dsm176820405e9.7.2025.04.14.04.09.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 04:09:08 -0700 (PDT)
+ Mon, 14 Apr 2025 04:09:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3718eb5-1920-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: e4ca6409-1920-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744628949; x=1745233749; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1744628951; x=1745233751; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MwMsxn6Jd7jyTrnz0TEyUCElfwL1OHRjwA8ZnK04oco=;
-        b=LSJ8BL4q0PdPq0e/61LQ0TfrkCTEbfTt4jpJQk8S1aWELBcd/TZ+fumzvTS6+Dt+HQ
-         grmsX7AC7A/mAmjI+lH5uvioNr3FN7004poOaqMVsFG0dTgT+Gqm2lBNXm0aTj2twMq/
-         WZNxOdW1aKGB7fLxnOzctwICQoHnsDM14X8g0=
+        bh=FqFVEiY9DHURRecOhH2xsVEyvFBLoIcTk7clcfsrv2I=;
+        b=WFmeiskp3+vsKPgOmZxUZ+uioA4706zkv90lQ1g3rxCwB6xFJiwRJdfBqYBHMDkVTt
+         0shTUdltmBw1wDbWpM0jJSpHou/FizX8J2a3wHhi1z6T+U3V1jyaOADai5IrvHcCE/3v
+         lBk8Bh+6XIBCDulIGdTUmmoxnE/62l/wB8mIU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744628949; x=1745233749;
+        d=1e100.net; s=20230601; t=1744628951; x=1745233751;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MwMsxn6Jd7jyTrnz0TEyUCElfwL1OHRjwA8ZnK04oco=;
-        b=EAnDZYzChRGqgYVEz4/kZfQ/eJkDWIQZOiuYL+5YzcKJnpmM0SPzb68RMG+DeII6iy
-         j32PC4pf/U5p5N1pNeMZ5hO4xeZVJgMHexTgLorhLYyaPMP4t/b/4WSK62uFM/1QRzFE
-         f0kqRBGCYBRXRo9ThyxmvEs39Q3HNsEO5Pvo7X8LYZTcjVb1wGi5hFR90T5i4P0OnbCX
-         /CuPwZjmAsFHa7V+5tAu6atgyLwuXPw1q7UGo0nRQLlXteNxfEzrakzfmXmuwKDV96Z6
-         mvcXoVcmzwE7aErWdli2rRSldP6YkUXbCbh/QkD0VOlnA8tK8PWGL4V8mzK+rJNnQwWN
-         oVaQ==
-X-Gm-Message-State: AOJu0YzR0l+Oe/1et2qurbW+JuVORaVwjCGAi4FyDKt4lrKbS9dGjqnl
-	bEf9dJdzRIBwZ/eAAcwfpkutPa3/SF297QtHx89M2FQecMvGL7IMqIxB6jOOS4iEnsXxhjlG/q8
-	QbFQ=
-X-Gm-Gg: ASbGnctNatGbM70J+j7Nx6BS/Oo16ea4bkv3rH7urNJ1VythK9+7f27m6mDFHeSBwoc
-	Q+AfKPFsSl4sQGZM4GN7PHjYu83Ja0hHH+tqj2SrKyLIHCW62Er1Fh2+18O/MkfFDNRz5bsMbY2
-	48jjDmKPCI9uKOdiy6HE+oKs9Ctzwa8KojkwM7N43zfDuxg59o1A8pbLzciIpxYWtsJJJlOH5os
-	cCR2/pyN8aCe8H/ruYTjim/NAFP9n+Z9BEggMSAkOX11YlQiUlD4PwgWoBhCtGJoVXIiSeoNh26
-	sRfl9xd4hjKg0jXL5YDnIHdBMH6f0bQ56qWCO6HkuJlx1yfjoDFPUGvGNfMm1T9M8NuAZIIL+Tf
-	mJ2YBLfgmn639Sg==
-X-Google-Smtp-Source: AGHT+IFnAY3HNdb1GkemiFAV4NeEsPcpgR1Y2eChTj17M0J4//b9qAZzHqAbfJ4PdYYIgohtWyCBrg==
-X-Received: by 2002:a05:600c:500d:b0:43c:ed61:2c26 with SMTP id 5b1f17b1804b1-43f3a959599mr121393665e9.17.1744628948708;
-        Mon, 14 Apr 2025 04:09:08 -0700 (PDT)
+        bh=FqFVEiY9DHURRecOhH2xsVEyvFBLoIcTk7clcfsrv2I=;
+        b=wN5NDPE4ft+Jgj2BcBhaDL4mpDIFG5eEhYecTsLQIAF+EZ82YY5B2GcsCbbEeegWPY
+         AKyqknyuOSlCnMu4WDydimf8NOE2v5qMuIU40ipG0AZ2OBWI+ESK9VWrcdMAp7x2/BdF
+         9QETo1sZuxgn2RrsJToEt4MQXi2vhWBOY8XQHkcfno2/hHFQGAaoSDFhpJlXf8/JoBmq
+         tTvmsUIKrw8uye/Xb6Ws/c01wRB64YWlhrTYdrb1MT9+gGRfcTaena7kBGANE6W94z/g
+         qwug++P/hnRQNUHACr9K4OUQvjI61ezberobdkukzsSiq50KoMSkgkfCFWOz28XER7vG
+         IG7g==
+X-Gm-Message-State: AOJu0YwdurIZbOC+pLO1LIUbM/N07fxgwwBX3mph0pZoISVktPyaFBVa
+	lHsmiees+KGFfYBhR7TJWJMzFJ05xNbSQcdQfiYHp54QnlJkcz5o0djzKUeOvDgtXWjrUPIfB5x
+	C6nI=
+X-Gm-Gg: ASbGnct2qpOOL2sGm9c6p1lFnPG6j4EVWUBJxwPFHmMQSglJs+Tu8QsfeM5a6pWlURb
+	wG3XEWxN1vhMzuWKdky0qI7bYPhyCvlz4fYkwpcycPN7YXQKwviK1lhcESB7D+j65I4+7NRWLdz
+	OCy5p9o+hxzTLzDC/bjai2LQ7m9jR1ky27UnrnIkJAYW0hHao7eSRPUGpB8ma6ooXtxtaEOCL/z
+	tQTqGMYSGENWfI6McMnG9pjyi/v8qfB2qrbT8aTlLc4xyNOIOMwN9ncViu2OKuFbUy1AsZo/6QJ
+	KtIo08EUMaSsrVNosoXtQq6qkr2nzeGzIPwlbYmFnHEakqlRZ3FFPberJDovZfAtEOYK8olPyfO
+	I6uzJ5AsXfet8qA==
+X-Google-Smtp-Source: AGHT+IGZ04PS5HcN2fvZn8IhAhqmw+tj3+Yj7NHz+aAhUYPXM8WPANEqvuMs2cLjpgEIY8FQQffJ9A==
+X-Received: by 2002:a05:600c:1d09:b0:43b:ce3c:19d0 with SMTP id 5b1f17b1804b1-43f3a9bee1dmr64654355e9.29.1744628950945;
+        Mon, 14 Apr 2025 04:09:10 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
@@ -89,9 +89,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v3 3/6] CI: remove now unused alpine-3.18-arm64-rootfs job and its container
-Date: Mon, 14 Apr 2025 12:09:00 +0100
-Message-Id: <20250414110903.2355303-4-andrew.cooper3@citrix.com>
+Subject: [PATCH v3 5/6] CI: save toolstack artifact as cpio.gz
+Date: Mon, 14 Apr 2025 12:09:02 +0100
+Message-Id: <20250414110903.2355303-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250414110903.2355303-1-andrew.cooper3@citrix.com>
 References: <20250414110903.2355303-1-andrew.cooper3@citrix.com>
@@ -101,7 +101,8 @@ Content-Transfer-Encoding: 8bit
 
 From: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-This got moved to test-artifacts.
+This avoids the need to re-compress it in every test job.  This saves minutes
+of wallclock time.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -111,106 +112,155 @@ CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Doug Goldstein <cardoe@cardoe.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- automation/gitlab-ci/build.yaml               | 11 ----
- .../alpine/3.18-arm64v8.dockerfile            | 66 -------------------
- 2 files changed, 77 deletions(-)
- delete mode 100644 automation/tests-artifacts/alpine/3.18-arm64v8.dockerfile
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 40dcd31f1bce..1b82b359d01f 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -264,17 +264,6 @@
+v3:
+ * Rebase
+ * Rename to xen-tools.cpio.gz to be more specific
+
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1766186423
+---
+ automation/scripts/build                          | 2 +-
+ automation/scripts/qemu-alpine-x86_64.sh          | 2 +-
+ automation/scripts/qemu-smoke-dom0-arm64.sh       | 2 +-
+ automation/scripts/qemu-smoke-dom0less-arm64.sh   | 2 +-
+ automation/scripts/qubes-x86-64.sh                | 4 +++-
+ automation/scripts/xilinx-smoke-dom0-x86_64.sh    | 4 ++--
+ automation/scripts/xilinx-smoke-dom0less-arm64.sh | 3 +--
+ 7 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/automation/scripts/build b/automation/scripts/build
+index 522efe774ef3..51effec81ddd 100755
+--- a/automation/scripts/build
++++ b/automation/scripts/build
+@@ -108,7 +108,7 @@ else
+     # Note: Some smoke tests depending on finding binaries/xen on a full build
+     # even though dist/ contains everything, while some containers don't even
+     # build Xen
+-    cp -r dist binaries/
++    (cd dist/install; find | cpio -o -H newc | gzip) > binaries/xen-tools.cpio.gz
+     cp -r tools/tests binaries/
+     collect_xen_artefacts
+ fi
+diff --git a/automation/scripts/qemu-alpine-x86_64.sh b/automation/scripts/qemu-alpine-x86_64.sh
+index c7dd12197862..fe86caa39304 100755
+--- a/automation/scripts/qemu-alpine-x86_64.sh
++++ b/automation/scripts/qemu-alpine-x86_64.sh
+@@ -30,11 +30,11 @@ cd ..
  
- # Arm test artifacts
+ # Dom0 rootfs
+ cp rootfs.cpio.gz dom0-rootfs.cpio.gz
++cat xen-tools.cpio.gz >> dom0-rootfs.cpio.gz
  
--alpine-3.18-arm64-rootfs-export:
--  extends: .test-jobs-artifact-common
--  image: registry.gitlab.com/xen-project/xen/tests-artifacts/alpine:3.18-arm64v8
--  script:
--    - mkdir binaries && cp /initrd.tar.gz binaries/initrd.tar.gz
--  artifacts:
--    paths:
--      - binaries/initrd.tar.gz
--  tags:
--    - arm64
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+-cp -ar ../dist/install/* .
+ mkdir -p root etc/local.d
+ mv ../domU-rootfs.cpio.gz ./root
+ cp ../bzImage ./root
+diff --git a/automation/scripts/qemu-smoke-dom0-arm64.sh b/automation/scripts/qemu-smoke-dom0-arm64.sh
+index c0cf61ff8f7b..61dd24b9abef 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm64.sh
+@@ -29,11 +29,11 @@ cd ..
+ 
+ # Dom0 rootfs
+ cp rootfs.cpio.gz dom0-rootfs.cpio.gz
++cat xen-tools.cpio.gz >> dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+-cp -ar ../dist/install/* .
+ mkdir -p etc/local.d root
+ mv ../domU-rootfs.cpio.gz ./root
+ cp ../Image ./root
+diff --git a/automation/scripts/qemu-smoke-dom0less-arm64.sh b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+index 8e939f0b7214..58f11dd31038 100755
+--- a/automation/scripts/qemu-smoke-dom0less-arm64.sh
++++ b/automation/scripts/qemu-smoke-dom0less-arm64.sh
+@@ -116,11 +116,11 @@ cd ..
+ 
+ # Dom0 rootfs
+ cp binaries/rootfs.cpio.gz binaries/dom0-rootfs.cpio.gz
++cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+-cp -ar ../binaries/dist/install/* .
+ mkdir -p etc/local.d
+ 
+ echo "#!/bin/bash
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index e2376cb51cb4..3947027d6e4d 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -189,12 +189,12 @@ fi
+ 
+ # Dom0 rootfs
+ cp binaries/rootfs.cpio.gz binaries/dom0-rootfs.cpio.gz
++cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+ mkdir -p boot etc/local.d
+-cp -ar ../binaries/dist/install/* .
+ cp -ar ../binaries/tests .
+ cp -a ../automation/scripts/run-tools-tests tests/
+ 
+@@ -228,8 +228,10 @@ else
+ fi
+ 
+ chmod +x etc/local.d/xen.start
++mkdir -p etc/xen
+ echo "$domU_config" > etc/xen/domU.cfg
+ 
++mkdir -p etc/default
+ echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
+ echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
+ mkdir -p var/log/xen/console
+diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+index 85007dcc290a..1f8cc172c630 100755
+--- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
++++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+@@ -107,6 +107,7 @@ rm -rf rootfs
+ 
+ # Dom0 rootfs
+ cp binaries/rootfs.cpio.gz binaries/dom0-rootfs.cpio.gz
++cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+ if [[ "${TEST}" == argo ]]; then
+     cat binaries/argo.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+ fi
+@@ -114,8 +115,7 @@ fi
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+-mkdir -p boot etc/local.d
+-cp -ar ../binaries/dist/install/* .
++mkdir -p boot etc/local.d etc/xen etc/default
+ echo "#!/bin/bash
+ set -x
+ export LD_LIBRARY_PATH=/usr/local/lib
+diff --git a/automation/scripts/xilinx-smoke-dom0less-arm64.sh b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
+index a3031ecab0dc..59f3fe7edb3e 100755
+--- a/automation/scripts/xilinx-smoke-dom0less-arm64.sh
++++ b/automation/scripts/xilinx-smoke-dom0less-arm64.sh
+@@ -56,12 +56,11 @@ rm -rf rootfs
+ 
+ # Dom0 rootfs
+ cp binaries/rootfs.cpio.gz binaries/dom0-rootfs.cpio.gz
++cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+ cd rootfs
+-cp -ar ../binaries/dist/install/* .
 -
- qemu-system-aarch64-6.0.0-arm64-export:
-   extends: .test-jobs-artifact-common
-   image: registry.gitlab.com/xen-project/xen/tests-artifacts/qemu-system-aarch64:6.0.0-arm64v8
-diff --git a/automation/tests-artifacts/alpine/3.18-arm64v8.dockerfile b/automation/tests-artifacts/alpine/3.18-arm64v8.dockerfile
-deleted file mode 100644
-index a4542f703997..000000000000
---- a/automation/tests-artifacts/alpine/3.18-arm64v8.dockerfile
-+++ /dev/null
-@@ -1,66 +0,0 @@
--# syntax=docker/dockerfile:1
--FROM --platform=linux/arm64/v8 alpine:3.18
--LABEL maintainer.name="The Xen Project" \
--      maintainer.email="xen-devel@lists.xenproject.org"
--
--ENV USER root
--
--RUN mkdir /build
--WORKDIR /build
--
--RUN \
--  # apk
--  apk update && \
--  \
--  # xen runtime deps
--  apk add musl && \
--  apk add openrc && \
--  apk add busybox && \
--  apk add sudo && \
--  apk add dbus && \
--  apk add bash && \
--  apk add python3 && \
--  apk add zlib && \
--  apk add ncurses && \
--  apk add yajl && \
--  apk add libaio && \
--  apk add xz && \
--  apk add util-linux && \
--  apk add argp-standalone && \
--  apk add libfdt && \
--  apk add glib && \
--  apk add pixman && \
--  apk add curl && \
--  apk add udev && \
--  \
--  # Xen
--  cd / && \
--  # Minimal ramdisk environment in case of cpio output
--  rc-update add udev && \
--  rc-update add udev-trigger && \
--  rc-update add udev-settle && \
--  rc-update add networking sysinit && \
--  rc-update add loopback sysinit && \
--  rc-update add bootmisc boot && \
--  rc-update add devfs sysinit && \
--  rc-update add dmesg sysinit && \
--  rc-update add hostname boot && \
--  rc-update add hwclock boot && \
--  rc-update add hwdrivers sysinit && \
--  rc-update add killprocs shutdown && \
--  rc-update add modloop sysinit && \
--  rc-update add modules boot && \
--  rc-update add mount-ro shutdown && \
--  rc-update add savecache shutdown && \
--  rc-update add sysctl boot && \
--  rc-update add local default && \
--  cp -a /sbin/init /init && \
--  echo "ttyS0" >> /etc/securetty && \
--  echo "hvc0" >> /etc/securetty && \
--  echo "ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100" >> /etc/inittab && \
--  echo "hvc0::respawn:/sbin/getty -L hvc0 115200 vt100" >> /etc/inittab && \
--  passwd -d "root" root && \
--  \
--  # Create rootfs
--  cd / && \
--  tar cvzf /initrd.tar.gz bin dev etc home init lib mnt opt root sbin usr var
+ mkdir -p etc/local.d
+ echo "#!/bin/bash
+ 
 -- 
 2.39.5
 
