@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA79C369B2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 10:19:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949557.1346091 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57343C369B5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 10:19:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949560.1346114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Gtz-0006Mt-C3; Mon, 14 Apr 2025 10:18:55 +0000
+	id 1u4Gu2-0006xB-Eo; Mon, 14 Apr 2025 10:18:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949557.1346091; Mon, 14 Apr 2025 10:18:55 +0000
+Received: by outflank-mailman (output) from mailman id 949560.1346114; Mon, 14 Apr 2025 10:18:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4Gtz-0006Mk-95; Mon, 14 Apr 2025 10:18:55 +0000
-Received: by outflank-mailman (input) for mailman id 949557;
- Mon, 14 Apr 2025 10:18:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u4Gu2-0006vl-61; Mon, 14 Apr 2025 10:18:58 +0000
+Received: by outflank-mailman (input) for mailman id 949560;
+ Mon, 14 Apr 2025 10:18:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KxE1=XA=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u4Gtx-0005Nh-On
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 10:18:53 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dd23d9a6-1919-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 12:18:52 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43ede096d73so29815775e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 03:18:52 -0700 (PDT)
+ id 1u4Gu1-0006cA-4U
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 10:18:57 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id de8dd637-1919-11f0-9ffb-bf95429c2676;
+ Mon, 14 Apr 2025 12:18:54 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43d07ca6a80so19015125e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Apr 2025 03:18:54 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233a2f08sm171340495e9.12.2025.04.14.03.18.50
+ 5b1f17b1804b1-43f233a2f08sm171340495e9.12.2025.04.14.03.18.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 03:18:51 -0700 (PDT)
+ Mon, 14 Apr 2025 03:18:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd23d9a6-1919-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: de8dd637-1919-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744625932; x=1745230732; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1744625934; x=1745230734; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wlk2C2qbHJoC+R/qrRgQwbQ441YQiHB5rm1pXRjQnSc=;
-        b=sz0ZQO+H82rgAbZ7eplpczt/+u+akZusZPjcGAxJX5gCh4hIwEAtlNzn34AMcfRXT/
-         5QOxAWqpA7ZqsLIaCypmE2OhsdGLYxfEQJF1V3AJkOsNnjxs3djGdHclP7oH3bc4Ag7i
-         kDXtzO0wHmsWtJ4HXSk8m/nMlMCxqWG5bL/9k=
+        bh=1BxgGCRwzO7L707eY7SgfaioeTDsDFCJ+wxG6hWaDZA=;
+        b=PD6w7Aojk5gPSRkkcdC7CbeF+9iWhUT9uhmGHCQWXfC2zVyuwab0EMWh6Hz5Q0I+g2
+         CQXLQM4VoyyYrY36PF2Qoo46HS+vBM38A/4uWWk/odJ1qMaaVwejiTdg6HzanhoF66DK
+         QhrUgPamz3pmYBNRHY+kld/g4HHx4LVVSLMqM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744625932; x=1745230732;
+        d=1e100.net; s=20230601; t=1744625934; x=1745230734;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wlk2C2qbHJoC+R/qrRgQwbQ441YQiHB5rm1pXRjQnSc=;
-        b=TKBotqxpqyTLcUziIeLviGkztIPAOYNcxnwSeaVVSUDTj+2aj/qF0k8r2+czorhkbh
-         BrvSDn3Zeffh6e9t9I+PG/NFZSw3w2cKG059QEyBPGzYMkvFPCELoT3vhsjYSa1I3MuB
-         JnKCwdAf+VMlPyQ6uZP7hSrEuSOLBD2T59Lw9p5+cNY+E4Udpj5feW/XmLMa7UdDcZjV
-         mFmtLIlkLlDuJCEc7SVXec/qlr8zURSliVFYswqWXGmAGL40asnHoZJkO5m6+GeO+oZL
-         dz+ZMywapb5uNTjKDUsn3DA3EWY9XGeDQCv1tdk4brqegkCIeO0LuzvjBin/GG+6pt92
-         /MjA==
-X-Gm-Message-State: AOJu0YySjKx5hvDI9ag6cuZqT/AKyuUZi69gAdLZwaRsH3L4ajx1vzSo
-	MbZ4z5YB201QErupGeewy1737JLZlTTq0aRhkVwRXEkpY6GNyvSEklnsVnToO9kfdEIPGdpJsWp
-	xiTQ=
-X-Gm-Gg: ASbGnctgNyMdCFyd9lWLBvfHL/noi+sB7uDQpvpCMkB4o7VJvKGkoKZB3eqKxfabWOY
-	jJfDyaoxgJuRAplLqqZXZMmILR99oWTAx2sMNrqVD3jiKtBmhX5m2WOPp3liMEmb8tFN+POMh0I
-	LzUIxizHC349+jK1Ra8dzmBCFupjfxos+zXswzZO8MLR0ZDrsSTJ1CC5jf800S++03UV7wjfuJO
-	P+HLZ5RD1ubhXM1MP5ust14QW7ORTkSGFPlp/EJ8yOCUu/BCwKyWfm9C99K3qaBH010lxu+mfzQ
-	P7ZHbZ1jZlQR+d1bayiNcWD28Q2m3ihs+32xJfg8NadzPMx8+rQqatE4CbNhmBLki8fSvZiti5f
-	yeb+OE+X85LPzCg==
-X-Google-Smtp-Source: AGHT+IEYbjX2/qPltvHzwBvhqVGJSlcIvueTuo9Pe0SPfLBl1RG9OOR//v0UwuHwn84+dlnokajXwQ==
-X-Received: by 2002:a05:600c:46d1:b0:43d:36c:f24 with SMTP id 5b1f17b1804b1-43f3a93de33mr103346745e9.13.1744625931696;
-        Mon, 14 Apr 2025 03:18:51 -0700 (PDT)
+        bh=1BxgGCRwzO7L707eY7SgfaioeTDsDFCJ+wxG6hWaDZA=;
+        b=dCOBbiM3dI+da6u9sSvPTYH1v/GPYPj6yOBFwMqX53xZJ06mP3J6+nEa7PB4u29k6u
+         4dIqnv3im9KIvg97Fv3OByxMY/yp262n1o8URHxKeC16FuhmbSTgoTSqnjnuj2vMWAgA
+         XQVz2/Y6JfoFu5flKfebom1q2lgOrVNvSep8vxoe48swnkvMhM40fuZ/lYjNCtZOj7GA
+         ZfnZZdU59ZI0DhX0xNkID3/H3bJTRDzk5ub70wCrfMqe7s3ZvBTYkd5ximU2DVwx7DXM
+         EpAcnJR3uk2snPjGBvwEMWh+j8bENOBx4DIuQldMfzNINhcIAQUjBARDJxtEHsV25FpI
+         vfkg==
+X-Gm-Message-State: AOJu0Yz4wBFd0/7SDpOB5qP8v4SkmndSIrgtMQVuw2P+UHD7LqgUwCfU
+	10GPSSZP258QOT/x7b6YDdEWGgxI7XBHto2ve3PhAvhAQtV3TCeB9XgJwCnq71RiPOLB7aNzKi4
+	nvJc=
+X-Gm-Gg: ASbGncvB9NOmdGCuETRp7+Q8fevzRC8tXmgP2iSmiEZsmuqxSfuaD4I6rokbiLQpsSj
+	HYe8NV1HhQRKtc1lSulEHMKS146/z2yiYuCvncAVrYN1gFv7oXU/Recq639vVAsJzeoRQf4QV9V
+	oNAwKF09x7j76hMbM20d3Pd5HHCd3b7vr7v8O8PvtPayWGGTqZg52NgHyBjJjc7MdE0MQ39CQyL
+	grX/a6H0o493cxWxoxx7ffGC+ZFkUbBQO/puuXLOL5nS1tN29aUyjjEdWD+KZPPBnY5DXFtbOtp
+	wKVhFTXEVNB4aQiuPiqyaJtd4eJ5JCtRH3dOeeq5e/upVqeOrdqBdBnQ/j04xLT3JSHqI8HMaN+
+	FJ8Cveuve+YZUuw==
+X-Google-Smtp-Source: AGHT+IHDf0hhLAOJettuM+qp4C4T4LENm81nifm+m3sS3bM+cfNaYx/OsGEvtN1kW3nGhYlQDLnZpA==
+X-Received: by 2002:a05:600c:34c5:b0:43d:649:4e50 with SMTP id 5b1f17b1804b1-43f3a93c74cmr104465045e9.13.1744625934073;
+        Mon, 14 Apr 2025 03:18:54 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jason Andryuk <jason.andryuk@amd.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2 4/7] Shrink the rootfs substantially
-Date: Mon, 14 Apr 2025 11:18:40 +0100
-Message-Id: <20250414101843.2348330-5-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 7/7] Package microcode for the x86 hardware runners
+Date: Mon, 14 Apr 2025 11:18:43 +0100
+Message-Id: <20250414101843.2348330-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250414101843.2348330-1-andrew.cooper3@citrix.com>
 References: <20250414101843.2348330-1-andrew.cooper3@citrix.com>
@@ -99,25 +100,16 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-bash, busybox, musl and zlib are all in the base container.
+They are all out of date, to different degrees.
 
-python3 and ncurses are in principle used by bits of Xen, but not in anything
-we test in CI.  argp-standlone, curl, dbus, libfdt, libgcc and sudo aren't
-used at all (for x86 at least).
+Install jq into the x86_64 build container so we can parse the Github latest
+release information in an acceptable way.
 
-libbz2 and libuuid were pulled in transitively before, and need to be included
-explicitly now.
-
-Use apk --no-cache to avoid keeping a ~2M package index on disk.
-
-Remove the modules scan on boot.  We don't have or build any.  This removes a
-chunk of warnings on boot.
-
-This shrinks the rootfs from ~30M down to ~8M.
-
-No practical change.
+The resulting archive must be uncompressed, in order to work during early
+boot.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
 CC: Stefano Stabellini <sstabellini@kernel.org>
@@ -125,89 +117,89 @@ CC: Michal Orzel <michal.orzel@amd.com>
 CC: Doug Goldstein <cardoe@cardoe.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- scripts/alpine-rootfs.sh | 60 +++++++++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 26 deletions(-)
+ .gitlab-ci.yml                             |  4 +++
+ images/alpine/3.18-x86_64-build.dockerfile |  3 ++
+ scripts/x86-microcode.sh                   | 42 ++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
+ create mode 100755 scripts/x86-microcode.sh
 
-diff --git a/scripts/alpine-rootfs.sh b/scripts/alpine-rootfs.sh
-index 75e2f8648ce5..72c29e0a0a13 100755
---- a/scripts/alpine-rootfs.sh
-+++ b/scripts/alpine-rootfs.sh
-@@ -4,33 +4,42 @@ set -eu
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index d70ddd99e529..74335363d5ed 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -64,6 +64,10 @@ linux-6.6.56-x86_64:
+     ARGO_SHA: "705a7a8a624b42e13e655d3042059b8a85cdf6a3"
+     ARGOEXEC_SHA: "d900429f6640acc6f68a3d3a4c945d7da60625d8"
  
- WORKDIR="${PWD}"
- COPYDIR="${WORKDIR}/binaries"
-+UNAME=$(uname -m)
++microcode-x86:
++  extends: .x86_64-artifacts
++  script: ./scripts/x86-microcode.sh
++
+ #
+ # The jobs below here are legacy and being phased out.
+ #
+diff --git a/images/alpine/3.18-x86_64-build.dockerfile b/images/alpine/3.18-x86_64-build.dockerfile
+index eac0cda4fed3..c4ff30e1f138 100644
+--- a/images/alpine/3.18-x86_64-build.dockerfile
++++ b/images/alpine/3.18-x86_64-build.dockerfile
+@@ -27,6 +27,9 @@ RUN <<EOF
+             openssl-dev
+             perl
  
--apk update
-+apk --no-cache update
- 
--# xen runtime deps
--apk add musl
--apk add libgcc
--apk add openrc
--apk add busybox
--apk add sudo
--apk add dbus
--apk add bash
--apk add python3
--apk add zlib
--apk add lzo
--apk add ncurses
--apk add yajl
--apk add libaio
--apk add xz
--apk add util-linux
--apk add argp-standalone
--apk add libfdt
--apk add glib
--apk add pixman
--apk add curl
--apk add udev
--apk add pciutils
--apk add libelf
-+PKGS=(
-+    # System
-+    openrc
-+    udev
-+    util-linux
++            # Microcode
++            jq
 +
-+    # Xen toolstack runtime deps
-+    libbz2
-+    libuuid
-+    lzo
-+    xz
-+    yajl
+             # Argo build deps
+             autoconf
+             automake
+diff --git a/scripts/x86-microcode.sh b/scripts/x86-microcode.sh
+new file mode 100755
+index 000000000000..cb55a3bd2d52
+--- /dev/null
++++ b/scripts/x86-microcode.sh
+@@ -0,0 +1,42 @@
++#!/bin/bash
 +
-+    # QEMU
-+    glib
-+    libaio
-+    pixman
-+    )
++set -eux -o pipefail
 +
-+case $UNAME in
-+    x86_64)
-+        PKGS+=(
-+            # System
-+            pciutils
++WORKDIR="${PWD}"
++COPYDIR="${WORKDIR}/binaries"
 +
-+            # QEMU
-+            libelf
-+            )
-+        ;;
-+esac
++ROOTDIR="${WORKDIR}/root"
++UCODEDIR="${ROOTDIR}/kernel/x86/microcode"
++mkdir -p "${UCODEDIR}"
 +
-+apk add --no-cache "${PKGS[@]}"
- 
- # Xen
- cd /
-@@ -45,7 +54,6 @@ rc-update add dmesg sysinit
- rc-update add hostname boot
- rc-update add hwclock boot
- rc-update add hwdrivers sysinit
--rc-update add modules boot
- rc-update add killprocs shutdown
- rc-update add mount-ro shutdown
- rc-update add savecache shutdown
++#
++# Intel microcode comes from github
++#
++curl -fsSL https://api.github.com/repos/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/latest > intel-latest.json
++TARBALL_URL="$(jq -r .tarball_url intel-latest.json)"
++curl -fsSL "${TARBALL_URL}" > intel-latest.tar
++tar xf intel-latest.tar --strip-components=1
++
++(
++    cd intel-ucode
++    cat 06-97-02 # adl-*
++    cat 06-8e-09 # kbl-*
++) > "${UCODEDIR}/GenuineIntel.bin"
++
++#
++# AMD microcode comes from linux-firmware
++#
++curl -fsSLO https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amd-ucode/microcode_amd_fam17h.bin
++curl -fsSLO https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amd-ucode/microcode_amd_fam19h.bin
++
++(
++    cat microcode_amd_fam17h.bin # zen2-*, xilinux-*-x86_64-*
++    cat microcode_amd_fam19h.bin # zen3p-*
++) > "${UCODEDIR}/AuthenticAMD.bin"
++
++# Package everything up.  It must be uncompressed
++cd "${ROOTDIR}"
++find . | cpio -R 0:0 -H newc -o > "${COPYDIR}/ucode.cpio"
++
++# Print the contents for the build log
++cpio -tv < "${COPYDIR}/ucode.cpio"
 -- 
 2.39.5
 
