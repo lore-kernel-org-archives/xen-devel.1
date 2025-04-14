@@ -4,40 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D5CC3601E
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 06:38:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949080.1345720 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94AAC369B4
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 07:41:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949115.1345751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4DS7-0000jm-QC; Mon, 14 Apr 2025 06:37:55 +0000
+	id 1u4ERl-0000Ll-MA; Mon, 14 Apr 2025 07:41:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949080.1345720; Mon, 14 Apr 2025 06:37:55 +0000
+Received: by outflank-mailman (output) from mailman id 949115.1345751; Mon, 14 Apr 2025 07:41:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4DS7-0000jf-NW; Mon, 14 Apr 2025 06:37:55 +0000
-Received: by outflank-mailman (input) for mailman id 949080;
- Mon, 14 Apr 2025 06:37:54 +0000
+	id 1u4ERl-0000Ld-IA; Mon, 14 Apr 2025 07:41:37 +0000
+Received: by outflank-mailman (input) for mailman id 949115;
+ Mon, 14 Apr 2025 07:41:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ezPI=XA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1u4DS6-0000jU-E4
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 06:37:54 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=KQal=XA=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
+ id 1u4ERj-0008Gw-NE
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 07:41:35 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20625.outbound.protection.outlook.com
+ [2a01:111:f403:2413::625])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fd9ffa5c-18fa-11f0-9ffb-bf95429c2676;
- Mon, 14 Apr 2025 08:37:52 +0200 (CEST)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cf680d351so28268195e9.0
- for <xen-devel@lists.xenproject.org>; Sun, 13 Apr 2025 23:37:52 -0700 (PDT)
-Received: from ?IPV6:2003:ca:b71f:2f7e:1407:af3a:2658:6d8d?
- (p200300cab71f2f7e1407af3a26586d8d.dip0.t-ipconnect.de.
- [2003:ca:b71f:2f7e:1407:af3a:2658:6d8d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f20a9f14csm105752055e9.1.2025.04.13.23.37.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 13 Apr 2025 23:37:51 -0700 (PDT)
+ id e242d72c-1903-11f0-9ffb-bf95429c2676;
+ Mon, 14 Apr 2025 09:41:33 +0200 (CEST)
+Received: from CH2PR10CA0016.namprd10.prod.outlook.com (2603:10b6:610:4c::26)
+ by SJ2PR12MB8955.namprd12.prod.outlook.com (2603:10b6:a03:542::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.34; Mon, 14 Apr
+ 2025 07:41:30 +0000
+Received: from CH1PEPF0000AD78.namprd04.prod.outlook.com
+ (2603:10b6:610:4c:cafe::6) by CH2PR10CA0016.outlook.office365.com
+ (2603:10b6:610:4c::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.35 via Frontend Transport; Mon,
+ 14 Apr 2025 07:41:29 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH1PEPF0000AD78.mail.protection.outlook.com (10.167.244.56) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8655.12 via Frontend Transport; Mon, 14 Apr 2025 07:41:29 +0000
+Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 14 Apr 2025 02:41:27 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,108 +58,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd9ffa5c-18fa-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1744612672; x=1745217472; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=LwVGuxOkXG6Et+whwlTdqzC4aYYwzHMjz7sVeyBD/yc=;
-        b=LW3/C+Ex0/BO4YyB7QyKgcFXtG5rswffdU/S2jakIfNSbhVEsfqiGQ5TRwEMgvJZh6
-         XjEOh7MEX8ydmgcSkJclyyQdV4cXE46iVZnsMkB70BNc3R7zUhs1I3B4jBTd34rspZz5
-         aKICBr6bEfq59YAF0Z8INK9BstgwtV8IbQK0H4RuuUTHm7X7raHTi7UfOEU2pa5k0t43
-         Y6OvRX1ANTSw8XIrvUyfgD+C4MUaoi3GV2KEcEGFXA3CF8UfZhPifbKDU0wJOdLsG7g3
-         NhUnhwpQboZBKRUWehGHM2FKBfBcmlbgV1b6a91c67Yy0i9dsAn0SDQXcoMUglefXoz6
-         X3+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744612672; x=1745217472;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LwVGuxOkXG6Et+whwlTdqzC4aYYwzHMjz7sVeyBD/yc=;
-        b=Lp8fu/ayFxDn7ETw46eg3pSvY0csH4x8Zcu+gysfFeSVn4SgFrz8AjTckETnEfVcWG
-         dGPj1jQKZOicsdfqG6UgX0nWFki86BBgCnvc5TixImK5/jXJfUIleoSWPMVSDMZe9D+C
-         oI53WhRtXhQcg5eqN3VmW/XUfvG20VD1ykwbyLZjGemn3bAkYrkkEmwULtNUtnoFSgy8
-         7YS0nc1svg2oEfxCXqNTuYbbtnt8glFLtP9s3rXRxQvZJGXLPlHPtSUlySF7M1jG/r5G
-         M0qdWvQ49R3PGycLsyb+nmQzajBG3xvlQ0LKh3NSBT/SLHOL+7zAi/12oumSLFK1i1HD
-         35Xg==
-X-Forwarded-Encrypted: i=1; AJvYcCW7XMaFCtgF3F0UekwXaLEwwmExvKSy4CWvL5B6HSGZDJv4W1Io+dDVMEYPxtQdxAMClBY7+IfxNDE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxSt0Nxjt1f29WcRm60P4dwe7lxTrJHk9VfnHq2+z21h1LT8+UP
-	L+ZUZ2EjcAalbxYv+MbnH2X9Bl7oqKySeNFDwKbym9veQf4NY9ikjFNdN1dc7A==
-X-Gm-Gg: ASbGncu9IpxmAIgyGRx38obFhoUx4i2i7Atiq2le8t/m9teMJ0QLMZyHR0WkRBf+iDm
-	Qm+HcCr6Q6NLOQcOl4ZN2LZFebfp6B/oy7Zri5okZu/ywohZuMKdVt0nc5vkaveynmI4JXzwVn5
-	02Pm9+DmZBje65a+AkwgTE6MtyfjVAKROGet7iC4b4DC2F88SoNyF0ocRoDNbDcjsO2eSotU/j4
-	/mdefLbASZDtb1TpcliPucNEAfsdTsQFdnxYbT7OW0JjPEfZtWq5Zy59ZVtGwflheALxu6HXpu+
-	y6vDeW4aSj9uT89CanoGBpCWR5CwhGPr1UZ2Ox1iltfygi644Zjhiarz+CD7JAu7D6mz+ATBeWY
-	00w36UvAM/wXWcWsCo6lUIazmBsAptWjgvC8BOFWbEkuMqtHRbfhoy+uRFI7hg5SBlFXrLycuRW
-	Y=
-X-Google-Smtp-Source: AGHT+IG6MiEKjmB5j8Tbtg/BKEJK45adl/qjMiPo/7xgHk/SJMQtaLJMNDUrJY9X6893AA4DE1BeeQ==
-X-Received: by 2002:a05:600c:3c84:b0:439:91c7:895a with SMTP id 5b1f17b1804b1-43f2ea651bcmr138989925e9.7.1744612672081;
-        Sun, 13 Apr 2025 23:37:52 -0700 (PDT)
-Message-ID: <07c71107-a08b-4407-bf5d-9cd4314bf9cb@suse.com>
-Date: Mon, 14 Apr 2025 08:37:50 +0200
+X-Inumbo-ID: e242d72c-1903-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dMQMu38ef+sUX4uH3SVGRPk8KF+aIz8AL5ydZDYcRG1e63/CckF2LfKaZYnNQWa/DoD5eISD0zl1GYXlkxIsxa2zEzsvjt17mn4MUbvtSIdRvn77fDTtltA1LDayO6wthUgHDImBM3Fz22LqumwsleH9or73oG0iOlqtipvA2/m2wPE9mdeZaZQoKULn3vyaeLcvAnQm3T4TegSOS8GTeRMsmE3WN/vc/Bakt20/oVw0sPiJAVI/0oe+rsxHJH/5fB+u2qwkHmTSwGvHoSF4fPL8Qv0whiUJijx//EJVBV7982EjgsAxFRzAYqQaPKqfjdO1AWnAqqfP9IDZrdW+mg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kLUcq/TmN6jDuYZQqVsZv1XniSM+qayZPJdduzw5/xc=;
+ b=L/1bKH9x4e/9mAd7mymfkowk3W9j0dYy4S+QY4L6Xgf8u/3fbifBiPbpXGigzH9CHq2Lo7DRi5kHg+igKy4rRXb3vDbk0hdP9jJ9s4h8bcKe9tYAyHw21O/kiFIY1baJEdDXJ+w5TGH1//DnVnIpeTpawlYR78HNT/EqEoz2CQLhKO+p5TJcOwHDRvaV/BNsz84nGpQu/nNMN3F4pJuYeVhh00GJX/I8kdDsOBmPUv2nO8/qAtqZ6gEtKpwXnmsw7ycSi3LCel4afMEtgBOHO4LE7xAay9f6tpt8XxBh7YJbX6CXQCAK5H+4+wzMhjQiDJokFBZX1g+pR7zTbLFkgg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kLUcq/TmN6jDuYZQqVsZv1XniSM+qayZPJdduzw5/xc=;
+ b=WYchlDRPdNUbzNhm5f/Vv2OyCE1/A41f7UnWsaIwteExQmJ0obdS3XfTW7p1YIoKCa1yKcY0bobsa1D+pIiZJ8neXDTzzT/Xk58GiYI4p/OgrJEyfX/cI2VotAIe5RA9BVrpuIGMjPdz24y04++2lZyczADh7Fl7mdmnQENX6+o=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Penny Zheng <Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
+	<jbeulich@suse.com>
+Subject: [PATCH v4 04/15] xen/cpufreq: refactor cmdline "cpufreq=xxx"
+Date: Mon, 14 Apr 2025 15:40:45 +0800
+Message-ID: <20250414074056.3696888-5-Penny.Zheng@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250414074056.3696888-1-Penny.Zheng@amd.com>
+References: <20250414074056.3696888-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] x86/mm: move mmio_ro_emulated_write() to PV only file
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <20250411105411.22334-1-roger.pau@citrix.com>
- <20250411105411.22334-6-roger.pau@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250411105411.22334-6-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD78:EE_|SJ2PR12MB8955:EE_
+X-MS-Office365-Filtering-Correlation-Id: aaef0c1a-0ca1-4adf-e9c3-08dd7b27c4fb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?uYB/yuBNk1lEBknlLnzYnz4hAIIM2Zi0BMI7AcyLIsoqi3rKvFBmzNALsdsm?=
+ =?us-ascii?Q?obOzVnhBTxByzyL59ZQxroacBBLKUXI0WHAiNOBJx+DVrNGqez3xiCZbd6tA?=
+ =?us-ascii?Q?hzDinkLXZPBG5VjkyOSDbZjsNPQ1RaAf75v9NW5gQ0AVbt7h9Yr6Cd0zlWWo?=
+ =?us-ascii?Q?9BtdnH/42W99m+GN4VahKX0AkxOESO6U9tx6U0ODrCfsqljA+7UJlybg+vHW?=
+ =?us-ascii?Q?0LMygegxrXqT7NtCHP4SoTZ2e7iYtUIoxX2hIVnJsdZS/vAQZcrEtma/6+2n?=
+ =?us-ascii?Q?QfOnT5NW7L6eN9wjBj1Bciw4VYBWO4yHwNzmezdnEE9z95gYbj3n1hjds4yc?=
+ =?us-ascii?Q?okyyix2q3XRpwMkWbiY3p/2lKgs6CwAnmGoniuQUUpK9rg7UvSXiyamRab0Z?=
+ =?us-ascii?Q?Gr4xTpqkYP21TXp4ETcuxBQl7H7i/P1O0HG67uWToBXj4a7oQltxxV7S/g8M?=
+ =?us-ascii?Q?NORd39uqIHLdz0J8WLKGAe+ERB+M948B/o/KeCbQPm9bsVOJTHT5OhFqalX5?=
+ =?us-ascii?Q?QXp2YqdQNg4ADhU+/7YIZaXekcVY06We+xEhKBSPDe76hmJgd3bjRg6y75AF?=
+ =?us-ascii?Q?51GLqF1DeL0AcJILY5G8q2LE/g44xVrpb0LVnqVrdfiRBvT7kPUmib6k7gyC?=
+ =?us-ascii?Q?PTE5vwtt24Polt0jfsN7IvdHGPGEta6cC1chgQ4ysqsyTD+daYRObFrO7HEW?=
+ =?us-ascii?Q?RWCkiybdscGMKY7I7tboyJPo5VB/pY1o/fP03WLrdmXfU4mi9m544NaFzV0U?=
+ =?us-ascii?Q?u2S77/y96qtCb0pbVw8RO0KMnZTRjAFg0OHzOZ5YiMCdDrwnxlA46gy2i/xy?=
+ =?us-ascii?Q?ixDHxPl8Oi5v9bqXirso+/uWkKTxITwXPQN4u3MSwngGUfiK5uQvpW6ggije?=
+ =?us-ascii?Q?uK+zRmnEkw6T6m14s51zIM0cQVh4FLheoNVIJvJ4OuTqucnBf0vewZg1IyDf?=
+ =?us-ascii?Q?kRFbsOLLcY99c/FezFc7osU+jL7qCr/wWQPBcr7LjBaY8A0Ov3kHOR/XZKXo?=
+ =?us-ascii?Q?8IPwRy5d/NQ2TrfQg1/uCtoZMtn1xfDHrprpFHywgTy3paxPAU4MkGbGIGWq?=
+ =?us-ascii?Q?MHRKWp1j5lvTwUmCVszCQ8GERqHL+hrKD43sxvWRC/9uePqSMHRLLEkBlsSs?=
+ =?us-ascii?Q?JODYM3fVbgtcVbXDsFtsN5bduV43njYs7JYVsVG/tteVayf/jfF1Hglhw7J6?=
+ =?us-ascii?Q?Yo23bevWCp+3Ai9hj0XTTqvo0scTHMpLVnjOGtb6Op5xwXBrH4wEi//G6ULC?=
+ =?us-ascii?Q?GdV9K0r5VqVxKzDv5a04pZH8FYHoI1rJK/pySnAayvueazT8KAH6OJYWz4lP?=
+ =?us-ascii?Q?a9WrxATRn1+o3BvE7rkQL1dW8u2RllqjwrGRgKdCpQrOQOUJH+u826x+sQz+?=
+ =?us-ascii?Q?DuaBlLY8j99aqeCdIqxXe4eQZ9w3t6FsMPROKodEFfAhbRdKss8NwadwX3l2?=
+ =?us-ascii?Q?mKrpQkKrwh5ztX6loYDbBmRs4doSXsrlALO5niDEiPap2cjg66uJMoVVnU/6?=
+ =?us-ascii?Q?bIgcLXOn6khEr/T97J4r0Uzb/9OTuTQWYVj6?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 07:41:29.4638
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aaef0c1a-0ca1-4adf-e9c3-08dd7b27c4fb
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000AD78.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8955
 
-On 11.04.2025 12:54, Roger Pau Monne wrote:
-> mmio_ro_emulated_write() is only used in pv/ro-page-fault.c, move the
-> function to that file and make it static.
-> 
-> No functional change intended.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+A helper function handle_cpufreq_cmdline() is introduced to tidy different
+handling pathes.
+We also add a new helper cpufreq_opts_contain() to ignore and warn user
+redundant setting, like "cpufreq=hwp;hwp;xen"
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-with ...
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+---
+v2 -> v3:
+- new commit
+---
+v3 -> v4:
+- add one single helper to do the tidy work
+- ignore and warn user redundant setting
+---
+ xen/drivers/cpufreq/cpufreq.c | 53 +++++++++++++++++++++++++++++------
+ 1 file changed, 45 insertions(+), 8 deletions(-)
 
-> --- a/xen/arch/x86/pv/ro-page-fault.c
-> +++ b/xen/arch/x86/pv/ro-page-fault.c
-> @@ -298,6 +298,14 @@ static int ptwr_do_page_fault(struct x86_emulate_ctxt *ctxt,
->   * fault handling for read-only MMIO pages
->   */
->  
-> +struct mmio_ro_emulate_ctxt {
-> +        unsigned long cr2;
-> +        /* Used only for mmcfg case */
-> +        unsigned int seg, bdf;
-> +        /* Used only for non-mmcfg case */
-> +        mfn_t mfn;
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index e01acc0c2d..79c6444116 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -71,6 +71,49 @@ unsigned int __initdata cpufreq_xen_cnt = 1;
+ 
+ static int __init cpufreq_cmdline_parse(const char *s, const char *e);
+ 
++static bool __init cpufreq_opts_contain(enum cpufreq_xen_opt option)
++{
++    unsigned int count = cpufreq_xen_cnt;
++
++    while ( count )
++    {
++        if ( cpufreq_xen_opts[--count] == option )
++            return true;
++    }
++
++    return false;
++}
++
++static int __init handle_cpufreq_cmdline(enum cpufreq_xen_opt option)
++{
++    int ret = 0;
++
++    if ( cpufreq_opts_contain(option) )
++    {
++        const char *cpufreq_opts_str[] = { "CPUFREQ_xen", "CPUFREQ_hwp" };
++
++        printk(XENLOG_WARNING
++               "Duplicate cpufreq driver option: %s",
++               cpufreq_opts_str[option - 1]);
++        return 0;
++    }
++
++    cpufreq_controller = FREQCTL_xen;
++    cpufreq_xen_opts[cpufreq_xen_cnt++] = option;
++    switch ( option )
++    {
++    case CPUFREQ_hwp:
++    case CPUFREQ_xen:
++        xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
++        break;
++    default:
++        ret = -EINVAL;
++        break;
++    }
++
++    return ret;
++}
++
+ static int __init cf_check setup_cpufreq_option(const char *str)
+ {
+     const char *arg = strpbrk(str, ",:;");
+@@ -114,20 +157,14 @@ static int __init cf_check setup_cpufreq_option(const char *str)
+ 
+         if ( choice > 0 || !cmdline_strcmp(str, "xen") )
+         {
+-            xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
+-            cpufreq_controller = FREQCTL_xen;
+-            cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_xen;
+-            ret = 0;
++            ret = handle_cpufreq_cmdline(CPUFREQ_xen);
+             if ( arg[0] && arg[1] )
+                 ret = cpufreq_cmdline_parse(arg + 1, end);
+         }
+         else if ( IS_ENABLED(CONFIG_INTEL) && choice < 0 &&
+                   !cmdline_strcmp(str, "hwp") )
+         {
+-            xen_processor_pmbits |= XEN_PROCESSOR_PM_PX;
+-            cpufreq_controller = FREQCTL_xen;
+-            cpufreq_xen_opts[cpufreq_xen_cnt++] = CPUFREQ_hwp;
+-            ret = 0;
++            ret = handle_cpufreq_cmdline(CPUFREQ_hwp);
+             if ( arg[0] && arg[1] )
+                 ret = hwp_cmdline_parse(arg + 1, end);
+         }
+-- 
+2.34.1
 
-... the unnecessarily deep indentation corrected here.
-
-Jan
 
