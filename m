@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95AC6C369B2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 07:50:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.949185.1345841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148D3C369B2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Apr 2025 07:52:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.949226.1345852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4EaR-0006kc-Mg; Mon, 14 Apr 2025 07:50:35 +0000
+	id 1u4Ec5-000856-6y; Mon, 14 Apr 2025 07:52:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 949185.1345841; Mon, 14 Apr 2025 07:50:35 +0000
+Received: by outflank-mailman (output) from mailman id 949226.1345852; Mon, 14 Apr 2025 07:52:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4EaR-0006kV-JO; Mon, 14 Apr 2025 07:50:35 +0000
-Received: by outflank-mailman (input) for mailman id 949185;
- Mon, 14 Apr 2025 07:50:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u4Ec5-00084z-1U; Mon, 14 Apr 2025 07:52:17 +0000
+Received: by outflank-mailman (input) for mailman id 949226;
+ Mon, 14 Apr 2025 07:52:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KQal=XA=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u4ERz-0000Ks-Gl
- for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 07:41:51 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2060c.outbound.protection.outlook.com
- [2a01:111:f403:200a::60c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ea552f81-1903-11f0-9eae-5ba50f476ded;
- Mon, 14 Apr 2025 09:41:47 +0200 (CEST)
-Received: from CH2PR14CA0003.namprd14.prod.outlook.com (2603:10b6:610:60::13)
- by DS0PR12MB8442.namprd12.prod.outlook.com (2603:10b6:8:125::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.30; Mon, 14 Apr
- 2025 07:41:40 +0000
+ id 1u4ESA-0008Gw-4g
+ for xen-devel@lists.xenproject.org; Mon, 14 Apr 2025 07:42:02 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20618.outbound.protection.outlook.com
+ [2a01:111:f403:2413::618])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id edbc6620-1903-11f0-9ffb-bf95429c2676;
+ Mon, 14 Apr 2025 09:41:52 +0200 (CEST)
+Received: from CH2PR14CA0030.namprd14.prod.outlook.com (2603:10b6:610:60::40)
+ by LV2PR12MB5968.namprd12.prod.outlook.com (2603:10b6:408:14f::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.32; Mon, 14 Apr
+ 2025 07:41:44 +0000
 Received: from CH1PEPF0000AD7A.namprd04.prod.outlook.com
- (2603:10b6:610:60:cafe::fb) by CH2PR14CA0003.outlook.office365.com
- (2603:10b6:610:60::13) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:610:60:cafe::dc) by CH2PR14CA0030.outlook.office365.com
+ (2603:10b6:610:60::40) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.34 via Frontend Transport; Mon,
- 14 Apr 2025 07:41:39 +0000
+ 14 Apr 2025 07:41:44 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CH1PEPF0000AD7A.mail.protection.outlook.com (10.167.244.59) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Mon, 14 Apr 2025 07:41:39 +0000
+ 15.20.8655.12 via Frontend Transport; Mon, 14 Apr 2025 07:41:44 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 14 Apr 2025 02:41:37 -0500
+ 15.1.2507.39; Mon, 14 Apr 2025 02:41:41 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea552f81-1903-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: edbc6620-1903-11f0-9ffb-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RvUWsWBL4AHCmXFb3y6ZNyjxkD/55Qf5MGEljqwAMxWVwRnJ003YWF51Cyfi5yB6Y6mP2HPqUr8NN1sr5knfSOW0TpXKtXPlRkTfBKd9i6b6zkQ6ZmkoC2hr4CYMMmPeJgNT/twOtHyKU6eSO2gy153CGIfzZ+pFtRtmOUgekqLlc9eIe0ypXvtswUA3y9IVGrW2TcrEre79Jwi4WhbRdn401s5Sw2gRQJ3gNmtf1iYQIw/s93VwcarSkJH3G7WAPN1tiAdJRd/Hf1DuI/AM7F26NcqttyiXw2EgW8jQ2IFikWMyPxlFibhmlruLOYzZsg/HyNddbFpUE1ayBabABQ==
+ b=uHncPC0xlGLtcf5N8Kl+upEIL3JetxpEEJ+Kgk3319rr6g4k1Xl0CAgSqaI7sKMTNKZjbR8HZVmmjeOqSVM9WJaOU8Oj2xtbSRKzYRRWSFLl+2UEHrKjlWTkoBxy68DFTk2P+prz8TaIAOs995jg+6J03S/rqpdyBBIDUDbKRm6/AFN0XzlMIcRU6UPCV9HzvBY2CH13+hUSj56AOI+ncqmPn34HXkrooe2EYezAYJLanYx/44ushDveR1YGatEuPj2IvPrYvYao01Ln0JZcKSpNjz8/YdvLaZuH23Re9VrdxKZCa+VoZeZ/bqzLtsLocIuqaGPWB73akzkQEjdyBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rk631RlTo98VfmfT4ziRgfHzrRt52/TQ2E4HOv/hOcw=;
- b=jMII2UT+nrQ4yWJLrsUp37ZpXvwJR1mK7VFBqs5RX0YVggs8meiHA5Lxz6K/EUhtDJI1+kUeZrqjgnloHTUU1XCIEv5uawcfbABF8tVAK9oczIMTlY1GeQEEOdFecDTmoW6+iBF6UJKYirCNj9WqoA9EN94wDEPfwh9D4OvzfvqrGbYX93oKcUK0XpH+f0tb1I4N7XaqAh4QcxKG67Bt22vqS50eWLI+GQKmZAoofUqWMXEe49dfA8o8pu+h1OUABb0utjGqeJdETW4OfA32I4jQNAkUVNy4E/j1B2mHSBn9OmFS2jgmQwpo8rpvZMDvNwDIThi0Yq5X79O9lRFKtQ==
+ bh=fANokxGaerdWPBII5E1qURuV3YfJA1bhgLqXW05YT68=;
+ b=xPbOqldZPzV/tHphhI2P80zh9bqIOyRZ2hZVD+alBjuXa9RRulF6WkFovadpVy2TBXP7aKdXiigk1edVCgn1KOEWdX2PFuKKrsAJyNFoEDuvuq+Uf+COdhm8JDbqjmZWjoWFt+7vwOk7v8x3kunrKiUSnwrA3CtWjRus9vUSA+0ZIA01CxORxN6k9RxWgYBcgphXPrNXv15eC0JVt7iMCbfOZCq6Elr13cD9aqOdGgoDgU1D6UC7+cYXNmXnDHV70CKGRX5GOiHjHAUoRHkVthKP14Ngddmv/6tPIxoPdur7OJM1xgjQHFGRDgAP1TEKZOmvD1w5YMo8rPSIC5ECYw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rk631RlTo98VfmfT4ziRgfHzrRt52/TQ2E4HOv/hOcw=;
- b=FfSSWc0B6VsvC/64KLt62Y82QhMNf4qZP1pd1Xg11XUbVGYFw8xWHXOKDMv8FqLVAJZMXDeGwODy4y/w+qImBWy3zIOfWEEC5QlTHWSeN/9ESFVKWzMsE6uHRqwA8nTyAiiETDaxau0Mbi6xd3AqWR666k4KHSP8BKYzxwvhe58=
+ bh=fANokxGaerdWPBII5E1qURuV3YfJA1bhgLqXW05YT68=;
+ b=xTH7y6R6QfpUhwBnK+Ksx3oliMEbUA4WETbfSC5bi2Dz4OfWon4dJa8XMBoR/daw4xCwtfZ1IkCaPIhn329MlS9QfImMzjB99Q7VxDN3gOB3GVQDE6dF2IurH8EU6sH9zAaSTefZRofG6/UEKwPE6C0qumrGRtLTLhlsc9ZJqpc=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,569 +82,428 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 09/15] xen/x86: introduce a new amd cppc driver for cpufreq scaling
-Date: Mon, 14 Apr 2025 15:40:50 +0800
-Message-ID: <20250414074056.3696888-10-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 11/15] xen/x86: implement EPP support for the amd-cppc driver in active mode
+Date: Mon, 14 Apr 2025 15:40:52 +0800
+Message-ID: <20250414074056.3696888-12-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250414074056.3696888-1-Penny.Zheng@amd.com>
 References: <20250414074056.3696888-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7A:EE_|DS0PR12MB8442:EE_
-X-MS-Office365-Filtering-Correlation-Id: 735ac579-4b0a-45dd-74dd-08dd7b27cb24
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7A:EE_|LV2PR12MB5968:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3cf8dadf-b36a-4952-05a7-08dd7b27cdc0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|36860700013|82310400026;
+	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?OTZMRk9TNmtyREh0VzJxYnd3MWZiVVlDVVpvSjRrNEVvYnA2elFhS1BtWkFz?=
- =?utf-8?B?M1ZQQ1NpRE5mZ0l6TXhMNmw1ekZCUExaR0UyT3U3T0daekl3M3AwQVJZRlEz?=
- =?utf-8?B?K09mMEsxRDVNZTNxRjExVEtyQmxTK2ZqNEx1TkdoTjRTVGVZcnp3YWV1UnYv?=
- =?utf-8?B?YmRQT0cvNCtmaVM0TFc1c0ZRV0hPMXZYNlZtUkxSUVF0TVIxRXlyNXRGYzVr?=
- =?utf-8?B?K3R0MmJhcGxYaGdXb3ZKRGxSdHBlTkxaeFc0U1hRNXh3WE8xUUdFVEpWNTBv?=
- =?utf-8?B?NjVwY1ZiMkUrenE5REpyTnlzRkNNb3JaZVBZRjE0VGVPZ1VNczVhWEVTR3No?=
- =?utf-8?B?MjJwNHhGMlpBL3J6MzRCUVRuWEc4cithTDNWR2lYS0V2VmFMaGhNMnVYMS9O?=
- =?utf-8?B?VXhLaStYR3BsQjViei9oc2dzVkpIdHhoRmQ0RUpCMmJUUXd2OWhtSHFvTVJp?=
- =?utf-8?B?bVlVKzUvU25LVW95czFSaEFzZDVuWWt4b2pPSFF3VkpQa0x4RTc2aS9JM1ZR?=
- =?utf-8?B?LzZ1TW9tL3FyS2I5UHRmNWhxaXVGWkpoclBGYmtQcjd0bjdTdzR0YWtMdEQy?=
- =?utf-8?B?WlpwQ0VDalJMais1dG05bmo4a1JOejQ5cXpwL0dRMzdCV0tIKzZXYmRNUDR2?=
- =?utf-8?B?R0lFQnpVTDhJN0dsT2RoM2Z3WVU2eGI3Zzh2RGJGd0lRNlV0VmtMUS9VeklZ?=
- =?utf-8?B?aUtQOE1XeUx3K1NGMTVwaWpsT2tja3RtWUJkSmxOU3ZPVy9TcFdNbnd5bUc4?=
- =?utf-8?B?enlXSUUrNyt6emF6a3FOaEkwc3FHOFp0Y3lPRy9tQjNyN2JOeldMczI5bGkr?=
- =?utf-8?B?UCtCdVc2TVJUZjZLSC8zTXROZUlFcmJjRFRaSTFPOWNZL1dINUpjZXlna3VL?=
- =?utf-8?B?K1kvSEk2ajRlaitIOXNnbURpT0Rkc0g1RTg4cjA1aWhhMmlpaU1tUFVkY3VH?=
- =?utf-8?B?akQ2WGlBNHl6YmVuK0JCZ0M0SERFRGJlaERXRHBPd3JOaXY4TzVTTG8zeHAx?=
- =?utf-8?B?RVU0Nkx4UTRuN2xIWjI3Z3dvTG9hdVpYOUlreVh6Y3hNMUV1V0EzVGFFTEpz?=
- =?utf-8?B?YmJteURNVVcwUmZoc2Y4aXRtYkMvU2xuTjdWenIxRTZpaDYwSGlUYnhyRGZC?=
- =?utf-8?B?OTdCaU10R016cVQ4bVZ6dHhMUU9mVGVnRmJPS1RsMmFrL0lZelVKbU1BYTA4?=
- =?utf-8?B?bFVCWThCMG9XTjM4RkFPZFlqUnFKbkxSYnE2a1BPeGo4YmJPa3dlQW8yK2Fj?=
- =?utf-8?B?WFFQUjk3Umc2RnNrclphOUJCVVhpOVM5S2I1M0FUYlg4Z2k5R2d0RG9GeEh3?=
- =?utf-8?B?ZzVPMXVPRWNFNk9Za1NZeUhiOGd5b3ExY3VublRIWG1yajNtcjlza3c2bkFJ?=
- =?utf-8?B?cmtFRDF2c29mRWMzYk1sU2RvdUEyZEZHOUJSaVcvQXpWbHF6Q1ZqclJqWjd0?=
- =?utf-8?B?TzY2U3YxNDNQT2VBR1I0NjJoY2drQU9aM2U1ZkNGclFGUTc4dFZsSUZ6ZmxM?=
- =?utf-8?B?bWYwSnZSSTBna2V6bFV4YmlZZG41RGthWm53c21LLzlYMk1Za1dCaUtYOGl4?=
- =?utf-8?B?Q3hOMkVQRjFIMDExUlNqazhwU3JtRU0rbjdSV0tINnE4RFRVcWtUTjczbWJ6?=
- =?utf-8?B?eXo4UUFuQWsweis1VGpOL3E0NS9DSk9tU3BlRjJYS2U5UGN2a3A3QUcvV3E4?=
- =?utf-8?B?MUFpejNEMlNTclkzZXpXd2RRTHFVUXoyU1J4RWJza3N3NHZjVFBhYmg0T0FE?=
- =?utf-8?B?ckVYb1NqUzVQajlXeFhZZmQ4N1FoOTM2dTEvdm0zQkNLMHZZUGNQelRFbDE0?=
- =?utf-8?B?UERjeWJYRXA1bkg1dnE4cHRUbHBZb2dSTVFSU2toc2JHRmdCQmxXcXRxUVZo?=
- =?utf-8?B?SmZIR09SNDRHenJ3ZzJuN0VpWDdFUkpxQlVyT0FaV1RKVlB3YjlXMFA4UlVG?=
- =?utf-8?B?bk9rY05XUDFqM0JBdFJ2ZmJ4U0wxTWxYTUdCMzBNOUdDb3NCdmM2eHdZSnN2?=
- =?utf-8?B?cDR2SjkzQ2lLazM4Nk11aDdNeWlmczQ2QW1NWkp0MllWZjRQVGJvMmkrclJY?=
- =?utf-8?Q?E3hapT?=
+	=?us-ascii?Q?G/LQY0YG6Wpd5Hy2kebkMNjRenfg0i1M2bvUO29bxqLznhWrIBtF2Arx83zF?=
+ =?us-ascii?Q?7jXt102xCXYSVXPyk15YwbR6x9xwurjJp/TyNX37owXddy+Jsj/ngauoYhiS?=
+ =?us-ascii?Q?EFMLTV56wr/E46ivqD5suwqBD6qvtcBUiXbCnxCzE1OqXmsGCaBYQxBQ3rws?=
+ =?us-ascii?Q?iaKU/nCwfbXAGa4hSxMWo1PhvJ+Wo0t0iFiFdg27mpiCveXxrqxu7+TdpoVD?=
+ =?us-ascii?Q?Ey9LJqjbQwa1xOSkl453SUUSkIrNgz2jbTjy4rsAw91iUSrw0utZRWzjnlle?=
+ =?us-ascii?Q?bamSsxu3r51BcRbE91AccVl86MFMzPEPP0Yccu298ZVbWhURDK3w/cCCLIi9?=
+ =?us-ascii?Q?JLiZtJ/ZYGRJv0bMBdebN+PxgexhBpNqL5WXR0vBWSscnIaa7oON95V1JrZf?=
+ =?us-ascii?Q?/wgUZrbZxmWP+Coa6reWoCTlrIFWt5TQbjMjisHTTJmJKjekTHl1sIck2QDe?=
+ =?us-ascii?Q?oIkLuRK2Ph4Xki5XlGMGWEkWShnRluG9kMLER19yQlPMW8ybyRRZSajFvQpS?=
+ =?us-ascii?Q?UgrJlZEO9h2ouDGSLRbTliQ1fcSdsHkcCQGdxFfEKUyLnDSTLMl4jIkkPAsO?=
+ =?us-ascii?Q?XubByWNu9XMf0iy1zOr9F39B0rWER1rljdCx/7nQkBgACMzRypA7NK95lxCP?=
+ =?us-ascii?Q?EBsUWq5VqtAt7R8CS1QTZ8t+BYjg9/NMUHrl51awyl7LV2AVpW6BxkbkhpsT?=
+ =?us-ascii?Q?Ram1Pzd+vk7oLU2GhaBB7fsj5YW2QB2Cf8EKx9arZuVoSvRaOyf1Q9ouTVw4?=
+ =?us-ascii?Q?yOrf0kLvfoWu5At7newoSVg4WcRjBZp3SGTWteY9rX0PXAumTDuhJlYr9LmS?=
+ =?us-ascii?Q?2r5IzzDpsOL1D0rhg9dgJWDRZYZ3uNybrVe5qvo/vkF7XNKVFw9bB46Bbp+S?=
+ =?us-ascii?Q?bdUdM53jhDYQBIVEYGPouz6CL7ZaGSJaK2FcUz8NNfAaY6SYHjX/W+96GrNs?=
+ =?us-ascii?Q?V9OuCtQfTI4ytbZtvBxZ0H/zn4xIQBHJikbGhjF1OVnt/It41dDy+rZfb1Y9?=
+ =?us-ascii?Q?hJ+ROYIH8F2LVDLTMLqyJeylHKZa2+UPy864+wDLjioENDceHn6IIMtCXLbD?=
+ =?us-ascii?Q?K9yDFjz0ry5XXyOTs5mOhdBGj+TY7iKPEE2BbnubLbQmMtgy/XZ9pKZTRhmf?=
+ =?us-ascii?Q?C7bBxlh3088BHk6wqQofIqtwPsyi+3gl1aq0wzN67yxIYkY+aiQCqgfBpji+?=
+ =?us-ascii?Q?jxo+nO2RicOFls2itA4mcHwO2DihclyBg3dZB+/IrspjiEom0w++9pKV6I2j?=
+ =?us-ascii?Q?BYVGOvbqPiw2RUH8U7UqVht/Z/nHDTRTyyuewyUEdYhQAplYUZQ66+YxMhVb?=
+ =?us-ascii?Q?Sr9g2/zWexNaCeOZr1DJv8YmYGelqv9ONCWTTu0q4LJQgU0/vkpvfKWng7gQ?=
+ =?us-ascii?Q?caAzHhNBA7JilzZmdShxpJenP5Yo15Y89dqNc/liQz367jlCVuxVcQ11kJ8M?=
+ =?us-ascii?Q?U5h/5sd6yJI6uhkLFyTlHzaXn559xZviyxmH9g4e+YuNgcGpMV0nGf+iNicn?=
+ =?us-ascii?Q?SPctfxQ8eznL2utkg6L+gJOxidJAztfYd80A?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 07:41:39.7958
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 07:41:44.1708
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 735ac579-4b0a-45dd-74dd-08dd7b27cb24
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3cf8dadf-b36a-4952-05a7-08dd7b27cdc0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	CH1PEPF0000AD7A.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8442
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5968
 
-amd-cppc is the AMD CPU performance scaling driver that introduces a
-new CPU frequency control mechanism firstly on AMD Zen based CPU series.
-The new mechanism is based on Collaborative Processor Performance
-Control (CPPC) which is a finer grain frequency management
-than legacy ACPI hardware P-States.
-Current AMD CPU platforms are using the ACPI P-states driver to
-manage CPU frequency and clocks with switching only in 3 P-states.
-The new amd-cppc allows a more flexible, low-latency interface for Xen
-to directly communicate the performance hints to hardware.
+amd-cppc has 2 operation modes: autonomous (active) mode,
+non-autonomous (passive) mode.
+In active mode, platform ignores the requestd done in the Desired
+Performance Target register and takes into account only the values
+set to the minimum, maximum and energy performance preference(EPP)
+registers.
+The EPP is used in the CCLK DPM controller to drive the frequency
+that a core is going to operate during short periods of activity.
+The SOC EPP targets are configured on a scale from 0 to 255 where 0
+represents maximum performance and 255 represents maximum efficiency.
 
-The first version "amd-cppc" could leverage common governors such as
-*ondemand*, *performance*, etc, to manage the performance hints. In the
-future, we will introduce an advanced active mode to enable autonomous
-performence level selection.
+We implement a new AMD CPU frequency driver `amd-cppc-epp` for active mode.
+It requires `active` tag for users to explicitly select active mode.
+In driver `active-cppc-epp`, ->setpolicy() is hooked, not the ->target(), as
+it does not depend on xen governor to do performance tuning.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
 v1 -> v2:
-- re-construct union caps and req to have anonymous struct instead
-- avoid "else" when the earlier if() ends in an unconditional control flow statement
-- Add check to avoid chopping off set bits from cast
-- make pointers pointer-to-const wherever possible
-- remove noisy log
-- exclude families before 0x17 before CPPC-feature MSR op
-- remove useless variable helpers
-- use xvzalloc and XVFREE
-- refactor error handling as ENABLE bit can only be cleared by reset
+- Remove redundant epp_mode
+- Remove pointless initializer
+- Define sole caller read_epp_init_once and epp_init value to read
+pre-defined BIOS epp value only once
+- Combine the commit "xen/cpufreq: introduce policy type when
+cpufreq_driver->setpolicy exists"
 ---
 v2 -> v3:
-- Move all MSR-definations to msr-index.h and follow the required style
-- Refactor opening figure braces for struct/union
-- Sort overlong lines throughout the series
-- Make offset/res int covering underflow scenario
-- Error out when amd_max_freq_mhz isn't set
-- Introduce amd_get_freq(name) macro to decrease redundancy
-- Supported CPU family checked ahead of smp-function
-- Nominal freq shall be checked between the [min, max]
-- Use APERF/MPREF to calculate current frequency
-- Use amd_cppc_cpufreq_cpu_exit() to tidy error path
+- Combined with commit "x86/cpufreq: add "cpufreq=amd-cppc,active" para"
+- Refactor doc about "active mode"
+- Change opt_cpufreq_active to opt_active_mode
+- Let caller pass epp_init when unspecified to allow the function parameter
+to be of uint8_t
+- Make epp_init per-cpu value
 ---
 v3 -> v4:
-- verbose print shall come with a CPU number
-- deal with res <= 0 in amd_cppc_khz_to_perf()
-- introduce a single helper amd_get_lowest_or_nominal_freq() to cover both
-lowest and nominal scenario
-- reduce abuse of wrmsr_safe()/rdmsr_safe() with wrmsrl()/rdmsrl()
-- move cf_check from amd_cppc_write_request() to amd_cppc_write_request_msrs()
-- add comment to explain why setting non_linear_lowest in passive mode
-- add check to ensure perf values in
-lowest <= non_linear_lowest <= nominal <= highset
-- refactor comment for "data->err != 0" scenario
-- use "data->err" instead of -ENODEV
-- add U suffixes for all msr macro
+- doc refinement
+- use MASK_EXTR() to get epp value
+- fix indentation
+- replace if-else() with switch()
+- combine successive comments and do refinement
+- no need to introduce amd_cppc_epp_update_limit() as a wrapper
+- rename cpufreq_parse_policy() with cpufreq_policy_from_governor()
+- no need to use case-insensitive comparison
 ---
- xen/arch/x86/acpi/cpufreq/amd-cppc.c | 393 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/msr-index.h |   5 +
- 2 files changed, 398 insertions(+)
+ docs/misc/xen-command-line.pandoc    |   8 +-
+ xen/arch/x86/acpi/cpufreq/amd-cppc.c | 121 ++++++++++++++++++++++++++-
+ xen/arch/x86/include/asm/msr-index.h |   1 +
+ xen/drivers/cpufreq/utility.c        |  11 +++
+ xen/include/acpi/cpufreq/cpufreq.h   |  12 +++
+ xen/include/public/sysctl.h          |   1 +
+ 6 files changed, 149 insertions(+), 5 deletions(-)
 
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 9ef847a336..09f5cb452f 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -515,7 +515,7 @@ If set, force use of the performance counters for oprofile, rather than detectin
+ available support.
+ 
+ ### cpufreq
+-> `= none | {{ <boolean> | xen } { [:[powersave|performance|ondemand|userspace][,[<maxfreq>]][,[<minfreq>]]] } [,verbose]} | dom0-kernel | hwp[:[<hdc>][,verbose]] | amd-cppc[:[verbose]]`
++> `= none | {{ <boolean> | xen } { [:[powersave|performance|ondemand|userspace][,[<maxfreq>]][,[<minfreq>]]] } [,verbose]} | dom0-kernel | hwp[:[<hdc>][,verbose]] | amd-cppc[:[active][,verbose]]`
+ 
+ > Default: `xen`
+ 
+@@ -537,6 +537,12 @@ choice of `dom0-kernel` is deprecated and not supported by all Dom0 kernels.
+ * `amd-cppc` selects ACPI Collaborative Performance and Power Control (CPPC)
+   on supported AMD hardware to provide finer grained frequency control
+   mechanism. The default is disabled.
++* `active` is to enable amd-cppc driver in active(autonomous) mode. In this
++  mode, users could write to energy performance preference register(epp) to
++  tell hardware if they want to bias toward performance or energy efficiency.
++  Then built-in CPPC power algorithm will calculate the runtime workload and
++  adjust cores frequency automatically according to the power supply, thermal,
++  core voltage and some other hardware conditions.
+ 
+ There is also support for `;`-separated fallback options:
+ `cpufreq=hwp;xen,verbose`.  This first tries `hwp` and falls back to `xen` if
 diff --git a/xen/arch/x86/acpi/cpufreq/amd-cppc.c b/xen/arch/x86/acpi/cpufreq/amd-cppc.c
-index 8a081e5523..2fdfd17f59 100644
+index 2fdfd17f59..3a576fd4be 100644
 --- a/xen/arch/x86/acpi/cpufreq/amd-cppc.c
 +++ b/xen/arch/x86/acpi/cpufreq/amd-cppc.c
-@@ -14,7 +14,56 @@
- #include <xen/domain.h>
- #include <xen/init.h>
- #include <xen/param.h>
-+#include <xen/percpu.h>
-+#include <xen/xvmalloc.h>
- #include <acpi/cpufreq/cpufreq.h>
-+#include <asm/amd.h>
-+#include <asm/msr-index.h>
-+
-+#define amd_cppc_err(cpu, fmt, args...)                             \
-+    printk(XENLOG_ERR "AMD_CPPC: CPU%u error: " fmt, cpu, ## args)
-+#define amd_cppc_warn(cpu, fmt, args...)                            \
-+    printk(XENLOG_WARNING "AMD_CPPC: CPU%u warning: " fmt, cpu, ## args)
-+#define amd_cppc_verbose(cpu, fmt, args...)                         \
-+({                                                                  \
-+    if ( cpufreq_verbose )                                          \
-+        printk(XENLOG_DEBUG "AMD_CPPC: CPU%u " fmt, cpu, ## args);  \
-+})
-+
-+struct amd_cppc_drv_data
-+{
-+    const struct xen_processor_cppc *cppc_data;
-+    union {
-+        uint64_t raw;
-+        struct {
-+            unsigned int lowest_perf:8;
-+            unsigned int lowest_nonlinear_perf:8;
-+            unsigned int nominal_perf:8;
-+            unsigned int highest_perf:8;
-+            unsigned int :32;
-+        };
-+    } caps;
-+    union {
-+        uint64_t raw;
-+        struct {
-+            unsigned int max_perf:8;
-+            unsigned int min_perf:8;
-+            unsigned int des_perf:8;
-+            unsigned int epp:8;
-+            unsigned int :32;
-+        };
-+    } req;
-+
-+    int err;
-+};
-+
-+static DEFINE_PER_CPU_READ_MOSTLY(struct amd_cppc_drv_data *,
-+                                  amd_cppc_drv_data);
-+/*
-+ * Core max frequency read from PstateDef as anchor point
-+ * for freq-to-perf transition
-+ */
-+static DEFINE_PER_CPU_READ_MOSTLY(uint64_t, amd_max_pxfreq_mhz);
+@@ -30,6 +30,9 @@
+         printk(XENLOG_DEBUG "AMD_CPPC: CPU%u " fmt, cpu, ## args);  \
+ })
  
- static bool __init amd_cppc_handle_option(const char *s, const char *end)
++static bool __ro_after_init opt_active_mode;
++static DEFINE_PER_CPU_READ_MOSTLY(uint8_t, epp_init);
++
+ struct amd_cppc_drv_data
  {
-@@ -51,10 +100,354 @@ int __init amd_cppc_cmdline_parse(const char *s, const char *e)
+     const struct xen_processor_cppc *cppc_data;
+@@ -76,6 +79,13 @@ static bool __init amd_cppc_handle_option(const char *s, const char *end)
+         return true;
+     }
+ 
++    ret = parse_boolean("active", s, end);
++    if ( ret >= 0 )
++    {
++        opt_active_mode = ret;
++        return true;
++    }
++
+     return false;
+ }
+ 
+@@ -244,11 +254,18 @@ static void cf_check amd_cppc_write_request_msrs(void *info)
+ }
+ 
+ static void amd_cppc_write_request(unsigned int cpu, uint8_t min_perf,
+-                                   uint8_t des_perf, uint8_t max_perf)
++                                   uint8_t des_perf, uint8_t max_perf,
++                                   uint8_t epp)
+ {
+     struct amd_cppc_drv_data *data = per_cpu(amd_cppc_drv_data, cpu);
+     uint64_t prev = data->req.raw;
+ 
++    if ( !opt_active_mode )
++        data->req.des_perf = des_perf;
++    else
++        data->req.des_perf = 0;
++    data->req.epp = epp;
++
+     data->req.min_perf = min_perf;
+     data->req.max_perf = max_perf;
+     data->req.des_perf = des_perf;
+@@ -259,6 +276,14 @@ static void amd_cppc_write_request(unsigned int cpu, uint8_t min_perf,
+     on_selected_cpus(cpumask_of(cpu), amd_cppc_write_request_msrs, data, 1);
+ }
+ 
++static void read_epp_init(void)
++{
++    uint64_t val;
++
++    rdmsrl(MSR_AMD_CPPC_REQ, val);
++    this_cpu(epp_init) = MASK_EXTR(val, AMD_CPPC_EPP_MASK);
++}
++
+ static int cf_check amd_cppc_cpufreq_target(struct cpufreq_policy *policy,
+                                             unsigned int target_freq,
+                                             unsigned int relation)
+@@ -280,7 +305,10 @@ static int cf_check amd_cppc_cpufreq_target(struct cpufreq_policy *policy,
+      * performance in P-state range.
+      */
+     amd_cppc_write_request(policy->cpu, data->caps.lowest_nonlinear_perf,
+-                           des_perf, data->caps.highest_perf);
++                           des_perf, data->caps.highest_perf,
++                           /* Pre-defined BIOS value for passive mode */
++                           per_cpu(epp_init, policy->cpu));
++
      return 0;
  }
  
-+/*
-+ * If CPPC lowest_freq and nominal_freq registers are exposed then we can
-+ * use them to convert perf to freq and vice versa. The conversion is
-+ * extrapolated as an linear function passing by the 2 points:
-+ *  - (Low perf, Low freq)
-+ *  - (Nominal perf, Nominal freq)
-+ */
-+static int amd_cppc_khz_to_perf(const struct amd_cppc_drv_data *data,
-+                                unsigned int freq, uint8_t *perf)
-+{
-+    const struct xen_processor_cppc *cppc_data = data->cppc_data;
-+    uint64_t mul, div;
-+    int offset = 0, res;
+@@ -360,6 +388,8 @@ static void cf_check amd_cppc_init_msrs(void *info)
+      */
+     policy->cur = cpufreq_driver_getavg(policy->cpu, GOV_GETAVG);
+ 
++    read_epp_init();
 +
-+    if ( freq == (cppc_data->cpc.nominal_mhz * 1000) )
-+    {
-+        *perf = data->caps.nominal_perf;
-+        return 0;
-+    }
-+
-+    if ( freq == (cppc_data->cpc.lowest_mhz * 1000) )
-+    {
-+        *perf = data->caps.lowest_perf;
-+        return 0;
-+    }
-+
-+    if ( cppc_data->cpc.lowest_mhz && cppc_data->cpc.nominal_mhz &&
-+         cppc_data->cpc.lowest_mhz < cppc_data->cpc.nominal_mhz )
-+    {
-+        mul = data->caps.nominal_perf - data->caps.lowest_perf;
-+        div = cppc_data->cpc.nominal_mhz - cppc_data->cpc.lowest_mhz;
-+
-+        /*
-+         * We don't need to convert to kHz for computing offset and can
-+         * directly use nominal_mhz and lowest_mhz as the division
-+         * will remove the frequency unit.
-+         */
-+        offset = data->caps.nominal_perf -
-+                 (mul * cppc_data->cpc.nominal_mhz) / div;
-+    }
-+    else
-+    {
-+        /* Read Processor Max Speed(MHz) as anchor point */
-+        mul = data->caps.highest_perf;
-+        div = this_cpu(amd_max_pxfreq_mhz);
-+        if ( !div || div == INVAL_FREQ_MHZ )
-+            return -EINVAL;
-+    }
-+
-+    res = offset + (mul * freq) / (div * 1000);
-+    if ( res > UINT8_MAX )
-+    {
-+        printk_once(XENLOG_WARNING
-+                    "Perf value exceeds maximum value 255: %d\n", res);
-+        *perf = 0xff;
-+        return 0;
-+    } else if ( res < 0 )
-+    {
-+        printk_once(XENLOG_WARNING
-+                    "Perf value smaller than minimum value 0: %d\n", res);
-+        *perf = 0;
-+        return 0;
-+    }
-+    *perf = (uint8_t)res;
-+
-+    return 0;
-+}
-+
-+static int amd_get_lowest_or_nominal_freq(const struct amd_cppc_drv_data *data,
-+                                          uint32_t cpc_mhz, uint8_t perf,
-+                                          unsigned int *freq)
-+{
-+    uint64_t mul, div, res;
-+
-+    if ( !freq )
-+        return -EINVAL;
-+
-+    if ( cpc_mhz )
-+    {
-+        /* Switch to khz */
-+        *freq = cpc_mhz * 1000;
-+        return 0;
-+    }
-+
-+    /* Read Processor Max Speed(MHz) as anchor point */
-+    mul = this_cpu(amd_max_pxfreq_mhz);
-+    if ( mul == INVAL_FREQ_MHZ || !mul )
-+    {
-+        printk(XENLOG_ERR
-+               "Failed to read valid processor max frequency as anchor point: %lu\n",
-+               mul);
-+        return -EINVAL;
-+    }
-+    div = data->caps.highest_perf;
-+    res = (mul * perf * 1000) / div;
-+
-+    if ( res > UINT_MAX || !res )
-+    {
-+        printk(XENLOG_ERR
-+               "Frequeny exceeds maximum value UINT_MAX or being zero value: %lu\n",
-+               res);
-+        return -EINVAL;
-+    }
-+    *freq = (unsigned int)res;
-+
-+    return 0;
-+}
-+
-+static int amd_get_max_freq(const struct amd_cppc_drv_data *data,
-+                            unsigned int *max_freq)
-+{
-+    unsigned int nom_freq = 0, boost_ratio;
-+    int res;
-+
-+    res = amd_get_lowest_or_nominal_freq(data,
-+                                         data->cppc_data->cpc.nominal_mhz,
-+                                         data->caps.nominal_perf,
-+                                         &nom_freq);
-+    if ( res )
-+        return res;
-+
-+    boost_ratio = (unsigned int)(data->caps.highest_perf /
-+                                 data->caps.nominal_perf);
-+    *max_freq = nom_freq * boost_ratio;
-+
-+    return 0;
-+}
-+
-+static int cf_check amd_cppc_cpufreq_verify(struct cpufreq_policy *policy)
-+{
-+    cpufreq_verify_within_limits(policy, policy->cpuinfo.min_freq,
-+                                 policy->cpuinfo.max_freq);
-+
-+    return 0;
-+}
-+
-+static void cf_check amd_cppc_write_request_msrs(void *info)
-+{
-+    const struct amd_cppc_drv_data *data = info;
-+
-+    wrmsrl(MSR_AMD_CPPC_REQ, data->req.raw);
-+}
-+
-+static void amd_cppc_write_request(unsigned int cpu, uint8_t min_perf,
-+                                   uint8_t des_perf, uint8_t max_perf)
-+{
-+    struct amd_cppc_drv_data *data = per_cpu(amd_cppc_drv_data, cpu);
-+    uint64_t prev = data->req.raw;
-+
-+    data->req.min_perf = min_perf;
-+    data->req.max_perf = max_perf;
-+    data->req.des_perf = des_perf;
-+
-+    if ( prev == data->req.raw )
-+        return;
-+
-+    on_selected_cpus(cpumask_of(cpu), amd_cppc_write_request_msrs, data, 1);
-+}
-+
-+static int cf_check amd_cppc_cpufreq_target(struct cpufreq_policy *policy,
-+                                            unsigned int target_freq,
-+                                            unsigned int relation)
-+{
-+    unsigned int cpu = policy->cpu;
-+    const struct amd_cppc_drv_data *data = per_cpu(amd_cppc_drv_data, cpu);
-+    uint8_t des_perf;
-+    int res;
-+
-+    if ( unlikely(!target_freq) )
-+        return 0;
-+
-+    res = amd_cppc_khz_to_perf(data, target_freq, &des_perf);
-+    if ( res )
-+        return res;
-+
-+    /*
-+     * Setting with "lowest_nonlinear_perf" to ensure governoring
-+     * performance in P-state range.
-+     */
-+    amd_cppc_write_request(policy->cpu, data->caps.lowest_nonlinear_perf,
-+                           des_perf, data->caps.highest_perf);
-+    return 0;
-+}
-+
-+static void cf_check amd_cppc_init_msrs(void *info)
-+{
-+    struct cpufreq_policy *policy = info;
-+    struct amd_cppc_drv_data *data = this_cpu(amd_cppc_drv_data);
-+    uint64_t val;
-+    unsigned int min_freq = 0, nominal_freq = 0, max_freq;
-+
-+    /* Package level MSR */
-+    rdmsrl(MSR_AMD_CPPC_ENABLE, val);
-+    /*
-+     * Only when Enable bit is on, the hardware will calculate the processor’s
-+     * performance capabilities and initialize the performance level fields in
-+     * the CPPC capability registers.
-+     */
-+    if ( !(val & AMD_CPPC_ENABLE) )
-+    {
-+        val |= AMD_CPPC_ENABLE;
-+        wrmsrl(MSR_AMD_CPPC_ENABLE, val);
-+    }
-+
-+    rdmsrl(MSR_AMD_CPPC_CAP1, data->caps.raw);
-+
-+    if ( data->caps.highest_perf == 0 || data->caps.lowest_perf == 0 ||
-+         data->caps.nominal_perf == 0 || data->caps.lowest_nonlinear_perf == 0 ||
-+         data->caps.lowest_perf > data->caps.lowest_nonlinear_perf ||
-+         data->caps.lowest_nonlinear_perf > data->caps.nominal_perf ||
-+         data->caps.nominal_perf > data->caps.highest_perf )
-+    {
-+        amd_cppc_err(policy->cpu,
-+                     "Platform malfunction, read CPPC capability highest(%u), lowest(%u), nominal(%u), lowest_nonlinear(%u) zero value\n",
-+                     data->caps.highest_perf, data->caps.lowest_perf,
-+                     data->caps.nominal_perf, data->caps.lowest_nonlinear_perf);
-+        goto err;
-+    }
-+
-+    amd_process_freq(cpu_data + policy->cpu,
-+                     NULL, NULL, &this_cpu(amd_max_pxfreq_mhz));
-+
-+    data->err = amd_get_lowest_or_nominal_freq(data,
-+                                               data->cppc_data->cpc.lowest_mhz,
-+                                               data->caps.lowest_perf,
-+                                               &min_freq);
-+    if ( data->err )
-+        return;
-+
-+    data->err = amd_get_lowest_or_nominal_freq(data,
-+                                               data->cppc_data->cpc.nominal_mhz,
-+                                               data->caps.nominal_perf,
-+                                               &nominal_freq);
-+    if ( data->err )
-+        return;
-+
-+    data->err = amd_get_max_freq(data, &max_freq);
-+    if ( data->err )
-+        return;
-+
-+    if ( min_freq > nominal_freq || nominal_freq > max_freq )
-+    {
-+        amd_cppc_err(policy->cpu,
-+                     "min(%u), or max(%u), or nominal(%u) freq value is incorrect\n",
-+                     min_freq, max_freq, nominal_freq);
-+        goto err;
-+    }
-+
-+    policy->min = min_freq;
-+    policy->max = max_freq;
-+
-+    policy->cpuinfo.min_freq = min_freq;
-+    policy->cpuinfo.max_freq = max_freq;
-+    policy->cpuinfo.perf_freq = nominal_freq;
-+    /*
-+     * Set after policy->cpuinfo.perf_freq, as we are taking
-+     * APERF/MPERF average frequency as current frequency.
-+     */
-+    policy->cur = cpufreq_driver_getavg(policy->cpu, GOV_GETAVG);
-+
-+    return;
-+
-+ err:
-+    /*
-+     * No fallback shceme is available here, see more explanation at call
-+     * site in amd_cppc_cpufreq_cpu_init().
-+     */
-+    data->err = -EINVAL;
-+}
-+
-+/*
-+ * AMD CPPC driver is different than legacy ACPI hardware P-State,
-+ * which has a finer grain frequency range between the highest and lowest
-+ * frequency. And boost frequency is actually the frequency which is mapped on
-+ * highest performance ratio. The legacy P0 frequency is actually mapped on
-+ * nominal performance ratio.
-+ */
-+static void amd_cppc_boost_init(struct cpufreq_policy *policy,
-+                                const struct amd_cppc_drv_data *data)
-+{
-+    if ( data->caps.highest_perf <= data->caps.nominal_perf )
-+        return;
-+
-+    policy->turbo = CPUFREQ_TURBO_ENABLED;
-+}
-+
-+static int cf_check amd_cppc_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-+{
-+    XVFREE(per_cpu(amd_cppc_drv_data, policy->cpu));
-+
+     return;
+ 
+  err:
+@@ -393,7 +423,7 @@ static int cf_check amd_cppc_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+     return 0;
+ }
+ 
+-static int cf_check amd_cppc_cpufreq_cpu_init(struct cpufreq_policy *policy)
++static int amd_cppc_cpufreq_init_perf(struct cpufreq_policy *policy)
+ {
+     unsigned int cpu = policy->cpu;
+     struct amd_cppc_drv_data *data;
+@@ -434,12 +464,82 @@ static int cf_check amd_cppc_cpufreq_cpu_init(struct cpufreq_policy *policy)
+ 
+     amd_cppc_boost_init(policy, data);
+ 
 +    return 0;
 +}
 +
 +static int cf_check amd_cppc_cpufreq_cpu_init(struct cpufreq_policy *policy)
 +{
-+    unsigned int cpu = policy->cpu;
-+    struct amd_cppc_drv_data *data;
-+    const struct cpuinfo_x86 *c = cpu_data + cpu;
++    int ret;
 +
-+    data = xvzalloc(struct amd_cppc_drv_data);
-+    if ( !data )
-+        return -ENOMEM;
++    ret = amd_cppc_cpufreq_init_perf(policy);
++    if ( ret )
++        return ret;
 +
-+    data->cppc_data = &processor_pminfo[cpu]->cppc_data;
+     amd_cppc_verbose(policy->cpu,
+                      "CPU initialized with amd-cppc passive mode\n");
+ 
+     return 0;
+ }
+ 
++static int cf_check amd_cppc_epp_cpu_init(struct cpufreq_policy *policy)
++{
++    int ret;
 +
-+    per_cpu(amd_cppc_drv_data, cpu) = data;
++    ret = amd_cppc_cpufreq_init_perf(policy);
++    if ( ret )
++        return ret;
 +
-+    /* Feature CPPC is firstly introduced on Zen2 */
-+    if ( c->x86 < 0x17 )
-+    {
-+        printk_once("Unsupported cpu family: %x\n", c->x86);
-+        return -EOPNOTSUPP;
-+    }
-+
-+    on_selected_cpus(cpumask_of(cpu), amd_cppc_init_msrs, policy, 1);
-+
-+    /*
-+     * The enable bit is sticky, as we need to enable it at the very first
-+     * begining, before CPPC capability sanity check.
-+     * If error path takes effective, not only amd-cppc cpufreq driver fails
-+     * to initialize, but also we could not fall back to legacy P-states
-+     * driver, irrespective of the command line specifying a fallback option.
-+     */
-+    if ( data->err )
-+    {
-+        amd_cppc_err(cpu, "Could not initialize AMD CPPC MSR properly\n");
-+        amd_cppc_cpufreq_cpu_exit(policy);
-+        return data->err;
-+    }
-+
-+    policy->governor = cpufreq_opt_governor ? : CPUFREQ_DEFAULT_GOVERNOR;
-+
-+    amd_cppc_boost_init(policy, data);
++    policy->policy = cpufreq_policy_from_governor(policy->governor);
 +
 +    amd_cppc_verbose(policy->cpu,
-+                     "CPU initialized with amd-cppc passive mode\n");
++                     "CPU initialized with amd-cppc active mode\n");
 +
++    return 0;
++}
++
++static int cf_check amd_cppc_epp_set_policy(struct cpufreq_policy *policy)
++{
++    const struct amd_cppc_drv_data *data = per_cpu(amd_cppc_drv_data,
++                                                   policy->cpu);
++    uint8_t max_perf, min_perf, epp;
++
++    /*
++     * Initial min/max values for CPPC Performance Controls Register.
++     * Continuous CPPC performance scale in active mode is [lowest_perf,
++     * highest_perf]
++     */
++    max_perf = data->caps.highest_perf;
++    min_perf = data->caps.lowest_perf;
++
++    /*
++     * As min_perf sets the idle frequency and max_perf sets the maximum
++     * frequency, we make min_perf equal with max_perf in performance mode
++     * and lower max_perf to the nominal perf in powersave mode, to achieve
++     * ultmost performance and efficiency in each mode.
++     */
++    switch ( policy->policy )
++    {
++    case CPUFREQ_POLICY_PERFORMANCE:
++        /* Force the epp value to be zero for performance policy */
++        epp = CPPC_ENERGY_PERF_MAX_PERFORMANCE;
++        min_perf = max_perf;
++        break;
++    case CPUFREQ_POLICY_POWERSAVE:
++        /* Force the epp value to be 0xff for powersave policy */
++        epp = CPPC_ENERGY_PERF_MAX_POWERSAVE;
++        max_perf = data->caps.nominal_perf;
++        break;
++    default:
++        epp = per_cpu(epp_init, policy->cpu);
++        break;
++    }
++
++    amd_cppc_write_request(policy->cpu, min_perf,
++                           0 /* no des_perf for epp mode */,
++                           max_perf, epp);
 +    return 0;
 +}
 +
  static const struct cpufreq_driver __initconst_cf_clobber
  amd_cppc_cpufreq_driver =
  {
-     .name   = XEN_AMD_CPPC_DRIVER_NAME,
-+    .verify = amd_cppc_cpufreq_verify,
-+    .target = amd_cppc_cpufreq_target,
-+    .init   = amd_cppc_cpufreq_cpu_init,
-+    .exit   = amd_cppc_cpufreq_cpu_exit,
+@@ -450,6 +550,16 @@ amd_cppc_cpufreq_driver =
+     .exit   = amd_cppc_cpufreq_cpu_exit,
  };
  
++static const struct cpufreq_driver __initconst_cf_clobber
++amd_cppc_epp_driver =
++{
++    .name       = XEN_AMD_CPPC_EPP_DRIVER_NAME,
++    .verify     = amd_cppc_cpufreq_verify,
++    .setpolicy  = amd_cppc_epp_set_policy,
++    .init       = amd_cppc_epp_cpu_init,
++    .exit       = amd_cppc_cpufreq_cpu_exit,
++};
++
  int __init amd_cppc_register_driver(void)
+ {
+     int ret;
+@@ -460,7 +570,10 @@ int __init amd_cppc_register_driver(void)
+         return -ENODEV;
+     }
+ 
+-    ret = cpufreq_register_driver(&amd_cppc_cpufreq_driver);
++    if ( opt_active_mode )
++        ret = cpufreq_register_driver(&amd_cppc_epp_driver);
++    else
++        ret = cpufreq_register_driver(&amd_cppc_cpufreq_driver);
+     if ( ret )
+         return ret;
+ 
 diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 22d9e76e55..3ffa613df0 100644
+index 3ffa613df0..d29d1d33aa 100644
 --- a/xen/arch/x86/include/asm/msr-index.h
 +++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -238,6 +238,11 @@
+@@ -242,6 +242,7 @@
+ #define MSR_AMD_CPPC_ENABLE                 0xc00102b1U
+ #define  AMD_CPPC_ENABLE                    (_AC(1, ULL) <<  0)
+ #define MSR_AMD_CPPC_REQ                    0xc00102b3U
++#define  AMD_CPPC_EPP_MASK                  (_AC(0xff, ULL) <<  24)
  
- #define MSR_AMD_CSTATE_CFG                  0xc0010296U
- 
-+#define MSR_AMD_CPPC_CAP1                   0xc00102b0U
-+#define MSR_AMD_CPPC_ENABLE                 0xc00102b1U
-+#define  AMD_CPPC_ENABLE                    (_AC(1, ULL) <<  0)
-+#define MSR_AMD_CPPC_REQ                    0xc00102b3U
-+
  /*
   * Legacy MSR constants in need of cleanup.  No new MSRs below this comment.
-  */
+diff --git a/xen/drivers/cpufreq/utility.c b/xen/drivers/cpufreq/utility.c
+index b35e2eb1b6..2617581125 100644
+--- a/xen/drivers/cpufreq/utility.c
++++ b/xen/drivers/cpufreq/utility.c
+@@ -487,3 +487,14 @@ int __cpufreq_set_policy(struct cpufreq_policy *data,
+ 
+     return __cpufreq_governor(data, CPUFREQ_GOV_LIMITS);
+ }
++
++unsigned int cpufreq_policy_from_governor(const struct cpufreq_governor *gov)
++{
++    if ( !strncmp(gov->name, "performance", CPUFREQ_NAME_LEN) )
++        return CPUFREQ_POLICY_PERFORMANCE;
++
++    if ( !strncmp(gov->name, "powersave", CPUFREQ_NAME_LEN) )
++        return CPUFREQ_POLICY_POWERSAVE;
++
++    return CPUFREQ_POLICY_UNKNOWN;
++}
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 83050c58b2..6f31009e82 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -83,6 +83,7 @@ struct cpufreq_policy {
+     int8_t              turbo;  /* tristate flag: 0 for unsupported
+                                  * -1 for disable, 1 for enabled
+                                  * See CPUFREQ_TURBO_* below for defines */
++    unsigned int        policy; /* CPUFREQ_POLICY_* */
+ };
+ DECLARE_PER_CPU(struct cpufreq_policy *, cpufreq_cpu_policy);
+ 
+@@ -133,6 +134,17 @@ extern int cpufreq_register_governor(struct cpufreq_governor *governor);
+ extern struct cpufreq_governor *__find_governor(const char *governor);
+ #define CPUFREQ_DEFAULT_GOVERNOR &cpufreq_gov_dbs
+ 
++#define CPUFREQ_POLICY_UNKNOWN      0
++/*
++ * If cpufreq_driver->target() exists, the ->governor decides what frequency
++ * within the limits is used. If cpufreq_driver->setpolicy() exists, these
++ * two generic policies are available:
++ */
++#define CPUFREQ_POLICY_POWERSAVE    1
++#define CPUFREQ_POLICY_PERFORMANCE  2
++
++unsigned int cpufreq_policy_from_governor(const struct cpufreq_governor *gov);
++
+ /* pass a target to the cpufreq driver */
+ extern int __cpufreq_driver_target(struct cpufreq_policy *policy,
+                                    unsigned int target_freq,
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 42997252ef..fa431fd983 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -424,6 +424,7 @@ struct xen_set_cppc_para {
+ };
+ 
+ #define XEN_AMD_CPPC_DRIVER_NAME "amd-cppc"
++#define XEN_AMD_CPPC_EPP_DRIVER_NAME "amd-cppc-epp"
+ #define XEN_HWP_DRIVER_NAME "hwp"
+ 
+ /*
 -- 
 2.34.1
 
