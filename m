@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C02C369AB
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Apr 2025 10:09:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.952481.1347919 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F320C369AB
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Apr 2025 10:10:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.952504.1347928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4dDw-00023Q-2S; Tue, 15 Apr 2025 10:09:00 +0000
+	id 1u4dFM-0003me-8r; Tue, 15 Apr 2025 10:10:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 952481.1347919; Tue, 15 Apr 2025 10:09:00 +0000
+Received: by outflank-mailman (output) from mailman id 952504.1347928; Tue, 15 Apr 2025 10:10:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4dDv-00023H-Sq; Tue, 15 Apr 2025 10:08:59 +0000
-Received: by outflank-mailman (input) for mailman id 952481;
- Tue, 15 Apr 2025 10:08:58 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1u4dDu-00022j-Hr
- for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 10:08:58 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1u4dDu-00Gx12-0D;
- Tue, 15 Apr 2025 10:08:58 +0000
-Received: from [143.198.24.140] (helo=[100.81.22.8])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1u4dDt-0031HY-1n;
- Tue, 15 Apr 2025 10:08:57 +0000
+	id 1u4dFM-0003mX-6K; Tue, 15 Apr 2025 10:10:28 +0000
+Received: by outflank-mailman (input) for mailman id 952504;
+ Tue, 15 Apr 2025 10:10:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=OGoX=XB=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1u4dFL-0003mN-0b
+ for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 10:10:27 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d9cb5790-19e1-11f0-9eae-5ba50f476ded;
+ Tue, 15 Apr 2025 12:10:26 +0200 (CEST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5cded3e2eso8554032a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Apr 2025 03:10:26 -0700 (PDT)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ a640c23a62f3a-acaa1cb40e3sm1050151866b.122.2025.04.15.03.10.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Apr 2025 03:10:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +46,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=30+nHoXhM1HKJD5jVk3ExrRCsBsij7f6Aozhhh9di/E=; b=No6ZJTd0IPDPJzHOfCM+qUVmyV
-	xJn4qd2m+1Ipji63L/yZMYSxvdHZqNZqcBqGrtpZyQRdpgL+NBy6khEbSUdbm3vVjUNBMWcK2YPQ3
-	XH0eZQyxEJokjPZwvzMpO1H2D3HMQrszAOgN2bPgVzyeNxLjtx6T5PuypKrbG21478Rw=;
-Message-ID: <a9dac3d6-fc12-4caf-b61e-d189d3deaaf9@xen.org>
-Date: Tue, 15 Apr 2025 19:08:51 +0900
+X-Inumbo-ID: d9cb5790-19e1-11f0-9eae-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1744711826; x=1745316626; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=gY43497sSxUtdzpZ2hM8DobKNxC8/fxSO4K8OtOWh18=;
+        b=I9sU8YY8yY1YKfZ1NoGDE17b/4b0LpXjQ9xDiyh6TCiutLmdrtN8p+f0hdwIK5FQHv
+         xO9jE+J/+O2kGDt30F7oo93O+pWHrE8EON74+2hnzoT0UfZfa1z2NDZOVEkdeebC/jAU
+         qosoGzL5KrGn528x79K7dVnPegVsKEdzBijdI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744711826; x=1745316626;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gY43497sSxUtdzpZ2hM8DobKNxC8/fxSO4K8OtOWh18=;
+        b=srbSp+K8tA2aCZwQ1H1dKtYMGMQJ4wDrIHDq1MhI0jAjm+8G2RFg8bDYSWAzC2tJ/D
+         rN9TCsdefV53b0acKkIz9ODJm7A9vWm4LE8q7S+/tKXR7fAZJIEgaFfTT9xav0rkebOf
+         1kyij+9H0QNacGTiDjZGkKoZsmpn4wlbqRYsNSf+HSs5HGQdBlW6jfXcVg9geAvYzZLn
+         iHDoI7C1A8fS6D014lbabomtGdk1Ys32OF9KIuF/uTdY6LeiNqvknYHMJn4RviDvVtZ6
+         10/FoyHqGYNrCxM5lhhE+srJJFw7HlWVQiESnCYIWjqHpvjZH+V1wgHi0CsXlE0B2nxK
+         b5Yw==
+X-Gm-Message-State: AOJu0Yx4PeJGEERZfbL+3Zaaqb/Qz9XF3W2amYucbqn4LbyjigAeS61d
+	0zx6B/dsrBmrXzNENRHGoZsuUuHZoAMvNZzZcEbXWDGrsrNk2+YsSIQOhrVQo9k=
+X-Gm-Gg: ASbGncsN1UKfcZs8UeGYhaJaEMskxS1Ng6hoUOMBlyVeOEKp8fpLKuRknPSLXpi6Tlq
+	iop6SpGTrrRdPpJyID9Q8NbtyhbcWxvl0QA1Iqg13vTb73UvqEzsG0uox4Cu5iUY/vwpXi1GksU
+	1suZQwYCh+YhbC118oL+UB4v3jZfMGANVHqZPGMemIvXuF2+NHXdzj9IkQbyQD6XsMXniZ4qWms
+	fFIYiq8BiLH8DxWjFTpB5bm5c1zqODAPFdM9zUm08d2jTD0iT/4NWtfhMzkbTZro1eqtvKtZS6H
+	hkNMfk7qXL2epSrs+/kUfXBY300PVnDVlL+XfyZpt4PxDw==
+X-Google-Smtp-Source: AGHT+IGNagXJsLWL0AwxJS+PThdmTAQHhspaXhGliosb16F2UnzZ8O6wCUBtvfuDNkP+11BewYW7hw==
+X-Received: by 2002:a17:907:724c:b0:aca:a357:d5f7 with SMTP id a640c23a62f3a-acad343c75amr1640513866b.3.1744711825519;
+        Tue, 15 Apr 2025 03:10:25 -0700 (PDT)
+Date: Tue, 15 Apr 2025 12:10:24 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jiqian Chen <Jiqian.Chen@amd.com>
+Cc: xen-devel@lists.xenproject.org, Huang Rui <ray.huang@amd.com>
+Subject: Re: [PATCH v2 2/8] vpci/header: Emulate legacy capability list for
+ host
+Message-ID: <Z_4wkFn1VvBe_6Eh@macbook.lan>
+References: <20250409064528.405573-1-Jiqian.Chen@amd.com>
+ <20250409064528.405573-3-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/7] arm/mpu: Provide access to the MPU region from the
- C code
-Content-Language: en-GB
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20250411145655.140667-1-luca.fancellu@arm.com>
- <20250411145655.140667-3-luca.fancellu@arm.com>
- <d58be435-fd83-42bc-9fd0-a8884f358704@xen.org>
- <1A24757A-ECCB-4080-B370-DA44D469CC7D@arm.com>
- <6a681c92-8c61-43f5-b266-b0306bc0b1ce@xen.org>
- <72B2783C-AF90-4154-8EF9-4F81A0A537B2@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <72B2783C-AF90-4154-8EF9-4F81A0A537B2@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250409064528.405573-3-Jiqian.Chen@amd.com>
 
-
-
-On 15/04/2025 17:08, Luca Fancellu wrote:
-> Hi Julien,
+On Wed, Apr 09, 2025 at 02:45:22PM +0800, Jiqian Chen wrote:
+> Current logic of init_header() only emulates legacy capability list
+> for guest, expand it to emulate for host too. So that it will be
+> easy to hide a capability whose initialization fails and no need
+> to distinguish host or guest.
 > 
->>>>>   +/*
->>>>> + * The following are needed for the case generators GENERATE_WRITE_PR_REG_CASE
->>>>> + * and GENERATE_READ_PR_REG_CASE with num==0
->>>>> + */
->>>>> +#define PRBAR0_EL2 PRBAR_EL2
->>>>> +#define PRLAR0_EL2 PRLAR_EL2
->>>>
->>>> Rather than aliasing, shouldn't we just rename PR{B,L}AR_EL2 to PR{B,L}AR0_EL2? This would the code mixing between the two.
->>> PR{B,L}AR0_ELx does not exists really, the PR{B,L}AR<n>_ELx exists for n=1..15, here I’m only using this “alias” for the generator,
->>> but PR{B,L}AR_EL2 are the real register.
->>
->> In this case, can PR{B,L}AR0_EL2 defined in mm.c so they are not used anywhere else?
+> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+> ---
+> cc: "Roger Pau Monné" <roger.pau@citrix.com>
+> ---
+> v1->v2 changes:
+> new patch
 > 
-> So this was the case in my previous serie, but Ayan asked me to put them in
-> here because PRBAR_EL2 is arm64 specific, not sure now, shall we move it back
-> and protect it with CONFIG_ARM_64?
+> Best regards,
+> Jiqian Chen.
+> ---
+>  xen/drivers/vpci/header.c | 139 ++++++++++++++++++++------------------
+>  1 file changed, 74 insertions(+), 65 deletions(-)
+> 
+> diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+> index ef6c965c081c..0910eb940e23 100644
+> --- a/xen/drivers/vpci/header.c
+> +++ b/xen/drivers/vpci/header.c
+> @@ -745,6 +745,76 @@ static int bar_add_rangeset(const struct pci_dev *pdev, struct vpci_bar *bar,
+>      return !bar->mem ? -ENOMEM : 0;
+>  }
+>  
+> +/* These capabilities can be exposed to the guest, that vPCI can handle. */
+> +static const unsigned int guest_supported_caps[] = {
+> +    PCI_CAP_ID_MSI,
+> +    PCI_CAP_ID_MSIX,
+> +};
+> +
+> +static int vpci_init_capability_list(struct pci_dev *pdev)
+> +{
+> +    int rc;
+> +    bool mask_cap_list = false;
+> +    bool is_hwdom = is_hardware_domain(pdev->domain);
+> +    const unsigned int *caps = is_hwdom ? NULL : guest_supported_caps;
+> +    const unsigned int n = is_hwdom ? 0 : ARRAY_SIZE(guest_supported_caps);
+> +
+> +    if ( pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
+> +    {
+> +        unsigned int next, ttl = 48;
+> +
+> +        next = pci_find_next_cap_ttl(pdev->sbdf, PCI_CAPABILITY_LIST,
+> +                                     caps, n, &ttl);
+> +
+> +        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_CAPABILITY_LIST, 1,
+> +                               (void *)(uintptr_t)next);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        next &= ~3;
+> +
+> +        if ( !next && !is_hwdom )
+> +            /*
+> +             * If we don't have any supported capabilities to expose to the
+> +             * guest, mask the PCI_STATUS_CAP_LIST bit in the status register.
+> +             */
+> +            mask_cap_list = true;
+> +
+> +        while ( next && ttl )
+> +        {
+> +            unsigned int pos = next;
+> +
+> +            next = pci_find_next_cap_ttl(pdev->sbdf, pos + PCI_CAP_LIST_NEXT,
+> +                                         caps, n, &ttl);
+> +
+> +            rc = vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
+> +                                   pos + PCI_CAP_LIST_ID, 1, NULL);
+> +            if ( rc )
+> +                return rc;
+> +
+> +            rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
+> +                                   pos + PCI_CAP_LIST_NEXT, 1,
+> +                                   (void *)(uintptr_t)next);
+> +            if ( rc )
+> +                return rc;
+> +
+> +            next &= ~3;
+> +        }
+> +    }
+> +
+> +    /* Utilize rsvdp_mask to hide PCI_STATUS_CAP_LIST from the guest. */
+> +    rc = vpci_add_register_mask(pdev->vpci, vpci_hw_read16, vpci_hw_write16,
+> +                                PCI_STATUS, 2, NULL,
+> +                                PCI_STATUS_RO_MASK &
+> +                                    ~(mask_cap_list ? PCI_STATUS_CAP_LIST : 0),
+> +                                PCI_STATUS_RW1C_MASK,
+> +                                mask_cap_list ? PCI_STATUS_CAP_LIST : 0,
+> +                                PCI_STATUS_RSVDZ_MASK);
 
-Yes. I don't thikn PRBAR0_EL2 should be exposed.
+One further remark I've forgot to make on the previous reply: I'm
+unsure we want to do this for dom0, as we in general allow dom0
+unfiltered write access (unless it's for accesses mediated by Xen).
 
-Cheers,
-
--- 
-Julien Grall
-
+Thanks, Roger.
 
