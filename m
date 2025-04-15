@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 242ACC369AB
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Apr 2025 20:38:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.954622.1348647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA5BC369AB
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Apr 2025 22:40:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.954667.1348661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4n2k-0005N0-Lf; Tue, 15 Apr 2025 20:38:06 +0000
+	id 1u4ox6-00071N-Us; Tue, 15 Apr 2025 22:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 954622.1348647; Tue, 15 Apr 2025 20:38:06 +0000
+Received: by outflank-mailman (output) from mailman id 954667.1348661; Tue, 15 Apr 2025 22:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4n2k-0005Mt-JA; Tue, 15 Apr 2025 20:38:06 +0000
-Received: by outflank-mailman (input) for mailman id 954622;
- Tue, 15 Apr 2025 20:38:05 +0000
+	id 1u4ox6-00071G-S1; Tue, 15 Apr 2025 22:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 954667;
+ Tue, 15 Apr 2025 22:40:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wZ1T=XB=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u4n2j-0005Mn-6K
- for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 20:38:05 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1u4ox5-00071A-1V
+ for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 22:40:23 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 86942b09-1a39-11f0-9eae-5ba50f476ded;
- Tue, 15 Apr 2025 22:38:03 +0200 (CEST)
+ id 9ba1cc40-1a4a-11f0-9eae-5ba50f476ded;
+ Wed, 16 Apr 2025 00:40:20 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 508375C5A07;
- Tue, 15 Apr 2025 20:35:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69D87C4CEE7;
- Tue, 15 Apr 2025 20:37:59 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 46C3C6115F;
+ Tue, 15 Apr 2025 22:40:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C5CAC4CEE7;
+ Tue, 15 Apr 2025 22:40:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,49 +43,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 86942b09-1a39-11f0-9eae-5ba50f476ded
+X-Inumbo-ID: 9ba1cc40-1a4a-11f0-9eae-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744749481;
-	bh=YHRIdkp/La6RZNUsrbQro8/zHysEvwBk8lOgjmZcqE8=;
+	s=k20201202; t=1744756818;
+	bh=azKy7Of8j02Wui/5ECtU0oU4BJp7g2vh2iJORCVUWsA=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=I+XbPJbxIm8U2Pisc7EIBG88K4r7oevSlq3xwydRi05EotHaM60w4O7teXkoKW+za
-	 DDuuS3KpaEDgbne+DyWvCtNKWzzk7364Q6AYXq/C+Srmbve3/09g7gETP3ixRZ2Gv0
-	 Q53hl2vbRDDQupao8xg9bDu0HkVqxgHuIcq0L/83hZNWJEEI8xlroPUcWzyVICBtOJ
-	 IEFYclygLJRiHh4ZqqI7jS5zHTGCEGM9EcbbZhOdDOCj/Yf6y4gHEg97IbjJkfqsDF
-	 wG0CtktDhcFId3nK9DgW1Lu7Gu5yG29mDeeLVJ1cyqYj/GRWDwc9rtz2ZObeKAyXsz
-	 r0fEFMk8a3NeA==
-Date: Tue, 15 Apr 2025 13:37:57 -0700 (PDT)
+	b=lcouqrGu1gLy7uEMFOpWVDStB88NHT6uZJ5G7v2oSQZEzwVPOr+Sf7Iv8PM39fMSk
+	 XYIW+ZoR1I7uks9YDD2DV9TQqKDEGQH8UwpU//iUGWt+fvb2tcYEjRAqRHXAPS3yEE
+	 7nIcENS9oq2Bl/+fnQ/VM2REXzq6kKZA8qupsF87BxwpDSeuTGpTiRJKpxpbb7bq1m
+	 L8fuGzlChblCNYeDSru4QpCuj0o8xwGGOTuNJTh3oclSADG6vuRJDy2qgAMt0WLULa
+	 MMkGqC0T7rEJaUYmmMzwLw0mHGZVgmX97pINdViTQctYsD/CEfa5VxfU42dQioMkKs
+	 pC64faU4PrMLA==
+Date: Tue, 15 Apr 2025 15:40:14 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: "Weber (US), Matthew L" <matthew.l.weber3@boeing.com>
-cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    "Whitehead (US), Joshua C" <joshua.c.whitehead@boeing.com>, 
-    "Wood (US), Brian J" <brian.j.wood2@boeing.com>, julien@xen.org, 
-    bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, 
-    Luca.Fancellu@arm.com, andrei.cherechesu@oss.nxp.com, 
-    andrei.cherechesu@nxp.com, peng.fan@nxp.com, john.ernberg@actia.se, 
-    sstabellini@kernel.org
-Subject: Re: NXP Layerscape SMMU IDs
-In-Reply-To: <BN0P110MB20674B71640958CA7A56035AF3B6A@BN0P110MB2067.NAMP110.PROD.OUTLOOK.COM>
-Message-ID: <alpine.DEB.2.22.394.2504151335030.8008@ubuntu-linux-20-04-desktop>
-References: <BN0P110MB20674B71640958CA7A56035AF3B6A@BN0P110MB2067.NAMP110.PROD.OUTLOOK.COM>
+To: Julien Grall <julien@xen.org>
+cc: Mykyta Poturai <Mykyta_Poturai@epam.com>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Jan Beulich <jbeulich@suse.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 0/2] Add support for MSI injection on Arm
+In-Reply-To: <98feb427-7da5-47ff-831c-2b4bcb26c4b9@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2504151536240.8008@ubuntu-linux-20-04-desktop>
+References: <cover.1744621166.git.mykyta_poturai@epam.com> <98feb427-7da5-47ff-831c-2b4bcb26c4b9@xen.org>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-Adding a few people in CC that might be able to help
+On Mon, 14 Apr 2025, Julien Grall wrote:
+> Hi Mykyta,
+> 
+> On 14/04/2025 18:51, Mykyta Poturai wrote:
+> > This series adds the base support for MSI injection on Arm. This is
+> > needed to streamline virtio-pci interrupt triggering.
+> > 
+> > With this patches, MSIs can be triggered in guests by issuing the new
+> > DM op, inject_msi2. This op is similar to inject_msi, but it allows
+> > to specify the source id of the MSI.
+> > 
+> > We chose the approach of adding a new DM op instead of using the pad
+> > field of inject_msi because we have no clear way of distinguishing
+> > between set and unset pad fields. New implementations also adds flags
+> > field to clearly specify if the SBDF is set.
+> > 
+> > Patches were tested on QEMU with
+> 
+> [...]
+> 
+> > patches for ITS support for DomUs applied.
+> 
+> This means this series is unusable without external patches. Given this is
+> adding a new DM operations, I think it would be more sensible to have the vITS
+> support merged first. Then we can look at merging this series.
 
-On Fri, 11 Apr 2025, Weber (US), Matthew L wrote:
-> Hello,
-> 
-> We're curious if anyone else has figured out NXP Layerscape Xen support to get at least basic domains launching with minimal IO support?
-> 
-> Started a recent discussion on it here:
-> https://community.nxp.com/t5/Layerscape/How-to-determine-LS1088A-SMMU-Masters-and-Stream-IDs/m-p/2072157#M15560
-> 
-> We're guessing some of the NXP specific chip/interconnect designs in Layerscape were carried over from the QORIQ PowerPC P/T series.  Maybe some clues in that Topaz hypervisor code?  https://github.com/nxp-qoriq-yocto-sdk/hypervisor
-> 
-> Regards,
-> Matt
-> 
+Hi Mykyta, just checking explicitly with you whether this series
+requires vgic-v3-its.c for DomUs?
+
+If yes, how far are you from sending the relevant patches to xen-devel?
+How many are they?
 
