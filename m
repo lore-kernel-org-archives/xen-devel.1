@@ -4,35 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E09DC369BD
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 00:04:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.954719.1348701 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B77C369AB
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 00:08:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.954660.1348710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4qGH-0004rZ-Vt; Wed, 16 Apr 2025 00:04:17 +0000
+	id 1u4qKY-0005S3-FA; Wed, 16 Apr 2025 00:08:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 954719.1348701; Wed, 16 Apr 2025 00:04:17 +0000
+Received: by outflank-mailman (output) from mailman id 954660.1348710; Wed, 16 Apr 2025 00:08:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4qGH-0004rS-Sw; Wed, 16 Apr 2025 00:04:17 +0000
-Received: by outflank-mailman (input) for mailman id 954719;
- Wed, 16 Apr 2025 00:04:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u4qKY-0005Rw-C2; Wed, 16 Apr 2025 00:08:42 +0000
+Received: by outflank-mailman (input) for mailman id 954660;
+ Tue, 15 Apr 2025 21:52:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RcVf=XC=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u4qGH-0004rM-7J
- for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 00:04:17 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [2604:1380:45d1:ec00::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 532c1e23-1a56-11f0-9ffb-bf95429c2676;
- Wed, 16 Apr 2025 02:04:12 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id BD1BCA4A7A9;
- Tue, 15 Apr 2025 23:58:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40202C4CEE7;
- Wed, 16 Apr 2025 00:04:10 +0000 (UTC)
+ <SRS0=p6zj=XB=tum.de=manuel.andreas@srs-se1.protection.inumbo.net>)
+ id 1u4oCW-0000LC-RL
+ for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 21:52:19 +0000
+Received: from postout2.mail.lrz.de (postout2.mail.lrz.de [129.187.255.138])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e324bace-1a43-11f0-9eae-5ba50f476ded;
+ Tue, 15 Apr 2025 23:52:13 +0200 (CEST)
+Received: from lxmhs52.srv.lrz.de (localhost [127.0.0.1])
+ by postout2.mail.lrz.de (Postfix) with ESMTP id 4ZcdDD2ymnzyWC
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Apr 2025 23:52:12 +0200 (CEST)
+Received: from postout2.mail.lrz.de ([127.0.0.1])
+ by lxmhs52.srv.lrz.de (lxmhs52.srv.lrz.de [127.0.0.1]) (amavis, port 20024)
+ with LMTP id Cwlj-3_X8RcF for <xen-devel@lists.xenproject.org>;
+ Tue, 15 Apr 2025 23:52:11 +0200 (CEST)
+Received: from [192.168.0.140] (unknown [46.128.11.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by postout2.mail.lrz.de (Postfix) with ESMTPSA id 4ZcdDC1cJnzyW9
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Apr 2025 23:52:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,62 +51,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 532c1e23-1a56-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744761850;
-	bh=ck3g4hbRNkZLQBFdyBxGLZ4u9ILqhb7kcAyB6crRRkc=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=p9Rf7AysgMQtbhS8fPzXIDI8cTPbtCgIUItBYmsZ2g23eeX2SDW0qctb2q99g3tnA
-	 YwDnLKveHas4+IAWiH+O6rhxC4xYH3rAAbbqMigWF0zLXlHV1xhQA0fZ6ObQoFVmYY
-	 YtkJiBxoOpw9PZFOHJGQ01HhQPJXhKP/+izbzeGcD9cAPZFU1MvNxeG2aRA70xr9mm
-	 0dBELssgrmrinaDjYp3TDHrmPuVa35ZK0jrpOzB3Fgi960aOytwRVJGGpBWkWcHYZv
-	 ejmARTYhtFDpDBhEQT8gScmUGWj0iMum4NCzyOlohoeUCMll22kYQRa0VYdHAitn9j
-	 BM3dnvq1D1w9A==
-Date: Tue, 15 Apr 2025 17:04:08 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Anthony PERARD <anthony.perard@vates.tech>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [XEN PATCH] automation: Avoid changing source files for randconfig
- tests
-In-Reply-To: <Z-_qJ4eIDpGvfRFL@l14>
-Message-ID: <alpine.DEB.2.22.394.2504151704020.8008@ubuntu-linux-20-04-desktop>
-References: <20250326142754.5441-1-anthony.perard@vates.tech> <alpine.DEB.2.22.394.2503261910100.563920@ubuntu-linux-20-04-desktop> <Z-UvUUwUToTr5OgD@l14> <alpine.DEB.2.22.394.2503271554250.563920@ubuntu-linux-20-04-desktop> <Z-_qJ4eIDpGvfRFL@l14>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: e324bace-1a43-11f0-9eae-5ba50f476ded
+Authentication-Results: postout.lrz.de (amavis); dkim=pass (2048-bit key)
+ reason="pass (just generated, assumed good)" header.d=tum.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tum.de; h=
+	subject:subject:from:from:content-language:user-agent
+	:mime-version:date:date:message-id:content-type:content-type
+	:received:received; s=tu-postout21; t=1744753931; bh=zQeDeQ0W1y6
+	wYnTX8FySKIhUdQH5ebIhmhLL6OmhJbc=; b=kXdmglTuGtQC0ujNlD+H410WduV
+	xE0aeLVuUG6oUPJa7kYUfaVZDa5pp0kQnseDQTDAbd6U+FAfL/U4RLjQfBhd9QLZ
+	o+zjur5zgQYKpip3DmsZ8OGEpl+oe4C96qRXY/ei7SXVHD1g+w4tD0JPv2UaHGGy
+	8vM/wLIKerOoVFHKazA8DD8bUitSPPKOOvCM4b3sFhJ3wm+oQhIn3toBESs1Ceng
+	pxL16Zc5ivxOfHBVsJWflH+jXFbZJe0a7CjWmwKvRByXrdGN/untMVD8+uDm7R3F
+	4bLV9UmFhRZPnfpqZoXX2xe/5nCgVPLfFyRg6vTKUw0VYCrAPYunxxjWlOw==
+X-Virus-Scanned: by amavisd-new at lrz.de in lxmhs52.srv.lrz.de
+Content-Type: multipart/mixed; boundary="------------YdYylOs7HoDWEUUYS4zhUrGa"
+Message-ID: <e7347061-6dc6-44a3-ad41-270e705db2c5@tum.de>
+Date: Tue, 15 Apr 2025 23:52:10 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: xen-devel@lists.xenproject.org
+From: Manuel Andreas <manuel.andreas@tum.de>
+Subject: Assert in x86_emulate_wrapper triggerable by HVM domain
+Autocrypt: addr=manuel.andreas@tum.de; keydata=
+ xjMEY9Zx/RYJKwYBBAHaRw8BAQdALWzRzW9a74DX4l6i8VzXGvv72Vz0qfvj9s7bjBD905nN
+ Jk1hbnVlbCBBbmRyZWFzIDxtYW51ZWwuYW5kcmVhc0B0dW0uZGU+wokEExYIADEWIQQuSfNX
+ 11QV6exAUmOqZGwY4LuingUCY9Zx/QIbAwQLCQgHBRUICQoLBRYCAwEAAAoJEKpkbBjgu6Ke
+ McQBAPyP530S365I50I5rM2XjH5Hr9YcUQATD5dusZJMDgejAP9T/wUurwQSuRfm1rK8cNcf
+ w4wP3+PLvL+J+kuVku93CM44BGPWcf0SCisGAQQBl1UBBQEBB0AmCAf31tLBD5tvtdZ0XX1B
+ yGLUAxhgmFskGyPhY8wOKQMBCAfCeAQYFggAIBYhBC5J81fXVBXp7EBSY6pkbBjgu6KeBQJj
+ 1nH9AhsMAAoJEKpkbBjgu6Kej6YA/RvJdXMjsD5csifolLw53KX0/ElM22SvaGym1+KiiVND
+ AQDy+y+bCXI+J713/AwLBsDxTEXmP7Cp49ZqbAu83NnpBQ==
 
-On Fri, 4 Apr 2025, Anthony PERARD wrote:
-> On Thu, Mar 27, 2025 at 03:59:16PM -0700, Stefano Stabellini wrote:
-> > I was suggesting to create a file under /tmp instead to keep the source
-> > directory cleaner,
-> 
-> There's an easy way to keep the source directory *extra clean* when
-> doing hypervisor build, like we are doing here for randoconfig, that is:
-> out-of-tree build!
-> 
-> > and also because I don't think it is an issue to add
-> > files to /tmp and not clean them because they get removed when the
-> > container exits. Isn't it the case? Locally it looks like each
-> > containers gets its own /tmp that is cleaned after exit.
-> 
-> Sorry, I tend to think that those script could be use outside of the CI
-> or containers, and /tmp can have a lot of different configuration, so
-> it's better to clean after oneself when possible.
-> 
-> As for running containers locally, maybe it's faster to reuse a
-> container instead of creating a new one from an image, which mean /tmp
-> is probably not cleaned on exit. But I guess people usuasly do `docker
-> run --rm` or use `containerize` which does the same.
-> 
-> > So my preference is to use mktemp and *not* clean the tmp file on exit.
-> > 
-> > If you think we have to clean the tmp file on exit, then let's go with
-> > your xen/allrandom.config.tmp approach as I would prefer to avoid the
-> > "trap" command to keep the sources simpler.
-> 
-> So, is that an Ack on my original patch?
+This is a multi-part message in MIME format.
+--------------YdYylOs7HoDWEUUYS4zhUrGa
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Yes
+Dear all,
+
+my fuzzing infrastructure discovered that an assert in 
+x86_emulate_wrapper is able to be triggered by an HVM domain executing a 
+specially crafted repeating movs instruction.
+
+Specifically, if the emulation of the rep movs instruction triggers an 
+exception (e.g. by accessing invalid memory after some amount of 
+iterations), the emulation will be halted at that point.
+However, the instruction manual requires that _some_ register state 
+(namely the updated value of rcx) shall be commited, whereas the 
+instruction pointer needs to be rolled back to point to the address of 
+the instruction itself. The assert checks for the latter. Problematic is 
+the fact that for these type of repeating instructions, Xen seems to 
+eventually just commit all register state when it encounters an exception:
+
+    557  #define put_rep_prefix(reps_completed) 
+({                               \
+    558      if ( rep_prefix() 
+)                                                 \
+    559 { \
+    560          __put_rep_prefix(&_regs, ctxt->regs, ad_bytes, 
+reps_completed); \
+    561          if ( unlikely(rc == X86EMUL_EXCEPTION) 
+)                        \
+    562              goto 
+complete_insn;                                         \
+    563 } \
+    564  })
+
+   8356   complete_insn: /* Commit shadow register state. */
+   8357      put_fpu(fpu_type, false, state, ctxt, ops);
+   8358      fpu_type = X86EMUL_FPU_none;
+   8359
+   8360      /* Zero the upper 32 bits of %rip if not in 64-bit mode. */
+   8361      if ( !mode_64bit() )
+   8362          _regs.r(ip) = (uint32_t)_regs.r(ip);
+   8363
+   8364      /* Should a singlestep #DB be raised? */
+   8365      if ( rc == X86EMUL_OKAY && singlestep && !ctxt->retire.mov_ss )
+   8366      {
+   8367          ctxt->retire.singlestep = true;
+   8368          ctxt->retire.sti = false;
+   8369      }
+   8370
+   8371      if ( rc != X86EMUL_DONE )
+   8372          *ctxt->regs = _regs; // <- Incorrect RIP is commited
+
+I've attached an XTF test that should trigger the aforementioned assert 
+on the latest release commit: 3ad5d648cda5add395f49fc3704b2552aae734f7
+
+Best,
+Manuel
+
+--------------YdYylOs7HoDWEUUYS4zhUrGa
+Content-Type: application/gzip; name="poc-x86emul-assert-orig-ip.tar.gz"
+Content-Disposition: attachment; filename="poc-x86emul-assert-orig-ip.tar.gz"
+Content-Transfer-Encoding: base64
+
+H4sIAAAAAAAAA+2WXU/bMBSGe+1f4WVUallDkzZJURnTGFS74UOiZdLEEEpttzUkdha7pWja
+f5/ttBobtN1EBUL4ufHXax/Hx+fEGUfudDsi6ThxYyFILl2e06FLs3ppXXiKVhjq0m+F3t1y
+TskPwlYz8luNICp5fqjGSzBc2w6WMBYyziEsCXk7FUt0q8ZfKNli/6cxZVtoDTa0g6MgWOR/
+P1TO9oNWFDXDVqOh/R811ZWA3hpsr+SV+7++uQngJvw4oAmBkggp6iuvhJmQk4HRu4vlSmek
+WTwkq7Rw9TKSYw4POBJwwPN/tS3I/3xWHbylDCVjTOD7qRxsjT4AgDgTEqJRXNi8lFQm5PwC
+7kKnp9pLNu7sADDhFBfztJGKblbBDwAVWU6ZvK44XXUBJWVDOM5gsQDUC1yqQ9ET33xjTlWt
+pKfEIoUTnsRSe6sCTZ/GSfkEbnhTv1GD5XKOpjvOvbFtbzDDaDB9QEOw3yfY84xC/KEQEt9t
+5iSDapL4rpRYtCtGX62Vy6RoYFq9I28/VIMOQk5N2SYpz291TW3cFJiaQtBihfnXzw/sjOUk
+Vg7pq0O4oXIECdN1DDHpj4ezMxTFsel5ypOXYowQEaJyfHZ4qLp/AlA3F+SQoziBkzinegnR
+1n0px6QN93UVuTowXBX8iepyPnUPnKK7HwuKXD4YCCLbMNCdMu67NxTL0axNGSZMuqpbuMWS
+jCZ6oMNw21y25w7+0tL8T9mAb10Jzh5rw+R/z1v4/2/4zb/yf8vzGzb/PwVFKnJYnBJHXfAl
+yaxWKFEsyVDHq1KLjCAaJ/MhwiY05yxVt16o4fPf2WI0SaOgCOaLmdiEnKQquWrphYrI5z6K
+V8mS+D+Kr4nOfo+2seL95zWCe++/KPBt/D8F8+fORuX05KRXrffHNMF1xNOUs630GoDjvaPO
+7Ie9u+yRtr/X63w+Of1qdLPEAHqdbs/tHH/p6k6TBADg/Ss3I7lKFvDdLjRPLw7Aw/sYErOJ
+5z4ki8VisVgsFovFYrFYLBaLxWKxWCyWF8QvKyILuQAoAAA=
+
+--------------YdYylOs7HoDWEUUYS4zhUrGa--
 
