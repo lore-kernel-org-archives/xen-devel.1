@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E88C369C9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DFAC369C5
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 11:59:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.955716.1349324 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.955720.1349360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u51Q4-0006Hk-I2; Wed, 16 Apr 2025 11:59:08 +0000
+	id 1u51Q7-0007AN-QL; Wed, 16 Apr 2025 11:59:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 955716.1349324; Wed, 16 Apr 2025 11:59:08 +0000
+Received: by outflank-mailman (output) from mailman id 955720.1349360; Wed, 16 Apr 2025 11:59:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u51Q4-0006HK-DO; Wed, 16 Apr 2025 11:59:08 +0000
-Received: by outflank-mailman (input) for mailman id 955716;
- Wed, 16 Apr 2025 11:59:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u51Q7-00078t-I4; Wed, 16 Apr 2025 11:59:11 +0000
+Received: by outflank-mailman (input) for mailman id 955720;
+ Wed, 16 Apr 2025 11:59:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9TmO=XC=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u51Q3-0006Ay-AA
- for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 11:59:07 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3195a0a3-1aba-11f0-9ffb-bf95429c2676;
- Wed, 16 Apr 2025 13:59:04 +0200 (CEST)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43ed8d32a95so56373815e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Apr 2025 04:59:04 -0700 (PDT)
+ id 1u51Q5-0006At-GP
+ for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 11:59:09 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 343109fa-1aba-11f0-9eaf-5ba50f476ded;
+ Wed, 16 Apr 2025 13:59:09 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43cfe63c592so72078725e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Apr 2025 04:59:09 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4405b5a9846sm18761905e9.35.2025.04.16.04.59.03
+ 5b1f17b1804b1-4405b5a9846sm18761905e9.35.2025.04.16.04.59.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 04:59:03 -0700 (PDT)
+ Wed, 16 Apr 2025 04:59:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3195a0a3-1aba-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 343109fa-1aba-11f0-9eaf-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744804744; x=1745409544; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1744804748; x=1745409548; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LrR2qFw2RhoT1ioWjoOtSsI3tc2/ebxvB/CbMCw2zPk=;
-        b=lY19Pb/QkMau1TtctWTGLyJuH0OpsIxrf5XbahmkBta3oNOzELCGVNJN2dO3CIZFNl
-         h7PSzkGAuefcN0iWthKb59jgYdqatahk8zxpf8kGemK4EVYDP9qtIXqmE1og3Iyh6z+s
-         87+0zrW3PEYZ0LHmiwhCy7nUIuSVC3X8wSUws=
+        bh=1daQrbWI9UKwuEhY3SZBXcJke4ogYtrZfiRlr7lZLK8=;
+        b=QB1m3j6aJ0qa30+P6+dyHHCNS8MMeJvmIRD0OzSt3C3KMjRCDmqmL4QWbPFRntR1vK
+         XZVoihQj/yUYZT9O78kfFKeJGbkGRdYkefwKp53AOPA5StPkZS3XRy3IxPulCU0H80Jd
+         O3lwpdykuKBD9vNs8bOP+RTxa3+V3izGK7zhE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744804744; x=1745409544;
+        d=1e100.net; s=20230601; t=1744804748; x=1745409548;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LrR2qFw2RhoT1ioWjoOtSsI3tc2/ebxvB/CbMCw2zPk=;
-        b=Dgz6bfWmgeFLqujwndD8oCDAoi0uDZIyPzQCDXrjIJ372DGMrLKwA2ku+jX3IWNPXD
-         iR3yZQ2llwMZPhFrhg2a8C4fjB3/ZLw/cMAfVd3WNKarWjPvQmJeLIIdyR0UfrpoPivZ
-         3HJRBuHoE6Q3+fWPVqlMFZDZuo2X5E4/h88BwFTfEDcBPHzZHIzrUbLDNg6KqFo/3fjK
-         7RdaswK2lNblG/EvVMHWsS1GRwZeu1y5+KloX2s49IxWP8SQsPpr4k7M8bFxwz/ZaJzN
-         lPW34Rl/TlVY7Xk54h4wqhEdudbteQSTdqhoMs1pScuUUb64TbooIvSqe7fsvRLrvx3Q
-         ybLg==
-X-Gm-Message-State: AOJu0YyGRZAbBca7aPV+MazhYquDFwGSJMPBt2I+42kKo0MlfbDMQzKf
-	kwApO+sHpvwjrO/KqsoPNVd4qUKUa3xkUtGthriDxBsmiATc3u2K6wTw/4o0o/KVJ55+QaSHqzG
-	pF54=
-X-Gm-Gg: ASbGnctiDhi2gXyE4jyIdfSItG9Jh7ssyAlwhhcEKRoHzHpMyfK0+6CN5ZQLEfmGfoj
-	54MHmRX3/6d37dO7H0FOcKNxv4E650LYOXK7V5U0US+mjimRw0kJf9o1pUA2NQJDT1gDimuKRRg
-	+w4Ftiy3Q11UlNbIniVhEgNaoluE+Wjj9dtK7khdkOnfELI1BFKAi6Bklqm04+MYQQu7DITVsDV
-	DM0xErcZPlS21aw7ay+lIgPzsy6Rmyqwnxb2WgIDakDySTwFkhBmzHeN8AeGYxxBl28CVVT3Sep
-	Ww/yx2MTw9+GPesT6ibBRhR23uzXrLwunTJ6UQiBgqvYQJ8yrV/w7vQcHgx0WaQvJ2pPuxO/A3D
-	wVvQxjz5Z3ZkOVg==
-X-Google-Smtp-Source: AGHT+IEgmpj4c+9t4rzrKeUZP9r3Zsv7CNOYMl3PyaY7qkbB+/Oe06vxRPeZ7j85uQVqCPnFx5sCBw==
-X-Received: by 2002:a05:600c:811b:b0:43d:ed:ad07 with SMTP id 5b1f17b1804b1-4405d6cc339mr13999945e9.29.1744804743959;
-        Wed, 16 Apr 2025 04:59:03 -0700 (PDT)
+        bh=1daQrbWI9UKwuEhY3SZBXcJke4ogYtrZfiRlr7lZLK8=;
+        b=DE7v0aITNHUM9DSVdjexNnlOaScaYWDyo4vYEjuyMIQjRfRvGWCEH3gEXnPp2KN/lE
+         /1dmWnZHrJPWr/toMdsA3nj+BK+g1jE0iH3kAsf/RTeZmFEIHO34S7FwdotBZLz51HRN
+         /nZUjdxukcovCvOk+72UPmcgfc1cY8pn13iM0ibFscNjHRvWO8CJX5H4r+N9bQ+EVOff
+         Qv9pAZIncK8YUKOszc4vRCo/aEfrCoyzSiLa8t9Y0BY8GsoFUHYIvwa1FYiyz62vn0+6
+         USRd9fFLB5ge5giOYYcRVdidLON5jLbXWUk6fX5WI8iUyjlb2dm7XBWGIkutVS1aWRzD
+         K9uA==
+X-Gm-Message-State: AOJu0YwnrU9PKvkfacbBWSfBG+IOHMV1YZHaWL0STAxkLx9AWTfP4l21
+	ye5v7smUpIemKMo1VPQn7qO5Ywl7iM9FnTUnk6lMUdoviTr/Yhi0NPCodcGaoA4RV8TRVuh3tBm
+	MpkA=
+X-Gm-Gg: ASbGncujSKvuBKa3QlU0p8cJ/hJV3JnO+dH735QafY+o7uSgDoe3PoJyEgBZLmip7FP
+	sYvANKAU3sX3uk0UljJtaaD2055u3oaQuYyj7deS/5GjBXBL9s3tX49YShK0JyU47dyaoFtO3kV
+	5RtZtnLfvsPPglJ2THvNY8WrStDonTWirEufS08y6mMxyoDWT9Oey+Qfrh4tCtKz+TyyTdw7egL
+	QGcrgNPvuEu0VGFkQJBmOPrrOFvayns8ShvTBSqi4KZHuwWR9KaiJOKjNzdG5NijjsX9PtTfOj+
+	ebyBd0/TL87ubjd6AGQ6PFIukTam5FAAr/5u/3WUD7y7SYD/zxzKG5PY+xD7cq/8CKuWV5REwK6
+	xRwtRUlADiWGttg==
+X-Google-Smtp-Source: AGHT+IFgpfcqBIvlugUUmrvz/YH5fAtZyyY+frKoounRJDMbxOfMjexVXjUUxjtZ+ntbvBpdiGHb+A==
+X-Received: by 2002:a05:600c:1c1c:b0:43d:82c:2b23 with SMTP id 5b1f17b1804b1-4405d6ad1a1mr14089215e9.23.1744804748260;
+        Wed, 16 Apr 2025 04:59:08 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Lin Liu <lin.liu@citrix.com>,
@@ -96,9 +96,9 @@ Cc: Lin Liu <lin.liu@citrix.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v6 01/15] xen: Implement common byte{order,swap}.h
-Date: Wed, 16 Apr 2025 12:58:46 +0100
-Message-Id: <20250416115900.2491661-2-andrew.cooper3@citrix.com>
+Subject: [PATCH v6 06/15] xen/arch: Switch to new byteorder infrastructure
+Date: Wed, 16 Apr 2025 12:58:51 +0100
+Message-Id: <20250416115900.2491661-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250416115900.2491661-1-andrew.cooper3@citrix.com>
 References: <20250416115900.2491661-1-andrew.cooper3@citrix.com>
@@ -108,13 +108,11 @@ Content-Transfer-Encoding: 8bit
 
 From: Lin Liu <lin.liu@citrix.com>
 
-The current swab??() infrastructure is unecesserily complicated, and can be
-replaced entirely with compiler builtins.
+This needs to be done in several steps, because of common vs arch issues.
+Start by using the new common infastructure inside the arch infrastructure.
 
-All supported compilers provide __BYTE_ORDER__ and __builtin_bswap??().
-
-Nothing in Xen cares about the values of __{BIG,LITTLE}_ENDIAN; just that one
-of them is defined.  Therefore, centralise their definitions in xen/config.h
+libelf-private.h is awkward, and the only thing in Xen using swab??()
+directly.  It needs updating at the same time.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -133,151 +131,117 @@ CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 CC: Lin Liu <lin.liu@citrix.com>
 
-v6:
- * Fix typos
- * Retain __{BIG,LITTLE}_ENDIAN_BITFIELDS and set them in common logic.
- * Extra brackets for the non-transformed case.
-
 v5:
- * Rebase substantially
- * Drop PASTE().  It doesn't work when BITS_PER_LONG isn't a plain integer
- * Simplify in light of new toolchain baseline
+ * Rebase
+ * Rearange from other patches to maintain bisectability
 ---
- xen/include/xen/byteorder.h               | 44 +++++++++++++++++++++++
- xen/include/xen/byteorder/big_endian.h    |  7 ----
- xen/include/xen/byteorder/little_endian.h |  7 ----
- xen/include/xen/byteswap.h                | 15 ++++++++
- xen/include/xen/config.h                  |  8 +++++
- 5 files changed, 67 insertions(+), 14 deletions(-)
- create mode 100644 xen/include/xen/byteorder.h
- create mode 100644 xen/include/xen/byteswap.h
+ xen/arch/arm/include/asm/byteorder.h   |  4 +---
+ xen/arch/ppc/include/asm/byteorder.h   |  8 +-------
+ xen/arch/riscv/include/asm/byteorder.h |  4 +---
+ xen/arch/x86/include/asm/byteorder.h   | 25 +------------------------
+ xen/common/libelf/libelf-private.h     |  6 +++---
+ 5 files changed, 7 insertions(+), 40 deletions(-)
 
-diff --git a/xen/include/xen/byteorder.h b/xen/include/xen/byteorder.h
-new file mode 100644
-index 000000000000..2b9b97044478
---- /dev/null
-+++ b/xen/include/xen/byteorder.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#ifndef XEN_BYTEORDER_H
-+#define XEN_BYTEORDER_H
-+
-+#include <xen/byteswap.h>
-+#include <xen/stdint.h>
-+
-+#if defined(__LITTLE_ENDIAN)
-+
-+# define cpu_to_le64(x) ((uint64_t)(x))
-+# define le64_to_cpu(x) ((uint64_t)(x))
-+# define cpu_to_le32(x) ((uint32_t)(x))
-+# define le32_to_cpu(x) ((uint32_t)(x))
-+# define cpu_to_le16(x) ((uint16_t)(x))
-+# define le16_to_cpu(x) ((uint16_t)(x))
-+
-+# define cpu_to_be64(x) bswap64(x)
-+# define be64_to_cpu(x) bswap64(x)
-+# define cpu_to_be32(x) bswap32(x)
-+# define be32_to_cpu(x) bswap32(x)
-+# define cpu_to_be16(x) bswap16(x)
-+# define be16_to_cpu(x) bswap16(x)
-+
-+#elif defined(__BIG_ENDIAN)
-+
-+# define cpu_to_le64(x) bswap64(x)
-+# define le64_to_cpu(x) bswap64(x)
-+# define cpu_to_le32(x) bswap32(x)
-+# define le32_to_cpu(x) bswap32(x)
-+# define cpu_to_le16(x) bswap16(x)
-+# define le16_to_cpu(x) bswap16(x)
-+
-+# define cpu_to_be64(x) ((uint64_t)(x))
-+# define be64_to_cpu(x) ((uint64_t)(x))
-+# define cpu_to_be32(x) ((uint32_t)(x))
-+# define be32_to_cpu(x) ((uint32_t)(x))
-+# define cpu_to_be16(x) ((uint16_t)(x))
-+# define be16_to_cpu(x) ((uint16_t)(x))
-+
-+#else
-+# error Unknown Endianness
-+#endif /* __*_ENDIAN */
-+
-+#endif /* XEN_BYTEORDER_H */
-diff --git a/xen/include/xen/byteorder/big_endian.h b/xen/include/xen/byteorder/big_endian.h
-index ce395a17f64b..512291c76f1b 100644
---- a/xen/include/xen/byteorder/big_endian.h
-+++ b/xen/include/xen/byteorder/big_endian.h
-@@ -1,13 +1,6 @@
- #ifndef __XEN_BYTEORDER_BIG_ENDIAN_H__
- #define __XEN_BYTEORDER_BIG_ENDIAN_H__
+diff --git a/xen/arch/arm/include/asm/byteorder.h b/xen/arch/arm/include/asm/byteorder.h
+index 9c712c47884a..7f1419c45a16 100644
+--- a/xen/arch/arm/include/asm/byteorder.h
++++ b/xen/arch/arm/include/asm/byteorder.h
+@@ -1,9 +1,7 @@
+ #ifndef __ASM_ARM_BYTEORDER_H__
+ #define __ASM_ARM_BYTEORDER_H__
  
--#ifndef __BIG_ENDIAN
--#define __BIG_ENDIAN 4321
--#endif
--#ifndef __BIG_ENDIAN_BITFIELD
--#define __BIG_ENDIAN_BITFIELD
--#endif
+-#define __BYTEORDER_HAS_U64__
 -
- #include <xen/types.h>
- #include <xen/byteorder/swab.h>
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
  
-diff --git a/xen/include/xen/byteorder/little_endian.h b/xen/include/xen/byteorder/little_endian.h
-index 8b118afba5e3..bd1afc6a67c3 100644
---- a/xen/include/xen/byteorder/little_endian.h
-+++ b/xen/include/xen/byteorder/little_endian.h
-@@ -1,13 +1,6 @@
- #ifndef __XEN_BYTEORDER_LITTLE_ENDIAN_H__
- #define __XEN_BYTEORDER_LITTLE_ENDIAN_H__
+ #endif /* __ASM_ARM_BYTEORDER_H__ */
+ /*
+diff --git a/xen/arch/ppc/include/asm/byteorder.h b/xen/arch/ppc/include/asm/byteorder.h
+index 2b5f6b9f6321..8df6adbf0d7d 100644
+--- a/xen/arch/ppc/include/asm/byteorder.h
++++ b/xen/arch/ppc/include/asm/byteorder.h
+@@ -1,12 +1,6 @@
+ #ifndef _ASM_PPC_BYTEORDER_H
+ #define _ASM_PPC_BYTEORDER_H
  
--#ifndef __LITTLE_ENDIAN
--#define __LITTLE_ENDIAN 1234
--#endif
--#ifndef __LITTLE_ENDIAN_BITFIELD
--#define __LITTLE_ENDIAN_BITFIELD
--#endif
+-#define __arch__swab16 __builtin_bswap16
+-#define __arch__swab32 __builtin_bswap32
+-#define __arch__swab64 __builtin_bswap64
 -
- #include <xen/types.h>
- #include <xen/byteorder/swab.h>
+-#define __BYTEORDER_HAS_U64__
+-
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
  
-diff --git a/xen/include/xen/byteswap.h b/xen/include/xen/byteswap.h
-new file mode 100644
-index 000000000000..46d93f88eac9
---- /dev/null
-+++ b/xen/include/xen/byteswap.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+#ifndef XEN_BYTESWAP_H
-+#define XEN_BYTESWAP_H
-+
-+#define bswap16(x) __builtin_bswap16(x)
-+#define bswap32(x) __builtin_bswap32(x)
-+#define bswap64(x) __builtin_bswap64(x)
-+
-+#if BITS_PER_LONG == 64
-+# define bswapl(x) bswap64(x)
-+#elif BITS_PER_LONG == 32
-+# define bswapl(x) bswap32(x)
-+#endif
-+
-+#endif /* XEN_BYTESWAP_H */
-diff --git a/xen/include/xen/config.h b/xen/include/xen/config.h
-index 7d43159efb56..1d7195066c08 100644
---- a/xen/include/xen/config.h
-+++ b/xen/include/xen/config.h
-@@ -108,4 +108,12 @@
- /* It is assumed that sizeof(void *) == __alignof(void *) */
- #define POINTER_ALIGN   __SIZEOF_POINTER__
+ #endif /* _ASM_PPC_BYTEORDER_H */
+diff --git a/xen/arch/riscv/include/asm/byteorder.h b/xen/arch/riscv/include/asm/byteorder.h
+index 8ca65e1b330e..a32bca02df38 100644
+--- a/xen/arch/riscv/include/asm/byteorder.h
++++ b/xen/arch/riscv/include/asm/byteorder.h
+@@ -1,9 +1,7 @@
+ #ifndef ASM__RISCV__BYTEORDER_H
+ #define ASM__RISCV__BYTEORDER_H
  
-+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-+# define __LITTLE_ENDIAN
-+# define __LITTLE_ENDIAN_BITFIELD
-+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-+# define __BIG_ENDIAN
-+# define __BIG_ENDIAN_BITFIELD
-+#endif
-+
- #endif /* __XEN_CONFIG_H__ */
-
-base-commit: 7f8c2dd829358406dc9e50d5e386e4d2b20b4303
+-#define __BYTEORDER_HAS_U64__
+-
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
+ 
+ #endif /* ASM__RISCV__BYTEORDER_H */
+ /*
+diff --git a/xen/arch/x86/include/asm/byteorder.h b/xen/arch/x86/include/asm/byteorder.h
+index 44c240376d3a..3524a6cee741 100644
+--- a/xen/arch/x86/include/asm/byteorder.h
++++ b/xen/arch/x86/include/asm/byteorder.h
+@@ -1,29 +1,6 @@
+ #ifndef __ASM_X86_BYTEORDER_H__
+ #define __ASM_X86_BYTEORDER_H__
+ 
+-#include <xen/types.h>
+-#include <xen/compiler.h>
+-
+-static inline attr_const uint32_t ___arch__swab32(uint32_t x)
+-{
+-    asm("bswap %0" : "=r" (x) : "0" (x));
+-    return x;
+-}
+-
+-static inline attr_const uint64_t ___arch__swab64(uint64_t x)
+-{ 
+-    asm ( "bswap %0" : "+r" (x) );
+-    return x;
+-} 
+-
+-/* Do not define swab16.  Gcc is smart enough to recognize "C" version and
+-   convert it into rotation or exhange.  */
+-
+-#define __arch__swab64(x) ___arch__swab64(x)
+-#define __arch__swab32(x) ___arch__swab32(x)
+-
+-#define __BYTEORDER_HAS_U64__
+-
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
+ 
+ #endif /* __ASM_X86_BYTEORDER_H__ */
+diff --git a/xen/common/libelf/libelf-private.h b/xen/common/libelf/libelf-private.h
+index 197d7a7623a3..65417dffc8a0 100644
+--- a/xen/common/libelf/libelf-private.h
++++ b/xen/common/libelf/libelf-private.h
+@@ -31,9 +31,9 @@
+    printk(fmt, ## args )
+ 
+ #define strtoull(str, end, base) simple_strtoull(str, end, base)
+-#define bswap_16(x) swab16(x)
+-#define bswap_32(x) swab32(x)
+-#define bswap_64(x) swab64(x)
++#define bswap_16(x) bswap16(x)
++#define bswap_32(x) bswap32(x)
++#define bswap_64(x) bswap64(x)
+ 
+ #else /* !__XEN__ */
+ 
 -- 
 2.39.5
 
