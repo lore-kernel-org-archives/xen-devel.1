@@ -4,42 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B77C369AB
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 00:08:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.954660.1348710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BD0C369AB
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 00:48:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.954748.1348721 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4qKY-0005S3-FA; Wed, 16 Apr 2025 00:08:42 +0000
+	id 1u4qx1-0003km-HM; Wed, 16 Apr 2025 00:48:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 954660.1348710; Wed, 16 Apr 2025 00:08:42 +0000
+Received: by outflank-mailman (output) from mailman id 954748.1348721; Wed, 16 Apr 2025 00:48:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u4qKY-0005Rw-C2; Wed, 16 Apr 2025 00:08:42 +0000
-Received: by outflank-mailman (input) for mailman id 954660;
- Tue, 15 Apr 2025 21:52:19 +0000
+	id 1u4qx1-0003kf-E0; Wed, 16 Apr 2025 00:48:27 +0000
+Received: by outflank-mailman (input) for mailman id 954748;
+ Wed, 16 Apr 2025 00:48:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p6zj=XB=tum.de=manuel.andreas@srs-se1.protection.inumbo.net>)
- id 1u4oCW-0000LC-RL
- for xen-devel@lists.xenproject.org; Tue, 15 Apr 2025 21:52:19 +0000
-Received: from postout2.mail.lrz.de (postout2.mail.lrz.de [129.187.255.138])
+ <SRS0=RcVf=XC=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1u4qwz-0003kZ-MJ
+ for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 00:48:25 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e324bace-1a43-11f0-9eae-5ba50f476ded;
- Tue, 15 Apr 2025 23:52:13 +0200 (CEST)
-Received: from lxmhs52.srv.lrz.de (localhost [127.0.0.1])
- by postout2.mail.lrz.de (Postfix) with ESMTP id 4ZcdDD2ymnzyWC
- for <xen-devel@lists.xenproject.org>; Tue, 15 Apr 2025 23:52:12 +0200 (CEST)
-Received: from postout2.mail.lrz.de ([127.0.0.1])
- by lxmhs52.srv.lrz.de (lxmhs52.srv.lrz.de [127.0.0.1]) (amavis, port 20024)
- with LMTP id Cwlj-3_X8RcF for <xen-devel@lists.xenproject.org>;
- Tue, 15 Apr 2025 23:52:11 +0200 (CEST)
-Received: from [192.168.0.140] (unknown [46.128.11.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by postout2.mail.lrz.de (Postfix) with ESMTPSA id 4ZcdDC1cJnzyW9
- for <xen-devel@lists.xenproject.org>; Tue, 15 Apr 2025 23:52:11 +0200 (CEST)
+ id 7ce96a6c-1a5c-11f0-9eaf-5ba50f476ded;
+ Wed, 16 Apr 2025 02:48:19 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id D6D53A4A80C;
+ Wed, 16 Apr 2025 00:42:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFD77C4CEE7;
+ Wed, 16 Apr 2025 00:48:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,118 +43,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e324bace-1a43-11f0-9eae-5ba50f476ded
-Authentication-Results: postout.lrz.de (amavis); dkim=pass (2048-bit key)
- reason="pass (just generated, assumed good)" header.d=tum.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tum.de; h=
-	subject:subject:from:from:content-language:user-agent
-	:mime-version:date:date:message-id:content-type:content-type
-	:received:received; s=tu-postout21; t=1744753931; bh=zQeDeQ0W1y6
-	wYnTX8FySKIhUdQH5ebIhmhLL6OmhJbc=; b=kXdmglTuGtQC0ujNlD+H410WduV
-	xE0aeLVuUG6oUPJa7kYUfaVZDa5pp0kQnseDQTDAbd6U+FAfL/U4RLjQfBhd9QLZ
-	o+zjur5zgQYKpip3DmsZ8OGEpl+oe4C96qRXY/ei7SXVHD1g+w4tD0JPv2UaHGGy
-	8vM/wLIKerOoVFHKazA8DD8bUitSPPKOOvCM4b3sFhJ3wm+oQhIn3toBESs1Ceng
-	pxL16Zc5ivxOfHBVsJWflH+jXFbZJe0a7CjWmwKvRByXrdGN/untMVD8+uDm7R3F
-	4bLV9UmFhRZPnfpqZoXX2xe/5nCgVPLfFyRg6vTKUw0VYCrAPYunxxjWlOw==
-X-Virus-Scanned: by amavisd-new at lrz.de in lxmhs52.srv.lrz.de
-Content-Type: multipart/mixed; boundary="------------YdYylOs7HoDWEUUYS4zhUrGa"
-Message-ID: <e7347061-6dc6-44a3-ad41-270e705db2c5@tum.de>
-Date: Tue, 15 Apr 2025 23:52:10 +0200
+X-Inumbo-ID: 7ce96a6c-1a5c-11f0-9eaf-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1744764497;
+	bh=a0O26c4Cj43kfU98RbiNOvDMT8WLwKSSrfD6HelEqls=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Wf6m9jddKI4FfVDUeopWEOGA3aDD0eXASunU/lIVbWZkzE1KZtHd/Fc5i1yvwaZ2x
+	 MOl4ye6FIzRdm3glmaSAJFWDYeGOuZy4tyFDkIlLh8DQ5RSRwl0A0pxHjyXER5sjSf
+	 frNDnrQ+EFM5ApTEYjJWYk9xtUXIGvUm+iQFW7Cul2TgSKf0JxGs6gsiOTITWpqfzq
+	 wXANs/cHOjQCRaGmrT55BRhN04FAmVYaQA8wg5zckc2SL1gKvn763Z8YDBERqtBwlA
+	 S2XpxSZy3Wj+hW5hTs8u5UsRiRvDiPgK6dcXa68PU0YuG3hM4tp6gjZgtBVPIDsM7e
+	 8IEOy5avpaeZA==
+Date: Tue, 15 Apr 2025 17:48:15 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Jason Andryuk <jason.andryuk@amd.com>
+cc: xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v4 2/7] xen/arm: dom0less hwdom construction
+In-Reply-To: <20250407194038.83860-3-jason.andryuk@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2504151748070.8008@ubuntu-linux-20-04-desktop>
+References: <20250407194038.83860-1-jason.andryuk@amd.com> <20250407194038.83860-3-jason.andryuk@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: xen-devel@lists.xenproject.org
-From: Manuel Andreas <manuel.andreas@tum.de>
-Subject: Assert in x86_emulate_wrapper triggerable by HVM domain
-Autocrypt: addr=manuel.andreas@tum.de; keydata=
- xjMEY9Zx/RYJKwYBBAHaRw8BAQdALWzRzW9a74DX4l6i8VzXGvv72Vz0qfvj9s7bjBD905nN
- Jk1hbnVlbCBBbmRyZWFzIDxtYW51ZWwuYW5kcmVhc0B0dW0uZGU+wokEExYIADEWIQQuSfNX
- 11QV6exAUmOqZGwY4LuingUCY9Zx/QIbAwQLCQgHBRUICQoLBRYCAwEAAAoJEKpkbBjgu6Ke
- McQBAPyP530S365I50I5rM2XjH5Hr9YcUQATD5dusZJMDgejAP9T/wUurwQSuRfm1rK8cNcf
- w4wP3+PLvL+J+kuVku93CM44BGPWcf0SCisGAQQBl1UBBQEBB0AmCAf31tLBD5tvtdZ0XX1B
- yGLUAxhgmFskGyPhY8wOKQMBCAfCeAQYFggAIBYhBC5J81fXVBXp7EBSY6pkbBjgu6KeBQJj
- 1nH9AhsMAAoJEKpkbBjgu6Kej6YA/RvJdXMjsD5csifolLw53KX0/ElM22SvaGym1+KiiVND
- AQDy+y+bCXI+J713/AwLBsDxTEXmP7Cp49ZqbAu83NnpBQ==
+Content-Type: text/plain; charset=US-ASCII
 
-This is a multi-part message in MIME format.
---------------YdYylOs7HoDWEUUYS4zhUrGa
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On Mon, 7 Apr 2025, Jason Andryuk wrote:
+> When creating a hardware domain, have the dom0less code call
+> construct_hwdom() which is shared with the dom0 code.  The hardware
+> domain requires building that best matches the dom0 build path.  Re-use
+> it to keep them in sync.
+> 
+> The device tree node of the dom0less config is now passed into
+> construct_hwdom().  dom0 uses /chosen for process_shm while a hwdom will
+> use the value from its dom0less device tree node.
+> 
+> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 
-Dear all,
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-my fuzzing infrastructure discovered that an assert in 
-x86_emulate_wrapper is able to be triggered by an HVM domain executing a 
-specially crafted repeating movs instruction.
 
-Specifically, if the emulation of the rep movs instruction triggers an 
-exception (e.g. by accessing invalid memory after some amount of 
-iterations), the emulation will be halted at that point.
-However, the instruction manual requires that _some_ register state 
-(namely the updated value of rcx) shall be commited, whereas the 
-instruction pointer needs to be rolled back to point to the address of 
-the instruction itself. The assert checks for the latter. Problematic is 
-the fact that for these type of repeating instructions, Xen seems to 
-eventually just commit all register state when it encounters an exception:
-
-    557  #define put_rep_prefix(reps_completed) 
-({                               \
-    558      if ( rep_prefix() 
-)                                                 \
-    559 { \
-    560          __put_rep_prefix(&_regs, ctxt->regs, ad_bytes, 
-reps_completed); \
-    561          if ( unlikely(rc == X86EMUL_EXCEPTION) 
-)                        \
-    562              goto 
-complete_insn;                                         \
-    563 } \
-    564  })
-
-   8356   complete_insn: /* Commit shadow register state. */
-   8357      put_fpu(fpu_type, false, state, ctxt, ops);
-   8358      fpu_type = X86EMUL_FPU_none;
-   8359
-   8360      /* Zero the upper 32 bits of %rip if not in 64-bit mode. */
-   8361      if ( !mode_64bit() )
-   8362          _regs.r(ip) = (uint32_t)_regs.r(ip);
-   8363
-   8364      /* Should a singlestep #DB be raised? */
-   8365      if ( rc == X86EMUL_OKAY && singlestep && !ctxt->retire.mov_ss )
-   8366      {
-   8367          ctxt->retire.singlestep = true;
-   8368          ctxt->retire.sti = false;
-   8369      }
-   8370
-   8371      if ( rc != X86EMUL_DONE )
-   8372          *ctxt->regs = _regs; // <- Incorrect RIP is commited
-
-I've attached an XTF test that should trigger the aforementioned assert 
-on the latest release commit: 3ad5d648cda5add395f49fc3704b2552aae734f7
-
-Best,
-Manuel
-
---------------YdYylOs7HoDWEUUYS4zhUrGa
-Content-Type: application/gzip; name="poc-x86emul-assert-orig-ip.tar.gz"
-Content-Disposition: attachment; filename="poc-x86emul-assert-orig-ip.tar.gz"
-Content-Transfer-Encoding: base64
-
-H4sIAAAAAAAAA+2WXU/bMBSGe+1f4WVUallDkzZJURnTGFS74UOiZdLEEEpttzUkdha7pWja
-f5/ttBobtN1EBUL4ufHXax/Hx+fEGUfudDsi6ThxYyFILl2e06FLs3ppXXiKVhjq0m+F3t1y
-TskPwlYz8luNICp5fqjGSzBc2w6WMBYyziEsCXk7FUt0q8ZfKNli/6cxZVtoDTa0g6MgWOR/
-P1TO9oNWFDXDVqOh/R811ZWA3hpsr+SV+7++uQngJvw4oAmBkggp6iuvhJmQk4HRu4vlSmek
-WTwkq7Rw9TKSYw4POBJwwPN/tS3I/3xWHbylDCVjTOD7qRxsjT4AgDgTEqJRXNi8lFQm5PwC
-7kKnp9pLNu7sADDhFBfztJGKblbBDwAVWU6ZvK44XXUBJWVDOM5gsQDUC1yqQ9ET33xjTlWt
-pKfEIoUTnsRSe6sCTZ/GSfkEbnhTv1GD5XKOpjvOvbFtbzDDaDB9QEOw3yfY84xC/KEQEt9t
-5iSDapL4rpRYtCtGX62Vy6RoYFq9I28/VIMOQk5N2SYpz291TW3cFJiaQtBihfnXzw/sjOUk
-Vg7pq0O4oXIECdN1DDHpj4ezMxTFsel5ypOXYowQEaJyfHZ4qLp/AlA3F+SQoziBkzinegnR
-1n0px6QN93UVuTowXBX8iepyPnUPnKK7HwuKXD4YCCLbMNCdMu67NxTL0axNGSZMuqpbuMWS
-jCZ6oMNw21y25w7+0tL8T9mAb10Jzh5rw+R/z1v4/2/4zb/yf8vzGzb/PwVFKnJYnBJHXfAl
-yaxWKFEsyVDHq1KLjCAaJ/MhwiY05yxVt16o4fPf2WI0SaOgCOaLmdiEnKQquWrphYrI5z6K
-V8mS+D+Kr4nOfo+2seL95zWCe++/KPBt/D8F8+fORuX05KRXrffHNMF1xNOUs630GoDjvaPO
-7Ie9u+yRtr/X63w+Of1qdLPEAHqdbs/tHH/p6k6TBADg/Ss3I7lKFvDdLjRPLw7Aw/sYErOJ
-5z4ki8VisVgsFovFYrFYLBaLxWKxWCyWF8QvKyILuQAoAAA=
-
---------------YdYylOs7HoDWEUUYS4zhUrGa--
+> ---
+> v3:
+> Rebase on process_shm_chosen() removal
+> ---
+>  xen/arch/arm/dom0less-build.c           | 57 ++++++++++++++-----------
+>  xen/arch/arm/domain_build.c             |  7 +--
+>  xen/arch/arm/include/asm/domain_build.h |  3 +-
+>  3 files changed, 39 insertions(+), 28 deletions(-)
+> 
+> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+> index bd15563750..7bc6a6c4d7 100644
+> --- a/xen/arch/arm/dom0less-build.c
+> +++ b/xen/arch/arm/dom0less-build.c
+> @@ -929,36 +929,45 @@ static int __init construct_domU(struct domain *d,
+>      /* type must be set before allocate memory */
+>      d->arch.type = kinfo.type;
+>  #endif
+> -    if ( !dt_find_property(node, "xen,static-mem", NULL) )
+> -        allocate_memory(d, &kinfo);
+> -    else if ( !is_domain_direct_mapped(d) )
+> -        allocate_static_memory(d, &kinfo, node);
+> -    else
+> -        assign_static_memory_11(d, &kinfo, node);
+> -
+> -    rc = process_shm(d, &kinfo, node);
+> -    if ( rc < 0 )
+> -        return rc;
+> -
+> -    /*
+> -     * Base address and irq number are needed when creating vpl011 device
+> -     * tree node in prepare_dtb_domU, so initialization on related variables
+> -     * shall be done first.
+> -     */
+> -    if ( kinfo.vpl011 )
+> +    if ( is_hardware_domain(d) )
+>      {
+> -        rc = domain_vpl011_init(d, NULL);
+> +        rc = construct_hwdom(&kinfo, node);
+>          if ( rc < 0 )
+>              return rc;
+>      }
+> +    else
+> +    {
+> +        if ( !dt_find_property(node, "xen,static-mem", NULL) )
+> +            allocate_memory(d, &kinfo);
+> +        else if ( !is_domain_direct_mapped(d) )
+> +            allocate_static_memory(d, &kinfo, node);
+> +        else
+> +            assign_static_memory_11(d, &kinfo, node);
+>  
+> -    rc = prepare_dtb_domU(d, &kinfo);
+> -    if ( rc < 0 )
+> -        return rc;
+> +        rc = process_shm(d, &kinfo, node);
+> +        if ( rc < 0 )
+> +            return rc;
+>  
+> -    rc = construct_domain(d, &kinfo);
+> -    if ( rc < 0 )
+> -        return rc;
+> +        /*
+> +         * Base address and irq number are needed when creating vpl011 device
+> +         * tree node in prepare_dtb_domU, so initialization on related variables
+> +         * shall be done first.
+> +         */
+> +        if ( kinfo.vpl011 )
+> +        {
+> +            rc = domain_vpl011_init(d, NULL);
+> +            if ( rc < 0 )
+> +                return rc;
+> +        }
+> +
+> +        rc = prepare_dtb_domU(d, &kinfo);
+> +        if ( rc < 0 )
+> +            return rc;
+> +
+> +        rc = construct_domain(d, &kinfo);
+> +        if ( rc < 0 )
+> +            return rc;
+> +    }
+>  
+>      domain_vcpu_affinity(d, node);
+>  
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index b8f282ff10..0a329f9f5e 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -2305,10 +2305,11 @@ static int __init construct_dom0(struct domain *d)
+>      if ( rc < 0 )
+>          return rc;
+>  
+> -    return construct_hwdom(&kinfo);
+> +    return construct_hwdom(&kinfo, NULL);
+>  }
+>  
+> -int __init construct_hwdom(struct kernel_info *kinfo)
+> +int __init construct_hwdom(struct kernel_info *kinfo,
+> +                           const struct dt_device_node *node)
+>  {
+>      struct domain *d = kinfo->d;
+>      int rc;
+> @@ -2327,7 +2328,7 @@ int __init construct_hwdom(struct kernel_info *kinfo)
+>  
+>      if ( acpi_disabled )
+>      {
+> -        rc = process_shm(d, kinfo, NULL);
+> +        rc = process_shm(d, kinfo, node);
+>          if ( rc < 0 )
+>              return rc;
+>      }
+> diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
+> index 134290853c..17619c875d 100644
+> --- a/xen/arch/arm/include/asm/domain_build.h
+> +++ b/xen/arch/arm/include/asm/domain_build.h
+> @@ -13,7 +13,8 @@ bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
+>                            paddr_t tot_size);
+>  void allocate_memory(struct domain *d, struct kernel_info *kinfo);
+>  int construct_domain(struct domain *d, struct kernel_info *kinfo);
+> -int construct_hwdom(struct kernel_info *kinfo);
+> +int construct_hwdom(struct kernel_info *kinfo,
+> +                    const struct dt_device_node *node);
+>  int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
+>  int make_chosen_node(const struct kernel_info *kinfo);
+>  int make_cpus_node(const struct domain *d, void *fdt);
+> -- 
+> 2.49.0
+> 
 
