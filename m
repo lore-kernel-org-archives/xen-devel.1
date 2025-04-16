@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E114C369BD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B069C369C2
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 11:59:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.955717.1349328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.955721.1349367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u51Q4-0006NM-QD; Wed, 16 Apr 2025 11:59:08 +0000
+	id 1u51Q8-0007HB-Ec; Wed, 16 Apr 2025 11:59:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 955717.1349328; Wed, 16 Apr 2025 11:59:08 +0000
+Received: by outflank-mailman (output) from mailman id 955721.1349367; Wed, 16 Apr 2025 11:59:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u51Q4-0006MV-LN; Wed, 16 Apr 2025 11:59:08 +0000
-Received: by outflank-mailman (input) for mailman id 955717;
- Wed, 16 Apr 2025 11:59:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u51Q8-0007Ck-0m; Wed, 16 Apr 2025 11:59:12 +0000
+Received: by outflank-mailman (input) for mailman id 955721;
+ Wed, 16 Apr 2025 11:59:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9TmO=XC=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u51Q3-0006At-F3
- for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 11:59:07 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 32adc87c-1aba-11f0-9eaf-5ba50f476ded;
- Wed, 16 Apr 2025 13:59:06 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3912d2c89ecso6295337f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 16 Apr 2025 04:59:06 -0700 (PDT)
+ id 1u51Q6-0006Ay-03
+ for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 11:59:10 +0000
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [2a00:1450:4864:20::433])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 33a33b81-1aba-11f0-9ffb-bf95429c2676;
+ Wed, 16 Apr 2025 13:59:08 +0200 (CEST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-39149bccb69so6546101f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Apr 2025 04:59:08 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4405b5a9846sm18761905e9.35.2025.04.16.04.59.05
+ 5b1f17b1804b1-4405b5a9846sm18761905e9.35.2025.04.16.04.59.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 04:59:05 -0700 (PDT)
+ Wed, 16 Apr 2025 04:59:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 32adc87c-1aba-11f0-9eaf-5ba50f476ded
+X-Inumbo-ID: 33a33b81-1aba-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1744804746; x=1745409546; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1744804747; x=1745409547; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zUNa1Dyx+tMseYVZXh4eCgKt5Xt2Q/iT4S+G6caeN+A=;
-        b=gdjnL1HFIg5WY7479hrdIbrnnrnFKekCcADcRVo/ygkMCPHbbmXAqmJVgB7cpjULdx
-         U8mpo+++22JFuzIWa0zfGxQ4JK066SpnnaJwv6PRt8+Zx5DC/NII9/zL2jliWII+Q0Rq
-         xh+MfVKakwQ7oBSW+zVBAdStYFZoQJKULDrZQ=
+        bh=o2XegFQnInsmfNXqMeBFji/7yyCuSkRmN52heLn+Rqs=;
+        b=JrXB50+lYqhBGxBSw36JiDoj8nz4W5rSB2pk90QC3raJYHrQS7dV630oWhfm77tZNl
+         zVCsrG40okgTXDcXZxouo/NQKZi7RZbsHfMsSVh18qyRkvXW50vo+xSzt95UI00qrx6f
+         hXKdQDs9q2tS/LWIhDTXZiyaOBxB432N0Fhv8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744804746; x=1745409546;
+        d=1e100.net; s=20230601; t=1744804747; x=1745409547;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=zUNa1Dyx+tMseYVZXh4eCgKt5Xt2Q/iT4S+G6caeN+A=;
-        b=cPzWfFQtu7OeVi4OtT6hR5MR+v0L33uAQtOgCP8dHnGMdtPvwUYs/pcayqZI6fXPDW
-         T0twjxGjT0F1+aKqppZ+jX6hIyoDy2mKcn2l4sbtcu0+fF6gA13BkqXHc0uXcL2jkUZl
-         nAqXXEh0I3b6nj7eMcwYa49A0p5vqTM3Mp2AEIfSle1ELCZsmHc7sJ7udjHiYGnlZgg6
-         K1xNO0ZC9KhA6j6LvdKHPBmR0vCa9FBRmjD1ZKnh/3KVgvR4Rba/2c1CGV2nu5er9wWI
-         kxqnGBlxVc5O+eoPueOsOJCiItF23awB7brKjxpgwiPWJxg9T4p0obPK68+8309yMxeL
-         TquA==
-X-Gm-Message-State: AOJu0YybF82WqppUUOxbJwuHMaFzy04dU82lWrMYrFOuo9LBxUuLjk4F
-	ENIApU6HRDBqBx1PnFWjaashM6PaLS8dXr9hzdq+yWxrqQV1dTg6IqHHauA8MUdsJNCt0ZQGXz3
-	Qwz4=
-X-Gm-Gg: ASbGncsZp86c1nGFGtARE0FqR7MsmliAOqc9irlBcH9nJ26dHcchPsQ5YG3iheIxvag
-	hR7R4jbEdoHnPiiILGvOguW4Fas81CUGcpxhs1yRiIjhX6NvxCa1+5rjiuOt+Ie9/ZoCtdwbAdP
-	5rbHHugakUFjkcz0LvO1dp6mf4yptGaPcFO+uGJyqA2rWmxMDovDDefqPqvDlGPNLrzjqsoMLZc
-	nurllwfggs/n2WJFqD/5NZCGE368PtksS9VU5OL/bDKW4Zg3IGbMybvOJjLPxFx4buTDUANzfD+
-	P5QCwWj7DI/jXuWDb/J0wJcsMn+XtRw+bwrWt2ax8vrNYC8oQM0w9Gox2XJYN05r4pRA33px7df
-	1PI+A2LwjnuJFBw==
-X-Google-Smtp-Source: AGHT+IFC4KxZoundul9p9QvnfODv9XvUcsDB9qkah3he6c9DvXWbth2Ekotn4vNSN2k4PfjCVyFRhw==
-X-Received: by 2002:a5d:584d:0:b0:391:41c9:7a87 with SMTP id ffacd0b85a97d-39ee5baf64bmr1447365f8f.51.1744804745744;
-        Wed, 16 Apr 2025 04:59:05 -0700 (PDT)
+        bh=o2XegFQnInsmfNXqMeBFji/7yyCuSkRmN52heLn+Rqs=;
+        b=vLejQO8TC7HMESzgLHdnOt1tOsd0BpzIxBkmG1VsfmU/aR4ukKRj8SYU0gZJuqSoJh
+         PsaS5tbALvDB7LxQnthkw/CtN6jg1OAWVx5xl5gnUXErv4/HuPTrjhZkr3KpD09G8jz+
+         OZDPTJfeo2tIRG7pMANr/VNp8MjKYsNb2xvtTjrC2mZeXc4EjGaKGGEKY4BPK/3Ugu8p
+         qHEXze0LzTgnqTU1MtJ6ot5ixF9kbkpoNrWa9+54HkriWPsn5I3xjimQrzv9tA4rLCL4
+         ikxdGc6UUs8N2jlcxvMYEENBYJ4wHuet7g6aEFvqpuzvYkc2GE7k2E5o+EQw7bQTc2iF
+         YaRA==
+X-Gm-Message-State: AOJu0YyhHqWUQyDl4unjodrmstmmGXPGqw2wvrlBSirEZ6f3nvGE78+I
+	b2VTM7th9yrJnW2NZOPg6cnwctZRnEUBYu8y939B4ayFokbBPffnUXjT3VPpQTDBZCnfgmFaLue
+	OL7Y=
+X-Gm-Gg: ASbGncsjpoOAJ55D/qDg9Suv42Fp3NRJ8B9km0BHReoFBD+OltwCgJ2j7UO5Hq4gAtS
+	aB0T1ae4+r1yvOkvz+bOZs39ONaNNUxsquTQwfXfQh7oD/Ut6WdxYXA3lbAQnAV/IawdFE8iHml
+	4Qzg86tAqm9bI28bnUMMuU7SNnRkQ28KDhaHUDBKuVj3yxGvZjcUdcY3Mcw0eSH7FoziDLSBRvV
+	SeaTlbn7vtf+YhhKrypuIfW68P0x5Q0FE8Uh44WNHxXhfxw8KNvZgP5u3WFny/bH5S3390oNolc
+	y5Ci4lMcqYsE2ovctOhuvD1Skxc205XQbzPnb3yc5WcleSILe1V3Sp8/utlzGqTlCoicCa5Biu7
+	kNs8v6AkRGLDvqUalld4FLuaF
+X-Google-Smtp-Source: AGHT+IFnpWMeUKpKAYDo8WHZK3az+S0rAtQDGZTNX+eCfLoukZHNePftojb/WNxXpv12ovIM+CpgSA==
+X-Received: by 2002:a5d:64ef:0:b0:39c:12ce:67d with SMTP id ffacd0b85a97d-39ee5b0fee4mr1485921f8f.9.1744804747473;
+        Wed, 16 Apr 2025 04:59:07 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Lin Liu <lin.liu@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
@@ -96,9 +96,9 @@ Cc: Lin Liu <lin.liu@citrix.com>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v6 03/15] xen/lib: Switch to xen/byteorder.h
-Date: Wed, 16 Apr 2025 12:58:48 +0100
-Message-Id: <20250416115900.2491661-4-andrew.cooper3@citrix.com>
+Subject: [PATCH v6 05/15] xen/decompressors: Remove use of *_to_cpup() helpers
+Date: Wed, 16 Apr 2025 12:58:50 +0100
+Message-Id: <20250416115900.2491661-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250416115900.2491661-1-andrew.cooper3@citrix.com>
 References: <20250416115900.2491661-1-andrew.cooper3@citrix.com>
@@ -108,20 +108,14 @@ Content-Transfer-Encoding: 8bit
 
 From: Lin Liu <lin.liu@citrix.com>
 
-In divmod.c, additionally swap xen/lib.h for xen/macros.h as only ABS() is
-needed.
-
-In find-next-bit.c, ext2 has nothing to do with this logic.  It was a local
-modification when the logic was imported from Linux, because Xen didn't have a
-suitable helper.
-
-The new infrastructure does have a suitable primitive, so use it.
+These wrappers simply hide a deference, which adds to the cognitive complexity
+of reading the code.  As such, they're not going to be included in the new
+byteswap infrastructure.
 
 No functional change.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
 CC: Michal Orzel <michal.orzel@amd.com>
@@ -136,130 +130,189 @@ CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 CC: Lin Liu <lin.liu@citrix.com>
 
-The find-next-bit.c changes, being inside __BIG_ENDIAN aren't even compiled in
-any build of Xen.  I manually checked that they compiled.
+v6:
+ * Fix lz4 and lzo1x too.
 
 v5:
  * Rebase
- * Include a fixto divmod.c
- * Explain why even Linux has never had anything by the name ext2_swab()
+ * Rearranged from other patches
 ---
- xen/lib/divmod.c        |  4 ++--
- xen/lib/find-next-bit.c | 39 +++++++--------------------------------
- 2 files changed, 9 insertions(+), 34 deletions(-)
+ tools/libs/guest/xg_dom_decompress_lz4.c          | 10 ++++++++--
+ tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c | 14 ++++----------
+ tools/libs/guest/xg_dom_decompress_unsafe_xz.c    | 13 +++++++------
+ xen/common/lz4/defs.h                             |  6 +++++-
+ xen/common/unlzo.c                                | 12 ++++++++++--
+ xen/common/xz/private.h                           | 12 +++++++++---
+ 6 files changed, 43 insertions(+), 24 deletions(-)
 
-diff --git a/xen/lib/divmod.c b/xen/lib/divmod.c
-index 0377d62130ae..063e867a81ed 100644
---- a/xen/lib/divmod.c
-+++ b/xen/lib/divmod.c
-@@ -1,6 +1,6 @@
--#include <xen/lib.h>
-+#include <xen/byteorder.h>
-+#include <xen/macros.h>
- #include <xen/types.h>
--#include <asm/byteorder.h>
+diff --git a/tools/libs/guest/xg_dom_decompress_lz4.c b/tools/libs/guest/xg_dom_decompress_lz4.c
+index b26cce3ec532..53ef0bf328ed 100644
+--- a/tools/libs/guest/xg_dom_decompress_lz4.c
++++ b/tools/libs/guest/xg_dom_decompress_lz4.c
+@@ -3,6 +3,8 @@
+ #include <inttypes.h>
+ #include <stdint.h>
  
- /*
-  * A couple of 64 bit operations ported from FreeBSD.
-diff --git a/xen/lib/find-next-bit.c b/xen/lib/find-next-bit.c
-index 761b02739841..9b8d7814f20c 100644
---- a/xen/lib/find-next-bit.c
-+++ b/xen/lib/find-next-bit.c
-@@ -9,8 +9,7 @@
-  * 2 of the License, or (at your option) any later version.
-  */
- #include <xen/bitops.h>
--
--#include <asm/byteorder.h>
-+#include <xen/byteorder.h>
++#include INCLUDE_ENDIAN_H
++
+ #define XG_NEED_UNALIGNED
+ #include "xg_private.h"
+ #include "xg_dom_decompress.h"
+@@ -17,9 +19,13 @@ typedef uint64_t u64;
+ #define likely(a) a
+ #define unlikely(a) a
  
- #define __ffs(x) (ffsl(x) - 1)
- #define ffz(x) __ffs(~(x))
-@@ -164,30 +163,6 @@ EXPORT_SYMBOL(find_first_zero_bit);
- 
- #ifdef __BIG_ENDIAN
- 
--/* include/linux/byteorder does not support "unsigned long" type */
--static inline unsigned long ext2_swabp(const unsigned long * x)
--{
--#if BITS_PER_LONG == 64
--	return (unsigned long) __swab64p((u64 *) x);
--#elif BITS_PER_LONG == 32
--	return (unsigned long) __swab32p((u32 *) x);
--#else
--#error BITS_PER_LONG not defined
--#endif
--}
--
--/* include/linux/byteorder doesn't support "unsigned long" type */
--static inline unsigned long ext2_swab(const unsigned long y)
--{
--#if BITS_PER_LONG == 64
--	return (unsigned long) __swab64((u64) y);
--#elif BITS_PER_LONG == 32
--	return (unsigned long) __swab32((u32) y);
--#else
--#error BITS_PER_LONG not defined
--#endif
--}
--
- #ifndef find_next_zero_bit_le
- unsigned long find_next_zero_bit_le(const void *addr, unsigned
- 		long size, unsigned long offset)
-@@ -202,7 +177,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
- 	size -= result;
- 	offset &= (BITS_PER_LONG - 1UL);
- 	if (offset) {
--		tmp = ext2_swabp(p++);
-+		tmp = bswapl(*p++);
- 		tmp |= (~0UL >> (BITS_PER_LONG - offset));
- 		if (size < BITS_PER_LONG)
- 			goto found_first;
-@@ -220,7 +195,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
- 	}
- 	if (!size)
- 		return result;
--	tmp = ext2_swabp(p);
-+	tmp = bswapl(*p);
- found_first:
- 	tmp |= ~0UL << size;
- 	if (tmp == ~0UL)	/* Are any bits zero? */
-@@ -229,7 +204,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
- 	return result + ffz(tmp);
- 
- found_middle_swap:
--	return result + ffz(ext2_swab(tmp));
-+	return result + ffz(bswapl(tmp));
+-static inline uint_fast16_t le16_to_cpup(const unsigned char *buf)
++static inline uint16_t le16_to_cpu(uint16_t v)
+ {
+-    return buf[0] | (buf[1] << 8);
++#if BYTE_ORDER == BIG_ENDIAN
++    return __builtin_bswap16(v);
++#else
++    return v;
++#endif
  }
- EXPORT_SYMBOL(find_next_zero_bit_le);
- #endif
-@@ -248,7 +223,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
- 	size -= result;
- 	offset &= (BITS_PER_LONG - 1UL);
- 	if (offset) {
--		tmp = ext2_swabp(p++);
-+		tmp = bswapl(*p++);
- 		tmp &= (~0UL << offset);
- 		if (size < BITS_PER_LONG)
- 			goto found_first;
-@@ -267,7 +242,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
- 	}
- 	if (!size)
- 		return result;
--	tmp = ext2_swabp(p);
-+	tmp = bswapl(*p);
- found_first:
- 	tmp &= (~0UL >> (BITS_PER_LONG - size));
- 	if (tmp == 0UL)		/* Are any bits set? */
-@@ -276,7 +251,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
- 	return result + __ffs(tmp);
  
- found_middle_swap:
--	return result + __ffs(ext2_swab(tmp));
-+	return result + __ffs(bswapl(tmp));
- }
- EXPORT_SYMBOL(find_next_bit_le);
+ #include "../../xen/include/xen/lz4.h"
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c b/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+index e58c1b95ed17..3f6b133ccf9d 100644
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
++++ b/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+@@ -16,25 +16,19 @@ typedef uint64_t u64;
+ #define noinline
+ #define unlikely(a) a
+ 
+-static inline u16 be16_to_cpup(const u16 *p)
++static inline u16 be16_to_cpu(const u16 v)
+ {
+-	u16 v = *p;
+ #if BYTE_ORDER == LITTLE_ENDIAN
+-	return (((v & 0x00ffU) << 8) |
+-                ((v & 0xff00U) >> 8));
++	return __builtin_bswap16(v);
+ #else
+ 	return v;
  #endif
+ }
+ 
+-static inline u32 be32_to_cpup(const u32 *p)
++static inline u32 be32_to_cpup(const u32 v)
+ {
+-	u32 v = *p;
+ #if BYTE_ORDER == LITTLE_ENDIAN
+-	return (((v & 0x000000ffUL) << 24) |
+-                ((v & 0x0000ff00UL) <<  8) |
+-                ((v & 0x00ff0000UL) >>  8) |
+-                ((v & 0xff000000UL) >> 24));
++	return __builtin_bswap32(v);
+ #else
+ 	return v;
+ #endif
+diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_xz.c b/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+index 80eed912dd68..7dbd2622c3b8 100644
+--- a/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
++++ b/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+@@ -19,18 +19,19 @@ typedef uint32_t __le32;
+ static inline u32 cpu_to_le32(const u32 v)
+ {
+ #if BYTE_ORDER == BIG_ENDIAN
+-	return (((v & 0x000000ffUL) << 24) |
+-	        ((v & 0x0000ff00UL) <<  8) |
+-	        ((v & 0x00ff0000UL) >>  8) |
+-	        ((v & 0xff000000UL) >> 24));
++        return __builtin_bswap32(v);
+ #else
+ 	return v;
+ #endif
+ }
+ 
+-static inline u32 le32_to_cpup(const u32 *p)
++static inline u32 le32_to_cpu(const u32 p)
+ {
+-	return cpu_to_le32(*p);
++#if BYTE_ORDER == BIG_ENDIAN
++        return __builtin_bswap32(v);
++#else
++	return v;
++#endif
+ }
+ 
+ #define __force
+diff --git a/xen/common/lz4/defs.h b/xen/common/lz4/defs.h
+index ecfbf07f8323..e477806634c1 100644
+--- a/xen/common/lz4/defs.h
++++ b/xen/common/lz4/defs.h
+@@ -18,7 +18,11 @@
+ 
+ static inline u16 get_unaligned_le16(const void *p)
+ {
+-	return le16_to_cpup(p);
++	u16 v;
++
++	memcpy(&v, p, sizeof(v));
++
++	return le16_to_cpu(v);
+ }
+ 
+ #endif
+diff --git a/xen/common/unlzo.c b/xen/common/unlzo.c
+index acb8dff600fc..17efb1cc8f1d 100644
+--- a/xen/common/unlzo.c
++++ b/xen/common/unlzo.c
+@@ -39,12 +39,20 @@
+ 
+ static inline u16 get_unaligned_be16(const void *p)
+ {
+-	return be16_to_cpup(p);
++	u16 v;
++
++	memcpy(&v, p, sizeof(v));
++
++	return be16_to_cpu(v);
+ }
+ 
+ static inline u32 get_unaligned_be32(const void *p)
+ {
+-	return be32_to_cpup(p);
++	u32 v;
++
++	memcpy(&v, p, sizeof(v));
++
++	return be32_to_cpu(v);
+ }
+ 
+ #endif
+diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
+index 2299705378ac..a63379994fd6 100644
+--- a/xen/common/xz/private.h
++++ b/xen/common/xz/private.h
+@@ -18,17 +18,23 @@
+ 
+ static inline u32 get_unaligned_le32(const void *p)
+ {
+-	return le32_to_cpup(p);
++	u32 v;
++
++	memcpy(&v, p, sizeof(v));
++
++	return le32_to_cpu(v);
+ }
+ 
+ static inline void put_unaligned_le32(u32 val, void *p)
+ {
+-	*(__force __le32*)p = cpu_to_le32(val);
++	u32 v = cpu_to_le32(val);
++
++	memcpy(p, &v, sizeof(v));
+ }
+ 
+ #endif
+ 
+-#define get_le32(p) le32_to_cpup((const uint32_t *)(p))
++#define get_le32(p) le32_to_cpu(*(const uint32_t *)(p))
+ 
+ #define false 0
+ #define true 1
 -- 
 2.39.5
 
