@@ -4,34 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBD0C369CA
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 23:03:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.956759.1350041 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EB69C369BD
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 23:07:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.956757.1350051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5Bmu-0000Cw-9a; Wed, 16 Apr 2025 23:03:24 +0000
+	id 1u5BqP-0000mG-PD; Wed, 16 Apr 2025 23:07:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 956759.1350041; Wed, 16 Apr 2025 23:03:24 +0000
+Received: by outflank-mailman (output) from mailman id 956757.1350051; Wed, 16 Apr 2025 23:07:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5Bmu-0000Cm-6L; Wed, 16 Apr 2025 23:03:24 +0000
-Received: by outflank-mailman (input) for mailman id 956759;
- Wed, 16 Apr 2025 23:03:22 +0000
+	id 1u5BqP-0000m9-LQ; Wed, 16 Apr 2025 23:07:01 +0000
+Received: by outflank-mailman (input) for mailman id 956757;
+ Wed, 16 Apr 2025 22:52:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RcVf=XC=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u5Bms-0000Cg-Se
- for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 23:03:22 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Y+to=XC=tum.de=f.specht@srs-se1.protection.inumbo.net>)
+ id 1u5BcZ-00079h-2K
+ for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 22:52:45 +0000
+Received: from postout2.mail.lrz.de (postout2.mail.lrz.de [129.187.255.138])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fd7e2cd6-1b16-11f0-9eaf-5ba50f476ded;
- Thu, 17 Apr 2025 01:03:21 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8CBEA4A371;
- Wed, 16 Apr 2025 23:03:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0EE2C4CEE2;
- Wed, 16 Apr 2025 23:03:18 +0000 (UTC)
+ id 7f75aaa2-1b15-11f0-9eaf-5ba50f476ded;
+ Thu, 17 Apr 2025 00:52:40 +0200 (CEST)
+Received: from lxmhs52.srv.lrz.de (localhost [127.0.0.1])
+ by postout2.mail.lrz.de (Postfix) with ESMTP id 4ZdGWW352pzyXy;
+ Thu, 17 Apr 2025 00:52:39 +0200 (CEST)
+Received: from postout2.mail.lrz.de ([127.0.0.1])
+ by lxmhs52.srv.lrz.de (lxmhs52.srv.lrz.de [127.0.0.1]) (amavis, port 20024)
+ with LMTP id BUKWwZpHKzs4; Thu, 17 Apr 2025 00:52:38 +0200 (CEST)
+Received: from localhost (ip-77-25-21-71.web.vodafone.de [77.25.21.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (Client did not present a certificate)
+ by postout2.mail.lrz.de (Postfix) with ESMTPSA id 4ZdGWV24mvzyXt;
+ Thu, 17 Apr 2025 00:52:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,90 +50,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd7e2cd6-1b16-11f0-9eaf-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744844599;
-	bh=sHcVmZMzDb1QRF4spWG2Y4SYz35CPMy3X6mpp0ByB0I=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=i+6rMlED/9/8ZxKfe5vrvZ+aBGtPgJvBnQA+p17MCJGUrLaGE5O6dUAufFsCc5Q20
-	 /mJZb4WwPAgR7cJZ+lf+QSr1qNTTsLOyzb4DK7/2jhPUW/0iiWYZdIL8x1f61hVtrO
-	 XDeBanRRKpsx2xynmUkOZOeE/i5MLcEfzeh18FdWITW3be4LFvsbd7SoxYyIB6BExG
-	 qRsVsFiV38as0T3TOvxNZPpChdxZgyzH5BdrEwstUUc1qcxK0wOVAITEiqcIb9iqyd
-	 1eKL7X77iuASLZq+J2R1RVtup2rDFjrUmWj4xstmPQqn51vfpeyGw2PlPVKS5CKL2q
-	 c78n+GtO9x5OQ==
-Date: Wed, 16 Apr 2025 16:03:17 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Michal Orzel <michal.orzel@amd.com>
-cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2] CI: Add Arm64/Arm32 MPU build jobs
-In-Reply-To: <20250416082130.236530-1-michal.orzel@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2504161602250.8008@ubuntu-linux-20-04-desktop>
-References: <20250416082130.236530-1-michal.orzel@amd.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 7f75aaa2-1b15-11f0-9eaf-5ba50f476ded
+Authentication-Results: postout.lrz.de (amavis); dkim=pass (2048-bit key)
+ reason="pass (just generated, assumed good)" header.d=tum.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tum.de; h=
+	content-disposition:content-type:content-type:mime-version
+	:message-id:subject:subject:from:from:date:date:received
+	:received; s=tu-postout21; t=1744843958; bh=tLa+VU89u/pPAmcI58Xx
+	Rvys5/PhJoI02bJae+8u2Og=; b=SifitEc0HgRMWodNj5JCqGWBtfzs+ooY6+F/
+	DhOqq3usLmj1Cg6H+0DQJ32VyQ6hl8VqHaIrDfGa2kFplsU3PD4xrGZIZq4e2MoK
+	FjeHamf+j4NdL5KULB/t0hG+JoEvjt+o/4KpgmzD6CYvArC73jrxCMoF0ecEV35Z
+	yomVAKpbgSVBS6k3ZchAbpnAbWiSaxlVbIUpxm4lajN+A2eULD+6gAcgVj4FmXxh
+	6XZ2B75PdXz5YSSEZj+BahtcRFbirhd76QXfxgbtoo1W0Uk1zuf3UhlLCnVuFJBs
+	LXCKX/PCLWf/Vif19GGLWZ6L4l0KoLaxhWW1MgS13TgDBvqVDQ==
+X-Virus-Scanned: by amavisd-new at lrz.de in lxmhs52.srv.lrz.de
+Date: Thu, 17 Apr 2025 00:52:23 +0200
+From: Fabian Specht <f.specht@tum.de>
+To: xen-devel@lists.xenproject.org
+Cc: manuel.andreas@tum.de
+Subject: x86 emulation bug
+Message-ID: <jfgrmlid6fhbptebr22ccqimqhys3pchcoyuoepjz2iwoillei@xxaicsktj2pl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-
-On Wed, 16 Apr 2025, Michal Orzel wrote:
-> Just like for RISCV and PPC, the earlier we enable the CI build the
-> better.
-> 
-> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Content-Type: multipart/mixed; boundary="dtn5ecljjtysyige"
+Content-Disposition: inline
 
 
-> ---
-> Changes in v2:
->  - add Arm32 job given recently committed series
-> 
-> Pipeline:
-> https://gitlab.com/xen-project/people/morzel/xen/-/pipelines/1771015642
-> ---
->  automation/gitlab-ci/build.yaml | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
-> 
-> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-> index ac5367874526..ab5211f77e5e 100644
-> --- a/automation/gitlab-ci/build.yaml
-> +++ b/automation/gitlab-ci/build.yaml
-> @@ -379,6 +379,16 @@ debian-bookworm-gcc-arm32-debug-earlyprintk:
->        CONFIG_EARLY_UART_CHOICE_PL011=y
->        CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
->  
-> +debian-bookworm-gcc-arm32-debug-mpu:
-> +  extends: .gcc-arm32-cross-build-debug
-> +  variables:
-> +    CONTAINER: debian:bookworm-arm64v8-arm32-gcc
-> +    HYPERVISOR_ONLY: y
-> +    EXTRA_XEN_CONFIG: |
-> +      CONFIG_XEN_START_ADDRESS=0x0
-> +      CONFIG_MPU=y
-> +      CONFIG_UNSUPPORTED=y
-> +
->  # Arm builds
->  
->  debian-bookworm-gcc-arm64:
-> @@ -443,6 +453,16 @@ alpine-3.18-gcc-debug-arm64-earlyprintk:
->        CONFIG_EARLY_UART_CHOICE_PL011=y
->        CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
->  
-> +alpine-3.18-gcc-debug-arm64-mpu:
-> +  extends: .gcc-arm64-build-debug
-> +  variables:
-> +    CONTAINER: alpine:3.18-arm64v8
-> +    HYPERVISOR_ONLY: y
-> +    EXTRA_XEN_CONFIG: |
-> +      CONFIG_XEN_START_ADDRESS=0x0
-> +      CONFIG_MPU=y
-> +      CONFIG_UNSUPPORTED=y
-> +
->  # Yocto test jobs
->  yocto-qemuarm64:
->    extends: .yocto-test-arm64
-> -- 
-> 2.25.1
-> 
-> 
+--dtn5ecljjtysyige
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Dear all,
+
+we discovered a bug in hvm64 x86 Xen. Using the attached xtf test we are
+able to trigger an assert in arch/x86/hvm/emulate.c:
+
+
+if ( (hvmemul_ctxt->ctxt.regs->eflags & X86_EFLAGS_DF) && (reps > 1) )
+{
+	/*
+	 * x86_emulate() clips the repetition count to ensure we don't wrap
+	 * the effective-address index register. Hence this assertion holds.
+	 */
+	ASSERT(offset >= ((reps - 1) * bytes_per_rep));
+	okay = hvm_virtual_to_linear_addr(
+		seg, reg, offset - (reps - 1) * bytes_per_rep,
+		reps * bytes_per_rep, access_type,
+		hvmemul_get_seg_reg(x86_seg_cs, hvmemul_ctxt), linear);
+	*linear += (reps - 1) * bytes_per_rep;
+	if ( hvmemul_ctxt->ctxt.addr_size != 64 )
+		*linear = (uint32_t)*linear;
+}
+
+
+If debug mode is not enabled, this will later on result in an integer
+underflow, however we were not able to find any severe problems.
+
+The test below will not work with vanilla xtf. To get it working,
+we have to edit 'pae_l1_identmap' in arch/x86/hvm/pagetables.S in xtf
+from
+
+
+PAGETABLE_START(pae_l1_identmap)
+        .long 0, 0
+        .rept PAE_L1_PT_ENTRIES - 1
+        .long (PAE_IDX(pae_l1_identmap) << PAE_L1_PT_SHIFT) + _PAGE_LEAF
+        .long 0
+        .endr
+PAGETABLE_END(pae_l1_identmap)
+
+
+to the following value:
+
+
+PAGETABLE_START(pae_l1_identmap)
+        .quad (0x5564000000) + _PAGE_LEAF
+        .rept PAE_L1_PT_ENTRIES - 1
+        .long (PAE_IDX(pae_l1_identmap) << PAE_L1_PT_SHIFT) + _PAGE_LEAF
+        .long 0
+        .endr
+PAGETABLE_END(pae_l1_identmap)
+
+
+
+We were able to reproduce this bug in several versions including the
+most current one at the time of writing this.
+
+
+Best,
+Fabian
+
+--dtn5ecljjtysyige
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="main.c"
+
+/**
+ * @file tests/poc/main.c
+ * @ref test-poc
+ *
+ * @page test-poc poc
+ *
+ * @todo Docs for test-poc
+ *
+ * @see tests/poc/main.c
+ */
+#include <xtf.h>
+
+const char test_title[] = "Test poc";
+
+void test_main(void)
+{
+	printk("Starting up reps offset assert poc!\n");
+
+    asm volatile ( 
+        "mov $0xd000f8, %%eax;"
+        "mov $0x0, %%rdi;"
+        "mov $0x1900000000000000, %%rcx;"
+        "std;"
+        "rep stos %%eax, %%es:(%%rdi);"
+        ::: "memory", "cc", "rax", "rdi", "rcx"
+    );
+
+    printk("Unreachable with enabled debug asserts!\n");
+    xtf_success(NULL);
+    xtf_success(NULL);
+}
+
+/*
+ * Local variables:
+ * mode: C
+ * c-file-style: "BSD"
+ * c-basic-offset: 4
+ * tab-width: 4
+ * indent-tabs-mode: nil
+ * End:
+ */
+
+--dtn5ecljjtysyige--
 
