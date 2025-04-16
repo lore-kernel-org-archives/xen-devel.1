@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F8DC369C2
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 22:04:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.956701.1350030 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBD0C369CA
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Apr 2025 23:03:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.956759.1350041 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5ArI-0006jc-4j; Wed, 16 Apr 2025 22:03:52 +0000
+	id 1u5Bmu-0000Cw-9a; Wed, 16 Apr 2025 23:03:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 956701.1350030; Wed, 16 Apr 2025 22:03:52 +0000
+Received: by outflank-mailman (output) from mailman id 956759.1350041; Wed, 16 Apr 2025 23:03:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5ArI-0006jV-1r; Wed, 16 Apr 2025 22:03:52 +0000
-Received: by outflank-mailman (input) for mailman id 956701;
- Wed, 16 Apr 2025 22:03:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u5Bmu-0000Cm-6L; Wed, 16 Apr 2025 23:03:24 +0000
+Received: by outflank-mailman (input) for mailman id 956759;
+ Wed, 16 Apr 2025 23:03:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RcVf=XC=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u5ArH-0006jP-JG
- for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 22:03:51 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [2600:3c04:e001:324:0:1991:8:25])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac01ac56-1b0e-11f0-9ffb-bf95429c2676;
- Thu, 17 Apr 2025 00:03:49 +0200 (CEST)
+ id 1u5Bms-0000Cg-Se
+ for xen-devel@lists.xenproject.org; Wed, 16 Apr 2025 23:03:22 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fd7e2cd6-1b16-11f0-9eaf-5ba50f476ded;
+ Thu, 17 Apr 2025 01:03:21 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E2E156156A;
- Wed, 16 Apr 2025 22:03:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A2DAC4CEE2;
- Wed, 16 Apr 2025 22:03:45 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8CBEA4A371;
+ Wed, 16 Apr 2025 23:03:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0EE2C4CEE2;
+ Wed, 16 Apr 2025 23:03:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,131 +43,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac01ac56-1b0e-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: fd7e2cd6-1b16-11f0-9eaf-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744841026;
-	bh=cC0ablkiefFiUWFXjgW4PLnZWHchzGaQ56t4I01BkAU=;
+	s=k20201202; t=1744844599;
+	bh=sHcVmZMzDb1QRF4spWG2Y4SYz35CPMy3X6mpp0ByB0I=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=BYReslRUVLV2nuo337I0G0U9SDcJ3GgGFWkCbh6/5M2PMt2qigpvyRhGCaf/osbYK
-	 kw6xMxy0JAqTFSKRM2UJdFodqb8WUhR7JPNLMOWkpgtSe8EDkemaIEaeZs63hX0wWT
-	 djgOg12D+r0yaTiUEfWZ13uxQ53vvq6mR5PyhELL7yQ1uvEzB2W10wQhiZmza8cWUX
-	 vvwthCk6bmJg1BmjFLDQfn3CvuuS6uuQjUILuM64oFFYlKhgVEiKAM8PAzxqTEIxHx
-	 tTe8spdcwJVIOBObR7b3J7CnY37AyRwKaTVSD4jnnzbaVILiQ8bIPn7OLRw8rSNwM4
-	 LYfQkqAMX99wQ==
-Date: Wed, 16 Apr 2025 15:03:44 -0700 (PDT)
+	b=i+6rMlED/9/8ZxKfe5vrvZ+aBGtPgJvBnQA+p17MCJGUrLaGE5O6dUAufFsCc5Q20
+	 /mJZb4WwPAgR7cJZ+lf+QSr1qNTTsLOyzb4DK7/2jhPUW/0iiWYZdIL8x1f61hVtrO
+	 XDeBanRRKpsx2xynmUkOZOeE/i5MLcEfzeh18FdWITW3be4LFvsbd7SoxYyIB6BExG
+	 qRsVsFiV38as0T3TOvxNZPpChdxZgyzH5BdrEwstUUc1qcxK0wOVAITEiqcIb9iqyd
+	 1eKL7X77iuASLZq+J2R1RVtup2rDFjrUmWj4xstmPQqn51vfpeyGw2PlPVKS5CKL2q
+	 c78n+GtO9x5OQ==
+Date: Wed, 16 Apr 2025 16:03:17 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Grygorii Strashko <grygorii_strashko@epam.com>
-cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>, 
-    Alejandro Vallejo <agarciav@amd.com>
-Subject: Re: [ImageBuilder v2] uboot-script-gen: add xen xsm policy loading
- support
-In-Reply-To: <20250415070128.1938253-1-grygorii_strashko@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2504161503150.8008@ubuntu-linux-20-04-desktop>
-References: <20250415070128.1938253-1-grygorii_strashko@epam.com>
+To: Michal Orzel <michal.orzel@amd.com>
+cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2] CI: Add Arm64/Arm32 MPU build jobs
+In-Reply-To: <20250416082130.236530-1-michal.orzel@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2504161602250.8008@ubuntu-linux-20-04-desktop>
+References: <20250416082130.236530-1-michal.orzel@amd.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Tue, 15 Apr 2025, Grygorii Strashko wrote:
-> From: Grygorii Strashko <grygorii_strashko@epam.com>
+On Wed, 16 Apr 2025, Michal Orzel wrote:
+> Just like for RISCV and PPC, the earlier we enable the CI build the
+> better.
 > 
-> This patch adds Xen XSM policy loading support.
-> 
-> The configuration file XEN_POLICY specifies Xen hypervisor
-> XSM policy binary to load.
-> 
-> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
 > ---
-> changes in v2:
-> - fix conditional statements for XEN_POLICY
-> - add XSM policy binary check
+> Changes in v2:
+>  - add Arm32 job given recently committed series
 > 
->  README.md                |  2 ++
->  scripts/uboot-script-gen | 34 ++++++++++++++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
+> Pipeline:
+> https://gitlab.com/xen-project/people/morzel/xen/-/pipelines/1771015642
+> ---
+>  automation/gitlab-ci/build.yaml | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
 > 
-> diff --git a/README.md b/README.md
-> index 137abef153ce..9106d2a07302 100644
-> --- a/README.md
-> +++ b/README.md
-> @@ -91,6 +91,8 @@ Where:
->  - XEN specifies the Xen hypervisor binary to load. Note that it has to
->    be a regular Xen binary, not a u-boot binary.
+> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+> index ac5367874526..ab5211f77e5e 100644
+> --- a/automation/gitlab-ci/build.yaml
+> +++ b/automation/gitlab-ci/build.yaml
+> @@ -379,6 +379,16 @@ debian-bookworm-gcc-arm32-debug-earlyprintk:
+>        CONFIG_EARLY_UART_CHOICE_PL011=y
+>        CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
 >  
-> +- XEN_POLICY specifies the Xen hypervisor XSM policy binary to load.
+> +debian-bookworm-gcc-arm32-debug-mpu:
+> +  extends: .gcc-arm32-cross-build-debug
+> +  variables:
+> +    CONTAINER: debian:bookworm-arm64v8-arm32-gcc
+> +    HYPERVISOR_ONLY: y
+> +    EXTRA_XEN_CONFIG: |
+> +      CONFIG_XEN_START_ADDRESS=0x0
+> +      CONFIG_MPU=y
+> +      CONFIG_UNSUPPORTED=y
 > +
->  - XEN_COLORS specifies the colors (cache coloring) to be used for Xen
->    and is in the format startcolor-endcolor
+>  # Arm builds
 >  
-> diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-> index c4d26caf5e0e..208eafdecfeb 100755
-> --- a/scripts/uboot-script-gen
-> +++ b/scripts/uboot-script-gen
-> @@ -315,6 +315,15 @@ function xen_device_tree_editing()
->      dt_set "/chosen" "#size-cells" "hex" "0x2"
->      dt_set "/chosen" "xen,xen-bootargs" "str" "$XEN_CMD"
+>  debian-bookworm-gcc-arm64:
+> @@ -443,6 +453,16 @@ alpine-3.18-gcc-debug-arm64-earlyprintk:
+>        CONFIG_EARLY_UART_CHOICE_PL011=y
+>        CONFIG_EARLY_UART_BASE_ADDRESS=0x9000000
 >  
-> +    if test -n "$XEN_POLICY" && test "$xen_policy_addr" != "-"
-> +    then
-> +        local node_name="xen-policy@${xen_policy_addr#0x}"
+> +alpine-3.18-gcc-debug-arm64-mpu:
+> +  extends: .gcc-arm64-build-debug
+> +  variables:
+> +    CONTAINER: alpine:3.18-arm64v8
+> +    HYPERVISOR_ONLY: y
+> +    EXTRA_XEN_CONFIG: |
+> +      CONFIG_XEN_START_ADDRESS=0x0
+> +      CONFIG_MPU=y
+> +      CONFIG_UNSUPPORTED=y
 > +
-> +        dt_mknode "/chosen" "$node_name"
-> +        dt_set "/chosen/$node_name" "compatible" "str_a" "xen,xsm-policy xen,multiboot-module multiboot,module"
-> +        dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $xen_policy_addr $xen_policy_size)"
-> +    fi
-> +
->      if test "$DOM0_KERNEL"
->      then
->          local node_name="dom0@${dom0_kernel_addr#0x}"
-> @@ -900,6 +909,15 @@ xen_file_loading()
->      kernel_addr=$memaddr
->      kernel_path=$XEN
->      load_file "$XEN" "host_kernel"
-> +
-> +    xen_policy_addr="-"
-> +    if test -n "$XEN_POLICY"
-> +    then
-> +        check_file_type "${XEN_POLICY}" "SE Linux policy"
-> +        xen_policy_addr=$memaddr
-> +        load_file "$XEN_POLICY" "xen_policy"
-> +        xen_policy_size=$filesize
-> +    fi
->  }
->  
->  linux_file_loading()
-> @@ -939,6 +957,22 @@ bitstream_load_and_config()
->  
->  create_its_file_xen()
->  {
-> +    if test -n "$XEN_POLICY" && test "$xen_policy_addr" != "-"
-> +    then
-> +        cat >> "$its_file" <<- EOF
-> +        xen_policy {
-> +            description = "Xen XSM policy binary";
-> +            data = /incbin/("$XEN_POLICY");
-> +            type = "kernel";
-
-This should be "firmware". Aside from that, the patch is fine.
-If you are OK with it, I can fix it on commit.
-
-
-
-> +            arch = "arm64";
-> +            os = "linux";
-> +            compression = "none";
-> +            load = <$xen_policy_addr>;
-> +            $fit_algo
-> +        };
-> +	EOF
-> +    fi
-> +
->      if test "$DOM0_KERNEL"
->      then
->          if test "$ramdisk_addr" != "-"
+>  # Yocto test jobs
+>  yocto-qemuarm64:
+>    extends: .yocto-test-arm64
 > -- 
-> 2.34.1
+> 2.25.1
+> 
 > 
 
