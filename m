@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9364AC369C2
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Apr 2025 14:22:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.957805.1350841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A640C369C9
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Apr 2025 14:25:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.957830.1350861 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5Q8B-0002Ju-LO; Thu, 17 Apr 2025 14:22:19 +0000
+	id 1u5QAi-0003Sf-8Z; Thu, 17 Apr 2025 14:24:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 957805.1350841; Thu, 17 Apr 2025 14:22:19 +0000
+Received: by outflank-mailman (output) from mailman id 957830.1350861; Thu, 17 Apr 2025 14:24:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5Q8B-0002Jn-ID; Thu, 17 Apr 2025 14:22:19 +0000
-Received: by outflank-mailman (input) for mailman id 957805;
- Thu, 17 Apr 2025 14:22:18 +0000
+	id 1u5QAi-0003SY-5Q; Thu, 17 Apr 2025 14:24:56 +0000
+Received: by outflank-mailman (input) for mailman id 957830;
+ Thu, 17 Apr 2025 14:24:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=F8tB=XD=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1u5Q8A-0002J1-FW
- for xen-devel@lists.xenproject.org; Thu, 17 Apr 2025 14:22:18 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20616.outbound.protection.outlook.com
- [2a01:111:f403:2417::616])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=nsoM=XD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1u5QAh-0003Db-Gp
+ for xen-devel@lists.xenproject.org; Thu, 17 Apr 2025 14:24:55 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c800108-1b97-11f0-9eb0-5ba50f476ded;
- Thu, 17 Apr 2025 16:22:16 +0200 (CEST)
-Received: from BN9PR03CA0804.namprd03.prod.outlook.com (2603:10b6:408:13f::29)
- by MN6PR12MB8589.namprd12.prod.outlook.com (2603:10b6:208:47d::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.34; Thu, 17 Apr
- 2025 14:22:12 +0000
-Received: from BN3PEPF0000B373.namprd21.prod.outlook.com
- (2603:10b6:408:13f:cafe::22) by BN9PR03CA0804.outlook.office365.com
- (2603:10b6:408:13f::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.18 via Frontend Transport; Thu,
- 17 Apr 2025 14:22:12 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN3PEPF0000B373.mail.protection.outlook.com (10.167.243.170) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8678.4 via Frontend Transport; Thu, 17 Apr 2025 14:22:11 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Apr
- 2025 09:22:09 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Apr
- 2025 09:22:09 -0500
-Received: from [172.23.161.73] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 17 Apr 2025 09:22:07 -0500
+ id bb2ec953-1b97-11f0-9eb0-5ba50f476ded;
+ Thu, 17 Apr 2025 16:24:54 +0200 (CEST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-39c14016868so853860f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Apr 2025 07:24:54 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c7a896b04esm1180700385a.63.2025.04.17.07.24.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Apr 2025 07:24:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,115 +47,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c800108-1b97-11f0-9eb0-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NsXc6mBh6sMW8zKUJTeNqcdE9RzdflN5OffvCXvokJlcTpCmiKNEtW+mtUv5ZIKBCqOzu8GZqjzy3Xkgjd2iO1SUgKKtyV3VbbCEvKaIQsE/JRsfmowoAn89iWkorUytSkfLYF0uxLyS4fNJGwxWvL2G5wFQ1rcXaiQLgGBgum3xYOyiknMgjW8/lmZl0DaMCejKX3awwwCh+3s3sW7jpx7PC/MvDiu8evsiECu4z5Diyrqgdw5FQdPfQ3t7ZWYla7y5YX//MHwhGfDhKmw53NWR7HhTnI1KmHUkZOFvMyjttP78EndcHVH2ZmuI8ooSPWLUk54xELneS1Sy33D46w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5qCHWFQ0DFfzt5um3E1dhf8yXRt+EDDNxTb26bpKz2I=;
- b=wEnfbKhAWes/dIbIOHyxT1g8fsh2Nf7hssGuuP9Yq00XNfbihPzyNkRcFhalCrsyzQ/yhI5oXCNzZ2n/nPrK8mOmpcmvKWuj0wNi0Spum2wpYizLLXGOyLN/KiDdpGofMW1V5b2eQqkKjPg8OV9318827XwAjJ5ckr4+3Xs+kVQIdVvtYAhXo3P785Vx6PLOZdeIcTaHPdKbwcyXX37MP1qKq3TNIT58c0pFEDA0iLaSBWGnFcxrzA3N/PjMQoeSM7IgXWsQZJ8VsW+F+TcY/eWn0JPaFRs5bToiRWpAwhELoN0Nka4+m3oF+l9evks1f6mhZsuKMT1e8ki7HFnJOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5qCHWFQ0DFfzt5um3E1dhf8yXRt+EDDNxTb26bpKz2I=;
- b=Qtq4rgTX5jQX6rMJO9aPzZ2gCWCdNZrioSsc/leCkp/6ls+KcNZVlUVK6KRCQvQO+Xrc8qFg1Y2MThmKhGFlRcBh89F1ITcBPzHspiAM1e8/OVVHZLrGUHHK0PUcso5F0rdHuKE+Gh0N4irJIKjFNZ2+5SOnGI7CwxkkmzMuioU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <64116bdc-9762-4b06-85c7-d269ef4c9ecd@amd.com>
-Date: Thu, 17 Apr 2025 10:22:10 -0400
+X-Inumbo-ID: bb2ec953-1b97-11f0-9eb0-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1744899894; x=1745504694; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=0rwqXzlXFaWnSYdyRY+UHDHRCNQa4yZUsXRLpnF+5rA=;
+        b=BMbJpg4Zi6QwiOOUjSH5WJN+GTW5pUczSOP0DWJSubRf2cqWuLsHYDvHGMeHGKjx5o
+         u0GwFy3wMzOLxfp2CWyzSqp+0a4SLVXPq7m9VKrWYA/KlcDBx2X/or3PdHypd1cUQK/B
+         O7bl5eIYXPZF4KzujfmlJTLRixiEnuKDaeFSuMzQM5Gv2KSdrWX+r4SeiwkRMOKPZPfb
+         8F290k061imPNLtCwleBylivQL/4hM8JJJUVsRfBRJ62QAViF8hQGa5IRCUXbdktz6zD
+         jbD3gfT6MV3XAZ1O7IfVxApCCY303fAazpu8U8SBuJPfu2uQ09L7JNfA0fsgCy3ioQAZ
+         lQdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744899894; x=1745504694;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0rwqXzlXFaWnSYdyRY+UHDHRCNQa4yZUsXRLpnF+5rA=;
+        b=Xyh1dR+XwuZjdyJwGRPPoTmGNQ+wqUrOdGqFg/JCgy2ohoDmUDCY8FT8ZjKMxqJiYm
+         5dUpnJjjx398rb6nf/4jFDoXJ4tHVzKpClEYyMjl+6EYQunhdgtelZ2bNRvgRLQvU/X4
+         7CDzfyRplb/QCwZzaV8Tx40RN5CB+W4ijx+f+pF7wP4RWZ4DiqgY9Da2u2gBx9gRqdB3
+         Q+lPmljJsho0/tShP0OY0piruIh4U02OxkrqoMgn7Kgy/l53DKogfsWlFEAIXnO+WmCY
+         fdiZOkD2PXgCzFUEFL8H3P08hdR3gmUZZtRvAUF8sTpEK0A5UizGGIt8UEncSLhDr1GP
+         qArw==
+X-Forwarded-Encrypted: i=1; AJvYcCVHdjujK98vehRTmt4XsxJoyc0lbTq7QO1gCaV0ZvDETy2YDVJiAa2ac1blrE8U0e+78I4LOdYvOyA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxyO33tslnrsLKVIpg6HlUbkEtbmo1hEsG1+Su5HbNmtHYFxqzX
+	elKGYTDZ0Gg8FcaBQ+v8DxOGixa7sTVtTc7m5Xj7T4CcFe0n218vxFnU6KExOg==
+X-Gm-Gg: ASbGncvPTf0LjAxIR0p6LoeWY6PpesfOVo4AABL7/LSy8rOnF3rZbZh82MWpxpsjuwj
+	2QaRKqIbl5W/kfQ4IqqYQHWnjioWnjvAzmmXXiCZkWz0CgCWdwEEIv4DxQK4OM2AfmkG4dsObMk
+	NR8+225uuVfsFoxWpjMLdoCFCC5D/w35SvH7SLRMuaSa+JyRUVdMQudjAt+JkIlkhg5yv5ZEcuj
+	JmDC6bqbCwFuRNGItt9cDbCZXr3r5vWOXqOYLucO3zT2zFzb30hyHFxvNOTQLc3cDei3avRCk7v
+	dAUn7qLBCMXhOKplfxvYPIVa1zZcBm1huGm2EMNt3bqLi3ZLERdvG/+EicWjOsswnnRc24GwESd
+	u+/u0gw5+PV4Ru5gBTH1jT7z2ww==
+X-Google-Smtp-Source: AGHT+IHv/XmX55791G2Ds/lz/6K+H+6CVnWrwKFMaPGOyRV4aJmxZ8xS73W2tZYZx9zvs9e35dHMoQ==
+X-Received: by 2002:a05:6000:1a8e:b0:39a:e71d:ee34 with SMTP id ffacd0b85a97d-39ee5b9e3aamr4902555f8f.37.1744899893805;
+        Thu, 17 Apr 2025 07:24:53 -0700 (PDT)
+Message-ID: <a71db245-5b0b-435e-8e58-cb43c5162862@suse.com>
+Date: Thu, 17 Apr 2025 16:24:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v19 2/3] vpci: acquire d->pci_lock in I/O handlers
-To: Jan Beulich <jbeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
-	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger.pau@citrix.com>, <xen-devel@lists.xenproject.org>
-References: <20250415165404.435506-1-stewart.hildebrand@amd.com>
- <20250415165404.435506-3-stewart.hildebrand@amd.com>
- <ab982710-0172-472b-b3eb-07914d6579cf@suse.com>
+Subject: Re: [PATCH v1 03/14] xen/riscv: introduce ioremap()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1744126720.git.oleksii.kurochko@gmail.com>
+ <6d91eeabe2735de93bfcf2a2420e2059a8f35e52.1744126720.git.oleksii.kurochko@gmail.com>
+ <84089b6d-efeb-4613-85b9-eb10d11d7338@suse.com>
+ <f315bc11-c537-4dca-9e62-a6d3f02733e4@gmail.com>
+ <6b226b72-11a4-4004-b42d-0e280de83539@suse.com>
+ <bbfdc4a0-54f0-4a9d-aa6d-2cf85ec03411@gmail.com>
 Content-Language: en-US
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-In-Reply-To: <ab982710-0172-472b-b3eb-07914d6579cf@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <bbfdc4a0-54f0-4a9d-aa6d-2cf85ec03411@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B373:EE_|MN6PR12MB8589:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97928897-4d4c-49d1-b734-08dd7dbb3e3c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?RjZLeDh5c3hnSXg0bzdMT3lPbUVMZTBPY3c4VXpNakNNU21vYS9ZMTdxTXJC?=
- =?utf-8?B?bERWNHhuZXVHUEp0azNobFd2NUFDYXpaM01wUGdNNE1qYVJUclJZVG9XcWx1?=
- =?utf-8?B?VEtuc003YXlNVDcvSUlmcGJhTm84L1E4Yzgwd2kzcjVJZll0KzBRUHdqTWdI?=
- =?utf-8?B?Uk52blhjZ1dDa0pMOStWYnhtWHl4alBqMzFSa2VReFlGb3RIRTFoYmlHZWFV?=
- =?utf-8?B?bDdiWFRwakEydlFaTHpKK3VVWEZxT0M0d2I2dCt1eGhkaWs4cmdZQk15WXZC?=
- =?utf-8?B?dDNXUzIyeXJIdVZ4dVJhQ3hRSWg2aXo1MTZMSm53OVFSZTFGVXJCdGVhWXFx?=
- =?utf-8?B?RldBU1BmYy9XbldlL0lzSUdrNkNXeGt6dzBOYXZicTAwVDY0eVA5Z1B2RFJz?=
- =?utf-8?B?aTJ6ZjdOai9kdFltczJUaUNmRnBsMFdtODh1c1h6b3pSNmg1Qkk1QVBsZExP?=
- =?utf-8?B?dkZsRGZONTByRWhrNi9zN1ZNZDdnVkRBQlVuaW9Ec3F5ZTJKTVdGYVRUOEYy?=
- =?utf-8?B?QkllYlhRUVJHOU1wMHJKdUt2KytjczYvKys5YVppcHppTUZ5RGhCY1QzQThy?=
- =?utf-8?B?d3p2Q0w3L2gwSUtVZkxSVDViN2NjVFV3eGJoK090N3gwcWFCYzFGQ2oxTFcx?=
- =?utf-8?B?enk5K09OSEhWV1ZEODV0Z0tFNE0wdW04L3h2Y2VFT0hCUy9oMUdXVkhNOTI2?=
- =?utf-8?B?TzluSWhRbWxQekVwZDlLSmdnRDVwNG9EZGZvZXJSTzYwdjI1SjNkSWdOa0NK?=
- =?utf-8?B?M2JPa3R3d2FjWHlwNDIrUUV5eTBkZ253aEhyWFpEZURGc2pNbkQ3TnBvL0Zi?=
- =?utf-8?B?NUhlSmlJb2R5bCtid3d3b1JPaDlFeWxGYk5DNUNMd0xCTGJzWXVHR09Vak10?=
- =?utf-8?B?cnNHOFNnVS9LTmQ3Z08zU3F5L0dybDYxS2FKUUh1d3Y5anBVeG5maVByZjZw?=
- =?utf-8?B?aEtmUkJzdVNwRnRXd1NGRFhVMy94V2tHRVpHZzBrR0N3L0Y3MGg4R3ZIYWtm?=
- =?utf-8?B?OWVCQUh3RTBwTDVSR2hpSmtZU2c1NVZ3UGdqRzJ0cmRpcnEwTFRqY05nMHVM?=
- =?utf-8?B?N3ZoWUZVdU9vcCtRekRLbWFjbzlrdExaZFlYYzVYaEF0TTdLMHpXNDBhUjBi?=
- =?utf-8?B?c1RNdFdRbEl0UzJhUGZjc2Roem5Kd2lteWlLR0I0cWFETTB4QU45bUV4VWlM?=
- =?utf-8?B?dDNObWZrQlQrWlhQUkhnaEdnTGM1ZmJsZDBQNDVZNWVnY2xoM2FVeE9RZnZt?=
- =?utf-8?B?cTRLSVFFVTJCb1FzcEJjeWxXUFMrenQrTzY1d1Z2aENTemIvNm9vVDZRVG1q?=
- =?utf-8?B?a2NzWVNTRnc4c2ZCaC9LUnpUd2RMbWMwYmlhbWx4TWNMYVJxV3ZGUWdvOS95?=
- =?utf-8?B?MnZqem43dm5GMWo1L2diWStZa0JJSTcyaWU4MXNtVGI1NXdMSTRYWEE2Y3d3?=
- =?utf-8?B?TW96U3FRQ3U4V2cvZlVQWU5UU2ZXd2Y4b0N5eER4akEyUEtoZzA0SUJ6clZN?=
- =?utf-8?B?MTYyUVc1VldoQ1c2QTZIem56RFFSRWg2ajJxcXpCaU1pQ2NGdVhiUThDaHNR?=
- =?utf-8?B?T2hxbEoyMk8zVHJUdllYdkZwTzZLM3Y1TW1kV0tDd2xYM05nKzFHaXhLMzhK?=
- =?utf-8?B?ZWNvUW5Gakt2SmxDbTRuN3E3K3UrWGNtdkRsVFRBRVlQbnJKUnhQeEFTNDJV?=
- =?utf-8?B?R1hCZVdQSERqQkt6MzdVUXRUK2trQytnZ3BZdlp6bkNzVjFXTWYrY1pwY0Q5?=
- =?utf-8?B?anovWUlGOWxqdzcxaXZha2sxZWZPZ0xKOE5uMTlVTEkrQjArY0NCKy9jSVZr?=
- =?utf-8?B?clNyM21oL2hYS1JnWmlSN1VqT2YzN0VrWE1xZnBtTU9waWNFTjB5ekpPd2o4?=
- =?utf-8?B?NjNQZkJJMEJEai9wZjZBaWJPK3BzbTRTWS9DUzdYdWFORlRPSG9EUFZhc0xj?=
- =?utf-8?B?L0dnWWVhMjE2M0hQYUc2VnljZlVqU29qYVhKSXZ4ZW5VS0lWclN4UUZhTFpQ?=
- =?utf-8?B?VHZNYkU5ZytnS3k3a2J6OFpOMTdFSzlVZDJTbjl2b0JZR2o0ZWNNUWtUUEtD?=
- =?utf-8?Q?KLJNnO?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2025 14:22:11.2564
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97928897-4d4c-49d1-b734-08dd7dbb3e3c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B373.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8589
 
-On 4/16/25 11:27, Jan Beulich wrote:
-> On 15.04.2025 18:54, Stewart Hildebrand wrote:
->> In preparation for translating virtual PCI bus topology (where a pdev
->> lookup will be needed in the vPCI I/O handlers), acquire d->pci_lock in
->> the vPCI I/O handlers.
+On 17.04.2025 16:20, Oleksii Kurochko wrote:
+> On 4/15/25 1:02 PM, Jan Beulich wrote:
+>> On 15.04.2025 12:29, Oleksii Kurochko wrote:
+>>> On 4/10/25 5:13 PM, Jan Beulich wrote:
+>>>> On 08.04.2025 17:57, Oleksii Kurochko wrote:
+>>>>> Based on RISC-V unpriviliged spec ( Version 20240411 ):
+>>>>> ```
+>>>>> For implementations that conform to the RISC-V Unix Platform Specification,
+>>>>> I/O devices and DMA operations are required to access memory coherently and
+>>>>> via strongly ordered I/O channels. Therefore, accesses to regular main memory
+>>>>> regions that are concurrently accessed by external devices can also use the
+>>>>> standard synchronization mechanisms. Implementations that do not conform
+>>>>> to the Unix Platform Specification and/or in which devices do not access
+>>>>> memory coherently will need to use mechanisms
+>>>>> (which are currently platform-specific or device-specific) to enforce
+>>>>> coherency.
+>>>>>
+>>>>> I/O regions in the address space should be considered non-cacheable
+>>>>> regions in the PMAs for those regions. Such regions can be considered coherent
+>>>>> by the PMA if they are not cached by any agent.
+>>>>> ```
+>>>>> and [1]:
+>>>>> ```
+>>>>> The current riscv linux implementation requires SOC system to support
+>>>>> memory coherence between all I/O devices and CPUs. But some SOC systems
+>>>>> cannot maintain the coherence and they need support cache clean/invalid
+>>>>> operations to synchronize data.
+>>>>>
+>>>>> Current implementation is no problem with SiFive FU540, because FU540
+>>>>> keeps all IO devices and DMA master devices coherence with CPU. But to a
+>>>>> traditional SOC vendor, it may already have a stable non-coherency SOC
+>>>>> system, the need is simply to replace the CPU with RV CPU and rebuild
+>>>>> the whole system with IO-coherency is very expensive.
+>>>>> ```
+>>>>>
+>>>>> and the fact that all known ( to me ) CPUs that support the H-extension
+>>>>> and that ones is going to be supported by Xen have memory coherency
+>>>>> between all I/O devices and CPUs, so it is currently safe to use the
+>>>>> PAGE_HYPERVISOR attribute.
+>>>>> However, in cases where a platform does not support memory coherency, it
+>>>>> should support CMO extensions and Svpbmt. In this scenario, updates to
+>>>>> ioremap will be necessary.
+>>>>> For now, a compilation error will be generated to ensure that the need to
+>>>>> update ioremap() is not overlooked.
+>>>>>
+>>>>> [1]https://patchwork.kernel.org/project/linux-riscv/patch/1555947870-23014-1-git-send-email-guoren@kernel.org/
+>>>> But MMIO access correctness isn't just a matter of coherency. There may not
+>>>> be any caching involved in most cases, or else you may observe significantly
+>>>> delayed or even dropped (folded with later ones) writes, and reads may be
+>>>> serviced from the cache instead of going to actual MMIO. Therefore ...
+>>>>
+>>>>> --- a/xen/arch/riscv/Kconfig
+>>>>> +++ b/xen/arch/riscv/Kconfig
+>>>>> @@ -15,6 +15,18 @@ config ARCH_DEFCONFIG
+>>>>>    	string
+>>>>>    	default "arch/riscv/configs/tiny64_defconfig"
+>>>>>    
+>>>>> +config HAS_SVPBMT
+>>>>> +	bool
+>>>>> +	help
+>>>>> +	  This config enables usage of Svpbmt ISA-extension ( Supervisor-mode:
+>>>>> +	  page-based memory types).
+>>>>> +
+>>>>> +	  The memory type for a page contains a combination of attributes
+>>>>> +	  that indicate the cacheability, idempotency, and ordering
+>>>>> +	  properties for access to that page.
+>>>>> +
+>>>>> +	  The Svpbmt extension is only available on 64-bit cpus.
+>>>> ... I kind of expect this extension (or anything else that there might be) will need
+>>>> making use of.
+>>> In cases where the Svpbmt extension isn't available, PMA (Physical Memory Attributes)
+>>> is used to control which memory regions are cacheable, non-cacheable, readable, writable,
+>>> etc. PMA is configured in M-mode by the firmware (e.g., OpenSBI), as is done in Andes
+>>> cores, or it can be fixed at design time, as in SiFive cores.
+>> How would things work if there was a need to map a RAM page uncacheable (via
+>> ioremap() or otherwise)?
 > 
-> I find it concerning that the locked regions (it's a domain-wide lock
-> after all) are further grown.
+> My understanding is that Svpbmt is only needed when someone wants to change the memory
+> attribute of a page set by PMA.
+> 
+> The question is if non-cacheable RAM page is really needed if we have a coherency?
 
-Hm. Right. Another approach may be to call
-vpci_translate_virtual_device from within locked context of
-vpci_{read,write}.
+Aiui coherency here is among CPUs. Properties of devices in the system are
+largely unknown? (Beyond this there may also be special situations in which
+one really cares about data going directly to RAM.)
+
+Jan
 
