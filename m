@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBE3AC369B2
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Apr 2025 12:49:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.957511.1350611 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80443C369D0
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Apr 2025 12:49:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.957514.1350641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5OgB-0004zM-4P; Thu, 17 Apr 2025 12:49:19 +0000
+	id 1u5OgF-0005gg-VP; Thu, 17 Apr 2025 12:49:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 957511.1350611; Thu, 17 Apr 2025 12:49:19 +0000
+Received: by outflank-mailman (output) from mailman id 957514.1350641; Thu, 17 Apr 2025 12:49:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5OgB-0004zF-1Y; Thu, 17 Apr 2025 12:49:19 +0000
-Received: by outflank-mailman (input) for mailman id 957511;
- Thu, 17 Apr 2025 12:49:17 +0000
+	id 1u5OgF-0005gX-Qf; Thu, 17 Apr 2025 12:49:23 +0000
+Received: by outflank-mailman (input) for mailman id 957514;
+ Thu, 17 Apr 2025 12:49:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m2wG=XD=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1u5Og9-0004z9-Of
- for xen-devel@lists.xenproject.org; Thu, 17 Apr 2025 12:49:17 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2062e.outbound.protection.outlook.com
- [2a01:111:f403:240a::62e])
+ id 1u5OgE-0004z9-T4
+ for xen-devel@lists.xenproject.org; Thu, 17 Apr 2025 12:49:22 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2060c.outbound.protection.outlook.com
+ [2a01:111:f403:200a::60c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5dc0df84-1b8a-11f0-9eb0-5ba50f476ded;
- Thu, 17 Apr 2025 14:49:15 +0200 (CEST)
-Received: from CH2PR05CA0052.namprd05.prod.outlook.com (2603:10b6:610:38::29)
- by CY8PR12MB8300.namprd12.prod.outlook.com (2603:10b6:930:7d::16)
+ id 6265ff7c-1b8a-11f0-9eb0-5ba50f476ded;
+ Thu, 17 Apr 2025 14:49:22 +0200 (CEST)
+Received: from CH2PR05CA0054.namprd05.prod.outlook.com (2603:10b6:610:38::31)
+ by PH8PR12MB6841.namprd12.prod.outlook.com (2603:10b6:510:1c8::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.34; Thu, 17 Apr
- 2025 12:49:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.36; Thu, 17 Apr
+ 2025 12:49:16 +0000
 Received: from CH2PEPF00000140.namprd02.prod.outlook.com
- (2603:10b6:610:38:cafe::69) by CH2PR05CA0052.outlook.office365.com
- (2603:10b6:610:38::29) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:610:38:cafe::78) by CH2PR05CA0054.outlook.office365.com
+ (2603:10b6:610:38::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.13 via Frontend Transport; Thu,
- 17 Apr 2025 12:49:10 +0000
+ 17 Apr 2025 12:49:15 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CH2PEPF00000140.mail.protection.outlook.com (10.167.244.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Thu, 17 Apr 2025 12:49:09 +0000
+ 15.20.8655.12 via Frontend Transport; Thu, 17 Apr 2025 12:49:15 +0000
 Received: from xcbagarciav01.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 17 Apr
- 2025 07:49:08 -0500
+ 2025 07:49:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5dc0df84-1b8a-11f0-9eb0-5ba50f476ded
+X-Inumbo-ID: 6265ff7c-1b8a-11f0-9eb0-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MZbOShdQai4RPb4lZv0r7FsHnSt2gF+GdabafLkTUqfp0aBFuyxUBvHq1nGS03h8sO6XPgEss6ZpW9nYeuyEVQz5Arw96jIHgcU1nWKMy1eCOr4ACPLTcy4BEyjjrDgliXgCl1bI25jeD3ZYPnAfHGS6wKExvQeQVWFrSCCkJMLV2/uS2AvMAIHgGFUAi9R49Egqldo88uXGJGc/tzHRkvm4lNFQMoYd8u4Povlj1K90+kFZhIam3a9Ep45MytqkQdj7HwkGcVEHIBqqTjZW+lL86U/iWDizUpdsLrt7peSE7UEUdT4zqUWCjxl83MqVBsRV+ZSs78j0q8BH6Ohy1A==
+ b=EXlG+a1pNTTUr+pQM4CajbK+/5WSYT+W3uN+9iqEtyNOyNcmDp0eDrFeTF57iieFLvy27zNUIhDnujzpYXgOioUSGQWkuP09lQSwaZN3txD+QAgc2dC1Ae1gE50Hds0LvRmyP26KpSKcslLYBRcnGYUe9nr1aG8o4EYSpN3V0SpNn86ikVZr/ZnDorXr4NVyC0fHyaDh8dHJyK9gkmXu/DOhW8g8mfWDW8o5Pvmc0o5jKBOKpRgelyzRfDbYXVGvBZec7TPn6Dolj5bl9V6s/+DGp2IPyC6EWQ5hebvMkAdyHF/PMEcozQtKlfiYRTLwcVMvN3pm+nw29Wu4nI14EA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l0V8J3XxDGZtykescY6/CNgGnDmTrlCK6rwDVmn+jSo=;
- b=P0oE07yvgEu56svo8Xk24JI2rKMiYV6/XNdZUgCkpU56iOoI7YRF6TRm2mpUuWvf0IPJ+kdMUqL2zpXkF+6t34xdoF9ZtJROg5AiXecLaP0U1lFfzbU+c6N0VH1RLHpGrXITvwNM6BTo2v7Rry5zVSf//bGk2fhmi9C3YgdQNucP6GFTFR6aP9DeYM7Mc72sDhLRlBd3VTS01Ttg6u1vBLyIq4+i2+KkAzsmYkOTRzMQ4cUuSg4NmUR5bNrthGxx6bpQ0z8M9jnrLFMG7J+JEOt/iL38bgTO2h/mkDKpe+UIPuFyUW5cviFIWwoSNRm7qEsdZgXUsQ23HXzv57MLVw==
+ bh=BqcYxmLh/A5uCJx4yM7Ep5bOtDXg6ZeSzjmQRQDNChI=;
+ b=oBCwm9lVkLRSv2RiBf7ZnJDhOshKkoWK9ftFDZlpEM3Wgqzc2PmFoV+UJ6k/xkaNoEkBPg3LkW5RkgCQKQjx2MudV2DTctR7n/3jZYKRuwqRejjlszA+bfC0YxtLDGU9CpQ35c+EZ8Pf9CEdW2IZVBdmtehrIDYOZzZJ4Cl8YVqzNbZ9yaCol1skId0PVlsCKWHM6Tx4U4dwTgqo8nceWTaFpxF1T5EImaCbh5KUy0jPVQoznH7pM8RQMr/5AQ3UCod8EYQUQBH7+7wDY0FKDMWu/YbH2XXFX4Ub+ojsDVgRTFBzwaxFkqB0kl+GFuUW5K7ad+OuuQ77bzGIjl5naw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l0V8J3XxDGZtykescY6/CNgGnDmTrlCK6rwDVmn+jSo=;
- b=Vjx4qDrriLjGGFMMOfk9GtNyAiqGIqlGht7sdq6D9bcMWMa4t4faxE2gA2tVcPPXDCkRLyHZrA4ckDR5UguwHnBlxoWyeBjAz987xo47x3VVq/4kkRUMrIl1GPhcpaXpxZrUZmP7+6t3Z3lYrbyKIbbV/n7HR74+yngz9hjkiHY=
+ bh=BqcYxmLh/A5uCJx4yM7Ep5bOtDXg6ZeSzjmQRQDNChI=;
+ b=1CkrwIQnw1TnjHzKEoAhLCIGjXvaHmcBixI21/CUBH+4gVpWeSPvcMqEnJtq3m1K776KSB3aqGeAIhRF1GzPhVF19DaSHY7twPn9+lA83pMTB6rT7DSyKF7LvETKDHhRAYW+3fO2BHd7nnYMInpW9lz5QC2EuEk0272Ti2+6CX8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,16 +82,18 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Alejandro Vallejo <agarciav@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <agarciav@amd.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
 	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	"Bertrand Marquis" <bertrand.marquis@arm.com>
-Subject: [PATCH v4 00/13] Hyperlaunch device tree for dom0
-Date: Thu, 17 Apr 2025 13:48:22 +0100
-Message-ID: <20250417124844.11143-1-agarciav@amd.com>
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Jason
+ Andryuk" <jason.andryuk@amd.com>, Alejandro Vallejo <agarciav@amd.com>
+Subject: [PATCH v4 04/13] x86/hyperlaunch: initial support for hyperlaunch device tree
+Date: Thu, 17 Apr 2025 13:48:26 +0100
+Message-ID: <20250417124844.11143-5-agarciav@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250417124844.11143-1-agarciav@amd.com>
+References: <20250417124844.11143-1-agarciav@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -100,120 +102,202 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000140:EE_|CY8PR12MB8300:EE_
-X-MS-Office365-Filtering-Correlation-Id: 597053f6-13ab-4564-4927-08dd7dae3f83
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000140:EE_|PH8PR12MB6841:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4c18cbe8-275d-4ba3-0958-08dd7dae42f2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024|13003099007;
+	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?3eFCRpjGi/TzHp9dIm5HnvO4KHoOjp1DTIWkpJgaEHpQQTIOGBdf6FAfaYyD?=
- =?us-ascii?Q?1ou35vfrm1JcW+gVhKmCsha2gCzR5JbF9TvMnyk/49UzaEGI3T+GpFiFOBQa?=
- =?us-ascii?Q?xYHN2H9efaSbNOUQ7xETOFOPezwVcCbJXMavanLh68v9tNhJBZWCZZOdjt82?=
- =?us-ascii?Q?WEbaGCh0IyA6Eh/X2Mzi1iXFmdWHS5kuUvwBoJmM9F7YrXAxQwtXWECq/VA0?=
- =?us-ascii?Q?vLQCptbuDY2YwYUe8ZRMwsINRpKdSJ5e4CrEMSXHtRapcnErAG4e79lwUwlT?=
- =?us-ascii?Q?AIXRYXTJiDmce3tfeau3X9O35T6tnUHHtXH1axAiMZrK0zb8mBL6ez1zFTPq?=
- =?us-ascii?Q?/5f21lKpy3JAfl5JfQAkmkRxsUNhKX2oiCguVckCVwPIJNFKccrS0Q7n0wTl?=
- =?us-ascii?Q?xVrS8MMzyX4XHbyVUu7uAVSesH4NgGv8Wsjs1F8RFJL8AIKpfm6ACI5UC3gH?=
- =?us-ascii?Q?dlpiIFqc/+AbLrtPXXJ7SwVXZ18SLOOm/2DgiSDGOKVz0f9H6HMn52K6co0D?=
- =?us-ascii?Q?BHf8z98w13RYEe56B+XzNudogGYXsRcw41fbMmS+xJCvAV4Z5LRighlI6Vg1?=
- =?us-ascii?Q?/GH1IfAwWjmobGkOUmgBSBj0Se6ZDPU5cjGnsdz+nVDBu0VQiGGBPp5Q9I/r?=
- =?us-ascii?Q?eb3CD1oteUEF+CqAFtZvLEiaXFxXoz5l1uSpc7yR8zHtu7TxbtCfYzWur84c?=
- =?us-ascii?Q?kvQwZTFh9SPV1UAIwQA38aio/bl2KLNf0r022vxUkdvYEslUltKu4Y/n5qe6?=
- =?us-ascii?Q?h1mV1EINLdH9ts036JEbNeyOyOdKA67fHurgOaa89tPws6AXxfjH8tYQW9Ut?=
- =?us-ascii?Q?OypjMibPGuzGy+2RMluXe1fGR9t0J1Ez94gVFxlEQXzJlkZdLMggvUhZEnKw?=
- =?us-ascii?Q?Q4CCj39hAxxHur51Q7y8p02hwDR29smU3iwRho0PvfTrlBYvvy1WABf9WfHo?=
- =?us-ascii?Q?nQ9XpHrqTNCQBgeoU91YKfatyDD2SgPiDKPWlWZrqzun6Exbit5bppkcuEc1?=
- =?us-ascii?Q?yUDek0XsKYsF8IbKRKlDrrH0ZbRu/tjuVxJZFz92N7GHt0tWgHTUDuU27MQw?=
- =?us-ascii?Q?ivsAf7DBtOt2nTXVMSspJS4+dwu2gAu8eNBbgpi7nW8lg0+7cTCvcAT1h3al?=
- =?us-ascii?Q?a55jzMW5QMjXWy0A1pLo1SQPTdlainOMIau7yTm9qXMOS8c4CeqFQHDBMS9U?=
- =?us-ascii?Q?IxGLh/QNmJAPbSPl+ad8a0M5obdhMtCzCa7PM97KafRK97z2UCmddfWHmP9k?=
- =?us-ascii?Q?dMaME/lyRPrT1UnhAQdNMCh+s2jpydX54lO9EtVwQ+nvrD3VM+e5yWH2ZhxC?=
- =?us-ascii?Q?23tJpQlS90WI+/v2qYnjnnlOLvc5M++5t63wYkdS2x7M5HVPsp1asZeI9KYZ?=
- =?us-ascii?Q?dAtMF4XMhpadTjchQpLg0MJfzFvAkSu628ilVdYBhS0RERWBCT8HtHItY59T?=
- =?us-ascii?Q?XsJl6BQm09Vsv8o4hSudssgOZHKZB8QKABtRDcCcHyeWFTgLWM2rArJ8nEwr?=
- =?us-ascii?Q?H302mtID4KnjOYY=3D?=
+	=?us-ascii?Q?2HYrgQ+1yz0Th2DSfVJOrOfG23L8Mvd+qXzH5T4jsvTPpCI7fdNlnJw8ZZiE?=
+ =?us-ascii?Q?sJ6hrUhpHIvBI5JFMnI3uv6Pn8aaMZg8NYGgBT/rUemb344LuQK4Mb3mmbDE?=
+ =?us-ascii?Q?p2EjizAOaSbUlewDuEENZfnVg4aQJk23DCUs7E+4zKUlLdgYXuLibfeMPSqZ?=
+ =?us-ascii?Q?6htFRzjMPoyveAqLPkWZFW7jYNTjmJ/SWeOaNIKdowmYuWBcGveaS4mz1Ij/?=
+ =?us-ascii?Q?eyaAQfcnJvCc2d8zl1QQKkluP/JVzDIl0g/G7b2WWIm/MJQAIlBfGQ2CjAmF?=
+ =?us-ascii?Q?m8u1U3AswT0XSqQoro9xNED9cdL0R2bo/Mn2nTORr7RHkp5P3wEbso9l/B2k?=
+ =?us-ascii?Q?B+h0CV2xasAFcDHU6GGqmveTXoutWqbaKjMyU/ELW1vCGRQx3/dStgN5llNj?=
+ =?us-ascii?Q?s87taJUGSxCdTIsimRAumYdaSdj7fE+VbU9Vrk12gUs1zNKfL20bBl4b3D+a?=
+ =?us-ascii?Q?FNaqaJkf0QsSD3JxBBuSmDXZHSubHV12iKnoXeat+pglCmMGDV90w72Ju8Fm?=
+ =?us-ascii?Q?WQDRwwKteQ/pEP//tOTIMWAt9OyrDuhFj0hrMpwllXMms1kUb1w0+JRF56CA?=
+ =?us-ascii?Q?Uhl3TQOMDJtmkjBJQ/Y7RxJpoGae0OkFaSm+Fc1yv+jI7bx8PnCxXrTaZeSA?=
+ =?us-ascii?Q?x9DqsDjrDhLJboFGA5w3/OFhQOGSLN8t8anweO3lm2owOPTpIG7NudAp9znt?=
+ =?us-ascii?Q?mu9EymE5RaHqdBAvX8f3Ldlnxx5lnas+TbcORqWndXN4RcWsvrPfBsk7IV7U?=
+ =?us-ascii?Q?hsXOVXHULaHdzI+BtNcVF6ybZfhRlk/1X35kVmnPSwW4yOmz9ckSA0lxUXxR?=
+ =?us-ascii?Q?78UNFFHas2bgXCsnLWkPeEKD2cpdufPxhaY1BSeUCm+/wPKlU46/9aJfjrMe?=
+ =?us-ascii?Q?sIeFAKThIqKtCtz6E4PmzZNyjJUV9lc2zAp0WMXnfS3959DrtOulHCu9CtH+?=
+ =?us-ascii?Q?EYUn3+l+mRcQLJXVoUfuf5sermwgGgmqtWOihvT/Dtjh0ilVCBXpRR7hLBIW?=
+ =?us-ascii?Q?V9KeafT/T9QVknGvYfDMwhbDXOTOjppOJSVqvwp7YgFj/MGFjwFaIdZrz0Az?=
+ =?us-ascii?Q?ksy/jxf7L1l8JPqgA9FLlOfdW0Ykr262bWLrqu9qqZlmYI694MCngqUt9sZL?=
+ =?us-ascii?Q?nwU9FqhO77nNcU6IWw8c597au0KoyIv8tgYolJIB9iI4PB0qK7pw1XRB2syJ?=
+ =?us-ascii?Q?fB9vXK/DkIdGokSkEwg4I8Qeoi9D1ABbXjBXAn0vQMMPsooAEh2uUFIBcv9i?=
+ =?us-ascii?Q?JE9QNRVx1j2OlMFGCz90PUGmhHjEYHzVVnDK/Y7ipMta4uYoh2udtTh8yBDc?=
+ =?us-ascii?Q?WZEV6oR9qrLHmbf12M83qdPDYgR9pvfPQRzajN1pWWK0HKz/LhR3GyPDluPu?=
+ =?us-ascii?Q?oMZxHanpxZluQNNsV7PS0zbCRVQuDX28HC1BptnLCxNFPlybaZu9lToiLQCU?=
+ =?us-ascii?Q?I0awtqUYld7cfRDbvyrfSqnLSC6ozwBMUJ3OMLFndIwFsPFOP/Lc/9JUVNa/?=
+ =?us-ascii?Q?mtvdaJKUXy1alKYsK2AvQOyGyBL+r8yIVHlA?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2025 12:49:09.9178
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2025 12:49:15.6794
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 597053f6-13ab-4564-4927-08dd7dae3f83
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c18cbe8-275d-4ba3-0958-08dd7dae42f2
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	CH2PEPF00000140.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8300
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6841
 
-Hi,
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-Here's a new version. Took a while to integrate all the feedback, but
-here it is.
+Add the ability to detect both a formal hyperlaunch device tree or a dom0less
+device tree. If the hyperlaunch device tree is found, then count the number of
+domain entries, reporting an error if more than one is found.
 
-v4 pipeline: https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/1772300721
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
+---
+v4:
+  * Panic if we're booting on hyperlaunch, but walking the DTB fails.
+  * Remove inconsequential "else" clause in fdt.c
+  * Remove stub, as it's not required due to DCE
+  * Use min() rather than open-code it
+---
+ xen/arch/x86/include/asm/bootinfo.h |  1 +
+ xen/common/domain-builder/core.c    | 11 +++++
+ xen/common/domain-builder/fdt.c     | 63 +++++++++++++++++++++++++++++
+ xen/common/domain-builder/fdt.h     |  1 +
+ 4 files changed, 76 insertions(+)
 
-v3: https://lore.kernel.org/xen-devel/20250408160802.49870-1-agarciav@amd.com/
-v2: https://lore.kernel.org/xen-devel/20241226165740.29812-1-dpsmith@apertussolutions.com/
-v1: https://lore.kernel.org/xen-devel/20241123182044.30687-1-dpsmith@apertussolutions.com/
-
-Cheers,
-Alejandro
-
-========= Original cover letter:
-
-The Hyperlaunch device tree for dom0 series is the second split out for the
-introduction of the Hyperlaunch domain builder logic. These changes focus on
-introducing the ability to express a domain configuration that is then used to
-populate the struct boot_domain structure for dom0. This ability to express a
-domain configuration provides the next step towards a general domain builder.
-
-The splitting of Hyperlaunch into a set of series are twofold, to reduce the
-effort in reviewing a much larger series, and to reduce the effort in handling
-the knock-on effects to the construction logic from requested review changes.
-
-Alejandro Vallejo (1):
-  x86/hyperlaunch: Add helpers to locate multiboot modules
-
-Daniel P. Smith (12):
-  x86/boot: add cmdline to struct boot_domain
-  kconfig: introduce domain builder config options
-  common/hyperlaunch: introduce the domain builder
-  x86/hyperlaunch: initial support for hyperlaunch device tree
-  x86/hyperlaunch: locate dom0 kernel with hyperlaunch
-  x86/hyperlaunch: obtain cmdline from device tree
-  x86/hyperlaunch: locate dom0 initrd with hyperlaunch
-  x86/hyperlaunch: add domain id parsing to domain config
-  x86/hyperlaunch: specify dom0 mode with device tree
-  x86/hyperlaunch: add memory parsing to domain config
-  x86/hyperlaunch: add max vcpu parsing of hyperlaunch device tree
-  x86/hyperlaunch: add capabilities to boot domain
-
- xen/arch/x86/Kconfig                   |   1 +
- xen/arch/x86/dom0_build.c              |  11 +
- xen/arch/x86/hvm/dom0_build.c          |  31 +-
- xen/arch/x86/include/asm/boot-domain.h |  17 +
- xen/arch/x86/include/asm/bootinfo.h    |  10 +-
- xen/arch/x86/pv/dom0_build.c           |   4 +-
- xen/arch/x86/setup.c                   |  91 +++--
- xen/common/Kconfig                     |   5 +
- xen/common/Makefile                    |   1 +
- xen/common/domain-builder/Kconfig      |  18 +
- xen/common/domain-builder/Makefile     |   2 +
- xen/common/domain-builder/core.c       | 110 ++++++
- xen/common/domain-builder/fdt.c        | 488 +++++++++++++++++++++++++
- xen/common/domain-builder/fdt.h        |  39 ++
- xen/include/xen/domain-builder.h       |  13 +
- xen/include/xen/libfdt/libfdt-xen.h    |  44 +++
- 16 files changed, 839 insertions(+), 46 deletions(-)
- create mode 100644 xen/common/domain-builder/Kconfig
- create mode 100644 xen/common/domain-builder/Makefile
- create mode 100644 xen/common/domain-builder/core.c
- create mode 100644 xen/common/domain-builder/fdt.c
- create mode 100644 xen/common/domain-builder/fdt.h
- create mode 100644 xen/include/xen/domain-builder.h
-
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 82c2650fcf..1e3d582e45 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -84,6 +84,7 @@ struct boot_info {
+     bool hyperlaunch_enabled;
+ 
+     unsigned int nr_modules;
++    unsigned int nr_domains;
+     struct boot_module mods[MAX_NR_BOOTMODS + 1];
+     struct boot_domain domains[MAX_NR_BOOTDOMS];
+ };
+diff --git a/xen/common/domain-builder/core.c b/xen/common/domain-builder/core.c
+index a5b21fc179..3b062e85ec 100644
+--- a/xen/common/domain-builder/core.c
++++ b/xen/common/domain-builder/core.c
+@@ -43,6 +43,17 @@ void __init builder_init(struct boot_info *bi)
+             break;
+         }
+     }
++
++    if ( bi->hyperlaunch_enabled )
++    {
++        int ret;
++
++        printk(XENLOG_INFO "Hyperlaunch configuration:\n");
++        if ( (ret = walk_hyperlaunch_fdt(bi)) < 0 )
++            panic("Walk of device tree failed (%d)\n", ret);
++
++        printk(XENLOG_INFO "  number of domains: %u\n", bi->nr_domains);
++    }
+ }
+ 
+ /*
+diff --git a/xen/common/domain-builder/fdt.c b/xen/common/domain-builder/fdt.c
+index aaf8c1cc16..b5ff8220da 100644
+--- a/xen/common/domain-builder/fdt.c
++++ b/xen/common/domain-builder/fdt.c
+@@ -13,6 +13,36 @@
+ 
+ #include "fdt.h"
+ 
++static int __init find_hyperlaunch_node(const void *fdt)
++{
++    int hv_node = fdt_path_offset(fdt, "/chosen/hypervisor");
++
++    if ( hv_node >= 0 )
++    {
++        /* Anything other than zero indicates no match */
++        if ( fdt_node_check_compatible(fdt, hv_node, "hypervisor,xen") )
++            return -ENODATA;
++
++        return hv_node;
++    }
++    else
++    {
++        /* Look for dom0less config */
++        int node, chosen_node = fdt_path_offset(fdt, "/chosen");
++
++        if ( chosen_node < 0 )
++            return -ENOENT;
++
++        fdt_for_each_subnode(node, fdt, chosen_node)
++        {
++            if ( !fdt_node_check_compatible(fdt, node, "xen,domain") )
++                return chosen_node;
++        }
++    }
++
++    return -ENODATA;
++}
++
+ int __init has_hyperlaunch_fdt(const struct boot_info *bi)
+ {
+     int ret = 0;
+@@ -20,7 +50,40 @@ int __init has_hyperlaunch_fdt(const struct boot_info *bi)
+ 
+     if ( !fdt || fdt_check_header(fdt) < 0 )
+         ret = -EINVAL;
++    else
++        ret = find_hyperlaunch_node(fdt);
++
++    bootstrap_unmap();
++
++    return min(0, ret);
++}
++
++int __init walk_hyperlaunch_fdt(struct boot_info *bi)
++{
++    int ret = 0, hv_node, node;
++    const void *fdt = bootstrap_map_bm(&bi->mods[HYPERLAUNCH_MODULE_IDX]);
++
++    if ( unlikely(!fdt) )
++        return -EINVAL;
++
++    hv_node = find_hyperlaunch_node(fdt);
++    if ( hv_node < 0 )
++    {
++        ret = hv_node;
++        goto err_out;
++    }
++
++    fdt_for_each_subnode(node, fdt, hv_node)
++    {
++        if ( !fdt_node_check_compatible(fdt, node, "xen,domain") )
++            bi->nr_domains++;
++    }
++
++    /* Until multi-domain construction is added, throw an error */
++    if ( bi->nr_domains != 1 )
++        printk(XENLOG_ERR "hyperlaunch only supports dom0 construction\n");
+ 
++ err_out:
+     bootstrap_unmap();
+ 
+     return ret;
+diff --git a/xen/common/domain-builder/fdt.h b/xen/common/domain-builder/fdt.h
+index 97a45a6ec4..955aead497 100644
+--- a/xen/common/domain-builder/fdt.h
++++ b/xen/common/domain-builder/fdt.h
+@@ -8,5 +8,6 @@ struct boot_info;
+ #define HYPERLAUNCH_MODULE_IDX 0
+ 
+ int has_hyperlaunch_fdt(const struct boot_info *bi);
++int walk_hyperlaunch_fdt(struct boot_info *bi);
+ 
+ #endif /* __XEN_DOMAIN_BUILDER_FDT_H__ */
 -- 
 2.43.0
 
