@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F9F4C369CA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531CAC369D1
 	for <xen-devel@archiver.kernel.org>; Fri, 18 Apr 2025 14:19:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.959027.1351508 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.959030.1351533 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5mYI-00030q-8d; Fri, 18 Apr 2025 14:18:46 +0000
+	id 1u5mYK-0003V6-Vz; Fri, 18 Apr 2025 14:18:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 959027.1351508; Fri, 18 Apr 2025 14:18:46 +0000
+Received: by outflank-mailman (output) from mailman id 959030.1351533; Fri, 18 Apr 2025 14:18:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5mYI-00030i-67; Fri, 18 Apr 2025 14:18:46 +0000
-Received: by outflank-mailman (input) for mailman id 959027;
- Fri, 18 Apr 2025 14:18:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u5mYK-0003UX-Qi; Fri, 18 Apr 2025 14:18:48 +0000
+Received: by outflank-mailman (input) for mailman id 959030;
+ Fri, 18 Apr 2025 14:18:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ic+s=XE=bounce.vates.tech=bounce-md_30504962.68025f3f.v1-d861420a82c744a2b764f6bbced4204d@srs-se1.protection.inumbo.net>)
- id 1u5mYG-00030I-RB
- for xen-devel@lists.xenproject.org; Fri, 18 Apr 2025 14:18:44 +0000
-Received: from mail179-46.suw41.mandrillapp.com
- (mail179-46.suw41.mandrillapp.com [198.2.179.46])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 06661741-1c60-11f0-9ffb-bf95429c2676;
- Fri, 18 Apr 2025 16:18:40 +0200 (CEST)
-Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-46.suw41.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZfH1W1TYWz8XRqfS
- for <xen-devel@lists.xenproject.org>; Fri, 18 Apr 2025 14:18:39 +0000 (GMT)
+ <SRS0=TU4N=XE=bounce.vates.tech=bounce-md_30504962.68025f43.v1-11aa9698a46e4605a1aa47936d2968e5@srs-se1.protection.inumbo.net>)
+ id 1u5mYJ-00030w-Ld
+ for xen-devel@lists.xenproject.org; Fri, 18 Apr 2025 14:18:47 +0000
+Received: from mail128-130.atl41.mandrillapp.com
+ (mail128-130.atl41.mandrillapp.com [198.2.128.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0a3867da-1c60-11f0-9eb0-5ba50f476ded;
+ Fri, 18 Apr 2025 16:18:47 +0200 (CEST)
+Received: from pmta08.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail128-130.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4ZfH1b456fzS62GqB
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Apr 2025 14:18:43 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- d861420a82c744a2b764f6bbced4204d; Fri, 18 Apr 2025 14:18:39 +0000
+ 11aa9698a46e4605a1aa47936d2968e5; Fri, 18 Apr 2025 14:18:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,90 +45,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06661741-1c60-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 0a3867da-1c60-11f0-9eb0-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1744985919; x=1745255919;
-	bh=xueNMDJgTSP5NK02VEV+nKr1/iu6F6Tlm4ltAoWCn1Q=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=xnBBln4zpT5P+Kw4HC2cCDxFPBn1RKgM5AlYetiYDcU4N2jhiYaJ4iIgA1PJh3fIf
-	 o61JMjlCL0zaX/LjOfVCvS96wttxMeXP4+wnvk/NVHSJQsZ2bytTh1FI93VhkvuD8j
-	 Avxw39hvhUtlpPry8PS08uUEgGJ0W/pasuJF1zrXeObYIxne5JG9mgPpNZk9YpsCGE
-	 5rrJLFeIZiE3JzKjEddV52MymYbvgS22/EhHLjUX4qqiECiXi0lCePwq5CWpno0N53
-	 g5k2hpA3G8Pg1BVktAHAdfEENxrlJQnGXiZlw5TV3uB7HlmFPr4qbVuKJWvLL2Ppg8
-	 uMhydolPzJvlg==
+	s=mte1; t=1744985923; x=1745255923;
+	bh=zUCaxDM5n36EidycTWY29lREVYS1vqxzxsWMLChZfJU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=RTEaQttw9/dNnlodj0ugHm+OC6nExkd4qTB1dyfdY1Bi1tJpSv8jvvt8pRR9Y3vNb
+	 vGQp8ydE25FN0PXwsrAGXBsR+M+QZEx8ytUWXlcgubuwVwMYnX/jvJamNjnJqLwcQP
+	 KMIdxdO277WUbvl3C58x0J4fAdX7IBI8P+t1jAZtVy/YZWkGWYZmgCulhP6xFsbtVi
+	 c7+R1mPNAOabI5S5K8/w+QGmcOgbJXE7BXvQdCQblwd6U8w3aPh+B9wzSSkd859Su/
+	 SuiLNLfHyty+FUO7ubdulurlruBySjcANBntntRg1ivPWbdj4tcMVWjuOMEUulSmYC
+	 QB42fBwgleQUA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1744985919; x=1745246419; i=teddy.astie@vates.tech;
-	bh=xueNMDJgTSP5NK02VEV+nKr1/iu6F6Tlm4ltAoWCn1Q=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=ht9II0QUH3hrVzQp5F66tZPq1HGci9KUB86RZAfbRofgnutDBp6iDymTcXyi7L6z7
-	 quBW5srCCOzuO7Lm5+VJlPoeYDuAe591wEPQU4sSfR7JKki1ivfqQvgr77thPY9DI8
-	 jNYNv0zOCz0cUrM+es9KA9oyNQ1iYdy5Ja47tSAEE0d1jqde8TeTpfNAZrlcA4PD/V
-	 o8ch3K9qDKHAp0K2JKX8zIqyTE9ERjDGny2fI68paVg5MzSn9LybfVwn8miSgIDmnY
-	 yIYrte9+8Bje58cjIpJKLt6OzBYtHXC4OYlJnixN/ATqtx3dObatHTEBMshobnapNq
-	 EnVywnSsvISTg==
+	t=1744985923; x=1745246423; i=teddy.astie@vates.tech;
+	bh=zUCaxDM5n36EidycTWY29lREVYS1vqxzxsWMLChZfJU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=Xp2hxCz8XqSBmkRZQt7pOBNS/ZSYCTT2clksk1QJPB4Se4vRBxJfGBZH2gNOfXIj0
+	 lRN9lD38dFp9pOmZGStMS2JeFTM2lTwxoenZ5Vm6spCKCQG3DZmJlOugjdaFIHe4at
+	 BnBeH7GO1lk6kD5aQGpiLaA2u0Y8CWdu0iKgUz6i7oi4XC/M4Asupw+hgKaLpJTGP+
+	 oUYCSfcX8/G33O2/pye9RmBUyXo0TSsngZWRlPDR6kjfsl0S5hCHqkatGyj6c3+2DV
+	 q+cHezJegQWe+69jxuG60kOlWh39nk1Y37qmmp4hQQPWWDgIng/xWMx/q0E1Q9iac6
+	 u88w11HO7AVBw==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=200/4]=20Physical=20address=20hypercall=20ABI=20("HVMv2")?=
+Subject: =?utf-8?Q?[RFC=20PATCH=204/4]=20libxl:=20Add=20support=20for=20enabling=20physaddr=5Fabi?=
 X-Mailer: git-send-email 2.47.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1744985917687
+X-Bm-Transport-Timestamp: 1744985922839
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>
-Message-Id: <cover.1744981654.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>
+Message-Id: <762e90acafcbf0b84c670400577501cd0e34bdea.1744981654.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1744981654.git.teddy.astie@vates.tech>
+References: <cover.1744981654.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.d861420a82c744a2b764f6bbced4204d?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.11aa9698a46e4605a1aa47936d2968e5?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250418:md
-Date: Fri, 18 Apr 2025 14:18:39 +0000
+Date: Fri, 18 Apr 2025 14:18:43 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-In current HVM mode, when a hypercall references a structure in guest memory,
-it is passed to the hypervisor as its "linear address" (e.g virtual address for
-the x86 long mode).
-One of the caveats is that this linear address (GVA) is generally not directly
-usable by the Xen and needs to be translated from GVA to GPA then HPA. This
-implies a complex and potentially expensive lookup of the pagetables inside the
-guest. This can be significant, especially if the P2M cannot use efficiently
-superpages (or with e.g XSA-304).
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+ tools/include/libxl.h            | 5 +++++
+ tools/libs/light/libxl_create.c  | 4 ++++
+ tools/libs/light/libxl_types.idl | 1 +
+ tools/xl/xl_parse.c              | 1 +
+ 4 files changed, 11 insertions(+)
 
-This proposal introduce a new mode where all addresses used for hypercalls are
-GPADDR instead of GVADDR, therefore, looking up the HPA related to this GPA
-only needs a P2M lookup and not looking through the inside-guest pagetables.
-
-This mode is opt-in and must be enabled explicitely by the toolstack.
-
-This is also mandatory for confidential-computing guests (e.g SEV) where the
-guest pagetable are not visible to the hypervisor.
-
-In a synthetic xtf-based hypercall benchmark (VCPUOP_get_runstate_info loop),
-it gives broadly a 30% overhead reduction when tested on a AMD EPYC 9124.
-
-This serie only implement support for x86 yet this ABI is also meaningful for
-other architectures as well.
-A separate patch for adding support in Linux is planned.
-
-Teddy Astie (4):
-  xen: Introduce physaddr_abi CDF flag
-  x86/hvm: Consider phyaddr_abi when copying from/to guest memory
-  x86/public: Expose physaddr_abi through Xen HVM CPUID leaf
-  libxl: Add support for enabling physaddr_abi
-
- tools/include/libxl.h               |  5 +++++
- tools/libs/light/libxl_create.c     |  4 ++++
- tools/libs/light/libxl_types.idl    |  1 +
- tools/xl/xl_parse.c                 |  1 +
- xen/arch/x86/cpuid.c                |  3 +++
- xen/arch/x86/hvm/hvm.c              | 17 ++++++++++++++---
- xen/common/domain.c                 | 10 +++++++++-
- xen/include/public/arch-x86/cpuid.h |  2 ++
- xen/include/public/domctl.h         |  4 +++-
- xen/include/xen/sched.h             |  6 ++++++
- 10 files changed, 48 insertions(+), 5 deletions(-)
-
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index b7ad7735ca..6af9a658c9 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -178,6 +178,11 @@
+  */
+ #define LIBXL_HAVE_BUILDINFO_EVENT_CHANNELS 1
+ 
++/*
++ * The libxl_domain_build_info has physaddr_abi field.
++ */
++#define LIBXL_HAVE_BUILDINFO_PHYS_ADDR_ABI 1
++
+ /*
+  * libxl_domain_build_info has the u.hvm.ms_vm_genid field.
+  */
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index e03599ea99..43e8c18768 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -466,6 +466,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
+ 
+         libxl_defbool_setdefault(&b_info->apic,                     true);
+         libxl_defbool_setdefault(&b_info->nested_hvm,               false);
++        libxl_defbool_setdefault(&b_info->physaddr_abi,             false);
+     }
+ 
+     if (b_info->max_grant_version == LIBXL_MAX_GRANT_DEFAULT) {
+@@ -662,6 +663,9 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
+ 
+             if ( libxl_defbool_val(b_info->nested_hvm) )
+                 create.flags |= XEN_DOMCTL_CDF_nested_virt;
++
++            if (libxl_defbool_val(b_info->physaddr_abi))
++                create.flags |= XEN_DOMCTL_CDF_physaddr_abi;
+         }
+ 
+         if (libxl_defbool_val(b_info->vpmu))
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 9bb2969931..d02e84471b 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -637,6 +637,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     ("nested_hvm",       libxl_defbool),
+     ("apic",             libxl_defbool),
+     ("dm_restrict",      libxl_defbool),
++    ("physaddr_abi",     libxl_defbool),
+     ("tee",              libxl_tee_type),
+     ("u", KeyedUnion(None, libxl_domain_type, "type",
+                 [("hvm", Struct(None, [("firmware",         string),
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 089a88935a..bd674684fa 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1803,6 +1803,7 @@ void parse_config_data(const char *config_source,
+     }
+ 
+     xlu_cfg_get_defbool(config, "nestedhvm", &b_info->nested_hvm, 0);
++    xlu_cfg_get_defbool(config, "physaddr_abi", &b_info->physaddr_abi, 0);
+ 
+     switch(b_info->type) {
+     case LIBXL_DOMAIN_TYPE_HVM:
 -- 
 2.47.2
 
