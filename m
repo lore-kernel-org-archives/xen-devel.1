@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB865C369D3
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:09:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.960020.1352073 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9408CC369C9
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:09:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.960028.1352093 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GMy-0004yx-AF; Sat, 19 Apr 2025 22:09:04 +0000
+	id 1u6GNE-0005jx-QI; Sat, 19 Apr 2025 22:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 960020.1352073; Sat, 19 Apr 2025 22:09:04 +0000
+Received: by outflank-mailman (output) from mailman id 960028.1352093; Sat, 19 Apr 2025 22:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GMy-0004yo-76; Sat, 19 Apr 2025 22:09:04 +0000
-Received: by outflank-mailman (input) for mailman id 960020;
- Sat, 19 Apr 2025 22:09:02 +0000
+	id 1u6GNE-0005jq-NQ; Sat, 19 Apr 2025 22:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 960028;
+ Sat, 19 Apr 2025 22:09:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u6GMw-0004ik-JG
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:09:02 +0000
+ id 1u6GND-0004ik-FL
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:09:19 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e4f715a3-1d6a-11f0-9ffb-bf95429c2676;
- Sun, 20 Apr 2025 00:09:00 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 17451005092371023.849891890091;
- Sat, 19 Apr 2025 15:08:29 -0700 (PDT)
+ id ef1c04f2-1d6a-11f0-9ffb-bf95429c2676;
+ Sun, 20 Apr 2025 00:09:17 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1745100512455384.54233147742355;
+ Sat, 19 Apr 2025 15:08:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,135 +40,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4f715a3-1d6a-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1745100512; cv=none; 
+X-Inumbo-ID: ef1c04f2-1d6a-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; t=1745100514; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=KY9xIV6D1qIKDm7tQZZ3DwwdQxIbJaMpxrUzWQFBWf4ZuRI0DD6mYBa7SuyxRlcfpsTb78z5XVGIxgHht1d/3pzPav8m/3OGzBYwBNSt7kbzl0b5/fVL2ng1ZqNIoTWgt7QJ7D3JCo1azGDxvu4teS6oN+c8+BHisBRHwqyk998=
+	b=kea+OpCMbrU3niOqZ4LOEwuW42skHXjA8N5TrltliYaj/a6mW4QNYiGU3lwmAZbzWUKba8mcY/i6Odpa4LFMHDfqm5NiEPedJLUmR/8JJx1EcZlT04TIZXNL7b7D2YC7jI3pVtN0n6Z23FegLNH6aCmcfH03ylXooy0EOsR8i4M=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1745100512; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=NzmQ6uolA8E5w5U/XEFdVN2iE4YPjBizc0u4UT10BuI=; 
-	b=MmQn+SO5FNcY1qNOsYUujRgjATfSneLSIVBaBEww3x5k+n7/nm2GOhaarbNCKOTYUjBSv5O6zoyjBPG3JKAdcSCOcayh67xfqUtN0XLEq5qfdK18+pGvtSKy7F3AelksdzZy4bv29MRK26C3hyhyxKfCEUvRKwluw1gwC1ehZSw=
+	t=1745100514; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=YokNzpGdgI0vQMpM08lo4NE+yMaBURARXSs0s10k4IU=; 
+	b=EHi61hS/Sa1kndbQpbdGURi8SKMwBdvwG2DsXey3X1ecXJRER2y9woP9g/P5UCK85cNydRfYIcuIxJkc9UXojONewLZCHLSZ5VrqIe9rayRwu+eH4oJb9eXvF3uJo/LkD2iFFFSOUCdxSzEDF0F4OWAbeVfnNfyYO0aWTlEfiXw=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100512;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100514;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=NzmQ6uolA8E5w5U/XEFdVN2iE4YPjBizc0u4UT10BuI=;
-	b=LNg/BvTDhj2VHPq5wbqm7p2xLJtHhQip1i7OEGm539DgQcPUIJRopEy0DXH8kjI5
-	FI1Fw/6QWC/PNKhfpqyA2XTi0HBspISsGiOcd5ERmFxOGY3gE7p00mf6OfC8HMlmxfp
-	jWI2iEhdcJ7q3zoTH60fj2Ges9kS3tWlkZ3TnOQQ=
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
+	bh=YokNzpGdgI0vQMpM08lo4NE+yMaBURARXSs0s10k4IU=;
+	b=CRabSLX/9Tp3KlF0bltxA3SF8iGKnnVgyojCoTdMzwINEkuTMieLstBIHwYXf8mG
+	bwQUQSmn9xaDs9k6IPaAeJHUE0ut2hkmwztFL6Qi0H6K8uu1KbgNPuL2JHeJQadqDSo
+	njvPS1h/vtAJ8jvF1hpBJZSso/9Yihnr0j8xHueg=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	jason.andryuk@amd.com,
-	christopher.w.clark@gmail.com,
 	stefano.stabellini@amd.com,
-	agarciav@amd.com
-Subject: [RFC 00/38] Hyperlaunch domain builder
-Date: Sat, 19 Apr 2025 18:07:42 -0400
-Message-Id: <20250419220820.4234-1-dpsmith@apertussolutions.com>
+	agarciav@amd.com,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [RFC 03/38] x86/hyperlaunch: convert max vcpu determination to domain builder
+Date: Sat, 19 Apr 2025 18:07:45 -0400
+Message-Id: <20250419220820.4234-4-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20250419220820.4234-1-dpsmith@apertussolutions.com>
+References: <20250419220820.4234-1-dpsmith@apertussolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-NOTE: Sending this series as an RFC as it is a follow-on to the hyperlaunch
-dom0 device tree series going through rounds of review right now. This specific
-iteration is based off of v3 with the exception of one fix found here and
-already incorporated into v4.
+The domain configuration may request more vcpus than are present in the system.
+For dom0, the function dom0_max_vcpus() was used to clamp down to physically
+available vcpus. Here we are introducing a generalized version,
+dom_max_vcpus(), that takes a boot domain and sets the max vcpus based on the
+lesser of the requested max and the available vcpus.
 
-The Hyperlaunch domain builder series is the third split out for the
-introduction of the Hyperlaunch domain builder logic. These changes focus on
-introducing the ability to create multiple PVH domains at boot. The definition
-for those domains will come from the Device Tree capability introduced in the
-dom0 device tree series.
-
-Documentation on Hyperlaunch:
-https://wiki.xenproject.org/wiki/Hyperlaunch
-
-Original Hyperlaunch v1 patch series:
-https://lists.xenproject.org/archives/html/xen-devel/2022-07/msg00345.html
-
-V/r,
-Daniel P. Smith
-
-Daniel P. Smith (38):
-  maintainers: add new section for hyperlaunch
-  x86/hyperlaunch: correct the naming of domain ramdisk field
-  x86/hyperlaunch: convert max vcpu determination to domain builder
-  x86/hyperlaunch: convert vcpu0 creation to domain builder
-  x86/hyperlaunch: move dom0 cpuid policy behind capability check
-  x86/hyperlaunch: add hardware domain capability support
-  x86/hyperlaunch: introduce pvh domain builder
-  x86/hyperlaunch: move initial hwdom setup to dom_construct_pvh
-  x86/boot: convert dom0 page calculation to use boot domain
-  x86/boot: refactor dom0 page calculation
-  x86/boot: generalize paging pages calculation
-  x86/boot: generalize compute number of domain pages
-  x86/hyperlaunch: move page computation to domain builder
-  x86/hyperlaunch: move pvh p2m init to domain builder
-  x86/hyperlaunch: move iommu init to domain builder
-  x86/boot: move and rename sched_setup_dom0_vcpus
-  x86/hyperlaunch: move pvh_setup_cpus to domain builder
-  x86/boot: rename pvh acpi setup function
-  x86/hyperlaunch: add domu memory map construction
-  x86/hyperlaunch: move populating p2m under domain builder
-  x86/hyperlaunch: move remaining pvh dom0 construction
-  x86/hyperlaunch: relocate pvh_steal_ram to domain builder
-  x86/hyperlaunch: add domu acpi construction
-  x86/boot: export command line processing
-  x86/hyperlaunch: convert create_dom0 to arch_create_dom
-  x86/hyperlaunch: remove dom0-isms from arch_create_dom
-  x86/hyperlaunch: introduce domain builder general dom creation
-  x86/hyperlaunch: add xenstore boot capabilities flag
-  x86/hyperlaunch: allocate console for domu
-  x86/hyperlaunch: allocate xenstore for domu
-  x86/hyperlaunch: move boot module discard to domain builder
-  x86/hyperlaunch: introduce concept of core domains
-  x86/boot: refactor bzimage parser to be re-enterant
-  x86/hyperlaunch: introduce multidomain kconfig option
-  x86/hyperlaunch: add multidomain construction logic
-  x86/hyperlaunch: enable unpausing mulitple domains
-  x86/hyperlaunch: generalize domid assignment
-  tools: introduce hyperlaunch domain late init
-
- .gitignore                                |    1 +
- MAINTAINERS                               |    9 +
- tools/helpers/Makefile                    |   12 +
- tools/helpers/late-init-domains.c         |  364 +++++++
- tools/helpers/late-init-domains.h         |   18 +
- tools/helpers/xs-helpers.c                |  117 +++
- tools/helpers/xs-helpers.h                |   26 +
- xen/arch/x86/bzimage.c                    |   38 +-
- xen/arch/x86/dom0_build.c                 |  120 +--
- xen/arch/x86/domain-builder/Kconfig       |   12 +
- xen/arch/x86/domain-builder/Makefile      |    1 +
- xen/arch/x86/domain-builder/core.c        |  127 ++-
- xen/arch/x86/domain-builder/domain.c      |  421 ++++++++
- xen/arch/x86/domain-builder/fdt.c         |   37 +-
- xen/arch/x86/hvm/Makefile                 |    1 +
- xen/arch/x86/hvm/dom0_build.c             |  600 +-----------
- xen/arch/x86/hvm/dom_build.c              | 1063 +++++++++++++++++++++
- xen/arch/x86/include/asm/boot-domain.h    |   21 +-
- xen/arch/x86/include/asm/bootinfo.h       |   28 +-
- xen/arch/x86/include/asm/bzimage.h        |    5 +-
- xen/arch/x86/include/asm/dom0_build.h     |   19 +-
- xen/arch/x86/include/asm/domain-builder.h |   29 +
- xen/arch/x86/include/asm/setup.h          |    4 +-
- xen/arch/x86/pv/dom0_build.c              |   19 +-
- xen/arch/x86/setup.c                      |  207 +---
- xen/common/sched/core.c                   |   12 -
- xen/include/xen/sched.h                   |    1 -
- 27 files changed, 2412 insertions(+), 900 deletions(-)
- create mode 100644 tools/helpers/late-init-domains.c
- create mode 100644 tools/helpers/late-init-domains.h
- create mode 100644 tools/helpers/xs-helpers.c
- create mode 100644 tools/helpers/xs-helpers.h
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+---
+ xen/arch/x86/domain-builder/Makefile      |  1 +
+ xen/arch/x86/domain-builder/domain.c      | 38 +++++++++++++++++++++++
+ xen/arch/x86/include/asm/domain-builder.h |  1 +
+ xen/arch/x86/setup.c                      |  4 +--
+ 4 files changed, 42 insertions(+), 2 deletions(-)
  create mode 100644 xen/arch/x86/domain-builder/domain.c
- create mode 100644 xen/arch/x86/hvm/dom_build.c
 
+diff --git a/xen/arch/x86/domain-builder/Makefile b/xen/arch/x86/domain-builder/Makefile
+index b10cd56b286b..67024b5cb213 100644
+--- a/xen/arch/x86/domain-builder/Makefile
++++ b/xen/arch/x86/domain-builder/Makefile
+@@ -1,2 +1,3 @@
+ obj-$(CONFIG_DOMAIN_BUILDER) += fdt.init.o
+ obj-y += core.init.o
++obj-y += domain.init.o
+diff --git a/xen/arch/x86/domain-builder/domain.c b/xen/arch/x86/domain-builder/domain.c
+new file mode 100644
+index 000000000000..f2277b9e3cf3
+--- /dev/null
++++ b/xen/arch/x86/domain-builder/domain.c
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2024, Apertus Solutions, LLC
++ */
++
++#include <xen/cpumask.h>
++#include <xen/domain.h>
++#include <xen/init.h>
++#include <xen/sched.h>
++
++#include <asm/bootinfo.h>
++
++unsigned int __init dom_max_vcpus(struct boot_domain *bd)
++{
++    unsigned int limit = bd->mode & BUILD_MODE_PARAVIRT ?
++                                    MAX_VIRT_CPUS : HVM_MAX_VCPUS;
++
++    if ( bd->capabilities & BUILD_CAPS_CONTROL )
++        limit = dom0_max_vcpus();
++    else
++        limit = min(limit,
++                    (uint32_t)cpumask_weight(cpupool_valid_cpus(cpupool0)));
++
++    if ( bd->max_vcpus == 0 || bd->max_vcpus > limit )
++        bd->max_vcpus = limit;
++
++    return bd->max_vcpus;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
+index 7518b6ddf3b9..f37f73e2255b 100644
+--- a/xen/arch/x86/include/asm/domain-builder.h
++++ b/xen/arch/x86/include/asm/domain-builder.h
+@@ -8,5 +8,6 @@ int __init builder_get_cmdline(
+     struct boot_info *bi, int offset, char *cmdline, size_t size);
+ 
+ void builder_init(struct boot_info *bi);
++unsigned int dom_max_vcpus(struct boot_domain *bd);
+ 
+ #endif
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 6a939ccede3f..86bbd7c72ccd 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1010,18 +1010,18 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+     char *cmdline = NULL;
+     size_t cmdline_size;
+     unsigned int create_flags = 0;
++    struct boot_domain *bd = &bi->domains[0];
+     struct xen_domctl_createdomain dom0_cfg = {
+         .flags = IS_ENABLED(CONFIG_TBOOT) ? XEN_DOMCTL_CDF_s3_integrity : 0,
+         .max_evtchn_port = -1,
+         .max_grant_frames = -1,
+         .max_maptrack_frames = -1,
+         .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
+-        .max_vcpus = dom0_max_vcpus(),
++        .max_vcpus = dom_max_vcpus(bd),
+         .arch = {
+             .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
+         },
+     };
+-    struct boot_domain *bd = &bi->domains[0];
+     struct domain *d;
+ 
+     if ( opt_dom0_pvh ||
 -- 
 2.30.2
 
