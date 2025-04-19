@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F06C369CF
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:11:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.960069.1352192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA031C369C9
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:13:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.960114.1352202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GOi-0002JS-9i; Sat, 19 Apr 2025 22:10:52 +0000
+	id 1u6GQz-0004p9-TN; Sat, 19 Apr 2025 22:13:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 960069.1352192; Sat, 19 Apr 2025 22:10:52 +0000
+Received: by outflank-mailman (output) from mailman id 960114.1352202; Sat, 19 Apr 2025 22:13:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GOi-0002IR-3a; Sat, 19 Apr 2025 22:10:52 +0000
-Received: by outflank-mailman (input) for mailman id 960069;
- Sat, 19 Apr 2025 22:10:51 +0000
+	id 1u6GQz-0004p0-QE; Sat, 19 Apr 2025 22:13:13 +0000
+Received: by outflank-mailman (input) for mailman id 960114;
+ Sat, 19 Apr 2025 22:13:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u6GOh-0007X1-2C
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:10:51 +0000
+ id 1u6GQy-0004oZ-Ku
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:13:12 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25938261-1d6b-11f0-9ffb-bf95429c2676;
- Sun, 20 Apr 2025 00:10:49 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1745100530188877.5400344244114;
- Sat, 19 Apr 2025 15:08:50 -0700 (PDT)
+ id 79c93cdc-1d6b-11f0-9ffb-bf95429c2676;
+ Sun, 20 Apr 2025 00:13:10 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1745100552863208.68927810979392;
+ Sat, 19 Apr 2025 15:09:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25938261-1d6b-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1745100532; cv=none; 
+X-Inumbo-ID: 79c93cdc-1d6b-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; t=1745100556; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=g2Pty8YVcaCEnfAg1/dz3RvPZ7/hjg2PgeRXvbCMmoSFR6cqrupwYcaTrShMGVWJe9of+kO4+h2i2bCi7uv+2rz/lGo2iVBYtPBV9OKGFDKOBV6ccWScp5iqw1J/jm77q9GGHKy70ePfp6rEPH2BFRYFo1HwgfDZYCrYoIMgDag=
+	b=LHcEECMDjJj3dC1RqieD9Wr7XiwZxrVMvdlaLg9Xxgx0jSazAiWW/miGr06eWR1/1dwfR3RWIwelv+cIxcij2O7HGraU0P5T86QKyMfnxBEXNkLh5vfr+qL2J7kMDmsKHvCze6woX6nCxuwTYZFq0H9MvtOo6VLAQ2JzIwsyqYY=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1745100532; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=i4cmCekFDOf6Zqqnx0QnwPpbFO/VkKVHyAi01YfF4U4=; 
-	b=K3l7lNjDShe/rNzSGfKEyZTyV9H78ALvN/bnGuY5yFqxDZBwG7TEvL5gLFR+l/97WzIXYWVR3DBu0faBjusakgb/ZxkYa9m+4VCQ3kyVBxvbAQJY5mAS0HZT4BNUGVCKmJBszm3HzJk/XoH6AtRUZbaf3OJfrS1IJXaZxWqsdoM=
+	t=1745100556; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=5FUmF1YRY9NDE1umkBI15/zKKYB7vvic5T3QpbucTJ0=; 
+	b=fzTYjYL1wH7w0gBmq5H0mV1sJyq3I/1Gxg02/oKnjCFM4mGp/+mBhvQuzkcEQI2+SOQ9eGqP5hYnnDeX7JwwK6Ua+EjlMbvo/37y8aQvBF9Wwv8ew3Ue46ZlxEkWzMW/f3Z8QATAI62VeJeZ3/5grvll3s0oPqJBTp0XxSxv5Bk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100532;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100556;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=i4cmCekFDOf6Zqqnx0QnwPpbFO/VkKVHyAi01YfF4U4=;
-	b=nD6ofalYGXbAilkE31f+IR6dgUepXRRFNVBg418gQk+LJ8Ezg+Vi22WKzSxgNf1x
-	gQMrGGTG5cFV0Lub/za+lLG22Qe6NxKomzIXHrvbVzbNWqLTwkHh3+jgUNaawRlzSJ9
-	HNMafPhADieMims7WfdoM3p2zvWYonht7us32saI=
+	bh=5FUmF1YRY9NDE1umkBI15/zKKYB7vvic5T3QpbucTJ0=;
+	b=Oj9T8XhxwGoAp7n/4JvkPILnnCIQ6wc4eL+RcluTNx36iQLN4CXQl2pOc1y8rq1N
+	vnWz81HiJA9PPTxzfcYQ3WFpnczBiEDBaNigwJc9sjOEC3tEFQXyrUI+MtwMa0hjqWZ
+	1aFTz+Od1BWHjUYqhawfx3lQU3KOopzkQU7dbt8U=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 13/38] x86/hyperlaunch: move page computation to domain builder
-Date: Sat, 19 Apr 2025 18:07:55 -0400
-Message-Id: <20250419220820.4234-14-dpsmith@apertussolutions.com>
+Subject: [RFC 28/38] x86/hyperlaunch: add xenstore boot capabilities flag
+Date: Sat, 19 Apr 2025 18:08:10 -0400
+Message-Id: <20250419220820.4234-29-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250419220820.4234-1-dpsmith@apertussolutions.com>
 References: <20250419220820.4234-1-dpsmith@apertussolutions.com>
@@ -78,250 +78,68 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-The function dom_compute_nr_pages() is being moved to the domain builder. For
-this to happen, the variable dom0_nodes, and the functions
-calculate_dom0_pages() and dom0_pv_restrict_pages() must be exported.
+Add the ability to designate a domain as the Xenstore domain via the
+hyperlaunch configuration.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/dom0_build.c                 | 75 +----------------------
- xen/arch/x86/domain-builder/domain.c      | 70 +++++++++++++++++++++
- xen/arch/x86/include/asm/dom0_build.h     |  4 +-
- xen/arch/x86/include/asm/domain-builder.h |  5 ++
- 4 files changed, 81 insertions(+), 73 deletions(-)
+ xen/arch/x86/domain-builder/core.c     | 2 +-
+ xen/arch/x86/domain-builder/domain.c   | 2 ++
+ xen/arch/x86/domain-builder/fdt.c      | 2 ++
+ xen/arch/x86/include/asm/boot-domain.h | 1 +
+ 4 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 53ab1afbaa1f..e488a204372b 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -209,7 +209,7 @@ static int __init cf_check parse_dom0_nodes(const char *s)
- custom_param("dom0_nodes", parse_dom0_nodes);
- 
- cpumask_t __initdata dom0_cpus;
--static nodemask_t __initdata dom0_nodes;
-+nodemask_t __initdata dom0_nodes;
- 
- unsigned int __init dom0_max_vcpus(void)
- {
-@@ -315,8 +315,7 @@ static unsigned long __init default_nr_pages(unsigned long avail)
-                             : min(avail / 16, 128UL << (20 - PAGE_SHIFT)));
- }
- 
--static void __init calculate_dom0_pages(
--    struct boot_domain *bd, unsigned long avail)
-+void __init calculate_dom0_pages(struct boot_domain *bd, unsigned long avail)
- {
-     unsigned long nr_pages = bd->mem_pages ?: default_nr_pages(avail);
- 
-@@ -338,7 +337,7 @@ static void __init calculate_dom0_pages(
-     bd->mem_pages = nr_pages;
- }
- 
--static void __init dom0_pv_restrict_pages(
-+void __init dom0_pv_restrict_pages(
-     struct boot_domain *bd, struct elf_dom_parms *parms)
- {
-     if ( (parms->p2m_base == UNSET_ADDR) && !memsize_gt_zero(&dom0_size) &&
-@@ -377,74 +376,6 @@ static void __init dom0_pv_restrict_pages(
+diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
+index 2f0b8bd82c3a..e21f5efbfe62 100644
+--- a/xen/arch/x86/domain-builder/core.c
++++ b/xen/arch/x86/domain-builder/core.c
+@@ -98,7 +98,7 @@ void __init builder_init(struct boot_info *bi)
+         bi->mods[i].type = BOOTMOD_KERNEL;
+         bi->domains[0].kernel = &bi->mods[i];
+         bi->domains[0].capabilities |=
+-            (BUILD_CAPS_CONTROL | BUILD_CAPS_HARDWARE);
++            (BUILD_CAPS_CONTROL | BUILD_CAPS_HARDWARE | BUILD_CAPS_XENSTORE);
+         bi->nr_domains = 1;
      }
  }
- 
--unsigned long __init dom_compute_nr_pages(
--    struct boot_domain *bd, struct elf_dom_parms *parms)
--{
--    nodeid_t node;
--    nodemask_t nodes = { 0 };
--    struct domain *d = bd->d;
--    unsigned long avail = 0, iommu_pages = 0;
--
--    nodes_or(nodes, nodes, node_online_map);
--
--    /* If building dom0 or hwdom, apply command line restriction. */
--    if ( bd->capabilities & (BUILD_CAPS_CONTROL | BUILD_CAPS_HARDWARE) )
--        nodes_and(nodes, nodes, dom0_nodes);
--
--    ASSERT(nodes_weight(nodes) != 0);
--
--    for_each_node_mask ( node, nodes )
--        avail += avail_domheap_pages_region(node, 0, 0) +
--                 initial_images_nrpages(node);
--
--    /* Reserve memory for further dom0 vcpu-struct allocations... */
--    avail -= (d->max_vcpus - 1UL)
--             << get_order_from_bytes(sizeof(struct vcpu));
--    /* ...and compat_l4's, if needed. */
--    if ( is_pv_32bit_domain(d) )
--        avail -= d->max_vcpus - 1;
--
--    /* Reserve memory for iommu_dom0_init() (rough estimate). */
--    if ( is_hardware_domain(d) && is_iommu_enabled(d)
--         && !iommu_hwdom_passthrough )
--    {
--        unsigned int s;
--
--        for ( s = 9; s < BITS_PER_LONG; s += 9 )
--            iommu_pages += max_pdx >> s;
--
--        avail -= iommu_pages;
--    }
--
--    if ( paging_mode_enabled(d) || opt_dom0_shadow || opt_pv_l1tf_hwdom )
--    {
--        unsigned long cpu_pages;
--
--        /*
--         * Clamp according to min/max limits and available memory
--         * (preliminary).
--         */
--        calculate_dom0_pages(bd, avail);
--
--        cpu_pages = dom_paging_pages(bd, bd->mem_pages);
--
--        if ( !iommu_use_hap_pt(d) )
--            avail -= cpu_pages;
--        else if ( cpu_pages > iommu_pages )
--            avail -= cpu_pages - iommu_pages;
--    }
--
--    /* Clamp according to min/max limits and available memory (final). */
--    calculate_dom0_pages(bd, avail);
--
--    if ( is_pv_domain(d) )
--        dom0_pv_restrict_pages(bd, parms);
--
--    d->max_pages = min_t(unsigned long, bd->max_pages, UINT_MAX);
--
--    return bd->mem_pages;
--}
--
- static void __init process_dom0_ioports_disable(struct domain *dom0)
- {
-     unsigned long io_from, io_to;
 diff --git a/xen/arch/x86/domain-builder/domain.c b/xen/arch/x86/domain-builder/domain.c
-index 87f538ae26c5..bdb4d9745ff2 100644
+index 13f99111a3a9..c1b2e011aaa0 100644
 --- a/xen/arch/x86/domain-builder/domain.c
 +++ b/xen/arch/x86/domain-builder/domain.c
-@@ -6,6 +6,8 @@
- #include <xen/cpumask.h>
- #include <xen/domain.h>
- #include <xen/init.h>
-+#include <xen/libelf.h>
-+#include <xen/nodemask.h>
- #include <xen/sched.h>
+@@ -250,6 +250,8 @@ struct domain *__init arch_create_dom(
+     if ( bd->domid == DOMID_INVALID )
+         /* Create initial domain.  Not d0 for pvshim. */
+         bd->domid = get_initial_domain_id();
++    if ( bd->capabilities & BUILD_CAPS_XENSTORE )
++        dom_cfg.flags |= XEN_DOMCTL_CDF_xs_domain;
+     if ( bd->capabilities & BUILD_CAPS_CONTROL )
+         create_flags |= CDF_privileged | CDF_hardware;
+     d = domain_create(bd->domid, &dom_cfg,
+diff --git a/xen/arch/x86/domain-builder/fdt.c b/xen/arch/x86/domain-builder/fdt.c
+index 1af58ed4eb86..9c6c0ae09a24 100644
+--- a/xen/arch/x86/domain-builder/fdt.c
++++ b/xen/arch/x86/domain-builder/fdt.c
+@@ -269,6 +269,8 @@ static int __init process_domain_node(
+                 printk("c");
+             if ( bd->capabilities & BUILD_CAPS_HARDWARE )
+                 printk(" h");
++            if ( bd->capabilities & BUILD_CAPS_XENSTORE )
++                printk(" x");
+             printk("\n");
+         }
+     }
+diff --git a/xen/arch/x86/include/asm/boot-domain.h b/xen/arch/x86/include/asm/boot-domain.h
+index 18d144de2fea..32f1f8fbc4e8 100644
+--- a/xen/arch/x86/include/asm/boot-domain.h
++++ b/xen/arch/x86/include/asm/boot-domain.h
+@@ -16,6 +16,7 @@ struct boot_domain {
+ #define BUILD_CAPS_NONE          (0)
+ #define BUILD_CAPS_CONTROL       (1 << 0)
+ #define BUILD_CAPS_HARDWARE      (1 << 1)
++#define BUILD_CAPS_XENSTORE      (1 << 2)
+     uint32_t capabilities;
  
- #include <asm/bootinfo.h>
-@@ -31,6 +33,74 @@ unsigned long __init dom_paging_pages(
-     return DIV_ROUND_UP(memkb, 1024) << (20 - PAGE_SHIFT);
- }
- 
-+unsigned long __init dom_compute_nr_pages(
-+    struct boot_domain *bd, struct elf_dom_parms *parms)
-+{
-+    nodeid_t node;
-+    nodemask_t nodes = { 0 };
-+    struct domain *d = bd->d;
-+    unsigned long avail = 0, iommu_pages = 0;
-+
-+    nodes_or(nodes, nodes, node_online_map);
-+
-+    /* If building dom0 or hwdom, apply command line restriction. */
-+    if ( bd->capabilities & (BUILD_CAPS_CONTROL | BUILD_CAPS_HARDWARE) )
-+        nodes_and(nodes, nodes, dom0_nodes);
-+
-+    ASSERT(nodes_weight(nodes) != 0);
-+
-+    for_each_node_mask ( node, nodes )
-+        avail += avail_domheap_pages_region(node, 0, 0) +
-+                 initial_images_nrpages(node);
-+
-+    /* Reserve memory for further dom0 vcpu-struct allocations... */
-+    avail -= (d->max_vcpus - 1UL)
-+             << get_order_from_bytes(sizeof(struct vcpu));
-+    /* ...and compat_l4's, if needed. */
-+    if ( is_pv_32bit_domain(d) )
-+        avail -= d->max_vcpus - 1;
-+
-+    /* Reserve memory for iommu_dom0_init() (rough estimate). */
-+    if ( is_hardware_domain(d) && is_iommu_enabled(d)
-+         && !iommu_hwdom_passthrough )
-+    {
-+        unsigned int s;
-+
-+        for ( s = 9; s < BITS_PER_LONG; s += 9 )
-+            iommu_pages += max_pdx >> s;
-+
-+        avail -= iommu_pages;
-+    }
-+
-+    if ( paging_mode_enabled(d) || opt_dom0_shadow || opt_pv_l1tf_hwdom )
-+    {
-+        unsigned long cpu_pages;
-+
-+        /*
-+         * Clamp according to min/max limits and available memory
-+         * (preliminary).
-+         */
-+        calculate_dom0_pages(bd, avail);
-+
-+        cpu_pages = dom_paging_pages(bd, bd->mem_pages);
-+
-+        if ( !iommu_use_hap_pt(d) )
-+            avail -= cpu_pages;
-+        else if ( cpu_pages > iommu_pages )
-+            avail -= cpu_pages - iommu_pages;
-+    }
-+
-+    /* Clamp according to min/max limits and available memory (final). */
-+    calculate_dom0_pages(bd, avail);
-+
-+    if ( is_pv_domain(d) )
-+        dom0_pv_restrict_pages(bd, parms);
-+
-+    d->max_pages = min_t(unsigned long, bd->max_pages, UINT_MAX);
-+
-+    return bd->mem_pages;
-+}
-+
- unsigned int __init dom_max_vcpus(struct boot_domain *bd)
- {
-     unsigned int limit = bd->mode & BUILD_MODE_PARAVIRT ?
-diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
-index 7275bcf9ba6b..43a402af15b7 100644
---- a/xen/arch/x86/include/asm/dom0_build.h
-+++ b/xen/arch/x86/include/asm/dom0_build.h
-@@ -7,13 +7,15 @@
- #include <asm/setup.h>
- 
- extern unsigned int dom0_memflags;
-+extern nodemask_t dom0_nodes;
- 
- void dom0_set_affinity(struct domain *dom0);
- 
- int dom0_setup_permissions(struct domain *d);
- 
- struct boot_domain;
--unsigned long dom_compute_nr_pages(
-+void calculate_dom0_pages(struct boot_domain *bd, unsigned long avail);
-+void dom0_pv_restrict_pages(
-     struct boot_domain *bd, struct elf_dom_parms *parms);
- 
- int dom0_construct_pv(struct boot_domain *bd);
-diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
-index 8b0b224eba41..f9b11e06ceb8 100644
---- a/xen/arch/x86/include/asm/domain-builder.h
-+++ b/xen/arch/x86/include/asm/domain-builder.h
-@@ -11,6 +11,11 @@ void builder_init(struct boot_info *bi);
- 
- unsigned long dom_paging_pages(
-     const struct boot_domain *d, unsigned long nr_pages);
-+
-+struct elf_dom_parms;
-+unsigned long dom_compute_nr_pages(
-+    struct boot_domain *bd, struct elf_dom_parms *parms);
-+
- unsigned int dom_max_vcpus(struct boot_domain *bd);
- struct vcpu *alloc_dom_vcpu0(struct boot_domain *bd);
- 
+                                           /* On     | Off    */
 -- 
 2.30.2
 
