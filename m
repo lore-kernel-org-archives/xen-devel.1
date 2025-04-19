@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85ACC369C9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B98C369CF
 	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:21:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.960253.1352337 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.960252.1352334 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GYv-0004Tz-3y; Sat, 19 Apr 2025 22:21:25 +0000
+	id 1u6GYu-0004Sn-TG; Sat, 19 Apr 2025 22:21:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 960253.1352337; Sat, 19 Apr 2025 22:21:25 +0000
+Received: by outflank-mailman (output) from mailman id 960252.1352334; Sat, 19 Apr 2025 22:21:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GYu-0004TG-RH; Sat, 19 Apr 2025 22:21:24 +0000
-Received: by outflank-mailman (input) for mailman id 960253;
- Sat, 19 Apr 2025 22:21:24 +0000
+	id 1u6GYu-0004SO-Iy; Sat, 19 Apr 2025 22:21:24 +0000
+Received: by outflank-mailman (input) for mailman id 960252;
+ Sat, 19 Apr 2025 22:21:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u6GPo-0004yY-Qt
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:12:00 +0000
+ id 1u6GRT-0004yY-T6
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:13:43 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4fbae569-1d6b-11f0-9eb0-5ba50f476ded;
- Sun, 20 Apr 2025 00:11:59 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1745100546108391.4594608164257;
- Sat, 19 Apr 2025 15:09:06 -0700 (PDT)
+ id 8cf644d5-1d6b-11f0-9eb0-5ba50f476ded;
+ Sun, 20 Apr 2025 00:13:42 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1745100563151665.1808490006621;
+ Sat, 19 Apr 2025 15:09:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4fbae569-1d6b-11f0-9eb0-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; t=1745100552; cv=none; 
+X-Inumbo-ID: 8cf644d5-1d6b-11f0-9eb0-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; t=1745100571; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=kAFDjP5hC/DHyg5mi6B3pHJBMWipG3yLUNWg01uonydE8pTfNXXDcdtzsjd7XgIvtqBWlumi3KZ4KldEuVank4Zf1x3WEcRQ+ZUFYVBV0DPYpUZgP50P+XKJkRRLktcqHe00QGlc8gdd5Zz5sBrMVmC6cYAjnZzAV6lB/zZRNq0=
+	b=anWjUrDEW6/RaRHcc8BAKESuY1HNFS30V8ANqIDZoiceXVZn27xsv2RbJGuRHjZ0IaHMwVcRu+7zVHlohroibwI22bER1d9BKQ7UmDclWChyY9EIMIqYzJx3bcF8Ub6dIFllkJMVDwY9r8kMt1rizFTKJ9Xgl0TtBN96UMxFTEQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1745100552; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=2KWTr4dpH7kEQOohwPUOqAsWDUBqr7T/oi51YKgyffE=; 
-	b=FoRsKBowGPNcX9U26cYDOaPk1heW/XtkCmr5Nn54gMoJkfPALQ2aIu9qCH9hA5tJle8RYGw/2hTuQQJ6YhUi02FeKj8xrENcDS3dgIozCRwrW2O3GStzz7vmsgk4g5Ie9NgPB546PRG5EVOo9plLpO2y0BePs9rrjupmE+Bx6rg=
+	t=1745100571; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=xTTdPfDolfNjAS0Qvmz0FxzFVp9V69k5pb2zgYetYhg=; 
+	b=PI1y5fbyqhMuuMmwVBO8UJrEUHmh4QVtiKXtKZhnR+yLI2gVTRsAGHtg/UaQ9XUMqwPw+NE/Oq77sRiKnZl4hcuH0BpDY1Cd57xEZCsZ0WEEzgnLybG0nUozddfdJsiKEVuv6O0uej/qnY/vNbEo3qWTOpxVUwB6SnQNoHiVtes=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100552;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100571;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=2KWTr4dpH7kEQOohwPUOqAsWDUBqr7T/oi51YKgyffE=;
-	b=KBYjqrE3I3JYg6L8aOmLkCsdtPMnvPTK4wDq2Ffu9BKz13Su1VI6XrULRGip/CFi
-	FVxTm8YhlmRD2OONDaBReMycZUdNkYudxCy9RN47JhqcjWAywO1GaNjdr9qAihp42d6
-	77/uzzeaJuTBxAryeHfDZiDHLR9beggrEY+LxikI=
+	bh=xTTdPfDolfNjAS0Qvmz0FxzFVp9V69k5pb2zgYetYhg=;
+	b=a0ooV0zfRFp3A8MxgK6mqydxzeHTgOL5Q1RQyvzbHmvHexjOjiQzhaq1hgEwkBoq
+	lXkTx2EcQsmi6a2xkWAmCTooNLxvsARFZ1rA+kwhdlmH2BOk76lJMGc8OmUH+3Lz5Nb
+	194UsoKNenheT+hrBN0Fc6rWTHN0n8zgjf7uNGgo=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 20/38] x86/hyperlaunch: move populating p2m under domain builder
-Date: Sat, 19 Apr 2025 18:08:02 -0400
-Message-Id: <20250419220820.4234-21-dpsmith@apertussolutions.com>
+Subject: [RFC 30/38] x86/hyperlaunch: allocate xenstore for domu
+Date: Sat, 19 Apr 2025 18:08:12 -0400
+Message-Id: <20250419220820.4234-31-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250419220820.4234-1-dpsmith@apertussolutions.com>
 References: <20250419220820.4234-1-dpsmith@apertussolutions.com>
@@ -78,146 +78,138 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Introduce hvm_populate_p2m() for populating domU p2m maps. Rename
-pvh_populate_p2m() to dom0_pvh_populate_p2m() and export it. With these
-adjustments, move the calls to populate the p2m maps under domain builder.
+During domU construction, a page of memory and an event channel must be setup
+for xenstore connection. In this commit, a page from the special page region of
+domU is setup as the xenstore page along with an event channel. The page
+address and event channel are published in the HVM parameters, so the domain
+can be announced to Xenstore.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/hvm/dom0_build.c             | 14 ++------
- xen/arch/x86/hvm/dom_build.c              | 39 +++++++++++++++++++++++
- xen/arch/x86/include/asm/dom0_build.h     |  1 +
- xen/arch/x86/include/asm/domain-builder.h |  2 ++
- 4 files changed, 45 insertions(+), 11 deletions(-)
+ xen/arch/x86/domain-builder/domain.c   | 38 ++++++++++++++++++++++++--
+ xen/arch/x86/hvm/dom_build.c           | 32 ++++++++++++++++++++++
+ xen/arch/x86/include/asm/boot-domain.h |  2 +-
+ 3 files changed, 69 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
-index 8ea4c7bd2792..73ce33fb17f1 100644
---- a/xen/arch/x86/hvm/dom0_build.c
-+++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -88,9 +88,8 @@ static int __init modify_identity_mmio(struct domain *d, unsigned long pfn,
- }
- 
- /* Populate a HVM memory range using the biggest possible order. */
--static int __init pvh_populate_memory_range(struct domain *d,
--                                            unsigned long start,
--                                            unsigned long nr_pages)
-+int __init pvh_populate_memory_range(
-+    struct domain *d, unsigned long start, unsigned long nr_pages)
- {
-     static const struct {
-         unsigned long align;
-@@ -399,7 +398,7 @@ void __init dom0_pvh_setup_e820(struct domain *d, unsigned long nr_pages)
-     ASSERT(cur_pages == nr_pages);
- }
- 
--static int __init pvh_populate_p2m(struct domain *d)
-+int __init dom0_pvh_populate_p2m(struct domain *d)
- {
-     struct vcpu *v = d->vcpu[0];
-     unsigned int i;
-@@ -1262,13 +1261,6 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
-     struct domain *d = bd->d;
-     int rc;
- 
--    rc = pvh_populate_p2m(d);
--    if ( rc )
--    {
--        printk("Failed to setup Dom0 physical memory map\n");
--        return rc;
--    }
--
-     rc = pvh_load_kernel(bd, &entry, &start_info);
-     if ( rc )
-     {
-diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-index 658d3d170e64..9421dc431ba9 100644
---- a/xen/arch/x86/hvm/dom_build.c
-+++ b/xen/arch/x86/hvm/dom_build.c
-@@ -23,6 +23,8 @@
- #include <asm/dom0_build.h>
- #include <asm/domain-builder.h>
- #include <asm/hvm/io.h>
-+#include <asm/hvm/support.h>
-+#include <asm/p2m.h>
- #include <asm/paging.h>
- #include <asm/pci.h>
- 
-@@ -247,6 +249,33 @@ int __init hvm_setup_cpus(
+diff --git a/xen/arch/x86/domain-builder/domain.c b/xen/arch/x86/domain-builder/domain.c
+index 7ce069a57c5d..b413a87cc9c9 100644
+--- a/xen/arch/x86/domain-builder/domain.c
++++ b/xen/arch/x86/domain-builder/domain.c
+@@ -240,6 +240,38 @@ static int __init alloc_console_evtchn(
      return 0;
  }
  
-+static int __init hvm_populate_p2m(struct domain *d)
++static int __init alloc_store_evtchn(
++    const struct boot_info *bi, struct boot_domain *bd)
 +{
-+    unsigned int i;
++    evtchn_alloc_unbound_t evtchn_req;
++    const struct boot_domain *xsdom;
++    int idx, rc;
 +
-+    /* Populate memory map. */
-+    for ( i = 0; i < d->arch.nr_e820; i++ )
++    idx = first_boot_domain_index(bi, BUILD_CAPS_XENSTORE);
++    if ( idx < 0 )
 +    {
-+        int rc;
-+        unsigned long addr, size;
-+
-+        if ( d->arch.e820[i].type != E820_RAM &&
-+             d->arch.e820[i].type != E820_ACPI &&
-+             PFN_DOWN(d->arch.e820[i].addr) != START_SPECIAL_REGION )
-+                continue;
-+
-+        addr = PFN_DOWN(d->arch.e820[i].addr);
-+        size = PFN_DOWN(d->arch.e820[i].size);
-+
-+        rc = pvh_populate_memory_range(d, addr, size);
-+        if ( rc )
-+            return rc;
-+
++        printk(XENLOG_WARNING "No backing xenstore domain for %pdv\n",
++               bd->d);
++        return -EINVAL;
 +    }
++
++    if ( bi->domains[idx].d )
++        xsdom = &bi->domains[idx];
++    else
++    {
++        printk(XENLOG_WARNING "Xenstore domain for %pd console not constructed\n",
++               bd->d);
++        return -EINVAL;
++    }
++
++    if ( (rc = alloc_dom_evtchn(bd, xsdom, &evtchn_req)) < 0 )
++        return rc;
++
++    bd->store.evtchn = evtchn_req.port;
++
++    return 0;
++}
++
+ static size_t __init domain_cmdline_size(
+     struct boot_info *bi, struct boot_domain *bd)
+ {
+@@ -362,8 +394,10 @@ struct domain *__init arch_create_dom(
+         bd->cmdline = cmdline;
+     }
+ 
+-   if ( !(bd->capabilities & BUILD_CAPS_HARDWARE) )
+-       alloc_console_evtchn(bi, bd);
++    if ( !(bd->capabilities & BUILD_CAPS_XENSTORE) )
++        alloc_store_evtchn(bi, bd);
++    if ( !(bd->capabilities & BUILD_CAPS_HARDWARE) )
++        alloc_console_evtchn(bi, bd);
+ 
+     if ( construct_dom0(bd) != 0 )
+         panic("Could not construct domain 0\n");
+diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
+index 934ae138e58f..2798542e5483 100644
+--- a/xen/arch/x86/hvm/dom_build.c
++++ b/xen/arch/x86/hvm/dom_build.c
+@@ -930,6 +930,35 @@ static int __init alloc_console_page(struct boot_domain *bd)
+     return 0;
+ }
+ 
++static int __init alloc_xenstore_page(struct boot_domain *bd)
++{
++    paddr_t xs_addr = special_pfn(SPECIALPAGE_XENSTORE) << PAGE_SHIFT;
++    uint32_t fields[7] = { 0, 0, 0, 0, 0, 1, 0};
++
++    if ( !port_is_valid(bd->d, bd->store.evtchn) )
++    {
++        printk("No event channel available for %pd xenstore\n", bd->d);
++        return -EINVAL;
++    }
++
++    /*
++     * Set connection field to XENSTORE_RECONNECT, where the
++     * xenstore_domain_interface fields are located after the 2 1024 buffers
++     */
++    if ( hvm_copy_to_guest_phys(xs_addr + 2048, fields, sizeof(fields),
++                                bd->d->vcpu[0]) )
++    {
++        printk("Unable to set xenstore connection state\n");
++        return -EFAULT;
++    }
++
++    bd->store.gfn = gfn_x(gaddr_to_gfn(xs_addr));
++    bd->d->arch.hvm.params[HVM_PARAM_STORE_PFN] = bd->store.gfn;
++    bd->d->arch.hvm.params[HVM_PARAM_STORE_EVTCHN] = bd->store.evtchn;
 +
 +    return 0;
 +}
 +
  int __init dom_construct_pvh(struct boot_domain *bd)
  {
-     int rc;
-@@ -288,6 +317,16 @@ int __init dom_construct_pvh(struct boot_domain *bd)
-     if ( is_hardware_domain(bd->d) )
-         iommu_hwdom_init(bd->d);
+     paddr_t entry, start_info;
+@@ -1009,6 +1038,9 @@ int __init dom_construct_pvh(struct boot_domain *bd)
+     if ( !is_hardware_domain(bd->d) )
+         alloc_console_page(bd);
  
-+    if ( is_control_domain(bd->d) || is_hardware_domain(bd->d) )
-+        rc = dom0_pvh_populate_p2m(bd->d);
-+    else
-+        rc = hvm_populate_p2m(bd->d);
-+    if ( rc )
-+    {
-+        printk("Failed to setup HVM/PVH %pd physical memory map\n", bd->d);
-+        return rc;
-+    }
++    if ( !is_xenstore_domain(bd->d) )
++        alloc_xenstore_page(bd);
 +
-     return dom0_construct_pvh(bd);
- }
+     if ( opt_dom0_verbose )
+     {
+         printk("Dom%u memory map:\n", bd->domid);
+diff --git a/xen/arch/x86/include/asm/boot-domain.h b/xen/arch/x86/include/asm/boot-domain.h
+index cb6e1fab23ba..df2bfa0c94fa 100644
+--- a/xen/arch/x86/include/asm/boot-domain.h
++++ b/xen/arch/x86/include/asm/boot-domain.h
+@@ -41,7 +41,7 @@ struct boot_domain {
+     struct {
+         xen_pfn_t gfn;
+         evtchn_port_t evtchn;
+-    } console;
++    } console, store;
+ };
  
-diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
-index 36f563bd9d5b..3819b3f4e7a4 100644
---- a/xen/arch/x86/include/asm/dom0_build.h
-+++ b/xen/arch/x86/include/asm/dom0_build.h
-@@ -21,6 +21,7 @@ void dom0_pv_restrict_pages(
- void dom0_pvh_setup_e820(struct domain *d, unsigned long nr_pages);
- 
- int dom0_pvh_setup_acpi(struct domain *d, paddr_t start_info);
-+int dom0_pvh_populate_p2m(struct domain *d);
- 
- int dom0_construct_pv(struct boot_domain *bd);
- int dom0_construct_pvh(struct boot_domain *bd);
-diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
-index 7bc2fbe66bc2..fa6fa60841ab 100644
---- a/xen/arch/x86/include/asm/domain-builder.h
-+++ b/xen/arch/x86/include/asm/domain-builder.h
-@@ -10,6 +10,8 @@ int __init builder_get_cmdline(
- void builder_init(struct boot_info *bi);
- 
- int hvm_setup_cpus(struct domain *d, paddr_t entry, paddr_t start_info);
-+int pvh_populate_memory_range(
-+    struct domain *d, unsigned long start, unsigned long nr_pages);
- 
- unsigned long dom_paging_pages(
-     const struct boot_domain *d, unsigned long nr_pages);
+ #endif
 -- 
 2.30.2
 
