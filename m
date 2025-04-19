@@ -4,34 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73637C369C9
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 00:20:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.959692.1352002 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53923C369AB
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 01:04:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.959750.1352023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5vwJ-0001xL-0V; Sat, 19 Apr 2025 00:20:11 +0000
+	id 1u5wce-0000ro-G3; Sat, 19 Apr 2025 01:03:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 959692.1352002; Sat, 19 Apr 2025 00:20:10 +0000
+Received: by outflank-mailman (output) from mailman id 959750.1352023; Sat, 19 Apr 2025 01:03:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u5vwI-0001xE-Tw; Sat, 19 Apr 2025 00:20:10 +0000
-Received: by outflank-mailman (input) for mailman id 959692;
- Sat, 19 Apr 2025 00:20:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HXfy=XF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u5vwI-0000Vo-60
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 00:20:10 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0cd2985e-1cb4-11f0-9eb0-5ba50f476ded;
- Sat, 19 Apr 2025 02:20:09 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C6FF6446C1;
- Sat, 19 Apr 2025 00:20:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E751BC4CEE2;
- Sat, 19 Apr 2025 00:20:06 +0000 (UTC)
+	id 1u5wce-0000rh-Bp; Sat, 19 Apr 2025 01:03:56 +0000
+Received: by outflank-mailman (input) for mailman id 959750;
+ Sat, 19 Apr 2025 01:03:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=GNoH=XF=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1u5wcc-0000dd-FF
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 01:03:54 +0000
+Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 28c14c9c-1cba-11f0-9ffb-bf95429c2676;
+ Sat, 19 Apr 2025 03:03:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,150 +38,377 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cd2985e-1cb4-11f0-9eb0-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745022007;
-	bh=CF+odxzWcg7zsi28Vur77a/FcO+EiHs3jYiVHS7CUb0=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=lcezpP5v6CLW0aO9JA5/3y2ZSC8Cm5ZU+TpjLERDTeLBAmv4UmYuEL5+GUI6YANR1
-	 6vXzfqqGT+PE+WOKnyMIb2Jm0zxscHotlohV5/mhzPveouRUYO1wWhaTWs9z/Ev6uq
-	 2TkfRn7Q32CCTsl4TO9Kx+GGpX//SY+HG4dCkrip9JtctjKht5llFeykEZ4hZ4pC70
-	 6Zo3MhsC9B199lnHWDcGKe5WQ30rlSBRiqsu2XXDEBLXMY+DUt8xg0NPx0ZqSDDbej
-	 rBS0+Xw2zfdwDvZM4EdRjJ4CG82M0+j7G9HkrTTOTWrujvwaVG//T/QEcM4pDPAxpX
-	 smxGv/xuTUMLQ==
-Date: Fri, 18 Apr 2025 17:20:05 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, 
-    Michal Orzel <michal.orzel@amd.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v3 2/4] xen/arm: make pci_host_common_probe return the
- bridge
-In-Reply-To: <0abee55bcc632ba1be356461e22eca2ceb11dadd.1744203405.git.mykyta_poturai@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2504181649010.785180@ubuntu-linux-20-04-desktop>
-References: <cover.1744203405.git.mykyta_poturai@epam.com> <0abee55bcc632ba1be356461e22eca2ceb11dadd.1744203405.git.mykyta_poturai@epam.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 28c14c9c-1cba-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1745024631; x=1745283831;
+	bh=F3bwVJxkxikxRIcz+L/Xuqu0AofNvAvp6z3DvGpiibo=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=bk2jsr2wc/WzkGbcZYGPRPfqxDI0GQfLOFH9hLtDcPDzIz9KkvLs/5Mju1gDNS1gr
+	 q8MIsHD2kvbq5W2qIHMIIxwcTJQc4cqIPcq5iFMawVtyasc52ReLZp/L+DJADhSrJs
+	 MTmaEWdR4c6hrZbk1dqNaE+SJGfb0WjWe7W5+M6IqHUlWV4vvuZ+cKW1Rd08mZsCsX
+	 xBXZzGc4WZRw6YOBuJHHdnerwnj1ftO4407+viYynvpENsCia/RhhA9RHWlQm44LTo
+	 HJ6Jr4RCBfIwW0hxsOWySSepnUllHy+kOyi09o1gZzClOAifm0DbdeCfggVLowPUjj
+	 WQAKlYb9Kja3g==
+Date: Sat, 19 Apr 2025 01:03:47 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, cardoe@cardoe.com, marmarek@invisiblethingslab.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v2 1/4] CI: unify x86 XTF test runner
+Message-ID: <20250419010319.2572518-2-dmukhin@ford.com>
+In-Reply-To: <20250419010319.2572518-1-dmukhin@ford.com>
+References: <20250419010319.2572518-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 1096fe74d75838731cc9926ba41157d775b2d8a1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 9 Apr 2025, Mykyta Poturai wrote:
-> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> 
-> Some of the PCI host bridges require additional processing during the
-> probe phase. For that they need to access struct bridge of the probed
-> host, so return pointer to the new bridge from pci_host_common_probe.
-> 
-> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> ---
-> v2->v3:
-> * no change
-> 
-> v1->v2:
-> * no change
-> ---
->  xen/arch/arm/include/asm/pci.h      |  5 +++--
->  xen/arch/arm/pci/pci-host-common.c  | 10 +++++-----
->  xen/arch/arm/pci/pci-host-generic.c |  2 +-
->  xen/arch/arm/pci/pci-host-zynqmp.c  |  2 +-
->  4 files changed, 10 insertions(+), 9 deletions(-)
-> 
-> diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.h
-> index a87672d834..3d2ca9b5b0 100644
-> --- a/xen/arch/arm/include/asm/pci.h
-> +++ b/xen/arch/arm/include/asm/pci.h
-> @@ -18,6 +18,7 @@
->  #ifdef CONFIG_HAS_PCI
->  
->  #include <asm/p2m.h>
-> +#include <xen/err.h>
->  
->  #define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
->  
-> @@ -95,8 +96,8 @@ struct pci_ecam_ops {
->  /* Default ECAM ops */
->  extern const struct pci_ecam_ops pci_generic_ecam_ops;
->  
-> -int pci_host_common_probe(struct dt_device_node *dev,
-> -                          const struct pci_ecam_ops *ops);
-> +struct pci_host_bridge *pci_host_common_probe(struct dt_device_node *dev,
-> +                                              const struct pci_ecam_ops *ops);
->  int pci_generic_config_read(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
->                              uint32_t reg, uint32_t len, uint32_t *value);
->  int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
-> diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-> index c0faf0f436..7ce9675551 100644
-> --- a/xen/arch/arm/pci/pci-host-common.c
-> +++ b/xen/arch/arm/pci/pci-host-common.c
-> @@ -208,8 +208,8 @@ static int pci_bus_find_domain_nr(struct dt_device_node *dev)
->      return domain;
->  }
->  
-> -int pci_host_common_probe(struct dt_device_node *dev,
-> -                          const struct pci_ecam_ops *ops)
-> +struct pci_host_bridge *pci_host_common_probe(struct dt_device_node *dev,
-> +                                              const struct pci_ecam_ops *ops)
->  {
->      struct pci_host_bridge *bridge;
->      struct pci_config_window *cfg;
-> @@ -221,7 +221,7 @@ int pci_host_common_probe(struct dt_device_node *dev,
->  
->      bridge = pci_alloc_host_bridge();
->      if ( !bridge )
-> -        return -ENOMEM;
-> +        return ERR_PTR(-ENOMEM);
+From: Denis Mukhin <dmukhin@ford.com>
 
-There is a return 0 just above that needs to be changed to return NULL.
+Add test runner script qemu-xtf.sh which is allows any XTF x86 test to be
+easily executed. Test runner is invoked from the qemu-smoke* jobs with the
+hardcoded parameters.
+
+Each x86 XTF job lead time is reduced a bit since only the test-related cod=
+e
+is built, not the entire XTF project.
+
+Add .gitignore to avoid committing test artifacts by mistake.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v2:
+- removed TOP
+- dropped XEN_CONSOLE in favor of XEN_CMDLINE
+- fixup for XTF_SRC_CONFIG
+---
+ automation/gitlab-ci/test.yaml                |   8 +-
+ automation/scripts/.gitignore                 |   6 +
+ .../scripts/include/configs/xtf-x86-64-config |   0
+ automation/scripts/include/xtf-runner         | 131 ++++++++++++++++++
+ automation/scripts/include/xtf-x86-64         |  31 +++++
+ automation/scripts/qemu-smoke-x86-64.sh       |  26 ----
+ automation/scripts/qemu-xtf.sh                |  28 ++++
+ 7 files changed, 200 insertions(+), 30 deletions(-)
+ create mode 100644 automation/scripts/.gitignore
+ create mode 100644 automation/scripts/include/configs/xtf-x86-64-config
+ create mode 100644 automation/scripts/include/xtf-runner
+ create mode 100644 automation/scripts/include/xtf-x86-64
+ delete mode 100755 automation/scripts/qemu-smoke-x86-64.sh
+ create mode 100755 automation/scripts/qemu-xtf.sh
+
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yam=
+l
+index 5ce445b78f..3adc841335 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -659,28 +659,28 @@ qemu-alpine-x86_64-gcc:
+ qemu-smoke-x86-64-gcc:
+   extends: .qemu-smoke-x86-64
+   script:
+-    - ./automation/scripts/qemu-smoke-x86-64.sh pv 2>&1 | tee ${LOGFILE}
++    - ./automation/scripts/qemu-xtf.sh x86-64 pv64 example 2>&1 | tee ${LO=
+GFILE}
+   needs:
+     - debian-12-x86_64-gcc-debug
+=20
+ qemu-smoke-x86-64-clang:
+   extends: .qemu-smoke-x86-64
+   script:
+-    - ./automation/scripts/qemu-smoke-x86-64.sh pv 2>&1 | tee ${LOGFILE}
++    - ./automation/scripts/qemu-xtf.sh x86-64 pv64 example 2>&1 | tee ${LO=
+GFILE}
+   needs:
+     - debian-12-x86_64-clang-debug
+=20
+ qemu-smoke-x86-64-gcc-pvh:
+   extends: .qemu-smoke-x86-64
+   script:
+-    - ./automation/scripts/qemu-smoke-x86-64.sh pvh 2>&1 | tee ${LOGFILE}
++    - ./automation/scripts/qemu-xtf.sh x86-64 hvm64 example 2>&1 | tee ${L=
+OGFILE}
+   needs:
+     - debian-12-x86_64-gcc-debug
+=20
+ qemu-smoke-x86-64-clang-pvh:
+   extends: .qemu-smoke-x86-64
+   script:
+-    - ./automation/scripts/qemu-smoke-x86-64.sh pvh 2>&1 | tee ${LOGFILE}
++    - ./automation/scripts/qemu-xtf.sh x86-64 hvm64 example 2>&1 | tee ${L=
+OGFILE}
+   needs:
+     - debian-12-x86_64-clang-debug
+=20
+diff --git a/automation/scripts/.gitignore b/automation/scripts/.gitignore
+new file mode 100644
+index 0000000000..2f2d6e1ebd
+--- /dev/null
++++ b/automation/scripts/.gitignore
+@@ -0,0 +1,6 @@
++!include
++
++binaries
++smoke.serial
++xen
++xtf*/
+diff --git a/automation/scripts/include/configs/xtf-x86-64-config b/automat=
+ion/scripts/include/configs/xtf-x86-64-config
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/automation/scripts/include/xtf-runner b/automation/scripts/inc=
+lude/xtf-runner
+new file mode 100644
+index 0000000000..320eb65dc8
+--- /dev/null
++++ b/automation/scripts/include/xtf-runner
+@@ -0,0 +1,131 @@
++#!/bin/bash
++#
++# XTF test utilities.
++#
++# Environment variables:
++#   BOOT_MSG: Expected boot message
++#   FW_PREFIX: Firmware images path including '/' at the end
++#   PASSED: XTF test printout in case of a pass
++#   QEMU_PREFIX: QEMU path including '/' at the end
++#   TEST_LOG: Output log file
++#   UBOOT_CMD: U-Boot command line
++#   WORKDIR: Test working directory
++#   XEN_BINARY: Xen binary location
++#   XEN_CONSOLE: Xen console device name
++#   XTF_SRC_CONFIG: XTF config file
++#   XTF_SRC_BRANCH: XTF branch
++#   XTF_SRC_URI: XTF source code URI
++
++# Output log file
++TEST_LOG=3D"${TEST_LOG:-${XEN_ROOT}/smoke.serial}"
++# XTF test printout in case of a pass
++PASSED=3D"${PASSED:-Test result: SUCCESS}"
++# Expected boot message
++BOOT_MSG=3D"${BOOT_MSG:-Latest ChangeSet: }"
++# Test working directory
++WORKDIR=3D"${WORKDIR:-${XEN_ROOT}/binaries}"
++# XTF source code
++XTF_SRC_CONFIG=3D"${XTF_SRC_CONFIG:-include/configs/xtf-${ARCH}-config}"
++
++function die()
++{
++    set +x
++    echo "FATAL: $*" >&2
++    exit 1
++}
++
++# Build an XTF test binary.
++# $1 Test variant.
++# $2 Test name.
++function xtf_build_binary()
++{
++    local xtf_variant=3D$1
++    local xtf_name=3D$2
++    local xtf_dir=3D"xtf-${ARCH}"
++
++    # Crude check for local testing
++    if [ ! -d ${xtf_dir} ]; then
++        git clone ${XTF_SRC_URI} ${xtf_dir} -b ${XTF_SRC_BRANCH}
++    fi
++
++    make \
++        -C ${xtf_dir} \
++        -j$(nproc) \
++        $(tr '\n' ' ' < ${XTF_SRC_CONFIG}) \
++        TESTS=3Dtests/${xtf_name}
++
++    export XTF_NAME=3D"${xtf_name}"
++    export XTF_VARIANT=3D"${xtf_variant}"
++    export XTF_WORKDIR=3D"$(readlink -f ${xtf_dir})"
++    export XTF_BINARY=3D"${XTF_WORKDIR}/tests/${xtf_name}/test-${xtf_varia=
+nt}-${xtf_name}"
++}
++
++# Build Xen command line for running an XTF test.
++# $1 Test variant.
++# $2 Test name.
++function xtf_build_cmdline()
++{
++    local xtf_variant=3D$1
++    local xtf_name=3D$2
++    declare -a cmdline=3D()
++
++    cmdline+=3D("${XEN_CMDLINE}")
++
++    # NB: OK to have hvm64, which is x86-only variant
++    if [[ $xtf_variant =3D=3D "hvm64" ]]; then
++        cmdline+=3D("dom0-iommu=3Dnone dom0=3Dpvh")
++    fi
++
++    export XEN_CMDLINE=3D"${cmdline[@]}"
++}
++
++# Build an XTF test environment.
++# $1 Test variant.
++# $2 Test name.
++function xtf_build_test()
++{
++    local v=3D$1
++    local xtf_name=3D$2
++    local xtf_variant=3D""
++
++    for x in ${XTF_SRC_VARIANTS}; do
++        if [[ "${x}" =3D=3D "${v}" ]]; then
++            xtf_variant=3D${v}
++            break
++        fi
++    done
++    if [[ -z $xtf_variant ]]; then
++        die "unsupported test variant '$1', supported variants: ${XTF_SRC_=
+VARIANTS}"
++    fi
++
++    xtf_build_binary ${xtf_variant} ${xtf_name}
++    xtf_build_cmdline ${xtf_variant} ${xtf_name}
++}
++
++# Execute an XTF test.
++function xtf_run_test()
++{
++    rm -f ${TEST_LOG}
++    export BOOT_MSG PASSED TEST_CMD TEST_LOG UBOOT_CMD
++    ./console.exp | sed 's/\r\+$//'
++}
++
++# Setup environment and run an XTF test.
++# $1 Test variant.
++# $2 Test name.
++function xtf_test()
++{
++    # Out: FW_*, QEMU_*, XEN_{BINARY,CONSOLE}, XTF_SRC_*
++    xtf_arch_prepare
++
++    # In: XTF_SRC_*
++    # OUt: XTF_{BINARY,NAME,VARIANT,WORKDIR} and XEN_CMDLINE
++    xtf_build_test $@
++
++    # In: FW_*, QEMU_*, XTF_*, XEN_*
++    # Out: BOOT_MSG, PASSED, TEST_{CMD,LOG}, UBOOT_CMD
++    xtf_arch_setup
++
++    # In: BOOT_MSG, PASSED, TEST_{CMD,LOG}, UBOOT_CMD
++    xtf_run_test
++}
+diff --git a/automation/scripts/include/xtf-x86-64 b/automation/scripts/inc=
+lude/xtf-x86-64
+new file mode 100644
+index 0000000000..b1b0cc201e
+--- /dev/null
++++ b/automation/scripts/include/xtf-x86-64
+@@ -0,0 +1,31 @@
++#!/bin/bash
++#
++# XTF test utilities (x86_64).
++#
++
++# Arch-specific environment overrides.
++function xtf_arch_prepare()
++{
++    export FW_PREFIX=3D"${FW_PREFIX:-}"
++    export QEMU_PREFIX=3D"${QEMU_PREFIX:-}"
++    export XEN_BINARY=3D"${XEN_BINARY:-${WORKDIR}/xen}"
++    export XEN_CMDLINE=3D"${XEN_CMDLINE:-loglvl=3Dall noreboot console_tim=
+estamps=3Dboot console=3Dcom1}"
++    export XTF_SRC_BRANCH=3D"${XTF_SRC_BRANCH:-master}"
++    export XTF_SRC_URI=3D"${XTF_SRC_URI:-https://xenbits.xen.org/git-http/=
+xtf.git}"
++    export XTF_SRC_VARIANTS=3D"hvm64 pv64"
++}
++
++# Perform arch-specific XTF environment setup.
++function xtf_arch_setup()
++{
++    export TEST_CMD=3D"${QEMU_PREFIX}qemu-system-x86_64 \
++        -no-reboot \
++        -nographic \
++        -monitor none \
++        -serial stdio \
++        -m 512 \
++        -kernel ${XEN_BINARY} \
++        -initrd ${XTF_BINARY} \
++        -append \"${XEN_CMDLINE}\" \
++    "
++}
+diff --git a/automation/scripts/qemu-smoke-x86-64.sh b/automation/scripts/q=
+emu-smoke-x86-64.sh
+deleted file mode 100755
+index da0c26cc2f..0000000000
+--- a/automation/scripts/qemu-smoke-x86-64.sh
++++ /dev/null
+@@ -1,26 +0,0 @@
+-#!/bin/bash
+-
+-set -ex -o pipefail
+-
+-# variant should be either pv or pvh
+-variant=3D$1
+-
+-# Clone and build XTF
+-git clone https://xenbits.xen.org/git-http/xtf.git
+-cd xtf && make -j$(nproc) && cd -
+-
+-case $variant in
+-    pvh) k=3Dtest-hvm64-example    extra=3D"dom0-iommu=3Dnone dom0=3Dpvh" =
+;;
+-    *)   k=3Dtest-pv64-example     extra=3D ;;
+-esac
+-
+-rm -f smoke.serial
+-export TEST_CMD=3D"qemu-system-x86_64 -nographic -kernel binaries/xen \
+-        -initrd xtf/tests/example/$k \
+-        -append \"loglvl=3Dall console=3Dcom1 noreboot console_timestamps=
+=3Dboot $extra\" \
+-        -m 512 -monitor none -serial stdio"
+-
+-export TEST_LOG=3D"smoke.serial"
+-export PASSED=3D"Test result: SUCCESS"
+-
+-./automation/scripts/console.exp | sed 's/\r\+$//'
+diff --git a/automation/scripts/qemu-xtf.sh b/automation/scripts/qemu-xtf.s=
+h
+new file mode 100755
+index 0000000000..55c221b36d
+--- /dev/null
++++ b/automation/scripts/qemu-xtf.sh
+@@ -0,0 +1,28 @@
++#!/bin/bash
++#
++# XTF test runner (QEMU).
++#
++
++set -e -o pipefail
++
++if [ $# -lt 3 ]; then
++    echo "Usage: $(basename $0) ARCH XTF-VARIANT XTF-NAME"
++    exit 0
++fi
++
++export ARCH=3D"$1"
++shift
++
++set -x
++
++export XEN_ROOT=3D"${PWD}"
++cd $(dirname $0)
++
++source include/xtf-runner
++
++if [ ! -f "include/xtf-${ARCH}" ]; then
++    die "unsupported architecture '${ARCH}'"
++fi
++source include/xtf-${ARCH}
++
++xtf_test $@
+--=20
+2.34.1
 
 
->      /* Parse and map our Configuration Space windows */
->      cfg = gen_pci_init(dev, ops);
-> @@ -244,12 +244,12 @@ int pci_host_common_probe(struct dt_device_node *dev,
->      bridge->segment = domain;
->      pci_add_host_bridge(bridge);
->  
-> -    return 0;
-> +    return bridge;
->  
->  err_exit:
->      xfree(bridge);
->  
-> -    return err;
-> +    return ERR_PTR(err);
->  }
->  
->  /*
-> diff --git a/xen/arch/arm/pci/pci-host-generic.c b/xen/arch/arm/pci/pci-host-generic.c
-> index 46de6e43cc..a6ffbda174 100644
-> --- a/xen/arch/arm/pci/pci-host-generic.c
-> +++ b/xen/arch/arm/pci/pci-host-generic.c
-> @@ -29,7 +29,7 @@ static const struct dt_device_match __initconstrel gen_pci_dt_match[] =
->  static int __init pci_host_generic_probe(struct dt_device_node *dev,
->                                           const void *data)
->  {
-> -    return pci_host_common_probe(dev, &pci_generic_ecam_ops);
-> +    return PTR_RET(pci_host_common_probe(dev, &pci_generic_ecam_ops));
->  }
->  
->  DT_DEVICE_START(pci_gen, "PCI HOST GENERIC", DEVICE_PCI_HOSTBRIDGE)
-> diff --git a/xen/arch/arm/pci/pci-host-zynqmp.c b/xen/arch/arm/pci/pci-host-zynqmp.c
-> index 101edb8593..a38f2e019e 100644
-> --- a/xen/arch/arm/pci/pci-host-zynqmp.c
-> +++ b/xen/arch/arm/pci/pci-host-zynqmp.c
-> @@ -47,7 +47,7 @@ static const struct dt_device_match __initconstrel nwl_pcie_dt_match[] =
->  static int __init pci_host_generic_probe(struct dt_device_node *dev,
->                                           const void *data)
->  {
-> -    return pci_host_common_probe(dev, &nwl_pcie_ops);
-> +    return PTR_RET(pci_host_common_probe(dev, &nwl_pcie_ops));
->  }
->  
->  DT_DEVICE_START(pci_gen, "PCI HOST ZYNQMP", DEVICE_PCI_HOSTBRIDGE)
-> -- 
-> 2.34.1
-> 
 
