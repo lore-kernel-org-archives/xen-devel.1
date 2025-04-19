@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1F3C369D3
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:21:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.960254.1352351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2305FC369C9
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:21:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.960257.1352355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GYw-0004sF-IY; Sat, 19 Apr 2025 22:21:26 +0000
+	id 1u6GYw-0004v1-Tm; Sat, 19 Apr 2025 22:21:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 960254.1352351; Sat, 19 Apr 2025 22:21:26 +0000
+Received: by outflank-mailman (output) from mailman id 960257.1352355; Sat, 19 Apr 2025 22:21:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GYw-0004qZ-7M; Sat, 19 Apr 2025 22:21:26 +0000
-Received: by outflank-mailman (input) for mailman id 960254;
- Sat, 19 Apr 2025 22:21:24 +0000
+	id 1u6GYw-0004tw-Ib; Sat, 19 Apr 2025 22:21:26 +0000
+Received: by outflank-mailman (input) for mailman id 960257;
+ Sat, 19 Apr 2025 22:21:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u6GPw-0004yY-HI
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:12:08 +0000
+ id 1u6GP5-0004yY-0x
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:11:15 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 54384874-1d6b-11f0-9eb0-5ba50f476ded;
- Sun, 20 Apr 2025 00:12:07 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1745100548675466.4706189515272;
- Sat, 19 Apr 2025 15:09:08 -0700 (PDT)
+ id 3368e8e3-1d6b-11f0-9eb0-5ba50f476ded;
+ Sun, 20 Apr 2025 00:11:12 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1745100535464486.0908090025065;
+ Sat, 19 Apr 2025 15:08:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54384874-1d6b-11f0-9eb0-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; t=1745100552; cv=none; 
+X-Inumbo-ID: 3368e8e3-1d6b-11f0-9eb0-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; t=1745100540; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=ElxRJqYtZe7ohyN2i5hH9DKMkius3OTgqmRUQSCXRFxaKRBAJv56z/TU5ZF7LXnQt/ollB0by6LCc5/5l9M0DJqLHRSnJhGdRtnFVAxnXTi4pj49BuGZLsgtBig7s/ONX2vNYR6Pqve3SiPjqx5W1A6vCckRkGWM+lLSK9UGICw=
+	b=bCgIUk8XLrSRb2+emrpZXS/xMRZZzP/JIQEx1NDclO9uqk/xo1tzfOwUe5TWhyTHKmAUnTQxyNgwAnCptS/HRCwT6CVUODWnuJa8pIhv+1dRMx1Kd0N7jYeueGQWPMhOQHX/peSUAytuXsMQnIYK9ksVQxWCrW4G6nfgKuj+gwY=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1745100552; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=GejcDqJh4eQpJAs/6oq6gMhMd3jidjZDIYzSmQIkSCQ=; 
-	b=JpR0xaxhPe6R70jq41xcFaG52X7TLQRb5rwfVubIvvuvl1yczoqyAac9kIyqJ/SKlBHldlnIidJT5QWi+tRBTpRss25uXxZ0CcIIr0dKsZAMmIE2M9712kZtUJoPbqUVR2BaRIy3TiKcnQ573Bd/e1uJoGPN+2b16wSa7dsri14=
+	t=1745100540; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=2DObGwETdwh7JUH3NaImfvU+NN7DFUDrg2HJnLwWc6A=; 
+	b=HAgOY8rb0aTpjt9jpcc8JTsXxQdP/tXtGgTf14h4A35Y1BD6tm0EP1lKs24DCbLIqL332Iazdt7b8V3ylm/MnhPfLg+1QK7kjNspHIISCIIzllaKSIIdY8aPcIxmRrJZc0B1FqBf7DQdyjmrOTmDPDiKWiD5Iby6gtbS0scO/KQ=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100552;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100540;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=GejcDqJh4eQpJAs/6oq6gMhMd3jidjZDIYzSmQIkSCQ=;
-	b=iKmWKfuSxPlOaKxRc30RWqNNqG1Apa1rBEX2BdlEgkZfQS+pImHabGak0DFLIGP2
-	Z/TEWxW2yeQ4E0K7vsz49ytpuKPVjRkQ9DOqkbd8v12R5JFZXt01IMq/k3vsJsOrBka
-	KCBB+CCfSmrF9I79FqQ6dPtvDbaFRmv3Oks4zAmY=
+	bh=2DObGwETdwh7JUH3NaImfvU+NN7DFUDrg2HJnLwWc6A=;
+	b=j+nMrzDa8bS4dUdaFEuJ1m3fb5Ec2PI3xjnWjgqj98wZLn3l4uteUQanGDU1VSIM
+	yvc6mqxYUxvOnpR+C3bad+Yh+Ut+XDE/AwFJUAY/2e7LPGY8ZsysxbKSsEnYrhPxu8C
+	VCOHJC9PwyhX7FPPzoJNSlk4Reu9Cs88hBOyrqEo=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 23/38] x86/hyperlaunch: add domu acpi construction
-Date: Sat, 19 Apr 2025 18:08:05 -0400
-Message-Id: <20250419220820.4234-24-dpsmith@apertussolutions.com>
+Subject: [RFC 19/38] x86/hyperlaunch: add domu memory map construction
+Date: Sat, 19 Apr 2025 18:08:01 -0400
+Message-Id: <20250419220820.4234-20-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250419220820.4234-1-dpsmith@apertussolutions.com>
 References: <20250419220820.4234-1-dpsmith@apertussolutions.com>
@@ -78,245 +78,189 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Introduce hvm_setup_acpi() that will construct an APCI table for a general HVM
-domU guest.
+Introduce hvm_setup_e820() that will build the e820 memory map for a general
+domU. To populate the ACPI entry, ACPI table size helpers are introduced. A
+conditional is added to the domain builder to select between calling
+hvm_setup_e820() and dom0_pvh_setup_e820() depending on if it is building dom0
+or a domU.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/hvm/dom_build.c | 213 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 212 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/dom_build.c | 149 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 148 insertions(+), 1 deletion(-)
 
 diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-index f997f293f329..c482d5c2d974 100644
+index 078e42447b0a..658d3d170e64 100644
 --- a/xen/arch/x86/hvm/dom_build.c
 +++ b/xen/arch/x86/hvm/dom_build.c
-@@ -408,6 +408,214 @@ int __init hvm_add_mem_range(
-     return 0;
+@@ -16,6 +16,7 @@
+ 
+ #include <acpi/actables.h>
+ 
++#include <public/hvm/e820.h>
+ #include <public/hvm/hvm_vcpu.h>
+ 
+ #include <asm/bootinfo.h>
+@@ -43,12 +44,158 @@ static void __hwdom_init pvh_setup_mmcfg(struct domain *d)
+     }
  }
  
-+static int __init hvm_setup_acpi_madt(
-+    struct domain *d, struct acpi_table_madt *madt)
++static unsigned long __init hvm_size_acpi_madt(struct domain *d)
 +{
-+    struct acpi_table_header *table;
-+    struct acpi_madt_local_apic *lapic;
-+    acpi_status status;
-+    unsigned long size = hvm_size_acpi_madt(d);
-+    int i;
++    unsigned long size = sizeof(struct acpi_table_madt);
 +
-+    /* Copy the native MADT table header. */
-+    status = acpi_get_table(ACPI_SIG_MADT, 0, &table);
-+    if ( !ACPI_SUCCESS(status) )
-+    {
-+        printk("Failed to get MADT ACPI table, aborting.\n");
-+        return -EINVAL;
-+    }
-+    madt->header = *table;
-+    madt->address = APIC_DEFAULT_PHYS_BASE;
-+    /*
-+     * NB: this is currently set to 4, which is the revision in the ACPI
-+     * spec 6.1. Sadly ACPICA doesn't provide revision numbers for the
-+     * tables described in the headers.
-+     */
-+    madt->header.revision = min_t(unsigned char, table->revision, 4);
++    size += sizeof(struct acpi_madt_local_apic) * d->max_vcpus;
 +
-+    lapic = (void *)(madt + 1);
-+
-+    for ( i = 0; i < d->max_vcpus; i++ )
-+    {
-+        lapic->header.type = ACPI_MADT_TYPE_LOCAL_APIC;
-+        lapic->header.length = sizeof(*lapic);
-+        lapic->id = i * 2;
-+        lapic->processor_id = i;
-+        lapic->lapic_flags = ACPI_MADT_ENABLED;
-+
-+        lapic++;
-+    }
-+
-+    madt->header.length = size;
-+    /*
-+     * Calling acpi_tb_checksum here is a layering violation, but
-+     * introducing a wrapper for such simple usage seems overkill.
-+     */
-+    madt->header.checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, madt), size);
-+
-+    return 0;
++    return size;
 +}
 +
-+static int __init hvm_setup_acpi_xsdt(
-+    struct domain *d, struct acpi_table_xsdt *xsdt, paddr_t madt_addr)
++static unsigned long __init hvm_size_acpi_xsdt(struct domain *d)
 +{
-+    struct acpi_table_header *table;
-+    struct acpi_table_rsdp *rsdp;
-+    unsigned long size = hvm_size_acpi_xsdt(d);
-+    paddr_t xsdt_paddr;
++    unsigned long size = sizeof(struct acpi_table_xsdt);
++    /* Only adding the MADT table to the XSDT. */
++    unsigned int num_tables = 1;
 +
 +    /*
-+     * Restore original DMAR table signature, we are going to filter it from
-+     * the new XSDT that is presented to the guest, so it is no longer
-+     * necessary to have it's signature zapped.
++     * No need to add or subtract anything because struct acpi_table_xsdt
++     * includes one array slot already.
 +     */
-+    acpi_dmar_reinstate();
++    size += num_tables * sizeof(uint64_t);
 +
-+    /* Copy the native XSDT table header. */
-+    rsdp = acpi_os_map_memory(acpi_os_get_root_pointer(), sizeof(*rsdp));
-+    if ( !rsdp )
-+    {
-+        printk("Unable to map RSDP\n");
-+        return -EINVAL;
-+    }
-+    xsdt_paddr = rsdp->xsdt_physical_address;
-+    acpi_os_unmap_memory(rsdp, sizeof(*rsdp));
-+    table = acpi_os_map_memory(xsdt_paddr, sizeof(*table));
-+    if ( !table )
-+    {
-+        printk("Unable to map XSDT\n");
-+        return -EINVAL;
-+    }
-+    xsdt->header = *table;
-+    acpi_os_unmap_memory(table, sizeof(*table));
-+
-+    /* Add the custom MADT. */
-+    xsdt->table_offset_entry[0] = madt_addr;
-+
-+    xsdt->header.revision = 1;
-+    xsdt->header.length = size;
-+    /*
-+     * Calling acpi_tb_checksum here is a layering violation, but
-+     * introducing a wrapper for such simple usage seems overkill.
-+     */
-+    xsdt->header.checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, xsdt), size);
-+
-+    return 0;
++    return size;
 +}
 +
-+static int __init hvm_alloc_acpi_region(
-+    struct domain *d, void **region, unsigned long size, paddr_t *addr)
++static unsigned long __init hvm_size_acpi_region(struct domain *d)
 +{
-+    int i;
++    unsigned long size = sizeof(struct acpi_table_rsdp);
 +
-+    *addr = 0;
++    size += hvm_size_acpi_xsdt(d);
++    size += hvm_size_acpi_madt(d);
 +
-+    for ( i = 0; i < d->arch.nr_e820; i++ )
-+    {
-+        if ( d->arch.e820[i].type == E820_ACPI )
-+        {
-+            if ( d->arch.e820[i].size < size )
-+                break;
-+
-+            *addr = d->arch.e820[i].addr;
-+            break;
-+        }
-+    }
-+
-+    /* The e820 setup did not allocate ACPI region, steal one instead. */
-+    if ( *addr == 0 )
-+    {
-+        if ( hvm_steal_ram(d, size, 0, GB(4), addr) )
-+        {
-+            printk("Unable to allocate guest RAM for RSDP\n");
-+            return -ENOMEM;
-+        }
-+        if ( hvm_add_mem_range(d, *addr, *addr + size, E820_ACPI) )
-+        {
-+            printk("Unable to add RSDP region to memory map\n");
-+            return -EFAULT;
-+        }
-+    }
-+
-+    *region = xzalloc_bytes(size);
-+    if ( !region )
-+        return -ENOMEM;
-+
-+    return 0;
++    return ROUNDUP(size, PAGE_SIZE);
 +}
 +
-+static int __init hvm_setup_acpi(struct domain *d, paddr_t start_info)
++/* From xenguest lib */
++#define END_SPECIAL_REGION   0xff000U
++#define NR_SPECIAL_PAGES     8
++#define START_SPECIAL_REGION (END_SPECIAL_REGION - NR_SPECIAL_PAGES)
++
++#define SPECIALPAGE_PAGING   0
++#define SPECIALPAGE_ACCESS   1
++#define SPECIALPAGE_SHARING  2
++#define SPECIALPAGE_BUFIOREQ 3
++#define SPECIALPAGE_XENSTORE 4
++#define SPECIALPAGE_IOREQ    5
++#define SPECIALPAGE_IDENT_PT 6
++#define SPECIALPAGE_CONSOLE  7
++#define special_pfn(x)       (START_SPECIAL_REGION + (x))
++
++/*
++ * Allocation scheme, derived from xenlight/xenguest:
++ *
++ *                                  |  <4G MMIO Hole  |
++ * [ Low Mem ][ RDM Mem ][ >1M Mem ][ ACPI ][ Special ][ High Mem ]
++ *
++ */
++static void __init hvm_setup_e820(struct domain *d, unsigned long nr_pages)
 +{
-+    paddr_t rsdp_paddr, xsdt_paddr, madt_paddr;
-+    struct acpi_table_rsdp *rsdp;
-+    unsigned long size = hvm_size_acpi_region(d);
-+    void *table;
-+    int rc;
++    const uint32_t lowmem_reserved_base = 0x9e000;
++    const uint32_t rdm_base = 0xa0000, rdm_size = 0x60;
++    unsigned long low_pages, ext_pages, mmio_pages, acpi_pages, high_pages = 0;
++    unsigned long max_ext_pages = (HVM_BELOW_4G_MMIO_START - MB(1)) >> PAGE_SHIFT,
++                  page_count = 0;
++    unsigned nr = 0, e820_entries = 5;
 +
-+    rc = hvm_alloc_acpi_region(d, &table, size, &rsdp_paddr);
-+    if ( rc < 0 )
-+        return rc;
++    /* low pages: below 1MB */
++    low_pages = lowmem_reserved_base >> PAGE_SHIFT;
++    if ( low_pages > nr_pages )
++        panic("Insufficient memory for HVM/PVH domain (%pd)\n", d);
 +
-+    /* RSDP */
-+    rsdp = table;
-+    xsdt_paddr = rsdp_paddr + sizeof(struct acpi_table_rsdp);
++    acpi_pages = hvm_size_acpi_region(d) >> PAGE_SHIFT;
++    mmio_pages = acpi_pages + NR_SPECIAL_PAGES;
 +
-+    *rsdp = (struct acpi_table_rsdp){
-+        .signature = ACPI_SIG_RSDP,
-+        .revision = 2,
-+        .length = sizeof(struct acpi_table_rsdp),
-+        .oem_id = "XenHL\0", /* Xen Hyperlaunch */
-+        .xsdt_physical_address = xsdt_paddr,
-+    };
++    /* ext pages: from 1MB to mmio hole */
++    ext_pages = nr_pages - (low_pages + mmio_pages);
++    if ( ext_pages > max_ext_pages )
++        ext_pages = max_ext_pages;
 +
-+    rsdp->checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, rsdp),
-+                                       ACPI_RSDP_REV0_SIZE);
-+    rsdp->extended_checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, rsdp),
-+                                                sizeof(*rsdp));
++    /* high pages: above 4GB */
++    if ( nr_pages > (low_pages + mmio_pages + ext_pages) )
++        high_pages = nr_pages - (low_pages + mmio_pages + ext_pages);
 +
-+    /* XSDT */
-+    table += sizeof(struct acpi_table_rsdp);
-+    madt_paddr = xsdt_paddr + hvm_size_acpi_xsdt(d);
++    /* If we should have a highmem range, add one more e820 entry */
++    if ( high_pages )
++        e820_entries++;
 +
-+    rc = hvm_setup_acpi_xsdt(d, table, madt_paddr);
-+    if ( rc )
++    ASSERT(e820_entries < E820MAX);
++
++    d->arch.e820 = xzalloc_array(struct e820entry, e820_entries);
++    if ( !d->arch.e820 )
++        panic("Unable to allocate memory for boot domain e820 map\n");
++
++    /* usable: Low memory */
++    d->arch.e820[nr].addr = 0x000000;
++    d->arch.e820[nr].size = low_pages << PAGE_SHIFT;
++    d->arch.e820[nr].type = E820_RAM;
++    page_count += d->arch.e820[nr].size >> PAGE_SHIFT;
++    nr++;
++
++    /* reserved: lowmem reserved device memory */
++    d->arch.e820[nr].addr = rdm_base;
++    d->arch.e820[nr].size = rdm_size;
++    d->arch.e820[nr].type = E820_RESERVED;
++    nr++;
++
++    /* usable: extended memory from 1MB */
++    d->arch.e820[nr].addr = 0x100000;
++    d->arch.e820[nr].size = ext_pages << PAGE_SHIFT;
++    d->arch.e820[nr].type = E820_RAM;
++    page_count += d->arch.e820[nr].size >> PAGE_SHIFT;
++    nr++;
++
++    /* reserved: ACPI entry, ACPI_INFO_PHYSICAL_ADDRESS */
++    d->arch.e820[nr].addr = 0xFC000000;
++    d->arch.e820[nr].size = acpi_pages << PAGE_SHIFT;
++    d->arch.e820[nr].type = E820_ACPI;
++    page_count += d->arch.e820[nr].size >> PAGE_SHIFT;
++    nr++;
++
++    /* reserved: HVM special pages, X86_HVM_END_SPECIAL_REGION */
++    d->arch.e820[nr].addr = START_SPECIAL_REGION << PAGE_SHIFT;
++    d->arch.e820[nr].size = NR_SPECIAL_PAGES << PAGE_SHIFT;
++    d->arch.e820[nr].type = E820_RESERVED;
++    page_count += d->arch.e820[nr].size >> PAGE_SHIFT;
++    nr++;
++
++    /* usable: highmem */
++    if ( high_pages )
 +    {
-+        printk("Unable to construct XSDT\n");
-+        goto out;
++        d->arch.e820[nr].addr = 0x100000000;
++        d->arch.e820[nr].size = high_pages << PAGE_SHIFT;
++        d->arch.e820[nr].type = E820_RAM;
++        page_count += d->arch.e820[nr].size >> PAGE_SHIFT;
++        nr++;
 +    }
 +
++    d->arch.nr_e820 = nr;
 +
-+    /* MADT */
-+    table += hvm_size_acpi_xsdt(d);
-+    rc = hvm_setup_acpi_madt(d, table);
-+    if ( rc )
-+    {
-+        printk("Unable to construct MADT\n");
-+        goto out;
-+    }
-+
-+    /* Copy ACPI region into guest memory. */
-+    rc = hvm_copy_to_guest_phys(rsdp_paddr, rsdp, size, d->vcpu[0]);
-+    if ( rc )
-+    {
-+        printk("Unable to copy RSDP into guest memory\n");
-+        goto out;
-+    }
-+
-+    /* Copy RSDP address to start_info. */
-+    rc = hvm_copy_to_guest_phys(
-+        start_info + offsetof(struct hvm_start_info, rsdp_paddr), &rsdp_paddr,
-+        sizeof(((struct hvm_start_info *) 0)->rsdp_paddr), d->vcpu[0]);
-+    if ( rc )
-+        printk("Unable to copy RSDP address to start info\n");
-+
-+ out:
-+    if ( rsdp )
-+        xfree(rsdp);
-+
-+    return rc;
++    ASSERT(nr == e820_entries);
++    ASSERT(nr_pages == page_count);
 +}
 +
- static bool __init check_load_address(
-     const struct domain *d, const struct elf_binary *elf)
+ static void __init pvh_init_p2m(struct boot_domain *bd)
  {
-@@ -757,7 +965,10 @@ int __init dom_construct_pvh(struct boot_domain *bd)
-         return rc;
-     }
+     unsigned long nr_pages = dom_compute_nr_pages(bd, NULL);
+     bool preempted;
  
--    rc = dom0_pvh_setup_acpi(bd->d, start_info);
-+    if ( is_control_domain(bd->d) || is_hardware_domain(bd->d) )
-+        rc = dom0_pvh_setup_acpi(bd->d, start_info);
+-    dom0_pvh_setup_e820(bd->d, nr_pages);
++    if ( bd->capabilities & (BUILD_CAPS_CONTROL | BUILD_CAPS_HARDWARE) )
++        dom0_pvh_setup_e820(bd->d, nr_pages);
 +    else
-+        rc = hvm_setup_acpi(bd->d, start_info);
-     if ( rc )
-     {
-         printk("Failed to setup Dom0 ACPI tables: %d\n", rc);
++        hvm_setup_e820(bd->d, nr_pages);
++
+     do {
+         preempted = false;
+         paging_set_allocation(bd->d, dom_paging_pages(bd, nr_pages),
 -- 
 2.30.2
 
