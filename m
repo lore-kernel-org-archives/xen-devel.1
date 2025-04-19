@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB569C369C9
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:21:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.960273.1352382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB658C369CF
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Apr 2025 22:21:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.960275.1352389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GZ6-0006jS-TQ; Sat, 19 Apr 2025 22:21:36 +0000
+	id 1u6GZ7-0006q6-JR; Sat, 19 Apr 2025 22:21:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 960273.1352382; Sat, 19 Apr 2025 22:21:36 +0000
+Received: by outflank-mailman (output) from mailman id 960275.1352389; Sat, 19 Apr 2025 22:21:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6GZ6-0006iW-Oi; Sat, 19 Apr 2025 22:21:36 +0000
-Received: by outflank-mailman (input) for mailman id 960273;
+	id 1u6GZ7-0006nr-9o; Sat, 19 Apr 2025 22:21:37 +0000
+Received: by outflank-mailman (input) for mailman id 960275;
  Sat, 19 Apr 2025 22:21:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1u6GRp-0004yY-7a
- for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:14:05 +0000
+ id 1u6GP9-0004yY-WA
+ for xen-devel@lists.xenproject.org; Sat, 19 Apr 2025 22:11:20 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 99dcf2b1-1d6b-11f0-9eb0-5ba50f476ded;
- Sun, 20 Apr 2025 00:14:04 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 17451005681919.729422362614287;
- Sat, 19 Apr 2025 15:09:28 -0700 (PDT)
+ id 377390f8-1d6b-11f0-9eb0-5ba50f476ded;
+ Sun, 20 Apr 2025 00:11:19 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1745100534648793.2115318942064;
+ Sat, 19 Apr 2025 15:08:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99dcf2b1-1d6b-11f0-9eb0-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; t=1745100571; cv=none; 
+X-Inumbo-ID: 377390f8-1d6b-11f0-9eb0-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; t=1745100540; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=IeC677nf98P/AOhN210mWuPZjzW3XkZvyeBoTAPX42mwIDr/DA4h+bWDvezCNyORG3dsCnW2kOhzVA/TXgjehU3dJ8PwpeYXjQJOeFWOi2D0uNUf+hcAOpVN2ts93iE90mwyRkC+aEhpn4GvN9cl2XHo/HxSH4QlS0a4FVYYF24=
+	b=EPa67t7mNi7fF2zt10Ul0B2UoAt8xxdRmVRzHl1ZUlfgt4lyO59jE+L/h3OSf/z7YD8SAo3lOkLi45aH6xgVyBUiqhqEGPu5Ko7h+Hi5Xi4pSIIjFohj1bKdi14JEMRrUEPvETir9cExUs+fRRfe5/ZfFUzfIHnvQTyrKnGHAeg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1745100571; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=lqmxREyAE0WjRdlDATtWmFP941B+/fkRIhZO5eZCnWA=; 
-	b=FPWgwbab7TgW70DOAImMDgvCzOT30qSfqfAFyE1HzGjTgdajGdUZwnKhq5eGFSBD+IZfVHMkdME77Ofql2gd9KyBU8Z27lP7E+c+g+AnT2FeDDJ39e2Ke5TzoMldaasVWMo1SLAqBkD8aSAJXnhhgmn49nLGRL4Ig7izl44Obic=
+	t=1745100540; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=2mkjxzW5Ru2Q92RR48HdEoTcd4H0/JB/kPW2NI5sInE=; 
+	b=J4tji14XEmKCceQDiriM56toiiaDpVIvUKZVULx5y7PDUeCabDOKaYOuo/d+VaJkcBKlKFeeL4YdVsM4J0nvWrp96jPHhVip1Pcanqa1A37flOxJzAQDU+NJMvOQcCI2h5TFm+DML2d2mmdcInr/DoVzfAAWTVhe6dQrOSV3r8w=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100571;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745100540;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=lqmxREyAE0WjRdlDATtWmFP941B+/fkRIhZO5eZCnWA=;
-	b=P3kEEki7Aklx1SZji5YoSDUrUiCWXt2CK/dZ/nV2NgfvkcUDPeRe9MdlJE9T45qc
-	Lc8ywD+kPmMOwmV/b69mRRLCR5K/yR9taaSrCw3NqNcTImZyYIw4KL+j/F4b09u6vYm
-	5OHY1hv4vcUVR3/8S1tLmH+cmf649GKyHCVlg8Rc=
+	bh=2mkjxzW5Ru2Q92RR48HdEoTcd4H0/JB/kPW2NI5sInE=;
+	b=HJYDam8Try/ibd4JiDWljMjg/93cJUlaibk/F0Var7goINrYqEl/8M5SqBdTwhVB
+	bv67aafshWF2D5reTbey8gETBoYDkJrs5WBodfVcxllArgjXgJD0cwka8mp6LuMTW52
+	6SJEmmG0jHkfWRRADTbbyq9bSfu/xAgQsGrlF0zc=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC 36/38] x86/hyperlaunch: enable unpausing mulitple domains
-Date: Sat, 19 Apr 2025 18:08:18 -0400
-Message-Id: <20250419220820.4234-37-dpsmith@apertussolutions.com>
+Subject: [RFC 18/38] x86/boot: rename pvh acpi setup function
+Date: Sat, 19 Apr 2025 18:08:00 -0400
+Message-Id: <20250419220820.4234-19-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250419220820.4234-1-dpsmith@apertussolutions.com>
 References: <20250419220820.4234-1-dpsmith@apertussolutions.com>
@@ -78,112 +78,51 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This commit enables the domain builder to unpause all domains
-that have been flagged to start on boot.
+The function pvh_setup_acpi() is dom0 specific, renaming it to
+dom0_pvh_setup_acpi(). Now export the function so that it may be called by the
+domain builder.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/domain-builder/core.c        | 20 ++++++++++++++++++++
- xen/arch/x86/include/asm/boot-domain.h    |  8 +++++---
- xen/arch/x86/include/asm/domain-builder.h |  1 +
- xen/arch/x86/setup.c                      |  8 +++++++-
- 4 files changed, 33 insertions(+), 4 deletions(-)
+ xen/arch/x86/hvm/dom0_build.c         | 4 ++--
+ xen/arch/x86/include/asm/dom0_build.h | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
-index 2712703e17e6..fa01b8390a23 100644
---- a/xen/arch/x86/domain-builder/core.c
-+++ b/xen/arch/x86/domain-builder/core.c
-@@ -6,6 +6,7 @@
- #include <xen/init.h>
- #include <xen/kconfig.h>
- #include <xen/lib.h>
-+#include <xen/sched.h>
- 
- #include <asm/bootinfo.h>
- #include <asm/domain-builder.h>
-@@ -206,6 +207,25 @@ unsigned int __init builder_create_domains(struct boot_info *bi)
-     return build_count;
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index a3b6afc5318a..8ea4c7bd2792 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -1125,7 +1125,7 @@ static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
+     return rc;
  }
  
-+int __init builder_unpause_domains(struct boot_info *bi)
-+{
-+    int i, count = 0;
-+
-+    for ( i = 0; i < bi->nr_domains; i++ )
-+    {
-+        struct boot_domain *bd = &bi->domains[i];
-+
-+        if ( bd->capabilities & BUILD_CAPS_HARDWARE ||
-+             bd->mode & BUILD_MODE_START_ON_BOOT )
-+        {
-+            domain_unpause_by_systemcontroller(bd->d);
-+            count++;
-+        }
-+    }
-+
-+    return count;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/include/asm/boot-domain.h b/xen/arch/x86/include/asm/boot-domain.h
-index a574f4941ed3..b592aef84b27 100644
---- a/xen/arch/x86/include/asm/boot-domain.h
-+++ b/xen/arch/x86/include/asm/boot-domain.h
-@@ -22,9 +22,11 @@ struct boot_domain {
- #define BUILD_CAPS_XENSTORE      (1 << 2)
-     uint32_t capabilities;
- 
--                                          /* On     | Off    */
--#define BUILD_MODE_PARAVIRT      (1 << 0) /* PV     | PVH/HVM */
--#define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM    | PVH     */
-+                                          /* On       | Off     */
-+#define BUILD_MODE_PARAVIRT      (1 << 0) /* PV       | PVH/HVM */
-+#define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM      | PVH     */
-+#define BUILD_MODE_LONG          (1 << 2) /* 64 BIT   | 32 BIT  */
-+#define BUILD_MODE_START_ON_BOOT (1 << 3) /* UNPAUSED | PAUSED  */
-     uint32_t mode;
- 
-     unsigned long mem_pages;
-diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
-index 5dc5661bec07..df55cf52460c 100644
---- a/xen/arch/x86/include/asm/domain-builder.h
-+++ b/xen/arch/x86/include/asm/domain-builder.h
-@@ -9,6 +9,7 @@ int __init builder_get_cmdline(
- 
- void builder_init(struct boot_info *bi);
- unsigned int builder_create_domains(struct boot_info *bi);
-+int builder_unpause_domains(struct boot_info *bi);
- 
- struct domain *arch_create_dom(
-     struct boot_info *bi, struct boot_domain *bd);
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 09b1fc94426d..ba0dd427c81b 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -787,6 +787,7 @@ static inline bool using_2M_mapping(void)
- 
- static void noreturn init_done(void)
+-static int __init pvh_setup_acpi(struct domain *d, paddr_t start_info)
++int __init dom0_pvh_setup_acpi(struct domain *d, paddr_t start_info)
  {
-+    struct boot_info *bi = &xen_boot_info;
-     void *va;
-     unsigned long start, end;
-     int err;
-@@ -800,7 +801,12 @@ static void noreturn init_done(void)
-     if ( IS_ENABLED(CONFIG_SELF_TESTS) && cpu_has_xen_shstk )
-         stub_selftest();
+     unsigned long pfn, nr_pages;
+     paddr_t madt_paddr, xsdt_paddr, rsdp_paddr;
+@@ -1283,7 +1283,7 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
+         return rc;
+     }
  
--    domain_unpause_by_systemcontroller(dom0);
-+    err = builder_unpause_domains(bi);
-+    if ( err == 0 )
-+        panic("domain builder: failed to schedule any domain to start\n");
-+    else
-+        printk("domain builder: unpaused %d of %d domains at boot\n", err,
-+               bi->nr_domains);
+-    rc = pvh_setup_acpi(d, start_info);
++    rc = dom0_pvh_setup_acpi(bd->d, start_info);
+     if ( rc )
+     {
+         printk("Failed to setup Dom0 ACPI tables: %d\n", rc);
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index e5debd5adf9f..36f563bd9d5b 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -20,6 +20,8 @@ void dom0_pv_restrict_pages(
  
-     /* MUST be done prior to removing .init data. */
-     unregister_init_virtual_region();
+ void dom0_pvh_setup_e820(struct domain *d, unsigned long nr_pages);
+ 
++int dom0_pvh_setup_acpi(struct domain *d, paddr_t start_info);
++
+ int dom0_construct_pv(struct boot_domain *bd);
+ int dom0_construct_pvh(struct boot_domain *bd);
+ 
 -- 
 2.30.2
 
