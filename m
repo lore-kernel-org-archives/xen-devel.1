@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51689C369AB
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:41:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961055.1352703 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F45C369AB
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:41:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961079.1352713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lls-0005vj-Fq; Mon, 21 Apr 2025 07:40:52 +0000
+	id 1u6lm1-0007Mg-OG; Mon, 21 Apr 2025 07:41:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961055.1352703; Mon, 21 Apr 2025 07:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 961079.1352713; Mon, 21 Apr 2025 07:41:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lls-0005vY-Bv; Mon, 21 Apr 2025 07:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 961055;
- Mon, 21 Apr 2025 07:40:51 +0000
+	id 1u6lm1-0007MZ-L6; Mon, 21 Apr 2025 07:41:01 +0000
+Received: by outflank-mailman (input) for mailman id 961079;
+ Mon, 21 Apr 2025 07:41:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kh51=XH=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u6ljv-0007m8-IQ
- for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:51 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20615.outbound.protection.outlook.com
- [2a01:111:f403:2414::615])
+ id 1u6ljM-0007m8-E4
+ for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:16 +0000
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20610.outbound.protection.outlook.com
+ [2a01:111:f403:2406::610])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aa83b2ef-1e83-11f0-9eb0-5ba50f476ded;
- Mon, 21 Apr 2025 09:38:50 +0200 (CEST)
-Received: from BN0PR10CA0005.namprd10.prod.outlook.com (2603:10b6:408:143::19)
- by IA1PR12MB6650.namprd12.prod.outlook.com (2603:10b6:208:3a1::18)
+ id 95daf4f8-1e83-11f0-9eb0-5ba50f476ded;
+ Mon, 21 Apr 2025 09:38:15 +0200 (CEST)
+Received: from BN9PR03CA0146.namprd03.prod.outlook.com (2603:10b6:408:fe::31)
+ by CY3PR12MB9632.namprd12.prod.outlook.com (2603:10b6:930:100::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.33; Mon, 21 Apr
- 2025 07:38:45 +0000
-Received: from BN2PEPF000055DC.namprd21.prod.outlook.com
- (2603:10b6:408:143:cafe::5b) by BN0PR10CA0005.outlook.office365.com
- (2603:10b6:408:143::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.34 via Frontend Transport; Mon,
- 21 Apr 2025 07:38:45 +0000
+ 2025 07:38:10 +0000
+Received: from BN2PEPF000055E0.namprd21.prod.outlook.com
+ (2603:10b6:408:fe:cafe::1e) by BN9PR03CA0146.outlook.office365.com
+ (2603:10b6:408:fe::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.35 via Frontend Transport; Mon,
+ 21 Apr 2025 07:38:09 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF000055DC.mail.protection.outlook.com (10.167.245.6) with Microsoft
+ BN2PEPF000055E0.mail.protection.outlook.com (10.167.245.10) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:38:45 +0000
+ 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:38:09 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 21 Apr 2025 02:38:42 -0500
+ 15.1.2507.39; Mon, 21 Apr 2025 02:38:07 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aa83b2ef-1e83-11f0-9eb0-5ba50f476ded
+X-Inumbo-ID: 95daf4f8-1e83-11f0-9eb0-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tWfluo6nysMMOpwDbLL8MWabMVj3oZJwOs/FcIjOzKNISCH+IEGaYFsuySXZcrcMF6VYBzfCzPBocYswpP4+HXjSSvonMFn+CaL7qsY2MisqwxnaMaRAL7LO94YXx93nuWS4r6VpUDgT/kBfM61hiWS6HAi57opZB5CKwgwyVYLKMWmd10ATpNdIzCV6eQmQ7/akkVevXQHnta+HvK1RRZPTfIMHLRo28491wMeRIDn1A8lexrg3qunT2Dn0aNWnVLcLiP/1IM8Zaxvgn3yZRCRSjotY2wk5pL+heKBV8m1QywjNe9kWt3lz4OcgxWBim4S3Ct+2N9mMzkEubFv3Zg==
+ b=rL/tl4vMXt8mdTOIFj8PYSfpuOU3WaSrPjO6IprncEYqiBCzgMs5SsZpCX9xVRpxeN68t0I0xFgfJAveMQSn3Jc+o41TiEfWuvxFtxsWmY2hrbTWUbmiuMmgwZyf/S2Tzq8aCo+QkvQXsBa9RLwMK/EHJIQpPn29tvsaAjb/tJtYINrLl7sPAsSqkbll6+dukv1AkTSXGJ95zCHdgchD1gB0lKrW+2ygJMwBNoPpeKQ7VrW2pSW+2IDIckKNTB3S+aEni0dPlVuzi39pnkumz7uap+tFvFoir31IH5dizTyv9zNJmJyr4CqLZD4+/i/ikC/HEva98WKWC1fTSmX1wg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oYj3NqbBx+0ow/uBVXY339j3B712DE1MxpwDgkbl8mU=;
- b=kokUlbEeK7YosUUK6Hye8ruzMNSSCwF1Lp9JzWBbn13XXX2VwXKyfLLuy/OqcjwRqQQmv8jdjaFLI6rfhUBkXko6C9bNEYyLYYgubQa3nESdM1dGX5f2L5K5dOKWPjlQfG2TMwiMKSM52As4mwwj3KaIyvSWWCNSte9zo334xE3DiBIuj0KpA9+inQ6NBS1GQ5ccciF8XbaYHZqN6t/Exl7Ynzq6PCLdvpiXMdtzXj6NeoGLPElkeuCIz8Bnqxp92n3cgTTfwUlM907P2KF1sMZcHdPePaRATjLYgWAtiytH0jZxNYNg1tsD9ehtzwKGqr/gQdSCTau+G+bmsylPJA==
+ bh=cFdEVvM9KEbTQvEO5iqh931D2sWFuvZKZpuM2Z14a5o=;
+ b=lJVERPWZZoTr0Zcx6F/lJQrzfQ2D5tQFqRQZMk3jyl7WL383CpCG8K3mre3xSBAqAscTCpeLTt1NEc77s8YRhz7dako+aqS5jaIzIviRjgr4YTyxyJTj8DeP/RT+3ShQIot+ZBww27Qu2qShNjhUiXVU89ONtJsI7/OWHcjmcXlmjTchKZx/F7jiJNmpvrp2uw3NZHRBUpyAqgs43QKCXiOnQTm3aqJzqYNChUHbZ1ZyfIGOL2czm82csTfMfgPSLw2hXX7tTRSk+3MjWgEzexiJADUhYKcivbyMLHf51ahECMFB9mUP2zMjv/a4qN/nqea+0PvEm4zcttd4OM4CgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oYj3NqbBx+0ow/uBVXY339j3B712DE1MxpwDgkbl8mU=;
- b=DsG+pF12LOZ+qYY9M0KVT2QCR8yR71r29z8u2WQASSfsQ543fgUYxqnyW5l+wyl/NUXmBB9R6BX60gwm06eLlosNrP/aZb4sfuIHYgsNcpGncr3rTssvfCupfY/qqR7egDM2tUGYMr+aUt2uBm5n8i5r98oULG5w8+pXpqARJVo=
+ bh=cFdEVvM9KEbTQvEO5iqh931D2sWFuvZKZpuM2Z14a5o=;
+ b=Mkrm8kZwMZqwAPy4Xs6fSlXmr7Iz8QdEDQPe9nIXzgnMTb7uGRgfUyJsQeBJvuiy/v9oouVF+xt7E4+dLG/KpQaP3AfwNfC5YiYmVtSv4gPerztQkdE9lwwGb7018RAOR71hL0d+0AmyQ5+LMK3haDFwQUl7LoN1fDmJ8Ej+nKw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,16 +82,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Stefano Stabellini <stefano.stabellini@amd.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
-	Penny Zheng <Penny.Zheng@amd.com>
-Subject: [PATCH v3 20/20] xen/sysctl: wrap around sysctl hypercall
-Date: Mon, 21 Apr 2025 15:37:23 +0800
-Message-ID: <20250421073723.3863060-21-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 09/20] xen/pmstat: consolidate code into pmstat.c
+Date: Mon, 21 Apr 2025 15:37:12 +0800
+Message-ID: <20250421073723.3863060-10-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250421073723.3863060-1-Penny.Zheng@amd.com>
 References: <20250421073723.3863060-1-Penny.Zheng@amd.com>
@@ -103,198 +98,558 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DC:EE_|IA1PR12MB6650:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0bbd242a-5e59-4a35-f68e-08dd80a78c24
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055E0:EE_|CY3PR12MB9632:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0894b769-d5fb-4dc7-e806-08dd80a77684
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?2A+1s7RxTFS988xkHiAILteWDobbnfTEasITg2w9vgncR0bhzhVp5EOBY12L?=
- =?us-ascii?Q?chc5H8aO7IaJ1o/8VgwtZBhOsQsM4ixoBRbg9tXjqgn8M4oF/ZVwS4F+JSQF?=
- =?us-ascii?Q?CcOXVogGb8IzrDmv1yR9B1gScaj9CGHZPIzjFiflTJs8CFjJp3+ra+9omCwj?=
- =?us-ascii?Q?GILjrK80IDMZal6n2XffnCYNQFQgRjkqbBLRLZlDeKJ9FzjzVFQYBz6cwhfp?=
- =?us-ascii?Q?WUsTdJCX8NNS29xzq1iZJA1Or4xunwBXZ9wmZ/v6ImOxKg+ZwxBcsGpy1lnK?=
- =?us-ascii?Q?kLPXoWeSu3FkASMqjvLrVAZALe5xvTf1RAwX9e1NuTeHDZjzXu7i5XiusUN8?=
- =?us-ascii?Q?cZ03ZuHUk664QxARquYLzctiCEIoep71ro3WnalCLDh2x05e/BQn+sCzfFXf?=
- =?us-ascii?Q?IDLKfgshQf3WbsBNPvMIWvJhVX0i01GcdBKxjAI8FcPPBkvO10iY0r7sh4Rv?=
- =?us-ascii?Q?asLIq7/EaWGJwOsp+od1OQD6HJu5/7KIre4h4WqUf3HzMZLDZWfUz1dpJr84?=
- =?us-ascii?Q?hM0UJ0t8+ewvB6dmT/+bz+5b4G5vwt0QgNUp2oB5JasHe+akfD6RZ5XSwGKS?=
- =?us-ascii?Q?hB+M8tBq17OghXfy1Iw/Ueo7cI+V74YXOozw0cPfvM0R78dgcjccB2CNhRX+?=
- =?us-ascii?Q?YPxsMyNLKRi58s+7+yt1BVdUzv3keN0aproPemXZVp4eIWE3Fe9SezzYtSkn?=
- =?us-ascii?Q?nwByPPnrZWCXymEjJ4khvHZMnQmSMbHQ7NlYPCq0qjMuiFVdIDcsc4VnTCXJ?=
- =?us-ascii?Q?Ls3MceFWw5Z4I+nrnoaB/MYCoCspJ99smOP35K4nJA72uWrforKvL4n/j/z4?=
- =?us-ascii?Q?ZJuBo+zKkNwRVERgrdCHquS4OVc7Cb348F5l539YVBYqqRpB04wPYuWIZVy8?=
- =?us-ascii?Q?Eh8PdXY0rj4H0OGP+qMUPLotttnn8aU36VZmCohvI8YBkxVRtnbasFZPt68X?=
- =?us-ascii?Q?kfhFSZdM6xPx0CDizJTA7nSdDihP7Ddvsln8hUzE5QgqS/iQzMiMfyXCYHqs?=
- =?us-ascii?Q?jRRAM85PqAi3IEOapoDoyRRSAo7fAdpYma3Ja8woc5fIx5OY+iT6lV+yNSH6?=
- =?us-ascii?Q?aqloJ0WRKQqhklHVi9OJIDzVqWDFIkfRxkRiz6XBjs7Xhg3ItIfTZtYMebyH?=
- =?us-ascii?Q?ibjFfBLUI+ZjGu6VvRfUqmuD3Bb7zAyc4geqoefZyFLdkZdaW9oqcPZmE0yt?=
- =?us-ascii?Q?yABL/WEgolVTXWHHtP7gg3J7FIUKgWvIuvpRy2Iq0IWFeEi0xiy7Pqrz9tk3?=
- =?us-ascii?Q?zEgcv6itt3pG468ylPWw/VPYUIXfA3ELQ3JWsw1SuVQLlMchbLXmxkf5Rokw?=
- =?us-ascii?Q?v022+2kONXMMemwbJy4iFMQWXDRSGASlO4+qKSJKLOppWJiBf/HoeeKaiUsH?=
- =?us-ascii?Q?3Bstpj5vME05IV6w/bgcCgbYx+WcuiChYyaIzymJ10dhifEmCco4JixfuyV2?=
- =?us-ascii?Q?q2fl7w4La6yFh/jGQb3QYcUubbVdykXCOtnch1AJ6hmRg/98OZde96zu+BNn?=
- =?us-ascii?Q?T3oQWw4bgln3Nqs6ji/VqVpDNSnlrIXTL9ti?=
+	=?us-ascii?Q?RNrRbsxkRWNs5G3Y/uf809jDFFBp+f74k1X/9GOLYCFnHSZN+knOJWWxJFWh?=
+ =?us-ascii?Q?gtH7RmTV8K9W1yHkbUTiCrNazRJstPuHO7xoWqwh1Yp03gA7g3H51gjksOQA?=
+ =?us-ascii?Q?QuZpou2ABuxoygud+HP66b79KeqHNXuLE+bC/OaSMCh0XvW0yrn1OTa6lAJl?=
+ =?us-ascii?Q?e/v1+S/XjFG7nlmvotfhpUHlGFc9T5WrZO8GZHYdRFjL0F4M4AQCcnzLFQdM?=
+ =?us-ascii?Q?GUZ2OHkQYSDicC98wTZOYVFgUp5Qb41brgqNLgEac6kWdgNrB6ZgmeZb4Tao?=
+ =?us-ascii?Q?vGD6HATvyLLjvzVubwXLipVwboCsiiSSMnql3kYDK7OyUYOqqSbqQyAok/eS?=
+ =?us-ascii?Q?z0A1MzrH5FCEDkRdWWosCs9YFVf/youvvLXEd7gczWmfi+YbjzA3j7UhFGZn?=
+ =?us-ascii?Q?1mfzx7jeDSvL7W3shHG1iJRbCtWTNtVESCwX1eKCak95sjaJeQhxNvgZGIHe?=
+ =?us-ascii?Q?mktCrCSnr5Isd7riUsk8DzQMvBK0cYo5bEJV4rxyEpRtF9FFqYeocSLYvVBh?=
+ =?us-ascii?Q?VCfTRrZP14TsKTvnNjFjxkrzVbvNauy3ijPQPhEexx0Ww90eF8qfBsFri+Jh?=
+ =?us-ascii?Q?h5h2Ull/cbWlljfB7celXq3LDAymdzjVgI2b9mzALezor2aecW9oxzAe781a?=
+ =?us-ascii?Q?Z+Iyi7QdHQUMjN6xtW2iAa7ZjwOUQgka6T1vNbDmt4bFWjUwIVJHAyS45cZy?=
+ =?us-ascii?Q?WpHc4H2xHUPd3Gfxa4L8vufwmoCV4Hv574HOYVCKJRXCTpsxrLoPRrrP8FLn?=
+ =?us-ascii?Q?R+dg2k+j3/PtImVuwjZJZmz82alM4hDqhavmeHox8Q6okmRL/Uc4Z1BtsxJo?=
+ =?us-ascii?Q?WxY/oW21SXzEzhwpPpWOBantLunzOz2N2rTWE8gYf2O8lIfU5yYXuxFSIb1Y?=
+ =?us-ascii?Q?kDBXZd8cIMhg7vNsibBa+LCOhWJELk3qITIvz6oo/t32k31K07imipNQX8NK?=
+ =?us-ascii?Q?zSyoyKpuu/nO1tTYoEZNmmMv1uhQK0jBt1gNVY6KNBckBY8gMumd6dXMkuZb?=
+ =?us-ascii?Q?YTgnrZiBIuNRcq2DuPO2NIscxI9nz4nELtzaqKKhcdA2toL/agTRIe9AXPGF?=
+ =?us-ascii?Q?ol48OfnZ6nPeyJeLMUCbxlBbPCWqsis1gBNQTaJ6bckZEMNA/KpT/YJf320Z?=
+ =?us-ascii?Q?v6beS+4z89AJCnt91UmUavVO+kWF5U5L9M1Be+WDUmj+zO/jeaWsMdA+vLrY?=
+ =?us-ascii?Q?apwZ3OeQ1tTkn/ezrlCrrxQw48J/FXYbDMmoLm7Zetr6+Mb4e9WOSxcqq1dx?=
+ =?us-ascii?Q?SnxTnl3orkm6A4FPUCs0swRMEakjqB4LiY3+OK9/CxA2EMRV+3y1XEJljRrI?=
+ =?us-ascii?Q?ZIc/c9iXdmaNlBH8PU0rjY9K8HbgQyFCrgErCo+pevcgXx6ndhiQn7gxPzz3?=
+ =?us-ascii?Q?7KBLKdFELfEsrg7xJSIIsDT4DoWZC5QMkRImjKZIZNo+J7k/6YL4O0aMG74C?=
+ =?us-ascii?Q?vKPv39DvrZc9ZO3ndqs7PYjm1l+CNXTgODsOG4npf2qdeRfjW1ScaiiEPBVe?=
+ =?us-ascii?Q?z8hG/1R1C/OvBhdZi+O1Fr1L+bYvsbmOZPKc?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:38:45.5184
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:38:09.2362
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bbd242a-5e59-4a35-f68e-08dd80a78c24
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0894b769-d5fb-4dc7-e806-08dd80a77684
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055DC.namprd21.prod.outlook.com
+	BN2PEPF000055E0.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6650
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9632
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+We move the following functions into drivers/acpi/pmstat.c, as they
+are all designed for performance statistic:
+- cpufreq_residency_update
+- cpufreq_statistic_reset
+- cpufreq_statistic_update
+- cpufreq_statistic_init
+- cpufreq_statistic_exit
+Consequently, variable "cpufreq_statistic_data" and "cpufreq_statistic_lock"
+shall become static.
+We also move out acpi_set_pdc_bits(), as it is the handler for sub-hypercall
+XEN_PM_PDC, and shall stay with the other handlers together in
+drivers/cpufreq/cpufreq.c.
 
-Wrap sysctl hypercall def and sysctl.o with CONFIG_SYSCTL, and since
-PV_SHIM_EXCLUSIVE needs sorting as a prereq in the future, we move
-them out of PV_SHIM_EXCLUSIVE condition at the same time.
+Various style corrections shall be applied at the same time while moving these
+functions, including:
+- brace for if() and for() shall live at a seperate line
+- add extra space before and after bracket of if() and for()
+- use array notation
+- convert uint32_t into unsigned int
+- convert u32 into uint32_t
 
-We also need to remove all transient "#ifdef CONFIG_SYSCTL"-s in sysctl.c.
-
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
----
-v1 -> v2:
-- remove all transient "#ifdef CONFIG_SYSCTL"-s in sysctl.c
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 v2 -> v3:
-- move out of CONFIG_PV_SHIM_EXCLUSIVE condition
+- brace for if() and for() shall live at a seperate line
+- use array notation
+- convert uint32_t into unsigned int
 ---
- xen/common/Makefile          |  2 +-
- xen/common/sysctl.c          | 12 ------------
- xen/include/hypercall-defs.c |  8 ++++++--
- 3 files changed, 7 insertions(+), 15 deletions(-)
+ xen/drivers/acpi/pmstat.c                 | 202 ++++++++++++++++++----
+ xen/drivers/cpufreq/cpufreq.c             |  31 ++++
+ xen/drivers/cpufreq/utility.c             | 162 -----------------
+ xen/include/acpi/cpufreq/cpufreq.h        |   2 -
+ xen/include/acpi/cpufreq/processor_perf.h |   4 -
+ 5 files changed, 201 insertions(+), 200 deletions(-)
 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 98f0873056..15ab048244 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -49,6 +49,7 @@ obj-y += spinlock.o
- obj-$(CONFIG_STACK_PROTECTOR) += stack-protector.o
- obj-y += stop_machine.o
- obj-y += symbols.o
-+obj-$(CONFIG_SYSCTL) += sysctl.o
- obj-y += tasklet.o
- obj-y += time.o
- obj-y += timer.o
-@@ -70,7 +71,6 @@ obj-$(CONFIG_COMPAT) += $(addprefix compat/,domain.o memory.o multicall.o xlat.o
- ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
- obj-y += domctl.o
- obj-$(CONFIG_VM_EVENT) += monitor.o
--obj-y += sysctl.o
- endif
+diff --git a/xen/drivers/acpi/pmstat.c b/xen/drivers/acpi/pmstat.c
+index c51b9ca358..abfdc45cc2 100644
+--- a/xen/drivers/acpi/pmstat.c
++++ b/xen/drivers/acpi/pmstat.c
+@@ -41,7 +41,176 @@
+ #include <acpi/cpufreq/cpufreq.h>
+ #include <xen/pmstat.h>
  
- extra-y := symbols-dummy.o
-diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index 85a1adacdd..08174a924d 100644
---- a/xen/common/sysctl.c
-+++ b/xen/common/sysctl.c
-@@ -58,7 +58,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+-DEFINE_PER_CPU_READ_MOSTLY(struct pm_px *, cpufreq_statistic_data);
++static DEFINE_PER_CPU_READ_MOSTLY(struct pm_px *, cpufreq_statistic_data);
++
++static DEFINE_PER_CPU(spinlock_t, cpufreq_statistic_lock);
++
++/*********************************************************************
++ *                    Px STATISTIC INFO                              *
++ *********************************************************************/
++
++static void cpufreq_residency_update(unsigned int cpu, uint8_t state)
++{
++    uint64_t now, total_idle_ns;
++    int64_t delta;
++    struct pm_px *pxpt = per_cpu(cpufreq_statistic_data, cpu);
++
++    total_idle_ns = get_cpu_idle_time(cpu);
++    now = NOW();
++
++    delta = (now - pxpt->prev_state_wall) -
++            (total_idle_ns - pxpt->prev_idle_wall);
++
++    if ( likely(delta >= 0) )
++        pxpt->u.pt[state].residency += delta;
++
++    pxpt->prev_state_wall = now;
++    pxpt->prev_idle_wall = total_idle_ns;
++}
++
++void cpufreq_statistic_update(unsigned int cpu, uint8_t from, uint8_t to)
++{
++    struct pm_px *pxpt;
++    const struct processor_pminfo *pmpt = processor_pminfo[cpu];
++    spinlock_t *cpufreq_statistic_lock =
++               &per_cpu(cpufreq_statistic_lock, cpu);
++
++    spin_lock(cpufreq_statistic_lock);
++
++    pxpt = per_cpu(cpufreq_statistic_data, cpu);
++    if ( !pxpt || !pmpt )
++    {
++        spin_unlock(cpufreq_statistic_lock);
++        return;
++    }
++
++    pxpt->u.last = from;
++    pxpt->u.cur = to;
++    pxpt->u.pt[to].count++;
++
++    cpufreq_residency_update(cpu, from);
++
++    pxpt->u.trans_pt[from * pmpt->perf.state_count + to]++;
++
++    spin_unlock(cpufreq_statistic_lock);
++}
++
++int cpufreq_statistic_init(unsigned int cpu)
++{
++    unsigned int i, count;
++    struct pm_px *pxpt;
++    const struct processor_pminfo *pmpt = processor_pminfo[cpu];
++    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
++
++    spin_lock_init(cpufreq_statistic_lock);
++
++    if ( !pmpt )
++        return -EINVAL;
++
++    spin_lock(cpufreq_statistic_lock);
++
++    pxpt = per_cpu(cpufreq_statistic_data, cpu);
++    if ( pxpt )
++    {
++        spin_unlock(cpufreq_statistic_lock);
++        return 0;
++    }
++
++    count = pmpt->perf.state_count;
++
++    pxpt = xzalloc(struct pm_px);
++    if ( !pxpt )
++    {
++        spin_unlock(cpufreq_statistic_lock);
++        return -ENOMEM;
++    }
++    per_cpu(cpufreq_statistic_data, cpu) = pxpt;
++
++    pxpt->u.trans_pt = xzalloc_array(uint64_t, count * count);
++    if ( !pxpt->u.trans_pt )
++    {
++        xfree(pxpt);
++        spin_unlock(cpufreq_statistic_lock);
++        return -ENOMEM;
++    }
++
++    pxpt->u.pt = xzalloc_array(struct pm_px_val, count);
++    if ( !pxpt->u.pt )
++    {
++        xfree(pxpt->u.trans_pt);
++        xfree(pxpt);
++        spin_unlock(cpufreq_statistic_lock);
++        return -ENOMEM;
++    }
++
++    pxpt->u.total = pmpt->perf.state_count;
++    pxpt->u.usable = pmpt->perf.state_count - pmpt->perf.platform_limit;
++
++    for ( i = 0; i < pmpt->perf.state_count; i++ )
++        pxpt->u.pt[i].freq = pmpt->perf.states[i].core_frequency;
++
++    pxpt->prev_state_wall = NOW();
++    pxpt->prev_idle_wall = get_cpu_idle_time(cpu);
++
++    spin_unlock(cpufreq_statistic_lock);
++
++    return 0;
++}
++
++void cpufreq_statistic_exit(unsigned int cpu)
++{
++    struct pm_px *pxpt;
++    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
++
++    spin_lock(cpufreq_statistic_lock);
++
++    pxpt = per_cpu(cpufreq_statistic_data, cpu);
++    if ( !pxpt )
++    {
++        spin_unlock(cpufreq_statistic_lock);
++        return;
++    }
++
++    xfree(pxpt->u.trans_pt);
++    xfree(pxpt->u.pt);
++    xfree(pxpt);
++    per_cpu(cpufreq_statistic_data, cpu) = NULL;
++
++    spin_unlock(cpufreq_statistic_lock);
++}
++
++static void cpufreq_statistic_reset(unsigned int cpu)
++{
++    unsigned int i, j, count;
++    struct pm_px *pxpt;
++    const struct processor_pminfo *pmpt = processor_pminfo[cpu];
++    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
++
++    spin_lock(cpufreq_statistic_lock);
++
++    pxpt = per_cpu(cpufreq_statistic_data, cpu);
++    if ( !pmpt || !pxpt || !pxpt->u.pt || !pxpt->u.trans_pt )
++    {
++        spin_unlock(cpufreq_statistic_lock);
++        return;
++    }
++
++    count = pmpt->perf.state_count;
++
++    for ( i = 0; i < count; i++ )
++    {
++        pxpt->u.pt[i].residency = 0;
++        pxpt->u.pt[i].count = 0;
++
++        for ( j = 0; j < count; j++ )
++            pxpt->u.trans_pt[i * count + j] = 0;
++    }
++
++    pxpt->prev_state_wall = NOW();
++    pxpt->prev_idle_wall = get_cpu_idle_time(cpu);
++
++    spin_unlock(cpufreq_statistic_lock);
++}
  
-     switch ( op->cmd )
-     {
--#ifdef CONFIG_SYSCTL
-     case XEN_SYSCTL_readconsole:
-         ret = xsm_readconsole(XSM_HOOK, op->u.readconsole.clear);
-         if ( ret )
-@@ -66,17 +65,14 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+ /*
+  * Get PM statistic info
+@@ -518,34 +687,3 @@ int do_pm_op(struct xen_sysctl_pm_op *op)
  
-         ret = read_console_ring(&op->u.readconsole);
-         break;
--#endif /* CONFIG_SYSCTL */
+     return ret;
+ }
+-
+-int acpi_set_pdc_bits(uint32_t acpi_id, XEN_GUEST_HANDLE(uint32) pdc)
+-{
+-    u32 bits[3];
+-    int ret;
+-
+-    if ( copy_from_guest(bits, pdc, 2) )
+-        ret = -EFAULT;
+-    else if ( bits[0] != ACPI_PDC_REVISION_ID || !bits[1] )
+-        ret = -EINVAL;
+-    else if ( copy_from_guest_offset(bits + 2, pdc, 2, 1) )
+-        ret = -EFAULT;
+-    else
+-    {
+-        u32 mask = 0;
+-
+-        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_CX )
+-            mask |= ACPI_PDC_C_MASK | ACPI_PDC_SMP_C1PT;
+-        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_PX )
+-            mask |= ACPI_PDC_P_MASK | ACPI_PDC_SMP_C1PT;
+-        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_TX )
+-            mask |= ACPI_PDC_T_MASK | ACPI_PDC_SMP_C1PT;
+-        bits[2] &= (ACPI_PDC_C_MASK | ACPI_PDC_P_MASK | ACPI_PDC_T_MASK |
+-                    ACPI_PDC_SMP_C1PT) & ~mask;
+-        ret = arch_acpi_set_pdc_bits(acpi_id, bits, mask);
+-    }
+-    if ( !ret && __copy_to_guest_offset(pdc, 2, bits + 2, 1) )
+-        ret = -EFAULT;
+-
+-    return ret;
+-}
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index 19e2992335..c2d777e0ec 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -588,6 +588,37 @@ out:
+     return ret;
+ }
  
-     case XEN_SYSCTL_tbuf_op:
-         ret = tb_control(&op->u.tbuf_op);
-         break;
++int acpi_set_pdc_bits(unsigned int acpi_id, XEN_GUEST_HANDLE(uint32) pdc)
++{
++    uint32_t bits[3];
++    int ret;
++
++    if ( copy_from_guest(bits, pdc, 2) )
++        ret = -EFAULT;
++    else if ( bits[0] != ACPI_PDC_REVISION_ID || !bits[1] )
++        ret = -EINVAL;
++    else if ( copy_from_guest_offset(bits + 2, pdc, 2, 1) )
++        ret = -EFAULT;
++    else
++    {
++        uint32_t mask = 0;
++
++        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_CX )
++            mask |= ACPI_PDC_C_MASK | ACPI_PDC_SMP_C1PT;
++        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_PX )
++            mask |= ACPI_PDC_P_MASK | ACPI_PDC_SMP_C1PT;
++        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_TX )
++            mask |= ACPI_PDC_T_MASK | ACPI_PDC_SMP_C1PT;
++        bits[2] &= (ACPI_PDC_C_MASK | ACPI_PDC_P_MASK | ACPI_PDC_T_MASK |
++                    ACPI_PDC_SMP_C1PT) & ~mask;
++        ret = arch_acpi_set_pdc_bits(acpi_id, bits, mask);
++    }
++    if ( !ret && __copy_to_guest_offset(pdc, 2, bits + 2, 1) )
++        ret = -EFAULT;
++
++    return ret;
++}
++
+ static void cpufreq_cmdline_common_para(struct cpufreq_policy *new_policy)
+ {
+     if (usr_max_freq)
+diff --git a/xen/drivers/cpufreq/utility.c b/xen/drivers/cpufreq/utility.c
+index e690a484f1..723045b240 100644
+--- a/xen/drivers/cpufreq/utility.c
++++ b/xen/drivers/cpufreq/utility.c
+@@ -35,168 +35,6 @@ struct cpufreq_driver __read_mostly cpufreq_driver;
+ struct processor_pminfo *__read_mostly processor_pminfo[NR_CPUS];
+ DEFINE_PER_CPU_READ_MOSTLY(struct cpufreq_policy *, cpufreq_cpu_policy);
  
--#ifdef CONFIG_SYSCTL
-     case XEN_SYSCTL_sched_id:
-         op->u.sched_id.sched_id = scheduler_id();
-         break;
--#endif /* CONFIG_SYSCTL */
+-DEFINE_PER_CPU(spinlock_t, cpufreq_statistic_lock);
+-
+-/*********************************************************************
+- *                    Px STATISTIC INFO                              *
+- *********************************************************************/
+-
+-void cpufreq_residency_update(unsigned int cpu, uint8_t state)
+-{
+-    uint64_t now, total_idle_ns;
+-    int64_t delta;
+-    struct pm_px *pxpt = per_cpu(cpufreq_statistic_data, cpu);
+-
+-    total_idle_ns = get_cpu_idle_time(cpu);
+-    now = NOW();
+-
+-    delta = (now - pxpt->prev_state_wall) - 
+-            (total_idle_ns - pxpt->prev_idle_wall);
+-
+-    if ( likely(delta >= 0) )
+-        pxpt->u.pt[state].residency += delta;
+-
+-    pxpt->prev_state_wall = now;
+-    pxpt->prev_idle_wall = total_idle_ns;
+-}
+-
+-void cpufreq_statistic_update(unsigned int cpu, uint8_t from, uint8_t to)
+-{
+-    struct pm_px *pxpt;
+-    struct processor_pminfo *pmpt = processor_pminfo[cpu];
+-    spinlock_t *cpufreq_statistic_lock = 
+-               &per_cpu(cpufreq_statistic_lock, cpu);
+-
+-    spin_lock(cpufreq_statistic_lock);
+-
+-    pxpt = per_cpu(cpufreq_statistic_data, cpu);
+-    if ( !pxpt || !pmpt ) {
+-        spin_unlock(cpufreq_statistic_lock);
+-        return;
+-    }
+-
+-    pxpt->u.last = from;
+-    pxpt->u.cur = to;
+-    pxpt->u.pt[to].count++;
+-
+-    cpufreq_residency_update(cpu, from);
+-
+-    (*(pxpt->u.trans_pt + from * pmpt->perf.state_count + to))++;
+-
+-    spin_unlock(cpufreq_statistic_lock);
+-}
+-
+-int cpufreq_statistic_init(unsigned int cpu)
+-{
+-    uint32_t i, count;
+-    struct pm_px *pxpt;
+-    const struct processor_pminfo *pmpt = processor_pminfo[cpu];
+-    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
+-
+-    spin_lock_init(cpufreq_statistic_lock);
+-
+-    if ( !pmpt )
+-        return -EINVAL;
+-
+-    spin_lock(cpufreq_statistic_lock);
+-
+-    pxpt = per_cpu(cpufreq_statistic_data, cpu);
+-    if ( pxpt ) {
+-        spin_unlock(cpufreq_statistic_lock);
+-        return 0;
+-    }
+-
+-    count = pmpt->perf.state_count;
+-
+-    pxpt = xzalloc(struct pm_px);
+-    if ( !pxpt ) {
+-        spin_unlock(cpufreq_statistic_lock);
+-        return -ENOMEM;
+-    }
+-    per_cpu(cpufreq_statistic_data, cpu) = pxpt;
+-
+-    pxpt->u.trans_pt = xzalloc_array(uint64_t, count * count);
+-    if (!pxpt->u.trans_pt) {
+-        xfree(pxpt);
+-        spin_unlock(cpufreq_statistic_lock);
+-        return -ENOMEM;
+-    }
+-
+-    pxpt->u.pt = xzalloc_array(struct pm_px_val, count);
+-    if (!pxpt->u.pt) {
+-        xfree(pxpt->u.trans_pt);
+-        xfree(pxpt);
+-        spin_unlock(cpufreq_statistic_lock);
+-        return -ENOMEM;
+-    }
+-
+-    pxpt->u.total = pmpt->perf.state_count;
+-    pxpt->u.usable = pmpt->perf.state_count - pmpt->perf.platform_limit;
+-
+-    for (i=0; i < pmpt->perf.state_count; i++)
+-        pxpt->u.pt[i].freq = pmpt->perf.states[i].core_frequency;
+-
+-    pxpt->prev_state_wall = NOW();
+-    pxpt->prev_idle_wall = get_cpu_idle_time(cpu);
+-
+-    spin_unlock(cpufreq_statistic_lock);
+-
+-    return 0;
+-}
+-
+-void cpufreq_statistic_exit(unsigned int cpu)
+-{
+-    struct pm_px *pxpt;
+-    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
+-
+-    spin_lock(cpufreq_statistic_lock);
+-
+-    pxpt = per_cpu(cpufreq_statistic_data, cpu);
+-    if (!pxpt) {
+-        spin_unlock(cpufreq_statistic_lock);
+-        return;
+-    }
+-
+-    xfree(pxpt->u.trans_pt);
+-    xfree(pxpt->u.pt);
+-    xfree(pxpt);
+-    per_cpu(cpufreq_statistic_data, cpu) = NULL;
+-
+-    spin_unlock(cpufreq_statistic_lock);
+-}
+-
+-void cpufreq_statistic_reset(unsigned int cpu)
+-{
+-    uint32_t i, j, count;
+-    struct pm_px *pxpt;
+-    const struct processor_pminfo *pmpt = processor_pminfo[cpu];
+-    spinlock_t *cpufreq_statistic_lock = &per_cpu(cpufreq_statistic_lock, cpu);
+-
+-    spin_lock(cpufreq_statistic_lock);
+-
+-    pxpt = per_cpu(cpufreq_statistic_data, cpu);
+-    if ( !pmpt || !pxpt || !pxpt->u.pt || !pxpt->u.trans_pt ) {
+-        spin_unlock(cpufreq_statistic_lock);
+-        return;
+-    }
+-
+-    count = pmpt->perf.state_count;
+-
+-    for (i=0; i < count; i++) {
+-        pxpt->u.pt[i].residency = 0;
+-        pxpt->u.pt[i].count = 0;
+-
+-        for (j=0; j < count; j++)
+-            *(pxpt->u.trans_pt + i*count + j) = 0;
+-    }
+-
+-    pxpt->prev_state_wall = NOW();
+-    pxpt->prev_idle_wall = get_cpu_idle_time(cpu);
+-
+-    spin_unlock(cpufreq_statistic_lock);
+-}
+-
+-
+ /*********************************************************************
+  *                   FREQUENCY TABLE HELPERS                         *
+  *********************************************************************/
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index a3c84143af..241117a9af 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -20,8 +20,6 @@
  
-     case XEN_SYSCTL_getdomaininfolist:
-     { 
-@@ -117,7 +113,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-     }
-     break;
+ #include "processor_perf.h"
  
--#ifdef CONFIG_SYSCTL
- #ifdef CONFIG_PERF_COUNTERS
-     case XEN_SYSCTL_perfc_op:
-         ret = perfc_control(&op->u.perfc_op);
-@@ -129,7 +124,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         ret = spinlock_profile_control(&op->u.lockprof_op);
-         break;
- #endif
--#endif /* CONFIG_SYSCTL */
+-DECLARE_PER_CPU(spinlock_t, cpufreq_statistic_lock);
+-
+ extern bool cpufreq_verbose;
  
-     case XEN_SYSCTL_debug_keys:
-     {
-@@ -191,7 +185,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         break;
- #endif /* CONFIG_PM_OP */
+ enum cpufreq_xen_opt {
+diff --git a/xen/include/acpi/cpufreq/processor_perf.h b/xen/include/acpi/cpufreq/processor_perf.h
+index 301104e16f..6de43f8602 100644
+--- a/xen/include/acpi/cpufreq/processor_perf.h
++++ b/xen/include/acpi/cpufreq/processor_perf.h
+@@ -9,11 +9,9 @@
  
--#ifdef CONFIG_SYSCTL
-     case XEN_SYSCTL_page_offline_op:
-     {
-         uint32_t *status, *ptr;
-@@ -302,7 +295,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-             ret = -EFAULT;
-     }
-     break;
--#endif /* CONFIG_SYSCTL */
+ unsigned int powernow_register_driver(void);
+ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag);
+-void cpufreq_residency_update(unsigned int cpu, uint8_t state);
+ void cpufreq_statistic_update(unsigned int cpu, uint8_t from, uint8_t to);
+ int  cpufreq_statistic_init(unsigned int cpu);
+ void cpufreq_statistic_exit(unsigned int cpu);
+-void cpufreq_statistic_reset(unsigned int cpu);
  
-     case XEN_SYSCTL_numainfo:
-     {
-@@ -493,11 +485,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         break;
+ int  cpufreq_limit_change(unsigned int cpu);
  
-     default:
--#ifdef CONFIG_SYSCTL
-         ret = arch_do_sysctl(op, u_sysctl);
--#else
--        ret = -EOPNOTSUPP;
--#endif
-         copyback = 0;
-         break;
-     }
-diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
-index 7720a29ade..c1081d87a2 100644
---- a/xen/include/hypercall-defs.c
-+++ b/xen/include/hypercall-defs.c
-@@ -194,8 +194,10 @@ kexec_op(unsigned long op, void *uarg)
- #ifdef CONFIG_IOREQ_SERVER
- dm_op(domid_t domid, unsigned int nr_bufs, xen_dm_op_buf_t *bufs)
- #endif
--#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+#ifdef CONFIG_SYSCTL
- sysctl(xen_sysctl_t *u_sysctl)
-+#endif
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
- domctl(xen_domctl_t *u_domctl)
- paging_domctl_cont(xen_domctl_t *u_domctl)
- platform_op(xen_platform_op_t *u_xenpf_op)
-@@ -273,8 +275,10 @@ physdev_op                         compat   do       hvm      hvm      do_arm
- #ifdef CONFIG_HVM
- hvm_op                             do       do       do       do       do
- #endif
--#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+#ifdef CONFIG_SYSCTL
- sysctl                             do       do       do       do       do
-+#endif
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
- domctl                             do       do       do       do       do
- #endif
- #ifdef CONFIG_KEXEC
+@@ -56,7 +54,5 @@ struct pm_px {
+     uint64_t prev_idle_wall;
+ };
+ 
+-DECLARE_PER_CPU(struct pm_px *, cpufreq_statistic_data);
+-
+ int cpufreq_cpu_init(unsigned int cpu);
+ #endif /* __XEN_PROCESSOR_PM_H__ */
 -- 
 2.34.1
 
