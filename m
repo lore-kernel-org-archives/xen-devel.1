@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D7BC369D2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987E7C3DA4A
 	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:38:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961003.1352654 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.960996.1352603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6ljE-0000mM-Pf; Mon, 21 Apr 2025 07:38:08 +0000
+	id 1u6lj0-0007mQ-7C; Mon, 21 Apr 2025 07:37:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961003.1352654; Mon, 21 Apr 2025 07:38:08 +0000
+Received: by outflank-mailman (output) from mailman id 960996.1352603; Mon, 21 Apr 2025 07:37:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6ljE-0000m2-Kg; Mon, 21 Apr 2025 07:38:08 +0000
-Received: by outflank-mailman (input) for mailman id 961003;
- Mon, 21 Apr 2025 07:38:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u6lj0-0007mJ-3q; Mon, 21 Apr 2025 07:37:54 +0000
+Received: by outflank-mailman (input) for mailman id 960996;
+ Mon, 21 Apr 2025 07:37:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kh51=XH=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u6ljD-0000OX-EL
- for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:07 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20618.outbound.protection.outlook.com
- [2a01:111:f403:240a::618])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8ec3fd21-1e83-11f0-9ffb-bf95429c2676;
- Mon, 21 Apr 2025 09:38:05 +0200 (CEST)
-Received: from BL1P221CA0044.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:5b5::16)
- by DS0PR12MB7728.namprd12.prod.outlook.com (2603:10b6:8:13a::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.34; Mon, 21 Apr
- 2025 07:37:58 +0000
-Received: from BN2PEPF000055E1.namprd21.prod.outlook.com
- (2603:10b6:208:5b5:cafe::5c) by BL1P221CA0044.outlook.office365.com
- (2603:10b6:208:5b5::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.36 via Frontend Transport; Mon,
- 21 Apr 2025 07:37:58 +0000
+ id 1u6liy-0007m8-Hd
+ for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:37:52 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20606.outbound.protection.outlook.com
+ [2a01:111:f403:2414::606])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 86510256-1e83-11f0-9eb0-5ba50f476ded;
+ Mon, 21 Apr 2025 09:37:50 +0200 (CEST)
+Received: from MN2PR04CA0021.namprd04.prod.outlook.com (2603:10b6:208:d4::34)
+ by SA0PR12MB7462.namprd12.prod.outlook.com (2603:10b6:806:24b::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.25; Mon, 21 Apr
+ 2025 07:37:45 +0000
+Received: from BN2PEPF000055DE.namprd21.prod.outlook.com
+ (2603:10b6:208:d4:cafe::2b) by MN2PR04CA0021.outlook.office365.com
+ (2603:10b6:208:d4::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.31 via Frontend Transport; Mon,
+ 21 Apr 2025 07:37:45 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF000055E1.mail.protection.outlook.com (10.167.245.11) with Microsoft
+ BN2PEPF000055DE.mail.protection.outlook.com (10.167.245.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8699.1 via Frontend Transport; Mon, 21 Apr 2025 07:37:58 +0000
+ 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:37:45 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 21 Apr 2025 02:37:55 -0500
+ 15.1.2507.39; Mon, 21 Apr 2025 02:37:39 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ec3fd21-1e83-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 86510256-1e83-11f0-9eb0-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lYe3Nu3Pe/Y/iGxyZfhfQUPpneQ+sjrPWdpKOhkqfRiACYdGAthQxo61yAIvXv3z86hpuVmi/YSPE3FucVP2BCsTYCEPbM35801+8uVmD7srUgl5pACg5kE2IMNkWRi+HkGFgu0c/J5U8bBe5gIR0rQfrTGMJK6qNbeUUoS38K6sK5gvwA9t3T9bOS75BaoxHpfpg9GfJWeph3Baea7mm+UKlFNaUkKugopzILGifHwJpFLJJGdY06T2eoIkPpSRqDEvP2IiMEl07bwkxZ/O3c1WSFq1jmWqghHiLTo3DShnwhws/V1ZA+ZGH86NVvCTYBeYPGBXkhVN1pf0CDYmXw==
+ b=gOHTQise1nwiqhQ03qCfCL8J+g1sHQloVC+E9+JZZhtK3+IQQFhmHnFYGkPUel571kbwiVkzothrxVFqaRIr7J4v8VSpBmT+q2rkrZNZ07Cja0KBe5hoXCIagDQ0WpvxbjkPjUCmX4GYmSUsIuuR25qzx725G8BXwstmvi7XcEQ6HsgaVhhBs8ONDegxyNEF79aWuXF5xC+vZk76NOVficHGCsht9xcvS1KSnGfgdfWd04DQtqogNZ4VQ5jkn1QaTmPOtxjSfFCAuw/qdi9bg6premFNMHTshNXjCsWreiqYrvIMDcQqx/vdPXX1NpTqU51WODVPdHBLhiq/V1BnNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hilgACvHl4Syp1ch7k42+lgpwN4ZWXDPUPo+Y2KEs6A=;
- b=lpsNgkEF6UVj9M9Z2RC6XGPn143jLiVxSb0Xez8jFSQAAxOOFXTUYJT/FNk0aO7bZiGwYDwn+Qf9pkZEOlNZgQjkSaTAZuUNXGJ3uwS7RWZFqQUwYtOBjH7mP+uyLp+ji8eLmubVlBFw6h0cLuqvsSFfJFXtvxlQqVzedVNOf8Iz4H4WgBB9O8CDiGoSLBco6RIrmlRKgrpZzwQw5qBTOg51Y27kvUqkABhLlxM4jrEiCcybrq8NB4Y1s3izHC4uE+0UR9W9B2/Y4ReyM6Dxitre8dph+HlEDUmxK1bIHIIJA+HLeiQ/jBtTfutNjIYbGS+i8rX8gzlltKLictseQA==
+ bh=xHwtQoUXOLe8JsiTb5ocVLRP+W5abyHJLBWNclqbEuw=;
+ b=rxrRGeweSOfkhU+HMMjgTdXlhEPg6Tg1cYQWdpVlA5i9OzgTNKlC/4R5maRNQAgonsk6n3ubi+0m5E04Ho+NFpYb5AYn/hBSCr+xICRwgKKti7hDd7dkcZN/vkofc88u7eOZq2TUVbi3cz2ML/J8MGdlL7yw84dvxqV+Ussvpz2l35JzmcAj0ZHsRGKpi33BCIyxN78ehfdYdBQJ1q5IDmwRnrcRO1JUc7CCI2FJwRjxDsy/CJRKVdQWkLs2e1ZHh3mlvQZpqW+VrgXRzbKwEV7ubich6UgxiUTsOoQXj2QuzoR2iB+vMHDcvRaqB14kyfcU3JoeGSj1rR6cb1yhGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hilgACvHl4Syp1ch7k42+lgpwN4ZWXDPUPo+Y2KEs6A=;
- b=aGfUGUUyZoU9YMKqoWMfDi7SSlRu0BiqfgnIoqAVjwD4hzQBPMYB3zrNt5CgZN07CCSnNGdRgLTYZcsun9xhvDvuxAEUi5cT+dXpe/VvKIB0KpcHDA8FsZPLWi2DR1ZoSjInUK+E3qET/NMVOMbW+5oBjdRbJAAdo68+cIvO094=
+ bh=xHwtQoUXOLe8JsiTb5ocVLRP+W5abyHJLBWNclqbEuw=;
+ b=k043BRLySF+Mkv6SuwGTu7mGkRk8F3zdLU0ZLKx2w2Hu6yqo6QL23oM2sc6BwR4iYI4KbyXiVHF/d9zbh7Bk+ft00gn1Jsu4VeXm4xubR3KvEYDxvBcFU/io7uUGfmVIwzQmajtMMATAnDceWmIHwHKBj1aZFcOq8+SYnilWWtY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -81,18 +81,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 05/20] xen/sysctl: make CONFIG_TRACEBUFFER depend on CONFIG_SYSCTL
-Date: Mon, 21 Apr 2025 15:37:08 +0800
-Message-ID: <20250421073723.3863060-6-Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>, <xen-devel@dornerworks.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Daniel
+ P. Smith" <dpsmith@apertussolutions.com>, Dario Faggioli
+	<dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap
+	<gwd@xenproject.org>, Nathan Studer <nathan.studer@dornerworks.com>, "Stewart
+ Hildebrand" <stewart@stew.dk>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, "Connor
+ Davis" <connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 00/20] xen: introduce CONFIG_SYSCTL
+Date: Mon, 21 Apr 2025 15:37:03 +0800
+Message-ID: <20250421073723.3863060-1-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250421073723.3863060-1-Penny.Zheng@amd.com>
-References: <20250421073723.3863060-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -101,74 +106,142 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055E1:EE_|DS0PR12MB7728:EE_
-X-MS-Office365-Filtering-Correlation-Id: a9840dbe-20a1-450e-4ff5-08dd80a76ffd
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DE:EE_|SA0PR12MB7462:EE_
+X-MS-Office365-Filtering-Correlation-Id: aeaeeb18-cb7d-4801-1207-08dd80a76824
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
+	BCL:0;ARA:13230040|376014|7416014|82310400026|1800799024|36860700013|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?7rbKJpHLB2raXc4o/xd4oenxGdI1LzvweJGCvZHQwKFDyOVeo7+lAqkO6RXi?=
- =?us-ascii?Q?0JzgI8nf7+dCu7tVcL/Qyo+dQ3crRqy5nu3pyFMbQ0TL/XC0hOezfe6n53iv?=
- =?us-ascii?Q?TxbAvtO2kjZ6MNSM5O+YAGNT1PVDewqDCZOGtz+VkZhbdy4zgaPUpwNm7XZb?=
- =?us-ascii?Q?D9osFqvTPouIHSEG7Fgz3Mmu7P+f/xnhqU1uWxh03gBHz8Lb4Vf0uP/DZAb5?=
- =?us-ascii?Q?JSovbWbCxL+zqf/2WwKHB0vKcE9cqeQ6E96c7069paZl5P3oIwT6vCxyE2Wu?=
- =?us-ascii?Q?2xaJLsgecDFMlGLN/PAuSPjIOuKkJA3A4KWW5+VnKGh0cNjNGuUQoq6FkgR7?=
- =?us-ascii?Q?v834ClhJ1A05ogAjd7Bif4rd4YEjmB6e1RQCeN8KU+ix/niDSwk0MdafeVHD?=
- =?us-ascii?Q?WFn5HIlGZKxDG79IGSR5IwStYSvrTcfHDmrChlJ66PMy327PMH+zPwism2nV?=
- =?us-ascii?Q?GY/hun1VrcKWBY6xZvguiBFZ0m6momtKm/+rqWjqrBpEm2yBePdonfJQdebu?=
- =?us-ascii?Q?RZpYaMkLcAhrgQITg8KQi83JHkPWsEyKfGnhvmAOrvs5sLioDiSfEtoH6HNv?=
- =?us-ascii?Q?vpu3aoiiK/dotbJ0L59PlYMOqhCrXoQokkaPO3pj6MKnvsOxNVlnIB3/5rqo?=
- =?us-ascii?Q?Kq0HimqNk/6y33JGn5SUTb5uumhJK8/pF97N0U7pzvH3jaE6iArk0C6n2x5F?=
- =?us-ascii?Q?EHyeEJpPYvzQo7idkQDZ0pOKaP8gH9mB1oJD3iB7F5TQu3DtDoweFeL4upZ0?=
- =?us-ascii?Q?i/wGl5ybAJYMIRM0qMr7RY1BnQLBwEmODcLk6aMZitwkx36VAiHkCR5OW2wN?=
- =?us-ascii?Q?ZSc6gHeZjPwcsFidblzbR+q/BNrGGlr4YQC3keCzaXMucj2ZvBkQCvMjiJQJ?=
- =?us-ascii?Q?cOzKXc487UkZyL1pAUYmsQ0CPLsKQ3IDKtcHFakrSbpFDdSyRiz9cS22/qzU?=
- =?us-ascii?Q?sO8j557OR25tBKJLdLSXawh/Vy7f2bgcCaFVBZa5N0LZq+n9cGwOd36oUzd9?=
- =?us-ascii?Q?YLwC0WWN2ltuUzRRv2/v5w1zn1BFMJpjF+dT8lvldr83eXlKRAB4ANZKeeHf?=
- =?us-ascii?Q?TSeux80tPCHZCMMwnlS1v9CuFmGbGamDJwPCCyYU8HqGLlf0dNe+XH0/+cBl?=
- =?us-ascii?Q?E/ns/otIswPEv6dVk9DSF23yj3/u66IGDA49lcFcu2iuaUlYFZx+37g9jDQY?=
- =?us-ascii?Q?Mux0r/SWks9syeJEqbXBoNDZSkBB+iOERtOqwqldKAp4u8Vs/1F8GMRPPo5Q?=
- =?us-ascii?Q?JjRt4dkASzWe1xTvNgNYN/MRVwLdAp1id9nkg3LeOrHSRt4N3FJkQA8sz8F4?=
- =?us-ascii?Q?VnTRNvf0XI1ARgRopx721U8zAaKXbssw9epahipHiz+Tf23B4EJtejpHJQC+?=
- =?us-ascii?Q?1vokTeICxd/EBKOvJ5KVEb5zgo/cIBEcdGxvB8qh3s9UaRCeosG+965Q+hZy?=
- =?us-ascii?Q?fVgSD60zmsLo9QLSwEuIAssHhlamIbJxHsOiCAz/NNPQRNiI51rRDxAcjvpM?=
- =?us-ascii?Q?ae4NUPKwUhmS2zg=3D?=
+	=?us-ascii?Q?B4G/rRsCNrNs6GWAFOIB4XFVL/9mhr6XudDfpMgsgnO132mZHAq+e4WHSF0Y?=
+ =?us-ascii?Q?NjhDZdB7BgV+j3pUyHKNlaApvCtZFYSojd7erre+yB5YuzYm6sZzbRjqozP+?=
+ =?us-ascii?Q?csxfIsDOgEM49pSW9ibLzFL5jxr96enLWw5JNTk79kGySBO+k//4zcEeqMaY?=
+ =?us-ascii?Q?kh64VRdAMLVPklkgkayTCHezxZQUproLi8ODFEamArfLOVWnlBIYzQ06Rnsg?=
+ =?us-ascii?Q?WqRmnylPl4uZBo8nHgCRN6QzojP9vQdIXbwxVGd7UA4Spr6/ZXX9pCKQ+T0w?=
+ =?us-ascii?Q?ALMkfCiM1cw3tSFFKTV1DXqai1sqYmGQFijGDT+xFkL4bcDTILDzn7gS7rSi?=
+ =?us-ascii?Q?IMG1kPXOtxxLLxiuEx4eRoAVMZgGwnvDDqv15dKCKSwDNhwWYhtL/txxfIa3?=
+ =?us-ascii?Q?2tOHznIIqT34y7ecnG7qvfL3662g9NjHbDxpqo3jCVedWMH17nS+a7KcXdQP?=
+ =?us-ascii?Q?dHSlvVbdIBfVV5ICrFJkRqCAP4Xli1X/cveR1xCdUOJop/e44tWsJrL5cCdQ?=
+ =?us-ascii?Q?6qWFNq6DtYFoWTy1Pdqo0gG50w2g8sx87ULgIYeFtk7FBMlTo18/Uo7ZcEZ6?=
+ =?us-ascii?Q?hsmv//X1dg0d4/ZdQ8q4PQJ3QN5PKdE9UAcEuAt9pAJTU1bHHvTgJCp+elQG?=
+ =?us-ascii?Q?pAmGF+BoxeSKjV7FfzgcLFdhUexYveDu+r5a/at5KpFWF2CCJWlSMOJWrREq?=
+ =?us-ascii?Q?8JuEkwl0DZBlQL6voG6lOjmC04G1/T9/uAFFsdBS7Xg86wrY7dbyV5ax1uVA?=
+ =?us-ascii?Q?fs7et1BxG9P4GOv//DQC12WLZm5gY64tIukAOLMjwUzDI1tgduDfYq+u2ki4?=
+ =?us-ascii?Q?AYiRyzmBbXP6DjRmGYAUISjlhKJaDbfzaa6gh+T6YhytCpw/4/BM/4lRhH7Y?=
+ =?us-ascii?Q?h3PNgqSa64BVYY84XS3nEyyRLGDgPi9u2GP68wuorS0hXfz1HH7YOw2FCTeC?=
+ =?us-ascii?Q?eyp2L30etFJjSvIg5kCsAd2nGlXMI8e7Si5uLrnpfrfzlALj7pLZCWdKkjTJ?=
+ =?us-ascii?Q?pNyfc3lSzCmt2OWOt0PQVwVNo6rTycpWVPTccM4D7fMWP/sfNVECi38kk1de?=
+ =?us-ascii?Q?Njo2N+VlAu7zpjHIZQOWSpo22MGybQf0sUV+MdejqX6QdH1zMQhNWqEtDWQ3?=
+ =?us-ascii?Q?GyNwA7cS6kD1HF48JRqzRVtSJW/J2mIh5YntARf7vfoSvyx+8illCJ7jzdh8?=
+ =?us-ascii?Q?ULFeav+BUSz46P0ICXO3lrCBmOY2O8nPoCaSoBM1AqS/ktH9nI4Tor+Gmru8?=
+ =?us-ascii?Q?sA7yLWj7e1vGzkIrW1VjRtEvXvDYnKE2JivvlL3jUpbWK2r1PBJvcKJKwCMs?=
+ =?us-ascii?Q?JXwy8Rbdw+pzTFWJD865peEbKChd5YFiopRUbXFBgw3L/BllqBOZGhB2i7JA?=
+ =?us-ascii?Q?venhILn5P5Nauqop+EelOlRrRv2Z7g/rZQ64V4maxVQhwz6BeG3O4MjNQVrU?=
+ =?us-ascii?Q?bAgQKKFnzIGhZSRcsPJiNbZgTY5FUgPSHocKw5jdeThyUZg1OiaUHnTdgCmS?=
+ =?us-ascii?Q?EXUvWqIQApUKEdXwbjM//eS4BgK68FewNBUO?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(82310400026)(1800799024)(36860700013)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:37:58.2823
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:37:45.1151
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9840dbe-20a1-450e-4ff5-08dd80a76ffd
+X-MS-Exchange-CrossTenant-Network-Message-Id: aeaeeb18-cb7d-4801-1207-08dd80a76824
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055E1.namprd21.prod.outlook.com
+	BN2PEPF000055DE.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7728
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB7462
 
-Users could only access trace buffers via hypercal XEN_SYSCTL_tbuf_op,
-so this commit makes CONFIG_TRACEBUFFER depend on CONFIG_SYSCTL
+It can be beneficial for some dom0less systems to further reduce Xen footprint
+and disable some hypercalls handling code, which may not to be used & required
+in such systems. Each hypercall has a separate option to keep configuration
+flexible.
 
-Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
- xen/common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Options to disable hypercalls:
+- sysctl
+- domctl
+- hvm
+- physdev
+- platform
 
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index d89e9ede77..9cccc37232 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -549,6 +549,7 @@ config DTB_FILE
- config TRACEBUFFER
- 	bool "Enable tracing infrastructure" if EXPERT
- 	default y
-+	depends on SYSCTL
- 	help
- 	  Enable tracing infrastructure and pre-defined tracepoints within Xen.
- 	  This will allow live information about Xen's execution and performance
+This patch serie is only focusing on introducing CONFIG_SYSCTL. Different
+options will be covered in different patch serie.
+
+Features, like LIVEPATCH, Overlay DTB, which fully rely on sysctl op, are also
+being wrapped with proper CONFIG_SYSCTL, to reduce Xen footprint as much as
+possible.
+
+It is based on Stefano Stabellini's commit "xen: introduce kconfig options to
+disable hypercalls"(
+https://lore.kernel.org/xen-devel/20241219092917.3006174-1-Sergiy_Kibrik@epam.com)
+
+Penny Zheng (18):
+  xen/x86: remove "depends on !PV_SHIM_EXCLUSIVE"
+  xen/xsm: wrap around xsm_sysctl with CONFIG_SYSCTL
+  xen/sysctl: wrap around XEN_SYSCTL_readconsole
+  xen/sysctl: make CONFIG_TRACEBUFFER depend on CONFIG_SYSCTL
+  xen/sysctl: wrap around XEN_SYSCTL_sched_id
+  xen/sysctl: wrap around XEN_SYSCTL_perfc_op
+  xen/sysctl: wrap around XEN_SYSCTL_lockprof_op
+  xen/pmstat: consolidate code into pmstat.c
+  xen/pmstat: introduce CONFIG_PM_OP
+  xen/sysctl: introduce CONFIG_PM_STATS
+  xen/sysctl: wrap around XEN_SYSCTL_page_offline_op
+  xen/sysctl: wrap around XEN_SYSCTL_cpupool_op
+  xen/sysctl: wrap around XEN_SYSCTL_scheduler_op
+  xen: make avail_domheap_pages() inlined into get_outstanding_claims()
+  xen/sysctl: wrap around XEN_SYSCTL_physinfo
+  xen/sysctl: make CONFIG_COVERAGE depend on CONFIG_SYSCTL
+  xen/sysctl: make CONFIG_LIVEPATCH depend on CONFIG_SYSCTL
+  xen/sysctl: wrap around arch-specific arch_do_sysctl
+
+Stefano Stabellini (2):
+  xen: introduce CONFIG_SYSCTL
+  xen/sysctl: wrap around sysctl hypercall
+
+ xen/Kconfig.debug                            |   2 +-
+ xen/arch/arm/Kconfig                         |   1 +
+ xen/arch/arm/Makefile                        |   2 +-
+ xen/arch/riscv/stubs.c                       |   2 +
+ xen/arch/x86/Kconfig                         |   4 -
+ xen/arch/x86/Makefile                        |   2 +-
+ xen/arch/x86/acpi/cpu_idle.c                 |   2 +
+ xen/arch/x86/acpi/cpufreq/hwp.c              |   6 +
+ xen/arch/x86/acpi/cpufreq/powernow.c         |   4 +
+ xen/arch/x86/hvm/Kconfig                     |   1 -
+ xen/arch/x86/psr.c                           |  18 +
+ xen/common/Kconfig                           |  29 +-
+ xen/common/Makefile                          |   2 +-
+ xen/common/page_alloc.c                      |  55 +-
+ xen/common/perfc.c                           |   2 +
+ xen/common/sched/arinc653.c                  |   6 +
+ xen/common/sched/core.c                      |   4 +
+ xen/common/sched/cpupool.c                   |   8 +
+ xen/common/sched/credit.c                    |   4 +
+ xen/common/sched/credit2.c                   |   4 +
+ xen/common/sched/private.h                   |   4 +
+ xen/common/spinlock.c                        |   2 +
+ xen/common/sysctl.c                          |   7 +-
+ xen/drivers/acpi/Makefile                    |   3 +-
+ xen/drivers/acpi/pm_op.c                     | 409 ++++++++++++++
+ xen/drivers/acpi/pmstat.c                    | 559 ++++++-------------
+ xen/drivers/char/console.c                   |   2 +
+ xen/drivers/cpufreq/cpufreq.c                |  31 +
+ xen/drivers/cpufreq/cpufreq_misc_governors.c |   2 +
+ xen/drivers/cpufreq/cpufreq_ondemand.c       |   2 +
+ xen/drivers/cpufreq/utility.c                | 203 -------
+ xen/drivers/video/Kconfig                    |   4 +-
+ xen/include/acpi/cpufreq/cpufreq.h           |   5 -
+ xen/include/acpi/cpufreq/processor_perf.h    |  14 +-
+ xen/include/hypercall-defs.c                 |   8 +-
+ xen/include/xen/mm.h                         |   1 -
+ xen/include/xsm/xsm.h                        |  18 +
+ xen/xsm/dummy.c                              |   6 +
+ xen/xsm/flask/hooks.c                        |  14 +
+ 39 files changed, 804 insertions(+), 648 deletions(-)
+ create mode 100644 xen/drivers/acpi/pm_op.c
+
 -- 
 2.34.1
 
