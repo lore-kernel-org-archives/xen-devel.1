@@ -4,49 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C01C369D5
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:42:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961167.1352793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB38C369AB
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 17:54:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961379.1352813 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lmp-0006Ir-3I; Mon, 21 Apr 2025 07:41:51 +0000
+	id 1u6vLR-0007wy-W6; Mon, 21 Apr 2025 17:54:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961167.1352793; Mon, 21 Apr 2025 07:41:51 +0000
+Received: by outflank-mailman (output) from mailman id 961379.1352813; Mon, 21 Apr 2025 17:54:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lmp-0006Ih-0P; Mon, 21 Apr 2025 07:41:51 +0000
-Received: by outflank-mailman (input) for mailman id 961167;
- Mon, 21 Apr 2025 07:41:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u6vLR-0007wq-S9; Mon, 21 Apr 2025 17:54:13 +0000
+Received: by outflank-mailman (input) for mailman id 961379;
+ Mon, 21 Apr 2025 17:54:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Kh51=XH=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u6ljk-0007m8-A9
- for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:40 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20630.outbound.protection.outlook.com
- [2a01:111:f403:2414::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a340b8fe-1e83-11f0-9eb0-5ba50f476ded;
- Mon, 21 Apr 2025 09:38:38 +0200 (CEST)
-Received: from BN9PR03CA0234.namprd03.prod.outlook.com (2603:10b6:408:f8::29)
- by CY8PR12MB7362.namprd12.prod.outlook.com (2603:10b6:930:52::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.33; Mon, 21 Apr
- 2025 07:38:35 +0000
-Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
- (2603:10b6:408:f8:cafe::d5) by BN9PR03CA0234.outlook.office365.com
- (2603:10b6:408:f8::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.34 via Frontend Transport; Mon,
- 21 Apr 2025 07:38:35 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:38:34 +0000
-Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
- SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 21 Apr 2025 02:38:32 -0500
+ <SRS0=k4Vt=XH=g.ecc.u-tokyo.ac.jp=ishiir@srs-se1.protection.inumbo.net>)
+ id 1u6vLP-0007wk-DR
+ for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 17:54:12 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9b836f0b-1ed9-11f0-9ffb-bf95429c2676;
+ Mon, 21 Apr 2025 19:54:01 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5deb6482cso9386928a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Apr 2025 10:54:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,122 +42,244 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a340b8fe-1e83-11f0-9eb0-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YtT4ELWSd9huXwW75KTVR22+C9q+hRzjGCeuP0PPXbMSrUz4894wXOosK4OM0SXP6gscuH7t2EWDkl0s1h+SZ12C4UBciHiouH5WZtt/whojNyBUT8ZL9i0lDaDAR9vj4O5xu1mzmFjrDXh6pWJw7xJFRreeCc22Ik4dhwNcx49SQ6P7Sjf9M0pyetslrTPal2Jo4Fu6r9vibHgD69FAhg71wRCfneK+KguZ0VODzR1c2Czu7z927/7tJUieobxwoVGSF2fQtB5XQbNaqFrVnGszw8I1bU2+kbp9CGIm1uI8HMJeRBjrNP0exn5CnUieWwIrEOBpGppKFUqQAfc8LQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N0coEvbNIv0VbAslUDsH+eGX4i+dWXPk3ASTSHLtwxU=;
- b=ZMvjQzFTa+3anupjl4L0gmJdS5xib1cdPvTppcYkVZgwYe9YTea62ImPgfred1P6xHvH/rBPuXduageU2PkBoDmIcfWtufW7WfJ8sbQyIVw7JnG5GjwhbVnLqw9fG5PujfRTnOpx61+FRVKsof1m3oWp7D4saIoNtDDodvjW/vV0lu2tGRJw7qLBuU/1WN/Ky8XKnH5Buih5rmHPpC4fF5IsV4bWp6zHtF2Dz9doKWRybpnfNGzwPmw8XSRX+Ff0yfgUVBhY3VgUNOtieCQPqONUfNnJQ4mM3h/+sIGx9tjZCznQAXokPH7hnWoU4iiMKgCsIGHuw4zgfVxG0o9a0Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N0coEvbNIv0VbAslUDsH+eGX4i+dWXPk3ASTSHLtwxU=;
- b=A1adtXLTpQoco4iOPG7qbS96gGlV6V7slmSlqFh6ZU+KN4uoGg81Wut+AmgWB5wP3ZhEcn1h/WPTTuiPkooj0+nqyRpHLeiks3vQMRKKlxylaikCflSAH9UMeNywZWBNIfjeqc5HQSknv9XOkdIsGUy6JMA1dOUBh5o3yhB53Os=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 17/20] xen/sysctl: make CONFIG_COVERAGE depend on CONFIG_SYSCTL
-Date: Mon, 21 Apr 2025 15:37:20 +0800
-Message-ID: <20250421073723.3863060-18-Penny.Zheng@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250421073723.3863060-1-Penny.Zheng@amd.com>
-References: <20250421073723.3863060-1-Penny.Zheng@amd.com>
+X-Inumbo-ID: 9b836f0b-1ed9-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=g.ecc.u-tokyo.ac.jp; s=google; t=1745258041; x=1745862841; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=rgpbcd0UHgkLVgzrjd4scDmmUyBha2wUHEHGK7CtbMs=;
+        b=F8Z7dcDi0yHuocHtVnUnzeRDeBpRkxCgR81vrOX6utFTUHG4RhiG8hunfi2oc833eM
+         Tt/50BXbyS2hoOsaHjT6fHN81awD+YgGs7jMvfLAkWh/PzcsaOSE6069bjfht/RVfofI
+         NjUJz/I7FLiNi75axi1yABq5R1aBBK9GJUnx4sVMW4i+Dz1V2HWkeCARJ3An8RA8WG6u
+         NiFyRZjvAkdxtW/Q+MQ7AUdEfPrTxjuHUPrFyd89ThZFRXSiTqn5LsEBkTF6zPHotiln
+         /dKEC52kpRPD6g88HeQg6SCVnKjG3aDHAiTkturkEgk0vexHb99L8ZY5+WTsjFzCHZEO
+         5xrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745258041; x=1745862841;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rgpbcd0UHgkLVgzrjd4scDmmUyBha2wUHEHGK7CtbMs=;
+        b=W4Z49ywlJ4TqH2rbI/zxYGpclNsFjBK8TI068IG7umTLWFdiLVG/sAJ35NgaYP6h+Z
+         FOMuOaTyplKroBPboh/MVxMHwLrnpzes1+frjjccG8yDC9jbvM+JrbTZZm++MXTlGQEK
+         a1wZ+5vWlUmyPgzL6aZ+Ahh1cv9RYYUxgHoj8AaXrgJDsBVDE+eVRo8DEdWq9nS1/Rlp
+         WOXqBYVTcjvt2tLEdYqXHdJwCJWi7Co/dG8SaEVjLQ62Bt9RXCDmYYnBm6JbpCQKWXL4
+         qMogLzZGgl50mHc2tmUEjYjsb0F5i7HjMeUTDG3d4arBTRw6LqpYJsMHsGmjSEjovFkp
+         Qydg==
+X-Gm-Message-State: AOJu0YwHHGwJKnRYzZWU3GiQCyWITje3WIWTbaeEBNt4pLd1NIRGXSRR
+	bFpAVazFAXVMbu04lD3LoMtr/n7GJ+3xq0PVck60IxM/RwGYpei7Fh4h0b6OXUsmsla4H5WBDhg
+	7g57IUpLEkagBunzoO+QuhISgkGhSltExSzRyFpaCST04yrIRYLG+ww==
+X-Gm-Gg: ASbGnctXTzOq6hzLiYw8HiGZkpReMbnOAyr3fdApLoyD5x+XXIg5KVFgrBth3bwmv7k
+	8bDDDvS2eBHBzG8JnS4nyQQkjAPJJ4OaH9annj/LzwMg/RI15oAKRWrK3XqQ/odDd1bcfNn3omX
+	3D/ryYa86MerEhuLojfFRTtA7To+5pvsAxn/C6fjIK6ooe1FQ240UaquY=
+X-Google-Smtp-Source: AGHT+IHWqR+rHse8iF2D1/VGGzwEcgksMXHwtL61c4ERMF1j2/9r+Wwtnlcx8bCbXZWSxOaTmj7vgdjhGQ9XYUKbGTQ=
+X-Received: by 2002:a17:907:1b16:b0:abf:6a8d:76b8 with SMTP id
+ a640c23a62f3a-acb6ec517bamr1169416566b.11.1745258040879; Mon, 21 Apr 2025
+ 10:54:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|CY8PR12MB7362:EE_
-X-MS-Office365-Filtering-Correlation-Id: bae1f005-c9db-4fc0-48fa-08dd80a785ca
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?ZIRb7Zw8xY2tI+P34Zf+sblaMMMqUv2Zy3FgaCT6PoyhuZDj3HRocMRDhZ7d?=
- =?us-ascii?Q?18nHDVNwA6wUFwihoCeSE6TWsDAWiBI6MLCrVMoYrQXg5Oc4Wy89LKk0nlJN?=
- =?us-ascii?Q?dX0PFUgB2Lunr6htLmXnTiLrQWxBOvMGYaIfnhYP8KbJy0KrYuu8eq+wPYaM?=
- =?us-ascii?Q?6jN3lGX0Yn1PMSqVbT/YruA6a0yI3m53pQvWL0sM3Ejg9b5R53yqaaZlRYyk?=
- =?us-ascii?Q?m+8cbDFUA4gmPviRvQUXgPvECqC6c0BCmmYGZcMxY6qg/ykqyQgcZKoTNiff?=
- =?us-ascii?Q?XnTTg8u2toDarb5g0EyiwTUhA9LlzltSGJVKE+fITthS2Xo81N6IKE2dcEUY?=
- =?us-ascii?Q?Bf2aPOdb9r5O47PCFRZFfrlly218kjWsuagv+WYRYrwi14c/t4O7AweghKPv?=
- =?us-ascii?Q?jqTC1zcsR5VWB3QdKd2kC33kAbKAPOpP6FUVzDWR1++gtDM5nchONJFEFQ0Y?=
- =?us-ascii?Q?sJ/E/78/yzw3lbrNY2QCHx00sZjDXIHEl3SwgzPHxh0Wvt5q/Vh4GuF4o//c?=
- =?us-ascii?Q?lsvxM8TW+parSztcIz+TZs08QzuV+62KZYWH4a0UgUxiPRogCmtXomfcY7n/?=
- =?us-ascii?Q?psKtT5HYeND5no6CT9Pq78owJRxSBA1+z5xAPwH9qybE/S1C1pb8e43b/s9m?=
- =?us-ascii?Q?LzZXC3h0pI454vOIbc+XRS0tCn2Uv5/j3OogPBBmJ2Urd22X4numkEDXTxrM?=
- =?us-ascii?Q?HegYQXJzhqnR0oKgsITe1Og6sPuBblg4jFByhZH9kmV302QoB2S8LWAHMr+R?=
- =?us-ascii?Q?r2fHLmS5Dqa0QBpEoS9Np+Fj7XG0IZ80fv4KDiIk8uVBvnfJZINx+sLj8d8a?=
- =?us-ascii?Q?5bqSjT68zG9trLpZc/HTzSK4lsJxXebqnQpOuSZTDRRBJOU1RV2sjJG84CwU?=
- =?us-ascii?Q?+2Ccww4ZzSNxuj/tcHimFVhdLqcKQLE9iHyX7qtEtYhum5So7tTEN4khD0Nq?=
- =?us-ascii?Q?Cdt4ECP15KMBp+oL6QLoQ/dKFSPkZoRX4p+6VK+MgrrTjXAkVF2Xs6OYDSDg?=
- =?us-ascii?Q?xPjVCAEv41953A7aRHtNZPKMlVVd62pt9UNpdTAgGmUyaZ1aiSWsba4Nnwf7?=
- =?us-ascii?Q?2ajBkhiQ6hCdnn98y9ybV7SLrn0Y5ptLh4S+M/T7QPZnNwbQlBZUmJRxH3cd?=
- =?us-ascii?Q?B761yolIG6h6sGL3bC/JElB/gDEO1jnU6XToEtt5/xDivlY2edLL4YVWFk/j?=
- =?us-ascii?Q?GsH6j4H2ysuoRNycBF3LddNor3L/aqrGS6X93ei3NHmFwXWda0NWpYSxBinS?=
- =?us-ascii?Q?6TWoTBHRVDeKYumDJjFjB1KmHxTbeqZgvvz6T3597m71M6Ohdsyu6/LjBUwF?=
- =?us-ascii?Q?XahHkkNon4AWvXVNKebMcU9+/JmYmEnBw4esYxEwZxObMPifb96fVDKHibO6?=
- =?us-ascii?Q?PDfjIv9Psreq3A3OyjZ0nT63Tl+ZlKStA38znon9OQ9PuFbF3ToTkOgJSIfl?=
- =?us-ascii?Q?Z1IYSgeKnoBr5yPG4GiraX2vjvLeiGqxzZ6psZ/kbUfcSlWuWHNSRmXZx2Sz?=
- =?us-ascii?Q?HzdDIVduUpH/tnvfjZX/Pt9DNOjdi+drVHJC?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:38:34.8574
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bae1f005-c9db-4fc0-48fa-08dd80a785ca
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055DF.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7362
+References: <CA+aCS-Ha4jSYFfxhOwMGiGJPdCOtgBJLt=3Q=v9dfp6SQJys4w@mail.gmail.com>
+ <1415ddc9-81f3-4d50-b735-7e44a7f656d5@citrix.com> <CA+aCS-H2wkiVOMvCS7cCPojduXdStMYzHn7SxintNyg0vS_Bhg@mail.gmail.com>
+In-Reply-To: <CA+aCS-H2wkiVOMvCS7cCPojduXdStMYzHn7SxintNyg0vS_Bhg@mail.gmail.com>
+From: REIMA ISHII <ishiir@g.ecc.u-tokyo.ac.jp>
+Date: Tue, 22 Apr 2025 02:53:49 +0900
+X-Gm-Features: ATxdqUHw7hh_Tf_W6oHItl9JyxFMR4IMXupq2jtJ5GPAIo9rx5-AuYWMmxym1zU
+Message-ID: <CA+aCS-E0WtbnSM7FuPL0jruXLjdFaZOa9aS0gyy_x5JDRWh50A@mail.gmail.com>
+Subject: Re: [BUG] Nested Virtualization Bug on x86-64 AMD CPU
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Takahiro Shinagawa <shina@ecc.u-tokyo.ac.jp>
+Content-Type: multipart/alternative; boundary="00000000000091ce4206334d8dec"
 
-All coverage-related op shall be wrapped around with CONFIG_SYSCTL,
-so this commit makes CONFIG_COVERAGE depend on CONFIG_SYSCTL.
+--00000000000091ce4206334d8dec
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
-v1 -> v2:
-- commit message refactor
----
- xen/Kconfig.debug | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I am writing to follow up on the bug report I sent, regarding a BUG()
+triggered in Xen when performing a nested VMRUN with CR0.PG=3D0 in Long
+Mode. The issue was discussed with Andrew Cooper at that time, and I
+would like to check if there have been any updates or plans for
+addressing this issue.
 
-diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
-index f7cc5ffaab..84d26b3f46 100644
---- a/xen/Kconfig.debug
-+++ b/xen/Kconfig.debug
-@@ -37,7 +37,7 @@ config SELF_TESTS
- 
- config COVERAGE
- 	bool "Code coverage support"
--	depends on !LIVEPATCH
-+	depends on !LIVEPATCH && SYSCTL
- 	select SUPPRESS_DUPLICATE_SYMBOL_WARNINGS if !ENFORCE_UNIQUE_SYMBOLS
- 	help
- 	  Enable code coverage support.
--- 
-2.34.1
+To briefly recap:
+- The problem occurs when an L1 hypervisor, while in 64-bit mode,
+executes VMRUN with CR0.PG=3D0 in VMCB12, targeting a 64-bit L2 guest.
+- Instead of raising VMEXIT_INVALID, the system encounters a BUG() at
+`nsvm_vmcb_guest_intercepts_exitcode`.
+- VMEXIT reason observed was 0x402 (AVIC_NOACCEL), although Xen does not
+support AVIC.
 
+Andrew pointed out that this could indicate either a missing validity
+check (as the state LMA=3D1 && PG=3D0 is invalid) or possible memory
+corruption.
+
+Given that this issue could potentially allow a guest VM to trigger a
+hypervisor panic, I believe it might be worth formally recognizing and
+addressing.
+May I kindly ask if this has been acknowledged as a bug internally, or
+if there are any plans to handle this case safely (e.g., raising
+VMEXIT_INVALID instead of BUG()) in future Xen releases?
+
+Thank you very much for your time
+
+
+On Wed, Dec 6, 2023 at 12:05=E2=80=AFPM Reima ISHII <ishiir@g.ecc.u-tokyo.a=
+c.jp>
+wrote:
+
+> Thank you for your prompt response.
+>
+> On Tue, Dec 5, 2023 at 11:43=E2=80=AFPM Andrew Cooper <andrew.cooper3@cit=
+rix.com>
+> wrote:
+> > Who is still in 64-bit mode ?
+> >
+> > It is legal for a 64-bit L1 to VMRUN into a 32-bit L2 with PG=3D0.
+> >
+> > But I'm guessing that you mean L2 is also 64-bit, and we're clearing PG=
+,
+> > thus creating an illegal state (LMA=3D1 && PG=3D0) in VMCB12.
+> >
+> > And yes, in that case (virtual) VMRUN at L1 ought to fail with
+> > VMEXIT_INVALID.
+>
+> Yes, you are correct in your understanding. This issue is triggered by
+> VMRUN execution to 64-bit L2 guests, when CR0.PG is cleared in VMCB12.
+> Contrary to the expected behavior where a VMRUN at L1 should fail with
+> VMEXIT_INVALID, the VMRUN does not fail but instead, the system
+> encounters a BUG().
+>
+> > As an incidental observation, that function is particularly absurd and
+> > the two switches should be merged.
+> >
+> > VMExit reason 0x402 is AVIC_NOACCEL and Xen has no support for AVIC in
+> > the slightest right now.  i.e. Xen shouldn't have AVIC active in the
+> > VMCB, and should never any AVIC related VMExits.
+> >
+> > It is possible that we've got memory corruption, and have accidentally
+> > activated AVIC in the VMCB.
+>
+> The idea of potential memory corruption activating AVIC in the VMCB is
+> certainly an interesting perspective. While I'm not sure how exactly
+> such memory corruption could occur, the suggestion does provide a
+> compelling explanation for the VMExit reason 0x402 (AVIC_NOACCEL),
+> particularly considering Xen's current lack of AVIC support.
+>
+> > But, is this by any chance all running nested under KVM in your fuzzer?
+>
+> No, KVM was not used. The issue was observed on a Xen hypervisor's
+> domU HVM running directly on the hardware. Within the guest HVM, a
+> simple custom hypervisor was utilized.
+>
+> --
+> Graduate School of Information Science and Technology, The University of
+> Tokyo
+> Reima Ishii
+> ishiir@g.ecc.u-tokyo.ac.jp
+>
+
+
+--=20
+=E6=9D=B1=E4=BA=AC=E5=A4=A7=E5=AD=A6=E5=A4=A7=E5=AD=A6=E9=99=A2 =E6=83=85=
+=E5=A0=B1=E7=90=86=E5=B7=A5=E5=AD=A6=E7=B3=BB=E7=A0=94=E7=A9=B6=E7=A7=91 =
+=E3=82=B7=E3=82=B9=E3=83=86=E3=83=A0=E6=83=85=E5=A0=B1=E5=AD=A6=E5=B0=82=E6=
+=94=BB =E4=BF=AE=E5=A3=AB2=E5=B9=B4
+=E7=9F=B3=E4=BA=95=E7=8E=B2=E7=9C=9F
+ishiir@g.ecc.u-tokyo.ac.jp
+
+--00000000000091ce4206334d8dec
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I am writing to follow up on the bug report I sent, regard=
+ing a BUG()<br>triggered in Xen when performing a nested VMRUN with <a href=
+=3D"http://CR0.PG">CR0.PG</a>=3D0 in Long<br>Mode. The issue was discussed =
+with Andrew Cooper at that time, and I<br>would like to check if there have=
+ been any updates or plans for<br>addressing this issue.<br><br>To briefly =
+recap:<br>- The problem occurs when an L1 hypervisor, while in 64-bit mode,=
+<br>executes VMRUN with <a href=3D"http://CR0.PG">CR0.PG</a>=3D0 in VMCB12,=
+ targeting a 64-bit L2 guest.<br>- Instead of raising VMEXIT_INVALID, the s=
+ystem encounters a BUG() at<br>`nsvm_vmcb_guest_intercepts_exitcode`.<br>- =
+VMEXIT reason observed was 0x402 (AVIC_NOACCEL), although Xen does not<br>s=
+upport AVIC.<br><br>Andrew pointed out that this could indicate either a mi=
+ssing validity<br>check (as the state LMA=3D1 &amp;&amp; PG=3D0 is invalid)=
+ or possible memory<br>corruption.<br><br>Given that this issue could poten=
+tially allow a guest VM to trigger a<br>hypervisor panic, I believe it migh=
+t be worth formally recognizing and<br>addressing.<br>May I kindly ask if t=
+his has been acknowledged as a bug internally, or<br>if there are any plans=
+ to handle this case safely (e.g., raising<br>VMEXIT_INVALID instead of BUG=
+()) in future Xen releases?<br><br>Thank you very much for your time</div><=
+br><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Wed, Dec 6, 2023 at 12:05=E2=80=AFPM Reima ISHII &lt;=
+<a href=3D"mailto:ishiir@g.ecc.u-tokyo.ac.jp">ishiir@g.ecc.u-tokyo.ac.jp</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Tha=
+nk you for your prompt response.<br>
+<br>
+On Tue, Dec 5, 2023 at 11:43=E2=80=AFPM Andrew Cooper &lt;<a href=3D"mailto=
+:andrew.cooper3@citrix.com" target=3D"_blank">andrew.cooper3@citrix.com</a>=
+&gt; wrote:<br>
+&gt; Who is still in 64-bit mode ?<br>
+&gt;<br>
+&gt; It is legal for a 64-bit L1 to VMRUN into a 32-bit L2 with PG=3D0.<br>
+&gt;<br>
+&gt; But I&#39;m guessing that you mean L2 is also 64-bit, and we&#39;re cl=
+earing PG,<br>
+&gt; thus creating an illegal state (LMA=3D1 &amp;&amp; PG=3D0) in VMCB12.<=
+br>
+&gt;<br>
+&gt; And yes, in that case (virtual) VMRUN at L1 ought to fail with<br>
+&gt; VMEXIT_INVALID.<br>
+<br>
+Yes, you are correct in your understanding. This issue is triggered by<br>
+VMRUN execution to 64-bit L2 guests, when <a href=3D"http://CR0.PG" rel=3D"=
+noreferrer" target=3D"_blank">CR0.PG</a> is cleared in VMCB12.<br>
+Contrary to the expected behavior where a VMRUN at L1 should fail with<br>
+VMEXIT_INVALID, the VMRUN does not fail but instead, the system<br>
+encounters a BUG().<br>
+<br>
+&gt; As an incidental observation, that function is particularly absurd and=
+<br>
+&gt; the two switches should be merged.<br>
+&gt;<br>
+&gt; VMExit reason 0x402 is AVIC_NOACCEL and Xen has no support for AVIC in=
+<br>
+&gt; the slightest right now.=C2=A0 i.e. Xen shouldn&#39;t have AVIC active=
+ in the<br>
+&gt; VMCB, and should never any AVIC related VMExits.<br>
+&gt;<br>
+&gt; It is possible that we&#39;ve got memory corruption, and have accident=
+ally<br>
+&gt; activated AVIC in the VMCB.<br>
+<br>
+The idea of potential memory corruption activating AVIC in the VMCB is<br>
+certainly an interesting perspective. While I&#39;m not sure how exactly<br=
+>
+such memory corruption could occur, the suggestion does provide a<br>
+compelling explanation for the VMExit reason 0x402 (AVIC_NOACCEL),<br>
+particularly considering Xen&#39;s current lack of AVIC support.<br>
+<br>
+&gt; But, is this by any chance all running nested under KVM in your fuzzer=
+?<br>
+<br>
+No, KVM was not used. The issue was observed on a Xen hypervisor&#39;s<br>
+domU HVM running directly on the hardware. Within the guest HVM, a<br>
+simple custom hypervisor was utilized.<br>
+<br>
+-- <br>
+Graduate School of Information Science and Technology, The University of To=
+kyo<br>
+Reima Ishii<br>
+<a href=3D"mailto:ishiir@g.ecc.u-tokyo.ac.jp" target=3D"_blank">ishiir@g.ec=
+c.u-tokyo.ac.jp</a><br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><div>=E6=9D=B1=E4=BA=AC=E5=A4=A7=E5=AD=A6=E5=A4=A7=E5=AD=A6=
+=E9=99=A2 =E6=83=85=E5=A0=B1=E7=90=86=E5=B7=A5=E5=AD=A6=E7=B3=BB=E7=A0=94=
+=E7=A9=B6=E7=A7=91 =E3=82=B7=E3=82=B9=E3=83=86=E3=83=A0=E6=83=85=E5=A0=B1=
+=E5=AD=A6=E5=B0=82=E6=94=BB =E4=BF=AE=E5=A3=AB2=E5=B9=B4</div><div>=E7=9F=
+=B3=E4=BA=95=E7=8E=B2=E7=9C=9F</div><div><a href=3D"mailto:ishiir@g.ecc.u-t=
+okyo.ac.jp" target=3D"_blank">ishiir@g.ecc.u-tokyo.ac.jp</a></div></div></d=
+iv>
+
+--00000000000091ce4206334d8dec--
 
