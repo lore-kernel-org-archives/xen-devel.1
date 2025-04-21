@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED240C369AB
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961168.1352798 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C01C369D5
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 07:42:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961167.1352793 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lmp-0006ME-DB; Mon, 21 Apr 2025 07:41:51 +0000
+	id 1u6lmp-0006Ir-3I; Mon, 21 Apr 2025 07:41:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961168.1352798; Mon, 21 Apr 2025 07:41:51 +0000
+Received: by outflank-mailman (output) from mailman id 961167.1352793; Mon, 21 Apr 2025 07:41:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6lmp-0006L9-89; Mon, 21 Apr 2025 07:41:51 +0000
-Received: by outflank-mailman (input) for mailman id 961168;
+	id 1u6lmp-0006Ih-0P; Mon, 21 Apr 2025 07:41:51 +0000
+Received: by outflank-mailman (input) for mailman id 961167;
  Mon, 21 Apr 2025 07:41:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kh51=XH=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1u6ljd-0007m8-8a
- for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:33 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061a.outbound.protection.outlook.com
- [2a01:111:f403:2415::61a])
+ id 1u6ljk-0007m8-A9
+ for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 07:38:40 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20630.outbound.protection.outlook.com
+ [2a01:111:f403:2414::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9bd363bf-1e83-11f0-9eb0-5ba50f476ded;
- Mon, 21 Apr 2025 09:38:26 +0200 (CEST)
-Received: from BN9PR03CA0126.namprd03.prod.outlook.com (2603:10b6:408:fe::11)
- by CY3PR12MB9554.namprd12.prod.outlook.com (2603:10b6:930:109::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Mon, 21 Apr
- 2025 07:38:21 +0000
-Received: from BN2PEPF000055E0.namprd21.prod.outlook.com
- (2603:10b6:408:fe:cafe::7b) by BN9PR03CA0126.outlook.office365.com
- (2603:10b6:408:fe::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.35 via Frontend Transport; Mon,
- 21 Apr 2025 07:38:21 +0000
+ id a340b8fe-1e83-11f0-9eb0-5ba50f476ded;
+ Mon, 21 Apr 2025 09:38:38 +0200 (CEST)
+Received: from BN9PR03CA0234.namprd03.prod.outlook.com (2603:10b6:408:f8::29)
+ by CY8PR12MB7362.namprd12.prod.outlook.com (2603:10b6:930:52::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.33; Mon, 21 Apr
+ 2025 07:38:35 +0000
+Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
+ (2603:10b6:408:f8:cafe::d5) by BN9PR03CA0234.outlook.office365.com
+ (2603:10b6:408:f8::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.34 via Frontend Transport; Mon,
+ 21 Apr 2025 07:38:35 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN2PEPF000055E0.mail.protection.outlook.com (10.167.245.10) with Microsoft
+ BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:38:21 +0000
+ 15.20.8678.4 via Frontend Transport; Mon, 21 Apr 2025 07:38:34 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 21 Apr 2025 02:38:18 -0500
+ 15.1.2507.39; Mon, 21 Apr 2025 02:38:32 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bd363bf-1e83-11f0-9eb0-5ba50f476ded
+X-Inumbo-ID: a340b8fe-1e83-11f0-9eb0-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vDksez5OTh0pz65AQA4OHTzlX8+W4S5hgjzjik8KCOxxHPK4qoY17WHvhD6J3bbsq2M6OOkxuKy8kFTloXVZvFQSaZ27aZR2NxWrXfSNs6DgvslqC28XKR0a8YQfapUE89CRcbA0WGdpYnh+3vPdc4Vfv+2HXRXSC7FbNydFUWLQxyJ1LEQ/9FtamYtwBhPbBOnR/EujyHMIRC/Z99uEIQp0/Y59YnoaADfxrE4mLHcI7M778lXrJPuzKovJAli3YR3NqRe64H6+fsoapuLxmsGJ+ZUTGj4w9remxvCjSOnFU2/Evl6ZS7a6YeBiuolHyEPUf5H53dAQJsjhfrulbA==
+ b=YtT4ELWSd9huXwW75KTVR22+C9q+hRzjGCeuP0PPXbMSrUz4894wXOosK4OM0SXP6gscuH7t2EWDkl0s1h+SZ12C4UBciHiouH5WZtt/whojNyBUT8ZL9i0lDaDAR9vj4O5xu1mzmFjrDXh6pWJw7xJFRreeCc22Ik4dhwNcx49SQ6P7Sjf9M0pyetslrTPal2Jo4Fu6r9vibHgD69FAhg71wRCfneK+KguZ0VODzR1c2Czu7z927/7tJUieobxwoVGSF2fQtB5XQbNaqFrVnGszw8I1bU2+kbp9CGIm1uI8HMJeRBjrNP0exn5CnUieWwIrEOBpGppKFUqQAfc8LQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QQXcalj/v4jEH1lTcqQu1NCuh3EhcbUREvGNsTW+ECE=;
- b=GUPYiKt+CPeQa+NY/Z8urZCAH5UIgiUzPI8T0Gm3R7AwBzoPaX3S/wU5f5eaNRSLf517HgcLQaEtoWKDkQ6ea6Wvbal2SHIZnnHRpuLza6Cj94yk+n88NMGd87JlAEJWkWpIuFGu+WWlZbrKMfDw9OpP6mOAUjjz5ILaGiktFRxJurH28fD6nHht6bs+VIO8K8Ogssbb6htWdd6NlFqcFPqyAk/z/ZDHvFOtBvdlgmONqRi3285sY93mJFyNqjyCHTHNsAPS3Hp8YbObsn3iZyc6Iau+k+CeYziBjusWp65cuR1a1DY4+aYiNK8rRwd31lfIuLw1dsbOGiEhx/WaLw==
+ bh=N0coEvbNIv0VbAslUDsH+eGX4i+dWXPk3ASTSHLtwxU=;
+ b=ZMvjQzFTa+3anupjl4L0gmJdS5xib1cdPvTppcYkVZgwYe9YTea62ImPgfred1P6xHvH/rBPuXduageU2PkBoDmIcfWtufW7WfJ8sbQyIVw7JnG5GjwhbVnLqw9fG5PujfRTnOpx61+FRVKsof1m3oWp7D4saIoNtDDodvjW/vV0lu2tGRJw7qLBuU/1WN/Ky8XKnH5Buih5rmHPpC4fF5IsV4bWp6zHtF2Dz9doKWRybpnfNGzwPmw8XSRX+Ff0yfgUVBhY3VgUNOtieCQPqONUfNnJQ4mM3h/+sIGx9tjZCznQAXokPH7hnWoU4iiMKgCsIGHuw4zgfVxG0o9a0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QQXcalj/v4jEH1lTcqQu1NCuh3EhcbUREvGNsTW+ECE=;
- b=1VaR4qp4aww5jnE7crnFVeVgOiC875b8y0OrN9CMarRtxF1eKBA0iTIN8K1jm/q5gqOR/oPfug6J6GhusAE1ahAj7dzeUZVK/S/brCncda1XfSEGkq2qbSY0OjfaqvshS9CrOuD0YjQmAa1mydPD4V6snXbHLWn8tfGaQwGfE0c=
+ bh=N0coEvbNIv0VbAslUDsH+eGX4i+dWXPk3ASTSHLtwxU=;
+ b=A1adtXLTpQoco4iOPG7qbS96gGlV6V7slmSlqFh6ZU+KN4uoGg81Wut+AmgWB5wP3ZhEcn1h/WPTTuiPkooj0+nqyRpHLeiks3vQMRKKlxylaikCflSAH9UMeNywZWBNIfjeqc5HQSknv9XOkdIsGUy6JMA1dOUBh5o3yhB53Os=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,16 +82,14 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Dario Faggioli
-	<dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap
-	<gwd@xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	"Jan Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [PATCH v3 13/20] xen/sysctl: wrap around XEN_SYSCTL_cpupool_op
-Date: Mon, 21 Apr 2025 15:37:16 +0800
-Message-ID: <20250421073723.3863060-14-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 17/20] xen/sysctl: make CONFIG_COVERAGE depend on CONFIG_SYSCTL
+Date: Mon, 21 Apr 2025 15:37:20 +0800
+Message-ID: <20250421073723.3863060-18-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250421073723.3863060-1-Penny.Zheng@amd.com>
 References: <20250421073723.3863060-1-Penny.Zheng@amd.com>
@@ -103,159 +101,78 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055E0:EE_|CY3PR12MB9554:EE_
-X-MS-Office365-Filtering-Correlation-Id: efda5a8b-4ecd-4468-4781-08dd80a77dcb
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|CY8PR12MB7362:EE_
+X-MS-Office365-Filtering-Correlation-Id: bae1f005-c9db-4fc0-48fa-08dd80a785ca
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|7416014|1800799024|36860700013;
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?3JKdo3qGvt3l4ag9jd2AByD/zb0aQh0ZFRiqRE1SfguxtPXAp03aCYZe8RN6?=
- =?us-ascii?Q?yveb/lL/xYfyPVxhpxatlsHo52w9jX9H2LfGL1xVwOjmpez+H1N2PzH6CR5W?=
- =?us-ascii?Q?slhuDClmkjSp6U16SoUOBOLH9U/xBh8ozKkihwg7hSx3XtJBmHirXLwxjSL9?=
- =?us-ascii?Q?RM6c+fiv6g7m2nSBJQPtPSz1nPmurexOy7Ghiu08uRNci99+5/USKGyxLSpI?=
- =?us-ascii?Q?3fIgU3GBVPedrGHL87T+JPvLj9yYmljeHBxBkYiup/MGPSN8nxUVv4NfjGVD?=
- =?us-ascii?Q?2gnera8v2Lcm/my2uZak0B1VfWhy5IegBu0VcOHBOg8l5ZS/02IOkLP1xg+h?=
- =?us-ascii?Q?DHFCP2yiOHy1bXdz14OjHPsSqFLKq4PolyP47EdmOGsYGji9J4uF49lEY6NM?=
- =?us-ascii?Q?sbAvyEQxFmf2KjWbf0uQjwMdkuhDJGGwLGsQv+IxIpF35na+juBCPUG7iLaH?=
- =?us-ascii?Q?jPEXV5P5xjnxBiIlI5pPDPgZ5v/CNfikY7GRc9mda7bIu2Eq+tFqULrXKOXG?=
- =?us-ascii?Q?8EsVRPhO+AsyLOl4ccGJYjPk71TOxiNd5XJd/7kWCsLldl++fO3hJVaWABrl?=
- =?us-ascii?Q?TcH92Bz6MuyrW0qi6MNNHyhJM+3bYnG9+rl7QAUkj5dUMMfyyC2JzZ+35p++?=
- =?us-ascii?Q?L3ItiYEsdmmxNQ4spmcZTrxWcgpCNZIEYPqXE+RtdHJs6+re2iOkdUHH1RIs?=
- =?us-ascii?Q?d+oMEuhC0BGY6Xye33RzJReXiyCufIkdPCxUACibi8DZjBFA261bJa7RvGHm?=
- =?us-ascii?Q?N//5feygHe6+M/e9jrpPA6H2D1RyHFA4+rMXT09KCT2YKVBryQ+IekHvNyY2?=
- =?us-ascii?Q?3PsXNWrcCBhjSz+kTEhtMIDJp7Tw9eVEHe53H55YyhZwEXWA7vV9MZFlhwAm?=
- =?us-ascii?Q?Zjfd6RTp3pBOXPth/SBSumN+YMH7mf+PNOy1ShFlbpOp/pBJOl+9TS7kt1fz?=
- =?us-ascii?Q?S9Ldhlf+hc2ZAa83yUhj4B3cBxsJ8SnDkR7/Cb22jUcPCShkOXuwOnnCKpzG?=
- =?us-ascii?Q?r6+ChsUXEditTX946GGnb32KRcOFBsUq6Lo4V7Upl40zsPpnHen3EnyA2KSH?=
- =?us-ascii?Q?hPfclQLbSNKzuAwx1yWBN+dUi68jS5Ha+NYY5G292pkuBmRhHszQeOVGMt9N?=
- =?us-ascii?Q?WsBDN3ZGj+iPdeK12LBV5yQlWGAcHKvfN2D5qBpc1e+01ZQ0bwC4rYkufsJI?=
- =?us-ascii?Q?y9Kqs2yNg6wLzTj2C4PP0JeDE6xMqeURa4bHtHju4VXnZV+aA3kt2Ki6oaul?=
- =?us-ascii?Q?zSX4MdThqEt1UoZ0MH18K40E7zp8UGTUrYzVKellE0IkU7ltUBhYKTvFbjsW?=
- =?us-ascii?Q?Qg/abXMY9hLp6xR3dSoCRihp4LNoocgAazRhK0QTv6/4IO5R6QInOF27zJ36?=
- =?us-ascii?Q?P1EsQoiiRoF7QpS0aQxEKqw7OzS5Ef3coMv51RjEZ1dzSXM4ad4D6Ut6XWBR?=
- =?us-ascii?Q?WgZnQ2fMZWLYugB6frF/4xJtCYk8d/iIDgkg0L8jtk0a+WMMQDSLQmPiazlB?=
- =?us-ascii?Q?WKxtR4LJM/37i/ybZNFm4vDVQBqoqfwtOALj?=
+	=?us-ascii?Q?ZIRb7Zw8xY2tI+P34Zf+sblaMMMqUv2Zy3FgaCT6PoyhuZDj3HRocMRDhZ7d?=
+ =?us-ascii?Q?18nHDVNwA6wUFwihoCeSE6TWsDAWiBI6MLCrVMoYrQXg5Oc4Wy89LKk0nlJN?=
+ =?us-ascii?Q?dX0PFUgB2Lunr6htLmXnTiLrQWxBOvMGYaIfnhYP8KbJy0KrYuu8eq+wPYaM?=
+ =?us-ascii?Q?6jN3lGX0Yn1PMSqVbT/YruA6a0yI3m53pQvWL0sM3Ejg9b5R53yqaaZlRYyk?=
+ =?us-ascii?Q?m+8cbDFUA4gmPviRvQUXgPvECqC6c0BCmmYGZcMxY6qg/ykqyQgcZKoTNiff?=
+ =?us-ascii?Q?XnTTg8u2toDarb5g0EyiwTUhA9LlzltSGJVKE+fITthS2Xo81N6IKE2dcEUY?=
+ =?us-ascii?Q?Bf2aPOdb9r5O47PCFRZFfrlly218kjWsuagv+WYRYrwi14c/t4O7AweghKPv?=
+ =?us-ascii?Q?jqTC1zcsR5VWB3QdKd2kC33kAbKAPOpP6FUVzDWR1++gtDM5nchONJFEFQ0Y?=
+ =?us-ascii?Q?sJ/E/78/yzw3lbrNY2QCHx00sZjDXIHEl3SwgzPHxh0Wvt5q/Vh4GuF4o//c?=
+ =?us-ascii?Q?lsvxM8TW+parSztcIz+TZs08QzuV+62KZYWH4a0UgUxiPRogCmtXomfcY7n/?=
+ =?us-ascii?Q?psKtT5HYeND5no6CT9Pq78owJRxSBA1+z5xAPwH9qybE/S1C1pb8e43b/s9m?=
+ =?us-ascii?Q?LzZXC3h0pI454vOIbc+XRS0tCn2Uv5/j3OogPBBmJ2Urd22X4numkEDXTxrM?=
+ =?us-ascii?Q?HegYQXJzhqnR0oKgsITe1Og6sPuBblg4jFByhZH9kmV302QoB2S8LWAHMr+R?=
+ =?us-ascii?Q?r2fHLmS5Dqa0QBpEoS9Np+Fj7XG0IZ80fv4KDiIk8uVBvnfJZINx+sLj8d8a?=
+ =?us-ascii?Q?5bqSjT68zG9trLpZc/HTzSK4lsJxXebqnQpOuSZTDRRBJOU1RV2sjJG84CwU?=
+ =?us-ascii?Q?+2Ccww4ZzSNxuj/tcHimFVhdLqcKQLE9iHyX7qtEtYhum5So7tTEN4khD0Nq?=
+ =?us-ascii?Q?Cdt4ECP15KMBp+oL6QLoQ/dKFSPkZoRX4p+6VK+MgrrTjXAkVF2Xs6OYDSDg?=
+ =?us-ascii?Q?xPjVCAEv41953A7aRHtNZPKMlVVd62pt9UNpdTAgGmUyaZ1aiSWsba4Nnwf7?=
+ =?us-ascii?Q?2ajBkhiQ6hCdnn98y9ybV7SLrn0Y5ptLh4S+M/T7QPZnNwbQlBZUmJRxH3cd?=
+ =?us-ascii?Q?B761yolIG6h6sGL3bC/JElB/gDEO1jnU6XToEtt5/xDivlY2edLL4YVWFk/j?=
+ =?us-ascii?Q?GsH6j4H2ysuoRNycBF3LddNor3L/aqrGS6X93ei3NHmFwXWda0NWpYSxBinS?=
+ =?us-ascii?Q?6TWoTBHRVDeKYumDJjFjB1KmHxTbeqZgvvz6T3597m71M6Ohdsyu6/LjBUwF?=
+ =?us-ascii?Q?XahHkkNon4AWvXVNKebMcU9+/JmYmEnBw4esYxEwZxObMPifb96fVDKHibO6?=
+ =?us-ascii?Q?PDfjIv9Psreq3A3OyjZ0nT63Tl+ZlKStA38znon9OQ9PuFbF3ToTkOgJSIfl?=
+ =?us-ascii?Q?Z1IYSgeKnoBr5yPG4GiraX2vjvLeiGqxzZ6psZ/kbUfcSlWuWHNSRmXZx2Sz?=
+ =?us-ascii?Q?HzdDIVduUpH/tnvfjZX/Pt9DNOjdi+drVHJC?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(7416014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:38:21.4418
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 07:38:34.8574
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: efda5a8b-4ecd-4468-4781-08dd80a77dcb
+X-MS-Exchange-CrossTenant-Network-Message-Id: bae1f005-c9db-4fc0-48fa-08dd80a785ca
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055E0.namprd21.prod.outlook.com
+	BN2PEPF000055DF.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9554
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7362
 
-Function cpupool_do_sysctl is designed for doing cpupool related sysctl
-operations, and shall be wrapped.
-
-The following static functions are only called by cpupool_do_sysctl(), then
-shall be wrapped too:
-- cpupool_get_next_by_id
-- cpupool_destroy
-- cpupool_unassign_cpu_helper
-- cpupool_unassign_cpu
+All coverage-related op shall be wrapped around with CONFIG_SYSCTL,
+so this commit makes CONFIG_COVERAGE depend on CONFIG_SYSCTL.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 v1 -> v2:
-- no need to wrap declaration
-- add transient #ifdef in sysctl.c for correct compilation
+- commit message refactor
 ---
-v2 -> v3
-- move #endif up ahead of the blank line
----
- xen/common/sched/cpupool.c | 8 ++++++++
- xen/common/sysctl.c        | 2 +-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+ xen/Kconfig.debug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 3d02c7b706..f5459c2779 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -241,10 +241,12 @@ struct cpupool *cpupool_get_by_id(unsigned int poolid)
-     return __cpupool_get_by_id(poolid, true);
- }
+diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+index f7cc5ffaab..84d26b3f46 100644
+--- a/xen/Kconfig.debug
++++ b/xen/Kconfig.debug
+@@ -37,7 +37,7 @@ config SELF_TESTS
  
-+#ifdef CONFIG_SYSCTL
- static struct cpupool *cpupool_get_next_by_id(unsigned int poolid)
- {
-     return __cpupool_get_by_id(poolid, false);
- }
-+#endif /* CONFIG_SYSCTL */
- 
- void cpupool_put(struct cpupool *pool)
- {
-@@ -352,6 +354,7 @@ static struct cpupool *cpupool_create(unsigned int poolid,
- 
-     return ERR_PTR(ret);
- }
-+#ifdef CONFIG_SYSCTL
- /*
-  * destroys the given cpupool
-  * returns 0 on success, 1 else
-@@ -379,6 +382,7 @@ static int cpupool_destroy(struct cpupool *c)
-     debugtrace_printk("cpupool_destroy(pool=%u)\n", c->cpupool_id);
-     return 0;
- }
-+#endif /* CONFIG_SYSCTL */
- 
- /*
-  * Move domain to another cpupool
-@@ -568,6 +572,7 @@ static int cpupool_unassign_cpu_start(struct cpupool *c, unsigned int cpu)
-     return ret;
- }
- 
-+#ifdef CONFIG_SYSCTL
- static long cf_check cpupool_unassign_cpu_helper(void *info)
- {
-     struct cpupool *c = info;
-@@ -633,6 +638,7 @@ static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
-     }
-     return continue_hypercall_on_cpu(work_cpu, cpupool_unassign_cpu_helper, c);
- }
-+#endif /* CONFIG_SYSCTL */
- 
- /*
-  * add a new domain to a cpupool
-@@ -810,6 +816,7 @@ static void cpupool_cpu_remove_forced(unsigned int cpu)
-     rcu_read_unlock(&sched_res_rculock);
- }
- 
-+#ifdef CONFIG_SYSCTL
- /*
-  * do cpupool related sysctl operations
-  */
-@@ -975,6 +982,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
- 
-     return ret;
- }
-+#endif /* CONFIG_SYSCTL */
- 
- unsigned int cpupool_get_id(const struct domain *d)
- {
-diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index 504e3516c3..767e0b7389 100644
---- a/xen/common/sysctl.c
-+++ b/xen/common/sysctl.c
-@@ -252,11 +252,11 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
-         copyback = 0;
-     }
-     break;
--#endif /* CONFIG_SYSCTL */
- 
-     case XEN_SYSCTL_cpupool_op:
-         ret = cpupool_do_sysctl(&op->u.cpupool_op);
-         break;
-+#endif /* CONFIG_SYSCTL */
- 
-     case XEN_SYSCTL_scheduler_op:
-         ret = sched_adjust_global(&op->u.scheduler_op);
+ config COVERAGE
+ 	bool "Code coverage support"
+-	depends on !LIVEPATCH
++	depends on !LIVEPATCH && SYSCTL
+ 	select SUPPRESS_DUPLICATE_SYMBOL_WARNINGS if !ENFORCE_UNIQUE_SYMBOLS
+ 	help
+ 	  Enable code coverage support.
 -- 
 2.34.1
 
