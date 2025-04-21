@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A46DC369AB
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 19:57:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961429.1352843 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCC4C369D3
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Apr 2025 20:39:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961443.1352862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6xGZ-0008I7-PI; Mon, 21 Apr 2025 19:57:19 +0000
+	id 1u6xvX-00063n-SH; Mon, 21 Apr 2025 20:39:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961429.1352843; Mon, 21 Apr 2025 19:57:19 +0000
+Received: by outflank-mailman (output) from mailman id 961443.1352862; Mon, 21 Apr 2025 20:39:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u6xGZ-0008I0-LY; Mon, 21 Apr 2025 19:57:19 +0000
-Received: by outflank-mailman (input) for mailman id 961429;
- Mon, 21 Apr 2025 19:57:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u6xvX-00063e-PK; Mon, 21 Apr 2025 20:39:39 +0000
+Received: by outflank-mailman (input) for mailman id 961443;
+ Mon, 21 Apr 2025 20:39:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=J93P=XH=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u6xGY-0008Hu-GL
- for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 19:57:18 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d15e8355-1eea-11f0-9ffb-bf95429c2676;
- Mon, 21 Apr 2025 21:57:13 +0200 (CEST)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-39d83782ef6so3811602f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 21 Apr 2025 12:57:13 -0700 (PDT)
-Received: from [192.168.86.29] ([83.104.178.215])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa42082csm12682161f8f.3.2025.04.21.12.57.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Apr 2025 12:57:12 -0700 (PDT)
+ <SRS0=nRXx=XH=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1u6xvW-000634-2m
+ for xen-devel@lists.xenproject.org; Mon, 21 Apr 2025 20:39:38 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bcc5e02c-1ef0-11f0-9eb0-5ba50f476ded;
+ Mon, 21 Apr 2025 22:39:36 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id F0759A4BE06;
+ Mon, 21 Apr 2025 20:34:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D895EC4CEE4;
+ Mon, 21 Apr 2025 20:39:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,135 +43,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d15e8355-1eea-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1745265433; x=1745870233; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=fCI9GIz3tQx69mZRHQOydIWdQRCRJDxY6m4AQBClgkE=;
-        b=eqsZXtyq70BNcj14YFbHrbBtHaww3VMlUHg11HCrBIGQPxYF5ln2sr9f0A6vhQUz+Y
-         5QVm0zu+q7PZG7oEWpYXee3QH0QsuQi4wsLpPDRml6PnVGTClLbyoS50Ab84riWAS7C8
-         yj0Kmf473lJNHM2qdJ1KmSvf69dpGe5pAtsVM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745265433; x=1745870233;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fCI9GIz3tQx69mZRHQOydIWdQRCRJDxY6m4AQBClgkE=;
-        b=DaPQO6DdR0sAAYmV/YHcPqjQKk2Rr3kuBmAK4TcvKft2vAAAztLiYnY6I+Dgd14tIY
-         GJ1/CjYaFSweqYZII6EyyPkcO43OphFaSGEADzVzcWbrPzgITtj39axpVqwI9svSphm+
-         ExaOKte/4A+EqA+XHfwUcVtD4gJQcZ0lXi9gYj8UPONGFbNafm1Rxx2ooa5NdiEUeWYO
-         g2ToKLaHbGul7oWTAiRhzY7tgQzC0BhL1FYvA/Mg/fje3S2IPaAqxreaylrtkH7kGD4r
-         tf6N5/FCkSJG48Y+ftW8B36ruxNXrE4ZYB82POnjwHxS3gADeWeEAn/Uk78PyAHeByg4
-         Orog==
-X-Gm-Message-State: AOJu0YxxSTlD+r7FN3zQeD6TL1GijS+GrespNxM70w1+A+kLVNvYXoib
-	5Wa0Rc6/fRv5ex4cKo9Bx+RQsEBWFhckvytt47O7MjlWI50fCZ431dnK84FuvYQbplolW+qo0bx
-	ovDg=
-X-Gm-Gg: ASbGncsBRhhy72zA0+3FZz64Qasg7ffTbQITO7gJ5aWM3Cz/Cc+LyJ7UBY3gymw+hGz
-	cziidF7pZGv4GXzTjebfxBrBN3rzHF9n+Auxcxe9Xki897TuhHX0i8A69444fDBlD6XGSYpjbVe
-	KecJ8o7vMfN9LZSNEkelISu60rnZ/6moprkc18gkV/Uw61WtRr7WMTq1vyTV+YmbJxM9iE61Wv+
-	iff3XAW58qSrbP3VgwUHKTQjsXMYu/bYvYWwVn2SYH9RseoYZiWPwH1tTFO1vUx6JfOdJoDWBDa
-	swlZgmc/wCl/L5qkpzxjh1VhcF0cUwqYY4BR6HHiLJPQYb90V3YuSg==
-X-Google-Smtp-Source: AGHT+IHJWddlpzHq2KGpbGF2LNXbLCMSu1y87N/iQhJVRiZ1J0zqEsCQ3bY6drnrT2v8sSAPHNXo+Q==
-X-Received: by 2002:a05:6000:240a:b0:39c:2c0b:8db4 with SMTP id ffacd0b85a97d-39ef8ba5d0dmr11598487f8f.10.1745265432840;
-        Mon, 21 Apr 2025 12:57:12 -0700 (PDT)
-Message-ID: <92af3712-a163-4aef-abc9-beb8d1d1eda6@citrix.com>
-Date: Mon, 21 Apr 2025 20:57:11 +0100
+X-Inumbo-ID: bcc5e02c-1ef0-11f0-9eb0-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1745267974;
+	bh=yVt4eZaqa9Vm8qM8LjqhbIy57iO2fl9YQeXupfdcHNQ=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=OjTfEG7MtuQRZj96N32TDTnuaX3QQ/eXCNoj+VgTOv3Jf0MC6qhUssc4P1PM3sXHU
+	 +s7SkIkIzGDk8p/oy6+RFNfNmdnbvARkykDSGXaEHkxL5q0i6CfQVLbFM/S3dtDMrT
+	 gEbM1bNm0GGRsExbk7+n87JD+Oyv0aIH7kb8XIGTEi5uFy6rFwlvu2MKJEMP0Qd/tI
+	 VXFYbsT+ThETuwT1ZdcUCGfDL7h6hLbf44VGeJRRpjmFWplLUCGz9Etz972sjJ0jmP
+	 TARiizmzD9BSVuoYSu6iPAP8do3jPfYptYegQ9kS+c7+/V2jNHshpCrnMXdjyPeSWE
+	 RwIlQ/7CidQlg==
+Date: Mon, 21 Apr 2025 13:39:32 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: dmkhn@proton.me
+cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, 
+    cardoe@cardoe.com, marmarek@invisiblethingslab.com, sstabellini@kernel.org, 
+    dmukhin@ford.com
+Subject: Re: [PATCH v2 2/4] CI: switch x86 EFI smoke test runner to
+ qemu-xtf.sh
+In-Reply-To: <20250419010319.2572518-3-dmukhin@ford.com>
+Message-ID: <alpine.DEB.2.22.394.2504211338190.785180@ubuntu-linux-20-04-desktop>
+References: <20250419010319.2572518-1-dmukhin@ford.com> <20250419010319.2572518-3-dmukhin@ford.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Nested Virtualization Bug on x86-64 AMD CPU
-To: REIMA ISHII <ishiir@g.ecc.u-tokyo.ac.jp>
-Cc: xen-devel@lists.xenproject.org,
- Takahiro Shinagawa <shina@ecc.u-tokyo.ac.jp>
-References: <CA+aCS-Ha4jSYFfxhOwMGiGJPdCOtgBJLt=3Q=v9dfp6SQJys4w@mail.gmail.com>
- <1415ddc9-81f3-4d50-b735-7e44a7f656d5@citrix.com>
- <CA+aCS-H2wkiVOMvCS7cCPojduXdStMYzHn7SxintNyg0vS_Bhg@mail.gmail.com>
- <CA+aCS-E0WtbnSM7FuPL0jruXLjdFaZOa9aS0gyy_x5JDRWh50A@mail.gmail.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <CA+aCS-E0WtbnSM7FuPL0jruXLjdFaZOa9aS0gyy_x5JDRWh50A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-On 21/04/2025 6:53 pm, REIMA ISHII wrote:
-> I am writing to follow up on the bug report I sent, regarding a BUG()
-> triggered in Xen when performing a nested VMRUN with CR0.PG
-> <http://CR0.PG>=0 in Long
-> Mode. The issue was discussed with Andrew Cooper at that time, and I
-> would like to check if there have been any updates or plans for
-> addressing this issue.
->
-> To briefly recap:
-> - The problem occurs when an L1 hypervisor, while in 64-bit mode,
-> executes VMRUN with CR0.PG <http://CR0.PG>=0 in VMCB12, targeting a
-> 64-bit L2 guest.
-> - Instead of raising VMEXIT_INVALID, the system encounters a BUG() at
-> `nsvm_vmcb_guest_intercepts_exitcode`.
-> - VMEXIT reason observed was 0x402 (AVIC_NOACCEL), although Xen does not
-> support AVIC.
->
-> Andrew pointed out that this could indicate either a missing validity
-> check (as the state LMA=1 && PG=0 is invalid) or possible memory
-> corruption.
->
-> Given that this issue could potentially allow a guest VM to trigger a
-> hypervisor panic, I believe it might be worth formally recognizing and
-> addressing.
-> May I kindly ask if this has been acknowledged as a bug internally, or
-> if there are any plans to handle this case safely (e.g., raising
-> VMEXIT_INVALID instead of BUG()) in future Xen releases?
->
-> Thank you very much for your time
+On Sat, 19 Apr 2025, dmkhn@proton.me wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Use qemu-xtf.sh for qemu-smoke-x86-64-gcc-efi job.
+> 
+> Lead time is reduced a bit since not all XTF code base is built, just the
+> required test.
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> Changes since v2:
+> - removed TOP
+> - dropped XEN_CONSOLE in favor of XEN_CMDLINE
+> ---
+>  automation/gitlab-ci/test.yaml                |  2 +-
+>  .../include/configs/xtf-x86-64-efi-config     |  0
+>  automation/scripts/include/xtf-x86-64-efi     | 52 +++++++++++++++++++
+>  automation/scripts/qemu-smoke-x86-64-efi.sh   | 43 ---------------
+>  4 files changed, 53 insertions(+), 44 deletions(-)
+>  create mode 100644 automation/scripts/include/configs/xtf-x86-64-efi-config
+>  create mode 100644 automation/scripts/include/xtf-x86-64-efi
+>  delete mode 100755 automation/scripts/qemu-smoke-x86-64-efi.sh
+> 
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index 3adc841335..ca1e4eb528 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -687,7 +687,7 @@ qemu-smoke-x86-64-clang-pvh:
+>  qemu-smoke-x86-64-gcc-efi:
+>    extends: .qemu-smoke-x86-64
+>    script:
+> -    - ./automation/scripts/qemu-smoke-x86-64-efi.sh pv 2>&1 | tee ${LOGFILE}
+> +    - ./automation/scripts/qemu-xtf.sh x86-64-efi hvm64 example 2>&1 | tee ${LOGFILE}
 
-Sorry, also fell between the cracks.  I've opened
-https://gitlab.com/xen-project/xen/-/issues/216
+Isn't it supposed to be pv64 as variant of the test to match what we had
+before?
 
-Again, no idea when I'll have time to look into this.
 
-~Andrew
+>    needs:
+>      - debian-12-x86_64-gcc-debug
+>  
+> diff --git a/automation/scripts/include/configs/xtf-x86-64-efi-config b/automation/scripts/include/configs/xtf-x86-64-efi-config
+> new file mode 100644
+> index 0000000000..e69de29bb2
+> diff --git a/automation/scripts/include/xtf-x86-64-efi b/automation/scripts/include/xtf-x86-64-efi
+> new file mode 100644
+> index 0000000000..e0d821b3f6
+> --- /dev/null
+> +++ b/automation/scripts/include/xtf-x86-64-efi
+> @@ -0,0 +1,52 @@
+> +#!/bin/bash
+> +#
+> +# XTF test utilities (x86_64, EFI).
+> +#
+> +
+> +# Arch-specific environment overrides.
+> +function xtf_arch_prepare()
+> +{
+> +    export FW_PREFIX="${FW_PREFIX:-/usr/share/OVMF/}"
+> +    export QEMU_PREFIX="${QEMU_PREFIX:-}"
+> +    export XEN_BINARY="${XEN_BINARY:-${WORKDIR}/xen.efi}"
+> +    export XEN_CMDLINE="${XEN_CMDLINE:-loglvl=all noreboot console_timestamps=boot console=com1}"
+> +    export XTF_SRC_BRANCH="${XTF_SRC_BRANCH:-master}"
+> +    export XTF_SRC_URI="${XTF_SRC_URI:-https://xenbits.xen.org/git-http/xtf.git}"
+> +    export XTF_SRC_VARIANTS="hvm64 pv64"
+> +}
+> +
+> +# Perform arch-specific XTF environment setup.
+> +function xtf_arch_setup()
+> +{
+> +    local esp_dir="${WORKDIR}/boot-esp"
+> +    local efi_dir="${esp_dir}/EFI/BOOT"
+> +
+> +    # Generate EFI boot environment
+> +    mkdir -p ${efi_dir}
+> +    cp ${XEN_BINARY} ${efi_dir}/BOOTX64.EFI
+> +    cp ${XTF_BINARY} ${efi_dir}/kernel
+> +
+> +    cat > ${efi_dir}/BOOTX64.cfg <<EOF
+> +[global]
+> +default=test
+> +
+> +[test]
+> +options=${XEN_CMDLINE}
+> +kernel=kernel
+> +EOF
+> +
+> +    # NB: OVMF_CODE.fd is read-only, no need to copy
+> +    cp ${FW_PREFIX}OVMF_VARS.fd ${WORKDIR}
+> +
+> +    export TEST_CMD="${QEMU_PREFIX}qemu-system-x86_64 \
+> +        -no-reboot \
+> +        -nographic \
+> +        -monitor none \
+> +        -serial stdio \
+> +        -m 512 \
+> +        -M q35,kernel-irqchip=split \
+> +        -drive if=pflash,format=raw,readonly=on,file=${FW_PREFIX}OVMF_CODE.fd \
+> +        -drive if=pflash,format=raw,file=${WORKDIR}/OVMF_VARS.fd \
+> +        -drive file=fat:rw:${esp_dir},media=disk,index=0,format=raw \
+> +    "
+> +}
+> diff --git a/automation/scripts/qemu-smoke-x86-64-efi.sh b/automation/scripts/qemu-smoke-x86-64-efi.sh
+> deleted file mode 100755
+> index 7572722be6..0000000000
+> --- a/automation/scripts/qemu-smoke-x86-64-efi.sh
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -#!/bin/bash
+> -
+> -set -ex -o pipefail
+> -
+> -# variant should be either pv or pvh
+> -variant=$1
+> -
+> -# Clone and build XTF
+> -git clone https://xenbits.xen.org/git-http/xtf.git
+> -cd xtf && make -j$(nproc) && cd -
+> -
+> -case $variant in
+> -    pvh) k=test-hvm64-example    extra="dom0-iommu=none dom0=pvh" ;;
+> -    *)   k=test-pv64-example     extra= ;;
+> -esac
+> -
+> -mkdir -p boot-esp/EFI/BOOT
+> -cp binaries/xen.efi boot-esp/EFI/BOOT/BOOTX64.EFI
+> -cp xtf/tests/example/$k boot-esp/EFI/BOOT/kernel
+> -
+> -cat > boot-esp/EFI/BOOT/BOOTX64.cfg <<EOF
+> -[global]
+> -default=test
+> -
+> -[test]
+> -options=loglvl=all console=com1 noreboot console_timestamps=boot $extra
+> -kernel=kernel
+> -EOF
+> -
+> -cp /usr/share/OVMF/OVMF_CODE.fd OVMF_CODE.fd
+> -cp /usr/share/OVMF/OVMF_VARS.fd OVMF_VARS.fd
+> -
+> -rm -f smoke.serial
+> -export TEST_CMD="qemu-system-x86_64 -nographic -M q35,kernel-irqchip=split \
+> -        -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
+> -        -drive if=pflash,format=raw,file=OVMF_VARS.fd \
+> -        -drive file=fat:rw:boot-esp,media=disk,index=0,format=raw \
+> -        -m 512 -monitor none -serial stdio"
+> -
+> -export TEST_LOG="smoke.serial"
+> -export PASSED="Test result: SUCCESS"
+> -
+> -./automation/scripts/console.exp | sed 's/\r\+$//'
+> -- 
+> 2.34.1
+> 
+> 
 
