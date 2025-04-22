@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D88BCC369DC
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961782.1353137 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09472C369DF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961786.1353179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78ua-0005aO-GZ; Tue, 22 Apr 2025 08:23:24 +0000
+	id 1u78ue-0006bo-0u; Tue, 22 Apr 2025 08:23:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961782.1353137; Tue, 22 Apr 2025 08:23:24 +0000
+Received: by outflank-mailman (output) from mailman id 961786.1353179; Tue, 22 Apr 2025 08:23:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78ua-0005Yt-8y; Tue, 22 Apr 2025 08:23:24 +0000
-Received: by outflank-mailman (input) for mailman id 961782;
- Tue, 22 Apr 2025 08:23:23 +0000
+	id 1u78ud-0006Zu-L7; Tue, 22 Apr 2025 08:23:27 +0000
+Received: by outflank-mailman (input) for mailman id 961786;
+ Tue, 22 Apr 2025 08:23:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78uZ-0004wM-4y
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:23 +0000
+ id 1u78ub-0004wM-5a
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:25 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0b05e9a0-1f53-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 10:23:18 +0200 (CEST)
+ id 0c52d903-1f53-11f0-9eb0-5ba50f476ded;
+ Tue, 22 Apr 2025 10:23:21 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9J1954391
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9M1954391
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:22:31 -0700
+ Tue, 22 Apr 2025 01:22:36 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b05e9a0-1f53-11f0-9eb0-5ba50f476ded
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9J1954391
+X-Inumbo-ID: 0c52d903-1f53-11f0-9eb0-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9M1954391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310152;
-	bh=2fX9OBA6uAgolGV2mwCjcajGTCrZX3UzmQx9++m7S8w=;
+	s=2025042001; t=1745310158;
+	bh=ZDjz7zZ6jpSk7UYBX1f+/D6FpEpADYtgSJeGI0K8PfU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DWloroeBI0Xco+1f4PQTeYOR+vYxwQ6OWrLvdsoNKKSO7CBjg/hE29Yiga1DMWA6a
-	 3vjJgLMxR6/Kq1B4f3AtI2es9FoJ5qy02eFKKKI96lyZVVL8RDLAlkYglcv8alS0Qf
-	 WcSregt3TEEKdcYBIPtoG6YGq2XfT7SY3xWvzXDaQnXgzRD4xy21W88jQ5y3uEu7b6
-	 1pQ93SrdhPxcmqTgXqXEgwbVpDt1UW0nZ3vhjRNRm4Bz3ilkQ2KvD4xwcW5uo/xdRZ
-	 iWqoZnPrxYn/rhNZ4bGCGPJoZdnXc9udd1Mjqp99UFtk+G5UJNIl0iraeMYyl4BFtQ
-	 7iVfP7LKBPL8Q==
+	b=JnM1tOMn1uOqwogaGDb5MA0EnSbBUePNLnpaO/hoa8wawH5peRy9eV+Mxx6gdUAsP
+	 4J+kDIbBA+tj1HaAosm+HAGN3bs6BDN2tw/gvDOb3rz0QBzJKtmPhVFCU1gjPZARLN
+	 cVFTJm2CNABewq6f0h4AUzPrxnKJY7GgDt4k+LmQnyeNf/IJcVPLHUmkr4KgzM4ddw
+	 cpG5h9ajIgNj3NZXg8iZqKaJefvUYCb83TLTbKiVCSqsmym2tgrGB9O/MnG0tdrpqX
+	 e49cOPxt2MjmuEMWTIfxUCvSYUho6LiyNa9c/tKoPjWL4drYZI2WdYQ+dXK3vNAiOJ
+	 HJ3Be9VSRalww==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -73,71 +73,41 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 05/34] x86/msr: Return u64 consistently in Xen PMC read functions
-Date: Tue, 22 Apr 2025 01:21:46 -0700
-Message-ID: <20250422082216.1954310-6-xin@zytor.com>
+Subject: [RFC PATCH v2 08/34] x86/msr: Convert a native_wrmsr() use to native_wrmsrq()
+Date: Tue, 22 Apr 2025 01:21:49 -0700
+Message-ID: <20250422082216.1954310-9-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
 References: <20250422082216.1954310-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The pv_ops PMC read API is defined as:
-        u64 (*read_pmc)(int counter);
-
-But Xen PMC read functions return unsigned long long, make them
-return u64 consistently.
+Convert a native_wrmsr() use to native_wrmsrq() to zap meaningless type
+conversions when a u64 MSR value is splitted into two u32.
 
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 ---
- arch/x86/xen/pmu.c     | 6 +++---
- arch/x86/xen/xen-ops.h | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ arch/x86/include/asm/sev-internal.h | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
-index f06987b0efc3..9c1682af620a 100644
---- a/arch/x86/xen/pmu.c
-+++ b/arch/x86/xen/pmu.c
-@@ -346,7 +346,7 @@ bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err)
- 	return true;
+diff --git a/arch/x86/include/asm/sev-internal.h b/arch/x86/include/asm/sev-internal.h
+index 73cb774c3639..9da509e52e11 100644
+--- a/arch/x86/include/asm/sev-internal.h
++++ b/arch/x86/include/asm/sev-internal.h
+@@ -101,12 +101,7 @@ static inline u64 sev_es_rd_ghcb_msr(void)
+ 
+ static __always_inline void sev_es_wr_ghcb_msr(u64 val)
+ {
+-	u32 low, high;
+-
+-	low  = (u32)(val);
+-	high = (u32)(val >> 32);
+-
+-	native_wrmsr(MSR_AMD64_SEV_ES_GHCB, low, high);
++	native_wrmsrq(MSR_AMD64_SEV_ES_GHCB, val);
  }
  
--static unsigned long long xen_amd_read_pmc(int counter)
-+static u64 xen_amd_read_pmc(int counter)
- {
- 	struct xen_pmu_amd_ctxt *ctxt;
- 	uint64_t *counter_regs;
-@@ -366,7 +366,7 @@ static unsigned long long xen_amd_read_pmc(int counter)
- 	return counter_regs[counter];
- }
- 
--static unsigned long long xen_intel_read_pmc(int counter)
-+static u64 xen_intel_read_pmc(int counter)
- {
- 	struct xen_pmu_intel_ctxt *ctxt;
- 	uint64_t *fixed_counters;
-@@ -396,7 +396,7 @@ static unsigned long long xen_intel_read_pmc(int counter)
- 	return arch_cntr_pair[counter].counter;
- }
- 
--unsigned long long xen_read_pmc(int counter)
-+u64 xen_read_pmc(int counter)
- {
- 	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
- 		return xen_amd_read_pmc(counter);
-diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
-index 25e318ef27d6..dc886c3cc24d 100644
---- a/arch/x86/xen/xen-ops.h
-+++ b/arch/x86/xen/xen-ops.h
-@@ -274,7 +274,7 @@ static inline void xen_pmu_finish(int cpu) {}
- bool pmu_msr_read(unsigned int msr, uint64_t *val, int *err);
- bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err);
- int pmu_apic_update(uint32_t reg);
--unsigned long long xen_read_pmc(int counter);
-+u64 xen_read_pmc(int counter);
- 
- #ifdef CONFIG_SMP
- 
+ enum es_result sev_es_ghcb_hv_call(struct ghcb *ghcb,
 -- 
 2.49.0
 
