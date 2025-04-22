@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C34C369D8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE183C369C2
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961788.1353196 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.961790.1353208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78uf-0006yE-Ij; Tue, 22 Apr 2025 08:23:29 +0000
+	id 1u78ug-0007GD-J1; Tue, 22 Apr 2025 08:23:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961788.1353196; Tue, 22 Apr 2025 08:23:29 +0000
+Received: by outflank-mailman (output) from mailman id 961790.1353208; Tue, 22 Apr 2025 08:23:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78ue-0006vx-UP; Tue, 22 Apr 2025 08:23:28 +0000
-Received: by outflank-mailman (input) for mailman id 961788;
- Tue, 22 Apr 2025 08:23:26 +0000
+	id 1u78ug-0007Ed-4q; Tue, 22 Apr 2025 08:23:30 +0000
+Received: by outflank-mailman (input) for mailman id 961790;
+ Tue, 22 Apr 2025 08:23:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78uc-0004wM-5a
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:26 +0000
+ id 1u78ud-0004wM-5p
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:27 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0c784155-1f53-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 10:23:21 +0200 (CEST)
+ id 0d318768-1f53-11f0-9eb0-5ba50f476ded;
+ Tue, 22 Apr 2025 10:23:22 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9X1954391
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9U1954391
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:22:59 -0700
+ Tue, 22 Apr 2025 01:22:53 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c784155-1f53-11f0-9eb0-5ba50f476ded
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9X1954391
+X-Inumbo-ID: 0d318768-1f53-11f0-9eb0-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9U1954391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310181;
-	bh=NNx/bsW0ODtmJpfsi048P3Fj6b4nBpFrrvypKuPXLIg=;
+	s=2025042001; t=1745310174;
+	bh=tKwShxS8SnH3+r0XrY4puuThpPUtqn9sxGzBAvLv2qE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cbIqq/wL911bUtP7+WKZQwUp5BP2uQDF0M396c/1wV9SxBhoCkZqNqqK/X5WlcGHr
-	 ashWQDaWODnE6g9w4+IW/hSEyKjNsaVVVc+pObXiea4M3kb3inrzeAuXhSDfHp6Cx+
-	 HfUn2y8wZAC5H0mjajud2hEDrBLl2csSFGl0BMmU/YjJkF1ob54eK/BjPWWd13ikh9
-	 kLIBXoce48SGlAb8V3FWMUzo67hW5FrpbagoXdvt+RFV1FYEkIe1lKQFkOEY7FcA+R
-	 eeiYsX+Bcaf3/8X8V8OUbwLjuG+YkH53wOp7lVVoobhRWAMn1YmRpvzx2zJd94GdB2
-	 hN1HWhqneMGyA==
+	b=XB6Bl9mXdDXZ6uItIj7HmLj7+SgdGBr4//8M02L9kJyhIy3nGwHmq06Q+9ILpfIlb
+	 DSW1MBRBqfeODTFbogdeHWzIgmLXyURs0ZW2ugh2lPSGw0OKHOrvNKtbLD+nZ4lrTa
+	 qIuGgzEaupHFGvAC+Tbg8gTVGMhiiY1uK2ST8DoPpunwIb7quo5Cjs7FvMp7lz3q7O
+	 pE6XjV47oI+sHnWs9sPDeMj+IBucjeTvRUtGK5ilXHJsQnNbtPFggDyMZFoo2A4oNo
+	 14+LS6Gf83CPkNWu/aX+A7mTB9LH5hngobXqbCOjg1NK53i/1WPuQwdrG5HQPub9ZJ
+	 /825s1gxrDgXw==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -73,112 +73,233 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 19/34] x86/extable: Add support for immediate form MSR instructions
-Date: Tue, 22 Apr 2025 01:22:00 -0700
-Message-ID: <20250422082216.1954310-20-xin@zytor.com>
+Subject: [RFC PATCH v2 16/34] x86/msr: Change function type of native_read_msr_safe()
+Date: Tue, 22 Apr 2025 01:21:57 -0700
+Message-ID: <20250422082216.1954310-17-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
 References: <20250422082216.1954310-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Change function type of native_read_msr_safe() to
+
+    int native_read_msr_safe(u32 msr, u64 *val)
+
+to make it the same as the type of native_write_msr_safe().
+
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 ---
- arch/x86/include/asm/msr.h | 18 ++++++++++++++++++
- arch/x86/mm/extable.c      | 39 +++++++++++++++++++++++++++++++++-----
- 2 files changed, 52 insertions(+), 5 deletions(-)
+ arch/x86/include/asm/msr.h            | 21 +++++++++++----------
+ arch/x86/include/asm/paravirt_types.h |  4 ++--
+ arch/x86/kvm/svm/svm.c                | 19 +++++++------------
+ arch/x86/xen/enlighten_pv.c           |  9 ++++++---
+ arch/x86/xen/pmu.c                    | 14 ++++++++------
+ 5 files changed, 34 insertions(+), 33 deletions(-)
 
 diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index c955339be9c9..8f7a67b1c61c 100644
+index dd1114053173..c955339be9c9 100644
 --- a/arch/x86/include/asm/msr.h
 +++ b/arch/x86/include/asm/msr.h
-@@ -78,6 +78,24 @@ static inline void do_trace_rdpmc(u32 msr, u64 val, int failed) {}
- extern u64 xen_read_pmc(int counter);
- #endif
+@@ -135,18 +135,22 @@ static inline u64 native_read_msr(u32 msr)
+ 	return val;
+ }
  
-+/*
-+ * Called only from an MSR fault handler, the instruction pointer points to
-+ * the MSR access instruction that caused the fault.
-+ */
-+static __always_inline bool is_msr_imm_insn(void *ip)
-+{
-+	/*
-+	 * A full decoder for immediate form MSR instructions appears excessive.
-+	 */
-+#ifdef CONFIG_X86_64
-+	const u8 msr_imm_insn_prefix[] = { 0xc4, 0xe7 };
-+
-+	return !memcmp(ip, msr_imm_insn_prefix, sizeof(msr_imm_insn_prefix));
-+#else
-+	return false;
-+#endif
-+}
-+
- /*
-  * __rdmsr() and __wrmsr() are the two primitives which are the bare minimum MSR
-  * accessors and should not have any tracing or other functionality piggybacking
-diff --git a/arch/x86/mm/extable.c b/arch/x86/mm/extable.c
-index bf8dab18be97..f1743babafc8 100644
---- a/arch/x86/mm/extable.c
-+++ b/arch/x86/mm/extable.c
-@@ -167,23 +167,52 @@ static bool ex_handler_uaccess(const struct exception_table_entry *fixup,
- static bool ex_handler_msr(const struct exception_table_entry *fixup,
- 			   struct pt_regs *regs, bool wrmsr, bool safe, int reg)
+-static inline u64 native_read_msr_safe(u32 msr, int *err)
++static inline int native_read_msr_safe(u32 msr, u64 *p)
  {
-+	bool imm_insn = is_msr_imm_insn((void *)regs->ip);
-+	u32 msr;
++	int err;
+ 	DECLARE_ARGS(val, low, high);
+ 
+ 	asm volatile("1: rdmsr ; xor %[err],%[err]\n"
+ 		     "2:\n\t"
+ 		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_RDMSR_SAFE, %[err])
+-		     : [err] "=r" (*err), EAX_EDX_RET(val, low, high)
++		     : [err] "=r" (err), EAX_EDX_RET(val, low, high)
+ 		     : "c" (msr));
+ 	if (tracepoint_enabled(read_msr))
+-		do_trace_read_msr(msr, EAX_EDX_VAL(val, low, high), *err);
+-	return EAX_EDX_VAL(val, low, high);
++		do_trace_read_msr(msr, EAX_EDX_VAL(val, low, high), err);
 +
-+	if (imm_insn)
-+		/*
-+		 * The 32-bit immediate specifying a MSR is encoded into
-+		 * byte 5 ~ 8 of an immediate form MSR instruction.
-+		 */
-+		msr = *(u32 *)(regs->ip + 5);
-+	else
-+		msr = (u32)regs->cx;
++	*p = EAX_EDX_VAL(val, low, high);
 +
- 	if (__ONCE_LITE_IF(!safe && wrmsr)) {
--		pr_warn("unchecked MSR access error: WRMSR to 0x%x (tried to write 0x%08x%08x) at rIP: 0x%lx (%pS)\n",
--			(unsigned int)regs->cx, (unsigned int)regs->dx,
--			(unsigned int)regs->ax,  regs->ip, (void *)regs->ip);
-+		/*
-+		 * To maintain consistency with existing RDMSR and WRMSR(NS) instructions,
-+		 * the register operand for immediate form MSR instructions is ALWAYS
-+		 * encoded as RAX in <asm/msr.h> for reading or writing the MSR value.
-+		 */
-+		u64 msr_val = regs->ax;
++	return err;
+ }
+ 
+ /* Can be uninlined because referenced by paravirt */
+@@ -242,8 +246,8 @@ static inline int wrmsrq_safe(u32 msr, u64 val)
+ /* rdmsr with exception handling */
+ #define rdmsr_safe(msr, low, high)				\
+ ({								\
+-	int __err;						\
+-	u64 __val = native_read_msr_safe((msr), &__err);	\
++	u64 __val;						\
++	int __err = native_read_msr_safe((msr), &__val);	\
+ 	(*low) = (u32)__val;					\
+ 	(*high) = (u32)(__val >> 32);				\
+ 	__err;							\
+@@ -251,10 +255,7 @@ static inline int wrmsrq_safe(u32 msr, u64 val)
+ 
+ static inline int rdmsrq_safe(u32 msr, u64 *p)
+ {
+-	int err;
+-
+-	*p = native_read_msr_safe(msr, &err);
+-	return err;
++	return native_read_msr_safe(msr, p);
+ }
+ #endif	/* !CONFIG_PARAVIRT_XXL */
+ 
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 91b3423d36ce..d2db38c32bc5 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -96,9 +96,9 @@ struct pv_cpu_ops {
+ 
+ 	/*
+ 	 * Safe MSR operations.
+-	 * read sets err to 0 or -EIO.  write returns 0 or -EIO.
++	 * Returns 0 or -EIO.
+ 	 */
+-	u64 (*read_msr_safe)(unsigned int msr, int *err);
++	int (*read_msr_safe)(unsigned int msr, u64 *val);
+ 	int (*write_msr_safe)(u32 msr, u64 val);
+ 
+ 	void (*start_context_switch)(struct task_struct *prev);
+diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
+index 4ef9978dce70..838606f784c9 100644
+--- a/arch/x86/kvm/svm/svm.c
++++ b/arch/x86/kvm/svm/svm.c
+@@ -475,15 +475,13 @@ static void svm_inject_exception(struct kvm_vcpu *vcpu)
+ 
+ static void svm_init_erratum_383(void)
+ {
+-	int err;
+ 	u64 val;
+ 
+ 	if (!static_cpu_has_bug(X86_BUG_AMD_TLB_MMATCH))
+ 		return;
+ 
+ 	/* Use _safe variants to not break nested virtualization */
+-	val = native_read_msr_safe(MSR_AMD64_DC_CFG, &err);
+-	if (err)
++	if (native_read_msr_safe(MSR_AMD64_DC_CFG, &val))
+ 		return;
+ 
+ 	val |= (1ULL << 47);
+@@ -648,13 +646,12 @@ static int svm_enable_virtualization_cpu(void)
+ 	 * erratum is present everywhere).
+ 	 */
+ 	if (cpu_has(&boot_cpu_data, X86_FEATURE_OSVW)) {
+-		uint64_t len, status = 0;
++		u64 len, status = 0;
+ 		int err;
+ 
+-		len = native_read_msr_safe(MSR_AMD64_OSVW_ID_LENGTH, &err);
++		err = native_read_msr_safe(MSR_AMD64_OSVW_ID_LENGTH, &len);
+ 		if (!err)
+-			status = native_read_msr_safe(MSR_AMD64_OSVW_STATUS,
+-						      &err);
++			err = native_read_msr_safe(MSR_AMD64_OSVW_STATUS, &status);
+ 
+ 		if (err)
+ 			osvw_status = osvw_len = 0;
+@@ -2145,14 +2142,13 @@ static int ac_interception(struct kvm_vcpu *vcpu)
+ 
+ static bool is_erratum_383(void)
+ {
+-	int err, i;
++	int i;
+ 	u64 value;
+ 
+ 	if (!erratum_383_found)
+ 		return false;
+ 
+-	value = native_read_msr_safe(MSR_IA32_MC0_STATUS, &err);
+-	if (err)
++	if (native_read_msr_safe(MSR_IA32_MC0_STATUS, &value))
+ 		return false;
+ 
+ 	/* Bit 62 may or may not be set for this mce */
+@@ -2165,8 +2161,7 @@ static bool is_erratum_383(void)
+ 	for (i = 0; i < 6; ++i)
+ 		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0);
+ 
+-	value = native_read_msr_safe(MSR_IA32_MCG_STATUS, &err);
+-	if (!err) {
++	if (!native_read_msr_safe(MSR_IA32_MCG_STATUS, &value)) {
+ 		value &= ~(1ULL << 2);
+ 		native_write_msr_safe(MSR_IA32_MCG_STATUS, value);
+ 	}
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 052f68c92111..195e6501a000 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1095,7 +1095,7 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
+ 		return val;
+ 
+ 	if (err)
+-		val = native_read_msr_safe(msr, err);
++		*err = native_read_msr_safe(msr, &val);
+ 	else
+ 		val = native_read_msr(msr);
+ 
+@@ -1162,9 +1162,12 @@ static void xen_do_write_msr(u32 msr, u64 val, int *err)
+ 	}
+ }
+ 
+-static u64 xen_read_msr_safe(unsigned int msr, int *err)
++static int xen_read_msr_safe(unsigned int msr, u64 *val)
+ {
+-	return xen_do_read_msr(msr, err);
++	int err;
 +
-+		if (!imm_insn) {
-+			/*
-+			 * On processors that support the Intel 64 architecture, the
-+			 * high-order 32 bits of each of RAX and RDX are ignored.
-+			 */
-+			msr_val &= 0xffffffff;
-+			msr_val |= (u64)regs->dx << 32;
-+		}
-+
-+		pr_warn("unchecked MSR access error: WRMSR to 0x%x (tried to write 0x%016llx) at rIP: 0x%lx (%pS)\n",
-+			msr, msr_val, regs->ip, (void *)regs->ip);
- 		show_stack_regs(regs);
++	*val = xen_do_read_msr(msr, &err);
++	return err;
+ }
+ 
+ static int xen_write_msr_safe(u32 msr, u64 val)
+diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
+index afb02f43ee3f..ee908dfcff48 100644
+--- a/arch/x86/xen/pmu.c
++++ b/arch/x86/xen/pmu.c
+@@ -319,11 +319,12 @@ static u64 xen_amd_read_pmc(int counter)
+ 	uint8_t xenpmu_flags = get_xenpmu_flags();
+ 
+ 	if (!xenpmu_data || !(xenpmu_flags & XENPMU_IRQ_PROCESSING)) {
+-		uint32_t msr;
+-		int err;
++		u32 msr;
++		u64 val;
+ 
+ 		msr = amd_counters_base + (counter * amd_msr_step);
+-		return native_read_msr_safe(msr, &err);
++		native_read_msr_safe(msr, &val);
++		return val;
  	}
  
- 	if (__ONCE_LITE_IF(!safe && !wrmsr)) {
- 		pr_warn("unchecked MSR access error: RDMSR from 0x%x at rIP: 0x%lx (%pS)\n",
--			(unsigned int)regs->cx, regs->ip, (void *)regs->ip);
-+			msr, regs->ip, (void *)regs->ip);
- 		show_stack_regs(regs);
+ 	ctxt = &xenpmu_data->pmu.c.amd;
+@@ -340,15 +341,16 @@ static u64 xen_intel_read_pmc(int counter)
+ 	uint8_t xenpmu_flags = get_xenpmu_flags();
+ 
+ 	if (!xenpmu_data || !(xenpmu_flags & XENPMU_IRQ_PROCESSING)) {
+-		uint32_t msr;
+-		int err;
++		u32 msr;
++		u64 val;
+ 
+ 		if (counter & (1 << INTEL_PMC_TYPE_SHIFT))
+ 			msr = MSR_CORE_PERF_FIXED_CTR0 + (counter & 0xffff);
+ 		else
+ 			msr = MSR_IA32_PERFCTR0 + counter;
+ 
+-		return native_read_msr_safe(msr, &err);
++		native_read_msr_safe(msr, &val);
++		return val;
  	}
  
- 	if (!wrmsr) {
- 		/* Pretend that the read succeeded and returned 0. */
- 		regs->ax = 0;
--		regs->dx = 0;
-+
-+		if (!imm_insn)
-+			regs->dx = 0;
- 	}
- 
- 	if (safe)
+ 	ctxt = &xenpmu_data->pmu.c.intel;
 -- 
 2.49.0
 
