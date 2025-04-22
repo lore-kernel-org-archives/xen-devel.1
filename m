@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FA8C369D7
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961783.1353145 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D52C369DE
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.961787.1353188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78ub-0005n2-43; Tue, 22 Apr 2025 08:23:25 +0000
+	id 1u78ue-0006mq-Lk; Tue, 22 Apr 2025 08:23:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961783.1353145; Tue, 22 Apr 2025 08:23:25 +0000
+Received: by outflank-mailman (output) from mailman id 961787.1353188; Tue, 22 Apr 2025 08:23:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78ua-0005ku-UH; Tue, 22 Apr 2025 08:23:24 +0000
-Received: by outflank-mailman (input) for mailman id 961783;
- Tue, 22 Apr 2025 08:23:23 +0000
+	id 1u78ue-0006l4-6U; Tue, 22 Apr 2025 08:23:28 +0000
+Received: by outflank-mailman (input) for mailman id 961787;
+ Tue, 22 Apr 2025 08:23:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78uZ-0004wX-G5
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:23 +0000
+ id 1u78ub-0004wX-Gn
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:25 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0b2a1400-1f53-11f0-9ffb-bf95429c2676;
- Tue, 22 Apr 2025 10:23:19 +0200 (CEST)
+ id 0ad4ecd9-1f53-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 10:23:18 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9S1954391
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9F1954391
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:22:49 -0700
+ Tue, 22 Apr 2025 01:22:22 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b2a1400-1f53-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9S1954391
+X-Inumbo-ID: 0ad4ecd9-1f53-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9F1954391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310171;
-	bh=tgzUrlRfHVNmuhey2aHHRIY5ipoKFEwgpjfhEzZ9bZY=;
+	s=2025042001; t=1745310144;
+	bh=gofr29Us7GJwE+ep+JSVtswMwKTsjSvf3ByH2Ru+lMY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cSUq20FJ1es+IIhRb98fV1d5F5NvXSUm1EMpz1+tO0YnVvnuTJaFjsStronse55k5
-	 YxZtOYxcfkDzQLV4kClq6Bh9fQSG39eicOmoWqumnSOinsUbwn6q998dOSYad0zsE1
-	 XTVUr6fpYzuVa8qpsuccsUw3Ow+s/jyBTD5r2pg0D9UWVh301tVKqpsTK+wFXOiuaD
-	 N0eQT6AhQXD63t318ErncqLrfB5Jcz79t3Isvxia9piGM6jDV7ZfMM3vN8awrIAAmE
-	 baBmekkbHBPV6QEgBNF1TdwtwUqOlgXwgXJkAJ4oGprjAmWEMzvfq69Je187jfLeDB
-	 aWRCULSzY6RQw==
+	b=C+FHL7l1DozIF9G3dyP8TJEkWL4mb+IbzggFlvUHen/RMc6m8raGVFoPqJTk1NloE
+	 dZEvycUnAXEB+wMZfgOQgp8M7ntf0J0NYGe5AWNwyKSvmonnj0D3+yR3eYhx6wihMv
+	 cbXC2V4zp5cqC6kq70UtDQC71N3d8i/2m8Yp2DtlJze9Ps9J0z6WDGvYaj8GYIO1E6
+	 aFROF2AMz5JriybNNFSrbo4djA+VO/OFXxmQpoMKOQ9J9Y8vIl/Eda+WEtNJJYyOnv
+	 lpZh7KcgftJhdhV4JmJK/hirxkQJt4YDV8FOC/FXYUao/OGh7u3HXxEXgFRrimFNNO
+	 bUzyvFISvm1gQ==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -73,420 +73,542 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 14/34] x86/msr: refactor pv_cpu_ops.write_msr{_safe}()
-Date: Tue, 22 Apr 2025 01:21:55 -0700
-Message-ID: <20250422082216.1954310-15-xin@zytor.com>
+Subject: [RFC PATCH v2 01/34] x86/msr: Move rdtsc{,_ordered}() to <asm/tsc.h>
+Date: Tue, 22 Apr 2025 01:21:42 -0700
+Message-ID: <20250422082216.1954310-2-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
 References: <20250422082216.1954310-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-An MSR value is represented as a 64-bit unsigned integer, with existing
-MSR instructions storing it in EDX:EAX as two 32-bit segments.
-
-The new immediate form MSR instructions, however, utilize a 64-bit
-general-purpose register to store the MSR value.  To unify the usage of
-all MSR instructions, let the default MSR access APIs accept an MSR
-value as a single 64-bit argument instead of two 32-bit segments.
-
-The dual 32-bit APIs are still available as convenient wrappers over the
-APIs that handle an MSR value as a single 64-bit argument.
-
-The following illustrates the updated derivation of the MSR write APIs:
-
-                 __wrmsrq(u32 msr, u64 val)
-                   /                  \
-                  /                    \
-           native_wrmsrq(msr, val)    native_wrmsr(msr, low, high)
-                 |
-                 |
-           native_write_msr(msr, val)
-                /          \
-               /            \
-       wrmsrq(msr, val)    wrmsr(msr, low, high)
-
-When CONFIG_PARAVIRT is enabled, wrmsrq() and wrmsr() are defined on top
-of paravirt_write_msr():
-
-            paravirt_write_msr(u32 msr, u64 val)
-               /             \
-              /               \
-          wrmsrq(msr, val)    wrmsr(msr, low, high)
-
-paravirt_write_msr() invokes cpu.write_msr(msr, val), an indirect layer
-of pv_ops MSR write call:
-
-    If on native:
-
-            cpu.write_msr = native_write_msr
-
-    If on Xen:
-
-            cpu.write_msr = xen_write_msr
-
-Therefore, refactor pv_cpu_ops.write_msr{_safe}() to accept an MSR value
-in a single u64 argument, replacing the current dual u32 arguments.
-
-No functional change intended.
+Relocate rdtsc{,_ordered}() from <asm/msr.h> to <asm/tsc.h>, and
+subsequently remove the inclusion of <asm/msr.h> in <asm/tsc.h>.
+Consequently, <asm/msr.h> must be included in several source files
+that previously did not require it.
 
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 ---
+ arch/x86/boot/startup/sme.c                   |  1 +
+ arch/x86/events/msr.c                         |  3 +
+ arch/x86/events/perf_event.h                  |  1 +
+ arch/x86/events/probe.c                       |  2 +
+ arch/x86/hyperv/ivm.c                         |  1 +
+ arch/x86/include/asm/fred.h                   |  1 +
+ arch/x86/include/asm/microcode.h              |  2 +
+ arch/x86/include/asm/mshyperv.h               |  1 +
+ arch/x86/include/asm/msr.h                    | 55 +-------------
+ arch/x86/include/asm/suspend_32.h             |  1 +
+ arch/x86/include/asm/suspend_64.h             |  1 +
+ arch/x86/include/asm/switch_to.h              |  2 +
+ arch/x86/include/asm/tsc.h                    | 76 ++++++++++++++++++-
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  1 +
+ arch/x86/kernel/fpu/xstate.h                  |  1 +
+ arch/x86/kernel/hpet.c                        |  1 +
+ arch/x86/kernel/process_64.c                  |  1 +
+ arch/x86/kernel/trace_clock.c                 |  2 +-
+ arch/x86/kernel/tsc_sync.c                    |  1 +
+ arch/x86/lib/kaslr.c                          |  2 +-
+ arch/x86/realmode/init.c                      |  1 +
+ drivers/acpi/processor_perflib.c              |  1 +
+ drivers/acpi/processor_throttling.c           |  3 +-
+ drivers/cpufreq/amd-pstate-ut.c               |  2 +
+ drivers/hwmon/hwmon-vid.c                     |  4 +
+ drivers/net/vmxnet3/vmxnet3_drv.c             |  4 +
+ .../intel/speed_select_if/isst_if_common.c    |  1 +
+ drivers/platform/x86/intel/turbo_max_3.c      |  1 +
+ 28 files changed, 115 insertions(+), 58 deletions(-)
 
-Change in v2:
-* Spell out the reason why use a single u64 argument to pass the MSR
-  value in the lowest level APIs (Andrew Cooper).
----
- arch/x86/include/asm/msr.h            | 35 ++++++++++++---------------
- arch/x86/include/asm/paravirt.h       | 27 +++++++++++----------
- arch/x86/include/asm/paravirt_types.h |  4 +--
- arch/x86/kernel/kvmclock.c            |  2 +-
- arch/x86/kvm/svm/svm.c                | 15 +++---------
- arch/x86/xen/enlighten_pv.c           | 29 +++++++++-------------
- 6 files changed, 46 insertions(+), 66 deletions(-)
-
-diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index 2ab8effea4cd..dd1114053173 100644
---- a/arch/x86/include/asm/msr.h
-+++ b/arch/x86/include/asm/msr.h
-@@ -97,12 +97,12 @@ static __always_inline u64 __rdmsr(u32 msr)
- 	return EAX_EDX_VAL(val, low, high);
- }
+diff --git a/arch/x86/boot/startup/sme.c b/arch/x86/boot/startup/sme.c
+index 5738b31c8e60..591d6a4d2e59 100644
+--- a/arch/x86/boot/startup/sme.c
++++ b/arch/x86/boot/startup/sme.c
+@@ -44,6 +44,7 @@
+ #include <asm/sections.h>
+ #include <asm/coco.h>
+ #include <asm/sev.h>
++#include <asm/msr.h>
  
--static __always_inline void __wrmsr(u32 msr, u32 low, u32 high)
-+static __always_inline void __wrmsrq(u32 msr, u64 val)
- {
- 	asm volatile("1: wrmsr\n"
- 		     "2:\n"
- 		     _ASM_EXTABLE_TYPE(1b, 2b, EX_TYPE_WRMSR)
--		     : : "c" (msr), "a"(low), "d" (high) : "memory");
-+		     : : "c" (msr), "a" ((u32)val), "d" ((u32)(val >> 32)) : "memory");
- }
+ #define PGD_FLAGS		_KERNPG_TABLE_NOENC
+ #define P4D_FLAGS		_KERNPG_TABLE_NOENC
+diff --git a/arch/x86/events/msr.c b/arch/x86/events/msr.c
+index 8970ecef87c5..c39e49cecace 100644
+--- a/arch/x86/events/msr.c
++++ b/arch/x86/events/msr.c
+@@ -3,6 +3,9 @@
+ #include <linux/sysfs.h>
+ #include <linux/nospec.h>
+ #include <asm/cpu_device_id.h>
++#include <asm/msr.h>
++#include <asm/tsc.h>
++
+ #include "probe.h"
  
- #define native_rdmsr(msr, val1, val2)			\
-@@ -118,11 +118,10 @@ static __always_inline u64 native_rdmsrq(u32 msr)
- }
+ enum perf_msr_id {
+diff --git a/arch/x86/events/perf_event.h b/arch/x86/events/perf_event.h
+index b29b452b1187..53ef48b4c65c 100644
+--- a/arch/x86/events/perf_event.h
++++ b/arch/x86/events/perf_event.h
+@@ -17,6 +17,7 @@
+ #include <asm/fpu/xstate.h>
+ #include <asm/intel_ds.h>
+ #include <asm/cpu.h>
++#include <asm/msr.h>
  
- #define native_wrmsr(msr, low, high)			\
--	__wrmsr(msr, low, high)
-+	__wrmsrq((msr), (u64)(high) << 32 | (low))
+ /* To enable MSR tracing please use the generic trace points. */
  
- #define native_wrmsrq(msr, val)				\
--	__wrmsr((msr), (u32)((u64)(val)),		\
--		       (u32)((u64)(val) >> 32))
-+	__wrmsrq((msr), (val))
+diff --git a/arch/x86/events/probe.c b/arch/x86/events/probe.c
+index fda35cf25528..bb719d0d3f0b 100644
+--- a/arch/x86/events/probe.c
++++ b/arch/x86/events/probe.c
+@@ -2,6 +2,8 @@
+ #include <linux/export.h>
+ #include <linux/types.h>
+ #include <linux/bits.h>
++
++#include <asm/msr.h>
+ #include "probe.h"
  
- static inline u64 native_read_msr(u32 msr)
- {
-@@ -151,11 +150,8 @@ static inline u64 native_read_msr_safe(u32 msr, int *err)
- }
+ static umode_t
+diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
+index 1b8a2415183b..8209de792388 100644
+--- a/arch/x86/hyperv/ivm.c
++++ b/arch/x86/hyperv/ivm.c
+@@ -22,6 +22,7 @@
+ #include <asm/realmode.h>
+ #include <asm/e820/api.h>
+ #include <asm/desc.h>
++#include <asm/msr.h>
+ #include <uapi/asm/vmx.h>
  
- /* Can be uninlined because referenced by paravirt */
--static inline void notrace
--native_write_msr(u32 msr, u32 low, u32 high)
-+static inline void notrace native_write_msr(u32 msr, u64 val)
- {
--	u64 val = (u64)high << 32 | low;
--
- 	native_wrmsrq(msr, val);
+ #ifdef CONFIG_AMD_MEM_ENCRYPT
+diff --git a/arch/x86/include/asm/fred.h b/arch/x86/include/asm/fred.h
+index 2a29e5216881..12b34d5b2953 100644
+--- a/arch/x86/include/asm/fred.h
++++ b/arch/x86/include/asm/fred.h
+@@ -9,6 +9,7 @@
+ #include <linux/const.h>
  
- 	if (tracepoint_enabled(write_msr))
-@@ -163,8 +159,7 @@ native_write_msr(u32 msr, u32 low, u32 high)
- }
- 
- /* Can be uninlined because referenced by paravirt */
--static inline int notrace
--native_write_msr_safe(u32 msr, u32 low, u32 high)
-+static inline int notrace native_write_msr_safe(u32 msr, u64 val)
- {
- 	int err;
- 
-@@ -172,10 +167,10 @@ native_write_msr_safe(u32 msr, u32 low, u32 high)
- 		     "2:\n\t"
- 		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_WRMSR_SAFE, %[err])
- 		     : [err] "=a" (err)
--		     : "c" (msr), "0" (low), "d" (high)
-+		     : "c" (msr), "0" ((u32)val), "d" ((u32)(val >> 32))
- 		     : "memory");
- 	if (tracepoint_enabled(write_msr))
--		do_trace_write_msr(msr, ((u64)high << 32 | low), err);
-+		do_trace_write_msr(msr, val, err);
- 	return err;
- }
- 
-@@ -227,7 +222,7 @@ do {								\
- 
- static inline void wrmsr(u32 msr, u32 low, u32 high)
- {
--	native_write_msr(msr, low, high);
-+	native_write_msr(msr, (u64)high << 32 | low);
- }
- 
- #define rdmsrq(msr, val)			\
-@@ -235,13 +230,13 @@ static inline void wrmsr(u32 msr, u32 low, u32 high)
- 
- static inline void wrmsrq(u32 msr, u64 val)
- {
--	native_write_msr(msr, (u32)(val & 0xffffffffULL), (u32)(val >> 32));
-+	native_write_msr(msr, val);
- }
- 
- /* wrmsr with exception handling */
--static inline int wrmsr_safe(u32 msr, u32 low, u32 high)
-+static inline int wrmsrq_safe(u32 msr, u64 val)
- {
--	return native_write_msr_safe(msr, low, high);
-+	return native_write_msr_safe(msr, val);
- }
- 
- /* rdmsr with exception handling */
-@@ -279,11 +274,11 @@ static __always_inline void wrmsrns(u32 msr, u64 val)
- }
+ #include <asm/asm.h>
++#include <asm/msr.h>
+ #include <asm/trapnr.h>
  
  /*
-- * 64-bit version of wrmsr_safe():
-+ * Dual u32 version of wrmsrq_safe():
-  */
--static inline int wrmsrq_safe(u32 msr, u64 val)
-+static inline int wrmsr_safe(u32 msr, u32 low, u32 high)
+diff --git a/arch/x86/include/asm/microcode.h b/arch/x86/include/asm/microcode.h
+index 263ea3dd0001..107a1aaa211b 100644
+--- a/arch/x86/include/asm/microcode.h
++++ b/arch/x86/include/asm/microcode.h
+@@ -2,6 +2,8 @@
+ #ifndef _ASM_X86_MICROCODE_H
+ #define _ASM_X86_MICROCODE_H
+ 
++#include <asm/msr.h>
++
+ struct cpu_signature {
+ 	unsigned int sig;
+ 	unsigned int pf;
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index bab5ccfc60a7..15d00dace70f 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -8,6 +8,7 @@
+ #include <linux/io.h>
+ #include <asm/nospec-branch.h>
+ #include <asm/paravirt.h>
++#include <asm/msr.h>
+ #include <hyperv/hvhdk.h>
+ 
+ /*
+diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
+index 2ccc78ebc3d7..2caa13830e11 100644
+--- a/arch/x86/include/asm/msr.h
++++ b/arch/x86/include/asm/msr.h
+@@ -12,6 +12,7 @@
+ #include <uapi/asm/msr.h>
+ #include <asm/shared/msr.h>
+ 
++#include <linux/types.h>
+ #include <linux/percpu.h>
+ 
+ struct msr_info {
+@@ -169,60 +170,6 @@ native_write_msr_safe(u32 msr, u32 low, u32 high)
+ extern int rdmsr_safe_regs(u32 regs[8]);
+ extern int wrmsr_safe_regs(u32 regs[8]);
+ 
+-/**
+- * rdtsc() - returns the current TSC without ordering constraints
+- *
+- * rdtsc() returns the result of RDTSC as a 64-bit integer.  The
+- * only ordering constraint it supplies is the ordering implied by
+- * "asm volatile": it will put the RDTSC in the place you expect.  The
+- * CPU can and will speculatively execute that RDTSC, though, so the
+- * results can be non-monotonic if compared on different CPUs.
+- */
+-static __always_inline u64 rdtsc(void)
+-{
+-	DECLARE_ARGS(val, low, high);
+-
+-	asm volatile("rdtsc" : EAX_EDX_RET(val, low, high));
+-
+-	return EAX_EDX_VAL(val, low, high);
+-}
+-
+-/**
+- * rdtsc_ordered() - read the current TSC in program order
+- *
+- * rdtsc_ordered() returns the result of RDTSC as a 64-bit integer.
+- * It is ordered like a load to a global in-memory counter.  It should
+- * be impossible to observe non-monotonic rdtsc_unordered() behavior
+- * across multiple CPUs as long as the TSC is synced.
+- */
+-static __always_inline u64 rdtsc_ordered(void)
+-{
+-	DECLARE_ARGS(val, low, high);
+-
+-	/*
+-	 * The RDTSC instruction is not ordered relative to memory
+-	 * access.  The Intel SDM and the AMD APM are both vague on this
+-	 * point, but empirically an RDTSC instruction can be
+-	 * speculatively executed before prior loads.  An RDTSC
+-	 * immediately after an appropriate barrier appears to be
+-	 * ordered as a normal load, that is, it provides the same
+-	 * ordering guarantees as reading from a global memory location
+-	 * that some other imaginary CPU is updating continuously with a
+-	 * time stamp.
+-	 *
+-	 * Thus, use the preferred barrier on the respective CPU, aiming for
+-	 * RDTSCP as the default.
+-	 */
+-	asm volatile(ALTERNATIVE_2("rdtsc",
+-				   "lfence; rdtsc", X86_FEATURE_LFENCE_RDTSC,
+-				   "rdtscp", X86_FEATURE_RDTSCP)
+-			: EAX_EDX_RET(val, low, high)
+-			/* RDTSCP clobbers ECX with MSR_TSC_AUX. */
+-			:: "ecx");
+-
+-	return EAX_EDX_VAL(val, low, high);
+-}
+-
+ static inline u64 native_read_pmc(int counter)
  {
--	return wrmsr_safe(msr, (u32)val,  (u32)(val >> 32));
-+	return wrmsrq_safe(msr, (u64)high << 32 | low);
- }
+ 	DECLARE_ARGS(val, low, high);
+diff --git a/arch/x86/include/asm/suspend_32.h b/arch/x86/include/asm/suspend_32.h
+index d8416b3bf832..e8e5aab06255 100644
+--- a/arch/x86/include/asm/suspend_32.h
++++ b/arch/x86/include/asm/suspend_32.h
+@@ -9,6 +9,7 @@
  
- struct msr __percpu *msrs_alloc(void);
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index c7689f5f70d6..1bd1dad8da5a 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -180,10 +180,9 @@ static inline u64 paravirt_read_msr(unsigned msr)
- 	return PVOP_CALL1(u64, cpu.read_msr, msr);
- }
+ #include <asm/desc.h>
+ #include <asm/fpu/api.h>
++#include <asm/msr.h>
  
--static inline void paravirt_write_msr(unsigned msr,
--				      unsigned low, unsigned high)
-+static inline void paravirt_write_msr(u32 msr, u64 val)
- {
--	PVOP_VCALL3(cpu.write_msr, msr, low, high);
-+	PVOP_VCALL2(cpu.write_msr, msr, val);
- }
+ /* image of the saved processor state */
+ struct saved_context {
+diff --git a/arch/x86/include/asm/suspend_64.h b/arch/x86/include/asm/suspend_64.h
+index 54df06687d83..b512f9665f78 100644
+--- a/arch/x86/include/asm/suspend_64.h
++++ b/arch/x86/include/asm/suspend_64.h
+@@ -9,6 +9,7 @@
  
- static inline u64 paravirt_read_msr_safe(unsigned msr, int *err)
-@@ -191,10 +190,9 @@ static inline u64 paravirt_read_msr_safe(unsigned msr, int *err)
- 	return PVOP_CALL2(u64, cpu.read_msr_safe, msr, err);
- }
+ #include <asm/desc.h>
+ #include <asm/fpu/api.h>
++#include <asm/msr.h>
  
--static inline int paravirt_write_msr_safe(unsigned msr,
--					  unsigned low, unsigned high)
-+static inline int paravirt_write_msr_safe(u32 msr, u64 val)
- {
--	return PVOP_CALL3(int, cpu.write_msr_safe, msr, low, high);
-+	return PVOP_CALL2(int, cpu.write_msr_safe, msr, val);
- }
- 
- #define rdmsr(msr, val1, val2)			\
-@@ -204,22 +202,25 @@ do {						\
- 	val2 = _l >> 32;			\
+ /*
+  * Image of the saved processor state, used by the low level ACPI suspend to
+diff --git a/arch/x86/include/asm/switch_to.h b/arch/x86/include/asm/switch_to.h
+index 75248546403d..4f21df7af715 100644
+--- a/arch/x86/include/asm/switch_to.h
++++ b/arch/x86/include/asm/switch_to.h
+@@ -52,6 +52,8 @@ do {									\
  } while (0)
  
--#define wrmsr(msr, val1, val2)			\
--do {						\
--	paravirt_write_msr(msr, val1, val2);	\
--} while (0)
-+static __always_inline void wrmsr(u32 msr, u32 low, u32 high)
+ #ifdef CONFIG_X86_32
++#include <asm/msr.h>
++
+ static inline void refresh_sysenter_cs(struct thread_struct *thread)
+ {
+ 	/* Only happens when SEP is enabled, no need to test "SEP"arately: */
+diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
+index 94408a784c8e..13335a130edf 100644
+--- a/arch/x86/include/asm/tsc.h
++++ b/arch/x86/include/asm/tsc.h
+@@ -7,7 +7,81 @@
+ 
+ #include <asm/cpufeature.h>
+ #include <asm/processor.h>
+-#include <asm/msr.h>
++
++/*
++ * both i386 and x86_64 returns 64-bit value in edx:eax, but gcc's "A"
++ * constraint has different meanings. For i386, "A" means exactly
++ * edx:eax, while for x86_64 it doesn't mean rdx:rax or edx:eax. Instead,
++ * it means rax *or* rdx.
++ */
++#ifdef CONFIG_X86_64
++/* Using 64-bit values saves one instruction clearing the high half of low */
++#define DECLARE_ARGS(val, low, high)	unsigned long low, high
++#define EAX_EDX_VAL(val, low, high)	((low) | (high) << 32)
++#define EAX_EDX_RET(val, low, high)	"=a" (low), "=d" (high)
++#else
++#define DECLARE_ARGS(val, low, high)	u64 val
++#define EAX_EDX_VAL(val, low, high)	(val)
++#define EAX_EDX_RET(val, low, high)	"=A" (val)
++#endif
++
++/**
++ * rdtsc() - returns the current TSC without ordering constraints
++ *
++ * rdtsc() returns the result of RDTSC as a 64-bit integer.  The
++ * only ordering constraint it supplies is the ordering implied by
++ * "asm volatile": it will put the RDTSC in the place you expect.  The
++ * CPU can and will speculatively execute that RDTSC, though, so the
++ * results can be non-monotonic if compared on different CPUs.
++ */
++static __always_inline u64 rdtsc(void)
 +{
-+	paravirt_write_msr(msr, (u64)high << 32 | low);
++	DECLARE_ARGS(val, low, high);
++
++	asm volatile("rdtsc" : EAX_EDX_RET(val, low, high));
++
++	return EAX_EDX_VAL(val, low, high);
 +}
- 
- #define rdmsrq(msr, val)			\
- do {						\
- 	val = paravirt_read_msr(msr);		\
- } while (0)
- 
--static inline void wrmsrq(unsigned msr, u64 val)
-+static inline void wrmsrq(u32 msr, u64 val)
- {
--	wrmsr(msr, (u32)val, (u32)(val>>32));
-+	paravirt_write_msr(msr, val);
- }
- 
--#define wrmsr_safe(msr, a, b)	paravirt_write_msr_safe(msr, a, b)
-+static inline int wrmsrq_safe(u32 msr, u64 val)
++
++/**
++ * rdtsc_ordered() - read the current TSC in program order
++ *
++ * rdtsc_ordered() returns the result of RDTSC as a 64-bit integer.
++ * It is ordered like a load to a global in-memory counter.  It should
++ * be impossible to observe non-monotonic rdtsc_unordered() behavior
++ * across multiple CPUs as long as the TSC is synced.
++ */
++static __always_inline u64 rdtsc_ordered(void)
 +{
-+	return paravirt_write_msr_safe(msr, val)
++	DECLARE_ARGS(val, low, high);
++
++	/*
++	 * The RDTSC instruction is not ordered relative to memory
++	 * access.  The Intel SDM and the AMD APM are both vague on this
++	 * point, but empirically an RDTSC instruction can be
++	 * speculatively executed before prior loads.  An RDTSC
++	 * immediately after an appropriate barrier appears to be
++	 * ordered as a normal load, that is, it provides the same
++	 * ordering guarantees as reading from a global memory location
++	 * that some other imaginary CPU is updating continuously with a
++	 * time stamp.
++	 *
++	 * Thus, use the preferred barrier on the respective CPU, aiming for
++	 * RDTSCP as the default.
++	 */
++	asm volatile(ALTERNATIVE_2("rdtsc",
++				   "lfence; rdtsc", X86_FEATURE_LFENCE_RDTSC,
++				   "rdtscp", X86_FEATURE_RDTSCP)
++			: EAX_EDX_RET(val, low, high)
++			/* RDTSCP clobbers ECX with MSR_TSC_AUX. */
++			:: "ecx");
++
++	return EAX_EDX_VAL(val, low, high);
 +}
++
++#undef DECLARE_ARGS
++#undef EAX_EDX_VAL
++#undef EAX_EDX_RET
  
- /* rdmsr with exception handling */
- #define rdmsr_safe(msr, a, b)				\
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 475f508531d6..91b3423d36ce 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -92,14 +92,14 @@ struct pv_cpu_ops {
+ /*
+  * Standard way to access the cycle counter.
+diff --git a/arch/x86/kernel/cpu/resctrl/pseudo_lock.c b/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
+index 2a82eb6a0376..26c354bdea07 100644
+--- a/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
++++ b/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
+@@ -25,6 +25,7 @@
+ #include <asm/cpu_device_id.h>
+ #include <asm/resctrl.h>
+ #include <asm/perf_event.h>
++#include <asm/msr.h>
  
- 	/* Unsafe MSR operations.  These will warn or panic on failure. */
- 	u64 (*read_msr)(unsigned int msr);
--	void (*write_msr)(unsigned int msr, unsigned low, unsigned high);
-+	void (*write_msr)(u32 msr, u64 val);
+ #include "../../events/perf_event.h" /* For X86_CONFIG() */
+ #include "internal.h"
+diff --git a/arch/x86/kernel/fpu/xstate.h b/arch/x86/kernel/fpu/xstate.h
+index a3b7dcbdb060..52ce19289989 100644
+--- a/arch/x86/kernel/fpu/xstate.h
++++ b/arch/x86/kernel/fpu/xstate.h
+@@ -5,6 +5,7 @@
+ #include <asm/cpufeature.h>
+ #include <asm/fpu/xstate.h>
+ #include <asm/fpu/xcr.h>
++#include <asm/msr.h>
  
- 	/*
- 	 * Safe MSR operations.
- 	 * read sets err to 0 or -EIO.  write returns 0 or -EIO.
- 	 */
- 	u64 (*read_msr_safe)(unsigned int msr, int *err);
--	int (*write_msr_safe)(unsigned int msr, unsigned low, unsigned high);
-+	int (*write_msr_safe)(u32 msr, u64 val);
+ #ifdef CONFIG_X86_64
+ DECLARE_PER_CPU(u64, xfd_state);
+diff --git a/arch/x86/kernel/hpet.c b/arch/x86/kernel/hpet.c
+index cc5d12232216..c9982a7c9536 100644
+--- a/arch/x86/kernel/hpet.c
++++ b/arch/x86/kernel/hpet.c
+@@ -12,6 +12,7 @@
+ #include <asm/hpet.h>
+ #include <asm/time.h>
+ #include <asm/mwait.h>
++#include <asm/msr.h>
  
- 	void (*start_context_switch)(struct task_struct *prev);
- 	void (*end_context_switch)(struct task_struct *next);
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index 0af797930ccb..ca0a49eeac4a 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -196,7 +196,7 @@ static void kvm_setup_secondary_clock(void)
- void kvmclock_disable(void)
- {
- 	if (msr_kvm_system_time)
--		native_write_msr(msr_kvm_system_time, 0, 0);
-+		native_write_msr(msr_kvm_system_time, 0);
- }
- 
- static void __init kvmclock_init_mem(void)
-diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-index 67657b3a36ce..4ef9978dce70 100644
---- a/arch/x86/kvm/svm/svm.c
-+++ b/arch/x86/kvm/svm/svm.c
-@@ -475,7 +475,6 @@ static void svm_inject_exception(struct kvm_vcpu *vcpu)
- 
- static void svm_init_erratum_383(void)
- {
--	u32 low, high;
- 	int err;
- 	u64 val;
- 
-@@ -489,10 +488,7 @@ static void svm_init_erratum_383(void)
- 
- 	val |= (1ULL << 47);
- 
--	low  = lower_32_bits(val);
--	high = upper_32_bits(val);
--
--	native_write_msr_safe(MSR_AMD64_DC_CFG, low, high);
-+	native_write_msr_safe(MSR_AMD64_DC_CFG, val);
- 
- 	erratum_383_found = true;
- }
-@@ -2167,17 +2163,12 @@ static bool is_erratum_383(void)
- 
- 	/* Clear MCi_STATUS registers */
- 	for (i = 0; i < 6; ++i)
--		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0, 0);
-+		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0);
- 
- 	value = native_read_msr_safe(MSR_IA32_MCG_STATUS, &err);
- 	if (!err) {
--		u32 low, high;
--
- 		value &= ~(1ULL << 2);
--		low    = lower_32_bits(value);
--		high   = upper_32_bits(value);
--
--		native_write_msr_safe(MSR_IA32_MCG_STATUS, low, high);
-+		native_write_msr_safe(MSR_IA32_MCG_STATUS, value);
- 	}
- 
- 	/* Flush tlb to evict multi-match entries */
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 9a89cb29fa35..052f68c92111 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1111,10 +1111,8 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
- 	return val;
- }
- 
--static void set_seg(u32 which, u32 low, u32 high)
-+static void set_seg(u32 which, u64 base)
- {
--	u64 base = ((u64)high << 32) | low;
--
- 	if (HYPERVISOR_set_segment_base(which, base))
- 		WARN(1, "Xen set_segment_base(%u, %llx) failed\n", which, base);
- }
-@@ -1124,23 +1122,21 @@ static void set_seg(u32 which, u32 low, u32 high)
-  * With err == NULL write_msr() semantics are selected.
-  * Supplying an err pointer requires err to be pre-initialized with 0.
+ #undef  pr_fmt
+ #define pr_fmt(fmt) "hpet: " fmt
+diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
+index 24e1ccf22912..cfa9c031de91 100644
+--- a/arch/x86/kernel/process_64.c
++++ b/arch/x86/kernel/process_64.c
+@@ -57,6 +57,7 @@
+ #include <asm/unistd.h>
+ #include <asm/fsgsbase.h>
+ #include <asm/fred.h>
++#include <asm/msr.h>
+ #ifdef CONFIG_IA32_EMULATION
+ /* Not included via unistd.h */
+ #include <asm/unistd_32_ia32.h>
+diff --git a/arch/x86/kernel/trace_clock.c b/arch/x86/kernel/trace_clock.c
+index b8e7abe00b06..708d61743d15 100644
+--- a/arch/x86/kernel/trace_clock.c
++++ b/arch/x86/kernel/trace_clock.c
+@@ -4,7 +4,7 @@
   */
--static void xen_do_write_msr(unsigned int msr, unsigned int low,
--			     unsigned int high, int *err)
-+static void xen_do_write_msr(u32 msr, u64 val, int *err)
- {
--	u64 val;
- 	bool emulated;
+ #include <asm/trace_clock.h>
+ #include <asm/barrier.h>
+-#include <asm/msr.h>
++#include <asm/tsc.h>
  
- 	switch (msr) {
- 	case MSR_FS_BASE:
--		set_seg(SEGBASE_FS, low, high);
-+		set_seg(SEGBASE_FS, val);
- 		break;
+ /*
+  * trace_clock_x86_tsc(): A clock that is just the cycle counter.
+diff --git a/arch/x86/kernel/tsc_sync.c b/arch/x86/kernel/tsc_sync.c
+index f1c7a86dbf49..ec3aa340d351 100644
+--- a/arch/x86/kernel/tsc_sync.c
++++ b/arch/x86/kernel/tsc_sync.c
+@@ -21,6 +21,7 @@
+ #include <linux/kernel.h>
+ #include <linux/smp.h>
+ #include <linux/nmi.h>
++#include <asm/msr.h>
+ #include <asm/tsc.h>
  
- 	case MSR_KERNEL_GS_BASE:
--		set_seg(SEGBASE_GS_USER, low, high);
-+		set_seg(SEGBASE_GS_USER, val);
- 		break;
+ struct tsc_adjust {
+diff --git a/arch/x86/lib/kaslr.c b/arch/x86/lib/kaslr.c
+index a58f451a7dd3..b5893928d55c 100644
+--- a/arch/x86/lib/kaslr.c
++++ b/arch/x86/lib/kaslr.c
+@@ -8,7 +8,7 @@
+  */
+ #include <asm/asm.h>
+ #include <asm/kaslr.h>
+-#include <asm/msr.h>
++#include <asm/tsc.h>
+ #include <asm/archrandom.h>
+ #include <asm/e820/api.h>
+ #include <asm/shared/io.h>
+diff --git a/arch/x86/realmode/init.c b/arch/x86/realmode/init.c
+index 263787b4800c..ed5c63c0b4e5 100644
+--- a/arch/x86/realmode/init.c
++++ b/arch/x86/realmode/init.c
+@@ -9,6 +9,7 @@
+ #include <asm/realmode.h>
+ #include <asm/tlbflush.h>
+ #include <asm/crash.h>
++#include <asm/msr.h>
+ #include <asm/sev.h>
  
- 	case MSR_GS_BASE:
--		set_seg(SEGBASE_GS_KERNEL, low, high);
-+		set_seg(SEGBASE_GS_KERNEL, val);
- 		break;
+ struct real_mode_header *real_mode_header;
+diff --git a/drivers/acpi/processor_perflib.c b/drivers/acpi/processor_perflib.c
+index 53996f1a2d80..64b8d1e19594 100644
+--- a/drivers/acpi/processor_perflib.c
++++ b/drivers/acpi/processor_perflib.c
+@@ -20,6 +20,7 @@
+ #include <acpi/processor.h>
+ #ifdef CONFIG_X86
+ #include <asm/cpufeature.h>
++#include <asm/msr.h>
+ #endif
  
- 	case MSR_STAR:
-@@ -1156,15 +1152,13 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
- 		break;
+ #define ACPI_PROCESSOR_FILE_PERFORMANCE	"performance"
+diff --git a/drivers/acpi/processor_throttling.c b/drivers/acpi/processor_throttling.c
+index 00d045e5f524..8482e9a8a7aa 100644
+--- a/drivers/acpi/processor_throttling.c
++++ b/drivers/acpi/processor_throttling.c
+@@ -18,9 +18,10 @@
+ #include <linux/sched.h>
+ #include <linux/cpufreq.h>
+ #include <linux/acpi.h>
++#include <linux/uaccess.h>
+ #include <acpi/processor.h>
+ #include <asm/io.h>
+-#include <linux/uaccess.h>
++#include <asm/asm.h>
  
- 	default:
--		val = (u64)high << 32 | low;
--
- 		if (pmu_msr_chk_emulated(msr, &val, false, &emulated) && emulated)
- 			return;
+ /* ignore_tpc:
+  *  0 -> acpi processor driver doesn't ignore _TPC values
+diff --git a/drivers/cpufreq/amd-pstate-ut.c b/drivers/cpufreq/amd-pstate-ut.c
+index 707fa81c749f..c8d031b297d2 100644
+--- a/drivers/cpufreq/amd-pstate-ut.c
++++ b/drivers/cpufreq/amd-pstate-ut.c
+@@ -31,6 +31,8 @@
  
- 		if (err)
--			*err = native_write_msr_safe(msr, low, high);
-+			*err = native_write_msr_safe(msr, val);
- 		else
--			native_write_msr(msr, low, high);
-+			native_write_msr(msr, val);
- 	}
- }
+ #include <acpi/cppc_acpi.h>
  
-@@ -1173,12 +1167,11 @@ static u64 xen_read_msr_safe(unsigned int msr, int *err)
- 	return xen_do_read_msr(msr, err);
- }
++#include <asm/msr.h>
++
+ #include "amd-pstate.h"
  
--static int xen_write_msr_safe(unsigned int msr, unsigned int low,
--			      unsigned int high)
-+static int xen_write_msr_safe(u32 msr, u64 val)
- {
- 	int err = 0;
  
--	xen_do_write_msr(msr, low, high, &err);
-+	xen_do_write_msr(msr, val, &err);
+diff --git a/drivers/hwmon/hwmon-vid.c b/drivers/hwmon/hwmon-vid.c
+index 6d1175a51832..2df4956296ed 100644
+--- a/drivers/hwmon/hwmon-vid.c
++++ b/drivers/hwmon/hwmon-vid.c
+@@ -15,6 +15,10 @@
+ #include <linux/kernel.h>
+ #include <linux/hwmon-vid.h>
  
- 	return err;
- }
-@@ -1190,11 +1183,11 @@ static u64 xen_read_msr(unsigned int msr)
- 	return xen_do_read_msr(msr, xen_msr_safe ? &err : NULL);
- }
++#ifdef CONFIG_X86
++#include <asm/msr.h>
++#endif
++
+ /*
+  * Common code for decoding VID pins.
+  *
+diff --git a/drivers/net/vmxnet3/vmxnet3_drv.c b/drivers/net/vmxnet3/vmxnet3_drv.c
+index 3df6aabc7e33..7edd0b5e0e77 100644
+--- a/drivers/net/vmxnet3/vmxnet3_drv.c
++++ b/drivers/net/vmxnet3/vmxnet3_drv.c
+@@ -27,6 +27,10 @@
+ #include <linux/module.h>
+ #include <net/ip6_checksum.h>
  
--static void xen_write_msr(unsigned int msr, unsigned low, unsigned high)
-+static void xen_write_msr(u32 msr, u64 val)
- {
- 	int err;
++#ifdef CONFIG_X86
++#include <asm/msr.h>
++#endif
++
+ #include "vmxnet3_int.h"
+ #include "vmxnet3_xdp.h"
  
--	xen_do_write_msr(msr, low, high, xen_msr_safe ? &err : NULL);
-+	xen_do_write_msr(msr, val, xen_msr_safe ? &err : NULL);
- }
+diff --git a/drivers/platform/x86/intel/speed_select_if/isst_if_common.c b/drivers/platform/x86/intel/speed_select_if/isst_if_common.c
+index 44dcd165b4c0..8a5713593811 100644
+--- a/drivers/platform/x86/intel/speed_select_if/isst_if_common.c
++++ b/drivers/platform/x86/intel/speed_select_if/isst_if_common.c
+@@ -21,6 +21,7 @@
  
- /* This is called once we have the cpu_possible_mask */
+ #include <asm/cpu_device_id.h>
+ #include <asm/intel-family.h>
++#include <asm/msr.h>
+ 
+ #include "isst_if_common.h"
+ 
+diff --git a/drivers/platform/x86/intel/turbo_max_3.c b/drivers/platform/x86/intel/turbo_max_3.c
+index 7e538bbd5b50..b5af3e91ba04 100644
+--- a/drivers/platform/x86/intel/turbo_max_3.c
++++ b/drivers/platform/x86/intel/turbo_max_3.c
+@@ -17,6 +17,7 @@
+ 
+ #include <asm/cpu_device_id.h>
+ #include <asm/intel-family.h>
++#include <asm/msr.h>
+ 
+ #define MSR_OC_MAILBOX			0x150
+ #define MSR_OC_MAILBOX_CMD_OFFSET	32
 -- 
 2.49.0
 
