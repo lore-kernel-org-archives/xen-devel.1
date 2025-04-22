@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A26C369CB
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:33:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.962010.1353391 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13D49C369CB
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:33:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.962028.1353400 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u793w-0004cc-31; Tue, 22 Apr 2025 08:33:04 +0000
+	id 1u794E-0005Mi-Eq; Tue, 22 Apr 2025 08:33:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 962010.1353391; Tue, 22 Apr 2025 08:33:04 +0000
+Received: by outflank-mailman (output) from mailman id 962028.1353400; Tue, 22 Apr 2025 08:33:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u793v-0004cT-WC; Tue, 22 Apr 2025 08:33:04 +0000
-Received: by outflank-mailman (input) for mailman id 962010;
- Tue, 22 Apr 2025 08:33:03 +0000
+	id 1u794E-0005MZ-Bx; Tue, 22 Apr 2025 08:33:22 +0000
+Received: by outflank-mailman (input) for mailman id 962028;
+ Tue, 22 Apr 2025 08:33:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78ul-0004wX-Ir
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:35 +0000
+ id 1u78uj-0004wX-IW
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:33 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 118c77b3-1f53-11f0-9ffb-bf95429c2676;
- Tue, 22 Apr 2025 10:23:29 +0200 (CEST)
+ id 0aca085a-1f53-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 10:23:18 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9c1954391
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9E1954391
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:23:09 -0700
+ Tue, 22 Apr 2025 01:22:20 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 118c77b3-1f53-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9c1954391
+X-Inumbo-ID: 0aca085a-1f53-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9E1954391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310191;
-	bh=sK7SiEcLnDzK1DJz1rvdwY9xA/sqvcg2VrbN9TcPHbg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=foWRBYLsKAd18ivlovmpAbGclkDRxT1gihjkFNepAQkuXKH79JRP4ulwlbvMqwqjP
-	 suJQ6v0PsxMNzpKDmTjfE93RTV8V4gdoIR1d3JcQCSVVdKiFQhtivKD6EKhIDH+GvA
-	 pmr4R679vcjmvWNhbOk9b+590Omb7eLnU3x+Um/wSBr4mUnyhDNssmAuPp5adjEKNR
-	 oZMbEABpZ3jLduPbsg/STQMgOMmdpaBwCIu1MuDUpjSPvSNdVKRkzoakFpe/Lso2Ci
-	 xcBEorcc04dH7iKh95hVNKLSN78H46XgSqj4+4Nrve/RjaXkyN82gMV1u86fsqhsvJ
-	 +LDnx8McRaOiw==
+	s=2025042001; t=1745310142;
+	bh=mYcTzU0oObhvxWiZx+iiw1dueV7yQ96m6ct2fgUgxlA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=coQSwlhZKMasXch4vb9MccuN5lPE6K+czznn/cj5lrt8w3zCTLqPI3EvxgT/JXgLR
+	 JyjiL4Jdfd1e6yDi2uLRF74KLb5HbAUDLx0QLG/V9QoskVA0B1JdssAt+3pkfAUH4L
+	 HDOXgxSKh2KwOCizLlzk8+EehNeWtMVP7zozfQ2aTEAvuLwOKDLIJKJmFyE6XndVkg
+	 iA+/X2cnKdqtk4yn7E856l7cmqtDR8XRCST0c8ZnAr47yysDHIB/AA6NA04jrNwZAr
+	 EBPETFtsShEkDGlZrttN07OBL96YEQmtzFzBPc9HAWOPDwlfAZyYRr7G/9WrED437W
+	 CowiWvGjoZBkA==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -73,118 +73,158 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 24/34] x86/mce: Use native MSR API __native_{wr,rd}msrq()
-Date: Tue, 22 Apr 2025 01:22:05 -0700
-Message-ID: <20250422082216.1954310-25-xin@zytor.com>
+Subject: [RFC PATCH v2 00/34] MSR refactor with new MSR instructions support
+Date: Tue, 22 Apr 2025 01:21:41 -0700
+Message-ID: <20250422082216.1954310-1-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
-References: <20250422082216.1954310-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use native MSR API __native_{wr,rd}msrq() instead of MSR assemely.
+Obviously the existing MSR code and the pv_ops MSR access APIs need some
+love: https://lore.kernel.org/lkml/87y1h81ht4.ffs@tglx/
 
-Signed-off-by: Xin Li (Intel) <xin@zytor.com>
----
- arch/x86/kernel/cpu/mce/core.c | 55 +++++++++++++++++++++-------------
- 1 file changed, 35 insertions(+), 20 deletions(-)
+hpa has started a discussion about how to refactor it last October:
+https://lore.kernel.org/lkml/7a4de623-ecda-4369-a7ae-0c43ef328177@zytor.com/
 
-diff --git a/arch/x86/kernel/cpu/mce/core.c b/arch/x86/kernel/cpu/mce/core.c
-index 32286bad75e6..b854a60238de 100644
---- a/arch/x86/kernel/cpu/mce/core.c
-+++ b/arch/x86/kernel/cpu/mce/core.c
-@@ -370,13 +370,40 @@ static int msr_to_offset(u32 msr)
- 
- void ex_handler_msr_mce(struct pt_regs *regs, bool wrmsr)
- {
-+	bool imm_insn = is_msr_imm_insn((void *)regs->ip);
-+	u32 msr;
-+
-+	if (imm_insn)
-+		/*
-+		 * The 32-bit immediate specifying a MSR is encoded into
-+		 * byte 5 ~ 8 of an immediate form MSR instruction.
-+		 */
-+		msr = *(u32 *)(regs->ip + 5);
-+	else
-+		msr = (u32)regs->cx;
-+
- 	if (wrmsr) {
--		pr_emerg("MSR access error: WRMSR to 0x%x (tried to write 0x%08x%08x) at rIP: 0x%lx (%pS)\n",
--			 (unsigned int)regs->cx, (unsigned int)regs->dx, (unsigned int)regs->ax,
--			 regs->ip, (void *)regs->ip);
-+		/*
-+		 * To maintain consistency with existing RDMSR and WRMSR(NS) instructions,
-+		 * the register operand for immediate form MSR instructions is ALWAYS
-+		 * encoded as RAX in <asm/msr.h> for reading or writing the MSR value.
-+		 */
-+		u64 msr_val = regs->ax;
-+
-+		if (!imm_insn) {
-+			/*
-+			 * On processors that support the Intel 64 architecture, the
-+			 * high-order 32 bits of each of RAX and RDX are ignored.
-+			 */
-+			msr_val &= 0xffffffff;
-+			msr_val |= (u64)regs->dx << 32;
-+		}
-+
-+		pr_emerg("MSR access error: WRMSR to 0x%x (tried to write 0x%016llx) at rIP: 0x%lx (%pS)\n",
-+			 msr, msr_val, regs->ip, (void *)regs->ip);
- 	} else {
- 		pr_emerg("MSR access error: RDMSR from 0x%x at rIP: 0x%lx (%pS)\n",
--			 (unsigned int)regs->cx, regs->ip, (void *)regs->ip);
-+			 msr, regs->ip, (void *)regs->ip);
- 	}
- 
- 	show_stack_regs(regs);
-@@ -390,7 +417,7 @@ void ex_handler_msr_mce(struct pt_regs *regs, bool wrmsr)
- /* MSR access wrappers used for error injection */
- noinstr u64 mce_rdmsrq(u32 msr)
- {
--	DECLARE_ARGS(val, low, high);
-+	u64 val;
- 
- 	if (__this_cpu_read(injectm.finished)) {
- 		int offset;
-@@ -414,19 +441,13 @@ noinstr u64 mce_rdmsrq(u32 msr)
- 	 * architectural violation and needs to be reported to hw vendor. Panic
- 	 * the box to not allow any further progress.
- 	 */
--	asm volatile("1: rdmsr\n"
--		     "2:\n"
--		     _ASM_EXTABLE_TYPE(1b, 2b, EX_TYPE_RDMSR_IN_MCE)
--		     : EAX_EDX_RET(val, low, high) : "c" (msr));
-+	__native_rdmsrq(msr, &val, EX_TYPE_RDMSR_IN_MCE);
- 
--
--	return EAX_EDX_VAL(val, low, high);
-+	return val;
- }
- 
- static noinstr void mce_wrmsrq(u32 msr, u64 v)
- {
--	u32 low, high;
--
- 	if (__this_cpu_read(injectm.finished)) {
- 		int offset;
- 
-@@ -441,14 +462,8 @@ static noinstr void mce_wrmsrq(u32 msr, u64 v)
- 		return;
- 	}
- 
--	low  = (u32)v;
--	high = (u32)(v >> 32);
--
- 	/* See comment in mce_rdmsrq() */
--	asm volatile("1: wrmsr\n"
--		     "2:\n"
--		     _ASM_EXTABLE_TYPE(1b, 2b, EX_TYPE_WRMSR_IN_MCE)
--		     : : "c" (msr), "a"(low), "d" (high) : "memory");
-+	__native_wrmsrq(msr, v, EX_TYPE_WRMSR_IN_MCE);
- }
- 
- /*
+The consensus so far is to utilize the alternatives mechanism to eliminate
+the Xen MSR access overhead on native systems and enable new MSR instructions
+based on their availability.
+
+To achieve this, a code refactor is required:
+
+Patch 1 relocates rdtsc{,_ordered}() from <asm/msr.h> to <asm/tsc.h> and
+removes the inclusion of <asm/msr.h> in <asm/tsc.h>.  As a result,
+<asm/msr.h> must now be explicitly included in several source files where
+it was previously included implicitly through <asm/tsc.h>.
+
+Patches 2 ~ 6 refactor the code to use the alternatives mechanism to read
+PMC.
+
+Patches 7 ~ 16 unify and simplify the MSR API definitions and usages.
+
+Patches 17 ~ 19 add basic support for immediate form MSR instructions,
+e.g., its CPU feature bit and opcode.
+
+Patch 20 adds a new exception type to allow a function call inside an
+alternative for instruction emulation to "kick back" the exception into
+the alternatives pattern, possibly invoking a different exception handling
+pattern there, or at least indicating the "real" location of the fault.
+
+patches 21 and 22 refactor the code to use the alternatives mechanism to
+read and write MSR.
+
+Patches 23 ~ 34 are afterwards cleanups.
+
+
+H. Peter Anvin (Intel) (1):
+  x86/extable: Implement EX_TYPE_FUNC_REWIND
+
+Xin Li (Intel) (33):
+  x86/msr: Move rdtsc{,_ordered}() to <asm/tsc.h>
+  x86/msr: Remove rdpmc()
+  x86/msr: Rename rdpmcl() to rdpmcq()
+  x86/msr: Convert rdpmcq() into a function
+  x86/msr: Return u64 consistently in Xen PMC read functions
+  x86/msr: Use the alternatives mechanism to read PMC
+  x86/msr: Convert __wrmsr() uses to native_wrmsr{,q}() uses
+  x86/msr: Convert a native_wrmsr() use to native_wrmsrq()
+  x86/msr: Add the native_rdmsrq() helper
+  x86/msr: Convert __rdmsr() uses to native_rdmsrq() uses
+  x86/msr: Remove calling native_{read,write}_msr{,_safe}() in
+    pmu_msr_{read,write}()
+  x86/msr: Remove pmu_msr_{read,write}()
+  x86/xen/msr: Remove the error pointer argument from set_reg()
+  x86/msr: refactor pv_cpu_ops.write_msr{_safe}()
+  x86/msr: Replace wrmsr(msr, low, 0) with wrmsrq(msr, low)
+  x86/msr: Change function type of native_read_msr_safe()
+  x86/cpufeatures: Add a CPU feature bit for MSR immediate form
+    instructions
+  x86/opcode: Add immediate form MSR instructions
+  x86/extable: Add support for immediate form MSR instructions
+  x86/msr: Utilize the alternatives mechanism to write MSR
+  x86/msr: Utilize the alternatives mechanism to read MSR
+  x86/extable: Remove new dead code in ex_handler_msr()
+  x86/mce: Use native MSR API __native_{wr,rd}msrq()
+  x86/msr: Rename native_wrmsrq() to native_wrmsrq_no_trace()
+  x86/msr: Rename native_wrmsr() to native_wrmsr_no_trace()
+  x86/msr: Rename native_write_msr() to native_wrmsrq()
+  x86/msr: Rename native_write_msr_safe() to native_wrmsrq_safe()
+  x86/msr: Rename native_rdmsrq() to native_rdmsrq_no_trace()
+  x86/msr: Rename native_rdmsr() to native_rdmsr_no_trace()
+  x86/msr: Rename native_read_msr() to native_rdmsrq()
+  x86/msr: Rename native_read_msr_safe() to native_rdmsrq_safe()
+  x86/msr: Move the ARGS macros after the MSR read/write APIs
+  x86/msr: Convert native_rdmsr_no_trace() uses to
+    native_rdmsrq_no_trace() uses
+
+ arch/x86/boot/startup/sme.c                   |   5 +-
+ arch/x86/events/amd/brs.c                     |   4 +-
+ arch/x86/events/amd/uncore.c                  |   2 +-
+ arch/x86/events/core.c                        |   2 +-
+ arch/x86/events/intel/core.c                  |   4 +-
+ arch/x86/events/intel/ds.c                    |   2 +-
+ arch/x86/events/msr.c                         |   3 +
+ arch/x86/events/perf_event.h                  |   1 +
+ arch/x86/events/probe.c                       |   2 +
+ arch/x86/hyperv/hv_apic.c                     |   6 +-
+ arch/x86/hyperv/hv_vtl.c                      |   4 +-
+ arch/x86/hyperv/ivm.c                         |   7 +-
+ arch/x86/include/asm/apic.h                   |   4 +-
+ arch/x86/include/asm/asm.h                    |   6 +
+ arch/x86/include/asm/cpufeatures.h            |   1 +
+ arch/x86/include/asm/extable_fixup_types.h    |   1 +
+ arch/x86/include/asm/fred.h                   |   3 +-
+ arch/x86/include/asm/microcode.h              |  10 +-
+ arch/x86/include/asm/mshyperv.h               |   3 +-
+ arch/x86/include/asm/msr.h                    | 637 ++++++++++++------
+ arch/x86/include/asm/paravirt.h               |  78 ---
+ arch/x86/include/asm/paravirt_types.h         |  13 -
+ arch/x86/include/asm/sev-internal.h           |   9 +-
+ arch/x86/include/asm/spec-ctrl.h              |   2 +-
+ arch/x86/include/asm/suspend_32.h             |   1 +
+ arch/x86/include/asm/suspend_64.h             |   1 +
+ arch/x86/include/asm/switch_to.h              |   4 +-
+ arch/x86/include/asm/tsc.h                    |  76 ++-
+ arch/x86/kernel/cpu/amd.c                     |   2 +-
+ arch/x86/kernel/cpu/common.c                  |  10 +-
+ arch/x86/kernel/cpu/mce/core.c                |  61 +-
+ arch/x86/kernel/cpu/microcode/amd.c           |  10 +-
+ arch/x86/kernel/cpu/microcode/core.c          |   4 +-
+ arch/x86/kernel/cpu/microcode/intel.c         |   8 +-
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  25 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c        |   2 +-
+ arch/x86/kernel/cpu/scattered.c               |   1 +
+ arch/x86/kernel/cpu/umwait.c                  |   4 +-
+ arch/x86/kernel/fpu/xstate.h                  |   1 +
+ arch/x86/kernel/hpet.c                        |   1 +
+ arch/x86/kernel/kvm.c                         |   2 +-
+ arch/x86/kernel/kvmclock.c                    |   2 +-
+ arch/x86/kernel/paravirt.c                    |   5 -
+ arch/x86/kernel/process_64.c                  |   1 +
+ arch/x86/kernel/trace_clock.c                 |   2 +-
+ arch/x86/kernel/tsc_sync.c                    |   1 +
+ arch/x86/kvm/svm/svm.c                        |  34 +-
+ arch/x86/kvm/vmx/vmx.c                        |  12 +-
+ arch/x86/lib/kaslr.c                          |   2 +-
+ arch/x86/lib/x86-opcode-map.txt               |   5 +-
+ arch/x86/mm/extable.c                         | 181 +++--
+ arch/x86/realmode/init.c                      |   1 +
+ arch/x86/xen/enlighten_pv.c                   | 112 ++-
+ arch/x86/xen/pmu.c                            |  63 +-
+ arch/x86/xen/xen-asm.S                        | 113 ++++
+ arch/x86/xen/xen-ops.h                        |  14 +-
+ drivers/acpi/processor_perflib.c              |   1 +
+ drivers/acpi/processor_throttling.c           |   3 +-
+ drivers/cpufreq/amd-pstate-ut.c               |   2 +
+ drivers/hwmon/hwmon-vid.c                     |   4 +
+ drivers/net/vmxnet3/vmxnet3_drv.c             |   6 +-
+ .../intel/speed_select_if/isst_if_common.c    |   1 +
+ drivers/platform/x86/intel/turbo_max_3.c      |   1 +
+ tools/arch/x86/lib/x86-opcode-map.txt         |   5 +-
+ 64 files changed, 988 insertions(+), 605 deletions(-)
+
+
+base-commit: f30a0c0d2b08b355c01392538de8fc872387cb2b
 -- 
 2.49.0
 
