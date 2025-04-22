@@ -4,34 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B246BC369C2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:34:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.962094.1353451 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A11C369CB
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:39:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.962154.1353460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u795N-00009T-TD; Tue, 22 Apr 2025 08:34:33 +0000
+	id 1u799j-0001tz-Cv; Tue, 22 Apr 2025 08:39:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 962094.1353451; Tue, 22 Apr 2025 08:34:33 +0000
+Received: by outflank-mailman (output) from mailman id 962154.1353460; Tue, 22 Apr 2025 08:39:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u795N-00009M-P0; Tue, 22 Apr 2025 08:34:33 +0000
-Received: by outflank-mailman (input) for mailman id 962094;
- Tue, 22 Apr 2025 08:34:32 +0000
+	id 1u799j-0001ts-A7; Tue, 22 Apr 2025 08:39:03 +0000
+Received: by outflank-mailman (input) for mailman id 962154;
+ Tue, 22 Apr 2025 08:39:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78ui-0004wX-IS
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:32 +0000
-Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ (envelope-from <SRS0=mE8E=XI=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1u799i-0001tm-R6
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:39:02 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0a98037f-1f53-11f0-9ffb-bf95429c2676;
- Tue, 22 Apr 2025 10:23:18 +0200 (CEST)
-Received: from terminus.zytor.com (terminus.zytor.com
- [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9G1954391
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:22:24 -0700
+ id 3d0938ac-1f55-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 10:39:00 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5dce099f4so5903402a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 01:39:00 -0700 (PDT)
+Received: from ?IPV6:2003:e5:873d:1a00:8e99:ce06:aa4a:2e7b?
+ (p200300e5873d1a008e99ce06aa4a2e7b.dip0.t-ipconnect.de.
+ [2003:e5:873d:1a00:8e99:ce06:aa4a:2e7b])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-acb6eefd8besm623509666b.122.2025.04.22.01.38.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Apr 2025 01:38:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,90 +49,345 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a98037f-1f53-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9G1954391
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310146;
-	bh=IoPTRGWe2Y3cj4mu9rrTWSQjJVT8gGehrwqKDjIdcAQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=b1z8RlaqquIXeYBqIgAy+u/r/q47lKeO8pCBYXjerdwtNfjtGgxePxuKRH1G8q7Eg
-	 3yr5aijpEOpIzQRR4VI95BAlBgsgxvAjMKpeoxc8AmYPQDI2WH7ESLigIPAoWSaJha
-	 lTiBdiyZXvX61dgoYdVd4h8eAdxh5SIPVz3MC8rQW9bkPs5PakJ7J11JQ1LIEovXF5
-	 OE/aPM5jxUO7eRx2T5+gGxwuzqRYYxNf0xIOCyXWR6eEAXQ6FBb9vzoj5U+Lt3CyAd
-	 D4Pxs/8oSukBmPJ9BE/q/qb5j/rNcjBlzuv/7Iw8PZHjSubwTAJSuLzuPx2ys04J8n
-	 xkcnr5QGmv2YA==
-From: "Xin Li (Intel)" <xin@zytor.com>
-To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        virtualization@lists.linux.dev, linux-pm@vger.kernel.org,
-        linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
-        netdev@vger.kernel.org, platform-driver-x86@vger.kernel.org
-Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        acme@kernel.org, jgross@suse.com, andrew.cooper3@citrix.com,
-        peterz@infradead.org, namhyung@kernel.org, mark.rutland@arm.com,
-        alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-        irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
-        wei.liu@kernel.org, ajay.kaher@broadcom.com,
-        bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
-        pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
-        luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
-        haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 02/34] x86/msr: Remove rdpmc()
-Date: Tue, 22 Apr 2025 01:21:43 -0700
-Message-ID: <20250422082216.1954310-3-xin@zytor.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
-References: <20250422082216.1954310-1-xin@zytor.com>
+X-Inumbo-ID: 3d0938ac-1f55-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1745311140; x=1745915940; darn=lists.xenproject.org;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=0ax55UGcTWOWHuVz+3BJ6ZXy/45nBJzHHncbaK4NkZI=;
+        b=P/Nzwr+JLxZf6GvLppKJ7l1agIvmNTLqRsuhi6EByjuTv9jYM75XG3o/MMSCxcNGb0
+         EkuzG3WpeIpLZ9qWXGWUylhFW0+kGzlu0lLCNEN7zvmfiI3sCdVLXsGwvAZ+b+/cvjKd
+         9qVR2gMSXzM7pAx4NGWgaGz5lk+U0Pv/0eqIAjL/GD9FV6MAORGDegDfi148v5F/TZO0
+         wBMeNAH3s9Tpj+kgjKYkJJTiXHtdFTD62DBgVsfaVU8KRRbTIGb6W2aWT9gYiA1NhouM
+         SgVYubtcODOLdpsIFez/rKvfspXRJMM7vsYVD55VpaltnMLZGJj4fEmviuHNHpKi/xWE
+         AioA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745311140; x=1745915940;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=0ax55UGcTWOWHuVz+3BJ6ZXy/45nBJzHHncbaK4NkZI=;
+        b=oOd3l9jaYqJjD6nBC3KEVTTlys3ZgaFbWqeQe++Saa+TIjDWHsWurwMa/xTcvH5z+A
+         dZxdvGEZcJNpdBV5c/AgHorkhbesDSD/nArEcjdh83efcdDsVWkLknvfyWg5esvHuMPF
+         rs57fKsCnvAMADKzKz8p+odKM2AX+R/MOE5tpDq2336uaJPr6kdz0dziOwi38pHkB6/g
+         BoEEhzx+3sFISlmVhboIBOaL4Q0Ix/msv+IycZdO2JhcGowy7i/A/7fHTMp2mPlsBDvK
+         UgdqROC+O7YsqCOvViDlCLWel0OSItkqWaYF558Pm8wYjrRxNUBD0Y+HEliPbipUSWbc
+         joZA==
+X-Forwarded-Encrypted: i=1; AJvYcCV8I8+KAgsARL/pubCmPNHU6h31sV8QBrlJq8MQuSMRn8EjFgTABSQ+h8k73ST3wAkR+7MNXrwiecg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwiqRPhhFZVySYp/Q6YR4wpDfgOU8rCG49cVPZmgTUFVk8J4GtY
+	jllIO3qslV6KQF81ta8ltfvyXOGqM3L5UXZDF+hi2Mxry+ZSwL45p5tWFVuDlj0=
+X-Gm-Gg: ASbGncv8+0EcldsyuCF7SNbNLpuybhTn3pfrcedEX3i3ApNmutsg755UrvFHHa1FSXi
+	TjkMbK1BJmJtg7kEoyhNIAuzHFz6mqIo3KsECp0jVcgubvY/V4qysFLujQ+pOfzzEXrFKtTCEsK
+	pyyULNhO6d6aA+6SU+wCM+4CYhDoUn9ZuzQx5T5LQSlkDb3XKVOiPQqbqXOsVCiJk0I82Z/8Ug7
+	Xrz01Jz/+3h31z2nJ0i2aLBuee7zcUCsIR0u6eYmaNFx+L4a53DHcpJmHuMI60F2EzoK4w5RkY9
+	cACgI08MDeGDEj2sLN0IYYWzM2GuVjLL4vcIH3bkeO2cpCZsRQ3Gznc0LYG3Yikj/wtCFVbSxOQ
+	prwolbp+lIkFdZDmC0/MVKieCvMTmx0zfYIJ/Y+ty/ITEZ46kylSo2uUIAWWWakV8kZlT8o/29e
+	7x
+X-Google-Smtp-Source: AGHT+IEmp/5XJLTqP5S0pRZ5YtwXiVrJr7qIcIrg0GxrIdRMvNGGFjSJJZr5xRVxQvA2fct+zsz19A==
+X-Received: by 2002:a17:907:1c14:b0:aca:95e7:9977 with SMTP id a640c23a62f3a-acb74b508b5mr1316747266b.28.1745311139866;
+        Tue, 22 Apr 2025 01:38:59 -0700 (PDT)
+Message-ID: <fbb509e8-0bd6-480f-be32-fd0895255a21@suse.com>
+Date: Tue, 22 Apr 2025 10:38:57 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2 06/34] x86/msr: Use the alternatives mechanism to
+ read PMC
+To: "Xin Li (Intel)" <xin@zytor.com>, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-pm@vger.kernel.org, linux-edac@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-acpi@vger.kernel.org,
+ linux-hwmon@vger.kernel.org, netdev@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, acme@kernel.org,
+ andrew.cooper3@citrix.com, peterz@infradead.org, namhyung@kernel.org,
+ mark.rutland@arm.com, alexander.shishkin@linux.intel.com, jolsa@kernel.org,
+ irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
+ wei.liu@kernel.org, ajay.kaher@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
+ pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
+ luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
+ haiyangz@microsoft.com, decui@microsoft.com
+References: <20250422082216.1954310-1-xin@zytor.com>
+ <20250422082216.1954310-7-xin@zytor.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20250422082216.1954310-7-xin@zytor.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------oWGr0D8fp74ylaTm4CQbbsBV"
 
-rdpmc() is not used anywhere, remove it.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------oWGr0D8fp74ylaTm4CQbbsBV
+Content-Type: multipart/mixed; boundary="------------qqqJQkp59jKjmbEZC1Vwrfie";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: "Xin Li (Intel)" <xin@zytor.com>, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-pm@vger.kernel.org, linux-edac@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-acpi@vger.kernel.org,
+ linux-hwmon@vger.kernel.org, netdev@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, acme@kernel.org,
+ andrew.cooper3@citrix.com, peterz@infradead.org, namhyung@kernel.org,
+ mark.rutland@arm.com, alexander.shishkin@linux.intel.com, jolsa@kernel.org,
+ irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
+ wei.liu@kernel.org, ajay.kaher@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
+ pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
+ luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
+ haiyangz@microsoft.com, decui@microsoft.com
+Message-ID: <fbb509e8-0bd6-480f-be32-fd0895255a21@suse.com>
+Subject: Re: [RFC PATCH v2 06/34] x86/msr: Use the alternatives mechanism to
+ read PMC
+References: <20250422082216.1954310-1-xin@zytor.com>
+ <20250422082216.1954310-7-xin@zytor.com>
+In-Reply-To: <20250422082216.1954310-7-xin@zytor.com>
 
-Signed-off-by: Xin Li (Intel) <xin@zytor.com>
----
- arch/x86/include/asm/msr.h      | 7 -------
- arch/x86/include/asm/paravirt.h | 7 -------
- 2 files changed, 14 deletions(-)
+--------------qqqJQkp59jKjmbEZC1Vwrfie
+Content-Type: multipart/mixed; boundary="------------xefsIXpq0wxo0BM9i717snKf"
 
-diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index 2caa13830e11..e05466e486fc 100644
---- a/arch/x86/include/asm/msr.h
-+++ b/arch/x86/include/asm/msr.h
-@@ -234,13 +234,6 @@ static inline int rdmsrq_safe(u32 msr, u64 *p)
- 	return err;
- }
- 
--#define rdpmc(counter, low, high)			\
--do {							\
--	u64 _l = native_read_pmc((counter));		\
--	(low)  = (u32)_l;				\
--	(high) = (u32)(_l >> 32);			\
--} while (0)
--
- #define rdpmcl(counter, val) ((val) = native_read_pmc(counter))
- 
- #endif	/* !CONFIG_PARAVIRT_XXL */
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 86a77528792d..c4dedb984735 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -244,13 +244,6 @@ static inline u64 paravirt_read_pmc(int counter)
- 	return PVOP_CALL1(u64, cpu.read_pmc, counter);
- }
- 
--#define rdpmc(counter, low, high)		\
--do {						\
--	u64 _l = paravirt_read_pmc(counter);	\
--	low = (u32)_l;				\
--	high = _l >> 32;			\
--} while (0)
--
- #define rdpmcl(counter, val) ((val) = paravirt_read_pmc(counter))
- 
- static inline void paravirt_alloc_ldt(struct desc_struct *ldt, unsigned entries)
--- 
-2.49.0
+--------------xefsIXpq0wxo0BM9i717snKf
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMjIuMDQuMjUgMTA6MjEsIFhpbiBMaSAoSW50ZWwpIHdyb3RlOg0KPiBUbyBlbGltaW5h
+dGUgdGhlIGluZGlyZWN0IGNhbGwgb3ZlcmhlYWQgaW50cm9kdWNlZCBieSB0aGUgcHZfb3Bz
+IEFQSSwNCj4gdXNlIHRoZSBhbHRlcm5hdGl2ZXMgbWVjaGFuaXNtIHRvIHJlYWQgUE1DOg0K
+DQpXaGljaCBpbmRpcmVjdCBjYWxsIG92ZXJoZWFkPyBUaGUgaW5kaXJlY3QgY2FsbCBpcyBw
+YXRjaGVkIHZpYSB0aGUNCmFsdGVybmF0aXZlIG1lY2hhbmlzbSB0byBhIGRpcmVjdCBvbmUu
+DQoNCj4gDQo+ICAgICAgMSkgV2hlbiBidWlsdCB3aXRoICFDT05GSUdfWEVOX1BWLCBYODZf
+RkVBVFVSRV9YRU5QViBiZWNvbWVzIGENCj4gICAgICAgICBkaXNhYmxlZCBmZWF0dXJlLCBw
+cmV2ZW50aW5nIHRoZSBYZW4gUE1DIHJlYWQgY29kZSBmcm9tIGJlaW5nDQo+ICAgICAgICAg
+YnVpbHQgYW5kIGVuc3VyaW5nIHRoZSBuYXRpdmUgY29kZSBpcyBleGVjdXRlZCB1bmNvbmRp
+dGlvbmFsbHkuDQoNCldpdGhvdXQgQ09ORklHX1hFTl9QViBDT05GSUdfUEFSQVZJUlRfWFhM
+IGlzIG5vdCBzZWxlY3RlZCwgcmVzdWx0aW5nIGluDQpuYXRpdmUgY29kZSBhbnl3YXkuDQoN
+Cj4gDQo+ICAgICAgMikgV2hlbiBidWlsdCB3aXRoIENPTkZJR19YRU5fUFY6DQo+IA0KPiAg
+ICAgICAgIDIuMSkgSWYgbm90IHJ1bm5pbmcgb24gdGhlIFhlbiBoeXBlcnZpc29yICghWDg2
+X0ZFQVRVUkVfWEVOUFYpLA0KPiAgICAgICAgICAgICAgdGhlIGtlcm5lbCBydW50aW1lIGJp
+bmFyeSBpcyBwYXRjaGVkIHRvIHVuY29uZGl0aW9uYWxseQ0KPiAgICAgICAgICAgICAganVt
+cCB0byB0aGUgbmF0aXZlIFBNQyByZWFkIGNvZGUuDQo+IA0KPiAgICAgICAgIDIuMikgSWYg
+cnVubmluZyBvbiB0aGUgWGVuIGh5cGVydmlzb3IgKFg4Nl9GRUFUVVJFX1hFTlBWKSwgdGhl
+DQo+ICAgICAgICAgICAgICBrZXJuZWwgcnVudGltZSBiaW5hcnkgaXMgcGF0Y2hlZCB0byB1
+bmNvbmRpdGlvbmFsbHkganVtcA0KPiAgICAgICAgICAgICAgdG8gdGhlIFhlbiBQTUMgcmVh
+ZCBjb2RlLg0KPiANCj4gQ29uc2VxdWVudGx5LCByZW1vdmUgdGhlIHB2X29wcyBQTUMgcmVh
+ZCBBUEkuDQoNCkkgZG9uJ3Qgc2VlIHRoZSB2YWx1ZSBvZiB0aGlzIHBhdGNoLg0KDQpJdCBh
+ZGRzIG1vcmUgI2lmZGVmIGFuZCBjb2RlIGxpbmVzIHdpdGhvdXQgYW55IHJlYWwgZ2Fpbi4N
+Cg0KSW4gY2FzZSB0aGUgeDg2IG1haW50YWluZXJzIHRoaW5rIGl0IGlzIHN0aWxsIHdvcnRo
+IGl0LCBJIHdvbid0IG9iamVjdC4NCg0KDQpKdWVyZ2VuDQoNCj4gDQo+IFNpZ25lZC1vZmYt
+Ynk6IFhpbiBMaSAoSW50ZWwpIDx4aW5Aenl0b3IuY29tPg0KPiAtLS0NCj4gICBhcmNoL3g4
+Ni9pbmNsdWRlL2FzbS9tc3IuaCAgICAgICAgICAgIHwgMzEgKysrKysrKysrKysrKysrKysr
+KystLS0tLS0tDQo+ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vcGFyYXZpcnQuaCAgICAgICB8
+ICA1IC0tLS0tDQo+ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vcGFyYXZpcnRfdHlwZXMuaCB8
+ICAyIC0tDQo+ICAgYXJjaC94ODYva2VybmVsL3BhcmF2aXJ0LmMgICAgICAgICAgICB8ICAx
+IC0NCj4gICBhcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMgICAgICAgICAgIHwgIDIgLS0N
+Cj4gICBkcml2ZXJzL25ldC92bXhuZXQzL3ZteG5ldDNfZHJ2LmMgICAgIHwgIDIgKy0NCj4g
+ICA2IGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKyksIDE5IGRlbGV0aW9ucygtKQ0K
+PiANCj4gZGlmZiAtLWdpdCBhL2FyY2gveDg2L2luY2x1ZGUvYXNtL21zci5oIGIvYXJjaC94
+ODYvaW5jbHVkZS9hc20vbXNyLmgNCj4gaW5kZXggMDFkYzhlNjFlZjk3Li4zM2NmNTA2ZTJm
+ZDYgMTAwNjQ0DQo+IC0tLSBhL2FyY2gveDg2L2luY2x1ZGUvYXNtL21zci5oDQo+ICsrKyBi
+L2FyY2gveDg2L2luY2x1ZGUvYXNtL21zci5oDQo+IEBAIC04LDYgKzgsNyBAQA0KPiAgIA0K
+PiAgICNpbmNsdWRlIDxhc20vYXNtLmg+DQo+ICAgI2luY2x1ZGUgPGFzbS9lcnJuby5oPg0K
+PiArI2luY2x1ZGUgPGFzbS9jcHVmZWF0dXJlLmg+DQo+ICAgI2luY2x1ZGUgPGFzbS9jcHVt
+YXNrLmg+DQo+ICAgI2luY2x1ZGUgPHVhcGkvYXNtL21zci5oPg0KPiAgICNpbmNsdWRlIDxh
+c20vc2hhcmVkL21zci5oPg0KPiBAQCAtNzMsNiArNzQsMTAgQEAgc3RhdGljIGlubGluZSB2
+b2lkIGRvX3RyYWNlX3JlYWRfbXNyKHUzMiBtc3IsIHU2NCB2YWwsIGludCBmYWlsZWQpIHt9
+DQo+ICAgc3RhdGljIGlubGluZSB2b2lkIGRvX3RyYWNlX3JkcG1jKHUzMiBtc3IsIHU2NCB2
+YWwsIGludCBmYWlsZWQpIHt9DQo+ICAgI2VuZGlmDQo+ICAgDQo+ICsjaWZkZWYgQ09ORklH
+X1hFTl9QVg0KPiArZXh0ZXJuIHU2NCB4ZW5fcmVhZF9wbWMoaW50IGNvdW50ZXIpOw0KPiAr
+I2VuZGlmDQo+ICsNCj4gICAvKg0KPiAgICAqIF9fcmRtc3IoKSBhbmQgX193cm1zcigpIGFy
+ZSB0aGUgdHdvIHByaW1pdGl2ZXMgd2hpY2ggYXJlIHRoZSBiYXJlIG1pbmltdW0gTVNSDQo+
+ICAgICogYWNjZXNzb3JzIGFuZCBzaG91bGQgbm90IGhhdmUgYW55IHRyYWNpbmcgb3Igb3Ro
+ZXIgZnVuY3Rpb25hbGl0eSBwaWdneWJhY2tpbmcNCj4gQEAgLTE3MCwxNiArMTc1LDMyIEBA
+IG5hdGl2ZV93cml0ZV9tc3Jfc2FmZSh1MzIgbXNyLCB1MzIgbG93LCB1MzIgaGlnaCkNCj4g
+ICBleHRlcm4gaW50IHJkbXNyX3NhZmVfcmVncyh1MzIgcmVnc1s4XSk7DQo+ICAgZXh0ZXJu
+IGludCB3cm1zcl9zYWZlX3JlZ3ModTMyIHJlZ3NbOF0pOw0KPiAgIA0KPiAtc3RhdGljIGlu
+bGluZSB1NjQgbmF0aXZlX3JlYWRfcG1jKGludCBjb3VudGVyKQ0KPiArc3RhdGljIF9fYWx3
+YXlzX2lubGluZSB1NjQgbmF0aXZlX3JkcG1jcShpbnQgY291bnRlcikNCj4gICB7DQo+ICAg
+CURFQ0xBUkVfQVJHUyh2YWwsIGxvdywgaGlnaCk7DQo+ICAgDQo+IC0JYXNtIHZvbGF0aWxl
+KCJyZHBtYyIgOiBFQVhfRURYX1JFVCh2YWwsIGxvdywgaGlnaCkgOiAiYyIgKGNvdW50ZXIp
+KTsNCj4gKwlhc21faW5saW5lIHZvbGF0aWxlKCJyZHBtYyIgOiBFQVhfRURYX1JFVCh2YWws
+IGxvdywgaGlnaCkgOiAiYyIgKGNvdW50ZXIpKTsNCj4gKw0KPiAgIAlpZiAodHJhY2Vwb2lu
+dF9lbmFibGVkKHJkcG1jKSkNCj4gICAJCWRvX3RyYWNlX3JkcG1jKGNvdW50ZXIsIEVBWF9F
+RFhfVkFMKHZhbCwgbG93LCBoaWdoKSwgMCk7DQo+ICsNCj4gICAJcmV0dXJuIEVBWF9FRFhf
+VkFMKHZhbCwgbG93LCBoaWdoKTsNCj4gICB9DQo+ICAgDQo+ICtzdGF0aWMgX19hbHdheXNf
+aW5saW5lIHU2NCByZHBtY3EoaW50IGNvdW50ZXIpDQo+ICt7DQo+ICsjaWZkZWYgQ09ORklH
+X1hFTl9QVg0KPiArCWlmIChjcHVfZmVhdHVyZV9lbmFibGVkKFg4Nl9GRUFUVVJFX1hFTlBW
+KSkNCj4gKwkJcmV0dXJuIHhlbl9yZWFkX3BtYyhjb3VudGVyKTsNCj4gKyNlbmRpZg0KPiAr
+DQo+ICsJLyoNCj4gKwkgKiAxKSBXaGVuIGJ1aWx0IHdpdGggIUNPTkZJR19YRU5fUFYuDQo+
+ICsJICogMikgV2hlbiBidWlsdCB3aXRoIENPTkZJR19YRU5fUFYgYnV0IG5vdCBydW5uaW5n
+IG9uIFhlbiBoeXBlcnZpc29yLg0KPiArCSAqLw0KPiArCXJldHVybiBuYXRpdmVfcmRwbWNx
+KGNvdW50ZXIpOw0KPiArfQ0KPiArDQo+ICAgI2lmZGVmIENPTkZJR19QQVJBVklSVF9YWEwN
+Cj4gICAjaW5jbHVkZSA8YXNtL3BhcmF2aXJ0Lmg+DQo+ICAgI2Vsc2UNCj4gQEAgLTIzMywx
+MiArMjU0LDYgQEAgc3RhdGljIGlubGluZSBpbnQgcmRtc3JxX3NhZmUodTMyIG1zciwgdTY0
+ICpwKQ0KPiAgIAkqcCA9IG5hdGl2ZV9yZWFkX21zcl9zYWZlKG1zciwgJmVycik7DQo+ICAg
+CXJldHVybiBlcnI7DQo+ICAgfQ0KPiAtDQo+IC1zdGF0aWMgX19hbHdheXNfaW5saW5lIHU2
+NCByZHBtY3EoaW50IGNvdW50ZXIpDQo+IC17DQo+IC0JcmV0dXJuIG5hdGl2ZV9yZWFkX3Bt
+Yyhjb3VudGVyKTsNCj4gLX0NCj4gLQ0KPiAgICNlbmRpZgkvKiAhQ09ORklHX1BBUkFWSVJU
+X1hYTCAqLw0KPiAgIA0KPiAgIC8qIEluc3RydWN0aW9uIG9wY29kZSBmb3IgV1JNU1JOUyBz
+dXBwb3J0ZWQgaW4gYmludXRpbHMgPj0gMi40MCAqLw0KPiBkaWZmIC0tZ2l0IGEvYXJjaC94
+ODYvaW5jbHVkZS9hc20vcGFyYXZpcnQuaCBiL2FyY2gveDg2L2luY2x1ZGUvYXNtL3BhcmF2
+aXJ0LmgNCj4gaW5kZXggNTkwODI0OTE2Mzk0Li5jNzY4OWY1ZjcwZDYgMTAwNjQ0DQo+IC0t
+LSBhL2FyY2gveDg2L2luY2x1ZGUvYXNtL3BhcmF2aXJ0LmgNCj4gKysrIGIvYXJjaC94ODYv
+aW5jbHVkZS9hc20vcGFyYXZpcnQuaA0KPiBAQCAtMjM5LDExICsyMzksNiBAQCBzdGF0aWMg
+aW5saW5lIGludCByZG1zcnFfc2FmZSh1bnNpZ25lZCBtc3IsIHU2NCAqcCkNCj4gICAJcmV0
+dXJuIGVycjsNCj4gICB9DQo+ICAgDQo+IC1zdGF0aWMgX19hbHdheXNfaW5saW5lIHU2NCBy
+ZHBtY3EoaW50IGNvdW50ZXIpDQo+IC17DQo+IC0JcmV0dXJuIFBWT1BfQ0FMTDEodTY0LCBj
+cHUucmVhZF9wbWMsIGNvdW50ZXIpOw0KPiAtfQ0KPiAtDQo+ICAgc3RhdGljIGlubGluZSB2
+b2lkIHBhcmF2aXJ0X2FsbG9jX2xkdChzdHJ1Y3QgZGVzY19zdHJ1Y3QgKmxkdCwgdW5zaWdu
+ZWQgZW50cmllcykNCj4gICB7DQo+ICAgCVBWT1BfVkNBTEwyKGNwdS5hbGxvY19sZHQsIGxk
+dCwgZW50cmllcyk7DQo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9wYXJh
+dmlydF90eXBlcy5oIGIvYXJjaC94ODYvaW5jbHVkZS9hc20vcGFyYXZpcnRfdHlwZXMuaA0K
+PiBpbmRleCA2MzFjMzA2Y2UxZmYuLjQ3NWY1MDg1MzFkNiAxMDA2NDQNCj4gLS0tIGEvYXJj
+aC94ODYvaW5jbHVkZS9hc20vcGFyYXZpcnRfdHlwZXMuaA0KPiArKysgYi9hcmNoL3g4Ni9p
+bmNsdWRlL2FzbS9wYXJhdmlydF90eXBlcy5oDQo+IEBAIC0xMDEsOCArMTAxLDYgQEAgc3Ry
+dWN0IHB2X2NwdV9vcHMgew0KPiAgIAl1NjQgKCpyZWFkX21zcl9zYWZlKSh1bnNpZ25lZCBp
+bnQgbXNyLCBpbnQgKmVycik7DQo+ICAgCWludCAoKndyaXRlX21zcl9zYWZlKSh1bnNpZ25l
+ZCBpbnQgbXNyLCB1bnNpZ25lZCBsb3csIHVuc2lnbmVkIGhpZ2gpOw0KPiAgIA0KPiAtCXU2
+NCAoKnJlYWRfcG1jKShpbnQgY291bnRlcik7DQo+IC0NCj4gICAJdm9pZCAoKnN0YXJ0X2Nv
+bnRleHRfc3dpdGNoKShzdHJ1Y3QgdGFza19zdHJ1Y3QgKnByZXYpOw0KPiAgIAl2b2lkICgq
+ZW5kX2NvbnRleHRfc3dpdGNoKShzdHJ1Y3QgdGFza19zdHJ1Y3QgKm5leHQpOw0KPiAgICNl
+bmRpZg0KPiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYva2VybmVsL3BhcmF2aXJ0LmMgYi9hcmNo
+L3g4Ni9rZXJuZWwvcGFyYXZpcnQuYw0KPiBpbmRleCAxY2NkMDVkODk5OWYuLjI4ZDE5NWFk
+NzUxNCAxMDA2NDQNCj4gLS0tIGEvYXJjaC94ODYva2VybmVsL3BhcmF2aXJ0LmMNCj4gKysr
+IGIvYXJjaC94ODYva2VybmVsL3BhcmF2aXJ0LmMNCj4gQEAgLTEzMiw3ICsxMzIsNiBAQCBz
+dHJ1Y3QgcGFyYXZpcnRfcGF0Y2hfdGVtcGxhdGUgcHZfb3BzID0gew0KPiAgIAkuY3B1Lndy
+aXRlX21zcgkJPSBuYXRpdmVfd3JpdGVfbXNyLA0KPiAgIAkuY3B1LnJlYWRfbXNyX3NhZmUJ
+PSBuYXRpdmVfcmVhZF9tc3Jfc2FmZSwNCj4gICAJLmNwdS53cml0ZV9tc3Jfc2FmZQk9IG5h
+dGl2ZV93cml0ZV9tc3Jfc2FmZSwNCj4gLQkuY3B1LnJlYWRfcG1jCQk9IG5hdGl2ZV9yZWFk
+X3BtYywNCj4gICAJLmNwdS5sb2FkX3RyX2Rlc2MJPSBuYXRpdmVfbG9hZF90cl9kZXNjLA0K
+PiAgIAkuY3B1LnNldF9sZHQJCT0gbmF0aXZlX3NldF9sZHQsDQo+ICAgCS5jcHUubG9hZF9n
+ZHQJCT0gbmF0aXZlX2xvYWRfZ2R0LA0KPiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYveGVuL2Vu
+bGlnaHRlbl9wdi5jIGIvYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jDQo+IGluZGV4IDg0
+NmI1NzM3ZDMyMC4uOWZiZTE4N2FmZjAwIDEwMDY0NA0KPiAtLS0gYS9hcmNoL3g4Ni94ZW4v
+ZW5saWdodGVuX3B2LmMNCj4gKysrIGIvYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jDQo+
+IEBAIC0xMjM2LDggKzEyMzYsNiBAQCBzdGF0aWMgY29uc3QgdHlwZW9mKHB2X29wcykgeGVu
+X2NwdV9vcHMgX19pbml0Y29uc3QgPSB7DQo+ICAgCQkucmVhZF9tc3Jfc2FmZSA9IHhlbl9y
+ZWFkX21zcl9zYWZlLA0KPiAgIAkJLndyaXRlX21zcl9zYWZlID0geGVuX3dyaXRlX21zcl9z
+YWZlLA0KPiAgIA0KPiAtCQkucmVhZF9wbWMgPSB4ZW5fcmVhZF9wbWMsDQo+IC0NCj4gICAJ
+CS5sb2FkX3RyX2Rlc2MgPSBwYXJhdmlydF9ub3AsDQo+ICAgCQkuc2V0X2xkdCA9IHhlbl9z
+ZXRfbGR0LA0KPiAgIAkJLmxvYWRfZ2R0ID0geGVuX2xvYWRfZ2R0LA0KPiBkaWZmIC0tZ2l0
+IGEvZHJpdmVycy9uZXQvdm14bmV0My92bXhuZXQzX2Rydi5jIGIvZHJpdmVycy9uZXQvdm14
+bmV0My92bXhuZXQzX2Rydi5jDQo+IGluZGV4IDdlZGQwYjVlMGU3Ny4uOGFmM2I0ZDdlZjRk
+IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL25ldC92bXhuZXQzL3ZteG5ldDNfZHJ2LmMNCj4g
+KysrIGIvZHJpdmVycy9uZXQvdm14bmV0My92bXhuZXQzX2Rydi5jDQo+IEBAIC0xNTEsNyAr
+MTUxLDcgQEAgc3RhdGljIHU2NA0KPiAgIHZteG5ldDNfZ2V0X2N5Y2xlcyhpbnQgcG1jKQ0K
+PiAgIHsNCj4gICAjaWZkZWYgQ09ORklHX1g4Ng0KPiAtCXJldHVybiBuYXRpdmVfcmVhZF9w
+bWMocG1jKTsNCj4gKwlyZXR1cm4gbmF0aXZlX3JkcG1jcShwbWMpOw0KPiAgICNlbHNlDQo+
+ICAgCXJldHVybiAwOw0KPiAgICNlbmRpZg0KDQo=
+--------------xefsIXpq0wxo0BM9i717snKf
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------xefsIXpq0wxo0BM9i717snKf--
+
+--------------qqqJQkp59jKjmbEZC1Vwrfie--
+
+--------------oWGr0D8fp74ylaTm4CQbbsBV
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmgHVaEFAwAAAAAACgkQsN6d1ii/Ey+4
+Iwf+P9Anst6NLwWqmB/uty6SQtRbl27XWkzPR5WuXxRCqzw/TzMJRycI3KQdOG3uwJm2SavyMaCW
+uoBR5Q6dEVl+HR/HEjYcFUPrht8UBU/DPjII+Mw9av5BTpbqZbeWcSXzGpssCKT6LSdMz2lL9/z7
+tJ/TqijlLR9rqocXgE+4glFgcv3QAefO1du0hLZqrVI4MA7R/q9ygvviVnq5XE3roR21AiFmxJ3+
+hrYYFSKQ62D4hp5zgr+XlPdiGmhSZuUeJqd0xKaIBX/gB2zoAeUsbxxinEe73DfRVQCw+zG9WpP1
+oUZyBiVvIe4saCtWqIFn8SB/re/GmwczEUAFjiN8Kg==
+=Nnhs
+-----END PGP SIGNATURE-----
+
+--------------oWGr0D8fp74ylaTm4CQbbsBV--
 
