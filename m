@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DE6C369C2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:07:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.962778.1353978 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A916C369D3
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:07:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.962765.1353959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FDh-0002hN-A8; Tue, 22 Apr 2025 15:07:33 +0000
+	id 1u7FDY-0001ji-IR; Tue, 22 Apr 2025 15:07:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 962778.1353978; Tue, 22 Apr 2025 15:07:33 +0000
+Received: by outflank-mailman (output) from mailman id 962765.1353959; Tue, 22 Apr 2025 15:07:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FDh-0002hC-6v; Tue, 22 Apr 2025 15:07:33 +0000
-Received: by outflank-mailman (input) for mailman id 962778;
- Tue, 22 Apr 2025 15:07:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u7FDY-0001jY-Es; Tue, 22 Apr 2025 15:07:24 +0000
+Received: by outflank-mailman (input) for mailman id 962765;
+ Tue, 22 Apr 2025 15:07:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BiSK=XI=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1u7FDf-0000lQ-GT
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:07:31 +0000
-Received: from 16.mo583.mail-out.ovh.net (16.mo583.mail-out.ovh.net
- [87.98.174.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 825c7e38-1f8b-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 17:07:30 +0200 (CEST)
-Received: from director6.ghost.mail-out.ovh.net (unknown [10.109.148.21])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4Zhlw11xj6z1gwT
- for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:07:29 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-6tjtj (unknown [10.110.178.32])
- by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 518011FEC4;
- Tue, 22 Apr 2025 15:07:28 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.113])
- by ghost-submission-5b5ff79f4f-6tjtj with ESMTPSA
- id XczlBbCwB2gtAQEAHtJGkA
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:07:28 +0000
+ id 1u7FDX-0008SP-CB
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:07:23 +0000
+Received: from 8.mo583.mail-out.ovh.net (8.mo583.mail-out.ovh.net
+ [178.32.116.78]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7da3cf56-1f8b-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 17:07:21 +0200 (CEST)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.25.16])
+ by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4Zhlvs0mQ0z1hRD
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:07:21 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-9jk7j (unknown [10.110.164.38])
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 4B0F81FEC8;
+ Tue, 22 Apr 2025 15:07:20 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.105])
+ by ghost-submission-5b5ff79f4f-9jk7j with ESMTPSA
+ id 8J+EB6iwB2h4GgEATnw8yA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:07:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,344 +48,415 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 825c7e38-1f8b-11f0-9eb0-5ba50f476ded
-Authentication-Results:garm.ovh; auth=pass (GARM-113S007e787a2bd-89e1-430c-a228-f3b8fb6ac07a,
+X-Inumbo-ID: 7da3cf56-1f8b-11f0-9ffb-bf95429c2676
+Authentication-Results:garm.ovh; auth=pass (GARM-105G006566173e4-e8e0-4e73-a28e-31db44e7d3fa,
                     7E508E014E7E7C169EB13C6E22C3C4EBF1F0FDD7) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH 09/21] lib/sha1.c: add file
-Date: Tue, 22 Apr 2025 18:06:43 +0300
-Message-ID: <8dec423182ed60e2233ed87d98066fed6dc20caf.1745172094.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH 06/21] xen/arch/x86: reserve TXT memory
+Date: Tue, 22 Apr 2025 18:06:40 +0300
+Message-ID: <39d9839d4cb3bafbe7b43f91d472c50cce1e720f.1745172094.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12731957624680330396
+X-Ovh-Tracer-Id: 12729705823544194204
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeiteejtdffveekuddtgfegteffkefhgedujeehfeefveekvdevveevteeufeevteenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrdduudefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfegmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=WDJT0W+j5imcAWnKzPI6gEyLmrSG03CfujuYBuS2VuQ=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgeekffeiiedtveekhfdugeffveeigefgleegvdeghefftdetheefueeliedukedvnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrddutdehnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=HvumLBFYP6CuHegJXtZM9ondyMXqUewjKdXuvImTbxE=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1745334449; v=1;
- b=UM7ZURbYhRRjQiFbl+pHtxZI+t5eXVeafpdrNRYGif+JnCVnauX1q3w+R+agFXTXvTxycoY8
- K/zkiFFYN+IEs1tMSWwMDKWIdSOTUPMizO22JcWzReXz3SkWwWrPgQuQsDsr3Hn3oTKYlXuBH/P
- MCPhTu+8SjWRWZsxauiCXM5/1xHufeTEr2f2SnjHaVhSPo95NeehkjHVHhZuCOTYIe4q40uays0
- Of5g6Ipa7VPRkBZVNoH3YoKnbNZAY4G19p1WOCELba3wkpbyhfYbf2uSS+VCSNFG1CTUvCtpOIA
- BSl83zhAYMUvpKcoQZcK8KcjmIztsMhnvPWmncXmmjOlQ==
+ t=1745334441; v=1;
+ b=bzfRhvdQ9bEu02yLXJWY9MSF6ulVuy0R9bzwIolKpiQQEXpuPgN+fCe1SHKnb6viuRztcOHd
+ XB+VZ6mGsR0qVjW9xBqjGh/SnyB7dpbySnXmswD0rVdV/E7BljgA1nY/7jnVuc9SF6JXwyRczvA
+ XGwDyAw3Ay4RZ352XhC3SCbgE1p8O/py8wy0Mfjb/SGJH1lREARR0rju64K0i+fhYDc87r2rU1f
+ mj5qPnYTJCQr/zUUrKdAab6UQBl2dT45gwUpMjw6RoL1Odflzi+NpUeRpECetR7niyG9ALmO3wD
+ NwIU9xFr0Mcfgt8zuhCGPKScWGmKWYSVHXeY0Hh9m13zw==
 
-From: Krystian Hebel <krystian.hebel@3mdeb.com>
+From: Kacper Stojek <kacper.stojek@3mdeb.com>
 
-The code comes from [1] and is licensed under GPL-2.0 license.
-It's a combination of:
- - include/crypto/sha1.h
- - include/crypto/sha1_base.h
- - lib/crypto/sha1.c
- - crypto/sha1_generic.c
+TXT heap, SINIT and TXT private space are marked as reserved or unused
+in e820 to protect from unintended uses.
 
-Changes:
- - includes
- - formatting
- - renames and splicing of some trivial functions that are called once
- - dropping of `int` return values (only zero was ever returned)
- - getting rid of references to `struct shash_desc`
-
-[1]: https://github.com/torvalds/linux/tree/afdab700f65e14070d8ab92175544b1c62b8bf03
-
-Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+Signed-off-by: Kacper Stojek <kacper.stojek@3mdeb.com>
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
+Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/include/xen/sha1.h |  12 +++
- xen/lib/Makefile       |   1 +
- xen/lib/sha1.c         | 240 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 253 insertions(+)
- create mode 100644 xen/include/xen/sha1.h
- create mode 100644 xen/lib/sha1.c
+ xen/arch/x86/Makefile                |   1 +
+ xen/arch/x86/include/asm/intel_txt.h |   6 ++
+ xen/arch/x86/include/asm/mm.h        |   3 +
+ xen/arch/x86/include/asm/slaunch.h   |  44 ++++++++++++
+ xen/arch/x86/intel_txt.c             | 102 +++++++++++++++++++++++++++
+ xen/arch/x86/setup.c                 |  10 ++-
+ xen/arch/x86/slaunch.c               |  96 +++++++++++++++++++++++++
+ 7 files changed, 259 insertions(+), 3 deletions(-)
+ create mode 100644 xen/arch/x86/intel_txt.c
 
-diff --git a/xen/include/xen/sha1.h b/xen/include/xen/sha1.h
-new file mode 100644
-index 0000000000..752dfdf827
---- /dev/null
-+++ b/xen/include/xen/sha1.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+#ifndef __XEN_SHA1_H
-+#define __XEN_SHA1_H
-+
-+#include <xen/inttypes.h>
-+
-+#define SHA1_DIGEST_SIZE  20
-+
-+void sha1_hash(const u8 *data, unsigned int len, u8 *out);
-+
-+#endif /* !__XEN_SHA1_H */
-diff --git a/xen/lib/Makefile b/xen/lib/Makefile
-index 76dc86fab0..0d5774b8d7 100644
---- a/xen/lib/Makefile
-+++ b/xen/lib/Makefile
-@@ -38,6 +38,7 @@ lib-y += strtoll.o
- lib-y += strtoul.o
- lib-y += strtoull.o
- lib-$(CONFIG_X86) += x86-generic-hweightl.o
-+lib-$(CONFIG_X86) += sha1.o
- lib-$(CONFIG_X86) += xxhash32.o
- lib-$(CONFIG_X86) += xxhash64.o
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 571cad160d..cae548f7e9 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -40,6 +40,7 @@ obj-$(CONFIG_GDBSX) += gdbsx.o
+ obj-y += hypercall.o
+ obj-y += i387.o
+ obj-y += i8259.o
++obj-y += intel_txt.o
+ obj-y += io_apic.o
+ obj-$(CONFIG_LIVEPATCH) += alternative.o livepatch.o
+ obj-y += msi.o
+diff --git a/xen/arch/x86/include/asm/intel_txt.h b/xen/arch/x86/include/asm/intel_txt.h
+index 7170baf6fb..85ef9f6245 100644
+--- a/xen/arch/x86/include/asm/intel_txt.h
++++ b/xen/arch/x86/include/asm/intel_txt.h
+@@ -396,4 +396,10 @@ static inline void txt_verify_pmr_ranges(struct txt_os_mle_data *os_mle,
+     */
+ }
  
-diff --git a/xen/lib/sha1.c b/xen/lib/sha1.c
++/* Prepares for accesses to TXT-specific memory. */
++void txt_map_mem_regions(void);
++
++/* Marks TXT-specific memory as used to avoid its corruption. */
++void txt_reserve_mem_regions(void);
++
+ #endif /* __ASSEMBLY__ */
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index a1bc8cc274..061cb12a5b 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -106,6 +106,9 @@
+ #define _PGC_need_scrub   _PGC_allocated
+ #define PGC_need_scrub    PGC_allocated
+ 
++/* How much of the directmap is prebuilt at compile time. */
++#define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
++
+ #ifndef CONFIG_BIGMEM
+ /*
+  * This definition is solely for the use in struct page_info (and
+diff --git a/xen/arch/x86/include/asm/slaunch.h b/xen/arch/x86/include/asm/slaunch.h
+index 08cc2657f0..78d3c8bf37 100644
+--- a/xen/arch/x86/include/asm/slaunch.h
++++ b/xen/arch/x86/include/asm/slaunch.h
+@@ -7,13 +7,57 @@
+ #ifndef _ASM_X86_SLAUNCH_H_
+ #define _ASM_X86_SLAUNCH_H_
+ 
++#include <xen/slr_table.h>
+ #include <xen/types.h>
+ 
+ extern bool slaunch_active;
+ 
++/*
++ * evt_log is assigned a physical address and the caller must map it to
++ * virtual, if needed.
++ */
++static inline void find_evt_log(struct slr_table *slrt, void **evt_log,
++                                uint32_t *evt_log_size)
++{
++    struct slr_entry_log_info *log_info;
++
++    log_info = (struct slr_entry_log_info *)
++        slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_LOG_INFO);
++    if ( log_info != NULL )
++    {
++        *evt_log = _p(log_info->addr);
++        *evt_log_size = log_info->size;
++    }
++    else
++    {
++        *evt_log = NULL;
++        *evt_log_size = 0;
++    }
++}
++
+ /*
+  * Retrieves pointer to SLRT.  Checks table's validity and maps it as necessary.
+  */
+ struct slr_table *slaunch_get_slrt(void);
+ 
++/*
++ * Prepares for accesses to essential data structures setup by boot environment.
++ */
++void slaunch_map_mem_regions(void);
++
++/* Marks regions of memory as used to avoid their corruption. */
++void slaunch_reserve_mem_regions(void);
++
++/*
++ * This helper function is used to map memory using L2 page tables by aligning
++ * mapped regions to 2MB. This way page allocator (which at this point isn't
++ * yet initialized) isn't needed for creating new L1 mappings. The function
++ * also checks and skips memory already mapped by the prebuilt tables.
++ *
++ * There is no unmap_l2() because the function is meant to be used by the code
++ * that accesses DRTM-related memory soon after which Xen rebuilds memory maps,
++ * effectively dropping all existing mappings.
++ */
++int slaunch_map_l2(unsigned long paddr, unsigned long size);
++
+ #endif /* _ASM_X86_SLAUNCH_H_ */
+diff --git a/xen/arch/x86/intel_txt.c b/xen/arch/x86/intel_txt.c
 new file mode 100644
-index 0000000000..a11822519d
+index 0000000000..4a4e404007
 --- /dev/null
-+++ b/xen/lib/sha1.c
-@@ -0,0 +1,240 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/xen/arch/x86/intel_txt.c
+@@ -0,0 +1,102 @@
 +/*
-+ * SHA1 routine optimized to do word accesses rather than byte accesses,
-+ * and to avoid unnecessary copies into the context array.
++ * SPDX-License-Identifier: GPL-2.0-or-later
 + *
-+ * This was based on the git SHA1 implementation.
++ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
 + */
 +
-+#include <xen/bitops.h>
++#include <xen/bug.h>
++#include <xen/init.h>
++#include <xen/lib.h>
 +#include <xen/types.h>
-+#include <xen/sha1.h>
-+#include <xen/unaligned.h>
++#include <asm/e820.h>
++#include <asm/intel_txt.h>
++#include <asm/slaunch.h>
 +
-+/*
-+ * If you have 32 registers or more, the compiler can (and should)
-+ * try to change the array[] accesses into registers. However, on
-+ * machines with less than ~25 registers, that won't really work,
-+ * and at least gcc will make an unholy mess of it.
-+ *
-+ * So to avoid that mess which just slows things down, we force
-+ * the stores to memory to actually happen (we might be better off
-+ * with a 'W(t)=(val);asm("":"+m" (W(t))' there instead, as
-+ * suggested by Artur Skawina - that will also make gcc unable to
-+ * try to do the silly "optimize away loads" part because it won't
-+ * see what the value will be).
-+ *
-+ * Ben Herrenschmidt reports that on PPC, the C version comes close
-+ * to the optimized asm with this (ie on PPC you don't want that
-+ * 'volatile', since there are lots of registers).
-+ *
-+ * On ARM we get the best code generation by forcing a full memory barrier
-+ * between each SHA_ROUND, otherwise gcc happily get wild with spilling and
-+ * the stack frame size simply explode and performance goes down the drain.
-+ */
++static uint64_t __initdata txt_heap_base, txt_heap_size;
 +
-+#ifdef CONFIG_X86
-+  #define setW(x, val) (*(volatile uint32_t *)&W(x) = (val))
-+#elif defined(CONFIG_ARM)
-+  #define setW(x, val) do { W(x) = (val); __asm__("":::"memory"); } while ( 0 )
-+#else
-+  #define setW(x, val) (W(x) = (val))
-+#endif
-+
-+/* This "rolls" over the 512-bit array */
-+#define W(x) (array[(x) & 15])
-+
-+/*
-+ * Where do we get the source from? The first 16 iterations get it from
-+ * the input data, the next mix it from the 512-bit array.
-+ */
-+#define SHA_SRC(t) get_unaligned_be32((uint32_t *)data + t)
-+#define SHA_MIX(t) rol32(W(t + 13) ^ W(t + 8) ^ W(t + 2) ^ W(t), 1)
-+
-+#define SHA_ROUND(t, input, fn, constant, A, B, C, D, E) do { \
-+        uint32_t TEMP = input(t); setW(t, TEMP);              \
-+        E += TEMP + rol32(A, 5) + (fn) + (constant);          \
-+        B = ror32(B, 2);                                      \
-+        TEMP = E; E = D; D = C; C = B; B = A; A = TEMP;       \
-+    } while ( 0 )
-+
-+#define T_0_15(t, A, B, C, D, E)  \
-+        SHA_ROUND(t, SHA_SRC, (((C ^ D) & B) ^ D), 0x5a827999, A, B, C, D, E)
-+#define T_16_19(t, A, B, C, D, E) \
-+        SHA_ROUND(t, SHA_MIX, (((C ^ D) & B) ^ D), 0x5a827999, A, B, C, D, E)
-+#define T_20_39(t, A, B, C, D, E) \
-+        SHA_ROUND(t, SHA_MIX, (B ^ C ^ D), 0x6ed9eba1, A, B, C, D, E)
-+#define T_40_59(t, A, B, C, D, E)                                             \
-+        SHA_ROUND(t, SHA_MIX, ((B & C) + (D & (B ^ C))), 0x8f1bbcdc, A, B, C, \
-+                  D, E)
-+#define T_60_79(t, A, B, C, D, E) \
-+        SHA_ROUND(t, SHA_MIX, (B ^ C ^ D), 0xca62c1d6, A, B, C, D, E)
-+
-+#define SHA1_BLOCK_SIZE         64
-+#define SHA1_WORKSPACE_WORDS    16
-+
-+struct sha1_state {
-+    uint32_t state[SHA1_DIGEST_SIZE / 4];
-+    uint64_t count;
-+    uint8_t buffer[SHA1_BLOCK_SIZE];
-+};
-+
-+typedef void sha1_block_fn(struct sha1_state *sst, const uint8_t *src, int blocks);
-+
-+/**
-+ * sha1_transform - single block SHA1 transform (deprecated)
-+ *
-+ * @digest: 160 bit digest to update
-+ * @data:   512 bits of data to hash
-+ * @array:  16 words of workspace (see note)
-+ *
-+ * This function executes SHA-1's internal compression function.  It updates the
-+ * 160-bit internal state (@digest) with a single 512-bit data block (@data).
-+ *
-+ * Don't use this function.  SHA-1 is no longer considered secure.  And even if
-+ * you do have to use SHA-1, this isn't the correct way to hash something with
-+ * SHA-1 as this doesn't handle padding and finalization.
-+ *
-+ * Note: If the hash is security sensitive, the caller should be sure
-+ * to clear the workspace. This is left to the caller to avoid
-+ * unnecessary clears between chained hashing operations.
-+ */
-+void sha1_transform(uint32_t *digest, const uint8_t *data, uint32_t *array)
++void __init txt_map_mem_regions(void)
 +{
-+    uint32_t A, B, C, D, E;
-+    unsigned int i = 0;
++    int rc;
 +
-+    A = digest[0];
-+    B = digest[1];
-+    C = digest[2];
-+    D = digest[3];
-+    E = digest[4];
++    rc = slaunch_map_l2(TXT_PRIV_CONFIG_REGS_BASE, NR_TXT_CONFIG_SIZE);
++    BUG_ON(rc != 0);
 +
-+    /* Round 1 - iterations 0-16 take their input from 'data' */
-+    for ( ; i < 16; ++i )
-+        T_0_15(i, A, B, C, D, E);
++    txt_heap_base = read_txt_reg(TXTCR_HEAP_BASE);
++    BUG_ON(txt_heap_base == 0);
 +
-+    /* Round 1 - tail. Input from 512-bit mixing array */
-+    for ( ; i < 20; ++i )
-+        T_16_19(i, A, B, C, D, E);
++    txt_heap_size = read_txt_reg(TXTCR_HEAP_SIZE);
++    BUG_ON(txt_heap_size == 0);
 +
-+    /* Round 2 */
-+    for ( ; i < 40; ++i )
-+        T_20_39(i, A, B, C, D, E);
-+
-+    /* Round 3 */
-+    for ( ; i < 60; ++i )
-+        T_40_59(i, A, B, C, D, E);
-+
-+    /* Round 4 */
-+    for ( ; i < 80; ++i )
-+        T_60_79(i, A, B, C, D, E);
-+
-+    digest[0] += A;
-+    digest[1] += B;
-+    digest[2] += C;
-+    digest[3] += D;
-+    digest[4] += E;
++    rc = slaunch_map_l2(txt_heap_base, txt_heap_size);
++    BUG_ON(rc != 0);
 +}
 +
-+static void sha1_init(struct sha1_state *sctx)
++/* Mark RAM region as RESERVED if it isn't marked that way already. */
++static int __init mark_ram_as(struct e820map *e820, uint64_t start,
++                              uint64_t end, uint32_t type)
 +{
-+    sctx->state[0] = 0x67452301UL;
-+    sctx->state[1] = 0xefcdab89UL;
-+    sctx->state[2] = 0x98badcfeUL;
-+    sctx->state[3] = 0x10325476UL;
-+    sctx->state[4] = 0xc3d2e1f0UL;
-+    sctx->count = 0;
-+}
++    unsigned int i;
++    uint32_t from_type = E820_RAM;
 +
-+static void sha1_do_update(struct sha1_state *sctx,
-+                           const uint8_t *data,
-+                           unsigned int len,
-+                           sha1_block_fn *block_fn)
-+{
-+    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
-+
-+    sctx->count += len;
-+
-+    if ( unlikely((partial + len) >= SHA1_BLOCK_SIZE) )
++    for ( i = 0; i < e820->nr_map; i++ )
 +    {
-+        int blocks;
++        uint64_t rs = e820->map[i].addr;
++        uint64_t re = rs + e820->map[i].size;
++        if ( start >= rs && end <= re )
++            break;
++    }
 +
-+        if ( partial )
++    /*
++     * Allow the range to be unlisted since we're only preventing RAM from
++     * use.
++     */
++    if ( i == e820->nr_map )
++        return 1;
++
++    /*
++     * e820_change_range_type() fails if the range is already marked with the
++     * desired type. Don't consider it an error if firmware has done it for us.
++     */
++    if ( e820->map[i].type == type )
++        return 1;
++
++    /* E820_ACPI or E820_NVS are really unexpected, but others are fine. */
++    if ( e820->map[i].type == E820_RESERVED ||
++         e820->map[i].type == E820_UNUSABLE )
++        from_type = e820->map[i].type;
++
++    return e820_change_range_type(e820, start, end, from_type, type);
++}
++
++void __init txt_reserve_mem_regions(void)
++{
++    int rc;
++    uint64_t sinit_base, sinit_size;
++
++    /* TXT Heap */
++    BUG_ON(txt_heap_base == 0);
++    printk("SLAUNCH: reserving TXT heap (%#lx - %#lx)\n", txt_heap_base,
++           txt_heap_base + txt_heap_size);
++    rc = mark_ram_as(&e820_raw, txt_heap_base, txt_heap_base + txt_heap_size,
++                     E820_RESERVED);
++    BUG_ON(rc == 0);
++
++    sinit_base = read_txt_reg(TXTCR_SINIT_BASE);
++    BUG_ON(sinit_base == 0);
++
++    sinit_size = read_txt_reg(TXTCR_SINIT_SIZE);
++    BUG_ON(sinit_size == 0);
++
++    /* SINIT */
++    printk("SLAUNCH: reserving SINIT memory (%#lx - %#lx)\n", sinit_base,
++           sinit_base + sinit_size);
++    rc = mark_ram_as(&e820_raw, sinit_base, sinit_base + sinit_size,
++                     E820_RESERVED);
++    BUG_ON(rc == 0);
++
++    /* TXT Private Space */
++    rc = mark_ram_as(&e820_raw, TXT_PRIV_CONFIG_REGS_BASE,
++                     TXT_PRIV_CONFIG_REGS_BASE + NR_TXT_CONFIG_SIZE,
++                     E820_UNUSABLE);
++    BUG_ON(rc == 0);
++}
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 24b36c1a59..403d976449 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -52,6 +52,7 @@
+ #include <asm/prot-key.h>
+ #include <asm/pv/domain.h>
+ #include <asm/setup.h>
++#include <asm/slaunch.h>
+ #include <asm/smp.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/tboot.h>
+@@ -1058,9 +1059,6 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+     return d;
+ }
+ 
+-/* How much of the directmap is prebuilt at compile time. */
+-#define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
+-
+ void asmlinkage __init noreturn __start_xen(void)
+ {
+     const char *memmap_type = NULL;
+@@ -1396,6 +1394,12 @@ void asmlinkage __init noreturn __start_xen(void)
+ #endif
+     }
+ 
++    if ( slaunch_active )
++    {
++        slaunch_map_mem_regions();
++        slaunch_reserve_mem_regions();
++    }
++
+     /* Sanitise the raw E820 map to produce a final clean version. */
+     max_page = raw_max_page = init_e820(memmap_type, &e820_raw);
+ 
+diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
+index 0404084b02..20e277cc5c 100644
+--- a/xen/arch/x86/slaunch.c
++++ b/xen/arch/x86/slaunch.c
+@@ -7,7 +7,11 @@
+ #include <xen/compiler.h>
+ #include <xen/init.h>
+ #include <xen/macros.h>
++#include <xen/mm.h>
+ #include <xen/types.h>
++#include <asm/e820.h>
++#include <asm/intel_txt.h>
++#include <asm/page.h>
+ #include <asm/slaunch.h>
+ 
+ /*
+@@ -24,3 +28,95 @@ static void __maybe_unused compile_time_checks(void)
+ {
+     BUILD_BUG_ON(sizeof(slaunch_active) != 1);
+ }
++
++struct slr_table *__init slaunch_get_slrt(void)
++{
++    static struct slr_table *slrt;
++
++    if (slrt == NULL) {
++        int rc;
++
++        slrt = __va(slaunch_slrt);
++
++        rc = slaunch_map_l2(slaunch_slrt, PAGE_SIZE);
++        BUG_ON(rc != 0);
++
++        if ( slrt->magic != SLR_TABLE_MAGIC )
++            panic("SLRT has invalid magic value: %#08x!\n", slrt->magic);
++        /* XXX: are newer revisions allowed? */
++        if ( slrt->revision != SLR_TABLE_REVISION )
++            panic("SLRT is of unsupported revision: %#04x!\n", slrt->revision);
++        if ( slrt->architecture != SLR_INTEL_TXT )
++            panic("SLRT is for unexpected architecture: %#04x!\n",
++                  slrt->architecture);
++        if ( slrt->size > slrt->max_size )
++            panic("SLRT is larger than its max size: %#08x > %#08x!\n",
++                  slrt->size, slrt->max_size);
++
++        if ( slrt->size > PAGE_SIZE )
 +        {
-+            int p = SHA1_BLOCK_SIZE - partial;
-+
-+            memcpy(sctx->buffer + partial, data, p);
-+            data += p;
-+            len -= p;
-+
-+            block_fn(sctx, sctx->buffer, 1);
++            rc = slaunch_map_l2(slaunch_slrt, slrt->size);
++            BUG_ON(rc != 0);
 +        }
-+
-+        blocks = len / SHA1_BLOCK_SIZE;
-+        len %= SHA1_BLOCK_SIZE;
-+
-+        if ( blocks )
-+        {
-+            block_fn(sctx, data, blocks);
-+            data += blocks * SHA1_BLOCK_SIZE;
-+        }
-+        partial = 0;
 +    }
-+    if ( len )
-+        memcpy(sctx->buffer + partial, data, len);
++
++    return slrt;
 +}
 +
-+static void sha1_do_finalize(struct sha1_state *sctx, sha1_block_fn *block_fn)
++void __init slaunch_map_mem_regions(void)
 +{
-+    const int bit_offset = SHA1_BLOCK_SIZE - sizeof(__be64);
-+    __be64 *bits = (__be64 *)(sctx->buffer + bit_offset);
-+    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
++    void *evt_log_addr;
++    uint32_t evt_log_size;
 +
-+    sctx->buffer[partial++] = 0x80;
-+    if ( partial > bit_offset )
++    /* Vendor-specific part. */
++    txt_map_mem_regions();
++
++    find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
++    if ( evt_log_addr != NULL )
 +    {
-+        memset(sctx->buffer + partial, 0x0, SHA1_BLOCK_SIZE - partial);
-+        partial = 0;
-+
-+        block_fn(sctx, sctx->buffer, 1);
++        int rc = slaunch_map_l2((uintptr_t)evt_log_addr, evt_log_size);
++        BUG_ON(rc != 0);
 +    }
-+
-+    memset(sctx->buffer + partial, 0x0, bit_offset - partial);
-+    *bits = cpu_to_be64(sctx->count << 3);
-+    block_fn(sctx, sctx->buffer, 1);
 +}
 +
-+static void sha1_finish(struct sha1_state *sctx, uint8_t *out)
++void __init slaunch_reserve_mem_regions(void)
 +{
-+    __be32 *digest = (__be32 *)out;
-+    int i;
++    int rc;
 +
-+    for ( i = 0; i < SHA1_DIGEST_SIZE / sizeof(__be32); i++ )
-+        put_unaligned_be32(sctx->state[i], digest++);
++    void *evt_log_addr;
++    uint32_t evt_log_size;
 +
-+    memset(sctx, 0, sizeof(*sctx));
-+}
++    /* Vendor-specific part. */
++    txt_reserve_mem_regions();
 +
-+static void sha1_generic_block_fn(struct sha1_state *sctx, const uint8_t *src,
-+                                  int blocks)
-+{
-+    uint32_t temp[SHA1_WORKSPACE_WORDS];
-+
-+    while ( blocks-- )
++    find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
++    if ( evt_log_addr != NULL )
 +    {
-+        sha1_transform(sctx->state, src, temp);
-+        src += SHA1_BLOCK_SIZE;
++        printk("SLAUNCH: reserving event log (%#lx - %#lx)\n",
++               (uint64_t)evt_log_addr,
++               (uint64_t)evt_log_addr + evt_log_size);
++        rc = reserve_e820_ram(&e820_raw, (uint64_t)evt_log_addr,
++                              (uint64_t)evt_log_addr + evt_log_size);
++        BUG_ON(rc == 0);
 +    }
-+    memset(temp, 0, sizeof(temp));
 +}
 +
-+void sha1_hash(const uint8_t *data, unsigned int len, uint8_t *out)
++int __init slaunch_map_l2(unsigned long paddr, unsigned long size)
 +{
-+    struct sha1_state sctx;
++    unsigned long aligned_paddr = paddr & ~((1ULL << L2_PAGETABLE_SHIFT) - 1);
++    unsigned long pages = ((paddr + size) - aligned_paddr);
++    pages = ROUNDUP(pages, 1ULL << L2_PAGETABLE_SHIFT) >> PAGE_SHIFT;
 +
-+    sha1_init(&sctx);
-+    sha1_do_update(&sctx, data, len, sha1_generic_block_fn);
-+    sha1_do_finalize(&sctx, sha1_generic_block_fn);
-+    sha1_finish(&sctx, out);
++    if ( aligned_paddr + pages * PAGE_SIZE <= PREBUILT_MAP_LIMIT )
++        return 0;
++
++    if ( aligned_paddr < PREBUILT_MAP_LIMIT )
++    {
++        pages -= (PREBUILT_MAP_LIMIT - aligned_paddr) >> PAGE_SHIFT;
++        aligned_paddr = PREBUILT_MAP_LIMIT;
++    }
++
++    return map_pages_to_xen((uintptr_t)__va(aligned_paddr),
++                            maddr_to_mfn(aligned_paddr),
++                            pages, PAGE_HYPERVISOR);
 +}
 -- 
 2.49.0
