@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A24C2C369C2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.962760.1353939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DE6C369C2
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:07:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.962778.1353978 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FDR-00014J-SF; Tue, 22 Apr 2025 15:07:17 +0000
+	id 1u7FDh-0002hN-A8; Tue, 22 Apr 2025 15:07:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 962760.1353939; Tue, 22 Apr 2025 15:07:17 +0000
+Received: by outflank-mailman (output) from mailman id 962778.1353978; Tue, 22 Apr 2025 15:07:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FDR-00014A-OR; Tue, 22 Apr 2025 15:07:17 +0000
-Received: by outflank-mailman (input) for mailman id 962760;
- Tue, 22 Apr 2025 15:07:16 +0000
+	id 1u7FDh-0002hC-6v; Tue, 22 Apr 2025 15:07:33 +0000
+Received: by outflank-mailman (input) for mailman id 962778;
+ Tue, 22 Apr 2025 15:07:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BiSK=XI=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1u7FDQ-0000lQ-TF
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:07:16 +0000
-Received: from 19.mo561.mail-out.ovh.net (19.mo561.mail-out.ovh.net
- [178.32.98.231]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7a2a3a88-1f8b-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 17:07:16 +0200 (CEST)
-Received: from director7.ghost.mail-out.ovh.net (unknown [10.108.25.15])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4Zhlvl2j2fz1bff
- for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:07:15 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-bt6hd (unknown [10.110.178.210])
- by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 70DE61FE99;
- Tue, 22 Apr 2025 15:07:14 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.101])
- by ghost-submission-5b5ff79f4f-bt6hd with ESMTPSA
- id nK3OBqKwB2ge+RAAyP1w0w
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:07:14 +0000
+ id 1u7FDf-0000lQ-GT
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:07:31 +0000
+Received: from 16.mo583.mail-out.ovh.net (16.mo583.mail-out.ovh.net
+ [87.98.174.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 825c7e38-1f8b-11f0-9eb0-5ba50f476ded;
+ Tue, 22 Apr 2025 17:07:30 +0200 (CEST)
+Received: from director6.ghost.mail-out.ovh.net (unknown [10.109.148.21])
+ by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4Zhlw11xj6z1gwT
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:07:29 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-6tjtj (unknown [10.110.178.32])
+ by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 518011FEC4;
+ Tue, 22 Apr 2025 15:07:28 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.113])
+ by ghost-submission-5b5ff79f4f-6tjtj with ESMTPSA
+ id XczlBbCwB2gtAQEAHtJGkA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:07:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,287 +48,344 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a2a3a88-1f8b-11f0-9eb0-5ba50f476ded
-Authentication-Results:garm.ovh; auth=pass (GARM-101G004b327d7ef-90ae-41a5-ba9a-3cc7237e961b,
+X-Inumbo-ID: 825c7e38-1f8b-11f0-9eb0-5ba50f476ded
+Authentication-Results:garm.ovh; auth=pass (GARM-113S007e787a2bd-89e1-430c-a228-f3b8fb6ac07a,
                     7E508E014E7E7C169EB13C6E22C3C4EBF1F0FDD7) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH 04/21] x86/boot/slaunch_early: implement early initialization
-Date: Tue, 22 Apr 2025 18:06:38 +0300
-Message-ID: <0e67e075eeba3c78c0db55f65caa233f94c38d78.1745172094.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH 09/21] lib/sha1.c: add file
+Date: Tue, 22 Apr 2025 18:06:43 +0300
+Message-ID: <8dec423182ed60e2233ed87d98066fed6dc20caf.1745172094.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12728016974653797532
+X-Ovh-Tracer-Id: 12731957624680330396
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeffjefgudevkeetudegueeihfdthfejgfeileekuefggeegtdegveehfeehfeefueenucffohhmrghinhepsggrshgvrdhmrghppdhhvggrugdrshgsnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheeiudgmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=pt0Pi7ZFKQj7O1HXO7Pvp5p5rmWoJu6O09JQ4IeitBY=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeiteejtdffveekuddtgfegteffkefhgedujeehfeefveekvdevveevteeufeevteenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrdduudefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=WDJT0W+j5imcAWnKzPI6gEyLmrSG03CfujuYBuS2VuQ=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1745334435; v=1;
- b=huZeoKq35ciMwpgmCBtw6yuOubC+UUl99fN2sDkcWf4NpVDJbf3Fj0b/W/ab1K3i/oEnHr3p
- rmy2MbYBQzx9tv5weaavXuvgM+AgHbIMQcL9B4qJK+FR6FeqTKpxePynJQUv7U7dgJypGs/8Uyb
- NoAiHOwRFi3sYuS2zAFe5RuX2XJA0uY3e6cW/8VTmEroE0T4L46slgJuXW3MIpSZ5n4M9ZbuR7m
- Yq1NInvlSUe2QPxo/rle3aP7ZNYGHg/1mr19WarM+lDF6d4/AFQPg/QINQVsxE6x3SKOQLXPkou
- 9RReqkIr8hELbY2bkuUl8P6kF0JYXKpq21jviVOesZpLg==
+ t=1745334449; v=1;
+ b=UM7ZURbYhRRjQiFbl+pHtxZI+t5eXVeafpdrNRYGif+JnCVnauX1q3w+R+agFXTXvTxycoY8
+ K/zkiFFYN+IEs1tMSWwMDKWIdSOTUPMizO22JcWzReXz3SkWwWrPgQuQsDsr3Hn3oTKYlXuBH/P
+ MCPhTu+8SjWRWZsxauiCXM5/1xHufeTEr2f2SnjHaVhSPo95NeehkjHVHhZuCOTYIe4q40uays0
+ Of5g6Ipa7VPRkBZVNoH3YoKnbNZAY4G19p1WOCELba3wkpbyhfYbf2uSS+VCSNFG1CTUvCtpOIA
+ BSl83zhAYMUvpKcoQZcK8KcjmIztsMhnvPWmncXmmjOlQ==
 
-Make head.S invoke a C function to retrieve MBI and SLRT addresses in a
-platform-specific way.  This is also the place to perform sanity checks
-of DRTM.
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+The code comes from [1] and is licensed under GPL-2.0 license.
+It's a combination of:
+ - include/crypto/sha1.h
+ - include/crypto/sha1_base.h
+ - lib/crypto/sha1.c
+ - crypto/sha1_generic.c
+
+Changes:
+ - includes
+ - formatting
+ - renames and splicing of some trivial functions that are called once
+ - dropping of `int` return values (only zero was ever returned)
+ - getting rid of references to `struct shash_desc`
+
+[1]: https://github.com/torvalds/linux/tree/afdab700f65e14070d8ab92175544b1c62b8bf03
+
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 ---
- xen/arch/x86/Makefile                |  1 +
- xen/arch/x86/boot/Makefile           |  5 +++-
- xen/arch/x86/boot/head.S             | 43 ++++++++++++++++++++++++++++
- xen/arch/x86/boot/slaunch_early.c    | 41 ++++++++++++++++++++++++++
- xen/arch/x86/include/asm/intel_txt.h | 16 +++++++++++
- xen/arch/x86/include/asm/slaunch.h   | 19 ++++++++++++
- xen/arch/x86/slaunch.c               | 26 +++++++++++++++++
- 7 files changed, 150 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/x86/boot/slaunch_early.c
- create mode 100644 xen/arch/x86/include/asm/slaunch.h
- create mode 100644 xen/arch/x86/slaunch.c
+ xen/include/xen/sha1.h |  12 +++
+ xen/lib/Makefile       |   1 +
+ xen/lib/sha1.c         | 240 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 253 insertions(+)
+ create mode 100644 xen/include/xen/sha1.h
+ create mode 100644 xen/lib/sha1.c
 
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index f59c9665fd..571cad160d 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -59,6 +59,7 @@ obj-$(CONFIG_COMPAT) += x86_64/physdev.o
- obj-$(CONFIG_X86_PSR) += psr.o
- obj-y += setup.o
- obj-y += shutdown.o
-+obj-y += slaunch.o
- obj-y += smp.o
- obj-y += smpboot.o
- obj-y += spec_ctrl.o
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index be91a5757a..d0015f7d19 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -5,6 +5,7 @@ obj-bin-y += $(obj64)
- obj32 := cmdline.32.o
- obj32 += reloc.32.o
- obj32 += reloc-trampoline.32.o
-+obj32 += slaunch_early.32.o
- 
- obj64 := reloc-trampoline.o
- 
-@@ -28,6 +29,8 @@ $(obj32): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
- $(obj)/%.32.o: $(src)/%.c FORCE
- 	$(call if_changed_rule,cc_o_c)
- 
-+$(obj)/slaunch_early.32.o: XEN_CFLAGS += -D__EARLY_SLAUNCH__
-+
- orphan-handling-$(call ld-option,--orphan-handling=error) := --orphan-handling=error
- LDFLAGS_DIRECT-$(call ld-option,--warn-rwx-segments) := --no-warn-rwx-segments
- LDFLAGS_DIRECT += $(LDFLAGS_DIRECT-y)
-@@ -81,7 +84,7 @@ cmd_combine = \
-               --bin1      $(obj)/built-in-32.base.bin \
-               --bin2      $(obj)/built-in-32.offset.bin \
-               --map       $(obj)/built-in-32.base.map \
--              --exports   cmdline_parse_early,reloc,reloc_trampoline32 \
-+              --exports   cmdline_parse_early,reloc,reloc_trampoline32,slaunch_early_init \
-               --output    $@
- 
- targets += built-in-32.S
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index cd951ad2dc..e522a36305 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -472,6 +472,10 @@ __start:
-         /* Bootloaders may set multiboot{1,2}.mem_lower to a nonzero value. */
-         xor     %edx,%edx
- 
-+        /* Check for TrenchBoot slaunch bootloader. */
-+        cmp     $SLAUNCH_BOOTLOADER_MAGIC, %eax
-+        je      .Lslaunch_proto
-+
-         /* Check for Multiboot2 bootloader. */
-         cmp     $MULTIBOOT2_BOOTLOADER_MAGIC,%eax
-         je      .Lmultiboot2_proto
-@@ -487,6 +491,45 @@ __start:
-         cmovnz  MB_mem_lower(%ebx),%edx
-         jmp     trampoline_bios_setup
- 
-+.Lslaunch_proto:
-+        /*
-+         * Upon reaching here, CPU state mostly matches the one setup by the
-+         * bootloader with ESP, ESI and EDX being clobbered above.
-+         */
-+
-+        /* Save information that TrenchBoot slaunch was used. */
-+        movb    $1, sym_esi(slaunch_active)
-+
-+        /*
-+         * Prepare space for output parameter of slaunch_early_init(), which is
-+         * a structure of two uint32_t fields.
-+         */
-+        sub     $8, %esp
-+
-+        push    %esp                             /* pointer to output structure */
-+        lea     sym_offs(__2M_rwdata_end), %ecx  /* end of target image */
-+        lea     sym_offs(_start), %edx           /* target base address */
-+        mov     %esi, %eax                       /* load base address */
-+        /*
-+         * slaunch_early_init(load/eax, tgt/edx, tgt_end/ecx, ret/stk) using
-+         * fastcall calling convention.
-+         */
-+        call    slaunch_early_init
-+        add     $4, %esp                         /* pop the fourth parameter */
-+
-+        /* Move outputs of slaunch_early_init() from stack into registers. */
-+        pop     %eax  /* physical MBI address */
-+        pop     %edx  /* physical SLRT address */
-+
-+        /* Save physical address of SLRT for C code. */
-+        mov     %edx, sym_esi(slaunch_slrt)
-+
-+        /* Store MBI address in EBX where MB2 code expects it. */
-+        mov     %eax, %ebx
-+
-+        /* Move magic number expected by Multiboot 2 to EAX and fall through. */
-+        movl    $MULTIBOOT2_BOOTLOADER_MAGIC, %eax
-+
- .Lmultiboot2_proto:
-         /* Skip Multiboot2 information fixed part. */
-         lea     (MB2_fixed_sizeof+MULTIBOOT2_TAG_ALIGN-1)(%ebx),%ecx
-diff --git a/xen/arch/x86/boot/slaunch_early.c b/xen/arch/x86/boot/slaunch_early.c
+diff --git a/xen/include/xen/sha1.h b/xen/include/xen/sha1.h
 new file mode 100644
-index 0000000000..177267248f
+index 0000000000..752dfdf827
 --- /dev/null
-+++ b/xen/arch/x86/boot/slaunch_early.c
-@@ -0,0 +1,41 @@
++++ b/xen/include/xen/sha1.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
++#ifndef __XEN_SHA1_H
++#define __XEN_SHA1_H
++
++#include <xen/inttypes.h>
++
++#define SHA1_DIGEST_SIZE  20
++
++void sha1_hash(const u8 *data, unsigned int len, u8 *out);
++
++#endif /* !__XEN_SHA1_H */
+diff --git a/xen/lib/Makefile b/xen/lib/Makefile
+index 76dc86fab0..0d5774b8d7 100644
+--- a/xen/lib/Makefile
++++ b/xen/lib/Makefile
+@@ -38,6 +38,7 @@ lib-y += strtoll.o
+ lib-y += strtoul.o
+ lib-y += strtoull.o
+ lib-$(CONFIG_X86) += x86-generic-hweightl.o
++lib-$(CONFIG_X86) += sha1.o
+ lib-$(CONFIG_X86) += xxhash32.o
+ lib-$(CONFIG_X86) += xxhash64.o
+ 
+diff --git a/xen/lib/sha1.c b/xen/lib/sha1.c
+new file mode 100644
+index 0000000000..a11822519d
+--- /dev/null
++++ b/xen/lib/sha1.c
+@@ -0,0 +1,240 @@
++/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
++ * SHA1 routine optimized to do word accesses rather than byte accesses,
++ * and to avoid unnecessary copies into the context array.
 + *
-+ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
++ * This was based on the git SHA1 implementation.
 + */
 +
-+#include <xen/slr_table.h>
++#include <xen/bitops.h>
 +#include <xen/types.h>
-+#include <asm/intel_txt.h>
++#include <xen/sha1.h>
++#include <xen/unaligned.h>
 +
-+struct early_init_results
++/*
++ * If you have 32 registers or more, the compiler can (and should)
++ * try to change the array[] accesses into registers. However, on
++ * machines with less than ~25 registers, that won't really work,
++ * and at least gcc will make an unholy mess of it.
++ *
++ * So to avoid that mess which just slows things down, we force
++ * the stores to memory to actually happen (we might be better off
++ * with a 'W(t)=(val);asm("":"+m" (W(t))' there instead, as
++ * suggested by Artur Skawina - that will also make gcc unable to
++ * try to do the silly "optimize away loads" part because it won't
++ * see what the value will be).
++ *
++ * Ben Herrenschmidt reports that on PPC, the C version comes close
++ * to the optimized asm with this (ie on PPC you don't want that
++ * 'volatile', since there are lots of registers).
++ *
++ * On ARM we get the best code generation by forcing a full memory barrier
++ * between each SHA_ROUND, otherwise gcc happily get wild with spilling and
++ * the stack frame size simply explode and performance goes down the drain.
++ */
++
++#ifdef CONFIG_X86
++  #define setW(x, val) (*(volatile uint32_t *)&W(x) = (val))
++#elif defined(CONFIG_ARM)
++  #define setW(x, val) do { W(x) = (val); __asm__("":::"memory"); } while ( 0 )
++#else
++  #define setW(x, val) (W(x) = (val))
++#endif
++
++/* This "rolls" over the 512-bit array */
++#define W(x) (array[(x) & 15])
++
++/*
++ * Where do we get the source from? The first 16 iterations get it from
++ * the input data, the next mix it from the 512-bit array.
++ */
++#define SHA_SRC(t) get_unaligned_be32((uint32_t *)data + t)
++#define SHA_MIX(t) rol32(W(t + 13) ^ W(t + 8) ^ W(t + 2) ^ W(t), 1)
++
++#define SHA_ROUND(t, input, fn, constant, A, B, C, D, E) do { \
++        uint32_t TEMP = input(t); setW(t, TEMP);              \
++        E += TEMP + rol32(A, 5) + (fn) + (constant);          \
++        B = ror32(B, 2);                                      \
++        TEMP = E; E = D; D = C; C = B; B = A; A = TEMP;       \
++    } while ( 0 )
++
++#define T_0_15(t, A, B, C, D, E)  \
++        SHA_ROUND(t, SHA_SRC, (((C ^ D) & B) ^ D), 0x5a827999, A, B, C, D, E)
++#define T_16_19(t, A, B, C, D, E) \
++        SHA_ROUND(t, SHA_MIX, (((C ^ D) & B) ^ D), 0x5a827999, A, B, C, D, E)
++#define T_20_39(t, A, B, C, D, E) \
++        SHA_ROUND(t, SHA_MIX, (B ^ C ^ D), 0x6ed9eba1, A, B, C, D, E)
++#define T_40_59(t, A, B, C, D, E)                                             \
++        SHA_ROUND(t, SHA_MIX, ((B & C) + (D & (B ^ C))), 0x8f1bbcdc, A, B, C, \
++                  D, E)
++#define T_60_79(t, A, B, C, D, E) \
++        SHA_ROUND(t, SHA_MIX, (B ^ C ^ D), 0xca62c1d6, A, B, C, D, E)
++
++#define SHA1_BLOCK_SIZE         64
++#define SHA1_WORKSPACE_WORDS    16
++
++struct sha1_state {
++    uint32_t state[SHA1_DIGEST_SIZE / 4];
++    uint64_t count;
++    uint8_t buffer[SHA1_BLOCK_SIZE];
++};
++
++typedef void sha1_block_fn(struct sha1_state *sst, const uint8_t *src, int blocks);
++
++/**
++ * sha1_transform - single block SHA1 transform (deprecated)
++ *
++ * @digest: 160 bit digest to update
++ * @data:   512 bits of data to hash
++ * @array:  16 words of workspace (see note)
++ *
++ * This function executes SHA-1's internal compression function.  It updates the
++ * 160-bit internal state (@digest) with a single 512-bit data block (@data).
++ *
++ * Don't use this function.  SHA-1 is no longer considered secure.  And even if
++ * you do have to use SHA-1, this isn't the correct way to hash something with
++ * SHA-1 as this doesn't handle padding and finalization.
++ *
++ * Note: If the hash is security sensitive, the caller should be sure
++ * to clear the workspace. This is left to the caller to avoid
++ * unnecessary clears between chained hashing operations.
++ */
++void sha1_transform(uint32_t *digest, const uint8_t *data, uint32_t *array)
 +{
-+    uint32_t mbi_pa;
-+    uint32_t slrt_pa;
-+} __packed;
++    uint32_t A, B, C, D, E;
++    unsigned int i = 0;
 +
-+void slaunch_early_init(uint32_t load_base_addr,
-+                        uint32_t tgt_base_addr,
-+                        uint32_t tgt_end_addr,
-+                        struct early_init_results *result)
-+{
-+    void *txt_heap;
-+    struct txt_os_mle_data *os_mle;
-+    struct slr_table *slrt;
-+    struct slr_entry_intel_info *intel_info;
++    A = digest[0];
++    B = digest[1];
++    C = digest[2];
++    D = digest[3];
++    E = digest[4];
 +
-+    txt_heap = txt_init();
-+    os_mle = txt_os_mle_data_start(txt_heap);
++    /* Round 1 - iterations 0-16 take their input from 'data' */
++    for ( ; i < 16; ++i )
++        T_0_15(i, A, B, C, D, E);
 +
-+    result->slrt_pa = os_mle->slrt;
-+    result->mbi_pa = 0;
++    /* Round 1 - tail. Input from 512-bit mixing array */
++    for ( ; i < 20; ++i )
++        T_16_19(i, A, B, C, D, E);
 +
-+    slrt = (struct slr_table *)(uintptr_t)os_mle->slrt;
++    /* Round 2 */
++    for ( ; i < 40; ++i )
++        T_20_39(i, A, B, C, D, E);
 +
-+    intel_info = (struct slr_entry_intel_info *)
-+        slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+    if ( intel_info == NULL || intel_info->hdr.size != sizeof(*intel_info) )
-+        return;
++    /* Round 3 */
++    for ( ; i < 60; ++i )
++        T_40_59(i, A, B, C, D, E);
 +
-+    result->mbi_pa = intel_info->boot_params_base;
++    /* Round 4 */
++    for ( ; i < 80; ++i )
++        T_60_79(i, A, B, C, D, E);
++
++    digest[0] += A;
++    digest[1] += B;
++    digest[2] += C;
++    digest[3] += D;
++    digest[4] += E;
 +}
-diff --git a/xen/arch/x86/include/asm/intel_txt.h b/xen/arch/x86/include/asm/intel_txt.h
-index 2cc6eb5be9..b973640c56 100644
---- a/xen/arch/x86/include/asm/intel_txt.h
-+++ b/xen/arch/x86/include/asm/intel_txt.h
-@@ -269,4 +269,20 @@ static inline void *txt_sinit_mle_data_start(void *heap)
-         sizeof(uint64_t);
- }
- 
-+static inline void *txt_init(void)
++
++static void sha1_init(struct sha1_state *sctx)
 +{
-+    void *txt_heap;
-+
-+    /* Clear the TXT error register for a clean start of the day. */
-+    write_txt_reg(TXTCR_ERRORCODE, 0);
-+
-+    txt_heap = _p(read_txt_reg(TXTCR_HEAP_BASE));
-+
-+    if ( txt_os_mle_data_size(txt_heap) < sizeof(struct txt_os_mle_data) ||
-+         txt_os_sinit_data_size(txt_heap) < sizeof(struct txt_os_sinit_data) )
-+        txt_reset(SLAUNCH_ERROR_GENERIC);
-+
-+    return txt_heap;
++    sctx->state[0] = 0x67452301UL;
++    sctx->state[1] = 0xefcdab89UL;
++    sctx->state[2] = 0x98badcfeUL;
++    sctx->state[3] = 0x10325476UL;
++    sctx->state[4] = 0xc3d2e1f0UL;
++    sctx->count = 0;
 +}
 +
- #endif /* __ASSEMBLY__ */
-diff --git a/xen/arch/x86/include/asm/slaunch.h b/xen/arch/x86/include/asm/slaunch.h
-new file mode 100644
-index 0000000000..08cc2657f0
---- /dev/null
-+++ b/xen/arch/x86/include/asm/slaunch.h
-@@ -0,0 +1,19 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
-+ */
-+
-+#ifndef _ASM_X86_SLAUNCH_H_
-+#define _ASM_X86_SLAUNCH_H_
-+
-+#include <xen/types.h>
-+
-+extern bool slaunch_active;
-+
-+/*
-+ * Retrieves pointer to SLRT.  Checks table's validity and maps it as necessary.
-+ */
-+struct slr_table *slaunch_get_slrt(void);
-+
-+#endif /* _ASM_X86_SLAUNCH_H_ */
-diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
-new file mode 100644
-index 0000000000..0404084b02
---- /dev/null
-+++ b/xen/arch/x86/slaunch.c
-@@ -0,0 +1,26 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
-+ */
-+
-+#include <xen/compiler.h>
-+#include <xen/init.h>
-+#include <xen/macros.h>
-+#include <xen/types.h>
-+#include <asm/slaunch.h>
-+
-+/*
-+ * These variables are assigned to by the code near Xen's entry point.
-+ * slaunch_slrt is not declared in slaunch.h to facilitate accessing the
-+ * variable through slaunch_get_slrt().
-+ */
-+bool __initdata slaunch_active;
-+uint32_t __initdata slaunch_slrt; /* physical address */
-+
-+/* Using slaunch_active in head.S assumes it's a single byte in size, so enforce
-+ * this assumption. */
-+static void __maybe_unused compile_time_checks(void)
++static void sha1_do_update(struct sha1_state *sctx,
++                           const uint8_t *data,
++                           unsigned int len,
++                           sha1_block_fn *block_fn)
 +{
-+    BUILD_BUG_ON(sizeof(slaunch_active) != 1);
++    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
++
++    sctx->count += len;
++
++    if ( unlikely((partial + len) >= SHA1_BLOCK_SIZE) )
++    {
++        int blocks;
++
++        if ( partial )
++        {
++            int p = SHA1_BLOCK_SIZE - partial;
++
++            memcpy(sctx->buffer + partial, data, p);
++            data += p;
++            len -= p;
++
++            block_fn(sctx, sctx->buffer, 1);
++        }
++
++        blocks = len / SHA1_BLOCK_SIZE;
++        len %= SHA1_BLOCK_SIZE;
++
++        if ( blocks )
++        {
++            block_fn(sctx, data, blocks);
++            data += blocks * SHA1_BLOCK_SIZE;
++        }
++        partial = 0;
++    }
++    if ( len )
++        memcpy(sctx->buffer + partial, data, len);
++}
++
++static void sha1_do_finalize(struct sha1_state *sctx, sha1_block_fn *block_fn)
++{
++    const int bit_offset = SHA1_BLOCK_SIZE - sizeof(__be64);
++    __be64 *bits = (__be64 *)(sctx->buffer + bit_offset);
++    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
++
++    sctx->buffer[partial++] = 0x80;
++    if ( partial > bit_offset )
++    {
++        memset(sctx->buffer + partial, 0x0, SHA1_BLOCK_SIZE - partial);
++        partial = 0;
++
++        block_fn(sctx, sctx->buffer, 1);
++    }
++
++    memset(sctx->buffer + partial, 0x0, bit_offset - partial);
++    *bits = cpu_to_be64(sctx->count << 3);
++    block_fn(sctx, sctx->buffer, 1);
++}
++
++static void sha1_finish(struct sha1_state *sctx, uint8_t *out)
++{
++    __be32 *digest = (__be32 *)out;
++    int i;
++
++    for ( i = 0; i < SHA1_DIGEST_SIZE / sizeof(__be32); i++ )
++        put_unaligned_be32(sctx->state[i], digest++);
++
++    memset(sctx, 0, sizeof(*sctx));
++}
++
++static void sha1_generic_block_fn(struct sha1_state *sctx, const uint8_t *src,
++                                  int blocks)
++{
++    uint32_t temp[SHA1_WORKSPACE_WORDS];
++
++    while ( blocks-- )
++    {
++        sha1_transform(sctx->state, src, temp);
++        src += SHA1_BLOCK_SIZE;
++    }
++    memset(temp, 0, sizeof(temp));
++}
++
++void sha1_hash(const uint8_t *data, unsigned int len, uint8_t *out)
++{
++    struct sha1_state sctx;
++
++    sha1_init(&sctx);
++    sha1_do_update(&sctx, data, len, sha1_generic_block_fn);
++    sha1_do_finalize(&sctx, sha1_generic_block_fn);
++    sha1_finish(&sctx, out);
 +}
 -- 
 2.49.0
