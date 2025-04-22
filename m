@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1327C369C2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:26:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.963026.1354149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5636CC369D7
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:26:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.963043.1354159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FVU-0000uj-5y; Tue, 22 Apr 2025 15:25:56 +0000
+	id 1u7FW5-0001SF-Dt; Tue, 22 Apr 2025 15:26:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 963026.1354149; Tue, 22 Apr 2025 15:25:56 +0000
+Received: by outflank-mailman (output) from mailman id 963043.1354159; Tue, 22 Apr 2025 15:26:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FVU-0000uc-3U; Tue, 22 Apr 2025 15:25:56 +0000
-Received: by outflank-mailman (input) for mailman id 963026;
- Tue, 22 Apr 2025 15:25:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u7FW5-0001S8-AY; Tue, 22 Apr 2025 15:26:33 +0000
+Received: by outflank-mailman (input) for mailman id 963043;
+ Tue, 22 Apr 2025 15:26:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NnGu=XI=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1u7FIk-00053b-M7
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:12:46 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3ed5bc41-1f8c-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 17:12:46 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43edb40f357so39825935e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 08:12:45 -0700 (PDT)
+ id 1u7FW3-0001BV-Q1
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:26:31 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2877fe4a-1f8e-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 17:26:27 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43ede096d73so39279615e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 08:26:27 -0700 (PDT)
 Received: from [192.168.1.5] (user-109-243-64-225.play-internet.pl.
  [109.243.64.225]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5acdd4sm176051415e9.14.2025.04.22.08.12.44
+ 5b1f17b1804b1-4406d5acccdsm175431155e9.11.2025.04.22.08.26.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 08:12:44 -0700 (PDT)
+ Tue, 22 Apr 2025 08:26:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ed5bc41-1f8c-11f0-9eb0-5ba50f476ded
+X-Inumbo-ID: 2877fe4a-1f8e-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745334765; x=1745939565; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1745335586; x=1745940386; darn=lists.xenproject.org;
         h=in-reply-to:from:content-language:references:cc:to:subject
          :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oiUqEBuY4Ss8TzKkuyi1daOGwN2KW+4XMKyBVzNRhfU=;
-        b=iu+RlvdDqgpvCXHkrIohZCRyGje8Ly+uLZP64LFBxfpak68TIJmGKnodXLQtsGzYxc
-         xjm8cpqoL6QKm3ZU6Dca+6R+5VyxEZxI8RDi2ba86kCrv3+lY1dF9Ko8jsvJ0M4iwbpu
-         Ppoqy5J52SqpiDbkGcpwKYp9CLtmKCvAiWWtLLFqHG/S32PlozhzjLnCHk4XvqbIryNT
-         Lhe1ZnKBiWmD4KRZaspwvx13uYRtgup3S08tXk3Y0aYRUKpbi/mlfoTRagZ8zko7DZb5
-         r5I0gjXnhVywqyU+rz9ApXcM7cRnwArQk6av/VlI37k1g8idGmUqysPH0i2BSB7Tfmxq
-         lOJg==
+        bh=2i+b3sG20yNAfVUCtSo4JTOzMhUrm01QUTcDtC3O6a0=;
+        b=U19urJKmQqAWqMtdtSz95eS+MClN1HvA+nYRDepdeA9Cn6X3Erh0k6gEtOEW2Lal11
+         C6Y9fU7yuj8+7hDMrriorcpgQcGy8712fECMagh8INp+CeKi1gVx0txwdTbv6i/Kvvwo
+         RqXiJGQaaOLGxmQ9YbBLZAuXkTfZWt3499teOxn7uJod8HjASEmtZh2BwDj+Cut9vzpc
+         LN/vHAG8lBDHBm3mYpXzxiiKlvRmX75nu2VR3y1q+ZTWn9/PGiPY7sFstwtsjr6AmmUD
+         clGhSVVAx5CDs5Uza4LoUoBoB70Ds+8XTaYSg0TuJEMDCmhrS9Fn04fsF41LqejbGmWf
+         sAvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745334765; x=1745939565;
+        d=1e100.net; s=20230601; t=1745335586; x=1745940386;
         h=in-reply-to:from:content-language:references:cc:to:subject
          :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=oiUqEBuY4Ss8TzKkuyi1daOGwN2KW+4XMKyBVzNRhfU=;
-        b=HEfnhpEVxP+fjY3YvmmxM36KGJuRZWENt0eYh6tdqUYUvncRxAUSjnGYqUnhRjj6uK
-         UP0YhPm9lR2fJ/r/1nyq5t2sjq56i2XRDqW5CrIdCt6VMiURQIZnSVsqhom9TKbGwxAR
-         fEwW/41QtnZKLoCvt4FtK+uKTf2R9SM3KvYJxlwUIikry9+O/0KWI89Q8N0vGv1ioUmn
-         EkjQVOREH1zPJNbCQ9lYrBFz6ECXFjdhlpW4wh6U0wyswlXGk+bZG5oNmjvgyleJ2Rik
-         jZ6g1uoiSVxjNrpPYQJ9H+WJ1gjQ2K4eThr6GGRxNeEOpXsX9Y5zCEzkPv88SWSd/QXR
-         /+vg==
-X-Forwarded-Encrypted: i=1; AJvYcCVtVpSwylw27zHmSf7T0V+kG6GIlviqZhMHpiXw/c9kSaZOyjiGceQ/HB8J0S4GrE/t0qV0PbHxtWU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx5wofsWkeKBw1UC9BqBYUFW2smD4Fpo28/iSEoGbfCp+xtkOJi
-	wvycU/usQ+cK777ve8TjuNUPLhh66wwxJqIWObxwDiVj+iOOl90l
-X-Gm-Gg: ASbGncuW0KOLj2yXjgfCi2g4CYTa5/C+o+r0vROAKLg+7odH5CIVfq83w8u2fKrHxLc
-	a/48B99PLQEz0rZh3jwRmylYD4zUX+fpIZ7EAm8MPrzOZgwfAhZUgdaKZYcfl7UmYIC5JUzQilB
-	SSSLf9w22DUxSnv8YWvvegVcJ0mUo8ixXVL3Hm9xQXDlm+Rc9mTmnrXVkw80zecqSmfy6Rdmyqh
-	GS/jrGRc1K0/P+tyHAVuPqxARv2bLCwbytGj+SGIw0QCXV7fEvUStRQ2dSHm5VRSfBWfbp8M4eY
-	Iycp+/8U9iXWRbQHWw0RSBQCVmzqWVYb2uRQGPTVzzSKPEaU4gDCigOiQ7dmCiIpPk3eU0kKnKE
-	lOxqRz3QCYwpT6GhO
-X-Google-Smtp-Source: AGHT+IERZlGz/oPhzxTG22sOsD9Gd4gkfx86jY4wtwNZkuUU5qA5pBbQ/7eEDxABrgUX7pPviZVucg==
-X-Received: by 2002:a05:600c:3c9b:b0:43c:ec4c:25b1 with SMTP id 5b1f17b1804b1-4406abfbcd7mr127875805e9.23.1745334765263;
-        Tue, 22 Apr 2025 08:12:45 -0700 (PDT)
+        bh=2i+b3sG20yNAfVUCtSo4JTOzMhUrm01QUTcDtC3O6a0=;
+        b=oxklElPdNiMOHM0EeL0rg387RR1KvOxz+v9rsGwJMYKAQXgExOh1mR0pAOU7wJTj+B
+         lbT91giC7CmVi2dNfLONGh8q8/7vlGFKMRUl3tVNCCZ2aHlyOu3Clfz87neComymPtyY
+         hTeZVyXpJOTUe9qulDKs5ksmvCh54dAmusa+ViIju99YGleEQvq5HIfvL2AT5z+f0AKl
+         kUIDEE2d4e6/fhBctx00ZPUBoAd+U97Wp4c1DUQ1RzNZ439c+hpWHpErDNbDgnE7MAaC
+         B8Y3l1Axdnh0DhOYBSN+G80N+pIBb8UZnYFtw/lHcFAEjQWJq6gtP6hVTrZ/WoGe2d6k
+         mPBw==
+X-Forwarded-Encrypted: i=1; AJvYcCXaU2XHUi6N2TeY+LwlNVUaAcpfHunYq9PIZKF9glRjBGq5+ME2DGUabckQRwCWbrZ5f9h76GFRytw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwtPArWXVHWpQ1ufHr2rxdq34FZMdNlw9GdwKhdc38/qZeJpN+t
+	WVSybPybCzm4gxjI8ktDIsj2P1KMP1D5jSkEEbR0g42RrVj/yxmy
+X-Gm-Gg: ASbGncubhaCs7nZ1dwzEH4fTcX3p76QrOi7Mn0NDk+QKHcmQW2bvw9EAHCowKs1wIpO
+	fEPFbqf1byiIs9197QFwKVCouX0jd0AJ9e/JC5Mc069J/3vhR+W15DQ7Msyp59cWLxNArPsjxCa
+	0uckDThOsk2mQwgdvrNEhQwtIk2lEScf8rJ7BgCCdtIBxPtywaULOZZmSoyl5KxWo5RgUTRVpTp
+	AorrOpwqGHwmPM0zRBLabAzO+ea9GKcveplBSQ35AYtSmBS7wodrHQIh6FcfK+j05j0MG8ymZo/
+	1rAHM2CDn+czxkSjeTQJFYqmHPi4/8/760IXd2+n+h1tESDALpHySvpwxqlCWhCI1CbROIlXp1p
+	54vBqYP9VpDdXkrcX
+X-Google-Smtp-Source: AGHT+IET30Bf3iJASEFOK54y1bumZUsTSU5F8JDqdnMgPzjpFnDysZ7tQv/69K1JXIkob+R1nOZrVw==
+X-Received: by 2002:a05:6000:c08:b0:3a0:65bc:3543 with SMTP id ffacd0b85a97d-3a065bc358amr447562f8f.35.1745335586533;
+        Tue, 22 Apr 2025 08:26:26 -0700 (PDT)
 Content-Type: multipart/alternative;
- boundary="------------5dwnZhe09JW5CNlehNPefJLI"
-Message-ID: <3181aaf7-e1a8-48de-8f16-dad0dfad0cdc@gmail.com>
-Date: Tue, 22 Apr 2025 17:12:44 +0200
+ boundary="------------HNrnkjgiINFiv5zEhkZO2Fg5"
+Message-ID: <6010658f-9e29-40d9-902c-890cb27a2a4b@gmail.com>
+Date: Tue, 22 Apr 2025 17:26:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] asm-generic: move some parts of Arm's
- domain_build.h to common
+Subject: Re: [PATCH v2 7/8] xen/common: dom0less: introduce common
+ domain-build.c
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
  <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
@@ -102,71 +102,76 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  xen-devel@lists.xenproject.org
 References: <cover.1744626032.git.oleksii.kurochko@gmail.com>
- <1c67078147c4a89e46f253f040bef5046fac9ca9.1744626032.git.oleksii.kurochko@gmail.com>
- <1e7ba51b-8943-4001-be2f-9181e7362223@suse.com>
+ <9dbf651ce177a7292f80879373e86a51305f216e.1744626032.git.oleksii.kurochko@gmail.com>
+ <faa552cb-d933-492b-b3ed-e803856265ab@suse.com>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1e7ba51b-8943-4001-be2f-9181e7362223@suse.com>
+In-Reply-To: <faa552cb-d933-492b-b3ed-e803856265ab@suse.com>
 
 This is a multi-part message in MIME format.
---------------5dwnZhe09JW5CNlehNPefJLI
+--------------HNrnkjgiINFiv5zEhkZO2Fg5
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 4/17/25 4:36 PM, Jan Beulich wrote:
+On 4/17/25 4:45 PM, Jan Beulich wrote:
 > On 14.04.2025 17:56, Oleksii Kurochko wrote:
->> --- /dev/null
+>> --- a/xen/include/xen/fdt-domain-build.h
 >> +++ b/xen/include/xen/fdt-domain-build.h
->> @@ -0,0 +1,46 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +#ifndef __XEN_FDT_DOMAIN_BUILD_H__
->> +#define __XEN_FDT_DOMAIN_BUILD_H__
+>> @@ -5,6 +5,7 @@
+>>   #include <xen/bootfdt.h>
+>>   #include <xen/device_tree.h>
+>>   #include <xen/fdt-kernel.h>
+>> +#include <xen/mm.h>
+>>   #include <xen/types.h>
+>>   
+>>   #if __has_include(<asm/domain_build.h>)
+>> @@ -32,7 +33,37 @@ int make_memory_node(const struct kernel_info *kinfo, int addrcells,
+>>                        int sizecells, const struct membanks *mem);
+>>   int make_timer_node(const struct kernel_info *kinfo);
+>>   
+>> -unsigned int get_allocation_size(paddr_t size);
 >> +
->> +#include <xen/bootfdt.h>
->> +#include <xen/device_tree.h>
->> +#include <xen/fdt-kernel.h>
->> +#include <xen/types.h>
+>> +static inline int get_allocation_size(paddr_t size)
+>> +{
+>> +    /*
+>> +     * get_order_from_bytes returns the order greater than or equal to
+>> +     * the given size, but we need less than or equal. Adding one to
+>> +     * the size pushes an evenly aligned size into the next order, so
+>> +     * we can then unconditionally subtract 1 from the order which is
+>> +     * returned.
+>> +     */
+>> +    return get_order_from_bytes(size + 1) - 1;
+>> +}
 >> +
->> +#if __has_include(<asm/domain_build.h>)
->> +#   include <asm/domain_build.h>
->> +#endif
-> Why is this conditional include needed? There's ...
+>> +typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
+>> +                                               paddr_t gpa,
+>> +                                               void *buf,
+> This very much looks like the latest now, when the code is made common,
+> it wants to be const void *. Even if this may require another prereq
+> patch.
+>
+> However, instead of using a function pointer, couldn't the now common
+> code call copy_to_guest_phys_flush_dcache() conditionally upon
+> IS_ENABLED(CONFIG_<whatever>)?
 
-To use everywhere just the generic header xen/fdt-domain-build.h instead of both
-xen/fdt-domain-build.h and <asm/domain_build.h>.
+I thought about having IS_ENABLED(CONFIG_ARM) as, at the moment, this is necessary to
+be called only for Arm as guest domain on Arm could be ran with cache disabled so to be sure
+that DTB, kernel and initrd is fully in RAM this function should be called.
+
+For RISC-V, it isn't possible case as guest domain won't run with cache disabled.
+
+> Or provide a weak
+> copy_to_guest_phys_flush_dcache() which would simply call
+> copy_to_guest_phys()?
+
+Could it be a weak function with empty implementation?
+Is copy_to_guest_phys() implemented for other archs?
+
 
 ~ Oleksii
 
->
->> +struct domain;
->> +struct page_info;
->> +struct membanks;
->> +
->> +typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
->> +                                     unsigned int order, void *extra);
->> +bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
->> +                             alloc_domheap_mem_cb cb, void *extra);
->> +
->> +bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
->> +                          paddr_t tot_size);
->> +void allocate_memory(struct domain *d, struct kernel_info *kinfo);
->> +int construct_domain(struct domain *d, struct kernel_info *kinfo);
->> +int make_chosen_node(const struct kernel_info *kinfo);
->> +int make_cpus_node(const struct domain *d, void *fdt);
->> +int make_hypervisor_node(struct domain *d, const struct kernel_info *kinfo,
->> +                         int addrcells, int sizecells);
->> +int make_memory_node(const struct kernel_info *kinfo, int addrcells,
->> +                     int sizecells, const struct membanks *mem);
->> +int make_timer_node(const struct kernel_info *kinfo);
->> +
->> +unsigned int get_allocation_size(paddr_t size);
->> +
->> +#endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
-> ... nothing here showing any dependency thereon.
->
-> Jan
---------------5dwnZhe09JW5CNlehNPefJLI
+--------------HNrnkjgiINFiv5zEhkZO2Fg5
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -178,78 +183,74 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 4/17/25 4:36 PM, Jan Beulich wrote:<br>
+    <div class="moz-cite-prefix">On 4/17/25 4:45 PM, Jan Beulich wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:1e7ba51b-8943-4001-be2f-9181e7362223@suse.com">
+      cite="mid:faa552cb-d933-492b-b3ed-e803856265ab@suse.com">
       <pre wrap="" class="moz-quote-pre">On 14.04.2025 17:56, Oleksii Kurochko wrote:
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">--- /dev/null
+        <pre wrap="" class="moz-quote-pre">--- a/xen/include/xen/fdt-domain-build.h
 +++ b/xen/include/xen/fdt-domain-build.h
-@@ -0,0 +1,46 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __XEN_FDT_DOMAIN_BUILD_H__
-+#define __XEN_FDT_DOMAIN_BUILD_H__
+@@ -5,6 +5,7 @@
+ #include &lt;xen/bootfdt.h&gt;
+ #include &lt;xen/device_tree.h&gt;
+ #include &lt;xen/fdt-kernel.h&gt;
++#include &lt;xen/mm.h&gt;
+ #include &lt;xen/types.h&gt;
+ 
+ #if __has_include(&lt;asm/domain_build.h&gt;)
+@@ -32,7 +33,37 @@ int make_memory_node(const struct kernel_info *kinfo, int addrcells,
+                      int sizecells, const struct membanks *mem);
+ int make_timer_node(const struct kernel_info *kinfo);
+ 
+-unsigned int get_allocation_size(paddr_t size);
 +
-+#include &lt;xen/bootfdt.h&gt;
-+#include &lt;xen/device_tree.h&gt;
-+#include &lt;xen/fdt-kernel.h&gt;
-+#include &lt;xen/types.h&gt;
++static inline int get_allocation_size(paddr_t size)
++{
++    /*
++     * get_order_from_bytes returns the order greater than or equal to
++     * the given size, but we need less than or equal. Adding one to
++     * the size pushes an evenly aligned size into the next order, so
++     * we can then unconditionally subtract 1 from the order which is
++     * returned.
++     */
++    return get_order_from_bytes(size + 1) - 1;
++}
 +
-+#if __has_include(&lt;asm/domain_build.h&gt;)
-+#   include &lt;asm/domain_build.h&gt;
-+#endif
++typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
++                                               paddr_t gpa,
++                                               void *buf,
 </pre>
       </blockquote>
       <pre wrap="" class="moz-quote-pre">
-Why is this conditional include needed? There's ...</pre>
-    </blockquote>
-    <pre>To use everywhere just the generic header xen/fdt-domain-build.h instead of both
-xen/fdt-domain-build.h and &lt;asm/domain_build.h&gt;.
+This very much looks like the latest now, when the code is made common,
+it wants to be const void *. Even if this may require another prereq
+patch.
 
-~ Oleksii
+However, instead of using a function pointer, couldn't the now common
+code call copy_to_guest_phys_flush_dcache() conditionally upon
+IS_ENABLED(CONFIG_&lt;whatever&gt;)? </pre>
+    </blockquote>
+    <pre>I thought about having IS_ENABLED(CONFIG_ARM) as, at the moment, this is necessary to
+be called only for Arm as guest domain on Arm could be ran with cache disabled so to be sure
+that DTB, kernel and initrd is fully in RAM this function should be called.
+
+For RISC-V, it isn't possible case as guest domain won't run with cache disabled.
 </pre>
     <blockquote type="cite"
-      cite="mid:1e7ba51b-8943-4001-be2f-9181e7362223@suse.com">
-      <pre wrap="" class="moz-quote-pre">
-
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">+struct domain;
-+struct page_info;
-+struct membanks;
-+
-+typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
-+                                     unsigned int order, void *extra);
-+bool allocate_domheap_memory(struct domain *d, paddr_t tot_size,
-+                             alloc_domheap_mem_cb cb, void *extra);
-+
-+bool allocate_bank_memory(struct kernel_info *kinfo, gfn_t sgfn,
-+                          paddr_t tot_size);
-+void allocate_memory(struct domain *d, struct kernel_info *kinfo);
-+int construct_domain(struct domain *d, struct kernel_info *kinfo);
-+int make_chosen_node(const struct kernel_info *kinfo);
-+int make_cpus_node(const struct domain *d, void *fdt);
-+int make_hypervisor_node(struct domain *d, const struct kernel_info *kinfo,
-+                         int addrcells, int sizecells);
-+int make_memory_node(const struct kernel_info *kinfo, int addrcells,
-+                     int sizecells, const struct membanks *mem);
-+int make_timer_node(const struct kernel_info *kinfo);
-+
-+unsigned int get_allocation_size(paddr_t size);
-+
-+#endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-... nothing here showing any dependency thereon.
-
-Jan
-</pre>
+      cite="mid:faa552cb-d933-492b-b3ed-e803856265ab@suse.com">
+      <pre wrap="" class="moz-quote-pre">Or provide a weak
+copy_to_guest_phys_flush_dcache() which would simply call
+copy_to_guest_phys()?</pre>
     </blockquote>
+    <pre>Could it be a weak function with empty implementation?
+Is copy_to_guest_phys() implemented for other archs?
+
+
+~ Oleksii</pre>
   </body>
 </html>
 
---------------5dwnZhe09JW5CNlehNPefJLI--
+--------------HNrnkjgiINFiv5zEhkZO2Fg5--
 
