@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83BF7C369C2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6065C369D8
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 08:23:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.961778.1353111 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.961779.1353118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78uZ-0005AU-1A; Tue, 22 Apr 2025 08:23:23 +0000
+	id 1u78uZ-0005DO-Be; Tue, 22 Apr 2025 08:23:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 961778.1353111; Tue, 22 Apr 2025 08:23:23 +0000
+Received: by outflank-mailman (output) from mailman id 961779.1353118; Tue, 22 Apr 2025 08:23:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u78uY-0005AN-Tx; Tue, 22 Apr 2025 08:23:22 +0000
-Received: by outflank-mailman (input) for mailman id 961778;
+	id 1u78uZ-0005Cb-3w; Tue, 22 Apr 2025 08:23:23 +0000
+Received: by outflank-mailman (input) for mailman id 961779;
  Tue, 22 Apr 2025 08:23:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Qhpm=XI=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u78uX-0004wM-61
+ id 1u78uX-0004wX-Pf
  for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 08:23:21 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0b950c4d-1f53-11f0-9eb0-5ba50f476ded;
- Tue, 22 Apr 2025 10:23:19 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0a8edea2-1f53-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 10:23:18 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9N1954391
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53M8MG9I1954391
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 22 Apr 2025 01:22:38 -0700
+ Tue, 22 Apr 2025 01:22:29 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b950c4d-1f53-11f0-9eb0-5ba50f476ded
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9N1954391
+X-Inumbo-ID: 0a8edea2-1f53-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53M8MG9I1954391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745310160;
-	bh=fbJnWtTq9obtgTU/Lma7WAz0yq4D3lVBsvZaY+1Z5fs=;
+	s=2025042001; t=1745310150;
+	bh=LVsPA2fgI6zP2WHSw0Nia0LCB15Xp7S+WVy/cleUJE0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fz4KTPrFlZOPu7Ad1BierSmHsj97cJ3HwU46GfU9c4zQ48NxZGpjLX6slUlsokCO0
-	 4xlliWRpPkfsUMMPkXBb9GNHLmUgduGYR/Rskic9b7sZP/p+LxzbEtOw78olSobs9G
-	 ORuOuj0McqrDPuInHQiYwxmYbrWzgJHRXc14cHQPd4zY/g9yqoofBYiNjiEHxF2NkY
-	 dj7DAY0zNt0U+sXlItRhYuyJBQXg/acXr7I7rBcL0tJaAfipwl1y3rcyW5x0mLyP3C
-	 Xno7ixoagmmS2q3B8Ytaw5MjR7mKGnndC8HIp5PyTF5TP+uK53eLtVcRLBIM8cpWUk
-	 6dCZLOATluRuQ==
+	b=QGVnEjv8tkGkgZOr/+y8tNZXRRi8XZB8ZUa+hfPMwgCsh/bvO2xAJc9VhI65ltj5f
+	 LMenRE/fk3S5bW+6vEW/9EjVTjmw+65DjmMvRnz6VuJvvPndtokirGhHIMxOWUzT2M
+	 bIUKmTb6xJsOQYxjwZVpD51rGRaiashhG0EWnYIoNFDkiI2ospc66RIjCIqRJWJ/CP
+	 +fpEFOvt1EWqbNyzTmd3AOW9kLnosooHZzpFKsuIPLbiVSdFUwzHvJkSu7shtN70qV
+	 rM9/AEtTfOcxs3bRd6Mxjf9DlDoUk5oHlzv2vYsxQwfHSorx8cOLau0HjwAXgZ8ds3
+	 mK4Mot9OoKckQ==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -73,51 +73,156 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
-Subject: [RFC PATCH v2 09/34] x86/msr: Add the native_rdmsrq() helper
-Date: Tue, 22 Apr 2025 01:21:50 -0700
-Message-ID: <20250422082216.1954310-10-xin@zytor.com>
+Subject: [RFC PATCH v2 04/34] x86/msr: Convert rdpmcq() into a function
+Date: Tue, 22 Apr 2025 01:21:45 -0700
+Message-ID: <20250422082216.1954310-5-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250422082216.1954310-1-xin@zytor.com>
 References: <20250422082216.1954310-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-__rdmsr() is the lowest-level primitive MSR read API, implemented in
-assembly code and returning an MSR value in a u64 integer, on top of
-which a convenience wrapper native_rdmsr() is defined to return an MSR
-value in two u32 integers.  For some reason, native_rdmsrq() is not
-defined and __rdmsr() is directly used when it needs to return an MSR
-value in a u64 integer.
-
-Add the native_rdmsrq() helper, which is simply an alias of __rdmsr(),
-to make native_rdmsr() and native_rdmsrq() a pair of MSR read APIs.
-
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 ---
+ arch/x86/events/amd/uncore.c              |  2 +-
+ arch/x86/events/core.c                    |  2 +-
+ arch/x86/events/intel/core.c              |  4 ++--
+ arch/x86/events/intel/ds.c                |  2 +-
+ arch/x86/include/asm/msr.h                |  5 ++++-
+ arch/x86/include/asm/paravirt.h           |  4 +---
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c | 12 ++++++------
+ 7 files changed, 16 insertions(+), 15 deletions(-)
 
-Change in v2:
-* Split into two changes and add the native_rdmsrl() helper in the
-  first one with a proper explanation (Ingo).
----
- arch/x86/include/asm/msr.h | 5 +++++
- 1 file changed, 5 insertions(+)
-
+diff --git a/arch/x86/events/amd/uncore.c b/arch/x86/events/amd/uncore.c
+index b9933ab3116c..f2601c662783 100644
+--- a/arch/x86/events/amd/uncore.c
++++ b/arch/x86/events/amd/uncore.c
+@@ -152,7 +152,7 @@ static void amd_uncore_read(struct perf_event *event)
+ 	if (hwc->event_base_rdpmc < 0)
+ 		rdmsrq(hwc->event_base, new);
+ 	else
+-		rdpmcq(hwc->event_base_rdpmc, new);
++		new = rdpmcq(hwc->event_base_rdpmc);
+ 
+ 	local64_set(&hwc->prev_count, new);
+ 	delta = (new << COUNTER_SHIFT) - (prev << COUNTER_SHIFT);
+diff --git a/arch/x86/events/core.c b/arch/x86/events/core.c
+index 3da1f0b3446c..0a3939b9965e 100644
+--- a/arch/x86/events/core.c
++++ b/arch/x86/events/core.c
+@@ -139,7 +139,7 @@ u64 x86_perf_event_update(struct perf_event *event)
+ 	 */
+ 	prev_raw_count = local64_read(&hwc->prev_count);
+ 	do {
+-		rdpmcq(hwc->event_base_rdpmc, new_raw_count);
++		new_raw_count = rdpmcq(hwc->event_base_rdpmc);
+ 	} while (!local64_try_cmpxchg(&hwc->prev_count,
+ 				      &prev_raw_count, new_raw_count));
+ 
+diff --git a/arch/x86/events/intel/core.c b/arch/x86/events/intel/core.c
+index ba623e6cae1b..4370d0d86013 100644
+--- a/arch/x86/events/intel/core.c
++++ b/arch/x86/events/intel/core.c
+@@ -2739,12 +2739,12 @@ static u64 intel_update_topdown_event(struct perf_event *event, int metric_end,
+ 
+ 	if (!val) {
+ 		/* read Fixed counter 3 */
+-		rdpmcq((3 | INTEL_PMC_FIXED_RDPMC_BASE), slots);
++		slots = rdpmcq(3 | INTEL_PMC_FIXED_RDPMC_BASE);
+ 		if (!slots)
+ 			return 0;
+ 
+ 		/* read PERF_METRICS */
+-		rdpmcq(INTEL_PMC_FIXED_RDPMC_METRICS, metrics);
++		metrics = rdpmcq(INTEL_PMC_FIXED_RDPMC_METRICS);
+ 	} else {
+ 		slots = val[0];
+ 		metrics = val[1];
+diff --git a/arch/x86/events/intel/ds.c b/arch/x86/events/intel/ds.c
+index 4074567219de..845439fd9c03 100644
+--- a/arch/x86/events/intel/ds.c
++++ b/arch/x86/events/intel/ds.c
+@@ -2279,7 +2279,7 @@ intel_pmu_save_and_restart_reload(struct perf_event *event, int count)
+ 	WARN_ON(this_cpu_read(cpu_hw_events.enabled));
+ 
+ 	prev_raw_count = local64_read(&hwc->prev_count);
+-	rdpmcq(hwc->event_base_rdpmc, new_raw_count);
++	new_raw_count = rdpmcq(hwc->event_base_rdpmc);
+ 	local64_set(&hwc->prev_count, new_raw_count);
+ 
+ 	/*
 diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index b50cbd3299b3..2ab8effea4cd 100644
+index ed32637b1df6..01dc8e61ef97 100644
 --- a/arch/x86/include/asm/msr.h
 +++ b/arch/x86/include/asm/msr.h
-@@ -112,6 +112,11 @@ do {							\
- 	(void)((val2) = (u32)(__val >> 32));		\
- } while (0)
+@@ -234,7 +234,10 @@ static inline int rdmsrq_safe(u32 msr, u64 *p)
+ 	return err;
+ }
  
-+static __always_inline u64 native_rdmsrq(u32 msr)
+-#define rdpmcq(counter, val) ((val) = native_read_pmc(counter))
++static __always_inline u64 rdpmcq(int counter)
 +{
-+	return __rdmsr(msr);
++	return native_read_pmc(counter);
 +}
-+
- #define native_wrmsr(msr, low, high)			\
- 	__wrmsr(msr, low, high)
  
+ #endif	/* !CONFIG_PARAVIRT_XXL */
+ 
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 63ca099f8368..590824916394 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -239,13 +239,11 @@ static inline int rdmsrq_safe(unsigned msr, u64 *p)
+ 	return err;
+ }
+ 
+-static inline u64 paravirt_read_pmc(int counter)
++static __always_inline u64 rdpmcq(int counter)
+ {
+ 	return PVOP_CALL1(u64, cpu.read_pmc, counter);
+ }
+ 
+-#define rdpmcq(counter, val) ((val) = paravirt_read_pmc(counter))
+-
+ static inline void paravirt_alloc_ldt(struct desc_struct *ldt, unsigned entries)
+ {
+ 	PVOP_VCALL2(cpu.alloc_ldt, ldt, entries);
+diff --git a/arch/x86/kernel/cpu/resctrl/pseudo_lock.c b/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
+index a5e21f44b0ca..276ffab194f6 100644
+--- a/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
++++ b/arch/x86/kernel/cpu/resctrl/pseudo_lock.c
+@@ -1019,8 +1019,8 @@ static int measure_residency_fn(struct perf_event_attr *miss_attr,
+ 	 * used in L1 cache, second to capture accurate value that does not
+ 	 * include cache misses incurred because of instruction loads.
+ 	 */
+-	rdpmcq(hit_pmcnum, hits_before);
+-	rdpmcq(miss_pmcnum, miss_before);
++	hits_before = rdpmcq(hit_pmcnum);
++	miss_before = rdpmcq(miss_pmcnum);
+ 	/*
+ 	 * From SDM: Performing back-to-back fast reads are not guaranteed
+ 	 * to be monotonic.
+@@ -1028,8 +1028,8 @@ static int measure_residency_fn(struct perf_event_attr *miss_attr,
+ 	 * before proceeding.
+ 	 */
+ 	rmb();
+-	rdpmcq(hit_pmcnum, hits_before);
+-	rdpmcq(miss_pmcnum, miss_before);
++	hits_before = rdpmcq(hit_pmcnum);
++	miss_before = rdpmcq(miss_pmcnum);
+ 	/*
+ 	 * Use LFENCE to ensure all previous instructions are retired
+ 	 * before proceeding.
+@@ -1051,8 +1051,8 @@ static int measure_residency_fn(struct perf_event_attr *miss_attr,
+ 	 * before proceeding.
+ 	 */
+ 	rmb();
+-	rdpmcq(hit_pmcnum, hits_after);
+-	rdpmcq(miss_pmcnum, miss_after);
++	hits_after = rdpmcq(hit_pmcnum);
++	miss_after = rdpmcq(miss_pmcnum);
+ 	/*
+ 	 * Use LFENCE to ensure all previous instructions are retired
+ 	 * before proceeding.
 -- 
 2.49.0
 
