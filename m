@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C9DDC369D3
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:10:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.962832.1353999 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADEDCC369D7
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 15:10:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.962838.1354009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FGd-0006N1-V0; Tue, 22 Apr 2025 15:10:35 +0000
+	id 1u7FGm-0006lP-AD; Tue, 22 Apr 2025 15:10:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 962832.1353999; Tue, 22 Apr 2025 15:10:35 +0000
+Received: by outflank-mailman (output) from mailman id 962838.1354009; Tue, 22 Apr 2025 15:10:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7FGd-0006Mu-Rg; Tue, 22 Apr 2025 15:10:35 +0000
-Received: by outflank-mailman (input) for mailman id 962832;
- Tue, 22 Apr 2025 15:10:34 +0000
+	id 1u7FGm-0006lG-5X; Tue, 22 Apr 2025 15:10:44 +0000
+Received: by outflank-mailman (input) for mailman id 962838;
+ Tue, 22 Apr 2025 15:10:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BiSK=XI=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1u7FE6-0008SP-7A
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:07:58 +0000
-Received: from 20.mo584.mail-out.ovh.net (20.mo584.mail-out.ovh.net
- [46.105.33.73]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8e0b909d-1f8b-11f0-9ffb-bf95429c2676;
- Tue, 22 Apr 2025 17:07:49 +0200 (CEST)
-Received: from director11.ghost.mail-out.ovh.net (unknown [10.108.17.76])
- by mo584.mail-out.ovh.net (Postfix) with ESMTP id 4ZhlwN5Qk1z1YQL
- for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:07:48 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-66vcx (unknown [10.110.113.119])
- by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 3970E1FEEB;
- Tue, 22 Apr 2025 15:07:48 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.103])
- by ghost-submission-5b5ff79f4f-66vcx with ESMTPSA
- id r4pwBMSwB2iYPQEAq1tSyQ
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:07:48 +0000
+ id 1u7FEI-0008SP-9m
+ for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 15:08:10 +0000
+Received: from 8.mo582.mail-out.ovh.net (8.mo582.mail-out.ovh.net
+ [178.33.42.204]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 968e4884-1f8b-11f0-9ffb-bf95429c2676;
+ Tue, 22 Apr 2025 17:08:03 +0200 (CEST)
+Received: from director11.ghost.mail-out.ovh.net (unknown [10.109.176.110])
+ by mo582.mail-out.ovh.net (Postfix) with ESMTP id 4Zhlwf6xQpz1bPs
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 15:08:02 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-86gjs (unknown [10.110.118.75])
+ by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 556AE1FF03;
+ Tue, 22 Apr 2025 15:08:02 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.108])
+ by ghost-submission-5b5ff79f4f-86gjs with ESMTPSA
+ id eWpyAdKwB2hq8wAAiLZzDg
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 22 Apr 2025 15:08:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e0b909d-1f8b-11f0-9ffb-bf95429c2676
-Authentication-Results:garm.ovh; auth=pass (GARM-103G005d376d45a-cfc9-4d09-aaa1-7133b0f28e22,
+X-Inumbo-ID: 968e4884-1f8b-11f0-9ffb-bf95429c2676
+Authentication-Results:garm.ovh; auth=pass (GARM-108S002681ac38e-e960-4b16-b2af-646d803af872,
                     7E508E014E7E7C169EB13C6E22C3C4EBF1F0FDD7) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
@@ -58,244 +58,184 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH 16/21] x86/smpboot.c: TXT AP bringup
-Date: Tue, 22 Apr 2025 18:06:50 +0300
-Message-ID: <ba71f47de004151a417329208cc0605610e07ff3.1745172094.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH 21/21] x86/cpu: report SMX, TXT and SKINIT capabilities
+Date: Tue, 22 Apr 2025 18:06:55 +0300
+Message-ID: <5b40dbb1b30ce1e4bf7aed3e0ab7357db40d51ac.1745172094.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12737305649478808732
+X-Ovh-Tracer-Id: 12741246295885329564
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeggeeuvddvtedtteevudejjeeitdefhfetkeeggeffffelfeeivdffudeltdeihfenucffohhmrghinhepthhrrghmphholhhinhgvrdhssgenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddruddtfeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehkeegmgdpmhhouggvpehsmhhtphhouhht
-DKIM-Signature: a=rsa-sha256; bh=eCAcImKtxvGqrMC6IMfND+wqKXNaj+5QRm1VUSFFf6Q=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeegtdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgeekffeiiedtveekhfdugeffveeigefgleegvdeghefftdetheefueeliedukedvnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrddutdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekvdgmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=u1i8lAG0kzr5pAfgDXgiX2oc2nU8MOoTSYHcysfLbnY=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1745334468; v=1;
- b=BTTsWKQhiy2ji/HA+zVzcTvPrRzPrWM3DDwZrXnK57EzhDtfsApr0AEnkbmMAz3zGCoG9DPr
- JB3I01ws5oyUzLav2KRp1YNzbCP+t38BXUxZ71ihVh4S952YKPwxnBn48t8GFKV7fwyPc6bwwMM
- +qK1Xi0CoOb/Ri+55mieycjGnNlQaFpx+zesmSScQphhXyaHphmzCtIr2NDaYlMFhPg/BjRSIqm
- ShD6+kJlkCbnJ34+Wb+VGfhjrkFh6RIHOtlC4ENj4p9goAmLUNPGfrGwiVPKS6hwBdvSEnU2Hyu
- sPqmwUsUkDYFpvjSvtG3f89vOCi0lqoXecH27ef47GbNA==
+ t=1745334483; v=1;
+ b=VYr6oLYiwmn7ou/SifLAnmZ0APAtJ3ahbBKYAaR6uA30Rx8QFqgu40s8xwiCixQfxj5yg40F
+ BhqASz0kXVS9dBGpdwOUOF4+Oil7easweehwegbTBVALpni0+SckQV7unWAzSQ/7jV1pvbsQygD
+ 0FvkLwM2UR7KUprgoz9nHkIjpDjZpsCifV4i6J77WHcMljj2bq0vnSI1/TYcm0mwiwBcEZBcH9m
+ z0NedCW+IDRc3hbYs0CHKnCZUIwy3kGQs1S3Qn2dpwhhNgumghwxPv03d/EzU8C4bJb1gjOUe3m
+ 6nxTfhW6Xcsnq1f0AKmnogUtkYF22+iirePd9rv8pkTlg==
 
-From: Krystian Hebel <krystian.hebel@3mdeb.com>
+From: Michał Żygowski <michal.zygowski@3mdeb.com>
 
-On Intel TXT, APs are started in one of two ways, depending on ACM
-which reports it in its information table. In both cases, all APs are
-started simultaneously after BSP requests them to do so. Two possible
-ways are:
-- GETSEC[WAKEUP] instruction,
-- MONITOR address.
+Report TXT capabilities so that dom0 can query the Intel TXT or AMD
+SKINIT support information using xl dmesg.
 
-GETSEC[WAKEUP] requires versions >= 7 of SINIT to MLE Data, but there is
-no clear mapping of that version with regard to processor family and
-it's not known which CPUs actually use it. It could have been designed
-for TXT support on CPUs that lack MONITOR/MWAIT, because GETSEC[WAKEUP]
-seems to be more complicated, in software and hardware alike.
-
-This patch implements only MONITOR approach, GETSEC[WAKEUP] support will
-be added later once more details and means of testing are available and
-if there is a practical need for it.
-
-With this patch, every AP goes through assembly part, and only when in
-start_secondary() in C they re-enter MONITOR/MWAIT iff they are not the
-AP that was asked to boot. The same address is reused for simplicity,
-and on next wakeup call APs don't have to go through assembly part
-again (GDT, paging, stack setting).
-
-Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/arch/x86/boot/trampoline.S       | 19 +++++++++-
- xen/arch/x86/include/asm/intel_txt.h |  6 +++
- xen/arch/x86/include/asm/processor.h |  1 +
- xen/arch/x86/smpboot.c               | 57 ++++++++++++++++++++++++++++
- 4 files changed, 82 insertions(+), 1 deletion(-)
+ xen/arch/x86/cpu/amd.c               | 14 +++++++++
+ xen/arch/x86/cpu/cpu.h               |  1 +
+ xen/arch/x86/cpu/hygon.c             |  1 +
+ xen/arch/x86/cpu/intel.c             | 44 ++++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/intel_txt.h |  5 ++++
+ 5 files changed, 65 insertions(+)
 
-diff --git a/xen/arch/x86/boot/trampoline.S b/xen/arch/x86/boot/trampoline.S
-index ed593acc46..5989d3a69a 100644
---- a/xen/arch/x86/boot/trampoline.S
-+++ b/xen/arch/x86/boot/trampoline.S
-@@ -58,6 +58,16 @@ GLOBAL(entry_SIPI16)
-         ljmpl   $BOOT_CS32,$bootsym_rel(trampoline_protmode_entry,6)
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index ce4e1df710..8be135dbc1 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -671,6 +671,19 @@ void amd_log_freq(const struct cpuinfo_x86 *c)
+ #undef FREQ
+ }
  
-         .code32
-+GLOBAL(txt_ap_entry)
-+        /*
-+         * APs enter here in protected mode without paging. GDT is set in JOIN
-+         * structure, it points to trampoline_gdt. Interrupts are disabled by
-+         * TXT (including NMI and SMI), so IDT doesn't matter at this point.
-+         * The only missing point is telling that we are AP by saving non-zero
-+         * value in EBX.
-+         */
-+        mov     $1, %ebx
++void amd_log_skinit(const struct cpuinfo_x86 *c)
++{
++    /* Run only on BSP to report the capability only once */
++    if ( smp_processor_id() )
++        return;
 +
- trampoline_protmode_entry:
-         /* Set up a few descriptors: on entry only CS is guaranteed good. */
-         mov     $BOOT_DS,%eax
-@@ -143,7 +153,7 @@ start64:
-         .word   0
- idt_48: .word   0, 0, 0 # base = limit = 0
++    printk("CPU: SKINIT capability ");
++    if ( !test_bit(X86_FEATURE_SKINIT, &boot_cpu_data.x86_capability) )
++        printk("not supported\n");
++    else
++        printk("supported\n");
++}
++
+ void cf_check early_init_amd(struct cpuinfo_x86 *c)
+ {
+ 	if (c == &boot_cpu_data)
+@@ -1320,6 +1333,7 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 	check_syscfg_dram_mod_en();
  
--trampoline_gdt:
-+GLOBAL(trampoline_gdt)
-         .word   0                  /* 0x0000: unused (reused for GDTR) */
- gdt_48:
-         .word   .Ltrampoline_gdt_end - trampoline_gdt - 1
-@@ -154,6 +164,13 @@ gdt_48:
-         .quad   0x00cf93000000ffff /* 0x0018: ring 0 data */
-         .quad   0x00009b000000ffff /* 0x0020: real-mode code @ BOOT_TRAMPOLINE */
-         .quad   0x000093000000ffff /* 0x0028: real-mode data @ BOOT_TRAMPOLINE */
-+        /*
-+         * Intel TXT requires these two in exact order. This isn't compatible
-+         * with order required by syscall, so we have duplicated entries...
-+         * If order ever changes, update selector numbers in asm/intel_txt.h.
-+         */
-+        .quad   0x00cf9b000000ffff /* 0x0030: ring 0 code, 32-bit mode */
-+        .quad   0x00cf93000000ffff /* 0x0038: ring 0 data */
- .Ltrampoline_gdt_end:
+ 	amd_log_freq(c);
++	amd_log_skinit(c);
+ }
  
-         /* Relocations for trampoline Real Mode segments. */
+ const struct cpu_dev __initconst_cf_clobber amd_cpu_dev = {
+diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
+index 8be65e975a..5bcf118a93 100644
+--- a/xen/arch/x86/cpu/cpu.h
++++ b/xen/arch/x86/cpu/cpu.h
+@@ -20,6 +20,7 @@ extern bool detect_extended_topology(struct cpuinfo_x86 *c);
+ 
+ void cf_check early_init_amd(struct cpuinfo_x86 *c);
+ void amd_log_freq(const struct cpuinfo_x86 *c);
++void amd_log_skinit(const struct cpuinfo_x86 *c);
+ void amd_init_lfence(struct cpuinfo_x86 *c);
+ void amd_init_ssbd(const struct cpuinfo_x86 *c);
+ void amd_init_spectral_chicken(void);
+diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
+index f7508cc8fc..6ebb8b5fab 100644
+--- a/xen/arch/x86/cpu/hygon.c
++++ b/xen/arch/x86/cpu/hygon.c
+@@ -85,6 +85,7 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
+ 	}
+ 
+ 	amd_log_freq(c);
++	amd_log_skinit(c);
+ }
+ 
+ const struct cpu_dev __initconst_cf_clobber hygon_cpu_dev = {
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index 6a680ba38d..618bd5540e 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -13,6 +13,7 @@
+ #include <asm/apic.h>
+ #include <asm/i387.h>
+ #include <asm/trampoline.h>
++#include <asm/intel_txt.h>
+ 
+ #include "cpu.h"
+ 
+@@ -571,6 +572,47 @@ static void init_intel_perf(struct cpuinfo_x86 *c)
+     }
+ }
+ 
++/*
++ * Print out the SMX and TXT capabilties, so that dom0 can determine if the
++ * system is DRTM-capable.
++ */
++static void intel_log_smx_txt(struct cpuinfo_x86 *c)
++{
++    unsigned long cr4_val, getsec_caps;
++
++    /* Run only on BSP to report the SMX/TXT caps only once */
++    if ( smp_processor_id() )
++        return;
++
++    printk("CPU: SMX capability ");
++    if ( !test_bit(X86_FEATURE_SMX, &boot_cpu_data.x86_capability) )
++    {
++        printk("not supported\n");
++        return;
++    }
++    printk("supported\n");
++
++    /* Can't run GETSEC without VMX and SMX */
++    if ( !test_bit(X86_FEATURE_VMX, &boot_cpu_data.x86_capability) )
++        return;
++
++    cr4_val = read_cr4();
++    if ( !(cr4_val & X86_CR4_SMXE) )
++        write_cr4(cr4_val | X86_CR4_SMXE);
++
++    asm volatile ("getsec\n"
++        : "=a" (getsec_caps)
++        : "a" (GETSEC_CAPABILITIES), "b" (0) :);
++
++    if ( getsec_caps & GETSEC_CAP_TXT_CHIPSET )
++        printk("Chipset supports TXT\n");
++    else
++        printk("Chipset does not support TXT\n");
++
++    if ( !(cr4_val & X86_CR4_SMXE) )
++        write_cr4(cr4_val & ~X86_CR4_SMXE);
++}
++
+ static void cf_check init_intel(struct cpuinfo_x86 *c)
+ {
+ 	/* Detect the extended topology information if available */
+@@ -585,6 +627,8 @@ static void cf_check init_intel(struct cpuinfo_x86 *c)
+ 		detect_ht(c);
+ 	}
+ 
++	intel_log_smx_txt(c);
++
+ 	/* Work around errata */
+ 	Intel_errata_workarounds(c);
+ 
 diff --git a/xen/arch/x86/include/asm/intel_txt.h b/xen/arch/x86/include/asm/intel_txt.h
-index 0a36ef66d1..af997c9da6 100644
+index af997c9da6..76ec651b11 100644
 --- a/xen/arch/x86/include/asm/intel_txt.h
 +++ b/xen/arch/x86/include/asm/intel_txt.h
-@@ -79,6 +79,9 @@
+@@ -82,6 +82,11 @@
+ #define TXT_AP_BOOT_CS                  0x0030
+ #define TXT_AP_BOOT_DS                  0x0038
  
- #define SLAUNCH_BOOTLOADER_MAGIC             0x4c534254
- 
-+#define TXT_AP_BOOT_CS                  0x0030
-+#define TXT_AP_BOOT_DS                  0x0038
++/* EAX value for GETSEC leaf functions. Intel SDM: GETSEC[CAPABILITIES] */
++#define GETSEC_CAPABILITIES             0
++/* Intel SDM: GETSEC Capability Result Encoding */
++#define GETSEC_CAP_TXT_CHIPSET          1
 +
  #ifndef __ASSEMBLY__
  
  #include <xen/slr_table.h>
-@@ -93,6 +96,9 @@
- #define _txt(x) __va(x)
- #endif
- 
-+extern char txt_ap_entry[];
-+extern uint32_t trampoline_gdt[];
-+
- /*
-  * Always use private space as some of registers are either read-only or not
-  * present in public space.
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index 75af7ea3c4..9957e3cb9e 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -473,6 +473,7 @@ void set_in_mcu_opt_ctrl(uint32_t mask, uint32_t val);
- enum ap_boot_method {
-     AP_BOOT_NORMAL,
-     AP_BOOT_SKINIT,
-+    AP_BOOT_TXT,
- };
- extern enum ap_boot_method ap_boot_method;
- 
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 54207e6d88..1ff26761ab 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -29,6 +29,7 @@
- #include <asm/flushtlb.h>
- #include <asm/guest.h>
- #include <asm/idt.h>
-+#include <asm/intel_txt.h>
- #include <asm/io_apic.h>
- #include <asm/irq-vectors.h>
- #include <asm/mc146818rtc.h>
-@@ -37,6 +38,7 @@
- #include <asm/mtrr.h>
- #include <asm/prot-key.h>
- #include <asm/setup.h>
-+#include <asm/slaunch.h>
- #include <asm/spec_ctrl.h>
- #include <asm/tboot.h>
- #include <asm/time.h>
-@@ -325,6 +327,29 @@ void asmlinkage start_secondary(void *unused)
-      */
-     unsigned int cpu = booting_cpu;
- 
-+    if ( ap_boot_method == AP_BOOT_TXT ) {
-+        uint64_t misc_enable;
-+        uint32_t my_apicid;
-+        struct txt_sinit_mle_data *sinit_mle =
-+              txt_sinit_mle_data_start(__va(read_txt_reg(TXTCR_HEAP_BASE)));
-+
-+        /* TXT released us with MONITOR disabled in IA32_MISC_ENABLE. */
-+        rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
-+        wrmsrl(MSR_IA32_MISC_ENABLE,
-+               misc_enable | MSR_IA32_MISC_ENABLE_MONITOR_ENABLE);
-+
-+        /* get_apic_id() reads from x2APIC if it thinks it is enabled. */
-+        x2apic_ap_setup();
-+        my_apicid = get_apic_id();
-+
-+        while ( my_apicid != x86_cpu_to_apicid[cpu] ) {
-+            asm volatile ("monitor; xor %0,%0; mwait"
-+                          :: "a"(__va(sinit_mle->rlp_wakeup_addr)), "c"(0),
-+                          "d"(0) : "memory");
-+            cpu = booting_cpu;
-+        }
-+    }
-+
-     /* Critical region without IDT or TSS.  Any fault is deadly! */
- 
-     set_current(idle_vcpu[cpu]);
-@@ -421,6 +446,28 @@ void asmlinkage start_secondary(void *unused)
-     startup_cpu_idle_loop();
- }
- 
-+static int wake_aps_in_txt(void)
-+{
-+    struct txt_sinit_mle_data *sinit_mle =
-+              txt_sinit_mle_data_start(__va(read_txt_reg(TXTCR_HEAP_BASE)));
-+    uint32_t *wakeup_addr = __va(sinit_mle->rlp_wakeup_addr);
-+
-+    uint32_t join[4] = {
-+        trampoline_gdt[1],               /* GDT limit */
-+        bootsym_phys(trampoline_gdt),    /* GDT base */
-+        TXT_AP_BOOT_CS,                  /* CS selector, DS = CS+8 */
-+        bootsym_phys(txt_ap_entry)       /* EIP */
-+    };
-+
-+    write_txt_reg(TXTCR_MLE_JOIN, __pa(join));
-+
-+    smp_mb();
-+
-+    *wakeup_addr = 1;
-+
-+    return 0;
-+}
-+
- static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
- {
-     unsigned long send_status = 0, accept_status = 0;
-@@ -443,6 +490,9 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
-     if ( tboot_in_measured_env() && !tboot_wake_ap(phys_apicid, start_eip) )
-         return 0;
- 
-+    if ( ap_boot_method == AP_BOOT_TXT )
-+        return wake_aps_in_txt();
-+
-     /*
-      * Be paranoid about clearing APIC errors.
-      */
-@@ -1150,6 +1200,13 @@ static struct notifier_block cpu_smpboot_nfb = {
- 
- void __init smp_prepare_cpus(void)
- {
-+    /*
-+     * If the platform is performing a Secure Launch via TXT, secondary
-+     * CPUs (APs) will need to be woken up in a TXT-specific way.
-+     */
-+    if ( slaunch_active && boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-+        ap_boot_method = AP_BOOT_TXT;
-+
-     register_cpu_notifier(&cpu_smpboot_nfb);
- 
-     mtrr_aps_sync_begin();
 -- 
 2.49.0
 
