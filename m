@@ -4,32 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D57C369D8
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 20:48:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.965332.1355920 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C7B6C369CB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 20:50:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.965345.1355930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7h1U-0001yV-OV; Wed, 23 Apr 2025 20:48:48 +0000
+	id 1u7h2a-0002YF-5W; Wed, 23 Apr 2025 20:49:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 965332.1355920; Wed, 23 Apr 2025 20:48:48 +0000
+Received: by outflank-mailman (output) from mailman id 965345.1355930; Wed, 23 Apr 2025 20:49:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7h1U-0001yO-Lg; Wed, 23 Apr 2025 20:48:48 +0000
-Received: by outflank-mailman (input) for mailman id 965332;
- Wed, 23 Apr 2025 20:48:47 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1u7h1T-0001yF-J6
- for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 20:48:47 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1u7h1S-00HI9z-1V;
- Wed, 23 Apr 2025 20:48:46 +0000
-Received: from [2a02:8012:3a1:0:752c:956a:3e76:876d]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1u7h1S-007MJA-0t;
- Wed, 23 Apr 2025 20:48:46 +0000
+	id 1u7h2a-0002Y8-2y; Wed, 23 Apr 2025 20:49:56 +0000
+Received: by outflank-mailman (input) for mailman id 965345;
+ Wed, 23 Apr 2025 20:49:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=UY1Q=XJ=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1u7h2Z-0002Xy-AH
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 20:49:55 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 80eba918-2084-11f0-9ffb-bf95429c2676;
+ Wed, 23 Apr 2025 22:49:53 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C6A8A4A180;
+ Wed, 23 Apr 2025 20:49:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF39CC4CEEA;
+ Wed, 23 Apr 2025 20:49:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,109 +43,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=99X0+FUIM4sZ+ADCor552omGYZhJTFq7zryGUC3zAMo=; b=MwrtgjJzhsnzw83oNzELVUTeVs
-	cG1Sxiy23POOfXEdKx5mwbN3IVODi/KlSDHetY9DzUnzNN63yrxGLED7Ir/uLF1A1HNYVOpZQu6CO
-	0ycn4YmtQ4WQ/9G1nCTie7+cy+QrcWS96ZIoR2l4ix3tJxFip578LDvJGkn8pl5XnwW0=;
-Message-ID: <afdb0197-6f0f-47a7-88cb-83e014f09914@xen.org>
-Date: Wed, 23 Apr 2025 21:48:44 +0100
+X-Inumbo-ID: 80eba918-2084-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1745441391;
+	bh=GLhSDM9qc3q1S6fIf2zvHc1w/28TuKcPCdYwlopCgDc=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=OF4wYffzvZHGUe1XabwustgVODscZA82VeiX1XPvywKH0eeuDQJwoOz8Fiy4Rrpvq
+	 +ISY7JOkMttgYj8iFYulwuGy721XUEsIu2gTmst7/dSmJy/riglzgD0TFARVXfUEG4
+	 BVqGUGVe1tInibKXH34ATRGyqCBzu3IxyLW+cWxGczFyKH1Kn3j18lAb4RM3vpHVqB
+	 /b2HN3Lm7lnW0jBGMldRUyt6BS3/jmiIyup3ZAS0rY4utRVll5iPAFDwMBXZj14Amv
+	 rkAQfZez9Rr/kvYaPBr30CiJsZ3c/75z1oqcd2wEWJB8QE3Ua3UBtwC5cit2agkScU
+	 7O9L9GpKtS+8A==
+Date: Wed, 23 Apr 2025 13:49:49 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Stefano Stabellini <sstabellini@kernel.org>
+cc: Victor Lira <victorm.lira@amd.com>, xen-devel@lists.xenproject.org, 
+    Federico Serafini <federico.serafini@bugseng.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+    Julien Grall <julien@xen.org>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Nicola Vetrini <nicola.vetrini@bugseng.com>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: Re: [PATCH v1] misra: add deviation of Rule 5.5
+In-Reply-To: <alpine.DEB.2.22.394.2504231344490.785180@ubuntu-linux-20-04-desktop>
+Message-ID: <alpine.DEB.2.22.394.2504231347500.785180@ubuntu-linux-20-04-desktop>
+References: <9e1210f2a9c794d68dcc6b897239b228b141296a.1745427770.git.victorm.lira@amd.com> <48c7830931a98b2bf70ef1509f309b262b9e5792.1745427770.git.victorm.lira@amd.com> <alpine.DEB.2.22.394.2504231344490.785180@ubuntu-linux-20-04-desktop>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] misra: add deviation of Rule 10.1 for unary minus
-Content-Language: en-GB
-To: victorm.lira@amd.com, xen-devel@lists.xenproject.org
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Federico Serafini <federico.serafini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>
-References: <9e1210f2a9c794d68dcc6b897239b228b141296a.1745427770.git.victorm.lira@amd.com>
- <7c7b7a09e9d5ac1cc6f93fecacd8065fb6f25324.1745427770.git.victorm.lira@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <7c7b7a09e9d5ac1cc6f93fecacd8065fb6f25324.1745427770.git.victorm.lira@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-Hi Victor,
+On Wed, 23 Apr 2025, Stefano Stabellini wrote:
+> On Wed, 23 Apr 2025, victorm.lira@amd.com wrote:
+> > From: Federico Serafini <federico.serafini@bugseng.com>
+> > 
+> > MISRA C Rule 5.5 states that:
+> > "Identifiers shall be distinct from macro names".
+> > 
+> > A common pattern in Xen is to have a function-like macro that acts as a
+> > "wrapper" for the function to be called:
+> > before calling the function, the macro adds additional checks or
+> > increase/decrease the number of parameters depending on the
+> > configuration.
+> > 
+> > Update ECLAIR configuration and deviations.rst.
+> > 
+> > Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
+> > Signed-off-by: Victor Lira <victorm.lira@amd.com>
+> 
+> This is something we have already discussed in the past and accepted,
+> but we were missing the ECLAIR configuration for the deviation.
+> 
+> Thanks Federico for producing it.
+> 
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> I understand Jan asked for being more precise with the wording and I am
+> OK with that.
 
-On 23/04/2025 18:54, victorm.lira@amd.com wrote:
-> From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-> 
-> MISRA C Rule 10.1 states:
-> "Operands shall not be of an inappropriate essential type"
-> 
-> The unary minus operator applied to an unsigned quantity has
-> a semantics (wrap around) that is well-known to all Xen developers.
-> Thus, this operation is deemed safe.
-> 
-> No functional change.
-> 
-> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
-> Signed-off-by: Victor Lira <victorm.lira@amd.com>
-> ---
-> Changes v1:
-> - add rule title to commit message
-> ---
-> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-> Cc: Anthony PERARD <anthony.perard@vates.tech>
-> Cc: Michal Orzel <michal.orzel@amd.com>
-> Cc: Jan Beulich <jbeulich@suse.com>
-> Cc: Julien Grall <julien@xen.org>
-> Cc: Roger Pau Monné <roger.pau@citrix.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>
-> Cc: Federico Serafini <federico.serafini@bugseng.com>
-> Cc: Bertrand Marquis <bertrand.marquis@arm.com>
-> ---
->   automation/eclair_analysis/ECLAIR/deviations.ecl | 6 ++++++
->   docs/misra/deviations.rst                        | 6 ++++++
->   2 files changed, 12 insertions(+)
-> 
-> diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> index 303b06203a..2cfce850bd 100644
-> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> @@ -347,6 +347,12 @@ constant expressions are required.\""
->     "any()"}
->   -doc_end
-> 
-> +-doc_begin="Unary minus operations on non-negative integers have a semantics (wrap around) that is well-known to all Xen developers."
-> +-config=MC3A2.R10.1,etypes+={safe,
-> +  "stmt(node(unary_operator)&&operator(minus))",
-> +  "src_expr(definitely_in(0..))"}
-> +-doc_end
-> +
->   #
->   # Series 11
->   #
-> diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-> index cfdd1a9838..c5897e31c5 100644
-> --- a/docs/misra/deviations.rst
-> +++ b/docs/misra/deviations.rst
-> @@ -321,6 +321,12 @@ Deviations related to MISRA C:2012 Rules:
->          If no bits are set, 0 is returned.
->        - Tagged as `safe` for ECLAIR.
-> 
-> +   * - R10.1
-> +     - Applying the unary minus operator to an unsigned quantity has a
-> +       semantics (wrap around) that is well-known to all Xen developers.
-> +       For this reason, the operation is safe.
-
-I have realized we use similar wording in the rest of the deviations, 
-but this is rather fragile argument. "well-known" is very subjective and 
-could change over time.
-
-How many violations do we have? Could we deviate them one by one?
-
-Cheers,
-
--- 
-Julien Grall
-
+Please remove this last sentence. I meant to say that I am OK with Jan's
+request to narrow the deviation, both wording and check. The wording can
+be done, I am not sure about the check.
 
