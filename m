@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55EAAC369D9
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 01:03:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.963781.1354753 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F292C369D8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 01:03:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.963783.1354773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7OVq-0001zp-Kh; Wed, 23 Apr 2025 01:02:54 +0000
+	id 1u7OVt-0002XL-8z; Wed, 23 Apr 2025 01:02:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 963781.1354753; Wed, 23 Apr 2025 01:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 963783.1354773; Wed, 23 Apr 2025 01:02:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7OVq-0001zi-H1; Wed, 23 Apr 2025 01:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 963781;
- Wed, 23 Apr 2025 01:02:53 +0000
+	id 1u7OVt-0002WI-3z; Wed, 23 Apr 2025 01:02:57 +0000
+Received: by outflank-mailman (input) for mailman id 963783;
+ Wed, 23 Apr 2025 01:02:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dLR5=XJ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u7OVp-0000o7-Go
- for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 01:02:53 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ id 1u7OVr-0000o7-QY
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 01:02:55 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id adfa9e1d-1fde-11f0-9ffb-bf95429c2676;
- Wed, 23 Apr 2025 03:02:51 +0200 (CEST)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb94so60202185e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 18:02:51 -0700 (PDT)
+ id af6e1111-1fde-11f0-9ffb-bf95429c2676;
+ Wed, 23 Apr 2025 03:02:53 +0200 (CEST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43d04dc73b7so53142435e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 18:02:54 -0700 (PDT)
 Received: from localhost.localdomain ([83.104.178.215])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-44092d2326dsm6707635e9.15.2025.04.22.18.02.49
+ 5b1f17b1804b1-44092d2326dsm6707635e9.15.2025.04.22.18.02.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 18:02:50 -0700 (PDT)
+ Tue, 22 Apr 2025 18:02:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: adfa9e1d-1fde-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: af6e1111-1fde-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1745370171; x=1745974971; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1745370173; x=1745974973; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Az5L3AwTen2X3hdYSvHBPLsXM8erZfsxm7tPT2WuzcM=;
-        b=MCOTSkLhYaRq+hIqlwtxj3afDYyjkDl/ZhkgXZGXQl1rgK9fer32P7F3rFFGEfvZUG
-         XAWXyPf+ZAqxrM8nUmUzSxs+gIHzC5/gkDNlBswHnlCq/YulV4P7BVGjKs2jilI5jC6R
-         EzFnSA6eZc4WGRYwY5tyv/NQO/Kuwb5UG2pq8=
+        bh=LoWKMqHtqBPDLmEPFfxaswFqTNu87oQfZQ9HmGyS6OI=;
+        b=mOg5wIgTIonFrTfHloaskb6MhkA1TkBb4XO66TKPJI/wApelk4ONDdGXVWpCMvreDL
+         +XL3BvtdEwfrwjc7iqjwfrbe+6zdIZ6cXTGJT9KZkqUNhN1iDn2BfEGL5E2sYOapIu1B
+         cuwEDGwvyOmXEDZDB8p/NzfEQvYCFSEIUg+T0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745370171; x=1745974971;
+        d=1e100.net; s=20230601; t=1745370173; x=1745974973;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Az5L3AwTen2X3hdYSvHBPLsXM8erZfsxm7tPT2WuzcM=;
-        b=kPrxHcRvufn8ysk3L1UHxAxaleiE+M/Uq8moPCiTol3ik8gxTCK1sPJy2yESgj7mNp
-         bB6KCxBiRRe+fjvDxCuMCkYe8Ir7xcGBdjkbP/xkE3BW50OUoKJ3MisR3xWQ0absDaYG
-         KOM3/YIYruQWzl0CS9XP/I+4sD73+aL+HoNkVExT0q3pfPHFog7PhppKS79xhfcsRark
-         cGw9t8b6kCyRWJrGEaEVkqtBWUGtzkk7r+NZ5g1vfHpDjAJ7H9NIIdIONoGAZWyVgC4V
-         qU8z22Vz7CKi+NAvd7u+muC8tSZZVxeEHDKAPL4p3ToPWFBLEVu/DXJ4CaW0idJLO1Bc
-         2+XA==
-X-Gm-Message-State: AOJu0Yz1ck47lV6wk7OoXlSHcBIytwXeX+OA1n7wMsD992Hh7CptNDOt
-	EO5EmFGYAFx9aOfK451351gpgDXV9iOVFl8ohpfTbKJ98oBd1DBoZZDfJhfrSHPdOvhDQxoNsQC
-	+
-X-Gm-Gg: ASbGncs9MKmwSl7CdJgMPZ/7FtIS0Xp7qNpPSXTeJiZRBVpCsDCK/AMLHhnrCc5kj8J
-	UJxJvPHtY2vhC7iVJIg8WrDmOdLwryPZf0J1L8JPe7wqvRmYSed1HnlJ3PMv9M7No5htLHQUokh
-	k8snJH7BdJGtqrEsGEdzs921A002NnZPnIeYo0H9sGD3bwc0Ji1LE9TY4S9bfjURWd6T8DYXbby
-	7Xh3qkpj8SaVC7fi18FbyR25Fow5iUL/qaVAFWnyHFSRRS6kRyxeYqo4dUyGybtOx9H3QYJ24Wa
-	A4+n6w2zaM6loteIEsiyznSofanPejRkMUMgPh6BHvv2cdUs9+RfKY9rM210UQ==
-X-Google-Smtp-Source: AGHT+IEcxiy7BCMC8dQM+wTEIGNnjB9Ygk8LgBhJdkXFw8myBmCXysxUCn4C1uwaGlXg9SIIKR4tqA==
-X-Received: by 2002:a05:600c:1c9d:b0:43c:fb95:c76f with SMTP id 5b1f17b1804b1-4406ab93151mr166134125e9.9.1745370170847;
-        Tue, 22 Apr 2025 18:02:50 -0700 (PDT)
+        bh=LoWKMqHtqBPDLmEPFfxaswFqTNu87oQfZQ9HmGyS6OI=;
+        b=rWGTj8d5MmMtMmIb8yDLy36lQ2xtAFwAC2lOY/PyVTvSyr+xoKGD47bFeD4Zk49+lP
+         +M5jKLvKM3JxaWXwrIBOzQvj3E/xRAVrlXE1+AvH/eUC5aw75DpjUxiVZARU7Sfe8ynX
+         AoLDSLauxWktIKBIOcB/xRdg2guGs+Mh6GrD1i/AhD4zOEdxMQCTsKfERbSG1ORCpREB
+         ps5lowLu/cN7NnQfYeu7/m4c/89vgodtrLH36v3/pQ5claB7Nn5dydAwPSEWYbRmC7vv
+         zYxqlAci1frDHpbhPQ38x4BS+Mw7Ryamq0AulMrocjQCTZqamDCLzTHozu+StwTKOvb8
+         0yRw==
+X-Gm-Message-State: AOJu0Yxc4xK0/imT1ECML5QNZ6ZnWWIL2mCB3OWv4pn35vzGtSBQiv5I
+	CAWi+Y3wYxNkWKiWQ9HCJMEtscm+0yYyPf/7+nbUr/4IFdDSS8oBiwMwWbPbrKoEi7dEZiWlOuv
+	/
+X-Gm-Gg: ASbGncvC/j8oJW6JUn2/IOsbhfzmrCqxpPuo4RGiSo1vGMIL9ad8EX/FyB30NrD4c0V
+	e4iMNFso2jnDSvuUwrbyts1Ha9DuC7bqeiPFNazsr2gtQ1zUXJEyTCwYrcEnk1AVKFnKKXja+w1
+	e3dHEcU88WNwAw+fj90PwSTSQfDpIqU85xoE6258O6UFonGpIs5aQCa4hdsjgqWvR+aZ8o6W3Lk
+	Rszpjc60v2LVAPsHUpIRMKiM2kaUm5qls6NPFPVnbJm5nWat69lilGQfdpKgaDGRLQy4b8WpfCo
+	SFnosVIzMk6lF+wBnC+uIKfLpai08Vzp3jXrkTztkZoKu/csqjA0T2g5CnDofA==
+X-Google-Smtp-Source: AGHT+IHzp4hNlxBfSm5YRXWG9V+oQpZjMac/1ALmOGUgU+tXdqLeroMdU4JaXHiFRcvBaTqZatJL9A==
+X-Received: by 2002:a05:600c:5110:b0:43c:e70d:44f0 with SMTP id 5b1f17b1804b1-4406aba758cmr134644925e9.19.1745370173253;
+        Tue, 22 Apr 2025 18:02:53 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 5/8] x86/altcall: Introduce new simpler scheme
-Date: Wed, 23 Apr 2025 02:02:34 +0100
-Message-Id: <20250423010237.1528582-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 7/8] x86/altcall: Switch to simpler scheme
+Date: Wed, 23 Apr 2025 02:02:36 +0100
+Message-Id: <20250423010237.1528582-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250423010237.1528582-1-andrew.cooper3@citrix.com>
 References: <20250423010237.1528582-1-andrew.cooper3@citrix.com>
@@ -95,188 +95,94 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Encoding altcalls as regular alternatives leads to an unreasonable amount of
-complexity in _apply_alternatives().
+With all the infrastructure in place, switch from using ALTERNATIVE() to
+simply populating .alt_call_sites.
 
-Introduce apply_alt_calls(), and an .alt_call_sites section which simply
-tracks the source address (relative, to save on space).  That's literally all
-that is needed in order to devirtualise the function pointers.
+Before, _apply_alternatives() would devirtualise in two passes; the first
+being opportunistic, and the second (signified by the force parameter) sealing
+any call with a still-NULL function pointer.
 
-apply_alt_calls() is mostly as per _apply_alternatives(), except the size is
-known to be 6 bytes.  Drop the logic for JMP *RIPREL, as there's no support
-for tailcall optimisations, nor a feasbile plan on how to introduce support.
-Pad with a redundant prefix to avoid needing a separate NOP on the end.
+Now, all devirtualising is performed together, at the point in time of the
+second pass previously.  The call to seal_endbr64() needs delaying until after
+apply_alt_calls() is complete, or we have a narrow window with real indirect
+branches and no ENDBR64 instructions.
 
-Wire it up in nmi_apply_alternatives(), although the section is empty at this
-juncture so nothing happens in practice.
+Under the hood, the following changes are happening:
+
+  Section                Old size   New size   Change (%)
+  .alt_call_sites               0    0x00730   +0x0730
+  .altinstructions        0x1350a    0x11fe0   -0x152a (-7%)
+  .altinstr_replacement   0x015f2    0x00e35   -0x07bd (-23%)
+
+The changes aren't quite equal because inlining is affected by the smaller
+asm() block.  Nevertheless, the metadata is held in 1/3 of the space, and
+there are no CALL instructions held in the replacement section any more.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-Finding a 6-byte UD instruction that is distinct from ud2 turns out to be
-quite challengning.  The easy way involves a length changing prefix, which is
-best avoided.  Suggestions for alternative patterns welcome.
-
 ---
- xen/arch/x86/alternative.c                  | 94 +++++++++++++++++++++
- xen/arch/x86/include/asm/alternative-call.h |  7 ++
- xen/arch/x86/xen.lds.S                      |  4 +
- 3 files changed, 105 insertions(+)
+ xen/arch/x86/alternative.c                  | 9 ++-------
+ xen/arch/x86/include/asm/alternative-call.h | 9 ++++++---
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
-index 4b9f8d860153..f6594e21a14c 100644
+index 22af224f08f7..047bfc6e424b 100644
 --- a/xen/arch/x86/alternative.c
 +++ b/xen/arch/x86/alternative.c
-@@ -388,6 +388,92 @@ static int init_or_livepatch _apply_alternatives(struct alt_instr *start,
+@@ -378,13 +378,6 @@ static int init_or_livepatch _apply_alternatives(struct alt_instr *start,
+         text_poke(orig, buf, total_len);
+     }
+ 
+-    /*
+-     * Clobber endbr64 instructions now that altcall has finished optimising
+-     * all indirect branches to direct ones.
+-     */
+-    if ( force && system_state < SYS_STATE_active )
+-        seal_endbr64();
+-
      return 0;
  }
  
-+/*
-+ * At build time, alternative calls are emitted as:
-+ *   ff 15 xx xx xx xx  =>  call *disp32(%rip)
-+ *
-+ * During boot, we devirtualise by editing to:
-+ *   2e e8 xx xx xx xx  =>  cs call disp32
-+ *
-+ * or, if the function pointer is still NULL, poison to:
-+ *   0f 0b 0f 0b 0f 0b  =>  ud2a (x3)
-+ */
-+static int init_or_livepatch apply_alt_calls(
-+    const struct alt_call *start, const struct alt_call *end)
-+{
-+    const struct alt_call *a;
+@@ -533,6 +526,8 @@ static int __init cf_check nmi_apply_alternatives(
+             rc = apply_alt_calls(__alt_call_sites_start, __alt_call_sites_end);
+             if ( rc )
+                 panic("Unable to apply alternative calls: %d\n", rc);
 +
-+    for ( a = start; a < end; a++ )
-+    {
-+        const uint8_t *dest;
-+        uint8_t buf[6], *orig = ALT_CALL_PTR(a);
-+        long disp;
-+
-+        /* It's likely that this won't change, but check just to be safe. */
-+        BUILD_BUG_ON(ALT_CALL_LEN(a) != 6);
-+
-+        if ( orig[0] != 0xff || orig[1] != 0x15 )
-+        {
-+            printk(XENLOG_ERR
-+                   "Altcall for %ps [%6ph] not CALL *RIPREL\n",
-+                   orig, orig);
-+            return -EINVAL;
-+        }
-+
-+        disp = *(int32_t *)(orig + 2);
-+        dest = *(const void **)(orig + 6 + disp);
-+
-+        if ( dest )
-+        {
-+            /*
-+             * When building for CET-IBT, all function pointer targets
-+             * should have an endbr64 instruction.
-+             *
-+             * If this is not the case, leave a warning because
-+             * something is probably wrong with the build.  A CET-IBT
-+             * enabled system might have exploded already.
-+             *
-+             * Otherwise, skip the endbr64 instruction.  This is a
-+             * marginal perf improvement which saves on instruction
-+             * decode bandwidth.
-+             */
-+            if ( IS_ENABLED(CONFIG_XEN_IBT) )
-+            {
-+                if ( is_endbr64(dest) )
-+                    dest += ENDBR64_LEN;
-+                else
-+                    printk(XENLOG_WARNING
-+                           "Altcall %ps dest %ps has no endbr64\n",
-+                           orig, dest);
-+            }
-+
-+            disp = dest - (orig + 6);
-+            ASSERT(disp == (int32_t)disp);
-+
-+            buf[0] = 0x2e;
-+            buf[1] = 0xe8;
-+            *(int32_t *)(buf + 2) = disp;
-+        }
-+        else
-+        {
-+            /*
-+             * The function pointer is still NULL.  Seal the whole call, as
-+             * it's not used.
-+             */
-+            buf[0] = 0x0f;
-+            buf[1] = 0x0b;
-+            buf[2] = 0x0f;
-+            buf[3] = 0x0b;
-+            buf[4] = 0x0f;
-+            buf[5] = 0x0b;
-+        }
-+
-+        text_poke(orig, buf, sizeof(buf));
-+    }
-+
-+    return 0;
-+}
-+
- #ifdef CONFIG_LIVEPATCH
- int apply_alternatives(struct alt_instr *start, struct alt_instr *end)
- {
-@@ -401,6 +487,7 @@ static unsigned int __initdata alt_todo;
- static unsigned int __initdata alt_done;
++            seal_endbr64();
+         }
  
- extern struct alt_instr __alt_instructions[], __alt_instructions_end[];
-+extern struct alt_call __alt_call_sites_start[], __alt_call_sites_end[];
- 
- /*
-  * At boot time, we patch alternatives in NMI context.  This means that the
-@@ -435,6 +522,13 @@ static int __init cf_check nmi_apply_alternatives(
-         if ( rc )
-             panic("Unable to apply alternatives: %d\n", rc);
- 
-+        if ( alt_todo & ALT_CALLS )
-+        {
-+            rc = apply_alt_calls(__alt_call_sites_start, __alt_call_sites_end);
-+            if ( rc )
-+                panic("Unable to apply alternative calls: %d\n", rc);
-+        }
-+
          /*
-          * Reinstate perms on .text to be RX.  This also cleans out the dirty
-          * bits, which matters when CET Shstk is active.
 diff --git a/xen/arch/x86/include/asm/alternative-call.h b/xen/arch/x86/include/asm/alternative-call.h
-index 828ea32a9625..49a04a7cc45b 100644
+index 49a04a7cc45b..bbc49a5274d9 100644
 --- a/xen/arch/x86/include/asm/alternative-call.h
 +++ b/xen/arch/x86/include/asm/alternative-call.h
-@@ -4,6 +4,13 @@
+@@ -2,7 +2,8 @@
+ #ifndef X86_ALTERNATIVE_CALL_H
+ #define X86_ALTERNATIVE_CALL_H
  
- #include <asm/alternative.h>
+-#include <asm/alternative.h>
++#include <xen/macros.h>
++#include <xen/stdint.h>
  
-+/* Simply the relative position of the source call. */
-+struct alt_call {
-+    int32_t offset;
-+};
-+#define ALT_CALL_PTR(a) ((void *)&(a)->offset + (a)->offset)
-+#define ALT_CALL_LEN(a) (6)
-+
- /*
-  * Machinery to allow converting indirect to direct calls, when the called
-  * function is determined once at boot and later never changed.
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index d4dd6434c466..53bafc98a536 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -260,6 +260,10 @@ SECTIONS
-         __alt_instructions = .;
-         *(.altinstructions)
-         __alt_instructions_end = .;
-+        . = ALIGN(4);
-+        __alt_call_sites_start = .;
-+        *(.alt_call_sites)
-+        __alt_call_sites_end = .;
- 
-        LOCK_PROFILE_DATA
- 
+ /* Simply the relative position of the source call. */
+ struct alt_call {
+@@ -86,8 +87,10 @@ struct alt_call {
+     rettype ret_;                                                  \
+     register unsigned long r10_ asm("r10");                        \
+     register unsigned long r11_ asm("r11");                        \
+-    asm volatile (ALTERNATIVE("call *%c[addr](%%rip)", "call .",   \
+-                              X86_FEATURE_ALWAYS)                  \
++    asm volatile ("1: call *%c[addr](%%rip)\n\t"                   \
++                  ".pushsection .alt_call_sites, \"a\", @progbits\n\t"  \
++                  ".long 1b - .\n\t"                               \
++                  ".popsection"                                    \
+                   : ALT_CALL ## n ## _OUT, "=a" (ret_),            \
+                     "=r" (r10_), "=r" (r11_) ASM_CALL_CONSTRAINT   \
+                   : [addr] "i" (&(func)), "g" (func)               \
 -- 
 2.39.5
 
