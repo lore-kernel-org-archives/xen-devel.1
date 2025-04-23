@@ -4,29 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 320B3C369D3
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Apr 2025 23:38:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.963757.1354689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D50AC369C2
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 01:03:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.963778.1354722 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7NBh-0005RJ-Vz; Tue, 22 Apr 2025 23:38:01 +0000
+	id 1u7OVm-0001Fr-IX; Wed, 23 Apr 2025 01:02:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 963757.1354689; Tue, 22 Apr 2025 23:38:01 +0000
+Received: by outflank-mailman (output) from mailman id 963778.1354722; Wed, 23 Apr 2025 01:02:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7NBh-0005RC-T7; Tue, 22 Apr 2025 23:38:01 +0000
-Received: by outflank-mailman (input) for mailman id 963757;
- Tue, 22 Apr 2025 23:37:59 +0000
+	id 1u7OVm-0001Fk-Fo; Wed, 23 Apr 2025 01:02:50 +0000
+Received: by outflank-mailman (input) for mailman id 963778;
+ Wed, 23 Apr 2025 01:02:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8D33=XI=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1u7NBe-0005Qx-SE
- for xen-devel@lists.xenproject.org; Tue, 22 Apr 2025 23:37:59 +0000
-Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
- [109.224.244.16]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ceee8035-1fd2-11f0-9eb0-5ba50f476ded;
- Wed, 23 Apr 2025 01:37:52 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=dLR5=XJ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1u7OVl-0000oH-2l
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 01:02:49 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ac78f74a-1fde-11f0-9eb0-5ba50f476ded;
+ Wed, 23 Apr 2025 03:02:48 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso67688295e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Apr 2025 18:02:48 -0700 (PDT)
+Received: from localhost.localdomain ([83.104.178.215])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-44092d2326dsm6707635e9.15.2025.04.22.18.02.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Apr 2025 18:02:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,114 +47,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ceee8035-1fd2-11f0-9eb0-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1745365071; x=1745624271;
-	bh=gjP3EGsNseK5YgTfoovawhW3/3/7Cydu7Tdbrr6oyyM=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=U3oqeeKG/76KKbeo6YmzGawBvGgEQXtVxT//g42Dy2tAlXWWhFQSXyDsOQuZJ4Lj0
-	 nzvk8e//BVhsdIGBcl45NID6eO8/BDIYeiWazyI7/2zGaHuYP6VZuE8G+LQQgArFmF
-	 PryNLv+JtaELOkiRNRlhZCLK7r7fEMV/Nxa/DhPds5Z3IcE+KVRXk6btjPnKTG7hYI
-	 B05LYcMyizrIOZ1hlDabaH564S0yDEkVI8CGoI7Y3Ox9QZGUBQ5Ne3ep2XeBnlGlpE
-	 waghD6SftzkS2SxDlKG4m3WH3vX1lD5QeAfSR/GOqk1BH4ugSrh5/qzWl7f0bPihc7
-	 4S91dsr/ZD1yg==
-Date: Tue, 22 Apr 2025 23:37:47 +0000
-To: Jan Beulich <jbeulich@suse.com>
-From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v1 3/3] xen/domain: rewrite emulation_flags_ok()
-Message-ID: <aAgoSHWRDE1cE2LB@starscream>
-In-Reply-To: <c14efb79-54c1-438d-813e-15f635813ccc@suse.com>
-References: <20250401005224.461325-1-dmukhin@ford.com> <20250401005224.461325-4-dmukhin@ford.com> <c14efb79-54c1-438d-813e-15f635813ccc@suse.com>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 2aa787f89394c56eb03097064500c86b97510a8e
+X-Inumbo-ID: ac78f74a-1fde-11f0-9eb0-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1745370168; x=1745974968; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Hixb/ZwuxNqQ0rmjpvM4G3/QpMDCCkyGKcIaO2DF2yg=;
+        b=RjlGaz3BAFrynbTC29EjpQtESSz2LoFW7nPfAzd5GddUurdmcIekNRaFH21URheUqh
+         9cMYY2b8R9EJLUOqqd7egQn9Pwond3y6PMmIqX6tenjniIO9mwrkXUHCleEXZ0FInckg
+         nU7DnJ9TVLbmBAVLyNJd3YspSgs1E7lgkO328=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745370168; x=1745974968;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Hixb/ZwuxNqQ0rmjpvM4G3/QpMDCCkyGKcIaO2DF2yg=;
+        b=t4J3nQt5YzXekkLwjvrlNz8GKOVywz8C8hKK29lQZPzXHMC1ezc7n8VJ/V2z2TcaOK
+         9ICeE0KusW3QoWv+cxLDCSc3lxwN08gGfy282KqB1O8yVBIlS3XiKliQWJInr5mBRqSB
+         kMUzVbhkGBxD9H9sjqOz25VSLK8TWSOcX9Gd1VH9YPDuhg4cC78d5csC8s/RokAd2wLp
+         2lGlgU/7dvxzONALTZ3M4ANRRqqoFDgvw+ShoLIn6VoUpYjbraR+FHI9Q8ZhQrvGOaPF
+         EUHqKSN11/Q5HHSAi7ODJ7p6icq/uJzak2oJf5LsqWSNgStPJsE59bE4Ix2ejznBjNSv
+         gEtg==
+X-Gm-Message-State: AOJu0YwfnPxIfY0Qv4FLYGUxHqCrO5c3+eIbARphyCtMUG6/8x8wxJnp
+	BT0tIHxknSMlqFhzssKx0AeHSuku4nRg0KqjKPFnrvsX9gjOHtNYUHW1IdFuGWLAzH0LPY6ArLx
+	s
+X-Gm-Gg: ASbGnctZixydjEScJokOXtL3SGS1Tjg/eZBDO+m1Y+ChyQn+ijbtG9dqtPkzXov3peE
+	CcFR0Ii1w/aJJXEXBQzSnpVq/hXNJhat89Ftu5iu4lb5yQgnHkgm8NnmjxybncVLBRwsSe8JcBB
+	kgVqPxif1weX2GvvigpRz4+EYhgM4+089vDwg7JrbTUNHQBS5TlXaEdKtVPJINzhzNIK/cHOabN
+	NJls92OibasyzfM7LDSUiJxh8uXvCkHHCF+fSvwfPP/GQKeTiqGSrt6COy2rUsdm0m2qHG/oxGx
+	n42QrkcZaKdDXuYbcedYs7ifZG7BJrNv9pXJ/J0MLWBgoRSvQY8XYhna40HmGg==
+X-Google-Smtp-Source: AGHT+IGG65bPPpjp6zyCd08HRoORDUf6/LHaa7fgyod4T8zNUbNxIP+hfw/DjUz88TWXAFtevruM/w==
+X-Received: by 2002:a05:600c:3d96:b0:43c:f895:cb4e with SMTP id 5b1f17b1804b1-4406aba6809mr162887685e9.17.1745370167910;
+        Tue, 22 Apr 2025 18:02:47 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 3/8] x86/alternatives: Rework information passing into nmi_apply_alternatives()
+Date: Wed, 23 Apr 2025 02:02:32 +0100
+Message-Id: <20250423010237.1528582-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250423010237.1528582-1-andrew.cooper3@citrix.com>
+References: <20250423010237.1528582-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 08, 2025 at 05:34:27PM +0200, Jan Beulich wrote:
-> On 01.04.2025 02:52, dmkhn@proton.me wrote:
-> > From: Denis Mukhin <dmukhin@ford.com>
-> >
-> > Rewrite emulation_flags_ok() using XEN_X86_EMU_{OPTIONAL,BASELINE}
-> > to simplify future modifications.
-> >
-> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> > ---
-> > Came in the context of NS16550 emulator v3 series:
-> >   https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-0-c5d36=
-b31d66c@ford.com/
-> >
-> > After modifying emulation_flags_ok() with a new NS16550 vUART
-> > configuration switch passed from the toolstack for the HVM
-> > case, I decided to look into how to improve emulation_flags_ok().
-> > ---
-> >  xen/arch/x86/domain.c | 29 +++++++++++------------------
-> >  1 file changed, 11 insertions(+), 18 deletions(-)
->=20
-> There is a readability win, yes.
->=20
-> > --- a/xen/arch/x86/domain.c
-> > +++ b/xen/arch/x86/domain.c
-> > @@ -750,25 +750,18 @@ static bool emulation_flags_ok(const struct domai=
-n *d, uint32_t emflags)
-> >      BUILD_BUG_ON(X86_EMU_ALL !=3D XEN_X86_EMU_ALL);
-> >  #endif
-> >
-> > -    if ( is_hvm_domain(d) )
-> > -    {
-> > -        if ( is_hardware_domain(d) &&
-> > -             emflags !=3D (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAP=
-IC) )
-> > -            return false;
-> > -        if ( !is_hardware_domain(d) &&
-> > -             /* HVM PIRQ feature is user-selectable. */
-> > -             (emflags & ~X86_EMU_USE_PIRQ) !=3D
-> > -             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
-> > -             emflags !=3D X86_EMU_LAPIC )
-> > -            return false;
-> > -    }
-> > -    else if ( emflags !=3D 0 && emflags !=3D X86_EMU_PIT )
-> > -    {
-> > -        /* PV or classic PVH. */
-> > -        return false;
-> > -    }
-> > +    /* PV or classic PVH */
-> > +    if ( !is_hvm_domain(d) )
-> > +        return emflags =3D=3D 0 || emflags =3D=3D XEN_X86_EMU_PIT;
->=20
-> What's "classic PVH" here? This got to be PVHv1, which is dead. As you to=
-uch /
-> move such a comment, you want to adjust it so it's at least no longer sta=
-le.
+nmi_apply_alternatives() is soon going to need to dispatch to multiple
+functions, and a force parameter is not a good way of passing information.
 
-Looks like the comment should say "PV".
+Introduce ALT_INSNS and ALT_CALLS to pass in at the top level to select the
+operation(s) desired.  They represent what will happen when we've separated
+the altcalls out of the general alternative instructions infrastructure,
+although in the short term we still need to synthesise the force parameter for
+_apply_alternatives().
 
->=20
-> > -    return true;
-> > +    /* HVM */
-> > +    if ( is_hardware_domain(d) )
-> > +        return emflags =3D=3D (XEN_X86_EMU_LAPIC |
-> > +                           XEN_X86_EMU_IOAPIC |
-> > +                           XEN_X86_EMU_VPCI);
-> > +
-> > +    return (emflags & ~XEN_X86_EMU_OPTIONAL) =3D=3D XEN_X86_EMU_BASELI=
-NE ||
-> > +            emflags =3D=3D XEN_X86_EMU_LAPIC;
->=20
-> There was a comment about X86_EMU_USE_PIRQ being optional, which you've l=
-ost
-> together with (only) that (i.e. not at the same time including vPCI) opti=
-onality.
->=20
-> Furthermore you move from X86_EMU_* namespace to XEN_X86_EMU_* one withou=
-t even
-> mentioning that (and the reason to do so) in the description. Aiui the fu=
-nction
-> deliberately uses the internal names, not the public interface ones.
->=20
-> Jan
+Move two externs to reduce their scope a little.
+
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/alternative.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
+index d1a3b7ea7ca6..9aa591b364a4 100644
+--- a/xen/arch/x86/alternative.c
++++ b/xen/arch/x86/alternative.c
+@@ -19,8 +19,6 @@
+ 
+ #define MAX_PATCH_LEN (255-1)
+ 
+-extern struct alt_instr __alt_instructions[], __alt_instructions_end[];
+-
+ #ifdef K8_NOP1
+ static const unsigned char k8nops[] init_or_livepatch_const = {
+     K8_NOP1,
+@@ -387,9 +385,13 @@ int apply_alternatives(struct alt_instr *start, struct alt_instr *end)
+ }
+ #endif
+ 
++#define ALT_INSNS (1U << 0)
++#define ALT_CALLS (1U << 1)
+ static unsigned int __initdata alt_todo;
+ static unsigned int __initdata alt_done;
+ 
++extern struct alt_instr __alt_instructions[], __alt_instructions_end[];
++
+ /*
+  * At boot time, we patch alternatives in NMI context.  This means that the
+  * active NMI-shadow will defer any further NMIs, removing the slim race
+@@ -419,7 +421,7 @@ static int __init cf_check nmi_apply_alternatives(
+         flush_local(FLUSH_TLB_GLOBAL);
+ 
+         rc = _apply_alternatives(__alt_instructions, __alt_instructions_end,
+-                                 alt_done);
++                                 alt_todo == ALT_CALLS);
+         if ( rc )
+             panic("Unable to apply alternatives: %d\n", rc);
+ 
+@@ -442,7 +444,7 @@ static int __init cf_check nmi_apply_alternatives(
+  * This routine is called with local interrupt disabled and used during
+  * bootup.
+  */
+-static void __init _alternative_instructions(bool force)
++static void __init _alternative_instructions(unsigned int what)
+ {
+     unsigned int i;
+     nmi_callback_t *saved_nmi_callback;
+@@ -460,7 +462,7 @@ static void __init _alternative_instructions(bool force)
+     ASSERT(!local_irq_is_enabled());
+ 
+     /* Set what operation to perform /before/ setting the callback. */
+-    alt_todo = 1u << force;
++    alt_todo = what;
+     barrier();
+ 
+     /*
+@@ -490,12 +492,12 @@ static void __init _alternative_instructions(bool force)
+ void __init alternative_instructions(void)
+ {
+     arch_init_ideal_nops();
+-    _alternative_instructions(false);
++    _alternative_instructions(ALT_INSNS);
+ }
+ 
+ void __init boot_apply_alt_calls(void)
+ {
+     local_irq_disable();
+-    _alternative_instructions(true);
++    _alternative_instructions(ALT_CALLS);
+     local_irq_enable();
+ }
+-- 
+2.39.5
 
 
