@@ -4,32 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED72C369D1
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 14:51:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.964868.1355558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FF3C369CB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 14:56:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.964882.1355580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7bRe-0000tc-Oe; Wed, 23 Apr 2025 14:51:26 +0000
+	id 1u7bWj-0001zM-Ei; Wed, 23 Apr 2025 14:56:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 964868.1355558; Wed, 23 Apr 2025 14:51:26 +0000
+Received: by outflank-mailman (output) from mailman id 964882.1355580; Wed, 23 Apr 2025 14:56:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7bRe-0000tV-M2; Wed, 23 Apr 2025 14:51:26 +0000
-Received: by outflank-mailman (input) for mailman id 964868;
- Wed, 23 Apr 2025 14:51:25 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anthony@xenproject.org>) id 1u7bRd-0000tP-KI
- for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 14:51:25 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1u7bRd-00H7uE-0j;
- Wed, 23 Apr 2025 14:51:25 +0000
-Received: from [2a01:e0a:1da:8420:b77:bd5:6e45:7633] (helo=l14)
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1u7bRc-00EJqh-32;
- Wed, 23 Apr 2025 14:51:25 +0000
+	id 1u7bWj-0001zF-C0; Wed, 23 Apr 2025 14:56:41 +0000
+Received: by outflank-mailman (input) for mailman id 964882;
+ Wed, 23 Apr 2025 14:56:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xLCI=XJ=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
+ id 1u7bWh-0001z6-DS
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 14:56:39 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2564cbe0-2053-11f0-9ffb-bf95429c2676;
+ Wed, 23 Apr 2025 16:56:34 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C8CFD44CF3;
+ Wed, 23 Apr 2025 14:56:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDCC6C4CEE3;
+ Wed, 23 Apr 2025 14:56:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,46 +43,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date;
-	bh=ZMUdDQeYf0Mz/yAiP1UoRcaMoDSSQYKu6rtE9bZNjuc=; b=4oelYfjtXfFUGL07zS/XMZJM4I
-	IteRILWLh/UVzSG3bcknhbwWmKKrTK3NEwyzryTOK247Fk7/9ayFLuXsgSD2b6/dnXFh9nldAvGUj
-	UDcMT/LfeIbd0dgRwjclH6MFThZO89WTUc+mGJ3jTUWch1WhCF/PbbDlKEvNwhg9RcZA=;
-Date: Wed, 23 Apr 2025 16:51:23 +0200
-From: Anthony PERARD <anthony@xenproject.org>
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2 1/2] tools/libxl: Skip invalid IRQs
-Message-ID: <aAj-a3wwNWCjKPdl@l14>
-References: <20250418210550.542456-1-jason.andryuk@amd.com>
- <20250418210550.542456-2-jason.andryuk@amd.com>
+X-Inumbo-ID: 2564cbe0-2053-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1745420192;
+	bh=u4ZJEi5IiPiWfvZO1/8sPTqDP3oVUZ4o7KhWtxYqF7Y=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=HcMyYKV5wh/ZRRx9r85aaHoPNkEQZBfUbeguEkAFzg0u9Y/GIqwRpEpsYFBmI0upJ
+	 iVemyJ32bgqmx6LW9PBgLJaHI5S4B5R4r0vsxWnf79CIxuYeKnhoGQwu7XGexnxqQt
+	 CTh9O6iZ96OhGCPtCQTN5Gk1l6BFRUJvuVQOQ6uA=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	patches@lists.linux.dev,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org,
+	Kees Cook <kees@kernel.org>,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 6.1 025/291] xen/mcelog: Add __nonstring annotations for unterminated strings
+Date: Wed, 23 Apr 2025 16:40:14 +0200
+Message-ID: <20250423142625.430159156@linuxfoundation.org>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250423142624.409452181@linuxfoundation.org>
+References: <20250423142624.409452181@linuxfoundation.org>
+User-Agent: quilt/0.68
+X-stable: review
+X-Patchwork-Hint: ignore
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250418210550.542456-2-jason.andryuk@amd.com>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 18, 2025 at 05:05:49PM -0400, Jason Andryuk wrote:
-> A PCI device's irq field is an 8-bit number.  A value of 0xff indicates
-> that the device IRQ is not connected.  Additionally, the Linux ACPI code
-> can convert these 0xff values to IRQ_NOTCONNECTED(0x80000000) because
-> "0x80000000 is guaranteed to be outside the available range of
-> interrupts and easy to distinguish from other possible incorrect
-> values."  When the hypercall to assign that IRQ fails, device
-> passthrough as a whole fails.
-> 
-> Add checking for a valid IRQ and skip the IRQ handling for PCI devices
-> outside that range.  This allows for passthrough of devices without
-> legacy IRQs.
-> 
-> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+6.1-stable review patch.  If anyone has any objections, please let me know.
 
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+------------------
 
-Thanks,
+From: Kees Cook <kees@kernel.org>
 
+[ Upstream commit 1c3dfc7c6b0f551fdca3f7c1f1e4c73be8adb17d ]
+
+When a character array without a terminating NUL character has a static
+initializer, GCC 15's -Wunterminated-string-initialization will only
+warn if the array lacks the "nonstring" attribute[1]. Mark the arrays
+with __nonstring to and correctly identify the char array as "not a C
+string" and thereby eliminate the warning.
+
+Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=117178 [1]
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org
+Signed-off-by: Kees Cook <kees@kernel.org>
+Acked-by: Juergen Gross <jgross@suse.com>
+Message-ID: <20250310222234.work.473-kees@kernel.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ include/xen/interface/xen-mca.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/xen/interface/xen-mca.h b/include/xen/interface/xen-mca.h
+index 464aa6b3a5f92..1c9afbe8cc260 100644
+--- a/include/xen/interface/xen-mca.h
++++ b/include/xen/interface/xen-mca.h
+@@ -372,7 +372,7 @@ struct xen_mce {
+ #define XEN_MCE_LOG_LEN 32
+ 
+ struct xen_mce_log {
+-	char signature[12]; /* "MACHINECHECK" */
++	char signature[12] __nonstring; /* "MACHINECHECK" */
+ 	unsigned len;	    /* = XEN_MCE_LOG_LEN */
+ 	unsigned next;
+ 	unsigned flags;
 -- 
-Anthony PERARD
+2.39.5
+
+
+
+um: ntf-flags
+       -
+-        name: type
++        name: ndm-type
+         type: u8
+         enum: rtm-type
+   -
+-- 
+2.39.5
+
+
+
 
