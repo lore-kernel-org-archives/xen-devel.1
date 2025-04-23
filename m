@@ -4,33 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BCFC369D1
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 14:28:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.964831.1355524 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 412B8C369CB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 14:41:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.964843.1355534 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7b5h-0003EX-LE; Wed, 23 Apr 2025 14:28:45 +0000
+	id 1u7bHX-0006Sm-LS; Wed, 23 Apr 2025 14:40:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 964831.1355524; Wed, 23 Apr 2025 14:28:45 +0000
+Received: by outflank-mailman (output) from mailman id 964843.1355534; Wed, 23 Apr 2025 14:40:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7b5h-0003EQ-Ig; Wed, 23 Apr 2025 14:28:45 +0000
-Received: by outflank-mailman (input) for mailman id 964831;
- Wed, 23 Apr 2025 14:28:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u7bHX-0006Sf-Ir; Wed, 23 Apr 2025 14:40:59 +0000
+Received: by outflank-mailman (input) for mailman id 964843;
+ Wed, 23 Apr 2025 14:40:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IBP9=XJ=flex--seanjc.bounces.google.com=3GfkIaAYKCXYmYUhdWaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@srs-se1.protection.inumbo.net>)
- id 1u7b5g-0003EK-Me
- for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 14:28:44 +0000
-Received: from mail-pg1-x549.google.com (mail-pg1-x549.google.com
- [2607:f8b0:4864:20::549])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 415b1378-204f-11f0-9ffb-bf95429c2676;
- Wed, 23 Apr 2025 16:28:42 +0200 (CEST)
-Received: by mail-pg1-x549.google.com with SMTP id
- 41be03b00d2f7-afd3f1adff7so790294a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 23 Apr 2025 07:28:42 -0700 (PDT)
+ <SRS0=Oonq=XJ=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
+ id 1u7bHV-0006SZ-EN
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 14:40:58 +0000
+Received: from 6.mo582.mail-out.ovh.net (6.mo582.mail-out.ovh.net
+ [87.98.177.69]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f6b75f6a-2050-11f0-9eb0-5ba50f476ded;
+ Wed, 23 Apr 2025 16:40:56 +0200 (CEST)
+Received: from director6.ghost.mail-out.ovh.net (unknown [10.108.17.1])
+ by mo582.mail-out.ovh.net (Postfix) with ESMTP id 4ZjMGv2N8Kz1W0d
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Apr 2025 14:40:55 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-zn847 (unknown [10.110.164.38])
+ by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 0FD0C1FD68;
+ Wed, 23 Apr 2025 14:40:53 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.98])
+ by ghost-submission-5b5ff79f4f-zn847 with ESMTPSA
+ id vwIvLvX7CGg+igEA20Vi8Q
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Wed, 23 Apr 2025 14:40:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,88 +48,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 415b1378-204f-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1745418521; x=1746023321; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=40rtvLOwDeuUbiOuCoW1t5olyX8gz8CZJ5ahJ10eU+w=;
-        b=eV9iSR2067jWRO2+DiGAkYhnPzWljXvNKBxPPsayGMIhZj6engrHy/iDUd+pBQt3dZ
-         WcuG8+DInS+hWWTwk5aflG8zK1ud/f5gTbL7dcQd6YIr1bQnws9MF59VCikjXXmDsrbN
-         D/5QbFz3IgzN2QQfkDpzM4hJMRoWSdFFbzJ0P6lKHs8BBA6yS0bva64tuvBv1/+dI3u7
-         vfUs1nFinDYdZMz/0Z9iRCrp2fac2tDA9XvBiiFb+o1XYm9bOR/iDzfYw8vd3zeW50gu
-         UZojhdPOL5R3EZ5Plj2uINGnYGhu5tJplfeGdoQLraDNuwIiSfuBl+mG/cpqNM9y63DK
-         tO9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745418521; x=1746023321;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=40rtvLOwDeuUbiOuCoW1t5olyX8gz8CZJ5ahJ10eU+w=;
-        b=SS0WhHJ5NjSMx10ldIXNtPhvUzS9qft79/K5sVPSCDIXu8BQGBd5uaNAudwLjWQk6D
-         AN1rgTpcw/07r539DIKmvNe3Xj143f7pv24McKMbJ1EXs+lFspvvbX42NNGr8qT0xKAJ
-         fJ7ZzAOju/6hklqD51I6esdjpnQDh2MsDsNreuAM14pnopZP7mPwKoyMQ5pas+fgDGJm
-         mP2FuvrdysUDv6SWsRLWQeTJIoT7wRvY0sRxtTMP5fzvaWjAfCm72hACBI1xjbjkBOXT
-         hdXk3ao7YPWMgPqsG9NR3i7sVo9Ltp/W5dMMYIts2/73uxUjpSWK7/k2hge2W26NyNBa
-         7ARw==
-X-Forwarded-Encrypted: i=1; AJvYcCXgmmdlWL1V/BrFerIHUspNL6G7AajWTKJbFpVwqHLUKYv72foLBHhBEWaoHYMkCSd+ZqBM8e1vuhg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyPtVkxuRC06w65fZzqfOH+Yg3Tms0XYKwFTVdcBDjRHVansCbx
-	j2EGfZMpluj+gqeeqsB8uXN2uJ94ZDoxG2Ru/qA6zHEjfFGEFVGeT0KBN3mn4+D3Me5gY1UfQ4V
-	PQg==
-X-Google-Smtp-Source: AGHT+IEHFWhYz0oAsCQCzYVGgs17eJ2RdOv2pA+CJ/89PxdUza1pyAyGtkAfHJad1QU5DCSNGF6B8Gtgtdo=
-X-Received: from pjxx4.prod.google.com ([2002:a17:90b:58c4:b0:301:1ea9:63b0])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90a:c2cd:b0:2fa:21d3:4332
- with SMTP id 98e67ed59e1d1-309df187b6dmr4574319a91.12.1745418521285; Wed, 23
- Apr 2025 07:28:41 -0700 (PDT)
-Date: Wed, 23 Apr 2025 07:28:39 -0700
-In-Reply-To: <20250422082216.1954310-4-xin@zytor.com>
-Mime-Version: 1.0
-References: <20250422082216.1954310-1-xin@zytor.com> <20250422082216.1954310-4-xin@zytor.com>
-Message-ID: <aAj5F9IZXG7MB0ai@google.com>
-Subject: Re: [RFC PATCH v2 03/34] x86/msr: Rename rdpmcl() to rdpmcq()
-From: Sean Christopherson <seanjc@google.com>
-To: "Xin Li (Intel)" <xin@zytor.com>
-Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org, 
-	linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-pm@vger.kernel.org, 
-	linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org, 
-	linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	netdev@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, acme@kernel.org, 
-	jgross@suse.com, andrew.cooper3@citrix.com, peterz@infradead.org, 
-	namhyung@kernel.org, mark.rutland@arm.com, alexander.shishkin@linux.intel.com, 
-	jolsa@kernel.org, irogers@google.com, adrian.hunter@intel.com, 
-	kan.liang@linux.intel.com, wei.liu@kernel.org, ajay.kaher@broadcom.com, 
-	bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com, 
-	pbonzini@redhat.com, vkuznets@redhat.com, luto@kernel.org, 
-	boris.ostrovsky@oracle.com, kys@microsoft.com, haiyangz@microsoft.com, 
-	decui@microsoft.com
-Content-Type: text/plain; charset="us-ascii"
+X-Inumbo-ID: f6b75f6a-2050-11f0-9eb0-5ba50f476ded
+Authentication-Results:garm.ovh; auth=pass (GARM-98R002be13997d-0a89-4925-a797-54a9fae4682a,
+                    E44920665798B4DCDE3BF656E3E0060933CCD35A) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.181.178
+Date: Wed, 23 Apr 2025 17:40:44 +0300
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	ross.philipson@oracle.com, trenchboot-devel@googlegroups.com
+Subject: Re: [PATCH 02/21] include/xen/slr_table.h: Secure Launch Resource
+ Table definitions
+Message-ID: <aAj77DAIofkTJ6Dm@MjU3Nj>
+References: <cover.1745172094.git.sergii.dmytruk@3mdeb.com>
+ <1cf5d940e666b2b292fc84ed1fbb8a95cd57f027.1745172094.git.sergii.dmytruk@3mdeb.com>
+ <6bd0a24d-4f16-4d21-a660-c29407952bb2@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <6bd0a24d-4f16-4d21-a660-c29407952bb2@citrix.com>
+X-Ovh-Tracer-Id: 18155980426681103516
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeeikeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggugfgjsehtkeertddttddunecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepueeiudeuveffkeetveelgeehhffgheehgfegjeekleffgeelffetjeefieetleeknecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrdelkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehkedvmgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=YQ5EvYS0UX2BxNPaB09EH3dTnNR9Dl+4R3DL3BrOTVI=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1745419255; v=1;
+ b=kbxR1eD51RqHUa/SWWyEA0iqvX5+VHya2hVXuUY4y4xQV0r5bVRGvVHxXSpeeC+nFjHY+Eej
+ DPfEAyUCYRmiNSMXhskxg4ksrdekd2j75GM+EkT7GmixRzrHJsrZDSLMukCX/t8xIvcAIg9rbhD
+ NDbrMntrzWvwqYGSv1+BucsK1r4psd5G5rjNV+i1E7uKvj0LG9P1rDgX1LF5LwEO9t8MstTlwA4
+ 3iX+MG6ozLywo15VvX0yl7H5c7Btf1cnFXf3ITeRyt/zHvZfIU2Y5AUMJ/QuMS9izmhLeEZvx4k
+ JeBq+Gid7+IoKgWZTnL1lLgF4Cy7LuqHp/4SJZ3kne2Vg==
 
-On Tue, Apr 22, 2025, Xin Li (Intel) wrote:
-> Signed-off-by: Xin Li (Intel) <xin@zytor.com>
-> ---
->  arch/x86/events/amd/uncore.c              |  2 +-
->  arch/x86/events/core.c                    |  2 +-
->  arch/x86/events/intel/core.c              |  4 ++--
->  arch/x86/events/intel/ds.c                |  2 +-
->  arch/x86/include/asm/msr.h                |  2 +-
->  arch/x86/include/asm/paravirt.h           |  2 +-
->  arch/x86/kernel/cpu/resctrl/pseudo_lock.c | 12 ++++++------
->  7 files changed, 13 insertions(+), 13 deletions(-)
-> 
-> diff --git a/arch/x86/events/amd/uncore.c b/arch/x86/events/amd/uncore.c
-> index f231e1078e51..b9933ab3116c 100644
-> --- a/arch/x86/events/amd/uncore.c
-> +++ b/arch/x86/events/amd/uncore.c
-> @@ -152,7 +152,7 @@ static void amd_uncore_read(struct perf_event *event)
->  	if (hwc->event_base_rdpmc < 0)
->  		rdmsrq(hwc->event_base, new);
->  	else
-> -		rdpmcl(hwc->event_base_rdpmc, new);
-> +		rdpmcq(hwc->event_base_rdpmc, new);
+On Tue, Apr 22, 2025 at 09:23:02PM +0100, Andrew Cooper wrote:
+> On 22/04/2025 4:06 pm, Sergii Dmytruk wrote:
+> > diff --git a/xen/include/xen/slr_table.h b/xen/include/xen/slr_table.h
+> > new file mode 100644
+> > index 0000000000..e9dbac5d0a
+> > --- /dev/null
+> > +++ b/xen/include/xen/slr_table.h
+> > @@ -0,0 +1,274 @@
+> > +/* SPDX-License-Identifier: GPL-3.0-or-later */
+>
+> I'm sorry, but we cannot accept this submission.
+>
+> Xen is GPL-2-only, and can only accept source code compatible with this
+> license.  Everything else in this series appears to be compatible (and
+> therefore is fine), but this patch is not.
+>
+> ~Andrew
 
-Now that rdpmc() is gone, i.e. rdpmcl/rdpmcq() is the only helper, why not simply
-rename rdpmcl() => rdpmc()?  I see no point in adding a 'q' qualifier; it doesn't
-disambiguate anything and IMO is pure noise.
+I think the license comes from GRUB's version which is GPL-3-or-later
+while the original Linux header file is GPL-2.  Linux patches is really
+the source here.  I don't think anything prevents use of the header
+under GPL-2, so I'll change the license in v2.  Adding Ross Philipson to
+CC as the original author of both Linux and GRUB versions just in case.
 
