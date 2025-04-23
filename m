@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB4D8C369CB
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 08:52:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.964215.1355071 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 252ABC369CB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Apr 2025 08:57:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.964234.1355082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7VqW-00020g-Tj; Wed, 23 Apr 2025 08:52:44 +0000
+	id 1u7Vv7-0002ke-GN; Wed, 23 Apr 2025 08:57:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 964215.1355071; Wed, 23 Apr 2025 08:52:44 +0000
+Received: by outflank-mailman (output) from mailman id 964234.1355082; Wed, 23 Apr 2025 08:57:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7VqW-00020Z-Qx; Wed, 23 Apr 2025 08:52:44 +0000
-Received: by outflank-mailman (input) for mailman id 964215;
- Wed, 23 Apr 2025 08:52:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u7Vv7-0002kX-CT; Wed, 23 Apr 2025 08:57:29 +0000
+Received: by outflank-mailman (input) for mailman id 964234;
+ Wed, 23 Apr 2025 08:57:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZaJ6=XJ=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u7VqU-0001cu-JW
- for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 08:52:43 +0000
-Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4f0dfc1d-2020-11f0-9ffb-bf95429c2676;
- Wed, 23 Apr 2025 10:52:40 +0200 (CEST)
-Received: from [192.168.7.202] ([71.202.166.45]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53N8pdPU3180274
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Wed, 23 Apr 2025 01:51:39 -0700
+ (envelope-from <SRS0=rvAI=XJ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1u7Vv6-0002kQ-5x
+ for xen-devel@lists.xenproject.org; Wed, 23 Apr 2025 08:57:28 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fae6e0c7-2020-11f0-9eb0-5ba50f476ded;
+ Wed, 23 Apr 2025 10:57:27 +0200 (CEST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-39c1efc4577so3233421f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Apr 2025 01:57:27 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39f069df9fcsm12811759f8f.16.2025.04.23.01.57.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Apr 2025 01:57:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,240 +47,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f0dfc1d-2020-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53N8pdPU3180274
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745398303;
-	bh=6kmN/+GrZw4rC3Ys6pLoNaD/Wf1DQKhvLOyIykqio94=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=dl3P7bXFsCov3PgD20ymOIC1FG1eSAGxGe1DQbY2LG6O/NrMHMVBlGAk+JDp60Fgf
-	 +Pnv70fyGnLeBBbiUkB5NfR80TUqf9PoUmAU9iHHDMoRGzCfwBcwkKjONfEfh6RU3y
-	 Xd+yt6SiKMOPKs7smA0LIwhSCJBbmEF2pgXMq1hR7ce2lmLZxa2oozrZU5Xx64YBSy
-	 em5fezjfad3PGQcOwdbxM11bSPQVT17+MM/RZhPGMfA5z1Fo8GISFAxn0dAWTxVqKs
-	 NapT16DwTl3Gg6ZXI0V3IlW3sqxII7MOJohN3YgP4fSuVYSwWgYi1N7Og/gNcKFK4d
-	 023Wanxii0hkw==
-Message-ID: <f7198308-e8f8-4cc5-b884-24bc5f408a2a@zytor.com>
-Date: Wed, 23 Apr 2025 01:51:38 -0700
+X-Inumbo-ID: fae6e0c7-2020-11f0-9eb0-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1745398646; x=1746003446; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=dY6sI1kfD+bgQVJ9TFVem7ucYgEopEx44l7CgXAfIfc=;
+        b=XVTYTLvg+JmOeXGlpUOfuJLr5WAcPTWEJnazvS48ljRx/GHTicEBdkTSfqdee+/fG1
+         dpDcHmj4QEUMGvC54wLX1+h38mWcm3RLtvE1YvTiNRPnn0YZhQCgQZJpKn6CkYD0N3iF
+         HP+opHI4Zz0A1RxNCtBmg6wNBgT4PICFi5oZADwJfDj//ao/F8wPXG/50+F4Idzl/SXV
+         Z6R5gdgFkZOG0NCHqhw1IGJsFqz5IwFADFjiab8AjuTvKu0XS9xKjKHRZCSS2iXL5p2U
+         DZ7hewhUjMbgEX1wczyiWFrNmgz5TUpwEAL6VMGbQ26x00jZJb7q4pLIDHbWWkVNngx7
+         V9yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745398646; x=1746003446;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dY6sI1kfD+bgQVJ9TFVem7ucYgEopEx44l7CgXAfIfc=;
+        b=uPG2Qa008fx2BDW+DLnVL60FTxSVCwqFaxnIWkIJSmk0lmrgA0LFb/dC90yuNW2CNw
+         ci+tlJzH4u/ITNSG/tf3LelR0kUP6faTAHCq6Dj9kjnbsJMC8U9G1ZF7uAAsrx4jKzUJ
+         1OF0pA234XtvQRAAlhFssGYKzONH3tJ9FjFEKjHr5ji/v0hSPo9JPKjXAEJs5u4f9iEE
+         SV6OFzSwJKtzT70IjxWvKbWqBQ/aZZyx08qWRNxP/UVb9HuCx5cAnGHBEwBevMEnCH6v
+         TDhUtA8dYuX4CsiJtC8pp6B5X07PD6kzsduxVMRokbtUzGMozxC7rooaX4LRrQnanWKi
+         A6WQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWfn4Dy20MiD0kIa3UzL9sMYcg1V6a3C55GvBh8AZDESmMLYVyVGVivjuHiFqzinXqDWbiEf4xrAGM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YweO5XsTBjW7EvA1dKnTneIC72sLFk0zZ09YHsgsRYMvsfYOrC5
+	mmVF+USx72FRz4SRHZoX3RyzoNAmfP/dQxDCKmOf988IMprsSGWJFiQP9Ys9bY916Usp+02aL2I
+	=
+X-Gm-Gg: ASbGncuqmgfBbrAmqZpPqlLpoB0uCZPZUzvEyW0Zqmmz43VkMhqhhUrBNZdECC5PQB6
+	vWydYXMv2rMCENZKlQrpu8GLD53zYJIjjbofEmcP1jhrVLSl6hq+PoHdb2Pa6jQi9E4UwBwU3yo
+	PrvLDJg0f8rjyrJ8BR0/J9/nj2zBWvW7O05DpS3rpjxC6aYUadPQeRir/+g6ItdtNUZIE4SLGB6
+	TVJFgULpfQ05e02V1kP6WULiamKD77C9DWDdcGZACHoV0dSt9RGQtnoJ+WNaqTgYLjDbRcOc5Lg
+	La+715u8PPvgGaXpEkfxyeVXixgUquY/8nxAaccW5A250yUvJizn6r87vUoFSKl1SN2VCX+Gw5Y
+	IIyra2HKc7wSeS2ak1OyjN3IxTg==
+X-Google-Smtp-Source: AGHT+IEiZdZF+jALvaCxg9Uy3GSsIzUZGBi6I9mboqb3H+CbMZRDWSFyTdvfBNnvIWZItEjr34LLIQ==
+X-Received: by 2002:a5d:5f54:0:b0:391:22a9:4408 with SMTP id ffacd0b85a97d-39efba4ad94mr14654862f8f.16.1745398646259;
+        Wed, 23 Apr 2025 01:57:26 -0700 (PDT)
+Message-ID: <2de9f9a8-a785-445b-9ca3-97c6ba7285d6@suse.com>
+Date: Wed, 23 Apr 2025 10:57:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 21/34] x86/msr: Utilize the alternatives mechanism
- to write MSR
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
-        linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        virtualization@lists.linux.dev, linux-pm@vger.kernel.org,
-        linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
-        netdev@vger.kernel.org, platform-driver-x86@vger.kernel.org
-Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        acme@kernel.org, andrew.cooper3@citrix.com, peterz@infradead.org,
-        namhyung@kernel.org, mark.rutland@arm.com,
-        alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-        irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
-        wei.liu@kernel.org, ajay.kaher@broadcom.com,
-        bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
-        pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
-        luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
-        haiyangz@microsoft.com, decui@microsoft.com
-References: <20250422082216.1954310-1-xin@zytor.com>
- <20250422082216.1954310-22-xin@zytor.com>
- <b2624e84-6fab-44a3-affc-ce0847cd3da4@suse.com>
+Subject: Re: [PATCH] x86/intel: workaround several MONITOR/MWAIT errata
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20250417161913.14661-1-roger.pau@citrix.com>
+ <463cd02d-febc-4878-90b5-9272f91b9033@suse.com>
+ <aAioMDTUgjn3MJS2@macbook.lan>
 Content-Language: en-US
-From: Xin Li <xin@zytor.com>
-Autocrypt: addr=xin@zytor.com; keydata=
- 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
- l75w1xInsg==
-In-Reply-To: <b2624e84-6fab-44a3-affc-ce0847cd3da4@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <aAioMDTUgjn3MJS2@macbook.lan>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 4/22/2025 2:57 AM, Jürgen Groß wrote:
-> On 22.04.25 10:22, Xin Li (Intel) wrote:
->> The story started from tglx's reply in [1]:
+On 23.04.2025 10:45, Roger Pau Monné wrote:
+> On Tue, Apr 22, 2025 at 10:26:37AM +0200, Jan Beulich wrote:
+>> On 17.04.2025 18:19, Roger Pau Monne wrote:
+>>> @@ -380,6 +380,43 @@ static void probe_c3_errata(const struct cpuinfo_x86 *c)
+>>>      }
+>>>  }
+>>>  
+>>> +/*
+>>> + * APL30: One use of the MONITOR/MWAIT instruction pair is to allow a logical
+>>> + * processor to wait in a sleep state until a store to the armed address range
+>>> + * occurs. Due to this erratum, stores to the armed address range may not
+>>> + * trigger MWAIT to resume execution.
+>>> + *
+>>> + * ICX143: Under complex microarchitectural conditions, a monitor that is armed
+>>> + * with the MWAIT instruction may not be triggered, leading to a processor
+>>> + * hang.
+>>> + *
+>>> + * LNL030: Problem P-cores may not exit power state Core C6 on monitor hit.
 >>
->>    For actual performance relevant code the current PV ops mechanics
->>    are a horrorshow when the op defaults to the native instruction.
+>> I didn't manage to spot all three spec updates; none of these have a ucode fix,
+>> hence permitting the workaround to be avoided?
 >>
->>    look at wrmsrl():
+>> Since CPX is 3rd Gen Xeon Scalable just like ICX is, I'm surprised that one's
+>> unaffected. The most recent spec update there is a year old than ICX'es, so
+>> may simply be too old to include the erratum?
 >>
->>    wrmsrl(msr, val
->>     wrmsr(msr, (u32)val, (u32)val >> 32))
->>      paravirt_write_msr(msr, low, high)
->>        PVOP_VCALL3(cpu.write_msr, msr, low, high)
->>
->>    Which results in
->>
->>     mov    $msr, %edi
->>     mov    $val, %rdx
->>     mov    %edx, %esi
->>     shr    $0x20, %rdx
->>     call    native_write_msr
->>
->>    and native_write_msr() does at minimum:
->>
->>     mov    %edi,%ecx
->>     mov    %esi,%eax
->>     wrmsr
->>     ret
->>
->>    In the worst case 'ret' is going through the return thunk. Not to
->>    talk about function prologues and whatever.
->>
->>    This becomes even more silly for trivial instructions like STI/CLI
->>    or in the worst case paravirt_nop().
+>> Sunny Cove is used by further Icelake models - they're known to be unaffected?
 > 
-> This is nonsense.
+> FWIW, client IceLake also seems to be unaffected, so I don't really
+> know.  So far I've only found this issue in the ICX spec update.  The
+> fix for Linux limits this further to model 106 only.
 > 
-> In the non-Xen case the initial indirect call is directly replaced with
-> STI/CLI via alternative patching, while for Xen it is replaced by a direct
-> call.
-> 
-> The paravirt_nop() case is handled in alt_replace_call() by replacing the
-> indirect call with a nop in case the target of the call was paravirt_nop()
-> (which is in fact no_func()).
-> 
+>>> + * Force the sending of an IPI in those cases.
+>>> + */
+>>> +static void probe_mwait_errata(void)
+>>> +{
+>>> +    static const struct x86_cpu_id models[] = {
+>>> +        /* Apollo Lake */
+>>> +        INTEL_FAM6_MODEL(0x5C),
+>>> +        /* Ice Lake */
+>>> +        INTEL_FAM6_MODEL(0x6A),
+>>> +        INTEL_FAM6_MODEL(0x6C),
+>>> +        /* Lunar Lake */
+>>> +        INTEL_FAM6_MODEL(0xBD),
 >>
->>    The call makes only sense, when the native default is an actual
->>    function, but for the trivial cases it's a blatant engineering
->>    trainwreck.
+>> Use identifiers from intel-family.h here?
 > 
-> The trivial cases are all handled as stated above: a direct replacement
-> instruction is placed at the indirect call position.
-
-The above comment was given in 2023 IIRC, and you have addressed it.
-
+> Sure.
 > 
->> Later a consensus was reached to utilize the alternatives mechanism to
->> eliminate the indirect call overhead introduced by the pv_ops APIs:
+>>> +        { }
+>>> +    };
+>>> +#undef INTEL_FAM6_MODEL
+>>> +
+>>> +    if ( boot_cpu_has(X86_FEATURE_MONITOR) && !force_mwait_ipi_wakeup &&
+>>> +         x86_match_cpu(models) )
+>>> +    {
+>>> +        printk(XENLOG_WARNING
+>>> +               "Forcing IPI MWAIT wakeup due to CPU erratum\n");
+>>> +        force_mwait_ipi_wakeup = true;
+>>> +    }
+>>> +}
 >>
->>      1) When built with !CONFIG_XEN_PV, X86_FEATURE_XENPV becomes a
->>         disabled feature, preventing the Xen code from being built
->>         and ensuring the native code is executed unconditionally.
-> 
-> This is the case today already. There is no need for any change to have
-> this in place.
-> 
+>> Do we really need to cater for asymmetric systems? IOW can't we do this once
+>> on the BSP? Otherwise - why the use of boot_cpu_has() here? Oh, wait ...
 >>
->>      2) When built with CONFIG_XEN_PV:
+>>> @@ -406,6 +443,8 @@ static void Intel_errata_workarounds(struct cpuinfo_x86 *c)
+>>>  		__set_bit(X86_FEATURE_CLFLUSH_MONITOR, c->x86_capability);
+>>>  
+>>>  	probe_c3_errata(c);
+>>> +	if (c == &boot_cpu_data)
+>>> +		probe_mwait_errata();
+>>>  }
 >>
->>         2.1) If not running on the Xen hypervisor (!X86_FEATURE_XENPV),
->>              the kernel runtime binary is patched to unconditionally
->>              jump to the native MSR write code.
+>> ..., you do this for the BSP only. Then why's the function not __init and
+>> the global variable not __ro_after_init (and models[] __initconst)?
 >>
->>         2.2) If running on the Xen hypervisor (X86_FEATURE_XENPV), the
->>              kernel runtime binary is patched to unconditionally jump
->>              to the Xen MSR write code.
+>> (Later) Except that this path is also taken for S3 resume, from
+>> recheck_cpu_features(). This shouldn't alter the variable value anymore,
+>> though. A disagreement ought to result in recheck_cpu_features() to
+>> report failure. (Imo perhaps better to avoid the call above during resume.)
 > 
-> I can't see what is different here compared to today's state.
-> 
->>
->> The alternatives mechanism is also used to choose the new immediate
->> form MSR write instruction when it's available.
-> 
-> Yes, this needs to be added.
-> 
->> Consequently, remove the pv_ops MSR write APIs and the Xen callbacks.
-> 
-> I still don't see a major difference to today's solution.
+> I did consider to limit the call based on system_state, wasn't sure
+> whether that would be more churn than help.
 
-The existing code generates:
+The fundamental expectation is that such aspects don't changes across
+S3. I'd suggest to add the extra check, but I wouldn't insist; what I'd
+like to see is the variable becoming __ro_after_init, though (whichever
+way this is being arranged for).
 
-     ...
-     bf e0 06 00 00          mov    $0x6e0,%edi
-     89 d6                   mov    %edx,%esi
-     48 c1 ea 20             shr    $0x20,%rdx
-     ff 15 07 48 8c 01       call   *0x18c4807(%rip)  # <pv_ops+0xb8>
-     31 c0                   xor    %eax,%eax
-     ...
+> LNL030 has a reference to: "It may be possible for the BIOS to contain
+> a workaround for this erratum." so wasn't fully sure we wouldn't need
+> to check for this in all cores if there's some firmware fix for it
+> that Xen could identify.
 
-And on native, the indirect call instruction is patched to a direct call
-as you mentioned:
+Usually this means a ucode update (occasionally it may also be a chipset
+config that firmware can fiddle with), in which case we wouldn't
+normally (i.e. unless in critical situations) add a workaround at all.
 
-     ...
-     bf e0 06 00 00          mov    $0x6e0,%edi
-     89 d6                   mov    %edx,%esi
-     48 c1 ea 20             shr    $0x20,%rdx
-     e8 60 3e 01 00          call   <{native,xen}_write_msr> # direct
-     90                      nop
-     31 c0                   xor    %eax,%eax
-     ...
-
-
-This patch set generates assembly w/o CALL on native:
-
-     ...
-     e9 e6 22 c6 01          jmp    1f   # on native or nop on Xen
-     b9 e0 06 00 00          mov    $0x6e0,%ecx
-     e8 91 d4 fa ff          call   ffffffff8134ee80 <asm_xen_write_msr>
-     e9 a4 9f eb 00          jmp    ffffffff8225b9a0 <__x86_return_thunk>
-         ...
-1:  b9 e0 06 00 00          mov    $0x6e0,%ecx   # immediate form here
-     48 89 c2                mov    %rax,%rdx
-     48 c1 ea 20             shr    $0x20,%rdx
-     3e 0f 30                ds wrmsr
-     ...
-
-It's not a major change, but when it is patched to use the immediate 
-form MSR write instruction, it's straightforwardly streamlined.
-
-> 
-> Only the "paravirt" term has been eliminated.
-
-Yes.
-
-But a PV guest doesn't operate at the highest privilege level, which
-means MSR instructions typically result in a #GP fault.  I actually 
-think the pv_ops MSR APIs are unnecessary because of this inherent
-limitation.
-
-Looking at the Xen MSR code, except PMU and just a few MSRs, it falls
-back to executes native MSR instructions.  As MSR instructions trigger
-#GP, Xen takes control and handles them in 2 ways:
-
-   1) emulate (or ignore) a MSR operation and skip the guest instruction.
-
-   2) inject the #GP back to guest OS and let its #GP handler handle it.
-      But Linux MSR exception handler just ignores the MSR instruction
-      (MCE MSR exception will panic).
-
-So why not let Xen handle all the details which it already tries to do?
-(Linux w/ such a change may not be able to run on old Xen hypervisors.)
-
-BTW, if performance is a concern, writes to MSR_KERNEL_GS_BASE and
-MSR_GS_BASE anyway are hpyercalls into Xen.
-
-Thanks!
-     Xin
+Jan
 
