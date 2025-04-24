@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA9BBC369AB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A60BBC369C2
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Apr 2025 16:11:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.966537.1356758 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.966531.1356711 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7zAI-00038l-TX; Thu, 24 Apr 2025 16:11:06 +0000
+	id 1u7zA5-0001ql-Lq; Thu, 24 Apr 2025 16:10:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 966537.1356758; Thu, 24 Apr 2025 16:11:06 +0000
+Received: by outflank-mailman (output) from mailman id 966531.1356711; Thu, 24 Apr 2025 16:10:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7zAI-00038Y-Pw; Thu, 24 Apr 2025 16:11:06 +0000
-Received: by outflank-mailman (input) for mailman id 966537;
- Thu, 24 Apr 2025 16:11:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u7zA5-0001po-F7; Thu, 24 Apr 2025 16:10:53 +0000
+Received: by outflank-mailman (input) for mailman id 966531;
+ Thu, 24 Apr 2025 16:10:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/3PA=XK=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1u7zAH-0001nH-Rd
- for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 16:11:05 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20619.outbound.protection.outlook.com
- [2a01:111:f403:2405::619])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8c89994-2126-11f0-9eb2-5ba50f476ded;
- Thu, 24 Apr 2025 18:11:05 +0200 (CEST)
-Received: from BY5PR03CA0022.namprd03.prod.outlook.com (2603:10b6:a03:1e0::32)
- by LV3PR12MB9118.namprd12.prod.outlook.com (2603:10b6:408:1a1::10)
+ id 1u7zA4-0001nN-6D
+ for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 16:10:52 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20616.outbound.protection.outlook.com
+ [2a01:111:f403:2407::616])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id af942526-2126-11f0-9ffb-bf95429c2676;
+ Thu, 24 Apr 2025 18:10:49 +0200 (CEST)
+Received: from BYAPR08CA0020.namprd08.prod.outlook.com (2603:10b6:a03:100::33)
+ by DS5PPF78FC67EBA.namprd12.prod.outlook.com (2603:10b6:f:fc00::655)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.23; Thu, 24 Apr
- 2025 16:11:00 +0000
-Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
- (2603:10b6:a03:1e0:cafe::8f) by BY5PR03CA0022.outlook.office365.com
- (2603:10b6:a03:1e0::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.33 via Frontend Transport; Thu,
- 24 Apr 2025 16:10:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Thu, 24 Apr
+ 2025 16:10:46 +0000
+Received: from SJ5PEPF000001CC.namprd05.prod.outlook.com
+ (2603:10b6:a03:100:cafe::30) by BYAPR08CA0020.outlook.office365.com
+ (2603:10b6:a03:100::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.35 via Frontend Transport; Thu,
+ 24 Apr 2025 16:10:45 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
+ SJ5PEPF000001CC.mail.protection.outlook.com (10.167.242.41) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Thu, 24 Apr 2025 16:10:58 +0000
+ 15.20.8655.12 via Frontend Transport; Thu, 24 Apr 2025 16:10:45 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 11:10:54 -0500
+ 2025 11:10:41 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8c89994-2126-11f0-9eb2-5ba50f476ded
+X-Inumbo-ID: af942526-2126-11f0-9ffb-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EfHpcRYNOswSjvp5rIbFKSzm0YFibrJN61wgnlzoFMIfg5X0KY1D47cmPY10xJ6af2lgVrN4wNrDhEgnhDMS9Zvh/GEGmKk1KeokPBkn3OxrpD7DxlGBppMzoLP/vNthxbNPLN8wuvfybwMs0siimsF1LALfwqpj4BCGTqXKL1+FW/AQaE6BJBvj27xPwk8d9VFsMseCQ8hLw6009Mkkz2qcy7h+JigJ5yBJOmsWtTXwuGgMUT11LPuJTkCPFvh5WogljEnm+hR1Diqr24MGuHrEgcGwBYuvSY+abaqLEqFTYIf2+TCS8n3ffTQMS9+n71I1zTwnsP37ln3AyrwDgQ==
+ b=au0ONRxs4r21n/+cqzlGjIPQ/we2L2J5uuDDpAcqMVlo9GOhuz1zodIysbLkbVfuf72QgjfKu4xTi7FamJKeujO6j+4EZY0H7wBKrfN4ZrlW0bEeyiizrex1DUDfsVzaqAed+L2ljSk+zeXe9sfIfHjovMyHsYVnMkjv4sHfcr4FNuLz+nlV5wcNpRLVGzWHaETMMdPByuwUk0k3MrvrA8kIOLVPK27B2oZ8ag4EPxpRysmdR93kqQYVgO/Y/BVWwvYAJiCdlJwgUpu1w4mfx6Xpj7U5bMigv0awtJ1jN1+NELVSBqkVwuu2acihFOnXx+MiCGWKZFwONADWx5BdKg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQTbGW0kHXZziuUHgHskmnnUaC6QlbCAFsioAwpmZ8w=;
- b=L2AeSARIDi7pmHMu+3fsEZL1ldXRS/QNreje1ikOH43q7BCY/RF1UJ8IQIGwU9XATOdCF8+KVAjLvMOhESbXSwEDpgZVUcRQoemApe7fpAw0JZtSVamfh/8qngyx5+v3/6KphlcYRLwgxNRM6GGnpeNg22479jwt1L8hfahB53mtWM6FL4PwFrWzW/bPG5ST2c3z7Ejp+Qv5HEVMAlUrKVLRUScSRru9umEmz3A3hoFVUZQIZZeiyI99Tqv/RQd1HGy6c6KLdHfhtwAC7IF7bxsAJbySCAmCAtie3wHyEa7p2dZME8n7UWJS7PSZDeqi2evYj5cXchjhQJj0JcBuWg==
+ bh=wEc/HNT0KESzfboUNJTrwBwewE4li5sM04iz6EBbZLA=;
+ b=Z8fTOysRth74p/g6tvMdsRd17+Cs5l28fgJqbeGrfcBXeXtP6NKWQ6tbGlOawOzpbMARlPyZ+uZlre2hAMZOGAQSgXjWFLL175K6R/Kntu7JC/CX3KaNoZmqIcUnMJjyCBw60Q5ds1nHE1tUBnVHHgl0hwkilLFKvzl/KkJ2ODCG1h430KsKRIEru5jjwP/AmDc7JcvxbLR8RerpECcAl2556M/bWIw17cgLclcpADIEl2bJcKKmKoeBuHP22wqOclHKW9zqaV9adv5URfG/INTAXMygvZqgC4XX3q68U6nYobnFwBrAZGEtkbMoFvkWI8xNJVCxKyr8hf5EY9db4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQTbGW0kHXZziuUHgHskmnnUaC6QlbCAFsioAwpmZ8w=;
- b=ppxoxDAcwK82kdHYij/M2ksL796VxXRlm1QlJSoddwmNs4Hnmxvuww23ly1rVxVLl5AXX/wp//u7KfXIsQQPzc8DVwm9iqdu1MZKWbktC/lKBK+sB07NeAjG3nVYzDlEfXOZ2vIYqmtB7wJYrGBpD7Ulqza+AWAuwh8mBrvbsNk=
+ bh=wEc/HNT0KESzfboUNJTrwBwewE4li5sM04iz6EBbZLA=;
+ b=LVuN/Yyz4FFTcMsGhXWRmfXEd9AJA1MOTizWK+7Y3m0YQoO7Y799MMzCXRqd29C9816PgWk3CussKlmGyVK5alwDqUMqAxV9uxZB8xLy0S9u1AVlGIIjL9NW983bdtg259pd3pKDfJ2udAW+RdVofr+NK7+3qG0iEhJmpyr3dxk=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,15 +82,15 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Alejandro Vallejo <agarciav@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Jason
- Andryuk" <jason.andryuk@amd.com>, Alejandro Vallejo <agarciav@amd.com>
-Subject: [PATCH v5 05/12] x86/hyperlaunch: locate dom0 kernel with hyperlaunch
-Date: Thu, 24 Apr 2025 17:10:15 +0100
-Message-ID: <20250424161027.92942-6-agarciav@amd.com>
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Alejandro Vallejo <agarciav@amd.com>
+Subject: [PATCH v5 01/12] kconfig: introduce domain builder config options
+Date: Thu, 24 Apr 2025 17:10:11 +0100
+Message-ID: <20250424161027.92942-2-agarciav@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250424161027.92942-1-agarciav@amd.com>
 References: <20250424161027.92942-1-agarciav@amd.com>
@@ -102,175 +102,106 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|LV3PR12MB9118:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1a5cbca-937d-4d72-8b14-08dd834a9983
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CC:EE_|DS5PPF78FC67EBA:EE_
+X-MS-Office365-Filtering-Correlation-Id: 866f05cf-6190-4ef9-a3dc-08dd834a9225
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?gE5657PnO3DtB2t3y89tGV43K68/Le/vIem1QLfr9a41dE21j1G51tF8QCTy?=
- =?us-ascii?Q?DhVYLyq2JFwDV6gTarwBdMdvgV7BjR5mAOB2pJXdYbIoH+hgjQOh50E1zI10?=
- =?us-ascii?Q?cPkdXhbYrgH8S7QBeXNHui9uV6CvmL/agtLCI5el4ZhJgDfblt8UfhpwJxUK?=
- =?us-ascii?Q?SOGHa6X5czLnwQHfkfazt7tHqf176s0TXrygR6SskNTfW4QnHzAWGYm64J9V?=
- =?us-ascii?Q?cmCacHUpnhA49naj3IvHRiT2PTRoYWzbOvTVjwT8rxkBE5Pks4xc2M7bmfCd?=
- =?us-ascii?Q?6jMsod9QRqcGdVEdOnKbSJLF4CSnz6B3og7S+5DjOHZf+sjv2u4fFgprpE/u?=
- =?us-ascii?Q?xRfslIFvcZXGovjmJWKEyvuikJCJyKT1qn/TC5f89OCBCXM8oR5PULXUe90w?=
- =?us-ascii?Q?mLZ72brEcbkxPm/fvRXVBBRCJ5b7kjCSnBamF93fFT3mVCpYYvfvKgeJjPLl?=
- =?us-ascii?Q?lpTGOz9NY3Qeiw3PAF9FR/vj9pFw43cXWG19zQg1wudqaE56z1DOIIDjpplZ?=
- =?us-ascii?Q?jCetzem4+O/p9CUJSfrSGcK6dgM1dVw9mdTQFY5M3Z59Fsoa5seMu5RNJ2+j?=
- =?us-ascii?Q?mX4Z73k6U9wY8ClVW8dezuDG9RMeC2sAcy0R0p4nHtjsUHSSicd2lJw/vFwJ?=
- =?us-ascii?Q?DUWj9I6tnFiYtE/1M7z9D7ToO+tSjmrMbjwmrkK54kccvcQo+XvNjS/m75EO?=
- =?us-ascii?Q?HweSv4eAf+HY+O6v9RXc78amt2jqxtccBWRJ+N9phWPiosQPekr833OfdUzM?=
- =?us-ascii?Q?gLIlDhZmkFNp737A6zd2AkY/Vu1xXlj+yLfFfz9QHuhToSc8XJyDW2wSHdT1?=
- =?us-ascii?Q?Gzu+4xlKcmSdcsjJFV+OzHZHgHjcbiUCyI2zq2UsOJAWfNdJ/yJU/TJer9wM?=
- =?us-ascii?Q?USAWPSuqd8oFzlNFRdaD2gevn03lpy1rrq01TwuOfBXtbd7V9KQwgIEwUZXc?=
- =?us-ascii?Q?8UA/7KCSAv2IvjDmQ6UVcjEmhvQ8h2lIK0L+5TwxLsX6uNG2sz3VNTgDIUTr?=
- =?us-ascii?Q?NNcq9kExcJIWVWnEE0Jfw2dLJuDvkPXV3hKKvCXYbOr3wnXXvhFXbyUiziV7?=
- =?us-ascii?Q?WhVpS0qTffdxN9qeMS+dGvS0hDkMjQiOKWBQaCol+mu91Iz0oeJQJTx/Kzup?=
- =?us-ascii?Q?6sqf4WphPOV2ry0pKKzeMTXL1/XdOQS51k4uiX5ZELWuYcSUROia7ehPV5xI?=
- =?us-ascii?Q?o5iOGNZVGQviet1F69MhPogW73YvYWjkdA+TnOQhAc8NivoOskDuV3kHkgLh?=
- =?us-ascii?Q?05sHnwfHZsx+YfzXYElD8N+GU5FmKpP93f0RxJQEBVwuPADs0PDZfTvWSyfW?=
- =?us-ascii?Q?03f0naD9DEVdmcFTgPhMSi7lHUCRMVijZRWTN3YJD0YfknGLVG4HMcOXhQ76?=
- =?us-ascii?Q?vyYlrUtaM4bnrviPkSIh6aaVKztRmfabdV49sNsLx5grHL1Tansb/bvmznAE?=
- =?us-ascii?Q?AqIH5ZXFips9MP4YNyTZd4yMd15Z8oJ6jr7WJfoYp7ASTt3irMvakyrjf4Vc?=
- =?us-ascii?Q?6Lc4vYIxF1Dhm8mG1PC4A0Lyx0kWjPkLaDkj?=
+	=?us-ascii?Q?G9FCx2/Fxl3W9Y0bklNwdpjnX400xfy0QMkwQEY6daiebgnI776Bd9UmP9If?=
+ =?us-ascii?Q?3onCmAQ/i1s7tEzVuggTGXEZEZ+QYsOxAfr4leq2FYEBKYuAsDzWCAZGgp6a?=
+ =?us-ascii?Q?gDRNrTJPgtFQT7UFHrDIqTKG+POzNJ+TWykkzURTHjvkonWAxeMHK5NWVKxo?=
+ =?us-ascii?Q?7TcyXfE/dmQXpOpw5NLUHE/Nin1o7TZ4RlKXvYMKd+i2/yUQUWfUwBT+vE+G?=
+ =?us-ascii?Q?vxwdwiomgri4//TA+N69Az4yU7g5uwLWVQKnARiyIlDfiUNHi0becNBAVAuD?=
+ =?us-ascii?Q?BVdPqcK35cLKfj7Cz59KClCvRwz0SShy2Ur/dN86Ugo5YTrFm+z34GeImFeQ?=
+ =?us-ascii?Q?ZI7nxjbAdBG//ZKZMx0bxnoT9z67bslLEZKR0gFYwVfb8Eu4GLoRXP87mFM3?=
+ =?us-ascii?Q?JGFOWI0Ppx3guEElMTJNb4LtnnDamOb/RE7KiX9612XIyqSiNOjMv8ZBjySz?=
+ =?us-ascii?Q?lJ0LDG7MRWFiTRkqTwTXk9g9V7CBeTjeomuatsW+vlmwo7x9UFWtg9PEE8eC?=
+ =?us-ascii?Q?ZPHNqs/3esqeDUp8VOSH9TOXWBwK69bpObDa8UJkwm/1xJXQp31g6cUkVPP3?=
+ =?us-ascii?Q?cdmLze6pfWjKn+igOaLlZGzV9JDpTZoV95zSvgTWgpNbj2LmYDQKkruJIzVL?=
+ =?us-ascii?Q?65Hht5NbIDfmzn/xk5DSDxG0VHtf+Rc+9tipI4Lnlv5AxQBumyB1DK+pkTI+?=
+ =?us-ascii?Q?Ymt8Aa3b7BDO24fsLyjJx0FiRuBOdlUHqh2A4tT76EujjghtTf9/uaSZYFIP?=
+ =?us-ascii?Q?awEJzj/TvWlZvpdzW2S4QM5nOS+AqeXswv49lywd2D0eFFWzzt9s8/jTvXXH?=
+ =?us-ascii?Q?kppzBrZNT508JlY4jJ/hAZOSj4/eB16T4bJ/7aDNjBtjh9lb1k/oA+l/nlyg?=
+ =?us-ascii?Q?U+KU37mknB+kpH7JhznihbuD+C3DMh4I6JHaCUKWdQiKv4ptfVIuNkJLsvQw?=
+ =?us-ascii?Q?NXvO/6aJdrXJDJSWH3UFz6/PFzTfOSGC5ZIFnG73bnr8lQvqBUaQDqpIbg9c?=
+ =?us-ascii?Q?oS2TPTUjvkLca/NBJjZ1m6zyHsjjx31wF/MGM7kISWlLpoq7vDVWnO2jox/1?=
+ =?us-ascii?Q?Eu5x18s/2dLRxH9Z35C26AbxHr7KJO4yECSL2gUQs2Ljm4NOy0eY/IG8WItu?=
+ =?us-ascii?Q?vSyhguYq6PRdU4ezcL+7HH2UbYtOYu/bNUr5Ygmo9C/buvf832ECelX6A46D?=
+ =?us-ascii?Q?rv3llwy8LgrabjAyNppNOjTe4eZHHgXvp7vpngoegdzOpjOsdNQcu7uv3muJ?=
+ =?us-ascii?Q?Okqko7KSzdEWu8GELLWx8TGxGr8XnjSklqI2EhiEQT2UzXSnh/HaxBSWRynK?=
+ =?us-ascii?Q?ED2dGCiLwxOveP9tLnpT7RczKhagbyhhUAvvGwmfdJqYSmZ4yvC/inSWkePJ?=
+ =?us-ascii?Q?0Et+U+/gLXTFVv6CwcSVZddwKNFiQeOSpFWbm+lCOBpInupMBSu9MISqs2Jm?=
+ =?us-ascii?Q?RuKUREORq4v8QaaGgbAVYtNjSRHrmudsimSZ/765HuhFqyZE1tP5NKl3g+7N?=
+ =?us-ascii?Q?Askjm+Hi/AoFjbCFHKx7PZyET2CuJIhHuTkc?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 16:10:58.1425
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 16:10:45.7987
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1a5cbca-937d-4d72-8b14-08dd834a9983
+X-MS-Exchange-CrossTenant-Network-Message-Id: 866f05cf-6190-4ef9-a3dc-08dd834a9225
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001C9.namprd05.prod.outlook.com
+	SJ5PEPF000001CC.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9118
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPF78FC67EBA
 
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-Look for a subnode of type `multiboot,kernel` within a domain node. If
-found, locate it using the multiboot module helper to generically ensure
-it lives in the module list. If the bootargs property is present and
-there was not an MB1 string, then use the command line from the device
-tree definition.
+Hyperlaunch domain builder will be the consolidated boot time domain
+building logic framework. Introduces the config option to enable this
+domain builder to eventually turn on the ability to load the domain
+configuration via a flattened device tree.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
 ---
 v5:
-  * Add domain name to the error path on no-kernel.
+  * Removed CONFIG_HAS_BOOT_INFO
+  * Reworded help message
 ---
- xen/arch/x86/setup.c            |  1 +
- xen/common/domain-builder/fdt.c | 64 +++++++++++++++++++++++++++++++--
- 2 files changed, 62 insertions(+), 3 deletions(-)
+ xen/common/Kconfig                |  2 ++
+ xen/common/domain-builder/Kconfig | 15 +++++++++++++++
+ 2 files changed, 17 insertions(+)
+ create mode 100644 xen/common/domain-builder/Kconfig
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index bd13d9d196..7e756302ae 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1290,6 +1290,7 @@ void asmlinkage __init noreturn __start_xen(void)
-         i = first_boot_module_index(bi, BOOTMOD_UNKNOWN);
-         bi->mods[i].type = BOOTMOD_KERNEL;
-         bi->domains[0].kernel = &bi->mods[i];
-+        bi->nr_domains = 1;
-         bi->hyperlaunch_enabled = false;
-     }
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index be28060716..e025fbe257 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -144,6 +144,8 @@ config STATIC_MEMORY
  
-diff --git a/xen/common/domain-builder/fdt.c b/xen/common/domain-builder/fdt.c
-index 11f0436e85..662c715483 100644
---- a/xen/common/domain-builder/fdt.c
-+++ b/xen/common/domain-builder/fdt.c
-@@ -99,9 +99,9 @@ static int __init fdt_prop_as_reg(const struct fdt_property *prop,
-  * @return              -EINVAL on malformed nodes, otherwise
-  *                      index inside `bi->mods`
-  */
--int __init fdt_read_multiboot_module(const void *fdt, int node,
--                                     int address_cells, int size_cells,
--                                     struct boot_info *bi)
-+static int __init fdt_read_multiboot_module(const void *fdt, int node,
-+                                            int address_cells, int size_cells,
-+                                            struct boot_info *bi)
- {
-     const struct fdt_property *prop;
-     uint64_t addr, size;
-@@ -185,6 +185,52 @@ int __init fdt_read_multiboot_module(const void *fdt, int node,
-     return idx;
- }
+ 	  If unsure, say N.
  
-+static int __init process_domain_node(
-+    struct boot_info *bi, const void *fdt, int dom_node)
-+{
-+    int node;
-+    struct boot_domain *bd = &bi->domains[bi->nr_domains];
-+    const char *name = fdt_get_name(fdt, dom_node, NULL) ?: "unknown";
-+    int address_cells = fdt_address_cells(fdt, dom_node);
-+    int size_cells = fdt_size_cells(fdt, dom_node);
++source "common/domain-builder/Kconfig"
 +
-+    fdt_for_each_subnode(node, fdt, dom_node)
-+    {
-+        if ( !fdt_node_check_compatible(fdt, node, "multiboot,kernel") )
-+        {
-+            int idx;
-+
-+            if ( bd->kernel )
-+            {
-+                printk(XENLOG_WARNING
-+                       "  duplicate kernel for domain %s\n", name);
-+                continue;
-+            }
-+
-+            idx = fdt_read_multiboot_module(fdt, node, address_cells,
-+                                            size_cells, bi);
-+            if ( idx < 0 )
-+            {
-+                printk(XENLOG_ERR
-+                       "  failed processing kernel for domain %s\n", name);
-+                return idx;
-+            }
-+
-+            printk(XENLOG_INFO "  kernel: multiboot-index=%d\n", idx);
-+            bi->mods[idx].type = BOOTMOD_KERNEL;
-+            bd->kernel = &bi->mods[idx];
-+        }
-+    }
-+
-+    if ( !bd->kernel )
-+    {
-+        printk(XENLOG_ERR "error: no kernel assigned to domain %s\n", name);
-+        return -ENODATA;
-+    }
-+
-+    return 0;
-+}
-+
- static int __init find_hyperlaunch_node(const void *fdt)
- {
-     int hv_node = fdt_path_offset(fdt, "/chosen/hypervisor");
-@@ -248,8 +294,20 @@ int __init walk_hyperlaunch_fdt(struct boot_info *bi)
+ menu "Speculative hardening"
  
-     fdt_for_each_subnode(node, fdt, hv_node)
-     {
-+        if ( bi->nr_domains >= MAX_NR_BOOTDOMS )
-+        {
-+            printk(XENLOG_WARNING "warning: only creating first %u domains\n",
-+                   MAX_NR_BOOTDOMS);
-+            break;
-+        }
+ config INDIRECT_THUNK
+diff --git a/xen/common/domain-builder/Kconfig b/xen/common/domain-builder/Kconfig
+new file mode 100644
+index 0000000000..44b8351af8
+--- /dev/null
++++ b/xen/common/domain-builder/Kconfig
+@@ -0,0 +1,15 @@
++menu "Domain Builder Features"
 +
-         if ( !fdt_node_check_compatible(fdt, node, "xen,domain") )
-+        {
-+            if ( (ret = process_domain_node(bi, fdt, node)) < 0 )
-+                break;
++config DOMAIN_BUILDER
++	bool "Domain builder (UNSUPPORTED)" if UNSUPPORTED && X86
++	select LIBFDT
++	help
++	  Support for constructing predefined domains described by a flattened
++	  device tree. This allows constructing multiple domains at boot time
++	  instead of being limited to a single dom0.
 +
-             bi->nr_domains++;
-+        }
-     }
- 
-     /* Until multi-domain construction is added, throw an error */
++	  This feature is currently experimental.
++
++	  If unsure, say N.
++
++endmenu
 -- 
 2.43.0
 
