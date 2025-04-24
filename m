@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1C7C369AB
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Apr 2025 17:51:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.966751.1356864 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2360CC369AB
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Apr 2025 17:51:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.966754.1356875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u80jA-0001Pg-C9; Thu, 24 Apr 2025 17:51:12 +0000
+	id 1u80jR-0001jn-Jl; Thu, 24 Apr 2025 17:51:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 966751.1356864; Thu, 24 Apr 2025 17:51:12 +0000
+Received: by outflank-mailman (output) from mailman id 966754.1356875; Thu, 24 Apr 2025 17:51:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u80jA-0001PZ-9Q; Thu, 24 Apr 2025 17:51:12 +0000
-Received: by outflank-mailman (input) for mailman id 966751;
- Thu, 24 Apr 2025 17:51:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u80jR-0001jc-Gk; Thu, 24 Apr 2025 17:51:29 +0000
+Received: by outflank-mailman (input) for mailman id 966754;
+ Thu, 24 Apr 2025 17:51:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/BVb=XK=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u80j8-0001PT-Sk
- for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 17:51:11 +0000
+ id 1u80jQ-0001j9-4I
+ for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 17:51:28 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b2947a4a-2134-11f0-9ffb-bf95429c2676;
- Thu, 24 Apr 2025 19:51:08 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bca047ca-2134-11f0-9eb2-5ba50f476ded;
+ Thu, 24 Apr 2025 19:51:25 +0200 (CEST)
 Received: from [192.168.7.202] ([71.202.166.45]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53OHo0ch1382184
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53OHooUY1383060
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Thu, 24 Apr 2025 10:50:01 -0700
+ Thu, 24 Apr 2025 10:50:51 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,23 +42,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2947a4a-2134-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53OHo0ch1382184
+X-Inumbo-ID: bca047ca-2134-11f0-9eb2-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53OHooUY1383060
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745517004;
-	bh=s//FslW+O7Kn/IezyVBmG0EeFGCYGlqoMCN23p8kepQ=;
+	s=2025042001; t=1745517053;
+	bh=vRUzZpZGFJolMKWVih6pSIskaMZx/C9W0RbkMI/WUL4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Qmcxq/0pRXzN/V+n0zvhvv/OoLvqqvKKiVDhNOGC1sz6osmqDDUYrR+tqqy3ga/u7
-	 JZpvT18GGm7u7JMxdWjZSYChBiJHXKChUd2j3U39ORZs5MDVb4G7VtVtmZRcbpeLMt
-	 m3iEcT7ggWGzwceuQ2WNjjW5bkmHSlTac6xC2kFMvWFQzV9xA4ABxyzXK56cpGvVXB
-	 Z2GE+XuHwAbGxdx+vxfyvWePtTx/85Pa22tSKDMjJILyluCkPpeG0HBau04zqCZjI0
-	 PP1ixyRBjfPn514E7EZwguUuURA8RzDzTFyQbM8I27ftfQ+nYl+1piEjuJAyk3NecS
-	 iN/TMRiJOd+JA==
-Message-ID: <ca088501-2fbe-4a32-b191-04f7be6a2713@zytor.com>
-Date: Thu, 24 Apr 2025 10:49:59 -0700
+	b=BVFv6Rd/IQ4J/PYHV3nN9oqAwGme4iFBImZRL6GTcMhgw7NYKI28t7uuoVpBh6PKp
+	 Qy2xaOL92iZPXBKZt18DClDdHu3Cu26OIl4X3wCxR6sP5IvdC0f2A7gL/3A2OrpX9K
+	 vBDJPG7XgmIA8lWPglrxwu2BGk3JKhEvcr6RSlKe2FpGUDSIGQIrDKIZmZn49EaoYL
+	 ADBESCC4Zsb4bWa7wGLDCdPOl+K3TeEVWdgeOHMFTdiA2wKrluDoC86oJ/ps6iqrBb
+	 f6WH3cQT18xQO9Bmnlmpr31eZorHV057tP0mCCdH9T/XCtwTZdzP0kYWRlcnS5Uvqb
+	 Rvudk3Z8FPKfA==
+Message-ID: <b90ead3b-75fd-464f-aa93-5afdc7ee0f02@zytor.com>
+Date: Thu, 24 Apr 2025 10:50:50 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 12/34] x86/msr: Remove pmu_msr_{read,write}()
+Subject: Re: [RFC PATCH v2 13/34] x86/xen/msr: Remove the error pointer
+ argument from set_reg()
 To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
         linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -78,8 +79,8 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com
 References: <20250422082216.1954310-1-xin@zytor.com>
- <20250422082216.1954310-13-xin@zytor.com>
- <8944b510-6d70-472c-99a2-52a60517733d@suse.com>
+ <20250422082216.1954310-14-xin@zytor.com>
+ <7c7de4be-e8d0-45b9-9212-186d79e95512@suse.com>
 Content-Language: en-US
 From: Xin Li <xin@zytor.com>
 Autocrypt: addr=xin@zytor.com; keydata=
@@ -116,18 +117,12 @@ Autocrypt: addr=xin@zytor.com; keydata=
  PYbAkjBbm+tuJ/Sm+5Yp5T/BnKz21FoCS8uvTiziHj2H7Cuekn6F8EYhegONm+RVg3vikOpn
  gao85i4HwQTK9/D1wgJIQkdwWXVMZ6q/OALaBp82vQ2U9sjTyFXgDjglgh00VRAHP7u1Rcu4
  l75w1xInsg==
-In-Reply-To: <8944b510-6d70-472c-99a2-52a60517733d@suse.com>
+In-Reply-To: <7c7de4be-e8d0-45b9-9212-186d79e95512@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 4/24/2025 3:05 AM, Jürgen Groß wrote:
-> 
-> May I suggest to get rid of the "emul" parameter of pmu_msr_chk_emulated()?
-> It has no real value, as pmu_msr_chk_emulated() could easily return 
-> false in
-> the cases where it would set *emul to false.
+On 4/24/2025 3:11 AM, Jürgen Groß wrote:
+> set_seg(), please (further up, too).
 
-Good idea!
-
-The function type is a bit of weird but I didn't think of change it.
+Good catch, thanks a lot!
 
