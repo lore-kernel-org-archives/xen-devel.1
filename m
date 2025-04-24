@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689B4C369AB
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Apr 2025 06:19:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.965835.1356241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F298FC369D5
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Apr 2025 06:35:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.965850.1356251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7pvE-0003hc-IF; Thu, 24 Apr 2025 06:18:56 +0000
+	id 1u7qAc-00079q-Ux; Thu, 24 Apr 2025 06:34:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 965835.1356241; Thu, 24 Apr 2025 06:18:56 +0000
+Received: by outflank-mailman (output) from mailman id 965850.1356251; Thu, 24 Apr 2025 06:34:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u7pvE-0003hV-Fg; Thu, 24 Apr 2025 06:18:56 +0000
-Received: by outflank-mailman (input) for mailman id 965835;
- Thu, 24 Apr 2025 06:18:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u7qAc-00079j-SR; Thu, 24 Apr 2025 06:34:50 +0000
+Received: by outflank-mailman (input) for mailman id 965850;
+ Thu, 24 Apr 2025 06:34:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IaUl=XK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1u7pvD-0003hP-PB
- for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 06:18:55 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ff809a97-20d3-11f0-9eb1-5ba50f476ded;
- Thu, 24 Apr 2025 08:18:54 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-39ac9aea656so731438f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Apr 2025 23:18:54 -0700 (PDT)
+ id 1u7qAb-00079Z-05
+ for xen-devel@lists.xenproject.org; Thu, 24 Apr 2025 06:34:49 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3690d598-20d6-11f0-9ffb-bf95429c2676;
+ Thu, 24 Apr 2025 08:34:46 +0200 (CEST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-39c266c2dd5so647906f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Apr 2025 23:34:46 -0700 (PDT)
 Received: from ?IPV6:2003:ca:b734:b408:9d23:e5d:de25:e110?
  (p200300cab734b4089d230e5dde25e110.dip0.t-ipconnect.de.
  [2003:ca:b734:b408:9d23:e5d:de25:e110])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d2a35f0sm7164515e9.15.2025.04.23.23.18.53
+ ffacd0b85a97d-3a06d532a9dsm995408f8f.61.2025.04.23.23.34.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Apr 2025 23:18:53 -0700 (PDT)
+ Wed, 23 Apr 2025 23:34:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,54 +49,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff809a97-20d3-11f0-9eb1-5ba50f476ded
+X-Inumbo-ID: 3690d598-20d6-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1745475534; x=1746080334; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1745476485; x=1746081285; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=0xpX0cMUyLAPCpNvd9WcehRSs8l4r8ukiuxwyPaApb0=;
-        b=IcJF+13b0rNBswOvUUVKbLzZV3cj8v76N380w20kN7d/JZ378sX01kh3eRPHVbOkwb
-         4+BqUmw3laMa5g2Z5VGjtvgn1wUluUtaXrcZEV3e9wQoIwPFMo3+kv+kOfrQ6EQxzfTQ
-         atVpTpI6aCzCIDVKzaT1e9cc4IjbrrGX7W9qI4lctizkpU+SV3H7sTzC3AlpI18tb59l
-         gk1ziNTBqNG5K+PwfVpNYyjwt/uf3JCgdOdu8aLWNGd7Kf2oMJYdYRa1sZkb0OsAUNPM
-         L9lSTBok4A3XvuGKYIabG9k9ZOhANjyAnESkGgFGQpFbfsrGUZ79j5ci22NZ+XvSFUg6
-         +trA==
+        bh=zL+sciCXJIK0yGTIFxCeU0K61FCHzj7AzTTjNz1xr98=;
+        b=MhucUiW1TkRtcJoFAmcz5S6ZIlbz4NmC48nkTD1lIRtD9bpEZwWLrf+iqMLhnbu7X2
+         v9cx+rnq0XaXycO2xVjt15yoRJNdnyX7rTPi+VFXWLPM652GICjFp6iepDfKhQUa4TGR
+         fdcBAhdFIdUeoESIdcRq/OIqkkU5ns8X4DkYojx1rfkw6dTa/s7sqr5AmSV3RHhzkZmk
+         GET3bu9r7HYyoRRwCzIl2G6SAeI225ZJq5IGtqNJD2Yspmw2e6ZxiRUYmhAYfsABOISr
+         oomOyae1fPQI/WPxzykNva7C0F4FszZeVDMR7YcLDy1+I68qbJlzoqVo5N0x77ENSEQg
+         TbVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745475534; x=1746080334;
+        d=1e100.net; s=20230601; t=1745476485; x=1746081285;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0xpX0cMUyLAPCpNvd9WcehRSs8l4r8ukiuxwyPaApb0=;
-        b=lVTiu8rLo3ezIXK18EtLIFlhSzT4d+tNNtEPZVDZM0+fYqnO+gWkVK80JWmYMvbTYA
-         Y1mJgusRyZeJRlra6qX5ROCloUUdnJrHW6K/qUfjkf1qUuCJPGmv/hsoCG0fHlxRF/n/
-         /ajEgI1Is1w5IEFEdjlhNPZERwPxCSvON7PPtC4+LtC42k9i+QRecorxM1Ii1pR3ApH9
-         Nih9cibEywd7CjuT5kVm5ODBa/KygcVJxtuz+ghLYITW6emqdIx1ynUAejenJUfQQlSA
-         m+Ukw4Rkw0OZvVgdEp3BrGUP5o1bcBvhW7TMJZwahHa7Z8mRAw3cOCV8mYJSpzdFnSWb
-         GdQA==
-X-Forwarded-Encrypted: i=1; AJvYcCWBJLi3aWJ8Cea8Ka1TAh964WaTfY1Ueu38/xFu/dJwUSpGIZh71O0nbb8qtcRnwRsuxRy15+MJHag=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw36J23bwwMK1C21FpIEMGXRbC9r7JD1plh+wM6WbrakWxNDggq
-	sVqIDoCx+TeJcO5YWD3ISniLvsa7txwHODm4O7aRE4Le5rMzXn9xjFTA0Y3Nvw==
-X-Gm-Gg: ASbGncvPzEm/tKujAL+LywIebyrfMbGEwVOPGJu83K8LB5GnaQzpPe1kggKx9Vfxujg
-	Qi6UJZ4qNAGLN1Tqs46gl9ye+QNeqbJnVykywyTemt3pYe9PhrkhdDhQ0NYuL08oVTh+qGWfXrB
-	l5AEuq9DhbbQjugpyi/boM8CsTJcOQiNv33HUlaMLxTlWhYOLu/wQekKg37hTsRaYy+5FOQGD39
-	m8qsvoPfGSWlwS0v4ZXQNweTQzUXezgUgyknKkZzaqknHM9Y+hxDyAyUGveG1iB+olsual9vZ8o
-	IX4VZQkKbOKcwT4Shq8cjqqz+ErCAu8PsaBsDHlMXjjhVjjFg2DXmWVcHxSM4Em4RdOENQN86kE
-	0Y3tCgWQkt/UGkpUUvaGWz1cueb/b3lUqPcaU3kewPGSB+ez47o5SKG1oSOjecjFgKwFIJnYhHx
-	+4HDh644I=
-X-Google-Smtp-Source: AGHT+IGIP4sCkBDkzCvn7skUkrHV0kNsI7HIFkRx6Iph43dmLCbwWv5DjMV/+rhZm8UpxDRjJ7oFdA==
-X-Received: by 2002:a05:6000:1ac9:b0:39c:268e:ae04 with SMTP id ffacd0b85a97d-3a06cecb311mr797596f8f.0.1745475534151;
-        Wed, 23 Apr 2025 23:18:54 -0700 (PDT)
-Message-ID: <fc4bb04a-8d6d-4744-9be3-399aea5081e2@suse.com>
-Date: Thu, 24 Apr 2025 08:18:51 +0200
+        bh=zL+sciCXJIK0yGTIFxCeU0K61FCHzj7AzTTjNz1xr98=;
+        b=UKTLBaJOVKHDtXvI8ZHO/UXZ7y1DCVlx+9R1EKfEAsvBNrWPMIVSIrAW1Gt50cp2c2
+         mXFmftle+6ahmjJxhBI08HZk1kaweeWpS+4e3VTH6UDvgbj8YQ1L878uUwgnvXl8pqUa
+         KuT4sLcLLYQy1TwTeUrRkvBuOrI6S8ZcLnf6sgFD/Lcg6P7LOBC7f8Y1oIUr4eyQ7mGW
+         McIOPh0l6pgRb+aZWdX76+oT5gPfUltDfbZF9hk0P/gS/r834GCHsgOw9TRJf+Xi2hHz
+         MKrSW/ouB96WqM9yYLfr1eIKye8ipGUjd+WN9yySqQIInGJmGn3QzaHtI9y1PYB0WF/f
+         e2Cw==
+X-Forwarded-Encrypted: i=1; AJvYcCXJk9AaF0IJRdEndafUY0lSCrpK2XgTqJmM+6sDSnG69HYWG+ofpIYoT6yz0uVHtFAERSXvdTozTw8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwUDV+2IlbeVB9E4d4v4B9l3r+Tpqi9zJYY4vogK26Eg9OmbMJx
+	QY9BTmepAMBiRIVwzcuFh8MdojmRGvffwi4Pkr/O8Z67aYclaNFZi36rykWbYg==
+X-Gm-Gg: ASbGncu9EQFeC+o2AW0ftyaBgva+rlnTliGC98QlKiKcgK83ZVoVqU4GVXhnGjTvs+s
+	cWuON8TqxEboE0VQmu8ifGGlI4xEubPTPuiewAIPOmYndUgMo0yLw9LYE25Wskel1BzE6fJGW3r
+	44/TrwOE14lpWGPob144uVF8iuDiF57Fc8LQJX0EweNjyz/0c0l7djLQbgmuNfaU2lxQnAtgRKI
+	V+GPmr2GovJ5GHs9B+hoFQMEZNe7sAW6LlNxjvGYhWxBLFRim0SxbndP/lfO1Tevpumw1SCtx4Q
+	Id2rBqxND0EfC7XcgwM6gZspGi2KCLm3sxW2gTF5Cnhx5fUUX8ZqFtLk5xvypJ8WKURvIb4TWbG
+	4awu+aSjjSG78M/ZgXpIqdDHcf2C/K+XB2+3RIBwypjTVMRtLgLF+K16Cf2zhDs5lpA7ruRg4
+X-Google-Smtp-Source: AGHT+IH9E1o9LJ+cwSu+3F7DUFRfhr2+CxwRYdb8fS8cZImhSvBJsJrpIokuBBQvNbHY6XwgWrf5Bg==
+X-Received: by 2002:a05:6000:18a8:b0:391:241d:a13e with SMTP id ffacd0b85a97d-3a06cfab52fmr727926f8f.48.1745476485300;
+        Wed, 23 Apr 2025 23:34:45 -0700 (PDT)
+Message-ID: <40a5c44c-4ef1-4852-b441-ea65e31b2345@suse.com>
+Date: Thu, 24 Apr 2025 08:34:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/vpci: Fix msix existing mapping printk
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <20250423212229.32721-1-jason.andryuk@amd.com>
+Subject: Re: UBSan bug in real mode fpu emulation
+To: Fabian Specht <f.specht@tum.de>, xen-devel@lists.xenproject.org
+Cc: manuel.andreas@tum.de
+References: <l2jnq5cxgkzcdkndp3mjf76nd7wdp2pbstkqo7llaarmbfqdge@bxdydela4rcf>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -122,23 +120,45 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250423212229.32721-1-jason.andryuk@amd.com>
+In-Reply-To: <l2jnq5cxgkzcdkndp3mjf76nd7wdp2pbstkqo7llaarmbfqdge@bxdydela4rcf>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 23.04.2025 23:22, Jason Andryuk wrote:
-> --- a/xen/drivers/vpci/msix.c
-> +++ b/xen/drivers/vpci/msix.c
-> @@ -666,7 +666,7 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
->                  put_gfn(d, start);
->                  gprintk(XENLOG_WARNING,
->                          "%pp: existing mapping (mfn: %" PRI_mfn
-> -                        "type: %d) at %#lx clobbers MSIX MMIO area\n",
-> +                        " type: %d) at %#lx clobbers MSIX MMIO area\n",
+On 24.04.2025 03:08, Fabian Specht wrote:
+> we discovered a bug regarding undefined behaviour in the FPU emulation
+> unit.
+> 
+> if ( !s->rex_prefix )
+> {
+> 	/* Convert 32-bit real/vm86 to 32-bit prot format. */
+> 	unsigned int fip = fpstate.env.mode.real.fip_lo +
+> 					   (fpstate.env.mode.real.fip_hi << 16);
+> 	unsigned int fdp = fpstate.env.mode.real.fdp_lo +
+> 					   (fpstate.env.mode.real.fdp_hi << 16);
+> 	unsigned int fop = fpstate.env.mode.real.fop;
+> 
+> 	fpstate.env.mode.prot.fip = fip & 0xf;
+> 	fpstate.env.mode.prot.fcs = fip >> 4;
+> 	fpstate.env.mode.prot.fop = fop;
+> 	fpstate.env.mode.prot.fdp = fdp & 0xf;
+> 	fpstate.env.mode.prot.fds = fdp >> 4;
+> }
+> 
+> It occurs at arch/x86/arch/x86/x86_emulate/blk.c:85 of the v4.20.0
+> release during the bit shift and can be triggered using the attached xtf
+> test. We are not aware of any security consequences.
+> Simply shifting by 4 should do the trick in my opinion.
 
-Imo this is a good indication that the format string better wouldn't be
-extending across multiple lines. Then it would also be possible to grep
-for it (in the sources) using e.g. "existing mapping .* clobbers".
+Since ...
+
+> Similar code resides in the same file in lines 87, 125 and 127.
+
+... all of these are shifts by 16, could you clarify what it is that you
+want to shift by 4? Imo what we need to do here is add casts to unsigned
+int, for the results thereof to be shifted (or use some extra arithmetic
+to achieve the same effect, e.g. add in 0U). Or we could go and replace
+the shifts by 16 with shifts by 12 (accounting for the later right shift
+by 4, which would then need dropping).
 
 Jan
 
