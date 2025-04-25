@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A98BFC369C2
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 08:08:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.967296.1357117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6E6C369D1
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 08:35:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.967318.1357188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8E5z-0006fR-LX; Fri, 25 Apr 2025 08:07:39 +0000
+	id 1u8EX2-00045D-H4; Fri, 25 Apr 2025 08:35:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 967296.1357117; Fri, 25 Apr 2025 08:07:39 +0000
+Received: by outflank-mailman (output) from mailman id 967318.1357188; Fri, 25 Apr 2025 08:35:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8E5z-0006fK-HE; Fri, 25 Apr 2025 08:07:39 +0000
-Received: by outflank-mailman (input) for mailman id 967296;
- Fri, 25 Apr 2025 08:07:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u8EX2-00043U-3c; Fri, 25 Apr 2025 08:35:36 +0000
+Received: by outflank-mailman (input) for mailman id 967318;
+ Fri, 25 Apr 2025 08:35:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZJ1s=XL=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1u8E5y-0006fE-DU
- for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 08:07:38 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4fd42561-21ac-11f0-9ffb-bf95429c2676;
- Fri, 25 Apr 2025 10:07:20 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3914aba1ce4so1441151f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Apr 2025 01:07:28 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073e461casm1593348f8f.74.2025.04.25.01.07.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Apr 2025 01:07:27 -0700 (PDT)
+ (envelope-from <SRS0=Tuhi=XL=zytor.com=xin@srs-se1.protection.inumbo.net>)
+ id 1u8EX0-0002sy-S8
+ for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 08:35:34 +0000
+Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 408609bf-21b0-11f0-9eb3-5ba50f476ded;
+ Fri, 25 Apr 2025 10:35:34 +0200 (CEST)
+Received: from terminus.zytor.com (terminus.zytor.com
+ [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53P8Yg5X2390085
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Fri, 25 Apr 2025 01:35:06 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,150 +43,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4fd42561-21ac-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1745568447; x=1746173247; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=SWU1PEhrpAVMYN5N36PBet5PbNmWcrMovqbMPn1yVtM=;
-        b=hHM7f5RXMornKJBxcsGOfa38tp09txgcnspcVWAte8iRc6ufYulqTynuwXqvVK4X7Q
-         JaW/fSe2I+JEFxU7CThgvaCk5rmyuigIv9ByqbIR29/21cUzT2t+ppkpMNzeeUtirxsb
-         3I/FQ5MoI0+Pilnxm50PHiaXtfNq6WoC/qVmX4f+M6c5jP82l5GOrazVs83yOzUUsfIa
-         OvGzVQPG7Ot5HdHXnheCeQPp/pOnhTTaHHDMpz6/r1zIC66bIx8MIJYcARpA2qDReE5K
-         Kz3vUWbzb7DKsF5WQaeevUsnH1kPN4kLOAnvPPZmYdduvipPtx+PIXq5WryMFwwG1xzp
-         B9ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745568447; x=1746173247;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SWU1PEhrpAVMYN5N36PBet5PbNmWcrMovqbMPn1yVtM=;
-        b=Krhfb5pP7Ur2t6kYNOUeswxjprU+HcyT6N1G5AlUj3Mw0oHscJ9x9WW8ckXEF2fZ3e
-         sfgWmXdfJSF7XkUXJ4lPMPBIoEy0hKuhQbF9hLT9RC8Lar/VjZxhU7m1HvbKDj1XsVPI
-         pW2qRvBZcylK8qHbbCQuKKPJNk9B3HZoVrxF+5WfQQx6ONEs8QUmfmPEmJ1gZ63+6sSY
-         Y7aX3WdDIlljj+SwJwISC5U5xRcp09Ztv9t7XPp0fRW6qzxDZ5HPDwQrN+CU6PhnxdK3
-         +f6x4o9sUFvVGR0LBTx72R14/Fc7bwbMJAFKvBUXv2wq7pwnh28TCERxM5tkBXQe9kTW
-         I60A==
-X-Forwarded-Encrypted: i=1; AJvYcCUNeVM1REgh2aRhh/vRK7iCQDMz6rKFmk3J+QKPl9NkahFJzgX133+LW/0Tq9zd++sUzVY/pXeQw7I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YypGHMmF2pxFN6zxYlbLpIuf7SGzFDvl+CI59YXe/cSqI7OqQuA
-	TAe5OzNt3Aa+QMX+/QkhdMb1bBAsKV1b5HOdcDkk77CPyR4Re4sSolvSY0Pk8w==
-X-Gm-Gg: ASbGncue867QDA9Gzfho5fY8TqbwYLLEijkWqeFKsBLEP37+I7jbrR6RI+gJHoHJKiL
-	0ES7aXIATJWInLnCgdHKmdisdHg67ojqugxTZxH5fWnXLKHWBASmkcVFTB+78WtTtjFJgztzh6k
-	ohEH5EV5xzzFBFYLFdRocibfWi3gxdBrkTIJ2fegbFWHV4dTtdhr3T9wZDPjLuQYMA25umMU9ko
-	hY1kHTzn/EXsCzhlUUIFON+5hVsSpdr0HkqovfYASnYVhhVAv9/cDd9aDGVppQDC4zR74gzKBru
-	YCJJi1amEz7TDXt7+m7PqJhINT6VSkSaHSA8jocHOr8GyYPcU6w+snsx+O5kreXf+d6UoU7bUtL
-	+uOEDpQ8MrZk4WOTTRAsAICDQDZGm4UITeAht
-X-Google-Smtp-Source: AGHT+IHQuzSZYrgjgZCr4a0EGokX2J65T8ABMGA7UijjrwLRQirxlAN5S/2VwUy0yEq93F9Wu4bBew==
-X-Received: by 2002:a05:6000:2403:b0:39a:ca05:54a9 with SMTP id ffacd0b85a97d-3a074e41d2bmr851952f8f.29.1745568447596;
-        Fri, 25 Apr 2025 01:07:27 -0700 (PDT)
-Message-ID: <8d65ee65-ec6f-49a3-8954-d303b08dc2df@suse.com>
-Date: Fri, 25 Apr 2025 10:07:25 +0200
+X-Inumbo-ID: 408609bf-21b0-11f0-9eb3-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53P8Yg5X2390085
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025042001; t=1745570107;
+	bh=FN/DKU8Mk2Q9Xof2Rumm+93wLI4a8v+UmrLXGE1N9mk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=L78zoZAAN4f887y6qrYsRv1om8NzU+UWXr3Vc5HlTTSXUohwqXnXnQojJBw9b1s9T
+	 h86xOvwIJB6Ua8meWZlAGHT+h0th53l96xPbayjpOKZ4DjyHxqkGpydO8o/0KivYn/
+	 jdmHXS+sQqnMkJPFn7dB5i5Yyfy1DYtABR6j7h99DUMuLqt/k17vF2jb+38yQcRdEV
+	 G9ngF24E4Kjj7fU2hIpR+Ghr6tgUOovBiIhQZcV+qhdz3Vedm6AWFYqyxgevLN4POO
+	 UVTWdh/p6/hvKNjFY4TLjPK6aHrVKvmhjHc4zWe61CNbkTMmx2vkewcubTz2h2/90a
+	 wIeCZ3lZzhmcw==
+From: "Xin Li (Intel)" <xin@zytor.com>
+To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
+        virtualization@lists.linux.dev, linux-pm@vger.kernel.org,
+        linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        netdev@vger.kernel.org, platform-driver-x86@vger.kernel.org
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        acme@kernel.org, jgross@suse.com, andrew.cooper3@citrix.com,
+        peterz@infradead.org, namhyung@kernel.org, mark.rutland@arm.com,
+        alexander.shishkin@linux.intel.com, jolsa@kernel.org,
+        irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
+        wei.liu@kernel.org, ajay.kaher@broadcom.com,
+        bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
+        pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
+        luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
+        haiyangz@microsoft.com, decui@microsoft.com,
+        dapeng1.mi@linux.intel.com
+Subject: [PATCH v3 09/14] x86/xen/msr: Remove calling native_{read,write}_msr{,_safe}() in pmu_msr_{read,write}()
+Date: Fri, 25 Apr 2025 01:34:32 -0700
+Message-ID: <20250425083442.2390017-10-xin@zytor.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250425083442.2390017-1-xin@zytor.com>
+References: <20250425083442.2390017-1-xin@zytor.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] misra: add deviation for rules 21.1 and 21.2
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: victorm.lira@amd.com, Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Federico Serafini <federico.serafini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>, xen-devel@lists.xenproject.org
-References: <9e1210f2a9c794d68dcc6b897239b228b141296a.1745427770.git.victorm.lira@amd.com>
- <f5d35582-9270-4816-84c2-f078afeee711@suse.com>
- <alpine.DEB.2.22.394.2504241443550.785180@ubuntu-linux-20-04-desktop>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alpine.DEB.2.22.394.2504241443550.785180@ubuntu-linux-20-04-desktop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 24.04.2025 23:45, Stefano Stabellini wrote:
-> On Thu, 24 Apr 2025, Jan Beulich wrote:
->> On 23.04.2025 19:54, victorm.lira@amd.com wrote:
->>> From: Nicola Vetrini <nicola.vetrini@bugseng.com>
->>>
->>> MISRA C Rules 21.1 ("#define and #undef shall not be used on a
->>> reserved identifier or reserved macro name") and R21.2 ("A reserved
->>> identifier or reserved macro name shall not be declared") violations
->>> are not problematic for Xen, as it does not use the C or POSIX
->>> libraries.
->>>
->>> Xen uses -fno-builtin and -nostdinc to ensure this, but there are still
->>> __builtin_* functions from the compiler that are available so
->>> a deviation is formulated for all identifiers not starting with
->>> "__builtin_".
->>>
->>> The missing text of a deviation for Rule 21.2 is added to
->>> docs/misra/deviations.rst.
->>>
->>> To avoid regressions, tag both rules as clean and add them to the
->>> monitored set.
->>>
->>> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
->>> Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
->>> Signed-off-by: Victor Lira <victorm.lira@amd.com>
->>
->> While the rule is in the library section, ...
->>
->>> --- a/docs/misra/deviations.rst
->>> +++ b/docs/misra/deviations.rst
->>> @@ -587,7 +587,31 @@ Deviations related to MISRA C:2012 Rules:
->>>         construct is deviated only in Translation Units that present a violation
->>>         of the Rule due to uses of this macro.
->>>       - Tagged as `deliberate` for ECLAIR.
->>> -
->>> +
->>> +   * - R21.1
->>> +     - Rule 21.1 reports identifiers reserved for the C and POSIX standard
->>> +       libraries. Xen does not use such libraries and all translation units
->>> +       are compiled with option '-nostdinc', therefore there is no reason to
->>> +       avoid to use `#define` or `#undef` on such identifiers except for those
->>> +       beginning with `__builtin_` for which compilers may perform (wrong)
->>> +       optimizations.
->>> +     - Tagged as `safe` for ECLAIR.
->>
->> ... I'd like to ask that it be explicitly clarified here that it's solely
->> the library (and not e.g. the compiler itself) that are of concern here.
-> 
-> The language can be clarified:
-> 
-> - Rule 21.1 reports identifiers reserved for the C and POSIX standard
->   libraries. Xen does not use such libraries and all translation units
->   are compiled with option '-nostdinc', therefore there is no reason to
->   avoid to use `#define` or `#undef` on C and POSIX standard libraries
->   identifiers except for those beginning with `__builtin_` for which
->   compilers may perform (wrong) optimizations.
+hpa found that pmu_msr_write() is actually a completely pointless
+function [1]: all it does is shuffle some arguments, then calls
+pmu_msr_chk_emulated() and if it returns true AND the emulated flag
+is clear then does *exactly the same thing* that the calling code
+would have done if pmu_msr_write() itself had returned true.  And
+pmu_msr_read() does the equivalent stupidity.
 
-Which makes it more apparent that there is a gap: What about e.g. __x86_64__?
-That falls within what the rules cover, is not a C or POSIX standard library
-identifier, yet very clearly must not be fiddled with. Whereas the text
-above deviates it.
+Remove the calls to native_{read,write}_msr{,_safe}() within
+pmu_msr_{read,write}().  Instead reuse the existing calling code
+that decides whether to call native_{read,write}_msr{,_safe}() based
+on the return value from pmu_msr_{read,write}().  Consequently,
+eliminate the need to pass an error pointer to pmu_msr_{read,write}().
 
-Jan
+While at it, refactor pmu_msr_write() to take the MSR value as a u64
+argument, replacing the current dual u32 arguments, because the dual
+u32 arguments were only used to call native_write_msr{,_safe}(), which
+has now been removed.
+
+[1]: https://lore.kernel.org/lkml/0ec48b84-d158-47c6-b14c-3563fd14bcc4@zytor.com/
+
+Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Sign-off-by: Xin Li (Intel) <xin@zytor.com>
+---
+
+Change in v3:
+*) Rename pmu_msr_{read,write}() to pmu_msr_{read,write}_emulated()
+   (Dapeng Mi).
+*) Fix a pmu_msr_read() callsite with wrong arguments (Dapeng Mi).
+---
+ arch/x86/xen/enlighten_pv.c |  8 ++++++--
+ arch/x86/xen/pmu.c          | 27 ++++-----------------------
+ arch/x86/xen/xen-ops.h      |  4 ++--
+ 3 files changed, 12 insertions(+), 27 deletions(-)
+
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 846b5737d320..61e51a970f3c 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1090,7 +1090,7 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
+ {
+ 	u64 val = 0;	/* Avoid uninitialized value for safe variant. */
+ 
+-	if (pmu_msr_read(msr, &val, err))
++	if (pmu_msr_read_emulated(msr, &val))
+ 		return val;
+ 
+ 	if (err)
+@@ -1132,6 +1132,8 @@ static void set_seg(unsigned int which, unsigned int low, unsigned int high,
+ static void xen_do_write_msr(unsigned int msr, unsigned int low,
+ 			     unsigned int high, int *err)
+ {
++	u64 val;
++
+ 	switch (msr) {
+ 	case MSR_FS_BASE:
+ 		set_seg(SEGBASE_FS, low, high, err);
+@@ -1158,7 +1160,9 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
+ 		break;
+ 
+ 	default:
+-		if (!pmu_msr_write(msr, low, high, err)) {
++		val = (u64)high << 32 | low;
++
++		if (!pmu_msr_write_emulated(msr, val)) {
+ 			if (err)
+ 				*err = native_write_msr_safe(msr, low, high);
+ 			else
+diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
+index 9c1682af620a..b6557f2d1a2e 100644
+--- a/arch/x86/xen/pmu.c
++++ b/arch/x86/xen/pmu.c
+@@ -313,37 +313,18 @@ static bool pmu_msr_chk_emulated(unsigned int msr, uint64_t *val, bool is_read,
+ 	return true;
+ }
+ 
+-bool pmu_msr_read(unsigned int msr, uint64_t *val, int *err)
++bool pmu_msr_read_emulated(u32 msr, u64 *val)
+ {
+ 	bool emulated;
+ 
+-	if (!pmu_msr_chk_emulated(msr, val, true, &emulated))
+-		return false;
+-
+-	if (!emulated) {
+-		*val = err ? native_read_msr_safe(msr, err)
+-			   : native_read_msr(msr);
+-	}
+-
+-	return true;
++	return pmu_msr_chk_emulated(msr, val, true, &emulated) && emulated;
+ }
+ 
+-bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err)
++bool pmu_msr_write_emulated(u32 msr, u64 val)
+ {
+-	uint64_t val = ((uint64_t)high << 32) | low;
+ 	bool emulated;
+ 
+-	if (!pmu_msr_chk_emulated(msr, &val, false, &emulated))
+-		return false;
+-
+-	if (!emulated) {
+-		if (err)
+-			*err = native_write_msr_safe(msr, low, high);
+-		else
+-			native_write_msr(msr, low, high);
+-	}
+-
+-	return true;
++	return pmu_msr_chk_emulated(msr, &val, false, &emulated) && emulated;
+ }
+ 
+ static u64 xen_amd_read_pmc(int counter)
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index 735f58780704..163e03e33089 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -274,8 +274,8 @@ void xen_pmu_finish(int cpu);
+ static inline void xen_pmu_init(int cpu) {}
+ static inline void xen_pmu_finish(int cpu) {}
+ #endif
+-bool pmu_msr_read(unsigned int msr, uint64_t *val, int *err);
+-bool pmu_msr_write(unsigned int msr, uint32_t low, uint32_t high, int *err);
++bool pmu_msr_read_emulated(u32 msr, u64 *val);
++bool pmu_msr_write_emulated(u32 msr, u64 val);
+ int pmu_apic_update(uint32_t reg);
+ u64 xen_read_pmc(int counter);
+ 
+-- 
+2.49.0
+
 
