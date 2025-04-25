@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56454C3ABA1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C82C3ABA3
 	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 08:35:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.967311.1357126 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.967320.1357202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8EWy-0002tm-O6; Fri, 25 Apr 2025 08:35:32 +0000
+	id 1u8EX3-0004Tm-RL; Fri, 25 Apr 2025 08:35:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 967311.1357126; Fri, 25 Apr 2025 08:35:32 +0000
+Received: by outflank-mailman (output) from mailman id 967320.1357202; Fri, 25 Apr 2025 08:35:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8EWy-0002tf-LG; Fri, 25 Apr 2025 08:35:32 +0000
-Received: by outflank-mailman (input) for mailman id 967311;
- Fri, 25 Apr 2025 08:35:31 +0000
+	id 1u8EX3-0004QH-GH; Fri, 25 Apr 2025 08:35:37 +0000
+Received: by outflank-mailman (input) for mailman id 967320;
+ Fri, 25 Apr 2025 08:35:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Tuhi=XL=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u8EWx-0002sy-4l
- for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 08:35:31 +0000
+ id 1u8EX1-0002sy-Nh
+ for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 08:35:35 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3cdda175-21b0-11f0-9eb3-5ba50f476ded;
- Fri, 25 Apr 2025 10:35:27 +0200 (CEST)
+ id 40efd850-21b0-11f0-9eb3-5ba50f476ded;
+ Fri, 25 Apr 2025 10:35:34 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53P8Yg5V2390085
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53P8Yg5Y2390085
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Fri, 25 Apr 2025 01:35:02 -0700
+ Fri, 25 Apr 2025 01:35:08 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3cdda175-21b0-11f0-9eb3-5ba50f476ded
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53P8Yg5V2390085
+X-Inumbo-ID: 40efd850-21b0-11f0-9eb3-5ba50f476ded
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53P8Yg5Y2390085
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745570103;
-	bh=HGw2nFQL5aKA5RzIm7/QSoWKBl/SarOifRVAMhDF5jc=;
+	s=2025042001; t=1745570110;
+	bh=hZcF32qWuESh4ggtUZngdaMFRMTAW60ISVLqNJ/G40g=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=WmynG9wHeRjV+Q3G3LyDwa0t8H2xdLhYQhh0ra6oIC+UKd/vIlwdgrqzDjKdCDec2
-	 PnojmoRouq3yIpIiGFGVI2h14sephA3L4z+tUh7+efsj9OhPET2PQZgkHJyaQryO1J
-	 HjXROz4i7dHc2FLIHeagMur/3NIya3J9of0PiuZl2K+1kbxBdagDgSqYF6kqkg7o13
-	 4Xt2UVPF8/kCortRdwMgreH8vjS20RTFSJPYmFHCcndr+PULwc5WvqeeXBnSMpd0Jj
-	 t76O0a/CmAPYaGzPF5p6HEpyekAJYxcBemmDnxV7IEH/jHg/7MdFfLjWdILBqGNFxn
-	 IJwSKbRyX0DGw==
+	b=HPho89N0GdJN3e3pjBsIA0ar8wp8OZKDdCb66UoC3mGT8GRM8ymWe0/7RRhoe1RGp
+	 hi5oxD95MX+TAVMTmotvLVmRFlKMhlHBUZvxcrA3ibHc/S5Uptxz4WHL4WsbgQIJOF
+	 eO+lFs8yVNoW+g5v3WExIjfj2qB66a4rYIxtSOq+BOn9czM9SpZJljr3uMsySsN52t
+	 gnmi11rTDeSnKTc6rQtY9lpFo8shGTn0Dz3eMJHrLOzLw+xKsLlQV8fM6B8xPxM/j0
+	 2HVHK3VkcGWFHWjWN6mE35i2sVAys6OTWDWh46qlOCEAMeQPlRv5TfTgefoh8L4zf7
+	 tlW8jQbXAKYVw==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -74,50 +74,153 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com,
         dapeng1.mi@linux.intel.com
-Subject: [PATCH v3 07/14] x86/msr: Add the native_rdmsrq() helper
-Date: Fri, 25 Apr 2025 01:34:30 -0700
-Message-ID: <20250425083442.2390017-8-xin@zytor.com>
+Subject: [PATCH v3 10/14] x86/xen/msr: Remove pmu_msr_{read,write}()
+Date: Fri, 25 Apr 2025 01:34:33 -0700
+Message-ID: <20250425083442.2390017-11-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250425083442.2390017-1-xin@zytor.com>
 References: <20250425083442.2390017-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-__rdmsr() is the lowest-level primitive MSR read API, implemented in
-assembly code and returning an MSR value in a u64 integer, on top of
-which a convenience wrapper native_rdmsr() is defined to return an MSR
-value in two u32 integers.  For some reason, native_rdmsrq() is not
-defined and __rdmsr() is directly used when it needs to return an MSR
-value in a u64 integer.
+As pmu_msr_{read,write}() are now wrappers of pmu_msr_chk_emulated(),
+remove them and use pmu_msr_chk_emulated() directly.
 
-Add the native_rdmsrq() helper, which is simply an alias of __rdmsr(),
-to make native_rdmsr() and native_rdmsrq() a pair of MSR read APIs.
+As pmu_msr_chk_emulated() could easily return false in the cases where
+it would set *emul to false, remove the "emul" argument and use the
+return value instead.
 
+While at it, convert the data type of MSR index to u32 in functions
+called in pmu_msr_chk_emulated().
+
+Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Suggested-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 ---
 
-Change in v2:
-* Split into two changes and add the native_rdmsrl() helper in the
-  first one with a proper explanation (Ingo).
+Change in v3:
+*) Remove the "emul" argument of pmu_msr_chk_emulated() (Juergen Gross).
 ---
- arch/x86/include/asm/msr.h | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/x86/xen/enlighten_pv.c | 15 ++++++++-------
+ arch/x86/xen/pmu.c          | 30 ++++++------------------------
+ arch/x86/xen/xen-ops.h      |  3 +--
+ 3 files changed, 15 insertions(+), 33 deletions(-)
 
-diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index 82a908125b20..7b9713a49d59 100644
---- a/arch/x86/include/asm/msr.h
-+++ b/arch/x86/include/asm/msr.h
-@@ -107,6 +107,11 @@ do {							\
- 	(void)((val2) = (u32)(__val >> 32));		\
- } while (0)
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 61e51a970f3c..528a2f4df050 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1090,7 +1090,7 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
+ {
+ 	u64 val = 0;	/* Avoid uninitialized value for safe variant. */
  
-+static __always_inline u64 native_rdmsrq(u32 msr)
-+{
-+	return __rdmsr(msr);
-+}
+-	if (pmu_msr_read_emulated(msr, &val))
++	if (pmu_msr_chk_emulated(msr, &val, true))
+ 		return val;
+ 
+ 	if (err)
+@@ -1162,12 +1162,13 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
+ 	default:
+ 		val = (u64)high << 32 | low;
+ 
+-		if (!pmu_msr_write_emulated(msr, val)) {
+-			if (err)
+-				*err = native_write_msr_safe(msr, low, high);
+-			else
+-				native_write_msr(msr, low, high);
+-		}
++		if (pmu_msr_chk_emulated(msr, &val, false))
++			return;
 +
- #define native_wrmsr(msr, low, high)			\
- 	__wrmsr(msr, low, high)
++		if (err)
++			*err = native_write_msr_safe(msr, low, high);
++		else
++			native_write_msr(msr, low, high);
+ 	}
+ }
+ 
+diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
+index b6557f2d1a2e..6bee83018694 100644
+--- a/arch/x86/xen/pmu.c
++++ b/arch/x86/xen/pmu.c
+@@ -128,7 +128,7 @@ static inline uint32_t get_fam15h_addr(u32 addr)
+ 	return addr;
+ }
+ 
+-static inline bool is_amd_pmu_msr(unsigned int msr)
++static bool is_amd_pmu_msr(u32 msr)
+ {
+ 	if (boot_cpu_data.x86_vendor != X86_VENDOR_AMD &&
+ 	    boot_cpu_data.x86_vendor != X86_VENDOR_HYGON)
+@@ -194,8 +194,7 @@ static bool is_intel_pmu_msr(u32 msr_index, int *type, int *index)
+ 	}
+ }
+ 
+-static bool xen_intel_pmu_emulate(unsigned int msr, u64 *val, int type,
+-				  int index, bool is_read)
++static bool xen_intel_pmu_emulate(u32 msr, u64 *val, int type, int index, bool is_read)
+ {
+ 	uint64_t *reg = NULL;
+ 	struct xen_pmu_intel_ctxt *ctxt;
+@@ -257,7 +256,7 @@ static bool xen_intel_pmu_emulate(unsigned int msr, u64 *val, int type,
+ 	return false;
+ }
+ 
+-static bool xen_amd_pmu_emulate(unsigned int msr, u64 *val, bool is_read)
++static bool xen_amd_pmu_emulate(u32 msr, u64 *val, bool is_read)
+ {
+ 	uint64_t *reg = NULL;
+ 	int i, off = 0;
+@@ -298,33 +297,16 @@ static bool xen_amd_pmu_emulate(unsigned int msr, u64 *val, bool is_read)
+ 	return false;
+ }
+ 
+-static bool pmu_msr_chk_emulated(unsigned int msr, uint64_t *val, bool is_read,
+-				 bool *emul)
++bool pmu_msr_chk_emulated(u32 msr, u64 *val, bool is_read)
+ {
+ 	int type, index = 0;
+ 
+ 	if (is_amd_pmu_msr(msr))
+-		*emul = xen_amd_pmu_emulate(msr, val, is_read);
++		return xen_amd_pmu_emulate(msr, val, is_read);
+ 	else if (is_intel_pmu_msr(msr, &type, &index))
+-		*emul = xen_intel_pmu_emulate(msr, val, type, index, is_read);
++		return xen_intel_pmu_emulate(msr, val, type, index, is_read);
+ 	else
+ 		return false;
+-
+-	return true;
+-}
+-
+-bool pmu_msr_read_emulated(u32 msr, u64 *val)
+-{
+-	bool emulated;
+-
+-	return pmu_msr_chk_emulated(msr, val, true, &emulated) && emulated;
+-}
+-
+-bool pmu_msr_write_emulated(u32 msr, u64 val)
+-{
+-	bool emulated;
+-
+-	return pmu_msr_chk_emulated(msr, &val, false, &emulated) && emulated;
+ }
+ 
+ static u64 xen_amd_read_pmc(int counter)
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index 163e03e33089..fd7f845b83a3 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -274,8 +274,7 @@ void xen_pmu_finish(int cpu);
+ static inline void xen_pmu_init(int cpu) {}
+ static inline void xen_pmu_finish(int cpu) {}
+ #endif
+-bool pmu_msr_read_emulated(u32 msr, u64 *val);
+-bool pmu_msr_write_emulated(u32 msr, u64 val);
++bool pmu_msr_chk_emulated(u32 msr, u64 *val, bool is_read);
+ int pmu_apic_update(uint32_t reg);
+ u64 xen_read_pmc(int counter);
  
 -- 
 2.49.0
