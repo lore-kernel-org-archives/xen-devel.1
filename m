@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1772C369AB
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 01:16:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.967090.1357049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 867ACC369D1
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 03:45:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.967144.1357058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u87gD-0006E2-CV; Fri, 25 Apr 2025 01:16:37 +0000
+	id 1u8A04-0001uz-Ie; Fri, 25 Apr 2025 03:45:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 967090.1357049; Fri, 25 Apr 2025 01:16:37 +0000
+Received: by outflank-mailman (output) from mailman id 967144.1357058; Fri, 25 Apr 2025 03:45:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u87gD-0006Dv-8k; Fri, 25 Apr 2025 01:16:37 +0000
-Received: by outflank-mailman (input) for mailman id 967090;
- Fri, 25 Apr 2025 01:16:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u8A04-0001us-G9; Fri, 25 Apr 2025 03:45:16 +0000
+Received: by outflank-mailman (input) for mailman id 967144;
+ Fri, 25 Apr 2025 03:45:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=tq29=XL=zytor.com=hpa@srs-se1.protection.inumbo.net>)
- id 1u87gC-0005ro-1R
- for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 01:16:36 +0000
+ id 1u8A02-0001um-S3
+ for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 03:45:15 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eccefaf0-2172-11f0-9eb3-5ba50f476ded;
- Fri, 25 Apr 2025 03:16:34 +0200 (CEST)
-Received: from [172.27.3.244] ([76.133.66.138]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53P1FaK51878943
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b026bbb9-2187-11f0-9ffb-bf95429c2676;
+ Fri, 25 Apr 2025 05:45:12 +0200 (CEST)
+Received: from [IPV6:2601:646:8081:1f93:ace:6989:11eb:d5d3]
+ ([IPv6:2601:646:8081:1f93:ace:6989:11eb:d5d3]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53P3iRFQ2047105
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Thu, 24 Apr 2025 18:15:37 -0700
+ Thu, 24 Apr 2025 20:44:27 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,24 +43,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eccefaf0-2172-11f0-9eb3-5ba50f476ded
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53P1FaK51878943
+X-Inumbo-ID: b026bbb9-2187-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53P3iRFQ2047105
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745543740;
-	bh=Eqcm/Hif/MkDs4mjYz2tKFyoVP1HuqqqBruNWCY5tSI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=bwKC9WDGeH6PKjPk6PbPnscfTUG7uO0p90T8jZtRz/H1uV5R0u0jHyKPLpz4Lzuza
-	 jaan86VUYCLDqr62mFWyqSXvvBjaf+ve6G5ZtKNwudj3pQxiq/p0DQHubDAWAL4iVK
-	 Num9qesxZzs6c+gaFJIpcjhHqgTrRqcXI4bwh1tGXr1pf3tvinHjceiUPk+LlVYVAf
-	 mYaL7M4P9z3kr6aQ69HDJ4GJ4kjHFXVFi/8OoAlHsRrCGt5QgNwZK3Agfp39Cx1S5g
-	 BERlMv7+KxMZFAhG9+QYjnrsyKHBCBRF3w4ALl9e3WkwPa1KT4qcT1tq3RLd9c/O5Z
-	 dx3hBdqeJAyRA==
-Message-ID: <483eb20c-7302-4733-a15f-21d140396919@zytor.com>
-Date: Thu, 24 Apr 2025 18:15:36 -0700
+	s=2025042001; t=1745552672;
+	bh=b2EU0c9r4+7Z91N6+uKj1oR80E0vF0IHEbyiUhJnLQA=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+	b=h6tkGPZf95yQ3bAcYVi/++g5apF9dA+xDaGqiCLYRc9VcHVlrJdGQsg4l29MEZ7CJ
+	 aLVdgM7ERZdGZm+YeYHxkaRoWYmC139k7kZqYZoAzT/znx6Kx6O2GtZpDA/JUfvlJ1
+	 CcsBsfRHddjbpCzdM4zIuzpA7epwqsOqTiZB4ua/CkyilKNABnOQlavSOZxha0+wfj
+	 cX6ckW2WvvNyLFS1B2A5lWVYkYGzgGJhfmVN53iSVa6vyOu/NY5xsXrNsSQKXTH85b
+	 +dwG+fJzWTGalgBqhI1nG1clXUnlMv9jRJvaiZN9wKeE5vSAPLzqIsZZs/a531ezoe
+	 HihwH9Nv3ITtg==
+Message-ID: <72516271-5b28-434a-838b-d8532e1b4fc1@zytor.com>
+Date: Thu, 24 Apr 2025 20:44:19 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [RFC PATCH v2 21/34] x86/msr: Utilize the alternatives mechanism
  to write MSR
+From: "H. Peter Anvin" <hpa@zytor.com>
 To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
         Xin Li
  <xin@zytor.com>, linux-kernel@vger.kernel.org,
@@ -86,46 +88,58 @@ References: <20250422082216.1954310-1-xin@zytor.com>
  <37c88ea3-dd24-4607-9ee1-0f19025aaef3@suse.com>
  <bb8f6b85-4e7d-440a-a8c3-0e0da45864b8@zytor.com>
  <0cdc6e9d-88eb-4ead-8d55-985474257d53@suse.com>
+ <483eb20c-7302-4733-a15f-21d140396919@zytor.com>
 Content-Language: en-US
-From: "H. Peter Anvin" <hpa@zytor.com>
-In-Reply-To: <0cdc6e9d-88eb-4ead-8d55-985474257d53@suse.com>
+In-Reply-To: <483eb20c-7302-4733-a15f-21d140396919@zytor.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 4/24/25 01:14, Jürgen Groß wrote:
+On 4/24/25 18:15, H. Peter Anvin wrote:
+> On 4/24/25 01:14, Jürgen Groß wrote:
+>>>
+>>> Actually, that is how we get this patch with the existing alternatives
+>>> infrastructure.  And we took a step further to also remove the pv_ops
+>>> MSR APIs...
 >>
->> Actually, that is how we get this patch with the existing alternatives
->> infrastructure.  And we took a step further to also remove the pv_ops
->> MSR APIs...
+>> And this is what I'm questioning. IMHO this approach is adding more
+>> code by removing the pv_ops MSR_APIs just because "pv_ops is bad". And
+>> I believe most refusal of pv_ops is based on no longer valid reasoning.
+>>
 > 
-> And this is what I'm questioning. IMHO this approach is adding more
-> code by removing the pv_ops MSR_APIs just because "pv_ops is bad". And
-> I believe most refusal of pv_ops is based on no longer valid reasoning.
+> pvops are a headache because it is effectively a secondary alternatives 
+> infrastructure that is incompatible with the alternatives one...
+> 
+>>> It looks to me that you want to add a new facility to the alternatives
+>>> infrastructure first?
+>>
+>> Why would we need a new facility in the alternatives infrastructure?
+> 
+> I'm not sure what Xin means with "facility", but a key motivation for 
+> this is to:
+> 
+> a. Avoid using the pvops for MSRs when on the only remaining user 
+> thereof (Xen) is only using it for a very small subset of MSRs and for 
+> the rest it is just overhead, even for Xen;
+> 
+> b. Being able to do wrmsrns immediate/wrmsrns/wrmsr and rdmsr immediate/ 
+> rdmsr alternatives.
+> 
+> Of these, (b) is by far the biggest motivation. The architectural 
+> direction for supervisor states is to avoid ad hoc and XSAVES ISA and 
+> instead use MSRs. The immediate forms are expected to be significantly 
+> faster, because they make the MSR index available at the very beginning 
+> of the pipeline instead of at a relatively late stage.
 > 
 
-pvops are a headache because it is effectively a secondary alternatives 
-infrastructure that is incompatible with the alternatives one...
+Note that to support the immediate forms, we *must* do these inline, or 
+the const-ness of the MSR index -- which applies to by far the vast 
+majority of MSR references -- gets lost. pvops does exactly that.
 
->> It looks to me that you want to add a new facility to the alternatives
->> infrastructure first?
-> 
-> Why would we need a new facility in the alternatives infrastructure?
-
-I'm not sure what Xin means with "facility", but a key motivation for 
-this is to:
-
-a. Avoid using the pvops for MSRs when on the only remaining user 
-thereof (Xen) is only using it for a very small subset of MSRs and for 
-the rest it is just overhead, even for Xen;
-
-b. Being able to do wrmsrns immediate/wrmsrns/wrmsr and rdmsr 
-immediate/rdmsr alternatives.
-
-Of these, (b) is by far the biggest motivation. The architectural 
-direction for supervisor states is to avoid ad hoc and XSAVES ISA and 
-instead use MSRs. The immediate forms are expected to be significantly 
-faster, because they make the MSR index available at the very beginning 
-of the pipeline instead of at a relatively late stage.
+Furthermore, the MSR immediate instructions take a 64-bit number in a 
+single register; as these instructions are by necessity relatively long, 
+it makes sense for the alternative sequence to accept a 64-bit input 
+register and do the %eax/%edx shuffle in the legacy fallback code... we 
+did a bunch of experiments to see what made most sense.
 
 	-hpa
 
