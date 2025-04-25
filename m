@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE90C369C2
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 11:24:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.967689.1357448 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EADC369D1
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Apr 2025 11:24:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.967687.1357422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8HAP-0001r8-7J; Fri, 25 Apr 2025 11:24:25 +0000
+	id 1u8HAN-0001E3-MW; Fri, 25 Apr 2025 11:24:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 967689.1357448; Fri, 25 Apr 2025 11:24:25 +0000
+Received: by outflank-mailman (output) from mailman id 967687.1357422; Fri, 25 Apr 2025 11:24:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8HAP-0001qR-2S; Fri, 25 Apr 2025 11:24:25 +0000
-Received: by outflank-mailman (input) for mailman id 967689;
- Fri, 25 Apr 2025 11:24:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u8HAN-0001DI-IN; Fri, 25 Apr 2025 11:24:23 +0000
+Received: by outflank-mailman (input) for mailman id 967687;
+ Fri, 25 Apr 2025 11:24:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6c45=XL=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1u8HAN-0001A7-Qn
- for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 11:24:23 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d6b2928f-21c7-11f0-9eb3-5ba50f476ded;
- Fri, 25 Apr 2025 13:24:23 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43d2d952eb1so15049285e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 25 Apr 2025 04:24:23 -0700 (PDT)
+ id 1u8HAM-0001AX-39
+ for xen-devel@lists.xenproject.org; Fri, 25 Apr 2025 11:24:22 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d4cce376-21c7-11f0-9ffb-bf95429c2676;
+ Fri, 25 Apr 2025 13:24:20 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so15048715e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Apr 2025 04:24:20 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-440a531072csm21743005e9.18.2025.04.25.04.24.21
+ 5b1f17b1804b1-440a531072csm21743005e9.18.2025.04.25.04.24.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 04:24:21 -0700 (PDT)
+ Fri, 25 Apr 2025 04:24:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6b2928f-21c7-11f0-9eb3-5ba50f476ded
+X-Inumbo-ID: d4cce376-21c7-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1745580263; x=1746185063; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=v36HYmxQutvat5+vkDgo13dmyUzLDnP9Gcli+3xTA18=;
-        b=mrx6vv2b/kS660y42GT0Z23ISsNlZxk1PLoYK84p04IqBn1eGu7mirUpBaxFvR6ZJz
-         HFR69Eg2sxWgbEPYO8TOgxVUjXlYv3MUCXcJx7PmSVVYcZkvzDq5uQe8Fk7M3hubYp10
-         w3cdUVVFkqVMKuy53D2wcadKn8YELVP7b//As=
+        d=citrix.com; s=google; t=1745580259; x=1746185059; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YiFJDGmQn+KQNTJ2JzPNQ5Hnz+qZ6HXT6jjVBS38GNk=;
+        b=rYvfmEbSyKlmh0qFt3C9utLc2MTbSsVYsxJQZMzLD/bYWAf1YohDcL4Q36ImXNUGMa
+         GUhztUlSfw+onjKyjoHskjUR5knSCoB5MlxSk6b1/Nziq1OXBQX5WFISWU56diOyDXB2
+         odl2xmvfFBBcHkOjuDb/JsltH05hljW2K1WT4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745580263; x=1746185063;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=v36HYmxQutvat5+vkDgo13dmyUzLDnP9Gcli+3xTA18=;
-        b=SYhlGdwDP/OXqzrjRIh2n6MFq8ZYmCTKrtb/lM6vhEAqrKI20mLQ48fzp3csoJZfeS
-         RELxo8v8f9lbsxhzXXFpYYSyR+3p2vSzbpfSOz2CMr0mUeWq3ktWeILpWtnplasTThRn
-         LpF6GdAmw0HD/tr3EoeKjd45fO+Wa6hxBQ08G7Ans812IXdA3kA1Sc311SA8/3b4dGo6
-         IDad+bWtvBTeiE+vHB6CE5Ky3LktAeHN5qyNs7A8kTp7dZcSZc/t4iPXJUpz/4MUNlLQ
-         dK+BYDCjkcRxSTSIaWuCs8S7jmmu5uli1mihwsOh6E9pjaXcDuPW9pVTEWuVsrnbhpJk
-         r3XQ==
-X-Gm-Message-State: AOJu0YwXgqStn7fbtoqX7FMaNnxx836boEEHMgqEWnTcrVcTCKhVOX/u
-	mioNT1YfFF3rxcgZST+zB9zB3h/zSqMAcIiLTB092/uoACyjrenKa6kGx+kmFAw2/kPMMMFhI9x
-	q
-X-Gm-Gg: ASbGncvUfNnuBUq3RVemGRs9nBGRBZMf3VBRpMBVT/jhjFEom9ond37hJaCERoreENP
-	V5lQlniMmie1OV+afOVbkQrghz1sFBMa8jy1pW36VO+qlIpGia4TBSna/pmw09sdzvpVyP127J3
-	mpqal4fL5KYnZyXVOS81Kq3FqQWXer3BYf2O4zSEWR5q+hV1RJI0z/IzOnjWxqhO6NfVAuj5V4G
-	OK9P8b3cOFx4vL5QUVrj6WkqkkV4ovtz/zTYOb70eVojSHQMJiMaEn2IZYPwnQEfBAoTztFhL+h
-	JOk1hHZvRt0WnT3PzdRLop4FjNzbRmG69VApA6i6zn/RvF8u7hOBkkQZOcymjgsIjtJey1W6EiI
-	yWKeUEIixNofVGA==
-X-Google-Smtp-Source: AGHT+IHRAPyNcrOaqj+bbzurrRKNdUBK3cc5md8L0wzSjrPO3xVS+zDe1HZyI4mdv4p/xbr8sHyvnw==
-X-Received: by 2002:a05:600c:1d9f:b0:43c:fceb:91a with SMTP id 5b1f17b1804b1-440a65e6dc3mr16451745e9.11.1745580262651;
-        Fri, 25 Apr 2025 04:24:22 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1745580259; x=1746185059;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YiFJDGmQn+KQNTJ2JzPNQ5Hnz+qZ6HXT6jjVBS38GNk=;
+        b=UcMSxYajoc8W77InW5mocWmsTgcEW1KYmoqfEuKGonb/hcKDBgxb1b5wCDYa/NNkiW
+         zD8h6zWxL5xVzXn/QymQTSvhiF0WIfzF5GAJ01SkvH7LGPuLAqMJua7iAvTbHD3IKjoB
+         mMHynT1dxc78UsXKAomqnhJpUBgNUf2qopJcrzOySHgiYuhaGng2DxZZ6klbzOkVD6EN
+         HmsBbTRcLSRtnI4fMk7qwWSainEbC5euA2QLatPph60i+F7y589HzgmMok1MC1utkS7W
+         Rqz5qqsSKdV6xNoLoWeYM4MTk2tG3D3gUcKk3bqP0LCKtBg1RV3cuuyZgOk/ShtQOkNr
+         SMjA==
+X-Gm-Message-State: AOJu0Yxj+U81RAfgCnB0fqR+sUO2KJ7dEb0CMIUBTLRnhP02MHiTxfI3
+	Ne4yckixKOIERSkxeNgWLa0haEgFQ19iZplpci7eaKtulwGj4h3noPYQ9PTlJC7jkG4kUGwUNwo
+	f
+X-Gm-Gg: ASbGncuoJLlrXsy+18CqfLGPgu7Ca/1oq7XxPqWj+NI1KDRGF99vepki+9rRpiN5vFq
+	MwDvMalFooGzSXwoYhVIOCyIwmirNXrQg6Ciio6zOFF0HeaPRRYKHldlinfl/ZigI8DJ9O5SwEv
+	cHXPt1x18Lo8BVVu2nBwz4JCNSM/xQdSj7a/4J+J4sIauBB5KGIJoEMspBFuE8yc6tSFO/G6oLz
+	/WZuhVR5CwsTtzyHfcDXaWZl7TPV5YidkuJC5jbbub0jB8Dypvc+8Zk0vumCbKNQR9m4pjFGZSI
+	87dlkj1f5oaz52FfDlfRSZyltsAHkZHtNhO4VEQJ8GkkCVzgzq0k01Z1i3J7un8L8iz3VgSgtMd
+	O8DFac6+c5lECBQ==
+X-Google-Smtp-Source: AGHT+IEzI4yvi2ZlxZKf3Lt/U46wM/oxeiZTMcJO8ab9we6uVs6D8qHzxmqn65nQbEbGkQeCDQxOVA==
+X-Received: by 2002:a05:600c:1c0a:b0:440:68db:a045 with SMTP id 5b1f17b1804b1-440a66abaffmr14477275e9.26.1745580259369;
+        Fri, 25 Apr 2025 04:24:19 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Shawn Anastasio <sanastasio@raptorengineering.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
@@ -91,69 +90,44 @@ Cc: Shawn Anastasio <sanastasio@raptorengineering.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH v5 3/3] ppc/mm: Introduce mm-types.h
-Date: Fri, 25 Apr 2025 12:24:15 +0100
-Message-Id: <20250425112415.245585-4-andrew.cooper3@citrix.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v5 0/3] xen/mm: Introduce pte_attr_t
+Date: Fri, 25 Apr 2025 12:24:12 +0100
+Message-Id: <20250425112415.245585-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250425112415.245585-1-andrew.cooper3@citrix.com>
-References: <20250425112415.245585-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
+This is in order to support PPC needing wider flags, but I've also written it
+as a showcase of the new __has_include().
 
-Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1786141700
 
-Possibly not for taking on it's own (might be better with the PPC
-implemenation of map_pages_to_xen()).
+Andrew Cooper (1):
+  xen/mm: Introduce mm-types.h
 
-Nevertheless, this patch alone now does trip:
+Shawn Anastasio (2):
+  xen/mm: Switch some APIs over to pte_attr_t
+  ppc/mm: Introduce mm-types.h
 
-  diff --git a/xen/common/vmap.c b/xen/common/vmap.c
-  index d6991421f3f7..9552806dba39 100644
-  --- a/xen/common/vmap.c
-  +++ b/xen/common/vmap.c
-  @@ -228,6 +228,8 @@ void *__vmap(const mfn_t *mfn, unsigned int granularity,
-       void *va = vm_alloc(nr * granularity, align, type);
-       unsigned long cur = (unsigned long)va;
-
-  +    BUILD_BUG_ON(sizeof(pte_attr_t) != 4);
-  +
-       for ( ; va && nr--; ++mfn, cur += PAGE_SIZE * granularity )
-       {
-           if ( map_pages_to_xen(cur, *mfn, granularity, flags) )
-
-in PPC builds only.
----
- xen/arch/ppc/include/asm/mm-types.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ xen/arch/arm/mmu/pt.c               |  4 ++--
+ xen/arch/ppc/include/asm/mm-types.h |  7 +++++++
+ xen/arch/ppc/mm-radix.c             |  2 +-
+ xen/arch/riscv/pt.c                 |  2 +-
+ xen/arch/x86/mm.c                   |  6 +++---
+ xen/common/efi/boot.c               |  4 ++--
+ xen/common/vmap.c                   |  2 +-
+ xen/include/xen/mm-types.h          | 19 +++++++++++++++++++
+ xen/include/xen/mm.h                |  7 ++++---
+ xen/include/xen/vmap.h              |  3 ++-
+ 10 files changed, 42 insertions(+), 14 deletions(-)
  create mode 100644 xen/arch/ppc/include/asm/mm-types.h
+ create mode 100644 xen/include/xen/mm-types.h
 
-diff --git a/xen/arch/ppc/include/asm/mm-types.h b/xen/arch/ppc/include/asm/mm-types.h
-new file mode 100644
-index 000000000000..06a3af1c6eda
---- /dev/null
-+++ b/xen/arch/ppc/include/asm/mm-types.h
-@@ -0,0 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef PPC_MM_TYPES_H
-+#define PPC_MM_TYPES_H
-+
-+typedef unsigned long pte_attr_t;
-+
-+#endif /* PPC_MM_TYPES_H */
+
+base-commit: 6dc1b711ded0e477c501d4017ccb0da83d6d56a1
 -- 
 2.39.5
 
