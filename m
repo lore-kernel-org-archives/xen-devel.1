@@ -4,36 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B79F6C369CB
-	for <xen-devel@archiver.kernel.org>; Sat, 26 Apr 2025 13:46:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.969186.1358426 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8728AC369CB
+	for <xen-devel@archiver.kernel.org>; Sat, 26 Apr 2025 18:51:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.969283.1358446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8fqp-0006IZ-6q; Sat, 26 Apr 2025 13:45:51 +0000
+	id 1u8kby-0001pW-2j; Sat, 26 Apr 2025 18:50:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 969186.1358426; Sat, 26 Apr 2025 13:45:51 +0000
+Received: by outflank-mailman (output) from mailman id 969283.1358446; Sat, 26 Apr 2025 18:50:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8fqp-0006IS-4H; Sat, 26 Apr 2025 13:45:51 +0000
-Received: by outflank-mailman (input) for mailman id 969186;
- Sat, 26 Apr 2025 13:45:50 +0000
+	id 1u8kbx-0001pP-W3; Sat, 26 Apr 2025 18:50:49 +0000
+Received: by outflank-mailman (input) for mailman id 969283;
+ Sat, 26 Apr 2025 18:50:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/J9Y=XM=linux.intel.com=ilpo.jarvinen@srs-se1.protection.inumbo.net>)
- id 1u8fqo-0006I3-1t
- for xen-devel@lists.xenproject.org; Sat, 26 Apr 2025 13:45:50 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c0d008e8-22a4-11f0-9eb3-5ba50f476ded;
- Sat, 26 Apr 2025 15:45:47 +0200 (CEST)
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Apr 2025 06:45:44 -0700
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost)
- ([10.245.245.235])
- by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Apr 2025 06:45:29 -0700
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ssvg=XM=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1u8kbw-0001Xu-RD
+ for xen-devel@lists.xenproject.org; Sat, 26 Apr 2025 18:50:48 +0000
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
+ [79.135.106.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5dffd455-22cf-11f0-9eb3-5ba50f476ded;
+ Sat, 26 Apr 2025 20:50:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,178 +38,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c0d008e8-22a4-11f0-9eb3-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1745675147; x=1777211147;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=I4nsA4r/Iu57UddEcOKuVuHTuSSaO7yRpZoDOY/Qp2U=;
-  b=minQNd4PV8UvM6sS4XH470LF4gFoSwzIUdtxZBBvpXPTDa4i4ZR9inpC
-   1lgGYgJLwYHgzcE6Qgs+wXV4aY04svzmCoQpUndxjQAe0GsCr6KiXfl2h
-   hvlqsJzQMpHOhzBIR2mWg/j0yoVZ99OPbJyIzF8TvrEFtTKUluojB6M5H
-   0XY0nU/TumYogcpvAOl+WYqNKoA5ehcIqetfcPNwDE87r3/mNePKg6n5c
-   eu+tGOA0QlMt/4EGyeWvk/RPDDQ2WeaKCjXfq2xh4YqePtJxFrfg0XBCH
-   oso7yNu6gZfgm+cOx0ouwyOEe0fT0Kd/jMOeGhH9j/fZzmdE1fxHa7LN9
-   Q==;
-X-CSE-ConnectionGUID: joVWRuThQpWSTAiBySOrqQ==
-X-CSE-MsgGUID: awuDPgtGSYS3cylfsoBFzw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11415"; a="47229785"
-X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
-   d="scan'208";a="47229785"
-X-CSE-ConnectionGUID: WMbNce1ORpCDbJZHWjGjpw==
-X-CSE-MsgGUID: UaIR2HdjTjK095toUEDbGQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
-   d="scan'208";a="138223278"
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Sat, 26 Apr 2025 16:45:26 +0300 (EEST)
-To: Xin Li <xin@zytor.com>
-cc: LKML <linux-kernel@vger.kernel.org>, kvm@vger.kernel.org, 
-    linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-    virtualization@lists.linux.dev, linux-pm@vger.kernel.org, 
-    linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org, 
-    linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-    Netdev <netdev@vger.kernel.org>, platform-driver-x86@vger.kernel.org, 
-    tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
-    dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
-    acme@kernel.org, jgross@suse.com, andrew.cooper3@citrix.com, 
-    peterz@infradead.org, namhyung@kernel.org, mark.rutland@arm.com, 
-    alexander.shishkin@linux.intel.com, jolsa@kernel.org, irogers@google.com, 
-    adrian.hunter@intel.com, kan.liang@linux.intel.com, wei.liu@kernel.org, 
-    ajay.kaher@broadcom.com, bcm-kernel-feedback-list@broadcom.com, 
-    tony.luck@intel.com, pbonzini@redhat.com, vkuznets@redhat.com, 
-    seanjc@google.com, luto@kernel.org, boris.ostrovsky@oracle.com, 
-    kys@microsoft.com, haiyangz@microsoft.com, decui@microsoft.com, 
-    dapeng1.mi@linux.intel.com
-Subject: Re: [PATCH v3 01/14] x86/msr: Move rdtsc{,_ordered}() to
- <asm/tsc.h>
-In-Reply-To: <e62b81f3-1952-43e6-85fd-18c6f37d531d@zytor.com>
-Message-ID: <f8a5b080-b2a8-06f0-3d2d-d232ef0887a4@linux.intel.com>
-References: <20250425083442.2390017-1-xin@zytor.com> <20250425083442.2390017-2-xin@zytor.com> <42dc90e1-df2a-2324-d28c-d75fb525e4a2@linux.intel.com> <e62b81f3-1952-43e6-85fd-18c6f37d531d@zytor.com>
+X-Inumbo-ID: 5dffd455-22cf-11f0-9eb3-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1745693446; x=1745952646;
+	bh=iey7/TFInYOca1c5c+QCwD1da9aOSx54FLyeif0g//M=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=emMKyYH9GS+mZuU+sAyQdIS+asoVTPCYhuqtCfLUIcQD+r2a3SHLAk718EaKqM1MO
+	 XLudeLW2WvG1ku7feIIAVT15MsL/fg7yb+VOAzxwOPQS0tvL9PhrBc2rcEOSO0dSsK
+	 +1iw5qP+aFPnIgBUJ/L5k858rmxpxMg50BPXdvQN1x+XyCfpIQ4GdJ8iL9GmboS1iF
+	 OIjlYTphJy/tJqr/MFpHewwPx3D41Oh3pLegYnEB7PCkFEEYaOaikWjsHVjL7UvlxZ
+	 Koo7LOp2EJklE1fym6bWWaSxqWnZY7Di5r8PCxSRNxwopiNMKgRG7Lap3cXKZw1BFa
+	 3CD4ISTQ1O8lQ==
+Date: Sat, 26 Apr 2025 18:50:41 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v2 1/3] xen/console: cleanup conring management
+Message-ID: <20250426185021.100646-2-dmukhin@ford.com>
+In-Reply-To: <20250426185021.100646-1-dmukhin@ford.com>
+References: <20250426185021.100646-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: c0842f0b4534ea8c129fd7ecc838092ce8bcf57b
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-589040720-1745675126=:944"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+From: Denis Mukhin <dmukhin@ford.com>
 
---8323328-589040720-1745675126=:944
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+Move console_locks_busted handling inside conring_puts() to remove
+tasklet code duplication.
 
-On Sat, 26 Apr 2025, Xin Li wrote:
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+Changes v1->v2:
+- added Stefano's R-b
+---
+ xen/drivers/char/console.c | 29 ++++++++++++++---------------
+ 1 file changed, 14 insertions(+), 15 deletions(-)
 
-> On 4/25/2025 8:45 AM, Ilpo J=C3=A4rvinen wrote:
-> > To me this looks really a random set of source files, maybe it helped s=
-ome
-> > build success but it's hard for me to review this because there are sti=
-ll
-> > cases that depend on indirect include chains.
-> >=20
-> > Could you just look into solving all missing msr.h includes instead
-> > as clearly some are still missing after 3 pre-existing ones and you add=
-ing
-> > it into 3 files:
-> >=20
-> > $ git grep -e rdmsr -e wrmsr -l drivers/platform/x86/
-> > drivers/platform/x86/intel/ifs/core.c
-> > drivers/platform/x86/intel/ifs/load.c
-> > drivers/platform/x86/intel/ifs/runtest.c
-> > drivers/platform/x86/intel/pmc/cnp.c
-> > drivers/platform/x86/intel/pmc/core.c
-> > drivers/platform/x86/intel/speed_select_if/isst_if_common.c
-> > drivers/platform/x86/intel/speed_select_if/isst_if_mbox_msr.c
-> > drivers/platform/x86/intel/speed_select_if/isst_tpmi_core.c
-> > drivers/platform/x86/intel/tpmi_power_domains.c
-> > drivers/platform/x86/intel/turbo_max_3.c
-> > drivers/platform/x86/intel/uncore-frequency/uncore-frequency.c
-> > drivers/platform/x86/intel_ips.c
-> >=20
-> > $ git grep -e 'msr.h' -l drivers/platform/x86/
-> > drivers/platform/x86/intel/pmc/core.c
-> > drivers/platform/x86/intel/tpmi_power_domains.c
-> > drivers/platform/x86/intel_ips.c
->=20
-> I think you want me to add all necessary direct inclusions, right?
-
-For asm/msr.h yes, as it seems you're altering the inclusion paths and all=
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index c3150fbdb7..aaa97088aa 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -325,6 +325,17 @@ static void cf_check do_dec_thresh(unsigned char key, =
+bool unused)
+  * ********************************************************
+  */
 =20
-non-direct includes have a chance of breaking so it seems prudent to just=
++static void cf_check notify_dom0_con_ring(void *unused)
++{
++    send_global_virq(VIRQ_CON_RING);
++}
++
++static DECLARE_SOFTIRQ_TASKLET(notify_dom0_con_ring_tasklet,
++                               notify_dom0_con_ring,
++                               NULL);
++
++static bool console_locks_busted;
++
+ static void conring_puts(const char *str, size_t len)
+ {
+     ASSERT(rspin_is_locked(&console_lock));
+@@ -334,6 +345,9 @@ static void conring_puts(const char *str, size_t len)
 =20
-convert them into direct includes.
-
-> This is the right thing to do, and I did try it but gave up later.
->=20
-> I will do it in the next iteration as you asked.  But I want to make my
-> points:
->=20
-> 1) It's not just two patterns {rd,wr}msr, there are a lot of definitions
->    in <asm/msr.h> and we need to cover all of them:
-
-I know and I don't expect you to get it 100% perfect, but taking a major=20
-step into the right direction would be way better than build testing one=20
-configuration and see what blows up and fix only those.
-
-In this particular case, the amount of includes seemed really subpar with=
+     if ( conringp - conringc > conring_size )
+         conringc =3D conringp - conring_size;
++
++    if ( !console_locks_busted )
++        tasklet_schedule(&notify_dom0_con_ring_tasklet);
+ }
 =20
-many users lacking the include.
-
->       struct msr_info
->       struct msr_regs_info
->       struct saved_msr
->       struct saved_msrs
-
-Could be shortened to -e 'struct msr' -e 'struct saved_msr'.
-
->       {read,write}_msr
->       rdpmc
->       .*msr.*_on_cpu
-
-Well, my pattern already caught rdmsr.*on_cpu and wrmsr.*on_cpu.
-
-For the other patterns, I don't see those at all under=20
-drivers/platform/x86/ but I think when one typically implies the=20
-others tend appear as well so this might not be as hard as it seems.
-
-> 2) Once all necessary direct inclusions are in place, it's easy to
->    overlook adding a header inclusion in practice, especially if the
->    build passes.  Besides we often forget to remove a header when a
->    definition is removed.  In other words, direct inclusion is hard to
->    maintain.
-
-This is true as well but we should still try to move towards the right=20
-state affairs even if we will not get it near 100% until there's a real=20
-tool that relentlessly keeps exposing such human oversight.
-
-And do I try to check also includes whenever I remember while reviewing=20
-patches (which requires some effort as they are not visible in the code=20
-context and might not appear in a patch at all).
-
-> 3) Some random kernel configuration combinations can cause the current
->    kernel build to fail.  I hit one in x86 UML.
-
-Yes, which why direct including is much better than relying on fragile=20
-indirects.
-
-> We all know Ingo is the best person to discuss this with :).  While my
-> understanding of the header inclusion issue may be inaccurate or
-> outdated.
->=20
-> So for me, using "make allyesconfig" is a practical method for a quick
-> local build check, plus I always send my patches to Intel LKP.
-
-Even with LKP, randconfig builds may still require many tests to find=20
-issues.
-
-> There probably wants a script that identifies all files that reference a
-> definition in a header thus need to include it explicitly.  And indirect
-> includes should be zapped.
-
-Sadly, the clang based include-what-you-use tool is not yet there for=20
-the kernel AFAIK.
-
+ long read_console_ring(struct xen_sysctl_readconsole *op)
+@@ -594,13 +608,6 @@ static void cf_check serial_rx(char c)
+     __serial_rx(c);
+ }
+=20
+-static void cf_check notify_dom0_con_ring(void *unused)
+-{
+-    send_global_virq(VIRQ_CON_RING);
+-}
+-static DECLARE_SOFTIRQ_TASKLET(notify_dom0_con_ring_tasklet,
+-                               notify_dom0_con_ring, NULL);
+-
+ #ifdef CONFIG_X86
+ static inline void xen_console_write_debug_port(const char *buf, size_t le=
+n)
+ {
+@@ -648,10 +655,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM=
+(char) buffer,
+ #endif
+=20
+             if ( opt_console_to_ring )
+-            {
+                 conring_puts(kbuf, kcount);
+-                tasklet_schedule(&notify_dom0_con_ring_tasklet);
+-            }
+=20
+             nrspin_unlock_irq(&console_lock);
+         }
+@@ -753,8 +757,6 @@ long do_console_io(
+  * *****************************************************
+  */
+=20
+-static bool console_locks_busted;
+-
+ static void __putstr(const char *str)
+ {
+     size_t len =3D strlen(str);
+@@ -775,9 +777,6 @@ static void __putstr(const char *str)
+ #endif
+=20
+     conring_puts(str, len);
+-
+-    if ( !console_locks_busted )
+-        tasklet_schedule(&notify_dom0_con_ring_tasklet);
+ }
+=20
+ static int printk_prefix_check(char *p, char **pp)
 --=20
- i.
+2.34.1
 
---8323328-589040720-1745675126=:944--
+
 
