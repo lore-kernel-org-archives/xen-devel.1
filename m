@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D1ECC369D3
-	for <xen-devel@archiver.kernel.org>; Sat, 26 Apr 2025 07:27:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.968971.1358356 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB58EC369CB
+	for <xen-devel@archiver.kernel.org>; Sat, 26 Apr 2025 07:27:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.968970.1358347 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8Zwo-0007IV-3E; Sat, 26 Apr 2025 07:27:38 +0000
+	id 1u8Zwa-00071s-Td; Sat, 26 Apr 2025 07:27:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 968971.1358356; Sat, 26 Apr 2025 07:27:38 +0000
+Received: by outflank-mailman (output) from mailman id 968970.1358347; Sat, 26 Apr 2025 07:27:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8Zwo-0007IO-0d; Sat, 26 Apr 2025 07:27:38 +0000
-Received: by outflank-mailman (input) for mailman id 968971;
- Sat, 26 Apr 2025 07:27:36 +0000
+	id 1u8Zwa-00071l-QK; Sat, 26 Apr 2025 07:27:24 +0000
+Received: by outflank-mailman (input) for mailman id 968970;
+ Sat, 26 Apr 2025 07:27:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ssvg=XM=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1u8Zwm-00071f-NN
- for xen-devel@lists.xenproject.org; Sat, 26 Apr 2025 07:27:36 +0000
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ece44583-226f-11f0-9eb3-5ba50f476ded;
- Sat, 26 Apr 2025 09:27:36 +0200 (CEST)
+ id 1u8ZwY-00071f-IN
+ for xen-devel@lists.xenproject.org; Sat, 26 Apr 2025 07:27:23 +0000
+Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
+ [79.135.106.31]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e37b38f8-226f-11f0-9eb3-5ba50f476ded;
+ Sat, 26 Apr 2025 09:27:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +38,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ece44583-226f-11f0-9eb3-5ba50f476ded
+X-Inumbo-ID: e37b38f8-226f-11f0-9eb3-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1745652455; x=1745911655;
-	bh=wuce2F8XhQtkwL25frhauUv7JiUBR5gDyh17uZrs2m0=;
+	s=protonmail; t=1745652438; x=1745911638;
+	bh=VjAyQNIjtxK99AxpiwiswOvxpQEu4dQDUxS4qpU493s=;
 	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
 	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
 	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=iQ111GOXT09mKcbkxGPjIIwYaS+w8//WWrVsQLAczZ/yTAldZA0LDBEGANvfCqdkR
-	 ZFEaMdZvwm8B5TMgH+BMexgHkuMqNlbQtXII9A2/uPTF9R2qFgT/ZcESAanBm2ZqUH
-	 EQwVZi+p5eRbzXkiHFmmhBW4/oSkkZnzWp90bQyVQsw5/0laAqEhM1H8iCjtNUe1XD
-	 SAwmy/hEg/n0806fbqH6EpqUc85Teh7WJ1oDefiT76BHu1wDF5sEz09hk+F787sxzY
-	 5biaTkr1/klk2vc7m4eKEXj6nFvyOLR/FiIhVqSp1ZpXO/ImZ/aKh3SIvj4VUQjQ+y
-	 OmsIOKFHAYcnQ==
-Date: Sat, 26 Apr 2025 07:27:29 +0000
+	b=NTip1YwnTSs2DsekIYBYWGWs0S+GGXzxbETrFJ4lSOk2JEe44D8/6v9pGZ1T3pDQD
+	 uTE7kaVkcpCK+i8JAr1wkT9LHRkciZ1xYPGjKcLNOdEGLkYR8/wdcJnp59neJg1b2X
+	 FgA7qp6N295ORbrTlJ8mHt7g+gXK5zRPKZYOhgyOyTY6ICJeqyDD8qsWfXkV7hUTqD
+	 SBbWLxDgv1T274oEsMIJYHpPaxlazz0T8kl5iUEITdwJULyqF14d5panXkBrK2Ux95
+	 ZNgvDu9wQWoOIKwrFRHL0BgQTayxFP5vSbyWRKxZvkAWfSJWwYUcffjNkTlFvnFilx
+	 Ot+gtktbb7RBg==
+Date: Sat, 26 Apr 2025 07:27:12 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, jbeulich@suse.com, roger.pau@citrix.com, dmukhin@ford.com
-Subject: [PATCH v4 1/3] x86/vmx: Introduce vmread()
-Message-ID: <20250426072720.39317-1-dmukhin@ford.com>
+Subject: [PATCH v4 0/3] x86/vmx: Update __vmread()
+Message-ID: <20250426072656.39259-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 4740a4eca92b80fd0b2c2946a8de21d1667bc54f
+X-Pm-Message-ID: 8f0626220fdd2a9a758cd9019b9e1a281d9e25fa
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-From: Denis Mukhin <dmukhin@ford.com>
+The patch series reworks __vmread() by introducing a new cleaner API.
 
-The current implementation of __vmread() returns the result via pointer
-argument which leads to excess code in some places.
+Patch 1 introduces a new vmread() call which will be a replacement for
+__vmcall().
+Patch 2 updates the type of arch_vcpu->dr7 field.
+Patch 3 replaces __vmread() with vmread().
 
-Introduce a new vmread() function as suggested in [1].
+Link to v3: https://lore.kernel.org/xen-devel/20250422215833.522007-1-dmukh=
+in@ford.com/
+Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1=
+787132005
 
-[1] https://lore.kernel.org/xen-devel/c452a1d7-4a57-4c5f-8a83-36a74ff228ec@=
-citrix.com/
+Denis Mukhin (3):
+  x86/vmx: Introduce vmread()
+  x86/vmx: Update arch_vcpu->dr7 type
+  x86/vmx: Replace __vmread() with vmread()
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
- xen/arch/x86/include/asm/hvm/vmx/vmx.h | 24 +++++++++++++++---------
- 1 file changed, 15 insertions(+), 9 deletions(-)
+ docs/misra/function-macro-properties.json |   9 -
+ xen/arch/x86/cpu/vpmu_intel.c             |   3 +-
+ xen/arch/x86/hvm/vmx/intr.c               |  26 +--
+ xen/arch/x86/hvm/vmx/realmode.c           |   2 +-
+ xen/arch/x86/hvm/vmx/vmcs.c               |  11 +-
+ xen/arch/x86/hvm/vmx/vmx.c                | 210 ++++++++++------------
+ xen/arch/x86/hvm/vmx/vvmx.c               |  43 ++---
+ xen/arch/x86/include/asm/domain.h         |   2 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h    |  19 +-
+ 9 files changed, 134 insertions(+), 191 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/=
-asm/hvm/vmx/vmx.h
-index 33d3d43a38..cc8c53fab1 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -320,16 +320,25 @@ static always_inline void __vmpclear(u64 addr)
-     BUG();
- }
-=20
--static always_inline void __vmread(unsigned long field, unsigned long *val=
-ue)
-+static always_inline unsigned long vmread(unsigned long field)
- {
--    asm volatile ( "vmread %1, %0\n\t"
-+    unsigned long value;
-+
-+    asm volatile ( "vmread %[field], %[value]\n\t"
-                    /* CF=3D=3D1 or ZF=3D=3D1 --> BUG() */
-                    UNLIKELY_START(be, vmread)
-                    _ASM_BUGFRAME_TEXT(0)
-                    UNLIKELY_END_SECTION
--                   : "=3Drm" (*value)
--                   : "r" (field),
-+                   : [value] "=3Drm" (value)
-+                   : [field] "r" (field),
-                      _ASM_BUGFRAME_INFO(BUGFRAME_bug, __LINE__, __FILE__, =
-0) );
-+
-+    return value;
-+}
-+
-+static always_inline void __vmread(unsigned long field, unsigned long *val=
-ue)
-+{
-+    *value =3D vmread(field);
- }
-=20
- static always_inline void __vmwrite(unsigned long field, unsigned long val=
-ue)
-@@ -363,7 +372,7 @@ static inline enum vmx_insn_errno vmread_safe(unsigned =
-long field,
-     if ( unlikely(fail_invalid) )
-         ret =3D VMX_INSN_FAIL_INVALID;
-     else if ( unlikely(fail_valid) )
--        __vmread(VM_INSTRUCTION_ERROR, &ret);
-+        ret =3D vmread(VM_INSTRUCTION_ERROR);
-=20
-     return ret;
- }
-@@ -371,8 +380,6 @@ static inline enum vmx_insn_errno vmread_safe(unsigned =
-long field,
- static inline enum vmx_insn_errno vmwrite_safe(unsigned long field,
-                                                unsigned long value)
- {
--    unsigned long ret;
--
-     asm goto ( "vmwrite %[value], %[field]\n\t"
-                "jc %l[vmfail_invalid]\n\t"
-                "jz %l[vmfail_error]"
-@@ -386,8 +393,7 @@ static inline enum vmx_insn_errno vmwrite_safe(unsigned=
- long field,
-     return VMX_INSN_FAIL_INVALID;
-=20
-  vmfail_error:
--    __vmread(VM_INSTRUCTION_ERROR, &ret);
--    return ret;
-+    return vmread(VM_INSTRUCTION_ERROR);
- }
-=20
- static always_inline void __invept(unsigned long type, uint64_t eptp)
 --=20
 2.34.1
 
