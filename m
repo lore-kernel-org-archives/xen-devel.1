@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C02C1C369D5
-	for <xen-devel@archiver.kernel.org>; Sun, 27 Apr 2025 09:21:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.969574.1358643 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BEAEC3ABA1
+	for <xen-devel@archiver.kernel.org>; Sun, 27 Apr 2025 09:21:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.969572.1358629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8yCY-0002ty-PF; Sun, 27 Apr 2025 09:21:30 +0000
+	id 1u8yCX-0002hY-Jj; Sun, 27 Apr 2025 09:21:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 969574.1358643; Sun, 27 Apr 2025 09:21:30 +0000
+Received: by outflank-mailman (output) from mailman id 969572.1358629; Sun, 27 Apr 2025 09:21:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u8yCY-0002s7-5B; Sun, 27 Apr 2025 09:21:30 +0000
-Received: by outflank-mailman (input) for mailman id 969574;
- Sun, 27 Apr 2025 09:21:28 +0000
+	id 1u8yCX-0002ep-Bp; Sun, 27 Apr 2025 09:21:29 +0000
+Received: by outflank-mailman (input) for mailman id 969572;
+ Sun, 27 Apr 2025 09:21:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hqWD=XN=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u8yCW-0001A9-AC
- for xen-devel@lists.xenproject.org; Sun, 27 Apr 2025 09:21:28 +0000
+ id 1u8yCV-0001A9-LF
+ for xen-devel@lists.xenproject.org; Sun, 27 Apr 2025 09:21:27 +0000
 Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fdeccf77-2348-11f0-9ffb-bf95429c2676;
- Sun, 27 Apr 2025 11:21:26 +0200 (CEST)
+ id fd8bdb24-2348-11f0-9ffb-bf95429c2676;
+ Sun, 27 Apr 2025 11:21:25 +0200 (CEST)
 Received: from terminus.zytor.com (terminus.zytor.com
  [IPv6:2607:7c80:54:3:0:0:0:136]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53R9KRSA1598826
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53R9KRS81598826
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Sun, 27 Apr 2025 02:20:59 -0700
+ Sun, 27 Apr 2025 02:20:54 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fdeccf77-2348-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53R9KRSA1598826
+X-Inumbo-ID: fd8bdb24-2348-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53R9KRS81598826
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745745661;
-	bh=xSwvXgDX6OxaNo/5zNBmXsRwQ/88eQ44kA7lem5A6dQ=;
+	s=2025042001; t=1745745656;
+	bh=bzFeWw6MFKyWrGw0/gn3Z8aFXHMt/Uenz11b4dG3MDc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=D0JUbxQQdbZCNLX3OKQu8A6eB6OZaD+NW2/MquqPBPq0nySaKbBd5haWdeFwCjcbL
-	 48nG/DeH0VR6tg3lfosGvNIIZnow1Qc7IbkQZGYWFBtKkzmVdidOPgmlRnROE/OKP8
-	 J1Skm6wu/LBIeAtXycYnjcj6fGliv6eMIGxXoz5gy8tT/ncdqThWrv/95hhjY7HSD9
-	 kBT2J4VNQ0ZrdHTfRlTxtDrZzHu0mOdaF2diRqVWnAD9CdLLQ60qpzCLTAWM7EoWtV
-	 Aj+H1l+tc2HfB2gaOXvcpVAY35MnutPbbZHkO1HCI/I9O6M6r50n8XkoDdMmZBnCYU
-	 9cvpSWeBC7LyQ==
+	b=Qe7DdUyA6Vfc8M4QRIxa4Z9YkrXEdOqRRWeljkIsdUk3S4jQ0WofjiJl/3JtPZfRa
+	 oqYLhNa9F2QGhF74XS4fySVpp8gUtxFi4eGGCFmiLuWoGJTzccCu6vKUJxTqaN1p/9
+	 i/ooQbZ0h1EJW57gJwo9FzQk1GNeYSlypakueXANTztoi0o6vItHNEVUV01dWO9Uoa
+	 eudFhhaYI3XxIT5LpI91SsbwdMc33b51+WdKFBmbeTLbM2d3b+o0fahMn0n17WD5RG
+	 kWY/LYuOeuPBrl8OO2lTxqBNoHq+wD10METAdlfpDLmlGTBeOlSi18XTgg9dWCWVSt
+	 ULCokpcBvc9vg==
 From: "Xin Li (Intel)" <xin@zytor.com>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
         linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
@@ -74,421 +74,161 @@ Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
         luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
         haiyangz@microsoft.com, decui@microsoft.com,
         dapeng1.mi@linux.intel.com, ilpo.jarvinen@linux.intel.com
-Subject: [PATCH v4 13/15] x86/pvops/msr: refactor pv_cpu_ops.write_msr{,_safe}()
-Date: Sun, 27 Apr 2025 02:20:25 -0700
-Message-ID: <20250427092027.1598740-14-xin@zytor.com>
+Subject: [PATCH v4 11/15] x86/xen/msr: Remove pmu_msr_{read,write}()
+Date: Sun, 27 Apr 2025 02:20:23 -0700
+Message-ID: <20250427092027.1598740-12-xin@zytor.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250427092027.1598740-1-xin@zytor.com>
 References: <20250427092027.1598740-1-xin@zytor.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-An MSR value is represented as a 64-bit unsigned integer, with existing
-MSR instructions storing it in EDX:EAX as two 32-bit segments.
+As pmu_msr_{read,write}() are now wrappers of pmu_msr_chk_emulated(),
+remove them and use pmu_msr_chk_emulated() directly.
 
-The new immediate form MSR instructions, however, utilize a 64-bit
-general-purpose register to store the MSR value.  To unify the usage of
-all MSR instructions, let the default MSR access APIs accept an MSR
-value as a single 64-bit argument instead of two 32-bit segments.
+As pmu_msr_chk_emulated() could easily return false in the cases where
+it would set *emul to false, remove the "emul" argument and use the
+return value instead.
 
-The dual 32-bit APIs are still available as convenient wrappers over the
-APIs that handle an MSR value as a single 64-bit argument.
+While at it, convert the data type of MSR index to u32 in functions
+called in pmu_msr_chk_emulated().
 
-The following illustrates the updated derivation of the MSR write APIs:
-
-                 __wrmsrq(u32 msr, u64 val)
-                   /                  \
-                  /                    \
-           native_wrmsrq(msr, val)    native_wrmsr(msr, low, high)
-                 |
-                 |
-           native_write_msr(msr, val)
-                /          \
-               /            \
-       wrmsrq(msr, val)    wrmsr(msr, low, high)
-
-When CONFIG_PARAVIRT is enabled, wrmsrq() and wrmsr() are defined on top
-of paravirt_write_msr():
-
-            paravirt_write_msr(u32 msr, u64 val)
-               /             \
-              /               \
-          wrmsrq(msr, val)    wrmsr(msr, low, high)
-
-paravirt_write_msr() invokes cpu.write_msr(msr, val), an indirect layer
-of pv_ops MSR write call:
-
-    If on native:
-
-            cpu.write_msr = native_write_msr
-
-    If on Xen:
-
-            cpu.write_msr = xen_write_msr
-
-Therefore, refactor pv_cpu_ops.write_msr{_safe}() to accept an MSR value
-in a single u64 argument, replacing the current dual u32 arguments.
-
-No functional change intended.
-
+Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+Suggested-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Xin Li (Intel) <xin@zytor.com>
 Reviewed-by: Juergen Gross <jgross@suse.com>
 Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
 
-Change in v2:
-* Spell out the reason why use a single u64 argument to pass the MSR
-  value in the lowest level APIs (Andrew Cooper).
----
- arch/x86/include/asm/msr.h            | 35 ++++++++++++---------------
- arch/x86/include/asm/paravirt.h       | 27 +++++++++++----------
- arch/x86/include/asm/paravirt_types.h |  4 +--
- arch/x86/kernel/kvmclock.c            |  2 +-
- arch/x86/kvm/svm/svm.c                | 15 +++---------
- arch/x86/xen/enlighten_pv.c           | 30 +++++++++--------------
- 6 files changed, 46 insertions(+), 67 deletions(-)
+Change in v4:
+*) Remove two "else" that no longer make sense (Juergen Gross).
 
-diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index 7b9713a49d59..0392b9596107 100644
---- a/arch/x86/include/asm/msr.h
-+++ b/arch/x86/include/asm/msr.h
-@@ -92,12 +92,12 @@ static __always_inline u64 __rdmsr(u32 msr)
- 	return EAX_EDX_VAL(val, low, high);
- }
- 
--static __always_inline void __wrmsr(u32 msr, u32 low, u32 high)
-+static __always_inline void __wrmsrq(u32 msr, u64 val)
- {
- 	asm volatile("1: wrmsr\n"
- 		     "2:\n"
- 		     _ASM_EXTABLE_TYPE(1b, 2b, EX_TYPE_WRMSR)
--		     : : "c" (msr), "a"(low), "d" (high) : "memory");
-+		     : : "c" (msr), "a" ((u32)val), "d" ((u32)(val >> 32)) : "memory");
- }
- 
- #define native_rdmsr(msr, val1, val2)			\
-@@ -113,11 +113,10 @@ static __always_inline u64 native_rdmsrq(u32 msr)
- }
- 
- #define native_wrmsr(msr, low, high)			\
--	__wrmsr(msr, low, high)
-+	__wrmsrq((msr), (u64)(high) << 32 | (low))
- 
- #define native_wrmsrq(msr, val)				\
--	__wrmsr((msr), (u32)((u64)(val)),		\
--		       (u32)((u64)(val) >> 32))
-+	__wrmsrq((msr), (val))
- 
- static inline u64 native_read_msr(u32 msr)
- {
-@@ -146,11 +145,8 @@ static inline u64 native_read_msr_safe(u32 msr, int *err)
- }
- 
- /* Can be uninlined because referenced by paravirt */
--static inline void notrace
--native_write_msr(u32 msr, u32 low, u32 high)
-+static inline void notrace native_write_msr(u32 msr, u64 val)
- {
--	u64 val = (u64)high << 32 | low;
--
- 	native_wrmsrq(msr, val);
- 
- 	if (tracepoint_enabled(write_msr))
-@@ -158,8 +154,7 @@ native_write_msr(u32 msr, u32 low, u32 high)
- }
- 
- /* Can be uninlined because referenced by paravirt */
--static inline int notrace
--native_write_msr_safe(u32 msr, u32 low, u32 high)
-+static inline int notrace native_write_msr_safe(u32 msr, u64 val)
- {
- 	int err;
- 
-@@ -167,10 +162,10 @@ native_write_msr_safe(u32 msr, u32 low, u32 high)
- 		     "2:\n\t"
- 		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_WRMSR_SAFE, %[err])
- 		     : [err] "=a" (err)
--		     : "c" (msr), "0" (low), "d" (high)
-+		     : "c" (msr), "0" ((u32)val), "d" ((u32)(val >> 32))
- 		     : "memory");
- 	if (tracepoint_enabled(write_msr))
--		do_trace_write_msr(msr, ((u64)high << 32 | low), err);
-+		do_trace_write_msr(msr, val, err);
- 	return err;
- }
- 
-@@ -206,7 +201,7 @@ do {								\
- 
- static inline void wrmsr(u32 msr, u32 low, u32 high)
- {
--	native_write_msr(msr, low, high);
-+	native_write_msr(msr, (u64)high << 32 | low);
- }
- 
- #define rdmsrq(msr, val)			\
-@@ -214,13 +209,13 @@ static inline void wrmsr(u32 msr, u32 low, u32 high)
- 
- static inline void wrmsrq(u32 msr, u64 val)
- {
--	native_write_msr(msr, (u32)(val & 0xffffffffULL), (u32)(val >> 32));
-+	native_write_msr(msr, val);
- }
- 
- /* wrmsr with exception handling */
--static inline int wrmsr_safe(u32 msr, u32 low, u32 high)
-+static inline int wrmsrq_safe(u32 msr, u64 val)
- {
--	return native_write_msr_safe(msr, low, high);
-+	return native_write_msr_safe(msr, val);
- }
- 
- /* rdmsr with exception handling */
-@@ -264,11 +259,11 @@ static __always_inline void wrmsrns(u32 msr, u64 val)
- }
- 
- /*
-- * 64-bit version of wrmsr_safe():
-+ * Dual u32 version of wrmsrq_safe():
-  */
--static inline int wrmsrq_safe(u32 msr, u64 val)
-+static inline int wrmsr_safe(u32 msr, u32 low, u32 high)
- {
--	return wrmsr_safe(msr, (u32)val,  (u32)(val >> 32));
-+	return wrmsrq_safe(msr, (u64)high << 32 | low);
- }
- 
- struct msr __percpu *msrs_alloc(void);
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index f272c4bd3d5b..edf23bde367e 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -180,10 +180,9 @@ static inline u64 paravirt_read_msr(unsigned msr)
- 	return PVOP_CALL1(u64, cpu.read_msr, msr);
- }
- 
--static inline void paravirt_write_msr(unsigned msr,
--				      unsigned low, unsigned high)
-+static inline void paravirt_write_msr(u32 msr, u64 val)
- {
--	PVOP_VCALL3(cpu.write_msr, msr, low, high);
-+	PVOP_VCALL2(cpu.write_msr, msr, val);
- }
- 
- static inline u64 paravirt_read_msr_safe(unsigned msr, int *err)
-@@ -191,10 +190,9 @@ static inline u64 paravirt_read_msr_safe(unsigned msr, int *err)
- 	return PVOP_CALL2(u64, cpu.read_msr_safe, msr, err);
- }
- 
--static inline int paravirt_write_msr_safe(unsigned msr,
--					  unsigned low, unsigned high)
-+static inline int paravirt_write_msr_safe(u32 msr, u64 val)
- {
--	return PVOP_CALL3(int, cpu.write_msr_safe, msr, low, high);
-+	return PVOP_CALL2(int, cpu.write_msr_safe, msr, val);
- }
- 
- #define rdmsr(msr, val1, val2)			\
-@@ -204,22 +202,25 @@ do {						\
- 	val2 = _l >> 32;			\
- } while (0)
- 
--#define wrmsr(msr, val1, val2)			\
--do {						\
--	paravirt_write_msr(msr, val1, val2);	\
--} while (0)
-+static __always_inline void wrmsr(u32 msr, u32 low, u32 high)
-+{
-+	paravirt_write_msr(msr, (u64)high << 32 | low);
-+}
- 
- #define rdmsrq(msr, val)			\
- do {						\
- 	val = paravirt_read_msr(msr);		\
- } while (0)
- 
--static inline void wrmsrq(unsigned msr, u64 val)
-+static inline void wrmsrq(u32 msr, u64 val)
- {
--	wrmsr(msr, (u32)val, (u32)(val>>32));
-+	paravirt_write_msr(msr, val);
- }
- 
--#define wrmsr_safe(msr, a, b)	paravirt_write_msr_safe(msr, a, b)
-+static inline int wrmsrq_safe(u32 msr, u64 val)
-+{
-+	return paravirt_write_msr_safe(msr, val);
-+}
- 
- /* rdmsr with exception handling */
- #define rdmsr_safe(msr, a, b)				\
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 631c306ce1ff..78777b78da12 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -92,14 +92,14 @@ struct pv_cpu_ops {
- 
- 	/* Unsafe MSR operations.  These will warn or panic on failure. */
- 	u64 (*read_msr)(unsigned int msr);
--	void (*write_msr)(unsigned int msr, unsigned low, unsigned high);
-+	void (*write_msr)(u32 msr, u64 val);
- 
- 	/*
- 	 * Safe MSR operations.
- 	 * read sets err to 0 or -EIO.  write returns 0 or -EIO.
- 	 */
- 	u64 (*read_msr_safe)(unsigned int msr, int *err);
--	int (*write_msr_safe)(unsigned int msr, unsigned low, unsigned high);
-+	int (*write_msr_safe)(u32 msr, u64 val);
- 
- 	u64 (*read_pmc)(int counter);
- 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index 0af797930ccb..ca0a49eeac4a 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -196,7 +196,7 @@ static void kvm_setup_secondary_clock(void)
- void kvmclock_disable(void)
- {
- 	if (msr_kvm_system_time)
--		native_write_msr(msr_kvm_system_time, 0, 0);
-+		native_write_msr(msr_kvm_system_time, 0);
- }
- 
- static void __init kvmclock_init_mem(void)
-diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-index 67657b3a36ce..4ef9978dce70 100644
---- a/arch/x86/kvm/svm/svm.c
-+++ b/arch/x86/kvm/svm/svm.c
-@@ -475,7 +475,6 @@ static void svm_inject_exception(struct kvm_vcpu *vcpu)
- 
- static void svm_init_erratum_383(void)
- {
--	u32 low, high;
- 	int err;
- 	u64 val;
- 
-@@ -489,10 +488,7 @@ static void svm_init_erratum_383(void)
- 
- 	val |= (1ULL << 47);
- 
--	low  = lower_32_bits(val);
--	high = upper_32_bits(val);
--
--	native_write_msr_safe(MSR_AMD64_DC_CFG, low, high);
-+	native_write_msr_safe(MSR_AMD64_DC_CFG, val);
- 
- 	erratum_383_found = true;
- }
-@@ -2167,17 +2163,12 @@ static bool is_erratum_383(void)
- 
- 	/* Clear MCi_STATUS registers */
- 	for (i = 0; i < 6; ++i)
--		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0, 0);
-+		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0);
- 
- 	value = native_read_msr_safe(MSR_IA32_MCG_STATUS, &err);
- 	if (!err) {
--		u32 low, high;
--
- 		value &= ~(1ULL << 2);
--		low    = lower_32_bits(value);
--		high   = upper_32_bits(value);
--
--		native_write_msr_safe(MSR_IA32_MCG_STATUS, low, high);
-+		native_write_msr_safe(MSR_IA32_MCG_STATUS, value);
- 	}
- 
- 	/* Flush tlb to evict multi-match entries */
+Change in v3:
+*) Remove the "emul" argument of pmu_msr_chk_emulated() (Juergen Gross).
+---
+ arch/x86/xen/enlighten_pv.c | 15 ++++++++-------
+ arch/x86/xen/pmu.c          | 33 ++++++++-------------------------
+ arch/x86/xen/xen-ops.h      |  3 +--
+ 3 files changed, 17 insertions(+), 34 deletions(-)
+
 diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index c247e7689bc3..c067d1e8a39c 100644
+index 61e51a970f3c..528a2f4df050 100644
 --- a/arch/x86/xen/enlighten_pv.c
 +++ b/arch/x86/xen/enlighten_pv.c
-@@ -1110,10 +1110,8 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
- 	return val;
- }
- 
--static void set_seg(u32 which, u32 low, u32 high)
-+static void set_seg(u32 which, u64 base)
+@@ -1090,7 +1090,7 @@ static u64 xen_do_read_msr(unsigned int msr, int *err)
  {
--	u64 base = ((u64)high << 32) | low;
--
- 	if (HYPERVISOR_set_segment_base(which, base))
- 		WARN(1, "Xen set_segment_base(%u, %llx) failed\n", which, base);
- }
-@@ -1123,22 +1121,19 @@ static void set_seg(u32 which, u32 low, u32 high)
-  * With err == NULL write_msr() semantics are selected.
-  * Supplying an err pointer requires err to be pre-initialized with 0.
-  */
--static void xen_do_write_msr(unsigned int msr, unsigned int low,
--			     unsigned int high, int *err)
-+static void xen_do_write_msr(u32 msr, u64 val, int *err)
- {
--	u64 val;
--
- 	switch (msr) {
- 	case MSR_FS_BASE:
--		set_seg(SEGBASE_FS, low, high);
-+		set_seg(SEGBASE_FS, val);
- 		break;
+ 	u64 val = 0;	/* Avoid uninitialized value for safe variant. */
  
- 	case MSR_KERNEL_GS_BASE:
--		set_seg(SEGBASE_GS_USER, low, high);
-+		set_seg(SEGBASE_GS_USER, val);
- 		break;
+-	if (pmu_msr_read_emulated(msr, &val))
++	if (pmu_msr_chk_emulated(msr, &val, true))
+ 		return val;
  
- 	case MSR_GS_BASE:
--		set_seg(SEGBASE_GS_KERNEL, low, high);
-+		set_seg(SEGBASE_GS_KERNEL, val);
- 		break;
- 
- 	case MSR_STAR:
-@@ -1154,15 +1149,13 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
- 		break;
- 
+ 	if (err)
+@@ -1162,12 +1162,13 @@ static void xen_do_write_msr(unsigned int msr, unsigned int low,
  	default:
--		val = (u64)high << 32 | low;
--
- 		if (pmu_msr_chk_emulated(msr, &val, false))
- 			return;
+ 		val = (u64)high << 32 | low;
  
- 		if (err)
--			*err = native_write_msr_safe(msr, low, high);
-+			*err = native_write_msr_safe(msr, val);
- 		else
--			native_write_msr(msr, low, high);
-+			native_write_msr(msr, val);
+-		if (!pmu_msr_write_emulated(msr, val)) {
+-			if (err)
+-				*err = native_write_msr_safe(msr, low, high);
+-			else
+-				native_write_msr(msr, low, high);
+-		}
++		if (pmu_msr_chk_emulated(msr, &val, false))
++			return;
++
++		if (err)
++			*err = native_write_msr_safe(msr, low, high);
++		else
++			native_write_msr(msr, low, high);
  	}
  }
  
-@@ -1171,12 +1164,11 @@ static u64 xen_read_msr_safe(unsigned int msr, int *err)
- 	return xen_do_read_msr(msr, err);
+diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
+index b6557f2d1a2e..5f3d2a6c70f1 100644
+--- a/arch/x86/xen/pmu.c
++++ b/arch/x86/xen/pmu.c
+@@ -128,7 +128,7 @@ static inline uint32_t get_fam15h_addr(u32 addr)
+ 	return addr;
  }
  
--static int xen_write_msr_safe(unsigned int msr, unsigned int low,
--			      unsigned int high)
-+static int xen_write_msr_safe(u32 msr, u64 val)
+-static inline bool is_amd_pmu_msr(unsigned int msr)
++static bool is_amd_pmu_msr(u32 msr)
  {
- 	int err = 0;
- 
--	xen_do_write_msr(msr, low, high, &err);
-+	xen_do_write_msr(msr, val, &err);
- 
- 	return err;
- }
-@@ -1188,11 +1180,11 @@ static u64 xen_read_msr(unsigned int msr)
- 	return xen_do_read_msr(msr, xen_msr_safe ? &err : NULL);
+ 	if (boot_cpu_data.x86_vendor != X86_VENDOR_AMD &&
+ 	    boot_cpu_data.x86_vendor != X86_VENDOR_HYGON)
+@@ -194,8 +194,7 @@ static bool is_intel_pmu_msr(u32 msr_index, int *type, int *index)
+ 	}
  }
  
--static void xen_write_msr(unsigned int msr, unsigned low, unsigned high)
-+static void xen_write_msr(u32 msr, u64 val)
+-static bool xen_intel_pmu_emulate(unsigned int msr, u64 *val, int type,
+-				  int index, bool is_read)
++static bool xen_intel_pmu_emulate(u32 msr, u64 *val, int type, int index, bool is_read)
  {
- 	int err;
- 
--	xen_do_write_msr(msr, low, high, xen_msr_safe ? &err : NULL);
-+	xen_do_write_msr(msr, val, xen_msr_safe ? &err : NULL);
+ 	uint64_t *reg = NULL;
+ 	struct xen_pmu_intel_ctxt *ctxt;
+@@ -257,7 +256,7 @@ static bool xen_intel_pmu_emulate(unsigned int msr, u64 *val, int type,
+ 	return false;
  }
  
- /* This is called once we have the cpu_possible_mask */
+-static bool xen_amd_pmu_emulate(unsigned int msr, u64 *val, bool is_read)
++static bool xen_amd_pmu_emulate(u32 msr, u64 *val, bool is_read)
+ {
+ 	uint64_t *reg = NULL;
+ 	int i, off = 0;
+@@ -298,33 +297,17 @@ static bool xen_amd_pmu_emulate(unsigned int msr, u64 *val, bool is_read)
+ 	return false;
+ }
+ 
+-static bool pmu_msr_chk_emulated(unsigned int msr, uint64_t *val, bool is_read,
+-				 bool *emul)
++bool pmu_msr_chk_emulated(u32 msr, u64 *val, bool is_read)
+ {
+ 	int type, index = 0;
+ 
+ 	if (is_amd_pmu_msr(msr))
+-		*emul = xen_amd_pmu_emulate(msr, val, is_read);
+-	else if (is_intel_pmu_msr(msr, &type, &index))
+-		*emul = xen_intel_pmu_emulate(msr, val, type, index, is_read);
+-	else
+-		return false;
+-
+-	return true;
+-}
+-
+-bool pmu_msr_read_emulated(u32 msr, u64 *val)
+-{
+-	bool emulated;
++		return xen_amd_pmu_emulate(msr, val, is_read);
+ 
+-	return pmu_msr_chk_emulated(msr, val, true, &emulated) && emulated;
+-}
++	if (is_intel_pmu_msr(msr, &type, &index))
++		return xen_intel_pmu_emulate(msr, val, type, index, is_read);
+ 
+-bool pmu_msr_write_emulated(u32 msr, u64 val)
+-{
+-	bool emulated;
+-
+-	return pmu_msr_chk_emulated(msr, &val, false, &emulated) && emulated;
++	return false;
+ }
+ 
+ static u64 xen_amd_read_pmc(int counter)
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index 163e03e33089..fd7f845b83a3 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -274,8 +274,7 @@ void xen_pmu_finish(int cpu);
+ static inline void xen_pmu_init(int cpu) {}
+ static inline void xen_pmu_finish(int cpu) {}
+ #endif
+-bool pmu_msr_read_emulated(u32 msr, u64 *val);
+-bool pmu_msr_write_emulated(u32 msr, u64 val);
++bool pmu_msr_chk_emulated(u32 msr, u64 *val, bool is_read);
+ int pmu_apic_update(uint32_t reg);
+ u64 xen_read_pmc(int counter);
+ 
 -- 
 2.49.0
 
