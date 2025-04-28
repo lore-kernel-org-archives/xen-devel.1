@@ -4,34 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB6DC369D5
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Apr 2025 20:13:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.971149.1359633 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1FB6C369D5
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Apr 2025 21:10:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.971169.1359651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9UrJ-0006ST-TG; Mon, 28 Apr 2025 20:13:45 +0000
+	id 1u9Vk7-0006aC-93; Mon, 28 Apr 2025 21:10:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 971149.1359633; Mon, 28 Apr 2025 20:13:45 +0000
+Received: by outflank-mailman (output) from mailman id 971169.1359651; Mon, 28 Apr 2025 21:10:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9UrJ-0006SM-Oe; Mon, 28 Apr 2025 20:13:45 +0000
-Received: by outflank-mailman (input) for mailman id 971149;
- Mon, 28 Apr 2025 20:13:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u9Vk7-0006a5-6Z; Mon, 28 Apr 2025 21:10:23 +0000
+Received: by outflank-mailman (input) for mailman id 971169;
+ Mon, 28 Apr 2025 21:10:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=u4d+=XO=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1u9UrI-0006SE-QT
- for xen-devel@lists.xenproject.org; Mon, 28 Apr 2025 20:13:44 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4716fd2a-246d-11f0-9ffb-bf95429c2676;
- Mon, 28 Apr 2025 22:13:42 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A763B5C04FC;
- Mon, 28 Apr 2025 20:11:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CF61C4CEE4;
- Mon, 28 Apr 2025 20:13:39 +0000 (UTC)
+ <SRS0=DEkc=XO=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1u9Vk5-0006Zo-MO
+ for xen-devel@lists.xenproject.org; Mon, 28 Apr 2025 21:10:21 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2060d.outbound.protection.outlook.com
+ [2a01:111:f403:2417::60d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2ff817ef-2475-11f0-9eb4-5ba50f476ded;
+ Mon, 28 Apr 2025 23:10:19 +0200 (CEST)
+Received: from CH2PR05CA0032.namprd05.prod.outlook.com (2603:10b6:610::45) by
+ MW3PR12MB4410.namprd12.prod.outlook.com (2603:10b6:303:5b::24) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8678.33; Mon, 28 Apr 2025 21:10:16 +0000
+Received: from CH1PEPF0000A347.namprd04.prod.outlook.com
+ (2603:10b6:610:0:cafe::90) by CH2PR05CA0032.outlook.office365.com
+ (2603:10b6:610::45) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8678.13 via Frontend Transport; Mon,
+ 28 Apr 2025 21:10:15 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CH1PEPF0000A347.mail.protection.outlook.com (10.167.244.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8678.33 via Frontend Transport; Mon, 28 Apr 2025 21:10:15 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
+ 2025 16:10:14 -0500
+Received: from [172.25.248.240] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Mon, 28 Apr 2025 16:10:13 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,475 +61,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4716fd2a-246d-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745871220;
-	bh=0vOekQTbls2azYaGMx2HD/SDFkWASciwYaUBpMUArow=;
-	h=Date:From:To:cc:Subject:From;
-	b=tlhIYiDdym941cBD1oA5eVNvufHCt8x7cKmtQ4lSAF4EHvFgzP3Y0lIzdonBv4Z7P
-	 JiqDBzRuOeEm+Wpze6UoSBqlzjdkcqPI//oGQse4qEShlE3yqLjvQOWrwwuH/r0etR
-	 p8kCoPPtCEVWYeXhwhMDvUKp6wAdB4UK1MVi5iunwaVh/kDb947zxRaMYtM876LFoZ
-	 Ptfk5nf/h76sZuQft4GAbEEEpmX9R2gVi9cqXZYzWrh7khmc+Hpi5e5Q4YlvrhsbBG
-	 K3BzoY9II7dS+zroWt0LYkCEVroTJX5fq5icaMy4rTxCXknBD1N9ZEG6BFQ/Zg2peK
-	 JGSUmEJX4swaw==
-Date: Mon, 28 Apr 2025 13:13:38 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, andrei.cherechesu@nxp.com, dmukhin@ford.com, 
-    michal.orzel@amd.com, jason.andryuk@amd.com, S32@nxp.com
-Subject: [PATCH v8] uboot-script-gen: Dynamically compute addr and size when
- loading binaries
-Message-ID: <alpine.DEB.2.22.394.2504281312280.785180@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 2ff817ef-2475-11f0-9eb4-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QpsCo50aYompCQ8K6Wz6ZyPueCLS55e9wdCNLOVIvqZ1PaSyghF1Uj9TnAQAGSyXwaUU+ZpK8g/KK9AaZ7sW4eFXs4bPqmmt7zLf+bc+0wbF4V6sL3wIpEGIaC4W4IWVDGOAFeTLCi2OTAJiT9GSjyq0w7hWckLDaofkTWOB2+ikZ5/bIBvSu7CarjtTQsUQbX19M6zhvoWmRs1Hd9LnrBSsG039kmP3j7wgftCwwma/DbPgg3zHhsIjCkCZfE+6UCKLozWpcJ5QbCQIL+Bzu4pRSsF2NX9Xhei8O7a/RUt4czySIsVB27ylEXb9BxF7av3N4XC7nfSCHWwqhBbFdw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T59YqtMA9cSf61s0uNZ5bSB4OwxVG3dB8QJcEEDd30s=;
+ b=ourS2DeT7Mzl2KuJdH+5Alof3v7WP2Wl7hgyKZOrO/11rqxRkByQdgSxyx070nFiujGKpyFP7gFCJOSCRgM/4di24xa+w5LX+T0iu0vmBK8RbL3eguF0DJKIuqoscd/YYzG+aPIMng2182D0AtcjTuWd3uHhlPO+dF9UwlGTldt57VS4gVO7L8EnEnPJK9zdmKi1W7+UEsb32FqlFpWzGfMEMLlxcxXzHExS1eyQ65X9KaoXQCmK5EnD0giKjDaIUvvp71hIHT0b4l4hXGPxXHWdQRTLP8g2386vz5uWQBvNQ4YCVYyKt8Jk/8l0Dci2UAjWdGD1LbdMP9y08ccVyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=ariadne.space smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T59YqtMA9cSf61s0uNZ5bSB4OwxVG3dB8QJcEEDd30s=;
+ b=sx1jhAZYpIOAZMMWR1yvkiWeHPvCA077zAY3dhHTaS9gBdWLGlXCWCErAWQh5QWzoXDcTVS0pqndG4typquwkG0806hOWAYfSniso1NHDc6wskbYOH7QxHvFpoqeR2fqUX7MoxbOgQsa6wGpFPu8KVcDgDwLGGX1eOkKIcgi6Bg=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <3aa95fa2-eb10-4d97-bff0-dce96688a4cf@amd.com>
+Date: Mon, 28 Apr 2025 17:10:13 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] x86/hyperv: use dynamically allocated page for
+ hypercalls
+To: Ariadne Conill <ariadne@ariadne.space>, <xen-devel@lists.xenproject.org>
+CC: Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>, Alejandro Vallejo <agarciav@amd.com>, "Alexander M .
+ Merritt" <alexander@edera.dev>
+References: <20250428195736.2516-1-ariadne@ariadne.space>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20250428195736.2516-1-ariadne@ariadne.space>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A347:EE_|MW3PR12MB4410:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e649379-62cf-48c6-75fa-08dd86991277
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?U2RxSVM1NzJucmxHc3VpYk9YTFNDSVdNRGRXeERSbHpaYjJvbGtWdUI0ZmEv?=
+ =?utf-8?B?aWx5emhxVXRQUjZ2dmNEOVA1WTNUb1VYYjJOZnR1ODh4RTFlYkp2b3hVTWp1?=
+ =?utf-8?B?ajkyTTFESlIyUTNibnpCdjBySFA2VHo3Qm9DL0lRTzUxWjZ5aHdCUVJwUGRj?=
+ =?utf-8?B?V3R1MWxCZCtJR043UjIrZkNjRGpJc2NaSWNpL0lRbGIwZHNGMDFrZXIvUnNS?=
+ =?utf-8?B?UFI2ZEZIcGRaZDhzeGVaQ1NlWGJveFUreStvMDFJMkcxWHN5TWJmR3hDL2FZ?=
+ =?utf-8?B?SWVkTUwrdWJLSEpocUJZd3Mxb0ZBOXFqdnpJMFZhZlh5NUZLTWhVUWZnWjJP?=
+ =?utf-8?B?emVMaEhZc0RxVnUrbEMyaHA4NEc0bDNac0puY3RxL21BQU5pRUVFWWc4WW9o?=
+ =?utf-8?B?eEdOSU9oSUNKMklXZDBzTHh3U3JWSkZlajc0NVUvOXhnRHB0R3QyZk5NWk01?=
+ =?utf-8?B?SVd4MnRhWWIvZjNIbWpzTElyOERrMTBsNWluWDdITVNsOWxWQzB0RmJFSzVF?=
+ =?utf-8?B?RUlJcjBvRHpQcTJHK0pyazB1a1FXV2Y0NUxMQkNiRTdZU3JMYWE0T01VbCsw?=
+ =?utf-8?B?UXhubUVPQ0MzRkwxSGJNVWFQeFJBczRKaitWeitYTXdzRWdKNWdHZWtFZHk3?=
+ =?utf-8?B?NFI0VlBNN3ZaQkdvY00vNXBEbHBBaWhybEJHSGJ0YUl1T20xM25BWUc4SElV?=
+ =?utf-8?B?NE9yQmRUOTRvSjlXODVqSWdERWFaaWs4SWtSd2Y3aHpmdDZQV3FvUDRuTmJw?=
+ =?utf-8?B?Y0ZLTFhweVZCVEZGblhOMG5idjNYZHM1WStBcm9zOTBqd0R2aXhkV0RFbENu?=
+ =?utf-8?B?ZFVvQ2NmNTk4c28wc01DU0xhSnVKTEp2N2hUbWF2OFBmRldDZGhnNmNnNHl2?=
+ =?utf-8?B?TEdGOXRYWUFtU0R2MzRxcG5jWk1UWFgzckJ2MldRVXhlb3hScTRkbERjS01w?=
+ =?utf-8?B?WUFYSWREUThocUUzckJjUGNNYmJVd0NUajRyRHE4cmtpeFUzUGZ0OCtaSTZx?=
+ =?utf-8?B?bnJGRkJWcXJPcklpcEdrNFdyN2JOTTR3Ni8wczgwdjdTczJQdEt4Z1hZN0M4?=
+ =?utf-8?B?OHQwRitpVDJSclkzaUZpTlR2ck5semFQN2gvQ3N5WUNBcWU0anhGVXc5cWl6?=
+ =?utf-8?B?VENJWUFZb2thcTVuU1Q2RjdXeDY2azVxdENjUXI1dkd3STFKQzJ4VW9oMUI0?=
+ =?utf-8?B?UkttNmZzZEx3ZGF1R1doL3pEem5yYm1UWjBQandEUURSOG1JMVBTa29uRUE3?=
+ =?utf-8?B?cWVKMEc2SDhsREkxMDBmNWkzN1NwTXJwZnUrQkxRQWNWYXV1dmZ4ejVPUjc4?=
+ =?utf-8?B?U2pkK0FzMkJFNEt3QUtSY2c4YXRvLzB4VDNTUjBWeXhLYnQ2U0kvVVdMWU41?=
+ =?utf-8?B?ZUkwUFJqOVA4QnpUbGF4dklhTVhqUHg3Tk5zV3VFd3U0WTBjOEgyckVVNjN1?=
+ =?utf-8?B?b0JsbnlwOGR2MUxaUEVDOWZORnVtdnhFN0FMU1h5K0NBeVdReGlmRDhKR25O?=
+ =?utf-8?B?eWgvRy9NZmdzSjNVQVBvRG1BYnNQSHdSV3R3UE1uZS96M045MmZIc25QbUM1?=
+ =?utf-8?B?OVdQY0haRko2SVhVY1NsdEV1bzJmUTE5Tm5RUlE4eTRUZ3JNZHhHYkprQjFp?=
+ =?utf-8?B?eEI5eE1YVUM1RzBvZjBWVzVQZVFHOUZNd2l2K1F1M3hhSmVhZkZwQlVVVkxi?=
+ =?utf-8?B?UlZBRzBiOXZkWjl2VWc0Qmk0bXJ6bXQ0U0g2WmpDWjZaRlNnL2NjM2pudWhM?=
+ =?utf-8?B?WUFKNFNmT2hTRVBWeHhSSlNHaHNEMlhSbS9NZkZDTDdjRjVRb2NhL2ZPZitq?=
+ =?utf-8?B?T05VbkRKYzVhTEJFVEp4eDlJb1pzbFRzWnorU0FYMWJqWG1TK0wweUl0WlpW?=
+ =?utf-8?B?V2VaUHdYQ1dQUXhwK21uMG5HNytVWG82Z1lESWdFeHFxcUQxeG84LzFRR0ZS?=
+ =?utf-8?B?eUNOejhyZmxkYmo5WkpTSWtBSWFkSHp3WUozMWpYSlpKeit6NGMzcWwxcE1S?=
+ =?utf-8?B?MHVDQ3JxaTBsWjZGVjJScjVqdzJ6dDVlVE9uLzkxTFIxRmF6eEZ0RjJpTFIy?=
+ =?utf-8?Q?sqAGbj?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 21:10:15.3770
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e649379-62cf-48c6-75fa-08dd86991277
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000A347.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4410
 
-From: Andrei Cherechesu <andrei.cherechesu@oss.nxp.com>
+On 2025-04-28 15:57, Ariadne Conill wrote:
+> Previously Xen placed the hypercall page at the highest possible MFN,
+> but this caused problems on systems where there is more than 36 bits
+> of physical address space.
+> 
+> In general, it also seems unreliable to assume that the highest possible
+> MFN is not already reserved for some other purpose.
+> 
+> Fixes: 620fc734f854 ("x86/hyperv: setup hypercall page")
+> Cc: Alejandro Vallejo <agarciav@amd.com>
+> Cc: Alexander M. Merritt <alexander@edera.dev>
+> Signed-off-by: Ariadne Conill <ariadne@ariadne.space>
 
-Normally, the Imagebuilder would precompute the sizes of the loaded
-binaries and addresses where they are loaded before generating the
-script, and the sizes and addresses that needed to be provided to
-Xen via /chosen would be hardcoded in the boot script.
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
-Added an option via "-s" parameter to avoid hardcoding any
-address in the boot script, and dynamically compute the
-loading addresses for binaries. The first loading address is based
-on the MEMORY_START parameter and after loading each binary,
-the loading address and the size of the binary are stored in
-variables with corresponding names. Then, the loading address
-for the next binary is computed and aligned to 0x200000.
-
-If the "-s" parameter is not used, the normal flow is executed,
-where the loading addresses and sizes for each binaries are
-precomputed and hardcoded inside the script, but the loading
-addresses and sizes for each binary are now also stored for eventual
-later use.
-
-Reserved memory regions are left TBD in the -s case.
-
-Link: https://lists.xenproject.org/archives/html/xen-devel/2022-09/msg01862.html
-Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Reviewed-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
-Reviewed-by: Denis Mukhin <dmukhin@ford.com>
----
-Changes in v8:
-- remove quotes in heredoc
-- change memaddr to hex for readability
-
-Changes in v7:
-- use $()
-- better description and alphabetical order
-- use heredoc
-
-Changes in v6:
-- make initial ${memaddr} setting depending on CALC
-
-This patch adds quite a bit of complexity which is the reason why I
-didn't originally commit it. Now that we are enabling ImageBuilder in
-Yocto, it turns out this patch is required because Yocto invokes
-ImageBuilder before all the binaries are ready and available.
-
-Andrei, sorry for taking so long to realize why it is essential, but we
-are getting there now.
-
-The changes I made to the original patch are purely to make it simpler
-to maintain.
----
- README.md                |   2 +
- scripts/uboot-script-gen | 181 ++++++++++++++++++++++++++++++++-------
- 2 files changed, 152 insertions(+), 31 deletions(-)
-
-diff --git a/README.md b/README.md
-index f8039ec..28c9e6b 100644
---- a/README.md
-+++ b/README.md
-@@ -356,6 +356,8 @@ Where:\
-    can only be used  in combination with the -k option.  This adds the
-    public key into the dtb.  Then one can add this dtb back into the
-    u-boot bin or elf.\
-+-s addresses and sizes are calculated dynamically from U-Boot, hence
-+   binaries don't need to be available at the time of invocation.\
- 
- ### Signed FIT images
- 
-diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-index 638154a..dfa154e 100755
---- a/scripts/uboot-script-gen
-+++ b/scripts/uboot-script-gen
-@@ -1,8 +1,11 @@
- #!/bin/bash
- 
- offset=$((2*1024*1024))
-+PADDING_MASK=$(printf "0x%X\n" $(($offset - 1)))
-+PADDING_MASK_INV=$(printf "0x%X\n" $((~$PADDING_MASK)))
- filesize=0
- prog_req=(mkimage file fdtput mktemp awk od)
-+CALC=""
- 
- function cleanup_and_return_err()
- {
-@@ -100,17 +103,40 @@ function dt_set()
-     fi
- }
- 
-+function dt_set_calc()
-+{
-+    local path=$1
-+    local var=$2
-+    local name_var=$3
-+ 
-+    local addr_var="$name_var"_addr
-+    local size_var="$name_var"_size
-+
-+    cat >> $UBOOT_SOURCE <<- EOF
-+	setexpr addr_hi \${$addr_var} / 0x100000000
-+	setexpr addr_lo \${$addr_var} \& 0xFFFFFFFF
-+	setexpr size_hi \${$size_var} / 0x100000000
-+	setexpr size_lo \${$size_var} \& 0xFFFFFFFF
-+	fdt set $path $var <0x\${addr_hi} 0x\${addr_lo} 0x\${size_hi} 0x\${size_lo}>
-+	EOF
-+}
-+
- function add_device_tree_kernel()
- {
-     local path=$1
--    local addr=$2
--    local size=$3
--    local bootargs=$4
-+    local name=$2
-+    local addr=$3
-+    local size=$4
-+    local bootargs=$5
-     local node_name="module@${addr#0x}"
- 
-     dt_mknode "$path" "$node_name"
-     dt_set "$path/$node_name" "compatible" "str_a" "multiboot,kernel multiboot,module"
--    dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    if test "$CALC"; then
-+        dt_set_calc "$path/$node_name" "reg" $name
-+    else
-+        dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    fi
-     dt_set "$path/$node_name" "bootargs" "str" "$bootargs"
- }
- 
-@@ -118,26 +144,36 @@ function add_device_tree_kernel()
- function add_device_tree_ramdisk()
- {
-     local path=$1
--    local addr=$2
--    local size=$3
-+    local name=$2
-+    local addr=$3
-+    local size=$4
-     local node_name="module@${addr#0x}"
- 
-     dt_mknode "$path"  "$node_name"
-     dt_set "$path/$node_name" "compatible" "str_a" "multiboot,ramdisk multiboot,module"
--    dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    if test "$CALC"; then
-+        dt_set_calc "$path/$node_name" "reg" $name
-+    else
-+        dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    fi
- }
- 
- 
- function add_device_tree_passthrough()
- {
-     local path=$1
--    local addr=$2
--    local size=$3
-+    local name=$2
-+    local addr=$3
-+    local size=$4
-     local node_name="module@${addr#0x}"
- 
-     dt_mknode "$path"  "$node_name"
-     dt_set "$path/$node_name" "compatible" "str_a" "multiboot,device-tree multiboot,module"
--    dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    if test "$CALC"; then
-+        dt_set_calc "$path/$node_name" "reg" $name
-+    else
-+        dt_set "$path/$node_name" "reg" "hex"  "$(split_addr_size $addr $size)"
-+    fi
- }
- 
- function add_device_tree_mem()
-@@ -358,7 +394,11 @@ function xen_device_tree_editing()
- 
-         dt_mknode "/chosen" "$node_name"
-         dt_set "/chosen/$node_name" "compatible" "str_a" "xen,xsm-policy xen,multiboot-module multiboot,module"
--        dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $xen_policy_addr $xen_policy_size)"
-+        if test "$CALC"; then
-+            dt_set_calc "/chosen/$node_name" "reg" "xen_policy"
-+        else
-+            dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $xen_policy_addr $xen_policy_size)"
-+        fi
-     fi
- 
-     if test "$DOM0_KERNEL"
-@@ -367,7 +407,11 @@ function xen_device_tree_editing()
- 
-         dt_mknode "/chosen" "$node_name"
-         dt_set "/chosen/$node_name" "compatible" "str_a" "xen,linux-zimage xen,multiboot-module multiboot,module"
--        dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $dom0_kernel_addr $dom0_kernel_size)"
-+        if test "$CALC"; then
-+            dt_set_calc "/chosen/$node_name" "reg" "dom0_linux"
-+        else
-+            dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $dom0_kernel_addr $dom0_kernel_size)"
-+        fi
-         dt_set "/chosen" "xen,dom0-bootargs" "str" "$DOM0_CMD"
-     fi
- 
-@@ -377,7 +421,11 @@ function xen_device_tree_editing()
- 
-         dt_mknode "/chosen" "$node_name"
-         dt_set "/chosen/$node_name" "compatible" "str_a" "xen,linux-initrd xen,multiboot-module multiboot,module"
--        dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $ramdisk_addr $ramdisk_size)"
-+        if test "$CALC"; then
-+            dt_set_calc "/chosen/$node_name" "reg" "dom0_ramdisk"
-+        else
-+            dt_set "/chosen/$node_name" "reg" "hex" "$(split_addr_size $ramdisk_addr $ramdisk_size)"
-+        fi
-     fi
- 
-     i=0
-@@ -464,14 +512,14 @@ function xen_device_tree_editing()
- 
-         xen_dt_domu_add_vcpu_nodes "/chosen/domU$i" $i ${DOMU_VCPUS[$i]}
- 
--        add_device_tree_kernel "/chosen/domU$i" ${domU_kernel_addr[$i]} ${domU_kernel_size[$i]} "${DOMU_CMD[$i]}"
-+        add_device_tree_kernel "/chosen/domU$i" "domU${i}_kernel" ${domU_kernel_addr[$i]} ${domU_kernel_size[$i]} "${DOMU_CMD[$i]}"
-         if test "${domU_ramdisk_addr[$i]}"
-         then
--            add_device_tree_ramdisk "/chosen/domU$i" ${domU_ramdisk_addr[$i]} ${domU_ramdisk_size[$i]}
-+            add_device_tree_ramdisk "/chosen/domU$i" "domU${i}_ramdisk" ${domU_ramdisk_addr[$i]} ${domU_ramdisk_size[$i]}
-         fi
-         if test "${domU_passthrough_dtb_addr[$i]}"
-         then
--            add_device_tree_passthrough "/chosen/domU$i" ${domU_passthrough_dtb_addr[$i]} ${domU_passthrough_dtb_size[$i]}
-+            add_device_tree_passthrough "/chosen/domU$i" "domU${i}_fdt" ${domU_passthrough_dtb_addr[$i]} ${domU_passthrough_dtb_size[$i]}
-         fi
-         i=$(( $i + 1 ))
-     done
-@@ -504,7 +552,11 @@ function device_tree_editing()
- 
-     if test $UBOOT_SOURCE
-     then
--        echo "fdt addr $device_tree_addr" >> $UBOOT_SOURCE
-+        if test "$CALC"; then
-+            echo "fdt addr \${host_fdt_addr}" >> $UBOOT_SOURCE
-+        else
-+            echo "fdt addr $device_tree_addr" >> $UBOOT_SOURCE
-+        fi
-         echo "fdt resize 1024" >> $UBOOT_SOURCE
- 
-         if test $NUM_DT_OVERLAY && test $NUM_DT_OVERLAY -gt 0
-@@ -512,7 +564,11 @@ function device_tree_editing()
-             i=0
-             while test $i -lt $NUM_DT_OVERLAY
-             do
--                echo "fdt apply ${dt_overlay_addr[$i]}" >> $UBOOT_SOURCE
-+                if test "$CALC"; then
-+                    echo "fdt apply \${host_fdto${i}_addr}" >> $UBOOT_SOURCE
-+                else
-+                    echo "fdt apply ${dt_overlay_addr[$i]}" >> $UBOOT_SOURCE
-+                fi
-                 i=$(( $i + 1 ))
-             done
-         fi
-@@ -530,8 +586,12 @@ function fill_reserved_spaces_from_dtb()
- {
-     if [ ! -f $DEVICE_TREE ]
-     then
--        echo "File $DEVICE_TREE doesn't exist, exiting";
--        cleanup_and_return_err
-+        if test "$CALC"; then
-+            return
-+        else
-+            echo "File $DEVICE_TREE doesn't exist, exiting";
-+            cleanup_and_return_err
-+        fi
-     fi
- 
-     # Check if reserved-memory node exists
-@@ -613,7 +673,7 @@ function get_image_size()
-     printf "%u" $effective_size
- }
- 
--function add_size()
-+function add_size_from_file()
- {
-     local filename=$1
-     local size=`stat -L --printf="%s" $filename`
-@@ -645,6 +705,27 @@ function add_size()
-     filesize=$size
- }
- 
-+function add_size_calculate()
-+{
-+    local fit_scr_name=$1
-+
-+    cat >> $UBOOT_SOURCE <<- EOF
-+	setenv ${fit_scr_name}_addr \${memaddr}
-+	setenv ${fit_scr_name}_size \${filesize}
-+	setexpr memaddr \${memaddr} \+ \${filesize}
-+	setexpr memaddr \${memaddr} \+ $PADDING_MASK
-+	setexpr memaddr \${memaddr} \& $PADDING_MASK_INV
-+	EOF
-+
-+    # TODO: missing ${RESERVED_MEM_SPACES[@]} check
-+
-+    # The following are updated to avoid collisions in node names, but
-+    # they are not actively used.
-+    memaddr=$((memaddr + offset))
-+    memaddr=$(printf "0x%X\n" $memaddr)
-+    filesize=$offset
-+}
-+
- function load_file()
- {
-     local filename=$1
-@@ -657,10 +738,16 @@ function load_file()
-     if test "$FIT"
-     then
-         echo "imxtract \$fit_addr $fit_scr_name $memaddr" >> $UBOOT_SOURCE
-+        add_size_from_file $filename
-     else
--        echo "$LOAD_CMD $memaddr ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+        if test "$CALC"; then
-+            echo "$LOAD_CMD \${memaddr} ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+            add_size_calculate $fit_scr_name
-+        else
-+            echo "$LOAD_CMD $memaddr ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+            add_size_from_file $filename
-+        fi
-     fi
--    add_size $filename
- }
- 
- function check_file_type()
-@@ -670,8 +757,13 @@ function check_file_type()
- 
-     if [ ! -f $filename ]
-     then
--        echo "File $filename doesn't exist, exiting";
--        cleanup_and_return_err
-+        if test "$CALC"
-+        then
-+            return
-+        else
-+            echo "File $filename doesn't exist, exiting";
-+            cleanup_and_return_err
-+        fi
-     fi
- 
-     # if file doesn't know what it is, it outputs data, so include that
-@@ -705,8 +797,13 @@ function check_compressed_file_type()
- 
-     if [ ! -f $filename ]
-     then
--        echo "File $filename doesn't exist, exiting";
--        cleanup_and_return_err
-+        if test "$CALC"
-+        then
-+            return
-+        else
-+            echo "File $filename doesn't exist, exiting";
-+            cleanup_and_return_err
-+        fi
-     fi
- 
-     file_type=$( file -L $filename )
-@@ -872,6 +969,12 @@ function linux_config()
- generate_uboot_images()
- {
-     local arch=$(file -L $XEN | grep -E 'ARM64|Aarch64')
-+    
-+    if test "$CALC"
-+    then
-+        echo "bootm is not compatible with -s"
-+        cleanup_and_return_err
-+    fi
- 
-     if test "$arch"
-     then
-@@ -997,7 +1100,11 @@ bitstream_load_and_config()
-         if test "$UBOOT_SOURCE"
-         then
-             # we assume the FPGA device is 0 here
--            echo "fpga load 0 $bitstream_addr $bitstream_size" >> "$UBOOT_SOURCE"
-+            if test "$CALC"; then
-+                echo "fpga load 0 \${fpga_bitstream_addr} \${fpga_bitstream_size}" >> "$UBOOT_SOURCE"
-+            else
-+                echo "fpga load 0 $bitstream_addr $bitstream_size" >> "$UBOOT_SOURCE"
-+            fi
-         fi
-     fi
- }
-@@ -1271,7 +1378,7 @@ function print_help
- {
-     script=`basename "$0"`
-     echo "usage:"
--    echo "	$script -c CONFIG_FILE -d DIRECTORY [-t LOAD_CMD] [-o FILE] [-k KEY_DIR/HINT [-u U-BOOT_DTB]] [-e] [-f] [-p PREPEND_PATH]"
-+    echo "	$script -c CONFIG_FILE -d DIRECTORY [-t LOAD_CMD] [-o FILE] [-k KEY_DIR/HINT [-u U-BOOT_DTB]] [-e] [-f] [-p PREPEND_PATH] [-s]"
-     echo "	$script -h"
-     echo "where:"
-     echo "	CONFIG_FILE - configuration file"
-@@ -1289,13 +1396,14 @@ function print_help
-     echo "	-f - enable generating a FIT image"
-     echo "	PREPEND_PATH - path to be appended before file names to match deploy location within rootfs"
-     echo "	-h - prints out the help message and exits "
-+    echo "	-s - let U-Boot calculate binary images load addresses/sizes dynamically"
-     echo "Defaults:"
-     echo "	CONFIG_FILE=$cfg_file, UBOOT_TYPE=\"LOAD_CMD\" env var, DIRECTORY=$uboot_dir"
-     echo "Example:"
-     echo "	$script -c ../config -d ./build42 -t \"scsi load 1:1\""
- }
- 
--while getopts ":c:t:d:ho:k:u:fp:" opt; do
-+while getopts ":c:t:d:ho:k:u:fp:s" opt; do
-     case ${opt} in
-     t )
-         case $OPTARG in
-@@ -1340,6 +1448,9 @@ while getopts ":c:t:d:ho:k:u:fp:" opt; do
-     p )
-         prepend_path="$OPTARG"
-         ;;
-+    s )
-+        CALC=y
-+        ;;
-     h )
-         print_help
-         exit 0
-@@ -1533,6 +1644,10 @@ uboot_addr=$memaddr
- # 2MB are enough for a uboot script
- memaddr=$(( $memaddr + $offset ))
- memaddr=`printf "0x%X\n" $memaddr`
-+if test "$CALC"
-+then
-+    echo "setenv memaddr $memaddr" >> $UBOOT_SOURCE
-+fi
- 
- fill_reserved_spaces_from_dtb
- 
-@@ -1583,7 +1698,11 @@ fi
- 
- if [ "$BOOT_CMD" != "none" ]
- then
--    echo "$BOOT_CMD $kernel_addr $([ "$BOOT_CMD" = "bootefi" ] || echo '-') $device_tree_addr" >> $UBOOT_SOURCE
-+    if test "$CALC"; then
-+        echo "$BOOT_CMD \${host_kernel_addr} $([ "$BOOT_CMD" = "bootefi" ] || echo '-') \${host_fdt_addr}" >> $UBOOT_SOURCE
-+    else
-+        echo "$BOOT_CMD $kernel_addr $([ "$BOOT_CMD" = "bootefi" ] || echo '-') $device_tree_addr" >> $UBOOT_SOURCE
-+    fi
- else
-     # skip boot command but store load addresses to be used later
-     echo "setenv host_kernel_addr $kernel_addr" >> $UBOOT_SOURCE
--- 
-2.25.1
-
+Thanks,
+Jason
 
