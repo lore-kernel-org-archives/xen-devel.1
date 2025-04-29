@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57049C3ABA9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48C64C369DC
 	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 06:33:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.971399.1359854 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.971414.1359906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9eX8-0007Jb-S3; Tue, 29 Apr 2025 06:33:34 +0000
+	id 1u9eXB-0008FD-OZ; Tue, 29 Apr 2025 06:33:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 971399.1359854; Tue, 29 Apr 2025 06:33:34 +0000
+Received: by outflank-mailman (output) from mailman id 971414.1359906; Tue, 29 Apr 2025 06:33:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9eX8-0007Ic-MI; Tue, 29 Apr 2025 06:33:34 +0000
-Received: by outflank-mailman (input) for mailman id 971399;
- Tue, 29 Apr 2025 04:06:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u9eXB-0008At-8X; Tue, 29 Apr 2025 06:33:37 +0000
+Received: by outflank-mailman (input) for mailman id 971414;
+ Tue, 29 Apr 2025 04:06:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WGTB=XP=kernel.org=devnull+chenlinxuan.uniontech.com@srs-se1.protection.inumbo.net>)
- id 1u9cEg-0003lQ-Iy
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 04:06:22 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d93bd99-24af-11f0-9eb4-5ba50f476ded;
- Tue, 29 Apr 2025 06:06:19 +0200 (CEST)
+ id 1u9cEr-0003mv-Oe
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 04:06:33 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4d1e5c05-24af-11f0-9ffb-bf95429c2676;
+ Tue, 29 Apr 2025 06:06:18 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5FDD04A2BA;
- Tue, 29 Apr 2025 04:06:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 32BAAC16AAE;
- Tue, 29 Apr 2025 04:06:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 841A6615EF;
+ Tue, 29 Apr 2025 04:05:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AF344C4CEE3;
+ Tue, 29 Apr 2025 04:06:16 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 25755C3ABA5;
- Tue, 29 Apr 2025 04:06:17 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 98151C369CB;
+ Tue, 29 Apr 2025 04:06:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,26 +47,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d93bd99-24af-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 4d1e5c05-24af-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745899577;
-	bh=k2PRcTC3BnKrnGtxiZbpr39EydncBfZx8pWBXCBrn+o=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=sl1R/QSSKs05tUYWMQq/uiCadkREGBOU5tVJHGA66P2EkOFGfCC1JLNOssSpJjpfv
-	 i1N3YAK7hTIvrT9evYzjPTpMtl9av07WHvpZFrJXHyBHKvQWjn/JhigCD6fkfMAGPH
-	 JkY8VguW7fzhxvQAMEhDofx3SSxc7yjIqdbHjB9Zr5KEaqG9hWmkcjzjao55vtZ/NI
-	 q8WnG0Bz6jZ+4e+KKoj5E4dzgyIM5z1gqx+F00UJmhuUlydMRP5jx4WNva+ZnwM6YJ
-	 EGWX7EYVTkC+hr3arTlEqZN+KPB4ASUlbCDvZNZIqqfe80t6+0KxhgB0ir2HqOqYyq
-	 ONp6bMmilIzFA==
+	s=k20201202; t=1745899576;
+	bh=V+YDfvUyGy5qM6nqWNSGKKulp2fwuDLB1gLxIkj/Hno=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=JrpjRytRVQqTzmvDN6tW8YwWy5LZEcqe6LwvOCY/SquzF6mxh4RHWz4fLI7DHh+Q6
+	 OIk1xHUupRbL7YZJ6VPBb5I/Cqe1L8DRA43HCUDBtHqFaVGf0cAm9sPKUqLs5nmFys
+	 hcjlxVCHe61nmaW0bNMqcoYxGsf/Gj0KWmWjwk0jnsS7P81OWOSUTyOHasEJpPtzsT
+	 WkB3ojGfh670XtC3ltZq9dxNP1wwvpx6uNHneQD55VGNpzCOJIw3LaE9t8IR8WsOAz
+	 HhVjN8ByZI/ZAVMh+pwvU8yzJR+3XjfSUGjQ9ENcQzkgQOmbRX7izujoWnKPklrAFY
+	 eiZ7yDwkQxZpw==
 From: Chen Linxuan via B4 Relay <devnull+chenlinxuan.uniontech.com@kernel.org>
-Date: Tue, 29 Apr 2025 12:06:10 +0800
-Subject: [PATCH RFC v3 6/8] kcov: add __always_inline for canonicalize_ip
+Subject: [PATCH RFC v3 0/8] kernel-hacking: introduce CONFIG_NO_AUTO_INLINE
+Date: Tue, 29 Apr 2025 12:06:04 +0800
+Message-Id: <20250429-noautoinline-v3-0-4c49f28ea5b5@uniontech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250429-noautoinline-v3-6-4c49f28ea5b5@uniontech.com>
-References: <20250429-noautoinline-v3-0-4c49f28ea5b5@uniontech.com>
-In-Reply-To: <20250429-noautoinline-v3-0-4c49f28ea5b5@uniontech.com>
+X-B4-Tracking: v=1; b=H4sIACxQEGgC/22OzQ6CMBCEX4X0qiXdpQXqyQTCA3g1HhBXaaKt4
+ S8YwrtbG0/G48xkvpmF9dQZ6tkuWlhHk+mNs14k24g1bW1vxM3Fa4YClZCQcuvqcXDG3o0lnpM
+ +a1KJkgqZrzw7upo54I7sUBXs5M3W9IPrXmFighAlUEksc5BQlCWWYvPFAwgFEuNco0458Kalz
+ 9A81nY/Wn9toKaNG/cI4AkD7P+1CbnglOoaM8hUIq6/gHVd37l4dtL+AAAA
+X-Change-ID: 20250416-noautoinline-8e9b9e535452
 To: Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, 
  Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, 
  Andrew Morton <akpm@linux-foundation.org>, 
@@ -100,21 +103,21 @@ Cc: linux-nvme@lists.infradead.org, linux-kernel@vger.kernel.org,
  Chen Linxuan <chenlinxuan@uniontech.com>, 
  Changbin Du <changbin.du@intel.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=999;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2639;
  i=chenlinxuan@uniontech.com; h=from:subject:message-id;
- bh=bu46wuQGrDj6kBvEdZGeSh/hu1kfUprs2xtOHC9YvDM=;
- b=owEBbQKS/ZANAwAKAXYe5hQ5ma6LAcsmYgBoEFAzBVNZPkSl6Omnu5oU34AQK+1mpqi/WLkNr
- 0NEvxK8dUyJAjMEAAEKAB0WIQTO1VElAk6xdvy0ZVp2HuYUOZmuiwUCaBBQMwAKCRB2HuYUOZmu
- i8g1D/40bhkDUMn5ZsiK4TnuOugcii2OnZKhTkti9V/LWWRvgzRyIsQwQx4FtXYSoLWNriV0VjO
- CyBhHFDEFDn9Qz/M965AcIUUmKLR5grVtMB9zo5zCc6a91HPJy6GMCb7vQWZAzb4+pWGKnhvAMx
- Ov0wOqEkIfqqFMjOVcO8Vm4hfpv/gUj81gfM3GBjvGd2OHSGu5Pij0pZYLJpk1zPwPTmvDqrsz4
- oYuo8iGnQFrGPoCp8bulBU2twHYxidXZqedbEM/1LtFaKcmn/lXQC7zQRnMoVVJw/VWRJEm3H/r
- ZAZEvQW29nAzq7hH4vvQnts2FtjI834A3qFtxQn63CS2Sfr4r+Cq1EuVsao/7MSVIED9IWykpk7
- 4zxistnA1wTl+9FGo+ICJdWpP4NFZYJXYzFIo2tProekWZDMySQIIR8PlepBYAhmPBM4brAn4p+
- 6EeroMTKyY8ruNjdDNz7d2T4eCWNT79QPnCWQnqqQnu6en7oxsQ2nWq0yCWUgq6PiInxlG1IrOp
- ws0NDutFTcctb93F/sUKWR8fxwjFNCr2kJf2YNiq9h6vsJ5kJf0v5kwbgfSvV4AJmDUqbWsjulX
- AA7Pwu8V0FCWq4C/mflHXRlVyt5MBdGeteRJDx/xMeppywk4M4UANlKUX+SDfpwBq2fbdtOztNl
- do0e6Yl/yQUEHnA==
+ bh=V+YDfvUyGy5qM6nqWNSGKKulp2fwuDLB1gLxIkj/Hno=;
+ b=owEBbQKS/ZANAwAKAXYe5hQ5ma6LAcsmYgBoEFAt1A5qQ0LESAzipTR7awHbnQPj78n5atow0
+ tiwIctZ69yJAjMEAAEKAB0WIQTO1VElAk6xdvy0ZVp2HuYUOZmuiwUCaBBQLQAKCRB2HuYUOZmu
+ ixgVD/9iV08f+Vs6eS/LbQDJ7q+zM9yfQ97NvSrbN+MQtFOdOOX/B9DDWjz07bMvwZeoSrnuWD8
+ Hp2NCMdUMvn/XAg8tY/cC0FeuznQPAg5DIqOw8e+jaILOgWNROimjgixLuhTr6WiaM0KrcZDHBL
+ OCFiXr8cJEoV5nmHDZpwmsRyfhwIkYxKUiqVZvxYPnX5Mq0jdE9cE129yrf++c0rJHV7tiA9m3m
+ 3Dgfo4EYCqhLMhujPTgQnqrtD260ZB/BDOIDT/4pmvjfuO7SVexQMqaZ6VD9Zv6g3IpgG//tHdW
+ YqgmY8n2rOMhJaDXULwLGpK32HY5uEPSykT3U8ytrJs1vPonlNQ+Yl1jBUOMiJd28s6gMWhAfNF
+ 7DhrCdUVPQITzQ3hp7+hMavCnibw1bsO70Q1Jyoe/HbpVw+jgqinhhqNY/q95Z3kUEjgZ70wbQz
+ J4+fpvQceoLTw3aPUBwT4AgmFYItGhMG/oWciNlmNPDr/PkMdez2OuxVUBnKvMvmy4yNtOyF82f
+ vhAi9OSPoii6ldf1OcZLCU7qEMXlU9dM1KhX437xOQ4ZbW31J0vPnuqxW9b5BE8+hsNfWWLyt/z
+ sTJSwkwcY3PBvFzx6dDyI4Q7JC83rCdQ6Bpw8f+o9IgK2kSIMrG0t4mrxG3OSfZB8NXalFg40yK
+ bumZ9NWzca7x0hA==
 X-Developer-Key: i=chenlinxuan@uniontech.com; a=openpgp;
  fpr=D818ACDD385CAE92D4BAC01A6269794D24791D21
 X-Endpoint-Received: by B4 Relay for chenlinxuan@uniontech.com/default with
@@ -122,38 +125,77 @@ X-Endpoint-Received: by B4 Relay for chenlinxuan@uniontech.com/default with
 X-Original-From: Chen Linxuan <chenlinxuan@uniontech.com>
 Reply-To: chenlinxuan@uniontech.com
 
-From: Chen Linxuan <chenlinxuan@uniontech.com>
+This series introduces a new kernel configuration option NO_AUTO_INLINE,
+which can be used to disable the automatic inlining of functions.
 
-Presume that kernel is compiled for x86_64 with gcc version 13.3.0:
+This will allow the function tracer to trace more functions
+because it only traces functions that the compiler has not inlined.
 
-  make allmodconfig
-  make KCFLAGS="-fno-inline-small-functions -fno-inline-functions-called-once"
+Previous discussions can be found at
 
-This results a objtool warning:
+Link: https://lore.kernel.org/all/20181028130945.23581-3-changbin.du@gmail.com/
 
-  vmlinux.o: warning: objtool: __sanitizer_cov_trace_pc+0xc: call to canonicalize_ip() with UACCESS enabled
+This patch depends on
+
+  [PATCH] drm/i915/pxp: fix undefined reference to
+          `intel_pxp_gsccs_is_ready_for_sessions'
+
+which can be found at
+
+  https://lore.kernel.org/all/20250415090616.2649889-1-jani.nikula@intel.com/
+
+as well as
+
+  [RFC PATCH 5/7] RDMA/hns: initialize db in update_srq_db()
+
+which can be found at
+
+  https://lore.kernel.org/all/FF922C77946229B6+20250411105459.90782-5-chenlinxuan@uniontech.com/
 
 Signed-off-by: Chen Linxuan <chenlinxuan@uniontech.com>
 ---
- kernel/kcov.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v3:
+- Fix some modpost and objtool warnings
+- Try support clang as Bart Van Assche suggested.
+- Remove architecture depends as Bart Van Assche suggested.
+- Link to v2: https://lore.kernel.org/r/20250416-noautoinline-v2-0-e69a2717530f@uniontech.com
 
-diff --git a/kernel/kcov.c b/kernel/kcov.c
-index 187ba1b80bda169d2f7efead5c6076b8829522ca..a2e2d3c655406b5a1f53e4855c782727b0541935 100644
---- a/kernel/kcov.c
-+++ b/kernel/kcov.c
-@@ -194,7 +194,7 @@ static notrace bool check_kcov_mode(enum kcov_mode needed_mode, struct task_stru
- 	return mode == needed_mode;
- }
- 
--static notrace unsigned long canonicalize_ip(unsigned long ip)
-+static __always_inline notrace unsigned long canonicalize_ip(unsigned long ip)
- {
- #ifdef CONFIG_RANDOMIZE_BASE
- 	ip -= kaslr_offset();
+Changes in v2:
+- Resend via b4 to correct Message-ID and recipients.
+- Update commit message following suggestions from Jarkko Sakkinen 
+- Link to v1: https://lore.kernel.org/r/31F42D8141CDD2D0+20250411105142.89296-1-chenlinxuan@uniontech.com
 
+---
+Chen Linxuan (4):
+      rseq: add __always_inline for rseq_kernel_fields
+      kcov: add __always_inline for canonicalize_ip
+      x86/xen: add __init for xen_pgd_walk
+      lib/Kconfig.debug: introduce CONFIG_NO_AUTO_INLINE
+
+Winston Wen (4):
+      nvme: add __always_inline for nvme_pci_npages_prp
+      mm: add __always_inline for page_contains_unaccepted
+      vfio/virtio: add __always_inline for virtiovf_get_device_config_size
+      tpm: add __always_inline for tpm_is_hwrng_enabled
+
+ Makefile                            | 16 ++++++++++++++++
+ arch/x86/xen/mmu_pv.c               |  2 +-
+ drivers/char/tpm/tpm-chip.c         |  2 +-
+ drivers/nvme/host/pci.c             |  2 +-
+ drivers/vfio/pci/virtio/legacy_io.c |  2 +-
+ kernel/kcov.c                       |  2 +-
+ kernel/rseq.c                       |  2 +-
+ lib/Kconfig.debug                   | 21 +++++++++++++++++++++
+ lib/Makefile                        |  3 +++
+ mm/page_alloc.c                     |  2 +-
+ 10 files changed, 47 insertions(+), 7 deletions(-)
+---
+base-commit: ca91b9500108d4cf083a635c2e11c884d5dd20ea
+change-id: 20250416-noautoinline-8e9b9e535452
+
+Best regards,
 -- 
-2.43.0
+Chen Linxuan <chenlinxuan@uniontech.com>
 
 
 
