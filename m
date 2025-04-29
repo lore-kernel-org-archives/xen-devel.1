@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC0CAC369DC
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 12:41:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.972392.1360760 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69784C369DC
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 12:41:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.972396.1360771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9kGY-00038e-EK; Tue, 29 Apr 2025 12:40:50 +0000
+	id 1u9kGs-0003ho-Lz; Tue, 29 Apr 2025 12:41:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 972392.1360760; Tue, 29 Apr 2025 12:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 972396.1360771; Tue, 29 Apr 2025 12:41:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9kGY-00038X-Bi; Tue, 29 Apr 2025 12:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 972392;
- Tue, 29 Apr 2025 12:40:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1u9kGs-0003hf-Ia; Tue, 29 Apr 2025 12:41:10 +0000
+Received: by outflank-mailman (input) for mailman id 972396;
+ Tue, 29 Apr 2025 12:41:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PDgl=XP=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1u9kDj-0007KK-9v
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 12:37:55 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061e.outbound.protection.outlook.com
- [2a01:111:f403:2415::61e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c5076f2d-24f6-11f0-9eb4-5ba50f476ded;
- Tue, 29 Apr 2025 14:37:54 +0200 (CEST)
-Received: from BN0PR03CA0057.namprd03.prod.outlook.com (2603:10b6:408:e7::32)
- by SJ2PR12MB8158.namprd12.prod.outlook.com (2603:10b6:a03:4f7::13)
+ id 1u9kDV-0007L9-1s
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 12:37:41 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20614.outbound.protection.outlook.com
+ [2a01:111:f403:2416::614])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bb26705b-24f6-11f0-9ffb-bf95429c2676;
+ Tue, 29 Apr 2025 14:37:38 +0200 (CEST)
+Received: from BN0PR03CA0040.namprd03.prod.outlook.com (2603:10b6:408:e7::15)
+ by SA3PR12MB7999.namprd12.prod.outlook.com (2603:10b6:806:312::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.19; Tue, 29 Apr
- 2025 12:37:51 +0000
+ 2025 12:37:33 +0000
 Received: from MN1PEPF0000ECDA.namprd02.prod.outlook.com
- (2603:10b6:408:e7:cafe::23) by BN0PR03CA0057.outlook.office365.com
- (2603:10b6:408:e7::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.41 via Frontend Transport; Tue,
- 29 Apr 2025 12:37:51 +0000
+ (2603:10b6:408:e7:cafe::83) by BN0PR03CA0040.outlook.office365.com
+ (2603:10b6:408:e7::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.37 via Frontend Transport; Tue,
+ 29 Apr 2025 12:37:33 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  MN1PEPF0000ECDA.mail.protection.outlook.com (10.167.242.134) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8699.20 via Frontend Transport; Tue, 29 Apr 2025 12:37:51 +0000
+ 15.20.8699.20 via Frontend Transport; Tue, 29 Apr 2025 12:37:33 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 29 Apr
- 2025 07:37:44 -0500
+ 2025 07:37:29 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5076f2d-24f6-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: bb26705b-24f6-11f0-9ffb-bf95429c2676
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XsbgbhUkv5vsQD2xtrpUjKMtb9yDj6Im4oTD/xEZSRflUI2Xpnl+BQYeqviTNKSnlkGe4ux2715QgvI8iZYwxqrPbCJ5xb+bPEWwoKxRtSdvfNsFb+sWfLOXhtAccQP5dMTneYjch/9DrXMNs98Fg80TaU/ThxczwYHmkY//nKlTkrR0xp9up2/OZOwsRQ8lf5akFBff6skL+jZ3pGyi1otUQUhFCsDjVNJAaM9Og6ouhhRlh6EXOXkNgqyBMJ7so9XOuaDaJyUa2Zo/L7hVphv7jWxA/H9tUZZ9tj+dNLchoLM8GGFcwkoNnrCU8rKS++AMZz1PwFBFHHFUf14r4w==
+ b=m9e8D8gpduj48qds7TjH9dOPn8ZgbAZN+R++qowLZ0cydbgbp11dBKUYy2f1KmOZ43A7MfLX7i1C2V1Mx243wOsdfJrH/iYvLG1zNmSBvIIitDwbtlxqvaR4KdIf4z0Hz0axiWaVuT6+mdQKnrl7QVLrtnOykyUquy2HbacWO+5JkSTDdRQTdGQ1eVhb1XzFe6RMPz67z8RJ91fwIQ3BVQ9C1Q9rgxvJL4n48rxfklMYc7fFbDXY/dOXO5PMl8HucNJIZVYOmQHmN3jBxkj+qmYitGtYhpI9Z4Ox265epHqHpwZknG97lBvBps+AWbXN0B4bJln/ZfUCUrazz0g0UA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Pk+0cuFaL4PjlqZuXO8kAMll1JDmXXUosf54xaUN2m0=;
- b=VOGqBqzl7TmKDHSYlY4JrWb1pCdxGxOspayJHZhLFaKP3r6+7VHf9Thv8GKl7YPv1+TRGzF0FNNj6Q4i59tArFwiixRPutvVVEc4eC4GJH8EkOPFrDhl/pIPcZnZFrfTk5l/xMp6M5M3zsF7xie+skK8qwOlZQNN9vd8erMyu/zftFsdTGHpaDDGaV7aWoXq371MqJQ7tQEDPlnGctJkDkkrGdWe6iSLaoWZ8uG+StGXqU0xzHfYuA9uI5TlFLj9N0uu8uGEUnFnmyL3BpdN4lSfnT+jWQO8BaJfP1KWntcIFRrDCiw7MbgrRuQvNWz92Ia4gEWNAtlWCTqGpI3amw==
+ bh=xDrFG98ghx3Lb9O56CXpByERjFCHM6cxhmOuzmZVC7s=;
+ b=pPfuc3cYrLFuvJue9vocA455JOec3CKRX8ATNYkg5OIQg0o8ClrxeB3q2tP3+4pSpWVssmlgtAmt+9UuhBFO/IwqHfN2qJbrutP/EzLGpWO4aTfFf3R7SJ2gUCZm2HckX6sGwunLCdDcWK0MgjXPrHBnVqDhfLbF+9IOsxLAJVFE+EZkeYVO8HpWoezHjRaZBI887cn4F5UTWZDZ36KxdD18tc/ma8KGXs2N7MmxzO4ain9WW9NVPDxGIz3EOYXOAEwg+eKMq7eRLf1u/IKzuejPdk5x6hvtnlTmS85ZfBLkWTpVuGtPxQJv+Q9pYsE++i1oIYJYsz8BpY7zBJHJZg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Pk+0cuFaL4PjlqZuXO8kAMll1JDmXXUosf54xaUN2m0=;
- b=MwrzTOV1SHVFiiC7YZWudKG2pwjEleoOe9ptqNyHEp8DKxn/TLoqS6vLgqGr5jQOfFYcS5SX20hG+Sei1/MpHgClcsIbXFFfEYmmME0rSsf6+0YRozzlZ2RI8e3PRIBe8L1JOs7qH9Z6p9rraeyWz5Bogb8ABC37ANW3LUNt8UI=
+ bh=xDrFG98ghx3Lb9O56CXpByERjFCHM6cxhmOuzmZVC7s=;
+ b=fIPzAOqgOwM+tlIoXYbBQc7pG+74Z5MmOakPImu0dNsPva3tYqrLjBmzGqVMZ1EvJjdrmEu/+XbiKGq2ztvw9U6n/sDe6S0WGSrAFPdSgEzEbOIu7DuIPAmEBOnSh4KoLj9cQnXv3+1D1ULb8waitPvymxuNFbabskGtHbEDiAo=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,9 +89,9 @@ CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Jan Beulich
  Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, "Jason
  Andryuk" <jason.andryuk@amd.com>, Alejandro Vallejo <agarciav@amd.com>,
 	"Denis Mukhin" <dmukhin@ford.com>
-Subject: [PATCH v6 10/12] x86/hyperlaunch: add memory parsing to domain config
-Date: Tue, 29 Apr 2025 13:36:21 +0100
-Message-ID: <20250429123629.20839-11-agarciav@amd.com>
+Subject: [PATCH v6 07/12] x86/hyperlaunch: locate dom0 initrd with hyperlaunch
+Date: Tue, 29 Apr 2025 13:36:18 +0100
+Message-ID: <20250429123629.20839-8-agarciav@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429123629.20839-1-agarciav@amd.com>
 References: <20250429123629.20839-1-agarciav@amd.com>
@@ -103,191 +103,124 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECDA:EE_|SJ2PR12MB8158:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9882f07-ffc9-454f-5147-08dd871aa7de
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECDA:EE_|SA3PR12MB7999:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2900730e-0f8a-4ce0-3d73-08dd871a9d30
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?mNGGpBFI/t7n3Hydf9kVCo3j26iQqfl5Q5uT/FctcnUnj7IQV95e3xDhNJM5?=
- =?us-ascii?Q?RgTRLgRExM6m9khvNBTc70iH7TGAdJ7AWPP5Vypr531iO/Fig2v1z9PW1Hus?=
- =?us-ascii?Q?RtjNy34i2kZ0iJ3FRC5NwF//MajMtke5OpR50oaIbknm3w42DxgKIqLinvAE?=
- =?us-ascii?Q?+rhk7LYWrTjIUaf/pEAJnGBj9RWaHgH95fH8G7YhcpJbdYqf7ASDiXgDEYQx?=
- =?us-ascii?Q?G4uWK0OxEd/KOyANCYwTrgGqViPQRt8/oa91DZ4bseakHjaH3Lmymc+DrA00?=
- =?us-ascii?Q?wODj7+yCmlNZ/hMZL/Lwx1tTxu2tlWqapXSVT2L3QTsPBSNszSj5r1InRMzJ?=
- =?us-ascii?Q?HDQLKW3Gp+SwLD4mGVEhnYh+OufOVG6t9DWfBYHvgWZzLygRVMO4YeyXsCbO?=
- =?us-ascii?Q?5r5NpajGw4di2EVyi+JUs7vT6X+HE0zXGLC5zbfy/laV4sfEBw/ddjasGOeL?=
- =?us-ascii?Q?1b8Ilzi7DeWD8KNKHeGFh78Fp87BCGoAXoGqOZmgeyd25wOPIZujpjKp0lss?=
- =?us-ascii?Q?DoEBF8R+5FiKmHQ1zP43WpF9mpV32JhkEU0giJd8eP1n4T5KlmQwd6IH+4RH?=
- =?us-ascii?Q?sAzq+BA/6gRcaK3SW728zitJ18WzP4HhPSmeWSMKuxa+5SCTRRui8B8U4k3z?=
- =?us-ascii?Q?hFUqOxhpjDPuqB/bkGCRw7DrJ0sGQKW/OaA30sAYOkYSL993cpoWnyp+yD1F?=
- =?us-ascii?Q?zjNV5LUQVy6GzPpxNr3cTZSo7b3uL5gCqqoBuaac73WbB44Y9oRfPWT+haJi?=
- =?us-ascii?Q?S/VySYQfaMbLlu4QuNhyfzz130Nsc3lJ0akSr3nmY1+HfpMmIDsIowG0nf0L?=
- =?us-ascii?Q?efZ8uWLDv/G/ZlTLbLMQ+0DHrGuCwtnrvGhaPkbVR00WXo4FvZcT2I0updJm?=
- =?us-ascii?Q?LJnYieGn1pF2wETXaPcGHYgJeWcKvPa9WupYN8s/UBm39dwzNFt6/6QWES3g?=
- =?us-ascii?Q?sszygl1kD2yrd3wvMDkpuI4Koprc1/QXhRmi/3Bu1aSY33YBr/ly47ovf8yc?=
- =?us-ascii?Q?2IgU378lEk2vUGpsulnwTvuIqIjNgZE8mhgqpF7D83JPDDFDUyJKY+VUSoX/?=
- =?us-ascii?Q?oOL3P+TH4GFkp/uA1dWwnsJtluLqvxU0arANbJxsFxSEwkkXmbosv11X6lTT?=
- =?us-ascii?Q?7Y6uBuG2FFwAaiD2ZWE/UwZk2jOBTWqB9uIAKTrYH6X0kakL+6GcefB5rmcX?=
- =?us-ascii?Q?XjuiVjEeatoHJTJ2wEva+bKwVJnEYPw7wJMPE/TIKflhs7ekQCw+aUozAyWS?=
- =?us-ascii?Q?m6Q2uCet01sia3qaCDH0fYMessBm94zd1LvSZ0q4dHe0Qt8tJhrSpgHr19Ne?=
- =?us-ascii?Q?ZOjL8b+fv+ti52vPphIazRh7LCrHobH1G/K6IPFp5xF4VhMuhyXBrbyoql3F?=
- =?us-ascii?Q?MGAh+8xwzp938if8ZleE0TVmN5ZodGDvNLnsET0KOuTBlO5ja37qozngigdJ?=
- =?us-ascii?Q?zDjffE0W/aet1P1WmN/0D4IVjW/xdDef0F0MLyLSNYh7fd+7DrwD04r2Turm?=
- =?us-ascii?Q?OJ/guqS0NoFWAC+1dm2BUeHp7x0g1y0QnQjG?=
+	=?us-ascii?Q?cuXTN9+ozAk+/y+9Y0Mn7+e41jQNNu6AjVeO4xkQnQWnytv6hrplu+ZxTi61?=
+ =?us-ascii?Q?bHXQbYwLDDCcH/EgSmT9P6C+L7CDyvvWgwheAc8ZYgtw9rouHui1V31tdENR?=
+ =?us-ascii?Q?pvjMhDRYA3FCMeZ1pjwO8jGU1gTIaunyXelPiZhznoTVJAYRIOJbo8qgJWqR?=
+ =?us-ascii?Q?umLCFd4HpiFumAzXqxtqbP6QerOSy7rIplqfWvencGk7d+WK/+2OPsIfzovm?=
+ =?us-ascii?Q?YvkIZMPU2YRlgpFRCv99rI6GH7RWw5r71z9mPT3KxAJOa14BCmuR6Ed+9pTA?=
+ =?us-ascii?Q?GyWnhtx+ks+sUOat3d6ppzGI/c3PiPNJhaLFu/49HKBojX1aIgFXkCOvyB6e?=
+ =?us-ascii?Q?vKEQzxw5IB7jNOzliTMAtkvfRJuVLd9/d8zLed/OpcrVPHHgQdJe3FgQIfsM?=
+ =?us-ascii?Q?NTeBfPeOVabssfH9H7jdDQiZNSq/RYynJJK488adr5gb9u1gPqC6pXWanswa?=
+ =?us-ascii?Q?yFJBTBKE09SPTcvSw6onUwUkFGJBip5A6qYcVtMKLIVrb+djf+/M2/nfWyPs?=
+ =?us-ascii?Q?I40glzER5NsSXXYwJopT6mLDDAMRbOZBNOcoYOCKSddVspHYEd5Y9NWe2HTo?=
+ =?us-ascii?Q?hN7dGYfqf0TBDTCjgi30CUbccuRlrMwk2AK0DuQwOoCMLOMTBVJ86B1oYUn9?=
+ =?us-ascii?Q?NlpXkUMp949Cmu/EW3Usji0kruEiJ1jII65JGFyUYAMPfDxODdDaGn9Yd1JU?=
+ =?us-ascii?Q?0wRoDNg/6Z+DQ0fmliomt5fmn0WZhotdS0Jo5rjeTnpBqt6zN40QJgt9g7GB?=
+ =?us-ascii?Q?kJAM3c4hcCfdoFlRhL6jOUH+FUxlXchMCc+oiqxThwvFZiI/obYevMv+RBW8?=
+ =?us-ascii?Q?GcR1PPjzKumjDKMVeQFjNhcQ24BsCbATgurp+c/XFvn8J1KQuhuavxHNXrnP?=
+ =?us-ascii?Q?cbXlxjO5uljdEo2yATM9z4iI+cLXvfD7o2wmXHm9gKGSBYGO7ZpXbpzP4RPD?=
+ =?us-ascii?Q?8103XfSmYK0pXC6IXOO4w8UVAgdKmw0y/UOSFA75y7O81WqP+USZpqsYeiuI?=
+ =?us-ascii?Q?jvQsgGCgsSY7aToU7CIh8/DrD/66OclIVj2x4QwTBb/dTtFuJRZjml8GbDDy?=
+ =?us-ascii?Q?US8y7OOPaLPlmig5MFlW1DNxQbYDnjtE656/Q+Ggw9FEBf7L/3nM18flAYsG?=
+ =?us-ascii?Q?hxMM7BOc4bg4y+jBG7iY6x1vFIk+Am3BvHXor27+VtfR5P63roSqEUY64h/Q?=
+ =?us-ascii?Q?tgwvKt3gWQYttnx6Q8Fu13X43KoeW3biu4pJSVK0jNgejXBUu2lWq3gKSXa3?=
+ =?us-ascii?Q?riQMEKs0ZrCb0UZ85W1nAPC9ACHbZNYCvtmdy1jvV2CG1EhzN17Ph4SUAkev?=
+ =?us-ascii?Q?sbbSx0CyqvYIbQFx/vpmbi6cKCsanfmucVnBSFHJmg6pdbYta4dz82CAMijT?=
+ =?us-ascii?Q?zx1h7Jxkr+0LpNfBT/1GDuMn0hqkYJLxsM/hcKJz1xfzD5u6K/NIJFjBEm8L?=
+ =?us-ascii?Q?sD5gbjB1OZ8kc4BDYcmL8/MnKijiQ2r5vXtIacTgwZQNC7+ZvgVSKTkf1dvn?=
+ =?us-ascii?Q?mOvEzUXhAM9hgy0UGqpvS4UR+gQ0vyeAmEvt?=
 X-Forefront-Antispam-Report:
 	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 12:37:51.1290
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 12:37:33.2122
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9882f07-ffc9-454f-5147-08dd871aa7de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2900730e-0f8a-4ce0-3d73-08dd871a9d30
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	MN1PEPF0000ECDA.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8158
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7999
 
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 
-Add three properties, memory, mem-min, and mem-max, to the domain node device
-tree parsing to define the memory allocation for a domain. All three fields are
-expressed in kb and written as a u64 in the device tree entries.
+Look for a subnode of type `multiboot,ramdisk` within a domain node and
+parse via the fdt_read_multiboot_module() helper. After a successful
+helper call, the module index is returned and the module is guaranteed
+to be in the module list.
+
+Fix unused typo in adjacent comment.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
 Reviewed-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/x86/dom0_build.c              |  8 +++++
- xen/arch/x86/include/asm/boot-domain.h |  4 +++
- xen/arch/x86/setup.c                   |  5 ++-
- xen/common/domain-builder/fdt.c        | 46 ++++++++++++++++++++++++++
- 4 files changed, 62 insertions(+), 1 deletion(-)
+ xen/arch/x86/setup.c            |  4 ++--
+ xen/common/domain-builder/fdt.c | 24 ++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 0b467fd4a4..8db24dbc0a 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -627,6 +627,14 @@ int __init construct_dom0(const struct boot_domain *bd)
- 
-     process_pending_softirqs();
- 
-+    /* If param dom0_size was not set and HL config provided memory size */
-+    if ( !get_memsize(&dom0_size, ULONG_MAX) && bd->mem_pages )
-+        dom0_size.nr_pages = bd->mem_pages;
-+    if ( !get_memsize(&dom0_min_size, ULONG_MAX) && bd->min_pages )
-+        dom0_min_size.nr_pages = bd->min_pages;
-+    if ( !get_memsize(&dom0_max_size, ULONG_MAX) && bd->max_pages )
-+        dom0_max_size.nr_pages = bd->max_pages;
-+
-     if ( is_hvm_domain(d) )
-         rc = dom0_construct_pvh(bd);
-     else if ( is_pv_domain(d) )
-diff --git a/xen/arch/x86/include/asm/boot-domain.h b/xen/arch/x86/include/asm/boot-domain.h
-index e316d4bcde..fa8ea1cc66 100644
---- a/xen/arch/x86/include/asm/boot-domain.h
-+++ b/xen/arch/x86/include/asm/boot-domain.h
-@@ -18,6 +18,10 @@ struct boot_domain {
- #define BUILD_MODE_ENABLE_DM     (1 << 1) /* HVM    | PVH     */
-     uint32_t mode;
- 
-+    unsigned long mem_pages;
-+    unsigned long min_pages;
-+    unsigned long max_pages;
-+
-     struct boot_module *kernel;
-     struct boot_module *module;
-     const char *cmdline;
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 343f87ee9d..4a3c41ad71 100644
+index 765b690c41..c8de028439 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -297,7 +297,10 @@ static const char *cmdline_cook(const char *p, const char *loader_name);
- struct boot_info __initdata xen_boot_info = {
-     .loader = "unknown",
-     .cmdline = "",
--    .domains = { [0 ... MAX_NR_BOOTDOMS - 1] = { .domid = DOMID_INVALID } },
-+    .domains = { [0 ... MAX_NR_BOOTDOMS - 1] = {
-+        .domid = DOMID_INVALID,
-+        .max_pages = ULONG_MAX,
-+    }},
- };
- 
- static struct boot_info *__init multiboot_fill_boot_info(
+@@ -2172,11 +2172,11 @@ void asmlinkage __init noreturn __start_xen(void)
+      * At this point all capabilities that consume boot modules should have
+      * claimed their boot modules. Find the first unclaimed boot module and
+      * claim it as the initrd ramdisk. Do a second search to see if there are
+-     * any remaining unclaimed boot modules, and report them as unusued initrd
++     * any remaining unclaimed boot modules, and report them as unused initrd
+      * candidates.
+      */
+     initrdidx = first_boot_module_index(bi, BOOTMOD_UNKNOWN);
+-    if ( initrdidx < MAX_NR_BOOTMODS )
++    if ( !bi->hyperlaunch_enabled && initrdidx < MAX_NR_BOOTMODS )
+     {
+         bi->mods[initrdidx].type = BOOTMOD_RAMDISK;
+         bi->domains[0].module = &bi->mods[initrdidx];
 diff --git a/xen/common/domain-builder/fdt.c b/xen/common/domain-builder/fdt.c
-index aadca11dfa..d9babe9d56 100644
+index dabe201b04..507f383f8e 100644
 --- a/xen/common/domain-builder/fdt.c
 +++ b/xen/common/domain-builder/fdt.c
-@@ -7,6 +7,7 @@
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/libfdt/libfdt.h>
-+#include <xen/sizes.h>
- 
- #include <asm/bootinfo.h>
- #include <asm/page.h>
-@@ -24,6 +25,16 @@ static int __init fdt_prop_as_u32(const struct fdt_property *prop,
-     return 0;
- }
- 
-+static int __init fdt_prop_as_u64(const struct fdt_property *prop,
-+                                  uint64_t *val)
-+{
-+    if ( !prop || fdt32_to_cpu(prop->len) < sizeof(uint64_t) )
-+        return -EINVAL;
-+
-+    *val = fdt64_to_cpu(*(const fdt64_t *)prop->data);
-+    return 0;
-+}
-+
- /*
-  * Unpacks a "reg" property into its address and size constituents.
-  *
-@@ -256,6 +267,41 @@ static int __init fdt_process_domain_node(
-                    (bd->mode & BUILD_MODE_ENABLE_DM) ? "hvm" :
-                                                        "pvh");
+@@ -226,6 +226,30 @@ static int __init fdt_process_domain_node(
+                 bd->kernel->fdt_cmdline = fdt_get_prop_offset(
+                     fdt, node, "bootargs", &bd->kernel->cmdline_pa);
          }
-+        else if ( !strncmp(prop_name, "memory", name_len) )
++        else if ( !fdt_node_check_compatible(fdt, node, "multiboot,ramdisk") )
 +        {
-+            uint64_t kb;
-+            if ( (rc = fdt_prop_as_u64(prop, &kb)) )
++            int idx;
++
++            if ( bd->module )
 +            {
-+                printk(XENLOG_ERR "  bad \"memory\" prop on domain %s\n", name);
-+                return rc;
++                printk(XENLOG_WARNING
++                       "Duplicate module for domain %s\n", name);
++                continue;
 +            }
-+            bd->mem_pages = PFN_DOWN(kb * SZ_1K);
-+            printk(XENLOG_ERR "  memory: %lu KiB\n", kb);
-+        }
-+        else if ( !strncmp(prop_name, "mem-min", name_len) )
-+        {
-+            uint64_t kb;
-+            if ( (rc = fdt_prop_as_u64(prop, &kb)) )
++
++            idx = fdt_read_multiboot_module(fdt, node, address_cells,
++                                            size_cells, bi);
++            if ( idx < 0 )
 +            {
-+                printk(XENLOG_ERR
-+                       "  bad \"mem-min\" prop on domain %s\n", name);
-+                return rc;
++                printk(XENLOG_ERR "  failed processing module for domain %s\n",
++                       name);
++                return idx;
 +            }
-+            bd->min_pages = PFN_DOWN(kb * SZ_1K);
-+            printk(XENLOG_INFO "  min memory: %lu kb\n", kb);
-+        }
-+        else if ( !strncmp(prop_name, "mem-max", name_len) )
-+        {
-+            uint64_t kb;
-+            if ( (rc = fdt_prop_as_u64(prop, &kb)) )
-+            {
-+                printk(XENLOG_ERR
-+                       "  bad \"mem-max\" prop on domain %s\n", name);
-+                return rc;
-+            }
-+            bd->max_pages = PFN_DOWN(kb * SZ_1K);
-+            printk(XENLOG_INFO "  max memory: %lu KiB\n", kb);
++
++            printk(XENLOG_INFO "  module: multiboot-index=%d\n", idx);
++            bi->mods[idx].type = BOOTMOD_RAMDISK;
++            bd->module = &bi->mods[idx];
 +        }
      }
  
-     fdt_for_each_subnode(node, fdt, dom_node)
+     if ( !bd->kernel )
 -- 
 2.43.0
 
