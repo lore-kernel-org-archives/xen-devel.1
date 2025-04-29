@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A2AC369D5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 03:14:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.971385.1359817 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D22C369DC
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 06:14:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.971417.1359828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9bQY-0005FT-7R; Tue, 29 Apr 2025 03:14:34 +0000
+	id 1u9eEN-0003ez-Rk; Tue, 29 Apr 2025 06:14:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 971385.1359817; Tue, 29 Apr 2025 03:14:34 +0000
+Received: by outflank-mailman (output) from mailman id 971417.1359828; Tue, 29 Apr 2025 06:14:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9bQY-0005FM-4u; Tue, 29 Apr 2025 03:14:34 +0000
-Received: by outflank-mailman (input) for mailman id 971385;
- Tue, 29 Apr 2025 03:14:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u9eEN-0003es-OL; Tue, 29 Apr 2025 06:14:11 +0000
+Received: by outflank-mailman (input) for mailman id 971417;
+ Tue, 29 Apr 2025 06:14:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=k9ft=XP=zytor.com=hpa@srs-se1.protection.inumbo.net>)
- id 1u9bQW-0005FE-6U
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 03:14:32 +0000
-Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f640f41-24a8-11f0-9ffb-bf95429c2676;
- Tue, 29 Apr 2025 05:14:29 +0200 (CEST)
-Received: from [127.0.0.1] ([76.133.66.138]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53T3DrjB119020
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Mon, 28 Apr 2025 20:13:53 -0700
+ (envelope-from <SRS0=qXnC=XP=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1u9eEM-0003em-RX
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 06:14:10 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 296772e8-24c1-11f0-9eb4-5ba50f476ded;
+ Tue, 29 Apr 2025 08:14:09 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac2ab99e16eso1211742566b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Apr 2025 23:14:09 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ace6e4fb5ecsm728919466b.71.2025.04.28.23.14.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Apr 2025 23:14:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,102 +47,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f640f41-24a8-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53T3DrjB119020
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745896436;
-	bh=peb82vM6bSNuZo6/KMKmNAvnzerA3MQBiRKI7q+5xfw=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=a++ELqym3lrpZPy7ffY5Gnnq0aNebWAwsQMnZAleLodLhRw9gdz5sbqMpSGZxWLZS
-	 /9za6Nyp1KexgNB7nXFXpN81dXKkHrxa1ti2HZylvJxMQTBsneVlMxj6hdeA6HgciA
-	 tOwW0eu+NpafDEOYGpD/0HvlLtjP9WIrk2gAy8t6jg6hlHtJQF/hd8pd5fCPqLolIX
-	 hx2rCTFcGPCM3TtOmG7U2KmdSt2WHoJeIWlDrJpdGMnuXqQiEcGsr4bievYSlRz9wq
-	 vj77sXGyLSXoYKTA2EWk6M4qRon8YrQ8jrBfjBbkBVizg6LoYfoLnMe5Em6X49Kisx
-	 gYDsmYl7YHsaA==
-Date: Mon, 28 Apr 2025 20:13:52 -0700
-From: "H. Peter Anvin" <hpa@zytor.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Ingo Molnar <mingo@kernel.org>
-CC: Arnd Bergmann <arnd@arndb.de>, Arnd Bergmann <arnd@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Juergen Gross <jgross@suse.com>,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        Alexander Usyskin <alexander.usyskin@intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        =?UTF-8?Q?Mateusz_Jo=C5=84czyk?= <mat.jonczyk@o2.pl>,
-        Mike Rapoport <rppt@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>, linux-kernel@vger.kernel.org,
-        xen-devel@lists.xenproject.org
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_bitops/32=3A_Convert_variable?=
- =?US-ASCII?Q?=5Fffs=28=29_and_fls=28=29_zero-case_handling_to_C?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <e5e97ff8-9670-40d1-a0fa-69504d34c4c4@citrix.com>
-References: <20250425141740.734030-1-arnd@kernel.org> <aAyiganPp_UsNlnZ@gmail.com> <d2b0e71c-e79b-40d6-8693-3202cd894d66@app.fastmail.com> <CAHk-=wh=TUsVv6xhtzYsWJwJggrjyOfYT3kBu+bHtoYLK0M9Xw@mail.gmail.com> <CAHk-=wgfk69H-T-vMWR33xUpVsWJLrF34d0OwUXa2sHhtpSwZg@mail.gmail.com> <e54f1943-e0ff-4f59-b24f-9b5a7a38becf@citrix.com> <CAHk-=wj0S2vWui0Y+1hpYMEhCiXKexbQ01h+Ckvww8hB29az_A@mail.gmail.com> <aA8nF0moBYOIgC5J@gmail.com> <aA8oqKUaFU-0wb-D@gmail.com> <CAHk-=wgJfWfWa2NTiTmev+Xr=e8Uo=aFkrXujLAQBVAVN-VigQ@mail.gmail.com> <B364FF6D-DFCC-42A7-ACA1-6A74E27EE57E@zytor.com> <67be5eee-b67b-409a-8309-829f891b9944@citrix.com> <916BD58C-E6A7-495E-9A60-722E130AC7A7@zytor.com> <e5e97ff8-9670-40d1-a0fa-69504d34c4c4@citrix.com>
-Message-ID: <956DB0ED-F3DB-456D-8D06-6F40DBDB815A@zytor.com>
+X-Inumbo-ID: 296772e8-24c1-11f0-9eb4-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1745907248; x=1746512048; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=CEHyaoDMFKGRU1E2AmIUNeNgLo2ACJqKO89ucJ4zOd0=;
+        b=A5eV6+mMFMz5NQAv7ndTyFQ67ZpcUB7zuUNqB004m4ldQ91Pxj7cZmPuiibnDB6gi6
+         gN6zDEfeJoifryk6wJZtxgi55tH+eItthhbLuDB18G5nY1mzs++4FUZYgrsdT9qQL1OZ
+         PAnr+rjfJWNXPzfGr6TTqSkS/6rjMGEHrVY9TS9+vMRBc3wfgzXtT12fnpA6j4WR+hjq
+         hp0s7zYu7VobwK9hbUhQgusqLMlricE1x1lvkbpeWPxQlzclHnqvy2reBM5IahB6U6Nm
+         yN1s9e4g34Vu25iaXuC90r5clQR6TGxH1po6BRkObfCAZLpQDr9aLPN4pnBBd58EaH5Z
+         dFQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745907248; x=1746512048;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CEHyaoDMFKGRU1E2AmIUNeNgLo2ACJqKO89ucJ4zOd0=;
+        b=E4CcxbKM5XAj4iirUx9ZhFT6fP2f/E9ttLdhQxCQeCvB+0I0zJKvvE/cntldlEaWf+
+         IFE3T7g1Pfk+FepZkW14Ey3i9tN7wJLBZ4ab57zTAnS34FHx6CzdhUaYrlB/NGIQqO7L
+         qGhHO+sPtga5nBokgkJfInLlplWVXGn+kFLMMhOKAvTmq+xVEvPdkZV61VjYSQ+zGOtR
+         iJs6SISrptZUOR85kxojMTQmb6l5G0xaRyrniY/YaT9mq7HLfbXcjhnMslEYQm9irpJW
+         iJ/p00jn/kPg92R9HDwYa5+yH07RPkQofuJpb637JqNF9u7ZJaiqZxBdL03948tVxO56
+         YD7g==
+X-Forwarded-Encrypted: i=1; AJvYcCUakra2o1Ezo2Cx2l2H+creodQMDTtXpriZI2R723lVKJhysUyM7h1PGJCYXHfyDPKdwKhhIDEzyZk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywa2k7VEb4FTcghHV2pEXpYTN/QyW+8+DZ2qCgY8NOgzEQM9AOG
+	DnC+dRU0s+HE/9624pBlQNyodidEJXWqAQdNdA2siVqoNrkKWkuqeJ887qMjUw==
+X-Gm-Gg: ASbGncvvLl/mM0VnV/oVLj277U6q2010/IZl/VmzJApAtYKaWXCnXiem3vVX3ynnMiH
+	fX1p0JZY3FxzOCbjsOzeZqifDDuHYF75By8avOcsQSApcZGauxYkrvzq5k04Vo8DXl6kaJKeTsz
+	tMneaGZplVEAME8FBBPQZ36qpc2VD31FbMtA6d+1DRGgxI9QF6WIC+0PC3gU1UErPqOORiI0CzT
+	MzL+xGpqknr535WAiwTasqoLnOpBEPZyTBJecB/8IwxjXP/uKIkDrVslbsyiTAvKQm5iytxITEk
+	jNdFQFgyA1X9NqxpQi6/vPSuuW+IrXQc+fOAHf+BJUJx4XyF7sft2bBDGsUEfXCYRhiXYcj2HSy
+	7qECnZCfO23d/enz6xAliQlbodA==
+X-Google-Smtp-Source: AGHT+IFfWFULhOwajRgdME0/ajfWYODSGgBwirsnHCHfUlUpp6FRPM3ai8a3L00HehzthyC/J8sY2g==
+X-Received: by 2002:a17:907:7244:b0:ac7:322d:779c with SMTP id a640c23a62f3a-acec4f749e0mr219030066b.50.1745907248518;
+        Mon, 28 Apr 2025 23:14:08 -0700 (PDT)
+Message-ID: <f2b6396c-c933-4fb9-ba4b-c90170540955@suse.com>
+Date: Tue, 29 Apr 2025 08:14:07 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] xen/page_alloc: address violation of Rule 14.3
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: victorm.lira@amd.com, Federico Serafini <federico.serafini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, xen-devel@lists.xenproject.org
+References: <5f2e316aae4667d1fe851e68552eb881c4d5a015.1745625477.git.victorm.lira@amd.com>
+ <3146fbf3-2ff1-48a4-b05b-37477a9a5cc5@suse.com>
+ <alpine.DEB.2.22.394.2504281551530.785180@ubuntu-linux-20-04-desktop>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <alpine.DEB.2.22.394.2504281551530.785180@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On April 28, 2025 7:25:17 PM PDT, Andrew Cooper <andrew=2Ecooper3@citrix=2E=
-com> wrote:
->On 29/04/2025 3:00 am, H=2E Peter Anvin wrote:
->> On April 28, 2025 5:12:13 PM PDT, Andrew Cooper <andrew=2Ecooper3@citri=
-x=2Ecom> wrote:
->>> On 28/04/2025 10:38 pm, H=2E Peter Anvin wrote:
->>>> On April 28, 2025 9:14:45 AM PDT, Linus Torvalds <torvalds@linux-foun=
-dation=2Eorg> wrote:
->>>>> On Mon, 28 Apr 2025 at 00:05, Ingo Molnar <mingo@kernel=2Eorg> wrote=
-:
->>>>>> And once we remove 486, I think we can do the optimization below to
->>>>>> just assume the output doesn't get clobbered by BS*L in the zero-ca=
-se,
->>>>>> right?
->>>>> We probably can't, because who knows what "Pentium" CPU's are out th=
-ere=2E
->>>>>
->>>>> Or even if Pentium really does get it right=2E I doubt we have any
->>>>> developers with an original Pentium around=2E
->>>>>
->>>>> So just leave the "we don't know what the CPU result is for zero"
->>>>> unless we get some kind of official confirmation=2E
->>>>>
->>>>>          Linus
->>>> If anyone knows for sure, it is probably Christian Ludloff=2E However=
-, there was a *huge* tightening of the formal ISA when the i686 was introdu=
-ced (family=3D6) and I really believe this was part of it=2E
->>>>
->>>> I also really don't trust that family=3D5 really means conforms to un=
-documented P5 behavior, e=2Eg=2E for Quark=2E
->>> https://www=2Esandpile=2Eorg/x86/flags=2Ehtm
+On 29.04.2025 01:21, Stefano Stabellini wrote:
+> On Mon, 28 Apr 2025, Jan Beulich wrote:
+>> On 26.04.2025 02:00, victorm.lira@amd.com wrote:
+>>> From: Federico Serafini <federico.serafini@bugseng.com>
 >>>
->>> That's a lot of "can't even characterise the result" in the P5=2E
+>>> MISRA C Rule 14.3 states that "Controlling expressions shall not be
+>>> invariant".
 >>>
->>> Looking at P4 column, that is clearly what the latest SDM has
->>> retroactively declared to be architectural=2E
->>>
->>> ~Andrew
->> Yes, but it wasn't about flags here=2E=20
+>>> Add a SAF comment to deviate the rule for build configurations without
+>>> CONFIG_LLC_COLORING enabled.
 >>
->> Now, question: can we just use __builtin_*() for these? I think gcc sho=
-uld always generate inline code for these on x86=2E
->
->Yes it does generate inline code=2E=C2=A0 https://godbolt=2Eorg/z/M45oo5r=
-qT
->
->GCC does it branchlessly, but cannot optimise based on context=2E
->
->Clang can optimise based on context, except the 0 case it seems=2E
->
->Moving to -march=3Di686 causes both GCC and Clang to switch to CMOV and
->create branchless code, but is still GCC still can't optimise out the
->CMOV based on context=2E
->
->~Andrew
+>> I was surprised by this supposedly being the only violation. And indeed it
+>> wasn't very hard to find more. For example, we have a number of
+>> "while ( num_online_cpus() > 1 && ... )", which become compile-time
+>> constant (false) when NR_CPUS=1.
+> 
+> Uhm, I did run a special scan for this and I can confirm no other
+> violations are detected.
 
-Maybe a gcc bug report would be better than trying to hack around this in =
-the kernel?
+Because of it being only one single configuration that's being scanned. I did
+point out before that this is a problem for anyone wanting to certify the
+hypervisor in a (perhaps just slightly) different configuration.
+
+>>> --- a/xen/common/page_alloc.c
+>>> +++ b/xen/common/page_alloc.c
+>>> @@ -2038,6 +2038,7 @@ static struct page_info *alloc_color_heap_page(unsigned int memflags,
+>>>
+>>>      spin_lock(&heap_lock);
+>>>
+>>> +    /* SAF-14-safe MISRA C R14.3 condition always false without LLC_COLORING */
+>>>      for ( i = 0; i < domain_num_llc_colors(d); i++ )
+>>>      {
+>>>          unsigned long free = free_colored_pages[domain_llc_color(d, i)];
+>>
+>> Hmm, this way the deviation applies even when LLC_COLORING=y.
+> 
+> Yes but in the LLC_COLORING=y case it is harmless. Do you have something
+> else in mind?
+
+What if, perhaps by mistake, domain_num_llc_colors() becomes constant 0 in
+yet another configuration? (I don't expect this would work, but in principle
+the comment ought to be inside an #ifdef.)
+
+>> As to the comment wording - looks like we're pretty inconsistent with that
+>> right now. I, for one, don't think the Misra rule needs (re)stating there;
+>> the SAF index points at all the data that's needed if one cares about the
+>> specifics of the deviation.
+> 
+> Do you prefer:
+> 
+> /* SAF-14-safe */
+
+That's too short. All I'm asking for is to drop the (imprecise) rule
+reference. Noticing only now: It being imprecise may make the comment go
+stale if we move to a newer Misra spec, as the rule number may be different
+then.
+
+Jan
 
