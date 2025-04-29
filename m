@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6724C3ABA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 17:28:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.972963.1361214 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81DC6C369DC
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 17:41:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.972980.1361225 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9okQ-0000Sj-HR; Tue, 29 Apr 2025 17:27:58 +0000
+	id 1u9oxH-0003Zi-Lf; Tue, 29 Apr 2025 17:41:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 972963.1361214; Tue, 29 Apr 2025 17:27:58 +0000
+Received: by outflank-mailman (output) from mailman id 972980.1361225; Tue, 29 Apr 2025 17:41:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9okQ-0000Sc-Ev; Tue, 29 Apr 2025 17:27:58 +0000
-Received: by outflank-mailman (input) for mailman id 972963;
- Tue, 29 Apr 2025 17:27:57 +0000
+	id 1u9oxH-0003Zb-Hq; Tue, 29 Apr 2025 17:41:15 +0000
+Received: by outflank-mailman (input) for mailman id 972980;
+ Tue, 29 Apr 2025 17:41:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=TYgR=XP=zytor.com=xin@srs-se1.protection.inumbo.net>)
- id 1u9okO-0000SW-RH
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 17:27:57 +0000
-Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=nK9Z=XP=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
+ id 1u9oxF-0003Xy-Pk
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 17:41:13 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 47dffcd4-251f-11f0-9ffb-bf95429c2676;
- Tue, 29 Apr 2025 19:27:54 +0200 (CEST)
-Received: from [192.168.7.202] ([71.202.166.45]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 53THR949509822
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Tue, 29 Apr 2025 10:27:09 -0700
+ id 1ffad625-2521-11f0-9ffb-bf95429c2676;
+ Tue, 29 Apr 2025 19:41:06 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 06DC344747;
+ Tue, 29 Apr 2025 17:41:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A93E2C4CEE9;
+ Tue, 29 Apr 2025 17:41:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,211 +43,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47dffcd4-251f-11f0-9ffb-bf95429c2676
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 53THR949509822
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025042001; t=1745947632;
-	bh=bi2Aevh2QzYHJjU5ZT4PV0lJuEojRhQww5I9NeYJf50=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=dl5+1MRV352QgdzCN55c3h5YzJsglVUunIeznoTZvR86tIRDHDduoKYAilNdy8UVy
-	 OEGai/Yt9OZDvSPgIzIhkxcj5ShG9kvXTjGlJ2zesdY1/FbO18R7e2/VTEIl7GKjaO
-	 xK07wa+p3OMX38teq7q76S09I4+Yz7Pt2REmAngLro9casDIXZcpeegj2EJx1I2ig2
-	 0/6ceuNx+bbiqR41148AXDkYgIeIfISQrjLKScf+66Hnx0A5RHGDmj07zcwLcWBYtD
-	 nuOvbzvclQP9Rcm7KE8EOSlR4rY0H6lR8tUdU/bUWP3YHocv+vO11bc0h3sHbn5MNb
-	 tpVmjIEc6McWQ==
-Message-ID: <7df3c16b-9353-4f30-a13b-1f0eb8563e69@zytor.com>
-Date: Tue, 29 Apr 2025 10:27:09 -0700
+X-Inumbo-ID: 1ffad625-2521-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1745948464;
+	bh=BOK0QXSoho3dbFB9Mjjl/1owMmFzongpvyKigN7MaJs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=mBsDac/DipxLJve5APZFVfL+IiziCQ26urXPLdEsvZxBq/RZwtlNo7jcAh9IV4dJm
+	 8VKR8KsCLqS+MSN+TOerTVA1cCWrUy/YFfCetFw7XUMjuHEF27LcF+z0dUlTYNVy1s
+	 x7PtEF757Vgp2cDeh+M7ZiZXpQsMM7YmCkzycmF4=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	patches@lists.linux.dev,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org,
+	Kees Cook <kees@kernel.org>,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 5.15 016/373] xen/mcelog: Add __nonstring annotations for unterminated strings
+Date: Tue, 29 Apr 2025 18:38:13 +0200
+Message-ID: <20250429161123.800570162@linuxfoundation.org>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250429161123.119104857@linuxfoundation.org>
+References: <20250429161123.119104857@linuxfoundation.org>
+User-Agent: quilt/0.68
+X-stable: review
+X-Patchwork-Hint: ignore
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/15] x86/msr: Add missing includes of <asm/msr.h>
-To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Cc: LKML <linux-kernel@vger.kernel.org>, kvm@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        virtualization@lists.linux.dev, linux-pm@vger.kernel.org,
-        linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
-        Netdev <netdev@vger.kernel.org>, platform-driver-x86@vger.kernel.org,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        acme@kernel.org, jgross@suse.com, andrew.cooper3@citrix.com,
-        peterz@infradead.org, namhyung@kernel.org, mark.rutland@arm.com,
-        alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-        irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com,
-        wei.liu@kernel.org, ajay.kaher@broadcom.com,
-        bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com,
-        pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com,
-        luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com,
-        haiyangz@microsoft.com, decui@microsoft.com,
-        dapeng1.mi@linux.intel.com
-References: <20250427092027.1598740-1-xin@zytor.com>
- <20250427092027.1598740-2-xin@zytor.com>
- <a1917b37-e41e-d303-749b-4007cda01605@linux.intel.com>
-Content-Language: en-US
-From: Xin Li <xin@zytor.com>
-Autocrypt: addr=xin@zytor.com; keydata=
- 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
- l75w1xInsg==
-In-Reply-To: <a1917b37-e41e-d303-749b-4007cda01605@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 4/29/2025 2:45 AM, Ilpo Järvinen wrote:
-> On Sun, 27 Apr 2025, Xin Li (Intel) wrote:
-> 
->> For some reason, there are some TSC-related functions in the MSR
->> header even though there is a tsc.h header.
->>
->> To facilitate the relocation of rdtsc{,_ordered}() from <asm/msr.h>
->> to <asm/tsc.h> and to eventually eliminate the inclusion of
->> <asm/msr.h> in <asm/tsc.h>, add <asm/msr.h> to the source files that
->> reference definitions from <asm/msr.h>.
->>
->> Signed-off-by: Xin Li (Intel) <xin@zytor.com>
->> Acked-by: Dave Hansen <dave.hansen@linux.intel.com>
->> Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
->> ---
->>
->> Change in v4:
->> *) Add missing includes in a different patch (Ilpo Järvinen).
->> *) Add all necessary direct inclusions for msr.h (Ilpo Järvinen).
->>
->> Change in v3:
->> * Add a problem statement to the changelog (Dave Hansen).
->> ---
->>   arch/x86/events/msr.c                                         | 3 +++
->>   arch/x86/events/perf_event.h                                  | 1 +
->>   arch/x86/events/probe.c                                       | 2 ++
-> 
-> Under arch/x86/events/ a few files seem to be missing the include?
-> 
->>   arch/x86/hyperv/ivm.c                                         | 1 +
-> 
-> Also under hyperv/ not all files are covered but I'm a bit hesitant to
-> suggest a change there since I'm not sure if they (hypervisors) do
-> something special w.r.t. msr.
-> 
->>   arch/x86/include/asm/fred.h                                   | 1 +
->>   arch/x86/include/asm/microcode.h                              | 2 ++
->>   arch/x86/include/asm/mshyperv.h                               | 1 +
->>   arch/x86/include/asm/msr.h                                    | 1 +
->>   arch/x86/include/asm/suspend_32.h                             | 1 +
->>   arch/x86/include/asm/suspend_64.h                             | 1 +
->>   arch/x86/include/asm/switch_to.h                              | 2 ++
-> 
-> arch/x86/kernel/acpi/ ?
-> acrh/x86/kernel/cet.c ?
-> ...
-> 
-> There seem to be quite many under arch/x86/ that still don't have it, I
-> didn't list them all as there were so many after this point.
-> 
-> But that's up to x86 maintainers how throughout they want you to be.
-> 
-> This command may be helpful to exclude the files which already have the
-> include so you can focus on the ones that may still be missing it:
-> 
-> git grep -l -e rdmsr -e wrmsr | grep -v -f <(git grep -l -e 'asm/msr\.h')
-> 
->>   arch/x86/kernel/cpu/resctrl/pseudo_lock.c                     | 1 +
->>   arch/x86/kernel/fpu/xstate.h                                  | 1 +
->>   arch/x86/kernel/hpet.c                                        | 1 +
->>   arch/x86/kernel/process_64.c                                  | 1 +
->>   arch/x86/kernel/trace_clock.c                                 | 2 +-
->>   arch/x86/kernel/tsc_sync.c                                    | 1 +
->>   arch/x86/lib/kaslr.c                                          | 2 +-
->>   arch/x86/mm/mem_encrypt_identity.c                            | 1 +
->>   arch/x86/realmode/init.c                                      | 1 +
->>   drivers/acpi/acpi_extlog.c                                    | 1 +
->>   drivers/acpi/processor_perflib.c                              | 1 +
->>   drivers/acpi/processor_throttling.c                           | 3 ++-
->>   drivers/char/agp/nvidia-agp.c                                 | 1 +
->>   drivers/cpufreq/amd-pstate-ut.c                               | 2 ++
->>   drivers/crypto/ccp/sev-dev.c                                  | 1 +
->>   drivers/edac/amd64_edac.c                                     | 1 +
->>   drivers/edac/ie31200_edac.c                                   | 1 +
->>   drivers/edac/mce_amd.c                                        | 1 +
->>   drivers/hwmon/hwmon-vid.c                                     | 4 ++++
->>   drivers/idle/intel_idle.c                                     | 1 +
->>   drivers/misc/cs5535-mfgpt.c                                   | 1 +
->>   drivers/net/vmxnet3/vmxnet3_drv.c                             | 4 ++++
->>   drivers/platform/x86/intel/ifs/core.c                         | 1 +
->>   drivers/platform/x86/intel/ifs/load.c                         | 1 +
->>   drivers/platform/x86/intel/ifs/runtest.c                      | 1 +
->>   drivers/platform/x86/intel/pmc/cnp.c                          | 1 +
->>   drivers/platform/x86/intel/speed_select_if/isst_if_common.c   | 1 +
->>   drivers/platform/x86/intel/speed_select_if/isst_if_mbox_msr.c | 1 +
->>   drivers/platform/x86/intel/speed_select_if/isst_tpmi_core.c   | 1 +
->>   drivers/platform/x86/intel/turbo_max_3.c                      | 1 +
->>   .../platform/x86/intel/uncore-frequency/uncore-frequency.c    | 1 +
->>   drivers/powercap/intel_rapl_common.c                          | 1 +
->>   drivers/powercap/intel_rapl_msr.c                             | 1 +
->>   .../thermal/intel/int340x_thermal/processor_thermal_device.c  | 1 +
->>   drivers/thermal/intel/intel_tcc_cooling.c                     | 1 +
->>   drivers/thermal/intel/x86_pkg_temp_thermal.c                  | 1 +
->>   drivers/video/fbdev/geode/display_gx.c                        | 1 +
->>   drivers/video/fbdev/geode/gxfb_core.c                         | 1 +
->>   drivers/video/fbdev/geode/lxfb_ops.c                          | 1 +
-> 
-> Under drivers/ this looked pretty complete. Nice work.
-> 
-> Acked-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com> # for pdx86
+5.15-stable review patch.  If anyone has any objections, please let me know.
 
-Thanks a lot!
+------------------
+
+From: Kees Cook <kees@kernel.org>
+
+[ Upstream commit 1c3dfc7c6b0f551fdca3f7c1f1e4c73be8adb17d ]
+
+When a character array without a terminating NUL character has a static
+initializer, GCC 15's -Wunterminated-string-initialization will only
+warn if the array lacks the "nonstring" attribute[1]. Mark the arrays
+with __nonstring to and correctly identify the char array as "not a C
+string" and thereby eliminate the warning.
+
+Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=117178 [1]
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org
+Signed-off-by: Kees Cook <kees@kernel.org>
+Acked-by: Juergen Gross <jgross@suse.com>
+Message-ID: <20250310222234.work.473-kees@kernel.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ include/xen/interface/xen-mca.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/xen/interface/xen-mca.h b/include/xen/interface/xen-mca.h
+index 7483a78d24251..20a3b320d1a58 100644
+--- a/include/xen/interface/xen-mca.h
++++ b/include/xen/interface/xen-mca.h
+@@ -371,7 +371,7 @@ struct xen_mce {
+ #define XEN_MCE_LOG_LEN 32
+ 
+ struct xen_mce_log {
+-	char signature[12]; /* "MACHINECHECK" */
++	char signature[12] __nonstring; /* "MACHINECHECK" */
+ 	unsigned len;	    /* = XEN_MCE_LOG_LEN */
+ 	unsigned next;
+ 	unsigned flags;
+-- 
+2.39.5
 
 
-> 
-> I also noticed these files might not need to include msr.h:
-> 
-> drivers/cpufreq/elanfreq.c
-> drivers/cpufreq/sc520_freq.c
-> drivers/accel/habanalabs/common/habanalabs_ioctl.c
-> 
-> ...so if you want, you may consider optionally adding a cleanup patch to
-> remove the include from them.
-> 
->> --- a/drivers/video/fbdev/geode/gxfb_core.c
->> +++ b/drivers/video/fbdev/geode/gxfb_core.c
->> @@ -30,6 +30,7 @@
->>   #include <linux/cs5535.h>
->>   
->>   #include <asm/olpc.h>
->> +#include <asm/msr.h>
-> 
-> In wrong order.
->>   
->>   #include "gxfb.h"
-> 
 
-I am more than happy to send v4A to address all your comments.
 
