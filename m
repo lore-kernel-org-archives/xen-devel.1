@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07356C3ABAA
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 11:07:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.971956.1360353 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DF7C369DC
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 11:07:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.971960.1360373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9inZ-0001ma-61; Tue, 29 Apr 2025 11:06:49 +0000
+	id 1u9ini-0002Q7-UH; Tue, 29 Apr 2025 11:06:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 971956.1360353; Tue, 29 Apr 2025 11:06:49 +0000
+Received: by outflank-mailman (output) from mailman id 971960.1360373; Tue, 29 Apr 2025 11:06:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9inZ-0001mP-3V; Tue, 29 Apr 2025 11:06:49 +0000
-Received: by outflank-mailman (input) for mailman id 971956;
- Tue, 29 Apr 2025 11:06:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1u9ini-0002Py-RT; Tue, 29 Apr 2025 11:06:58 +0000
+Received: by outflank-mailman (input) for mailman id 971960;
+ Tue, 29 Apr 2025 11:06:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Cjpo=XP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1u9inY-0001lr-1W
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 11:06:48 +0000
+ id 1u9ini-0001XI-1Y
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 11:06:58 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 093b7c7d-24ea-11f0-9ffb-bf95429c2676;
- Tue, 29 Apr 2025 13:06:44 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 105baaf9-24ea-11f0-9eb4-5ba50f476ded;
+ Tue, 29 Apr 2025 13:06:56 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4CA0421199;
- Tue, 29 Apr 2025 11:06:44 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E54FF21197;
+ Tue, 29 Apr 2025 11:06:55 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F068D13A8B;
- Tue, 29 Apr 2025 11:06:43 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 813F513A8B;
+ Tue, 29 Apr 2025 11:06:55 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Qu7uOMOyEGgNOwAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 29 Apr 2025 11:06:43 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 6U4gHs+yEGggOwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 29 Apr 2025 11:06:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,350 +54,1059 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 093b7c7d-24ea-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 105baaf9-24ea-11f0-9eb4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1745924804; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
+	t=1745924816; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=pmW3Z8PxhY68j0KGzwNsOgL5CZUZko1PJrOiOnKvPqw=;
-	b=sJ3FmXh5ti0nWyTBhLLCatLPMsOZ9sqjmCf/U7WfwScO1b9BK9kMGBF1X4Q4esTg6XqBqe
-	pVNpBENbJ8yJ5EXlySTkQfGGEQyKYVBaRxoF+6xgRbcgCT3YAXptyk04eeTAfdL5ZHGY/y
-	+FEkRqbr5zBWqU3lhO/aLgkSfOZa9hY=
+	bh=kMNpv8uYKhYM959nCNtSxOZtBZr44762EPL1Y4mLrUI=;
+	b=jENMQNGlVARPhO3XELst3l7yZFLh+zvuBvJ9wUTJMWnER1v2ZQro/CbuaNztrQGEP0GvOB
+	lotl2gTJ37+Fm3DkdwserbJ9z1crKIl+3TKZzP+L1d5pRCswtwwKbJex9Kujas3YRiclCn
+	VTmXuYjloeVrjcHEJ3I5O/C/b2wxfno=
 Authentication-Results: smtp-out1.suse.de;
-	none
+	dkim=pass header.d=suse.com header.s=susede1 header.b=XytPj0xd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1745924804; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
+	t=1745924815; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=pmW3Z8PxhY68j0KGzwNsOgL5CZUZko1PJrOiOnKvPqw=;
-	b=sJ3FmXh5ti0nWyTBhLLCatLPMsOZ9sqjmCf/U7WfwScO1b9BK9kMGBF1X4Q4esTg6XqBqe
-	pVNpBENbJ8yJ5EXlySTkQfGGEQyKYVBaRxoF+6xgRbcgCT3YAXptyk04eeTAfdL5ZHGY/y
-	+FEkRqbr5zBWqU3lhO/aLgkSfOZa9hY=
+	bh=kMNpv8uYKhYM959nCNtSxOZtBZr44762EPL1Y4mLrUI=;
+	b=XytPj0xdeTSgdEOtdDzalMfR/CDd0Lv5H1o48u/SD/DBdzqH2HPKVzKJ/xeecZ+KUFyCGt
+	nYKE38bK5sV/Lg3Ndar0INodpDOa4Zlm2Pq1Or3uuAuL1+DR9NYazWav59YK2gq9VtQ1f2
+	erHs3ChN2IZbK8rxAXhV77fl5nEpCVQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 1/4] docs: remove qemu-traditional support from documentation
-Date: Tue, 29 Apr 2025 13:06:31 +0200
-Message-ID: <20250429110636.30518-2-jgross@suse.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v3 3/4] tools: remove qemu-traditional
+Date: Tue, 29 Apr 2025 13:06:33 +0200
+Message-ID: <20250429110636.30518-4-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429110636.30518-1-jgross@suse.com>
 References: <20250429110636.30518-1-jgross@suse.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
+X-Rspamd-Queue-Id: E54FF21197
+X-Spamd-Result: default: False [-2.01 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MX_GOOD(-0.01)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[suse.com,citrix.com,vates.tech,amd.com,xen.org,kernel.org,gmail.com,xenproject.org,ens-lyon.org];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid];
-	RCVD_TLS_ALL(0.00)[]
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
 
-In preparation to no longer support qemu-traditional (including
-qemu-stubdom), remove it from documentation.
+Remove qemu traditional from the tree.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com> # CHANGELOG.md
 ---
-V2:
-- mention "qemu_xen_traditional" in xenstore-paths.pandoc as a removed
-  device model variant (Andrew Cooper)
-- don't drop Config.mk related documentation for QEMU_TRADITIONAL_REVISION
-  (Jan Beulich)
 V3:
-- drop another opengl reference (Anthony Perard)
-- drop 2 superfluous sentences for gfx_passthru (Anthony Perard)
-- reword a bios_path_override note (Anthony Perard)
+- remove another ioemu reference in INSTALL (Anthony Perard)
+- remove generating stubdompath.sh and related makefile helpers
+  (Anthony Perard)
 ---
- docs/man/xl-pci-configuration.5.pod           |  4 +-
- docs/man/xl.cfg.5.pod.in                      | 49 +++--------------
- docs/misc/stubdom.txt                         | 52 -------------------
- docs/misc/xenstore-paths.pandoc               |  3 +-
- docs/process/branching-checklist.txt          |  3 --
- docs/process/release-technician-checklist.txt |  2 -
- docs/process/xen-release-management.pandoc    |  2 +-
- 7 files changed, 13 insertions(+), 102 deletions(-)
+ .gitignore                                    |  3 -
+ CHANGELOG.md                                  |  1 +
+ Config.mk                                     | 38 --------
+ INSTALL                                       | 13 ---
+ MAINTAINERS                                   |  4 -
+ README                                        |  2 +-
+ SUPPORT.md                                    | 16 ---
+ config/Paths.mk.in                            |  3 +-
+ config/Tools.mk.in                            |  1 -
+ docs/process/branching-checklist.txt          |  1 -
+ docs/process/release-technician-checklist.txt |  1 -
+ stubdom/.gitignore                            |  3 -
+ stubdom/Makefile                              | 97 ++-----------------
+ stubdom/configure                             | 89 -----------------
+ stubdom/configure.ac                          | 15 ---
+ stubdom/ioemu-minios.cfg                      |  6 --
+ tools/Makefile                                | 58 -----------
+ tools/Rules.mk                                |  3 -
+ tools/config.h.in                             |  3 -
+ tools/configure                               | 42 +-------
+ tools/configure.ac                            | 21 +---
+ 21 files changed, 15 insertions(+), 405 deletions(-)
+ delete mode 100644 stubdom/ioemu-minios.cfg
 
-diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-index ec76f590b7..0691f06ad3 100644
---- a/docs/man/xl-pci-configuration.5.pod
-+++ b/docs/man/xl-pci-configuration.5.pod
-@@ -111,8 +111,8 @@ if this parameter is not specified.
- =item Description
+diff --git a/.gitignore b/.gitignore
+index 53f5df0003..ccc0bebee6 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -255,9 +255,6 @@ LibVNCServer*
+ tools/qemu-xen-dir-remote
+ tools/qemu-xen-dir
  
- By default pciback only allows PV guests to write "known safe" values
--into PCI configuration space, likewise QEMU (both qemu-xen and
--qemu-xen-traditional) imposes the same constraint on HVM guests.
-+into PCI configuration space, likewise QEMU imposes the same constraint
-+on HVM guests.
- However, many devices require writes to other areas of the configuration space
- in order to operate properly.  This option tells the backend (pciback or QEMU)
- to allow all writes to the PCI configuration space of this device by this
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 7339c44efd..c388899306 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -841,7 +841,7 @@ This option does not control the emulated graphics card presented to
- an HVM guest. See B<Emulated VGA Graphics Device> below for how to
- configure the emulated device. If B<Emulated VGA Graphics Device> options
- are used in a PV guest configuration, B<xl> will pick up B<vnc>, B<vnclisten>,
--B<vncpasswd>, B<vncdisplay>, B<vncunused>, B<sdl>, B<opengl> and
-+B<vncpasswd>, B<vncdisplay>, B<vncunused>, B<sdl> and
- B<keymap> to construct the paravirtual framebuffer device for the guest.
- 
- Each B<VFB_SPEC_STRING> is a comma-separated list of C<KEY=VALUE>
-@@ -895,12 +895,6 @@ is used.
- Specifies the path to the X authority file that should be used to
- connect to the X server when the B<sdl> option is used.
- 
--=item B<opengl=BOOLEAN>
+-tools/qemu-xen-traditional-dir-remote
+-tools/qemu-xen-traditional-dir
 -
--Enable OpenGL acceleration of the SDL display. Only effects machines
--using B<device_model_version="qemu-xen-traditional"> and only if the
--device-model was compiled with OpenGL support. The default is 0 (disabled).
+ tools/firmware/seabios-dir-remote
+ tools/firmware/seabios-dir
+ 
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 1ea06524db..c6e8ff09ba 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+     - Ability to enable stack protector
+ 
+ ### Removed
++ - Support of qemu-traditional has been removed.
+ 
+ ## [4.20.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.20.0) - 2025-03-05
+ 
+diff --git a/Config.mk b/Config.mk
+index 8be7733d9e..3ebc9ac125 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -165,20 +165,6 @@ define move-if-changed
+ 	if ! cmp -s $(1) $(2); then mv -f $(1) $(2); else rm -f $(1); fi
+ endef
+ 
+-BUILD_MAKE_VARS := sbindir bindir LIBEXEC LIBEXEC_BIN libdir SHAREDIR \
+-                   XENFIRMWAREDIR XEN_CONFIG_DIR XEN_SCRIPT_DIR XEN_LOCK_DIR \
+-                   XEN_RUN_DIR XEN_PAGING_DIR XEN_DUMP_DIR XEN_LOG_DIR \
+-                   XEN_LIB_DIR XEN_RUN_STORED
 -
- =item B<keymap=LANG>
- 
- Configure the keymap to use for the keyboard associated with this
-@@ -1215,17 +1209,11 @@ working graphics passthrough. See the XenVGAPassthroughTestedAdapters
- L<https://wiki.xenproject.org/wiki/XenVGAPassthroughTestedAdapters> wiki page
- for graphics cards currently supported by B<gfx_passthru>.
- 
--B<gfx_passthru> is currently supported both with the qemu-xen-traditional
--device-model and upstream qemu-xen device-model.
+-buildmakevars2file = $(eval $(call buildmakevars2file-closure,$(1)))
+-define buildmakevars2file-closure
+-    $(1): .phony
+-	rm -f $(1).tmp; \
+-	$(foreach var, $(BUILD_MAKE_VARS), \
+-	          echo "$(var)=\"$($(var))\"" >>$(1).tmp;) \
+-	$(call move-if-changed,$(1).tmp,$(1))
+-endef
 -
- When given as a boolean the B<gfx_passthru> option either disables graphics
- card passthrough or enables autodetection.
+ CFLAGS += -fno-strict-aliasing
  
- When given as a string the B<gfx_passthru> option describes the type
--of device to enable. Note that this behavior is only supported with the
--upstream qemu-xen device-model. With qemu-xen-traditional IGD (Intel Graphics
--Device) is always assumed and options other than autodetect or explicit IGD
--will result in an error.
-+of device to enable.
+ CFLAGS += -std=gnu99
+@@ -208,22 +194,12 @@ XEN_EXTFILES_URL ?= https://xenbits.xen.org/xen-extfiles
  
- Currently, valid values for the option are:
+ # Where to look for inlined subtrees (for example, from a tarball)
+ QEMU_UPSTREAM_INTREE ?= $(XEN_ROOT)/tools/qemu-xen
+-QEMU_TRADITIONAL_INTREE ?= $(XEN_ROOT)/tools/qemu-xen-traditional
  
-@@ -1903,10 +1891,7 @@ it may be useful to request a different one, like UEFI.
  
- =item B<rombios>
+ # Handle legacy options
+ ifneq (,$(SEABIOS_UPSTREAM_TAG))
+ SEABIOS_UPSTREAM_REVISION ?= $(SEABIOS_UPSTREAM_TAG)
+ endif
+-ifneq (,$(QEMU_REMOTE))
+-QEMU_TRADITIONAL_URL ?= $(QEMU_REMOTE)
+-endif
+-ifneq (,$(CONFIG_QEMU))
+-QEMU_TRADITIONAL_LOC ?= $(CONFIG_QEMU)
+-endif
+-ifneq (,$(QEMU_TAG))
+-QEMU_TRADITIONAL_REVISION ?= $(QEMU_TAG)
+-endif
  
--Loads ROMBIOS, a 16-bit x86 compatible BIOS. This is used by default
--when B<device_model_version=qemu-xen-traditional>. This is the only BIOS
--option supported when B<device_model_version=qemu-xen-traditional>. This is
--the BIOS used by all previous Xen versions.
-+Loads ROMBIOS, a 16-bit x86 compatible BIOS.
+ OVMF_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/ovmf.git
+ OVMF_UPSTREAM_REVISION ?= ba91d0292e593df8528b66f99c1b0b14fadc8e16
+@@ -239,20 +215,6 @@ SEABIOS_UPSTREAM_REVISION ?= rel-1.16.3
  
- =item B<seabios>
+ ETHERBOOT_NICS ?= rtl8139 8086100e
  
-@@ -1926,8 +1911,7 @@ Override the path to the blob to be used as BIOS. The blob provided here MUST
- be consistent with the B<bios=> which you have specified. You should not
- normally need to specify this option.
- 
--This option does not have any effect if using B<bios="rombios"> or
--B<device_model_version="qemu-xen-traditional">.
-+Requires B<device_model_version="qemu-xen">.
- 
- =item B<pae=BOOLEAN>
- 
-@@ -2516,15 +2500,10 @@ Sets the amount of RAM which the emulated video card will contain,
- which in turn limits the resolutions and bit depths which will be
- available.
- 
--When using the qemu-xen-traditional device-model, the default as well as
--minimum amount of video RAM for stdvga is 8 MB, which is sufficient for e.g.
--1600x1200 at 32bpp. For the upstream qemu-xen device-model, the default and
--minimum is 16 MB.
-+When using stdvga, the default and minimum is 16 MB.
- 
--When using the emulated Cirrus graphics card (B<vga="cirrus">) and the
--qemu-xen-traditional device-model, the amount of video RAM is fixed at 4 MB,
--which is sufficient for 1024x768 at 32 bpp. For the upstream qemu-xen
--device-model, the default and minimum is 8 MB.
-+When using the emulated Cirrus graphics card (B<vga="cirrus">), the
-+default and minimum is 8 MB.
- 
- For QXL vga, both the default and minimal are 128MB.
- If B<videoram> is set less than 128MB, an error will be triggered.
-@@ -2590,12 +2569,6 @@ B<qemu(1)> manpage. The default is B<en-us>.
- Specifies that the display should be presented via an X window (using
- Simple DirectMedia Layer). The default is (0) not enabled.
- 
--=item B<opengl=BOOLEAN>
 -
--Enable OpenGL acceleration of the SDL display. Only effects machines
--using B<device_model_version="qemu-xen-traditional"> and only if the
--device-model was compiled with OpenGL support. Default is (0) false.
+-QEMU_TRADITIONAL_URL ?= https://xenbits.xen.org/git-http/qemu-xen-traditional.git
+-QEMU_TRADITIONAL_REVISION ?= 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764
+-# Wed Jul 15 10:01:40 2020 +0100
+-# qemu-trad: remove Xen path dependencies
 -
- =item B<nographic=BOOLEAN>
- 
- Enable or disable the virtual graphics device.  The default is to
-@@ -2925,11 +2898,6 @@ Valid values are:
- Use the device-model merged into the upstream QEMU project.
- This device-model is the default for Linux dom0.
- 
--=item B<qemu-xen-traditional>
+-# Specify which qemu-dm to use. This may be `ioemu' to use the old
+-# Mercurial in-tree version, or a local directory, or a git URL.
+-# QEMU_UPSTREAM_LOC ?= `pwd`/$(XEN_ROOT)/../qemu-xen.git
 -
--Use the device-model based upon the historical Xen fork of QEMU.
--This device-model is still the default for NetBSD dom0.
+-# Defaults for subtree locations
+-QEMU_TRADITIONAL_LOC ?= $(call or,$(wildcard $(QEMU_TRADITIONAL_INTREE)),\
+-                                  $(QEMU_TRADITIONAL_URL))
 -
- =back
+ QEMU_UPSTREAM_LOC ?= $(call or,$(wildcard $(QEMU_UPSTREAM_INTREE)),\
+                                $(QEMU_UPSTREAM_URL))
  
- It is recommended to accept the default value for new guests.  If
-@@ -2949,8 +2917,7 @@ to specify this option.
- Override the path to the kernel image used as device-model stubdomain.
- The binary provided here MUST be consistent with the
- B<device_model_version> which you have specified.
--In case of B<qemu-xen-traditional> it is expected to be MiniOS-based stubdomain
--image, in case of B<qemu-xen> it is expected to be Linux-based stubdomain
-+In case of B<qemu-xen> it is expected to be Linux-based stubdomain
- kernel.
+diff --git a/INSTALL b/INSTALL
+index 88c1464816..eadf108aa5 100644
+--- a/INSTALL
++++ b/INSTALL
+@@ -113,15 +113,6 @@ Build a private copy of SeaBIOS.
+ Use the given SeaBIOS binary instead of compiling a private copy.
+   --with-system-seabios=PATH
  
- =item B<stubdomain_cmdline="STRING">
-diff --git a/docs/misc/stubdom.txt b/docs/misc/stubdom.txt
-index 64c220db20..cfcba4ba96 100644
---- a/docs/misc/stubdom.txt
-+++ b/docs/misc/stubdom.txt
-@@ -23,58 +23,6 @@ and https://wiki.xen.org/wiki/Device_Model_Stub_Domains for more
- information on device model stub domains
- 
- 
--Toolstack to MiniOS ioemu stubdomain protocol
-----------------------------------------------
+-Build the old qemu used by xm/xend. This is required if existing domUs
+-should be migrated to this host, or if existing domU snapshots should be
+-started with this version of the tools. Only if all domUs used the new
+-upstream qemu during initial start it is safe to disable this option.
+-The old qemu requires rombios, which can be disable along with
+-qemu-traditional.
+-  --enable-qemu-traditional
+-  --enable-rombios
 -
--This section describe communication protocol between toolstack and
--qemu-traditional running in MiniOS stubdomain. The protocol include
--expectations of both qemu and stubdomain itself.
--
--Setup (done by toolstack, expected by stubdomain):
-- - Block devices for target domain are connected as PV disks to stubdomain,
--   according to configuration order, starting with xvda
-- - Network devices for target domain are connected as PV nics to stubdomain,
--   according to configuration order, starting with 0
-- - if graphics output is expected, VFB and VKB devices are set for stubdomain
--   (its backend is responsible for exposing them using appropriate protocol
--   like VNC or Spice)
-- - other target domain's devices are not connected at this point to stubdomain
--   (may be hot-plugged later)
-- - QEMU command line (space separated arguments) is stored in
--   /vm/<target-uuid>/image/dmargs xenstore path
-- - target domain id is stored in /local/domain/<stubdom-id>/target xenstore path
--?? - bios type is stored in /local/domain/<target-id>/hvmloader/bios
-- - stubdomain's console 0 is connected to qemu log file
-- - stubdomain's console 1 is connected to qemu save file (for saving state)
-- - stubdomain's console 2 is connected to qemu save file (for restoring state)
-- - next consoles are connected according to target guest's serial console configuration
--
--Startup:
--1. PV stubdomain is started with ioemu-stubdom.gz kernel and no initrd
--2. stubdomain initialize relevant devices
--3. stubdomain signal readiness by writing "running" to /local/domain/<stubdom-id>/device-model/<target-id>/state xenstore path
--4. now stubdomain is considered running
--
--Runtime control (hotplug etc):
--Toolstack can issue command through xenstore. The sequence is (from toolstack POV):
--1. Write parameter to /local/domain/<stubdom-id>/device-model/<target-id>/parameter.
--2. Write command to /local/domain/<stubdom-id>/device-model/<target-id>/command.
--3. Wait for command result in /local/domain/<stubdom-id>/device-model/<target-id>/state (command specific value).
--4. Write "running" back to /local/domain/<stubdom-id>/device-model/<target-id>/state.
--
--Defined commands:
-- - "pci-ins" - PCI hot plug, results:
--   - "pci-inserted" - success
--   - "pci-insert-failed" - failure
-- - "pci-rem" - PCI hot remove, results:
--   - "pci-removed" - success
--   - ??
-- - "save" - save domain state to console 1, results:
--   - "paused" - success
-- - "continue" - resume domain execution, after loading state from console 2 (require -loadvm command argument), results:
--   - "running" - success
--
--
- Toolstack to Linux ioemu stubdomain protocol
- --------------------------------------------
+ The libxl toolstack uses the upstream qemu per default. A private copy
+ will be built. If desired this private copy can be configured with
+ additional options passed to its configure script.
+@@ -161,7 +152,6 @@ this detection and the sysv runlevel scripts have to be used.
  
-diff --git a/docs/misc/xenstore-paths.pandoc b/docs/misc/xenstore-paths.pandoc
-index a604f6b1c6..01a340fafc 100644
---- a/docs/misc/xenstore-paths.pandoc
-+++ b/docs/misc/xenstore-paths.pandoc
-@@ -636,7 +636,8 @@ Trustworthy copy of /local/domain/$DOMID/backend/$KIND/$DEVID/$NODE.
+ Build various stubom components, some are only example code. Its usually
+ enough to specify just --enable-stubdom and leave these options alone.
+-  --enable-ioemu-stubdom
+   --enable-c-stubdom
+   --disable-pv-grub
+   --disable-xenstore-stubdom
+@@ -245,7 +235,6 @@ locations.
+ XEN_EXTFILES_URL=
+ OVMF_UPSTREAM_URL=
+ QEMU_UPSTREAM_URL=
+-QEMU_TRADITIONAL_URL=
+ SEABIOS_UPSTREAM_URL=
+ MINIOS_UPSTREAM_URL=
  
- #### /libxl/$DOMID/dm-version ("qemu_xen"|"qemu_xen_traditional") = [n,INTERNAL]
+@@ -253,7 +242,6 @@ Using additional CFLAGS to build tools which will run in dom0 is
+ required when building distro packages. These variables can be used to
+ pass RPM_OPT_FLAGS.
+ EXTRA_CFLAGS_XEN_TOOLS=
+-EXTRA_CFLAGS_QEMU_TRADITIONAL=
+ EXTRA_CFLAGS_QEMU_XEN=
  
--The device model version for a domain.
-+The device model version for a domain. Note that "qemu_xen_traditional" is
-+a device model variant which has been removed from Xen.
+ Additional CFLAGS may be supplied to the build of the hypervisor by
+@@ -340,7 +328,6 @@ sudo make install BOOT_DIR=/ood/path/boot EFI_DIR=/odd/path/efi
+ export WGET=$(type -P false)
+ export GIT=$(type -P false)
+ export EXTRA_CFLAGS_XEN_TOOLS="$RPM_OPT_FLAGS"
+-export EXTRA_CFLAGS_QEMU_TRADITIONAL="$RPM_OPT_FLAGS"
+ export EXTRA_CFLAGS_QEMU_XEN="$RPM_OPT_FLAGS"
+ %configure \
+         --with-initddir=%{_initddir}
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c11b82eca9..7d1b3b8641 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -466,10 +466,6 @@ M:	Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+ S:	Supported
+ F:	tools/python
  
- #### /libxl/$DOMID/remus/netbuf/$DEVID/ifb = STRING [n,INTERNAL]
+-QEMU-DM
+-S:	Supported
+-T:	git https://xenbits.xenproject.org/git-http/qemu-xen-traditional.git
+-
+ QEMU UPSTREAM
+ M:	Stefano Stabellini <sstabellini@kernel.org>
+ M:	Anthony Perard <anthony.perard@vates.tech>
+diff --git a/README b/README
+index be90be3910..6ee58f7b35 100644
+--- a/README
++++ b/README
+@@ -80,7 +80,7 @@ disabled at compile time:
+       libnl-3-dev, etc).  Required if network buffering is desired
+       when using Remus with libxl.  See docs/README.remus for detailed
+       information.
+-    * 16-bit x86 assembler, loader and compiler for qemu-traditional / rombios
++    * 16-bit x86 assembler, loader and compiler for rombios
+       (dev86 rpm or bin86 & bcc debs)
+     * Development install of liblzma for rombios
+     * Development install of libbz2, liblzma, liblzo2, and libzstd for DomU
+diff --git a/SUPPORT.md b/SUPPORT.md
+index e8fd0c251e..5eecf1dcbc 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -998,21 +998,6 @@ See the section **Blkback** for image formats supported by QEMU.
  
+     Status: Supported, not security supported
+ 
+-### qemu-xen-traditional ###
+-
+-The Xen Project provides an old version of qemu with modifications
+-which enable use as a device model stub domain.  The old version is
+-normally selected by default only in a stub dm configuration, but it
+-can be requested explicitly in other configurations, for example in
+-`xl` with `device_model_version="QEMU_XEN_TRADITIONAL"`.
+-
+-    Status, Device Model Stub Domains: Supported, with caveats
+-    Status, as host process device model: No security support, not recommended
+-
+-qemu-xen-traditional is security supported only for those available
+-devices which are supported for mainstream QEMU (see above), with
+-trusted driver domains (see Device Model Stub Domains).
+-
+ ## Virtual Firmware
+ 
+ ### x86/HVM iPXE
+@@ -1031,7 +1016,6 @@ as the guest itself.
+ Booting a guest via guest BIOS firmware
+ 
+     Status, SeaBIOS (qemu-xen): Supported
+-    Status, ROMBIOS (qemu-xen-traditional): Supported
+ 
+ ### x86/HVM OVMF
+ 
+diff --git a/config/Paths.mk.in b/config/Paths.mk.in
+index 38b1bb6b1f..bc42748b7a 100644
+--- a/config/Paths.mk.in
++++ b/config/Paths.mk.in
+@@ -5,8 +5,7 @@
+ # because of this these variables are defined on one master input source file
+ # and is generated after running ./configure. The master source is located
+ # on the xen source tree at under config/Paths.mk.in and it is used to
+-# generate shell or header files by the build system upon demand through the
+-# use of the helper makefile helper buildmakevars2file().
++# generate shell or header files by the build system upon demand.
+ #
+ # For more documentation you can refer to the wiki:
+ #
+diff --git a/config/Tools.mk.in b/config/Tools.mk.in
+index 37c071961e..463ab75965 100644
+--- a/config/Tools.mk.in
++++ b/config/Tools.mk.in
+@@ -43,7 +43,6 @@ CONFIG_OVMF         := @ovmf@
+ CONFIG_ROMBIOS      := @rombios@
+ CONFIG_SEABIOS      := @seabios@
+ CONFIG_IPXE         := @ipxe@
+-CONFIG_QEMU_TRAD    := @qemu_traditional@
+ CONFIG_QEMU_XEN     := @qemu_xen@
+ CONFIG_QEMUU_EXTRA_ARGS:= @EXTRA_QEMUU_CONFIGURE_ARGS@
+ CONFIG_LIBNL        := @libnl@
 diff --git a/docs/process/branching-checklist.txt b/docs/process/branching-checklist.txt
-index 3dfa8ec257..aa7a27eed5 100644
+index aa7a27eed5..9632888a56 100644
 --- a/docs/process/branching-checklist.txt
 +++ b/docs/process/branching-checklist.txt
-@@ -14,8 +14,6 @@ ov=4.0
-     cd ~/git/qemu-xen.git
-     git branch staging-$v staging
-     git branch stable-$v master
--    cd ~/git/qemu-xen-traditional.git
--    git branch stable-$v master
+@@ -71,7 +71,6 @@ ov=4.0
+ Ensure references to qemu trees and Mini-OS in xen.git's Config.mk are updated.
+ The variables and there content should be:
+   * QEMU_UPSTREAM_REVISION: qemu-xen-X.Y.0
+-  * QEMU_TRADITIONAL_REVISION: xen-X.Y.0
+   * MINIOS_UPSTREAM_REVISION: xen-RELEASE-X.Y.0
+ Where X.Y is the release version (e.g. 4.17).
  
- # make branch in libvirt
-     ssh xen@xenbits.xen.org
-@@ -63,7 +61,6 @@ ov=4.0
-     cp xen--staging.patchbot-reported-heads xen--staging-$v.patchbot-reported-heads
-     cp qemu-xen--master.patchbot-reported-heads  qemu-xen--stable-$v.patchbot-reported-heads
-     cp qemu-xen--staging.patchbot-reported-heads  qemu-xen--staging-$v.patchbot-reported-heads
--    cp qemu-xen-traditional--master.patchbot-reported-heads qemu-xen-traditional--stable-$v.patchbot-reported-heads
- 
-     #emacs versions
-     perl -i~ -pe 'next unless m/\b\Q'$ov'\E\b/; $x=$_; $x=~ s/\b\Q'$ov'\E\b/'$v'/g; print $x;' versions
 diff --git a/docs/process/release-technician-checklist.txt b/docs/process/release-technician-checklist.txt
-index 7bbe7c1489..829e8ec47b 100644
+index 829e8ec47b..64ed9fd5b2 100644
 --- a/docs/process/release-technician-checklist.txt
 +++ b/docs/process/release-technician-checklist.txt
-@@ -32,8 +32,6 @@ t=RELEASE-$r
-   git show # should show appropriate intended commit
-   git-tag -u 'Xen.org Xen tree code signing' -m "Xen $v" xen-$v
+@@ -56,7 +56,6 @@ t=RELEASE-$r
  
--  git-push xenbits.xen.org:/home/xen/git/qemu-xen-traditional.git $s:stable-$x xen-$v
+ * change xen-unstable Config.mk
+ #   QEMU_UPSTREAM_REVISION,
+-#   QEMU_TRADITIONAL_REVISION
+ #   MINIOS_UPSTREAM_REVISION
+ #     (drop any references to the specific commits, e.g. date or title)
+ * change SUPPORT.md heading version number; -unstable or -rc tag
+diff --git a/stubdom/.gitignore b/stubdom/.gitignore
+index 23350446b9..1b69656d45 100644
+--- a/stubdom/.gitignore
++++ b/stubdom/.gitignore
+@@ -11,8 +11,6 @@
+ /gmp-*
+ /grub-*
+ /include
+-/ioemu
+-/ioemu/
+ /libs-*
+ /libxencall-*
+ /libxenevtchn-*
+@@ -29,7 +27,6 @@
+ /pciutils-*
+ /pkg-config/*
+ /polarssl-*
+-/stubdompath.sh
+ /tpm_emulator-*
+ /vtpm/vtpm_manager.h
+ /xenstore
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 724ce40365..666c3221dc 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -7,7 +7,6 @@ export PKG_CONFIG_DIR = $(CURDIR)/pkg-config
+ 
+ # Remove flags which are meant for tools, e.g. "-m64"
+ export EXTRA_CFLAGS_XEN_TOOLS=
+-export EXTRA_CFLAGS_QEMU_TRADITIONAL=
+ 
+ export stubdom=y
+ export debug=y
+@@ -71,16 +70,12 @@ TARGET_LDFLAGS += -nostdlib -L$(CROSS_PREFIX)/$(GNU_TARGET_ARCH)-xen-elf/lib
+ 
+ TARGETS=$(STUBDOM_TARGETS)
+ 
+-STUBDOMPATH="stubdompath.sh"
+-genpath-target = $(call buildmakevars2file,$(STUBDOMPATH))
+-$(eval $(genpath-target))
 -
- # consider making tag in minios, and updating xen.git Config.mk
-   git checkout SOMETHING
-   git show # should show appropriate intended commit
-diff --git a/docs/process/xen-release-management.pandoc b/docs/process/xen-release-management.pandoc
-index 7826419dad..5da18f6da1 100644
---- a/docs/process/xen-release-management.pandoc
-+++ b/docs/process/xen-release-management.pandoc
-@@ -193,7 +193,7 @@ from the last RC:
+ .PHONY: all
+ all: build
+ ifeq ($(STUBDOM_SUPPORTED),1)
+-build: $(STUBDOMPATH) $(STUBDOM_BUILD)
++build: $(STUBDOM_BUILD)
+ else
+-build: $(STUBDOMPATH)
++build:
+ endif
  
- 1. Send out commit moratorium emails to committers@.
+ ##############
+@@ -267,43 +262,6 @@ cross-tpmemu: $(TPMEMU_STAMPFILE)
+ .PHONY: $(CROSS_ROOT)
+ $(CROSS_ROOT): cross-newlib cross-zlib cross-libpci
  
--2. Check all the trees (mini-os, qemu-trad, qemu-xen, seabios, ovmf etc).
-+2. Check all the trees (mini-os, qemu-xen, seabios, ovmf etc).
- They have the correct commits and all security patches applied. There will be
- tools provided.
+-QEMU_ROOT := $(shell if [ -d "$(QEMU_TRADITIONAL_LOC)" ]; then echo "$(QEMU_TRADITIONAL_LOC)"; else echo .; fi)
+-
+-ifneq ($(filter ioemu,$(STUBDOM_TARGETS)),)
+-IOEMU_LINKFARM_TARGET := ioemu/linkfarm.stamp
+-endif
+-
+-ifeq ($(QEMU_ROOT),.)
+-$(XEN_ROOT)/tools/qemu-xen-traditional-dir:
+-	$(MAKE) DESTDIR= -C $(XEN_ROOT)/tools qemu-xen-traditional-dir-find
+-
+-ioemu/linkfarm.stamp: $(XEN_ROOT)/tools/qemu-xen-traditional-dir
+-	mkdir -p ioemu
+-	set -e;									\
+-	$(buildmakevars2shellvars);						\
+-	cd ioemu;								\
+-	src="$$XEN_ROOT/tools/qemu-xen-traditional-dir"; export src;		\
+-	(cd $$src && find * -type d						\
+-		$(addprefix ! -path , '*-softmmu*' '*-linux-user*') -print)	\
+-		| xargs mkdir -p;						\
+-	(cd $$src && find *	! -type l  -type f  $(addprefix ! -path ,	\
+-			'*.[oda1]' 'config-*' config.mak qemu-dm qemu-img-xen	\
+-			'*.html' '*.pod' '*-softmmu*' '*-linux-user*'		\
+-			)) >linkfarm.stamp.tmp;				\
+-	cmp -s linkfarm.stamp.tmp linkfarm.stamp &&			\
+-		rm linkfarm.stamp.tmp || {				\
+-		mv linkfarm.stamp.tmp linkfarm.stamp;			\
+-		cat linkfarm.stamp | while read f;			\
+-			do rm -f "$$f"; ln -s "$$src/$$f" "$$f"; done;	\
+-	}
+-else
+-export QEMU_ROOT
+-
+-ioemu/linkfarm.stamp:
+-	mkdir -p ioemu
+-	touch ioemu/linkfarm.stamp
+-endif
+-
+ #######
+ # libraries under tools/libs
+ #######
+@@ -380,29 +338,6 @@ $(TARGETS_MINIOS): mini-os-%:
+                 mkdir -p $@/$$i ; \
+ 	done
  
+-#######
+-# ioemu
+-#######
+-
+-ioemu-minios.gen.cfg: APP_LIBS = evtchn gnttab ctrl guest
+-ioemu-minios.gen.cfg: ioemu-minios.cfg Makefile
+-	$(GEN_config) >$@
+-
+-ioemu-minios-config.mk: ioemu-minios.gen.cfg
+-	MINIOS_CONFIG="$(CURDIR)/$<" CONFIG_FILE="$(CURDIR)/$@" $(MAKE) DESTDIR= -C $(MINI_OS) config
+-
+-.PHONY: ioemu
+-ioemu: cross-zlib cross-libpci libxenguest ioemu-minios-config.mk
+-	[ -f ioemu/config-host.mak ] || \
+-	  ( $(buildmakevars2shellvars); \
+-	    cd ioemu ; \
+-	    LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) \
+-	    TARGET_CPPFLAGS="$(TARGET_CPPFLAGS) $(shell cat ioemu-minios-config.mk)" \
+-	    TARGET_CFLAGS="$(TARGET_CFLAGS)" \
+-	    TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
+-	    $(QEMU_ROOT)/xen-setup-stubdom )
+-	$(MAKE) DESTDIR= -C ioemu -f $(QEMU_ROOT)/Makefile
+-
+ ###
+ # C
+ ###
+@@ -496,11 +431,6 @@ xenstorepvh: $(CROSS_ROOT) xenstorepvh-minios-config.mk
+ # minios
+ ########
+ 
+-.PHONY: ioemu-stubdom
+-ioemu-stubdom: APP_OBJS=$(CURDIR)/ioemu/i386-stubdom/qemu.a $(CURDIR)/ioemu/i386-stubdom/libqemu.a $(CURDIR)/ioemu/libqemu_common.a
+-ioemu-stubdom: mini-os-$(XEN_TARGET_ARCH)-ioemu lwip-$(XEN_TARGET_ARCH) libxenguest ioemu
+-	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/ioemu-minios.gen.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) APP_OBJS="$(APP_OBJS)"
+-
+ .PHONY: c-stubdom
+ c-stubdom: mini-os-$(XEN_TARGET_ARCH)-c lwip-$(XEN_TARGET_ARCH) libxenguest c
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/c/minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) APP_OBJS=$(CURDIR)/c/main.a
+@@ -539,18 +469,11 @@ xenstorepvh-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstorepvh $(XENSTORE_DEPS) xen
+ #########
+ 
+ ifeq ($(STUBDOM_SUPPORTED),1)
+-install: $(STUBDOMPATH) $(STUBDOM_INSTALL)
++install: $(STUBDOM_INSTALL)
+ else
+-install: $(STUBDOMPATH)
++install:
+ endif
+ 
+-install-ioemu: ioemu-stubdom
+-	$(INSTALL_DIR) "$(DESTDIR)$(LIBEXEC_BIN)"
+-	$(INSTALL_PROG) stubdom-dm "$(DESTDIR)$(LIBEXEC_BIN)"
+-	$(INSTALL_DATA) stubdompath.sh "$(DESTDIR)$(LIBEXEC_BIN)"
+-	$(INSTALL_DIR) "$(DESTDIR)$(XENFIRMWAREDIR)"
+-	$(INSTALL_DATA) mini-os-$(XEN_TARGET_ARCH)-ioemu/mini-os.gz "$(DESTDIR)$(XENFIRMWAREDIR)/ioemu-stubdom.gz"
+-
+ install-grub: pv-grub
+ 	$(INSTALL_DIR) "$(DESTDIR)$(XENFIRMWAREDIR)"
+ 	$(INSTALL_DATA) mini-os-$(XEN_TARGET_ARCH)-grub/mini-os.gz "$(DESTDIR)$(XENFIRMWAREDIR)/pv-grub-$(XEN_TARGET_ARCH).gz"
+@@ -593,11 +516,6 @@ else
+ uninstall:
+ endif
+ 
+-uninstall-ioemu:
+-	rm -f $(DESTDIR)$(LIBEXEC_BIN)/stubdom-dm
+-	rm -f $(DESTDIR)$(LIBEXEC_BIN)/stubdompath.sh
+-	rm -f $(DESTDIR)$(XENFIRMWAREDIR)/ioemu-stubdom.gz
+-
+ uninstall-grub:
+ 	rm -f $(DESTDIR)$(XENFIRMWAREDIR)/pv-grub-$(XEN_TARGET_ARCH).gz
+ 
+@@ -617,11 +535,10 @@ uninstall-vtpmmgr:
+ # clean
+ #######
+ 
+-# Only clean the libxc/ioemu/mini-os part
++# Only clean the libxc/mini-os part
+ .PHONY: clean
+ clean: $(foreach lib,$(STUB_LIBS),clean-libxen$(lib))
+ clean:
+-	rm -fr mini-os-$(XEN_TARGET_ARCH)-ioemu
+ 	rm -fr mini-os-$(XEN_TARGET_ARCH)-c
+ 	rm -fr mini-os-$(XEN_TARGET_ARCH)-grub
+ 	rm -fr mini-os-$(XEN_TARGET_ARCH)-xenstore
+@@ -632,11 +549,9 @@ clean:
+ 	$(MAKE) -C vtpm clean
+ 	$(MAKE) -C vtpmmgr clean
+ 	rm -fr grub-$(XEN_TARGET_ARCH)
+-	rm -f $(STUBDOMPATH)
+ 	rm -f *-minios-config.mk
+ 	rm -f *.gen.cfg
+ 	rm -fr pkg-config
+-	-[ ! -d ioemu ] || $(MAKE) DESTDIR= -C ioemu clean
+ 	-[ ! -d xenstore ] || $(MAKE) -f $(CURDIR)/xenlibs.mk -C xenstore clean
+ 	-[ ! -d xenstorepvh ] || $(MAKE) -f $(CURDIR)/xenlibs.mk -C xenstorepvh clean
+ 
+@@ -647,7 +562,7 @@ crossclean: clean
+ 	rm -fr newlib-$(XEN_TARGET_ARCH)
+ 	rm -fr zlib-$(XEN_TARGET_ARCH) pciutils-$(XEN_TARGET_ARCH)
+ 	rm -fr libs-$(XEN_TARGET_ARCH)
+-	rm -fr ioemu xenstore xenstorepvh
++	rm -fr xenstore xenstorepvh
+ 	rm -fr gmp-$(XEN_TARGET_ARCH)
+ 	rm -fr polarssl-$(XEN_TARGET_ARCH)
+ 	rm -fr tpm_emulator-$(XEN_TARGET_ARCH)
+diff --git a/stubdom/configure b/stubdom/configure
+index 08cacf764c..9dd0e7c796 100755
+--- a/stubdom/configure
++++ b/stubdom/configure
+@@ -622,7 +622,6 @@ STUBDOM_UNINSTALL
+ STUBDOM_INSTALL
+ STUBDOM_BUILD
+ STUBDOM_TARGETS
+-ioemu
+ vtpmmgr
+ vtpm
+ TPMEMU_VERSION
+@@ -713,14 +712,12 @@ SHELL'
+ ac_subst_files=''
+ ac_user_opts='
+ enable_option_checking
+-enable_ioemu_stubdom
+ enable_c_stubdom
+ enable_pv_grub
+ enable_xenstore_stubdom
+ enable_xenstorepvh_stubdom
+ enable_vtpm_stubdom
+ enable_vtpmmgr_stubdom
+-enable_qemu_traditional
+ enable_debug
+ enable_extfiles
+ '
+@@ -1363,7 +1360,6 @@ Optional Features:
+   --disable-option-checking  ignore unrecognized --enable/--with options
+   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+-  --enable-ioemu-stubdom  Build and install ioemu-stubdom
+   --enable-c-stubdom      Build and install c-stubdom (default is DISABLED)
+   --enable-pv-grub        Build and install pv-grub (default is DISABLED)
+   --disable-xenstore-stubdom
+@@ -1375,7 +1371,6 @@ Optional Features:
+   --enable-vtpm-stubdom   Build and install vtpm-stubdom
+   --enable-vtpmmgr-stubdom
+                           Build and install vtpmmgr-stubdom
+-
+   --disable-debug         Disable debug build of stubdom (default is ENABLED)
+   --disable-extfiles      Use xen extfiles repository for libraries (default
+                           is ENABLED)
+@@ -2411,40 +2406,6 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
+ 
+ # Enable/disable stub domains
+ 
+-# Check whether --enable-ioemu-stubdom was given.
+-if test ${enable_ioemu_stubdom+y}
+-then :
+-  enableval=$enable_ioemu_stubdom;
+-
+-if test "x$enableval" = "xyes"
+-then :
+-
+-
+-ioemu=y
+-STUBDOM_TARGETS="$STUBDOM_TARGETS ioemu"
+-STUBDOM_BUILD="$STUBDOM_BUILD ioemu-stubdom"
+-STUBDOM_INSTALL="$STUBDOM_INSTALL install-ioemu"
+-STUBDOM_UNINSTALL="$STUBDOM_UNINSTALL install-ioemu"
+-
+-
+-else $as_nop
+-
+-if test "x$enableval" = "xno"
+-then :
+-
+-
+-ioemu=n
+-
+-
+-fi
+-
+-fi
+-
+-
+-fi
+-
+-
+-
+ # Check whether --enable-c-stubdom was given.
+ if test ${enable_c_stubdom+y}
+ then :
+@@ -2685,35 +2646,6 @@ fi
+ 
+ 
+ 
+-# Check whether --enable-qemu-traditional was given.
+-if test ${enable_qemu_traditional+y}
+-then :
+-  enableval=$enable_qemu_traditional;
+-fi
+-
+-if test "x$enable_qemu_traditional" = "xyes"
+-then :
+-
+-    qemu_traditional=y
+-else $as_nop
+-
+-    qemu_traditional=n
+-
+-fi
+-if test "x$ioemu" = "x"
+-then :
+-
+-    ioemu=$qemu_traditional
+-
+-fi
+-echo "x$ioemu$qemu_traditional"
+-if test "x$ioemu$qemu_traditional" = "xyn"
+-then :
+-
+-    as_fn_error $? "IOEMU stubdomain requires qemu-traditional" "$LINENO" 5
+-
+-fi
+-
+ 
+ # Check whether --enable-debug was given.
+ if test ${enable_debug+y}
+@@ -4358,27 +4290,6 @@ fi
+ 
+ 
+ 
+-if test "x$ioemu" = "xy" || test "x$ioemu" = "x"
+-then :
+-
+-
+-ioemu=y
+-STUBDOM_TARGETS="$STUBDOM_TARGETS ioemu"
+-STUBDOM_BUILD="$STUBDOM_BUILD ioemu-stubdom"
+-STUBDOM_INSTALL="$STUBDOM_INSTALL install-ioemu"
+-STUBDOM_UNINSTALL="$STUBDOM_UNINSTALL install-ioemu"
+-
+-
+-else $as_nop
+-
+-
+-ioemu=n
+-
+-
+-fi
+-
+-
+-
+ 
+ 
+ 
+diff --git a/stubdom/configure.ac b/stubdom/configure.ac
+index fc736c0387..f07b08c5b3 100644
+--- a/stubdom/configure.ac
++++ b/stubdom/configure.ac
+@@ -18,7 +18,6 @@ m4_include([../m4/depends.m4])
+ m4_include([../m4/fetcher.m4])
+ 
+ # Enable/disable stub domains
+-AX_STUBDOM_CONDITIONAL([ioemu-stubdom], [ioemu])
+ AX_STUBDOM_DEFAULT_DISABLE([c-stubdom], [c])
+ AX_STUBDOM_DEFAULT_DISABLE([pv-grub], [grub])
+ AX_STUBDOM_DEFAULT_ENABLE([xenstore-stubdom], [xenstore])
+@@ -26,19 +25,6 @@ AX_STUBDOM_DEFAULT_ENABLE([xenstorepvh-stubdom], [xenstorepvh])
+ AX_STUBDOM_CONDITIONAL([vtpm-stubdom], [vtpm])
+ AX_STUBDOM_CONDITIONAL([vtpmmgr-stubdom], [vtpmmgr])
+ 
+-AC_ARG_ENABLE([qemu-traditional])
+-AS_IF([test "x$enable_qemu_traditional" = "xyes"], [
+-    qemu_traditional=y],[
+-    qemu_traditional=n
+-])
+-AS_IF([test "x$ioemu" = "x"], [
+-    ioemu=$qemu_traditional
+-])
+-echo "x$ioemu$qemu_traditional"
+-AS_IF([test "x$ioemu$qemu_traditional" = "xyn"], [
+-    AC_MSG_ERROR(IOEMU stubdomain requires qemu-traditional)
+-])
+-
+ AX_ARG_DEFAULT_ENABLE([debug], [Disable debug build of stubdom])
+ AX_ARG_DEFAULT_ENABLE([extfiles], [Use xen extfiles repository for libraries])
+ 
+@@ -69,7 +55,6 @@ AX_STUBDOM_AUTO_DEPENDS([vtpmmgr], [vtpm])
+ #Conditionally enable these stubdoms based on the presense of dependencies
+ AX_STUBDOM_CONDITIONAL_FINISH([vtpm-stubdom], [vtpm])
+ AX_STUBDOM_CONDITIONAL_FINISH([vtpmmgr-stubdom], [vtpmmgr])
+-AX_STUBDOM_CONDITIONAL_FINISH([ioemu-stubdom], [ioemu])
+ 
+ AX_STUBDOM_FINISH
+ AC_OUTPUT()
+diff --git a/stubdom/ioemu-minios.cfg b/stubdom/ioemu-minios.cfg
+deleted file mode 100644
+index 6153ae05f8..0000000000
+--- a/stubdom/ioemu-minios.cfg
++++ /dev/null
+@@ -1,6 +0,0 @@
+-CONFIG_LIBC=y
+-CONFIG_LWIP=y
+-CONFIG_START_NETWORK=n
+-CONFIG_QEMU_XS_ARGS=y
+-CONFIG_PCIFRONT=y
+-XEN_INTERFACE_VERSION=__XEN_LATEST_INTERFACE_VERSION__
+diff --git a/tools/Makefile b/tools/Makefile
+index e9e1cda305..6ecf7c0da8 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -24,7 +24,6 @@ SUBDIRS-$(CONFIG_Linux) += vchan
+ 
+ # do not recurse in to a dir we are about to delete
+ ifneq "$(MAKECMDGOALS)" "distclean"
+-SUBDIRS-$(CONFIG_QEMU_TRAD) += qemu-xen-traditional-dir
+ SUBDIRS-$(CONFIG_QEMU_XEN) += qemu-xen-dir
+ endif
+ 
+@@ -79,7 +78,6 @@ clean: subdirs-clean
+ 
+ .PHONY: distclean
+ distclean: subdirs-distclean clean
+-	rm -rf qemu-xen-traditional-dir qemu-xen-traditional-dir-remote
+ 	rm -rf qemu-xen-dir qemu-xen-dir-remote qemu-xen-build
+ 	rm -rf ../config/Tools.mk config.h config.log config.status \
+ 		config.cache autom4te.cache
+@@ -97,11 +95,6 @@ QEMU_UPSTREAM_RPATH := -Wl,-rpath,$(LIBEXEC_LIB)
+ IOEMU_EXTRA_LDFLAGS :=
+ endif
+ 
+-QEMU_ROOT := $(shell if [ -d "$(QEMU_TRADITIONAL_LOC)" ]; then echo "$(QEMU_TRADITIONAL_LOC)"; else echo .; fi)
+-ifneq ($(QEMU_ROOT),.)
+-export QEMU_ROOT
+-endif
+-
+ # Targets for external trees:
+ #  ${target}-dir-find
+ #    See if the directory exists and check it out if not.
+@@ -136,54 +129,6 @@ endif
+ #   ${TARGET}_LOC
+ #     The ultimate location of the source (either a local dir or remote URL)
+ 
+-# External target: qemu-xen-traditional
+-qemu-xen-traditional-dir-find:
+-	set -ex; \
+-	if test -d $(QEMU_TRADITIONAL_LOC); then \
+-		mkdir -p qemu-xen-traditional-dir; \
+-	else \
+-		export GIT=$(GIT); \
+-		$(XEN_ROOT)/scripts/git-checkout.sh $(QEMU_TRADITIONAL_LOC) $(QEMU_TRADITIONAL_REVISION) qemu-xen-traditional-dir; \
+-	fi
+-
+-.PHONY: qemu-xen-traditional-dir-force-update
+-qemu-xen-traditional-dir-force-update: qemu-xen-traditional-dir-find
+-	set -ex; \
+-	if [ "$(QEMU_TRADITIONAL_REVISION)" ]; then \
+-		cd qemu-xen-traditional-dir-remote; \
+-		$(GIT) fetch origin; \
+-		$(GIT) reset --hard $(QEMU_TRADITIONAL_REVISION); \
+-	fi
+-
+-qemu-traditional-recurse = \
+-	set -e; \
+-		$(buildmakevars2shellvars); \
+-		export CONFIG_BLKTAP1=n; \
+-		export BUILDING_QEMU_TRAD=y; \
+-		cd qemu-xen-traditional-dir; \
+-		$(1)
+-
+-subdir-all-qemu-xen-traditional-dir: qemu-xen-traditional-dir-find
+-	$(call qemu-traditional-recurse,\
+-		$(QEMU_ROOT)/xen-setup \
+-		--extra-cflags="-D__XEN_TOOLS__ $(EXTRA_CFLAGS_QEMU_TRADITIONAL)" \
+-		$(IOEMU_EXTRA_LDFLAGS) \
+-		--cpu=$(IOEMU_CPU_ARCH) \
+-		$(IOEMU_CONFIGURE_CROSS); \
+-		$(MAKE) all \
+-	)
+-
+-subdir-install-qemu-xen-traditional-dir: subdir-all-qemu-xen-traditional-dir
+-	$(call qemu-traditional-recurse,$(MAKE) install)
+-
+-subdir-clean-qemu-xen-traditional-dir:
+-	set -e; if test -d qemu-xen-traditional-dir/.; then \
+-		$(MAKE) -C qemu-xen-traditional-dir clean; \
+-	fi
+-subdir-uninstall-qemu-xen-traditional-dir:
+-	rm -f $(D)$(bindir)/qemu-nbd*
+-	rm -f $(D)$(bindir)/qemu-img*
+-
+ # External target: qemu-xen
+ qemu-xen-dir-find:
+ 	if test -d $(QEMU_UPSTREAM_LOC) ; then \
+@@ -276,9 +221,6 @@ subtree-force-update:
+ ifeq ($(CONFIG_QEMU_XEN),y)
+ 	$(MAKE) qemu-xen-dir-force-update
+ endif
+-ifeq ($(CONFIG_QEMU_TRAD),y)
+-	$(MAKE) qemu-xen-traditional-dir-force-update
+-endif
+ ifeq ($(CONFIG_X86),y)
+ 	$(MAKE) -C firmware subtree-force-update
+ endif
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 6bd636709f..725c3c32e9 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -134,12 +134,9 @@ endif
+ 
+ CFLAGS_libxenlight += $(CFLAGS_libxenctrl)
+ 
+-# Don't add -Werror if we are used by qemu-trad build system.
+-ifndef BUILDING_QEMU_TRAD
+ ifeq ($(CONFIG_WERROR),y)
+ CFLAGS += -Werror
+ endif
+-endif
+ 
+ ifeq ($(debug),y)
+ # Use -Og if available, -O0 otherwise
+diff --git a/tools/config.h.in b/tools/config.h.in
+index 0bab3cb136..fe2a94cfc4 100644
+--- a/tools/config.h.in
++++ b/tools/config.h.in
+@@ -42,9 +42,6 @@
+ /* pygrub enabled */
+ #undef HAVE_PYGRUB
+ 
+-/* Qemu traditional enabled */
+-#undef HAVE_QEMU_TRADITIONAL
+-
+ /* ROMBIOS enabled */
+ #undef HAVE_ROMBIOS
+ 
+diff --git a/tools/configure b/tools/configure
+index e1f6ea6bf5..27ae7c52fb 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -726,7 +726,6 @@ BCC
+ LD86
+ AS86
+ ipxe
+-qemu_traditional
+ LINUX_BACKEND_MODULES
+ pygrub
+ golang
+@@ -835,7 +834,6 @@ enable_seabios
+ enable_golang
+ enable_pygrub
+ with_linux_backend_modules
+-enable_qemu_traditional
+ enable_ipxe
+ with_system_ipxe
+ enable_rombios
+@@ -1518,13 +1516,10 @@ Optional Features:
+   --disable-seabios       Disable SeaBIOS (default is ENABLED)
+   --disable-golang        Disable Go tools (default is ENABLED)
+   --disable-pygrub        Disable pygrub (default is ENABLED)
+-  --enable-qemu-traditional
+-                          Enable qemu traditional device model, (DEFAULT is
+-                          off)
+   --enable-ipxe           Enable in-tree IPXE, (DEFAULT is off, see also
+                           --with-system-ipxe)
+-  --enable-rombios        Enable ROMBIOS, (DEFAULT is on if qemu-traditional
+-                          or ipxe is enabled, otherwise off)
++  --enable-rombios        Enable ROMBIOS, (DEFAULT is on if ipxe is enabled,
++                          otherwise off)
+   --enable-libfsimage     Enable libfsimage, (DEFAULT is on if pygrub is
+                           enabled, otherwise off)
+   --enable-systemd        Enable systemd support (default is DISABLED)
+@@ -4838,45 +4833,16 @@ fi
+ LINUX_BACKEND_MODULES="`eval echo $LINUX_BACKEND_MODULES`"
+ 
+ 
+-# Check whether --enable-qemu-traditional was given.
+-if test ${enable_qemu_traditional+y}
+-then :
+-  enableval=$enable_qemu_traditional;
+-fi
+-
+-if test "x$enable_qemu_traditional" = "xyes"
+-then :
+-
+-
+-printf "%s\n" "#define HAVE_QEMU_TRADITIONAL 1" >>confdefs.h
+-
+-    qemu_traditional=y
+-else $as_nop
+-
+-    qemu_traditional=n
+-
+-fi
+-
+-
+ # Check whether --enable-ipxe was given.
+ if test ${enable_ipxe+y}
+ then :
+   enableval=$enable_ipxe;
+-else $as_nop
+-
+-    if test "x$enable_qemu_traditional" = "xyes"
+-then :
+-
+-        enable_ipxe="yes"
+-
+ else $as_nop
+ 
+         enable_ipxe="no"
+ 
+ fi
+ 
+-fi
+-
+ if test "x$enable_ipxe" = "xno"
+ then :
+   ipxe=n
+@@ -4912,7 +4878,7 @@ then :
+   enableval=$enable_rombios;
+ else $as_nop
+ 
+-    if test "x$enable_qemu_traditional" = "xyes" -o "x$enable_ipxe" = "xyes"
++    if test "x$enable_ipxe" = "xyes"
+ then :
+ 
+         enable_rombios="yes"
+@@ -4928,7 +4894,7 @@ fi
+ if test "x$enable_rombios" = "xyes"
+ then :
+ 
+-                # Extract the first word of "as86", so it can be a program name with args.
++    # Extract the first word of "as86", so it can be a program name with args.
+ set dummy as86; ac_word=$2
+ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+ printf %s "checking for $ac_word... " >&6; }
+diff --git a/tools/configure.ac b/tools/configure.ac
+index 0dd6d747ab..dada1c3b15 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -121,25 +121,11 @@ esac])
+ LINUX_BACKEND_MODULES="`eval echo $LINUX_BACKEND_MODULES`"
+ AC_SUBST(LINUX_BACKEND_MODULES)
+ 
+-AC_ARG_ENABLE([qemu-traditional],
+-    AS_HELP_STRING([--enable-qemu-traditional],
+-                   [Enable qemu traditional device model, (DEFAULT is off)]))
+-AS_IF([test "x$enable_qemu_traditional" = "xyes"], [
+-AC_DEFINE([HAVE_QEMU_TRADITIONAL], [1], [Qemu traditional enabled])
+-    qemu_traditional=y],[
+-    qemu_traditional=n
+-])
+-AC_SUBST(qemu_traditional)
+-
+ AC_ARG_ENABLE([ipxe],
+     AS_HELP_STRING([--enable-ipxe],
+                    [Enable in-tree IPXE,
+                     (DEFAULT is off, see also --with-system-ipxe)]),,[
+-    AS_IF([test "x$enable_qemu_traditional" = "xyes"], [
+-        enable_ipxe="yes"
+-    ], [
+         enable_ipxe="no"
+-    ])
+ ])
+ AS_IF([test "x$enable_ipxe" = "xno"], [ipxe=n], [ipxe=y])
+ AC_ARG_WITH([system-ipxe],
+@@ -162,18 +148,15 @@ AC_SUBST(ipxe)
+ 
+ AC_ARG_ENABLE([rombios],
+     AS_HELP_STRING([--enable-rombios],
+-                   [Enable ROMBIOS, (DEFAULT is on if qemu-traditional or ipxe is enabled,
++                   [Enable ROMBIOS, (DEFAULT is on if ipxe is enabled,
+                     otherwise off)]),,[
+-    AS_IF([test "x$enable_qemu_traditional" = "xyes" -o "x$enable_ipxe" = "xyes"], [
++    AS_IF([test "x$enable_ipxe" = "xyes"], [
+         enable_rombios="yes"
+     ], [
+         enable_rombios="no"
+     ])
+ ])
+ AS_IF([test "x$enable_rombios" = "xyes"], [
+-    dnl as86, ld86, and bcc are only required when building rombios. They
+-    dnl are only needed when the host system is x86 but that check is done
+-    dnl for us above when checking if we should build with qemu-traditional.
+     AX_PATH_PROG_OR_FAIL([AS86], [as86])
+     AX_PATH_PROG_OR_FAIL([LD86], [ld86])
+     AX_PATH_PROG_OR_FAIL([BCC], [bcc])
 -- 
 2.43.0
 
