@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A686C3ABAB
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 06:33:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.971410.1359899 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A574CC3ABA4
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Apr 2025 06:33:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.971405.1359871 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9eXB-00084i-5P; Tue, 29 Apr 2025 06:33:37 +0000
+	id 1u9eX9-0007c5-NG; Tue, 29 Apr 2025 06:33:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 971410.1359899; Tue, 29 Apr 2025 06:33:37 +0000
+Received: by outflank-mailman (output) from mailman id 971405.1359871; Tue, 29 Apr 2025 06:33:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1u9eXA-00082x-OI; Tue, 29 Apr 2025 06:33:36 +0000
-Received: by outflank-mailman (input) for mailman id 971410;
- Tue, 29 Apr 2025 04:06:32 +0000
+	id 1u9eX9-0007Z2-Fn; Tue, 29 Apr 2025 06:33:35 +0000
+Received: by outflank-mailman (input) for mailman id 971405;
+ Tue, 29 Apr 2025 04:06:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WGTB=XP=kernel.org=devnull+chenlinxuan.uniontech.com@srs-se1.protection.inumbo.net>)
- id 1u9cEq-0003mv-0b
- for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 04:06:32 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 1u9cEo-0003mv-IB
+ for xen-devel@lists.xenproject.org; Tue, 29 Apr 2025 04:06:30 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4d6fd96e-24af-11f0-9ffb-bf95429c2676;
+ id 4d53a7f5-24af-11f0-9ffb-bf95429c2676;
  Tue, 29 Apr 2025 06:06:19 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3DF6D4A286;
- Tue, 29 Apr 2025 04:06:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0B92EC113CF;
- Tue, 29 Apr 2025 04:06:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D24B068429;
+ Tue, 29 Apr 2025 04:05:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CD555C4CEF1;
+ Tue, 29 Apr 2025 04:06:16 +0000 (UTC)
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id F4210C369D1;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id BD4A1C3ABA6;
  Tue, 29 Apr 2025 04:06:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -47,25 +47,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d6fd96e-24af-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 4d53a7f5-24af-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745899577;
-	bh=3PdF33JBq1nyxsd62zvfFmuPbfAnSnsdpa3r3ouJFOo=;
+	s=k20201202; t=1745899576;
+	bh=pJ9VpLz2vL2PDt7J0K2cXMYeDKnStbQajileR/wxzK8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=ImSxOhegHftYhReRG8oW+oM6LY5yoKLWrzrGW2V//kVusiY4KJ6C0HKApYqiV/umZ
-	 jZDui8NpjNYOGK5MqF5aClgT+4pvtjZWMb3AgQxuqqCOAz00C0Lpow4dLS8fVmD8AE
-	 Ew5h7vn3uiwE1AvsN5M2//c/5JyZpQKKbX7Q2uuKJzjHODfOAkvLYlkfv/lDyfol63
-	 jo+QK5Rd1p+0TMQoBTMEsNJWU3r3jcXOzCGrBtNYQaJBhwRFYH8Og+3Yvb56e+MIWk
-	 lrqdTOn18f4raKMikcfbZmVYGUzYJPzipTeU+RQml6v6GlEpxvCZhUZyn6fyKdVLbn
-	 3BOR5syl/U+lg==
+	b=FyUVqYls/+KqU5DpInz9ZWqZ/4CAAzIPkLtTAq2+9vTbtkfDvRR2CjebexTY9QBGl
+	 a18CtmbbDxF0tvb3AcYhTkIyRG0rGmIkJvOQyXGZmREvsxGc9clSCgXVDMI44bfCOB
+	 RwUBZ5vLAptbw96/QZcz10zYj2Ww1cjxiuhaCIV1kmi57bliowHPSI7urlxZe9vKEG
+	 oDldZTQDIsI86OtD5RmJoGS5Kqw98y9Y2hrIZWtmhbDW+Op3bNrJJxNcoQ6l/9xD1A
+	 sZMVPjVE+TJH9Zf+qU8izf83pAhbghYD3h20CeX6p7lBgVhUV7G4DchS76qQNbjUfj
+	 iEE1ouz0ZXZDA==
 From: Chen Linxuan via B4 Relay <devnull+chenlinxuan.uniontech.com@kernel.org>
-Date: Tue, 29 Apr 2025 12:06:08 +0800
-Subject: [PATCH RFC v3 4/8] tpm: add __always_inline for
- tpm_is_hwrng_enabled
+Date: Tue, 29 Apr 2025 12:06:06 +0800
+Subject: [PATCH RFC v3 2/8] mm: add __always_inline for
+ page_contains_unaccepted
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250429-noautoinline-v3-4-4c49f28ea5b5@uniontech.com>
+Message-Id: <20250429-noautoinline-v3-2-4c49f28ea5b5@uniontech.com>
 References: <20250429-noautoinline-v3-0-4c49f28ea5b5@uniontech.com>
 In-Reply-To: <20250429-noautoinline-v3-0-4c49f28ea5b5@uniontech.com>
 To: Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, 
@@ -101,21 +101,21 @@ Cc: linux-nvme@lists.infradead.org, linux-kernel@vger.kernel.org,
  Chen Linxuan <chenlinxuan@uniontech.com>, 
  Changbin Du <changbin.du@intel.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3942;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2614;
  i=chenlinxuan@uniontech.com; h=from:subject:message-id;
- bh=kxFAxUbcgxKFCXw3/ErTxJwPqpRyvp2FJuqCBA7VzuY=;
- b=owEBbQKS/ZANAwAKAXYe5hQ5ma6LAcsmYgBoEFAxPbGcLXiOi/dV/SoVEXm3HRnbi5/8nSvZh
- +e82+25uS6JAjMEAAEKAB0WIQTO1VElAk6xdvy0ZVp2HuYUOZmuiwUCaBBQMQAKCRB2HuYUOZmu
- i+71D/9hbbS4WFdBy9iBvtGFu5uSk9QxvEUgVVEszHz05+5HiG4ksE8wbutqqbHRzodOZ4fTRqw
- FBgWQudMTfmZ9Fzj2OyQSpBDCrM8FsKFEp555qc9ICcP/+NEGCSsRMIq6JHxaZziOrAUiqsMpl7
- PDahCNl1FroL8m5qLyTgyojpMOANxIr1af/VNJ8bPL6C+kt3UbvxE1BQxJaGaFWwu4tuA6W2H6P
- 99dM27ARBneT1Ci6a8VKJuN083PUS0DxYveGnH1FdDIjWVzoNOuccgzNF0F8v4/nl2tP84KxlLQ
- oPDVasKXAZJN0tEcMKQIwEAC+r1bcpKYHpMRVEYDYmBa264Q5nFxMISnjvLEJCKf83yqHDECcUe
- tggtJisUCNA23s3fRH1vFO5aVh1wasktvWFK0rezqWKiiSOynNsUWjQButCpUZofWo4wTHmJihb
- Ia2GiI8yLBpkdorp4xsf4SL4zvcLOzgirApNORHtHhkb9txKJ20L2WHS1VhiW7xpl3ejCcR9CpP
- YW9L2nkVmlDG0qngRaNtWv3EZCV/wN9/811wqZzwMQLNekcn/t8lq9fv9RB/bPjq7aCVZESyGER
- OBAzAGQDg3kym5GaVrbjje99pIap2zj0QwO9eZHif/0av9uHNFusDMAZGbKPHCqaEevUMehhBGq
- Eom+AMw7eNH7lTQ==
+ bh=+y8wKlsn55GLtsirs4Essnozl8lVGDb1RUHKRb3UGRw=;
+ b=owEBbQKS/ZANAwAKAXYe5hQ5ma6LAcsmYgBoEFAvQHTkSNXJxyOgEHVD9PhzBBGToDo54ToKB
+ JTzQ3Bt13uJAjMEAAEKAB0WIQTO1VElAk6xdvy0ZVp2HuYUOZmuiwUCaBBQLwAKCRB2HuYUOZmu
+ i2wDD/94Tikof0KqTbmGNltSJN0BkZfS5swTBN23SRIvCigAsJMsSAEE8+hsOfF5ug0IHuwNOI/
+ 1Qnd48PesFnCihU7hm3JfucE304u3ikq3JpHS8byjD3Iq2171RsPQwl30uxz+vEZ8hzs0TpTQBL
+ tbOgvO5HS5tVi2N8UEoiRrD/AIGE1AKJx646BKh7BWEfqlVn8Piwh3FS7UZcthV+4LqoV/TILJ5
+ CqwIUJDj8ZerV5DorB5SDBkZEPqwYLdujwzVjj9cp8vZwKMj+w/cFPS+07AzMtQNZybB8QumHsU
+ DHQmASWQEn05ggN/6NnlkKJvxaDxaREGdoSN4rVPnwenoh7XG44AwW+NWt2oRVUae7CdZaTJ02f
+ UozQggCd6pQA5H1c2SG9aalj7diOg0zrkq7srXqL9aVnJGeGkbSHAIxpmoG3bA+uXmBJSKWtr2+
+ 7DF6eO6UhF2ql4ur4skO7HIRADaqOFdEcIXMoQ8iutz4ml3kKwVIMhsOOAXwoXgNTZw6dPFvTUK
+ oOGrXVNKLy/fJX/0x7AiWVUMQSMsG/Kuios2R+atYaJYgzNmP+h2IF2Il+UfCg1zti1vGWy17fO
+ jFSai1Av+dm6o4iuFeMJx4Tgo52MAnqfyksIfcNlB+/tDcM4IwZn3C7WTQp9uxdiHyZV0edPtRS
+ Z2AKjqx+hU/5gsw==
 X-Developer-Key: i=chenlinxuan@uniontech.com; a=openpgp;
  fpr=D818ACDD385CAE92D4BAC01A6269794D24791D21
 X-Endpoint-Received: by B4 Relay for chenlinxuan@uniontech.com/default with
@@ -125,112 +125,62 @@ Reply-To: chenlinxuan@uniontech.com
 
 From: Winston Wen <wentao@uniontech.com>
 
-Presume that kernel is compiled for x86_64 with gcc version 13.3.0:
+On x86_64 with gcc version 13.3.0, I compile mm/page_alloc.c with:
 
   make defconfig
-  ./scripts/kconfig/merge_config.sh .config <(
-    echo CONFIG_TCG_TPM=y
-    echo CONFIG_HW_RANDOM=m
-  )
-  make KCFLAGS="-fno-inline-small-functions -fno-inline-functions-called-once"
+  make KCFLAGS="-fno-inline-small-functions -fno-inline-functions-called-once" \
+    mm/page_alloc.o
 
-This results a link error:
+Then I get a compile error:
 
-  ld: vmlinux.o: in function `tpm_add_hwrng':
-  tpm-chip.c:(.text+0x6c5924): undefined reference to `hwrng_register'
-  ld: vmlinux.o: in function `tpm_chip_unregister':
-  (.text+0x6c5bc9): undefined reference to `hwrng_unregister'
-  ld: vmlinux.o: in function `tpm_chip_register':
-  (.text+0x6c5c9b): undefined reference to `hwrng_unregister'
+    CALL    scripts/checksyscalls.sh
+    DESCEND objtool
+    INSTALL libsubcmd_headers
+    CC      mm/page_alloc.o
+  In file included from <command-line>:
+  mm/page_alloc.c: In function '__free_unaccepted.isra':
+  ././include/linux/compiler_types.h:557:45: error: call to '__compiletime_assert_1013' declared with attribute error: BUILD_BUG failed
+    557 |         _compiletime_assert(condition, msg, __compiletime_assert_, __COUNTER__)
+        |                                             ^
+  ././include/linux/compiler_types.h:538:25: note: in definition of macro '__compiletime_assert'
+    538 |                         prefix ## suffix();                             \
+        |                         ^~~~~~
+  ././include/linux/compiler_types.h:557:9: note: in expansion of macro '_compiletime_assert'
+    557 |         _compiletime_assert(condition, msg, __compiletime_assert_, __COUNTER__)
+        |         ^~~~~~~~~~~~~~~~~~~
+  ./include/linux/build_bug.h:39:37: note: in expansion of macro 'compiletime_assert'
+     39 | #define BUILD_BUG_ON_MSG(cond, msg) compiletime_assert(!(cond), msg)
+        |                                     ^~~~~~~~~~~~~~~~~~
+  ./include/linux/build_bug.h:59:21: note: in expansion of macro 'BUILD_BUG_ON_MSG'
+     59 | #define BUILD_BUG() BUILD_BUG_ON_MSG(1, "BUILD_BUG failed")
+        |                     ^~~~~~~~~~~~~~~~
+  mm/page_alloc.c:7301:9: note: in expansion of macro 'BUILD_BUG'
+   7301 |         BUILD_BUG();
+        |         ^~~~~~~~~
 
-With `CONFIG_TCG_TPM=y` and `CONFIG_HW_RANDOM=m`,
-the functions `tpm_add_hwrng`, `tpm_chip_unregister`, and
-`tpm_chip_register` are compiled into `vmlinux.o`
-and reference the symbols `hwrng_register` and `hwrng_unregister`.
-These symbols, however, are compiled into `rng-core.ko`, which results
-in the linking error.
-
-I am not sure but I think this weird linking error only arises when
-auto inlining is disabled because of some dead code elimination.
-
-`CONFIG_TCG_TPM=y` and `CONFIG_HW_RANDOM=m` set `CONFIG_HW_RANDOM_TPM=n`.
-This causes the function `tpm_is_hwrng_enabled` to always return
-`false`, as shown below:
-
-  static bool tpm_is_hwrng_enabled(struct tpm_chip *chip)
-  {
-      if (!IS_ENABLED(CONFIG_HW_RANDOM_TPM))
-          return false;
-      if (tpm_is_firmware_upgrade(chip))
-          return false;
-      if (chip->flags & TPM_CHIP_FLAG_HWRNG_DISABLED)
-          return false;
-      return true;
-  }
-
-When `tpm_is_hwrng_enabled` is inlined, dead code elimination
-optimizations are applied and the reference to the `hwrng_*` functions
-will been removed.
-For instance, in the `tpm_chip_unregister` function:
-
-  void tpm_chip_unregister(struct tpm_chip *chip)
-  {
-  #ifdef CONFIG_TCG_TPM2_HMAC
-      int rc;
-
-      rc = tpm_try_get_ops(chip);
-      if (!rc) {
-          tpm2_end_auth_session(chip);
-          tpm_put_ops(chip);
-      }
-  #endif
-
-      tpm_del_legacy_sysfs(chip);
-      if (tpm_is_hwrng_enabled(chip))
-          hwrng_unregister(&chip->hwrng);
-      tpm_bios_log_teardown(chip);
-      if (chip->flags & TPM_CHIP_FLAG_TPM2 && !tpm_is_firmware_upgrade(chip))
-          tpm_devs_remove(chip);
-      tpm_del_char_device(chip);
-  }
-
-When `tpm_is_hwrng_enabled` is inlined and always returns `false`,
-the call to `hwrng_unregister` is effectively part of a `if (false)`
-block, which I guess that will be then optimized out.
-
-However, when the `-fno-inline-small-functions` and
-`-fno-inline-functions-called-once` flags are used,
-tpm_is_hwrng_enabled is not inline.
-
-And this optimization some how cannot occur,
-leading to the undefined reference errors during linking.
-
-Adding the `__always_inline` attribute ensures that
-`tpm_is_hwrng_enabled` is inlined regardless of the compiler flags.
-This allows the dead code elimination to proceed as expected,
-resolving the linking issue.
+Marking page_contains_unaccepted with __always_inline and let dead code
+elimination remove reference to __free_unaccepted() here.
 
 Co-developed-by: Chen Linxuan <chenlinxuan@uniontech.com>
 Signed-off-by: Chen Linxuan <chenlinxuan@uniontech.com>
 Signed-off-by: Winston Wen <wentao@uniontech.com>
-Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
 ---
- drivers/char/tpm/tpm-chip.c | 2 +-
+ mm/page_alloc.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/char/tpm/tpm-chip.c b/drivers/char/tpm/tpm-chip.c
-index e25daf2396d37bcaeae8a96267764df0861ad1be..48cc74d84247e258a39f2118e03aa10d0cbb066a 100644
---- a/drivers/char/tpm/tpm-chip.c
-+++ b/drivers/char/tpm/tpm-chip.c
-@@ -534,7 +534,7 @@ static int tpm_hwrng_read(struct hwrng *rng, void *data, size_t max, bool wait)
- 	return tpm_get_random(chip, data, max);
- }
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index 5669baf2a6fea75c17b2be426443a6cf29051f52..433dc1936114469a323c8f3659730747965b2c3d 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -7346,7 +7346,7 @@ static bool __free_unaccepted(struct page *page)
  
--static bool tpm_is_hwrng_enabled(struct tpm_chip *chip)
-+static __always_inline bool tpm_is_hwrng_enabled(struct tpm_chip *chip)
+ #else
+ 
+-static bool page_contains_unaccepted(struct page *page, unsigned int order)
++static __always_inline bool page_contains_unaccepted(struct page *page, unsigned int order)
  {
- 	if (!IS_ENABLED(CONFIG_HW_RANDOM_TPM))
- 		return false;
+ 	return false;
+ }
 
 -- 
 2.43.0
