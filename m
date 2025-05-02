@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2368BC3ABA3
-	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 12:48:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.974670.1362460 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B7EC3ABAA
+	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 13:13:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.974687.1362478 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uApoc-0006lg-C3; Fri, 02 May 2025 12:48:30 +0000
+	id 1uAqCv-0002sx-Fz; Fri, 02 May 2025 13:13:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 974670.1362460; Fri, 02 May 2025 12:48:30 +0000
+Received: by outflank-mailman (output) from mailman id 974687.1362478; Fri, 02 May 2025 13:13:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uApoc-0006lZ-87; Fri, 02 May 2025 12:48:30 +0000
-Received: by outflank-mailman (input) for mailman id 974670;
- Fri, 02 May 2025 12:48:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XN81=XS=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uApob-0006lT-CF
- for xen-devel@lists.xenproject.org; Fri, 02 May 2025 12:48:29 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bc074605-2753-11f0-9ffb-bf95429c2676;
- Fri, 02 May 2025 14:48:24 +0200 (CEST)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9eb1eso3251392a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 02 May 2025 05:48:24 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5fa777c8b70sm1200519a12.29.2025.05.02.05.48.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 May 2025 05:48:23 -0700 (PDT)
+	id 1uAqCv-0002sq-DA; Fri, 02 May 2025 13:13:37 +0000
+Received: by outflank-mailman (input) for mailman id 974687;
+ Fri, 02 May 2025 13:13:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=8+YV=XS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uAqCt-0002sH-Uf
+ for xen-devel@lists.xenproject.org; Fri, 02 May 2025 13:13:35 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 40945ed9-2757-11f0-9eb4-5ba50f476ded;
+ Fri, 02 May 2025 15:13:34 +0200 (CEST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-39ee5ac4321so2088675f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 02 May 2025 06:13:34 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441b8a31576sm43819915e9.37.2025.05.02.06.13.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 06:13:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,118 +47,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc074605-2753-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 40945ed9-2757-11f0-9eb4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1746190103; x=1746794903; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=kfROYIzqlybIUGbRuA6q37zGqiTVAb0hovsYhAl8wuA=;
-        b=RlZB6PP5f3nLw65XJi9JJ8V+BAkXj2cO5pA/6cjMu+4IaMMCwSrWzjVT4wlRyUEjpa
-         QoXq0mFhY531SciK1mVfJ8q4jpRX9mWjcRNcZfnbMcZ7bF0BTKwbsZrW/kCGD8oPgy0Q
-         6lxA9iiIuu2ektj4aUpNTbYo19JEsQEhtT0OYMDMEiAWZC9mTkNVHwWgJyBby+QLir4x
-         ulK/IPQYEerc6Az1fJo7UjuIXqxdNN7S5VkrDvk3i6mScc3P37BvZ+MlU4Mz96ji3okT
-         albRiyEW4D/Q7ZCUuVXsSVQNrIqE5WHGTjI6z88fv3dsTilHBUm6UpUE0nMyOiKGd7xx
-         jE2g==
+        d=citrix.com; s=google; t=1746191614; x=1746796414; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qoZI407B5Po4OSQsJUN8qnspeE+Spjgmrm6XxhEYtzs=;
+        b=E1qJh5xW3OdeZLnDQyAg1GV9rHMIY12ZHPwoItRrv6OoEkjEfYCL872KmtRF1cpbyF
+         AWG60mFI6xB8Oi8bFt8Qtu2psKip1AhImaj01O+N4XoeXmQX9S7z7IjVZaOz5wQimKGI
+         vRUZdsXeLkzAWRo2UBcjLQa8jgl1ZbUnRJkIA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746190103; x=1746794903;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kfROYIzqlybIUGbRuA6q37zGqiTVAb0hovsYhAl8wuA=;
-        b=aAayDs+MAoq3Vu3S3eOTGGoanFtQay/A5tZv5Oh+UDD1hVfseoUlWY4kAuytYB4NwS
-         PKDOLUleglDkKuYNVANGapfEir5hjNH87kYhqW6OzwwQps/l2X8RP9qPb61JI20KUKFY
-         N028aQkeWxfihI71txl4hUabwvKxOvUpjns3Bx6wLiJ6SHvZ9BAcOLgHwVRJVcAK/Q/S
-         rd9ozcB7UxlfxEGjz6QwGwL+R4wCQcJHCN9zbUleM09YO9OJyFnN226iFZgRz3AkzH/v
-         5wGliCz+4dXE7u6/rx3321rNB8v1r4O2vxczOJ6Xu0VitdBCqMO59UBtYUGzk3rMILHF
-         1RbA==
-X-Forwarded-Encrypted: i=1; AJvYcCUSHL5cTDpbB13roBEEYTQcZnyXxGaTRAj0UxrK2qpiGkt+THJkXWhcvOK3E+HKhcJ9CO1Is1scsyQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyKCC1CAkSEr5tBY6fhGIcbRSKdTiP9ntqP4HWvuWgNMwbmKvOV
-	fImPHPQA1HM2O8i4MjIKIMNqmR2E+1lFgfQihpu7QNI34ebMMJU2XV7sIO7VaXRhm1aMdx8ScV0
-	=
-X-Gm-Gg: ASbGncubSEhyciDk6I9vp+JmW5PXbRPE0oSZnAn+XTceEoorfFeExDdHugIzyCQtiPu
-	55sN8n/QQtoM3Ptr8iXLUPSakuFZvod/50C12NqdLGgSYhYYP1u0pROEdipE1cArCanE2Fn8cHe
-	mGjD7QdFyQYjefLbvQqh1jT9/zTcNBUklzWZB4ZnMcpVEHwh6o1Z4+XQKpRkIK9AZM8GANigo4u
-	0C4tmxI29MPxbeow3BNiegH5aEkEeQ3eRIlxhUeeShb07A+kNYsKj4MPDiXcO5dKo33NWSdokx0
-	v36UdoElQ4+3CFAD95m3eFsVIX600acf5MaK4DiUMdAJj0y20qih37PA2+pPe1SvO/cMo7FhIY+
-	vwNZ9ggDx7oYNcXF1BPm1M2NCcQ==
-X-Google-Smtp-Source: AGHT+IGA6jRzWNhQw7ZbGZdHsyw6MwEtvPi4Ixp9YTzWHwVJXptNOfDLpxxmbI0JVLuZobITuwrXbw==
-X-Received: by 2002:a05:6402:5216:b0:5f6:22ca:8aae with SMTP id 4fb4d7f45d1cf-5f919836912mr5313383a12.2.1746190103472;
-        Fri, 02 May 2025 05:48:23 -0700 (PDT)
-Message-ID: <677b6100-a53d-4ac1-aa88-9ed988f7b84b@suse.com>
-Date: Fri, 2 May 2025 14:48:21 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/4] xen: Introduce physaddr_abi CDF flag
-To: Teddy Astie <teddy.astie@vates.tech>
+        d=1e100.net; s=20230601; t=1746191614; x=1746796414;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qoZI407B5Po4OSQsJUN8qnspeE+Spjgmrm6XxhEYtzs=;
+        b=A4+H7eFTaDUWzeMOOguXKP+fppXPDQJfmJRDW0EGzT3caCnWXInw9FDIYRYtEH3o1O
+         h5lqgBNH2+Pyzty4HNiThuc/4lq9Tz099EmeWtWowUpOPYdGgXXEeGHIEC48kn7f0Nnd
+         4l1TdWRa6EXPZmcPNuqEL9v0McYVOWOYSBbrK+e7cTObK+O/KLlRHTyQ+fgNfi+Qnmfq
+         pfHKv4xCX7M6FWghimjnraNLqHqkxZVimzxdnw/HdxU2qjblwH92g+71lNz0sQqyj991
+         T0yweIA/is2rfP1svs3zBWJh3ZZ74X2rrA23HifYjNmmqIURxt99/Ce2SYzxtFR4O327
+         eF4g==
+X-Gm-Message-State: AOJu0Yx27fIZEAmpU9feDjoHGO6cwVkXKOCmCtO2bOWNKzcuri1YvAHN
+	2VMFqxI2HS2qqxpSmgPJtl19qA9qAkVX2yXMJpOeEQVEl4Vr00o8XR9iG6UEdGit2XCoNDn4e93
+	6
+X-Gm-Gg: ASbGncsrYEg7znsKW2GK+Kci2Me+2r0Aj7w8qHvEcjI5dBaurABskcjC4zGQYXW8f24
+	Q34YqbvYuGVyqs2dBjcBFjTp5RpjJ12rpJhs9Ms/JL5iXIjuRxS3qVc9wZjjkq3JGl210uazg6A
+	SfUlARUcgwprBv8Py60Fkil3SaB6ITQREsmTIFX5ts5FuRqGufaE13K0ts2qN3N+MEpgbZRWW1a
+	shaEAxVQU+KugMun0b4sNjAvIFkwVw5nSETozz37iMUuN6sgZ49ozsLOWgU08uaI3cldfaiBlTJ
+	IHKj9v7k/BX/1/JJ7bNTuIqafJvpJKx5dowgO7EhzoO4g+Amo/u+cMKcgLZtA2qnr5e9wiFY3yP
+	Zxue5IhYRsXu00g==
+X-Google-Smtp-Source: AGHT+IFgaP9xpJnef20Ys3/kvKj36XXf6xnVxR4I709P3qotG9L4L7lyXxltQ321U0NjrtSuBQEA/Q==
+X-Received: by 2002:a5d:598b:0:b0:3a0:8495:d66f with SMTP id ffacd0b85a97d-3a099ad9a6cmr1801873f8f.23.1746191614098;
+        Fri, 02 May 2025 06:13:34 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1744981654.git.teddy.astie@vates.tech>
- <df0da6d56a9a9ca440b7bb2c7c0b71d66567e3aa.1744981654.git.teddy.astie@vates.tech>
- <238c657e-a53c-4eaa-84aa-1d3310b65723@suse.com>
- <ec06a030-3983-4689-bb8d-bbd523e820d4@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ec06a030-3983-4689-bb8d-bbd523e820d4@vates.tech>
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH] x86/mm: Improve bitops in vcpumask_to_pcpumask()
+Date: Fri,  2 May 2025 14:13:31 +0100
+Message-Id: <20250502131331.813701-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 02.05.2025 13:55, Teddy Astie wrote:
-> Le 30/04/2025 à 17:59, Jan Beulich a écrit :
->> On 18.04.2025 16:18, Teddy Astie wrote:
->>> @@ -745,6 +747,12 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
->>>           return -EINVAL;
->>>       }
->>>   
->>> +    if ( physaddr_abi && !hvm )
->>> +    {
->>> +        dprintk(XENLOG_INFO, "Physical address ABI requested for non-HVM guest");
->>> +        return -EINVAL;
->>> +    }
-> 
->>
->> Why this restriction?
->>
-> 
-> physaddr_abi changes how copy_from/to_guest works to make it use GPA 
-> instead of GVA. As non-HVM probably means PV guest, it would mean 
-> something like PV guest hypercalls uses physical addresses (derived from 
-> MFN?)
+This loop is for_each_set_bit() in disguise.
 
-Machine addresses, yes (hence MFN). If it was PFNs / (pseudo-)physical
-addresses, ...
+No functional change.
 
-> instead of virtual addresses, which would not really be practical 
-> for both the guest and the hypervisor.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-... I'd maybe agree here.
+More detailed analysis:
 
-Jan
+  add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-46 (-46)
+  Function                                     old     new   delta
+  vcpumask_to_pcpumask                         519     473     -46
+
+Re-shifting 1 just to clear it is horrible code generation.
+
+While the ffsl() is abtracted away, it doesn't logically move in terms of the
+loop position.  All that is happening is a (more efficient) clearing is moved
+to the post condition, and 3/4 of a cacheline of logic disappears.
+---
+ xen/arch/x86/mm.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 0b787ba55312..66c15a3c864f 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -3411,7 +3411,7 @@ int new_guest_cr3(mfn_t mfn)
+ static int vcpumask_to_pcpumask(
+     struct domain *d, XEN_GUEST_HANDLE_PARAM(const_void) bmap, cpumask_t *pmask)
+ {
+-    unsigned int vcpu_id, vcpu_bias, offs;
++    unsigned int vcpu_bias, offs;
+     unsigned long vmask;
+     struct vcpu *v;
+     bool is_native = !is_pv_32bit_domain(d);
+@@ -3432,12 +3432,10 @@ static int vcpumask_to_pcpumask(
+             return -EFAULT;
+         }
+ 
+-        while ( vmask )
++        for_each_set_bit ( vcpu_id, vmask )
+         {
+             unsigned int cpu;
+ 
+-            vcpu_id = ffsl(vmask) - 1;
+-            vmask &= ~(1UL << vcpu_id);
+             vcpu_id += vcpu_bias;
+             if ( (vcpu_id >= d->max_vcpus) )
+                 return 0;
+-- 
+2.39.5
+
 
