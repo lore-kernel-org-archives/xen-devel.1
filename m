@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8523C3ABAC
-	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 11:41:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.974588.1362404 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84DDDC3ABAA
+	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 11:55:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.974625.1362429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uAolH-0004Gu-L3; Fri, 02 May 2025 11:40:59 +0000
+	id 1uAozU-000721-1f; Fri, 02 May 2025 11:55:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 974588.1362404; Fri, 02 May 2025 11:40:59 +0000
+Received: by outflank-mailman (output) from mailman id 974625.1362429; Fri, 02 May 2025 11:55:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uAolH-0004G9-Fd; Fri, 02 May 2025 11:40:59 +0000
-Received: by outflank-mailman (input) for mailman id 974588;
- Fri, 02 May 2025 11:40:58 +0000
+	id 1uAozT-00071u-UX; Fri, 02 May 2025 11:55:39 +0000
+Received: by outflank-mailman (input) for mailman id 974625;
+ Fri, 02 May 2025 11:55:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uekI=XS=actia.se=john.ernberg@srs-se1.protection.inumbo.net>)
- id 1uAolG-0004Db-K0
- for xen-devel@lists.xenproject.org; Fri, 02 May 2025 11:40:58 +0000
-Received: from mail.actia.se (mail.actia.se [212.181.117.226])
+ <SRS0=CEml=XS=bounce.vates.tech=bounce-md_30504962.6814b2b7.v1-759278f8d84e481c831ca3237c1bca05@srs-se1.protection.inumbo.net>)
+ id 1uAozS-00071o-Hd
+ for xen-devel@lists.xenproject.org; Fri, 02 May 2025 11:55:38 +0000
+Received: from mail137-14.atl71.mandrillapp.com
+ (mail137-14.atl71.mandrillapp.com [198.2.137.14])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4ff52dca-274a-11f0-9eb4-5ba50f476ded;
- Fri, 02 May 2025 13:40:57 +0200 (CEST)
-Received: from S036ANL.actianordic.se (10.12.31.117) by S035ANL.actianordic.se
- (10.12.31.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 2 May
- 2025 13:40:56 +0200
-Received: from S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69]) by
- S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69%3]) with mapi id
- 15.01.2507.039; Fri, 2 May 2025 13:40:56 +0200
+ id 5bf26161-274c-11f0-9eb4-5ba50f476ded;
+ Fri, 02 May 2025 13:55:37 +0200 (CEST)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-14.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4Zpq9z3pB5z705wWq
+ for <xen-devel@lists.xenproject.org>; Fri,  2 May 2025 11:55:35 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 759278f8d84e481c831ca3237c1bca05; Fri, 02 May 2025 11:55:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,78 +45,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ff52dca-274a-11f0-9eb4-5ba50f476ded
-From: John Ernberg <john.ernberg@actia.se>
-To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>
-CC: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Catalin Marinas
-	<catalin.marinas@arm.com>, Andrew Morton <akpm@linux-foundation.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"iommu@lists.linux.dev" <iommu@lists.linux.dev>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"imx@lists.linux.dev" <imx@lists.linux.dev>, John Ernberg
-	<john.ernberg@actia.se>, "stable@kernel.org" <stable@kernel.org>
-Subject: [PATCH 1/2] xen: swiotlb: Use swiotlb bouncing if kmalloc allocation
- demands it
-Thread-Topic: [PATCH 1/2] xen: swiotlb: Use swiotlb bouncing if kmalloc
- allocation demands it
-Thread-Index: AQHbu1cQNcuPrbmRHEK42QDjG7hf6w==
-Date: Fri, 2 May 2025 11:40:55 +0000
-Message-ID: <20250502114043.1968976-2-john.ernberg@actia.se>
-References: <20250502114043.1968976-1-john.ernberg@actia.se>
-In-Reply-To: <20250502114043.1968976-1-john.ernberg@actia.se>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: git-send-email 2.49.0
-x-originating-ip: [10.12.12.35]
-x-esetresult: clean, is OK
-x-esetid: 37303A2956B14453667460
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 5bf26161-274c-11f0-9eb4-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1746186935; x=1746456935;
+	bh=8iJrYoI1OSS0dbzs4y01tnMky/wZNEidoo1t7rn/Q/E=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=riO8jYVXqG3nF4j9oFHmL/fZhYjWYvdMjZJEPjzpzZE3KaOHH6Idvo6cCJP/aiyfj
+	 td2zW9BvtCOvI4DGxB4uab4eNcbS88+fWFkvAEYMzWrEIGIMfd/x3Ra4jAXFjUk3pV
+	 I0D9R+QAsACyR/sNKdnN0pmed6icWWduY4iFMtTEjLbpVZcEoGyPGBpRUbxJJoRaOD
+	 L/QD6bCxb5IUYQ5pmFOn1pDIZCVSo35S78svUxfBolbOS5Nd/ETZ+hcxJqE3bE4xEB
+	 n5d3Bvmd3dCP/fkTnUaqywnVb7DMzwG2wtiQuQpBnXch4DzRVe952wmzCvmJBpPytO
+	 MmuktRNeZeL2Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1746186935; x=1746447435; i=teddy.astie@vates.tech;
+	bh=8iJrYoI1OSS0dbzs4y01tnMky/wZNEidoo1t7rn/Q/E=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=0UozmFr3FOWoqWbMzayyfmiEN2a/dtqdPdW8EM91pZTFJXRvt78uuuDS7aIcChdb5
+	 uZKnQDY5ePoaWRey0zZnNm2oe5sirXAb41L0f7/pw7K03yIT5rSMbEcWdSTWFwGkdd
+	 nQ123T3KK1wXTyKe3pFnDQ1sORoiAy/qCdMQ3SNvHOyAbRN8lBFh6MW5/Q5bx/w/CI
+	 2N/3A0pY8oTr/XTu0Fe/cTJnkDntL57jwqrCRN0XhWhqs5ObjxiOeh9lv0EWdC4iVa
+	 r1j6ObJfxebIqKoWM4TrI7dvOB54QHCecSoJBFm6w526dyMmIBMM4Dfndomx2SrMDp
+	 kKbZe2mHwGO+g==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[RFC=20PATCH=201/4]=20xen:=20Introduce=20physaddr=5Fabi=20CDF=20flag?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1746186934215
+Message-Id: <ec06a030-3983-4689-bb8d-bbd523e820d4@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1744981654.git.teddy.astie@vates.tech> <df0da6d56a9a9ca440b7bb2c7c0b71d66567e3aa.1744981654.git.teddy.astie@vates.tech> <238c657e-a53c-4eaa-84aa-1d3310b65723@suse.com>
+In-Reply-To: <238c657e-a53c-4eaa-84aa-1d3310b65723@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.759278f8d84e481c831ca3237c1bca05?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250502:md
+Date: Fri, 02 May 2025 11:55:35 +0000
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Xen swiotlb support was missed when the patch set starting with
-4ab5f8ec7d71 ("mm/slab: decouple ARCH_KMALLOC_MINALIGN from
-ARCH_DMA_MINALIGN") was merged.
+Le 30/04/2025 =C3=A0 17:59, Jan Beulich a =C3=A9crit=C2=A0:
+> On 18.04.2025 16:18, Teddy Astie wrote:
+>> @@ -745,6 +747,12 @@ static int sanitise_domain_config(struct xen_domctl=
+_createdomain *config)
+>>           return -EINVAL;
+>>       }
+>>   
+>> +    if ( physaddr_abi && !hvm )
+>> +    {
+>> +        dprintk(XENLOG_INFO, "Physical address ABI requested for non-HV=
+M guest");
+>> +        return -EINVAL;
+>> +    }
 
-When running Xen on iMX8QXP, a SoC without IOMMU, the effect was that USB
-transfers ended up corrupted when there was more than one URB inflight at
-the same time.
+> 
+> Why this restriction?
+> 
 
-Add a call to dma_kmalloc_needs_bounce() to make sure that allocations too
-small for DMA get bounced via swiotlb.
+physaddr_abi changes how copy_from/to_guest works to make it use GPA 
+instead of GVA. As non-HVM probably means PV guest, it would mean 
+something like PV guest hypercalls uses physical addresses (derived from 
+MFN?) instead of virtual addresses, which would not really be practical 
+for both the guest and the hypervisor.
 
-Closes: https://lore.kernel.org/linux-usb/ab2776f0-b838-4cf6-a12a-c208eb6aa=
-d59@actia.se/
-Fixes: 4ab5f8ec7d71 ("mm/slab: decouple ARCH_KMALLOC_MINALIGN from ARCH_DMA=
-_MINALIGN")
-Cc: stable@kernel.org # v6.5+
-Signed-off-by: John Ernberg <john.ernberg@actia.se>
+> Jan
+> 
 
----
+Teddy
 
-It's impossible to pick an exact fixes tag since this driver was missed
-in the flagged patch set. I picked one I felt gave a decent enough picture
-for someone coming across this later.
----
- drivers/xen/swiotlb-xen.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index 1f65795cf5d7..ef56a2500ed6 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -217,6 +217,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *d=
-ev, struct page *page,
- 	 * buffering it.
- 	 */
- 	if (dma_capable(dev, dev_addr, size, true) &&
-+	    !dma_kmalloc_needs_bounce(dev, size, dir) &&
- 	    !range_straddles_page_boundary(phys, size) &&
- 		!xen_arch_need_swiotlb(dev, phys, dev_addr) &&
- 		!is_swiotlb_force_bounce(dev))
---=20
-2.49.0
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
+
 
