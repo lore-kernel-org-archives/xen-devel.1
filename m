@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F4FC3ABA3
-	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 13:13:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.974686.1362469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE14C3ABAA
+	for <xen-devel@archiver.kernel.org>; Fri,  2 May 2025 14:02:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.974717.1362489 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uAqCs-0002ed-5s; Fri, 02 May 2025 13:13:34 +0000
+	id 1uAqxs-0001s8-0H; Fri, 02 May 2025 14:02:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 974686.1362469; Fri, 02 May 2025 13:13:34 +0000
+Received: by outflank-mailman (output) from mailman id 974717.1362489; Fri, 02 May 2025 14:02:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uAqCs-0002eW-39; Fri, 02 May 2025 13:13:34 +0000
-Received: by outflank-mailman (input) for mailman id 974686;
- Fri, 02 May 2025 13:13:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DrzU=XS=linux.intel.com=ilpo.jarvinen@srs-se1.protection.inumbo.net>)
- id 1uAqCq-0002eQ-3P
- for xen-devel@lists.xenproject.org; Fri, 02 May 2025 13:13:32 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a676de7-2757-11f0-9ffb-bf95429c2676;
- Fri, 02 May 2025 15:13:26 +0200 (CEST)
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 May 2025 06:13:23 -0700
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost)
- ([10.245.244.135])
- by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 May 2025 06:13:07 -0700
+	id 1uAqxr-0001s1-Td; Fri, 02 May 2025 14:02:07 +0000
+Received: by outflank-mailman (input) for mailman id 974717;
+ Fri, 02 May 2025 14:02:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=XN81=XS=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uAqxq-0001rv-PN
+ for xen-devel@lists.xenproject.org; Fri, 02 May 2025 14:02:06 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0756664d-275e-11f0-9eb4-5ba50f476ded;
+ Fri, 02 May 2025 16:02:05 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-acbb85ce788so476211466b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 02 May 2025 07:02:05 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad1891a3cf1sm55416466b.68.2025.05.02.07.02.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 May 2025 07:02:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,303 +47,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a676de7-2757-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1746191606; x=1777727606;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version:content-id;
-  bh=8rjzfX3W2W2Ua3bnqMyXei5mk/ntSXdZx8V9rkAjM0A=;
-  b=BTvvpj3DezlwCHQC1KFttZmojAwaNu1IkWPEKX0tReVpjjMdMMG9sNSU
-   UMNr9jo9DUeRJUDOhKaWz0KIXzENalaDnanW5wdmxa9+8RK50s53KYViK
-   F8o+IRLhx7x4eKmNrKwru6sVwMRoBfg9QMLlkdC9bEjbVDfX5gtVoSj4n
-   khOR9brSiJk0kqxr/vPD3Td8FMlTq++vdCPUNeBW3TThWq5TNqy3nkX4X
-   jcuhIfiKo6BDxkIPGv3kJLSfoMcMVGKhGDyaoUKcRkbQwrQObPNRY4gcf
-   mzVnw8dgCGN4up1ZrXwI3LMrPowdYknFuwtg30dyD5erv81s+iw2WgSlL
-   Q==;
-X-CSE-ConnectionGUID: XFg2xvHqTpiS5ZnSYg4w9g==
-X-CSE-MsgGUID: 4RDNRcO8RjGdveZPB2p+/w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11421"; a="59233289"
-X-IronPort-AV: E=Sophos;i="6.15,256,1739865600"; 
-   d="scan'208";a="59233289"
-X-CSE-ConnectionGUID: uqJeJQZ9QjyJ9pDg+lbEpA==
-X-CSE-MsgGUID: eaKgRDz1TzO6Du8usPzXEw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,256,1739865600"; 
-   d="scan'208";a="135599266"
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Fri, 2 May 2025 16:13:03 +0300 (EEST)
-To: "Xin Li (Intel)" <xin@zytor.com>, mingo@redhat.com
-cc: LKML <linux-kernel@vger.kernel.org>, kvm@vger.kernel.org, 
-    linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-    virtualization@lists.linux.dev, linux-pm@vger.kernel.org, 
-    linux-edac@vger.kernel.org, xen-devel@lists.xenproject.org, 
-    linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-    Netdev <netdev@vger.kernel.org>, platform-driver-x86@vger.kernel.org, 
-    tglx@linutronix.de, bp@alien8.de, dave.hansen@linux.intel.com, 
-    x86@kernel.org, hpa@zytor.com, acme@kernel.org, jgross@suse.com, 
-    andrew.cooper3@citrix.com, peterz@infradead.org, namhyung@kernel.org, 
-    mark.rutland@arm.com, alexander.shishkin@linux.intel.com, jolsa@kernel.org, 
-    irogers@google.com, adrian.hunter@intel.com, kan.liang@linux.intel.com, 
-    wei.liu@kernel.org, ajay.kaher@broadcom.com, 
-    bcm-kernel-feedback-list@broadcom.com, tony.luck@intel.com, 
-    pbonzini@redhat.com, vkuznets@redhat.com, seanjc@google.com, 
-    luto@kernel.org, boris.ostrovsky@oracle.com, kys@microsoft.com, 
-    haiyangz@microsoft.com, decui@microsoft.com, dapeng1.mi@linux.intel.com
-Subject: Re: [PATCH v4A 01/15] x86/msr: Add missing includes of <asm/msr.h>
-In-Reply-To: <20250501054241.1245648-1-xin@zytor.com>
-Message-ID: <a34d7955-aa31-7bef-52cf-65dc4bb7a5c1@linux.intel.com>
-References: <a1917b37-e41e-d303-749b-4007cda01605@linux.intel.com> <20250501054241.1245648-1-xin@zytor.com>
+X-Inumbo-ID: 0756664d-275e-11f0-9eb4-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1746194525; x=1746799325; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=YO5zmwpmbepxwvUEifQhQ9pOCIdLe74vn5s/qdroAmE=;
+        b=WFfU6N4p6tlffuxdi1cpmN3GIZVjfGm+tlDPWPrhRcPbK5uLvnTXpYRRfetyeESp5j
+         TE1SYe5L91rVULVUzYjukLME9Bx/GSjs0yvP+lIKIlByQFNJakMkOIRE/k724Nh5tYY0
+         3G61wyLQyW0/6Cd8dp6Qdifp/c5x6pAifjew3tVBxynVHZyEGaoP8iq/YRMvF+A4aFwi
+         heETvFvfiRn+FeOHrGEOT32wHTTn0beSUrW+FZNCcFqZpWOY+8+eo3poUiVA5EDkVLe8
+         x7RljGDRoU8FLuHXWCucj5tVTmpb17rhp0saQXCWVqA9jDHz33QuBon0+hWwsHxumh5z
+         GTfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746194525; x=1746799325;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YO5zmwpmbepxwvUEifQhQ9pOCIdLe74vn5s/qdroAmE=;
+        b=RqeBKwJWS28keCMKLLCEALibGNViN7+VnCIq9RQGYtkUIU9q+uDZdWiwgOGf0GWuKD
+         qbAraPLl0ZfCXvZSbZqT5zihQtPCJDhIhueoFNrcamAQmJVu2KiUTvsQKOnUBoGlWO9c
+         8xxWJKYhu8oi3VAca5Lnt6r2AHPZgiWX4CihescjlyE+IOpcJwbfQe59VJA1MDElDYtw
+         4QLKOYjOKOkH2DzXrwWiGdMuLYI9/GUSYCMEbow2W7LSDVSRl3tDboWJmBMPhlkSGAcw
+         jAkQBrSf5V0X1uMJk8fZzyY1s7K3iKsFp9AZKPZrxQcYhO0SaPVo3Jd0mHFeyWSzFi7q
+         g3ng==
+X-Forwarded-Encrypted: i=1; AJvYcCXyJrI5TSG7GCDauFab/LhpSenuBTvtZ+TKm7acFOGirkfXJd4LL3O36Tffvnn5OH4phwCwh4UXWz4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxxsIBbz/YYJGu7L7Lrv6Oj4p9Iw1d4ouSpCp5msP9fOQGm49T5
+	ORD3DZ4ouHVVMOg1rVnKZkIk1fHirsBUTGGhinLRTGAio/QEeImogQJkLGcZvw==
+X-Gm-Gg: ASbGncsPt8jLqNazj0HmU7b4uKT73K0XJYCVPc2Ofr6L+PYrjrjheuXzYHQP9EA71mY
+	FrxlX/NHgIa/tNiqMvHmvcAjK/BgZu02gyDPmkQYuTMd1FVuXELHhg9mKAwaA9A3JHnLxS0j460
+	K6eySlYN3h0GAUBjbmL8Yq9/JQ8LLMD+RIonCdg2Gd+6sJcWp3o4lC9V9hRW0bvD6JOCjkHqzun
+	m9bbKQ77bnZLoYlVPCmZya4iJ2PRRq8nzxsPFQzV1Ge8Kx8s9y/HCWzSJOqsc+1GaQkS2YyRpfK
+	5U3CbJVSEEoRhEKeLJ7YhXygf1Hs3kx01CmBC1EKgCZv1dXx1Xne7zk4BLYJ92H9e4H0kaW5YI8
+	tj+ACUjagIPHCXbZ2ggqn2+z/7Q==
+X-Google-Smtp-Source: AGHT+IHKAlEURCmptFJ+byoO6avNaqN9eGZ3CwX5LSoEA/jRUAids5zcsoeA0shdXCXU4+a6ISVRMQ==
+X-Received: by 2002:a17:907:d503:b0:ace:52f6:8500 with SMTP id a640c23a62f3a-ad17aeee406mr304549466b.45.1746194524726;
+        Fri, 02 May 2025 07:02:04 -0700 (PDT)
+Message-ID: <4f37480c-fed3-48dd-956e-b8d6b29a1ea3@suse.com>
+Date: Fri, 2 May 2025 16:02:03 +0200
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323328-2124274657-1746191047=:958"
-Content-ID: <69d4ead6-fa09-8594-add2-0d027d3e7e6c@linux.intel.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/mm: Improve bitops in vcpumask_to_pcpumask()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20250502131331.813701-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250502131331.813701-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+On 02.05.2025 15:13, Andrew Cooper wrote:
+> This loop is for_each_set_bit() in disguise.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
---8323328-2124274657-1746191047=:958
-Content-Type: text/plain; CHARSET=ISO-8859-15
-Content-Transfer-Encoding: QUOTED-PRINTABLE
-Content-ID: <914dd26d-9889-125a-917d-3b9acfbc7938@linux.intel.com>
-
-On Wed, 30 Apr 2025, Xin Li (Intel) wrote:
-
-> For some reason, there are some TSC-related functions in the MSR
-> header even though there is a tsc.h header.
->=20
-> To facilitate the relocation of rdtsc{,_ordered}() from <asm/msr.h>
-> to <asm/tsc.h> and to eventually eliminate the inclusion of
-> <asm/msr.h> in <asm/tsc.h>, add <asm/msr.h> to the source files that
-> reference definitions from <asm/msr.h>.
->=20
-> Signed-off-by: Xin Li (Intel) <xin@zytor.com>
-> Acked-by: Dave Hansen <dave.hansen@linux.intel.com>
-> Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> Acked-by: Ilpo J=E4rvinen <ilpo.jarvinen@linux.intel.com>
-> ---
->=20
-> Change in v4A:
-> *) Use "git grep -l -e $PATTERN | grep -v -f <(git grep -l -e 'asm/msr\.h=
-')"
->    to ensure ALL required *direct* inclusion of <asm/msr.h> (Ilpo J=E4rvi=
-nen).
->=20
-> Change in v4:
-> *) Add missing includes in a different patch (Ilpo J=E4rvinen).
-> *) Add all necessary direct inclusions for msr.h (Ilpo J=E4rvinen).
->=20
-> Change in v3:
-> * Add a problem statement to the changelog (Dave Hansen).
-> ---
->  arch/x86/coco/sev/core.c                                    | 1 +
->  arch/x86/events/amd/core.c                                  | 1 +
->  arch/x86/events/amd/ibs.c                                   | 1 +
->  arch/x86/events/amd/iommu.c                                 | 2 ++
->  arch/x86/events/amd/lbr.c                                   | 1 +
->  arch/x86/events/amd/power.c                                 | 1 +
->  arch/x86/events/core.c                                      | 1 +
->  arch/x86/events/intel/bts.c                                 | 1 +
->  arch/x86/events/intel/core.c                                | 1 +
->  arch/x86/events/intel/cstate.c                              | 1 +
->  arch/x86/events/intel/ds.c                                  | 1 +
->  arch/x86/events/intel/knc.c                                 | 1 +
->  arch/x86/events/intel/p4.c                                  | 1 +
->  arch/x86/events/intel/p6.c                                  | 1 +
->  arch/x86/events/intel/pt.c                                  | 1 +
->  arch/x86/events/intel/uncore.c                              | 1 +
->  arch/x86/events/intel/uncore_discovery.c                    | 1 +
->  arch/x86/events/intel/uncore_nhmex.c                        | 1 +
->  arch/x86/events/intel/uncore_snb.c                          | 1 +
->  arch/x86/events/intel/uncore_snbep.c                        | 1 +
->  arch/x86/events/msr.c                                       | 2 ++
->  arch/x86/events/perf_event.h                                | 1 +
->  arch/x86/events/probe.c                                     | 2 ++
->  arch/x86/events/rapl.c                                      | 1 +
->  arch/x86/events/utils.c                                     | 1 +
->  arch/x86/events/zhaoxin/core.c                              | 1 +
->  arch/x86/hyperv/hv_apic.c                                   | 1 +
->  arch/x86/hyperv/hv_init.c                                   | 1 +
->  arch/x86/hyperv/hv_spinlock.c                               | 1 +
->  arch/x86/hyperv/hv_vtl.c                                    | 1 +
->  arch/x86/hyperv/ivm.c                                       | 1 +
->  arch/x86/include/asm/fred.h                                 | 1 +
->  arch/x86/include/asm/kvm_host.h                             | 1 +
->  arch/x86/include/asm/microcode.h                            | 2 ++
->  arch/x86/include/asm/mshyperv.h                             | 1 +
->  arch/x86/include/asm/msr.h                                  | 1 +
->  arch/x86/include/asm/resctrl.h                              | 2 ++
->  arch/x86/include/asm/suspend_32.h                           | 1 +
->  arch/x86/include/asm/suspend_64.h                           | 1 +
->  arch/x86/include/asm/switch_to.h                            | 2 ++
->  arch/x86/kernel/acpi/sleep.c                                | 1 +
->  arch/x86/kernel/amd_nb.c                                    | 1 +
->  arch/x86/kernel/apic/apic.c                                 | 1 +
->  arch/x86/kernel/apic/apic_numachip.c                        | 1 +
->  arch/x86/kernel/cet.c                                       | 1 +
->  arch/x86/kernel/cpu/amd.c                                   | 1 +
->  arch/x86/kernel/cpu/aperfmperf.c                            | 1 +
->  arch/x86/kernel/cpu/bus_lock.c                              | 1 +
->  arch/x86/kernel/cpu/feat_ctl.c                              | 1 +
->  arch/x86/kernel/cpu/hygon.c                                 | 1 +
->  arch/x86/kernel/cpu/mce/inject.c                            | 1 +
->  arch/x86/kernel/cpu/microcode/core.c                        | 1 +
->  arch/x86/kernel/cpu/mshyperv.c                              | 1 +
->  arch/x86/kernel/cpu/resctrl/core.c                          | 1 +
->  arch/x86/kernel/cpu/resctrl/monitor.c                       | 1 +
->  arch/x86/kernel/cpu/resctrl/pseudo_lock.c                   | 1 +
->  arch/x86/kernel/cpu/resctrl/rdtgroup.c                      | 1 +
->  arch/x86/kernel/cpu/sgx/main.c                              | 1 +
->  arch/x86/kernel/cpu/topology.c                              | 1 +
->  arch/x86/kernel/cpu/topology_amd.c                          | 1 +
->  arch/x86/kernel/cpu/tsx.c                                   | 1 +
->  arch/x86/kernel/cpu/zhaoxin.c                               | 1 +
->  arch/x86/kernel/fpu/core.c                                  | 1 +
->  arch/x86/kernel/fpu/xstate.c                                | 1 +
->  arch/x86/kernel/fpu/xstate.h                                | 1 +
->  arch/x86/kernel/fred.c                                      | 1 +
->  arch/x86/kernel/hpet.c                                      | 1 +
->  arch/x86/kernel/kvm.c                                       | 1 +
->  arch/x86/kernel/paravirt.c                                  | 1 +
->  arch/x86/kernel/process.c                                   | 1 +
->  arch/x86/kernel/process_64.c                                | 1 +
->  arch/x86/kernel/trace_clock.c                               | 2 +-
->  arch/x86/kernel/traps.c                                     | 1 +
->  arch/x86/kernel/tsc.c                                       | 1 +
->  arch/x86/kernel/tsc_sync.c                                  | 1 +
->  arch/x86/kvm/svm/avic.c                                     | 1 +
->  arch/x86/kvm/svm/sev.c                                      | 1 +
->  arch/x86/kvm/svm/svm.c                                      | 1 +
->  arch/x86/kvm/vmx/nested.c                                   | 1 +
->  arch/x86/kvm/vmx/pmu_intel.c                                | 1 +
->  arch/x86/kvm/vmx/sgx.c                                      | 1 +
->  arch/x86/kvm/vmx/vmx.c                                      | 1 +
->  arch/x86/lib/insn-eval.c                                    | 1 +
->  arch/x86/lib/kaslr.c                                        | 2 +-
->  arch/x86/mm/mem_encrypt_identity.c                          | 1 +
->  arch/x86/mm/tlb.c                                           | 1 +
->  arch/x86/pci/amd_bus.c                                      | 1 +
->  arch/x86/pci/mmconfig-shared.c                              | 3 ++-
->  arch/x86/power/cpu.c                                        | 1 +
->  arch/x86/realmode/init.c                                    | 1 +
->  arch/x86/virt/svm/sev.c                                     | 1 +
->  arch/x86/xen/enlighten_pv.c                                 | 1 +
->  arch/x86/xen/pmu.c                                          | 1 +
->  arch/x86/xen/suspend.c                                      | 1 +
->  drivers/accel/habanalabs/common/habanalabs_ioctl.c          | 2 --
->  drivers/acpi/acpi_extlog.c                                  | 1 +
->  drivers/acpi/processor_perflib.c                            | 1 +
->  drivers/acpi/processor_throttling.c                         | 6 +++++-
->  drivers/char/agp/nvidia-agp.c                               | 1 +
->  drivers/cpufreq/amd-pstate-ut.c                             | 2 ++
->  drivers/cpufreq/elanfreq.c                                  | 1 -
->  drivers/cpufreq/sc520_freq.c                                | 1 -
->  drivers/crypto/ccp/sev-dev.c                                | 1 +
->  drivers/edac/amd64_edac.c                                   | 1 +
->  drivers/edac/ie31200_edac.c                                 | 1 +
->  drivers/edac/mce_amd.c                                      | 1 +
->  drivers/hwmon/hwmon-vid.c                                   | 4 ++++
->  drivers/idle/intel_idle.c                                   | 1 +
->  drivers/misc/cs5535-mfgpt.c                                 | 1 +
->  drivers/net/vmxnet3/vmxnet3_drv.c                           | 4 ++++
->  drivers/platform/x86/intel/ifs/core.c                       | 1 +
->  drivers/platform/x86/intel/ifs/load.c                       | 1 +
->  drivers/platform/x86/intel/ifs/runtest.c                    | 1 +
->  drivers/platform/x86/intel/pmc/cnp.c                        | 1 +
->  drivers/platform/x86/intel/speed_select_if/isst_if_common.c | 1 +
->  .../platform/x86/intel/speed_select_if/isst_if_mbox_msr.c   | 1 +
->  drivers/platform/x86/intel/speed_select_if/isst_tpmi_core.c | 1 +
->  drivers/platform/x86/intel/turbo_max_3.c                    | 1 +
->  .../platform/x86/intel/uncore-frequency/uncore-frequency.c  | 1 +
->  drivers/powercap/intel_rapl_common.c                        | 1 +
->  drivers/powercap/intel_rapl_msr.c                           | 1 +
->  .../intel/int340x_thermal/processor_thermal_device.c        | 1 +
->  drivers/thermal/intel/intel_tcc_cooling.c                   | 1 +
->  drivers/thermal/intel/x86_pkg_temp_thermal.c                | 1 +
->  drivers/video/fbdev/geode/display_gx.c                      | 1 +
->  drivers/video/fbdev/geode/gxfb_core.c                       | 1 +
->  drivers/video/fbdev/geode/lxfb_ops.c                        | 1 +
->  127 files changed, 142 insertions(+), 8 deletions(-)
->=20
-
-> diff --git a/arch/x86/kernel/trace_clock.c b/arch/x86/kernel/trace_clock.=
-c
-> index b8e7abe00b06..708d61743d15 100644
-> --- a/arch/x86/kernel/trace_clock.c
-> +++ b/arch/x86/kernel/trace_clock.c
-> @@ -4,7 +4,7 @@
->   */
->  #include <asm/trace_clock.h>
->  #include <asm/barrier.h>
-> -#include <asm/msr.h>
-> +#include <asm/tsc.h>
-
-Does this change belong to this patch?
-
-It might even cause a build failure until the second patch which moves=20
-the tsc related things to the other file (unless there's indirect include=
-=20
-path to asm/msr.h).
-
-> diff --git a/arch/x86/lib/kaslr.c b/arch/x86/lib/kaslr.c
-> index a58f451a7dd3..b5893928d55c 100644
-> --- a/arch/x86/lib/kaslr.c
-> +++ b/arch/x86/lib/kaslr.c
-> @@ -8,7 +8,7 @@
->   */
->  #include <asm/asm.h>
->  #include <asm/kaslr.h>
-> -#include <asm/msr.h>
-> +#include <asm/tsc.h>
-
-Same thing here.
-
->  #include <asm/archrandom.h>
->  #include <asm/e820/api.h>
->  #include <asm/shared/io.h>
-
-> diff --git a/drivers/accel/habanalabs/common/habanalabs_ioctl.c b/drivers=
-/accel/habanalabs/common/habanalabs_ioctl.c
-> index 8729a0c57d78..dc80ca921d90 100644
-> --- a/drivers/accel/habanalabs/common/habanalabs_ioctl.c
-> +++ b/drivers/accel/habanalabs/common/habanalabs_ioctl.c
-> @@ -17,8 +17,6 @@
->  #include <linux/uaccess.h>
->  #include <linux/vmalloc.h>
-> =20
-> -#include <asm/msr.h>
-> -
-
-I suggested making a separate patch out of these removals. Currently you=20
-do them without any clear warning in the changelog which only talks about=
-=20
-adding asm/msr.h.
-
-> diff --git a/drivers/acpi/processor_throttling.c b/drivers/acpi/processor=
-_throttling.c
-> index 00d045e5f524..ecd7fe256153 100644
-> --- a/drivers/acpi/processor_throttling.c
-> +++ b/drivers/acpi/processor_throttling.c
-> @@ -18,9 +18,13 @@
->  #include <linux/sched.h>
->  #include <linux/cpufreq.h>
->  #include <linux/acpi.h>
-> +#include <linux/uaccess.h>
->  #include <acpi/processor.h>
->  #include <asm/io.h>
-> -#include <linux/uaccess.h>
-> +#include <asm/asm.h>
-
-???
-
-> +#ifdef CONFIG_X86
-> +#include <asm/msr.h>
-> +#endif
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 
-I really appreciate you took the effort to do this change the correct
-way! :-)
-
---
- i.
---8323328-2124274657-1746191047=:958--
 
