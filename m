@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 433FBC3ABB9
-	for <xen-devel@archiver.kernel.org>; Mon,  5 May 2025 19:54:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.976366.1363532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0A4C3ABAA
+	for <xen-devel@archiver.kernel.org>; Mon,  5 May 2025 20:07:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.976377.1363540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uC1tF-0001RT-C9; Mon, 05 May 2025 19:54:13 +0000
+	id 1uC265-0003Mx-Dc; Mon, 05 May 2025 20:07:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 976366.1363532; Mon, 05 May 2025 19:54:13 +0000
+Received: by outflank-mailman (output) from mailman id 976377.1363540; Mon, 05 May 2025 20:07:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uC1tF-0001RM-8Q; Mon, 05 May 2025 19:54:13 +0000
-Received: by outflank-mailman (input) for mailman id 976366;
- Mon, 05 May 2025 19:54:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uC265-0003Mq-Ax; Mon, 05 May 2025 20:07:29 +0000
+Received: by outflank-mailman (input) for mailman id 976377;
+ Mon, 05 May 2025 20:07:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9/1y=XV=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1uC1tE-0001RG-Bx
- for xen-devel@lists.xenproject.org; Mon, 05 May 2025 19:54:12 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b612bd06-29ea-11f0-9eb4-5ba50f476ded;
- Mon, 05 May 2025 21:54:11 +0200 (CEST)
+ id 1uC264-0003Mk-EV
+ for xen-devel@lists.xenproject.org; Mon, 05 May 2025 20:07:28 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b20c8e7-29ec-11f0-9ffb-bf95429c2676;
+ Mon, 05 May 2025 22:07:17 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B14445C0717;
- Mon,  5 May 2025 19:51:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1ED7C4CEE4;
- Mon,  5 May 2025 19:54:08 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BD5BA61F1B;
+ Mon,  5 May 2025 20:06:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5C4DC4CEE4;
+ Mon,  5 May 2025 20:07:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +43,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b612bd06-29ea-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 8b20c8e7-29ec-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746474849;
-	bh=FI7V+8ZY3yhDWgiLgRNVXUBi91dr2BoVnQYvjNbejrk=;
+	s=k20201202; t=1746475636;
+	bh=0VGf1wA6wrUQNAP1iK28C/pi619OQRj+cVV0YQpDCss=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=VH8r5luMZInYS0Ehg/OUWFKUfVTrO95eBf/5sImLPEaYwzFNDCqRbSsGqnsMbGXec
-	 AGr12hfJgCOB3Jg7gNTHQv2Updk5exKhQJ75fx1t6MpdI6LXkU9rvutSunpikUcQQN
-	 cU8szMyZxLBagwhDVGP6LnDr5B3Na8uy6sWqIMqblPFTGIFOjyOXGYu+rbm5tiakbw
-	 E7JKvm2InGa+G+l6Yll2MkI4tli1q3UoBnz+X6+J+oh+dkKVuPEOC/ZRseKfB2/S8I
-	 TPt1dSNZvobDbQvI5VtNFqPypJ9ENPaJQDj1P/YCUgGRB0TEUd4ZHZK1DWtLNiAaHN
-	 99poqgtjNnHAQ==
-Date: Mon, 5 May 2025 12:54:07 -0700 (PDT)
+	b=CBn/qjyWKUnpvGn+nQWaFdb1kRaSPtpwGDTIc1BRfs9f3stLMXnCoyiHSO1pc6KBo
+	 8kJRbmJ2gjkozgMv3lllh3M6H2+tQsoPEjsx+Bk920tm+Za7ghdMGEdtrYZ5Rn3pJN
+	 A9Ks/utWXbk5o2dSyknDIuJlZ/XheIGAaxoi2YcUl/2oIz479+MlTpZaYloOhrRmjb
+	 yw/343Q0oiepvL6oMAgGto6wNE6R3R6cQ+JmoGb4TEdHpnUbmuEMreRt8KsuwQp+F4
+	 8QbdRsbUMApiwnCCmRSgKlVnupsHrCkEhoq28lw2YSJ2R5mOyV3xNhuELWkxlbMBZM
+	 Tue5oLLfFyg4g==
+Date: Mon, 5 May 2025 13:07:13 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
@@ -62,27 +62,41 @@ cc: xen-devel@lists.xenproject.org,
     Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
     Bertrand Marquis <bertrand.marquis@arm.com>, 
     Michal Orzel <michal.orzel@amd.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v4 4/8] arm/static-shmem.h: drop inclusion of
- asm/setup.h
-In-Reply-To: <2b126e4fde36d2a93c4a1ff6cb7266710738340a.1746468003.git.oleksii.kurochko@gmail.com>
-Message-ID: <alpine.DEB.2.22.394.2505051254000.3879245@ubuntu-linux-20-04-desktop>
-References: <cover.1746468003.git.oleksii.kurochko@gmail.com> <2b126e4fde36d2a93c4a1ff6cb7266710738340a.1746468003.git.oleksii.kurochko@gmail.com>
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Jan Beulich <jbeulich@suse.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v4 7/8] xen/common: dom0less: introduce common
+ domain-build.c
+In-Reply-To: <0bfc572f0d82e9d81bbc07bab5b6b7fb0d7634f8.1746468003.git.oleksii.kurochko@gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2505051306290.3879245@ubuntu-linux-20-04-desktop>
+References: <cover.1746468003.git.oleksii.kurochko@gmail.com> <0bfc572f0d82e9d81bbc07bab5b6b7fb0d7634f8.1746468003.git.oleksii.kurochko@gmail.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Mon, 5 May 2025, Oleksii Kurochko wrote:
-> Nothing is dependent from asm/setup.h in asm/static-shmem.h so inclusion of
-> asm/setup.h is droped.
+> Some functions of Arm's domain_build.c could be reused by dom0less or other
+> features connected to domain construction/build.
 > 
-> After this drop the following compilation error related to impicit declaration
-> of the following functions device_tree_get_reg and map_device_irqs_to_domain,
-> device_tree_get_u32 occur during compilation of dom0less-build.c ( as they are
-> declared in asm/setup.h ).
+> The following functions are moved to common:
+> - get_allocation_size().
+> - allocate_domheap_memory().
+> - guest_map_pages().
+> - allocate_bank_memory().
+> - add_hwdom_free_regions().
+> - find_unallocated_memory().
+> - allocate_memory().
+> - dtb_load().
+> - initrd_load().
 > 
-> Add inclusion of <asm/setup.h> in dt-overlay.c as it is using handle_device()
-> declared in <asm/setup.h>.
+> Prototype of dtb_load() and initrd_load() is updated to recieve a pointer
+> to copy_to_guest_phys() as some archs require
+> copy_to_guest_phys_fluch_dcache().
+> 
+> Update arm/include/asm/Makefile to generate  domain-build.h for Arm as it is
+> used by domain-build.c.
 > 
 > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
