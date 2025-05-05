@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C1EAC3ABB6
-	for <xen-devel@archiver.kernel.org>; Mon,  5 May 2025 23:15:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.976553.1363680 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A6FEC3ABB6
+	for <xen-devel@archiver.kernel.org>; Mon,  5 May 2025 23:19:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.976564.1363691 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uC51O-0002G8-4v; Mon, 05 May 2025 23:14:50 +0000
+	id 1uC55m-0002qm-LJ; Mon, 05 May 2025 23:19:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 976553.1363680; Mon, 05 May 2025 23:14:50 +0000
+Received: by outflank-mailman (output) from mailman id 976564.1363691; Mon, 05 May 2025 23:19:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uC51O-0002G1-2I; Mon, 05 May 2025 23:14:50 +0000
-Received: by outflank-mailman (input) for mailman id 976553;
- Mon, 05 May 2025 23:14:49 +0000
+	id 1uC55m-0002qf-II; Mon, 05 May 2025 23:19:22 +0000
+Received: by outflank-mailman (input) for mailman id 976564;
+ Mon, 05 May 2025 23:19:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Mk45=XV=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1uC51N-0002Fv-2z
- for xen-devel@lists.xenproject.org; Mon, 05 May 2025 23:14:49 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 1uC55l-0002qX-2E
+ for xen-devel@lists.xenproject.org; Mon, 05 May 2025 23:19:21 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [2604:1380:45d1:ec00::3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bbf7f4fb-2a06-11f0-9ffb-bf95429c2676;
- Tue, 06 May 2025 01:14:47 +0200 (CEST)
+ id 5d860eb4-2a07-11f0-9ffb-bf95429c2676;
+ Tue, 06 May 2025 01:19:18 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BA7AF4A252;
- Mon,  5 May 2025 23:14:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81328C4CEF1;
- Mon,  5 May 2025 23:14:44 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 1AC2FA4D3F3;
+ Mon,  5 May 2025 23:13:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91F26C4CEEE;
+ Mon,  5 May 2025 23:19:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bbf7f4fb-2a06-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 5d860eb4-2a07-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746486885;
-	bh=AaVyXzjXMB89c+N3cLGs6RLB1uFIyFBHLakI9cGBQ9U=;
+	s=k20201202; t=1746487156;
+	bh=CFlI8amxnvW9hCT1y9g6G11aTMlGoZyNkfPHFYbFLko=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=HVPTCFIQrJ2KaeujaUMNIqDB06WwR297YjQeAukSKLIIB0XXHltgVekrrbIuYIkaS
-	 Iw7F/hzIPdal+bOqI8rZPFjj1UYtPlXldDRD+YXSkDjzp6JFkKh7yz8XL7unJk8aHg
-	 pRJ/IZlwmsw0YjoUGreLdacF5mhZmOp+DibkeU+CR8gwIMruZUliEyuXBUQElcHp6/
-	 ndFkvVjUl9Jx67ZsFdXbK5gCebj/pcDDeekzp+9MNtd9BhHiPguw0nG2bJYdynNhAg
-	 m7eCONGMSz8nWVe7wmEk/jTmECVtcbjcjhUrft50KCU6wmPul7cPKQT8tXVqkhuh8Q
-	 rgIhGy8TAT9tg==
+	b=ZX/XRmhSW+p/63+gkpHp0Q7Hbhd/mzyRml7E+wa3ofaDuEZOTJXLxJegl0GMssZWg
+	 vA+OI3mNFD5RhmSFqsdTG9SOyVhzK9b5AWaYxlC7dcWoCPte930VS9JN7n/rUxRLXI
+	 syhSZpqj9jIy/LLEZlSSbBa8739Mthz5X42CKVrasKrEy4W7NY04rqJGidmegHQIma
+	 mJUdpDQ0FJxdKP27+x4+lJmV1L2PhDvm/QBmQ8bPQ2B22aCH3dgtVZJT2FOjqvIuKQ
+	 Y0MYTkttFUfpWtVb+2KKH4UJH5dYeSR+G4IpBxP6ecYiHEpIxVgJGaxWBpGQgjl1u/
+	 XFGaMv+uo2sZw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -62,16 +63,16 @@ Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	Sasha Levin <sashal@kernel.org>,
 	sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.15 043/153] xen: Add support for XenServer 6.1 platform device
-Date: Mon,  5 May 2025 19:11:30 -0400
-Message-Id: <20250505231320.2695319-43-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.10 031/114] xen: Add support for XenServer 6.1 platform device
+Date: Mon,  5 May 2025 19:16:54 -0400
+Message-Id: <20250505231817.2697367-31-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250505231320.2695319-1-sashal@kernel.org>
-References: <20250505231320.2695319-1-sashal@kernel.org>
+In-Reply-To: <20250505231817.2697367-1-sashal@kernel.org>
+References: <20250505231817.2697367-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.15.181
+X-stable-base: Linux 5.10.237
 Content-Transfer-Encoding: 8bit
 
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
@@ -110,7 +111,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+)
 
 diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
-index 6ebd819338ecb..2c77cac5594ba 100644
+index 804d8f4d0e73d..e7a95f7926c4e 100644
 --- a/drivers/xen/platform-pci.c
 +++ b/drivers/xen/platform-pci.c
 @@ -26,6 +26,8 @@
@@ -122,7 +123,7 @@ index 6ebd819338ecb..2c77cac5594ba 100644
  static unsigned long platform_mmio;
  static unsigned long platform_mmio_alloc;
  static unsigned long platform_mmiolen;
-@@ -174,6 +176,8 @@ static int platform_pci_probe(struct pci_dev *pdev,
+@@ -167,6 +169,8 @@ static int platform_pci_probe(struct pci_dev *pdev,
  static const struct pci_device_id platform_pci_tbl[] = {
  	{PCI_VENDOR_ID_XEN, PCI_DEVICE_ID_XEN_PLATFORM,
  		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
