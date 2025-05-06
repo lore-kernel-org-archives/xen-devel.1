@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 631D8C3ABC3
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:52:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977622.1364621 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4209FC3ABBC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:52:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977621.1364606 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLWW-0006Kn-Hm; Tue, 06 May 2025 16:52:04 +0000
+	id 1uCLWV-0005v2-4j; Tue, 06 May 2025 16:52:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977622.1364621; Tue, 06 May 2025 16:52:04 +0000
+Received: by outflank-mailman (output) from mailman id 977621.1364606; Tue, 06 May 2025 16:52:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLWW-0006Jp-EI; Tue, 06 May 2025 16:52:04 +0000
-Received: by outflank-mailman (input) for mailman id 977622;
- Tue, 06 May 2025 16:52:03 +0000
+	id 1uCLWV-0005tz-1C; Tue, 06 May 2025 16:52:03 +0000
+Received: by outflank-mailman (input) for mailman id 977621;
+ Tue, 06 May 2025 16:52:01 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uCLWV-0005Fd-CC
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:03 +0000
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [2a00:1450:4864:20::530])
+ id 1uCLWT-0005Fd-M9
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:01 +0000
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [2a00:1450:4864:20::635])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6e97b02a-2a9a-11f0-9ffb-bf95429c2676;
- Tue, 06 May 2025 18:52:01 +0200 (CEST)
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e8274a74so9110650a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:01 -0700 (PDT)
+ id 6d7fe31c-2a9a-11f0-9ffb-bf95429c2676;
+ Tue, 06 May 2025 18:52:00 +0200 (CEST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-acb615228a4so15460366b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:00 -0700 (PDT)
 Received: from fedora.. (user-109-243-69-225.play-internet.pl.
  [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.00
+ a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.51.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 09:52:00 -0700 (PDT)
+ Tue, 06 May 2025 09:51:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,145 +47,331 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e97b02a-2a9a-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 6d7fe31c-2a9a-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746550321; x=1747155121; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1746550319; x=1747155119; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fyH7+jYUX1HojA9xgArUa6tCu0OjPcD2ug7vub4dMik=;
-        b=GENtsU4FRYgUvlOcNdU0wKOW4uzsiaIHUu2TotLCeVh8O/qLEPyKQFA6ZkjvM/57Tz
-         YniyiUl+Yd69PMsPOTVlvLl5UQXkEM62BF1i8pIuwtF2dZHb9ExDq8BuCKdybpvexv4Z
-         2yQsMo/T0f1iUsxoe4Maox0/nimzfzzuOPxwtKwoqDpI//R71Xx+vjoF/olgWX4Gb4eh
-         qPt83Mea0owFaJqMMTbX+liF9QEcY8C8KR3mjKZmcraByaCDdG0vi67jc2T1lgmCEiXV
-         v2m4MA4npMOd5dkJswQ/kUdCPVqVN3A5nMqm0ffBbtrN11XfCMeuQF5Ipe5slU5tv5MR
-         MEgA==
+        bh=CP/6rOaeZ6U4S6TprvFe/y7WpP4kuiYu4f/W+psScZM=;
+        b=Prkyg5Tqmx/wbaQaijdjg8o14QbYPf7RkLQUzgv17WcUaFfmSWh6WuybUUjxHeESWK
+         67Kt/eYhlW3/P6oHxbTPk7jKSQlzfTv2ll+pUT0XaZbsnXx44pAhZdLzxtUjUoSQ7AGa
+         OLQPY0BzXRWmfuBTJNGCfRusybZdbNviiz0FjJdIhcKr3gMwQBSv10yYJVDSne9Ma3E9
+         9fBe2NZpmwDwmNx8gvNHJEvvJ/uefZqzd0gLrx2kSanBjl5fkMLKgSaxTXE5b9+2U7kJ
+         VRMkdFxPWJOrhMKhqtb5gxZvrlDj4LPbKoh4zXkktsvqihIgog5Zlcu60lhpbYXwDCMK
+         bivw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746550321; x=1747155121;
+        d=1e100.net; s=20230601; t=1746550319; x=1747155119;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=fyH7+jYUX1HojA9xgArUa6tCu0OjPcD2ug7vub4dMik=;
-        b=SEdQdkvKQtSi72nbJyy9TWCg4qhetigczwvXMOsRAEYTrgNdRXavEzNaXLeQDE7ZRJ
-         RQQ8AUEt8j/7IdNtwvgR/OvehK44kmGWNL3K6ueUNGDr+VnuxFBM5BWS2h8tSInGJ+P2
-         RE1vJ+OqAIqTL7skhU6G8HY4TC9wLZvja+peYp9VweQRDzUgMvRTyfnpOcgDgtq7foTM
-         ewlFM0qx6uZ6KRz8xST0BzCakMC0pDokdAtXntFlVZTQDtRnWzDmQ6NsekhCVcLiCPBQ
-         vijETvnNlLvBKZBqY/L67hF2nAETz17bzoDeOYiy95ntOGTqZK21/DB/rz64BYT7+XeW
-         KX5g==
-X-Gm-Message-State: AOJu0YxjoUOgsPO7d7CRnhQeEVt4B7GjykazkMCVEBlYViIYyYyz9Q9Y
-	wZYdgTLbIylthd14fDyZIb8gqgQn+n/+bwVF08F2cHKlMOnZ2gCjl8DF7g==
-X-Gm-Gg: ASbGncvEs8xfwYRFOSXbT5zwEeBv4MM/WfLL/TdaSVYGe6CyBHejUASLjXORv4RbFzU
-	prgbxq0+eVOz2bfAvMm1vVKCSiayeX+5+ISgvZG+32i3ByU9C/W6trSQSmyq1Nxjsu4GQ8CUaFs
-	bCIMY4pZkC0ovkyITblPHJptjvyQAhY0oJnNqtopdqftV4xRBu6FoopwlqQw8C2kmcvOucNqaAY
-	vX4cypA9vlikse+AHJ3zuED89r00n+l3psSTLBIKKTXubvGuDwgzca+uZAHE72OXX/o9TpTnHr/
-	DxuIf+kuf0zVmx+MAyo7PhBczmj4JDmNp1dhknxNliGcuL4P7bvYgJdkt5fWdt23JRDZQ6+iKzj
-	Z0L23kx6gjw==
-X-Google-Smtp-Source: AGHT+IGGmxCuy3frsT81IH5iVwWAXyfW7soT6GVZbGd9aCkHofw5Csv2YIhMKzuXyZSLhlpIO1JLsQ==
-X-Received: by 2002:a17:907:7da5:b0:ac3:48e4:f8bc with SMTP id a640c23a62f3a-ad1e8d54c0dmr14428266b.48.1746550320907;
-        Tue, 06 May 2025 09:52:00 -0700 (PDT)
+        bh=CP/6rOaeZ6U4S6TprvFe/y7WpP4kuiYu4f/W+psScZM=;
+        b=WJhDdEqMhbMkQOT7NHn56j2Ju6s32WZTXohrWBj8XOqbmUMb1DuXAWYwC1M58vzSn4
+         2h9bD7peo7fvKXaizlpCIKN9oXbBeuEe8oVO+6y04IV1jHD6SJgtsToErFLIUY/ItXFh
+         klED/CRW4qJari0tcl3k1JKJrz9VwJcJiSctbH/BXlYaelZHx7hLLYEXQjfew4yGFW8S
+         CF8DOG+MScN5EnnUCyRO/Loe0WQQt8uDrIRg3tN7X9zF048t++F5IU6lZzUjt+9HjwxI
+         Zr5IhXIBtrm3n75csNJEvT06SDZd2VCf9pXN/hFevTcTF5WBx7lv98/DRrab7HzNVBx6
+         6H8w==
+X-Gm-Message-State: AOJu0Yy7WcjGpj5n+SKxAV4wQ6ahsmeBL5lFdgP+CLzWqF/VMyw8bt57
+	qyyRxJ2ZWoCj8DNZ7jUXPFeFhSRasNZNx151aXNkTpLs5MFOMJCbDsGb/Q==
+X-Gm-Gg: ASbGncurxUrBAHjCSN+7lacz1w8G57DKSbbG67fS+HznweRlzO0eD2/yjBfFxMcZxrD
+	+jL43mOUBQUDIspWK3bGffDsEl/NMP6L+jfkr5mJfpTIkI8axnDQbTt8IT6Mp52pQsA9Wj1rCw0
+	SVHTMSCNQLxLB2qck3ImRikhK8jyuqgMSoBRwISVKT31VCc1Jbycw6KDfrHMI+Yzqpn6M4sBCrv
+	dt9R853HIzXZDI4HQN8dwoFkmOPBW8rW7yFm7o+tRcOJOIbpSQMdVM5KHOw86D2J8ksFoP247zH
+	iVSsdsdmEv0UjOzWOphG5us6yzoypwpM8WPe2TlIHnYi7mtbCeqcM9LD6q6XMs768wyD6I7qwRT
+	Fp7tgueshdU2bnvT7Ugy+
+X-Google-Smtp-Source: AGHT+IGrou4QtyM878xmIkaXrEEYa/uriKDowKj66N3imoG9kdeaqYGWx2lXK2Xm8nYhvxA07gpStg==
+X-Received: by 2002:a17:907:3e0f:b0:acb:2050:c105 with SMTP id a640c23a62f3a-ad1e794838fmr44600766b.21.1746550319005;
+        Tue, 06 May 2025 09:51:59 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 05/16] xen/asm-generic: introduce asm-generic/irq-dt.h
-Date: Tue,  6 May 2025 18:51:35 +0200
-Message-ID: <35c68e57e5348c6610e030890802e967f6be4230.1746530883.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v2 03/16] xen/riscv: introduce support of Svpbmt extension
+Date: Tue,  6 May 2025 18:51:33 +0200
+Message-ID: <da9273c20dc7ac1c131322e38a8cef361dfd86a9.1746530883.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce defintions of IRQ_TYPE_* which correspond to the Xen internal
-representation of the IRQ types and make them the same asthe existing
-device tree defintions for convenience.
+Svpbmt extension is necessary for chaning the memory type for a page contains
+a combination of attributes that indicate the cacheability, idempotency,
+and ordering properties for access to that page.
 
-These defines are going to be re-used, at least, by RISC-V architecture.
+As a part of the patch the following is introduced:
+- Svpbmt memory type defintions: PTE_PBMT_{NOCACHE,IO}.
+- PAGE_HYPERVISOR_{NOCACHE,WC}.
+- RISCV_ISA_EXT_svpbmt and add a check in runtime that Svpbmt is
+  supported by platform.
+- Update riscv/booting.txt with information about Svpbmt.
+- Update logic of pt_update_entry() to take into account PBMT bits.
+
+Use 'unsigned long' for pte_attr_t as PMBT bits are 61 and 62 and it doesn't
+fit into 'unsigned int'. Also, update function prototypes which uses
+'unsigned int' for flags/attibutes.
+
+Enable Svpbmt for testing in QEMU as Svpmbt is now mandatory for
+Xen work.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V2:
+Changes in v2:
  - new patch.
 ---
- xen/arch/arm/include/asm/Makefile |  1 +
- xen/arch/arm/include/asm/irq.h    | 15 +--------------
- xen/include/asm-generic/irq-dt.h  | 21 +++++++++++++++++++++
- 3 files changed, 23 insertions(+), 14 deletions(-)
- create mode 100644 xen/include/asm-generic/irq-dt.h
+ automation/scripts/qemu-smoke-riscv64.sh |  1 +
+ docs/misc/riscv/booting.txt              |  4 ++++
+ xen/arch/riscv/Kconfig                   | 14 ++++++++++++++
+ xen/arch/riscv/cpufeature.c              |  2 ++
+ xen/arch/riscv/include/asm/cpufeature.h  |  1 +
+ xen/arch/riscv/include/asm/fixmap.h      |  2 +-
+ xen/arch/riscv/include/asm/mm-types.h    |  8 ++++++++
+ xen/arch/riscv/include/asm/page.h        | 17 ++++++++++++++++-
+ xen/arch/riscv/pt.c                      | 20 +++++++++++---------
+ 9 files changed, 58 insertions(+), 11 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/mm-types.h
 
-diff --git a/xen/arch/arm/include/asm/Makefile b/xen/arch/arm/include/asm/Makefile
-index 831c914cce..87c8821421 100644
---- a/xen/arch/arm/include/asm/Makefile
-+++ b/xen/arch/arm/include/asm/Makefile
-@@ -4,6 +4,7 @@ generic-y += device.h
- generic-y += dom0less-build.h
- generic-y += hardirq.h
- generic-y += iocap.h
-+generic-y += irq-dt.h
- generic-y += paging.h
- generic-y += percpu.h
- generic-y += random.h
-diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.h
-index 88e060bf29..fce7e42a33 100644
---- a/xen/arch/arm/include/asm/irq.h
-+++ b/xen/arch/arm/include/asm/irq.h
-@@ -4,20 +4,7 @@
- #include <xen/device_tree.h>
- #include <public/device_tree_defs.h>
+diff --git a/automation/scripts/qemu-smoke-riscv64.sh b/automation/scripts/qemu-smoke-riscv64.sh
+index b2e112c942..25f9e4190e 100755
+--- a/automation/scripts/qemu-smoke-riscv64.sh
++++ b/automation/scripts/qemu-smoke-riscv64.sh
+@@ -7,6 +7,7 @@ rm -f smoke.serial
  
--/*
-- * These defines correspond to the Xen internal representation of the
-- * IRQ types. We choose to make them the same as the existing device
-- * tree definitions for convenience.
-- */
--#define IRQ_TYPE_NONE           DT_IRQ_TYPE_NONE
--#define IRQ_TYPE_EDGE_RISING    DT_IRQ_TYPE_EDGE_RISING
--#define IRQ_TYPE_EDGE_FALLING   DT_IRQ_TYPE_EDGE_FALLING
--#define IRQ_TYPE_EDGE_BOTH      DT_IRQ_TYPE_EDGE_BOTH 
--#define IRQ_TYPE_LEVEL_HIGH     DT_IRQ_TYPE_LEVEL_HIGH
--#define IRQ_TYPE_LEVEL_LOW      DT_IRQ_TYPE_LEVEL_LOW
--#define IRQ_TYPE_LEVEL_MASK     DT_IRQ_TYPE_LEVEL_MASK
--#define IRQ_TYPE_SENSE_MASK     DT_IRQ_TYPE_SENSE_MASK
--#define IRQ_TYPE_INVALID        DT_IRQ_TYPE_INVALID
-+#include <asm/irq-dt.h>
+ export TEST_CMD="qemu-system-riscv64 \
+     -M virt,aia=aplic-imsic \
++    -cpu rv64,svpbmt=on \
+     -smp 1 \
+     -nographic \
+     -m 2g \
+diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
+index 3a8474a27d..e100bde575 100644
+--- a/docs/misc/riscv/booting.txt
++++ b/docs/misc/riscv/booting.txt
+@@ -18,3 +18,7 @@ Xen is run:
+ - Zihintpause:
+   On a system that doesn't have this extension, cpu_relax() should be
+   implemented properly.
++- SVPBMT is mandatory to enable changing the memory attributes of a page.
++  For platforms that do not support SVPBMT, it is necessary to introduce a
++  similar mechanism as described in:
++  https://lore.kernel.org/all/20241102000843.1301099-1-samuel.holland@sifive.com/
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index d882e0a059..60520dab57 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -10,11 +10,25 @@ config RISCV
+ config RISCV_64
+ 	def_bool y
+ 	select 64BIT
++	select HAS_SVPBMT
  
- #define NR_VECTORS 256 /* XXX */
+ config ARCH_DEFCONFIG
+ 	string
+ 	default "arch/riscv/configs/tiny64_defconfig"
  
-diff --git a/xen/include/asm-generic/irq-dt.h b/xen/include/asm-generic/irq-dt.h
++config HAS_SVPBMT
++	bool
++	depends on RISCV_64
++	help
++	  This config enables usage of Svpbmt ISA-extension ( Supervisor-mode:
++	  page-based memory types).
++
++	  The memory type for a page contains a combination of attributes
++	  that indicate the cacheability, idempotency, and ordering
++	  properties for access to that page.
++
++	  The Svpbmt extension is only available on 64-bit cpus.
++
+ menu "Architecture Features"
+ 
+ source "arch/Kconfig"
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index 3246a03624..b7d5ec6580 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -137,6 +137,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
+     RISCV_ISA_EXT_DATA(zbs),
+     RISCV_ISA_EXT_DATA(smaia),
+     RISCV_ISA_EXT_DATA(ssaia),
++    RISCV_ISA_EXT_DATA(svpbmt),
+ };
+ 
+ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+@@ -151,6 +152,7 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+     RISCV_ISA_EXT_DATA(zifencei),
+     RISCV_ISA_EXT_DATA(zihintpause),
+     RISCV_ISA_EXT_DATA(zbb),
++    RISCV_ISA_EXT_DATA(svpbmt),
+ };
+ 
+ static bool __init is_lowercase_extension_name(const char *str)
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index 1015b6ee44..768b84b769 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -37,6 +37,7 @@ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_zbs,
+     RISCV_ISA_EXT_smaia,
+     RISCV_ISA_EXT_ssaia,
++    RISCV_ISA_EXT_svpbmt,
+     RISCV_ISA_EXT_MAX
+ };
+ 
+diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
+index e399a15f53..5990c964aa 100644
+--- a/xen/arch/riscv/include/asm/fixmap.h
++++ b/xen/arch/riscv/include/asm/fixmap.h
+@@ -33,7 +33,7 @@
+ extern pte_t xen_fixmap[];
+ 
+ /* Map a page in a fixmap entry */
+-void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
++void set_fixmap(unsigned int map, mfn_t mfn, pte_attr_t flags);
+ /* Remove a mapping from a fixmap entry */
+ void clear_fixmap(unsigned int map);
+ 
+diff --git a/xen/arch/riscv/include/asm/mm-types.h b/xen/arch/riscv/include/asm/mm-types.h
 new file mode 100644
-index 0000000000..5ec46da533
+index 0000000000..fa512064b8
 --- /dev/null
-+++ b/xen/include/asm-generic/irq-dt.h
-@@ -0,0 +1,21 @@
++++ b/xen/arch/riscv/include/asm/mm-types.h
+@@ -0,0 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +
-+#ifndef __ASM_GENERIC_IRQ_DT_H__
-+#define __ASM_GENERIC_IRQ_DT_H__
++#ifndef ASM_RISCV_MM_TYPES_H
++#define ASM_RISCV_MM_TYPES_H
 +
++typedef unsigned long pte_attr_t;
++
++#endif /* ASM_RISCV_MM_TYPES_H */
+diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
+index bf8988f657..2af4823170 100644
+--- a/xen/arch/riscv/include/asm/page.h
++++ b/xen/arch/riscv/include/asm/page.h
+@@ -46,6 +46,8 @@
+ #define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
+ 
+ #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
++#define PAGE_HYPERVISOR_NOCACHE     (PAGE_HYPERVISOR_RW | PTE_PMBT_IO)
++#define PAGE_HYPERVISOR_WC          (PAGE_HYPERVISOR_RW | PTE_PMBT_NOCACHE)
+ 
+ /*
+  * The PTE format does not contain the following bits within itself;
+@@ -56,8 +58,21 @@
+ #define PTE_SMALL       BIT(10, UL)
+ #define PTE_POPULATE    BIT(11, UL)
+ 
 +/*
-+ * These defines correspond to the Xen internal representation of the
-+ * IRQ types. We choose to make them the same as the existing device
-+ * tree definitions for convenience.
++ * [62:61] Svpbmt Memory Type definitions:
++ *
++ *  00 - PMA    Normal Cacheable, No change to implied PMA memory type
++ *  01 - NC     Non-cacheable, idempotent, weakly-ordered Main Memory
++ *  10 - IO     Non-cacheable, non-idempotent, strongly-ordered I/O memory
++ *  11 - Rsvd   Reserved for future standard use
 + */
-+#define IRQ_TYPE_NONE           DT_IRQ_TYPE_NONE
-+#define IRQ_TYPE_EDGE_RISING    DT_IRQ_TYPE_EDGE_RISING
-+#define IRQ_TYPE_EDGE_FALLING   DT_IRQ_TYPE_EDGE_FALLING
-+#define IRQ_TYPE_EDGE_BOTH      DT_IRQ_TYPE_EDGE_BOTH
-+#define IRQ_TYPE_LEVEL_HIGH     DT_IRQ_TYPE_LEVEL_HIGH
-+#define IRQ_TYPE_LEVEL_LOW      DT_IRQ_TYPE_LEVEL_LOW
-+#define IRQ_TYPE_LEVEL_MASK     DT_IRQ_TYPE_LEVEL_MASK
-+#define IRQ_TYPE_SENSE_MASK     DT_IRQ_TYPE_SENSE_MASK
-+#define IRQ_TYPE_INVALID        DT_IRQ_TYPE_INVALID
++#define PTE_PMBT_NOCACHE    BIT(61, UL)
++#define PTE_PMBT_IO         BIT(62, UL)
 +
-+#endif /* __ASM_GENERIC_IRQ_DT_H__ */
+ #define PTE_ACCESS_MASK (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE)
+ 
++#define PTE_PBMT_MASK   (PTE_PMBT_NOCACHE | PTE_PMBT_IO)
++
+ /* Calculate the offsets into the pagetables for a given VA */
+ #define pt_linear_offset(lvl, va)   ((va) >> XEN_PT_LEVEL_SHIFT(lvl))
+ 
+@@ -202,7 +217,7 @@ static inline pte_t read_pte(const pte_t *p)
+     return read_atomic(p);
+ }
+ 
+-static inline pte_t pte_from_mfn(mfn_t mfn, unsigned int flags)
++static inline pte_t pte_from_mfn(mfn_t mfn, pte_attr_t flags)
+ {
+     unsigned long pte = (mfn_x(mfn) << PTE_PPN_SHIFT) | flags;
+     return (pte_t){ .pte = pte };
+diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
+index 918b1b91ab..82c8c73c3e 100644
+--- a/xen/arch/riscv/pt.c
++++ b/xen/arch/riscv/pt.c
+@@ -25,7 +25,7 @@ static inline mfn_t get_root_page(void)
+  * See the comment about the possible combination of (mfn, flags) in
+  * the comment above pt_update().
+  */
+-static bool pt_check_entry(pte_t entry, mfn_t mfn, unsigned int flags)
++static bool pt_check_entry(pte_t entry, mfn_t mfn, pte_attr_t flags)
+ {
+     /* Sanity check when modifying an entry. */
+     if ( (flags & PTE_VALID) && mfn_eq(mfn, INVALID_MFN) )
+@@ -260,7 +260,7 @@ pte_t pt_walk(vaddr_t va, unsigned int *pte_level)
+  */
+ static int pt_update_entry(mfn_t root, vaddr_t virt,
+                            mfn_t mfn, unsigned int *target,
+-                           unsigned int flags)
++                           pte_attr_t flags)
+ {
+     int rc;
+     /*
+@@ -328,17 +328,19 @@ static int pt_update_entry(mfn_t root, vaddr_t virt,
+         pte.pte = 0;
+     else
+     {
++        const pte_attr_t attrs = PTE_ACCESS_MASK | PTE_PBMT_MASK;
++
+         /* We are inserting a mapping => Create new pte. */
+         if ( !mfn_eq(mfn, INVALID_MFN) )
+             pte = pte_from_mfn(mfn, PTE_VALID);
+-        else /* We are updating the permission => Copy the current pte. */
++        else /* We are updating the attributes => Copy the current pte. */
+         {
+             pte = *ptep;
+-            pte.pte &= ~PTE_ACCESS_MASK;
++            pte.pte &= ~attrs;
+         }
+ 
+-        /* update permission according to the flags */
+-        pte.pte |= (flags & PTE_ACCESS_MASK) | PTE_ACCESSED | PTE_DIRTY;
++        /* Update attributes of PTE according to the flags. */
++        pte.pte |= (flags & attrs) | PTE_ACCESSED | PTE_DIRTY;
+     }
+ 
+     write_pte(ptep, pte);
+@@ -353,7 +355,7 @@ static int pt_update_entry(mfn_t root, vaddr_t virt,
+ 
+ /* Return the level where mapping should be done */
+ static int pt_mapping_level(unsigned long vfn, mfn_t mfn, unsigned long nr,
+-                            unsigned int flags)
++                            pte_attr_t flags)
+ {
+     unsigned int level = 0;
+     unsigned long mask;
+@@ -407,7 +409,7 @@ static DEFINE_SPINLOCK(pt_lock);
+  * inserting will be done.
+  */
+ static int pt_update(vaddr_t virt, mfn_t mfn,
+-                     unsigned long nr_mfns, unsigned int flags)
++                     unsigned long nr_mfns, pte_attr_t flags)
+ {
+     int rc = 0;
+     unsigned long vfn = PFN_DOWN(virt);
+@@ -535,7 +537,7 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ }
+ 
+ /* Map a 4k page in a fixmap entry */
+-void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags)
++void set_fixmap(unsigned int map, mfn_t mfn, pte_attr_t flags)
+ {
+     if ( map_pages_to_xen(FIXMAP_ADDR(map), mfn, 1, flags | PTE_SMALL) != 0 )
+         BUG();
 -- 
 2.49.0
 
