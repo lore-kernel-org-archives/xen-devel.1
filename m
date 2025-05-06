@@ -4,36 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF18C3ABAC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:04:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977810.1364754 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07A9C3ABBE
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:14:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977844.1364762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLiG-0008Dj-Po; Tue, 06 May 2025 17:04:12 +0000
+	id 1uCLsC-0002V7-Md; Tue, 06 May 2025 17:14:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977810.1364754; Tue, 06 May 2025 17:04:12 +0000
+Received: by outflank-mailman (output) from mailman id 977844.1364762; Tue, 06 May 2025 17:14:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLiG-0008Da-Ju; Tue, 06 May 2025 17:04:12 +0000
-Received: by outflank-mailman (input) for mailman id 977810;
- Tue, 06 May 2025 17:04:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uCLsC-0002V0-Jq; Tue, 06 May 2025 17:14:28 +0000
+Received: by outflank-mailman (input) for mailman id 977844;
+ Tue, 06 May 2025 17:14:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kkOl=XW=bounce.vates.tech=bounce-md_30504962.681a3e8e.v1-ded5974a2ff842878c883815f8678456@srs-se1.protection.inumbo.net>)
- id 1uCLY9-00058E-FA
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:53:45 +0000
-Received: from mail137-14.atl71.mandrillapp.com
- (mail137-14.atl71.mandrillapp.com [198.2.137.14])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a6883d8e-2a9a-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 18:53:44 +0200 (CEST)
-Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail137-14.atl71.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZsPby2618z7064j4
- for <xen-devel@lists.xenproject.org>; Tue,  6 May 2025 16:53:34 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- ded5974a2ff842878c883815f8678456; Tue, 06 May 2025 16:53:34 +0000
+ <SRS0=oEbg=XW=cloud.com=kevin.lampis@srs-se1.protection.inumbo.net>)
+ id 1uCLsB-0002Tg-PV
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 17:14:27 +0000
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [2607:f8b0:4864:20::102a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8ebf9602-2a9d-11f0-9ffb-bf95429c2676;
+ Tue, 06 May 2025 19:14:25 +0200 (CEST)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-30820167b47so101587a91.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 10:14:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,64 +42,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a6883d8e-2a9a-11f0-9eb4-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1746550414; x=1746820414;
-	bh=fItoXDfcJHVJurWCoS7c4R6EdAt4qPJgrbuFX4XZ8VY=;
-	h=From:Subject:Message-Id:To:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=ax6he6nssMtjkNV7M9C7mqrOnGgPCpHfooBVrMF1ESw2dSMbnqBN73O3bFlVwc0L/
-	 4sTJhTQIGRrYpGLLvymxUBVIo7Uj9C2008bFFvRxQO8L1lt5rq4p4L9th3aof3JWQd
-	 +L55Y9SwYVQ5Z62VfnoDgKh0RdI3WXgBCVdzejMfIL+NirAsh/AxqzI4Ty7LfXhtW8
-	 Wix2Hx0VY9LCvUf11rr5t0aM90gOJt+uyNqTa/PI5nLGI77fB/NESHqNNPKewtqp2R
-	 dMz/wOUBZ7dVdbzkeL43B2J43hrc1lEp83QXXHYLosIV0PbX3YYEOh6oA5pFMqGjbD
-	 rq0PYgc+jyEaA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1746550414; x=1746810914; i=teddy.astie@vates.tech;
-	bh=fItoXDfcJHVJurWCoS7c4R6EdAt4qPJgrbuFX4XZ8VY=;
-	h=From:Subject:Message-Id:To:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=w72qnaYs/AwEmfdPdeyaJvHIczOpkIclV5xghStXGFzhrCE2OZTlsSgP2swbZSmOg
-	 HwjsKclfGMHB1rH87G/kXA/bqzGcilhJJfUv8wOIt8WLK2wCxCBpLqwUK2honG2HE7
-	 KsEdSx3j6q6aBqDxLcIc1osz7dkgSuUpXE+2mqGIX2u3gWh5PVl5ZK7+IHrKUtIQIJ
-	 1gfCJzvbBNscgV1zpV6S+lhGuGhAQDeZoVY9UZf7kA8xpWtti2CLCBroqf1dGPPGjI
-	 mnmAtc5Iy9KDRme7PjN9m2eKJBkjwciTKp+0r2lux6O8EcH7GvwOIVxyoduyewjnL6
-	 YYxpAD4Z90oEg==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=200/4]=20Add=20lockdown=20mode?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1746550413366
-Message-Id: <28b1d569-2f9a-45b7-9e94-09c9c0d73d20@vates.tech>
-To: "Kevin Lampis" <kevin.lampis@cloud.com>, xen-devel@lists.xenproject.org
-References: <20250506162347.1676357-1-kevin.lampis@cloud.com>
-In-Reply-To: <20250506162347.1676357-1-kevin.lampis@cloud.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ded5974a2ff842878c883815f8678456?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250506:md
-Date: Tue, 06 May 2025 16:53:34 +0000
+X-Inumbo-ID: 8ebf9602-2a9d-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1746551663; x=1747156463; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eOC5OeBMf7pOLob0OlXd7UldqLr5KECMJZ9sNcHSx0M=;
+        b=JQo+SknOpGjaZFywK70s+P1pY12RcQPtTqMPwLr2/jP4Oflq6qgXPqnM4gX8nkGihN
+         WAP4w9k5onU0kmXlqIU1F8/M66tydZGuqld3/Q2DVWLsDMhS+mITwOttkmm3kk00Wh7o
+         9Y/Pd6zeGRIKcHL2iPmXiz2ZuRHqLIx2XLISw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746551663; x=1747156463;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=eOC5OeBMf7pOLob0OlXd7UldqLr5KECMJZ9sNcHSx0M=;
+        b=wv4RCC9IWefiQc4CwP0MzxxFR+x91hu64+BlZ1PTj6Gh/9I9xBFn9FAuxLQCE4PTbG
+         F7bt3UfdAWV5N7Uz2CsLsjJUnRczFJnbg/RcSUG4ES2R1AMaIBRdeLnZAone3hyn+5Tq
+         s9EhWpNHI+xzt3tR2SJfsNz6qet5ZS8sQtGy2NyvS0YeOYzhcr6xvu9W7fTrIk+sR9+e
+         VaVA3VWqi/ca7TBIOhLFPfwrjiAyzgWnLasQymFcjq2Swn6rlE/nEwX95Dv1RSHp7u+d
+         prh9hLh/rztFB5o74pog2m/0t02jv8zKn96vUpSQ34pdL6tBTPgjeuVRPNbARhtOEl9s
+         EoUQ==
+X-Gm-Message-State: AOJu0YwkGyPSCvVpIq2ev62L/BUKcj+Gk+RxIMDvhOPg6sGAWZDg/n2D
+	/UtIjAZBvj/sEnavFRmwPeiTnfImu3YSmnZ3e/vmwKlQl+gAZWXsRywzRDmHLdzR6oEFsKRhxQZ
+	3cApKdZyHgKRoeVySa9oO4GkHFfxcYEkVR8wEejns1HPkdmIZJKM=
+X-Gm-Gg: ASbGncv15Gd1p3l4m+hWGQk5tQ8fHsE+572e4Mzau5Wf+9T1ejbT30GvmyOZnpsaR9K
+	Ir5wS+T2A+S30phpgcIhjEK2VGrLTbA4xGMU8BtMdKfqvcP2UM1TY8mAogZ4IfywC/TeH+uhztO
+	rkjjBfmcpLDnC8BgoMZWnQ
+X-Google-Smtp-Source: AGHT+IHF4sDTqGWBG9rJQ26zlW4WZMGnk2VmRKuDHRiAnPOphDKjLiVS3faXDgu7Y5YsrQIenFRbI1PR7LyW5HvDBLQ=
+X-Received: by 2002:a17:90b:554e:b0:2fa:2133:bc87 with SMTP id
+ 98e67ed59e1d1-30aa87b408bmr828030a91.6.1746551663490; Tue, 06 May 2025
+ 10:14:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+References: <20250506162510.1676425-1-kevin.lampis@cloud.com> <c853b996-76ea-405c-aee0-b4a26dc149fa@vates.tech>
+In-Reply-To: <c853b996-76ea-405c-aee0-b4a26dc149fa@vates.tech>
+From: Kevin Lampis <kevin.lampis@cloud.com>
+Date: Tue, 6 May 2025 18:13:59 +0100
+X-Gm-Features: ATxdqUHvDCDtD4TRpnRd-qY0jiBiVDDTOTS4VVo9-3muFxug0JGr6uq-Pfk030o
+Message-ID: <CAHaoHxa2znWNSPson78rs_Uh1Xd880HgHrhJFafbnhafxegp-Q@mail.gmail.com>
+Subject: Re: [PATCH 3/4] Add lockdown mode
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hello Kevin,
+On Tue, May 6, 2025 at 5:49=E2=80=AFPM Teddy Astie <teddy.astie@vates.tech>=
+ wrote:
+> (I can't find the PATCH 4/4)
 
-> The intention of lockdown mode is to prevent attacks from a rogue dom0
-> userspace from compromising the system.
+I apologize. The missing patch will be posted as soon as we can.
 
-Do we consider Dom0 kernel-space as well (thus Dom0 as a whole), or only 
-userland, what about privcmd device (which can issue hypercalls) ?
+> I am not convinced of the efficiency of being able to toggle lockdown
+> (including disabling it) mode from command-line.
 
-Teddy
+As you say a malicious userland could hijack the xen command-line arguments=
+.
+Patch 4 is about ignoring potentially dangerous command line arguments
+when lockdown mode is enabled.
+It is not about disabling lockdown mode itself. Sorry if the
+description was confusing.
 
+>Do we consider Dom0 kernel-space as well (thus Dom0 as a whole)
 
-Teddy Astie | Vates XCP-ng Developer
+Dom0 kernel is part of the trusted computing base for Secure Boot so
+we don't need to worry about that.
 
-XCP-ng & Xen Orchestra - Vates solutions
+>what about privcmd device (which can issue hypercalls) ?
 
-web: https://vates.tech
-
+We do have a solution for securing hypercalls but I believe it will be
+part of another patch series.
 
