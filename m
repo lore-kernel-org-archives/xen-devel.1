@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE8F1C3ABBC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:49:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977606.1364563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C2CC3ABBC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:52:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977619.1364589 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLU8-0003Fv-I9; Tue, 06 May 2025 16:49:36 +0000
+	id 1uCLWS-0005Q8-FI; Tue, 06 May 2025 16:52:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977606.1364563; Tue, 06 May 2025 16:49:36 +0000
+Received: by outflank-mailman (output) from mailman id 977619.1364589; Tue, 06 May 2025 16:52:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLU8-0003Fo-FM; Tue, 06 May 2025 16:49:36 +0000
-Received: by outflank-mailman (input) for mailman id 977606;
- Tue, 06 May 2025 16:49:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uCLWS-0005Py-8v; Tue, 06 May 2025 16:52:00 +0000
+Received: by outflank-mailman (input) for mailman id 977619;
+ Tue, 06 May 2025 16:51:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sZVp=XW=bounce.vates.tech=bounce-md_30504962.681a3d8c.v1-27e1172defaa4476915b7f165b02826a@srs-se1.protection.inumbo.net>)
- id 1uCLU7-0003Fi-3T
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:49:35 +0000
-Received: from mail137-14.atl71.mandrillapp.com
- (mail137-14.atl71.mandrillapp.com [198.2.137.14])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0ce942c7-2a9a-11f0-9ffb-bf95429c2676;
- Tue, 06 May 2025 18:49:25 +0200 (CEST)
-Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail137-14.atl71.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZsPW01ZkHz705qnc
- for <xen-devel@lists.xenproject.org>; Tue,  6 May 2025 16:49:16 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 27e1172defaa4476915b7f165b02826a; Tue, 06 May 2025 16:49:16 +0000
+ <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uCLWR-00058E-HQ
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:51:59 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6ce27762-2a9a-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 18:51:59 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso262713666b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:51:59 -0700 (PDT)
+Received: from fedora.. (user-109-243-69-225.play-internet.pl.
+ [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.51.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 May 2025 09:51:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,233 +47,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0ce942c7-2a9a-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1746550156; x=1746820156;
-	bh=94gLD2TU1RziIJLzd2SkFBfyeSw38UC4+1m8vKkod+s=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=gvSxgsxmUAqSdu50SPG1dOvguybcl5hcgVq5Y8yiKHe1JeZyaoTqKqD2kjAHBp52L
-	 Six+6R1WAbTl2PDPDepXgDcIhN6urQctIPtQaxfXrqLq0xZTrzigEdElgWCQm4hLIJ
-	 vr9scK2cWjK9QpV5b6Gp39M3DhwhViYS2fIaxIvQJZBrQPNU4PJmU3OHFtWkxdvGzM
-	 E9P+xgsUQ7sxNhECxFCJ14w0T+8LO9cysXA5ra74hthgHkFTiCuu4rcoNTvH5i3duu
-	 Zbtwrmr/UiGoMtvalIX9MIrcgSdKD1m5O/Y2HHV8IbDzwrrjG/TTSwJNmHYSset8gH
-	 NAZ0FnDVB98uw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1746550156; x=1746810656; i=teddy.astie@vates.tech;
-	bh=94gLD2TU1RziIJLzd2SkFBfyeSw38UC4+1m8vKkod+s=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=p423RydLrFi3K7uY16uxnU0iJW7Vwn9W5YSNQjUV1QFbAebofG9xXhunvx13zAbxL
-	 sdL97jbcVTP/Z4HTWqPfslvT7AkFH8QvwLUBxap/7Hlwju/TbO10QlMDmynPoLoWJF
-	 DBEuHFNKcqVL9SbDMCYs/8zYYSss0HoCY4eUBz5qjT0RfdM/jaywtA49rvDUSW3uSQ
-	 /vbkQpcclssiVSDEypomd1X2pimv/nWMWOoZyHQONPCj/lV98YYFI0Ibrcz8CRXvyK
-	 4BLR+JgNMuZJj+jJYyMtLm1bSPmYbORVxgdSxHSK58ssNsnm3fMkGRIAc56Nl7CotD
-	 iUmdKHV+N6XgA==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=203/4]=20Add=20lockdown=20mode?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1746550154364
-Message-Id: <c853b996-76ea-405c-aee0-b4a26dc149fa@vates.tech>
-To: "Kevin Lampis" <kevin.lampis@cloud.com>, xen-devel@lists.xenproject.org
-Cc: "Ross Lagerwall" <ross.lagerwall@citrix.com>
-References: <20250506162510.1676425-1-kevin.lampis@cloud.com>
-In-Reply-To: <20250506162510.1676425-1-kevin.lampis@cloud.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.27e1172defaa4476915b7f165b02826a?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250506:md
-Date: Tue, 06 May 2025 16:49:16 +0000
+X-Inumbo-ID: 6ce27762-2a9a-11f0-9eb4-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1746550318; x=1747155118; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=p8le7vZakEngLNFsWoDo29Hu279LBR8cdaIyUujlRsQ=;
+        b=d4PbMPo0sYUKhPtKk9Q6BsPDLD7mbTesm1fipeL7HH4Si+eC0HriH7SIa1+vK2FVj6
+         NMAMSIKfWDxMy5RoTg0NA9v3jKo6Z5DCj+u1ZeSRSimJ8ZH4RpTpfr3ZkiIyQO0zYVoA
+         PkAA4bQzFWJIDEC+s9axXHHYWQfhh59jtJ9WsbiIWKG4z3AKelvpV85XgLCtlVnCEvez
+         QGdu2jwtTdRizvZBGVR1JPUUb7LX0ZCFiTWfbinea2UVjcLffKe3L/PJroJa4Axojnlc
+         jYw3mmb+z8v8e+h9MhS4SKu0sgztCHcGic+cEXLI4a4ie2s2zliJiDWi7Rh8BAuvYTay
+         GV6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746550318; x=1747155118;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=p8le7vZakEngLNFsWoDo29Hu279LBR8cdaIyUujlRsQ=;
+        b=KVd9IPmRRMbKs0C8jaartlKqgqUVHvQjknC8xkK4xWFvrVITPBWUDeyBMYKjBhhao3
+         w3vfvbD/xNvgyLZeHYAM0UbqS9nddVruZxZsvB+WFgB0cS9G6rRfTyEWCjDF4jgldDfE
+         BIYLVoD7M+IjwAhvTZTraqBuSR40gffvuVLvUV9VWDboDiwS+cTPPafNWx0WrdJe8Cd9
+         iHzIxOUOuxrgEUwyaSsHEZTakvlYtme49RTUeuHwRAHQXR7NuzFbAXLXOg/kU850Tzo6
+         iaJp8NQ8wJC7rbmJYq7+QlhC9eRkrkOGHhsVVL/ytFdGZy6dtLGiQgdpzs14ZCjri2cp
+         8hJQ==
+X-Gm-Message-State: AOJu0YxNJktn/CMJ8NCe3J32jq2i+CMIdG+OgWfwb3pZcKRsmmUwnjbf
+	WrZ8fMX6RFb1EzO2D330l6gIgRduW7qkFl+GJPS8dVg/psV1O3Ok5NNmbw==
+X-Gm-Gg: ASbGncvavRPMwt5d4dCsmgrDcroMC5UBGiPya4cGu2qxhsIKx7/+A+8Ofa7fUZXbvk1
+	NtTcSvWkCf2/wz76ZxWNnuJbgYMvtWMa78rKXDXo7Z0dyQ/7DZW/l46cyPozm7ujP3KYHos6ENE
+	E8e35AT+z2P9wEv0xPqpFclO4Mn4mnDKpADEWHoPWrjkEByA81D/8LXhfwzt3o0h0VvQzgk4FX7
+	06rcSGXZ+KeK+vRPRkwhL1rjlAzy+qUVPL+wb1wsxGYWbG09+xWbU6Ydn1nPwpx3vuTOk7GiR5H
+	o8bo3TOYRgQ4hqRY0JTR4AStQVvP1H/gNNF5/+4bWDwQkDdhk+A1guRTW/iX+EMUdqZJ8vM9tpI
+	fxOMNFUASIg==
+X-Google-Smtp-Source: AGHT+IHO/Fo4tlE/KU7nbSnaumhBbp2s/ZDjX7acHYn6sWOydJxlNhuhT1vfDdpqT+aAvZwBra8qdg==
+X-Received: by 2002:a17:906:dc8b:b0:ac7:3911:35e6 with SMTP id a640c23a62f3a-ad1e8d0c9b3mr16799266b.58.1746550317709;
+        Tue, 06 May 2025 09:51:57 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 02/16] xen/riscv: introduce smp_prepare_boot_cpu()
+Date: Tue,  6 May 2025 18:51:32 +0200
+Message-ID: <704550ffbb34c94bfe85be928b2fcc0105552e82.1746530883.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1746530883.git.oleksii.kurochko@gmail.com>
+References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hello Kevin,
+Initialize cpu_{possible, online}_map by using smp_prepare_boot_cpu().
 
-Le 06/05/2025 =C3=A0 18:32, Kevin Lampis a =C3=A9crit=C2=A0:
-> The intention of lockdown mode is to prevent attacks from a rogue dom0
-> userspace from compromising the system. Lockdown mode can be controlled b=
-y a
-> Kconfig option and a command-line parameter.
+Drop DEFINE_PER_CPU(unsigned int, cpu_id) from stubs.c as this variable isn't
+expected to be used in RISC-V at all.
 
-What is the effective effect of such mode ? How does it protect the 
-hypervisor from Dom0 ?
-(I can't find the PATCH 4/4 which seems to give a explanation)
+Move declaration of cpu_{possible,online}_map from stubs.c to smpboot.c
+as now smpboot.c is now introduced.
+Other defintions keep in stubs.c as they are not initialized and not needed, at
+the moment.
 
-  It is also enabled automatically
-> when Secure Boot is enabled and it cannot be disabled in that case.
-> 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-> Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
-> ---
->   xen/arch/x86/setup.c       |  1 +
->   xen/common/Kconfig         |  8 ++++++
->   xen/common/Makefile        |  1 +
->   xen/common/kernel.c        |  3 +++
->   xen/common/lockdown.c      | 52 ++++++++++++++++++++++++++++++++++++++
->   xen/include/xen/lockdown.h |  9 +++++++
->   6 files changed, 74 insertions(+)
->   create mode 100644 xen/common/lockdown.c
->   create mode 100644 xen/include/xen/lockdown.h
-> 
-> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-> index 2518954124..276957c4ed 100644
-> --- a/xen/arch/x86/setup.c
-> +++ b/xen/arch/x86/setup.c
-> @@ -15,6 +15,7 @@
->   #include <xen/kexec.h>
->   #include <xen/keyhandler.h>
->   #include <xen/lib.h>
-> +#include <xen/lockdown.h>
->   #include <xen/multiboot.h>
->   #include <xen/nodemask.h>
->   #include <xen/numa.h>
-> diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-> index 4bec78c6f2..63ff37d046 100644
-> --- a/xen/common/Kconfig
-> +++ b/xen/common/Kconfig
-> @@ -596,4 +596,12 @@ config BUDDY_ALLOCATOR_SIZE
->   =09  Amount of memory reserved for the buddy allocator to serve Xen hea=
-p,
->   =09  working alongside the colored one.
->   
-> +config LOCKDOWN_DEFAULT
-> +=09bool "Enable lockdown mode by default"
-> +=09default n
-> +=09help
-> +=09  Lockdown mode prevents attacks from a rogue dom0 userspace from
-> +=09  compromising the system. This is automatically enabled when Secure
-> +=09  Boot is enabled.
-> +
->   endmenu
-> diff --git a/xen/common/Makefile b/xen/common/Makefile
-> index 98f0873056..b00a8a925a 100644
-> --- a/xen/common/Makefile
-> +++ b/xen/common/Makefile
-> @@ -26,6 +26,7 @@ obj-$(CONFIG_KEXEC) +=3D kexec.o
->   obj-$(CONFIG_KEXEC) +=3D kimage.o
->   obj-$(CONFIG_LIVEPATCH) +=3D livepatch.o livepatch_elf.o
->   obj-$(CONFIG_LLC_COLORING) +=3D llc-coloring.o
-> +obj-y +=3D lockdown.o
->   obj-$(CONFIG_VM_EVENT) +=3D mem_access.o
->   obj-y +=3D memory.o
->   obj-y +=3D multicall.o
-> diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-> index 8b63ca55f1..6658db9514 100644
-> --- a/xen/common/kernel.c
-> +++ b/xen/common/kernel.c
-> @@ -216,6 +216,9 @@ static void __init _cmdline_parse(const char *cmdline=
-)
->    */
->   void __init cmdline_parse(const char *cmdline)
->   {
-> +    /* Call this early since it affects command-line parsing */
-> +    lockdown_init(cmdline);
-> +
->       if ( opt_builtin_cmdline[0] )
->       {
->           printk("Built-in command line: %s\n", opt_builtin_cmdline);
-> diff --git a/xen/common/lockdown.c b/xen/common/lockdown.c
-> new file mode 100644
-> index 0000000000..935911dfd0
-> --- /dev/null
-> +++ b/xen/common/lockdown.c
-> @@ -0,0 +1,52 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +#include <xen/efi.h>
-> +#include <xen/kernel.h>
-> +#include <xen/lockdown.h>
-> +#include <xen/param.h>
-> +#include <xen/string.h>
-> +
-> +static bool __ro_after_init lockdown =3D IS_ENABLED(CONFIG_LOCKDOWN_DEFA=
-ULT);
-> +ignore_param("lockdown");
-> +
-> +bool is_locked_down(void)
-> +{
-> +    return lockdown;
-> +}
-> +
-> +void __init lockdown_init(const char *cmdline)
-> +{
-> +    if ( efi_secure_boot )
-> +    {
-> +        printk("Enabling lockdown mode because Secure Boot is enabled\n"=
-);
-> +        lockdown =3D true;
-> +    }
-> +    else
-> +    {
-> +        while ( *cmdline )
-> +        {
-> +            size_t param_len, name_len;
-> +            int ret;
-> +
-> +            cmdline +=3D strspn(cmdline, " \n\r\t");
-> +            param_len =3D strcspn(cmdline, " \n\r\t");
-> +            name_len =3D strcspn(cmdline, "=3D \n\r\t");
-> +
-> +            if ( !strncmp(cmdline, "lockdown", max(name_len, strlen("loc=
-kdown"))) ||
-> +                 !strncmp(cmdline, "no-lockdown", max(name_len, strlen("=
-no-lockdown"))) )
-> +            {
-> +                ret =3D parse_boolean("lockdown", cmdline, cmdline + par=
-am_len);
-> +                if ( ret >=3D 0 )
-> +                {
-> +                    lockdown =3D ret;
-> +                    printk("Lockdown mode set from command-line\n");
-> +                    break;
-> +                }
-> +            }
-> +
-> +            cmdline +=3D param_len;
-> +        }
-> +    }
-> +
-> +    printk("Lockdown mode is %s\n", lockdown ? "enabled" : "disabled");
-> +}
+Drop cpu_present_map as it is enough to have cpu_possible_map. Also, ask
+linker to provide symbol for cpu_present_map as common code references it.
 
-With
-> Kevin Lampis (1):
->   Disallow most command-line options when lockdown mode is enabled
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in v2:
+ - Add __read_mostly for cpu_online_map.
+ - Add __ro_after_init for cpu_possible_map.
+ - Drop cpu_present_map and cpumask_copy(&cpu_present_map, &cpu_possible_map);
+ - Drop cpumask_clear() for cpu_{possible,online}_map.
+ - Ask the linker provide the symbol for cpu_present_map as common code uses
+   it.
+ - s/smp_clear_cpu_maps/smp_prepare_boot_cpu.
+ - Include <xen/smp.h> in setup.c as smp_prepare_boot_cpu() is declare in that
+   header now.
+   Also, drop inclusion of asm/smp.h in setup.c asm xen/smp.h has inclusion of
+   asm/smp.h.
+ - Update the commit message.
+---
+ xen/arch/riscv/Makefile  |  1 +
+ xen/arch/riscv/setup.c   |  4 +++-
+ xen/arch/riscv/smpboot.c | 12 ++++++++++++
+ xen/arch/riscv/stubs.c   |  6 ------
+ xen/arch/riscv/xen.lds.S |  2 ++
+ 5 files changed, 18 insertions(+), 7 deletions(-)
+ create mode 100644 xen/arch/riscv/smpboot.c
 
-I am not convinced of the efficiency of being able to toggle lockdown 
-(including disabling it) mode from command-line. In case the userland 
-can hijack the cmdline, I can't see what would prevent it from setting 
-no-lockdown, which will disable the lockdown mode (also overriding 
-CONFIG_LOCKDOWN_DEFAULT).
-
-> diff --git a/xen/include/xen/lockdown.h b/xen/include/xen/lockdown.h
-> new file mode 100644
-> index 0000000000..b2baa31caa
-> --- /dev/null
-> +++ b/xen/include/xen/lockdown.h
-> @@ -0,0 +1,9 @@
-> +#ifndef XEN__LOCKDOWN_H
-> +#define XEN__LOCKDOWN_H
-> +
-> +#include <xen/types.h>
-> +
-> +bool is_locked_down(void);
-> +void lockdown_init(const char *cmdline);
-> +
-> +#endif /* XEN__LOCKDOWN_H */
-
-Teddy
-
-
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index d882c57528..f42cf3dfa6 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -10,6 +10,7 @@ obj-y += sbi.o
+ obj-y += setup.o
+ obj-y += shutdown.o
+ obj-y += smp.o
++obj-y += smpboot.o
+ obj-y += stubs.o
+ obj-y += time.o
+ obj-y += traps.o
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 4e416f6e44..2a564512d7 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -8,6 +8,7 @@
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ #include <xen/shutdown.h>
++#include <xen/smp.h>
+ #include <xen/vmap.h>
+ #include <xen/xvmalloc.h>
+ 
+@@ -19,7 +20,6 @@
+ #include <asm/intc.h>
+ #include <asm/sbi.h>
+ #include <asm/setup.h>
+-#include <asm/smp.h>
+ #include <asm/traps.h>
+ 
+ /* Xen stack for bringing up the first CPU. */
+@@ -72,6 +72,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     remove_identity_mapping();
+ 
++    smp_prepare_boot_cpu();
++
+     set_processor_id(0);
+ 
+     set_cpuid_to_hartid(0, bootcpu_id);
+diff --git a/xen/arch/riscv/smpboot.c b/xen/arch/riscv/smpboot.c
+new file mode 100644
+index 0000000000..0371dfa53e
+--- /dev/null
++++ b/xen/arch/riscv/smpboot.c
+@@ -0,0 +1,12 @@
++#include <xen/cpumask.h>
++#include <xen/init.h>
++#include <xen/sections.h>
++
++cpumask_t __read_mostly cpu_online_map;
++cpumask_t __ro_after_init cpu_possible_map;
++
++void __init smp_prepare_boot_cpu(void)
++{
++    cpumask_set_cpu(0, &cpu_possible_map);
++    cpumask_set_cpu(0, &cpu_online_map);
++}
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 83416d3350..fdcf91054e 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -11,12 +11,6 @@
+ 
+ /* smpboot.c */
+ 
+-cpumask_t cpu_online_map;
+-cpumask_t cpu_present_map;
+-cpumask_t cpu_possible_map;
+-
+-/* ID of the PCPU we're running on */
+-DEFINE_PER_CPU(unsigned int, cpu_id);
+ /* XXX these seem awfully x86ish... */
+ /* representing HT siblings of each logical CPU */
+ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_sibling_mask);
+diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
+index 818aa43669..8c3c06de01 100644
+--- a/xen/arch/riscv/xen.lds.S
++++ b/xen/arch/riscv/xen.lds.S
+@@ -165,6 +165,8 @@ SECTIONS
+     ELF_DETAILS_SECTIONS
+ }
+ 
++PROVIDE(cpu_present_map = cpu_possible_map);
++
+ ASSERT(IS_ALIGNED(__bss_start,      POINTER_ALIGN), "__bss_start is misaligned")
+ ASSERT(IS_ALIGNED(__bss_end,        POINTER_ALIGN), "__bss_end is misaligned")
+ 
+-- 
+2.49.0
 
 
