@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A061BC3ABAC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:52:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977630.1364670 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AAE9C3ABAC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:52:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977636.1364693 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLWc-0007eA-K7; Tue, 06 May 2025 16:52:10 +0000
+	id 1uCLWi-0000ML-Ht; Tue, 06 May 2025 16:52:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977630.1364670; Tue, 06 May 2025 16:52:10 +0000
+Received: by outflank-mailman (output) from mailman id 977636.1364693; Tue, 06 May 2025 16:52:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLWc-0007bF-4q; Tue, 06 May 2025 16:52:10 +0000
-Received: by outflank-mailman (input) for mailman id 977630;
- Tue, 06 May 2025 16:52:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uCLWi-0000Lz-Bz; Tue, 06 May 2025 16:52:16 +0000
+Received: by outflank-mailman (input) for mailman id 977636;
+ Tue, 06 May 2025 16:52:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uCLWa-00058E-9S
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:08 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 71566546-2a9a-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 18:52:06 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-acacb8743a7so11043266b.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:06 -0700 (PDT)
+ id 1uCLWg-0005Fd-94
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:14 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 74df34d6-2a9a-11f0-9ffb-bf95429c2676;
+ Tue, 06 May 2025 18:52:12 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so984598966b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:12 -0700 (PDT)
 Received: from fedora.. (user-109-243-69-225.play-internet.pl.
  [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.04
+ a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 09:52:05 -0700 (PDT)
+ Tue, 06 May 2025 09:52:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71566546-2a9a-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 74df34d6-2a9a-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746550326; x=1747155126; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1746550332; x=1747155132; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=maZIYenpt/TgC9UOWWJvY9Qazh2LoZdUwAXjgu0Aocs=;
-        b=mK2u8zQX+bU2Y/wbgmnMxQklpobGwCtD+VxGVI51DYUCuUO77PR/vZL8EHiEzPcsWI
-         3dvU4wy9WzkU3kHFK+L6/S1+h3d03j5kVjPEvunQSj5fDc0DBxbDxcpUH6yrD7+lRQwc
-         DMnRlB0Tiu0Fevyh56v+yOVMjpnszhTGgTpzBNujtvUbGvZ3tLmNt81ILPfnOMqScKJi
-         g8gBGjjUX2cv3g3Xkq7IZOQbVOVVxQbRZKGQF0EhrEwtgPXjlT9a6mlDVa/mXWOaegtM
-         gYiM3EMdiP9D7eK94cs3PGozt+vx+gIhfg1KTumXriHtMeJUWYf4TixoXxwKljlBPWQu
-         KxHw==
+        bh=jcNpMhCfyvA/6mSR/+djGto9U0zKi73zc12A/lkWF+Q=;
+        b=lqzKfps9AKcTYZvT507iJOWZrd0H5Q4anncLOxKgcHS/p09QtBSIgwdxxwhGJ9fLfh
+         wTlZq0oODHuLCmCTh6taq+4Tesb8GNYsF0qkxDiYwvCl6K/4BBDowAsUj8H/0Rp4ygV0
+         LeCKZHEsf/Z7s0gc7IK9eDpXE8sSwzA8xx4urHN3+jjMiw9Gid69nZ8+hg++MBtASJzK
+         EEqNVo/qtIPnH/hcfBuO2BWqTRTT5fAt/uBCcQDEPiku34jUOO/RjVXd18uiQGF+l5Tp
+         A0M43HUuKbjOzySrqg4NiBLcAFxPug+VyFDc1Buv9lVnNULHXIzJX10DI+Rp7mYRTk7N
+         4U0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746550326; x=1747155126;
+        d=1e100.net; s=20230601; t=1746550332; x=1747155132;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=maZIYenpt/TgC9UOWWJvY9Qazh2LoZdUwAXjgu0Aocs=;
-        b=fDSeQKcsi8Cw5ZJiBko4Q3qFh6gEP0ytKxOLUCHLzDejkC7pFZN7bPTNk9NkHoqhA9
-         WDFNmTzocqr62SSRzWGP8m7WOJ26d8cDTGBvoDfb1gRLWHu3ky88FjJf9fO6yR5EItCZ
-         Or6PiubCH7eJ3Gxc/+eHegZVC90F9NClWzl28cl7whAvRsCRo8/mku7EszAFovEN2Gur
-         +R49DTskHMfJTs/USwvutYdBn3ffb46mfYTyfGMu1fAvqntXLdStk/DiYb6s2VqQJhBX
-         cSZxk5naeLAv1jk1IKi7rmZmwg+kz/0yloOx6Rur/qmvAG5HzghhJbuqiWyclBN/Ejvn
-         /TzA==
-X-Gm-Message-State: AOJu0YzCYUBMUl/WcailxD6/rRMdSUSnrKWSv4DDYFsKlryA9oVEIgxj
-	pIC7+El/XQpVqMTvN8CyHUlRfsqnL6MifHHtf8OxJjz+/Q82jpOKgd2WqA==
-X-Gm-Gg: ASbGncuurOWnjC1Mwxh8sGKiutGK5zlA3JWglJaXr1LSMRkche2p31g462msWsdwqlS
-	psJsgW/0ge/OquoQCMP8Y61mesO8j0sKmuqdy9RyIq4e428g3QbKIUyWc6DAcowMbOLZ/ZPrY2f
-	KibLCyUMI8K2KneaisjLPh1MMCM4ht7rLApMdSwy8faD6UfD5f/6eokTW7kAyTBGjwecaoHVBcQ
-	VT10QYC4nC8ml5Bh/RbsrCKgTHryv8yseax1fSapZ50paMVlKFleRJj0f4+EmbwxFek5kLGU/w3
-	HDKVPYu/vZFKwyMwCnP69u0Dy4Y637F3SFNacglKAkCqmvJEPIyi+baGq7VeeyWi1L8W7iknYgM
-	h2E8t0lpZVQ==
-X-Google-Smtp-Source: AGHT+IH4c8fyVlUG1/9uOe655VcD6jWKV4hFGibis0LHxfaSmfsFm6d5cT/HapGyiJPpZFECSfaM+Q==
-X-Received: by 2002:a17:907:c70c:b0:acb:aa43:e82d with SMTP id a640c23a62f3a-ad1e7c4a0f3mr46544366b.3.1746550325511;
-        Tue, 06 May 2025 09:52:05 -0700 (PDT)
+        bh=jcNpMhCfyvA/6mSR/+djGto9U0zKi73zc12A/lkWF+Q=;
+        b=Yz8Vl5gR/HWHvhl+Wnnd2yQpYiUuj/HDsBQtcmH24R94ykrSG0f+N6fbrLsZzhNY4n
+         OxaZ5gZcNjtqfGVAaqXu4eqYq3WBGFRVDFAKscuJI62oOZjpGl1MhvVSs1uqoQmMDeGW
+         nLw438V/w8gIkeMeHTt4wK1i5DS7Rg2lAA4kNt/x9oTdsD4z1hdaXT1/S6/PAIUjdF17
+         atwd+NTzsR5aVPBdYF7J9cYkNGomoiUlmh9FAlpLsqSV5OPCkuUnLYRJEf5uRYsMTuro
+         5KKDI+8h07l5I0MrZaaWwqNvdbnDrftnPSdbdeEej8Vmlp00wr4eGOqLeTnhX7fzSDx6
+         ilIw==
+X-Gm-Message-State: AOJu0Yway623y1y+FNDAzCJYvR061Eq35HMxfGnLzgXN8c4KLL3eae//
+	vFjqv9SWCK1FIE/V+6fAm8w/J38hxchqwqg7p/YAMUnqNOwUtc5WCe+wdw==
+X-Gm-Gg: ASbGncuUFpIHcExT4ChNDV7uhE3BAvbA/1CvavhPNv36sC7b+pQb8eCYg5vgvQbLZlF
+	negv0JfLLgx7thueIjoDectnmq5jaK2hQj6ryIn3jxcf6GzlwqAeZ0VbXkPrugxStSbp52gqDmK
+	7gZJ7x25wiMODs50sMuLBxAQWPP646KEN1f+4gyCS6z6wrEFkPHzujMvzfO/WavEEKEvNs8GLD9
+	KiY3saXhE6d+HNdvdPODDxlvHN28OWuDm3cNRx1IBXn2J5+a8eL8U3upNx+IZh7IAuu/Dn1svVA
+	viargDEfx/Ys47DY7b9d7ivxu0WiRalKxEzToGLVrXaQi+9rYAEtyiF+mAUVTkg8nq3WbAqTvy0
+	wwfhqT+re6g==
+X-Google-Smtp-Source: AGHT+IFkxZQBdm9KBB1ZRaoupbLDFikCeyhEmwO7U7RC83JUMy9/iq0OKe0PRmNhijjDxsKR0eAo8w==
+X-Received: by 2002:a17:907:7b8d:b0:aca:d6f2:c39e with SMTP id a640c23a62f3a-ad1e8c14806mr16022866b.23.1746550331503;
+        Tue, 06 May 2025 09:52:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -95,451 +95,112 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v2 10/16] xen/riscv: imsic_init() implementation
-Date: Tue,  6 May 2025 18:51:40 +0200
-Message-ID: <f7588e93d0ddacc29ce5d89b2855624f82d6baa9.1746530883.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 16/16] xen/riscv: add basic UART support
+Date: Tue,  6 May 2025 18:51:46 +0200
+Message-ID: <9fbcd17751fb0b7925d622631acb0030ee110465.1746530883.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-imsic_init() is introduced to parse device tree node, which has the following
-bindings [2], and based on the parsed information update IMSIC configuration
-which is stored in imsic_cfg.
+Update Kconfig to select GENERIC_UART_INIT for basic UART init ( find a dt node
+and call device specific device_init() ).
 
-The following helpers are introduces for imsic_init() usage:
-  - imsic_parse_node() parses IMSIC node from DTS
-  - imsic_get_parent_cpuid() returns the hart ( CPU ) ID of the given device
-    tree node.
+Drop `default n if RISCV` statement for config HAS_NS16550 as now ns16550 is
+ready to be compiled and used by RISC-V. Also, make the config user selectable
+for everyone except X86.
 
-This patch is based on the code from [1].
+Initialize a minimal amount of stuff to have UART and Xen console:
+ - Initialize uart by calling uart_init().
+ - Initialize Xen console by calling console_init_{pre,post}irq().
+ - Initialize timer and its internal lists which are used by
+   init_timer() which is called by ns16550_init_postirq(); otherwise
+   "Unhandled exception: Store/AMO Page Fault" occurs.
+ - Enable local interrupt to recieve an input from UART
 
-Since Microchip originally developed imsic.{c,h}, an internal discussion with
-them led to the decision to use the MIT license.
-
-[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/0b1a94f2bc3bb1a81cd26bb75f0bf578f84cb4d4
-[2] https://elixir.bootlin.com/linux/v6.12/source/Documentation/devicetree/bindings/interrupt-controller/riscv,imsics.yaml
-
-Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V2:
- - Drop years in copyrights.
- - s/riscv_of_processor_hartid/dt_processor_cpuid.
- - s/imsic_get_parent_hartid/imsic_get_parent_cpuid.
-   Rename argument hartid to cpuid.
-   Make node argument const.
-   Return res instead of -EINVAL for the failure case of dt_processor_cpuid().
-   Drop local variable hart and use cpuid argument instead.
-   Drop useless return res;
- - imsic_parse_node() changes:
-   - Make node argument const.
-   - Check the return value of dt_property_read_u32() directly instead of
-     saving it to rc variable.
-   - Update tmp usage, use short form "-=".
-   - Update a check (imsic_cfg.nr_ids >= IMSIC_MAX_ID) to (imsic_cfg.nr_ids > IMSIC_MAX_ID)
-     as IMSIC_MAX_ID is changed to maximum valid value, not just the firsr out-of-range.
-   - Use `rc` to return value instead of explicitly use -EINVAL.
-   - Use do {} while() to find number of MMIO register sets.
- - Set IMSIC_MAX_ID to 2047 (maximum possible IRQ number).
- - imsic_init() changes:
-   - Use unsigned int in for's expression1.
-   - s/xfree/XFEE.
-   - Allocate msi and cpus array dynamically.
- - Drop forward declaration before declaration of imsic_get_config() in asm/imsic.h
-   as it is not used as parameter type.
- - Align declaration of imisic_init with defintion.
- - s/harts/cpus in imisic_mmios.
-   Also, change type from bool harts[NR_CPUS] to unsigned long *cpus.
- - Allocate msi member of imsic_config dynamically to save some memory.
- - Code style fixes.
+Changes in v2:
+ - Drop #include <xen/keyhandler.h> in setup.c, isn't needed anymore.
+ - Drop call of percpu_init_areas() as it was needed when I used polling
+   mode for UART,  for this case percpu is used to receive serial port info:
+     struct serial_port *port = this_cpu(poll_port);
+   So percpu isn't really needed at the current development state.
+ - Make HAS_NS16550 user selectable for everyone, except X86.
  - Update the commit message.
 ---
- xen/arch/riscv/Makefile            |   1 +
- xen/arch/riscv/imsic.c             | 286 +++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/imsic.h |  65 +++++++
- 3 files changed, 352 insertions(+)
- create mode 100644 xen/arch/riscv/imsic.c
- create mode 100644 xen/arch/riscv/include/asm/imsic.h
+ xen/arch/riscv/Kconfig   |  1 +
+ xen/arch/riscv/setup.c   | 13 +++++++++++++
+ xen/drivers/char/Kconfig |  3 +--
+ 3 files changed, 15 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index a1c145c506..e2b8aa42c8 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -2,6 +2,7 @@ obj-y += aplic.o
- obj-y += cpufeature.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
- obj-y += entry.o
-+obj-y += imsic.o
- obj-y += intc.o
- obj-y += irq.o
- obj-y += mm.o
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-new file mode 100644
-index 0000000000..43d0c92cbd
---- /dev/null
-+++ b/xen/arch/riscv/imsic.c
-@@ -0,0 +1,286 @@
-+/* SPDX-License-Identifier: MIT */
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 60520dab57..eb44318dda 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -2,6 +2,7 @@ config RISCV
+ 	def_bool y
+ 	select FUNCTION_ALIGNMENT_16B
+ 	select GENERIC_BUG_FRAME
++	select GENERIC_UART_INIT
+ 	select HAS_DEVICE_TREE
+ 	select HAS_PMAP
+ 	select HAS_UBSAN
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 4f92266224..5c7cd568f0 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -4,12 +4,16 @@
+ #include <xen/bug.h>
+ #include <xen/bootfdt.h>
+ #include <xen/compile.h>
++#include <xen/console.h>
+ #include <xen/device_tree.h>
+ #include <xen/init.h>
+ #include <xen/irq.h>
+ #include <xen/mm.h>
++#include <xen/percpu.h>
++#include <xen/serial.h>
+ #include <xen/shutdown.h>
+ #include <xen/smp.h>
++#include <xen/timer.h>
+ #include <xen/vmap.h>
+ #include <xen/xvmalloc.h>
+ 
+@@ -136,8 +140,17 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     intc_preinit();
+ 
++    uart_init();
++    console_init_preirq();
 +
-+/*
-+ * xen/arch/riscv/imsic.c
-+ *
-+ * RISC-V Incoming MSI Controller support
-+ *
-+ * (c) Microchip Technology Inc.
-+ * (c) Vates
-+ */
+     intc_init();
+ 
++    timer_init();
 +
-+#include <xen/const.h>
-+#include <xen/device_tree.h>
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/macros.h>
-+#include <xen/xmalloc.h>
++    local_irq_enable();
 +
-+#include <asm/imsic.h>
++    console_init_postirq();
 +
-+static struct imsic_config imsic_cfg;
-+
-+/* Callers aren't expected to changed imsic_cfg so return const. */
-+const struct imsic_config *imsic_get_config(void)
-+{
-+    return &imsic_cfg;
-+}
-+
-+static int __init imsic_get_parent_cpuid(const struct dt_device_node *node,
-+                                         unsigned int index,
-+                                         unsigned long *cpuid)
-+{
-+    int res;
-+    struct dt_phandle_args args;
-+
-+    res = dt_parse_phandle_with_args(node, "interrupts-extended",
-+                                     "#interrupt-cells", index, &args);
-+    if ( !res )
-+        res = dt_processor_cpuid(args.np->parent, cpuid);
-+
-+    return res;
-+}
-+
-+static int imsic_parse_node(const struct dt_device_node *node,
-+                            unsigned int *nr_parent_irqs)
-+{
-+    int rc;
-+    unsigned int tmp;
-+    paddr_t base_addr;
-+
-+    /* Find number of parent interrupts */
-+    *nr_parent_irqs = dt_number_of_irq(node);
-+    if ( !*nr_parent_irqs )
-+    {
-+        printk(XENLOG_ERR "%s: no parent irqs available\n", node->name);
-+        return -ENOENT;
-+    }
-+
-+    if ( !dt_property_read_u32(node, "riscv,guest-index-bits",
-+                               &imsic_cfg.guest_index_bits) )
-+        imsic_cfg.guest_index_bits = 0;
-+    tmp = BITS_PER_LONG - IMSIC_MMIO_PAGE_SHIFT;
-+    if ( tmp < imsic_cfg.guest_index_bits )
-+    {
-+        printk(XENLOG_ERR "%s: guest index bits too big\n", node->name);
-+        return -ENOENT;
-+    }
-+
-+    /* Find number of HART index bits */
-+    if ( !dt_property_read_u32(node, "riscv,hart-index-bits",
-+                               &imsic_cfg.hart_index_bits) )
-+    {
-+        /* Assume default value */
-+        imsic_cfg.hart_index_bits = fls(*nr_parent_irqs);
-+        if ( BIT(imsic_cfg.hart_index_bits, UL) < *nr_parent_irqs )
-+            imsic_cfg.hart_index_bits++;
-+    }
-+    tmp -= imsic_cfg.guest_index_bits;
-+    if ( tmp < imsic_cfg.hart_index_bits )
-+    {
-+        printk(XENLOG_ERR "%s: HART index bits too big\n", node->name);
-+        return -ENOENT;
-+    }
-+
-+    /* Find number of group index bits */
-+    if ( !dt_property_read_u32(node, "riscv,group-index-bits",
-+                               &imsic_cfg.group_index_bits) )
-+        imsic_cfg.group_index_bits = 0;
-+    tmp -= imsic_cfg.hart_index_bits;
-+    if ( tmp < imsic_cfg.group_index_bits )
-+    {
-+        printk(XENLOG_ERR "%s: group index bits too big\n", node->name);
-+        return -ENOENT;
-+    }
-+
-+    /* Find first bit position of group index */
-+    tmp = IMSIC_MMIO_PAGE_SHIFT * 2;
-+    if ( !dt_property_read_u32(node, "riscv,group-index-shift",
-+                               &imsic_cfg.group_index_shift) )
-+        imsic_cfg.group_index_shift = tmp;
-+    if ( imsic_cfg.group_index_shift < tmp )
-+    {
-+        printk(XENLOG_ERR "%s: group index shift too small\n", node->name);
-+        return -ENOENT;
-+    }
-+    tmp = imsic_cfg.group_index_bits + imsic_cfg.group_index_shift - 1;
-+    if ( tmp >= BITS_PER_LONG )
-+    {
-+        printk(XENLOG_ERR "%s: group index shift too big\n", node->name);
-+        return -EINVAL;
-+    }
-+
-+    /* Find number of interrupt identities */
-+    if ( !dt_property_read_u32(node, "riscv,num-ids", &imsic_cfg.nr_ids) )
-+    {
-+        printk(XENLOG_ERR "%s: number of interrupt identities not found\n",
-+               node->name);
-+        return -ENOENT;
-+    }
-+
-+    if ( (imsic_cfg.nr_ids < IMSIC_MIN_ID) ||
-+         (imsic_cfg.nr_ids > IMSIC_MAX_ID) ||
-+         ((imsic_cfg.nr_ids & IMSIC_MIN_ID) != IMSIC_MIN_ID) )
-+    {
-+        printk(XENLOG_ERR "%s: invalid number of interrupt identities\n",
-+               node->name);
-+        return -EINVAL;
-+    }
-+
-+    /* Compute base address */
-+    imsic_cfg.nr_mmios = 0;
-+    rc = dt_device_get_address(node, imsic_cfg.nr_mmios, &base_addr, NULL);
-+    if ( rc )
-+    {
-+        printk(XENLOG_ERR "%s: first MMIO resource not found\n", node->name);
-+        return rc;
-+    }
-+
-+    imsic_cfg.base_addr = base_addr;
-+    imsic_cfg.base_addr &= ~(BIT(imsic_cfg.guest_index_bits +
-+                           imsic_cfg.hart_index_bits +
-+                           IMSIC_MMIO_PAGE_SHIFT, UL) - 1);
-+    imsic_cfg.base_addr &= ~((BIT(imsic_cfg.group_index_bits, UL) - 1) <<
-+                           imsic_cfg.group_index_shift);
-+
-+    /* Find number of MMIO register sets */
-+    do {
-+        imsic_cfg.nr_mmios++;
-+    } while ( !dt_device_get_address(node, imsic_cfg.nr_mmios, &base_addr, NULL) );
-+
-+    return 0;
-+}
-+
-+int __init imsic_init(const struct dt_device_node *node)
-+{
-+    int rc;
-+    unsigned long reloff, cpuid;
-+    uint32_t nr_parent_irqs, index, nr_handlers = 0;
-+    paddr_t base_addr;
-+    unsigned int nr_mmios;
-+
-+    /* Parse IMSIC node */
-+    rc = imsic_parse_node(node, &nr_parent_irqs);
-+    if ( rc )
-+        return rc;
-+
-+    nr_mmios = imsic_cfg.nr_mmios;
-+
-+    /* Allocate MMIO resource array */
-+    imsic_cfg.mmios = xzalloc_array(struct imsic_mmios, nr_mmios);
-+    if ( !imsic_cfg.mmios )
-+        return -ENOMEM;
-+
-+    imsic_cfg.msi = xzalloc_array(struct imsic_msi, nr_parent_irqs);
-+    if ( !imsic_cfg.msi )
-+        return -ENOMEM;
-+
-+    /* Check MMIO register sets */
-+    for ( unsigned int i = 0; i < nr_mmios; i++ )
-+    {
-+        imsic_cfg.mmios[i].cpus = xzalloc_array(unsigned long,
-+                                                BITS_TO_LONGS(nr_parent_irqs));
-+        if ( !imsic_cfg.mmios[i].cpus )
-+            return -ENOMEM;
-+
-+        rc = dt_device_get_address(node, i, &imsic_cfg.mmios[i].base_addr,
-+                                   &imsic_cfg.mmios[i].size);
-+        if ( rc )
-+        {
-+            printk(XENLOG_ERR "%s:  unable to parse MMIO regset %d\n",
-+                   node->name, i);
-+            goto imsic_init_err;
-+        }
-+
-+        base_addr = imsic_cfg.mmios[i].base_addr;
-+        base_addr &= ~(BIT(imsic_cfg.guest_index_bits +
-+                     imsic_cfg.hart_index_bits +
-+                     IMSIC_MMIO_PAGE_SHIFT, UL) - 1);
-+        base_addr &= ~((BIT(imsic_cfg.group_index_bits, UL) - 1) <<
-+                     imsic_cfg.group_index_shift);
-+        if ( base_addr != imsic_cfg.base_addr )
-+        {
-+            rc = -EINVAL;
-+            printk(XENLOG_ERR "%s: address mismatch for regset %d\n",
-+                   node->name, i);
-+            goto imsic_init_err;
-+        }
-+    }
-+
-+    /* Configure handlers for target CPUs */
-+    for ( unsigned int i = 0; i < nr_parent_irqs; i++ )
-+    {
-+        rc = imsic_get_parent_cpuid(node, i, &cpuid);
-+        if ( rc )
-+        {
-+            printk(XENLOG_WARNING "%s: cpu ID for parent irq%d not found\n",
-+                   node->name, i);
-+            continue;
-+        }
-+
-+        if ( cpuid >= num_possible_cpus() )
-+        {
-+            printk(XENLOG_WARNING "%s: unsupported cpu ID=%lu for parent irq%d\n",
-+                   node->name, cpuid, i);
-+            continue;
-+        }
-+
-+        /* Find MMIO location of MSI page */
-+        index = nr_mmios;
-+        reloff = i * BIT(imsic_cfg.guest_index_bits, UL) * IMSIC_MMIO_PAGE_SZ;
-+        for ( unsigned int j = 0; nr_mmios; j++ )
-+        {
-+            if ( reloff < imsic_cfg.mmios[j].size )
-+            {
-+                index = j;
-+                break;
-+            }
-+
-+            /*
-+             * MMIO region size may not be aligned to
-+             * BIT(global->guest_index_bits) * IMSIC_MMIO_PAGE_SZ
-+             * if holes are present.
-+             */
-+            reloff -= ROUNDUP(imsic_cfg.mmios[j].size,
-+                BIT(imsic_cfg.guest_index_bits, UL) * IMSIC_MMIO_PAGE_SZ);
-+        }
-+
-+        if ( index >= nr_mmios )
-+        {
-+            printk(XENLOG_WARNING "%s: MMIO not found for parent irq%d\n",
-+                   node->name, i);
-+            continue;
-+        }
-+
-+        if ( !IS_ALIGNED(imsic_cfg.msi[cpuid].base_addr + reloff, PAGE_SIZE) )
-+        {
-+            printk(XENLOG_WARNING "%s: MMIO address 0x%lx is not aligned on a page\n",
-+                   node->name, imsic_cfg.msi[cpuid].base_addr + reloff);
-+            imsic_cfg.msi[cpuid].offset = 0;
-+            imsic_cfg.msi[cpuid].base_addr = 0;
-+            continue;
-+        }
-+
-+        bitmap_set(imsic_cfg.mmios[index].cpus, cpuid, 1);
-+        imsic_cfg.msi[cpuid].base_addr = imsic_cfg.mmios[index].base_addr;
-+        imsic_cfg.msi[cpuid].offset = reloff;
-+        nr_handlers++;
-+    }
-+
-+    if ( !nr_handlers )
-+    {
-+        printk(XENLOG_ERR "%s: No CPU handlers found\n", node->name);
-+        rc = -ENODEV;
-+        goto imsic_init_err;
-+    }
-+
-+    return 0;
-+
-+ imsic_init_err:
-+    for ( unsigned int i = 0; i < nr_mmios; i++ )
-+        XFREE(imsic_cfg.mmios[i].cpus);
-+    XFREE(imsic_cfg.mmios);
-+    XFREE(imsic_cfg.msi);
-+
-+    return rc;
-+}
-diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-new file mode 100644
-index 0000000000..ed51cac780
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/imsic.h
-@@ -0,0 +1,65 @@
-+/* SPDX-License-Identifier: MIT */
-+
-+/*
-+ * xen/arch/riscv/imsic.h
-+ *
-+ * RISC-V Incoming MSI Controller support
-+ *
-+ * (c) 2023 Microchip Technology Inc.
-+ */
-+
-+#ifndef ASM__RISCV__IMSIC_H
-+#define ASM__RISCV__IMSIC_H
-+
-+#include <xen/types.h>
-+
-+#define IMSIC_MMIO_PAGE_SHIFT   12
-+#define IMSIC_MMIO_PAGE_SZ      (1UL << IMSIC_MMIO_PAGE_SHIFT)
-+
-+#define IMSIC_MIN_ID            63
-+#define IMSIC_MAX_ID            2047
-+
-+struct imsic_msi {
-+    paddr_t base_addr;
-+    unsigned long offset;
-+};
-+
-+struct imsic_mmios {
-+    paddr_t base_addr;
-+    unsigned long size;
-+    unsigned long *cpus;
-+};
-+
-+struct imsic_config {
-+    /* base address */
-+    paddr_t base_addr;
-+
-+    /* Bits representing Guest index, HART index, and Group index */
-+    unsigned int guest_index_bits;
-+    unsigned int hart_index_bits;
-+    unsigned int group_index_bits;
-+    unsigned int group_index_shift;
-+
-+    /* imsic phandle */
-+    unsigned int phandle;
-+
-+    /* number of parent irq */
-+    unsigned int nr_parent_irqs;
-+
-+    /* number off interrupt identities */
-+    unsigned int nr_ids;
-+
-+    /* mmios */
-+    unsigned int nr_mmios;
-+    struct imsic_mmios *mmios;
-+
-+    /* MSI */
-+    struct imsic_msi *msi;
-+};
-+
-+struct dt_device_node;
-+int imsic_init(const struct dt_device_node *node);
-+
-+const struct imsic_config *imsic_get_config(void);
-+
-+#endif /* ASM__RISCV__IMSIC_H */
+     printk("All set up\n");
+ 
+     machine_halt();
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index e6e12bb413..8e49a52c73 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -2,8 +2,7 @@ config GENERIC_UART_INIT
+ 	bool
+ 
+ config HAS_NS16550
+-	bool "NS16550 UART driver" if ARM
+-	default n if RISCV
++	bool "NS16550 UART driver" if !X86
+ 	default y
+ 	help
+ 	  This selects the 16550-series UART support. For most systems, say Y.
 -- 
 2.49.0
 
