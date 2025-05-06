@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EE8C3ABBF
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 08:54:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.976882.1363993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C04C3ABBF
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 09:00:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.976893.1364003 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCE4O-00053y-Sw; Tue, 06 May 2025 08:54:32 +0000
+	id 1uCEAM-0006bM-GH; Tue, 06 May 2025 09:00:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 976882.1363993; Tue, 06 May 2025 08:54:32 +0000
+Received: by outflank-mailman (output) from mailman id 976893.1364003; Tue, 06 May 2025 09:00:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCE4O-00053r-Pp; Tue, 06 May 2025 08:54:32 +0000
-Received: by outflank-mailman (input) for mailman id 976882;
- Tue, 06 May 2025 08:54:30 +0000
+	id 1uCEAM-0006bF-D6; Tue, 06 May 2025 09:00:42 +0000
+Received: by outflank-mailman (input) for mailman id 976893;
+ Tue, 06 May 2025 09:00:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vx1h=XW=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uCE4M-00053l-Kn
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 08:54:30 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ id 1uCEAL-0006b9-2R
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 09:00:41 +0000
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [2a00:1450:4864:20::633])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b897d3c9-2a57-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 10:54:29 +0200 (CEST)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cf628cb14so44676745e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 01:54:29 -0700 (PDT)
+ id 9561280a-2a58-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 11:00:40 +0200 (CEST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ace94273f0dso251252266b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 02:00:40 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-441b89cc480sm164539785e9.2.2025.05.06.01.54.28
+ ffacd0b85a97d-3a099ae34e2sm12632186f8f.24.2025.05.06.01.34.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 01:54:28 -0700 (PDT)
+ Tue, 06 May 2025 01:34:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,136 +46,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b897d3c9-2a57-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 9561280a-2a58-11f0-9eb4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1746521669; x=1747126469; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=+0SajNHqz8FlHrvr6rdfNoWBqxUWnEZs/LJ4gSlGzr0=;
-        b=J2a1mw63rnduitq/WHvJP5YOrq43zlaGFmpirhoES1IWn9R8uznLXkLNr7oNvD9PWb
-         bdeInbJkGIP8M/K/dtd5LbuoVendlyrxdTcmUWCsJcCIwz6/m38rrBKiwm5k7IuyJB6p
-         dIomP7wqRVBCh4yDw+chAe9Y9iWfGP5U8oWOU=
+        d=citrix.com; s=google; t=1746522039; x=1747126839; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N+W9lEzZ3YPqEiQclAW6B381YvWea5VfolcXUQFEZ2o=;
+        b=WAgbHJofF7HgM3TMPI8TiQstYkTEQQwtthrPWF58srf1m8N5cb6pV0eLFI+tf8Xi8a
+         4tFBhyZp9yg0272GIGPEcVO6l6HfoUSp8/fkLlsCjKiYBiIbsNmD3ZAZDw7AW7whoEa4
+         +3mZZToVGaJZ3zzUkQVZGWkF8TazU6zB7DPOY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746521669; x=1747126469;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+0SajNHqz8FlHrvr6rdfNoWBqxUWnEZs/LJ4gSlGzr0=;
-        b=bqmLrYUKua5eyIXFHmsKXh+/jQXFipzCqu+t6sTbS6KSUtd7oYMrZjV3MTAPpmVEAG
-         uKfbKjL8x4W6p76Rx+nX81+tIrOGncqwPdSXhNOsyc+6ADhi38G+VjPNUvllwxnXjKp6
-         b7uFiIdm6kbPDtQ0cSfmWRXwlVEfu6Sm1s332kK1Akn+fuxeGTyrFQ8k2CDxObaeU8En
-         lWF1NLD9uBo1wxRfgpthDd1rZ/i9UF/WlGkQjbBvUKjOs8xAc72ji1maS+CmmigHnjIM
-         pjvoZnl485Qh8GDZK9hvRUnuSHC32CBUTG81MJNhu7t2rsNB8MFE+0L9cGzrjyTrqEt3
-         mFYA==
-X-Forwarded-Encrypted: i=1; AJvYcCVuz9MzIeJx93iTQ4Z/sxugI5c2fGHPyVtzf/A0VdlipuvEgKMsEIPCuzFFoxC+Ba3MTRB8ie1I5kA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz6MERjMCUUfqdEKBtEhE4DJ3kkFhCMnHGNBDiJ7RjuxYntSsrl
-	K7n26XFQWKTUVnfTP3JrBrH/cTPUDmLDzHRujb9Qnky2VM/4A8otQ0/LhtAJnqo=
-X-Gm-Gg: ASbGnctYe3D6RwNdOYt+JO+cqo9afh7MdRCOkBlzFXlJMT+1k3xWsqJVFxPXXqeZB2r
-	I4eZ9apLo1kPhoHqhDeS2us6a/BXkChp+RazVnnUnVIZS1WmxWVpPufqT6zhf4LbvrVE13dWYnS
-	QCJoWwJEQSsROX2oiy6rWW7yMccEE7vDhEGjQZeIzcZZloXO0hNJuOcLw0iRD4hxPboCzFpqbwf
-	Pp1Glo4qdIO7UYxRQ5T2i6iWHrYeRcvIsKoG3gkkLaV7RyxokEIh89gtEE6291nUBFuZE/riVXq
-	f90iGNZkPZj4HvbM9J2eiRRVhB0CRYyE49T/kZmXwytPGQ==
-X-Google-Smtp-Source: AGHT+IGcfeuMfQA6qm9TEp5NEI75xmqMffcPFN6YhQwISDTqYwB+9zrq9ETiFz9lGJmSic7d2JGQ9g==
-X-Received: by 2002:a05:600c:83cd:b0:43d:b33:679c with SMTP id 5b1f17b1804b1-441d00fa788mr25297895e9.14.1746521669092;
-        Tue, 06 May 2025 01:54:29 -0700 (PDT)
-Date: Tue, 6 May 2025 10:54:27 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+        d=1e100.net; s=20230601; t=1746522039; x=1747126839;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=N+W9lEzZ3YPqEiQclAW6B381YvWea5VfolcXUQFEZ2o=;
+        b=ULECoRQa5H+GO103fTqwpdPlnboMArrWMUl0iZOM8SKwQpuGw1jhed81V5Fxh9NkWG
+         o+AMuiFEbt2x4KerQ8o8ltAMMnnN8V4pfoLSVL5wV5y3Az3412OO+7tmyDlYT/lhlw7g
+         kZrCNdpuyWqVhRp/DniaOmnsYyx0gEmdQS8t8qwVUKN1seyPKd6s5j5PwAlTxGQ7Mn4w
+         u2l3RBD0wib9RRa16fV0evGFYJzzOXXypnNfBJlRWyG6ZUW0jAnHXamVUgvyl14hgny5
+         U7P88MnY1ETAdX5qV/ytfZ7Xg8dQm2z3wsqS2dI7U7auOIc7/cU74sDYn0KD5RH6le6m
+         R/tw==
+X-Gm-Message-State: AOJu0YxhAgsGxRhMMo0CY2EXd0WM96LnfmFgqQ+UHQbkXZ8vaEoisJEt
+	X7y9+4lhcWQLcpDHtYuuohQw9/gfQWoKsWMzjW8H37Cs5hNWXgRrM0RQJr9ACCgxocaU/obKkYm
+	g
+X-Gm-Gg: ASbGncvUe163xnv2zbm6U4d6TWb/BgQrrTp6e69uErJ3QiZjaW4wBHFY41XrV41ht1a
+	gewdQa/1vyq/om+WyjB5Kr9LNAESRiShFbrGobR9UpaTjNkuCwRjtCRfr5WqjmbZkwNf9emTHRP
+	iMHhKCehn4O73maQY6FmYZYz5LbFKXVHRluPmziU4N/gXEzG9tgphhdAgjsdnpmywTWWUjpI4Ya
+	gaYHIXLcNjURMBgwhy36rDl40m5drKaGSIEinqoX3cb6EqMWD9bluA81dRNKIdf+WEptZFUGbB2
+	KrRQASIOrknxN70Kzd0TzTWfgxCvNtSgVKCm0YxdKlezvA==
+X-Google-Smtp-Source: AGHT+IGhxmBqCb7xdHw4VhQuhl4tgy/BOqgPbggvS46dewpZnmq+sg0FvdSOBL2lOWhwvg/D+TI0Bw==
+X-Received: by 2002:a05:6000:1886:b0:39c:1f10:c736 with SMTP id ffacd0b85a97d-3a09fdbc906mr9154530f8f.43.1746520488398;
+        Tue, 06 May 2025 01:34:48 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	"Ragiadakou, Xenia" <Xenia.Ragiadakou@amd.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, jason.andryuk@amd.com,
-	agarciav@amd.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] xen/x86: allow Dom0 PVH to call XENMEM_exchange
-Message-ID: <aBnOQyXSz-j33Wux@macbook.lan>
-References: <alpine.DEB.2.22.394.2504251314050.785180@ubuntu-linux-20-04-desktop>
- <19d9aec4-c21a-47a9-9c58-6bfcadbd22e0@suse.com>
- <alpine.DEB.2.22.394.2504281242240.785180@ubuntu-linux-20-04-desktop>
- <aBiVkw2SXJHxpieh@mail-itl>
- <aBjLoM_ttxqftzlp@macbook.lan>
- <alpine.DEB.2.22.394.2505051100050.3879245@ubuntu-linux-20-04-desktop>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 4/9] x86/gnttab: do not implement GNTTABOP_cache_flush
+Date: Tue,  6 May 2025 10:31:43 +0200
+Message-ID: <20250506083148.34963-5-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250506083148.34963-1-roger.pau@citrix.com>
+References: <20250506083148.34963-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <alpine.DEB.2.22.394.2505051100050.3879245@ubuntu-linux-20-04-desktop>
 
-On Mon, May 05, 2025 at 11:11:10AM -0700, Stefano Stabellini wrote:
-> On Mon, 5 May 2025, Roger Pau Monné wrote:
-> > On Mon, May 05, 2025 at 12:40:18PM +0200, Marek Marczykowski-Górecki wrote:
-> > > On Mon, Apr 28, 2025 at 01:00:01PM -0700, Stefano Stabellini wrote:
-> > > > On Mon, 28 Apr 2025, Jan Beulich wrote:
-> > > > > On 25.04.2025 22:19, Stefano Stabellini wrote:
-> > > > > > From: Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>
-> > > > > > 
-> > > > > > Dom0 PVH might need XENMEM_exchange when passing contiguous memory
-> > > > > > addresses to firmware or co-processors not behind an IOMMU.
-> > > > > 
-> > > > > I definitely don't understand the firmware part: It's subject to the
-> > > > > same transparent P2M translations as the rest of the VM; it's just
-> > > > > another piece of software running there.
-> > > > > 
-> > > > > "Co-processors not behind an IOMMU" is also interesting; a more
-> > > > > concrete scenario might be nice, yet I realize you may be limited in
-> > > > > what you're allowed to say.
-> > > > 
-> > > > Sure. On AMD x86 platforms there is a co-processor called PSP running
-> > > > TEE firmware. The PSP is not behind an IOMMU. Dom0 needs occasionally to
-> > > > pass addresses to it.  See drivers/tee/amdtee/ and
-> > > > include/linux/psp-tee.h in Linux.
-> > > 
-> > > We had (have?) similar issue with amdgpu (for integrated graphics) - it
-> > > uses PSP for loading its firmware. With PV dom0 there is a workaround as
-> > > dom0 kinda knows MFN. I haven't tried PVH dom0 on such system yet, but I
-> > > expect troubles (BTW, hw1 aka zen2 gitlab runner has amdgpu, and it's
-> > > the one I used for debugging this issue).
-> > 
-> > That's ugly, and problematic when used in conjunction with AMD-SEV.
-> > 
-> > I wonder if Xen could emulate/mediate some parts of the PSP for dom0
-> > to use, while allowing Xen to be the sole owner of the device.  Having
-> > both Xen and dom0 use it (for different purposes) seems like asking
-> > for trouble.  But I also have no idea how complex the PSP interface
-> > is, neither whether it would be feasible to emulate the
-> > interfaces/registers needed for firmware loading.
-> 
-> Let me take a step back from the PSP for a moment. I am not opposed to a
-> PSP mediator in Xen, but I want to emphasize that the issue is more
-> general and extends well beyond the PSP.
-> 
-> In my years working in embedded systems, I have consistently seen cases
-> where Dom0 needs to communicate with something that does not go through
-> the IOMMU. This could be due to special firmware on a co-processor, a
-> hardware erratum that prevents proper IOMMU usage, or a high-bandwidth
-> device that technically supports the IOMMU but performs poorly unless
-> the IOMMU is disabled. All of these are real-world examples that I have
-> seen personally.
+The current underlying implementation of GNTTABOP_cache_flush on x86 won't
+work as expected.  The provided {clean,invalidate}_dcache_va_range()
+helpers only do a local pCPU cache flush, so the cache of previous pCPUs
+where the vCPU might have run are not flushed.
 
-I wouldn't be surprised, classic PV dom0 avoided those issues because
-it was dealing directly with host addresses (mfns), but that's not the
-case with PVH dom0.
+However instead of attempting to fix this, make the GNTTABOP_cache_flush
+operation only available to ARM.  There are no known users on x86, the
+implementation is broken, and other architectures don't have grant-table
+support yet.
 
-> In my opinion, we definitely need a solution like this patch for Dom0
-> PVH to function correctly in all scenarios.
+With that operation not implemented on x86, the related
+{clean,invalidate}_dcache_va_range() helpers can also be removed.
 
-I'm not opposed to having such interface available for PVH hardware
-domains.  I find it ugly, but I don't see much other way to deal with
-those kind of "devices".  Xen mediating accesses for each one of them
-is unlikely to be doable.
+Fixes: f62dc81c2df7 ("x86: introduce more cache maintenance operations")
+Fixes: 18e8d22fe750 ("introduce GNTTABOP_cache_flush")
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+I've attempted to introduce a new arch_do_grant_table_op() in a separate
+arch-specific file, but it required exposing too much functionality from
+the common grant_table.c, ifdefying is probably better for the time being.
+---
+ xen/arch/x86/include/asm/flushtlb.h | 15 ---------------
+ xen/common/grant_table.c            |  6 ++++++
+ 2 files changed, 6 insertions(+), 15 deletions(-)
 
-How do you hook this exchange interface into Linux to differentiate
-which drivers need to use mfns when interacting with the hardware?
+diff --git a/xen/arch/x86/include/asm/flushtlb.h b/xen/arch/x86/include/asm/flushtlb.h
+index bb0ad58db49b..d0c9120b5faf 100644
+--- a/xen/arch/x86/include/asm/flushtlb.h
++++ b/xen/arch/x86/include/asm/flushtlb.h
+@@ -182,21 +182,6 @@ void flush_area_mask(const cpumask_t *mask, const void *va,
+ }
+ 
+ static inline void flush_page_to_ram(unsigned long mfn, bool sync_icache) {}
+-static inline int invalidate_dcache_va_range(const void *p,
+-                                             unsigned long size)
+-{ return -EOPNOTSUPP; }
+-static inline int clean_and_invalidate_dcache_va_range(const void *p,
+-                                                       unsigned long size)
+-{
+-    unsigned int order = get_order_from_bytes(size);
+-    /* sub-page granularity support needs to be added if necessary */
+-    flush_area_local(p, FLUSH_CACHE|FLUSH_ORDER(order));
+-    return 0;
+-}
+-static inline int clean_dcache_va_range(const void *p, unsigned long size)
+-{
+-    return clean_and_invalidate_dcache_va_range(p, size);
+-}
+ 
+ unsigned int guest_flush_tlb_flags(const struct domain *d);
+ void guest_flush_tlb_mask(const struct domain *d, const cpumask_t *mask);
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index d874ac5f1241..cc7c7d004065 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -940,6 +940,7 @@ static void reduce_status_for_pin(struct domain *rd,
+         gnttab_clear_flags(rd, clear_flags, status);
+ }
+ 
++#ifdef CONFIG_ARM
+ static struct active_grant_entry *grant_map_exists(const struct domain *ld,
+                                                    struct grant_table *rgt,
+                                                    mfn_t mfn,
+@@ -975,6 +976,7 @@ static struct active_grant_entry *grant_map_exists(const struct domain *ld,
+ 
+     return ERR_PTR(-EINVAL);
+ }
++#endif /* CONFIG_ARM */
+ 
+ union maptrack_node {
+     struct {
+@@ -3520,6 +3522,7 @@ gnttab_swap_grant_ref(XEN_GUEST_HANDLE_PARAM(gnttab_swap_grant_ref_t) uop,
+     return 0;
+ }
+ 
++#ifdef CONFIG_ARM
+ static int _cache_flush(const gnttab_cache_flush_t *cflush, grant_ref_t *cur_ref)
+ {
+     struct domain *d, *owner;
+@@ -3631,6 +3634,7 @@ gnttab_cache_flush(XEN_GUEST_HANDLE_PARAM(gnttab_cache_flush_t) uop,
+ 
+     return 0;
+ }
++#endif /* CONFIG_ARM */
+ 
+ long do_grant_table_op(
+     unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop, unsigned int count)
+@@ -3773,6 +3777,7 @@ long do_grant_table_op(
+         break;
+     }
+ 
++#ifdef CONFIG_ARM
+     case GNTTABOP_cache_flush:
+     {
+         XEN_GUEST_HANDLE_PARAM(gnttab_cache_flush_t) cflush =
+@@ -3794,6 +3799,7 @@ long do_grant_table_op(
+         }
+         break;
+     }
++#endif
+ 
+     default:
+         rc = -ENOSYS;
+-- 
+2.48.1
 
-> Additionally, we could add a PSP mediator in Xen to provide best PSP
-> support, and also for cases where both Xen and Dom0 need access, but I
-> cannot fully assess the complexity involved, as I am not very familiar
-> with the API. Probably it is not going to be simple.
-
-For the specific PSP example, and kind of following from the question
-above: if we add some mediation layer in Xen for PSP registers, how
-could Linux differentiate whether it needs to use mfn of gfns when
-interacting with the device?
-
-Thanks, Roger.
 
