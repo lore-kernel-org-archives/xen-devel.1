@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B353C3ABAC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:03:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977776.1364743 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BED89C3ABBE
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:03:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977771.1364732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLhd-00079g-FU; Tue, 06 May 2025 17:03:33 +0000
+	id 1uCLhc-0006vE-7K; Tue, 06 May 2025 17:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977776.1364743; Tue, 06 May 2025 17:03:33 +0000
+Received: by outflank-mailman (output) from mailman id 977771.1364732; Tue, 06 May 2025 17:03:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLhd-00079X-Bq; Tue, 06 May 2025 17:03:33 +0000
-Received: by outflank-mailman (input) for mailman id 977776;
- Tue, 06 May 2025 17:03:31 +0000
+	id 1uCLhc-0006v7-4m; Tue, 06 May 2025 17:03:32 +0000
+Received: by outflank-mailman (input) for mailman id 977771;
+ Tue, 06 May 2025 17:03:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uCLWd-00058E-A5
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:11 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
+ id 1uCLWf-00058E-AM
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:13 +0000
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [2a00:1450:4864:20::529])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 71f6a8f8-2a9a-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 18:52:07 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac2bb7ca40bso1018488766b.3
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:07 -0700 (PDT)
+ id 73c51a7d-2a9a-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 18:52:10 +0200 (CEST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5c7d6b96fso11138294a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:10 -0700 (PDT)
 Received: from fedora.. (user-109-243-69-225.play-internet.pl.
  [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.05
+ a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 09:52:06 -0700 (PDT)
+ Tue, 06 May 2025 09:52:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71f6a8f8-2a9a-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 73c51a7d-2a9a-11f0-9eb4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746550327; x=1747155127; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1746550330; x=1747155130; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZIRZTc0vLBatCko0zk/UXfbMtR+m+ezQ4Ux4TBsMyjQ=;
-        b=Ar0NsDHSl4LX9nmusY/YTa1ITEZJIc4Rz3h76qPk+j/F3A6/oAGsVmMp8RFn9E2muL
-         5mCCkTrunm7DsjSnnexzqx7P57Lo0mlbS2vUD4Cla1NcnZYlvEthe46YEsjDR2hBcMs6
-         U/uXs/agEBJ7EEnV4tBYYJqLlvfJ2lFKe30oYWQceYYYeP3JV8TM15h403e3WPS/A4oa
-         x9LVDAXEU3mP3PdrhssXca1KQPY0tfKjwxdIhZsuTory+82olFcVOnmmj0zp2zJ9zkBE
-         Nga9O00DgDQbbFOuYr8N4HkHnlALDvorr8kD1pGOSUYqZeI7bGC/EIsribj0jOWibtAg
-         AQ0w==
+        bh=P6Bqs4HUZYvlu7+UKZCeflArWZzpdjYXovI0MbCmOOQ=;
+        b=TUxILspRiu/N+p+mxbWi5uTmvv9OTkoPYKTf3Bj3b6Qp5bt0QvHBa9bhj3fmEncmhy
+         MkXRaXR160BeBP7HlE4tcQgLP7gew4V5PO6RKd13b36GIzKRDr8+MQVM8z3ti3pXhEFT
+         dLe0zuPAtlCELS9yBaI+x5epheUq3lVr75k8Im7Ap05eedjGVLCG0gJnGSHbKgEUoVea
+         z4BUrAPWnQ5ToJeW+igrNqMFqNOEkqi0Hqe81F3EoHjmjTUWa3QJ9o4KcqUT86jaIVdy
+         y/EgyKAnn916WztrhvAkq5J4nep975QndqzRt4T+G2ikNL3DOnWeE5C1PHfzv1jSqi6p
+         l+7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746550327; x=1747155127;
+        d=1e100.net; s=20230601; t=1746550330; x=1747155130;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ZIRZTc0vLBatCko0zk/UXfbMtR+m+ezQ4Ux4TBsMyjQ=;
-        b=R/H+sWQsiuk1wLDmcPbmQB54MWNrmQEqrHNuOs0w6TTZQAzjxgD3OS8twDWRuP4P/G
-         8Ulz4sqYIDN8e1mHQQCTX2mnMJGs/S5rVIPui3lpqKsujSFOneCNoMuZkYjMCrwujYoJ
-         oeyro1tsC/ZLNw8t1DZk7V3y/MbfDHccxg2pIb4uhLh9ZOC6N01Ai0Q0ZNxa0rRg6e0g
-         MGDMCN4jcopSdbAWPN5jk7XPznTyhnJzNQCRBUKJ26/jG/Tz9MVTcX1BpQA13N8errX1
-         C9fUOFpDBTtv+Nz5ouXugjd5Jld3o49wKgq0/jSqda88vsRFS+yVgMb7nnwg42aZEebc
-         ButA==
-X-Gm-Message-State: AOJu0YxXvsDocdrZL+zr3AYhwuUx83I1c7OgmlA7U3kyK4+rABwGKyq+
-	IBKLo3UGwC4BEyjY8DTco9wXN66Fc4A13oBIO9DaBvErs+E/X8tC6hx58w==
-X-Gm-Gg: ASbGncu2XiwZW1m4nHJhc1Z6y2WKgzB6HMc7SfaS4+WZMYwFmyPDBKl1mLCRGsXXR5X
-	FmLThuKtAEEysTMTTnnH58xJrgebYyaKgsJNN3LD4aaG1eL9Z36kSWz4h1foneqzvSMNSCCOFll
-	B2UjKw6MfSDmk+vtXItr+mAk3gzmeuLDyII2b3LHORJh+D5sCv8CrZ5gasS2JgSfJGSJ9HcRPyR
-	RQbNz2qOspzojG11/9g0GGP2CFjI6lrFtGjOuZ6gn66E4cfFTwq0QKrF3cz58ZhBsVSM8xKxj1w
-	7W9Xwomj2mliktBc5V5I1ISg0SeLCbB1pqU1RnG5DcjFXSLhRD3Y0p77acK9ffCVGtPV6vAP+RO
-	6zdxsnBIGkpIMuZy3px19
-X-Google-Smtp-Source: AGHT+IFL3eXemXbrwhyJqd+wyul2UXQ2sa9GN9ToBu2ZpXUyWxeG/kGZi6BZ3DFnaC4TQOqn9yQOrg==
-X-Received: by 2002:a17:907:8d87:b0:ad1:e7f2:b94e with SMTP id a640c23a62f3a-ad1e8bcc880mr23868866b.18.1746550326504;
-        Tue, 06 May 2025 09:52:06 -0700 (PDT)
+        bh=P6Bqs4HUZYvlu7+UKZCeflArWZzpdjYXovI0MbCmOOQ=;
+        b=Rr7exofxNEb3JKLTQBh/dULoM2TLwtZnJxTpFsWcb+FXsrpTe7piHEKaQBOEN3c+8u
+         46l/oxvLBMY9RNWIAFRpBrBsANv5gj+ooux685Hger26c6xPlmHcGusdqRfZpMdiLsNf
+         93QhMRUTJw2CTOIjUpYTk5dMg0VnorVUvdP8I1RqweETF/jgKL/d5e0OaA2qtB3aWKgL
+         uGn655IH58Tpj7qM9KqX4GFi2gPHXdnjqRIo/PpM3yFWM4DBB2v8kt4IIjLRY/sFHeSc
+         ddNSK2+zZi+JApGhEFy4wcHVOtXo7jjMskVuTOCsen9bzRPRGZQDSHolhEjHB2TKpwih
+         /m0w==
+X-Gm-Message-State: AOJu0YzPF5DlDHjcIXYII4aLlx9zYPWTpL/XQHK1rczTVGP9XN6nwzVz
+	pooOCorq4it8uSq/4rB0fnRa480RiIc1/4LVEOEWI++VWIesGg8v5GsFGQ==
+X-Gm-Gg: ASbGnctMXlCm+YvdGG9+BzWrNAwARkPesaIV2MOdsWnMFZCKVQooTIOzlgQTrIDMggb
+	F2khTJDlVdzYSilAKlzyxhFyWPDXXN3fKWjhBDYFSdHR86+78Et5sihZhHV6Oz+i7AIEjOSXg/7
+	sC4gnil/ovpZQSk4ujF4SxFfhpQfuyvjCYl9VfVhfQmngN89cdLcr6FRSAmw87hlSlQ2O11f7df
+	qJld/oBz8IvPNb8u3XW1GNFWuG8J7OeQq8wEckI/b2EhQKKx1Uiy2KRSdMYpyLNbMRaJg1XgOLi
+	C8LNoBhp9rhoZYpNH9T60UtifrQeuXJ274lZDusbLXTtoXcLu+7eJRVv/Qe4AEgo/O5pf3u3cGw
+	+XzkWt0z7QQ==
+X-Google-Smtp-Source: AGHT+IGmp6lEcZuOM7EOyfKzzNLgVyhyK3ohwHus5N69zv5PaqpnW7B0bPc6iRwxRjxJgODrKgddtQ==
+X-Received: by 2002:a17:907:d87:b0:ad1:8b5c:114b with SMTP id a640c23a62f3a-ad1e8bc3344mr23293766b.18.1746550329573;
+        Tue, 06 May 2025 09:52:09 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -97,332 +97,364 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v2 11/16] xen/riscv: aplic_init() implementation
-Date: Tue,  6 May 2025 18:51:41 +0200
-Message-ID: <9129b10432dfc7ff8ba451842204342171da7dc1.1746530883.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 14/16] xen/riscv: add external interrupt handling for hypervisor mode
+Date: Tue,  6 May 2025 18:51:44 +0200
+Message-ID: <5688ed044febf734d9c75aa2e6f52affccd3fce9.1746530883.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=all
 Content-Transfer-Encoding: 8bit
 
-aplic_init() function does the following few things:
- - checks that IMSIC in device tree node  ( by checking msi-parent property
-   in APLIC node ) is present as current one implmenetaion of AIA is
-   supported only MSI method.
- - initialize IMSIC based on IMSIC device tree node
- - Read value of APLIC's paddr start/end and size.
- - Map aplic.regs
- - Setup APLIC initial state interrupts (disable all interrupts, set
-   interrupt type and default priority, confgifure APLIC domaincfg) by
-   calling aplic_init_hw_interrutps().
+Implement functions necessarry to have working external interrupts in
+hypervisor mode. The following changes are done:
+  - Add a common function intc_handle_external_irq() to call APLIC specific
+    function to handle an interrupt.
+  - Update do_trap() function to handle IRQ_S_EXT case; add the check to catch
+    case when cause of trap is an interrupt.
+  - Add handle_interrrupt() member to intc_hw_operations structure.
+  - Enable local interrupt delivery for IMSIC by calling of
+    imsic_ids_local_delivery() in imsic_init(); additionally introduce helper
+    imsic_csr_write() to update IMSIC_EITHRESHOLD and IMSIC_EITHRESHOLD.
+  - Enable hypervisor external interrupts.
+  - Implement aplic_handler_interrupt() and use it to init ->handle_interrupt
+    member of intc_hw_operations for APLIC.
+  - Add implementation of do_IRQ() to dispatch the interrupt.
 
-aplic_init() is based on the code from [1] and [2].
+The current patch is based on the code from [1].
 
-Since Microchip originally developed aplic.c, an internal discussion with
-them led to the decision to use the MIT license.
-
-[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7cfb4bd4748ca268142497ac5c327d2766fb342d
-[2] https://gitlab.com/xen-project/people/olkur/xen/-/commit/392a531bfad39bf4656ce8128e004b241b8b3f3e
+[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7390e2365828b83e27ead56b03114a56e3699dd5
 
 Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
- - use __ro_after_init for aplic_ops.
- - s/nr_irqs/num_irqs.
- - s/dt_processor_hartid/dt_processor_cpuid.
- - Drop confusing comment in aplic_init_hw_interrupts().
+ - use BIT() macros instead of 1UL << bit_num in aplic.c.
+ - Drop passing of a cause to aplic_handle_interrupt() function. And update
+   prototype of handle_interrupt() callback.
+ - Drop ASSERT() in intc_handle_external_irqs() as it is useless.
  - Code style fixes.
- - Drop years for Copyright.
- - Revert changes which drop nr_irq define from asm/irq.h,
-   it shouldn't be, at least, part of this patch.
- - Drop paddr_enf from struct aplic_regs. It is enough to have pair
-   (paddr_start, size).
- - Make  struct aplic_priv of asm/aplic.h private by moving it to
-   riscv/aplic-priv.h.
- - Add the comment above the initialization of APLIC's target register.
- - use writel() to access APLIC's registers.
- - use 'unsinged int' for local variable i in aplic_init_hw_interrupts.
- - Add the check that all modes in interrupts-extended property of
-   imsic node are equal. And drop rc != EOVERFLOW when interrupts-extended
-   property is read.
- - Add cf_check to aplic_init().
- - Fix a cycle of clrie register initialization in aplic_init_hw_interrupts().
-   Previous implementation leads to out-of-boundary.
- - Declare member num_irqs in struct intc_info as it is used by APLIC code.
+ - Drop cause argument for intc_handle_external_irqs().
+ - Update the commit message: drop words that imsic_ids_local_delivery() is
+   implemented in this patch, it is only called.
+ - Add cf_check for aplic_handle_interrupt(), aplic_set_irq_type().
+ - Move forward declarations in asm/intc.h up.
+ - Use plain C operator instead if {clear,set}_bit() for desc->status as it
+   is always used under spinlock().
+ - use writel() for writing to APLIC's sourcecfg in aplic_set_irq_type().
 ---
- xen/arch/riscv/aplic-priv.h        |  34 +++++++++
- xen/arch/riscv/aplic.c             | 106 +++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/aplic.h |  64 +++++++++++++++++
- xen/arch/riscv/include/asm/intc.h  |   3 +
- 4 files changed, 207 insertions(+)
- create mode 100644 xen/arch/riscv/aplic-priv.h
- create mode 100644 xen/arch/riscv/include/asm/aplic.h
+ xen/arch/riscv/aplic.c             | 70 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/aplic.h |  7 +++
+ xen/arch/riscv/include/asm/imsic.h |  1 +
+ xen/arch/riscv/include/asm/intc.h  |  5 +++
+ xen/arch/riscv/include/asm/irq.h   |  6 ++-
+ xen/arch/riscv/intc.c              |  5 +++
+ xen/arch/riscv/irq.c               | 47 ++++++++++++++++++++
+ xen/arch/riscv/traps.c             | 19 ++++++++
+ 8 files changed, 159 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/aplic-priv.h b/xen/arch/riscv/aplic-priv.h
-new file mode 100644
-index 0000000000..8a208dba8a
---- /dev/null
-+++ b/xen/arch/riscv/aplic-priv.h
-@@ -0,0 +1,34 @@
-+/* SPDX-License-Identifier: MIT */
-+
-+/*
-+ * xen/arch/riscv/aplic.h
-+ *
-+ * Private part of aplic.h header.
-+ *
-+ * RISC-V Advanced Platform-Level Interrupt Controller support
-+ *
-+ * Copyright (c) Microchip.
-+ * Copyright (c) Vates.
-+ */
-+
-+#ifndef ASM__RISCV_PRIV_APLIC_H
-+#define ASM__RISCV_PRIV_APLIC_H
-+
-+#include <xen/types.h>
-+
-+#include <asm/aplic.h>
-+#include <asm/imsic.h>
-+
-+struct aplic_priv {
-+    /* base physical address and size */
-+    paddr_t paddr_start;
-+    size_t  size;
-+
-+    /* registers */
-+    volatile struct aplic_regs *regs;
-+
-+    /* imsic configuration */
-+    const struct imsic_config *imsic_cfg;
-+};
-+
-+#endif /* ASM__RISCV_PRIV_APLIC_H */
 diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index 10ae81f7ac..797e5df020 100644
+index e2bee7ad23..ef7fc2562d 100644
 --- a/xen/arch/riscv/aplic.c
 +++ b/xen/arch/riscv/aplic.c
-@@ -9,19 +9,121 @@
+@@ -9,6 +9,7 @@
   * Copyright (c) 2024-2025 Vates
   */
  
-+#include <xen/device_tree.h>
++#include <xen/const.h>
+ #include <xen/device_tree.h>
  #include <xen/errno.h>
  #include <xen/init.h>
- #include <xen/irq.h>
-+#include <xen/mm.h>
- #include <xen/sections.h>
- #include <xen/types.h>
-+#include <xen/vmap.h>
-+
-+#include "aplic-priv.h"
+@@ -220,6 +221,70 @@ static void aplic_set_irq_affinity(struct irq_desc *desc, const cpumask_t *mask)
+     spin_unlock(&aplic.lock);
+ }
  
- #include <asm/device.h>
-+#include <asm/imsic.h>
- #include <asm/intc.h>
-+#include <asm/riscv_encoding.h>
++static void cf_check aplic_handle_interrupt(struct cpu_user_regs *regs)
++{
++    /* disable to avoid more external interrupts */
++    csr_clear(CSR_SIE, BIT(IRQ_S_EXT, UL));
 +
-+#define APLIC_DEFAULT_PRIORITY  1
++    /* clear the pending bit */
++    csr_clear(CSR_SIP, BIT(IRQ_S_EXT, UL));
 +
-+static struct aplic_priv aplic;
- 
- static struct intc_info __ro_after_init aplic_info = {
-     .hw_version = INTC_APLIC,
++    /* dispatch the interrupt */
++    do_IRQ(regs, csr_swap(CSR_STOPEI, 0) >> TOPI_IID_SHIFT);
++
++    /* enable external interrupts */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
++}
++
++static void cf_check aplic_set_irq_type(struct irq_desc *desc, unsigned int type)
++{
++    /*
++    * Interrupt 0 isn't possible based on the spec:
++    *   Each of an APLIC’s interrupt sources has a fixed unique identity number in the range 1 to N,
++    *   where N is the total number of sources at the APLIC. The number zero is not a valid interrupt
++    *   identity number at an APLIC. The maximum number of interrupt sources an APLIC may support
++    *   is 1023.
++    *
++    * Thereby interrupt 1 will correspond to bit 0 in sourcecfg[] register,
++    * interrupt 2 ->sourcecfg[1] and so on.
++    *
++    * And that is the reason why we need -1.
++    */
++    unsigned int irq_bit = desc->irq - 1;
++
++    spin_lock(&aplic.lock);
++
++    switch(type)
++    {
++    case IRQ_TYPE_EDGE_RISING:
++        writel(APLIC_SOURCECFG_SM_EDGE_RISE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_EDGE_FALLING:
++        writel(APLIC_SOURCECFG_SM_EDGE_FALL, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_HIGH:
++        writel(APLIC_SOURCECFG_SM_LEVEL_HIGH, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_LOW:
++        writel(APLIC_SOURCECFG_SM_LEVEL_LOW, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_NONE:
++        fallthrough;
++    case IRQ_TYPE_INVALID:
++        writel(APLIC_SOURCECFG_SM_INACTIVE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    default:
++        panic("%s: APLIC doesnt support IRQ type: 0x%x?\n", __func__, type);
++    }
++
++    spin_unlock(&aplic.lock);
++}
++
+ static const hw_irq_controller aplic_xen_irq_type = {
+     .typename     = "aplic",
+     .startup      = aplic_irq_startup,
+@@ -233,6 +298,8 @@ static struct intc_hw_operations __ro_after_init aplic_ops = {
+     .info                = &aplic_info,
+     .init                = aplic_init,
+     .host_irq_type       = &aplic_xen_irq_type,
++    .handle_interrupt    = aplic_handle_interrupt,
++    .set_irq_type        = aplic_set_irq_type,
  };
  
-+static void __init aplic_init_hw_interrupts(void)
-+{
-+    unsigned int i;
-+
-+    /* Disable all interrupts */
-+    for ( i = 0; i < ARRAY_SIZE(aplic.regs->clrie); i++)
-+        writel(-1U, &aplic.regs->clrie[i]);
-+
-+    /* Set interrupt type and default priority for all interrupts */
-+    for ( i = 1; i <= aplic_info.num_irqs; i++ )
-+    {
-+        writel(0, &aplic.regs->sourcecfg[i - 1]);
-+        /*
-+         * Low bits of target register contains Interrupt Priority bits which
-+         * can't be zero according to AIA spec.
-+         * Thereby they are initialized to APLIC_DEFAULT_PRIORITY.
-+         */
-+        writel(APLIC_DEFAULT_PRIORITY, &aplic.regs->target[i - 1]);
-+    }
-+
-+    writel(APLIC_DOMAINCFG_IE | APLIC_DOMAINCFG_DM, &aplic.regs->domaincfg);
-+}
-+
-+static int __init cf_check aplic_init(void)
-+{
-+    int rc;
-+    dt_phandle imsic_phandle;
-+    uint32_t irq_range[num_possible_cpus() * 2];
-+    const __be32 *prop;
-+    uint64_t size, paddr;
-+    struct dt_device_node *imsic_node;
-+    const struct dt_device_node *node = aplic_info.node;
-+
-+    /* Check for associated imsic node */
-+    rc = dt_property_read_u32(node, "msi-parent", &imsic_phandle);
-+    if ( !rc )
-+        panic("%s: IDC mode not supported\n", node->full_name);
-+
-+    imsic_node = dt_find_node_by_phandle(imsic_phandle);
-+    if ( !imsic_node )
-+        panic("%s: unable to find IMSIC node\n", node->full_name);
-+
-+    rc = dt_property_read_u32_array(imsic_node, "interrupts-extended",
-+                                    irq_range, ARRAY_SIZE(irq_range));
-+    if ( rc )
-+        panic("%s: unable to find interrupt-extended in %s node\n",
-+              __func__, imsic_node->full_name);
-+
-+    if ( irq_range[1] == IRQ_M_EXT )
-+        /* Machine mode imsic node, ignore this aplic node */
-+        return 0;
-+
-+    for ( unsigned int i = 0; i < ARRAY_SIZE(irq_range); i += 2 )
-+    {
-+        if ( irq_range[i + 1] != irq_range[1] )
-+            panic("%s: mode[%d] != %d\n", __func__, i + 1, irq_range[1]);
-+    }
-+
-+    rc = imsic_init(imsic_node);
-+    if ( rc )
-+        panic("%s: Failded to initialize IMSIC\n", node->full_name);
-+
-+    /* Find out number of interrupt sources */
-+    rc = dt_property_read_u32(node, "riscv,num-sources", &aplic_info.num_irqs);
-+    if ( !rc )
-+        panic("%s: failed to get number of interrupt sources\n",
-+              node->full_name);
-+
-+    prop = dt_get_property(node, "reg", NULL);
-+    dt_get_range(&prop, node, &paddr, &size);
-+    if ( !paddr )
-+        panic("%s: first MMIO resource not found\n", node->full_name);
-+
-+    aplic.paddr_start = paddr;
-+    aplic.size = size;
-+
-+    aplic.regs = ioremap(paddr, size);
-+    if ( !aplic.regs )
-+        panic("%s: unable to map\n", node->full_name);
-+
-+    /* Setup initial state APLIC interrupts */
-+    aplic_init_hw_interrupts();
-+
-+    return 0;
-+}
-+
-+static struct intc_hw_operations __ro_after_init aplic_ops = {
-+    .info                = &aplic_info,
-+    .init                = aplic_init,
-+};
-+
  static int cf_check aplic_irq_xlate(const uint32_t *intspec,
-                                     unsigned int intsize,
-                                     unsigned int *out_hwirq,
-@@ -53,8 +155,12 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
+@@ -274,6 +341,9 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
  
-     aplic_info.node = node;
+     register_intc_ops(&aplic_ops);
  
-+    aplic.imsic_cfg = imsic_get_config();
-+
-     dt_irq_xlate = aplic_irq_xlate;
- 
-+    register_intc_ops(&aplic_ops);
++    /* Enable supervisor external interrupt */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
 +
      return 0;
  }
  
 diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-new file mode 100644
-index 0000000000..6221030a68
---- /dev/null
+index dc4ccbb9aa..661d9f294f 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
 +++ b/xen/arch/riscv/include/asm/aplic.h
-@@ -0,0 +1,64 @@
-+/* SPDX-License-Identifier: MIT */
+@@ -18,6 +18,13 @@
+ #define APLIC_DOMAINCFG_IE      BIT(8, UL)
+ #define APLIC_DOMAINCFG_DM      BIT(2, UL)
+ 
++#define APLIC_SOURCECFG_SM_INACTIVE     0x0
++#define APLIC_SOURCECFG_SM_DETACH       0x1
++#define APLIC_SOURCECFG_SM_EDGE_RISE    0x4
++#define APLIC_SOURCECFG_SM_EDGE_FALL    0x5
++#define APLIC_SOURCECFG_SM_LEVEL_HIGH   0x6
++#define APLIC_SOURCECFG_SM_LEVEL_LOW    0x7
 +
-+/*
-+ * xen/arch/riscv/asm/include/aplic.h
-+ *
-+ * RISC-V Advanced Platform-Level Interrupt Controller support
-+ *
-+ * Copyright (c) Microchip.
-+ */
-+
-+#ifndef ASM__RISCV__APLIC_H
-+#define ASM__RISCV__APLIC_H
-+
-+#include <xen/types.h>
-+
-+#include <asm/imsic.h>
-+
-+#define APLIC_DOMAINCFG_IE      BIT(8, UL)
-+#define APLIC_DOMAINCFG_DM      BIT(2, UL)
-+
-+struct aplic_regs {
-+    uint32_t domaincfg;
-+    uint32_t sourcecfg[1023];
-+    uint8_t _reserved1[0xBC0];
-+
-+    uint32_t mmsiaddrcfg;
-+    uint32_t mmsiaddrcfgh;
-+    uint32_t smsiaddrcfg;
-+    uint32_t smsiaddrcfgh;
-+    uint8_t _reserved2[0x30];
-+
-+    uint32_t setip[32];
-+    uint8_t _reserved3[92];
-+
-+    uint32_t setipnum;
-+    uint8_t _reserved4[0x20];
-+
-+    uint32_t in_clrip[32];
-+    uint8_t _reserved5[92];
-+
-+    uint32_t clripnum;
-+    uint8_t _reserved6[32];
-+
-+    uint32_t setie[32];
-+    uint8_t _reserved7[92];
-+
-+    uint32_t setienum;
-+    uint8_t _reserved8[32];
-+
-+    uint32_t clrie[32];
-+    uint8_t _reserved9[92];
-+
-+    uint32_t clrienum;
-+    uint8_t _reserved10[32];
-+
-+    uint32_t setipnum_le;
-+    uint32_t setipnum_be;
-+    uint8_t _reserved11[4088];
-+
-+    uint32_t genmsi;
-+    uint32_t target[1023];
-+};
-+
-+#endif /* ASM__RISCV__APLIC_H */
+ #define APLIC_TARGET_HART_IDX_SHIFT 18
+ 
+ struct aplic_regs {
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 1d6ab4d685..c765d3d8e4 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -12,6 +12,7 @@
+ #define ASM__RISCV__IMSIC_H
+ 
+ #include <xen/spinlock.h>
++#include <xen/stdbool.h>
+ #include <xen/types.h>
+ 
+ #define IMSIC_MMIO_PAGE_SHIFT   12
 diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index e72d5fd9d3..2d55d74a2e 100644
+index 45a41147a6..1efa80fff6 100644
 --- a/xen/arch/riscv/include/asm/intc.h
 +++ b/xen/arch/riscv/include/asm/intc.h
-@@ -17,6 +17,9 @@ enum intc_version {
- struct intc_info {
-     enum intc_version hw_version;
-     const struct dt_device_node *node;
-+
-+    /* number of irqs */
-+    unsigned int num_irqs;
+@@ -22,6 +22,7 @@ struct intc_info {
+     unsigned int num_irqs;
  };
  
++struct cpu_user_regs;
  struct irq_desc;
+ 
+ struct intc_hw_operations {
+@@ -38,6 +39,8 @@ struct intc_hw_operations {
+     /* Set IRQ priority */
+     void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
+ 
++    /* handle external interrupt */
++    void (*handle_interrupt)(struct cpu_user_regs *regs);
+ };
+ 
+ void intc_preinit(void);
+@@ -48,4 +51,6 @@ void intc_init(void);
+ 
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
+ 
++void intc_handle_external_irqs(struct cpu_user_regs *regs);
++
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+index 6223bbbed5..1a05c5ff88 100644
+--- a/xen/arch/riscv/include/asm/irq.h
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -25,16 +25,20 @@ struct arch_irq_desc {
+     unsigned int type;
+ };
+ 
++struct cpu_user_regs;
++struct dt_device_node;
++
+ static inline void arch_move_irqs(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+ }
+ 
+-struct dt_device_node;
+ int platform_get_irq(const struct dt_device_node *device, int index);
+ 
+ void init_IRQ(void);
+ 
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq);
++
+ #endif /* ASM__RISCV__IRQ_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index 15f358601d..478401cc74 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -54,6 +54,11 @@ static void intc_set_irq_priority(struct irq_desc *desc, unsigned int priority)
+         intc_hw_ops->set_irq_priority(desc, priority);
+ }
+ 
++void intc_handle_external_irqs(struct cpu_user_regs *regs)
++{
++    intc_hw_ops->handle_interrupt(regs);
++}
++
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+ {
+     ASSERT(desc->status & IRQ_DISABLED);
+diff --git a/xen/arch/riscv/irq.c b/xen/arch/riscv/irq.c
+index 4c518bbd97..056bdf3ca8 100644
+--- a/xen/arch/riscv/irq.c
++++ b/xen/arch/riscv/irq.c
+@@ -11,6 +11,10 @@
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/irq.h>
++#include <xen/spinlock.h>
++
++#include <asm/hardirq.h>
++#include <asm/intc.h>
+ 
+ static irq_desc_t irq_desc[NR_IRQS];
+ 
+@@ -85,3 +89,46 @@ void __init init_IRQ(void)
+     if ( init_irq_data() < 0 )
+         panic("initialization of IRQ data failed\n");
+ }
++
++/* Dispatch an interrupt */
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
++{
++    struct irq_desc *desc = irq_to_desc(irq);
++    struct irqaction *action;
++
++    irq_enter();
++
++    spin_lock(&desc->lock);
++
++    if ( desc->handler->ack )
++        desc->handler->ack(desc);
++
++    if ( desc->status & IRQ_DISABLED )
++        goto out;
++
++    desc->status |= IRQ_INPROGRESS;
++
++    action = desc->action;
++
++    spin_unlock_irq(&desc->lock);
++
++#ifndef CONFIG_IRQ_HAS_MULTIPLE_ACTION
++    action->handler(irq, action->dev_id);
++#else
++    do {
++        action->handler(irq, action->dev_id);
++        action = action->next;
++    } while ( action );
++#endif /* CONFIG_IRQ_HAS_MULTIPLE_ACTION */
++
++    spin_lock_irq(&desc->lock);
++
++    desc->status &= ~IRQ_INPROGRESS;
++
++ out:
++    if ( desc->handler->end )
++        desc->handler->end(desc);
++
++    spin_unlock(&desc->lock);
++    irq_exit();
++}
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ea3638a54f..f061004d83 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -11,6 +11,7 @@
+ #include <xen/nospec.h>
+ #include <xen/sched.h>
+ 
++#include <asm/intc.h>
+ #include <asm/processor.h>
+ #include <asm/riscv_encoding.h>
+ #include <asm/traps.h>
+@@ -128,6 +129,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+         }
+         fallthrough;
+     default:
++        if ( cause & CAUSE_IRQ_FLAG )
++        {
++            /* Handle interrupt */
++            unsigned long icause = cause & ~CAUSE_IRQ_FLAG;
++
++            switch ( icause )
++            {
++            case IRQ_S_EXT:
++                intc_handle_external_irqs(cpu_regs);
++                break;
++
++            default:
++                break;
++            }
++
++            break;
++        }
++
+         do_unexpected_trap(cpu_regs);
+         break;
+     }
 -- 
 2.49.0
 
