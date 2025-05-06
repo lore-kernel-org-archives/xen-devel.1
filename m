@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F44C3ABC3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D219C3ABC4
 	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 08:35:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.976750.1363923 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.976746.1363883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCDlN-0004y3-0S; Tue, 06 May 2025 08:34:53 +0000
+	id 1uCDlI-000424-VB; Tue, 06 May 2025 08:34:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 976750.1363923; Tue, 06 May 2025 08:34:52 +0000
+Received: by outflank-mailman (output) from mailman id 976746.1363883; Tue, 06 May 2025 08:34:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCDlM-0004xw-TK; Tue, 06 May 2025 08:34:52 +0000
-Received: by outflank-mailman (input) for mailman id 976750;
- Tue, 06 May 2025 08:34:51 +0000
+	id 1uCDlI-00041x-SI; Tue, 06 May 2025 08:34:48 +0000
+Received: by outflank-mailman (input) for mailman id 976746;
+ Tue, 06 May 2025 08:34:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vx1h=XW=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uCDlL-00041m-Ox
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 08:34:51 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
+ id 1uCDlH-00041m-Fb
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 08:34:47 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9972bec-2a54-11f0-9ffb-bf95429c2676;
- Tue, 06 May 2025 10:34:50 +0200 (CEST)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-39ee5ac4321so6478568f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 01:34:50 -0700 (PDT)
+ id f68a342d-2a54-11f0-9ffb-bf95429c2676;
+ Tue, 06 May 2025 10:34:45 +0200 (CEST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so29528825e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 01:34:45 -0700 (PDT)
 Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a099ae32fesm12669233f8f.22.2025.05.06.01.34.49
+ 5b1f17b1804b1-441c0dfc537sm114483145e9.16.2025.05.06.01.34.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 01:34:49 -0700 (PDT)
+ Tue, 06 May 2025 01:34:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,108 +46,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9972bec-2a54-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: f68a342d-2a54-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1746520489; x=1747125289; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=p5UfBLcVStfB7Hed8NA5DfE3BRvsSJIoJFqhzuS6DZw=;
-        b=TikPXyvOnU2anYiYC+OXdBZxH2AQ3ySb/erSnJdwqkyXrzVk2DASMhpfLD9RI78l5j
-         ju/DsiLPqtCd0Aoz7QwpmyedkUsCfiC5qFGxXesV+qXxCSMu1nf8Fxe/B/Rs1emiBV+q
-         gIspOu3t59yY1j3igLFGwSdv6tkzWIL6YpPaE=
+        d=citrix.com; s=google; t=1746520484; x=1747125284; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VcW29tlgqCX35x9Q2VuHPxyDBhbeqQG+9E2OIuIdqs8=;
+        b=gkqkR7WNfcwiPTZg0HlWA2v5/wlWztp/Fq2UNDCJuKISYKkFlcRDJmkEK4buex0DI2
+         et+b1rAkpLwobRvwHTxZ4Of/uTXN+euF0YzGaBt3P+H6VxlkU/jQpEI0jnzZxEjKXq+r
+         IkMIYdVkkpKynHM4PN04DZhDZzwAfB0tgLWcw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746520489; x=1747125289;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=p5UfBLcVStfB7Hed8NA5DfE3BRvsSJIoJFqhzuS6DZw=;
-        b=xUSCApvz1mT0UygWLwa/kA1V1+ftHrN9M3vtKRAKBxxBfb3JECk97YF6T1oJfDUyyT
-         PkYKjMNS9paNET/x5wTkgcyNucqT3b558VBuZHq0SB4b8SkTA+QyfZhzeklcdrAmQ6wG
-         nsu8P9zM3CY02dG/nZsnQRkN2SciqUaplLL7voGN5VSxmFk3Qf0MCrIX0HgJQTrpyJpS
-         RNTyJDXLDlmtMWtv1iEhaT0am1VjmoHSMZGTDs+SiDb2TDfUgRX/GOdDhYT/1PeOeXwF
-         +jhfLj7KdpLpDlnDb1Rd6hkMYGIZ6W9fDOEivQB1XdSUJp0Zr60jjQkhkAE6jl2pg5GQ
-         UcGw==
-X-Gm-Message-State: AOJu0YyVP2HFpPBFVIbqprNdg9XMNBBsZ1pX5P2MmghIznujQk8pFFCa
-	2srgh9FrvpPqWBDf4wjTKlbVqnPzhWqn33/EPfC1O5UbUZbdFCWoHgimT8T0R1z9B4dD2JohxFP
-	K
-X-Gm-Gg: ASbGnctss8B6cNv1Xjzt9m5cnoD5mIc2fAmpV9yxKq7n8rZwBqP5HCbuF9df9yFf0Pi
-	XQRLCPDbFn2V8aR8qIC8RKGsTX3uzixdwIFczCKcN+NT72Ay6RTeTccbcfPZe/vjeFLDS1u9SjQ
-	WhFrqm9ev1wuYo2sauzaWqAqHfBazDACtxub6tJPrw3xwX6gMHejjlRUgFBhNWZe0rN5PVBmfZ+
-	tQFHPODxr0moWu8ae65XFDSZY6Rag/yd1LZf5HFgWtF3WC9Id3GAuIPz21d5k6DTAanUtMQWSF1
-	qJM+evdxP3mnTfsMfXg6j5TJeYqTCOmF0Vb0O7t2STP9sHmegB0kUL3h
-X-Google-Smtp-Source: AGHT+IG8SbqAp820tgfep77WqAq8u/7HTxpv/gmNciMOaCRPklO3tPbEepKkjQU+MEYnB+mrs5NwOg==
-X-Received: by 2002:a05:6000:2a3:b0:3a0:85ad:5ed9 with SMTP id ffacd0b85a97d-3a09fd7a183mr7019642f8f.4.1746520489409;
-        Tue, 06 May 2025 01:34:49 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1746520484; x=1747125284;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VcW29tlgqCX35x9Q2VuHPxyDBhbeqQG+9E2OIuIdqs8=;
+        b=qqy3auOxEIMOm5DBaIvu4b5wVsxXO83UvfhofF/1KVtu8cxpAVgj06kd7KXmh45KN5
+         2YWJcEYsscHdj60XYhIWUUSC6I7uL5tZ8ICGKBYkL+Yc8HPM/0QEOOGRVRCC7+LJxFYN
+         z4vdiNdiMxAM4dH8GYJGwH0HAd0HeNigb0q87BhzoZy/TCouhFduxs8mfA+Me/3g7FGH
+         lJzSGLSAzxseJOFIW3B3LF2dse3Yn0fM4p+ULHJSzpZ3mJRZMXXVUQ1v8ilcvuJ2hhQl
+         LfYEKatdnr7ECEq6yfS0ea3OYev1NrtpcEVBOBSKzrLYkIzEwTHnJkQ5nJBGs/SDp8Ag
+         IsQw==
+X-Gm-Message-State: AOJu0YxPicI3qOPKDeyiTH/Ta5CjlBZaYNRc4xReRdDY/hRKfpOXIL7M
+	ruj6AnCHshYw0mLUZxuAgzD/mVOpQDawcJqiKrnF0Qq0RJ5ks+ie2vUshZIQ+Pr3r4pnYfto6k5
+	Y
+X-Gm-Gg: ASbGnct6tIbZrr9FOoX0ERQRB+SKEyRbYbeofZEi+GPNgzyoX+5dB3U3CGHJ/kbI5zo
+	4XRQWUIt6lxk9Ro7yZFGb1o6+oIND2GmM4Y4hoMO5uVTz52F75LTxfqxlq6KaVRMU/rUqH80Je3
+	+CFjcM2U1G9U+X1k10ImRC5Vn67Uxefwkl/n+cZtuQ9lktK3AhpWpgJfZr8vGUsmJoNwI+dtPIy
+	rDXtzACwEg4n4qkTde4oIWiwPNk9ZofzqYa3YwnFtJRYRJ388bGf3fC7dX/nnW/AAJzKbRMqyPb
+	U8FNPKsSvFPRXdGap5SqF3eE9Yra/0Tr17cJEr9YGddEhA==
+X-Google-Smtp-Source: AGHT+IGAlqormNOZykPxlIggIY/CsIhXy0w5RwQsCodUE6SrqVTWTB/qaz2icYmwkMa/kqwLyTK4Fg==
+X-Received: by 2002:a05:600c:5491:b0:43d:5ec:b2f4 with SMTP id 5b1f17b1804b1-441d0fccbf5mr15642135e9.10.1746520484253;
+        Tue, 06 May 2025 01:34:44 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 5/9] x86/mtrr: use memory_type_changed() in hvm_set_mem_pinned_cacheattr()
-Date: Tue,  6 May 2025 10:31:44 +0200
-Message-ID: <20250506083148.34963-6-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 0/8] xen: cache control improvements
+Date: Tue,  6 May 2025 10:31:39 +0200
+Message-ID: <20250506083148.34963-1-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250506083148.34963-1-roger.pau@citrix.com>
-References: <20250506083148.34963-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The current logic partially open-codes memory_type_changed(), but doesn't
-check whether the type change or the cache flush is actually needed.
-Instead switch to using memory_type_changed(), at possibly a higher expense
-cost of not exclusively issuing cache flushes when limiting cacheability.
+Hello,
 
-However using memory_type_changed() has the benefit of limiting
-recalculations and cache flushes to strictly only when it's meaningful due
-to the guest configuration, like having devices or IO regions assigned.
+Following series contain some fixes for cache control operations, the
+main focus is to reduce the load on big systems when cache control
+operations are executed.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/mtrr.c | 22 +++-------------------
- 1 file changed, 3 insertions(+), 19 deletions(-)
+Patches 1-4 are bugfixes, while patches starting from 5 are improvements
+to the current code.  Patch 9 is an optimization to avoid having to
+broadcast cache flushes on all pCPUs on x86.
 
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index 797f2ae7fd3a..b88e81eb44b1 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -605,22 +605,8 @@ int hvm_set_mem_pinned_cacheattr(struct domain *d, uint64_t gfn_start,
- 
-                 type = range->type;
-                 call_rcu(&range->rcu, free_pinned_cacheattr_entry);
--                p2m_memory_type_changed(d);
--                switch ( type )
--                {
--                case X86_MT_UCM:
--                    /*
--                     * For EPT we can also avoid the flush in this case;
--                     * see epte_get_entry_emt().
--                     */
--                    if ( hap_enabled(d) && cpu_has_vmx )
--                case X86_MT_UC:
--                        break;
--                    /* fall through */
--                default:
--                    flush_all(FLUSH_CACHE);
--                    break;
--                }
-+                memory_type_changed(d);
-+
-                 return 0;
-             }
-         domain_unlock(d);
-@@ -682,9 +668,7 @@ int hvm_set_mem_pinned_cacheattr(struct domain *d, uint64_t gfn_start,
- 
-     xfree(newr);
- 
--    p2m_memory_type_changed(d);
--    if ( type != X86_MT_WB )
--        flush_all(FLUSH_CACHE);
-+    memory_type_changed(d);
- 
-     return rc;
- }
+Thanks, Roger.
+
+Roger Pau Monne (9):
+  x86/pv: fix MMUEXT_FLUSH_CACHE to flush all pCPU caches
+  x86/pv: fix emulation of wb{,no}invd to flush all pCPU caches
+  xen/gnttab: limit cache flush operation to guests allowed cache
+    control
+  x86/gnttab: do not implement GNTTABOP_cache_flush
+  x86/mtrr: use memory_type_changed() in hvm_set_mem_pinned_cacheattr()
+  x86/p2m: limit cache flush in memory_type_changed()
+  xen/x86: rename cache_flush_permitted() to has_arch_io_resources()
+  xen: introduce flag when a domain requires cache control
+  xen/x86: track dirty pCPU caches for a given vCPU
+
+ docs/man/xl.cfg.5.pod.in            | 10 +++++++
+ tools/include/libxl.h               |  7 +++++
+ tools/libs/light/libxl_create.c     |  6 ++++
+ tools/libs/light/libxl_types.idl    |  3 ++
+ tools/ocaml/libs/xc/xenctrl.ml      |  1 +
+ tools/ocaml/libs/xc/xenctrl.mli     |  1 +
+ tools/xl/xl_parse.c                 |  2 ++
+ xen/arch/arm/dom0less-build.c       | 12 ++++++--
+ xen/arch/arm/domain.c               |  3 +-
+ xen/arch/arm/domain_build.c         |  6 ++++
+ xen/arch/x86/domain.c               | 43 +++++++++++++++++++++++++++++
+ xen/arch/x86/hvm/hvm.c              |  2 +-
+ xen/arch/x86/hvm/mtrr.c             | 29 ++++---------------
+ xen/arch/x86/hvm/svm/svm.c          |  6 ++--
+ xen/arch/x86/hvm/vmx/vmcs.c         |  3 +-
+ xen/arch/x86/hvm/vmx/vmx.c          |  6 ++--
+ xen/arch/x86/include/asm/domain.h   |  9 ++++++
+ xen/arch/x86/include/asm/flushtlb.h | 15 ----------
+ xen/arch/x86/include/asm/iocap.h    | 19 ++-----------
+ xen/arch/x86/include/asm/p2m.h      |  2 +-
+ xen/arch/x86/mm.c                   | 21 ++++----------
+ xen/arch/x86/mm/p2m-ept.c           |  7 +----
+ xen/arch/x86/mm/p2m-pod.c           |  4 +--
+ xen/arch/x86/mm/p2m.c               | 13 ++++++++-
+ xen/arch/x86/pv/emul-priv-op.c      | 19 ++++++-------
+ xen/arch/x86/setup.c                |  7 +++++
+ xen/common/domain.c                 |  3 +-
+ xen/common/grant_table.c            | 11 ++++++++
+ xen/common/memory.c                 |  2 +-
+ xen/include/asm-generic/iocap.h     |  2 +-
+ xen/include/public/domctl.h         |  4 ++-
+ xen/include/xen/iocap.h             | 25 ++---------------
+ xen/include/xen/sched.h             |  6 ++++
+ 33 files changed, 181 insertions(+), 128 deletions(-)
+
 -- 
 2.48.1
 
