@@ -4,37 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8680C3ABBF
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 08:35:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.976753.1363947 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71DDC3ABC3
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 08:46:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.976857.1363977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCDlP-0005YH-TV; Tue, 06 May 2025 08:34:55 +0000
+	id 1uCDwf-0002L0-1R; Tue, 06 May 2025 08:46:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 976753.1363947; Tue, 06 May 2025 08:34:55 +0000
+Received: by outflank-mailman (output) from mailman id 976857.1363977; Tue, 06 May 2025 08:46:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCDlP-0005WU-O6; Tue, 06 May 2025 08:34:55 +0000
-Received: by outflank-mailman (input) for mailman id 976753;
- Tue, 06 May 2025 08:34:54 +0000
+	id 1uCDwe-0002KN-UG; Tue, 06 May 2025 08:46:32 +0000
+Received: by outflank-mailman (input) for mailman id 976857;
+ Tue, 06 May 2025 08:46:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Vx1h=XW=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uCDlO-00048v-Nn
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 08:34:54 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
+ <SRS0=+p1E=XW=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
+ id 1uCDwd-0002Hf-SQ
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 08:46:31 +0000
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110001.outbound.protection.outlook.com
+ [2a01:111:f403:c200::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fbf559b1-2a54-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 10:34:54 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso43079385e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 01:34:54 -0700 (PDT)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-441b2af306bsm208429945e9.21.2025.05.06.01.34.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 01:34:52 -0700 (PDT)
+ id 967a3719-2a56-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 10:46:23 +0200 (CEST)
+Received: from DUZPR01CA0272.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b9::12) by AM8PR08MB5697.eurprd08.prod.outlook.com
+ (2603:10a6:20b:1d7::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.22; Tue, 6 May
+ 2025 08:46:21 +0000
+Received: from DU2PEPF0001E9C5.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b9:cafe::7) by DUZPR01CA0272.outlook.office365.com
+ (2603:10a6:10:4b9::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.20 via Frontend Transport; Tue,
+ 6 May 2025 08:46:24 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU2PEPF0001E9C5.mail.protection.outlook.com (10.167.8.74) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.18 via
+ Frontend Transport; Tue, 6 May 2025 08:46:20 +0000
+Received: from DB7PR08MB2987.eurprd08.prod.outlook.com (2603:10a6:5:1c::25) by
+ DB9PR08MB9684.eurprd08.prod.outlook.com (2603:10a6:10:460::18) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8699.21; Tue, 6 May 2025 08:45:48 +0000
+Received: from DB7PR08MB2987.eurprd08.prod.outlook.com
+ ([fe80::d53f:b16d:70a5:8668]) by DB7PR08MB2987.eurprd08.prod.outlook.com
+ ([fe80::d53f:b16d:70a5:8668%2]) with mapi id 15.20.8699.026; Tue, 6 May 2025
+ 08:45:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,507 +63,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbf559b1-2a54-11f0-9eb4-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1746520493; x=1747125293; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jVsCpnQ84evwLMOD0Ne9LGSyDVtOtlci+rB7YWLWgTI=;
-        b=lgGi3/G/ubnc6ViHuYdQBzRzbBnJOePxnSXhUQfsr+F/GcHn5cCBXd9In5ejiC6SOw
-         Obu35BuPi8+xiVNkGK0/Y8g8G0W3XK9ssMBFn6PRL0OatHuhvz1qZLb6bTfr7GB6DWXy
-         9eeJ0V6HsGgyjk/mAHQsay9UPdjMPH2qjXNdE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746520493; x=1747125293;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jVsCpnQ84evwLMOD0Ne9LGSyDVtOtlci+rB7YWLWgTI=;
-        b=Ylq1yXOGYCHIkur9iKrH5X92oBf0JYDyrq74CFUE9p4yefxyNZzv54GHjoPI7hnaTi
-         L5u3lDXQibbVABnS6z0QbwDjj/eTajVawFVY9Hecdvn0Z6/ZP/dNJcK1pIGI2vW+TXMT
-         12dRbskD9Fk6R9GByhs3npsPOeAcSsLXBG5qmkwT5c0EYV2+5iNaoF+lrpOsNDf9xa30
-         6bjOZuDtBhZjO8AIhhY2mCGdRK9UKb9j0/H8TmbUM59c2OQIlIL5D/DJIPJNBtJUYxS2
-         bU3Vo97EX0tubzQMPaJFWYKBTo29+9R3fO9I4sBaKFAHrm4PfY6cSpA8kDZqxPsJ9Bn4
-         Usrg==
-X-Gm-Message-State: AOJu0YxkBpD78jDmGiIcPi0TzplSF++wrykFbeXOywggQnh/VR4CukN2
-	nY0VRQELv1H6s2M4yjHk555YGMCC9MCrwYSGoB343hpGCugwAuwh4scxx/5EUKHRkeWH+LTM4z8
-	6
-X-Gm-Gg: ASbGncsyLt8d2XtBflf3x7tFTaJEC6JOY5Ozlt3KMjpIKIxUhzR0ecGPED1cAmSoSco
-	JysNVV5bzasgw0Rkjn0U6lfQIcbDKt5yfyncbX+uUboAXe9J5RGHHfm5jVLiJ8DOg8P3XpilAYV
-	h7rEWhyIAabaEafsSNfmFswUtxoWTLm5cyJjCOvn8LeZZ+87doNLVXD+6Te8SuMAKn9ZnMFuv5V
-	aQ7DA6wONMbFcG857tO73CUThOMKtqbBP3F6SvPdctcnduiwkljqAmKqR3d5g96Q+hOU6QQWywm
-	3sEHsB2x1FVqA8/EcRAPPnarCUoIdtYMIaxw3q/hV6vZgA==
-X-Google-Smtp-Source: AGHT+IF3dBRn3/Jgs4mw0xEm6RRkSp1VNCEoLHtuUvy28npJedhfACuCeVrkkTxKolBgMX9AMQ39qw==
-X-Received: by 2002:a05:600c:4690:b0:43d:762:e0c4 with SMTP id 5b1f17b1804b1-441d054c744mr18730875e9.27.1746520492790;
-        Tue, 06 May 2025 01:34:52 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 8/9] xen: introduce flag when a domain requires cache control
-Date: Tue,  6 May 2025 10:31:47 +0200
-Message-ID: <20250506083148.34963-9-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250506083148.34963-1-roger.pau@citrix.com>
-References: <20250506083148.34963-1-roger.pau@citrix.com>
+X-Inumbo-ID: 967a3719-2a56-11f0-9eb4-5ba50f476ded
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=w+3jHi2Lhe4DLm8uI/cJuOJLsQQLwMe/BhUvgdOz6l1XfSOWCJaN2jaXue1p8jPGCrshcQbGXY2HiZQjAaLWiW+Hhon+NYln+t36AKInmRYHLmVaMXRpRcMCyIJJ1FzXHQF51u3PE9tMJCvrhhxxbfonDFXtIB7ai/YkyTm2A3vbHQb2N92pss2Ml1wXafOoAHt6RIu0TJ95iW5LzqxHlRpEZlWIT7YhuTsLmEckiZvtO7LkFhWStpEStOtIsvHsDxPKorOUIF8KB/w+Oe5CY5HmEC88JXoMQhfAMiaHEIpo5+QlK7iah8cyC2gwnFcmREyv+6ly9JPfn8a5yjTACw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZvUJUrNl6ANajshaEcEYREoNVnfY8bz+KZSy/ybfWM4=;
+ b=uYf+uRsIohZ7cqGvb/Ol9bdDj7GthQAJizJunHQa4bm8RsA6YMnRktPUpdkwp+c9tTc90GnGymiK6vUDzeaX7DzrryM3m5nZtZLpopTMzywABcd8MreMWGvFVvkf88aY3MDbIZmepbFcaAtx+HWVROE2oMKzkUVrsc9aAHICfmI/9WKl5r7d/++A5w0q8G6TRm6FhpOYW7osv6jOa5CbvoIt51NAJkq0opZFmqj0Ny36BtkAmrHhmQ7/7ejfCiMOk5NMtrdpK1wQ4UNiq+1qKUBGrj65UkfACnAmQNOvHid+OJUGBcqGvjB/aNy7ezGXSnrENTghPKbTkVPxUvX4cA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=amd.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZvUJUrNl6ANajshaEcEYREoNVnfY8bz+KZSy/ybfWM4=;
+ b=bjPaJGDDkkq6rw7R1GcOy/lMnzqne+BbnSPYejtDa5mHYU+QfkWUxGxXVewknsIO5plhIa17LMxEIQr2Km7g50FmhllvRZFazL6eTKkfx1HolC6zbgmGv8ZoL+Izfd4glfsdXpJPw3iaRrPnf4/AdEofJ9+RkM4J7JNxVnwUxzA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jh6L38isQPgmjrLXEBymkwVUZ3OTZYkCpSXPEU+qtd71TYNO72CK16y05H7aHlRcH+Oh/NabNBsneYK/eiTcL/7Q3w9pSvEr8cVeeApbCxixUMa7diElcG/OPkek6a5+9Tj+Y6D53laMj+h+RxJf+A1UOsQo5rRxUlKciCsEDEDAENfKbW59R0VmSeOjiOlj8qeUp7kGLJzbMbP6HX8XCTQvzJtDFZC2NodJWHQ4fPmGXhyiqcps2qwCKwu6OjunA7SMF98bq+wnV7WpvpePT6YllFS4nyBirXP31K39Lc8huc7qK/HGDp8B6EdjX2Q/lZP8VrQ3SWZFzDYSdIqj0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZvUJUrNl6ANajshaEcEYREoNVnfY8bz+KZSy/ybfWM4=;
+ b=UL3DOQPYi5K8Z6PEX1xUCL4lv6RtOAPYcXf72IZBPPFHFZRL/sQtG4/WdTWmKUaC+Q5YkePzyUwiEUSdEhhRai9sTl7mB4VSrf5yviV1eTghU2YyaPXCuolIgD1FblTToSNLmv6er1C+nnST979fLW0oIgi72aiViRBuJ9VytT6mELVK+WIpJZJfbG33NOR/izlLsdI38rBAUpAqjQsLpNY7aihBJOA/95XqZpPChHF2wIieo1n3ceCZlAGSkNQbjLYx9yyo7zlduQHsvrtLJXemriY+xBw1EvKxJgkHaYLHQazOdstaY24OQJrGbPB0P0Fxk2Wc+QSVSq5gEn0SVw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZvUJUrNl6ANajshaEcEYREoNVnfY8bz+KZSy/ybfWM4=;
+ b=bjPaJGDDkkq6rw7R1GcOy/lMnzqne+BbnSPYejtDa5mHYU+QfkWUxGxXVewknsIO5plhIa17LMxEIQr2Km7g50FmhllvRZFazL6eTKkfx1HolC6zbgmGv8ZoL+Izfd4glfsdXpJPw3iaRrPnf4/AdEofJ9+RkM4J7JNxVnwUxzA=
+From: Luca Fancellu <Luca.Fancellu@arm.com>
+To: "Orzel, Michal" <Michal.Orzel@amd.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <Bertrand.Marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v4 5/7] arm/mpu: Introduce utility functions for the pr_t
+ type
+Thread-Topic: [PATCH v4 5/7] arm/mpu: Introduce utility functions for the pr_t
+ type
+Thread-Index: AQHbuRpkN0hqV8eyHEGiv1K+YR6eKbPD+ocAgAFZpwA=
+Date: Tue, 6 May 2025 08:45:48 +0000
+Message-ID: <D12F66BB-984F-4230-8846-BB69119FFC2F@arm.com>
+References: <20250429152057.2380536-1-luca.fancellu@arm.com>
+ <20250429152057.2380536-6-luca.fancellu@arm.com>
+ <a11855ac-62f1-439b-8fc0-dcf2006a76b0@amd.com>
+In-Reply-To: <a11855ac-62f1-439b-8fc0-dcf2006a76b0@amd.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3826.500.181.1.5)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	DB7PR08MB2987:EE_|DB9PR08MB9684:EE_|DU2PEPF0001E9C5:EE_|AM8PR08MB5697:EE_
+X-MS-Office365-Filtering-Correlation-Id: 80bad79f-25d1-4738-e15a-08dd8c7a7989
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|366016|376014|1800799024|38070700018;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?utf-8?B?TkZYY3hXY0dXMi9EZHg5WDIremZqaW54VHpNL1FSUk92bVBmMFhCRWdNQ3dB?=
+ =?utf-8?B?U0l4R0VJMGtQSGdCbFMvVU1CTXRYaFY4eEZhdHVDSTk2eUJpY3cvVHN3ZmVV?=
+ =?utf-8?B?ZkhmQ0N1VzE4QnhLZFRVSFdhUi9BOUJkUHdoeEdjUEFQTGV0QVJjQnFUTEVD?=
+ =?utf-8?B?NFQvVGJvanhONGo4WlE3aTJtOXRPVUd3dGZ6QlhEcit3aldLY1hHaFI0cDBB?=
+ =?utf-8?B?NUJkMGZNalc0RWlpaWwzeTZnbDU0WlEzK1ozSTNIUnpJRURTYTZGTkpiSjRn?=
+ =?utf-8?B?d3FxLzBQSDRSUXhLQTlMT2NVV2pUc2MvYm9GQ2M5OXpvNFJmbnJmSWRvZlBr?=
+ =?utf-8?B?bGVxbTRocERwTURHUzBOQ2YzUVJlNWVyMW5LRkxqZkpERjFNRlZRbUxWU3Na?=
+ =?utf-8?B?dnRGa3NXM3liSmVmMzk4REVMT3BLdVVPNDJ4WmQxRkVtcnZGczRKcE1RUkJO?=
+ =?utf-8?B?WTg2eFA3cWVUb0t6ZDF1N3hiM2pubHVPUkgvUU0xOHlOWHVlSmdoVUJwRUJT?=
+ =?utf-8?B?R2NGMmtCYmRzY0F2SWZTRGxUaFNmVXVjZUZBSm1PQ09Xdm10OTcvZy9VTmtu?=
+ =?utf-8?B?K2ZkUUFHaEp5eTY1Q3JVSUJZZm4wZktNNVNKZGtydytyVG9sWXBxYXBXMGNw?=
+ =?utf-8?B?SkZCTk9ONEpnczFFVU5TMngzWVl5KzJFRyt2eFdJVnZpTDVsYjJLNi9EMk9Q?=
+ =?utf-8?B?dGhnbzJ6NFU2TGtEMHZJRDNBekZhQm5BWXg4Z1RDamk2S3ZoWkpvdGtDQk5H?=
+ =?utf-8?B?UmVodFNOTndNNlc1NW9yVFc0Vk5RZm11Uk1zSFAzYXk2L0tEaUJNWUxpRkM3?=
+ =?utf-8?B?VWd2ZCtlNWg2ZXk4UVRNYnV6STg1d3J4em1hYXNKQWt5Z1NmeTdEMExrcXYr?=
+ =?utf-8?B?S0IrY0lrem80NVpsV0lwdm9TYVUydEpQUGJKd0QydXc3T2xSR0NBeXNUcUU2?=
+ =?utf-8?B?YW10M0p3T21MRlRDMm02RjdLUW41UU1CRm1WTzVYYUhNZGlNbXpsajdoTitr?=
+ =?utf-8?B?VzdpSUtocS9LcW5rT1NwVW5qcmlmWUFxUmNPaXRnZW40RGtYTk9rUnRLdEpC?=
+ =?utf-8?B?TUNNS3JvNllWUjZ2M1BKckxXNmVLUkhtTHBnTnZZeDhhMzNPZXRybi9obFR4?=
+ =?utf-8?B?SnV1MkpzaW1EZGFkeVNjNUx0dnJ1Qno3MWhyZjNMS1pONVhxdjUyL0tWNzNn?=
+ =?utf-8?B?R2NtV0Zjcy9KbTBxT3czb0pFODYxZ2JaTEsyMlVvQ2lmYTVVcjFZL2Z5akhG?=
+ =?utf-8?B?ckNGd2xpZGRjeTBUdUk5S1BoSkdRbFJhdTV2WlkwMUxqc1NOZVJuRXRQY3Z0?=
+ =?utf-8?B?YlFLN0hCQ3BibENqWmZHeUhuRzA3Q1oyejZpRTIyclJlM1VsS3FteW54ZG00?=
+ =?utf-8?B?ZjBUcXd4Z1NGbm8vMU03TWF0MThRd0RXcXdNN2RHbG9aVEZRNm52ZHBWTjEx?=
+ =?utf-8?B?WDI0Q0ZlMU1nQXpSMnlPc2R3UjdhZWlUY2ZyOVlZdkREYitYb2NrUlBOdW8v?=
+ =?utf-8?B?bEEyOVZlMDNjcnVaNityWlhhWFA3ZmUzbVlQdG1VbE9qK3NmR1BsOGlucnpr?=
+ =?utf-8?B?NG5oVEx1Q2EzcGFpUnc3V0dOUXc2bDN5clRhVGFKZzh0K3ZMM1doN2RRcFZx?=
+ =?utf-8?B?QVg0NFR4VHVBcmNnNUcyUW9YTmJNZ25WRXpuRzZVSkhVTXZmSFZBSXFVd2xP?=
+ =?utf-8?B?QXpvdEk0clJHNzlRQTNXeXZybGxycDZsRkl6QkNITVdhVmJySWRKeXRIWVFq?=
+ =?utf-8?B?K1pYakp6MUFXM0gwQWRMdWlGY0g0WGI5MjNyU2RodUpZM1o0d1paR0UvQ216?=
+ =?utf-8?B?V2F3Qm9FbWdBanVCSnR4SzdpLzBjRFhXcDRyUElvaGRUOVA5NWpYSjh6ditj?=
+ =?utf-8?B?eDBVZnIvdzBSYjVHNmpmQ3gxNzhZNE5zb0VtaDExTVVPWjdBQUtKdlNHdUpE?=
+ =?utf-8?B?SGp0V2x0VUJzdmgyZ3J6QU8xanRocldTUEszelJ4NXJweXJyT3Q0T2RVb1dN?=
+ =?utf-8?Q?x+rE235fQFw34Eib4HrX1LnMFyTN8o=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB2987.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7D446BEEDB408D419C1E57A7917DF399@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB9684
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DU2PEPF0001E9C5.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	cfa1caf3-aaaf-4f1e-29e7-08dd8c7a6617
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|14060799003|35042699022|82310400026|1800799024|36860700013|376014|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?Zi90aWQ2enphK1VMY2JxZlk3T3drV29LcW4vZGVRMEY5Nkd4K2p6cEw4akUx?=
+ =?utf-8?B?eW5QYVo0dC9La0hhYnNMRHVXOEdSTHlIM0t4dGxzakJlK0pJMFhXbGUyMloz?=
+ =?utf-8?B?cXpxTTNtTmxTMTd1QUxEYk04QTZ5UTlBd2NOVm9ucTE5TmhJMlpFd0dSblBy?=
+ =?utf-8?B?UnVKRVRIeFNEYWs4T3RZSG5MMTVXek00dHdwY2NDR1ZGZVJoWHRnaEFza1FI?=
+ =?utf-8?B?aHNTWEs2MTRrc1NLc3ZYKy9VMHJlbnFZWWNBWTJLbGlja3R3NldrYWorRVdN?=
+ =?utf-8?B?YWdUZjdaRmxQcDFkRko4SFlENlRRVGpTQWZHckpabnBISndmbVVsQlRTc0E3?=
+ =?utf-8?B?NGNzT2oybkJKWkcwaElhVXFmNEVZcmFwSWVUZnp3WmtjSElWb0Q4V1E2QWNW?=
+ =?utf-8?B?cGNENDkyaEJJTm1RbmZHeHhtRUE4Q25BREpJZVd0aGNKMml1S3k1N25LK2Mw?=
+ =?utf-8?B?cGpCQ3JwU2hEeHFHdEtrUWphOCtpd1VFUVhTdHVDRVUwRE1tRHN6YlVtemt4?=
+ =?utf-8?B?dWJrNXgraWRMd2lTcVRHYTJzbERHdkNPQzI4ckx6eksrTnM2NHg5Qlc2VVBU?=
+ =?utf-8?B?a3ZPTkRpYTBKSlBlakxyVXB5M0tzSGY5dVBkV0F1UWZMMG1TY3hMY2pEaTVW?=
+ =?utf-8?B?N1FvaXpwa0ZKMEt0bkJGNm1PWTFkZysyQ3VrUXpab0d4V3krMkU2bFp6MmtG?=
+ =?utf-8?B?bUZQek1tOUowOGNRUHlRMFo3eU5tQWovd1RZckJuTjNBb2pla0VYeWhGWTZG?=
+ =?utf-8?B?Ti9ZWkliemtvWWhMcERjSnBpU210OGdRYmYrRllTVU1Hc0M2ci9iQ1NTcmNl?=
+ =?utf-8?B?MmtyeXdaTy9yOVJZNXVvT2VEYUNPWjE4YTlTaytHY0Rvd2ZPa0lkU0Q3NWoz?=
+ =?utf-8?B?cU1iT2xOd0c5UnExakQxTnpkSzFkUjJqWWkvU2hTM0hqbG1Za3ZUMDUya0Rw?=
+ =?utf-8?B?ZzdoWWZTZ3lCNFYraGw0bEFFd3dvZkJRZG9IbFVjaVd6TTA3UDdaUkFRY2hD?=
+ =?utf-8?B?cStvS01CN1RIWnY3OTZxMlB1WElMN285K21uU2tQeEloYS9KTk1hOE9sc3FJ?=
+ =?utf-8?B?Tytnb3hlc05iaWpOS1k3dEFUU2tNTXBjNlBWUEpXYXo2ejgxbkNTY3RyL1JY?=
+ =?utf-8?B?ZXdISUZON2JiSWtWenlrcThzcXVmWDFhYmZXMFRzMWpIUkxZdVNibzllMnZK?=
+ =?utf-8?B?YzFySG5jdlZza0Rub2M3RG5TVGhrV2N0VFF6a1k4by94OVNqUnpxR3VPdUhL?=
+ =?utf-8?B?d2JTS3RJVkdpWWZpVFFyNnJyNk9UcjlhTVdLem1Qb1Q2SUJUVkxMUjV1a1hN?=
+ =?utf-8?B?ZWNTdmtDMXIvQlpXQld6S1U1dXlaaTdoa1BjNGVQUnlRMVRQd1FCV0Y2ZE9i?=
+ =?utf-8?B?NnJQS1EwdThZRGhQNFFyQlQzUmxiK2xsaytMaTRpb2xTS0FsNEMwSEhCVnhz?=
+ =?utf-8?B?bDJtdG5jT1lRZHRnQWo5ZkFzSmR6QXhERjJzUnVpcDFieEo1Yng3d0NvTzdk?=
+ =?utf-8?B?N213b3UzVEJjUTZnVmpZNit0akZDNC93TkJNam5vNEVIOVVhV0JUZ0x1SXBx?=
+ =?utf-8?B?YkgyVWxXeG1NbXN1WkErZVBDaTJCT2NDaUs3QUFpdU1pQnNJRExIV01WOS92?=
+ =?utf-8?B?R1lyL3hZTGlTWElOSGNPR0NVOWg4ZjdFMXR4eXlSeWVEN3VYaittZ0lnSTAv?=
+ =?utf-8?B?SVYwN3hTa0M4TkxxaWRpR09VVk1QNWRxL0VHanpZOXd6OVROZU1tWWdsckN4?=
+ =?utf-8?B?dHpEYzRmMk1hcG5IejJ5Z0xNTUhiMHVKNVE2VkgwTHFDMTRpK2t4ZTljeElv?=
+ =?utf-8?B?WEtPV2QvSDVwVTkrS2xURWFyeW81RTJIWkNzWVFjb3o5ZHpVQytHTkh5VVIv?=
+ =?utf-8?B?cUhKUVVsRmN3bWRkZ0U2NEl2THREQjB4TTdiQkU2NEIzMjFuRzh2U0Q1TXN3?=
+ =?utf-8?B?YmJ1REJPS0pMRWJnR2RKSmRRMmNQY1VsWFNOWHNsWW81NWNWSVdMYkl2aXZO?=
+ =?utf-8?B?b3hCZGVSZytGYTF5aFJJcmE1MzFoOGp4VmVKbmk2SXRYZmI4V2R3VHhHejl1?=
+ =?utf-8?Q?VCrlXJ?=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(14060799003)(35042699022)(82310400026)(1800799024)(36860700013)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2025 08:46:20.8321
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80bad79f-25d1-4738-e15a-08dd8c7a7989
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DU2PEPF0001E9C5.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5697
 
-Such flag is added to the domain create hypercall, and a matching option is
-added to xl and libxl to set the flag: `cache_control`.  When the flag is
-set, the domain is allowed the usage of cache control operations.  If the
-flag is not explicitly set, libxl will set it if the domain has any `iomem`
-or `ioports` ranges assigned.
-
-Modify cache_flush_permitted() helper so that it's return value is no
-longer based on the IO resources assigned to the domain, but rather whether
-the domain has been explicitly allowed control over the cache, or if it has
-IOMMU support and there's a single IOMMU in the system that doesn't allow
-forcing snooping behind the guest back.  As a result of this, the return of
-cache_flush_permitted() is constant for the lifetime of a domain, based on
-the domain creation flags and the capabilities of the IOMMU if enabled
-for the domain.
-
-Since cache control is now known at domain creation, and doesn't change for
-the lifetime of a domain, the cache related checks can be simplified,
-specially in iomem_{permit,deny}_access() and
-ioports_{permit,deny}_access(), as the EPT EMT values won't depend on
-whether the domain has IO resources assigned, but rather chosen at creation
-time.
-
-As cache_flush_permitted() now also takes into account if a domain has an
-IOMMU assigned, and whether the IOMMU supports forcing snooping, some of
-the checks can be simplified to drop the iommu_snoop or is_iommu_enabled()
-checks previously used in conjunction with cache_flush_permitted().
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- docs/man/xl.cfg.5.pod.in         | 10 ++++++++++
- tools/include/libxl.h            |  7 +++++++
- tools/libs/light/libxl_create.c  |  6 ++++++
- tools/libs/light/libxl_types.idl |  3 +++
- tools/ocaml/libs/xc/xenctrl.ml   |  1 +
- tools/ocaml/libs/xc/xenctrl.mli  |  1 +
- tools/xl/xl_parse.c              |  2 ++
- xen/arch/arm/dom0less-build.c    | 12 ++++++++++--
- xen/arch/arm/domain.c            |  3 ++-
- xen/arch/arm/domain_build.c      |  6 ++++++
- xen/arch/x86/hvm/mtrr.c          |  2 +-
- xen/arch/x86/hvm/vmx/vmcs.c      |  3 +--
- xen/arch/x86/hvm/vmx/vmx.c       |  2 +-
- xen/arch/x86/include/asm/iocap.h | 19 ++-----------------
- xen/arch/x86/mm/p2m-ept.c        |  7 +------
- xen/arch/x86/setup.c             |  7 +++++++
- xen/common/domain.c              |  3 ++-
- xen/include/asm-generic/iocap.h  |  2 --
- xen/include/public/domctl.h      |  4 +++-
- xen/include/xen/iocap.h          | 25 ++-----------------------
- xen/include/xen/sched.h          |  6 ++++++
- 21 files changed, 74 insertions(+), 57 deletions(-)
-
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 7339c44efd54..d61685de4db3 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -1705,6 +1705,16 @@ This feature is a B<technology preview>.
- 
- =back
- 
-+=item B<cache_control=BOOLEAN>
-+
-+If this option is B<true>, Xen allows the guest to perform cache control
-+operations.
-+
-+If this option is missing the default will be set based on whether there are
-+any <B>iomem or <B>ioports (if applicable) assigned to the guest.  Note that
-+enabling <B>passthrough support can also allow guest cache control operations
-+depending on the <B>IOMMU features.
-+
- =back
- 
- =head2 Paravirtualised (PV) Guest Specific Options
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index b7ad7735ca4c..9a55e98f28bb 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -647,6 +647,13 @@
-  */
- #define LIBXL_HAVE_DT_OVERLAY_DOMAIN 1
- 
-+/*
-+ * LIBXL_HAVE_CACHE_CONTROL indicates the presence of cache_control boolean
-+ * field in libxl_domain_build_info.  The field signals whether a domain is
-+ * allowed access to cache control operations.
-+ */
-+#define LIBXL_HAVE_CACHE_CONTROL 1
-+
- /*
-  * libxl memory management
-  *
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index e03599ea99d1..469fa306e2f0 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -493,6 +493,9 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
-         b_info->bootloader_user =
-             libxl__strdup(gc, getenv("LIBXL_BOOTLOADER_USER"));
- 
-+    libxl_defbool_setdefault(&b_info->cache_control,
-+                             b_info->num_iomem || b_info->num_ioports);
-+
-     return 0;
- }
- 
-@@ -667,6 +670,9 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-         if (libxl_defbool_val(b_info->vpmu))
-             create.flags |= XEN_DOMCTL_CDF_vpmu;
- 
-+        if (libxl_defbool_val(b_info->cache_control))
-+            create.flags |= XEN_DOMCTL_CDF_cache_control;
-+
-         assert(info->passthrough != LIBXL_PASSTHROUGH_DEFAULT);
-         LOG(DETAIL, "passthrough: %s",
-             libxl_passthrough_to_string(info->passthrough));
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 9bb296993199..59303e8df74a 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -737,6 +737,9 @@ libxl_domain_build_info = Struct("domain_build_info",[
- 
-     ("vpmu", libxl_defbool),
- 
-+    # Allow guest access to cache control instructions.
-+    ("cache_control", libxl_defbool),
-+
-     ], dir=DIR_IN,
-        copy_deprecated_fn="libxl__domain_build_info_copy_deprecated",
- )
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 2690f9a92316..15ea2cbb0490 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -70,6 +70,7 @@ type domain_create_flag =
-   | CDF_IOMMU
-   | CDF_NESTED_VIRT
-   | CDF_VPMU
-+  | CDF_cache_control
- 
- type domain_create_iommu_opts =
-   | IOMMU_NO_SHAREPT
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index febbe1f6ae3f..c9ce99a62c16 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -63,6 +63,7 @@ type domain_create_flag =
-   | CDF_IOMMU
-   | CDF_NESTED_VIRT
-   | CDF_VPMU
-+  | CDF_cache_control
- 
- type domain_create_iommu_opts =
-   | IOMMU_NO_SHAREPT
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 089a88935aff..b5f3133581cb 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2993,6 +2993,8 @@ skip_usbdev:
- 
-     xlu_cfg_get_defbool(config, "vpmu", &b_info->vpmu, 0);
- 
-+    xlu_cfg_get_defbool(config, "cache_control", &b_info->cache_control, 0);
-+
-     xlu_cfg_destroy(config);
- }
- 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index a356fc94fc4d..e0f0b828d0b6 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -1106,6 +1106,8 @@ void __init create_domUs(void)
- 
-             if ( !strcmp(dom0less_iommu, "enabled") )
-                 iommu = true;
-+            else
-+                d_cfg.flags |= XEN_DOMCTL_CDF_cache_control;
-         }
- 
-         if ( (flags & CDF_hardware) && !(flags & CDF_directmap) &&
-@@ -1120,8 +1122,14 @@ void __init create_domUs(void)
-             has_dtb = true;
-         }
- 
--        if ( iommu_enabled && (iommu || has_dtb) )
--            d_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-+        if ( iommu || has_dtb )
-+            /*
-+             * Domain has devices assigned, either enable IOMMU support (if
-+             * present), or explicitly allow cache control operations for DMA
-+             * coherency.
-+             */
-+            d_cfg.flags |= iommu_enabled ? XEN_DOMCTL_CDF_iommu
-+                                         : XEN_DOMCTL_CDF_cache_control;
- 
-         if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
-         {
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 45aeb8bddcb0..1a8503f8d471 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -612,7 +612,8 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-     unsigned int max_vcpus;
-     unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
-     unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu |
--                                   XEN_DOMCTL_CDF_xs_domain );
-+                                   XEN_DOMCTL_CDF_xs_domain |
-+                                   XEN_DOMCTL_CDF_cache_control);
-     unsigned int sve_vl_bits = sve_decode_vl(config->arch.sve_vl);
- 
-     if ( (config->flags & ~flags_optional) != flags_required )
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 270a6b97e42c..0e7e6a6ac044 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -2381,6 +2381,12 @@ void __init create_dom0(void)
- 
-     if ( iommu_enabled )
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-+    else
-+        /*
-+         * A hardware domain without IOMMU will need cache control to
-+         * ensure DMA coherency.
-+         */
-+        dom0_cfg.flags |= XEN_DOMCTL_CDF_cache_control;
- 
-     if ( opt_dom0_sve )
-     {
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index e7acfb6e8dc4..887994d2b984 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -766,7 +766,7 @@ HVM_REGISTER_SAVE_RESTORE(MTRR, hvm_save_mtrr_msr, NULL, hvm_load_mtrr_msr, 1,
- 
- void memory_type_changed(struct domain *d)
- {
--    if ( (is_iommu_enabled(d) || cache_flush_permitted(d)) &&
-+    if ( cache_flush_permitted(d) &&
-          d->vcpu && d->vcpu[0] && p2m_memory_type_changed(d) )
-     {
-         flush_all(FLUSH_CACHE);
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index a44475ae15bd..fba62b5d47d8 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1921,8 +1921,7 @@ void cf_check vmx_do_resume(void)
-          *  2: execute wbinvd on all dirty pCPUs when guest wbinvd exits.
-          * If VT-d engine can force snooping, we don't need to do these.
-          */
--        if ( has_arch_pdevs(v->domain) && !iommu_snoop
--                && !cpu_has_wbinvd_exiting )
-+        if ( cache_flush_permitted(v->domain) && !cpu_has_wbinvd_exiting )
-         {
-             int cpu = v->arch.hvm.vmx.active_cpu;
-             if ( cpu != -1 )
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 827db6bdd807..639882ceb216 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3840,7 +3840,7 @@ static void vmx_do_extint(struct cpu_user_regs *regs)
- 
- static void cf_check vmx_wbinvd_intercept(void)
- {
--    if ( !cache_flush_permitted(current->domain) || iommu_snoop )
-+    if ( !cache_flush_permitted(current->domain) )
-         return;
- 
-     if ( cpu_has_wbinvd_exiting )
-diff --git a/xen/arch/x86/include/asm/iocap.h b/xen/arch/x86/include/asm/iocap.h
-index 61d026dbf5f6..d3bb66f0e97a 100644
---- a/xen/arch/x86/include/asm/iocap.h
-+++ b/xen/arch/x86/include/asm/iocap.h
-@@ -19,31 +19,16 @@
-     (!rangeset_is_empty((d)->iomem_caps) ||             \
-      !rangeset_is_empty((d)->arch.ioport_caps))
- 
--#define cache_flush_permitted has_arch_io_resources
--
- static inline int ioports_permit_access(struct domain *d, unsigned long s,
-                                         unsigned long e)
- {
--    bool flush = cache_flush_permitted(d);
--    int ret = rangeset_add_range(d->arch.ioport_caps, s, e);
--
--    if ( !ret && !is_iommu_enabled(d) && !flush )
--        /* See comment in iomem_permit_access(). */
--        memory_type_changed(d);
--
--    return ret;
-+    return rangeset_add_range(d->arch.ioport_caps, s, e);
- }
- 
- static inline int ioports_deny_access(struct domain *d, unsigned long s,
-                                       unsigned long e)
- {
--    int ret = rangeset_remove_range(d->arch.ioport_caps, s, e);
--
--    if ( !ret && !is_iommu_enabled(d) && !cache_flush_permitted(d) )
--        /* See comment in iomem_deny_access(). */
--        memory_type_changed(d);
--
--    return ret;
-+    return rangeset_remove_range(d->arch.ioport_caps, s, e);
- }
- 
- #endif /* __X86_IOCAP_H__ */
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index 0cf6818c13f0..d3ce422d76d7 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -505,12 +505,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-         return -1;
-     }
- 
--    /*
--     * Conditional must be kept in sync with the code in
--     * {iomem,ioports}_{permit,deny}_access().
--     */
--    if ( type != p2m_mmio_direct && !is_iommu_enabled(d) &&
--         !cache_flush_permitted(d) )
-+    if ( type != p2m_mmio_direct && !cache_flush_permitted(d) )
-     {
-         *ipat = true;
-         return X86_MT_WB;
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 25189541244d..ec1b9772bec0 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1029,6 +1029,13 @@ static struct domain *__init create_dom0(struct boot_info *bi)
- 
-     if ( iommu_enabled )
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-+    else if ( !pv_shim )
-+        /*
-+         * pvshim doesn't support passthrough, so never allow it cache control.
-+         * Otherwise a hardware domain without IOMMU will need cache control to
-+         * ensure DMA coherency.
-+         */
-+        dom0_cfg.flags |= XEN_DOMCTL_CDF_cache_control;
- 
-     /* Create initial domain.  Not d0 for pvshim. */
-     bd->domid = get_initial_domain_id();
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index abf1969e60e3..07b81a70c7a6 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -721,7 +721,8 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-          ~(XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
-            XEN_DOMCTL_CDF_s3_integrity | XEN_DOMCTL_CDF_oos_off |
-            XEN_DOMCTL_CDF_xs_domain | XEN_DOMCTL_CDF_iommu |
--           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu) )
-+           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu |
-+           XEN_DOMCTL_CDF_cache_control) )
-     {
-         dprintk(XENLOG_INFO, "Unknown CDF flags %#x\n", config->flags);
-         return -EINVAL;
-diff --git a/xen/include/asm-generic/iocap.h b/xen/include/asm-generic/iocap.h
-index 664bbc8971fe..011c1a475072 100644
---- a/xen/include/asm-generic/iocap.h
-+++ b/xen/include/asm-generic/iocap.h
-@@ -5,8 +5,6 @@
- #define has_arch_io_resources(d)                        \
-     (!rangeset_is_empty((d)->iomem_caps))
- 
--#define cache_flush_permitted has_arch_io_resources
--
- #endif /* __ASM_GENERIC_IOCAP_H__ */
- 
- /*
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 5b2063eed984..9134dde7e105 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -66,9 +66,11 @@ struct xen_domctl_createdomain {
- #define XEN_DOMCTL_CDF_nested_virt    (1U << _XEN_DOMCTL_CDF_nested_virt)
- /* Should we expose the vPMU to the guest? */
- #define XEN_DOMCTL_CDF_vpmu           (1U << 7)
-+/* Guest has control over the cache? */
-+#define XEN_DOMCTL_CDF_cache_control  (1U << 8)
- 
- /* Max XEN_DOMCTL_CDF_* constant.  Used for ABI checking. */
--#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_vpmu
-+#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_cache_control
- 
-     uint32_t flags;
- 
-diff --git a/xen/include/xen/iocap.h b/xen/include/xen/iocap.h
-index ffbc48b60fd5..a753fea2ec50 100644
---- a/xen/include/xen/iocap.h
-+++ b/xen/include/xen/iocap.h
-@@ -15,34 +15,13 @@
- static inline int iomem_permit_access(struct domain *d, unsigned long s,
-                                       unsigned long e)
- {
--    bool flush = cache_flush_permitted(d);
--    int ret = rangeset_add_range(d->iomem_caps, s, e);
--
--    if ( !ret && !is_iommu_enabled(d) && !flush )
--        /*
--         * Only flush if the range(s) are empty before this addition and
--         * IOMMU is not enabled for the domain, otherwise it makes no
--         * difference for effective cache attribute calculation purposes.
--         */
--        memory_type_changed(d);
--
--    return ret;
-+    return rangeset_add_range(d->iomem_caps, s, e);
- }
- 
- static inline int iomem_deny_access(struct domain *d, unsigned long s,
-                                     unsigned long e)
- {
--    int ret = rangeset_remove_range(d->iomem_caps, s, e);
--
--    if ( !ret && !is_iommu_enabled(d) && !cache_flush_permitted(d) )
--        /*
--         * Only flush if the range(s) are empty after this removal and
--         * IOMMU is not enabled for the domain, otherwise it makes no
--         * difference for effective cache attribute calculation purposes.
--         */
--        memory_type_changed(d);
--
--    return ret;
-+    return rangeset_remove_range(d->iomem_caps, s, e);
- }
- 
- #define iomem_access_permitted(d, s, e)                 \
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 559d201e0c7e..908a3b7292ff 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1222,6 +1222,12 @@ static always_inline bool is_iommu_enabled(const struct domain *d)
-     return evaluate_nospec(d->options & XEN_DOMCTL_CDF_iommu);
- }
- 
-+static inline bool cache_flush_permitted(const struct domain *d)
-+{
-+    return (d->options & XEN_DOMCTL_CDF_cache_control) ||
-+           (is_iommu_enabled(d) && !iommu_snoop);
-+}
-+
- #ifdef CONFIG_MEM_PAGING
- # define mem_paging_enabled(d) vm_event_check_ring((d)->vm_event_paging)
- #else
--- 
-2.48.1
-
+SGkgTWljaGFsLA0KDQo+IE9uIDUgTWF5IDIwMjUsIGF0IDEzOjA4LCBPcnplbCwgTWljaGFsIDxN
+aWNoYWwuT3J6ZWxAYW1kLmNvbT4gd3JvdGU6DQo+IA0KPiANCj4gDQo+IE9uIDI5LzA0LzIwMjUg
+MTc6MjAsIEx1Y2EgRmFuY2VsbHUgd3JvdGU6DQo+PiBJbnRyb2R1Y2UgZmV3IHV0aWxpdHkgZnVu
+Y3Rpb24gdG8gbWFuaXB1bGF0ZSBhbmQgaGFuZGxlIHRoZQ0KPiBzL2Zldy9hIGZldy8NCj4gcy9m
+dW5jdGlvbi9mdW5jdGlvbnMvDQoNCk9rDQoNCj4+IA0KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNo
+L2FybS9pbmNsdWRlL2FzbS9tcHUuaCBiL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9tcHUuaA0K
+Pj4gaW5kZXggNDBhODYxNDBiNmNjLi4wZTBhN2YwNWFkZTkgMTAwNjQ0DQo+PiAtLS0gYS94ZW4v
+YXJjaC9hcm0vaW5jbHVkZS9hc20vbXB1LmgNCj4+ICsrKyBiL3hlbi9hcmNoL2FybS9pbmNsdWRl
+L2FzbS9tcHUuaA0KPj4gQEAgLTI0LDYgKzI0LDcwIEBADQo+PiAjZGVmaW5lIE5VTV9NUFVfUkVH
+SU9OU19NQVNLICAgIChOVU1fTVBVX1JFR0lPTlMgLSAxKQ0KPj4gI2RlZmluZSBNQVhfTVBVX1JF
+R0lPTl9OUiAgICAgICAyNTUNCj4+IA0KPj4gKyNpZm5kZWYgX19BU1NFTUJMWV9fDQo+PiArDQo+
+PiArI2lmZGVmIENPTkZJR19BUk1fNjQNCj4+ICsvKg0KPj4gKyAqIFNldCBiYXNlIGFkZHJlc3Mg
+b2YgTVBVIHByb3RlY3Rpb24gcmVnaW9uLg0KPj4gKyAqDQo+PiArICogQHByOiBwb2ludGVyIHRv
+IHRoZSBwcm90ZWN0aW9uIHJlZ2lvbiBzdHJ1Y3R1cmUuDQo+PiArICogQGJhc2U6IGJhc2UgYWRk
+cmVzcyBhcyBiYXNlIG9mIHRoZSBwcm90ZWN0aW9uIHJlZ2lvbi4NCj4+ICsgKi8NCj4+ICtzdGF0
+aWMgaW5saW5lIHZvaWQgcHJfc2V0X2Jhc2UocHJfdCAqcHIsIHBhZGRyX3QgYmFzZSkNCj4+ICt7
+DQo+PiArICAgIHByLT5wcmJhci5yZWcuYmFzZSA9IChiYXNlID4+IE1QVV9SRUdJT05fU0hJRlQp
+Ow0KPiBTaG91bGRuJ3QgeW91IHRha2UgTVBVX1JFR0lPTl9SRVMwIGludG8gYWNjb3VudD8NCg0K
+WWVzIGluZGVlZCwgSeKAmWxsIGZpeA0KDQpDaGVlcnMsDQpMdWNhDQoNCg==
 
