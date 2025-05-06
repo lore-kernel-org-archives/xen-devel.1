@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4205AC3ABBC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 16:56:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977694.1364703 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1139FC3ABBC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:02:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977742.1364713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLaM-0003aN-0c; Tue, 06 May 2025 16:56:02 +0000
+	id 1uCLge-0005jR-L7; Tue, 06 May 2025 17:02:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977694.1364703; Tue, 06 May 2025 16:56:01 +0000
+Received: by outflank-mailman (output) from mailman id 977742.1364713; Tue, 06 May 2025 17:02:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLaL-0003aG-U2; Tue, 06 May 2025 16:56:01 +0000
-Received: by outflank-mailman (input) for mailman id 977694;
- Tue, 06 May 2025 16:56:01 +0000
+	id 1uCLge-0005jK-IA; Tue, 06 May 2025 17:02:32 +0000
+Received: by outflank-mailman (input) for mailman id 977742;
+ Tue, 06 May 2025 17:02:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cniF=XW=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uCLaL-0003a4-A4
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:56:01 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
+ <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uCLWh-00058E-Ar
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 16:52:15 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fcb86f3a-2a9a-11f0-9eb4-5ba50f476ded;
- Tue, 06 May 2025 18:56:00 +0200 (CEST)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso38010355e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:56:00 -0700 (PDT)
-Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b391c42bsm213418805e9.39.2025.05.06.09.55.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 May 2025 09:55:59 -0700 (PDT)
+ id 7450c7d3-2a9a-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 18:52:11 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ace98258d4dso866837866b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 09:52:11 -0700 (PDT)
+Received: from fedora.. (user-109-243-69-225.play-internet.pl.
+ [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad1891a3cb9sm740295366b.60.2025.05.06.09.52.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 May 2025 09:52:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,158 +47,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcb86f3a-2a9a-11f0-9eb4-5ba50f476ded
+X-Inumbo-ID: 7450c7d3-2a9a-11f0-9eb4-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1746550560; x=1747155360; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=f0QPuDckgmBjGtmjN6+ro2L4EL4408HeOivJnI0knug=;
-        b=mumb5Drg+xbkgfXoDrDS7JDUBQYSlX4o3BmGSzoK4A4rs0mYZBx3YoxcwlJIHlDBM7
-         E+4U7F/sHvvEdI/gz/oMzHAsfPVMMramPSqzIhovB3v0rdwZtbHebILejlohqLPswd1x
-         X4umHUMADjn8ej8GHvM7UdKaTrDrAGLQ3Dm0A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746550560; x=1747155360;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1746550331; x=1747155131; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=f0QPuDckgmBjGtmjN6+ro2L4EL4408HeOivJnI0knug=;
-        b=Ws88sj5luLKPc4K+501YRRZh7e9LAgG7rxnOAmZrQTC9r0cZqcqkQ6qJZXKal78SAr
-         Xvz/hOwoSWhtrkUhz/hkNIkOZgZFCtCbLl+LMHKm9bOuJZ/8LOy3+1LJQgHBV/FVUA/P
-         +fj5FApjSU8N1vAlL3aTCEqJdJei9EYg+AhL+wrTBoXwpZQdlW9HIRg1hhhX66dVBIkS
-         rbVt7b7UlbPHm2aKI79IhrdWCOPd0O+eg7mCR1vrD22/5t8JrxIzOhmZU9sdeY3gYC0P
-         PKN/2btNqEN+LRWCEIFlCrS7WM9gtG1C38tQRS3YEqnu4u01Orto/vWJuU2A1MIKHfz9
-         FYag==
-X-Forwarded-Encrypted: i=1; AJvYcCUTggKxxdLgh0DFCT8wK9P7vL8SZJ+2naqalI5x/JSEE1aUdBd595OMgDVVngCkyuf1QSqSMDqUMNA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwBGTqTx7o8PbTYiaZPCWt49E4LeO6gjw4jB3qSvoJKVWEWYWjv
-	9TGkjdFTEue7vlFh8LhEMiYCLHzJZQvVndmMtFqqeSZ1omREcauuMLwr7cZ3v6S96SOyccg1Bk9
-	C
-X-Gm-Gg: ASbGnctAO1g6ZPiwhJHgaCF/6kcMXKf7jB5NcQ+iSCUqKk05Qi8hLTAfFam2cy5Nu6s
-	Un1RcQYUhn5ABck6zsXIEn07V3o2iYtGe5m31YXgZMWt5uGMYU40g8nCLIEj0yNJ3w4C3vIQbxP
-	eGL3cJCk7lE8BBLnM6/asw78LystqvMJ8ThY211NtLosT5lr9FgcrbYf64Sp2zIdY7EtOIgFvtW
-	z/FY/5WZ6NaZdQAK9CGEK4fSy/WqB46BRBa1ztxgfiSTdzXNt/56casDkDOIK3POfkc0cnN23FW
-	SJ2kgqLqmD/hvDS9BMGLrLQ+OAtoFyZpFHm94hfWlCzs8HGQvD7n/1GTMbuNhOke4BvTqxSMExg
-	gVClezw7MMH1BOBHt
-X-Google-Smtp-Source: AGHT+IEWs9FBr+MfhSGpyAnzkxWzwR5cuBv9L7wLnjU62hB26r925f/QCitetRdkbPpj6fQ8R1Lm0g==
-X-Received: by 2002:a05:600c:4e09:b0:43d:224:86b5 with SMTP id 5b1f17b1804b1-441c48b0213mr115376295e9.4.1746550559648;
-        Tue, 06 May 2025 09:55:59 -0700 (PDT)
-Message-ID: <cf3e9dbf-7ea7-4b33-a4be-14cb5dac0ebc@citrix.com>
-Date: Tue, 6 May 2025 17:55:58 +0100
+        bh=74wiABz14bkw2Z/ZaZ483gmJiMxC4gHcocH3VFNYNbQ=;
+        b=MBkhhV87eQ6bgaluAlm3NUhVI2I0x3LOURr+fUAZSXLD17RlMNOM0TFE1bLRihbuCj
+         /aJDV3M4oBQrdywhmpfGMYfZ7rpZ0YUfYByHjBE9duXEzk4HqMXAi8akTPpavw45d4KB
+         qPO1yAXRgCnSBk8nUTlDDXErgBrI1v04d3okFLwpBStC8NNdD4ylEGLGkgILiCeePBsF
+         denSCbXPGlDX6vj/TK6FGdY4erhyClBX5B3ZppeeDGxwrcNZa8c08Reys4DgRulyNdna
+         1EqhwH9FNDtpuQ7ODoURI68dku4cHNWWN7x47LtAQ5YzxwxRtlgn3x/MrpnJDEGRFfm4
+         pCnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746550331; x=1747155131;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=74wiABz14bkw2Z/ZaZ483gmJiMxC4gHcocH3VFNYNbQ=;
+        b=Fl6vlptdQgRLqYXwNSDxgM4emYHS5vOH1MTc7J/1qTub3EBrJusytrFflP97F7B65F
+         b1PV6jEV8DYpUexpfTgRyIhrq3Qwuvhj+GRVlTiKZsOgiaI+BWYNjzZEs/bu/MTmTerC
+         l4fhBIJOKZ+KgtwVJlJz2IhD+AL5tETlIe2HUdfxvPv01OlBv4Y6eoyOGe5kzi3CH1lY
+         MfEewK0XUMlSmu1JCNc52lJ8/pet+WnL/j491jQnw+etKNLthEY5oKEVvWHaZIJ2Fxwf
+         CzRbxiezCiWs9egzQTrHj/ZNfbPHNbBevk7t9fwuWvp/vYiqBL2xRgr6k/pCqDk8PkUm
+         Vfdw==
+X-Gm-Message-State: AOJu0Yx1YcBH9MXIh7y5g/DHJ98xGq87dzSwWBWFcAS+tSU0IpjxhdfA
+	GCDdsL7eaqJQDc+qoHeEeRKe+1QQYNhrDny+kAYb4KQgDoxvKDn6GFUdmg==
+X-Gm-Gg: ASbGnctv3poAlvvredZkrlTfCHi1pXcLMlZ+GzmgxEFCXvGiEciMUaEYAW/+uErI56e
+	y4lx78mlytoHzQlvbAvmkWkj9nB3nMximrNhfGVbaRaEokoiohMut5IxWeJYqEkUvm6YBTKBbyC
+	Hzv0NtU7ERevCIiLmVkJ2nVltKEVLSOmzR/HuTDhLpXUoG2p2dcBBRtJLQaolo/Lavx8gJK5Upu
+	QPPZW2N4ojF+LIbPi3UJRszMTk7j3QWgZymh7XG6ZeJk14MzkkjvwcYEj21TxMMIGVwHw5xPe5F
+	Hts8oMcDDnlweK0ejGIMmq6UU9xEa/TFyb+28bYCsjrZIeEpmLKwkCn+mky7zA6icfJWLZ9qbHU
+	NsP7QM/tgrg==
+X-Google-Smtp-Source: AGHT+IFblu95xoNtRnG4Tji7qi8R+0NxWxbkXy0mdy5QOgL2ttB1oJu0kBzpaskg/5IPpBcIaP9wCA==
+X-Received: by 2002:a17:907:1c12:b0:ace:3732:8a86 with SMTP id a640c23a62f3a-ad1e8d053a9mr17933666b.41.1746550330549;
+        Tue, 06 May 2025 09:52:10 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v2 15/16] xen/riscv: implement setup_irq()
+Date: Tue,  6 May 2025 18:51:45 +0200
+Message-ID: <6f17bbf0eb6240d7389d389f0973af6fda5cce29.1746530883.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1746530883.git.oleksii.kurochko@gmail.com>
+References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] efi: Add a function to check if Secure Boot mode is
- enabled
-To: Kevin Lampis <kevin.lampis@cloud.com>, xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
-References: <20250506162449.1676405-1-kevin.lampis@cloud.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20250506162449.1676405-1-kevin.lampis@cloud.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-CC'ing the EFI maintainers.
+Introduce support for IRQ setup on RISC-V by implementing setup_irq() and
+__setup_irq(), adapted and extended from an initial implementation by [1].
 
-On 06/05/2025 5:24 pm, Kevin Lampis wrote:
-> diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-> index e39fbc3529..7c528cd5dd 100644
-> --- a/xen/common/efi/boot.c
-> +++ b/xen/common/efi/boot.c
-> @@ -870,6 +870,27 @@ static void __init pre_parse(const struct file *file)
->                     " last line will be ignored.\r\n");
->  }
->  
-> +static void __init init_secure_boot_mode(void)
-> +{
-> +    EFI_STATUS status;
-> +    EFI_GUID gv_uuid = EFI_GLOBAL_VARIABLE;
-> +    uint8_t data = 0;
-> +    UINTN size = sizeof(data);
-> +    UINT32 attr = 0;
+__setup_irq() does the following:
+  - Sets up an IRQ action.
+  - Validates that shared IRQs have non-NULL `dev_id` and are only used when
+    existing handlers allow sharing.
+  - Uses smp_wmb() to enforce memory ordering after assigning desc->action
+    to ensure visibility before enabling the IRQ.
+  - Supports multi-action setups via CONFIG_IRQ_HAS_MULTIPLE_ACTION.
 
-Newline between variables and code please.
+setup_irq() does the following:
+  - Converts IRQ number to descriptor and acquires its lock.
+  - Rejects registration if the IRQ is already assigned to a guest domain,
+    printing an error.
+  - Delegates the core setup to __setup_irq().
+  - On first-time setup, disables the IRQ, routes it to Xen using
+    intc_route_irq_to_xen(), sets default CPU affinity (current CPU),
+    calls the handler’s startup routine, and finally enables the IRQ.
 
-> +    status = efi_rs->GetVariable((CHAR16 *)L"SecureBoot", &gv_uuid, &attr,
-> +                                 &size, &data);
-> +
-> +    if ( status == EFI_NOT_FOUND ||
-> +         (status == EFI_SUCCESS &&
-> +          attr == (EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS) &&
-> +          size == 1 && data == 0) )
-> +        /* Platform does not support Secure Boot or it's disabled. */
-> +        efi_secure_boot = false;
-> +    else
-> +        /* Everything else play it safe and assume enabled. */
-> +        efi_secure_boot = true;
-> +}
+irq_set_affinity() invokes set_affinity() callback from the IRQ handler
+if present.
 
-I'm not sure this logic does what you want when a weird answer comes
-back from GetVariable().
+Defined IRQ_NO_PRIORITY as default priority used when routing IRQs to Xen.
 
-Also, you can't have this be a common function, yet ...
+[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7390e2365828b83e27ead56b03114a56e3699dd5
 
-> diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
-> index 7e1fce291d..b63d21f16c 100644
-> --- a/xen/common/efi/runtime.c
-> +++ b/xen/common/efi/runtime.c
-> @@ -40,6 +40,9 @@ void efi_rs_leave(struct efi_rs_state *state);
->  unsigned int __read_mostly efi_num_ct;
->  const EFI_CONFIGURATION_TABLE *__read_mostly efi_ct;
->  
-> +#if defined(CONFIG_X86) && !defined(CONFIG_PV_SHIM)
-> +bool __ro_after_init efi_secure_boot;
-> +#endif
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V2:
+ - Added implenmtation of aplic_set_irq_type() as it is going to be used in
+   this commit. And also, update the implementation of it. Make default case
+   of switch to do panic().
+ - Move all forward declaration up  in asm/irq.h.
+ - s/__setup_irq/_setup_irq.
+ - Code style fixes.
+ - Update commit message.
+ - use smp_wmb() instead of smp_mb() in _setup_irq().
+ - Drop irq_set_affinity().
+ - Use plain C operator instead if {clear,set}_bit() for desc->status as it
+   is always used under spinlock().
+ - Drop set_bit(_IRQ_DISABLED, &desc->status) in setup_irq() as in the case
+   when IRQ is setuped for a first time, desc->status should be already set
+   to IRQ_DISABLED in init_one_irq_desc().
+----
+ xen/arch/riscv/include/asm/irq.h |  2 +
+ xen/arch/riscv/irq.c             | 84 ++++++++++++++++++++++++++++++++
+ 2 files changed, 86 insertions(+)
 
-... this variable exist only on x86.
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+index 1a05c5ff88..d35fac0a86 100644
+--- a/xen/arch/riscv/include/asm/irq.h
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -9,6 +9,8 @@
+ 
+ #define NR_IRQS 1024
+ 
++#define IRQ_NO_PRIORITY 0
++
+ /* TODO */
+ #define nr_irqs 0U
+ #define nr_static_irqs 0
+diff --git a/xen/arch/riscv/irq.c b/xen/arch/riscv/irq.c
+index 056bdf3ca8..969e22395d 100644
+--- a/xen/arch/riscv/irq.c
++++ b/xen/arch/riscv/irq.c
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include <xen/bug.h>
++#include <xen/cpumask.h>
+ #include <xen/device_tree.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+@@ -58,6 +59,89 @@ int platform_get_irq(const struct dt_device_node *device, int index)
+     return dt_irq.irq;
+ }
+ 
++static int _setup_irq(struct irq_desc *desc, unsigned int irqflags,
++                      struct irqaction *new)
++{
++    bool shared = irqflags & IRQF_SHARED;
++
++    ASSERT(new != NULL);
++
++    /*
++     * Sanity checks:
++     *  - if the IRQ is marked as shared
++     *  - dev_id is not NULL when IRQF_SHARED is set
++     */
++    if ( desc->action != NULL && (!(desc->status & IRQF_SHARED) || !shared) )
++        return -EINVAL;
++    if ( shared && new->dev_id == NULL )
++        return -EINVAL;
++
++    if ( shared )
++        desc->status |= IRQF_SHARED;
++
++#ifdef CONFIG_IRQ_HAS_MULTIPLE_ACTION
++    new->next = desc->action;
++#endif
++
++    desc->action = new;
++    smp_wmb();
++
++    return 0;
++}
++
++int setup_irq(unsigned int irq, unsigned int irqflags, struct irqaction *new)
++{
++    int rc;
++    unsigned long flags;
++    struct irq_desc *desc = irq_to_desc(irq);
++    bool disabled;
++
++    spin_lock_irqsave(&desc->lock, flags);
++
++    disabled = (desc->action == NULL);
++
++    if ( desc->status & IRQ_GUEST )
++    {
++        spin_unlock_irqrestore(&desc->lock, flags);
++        /*
++         * TODO: would be nice to have functionality to print which domain owns
++         *       an IRQ.
++         */
++        printk(XENLOG_ERR "ERROR: IRQ %u is already in use by a domain\n", irq);
++        return -EBUSY;
++    }
++
++    rc = _setup_irq(desc, irqflags, new);
++    if ( rc )
++        goto err;
++
++    /* First time the IRQ is setup */
++    if ( disabled )
++    {
++        /* Route interrupt to xen */
++        intc_route_irq_to_xen(desc, IRQ_NO_PRIORITY);
++
++        /*
++         * We don't care for now which CPU will receive the
++         * interrupt.
++         *
++         * TODO: Handle case where IRQ is setup on different CPU than
++         *       the targeted CPU and the priority.
++         */
++        desc->handler->set_affinity(desc, cpumask_of(smp_processor_id()));
++
++        desc->handler->startup(desc);
++
++        /* Enable irq */
++        desc->status &= ~IRQ_DISABLED;
++    }
++
++ err:
++    spin_unlock_irqrestore(&desc->lock, flags);
++
++    return rc;
++}
++
+ int arch_init_one_irq_desc(struct irq_desc *desc)
+ {
+     desc->arch.type = IRQ_TYPE_INVALID;
+-- 
+2.49.0
 
-Also, why adjust it for PV shim?  None of this is even compiled for PV shim.
-
-~Andrew
 
