@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DDA9C3ABBC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:16:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.977859.1364772 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 593E8C3ABBC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 May 2025 17:16:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.977867.1364792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLti-0003IQ-08; Tue, 06 May 2025 17:16:02 +0000
+	id 1uCLu6-00046u-E0; Tue, 06 May 2025 17:16:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 977859.1364772; Tue, 06 May 2025 17:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 977867.1364792; Tue, 06 May 2025 17:16:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCLth-0003IJ-Ti; Tue, 06 May 2025 17:16:01 +0000
-Received: by outflank-mailman (input) for mailman id 977859;
- Tue, 06 May 2025 17:16:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uCLu6-00046n-BU; Tue, 06 May 2025 17:16:26 +0000
+Received: by outflank-mailman (input) for mailman id 977867;
+ Tue, 06 May 2025 17:16:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=u2/q=XW=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uCLtg-0003I5-KZ
- for xen-devel@lists.xenproject.org; Tue, 06 May 2025 17:16:00 +0000
-Received: from fout-a5-smtp.messagingengine.com
- (fout-a5-smtp.messagingengine.com [103.168.172.148])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c4baaf0a-2a9d-11f0-9ffb-bf95429c2676;
- Tue, 06 May 2025 19:15:55 +0200 (CEST)
-Received: from phl-compute-01.internal (phl-compute-01.phl.internal
- [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id 4CC3313814D6;
- Tue,  6 May 2025 13:15:54 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Tue, 06 May 2025 13:15:54 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 6 May 2025 13:15:52 -0400 (EDT)
+ <SRS0=/GUx=XW=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uCLjP-00068s-Ar
+ for xen-devel@lists.xenproject.org; Tue, 06 May 2025 17:05:23 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4bf75eba-2a9c-11f0-9eb4-5ba50f476ded;
+ Tue, 06 May 2025 19:05:22 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e22e6ed2so9356575a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 May 2025 10:05:22 -0700 (PDT)
+Received: from [192.168.1.5] (user-109-243-69-225.play-internet.pl.
+ [109.243.69.225]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad1895087d1sm734784366b.128.2025.05.06.10.05.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 May 2025 10:05:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,137 +47,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4baaf0a-2a9d-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1746551754;
-	 x=1746638154; bh=r3C7Cx71JtnvXS2B9VHdE8tIW7iQ8lSDLZJ61gznPeU=; b=
-	jutSPlto6G1CZkPno2H60NBXE1PvGZC3Ks2bwBpUmt0duCsnOFMZlJxPoKlTFTfd
-	nHzpJif4pqDrkExlIwPAn7bTJvjKR6ZXU1YkYriG2PgpoLDeCO7KtcaOBrmVoqNP
-	F+FIcRnto2Q1duY6Y5C2teNo6+vuNK815VoGh29wDf6gDdn5AVQDiUaLF6Qgj8xB
-	BuZGiRGIlSjv8PS2cUgf4RIHL0eYgZJeugOSqC5QZrrN22hFMuRbu+SOuCtvZwif
-	NE+S6BO+eYMROt0KSW9EjMjBJiziEvEKMHvFs8zJgVyE/3jkOfLJWXZQLCEb99f8
-	o4N1P+4CYa7kfc3SNns2HQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1746551754; x=1746638154; bh=r3C7Cx71JtnvXS2B9VHdE8tIW7iQ8lSDLZJ
-	61gznPeU=; b=doCtDDJdj17ewHE6q1oO9kfuRizcDxdMoLKpJ83pnCsBWIH68pI
-	urt2vnGtcNN+14IHY5IJ5aJRRVA+rDAxwmYbKeUC1r828UcsGUr7lOCWOno7AqZa
-	pT2a6N4AwOHF4FBEi5KObsT+xjUMKQVPmdrO1NurOmQmUIcOWls/Wm+8G6bHBAN0
-	NK1/1CkthqPHZGfmAq20Fh0HA+iuYKJU/3LM+iVTJ0IxSoyE44CyJJQEaP8aHewI
-	hMYbxXnWsuysajk7b/9Eh8n6TTKqWeQMvGZruJdluDDJCx2X2SNiWCP73Nc46o2p
-	5ib4I4ZNo7MPkM8U9vFljgUB/GU6Yk7UMFA==
-X-ME-Sender: <xms:yUMaaG3DeZlzMupzsUFwNnYIANiPxutVr11lX3dP2dzEqtlmfF_MHw>
-    <xme:yUMaaJE_3rTzqvGk7LZ1N2G8AQ-M57GCC8ekKCEMLc1_iLc6Dvb39EgrRMKrCTUsx
-    7jbRi_M5ozvSA>
-X-ME-Received: <xmr:yUMaaO6uyf7lmZSp3uCDun35T2LaK9I6KHcaEJOD_wF-xBbxjfq1oCZZ9mArCCxcipfUoX6AtyEpOeJw2b2i3QYCteYKVlfgnQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkeegheehucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepfeeggfekvdffhfdvjefggffgleeitdetfeeifeeigedtgedvie
-    elkeeuueejueeknecuffhomhgrihhnpeigvghnphhrohhjvggtthdrohhrghenucevlhhu
-    shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkh
-    esihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopedu
-    tddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoheprhhoshhsrdhlrghgvghrfigrlh
-    hlsegtihhtrhhigidrtghomhdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhs
-    rdigvghnrdhorhhgpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnh
-    hprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihig
-    rdgtohhmpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtg
-    homhdprhgtphhtthhopegrnhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghh
-    pdhrtghpthhtohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtoh
-    epjhgsvghulhhitghhsehsuhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigv
-    nhdrohhrgh
-X-ME-Proxy: <xmx:yUMaaH27VJtK-oJjrGNaDWJEq1FoXMlUFQS_ZbYXytBHlyHuDVPN2Q>
-    <xmx:yUMaaJHmBb2TLykrCaKRSqGC2C0_eWfba51f-Nw0A3XM3I5Gq2UOAg>
-    <xmx:yUMaaA8OPJVbkBRCvuENfpICfVWUJ2LK10B0fAAePQQwScPdW-HRpQ>
-    <xmx:yUMaaOkHpemJmf2POfMZhHJpLdGzC-WZ0LhbV2MQDRKzLXI_uenLgQ>
-    <xmx:ykMaaG6SjMpqZL7BjyqomoGD_QuhIJGndMSutyg5hrv2Gz0yXI2c4rkR>
-Feedback-ID: i1568416f:Fastmail
-Date: Tue, 6 May 2025 19:15:49 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, xen-devel@lists.xenproject.org,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 0/4] LivePatch signing support
-Message-ID: <aBpDxXKVHdt8IQX5@mail-itl>
-References: <20250506143218.1782603-1-ross.lagerwall@citrix.com>
+X-Inumbo-ID: 4bf75eba-2a9c-11f0-9eb4-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1746551122; x=1747155922; darn=lists.xenproject.org;
+        h=cc:to:subject:from:content-language:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=pDa0D1+aR8Ko4O2Nqip7CmD95+rrrCXpgxd1DZMq3A4=;
+        b=Q7aLYrezoz9adBIuNsYbO4fBLZ/QLqQtDcrefKOTr/tTWUTrcIbmw/2G53GP23eoZu
+         0gxrUY3uSFXSzjjC+3Te2kaPSrE2fiknmdZohPPKxX0IpSTnjsoeyLOu2D/hq659S09P
+         uPD1iA3PmNOV1D++Db9ts41hKKmu/SnrHhcLa2aRmMGdRX9XF9zqKNBxE233gw/VZNnK
+         uo3Bwd2pKW48xkX7JZGOMBvhej+Frbbdzh4vIX6PLDBsj1V/79PY2/4ILblJK0pQkEEt
+         zVFtZ6FEuoPxIn5qPRJZaoOi4eObEHx/N/I3npCLRqoG1nGgUdYbvukND34J8cAWlUQW
+         XzEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746551122; x=1747155922;
+        h=cc:to:subject:from:content-language:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pDa0D1+aR8Ko4O2Nqip7CmD95+rrrCXpgxd1DZMq3A4=;
+        b=xDYwfplDD8lnRF+/49mLTibNFw9j58Z4qp3vbPj/tNFSnWaKjGqxX8UlfwzuB6IaER
+         Ulhz0hTziOPbhuWXWZwbauGv3mhVzYc5/jD/HFY1Ir5u1Eh2EhK91GhBAqfek/Ui3hP1
+         7cQ0E15izusJOLjPDuqbXQgZdqY9NEI5+GpvRB8PPe0Fjdh672Z4XOYC18H6RkEKqyCE
+         jGdSj5FbjM5g42HngQSKo2JbWqkWQtIVg1Y4RO01cLxVSR4CeqwSX9E9gk2E7fCklfvn
+         F1w8XSavoDXPHUeChcp+PKqMyp6pJBhGiWa7EHclH8d5JmuwN4dG6P+IvAybxgtRI0dL
+         Um4w==
+X-Gm-Message-State: AOJu0YxhsMB+oIvpZIkocFygBjJnPjajPmCfWDAbssfFHmYWOk7nigPy
+	K5MJ+Mtx/NM6NlIxWJcPFAWNP1bfZX5yVXrF8XYohGEglCRIcj38cRWMMQ==
+X-Gm-Gg: ASbGncuwKWn+ttsq840usHD0HaLUc7bSoTkFjgdvktWgoVR5K/J+02SQqn/apwekSB5
+	klyYglHVYQuLTK2rIiCZgVhNBYKmBtBQtFs5NaucP/ZznUoQ4PavaWK7FHF85eXDd/cb/9iH0Jq
+	9DdpSlS/r/NliKQOqoxj03emwZxyCASE+d2UwQN+w5XCrqwduxhzEoqpStbiqoWlTckH0769sOb
+	19SwFpnDnkeVy7YvYkzcyd5oEvf9YLVd0vIgZclU1SKx2zfpR5ji1v33Ylyi4kmZz+SyxUGAp3/
+	WsLe04cKPqz79mjTgUhleDLJSs/4xGP94APgON2nlJMPVqAMbCZrmzH3biKkaNXfiQ6DpsLIiJ+
+	yf1O9GOjj56tND/NO
+X-Google-Smtp-Source: AGHT+IEVjhy5HF3PwgOBcWMoWA8WYUsi+JV7gB6U0aftrO7QSii4fQf5ik3/xNjNQHIxhLop4oXvXg==
+X-Received: by 2002:a17:906:794f:b0:ace:388e:d84a with SMTP id a640c23a62f3a-ad1e8e66735mr18410966b.47.1746551109058;
+        Tue, 06 May 2025 10:05:09 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------eFso15EVoD0XLSWwdndnFzyY"
+Message-ID: <666e3f49-2f92-4828-8897-8579832bcaa2@gmail.com>
+Date: Tue, 6 May 2025 19:05:08 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="YXVRcQecoyfcOYEc"
-Content-Disposition: inline
-In-Reply-To: <20250506143218.1782603-1-ross.lagerwall@citrix.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Xen 4.21 release schedule proposal
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Community Manager <community.manager@xenproject.org>,
+ "committers @ xenproject . org" <committers@xenproject.org>
+
+This is a multi-part message in MIME format.
+--------------eFso15EVoD0XLSWwdndnFzyY
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Hello everyone,
+
+Following the 8-month release cycle, also taking into account that 4.20
+has been released 5 March 2025 and the next "good" month for release should
+be November according to:
+https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html
+
+Here is suggested schedule:
+
+** Proposed option: Wed Nov 12, 2025 **
+  (~ +8 months from Xen 4.20 release)
+
+- Last posting date          Fri Aug 08, 2025 (+15 weeks from now)
+
+Patches adding new features are expected to be posted to the mailing
+list by this date, although perhaps not in their final version.
+
+- Feature freeze             Fri Aug 29, 2025 (+3 weeks from Last posting date)
+
+Patches adding new features should be committed by this date.
+Straightforward bugfixes may continue to be accepted by maintainers.
+
+- Code freeze                Fri Sep 26, 2025 (+4 weeks from Feature freeze)
+
+Bugfixes only.
+
+- Hard code freeze           Fri Oct 24, 2025 (+3 weeks from Code freeze)
+
+Bugfixes for serious bugs (including regressions), and low-risk fixes only.
+
+- Final commits              Fri Nov 07, 2025 (+2 weeks from Hard code freeze)
+
+Branch off staging-4.20.
+
+- Release                    Wed Nov 12, 2025
 
 
---YXVRcQecoyfcOYEc
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 6 May 2025 19:15:49 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, xen-devel@lists.xenproject.org,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 0/4] LivePatch signing support
+Please don't hesitate to provide your feedback.
 
-On Tue, May 06, 2025 at 03:32:12PM +0100, Ross Lagerwall wrote:
-> Live patch signing support was mentioned as future work in the design
-> document several years ago. This series finally implements support for
-> it since it is a requirement of Secure Boot to prevent loading unsigned
-> code into Xen.
->=20
-> Note that this series depends on another patch that has not yet been
-> merged:
-> xen/lib: Export additional sha256 functions
-> https://lists.xenproject.org/archives/html/xen-devel/2025-05/msg00222.html
->=20
-> Jennifer Herbert (1):
->   livepatch: Verify livepatch signatures
->=20
-> Kevin Lampis (1):
->   livepatch: Embed public key in Xen
->=20
-> Ross Lagerwall (2):
->   docs: Introduce live patch signing
->   crypto: Add RSA support
+If there are no objections, I plan to update the Wiki page
+Xen_Project_X.YY_Release_Notes to make it easier to find our final schedule
+( especially for the people who aren't following xen-devel mailing list ).
+As an additional benefit, it will also be accessible via SUPPORT.md (in the
+wiki athttps://xenbits.xen.org/docs/unstable-staging/support-matrix.html).
 
-Patches 1 and 4 seems to be lost...
+Thanks and have a good week.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+Best regards,
+  Oleksii
 
---YXVRcQecoyfcOYEc
-Content-Type: application/pgp-signature; name=signature.asc
+--------------eFso15EVoD0XLSWwdndnFzyY
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
+<!DOCTYPE html>
+<html>
+  <head>
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmgaQ8YACgkQ24/THMrX
-1ywo/Qf/atQOQQW6QhoNBolkdNVltezJOOcRY9duo5eiChUA4nXVPqBaAjrjIOuE
-cbjLBvCgAtQD6Vd27+guh7HSmK+pY5TAThLvk5/5wKFWbMhHwcwgfhraiEVmu/Rs
-94K+ji4QV1LOovsvUA5jFkDu8YnbDsSNORxVWTOQo5FKdQkFvDV0k4Y3GOJa+r6T
-gCzA253bhK/sYh5JR0DB/aZWcrBw/pqfGhBkQgCZSic4dd0XYqNSdYzDCOxuYDDT
-tTh9LZTyLm6l6pluEf+b6OG0zXAJEsherix7LPdN4kypdKFLxXhQfXlUvRyc4wHp
-AU9U0FHuM8nnPclE5l0tSCL+ug/Xyg==
-=JXur
------END PGP SIGNATURE-----
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <pre id="b"
+style="font-size: 13px; font-family: monospace; background: rgb(255, 255, 255); color: rgb(0, 0, 51); white-space: pre-wrap; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Hello everyone,
 
---YXVRcQecoyfcOYEc--
+Following the 8-month release cycle, also taking into account that 4.20
+has been released 5 March 2025 and the next "good" month for release should
+be November according to:
+<a
+href="https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html"
+style="font-size: 13px; font-family: monospace; background: rgb(255, 255, 255); color: rgb(0, 0, 255); text-decoration: none;"
+    class="moz-txt-link-freetext">https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html</a>
+
+Here is suggested schedule:
+
+** Proposed option: Wed Nov 12, 2025 **
+ (~ +8 months from Xen 4.20 release)
+
+- Last posting date          Fri Aug 08, 2025 (+15 weeks from now)
+
+Patches adding new features are expected to be posted to the mailing
+list by this date, although perhaps not in their final version.
+
+- Feature freeze             Fri Aug 29, 2025 (+3 weeks from Last posting date)
+
+Patches adding new features should be committed by this date.
+Straightforward bugfixes may continue to be accepted by maintainers.
+
+- Code freeze                Fri Sep 26, 2025 (+4 weeks from Feature freeze)
+
+Bugfixes only.
+
+- Hard code freeze           Fri Oct 24, 2025 (+3 weeks from Code freeze)
+
+Bugfixes for serious bugs (including regressions), and low-risk fixes only.
+
+- Final commits              Fri Nov 07, 2025 (+2 weeks from Hard code freeze)
+
+Branch off staging-4.20.
+
+- Release                    Wed Nov 12, 2025
+
+
+Please don't hesitate to provide your feedback.
+
+If there are no objections, I plan to update the Wiki page
+Xen_Project_X.YY_Release_Notes to make it easier to find our final schedule
+( especially for the people who aren't following xen-devel mailing list ).
+As an additional benefit, it will also be accessible via SUPPORT.md (in the
+wiki at <a
+href="https://xenbits.xen.org/docs/unstable-staging/support-matrix.html"
+style="font-size: 13px; font-family: monospace; background: rgb(255, 255, 255); color: rgb(0, 0, 255); text-decoration: none;"
+    class="moz-txt-link-freetext">https://xenbits.xen.org/docs/unstable-staging/support-matrix.html</a>).
+
+Thanks and have a good week.
+
+Best regards,
+ Oleksii
+</pre>
+    <p></p>
+  </body>
+</html>
+
+--------------eFso15EVoD0XLSWwdndnFzyY--
 
