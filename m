@@ -4,53 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB34EC3ABC3
-	for <xen-devel@archiver.kernel.org>; Wed,  7 May 2025 22:47:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.978860.1365693 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FB1C3ABC0
+	for <xen-devel@archiver.kernel.org>; Wed,  7 May 2025 23:02:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.978881.1365703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCnXo-0002M6-2g; Wed, 07 May 2025 22:47:16 +0000
+	id 1uCnmR-0005ca-AO; Wed, 07 May 2025 23:02:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 978860.1365693; Wed, 07 May 2025 22:47:16 +0000
+Received: by outflank-mailman (output) from mailman id 978881.1365703; Wed, 07 May 2025 23:02:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uCnXn-0002Lz-Vg; Wed, 07 May 2025 22:47:15 +0000
-Received: by outflank-mailman (input) for mailman id 978860;
- Wed, 07 May 2025 22:47:14 +0000
+	id 1uCnmR-0005cT-7a; Wed, 07 May 2025 23:02:23 +0000
+Received: by outflank-mailman (input) for mailman id 978881;
+ Wed, 07 May 2025 23:02:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sPgg=XX=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
- id 1uCnXm-00027q-JU
- for xen-devel@lists.xenproject.org; Wed, 07 May 2025 22:47:14 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2061f.outbound.protection.outlook.com
- [2a01:111:f403:2416::61f])
+ <SRS0=rmgq=XX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1uCnmQ-0005cN-AK
+ for xen-devel@lists.xenproject.org; Wed, 07 May 2025 23:02:22 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 369ed8ad-2b95-11f0-9ffb-bf95429c2676;
- Thu, 08 May 2025 00:47:12 +0200 (CEST)
-Received: from MW4PR04CA0281.namprd04.prod.outlook.com (2603:10b6:303:89::16)
- by MW6PR12MB9018.namprd12.prod.outlook.com (2603:10b6:303:241::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.26; Wed, 7 May
- 2025 22:47:00 +0000
-Received: from MWH0EPF000971E4.namprd02.prod.outlook.com
- (2603:10b6:303:89:cafe::79) by MW4PR04CA0281.outlook.office365.com
- (2603:10b6:303:89::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.32 via Frontend Transport; Wed,
- 7 May 2025 22:47:00 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000971E4.mail.protection.outlook.com (10.167.243.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8722.18 via Frontend Transport; Wed, 7 May 2025 22:46:59 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 7 May
- 2025 17:46:58 -0500
-Received: from xsjstefanos51.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 7 May 2025 17:46:58 -0500
+ id 51321e96-2b97-11f0-9ffb-bf95429c2676;
+ Thu, 08 May 2025 01:02:16 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id CD6665C465D;
+ Wed,  7 May 2025 22:59:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A9F6C4CEE2;
+ Wed,  7 May 2025 23:02:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,173 +43,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 369ed8ad-2b95-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D+lxbHcTN0tQnvxPin5mebs7QJV73W7GqjyqL28/QZfoQHXbT/xaSIw8MHs9cVV1KuYEi+X1PvYHOtO4BS0bNBnHDw5LCegXNhg4iUoH0DQalbhU3K7mPwQNvx1bBrZWp252lF08EbkW9/eLVibcWTnhgWxQLs2Rcn+huUafcrIr4z7f1JLX1DiBa5og5e2MtNzwlCPUf/tXjvwDnXAlfEaV7/xs0lfJ5O06tA4NwjwT8j7nc+kqmbXnjxXsSF8E/3Xko5RuYlCpwA6yC1LKjSLY9Ppc8fCMnp0XqWZk5yplO4UZqoswg4k8U2lbTyDoQ2c8UssnIlEp8AqGG5Q1MA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6mFAi4zYRUkBuhbz9pnZdU9K7CsFcZrta7WY6BXIQCE=;
- b=H3cZ8XRucGENSuyxpXXPUuD0Ghk8SJP72ocvOLcf/IGvGpmPExjEmNLOqnG31p9iw0fkTmnWcHf2r5wtWkhSnWiJsE3e+Mzo+Rv6TPSvat2AW1DapnF89ysgcptiIeHRd3Oz/ygbFSO3AFrA8Ug/dXDBlMv6yvofzqVmjHsQQWsIoqhuLAU9t5bk51ROTI5Rh4qdoTPlzC3caggmeMJWPTLILKx1qWjjMx9G5T7Y54uRqQ+MYkvAvYzLE+F7D/k1NCSrp0d09pVVUmEPkpgCmoytM4ZPNjnsDNkDZ4SXIVYGNMf8/m9caHJM/5sD7xVhCf+tHuTW5dhOzx+JC92gxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6mFAi4zYRUkBuhbz9pnZdU9K7CsFcZrta7WY6BXIQCE=;
- b=Ep0PGq2zTclxeRcF41CsCGmjgeqkccPQNVh/GZBd8zqdjtY3HwoZC0AsH60pgGPvx4ZPWu34cmUlkOov5CeV4VL6KRp4m0mDP20Gc2FwR6Ss24e/p1Y5Ot0FEYtPVnT5Tx3NnwzTIV8HopycU/LDUmaRosl+jVG9q9TMQwaHEjU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: <victorm.lira@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>, Victor Lira
-	<victorm.lira@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	"Jan Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Federico Serafini
-	<federico.serafini@bugseng.com>, Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [PATCH v1 1/2] x86: x86_emulate: address violation of MISRA C Rule 13.2
-Date: Wed, 7 May 2025 15:46:39 -0700
-Message-ID: <77f9c4cabe607ce4024013c604bc790fb629d322.1746657135.git.victorm.lira@amd.com>
-X-Mailer: git-send-email 2.47.0
+X-Inumbo-ID: 51321e96-2b97-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1746658933;
+	bh=cvA0hU8fRMdH3DNXGdnJMKTk0d4FGdmMHYBwW5VuKXM=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Up8Yc0Ta3SGyGm0R26tYopUQJnzTzuceV56ruNcr691y20uKDI+STnBJNb3jrS0+u
+	 X9ywPheN6WK2bllOm/zQO6SJHd5/1wATc9BXkIWDlSTm63JyDyOtqEfsN0sERBwhTi
+	 ndYzvDpJer8LZOfTWUYLKSxA/NG7hOaCFEt6NhfWKGCqXFOqqcUJp9IuhDljrp+Qlx
+	 hNyqakAbTGFBuetZyOXk66+OVSw7S52T3uVMmJ0F9S97nnWC9q3TGllvueemYH2X/e
+	 8SVca7VAtN9sEbDV8iPKh7BEnL4tN9lxVGF69MSnxoYAQ61uI2Ot28xY+TM6MvIPMV
+	 ZOmNtxEb3iZBQ==
+Date: Wed, 7 May 2025 16:02:11 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
+    Jan Beulich <jbeulich@suse.com>, 
+    "Ragiadakou, Xenia" <Xenia.Ragiadakou@amd.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, jason.andryuk@amd.com, 
+    agarciav@amd.com, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] xen/x86: allow Dom0 PVH to call XENMEM_exchange
+In-Reply-To: <aBnOQyXSz-j33Wux@macbook.lan>
+Message-ID: <alpine.DEB.2.22.394.2505061658330.3879245@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2504251314050.785180@ubuntu-linux-20-04-desktop> <19d9aec4-c21a-47a9-9c58-6bfcadbd22e0@suse.com> <alpine.DEB.2.22.394.2504281242240.785180@ubuntu-linux-20-04-desktop> <aBiVkw2SXJHxpieh@mail-itl> <aBjLoM_ttxqftzlp@macbook.lan>
+ <alpine.DEB.2.22.394.2505051100050.3879245@ubuntu-linux-20-04-desktop> <aBnOQyXSz-j33Wux@macbook.lan>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: None (SATLEXMB04.amd.com: victorm.lira@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E4:EE_|MW6PR12MB9018:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75777940-4063-49b3-cf23-08dd8db913df
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|7416014|376014|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?elozb1hJYkY1Z1Y3Nm5RMWJiZk4wNHIyR1dzak9PZlA0V3FJa3ZkQitRT2p3?=
- =?utf-8?B?bzd0VzdPOE1yRVRoeEo4Vm1TNE9aYUs1NWhTSUVSV01JQ2lDR2xHSDJabTg1?=
- =?utf-8?B?SlFOcjZSRDVsVkJxdFhXNHJlZjRSczk0WU1lekhVaVBsNFpOY2wzZjBVNHJy?=
- =?utf-8?B?MG5DN0wxQWJRQXMwaEszc3EwZDdKK3RUSFZqZHBrak9jcHgzaTNwcWN2d3Nj?=
- =?utf-8?B?L3lvUHBPSGw4NXVtMXhxTDk2L1A5S2psYXNjajRVc3R5YVNYOVdzckxzN0JX?=
- =?utf-8?B?TnBmT3dSZ3loeUEvS3Mya3B6MCsyUG8vZ2cveU9jRlRoU3VJcmtFc1hvL1hi?=
- =?utf-8?B?Q1JpbzBpZnhncGpvbWt0Vk1xaFVEMmlZTk45ZjJsMXBlZ0N2Z0d1RXhrZVBP?=
- =?utf-8?B?K3J6VmhVU1h1dzFJVWVUcXRPRi9ObkM1eWhLUXdSZXV5RmNkMDcrYUxmVjBI?=
- =?utf-8?B?dUlhcFkyUjQxQjVUT3RaQmFUOTJQOG13ekhRM3V5TFFlRXRjenY5dCtoQ2Vs?=
- =?utf-8?B?L3YxVUJFQ3BiSnZvRTlaUFh2dmo4alJyMXlGQUszVzF4b3dDQTl2VjFpcktW?=
- =?utf-8?B?MXFCSmx6aytCT241dk5nRVBPZytCaUoxRFVRLzNhMmdLTjVHRFNwdFJPUm41?=
- =?utf-8?B?bVJnczlXV1kzeTZsNVdsSkkxN0o1bjFEdldXSUlmTnQ5TjJpbUlxbkVTTVRz?=
- =?utf-8?B?SkpLYlZnU1JaMnFXTVZCSWFKQ2F6OGRiQ2t1T29mK3ZWM0pzTXVoTzhNZTI1?=
- =?utf-8?B?S1M5WG9ZdjU1RW16RmJ3QkFES08vSG1OL1ZTcldRWUlURlZFOGNveXMrdDZP?=
- =?utf-8?B?QXJtek4vTE1KWXk1Z3VsUlI0T3dDR2VMU25HeW1WeXJMMXJuT2dPRTFFTDVE?=
- =?utf-8?B?eFV0YWhjRlpFR3Y4Zlkxa1RMdlplakxqaFRzZHBya1VNWG1mSlAyUDlIV1F2?=
- =?utf-8?B?QVpJYTJjN2ZhTjlhM2lPcy9Md3ZPRGd2SzJBYlVHVmR4d21FRDdGb1JiaEJy?=
- =?utf-8?B?TXJyZDdpZk1xQzBpNVhmRVhNTTFrZDg0Y0NVMzhsR2ZmTlhFVjI1UkNzME56?=
- =?utf-8?B?R1ZkREtZOTZJMVFMSXhGbjRxODZSTDc0OUcwbG4yaXZDY3hYbmRpOEdnbE5y?=
- =?utf-8?B?cEQyWnE5QjFMMWhqeFk1czBNdWYxZFlKRFRTZU1ORW9CY1N1MU4rK0U0L0lF?=
- =?utf-8?B?RXN0WnJLb3hZZ2Y4b1ZUbnN3a2l6R2ZDeFh4RDZXaFlNWnZmWW9IamJlL3J6?=
- =?utf-8?B?OUZHZjRWamFtMVRvZnZhSkdQTnB0anROUkREYjI5NkZ0aUlxaVl4UWZ3SUxa?=
- =?utf-8?B?V2pmbHhZUzdqa2Y2d3FFa1NXYnhyQ2VVS0lqUWlyamVJbWNocTZZd1Zvb042?=
- =?utf-8?B?MTZtT3o1eDdEY2h2UVNkOE5ObkI1ZitPOEJwQTVzTTU2SU1yM0RLUDgvS255?=
- =?utf-8?B?OTc3VXF4b2F5ZmxlOU9YUmtpV3RENUF1ZFZtdDNiYW5jd2QwZWtSVUVBNGw5?=
- =?utf-8?B?b3AxNXZzeW5pMk04VmNKcHRJa2JmU2JTaDJlbU9VSXZDNlk2Y3ZaaGFJZXVV?=
- =?utf-8?B?cTZwKzN2eFNTKzJGTEt2Mkljb2xvekJ4bXc4UkRiUjYvL0s0ZG5Qc3NaQkV3?=
- =?utf-8?B?NVMvSzA4V3hrdncwUDBMZk4zSlRMc0NrTWtVaGdsYk9udXFxM2IvVG1vQnZH?=
- =?utf-8?B?SkEwYXpvbVg4cnc3RisyNDhCUXFNOVJjYkxXeUgxcHpzUzZ5K2phYlBhVE9X?=
- =?utf-8?B?RFRpK252T2pFd3drM3cvMmV3ak5nb2hrWWdoWkM4Y3lOVC93UmR2QTRTYm1i?=
- =?utf-8?B?b01lR0k0U01pL2JmbzBRZVFnM1F3a0JBOXl1V1UrOXpEb3BDNnlhZGx1ZUxS?=
- =?utf-8?B?QU1KSDZPb2pvQlNXblZsWnl5b2pjSUc4M2JTRkg5V3BZNTIrZEJvRzI1RElO?=
- =?utf-8?B?Z1JqQnBNY3BtQ0Z6QXozTWZmSG82SnBFSnVldG0zRVhCcERPWXdoZHNmUnRn?=
- =?utf-8?B?L0M0WnlNa0RTUGw4Ty9LS3FMUmRpSXZ6Vy93bzgrUFhDdC8xTGdLNjZKRUND?=
- =?utf-8?Q?jZEuZI?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(7416014)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2025 22:46:59.6926
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75777940-4063-49b3-cf23-08dd8db913df
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000971E4.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB9018
+Content-Type: multipart/mixed; BOUNDARY="8323329-1460966867-1746576173=:3879245"
+Content-ID: <alpine.DEB.2.22.394.2505061702580.3879245@ubuntu-linux-20-04-desktop>
 
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Rule 13.2 states: "The value of an expression and its persistent
-side effects shall be the same under all permitted evaluation orders".
+--8323329-1460966867-1746576173=:3879245
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.22.394.2505061702581.3879245@ubuntu-linux-20-04-desktop>
 
-The full expansion of macro "commit_far_branch" contains an assignment to
-variable "rc", which is also assigned to the result of the GNU statement
-expression which "commit_far_branch" expands to.
+On Tue, 6 May 2025, Roger Pau Monné wrote:
+> On Mon, May 05, 2025 at 11:11:10AM -0700, Stefano Stabellini wrote:
+> > On Mon, 5 May 2025, Roger Pau Monné wrote:
+> > > On Mon, May 05, 2025 at 12:40:18PM +0200, Marek Marczykowski-Górecki wrote:
+> > > > On Mon, Apr 28, 2025 at 01:00:01PM -0700, Stefano Stabellini wrote:
+> > > > > On Mon, 28 Apr 2025, Jan Beulich wrote:
+> > > > > > On 25.04.2025 22:19, Stefano Stabellini wrote:
+> > > > > > > From: Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>
+> > > > > > > 
+> > > > > > > Dom0 PVH might need XENMEM_exchange when passing contiguous memory
+> > > > > > > addresses to firmware or co-processors not behind an IOMMU.
+> > > > > > 
+> > > > > > I definitely don't understand the firmware part: It's subject to the
+> > > > > > same transparent P2M translations as the rest of the VM; it's just
+> > > > > > another piece of software running there.
+> > > > > > 
+> > > > > > "Co-processors not behind an IOMMU" is also interesting; a more
+> > > > > > concrete scenario might be nice, yet I realize you may be limited in
+> > > > > > what you're allowed to say.
+> > > > > 
+> > > > > Sure. On AMD x86 platforms there is a co-processor called PSP running
+> > > > > TEE firmware. The PSP is not behind an IOMMU. Dom0 needs occasionally to
+> > > > > pass addresses to it.  See drivers/tee/amdtee/ and
+> > > > > include/linux/psp-tee.h in Linux.
+> > > > 
+> > > > We had (have?) similar issue with amdgpu (for integrated graphics) - it
+> > > > uses PSP for loading its firmware. With PV dom0 there is a workaround as
+> > > > dom0 kinda knows MFN. I haven't tried PVH dom0 on such system yet, but I
+> > > > expect troubles (BTW, hw1 aka zen2 gitlab runner has amdgpu, and it's
+> > > > the one I used for debugging this issue).
+> > > 
+> > > That's ugly, and problematic when used in conjunction with AMD-SEV.
+> > > 
+> > > I wonder if Xen could emulate/mediate some parts of the PSP for dom0
+> > > to use, while allowing Xen to be the sole owner of the device.  Having
+> > > both Xen and dom0 use it (for different purposes) seems like asking
+> > > for trouble.  But I also have no idea how complex the PSP interface
+> > > is, neither whether it would be feasible to emulate the
+> > > interfaces/registers needed for firmware loading.
+> > 
+> > Let me take a step back from the PSP for a moment. I am not opposed to a
+> > PSP mediator in Xen, but I want to emphasize that the issue is more
+> > general and extends well beyond the PSP.
+> > 
+> > In my years working in embedded systems, I have consistently seen cases
+> > where Dom0 needs to communicate with something that does not go through
+> > the IOMMU. This could be due to special firmware on a co-processor, a
+> > hardware erratum that prevents proper IOMMU usage, or a high-bandwidth
+> > device that technically supports the IOMMU but performs poorly unless
+> > the IOMMU is disabled. All of these are real-world examples that I have
+> > seen personally.
+> 
+> I wouldn't be surprised, classic PV dom0 avoided those issues because
+> it was dealing directly with host addresses (mfns), but that's not the
+> case with PVH dom0.
 
-To avoid any dependence on the order of evaluation, the latter assignment
-is moved inside the macro.
+Yeah
 
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Signed-off-by: Victor Lira <victorm.lira@amd.com>
----
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Michal Orzel <michal.orzel@amd.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Roger Pau Monné <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: Federico Serafini <federico.serafini@bugseng.com>
-Cc: Bertrand Marquis <bertrand.marquis@arm.com>
----
- xen/arch/x86/x86_emulate/x86_emulate.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index 8e14ebb35b..7108fe7b30 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -337,7 +337,7 @@ do {                                                                    \
-     validate_far_branch(cs, newip);                                     \
-     _regs.r(ip) = (newip);                                              \
-     singlestep = _regs.eflags & X86_EFLAGS_TF;                          \
--    ops->write_segment(x86_seg_cs, cs, ctxt);                           \
-+    rc = ops->write_segment(x86_seg_cs, cs, ctxt);                      \
- })
+> > In my opinion, we definitely need a solution like this patch for Dom0
+> > PVH to function correctly in all scenarios.
+> 
+> I'm not opposed to having such interface available for PVH hardware
+> domains.  I find it ugly, but I don't see much other way to deal with
+> those kind of "devices".  Xen mediating accesses for each one of them
+> is unlikely to be doable.
+> 
+> How do you hook this exchange interface into Linux to differentiate
+> which drivers need to use mfns when interacting with the hardware?
 
- int x86emul_get_fpu(
-@@ -2382,7 +2382,7 @@ x86_emulate(
-              (rc = read_ulong(x86_seg_ss, sp_post_inc(op_bytes + src.val),
-                               &src.val, op_bytes, ctxt, ops)) ||
-              (rc = load_seg(x86_seg_cs, src.val, 1, &cs, ctxt, ops)) ||
--             (rc = commit_far_branch(&cs, dst.val)) )
-+             commit_far_branch(&cs, dst.val) )
-             goto done;
-         break;
+In the specific case we have at hands the driver is in Linux userspace
+and is specially-written for our use case. It is not generic, so we
+don't have this problem. But your question is valid.
 
-@@ -2438,7 +2438,7 @@ x86_emulate(
-         _regs.eflags &= mask;
-         _regs.eflags |= (eflags & ~mask) | X86_EFLAGS_MBS;
-         if ( (rc = load_seg(x86_seg_cs, sel, 1, &cs, ctxt, ops)) ||
--             (rc = commit_far_branch(&cs, (uint32_t)eip)) )
-+             commit_far_branch(&cs, (uint32_t)eip) )
-             goto done;
-         break;
-     }
-@@ -2557,7 +2557,7 @@ x86_emulate(
-         ASSERT(!mode_64bit());
-     far_jmp:
-         if ( (rc = load_seg(x86_seg_cs, imm2, 0, &cs, ctxt, ops)) ||
--             (rc = commit_far_branch(&cs, imm1)) )
-+             commit_far_branch(&cs, imm1) )
-             goto done;
-         break;
-
---
-2.47.0
+In Linux, the issue is hidden behind drivers/xen/swiotlb-xen.c and
+xen_arch_need_swiotlb. There are a few options:
+- force swiotlb bounce for everything on the problematic SoC
+- edit xen_arch_need_swiotlb to return true for the problematic device
+- introduce a kernel command line option to specify which device
+  xen_arch_need_swiotlb should return true for
+- introduce an ACPI table with the relevant info
+--8323329-1460966867-1746576173=:3879245--
 
