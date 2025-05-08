@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ACE5C3ABBE
-	for <xen-devel@archiver.kernel.org>; Thu,  8 May 2025 12:44:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.979360.1365993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0292BC3ABBE
+	for <xen-devel@archiver.kernel.org>; Thu,  8 May 2025 13:21:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.979383.1366007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uD0bV-0000Dd-Js; Thu, 08 May 2025 12:43:57 +0000
+	id 1uD1BZ-0005gs-B3; Thu, 08 May 2025 13:21:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 979360.1365993; Thu, 08 May 2025 12:43:57 +0000
+Received: by outflank-mailman (output) from mailman id 979383.1366007; Thu, 08 May 2025 13:21:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uD0bV-0000DW-HA; Thu, 08 May 2025 12:43:57 +0000
-Received: by outflank-mailman (input) for mailman id 979360;
- Thu, 08 May 2025 12:43:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uD1BZ-0005gh-82; Thu, 08 May 2025 13:21:13 +0000
+Received: by outflank-mailman (input) for mailman id 979383;
+ Thu, 08 May 2025 13:21:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LuaF=XY=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uD0bU-0000DA-3M
- for xen-devel@lists.xenproject.org; Thu, 08 May 2025 12:43:56 +0000
-Received: from fout-b6-smtp.messagingengine.com
- (fout-b6-smtp.messagingengine.com [202.12.124.149])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1885c8eb-2c0a-11f0-9ffb-bf95429c2676;
- Thu, 08 May 2025 14:43:53 +0200 (CEST)
-Received: from phl-compute-04.internal (phl-compute-04.phl.internal
- [10.202.2.44])
- by mailfout.stl.internal (Postfix) with ESMTP id 7B3FC11400E9;
- Thu,  8 May 2025 08:43:51 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-04.internal (MEProxy); Thu, 08 May 2025 08:43:51 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 8 May 2025 08:43:49 -0400 (EDT)
+ <SRS0=IqQS=XY=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1uD1BX-0005gY-C1
+ for xen-devel@lists.xenproject.org; Thu, 08 May 2025 13:21:11 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20628.outbound.protection.outlook.com
+ [2a01:111:f403:2416::628])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4d33e15d-2c0f-11f0-9eb4-5ba50f476ded;
+ Thu, 08 May 2025 15:21:10 +0200 (CEST)
+Received: from SJ0PR03CA0252.namprd03.prod.outlook.com (2603:10b6:a03:3a0::17)
+ by CH3PR12MB7594.namprd12.prod.outlook.com (2603:10b6:610:140::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.23; Thu, 8 May
+ 2025 13:21:01 +0000
+Received: from SJ1PEPF00002327.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::ab) by SJ0PR03CA0252.outlook.office365.com
+ (2603:10b6:a03:3a0::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.32 via Frontend Transport; Thu,
+ 8 May 2025 13:21:00 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00002327.mail.protection.outlook.com (10.167.242.90) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8722.18 via Frontend Transport; Thu, 8 May 2025 13:20:59 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 8 May
+ 2025 08:20:58 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 8 May
+ 2025 08:20:58 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Thu, 8 May 2025 08:20:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,163 +65,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1885c8eb-2c0a-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1746708231;
-	 x=1746794631; bh=VjAzjMR97l41RykYlGvw8f0ThPA/qmCei8qGQl+8pio=; b=
-	lX7SQr98W4Xx4E/2GUR/N02URW0jvy5TOPr4vG59Xzy0eYPIrRwj1Co3kXGe78y0
-	rwzLJq5IKRSxJ12jP1miMl4XTy9y3NaSmbXqo1ChZdG1MDYFnRFkgqvW9oYM31sB
-	/fvBSCHOguB2FxNaxXCw/Y0pk2S3vIiDn4m00PjdtD0+tfiVsU/dxksEaKuM0AiN
-	nqwzewsq08koC5AsLR3I5C7IHjVKo6GYqtijSD88fa8Po2LBmYpqKBjxfD+R0Wq5
-	3+cvJ3Uem2OkM+puW+mPIQR10jfW23HGwwVPhVY8+mNzjb61FmDtnUWWbFAgAEJ/
-	ac2DBl+LAY2qhDWGhWkVnQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1746708231; x=1746794631; bh=VjAzjMR97l41RykYlGvw8f0ThPA/qmCei8q
-	GQl+8pio=; b=FVlMEe6+x6f3rGrEen0UL95QqBwNYtbFVTYO6sON9mpRMiRBjQj
-	PhjM5fqDM9PxR3QyQ/9Zu0o7MOflTZYwxCIhCR4429AteNoVaB2POEgl9/vlgHjh
-	pIvpCOClv+ivGbvjDBscHAMYTTH0hqvo82RSoFB7rxbEXMmZnYyGdri5imnMkzNw
-	UU4WB2J1dzqjQ6aLS49vbsEB3bUNaDCvr5tRmipopKk42VRBieZX2+kOWEZCIiBn
-	uOr5P+Oz6EDaaKFUYQvLbq01sf/mUj89eWvauw6Fmc+UExL9sd9GrkGo/xFyauhM
-	XNcsq+Y+wV4E1/A1IWLtw3qDTtYkSdBrUwg==
-X-ME-Sender: <xms:B6ccaPTSBgKiygzd7OU638JWoOkkzn8OUIG-f0Q5_Js6OHDgCB99EA>
-    <xme:B6ccaAwmVVcv6Q3vZRo8gcbUEMA5xQ9nnYo-u-WfIzcIJ5MWUp1_HX_ihDMjuf3em
-    m-gZqzuQMMLCQ>
-X-ME-Received: <xmr:B6ccaE1T4CGqqSKgg7kfWnQDo86fkV9VYUjB2NBvD2kj-yKD4U4a40GUtGsxXqqupRbj_PqSzupgYJr_dG2aWarDO_973BA0LQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkeeljeejucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesghdtreertddt
-    jeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuc
-    eomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecu
-    ggftrfgrthhtvghrnhepieeluddvkeejueekhfffteegfeeiffefjeejvdeijedvgfejhe
-    etuddvkeffudeinecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghr
-    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeejpdhmohgu
-    vgepshhmthhpohhuthdprhgtphhtthhopehfrhgvughirghnohdriihighhlihhosegtlh
-    houhgurdgtohhmpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhi
-    gidrtghomhdprhgtphhtthhopehgvghrrghlugdrvghluggvrhdqvhgrshhssegtlhhouh
-    gurdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhho
-    jhgvtghtrdhorhhgpdhrtghpthhtohepughpshhmihhthhesrghpvghrthhushhsohhluh
-    htihhonhhsrdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomhdp
-    rhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-X-ME-Proxy: <xmx:B6ccaPAROs3eWbnJRQ_AFOukVeYVLHX8yCqg9LO4GSNRshnlXUjp1A>
-    <xmx:B6ccaIgHW3P8u1xWdsD9UuGKE4ErSPBzeXEnJek4mc3c9lyXKRR8pg>
-    <xmx:B6ccaDoBzUh86xWhAbEEG8gmBrrTj-RoBz8CkTvkhnGvgP17k6JBMg>
-    <xmx:B6ccaDgzeQ4SBUvqoD9NeYQAvVO3KmKODYlhGXQsWPdFvY4AkL94tg>
-    <xmx:B6ccaIRnJ-BssdIAo78Y0cAciKEWhw6cNggfkYFejobVvg9_N-TAPmCT>
-Feedback-ID: i1568416f:Fastmail
-Date: Thu, 8 May 2025 14:43:47 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Frediano Ziglio <frediano.ziglio@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Gerald Elder-Vass <gerald.elder-vass@cloud.com>,
-	xen-devel@lists.xenproject.org, dpsmith@apertussolutions.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [XEN PATCH v3] sbat: Add SBAT section to the Xen EFI binary
-Message-ID: <aBynA-TiQNwCAOkG@mail-itl>
-References: <20250507135442.3439237-1-gerald.elder-vass@cloud.com>
- <94652153-99fe-47d8-84d5-cbf2865ad6e0@citrix.com>
- <aByIDP2iEHjmo99t@mail-itl>
- <fab47327-e885-4565-817b-16343f41f487@citrix.com>
- <CACHz=ZjtMSe8EzG-wTMCz=kecwzYGR14cu29JwQ0oozK6fr_MQ@mail.gmail.com>
+X-Inumbo-ID: 4d33e15d-2c0f-11f0-9eb4-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AKzW80P4B1t+/bw5zbhVe8ZOQ5nPsTCRR4KxnZx1Q4L4Zo9EUTarEp6IZtkrUAD16lyD/OY6cUwCRuovFtMTZZAXLHIThsLrrWGrVDnIgiYRHulA3f8rETcueD4BXgV6nPsmJs4qu3r6+fNAttWIS6AncnH8i/A/ZS74mlRd67K+I25CfWkJCWnuIhgXea8SfnAVPKrxFAYUhVf1CG7e3RWEv9/Ln7l1a4oCWRCIMdoEGgupVKRi0qJX+2VQ4h7Mi4/z/9+wMJH7/2eASeF52b4FcYf/d4jA9/ITLV9Szw5et62waVOHx0wvI55TNptuQaVzoMEHjalhpeG/CmmeSw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ebr89cmmGKzjaVd2xUcU9bNIqcI96l1VlD/ym5sCsJw=;
+ b=R6GDDdgUUQZZnJyBnuYYj7av3BmETVPnV0mdqXvU7my/k0IEuBAt0TE8wyJ+eGWrnqTliySyamh7UgzBzEyfHHGI6qe09xkp0wwH1l8ZySbIatko3AgEC2rJStPugDVniZummKDmBpE7/lqiMMfiA4kE64YM+E0fZkaP5M813huCw44W4+G05/R8gonbVkQlNLZveKP0pmGEuRkwyDfnpF3CGktzNIDB3m519gqc2u+rDi8Uiy1B5L2OqxCD+ZAT6p8SHybNV7VfKDwLNp1/UwkhWAK8htjACOB7hGNDQQG5HQKxfyfxGbG8TbK8vwY1eQ8ZO08ywdN+O2v+rcgRdA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ebr89cmmGKzjaVd2xUcU9bNIqcI96l1VlD/ym5sCsJw=;
+ b=oBV3KE3KVVW/omjVU8giP0DbYQXihp4KlZQrlbRt+I3p4BG7y3XeO5gwV8jhGBWhn4DlxZap1DyjAQggkscJsBgVfJYsa5Y0GtmeeIEQSTSaaEmO7s6zwpoAj6RcIst+o/+fqQ9oOVWLCNs3BtJFPQ7nsgDhGzWQlFtY8KdCd0I=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Ayan Kumar Halder
+	<ayan.kumar.halder@amd.com>
+Subject: [PATCH v2 1/6] xen/arm: fix math in add_ext_regions
+Date: Thu, 8 May 2025 09:20:30 -0400
+Message-ID: <20250508132040.532898-2-stewart.hildebrand@amd.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250508132040.532898-1-stewart.hildebrand@amd.com>
+References: <20250508132040.532898-1-stewart.hildebrand@amd.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="yxgSmfUD35M1RgN/"
-Content-Disposition: inline
-In-Reply-To: <CACHz=ZjtMSe8EzG-wTMCz=kecwzYGR14cu29JwQ0oozK6fr_MQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002327:EE_|CH3PR12MB7594:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8c62be5e-7b55-4a63-004a-08dd8e332c78
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?TBXwOH0TqOueMZ6yrTGaXj5XbCnOf32tbfE+4IBfNYhf4wzzY3J3uPmu3baZ?=
+ =?us-ascii?Q?IKOEBH23ppCsAyfudXC7fGLc3eSyVJongVhHgcisrqNFGI67YMSwr2rIyNZJ?=
+ =?us-ascii?Q?C6cn1tf6PhK/Hku610IsVI7jLrD8YNNqNpgaupcyXq15U7JlkugE2oMkC+Sh?=
+ =?us-ascii?Q?Dc3JJk82eRf8H4/C3hpBXXVPaWr67XqjXb/pK6HJcGbHPjUC8H4CGm28zNww?=
+ =?us-ascii?Q?QIVORKyKYfy8oqDt4I8lJj5unmSQOXNOfJBC+BLqTk35sALeVSXXd2Ej826M?=
+ =?us-ascii?Q?EmTDZ4H9zYROJYvr5vtQuV71PetZrE5Q1jbJefIuo+SDMZHK6A39on5Qga3q?=
+ =?us-ascii?Q?YSqR96p+SmmZxTvM2+Z1YlMrvbRxo8mHE610U4XFWBoU9o5LrAS2F+RHhJ1v?=
+ =?us-ascii?Q?dbmzC0UvR1ex1chbIYDBwZeLM3rwwim5IR7clyY0QLdXdhoL5IPfVfFFxJt6?=
+ =?us-ascii?Q?7nelyN/fxpvN1PiuTR71FQrf/9HUT/LmcZy3r/5fnuhXNaWK743xf2nd/Wcq?=
+ =?us-ascii?Q?VoqhIB7OBC06aSZdovfGXFv0gH+wI73BQ4ameJZkP99182gFWF9oqtNRbMgq?=
+ =?us-ascii?Q?wFc+6gMN/77CCUVnpxAtLvZTkLMYzH8lLu4RY+s4WZaHQZre1tnEGZCI6kQ2?=
+ =?us-ascii?Q?bDNWqqba0m2dp+XNpuR86vEAZmxNaWPKC+5QUgrBvl4kzv3jDiXzlAZqjOn1?=
+ =?us-ascii?Q?Qg/M3WWWfTHtcAnrw6NFlYQxmGawcm55o7FXJJ7pVtlSVbH8RRNoDESq83ci?=
+ =?us-ascii?Q?ZLYC7eRzC5zmGlYW/INQ5U9VfRRrld9KVvAzSAYzB5uiBSmPqEE2WfeDWfeM?=
+ =?us-ascii?Q?OQ84vPDGW0Qh7egJVrvD/AsBgMvkUfJlaxyrBW9SXAETStS2Xjiif57Ex1vl?=
+ =?us-ascii?Q?zMey4roFmgQ+EpcNmAZ5oO3caltMcw2kJ1IuO93UPvDObejI+7KplOmCHLgD?=
+ =?us-ascii?Q?93XUFW+pV+K8J5sghE6YUIgrgYIqgY5Fih5Nwd/sY3R1wiS5h0g1VIi/lm2d?=
+ =?us-ascii?Q?HxEtRPyThXq3Ue28pLPqtUAWIQBJCWGIBUgpCz+w2t+s48yC6rsjgMM0V8vr?=
+ =?us-ascii?Q?mx0EXKVO/B579RpSX2VFydvlBGZmCeTthZDC4FVeOyF1cCL/xmlbiFJAxzbs?=
+ =?us-ascii?Q?feUhmqsGBwGplICB7oh58PEc/Bb2CIkW8koA5ReJKqxIMQyRO15fppreQIfk?=
+ =?us-ascii?Q?u8uR4rK/tywk08VzeVjq1wEmUvzzb6nWZo6KkeqDRG5X9zHtGAjs5BVRIzor?=
+ =?us-ascii?Q?onTqwWVbO3LNeaAVH8eC2vSGSFk0neosUyHnM78ARMCt2HT6tXPtyGWjVXJw?=
+ =?us-ascii?Q?XQrI4cOqVtm92ScjCifdSu/meqCqE7+IQPhw/PODezfz/rJ8mWCZc3yDmu9F?=
+ =?us-ascii?Q?aEMo3r42yV6mZEt0zQqiNRQLJAI/vYRBX3zpuyXswy2xgTLfEIa25mNMeNen?=
+ =?us-ascii?Q?d3Acqmdol1kc75zfXVMUx7o4+6mj9Yin5VZjSFc6/72uK/3l85Xpkem64xDJ?=
+ =?us-ascii?Q?SyDXGUdeYM9ocX1f1N/Oqy/Aa8cqQP0I5oVA?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2025 13:20:59.5555
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c62be5e-7b55-4a63-004a-08dd8e332c78
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF00002327.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7594
 
+In commit f37a59813979, the arguments to add_ext_regions() were switched
+from addresses to frame numbers. add_ext_regions() converts the frame
+numbers back to addresses, but the end address (e) is rounded down to
+page size alignment. The logic to calculate the size assumes e points to
+the last address, not page, effectively leading to the region size being
+erroneously calculated to be 2M smaller than the actual size of the
+region.
 
---yxgSmfUD35M1RgN/
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 8 May 2025 14:43:47 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Frediano Ziglio <frediano.ziglio@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Gerald Elder-Vass <gerald.elder-vass@cloud.com>,
-	xen-devel@lists.xenproject.org, dpsmith@apertussolutions.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [XEN PATCH v3] sbat: Add SBAT section to the Xen EFI binary
+Fix by adding 1 to the frame number before converting back to address.
 
-On Thu, May 08, 2025 at 01:28:21PM +0100, Frediano Ziglio wrote:
-> On Thu, May 8, 2025 at 12:55=E2=80=AFPM Andrew Cooper <andrew.cooper3@cit=
-rix.com> wrote:
-> >
-> > On 08/05/2025 11:31 am, Marek Marczykowski-G=C3=B3recki wrote:
-> > > On Thu, May 08, 2025 at 09:51:59AM +0100, Andrew Cooper wrote:
-> > >> Also,
-> > >>
-> > >>> ld: warning: orphan section `.sbat' from `prelink.o' being placed i=
-n section `.sbat'
-> > >> This is because sbat.o is getting linked into the non-EFI build of X=
-en too.
-> > >>
-> > >> I'm less sure how to go about fixing this.  There's no nice way I can
-> > >> see of of getting sbat.o only in the EFI build.  The other option is=
- to
-> > >> discard it for the ELF build.
-> > > This is kinda related to my question on Matrix - is multiboot2 binary
-> > > also supposed to (eventually) support UEFI SB?
-> >
-> > This is mixing two things.
-> >
-> > Xen is either an ELF binary (ultimately zipped, so xen.gz) or is an EFI
-> > binary (xen.efi).
-> >
-> > Both of these binaries currently have an MB2 header.  This was by
-> > accident, as xen.efi is a strict superset of the ELF build.
-> >
->=20
-> We are planning to use multiboot2 booting. The reason is the way we
-> want some parameters (like command line) to be passed. We are going to
-> use grub2.
+Fixes: f37a59813979 ("xen/arm: domain_build: Track unallocated pages using the frame number")
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Acked-by: Michal Orzel <michal.orzel@amd.com>
+---
+v1->v2:
+* add Michal's A-b
+---
+ xen/arch/arm/domain_build.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Which means that multiboot2 binary needs to be signed somehow, and for
-MS to be happy, needs to include SBAT too.
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index df29619c4007..2f2b021dec3e 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -761,7 +761,7 @@ int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
+     struct membanks *ext_regions = data;
+     paddr_t start, size;
+     paddr_t s = pfn_to_paddr(s_gfn);
+-    paddr_t e = pfn_to_paddr(e_gfn);
++    paddr_t e = pfn_to_paddr(e_gfn + 1) - 1;
+ 
+     if ( ext_regions->nr_banks >= ext_regions->max_banks )
+         return 0;
+-- 
+2.49.0
 
-Relevant series:
-https://lore.kernel.org/xen-devel/20240328151106.1451104-1-ross.lagerwall@c=
-itrix.com/
-I don't recall seeing v3 posted.
-
-And relevant grub series:
-https://lore.kernel.org/xen-devel/20240328151302.1451158-1-ross.lagerwall@c=
-itrix.com/
-
-> > AIUI, SBAT only makes sense to exist in the EFI binary.
-> >
-> > ~Andrew
->=20
-> Frediano
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---yxgSmfUD35M1RgN/
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmgcpwMACgkQ24/THMrX
-1ywMNwf/dyVtXhaDhhtskdBux0HZK5GmacoEjGfekF9ePCu1+hho6blFtlOMcLGb
-ojzq6w4rhOPFGlvMOqnzbBpwNJUZd3rczOApTFeG4xownH3QDjLmwoUofM/Cm/2q
-QBstivZjrg2/6s6KRJRQO2cqXqg5UaTFLt6loDfMJG15TUsIYtDxR/nJ4R1OS7i2
-Wl9QD+jg1HpH6hOa6o5aeYZ9xMJN/Ej5TesrIqB+WbyQ0Ojq4r6fENZVbprkP7TL
-uKd5U0hUyaq+J7PecWYNZ5TwE5u3YLxqO0MNDfYFzHD4iciH5kgytwoPEkDnVZiH
-Io0f/7o2ecK44mGHHyM/Ba0Q5BRPhA==
-=Sdn9
------END PGP SIGNATURE-----
-
---yxgSmfUD35M1RgN/--
 
