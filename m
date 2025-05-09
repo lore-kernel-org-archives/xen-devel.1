@@ -4,37 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91EC0C3ABBC
-	for <xen-devel@archiver.kernel.org>; Fri,  9 May 2025 08:53:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.979864.1366359 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3160C3ABBC
+	for <xen-devel@archiver.kernel.org>; Fri,  9 May 2025 09:06:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.979878.1366369 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uDJU8-0002va-O7; Fri, 09 May 2025 08:53:36 +0000
+	id 1uDJgJ-0004l9-UG; Fri, 09 May 2025 09:06:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 979864.1366359; Fri, 09 May 2025 08:53:36 +0000
+Received: by outflank-mailman (output) from mailman id 979878.1366369; Fri, 09 May 2025 09:06:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uDJU8-0002vT-LB; Fri, 09 May 2025 08:53:36 +0000
-Received: by outflank-mailman (input) for mailman id 979864;
- Fri, 09 May 2025 08:53:35 +0000
+	id 1uDJgJ-0004l2-QU; Fri, 09 May 2025 09:06:11 +0000
+Received: by outflank-mailman (input) for mailman id 979878;
+ Fri, 09 May 2025 09:06:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eMqf=XZ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uDJU7-0002vN-Mf
- for xen-devel@lists.xenproject.org; Fri, 09 May 2025 08:53:35 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ <SRS0=60h2=XZ=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
+ id 1uDJgI-0004kr-4M
+ for xen-devel@lists.xenproject.org; Fri, 09 May 2025 09:06:10 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20609.outbound.protection.outlook.com
+ [2a01:111:f403:200a::609])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 167f31fd-2cb3-11f0-9eb4-5ba50f476ded;
- Fri, 09 May 2025 10:53:33 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cf257158fso12135475e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 09 May 2025 01:53:33 -0700 (PDT)
-Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a1f5a4cc2esm2608437f8f.90.2025.05.09.01.53.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 01:53:32 -0700 (PDT)
+ id d63cf922-2cb4-11f0-9eb4-5ba50f476ded;
+ Fri, 09 May 2025 11:06:06 +0200 (CEST)
+Received: from BYAPR02CA0022.namprd02.prod.outlook.com (2603:10b6:a02:ee::35)
+ by CH3PR12MB8755.namprd12.prod.outlook.com (2603:10b6:610:17e::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.26; Fri, 9 May
+ 2025 09:06:00 +0000
+Received: from CO1PEPF000042AE.namprd03.prod.outlook.com
+ (2603:10b6:a02:ee:cafe::e4) by BYAPR02CA0022.outlook.office365.com
+ (2603:10b6:a02:ee::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.20 via Frontend Transport; Fri,
+ 9 May 2025 09:06:00 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AE.mail.protection.outlook.com (10.167.243.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8722.18 via Frontend Transport; Fri, 9 May 2025 09:06:00 +0000
+Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 9 May
+ 2025 04:05:58 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,341 +58,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 167f31fd-2cb3-11f0-9eb4-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1746780813; x=1747385613; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=FeHJ+5duaoOXuLNSG7JYnGnc3BvwUMlD8pqjJhdAsmI=;
-        b=GLnVjiL6F3Pg2mm127awdcDTHBvYFIpo7YSVzHCZpSb6XP5qKABFeyOa1GaI7CfMzu
-         UOrnbCi5+cAeLhcktuwMEGKlsTq5h0EvRZ7ET8KIVQxgy2kumwJ/TMSzZP5EDFIWdvKt
-         4WFgq8FNxn1e5rx9bkQM2pZvG63phX6XRm3yo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746780813; x=1747385613;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FeHJ+5duaoOXuLNSG7JYnGnc3BvwUMlD8pqjJhdAsmI=;
-        b=MpTpTA29nEkr3iYfU3nExazu95RnuU3xCL2CSt8NqxICihpQwq/6A1cIDjOIBk+YDl
-         vlMKi83/twyiUJEIBfr388/DBJ8MO3Al9Uti6BNd+jew/Dp02dtZyeqjVziyXMUV8xh6
-         +TLKUKlFMeID5kA+rcJVKK9a9g2BvVfhmKZTAubBYsMd8GxYNL2/IN0nN/44vX3rC6xS
-         /IJ1GSYgSeFeq/JZspRH62pK95+N4vlcsPZ6Klow3q06RU+3S0hzr6dbTkNrscdgulFG
-         HSBDdmzZPMMlJOQbnwi2k5cCpqC12nx1Ss7qa+Wnx85e6rhBcVzC7jCCspvBv0JUfiZz
-         sPVw==
-X-Forwarded-Encrypted: i=1; AJvYcCVIe00vElLBUfRr7/NayttBpn/xnstMACKgESeiN+gDmoU9xeTRPpoEe31gy2ahNXkQSh3fwVbSvzA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx1A+eO8aTWYWIp7rpW2xe//0jIm/SuW3AxbeDs+mBY/YLVpM66
-	Kqwkh0z0M1TmlytoQ2QoC2a5hO9g5KdB2SL4TGTYsLSXIAKuPtisiegs8LWdz2g=
-X-Gm-Gg: ASbGncvQ5KVdHajqOOuMV6VLJoIXlFQAGtJO2LCUh9YOa0Szf64zg6Rt3pCO5Cui4UH
-	NgLudN4y1KwJmmVFgek3Y1By0vW9rQK98KFO3XuMa4JmbI8/Us4k4bYY+PmQdbzVNeltJONw+Ti
-	E8rZ7981k6K1Y+Ne8KGB0SRwqgHroHU336li36Ki4/GNZKzmk4gPpA6gNVS+ZvxRVWkZS11+1tT
-	HjkD4lx5kr26HvlG7HiLYUGqLwC/o8uLiga2Oos72YMHJ13pTub5452RXTTNkZ1LZ+8KjPGPn5A
-	8Cqa+XDPhG8TxB+vKDac0ri8GK9Adav3XEbztKKyIXJrmVjDvZswGztY
-X-Google-Smtp-Source: AGHT+IEfBkk8+Thr9UsmUcJiEGjSJh3YIPTjfONmG7mUHZ4NeTKVvva3PIgVOVDHe9F777Jrc5y/Ow==
-X-Received: by 2002:a05:600c:3587:b0:440:59eb:bfc with SMTP id 5b1f17b1804b1-442d6dd2378mr15367705e9.23.1746780812972;
-        Fri, 09 May 2025 01:53:32 -0700 (PDT)
-Date: Fri, 9 May 2025 10:53:31 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Demi Marie Obenour <demiobenour@gmail.com>
-Cc: Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alejandro Vallejo <agarciav@amd.com>,
-	Xen developer discussion <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Xen-devel <xen-devel-bounces@lists.xenproject.org>
-Subject: Re: Mapping memory into a domain
-Message-ID: <aB3CixUoTN0dBODM@macbook.lan>
-References: <82772686-edcd-41e4-b81c-f6b3ded30901@gmail.com>
- <D9O702EAEGRU.10CY1WTUELAKF@amd.com>
- <24a0a77b-e543-453d-b20b-0dbac111287c@gmail.com>
- <D9P3M1Z20DAB.1HSZ79GOZOMKR@amd.com>
- <ae3465e2-b803-4a26-8443-0bc1d38da7ac@gmail.com>
- <aBuatoL1dm0tjZ9P@macbook.lan>
- <30243d25-881d-42d3-90c2-f791c3632372@gmail.com>
- <aBxizlMj3D94M3WS@macbook.lan>
- <ae1a35dd-b7b2-426f-b2d5-723bb07b0e79@gmail.com>
+X-Inumbo-ID: d63cf922-2cb4-11f0-9eb4-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mpjgCUah6SJz9CDNT6s/5v0R70ticXW+RRUvBaJMKUVsx0EJpAWZbabZyqyf7qtuyGEK1uKYFixL3NFAoR9zdwAGbSxfYp75pDgo5nE5+nD30FFtrRY1e/aMNk6L3JQNWRdJekip58J36MSuw2B2vglaxrtz84yFe5HcQVDRKVBQwPrHAAPi0kudZxV6CEabS2ihmggbbg5ZVaEjjASZnrDaclYWUI8OMqcLxpsB/pyhr9dHf+0u/DnyCkZAZzcBdYURI+NKGG3JHjrZW/HXl83SwzTJKKKvHDAaGMz1tsShH5ELZHhSdl2JfRuX+fJ6QH6bNqWVUGrwxxdvSyXyJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HDlCKerLbhNJ+aVeqVuglnHIG3S+ds+aZHU7MpSbFRw=;
+ b=o3FhzyN/pIQ6kS4IBqYItVB6K9h/oTYA2UmLFlOgO6YWPXZz5QQhGMey03NuS6VBn1xR/sB0el2bUSZy4wOFQeC8HBxfogpolk2mvLPT1VZ5cz9w0KR2KjquwVEyculBMVP7dwkPJCG5i8k6V5ZeHJamimTQ+xzupvi0VwbGqlDwWcfpLIXEM6hMnpX1Nca3eNaEzm1kmp0vCaQ3Eq3H/gVUcseriZ3LWeYiLvh79/cF+HRHY0T3v314d6tsNbctn+bp26vjulCAzpmRDTYCt/vEvXXfj7ZAQ7neBtKd2nvLTyi9FqAKNwkPT9NGKsvK+UaI4NR5EOuieBvXaBA+Zg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HDlCKerLbhNJ+aVeqVuglnHIG3S+ds+aZHU7MpSbFRw=;
+ b=DKTvk9X3hIaEl10lu1AQQhIwmslNVeSNB3sZ6ArWOp73YX0YAGhgx6ZUmEM9wQE4BjpzBsP0v3d5o3LcMnSz+QNLeB0yAePhRJSUvQwipKS6VyrWaxxiV0sgPh5D2hbylhNjtQC6rKUtah83CLKY+iICOx50z8WKeUtKAw5blT4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jiqian Chen <Jiqian.Chen@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v4 01/10] vpci/header: Move emulating cap list logic into new function
+Date: Fri, 9 May 2025 17:05:33 +0800
+Message-ID: <20250509090542.2199676-2-Jiqian.Chen@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250509090542.2199676-1-Jiqian.Chen@amd.com>
+References: <20250509090542.2199676-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ae1a35dd-b7b2-426f-b2d5-723bb07b0e79@gmail.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AE:EE_|CH3PR12MB8755:EE_
+X-MS-Office365-Filtering-Correlation-Id: e66e7973-69f5-4385-d4f9-08dd8ed8b7f5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?STIyVU9xMGZnSWhWU3pqZlJHOTQyUjVvazhpU09JUHNRVnU5RzZkcVB2NGxw?=
+ =?utf-8?B?SkU0WVUyc0F2RThXby9PU1NWdVplRGhMaFVnOVo5M3owOWFXOGdvbzRQdUtD?=
+ =?utf-8?B?NGt6MDIyRm91MWRwUXdFb0VoeDA1anBhS0lPYktRMzhJSUp1eTk0cmpwajVN?=
+ =?utf-8?B?Q09uYkU0S3d3RSt6S3IwdHpLeG9JT0lpYlNFeTM4Mk9TckFudU8wRXZjbnhm?=
+ =?utf-8?B?Q2lJSGlCVDVjSEd4dWF0YU44U2lSQnlWQ2NJNjl4S09pQzNTQnJDYldyKys3?=
+ =?utf-8?B?Y094SGxJYysyTDRvNG1OTWxSQzM0akl0UGdpU0xmUHRPOUFWNHRER01ubGp0?=
+ =?utf-8?B?c2I0UW1zMEtubFg2NmZyd0VBYUlMYnFFazd1WTdmWXFlejFkSUVCSnVrdFBW?=
+ =?utf-8?B?QklLYUpiMVpJWll1T01GdGo5cm5rZll3SGY5N1VCUVdNaEtqUFdTMklUdkEy?=
+ =?utf-8?B?N3RRK1pSVWF0blN4MmhQcjZjd0pHVUlOK3AyenNxVXJFeGNHWm5ZTXFvcVAy?=
+ =?utf-8?B?K0FZcytwaTFQcUZoV1BrVmNtSG56KzBIVFZsVW5HVHpYNkVMKzFEZ2hnRlVi?=
+ =?utf-8?B?V0NlY1pxcVRsQi9DVHZVWk84ai9RWXhFdStoTDRuNndDcUt6WkdJaWVXV21N?=
+ =?utf-8?B?eHgyUG9CdDJ6Mmg4OXhFZVFzNjRxMGZINk54SERXUVh5MFRFalMwZVBWbDN2?=
+ =?utf-8?B?OE1QRzh5R3NYZXhYWkdKdXNDb3o4eUI2M2J5ZllndGhTY1IxaTNaakFhbGVv?=
+ =?utf-8?B?cmlqYm5CU3VmZ0E2WWpkL25oOTRlTFNoZUxhY2RpRVJzNkFIb3d6VTJOVXJB?=
+ =?utf-8?B?RVVBcGJmZHNlQm10UjBqNjdJQkJUNWc5a0xxa0wyYlBPZFArRHRaT1orTXJG?=
+ =?utf-8?B?SGpUYXhLMFB0cDZkWGtsV21rc1V0MUlEdWE0RVNNK3BScXArZmdHTlBCeDJi?=
+ =?utf-8?B?T050aWVQYUFrT3VHK3AvSkRhUkYwVlFKbU5vUTRWSndsczNXN2xyN1pqTVRn?=
+ =?utf-8?B?SU91VVhxNGtUWDVFR3hkZ2NVbjluUDNvTFlZbWtqQ09DR09nUUpFa3hPOENS?=
+ =?utf-8?B?M1R6b2doS2ZTV3haZ0xSSkV3TEdvaVNzMmtUZ0tEdnRsY3ZGdFJ5ZlZveFpZ?=
+ =?utf-8?B?QVlleW1acWRZNzRDZDhkY2VVRWlNbHBaUUlMYXhlSWtsU0VEWUZ4MWJueUgz?=
+ =?utf-8?B?RGFrbEhrc2gyekJvOEg3SUxqeWwxUUEyN3pxYlRQSDV2bC9aR21SeFlOaHF2?=
+ =?utf-8?B?NE1peGhuSWVSWG5mMlUzU2k2R21xSUJEY1RMdDYvOEVIVHN6NThYOHloZ004?=
+ =?utf-8?B?Z2I3SWhseDZCbnVEeG5hNWFTWUVWS3VLQURHM3Z1ZVpxbENpU0VQZXRERmNx?=
+ =?utf-8?B?d3I5MmNqNHQ0RGhDQks1OVlCK2pvenJ6OFVmdUgyd1VFVW9RKy82SjFlblBq?=
+ =?utf-8?B?SEZxWHZUZmFubEpwbFcydmpmTkxqZXFFb1IwcW8wVUhpTTQyNCtaVXJmT2l1?=
+ =?utf-8?B?SXIzMjRGRlF1QWtvRUp5dWNDWng2MXZNNUZNOGcwNTJvZzR3dnA3VTRjaVB1?=
+ =?utf-8?B?cXY4UE96eUVWdUVLQzFWK2NDcWNMeFN6andHRFdrK3FxUGtKNXB6Zy9ReDlQ?=
+ =?utf-8?B?SGxRcVl4TE9jbEFESHoyQkR2TW5ZZFluZDlmUUJsaGhWT24wTjBaSjYvVy9G?=
+ =?utf-8?B?bkJiVVZpdTJrZlNhMUMwaklhWEFjUGEvZTVKKzVhZUpIOUtaeDlKRHBsbnBY?=
+ =?utf-8?B?WU9lb2VTc3FKd214WUxOdEsrRU92eWIrNk5kdGcwOTZOSGVITjFIUk1WTzVK?=
+ =?utf-8?B?b2ZQSm03U0RXaWp1M29iL1lnN2xEbVBHTC9MbjAyYUJhSHU4bDdhLzNJTkNP?=
+ =?utf-8?B?c1FLd1NSMkhJdkdFWjJyRjgzVVRVQW9KS08wNWhNMWM3V09TVkgzMTNVck9z?=
+ =?utf-8?B?L3V0MzVFK1F1V3pKV2ZnbFhPVEZNdDFaalJRZlZ6dFR2KzNWRWwvb0hJVkhC?=
+ =?utf-8?B?bGNML0VaWFdFNVdTY1ZQYTlCZG5ORjNTVEM5SVd2S2hjLzJ5Z0lQVnVxQ3RC?=
+ =?utf-8?Q?PFSInW?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2025 09:06:00.5523
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e66e7973-69f5-4385-d4f9-08dd8ed8b7f5
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000042AE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8755
 
-On Fri, May 09, 2025 at 12:52:28AM -0400, Demi Marie Obenour wrote:
-> On 5/8/25 3:52 AM, Roger Pau Monné wrote:
-> > On Wed, May 07, 2025 at 08:36:07PM -0400, Demi Marie Obenour wrote:
-> >> On 5/7/25 1:39 PM, Roger Pau Monné wrote:
-> >>> On Tue, May 06, 2025 at 04:56:12PM -0400, Demi Marie Obenour wrote:
-> >>>> On 5/6/25 9:06 AM, Alejandro Vallejo wrote:
-> >>>>> On Tue May 6, 2025 at 3:02 AM CEST, Demi Marie Obenour wrote:
-> >>>>>> On 5/5/25 7:32 AM, Alejandro Vallejo wrote:
-> >>>>>>> I suppose this is still about multiplexing the GPU driver the way we
-> >>>>>>> last discussed at Xen Summit?
-> >>>>>>>
-> >>>>>>> On Mon May 5, 2025 at 12:51 AM CEST, Demi Marie Obenour wrote:
-> >>>>>>>> What are the appropriate Xen internal functions for:
-> >>>>>>>>
-> >>>>>>>> 1. Turning a PFN into an MFN?
-> >>>>>>>> 2. Mapping an MFN into a guest?
-> >>>>>>>> 3. Unmapping that MFN from a guest?
-> >>>>>>>
-> >>>>>>> The p2m is the single source of truth about such mappings.
-> >>>>>>>
-> >>>>>>> This is all racy business. You want to keep the p2m lock for the full
-> >>>>>>> duration of whatever operation you wish do, or you risk another CPU
-> >>>>>>> taking it and pulling the rug under your feet at the most inconvenient
-> >>>>>>> time.
-> >>>>>>>
-> >>>>>>> In general all this faff is hidden under way too many layers beneath
-> >>>>>>> copy_{to,from}_guest(). Other p2m manipulation high-level constructs
-> >>>>>>> that might do interesting things worth looking at may be {map,unmap}_mmio_region()
-> >>>>>>>
-> >>>>>>> Note that not every pfn has an associated mfn. Not even every valid pfn
-> >>>>>>> has necessarily an associated mfn (there's pod). And all of this is
-> >>>>>>> volatile business in the presence of a baloon driver or vPCI placing
-> >>>>>>> mmio windows over guest memory.
-> >>>>>>
-> >>>>>> Can I check that POD is not in use?  
-> >>>>>
-> >>>>> Maybe, but now you're reaching exponential complexity considering each
-> >>>>> individual knob of the p2m into account.
-> >>>>>
-> >>>>>>
-> >>>>>>> In general anything up this alley would need a cohesive pair for
-> >>>>>>> map/unmap and a credible plan for concurrency and how it's all handled
-> >>>>>>> in conjunction with other bits that touch the p2m.
-> >>>>>>
-> >>>>>> Is taking the p2m lock for the entire operation a reasonable approach
-> >>>>>> for concurrency?  Will this cause too much lock contention?
-> >>>>>
-> >>>>> Maybe. It'd be fine for a page. Likely not so for several GiB if they
-> >>>>> aren't already superpages.
-> >>>>>
-> >>>>>>
-> >>>>>>>> The first patch I am going to send with this information is a documentation
-> >>>>>>>> patch so that others do not need to figure this out for themselves.
-> >>>>>>>> I remember being unsure even after looking through the source code, which
-> >>>>>>>> is why I am asking here.
-> >>>>>>>
-> >>>>>>> That's not surprising. There's per-arch stuff, per-p2mtype stuff,
-> >>>>>>> per-guesttype stuff. Plus madness like on-demand memory. It's no wonder
-> >>>>>>> such helpers don't exist and the general manipulations are hard to
-> >>>>>>> explain.
-> >>>>>>
-> >>>>>> Is this a task that is only suitable for someone who has several years
-> >>>>>> experience working on Xen, or is it something that would make sense for
-> >>>>>> someone who is less experienced?
-> >>>>>
-> >>>>> The p2m is a very complex beast that integrates more features than I
-> >>>>> care to count. It requires a lot of prior knowledge. Whoever does it
-> >>>>> must know Xen fairly well in many configurations.
-> >>>>>
-> >>>>> The real problem is finding the right primitives that do what you want
-> >>>>> without overcomplicating everything else, preserving system security
-> >>>>> invariants and have benign (and ideally clear) edge cases.
-> >>>>>
-> >>>>> This was the last email you sent (I think?). Has any of the requirements
-> >>>>> changed in any direction?
-> >>>>>
-> >>>>>   https://lore.kernel.org/xen-devel/Z5794ysNE4KDkFuT@itl-email/
-> >>>>
-> >>>> Map and Revoke are still needed, with the same requirements as described
-> >>>> in this email.  Steal and Return were needed for GPU shared virtual memory,
-> >>>> but it has been decided to not support this with virtio-GPU, so these
-> >>>> primitives are no longer needed.
-> >>>>
-> >>>>> Something I'm missing there is how everything works without Xen. That
-> >>>>> might help (me, at least) guage what could prove enough to support the
-> >>>>> usecase. Are there sequence diagrams anywhere about how this whole thing
-> >>>>> works without Xen? I vaguely remember you showing something last year in
-> >>>>> Xen Summit in the design session, but my memory isn't that good :)
-> >>>
-> >>> Hello,
-> >>>
-> >>> Sorry, possibly replying a bit out of context here.
-> >>>
-> >>> Since I will mention this in several places: p2m is the second stage
-> >>> page-tables used by Xen for PVH and HVM guests.  A p2m violation is
-> >>> the equivalent of a page-fault for guest p2m accesses.
-> >>>
-> >>>> A Linux driver that needs access to userspace memory
-> >>>> pages can get it in two different ways:
-> >>>>
-> >>>> 1. It can pin the pages using the pin_user_pages family of APIs.
-> >>>>    If these functions succeed, the driver is guaranteed to be able
-> >>>>    to access the pages until it unpins them.  However, this also
-> >>>>    means that the pages cannot be paged out or migrated.  Furthermore,
-> >>>>    file-backed pages cannot be safely pinned, and pinning GPU memory
-> >>>>    isn’t supported.  (At a minimum, it would prevent the pages from
-> >>>>    migrating from system RAM to VRAM, so all access by a dGPU would
-> >>>>    cross the PCIe bus, which would be very slow.)
-> >>>
-> >>> From a Xen p2m this is all fine - Xen will never remove pages from the
-> >>> p2m unless it's requested to.  So the pining, while needed on the Linux
-> >>> side, doesn't need to be propagated to Xen I would think.
-> >>
-> >> If pinning were enough things would be simple, but sadly it’s not.
-> >>
-> >>>> 2. It can grab the *current* location of the pages and register an
-> >>>>    MMU notifier.  This works for GPU memory and file-backed memory.
-> >>>>    However, when the invalidate_range function of this callback, the
-> >>>>    driver *must* stop all further accesses to the pages.
-> >>>>
-> >>>>    The invalidate_range callback is not allowed to block for a long
-> >>>>    period of time.  My understanding is that things like dirty page
-> >>>>    writeback are blocked while the callback is in progress.  My
-> >>>>    understanding is also that the callback is not allowed to fail.
-> >>>>    I believe it can return a retryable error but I don’t think that
-> >>>>    it is allowed to keep failing forever.
-> >>>>
-> >>>>    Linux’s grant table driver actually had a bug in this area, which
-> >>>>    led to deadlocks.  I fixed that a while back.
-> >>>>
-> >>>> KVM implements the second option: it maps pages into the stage-2
-> >>>> page tables (or shadow page tables, if that is chosen) and unmaps
-> >>>> them when the invalidate_range callback is called.
-> >>>
-> >>> I assume this map and unmap is done by the host as a result of some
-> >>> guest action?
-> >>
-> >> Unmapping can happen at any time for any or no reason.  Semantically,
-> >> it would be correct to only map the pages in response to a p2m violation,
-> >> but for performance it might be better to map the pages eagerly instead.
-> > 
-> > That's an implementation detail, you can certainly map the pages
-> > eagerly, or even map multiple contiguous pages as a result of a single
-> > p2m violation.
-> > 
-> > I would focus on making a functioning prototype first, performance
-> > comes afterwards.
-> 
-> Makes sense.
-> 
-> >>>> Furthermore,
-> >>>> if a page fault happens while the page is unmapped, KVM will try
-> >>>> to bring the pages back into memory so the guest can access it.
-> >>>
-> >>> You could likely handle this in Xen in the following way:
-> >>>
-> >>>  - A device model will get p2m violations forwarded, as it's the same
-> >>>    model that's used to handle emulation of device MMIO.  You will
-> >>>    need to register an ioreq server to request those faults to be
-> >>>    forwarded, I think the hardware domain kernel will handle those?
-> >>>
-> >>>  - Allow ioreqs to signal to Xen that a guest operation must be
-> >>>    retried.  IOW: resume guest execution without advancing the IP.
-> >>>
-> >>> I think this last bit is the one that will require changes to Xen, so
-> >>> that you can add a type of ioreq reply that implies a retry from the
-> >>> guest context.
-> >> I’m not actually sure if this is needed, though it would be nice.  It
-> >> might be possible for Xen to instead emulate the current instruction and
-> >> continue, with the ioreq server just returning the current value of the
-> >> pages.
-> > 
-> > You can, indeed, but it's cumbersome?  You might have to map the page
-> > in the context of the entity that implements the ioreq server to
-> > access the data.  Allowing retries would be more generic, and reduce
-> > the code in the ioreq server handler, that would only map the page
-> > to the guest p2m and request a retry.
-> 
-> Yeah, it is cumbersome indeed.
-> 
-> >> What I’m more concerned about is being able to provide a page
-> >> into the p2m so that the *next* access doesn’t fault, and being able
-> >> to remove that page from the p2m so that the next access *does* fault.
-> > 
-> > Maybe I'm not getting the question right, all Xen modifications to the
-> > p2m take immediate effect.  By the time a XEN_DOMCTL_memory_mapping
-> > hypercall returns the operation would have taken effect.
-> 
-> Ah, that makes sense.  When revoking access, can XEN_DOMCTL_iomem_permission
-> and XEN_DOMCTL_memory_mapping fail even if the parameters are correct and
-> the caller has enough permissions, or will they always succeed?
+No functional changes.
+Follow-on changes will benifit from this.
 
-They can fail, but not for a guest induced reason.
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+cc: "Roger Pau Monné" <roger.pau@citrix.com>
+---
+v3->v4 changes:
+* Add Acked-by of Roger.
 
-For example XEN_DOMCTL_iomem_permission manipulates a rangeset and
-revoking access might require a range to be split, and hence memory
-allocated.  That allocation of memory can fail, but that's not under
-guest control.
+v2->v3 changes:
+new patch.
 
-> >> Are there any hypercalls that can be used for these operations right
-> >> now?
-> > 
-> > With some trickery you could likely use XEN_DOMCTL_memory_mapping to
-> > add and remove those pages.  You will need calls to
-> > XEN_DOMCTL_iomem_permission beforehand so that you grant the receiving
-> > domain permissions to access those (and of course the granting domain
-> > needs to have full access to them).
-> > 
-> > This is no ideal if mapping RAM pages, AFAICT there are no strict
-> > checks that the added page is not RAM, but still you will need to
-> > handle RAM pages as IOMEM so and grant them using
-> > XEN_DOMCTL_iomem_permission which is not great.  Also note that this
-> > is a domctl, so not stable.  It might however be enough for a
-> > prototype.
-> 
-> Unfortunately this won’t work if the backend is a PVH domain, as a PVH
-> domain doesn’t know its own MFNs.  It also won’t work for deprivileged
-> backends because XEN_DOMCTL_iomem_permission is subject to XSA-77.
+Best regards,
+Jiqian Chen.
+---
+ xen/drivers/vpci/header.c | 138 ++++++++++++++++++++------------------
+ 1 file changed, 73 insertions(+), 65 deletions(-)
 
-Hm, I think solving this will be complicated using a single hypercall,
-because you have to deal with both MMIO and RAM, which are
-traditionally handled differently in Xen, also when mapped in the
-p2m.
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index ef6c965c081c..3e9b44454b43 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -745,6 +745,75 @@ static int bar_add_rangeset(const struct pci_dev *pdev, struct vpci_bar *bar,
+     return !bar->mem ? -ENOMEM : 0;
+ }
+ 
++static int vpci_init_capability_list(struct pci_dev *pdev)
++{
++    int rc;
++    bool mask_cap_list = false;
++
++    if ( !is_hardware_domain(pdev->domain) &&
++         pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
++    {
++        /* Only expose capabilities to the guest that vPCI can handle. */
++        unsigned int next, ttl = 48;
++        static const unsigned int supported_caps[] = {
++            PCI_CAP_ID_MSI,
++            PCI_CAP_ID_MSIX,
++        };
++
++        next = pci_find_next_cap_ttl(pdev->sbdf, PCI_CAPABILITY_LIST,
++                                     supported_caps,
++                                     ARRAY_SIZE(supported_caps), &ttl);
++
++        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
++                               PCI_CAPABILITY_LIST, 1,
++                               (void *)(uintptr_t)next);
++        if ( rc )
++            return rc;
++
++        next &= ~3;
++
++        if ( !next )
++            /*
++             * If we don't have any supported capabilities to expose to the
++             * guest, mask the PCI_STATUS_CAP_LIST bit in the status
++             * register.
++             */
++            mask_cap_list = true;
++
++        while ( next && ttl )
++        {
++            unsigned int pos = next;
++
++            next = pci_find_next_cap_ttl(pdev->sbdf,
++                                         pos + PCI_CAP_LIST_NEXT,
++                                         supported_caps,
++                                         ARRAY_SIZE(supported_caps), &ttl);
++
++            rc = vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
++                                   pos + PCI_CAP_LIST_ID, 1, NULL);
++            if ( rc )
++                return rc;
++
++            rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
++                                   pos + PCI_CAP_LIST_NEXT, 1,
++                                   (void *)(uintptr_t)next);
++            if ( rc )
++                return rc;
++
++            next &= ~3;
++        }
++    }
++
++    /* Utilize rsvdp_mask to hide PCI_STATUS_CAP_LIST from the guest. */
++    return vpci_add_register_mask(pdev->vpci, vpci_hw_read16, vpci_hw_write16,
++                                  PCI_STATUS, 2, NULL,
++                                  PCI_STATUS_RO_MASK &
++                                    ~(mask_cap_list ? PCI_STATUS_CAP_LIST : 0),
++                                  PCI_STATUS_RW1C_MASK,
++                                  mask_cap_list ? PCI_STATUS_CAP_LIST : 0,
++                                  PCI_STATUS_RSVDZ_MASK);
++}
++
+ static int cf_check init_header(struct pci_dev *pdev)
+ {
+     uint16_t cmd;
+@@ -753,7 +822,6 @@ static int cf_check init_header(struct pci_dev *pdev)
+     struct vpci_header *header = &pdev->vpci->header;
+     struct vpci_bar *bars = header->bars;
+     int rc;
+-    bool mask_cap_list = false;
+     bool is_hwdom = is_hardware_domain(pdev->domain);
+ 
+     ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
+@@ -794,61 +862,12 @@ static int cf_check init_header(struct pci_dev *pdev)
+     if ( rc )
+         return rc;
+ 
++    rc = vpci_init_capability_list(pdev);
++    if ( rc )
++        return rc;
++
+     if ( !is_hwdom )
+     {
+-        if ( pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
+-        {
+-            /* Only expose capabilities to the guest that vPCI can handle. */
+-            unsigned int next, ttl = 48;
+-            static const unsigned int supported_caps[] = {
+-                PCI_CAP_ID_MSI,
+-                PCI_CAP_ID_MSIX,
+-            };
+-
+-            next = pci_find_next_cap_ttl(pdev->sbdf, PCI_CAPABILITY_LIST,
+-                                         supported_caps,
+-                                         ARRAY_SIZE(supported_caps), &ttl);
+-
+-            rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
+-                                   PCI_CAPABILITY_LIST, 1,
+-                                   (void *)(uintptr_t)next);
+-            if ( rc )
+-                return rc;
+-
+-            next &= ~3;
+-
+-            if ( !next )
+-                /*
+-                 * If we don't have any supported capabilities to expose to the
+-                 * guest, mask the PCI_STATUS_CAP_LIST bit in the status
+-                 * register.
+-                 */
+-                mask_cap_list = true;
+-
+-            while ( next && ttl )
+-            {
+-                unsigned int pos = next;
+-
+-                next = pci_find_next_cap_ttl(pdev->sbdf,
+-                                             pos + PCI_CAP_LIST_NEXT,
+-                                             supported_caps,
+-                                             ARRAY_SIZE(supported_caps), &ttl);
+-
+-                rc = vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
+-                                       pos + PCI_CAP_LIST_ID, 1, NULL);
+-                if ( rc )
+-                    return rc;
+-
+-                rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
+-                                       pos + PCI_CAP_LIST_NEXT, 1,
+-                                       (void *)(uintptr_t)next);
+-                if ( rc )
+-                    return rc;
+-
+-                next &= ~3;
+-            }
+-        }
+-
+         /* Extended capabilities read as zero, write ignore */
+         rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL, 0x100, 4,
+                                (void *)0);
+@@ -856,17 +875,6 @@ static int cf_check init_header(struct pci_dev *pdev)
+             return rc;
+     }
+ 
+-    /* Utilize rsvdp_mask to hide PCI_STATUS_CAP_LIST from the guest. */
+-    rc = vpci_add_register_mask(pdev->vpci, vpci_hw_read16, vpci_hw_write16,
+-                                PCI_STATUS, 2, NULL,
+-                                PCI_STATUS_RO_MASK &
+-                                    ~(mask_cap_list ? PCI_STATUS_CAP_LIST : 0),
+-                                PCI_STATUS_RW1C_MASK,
+-                                mask_cap_list ? PCI_STATUS_CAP_LIST : 0,
+-                                PCI_STATUS_RSVDZ_MASK);
+-    if ( rc )
+-        return rc;
+-
+     if ( pdev->ignore_bars )
+         return 0;
+ 
+-- 
+2.34.1
 
-You could possibly use XENMEM_add_to_physmap_batch to create a foreign
-mapping in a remote guest p2m when mapping RAM, and
-XEN_DOMCTL_memory_mapping when mapping IOMEM.  But that requires the
-emulator/mediator to know when it's attempting to map RAM or IOMEM
-(which I think you wanted to avoid?)
-
-Otherwise a new XENMEM_add_to_physmap{,_batch} `phys_map_space` option
-needs to be added to cater for your requirements.
-
-> > Long term I think we want to expand XENMEM_add_to_physmap{,_batch} to
-> > handle this use-case.
-> 
-> That would indeed be better.
-> 
-> >> If not, which Xen functions would one use to implement them?
-> >> Some notes:
-> >>
-> >> - The p2m might need to be made to point to a PCI BAR or system RAM.
-> >>   The guest kernel and host userspace don’t know which, and in any
-> >>   case don’t need to care.  The host kernel knows, but I don’t know
-> >>   if the information is exposed to the Xen driver.
-> > 
-> > Hm, as said above, while you could possible handle RAM as IOMEM, it
-> > has the slight inconvenience of having to add such RAM pages to the
-> > d->iomem_caps rangeset for XEN_DOMCTL_memory_mapping to succeed.
-> > 
-> > From a guest PoV, it doesn't matter if the underlying page is RAM or
-> > MMIO, as long as it's mapped in the p2m.
-> 
-> Understood, thanks!
-> 
-> >> - If the p2m needs to point to system RAM, the RAM will be memory
-> >>   that belongs to the backend.
-> >>
-> >> - If the p2m needs to point to a PCI BAR, it will initially need
-> >>   to point to a real PCI device that is owned by the backend.
-> > 
-> > As long as you give the destination domain access to the page using
-> > XEN_DOMCTL_iomem_permission prior to the XEN_DOMCTL_memory_mapping
-> > call it should work.
-> > 
-> > How does this work for device DMA accesses?  If the device is assigned
-> > to the backend domain (and thus using the backend domain IOMMU context
-> > entry and page-tables) DMA accesses cannot be done against guest
-> > provided addresses, there needs to be some kind of translation layer
-> > that filters commands?
-> 
-> Thankfully, this is handled by the backend.
-
-Oh, I see.  So the device IOMMU context is always set to the hardware
-domain one, and the emulator handles all the translation required?
-
-Thanks, Roger.
 
