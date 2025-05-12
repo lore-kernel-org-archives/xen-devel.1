@@ -4,34 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E9BC3ABC3
-	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 18:15:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.982055.1368536 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3615DC3ABC3
+	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 18:26:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.982066.1368544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEXgT-0005qH-CW; Mon, 12 May 2025 18:15:25 +0000
+	id 1uEXrB-0007nF-6t; Mon, 12 May 2025 18:26:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 982055.1368536; Mon, 12 May 2025 18:15:25 +0000
+Received: by outflank-mailman (output) from mailman id 982066.1368544; Mon, 12 May 2025 18:26:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEXgT-0005qA-8I; Mon, 12 May 2025 18:15:25 +0000
-Received: by outflank-mailman (input) for mailman id 982055;
- Mon, 12 May 2025 18:15:24 +0000
+	id 1uEXrB-0007n8-3m; Mon, 12 May 2025 18:26:29 +0000
+Received: by outflank-mailman (input) for mailman id 982066;
+ Mon, 12 May 2025 18:26:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=tILs=X4=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1uEXX1-0001iN-M5
- for xen-devel@lists.xenproject.org; Mon, 12 May 2025 18:05:39 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (envelope-from <SRS0=mHvf=X4=m5p.com=ehem@srs-se1.protection.inumbo.net>)
+ id 1uEXr9-0007n2-JC
+ for xen-devel@lists.xenproject.org; Mon, 12 May 2025 18:26:27 +0000
+Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b4702cbb-2f5b-11f0-9ffb-bf95429c2676;
- Mon, 12 May 2025 20:05:37 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 459B7614B4;
- Mon, 12 May 2025 18:05:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2452C4CEE7;
- Mon, 12 May 2025 18:05:34 +0000 (UTC)
+ id 9bf87a83-2f5e-11f0-9ffb-bf95429c2676;
+ Mon, 12 May 2025 20:26:24 +0200 (CEST)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.18.1/8.17.1) with ESMTPS id 54CIPtkg052256
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Mon, 12 May 2025 14:26:01 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.18.1/8.15.2/Submit) id 54CIPrN9052255;
+ Mon, 12 May 2025 11:25:53 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,104 +45,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4702cbb-2f5b-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747073136;
-	bh=tClUygEdgjrbqL6Az0SliCxYp1+a19KrR43GjyNmmfE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=sIWqO7dcL6+H0+FDcizZdrxvtSrzg+M1wlI2sy83EV246KLXdSqqB9JNwNR5+1Oeq
-	 h6fyTrfhEuS84ixdK2gb3IZMS2Rg5MQZBGixyPJKPNYaPbyvFyU38Xim6BrsBN+Tt/
-	 Qx6TICpsew4Wm5p1Quqx63ujNooZgELWiDjBJdK4FkxTskFD0TNOHifZjigeJLfGq4
-	 HuAILqg/i6Vr+CsBCX9yRDRUCKq1FEf6e6A1NOtp9HylDf0KqAnX8/h8qFOVH4g6Rl
-	 EZqLkIZmueGkNsqQFf8UGpUODzhZ0/zj2z4Dycb0hGxV6TNyzYS5QOd5R37actUdPo
-	 LHU1e70CFRqew==
-From: Sasha Levin <sashal@kernel.org>
-To: patches@lists.linux.dev,
-	stable@vger.kernel.org
-Cc: Jason Andryuk <jason.andryuk@amd.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Sasha Levin <sashal@kernel.org>,
-	xin.wang2@amd.com,
-	chenqiuji666@gmail.com,
-	elder@kernel.org,
-	gregkh@linuxfoundation.org,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.10 2/3] xenbus: Allow PVH dom0 a non-local xenstore
-Date: Mon, 12 May 2025 14:05:27 -0400
-Message-Id: <20250512180528.438177-2-sashal@kernel.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250512180528.438177-1-sashal@kernel.org>
-References: <20250512180528.438177-1-sashal@kernel.org>
+X-Inumbo-ID: 9bf87a83-2f5e-11f0-9ffb-bf95429c2676
+Date: Mon, 12 May 2025 11:25:53 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+        Xen-devel <xen-devel@lists.xenproject.org>,
+        Anthony PERARD <anthony.perard@vates.tech>,
+        Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        Roberto Bagnara <roberto.bagnara@bugseng.com>,
+        Nicola Vetrini <nicola.vetrini@bugseng.com>,
+        "consulting @ bugseng . com" <consulting@bugseng.com>,
+        Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen: Use __auto_type
+Message-ID: <aCI9MZRN1A753Nw9@mattapan.m5p.com>
+References: <20250505124646.1569767-1-andrew.cooper3@citrix.com>
+ <alpine.DEB.2.22.394.2505051244090.3879245@ubuntu-linux-20-04-desktop>
+ <548430a5-fa4a-41d1-b5ba-ba45efa90bbc@suse.com>
+ <7acc83a3-2b15-4557-b293-0832b35e3680@citrix.com>
+ <35826c2a-4266-49d2-b1b8-1248aac227b5@suse.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.10.237
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <35826c2a-4266-49d2-b1b8-1248aac227b5@suse.com>
 
-From: Jason Andryuk <jason.andryuk@amd.com>
+On Mon, May 12, 2025 at 03:00:18PM +0200, Jan Beulich wrote:
+> On 12.05.2025 14:09, Andrew Cooper wrote:
+> > 
+> > Now for the (new) controversial part.  Since sending this, Linux has
+> > decided to just #define auto __auto_type for C < 23, in order to start
+> > writing C23 compatible code from now.  It's more succinct, and has
+> > better longevity.
+> > 
+> > We might want to consider the same, although it will introduce a new
+> > example of defining a keyword, which we'd have to call out in the
+> > MISRA/Eclair config.
+> 
+> I'm not outright opposed, as I don't think we use "auto" with its
+> original semantics, but it feels somewhat odd.
 
-[ Upstream commit 90989869baae47ee2aa3bcb6f6eb9fbbe4287958 ]
+Problem is "auto" already has a defined meaning in C.  Having this will
+subtly break contributions from authors who weren't familiar with
+everything in Xen's headers.  For anyone who does anything with projects
+besides Xen this will encourage bad habits.
 
-Make xenbus_init() allow a non-local xenstore for a PVH dom0 - it is
-currently forced to XS_LOCAL.  With Hyperlaunch booting dom0 and a
-xenstore stubdom, dom0 can be handled as a regular XS_HVM following the
-late init path.
+I believe many projects have a rule of *never* #define C keywords.  I'm
+surprised such made it into the Linux kernel.  I expect it will be ripped
+out in the near future.
 
-Ideally we'd drop the use of xen_initial_domain() and just check for the
-event channel instead.  However, ARM has a xen,enhanced no-xenstore
-mode, where the event channel and PFN would both be 0.  Retain the
-xen_initial_domain() check, and use that for an additional check when
-the event channel is 0.
+MISRA *doesn't* absolutely forbid this?
 
-Check the full 64bit HVM_PARAM_STORE_EVTCHN value to catch the off
-chance that high bits are set for the 32bit event channel.
 
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
-Change-Id: I5506da42e4c6b8e85079fefb2f193c8de17c7437
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Message-ID: <20250506204456.5220-1-jason.andryuk@amd.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/xen/xenbus/xenbus_probe.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
-index 743795d402cb0..fb5358a738204 100644
---- a/drivers/xen/xenbus/xenbus_probe.c
-+++ b/drivers/xen/xenbus/xenbus_probe.c
-@@ -864,9 +864,15 @@ static int __init xenbus_init(void)
- 	if (xen_pv_domain())
- 		xen_store_domain_type = XS_PV;
- 	if (xen_hvm_domain())
-+	{
- 		xen_store_domain_type = XS_HVM;
--	if (xen_hvm_domain() && xen_initial_domain())
--		xen_store_domain_type = XS_LOCAL;
-+		err = hvm_get_parameter(HVM_PARAM_STORE_EVTCHN, &v);
-+		if (err)
-+			goto out_error;
-+		xen_store_evtchn = (int)v;
-+		if (!v && xen_initial_domain())
-+			xen_store_domain_type = XS_LOCAL;
-+	}
- 	if (xen_pv_domain() && !xen_start_info->store_evtchn)
- 		xen_store_domain_type = XS_LOCAL;
- 	if (xen_pv_domain() && xen_start_info->store_evtchn)
-@@ -885,10 +891,6 @@ static int __init xenbus_init(void)
- 		xen_store_interface = gfn_to_virt(xen_store_gfn);
- 		break;
- 	case XS_HVM:
--		err = hvm_get_parameter(HVM_PARAM_STORE_EVTCHN, &v);
--		if (err)
--			goto out_error;
--		xen_store_evtchn = (int)v;
- 		err = hvm_get_parameter(HVM_PARAM_STORE_PFN, &v);
- 		if (err)
- 			goto out_error;
 -- 
-2.39.5
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
