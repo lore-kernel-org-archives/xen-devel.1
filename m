@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537F2C3ABCB
-	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 18:05:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.982019.1368515 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5CE1C3ABD8
+	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 18:05:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.982027.1368525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEXWu-000336-3z; Mon, 12 May 2025 18:05:32 +0000
+	id 1uEXX9-0003bv-BJ; Mon, 12 May 2025 18:05:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 982019.1368515; Mon, 12 May 2025 18:05:32 +0000
+Received: by outflank-mailman (output) from mailman id 982027.1368525; Mon, 12 May 2025 18:05:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEXWu-00032v-11; Mon, 12 May 2025 18:05:32 +0000
-Received: by outflank-mailman (input) for mailman id 982019;
- Mon, 12 May 2025 18:05:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uEXX9-0003bm-8e; Mon, 12 May 2025 18:05:47 +0000
+Received: by outflank-mailman (input) for mailman id 982027;
+ Mon, 12 May 2025 18:05:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=tILs=X4=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1uEXWs-0001iN-Ia
- for xen-devel@lists.xenproject.org; Mon, 12 May 2025 18:05:30 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af53ae77-2f5b-11f0-9ffb-bf95429c2676;
- Mon, 12 May 2025 20:05:28 +0200 (CEST)
+ id 1uEXX8-0001Kz-Eu
+ for xen-devel@lists.xenproject.org; Mon, 12 May 2025 18:05:46 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b9ace606-2f5b-11f0-9eb6-5ba50f476ded;
+ Mon, 12 May 2025 20:05:45 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 79B795C5507;
- Mon, 12 May 2025 18:03:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41088C4CEEF;
- Mon, 12 May 2025 18:05:25 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id F3C50614B7;
+ Mon, 12 May 2025 18:05:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DF8EC4CEE7;
+ Mon, 12 May 2025 18:05:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af53ae77-2f5b-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: b9ace606-2f5b-11f0-9eb6-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747073126;
-	bh=3AksgRRmkoQ6fJIncxndRZkvy/I4Fxh5QPEmqwimDJo=;
+	s=k20201202; t=1747073144;
+	bh=0M7b1jwuL8aGrtVgJT1veCJSLkJZ6QXbB0t/Micp/7M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QPr255rBlHWgPuVdnQtKzCGhYS41C3JKflJ0AIgmHnuaLPxtxrkg75Am93zlAQSIp
-	 HQWFb+OmaKKb8gQeMAjkFE2AXHBGEzzQIyX01rEv7GxWa56ALaPr563YhN1KcZdYKp
-	 XVMLuJRFe175hsPNbv0aRLJow5otDhfGnullY0odgnWA8nGu4r1cXh4BODtSd+MRsi
-	 S6pz67JVk0u8SHvVVX6ezMhV6jQRzo2Q8w3dz+gD5pfCchqjNXPNSe6IQ0f/nkMxh4
-	 Ktu8BoGVbGJNnLeOmjykWoQtGFAULAo6+ROW6MXsjAPo2BNGNaz6uL3xc5RuloqQIm
-	 8OQXiTJA1MetQ==
+	b=tyuVzCWj63wXRMOHJ5MGlLunznISQVMA/lipEyRQCtMonx1NA4tgbZKzpwtNfv7/C
+	 3RhMntOlyqtZGbIiUSEDZXB4882iArRoeFc+E3J+E3/ul/EMvRc8UTXS/ViB3JFtF3
+	 VfGq4XembhqziMvOavLcgg/da1Pe0cX/b2asOV87qjGQxxnxrJBCPL1sB1ges1Y1Na
+	 EhbHGEDiuMbo/UIJblj5zk9es2FLI1JIjy66ZO/BKu5cG0nkMFAPz7Ut3fF1wcBVpU
+	 4txeuvt69xDTSAS084chd9p2koow9L/RBjnSCjWI0WCYp4sNr8yK7tPRMh2/IkVeC5
+	 jTf/O886yQmUA==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
@@ -61,21 +61,21 @@ Cc: Jason Andryuk <jason.andryuk@amd.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Sasha Levin <sashal@kernel.org>,
-	gregkh@linuxfoundation.org,
 	chenqiuji666@gmail.com,
+	gregkh@linuxfoundation.org,
 	xin.wang2@amd.com,
 	xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.15 2/3] xenbus: Allow PVH dom0 a non-local xenstore
-Date: Mon, 12 May 2025 14:05:17 -0400
-Message-Id: <20250512180518.438085-2-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 2/3] xenbus: Allow PVH dom0 a non-local xenstore
+Date: Mon, 12 May 2025 14:05:36 -0400
+Message-Id: <20250512180537.438255-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250512180518.438085-1-sashal@kernel.org>
-References: <20250512180518.438085-1-sashal@kernel.org>
+In-Reply-To: <20250512180537.438255-1-sashal@kernel.org>
+References: <20250512180537.438255-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.15.182
+X-stable-base: Linux 5.4.293
 Content-Transfer-Encoding: 8bit
 
 From: Jason Andryuk <jason.andryuk@amd.com>
@@ -107,10 +107,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
-index e680bd1adf9c4..2068f83556b78 100644
+index fd686b962727a..17705f82f85fd 100644
 --- a/drivers/xen/xenbus/xenbus_probe.c
 +++ b/drivers/xen/xenbus/xenbus_probe.c
-@@ -927,9 +927,15 @@ static int __init xenbus_init(void)
+@@ -881,9 +881,15 @@ static int __init xenbus_init(void)
  	if (xen_pv_domain())
  		xen_store_domain_type = XS_PV;
  	if (xen_hvm_domain())
@@ -128,7 +128,7 @@ index e680bd1adf9c4..2068f83556b78 100644
  	if (xen_pv_domain() && !xen_start_info->store_evtchn)
  		xen_store_domain_type = XS_LOCAL;
  	if (xen_pv_domain() && xen_start_info->store_evtchn)
-@@ -948,10 +954,6 @@ static int __init xenbus_init(void)
+@@ -902,10 +908,6 @@ static int __init xenbus_init(void)
  		xen_store_interface = gfn_to_virt(xen_store_gfn);
  		break;
  	case XS_HVM:
