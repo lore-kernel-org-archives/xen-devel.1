@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB7A5C3ABC3
-	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 19:58:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.982171.1368729 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A220C3ABC3
+	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 20:01:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.982190.1368739 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEZIU-0008Vl-Qk; Mon, 12 May 2025 19:58:46 +0000
+	id 1uEZKq-00022k-9R; Mon, 12 May 2025 20:01:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 982171.1368729; Mon, 12 May 2025 19:58:46 +0000
+Received: by outflank-mailman (output) from mailman id 982190.1368739; Mon, 12 May 2025 20:01:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEZIU-0008Ve-NG; Mon, 12 May 2025 19:58:46 +0000
-Received: by outflank-mailman (input) for mailman id 982171;
- Mon, 12 May 2025 19:58:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uEZKq-00022d-6L; Mon, 12 May 2025 20:01:12 +0000
+Received: by outflank-mailman (input) for mailman id 982190;
+ Mon, 12 May 2025 20:01:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xFmg=X4=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1uEZIS-0008VY-Hd
- for xen-devel@lists.xenproject.org; Mon, 12 May 2025 19:58:45 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 81303be0-2f6b-11f0-9eb6-5ba50f476ded;
- Mon, 12 May 2025 21:58:42 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 984894EE7BD4;
- Mon, 12 May 2025 21:58:41 +0200 (CEST)
+ <SRS0=f4yg=X4=cloud.com=kevin.lampis@srs-se1.protection.inumbo.net>)
+ id 1uEZGQ-0005qp-AY
+ for xen-devel@lists.xenproject.org; Mon, 12 May 2025 19:56:38 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 36326998-2f6b-11f0-9ffb-bf95429c2676;
+ Mon, 12 May 2025 21:56:36 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad23c20f977so357194666b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 May 2025 12:56:36 -0700 (PDT)
+Received: from fedora.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad2197be0c5sm656407366b.153.2025.05.12.12.56.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 May 2025 12:56:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,113 +47,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 81303be0-2f6b-11f0-9eb6-5ba50f476ded
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1747079921;
-	b=dvBOSiPd7+CC0hMUYDV6HlpdI9wxv/KSPOziqznBXXohfDeiuGrWiMrPNCIOdZHLSRZN
-	 +/IHwcN3oEZcILLKeYU6BjHA4ucaMeeQXpge9oRFn2tldWooYzpJEgiLxrmEaUyC6gEVl
-	 E5b11nJ3y3Lo+YP9BUCJAta0BGprcHTHYR9aVm5OxHtOGaPKCMNOLoXhdPRbbCHsz4GV9
-	 N9DZd2Uus9x1EF08FSqcUyyaitSYTk5besnTdi6td3cAYX+4rOWpFwJJesslkHra8pb14
-	 s7gEYWdtPsQ3YfBk4v7MPrj90HTCbdWbCyAGIlDQt/O0EDwLSr3sbNgjm00BPjJj7SnRx
-	 7O2f+NUZUr3+dirI/GLJm6LXqeBwdjtMGyj/5mbfOwKBiJOqhHy2rxyggwtTaJPVKOUdH
-	 SQCEGCyhwtJBJULk6hh9QJkxQR8ByIlp8EmxFS8KeSUKKz3nybJ6yydPpkl14lsEtZbyL
-	 6SHO9G1UKaetRy2BMT6l28bVK/gMihLrLEoEhreLHVu3kf7/dbC74gammcZjGEjt6tU3D
-	 LPS3eIExEwKxjXlJ/MR5291Cr+2+1HGANDeSP+itl4UpvNqeIlIWXduuNTSNiONuTAZCE
-	 QEaVHmsY1NsaKJY+FjoE4WFPFxaY9whT0CJU6KYhAbTy8vBhDHMgrUksZgDNFSk=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1747079921;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=hR+3qkPcfLW/IX3IURdsuWso1H/te0G+BUEbl/2Gy1Q=;
-	b=PPkyTUwpmGOtS7oNaz5J2vqqoAyBZ8v0UwIS+OJnsMv5J9qSjXsNvwq35DXhfBgaPk0w
-	 abp9dxc6Trq1VUxTvlshU5lOo4rjHLU9ZfYEqbmnWwDvxf/C9sePCXPjsaHZij5ZFu8vP
-	 uDDSqxc11b8sDSh4nPRnGkJBG0GauGK2nUqmgzyzolZBUCbuanr+/7YEgtomP5E+076vK
-	 0ACc41mt4L6IJ76sOrgOYLMmu+mQh/XBNgWVMBeAyie1uiDfa/nWWriANYwRtXg4cTWtJ
-	 UfuZPezH5c+XqRp5VxFRld5I7DWLpN/zlmbocg6cHT1Dxdjuz6K6u5oQhjYj5HWxX/qy9
-	 wL+EvmfMCNbGl/1+cYH4wXU8MvQKYfPkl5C9w5a1iz1VTXz2juW7BcJ6DIWQVrgWAh6w8
-	 UkIizazmJwauFIrKfsDlaezr0AaAgkmh8YKX1VJWKiIv+6Kr4qBB9rlRRs4rwcNd+B/dt
-	 XnPxfR86pCK+dMJGsiKzXPkjqJmzYCS/ANmnUVFdbJ5viGTz6gaH06nBHZWhbMpMq/oqw
-	 nb4JM4Dskzm85D9Lzi8lCPm/mG77F3iWusvhzh7vzEoTPkb4FZLmFVLJVM7cTfndWBJim
-	 KqJGCLnMClqCTR8t47ZkBY+LzC7h1IuMQyu1W4WsFrE21tJb66viKhdApZdhdzU=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1747079921; bh=hcd7wQmJhh6MtgN4rwVGiFoEBqI4jUsM/KzB0GxjYII=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=P9qDIyiq4ftq+9djKYWiPSp/1ZumfA9pDUKFs01wF/YYVK6e+rBEjcU2wJvZUjSJC
-	 GMJhGgdO5oMYiygdzJyNZjFDNmw+MzaJfd31YQJTvkDw5pycDx7htuKpjcYcULXe83
-	 nZFsZBmH1SQZXvqeZ0vQoWEd/PRoBLKHHtcb4x+r+M84c0Jiy9LsNbYdhHq/MmSY8h
-	 LgyE4SwzArlzf7P+CaYy588MIyzy03eNfHO9HlR7Zzl6dy+rV1Aj2pg2kf3rwFeiEp
-	 M+41gleR3G17KX0nSPeOeGchoADQeRzc3/0E8tRw39uYbzoHVub2tsmi3wX7IrulAX
-	 kC93I/HkSPVAA==
+X-Inumbo-ID: 36326998-2f6b-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1747079796; x=1747684596; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=k4Wd8lHyFqDjTXjkxHBdAOOU5VtwxpSw3GkW45s9UOA=;
+        b=hW0slmy02z9nMSr6NpDMOgRKWt+vn0KEbENPvnLk8CVFOeBK1qdLfcHJZimRwj3wCN
+         f6vlic5s1RG9hkMJpYEwUdH0VOoKhTScJ1pTTpwdiusdQud2W2vyRjjcJwAkpftj66eH
+         hDjVhnatASd6ZdzXK6FIZvTHj4ewXRUlB3gVg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747079796; x=1747684596;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=k4Wd8lHyFqDjTXjkxHBdAOOU5VtwxpSw3GkW45s9UOA=;
+        b=fppV3vpLy7lXRd1mFWwOZAmiwVPnyLLQEDMWhewlnBoonObiiaqGsZpwOabohWu2Z3
+         9bv1jfb6xz53aO19LJ9cOc91n8v6fTNSHHVenW27yfNPgKDX3GpGaNH61LnDCo6wOwBl
+         +kY1JQ9GeE/mrmragx+vC8yln12GdprfalppUeBEIh68nRePCWrxS5V4+mg39MWI9Gb2
+         sxMEpK6x06z1l4Kp/NfQyxv7CRcapq60bJ2xT9p7c0WqXBL9ecPFyY++Mr5pxumazvyh
+         vVhAQtXJSdnDbyD9psDWtc1BLxWOTfbKVqLN+2J6NreYWqfffyhe2QlYmd9GM6Q/aPcW
+         e2fA==
+X-Gm-Message-State: AOJu0YxrLgEeGwetfjJDHi2BQLrALYNpNxeghgebkvBXJCDjHt+ymaYV
+	I/2N9G//BV3T7J8lndrlbjDagC0K6m7MB4AH1A4wnovo1AUf3c87Hg6QH8WzPQs3zbeW3M2qRV/
+	3
+X-Gm-Gg: ASbGncsMlGfT4aBc6Qs+2VvgN50nbnfblh1u1pVsO67m7bacYy2PbcrPhKfy5D73Y/i
+	YIj0PuKxhmXALsV1q1qxnucpFDJvvHojZWqvCEFRxV0Lp8ps4pPcyS62hkcknJx13mGbC7sswjT
+	v9uTNItctpet262I5GIa55tMJgC/54nz48OkBgEcqU1ENGSVn7+xKcLD+WBO8e1TAI1PK4pjM0H
+	UMhYtZLdUQaumziC39wDZQvWxrPRZ0sFAiO3ZDfSR4eIp3AZ5Ef0pxG0oiFUXKISedOnZ5gJ+2B
+	+2mn5eOW78+bQaugjMdCEKpUmmOR+rDE0GHEKoMn8k9RQARwEXvFLkcz5Epb/vjlfflk
+X-Google-Smtp-Source: AGHT+IHzSIWCtV2mlkh4F8aroWccKmHhvvAB4iWh/zuQL3EraTvCk466NJ4QBWQ1Uke7y85jSA8Flg==
+X-Received: by 2002:a17:907:a38e:b0:ad2:39a9:f1b8 with SMTP id a640c23a62f3a-ad239aa08eemr842161966b.57.1747079795633;
+        Mon, 12 May 2025 12:56:35 -0700 (PDT)
+From: Kevin Lampis <kevin.lampis@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Kevin Lampis <kevin.lampis@cloud.com>
+Subject: [PATCH 2/3] Add lockdown mode
+Date: Mon, 12 May 2025 20:56:27 +0100
+Message-ID: <20250512195628.1728455-3-kevin.lampis@cloud.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20250512195628.1728455-1-kevin.lampis@cloud.com>
+References: <20250512195628.1728455-1-kevin.lampis@cloud.com>
 MIME-Version: 1.0
-Date: Mon, 12 May 2025 21:58:41 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Elliott Mitchell <ehem+xen@m5p.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel
- <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger?=
- =?UTF-8?Q?_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Roberto Bagnara
- <roberto.bagnara@bugseng.com>, "consulting @ bugseng . com"
- <consulting@bugseng.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] xen: Use __auto_type
-In-Reply-To: <aCI9MZRN1A753Nw9@mattapan.m5p.com>
-References: <20250505124646.1569767-1-andrew.cooper3@citrix.com>
- <alpine.DEB.2.22.394.2505051244090.3879245@ubuntu-linux-20-04-desktop>
- <548430a5-fa4a-41d1-b5ba-ba45efa90bbc@suse.com>
- <7acc83a3-2b15-4557-b293-0832b35e3680@citrix.com>
- <35826c2a-4266-49d2-b1b8-1248aac227b5@suse.com>
- <aCI9MZRN1A753Nw9@mattapan.m5p.com>
-Message-ID: <9b616ece73d57d8bf5f524e50da14640@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2025-05-12 20:25, Elliott Mitchell wrote:
-> On Mon, May 12, 2025 at 03:00:18PM +0200, Jan Beulich wrote:
->> On 12.05.2025 14:09, Andrew Cooper wrote:
->> >
->> > Now for the (new) controversial part.  Since sending this, Linux has
->> > decided to just #define auto __auto_type for C < 23, in order to start
->> > writing C23 compatible code from now.  It's more succinct, and has
->> > better longevity.
->> >
->> > We might want to consider the same, although it will introduce a new
->> > example of defining a keyword, which we'd have to call out in the
->> > MISRA/Eclair config.
->> 
->> I'm not outright opposed, as I don't think we use "auto" with its
->> original semantics, but it feels somewhat odd.
-> 
-> Problem is "auto" already has a defined meaning in C.  Having this will
-> subtly break contributions from authors who weren't familiar with
-> everything in Xen's headers.  For anyone who does anything with 
-> projects
-> besides Xen this will encourage bad habits.
-> 
-> I believe many projects have a rule of *never* #define C keywords.  I'm
-> surprised such made it into the Linux kernel.  I expect it will be 
-> ripped
-> out in the near future.
-> 
-> MISRA *doesn't* absolutely forbid this?
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-It does, and in fact I don't think that is a wise decision (it's not 
-quite UB I think because Xen does not use standard library headers, but 
-still). However Xen does already #define "inline" with a specific 
-rationale. I could find only [1] as a reference to the discussion in 
-Linux, but perhaps I missed something. Do you have more recent thread 
-@Andrew?
+The intention of lockdown mode is to prevent attacks from a rogue dom0
+userspace from compromising the system. Lockdown mode can be controlled by a
+Kconfig option and a command-line parameter. It is also enabled automatically
+when Secure Boot is enabled and it cannot be disabled in that case.
 
-[1] 
-https://lore.kernel.org/lkml/d4f87590-6cbb-4ee9-bead-7d958fc1fa83@p183/#R
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
+---
+ xen/arch/x86/setup.c       |  1 +
+ xen/common/Kconfig         |  8 ++++++
+ xen/common/Makefile        |  1 +
+ xen/common/kernel.c        |  3 +++
+ xen/common/lockdown.c      | 52 ++++++++++++++++++++++++++++++++++++++
+ xen/include/xen/lockdown.h |  9 +++++++
+ 6 files changed, 74 insertions(+)
+ create mode 100644 xen/common/lockdown.c
+ create mode 100644 xen/include/xen/lockdown.h
 
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 2518954124..276957c4ed 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -15,6 +15,7 @@
+ #include <xen/kexec.h>
+ #include <xen/keyhandler.h>
+ #include <xen/lib.h>
++#include <xen/lockdown.h>
+ #include <xen/multiboot.h>
+ #include <xen/nodemask.h>
+ #include <xen/numa.h>
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index bf7b081ad0..42b2e4e869 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -565,4 +565,12 @@ config BUDDY_ALLOCATOR_SIZE
+ 	  Amount of memory reserved for the buddy allocator to serve Xen heap,
+ 	  working alongside the colored one.
+ 
++config LOCKDOWN_DEFAULT
++	bool "Enable lockdown mode by default"
++	default n
++	help
++	  Lockdown mode prevents attacks from a rogue dom0 userspace from
++	  compromising the system. This is automatically enabled when Secure
++	  Boot is enabled.
++
+ endmenu
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 98f0873056..b00a8a925a 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -26,6 +26,7 @@ obj-$(CONFIG_KEXEC) += kexec.o
+ obj-$(CONFIG_KEXEC) += kimage.o
+ obj-$(CONFIG_LIVEPATCH) += livepatch.o livepatch_elf.o
+ obj-$(CONFIG_LLC_COLORING) += llc-coloring.o
++obj-y += lockdown.o
+ obj-$(CONFIG_VM_EVENT) += mem_access.o
+ obj-y += memory.o
+ obj-y += multicall.o
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index 8b63ca55f1..6658db9514 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -216,6 +216,9 @@ static void __init _cmdline_parse(const char *cmdline)
+  */
+ void __init cmdline_parse(const char *cmdline)
+ {
++    /* Call this early since it affects command-line parsing */
++    lockdown_init(cmdline);
++
+     if ( opt_builtin_cmdline[0] )
+     {
+         printk("Built-in command line: %s\n", opt_builtin_cmdline);
+diff --git a/xen/common/lockdown.c b/xen/common/lockdown.c
+new file mode 100644
+index 0000000000..935911dfd0
+--- /dev/null
++++ b/xen/common/lockdown.c
+@@ -0,0 +1,52 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include <xen/efi.h>
++#include <xen/kernel.h>
++#include <xen/lockdown.h>
++#include <xen/param.h>
++#include <xen/string.h>
++
++static bool __ro_after_init lockdown = IS_ENABLED(CONFIG_LOCKDOWN_DEFAULT);
++ignore_param("lockdown");
++
++bool is_locked_down(void)
++{
++    return lockdown;
++}
++
++void __init lockdown_init(const char *cmdline)
++{
++    if ( efi_secure_boot )
++    {
++        printk("Enabling lockdown mode because Secure Boot is enabled\n");
++        lockdown = true;
++    }
++    else
++    {
++        while ( *cmdline )
++        {
++            size_t param_len, name_len;
++            int ret;
++
++            cmdline += strspn(cmdline, " \n\r\t");
++            param_len = strcspn(cmdline, " \n\r\t");
++            name_len = strcspn(cmdline, "= \n\r\t");
++
++            if ( !strncmp(cmdline, "lockdown", max(name_len, strlen("lockdown"))) ||
++                 !strncmp(cmdline, "no-lockdown", max(name_len, strlen("no-lockdown"))) )
++            {
++                ret = parse_boolean("lockdown", cmdline, cmdline + param_len);
++                if ( ret >= 0 )
++                {
++                    lockdown = ret;
++                    printk("Lockdown mode set from command-line\n");
++                    break;
++                }
++            }
++
++            cmdline += param_len;
++        }
++    }
++
++    printk("Lockdown mode is %s\n", lockdown ? "enabled" : "disabled");
++}
+diff --git a/xen/include/xen/lockdown.h b/xen/include/xen/lockdown.h
+new file mode 100644
+index 0000000000..b2baa31caa
+--- /dev/null
++++ b/xen/include/xen/lockdown.h
+@@ -0,0 +1,9 @@
++#ifndef XEN__LOCKDOWN_H
++#define XEN__LOCKDOWN_H
++
++#include <xen/types.h>
++
++bool is_locked_down(void);
++void lockdown_init(const char *cmdline);
++
++#endif /* XEN__LOCKDOWN_H */
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.42.0
+
 
