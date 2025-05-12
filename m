@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C12C3ABC3
-	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 14:47:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.981610.1368041 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4047DC3ABC3
+	for <xen-devel@archiver.kernel.org>; Mon, 12 May 2025 14:50:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.981651.1368066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEUR0-0005SS-Fp; Mon, 12 May 2025 14:47:14 +0000
+	id 1uEUU7-0000Ga-8r; Mon, 12 May 2025 14:50:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 981610.1368041; Mon, 12 May 2025 14:47:14 +0000
+Received: by outflank-mailman (output) from mailman id 981651.1368066; Mon, 12 May 2025 14:50:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEUR0-0005Rn-Ae; Mon, 12 May 2025 14:47:14 +0000
-Received: by outflank-mailman (input) for mailman id 981610;
- Mon, 12 May 2025 14:47:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uEUU7-0000GT-6M; Mon, 12 May 2025 14:50:27 +0000
+Received: by outflank-mailman (input) for mailman id 981651;
+ Mon, 12 May 2025 14:50:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WmCO=X4=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1uEUQz-0004eT-0M
- for xen-devel@lists.xenproject.org; Mon, 12 May 2025 14:47:13 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fd27dc1a-2f3f-11f0-9eb6-5ba50f476ded;
- Mon, 12 May 2025 16:47:12 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5fd1f7f8b25so3058474a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 May 2025 07:47:12 -0700 (PDT)
-Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad2197bd219sm634459366b.141.2025.05.12.07.47.11
+ <SRS0=zSlO=X4=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1uEUU6-0000GN-KD
+ for xen-devel@lists.xenproject.org; Mon, 12 May 2025 14:50:26 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6f78f79b-2f40-11f0-9ffb-bf95429c2676;
+ Mon, 12 May 2025 16:50:24 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ad238c68b35so432754866b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 12 May 2025 07:50:24 -0700 (PDT)
+Received: from localhost ([84.78.159.3]) by smtp.gmail.com with UTF8SMTPSA id
+ a640c23a62f3a-ad22a3a1501sm503204766b.121.2025.05.12.07.50.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 07:47:11 -0700 (PDT)
+ Mon, 12 May 2025 07:50:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,133 +46,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd27dc1a-2f3f-11f0-9eb6-5ba50f476ded
+X-Inumbo-ID: 6f78f79b-2f40-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747061232; x=1747666032; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yvQdZIK/JXFuZvTKoVLrQyBHywf2ZxT+4HEeq47F6rg=;
-        b=uM9jB+mYlLOYOvLPfxGxtAP7fC9t+sW5oqwGVXADLPtEED8N0oN5DSpLM+PQjah4lR
-         tRuAx5Vtdvssky3GhS++5q+fOWJDPiJXVzkKGyMcgk198ZBsFLh0E+d8Vo8OhsN4woct
-         R2u5NBOKdudJr0NFPYk4Fsrzf+7ubHi/ofbac=
+        d=citrix.com; s=google; t=1747061424; x=1747666224; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=6oZNQb/xEs5YyNa3I9FOEMw3ehWkBbYRL9ptJa2iUDs=;
+        b=vBr9bGCPRZVonKLCDzfuuxQ/xGBHEolB5BdDsDsBoxNystfESHENvhNVQhfyV/meZK
+         ChfECtFR7fe+6gdpEZeGX9o+2eKobrQge/TUf0oGFkc9qF54elLhbBwMu8YgVw/6fyp4
+         0MNEpsHKCdmfDO6ZQV38ODPR/OySE7QAXDMfE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747061232; x=1747666032;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yvQdZIK/JXFuZvTKoVLrQyBHywf2ZxT+4HEeq47F6rg=;
-        b=uQUTxtq8GNZIXPn4wZPKV2wclQSk7N0wb3wXANFg5xIzuJ0J4qiD3k8dSnI/TkhRkq
-         oSruDLh7Y4Rhm2Y/QyiIcCQui+kl+VFXGP7AbTvM0PCOvm7XKOun0qOWzWDqma4c3ZpW
-         V3e1QiQtIsnXXiQ4eyJiTgtr5E+xtqod1dUCztG/RyxaCps0vXR4VkLaKDqTo0mLR4gx
-         D4GfFB0MMuvhmKTV0l8hrg8FU27qdJFobLEhMllVGYg4ahILkyPtRwQSe8nDxRsp7tcY
-         jyh0//D9Use/J58VPHBe976mBVVBOSb1ZmhVuyvmqc4v41FfMj3ocQYL6fVq+rdBmO2V
-         RjQQ==
-X-Gm-Message-State: AOJu0YzlGh0Amf98skI/ZewYsCQ2TNQNp4NqndYlFl679COL6ts1hk2v
-	VZIvpyY+HIK/EkJp5Th5qCo69OFzXLOwLqIrD8qHYdfWSvpk/osOtMiq+3jkmYuSq6VIE0uQx3Y
-	=
-X-Gm-Gg: ASbGncuvl4/JDxUWst6gahcSh+VWh+VOsWBqJ9CZzykPqjz+zUaw73ODF4eQcvxicRq
-	/lOQE47e3d2zgpKe++O/z6eRnzadP2fisN8r+WA9R7jzdXPE7CrhxFG0WTY6pKznGciXsu1G6EC
-	ABjW0kpCssRUcs4SmBrrOH9+2HWTL9XrLCbsV4CKs0eM0hacI55ANpgc/DIYAtv+fq+dnpiKIV4
-	g2C3AvWf1nFldTIQtcrFRp3Cp/J8e1ilid0EUuzTr/LM+DWoky32/QlXut+aSSJmbQvwp+pse7/
-	n5PKiJHuCcKQLldJMiYydRv6nc1ojwjtg+XLidLUq7K1/2o7Dd7oeKXv/+ES98ChYkH6lHWtYE8
-	=
-X-Google-Smtp-Source: AGHT+IGgEcr4x5iQWIFKccA8eC5vCGT1qAVTBjx7C45iZw/EIh4KJNcSAiaafo5TFy0lRllyaadJBw==
-X-Received: by 2002:a17:907:9453:b0:ad1:76d2:d06 with SMTP id a640c23a62f3a-ad219171d53mr1385413566b.47.1747061231720;
-        Mon, 12 May 2025 07:47:11 -0700 (PDT)
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 4/5] libxc/PM: Ensure pxstat buffers are correctly sized
-Date: Mon, 12 May 2025 15:46:55 +0100
-Message-ID: <20250512144656.314925-5-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250512144656.314925-1-ross.lagerwall@citrix.com>
-References: <20250512144656.314925-1-ross.lagerwall@citrix.com>
+        d=1e100.net; s=20230601; t=1747061424; x=1747666224;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=6oZNQb/xEs5YyNa3I9FOEMw3ehWkBbYRL9ptJa2iUDs=;
+        b=dv1NzElZZRhjR94zWhqugEroTpBdPVuFFgei9AOirWNWiyPJpAo6G/80BUeyaD7io0
+         6L8nJoKdqEvSEC0kV3nofxqHnRKhhdYpLzzI5ORChQZEGt8S2q9q4Gy7exC29vWPmV4G
+         8BTgTkcpw7XPSHZXt1RygIAAtRcbeyoL1YhzUiyzqB0tkolYQciLR+HI9aT9XuDoRGeJ
+         kYQ9Qh6nH8oinAN0fvgVDBRNPg/HGhDpgRKnL/R0gEWE0mcf86aepAUn27VvDSXLHuIP
+         BZKggQQE2HRXkuZCVebZbucYqk5MTyalv6U8+OU285OBJBcmmYro2VwddBt45bk2hA1L
+         csnw==
+X-Gm-Message-State: AOJu0YzV9GuxdqCCKa/nTtDCo/Xz9hwlLnWC24fi3o8cvLPOwtkoUREG
+	FFu78ijZ/nOFar393rfAQdixxRm7ip3oXXWhK3mePnokQcltdkkfDCAKdr5Qd+BEY+AvP0Xtg7/
+	p
+X-Gm-Gg: ASbGncvU6C5ps87L1LdPR8ilXq6ZryxVQesZTnd2Ll/xrKNCOOF1ild4WQG8YchbXDV
+	f8ir0gKu/lyXSpRX7BRJommzpWrnydCWlHvfBPUGeiwNr3XU39yFXVsYBwbi5I+dQz/+TVwDDGh
+	dHobIEFBDD/IIB85HO12Y1fI5bOEcD3cLVM9rA/eABH5w6nCON0F8PD/T3rRA0NMIU808UYoDju
+	ofsiBym1qsB/CUaY1a7LNtttyFwYd04BPwuCWWDRUoJuqGY8I5UTvp2iSbVHd0XmfrGIHXCKElF
+	v0/rg9LWx75e2Hero/GHG5v2vYlfOkM/0LIquMjjXGa738wQ3ksK9gJO
+X-Google-Smtp-Source: AGHT+IFs7VjS7QiiNngk4TZCclha7Qvs9KkdCp7ReDVoSqhKJBBKPwaq4fNuAl6TMIzdDX8rKyXT2Q==
+X-Received: by 2002:a17:907:3e8d:b0:ad2:3555:f535 with SMTP id a640c23a62f3a-ad23555f608mr879059566b.5.1747061423758;
+        Mon, 12 May 2025 07:50:23 -0700 (PDT)
+Date: Mon, 12 May 2025 16:50:22 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: Issues on Zen4 (hw12) runner
+Message-ID: <aCIKrs0B5ZEi1v_z@macbook.lan>
+References: <aB0XtEor2rCxBKWR@mail-itl>
+ <aCHMwWd7cq-ZIMOl@macbook.lan>
+ <aCH4MnNQ7IzhJfkl@mail-itl>
+ <aCIDj_8tDcjR1nUS@macbook.lan>
+ <aCIIXkYar0TNP7H_@mail-itl>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <aCIIXkYar0TNP7H_@mail-itl>
 
-xc_pm_get_pxstat() requires the caller to allocate the pt and trans_pt
-buffers but then calls xc_pm_get_max_px() to determine how big they are
-(and hence how much Xen will copy into them). This is susceptible to
-races if xc_pm_get_max_px() changes so avoid the problem by requiring
-the caller to also pass in the size of the buffers.
+On Mon, May 12, 2025 at 04:40:29PM +0200, Marek Marczykowski-Górecki wrote:
+> On Mon, May 12, 2025 at 04:19:59PM +0200, Roger Pau Monné wrote:
+> > On Mon, May 12, 2025 at 03:31:19PM +0200, Marek Marczykowski-Górecki wrote:
+> > > On Mon, May 12, 2025 at 12:26:09PM +0200, Roger Pau Monné wrote:
+> > > > On Thu, May 08, 2025 at 10:44:36PM +0200, Marek Marczykowski-Górecki wrote:
+> > > > > Hi,
+> > > > > 
+> > > > > I wanted to post another revision of the series adding hw12 runner,
+> > > > > hoping that all known issues are fixed now, but unfortunately there is
+> > > > > still something broken. I've rebased my series on top of staging
+> > > > > (ed9488a0d) and got this pipeline:
+> > > > > 
+> > > > > https://gitlab.com/xen-project/people/marmarek/xen/-/pipelines/1807819142
+> > > > > (note due to some added debugging, some tests are incorrectly marked as
+> > > > > success even if they failed...)
+> > > > > 
+> > > > > 1. USB ethernet doesn't work on PVH dom0: https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/9978694739
+> > > > > There supposed to be an USB ethernet device connected to the USB
+> > > > > controller at c3:00.4. In the PV dom0 case it's detected as:
+> > > > > 
+> > > > >     [    3.911555] usb 7-1.4: new high-speed USB device number 3 using xhci_hcd
+> > > > >     [    4.004201] usb 7-1.4: New USB device found, idVendor=0bda, idProduct=8153, bcdDevice=30.00
+> > > > >     [    4.004675] usb 7-1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=6
+> > > > >     [    4.005079] usb 7-1.4: Product: USB 10/100/1000 LAN
+> > > > >     [    4.005349] usb 7-1.4: Manufacturer: Realtek
+> > > > >     [    4.005599] usb 7-1.4: SerialNumber: 684D35
+> > > > > 
+> > > > > But it's not there on PVH. The USB controller itself is detected, just
+> > > > > not device(s) connected to it. This applies to other controllers too
+> > > > > (there should be about 3 or 4 other USB devices - none of them show up).
+> > > > > 
+> > > > > 2. There is a bunch of "unhandled memory read" errors during PVH dom0
+> > > > > startup: https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/9978694739
+> > > > > 
+> > > > >     (XEN) [    4.026323] arch/x86/hvm/emulate.c:417:d0v0 unhandled memory read from 0xfedc0020 size 1
+> > > > >     (XEN) [    4.026789] arch/x86/hvm/emulate.c:417:d0v0 unhandled memory read from 0xfedc0021 size 1
+> > > > >     (XEN) [    4.027247] arch/x86/hvm/emulate.c:417:d0v0 unhandled memory read from 0xfedc0020 size 1
+> > > > >     (XEN) [    4.027671] arch/x86/hvm/emulate.c:417:d0v0 unhandled memory read from 0xfedc0021 size 1
+> > > > >     ...
+> > > > > 
+> > > > > This repeats several times. Could be related to the USB issue above?
+> > > > 
+> > > > Can you try with dom0=pf-fixup?  Those unhandled accesses might be the
+> > > > cause of the USB issues.
+> > > 
+> > > It did got rid of those messages, but USB still doesn't work:
+> > > https://gitlab.com/xen-project/people/marmarek/xen/-/jobs/10006580289
+> > 
+> > Hm, is it possible that the usage of console=xhci is interfering with
+> > USB devices?  Could you try to boot without console=xhci and see if
+> > you can still reproduce the issue?  You will need the physical device
+> > by your side, which I'm not sure it's possible.  Don't know if you
+> > host those remotely somewhere.
+> 
+> I can try, but will need a proper driver there (in dom0?) - AFAIR VGA
+> nor efifb doesn't output to HDMI there (and eDP is not connected).
+> Anyway, it's IMO unlikely, given it works just fine with PV dom0...
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
+Oh, I see, that's a good data point that it works with PV dom0.
+Handling of r/o subpage accesses is still different between PV and PVH
+which could maybe explain this, but it's less likely.
 
-* New in v2.
+Maybe I'm not spotting it, but I don't see any specific errors (like
+timeouts) from the XHCI controller on the log?  Neither there seems to
+be any errors or warnings from Xen.
 
- tools/libs/ctrl/xc_pm.c | 20 +++++++++-----------
- tools/misc/xenpm.c      |  1 +
- 2 files changed, 10 insertions(+), 11 deletions(-)
-
-diff --git a/tools/libs/ctrl/xc_pm.c b/tools/libs/ctrl/xc_pm.c
-index ff7b5ada053f..cffbd1b8a955 100644
---- a/tools/libs/ctrl/xc_pm.c
-+++ b/tools/libs/ctrl/xc_pm.c
-@@ -46,35 +46,33 @@ int xc_pm_get_pxstat(xc_interface *xch, int cpuid, struct xc_px_stat *pxpt)
- {
-     struct xen_sysctl sysctl = {};
-     /* Sizes unknown until xc_pm_get_max_px */
--    DECLARE_NAMED_HYPERCALL_BOUNCE(trans, pxpt->trans_pt, 0, XC_HYPERCALL_BUFFER_BOUNCE_BOTH);
--    DECLARE_NAMED_HYPERCALL_BOUNCE(pt, pxpt->pt, 0, XC_HYPERCALL_BUFFER_BOUNCE_BOTH);
-+    DECLARE_NAMED_HYPERCALL_BOUNCE(trans, pxpt->trans_pt,
-+                                   pxpt->total * pxpt->total,
-+                                   XC_HYPERCALL_BUFFER_BOUNCE_BOTH);
-+    DECLARE_NAMED_HYPERCALL_BOUNCE(pt, pxpt->pt, pxpt->total,
-+                                   XC_HYPERCALL_BUFFER_BOUNCE_BOTH);
- 
--    int max_px, ret;
-+    int ret;
- 
-     if ( !pxpt->trans_pt || !pxpt->pt )
-     {
-         errno = EINVAL;
-         return -1;
-     }
--    if ( (ret = xc_pm_get_max_px(xch, cpuid, &max_px)) != 0)
--        return ret;
--
--    HYPERCALL_BOUNCE_SET_SIZE(trans, max_px * max_px * sizeof(uint64_t));
--    HYPERCALL_BOUNCE_SET_SIZE(pt, max_px * sizeof(struct xc_px_val));
- 
-     if ( xc_hypercall_bounce_pre(xch, trans) )
--        return ret;
-+        return -1;
- 
-     if ( xc_hypercall_bounce_pre(xch, pt) )
-     {
-         xc_hypercall_bounce_post(xch, trans);
--        return ret;
-+        return -1;
-     }
- 
-     sysctl.cmd = XEN_SYSCTL_get_pmstat;
-     sysctl.u.get_pmstat.type = PMSTAT_get_pxstat;
-     sysctl.u.get_pmstat.cpuid = cpuid;
--    sysctl.u.get_pmstat.u.getpx.total = max_px;
-+    sysctl.u.get_pmstat.u.getpx.total = pxpt->total;
-     set_xen_guest_handle(sysctl.u.get_pmstat.u.getpx.trans_pt, trans);
-     set_xen_guest_handle(sysctl.u.get_pmstat.u.getpx.pt, pt);
- 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index db658ebaddd5..de319329e6b0 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -319,6 +319,7 @@ static int get_pxstat_by_cpuid(xc_interface *xc_handle, int cpuid, struct xc_px_
-     if ( !pxstat)
-         return -EINVAL;
- 
-+    pxstat->total = max_px_num;
-     pxstat->trans_pt = malloc(max_px_num * max_px_num *
-                               sizeof(uint64_t));
-     if ( !pxstat->trans_pt )
--- 
-2.49.0
-
+Thanks, Roger.
 
