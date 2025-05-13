@@ -4,29 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 978ECC3ABC3
-	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 05:29:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.982482.1368829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 648A5C3ABC9
+	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 05:56:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.982510.1368859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEiCK-0003Hf-Or; Tue, 13 May 2025 05:29:00 +0000
+	id 1uEicy-00084i-Bo; Tue, 13 May 2025 05:56:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 982482.1368829; Tue, 13 May 2025 05:29:00 +0000
+Received: by outflank-mailman (output) from mailman id 982510.1368859; Tue, 13 May 2025 05:56:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEiCK-0003HW-K2; Tue, 13 May 2025 05:29:00 +0000
-Received: by outflank-mailman (input) for mailman id 982482;
- Tue, 13 May 2025 05:29:00 +0000
+	id 1uEicy-00084b-92; Tue, 13 May 2025 05:56:32 +0000
+Received: by outflank-mailman (input) for mailman id 982510;
+ Tue, 13 May 2025 05:56:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Ws9y=X5=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uEiCI-0003HO-MO
- for xen-devel@lists.xenproject.org; Tue, 13 May 2025 05:29:00 +0000
-Received: from mail-10629.protonmail.ch (mail-10629.protonmail.ch
- [79.135.106.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29951e4c-2fbb-11f0-9ffb-bf95429c2676;
- Tue, 13 May 2025 07:28:55 +0200 (CEST)
+ (envelope-from <SRS0=PPiC=X5=zytor.com=xin@srs-se1.protection.inumbo.net>)
+ id 1uEicx-00084V-EZ
+ for xen-devel@lists.xenproject.org; Tue, 13 May 2025 05:56:31 +0000
+Received: from mail.zytor.com (terminus.zytor.com [2607:7c80:54:3::136])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 006bed71-2fbf-11f0-9ffb-bf95429c2676;
+ Tue, 13 May 2025 07:56:25 +0200 (CEST)
+Received: from [192.168.7.202] ([71.202.166.45]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 54D5trQ52161420
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Mon, 12 May 2025 22:55:54 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,55 +42,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29951e4c-2fbb-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1747114134; x=1747373334;
-	bh=x6BZWh7G08S8WrxqfstLOBlPC9RhnKLrx/6y3XGUxDE=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=HDFBA2z5V36uep6cBR1uUsMy5daPgv2JSUVLJXeg6o+WfgWuJy6PQXoyFGBVp1iE4
-	 L5U1QbTQhKeJ6ffg4DTQUmBPFXG9MmmAY7booaW5ngZ+Hv5VI9PkXTThrfghEDZuFV
-	 0TQ0DRWIR8qOq5jo83tYuxAYbccox+u3U/cvW8TfUSJsNRBhedH6UBlsXa6y6DHoPs
-	 66k015sKizxe4PZwtCwEWoV28ZWjs+SeJiGjPiLqrCtXEd/Ya7QgmT8a7oIeUosBCB
-	 haDZlOlNBkT/yenL1NaDRUwzXIfcSm/RiKL53o4c+V6dv5n7sO4UWLOWhY1kd0/Hm8
-	 ma8ZmC+5I8GIQ==
-Date: Tue, 13 May 2025 05:28:48 +0000
-To: xen-devel@lists.xenproject.org
-From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, jbeulich@suse.com, roger.pau@citrix.com, nicola.vetrini@bugseng.com, consulting@bugseng.com, dmukhin@ford.com
-Subject: [PATCH v5 0/2] x86/vmx: __vmread() cleanup
-Message-ID: <20250513052809.3947164-1-dmukhin@ford.com>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 64564245a46286fc62b2c46f1d123633555edf98
+X-Inumbo-ID: 006bed71-2fbf-11f0-9ffb-bf95429c2676
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 54D5trQ52161420
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025042001; t=1747115755;
+	bh=U6rcHZb4UW+jBgjxBhhwYGrN+qx8Tm8tX6P2roKukRQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=RUlxtiSSvL2zbdTxckg53o+QAfrDWf6H+yzUUXrHIYb0PPAoQ6MSHxFw6kOeUq+oG
+	 KaQwRsRKDadcJVZUk4LoQ4MIDtSjEH3MpMtwbWMljIEvGit9JSB3LYtAao5NqnaxX3
+	 73OkpjBHIhaCU8wAFyZtfQi/UnvDInPkne+6fTfWNJhjvGnfWd8YoEVchZUGfFJImV
+	 FWYoBlTrVymscSGDsakRpQiYXvt6BwN3Ai4Frx5MvB9uLc3FZ3II0QTJImlziUnnTb
+	 FZTI0Uo45mq/idyBSi8WPkEJ86WHg5azErFWd76rcZG+l/h/FwJ6OcsIrUh9XwWEp7
+	 xHc1pAahRuBKA==
+Message-ID: <eb077393-ea95-4ac0-9479-980e227f7bff@zytor.com>
+Date: Mon, 12 May 2025 22:55:53 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] x86/paravirt: Switch MSR access pv_ops functions to
+ instruction interfaces
+To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org,
+        x86@kernel.org, virtualization@lists.linux.dev
+Cc: Ajay Kaher <ajay.kaher@broadcom.com>,
+        Alexey Makhalov <alexey.amakhalov@broadcom.com>,
+        Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+        Thomas Gleixner
+ <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        xen-devel@lists.xenproject.org
+References: <20250506092015.1849-1-jgross@suse.com>
+ <20250506092015.1849-6-jgross@suse.com>
+ <722f5b30-20e9-4540-98e4-d211d7c44cbe@zytor.com>
+ <9f4e33d5-9cb3-4079-b764-87a15265fd52@suse.com>
+ <ff567466-a46a-4f66-935a-8fae1140c1a2@suse.com>
+Content-Language: en-US
+From: Xin Li <xin@zytor.com>
+Autocrypt: addr=xin@zytor.com; keydata=
+ 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
+ l75w1xInsg==
+In-Reply-To: <ff567466-a46a-4f66-935a-8fae1140c1a2@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Patch 1 is a straight replace of __vmread() with a new vmread() call.
-Patch 2 removes __vmread() and updates ECLAIR config; depends on patch 1.
+On 5/12/2025 4:24 AM, Juergen Gross wrote:
+> Now with the mentioned patch really attached. :-)
+> 
 
-Link to v4: https://lore.kernel.org/xen-devel/20250426072819.39455-1-dmukhi=
-n@ford.com/
-Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1=
-814196127
+Does it allow patching with an instruction more than 6 bytes long?
 
-Denis Mukhin (2):
-  x86/vmx: replace __vmread() with vmread()
-  x86/vmx: remove __vmread()
+The immediate form MSR instructions are 9 bytes long.
 
- docs/misra/function-macro-properties.json |   9 --
- xen/arch/x86/cpu/vpmu_intel.c             |   2 +-
- xen/arch/x86/hvm/vmx/intr.c               |  12 +-
- xen/arch/x86/hvm/vmx/realmode.c           |   2 +-
- xen/arch/x86/hvm/vmx/vmcs.c               |   8 +-
- xen/arch/x86/hvm/vmx/vmx.c                | 170 +++++++++++-----------
- xen/arch/x86/hvm/vmx/vvmx.c               |  36 ++---
- xen/arch/x86/include/asm/hvm/vmx/vmx.h    |   5 -
- 8 files changed, 115 insertions(+), 129 deletions(-)
-
---=20
-2.34.1
-
-
+Thanks!
+     Xin
 
