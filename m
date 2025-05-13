@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 918AAC3ABC3
-	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:11:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.983317.1369693 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA0DC3ABC3
+	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:11:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.983322.1369703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEtAM-0005H7-4B; Tue, 13 May 2025 17:11:42 +0000
+	id 1uEtAU-0005t2-BQ; Tue, 13 May 2025 17:11:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 983317.1369693; Tue, 13 May 2025 17:11:42 +0000
+Received: by outflank-mailman (output) from mailman id 983322.1369703; Tue, 13 May 2025 17:11:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEtAL-0005Gt-WF; Tue, 13 May 2025 17:11:42 +0000
-Received: by outflank-mailman (input) for mailman id 983317;
- Tue, 13 May 2025 17:11:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uEtAU-0005su-88; Tue, 13 May 2025 17:11:50 +0000
+Received: by outflank-mailman (input) for mailman id 983322;
+ Tue, 13 May 2025 17:11:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dvFL=X5=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uEt6E-0003Uz-UH
- for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:07:26 +0000
-Received: from 1.mo575.mail-out.ovh.net (1.mo575.mail-out.ovh.net
- [46.105.41.146]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bdf0c63c-301c-11f0-9ffb-bf95429c2676;
- Tue, 13 May 2025 19:07:25 +0200 (CEST)
-Received: from director5.ghost.mail-out.ovh.net (unknown [10.108.2.253])
- by mo575.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjZj0tsHz1wl4
- for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:07:25 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-2qtvb (unknown [10.111.174.145])
- by director5.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 4F1CA1FE42;
- Tue, 13 May 2025 17:07:24 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.106])
- by ghost-submission-5b5ff79f4f-2qtvb with ESMTPSA
- id RlK5Akx8I2jSxwEAFJ2vGA
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:07:24 +0000
+ id 1uEt5t-0003Mm-Ls
+ for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:07:05 +0000
+Received: from 13.mo582.mail-out.ovh.net (13.mo582.mail-out.ovh.net
+ [188.165.56.124]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b0798e6e-301c-11f0-9eb6-5ba50f476ded;
+ Tue, 13 May 2025 19:07:02 +0200 (CEST)
+Received: from director7.ghost.mail-out.ovh.net (unknown [10.109.139.225])
+ by mo582.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjZG3qKJz1f6K
+ for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:07:02 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-tzcrg (unknown [10.110.118.108])
+ by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id D9C691FD39;
+ Tue, 13 May 2025 17:07:01 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.99])
+ by ghost-submission-5b5ff79f4f-tzcrg with ESMTPSA
+ id /APTKjV8I2g1KAEAShSnmA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:07:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bdf0c63c-301c-11f0-9ffb-bf95429c2676
-Authentication-Results:garm.ovh; auth=pass (GARM-106R006b9d271f3-da02-4016-b3b2-a9ec1fd8f92a,
+X-Inumbo-ID: b0798e6e-301c-11f0-9eb6-5ba50f476ded
+Authentication-Results:garm.ovh; auth=pass (GARM-99G00304773c23-a1d9-40a9-a6f8-85607a0d1f7b,
                     0F27B6D195039ACFBDF5EC7F2AC12BEA7E98F15C) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
@@ -57,191 +57,188 @@ To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Ross Philipson <ross.philipson@oracle.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v2 21/22] x86/cpu: report SMX, TXT and SKINIT capabilities
-Date: Tue, 13 May 2025 20:05:58 +0300
-Message-ID: <7df06438d497830c646db4d32a4715e9fad729ec.1747155790.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v2 14/22] x86/boot: choose AP stack based on APIC ID
+Date: Tue, 13 May 2025 20:05:51 +0300
+Message-ID: <391ebc0e786cc94e2e558bfb91383705e8998b35.1747155790.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 8956815236962366620
+X-Ovh-Tracer-Id: 8950341310297519260
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgeekffeiiedtveekhfdugeffveeigefgleegvdeghefftdetheefueeliedukedvnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrddutdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheejhegmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=xpixWV2mjLfPJBjterQJqwu+52ca0ZiJyxVq/AkKkxM=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevleeiheduleelgfelgeeiveetgeduhfehffefgffhledtvefhledvgfekfefhueenucffohhmrghinhephhgvrggurdhssgdpthhrrghmphholhhinhgvrdhssgdpgiekiegpieegrdhssgenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddrleelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekvdgmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=LFjLGOzbWGs49PySjNsQW0fv0Cb3jzfBKePmEV573e8=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1747156045; v=1;
- b=KXpwKzJca4J3oxVvPsBkDdeqPcWzz5qGHw4Ew0kWg0h7AXN2Vnz2amGTJTNY/uzFGaQw+s8h
- AvwBUWKWMn0yjMXE9VzqCX+kxafgy67m8k2ZlWgaiCRH/7Y9Aymc98G0ryJ4Q2R7CzUQeN1EL8/
- UGabTrzvs8oTLFXK8nWZDgPqei7qqBLrNKCRcGP9UuZbFhvSBjOgyTS3xMnONGge3Yh8ESaH9Fi
- KMdqHur+hVpQCy6gD2hf9SGNSrU78VeNkbjr+3XgapGIgMSeObMOP62a1SYnbhrYLMPWLcQi/7p
- zXPyeSM4a907OjKBKzFiqkRNHMizKE4wekwaqP5Ia7DOQ==
+ t=1747156022; v=1;
+ b=S4CmfvIlPVHOUxOBRXERak2n0KoEmq/QTHvFLaDEZGwxGkxEA6jb29CJ6y4iVxrpNtVWYJg0
+ vDQVc9nY8fUbCoyOyUBDoKAdVobWaDRsRbVBlYQxbdMFudZd3ijCPjpDVNwcD8zBR/UgFA08EEW
+ lJXa2+YqinoEcRQ5YBXb0SmfMUgUufosT9AIdNOsZyFDBWtvZ7BE5/JItvg8ONh9iyU808kvuL+
+ kRtax6AzJCRRfVpmdfZ/psAnxAZSh85dhIGwZKjDCcSZFNec564dFhjbUXJS6KESgBzge2MvECe
+ w+yZWgj5bPhdtP6CFF3q6/hGSx7++p0fQ9zK6erWt7s7Q==
 
-From: Michał Żygowski <michal.zygowski@3mdeb.com>
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-Report TXT capabilities so that dom0 can query the Intel TXT or AMD
-SKINIT support information using xl dmesg.
+This is made as the first step of making parallel AP bring-up possible.
+It should be enough for pre-C code.
 
-Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
+Parallel AP bring-up is necessary because TXT by design releases all APs
+at once. In addition to that it reduces number of IPIs (and more
+importantly, delays between them) required to start all logical
+processors. This results in significant reduction of boot time, even
+when DRTM is not used, with performance gain growing with the number of
+logical CPUs.
+
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/arch/x86/cpu/amd.c               | 16 ++++++++++
- xen/arch/x86/cpu/cpu.h               |  1 +
- xen/arch/x86/cpu/hygon.c             |  1 +
- xen/arch/x86/cpu/intel.c             | 46 ++++++++++++++++++++++++++++
- xen/arch/x86/include/asm/intel-txt.h |  5 +++
- 5 files changed, 69 insertions(+)
+ xen/arch/x86/boot/head.S             |  1 +
+ xen/arch/x86/boot/trampoline.S       | 21 +++++++++++++++++++++
+ xen/arch/x86/boot/x86_64.S           | 28 +++++++++++++++++++++++++++-
+ xen/arch/x86/include/asm/apicdef.h   |  4 ++++
+ xen/arch/x86/include/asm/msr-index.h |  3 +++
+ xen/arch/x86/setup.c                 |  7 +++++++
+ 6 files changed, 63 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 37d67dd15c..18b6cbb50b 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -684,6 +684,21 @@ void amd_log_freq(const struct cpuinfo_x86 *c)
- #undef FREQ
- }
- 
-+void amd_log_skinit(const struct cpuinfo_x86 *c)
-+{
-+    /*
-+     * Run only on BSP and not during resume to report the capability only once.
-+     */
-+    if ( system_state != SYS_STATE_resume && smp_processor_id() )
-+        return;
-+
-+    printk("CPU: SKINIT capability ");
-+    if ( !test_bit(X86_FEATURE_SKINIT, &boot_cpu_data.x86_capability) )
-+        printk("not supported\n");
-+    else
-+        printk("supported\n");
-+}
-+
- void cf_check early_init_amd(struct cpuinfo_x86 *c)
- {
- 	if (c == &boot_cpu_data)
-@@ -1333,6 +1348,7 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
- 	check_syscfg_dram_mod_en();
- 
- 	amd_log_freq(c);
-+	amd_log_skinit(c);
- }
- 
- const struct cpu_dev __initconst_cf_clobber amd_cpu_dev = {
-diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
-index 8be65e975a..5bcf118a93 100644
---- a/xen/arch/x86/cpu/cpu.h
-+++ b/xen/arch/x86/cpu/cpu.h
-@@ -20,6 +20,7 @@ extern bool detect_extended_topology(struct cpuinfo_x86 *c);
- 
- void cf_check early_init_amd(struct cpuinfo_x86 *c);
- void amd_log_freq(const struct cpuinfo_x86 *c);
-+void amd_log_skinit(const struct cpuinfo_x86 *c);
- void amd_init_lfence(struct cpuinfo_x86 *c);
- void amd_init_ssbd(const struct cpuinfo_x86 *c);
- void amd_init_spectral_chicken(void);
-diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
-index f7508cc8fc..6ebb8b5fab 100644
---- a/xen/arch/x86/cpu/hygon.c
-+++ b/xen/arch/x86/cpu/hygon.c
-@@ -85,6 +85,7 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
- 	}
- 
- 	amd_log_freq(c);
-+	amd_log_skinit(c);
- }
- 
- const struct cpu_dev __initconst_cf_clobber hygon_cpu_dev = {
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index 12c3ff65e0..a99aec80ad 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -14,6 +14,7 @@
- #include <asm/apic.h>
- #include <asm/i387.h>
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 9a272155e9..7376fa85d5 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -8,6 +8,7 @@
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ #include <asm/msr-index.h>
++#include <asm/apicdef.h>
+ #include <asm/cpufeature.h>
  #include <asm/trampoline.h>
-+#include <asm/intel-txt.h>
  
- #include "cpu.h"
+diff --git a/xen/arch/x86/boot/trampoline.S b/xen/arch/x86/boot/trampoline.S
+index a92e399fbe..ed593acc46 100644
+--- a/xen/arch/x86/boot/trampoline.S
++++ b/xen/arch/x86/boot/trampoline.S
+@@ -71,6 +71,27 @@ trampoline_protmode_entry:
+         mov     $X86_CR4_PAE,%ecx
+         mov     %ecx,%cr4
  
-@@ -605,6 +606,49 @@ static void init_intel_perf(struct cpuinfo_x86 *c)
-     }
- }
++        /*
++         * Get APIC ID while we're in non-paged mode. Start by checking if
++         * x2APIC is enabled.
++         */
++        mov     $MSR_APIC_BASE, %ecx
++        rdmsr
++        test    $APIC_BASE_EXTD, %eax
++        jnz     .Lx2apic
++
++        /* Not x2APIC, read from MMIO */
++        and     $APIC_BASE_ADDR_MASK, %eax
++        mov     APIC_ID(%eax), %esp
++        shr     $24, %esp
++        jmp     1f
++
++.Lx2apic:
++        mov     $(MSR_X2APIC_FIRST + (APIC_ID >> MSR_X2APIC_SHIFT)), %ecx
++        rdmsr
++        mov     %eax, %esp
++1:
++
+         /* Load pagetable base register. */
+         mov     $sym_offs(idle_pg_table),%eax
+         add     bootsym_rel(trampoline_xen_phys_start,4,%eax)
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 08ae97e261..ac33576d8f 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -15,7 +15,33 @@ ENTRY(__high_start)
+         mov     $XEN_MINIMAL_CR4,%rcx
+         mov     %rcx,%cr4
  
-+/*
-+ * Print out the SMX and TXT capabilties, so that dom0 can determine if the
-+ * system is DRTM-capable.
-+ */
-+static void intel_log_smx_txt(struct cpuinfo_x86 *c)
-+{
-+    unsigned long cr4_val, getsec_caps;
+-        mov     stack_start(%rip),%rsp
++        test    %ebx,%ebx
++        cmovz   stack_start(%rip), %rsp
++        jz      .L_stack_set
 +
-+    /*
-+     * Run only on BSP and not during resume to report the capability only once.
-+     */
-+    if ( system_state != SYS_STATE_resume && smp_processor_id() )
-+        return;
++        /* APs only: get stack base from APIC ID saved in %esp. */
++        mov     $-1, %rax
++        lea     x86_cpu_to_apicid(%rip), %rcx
++1:
++        add     $1, %rax
++        cmp     $NR_CPUS, %eax
++        jb      2f
++        hlt
++2:
++        cmp     %esp, (%rcx, %rax, 4)
++        jne     1b
 +
-+    printk("CPU: SMX capability ");
-+    if ( !test_bit(X86_FEATURE_SMX, &boot_cpu_data.x86_capability) )
-+    {
-+        printk("not supported\n");
-+        return;
-+    }
-+    printk("supported\n");
++        /* %eax is now Xen CPU index. */
++        lea     stack_base(%rip), %rcx
++        mov     (%rcx, %rax, 8), %rsp
 +
-+    /* Can't run GETSEC without VMX and SMX */
-+    if ( !test_bit(X86_FEATURE_VMX, &boot_cpu_data.x86_capability) )
-+        return;
++        test    %rsp,%rsp
++        jnz     1f
++        hlt
++1:
++        add     $(STACK_SIZE - CPUINFO_sizeof), %rsp
 +
-+    cr4_val = read_cr4();
-+    if ( !(cr4_val & X86_CR4_SMXE) )
-+        write_cr4(cr4_val | X86_CR4_SMXE);
-+
-+    asm volatile ("getsec\n"
-+        : "=a" (getsec_caps)
-+        : "a" (GETSEC_CAPABILITIES), "b" (0) :);
-+
-+    if ( getsec_caps & GETSEC_CAP_TXT_CHIPSET )
-+        printk("Chipset supports TXT\n");
-+    else
-+        printk("Chipset does not support TXT\n");
-+
-+    if ( !(cr4_val & X86_CR4_SMXE) )
-+        write_cr4(cr4_val & ~X86_CR4_SMXE);
-+}
-+
- static void cf_check init_intel(struct cpuinfo_x86 *c)
- {
- 	/* Detect the extended topology information if available */
-@@ -619,6 +663,8 @@ static void cf_check init_intel(struct cpuinfo_x86 *c)
- 		detect_ht(c);
- 	}
++.L_stack_set:
  
-+	intel_log_smx_txt(c);
+         /* Reset EFLAGS (subsumes CLI and CLD). */
+         pushq   $0
+diff --git a/xen/arch/x86/include/asm/apicdef.h b/xen/arch/x86/include/asm/apicdef.h
+index 63dab01dde..e093a2aa3c 100644
+--- a/xen/arch/x86/include/asm/apicdef.h
++++ b/xen/arch/x86/include/asm/apicdef.h
+@@ -121,6 +121,10 @@
+ 
+ #define MAX_IO_APICS 128
+ 
++#ifndef __ASSEMBLY__
 +
- 	/* Work around errata */
- 	Intel_errata_workarounds(c);
+ extern bool x2apic_enabled;
  
-diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
-index 5d76443d35..c834e08903 100644
---- a/xen/arch/x86/include/asm/intel-txt.h
-+++ b/xen/arch/x86/include/asm/intel-txt.h
-@@ -85,6 +85,11 @@
- #define TXT_AP_BOOT_CS                  0x0030
- #define TXT_AP_BOOT_DS                  0x0038
- 
-+/* EAX value for GETSEC leaf functions. Intel SDM: GETSEC[CAPABILITIES] */
-+#define GETSEC_CAPABILITIES             0
-+/* Intel SDM: GETSEC Capability Result Encoding */
-+#define GETSEC_CAP_TXT_CHIPSET          1
++#endif /* !__ASSEMBLY__ */
 +
- #ifndef __ASSEMBLY__
+ #endif
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index 22d9e76e55..794cf44abe 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -169,6 +169,9 @@
+ #define MSR_X2APIC_FIRST                    0x00000800
+ #define MSR_X2APIC_LAST                     0x000008ff
  
- #include <xen/slr-table.h>
++/* MSR offset can be obtained by shifting MMIO offset this number of bits to the right. */
++#define MSR_X2APIC_SHIFT                    4
++
+ #define MSR_X2APIC_TPR                      0x00000808
+ #define MSR_X2APIC_PPR                      0x0000080a
+ #define MSR_X2APIC_EOI                      0x0000080b
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 479d2d744e..8e79d4be23 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2096,6 +2096,7 @@ void asmlinkage __init noreturn __start_xen(void)
+      */
+     if ( !pv_shim )
+     {
++        /* Separate loop to make parallel AP bringup possible. */
+         for_each_present_cpu ( i )
+         {
+             /* Set up cpu_to_node[]. */
+@@ -2103,6 +2104,12 @@ void asmlinkage __init noreturn __start_xen(void)
+             /* Set up node_to_cpumask based on cpu_to_node[]. */
+             numa_add_cpu(i);
+ 
++            if ( stack_base[i] == NULL )
++                stack_base[i] = cpu_alloc_stack(i);
++        }
++
++        for_each_present_cpu ( i )
++        {
+             if ( (park_offline_cpus || num_online_cpus() < max_cpus) &&
+                  !cpu_online(i) )
+             {
 -- 
 2.49.0
 
