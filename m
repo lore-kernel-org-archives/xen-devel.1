@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C4AC3ABC3
-	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:10:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.983250.1369626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F607C3ABC9
+	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:10:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.983248.1369611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEt9N-0000rx-Hi; Tue, 13 May 2025 17:10:41 +0000
+	id 1uEt9M-0000c2-L2; Tue, 13 May 2025 17:10:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 983250.1369626; Tue, 13 May 2025 17:10:41 +0000
+Received: by outflank-mailman (output) from mailman id 983248.1369611; Tue, 13 May 2025 17:10:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEt9N-0000pg-8u; Tue, 13 May 2025 17:10:41 +0000
-Received: by outflank-mailman (input) for mailman id 983250;
+	id 1uEt9M-0000Zt-GT; Tue, 13 May 2025 17:10:40 +0000
+Received: by outflank-mailman (input) for mailman id 983248;
  Tue, 13 May 2025 17:10:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dvFL=X5=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uEt67-0003Mm-8n
- for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:07:19 +0000
-Received: from 5.mo576.mail-out.ovh.net (5.mo576.mail-out.ovh.net
- [46.105.43.105]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b9c2dcc8-301c-11f0-9eb6-5ba50f476ded;
- Tue, 13 May 2025 19:07:18 +0200 (CEST)
-Received: from director9.ghost.mail-out.ovh.net (unknown [10.109.148.7])
- by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjZZ0sZDz27tZ
- for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:07:18 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-ss9cm (unknown [10.108.54.212])
- by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 460481FE9A;
- Tue, 13 May 2025 17:07:17 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.114])
- by ghost-submission-5b5ff79f4f-ss9cm with ESMTPSA
- id 2DmeAEV8I2gIEQEAgzAcRQ
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:07:17 +0000
+ id 1uEt5q-0003Uz-2M
+ for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:07:02 +0000
+Received: from 10.mo576.mail-out.ovh.net (10.mo576.mail-out.ovh.net
+ [46.105.73.241]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aedadc13-301c-11f0-9ffb-bf95429c2676;
+ Tue, 13 May 2025 19:07:00 +0200 (CEST)
+Received: from director2.ghost.mail-out.ovh.net (unknown [10.109.176.96])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjZC5nZ5z25NM
+ for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:06:59 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-r9289 (unknown [10.111.174.38])
+ by director2.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 0EAB51FD9F;
+ Tue, 13 May 2025 17:06:58 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.102])
+ by ghost-submission-5b5ff79f4f-r9289 with ESMTPSA
+ id BqUzLzJ8I2geNAEAW9b/4w
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:06:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,263 +48,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9c2dcc8-301c-11f0-9eb6-5ba50f476ded
-Authentication-Results:garm.ovh; auth=pass (GARM-114S008001f1f46-d194-4037-818a-410a4b9d68a0,
+X-Inumbo-ID: aedadc13-301c-11f0-9ffb-bf95429c2676
+Authentication-Results:garm.ovh; auth=pass (GARM-102R004bc407770-aa6c-47a9-8912-a5c517905175,
                     0F27B6D195039ACFBDF5EC7F2AC12BEA7E98F15C) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Ross Philipson <ross.philipson@oracle.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v2 19/22] x86/slaunch: support AMD SKINIT
-Date: Tue, 13 May 2025 20:05:56 +0300
-Message-ID: <bd428ab4b6a2002a2ca6bddf619481a1d493e058.1747155790.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v2 13/22] x86/tpm.c: implement event log for TPM2.0
+Date: Tue, 13 May 2025 20:05:50 +0300
+Message-ID: <b7d4ce28766ff419ad3163c4f9403f373956e567.1747155790.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 8954844911462364316
+X-Ovh-Tracer-Id: 8949496886597956764
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhheefheduieelieekfffgfffgfedutdevleevvdfhfffgledvgfdtuddtheefieenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddruddugeenucevlhhushhtvghrufhiiigvpeehnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehjeeimgdpmhhouggvpehsmhhtphhouhht
-DKIM-Signature: a=rsa-sha256; bh=I4A1LgkNpCIY8hzEp8h2TJ6VL6QVw7kE9g1WIgyMW2Q=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhheefheduieelieekfffgfffgfedutdevleevvdfhfffgledvgfdtuddtheefieenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddruddtvdenucevlhhushhtvghrufhiiigvpeefnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehjeeimgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=zv064gKVpCT4u14nztfo5gjyl4d57jChW3ReE92Rvms=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1747156038; v=1;
- b=OGQxphxCyM44df28KvwcxsN4P4Ryh5QW7XoLVUAv+Ed5Q4dT7TyS0s6qjZj3zCsAOUo2spoa
- 1npnk5utsMfiHhDutLoM8kUWCHE47d651KU4eAq80UYrAW6eMJr+PqmtpZtZYm6+E2SZ5h7Qv61
- NYuwvnvDGIuPVYUqOU9qc8fullaxAffJ7bN80vGFygiQplKKC0TdcBk7mCqdyCP3QnJPpTTOGUL
- GPA9O8pb+OsccKJmC0rAwgctc8L78Kik1LRix5NM8byfykk8UqiRnsEGKmUiUj/KRobQrlUHf7D
- qyil0sWm9TSSD0Neumg+4AL+wQamthMH44PwnRFHLSnQQ==
+ t=1747156019; v=1;
+ b=iS/E/9lBHuzdM+oyi/1VGkODzt2JG3MuXkqC3F9EYdPGvr0SfhGkHgeGSephf57lzpdjk2xQ
+ j+SKHJO2leZo2RFJ26hM5MGrLRsKakDTCBgHY42jnE5BblLD+hjq9QwdurfZ+cPgl54joHL1+te
+ FPxVc3MuPNYrd43XGiIt/aCFt698MGL94R5a5uRCTNMkjb1TFwuZg8+bkciqT6wtm8GSYmLTtGx
+ I5ITMipDOMGSH7ZP75hJ7oCf5YEcx6tLymT1qfCO3Otpqmusrs+rM/CQDnFQdSvuCBi5p3qYyau
+ kcoGjyBxB3h2LQBnulUeDcJI0fti7ob/MIZOfBLq2bSrA==
 
-This mostly involves not running Intel-specific code when on AMD.
-
-There are only a few new AMD-specific implementation details:
- - finding SLB start and size and then mapping and reserving it in e820
- - managing offset for adding the next TPM log entry (TXT-compatible
-   data prepared by SKL is stored inside of vendor data field within TCG
-   header)
-
-Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/arch/x86/e820.c    |  2 +-
- xen/arch/x86/slaunch.c | 90 ++++++++++++++++++++++++++++++++++--------
- xen/arch/x86/tpm.c     | 68 ++++++++++++++++++++++++++++++-
- 3 files changed, 141 insertions(+), 19 deletions(-)
+ xen/arch/x86/include/asm/intel-txt.h |  33 ++++++
+ xen/arch/x86/tpm.c                   | 169 ++++++++++++++++++++++-----
+ 2 files changed, 175 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/x86/e820.c b/xen/arch/x86/e820.c
-index 60f00e5259..cf13ab269a 100644
---- a/xen/arch/x86/e820.c
-+++ b/xen/arch/x86/e820.c
-@@ -444,7 +444,7 @@ static uint64_t __init mtrr_top_of_ram(void)
-     ASSERT(paddr_bits);
-     addr_mask = ((1ULL << paddr_bits) - 1) & PAGE_MASK;
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+index f0ec580558..bc51d2d287 100644
+--- a/xen/arch/x86/include/asm/intel-txt.h
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -202,6 +202,39 @@ struct txt_sinit_mle_data {
+     /* Ext Data Elements */
+ } __packed;
  
--    if ( slaunch_active )
-+    if ( slaunch_active && boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-         txt_restore_mtrrs(e820_verbose);
- 
-     rdmsrl(MSR_MTRRcap, mtrr_cap);
-diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
-index 7cc1831f15..f0447f91d2 100644
---- a/xen/arch/x86/slaunch.c
-+++ b/xen/arch/x86/slaunch.c
-@@ -17,6 +17,10 @@
- #include <asm/slaunch.h>
- #include <asm/tpm.h>
- 
-+/* SLB is 64k, 64k-aligned */
-+#define SKINIT_SLB_SIZE   0x10000
-+#define SKINIT_SLB_ALIGN  0x10000
++/* Types of extended data. */
++#define TXT_HEAP_EXTDATA_TYPE_END                    0
++#define TXT_HEAP_EXTDATA_TYPE_BIOS_SPEC_VER          1
++#define TXT_HEAP_EXTDATA_TYPE_ACM                    2
++#define TXT_HEAP_EXTDATA_TYPE_STM                    3
++#define TXT_HEAP_EXTDATA_TYPE_CUSTOM                 4
++#define TXT_HEAP_EXTDATA_TYPE_MADT                   6
++#define TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1   8
++#define TXT_HEAP_EXTDATA_TYPE_MCFG                   9
++#define TXT_HEAP_EXTDATA_TYPE_TPR_REQ               13
++#define TXT_HEAP_EXTDATA_TYPE_DTPR                  14
++#define TXT_HEAP_EXTDATA_TYPE_CEDT                  15
++
++/*
++ * Self-describing data structure that is used for extensions to TXT heap
++ * tables.
++ */
++struct txt_ext_data_element {
++    uint32_t type;   /* One of TXT_HEAP_EXTDATA_TYPE_*. */
++    uint32_t size;
++    uint8_t data[0]; /* size bytes. */
++} __packed;
++
++/*
++ * Extended data describing TPM 2.0 log.
++ */
++struct heap_event_log_pointer_element2_1 {
++    uint64_t physical_address;
++    uint32_t allocated_event_container_size;
++    uint32_t first_record_offset;
++    uint32_t next_record_offset;
++} __packed;
 +
  /*
-  * These variables are assigned to by the code near Xen's entry point.
-  *
-@@ -39,6 +43,8 @@ struct slr_table *__init slaunch_get_slrt(void)
- 
-     if (slrt == NULL) {
-         int rc;
-+        bool intel_cpu = (boot_cpu_data.x86_vendor == X86_VENDOR_INTEL);
-+        uint16_t slrt_architecture = intel_cpu ? SLR_INTEL_TXT : SLR_AMD_SKINIT;
- 
-         slrt = __va(slaunch_slrt);
- 
-@@ -50,9 +56,9 @@ struct slr_table *__init slaunch_get_slrt(void)
-         /* XXX: are newer revisions allowed? */
-         if ( slrt->revision != SLR_TABLE_REVISION )
-             panic("SLRT is of unsupported revision: %#04x!\n", slrt->revision);
--        if ( slrt->architecture != SLR_INTEL_TXT )
--            panic("SLRT is for unexpected architecture: %#04x!\n",
--                  slrt->architecture);
-+        if ( slrt->architecture != slrt_architecture )
-+            panic("SLRT is for unexpected architecture: %#04x != %#04x!\n",
-+                  slrt->architecture, slrt_architecture);
-         if ( slrt->size > slrt->max_size )
-             panic("SLRT is larger than its max size: %#08x > %#08x!\n",
-                   slrt->size, slrt->max_size);
-@@ -67,6 +73,23 @@ struct slr_table *__init slaunch_get_slrt(void)
-     return slrt;
- }
- 
-+static uint32_t __init get_slb_start(void)
-+{
-+    /*
-+     * The runtime computation relies on size being a power of 2 and equal to
-+     * alignment. Make sure these assumptions hold.
-+     */
-+    BUILD_BUG_ON(SKINIT_SLB_SIZE != SKINIT_SLB_ALIGN);
-+    BUILD_BUG_ON(SKINIT_SLB_SIZE == 0);
-+    BUILD_BUG_ON((SKINIT_SLB_SIZE & (SKINIT_SLB_SIZE - 1)) != 0);
-+
-+    /*
-+     * Rounding any address within SLB down to alignment gives SLB base and
-+     * SLRT is inside SLB on AMD.
-+     */
-+    return slaunch_slrt & ~(SKINIT_SLB_SIZE - 1);
-+}
-+
- void __init slaunch_map_mem_regions(void)
- {
-     int rc;
-@@ -77,7 +100,10 @@ void __init slaunch_map_mem_regions(void)
-     BUG_ON(rc != 0);
- 
-     /* Vendor-specific part. */
--    txt_map_mem_regions();
-+    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-+        txt_map_mem_regions();
-+    else if ( boot_cpu_data.x86_vendor == X86_VENDOR_AMD )
-+        slaunch_map_l2(get_slb_start(), SKINIT_SLB_SIZE);
- 
-     find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
-     if ( evt_log_addr != NULL )
-@@ -95,7 +121,18 @@ void __init slaunch_reserve_mem_regions(void)
-     uint32_t evt_log_size;
- 
-     /* Vendor-specific part. */
--    txt_reserve_mem_regions();
-+    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-+    {
-+        txt_reserve_mem_regions();
-+    }
-+    else if ( boot_cpu_data.x86_vendor == X86_VENDOR_AMD )
-+    {
-+        uint64_t slb_start = get_slb_start();
-+        uint64_t slb_end = slb_start + SKINIT_SLB_SIZE;
-+        printk("SLAUNCH: reserving SLB (%#lx - %#lx)\n", slb_start, slb_end);
-+        rc = reserve_e820_ram(&e820_raw, slb_start, slb_end);
-+        BUG_ON(rc == 0);
-+    }
- 
-     find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
-     if ( evt_log_addr != NULL )
-@@ -119,20 +156,41 @@ void __init slaunch_measure_slrt(void)
-          * In revision one of the SLRT, only platform-specific info table is
-          * measured.
-          */
--        struct slr_entry_intel_info tmp;
--        struct slr_entry_intel_info *entry;
-+        if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
-+        {
-+            struct slr_entry_intel_info tmp;
-+            struct slr_entry_intel_info *entry;
-+
-+            entry = (struct slr_entry_intel_info *)
-+                slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+            if ( entry == NULL )
-+                panic("SLRT is missing Intel-specific information!\n");
- 
--        entry = (struct slr_entry_intel_info *)
--            slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
--        if ( entry == NULL )
--            panic("SLRT is missing Intel-specific information!\n");
-+            tmp = *entry;
-+            tmp.boot_params_base = 0;
-+            tmp.txt_heap = 0;
- 
--        tmp = *entry;
--        tmp.boot_params_base = 0;
--        tmp.txt_heap = 0;
-+            tpm_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (uint8_t *)&tmp,
-+                            sizeof(tmp), DLE_EVTYPE_SLAUNCH, NULL, 0);
-+        }
-+        else if ( boot_cpu_data.x86_vendor == X86_VENDOR_AMD )
-+        {
-+            struct slr_entry_amd_info tmp;
-+            struct slr_entry_amd_info *entry;
-+
-+            entry = (struct slr_entry_amd_info *)
-+                slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_AMD_INFO);
-+            if ( entry == NULL )
-+                panic("SLRT is missing AMD-specific information!\n");
- 
--        tpm_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (uint8_t *)&tmp,
--                        sizeof(tmp), DLE_EVTYPE_SLAUNCH, NULL, 0);
-+            tmp = *entry;
-+            tmp.next = 0;
-+            tmp.slrt_base = 0;
-+            tmp.boot_params_base = 0;
-+
-+            tpm_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (uint8_t *)&tmp,
-+                            sizeof(tmp), DLE_EVTYPE_SLAUNCH, NULL, 0);
-+        }
-     }
-     else
-     {
+  * Functions to extract data from the Intel TXT Heap Memory. The layout
+  * of the heap is as follows:
 diff --git a/xen/arch/x86/tpm.c b/xen/arch/x86/tpm.c
-index 47a9edef50..e9ba073d55 100644
+index ed49fe3ccf..47a9edef50 100644
 --- a/xen/arch/x86/tpm.c
 +++ b/xen/arch/x86/tpm.c
-@@ -11,6 +11,7 @@
- #include <asm/intel-txt.h>
- #include <asm/slaunch.h>
- #include <asm/tpm.h>
-+#include <asm/x86-vendors.h>
- 
- #ifdef __EARLY_SLAUNCH__
- 
-@@ -52,11 +53,31 @@ void *(memcpy)(void *dest, const void *src, size_t n)
-     return dest;
- }
- 
-+static bool is_amd_cpu(void)
-+{
-+    /*
-+     * asm/processor.h can't be included in early code, which means neither
-+     * cpuid() function nor boot_cpu_data can be used here.
-+     */
-+    uint32_t eax, ebx, ecx, edx;
-+    asm volatile ( "cpuid"
-+          : "=a" (eax), "=b" (ebx), "=c" (ecx), "=d" (edx)
-+          : "0" (0), "c" (0) );
-+    return ebx == X86_VENDOR_AMD_EBX
-+        && ecx == X86_VENDOR_AMD_ECX
-+        && edx == X86_VENDOR_AMD_EDX;
-+}
-+
- #else   /* __EARLY_SLAUNCH__ */
- 
- #include <xen/mm.h>
- #include <xen/pfn.h>
- 
-+static bool is_amd_cpu(void)
-+{
-+    return boot_cpu_data.x86_vendor == X86_VENDOR_AMD;
-+}
-+
- #endif  /* __EARLY_SLAUNCH__ */
- 
- #define TPM_LOC_REG(loc, reg)   (0x1000 * (loc) + (reg))
-@@ -241,6 +262,21 @@ struct TPM12_PCREvent {
-     uint8_t Data[];
+@@ -536,6 +536,44 @@ struct tpm2_log_hashes {
+     struct tpm2_log_hash hashes[MAX_HASH_COUNT];
  };
  
-+struct tpm1_spec_id_event {
++struct tpm2_pcr_event_header {
++    uint32_t pcrIndex;
++    uint32_t eventType;
++    uint32_t digestCount;
++    uint8_t digests[0];
++    /*
++     * Each hash is represented as:
++     * struct {
++     *     uint16_t hashAlg;
++     *     uint8_t hash[size of hashAlg];
++     * };
++     */
++    /* uint32_t eventSize; */
++    /* uint8_t event[0]; */
++} __packed;
++
++struct tpm2_digest_sizes {
++    uint16_t algId;
++    uint16_t digestSize;
++} __packed;
++
++struct tpm2_spec_id_event {
 +    uint32_t pcrIndex;
 +    uint32_t eventType;
 +    uint8_t digest[20];
@@ -315,70 +171,173 @@ index 47a9edef50..e9ba073d55 100644
 +    uint8_t specVersionMajor;
 +    uint8_t specErrata;
 +    uint8_t uintnSize;
-+    uint8_t vendorInfoSize;
-+    uint8_t vendorInfo[0];  /* variable number of members */
++    uint32_t digestCount;
++    struct tpm2_digest_sizes digestSizes[0]; /* variable number of members */
++    /* uint8_t vendorInfoSize; */
++    /* uint8_t vendorInfo[vendorInfoSize]; */
 +} __packed;
 +
- struct txt_ev_log_container_12 {
-     char        Signature[20];      /* "TXT Event Container", null-terminated */
-     uint8_t     Reserved[12];
-@@ -384,6 +420,16 @@ static void *create_log_event12(struct txt_ev_log_container_12 *evt_log,
- {
-     struct TPM12_PCREvent *new_entry;
+ #ifdef __EARLY_SLAUNCH__
  
-+    if ( is_amd_cpu() )
-+    {
-+        /*
-+         * On AMD, TXT-compatible structure is stored as vendor data of
-+         * TCG-defined event log header.
-+         */
-+        struct tpm1_spec_id_event *spec_id = (void *)evt_log;
-+        evt_log = (struct txt_ev_log_container_12 *)&spec_id->vendorInfo[0];
-+    }
-+
-     new_entry = (void *)(((uint8_t *)evt_log) + evt_log->NextEventOffset);
+ union tpm2_cmd_rsp {
+@@ -769,19 +807,11 @@ static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
+         }
  
-     /*
-@@ -832,11 +878,29 @@ static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
+         if ( hash->alg == TPM_ALG_SHA1 )
+-        {
+             sha1_hash(hash->data, buf, size);
+-        }
+         else if ( hash->alg == TPM_ALG_SHA256 )
+-        {
+             sha2_256_digest(hash->data, buf, size);
+-        }
+         else
+-        {
+-            /* This is called "OneDigest" in TXT Software Development Guide. */
+-            memset(hash->data, 0, size);
+-            hash->data[0] = 1;
+-        }
++            /* create_log_event20() took care of initializing the digest. */;
+ 
+         if ( supported_hashes.count == MAX_HASH_COUNT )
+         {
+@@ -802,6 +832,102 @@ static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
  
  #endif /* __EARLY_SLAUNCH__ */
  
--static struct heap_event_log_pointer_element2_1 *find_evt_log_ext_data(void)
-+static struct heap_event_log_pointer_element2_1 *
-+find_evt_log_ext_data(struct tpm2_spec_id_event *evt_log)
- {
-     struct txt_os_sinit_data *os_sinit;
-     struct txt_ext_data_element *ext_data;
- 
-+    if ( is_amd_cpu() )
++static struct heap_event_log_pointer_element2_1 *find_evt_log_ext_data(void)
++{
++    struct txt_os_sinit_data *os_sinit;
++    struct txt_ext_data_element *ext_data;
++
++    os_sinit = txt_os_sinit_data_start(__va(read_txt_reg(TXTCR_HEAP_BASE)));
++    ext_data = (void *)((uint8_t *)os_sinit + sizeof(*os_sinit));
++
++    /*
++     * Find TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1 which is necessary to
++     * know where to put the next entry.
++     */
++    while ( ext_data->type != TXT_HEAP_EXTDATA_TYPE_END )
 +    {
-+        /*
-+         * Event log pointer is defined by TXT specification, but
-+         * secure-kernel-loader provides a compatible structure in vendor data
-+         * of the log.
-+         */
-+        const uint8_t *data_size =
-+            (void *)&evt_log->digestSizes[evt_log->digestCount];
-+
-+        if ( *data_size != sizeof(struct heap_event_log_pointer_element2_1) )
-+            return NULL;
-+
-+        /* Vendor data directly follows one-byte size. */
-+        return (void *)(data_size + 1);
++        if ( ext_data->type == TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1 )
++            break;
++        ext_data = (void *)&ext_data->data[ext_data->size];
 +    }
 +
-     os_sinit = txt_os_sinit_data_start(__va(read_txt_reg(TXTCR_HEAP_BASE)));
-     ext_data = (void *)((uint8_t *)os_sinit + sizeof(*os_sinit));
++    if ( ext_data->type == TXT_HEAP_EXTDATA_TYPE_END )
++        return NULL;
++
++    return (void *)&ext_data->data[0];
++}
++
++static struct tpm2_log_hashes
++create_log_event20(struct tpm2_spec_id_event *evt_log, uint32_t evt_log_size,
++                   uint32_t pcr, uint32_t type, const uint8_t *data,
++                   unsigned data_size)
++{
++    struct tpm2_log_hashes log_hashes = {0};
++
++    struct heap_event_log_pointer_element2_1 *log_ext_data;
++    struct tpm2_pcr_event_header *new_entry;
++    uint32_t entry_size;
++    unsigned i;
++    uint8_t *p;
++
++    log_ext_data = find_evt_log_ext_data();
++    if ( log_ext_data == NULL )
++        return log_hashes;
++
++    entry_size = sizeof(*new_entry);
++    for ( i = 0; i < evt_log->digestCount; ++i )
++    {
++        entry_size += sizeof(uint16_t); /* hash type */
++        entry_size += evt_log->digestSizes[i].digestSize;
++    }
++    entry_size += sizeof(uint32_t); /* data size field */
++    entry_size += data_size;
++
++    /*
++     * Check if there is enough space left for new entry.
++     * Note: it is possible to introduce a gap in event log if entry with big
++     * data_size is followed by another entry with smaller data. Maybe we should
++     * cap the event log size in such case?
++     */
++    if ( log_ext_data->next_record_offset + entry_size > evt_log_size )
++        return log_hashes;
++
++    new_entry = (void *)((uint8_t *)evt_log + log_ext_data->next_record_offset);
++    log_ext_data->next_record_offset += entry_size;
++
++    new_entry->pcrIndex = pcr;
++    new_entry->eventType = type;
++    new_entry->digestCount = evt_log->digestCount;
++
++    p = &new_entry->digests[0];
++    for ( i = 0; i < evt_log->digestCount; ++i )
++    {
++        uint16_t alg = evt_log->digestSizes[i].algId;
++        uint16_t size = evt_log->digestSizes[i].digestSize;
++
++        *(uint16_t *)p = alg;
++        p += sizeof(uint16_t);
++
++        log_hashes.hashes[i].alg = alg;
++        log_hashes.hashes[i].size = size;
++        log_hashes.hashes[i].data = p;
++        p += size;
++
++        /* This is called "OneDigest" in TXT Software Development Guide. */
++        memset(log_hashes.hashes[i].data, 0, size);
++        log_hashes.hashes[i].data[0] = 1;
++    }
++    log_hashes.count = evt_log->digestCount;
++
++    *(uint32_t *)p = data_size;
++    p += sizeof(uint32_t);
++
++    if ( data && data_size > 0 )
++        memcpy(p, data, data_size);
++
++    return log_hashes;
++}
++
+ /************************** end of TPM2.0 specific ****************************/
  
-@@ -870,7 +934,7 @@ create_log_event20(struct tpm2_spec_id_event *evt_log, uint32_t evt_log_size,
-     unsigned i;
-     uint8_t *p;
+ void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
+@@ -832,26 +958,15 @@ void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
+             printk(XENLOG_ERR "Extending PCR%u failed\n", pcr);
+ #endif
+         }
+-    } else {
+-        uint8_t sha1_digest[SHA1_DIGEST_SIZE];
+-        uint8_t sha256_digest[SHA2_256_DIGEST_SIZE];
++    }
++    else
++    {
+         uint32_t rc;
  
--    log_ext_data = find_evt_log_ext_data();
-+    log_ext_data = find_evt_log_ext_data(evt_log);
-     if ( log_ext_data == NULL )
-         return log_hashes;
+-        struct tpm2_log_hashes log_hashes = {
+-            .count = 2,
+-            .hashes = {
+-                {
+-                    .alg = TPM_ALG_SHA1,
+-                    .size = SHA1_DIGEST_SIZE,
+-                    .data = sha1_digest,
+-                },
+-                {
+-                    .alg = TPM_ALG_SHA256,
+-                    .size = SHA2_256_DIGEST_SIZE,
+-                    .data = sha256_digest,
+-                },
+-            },
+-        };
++        struct tpm2_spec_id_event *evt_log = evt_log_addr;
++        struct tpm2_log_hashes log_hashes =
++            create_log_event20(evt_log, evt_log_size, pcr, type, log_data,
++                               log_data_size);
  
+         rc = tpm2_hash_extend(loc, buf, size, pcr, &log_hashes);
+         if ( rc != 0 )
 -- 
 2.49.0
 
