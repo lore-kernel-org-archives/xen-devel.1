@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABAEC3ABC3
-	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:06:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.983183.1369542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 236DEC3ABD8
+	for <xen-devel@archiver.kernel.org>; Tue, 13 May 2025 17:06:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.983188.1369573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEt5K-000445-Pn; Tue, 13 May 2025 17:06:30 +0000
+	id 1uEt5U-000504-M7; Tue, 13 May 2025 17:06:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 983183.1369542; Tue, 13 May 2025 17:06:30 +0000
+Received: by outflank-mailman (output) from mailman id 983188.1369573; Tue, 13 May 2025 17:06:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uEt5K-00043v-Mu; Tue, 13 May 2025 17:06:30 +0000
-Received: by outflank-mailman (input) for mailman id 983183;
- Tue, 13 May 2025 17:06:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uEt5U-0004zt-Hd; Tue, 13 May 2025 17:06:40 +0000
+Received: by outflank-mailman (input) for mailman id 983188;
+ Tue, 13 May 2025 17:06:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dvFL=X5=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uEt5I-0003Mm-Lt
- for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:06:28 +0000
-Received: from 13.mo561.mail-out.ovh.net (13.mo561.mail-out.ovh.net
- [188.165.33.202]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9b8e4925-301c-11f0-9eb6-5ba50f476ded;
- Tue, 13 May 2025 19:06:27 +0200 (CEST)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.148.6])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjYb1mMMz1ZyR
- for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:06:27 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-z24qs (unknown [10.110.96.237])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 840131FD17;
- Tue, 13 May 2025 17:06:26 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.95])
- by ghost-submission-5b5ff79f4f-z24qs with ESMTPSA
- id i0RNERJ8I2hrPQEA8ZxQ9w
- (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:06:26 +0000
+ id 1uEt5T-0003Uz-1w
+ for xen-devel@lists.xenproject.org; Tue, 13 May 2025 17:06:39 +0000
+Received: from 7.mo581.mail-out.ovh.net (7.mo581.mail-out.ovh.net
+ [46.105.43.131]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a1530611-301c-11f0-9ffb-bf95429c2676;
+ Tue, 13 May 2025 19:06:37 +0200 (CEST)
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.25.156])
+ by mo581.mail-out.ovh.net (Postfix) with ESMTP id 4ZxjYm6MKXz1Fhd
+ for <xen-devel@lists.xenproject.org>; Tue, 13 May 2025 17:06:36 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-v29lk (unknown [10.110.188.76])
+ by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id C1C081FE80;
+ Tue, 13 May 2025 17:06:35 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.105])
+ by ghost-submission-5b5ff79f4f-v29lk with ESMTPSA
+ id eryDIBt8I2hUshgACLuduA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 13 May 2025 17:06:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,320 +48,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b8e4925-301c-11f0-9eb6-5ba50f476ded
-Authentication-Results:garm.ovh; auth=pass (GARM-95G00170b9feb2-8969-4951-a267-a939df1fc2a3,
+X-Inumbo-ID: a1530611-301c-11f0-9ffb-bf95429c2676
+Authentication-Results:garm.ovh; auth=pass (GARM-105G0062e7951fd-12e2-49b8-a10e-061233634830,
                     0F27B6D195039ACFBDF5EC7F2AC12BEA7E98F15C) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.181.178
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Ross Philipson <ross.philipson@oracle.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v2 02/22] include/xen/slr-table.h: Secure Launch Resource Table definitions
-Date: Tue, 13 May 2025 20:05:39 +0300
-Message-ID: <cdd7b9ff21c81683ce2245bc2b5e0a7a87e51e3c.1747155790.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v2 05/22] x86/boot/slaunch-early: early TXT checks and boot data retrieval
+Date: Tue, 13 May 2025 20:05:42 +0300
+Message-ID: <cd210c1886f4eaeb52435c3e93cf68b430cc9511.1747155790.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 8940489685544711324
+X-Ovh-Tracer-Id: 8943022961074877596
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhheefheduieelieekfffgfffgfedutdevleevvdfhfffgledvgfdtuddtheefieenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddrleehnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheeiudgmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=0z3fwA1ZiActkXXZVasH701JMmtlynrh9xlUCyNcoc8=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdeftdegieejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhheefheduieelieekfffgfffgfedutdevleevvdfhfffgledvgfdtuddtheefieenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekuddrudejkedpfeejrdehledrudegvddruddtheenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehkedumgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=tFKfUzszVh/xwE4DF75x7y3iV3k/7BaG2IaI1fkSePQ=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1747155987; v=1;
- b=kKUfQ1/1trEM7JDlOS6HueY16NOnBQBwG8rbylvwQk4KPVuXA5AJnOJ+M0J9R0Hve4F2yg+V
- Y511c3GnN4HkRcL3YgLKzuREMx/dddB4YpaqXBD3zRlm1OfIB7a4sGV0hp99o+5TiEzWoafBTHQ
- aGax2gWId66WQ1ZlqGBUNjF5VQFdxtuwoFC39OOHun2l3vuOPTsEbela+GL7D0VM0835sK/krVI
- yDTYAb8e5NiNZd723cCy+5QtIBpUHUQYkm4HtKm8JFfHJd/nMg8E/+EFCmtfL3pKUEO9XdOajls
- A7c5i7T4XIFX2syUjhUhBnL1WLsCkLX79MABZZpiLet+g==
+ t=1747155996; v=1;
+ b=kA2RD/zQxREyvarndY+ACW5/XynAiaUxCEKShSot9JONW+eum6rTMfs5X1Z9PfaXnNZi2cKy
+ amSc/q7Sf7bHxU3yHNAxWWQzNUnh4/MFhIN0RxNh1X8rbou8nkIlBwWPh+P91gSpRIP1Ci37olM
+ gu0D1rRPkZesm7OOSAefom1czrSnsQ28BMvxXXjd36D+eb58SJX7lzBkyUX5sUYcHSD2FcMjDSN
+ ZBKuVG2j3fWS6AYasmCNMJwNZp2uTG2doTDOPZPWOpAl9B3Mh3Ij3HYHTSXQZThh0tEllnnVFtB
+ hXgo1P11mDZqEqbRaat9OUi5JljPgAxsz50tV/1tG2rYw==
 
-The file provides constants, structures and several helper functions for
-parsing SLRT.
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
+The tests validate that important parts of memory are protected against
+DMA attacks, including Xen and MBI. Modules can be tested later, when it
+is possible to report issues to a user before invoking TXT reset.
+
+TPM event log validation is temporarily disabled due to an issue with
+its allocation by bootloader (GRUB) which will need to be modified to
+address this. Ultimately event log will also have to be validated early
+as it is used immediately after these tests to hold MBI measurements.
+See larger comment in txt_verify_pmr_ranges().
+
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/include/xen/slr-table.h | 268 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 268 insertions(+)
- create mode 100644 xen/include/xen/slr-table.h
+ xen/arch/x86/boot/slaunch-early.c    |   6 ++
+ xen/arch/x86/include/asm/intel-txt.h | 111 +++++++++++++++++++++++++++
+ 2 files changed, 117 insertions(+)
 
-diff --git a/xen/include/xen/slr-table.h b/xen/include/xen/slr-table.h
-new file mode 100644
-index 0000000000..6f0018bceb
---- /dev/null
-+++ b/xen/include/xen/slr-table.h
-@@ -0,0 +1,268 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
+diff --git a/xen/arch/x86/boot/slaunch-early.c b/xen/arch/x86/boot/slaunch-early.c
+index 48776ef559..b6f6deedc9 100644
+--- a/xen/arch/x86/boot/slaunch-early.c
++++ b/xen/arch/x86/boot/slaunch-early.c
+@@ -22,10 +22,13 @@ void asmlinkage slaunch_early_init(uint32_t load_base_addr,
+     void *txt_heap;
+     struct txt_os_mle_data *os_mle;
+     struct slr_table *slrt;
++    struct txt_os_sinit_data *os_sinit;
+     struct slr_entry_intel_info *intel_info;
++    uint32_t size = tgt_end_addr - tgt_base_addr;
+ 
+     txt_heap = txt_init();
+     os_mle = txt_os_mle_data_start(txt_heap);
++    os_sinit = txt_os_sinit_data_start(txt_heap);
+ 
+     result->slrt_pa = os_mle->slrt;
+     result->mbi_pa = 0;
+@@ -38,4 +41,7 @@ void asmlinkage slaunch_early_init(uint32_t load_base_addr,
+         return;
+ 
+     result->mbi_pa = intel_info->boot_params_base;
 +
-+/*
-+ *  Copyright (c) 2025 Apertus Solutions, LLC
-+ *  Copyright (c) 2025 Oracle and/or its affiliates.
-+ *  Copyright (c) 2025 3mdeb Sp. z o.o
-+ *
-+ *  Secure Launch Resource Table definitions
-+ */
++    txt_verify_pmr_ranges(os_mle, os_sinit, intel_info,
++                          load_base_addr, tgt_base_addr, size);
+ }
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+index 7a665b7cc3..339c29ebef 100644
+--- a/xen/arch/x86/include/asm/intel-txt.h
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -84,6 +84,8 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++#include <xen/slr-table.h>
 +
-+#ifndef XEN__SLR_TABLE_H
-+#define XEN__SLR_TABLE_H
-+
-+#include <xen/types.h>
-+
-+#define UEFI_SLR_TABLE_GUID \
-+    { 0x877a9b2aU, 0x0385, 0x45d1, { 0xa0, 0x34, 0x9d, 0xac, 0x9c, 0x9e, 0x56, 0x5f } }
-+
-+/* SLR table header values */
-+#define SLR_TABLE_MAGIC         0x4452544d
-+#define SLR_TABLE_REVISION      1
-+
-+/* Current revisions for the policy and UEFI config */
-+#define SLR_POLICY_REVISION         1
-+#define SLR_UEFI_CONFIG_REVISION    1
-+
-+/* SLR defined architectures */
-+#define SLR_INTEL_TXT   1
-+#define SLR_AMD_SKINIT  2
-+
-+/* SLR defined bootloaders */
-+#define SLR_BOOTLOADER_INVALID  0
-+#define SLR_BOOTLOADER_GRUB     1
-+
-+/* Log formats */
-+#define SLR_DRTM_TPM12_LOG      1
-+#define SLR_DRTM_TPM20_LOG      2
-+
-+/* DRTM Policy Entry Flags */
-+#define SLR_POLICY_FLAG_MEASURED    0x1
-+#define SLR_POLICY_IMPLICIT_SIZE    0x2
-+
-+/* Array Lengths */
-+#define TPM_EVENT_INFO_LENGTH       32
-+#define TXT_VARIABLE_MTRRS_LENGTH   32
-+
-+/* Tags */
-+#define SLR_ENTRY_INVALID       0x0000
-+#define SLR_ENTRY_DL_INFO       0x0001
-+#define SLR_ENTRY_LOG_INFO      0x0002
-+#define SLR_ENTRY_DRTM_POLICY   0x0003
-+#define SLR_ENTRY_INTEL_INFO    0x0004
-+#define SLR_ENTRY_AMD_INFO      0x0005
-+#define SLR_ENTRY_ARM_INFO      0x0006
-+#define SLR_ENTRY_UEFI_INFO     0x0007
-+#define SLR_ENTRY_UEFI_CONFIG   0x0008
-+#define SLR_ENTRY_END           0xffff
-+
-+/* Entity Types */
-+#define SLR_ET_UNSPECIFIED        0x0000
-+#define SLR_ET_SLRT               0x0001
-+#define SLR_ET_BOOT_PARAMS        0x0002
-+#define SLR_ET_SETUP_DATA         0x0003
-+#define SLR_ET_CMDLINE            0x0004
-+#define SLR_ET_UEFI_MEMMAP        0x0005
-+#define SLR_ET_RAMDISK            0x0006
-+#define SLR_ET_MULTIBOOT2_INFO    0x0007
-+#define SLR_ET_MULTIBOOT2_MODULE  0x0008
-+#define SLR_ET_TXT_OS2MLE         0x0010
-+#define SLR_ET_UNUSED             0xffff
-+
-+/*
-+ * Primary SLR Table Header
-+ */
-+struct slr_table
+ /* Need to differentiate between pre- and post paging enabled. */
+ #ifdef __EARLY_SLAUNCH__
+ #include <xen/macros.h>
+@@ -288,6 +290,115 @@ static inline void *txt_init(void)
+     return txt_heap;
+ }
+ 
++static inline int is_in_pmr(struct txt_os_sinit_data *os_sinit, uint64_t base,
++                            uint32_t size, int check_high)
 +{
-+    uint32_t magic;
-+    uint16_t revision;
-+    uint16_t architecture;
-+    uint32_t size;
-+    uint32_t max_size;
-+    /* entries[] */
-+} __packed;
++    /* Check for size overflow. */
++    if ( base + size < base )
++        txt_reset(SLAUNCH_ERROR_INTEGER_OVERFLOW);
 +
-+/*
-+ * Common SLRT Table Header
-+ */
-+struct slr_entry_hdr
-+{
-+    uint32_t tag;
-+    uint32_t size;
-+} __packed;
++    /* Low range always starts at 0, so its size is also end address. */
++    if ( base >= os_sinit->vtd_pmr_lo_base &&
++         base + size <= os_sinit->vtd_pmr_lo_size )
++        return 1;
 +
-+/*
-+ * Boot loader context
-+ */
-+struct slr_bl_context
-+{
-+    uint16_t bootloader;
-+    uint16_t reserved[3];
-+    uint64_t context;
-+} __packed;
-+
-+/*
-+ * Prototype of a function pointed to by slr_entry_dl_info::dl_handler.
-+ */
-+typedef void (*dl_handler_func)(struct slr_bl_context *bl_context);
-+
-+/*
-+ * DRTM Dynamic Launch Configuration
-+ */
-+struct slr_entry_dl_info
-+{
-+    struct slr_entry_hdr hdr;
-+    uint64_t dce_size;
-+    uint64_t dce_base;
-+    uint64_t dlme_size;
-+    uint64_t dlme_base;
-+    uint64_t dlme_entry;
-+    struct slr_bl_context bl_context;
-+    uint64_t dl_handler;
-+} __packed;
-+
-+/*
-+ * TPM Log Information
-+ */
-+struct slr_entry_log_info
-+{
-+    struct slr_entry_hdr hdr;
-+    uint16_t format;
-+    uint16_t reserved;
-+    uint32_t size;
-+    uint64_t addr;
-+} __packed;
-+
-+/*
-+ * DRTM Measurement Entry
-+ */
-+struct slr_policy_entry
-+{
-+    uint16_t pcr;
-+    uint16_t entity_type;
-+    uint16_t flags;
-+    uint16_t reserved;
-+    uint64_t size;
-+    uint64_t entity;
-+    char evt_info[TPM_EVENT_INFO_LENGTH];
-+} __packed;
-+
-+/*
-+ * DRTM Measurement Policy
-+ */
-+struct slr_entry_policy
-+{
-+    struct slr_entry_hdr hdr;
-+    uint16_t reserved[2];
-+    uint16_t revision;
-+    uint16_t nr_entries;
-+    struct slr_policy_entry policy_entries[];
-+} __packed;
-+
-+/*
-+ * Secure Launch defined MTRR saving structures
-+ */
-+struct slr_txt_mtrr_pair
-+{
-+    uint64_t mtrr_physbase;
-+    uint64_t mtrr_physmask;
-+} __packed;
-+
-+struct slr_txt_mtrr_state
-+{
-+    uint64_t default_mem_type;
-+    uint64_t mtrr_vcnt;
-+    struct slr_txt_mtrr_pair mtrr_pair[TXT_VARIABLE_MTRRS_LENGTH];
-+} __packed;
-+
-+/*
-+ * Intel TXT Info table
-+ */
-+struct slr_entry_intel_info
-+{
-+    struct slr_entry_hdr hdr;
-+    uint64_t boot_params_base;
-+    uint64_t txt_heap;
-+    uint64_t saved_misc_enable_msr;
-+    struct slr_txt_mtrr_state saved_bsp_mtrrs;
-+} __packed;
-+
-+/*
-+ * AMD SKINIT Info table
-+ */
-+struct slr_entry_amd_info
-+{
-+    struct slr_entry_hdr hdr;
-+    uint64_t next;
-+    uint32_t type;
-+    uint32_t len;
-+    uint64_t slrt_size;
-+    uint64_t slrt_base;
-+    uint64_t boot_params_base;
-+    uint16_t psp_version;
-+    uint16_t reserved[3];
-+} __packed;
-+
-+/*
-+ * UEFI config measurement entry
-+ */
-+struct slr_uefi_cfg_entry
-+{
-+    uint16_t pcr;
-+    uint16_t reserved;
-+    uint32_t size;
-+    uint64_t cfg; /* address or value */
-+    char evt_info[TPM_EVENT_INFO_LENGTH];
-+} __packed;
-+
-+struct slr_entry_uefi_config
-+{
-+    struct slr_entry_hdr hdr;
-+    uint16_t reserved[2];
-+    uint16_t revision;
-+    uint16_t nr_entries;
-+    struct slr_uefi_cfg_entry uefi_cfg_entries[];
-+} __packed;
-+
-+static inline void *
-+slr_end_of_entries(struct slr_table *table)
-+{
-+    return (uint8_t *)table + table->size;
-+}
-+
-+static inline struct slr_entry_hdr *
-+slr_next_entry(struct slr_table *table, struct slr_entry_hdr *curr)
-+{
-+    struct slr_entry_hdr *next = (struct slr_entry_hdr *)
-+                                 ((uint8_t *)curr + curr->size);
-+
-+    if ( (void *)next >= slr_end_of_entries(table) )
-+        return NULL;
-+    if ( next->tag == SLR_ENTRY_END )
-+        return NULL;
-+
-+    return next;
-+}
-+
-+static inline struct slr_entry_hdr *
-+slr_next_entry_by_tag (struct slr_table *table,
-+                       struct slr_entry_hdr *entry,
-+                       uint16_t tag)
-+{
-+    if ( !entry ) /* Start from the beginning */
-+        entry = (struct slr_entry_hdr *)((uint8_t *)table + sizeof(*table));
-+
-+    for ( ; ; )
++    if ( check_high && os_sinit->vtd_pmr_hi_size != 0 )
 +    {
-+        if ( entry->tag == tag )
-+            return entry;
-+
-+        entry = slr_next_entry(table, entry);
-+        if ( !entry )
-+            return NULL;
++        if ( os_sinit->vtd_pmr_hi_base + os_sinit->vtd_pmr_hi_size <
++             os_sinit->vtd_pmr_hi_size )
++            txt_reset(SLAUNCH_ERROR_INTEGER_OVERFLOW);
++        if ( base >= os_sinit->vtd_pmr_hi_base &&
++             base + size <= os_sinit->vtd_pmr_hi_base +
++                            os_sinit->vtd_pmr_hi_size )
++            return 1;
 +    }
 +
-+    return NULL;
++    return 0;
 +}
 +
-+#endif /* XEN__SLR_TABLE_H */
++static inline void txt_verify_pmr_ranges(struct txt_os_mle_data *os_mle,
++                                         struct txt_os_sinit_data *os_sinit,
++                                         struct slr_entry_intel_info *info,
++                                         uint32_t load_base_addr,
++                                         uint32_t tgt_base_addr,
++                                         uint32_t xen_size)
++{
++    int check_high_pmr = 0;
++
++    /* Verify the value of the low PMR base. It should always be 0. */
++    if ( os_sinit->vtd_pmr_lo_base != 0 )
++        txt_reset(SLAUNCH_ERROR_LO_PMR_BASE);
++
++    /*
++     * Low PMR size should not be 0 on current platforms. There is an ongoing
++     * transition to TPR-based DMA protection instead of PMR-based; this is not
++     * yet supported by the code.
++     */
++    if ( os_sinit->vtd_pmr_lo_size == 0 )
++        txt_reset(SLAUNCH_ERROR_LO_PMR_SIZE);
++
++    /* Check if regions overlap. Treat regions with no hole between as error. */
++    if ( os_sinit->vtd_pmr_hi_size != 0 &&
++         os_sinit->vtd_pmr_hi_base <= os_sinit->vtd_pmr_lo_size )
++        txt_reset(SLAUNCH_ERROR_HI_PMR_BASE);
++
++    /* All regions accessed by 32b code must be below 4G. */
++    if ( os_sinit->vtd_pmr_hi_base + os_sinit->vtd_pmr_hi_size <=
++         0x100000000ULL )
++        check_high_pmr = 1;
++
++    /*
++     * ACM checks that TXT heap and MLE memory is protected against DMA. We have
++     * to check if MBI and whole Xen memory is protected. The latter is done in
++     * case bootloader failed to set whole image as MLE and to make sure that
++     * both pre- and post-relocation code is protected.
++     */
++
++    /* Check if all of Xen before relocation is covered by PMR. */
++    if ( !is_in_pmr(os_sinit, load_base_addr, xen_size, check_high_pmr) )
++        txt_reset(SLAUNCH_ERROR_LO_PMR_MLE);
++
++    /* Check if all of Xen after relocation is covered by PMR. */
++    if ( load_base_addr != tgt_base_addr &&
++         !is_in_pmr(os_sinit, tgt_base_addr, xen_size, check_high_pmr) )
++        txt_reset(SLAUNCH_ERROR_LO_PMR_MLE);
++
++    /*
++     * If present, check that MBI is covered by PMR. MBI starts with 'uint32_t
++     * total_size'.
++     */
++    if ( info->boot_params_base != 0 &&
++         !is_in_pmr(os_sinit, info->boot_params_base,
++                    *(uint32_t *)(uintptr_t)info->boot_params_base,
++                    check_high_pmr) )
++        txt_reset(SLAUNCH_ERROR_BUFFER_BEYOND_PMR);
++
++    /* Check if TPM event log (if present) is covered by PMR. */
++    /*
++     * FIXME: currently commented out as GRUB allocates it in a hole between
++     * PMR and reserved RAM, due to 2MB resolution of PMR. There are no other
++     * easy-to-use DMA protection mechanisms that would allow to protect that
++     * part of memory. TPR (TXT DMA Protection Range) gives 1MB resolution, but
++     * it still wouldn't be enough.
++     *
++     * One possible solution would be for GRUB to allocate log at lower address,
++     * but this would further increase memory space fragmentation. Another
++     * option is to align PMR up instead of down, making PMR cover part of
++     * reserved region, but it is unclear what the consequences may be.
++     *
++     * In tboot this issue was resolved by reserving leftover chunks of memory
++     * in e820 and/or UEFI memory map. This is also a valid solution, but would
++     * require more changes to GRUB than the ones listed above, as event log is
++     * allocated much earlier than PMRs.
++     */
++    /*
++    if ( os_mle->evtlog_addr != 0 && os_mle->evtlog_size != 0 &&
++         !is_in_pmr(os_sinit, os_mle->evtlog_addr, os_mle->evtlog_size,
++                    check_high_pmr) )
++        txt_reset(SLAUNCH_ERROR_BUFFER_BEYOND_PMR);
++    */
++}
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* ASM__X86__INTEL_TXT_H */
 -- 
 2.49.0
 
