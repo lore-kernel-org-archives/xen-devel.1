@@ -4,31 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0453C2D0CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:39:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985644.1371586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F9FC2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 14:39:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985692.1371597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYnw-0008BJ-VS; Thu, 15 May 2025 13:39:20 +0000
+	id 1uFZk1-0000oV-7E; Thu, 15 May 2025 14:39:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985644.1371586; Thu, 15 May 2025 13:39:20 +0000
+Received: by outflank-mailman (output) from mailman id 985692.1371597; Thu, 15 May 2025 14:39:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYnw-0008BA-Sm; Thu, 15 May 2025 13:39:20 +0000
-Received: by outflank-mailman (input) for mailman id 985644;
- Thu, 15 May 2025 13:39:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uFZk1-0000oO-4Z; Thu, 15 May 2025 14:39:21 +0000
+Received: by outflank-mailman (input) for mailman id 985692;
+ Thu, 15 May 2025 14:39:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYXA-0006hT-BB
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:22:00 +0000
-Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9369a08a-318f-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 15:21:58 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1747315172286991.1892485678771;
- Thu, 15 May 2025 06:19:32 -0700 (PDT)
+ <SRS0=ZW7U=X7=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
+ id 1uFZjz-0000nA-1X
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 14:39:20 +0000
+Received: from 13.mo584.mail-out.ovh.net (13.mo584.mail-out.ovh.net
+ [178.33.251.8]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5f55a715-319a-11f0-9eb6-5ba50f476ded;
+ Thu, 15 May 2025 16:39:14 +0200 (CEST)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.17.183])
+ by mo584.mail-out.ovh.net (Postfix) with ESMTP id 4ZytBp0Cffz1XWN
+ for <xen-devel@lists.xenproject.org>; Thu, 15 May 2025 14:39:13 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-qbmbj (unknown [10.111.182.20])
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 9C1F81FEBD;
+ Thu, 15 May 2025 14:39:11 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.101])
+ by ghost-submission-5b5ff79f4f-qbmbj with ESMTPSA
+ id lBGEFI/8JWh3AwEA6WhilQ
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Thu, 15 May 2025 14:39:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,191 +48,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9369a08a-318f-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1747315174; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=cpHNUiAY0CXjmYiDxn5XFLJkzsx4euGYMAwAntvWgZHSMVqu1SiN/JmNbWox+1Hr+n7+BaDHTAkQ0aUrt5O5jrRnXvma+PGiZc8nQD60tfF/pjJ+5TRzPenVx/sO/quoOpWdfc9BCkbdM7PXeQoEWcsn5lq0rtmvd4VBauPajVA=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315174; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=VOh8i0DwJY/ONOyYgGyBDIv1dAYbBsfMWmmDU6GMhcQ=; 
-	b=YJopmnY5r4QbMcNLTv23ZUGN+Ic8qnGsM4fSN1uIqzS30MLxcefMnkyZej6WI+RMnZodr6oxBsNc4jizpAKedKT+ZEqo6e6Jgk5rOI7pS6dlJi/nR0c4tbbEARNtXqiMhXPIIZZznxjTVGwL3jANRsqOiZKISBJyLRC0xlK+e/w=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315174;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=VOh8i0DwJY/ONOyYgGyBDIv1dAYbBsfMWmmDU6GMhcQ=;
-	b=L2hO5WThLR1QAwQZCfuboaJGAYqccttrrOgRSHX3yY+mXif6LkQl817BfbLW+6I7
-	4Z4FbuG+qH3py7W16yTzPrV6m2HZoOsKbGcFkqN1kawlmnsP0dknjyzA/y6pz4pR7h3
-	FuMYcyPkffA2C6/xJhvhC/jzJIrB7T2wWDfB9WXU=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	jason.andryuk@amd.com,
-	stefano.stabellini@amd.com,
-	agarciav@amd.com,
-	Jan Beulich <jbeulich@suse.com>,
+X-Inumbo-ID: 5f55a715-319a-11f0-9eb6-5ba50f476ded
+Authentication-Results:garm.ovh; auth=pass (GARM-101G0046098e410-b8c9-4abb-8407-df55a892e50a,
+                    387E45D97A4461B8A9D628297587A76108926964) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.181.178
+Date: Thu, 15 May 2025 17:39:05 +0300
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: Demi Marie Obenour <demiobenour@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Christopher Clark <christopher.w.clark@gmail.com>
-Subject: [RFCv2 26/38] x86/hyperlaunch: introduce domain builder general dom creation
-Date: Thu, 15 May 2025 09:19:09 -0400
-Message-Id: <20250515131912.5019-7-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20250515131912.5019-1-dpsmith@apertussolutions.com>
-References: <20250515131912.5019-1-dpsmith@apertussolutions.com>
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
+	trenchboot-devel@googlegroups.com
+Subject: Re: [PATCH v2 20/22] x86/slaunch: support EFI boot
+Message-ID: <aCX8ibm3qbZo-C_x@MjU3Nj>
+References: <cover.1747155790.git.sergii.dmytruk@3mdeb.com>
+ <cc6da1456dfc87ed12d78f2e47e35987ec628711.1747155790.git.sergii.dmytruk@3mdeb.com>
+ <68e5f8bb-42b2-4da8-86ba-231cb5657106@gmail.com>
+ <aCSnskt6S2rHfUmC@MjU3Nj>
+ <1ba433ce-44b6-4d70-a232-f5f83f1fbaf8@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1ba433ce-44b6-4d70-a232-f5f83f1fbaf8@gmail.com>
+X-Ovh-Tracer-Id: 18199327573151233180
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdefuddtudefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpedttdeufffggfeuheevfeehieeijeekkeehheefjeejvdetjedvvdegkeevgedtffenucffohhmrghinhepthhrvghntghhsghoohhtrdhorhhgnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukedurddujeekpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekgegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=mALPy3UReUIH7bnvPUR5x/ZByWKTIsJbX7SfOPJTfdY=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1747319954; v=1;
+ b=duAciFfM5lzWmfq7+AS7of3ED1XIV3DFWBvbJ/z6jz0TNaUBmge5Uqw+ynw5ld93usbpo+G3
+ AMmG2d/hqZJoyKhq+Yo36t1YubcOQDehI79Z6UrE5htULqY4iBo8JFPHIJNS1tZQ4oHIHwCWd6U
+ RVF0q4zm7NA4LG8hf3cEceJabKFY0kUm3z9/cZixtwOgWSmPT17JCL/NFQUXW1+G3GGm1I5/uzj
+ e+FsIeeDNasoISXO46Sv8TTlObOWtjTVfL0tOQSyy89kGuMtloX3BeSNjrILjEjRfmMRnDDApKI
+ RrK0lWtE92lzwEhwuIWCB5YFnvr6qSauqbdLvNAPBmiXA==
 
-Introduce the builder_create_domains() function that provides the general
-domain construction abstraction that selects between classic dom0 construction
-and the hyperlaunch domain builder.
+On Wed, May 14, 2025 at 11:58:49AM -0400, Demi Marie Obenour wrote:
+> On 5/14/25 10:24 AM, Sergii Dmytruk wrote:
+> > On Tue, May 13, 2025 at 09:25:44PM -0400, Demi Marie Obenour wrote:
+> >> On 5/13/25 1:05 PM, Sergii Dmytruk wrote:
+> > That sentence in the commit message is worth rewording.  GRUB isn't a
+> > requirement, any TrenchBoot-enabled bootloader (or anything that wants
+> > to act as a bootloader) can be used.  systemd-boot could implement
+> > Secure Launch specification [0] and start Xen/Linux/something else via
+> > DRTM.  Usage without a real bootloader could be implemented similarly
+> > via some EFI stub that has binaries embedded into it or that can load
+> > them from a drive.
+> >
+> > Mind that at least Intel and AMD DRTM implementations require a DCE [1]
+> > binary that depends on a vendor, firmware version or a CPU generation.
+> > So even embedding all code into every kernel-like software won't produce
+> > self-contained DRTM-capable images.
+> >
+> > [0]: https://trenchboot.org/specifications/Secure_Launch/
+> > [1]: https://trenchboot.org/theory/Glossary/#dynamic-configuration-environment-dce
+>
+> Why is it better for Xen to rely on the bootloader to implement the
+> specification, instead of xen.efi itself implementing secure launch?
+> That would make secure launch significantly more usable.  For an
+> initial implementation it makes sense to rely on the bootloader, but
+> in the future it would be better for xen.efi to have its own
+> implementation.
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- xen/arch/x86/domain-builder/Makefile |  1 +
- xen/arch/x86/domain-builder/core.c   | 36 ++++++++++++++++++++++++++++
- xen/arch/x86/include/asm/bootinfo.h  | 26 ++++++++++++++++++++
- xen/arch/x86/setup.c                 | 23 +++++++++++++++---
- xen/include/xen/domain-builder.h     |  2 ++
- 5 files changed, 85 insertions(+), 3 deletions(-)
- create mode 100644 xen/arch/x86/domain-builder/core.c
+That specification is not exactly about DRTM, which is specified by CPU
+vendors.  It's about an interface between what starts DRTM (a bootloader
+in a broad sense) and what uses on it (kernels, hypervisors, etc.).  If
+the whole process is performed by a single entity, there is no need
+for the specification.
 
-diff --git a/xen/arch/x86/domain-builder/Makefile b/xen/arch/x86/domain-builder/Makefile
-index 69a7c574a8d8..96040bf66a04 100644
---- a/xen/arch/x86/domain-builder/Makefile
-+++ b/xen/arch/x86/domain-builder/Makefile
-@@ -1 +1,2 @@
-+obj-y += core.o
- obj-y += domain.o
-diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
-new file mode 100644
-index 000000000000..3b315e59b188
---- /dev/null
-+++ b/xen/arch/x86/domain-builder/core.c
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (C) 2025, Apertus Solutions, LLC
-+ */
-+
-+#include <xen/domain-builder.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+
-+#include <asm/bootinfo.h>
-+
-+unsigned int __init builder_create_domains(struct boot_info *bi)
-+{
-+    unsigned int build_count = 0;
-+    struct boot_domain *bd = &bi->domains[0];
-+
-+    if ( bd->capabilities & DOMAIN_CAPS_HARDWARE && bd->kernel == NULL )
-+        panic("%s: hardware domain missing kernel\n", __func__);
-+
-+
-+    arch_create_dom(bi, bd);
-+    if ( bd->d )
-+        build_count++;
-+
-+    return build_count;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index 5b2c93b1ef9e..430ae08cf5ef 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -132,6 +132,32 @@ static inline unsigned int __init next_boot_module_index(
-           (i) <= (b)->nr_modules;                       \
-           (i) = next_boot_module_index(b, t, i + 1) )
- 
-+/*
-+ * next_boot_domain_index:
-+ *     Finds the next boot domain with capability cap, starting at array index
-+ *     start.
-+ *
-+ * Returns:
-+ *      Success - index in boot_domains array
-+ *      Failure - a value greater than MAX_NR_BOOTDOMS
-+ */
-+static inline unsigned int __init next_boot_domain_index(
-+    const struct boot_info *bi, uint32_t cap, unsigned int start)
-+{
-+    int i;
-+
-+    for ( i = start; i < bi->nr_domains; i++ )
-+    {
-+        if ( bi->domains[i].capabilities & cap )
-+            return i;
-+    }
-+
-+    return MAX_NR_BOOTDOMS + 1;
-+}
-+
-+#define first_boot_domain_index(bi, cap)              \
-+    next_boot_domain_index(bi, cap, 0)
-+
- #endif /* X86_BOOTINFO_H */
- 
- /*
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 2458a43902e6..b2c7846be18f 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -2026,9 +2026,26 @@ void asmlinkage __init noreturn __start_xen(void)
-      * We're going to setup domain0 using the module(s) that we stashed safely
-      * above our heap. The second module, if present, is an initrd ramdisk.
-      */
--    dom0 = arch_create_dom(bi, &bi->domains[0]);
--    if ( !dom0 )
--        panic("Could not set up DOM0 guest OS\n");
-+    ret = builder_create_domains(bi);
-+    if ( ret <= 0 )
-+        panic("Could not set up boot-time domains\n");
-+    else
-+        printk(XENLOG_INFO "Constructed %d boot-time domains\n", ret);
-+
-+    /* Selection order: hardware domain, control domain, first domain */
-+    i = first_boot_domain_index(bi, DOMAIN_CAPS_HARDWARE);
-+    if ( i >= MAX_NR_BOOTDOMS )
-+    {
-+        i = first_boot_domain_index(bi, DOMAIN_CAPS_CONTROL);
-+        if ( i >= MAX_NR_BOOTDOMS )
-+        {
-+            printk(XENLOG_WARNING
-+                   "A hwdom/ctrldom not detected, using 0th domain\n");
-+            i = 0;
-+        }
-+    }
-+
-+    dom0 = bi->domains[i].d;
- 
-     heap_init_late();
- 
-diff --git a/xen/include/xen/domain-builder.h b/xen/include/xen/domain-builder.h
-index a9df326682ac..c26f670d4f66 100644
---- a/xen/include/xen/domain-builder.h
-+++ b/xen/include/xen/domain-builder.h
-@@ -43,4 +43,6 @@ void domain_vcpus_create(struct domain *d);
- struct domain *arch_create_dom(
-     struct boot_info *bi, struct boot_domain *bd);
- 
-+unsigned int builder_create_domains(struct boot_info *bi);
-+
- #endif /* __XEN_DOMAIN_BUILDER_H__ */
--- 
-2.30.2
+What starts DRTM needs to ensure the system supports DRTM and should
+then put it in a state suitable for DRTM start.  What uses DRTM
+needs to know much less and can heavily rely on the information from a
+bootloader.  Ideally, Xen/Linux would be able to handle DRTM uniformly
+on different hardware, but the reality is that abstracting away some
+differences is nearly impossible.
 
+> Is the code being added to GRUB for secure launch under a license
+> that would allow it to be used in Xen as well?
+
+GRUB's changes are GPL3-or-later, but that shouldn't be a problem,
+authors will likely agree to relicense it as GPL2-or-later for Xen.
+
+Regards
 
