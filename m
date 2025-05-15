@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E5C1C2D0CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:34:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985527.1371487 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C3DC2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:34:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985547.1371503 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYim-0001iF-0b; Thu, 15 May 2025 13:34:00 +0000
+	id 1uFYjO-0002hx-Kb; Thu, 15 May 2025 13:34:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985527.1371487; Thu, 15 May 2025 13:33:59 +0000
+Received: by outflank-mailman (output) from mailman id 985547.1371503; Thu, 15 May 2025 13:34:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYil-0001i2-Sp; Thu, 15 May 2025 13:33:59 +0000
-Received: by outflank-mailman (input) for mailman id 985527;
- Thu, 15 May 2025 13:33:58 +0000
+	id 1uFYjO-0002h3-F5; Thu, 15 May 2025 13:34:38 +0000
+Received: by outflank-mailman (input) for mailman id 985547;
+ Thu, 15 May 2025 13:34:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYWs-0006hT-Fr
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:21:42 +0000
+ id 1uFYXK-0006hT-P5
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:22:10 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88c57ca4-318f-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 15:21:40 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1747315168934810.2700415584003;
- Thu, 15 May 2025 06:19:28 -0700 (PDT)
+ id 9923e92f-318f-11f0-9ffb-bf95429c2676;
+ Thu, 15 May 2025 15:22:08 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1747315170626583.7198539212203;
+ Thu, 15 May 2025 06:19:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88c57ca4-318f-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1747315172; cv=none; 
+X-Inumbo-ID: 9923e92f-318f-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; t=1747315174; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=bZnXRPcKo0wcH8yr1SybE13nsDoHoa0ZNq9Tnmrr8jYN+O5HYkXoInRtDaQSxCO7upm1RfCJEGPgsZM1DeA/o1DDVTZ8ukMGzk1rzJUA6diLF4/JaRyr6wRt0mNTn8P9yeeB9xnodv3cc/6jqU3bvm6eKpAoLVDkcFJjOn/53Ak=
+	b=GeZrkLgy9Z+TEccRyIq7edi4Snl86Jz1BJ4K6B289ZoCZOaahk8PNMDVt72ZuBeKwZYMwcj9E6MTRNHte1WEsQml5dCpVJSzczi1qGnobPkmYIft8DqWn0rbKjK1pfpAx3nZoasCFDHYrMM/yEw4tVXy4DXs3Win5eZE/j4awwQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315172; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=szift5nr4RwxcY6KS6NmBQOllT78PfzrUTES2oF68ac=; 
-	b=JA5j43aOAP2sRYcTyXX6hsq7QjamKCzlYO0sJ0WVkDNN7jdZaRhYzxY3XL8Q98KioTeOm4FWqzGgsmkAU+9nk4WMx4khzj2DGsizZvNK0fgnLzOwrPwcw/6uDd1AHZCFvL9dIzXIM3TNpTMyCZ7zx562RTfMg9qbb5UOS+L9Gzs=
+	t=1747315174; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=pe3ywFf454HRDAAca+YGTm4pcdc3mvF9zfiQ+NSlMjk=; 
+	b=n3sLr9u/ol/2zfN2a1rbYciH65vi8x6M4KJJ/xZRP0u8op8JMOBv2r0OD5XOYE3DVXNy5nzKZnNjYVaktvp4CfnQmnR3487Wfz0kNm+SBEwF0sPxLNmosi/Ike9ywHUji8O8LUCi+yApocl7fBQszqSg5bYNBLIjOD/gxCI2lGg=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315172;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315174;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=szift5nr4RwxcY6KS6NmBQOllT78PfzrUTES2oF68ac=;
-	b=JwVYNyBbDIvgHO7dLCeTDsxu06mNQOnjlI6YmXs5uKkre54Fk//X3IbfHhhzERnL
-	b66wR+X6vHSV19Mr9KvI8w64wBRsEAv3e5/yQ3fqCeOOIF43/7ft1sFGpTr+EFjHk4a
-	4lE2X7+jRWxajnfS6v2AvjkfOCHbcd2j0L9iqoCg=
+	bh=pe3ywFf454HRDAAca+YGTm4pcdc3mvF9zfiQ+NSlMjk=;
+	b=tvalZ1wNMULr3vq3Onr+LL6N0kweIOaIGI78b8w0q5X/dvBMOYYtc4VEU54JfNze
+	NbKuDvLfPthn88Dp8lPHBzOmNlpbVagD0/+Cj1iYc5jf6XuVzB1uzKzTEsdGXPC/I40
+	+oSgSw+7ZfFExsCgd/BoxFAUrBWQut+DXT2m+YVc=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -67,10 +67,11 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	agarciav@amd.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFCv2 22/38] x86/hyperlaunch: add domu acpi construction
-Date: Thu, 15 May 2025 09:19:05 -0400
-Message-Id: <20250515131912.5019-3-dpsmith@apertussolutions.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Christopher Clark <christopher.w.clark@gmail.com>
+Subject: [RFCv2 24/38] x86/hyperlaunch: convert create_dom0 to arch_create_dom
+Date: Thu, 15 May 2025 09:19:07 -0400
+Message-Id: <20250515131912.5019-5-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250515131912.5019-1-dpsmith@apertussolutions.com>
 References: <20250515131912.5019-1-dpsmith@apertussolutions.com>
@@ -78,245 +79,455 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Introduce hvm_setup_acpi() that will construct an APCI table for a general HVM
-domU guest.
+The only consumer of the function domain_cmdline_size() and the acpi_param
+parameter is create_dom(). It is therefore reasonable to move
+domain_cmdline_size() and the acpi_param parameter along with its parsing code
+at the same time as create_dom0() is moved under the domain builder. While
+moving create_dom0(), rename it to arch_create_dom() as the function is now
+generalized.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/hvm/dom_build.c | 213 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 212 insertions(+), 1 deletion(-)
+ xen/arch/x86/domain-builder/Makefile |   2 +-
+ xen/arch/x86/domain-builder/domain.c | 180 +++++++++++++++++++++++++++
+ xen/arch/x86/setup.c                 | 174 +-------------------------
+ xen/include/xen/domain-builder.h     |   3 +
+ 4 files changed, 185 insertions(+), 174 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-index 2157340335d2..e73a3950b30e 100644
---- a/xen/arch/x86/hvm/dom_build.c
-+++ b/xen/arch/x86/hvm/dom_build.c
-@@ -409,6 +409,214 @@ int __init hvm_add_mem_range(
-     return 0;
+diff --git a/xen/arch/x86/domain-builder/Makefile b/xen/arch/x86/domain-builder/Makefile
+index 0c2e7085e21b..69a7c574a8d8 100644
+--- a/xen/arch/x86/domain-builder/Makefile
++++ b/xen/arch/x86/domain-builder/Makefile
+@@ -1 +1 @@
+-obj-y += domain.init.o
++obj-y += domain.o
+diff --git a/xen/arch/x86/domain-builder/domain.c b/xen/arch/x86/domain-builder/domain.c
+index d934b240229f..0a7b40c9a746 100644
+--- a/xen/arch/x86/domain-builder/domain.c
++++ b/xen/arch/x86/domain-builder/domain.c
+@@ -5,17 +5,25 @@
+ 
+ #include <xen/cpumask.h>
+ #include <xen/domain.h>
++#include <xen/domain-builder.h>
++#include <xen/err.h>
++#include <xen/grant_table.h>
+ #include <xen/init.h>
+ #include <xen/lib.h> /* get types.h for libefl.h */
+ #include <xen/libelf.h>
+ #include <xen/nodemask.h>
++#include <xen/param.h>
+ #include <xen/sched.h>
+ 
+ #include <public/bootfdt.h>
+ 
+ #include <asm/bootinfo.h>
++#include <asm/cpu-policy.h>
+ #include <asm/dom0_build.h>
++#include <asm/domain-builder.h>
++#include <asm/io_apic.h>
+ #include <asm/paging.h>
++#include <asm/pv/shim.h>
+ #include <asm/spec_ctrl.h>
+ 
+ unsigned int __init dom_max_vcpus(struct boot_domain *bd)
+@@ -55,6 +63,48 @@ void __init domain_vcpus_create(struct domain *d)
+     domain_update_node_affinity(d);
  }
  
-+static int __init hvm_setup_acpi_madt(
-+    struct domain *d, struct acpi_table_madt *madt)
++bool __read_mostly acpi_disabled;
++bool __initdata acpi_force;
++static char __initdata acpi_param[10] = "";
++
++static int __init cf_check parse_acpi_param(const char *s)
 +{
-+    struct acpi_table_header *table;
-+    struct acpi_madt_local_apic *lapic;
-+    acpi_status status;
-+    unsigned long size = hvm_size_acpi_madt(d);
-+    int i;
-+
-+    /* Copy the native MADT table header. */
-+    status = acpi_get_table(ACPI_SIG_MADT, 0, &table);
-+    if ( !ACPI_SUCCESS(status) )
++    /* Interpret the parameter for use within Xen. */
++    if ( !parse_bool(s, NULL) )
 +    {
-+        printk("Failed to get MADT ACPI table, aborting.\n");
-+        return -EINVAL;
++        disable_acpi();
 +    }
-+    madt->header = *table;
-+    madt->address = APIC_DEFAULT_PHYS_BASE;
-+    /*
-+     * NB: this is currently set to 4, which is the revision in the ACPI
-+     * spec 6.1. Sadly ACPICA doesn't provide revision numbers for the
-+     * tables described in the headers.
-+     */
-+    madt->header.revision = min_t(unsigned char, table->revision, 4);
-+
-+    lapic = (void *)(madt + 1);
-+
-+    for ( i = 0; i < d->max_vcpus; i++ )
++    else if ( !strcmp(s, "force") )
 +    {
-+        lapic->header.type = ACPI_MADT_TYPE_LOCAL_APIC;
-+        lapic->header.length = sizeof(*lapic);
-+        lapic->id = i * 2;
-+        lapic->processor_id = i;
-+        lapic->lapic_flags = ACPI_MADT_ENABLED;
-+
-+        lapic++;
++        acpi_force = true;
++        acpi_ht = 1;
++        acpi_disabled = false;
 +    }
-+
-+    madt->header.length = size;
-+    /*
-+     * Calling acpi_tb_checksum here is a layering violation, but
-+     * introducing a wrapper for such simple usage seems overkill.
-+     */
-+    madt->header.checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, madt), size);
-+
-+    return 0;
-+}
-+
-+static int __init hvm_setup_acpi_xsdt(
-+    struct domain *d, struct acpi_table_xsdt *xsdt, paddr_t madt_addr)
-+{
-+    struct acpi_table_header *table;
-+    struct acpi_table_rsdp *rsdp;
-+    unsigned long size = hvm_size_acpi_xsdt(d);
-+    paddr_t xsdt_paddr;
-+
-+    /*
-+     * Restore original DMAR table signature, we are going to filter it from
-+     * the new XSDT that is presented to the guest, so it is no longer
-+     * necessary to have it's signature zapped.
-+     */
-+    acpi_dmar_reinstate();
-+
-+    /* Copy the native XSDT table header. */
-+    rsdp = acpi_os_map_memory(acpi_os_get_root_pointer(), sizeof(*rsdp));
-+    if ( !rsdp )
++    else if ( !strcmp(s, "ht") )
 +    {
-+        printk("Unable to map RSDP\n");
-+        return -EINVAL;
++        if ( !acpi_force )
++            disable_acpi();
++        acpi_ht = 1;
 +    }
-+    xsdt_paddr = rsdp->xsdt_physical_address;
-+    acpi_os_unmap_memory(rsdp, sizeof(*rsdp));
-+    table = acpi_os_map_memory(xsdt_paddr, sizeof(*table));
-+    if ( !table )
++    else if ( !strcmp(s, "noirq") )
 +    {
-+        printk("Unable to map XSDT\n");
-+        return -EINVAL;
++        acpi_noirq_set();
 +    }
-+    xsdt->header = *table;
-+    acpi_os_unmap_memory(table, sizeof(*table));
-+
-+    /* Add the custom MADT. */
-+    xsdt->table_offset_entry[0] = madt_addr;
-+
-+    xsdt->header.revision = 1;
-+    xsdt->header.length = size;
-+    /*
-+     * Calling acpi_tb_checksum here is a layering violation, but
-+     * introducing a wrapper for such simple usage seems overkill.
-+     */
-+    xsdt->header.checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, xsdt), size);
-+
-+    return 0;
-+}
-+
-+static int __init hvm_alloc_acpi_region(
-+    struct domain *d, void **region, unsigned long size, paddr_t *addr)
-+{
-+    int i;
-+
-+    *addr = 0;
-+
-+    for ( i = 0; i < d->arch.nr_e820; i++ )
++    else if ( !strcmp(s, "verbose") )
 +    {
-+        if ( d->arch.e820[i].type == E820_ACPI )
-+        {
-+            if ( d->arch.e820[i].size < size )
-+                break;
-+
-+            *addr = d->arch.e820[i].addr;
-+            break;
-+        }
++        opt_acpi_verbose = true;
++        return 0;
 +    }
-+
-+    /* The e820 setup did not allocate ACPI region, steal one instead. */
-+    if ( *addr == 0 )
-+    {
-+        if ( hvm_steal_ram(d, size, 0, GB(4), addr) )
-+        {
-+            printk("Unable to allocate guest RAM for RSDP\n");
-+            return -ENOMEM;
-+        }
-+        if ( hvm_add_mem_range(d, *addr, *addr + size, E820_ACPI) )
-+        {
-+            printk("Unable to add RSDP region to memory map\n");
-+            return -EFAULT;
-+        }
-+    }
-+
-+    *region = xzalloc_bytes(size);
-+    if ( !region )
-+        return -ENOMEM;
-+
-+    return 0;
-+}
-+
-+static int __init hvm_setup_acpi(struct domain *d, paddr_t start_info)
-+{
-+    paddr_t rsdp_paddr, xsdt_paddr, madt_paddr;
-+    struct acpi_table_rsdp *rsdp;
-+    unsigned long size = hvm_size_acpi_region(d);
-+    void *table;
-+    int rc;
-+
-+    rc = hvm_alloc_acpi_region(d, &table, size, &rsdp_paddr);
-+    if ( rc < 0 )
-+        return rc;
-+
-+    /* RSDP */
-+    rsdp = table;
-+    xsdt_paddr = rsdp_paddr + sizeof(struct acpi_table_rsdp);
-+
-+    *rsdp = (struct acpi_table_rsdp){
-+        .signature = ACPI_SIG_RSDP,
-+        .revision = 2,
-+        .length = sizeof(struct acpi_table_rsdp),
-+        .oem_id = "XenHL\0", /* Xen Hyperlaunch */
-+        .xsdt_physical_address = xsdt_paddr,
-+    };
-+
-+    rsdp->checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, rsdp),
-+                                       ACPI_RSDP_REV0_SIZE);
-+    rsdp->extended_checksum -= acpi_tb_checksum(ACPI_CAST_PTR(u8, rsdp),
-+                                                sizeof(*rsdp));
-+
-+    /* XSDT */
-+    table += sizeof(struct acpi_table_rsdp);
-+    madt_paddr = xsdt_paddr + hvm_size_acpi_xsdt(d);
-+
-+    rc = hvm_setup_acpi_xsdt(d, table, madt_paddr);
-+    if ( rc )
-+    {
-+        printk("Unable to construct XSDT\n");
-+        goto out;
-+    }
-+
-+
-+    /* MADT */
-+    table += hvm_size_acpi_xsdt(d);
-+    rc = hvm_setup_acpi_madt(d, table);
-+    if ( rc )
-+    {
-+        printk("Unable to construct MADT\n");
-+        goto out;
-+    }
-+
-+    /* Copy ACPI region into guest memory. */
-+    rc = hvm_copy_to_guest_phys(rsdp_paddr, rsdp, size, d->vcpu[0]);
-+    if ( rc )
-+    {
-+        printk("Unable to copy RSDP into guest memory\n");
-+        goto out;
-+    }
-+
-+    /* Copy RSDP address to start_info. */
-+    rc = hvm_copy_to_guest_phys(
-+        start_info + offsetof(struct hvm_start_info, rsdp_paddr), &rsdp_paddr,
-+        sizeof(((struct hvm_start_info *) 0)->rsdp_paddr), d->vcpu[0]);
-+    if ( rc )
-+        printk("Unable to copy RSDP address to start info\n");
-+
-+ out:
-+    if ( rsdp )
-+        xfree(rsdp);
-+
-+    return rc;
-+}
-+
- static bool __init check_load_address(
-     const struct domain *d, const struct elf_binary *elf)
- {
-@@ -757,7 +965,10 @@ int __init dom_construct_pvh(struct boot_domain *bd)
-         return rc;
-     }
- 
--    rc = dom0_pvh_setup_acpi(bd->d, start_info);
-+    if ( is_control_domain(bd->d) || is_hardware_domain(bd->d) )
-+        rc = dom0_pvh_setup_acpi(bd->d, start_info);
 +    else
-+        rc = hvm_setup_acpi(bd->d, start_info);
-     if ( rc )
-     {
-         printk("Failed to setup Dom0 ACPI tables: %d\n", rc);
++        return -EINVAL;
++
++    /* Save the parameter so it can be propagated to domain0. */
++    safe_strcpy(acpi_param, s);
++
++    return 0;
++}
++custom_param("acpi", parse_acpi_param);
++
+ unsigned long __init dom_paging_pages(
+     const struct boot_domain *bd, unsigned long nr_pages)
+ {
+@@ -141,6 +191,136 @@ unsigned long __init dom_compute_nr_pages(
+     return bd->mem_pages;
+ }
+ 
++static size_t __init domain_cmdline_size(const struct boot_info *bi,
++                                         const struct boot_domain *bd)
++{
++    size_t s = bi->kextra ? strlen(bi->kextra) : 0;
++
++
++    /*
++     * Bootloader cmdline takes precedence and replaces the DT provided one.
++     *
++     * In that case, fdt_cmdline is not be populated at all.
++     */
++    if ( bd->kernel->fdt_cmdline )
++    {
++        BUG_ON(!IS_ENABLED(CONFIG_DOMAIN_BUILDER));
++        s += builder_get_cmdline_size(bi, bd->kernel->cmdline_pa);
++    }
++    else if ( bd->kernel->cmdline_pa )
++        s += strlen(__va(bd->kernel->cmdline_pa));
++
++    if ( s == 0 )
++        return s;
++
++    /*
++     * Certain parameters from the Xen command line may be added to the dom0
++     * command line. Add additional space for the possible cases along with one
++     * extra char to hold \0.
++     */
++    s += strlen(" noapic") + strlen(" acpi=") + sizeof(acpi_param) + 1;
++
++    return s;
++}
++
++struct domain *__init arch_create_dom(
++    struct boot_info *bi, struct boot_domain *bd)
++{
++    char *cmdline = NULL;
++    size_t cmdline_size;
++    struct xen_domctl_createdomain dom0_cfg = {
++        .flags = IS_ENABLED(CONFIG_TBOOT) ? XEN_DOMCTL_CDF_s3_integrity : 0,
++        .max_evtchn_port = -1,
++        .max_grant_frames = -1,
++        .max_maptrack_frames = -1,
++        .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
++        .max_vcpus = dom_max_vcpus(bd),
++        .arch = {
++            .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
++        },
++    };
++    struct domain *d;
++
++    if ( opt_dom0_pvh ||
++         (bi->hyperlaunch_enabled && !(bd->mode & BUILD_MODE_PARAVIRT)) )
++    {
++        dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
++                           ((hvm_hap_supported() && !opt_dom0_shadow) ?
++                            XEN_DOMCTL_CDF_hap : 0));
++
++        dom0_cfg.arch.emulation_flags |=
++            XEN_X86_EMU_LAPIC | XEN_X86_EMU_IOAPIC | XEN_X86_EMU_VPCI;
++    }
++
++    if ( iommu_enabled && (bd->capabilities & DOMAIN_CAPS_HARDWARE) )
++        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
++
++    if ( bd->domid == DOMID_INVALID )
++        /* Create initial domain.  Not d0 for pvshim. */
++        bd->domid = get_initial_domain_id();
++    d = domain_create(bd->domid, &dom0_cfg,
++            ((bd->capabilities & DOMAIN_CAPS_CONTROL)  ? CDF_privileged : 0) |
++            ((bd->capabilities & DOMAIN_CAPS_HARDWARE) ? CDF_hardware   : 0));
++    if ( IS_ERR(d) )
++        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
++
++    bd->d = d;
++
++    if ( has_dom0_caps(bd) )
++        init_dom0_cpuid_policy(bd->d);
++
++    if ( domain_vcpu0_create(bd) == NULL )
++        panic("Error creating %pdv0\n", d);
++
++    cmdline_size = domain_cmdline_size(bi, bd);
++    if ( cmdline_size )
++    {
++        if ( !(cmdline = xzalloc_array(char, cmdline_size)) )
++            panic("Error allocating cmdline buffer for %pd\n", d);
++
++        if ( bd->kernel->fdt_cmdline )
++        {
++            BUG_ON(!IS_ENABLED(CONFIG_DOMAIN_BUILDER));
++            builder_get_cmdline(
++                bi, bd->kernel->cmdline_pa, cmdline, cmdline_size);
++        }
++        else if ( bd->kernel->cmdline_pa )
++            strlcpy(cmdline,
++                    cmdline_cook(__va(bd->kernel->cmdline_pa), bi->loader),
++                    cmdline_size);
++
++        if ( bi->kextra )
++            /* kextra always includes exactly one leading space. */
++            strlcat(cmdline, bi->kextra, cmdline_size);
++
++        /* Append any extra parameters. */
++        if ( skip_ioapic_setup && !strstr(cmdline, "noapic") )
++            strlcat(cmdline, " noapic", cmdline_size);
++
++        if ( (strlen(acpi_param) == 0) && acpi_disabled )
++        {
++            printk("ACPI is disabled, notifying Domain 0 (acpi=off)\n");
++            safe_strcpy(acpi_param, "off");
++        }
++
++        if ( (strlen(acpi_param) != 0) && !strstr(cmdline, "acpi=") )
++        {
++            strlcat(cmdline, " acpi=", cmdline_size);
++            strlcat(cmdline, acpi_param, cmdline_size);
++        }
++        bd->kernel->cmdline_pa = 0;
++        bd->cmdline = cmdline;
++    }
++
++    if ( construct_dom0(bd) != 0 )
++        panic("Could not construct domain 0\n");
++
++    bd->cmdline = NULL;
++    xfree(cmdline);
++
++    return d;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index b03284428bb3..2458a43902e6 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -251,48 +251,6 @@ static int __init cf_check parse_smap_param(const char *s)
+ }
+ custom_param("smap", parse_smap_param);
+ 
+-bool __read_mostly acpi_disabled;
+-bool __initdata acpi_force;
+-static char __initdata acpi_param[10] = "";
+-
+-static int __init cf_check parse_acpi_param(const char *s)
+-{
+-    /* Interpret the parameter for use within Xen. */
+-    if ( !parse_bool(s, NULL) )
+-    {
+-        disable_acpi();
+-    }
+-    else if ( !strcmp(s, "force") )
+-    {
+-        acpi_force = true;
+-        acpi_ht = 1;
+-        acpi_disabled = false;
+-    }
+-    else if ( !strcmp(s, "ht") )
+-    {
+-        if ( !acpi_force )
+-            disable_acpi();
+-        acpi_ht = 1;
+-    }
+-    else if ( !strcmp(s, "noirq") )
+-    {
+-        acpi_noirq_set();
+-    }
+-    else if ( !strcmp(s, "verbose") )
+-    {
+-        opt_acpi_verbose = true;
+-        return 0;
+-    }
+-    else
+-        return -EINVAL;
+-
+-    /* Save the parameter so it can be propagated to domain0. */
+-    safe_strcpy(acpi_param, s);
+-
+-    return 0;
+-}
+-custom_param("acpi", parse_acpi_param);
+-
+ struct boot_info __initdata xen_boot_info = {
+     .loader = "unknown",
+     .cmdline = "",
+@@ -982,136 +940,6 @@ static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int li
+     return n;
+ }
+ 
+-static size_t __init domain_cmdline_size(const struct boot_info *bi,
+-                                         const struct boot_domain *bd)
+-{
+-    size_t s = bi->kextra ? strlen(bi->kextra) : 0;
+-
+-
+-    /*
+-     * Bootloader cmdline takes precedence and replaces the DT provided one.
+-     *
+-     * In that case, fdt_cmdline is not be populated at all.
+-     */
+-    if ( bd->kernel->fdt_cmdline )
+-    {
+-        BUG_ON(!IS_ENABLED(CONFIG_DOMAIN_BUILDER));
+-        s += builder_get_cmdline_size(bi, bd->kernel->cmdline_pa);
+-    }
+-    else if ( bd->kernel->cmdline_pa )
+-        s += strlen(__va(bd->kernel->cmdline_pa));
+-
+-    if ( s == 0 )
+-        return s;
+-
+-    /*
+-     * Certain parameters from the Xen command line may be added to the dom0
+-     * command line. Add additional space for the possible cases along with one
+-     * extra char to hold \0.
+-     */
+-    s += strlen(" noapic") + strlen(" acpi=") + sizeof(acpi_param) + 1;
+-
+-    return s;
+-}
+-
+-static struct domain *__init create_dom0(struct boot_info *bi)
+-{
+-    char *cmdline = NULL;
+-    size_t cmdline_size;
+-    struct boot_domain *bd = &bi->domains[0];
+-    struct xen_domctl_createdomain dom0_cfg = {
+-        .flags = IS_ENABLED(CONFIG_TBOOT) ? XEN_DOMCTL_CDF_s3_integrity : 0,
+-        .max_evtchn_port = -1,
+-        .max_grant_frames = -1,
+-        .max_maptrack_frames = -1,
+-        .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
+-        .max_vcpus = dom_max_vcpus(bd),
+-        .arch = {
+-            .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
+-        },
+-    };
+-    struct domain *d;
+-
+-    if ( opt_dom0_pvh ||
+-         (bi->hyperlaunch_enabled && !(bd->mode & BUILD_MODE_PARAVIRT)) )
+-    {
+-        dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
+-                           ((hvm_hap_supported() && !opt_dom0_shadow) ?
+-                            XEN_DOMCTL_CDF_hap : 0));
+-
+-        dom0_cfg.arch.emulation_flags |=
+-            XEN_X86_EMU_LAPIC | XEN_X86_EMU_IOAPIC | XEN_X86_EMU_VPCI;
+-    }
+-
+-    if ( iommu_enabled && (bd->capabilities & DOMAIN_CAPS_HARDWARE) )
+-        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
+-
+-    if ( bd->domid == DOMID_INVALID )
+-        /* Create initial domain.  Not d0 for pvshim. */
+-        bd->domid = get_initial_domain_id();
+-    d = domain_create(bd->domid, &dom0_cfg,
+-            ((bd->capabilities & DOMAIN_CAPS_CONTROL)  ? CDF_privileged : 0) |
+-            ((bd->capabilities & DOMAIN_CAPS_HARDWARE) ? CDF_hardware   : 0));
+-    if ( IS_ERR(d) )
+-        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
+-
+-    bd->d = d;
+-
+-    if ( has_dom0_caps(bd) )
+-        init_dom0_cpuid_policy(bd->d);
+-
+-    if ( domain_vcpu0_create(bd) == NULL )
+-        panic("Error creating %pdv0\n", d);
+-
+-    cmdline_size = domain_cmdline_size(bi, bd);
+-    if ( cmdline_size )
+-    {
+-        if ( !(cmdline = xzalloc_array(char, cmdline_size)) )
+-            panic("Error allocating cmdline buffer for %pd\n", d);
+-
+-        if ( bd->kernel->fdt_cmdline )
+-        {
+-            BUG_ON(!IS_ENABLED(CONFIG_DOMAIN_BUILDER));
+-            builder_get_cmdline(
+-                bi, bd->kernel->cmdline_pa, cmdline, cmdline_size);
+-        }
+-        else if ( bd->kernel->cmdline_pa )
+-            strlcpy(cmdline,
+-                    cmdline_cook(__va(bd->kernel->cmdline_pa), bi->loader),
+-                    cmdline_size);
+-
+-        if ( bi->kextra )
+-            /* kextra always includes exactly one leading space. */
+-            strlcat(cmdline, bi->kextra, cmdline_size);
+-
+-        /* Append any extra parameters. */
+-        if ( skip_ioapic_setup && !strstr(cmdline, "noapic") )
+-            strlcat(cmdline, " noapic", cmdline_size);
+-
+-        if ( (strlen(acpi_param) == 0) && acpi_disabled )
+-        {
+-            printk("ACPI is disabled, notifying Domain 0 (acpi=off)\n");
+-            safe_strcpy(acpi_param, "off");
+-        }
+-
+-        if ( (strlen(acpi_param) != 0) && !strstr(cmdline, "acpi=") )
+-        {
+-            strlcat(cmdline, " acpi=", cmdline_size);
+-            strlcat(cmdline, acpi_param, cmdline_size);
+-        }
+-        bd->kernel->cmdline_pa = 0;
+-        bd->cmdline = cmdline;
+-    }
+-
+-    if ( construct_dom0(bd) != 0 )
+-        panic("Could not construct domain 0\n");
+-
+-    bd->cmdline = NULL;
+-    xfree(cmdline);
+-
+-    return d;
+-}
+-
+ /* How much of the directmap is prebuilt at compile time. */
+ #define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
+ 
+@@ -2198,7 +2026,7 @@ void asmlinkage __init noreturn __start_xen(void)
+      * We're going to setup domain0 using the module(s) that we stashed safely
+      * above our heap. The second module, if present, is an initrd ramdisk.
+      */
+-    dom0 = create_dom0(bi);
++    dom0 = arch_create_dom(bi, &bi->domains[0]);
+     if ( !dom0 )
+         panic("Could not set up DOM0 guest OS\n");
+ 
+diff --git a/xen/include/xen/domain-builder.h b/xen/include/xen/domain-builder.h
+index 79e4c50ddf85..a9df326682ac 100644
+--- a/xen/include/xen/domain-builder.h
++++ b/xen/include/xen/domain-builder.h
+@@ -40,4 +40,7 @@ unsigned int dom_max_vcpus(struct boot_domain *bd);
+ struct vcpu *domain_vcpu0_create(struct boot_domain *bd);
+ void domain_vcpus_create(struct domain *d);
+ 
++struct domain *arch_create_dom(
++    struct boot_info *bi, struct boot_domain *bd);
++
+ #endif /* __XEN_DOMAIN_BUILDER_H__ */
 -- 
 2.30.2
 
