@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FABCC3ABC9
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:20:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985339.1371273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D20C2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:20:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985341.1371278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYVr-0005BU-14; Thu, 15 May 2025 13:20:39 +0000
+	id 1uFYVr-0005F8-9k; Thu, 15 May 2025 13:20:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985339.1371273; Thu, 15 May 2025 13:20:38 +0000
+Received: by outflank-mailman (output) from mailman id 985341.1371278; Thu, 15 May 2025 13:20:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYVq-0005Af-PO; Thu, 15 May 2025 13:20:38 +0000
-Received: by outflank-mailman (input) for mailman id 985339;
+	id 1uFYVr-0005Cq-1p; Thu, 15 May 2025 13:20:39 +0000
+Received: by outflank-mailman (input) for mailman id 985341;
  Thu, 15 May 2025 13:20:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYVF-00017p-Bu
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:20:01 +0000
+ id 1uFYUZ-0001J6-Ma
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:19:19 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c85656f-318f-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 15:19:59 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1747315099866282.80562315486736;
- Thu, 15 May 2025 06:18:19 -0700 (PDT)
+ [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 341bbdc6-318f-11f0-9eb6-5ba50f476ded;
+ Thu, 15 May 2025 15:19:18 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1747315079782580.7063259387406;
+ Thu, 15 May 2025 06:17:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c85656f-318f-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1747315101; cv=none; 
+X-Inumbo-ID: 341bbdc6-318f-11f0-9eb6-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; t=1747315081; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=aRh+yUXQmYU+RmfETNdrkEGzca5UOD2tTQn91CdoLUbD8mzZZZfp7pt1s+72++uLolHTzggwg7WirPXBxoz/RiWDt7CNZOWfn0zv9JOrOzC7uvevXl+se5Fl2W6QEy7LM+iVtSj6yiLKGw06hOi10iYUzmwig7gLKY7hXalBbv8=
+	b=dc5/a+7nd99mo+A/pV6W9eFXyHt+6cZB6ukowXZSI6up/t0WujVEktWTJvgPi+J/cfN2tVPk13yDKqGfa6T9GvW10GLPBDnN9GahnqjQCmGItg3P4hYNVHPl9h2MMiIAXPIVCgjWVIzFy2Bm2cfaoo2wI0asJ5G3qJ5adUX6fn0=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315101; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=ICDJmXNIOhJuI8oO8RsNDdgf3Sl+EcMlmuMMxu1kPpc=; 
-	b=XCQ1nlQpw37XY25Nk5IXUvZL+aHSb3GGvwMU9Ofj839UtXzrctl94wykUpwwuS0LRc4Fk0z/Ih/AFR1jBtz2jhmCoxQRs8m1qG363GnLNvw8fU1QUDEL1rFQ1PVdpP5yTwtYSIuSyedvk0UT6PcCFI6VZldnMnSf2ZZAocjFB68=
+	t=1747315081; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=MXwElwy2ea4EYXzf8tWnzaA3L9VVZ1JQGx/m4TNLx/Q=; 
+	b=ErrrdEYPwrwq7hhzHPDpDunIlLI80AASTEF2mSOu7RzbuNnWOtoJRfAHrjyH/Dmox+gxUunIg7627PtK3WOIR7gYVuFEtu1oHP7H+qa15AG926waHoLf9J/doqyxjmgvLF8STfKuummW4dG3X+jpz1ZuM+CnxQXZ24Te7rym9G8=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315101;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315081;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=ICDJmXNIOhJuI8oO8RsNDdgf3Sl+EcMlmuMMxu1kPpc=;
-	b=U3dpzQzKKLq6sicjzC9VB2uizzorWqiLbMUFzAVoaMb2WJCp2FC7wvunfWxIB3MT
-	ZT+Zu0sAUtDaT4ud22yFvnePDhYHod9cV7p8Nuno0wmMQnk537Lw4aW+lQz8tlIMyGx
-	l16NWHjx91bhUUy75NCSyPXyyWE7lFbxnGHpRauk=
+	bh=MXwElwy2ea4EYXzf8tWnzaA3L9VVZ1JQGx/m4TNLx/Q=;
+	b=BHkExP0JTjLJ5tFDxrgxJTNa4C3E6sku9rFZPk1jhpt6GabeS0GP/sHXUTN/TGRD
+	YtOzcR1Kf223DgVKWoPeKaWuUxkKkOfk5rHYXjhXSabHprHWcKQ1h3pRjdli1sAVO8S
+	/xMWaIS+VjX5RLWAGlbgYoiqflJyQuJ4z4gCtdGY=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFCv2 14/38] x86/hyperlaunch: move iommu init to domain builder
-Date: Thu, 15 May 2025 09:17:20 -0400
-Message-Id: <20250515131744.3843-15-dpsmith@apertussolutions.com>
+Subject: [RFCv2 09/38] x86/boot: refactor dom0 page calculation
+Date: Thu, 15 May 2025 09:17:15 -0400
+Message-Id: <20250515131744.3843-10-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250515131744.3843-1-dpsmith@apertussolutions.com>
 References: <20250515131744.3843-1-dpsmith@apertussolutions.com>
@@ -78,49 +78,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Move invocation of iommu_hwdom_init() to dom_construct_pvh() and guard it
-with a hardware domain check.
+Caution is needed when dom0 is being constructed as PV using an older kernel
+that does not have the elf note XEN_ELFNOTE_INIT_P2M. The logic for handling
+this situation is embedded directly and takes into account whether dom0 memory
+parameters were specified using the negative allocation syntax. To prepare for
+generalizing domain page allocation, isolate this logic to a separate handling
+function.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/hvm/dom0_build.c | 2 --
- xen/arch/x86/hvm/dom_build.c  | 4 ++++
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ xen/arch/x86/dom0_build.c | 76 +++++++++++++++++++++------------------
+ 1 file changed, 41 insertions(+), 35 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
-index 378a1f29fb1b..6990c1d3a882 100644
---- a/xen/arch/x86/hvm/dom0_build.c
-+++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -1304,8 +1304,6 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
-     struct domain *d = bd->d;
-     int rc;
- 
--    iommu_hwdom_init(d);
--
-     rc = pvh_populate_p2m(d);
-     if ( rc )
-     {
-diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-index eec65e3e805e..450e77d190a2 100644
---- a/xen/arch/x86/hvm/dom_build.c
-+++ b/xen/arch/x86/hvm/dom_build.c
-@@ -9,6 +9,7 @@
-  */
- 
- #include <xen/acpi.h>
-+#include <xen/iommu.h>
- #include <xen/init.h>
- #include <xen/softirq.h>
- #include <xen/types.h>
-@@ -92,6 +93,9 @@ int __init dom_construct_pvh(struct boot_domain *bd)
-      */
-     pvh_init_p2m(bd);
- 
-+    if ( is_hardware_domain(bd->d) )
-+        iommu_hwdom_init(bd->d);
-+
-     return dom0_construct_pvh(bd);
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index 02a3c2d249c3..a72064fbae80 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -353,12 +353,50 @@ static void __init calculate_dom0_pages(
+     bd->mem_pages = nr_pages;
  }
+ 
++static void __init dom0_pv_restrict_pages(
++    struct boot_domain *bd, struct elf_dom_parms *parms)
++{
++    if ( (parms->p2m_base == UNSET_ADDR) && !memsize_gt_zero(&dom0_size) &&
++         (!memsize_gt_zero(&dom0_min_size) || (bd->mem_pages > bd->min_pages)) )
++    {
++        /*
++         * Legacy Linux kernels (i.e. such without a XEN_ELFNOTE_INIT_P2M
++         * note) require that there is enough virtual space beyond the initial
++         * allocation to set up their initial page tables. This space is
++         * roughly the same size as the p2m table, so make sure the initial
++         * allocation doesn't consume more than about half the space that's
++         * available between params.virt_base and the address space end.
++         */
++        unsigned long vstart, vend, end;
++        unsigned long initrd_len = bd->ramdisk ? bd->ramdisk->size : 0;
++        size_t sizeof_long = is_pv_32bit_domain(bd->d) ? sizeof(int) : sizeof(long);
++
++        vstart = parms->virt_base;
++        vend = round_pgup(parms->virt_kend);
++        if ( !parms->unmapped_initrd )
++            vend += round_pgup(initrd_len);
++        end = vend + bd->mem_pages * sizeof_long;
++
++        if ( end > vstart )
++            end += end - vstart;
++        if ( end <= vstart ||
++             (sizeof_long < sizeof(end) && end > (1UL << (8 * sizeof_long))) )
++        {
++            end = sizeof_long >= sizeof(end) ? 0 : 1UL << (8 * sizeof_long);
++            bd->mem_pages = (end - vend) / (2 * sizeof_long);
++            if ( memsize_gt_zero(&dom0_min_size) &&
++                 bd->mem_pages < bd->min_pages )
++                bd->mem_pages = bd->min_pages;
++            printk("Dom0 memory clipped to %lu pages\n", bd->mem_pages);
++        }
++    }
++}
++
+ unsigned long __init dom0_compute_nr_pages(
+     struct boot_domain *bd, struct elf_dom_parms *parms)
+ {
+     nodeid_t node;
+     struct domain *d = bd->d;
+-    unsigned long initrd_len = bd->ramdisk ? bd->ramdisk->size : 0;
+     unsigned long avail = 0, iommu_pages = 0;
+ 
+     for_each_node_mask ( node, dom0_nodes )
+@@ -404,40 +442,8 @@ unsigned long __init dom0_compute_nr_pages(
+     /* Clamp according to min/max limits and available memory (final). */
+     calculate_dom0_pages(bd, avail);
+ 
+-    if ( is_pv_domain(d) &&
+-         (parms->p2m_base == UNSET_ADDR) && !memsize_gt_zero(&dom0_size) &&
+-         (!memsize_gt_zero(&dom0_min_size) || (bd->mem_pages > bd->min_pages)) )
+-    {
+-        /*
+-         * Legacy Linux kernels (i.e. such without a XEN_ELFNOTE_INIT_P2M
+-         * note) require that there is enough virtual space beyond the initial
+-         * allocation to set up their initial page tables. This space is
+-         * roughly the same size as the p2m table, so make sure the initial
+-         * allocation doesn't consume more than about half the space that's
+-         * available between params.virt_base and the address space end.
+-         */
+-        unsigned long vstart, vend, end;
+-        size_t sizeof_long = is_pv_32bit_domain(d) ? sizeof(int) : sizeof(long);
+-
+-        vstart = parms->virt_base;
+-        vend = round_pgup(parms->virt_kend);
+-        if ( !parms->unmapped_initrd )
+-            vend += round_pgup(initrd_len);
+-        end = vend + bd->mem_pages * sizeof_long;
+-
+-        if ( end > vstart )
+-            end += end - vstart;
+-        if ( end <= vstart ||
+-             (sizeof_long < sizeof(end) && end > (1UL << (8 * sizeof_long))) )
+-        {
+-            end = sizeof_long >= sizeof(end) ? 0 : 1UL << (8 * sizeof_long);
+-            bd->mem_pages = (end - vend) / (2 * sizeof_long);
+-            if ( memsize_gt_zero(&dom0_min_size) &&
+-                 bd->mem_pages < bd->min_pages )
+-                bd->mem_pages = bd->min_pages;
+-            printk("Dom0 memory clipped to %lu pages\n", bd->mem_pages);
+-        }
+-    }
++    if ( is_pv_domain(d) )
++        dom0_pv_restrict_pages(bd, parms);
+ 
+     d->max_pages = min_t(unsigned long, bd->max_pages, UINT_MAX);
  
 -- 
 2.30.2
