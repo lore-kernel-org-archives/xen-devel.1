@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1ECC3ABC9
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:30:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985454.1371418 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE6DC2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:31:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985472.1371428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYfj-0005zo-8O; Thu, 15 May 2025 13:30:51 +0000
+	id 1uFYgK-0006on-F1; Thu, 15 May 2025 13:31:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985454.1371418; Thu, 15 May 2025 13:30:51 +0000
+Received: by outflank-mailman (output) from mailman id 985472.1371428; Thu, 15 May 2025 13:31:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYfj-0005zd-2j; Thu, 15 May 2025 13:30:51 +0000
-Received: by outflank-mailman (input) for mailman id 985454;
- Thu, 15 May 2025 13:30:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uFYgK-0006og-AU; Thu, 15 May 2025 13:31:28 +0000
+Received: by outflank-mailman (input) for mailman id 985472;
+ Thu, 15 May 2025 13:31:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYWm-0006hT-1V
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:21:36 +0000
+ id 1uFYVz-0001J6-Dt
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:20:47 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 83af8a54-318f-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 15:21:32 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1747315169742869.1914971672236;
- Thu, 15 May 2025 06:19:29 -0700 (PDT)
+ [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6874c8f3-318f-11f0-9eb6-5ba50f476ded;
+ Thu, 15 May 2025 15:20:46 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1747315102766617.7586421581187;
+ Thu, 15 May 2025 06:18:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83af8a54-318f-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1747315172; cv=none; 
+X-Inumbo-ID: 6874c8f3-318f-11f0-9eb6-5ba50f476ded
+ARC-Seal: i=1; a=rsa-sha256; t=1747315107; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=gySeR3xZdn/C2DTKC2yYnEj5AVglZjEUXelTvjQOqA9A5yjCxO/dYeTFioVJvzRKfvvxmEtyxh7JkNCkym7SWRsgulO3XjTdfa79r4TSKCJNpEanGDmJOU0XSpy9j0MgrHRx60c5R6BhswxiHErd3sskSQRyCX5kyNhAX2Y/R44=
+	b=V62vozW4fixzn4GmMXPxn8QV5qJOjO6ZwgDWgZvDU8uei34mLHFqYc64BfV06ecCliHwTbcfv/OugmzthwbnOwb1Ve74kBd8mU3z2mM/fVcCvp9krxq8YkJReVC1j3guYXCPM/OjOX22GmAOTmc2b2/BWWLCYxlLuQdqAl9tyvw=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315172; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=lPwQqu2YZX/b272zm9ZL/KuLa6EJ8BsjBWcWBspQd9I=; 
-	b=MUerFAvA5M6VUeaEJ2MXN+cvS9LvRYOCsLqTCqvyYsnDCpECYIkMlDzQ9g5R3Og+7wCarHf8ehiEcJc2J659KTd0KopRIo28QcLzTapkOSEmVNL6NWHya7QJ/kfx21rGiY6TZV6p8fOQB7cLtsSL2Bglwvql8CZ1v5AB5dxXFgM=
+	t=1747315107; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=P3H/9i2KknvPDFh0EQzL+jlxmzJaWhM9u6fW8uCKxIU=; 
+	b=MOHzUXcjnZfXTX5Cz9rUqE51TqVhlUuIXi6Ven7MrQPd22mRuAEPI0uv4aF/5lOsVPOCFSgqyrxjqppdRH/TNYkW/HVkSXTYSsX1nIzDzBVMVsS2DNi34Q415o9D2Ezp9/RzCbL/D9FkrVzm9RKwzaIpEPw6RNH6t34dhdv9u6k=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315172;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315106;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=lPwQqu2YZX/b272zm9ZL/KuLa6EJ8BsjBWcWBspQd9I=;
-	b=E0iyFxofJ6jyi/+Jw6y0QWOBsGMnpxi1Tns2UcXFteDeuFpiCF4EOfg9jRrJnjjc
-	zqPW+FrdH4U2r1DYujq4p+yQ8XSbuXEZEu4TptigeThFyDY4+8Opk5ZEE9k6IwzdXZ8
-	zftuJ+1WNvNjbKs1HSP3wFSRJTtA3eE2foEu0pag=
+	bh=P3H/9i2KknvPDFh0EQzL+jlxmzJaWhM9u6fW8uCKxIU=;
+	b=oQFn78u8Kzs/c1IQAdJZwu+cT4wVjUKekT3PdUmbofD1lwL8gadrsKL55XuvqDuj
+	aYAj1uOKOwDryc3Asz88hgDIFiGocOC2DYe267BqTGkCJv66Hm+tvXZiuHNREBnK8wI
+	Eqa1f8tHYFr6d4ZbgbOQfy0/Ss8ZQtNZewadgnC8=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,59 +68,61 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFCv2 23/38] x86/boot: export command line processing
-Date: Thu, 15 May 2025 09:19:06 -0400
-Message-Id: <20250515131912.5019-4-dpsmith@apertussolutions.com>
+Subject: [RFCv2 17/38] x86/boot: rename pvh acpi setup function
+Date: Thu, 15 May 2025 09:17:23 -0400
+Message-Id: <20250515131744.3843-18-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20250515131912.5019-1-dpsmith@apertussolutions.com>
-References: <20250515131912.5019-1-dpsmith@apertussolutions.com>
+In-Reply-To: <20250515131744.3843-1-dpsmith@apertussolutions.com>
+References: <20250515131744.3843-1-dpsmith@apertussolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Export the function cmdline_cook() so that it can be called outside of setup.c.
+The function pvh_setup_acpi() is dom0 specific, renaming it to
+dom0_pvh_setup_acpi(). Now export the function so that it may be called by the
+domain builder.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/include/asm/setup.h | 2 ++
- xen/arch/x86/setup.c             | 4 +---
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/hvm/dom0_build.c         | 4 ++--
+ xen/arch/x86/include/asm/dom0_build.h | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index b517da6144de..4b8fbdc67e05 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -29,6 +29,8 @@ void init_IRQ(void);
- struct boot_domain;
- int construct_dom0(struct boot_domain *bd);
- 
-+const char *cmdline_cook(const char *p, const char *loader_name);
-+
- void setup_io_bitmap(struct domain *d);
- 
- extern struct boot_info xen_boot_info;
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 298e27848dda..b03284428bb3 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -293,8 +293,6 @@ static int __init cf_check parse_acpi_param(const char *s)
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index 7b9a2cccabce..9ea8acbb5a02 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -1125,7 +1125,7 @@ static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
+     return rc;
  }
- custom_param("acpi", parse_acpi_param);
  
--static const char *cmdline_cook(const char *p, const char *loader_name);
--
- struct boot_info __initdata xen_boot_info = {
-     .loader = "unknown",
-     .cmdline = "",
-@@ -952,7 +950,7 @@ static bool __init loader_is_grub2(const char *loader_name)
-  *
-  * Always returns a pointer within @p.
-  */
--static const char *__init cmdline_cook(const char *p, const char *loader_name)
-+const char *__init cmdline_cook(const char *p, const char *loader_name)
+-static int __init pvh_setup_acpi(struct domain *d, paddr_t start_info)
++int __init dom0_pvh_setup_acpi(struct domain *d, paddr_t start_info)
  {
-     /* Strip leading whitespace. */
-     while ( *p == ' ' )
+     unsigned long pfn, nr_pages;
+     paddr_t madt_paddr, xsdt_paddr, rsdp_paddr;
+@@ -1283,7 +1283,7 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
+         return rc;
+     }
+ 
+-    rc = pvh_setup_acpi(d, start_info);
++    rc = dom0_pvh_setup_acpi(bd->d, start_info);
+     if ( rc )
+     {
+         printk("Failed to setup Dom0 ACPI tables: %d\n", rc);
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index e5debd5adf9f..36f563bd9d5b 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -20,6 +20,8 @@ void dom0_pv_restrict_pages(
+ 
+ void dom0_pvh_setup_e820(struct domain *d, unsigned long nr_pages);
+ 
++int dom0_pvh_setup_acpi(struct domain *d, paddr_t start_info);
++
+ int dom0_construct_pv(struct boot_domain *bd);
+ int dom0_construct_pvh(struct boot_domain *bd);
+ 
 -- 
 2.30.2
 
