@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB7CC2D0CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:38:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985626.1371567 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F665C2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:39:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985641.1371577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYmp-00078B-Et; Thu, 15 May 2025 13:38:11 +0000
+	id 1uFYnp-0007tK-Oj; Thu, 15 May 2025 13:39:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985626.1371567; Thu, 15 May 2025 13:38:11 +0000
+Received: by outflank-mailman (output) from mailman id 985641.1371577; Thu, 15 May 2025 13:39:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYmp-000784-BT; Thu, 15 May 2025 13:38:11 +0000
-Received: by outflank-mailman (input) for mailman id 985626;
- Thu, 15 May 2025 13:38:10 +0000
+	id 1uFYnp-0007tD-M7; Thu, 15 May 2025 13:39:13 +0000
+Received: by outflank-mailman (input) for mailman id 985641;
+ Thu, 15 May 2025 13:39:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYYq-0006hT-Cx
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:23:44 +0000
+ id 1uFYXT-0006hT-Ug
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:22:19 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
  [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d15f04a2-318f-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 15:23:42 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 174731520685435.04435821717914;
- Thu, 15 May 2025 06:20:06 -0700 (PDT)
+ id 9f1ba848-318f-11f0-9ffb-bf95429c2676;
+ Thu, 15 May 2025 15:22:18 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1747315173142393.942667038713;
+ Thu, 15 May 2025 06:19:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d15f04a2-318f-11f0-9ffb-bf95429c2676
-ARC-Seal: i=1; a=rsa-sha256; t=1747315210; cv=none; 
+X-Inumbo-ID: 9f1ba848-318f-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; t=1747315176; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Kxcq2eaFIHbcjQbUBLOECM9KYNss9ShGDJq16IPwqbpAVv0V9uJx8ACTSHG973hAVhm5jYYY8MufnWrMN4DlQq17ZpNsn73UfGvfcpYqI0UG4lnHYYhZo2vxf6kmAgk1Ka7QKt9A0mTqK55jCb7Jfp5FxuG6h/vEEqbotgrVcjM=
+	b=NZBxKFLc6I/FFdo2eQajsV65yLItatKjMNG2BsTPPE5xNCLxYj9XvxDGsvcWK4CL4bTlvYjLXRzqHX7idrc8ztSdd+uAM7E0wCLQrPNmx79GhwbYvcMOu/0ep91baAJHa1S71f6NngSjtzZknjQvtS323PTUsPLk/0tMGyveIj8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315210; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=96dkUqvgm/7UIRL7jRGOzfsQUACLFlErwk/VB4OugJM=; 
-	b=TQN0GsXSjDaRuXgqpHOVnBug9+0dD9GGj2RNkw57uZ9fiuj1Am6nYkSCLqwKl6JZy6Db2o4JYMohzI3A8iuwXYN1U4L8YfGVq5vleP26GpzXvpsYvTLyZJ8tpSemq+lNxw9I9kkaGaXFE2OCKeay5sqeAk5OyE06/3ErWGA4nQ4=
+	t=1747315176; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=dok5mCKGcvhcJcoUDY82s5z4bmExib11eYAieKaC4x4=; 
+	b=ZtUrLxSywqzIrWxm8OZ/RuyXCrnIxLhgSyFhLNUdTrXBSgycmgPYTn6TPaE6LONGY/CdR96uWcpzbvBFp+K9dmYm8wSvZGVJGWjHqqXP9HkPkD8TYDJCHxILkWXEj9nV09Y/qsHDNFzewwLvu97Irz5EJNJBrEXR5Jvt45DtA0k=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315210;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315176;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=96dkUqvgm/7UIRL7jRGOzfsQUACLFlErwk/VB4OugJM=;
-	b=Od1+a5Mxbc8jzMsajg+SwvQNiVcFgESgXxOBa1EtBzPY2dBaWbppSTCr1u5+bXsv
-	QJMEZrx+w62sYRcaNBt/zFs7uTTI/dwoH42BVKa010EAlXIoEta22NYwoNJ3Oypy1H9
-	dBhBbNaZ8Ol18VxnNSfQKhLiEzCNavdxsCaHoltg=
+	bh=dok5mCKGcvhcJcoUDY82s5z4bmExib11eYAieKaC4x4=;
+	b=IXP6sts2bp2m053tZO4YXzfDi3sf5C2DPWtoqKaiSTCmv9hZH97/hZYi+zw4emE7
+	vwxNnYv+zywE/nnVt1cq5UdJMbDe6LqIWuePJZ7vp9D2uXkCJMFJlr8t5h+3BuyIz3E
+	67OHIZ4GIA/e0Qz98FxtOPrgZ2+QQQYbxn60SkBQ=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -67,209 +67,112 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	agarciav@amd.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFCv2 33/38] x86/hyperlaunch: move kernel extraction under domain builder
-Date: Thu, 15 May 2025 09:19:45 -0400
-Message-Id: <20250515131951.5594-4-dpsmith@apertussolutions.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Christopher Clark <christopher.w.clark@gmail.com>
+Subject: [RFCv2 27/38] x86/hyperlaunch: introduce arch builder finalize
+Date: Thu, 15 May 2025 09:19:10 -0400
+Message-Id: <20250515131912.5019-8-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20250515131951.5594-1-dpsmith@apertussolutions.com>
-References: <20250515131951.5594-1-dpsmith@apertussolutions.com>
+In-Reply-To: <20250515131912.5019-1-dpsmith@apertussolutions.com>
+References: <20250515131912.5019-1-dpsmith@apertussolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-The function bzimage_parse attempted to prepare the kernel image for copying
-into the guest for all supported kernel types, not just bzImage. The result was
-convoluted logic to handle three kernel image types, and then within the
-bzImage type, also handle three types of payloads.
-
-This commit moves the generalized kernel preparation for the three kernel types
-to the domain builder. It descopes bziamge_parse to only handling bzImages.
+This commit introduces a per arch builder finalize method where all
+post-construction finalization and cleanup can be handled. The call to discard
+boot modules relocated from inside the two x86 domain construction paths to the
+x86 domain builder finalize method. This will ensure modules are not discarded
+until after all domains have been constructed.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- xen/arch/x86/bzimage.c                    | 34 ++++++++++-------------
- xen/arch/x86/domain-builder/domain.c      | 30 ++++++++++++++++++++
- xen/arch/x86/hvm/dom_build.c              |  3 +-
- xen/arch/x86/include/asm/bzimage.h        |  5 ++--
- xen/arch/x86/include/asm/domain-builder.h |  3 ++
- xen/arch/x86/pv/dom0_build.c              |  4 ++-
- 6 files changed, 55 insertions(+), 24 deletions(-)
 
-diff --git a/xen/arch/x86/bzimage.c b/xen/arch/x86/bzimage.c
-index ba090b3ef9d6..65ee0eef029a 100644
---- a/xen/arch/x86/bzimage.c
-+++ b/xen/arch/x86/bzimage.c
-@@ -66,8 +66,6 @@ int __init bzimage_check(void *image, unsigned long len)
-     return 1;
+---
+
+Changes since RFC v1:
+- reworked the commit to introduce builder finalize
+- renamed the commit to refelect builder finalize
+---
+ xen/arch/x86/domain-builder/core.c   | 2 ++
+ xen/arch/x86/domain-builder/domain.c | 8 ++++++++
+ xen/arch/x86/hvm/dom_build.c         | 3 ---
+ xen/arch/x86/pv/dom0_build.c         | 3 ---
+ xen/include/xen/domain-builder.h     | 2 ++
+ 5 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/x86/domain-builder/core.c b/xen/arch/x86/domain-builder/core.c
+index 3b315e59b188..4eaf3a111208 100644
+--- a/xen/arch/x86/domain-builder/core.c
++++ b/xen/arch/x86/domain-builder/core.c
+@@ -22,6 +22,8 @@ unsigned int __init builder_create_domains(struct boot_info *bi)
+     if ( bd->d )
+         build_count++;
+ 
++    arch_builder_finalize(bi);
++
+     return build_count;
  }
  
--static unsigned long __initdata orig_image_len;
--
- unsigned long __init bzimage_headroom(void *image_start,
-                                       unsigned long image_length)
- {
-@@ -77,7 +75,6 @@ unsigned long __init bzimage_headroom(void *image_start,
-     image_start += (hdr->setup_sects + 1) * 512 + hdr->payload_offset;
-     image_length = hdr->payload_length;
- 
--    orig_image_len = image_length;
-     /* Linux build system mimics gzip isize field for bzip2/lzma algos */
-     headroom = gzip_isize(image_start, image_length);
-     /*
-@@ -96,31 +93,28 @@ unsigned long __init bzimage_headroom(void *image_start,
-     return ROUNDUP(headroom, PAGE_SIZE);
- }
- 
--int __init bzimage_parse(void *image_base, void **image_start,
--                         unsigned long *image_len)
-+int __init bzimage_parse(
-+    void *image_base, void **image_start, unsigned long headroom,
-+    unsigned long *image_len)
- {
-     struct setup_header *hdr = (struct setup_header *)(*image_start);
--    int err = bzimage_check(hdr, *image_len);
-+    int err = 0;
-     unsigned long output_len;
- 
--    if ( err < 0 )
--        return err;
--
--    if ( err > 0 )
--    {
--        *image_start += (hdr->setup_sects + 1) * 512 + hdr->payload_offset;
--        *image_len = hdr->payload_length;
--    }
-+    *image_start += (hdr->setup_sects + 1) * 512 + hdr->payload_offset;
-+    *image_len = hdr->payload_length;
- 
-     if ( elf_is_elfbinary(*image_start, *image_len) )
--        return 0;
-+        return err;
- 
--    BUG_ON(!(image_base < *image_start));
-+    output_len = gzip_isize(*image_start, *image_len);
- 
--    output_len = gzip_isize(*image_start, orig_image_len);
-+    BUG_ON(!(image_base < *image_start));
- 
--    if ( (err = perform_gunzip(image_base, *image_start, orig_image_len)) > 0 )
--        err = decompress(*image_start, orig_image_len, image_base);
-+    if ( gzip_check(*image_start, *image_len) )
-+        err = perform_gunzip(image_base, *image_start, *image_len);
-+    else
-+        err = decompress(*image_start, *image_len, image_base);
- 
-     if ( !err )
-     {
-@@ -128,7 +122,7 @@ int __init bzimage_parse(void *image_base, void **image_start,
-         *image_len = output_len;
-     }
- 
--    return err > 0 ? 0 : err;
-+    return err;
- }
- 
- /*
 diff --git a/xen/arch/x86/domain-builder/domain.c b/xen/arch/x86/domain-builder/domain.c
-index 9c2f30eee8bd..deff6c8efaf1 100644
+index 2c01705ebe4f..5b03e3dce228 100644
 --- a/xen/arch/x86/domain-builder/domain.c
 +++ b/xen/arch/x86/domain-builder/domain.c
-@@ -271,6 +271,36 @@ void __init arch_builder_headroom(struct boot_domain *bd)
-     bootstrap_unmap();
+@@ -326,6 +326,14 @@ struct domain *__init arch_create_dom(
+     return d;
  }
  
-+int __init arch_builder_prepare_kernel(
-+    void *image_base, void **image_start, unsigned long headroom,
-+    unsigned long *image_len)
++int __init arch_builder_finalize(struct boot_info *bi)
 +{
-+    int rc = 0;
++    /* Free temporary buffers. */
++    free_boot_modules();
 +
-+    *image_start = image_base + headroom;
-+    *image_len -= headroom;
-+
-+    if ( bzimage_check(*image_start, *image_len) )
-+        rc = bzimage_parse(image_base, image_start, headroom, image_len);
-+    else if ( gzip_check(*image_start, *image_len) )
-+    {
-+        unsigned long len = gzip_isize(*image_start, *image_len);
-+        rc = perform_gunzip(image_base, *image_start, *image_len);
-+        if ( !rc )
-+        {
-+            *image_start = image_base;
-+            *image_len = len;
-+        }
-+    }
-+    else if ( elf_is_elfbinary(*image_start, *image_len) )
-+        rc = 0;
-+    else
-+        rc = -EINVAL;
-+
-+    return rc;
++    return 0;
 +}
 +
-+
- struct domain *__init arch_create_dom(
-     struct boot_info *bi, struct boot_domain *bd)
- {
+ /*
+  * Local variables:
+  * mode: C
 diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-index 3eab97b5288b..170caac6716e 100644
+index e73a3950b30e..58fc40916df5 100644
 --- a/xen/arch/x86/hvm/dom_build.c
 +++ b/xen/arch/x86/hvm/dom_build.c
-@@ -745,7 +745,8 @@ static int __init pvh_load_kernel(
-     struct vcpu *v = d->vcpu[0];
-     int rc;
+@@ -853,9 +853,6 @@ static int __init pvh_load_kernel(
+         last_addr = ROUNDUP(last_addr, PAGE_SIZE);
+     }
  
--    if ( (rc = bzimage_parse(image_base, &image_start, &image_len)) != 0 )
-+    if ( (rc = arch_builder_prepare_kernel(image_base, &image_start,
-+                                           image->headroom, &image_len)) != 0 )
+-    /* Free temporary buffers. */
+-    free_boot_modules();
+-
+     rc = hvm_copy_to_guest_phys(last_addr, bd->cmdline, cmdline_len, v);
+     if ( rc )
      {
-         printk("Error trying to detect bz compressed kernel\n");
-         return rc;
-diff --git a/xen/arch/x86/include/asm/bzimage.h b/xen/arch/x86/include/asm/bzimage.h
-index c3a042f177ac..ebe4f9325c4f 100644
---- a/xen/arch/x86/include/asm/bzimage.h
-+++ b/xen/arch/x86/include/asm/bzimage.h
-@@ -6,7 +6,8 @@
- int bzimage_check(void *image, unsigned long len);
- unsigned long bzimage_headroom(void *image_start, unsigned long image_length);
- 
--int bzimage_parse(void *image_base, void **image_start,
--                  unsigned long *image_len);
-+int bzimage_parse(
-+    void *image_base, void **image_start, unsigned long headroom,
-+    unsigned long *image_len);
- 
- #endif /* __X86_BZIMAGE_H__ */
-diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
-index f1749d2786c6..3adeadc15423 100644
---- a/xen/arch/x86/include/asm/domain-builder.h
-+++ b/xen/arch/x86/include/asm/domain-builder.h
-@@ -21,6 +21,9 @@ unsigned long dom_paging_pages(
-     const struct boot_domain *d, unsigned long nr_pages);
- 
- void arch_builder_headroom(struct boot_domain *bd);
-+int arch_builder_prepare_kernel(
-+    void *image_base, void **image_start, unsigned long headroom,
-+    unsigned long *image_len);
- 
- unsigned long dom_compute_nr_pages(
-     struct boot_domain *bd, struct elf_dom_parms *parms);
 diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 21cb0b11748e..72319c31fa0e 100644
+index 195c0902d5a1..21cb0b11748e 100644
 --- a/xen/arch/x86/pv/dom0_build.c
 +++ b/xen/arch/x86/pv/dom0_build.c
-@@ -428,7 +428,9 @@ static int __init dom0_construct(struct boot_domain *bd)
+@@ -866,9 +866,6 @@ static int __init dom0_construct(struct boot_domain *bd)
+         init_hypercall_page(d, _p(parms.virt_hypercall));
+     }
  
-     d->max_pages = ~0U;
+-    /* Free temporary buffers. */
+-    free_boot_modules();
+-
+     /* Set up start info area. */
+     si = (start_info_t *)vstartinfo_start;
+     clear_page(si);
+diff --git a/xen/include/xen/domain-builder.h b/xen/include/xen/domain-builder.h
+index c26f670d4f66..ca9d9032b35b 100644
+--- a/xen/include/xen/domain-builder.h
++++ b/xen/include/xen/domain-builder.h
+@@ -43,6 +43,8 @@ void domain_vcpus_create(struct domain *d);
+ struct domain *arch_create_dom(
+     struct boot_info *bi, struct boot_domain *bd);
  
--    if ( (rc = bzimage_parse(image_base, &image_start, &image_len)) != 0 )
-+    if ( (rc = arch_builder_prepare_kernel(image_base, &image_start,
-+                                           bd->kernel->headroom,
-+                                           &image_len)) != 0 )
-         return rc;
++int arch_builder_finalize(struct boot_info *bi);
++
+ unsigned int builder_create_domains(struct boot_info *bi);
  
-     if ( (rc = elf_init(&elf, image_start, image_len)) != 0 )
+ #endif /* __XEN_DOMAIN_BUILDER_H__ */
 -- 
 2.30.2
 
