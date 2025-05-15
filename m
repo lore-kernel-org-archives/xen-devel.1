@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F139C2D0CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 19:56:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985922.1371707 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C66B9C2D0CD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 20:13:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985966.1371727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFegR-0004Y5-JQ; Thu, 15 May 2025 19:55:59 +0000
+	id 1uFews-0000Od-DS; Thu, 15 May 2025 20:12:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985922.1371707; Thu, 15 May 2025 19:55:59 +0000
+Received: by outflank-mailman (output) from mailman id 985966.1371727; Thu, 15 May 2025 20:12:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFegR-0004Xv-GC; Thu, 15 May 2025 19:55:59 +0000
-Received: by outflank-mailman (input) for mailman id 985922;
- Thu, 15 May 2025 19:55:58 +0000
+	id 1uFews-0000OW-Ar; Thu, 15 May 2025 20:12:58 +0000
+Received: by outflank-mailman (input) for mailman id 985966;
+ Thu, 15 May 2025 20:12:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=us+D=X7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uFegQ-00043V-HR
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 19:55:58 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
+ <SRS0=WBoN=X7=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1uFewq-0000ON-U3
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 20:12:57 +0000
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2061e.outbound.protection.outlook.com
+ [2a01:111:f403:2405::61e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9da64d0e-31c6-11f0-9ffb-bf95429c2676;
- Thu, 15 May 2025 21:55:56 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cf680d351so14712645e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 May 2025 12:55:56 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442ebd6fe86sm78320035e9.0.2025.05.15.12.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 12:55:55 -0700 (PDT)
+ id faca22a6-31c8-11f0-9ffb-bf95429c2676;
+ Thu, 15 May 2025 22:12:54 +0200 (CEST)
+Received: from SJ0PR13CA0206.namprd13.prod.outlook.com (2603:10b6:a03:2c3::31)
+ by SJ0PR12MB7008.namprd12.prod.outlook.com (2603:10b6:a03:486::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Thu, 15 May
+ 2025 20:12:49 +0000
+Received: from SJ5PEPF000001ED.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c3:cafe::d0) by SJ0PR13CA0206.outlook.office365.com
+ (2603:10b6:a03:2c3::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.19 via Frontend Transport; Thu,
+ 15 May 2025 20:12:49 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001ED.mail.protection.outlook.com (10.167.242.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8722.18 via Frontend Transport; Thu, 15 May 2025 20:12:49 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 15 May
+ 2025 15:12:47 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 15 May
+ 2025 15:12:47 -0500
+Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Thu, 15 May 2025 15:12:47 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,544 +65,228 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9da64d0e-31c6-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747338956; x=1747943756; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=78lwAjTVEfFZKXkvQFxXqM7GZdpZLNr3fAkXr5zqCcs=;
-        b=DpbHiMQF5fBrdkjr2ZvkkDp6T+3bxf/+9NmbjvUdBO4vDwa3bZx8KI9U0Dowc/6BaM
-         2vTU1NLlkJUA1fqjZN2F9iZfSmoK9gTQBUhaH1H/mChsoZVcuvxd1LZXaSp25hESSEtR
-         TJCZNIBJe8D0Vwx3B+sOwBiZomwv391HUlsio=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747338956; x=1747943756;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=78lwAjTVEfFZKXkvQFxXqM7GZdpZLNr3fAkXr5zqCcs=;
-        b=KFEmyLPcoMsTXuYR6yYwOxLPth5EiR8VaAwYHwQXPnUghHOYcMLHe9C9TvchPxBOvC
-         HUK83NfCDfeG7/anFUbYe/H655XZtXWnHX/vn8ZUM7aAM4c4DzlD0h4nz/wDn9FO/8ra
-         cdEkRggWtN4vdsfbF7JRJCqcy3+1UyHUH+/T9BZBGOji4PPOq143eiLnX+rNLuPUuEVG
-         owsxm+7BKdzVfUrYTpTW0DhT9fCMSnNHwwbXAImcCPg4WdAjVOoiq7kt3ir7IDvK2gku
-         AlX2ZCJCZKjA5qMaAXM2ecpFH7CvgFsbtx+Xk0kIdUexcbHFkOi91dT3uiHb8+0rP4Wx
-         PcBg==
-X-Gm-Message-State: AOJu0YxSKiYjIHgvC+thIqG8F2/pLmr0n9+4meLUaDhkGO/hcjd3Ry0A
-	Dg1EC2GGqC1S1NkWd5HQyz+Y2VJ9VuuiXQw3HMxwmihNcxh9JN2nrnWr6/dYeYd59jpTOrs1xU7
-	4aefd
-X-Gm-Gg: ASbGncs2aVlxjSGhE7vum4yj0DylQpgzIuTosdGuzKssFkBe8TsTkjromnov7lap3NE
-	vD9Wjzija4wkaRSrjcXmK8cV2OhaX/M0YNO0FA6BTL41kdDorLsx4PeoUPfIBA+2flsImjXSve8
-	1A9eShpwrgQJchmz3CtGzPPzVv1hhvJhu3N8EaKLIfnm8UlxLkAhLOfQaXusbQN5zgSNRqaOVox
-	ouYS6+9NHykqgKd0CoSayPd+QNg7eN6NwwbTZPYX/UKGibnh1PUjJC00Beml5NJ+J5HnqdzvFmk
-	F5VGZH0+Fgici52n5CP5PfJuZo9+Iyl3GKJ6JgoRLGhKlMA5jAY+sQgva5sJevNEX4hCaCXwB1x
-	OZNOfkfey0cA/AVgSlIozuroaNXblzCP5zhs=
-X-Google-Smtp-Source: AGHT+IF3How/2DZVnEKz0UT2FxoFJbzP/0XrdjvWYJ0uNhdGqw3ZlmHN9uoKmy9iREMsNxkVxVpMjA==
-X-Received: by 2002:a05:600c:46c9:b0:442:f8f6:48e5 with SMTP id 5b1f17b1804b1-442f8f6494fmr43419715e9.8.1747338955876;
-        Thu, 15 May 2025 12:55:55 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 2/3] x86: Use asm_inline for ALTERNATIVE() and EXTABLE
-Date: Thu, 15 May 2025 20:55:48 +0100
-Message-Id: <20250515195549.3703017-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250515195549.3703017-1-andrew.cooper3@citrix.com>
-References: <20250515195549.3703017-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: faca22a6-31c8-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Tk66sZPBRraqtp+2D0sUrsgGQR0/cKRqlI69sfiXH/Pz0dujCOjdc/HIswhvbCqHUsPqOWl3ssJ1JTJMC+A32BfuAgKWCTqW6orG6brWnamJK7sNWQw6N90CIgZbHho7glShs+5gZuVT4c9RA53p2HFttccaVfWScG6Zhty4UfviGYeveknCNZ8G/MKRIbzRES/2TT3+WqIRNhEntUrFj6sIY2KjpYRoBh/mVB9JkEGfAqtLGJUXEaoiL7ZLUa6sponMEDI+2IdXzyyMjRLp6Srhy/MwZq3a6Mdl2pxaGP1zx71/ihviAkMNyeRFIJpyp/lQT6wkL9x2w4Zep2QSIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YbjAW9090cd/bjSRbjftgw3ADh8FbS19dgg6yyE6XXs=;
+ b=Shl/YlGbOIkcMm902EsFnjpxmO22G2wROc3i8TgIg/Qo21+LEqGrNqQk0IvfMHAPgHOeLXbFDy3kSTktllDRbDz5oJ7Hj/Htstu3je1dHP17tHfls9uobVb1WhNEu+t/eeeFmckrhIFS9TFG7+fXj5r+hdSYviFPMGs0KFc7s3st7IvfIVUHooq5c2+DTOcpHetaIFHSqEaRV9Hf6pUhysauBL/Kb8HRfB3cMOnAlR4aXDFL0DxyZlqxxq7ad2EUZ5xUNdTcYemKLXxuRhJ2oPkSktYccJkJyE3ZWz7DnbTkxnzgdjH4cQODOXTQ1G+MJzZSWfc2+ECrdAsk3XCA2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YbjAW9090cd/bjSRbjftgw3ADh8FbS19dgg6yyE6XXs=;
+ b=gkn4UQjtDD8xRU0dv5bQD5qLU3W+NRgQEWsFrzlAEZ8LeCJwLMiFdzO2saThboeQ9uTM2DYJ8SbcgEGNl83/VdqrTkplwoXhj1sdm18kFz2ZtJ8hmr2X4/cBkkcw/lcDJFABRXat9eVh3BHVCyTTpLKKcdvR4dc4FCmHKCqsCZ4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
+Subject: [RFC PATCH v3] xenconsole: Add connected flag
+Date: Thu, 15 May 2025 16:12:45 -0400
+Message-ID: <20250515201245.80612-1-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001ED:EE_|SJ0PR12MB7008:EE_
+X-MS-Office365-Filtering-Correlation-Id: 16ae0ad1-216b-4ad2-fd69-08dd93ecdd61
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?WHVYJLCNR6zVgP9350kci3qrbzEm2N1cub0Y87IjrE6ueLUx/hxNsbWoLQrY?=
+ =?us-ascii?Q?J2lvTZucJfuJb8dkwJEtSwSQpuJF/94t5exSILYHs3ASlc0rbXbqejlDPrzG?=
+ =?us-ascii?Q?yaXngYzVINE/6pij1ogjgCYWe9F1WoC0a1fwowIxaCAF7XI7Pa3xHlDcAkJZ?=
+ =?us-ascii?Q?I/Dahs1/WbTKgD5L+DuxQI2v8w/sjYtUHKHuv+8HxipSbaLDRjZa7XEhYJfP?=
+ =?us-ascii?Q?I4RjsikwkKp9Up6nXT7PXXgzg4FMeiLhFJTxojPow+u3RU2ZZmgIaSelEJF4?=
+ =?us-ascii?Q?a4nfgorHkXTCun7q9chPSBTiXR/4K6v740NcVTfcoXOeytdG7bDeHL70/OIa?=
+ =?us-ascii?Q?QU4SGW4SPIraNv5qUfbQjie34h8rzfifwK9o/gpmHzO+jr3YXWednxUny8oB?=
+ =?us-ascii?Q?1CnRliZ2zO2VG1WtsiNPX24hCItefVKJEW0j36e57C24msL8B8HVThV/MPFm?=
+ =?us-ascii?Q?bjS+ay4WILfCRqPaghmowA75EvkMsAhi7CXxYcHyXyCuBWsleHXFUwSHrmER?=
+ =?us-ascii?Q?sRalFvFWfsOeWl399b8ZuDwXulxwuTZq4Eo+E6PCztJ90xWkMPBWLQrUUXY5?=
+ =?us-ascii?Q?t7pelji/3UnFwEWm/4uflCMvWqvGb9MgdBYD+gdyQecqw4LIvAIBJJjHoVay?=
+ =?us-ascii?Q?d6DsVctUKpgcgJ2iuC14T9rZUGV6JAKSIrc/rKN4fOD6NpqwybZ+gFPypB5g?=
+ =?us-ascii?Q?aBJwogyTxDGUrogbUfBfLgmvXifMlcgGqvUODz/U7L28AM7wlm15Swuhx3r/?=
+ =?us-ascii?Q?FqcmDWtUy5L4P5Vi7IWkd5UXb4CRWV6nbRh2ry3PJ/KewdxQHGYkhyvCIaBy?=
+ =?us-ascii?Q?6Unzx8aYIkCCphWX5MY/bSkwQhCvQzSQqh0Y7FmqBau/rNHeAOsCS3/YgUh2?=
+ =?us-ascii?Q?qzAKuQ0wDmvhjncSfy/OZlVyLSKHHR/oBLffwTgPzuAF6m2sOaCZwz6iwX6t?=
+ =?us-ascii?Q?IgqOLgceNlw33una+3GKicFZNNGESQSe8gCmO29EScGgrXWWl7DrwWNweed0?=
+ =?us-ascii?Q?hX5U0CXHRpBij8Xb/AoWTRSw8TNcpDfD5kHEhPL3PQf4zEAb2rRd69PzNoU0?=
+ =?us-ascii?Q?WuBaY9+OcYRawEfYJZH6m9EdzfdbGb1mPlNj95dIP3WCq3hDN8cn6TCK+EQk?=
+ =?us-ascii?Q?rYquNjmyeiAqKTzjnnpgMi4Ku7/0kPg4va1LJHViFr3kgvY4C0bLjbeySTEw?=
+ =?us-ascii?Q?kygJirl8g8jqAzDi8dCMwv4zI9Zx/O4WJBqA/NfJd/KgFPBNNIowif8Gk1bN?=
+ =?us-ascii?Q?fNiqVOncaTwu20rbToXPiIvJri1y7GMHAjYvZMRi1np8yH0bh7Gn+bl/kSx7?=
+ =?us-ascii?Q?eM/vzUL+wF9W60q1vut7EGryHvHmd+6PJP2e5c1ZxptgmNJEoCdZfefO1FJ4?=
+ =?us-ascii?Q?GME9rqEJXecmUQppggMfEYzPE3Yms8XitGw5WVjY4LwgPtlcKYusK5tSkSmG?=
+ =?us-ascii?Q?0bvzPmhav4WP5xUqi5kAoQB6v8ifNg5l+g7vXCpZrK1CI3X6L9yTeM0qXfH9?=
+ =?us-ascii?Q?zrACeY3HHEGzhvcqN0j+AQJbLsQEKwBX7EOA?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2025 20:12:49.0965
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16ae0ad1-216b-4ad2-fd69-08dd93ecdd61
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ5PEPF000001ED.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7008
 
-... when there really are only a few instructions in line.
+Sending again with an expanded description.  RFC to have a discussion
+about the approach.
 
-In some cases, reformat to reduce left-hand margine space.
+With hyperlaunch, a domU can start before its console ring is connected
+by xenconsoled.  With nothing emptying the ring, it can quickly fill
+during boot.  In domU_write_console(), __write_console returns 0 when
+the ring is full.  This loops spins until xenconsoled starts emptying
+the ring:
 
-No functional change.
+        while (len) {
+                ssize_t sent = __write_console(cons, data, len);
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+                if (sent < 0)
+                        return sent;
+
+                data += sent;
+                len -= sent;
+
+                if (unlikely(len))
+                        HYPERVISOR_sched_op(SCHEDOP_yield, NULL);
+        }
+
+The goal of this patch is to add a way for the frontend to know when a
+console is connected.  This patch adds a new flag to the end of the
+console ring structure.  It is used for the backend to indicate that it
+has connected and started servicing the page.
+
+The two values are
+XENCONSOLE_DISCONNECTED 1
+XENCONSOLE_CONNECTED    0
+
+XENCONSOLE_DISCONNECTED indicates to the guest that ring is
+disconnected, so it will not be serviced.  The guest can avoid writing
+into it in that case.  A domU can use console hypercalls and only
+transition to the ring when it is connected and won't fill and block.
+
+Once the backend (xenconsoled) maps and starts servicing the
+console, the flag will be set to XENCONSOLE_CONNECTED (0) to indicate
+the backend state to the frontend.
+
+With the flag change, the backend sends an event channel notification so
+the frontend can check the state.  Though this is not strictly
+necessary.
+
+The connected value as 0 will be match the default of a zero-ed console
+page.  Hyperlaunch can set the flag to XENCONSOLE_DISCONNECTED and let
+xenconsoled set to XENCONSOLE_CONNECTED.
+
+In terms of compatibility:
+Old domU drivers won't check the flag, so no change.
+New domU running on a new xen/xenconsoled will wait for the flag.
+New domU on an old xen/xenconsoled should only see a 0 for the flag and
+behave as if connected.
+
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
+v3:
+Flip flag values so 0 is connected.
 
-v2:
- * New, split out of previous single patch
- * Include EXTABLE
+The other option would be to add distinct features and connected fields:
+uint32_t features
+uint32_t connected
 
-There are some uses of _ASM_EXTABLE() which are in blocks with many
-instructions which are left unconverted.  There are also a couple for which I
-already have pending cleanup, which I've left alone to reduce churn.
+New domUs would check features for a magic value or flag to then know
+they can rely on connected transitioning.
+
+I think making XENCONSOLE_CONNECTED == 0 side steps the need for
+an additional features field.  As long as assuming zero-ed memory is
+acceptable.  However, this only matters for a hyperlaunched guest -
+xenconsoled will normally readily connect the console and set the value.
+
+This assumes that existing frontends are not using the flag space for
+some other use.
+
+The idea of the event channel notification is to let the domU receive an
+indication that xenconsoled is connected.  For xenstore, the xenstore
+driver owns the event channel/irq and can rebind it.  For hvc_xen, the
+hvc subsystem owns the irq, so it isn't readily available for rebinding.
+Maybe this should just be dropped.
+
+I had the idea for the kernel to use a static key and switch writing
+from the hypercall to the PV ring once connected.  It didn't actually
+work in my short attempt - I think changing the static key from within
+an interupt was wrong.  I fell back to just checking the flag directly
+without an optimization.  That would work and would make the event
+channel notification unnecessary.
 ---
- xen/arch/x86/cpu/amd.c                      | 52 +++++++++++----------
- xen/arch/x86/domain.c                       | 21 +++++----
- xen/arch/x86/extable.c                      | 21 +++++----
- xen/arch/x86/hvm/vmx/vmcs.c                 | 15 +++---
- xen/arch/x86/i387.c                         |  4 +-
- xen/arch/x86/include/asm/alternative-call.h |  3 +-
- xen/arch/x86/include/asm/alternative.h      | 36 ++++++++------
- xen/arch/x86/include/asm/hvm/vmx/vmx.h      | 15 +++---
- xen/arch/x86/include/asm/uaccess.h          |  4 +-
- xen/arch/x86/pv/misc-hypercalls.c           | 19 ++++----
- xen/arch/x86/traps.c                        | 48 ++++++++++---------
- xen/arch/x86/usercopy.c                     |  6 +--
- 12 files changed, 132 insertions(+), 112 deletions(-)
+ tools/console/daemon/io.c       |  6 ++++++
+ xen/include/public/io/console.h | 13 +++++++++++++
+ 2 files changed, 19 insertions(+)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 37d67dd15c89..27ae16780857 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -60,41 +60,45 @@ static inline int rdmsr_amd_safe(unsigned int msr, unsigned int *lo,
- 				 unsigned int *hi)
- {
- #ifdef CONFIG_CC_HAS_ASM_GOTO_OUTPUT
--    asm goto ( "1: rdmsr\n\t"
--               _ASM_EXTABLE(1b, %l[fault])
--               : "=a" (*lo), "=d" (*hi)
--               : "c" (msr), "D" (0x9c5a203a)
--               :
--               : fault );
-+    asm_inline goto (
-+        "1: rdmsr\n\t"
-+        _ASM_EXTABLE(1b, %l[fault])
-+        : "=a" (*lo), "=d" (*hi)
-+        : "c" (msr), "D" (0x9c5a203a)
-+        :
-+        : fault );
-+
-     return 0;
+diff --git a/tools/console/daemon/io.c b/tools/console/daemon/io.c
+index bb739bdb8c..10524eead7 100644
+--- a/tools/console/daemon/io.c
++++ b/tools/console/daemon/io.c
+@@ -731,6 +731,9 @@ static int console_create_ring(struct console *con)
+ 		con->ring_ref = ring_ref;
+ 	}
  
-  fault:
-     return -EFAULT;
- #else
--	int err;
--
--	asm volatile("1: rdmsr\n2:\n"
--		     ".section .fixup,\"ax\"\n"
--		     "3: movl %6,%2\n"
--		     "   jmp 2b\n"
--		     ".previous\n"
--		     _ASM_EXTABLE(1b, 3b)
--		     : "=a" (*lo), "=d" (*hi), "=r" (err)
--		     : "c" (msr), "D" (0x9c5a203a), "2" (0), "i" (-EFAULT));
--
--	return err;
-+    int err;
++	/* Mark the console as connected. */
++	con->interface->flag = XENCONSOLE_CONNECTED;
 +
-+    asm_inline volatile (
-+        "1: rdmsr\n2:\n"
-+        ".section .fixup,\"ax\"\n"
-+        "3: movl %6,%2\n"
-+        "   jmp 2b\n"
-+        ".previous\n"
-+        _ASM_EXTABLE(1b, 3b)
-+        : "=a" (*lo), "=d" (*hi), "=r" (err)
-+        : "c" (msr), "D" (0x9c5a203a), "2" (0), "i" (-EFAULT) );
+ 	/* Go no further if port has not changed and we are still bound. */
+ 	if (remote_port == con->remote_port) {
+ 		xc_evtchn_status_t status = {
+@@ -780,6 +783,9 @@ static int console_create_ring(struct console *con)
+ 	if (log_guest && (con->log_fd == -1))
+ 		con->log_fd = create_console_log(con);
+ 
++	/* Notify to check flags field. */
++	xenevtchn_notify(con->xce_handle, con->local_port);
 +
-+    return err;
- #endif
+  out:
+ 	return err;
  }
+diff --git a/xen/include/public/io/console.h b/xen/include/public/io/console.h
+index 4509b4b689..c16ef42ef4 100644
+--- a/xen/include/public/io/console.h
++++ b/xen/include/public/io/console.h
+@@ -19,6 +19,19 @@ struct xencons_interface {
+     char out[2048];
+     XENCONS_RING_IDX in_cons, in_prod;
+     XENCONS_RING_IDX out_cons, out_prod;
++/*
++ * Flag values signaling from backend to frontend whether the console is
++ * connected.  i.e. Whether it will be serviced and emptied.
++ *
++ * The flag starts as disconnected.
++ */
++#define XENCONSOLE_DISCONNECTED 1
++/*
++ * The flag is set to connected when the backend connects and the console
++ * will be serviced.
++ */
++#define XENCONSOLE_CONNECTED    0
++    uint32_t flag;
+ };
  
- static inline int wrmsr_amd_safe(unsigned int msr, unsigned int lo,
-                                  unsigned int hi)
- {
--    asm goto ( "1: wrmsr\n\t"
--               _ASM_EXTABLE(1b, %l[fault])
--               :
--               : "c" (msr), "a" (lo), "d" (hi), "D" (0x9c5a203a)
--               :
--               : fault );
-+    asm_inline goto (
-+        "1: wrmsr\n\t"
-+        _ASM_EXTABLE(1b, %l[fault])
-+        :
-+        : "c" (msr), "a" (lo), "d" (hi), "D" (0x9c5a203a)
-+        :
-+        : fault );
- 
-     return 0;
- 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index f197dad4c0cd..7536b6c8717e 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1706,16 +1706,17 @@ static void load_segments(struct vcpu *n)
-      * @all_segs_okay in function scope, and load NUL into @sel.
-      */
- #define TRY_LOAD_SEG(seg, val)                          \
--    asm volatile ( "1: mov %k[_val], %%" #seg "\n\t"    \
--                   "2:\n\t"                             \
--                   ".section .fixup, \"ax\"\n\t"        \
--                   "3: xor %k[ok], %k[ok]\n\t"          \
--                   "   mov %k[ok], %%" #seg "\n\t"      \
--                   "   jmp 2b\n\t"                      \
--                   ".previous\n\t"                      \
--                   _ASM_EXTABLE(1b, 3b)                 \
--                   : [ok] "+r" (all_segs_okay)          \
--                   : [_val] "rm" (val) )
-+    asm_inline volatile (                               \
-+        "1: mov %k[_val], %%" #seg "\n\t"               \
-+        "2:\n\t"                                        \
-+        ".section .fixup, \"ax\"\n\t"                   \
-+        "3: xor %k[ok], %k[ok]\n\t"                     \
-+        "   mov %k[ok], %%" #seg "\n\t"                 \
-+        "   jmp 2b\n\t"                                 \
-+        ".previous\n\t"                                 \
-+        _ASM_EXTABLE(1b, 3b)                            \
-+        : [ok] "+r" (all_segs_okay)                     \
-+        : [_val] "rm" (val) )
- 
-     if ( !compat )
-     {
-diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
-index 1572efa69a00..de392024527c 100644
---- a/xen/arch/x86/extable.c
-+++ b/xen/arch/x86/extable.c
-@@ -186,16 +186,17 @@ int __init cf_check stub_selftest(void)
-         place_ret(ptr + ARRAY_SIZE(tests[i].opc));
-         unmap_domain_page(ptr);
- 
--        asm volatile ( "INDIRECT_CALL %[stb]\n"
--                       ".Lret%=:\n\t"
--                       ".pushsection .fixup,\"ax\"\n"
--                       ".Lfix%=:\n\t"
--                       "pop %[exn]\n\t"
--                       "jmp .Lret%=\n\t"
--                       ".popsection\n\t"
--                       _ASM_EXTABLE(.Lret%=, .Lfix%=)
--                       : [exn] "+m" (res) ASM_CALL_CONSTRAINT
--                       : [stb] "r" (addr), "a" (tests[i].rax));
-+        asm_inline volatile (
-+            "INDIRECT_CALL %[stb]\n"
-+            ".Lret%=:\n\t"
-+            ".pushsection .fixup,\"ax\"\n"
-+            ".Lfix%=:\n\t"
-+            "pop %[exn]\n\t"
-+            "jmp .Lret%=\n\t"
-+            ".popsection\n\t"
-+            _ASM_EXTABLE(.Lret%=, .Lfix%=)
-+            : [exn] "+m" (res) ASM_CALL_CONSTRAINT
-+            : [stb] "r" (addr), "a" (tests[i].rax) );
- 
-         if ( res.raw != tests[i].res.raw )
-         {
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index a44475ae15bd..59f4d1d86f02 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -749,13 +749,14 @@ static int _vmx_cpu_up(bool bsp)
-     if ( bsp && (rc = vmx_cpu_up_prepare(cpu)) != 0 )
-         return rc;
- 
--    asm goto ( "1: vmxon %[addr]\n\t"
--               "   jbe %l[vmxon_fail]\n\t"
--               _ASM_EXTABLE(1b, %l[vmxon_fault])
--               :
--               : [addr] "m" (this_cpu(vmxon_region))
--               : "memory"
--               : vmxon_fail, vmxon_fault );
-+    asm_inline goto (
-+        "1: vmxon %[addr]\n\t"
-+        "   jbe %l[vmxon_fail]\n\t"
-+        _ASM_EXTABLE(1b, %l[vmxon_fault])
-+        :
-+        : [addr] "m" (this_cpu(vmxon_region))
-+        : "memory"
-+        : vmxon_fail, vmxon_fault );
- 
-     this_cpu(vmxon) = 1;
- 
-diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
-index 5429531ddd5f..b84cd6f7a9e1 100644
---- a/xen/arch/x86/i387.c
-+++ b/xen/arch/x86/i387.c
-@@ -62,7 +62,7 @@ static inline void fpu_fxrstor(struct vcpu *v)
-     switch ( __builtin_expect(fpu_ctxt->x[FPU_WORD_SIZE_OFFSET], 8) )
-     {
-     default:
--        asm volatile (
-+        asm_inline volatile (
-             "1: fxrstorq %0\n"
-             ".section .fixup,\"ax\"   \n"
-             "2: push %%"__OP"ax       \n"
-@@ -82,7 +82,7 @@ static inline void fpu_fxrstor(struct vcpu *v)
-             : "m" (*fpu_ctxt), "i" (sizeof(*fpu_ctxt) / 4) );
-         break;
-     case 4: case 2:
--        asm volatile (
-+        asm_inline volatile (
-             "1: fxrstor %0         \n"
-             ".section .fixup,\"ax\"\n"
-             "2: push %%"__OP"ax    \n"
-diff --git a/xen/arch/x86/include/asm/alternative-call.h b/xen/arch/x86/include/asm/alternative-call.h
-index bbc49a5274d9..b22c10c32283 100644
---- a/xen/arch/x86/include/asm/alternative-call.h
-+++ b/xen/arch/x86/include/asm/alternative-call.h
-@@ -87,7 +87,8 @@ struct alt_call {
-     rettype ret_;                                                  \
-     register unsigned long r10_ asm("r10");                        \
-     register unsigned long r11_ asm("r11");                        \
--    asm volatile ("1: call *%c[addr](%%rip)\n\t"                   \
-+    asm_inline volatile (                                          \
-+                  "1: call *%c[addr](%%rip)\n\t"                   \
-                   ".pushsection .alt_call_sites, \"a\", @progbits\n\t"  \
-                   ".long 1b - .\n\t"                               \
-                   ".popsection"                                    \
-diff --git a/xen/arch/x86/include/asm/alternative.h b/xen/arch/x86/include/asm/alternative.h
-index e17be8ddfd82..0482bbf7cbf1 100644
---- a/xen/arch/x86/include/asm/alternative.h
-+++ b/xen/arch/x86/include/asm/alternative.h
-@@ -126,12 +126,15 @@ extern void alternative_instructions(void);
-  * without volatile and memory clobber.
-  */
- #define alternative(oldinstr, newinstr, feature)                        \
--        asm volatile (ALTERNATIVE(oldinstr, newinstr, feature) : : : "memory")
-+    asm_inline volatile (                                               \
-+        ALTERNATIVE(oldinstr, newinstr, feature)                        \
-+        ::: "memory" )
- 
- #define alternative_2(oldinstr, newinstr1, feature1, newinstr2, feature2) \
--	asm volatile (ALTERNATIVE_2(oldinstr, newinstr1, feature1,	\
--				    newinstr2, feature2)		\
--		      : : : "memory")
-+    asm_inline volatile (                                               \
-+        ALTERNATIVE_2(oldinstr, newinstr1, feature1,                    \
-+                      newinstr2, feature2)                              \
-+        ::: "memory" )
- 
- /*
-  * Alternative inline assembly with input.
-@@ -143,14 +146,16 @@ extern void alternative_instructions(void);
-  * If you use variable sized constraints like "m" or "g" in the
-  * replacement make sure to pad to the worst case length.
-  */
--#define alternative_input(oldinstr, newinstr, feature, input...)	\
--	asm volatile (ALTERNATIVE(oldinstr, newinstr, feature)		\
--		      : : input)
-+#define alternative_input(oldinstr, newinstr, feature, input...)        \
-+    asm_inline volatile (                                               \
-+        ALTERNATIVE(oldinstr, newinstr, feature)                        \
-+        :: input )
- 
- /* Like alternative_input, but with a single output argument */
--#define alternative_io(oldinstr, newinstr, feature, output, input...)	\
--	asm volatile (ALTERNATIVE(oldinstr, newinstr, feature)		\
--		      : output : input)
-+#define alternative_io(oldinstr, newinstr, feature, output, input...)   \
-+    asm_inline volatile (                                               \
-+        ALTERNATIVE(oldinstr, newinstr, feature)                        \
-+        : output : input )
- 
- /*
-  * This is similar to alternative_io. But it has two features and
-@@ -160,11 +165,12 @@ extern void alternative_instructions(void);
-  * Otherwise, if CPU has feature1, newinstr1 is used.
-  * Otherwise, oldinstr is used.
-  */
--#define alternative_io_2(oldinstr, newinstr1, feature1, newinstr2,	\
--			 feature2, output, input...)			\
--	asm volatile(ALTERNATIVE_2(oldinstr, newinstr1, feature1,	\
--				   newinstr2, feature2)			\
--		     : output : input)
-+#define alternative_io_2(oldinstr, newinstr1, feature1, newinstr2,      \
-+                         feature2, output, input...)                    \
-+    asm_inline volatile (                                               \
-+        ALTERNATIVE_2(oldinstr, newinstr1, feature1,                    \
-+                      newinstr2, feature2)                              \
-+        : output : input )
- 
- /* Use this macro(s) if you need more than one output parameter. */
- #define ASM_OUTPUT2(a...) a
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-index d85b52b9d522..56bea252cc5a 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -431,13 +431,14 @@ static always_inline void __invvpid(unsigned long type, u16 vpid, u64 gva)
-     }  operand = {vpid, 0, gva};
- 
-     /* Fix up #UD exceptions which occur when TLBs are flushed before VMXON. */
--    asm goto ( "1: invvpid %[operand], %[type]\n\t"
--               "   jbe %l[vmfail]\n\t"
--               "2:" _ASM_EXTABLE(1b, 2b)
--               :
--               : [operand] "m" (operand), [type] "r" (type)
--               : "memory"
--               : vmfail );
-+    asm_inline goto (
-+        "1: invvpid %[operand], %[type]\n\t"
-+        "   jbe %l[vmfail]\n\t"
-+        "2:" _ASM_EXTABLE(1b, 2b)
-+        :
-+        : [operand] "m" (operand), [type] "r" (type)
-+        : "memory"
-+        : vmfail );
-     return;
- 
-  vmfail:
-diff --git a/xen/arch/x86/include/asm/uaccess.h b/xen/arch/x86/include/asm/uaccess.h
-index 2d01669b9610..719d053936b9 100644
---- a/xen/arch/x86/include/asm/uaccess.h
-+++ b/xen/arch/x86/include/asm/uaccess.h
-@@ -154,7 +154,7 @@ struct __large_struct { unsigned long buf[100]; };
-  * aliasing issues.
-  */
- #define put_unsafe_asm(x, addr, GUARD, err, itype, rtype, ltype, errret) \
--	__asm__ __volatile__(						\
-+	asm_inline volatile (						\
- 		GUARD(							\
- 		"	guest_access_mask_ptr %[ptr], %[scr1], %[scr2]\n" \
- 		)							\
-@@ -171,7 +171,7 @@ struct __large_struct { unsigned long buf[100]; };
- 		  "[ptr]" (addr), [errno] "i" (errret))
- 
- #define get_unsafe_asm(x, addr, GUARD, err, rtype, ltype, errret)	\
--	__asm__ __volatile__(						\
-+	asm_inline volatile (						\
- 		GUARD(							\
- 		"	guest_access_mask_ptr %[ptr], %[scr1], %[scr2]\n" \
- 		)							\
-diff --git a/xen/arch/x86/pv/misc-hypercalls.c b/xen/arch/x86/pv/misc-hypercalls.c
-index b529f00ea127..17030d800d1b 100644
---- a/xen/arch/x86/pv/misc-hypercalls.c
-+++ b/xen/arch/x86/pv/misc-hypercalls.c
-@@ -230,15 +230,16 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-          * Anyone wanting to check for errors from this hypercall should
-          * re-read %gs and compare against the input.
-          */
--        asm volatile ( "1: mov %[sel], %%gs\n\t"
--                       ".section .fixup, \"ax\", @progbits\n\t"
--                       "2: mov %k[flat], %%gs\n\t"
--                       "   xor %[sel], %[sel]\n\t"
--                       "   jmp 1b\n\t"
--                       ".previous\n\t"
--                       _ASM_EXTABLE(1b, 2b)
--                       : [sel] "+r" (sel)
--                       : [flat] "r" (FLAT_USER_DS32) );
-+        asm_inline volatile (
-+            "1: mov %[sel], %%gs\n\t"
-+            ".section .fixup, \"ax\", @progbits\n\t"
-+            "2: mov %k[flat], %%gs\n\t"
-+            "   xor %[sel], %[sel]\n\t"
-+            "   jmp 1b\n\t"
-+            ".previous\n\t"
-+            _ASM_EXTABLE(1b, 2b)
-+            : [sel] "+r" (sel)
-+            : [flat] "r" (FLAT_USER_DS32) );
- 
-         /* Update the cache of the inactive base, as read from the GDT/LDT. */
-         v->arch.pv.gs_base_user = read_gs_base();
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 25e0d5777e6e..c94779b4ad4f 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -126,27 +126,29 @@ void show_code(const struct cpu_user_regs *regs)
-      * Copy forward from regs->rip.  In the case of a fault, %ecx contains the
-      * number of bytes remaining to copy.
-      */
--    asm volatile ("1: rep movsb; 2:"
--                  _ASM_EXTABLE(1b, 2b)
--                  : "=&c" (missing_after),
--                    "=&D" (tmp), "=&S" (tmp)
--                  : "0" (ARRAY_SIZE(insns_after)),
--                    "1" (insns_after),
--                    "2" (regs->rip));
-+    asm_inline volatile (
-+        "1: rep movsb; 2:"
-+        _ASM_EXTABLE(1b, 2b)
-+        : "=&c" (missing_after),
-+          "=&D" (tmp), "=&S" (tmp)
-+        : "0" (ARRAY_SIZE(insns_after)),
-+          "1" (insns_after),
-+          "2" (regs->rip) );
- 
-     /*
-      * Copy backwards from regs->rip - 1.  In the case of a fault, %ecx
-      * contains the number of bytes remaining to copy.
-      */
--    asm volatile ("std;"
--                  "1: rep movsb;"
--                  "2: cld;"
--                  _ASM_EXTABLE(1b, 2b)
--                  : "=&c" (missing_before),
--                    "=&D" (tmp), "=&S" (tmp)
--                  : "0" (ARRAY_SIZE(insns_before)),
--                    "1" (insns_before + ARRAY_SIZE(insns_before) - 1),
--                    "2" (regs->rip - 1));
-+    asm_inline volatile (
-+        "std;"
-+        "1: rep movsb;"
-+        "2: cld;"
-+        _ASM_EXTABLE(1b, 2b)
-+        : "=&c" (missing_before),
-+          "=&D" (tmp), "=&S" (tmp)
-+        : "0" (ARRAY_SIZE(insns_before)),
-+          "1" (insns_before + ARRAY_SIZE(insns_before) - 1),
-+          "2" (regs->rip - 1) );
-     clac();
- 
-     printk("Xen code around <%p> (%ps)%s:\n",
-@@ -524,12 +526,14 @@ static void show_trace(const struct cpu_user_regs *regs)
-     printk("Xen call trace:\n");
- 
-     /* Guarded read of the stack top. */
--    asm ( "1: mov %[data], %[tos]; 2:\n"
--          ".pushsection .fixup,\"ax\"\n"
--          "3: movb $1, %[fault]; jmp 2b\n"
--          ".popsection\n"
--          _ASM_EXTABLE(1b, 3b)
--          : [tos] "+r" (tos), [fault] "+qm" (fault) : [data] "m" (*sp) );
-+    asm_inline (
-+        "1: mov %[data], %[tos]; 2:\n"
-+        ".pushsection .fixup,\"ax\"\n"
-+        "3: movb $1, %[fault]; jmp 2b\n"
-+        ".popsection\n"
-+        _ASM_EXTABLE(1b, 3b)
-+        : [tos] "+r" (tos), [fault] "+qm" (fault)
-+        : [data] "m" (*sp) );
- 
-     /*
-      * If RIP looks sensible, or the top of the stack doesn't, print RIP at
-diff --git a/xen/arch/x86/usercopy.c b/xen/arch/x86/usercopy.c
-index 7ab2009efe4c..a24b52cc66c1 100644
---- a/xen/arch/x86/usercopy.c
-+++ b/xen/arch/x86/usercopy.c
-@@ -19,7 +19,7 @@ unsigned int copy_to_guest_ll(void __user *to, const void *from, unsigned int n)
-     GUARD(unsigned dummy);
- 
-     stac();
--    asm volatile (
-+    asm_inline volatile (
-         GUARD(
-         "    guest_access_mask_ptr %[to], %q[scratch1], %q[scratch2]\n"
-         )
-@@ -39,7 +39,7 @@ unsigned int copy_from_guest_ll(void *to, const void __user *from, unsigned int
-     unsigned dummy;
- 
-     stac();
--    asm volatile (
-+    asm_inline volatile (
-         GUARD(
-         "    guest_access_mask_ptr %[from], %q[scratch1], %q[scratch2]\n"
-         )
-@@ -101,7 +101,7 @@ unsigned int clear_guest_pv(void __user *to, unsigned int n)
-         long dummy;
- 
-         stac();
--        asm volatile (
-+        asm_inline volatile (
-             "    guest_access_mask_ptr %[to], %[scratch1], %[scratch2]\n"
-             "1:  rep stosb\n"
-             "2:\n"
+ #ifdef XEN_WANT_FLEX_CONSOLE_RING
 -- 
-2.39.5
+2.49.0
 
 
