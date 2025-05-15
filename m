@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02C9AC2D0CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:20:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.985333.1371258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FABCC3ABC9
+	for <xen-devel@archiver.kernel.org>; Thu, 15 May 2025 13:20:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.985339.1371273 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYVp-0004tv-Dy; Thu, 15 May 2025 13:20:37 +0000
+	id 1uFYVr-0005BU-14; Thu, 15 May 2025 13:20:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 985333.1371258; Thu, 15 May 2025 13:20:37 +0000
+Received: by outflank-mailman (output) from mailman id 985339.1371273; Thu, 15 May 2025 13:20:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFYVp-0004sT-9S; Thu, 15 May 2025 13:20:37 +0000
-Received: by outflank-mailman (input) for mailman id 985333;
- Thu, 15 May 2025 13:20:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uFYVq-0005Af-PO; Thu, 15 May 2025 13:20:38 +0000
+Received: by outflank-mailman (input) for mailman id 985339;
+ Thu, 15 May 2025 13:20:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WRi0=X7=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1uFYUR-0001J6-Bp
- for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:19:11 +0000
+ id 1uFYVF-00017p-Bu
+ for xen-devel@lists.xenproject.org; Thu, 15 May 2025 13:20:01 +0000
 Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f50c843-318f-11f0-9eb6-5ba50f476ded;
- Thu, 15 May 2025 15:19:10 +0200 (CEST)
-Received: by mx.zohomail.com with SMTPS id 1747315077086430.3181831510035;
- Thu, 15 May 2025 06:17:57 -0700 (PDT)
+ [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4c85656f-318f-11f0-9ffb-bf95429c2676;
+ Thu, 15 May 2025 15:19:59 +0200 (CEST)
+Received: by mx.zohomail.com with SMTPS id 1747315099866282.80562315486736;
+ Thu, 15 May 2025 06:18:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,25 +40,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f50c843-318f-11f0-9eb6-5ba50f476ded
-ARC-Seal: i=1; a=rsa-sha256; t=1747315080; cv=none; 
+X-Inumbo-ID: 4c85656f-318f-11f0-9ffb-bf95429c2676
+ARC-Seal: i=1; a=rsa-sha256; t=1747315101; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=NtT9ACVh181HluxxaVMaxLDS+33yLsG964fBTaurRrQt57veOSD4fbxCn/ji2z+uFBIvm2E3OzUskUjl5zzSjipibQxzgBGbDNamPzK36oFyFfEg7ug75QcQu8ucx3WuuV36o/HQeyd/va2HN8WAvh+0O96zRfc0ELoF8uQRGXA=
+	b=aRh+yUXQmYU+RmfETNdrkEGzca5UOD2tTQn91CdoLUbD8mzZZZfp7pt1s+72++uLolHTzggwg7WirPXBxoz/RiWDt7CNZOWfn0zv9JOrOzC7uvevXl+se5Fl2W6QEy7LM+iVtSj6yiLKGw06hOi10iYUzmwig7gLKY7hXalBbv8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1747315080; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=SXbug0DKOX8Y5Ce3k9H738ujkJ9TrrqxK2HK+AOKWG0=; 
-	b=Oj9hx0dX01pSU8sBn83Lr95z4ck9C/ivXQ80c8rROZJqv23PUDouIXsAaMTEEdD4OSnjSZ2BEPY7k+oITozDE/HOHssi5PkGwEI6h7A5xuxCgtAnYbaajJdhpJw7eb2d01NT7qXJxC6/bhk23rGb5NJO+GNSIydEdFeHTDR7Q98=
+	t=1747315101; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=ICDJmXNIOhJuI8oO8RsNDdgf3Sl+EcMlmuMMxu1kPpc=; 
+	b=XCQ1nlQpw37XY25Nk5IXUvZL+aHSb3GGvwMU9Ofj839UtXzrctl94wykUpwwuS0LRc4Fk0z/Ih/AFR1jBtz2jhmCoxQRs8m1qG363GnLNvw8fU1QUDEL1rFQ1PVdpP5yTwtYSIuSyedvk0UT6PcCFI6VZldnMnSf2ZZAocjFB68=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315080;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747315101;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=SXbug0DKOX8Y5Ce3k9H738ujkJ9TrrqxK2HK+AOKWG0=;
-	b=usvFGD3YlUOfTBKfXZmtpGiQ7Aq31A5sMn6A3Pz/OQHWbqIAR6W271T4LTbwpcx1
-	//jDF/JiZk+BXqx6EjsgsEH/DsZLu7LJqHgI0AyTnO42lLs+6t6ncZ2cFIaN3/+QKmu
-	kK/Vr1vOrzAznobQNIsKNnkPPc9575BMoSFNHW1Y=
+	bh=ICDJmXNIOhJuI8oO8RsNDdgf3Sl+EcMlmuMMxu1kPpc=;
+	b=U3dpzQzKKLq6sicjzC9VB2uizzorWqiLbMUFzAVoaMb2WJCp2FC7wvunfWxIB3MT
+	ZT+Zu0sAUtDaT4ud22yFvnePDhYHod9cV7p8Nuno0wmMQnk537Lw4aW+lQz8tlIMyGx
+	l16NWHjx91bhUUy75NCSyPXyyWE7lFbxnGHpRauk=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
@@ -68,9 +68,9 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFCv2 06/38] x86/hyperlaunch: introduce pvh domain builder
-Date: Thu, 15 May 2025 09:17:12 -0400
-Message-Id: <20250515131744.3843-7-dpsmith@apertussolutions.com>
+Subject: [RFCv2 14/38] x86/hyperlaunch: move iommu init to domain builder
+Date: Thu, 15 May 2025 09:17:20 -0400
+Message-Id: <20250515131744.3843-15-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20250515131744.3843-1-dpsmith@apertussolutions.com>
 References: <20250515131744.3843-1-dpsmith@apertussolutions.com>
@@ -78,126 +78,49 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-Introduce dom_construct_pvh() as a wrapper around dom0_construct_pvh(). This
-function will be expanded as dom0 specific construction functions are
-generalized.
+Move invocation of iommu_hwdom_init() to dom_construct_pvh() and guard it
+with a hardware domain check.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/dom0_build.c                 |  5 ++--
- xen/arch/x86/hvm/Makefile                 |  1 +
- xen/arch/x86/hvm/dom_build.c              | 31 +++++++++++++++++++++++
- xen/arch/x86/include/asm/domain-builder.h |  8 ++++++
- xen/arch/x86/include/asm/setup.h          |  2 +-
- 5 files changed, 44 insertions(+), 3 deletions(-)
- create mode 100644 xen/arch/x86/hvm/dom_build.c
- create mode 100644 xen/arch/x86/include/asm/domain-builder.h
+ xen/arch/x86/hvm/dom0_build.c | 2 --
+ xen/arch/x86/hvm/dom_build.c  | 4 ++++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 22d9ff3f1e8c..2cf6535ce190 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -15,6 +15,7 @@
- #include <asm/amd.h>
- #include <asm/bootinfo.h>
- #include <asm/dom0_build.h>
-+#include <asm/domain-builder.h>
- #include <asm/guest.h>
- #include <asm/hpet.h>
- #include <asm/hvm/emulate.h>
-@@ -613,7 +614,7 @@ int __init dom0_setup_permissions(struct domain *d)
-     return rc;
- }
- 
--int __init construct_dom0(const struct boot_domain *bd)
-+int __init construct_dom0(struct boot_domain *bd)
- {
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index 378a1f29fb1b..6990c1d3a882 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -1304,8 +1304,6 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
+     struct domain *d = bd->d;
      int rc;
-     const struct domain *d = bd->d;
-@@ -637,7 +638,7 @@ int __init construct_dom0(const struct boot_domain *bd)
-         opt_dom0_max_vcpus_max = bd->max_vcpus;
  
-     if ( is_hvm_domain(d) )
--        rc = dom0_construct_pvh(bd);
-+        rc = dom_construct_pvh(bd);
-     else if ( is_pv_domain(d) )
-         rc = dom0_construct_pv(bd);
-     else
-diff --git a/xen/arch/x86/hvm/Makefile b/xen/arch/x86/hvm/Makefile
-index 6ec2c8f2db56..0830a5b2a56f 100644
---- a/xen/arch/x86/hvm/Makefile
-+++ b/xen/arch/x86/hvm/Makefile
-@@ -5,6 +5,7 @@ obj-y += viridian/
- obj-y += asid.o
- obj-y += dm.o
- obj-bin-y += dom0_build.init.o
-+obj-bin-y += dom_build.init.o
- obj-y += domain.o
- obj-y += emulate.o
- obj-$(CONFIG_GRANT_TABLE) += grant_table.o
+-    iommu_hwdom_init(d);
+-
+     rc = pvh_populate_p2m(d);
+     if ( rc )
+     {
 diff --git a/xen/arch/x86/hvm/dom_build.c b/xen/arch/x86/hvm/dom_build.c
-new file mode 100644
-index 000000000000..8546cfff1fbf
---- /dev/null
+index eec65e3e805e..450e77d190a2 100644
+--- a/xen/arch/x86/hvm/dom_build.c
 +++ b/xen/arch/x86/hvm/dom_build.c
-@@ -0,0 +1,31 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * hvm/dom_build.c
-+ *
-+ * Dom builder for PVH guest.
-+ *
-+ * Copyright (C) 2017 Citrix Systems R&D
-+ * Copyright (C) 2025 Apertus Solutions, LLC
-+ */
-+
-+#include <xen/init.h>
-+
-+#include <asm/bootinfo.h>
-+#include <asm/dom0_build.h>
-+
-+int __init dom_construct_pvh(struct boot_domain *bd)
-+{
-+    printk(XENLOG_INFO "*** Building a PVH Dom%d ***\n", bd->domid);
-+
-+    return dom0_construct_pvh(bd);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/x86/include/asm/domain-builder.h b/xen/arch/x86/include/asm/domain-builder.h
-new file mode 100644
-index 000000000000..dd429fc9ff8b
---- /dev/null
-+++ b/xen/arch/x86/include/asm/domain-builder.h
-@@ -0,0 +1,8 @@
-+#ifndef __XEN_X86_DOMBUILDER_H__
-+#define __XEN_X86_DOMBUILDER_H__
-+
-+struct boot_domain;
-+
-+int dom_construct_pvh(struct boot_domain *bd);
-+
-+#endif
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index ac34c698551e..b517da6144de 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -27,7 +27,7 @@ void subarch_init_memory(void);
- void init_IRQ(void);
+@@ -9,6 +9,7 @@
+  */
  
- struct boot_domain;
--int construct_dom0(const struct boot_domain *bd);
-+int construct_dom0(struct boot_domain *bd);
+ #include <xen/acpi.h>
++#include <xen/iommu.h>
+ #include <xen/init.h>
+ #include <xen/softirq.h>
+ #include <xen/types.h>
+@@ -92,6 +93,9 @@ int __init dom_construct_pvh(struct boot_domain *bd)
+      */
+     pvh_init_p2m(bd);
  
- void setup_io_bitmap(struct domain *d);
++    if ( is_hardware_domain(bd->d) )
++        iommu_hwdom_init(bd->d);
++
+     return dom0_construct_pvh(bd);
+ }
  
 -- 
 2.30.2
