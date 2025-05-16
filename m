@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973CAC3ABD8
-	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:31:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.986848.1372369 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C8FC3ABC9
+	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:31:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.986855.1372379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsLZ-00047l-Gl; Fri, 16 May 2025 10:31:21 +0000
+	id 1uFsLl-0004ds-Qp; Fri, 16 May 2025 10:31:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 986848.1372369; Fri, 16 May 2025 10:31:21 +0000
+Received: by outflank-mailman (output) from mailman id 986855.1372379; Fri, 16 May 2025 10:31:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsLZ-00047c-Cp; Fri, 16 May 2025 10:31:21 +0000
-Received: by outflank-mailman (input) for mailman id 986848;
- Fri, 16 May 2025 10:31:19 +0000
+	id 1uFsLl-0004dl-Nu; Fri, 16 May 2025 10:31:33 +0000
+Received: by outflank-mailman (input) for mailman id 986855;
+ Fri, 16 May 2025 10:31:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kgnf=YA=bounce.vates.tech=bounce-md_30504962.68271268.v1-55be2ee1b05f4c71bac5a8b138fad311@srs-se1.protection.inumbo.net>)
- id 1uFsF8-0000kS-Qw
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:24:42 +0000
-Received: from mail133-28.atl131.mandrillapp.com
- (mail133-28.atl131.mandrillapp.com [198.2.133.28])
+ <SRS0=bXh3=YA=bounce.vates.tech=bounce-md_30504962.68271253.v1-ceb244a8b2c1464eb7eaedbb43d943a4@srs-se1.protection.inumbo.net>)
+ id 1uFsEn-0000kS-Km
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:24:21 +0000
+Received: from mail187-4.suw11.mandrillapp.com
+ (mail187-4.suw11.mandrillapp.com [198.2.187.4])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9c17d21-323f-11f0-9ffb-bf95429c2676;
- Fri, 16 May 2025 12:24:41 +0200 (CEST)
-Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail133-28.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZzNVc0flkzMQxhSc
- for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 10:24:40 +0000 (GMT)
+ id ed3994a5-323f-11f0-9ffb-bf95429c2676;
+ Fri, 16 May 2025 12:24:20 +0200 (CEST)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-4.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4ZzNVC0TpJzlfknC
+ for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 10:24:19 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 55be2ee1b05f4c71bac5a8b138fad311; Fri, 16 May 2025 10:24:40 +0000
+ ceb244a8b2c1464eb7eaedbb43d943a4; Fri, 16 May 2025 10:24:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,400 +44,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9c17d21-323f-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: ed3994a5-323f-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1747391080; x=1747661080;
-	bh=rmMyFtnQQP/M6lJv+2OTm80wHgu+FGdxuTTYePbwvvo=;
+	s=mte1; t=1747391059; x=1747661059;
+	bh=Jt1BJnr3uTOtuUOvC1fwjWoIL41pGCxe5NFXv3n0GUU=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=QDuEbMATQOKPddW1ufK70fdBeatEr0CakgVN7waNQI9kJ5j9ABbZza4T5O79Iidkw
-	 5smVTwk0yrES1Pp7VugS3hE3t4Q2T0mE/BEQEzl1YYP0yBOEM1Popc5ATH0JEwsJIt
-	 nN0KMpD+Hgwa+LRSoPi5l/yYzr1wCsQpyrWO/RXFmdfDxu6oCa1I3TZnpvQYQ35GvM
-	 n8zIzXB7FQR+Tg9CBQirMsi3HU5bryIxr9wuW4gYI0ve2p+QvdHD1IKdjT90huxwzX
-	 VOI2DRvu7VPo4buRFZyEIzCQJwYf8BgKMrgjP8ycops/wi4NaQ77QmmRHofZCCek77
-	 dUhjU7tS5t8kA==
+	b=1+HQ7axaBIXi8erEPvRPonY+S8ynrwwzD5Pe3cP5DwDNcSh3FDRhdBBPwfR435tRA
+	 /KH4MG+7U3yJSSvScdIdSW6e134ZHWfcdZwj0oRtO88++yyxT/H7EjFBqF5QYE8iOx
+	 pFlHCxt1t9EsVqgOd94RPGm5f7h5pNbuvPqWBIdpzazeqXmzcvbdoUXty4+Zh8oq2A
+	 4tWfCFWC8EegM5J4D0JoSIi/UzOR49Y3K7wrdme28nOZIXIhq+Vc29gLPW+8FkqQVL
+	 VzS2C2g8ltQmI8+PeivBtsTeb0CA/DUoU2acL4rReL8B5LPhGM6qclvhjCje8F9ja/
+	 IRqzc/CMtWyaA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1747391080; x=1747651580; i=teddy.astie@vates.tech;
-	bh=rmMyFtnQQP/M6lJv+2OTm80wHgu+FGdxuTTYePbwvvo=;
+	t=1747391059; x=1747651559; i=teddy.astie@vates.tech;
+	bh=Jt1BJnr3uTOtuUOvC1fwjWoIL41pGCxe5NFXv3n0GUU=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=qKljt4eXIzjKpiRbjn9rvxgK70F9BWLWXx/pVT86itAsZglLmpx42itb1q2iv2PE5
-	 ID0i3ku/Txr/p0FvkN6v2y0SxzTIM5k3ZBq/+/TLDsnHsWlFvkEkmjZNUT3QQ986q/
-	 v+GGRkIQkP1c87qnssQdjLd9DM9mCnUK4sWWrBKPJ2MTuMYCOt/bCuJhEerG6w8Voc
-	 X9t7nNcN0aig8I6jM4u6H4uT2RMaTuj5KuYmF0SIYzYcGPRY5NFuSulJgIa81h4Poy
-	 eVzquOE6MsIlx4R7HyELmIQxpeG3wwzywRqftt+mUyAG6TphpxJiUTRZzPJ9T31qJg
-	 GpFBwkLhJRLjg==
+	b=N3IGwhZSwgPVxnNZgSUgdDkm9UccNoYIDxv7PhP7FNpIqtHRPEWlVp7rN0MMZp+zv
+	 ze7Vo9RY1Im7PELfLIrrYxG6Q+QXB23G83AO3nAk7rb2zk7zqBsDSP0Cf0jfAXMlYj
+	 nW7bEwzE1fzFrqxtuOGpCSNuNHWlBJaQZjZbVxNTMOuLtHKPUI4OMlVB+cRsOhaszr
+	 LLeQiT22CgaZRm7auXU/zU1/EoW0fgyB8m6wx4BvJNY8WkrV2NFreZJZV4WGMRERXQ
+	 pHSzEucj0b5J9zO/gXC9LfK8fFt3S6PPFLN+R46L9J1/BdN6Ah+tO2TvhUUadY11cy
+	 I73u6PFAk4LQA==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=2014/16]=20sev/emulate:=20Handle=20some=20non-emulable=20HVM=20paths?=
+Subject: =?utf-8?Q?[RFC=20PATCH=2012/16]=20x86/cpufeature:=20Introduce=20SME=20and=20SEV-related=20CPU=20features?=
 X-Mailer: git-send-email 2.49.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1747391079133
+X-Bm-Transport-Timestamp: 1747391057994
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Andrei Semenov" <andrei.semenov@vates.tech>
-Message-Id: <b185e194c53258ea659c13f3b9c062daaa6942a5.1747312394.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <e9dca2b2675cd4a0bcd01ba7cf64f40bc6e442e1.1747312394.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1747312394.git.teddy.astie@vates.tech>
 References: <cover.1747312394.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.55be2ee1b05f4c71bac5a8b138fad311?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ceb244a8b2c1464eb7eaedbb43d943a4?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250516:md
-Date: Fri, 16 May 2025 10:24:40 +0000
+Date: Fri, 16 May 2025 10:24:19 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-From: Andrei Semenov <andrei.semenov@vates.tech>
-
-Some code paths are not emulable under SEV or needs special handling.
-
-Signed-off-by: Andrei Semenov <andrei.semenov@vates.tech>
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/hvm/emulate.c | 137 ++++++++++++++++++++++++++++++++-----
- xen/arch/x86/hvm/hvm.c     |  13 ++++
- 2 files changed, 133 insertions(+), 17 deletions(-)
+ xen/arch/x86/cpu/common.c                   | 2 ++
+ xen/arch/x86/include/asm/cpufeature.h       | 4 ++++
+ xen/include/public/arch-x86/cpufeatureset.h | 5 +++++
+ xen/include/xen/lib/x86/cpu-policy.h        | 9 ++++++++-
+ 4 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 6ed8e03475..7ac3be2d59 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -26,6 +26,7 @@
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/monitor.h>
- #include <asm/hvm/support.h>
-+#include <asm/hvm/svm/sev.h>
- #include <asm/iocap.h>
- #include <asm/vm_event.h>
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index e8d4ca3203..a610b0f513 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -481,6 +481,8 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 		c->x86_capability[FEATURESET_e8b] = cpuid_ebx(0x80000008);
+ 	if (c->extended_cpuid_level >= 0x80000021)
+ 		c->x86_capability[FEATURESET_e21a] = cpuid_eax(0x80000021);
++	if (c->extended_cpuid_level >= 0x8000001f)
++		c->x86_capability[FEATURESET_e1fa] = cpuid_eax(0x8000001f);
  
-@@ -689,6 +690,9 @@ static void *hvmemul_map_linear_addr(
-         goto unhandleable;
-     }
+ 	/* Intel-defined flags: level 0x00000007 */
+ 	if (c->cpuid_level >= 7) {
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 397a04af41..bded70231c 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -233,6 +233,10 @@ static inline bool boot_cpu_has(unsigned int feat)
  
-+    if ( is_sev_domain(curr->domain) && (nr_frames > 1) )
-+        goto unhandleable;
+ #define cpu_has_msr_tsc_aux     (cpu_has_rdtscp || cpu_has_rdpid)
+ 
++#define cpu_has_sme             boot_cpu_has(X86_FEATURE_SME)
++#define cpu_has_sev             boot_cpu_has(X86_FEATURE_SEV)
++#define cpu_has_sev_es          boot_cpu_has(X86_FEATURE_SEV_ES)
 +
-     for ( i = 0; i < nr_frames; i++ )
-     {
-         enum hvm_translation_result res;
-@@ -703,8 +707,16 @@ static void *hvmemul_map_linear_addr(
-         /* Error checking.  Confirm that the current slot is clean. */
-         ASSERT(mfn_x(*mfn) == 0);
+ /* Bugs. */
+ #define cpu_bug_fpu_ptrs        boot_cpu_has(X86_BUG_FPU_PTRS)
+ #define cpu_bug_null_seg        boot_cpu_has(X86_BUG_NULL_SEG)
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index a6d4a0cba7..2a67bcc6a4 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -394,6 +394,11 @@ XEN_CPUFEATURE(MON_UMON_MITG,      16*32+30) /*   MCU_OPT_CTRL.MON_UMON_MITG */
+ /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.edx, word 17 (express in terms of word 16) */
+ XEN_CPUFEATURE(ITS_NO,             16*32+62) /*!A No Indirect Target Selection */
  
--        res = hvm_translate_get_page(curr, addr, true, pfec,
-+        if ( is_sev_domain(curr->domain) )
-+        {
-+            struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-+            unsigned long gpa = pfn_to_paddr(hvio->mmio_gpfn) | (addr & ~PAGE_MASK);
-+            res = hvm_translate_get_page(curr, gpa, false, pfec,
-                                      &pfinfo, &page, &gfn, &p2mt);
-+        }
-+        else
-+            res = hvm_translate_get_page(curr, addr, true, pfec,
-+                                         &pfinfo, &page, &gfn, &p2mt);
- 
-         switch ( res )
-         {
-@@ -1173,6 +1185,7 @@ static int hvmemul_linear_mmio_access(
-                                                            dir, buffer_offset);
-     paddr_t gpa;
-     unsigned long one_rep = 1;
-+    unsigned int chunk;
-     int rc;
- 
-     if ( cache == NULL )
-@@ -1183,21 +1196,50 @@ static int hvmemul_linear_mmio_access(
-         ASSERT_UNREACHABLE();
-         return X86EMUL_UNHANDLEABLE;
-     }
-+    
-+    chunk = min_t(unsigned int, size, PAGE_SIZE - offset);
- 
-     if ( known_gpfn )
-         gpa = pfn_to_paddr(hvio->mmio_gpfn) | offset;
-     else
-     {
--        rc = hvmemul_linear_to_phys(gla, &gpa, size, &one_rep, pfec,
-+        if ( is_sev_domain(current->domain) )
-+            gpa = pfn_to_paddr(hvio->mmio_gpfn) | offset;
-+        else
-+        {
-+            rc = hvmemul_linear_to_phys(gla, &gpa, chunk, &one_rep, pfec,
-+                                        hvmemul_ctxt);
-+            if ( rc != X86EMUL_OKAY )
-+                return rc;
-+        }
++/* AMD-defined CPU features, CPUID level 0x8000001f.eax, word 18 */
++XEN_CPUFEATURE(SME,                18*32+ 0) /*   Secure Memory Encryption */
++XEN_CPUFEATURE(SEV,                18*32+ 1) /*   Secure Encrypted Virtualization */
++XEN_CPUFEATURE(SEV_ES,             18*32+ 3) /*   SEV Encrypted State */
 +
-+        latch_linear_to_phys(hvio, gla, gpa, dir == IOREQ_WRITE);
-+    }
-+
-+    for ( ;; )
-+    {
-+        rc = hvmemul_phys_mmio_access(cache, gpa, chunk, dir, buffer, buffer_offset);
-+        if ( rc != X86EMUL_OKAY )
-+            break;
-+
-+        gla += chunk;
-+        buffer_offset += chunk;
-+        size -= chunk;
-+
-+        if ( size == 0 )
-+            break;
-+
-+        if ( is_sev_domain(current->domain) )
-+            return X86EMUL_UNHANDLEABLE;
-+
-+        chunk = min_t(unsigned int, size, PAGE_SIZE);
-+        rc = hvmemul_linear_to_phys(gla, &gpa, chunk, &one_rep, pfec,
-                                     hvmemul_ctxt);
-         if ( rc != X86EMUL_OKAY )
-             return rc;
--
--        latch_linear_to_phys(hvio, gla, gpa, dir == IOREQ_WRITE);
-     }
+ #endif /* XEN_CPUFEATURE */
  
--    return hvmemul_phys_mmio_access(cache, gpa, size, dir, buffer,
--                                    buffer_offset);
-+    return rc;
- }
+ /* Clean up from a default include.  Close the enum (for C). */
+diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
+index f43e1a3b21..a5b22b34d8 100644
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -22,6 +22,7 @@
+ #define FEATURESET_7d1       15 /* 0x00000007:1.edx    */
+ #define FEATURESET_m10Al     16 /* 0x0000010a.eax      */
+ #define FEATURESET_m10Ah     17 /* 0x0000010a.edx      */
++#define FEATURESET_e1fa      18 /* 0x8000001f.eax      */
  
- static inline int hvmemul_linear_mmio_read(
-@@ -1254,6 +1296,9 @@ static int linear_read(unsigned long addr, unsigned int bytes, void *p_data,
-     {
-         unsigned int part1 = PAGE_SIZE - offset;
- 
-+        if ( is_sev_domain(current->domain) )
-+            return X86EMUL_UNHANDLEABLE;
-+
-         /* Split the access at the page boundary. */
-         rc = linear_read(addr, part1, p_data, pfec, hvmemul_ctxt);
-         if ( rc != X86EMUL_OKAY )
-@@ -1278,11 +1323,25 @@ static int linear_read(unsigned long addr, unsigned int bytes, void *p_data,
-      * upon replay) the RAM access for anything that's ahead of or past MMIO,
-      * i.e. in RAM.
-      */
--    cache = hvmemul_find_mmio_cache(hvio, start, IOREQ_READ, ~0);
--    if ( !cache ||
--         addr + bytes <= start + cache->skip ||
--         addr >= start + cache->size )
--        rc = hvm_copy_from_guest_linear(p_data, addr, bytes, pfec, &pfinfo);
-+     cache = hvmemul_find_mmio_cache(hvio, start, IOREQ_READ, ~0);
-+     if ( !cache ||
-+          addr + bytes <= start + cache->skip ||
-+          addr >= start + cache->size )
-+     {
-+        if ( is_sev_domain(current->domain) )
-+        {
-+            if ( hvio->mmio_gpfn )
-+            {
-+                paddr_t gpa;
-+                gpa = pfn_to_paddr(hvio->mmio_gpfn) | (addr & ~PAGE_MASK);
-+                rc = hvm_copy_from_guest_phys(p_data, gpa, bytes);
-+            }
-+            else
-+                return X86EMUL_UNHANDLEABLE;
-+        }
-+        else
-+            rc = hvm_copy_from_guest_linear(p_data, addr, bytes, pfec, &pfinfo);
-+    }
- 
-     switch ( rc )
-     {
-@@ -1325,6 +1384,9 @@ static int linear_write(unsigned long addr, unsigned int bytes, void *p_data,
-     {
-         unsigned int part1 = PAGE_SIZE - offset;
- 
-+        if ( is_sev_domain(current->domain) )
-+            return X86EMUL_UNHANDLEABLE;
-+
-         /* Split the access at the page boundary. */
-         rc = linear_write(addr, part1, p_data, pfec, hvmemul_ctxt);
-         if ( rc != X86EMUL_OKAY )
-@@ -1340,9 +1402,23 @@ static int linear_write(unsigned long addr, unsigned int bytes, void *p_data,
-     /* See commentary in linear_read(). */
-     cache = hvmemul_find_mmio_cache(hvio, start, IOREQ_WRITE, ~0);
-     if ( !cache ||
--         addr + bytes <= start + cache->skip ||
--         addr >= start + cache->size )
--        rc = hvm_copy_to_guest_linear(addr, p_data, bytes, pfec, &pfinfo);
-+        addr + bytes <= start + cache->skip ||
-+        addr >= start + cache->size )
-+    {
-+        if ( is_sev_domain(current->domain) )
-+        {
-+            if ( hvio->mmio_gpfn )
-+            {
-+                paddr_t gpa;
-+                gpa = pfn_to_paddr(hvio->mmio_gpfn) | (addr & ~PAGE_MASK);
-+                rc = hvm_copy_to_guest_phys(gpa, p_data, bytes, current);
-+            }
-+            else
-+                return X86EMUL_UNHANDLEABLE;
-+        }
-+        else
-+            rc = hvm_copy_to_guest_linear(addr, p_data, bytes, pfec, &pfinfo);
-+    }
- 
-     switch ( rc )
-     {
-@@ -1430,7 +1506,12 @@ int cf_check hvmemul_insn_fetch(
-     if ( !bytes ||
-          unlikely((insn_off + bytes) > hvmemul_ctxt->insn_buf_bytes) )
-     {
--        int rc = __hvmemul_read(x86_seg_cs, offset, p_data, bytes,
-+        int rc;
-+
-+        if ( is_sev_domain(current->domain) )
-+            return X86EMUL_UNHANDLEABLE;
-+
-+        rc = __hvmemul_read(x86_seg_cs, offset, p_data, bytes,
-                                 hvm_access_insn_fetch, hvmemul_ctxt);
- 
-         if ( rc == X86EMUL_OKAY && bytes )
-@@ -1485,6 +1566,7 @@ static int cf_check hvmemul_write(
-     if ( !known_gla(addr, bytes, pfec) )
-     {
-         mapping = hvmemul_map_linear_addr(addr, bytes, pfec, hvmemul_ctxt);
-+
-         if ( IS_ERR(mapping) )
-              return ~PTR_ERR(mapping);
-     }
-@@ -1719,6 +1801,9 @@ static int cf_check hvmemul_cmpxchg(
-     int rc;
-     void *mapping = NULL;
- 
-+    if ( is_sev_domain(current->domain) )
-+        return X86EMUL_UNHANDLEABLE;
-+
-     rc = hvmemul_virtual_to_linear(
-         seg, offset, bytes, NULL, hvm_access_write, hvmemul_ctxt, &addr);
-     if ( rc != X86EMUL_OKAY )
-@@ -1821,6 +1906,9 @@ static int cf_check hvmemul_rep_ins(
-     p2m_type_t p2mt;
-     int rc;
- 
-+    if ( is_sev_domain(current->domain) )
-+        return X86EMUL_UNHANDLEABLE;
-+
-     rc = hvmemul_virtual_to_linear(
-         dst_seg, dst_offset, bytes_per_rep, reps, hvm_access_write,
-         hvmemul_ctxt, &addr);
-@@ -1899,6 +1987,9 @@ static int cf_check hvmemul_rep_outs(
-     p2m_type_t p2mt;
-     int rc;
- 
-+    if ( is_sev_domain(current->domain) )
-+        return X86EMUL_UNHANDLEABLE;
-+
-     if ( unlikely(hvmemul_ctxt->set_context) )
-         return hvmemul_rep_outs_set_context(dst_port, bytes_per_rep, reps);
- 
-@@ -1944,6 +2035,9 @@ static int cf_check hvmemul_rep_movs(
-     int rc, df = !!(ctxt->regs->eflags & X86_EFLAGS_DF);
-     char *buf;
- 
-+    if ( is_sev_domain(current->domain) )
-+        return X86EMUL_UNHANDLEABLE;
-+
-     rc = hvmemul_virtual_to_linear(
-         src_seg, src_offset, bytes_per_rep, reps, hvm_access_read,
-         hvmemul_ctxt, &saddr);
-@@ -2109,9 +2203,13 @@ static int cf_check hvmemul_rep_stos(
-     paddr_t gpa;
-     p2m_type_t p2mt;
-     bool df = ctxt->regs->eflags & X86_EFLAGS_DF;
--    int rc = hvmemul_virtual_to_linear(seg, offset, bytes_per_rep, reps,
--                                       hvm_access_write, hvmemul_ctxt, &addr);
-+    int rc;
-+
-+    if ( is_sev_domain(current->domain) )
-+        return X86EMUL_UNHANDLEABLE;
- 
-+    rc = hvmemul_virtual_to_linear(seg, offset, bytes_per_rep, reps,
-+                                   hvm_access_write, hvmemul_ctxt, &addr);
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -2770,6 +2868,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-     struct vcpu *curr = current;
-     uint32_t new_intr_shadow;
-     struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-+
-     int rc;
- 
-     /*
-@@ -2983,6 +3082,9 @@ void hvm_emulate_init_per_insn(
-         unsigned int pfec = PFEC_page_present | PFEC_insn_fetch;
-         unsigned long addr;
- 
-+        if ( is_sev_domain(current->domain) )
-+            goto out;
-+
-         if ( hvmemul_ctxt->seg_reg[x86_seg_ss].dpl == 3 )
-             pfec |= PFEC_user_mode;
- 
-@@ -3000,6 +3102,7 @@ void hvm_emulate_init_per_insn(
-             sizeof(hvmemul_ctxt->insn_buf) : 0;
-     }
- 
-+out:
-     hvmemul_ctxt->is_mem_access = false;
- }
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index e1bcf8e086..d3060329fb 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -56,6 +56,7 @@
- #include <asm/hvm/monitor.h>
- #include <asm/hvm/viridian.h>
- #include <asm/hvm/vm_event.h>
-+#include <asm/hvm/svm/sev.h>
- #include <asm/altp2m.h>
- #include <asm/mtrr.h>
- #include <asm/apic.h>
-@@ -3477,6 +3478,9 @@ enum hvm_translation_result hvm_copy_to_guest_linear(
-     unsigned long addr, const void *buf, unsigned int size, uint32_t pfec,
-     pagefault_info_t *pfinfo)
+ struct cpuid_leaf
  {
-+    if ( is_sev_domain(current->domain) )
-+        return HVMTRANS_unhandleable;
-+
-     return __hvm_copy((void *)buf /* HVMCOPY_to_guest doesn't modify */,
-                       addr, size, current, HVMCOPY_to_guest | HVMCOPY_linear,
-                       PFEC_page_present | PFEC_write_access | pfec, pfinfo);
-@@ -3486,6 +3490,9 @@ enum hvm_translation_result hvm_copy_from_guest_linear(
-     void *buf, unsigned long addr, unsigned int size, uint32_t pfec,
-     pagefault_info_t *pfinfo)
- {
-+    if ( is_sev_domain(current->domain) )
-+        return HVMTRANS_unhandleable;
-+
-     return __hvm_copy(buf, addr, size, current,
-                       HVMCOPY_from_guest | HVMCOPY_linear,
-                       PFEC_page_present | pfec, pfinfo);
-@@ -3495,6 +3502,9 @@ enum hvm_translation_result hvm_copy_from_vcpu_linear(
-     void *buf, unsigned long addr, unsigned int size, struct vcpu *v,
-     unsigned int pfec)
- {
-+    if ( is_sev_domain(v->domain) )
-+        return HVMTRANS_unhandleable;
-+
-     return __hvm_copy(buf, addr, size, v,
-                       HVMCOPY_from_guest | HVMCOPY_linear,
-                       PFEC_page_present | pfec, NULL);
-@@ -3522,6 +3532,9 @@ unsigned int clear_user_hvm(void *to, unsigned int len)
- {
-     int rc;
+@@ -317,7 +318,13 @@ struct cpu_policy
+             uint64_t :64, :64; /* Leaf 0x8000001c. */
+             uint64_t :64, :64; /* Leaf 0x8000001d - Cache properties. */
+             uint64_t :64, :64; /* Leaf 0x8000001e - Extd APIC/Core/Node IDs. */
+-            uint64_t :64, :64; /* Leaf 0x8000001f - AMD Secure Encryption. */
++            /* Leaf 0x8000001f - AMD Secure Memory Encryption. */
++            union {
++                uint32_t e1fa;
++                struct { DECL_BITFIELD(e1fa); };
++            };
++            uint32_t c_bit_pos:6, physaddr_red:6, num_vmpl:4, :16;
++            uint32_t max_sev_guests:32, min_no_es_asid;
+             uint64_t :64, :64; /* Leaf 0x80000020 - Platform QoS. */
  
-+    if ( is_sev_domain(current->domain) )
-+        return HVMTRANS_unhandleable;
-+
-     if ( current->hcall_compat && is_compat_arg_xlat_range(to, len) )
-     {
-         memset(to, 0x00, len);
+             /* Leaf 0x80000021 - Extended Feature 2 */
 -- 
 2.49.0
 
