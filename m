@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E89DC3ABD8
-	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 09:32:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.986619.1372166 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D2EC3ABC9
+	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 09:35:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.986660.1372208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFrPw-0008Nh-V9; Fri, 16 May 2025 09:31:48 +0000
+	id 1uFrTQ-0002sN-Gc; Fri, 16 May 2025 09:35:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 986619.1372166; Fri, 16 May 2025 09:31:48 +0000
+Received: by outflank-mailman (output) from mailman id 986660.1372208; Fri, 16 May 2025 09:35:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFrPw-0008NW-S7; Fri, 16 May 2025 09:31:48 +0000
-Received: by outflank-mailman (input) for mailman id 986619;
- Fri, 16 May 2025 09:31:47 +0000
+	id 1uFrTQ-0002sG-C5; Fri, 16 May 2025 09:35:24 +0000
+Received: by outflank-mailman (input) for mailman id 986660;
+ Fri, 16 May 2025 09:35:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5m+b=YA=bounce.vates.tech=bounce-md_30504962.682705fa.v1-dc3866fe00dd4d1cb15f5f7e0a1d2dc4@srs-se1.protection.inumbo.net>)
- id 1uFrPv-0007iv-CN
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 09:31:47 +0000
-Received: from mail133-28.atl131.mandrillapp.com
- (mail133-28.atl131.mandrillapp.com [198.2.133.28])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=C2cV=YA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uFrTP-0002s5-9a
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 09:35:23 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 95c81fea-3238-11f0-9eb6-5ba50f476ded;
- Fri, 16 May 2025 11:31:46 +0200 (CEST)
-Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail133-28.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZzMKQ0z9JzMQxf5l
- for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 09:31:38 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- dc3866fe00dd4d1cb15f5f7e0a1d2dc4; Fri, 16 May 2025 09:31:38 +0000
+ id 168a1173-3239-11f0-9eb6-5ba50f476ded;
+ Fri, 16 May 2025 11:35:22 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ad510c259b9so331869866b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 02:35:22 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad52d4383d6sm124518166b.102.2025.05.16.02.35.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 May 2025 02:35:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,168 +47,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95c81fea-3238-11f0-9eb6-5ba50f476ded
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1747387898; x=1747657898;
-	bh=Pu9DXVzNtDp7vBm0SeMKn1Apw+Y0YN30HfO50Yk2htE=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=J/nNHdh2qp9sPkOvbrRg/IHWwj+kWKEeaS/iuBP18i/Otyn3yWK/Wbn5U+0OfImI3
-	 D1xifpocdfuK61avf3HicCWyAb3t+up1exCbiRwggw+tflsPlGdfWzs3W2dZgryhqs
-	 TZjNZzKAxHCFXlssL3caV03s62eDOJxDuhUODK2ZDrTADnN88jd42OVPL6vAS7hYdZ
-	 uFXru8ytUsE++ExD1v7XuVwXOyUodgZRn5tNxmG06Z/KY3t5CcMcEP0S8OQnAgldLj
-	 hXsah7ld8jgmP4kHcZ71S4moVKJc6JtLW1DTGkklU2MLDsJc33ULlBg90ai9a1z0jj
-	 c/DMlMzOh3xjg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1747387898; x=1747648398; i=teddy.astie@vates.tech;
-	bh=Pu9DXVzNtDp7vBm0SeMKn1Apw+Y0YN30HfO50Yk2htE=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=E6oc20jCZY9it3AXgPjsovD8HM6gjOfKj+LgN4h+JhBSLEN+erYSegBU1Nmb9R842
-	 0gR1VS2S9+7OQxU+egl3eCurI6Jfia4HT4bb8VP4IXxZOpxEIB7QAH68Uj69W7irSe
-	 RsRhGk1FVyrEaOxhnjDAz31oIFaikUNuTosPR13tEFGmL5B8TRg60vKksOlBYcmALy
-	 8z1nAVMGo9AZlsSbh5ThzsBDtdtj3YttlLdWDCkcc8Nrq0Idw1a3oi8w0kLraMgpE5
-	 DmpYfInB+KPOth0mr7lYol6atWm7P3NEcExvx7bTb1HbrZgLA5fambEtPVC31RBw7I
-	 O96eR55C3FsEQ==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=2003/16]=20x86/hvm:=20Add=20support=20for=20physical=20address=20ABI?=
-X-Mailer: git-send-email 2.49.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1747387896927
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
-Message-Id: <ab0f146b8543629823dfd60a340278c206ab1d5d.1747312394.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1747312394.git.teddy.astie@vates.tech>
-References: <cover.1747312394.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.dc3866fe00dd4d1cb15f5f7e0a1d2dc4?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250516:md
-Date: Fri, 16 May 2025 09:31:38 +0000
+X-Inumbo-ID: 168a1173-3239-11f0-9eb6-5ba50f476ded
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1747388122; x=1747992922; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=GuUUtwLi5p78xydLz57ppP9dNcYDitOJlBtWKRI9umg=;
+        b=gLl8mcwDPNgSAxeSQLCuQOKooUtNvwrkv5Noi3V/OD8+cPux1fYZmCp19XeTBUBz5v
+         /sDqkli3SLorBfmBSfLqOioMfe41cbpmEWYJuVS9g3n+lEjaNrl4igZhmwkPL/Pqekh+
+         TFarT+fv0jVcWYYlDSe4BM2jtCDwC3LiRgGwr7HPQ+nflq5YSGEm/GJS74VEEs2vVmVV
+         wwH2Yi6PEFhBVXml1eCfZkkTu29YOMJM+jI1ZU3NnGDfLTa00nb0EJmuWdcYO5muG4Vw
+         XIy76G5RZ5OvGfu+I1eDXCxNFnU/91/Mxo3SX4t10N1PLTCwzGLE5AZb6Ks2PAprSrih
+         2rww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747388122; x=1747992922;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=GuUUtwLi5p78xydLz57ppP9dNcYDitOJlBtWKRI9umg=;
+        b=n/JGo3uMTSQKjpO5GXSKpDMurYQ7SkvmaKTfNjTqLQrE4jMeQm3fdTJJuO8dslUFYq
+         pu7OcGa0QdzSJlc6qn85kNcJ1CF27JSrWH2s8OsULTyKvFEFqayD6E1D3ESUmC6UvJFn
+         3xii9SLKTciOIOxWj9nCF3gVaKlMa5mEvYJbnCh5dBqg+yAJ0DuXs5Rtwpfj5IkvzUp8
+         gaxWVy4DIEbOvOd9o72G4dO7k7TimqmBRbDDdOjs91vedse59JUissc3jlIO233uV/Hn
+         RQrs7w6yeTgxJJiSaU87WgegEzZ0YoS34RFrsXom7t2xTefQR99k2y56e1ulnDdv5iU7
+         0dSw==
+X-Gm-Message-State: AOJu0Yxj4R1ca07EQ05v8/rBrPdacWJidsGYsI/Fh4nyFkXrYqSucuUP
+	b5r+8Q/g9xt29GGr0gq+IwDH7A1dv1eZOpcISo+8Mao8ytrQ5iB2DNIPW1VIPMXSYg==
+X-Gm-Gg: ASbGnctKqh0vfyn2/nwoz7FTYIZlrvLFNEyxg5KorHh2bxYzLGZ+I+kIyghR5SZtK1A
+	1ds+KIdHsCzFPOMQQQBqr6BPwpRWUERM7iajmN0s7idbdEvvI3pV6YbmPi31Fk54o23xs6hdG8F
+	IMe+voavS1BxmadDccyfEm3YII6sjZy6LL5UnP8NWeH5KA9YdqRvTCEnoizELLirO7l8Mtc81jx
+	3e6hMmXnPCk1ykY1XRKKOjOgCLUhhREqkkvvlSv/ppJ2Strt3syhDj/fAKryj5rb06W7taocfAe
+	xUBUjZKmmar+igN39aPAiuEVU++WfQy4lkVz9yY1SGCt6Sk6vdU8z+hC0gcd2AVCEgb9dnPd+Zk
+	7bAZNF+2/Shyjw7xfoIQ+NfpDD9jMvJnTsGhSwqCkEZkRcWE=
+X-Google-Smtp-Source: AGHT+IE4kohGyvQKsrWfdwryU5Plp+Rqb8fPtvj4Cv8/GQjHwOL8icnsKTwCPYZnNn/wb1a7a8+ZOw==
+X-Received: by 2002:a17:907:7205:b0:ad2:409f:fe6f with SMTP id a640c23a62f3a-ad52d5d2fa4mr337706066b.44.1747388121581;
+        Fri, 16 May 2025 02:35:21 -0700 (PDT)
+Message-ID: <04d6f03a-ff40-48c0-a88b-753f3f8bda0e@suse.com>
+Date: Fri, 16 May 2025 11:35:20 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+From: Jan Beulich <jbeulich@suse.com>
+Subject: Xen 4.18.5 released
+To: xen-announce@lists.xenproject.org
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Guest can tag their hypercalls with 0x40000000 in order to use this
-alternative ABI that uses physical addresses instead of linear ones.
+All,
 
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
-This one is based on the "HVMv2 ABI" RFC, but reworked in a way that is more
-compatible with existing guest (guest need to opt-in abi for a specific
-hypercall).
+we're pleased to announce the release of another bug fixing Xen version.
 
-Andrew has some plans regarding making a better HVM ABI for that, but it is
-a first start for this RFC.
----
- xen/arch/x86/hvm/hvm.c       | 17 ++++++++++++++---
- xen/arch/x86/hvm/hypercall.c | 17 +++++++++++++----
- xen/include/xen/sched.h      |  2 ++
- 3 files changed, 29 insertions(+), 7 deletions(-)
+Xen 4.18.5 is available from its git repository
+http://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=refs/heads/stable-4.18
+(tag RELEASE-4.18.5) or from the XenProject download page
+https://xenproject.org/resources/downloads/, or from
+https://downloads.xenproject.org/release/xen/4.18.5/.
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4cb2e13046..0e7c453b24 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3497,7 +3497,11 @@ unsigned int copy_to_user_hvm(void *to, const void *from, unsigned int len)
-         return 0;
-     }
- 
--    rc = hvm_copy_to_guest_linear((unsigned long)to, from, len, 0, NULL);
-+    if ( evaluate_nospec(current->hcall_physaddr) )
-+        rc = hvm_copy_to_guest_phys((unsigned long)to, from, len, current);
-+    else
-+        rc = hvm_copy_to_guest_linear((unsigned long)to, from, len, 0, NULL);
-+
-     return rc ? len : 0; /* fake a copy_to_user() return code */
- }
- 
-@@ -3511,7 +3515,10 @@ unsigned int clear_user_hvm(void *to, unsigned int len)
-         return 0;
-     }
- 
--    rc = hvm_copy_to_guest_linear((unsigned long)to, NULL, len, 0, NULL);
-+    if ( evaluate_nospec(current->hcall_physaddr) )
-+        rc = hvm_copy_to_guest_phys((unsigned long)to, NULL, len, current);
-+    else
-+        rc = hvm_copy_to_guest_linear((unsigned long)to, NULL, len, 0, NULL);
- 
-     return rc ? len : 0; /* fake a clear_user() return code */
- }
-@@ -3526,7 +3533,11 @@ unsigned int copy_from_user_hvm(void *to, const void *from, unsigned int len)
-         return 0;
-     }
- 
--    rc = hvm_copy_from_guest_linear(to, (unsigned long)from, len, 0, NULL);
-+    if ( evaluate_nospec(current->hcall_physaddr) )
-+        rc = hvm_copy_from_guest_phys(to, (unsigned long)from, len);
-+    else
-+        rc = hvm_copy_from_guest_linear(to, (unsigned long)from, len, 0, NULL);
-+
-     return rc ? len : 0; /* fake a copy_from_user() return code */
- }
- 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 6f8dfdff4a..b891089cda 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -160,8 +160,13 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%lx, %lx, %lx, %lx, %lx)",
-                     eax, regs->rdi, regs->rsi, regs->rdx, regs->r10, regs->r8);
- 
--        call_handlers_hvm64(eax, regs->rax, regs->rdi, regs->rsi, regs->rdx,
--                            regs->r10, regs->r8);
-+        if ( eax & 0x40000000U )
-+            curr->hcall_physaddr = true;
-+
-+        call_handlers_hvm64(eax & ~0x40000000U, regs->rax, regs->rdi, regs->rsi,
-+                            regs->rdx, regs->r10, regs->r8);
-+
-+        curr->hcall_physaddr = false;
- 
-         if ( !curr->hcall_preempted && regs->rax != -ENOSYS )
-             clobber_regs(regs, eax, hvm, 64);
-@@ -172,9 +177,13 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-                     regs->ebx, regs->ecx, regs->edx, regs->esi, regs->edi);
- 
-         curr->hcall_compat = true;
--        call_handlers_hvm32(eax, regs->eax, regs->ebx, regs->ecx, regs->edx,
--                            regs->esi, regs->edi);
-+        if ( eax & 0x40000000U )
-+            curr->hcall_physaddr = true;
-+
-+        call_handlers_hvm32(eax & ~0x40000000U, regs->eax, regs->ebx, regs->ecx,
-+                            regs->edx, regs->esi, regs->edi);
-         curr->hcall_compat = false;
-+        curr->hcall_physaddr = false;
- 
-         if ( !curr->hcall_preempted && regs->eax != -ENOSYS )
-             clobber_regs(regs, eax, hvm, 32);
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 559d201e0c..4ce9253284 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -240,6 +240,8 @@ struct vcpu
-     bool             hcall_compat;
-     /* Physical runstate area registered via compat ABI? */
-     bool             runstate_guest_area_compat;
-+    /* A hypercall is using the physical address ABI? */
-+    bool             hcall_physaddr;
- #endif
- 
- #ifdef CONFIG_IOREQ_SERVER
--- 
-2.49.0
+We recommend all users of the 4.18 stable series to update to this (now
+firmly) final full-support point release. The branch is moving into security-
+only maintenance mode now.
 
-
-
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+Regards, Jan
 
