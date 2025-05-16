@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3924C3ABD8
-	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:23:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.986812.1372338 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7FDC3ABC9
+	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:30:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.986837.1372349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsDl-0001Au-6b; Fri, 16 May 2025 10:23:17 +0000
+	id 1uFsKs-000353-TS; Fri, 16 May 2025 10:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 986812.1372338; Fri, 16 May 2025 10:23:17 +0000
+Received: by outflank-mailman (output) from mailman id 986837.1372349; Fri, 16 May 2025 10:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsDl-0001Al-3p; Fri, 16 May 2025 10:23:17 +0000
-Received: by outflank-mailman (input) for mailman id 986812;
- Fri, 16 May 2025 10:23:15 +0000
+	id 1uFsKs-00034w-Ql; Fri, 16 May 2025 10:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 986837;
+ Fri, 16 May 2025 10:30:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4w7r=YA=bounce.vates.tech=bounce-md_30504962.68271210.v1-e4369dd05760456da708e1454a2b2ce5@srs-se1.protection.inumbo.net>)
- id 1uFsDj-0000kS-HI
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:23:15 +0000
-Received: from mail133-28.atl131.mandrillapp.com
- (mail133-28.atl131.mandrillapp.com [198.2.133.28])
+ <SRS0=n8HW=YA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uFsKr-00034q-Ht
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:30:37 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c5a53bcc-323f-11f0-9ffb-bf95429c2676;
- Fri, 16 May 2025 12:23:13 +0200 (CEST)
-Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail133-28.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZzNSw4kMszMQxhr2
- for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 10:23:12 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- e4369dd05760456da708e1454a2b2ce5; Fri, 16 May 2025 10:23:12 +0000
+ id c88a9ebb-3240-11f0-9ffb-bf95429c2676;
+ Fri, 16 May 2025 12:30:27 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a0af41faa5so1060028f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 03:30:27 -0700 (PDT)
+Received: from [192.168.1.5] (user-109-243-64-38.play-internet.pl.
+ [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a35ca4d0fasm2461191f8f.8.2025.05.16.03.30.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 May 2025 03:30:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,635 +47,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5a53bcc-323f-11f0-9ffb-bf95429c2676
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1747390992; x=1747660992;
-	bh=DandEhzp+qPKdWdpmRXBmMLVVVlG3pQoydJsD7Um6to=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=gtSQHzLaiFJmwd3fY/To9E6iJGVRkCHSG2ZuIkc0Op0kIZhCpmBL1FMtQ0RRzjGhT
-	 +6UUlVSrIFt5X2KIvYJem9ub7n2DZlDuhjo4ql6GA8xRHMxof553+GlCluS5QT7h6A
-	 uAyUug7ybmUkDsBm4N1YIY3ZNrGE0IxOoS+Dspjb5SdtRdHl1jQ0Fk2pg62/aCaMHV
-	 BivaPSdUJ6LJKsmlFCCTv7nDmTBgyal8pQH9rcNerdOtaWGfrCdHVTJFa3u8MTMG8F
-	 TwAu6wjYelUgpxgK6P4Jcxi6HNfdf960BJs9j2BwbFAPElaw/wxJGLc8QNR7DJeV+1
-	 EU8LCBYPLwD9g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1747390992; x=1747651492; i=teddy.astie@vates.tech;
-	bh=DandEhzp+qPKdWdpmRXBmMLVVVlG3pQoydJsD7Um6to=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=OSzdryaztxGhQKUhl1b2SIM1J900Y41ZP6cTY31ujCh2PSc90ruH92ZAcYhmNwt6X
-	 EFVQ6BHBq5pbchzf9BnN+isz7mIJ42WC15MGY9kXG6NWfmuxH+MF3xGVdw06ymVzHw
-	 y1v4eSXDrTcKCWT8vjy8jzA1hUTXqMf8hgQoE3Z1/q9rYQM9MRlhAc8oZzimHQS3bh
-	 /AeEAI4AxO8Ak83uE4vArIO6rY3QG15uXtW8Qgd2sB8pCjgP3Eym8Jj/1vVUzw/Vq2
-	 sZoxH+KvWXD2uepKLDQMrdoNmafKPB9CtcCl1QCzPEaNp1wEXN0ZOpwNWNbYbqTE5J
-	 +YDYgmVJNPwlw==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=2009/16]=20common:=20Introduce=20confidential=20computing=20infrastructure?=
-X-Mailer: git-send-email 2.49.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1747390991298
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
-Message-Id: <2bff74440483be3c59156257a60d632727a18582.1747312394.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1747312394.git.teddy.astie@vates.tech>
-References: <cover.1747312394.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.e4369dd05760456da708e1454a2b2ce5?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250516:md
-Date: Fri, 16 May 2025 10:23:12 +0000
+X-Inumbo-ID: c88a9ebb-3240-11f0-9ffb-bf95429c2676
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747391427; x=1747996227; darn=lists.xenproject.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jGFAzIqle5bFXnLYqA97v+UXHOVGWk8Y1pP980RKSzI=;
+        b=YGf/mEfZX5KIXifqJtcUgj9w0rH4aM1JVdT99u0MPYstzylckbG2SdB9Stn1kVwgho
+         rX+sPRIQTKgs3FvaqnOKR443qzolr0+2ZrCaGPi+U7478wAQC74FBvWr2lRL4mOmcKRs
+         vMrQhTdAqCZjGf+GLk9VazdCOAUx/CKOWgrS9CmvA08MP8nFZff/ZHEWDxu7GG2WcyU1
+         WHV4jBkvHk71UyYPBvavFQ1OmmNqsgH9Fsm8QiQ4PfX5KFmM0GW9flyDE5ko7lqzoxT/
+         yzonOMBRAz5sxyM6Il6R86l/Lgpc9kyee0mPMyVgZGwCsjSMcxltUTwujXbaSr9s+ldg
+         WF9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747391427; x=1747996227;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=jGFAzIqle5bFXnLYqA97v+UXHOVGWk8Y1pP980RKSzI=;
+        b=KudjAxVbsj+7ra85c6vaxTxghWYAgMMX/4DPZghKT8wwnqslklrFt+FJp/A5jHrdO7
+         kfyhFuK7gNTmTJHBYzhr06f2rcThTpT3bnk0KBzpf95YajtsW0jiy2HSVtPyYOoh4L73
+         tAzWPJ+YlHYEzF3YL1DRh149HT0ZMi5fWrJOqh9mOOxh8vz5gp7YEwwj1Aa3T3orojP9
+         lPCeqBcj6xqCOaZNDp1hLggLO2j40RUNTVVbLAHMlX9rvjN84ILMk6BAjJFzLb07bFHR
+         nQnNBg6O462T3VcpuO528HT7PMjq6w8zWQaBWvJ8Jy9pWYvQlf8pdZ5cznUpQ5bNXRmW
+         VtHw==
+X-Forwarded-Encrypted: i=1; AJvYcCW0rYEUF8k9oWr1iYZ37lbDCzA495vYRYolVobVLsMWmQZTBhuZulCUrDIxnZxquRWDkY3RZHKmq0s=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyVV+V6ImkJPb9W/36KF4oxoq6xB5lgV1MynGmVVPwwJxAWULpQ
+	gYK4L+grruirPqDc8Z1R2lAjSgnVueKS3gjT7169NZiIMYqC/mV3qse7
+X-Gm-Gg: ASbGncuq+LuIKQnW3/J0aKIOybjc1jz2MwHNGOUbpKO1qkN0cmN16so7nLyYNbDjQx0
+	L1DfwGZOXoWXQvQoxvls2va7yoD0Pswm1QeuVqjIyhCDC5jdg9SCo8V/9BRlj4VWfTT8NoCl6T2
+	JQxt2Mo2h2W6yslzPIIZsjy58monnAAT/J86b+8uNrl2eNOFtvDE3g0A2v2KqQiNl0TRmYdQIDi
+	6xjCt68Cn+OB2DZRpn7cTORhMB46HhkS+tm4gC81+pIKVjyrhVh0rRmqIngkoI3VNozk2CqF9Ix
+	xF0ILfcSWhEF6B3vZm7jrPXG7GTk9QzqpSWEYVHtXUkd6A/7Keanwb7XB6b9RESgqe155WAIbU9
+	Qe8yZWj6MQ6NnELJCh66IPWoH
+X-Google-Smtp-Source: AGHT+IHTl4/QVNzyZEu/4YGFgfak5x2zXUD0cAzGm9ePLh/U0buHDQdhryLy0/sOIX0wQ70FeM1UEQ==
+X-Received: by 2002:a05:6000:2af:b0:3a1:f5cf:9553 with SMTP id ffacd0b85a97d-3a35fe6628amr1700349f8f.6.1747391426445;
+        Fri, 16 May 2025 03:30:26 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------DoFTsLVLewXu9u8IxN10XzQx"
+Message-ID: <cd0004ac-a475-40e8-98d0-e2af16ef2c5c@gmail.com>
+Date: Fri, 16 May 2025 12:30:25 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/16] xen/riscv: add ioremap_*() variants using
+ ioremap_attr()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1746530883.git.oleksii.kurochko@gmail.com>
+ <0258c1ac04a73b7d3f9f849507539a329b2998e3.1746530883.git.oleksii.kurochko@gmail.com>
+ <0fbe380e-2011-4238-9847-a007c754af6f@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <0fbe380e-2011-4238-9847-a007c754af6f@suse.com>
+
+This is a multi-part message in MIME format.
+--------------DoFTsLVLewXu9u8IxN10XzQx
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Introduce a subsystem that is used for future confidential computing
-platforms. This subsystem manages and provides hooks for domain management
-and exposes various informations for toolstack (COCO platform, supported
-features, ...).
 
-Add a domain creation flag to build a confidential computing guest.
+On 5/14/25 4:32 PM, Jan Beulich wrote:
+> On 06.05.2025 18:51, Oleksii Kurochko wrote:
+>> @@ -583,3 +584,36 @@ void *__init arch_vmap_virt_end(void)
+>>   {
+>>       return (void *)(VMAP_VIRT_START + VMAP_VIRT_SIZE);
+>>   }
+>> +
+>> +static void *ioremap_attr(paddr_t start, size_t len, pte_attr_t attributes)
+>> +{
+>> +    mfn_t mfn = _mfn(PFN_DOWN(start));
+>> +    unsigned int offs = start & (PAGE_SIZE - 1);
+>> +    unsigned int nr = PFN_UP(offs + len);
+>> +    void *ptr = __vmap(&mfn, nr, 1, 1, attributes, VMAP_DEFAULT);
+>> +
+>> +    if ( ptr == NULL )
+>> +        return NULL;
+>> +
+>> +    return ptr + offs;
+>> +}
+>> +
+>> +void __iomem *ioremap_nocache(paddr_t start, size_t len)
+>> +{
+>> +    return ioremap_attr(start, len, PAGE_HYPERVISOR_NOCACHE);
+>> +}
+> Why do you need both this and ...
+>
+>> +void __iomem *ioremap_cache(paddr_t start, size_t len)
+>> +{
+>> +    return ioremap_attr(start, len, PAGE_HYPERVISOR);
+>> +}
+>> +
+>> +void __iomem *ioremap_wc(paddr_t start, size_t len)
+>> +{
+>> +    return ioremap_attr(start, len, PAGE_HYPERVISOR_WC);
+>> +}
+>> +
+>> +void *ioremap(paddr_t pa, size_t len)
+>> +{
+>> +    return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
+>> +}
+> ... this? And why's the 1st parameter named differently for this last
+> one? Can't they all be in sync in this regard?
 
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
- xen/arch/x86/domain.c         |   4 +
- xen/arch/x86/hvm/hvm.c        |  10 ++-
- xen/common/Kconfig            |   5 ++
- xen/common/Makefile           |   1 +
- xen/common/coco.c             | 134 ++++++++++++++++++++++++++++++++++
- xen/common/domain.c           |  41 ++++++++++-
- xen/include/hypercall-defs.c  |   2 +
- xen/include/public/domctl.h   |   5 +-
- xen/include/public/hvm/coco.h |  65 +++++++++++++++++
- xen/include/public/xen.h      |   1 +
- xen/include/xen/coco.h        |  88 ++++++++++++++++++++++
- xen/include/xen/sched.h       |  10 +++
- 12 files changed, 363 insertions(+), 3 deletions(-)
- create mode 100644 xen/common/coco.c
- create mode 100644 xen/include/public/hvm/coco.h
- create mode 100644 xen/include/xen/coco.h
+Originally, I thought|ioremap_nocache()| was needed because it is used in
+common code. However, I now realize that the calls to|ioremap_nocache()|
+in|xen/drivers/char| are also ARM-specific. I assume all the
+UART drivers currently using|ioremap_nocache|() are intended for ARM.
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index f197dad4c0..a5783154ad 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -12,6 +12,7 @@
-  */
- 
- #include <xen/acpi.h>
-+#include <xen/coco.h>
- #include <xen/compat.h>
- #include <xen/console.h>
- #include <xen/cpu.h>
-@@ -948,6 +949,9 @@ void arch_domain_destroy(struct domain *d)
-     free_xenheap_page(d->shared_info);
-     cleanup_domain_irq_mapping(d);
- 
-+    if ( is_coco_domain(d) )
-+        coco_domain_destroy(d);
-+
-     psr_domain_free(d);
- }
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 625ae2098b..e1bcf8e086 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -15,6 +15,7 @@
- #include <xen/sched.h>
- #include <xen/irq.h>
- #include <xen/softirq.h>
-+#include <xen/coco.h>
- #include <xen/domain.h>
- #include <xen/domain_page.h>
- #include <xen/hypercall.h>
-@@ -702,7 +703,11 @@ int hvm_domain_initialise(struct domain *d,
-     if ( rc )
-         goto fail2;
- 
--    rc = hvm_asid_alloc(&d->arch.hvm.asid);
-+    if ( is_coco_domain(d) && d->coco_ops && d->coco_ops->asid_alloc )
-+        rc = d->coco_ops->asid_alloc(d, &d->arch.hvm.asid);
-+    else
-+        rc = hvm_asid_alloc(&d->arch.hvm.asid);
-+
-     if ( rc )
-         goto fail2;
- 
-@@ -710,6 +715,9 @@ int hvm_domain_initialise(struct domain *d,
-     if ( rc != 0 )
-         goto fail2;
- 
-+    if ( is_coco_domain(d) )
-+        coco_domain_initialise(d);
-+
-     return 0;
- 
-  fail2:
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 6d43be2e6e..1ddb73e707 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -576,4 +576,9 @@ config BUDDY_ALLOCATOR_SIZE
- 	  Amount of memory reserved for the buddy allocator to serve Xen heap,
- 	  working alongside the colored one.
- 
-+config COCO
-+	bool "Enable COnfidential COmputing support for guests" if EXPERT
-+	default n
-+	help
-+	  Allows to run guests in private encrypted memory space.
- endmenu
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 98f0873056..4409510fc0 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -5,6 +5,7 @@ obj-$(CONFIG_GENERIC_BUG_FRAME) += bug.o
- obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
- obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
-+obj-$(CONFIG_COCO) += coco.o
- obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
- obj-$(CONFIG_HAS_DEVICE_TREE) += device.o
- obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) += device.o
-diff --git a/xen/common/coco.c b/xen/common/coco.c
-new file mode 100644
-index 0000000000..d9bd17628d
---- /dev/null
-+++ b/xen/common/coco.c
-@@ -0,0 +1,134 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * General confidential computing functions.
-+ */
-+ 
-+#include <xen/coco.h>
-+#include <xen/errno.h>
-+#include <xen/domain.h>
-+#include <xen/domain_page.h>
-+#include <xen/guest_access.h>
-+#include <xen/hypercall.h>
-+#include <xen/sched.h>
-+#include <xen/sections.h>
-+#include <xen/types.h>
-+
-+#include <asm/p2m.h>
-+
-+#include <public/hvm/coco.h>
-+
-+static __ro_after_init struct coco_ops *coco_ops;
-+__read_mostly struct coco_platform_status platform_status;
-+
-+void __init coco_register_ops(struct coco_ops *ops)
-+{
-+    coco_ops = ops;
-+}
-+
-+int __init coco_init(void)
-+{
-+    int rc = 0;
-+
-+    if ( coco_ops )
-+        printk("coco: Using '%s'\n", coco_ops->name);
-+    else
-+    {
-+        printk("coco: No platform found\n");
-+        return 0;
-+    }
-+
-+    if ( coco_ops->init )
-+    {
-+        rc = coco_ops->init();
-+        
-+        if ( rc )
-+        {
-+            printk("coco: Unable to initialize coco platform (%d)", rc);
-+            goto err;
-+        }
-+    }
-+
-+    rc = coco_ops->get_platform_status(&platform_status);
-+    if ( rc )
-+    {
-+        printk("coco: Unable to get platform status\n");
-+        goto err;
-+    }
-+
-+    return 0;
-+
-+err:
-+    /* Disable confidential computing if initialization failed. */
-+    coco_ops = NULL;
-+    return rc;
-+}
-+
-+void coco_set_domain_ops(struct domain *d)
-+{
-+    ASSERT(is_coco_domain(d));
-+
-+    d->coco_ops = coco_ops->get_domain_ops(d);
-+}
-+
-+int coco_prepare_initial_memory(struct domain *d, gfn_t gfn, size_t page_count)
-+{
-+    /* TODO: Check prepare_initial_memory constraints (no dangling mapping). */
-+
-+    if ( d->coco_ops->prepare_initial_mem )
-+        return d->coco_ops->prepare_initial_mem(d, gfn, page_count);
-+    
-+    return 0;
-+}
-+
-+long coco_op_prepare_initial_mem(struct coco_prepare_initial_mem arg)
-+{
-+    long rc = 0;
-+    struct domain *d = get_domain_by_id(arg.domid);
-+
-+    if ( !d )
-+        return -ENOENT;
-+    
-+    if ( !is_coco_domain(d) )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    rc = coco_prepare_initial_memory(d, arg.gfn, arg.count);
-+
-+out:
-+    put_domain(d);
-+    return rc;
-+}
-+
-+long do_coco_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    if ( !is_hardware_domain(current->domain) )
-+        return -EPERM;
-+
-+    switch (cmd)
-+    {
-+        case XEN_COCO_platform_status:
-+        {
-+            if ( copy_to_guest(arg, &platform_status, 1) )
-+                return -EFAULT;
-+
-+            return 0;
-+        }
-+        
-+        case XEN_COCO_prepare_initial_mem:
-+        {
-+            struct coco_prepare_initial_mem prepare_initial_mem;
-+
-+            if ( copy_from_guest(&prepare_initial_mem, arg, 1) )
-+                return -EFAULT;
-+
-+            return coco_op_prepare_initial_mem(prepare_initial_mem);
-+        }
-+
-+        default:
-+            return -ENOSYS;
-+    }
-+}
-+
-+__initcall(coco_init);
-\ No newline at end of file
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index abf1969e60..c29d6efd29 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -4,6 +4,7 @@
-  * Generic domain-handling functions.
-  */
- 
-+#include <xen/coco.h>
- #include <xen/compat.h>
- #include <xen/init.h>
- #include <xen/lib.h>
-@@ -716,17 +717,51 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-     bool hap = config->flags & XEN_DOMCTL_CDF_hap;
-     bool iommu = config->flags & XEN_DOMCTL_CDF_iommu;
-     bool vpmu = config->flags & XEN_DOMCTL_CDF_vpmu;
-+    bool coco = config->flags & XEN_DOMCTL_CDF_coco;
- 
-     if ( config->flags &
-          ~(XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
-            XEN_DOMCTL_CDF_s3_integrity | XEN_DOMCTL_CDF_oos_off |
-            XEN_DOMCTL_CDF_xs_domain | XEN_DOMCTL_CDF_iommu |
--           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu) )
-+           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu | XEN_DOMCTL_CDF_coco) )
-     {
-         dprintk(XENLOG_INFO, "Unknown CDF flags %#x\n", config->flags);
-         return -EINVAL;
-     }
- 
-+    if ( coco )
-+    {
-+        if ( !IS_ENABLED(CONFIG_COCO) )
-+        {
-+            dprintk(XENLOG_INFO, "COCO support is compiled out\n");
-+            return -EINVAL;
-+        }
-+
-+        if ( !coco_is_supported() )
-+        {
-+            dprintk(XENLOG_INFO, "COCO is not available\n");
-+            return -EINVAL;
-+        }
-+    
-+        if ( !hvm )
-+        {
-+            dprintk(XENLOG_INFO, "COCO requested for non-HVM guest\n");
-+            return -EINVAL;
-+        }
-+
-+        if ( !hap )
-+        {
-+            dprintk(XENLOG_INFO, "COCO cannot work without HAP\n");
-+            return -EINVAL;
-+        }
-+
-+        if ( config->flags & XEN_DOMCTL_CDF_nested_virt )
-+        {
-+            dprintk(XENLOG_INFO, "Nested virtualization isn't supported with COCO\n");
-+            return -EINVAL;
-+        }
-+    }
-+
-     if ( config->grant_opts & ~XEN_DOMCTL_GRANT_version_mask )
-     {
-         dprintk(XENLOG_INFO, "Unknown grant options %#x\n", config->grant_opts);
-@@ -836,6 +871,9 @@ struct domain *domain_create(domid_t domid,
-     /* Holding CDF_* internal flags. */
-     d->cdf = flags;
- 
-+    if ( is_coco_domain(d) )
-+        coco_set_domain_ops(d);
-+
-     TRACE_TIME(TRC_DOM0_DOM_ADD, d->domain_id);
- 
-     lock_profile_register_struct(LOCKPROF_TYPE_PERDOM, d, domid);
-@@ -1617,6 +1655,7 @@ int domain_unpause_by_systemcontroller(struct domain *d)
-     {
-         d->creation_finished = true;
-         arch_domain_creation_finished(d);
-+        coco_domain_creation_finished(d); /* TODO: or before arch_* ? */
-     }
- 
-     domain_unpause(d);
-diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
-index 7720a29ade..6c01a9e395 100644
---- a/xen/include/hypercall-defs.c
-+++ b/xen/include/hypercall-defs.c
-@@ -209,6 +209,7 @@ hypfs_op(unsigned int cmd, const char *arg1, unsigned long arg2, void *arg3, uns
- #ifdef CONFIG_X86
- xenpmu_op(unsigned int op, xen_pmu_params_t *arg)
- #endif
-+coco_op(unsigned int cmd, void *arg)
- 
- #ifdef CONFIG_PV
- caller: pv64
-@@ -295,5 +296,6 @@ mca                                do       do       -        -        -
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
- paging_domctl_cont                 do       do       do       do       -
- #endif
-+coco_op                            do       do       do       do       do
- 
- #endif /* !CPPCHECK */
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 5b2063eed9..f4f69556b6 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -67,8 +67,11 @@ struct xen_domctl_createdomain {
- /* Should we expose the vPMU to the guest? */
- #define XEN_DOMCTL_CDF_vpmu           (1U << 7)
- 
-+#define _XEN_DOMCTL_CDF_coco         8
-+#define XEN_DOMCTL_CDF_coco          (1U << _XEN_DOMCTL_CDF_coco)
-+
- /* Max XEN_DOMCTL_CDF_* constant.  Used for ABI checking. */
--#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_vpmu
-+#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_coco
- 
-     uint32_t flags;
- 
-diff --git a/xen/include/public/hvm/coco.h b/xen/include/public/hvm/coco.h
-new file mode 100644
-index 0000000000..2e23d91e12
---- /dev/null
-+++ b/xen/include/public/hvm/coco.h
-@@ -0,0 +1,65 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __XEN_PUBLIC_HVM_COCO_H__
-+#define __XEN_PUBLIC_HVM_COCO_H__
-+
-+#include "../xen.h"
-+
-+#define XEN_COCO_platform_status 0
-+
-+/**
-+ * XEN_COCO_platform_status: Get the status of confidential computing platform.
-+ *
-+ * Query informations regarding the current confidential computing platform.
-+ *
-+ * Confidential computing is supposed working as long as COCO_STATUS_FLAG_SUPPORTED bit
-+ * is set, and additionally security-supported only if COCO_STATUS_FLAG_UNSAFE bit
-+ * is cleared.
-+ *
-+ * If COCO_PLATFORM_FLAG_UNSAFE is set but COCO_PLATFORM_FLAG_SUPPORTED is not,
-+ * then confidential computing is explicitly present but intentionally disabled
-+ * or forbidden by policy.
-+ */
-+struct coco_platform_status {
-+#define COCO_PLATFORM_none        0 /* None */
-+#define COCO_PLATFORM_amd_sev     1 /* AMD Secure Encrypted Virtualization */
-+#define COCO_PLATFORM_intel_tdx   2 /* Intel Trust Domain Extensions */
-+#define COCO_PLATFORM_arm_rme     3 /* ARM Realm Management Extension */
-+    uint32_t platform; /* OUT */
-+
-+#define COCO_PLATFORM_FLAG_sev_es  (1 << 0) /* AMD SEV Encrypted State */
-+#define COCO_PLATFORM_FLAG_sev_snp (1 << 1) /* AMD SEV Secure Nested Paging */
-+#define COCO_PLATFORM_FLAG_sev_tio (1 << 2) /* AMD SEV Trusted I/O */
-+    uint32_t platform_flags; /* OUT */
-+
-+#define COCO_STATUS_FLAG_supported (1 << 0) /* Confidential computing is supported and usable */
-+#define COCO_STATUS_FLAG_unsafe    (1 << 1) /* Confidential computing is unsafe (e.g debug mode) */
-+    uint32_t flags;    /* OUT */
-+    uint32_t features; /* OUT */
-+
-+    uint32_t version_major; /* OUT */
-+    uint32_t version_minor; /* OUT */
-+};
-+typedef struct coco_platform_status coco_platform_status_t;
-+DEFINE_XEN_GUEST_HANDLE(coco_platform_status_t);
-+
-+#define XEN_COCO_prepare_initial_mem 1
-+
-+/**
-+ * XEN_COCO_prepare_initial_mem: Prepare early memory pages of a guest
-+ * 
-+ * During guest construction, the confidential computing platform may require memory
-+ * to be prepared (e.g., encrypted) before the guest is started.
-+ * 
-+ * After preparation, any further access to these pages is invalid, as they may be
-+ * encrypted, sealed, or tracked by the platform.
-+ */
-+struct coco_prepare_initial_mem {
-+    domid_t domid;      /* IN */
-+    uint16_t _rsvd[3];  /* ZERO */
-+    uint64_t gfn;       /* IN */
-+    uint64_t count;     /* IN */
-+};
-+typedef struct coco_prepare_initial_mem coco_prepare_initial_mem_t;
-+DEFINE_XEN_GUEST_HANDLE(coco_prepare_initial_mem_t);
-+
-+#endif /* __XEN_PUBLIC_HVM_COCO_H__ */
-diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
-index 82b9c05a76..e656d6f617 100644
---- a/xen/include/public/xen.h
-+++ b/xen/include/public/xen.h
-@@ -118,6 +118,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
- #define __HYPERVISOR_xenpmu_op            40
- #define __HYPERVISOR_dm_op                41
- #define __HYPERVISOR_hypfs_op             42
-+#define __HYPERVISOR_coco_op              43
- 
- /* Architecture-specific hypercall definitions. */
- #define __HYPERVISOR_arch_0               48
-diff --git a/xen/include/xen/coco.h b/xen/include/xen/coco.h
-new file mode 100644
-index 0000000000..2ae43995ec
---- /dev/null
-+++ b/xen/include/xen/coco.h
-@@ -0,0 +1,88 @@
-+#ifndef _XEN_COCO_H
-+#define _XEN_COCO_H
-+
-+#include <asm/nospec.h>
-+
-+#include <xen/stdint.h>
-+#include <xen/sched.h>
-+
-+#include <public/hvm/coco.h>
-+
-+extern __read_mostly struct coco_platform_status platform_status;
-+
-+struct coco_domain_ops {
-+    int (*prepare_initial_mem)(struct domain *d, gfn_t gfn, size_t page_count);
-+    /* domain_creation_finished, ... */    
-+
-+    /* HVM domain hooks */
-+    int (*domain_initialise)(struct domain *d);
-+    int (*domain_creation_finished)(struct domain *d);
-+    void (*domain_destroy)(struct domain *d);
-+
-+#ifdef CONFIG_X86
-+    /* COCO-specific ASID allocation logic */
-+    int (*asid_alloc)(struct domain *d, struct hvm_asid *asid);
-+#endif
-+};
-+
-+struct coco_ops {
-+    const char *name;
-+    
-+    int (*init)(void);
-+    int (*get_platform_status)(coco_platform_status_t *status);
-+    struct coco_domain_ops *(*get_domain_ops)(struct domain *d);
-+};
-+
-+void __init coco_register_ops(struct coco_ops *ops);
-+int __init coco_init(void);
-+void coco_set_domain_ops(struct domain *d);
-+
-+#ifdef CONFIG_COCO
-+static inline bool coco_is_supported(void)
-+{
-+    return evaluate_nospec(platform_status.flags & COCO_STATUS_FLAG_supported);
-+}
-+
-+static inline int coco_domain_initialise(struct domain *d)
-+{
-+    if ( d->coco_ops && d->coco_ops->domain_initialise )
-+        return d->coco_ops->domain_initialise(d);
-+
-+    return 0;
-+}
-+
-+static inline int coco_domain_creation_finished(struct domain *d)
-+{
-+    if ( d->coco_ops && d->coco_ops->domain_creation_finished )
-+        return d->coco_ops->domain_creation_finished(d);
-+
-+    return 0;
-+}
-+
-+static inline void coco_domain_destroy(struct domain *d)
-+{
-+    if ( d->coco_ops && d->coco_ops->domain_destroy )
-+        d->coco_ops->domain_destroy(d);
-+}
-+#else
-+static inline bool coco_is_supported(void)
-+{
-+    return false;
-+}
-+
-+static inline int coco_domain_initialise(struct domain *d)
-+{
-+    return 0;
-+}
-+
-+static inline int coco_domain_creation_finished(struct domain *d)
-+{
-+    return 0;
-+}
-+
-+static inline void coco_domain_destroy(struct domain *d)
-+{
-+}
-+#endif
-+
-+#endif /* _XEN_COCO_H */
-\ No newline at end of file
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index f2f5a98534..c57bedc30a 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -630,6 +630,10 @@ struct domain
-     struct argo_domain *argo;
- #endif
- 
-+#ifdef CONFIG_COCO
-+    struct coco_domain_ops *coco_ops;
-+#endif
-+
-     /*
-      * Continuation information for domain_teardown().  All fields entirely
-      * private.
-@@ -1198,6 +1202,12 @@ static always_inline bool is_hvm_vcpu(const struct vcpu *v)
-     return is_hvm_domain(v->domain);
- }
- 
-+static always_inline bool is_coco_domain(const struct domain *d)
-+{
-+    return IS_ENABLED(CONFIG_COCO) &&
-+        evaluate_nospec(d->options & XEN_DOMCTL_CDF_coco);
-+}
-+
- static always_inline bool hap_enabled(const struct domain *d)
+I'll drop|ioremap_nocache()| for RISC-V, and I think it makes sense to
+create a separate patch to clean this up for ARM as well.
+
+~ Oleksii
+
+--------------DoFTsLVLewXu9u8IxN10XzQx
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 5/14/25 4:32 PM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:0fbe380e-2011-4238-9847-a007c754af6f@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 06.05.2025 18:51, Oleksii Kurochko wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">@@ -583,3 +584,36 @@ void *__init arch_vmap_virt_end(void)
  {
-     /* sanitise_domain_config() rejects HAP && !HVM */
--- 
-2.49.0
+     return (void *)(VMAP_VIRT_START + VMAP_VIRT_SIZE);
+ }
++
++static void *ioremap_attr(paddr_t start, size_t len, pte_attr_t attributes)
++{
++    mfn_t mfn = _mfn(PFN_DOWN(start));
++    unsigned int offs = start &amp; (PAGE_SIZE - 1);
++    unsigned int nr = PFN_UP(offs + len);
++    void *ptr = __vmap(&amp;mfn, nr, 1, 1, attributes, VMAP_DEFAULT);
++
++    if ( ptr == NULL )
++        return NULL;
++
++    return ptr + offs;
++}
++
++void __iomem *ioremap_nocache(paddr_t start, size_t len)
++{
++    return ioremap_attr(start, len, PAGE_HYPERVISOR_NOCACHE);
++}
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+Why do you need both this and ...
 
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+void __iomem *ioremap_cache(paddr_t start, size_t len)
++{
++    return ioremap_attr(start, len, PAGE_HYPERVISOR);
++}
++
++void __iomem *ioremap_wc(paddr_t start, size_t len)
++{
++    return ioremap_attr(start, len, PAGE_HYPERVISOR_WC);
++}
++
++void *ioremap(paddr_t pa, size_t len)
++{
++    return ioremap_attr(pa, len, PAGE_HYPERVISOR_NOCACHE);
++}
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+... this? And why's the 1st parameter named differently for this last
+one? Can't they all be in sync in this regard?</pre>
+    </blockquote>
+    <pre data-start="59" data-end="336" class="">Originally, I thought <code
+    data-start="81" data-end="100">ioremap_nocache()</code> was needed because it is used in
+common code. However, I now realize that the calls to <code
+    data-start="188" data-end="207">ioremap_nocache()</code>
+in <code data-start="211" data-end="229">xen/drivers/char</code> are also ARM-specific. I assume all the
+UART drivers currently using <code data-start="81" data-end="100">ioremap_nocache</code>() are intended for ARM.</pre>
+    <pre data-start="338" data-end="467" class="">I'll drop <code
+    data-start="348" data-end="367">ioremap_nocache()</code> for RISC-V, and I think it makes sense to
+create a separate patch to clean this up for ARM as well.
 
+~ Oleksii</pre>
+  </body>
+</html>
 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+--------------DoFTsLVLewXu9u8IxN10XzQx--
 
