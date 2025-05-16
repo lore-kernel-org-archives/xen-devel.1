@@ -4,52 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E1AC3ABD8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F077EC3ABC9
 	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 23:22:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.987716.1372949 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.987718.1372970 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uG4NI-0006WI-Kh; Fri, 16 May 2025 23:21:56 +0000
+	id 1uG4NK-00070w-Em; Fri, 16 May 2025 23:21:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 987716.1372949; Fri, 16 May 2025 23:21:56 +0000
+Received: by outflank-mailman (output) from mailman id 987718.1372970; Fri, 16 May 2025 23:21:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uG4NI-0006W9-Hn; Fri, 16 May 2025 23:21:56 +0000
-Received: by outflank-mailman (input) for mailman id 987716;
- Fri, 16 May 2025 23:21:55 +0000
+	id 1uG4NK-00070D-8g; Fri, 16 May 2025 23:21:58 +0000
+Received: by outflank-mailman (input) for mailman id 987718;
+ Fri, 16 May 2025 23:21:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iQOe=YA=amd.com=stefano.stabellini@srs-se1.protection.inumbo.net>)
- id 1uG4NH-0005s2-Lo
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 23:21:55 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060f.outbound.protection.outlook.com
- [2a01:111:f403:2415::60f])
+ id 1uG4NI-0005s2-M2
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 23:21:56 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:2412::61d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8d5ad323-32ac-11f0-9eb6-5ba50f476ded;
- Sat, 17 May 2025 01:21:54 +0200 (CEST)
-Received: from CH0PR03CA0257.namprd03.prod.outlook.com (2603:10b6:610:e5::22)
- by BL4PR12MB9722.namprd12.prod.outlook.com (2603:10b6:208:4ed::20)
+ id 8e5915ea-32ac-11f0-9eb6-5ba50f476ded;
+ Sat, 17 May 2025 01:21:55 +0200 (CEST)
+Received: from CH0PR03CA0427.namprd03.prod.outlook.com (2603:10b6:610:10e::30)
+ by PH7PR12MB9253.namprd12.prod.outlook.com (2603:10b6:510:30d::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.33; Fri, 16 May
- 2025 23:21:49 +0000
-Received: from CH1PEPF0000A34A.namprd04.prod.outlook.com
- (2603:10b6:610:e5:cafe::2a) by CH0PR03CA0257.outlook.office365.com
- (2603:10b6:610:e5::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.20 via Frontend Transport; Fri,
- 16 May 2025 23:21:49 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.24; Fri, 16 May
+ 2025 23:21:48 +0000
+Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
+ (2603:10b6:610:10e:cafe::51) by CH0PR03CA0427.outlook.office365.com
+ (2603:10b6:610:10e::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.25 via Frontend Transport; Fri,
+ 16 May 2025 23:21:48 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH1PEPF0000A34A.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8746.27 via Frontend Transport; Fri, 16 May 2025 23:21:49 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ 15.20.8746.27 via Frontend Transport; Fri, 16 May 2025 23:21:48 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 16 May
- 2025 18:21:49 -0500
+ 2025 18:21:47 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 16 May
+ 2025 18:21:47 -0500
 Received: from smtp.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Fri, 16 May 2025 18:21:48 -0500
+ Transport; Fri, 16 May 2025 18:21:46 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8d5ad323-32ac-11f0-9eb6-5ba50f476ded
+X-Inumbo-ID: 8e5915ea-32ac-11f0-9eb6-5ba50f476ded
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XKtZ8aW/IiRwTyZ/uaqz2fxpVZEXpFPF5KuSGIaAZdfsXEncC1DtyFeIXx5yR8quLC7bkso5t7y7XBWgbSRCoDiy+WJ/tCF+Rdl/B+bMhXOIJIiwoHUfGV2OzabSlcnzPXvu5GoDix8P7g42I+/jmy8+v0gBbt3utouL4t1h69cJBV6OFJhi+fe0xztZmplWWWNERth+1NPWdLst1uTO3WQsR+vCseKSpQmXavrDvgcv5RwTPGXcBxVVUqLBowusFm7r09go//2LZ0GBoWj8q7wyiI8w+ZJlwf9fVyCmIL4+bJOMycrtaqP1oiEnBveTPxBmf2sbrlhvawwrFGTkkw==
+ b=N48k9fDCm8AVH1vOEgCH4zBs4bk7c80SjG3qyO47bAB54rcAosn7JTDslQ63+0Y1QrM84c99Cl2J9L45RgglPn++X0cCMcHf1qywv69WshZ0Rc0BVM4buCw0Un7HhOmrOVB7eZmb7nJpI/lOm2JlMO3TjXpbtT+s8y34MM0G7zKkCGdNlsXc7TT0s3RXMZzxYIlxETGuGDA/7UIpu1/A9BF+LvN0HMe6bW1vSP5B2AxIOs0t9MN8njLEdMakrILAHQ6QCAei6pR6uZvLplveiQ+JRLVpuWc6d68gyZJE9hREcE7V8QDCDVmVnRBFcjLDqShIMhC3bu9Odc0qd+Es+w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ibzV0RVz7ZzeEdOUX3J5YjlDrdqnL5X0dajYZtxmsP0=;
- b=qsqNsvK3UoFdwVwAtG07+1Glnd7poxQsU5eybvEc8WpwOUAOqfqek7xk+BYfkaW8PPf7Q3Ia/YDPUg6Ll5okXGbdqWDDmDNOJic0mFXsVe4yrUg3CY7XAJaRkOuy86n3UO7A1tkqcxnG1tYs9B/ygfNdzebVGrDejFFUhRLRyS+q1UwEmuYX0zTbnG7YK08WuorFuoCOBsGze7l+S4m3JR8gJIV6kd9VVZzNM1vTRWnXeyO0YbZWvdCzSZW8vT0S0gaJhWB/T4YmDaE9ELyQ1Qc+aM2WgVfCUFVb24sFdQGypLRJMJ5k4yvSx8DIKjiQ9DErETwkuDtyFfYh15vozA==
+ bh=57V9Nd7Q2z6fh1EUxxPXh8g4JtB/sK8KIr3H3tt5FC0=;
+ b=RgqtonA+hPeHS2wHXU0H0nn9XIGhKwvRhnKo8r4QfRVbgHkaSGZzSr/ZLZoPDBpCnDWw2+96ZyjqlDIC0WysihaJVAeI5FOvNtTjgHmnrur+0U/HKWQRQXjxDtRt6h4xz2JglEU9nVJP1bgxWU5rHATOqfUxeior5zjkU9byWX6mqUhDCCbdqzkj7kjtOUS0Ye2ARxaCLgI+0HF0fBd8ga7RQIVeLPiLFyDasqsM/vKF7hXjLYcnzPPel2IXU3FuCtKzyAgUOeoMcvh5ow08fKCEZioVq7FNfrtM7RUdQWy/GxxPJKKBo4norIABPTE3nhB5UuRwufQ36JMAnadovg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibzV0RVz7ZzeEdOUX3J5YjlDrdqnL5X0dajYZtxmsP0=;
- b=h0cpAAOTRiq9qzJStQIhz1QLaNjH/MxpR7mxAGcabPwUGnn36mhqTW45CCB35AgxsuT5uXT8xcCg50dGQ0Ezri6ZEpB1svl0AYOBOmR2z8y/hKcyRgEtCAH/qOgKac5kxzQn6zJK2Myj8ISn9g+1Bq/KKUlOhoEcG3Qe90Cvppc=
+ bh=57V9Nd7Q2z6fh1EUxxPXh8g4JtB/sK8KIr3H3tt5FC0=;
+ b=3pjvcGzeemkOKnkD40JJuwZ3Z40UJ5INMqPZTSPCgwfuL6Egc5OumHnzoUELueenoZvNVhlA5ZsrKZhh3skcvZP5GsToMJ5RSIO3H2DuW7xJDxgHatHs3TKa4eYjnGk7vQRdianV0XdY79Z5KX/fgJil9TSiHNU4yOvwG5N7neo=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -90,153 +94,126 @@ CC: <andrew.cooper3@citrix.com>, <michal.orzel@amd.com>, <jbeulich@suse.com>,
 	<bertrand.marquis@arm.com>, Federico Serafini
 	<federico.serafini@bugseng.com>, Stefano Stabellini
 	<stefano.stabellini@amd.com>
-Subject: [PATCH 6/6] automation/eclair: update configuration of D4.10
-Date: Fri, 16 May 2025 16:21:30 -0700
-Message-ID: <20250516232130.835779-6-stefano.stabellini@amd.com>
+Subject: [PATCH 4/6] xen: refactor include guards
+Date: Fri, 16 May 2025 16:21:28 -0700
+Message-ID: <20250516232130.835779-4-stefano.stabellini@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <alpine.DEB.2.22.394.2505161618280.145034@ubuntu-linux-20-04-desktop>
 References: <alpine.DEB.2.22.394.2505161618280.145034@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: stefano.stabellini@amd.com does not
+Received-SPF: None (SATLEXMB05.amd.com: stefano.stabellini@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34A:EE_|BL4PR12MB9722:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d0098eb-b6ae-4ef0-8585-08dd94d06f4c
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|PH7PR12MB9253:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c29a5e5-071d-463c-c03b-08dd94d06e48
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?mLAxsJ2cxqSOq0wJUPAnz2mOBw1ZTjLDZx4BVp8M3ugPp2B7IBqi7ZATimzP?=
- =?us-ascii?Q?z328Tsk2tt/wFHVVGR5VAUkvplRqtY3YHZiJi/e6+mJi/aZAHroMC+DKNENz?=
- =?us-ascii?Q?vhD7wszYwhgnu1tIc4Xp1fX/2MXyPBcZi+KejgzNGlE423RFjYeiwUf75iEC?=
- =?us-ascii?Q?pYluNh6TEXZiT7c0oaVFBYRGlRoQw6pU38H/1h3yld8r5sDuYEN2fUwZ3uhX?=
- =?us-ascii?Q?PAdn0cOlw2wQOYdFomWH8urhyreiK75XT8rP7jGiAW3kZ9yknGAxJiULWr5m?=
- =?us-ascii?Q?fmfGzqURHiFB13uWShagI5nX01+YgdzHeK3zxPQVty+zTB41h00TTs3KncGi?=
- =?us-ascii?Q?h460QB6B9zWYQDRE2cMhU6QdhWVC+T8lP7CVwywUJmBkYRqHGLetSeA0BM31?=
- =?us-ascii?Q?DZXNkWtlah5L3ExQgBIOnsyxD3N+/S/uboS8EVCkTHYjzJmtDmn85jbYR7xZ?=
- =?us-ascii?Q?XVhWdlzCh/Q/Bc5l8WHZvdcM5R6H5XQKpKYC89qByDb71tiM0+ADXmcC+EDa?=
- =?us-ascii?Q?edpqZ4MpEWUmlaE+jrUNhku2zJAvFyjEcfOwtLJWJP+Jd3p1zd4jG7DXdOzS?=
- =?us-ascii?Q?2LF1DYtVgChYyg/gh5yFROhwRtHCq4e+Gxrm7Z+gia9ee/gWKNlHrVUeTB+O?=
- =?us-ascii?Q?Xpnq1zCj9eQu+m6dmseLr1TQ0aWFDRgV6fi4aIP1v5ygl4aFvt0JZnEVH0mU?=
- =?us-ascii?Q?Q2HjvBh7QmEMtaF3EhNkvZdPmRu1nXmYwQ7ZyA2/9DgQvZchx0ynZ4bqFVNF?=
- =?us-ascii?Q?xOnw9Y6a+BmMk2D897ScWx/3VOXzRQANTyU2z7Cslw0T0B+pO3zQOTU1ZkpQ?=
- =?us-ascii?Q?0wBUfXATk3if3y76XTjKf7/IphRksHb9aJ4Lyi3ECoF8g0YsKSHypxe9S9BY?=
- =?us-ascii?Q?n1cmlQZVYxFE7ptfwOXB3pk4g1VD2lf5lDWjkNE65+ZaxkWCi3+NeP0TIj+Y?=
- =?us-ascii?Q?HuF17uWVbhiNWCvv5f+Rz8nd91/RY+rX6LfnCzSUgAsMRpNkgXwRS/EVDEpJ?=
- =?us-ascii?Q?g3IBqH8fU3IU8mhSRz2foxQ7H/rLquLTjtcZY5vXDswGXzRPAoMvHljRPnOJ?=
- =?us-ascii?Q?/LSEi5Icx8eVOYrYS3gFDfImbTqIkxQOdLfmGnLmghMGrvX8VZ8jrTXzXBys?=
- =?us-ascii?Q?MLTq3t5uisaXCf3qmcj8UpZUkI/iXpAXW4U9MwxqpHKUNXlx5LlgrFtwOiGr?=
- =?us-ascii?Q?R8J1Nv97jYfAvflyeJ/1EBU24k6eJ35NPovV8Ilxxd77wnGhftvCZchvQn+i?=
- =?us-ascii?Q?Xv2dqXlUBaEoPxuCo/xGwllvOy59l7kNgZdudqSvP69EvNvsUx8qtn9xMsuJ?=
- =?us-ascii?Q?eC1JOaRDSeXtH/FtDReomDkmTMXn8iAmbxXSiwK7D1+hrdZkJ49WCHbDgDbW?=
- =?us-ascii?Q?AmkqAtfnlkGF22d3oC6RHSpYysLBZYggwfjPTYMC+DuSUGf/UEMx5Qwl2nFI?=
- =?us-ascii?Q?/2lZdlGMhBlrJQgyJoFIEqBxsPucJ4Mw/r9ZQLJRo6zm9404/YRhBivvcbps?=
- =?us-ascii?Q?9BNYXQPCKR/j+viAp4OkoZaSC60qjHFf5VFV?=
+	=?us-ascii?Q?GQspYlvZQDBymHqomv21D0KcsBZtzoy/cYmN4qXNJJ17E4GV4MRNkeIy2Ppa?=
+ =?us-ascii?Q?ZCAPTO1ppVLgK2M//Jtomfm1srPqt+Y0pkIPIdOejEOxVvfpvNekUw8Ahz5E?=
+ =?us-ascii?Q?Odv4LwymtYlLP+gqSFXTtyLJ2Bg+O6Th9xfwuOZyHKILD0++i73msKpZvEHs?=
+ =?us-ascii?Q?dF6U/j2q99+NURY5ZR3dpT0vq1/h3gNWS4Rac+5tqW7h+OSZW27cTM6yfBjb?=
+ =?us-ascii?Q?+aJAKca0VQlX2QWVYMxIVAq5mqjeUFWGOwXU8/upwNmke32mqzgLZ/KTXXeo?=
+ =?us-ascii?Q?NCxcJoO1fHItPdPofjaAwIO9IES8M5LnnOLvqjSlC+ddSrhMPkVoQxpLCGqT?=
+ =?us-ascii?Q?nrfoM6eOXxnz7pIVTuRKc2G9U63Pg37lQCX2ZZ/WngSEdWgKndZoCowNRlDD?=
+ =?us-ascii?Q?lui321tLATdokVkIfEAE6NMc/1dk8tq1lJGgbFVHQVEE3cyYwrnYzTFXmjJW?=
+ =?us-ascii?Q?jwR/FpaeJsSlI36n1uB6xP2nOPj8fPSIbtCWSA/hbLKeDPMtL5BX/orj02Rd?=
+ =?us-ascii?Q?WJMqrTSdxm0Kc3eVHoS/ypjH9+sS+/dG4icTqRHDJTRfveYIJOYBHOov3733?=
+ =?us-ascii?Q?t98dhI3sK1AUQ6jvMCZKBtkK/IlPtjyZTXk/9mysYj557WHaCTpWk47TRXBU?=
+ =?us-ascii?Q?LJmqY/eIjqK+sQm9hjY7ijuFrHHV5bkv12M8H4apsmSuIMtlrv9vkMfpkN4B?=
+ =?us-ascii?Q?xJ4rtGulmBhiHofMIx4wkF/DNqTQwBR3DGCbRnqSROLlqIFi29Nc6LgF26OV?=
+ =?us-ascii?Q?mv+DUohg6Y/Un+qIwfBqCiGt1WSTPSQVNqrA0kQSOkpyxRq1xNPhpSj22e96?=
+ =?us-ascii?Q?lAjaa82hwRiUE+7LcPhzlF+puHk0a3xdjZojD0UU6Gm14q4/7XeaM9NpkLz9?=
+ =?us-ascii?Q?QRAagRwb2/p4zx1Z3Sipm+FBze6CD7ziCm80Sp8KkFIOBz6SmBLK4Eon7bLp?=
+ =?us-ascii?Q?fAbEvTImiaLkcSm6r1w1Htfa5GrVXBRyy7/W6OoQQZbZegaqlk1UPNVspdoB?=
+ =?us-ascii?Q?S2vGEACW3tR4syFjKTqwVxj2Aia+f2ntjbz7MJXNsozU7I9y2BIV+mnx7VtV?=
+ =?us-ascii?Q?WIP2aFBD/105un/ZIa/tTPyRH+PADhenX6kZs9GmQKcnmb+52AGWw3I0V57v?=
+ =?us-ascii?Q?yvWNR6J/DIFolDg/duMwpXEr3Zr195iwHDRQg0XHD98MzWDEZ2+ZGCOy26aN?=
+ =?us-ascii?Q?9PAML6S0xo2JhHwBrtit6zJlpLIc0fzf22jwIL/qPh5dA5TGazzsOFIHjM4L?=
+ =?us-ascii?Q?Dy0F27AcTazRBMgTrgOa8MdbS8p7BPsRMncBMzCYMjyrMX8cs9jG+wHsGfvy?=
+ =?us-ascii?Q?/6vLdizIQv2wjQXQ0PyQigSeO+XI0jYKraFd9XwfwMfpZuSeA3L3adr+YDtv?=
+ =?us-ascii?Q?Q3D2xCWLwWeP/85hPUeDlI+rBXt6gwHU7tft/UBFaKYDm9RsZUBLNnqVqDqX?=
+ =?us-ascii?Q?uIGUy3rSuyLAXVwHUHIw7kVyZo49IiYUZDm7eunYsthjQ71YuBEmPzCnrKne?=
+ =?us-ascii?Q?QiZuxeVpM5/RbWaD+mkZrEQjBtn7QrF7VLQ0?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 23:21:49.7292
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 23:21:48.0301
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d0098eb-b6ae-4ef0-8585-08dd94d06f4c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c29a5e5-071d-463c-c03b-08dd94d06e48
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000A34A.namprd04.prod.outlook.com
+	CH1PEPF0000A34B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR12MB9722
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9253
 
 From: Federico Serafini <federico.serafini@bugseng.com>
 
-MISRA C Directive 4.10 states that "Precautions shall be taken in order
-to prevent the contents of a header file being included more than
-once".
+Refactor inclusion guards:
+1) use a syntax that is more likely to be recognized by static
+   analyzers;
+2) follow the CODING_STYLE.
 
-Update ECLAIR configuration to:
-- extend existing deviation to other comments explicitly saying a file
-  is intended for multiple inclusion;
-- extend existing deviation to other autogenerated files;
-- tag the guidelines as clean.
-
-Update deviations.rst accordingly.
+No functional change.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 ---
- automation/eclair_analysis/ECLAIR/deviations.ecl | 14 +++++++++++---
- automation/eclair_analysis/ECLAIR/tagging.ecl    |  1 +
- docs/misra/deviations.rst                        | 15 +++++++++++++++
- 3 files changed, 27 insertions(+), 3 deletions(-)
+ xen/include/xen/err.h     | 10 +++++++---
+ xen/include/xen/softirq.h | 10 +++++++---
+ 2 files changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index 9c67358d46..3fb6d9f971 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -72,11 +72,19 @@ they are not instances of commented-out code."
- -config=MC3A2.D4.3,reports+={deliberate, "any_area(any_loc(file(arm64_bitops))&&context(name(int_clear_mask16)))"}
- -doc_end
- 
---doc_begin="Files that are intended to be included more than once do not need to
--conform to the directive."
-+-doc_begin="Files that are intended to be included more than once (and have
-+a comment that says this explicitly) do not need to conform to the directive."
- -config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* This file is intended to be included multiple times\\. \\*/$, begin-4))"}
-+-config=MC3A2.D4.10,reports+={safe, "first_area(text(^.*Explicitly intended for multiple inclusion.*$, begin-3))"}
-+-config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* Generated file, do not edit! \\*/$, begin-2))"}
- -config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* Generated file, do not edit! \\*/$, begin-3))"}
---config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/generated/autoconf.h$)))"}
-+-doc_end
+diff --git a/xen/include/xen/err.h b/xen/include/xen/err.h
+index cbdd1bf7f8..5bdf8b215c 100644
+--- a/xen/include/xen/err.h
++++ b/xen/include/xen/err.h
+@@ -1,5 +1,7 @@
+-#if !defined(__XEN_ERR_H__) && !defined(__ASSEMBLY__)
+-#define __XEN_ERR_H__
++#if !defined(XEN_ERR_H)
++#define XEN_ERR_H
 +
-+-doc_begin="Autogenerated files that do not need to conform to the directive."
-+-config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/generated/autoconf\\.h$)))"}
-+-config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/xen/compile\\.h$)))"}
-+-config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/compat/xlat\\.h$)))"}
-+-config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/arch/(arm||x86)/include/generated/asm/.*$)))"}
- -doc_end
++#if !defined(__ASSEMBLY__)
  
- -doc_begin="Including multiple times a .c file is safe because every function or data item
-diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
-index 5bc35db1fd..7e3095423b 100644
---- a/automation/eclair_analysis/ECLAIR/tagging.ecl
-+++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
-@@ -23,6 +23,7 @@
- "MC3A2.D1.1||
- MC3A2.D2.1||
- MC3A2.D4.1||
-+MC3A2.D4.10||
- MC3A2.D4.11||
- MC3A2.D4.14||
- MC3A2.R1.1||
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index fe0b1e10a2..87ed81c918 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -30,6 +30,21 @@ Deviations related to MISRA C:2012 Directives:
-        not to add an additional encapsulation layer.
-      - Tagged as `deliberate` for ECLAIR.
+ #include <xen/compiler.h>
+ #include <xen/errno.h>
+@@ -41,4 +43,6 @@ static inline int __must_check PTR_RET(const void *ptr)
+ 	return IS_ERR(ptr) ? PTR_ERR(ptr) : 0;
+ }
  
-+   * - D4.10
-+     - Files that are intended to be included more than once (and have
-+       a comment that says this explicitly) do not need to conform to the
-+       directive.
-+     - Tagged as `safe` for ECLAIR.
+-#endif /* __XEN_ERR_H__ */
++#endif /* __ASSEMBLY__ */
 +
-+   * - D4.10
-+     - There are autogenerated files that do not need to comply to the
-+       directive.
-+     - Tagged as `safe` for ECLAIR. Such files are:
-+        - xen/include/generated/autoconf.h
-+        - xen/include/compat/xlat.h
-+        - xen/include/xen/compile.h
-+        - xen/arch/{arm,x86}/include/generated/asm/\*
++#endif /* XEN_ERR_H */
+diff --git a/xen/include/xen/softirq.h b/xen/include/xen/softirq.h
+index 33d6f2ecd2..5593c7b0a9 100644
+--- a/xen/include/xen/softirq.h
++++ b/xen/include/xen/softirq.h
+@@ -1,5 +1,7 @@
+-#if !defined(__XEN_SOFTIRQ_H__) && !defined(__ASSEMBLY__)
+-#define __XEN_SOFTIRQ_H__
++#if !defined(XEN_SOFTIRQ_H)
++#define XEN_SOFTIRQ_H
 +
-    * - D4.10
-      - Including multiple times a .c file is safe because every function or data item
-        it defines would in (the common case) be already defined.
++#if !defined(__ASSEMBLY__)
+ 
+ /* Low-latency softirqs come first in the following list. */
+ enum {
+@@ -40,4 +42,6 @@ void cpu_raise_softirq_batch_finish(void);
+  */
+ void process_pending_softirqs(void);
+ 
+-#endif /* __XEN_SOFTIRQ_H__ */
++#endif /* __ASSEMBLY__ */
++
++#endif /* XEN_SOFTIRQ_H */
 -- 
 2.25.1
 
