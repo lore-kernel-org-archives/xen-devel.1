@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68321C3ABC9
-	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:42:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.986934.1372450 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A14C3ABDD
+	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 10:43:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.986947.1372458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsVl-0001q4-8N; Fri, 16 May 2025 10:41:53 +0000
+	id 1uFsWl-0002eI-Is; Fri, 16 May 2025 10:42:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 986934.1372450; Fri, 16 May 2025 10:41:53 +0000
+Received: by outflank-mailman (output) from mailman id 986947.1372458; Fri, 16 May 2025 10:42:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFsVl-0001px-4O; Fri, 16 May 2025 10:41:53 +0000
-Received: by outflank-mailman (input) for mailman id 986934;
- Fri, 16 May 2025 10:41:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=C2cV=YA=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uFsVk-0001pr-IE
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:41:52 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 60551822-3242-11f0-9eb6-5ba50f476ded;
- Fri, 16 May 2025 12:41:51 +0200 (CEST)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-600dbfe7b37so1232477a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 03:41:51 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d2779efsm136249566b.77.2025.05.16.03.41.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 May 2025 03:41:50 -0700 (PDT)
+	id 1uFsWl-0002eB-GG; Fri, 16 May 2025 10:42:55 +0000
+Received: by outflank-mailman (input) for mailman id 986947;
+ Fri, 16 May 2025 10:42:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=UFMR=YA=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1uFsMI-00034q-TM
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 10:32:06 +0000
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [2607:f8b0:4864:20::433])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 02635dd6-3241-11f0-9ffb-bf95429c2676;
+ Fri, 16 May 2025 12:32:05 +0200 (CEST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-74267c68c11so1863991b3a.0
+ for <xen-devel@lists.xenproject.org>; Fri, 16 May 2025 03:32:05 -0700 (PDT)
+Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
+ by smtp.gmail.com with UTF8SMTPSA id
+ d9443c01a7336-231d4adbfc0sm11446755ad.71.2025.05.16.03.32.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 May 2025 03:32:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,143 +47,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 60551822-3242-11f0-9eb6-5ba50f476ded
+X-Inumbo-ID: 02635dd6-3241-11f0-9ffb-bf95429c2676
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1747392111; x=1747996911; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=SbAH3afseT0IFEIiUqd5KdjnhZsxM22cO8YrFfFbM0o=;
-        b=ECt/wjzCtAVW2LUrNblc7duJ0nbD2xxNp1DfMxGDUeALEX5VItMntxhhISE56W0BCh
-         RWgaYH+71zbed4L+2KvbpUC8+MuCULzalRMhw5lUbSvINgG7EuKTL+wx6AuA9+PV/a5D
-         6Pz0/xs9L4aX+BXjTi0Mu1HF1l8wBAhp32VGDxiAzdYsbSmOIVmsfmaxyMjbk+49B3VV
-         +NB2ybMunqSgxCFhFUjeM75sJcTXUO0v9VsT7BCCGsrSSw+jOIKMVHhMuQGH9VQcU6Sx
-         e7nQMRu/oCANwSGi0V+jWSOaEfmHsfr13bYjZAdk756Izth1z1kBWBACL/pU6Y1mbkeo
-         YqDg==
+        d=citrix.com; s=google; t=1747391523; x=1747996323; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=j0XKJISHS4dzAt7Jr7nklY20nUhhhSE6Y+hlXuQuwr0=;
+        b=Qitva1uZKekuWHP4VV3PFxYZbY4EHTJvP4oUnlJ0YzczmAk6jwjox9S10SlNpcBqU4
+         +8W4yVVHVKco7Gsn2h1BnpuDJjrGbFGPMVd3R82GaU7i/h3yu020sHM9ghW3I7TYK4C4
+         O5KyMEYqxtaNXbsjJih4KUnsiXoVE79NF7QbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747392111; x=1747996911;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1747391523; x=1747996323;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SbAH3afseT0IFEIiUqd5KdjnhZsxM22cO8YrFfFbM0o=;
-        b=OumqwxozNEQbWnSAnRtrf/JlTVWAAFIfpiPRLW3tS69VDjSYuvETjhjHmntD0UvmA/
-         m2CtVFEiOifmQgBPFwoxBZ/AY5ZbkEnYzCngzAmEljRjNgKmG7GbzZTXsOu/aQnVO4Jq
-         NNU6pUP0DoTy0r5vKJPpfTjC+2ZSAt6iy2veKxWAZmF/oV5xsppAchxU4THCfH2DFo69
-         yHMWuDQxa8P9SN35iEkMLA5lZOBo0PCY/wEUoJ0Kxeteid35smzA2r/xYFWD2NY6E/19
-         ICVkrY+C0t47eM+qXfPxqDEZVNXwVYTZwunQPxP/ECdt0gYkmrvyX0GAMibkqKKHIqeK
-         Qmpg==
-X-Forwarded-Encrypted: i=1; AJvYcCUgBFhJc2pk77ODQHI/sslBbX76wgN6INpA+uFuXMXF6ZDCB3IsYn9ay/bikFevXPSBuaOjiA312jg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzGuaBJ2Vrn4w0qPPTaYCf/Nq9qjJA8rzXuL8kGFHZPCJFPEiDc
-	utBfgvlrxummQfMTxJbxwQOPXXvFnGuwQCqwuDK1B2TYCZ9PWdqWqJPCQVVqwxFn1A==
-X-Gm-Gg: ASbGncv7VLBTYotTBTkcTizY3Zduy0UwEclmJpQI784XNCFePuBnAaNzutKXF4xguiS
-	2ygtpKnEkh0TZPIfse+mKvn5HpPhkkK5zOTo7KxCyQ3RKQR4QMLWfp6KaKoR2jFluq4DfPMfBsP
-	gJPNVS62DpBUh8phgwmd7p2MsNq6WjZ/kTFEmaPudUO7zVlYnzuJn7a+ZmLY2xJ8v5hkLCI08PV
-	1qX5+39rCyD9ef/NkjVyj2oc1sfQTvT4OamM5To/Ws4EqAaXJjtPBRFZ5+/TOpWmtphLvVtayeB
-	QtefNUTP5zrCdi0GUlmWi0yJv6HHs1e5LX9LBtje6NLduIEH1axS2GLGHq56NPgiuj7kDw1sJfE
-	YAjRv/YCoLTuWGoTnpOp+kmg3f26rLM7j+U1Y
-X-Google-Smtp-Source: AGHT+IH6332YGZqxLMj0Loh9plsmr2aqO4CvcfVfZA1bmA/ntNN1fVgIvXfT5ZGqdRUuv1Iqb5oDaQ==
-X-Received: by 2002:a17:906:c105:b0:ad2:2d84:ab80 with SMTP id a640c23a62f3a-ad52d65f554mr280206866b.58.1747392110962;
-        Fri, 16 May 2025 03:41:50 -0700 (PDT)
-Message-ID: <5d928ec5-b423-46d7-a8df-7be37b38b6d8@suse.com>
-Date: Fri, 16 May 2025 12:41:49 +0200
+        bh=j0XKJISHS4dzAt7Jr7nklY20nUhhhSE6Y+hlXuQuwr0=;
+        b=CpPNqGEDVtDNNXmfjttloFYvKa7FwUEoo8wcawl2EeDjvPeKdEjRFfsJ8ABqtZQqqD
+         fkpr3JopeOUavOkCp3sFFivyk+9dYDtABOZNXrXl/NwQqU9c3vjw+bTGrOYsr2mzsxfd
+         RSXI9Y8s67NAHgBgn4OR3DFyM4oiMtmwdfxbOaKV16LZurWf+iBH5s/5WUN5P204m4VT
+         tV8qA694WcZ4/YxaA1jyX6ZBWfcsRDD99ISSWNwspIWgcRG0l+t493ZlmNHWg7wxmS7F
+         gs5FtGPFPtSO2jGdkxvtrc7lqf2B+U81/rIC2NGacuSS3S9abTYLG2OLE36KxdKbiRYU
+         dGSQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUPw260vVk/TsnkP5e7+WAUP6oEHeCwAkpSAR3fPVmyqO+UpGIKnMpw/Ky03EKuNbNxYygXT44MIpk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx4PRwEYu1lOmWc3TEu3k4NDq19/Obde7+Yw22xPiQvZEdFk+UV
+	Wuk0snNe/g9JQF4IeGgDmWihtaDuxk4H+IJFg6RMAz3cfOrasUVJbPysP/uabCG5QCM=
+X-Gm-Gg: ASbGncv1o4MDSNAP28H4qtJilNLonYSKr0KoCF0ICZVebv1Kgr4AxZDK4QBHdVcvFjs
+	ajsYYR+jOzKh1BALrhSvSpR9WWrry3DKBSjV2s6U8hWG1cO+4U1FPYZk1ebLFmms0cekaYwi6+I
+	hsVfG1LRl5up2eaCdJeFuEbgBA0tbe2ZbJvXJXTRjOZM/5EDjVuocYZpPnwId+/7fXkBJcR4ZpB
+	x1SBgo80jisaz0Qo4FmUlbdSRVvi5IPfam+/AVmTsXZe3NNTzqi/Dav3PMDmfwtADriy816FKXD
+	N4TYFxRttMb5I9v1PqrnZSrTVP9b7UcCOfzxnbJ/tPvkeVsLijgtQh8pVznt98rrK5BtF0Quwon
+	SMimI68p815SClTgh/tg=
+X-Google-Smtp-Source: AGHT+IGlNaLtx3XnHMNfgYitvZAlLM+sz/IioPtcGAwH7g8dwijbXXbdGIWss5GC48RmrclnhESTzg==
+X-Received: by 2002:a17:903:1aec:b0:22d:e57a:27a2 with SMTP id d9443c01a7336-231de36bb6bmr25947565ad.23.1747391523582;
+        Fri, 16 May 2025 03:32:03 -0700 (PDT)
+Date: Fri, 16 May 2025 12:31:58 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2 2/6] x86/gnttab: do not implement GNTTABOP_cache_flush
+Message-ID: <aCcUHtWNBdbK7Iy0@macbook.lan>
+References: <20250516094535.63472-1-roger.pau@citrix.com>
+ <20250516094535.63472-3-roger.pau@citrix.com>
+ <b7d2f338-6918-4052-99e1-733dbb0aac7d@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 03/15] xen/x86: introduce new sub-hypercall to
- propagate CPPC data
-To: "Penny, Zheng" <penny.zheng@amd.com>
-Cc: "Huang, Ray" <Ray.Huang@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- "Orzel, Michal" <Michal.Orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20250414074056.3696888-1-Penny.Zheng@amd.com>
- <20250414074056.3696888-4-Penny.Zheng@amd.com>
- <2e1de23f-cc79-4d37-8667-0afd07736db3@suse.com>
- <IA1PR12MB84678234717460CB092E671CE193A@IA1PR12MB8467.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <IA1PR12MB84678234717460CB092E671CE193A@IA1PR12MB8467.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <b7d2f338-6918-4052-99e1-733dbb0aac7d@suse.com>
 
-On 16.05.2025 12:35, Penny, Zheng wrote:
->> -----Original Message-----
->> From: Jan Beulich <jbeulich@suse.com>
->> Sent: Monday, April 28, 2025 11:57 PM
->>
->> On 14.04.2025 09:40, Penny Zheng wrote:
->>> @@ -459,6 +464,26 @@ struct xen_processor_performance {  typedef
->>> struct xen_processor_performance xen_processor_performance_t;
->>> DEFINE_XEN_GUEST_HANDLE(xen_processor_performance_t);
->>>
->>> +struct xen_processor_cppc {
->>> +    uint8_t flags; /* flag for CPPC sub info type */
->>> +    /*
->>> +     * Subset _CPC fields useful for CPPC-compatible cpufreq
->>> +     * driver's initialization
->>> +     */
->>> +    struct {
->>> +        uint32_t highest_perf;
->>> +        uint32_t nominal_perf;
->>> +        uint32_t lowest_nonlinear_perf;
->>> +        uint32_t lowest_perf;
->>> +        uint32_t lowest_mhz;
->>> +        uint32_t nominal_mhz;
->>> +    } cpc;
->>> +    struct xen_psd_package domain_info; /* _PSD */
->>
->> This being a member of the new type, ...
->>
->>> --- a/xen/include/xlat.lst
->>> +++ b/xen/include/xlat.lst
->>> @@ -168,6 +168,7 @@
->>>  !  processor_performance           platform.h
->>>  !  processor_power                 platform.h
->>>  ?  processor_px                    platform.h
->>> +?  processor_cppc                  platform.h
->>
->> ... how can it be ? here when it's ...
->>
->>>  !  psd_package                     platform.h
->>
->> ... ! here? And with it being ?, you're lacking a place where you invoke the resulting
->> checking macro (which I assume would cause a build failure).
+On Fri, May 16, 2025 at 11:48:48AM +0200, Jan Beulich wrote:
+> On 16.05.2025 11:45, Roger Pau Monne wrote:
+> > --- a/xen/common/Kconfig
+> > +++ b/xen/common/Kconfig
+> > @@ -35,6 +35,11 @@ config GRANT_TABLE
+> >  
+> >  	  If unsure, say Y.
+> >  
+> > +config HAS_GRANT_CACHE_FLUSH
+> > +	bool
+> > +	depends on GRANT_TABLE
+> > +	default ARM
+> 
+> To keep arch stuff out of common file as much as possible, I think this instead
+> wants to be a "select ..." from ARM. Then:
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-I guess this wasn't clear enough then: Aiui you cannot "check" these, because the
-native and compat ones are going to be different. You'll need to use ! here, and
-then use the respective XLAT_* macro(s). IOW ...
+My first attempt was to do it as you suggest, but then if the users
+disables GRANT_TABLE you get the following warning:
 
-> Understood, I see it automatically generates CHECK_psd_package. I shall change psd_package with ? too
-> In order to avoid causing build failure, I add "typedef struct xen_psd_package xen_psd_package_t;"
-> I'm not familiar with the compat framework, if it isn't the right way to fix, plz let me know
+WARNING: unmet direct dependencies detected for HAS_GRANT_CACHE_FLUSH
+  Depends on [n]: GRANT_TABLE [=n]
+  Selected by [y]:
+  - ARM [=y]
+configuration written to .config
 
-... I expect this isn't the correct way of dealing with it.
+And you end up with the following on .config:
 
-Jan
+# CONFIG_GRANT_TABLE is not set
+CONFIG_HAS_GRANT_CACHE_FLUSH=y
+
+That's why I've done it the way presented in this patch.
+
+Thanks, Roger.
 
