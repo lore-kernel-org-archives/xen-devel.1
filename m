@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87FA3C3DA6D
-	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 02:29:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.986189.1371836 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57506C2D0CD
+	for <xen-devel@archiver.kernel.org>; Fri, 16 May 2025 02:29:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.986191.1371857 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFkp0-0006Q7-UU; Fri, 16 May 2025 02:29:14 +0000
+	id 1uFkpA-0006vN-FQ; Fri, 16 May 2025 02:29:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 986189.1371836; Fri, 16 May 2025 02:29:14 +0000
+Received: by outflank-mailman (output) from mailman id 986191.1371857; Fri, 16 May 2025 02:29:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uFkp0-0006Q0-Ry; Fri, 16 May 2025 02:29:14 +0000
-Received: by outflank-mailman (input) for mailman id 986189;
- Fri, 16 May 2025 02:29:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uFkpA-0006vG-CU; Fri, 16 May 2025 02:29:24 +0000
+Received: by outflank-mailman (input) for mailman id 986191;
+ Fri, 16 May 2025 02:29:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=07xk=YA=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uFkoy-0006Ps-CC
- for xen-devel@lists.xenproject.org; Fri, 16 May 2025 02:29:13 +0000
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8c1426f8-31fd-11f0-9ffb-bf95429c2676;
- Fri, 16 May 2025 04:29:10 +0200 (CEST)
+ id 1uFkp8-0006te-Pk
+ for xen-devel@lists.xenproject.org; Fri, 16 May 2025 02:29:22 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 92f3ed54-31fd-11f0-9eb6-5ba50f476ded;
+ Fri, 16 May 2025 04:29:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c1426f8-31fd-11f0-9ffb-bf95429c2676
+X-Inumbo-ID: 92f3ed54-31fd-11f0-9eb6-5ba50f476ded
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=imedksexubfk5coe2xwez3mdjq.protonmail; t=1747362548; x=1747621748;
-	bh=/BEUwhhP72BtvkVKFKsbgSbbCNM2TCebK6uJAiCil08=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=RHDhQN1k6mQpt3G+gtoqDn66xiB8JSwtgeazA6klZbMd44O8CG7detoJPoeaBcnsl
-	 eyJwQvq1FdkOxmZHRhzETSVSdIpgD0ZZVE/fVP5CjeZGD4DWmyBIkITfc6AHlG+E9S
-	 LhPPayFP2VUv3m6BChYGO1RBpkqyiVJ+2mJOZSkMNZObDddvO9Nb5kUso/DL5rY1sQ
-	 wn4gig83VfDeILX3Cz8fXxpUEeuxsB0Du3oYS0p8UJZKVHLAHwXR07QohgsTaSJfF7
-	 6Lqgj4DwjOOWpUH/NGS/br5b8uv+809VvqGAcRG5O+arqaz1P/H4F+dKRplzGiSWmh
-	 m8bYnWP9Hngxg==
-Date: Fri, 16 May 2025 02:29:02 +0000
+	s=protonmail; t=1747362560; x=1747621760;
+	bh=v1vn8ef3G4X58jhWf4vJUvPbMgDk9COkx7mA/B+hxO0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=TyJxbmrhxNM9N4pdybXCxOjZcXHLylq1QtjamuDFe4f7UzkFU0vBZrqAV2dYr1AVQ
+	 NPRloJiwr+w6przTXjCYQQ3EVVgcHSDPEoYgidSfpehzRxio4N/dOXc0WyuddnECXo
+	 1chTJsIKF8Zm7svDD85SlvkMczz6/CYRmHvk2O5P+Ly004Q5RBiJGOQ8be6pAtrRpw
+	 +uhvNhudv8hoWY+O9byS5s58uB+uxvMXSNng6lVCwDkAMovjdb8g0Sfpu5x0gmNiZq
+	 80cbF8fTcGBlgm0tu3splgnKgrFePnsYYss92SN00sk2W0+Paqp/GdGlIw7EB/l+8N
+	 P4QWJF1LGvSsQ==
+Date: Fri, 16 May 2025 02:29:16 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v2 0/2] xen/domain: updates to hardware emulation flags
-Message-ID: <20250516022855.1146121-1-dmukhin@ford.com>
+Subject: [PATCH v2 2/2] xen/domain: rewrite emulation_flags_ok()
+Message-ID: <20250516022855.1146121-3-dmukhin@ford.com>
+In-Reply-To: <20250516022855.1146121-1-dmukhin@ford.com>
+References: <20250516022855.1146121-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: ab2bc2529e178cc3b1adb026cb919c31d21ed593
+X-Pm-Message-ID: b6b8864594d38da9accff697830df3459e336910
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Patch 1 introduces use of d->arch.emulation_flags for non-x86 platforms and
-hooks emulation_flags to 'q' keyhandler for debugging. emulation_flags on
-non-x86 systems can be used for enabling domain emulation features.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Patch 2 rewrites emulation_flags_ok() on x86 with a goal of improving
-readability of the code.
+Rewrite emulation_flags_ok() to simplify future modifications.
 
-Originally, the code was part of [1], part of NS16550 emulator v3 series.
+Also, introduce X86_EMU_{BASELINE,OPTIONAL} helper macros.
 
-[1] https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-6-c5d36b3=
-1d66c@ford.com/
-[2] Link to v1: https://lore.kernel.org/xen-devel/20250401005224.461325-1-d=
-mukhin@ford.com/
-[3] Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelin=
-es/1820121879=20
+No functional change intended.
 
-Denis Mukhin (2):
-  xen/domain: introduce non-x86 hardware emulation flags
-  xen/domain: rewrite emulation_flags_ok()
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v1:
+- kept use of non-public X86_EMU_XXX flags
+- corrected some comments and macro definitions
+---
+ xen/arch/x86/domain.c             | 29 +++++++++++------------------
+ xen/arch/x86/include/asm/domain.h |  6 ++++++
+ 2 files changed, 17 insertions(+), 18 deletions(-)
 
- xen/arch/arm/include/asm/domain.h   |  1 +
- xen/arch/ppc/include/asm/domain.h   |  1 +
- xen/arch/riscv/include/asm/domain.h |  1 +
- xen/arch/x86/domain.c               | 29 +++++++++++------------------
- xen/arch/x86/include/asm/domain.h   |  6 ++++++
- xen/common/keyhandler.c             |  1 +
- 6 files changed, 21 insertions(+), 18 deletions(-)
-
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index f197dad4c0..c64c2c6fef 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -750,25 +750,18 @@ static bool emulation_flags_ok(const struct domain *d=
+, uint32_t emflags)
+     BUILD_BUG_ON(X86_EMU_ALL !=3D XEN_X86_EMU_ALL);
+ #endif
+=20
+-    if ( is_hvm_domain(d) )
+-    {
+-        if ( is_hardware_domain(d) &&
+-             emflags !=3D (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) =
+)
+-            return false;
+-        if ( !is_hardware_domain(d) &&
+-             /* HVM PIRQ feature is user-selectable. */
+-             (emflags & ~X86_EMU_USE_PIRQ) !=3D
+-             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
+-             emflags !=3D X86_EMU_LAPIC )
+-            return false;
+-    }
+-    else if ( emflags !=3D 0 && emflags !=3D X86_EMU_PIT )
+-    {
+-        /* PV or classic PVH. */
+-        return false;
+-    }
++    /* PV */
++    if ( !is_hvm_domain(d) )
++        return emflags =3D=3D 0 || emflags =3D=3D X86_EMU_PIT;
+=20
+-    return true;
++    /* HVM */
++    if ( is_hardware_domain(d) )
++        return emflags =3D=3D (X86_EMU_LAPIC |
++                           X86_EMU_IOAPIC |
++                           X86_EMU_VPCI);
++
++    return (emflags & ~X86_EMU_OPTIONAL) =3D=3D X86_EMU_BASELINE ||
++            emflags =3D=3D X86_EMU_LAPIC;
+ }
+=20
+ void __init arch_init_idle_domain(struct domain *d)
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/d=
+omain.h
+index 8c0dea12a5..3a9a9fd80d 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -494,6 +494,12 @@ struct arch_domain
+                                  X86_EMU_PIT | X86_EMU_USE_PIRQ |       \
+                                  X86_EMU_VPCI)
+=20
++/* User-selectable features. */
++#define X86_EMU_OPTIONAL        (X86_EMU_USE_PIRQ)
++
++#define X86_EMU_BASELINE        (X86_EMU_ALL & ~(X86_EMU_VPCI | \
++                                                 X86_EMU_OPTIONAL))
++
+ #define has_vlapic(d)      (!!((d)->arch.emulation_flags & X86_EMU_LAPIC))
+ #define has_vhpet(d)       (!!((d)->arch.emulation_flags & X86_EMU_HPET))
+ #define has_vpm(d)         (!!((d)->arch.emulation_flags & X86_EMU_PM))
 --=20
 2.34.1
+
 
 
