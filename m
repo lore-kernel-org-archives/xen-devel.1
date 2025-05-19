@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792AFC54756
-	for <xen-devel@archiver.kernel.org>; Mon, 19 May 2025 19:31:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.990210.1374152 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2B6C3ABDD
+	for <xen-devel@archiver.kernel.org>; Mon, 19 May 2025 19:40:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.990218.1374171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uH6Cc-0002kq-1N; Mon, 19 May 2025 19:31:10 +0000
+	id 1uH6Lf-0004Zv-1Z; Mon, 19 May 2025 19:40:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 990210.1374152; Mon, 19 May 2025 19:31:10 +0000
+Received: by outflank-mailman (output) from mailman id 990218.1374171; Mon, 19 May 2025 19:40:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uH6Cb-0002kj-Tj; Mon, 19 May 2025 19:31:09 +0000
-Received: by outflank-mailman (input) for mailman id 990210;
- Mon, 19 May 2025 19:31:09 +0000
+	id 1uH6Le-0004Zo-Un; Mon, 19 May 2025 19:40:30 +0000
+Received: by outflank-mailman (input) for mailman id 990218;
+ Mon, 19 May 2025 19:40:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wD6k=YD=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uH6Cb-0002kc-Jb
- for xen-devel@lists.xenproject.org; Mon, 19 May 2025 19:31:09 +0000
-Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
- [109.224.244.17]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cf8abddd-34e7-11f0-b892-0df219b8e170;
- Mon, 19 May 2025 21:31:07 +0200 (CEST)
+ id 1uH6Ld-0004Yu-9j
+ for xen-devel@lists.xenproject.org; Mon, 19 May 2025 19:40:29 +0000
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1d525ac1-34e9-11f0-b892-0df219b8e170;
+ Mon, 19 May 2025 21:40:27 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,79 +38,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf8abddd-34e7-11f0-b892-0df219b8e170
+X-Inumbo-ID: 1d525ac1-34e9-11f0-b892-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1747683066; x=1747942266;
-	bh=5WtLiQhEqyCqxTfrs3BWG+IdQfpdRybAo/Mk4kZdsAc=;
+	s=ufywkf3bczcgxnxdujomkfrazu.protonmail; t=1747683626; x=1747942826;
+	bh=ExNNPytRMx+TBBWpl9H7gQEHGZzIhvwOBb7pDt+Cih4=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=XFVIaqknv5L59a4viFPwggTUz6jPPJc7QTs8tA2Ym2b1k5Y6+CVlBfvn7Y2MPgjDh
-	 k0FD95bbWcPcnjvoF/Q2DDuH6wzr1nmZV4DM3ZWRvevt5aY5080xJxyC2inSZ4pStM
-	 joRjrvi8rt0c4MBemeMtZ3KlGBQsNGBwNo7lKry2ijxAfiyrfvhzGuhjM8S35Xl9ZV
-	 LT5sOyiqEdDnIBl0vb8D9ulB+XNKlhGcbFu0N8RkBYB0Ix4hKeHb6Jl3vRS3SChiM4
-	 iId9GwOPvHjJM0T8JSNzwdBufe626v1OpiS0W/PpxnUmhlZ6qR/zlzt26Neb9TaMxq
-	 FI1EBWYlSRwbQ==
-Date: Mon, 19 May 2025 19:31:02 +0000
-To: Jan Beulich <jbeulich@suse.com>
+	b=D9gtujnHEiPenjxpAsyV5MDOwTmxxQPLufxBNWkg/GoSE9M0ol07YcOK4UqTQ06S8
+	 aTWhmgUmTHns8QvfldBhSd3H/w1GUOitEFZLvfMpnGrKW6iJ4RLnfXRZ0zIOPcBxTy
+	 +scs9ZL0zcHfPgYPHPG7w1bP8qDYl3Za35Z9dopiNfScGrQ+4ysL6nKJF/iI8AYRKY
+	 fhzOsskjZcRKA0XIePfKef2Oxvwbk+ZMniz9jz1w0UY0iBACksXOLevdSJxgXy8aEV
+	 L3b1MHe1pts8bzS5/vtWVBq7+T8ehnIaxXSpQgZaPYFop/eRyWNDsMN81YIZhKF4ii
+	 3rW6hXpPpHkNg==
+Date: Mon, 19 May 2025 19:40:20 +0000
+To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v6 1/2] xen/domain: unify domain ID allocation
-Message-ID: <aCuG8TffcquVYWod@kraken>
-In-Reply-To: <98c10f03-c5f9-4e89-9aed-596b5cc3f8fd@suse.com>
-References: <20250516020434.1145337-1-dmukhin@ford.com> <20250516020434.1145337-2-dmukhin@ford.com> <98c10f03-c5f9-4e89-9aed-596b5cc3f8fd@suse.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v5 1/3] xen/console: cleanup conring management
+Message-ID: <20250519194002.1365454-2-dmukhin@ford.com>
+In-Reply-To: <20250519194002.1365454-1-dmukhin@ford.com>
+References: <20250519194002.1365454-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: ff79bb8070c29cefbc1de661ba059bb16fec84b9
+X-Pm-Message-ID: 56815f0c1ca0b0fc7f720a24e22918ab5df4d45f
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 18, 2025 at 10:52:24AM +0200, Jan Beulich wrote:
-> On 16.05.2025 04:04, dmkhn@proton.me wrote:
-> > From: Denis Mukhin <dmukhin@ford.com>
-> >
-> > Currently, hypervisor code has two different non-system domain ID alloc=
-ation
-> > implementations:
-> >
-> >   (a) Sequential IDs allocation in dom0less Arm code based on max_init_=
-domid;
-> >
-> >   (b) Sequential IDs allocation in XEN_DOMCTL_createdomain; does not us=
-e
-> >       max_init_domid (both Arm and x86).
-> >
-> > It makes sense to have a common helper code for such task across archit=
-ectures
-> > (Arm and x86) and between dom0less / toolstack domU allocation.
-> >
-> > Wrap the domain ID allocation as an arch-independent function domid_all=
-oc() in
-> > common/domain.c based on rangeset.
-> >
-> > Allocation algorithm:
-> > - If an explicit domain ID is provided, verify its availability and
-> >   use it if ID is not used;
-> > - Otherwise, perform an exhaustive search starting from the end of the =
-used
-> >   domain ID range. domid_alloc() guarantees that two subsequent calls w=
-ill
-> >   result in different IDs allocation.
-> While you properly retain original logic now, the above is not an accurat=
-e
-> description thereof, imo. To search "from the end" usually is understood =
-as
-> a backwards search. Whereas what you mean is that the search starts off w=
-here
-> the last one finished, wrapping around when hitting the end of the valid
-> range.
+From: Denis Mukhin <dmukhin@ford.com>
 
-I have updated the description in v7:
-  https://lore.kernel.org/xen-devel/20250519192306.1364471-2-dmukhin@ford.c=
-om/
+Move conring tasklet code close to conring definitions in the console drive=
+r
+and rename conring tasklet variables by adding conring_ prefix for better
+readability.
 
->=20
-> Jan
->=20
+No functional change.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+Changes since v4:
+- added R-b
+---
+ xen/drivers/char/console.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index c3150fbdb7..b4757844e6 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -325,6 +325,16 @@ static void cf_check do_dec_thresh(unsigned char key, =
+bool unused)
+  * ********************************************************
+  */
+=20
++static void cf_check conring_notify(void *unused)
++{
++    send_global_virq(VIRQ_CON_RING);
++}
++
++static DECLARE_SOFTIRQ_TASKLET(conring_tasklet, conring_notify, NULL);
++
++/* NB: Do not send conring VIRQs during panic. */
++static bool conring_no_notify;
++
+ static void conring_puts(const char *str, size_t len)
+ {
+     ASSERT(rspin_is_locked(&console_lock));
+@@ -594,13 +604,6 @@ static void cf_check serial_rx(char c)
+     __serial_rx(c);
+ }
+=20
+-static void cf_check notify_dom0_con_ring(void *unused)
+-{
+-    send_global_virq(VIRQ_CON_RING);
+-}
+-static DECLARE_SOFTIRQ_TASKLET(notify_dom0_con_ring_tasklet,
+-                               notify_dom0_con_ring, NULL);
+-
+ #ifdef CONFIG_X86
+ static inline void xen_console_write_debug_port(const char *buf, size_t le=
+n)
+ {
+@@ -650,7 +653,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(=
+char) buffer,
+             if ( opt_console_to_ring )
+             {
+                 conring_puts(kbuf, kcount);
+-                tasklet_schedule(&notify_dom0_con_ring_tasklet);
++                tasklet_schedule(&conring_tasklet);
+             }
+=20
+             nrspin_unlock_irq(&console_lock);
+@@ -753,8 +756,6 @@ long do_console_io(
+  * *****************************************************
+  */
+=20
+-static bool console_locks_busted;
+-
+ static void __putstr(const char *str)
+ {
+     size_t len =3D strlen(str);
+@@ -775,9 +776,8 @@ static void __putstr(const char *str)
+ #endif
+=20
+     conring_puts(str, len);
+-
+-    if ( !console_locks_busted )
+-        tasklet_schedule(&notify_dom0_con_ring_tasklet);
++    if ( !conring_no_notify )
++        tasklet_schedule(&conring_tasklet);
+ }
+=20
+ static int printk_prefix_check(char *p, char **pp)
+@@ -1171,7 +1171,7 @@ void console_force_unlock(void)
+     spin_debug_disable();
+     rspin_lock_init(&console_lock);
+     serial_force_unlock(sercon_handle);
+-    console_locks_busted =3D 1;
++    conring_no_notify =3D true;
+     console_start_sync();
+ }
+=20
+--=20
+2.34.1
+
 
 
