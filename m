@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DB1C2D0CD
-	for <xen-devel@archiver.kernel.org>; Mon, 19 May 2025 15:51:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.989963.1373943 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AB8C3DA6D
+	for <xen-devel@archiver.kernel.org>; Mon, 19 May 2025 15:51:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.989960.1373921 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uH2le-0005iV-P7; Mon, 19 May 2025 15:51:06 +0000
+	id 1uH2lb-0005Jb-N4; Mon, 19 May 2025 15:51:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 989963.1373943; Mon, 19 May 2025 15:51:06 +0000
+Received: by outflank-mailman (output) from mailman id 989960.1373921; Mon, 19 May 2025 15:51:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uH2le-0005h9-Gq; Mon, 19 May 2025 15:51:06 +0000
-Received: by outflank-mailman (input) for mailman id 989963;
- Mon, 19 May 2025 15:51:05 +0000
+	id 1uH2lb-0005JR-Jq; Mon, 19 May 2025 15:51:03 +0000
+Received: by outflank-mailman (input) for mailman id 989960;
+ Mon, 19 May 2025 15:51:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DWXC=YD=epam.com=Oleksii_Moisieiev@srs-se1.protection.inumbo.net>)
- id 1uH2ld-00055d-Ok
- for xen-devel@lists.xenproject.org; Mon, 19 May 2025 15:51:05 +0000
+ id 1uH2la-00055d-Lh
+ for xen-devel@lists.xenproject.org; Mon, 19 May 2025 15:51:02 +0000
 Received: from EUR03-AM7-obe.outbound.protection.outlook.com
  (mail-am7eur03on20625.outbound.protection.outlook.com
  [2a01:111:f403:260e::625])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 11ca88c7-34c9-11f0-b892-0df219b8e170;
- Mon, 19 May 2025 17:51:04 +0200 (CEST)
+ id 1008bc5b-34c9-11f0-b892-0df219b8e170;
+ Mon, 19 May 2025 17:51:01 +0200 (CEST)
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
  by AS8PR03MB9023.eurprd03.prod.outlook.com (2603:10a6:20b:5b7::10)
  with Microsoft SMTP Server (version=TLS1_2,
@@ -37,7 +37,7 @@ Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc%4]) with mapi id 15.20.8722.031; Mon, 19 May 2025
- 15:50:57 +0000
+ 15:50:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 11ca88c7-34c9-11f0-b892-0df219b8e170
+X-Inumbo-ID: 1008bc5b-34c9-11f0-b892-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XGg/9olLSQyFXp3WI5g+gqj1MIB07JU+yLK3Ts6j2cLNgHgEuiuW20D48yapSVv1MSFPqpPOA9ClHWtTCzniTKI5ZQw/AgqQozUqAiJkHgSmoAM9gIy3V3IO0fnqUXOUJkBa7lYNbIDrWfoVdWb8rE1dJap5cwCNtx5vZrw857b39AjEoWQR1WpVJ18qvcc/mFI9zaV9lMB0s6CPF2AORz6hZz2VzypjQuNC5VGjiWSrfSryzqAdilR/4qyjK4PXhyRYR360gIz0miuJ23j1REACtZOv3ZlR5cTmXSYsUeFbIVxPVt3D0Z7UAH4RnEs4hbHjpzgAh2Rt+VKfuhAVew==
+ b=nyLDAoIahHy3xrUhup8FivNBw6/vv1fgnmocpFcmatiuFnFFTbfOZk5//Ynf/ejappjOktwVhcv5V5c1GHKK0Dw/lKgsuJgCCcFvA8mygygUskMih0TlL1OAYCHTYMvqWzcsuNmm20YLfoA1EMJKMcdilJCctv1923ugi3lhLG9hLrSupuKLzranfGR310+LY1Mr618ueF4JPjrFuUz86daqncC5o55mjI/9wesi3hwPDymLPgO3ivR5xIGgi0xF5KSx9oC5qSU4L6Rc6ChMnXMBjgm1/zq3kK/1LAJtzH0QJ6PZniOx5UO15gKyvOSVdGr8WXjOUl3xM7auWfwKBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Pz/ZMdrRc7mCeJ8Rd8uhD1laT/igu+PIiYNbzkSXnXw=;
- b=awZAs3EoEJ12YoBTjpzM/OQX5ydkFI3y2OXtaW3q3dULc/T6LU+FaA8cV3pCGahU2sac65TZiuf2JYAUN4baNLWXnGnoGL3snLTkGCBmrPH++IDwyV1OMiTXQNlAAlOIFM7HFUw8GVOf1nh8QDlj4s7a6mj6hz1eXS69No8+W5a1GU5sQRfIOP9aYmpGl4ygG9Y6fdPZ+o2rFGKsRaZHwezNKGY+1aR3FzD9fP0D7PdpFPYEbOugX8WQ3tyrfEtmPyIAoUFuIyoVvneISHhFfsfediy5b8Zop15re/ytHVLU9tsuEkGMcd/LGfBXgAGKP346odYcnI252bWzK9xWUg==
+ bh=Fk5Gs0tS92nr5rjRn//mXLL1DtK3sxSAdDHVHneMlgQ=;
+ b=PYEWSQpruE9CrzMnBu/nkOUGv3dg4+7+WGDyAjVnJbsIMNA2VFz55Z04eHvkSj04VC74cRtrzAn+TXRFcC556LnQlEKZKZg8RoKWlUGede6j15hiczJZUOH2gRhsHCyZjMmR4oVB8A+Ksd2u4QUk7SVic8p7FOcJo19jp42hXm8QWiyteLMpLTywdyzpdQPbnu808a0uM4hpf332tkoWaNoLFOVO+nheQtdWABzIRD22mMtfQj+L96ig+DqmWJJKfWr7Ea0XkoRiLrMbZAQqJYgSVR802byUeLJEcnFOpflLmSqRh0HhzeUQQnYI0EcxuZ/5cxxdCoCcEsjA+kajEA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Pz/ZMdrRc7mCeJ8Rd8uhD1laT/igu+PIiYNbzkSXnXw=;
- b=tFyoNb38GDdxQWh9E0i6XSWddce2ipDDfWHSFNbOt8/8nq6iE5F0qVITv5LBuLqCDJtzJouVTPmN6hKW0cL3BEOxEFc08nkF4dWI70pZlGEJAy+ZHwzmA0TN/QALXWzQl5LKKjYE8s5Lwl6v//fuq5kvRZN+LqMc4Q+UKh4rSqQa2UOO/8lye8fbc+IV3kBb7nIbe6q/XLWI/lIsIfDs8B01+WdNVMmX/PyqPy7CBo6bkpmSoXm3reIYKchopiPchv8oUczK/L7ZWF07MYCh9fiD0/cU3DLdUklQSFQWdev2uM4X0Gw31misgoGpzikri6ri0p/VhSLrz9WwdEOr1g==
+ bh=Fk5Gs0tS92nr5rjRn//mXLL1DtK3sxSAdDHVHneMlgQ=;
+ b=CyzM5+tHsZu/GgQPVatc68oxjaAVk4gash6tLbEuR8+Vg0I0+5Db5u2MQV2DqmZer9QVXhFKxLF0jZT2pNGM/sxxY7u34OuRmgaJbJCEt85hRibOhwFqc0jtCkEfv1o6qVDl4tVw0nLfdH8aiSECtbU+nhLOmd639b/szx8RLOZXQAFadr5nqfe66Ryvt+PaUKMuWr00Jgi+THtoiQIYX3JnDzDH8nq61ZxOTLC1MWAHiQxuCOUKE1UgUfPX4K1jLWddl/Y7MKxfRnSVioj1zTI2d8ZVGK+S2tmXDmwY4VWCFhG4QqRapqtNSSf4QjN7OEpCeIIaMik9U2HE7gQVbg==
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
@@ -74,14 +74,14 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
 	<grygorii_strashko@epam.com>
-Subject: [RFC PATCH v4 4/8] docs: arm: add docs for SCMI over SMC calls
- forwarding driver
-Thread-Topic: [RFC PATCH v4 4/8] docs: arm: add docs for SCMI over SMC calls
- forwarding driver
-Thread-Index: AQHbyNXP0pQacOnhI0GW40rDQn7cHA==
-Date: Mon, 19 May 2025 15:50:57 +0000
+Subject: [RFC PATCH v4 2/8] xen/arm: scmi-smc: update to be used under sci
+ subsystem
+Thread-Topic: [RFC PATCH v4 2/8] xen/arm: scmi-smc: update to be used under
+ sci subsystem
+Thread-Index: AQHbyNXPRF0tCFj/sEGmRLZ+kuwLjw==
+Date: Mon, 19 May 2025 15:50:56 +0000
 Message-ID:
- <66d4472e46d94e4b64027986f004b98f610c4f1e.1747669845.git.oleksii_moisieiev@epam.com>
+ <21bdecf961b60fb0094b1f722444a45228aef878.1747669845.git.oleksii_moisieiev@epam.com>
 References: <cover.1747669845.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1747669845.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -92,70 +92,71 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|AS8PR03MB9023:EE_
-x-ms-office365-filtering-correlation-id: 33e991e4-a9a5-4dc6-930f-08dd96ecf219
+x-ms-office365-filtering-correlation-id: 2d345ae3-acfd-44a4-d9f7-08dd96ecf1cb
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|1800799024|376014|366016|7416014|38070700018;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?z2dnIVCiRsGu9p73VfXaMrx2qE9yzZOPkZ5CMVe1S2cvzAXDLGA6IeHSk6?=
- =?iso-8859-1?Q?WpGsuCQPHKXNWF/KuqNmliXjrc2r8XC7mOD6r5Y3mzVLvzWSkCOwgk5LMo?=
- =?iso-8859-1?Q?McnVpcGBvJoiOw2fEGBzU3GaZoQEHPbjb+XZB8IxFQiXRimR9Q1O1oJFZu?=
- =?iso-8859-1?Q?b99/P6wdpYiEjzGInbTI9ASlGMaZnOuwIeOR0ZFRClMGC9RCg0qdd/9k9n?=
- =?iso-8859-1?Q?EhNuDKh5kjZ+Vd0Xmy4quIJnWnq+tgsxuMqzhmk6pXne7tyHskDjwCHndp?=
- =?iso-8859-1?Q?jd3Zqszo2cuw9CCMb5BjmEW2wTcQfTx9pllPLF82vuR6uqwXOysx8Lskfi?=
- =?iso-8859-1?Q?olveXbWkAsL8mAEHZsbLMXIaMNcdscpS/GbCnoAPwakXjTT/teVSLw1AkJ?=
- =?iso-8859-1?Q?nSt/CTDkNaJ9JIUKcqT8WCYyuUu2DURcpVOpR+1fDzIB35hGOWQjhi0AT1?=
- =?iso-8859-1?Q?yL7YT2JnDk3DCX1FbFGkHsVWR04gGkbCFlpEyVzbVOLz621ScKBrwggoJr?=
- =?iso-8859-1?Q?4hGTbfSOHNurBOnE/IxMqD7C88Bs1x05qhZOAa9e2ehNdUU+AJvON/8Cb3?=
- =?iso-8859-1?Q?AcU5Vr+1zddkYCuMpMuUOpTqO8ECF1D+L73cuUu5Avf3g/HEWLP5nW/HEt?=
- =?iso-8859-1?Q?08ZK3bifhgnh2znumhOA7C+GKfjXvumHvUc9sa0tVgOr8x1k7dvbi7S38t?=
- =?iso-8859-1?Q?37M2KM5ie29iz8OiODjsk7RKfYMQgd3TD/KXfyN1r/nioEs+AXxN+xUXxu?=
- =?iso-8859-1?Q?J9Co67luaBv/YDlJVfL292H2yvcIDIDXtWxlSQ0PxyF3lwCqRu2doRkPSs?=
- =?iso-8859-1?Q?QTp+Vyxf3X+4w4Fk+KRw4ruxCbin1XUd8VM7pIsRg86CpFPN9b7lWpIDAN?=
- =?iso-8859-1?Q?/0T7QBpuBSe2DFi3GSLWdlenLf+CwYa+MfMRUjhKD5Vh8Ptw85vp9TRtel?=
- =?iso-8859-1?Q?a8u3HEVlkVmC4OP+R3YfVoE7PZ9tRsqzPxRyNSMKBSzKqKW9mSaK1n1Pxh?=
- =?iso-8859-1?Q?kaRZ9X96AZ8l/WtT2c3yzbYirJM8ayU7+XT3fraOASImswZQzTk+N4cBij?=
- =?iso-8859-1?Q?aU8aurIWBHBnx6BO9fdU07slTGTM9HAjXURGZy6VoICZ4MTINDXpN3rB+N?=
- =?iso-8859-1?Q?/CldQEx6blYDGlmooon7DUkAO1fPRPKNKCtgIpr/lZLgGa42RBAa0LFCZ0?=
- =?iso-8859-1?Q?gY3FrzlXAuMSr4PJik/g37rzeVyKEYJx/T24XlqMHOAIbef+tmk/IxYrXT?=
- =?iso-8859-1?Q?qfjqheQYFSyhwOSrzysnLeNvxnTbdSJGkHWIAh3+nd92ArpJ6T0lPYPPRk?=
- =?iso-8859-1?Q?uXbny86U1HbsBY5ibxiHPzBGp+TalwABiiAdmbpGJl/Q1ktIYTt9yvo8T1?=
- =?iso-8859-1?Q?Ys9DlrKjzVe1Vwvb/P79zYA+gFNWiStgEkdfHvKEY6zqmVoaUwqqgXSApj?=
- =?iso-8859-1?Q?92GIixOAhty/AFLLQhXu8C9IHu06n/HVZ7fwMfU0al7Kn3xRhJCRd+07Jp?=
- =?iso-8859-1?Q?c=3D?=
+ =?iso-8859-1?Q?ZZEf7nhsvJc4orGtNmwSE3GYCpExG7xmMdr/9yp0koxdtuO4QMahIH4/o+?=
+ =?iso-8859-1?Q?LnyPJA8ZChNu1FbOQ5WqdM4X1JsXqIWFoEDzA5vfCUhiBheP1ume79o6me?=
+ =?iso-8859-1?Q?QCst1GXZxCXG4bhP7Kbr8CvcVFJE+p61RvnKXZjDt/gO45qfa9JlJ+pHC6?=
+ =?iso-8859-1?Q?txMBr2s3iBI73qJTMN1gpKw8kt8es5FEKCNVjgKp/0wzAwbTH6T8TnAs8U?=
+ =?iso-8859-1?Q?TGGSCcNi9jq8D9SIOFR14A1kdqNTe2kaRS9h1GypkUhN+gEUvC8YUwqqdE?=
+ =?iso-8859-1?Q?e5XdEJWX9NofgcQAV0aSk8/Z713yOZPJp/OtpKN4ALJy55Ithqa2Re2/tF?=
+ =?iso-8859-1?Q?tJXVfy1GpvYfqYNnFU6pK7icMJ0/7i9M7HQK37qvqTo5gtfdXTryLcU3xs?=
+ =?iso-8859-1?Q?0ORi/wvBwOaejRknAZ6kCJOYEbW6KlSUmHOLZmi71mW6oKBusZxqPjPBYT?=
+ =?iso-8859-1?Q?ertn3/1CYTK+3HfvSffQATOjtc2PHzC0z8dEx63qBwzjjDDKRqDyZn3Msy?=
+ =?iso-8859-1?Q?8vWnySqiBmp5bcLfWRMH+As0tj+/kpgmCPcuALM3pbvNpHVXfzHnaeishQ?=
+ =?iso-8859-1?Q?mMrj+KvFsdggCEQx/WFM/4l8M6ylI7GhJwCq+3yCNb8wJSRBp1m00WP/mN?=
+ =?iso-8859-1?Q?7WT+HZUMsfhQACNJC1is/nMZcfQvvebAJ5m9VUG3c5phHjNEd63Tt3R1yT?=
+ =?iso-8859-1?Q?uuu6UxpkZz9h9tVcShaLogwpVAyXgj9pZI6TB4fpfSOyoYKgiBUvEaW24F?=
+ =?iso-8859-1?Q?om3PwezHe68oHLmtBwzDvI3GQqJSaJfnDi+3QUAOKq5vqld4vXEtMyIpLv?=
+ =?iso-8859-1?Q?1WUfNcbawfUVzWdLrOk0FKdhrMeSPeBDMJeml94mTVZPEtX8KO5yrhEAxY?=
+ =?iso-8859-1?Q?tcVbUzeCaHlrF0xD8liNZ3ZdK+u/NEQb95lufCMyR0tAr3o6Kdk0R85YuY?=
+ =?iso-8859-1?Q?NjYfSoo6U4yYCkp9dWyOaEigxf9wC9vujpy4cQ2jao2+ue1FVfYRqCAdtn?=
+ =?iso-8859-1?Q?1sevP33tkea1/mCWjJpDAZLg1h9IAImrk0KjppAGgqy+vqLUpUrMzkW/VT?=
+ =?iso-8859-1?Q?cVdxfW2huqaw/AFBGbwL95w8K9WOUvGxsKIS6rUG+6X4Pd6+MJy4RoF2xy?=
+ =?iso-8859-1?Q?sp6AJI5lCfC/N25UTIfFAPwUurMtag5esDrwHQv7NpnQXid6jA3RtA58Vb?=
+ =?iso-8859-1?Q?6v+Af+Ub7UmAKwhe7su1JgdgCJ3IT+bfZxOWbWOuVr2kHyKG+F4kMSrOft?=
+ =?iso-8859-1?Q?NlB46ohAu6RuoomgfGnsp3qEN7cujBBQZ/WVk+uLuenUm4LKvvBG0CVuWj?=
+ =?iso-8859-1?Q?ZsEPpRoMI5jI7U9mSwpz9tDZDOeRnHGGDPcEARUP+o9QdU/7t7JHOYgX0n?=
+ =?iso-8859-1?Q?qI78jSPftiM6RD5A2lPeadU0j1Uol9GzrKru+LoK3KFvi42zV3ruFviafj?=
+ =?iso-8859-1?Q?W3xCIb3hENc2EdX1v6YlMfTJ88pMDmoG8QNxxp4TsV0Cl5phdQEoZAF6c/?=
+ =?iso-8859-1?Q?mIdMAPcrwS73XIXb1CNGr4pbtCACTJPNeNgDPuOPFdYJH1v22jE03rT/a0?=
+ =?iso-8859-1?Q?d4GmQPc=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB8946.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7416014)(38070700018);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?xZ128+rPSw8K2EvKIw5a8uaYM9e4GdKOYll0AJ87uVsGaPZ/cDxp4BeABC?=
- =?iso-8859-1?Q?EWkiXojaIhQBXjal1j3InLMjB8mflmqhrAJB79W0HcdRriXHKiJf3LzVup?=
- =?iso-8859-1?Q?ktDXZ6v9EqnLLqGmGcT76wb+f2zGLNGC+sC2nbt909geNoCtvlKEbd9W/L?=
- =?iso-8859-1?Q?NdSzDBAfMVrGrLGqLMxUZ/2Jgz0XdfBzIVmXk2lQyCmPGeCDr9svQNrRWw?=
- =?iso-8859-1?Q?XR7Gu9lxLHyaIC2+SztnvG6YHAqyW+yRWRVxCgvA2eT9Fv3Ki6PjJzwXDR?=
- =?iso-8859-1?Q?RhGPGuZWUtW7Rh1nGsn+OD0i9SnmhyDPuL24a4LH0XcXq0Lesb0SOqlD8U?=
- =?iso-8859-1?Q?Cti3Q76bA7n4LT/dlCi6eGD2+6rPOjU/Ez6Gepek6EdR4cX9BlI2tsxiuw?=
- =?iso-8859-1?Q?7kkQSQS3U1TEAa+iYd2KeRJx5vSo3pDSpGR9r6xBYUt5Gm3EyvQ9K2l4qF?=
- =?iso-8859-1?Q?TcNdsFowMYV6Moov+jUHW1i2r6K4lHVvrEUH6ohxuWp4Y+n+e5VH+x54kJ?=
- =?iso-8859-1?Q?r+zXEnhY45fkqPR5WP8ouBdLCX7D1LN8PN1moDTVEjiH/LnOwwBy2aeRUI?=
- =?iso-8859-1?Q?+csWC2l5ng7SK4TIWOEp9djwndN7ech3e5Qqhth/Gl81q+t3mxlvd2yBZg?=
- =?iso-8859-1?Q?beBKFEw9/zH/wePvfo3uankCnkBVSzdnzafbcicFCzmVmgjjJR1DIfxUlS?=
- =?iso-8859-1?Q?+Kdt4q16g30IDRPUviiCy8kmhPd4XLX6+BvHJ5o3TM39h0RBP9NtLvxteu?=
- =?iso-8859-1?Q?8OqqKywuMda68+TAu25RV/l4kOxPGzNinpz8eQ7QFDjXI29S3B9RREkbOK?=
- =?iso-8859-1?Q?7XlXstgUAz+r2bvMU+a8YFIw3/Hbziehw/JLYV9Gl7xEu04hlsdzG8aT5l?=
- =?iso-8859-1?Q?d8Ifs1hfe7Q2SZQBhTKnVGfzr5l+BkJkb2KhWbWeocooBbgfeuBSbYJGRN?=
- =?iso-8859-1?Q?Mx1yD6DX4z6fuiKm3a5KJ6p4Jjz+MVm+RKuio+rrna8A7HKFG4RsYNoWxb?=
- =?iso-8859-1?Q?OombYBZxcREvtl6D7pCUY6/FeiOSdImotHBFom1W0YosKMnV8hyxJhyVad?=
- =?iso-8859-1?Q?GzYTCD8/Jv9F7t2Z5POx5ykheuvO6yFkjfIeks2J+IkIBOMKWMAasDgIiH?=
- =?iso-8859-1?Q?pk/EBMXm5ETjj+FNVLGorJcziOME8VJdd/uDMYeohksQQcvbptRtad/9lv?=
- =?iso-8859-1?Q?TCzwVWrAoqFMtOmjxDfZWHyDlu6linrmU9rtC5OP4HGiQXoqPb7VL8/A/o?=
- =?iso-8859-1?Q?r6/ZxMddqtiqxDLWtqUFYAAMAjcX75kR+m4eH3rlawtJc5jFzCFtU/abPZ?=
- =?iso-8859-1?Q?18oiJv0xQar0SjZK3e+99wPpZUVgtNS5dZlpmRZe8/aKvNRe9wMRtPX/l2?=
- =?iso-8859-1?Q?Qd4hhBcThZGFbGtatdea4wGhbdyNuoJ8yELEHKv3WZOaVU5j5IXdMatMHf?=
- =?iso-8859-1?Q?M6lMyQKLZOvOAjqz2pJZMhnp2iwzl8R0flc/3EofSpGYwjD2jDvZLeDuyT?=
- =?iso-8859-1?Q?y0VlfKSmEXBiWb2Twkurr1BDjvhBrcSpp/LXeHXxKXKJhFNZXTApCaeZHo?=
- =?iso-8859-1?Q?SCgyio3fvw1hp9y+zcPp5+gp7QIGCNK4sef8SlfkV2yHh6iizrgG708mfk?=
- =?iso-8859-1?Q?sixfYtq/iKuxi9gY9DO27S8mAcjA7woVwp8qtTfd2x45rTb49Aovyrjg?=
+ =?iso-8859-1?Q?uXO2gwt9+dnb2bkxFIQOYIBXsg09mwXvFfegzKOnWJFSNp4XXDrT8cycD0?=
+ =?iso-8859-1?Q?PJ5vGbF4/7XYLXWkBp4wUt01rJpHCLE1QQwy9z9yFbvh3bo984DAylIXIG?=
+ =?iso-8859-1?Q?W9sYR4IjPlN+yZ0eGJDz0A6BIpP4M0Gz8+h3dq5gpyeOjSPYGOlhSJvxC1?=
+ =?iso-8859-1?Q?BFEmZZ05YGPPGghLbRu5pgRQsIZD+ooUhQxK17HQ2xDPRTQR1c7L8eCiJ0?=
+ =?iso-8859-1?Q?XSmq5AYp3ENRQXNq3O1D2bCDEuaYW786jvwj1+tnGO9xQchNg7PFz3LAgj?=
+ =?iso-8859-1?Q?YAW664LSKi2//ax2hL983XbU2REI7fpYr9mrsDv/v7v/WXrG4WQeCx0oy6?=
+ =?iso-8859-1?Q?J4qGfjeYl9LUQbw+vm63WtFRa3xsW5RRuqEaDzVyg+n2drgaw05JD/Al02?=
+ =?iso-8859-1?Q?JHElecsPcDmyDGZ0Q33WzdVoHfG1m2t/JpfG5ocavEseSWd9xs0NxNk/Um?=
+ =?iso-8859-1?Q?G4gucwdITr3QjNFgZHnuRHokRurz1VtrOYQak5PZ8wUvuVz2dz2nDK3jWw?=
+ =?iso-8859-1?Q?5/0TEul9/N+SjE0wwRAA3VI2MlH+oPYBN3+F5Ip9JdArXBQnRY9PhxI1NA?=
+ =?iso-8859-1?Q?dvx+H534ZWjCHopY7tFcGtVT3bYd+Dl5Fn68fhEpe9/TQ6CsXHOcEOZe34?=
+ =?iso-8859-1?Q?ypeh0U4KrrwUG/WzmUHSN5Ys51LvRanI0/Skn9ycvZrz5f9eeLtUoMvymS?=
+ =?iso-8859-1?Q?9wQIBrWTBW7jJNj52u6vRjUR6AX0PYAmPTPPBZnUOeEga+mzgRaPxKiqR3?=
+ =?iso-8859-1?Q?Swsf2EQgTj5yc7L7wZxDL0DRQ4OIQV9KgD449Afqa8IfmjraXSUWlUvkQN?=
+ =?iso-8859-1?Q?mWB9OXgBXkPG7c0amOtCoOqAEFb6jAdD69ZK6zIeEG02l/QrunKAtupuGL?=
+ =?iso-8859-1?Q?bEXjpDQp7dXUFSwGKe1pVz8TM4QHGwW8Qn7oLOeROdkTsdLRWULSun9pdT?=
+ =?iso-8859-1?Q?l9Stp+TC8Pk96X30gUQC8NdLCmnQT+JkNQ/BFtfXUW1o2c+7p7qNCGSJP2?=
+ =?iso-8859-1?Q?Kc1CSIKP9dfZmVpTg2LmMH2DidbrutTyR1ZNZnMzLq9g+zjs0GMvZj4SbS?=
+ =?iso-8859-1?Q?i6u7U4snM0Pn8LaJE15GpXSk9PePLRc0G749IB2iqfSq3ZaZ0IWPzDh87P?=
+ =?iso-8859-1?Q?EFn6UFqXOkeBmCPLAwhqdifhxEZXXqt1hvtK2isHOlY52BzK5pg/jdKjRC?=
+ =?iso-8859-1?Q?YTog8BIJkcNrPNymIRLqQIVFkfYPKzc05HDMKZsUmz3uajrxy6eLbrqulY?=
+ =?iso-8859-1?Q?fidSZy6PzbCEzoKkVG1jurPKroKRWXv2/c2KzIhn5lw/+FdnH1DX6I19QJ?=
+ =?iso-8859-1?Q?bPI0OY7ipzR/TVeMYIbm3v6b3Bpz2qsYQHdksCePfndH7VmfjI4GZ3xK/h?=
+ =?iso-8859-1?Q?iMZpZSIfLoGFp0QRhHGzw8DqErQuIBOjHCvb1+MnjPbCSdg3EyV+R/S1IR?=
+ =?iso-8859-1?Q?PM1AvtRPQbj4wlYnHhZYjrQayBkcPeCtiHtxxfdzADb8oHN3OYtqMyEpGZ?=
+ =?iso-8859-1?Q?xydB7M4A1hbncEitruE+oox+jL1hFtEq1vDopVcVsZiHhidz7486yApPCh?=
+ =?iso-8859-1?Q?3SHhHemJWNPtAVViyURduq/67bs1o/4WDMLXoZLGqlXEJlh/jYz9fVsT9F?=
+ =?iso-8859-1?Q?MA4lzOLLpS9QDnDvMQU+d67lAphj1XgCbAe0Rf4m3F24tcfh57uYKaOA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -163,19 +164,33 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33e991e4-a9a5-4dc6-930f-08dd96ecf219
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 May 2025 15:50:57.0715
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d345ae3-acfd-44a4-d9f7-08dd96ecf1cb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 May 2025 15:50:56.4809
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: AR9ArqN9KAA43NJygCAs3IXpDgiZpyigFnGBsRgaX0dWWnz9pdY+3YRyFO5P9jJHwmaMdv7Frw+WNXP3AUH5azjxCT3uOXH/yetLS1b1MV8=
+X-MS-Exchange-CrossTenant-userprincipalname: ZFLy79QpGYhsxpLOEcw4g1j9kKyl+veX1ge3CfyuiNnX7+NJiz68EiOuDvR72pK7DKmW1d9KdAz3yjW/d29T78EpRmcKDI4nN1mzgTqp3Uc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9023
 
 From: Grygorii Strashko <grygorii_strashko@epam.com>
 
-Add documentation section for Simple Arm SCMI over SMC/HVC calls forwarding
-driver (EL3).
+The introduced SCI (System Control Interface) subsystem provides unified
+interface to integrate in Xen SCI drivers which adds support for ARM
+firmware (EL3, SCP) based software interfaces (like SCMI) that are used in
+system management. The SCI subsystem allows to add drivers for different FW
+interfaces or have different drivers for the same FW interface (for example=
+,
+SCMI with different transports).
+
+This patch updates SCMI over SMC calls handling layer, introduced by
+commit 3e322bef8bc0 ("xen/arm: firmware: Add SCMI over SMC calls handling
+layer"), to be SCI driver:
+- convert to DT device;
+- convert to SCI Xen interface.
+
+There are no functional changes in general, the driver is just adopted
+to the SCI interface.
 
 Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
@@ -183,249 +198,310 @@ Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 
 
 
- .../arm/firmware/arm-scmi.rst                 | 177 ++++++++++++++++++
- docs/hypervisor-guide/arm/index.rst           |   9 +
- docs/hypervisor-guide/index.rst               |   1 +
- 3 files changed, 187 insertions(+)
- create mode 100644 docs/hypervisor-guide/arm/firmware/arm-scmi.rst
- create mode 100644 docs/hypervisor-guide/arm/index.rst
+ xen/arch/arm/firmware/Kconfig                | 13 ++-
+ xen/arch/arm/firmware/scmi-smc.c             | 93 +++++++++++---------
+ xen/arch/arm/include/asm/firmware/scmi-smc.h | 41 ---------
+ xen/arch/arm/vsmc.c                          |  5 +-
+ xen/include/public/arch-arm.h                |  1 +
+ 5 files changed, 64 insertions(+), 89 deletions(-)
+ delete mode 100644 xen/arch/arm/include/asm/firmware/scmi-smc.h
 
-diff --git a/docs/hypervisor-guide/arm/firmware/arm-scmi.rst b/docs/hypervi=
-sor-guide/arm/firmware/arm-scmi.rst
-new file mode 100644
-index 0000000000..bf6a458a6a
---- /dev/null
-+++ b/docs/hypervisor-guide/arm/firmware/arm-scmi.rst
-@@ -0,0 +1,177 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
+diff --git a/xen/arch/arm/firmware/Kconfig b/xen/arch/arm/firmware/Kconfig
+index fc7918c7fc..bbf88fbb9a 100644
+--- a/xen/arch/arm/firmware/Kconfig
++++ b/xen/arch/arm/firmware/Kconfig
+@@ -8,9 +8,18 @@ config ARM_SCI
+=20
+ menu "Firmware Drivers"
+=20
++choice
++	prompt "ARM SCI driver type"
++	default SCMI_SMC
++	help
++	Choose which ARM SCI driver to enable.
 +
-+ARM System Control and Management Interface (SCMI)
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
++config ARM_SCI_NONE
++	bool "none"
 +
-+The System Control and Management Interface (SCMI) [1], which is a set of =
-operating
-+system-independent software interfaces that are used in system management.=
- SCMI currently
-+provides interfaces for:
+ config SCMI_SMC
+ 	bool "Forward SCMI over SMC calls from hwdom to EL3 firmware"
+-	default y
++	select ARM_SCI
+ 	help
+ 	  This option enables basic awareness for SCMI calls using SMC as
+ 	  doorbell mechanism and Shared Memory for transport ("arm,scmi-smc"
+@@ -18,4 +27,6 @@ config SCMI_SMC
+ 	  firmware node is used to trap and forward corresponding SCMI SMCs
+ 	  to firmware running at EL3, for calls coming from the hardware domain.
+=20
++endchoice
 +
-+- Discovery and self-description of the interfaces it supports
-+- Power domain management
-+- Clock management
-+- Reset domain management
-+- Voltage domain management
-+- Sensor management
-+- Performance management
-+- Power capping and monitoring
-+- Pin control protocol.
+ endmenu
+diff --git a/xen/arch/arm/firmware/scmi-smc.c b/xen/arch/arm/firmware/scmi-=
+smc.c
+index 33473c04b1..13d1137592 100644
+--- a/xen/arch/arm/firmware/scmi-smc.c
++++ b/xen/arch/arm/firmware/scmi-smc.c
+@@ -9,6 +9,7 @@
+  * Copyright 2024 NXP
+  */
+=20
++#include <asm/device.h>
+ #include <xen/acpi.h>
+ #include <xen/device_tree.h>
+ #include <xen/errno.h>
+@@ -16,12 +17,11 @@
+ #include <xen/sched.h>
+ #include <xen/types.h>
+=20
++#include <asm/firmware/sci.h>
+ #include <asm/smccc.h>
+-#include <asm/firmware/scmi-smc.h>
+=20
+ #define SCMI_SMC_ID_PROP   "arm,smc-id"
+=20
+-static bool __ro_after_init scmi_enabled;
+ static uint32_t __ro_after_init scmi_smc_id;
+=20
+ /*
+@@ -41,14 +41,11 @@ static bool scmi_is_valid_smc_id(uint32_t fid)
+  *
+  * Returns true if SMC was handled (regardless of response), false otherwi=
+se.
+  */
+-bool scmi_handle_smc(struct cpu_user_regs *regs)
++static bool scmi_handle_smc(struct cpu_user_regs *regs)
+ {
+     uint32_t fid =3D (uint32_t)get_user_reg(regs, 0);
+     struct arm_smccc_res res;
+=20
+-    if ( !scmi_enabled )
+-        return false;
+-
+     if ( !scmi_is_valid_smc_id(fid) )
+         return false;
+=20
+@@ -78,49 +75,45 @@ bool scmi_handle_smc(struct cpu_user_regs *regs)
+     return true;
+ }
+=20
+-static int __init scmi_check_smccc_ver(void)
++static int scmi_smc_domain_init(struct domain *d,
++                                struct xen_domctl_createdomain *config)
+ {
+-    if ( smccc_ver < ARM_SMCCC_VERSION_1_1 )
+-    {
+-        printk(XENLOG_WARNING
+-               "SCMI: No SMCCC 1.1 support, SCMI calls forwarding disabled=
+\n");
+-        return -ENOSYS;
+-    }
++    if ( !is_hardware_domain(d) )
++        return 0;
+=20
++    d->arch.sci_enabled =3D true;
++    printk(XENLOG_DEBUG "SCMI: %pd init\n", d);
+     return 0;
+ }
+=20
+-static int __init scmi_dt_init_smccc(void)
++static void scmi_smc_domain_destroy(struct domain *d)
+ {
+-    static const struct dt_device_match scmi_ids[] __initconst =3D
+-    {
+-        /* We only support "arm,scmi-smc" binding for now */
+-        DT_MATCH_COMPATIBLE("arm,scmi-smc"),
+-        { /* sentinel */ },
+-    };
+-    const struct dt_device_node *scmi_node;
+-    int ret;
++    if ( !is_hardware_domain(d) )
++        return;
+=20
+-    /* If no SCMI firmware node found, fail silently as it's not mandatory=
+ */
+-    scmi_node =3D dt_find_matching_node(NULL, scmi_ids);
+-    if ( !scmi_node )
+-        return -EOPNOTSUPP;
++    printk(XENLOG_DEBUG "SCMI: %pd destroy\n", d);
++}
+=20
+-    ret =3D dt_property_read_u32(scmi_node, SCMI_SMC_ID_PROP, &scmi_smc_id=
+);
+-    if ( !ret )
++static int __init scmi_check_smccc_ver(void)
++{
++    if ( smccc_ver < ARM_SMCCC_VERSION_1_1 )
+     {
+-        printk(XENLOG_ERR "SCMI: No valid \"%s\" property in \"%s\" DT nod=
+e\n",
+-               SCMI_SMC_ID_PROP, scmi_node->full_name);
+-        return -ENOENT;
++        printk(XENLOG_WARNING
++               "SCMI: No SMCCC 1.1 support, SCMI calls forwarding disabled=
+\n");
++        return -ENOSYS;
+     }
+=20
+-    scmi_enabled =3D true;
+-
+     return 0;
+ }
+=20
++static const struct sci_mediator_ops scmi_smc_ops =3D {
++    .handle_call =3D scmi_handle_smc,
++    .domain_init =3D scmi_smc_domain_init,
++    .domain_destroy =3D scmi_smc_domain_destroy,
++};
 +
-+The SCMI compliant firmware could run:
-+
-+- as part of EL3 secure world software (like Trusted Firmware-A) with
-+  ARM SMC/HVC shared-memory transport;
-+- on dedicated System Control Processor (SCP) with HW mailbox shared-memor=
-y transport
-+
-+The major purpose of enabling SCMI support in Xen is to enable guest domai=
-ns access to the SCMI
-+interfaces for performing management actions on passed-through devices (su=
-ch as clocks/resets etc)
-+without accessing directly to the System control HW (like clock controller=
-s) which in most cases
-+can't shared/split between domains. Or, at minimum, allow SCMI access for =
-dom0/hwdom (or guest
-+domain serving as Driver domain).
-+
-+The below sections describe SCMI support options available for Xen.
-+
-+[1] `Arm SCMI <https://developer.arm.com/documentation/den0056/latest/>`_
-+
-+Simple SCMI over SMC/HVC calls forwarding driver (EL3)
-+------------------------------------------------------
-+
-+The EL3 SCMI firmware (TF-A) with a single SCMI OSPM agent support is pret=
-ty generic case for
-+the default vendors SDK and new platforms with SCMI support. Such EL3 SCMI=
- firmware supports only
-+single SCMI OSPM transport (agent) with Shared memory based transport and =
-SMC/HVC calls as doorbell.
-+
-+The SCMI over SMC/HVC calls forwarding driver solves major problem for thi=
-s case by allowing
-+SMC/HVC calls to be forwarded form guest to the EL3 SCMI firmware.
-+
-+By default, the SCMI over SMC/HVC calls forwarding is enabled for Dom0/hwd=
-om.
-+
-+::
-+
-+    +--------------------------+
-+    |                          |
-+    | EL3 SCMI FW (TF-A)       |
-+    ++-------+--^--------------+
-+     |shmem  |  | smc-id
-+     +----^--+  |
-+          |     |
-+     +----|-+---+---+----------+
-+     |    | |  FWD  |      Xen |
-+     |    | +---^---+          |
-+     +----|-----|--------------+
-+          |     | smc-id
-+     +----v-----+--+ +---------+
-+     |             | |         |
-+     | Dom0/hwdom  | | DomU    |
-+     |             | |         |
-+     |             | |         |
-+     +-------------+ +---------+
-+
-+
-+The SCMI messages are passed directly through SCMI shared-memory (zero-cop=
-y) and driver only
-+forwards SMC/HVC calls.
-+
-+Compiling
-+^^^^^^^^^
-+
-+To build with the SCMI over SMC/HVC calls forwarding enabled support, enab=
-le Kconfig option
-+
-+::
-+
-+    CONFIG_SCMI_SMC
-+
-+The ``CONFIG_SCMI_SMC`` is enabled by default.
-+
-+Pass-through SCMI SMC to domain which serves as Driver domain
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+This section describes how to configure the SCMI over SMC/HVC calls forwar=
-ding driver to handle use
-+case "thin Dom0 with guest domain, which serves as Driver domain". In this=
- case HW need to be
-+enabled in Driver domain and dom0 is performing only control functions (wi=
-thout accessing FW) and so,
-+the SCMI need to be enabled in Driver domain.
-+
-+::
-+
-+     +--------------------------+
-+     |EL3 SCMI FW (TF-A)        |
-+     |                          |
-+     +-------------^--+-------+-+
-+             smc-id|  |shmem0 |
-+                   |  +----^--+
-+    +-------------++------+|----+
-+    |Xen          |  FWD  ||    |
-+    |             +--^----+|    |
-+    +----------------|-----|----+
-+              smc-id |     |
-+    +-----------+ +--+-----v-----+
-+    |           | |              |
-+    | Dom0      | |    Driver    |
-+    | Control   | |    domain    |
-+    |           | |              |
-+    +-----------+ +--------------+
-+
-+The SCMI can be enabled for one and only one guest domain.
-+
-+First. configure Dom0 to enable SCMI pass-through using Xen Command Line
-+**"dom0_scmi_smc_passthrough"** option. This will disable SCMI for Dom0/hw=
-dom and SCMI nodes will
-+be removed from Dom0/hwdom device tree.
-+
-+**Configure SCMI pass-through for guest domain with toolstack**
-+
-+* In domain's xl.cfg file add **"arm_sci"** option as below
-+
-+::
-+
-+    arm_sci =3D "type=3Dscmi_smc"
-+
-+* In domain's xl.cfg file enable access to the "arm,scmi-shmem"
-+
-+::
-+
-+    iomem =3D [
-+        "47ff0,1@22001",
-+    ]
-+
-+.. note:: It's up to the user to select guest IPA for mapping SCMI shared-=
-memory.
-+
-+* Add SCMI nodes to the Driver domain partial device tree as in the below =
-example:
-+
-+.. code::
-+
-+    passthrough {
-+       scmi_shm_0: sram@22001000 {
-+           compatible =3D "arm,scmi-shmem";
-+           reg =3D <0x0 0x22001000 0x0 0x1000>;
-+       };
-+
-+       firmware {
-+            compatible =3D "simple-bus";
-+                scmi: scmi {
-+                    compatible =3D "arm,scmi-smc";
-+                    shmem =3D <&scmi_shm_0>;
-+                    ...
-+                }
-+        }
+ /* Initialize the SCMI layer based on SMCs and Device-tree */
+-static int __init scmi_init(void)
++static int __init scmi_dom0_init(struct dt_device_node *dev, const void *d=
+ata)
+ {
+     int ret;
+=20
+@@ -134,22 +127,36 @@ static int __init scmi_init(void)
+     if ( ret )
+         return ret;
+=20
+-    ret =3D scmi_dt_init_smccc();
+-    if ( ret =3D=3D -EOPNOTSUPP )
+-        return ret;
++    ret =3D dt_property_read_u32(dev, SCMI_SMC_ID_PROP, &scmi_smc_id);
++    if ( !ret )
++    {
++        printk(XENLOG_ERR "SCMI: No valid \"%s\" property in \"%s\" DT nod=
+e\n",
++               SCMI_SMC_ID_PROP, dt_node_full_name(dev));
++        return -ENOENT;
 +    }
 +
-+In general, the configuration is similar to any other HW pass-through, exc=
-ept explicitly
-+enabling SCMI with "arm_sci" xl.cfg option.
-+
-+**Configure SCMI pass-through for predefined domain (dom0less)**
-+
-+* add "xen,sci_type" property for required DomU ("xen,domain") node
-+
-+::
-+
-+       xen,sci_type=3D"scmi_smc"
-+
-+* add scmi nodes to the Driver domain partial device tree the same way as =
-above and enable access
-+  to the "arm,scmi-shmem" according to  dom0less documentation. For exampl=
-e:
-+
-+.. code::
-+
-+      scmi_shm_0: sram@22001000 {
-+            compatible =3D "arm,scmi-shmem";
-+            reg =3D <0x00 0x22001000 0x00 0x1000>;
-+    ->        xen,reg =3D <0x0 0x47ff0000 0x0 0x1000 0x0 0x22001000>;
-+    ->        xen,force-assign-without-iommu;
-+      };
-diff --git a/docs/hypervisor-guide/arm/index.rst b/docs/hypervisor-guide/ar=
-m/index.rst
-new file mode 100644
-index 0000000000..7aae4a0a03
---- /dev/null
-+++ b/docs/hypervisor-guide/arm/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+ARM
-+=3D=3D=3D
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   firmware/arm-scmi
-diff --git a/docs/hypervisor-guide/index.rst b/docs/hypervisor-guide/index.=
-rst
-index e4393b0697..520fe01554 100644
---- a/docs/hypervisor-guide/index.rst
-+++ b/docs/hypervisor-guide/index.rst
-@@ -9,3 +9,4 @@ Hypervisor documentation
-    code-coverage
++    ret =3D sci_register(&scmi_smc_ops);
+     if ( ret )
+-        goto err;
++    {
++        printk(XENLOG_ERR "SCMI: mediator already registered (ret =3D %d)\=
+n",
++               ret);
++        return ret;
++    }
 =20
-    x86/index
-+   arm/index
-\ No newline at end of file
+     printk(XENLOG_INFO "Using SCMI with SMC ID: 0x%x\n", scmi_smc_id);
+=20
+     return 0;
+-
+- err:
+-    printk(XENLOG_ERR "SCMI: Initialization failed (ret =3D %d)\n", ret);
+-    return ret;
+ }
+=20
+-__initcall(scmi_init);
++static const struct dt_device_match scmi_smc_match[] __initconst =3D {
++    DT_MATCH_COMPATIBLE("arm,scmi-smc"),
++    { /* sentinel */ },
++};
++
++DT_DEVICE_START(scmi_smc, "SCMI SMC DOM0", DEVICE_FIRMWARE)
++    .dt_match =3D scmi_smc_match,
++    .init =3D scmi_dom0_init,
++DT_DEVICE_END
+=20
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/firmware/scmi-smc.h b/xen/arch/arm/in=
+clude/asm/firmware/scmi-smc.h
+deleted file mode 100644
+index 6b1a164a40..0000000000
+--- a/xen/arch/arm/include/asm/firmware/scmi-smc.h
++++ /dev/null
+@@ -1,41 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * xen/arch/arm/include/asm/firmware/scmi-smc.h
+- *
+- * ARM System Control and Management Interface (SCMI) over SMC
+- * Generic handling layer
+- *
+- * Andrei Cherechesu <andrei.cherechesu@nxp.com>
+- * Copyright 2024 NXP
+- */
+-
+-#ifndef __ASM_SCMI_SMC_H__
+-#define __ASM_SCMI_SMC_H__
+-
+-#include <xen/types.h>
+-
+-struct cpu_user_regs;
+-
+-#ifdef CONFIG_SCMI_SMC
+-
+-bool scmi_handle_smc(struct cpu_user_regs *regs);
+-
+-#else
+-
+-static inline bool scmi_handle_smc(struct cpu_user_regs *regs)
+-{
+-    return false;
+-}
+-
+-#endif /* CONFIG_SCMI_SMC */
+-
+-#endif /* __ASM_SCMI_H__ */
+-
+-/*
+- * Local variables:
+- * mode: C
+- * c-file-style: "BSD"
+- * c-basic-offset: 4
+- * indent-tabs-mode: nil
+- * End:
+- */
+diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
+index 51b3c02973..b33c69a1c2 100644
+--- a/xen/arch/arm/vsmc.c
++++ b/xen/arch/arm/vsmc.c
+@@ -21,7 +21,6 @@
+ #include <asm/traps.h>
+ #include <asm/vpsci.h>
+ #include <asm/platform.h>
+-#include <asm/firmware/scmi-smc.h>
+=20
+ /* Number of functions currently supported by Hypervisor Service. */
+ #define XEN_SMCCC_FUNCTION_COUNT 3
+@@ -233,7 +232,7 @@ static bool handle_sip(struct cpu_user_regs *regs)
+     if ( platform_smc(regs) )
+         return true;
+=20
+-    return scmi_handle_smc(regs);
++    return sci_handle_call(regs);
+ }
+=20
+ /*
+@@ -301,8 +300,6 @@ static bool vsmccc_handle_call(struct cpu_user_regs *re=
+gs)
+             break;
+         case ARM_SMCCC_OWNER_SIP:
+             handled =3D handle_sip(regs);
+-            if ( !handled )
+-                handled =3D sci_handle_call(regs);
+             break;
+         case ARM_SMCCC_OWNER_TRUSTED_APP ... ARM_SMCCC_OWNER_TRUSTED_APP_E=
+ND:
+         case ARM_SMCCC_OWNER_TRUSTED_OS ... ARM_SMCCC_OWNER_TRUSTED_OS_END=
+:
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index 55eed9992c..095b1a23e3 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -328,6 +328,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ #define XEN_DOMCTL_CONFIG_TEE_FFA       2
+=20
+ #define XEN_DOMCTL_CONFIG_ARM_SCI_NONE      0
++#define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC  1
+=20
+ struct xen_arch_domainconfig {
+     /* IN/OUT */
 --=20
 2.34.1
 
