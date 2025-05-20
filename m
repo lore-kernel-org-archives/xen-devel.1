@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9736CC54E71
-	for <xen-devel@archiver.kernel.org>; Tue, 20 May 2025 20:53:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.991132.1375045 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1C4C54E71
+	for <xen-devel@archiver.kernel.org>; Tue, 20 May 2025 21:02:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.991171.1375075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uHTx8-0006aT-J1; Tue, 20 May 2025 20:52:46 +0000
+	id 1uHU6E-0001gJ-Vu; Tue, 20 May 2025 21:02:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 991132.1375045; Tue, 20 May 2025 20:52:46 +0000
+Received: by outflank-mailman (output) from mailman id 991171.1375075; Tue, 20 May 2025 21:02:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uHTx8-0006aK-Ex; Tue, 20 May 2025 20:52:46 +0000
-Received: by outflank-mailman (input) for mailman id 991132;
- Tue, 20 May 2025 20:52:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uHU6E-0001gC-St; Tue, 20 May 2025 21:02:10 +0000
+Received: by outflank-mailman (input) for mailman id 991171;
+ Tue, 20 May 2025 21:02:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BmRr=YE=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uHTx6-0006MJ-W7
- for xen-devel@lists.xenproject.org; Tue, 20 May 2025 20:52:45 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 606472f9-35bc-11f0-a2fa-13f23c93f187;
- Tue, 20 May 2025 22:52:43 +0200 (CEST)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-442ec3ce724so49974645e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 20 May 2025 13:52:43 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a3674fed67sm13346626f8f.89.2025.05.20.13.52.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 13:52:42 -0700 (PDT)
+ id 1uHU6D-0001fn-Si
+ for xen-devel@lists.xenproject.org; Tue, 20 May 2025 21:02:09 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b0b9f1dd-35bd-11f0-b892-0df219b8e170;
+ Tue, 20 May 2025 23:02:08 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a35c894313so3811294f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 20 May 2025 14:02:08 -0700 (PDT)
+Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a35ca5a892sm17187164f8f.24.2025.05.20.14.02.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 May 2025 14:02:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,601 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 606472f9-35bc-11f0-a2fa-13f23c93f187
+X-Inumbo-ID: b0b9f1dd-35bd-11f0-b892-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747774363; x=1748379163; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QF2CENVJm5m7t+V0Pvc5Nc5BgJ21+f+zzmuztZZAqXo=;
-        b=lv0SzLuWD82UcZyH7XSMupV8IxvHOxfI+l9OLlHIR81D/jgYQEBRmaACV/vZjx7qkq
-         B9iqt5M+j0egK+OchiF0FEbVdn6MJwvjsqxa/vW8iEv9M6ui8V+4ef22dU9eR7yTeehs
-         B22Cz2GnYZvX1RJUkZjF3ijiv+f7jcbb8+pRs=
+        d=citrix.com; s=google; t=1747774927; x=1748379727; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=bKrzXzo8HG+/E0Y6LVc9S8OCNl/Zfeqv+vR2YpFSpzo=;
+        b=GiTco9uJTS+CDccGwN9nTS3yM5r+K4eMlQUyjp+gfOgLs7ZL9NHO0DrfP0VcYG8+8h
+         vd8xsNC360YYoJQWFjrxPK+rRW418R0kM6x5mMj3EMeyAl8OQ0yTA8b96BSZJ+9PqpFP
+         P3BdRFn0frUZ5gxvHanu3n6Sh06qorpqmMULc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747774363; x=1748379163;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QF2CENVJm5m7t+V0Pvc5Nc5BgJ21+f+zzmuztZZAqXo=;
-        b=KEqZyxTAlAK7t5alHhMfVm1PWvcGQ5PgD4X8MEx8sPIaTiRHHj/dzROOmmDPMmTWyX
-         kiFBDh3UMDrkosRGLpbg148FAf/EFAsud4N3byjQdRK4HUCdKhXlX4Ouioj5oFAZRd+v
-         m063WCBoQUtIpxUGXRtN2+DazpyZUqTw8czwnUKPQ0uedW43BkQuPdapqg5nhyvko8Zx
-         appgp0cGMjLSOVr76fq9RBkMKG+8ht6CJJKQgUPYE1Tj5SgNpoi0yYlvqkZSG/hMd70T
-         rfRqSVcetmsQbfA0CSSerMvSAp94Ni0QklFDamdVVVUqowikMWwyQVrE1t6Lk10akCQb
-         1l0Q==
-X-Gm-Message-State: AOJu0YzGufoI0lXEtG9dTJa8G4tjomV5OmB8ZmnQrIIo5vb1+EAHc3LV
-	Vl59tkZV/fOzPia0GPYxYxlY2zIHT7NdVlSu4cRHxWFXiBOl5UsTLQJ5jT5BiaJka666j6qZ9UR
-	frfQy
-X-Gm-Gg: ASbGncs01d8BXNOVjDoN35tzIv1bFjJ1cVjL0m6VtxlRys0gEG5WLhGVjG8DgnUsP29
-	4nR03w0INcbbi52l23YwqOntLGppxZ2FlPlw427JbPgt5uGDSZ1Y+Ft0DNU6teFO9V7fLR+qnzX
-	QZzuc1IhfwHXms7cs/oFz/dXLcxB1fnYAHp2uwa4oNU8DtjwQKSA6OysoQP/d/Hs/PJJj5oM5VM
-	lesGA10brdiUcFHsjnAFeLRa2Bl9y4CzioYW/IRE2x0gnn2TvC2dWnkHFLn9mjrdNJ2dYUFqViV
-	ISaA91BFHOVOIyaJy/6hHnbvTDeUTVohpA4lcydXNXGyOhftdUYhIN4XmnpYuwB3VGSejnNVWe0
-	xFl4hF1ZX0JpdnpGELvBIBN+Q
-X-Google-Smtp-Source: AGHT+IF6XfNakqFYxe0RQsn+F/j9c/CDgReDYbe2WRBYgz2TEaGBtLigippEMa+Dd+EUc5kkkbvFdw==
-X-Received: by 2002:a05:6000:4024:b0:3a3:6afd:f2dd with SMTP id ffacd0b85a97d-3a36afdf4demr8835081f8f.50.1747774362730;
-        Tue, 20 May 2025 13:52:42 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH 1/3] tools/tests: Drop depriv-fd-checker
-Date: Tue, 20 May 2025 21:52:37 +0100
-Message-Id: <20250520205239.203253-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250520205239.203253-1-andrew.cooper3@citrix.com>
-References: <20250520205239.203253-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1747774927; x=1748379727;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bKrzXzo8HG+/E0Y6LVc9S8OCNl/Zfeqv+vR2YpFSpzo=;
+        b=Wi0Jy5+aESRmTr/btiBofhA+4In8bKToVCreeBE4siEpBWKiTeKEHTJ4h41Dvyg0uq
+         2FtUSVNkFooM2Zey/BI8fSYB4E7A4RLMdVscISeetSHI8aui4t3kVAuuVMffA4guD01k
+         NTblDRJlIoBBZ5OGMXAIGQ8OThq3o/SgXm/aMtaeLYmpukIdXG7A8vWVMmCWaaVyQqT+
+         V0i+R4qh63l9fYnQHsSGpZePpGZjEpGQRJsJMon9MeQbcLiRE+Iwli8mq47eXHKRY3Kn
+         Q5AcLYDTk9JjqbVqR76K8C7Wc9SJ7DlD9hHHNHve7tOzr0a80V/SzWiCUPcgeTbQLXy9
+         lihw==
+X-Gm-Message-State: AOJu0YywGbatqfzWGuZzqPtKqVc6xFCowkqF3aHgizEhHHOYBxTjibDw
+	bmFtVSpBVWgZUexdsnjzAwTrRYwAlDmOIZV/WgABSwlgnv2PHJXJNZI/bAzYOTzP6uHzjlNNwXw
+	KTp+Z
+X-Gm-Gg: ASbGncvvTYI7hVn6vkxkA9hSYT3sh7iz+AgVkTnH1+eU/zBMsrfhQ8rHUtYEuw4H6fF
+	ZL+NoECfC7zPmRLtzQDGp1G/Oepp167ffh28gF48JKMBKMvy7bfAFaGlm8g2kk0iyui8Mal+sWT
+	vz9IV2gIHHdT4y1KIgpvjdswpLVrUUJjar1ULM7vk1YofXizZEjMgL9Bs6BFM0mqIkuiiBw6Y1A
+	QyhVJ6e0+AGspyhOZ2J99bPssczbfmDdZZHfiBPpF+UElxuF750afgLDPRxOXIIsolMjg+YBM/a
+	Ko+ZuGcGnFneko0BkBKtiNaHlKNrkAAMLEnhGgYQFisemObgZwdmgQojq57X/KtD2K+vZk4vhX5
+	PkgeJ8qPACtAE32Tg
+X-Google-Smtp-Source: AGHT+IFWZoOeDbSv9U8x3wlaEWeVvlD0PEwg+/g5fLbDDIdBmcj4AuaFLFIMx2pD2JcctP2YtpkrNw==
+X-Received: by 2002:a5d:5889:0:b0:3a3:7096:a217 with SMTP id ffacd0b85a97d-3a37096a495mr7201569f8f.17.1747774927203;
+        Tue, 20 May 2025 14:02:07 -0700 (PDT)
+Message-ID: <724b77b5-3b78-436e-bd20-726c34bef03b@citrix.com>
+Date: Tue, 20 May 2025 22:02:05 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tools: Add install/uninstall targets to
+ tests/x86_emulator
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Anthony PERARD <anthony@xenproject.org>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20240516110710.3446-1-alejandro.vallejo@cloud.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20240516110710.3446-1-alejandro.vallejo@cloud.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Unlike the other tests, this is not standalone.  It requires poking at a live
-system, making it unweildly to use.
+On 16/05/2024 12:07 pm, Alejandro Vallejo wrote:
+> Bring test_x86_emulator in line with other tests by adding
+> install/uninstall rules.
+>
+> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> ---
+>  tools/tests/x86_emulator/Makefile | 11 +++++++++--
+>  1 file changed, 9 insertions(+), 2 deletions(-)
+>
+> diff --git a/tools/tests/x86_emulator/Makefile b/tools/tests/x86_emulator/Makefile
+> index 834b2112e7fe..30edf7e0185d 100644
+> --- a/tools/tests/x86_emulator/Makefile
+> +++ b/tools/tests/x86_emulator/Makefile
+> @@ -269,8 +269,15 @@ clean:
+>  .PHONY: distclean
+>  distclean: clean
+>  
+> -.PHONY: install uninstall
+> -install uninstall:
+> +.PHONY: install
+> +install: all
+> +	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+> +	$(if $(TARGET-y),$(INSTALL_PROG) $(TARGET-y) $(DESTDIR)$(LIBEXEC_BIN))
+> +
+> +.PHONY: uninstall
+> +uninstall:
+> +	$(RM) -- $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/,$(TARGET-y))
+> +
+>  
+>  .PHONY: run32 clean32
+>  ifeq ($(XEN_COMPILE_ARCH),x86_64)
 
-It hasn't been touched in 7 years, despite changes in libraries and kernel
-devices using the deprivilege infrastructure.
+[starting a clean thread]
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- .gitignore                             |   1 -
- tools/tests/Makefile                   |   1 -
- tools/tests/depriv/Makefile            |  52 ---
- tools/tests/depriv/depriv-fd-checker.c | 436 -------------------------
- 4 files changed, 490 deletions(-)
- delete mode 100644 tools/tests/depriv/Makefile
- delete mode 100644 tools/tests/depriv/depriv-fd-checker.c
+x86_emulator is not special enough to behave differently to the rest of
+tools/.
 
-diff --git a/.gitignore b/.gitignore
-index 53f5df000383..4a4e20680464 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -165,7 +165,6 @@ tools/misc/xencov
- tools/pkg-config/*
- tools/qemu-xen-build
- tools/xentrace/xenalyze
--tools/tests/depriv/depriv-fd-checker
- tools/tests/x86_emulator/*.bin
- tools/tests/x86_emulator/*.tmp
- tools/tests/x86_emulator/32/x86_emulate
-diff --git a/tools/tests/Makefile b/tools/tests/Makefile
-index 3e60ab6b268d..36928676a666 100644
---- a/tools/tests/Makefile
-+++ b/tools/tests/Makefile
-@@ -9,7 +9,6 @@ ifneq ($(clang),y)
- SUBDIRS-$(CONFIG_X86) += x86_emulator
- endif
- SUBDIRS-y += xenstore
--SUBDIRS-y += depriv
- SUBDIRS-y += rangeset
- SUBDIRS-y += vpci
- SUBDIRS-y += paging-mempool
-diff --git a/tools/tests/depriv/Makefile b/tools/tests/depriv/Makefile
-deleted file mode 100644
-index 5404a12f4780..000000000000
---- a/tools/tests/depriv/Makefile
-+++ /dev/null
-@@ -1,52 +0,0 @@
--XEN_ROOT=$(CURDIR)/../../..
--include $(XEN_ROOT)/tools/Rules.mk
--
--CFLAGS += $(CFLAGS_xeninclude)
--CFLAGS += $(CFLAGS_libxenctrl)
--CFLAGS += $(CFLAGS_libxencall)
--CFLAGS += $(CFLAGS_libxenevtchn)
--CFLAGS += $(CFLAGS_libxengnttab)
--CFLAGS += $(CFLAGS_libxenforeignmemory)
--CFLAGS += $(CFLAGS_libxendevicemodel)
--CFLAGS += $(CFLAGS_libxentoolcore)
--CFLAGS += $(CFLAGS_libxentoollog)
--
--LDLIBS += $(LDLIBS_xeninclude)
--LDLIBS += $(LDLIBS_libxenctrl)
--LDLIBS += $(LDLIBS_libxencall)
--LDLIBS += $(LDLIBS_libxenevtchn)
--LDLIBS += $(LDLIBS_libxengnttab)
--LDLIBS += $(LDLIBS_libxenforeignmemory)
--LDLIBS += $(LDLIBS_libxendevicemodel)
--LDLIBS += $(LDLIBS_libxentoolcore)
--LDLIBS += $(LDLIBS_libxentoollog)
--
--INSTALL_PRIVBIN-y += depriv-fd-checker
--INSTALL_PRIVBIN := $(INSTALL_PRIVBIN-y)
--TARGETS += $(INSTALL_PRIVBIN)
--
--.PHONY: all
--all: build
--
--.PHONY: build
--build: $(TARGETS)
--
--.PHONY: clean
--clean:
--	$(RM) *.o $(TARGETS) *~ $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--
--depriv-fd-checker: depriv-fd-checker.o
--	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
--
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
--	$(INSTALL_PROG) $(INSTALL_PRIVBIN) $(DESTDIR)$(LIBEXEC_BIN)
--
--.PHONY: uninstall
--uninstall:
--	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(INSTALL_PRIVBIN))
--
---include $(DEPS_INCLUDE)
-diff --git a/tools/tests/depriv/depriv-fd-checker.c b/tools/tests/depriv/depriv-fd-checker.c
-deleted file mode 100644
-index 98a27a03d543..000000000000
---- a/tools/tests/depriv/depriv-fd-checker.c
-+++ /dev/null
-@@ -1,436 +0,0 @@
--/*
-- * depriv-fd-checker
-- *
-- * utility to check whether file descriptor(s) are deprivileged
-- *
-- * usage:
-- *  .../depriv-fd-checker CLASS FD X-INFO [CLASS FD X-INFO...]
-- *
-- * CLASS is one of:
-- *    privcmd gntdev evtchn     FD should be appropriate Xen control fd
-- *    readonly                  FD is expected to be readonly
-- *    appendonly                FD is expected to be append write only
-- #    tun                       FD is expected to be an open tun device
-- *
-- * In each case FD is probably a reference to an open-file stolen
-- * from another process, eg by the use of fishdescriptor.
-- *
-- * X-INFO is simply appended to the discursive reportage.
-- *
-- * It is an error if depriv-fd-checker cannot open the control
-- * facilities itself, or something goes wrong with checking, or an FD
-- * is entirely the wrong kind for the specified CLASS.  Otherwise:
-- *
-- * depriv-fd-checker will perhaps print, for each triplet:
-- *   CLASS checking FD INFORMATION... X-INFO
-- * and in any case print, for each triplet, exactly one of:
-- *   CLASS pass|fail FD INFORMATION... X-INFO
-- *   tun maybe FD IFNAME X-INFO
-- *
-- * "pass" means that the descriptor was restricted as expected.
-- * "fail" means that the descriptor was unrestricted.
-- * "maybe" means that further information is printed, as detailed above,
-- *         and the caller should check that it is as expected
-- */
--/*
-- * Copyright (C)2018 Citrix Systems R&D
-- *
-- * This program is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU Lesser General Public License
-- * as published by the Free Software Foundation; version 2.1 of the
-- * License.
-- *
-- * This library is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-- * Lesser General Public License for more details.
-- *
-- * You should have received a copy of the GNU Lesser General Public
-- * License along with this library; If not, see
-- * <http://www.gnu.org/licenses/>.
-- */
--
--#include <stdlib.h>
--#include <errno.h>
--#include <string.h>
--#include <stdio.h>
--#include <assert.h>
--#include <string.h>
--#include <unistd.h>
--#include <fcntl.h>
--#include <poll.h>
--
--#include <err.h>
--
--#include <xenctrl.h>
--#include <xencall.h>
--#include <xengnttab.h>
--#include <xenevtchn.h>
--
--/*
-- * Every class needs setup.  setup is called once per class at program
-- * startup.
-- *
-- * Then it can have
-- *     open test getfd close
-- * In which case the core code will for every fd
-- *     open test getfd dup2 test close
-- * And test should call blocked or succeeded and then immediately
-- * return, or error out
-- *
-- * Or it can have
-- *     check
-- * which should call report, or error out
-- *
-- * Errors: use trouble for simple syscall errors.  Or use err or errx
-- * and maybe print fd_desc and test_which, according to the comments
-- * in struct classinfo.
-- */
--
--static xentoollog_logger *logger;
--
--static int object_fd;
--static const char *classname;
--static const char *fd_desc;
--static const char *test_which;
--
--static const char *test_wh_unrest = "test (unrestricted)";
--static const char *test_wh_rest   = "test (restricted)";
--
--
--static void trouble(const char *what) __attribute__((noreturn));
--static void trouble(const char *what) {
--    fprintf(stderr,
--	    "trouble: %s %s %d (%s) %s: %s\n",
--	    classname, test_which, object_fd, fd_desc, what, strerror(errno));
--    exit(-1);
--}
--
--static void report(const char *pass_or_fail, const char *what,
--		   const char *notes) {
--    printf("%s %s %d %s (%s) %s\n",
--	   classname, pass_or_fail,
--	   object_fd, what, notes, fd_desc);
--    if (ferror(stdout) || fflush(stdout)) err(16,"stdout");
--}
--
--static void succeeded(const char *what) {
--    if (test_which == test_wh_unrest) {
--	/* ok */
--	test_which = 0;
--    } else if (test_which == test_wh_rest) {
--	report("fail",what,"unexpectedly succeeded");
--	test_which = 0;
--    } else {
--	abort();
--    }
--}
--
--static void blocked(const char *what) {
--    if (test_which == test_wh_rest) {
--	/* yay */
--	report("pass", what,"blocked");
--	test_which = 0;
--    } else if (test_which == test_wh_unrest) {
--	err(4,"test blocked on unrestricted fd: %s {%s}",what,test_which);
--    } else {
--	abort();
--    }
--}
--
--/* privcmd */
--
--static xc_interface *xch;
--static void setup_privcmd(void) { }
--static void open_privcmd(void) {
--    xch = xc_interface_open(logger,0,0);
--    if (!xch) trouble("xc_interface_open");
--}
--static void test_privcmd(void) {
--    int r = xc_get_online_cpus(xch);
--    if (r>0)
--	succeeded("xc_get_online_cpus");
--    else if (r==0)
--	errx(-1,"xc_get_online_cpus{%s, %s}=0", test_which, fd_desc);
--    else if (errno==EPERM || errno==EACCES)
--	blocked("xc_get_online_cpus");
--    else
--	trouble("xc_get_online_cpus");
--}
--static int getfd_privcmd(void) {
--    return xencall_fd(xc_interface_xcall_handle(xch));
--}
--static void close_privcmd(void) {
--    xc_interface_close(xch);
--}
--
--/* gntdev */
--
--static xengntshr_handle *xgs;
--static uint32_t gntshr_gref;
--static xengnttab_handle *xgt;
--static void setup_gntdev(void) {
--    void *r;
--    xgs = xengntshr_open(logger,0);
--    if (!xgs) trouble("xengntshr_open");
--    r = xengntshr_share_pages(xgs, 0, 1, &gntshr_gref, 1);
--    if (!r || r==(void*)-1) trouble("xengntshr_share_pages");
--    memset(r, 0x55, XC_PAGE_SIZE);
--}
--static void open_gntdev(void) {
--    xgt = xengnttab_open(logger,0);
--    if (!xgt) trouble("xengnttab_open");
--}
--static void test_gntdev(void) {
--    char mybuf[XC_PAGE_SIZE];
--    memset(mybuf, 0xaa, XC_PAGE_SIZE);
--    xengnttab_grant_copy_segment_t seg;
--    seg.source.foreign.ref = gntshr_gref;
--    seg.source.foreign.offset = 0;
--    seg.source.foreign.domid = 0;
--    seg.dest.virt = mybuf;
--    seg.len = 1;
--    seg.flags = GNTCOPY_source_gref;
--    for (;;) {
--	seg.status = 0;
--	int r = xengnttab_grant_copy(xgt,1,&seg);
--	if (r<0) {
--	    if (errno==EPERM || errno==EACCES || errno==ENOTTY)
--		blocked("xengnttab_grant_copy");
--	    else
--		trouble("xengnttab_grant_copy");
--	} else if (r==0) {
--	    if (seg.status==GNTST_okay)
--		succeeded("xengnttab_grant_copy okay");
--	    else if (seg.status==GNTST_eagain)
--		continue;
--	    else errx(-1,"xengnttab_grant_copy=%d {%s, %s} but .status=%d",
--		      r, test_which, fd_desc,(int)seg.status);
--	} else {
--	    errx(-1,"xengnttab_grant_copy=%d {%s, %s}",
--		 r, test_which, fd_desc);
--	}
--	break;
--    }
--}
--static int getfd_gntdev(void) {
--    return xengnttab_fd(xgt);
--}
--static void close_gntdev(void) {
--    xengnttab_close(xgt);
--}
--
--/* evtchn */
--
--static xenevtchn_handle *xce_recip, *xce;
--static void setup_evtchn(void) {
--    xce_recip = xenevtchn_open(logger, 0);
--    if (!xce_recip) err(-1,"xenevtchn_open (donor)");
--}
--static void open_evtchn(void) {
--    xce = xenevtchn_open(logger, 0);
--    if (!xce) err(-1,"xenevtchn_open");
--}
--static void test_evtchn(void) {
--    xenevtchn_port_or_error_t
--        recip_port=-1, test_unbound_port=-1, test_send_port=-1;
--
--    recip_port = xenevtchn_bind_unbound_port(xce_recip, 0);
--    if (recip_port < 0) trouble("xenevtchn_bind_unbound_port");
--
--    test_unbound_port = xenevtchn_bind_unbound_port(xce, 0);
--    if (test_unbound_port >= 0) {
--        succeeded("xenevtchn_bind_unbound_port");
--        goto out;
--    }
--
--    test_send_port = xenevtchn_bind_interdomain(xce, 0, recip_port);
--    /* bind_interdomain marks the channel pending */
--    struct pollfd pfd;
--    for (;;) {
--        pfd.fd = xenevtchn_fd(xce_recip);
--        pfd.events = POLLIN;
--        pfd.revents = 0;
--        int r = poll(&pfd,1,0);
--        if (r>=0) break;
--        if (errno!=EINTR) err(-1,"poll(xce_recip)");
--    }
--    if (pfd.revents & POLLIN) {
--        xenevtchn_port_or_error_t p3 = xenevtchn_pending(xce_recip);
--        if (p3 < 0) err(-1,"xenevtchn_pending(check)");
--        if (p3 != recip_port)
--            errx(-1,"xenevtchn_pending=%d expected %d",p3,recip_port);
--        xenevtchn_unmask(xce_recip, recip_port);
--    }
--
--    if (test_send_port>=0 && (pfd.revents & POLLIN)) {
--        succeeded("xenevtchn_bind_interdomain/poll");
--        /* we make no attempt to undo what we did to this stolen fd;
--         * the rightful owner will see a spurious event on test_send_port */
--    } else if (test_send_port==-1 && !(pfd.revents & POLLIN) &&
--               (errno==EPERM || errno==EACCES || errno==ENOTTY)) {
--	blocked("xenevtchn_notify");
--    } else {
--        err(-1,"%s %s xenevtchn_bind_interdomain=%d .revents=0x%x",
--             test_which, fd_desc, test_send_port, pfd.revents);
--    }
--
-- out:
--    if (recip_port        > 0) xenevtchn_unbind(xce, recip_port);
--    if (test_unbound_port > 0) xenevtchn_unbind(xce, test_unbound_port);
--    if (test_send_port    > 0) xenevtchn_unbind(xce, test_send_port);
--}
--static int getfd_evtchn(void) {
--    return xenevtchn_fd(xce);
--}
--static void close_evtchn(void) {
--    xenevtchn_close(xce);
--}
--
--/* fcntl */
--
--#define CHECK_FCNTL(openmode)				\
--    int r = fcntl(object_fd, F_GETFL);			\
--    if (r < 0) trouble("fcntl F_GETFL");		\
--    int m = r & (O_RDONLY | O_WRONLY | O_RDWR);		\
--							\
--    char mbuf[100 + 30*3];				\
--    snprintf(mbuf,sizeof(mbuf),				\
--	     "F_GETFL=%#o m=%#o " #openmode "=%#o",	\
--	     r,m,(int)openmode);			\
--							\
--    if (m != openmode) {				\
--	report("fail", #openmode, mbuf);		\
--	return;						\
--    }
--
--/* readonly */
--
--static void setup_readonly(void) { }
--static void check_readonly(void) {
--    CHECK_FCNTL(O_RDONLY);
--    report("pass", "fcntl", mbuf);
--}
--
--/* appendonly */
--
--static void setup_appendonly(void) { }
--static void check_appendonly(void) {
--    CHECK_FCNTL(O_WRONLY);
--    if (!(r & O_APPEND)) {
--	report("fail", "O_APPEND", mbuf);
--	return;
--    }
--    report("pass", "fcntl", mbuf);
--}
--
--#if defined(__linux__)
--#include <sys/ioctl.h>
--#include <sys/types.h>
--#include <sys/socket.h>
--#include <linux/if.h>
--#include <linux/if_tun.h>
--#ifndef TUNGETIFF
--#define TUNGETIFF _IOR('T', 210, unsigned int)
--#endif
--
--/* linux tun */
--
--static void setup_tun(void) { }
--static void check_tun(void) {
--    struct ifreq ifr;
--    int r;
--
--    memset(&ifr,0,sizeof(ifr));
--    r = ioctl(object_fd, TUNGETIFF, (void*)&ifr);
--    if (r<0) trouble("TUNGETIFF");
--    printf("tun maybe %d %.*s %s\n", object_fd,
--           (int)IFNAMSIZ, ifr.ifr_ifrn.ifrn_name,
--           fd_desc);
--}
--
--#define PLATFORM_CLASSES \
--    DEFCHECK(tun),
--
--#else /* !defined(__linux__) */
--#define PLATFORM_CLASSES /* empty */
--#endif
--
--/* class table and main program */
--
--#define DEFCLASS(cl) \
--    { #cl, setup_##cl, 0, open_##cl, test_##cl, getfd_##cl, close_##cl }
--#define DEFCHECK(meth) \
--    { #meth, setup_##meth, check_##meth }
--
--static const struct classinfo {
--    const char *name;     /* errors: print fd_desc   test_which */
--    void (*setup)(void);  /*               best not   best not  */
--    void (*check)(void);  /*               must       may       */
--    void (*open)(void);   /*               must       may       */
--    void (*test)(void);   /*               must       must      */
--    int (*getfd)(void);   /*               must       may       */
--    void (*close)(void);  /*               must       may       */
--} classinfos[] = {
--    DEFCLASS(privcmd),
--    DEFCLASS(gntdev),
--    DEFCLASS(evtchn),
--    DEFCHECK(readonly),
--    DEFCHECK(appendonly),
--    PLATFORM_CLASSES
--    { 0 }
--};
--
--int main(int argc, char **argv) {
--    const struct classinfo *cli;
--    int r;
--
--    argv++;
--
--    logger = (xentoollog_logger*)xtl_createlogger_stdiostream
--	(stderr, XTL_NOTICE, XTL_STDIOSTREAM_HIDE_PROGRESS);
--
--    fd_desc = "setup";
--    test_which = "setup";
--    for (cli = classinfos; cli->name; cli++)
--	cli->setup();
--
--    while ((classname = *argv++)) {
--	if (!*argv) errx(8,"need fd after class");
--	object_fd = atoi(*argv++);
--
--	fd_desc = *argv++;
--	if (!fd_desc) errx(8,"need info after fd");
--
--	for (cli = classinfos; cli->name; cli++)
--	    if (!strcmp(cli->name, classname))
--		goto found;
--	report("fail","unknown class","");
--	continue;
--
--    found:
--	if (cli->check) {
--	    report("checking","check","in progress");
--	    test_which = "check";
--	    cli->check();
--	} else {
--	    test_which = "open";
--	    report("checking","dup-hack","in progress");
--                                                  cli->open();
--
--	    test_which = test_wh_unrest;          cli->test();
--	    assert(!test_which);
--
--	    test_which = "getfd"; int intern_fd = cli->getfd();
--	    r = dup2(object_fd, intern_fd);
--	    if (r != intern_fd) err(-1, "dup2");
--
--	    test_which = test_wh_rest;             cli->test();
--	    assert(!test_which);
--
--	    test_which = "close";                  cli->close();
--	}
--    }
--
--    return 0;
--}
--- 
-2.39.5
+Theoretical concerns over cross compiling test_x86_emulator for non-x86
+can be fixed by whomever first wants to do this.
 
+The very real problem is that this doesn't run in x86 CI, because and
+only because it doesn't have an install target.
+
+~Andrew
 
