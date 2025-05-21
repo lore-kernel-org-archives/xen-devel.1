@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88358C54E71
-	for <xen-devel@archiver.kernel.org>; Wed, 21 May 2025 16:04:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.992139.1375933 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDBBC2D0CD
+	for <xen-devel@archiver.kernel.org>; Wed, 21 May 2025 16:04:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.992150.1376026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uHlvI-0004nr-Cj; Wed, 21 May 2025 16:04:04 +0000
+	id 1uHlvT-0007EK-Ao; Wed, 21 May 2025 16:04:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 992139.1375933; Wed, 21 May 2025 16:04:04 +0000
+Received: by outflank-mailman (output) from mailman id 992150.1376026; Wed, 21 May 2025 16:04:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uHlvI-0004nK-4w; Wed, 21 May 2025 16:04:04 +0000
-Received: by outflank-mailman (input) for mailman id 992139;
- Wed, 21 May 2025 16:04:03 +0000
+	id 1uHlvS-0007BH-Lb; Wed, 21 May 2025 16:04:14 +0000
+Received: by outflank-mailman (input) for mailman id 992150;
+ Wed, 21 May 2025 16:04:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hkAn=YF=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uHlvG-0004XB-Vf
- for xen-devel@lists.xenproject.org; Wed, 21 May 2025 16:04:03 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
+ id 1uHlvR-0004XB-3Q
+ for xen-devel@lists.xenproject.org; Wed, 21 May 2025 16:04:13 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 36443578-365d-11f0-a2fa-13f23c93f187;
- Wed, 21 May 2025 18:04:02 +0200 (CEST)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-601956fa3beso7489603a12.0
- for <xen-devel@lists.xenproject.org>; Wed, 21 May 2025 09:04:02 -0700 (PDT)
+ id 3c8ee7d1-365d-11f0-a2fa-13f23c93f187;
+ Wed, 21 May 2025 18:04:12 +0200 (CEST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ad563b69908so601633166b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 21 May 2025 09:04:12 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6004d502736sm9152513a12.25.2025.05.21.09.03.59
+ 4fb4d7f45d1cf-6004d502736sm9152513a12.25.2025.05.21.09.04.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 09:04:00 -0700 (PDT)
+ Wed, 21 May 2025 09:04:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,342 +47,424 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36443578-365d-11f0-a2fa-13f23c93f187
+X-Inumbo-ID: 3c8ee7d1-365d-11f0-a2fa-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747843441; x=1748448241; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1747843452; x=1748448252; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Vhh7mLKOS422FBFt4UIWy2zs58dqVadBUh2l97wxS44=;
-        b=JHwIyEJ29XJTqw83GuTyLOJbaMX05R8tTSh++dS2c+ScoLs50HZsFbRi0nOIBT/jBB
-         9dDpq7V2h4IcQuET7QBQbte1pvIoljRtKe9wApAuWeTccIcrrEjX4/IzQEndcBcsucnA
-         WhOt62WIGLV2Hg2YCQeQQ7QlB4KGZYjSj/7kO8oZQNJdySg74+r24VZXzqHkjTmqDwKu
-         +8wrAiP8EacctWDo+zrpHM3WEj8TIPzA2pKm3MNxB+ix6+N2sEnNuPfJSiY2gfSaKVQA
-         SlH6A3BmPX8KpTpCIWHKVF5x8RlFHa3jvJ8mV9KXMQwDhWY+i6FVgpMDveo/VmxtBBMz
-         gtTQ==
+        bh=XyAwodaa4cada9dAsxM26iAezZGHbHHwpzUE0m4gKwA=;
+        b=Wb/Wm7+gL4n8rHDqTt1kCOb5Z7MQo3tqIZu9mDIg8KYOYusyBFDsCxjBg4dMJGp/x3
+         nLTZpacd7X+e0LCXmOJphKc0dXfua87NofBzoHoFPirVbGlfwVMeylnRmRjnTdmm7erO
+         lt/oMwryHjgnNhLS1+eCQbuvGLqbpfQCVYI0qnAmfldjPdYE3Aqv8i950UXRdS6nwikK
+         aSpWYJ4VUDWGwoncmsilZ/MaDTYMNsrwr3UabPXidVhHrENFj/bEnW/r/v3JU6dHEnGA
+         5q0JtrH8GjEZ+zDTfpFGbPQ1IJw09+yiRkptjdnHpT5a2ZEqJWoaDYkjfBB8AQaG8/tZ
+         XRHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747843441; x=1748448241;
+        d=1e100.net; s=20230601; t=1747843452; x=1748448252;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Vhh7mLKOS422FBFt4UIWy2zs58dqVadBUh2l97wxS44=;
-        b=EckL5q5gqnZJyOLGzznq4Vy+ZnU5GhDp8mcJJcqoitV3JKh25rU2m0hnsrFMlnl0Ci
-         s2475CXfmssK7+0fun1gYEXz6k7kSMpl5EUHVI3gPyXySl2WJdAW6PDgq7wocq6mw0Jl
-         aKB8LNU4rj37feemkZBHsRNV9VJHa5UxFWHZCxKbp6UmE2uIcqHzu2wU2XCGbea/4gaA
-         E2DHJGMYYLu0cVIZHh2WUSoSQ92g4yRyu9br9Pvkib9K4KwVwdSuzqlRmvhZhJcisIYU
-         zdw/2q2SNNiWWeX7D/geGipgk9yfDh89aqn1xb08/RITGOvFH5og5R59gdCKo9fYXo0j
-         4HXg==
-X-Gm-Message-State: AOJu0YwsLkzh+Fpnr14bgaH6rm601yf4Eo2p3Uz2/k6ZexSvIDTLeVDr
-	gsAGsYEYEGOxtXBq5sjttRi8Ohdb9RThRSAQ2XgMWv3cGkPCWSFz5ceStC8yrg==
-X-Gm-Gg: ASbGnctNQmDL3/u4LHNy0LHUUgqm5xdLszhdEiMWAKy1phtowgOpPIbJQsQsoUp9nei
-	9v4iGGifF/rsOqrdUQ5RTvNiCeqraM8GKRh4io6Jy6uojHWEjm70JCau8HSuw+sbwujY5c9zWsZ
-	JiUpyzaRsmI+KwzywHlGnDmQ9pYqS6Mcf3o1+KDNgimtJMuGX8g7c6GTdUg5sxJULjYS8yHJRQi
-	s8pU4UGBzrbqlg6nmjGZTw5uv9TxD4UKvjAl58vKNsJhY+djzlUcmarFLERacmEAEUeNpP/rN5K
-	rxjOTPuMw49cxQEufDYG56EDc/OJ94VbZtbe7rq5kLgyT5FKITwuSsAcStFoCZTTXrozwordpNv
-	e1Rc/lLYXs1JxD1ukMw==
-X-Google-Smtp-Source: AGHT+IFhG7x4HtSEX7BJV/ofoAM1+NoJCsmEJv58pdf+SV/Z03PPdGmhTMEbAKl3/8PMUl63cZdGLA==
-X-Received: by 2002:a05:6402:254a:b0:601:9aeb:3d9 with SMTP id 4fb4d7f45d1cf-6019aeb05f4mr15520397a12.20.1747843440712;
-        Wed, 21 May 2025 09:04:00 -0700 (PDT)
+        bh=XyAwodaa4cada9dAsxM26iAezZGHbHHwpzUE0m4gKwA=;
+        b=NAYC2Yb/4pnQVi/Lz1gkOw/7pSsLTD7Ho+UcYjWo4XkBKSF+OGbZ2Q9eKCDQYqLLJ3
+         VzYNGD3qSXEVzLFAKNgyzEpMrh+AgzDWyr9Ys5wWia3bW9alJ0HbT51WQfinJ5gpVXPX
+         ihc40vv8pX2OoWk+APbHcwzOtOyUq1c6eDyT14hLDa6wOizFXw5TW3mpQtvlL1sG2Qbr
+         +rQv32rrSI4p1vJGErgRJ0au2YTjS/tnBuwPuAhDvsFz7LcjmZhRLoAhKqkEQedTHlNh
+         4n0yRhU1f8z8pEY8GBQOi8IIlnt6lDs0q6db6lhunbC/uTIV3uUd+mOeq7GCcU6JNny4
+         JGmw==
+X-Gm-Message-State: AOJu0YxikApHMrR0FOd9UogRKNKRxZqrascgEPz1gNaXS1bzu1Xz/Dnb
+	MRAneH3scEfO66S8JFgjUjwczsnXWRlJzyYxOoaiUfoaQhICSfFjljsUuB3b/Q==
+X-Gm-Gg: ASbGnctyPNXKMlHkRtv6c2j4SayRyh38n1+QOjKiEFgcNNBY80R3L26lH+ooyMAQbUY
+	tNPsfTX3PQ+dHByO7mzpMzGEJuiKMU9WQXmNrKjgmVr4B+3rtpj2qOFf9sVLBOy80dKlNG9uypu
+	MC18ROOR/OGa9TYEUwplK+2GZOF4B+iwsXH2fLy/JT2iMdq29sF651uexwuaaUsmg/XaEtx+2i9
+	TIOzS8xXzeNX9Mt/+xUUOmauXnJ8WLiEM0clriEvlayjgsnjym1RvFFKmNTZ3+wd+lqr0CR1FCM
+	FvkdUoAiUYa18t7r0qX4/cmx1ptYSEWjLvVjwUIsSLRnMePY6R8G9NEmwefjymNYvw8G/RtKSZb
+	/XJA6H4JWkRcZiQwjNw==
+X-Google-Smtp-Source: AGHT+IH4gHHiOcNKmaJyl8xGv7otfroRllepUtnSAz3Afmf5TUkO+KT9AIeJUB3LPsq6yOit4+DnbQ==
+X-Received: by 2002:a17:906:c408:b0:ad5:4919:6317 with SMTP id a640c23a62f3a-ad549196826mr1225561966b.49.1747843451176;
+        Wed, 21 May 2025 09:04:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v3 02/14] xen/riscv: introduce support of Svpbmt extension and make it mandatory
-Date: Wed, 21 May 2025 18:03:42 +0200
-Message-ID: <f1c19b5dec9e00b112d97324d582191fe127eb83.1747843009.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v3 12/14] xen/riscv: add external interrupt handling for hypervisor mode
+Date: Wed, 21 May 2025 18:03:52 +0200
+Message-ID: <30b7b5fe1b37b1360b9ba23b6fd0b9c90e0b7651.1747843009.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1747843009.git.oleksii.kurochko@gmail.com>
 References: <cover.1747843009.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Svpbmt extension is necessary for chaning the memory type for a page contains
-a combination of attributes that indicate the cacheability, idempotency,
-and ordering properties for access to that page.
+Implement functions necessarry to have working external interrupts in
+hypervisor mode. The following changes are done:
+  - Add a common function intc_handle_external_irq() to call APLIC specific
+    function to handle an interrupt.
+  - Update do_trap() function to handle IRQ_S_EXT case; add the check to catch
+    case when cause of trap is an interrupt.
+  - Add handle_interrrupt() member to intc_hw_operations structure.
+  - Enable local interrupt delivery for IMSIC by calling of
+    imsic_ids_local_delivery() in imsic_init(); additionally introduce helper
+    imsic_csr_write() to update IMSIC_EITHRESHOLD and IMSIC_EITHRESHOLD.
+  - Enable hypervisor external interrupts.
+  - Implement aplic_handler_interrupt() and use it to init ->handle_interrupt
+    member of intc_hw_operations for APLIC.
+  - Add implementation of do_IRQ() to dispatch the interrupt.
 
-As a part of the patch the following is introduced:
-- Svpbmt memory type defintions: PTE_PBMT_{NOCACHE,IO}.
-- PAGE_HYPERVISOR_{NOCACHE,WC}.
-- RISCV_ISA_EXT_svpbmt and add a check in runtime that Svpbmt is
-  supported by platform.
-- Update riscv/booting.txt with information about Svpbmt.
-- Update logic of pt_update_entry() to take into account PBMT bits.
+The current patch is based on the code from [1].
 
-Use 'unsigned long' for pte_attr_t as PMBT bits are 61 and 62 and it doesn't
-fit into 'unsigned int'. Also, update function prototypes which uses
-'unsigned int' for flags/attibutes.
+[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7390e2365828b83e27ead56b03114a56e3699dd5
 
-Enable Svpbmt for testing in QEMU as Svpmbt is now mandatory for
-Xen work.
-
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v3:
- - Remove dependecy "depends on RISCV_64" for HAS_SVPBMT as it is selected by
-   CONFIG_RISCV_64.
- - Move HAS_SVPMBT's help text to commit message as it's not too much sense
-   to have it for a prompt-less option.
- - Move definition of PTE_PMBT_{NOCACHE,IO} up closer to arch-specific
-   definitions.
- - Update the commit message and subject.
- - Add a comment above PAGE_HYPERVISOR_NOCACHE.
+Changes in V3:
+ - Add ASSERT(spin_is_locked(&desc->lock)) to aplic_set_irq_type().
+ - Fix code style for switch () in aplic_set_irq_type().
+ - Drop fallthrough between "case IRQ_TYPE_NONE: case IRQ_TYPE_INVALID:" as there
+   is no other statements in "case IRQ_TYPE_NONE".
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
-Changes in v2:
- - new patch.
+Changes in V2:
+ - use BIT() macros instead of 1UL << bit_num in aplic.c.
+ - Drop passing of a cause to aplic_handle_interrupt() function. And update
+   prototype of handle_interrupt() callback.
+ - Drop ASSERT() in intc_handle_external_irqs() as it is useless.
+ - Code style fixes.
+ - Drop cause argument for intc_handle_external_irqs().
+ - Update the commit message: drop words that imsic_ids_local_delivery() is
+   implemented in this patch, it is only called.
+ - Add cf_check for aplic_handle_interrupt(), aplic_set_irq_type().
+ - Move forward declarations in asm/intc.h up.
+ - Use plain C operator instead if {clear,set}_bit() for desc->status as it
+   is always used under spinlock().
+ - use writel() for writing to APLIC's sourcecfg in aplic_set_irq_type().
 ---
- automation/scripts/qemu-smoke-riscv64.sh |  1 +
- docs/misc/riscv/booting.txt              |  4 ++++
- xen/arch/riscv/Kconfig                   |  4 ++++
- xen/arch/riscv/cpufeature.c              |  2 ++
- xen/arch/riscv/include/asm/cpufeature.h  |  1 +
- xen/arch/riscv/include/asm/fixmap.h      |  2 +-
- xen/arch/riscv/include/asm/mm-types.h    |  8 ++++++++
- xen/arch/riscv/include/asm/page.h        | 23 ++++++++++++++++++++++-
- xen/arch/riscv/pt.c                      | 20 +++++++++++---------
- 9 files changed, 54 insertions(+), 11 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/mm-types.h
+ xen/arch/riscv/aplic.c             | 71 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/aplic.h |  7 +++
+ xen/arch/riscv/include/asm/imsic.h |  1 +
+ xen/arch/riscv/include/asm/intc.h  |  6 +++
+ xen/arch/riscv/include/asm/irq.h   |  6 ++-
+ xen/arch/riscv/intc.c              |  5 +++
+ xen/arch/riscv/irq.c               | 47 ++++++++++++++++++++
+ xen/arch/riscv/traps.c             | 19 ++++++++
+ 8 files changed, 161 insertions(+), 1 deletion(-)
 
-diff --git a/automation/scripts/qemu-smoke-riscv64.sh b/automation/scripts/qemu-smoke-riscv64.sh
-index b2e112c942..25f9e4190e 100755
---- a/automation/scripts/qemu-smoke-riscv64.sh
-+++ b/automation/scripts/qemu-smoke-riscv64.sh
-@@ -7,6 +7,7 @@ rm -f smoke.serial
+diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+index f48937ccc6..5415471680 100644
+--- a/xen/arch/riscv/aplic.c
++++ b/xen/arch/riscv/aplic.c
+@@ -9,6 +9,7 @@
+  * Copyright (c) 2024-2025 Vates
+  */
  
- export TEST_CMD="qemu-system-riscv64 \
-     -M virt,aia=aplic-imsic \
-+    -cpu rv64,svpbmt=on \
-     -smp 1 \
-     -nographic \
-     -m 2g \
-diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
-index 3a8474a27d..e100bde575 100644
---- a/docs/misc/riscv/booting.txt
-+++ b/docs/misc/riscv/booting.txt
-@@ -18,3 +18,7 @@ Xen is run:
- - Zihintpause:
-   On a system that doesn't have this extension, cpu_relax() should be
-   implemented properly.
-+- SVPBMT is mandatory to enable changing the memory attributes of a page.
-+  For platforms that do not support SVPBMT, it is necessary to introduce a
-+  similar mechanism as described in:
-+  https://lore.kernel.org/all/20241102000843.1301099-1-samuel.holland@sifive.com/
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index d882e0a059..62c5b7ba34 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -10,11 +10,15 @@ config RISCV
- config RISCV_64
- 	def_bool y
- 	select 64BIT
-+	select HAS_SVPBMT
++#include <xen/const.h>
+ #include <xen/device_tree.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+@@ -212,6 +213,71 @@ static void aplic_set_irq_affinity(struct irq_desc *desc, const cpumask_t *mask)
+     spin_unlock(&aplic.lock);
+ }
  
- config ARCH_DEFCONFIG
- 	string
- 	default "arch/riscv/configs/tiny64_defconfig"
- 
-+config HAS_SVPBMT
-+	bool
++static void cf_check aplic_handle_interrupt(struct cpu_user_regs *regs)
++{
++    /* disable to avoid more external interrupts */
++    csr_clear(CSR_SIE, BIT(IRQ_S_EXT, UL));
 +
- menu "Architecture Features"
- 
- source "arch/Kconfig"
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index 3246a03624..b7d5ec6580 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -137,6 +137,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
-     RISCV_ISA_EXT_DATA(zbs),
-     RISCV_ISA_EXT_DATA(smaia),
-     RISCV_ISA_EXT_DATA(ssaia),
-+    RISCV_ISA_EXT_DATA(svpbmt),
++    /* clear the pending bit */
++    csr_clear(CSR_SIP, BIT(IRQ_S_EXT, UL));
++
++    /* dispatch the interrupt */
++    do_IRQ(regs, csr_swap(CSR_STOPEI, 0) >> TOPI_IID_SHIFT);
++
++    /* enable external interrupts */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
++}
++
++static void cf_check aplic_set_irq_type(struct irq_desc *desc, unsigned int type)
++{
++    /*
++    * Interrupt 0 isn't possible based on the spec:
++    *   Each of an APLIC’s interrupt sources has a fixed unique identity number in the range 1 to N,
++    *   where N is the total number of sources at the APLIC. The number zero is not a valid interrupt
++    *   identity number at an APLIC. The maximum number of interrupt sources an APLIC may support
++    *   is 1023.
++    *
++    * Thereby interrupt 1 will correspond to bit 0 in sourcecfg[] register,
++    * interrupt 2 ->sourcecfg[1] and so on.
++    *
++    * And that is the reason why we need -1.
++    */
++    unsigned int irq_bit = desc->irq - 1;
++
++    ASSERT(spin_is_locked(&desc->lock));
++
++    spin_lock(&aplic.lock);
++
++    switch ( type )
++    {
++    case IRQ_TYPE_EDGE_RISING:
++        writel(APLIC_SOURCECFG_SM_EDGE_RISE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_EDGE_FALLING:
++        writel(APLIC_SOURCECFG_SM_EDGE_FALL, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_HIGH:
++        writel(APLIC_SOURCECFG_SM_LEVEL_HIGH, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_LOW:
++        writel(APLIC_SOURCECFG_SM_LEVEL_LOW, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_NONE:
++    case IRQ_TYPE_INVALID:
++        writel(APLIC_SOURCECFG_SM_INACTIVE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    default:
++        panic("%s: APLIC doesnt support IRQ type: 0x%x?\n", __func__, type);
++    }
++
++    spin_unlock(&aplic.lock);
++}
++
+ static const hw_irq_controller aplic_xen_irq_type = {
+     .typename     = "aplic",
+     .startup      = aplic_irq_startup,
+@@ -225,6 +291,8 @@ static struct intc_hw_operations __ro_after_init aplic_ops = {
+     .info                = &aplic_info,
+     .init                = aplic_init,
+     .host_irq_type       = &aplic_xen_irq_type,
++    .handle_interrupt    = aplic_handle_interrupt,
++    .set_irq_type        = aplic_set_irq_type,
  };
  
- static const struct riscv_isa_ext_data __initconst required_extensions[] = {
-@@ -151,6 +152,7 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
-     RISCV_ISA_EXT_DATA(zifencei),
-     RISCV_ISA_EXT_DATA(zihintpause),
-     RISCV_ISA_EXT_DATA(zbb),
-+    RISCV_ISA_EXT_DATA(svpbmt),
+ static int cf_check aplic_irq_xlate(const uint32_t *intspec,
+@@ -264,6 +332,9 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
+ 
+     register_intc_ops(&aplic_ops);
+ 
++    /* Enable supervisor external interrupt */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
++
+     return 0;
+ }
+ 
+diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+index a814a36a82..ef5b1d3e85 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
++++ b/xen/arch/riscv/include/asm/aplic.h
+@@ -18,6 +18,13 @@
+ #define APLIC_DOMAINCFG_IE      BIT(8, UL)
+ #define APLIC_DOMAINCFG_DM      BIT(2, UL)
+ 
++#define APLIC_SOURCECFG_SM_INACTIVE     0x0
++#define APLIC_SOURCECFG_SM_DETACH       0x1
++#define APLIC_SOURCECFG_SM_EDGE_RISE    0x4
++#define APLIC_SOURCECFG_SM_EDGE_FALL    0x5
++#define APLIC_SOURCECFG_SM_LEVEL_HIGH   0x6
++#define APLIC_SOURCECFG_SM_LEVEL_LOW    0x7
++
+ #define APLIC_TARGET_HART_IDX_SHIFT 18
+ 
+ struct aplic_regs {
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index a0eba55f99..4973016cd8 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -12,6 +12,7 @@
+ #define ASM__RISCV__IMSIC_H
+ 
+ #include <xen/spinlock.h>
++#include <xen/stdbool.h>
+ #include <xen/types.h>
+ 
+ #define IMSIC_MMIO_PAGE_SHIFT   12
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 1a88505518..b11b26addd 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -12,6 +12,7 @@ enum intc_version {
+     INTC_APLIC,
  };
  
- static bool __init is_lowercase_extension_name(const char *str)
-diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
-index 1015b6ee44..768b84b769 100644
---- a/xen/arch/riscv/include/asm/cpufeature.h
-+++ b/xen/arch/riscv/include/asm/cpufeature.h
-@@ -37,6 +37,7 @@ enum riscv_isa_ext_id {
-     RISCV_ISA_EXT_zbs,
-     RISCV_ISA_EXT_smaia,
-     RISCV_ISA_EXT_ssaia,
-+    RISCV_ISA_EXT_svpbmt,
-     RISCV_ISA_EXT_MAX
++struct cpu_user_regs;
+ struct irq_desc;
+ 
+ struct intc_info {
+@@ -35,6 +36,9 @@ struct intc_hw_operations {
+     void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
+     /* Set IRQ priority */
+     void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
++
++    /* handle external interrupt */
++    void (*handle_interrupt)(struct cpu_user_regs *regs);
  };
  
-diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
-index e399a15f53..5990c964aa 100644
---- a/xen/arch/riscv/include/asm/fixmap.h
-+++ b/xen/arch/riscv/include/asm/fixmap.h
-@@ -33,7 +33,7 @@
- extern pte_t xen_fixmap[];
+ void intc_preinit(void);
+@@ -45,4 +49,6 @@ void intc_init(void);
  
- /* Map a page in a fixmap entry */
--void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
-+void set_fixmap(unsigned int map, mfn_t mfn, pte_attr_t flags);
- /* Remove a mapping from a fixmap entry */
- void clear_fixmap(unsigned int map);
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
  
-diff --git a/xen/arch/riscv/include/asm/mm-types.h b/xen/arch/riscv/include/asm/mm-types.h
-new file mode 100644
-index 0000000000..fa512064b8
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/mm-types.h
-@@ -0,0 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++void intc_handle_external_irqs(struct cpu_user_regs *regs);
 +
-+#ifndef ASM_RISCV_MM_TYPES_H
-+#define ASM_RISCV_MM_TYPES_H
-+
-+typedef unsigned long pte_attr_t;
-+
-+#endif /* ASM_RISCV_MM_TYPES_H */
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index bf8988f657..81b91b63d8 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -37,6 +37,16 @@
- #define PTE_ACCESSED                BIT(6, UL)
- #define PTE_DIRTY                   BIT(7, UL)
- #define PTE_RSW                     (BIT(8, UL) | BIT(9, UL))
-+/*
-+ * [62:61] Svpbmt Memory Type definitions:
-+ *
-+ *  00 - PMA    Normal Cacheable, No change to implied PMA memory type
-+ *  01 - NC     Non-cacheable, idempotent, weakly-ordered Main Memory
-+ *  10 - IO     Non-cacheable, non-idempotent, strongly-ordered I/O memory
-+ *  11 - Rsvd   Reserved for future standard use
-+ */
-+#define PTE_PMBT_NOCACHE            BIT(61, UL)
-+#define PTE_PMBT_IO                 BIT(62, UL)
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+index 84c3c2904d..94151eb083 100644
+--- a/xen/arch/riscv/include/asm/irq.h
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -33,16 +33,20 @@ struct arch_irq_desc {
+     unsigned int type;
+ };
  
- #define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
- #define PTE_TABLE                   (PTE_VALID)
-@@ -46,6 +56,15 @@
- #define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
++struct cpu_user_regs;
++struct dt_device_node;
++
+ static inline void arch_move_irqs(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+ }
  
- #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
-+/*
-+ * PAGE_HYPERVISOR_NOCACHE is used for ioremap().
-+ *
-+ * Both PTE_PMBT_IO and PTE_PMBT_NOCACHE are non-cacheable, but the difference
-+ * is that IO is non-idempotent and strongly ordered, which makes it a good
-+ * candidate for mapping IOMEM.
-+ */
-+#define PAGE_HYPERVISOR_NOCACHE     (PAGE_HYPERVISOR_RW | PTE_PMBT_IO)
-+#define PAGE_HYPERVISOR_WC          (PAGE_HYPERVISOR_RW | PTE_PMBT_NOCACHE)
+-struct dt_device_node;
+ int platform_get_irq(const struct dt_device_node *device, int index);
+ 
+ void init_IRQ(void);
+ 
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq);
++
+ #endif /* ASM__RISCV__IRQ_H */
  
  /*
-  * The PTE format does not contain the following bits within itself;
-@@ -58,6 +77,8 @@
- 
- #define PTE_ACCESS_MASK (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE)
- 
-+#define PTE_PBMT_MASK   (PTE_PMBT_NOCACHE | PTE_PMBT_IO)
-+
- /* Calculate the offsets into the pagetables for a given VA */
- #define pt_linear_offset(lvl, va)   ((va) >> XEN_PT_LEVEL_SHIFT(lvl))
- 
-@@ -202,7 +223,7 @@ static inline pte_t read_pte(const pte_t *p)
-     return read_atomic(p);
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index f2823267a9..ea317aea5a 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -50,6 +50,11 @@ static void intc_set_irq_priority(struct irq_desc *desc, unsigned int priority)
+         intc_hw_ops->set_irq_priority(desc, priority);
  }
  
--static inline pte_t pte_from_mfn(mfn_t mfn, unsigned int flags)
-+static inline pte_t pte_from_mfn(mfn_t mfn, pte_attr_t flags)
- {
-     unsigned long pte = (mfn_x(mfn) << PTE_PPN_SHIFT) | flags;
-     return (pte_t){ .pte = pte };
-diff --git a/xen/arch/riscv/pt.c b/xen/arch/riscv/pt.c
-index 918b1b91ab..82c8c73c3e 100644
---- a/xen/arch/riscv/pt.c
-+++ b/xen/arch/riscv/pt.c
-@@ -25,7 +25,7 @@ static inline mfn_t get_root_page(void)
-  * See the comment about the possible combination of (mfn, flags) in
-  * the comment above pt_update().
-  */
--static bool pt_check_entry(pte_t entry, mfn_t mfn, unsigned int flags)
-+static bool pt_check_entry(pte_t entry, mfn_t mfn, pte_attr_t flags)
- {
-     /* Sanity check when modifying an entry. */
-     if ( (flags & PTE_VALID) && mfn_eq(mfn, INVALID_MFN) )
-@@ -260,7 +260,7 @@ pte_t pt_walk(vaddr_t va, unsigned int *pte_level)
-  */
- static int pt_update_entry(mfn_t root, vaddr_t virt,
-                            mfn_t mfn, unsigned int *target,
--                           unsigned int flags)
-+                           pte_attr_t flags)
- {
-     int rc;
-     /*
-@@ -328,17 +328,19 @@ static int pt_update_entry(mfn_t root, vaddr_t virt,
-         pte.pte = 0;
-     else
-     {
-+        const pte_attr_t attrs = PTE_ACCESS_MASK | PTE_PBMT_MASK;
++void intc_handle_external_irqs(struct cpu_user_regs *regs)
++{
++    intc_hw_ops->handle_interrupt(regs);
++}
 +
-         /* We are inserting a mapping => Create new pte. */
-         if ( !mfn_eq(mfn, INVALID_MFN) )
-             pte = pte_from_mfn(mfn, PTE_VALID);
--        else /* We are updating the permission => Copy the current pte. */
-+        else /* We are updating the attributes => Copy the current pte. */
-         {
-             pte = *ptep;
--            pte.pte &= ~PTE_ACCESS_MASK;
-+            pte.pte &= ~attrs;
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+ {
+     ASSERT(desc->status & IRQ_DISABLED);
+diff --git a/xen/arch/riscv/irq.c b/xen/arch/riscv/irq.c
+index 669ef3ae9e..466f1b4ba9 100644
+--- a/xen/arch/riscv/irq.c
++++ b/xen/arch/riscv/irq.c
+@@ -11,6 +11,10 @@
+ #include <xen/errno.h>
+ #include <xen/init.h>
+ #include <xen/irq.h>
++#include <xen/spinlock.h>
++
++#include <asm/hardirq.h>
++#include <asm/intc.h>
+ 
+ static irq_desc_t irq_desc[NR_IRQS];
+ 
+@@ -90,3 +94,46 @@ void __init init_IRQ(void)
+     if ( init_irq_data() < 0 )
+         panic("initialization of IRQ data failed\n");
+ }
++
++/* Dispatch an interrupt */
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
++{
++    struct irq_desc *desc = irq_to_desc(irq);
++    struct irqaction *action;
++
++    irq_enter();
++
++    spin_lock(&desc->lock);
++
++    if ( desc->handler->ack )
++        desc->handler->ack(desc);
++
++    if ( desc->status & IRQ_DISABLED )
++        goto out;
++
++    desc->status |= IRQ_INPROGRESS;
++
++    action = desc->action;
++
++    spin_unlock_irq(&desc->lock);
++
++#ifndef CONFIG_IRQ_HAS_MULTIPLE_ACTION
++    action->handler(irq, action->dev_id);
++#else
++    do {
++        action->handler(irq, action->dev_id);
++        action = action->next;
++    } while ( action );
++#endif /* CONFIG_IRQ_HAS_MULTIPLE_ACTION */
++
++    spin_lock_irq(&desc->lock);
++
++    desc->status &= ~IRQ_INPROGRESS;
++
++ out:
++    if ( desc->handler->end )
++        desc->handler->end(desc);
++
++    spin_unlock(&desc->lock);
++    irq_exit();
++}
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ea3638a54f..f061004d83 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -11,6 +11,7 @@
+ #include <xen/nospec.h>
+ #include <xen/sched.h>
+ 
++#include <asm/intc.h>
+ #include <asm/processor.h>
+ #include <asm/riscv_encoding.h>
+ #include <asm/traps.h>
+@@ -128,6 +129,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
          }
- 
--        /* update permission according to the flags */
--        pte.pte |= (flags & PTE_ACCESS_MASK) | PTE_ACCESSED | PTE_DIRTY;
-+        /* Update attributes of PTE according to the flags. */
-+        pte.pte |= (flags & attrs) | PTE_ACCESSED | PTE_DIRTY;
+         fallthrough;
+     default:
++        if ( cause & CAUSE_IRQ_FLAG )
++        {
++            /* Handle interrupt */
++            unsigned long icause = cause & ~CAUSE_IRQ_FLAG;
++
++            switch ( icause )
++            {
++            case IRQ_S_EXT:
++                intc_handle_external_irqs(cpu_regs);
++                break;
++
++            default:
++                break;
++            }
++
++            break;
++        }
++
+         do_unexpected_trap(cpu_regs);
+         break;
      }
- 
-     write_pte(ptep, pte);
-@@ -353,7 +355,7 @@ static int pt_update_entry(mfn_t root, vaddr_t virt,
- 
- /* Return the level where mapping should be done */
- static int pt_mapping_level(unsigned long vfn, mfn_t mfn, unsigned long nr,
--                            unsigned int flags)
-+                            pte_attr_t flags)
- {
-     unsigned int level = 0;
-     unsigned long mask;
-@@ -407,7 +409,7 @@ static DEFINE_SPINLOCK(pt_lock);
-  * inserting will be done.
-  */
- static int pt_update(vaddr_t virt, mfn_t mfn,
--                     unsigned long nr_mfns, unsigned int flags)
-+                     unsigned long nr_mfns, pte_attr_t flags)
- {
-     int rc = 0;
-     unsigned long vfn = PFN_DOWN(virt);
-@@ -535,7 +537,7 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
- }
- 
- /* Map a 4k page in a fixmap entry */
--void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags)
-+void set_fixmap(unsigned int map, mfn_t mfn, pte_attr_t flags)
- {
-     if ( map_pages_to_xen(FIXMAP_ADDR(map), mfn, 1, flags | PTE_SMALL) != 0 )
-         BUG();
 -- 
 2.49.0
 
