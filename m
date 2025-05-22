@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F8E5C54E65
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25EEC54756
 	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 07:55:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.993101.1376560 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.993103.1376575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI0lN-0006p6-JR; Thu, 22 May 2025 07:54:49 +0000
+	id 1uI0lP-00077E-40; Thu, 22 May 2025 07:54:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 993101.1376560; Thu, 22 May 2025 07:54:49 +0000
+Received: by outflank-mailman (output) from mailman id 993103.1376575; Thu, 22 May 2025 07:54:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI0lN-0006ox-GO; Thu, 22 May 2025 07:54:49 +0000
-Received: by outflank-mailman (input) for mailman id 993101;
- Thu, 22 May 2025 07:54:47 +0000
+	id 1uI0lO-00076S-UX; Thu, 22 May 2025 07:54:50 +0000
+Received: by outflank-mailman (input) for mailman id 993103;
+ Thu, 22 May 2025 07:54:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GVKv=YG=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uI0lL-0006LU-M8
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 07:54:47 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
+ id 1uI0lN-0006LU-ME
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 07:54:49 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 061ae988-36e2-11f0-b892-0df219b8e170;
- Thu, 22 May 2025 09:54:44 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a3683d8314so4468953f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 00:54:44 -0700 (PDT)
+ id 083f4952-36e2-11f0-b892-0df219b8e170;
+ Thu, 22 May 2025 09:54:47 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a4bdee0bf7so238247f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 00:54:47 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a35ca889d9sm22233672f8f.77.2025.05.22.00.54.42
+ ffacd0b85a97d-3a35ca5a892sm21774670f8f.24.2025.05.22.00.54.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 00:54:43 -0700 (PDT)
+ Thu, 22 May 2025 00:54:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,48 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 061ae988-36e2-11f0-b892-0df219b8e170
+X-Inumbo-ID: 083f4952-36e2-11f0-b892-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747900483; x=1748505283; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1747900486; x=1748505286; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SNt/a796h8HJ1FyF4HukdZmnJKGKgEPfZABr2Qwwqsc=;
-        b=mMkuERbf3ofMtAH2Id4jK/MG79eK0JwlKdSGgqI7XiTu0fbqajjQyNdJOYBmEC/ew5
-         5WL5ZyL7q1LacO1SN1ASf+3b2ADEUaroL772sNopGc/ql1+73GYCjcf1BWaQTYVNMpR9
-         gq7OL+T1qG3lgay5SzM3V1PQ9qaFOXPTJYolM=
+        bh=AWtufX/fZJTkl4t/yBYN+P8J2qIQZH/xOV2FrRV6Hek=;
+        b=N11JkwK+cstNd/PQ/n+Zpa05GWWNOw4jq37pyZcLxwowvRjKW+4y3a9quDdxXg7JFJ
+         XoyqPfx8DUfov51sZYpnhNIANam9Axw2Pg2ROXadrtozeVXIFf0DYpIUv9tTiB6V2x5s
+         cTV1jXDF95jUN4w0XXduJIn78MgyN9Oy9K6nM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747900483; x=1748505283;
+        d=1e100.net; s=20230601; t=1747900486; x=1748505286;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SNt/a796h8HJ1FyF4HukdZmnJKGKgEPfZABr2Qwwqsc=;
-        b=cXu2rJvD4u7G+k8/9PN+Apwzvapqi0ZUfQwOKhT5GiXsqxBF1QKJb4CJXROc/v9sGL
-         MSRImIRO7umqwMRSFoLkAtuveJTTqg0TdqaPrUj+8H9+5jmZFwszizxvyRjuJHOq/B/u
-         MJbNkfSWZQH4B+xOd5jO8ANVPnsJdTvVHPzMMJKVCU6rtLhTAgpHR+f4XCLc01zdRsOQ
-         4j80yOkuRjPS6jK5W7HRyGjYHRQGIPKCBbL5LvJbsZOfTmp9FxOAO5gYJZncOL8nYnek
-         KHXZOPHtxR6A7t4I0koJfqm8g7sjleZIdZFk0VTQLx0wXtksfcJgB4cVje2IoE+Ab3N6
-         81Fw==
-X-Gm-Message-State: AOJu0YxgEBxXNpV+NCFOl37I0uXlV0uqdxGh0q7gWbvYfOLKwfkQctQx
-	orBaaVhAiGpWnHM2kc3rzKvhmJo36SAV3YWyw5jGl/mZF8yVrEjE+BnYiQOI2If10KZCLitUys/
-	QmRQL
-X-Gm-Gg: ASbGncvm7q0hwWvI7qdgQ5E3AQXzXgawiWpArDOTpt2ubd3GhJ6m0tlXAoQh6bc0Nha
-	QmgVjFx3BvFpUh4n/y4kdMRmrP4alR/lm5ddhWrEI8CQ0qkhJBL4a+sVb+DymyrKN/AHOeHhaJ0
-	f/77mYpzFkw+IWXbHEahYjZ56st81yE3cftUVuC7zVhPOYjQdXKaVOGIImuAz7/e2OmBb568l+l
-	HJJlXKv5Qxsasz2rGmFOE+9nDs+y9C78V+y+o+M5lA6QmK3JH/wnGy7jisVdXwhxN9gjFcfAEGt
-	phGLRxIUTiKye3WxhWELun2CVpT8FzwfyauyTce08/BypzNh/IF3pjuHvJb5EU1Mm17HUeeWZlY
-	cz0TOF3g7P7GGK44l0tJGrXy7XAmRAg==
-X-Google-Smtp-Source: AGHT+IGw5ZUYXHmwfwWoYLLq3/50OjJvJxw5n7JcSFRYTWRVB29lNAxDM4fup1ovD+xAR/gqZwDlzw==
-X-Received: by 2002:a05:6000:c0b:b0:3a3:5c64:c60 with SMTP id ffacd0b85a97d-3a35c84beacmr15062310f8f.59.1747900483409;
-        Thu, 22 May 2025 00:54:43 -0700 (PDT)
+        bh=AWtufX/fZJTkl4t/yBYN+P8J2qIQZH/xOV2FrRV6Hek=;
+        b=B5Xq/1kj2fXHzBUZ6jGGpJ2QVUDmMcpyzQpKfXgotkdcqj5SaHaXSOxrzgvUM8hNSp
+         mLkVKJRtlK4zXJzM7AOTknxqFby18mgoOnGkNxFx3d9un1FS5/87AsVBtiyAqLuZVqYW
+         Si5OweUkaUwo5yjUTE6If/K+RjwSNjJnZUVC23WxbG2nYGeaqxFrBWFg/Z6qmVN0L5CG
+         ijVSYuu1r4S4yGRwYAltZkzjD5yn/lfORAQKCH/3TnQgpk5j8P3NM2/LXUdQZY8Nph/R
+         AZX5bBdEOvZobdlVIObbVeAvJGgM5M7ze25tK+0mwZFaOBcmlrDqdx7OM26RLzvBTAvK
+         GcEQ==
+X-Gm-Message-State: AOJu0YyBQ4/4B5WonlYCDWYVg3oJnX9hDvXdqK0+6K3J6+vPq47C4oyo
+	T44zZcjm6PIDw2ObBDfLglntHiopMwA7oqI47Dkh4TXSMxghs9/ZJn4Zy4Psi8QiWMuHu9S4vnS
+	Fq3yz
+X-Gm-Gg: ASbGncuoIQxRrUMZSwxNOnoXD/5uOwyl0JFJ3GK485SFFA+XH18zN/NXUyKkkR8AV8m
+	I1XHUDsCO55SpP2UZoIz8k51l/A5mm2aYFVUsWN161Fn9TdbQnT4b0nm7maf9W3BYUkZQ6MpVX3
+	9ho8O8K8abotHmBRdjPBafP3Ozv/KqDXEK1Cgbiqxf6hLjBnEaVBIlVp20cuA/eksukG2CqjfaT
+	t57XKha84lWPyQ/q3DAaBJBE59h7u03r8O5jOOw3T8xOC2/LXzasH0uPMjGNvdPEjogmVEM/31b
+	4ud5zpvdU2jBIFMCOuOvJ9/HrpzemsoTv22yH6cRXIpj/rWMHcFgi6Mf0YqR7i8Mi+wBocdVISK
+	i2ca+uHLs93gmeKxznH13aQcJ7L32QQ==
+X-Google-Smtp-Source: AGHT+IEdIbVsdISUuEN4SVsoPfQG2xeQf8EhvNBS7jzQTibsGDg+6/qOpvLZsSWIvjZBCOZv6m8qOg==
+X-Received: by 2002:a05:6000:22c7:b0:3a3:6cf9:9b58 with SMTP id ffacd0b85a97d-3a36cf99c63mr12895366f8f.20.1747900486560;
+        Thu, 22 May 2025 00:54:46 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 1/4] x86/boot: print CPU and APIC ID in bring up failure
-Date: Thu, 22 May 2025 09:54:37 +0200
-Message-ID: <20250522075440.99882-2-roger.pau@citrix.com>
+Subject: [PATCH v2 4/4] x86/boot: attempt to print trace and panic on AP bring up stall
+Date: Thu, 22 May 2025 09:54:40 +0200
+Message-ID: <20250522075440.99882-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250522075440.99882-1-roger.pau@citrix.com>
 References: <20250522075440.99882-1-roger.pau@citrix.com>
@@ -96,39 +96,58 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Print the CPU and APIC ID that fails to respond to the init sequence, or
-that didn't manage to reach the "callin" state.  Expand a bit the printed
-error messages.  Otherwise the "Not responding." message is not easy to
-understand by users.
+With the current AP bring up code, Xen can get stuck indefinitely if an AP
+freezes during boot after the 'callin' step.  Introduce a 5s timeout while
+waiting for APs to finish startup.
 
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On failure of an AP to complete startup, send an NMI to trigger the
+printing of a stack backtrace on the stuck AP and panic on the BSP.
+
+This patch was done while investigating the issue caused by Intel erratum
+ICX143.  It wasn't helpful in that case, but it's still and improvement
+when debugging AP bring up related issues.
+
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 Changes since v1:
- - Also print APIC ID.
+ - Use 5s timeout.
+ - Print APICID.
+ - Split NMI dispatch code movement to a pre-patch.
+ - Reorder timeout check condition.
 ---
- xen/arch/x86/smpboot.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ xen/arch/x86/smpboot.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 0189d6c332a4..dbc2f2f1d411 100644
+index dbc2f2f1d411..50c5674555e4 100644
 --- a/xen/arch/x86/smpboot.c
 +++ b/xen/arch/x86/smpboot.c
-@@ -618,10 +618,12 @@ static int do_boot_cpu(int apicid, int cpu)
-             smp_mb();
-             if ( bootsym(trampoline_cpu_started) == 0xA5 )
-                 /* trampoline started but...? */
--                printk("Stuck ??\n");
-+                printk("CPU%u/APICID%u: Didn't finish startup sequence\n",
-+                       cpu, apicid);
-             else
-                 /* trampoline code not run */
--                printk("Not responding.\n");
-+                printk("CPU%u/APICID%u: Not responding to startup\n",
-+                       cpu, apicid);
-         }
+@@ -1372,6 +1372,7 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm)
+ int __cpu_up(unsigned int cpu)
+ {
+     int apicid, ret;
++    s_time_t start;
+ 
+     if ( (apicid = x86_cpu_to_apicid[cpu]) == BAD_APICID )
+         return -ENODEV;
+@@ -1390,10 +1391,17 @@ int __cpu_up(unsigned int cpu)
+     time_latch_stamps();
+ 
+     set_cpu_state(CPU_STATE_ONLINE);
++    start = NOW();
+     while ( !cpu_online(cpu) )
+     {
+         cpu_relax();
+         process_pending_softirqs();
++        if ( (NOW() - start) > SECONDS(5) )
++        {
++            /* AP is stuck, send NMI and panic. */
++            show_execution_state_nmi(cpumask_of(cpu), true);
++            panic("CPU%u/APICID%u: Stuck while starting up\n", cpu, apicid);
++        }
      }
  
+     return 0;
 -- 
 2.49.0
 
