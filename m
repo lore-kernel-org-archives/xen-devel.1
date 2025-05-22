@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF16EC54F2E
-	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 23:53:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.994737.1377556 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F73C54E65
+	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 23:53:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.994754.1377625 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiP-0000Gi-9W; Thu, 22 May 2025 23:52:45 +0000
+	id 1uIFiZ-0002Ni-FN; Thu, 22 May 2025 23:52:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 994737.1377556; Thu, 22 May 2025 23:52:45 +0000
+Received: by outflank-mailman (output) from mailman id 994754.1377625; Thu, 22 May 2025 23:52:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiP-0000Ep-43; Thu, 22 May 2025 23:52:45 +0000
-Received: by outflank-mailman (input) for mailman id 994737;
- Thu, 22 May 2025 23:23:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=PZjB=YG=alex0.net=me@srs-se1.protection.inumbo.net>)
- id 1uIFFc-0004Yx-5I
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:23:00 +0000
-Received: from outbound.qs.icloud.com
- (p-east3-cluster1-host2-snip4-10.eps.apple.com [57.103.87.23])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1bbd007-3763-11f0-b892-0df219b8e170;
- Fri, 23 May 2025 01:22:57 +0200 (CEST)
-Received: from outbound.qs.icloud.com (localhost [127.0.0.1])
- by outbound.qs.icloud.com (Postfix) with ESMTPS id 08E1D18001D9
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 23:22:55 +0000 (UTC)
-Received: from smtpclient.apple (qs-asmtp-me-k8s.p00.prod.me.com
- [17.57.155.37])
- by outbound.qs.icloud.com (Postfix) with ESMTPSA id 690C2180012D
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 23:22:55 +0000 (UTC)
+	id 1uIFiZ-0002N2-7l; Thu, 22 May 2025 23:52:55 +0000
+Received: by outflank-mailman (input) for mailman id 994754;
+ Thu, 22 May 2025 23:52:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=j741=YG=flex--seanjc.bounces.google.com=30rgvaAYKCUs5rn0wpt11tyr.p1zAr0-qr8ryyv565.Ar0241wrp6.14t@srs-se1.protection.inumbo.net>)
+ id 1uIFiX-0007r8-0D
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:52:53 +0000
+Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
+ [2607:f8b0:4864:20::1049])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id df4313dd-3767-11f0-a2fb-13f23c93f187;
+ Fri, 23 May 2025 01:52:52 +0200 (CEST)
+Received: by mail-pj1-x1049.google.com with SMTP id
+ 98e67ed59e1d1-30e6980471cso6916035a91.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 16:52:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,89 +42,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1bbd007-3763-11f0-b892-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alex0.net; s=sig1;
-	bh=W4igLNWEpJdS+ajzjNyCAoqzb9V+DG8pjtCGb23spVg=;
-	h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
-	b=pQA47SytSi4NDaGJen0AKZZPDX28fadWhK+mf3OfhXCjs7WxTPrs/Zif1GqifH1Pa
-	 Ws7XkkKUhZbj5JEcCGZtqGgJbLSkqIIdzdoNi2ZEt/XibzFAKZuKBHETXQhlGn47VB
-	 gFd+9cFaVU8CmDf8J/b9OXCTG0nqMfVyBU1c7UOHZGYCC1WdIVK4zQ8TNnLeBmMpOz
-	 qh60G52sxNf/tZMnljJt5idwvQjrh4+cRy48AffjRp41RGtBUhUhiB1fsNs+QZi4En
-	 jWqLid4LMRoiVGPJc2vBs8GiTU4Nx6HjwTr9nlCpqZeAVXBcFTWKY3rCPkEsCBR0S5
-	 8Ut/YSqrHSSuA==
-From: me@alex0.net
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240"
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.500.181.1.5\))
-Subject: xen_acpi_processor driver is bound to dom0 vcpu count
-Message-Id: <A56FE54F-6BE8-4A4E-9598-B1C98028270F@alex0.net>
-Date: Fri, 23 May 2025 00:22:44 +0100
-To: xen-devel@lists.xenproject.org
-X-Mailer: Apple Mail (2.3826.500.181.1.5)
-X-Proofpoint-GUID: 08OLpaYwqyWuO0fGwWXqHDti4i2hrTNe
-X-Proofpoint-ORIG-GUID: 08OLpaYwqyWuO0fGwWXqHDti4i2hrTNe
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-22_10,2025-05-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- bulkscore=0 clxscore=1030 phishscore=0 adultscore=0 suspectscore=0
- mlxlogscore=999 spamscore=0 malwarescore=0 classifier=spam adjust=0
- reason=mlx scancount=1 engine=8.22.0-2503310001 definitions=main-2505220234
+X-Inumbo-ID: df4313dd-3767-11f0-a2fb-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1747957971; x=1748562771; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=pJUovYaxFJgcXRp1TDFKS/NrFefgEp1AkGzEV1OM9Zc=;
+        b=tciWqeq/yd7qi1qocfjWZN36EgEvzsjUGIhgmQEUgGapNR9y4XD3tVprslkOkuwRvM
+         wzGL/lAFwdcZZ4tZM4PKqtDhM38u6//Zc61KLMeCPfhlsZZ/v8hPF81PqNBvqCN5uivw
+         AIA6/FHU1ixmxc/WX67DttCAV6GCsRPxkvwWL8xV/+KUBaVItzdIc5pFDO/rjI3woAdl
+         USPGc49sOuQ2fdm7vQqsuC2S8OOQjcNdwTh9ShXXjWf0K3SMmfjWvOIMkQIEkohBwmNN
+         VIJehnKI5LorTndn0GiVElmot/wmSSNDkPrW933M1PV9hiLDbFfmG8jbaH5YVGqre6CL
+         ZYsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747957971; x=1748562771;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pJUovYaxFJgcXRp1TDFKS/NrFefgEp1AkGzEV1OM9Zc=;
+        b=OkES+3tVYSyYG6d+BZheEy1OSsGE7Qd6AeoTNZdLWJJjtnQ5Ootu0c6/ewg4GlNhih
+         m3AY/Jiy0DdGL01IAoLHWn4keDmrgeKdxYl0SyjOHvWJLPrXC99aj7xO2xcNRLZ5VRpQ
+         H/i+dVN6USSElusbiUjzUC8pAFX8wzbeZK+imoFe0mTiqmtQFmP94hHeM79Ef7siEuQu
+         8IFuyG5qj97SbNaITh2as9nT5j0vfgDM7u8qpkC76PH7yAEr/f/aLXfVYyybyO6gj4cP
+         m57r0haZ70P2hINY50ofwqsfc0DRBh5Dbt9pbPWo0Vjf7wj7U9CuGFQr3+NJfe6uSbzu
+         j8tQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVRlj59Xq3FHHTqIR3hv1X8thTzatmiajL+PrWJ75gtOyduCuStLmHNNlSW8j0sWz5bvL8tiLvb1C0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzpWZUr5ftt2soth/UMq2W3W3WNFpnY7wFp3q55nGuBb4wQ2H8f
+	vmkPskXXerNk3727EW32EzMdgNOQCqn4AXRxL/W8tUWMIEFNduQ8kjNwvnUP5aziQ6Se7kwJ268
+	FynlV8A==
+X-Google-Smtp-Source: AGHT+IEDndqxTWcCtq5oGwy52YECfaW+Ize1PqvGwCK7FSF7/oiShVYNO6fCIsKX/sBpVCvd/V18cyz4IiY=
+X-Received: from pjx8.prod.google.com ([2002:a17:90b:5688:b0:30a:31eb:ec8e])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:33c2:b0:2ee:edae:780
+ with SMTP id 98e67ed59e1d1-30e7d548c90mr43873310a91.15.1747957970976; Thu, 22
+ May 2025 16:52:50 -0700 (PDT)
+Reply-To: Sean Christopherson <seanjc@google.com>
+Date: Thu, 22 May 2025 16:52:20 -0700
+In-Reply-To: <20250522235223.3178519-1-seanjc@google.com>
+Mime-Version: 1.0
+References: <20250522235223.3178519-1-seanjc@google.com>
+X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
+Message-ID: <20250522235223.3178519-11-seanjc@google.com>
+Subject: [PATCH v3 10/13] KVM: Drop sanity check that per-VM list of irqfds is unique
+From: Sean Christopherson <seanjc@google.com>
+To: "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, 
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Ingo Molnar <mingo@redhat.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Juri Lelli <juri.lelli@redhat.com>, 
+	Vincent Guittot <vincent.guittot@linaro.org>, Shuah Khan <shuah@kernel.org>, 
+	Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, 
+	Sean Christopherson <seanjc@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, kvm@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	kvmarm@lists.linux.dev, K Prateek Nayak <kprateek.nayak@amd.com>, 
+	David Matlack <dmatlack@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
+Now that the eventfd's waitqueue ensures it has at most one priority
+waiter, i.e. prevents KVM from binding multiple irqfds to one eventfd,
+drop KVM's sanity check that eventfds are unique for a single VM.
 
---Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ virt/kvm/eventfd.c | 11 -----------
+ 1 file changed, 11 deletions(-)
 
-I think I=E2=80=99ve just uncovered a rather nasty bug in the =
-xen_acpi_processor driver in dom0. If the vcpu count in dom0 is set to =
-anything other than the exact number of physical cores, the =
-xen_acpi_processor kernel driver will fail to upload the C-state =
-information for those cores to Xen, resulting in Xen never knowing about =
-the C-states, which significantly impacts battery life on mobile =
-platforms.
+diff --git a/virt/kvm/eventfd.c b/virt/kvm/eventfd.c
+index 7b2e1f858f6d..d5258fd16033 100644
+--- a/virt/kvm/eventfd.c
++++ b/virt/kvm/eventfd.c
+@@ -288,7 +288,6 @@ static void kvm_irqfd_register(struct file *file, wait_queue_head_t *wqh,
+ {
+ 	struct kvm_irqfd_pt *p = container_of(pt, struct kvm_irqfd_pt, pt);
+ 	struct kvm_kernel_irqfd *irqfd = p->irqfd;
+-	struct kvm_kernel_irqfd *tmp;
+ 	struct kvm *kvm = p->kvm;
+ 
+ 	/*
+@@ -328,16 +327,6 @@ static void kvm_irqfd_register(struct file *file, wait_queue_head_t *wqh,
+ 	if (p->ret)
+ 		goto out;
+ 
+-	list_for_each_entry(tmp, &kvm->irqfds.items, list) {
+-		if (irqfd->eventfd != tmp->eventfd)
+-			continue;
+-
+-		WARN_ON_ONCE(1);
+-		/* This fd is used for another irq already. */
+-		p->ret = -EBUSY;
+-		goto out;
+-	}
+-
+ 	list_add_tail(&irqfd->list, &kvm->irqfds.items);
+ 
+ out:
+-- 
+2.49.0.1151.ga128411c76-goog
 
-This can impact users who set dom0_max_vcpus to a lesser value than =
-their number of CPU cores, but is particularly relevant if SMT is =
-enabled in firmware but disabled in Xen. As the cores are disabled =
-manually by Xen, dom0 will only see the number of active cores; but as =
-this is a lesser number of cores than Xen knows of it will mismatch and =
-half the cores will not see C-state information.
-
-The bug is reproducible easily by setting dom0_max_vcpus to less than =
-your physical core count and running xenpm start 1. See if there are any =
-cores that only display C0 and C1 C-states.
-
-Alex
-
-
---Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=utf-8
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; =
-charset=3Dutf-8"></head><body style=3D"overflow-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;">I think I=E2=80=99=
-ve just uncovered a rather nasty bug in the xen_acpi_processor driver in =
-dom0. If the vcpu count in dom0 is set to anything other than the exact =
-number of physical cores, the xen_acpi_processor kernel driver will fail =
-to upload the C-state information for those cores to Xen, resulting in =
-Xen never knowing about the C-states, which significantly impacts =
-battery life on mobile platforms.<br><div><br></div><div>This can impact =
-users who set dom0_max_vcpus to a lesser value than their number of CPU =
-cores, but is particularly relevant if SMT is enabled in firmware but =
-disabled in Xen. As the cores are disabled manually by Xen, dom0 will =
-only see the number of active cores; but as this is a lesser number of =
-cores than Xen knows of it will mismatch and half the cores will not see =
-C-state information.</div><div><br></div><div>The bug is reproducible =
-easily by setting&nbsp;<font color=3D"#000000"><span style=3D"caret-color:=
- rgb(0, 0, 0);">dom0_max_vcpus to less than your physical core count and =
-running xenpm start 1. See if there are any cores that only display C0 =
-and C1 =
-C-states.</span></font></div><div><br></div><div>Alex</div><div><br></div>=
-</body></html>=
-
---Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240--
 
