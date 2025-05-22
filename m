@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF38C54E65
-	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 17:37:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.994482.1377478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 570B6C54ED0
+	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 17:37:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.994479.1377454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI9qb-00043S-EE; Thu, 22 May 2025 17:36:49 +0000
+	id 1uI9qZ-0003Zw-Qn; Thu, 22 May 2025 17:36:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 994482.1377478; Thu, 22 May 2025 17:36:49 +0000
+Received: by outflank-mailman (output) from mailman id 994479.1377454; Thu, 22 May 2025 17:36:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI9qb-000432-9f; Thu, 22 May 2025 17:36:49 +0000
-Received: by outflank-mailman (input) for mailman id 994482;
- Thu, 22 May 2025 17:36:47 +0000
+	id 1uI9qZ-0003Zp-Ky; Thu, 22 May 2025 17:36:47 +0000
+Received: by outflank-mailman (input) for mailman id 994479;
+ Thu, 22 May 2025 17:36:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ckVG=YG=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uI9qZ-0003ZZ-Ll
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 17:36:47 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
+ id 1uI9qY-0003ZZ-8x
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 17:36:46 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 553117a6-3733-11f0-b892-0df219b8e170;
- Thu, 22 May 2025 19:36:46 +0200 (CEST)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-601c5cd15ecso7805412a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 10:36:46 -0700 (PDT)
+ id 53f4af67-3733-11f0-b892-0df219b8e170;
+ Thu, 22 May 2025 19:36:44 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ad560321ed9so697422266b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 10:36:44 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d442069sm1116063366b.103.2025.05.22.10.36.44
+ a640c23a62f3a-ad52d442069sm1116063366b.103.2025.05.22.10.36.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 10:36:44 -0700 (PDT)
+ Thu, 22 May 2025 10:36:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 553117a6-3733-11f0-b892-0df219b8e170
+X-Inumbo-ID: 53f4af67-3733-11f0-b892-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747935405; x=1748540205; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZadyQ1dGPInWsa7+i4u+dOHgUQQBDu0QP3e67vZGDBU=;
-        b=c++HdavcNLa4vAnsAAM3dvr6ZZhMV1YwVBErgoWrRvNvYpDwfjYAQjmGI6RXPOf6ct
-         K4aQm8DROpMIW0aZybfusnKDrWTOrxUd/3eNOV3gvK2AFZCrGFfpicViUyZ50BC0oLnx
-         qoQPHzcOQr2O/yeFWAEQlCrUQLgo9ks5P5Tiw=
+        d=citrix.com; s=google; t=1747935403; x=1748540203; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Jlg5b00ly6v1BGwroJTag38z3lVLNHAEgODPbkiybR4=;
+        b=PA40mZ+iXGCyfKJuxPR5HeF5mr7PqriuEydxJxyAVGZMG0wVyDTY1MblDgb3Ju0QXf
+         Uv+BGtvZe1bbUSQPK1NcZCENaMu9qgs8B5+62Fnwgm2x6NLZXsW9ldSA753qM4QzITgs
+         z+KgB17/DSrtZZmTBoRyPdqaIy5+iv5r40xNs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747935405; x=1748540205;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZadyQ1dGPInWsa7+i4u+dOHgUQQBDu0QP3e67vZGDBU=;
-        b=tyRsjiovXxbodeqq2EUfDQQTuEBH6T00/D1Gf0Jzn5T5kBc7sFaVw6cxD/fqS5YnhO
-         j9Ef3WfI4DA9vnF0CizEi74+J1sGKfIcJdw1O7wdx/LZkn1JhN29oojfQNbQ0lXnFZIs
-         VzS91rXulXfTWPgnFoYKm7wdoD5I05m5YV9Bi6Sv0UyJCMSnVilM8kx1l2QKWBkR+UdT
-         9x4Oicll4CpDPeCHySdVb5kw1wHDcTEVCp9Wh+spPk32PWzH2v51QpSihJG+8tDUNSF+
-         6wkNexzHlOhe8VnjFFmEcDD0dK1gkGIjcu1GvL876+AkZFe8tPckExTdQ2F6tLBg1wEe
-         nl+A==
-X-Gm-Message-State: AOJu0YwhXRauIP8om0yV7ddPzEQLWxmvA9mDVEz8wk1NMYXVxLYR7x/j
-	ufIdqZxvgQx/5CcdE76j1SyLpATmyWVTzl5/UbSNBuHgkogV20Q92h0VgTRq1pEuUI8FeP4bQ7j
-	TQ3Em
-X-Gm-Gg: ASbGncvKZUnRGLu3+LymNOQyp0eugyEpKQW6dL5QxnzBdxIP8HRDx/X9OWoZoxW15hm
-	B2nWUt+BYoKMsXAv7GDgqBxpDc7kvG7JCd9T7YnjoXGmwbhLB8mbmN5zGhQYy1DFJIyiwGshKO2
-	AEzHqFQ8+p3+INAH2O47NeQXJMR7hO7f9s6l3HnuXfnUjrgU/ZH2G/415ZsnoqhWR/rHbTIehx9
-	RJ2SM54TUFTIvnoQpMMadocOpNRndqcVwQZjoC7oFSj+ARR161u1pHyiEwz/mgnY/YfIeuYxMRl
-	GvJAZMZb2KPYbzhAVQgsfNyZ817XZyA1fZwqQ2KtuE3t6DOVTa6cQx9P6SfWyRoHrrQJClz2hjD
-	9P/dLJWXtTPzir+3D9Eweh9w/bD0L2jIEN5Q=
-X-Google-Smtp-Source: AGHT+IGpajxmUsPPYguIJRowQVROWmkBbc6c75BLnT1q+SBw/DEbc5kCmLDo8Qb2Z9sBZzuuh/yIBw==
-X-Received: by 2002:a17:907:96a1:b0:ad2:3f54:1834 with SMTP id a640c23a62f3a-ad536dce664mr2444664566b.40.1747935405312;
-        Thu, 22 May 2025 10:36:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1747935403; x=1748540203;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Jlg5b00ly6v1BGwroJTag38z3lVLNHAEgODPbkiybR4=;
+        b=t/9+BpT4tdJZ5ckSpKnHZ5j2qihkBfC/PIC/fNfsaTPMad5i2jZK+vP7PmiwQDIUCD
+         3DhLtmd8XDeKuHT3uGkJacTks3MrPA4H7EjkmE48ElZWA5JpS/pWU54EXgJ3fMTPjKhF
+         ovqVdnr0ZPbyu6elvvffiMy9CtiQnurluoUvZ7pcu/Bk/jUp/9LCjsSLfZ+g01Jh9AdD
+         zVvJLCDSpG/E1ZBXHsrm3dcyiZBmJoLAkDjZCXeUtdSvhQL0frp5TvZZP/+yduphGlty
+         08H+0qC0k2lQLLkfjckDCFqq3uJWaMd4o61+4uNCJD13hvJNXJfZeKY9yhsfdnikZKpJ
+         3erA==
+X-Gm-Message-State: AOJu0YxNQglyWhggEczjPUGEwJHZIW8u/Avce92ks7WP8zih+VH+gHgI
+	+WtpfZraYrI4xT8/EDfpEUZf6D8k020BT/Qxsj7jlnnci5hKOZmBMOhn2LCtz1bQ5BYPuUI+KFH
+	paMa0
+X-Gm-Gg: ASbGncuslbWFl9eG7mfPSVW8WPimq0xzqZb2O93LbjWfztLFbHJNwSge5LfVnp5NbXT
+	Qy0HOqceZboUx5bZqn2eEVMcDh20TEsdNo1/0zrG/dcu8HmpBDlX3OAY0vXYvDdtDJMuJy8B+dw
+	qZwtuPLWBWs/6qbguxJSprevNBDCAeY554EwTyljFoYhHIDpYCImUALbX9gA0oU1n4Zzc6wPYj3
+	A3EneTM7BUPoFgOev44hEgNyHA1JFoILQ4JbvZzjsanWUKFwNf7O8eTqxoG1ribIu8XdkUBKSBs
+	QvTS7QlOJGAtFKIfnlPG0mKn97OxWpDU2kT3RviCISAiolF15AsAPqvtcSUD1+2Iusudu2JmZdW
+	zxpCt3aGwDFkQj3gFTRezDsRWff07uk7YdBM=
+X-Google-Smtp-Source: AGHT+IExHm8o6ocEIwcqqG1QAc876IpnGu3pGCbDYf6FWjYf0RjbIdp+0NSXlrhcL76QSN0VnUrJWg==
+X-Received: by 2002:a17:906:ef0d:b0:ad5:a0e3:dab1 with SMTP id a640c23a62f3a-ad5a0e3db0cmr813415966b.35.1747935403216;
+        Thu, 22 May 2025 10:36:43 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,94 +87,30 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH 2/3] CI: Use bash arrays to simplfy dom0 rootfs construction
-Date: Thu, 22 May 2025 18:36:39 +0100
-Message-Id: <20250522173640.575452-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/3] CI: Improve domU handling
+Date: Thu, 22 May 2025 18:36:37 +0100
+Message-Id: <20250522173640.575452-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250522173640.575452-1-andrew.cooper3@citrix.com>
-References: <20250522173640.575452-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-For Qubes, this requires switching from sh to bash.
+A follow-up to an RFC patch on the initrd handling improvements, this time
+non-RFC.
 
-This reduces the number of times the target filename needs to be written to 1.
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1831808006
 
-Expand the comment to explain the concatination constraints.
+Andrew Cooper (3):
+  CI/qubes: Deduplicate the handling of ${dom0_check}
+  CI: Use bash arrays to simplfy dom0 rootfs construction
+  CI: Adjust how domU is packaged in dom0
 
-No functional change.
+ automation/scripts/qubes-x86-64.sh            | 39 ++++++++++++-------
+ .../scripts/xilinx-smoke-dom0-x86_64.sh       | 32 +++++++++------
+ 2 files changed, 46 insertions(+), 25 deletions(-)
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-I would like to find a slightly nicer way of conditional parts, but nothing
-comes to mind.
----
- automation/scripts/qubes-x86-64.sh             | 14 +++++++++-----
- automation/scripts/xilinx-smoke-dom0-x86_64.sh | 16 +++++++++-------
- 2 files changed, 18 insertions(+), 12 deletions(-)
-
-diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 10af274a0ba7..1dd3f48b3d29 100755
---- a/automation/scripts/qubes-x86-64.sh
-+++ b/automation/scripts/qubes-x86-64.sh
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/bin/bash
- 
- set -ex -o pipefail
- 
-@@ -187,10 +187,14 @@ Kernel \r on an \m (\l)
-     rm -rf rootfs
- fi
- 
--# Dom0 rootfs
--cp binaries/ucode.cpio binaries/dom0-rootfs.cpio.gz
--cat binaries/rootfs.cpio.gz >> binaries/dom0-rootfs.cpio.gz
--cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
-+# Dom0 rootfs.  The order or concatination is important; ucode wants to come
-+# first, and all uncompressed must be ahead of compressed.
-+parts=(
-+    binaries/ucode.cpio
-+    binaries/rootfs.cpio.gz
-+    binaries/xen-tools.cpio.gz
-+)
-+cat "${parts[@]}" > binaries/dom0-rootfs.cpio.gz
- 
- # test-local configuration
- mkdir -p rootfs
-diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-index 8f02fa73bd06..0fbabb41054a 100755
---- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-+++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
-@@ -103,13 +103,15 @@ find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
- cd ..
- rm -rf rootfs
- 
--# Dom0 rootfs
--cp binaries/ucode.cpio binaries/dom0-rootfs.cpio.gz
--cat binaries/rootfs.cpio.gz >> binaries/dom0-rootfs.cpio.gz
--cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
--if [[ "${TEST}" == argo ]]; then
--    cat binaries/argo.cpio.gz >> binaries/dom0-rootfs.cpio.gz
--fi
-+# Dom0 rootfs.  The order or concatination is important; ucode wants to come
-+# first, and all uncompressed must be ahead of compressed.
-+parts=(
-+    binaries/ucode.cpio
-+    binaries/rootfs.cpio.gz
-+    binaries/xen-tools.cpio.gz
-+)
-+[[ "${TEST}" == argo ]] && parts+=(binaries/argo.cpio.gz)
-+cat "${parts[@]}" > binaries/dom0-rootfs.cpio.gz
- 
- # test-local configuration
- mkdir -p rootfs
+base-commit: 7ab4b392b78b5ac1c7a1fb1d085637526e67521a
 -- 
 2.39.5
 
