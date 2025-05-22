@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E29BC54E90
-	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 15:33:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.994282.1377347 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3FBC54E90
+	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 15:44:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.994299.1377356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI7uf-0006pq-TY; Thu, 22 May 2025 15:32:53 +0000
+	id 1uI85h-0000bN-SJ; Thu, 22 May 2025 15:44:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 994282.1377347; Thu, 22 May 2025 15:32:53 +0000
+Received: by outflank-mailman (output) from mailman id 994299.1377356; Thu, 22 May 2025 15:44:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI7uf-0006ph-QV; Thu, 22 May 2025 15:32:53 +0000
-Received: by outflank-mailman (input) for mailman id 994282;
- Thu, 22 May 2025 15:32:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ix6t=YG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uI7ue-0006bs-3R
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 15:32:52 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 05d97bfa-3722-11f0-a2fb-13f23c93f187;
- Thu, 22 May 2025 17:32:51 +0200 (CEST)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-601a9e65228so4367063a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 08:32:51 -0700 (PDT)
-Received: from [10.0.5.8] ([213.235.133.42]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad5b192cb0asm304924066b.170.2025.05.22.08.32.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 May 2025 08:32:50 -0700 (PDT)
+	id 1uI85h-0000bG-PQ; Thu, 22 May 2025 15:44:17 +0000
+Received: by outflank-mailman (input) for mailman id 994299;
+ Thu, 22 May 2025 15:44:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=GrK8=YG=bounce.vates.tech=bounce-md_30504962.682f464c.v1-38279da09137419b8047aef6d5d12fd8@srs-se1.protection.inumbo.net>)
+ id 1uI85g-0000b3-Hi
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 15:44:16 +0000
+Received: from mail133-21.atl131.mandrillapp.com
+ (mail133-21.atl131.mandrillapp.com [198.2.133.21])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9c83f8b0-3723-11f0-b892-0df219b8e170;
+ Thu, 22 May 2025 17:44:14 +0200 (CEST)
+Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail133-21.atl131.mandrillapp.com (Mailchimp) with ESMTP id
+ 4b3CJX6qRzz1XdCyw
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 15:44:12 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 38279da09137419b8047aef6d5d12fd8; Thu, 22 May 2025 15:44:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,76 +45,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05d97bfa-3722-11f0-a2fb-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1747927971; x=1748532771; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=0ME/8N8eNfh+ICyV22mNqwvI/okvN6ReKjQi2OCzXUE=;
-        b=KNGMoLAwlFPPGoGNSdeZaomgkWoWrhWeuVqRv67p7dPnf7WTbYIkN5DLpjaCsRRVJX
-         If7yxM/C4QfPZ8oecoaveQDbI7lJq59TaatoeeiBcHIrMTyAWbCDVz4+Sa8d/2/xET5i
-         IFP9hP8brLXoIJ0nn/kVIGoTAV8bH1Xk2YI+LmQTnqvmve6ExztJRkdHC226dHSirzye
-         MtTLRMLACloVtN5ZR55O+iCR3vkBaqZJft2onN0EbjPu6xeoJHh8JuoTbjcVR87Yjo9k
-         tUS5AKeVoG7vHBc8En/k4FEpGFUsjeqiJvQCyB41pHl9cTePSK0UZkAu08steRf6UyuF
-         q6Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747927971; x=1748532771;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0ME/8N8eNfh+ICyV22mNqwvI/okvN6ReKjQi2OCzXUE=;
-        b=AxLWzFMUWmuHMP2e+TghAekJ9vzhR04pyki5pQc3AR7BtW79n8xiNSdXYqA3GW7a6Z
-         rJimsjGl/OlOvy26ZMjwszRSjmHEUS7snMmswmxZxgGVMMCj81GsisvDy3b+J6/Rzk5N
-         cvHqdJcvi4eikIyOeIzSCEXUlTI1yhgauCeHzdDqlM8J2ILS8T1x1RpKO/Taa5NE0AH2
-         EM70cYiE8t3vgaEaB99rccfM9f1ZLfN1T9NjqhwYTdhJ9GSyUpL6DtOz1T5wVzpNLn/2
-         qfh4S0mjOkhex68yvnvwCNL63iT2TY31zZADk0AQAvkTHmPL0tWlpuh8D67hna0lBakf
-         WKcg==
-X-Forwarded-Encrypted: i=1; AJvYcCViJxlGbAkleXnhEJoVy3H6vMO9BsKyRVqy/dgOjInv2jfGsDvsOFKAT/5qIHdpJs9Zlx+GUTNuTd0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz2wzE02kdWCKofcFehLoyMS38cLMwzqjuLpKweDlW4GBjsZ6RV
-	pb35+r8L6nknxWF7AN5UEZxr0c25u1K3PDrRyI8A8IuIV3PqzpDza8wVdp9iv+nKyg==
-X-Gm-Gg: ASbGnctPuKFRWlfN73ytX4J108Bbq/9jb1zTOZL38ibyME8VeXFKeEosDHLQ8tCWIoo
-	bDnsWxGJzSwCeNeuaqU4/0ZqfWsome8PiUVy/T8n1djgQyjHMIajsrOY/Nkz6Kzxevj84w0WkeA
-	ztYk92oheRXOgkcKxqzsLCHPVhOVLDJwbhLrB+EMSXJFcJ72huqVYwZmvaAS1nRdmoiFmEN20mq
-	4iMXYNZrJE/2KdsCe7843kY3yqJo6qFMsfhvjKp7w93TGgQYo63I/Yakrg2SL/tb0DvdWX8ymdU
-	zjQILMhoOlg5UVR7M9s=
-X-Google-Smtp-Source: AGHT+IF5KJzSEoAZGBMzN4YVn4HLrgpsu/UXGRFxbV8KFdrqTxEieKpAflTw74PkmrGxvJwXEIVPIw==
-X-Received: by 2002:a17:907:868f:b0:ad5:45d6:5fd5 with SMTP id a640c23a62f3a-ad545d66146mr2238979766b.30.1747927971066;
-        Thu, 22 May 2025 08:32:51 -0700 (PDT)
-Message-ID: <f1cdeb76-6b39-4852-ad84-012e9e128e92@suse.com>
-Date: Thu, 22 May 2025 17:32:29 +0200
+X-Inumbo-ID: 9c83f8b0-3723-11f0-b892-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1747928653; x=1748198653;
+	bh=lcpqq7hcTnh6r+A62ErUkxcMa+qXDJULjg3m1WtVDKM=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=0iPymMPIzqRJsa71/OuRtBaHy1DN3sNKT+IdUlxzvqOl50fqlbr6QgYVQCai0Gx7u
+	 uAYTdKdn4WFFSvOcjSEkK01p3hqxkkP1HWv4kLuIpxZ6pqkQVq+cwmJZo2sC8wI6P3
+	 LfTHSIR4bMRf1guw6yGIGT5/Li1xhe1tPLluq8M600qjI8xDTv/HgyTxhyjoCLKQWV
+	 NDRLWnSPcAl7AZCm+RvTIBLJHZPZ9zJ+apYAIxNzcQl8LAIVNqaL0qZmlp43v7+vSk
+	 th+fw+Oi4r+qItTXM32fobFjzS0737J66McCikD0Zv9hVN5zWrnkO7ccdzRmcg30fw
+	 BiBp6EJ5ewczw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1747928652; x=1748189152; i=teddy.astie@vates.tech;
+	bh=lcpqq7hcTnh6r+A62ErUkxcMa+qXDJULjg3m1WtVDKM=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=MdqrghRHvWqcWqM5FoQyPUocKdfxirgj/Z9T8u9hQyaBhfOoh3FJhKhfFUZbwKGqS
+	 zqaq7FIH8+Qdwc60hyVa4Emv7+liMqBjpNoOMcsWlXcdQVqq8SNWfYK45wUF6lIIbO
+	 49IaR/Iw+Te1MIsc1zJTqi8PSFsUGN25p1ufJARV9c7+uVWVJztA3aOm2oN1A+wiGC
+	 KrC1lSkebfBvodiYS4t6m+452zro2LT/1fyNIZ9vSImNVNeivwljx6bE0HSUqrgamv
+	 XkAtLPiUdaS2fmu7RL+FgPohGFnSyv4mTZE7920OUuM7qq9w11Ab4TRi6qObeBMk6L
+	 qJiKykmzfyz+Q==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[PATCH]=20iommu/amd:=20Remove=20dead=20non-atomic=20update=20checking?=
+X-Mailer: git-send-email 2.49.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1747928651689
+To: xen-devel@lists.xenproject.org
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <761f464ae56a449291e38724a1f823606f3ba9d0.1747924653.git.teddy.astie@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.38279da09137419b8047aef6d5d12fd8?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250522:md
+Date: Thu, 22 May 2025 15:44:12 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/14] xen/riscv: introduce intc_init() and helpers
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Romain Caritey <Romain.Caritey@microchip.com>, xen-devel@lists.xenproject.org
-References: <cover.1747843009.git.oleksii.kurochko@gmail.com>
- <e1c952169ca894f2ea5ab3236e3ceb68da0117c5.1747843009.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <e1c952169ca894f2ea5ab3236e3ceb68da0117c5.1747843009.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 21.05.2025 18:03, Oleksii Kurochko wrote:
-> Introduce intc_init() to initialize the interrupt controller using the
-> registered hardware ops.
-> Also add intc_route_irq_to_xen() to route IRQs to Xen, with support for
-> setting IRQ type and priority via new internal helpers intc_set_irq_type()
-> and intc_set_irq_priority().
-> 
-> Call intc_init() to do basic initialization steps for APLIC and IMSIC.
-> 
-> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+When updating a DTE, amd_iommu_setup_domain_device checks if the update had been
+non-atomic (i.e rc > 0) and eventually throws a warning but since [1], rc can
+no longer be positive, making this check never taken.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+[1] x86/iommu: remove non-CX16 logic from DMA remapping
+    https://gitlab.com/xen-project/xen/-/commit/3fc44151d83d3d63320036bcf06634dfbebe1ff3
+
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+ xen/drivers/passthrough/amd/iommu_map.c     |  4 +---
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 18 ------------------
+ 2 files changed, 1 insertion(+), 21 deletions(-)
+
+diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+index dde393645a..07f405ed63 100644
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -157,9 +157,7 @@ static void set_iommu_ptes_present(unsigned long pt_mfn,
+ /*
+  * This function returns
+  * - -errno for errors,
+- * - 0 for a successful update, atomic when necessary
+- * - 1 for a successful but non-atomic update, which may need to be warned
+- *   about by the caller.
++ * - 0 for a successful update
+  */
+ int amd_iommu_set_root_page_table(struct amd_iommu_dte *dte,
+                                   uint64_t root_ptr, uint16_t domain_id,
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index d00697edb3..409752ffc8 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -225,24 +225,6 @@ static int __must_check amd_iommu_setup_domain_device(
+             spin_unlock_irqrestore(&iommu->lock, flags);
+             return rc;
+         }
+-        if ( rc &&
+-             domain != pdev->domain &&
+-             /*
+-              * By non-atomically updating the DTE's domain ID field last,
+-              * during a short window in time TLB entries with the old domain
+-              * ID but the new page tables may have been inserted.  This could
+-              * affect I/O of other devices using this same (old) domain ID.
+-              * Such updating therefore is not a problem if this was the only
+-              * device associated with the old domain ID.  Diverting I/O of any
+-              * of a dying domain's devices to the quarantine page tables is
+-              * intended anyway.
+-              */
+-             !pdev->domain->is_dying &&
+-             pdev->domain != dom_io &&
+-             (any_pdev_behind_iommu(pdev->domain, pdev, iommu) ||
+-              pdev->phantom_stride) )
+-            AMD_IOMMU_WARN(" %pp: reassignment may cause %pd data corruption\n",
+-                           &PCI_SBDF(pdev->seg, bus, devfn), pdev->domain);
+ 
+         /*
+          * Check remaining settings are still in place from an earlier call
+-- 
+2.49.0
+
+
+
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
