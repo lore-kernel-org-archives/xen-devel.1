@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AC9C54F30
-	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 23:53:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.994740.1377516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B79C54F32
+	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 23:53:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.994744.1377552 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiJ-0007rQ-Ps; Thu, 22 May 2025 23:52:39 +0000
+	id 1uIFiP-0000Aa-0U; Thu, 22 May 2025 23:52:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 994740.1377516; Thu, 22 May 2025 23:52:39 +0000
+Received: by outflank-mailman (output) from mailman id 994744.1377552; Thu, 22 May 2025 23:52:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiJ-0007rJ-N0; Thu, 22 May 2025 23:52:39 +0000
-Received: by outflank-mailman (input) for mailman id 994740;
- Thu, 22 May 2025 23:52:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uIFiO-0000A0-Or; Thu, 22 May 2025 23:52:44 +0000
+Received: by outflank-mailman (input) for mailman id 994744;
+ Thu, 22 May 2025 23:52:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sMZ8=YG=flex--seanjc.bounces.google.com=3wrgvaAYKCTspbXkgZdlldib.Zljubk-absbiifpqp.ubkmolgbZq.lod@srs-se1.protection.inumbo.net>)
- id 1uIFiJ-0007r7-8G
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:52:39 +0000
-Received: from mail-pj1-x1049.google.com (mail-pj1-x1049.google.com
- [2607:f8b0:4864:20::1049])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d56e26af-3767-11f0-b892-0df219b8e170;
- Fri, 23 May 2025 01:52:36 +0200 (CEST)
-Received: by mail-pj1-x1049.google.com with SMTP id
- 98e67ed59e1d1-30e6980471cso6915926a91.1
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 16:52:35 -0700 (PDT)
+ <SRS0=rzkE=YG=flex--seanjc.bounces.google.com=3ybgvaAYKCUIwierngksskpi.gsq1ir-hizippmwxw.1irtvsnigx.svk@srs-se1.protection.inumbo.net>)
+ id 1uIFiN-0007r8-9m
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:52:43 +0000
+Received: from mail-pg1-x54a.google.com (mail-pg1-x54a.google.com
+ [2607:f8b0:4864:20::54a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d9627086-3767-11f0-a2fb-13f23c93f187;
+ Fri, 23 May 2025 01:52:42 +0200 (CEST)
+Received: by mail-pg1-x54a.google.com with SMTP id
+ 41be03b00d2f7-b090c7c2c6aso5541503a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 16:52:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,44 +42,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d56e26af-3767-11f0-b892-0df219b8e170
+X-Inumbo-ID: d9627086-3767-11f0-a2fb-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1747957954; x=1748562754; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:mime-version:date:reply-to:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Tip5ipIFHbSR2IYZnXAE5GbVsPWdm0Tjm7OJATFbViQ=;
-        b=zXpFV5PRdu0ve+1cxT3eEh62ss/B8NbfeQp4AubYb5W65veR5+bByEytTs+2UUIAad
-         kcgMxELiJiS42rxKSUxtOxpv3d/4KApZQ1+aZI0O1yzZke8nSCByLuRaf/dihUTC5wX+
-         Y9PKrSPH+ZYCHiQlVfYWoXQthkeM2BVqK0P9O/+Fv05neuDEmJ/oWjSIM9JoYO4viGaw
-         Utag76cp22qeFZkBjUoCk80MQzxN+aqsSEhDMXwOxJW3vd+5CkjuQhHJnca+prn0d+AK
-         JCH+5PAsGev6/eU+YeV9HaZIeuBtbJfSzC9dPat8elLNR6XaSiTjcWlP9ztN/zxzXP5i
-         Sr6Q==
+        d=google.com; s=20230601; t=1747957961; x=1748562761; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=f7qvTnT5s0mxP5eCWb+NaTk8UKR3m+k6rkKzLbxKznI=;
+        b=d/pYycVGIAw9dOdEkv1ZwdExtSGoDw3+LkySo2/0B3lQ667/oUPDoRbTBkQBqZdLac
+         BC72uYdMjf9fdA1wJ0nP8Amu7jG15GhoWm0fODVQEcRDnK4lJwY7VqOTq5eRPzxeC1kT
+         ED3UUGN5EBWPgexAd8MgGlQo53I1m7ETxf7GVD3sDeaGY1DB9185ezrFHXff9CKpqD3X
+         rAuv/zMS6BZRtMfS95ZPQmco3R3b4c9sUrVW15JG3pyKqw36H7QHf/uJhRsGSsd98QMC
+         EBrTfZAZNlina0eH6g3W9EM10dQoJXv+lxGAn4oHYHavBL3M2jl6KTm2i79U6bsANo7+
+         oAGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747957954; x=1748562754;
-        h=cc:to:from:subject:message-id:mime-version:date:reply-to
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Tip5ipIFHbSR2IYZnXAE5GbVsPWdm0Tjm7OJATFbViQ=;
-        b=aWQ+PmMteAssY4lQW6Ow9+xzBqH3so9yrNbpCXePvEAXxutR47JXBtnyeNDyZO0g+h
-         LZ7fk1D8VQassDduK+YfqZWJQSEuQ4JYu0FndEzHG3GClnEH2PxlzdoVkd4nfARWGDmf
-         vSSs5x1hS+UpM9a3McVCW+uqVCIzt9nk55B7k5KeGjXt5o/zzZLPO6V/dsHnpWzPexuU
-         MlZkR5e8i5kFPU3LErCjaqxvv9L7iB3gu0p1nVG3QyJONjPZoGbVWMbUCSZh0v/L495Q
-         iNv2smCabzwJt6CNQ2L6/QHwKRJ7hnVv6zQgGqag7A51rIamssqcHw25Jog8X1W3yiKC
-         8Rhw==
-X-Forwarded-Encrypted: i=1; AJvYcCV1tdmt7DwOtbn3kNhD32SGsXMTOxxChL4FZ4yfFUx8mlqSFplBvKTgzltIc20haiE0sm9bdFo0inc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy+TUtLtUkh1eUWdeQ2gGjqH3GbTjNgxSM0Ql6eVyltFKJPCWNx
-	axbArih7sBS+H61ZAkvS6/wwShn4W+fSbN36ML2EII4DetQrkPTBseHzJbDKKx0mT7Robmbk4mx
-	qkCJ09w==
-X-Google-Smtp-Source: AGHT+IFoFNCkbt8aJJ0xnDKCzmCnIh6gGll4rd5AbALinv7jGcAxGvJdpWgEmk1cX+UlvCwIOcTYID0HpNU=
-X-Received: from pjtu15.prod.google.com ([2002:a17:90a:c88f:b0:30a:2020:e2bd])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90a:d604:b0:303:75a7:26a4
- with SMTP id 98e67ed59e1d1-30e7d4fea75mr43035958a91.7.1747957954327; Thu, 22
- May 2025 16:52:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1747957961; x=1748562761;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=f7qvTnT5s0mxP5eCWb+NaTk8UKR3m+k6rkKzLbxKznI=;
+        b=fe9VIcU49zOybkcXPPDSSkNYEDRbOQdPWQJmfKxj2WuOaxdc6Zh1LU385PoIZNAbMh
+         syyJd/zu3x1DfuY/eAn1EH6Xqsi9xhpiaYAZ73fsdhW9gjQ2AGwyU7lAMfvbPJEOpQdX
+         nxen1jw99nIpKeROQ18UwPo3huO3ulkKGnc2VBM0CZrinyxDudFROFQ9uMvId4BVZEPZ
+         nR+3++1r2jyHC1LhS67B5TKhaBBgktZVdgBj3sFP8mp2utwN+l1N8ewJSJAE9q2PZSxv
+         OF02DQ1r2in6PgINhPf1u1cW1+MpWkGJXWYworrSDqRxH5M4cfg+MY2Vl786J7FmLJcs
+         ko/g==
+X-Forwarded-Encrypted: i=1; AJvYcCVbtrjSLR/iFmzfjgta9ASnb9n/J4iBIDYZKXUvSXt1wuHGkVYmvSYfz1aZNbCqqxj63EgahTigkww=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwrpxGU2ACbm8ZhBxajLd/LFboO6rf/X61FnRWHNfAfDcugUCb9
+	Ry8KqGe6rN+xsg+IK+sdpF+uGJPoAhZKZ5rSvTjbB362l2KYHhdgth0IzGAPIJ1A5JL758eqxn6
+	1H3Pixg==
+X-Google-Smtp-Source: AGHT+IFhLIWMr3ct7tle+BqkfXynUt92dE5T1Ga0fMI6fA92WD5PFOynQ9QIYOuFaunMobUQi3Ht7v2BK94=
+X-Received: from pjbsz13.prod.google.com ([2002:a17:90b:2d4d:b0:30e:7d59:f3a7])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90a:dfc7:b0:301:c5cb:7b13
+ with SMTP id 98e67ed59e1d1-30e830c6247mr35762810a91.3.1747957961111; Thu, 22
+ May 2025 16:52:41 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Thu, 22 May 2025 16:52:10 -0700
+Date: Thu, 22 May 2025 16:52:14 -0700
+In-Reply-To: <20250522235223.3178519-1-seanjc@google.com>
 Mime-Version: 1.0
+References: <20250522235223.3178519-1-seanjc@google.com>
 X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
-Message-ID: <20250522235223.3178519-1-seanjc@google.com>
-Subject: [PATCH v3 00/13] KVM: Make irqfd registration globally unique
+Message-ID: <20250522235223.3178519-5-seanjc@google.com>
+Subject: [PATCH v3 04/13] KVM: Add irqfd to KVM's list via the vfs_poll() callback
 From: Sean Christopherson <seanjc@google.com>
 To: "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
 	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, 
@@ -96,92 +99,171 @@ Cc: linux-kernel@vger.kernel.org, linux-hyperv@vger.kernel.org,
 	David Matlack <dmatlack@google.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Non-KVM folks,
+Add the irqfd structure to KVM's list of irqfds in kvm_irqfd_register(),
+i.e. via the vfs_poll() callback.  This will allow taking irqfds.lock
+across the entire registration sequence (add to waitqueue, add to list),
+and more importantly will allow inserting into KVM's list if and only if
+adding to the waitqueue succeeds (spoiler alert), without needing to
+juggle return codes in weird ways.
 
-I am hoping to route this through the KVM tree (6.17 or later), as the non-KVM
-changes should be glorified nops.  Please holler if you object to that idea.
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ virt/kvm/eventfd.c | 102 +++++++++++++++++++++++++--------------------
+ 1 file changed, 57 insertions(+), 45 deletions(-)
 
-Hyper-V folks in particular, let me know if you want a stable topic branch/tag,
-e.g. on the off chance you want to make similar changes to the Hyper-V code,
-and I'll make sure that happens.
-
-
-As for what this series actually does...
-
-Rework KVM's irqfd registration to require that an eventfd is bound to at
-most one irqfd throughout the entire system.  KVM currently disallows
-binding an eventfd to multiple irqfds for a single VM, but doesn't reject
-attempts to bind an eventfd to multiple VMs.
-
-This is obviously an ABI change, but I'm fairly confident that it won't
-break userspace, because binding an eventfd to multiple irqfds hasn't
-truly worked since commit e8dbf19508a1 ("kvm/eventfd: Use priority waitqueue
-to catch events before userspace").  A somewhat undocumented, and perhaps
-even unintentional, side effect of suppressing eventfd notifications for
-userspace is that the priority+exclusive behavior also suppresses eventfd
-notifications for any subsequent waiters, even if they are priority waiters.
-I.e. only the first VM with an irqfd+eventfd binding will get notifications.
-
-And for IRQ bypass, a.k.a. device posted interrupts, globally unique
-bindings are a hard requirement (at least on x86; I assume other archs are
-the same).  KVM and the IRQ bypass manager kinda sorta handle this, but in
-the absolute worst way possible (IMO).  Instead of surfacing an error to
-userspace, KVM silently ignores IRQ bypass registration errors.
-
-The motivation for this series is to harden against userspace goofs.  AFAIK,
-we (Google) have never actually had a bug where userspace tries to assign
-an eventfd to multiple VMs, but the possibility has come up in more than one
-bug investigation (our intra-host, a.k.a. copyless, migration scheme
-transfers eventfds from the old to the new VM when updating the host VMM).
-
-v3:
- - Retain WQ_FLAG_EXCLUSIVE in mshv_eventfd.c, which snuck in between v1
-   and v2. [Peter]
- - Use EXPORT_SYMBOL_GPL. [Peter]
- - Move WQ_FLAG_EXCLUSIVE out of add_wait_queue_priority() in a prep patch
-   so that the affected subsystems are more explicitly documented (and then
-   immediately drop the flag from drivers/xen/privcmd.c, which amusingly
-   hides that file from the diff stats).
-
-v2:
- - https://lore.kernel.org/all/20250519185514.2678456-1-seanjc@google.com
- - Use guard(spinlock_irqsave). [Prateek]
-
-v1: https://lore.kernel.org/all/20250401204425.904001-1-seanjc@google.com
-
-
-Sean Christopherson (13):
-  KVM: Use a local struct to do the initial vfs_poll() on an irqfd
-  KVM: Acquire SCRU lock outside of irqfds.lock during assignment
-  KVM: Initialize irqfd waitqueue callback when adding to the queue
-  KVM: Add irqfd to KVM's list via the vfs_poll() callback
-  KVM: Add irqfd to eventfd's waitqueue while holding irqfds.lock
-  sched/wait: Drop WQ_FLAG_EXCLUSIVE from add_wait_queue_priority()
-  xen: privcmd: Don't mark eventfd waiter as EXCLUSIVE
-  sched/wait: Add a waitqueue helper for fully exclusive priority
-    waiters
-  KVM: Disallow binding multiple irqfds to an eventfd with a priority
-    waiter
-  KVM: Drop sanity check that per-VM list of irqfds is unique
-  KVM: selftests: Assert that eventfd() succeeds in Xen shinfo test
-  KVM: selftests: Add utilities to create eventfds and do KVM_IRQFD
-  KVM: selftests: Add a KVM_IRQFD test to verify uniqueness requirements
-
- drivers/hv/mshv_eventfd.c                     |   8 ++
- include/linux/kvm_irqfd.h                     |   1 -
- include/linux/wait.h                          |   2 +
- kernel/sched/wait.c                           |  22 ++-
- tools/testing/selftests/kvm/Makefile.kvm      |   1 +
- tools/testing/selftests/kvm/arm64/vgic_irq.c  |  12 +-
- .../testing/selftests/kvm/include/kvm_util.h  |  40 ++++++
- tools/testing/selftests/kvm/irqfd_test.c      | 130 ++++++++++++++++++
- .../selftests/kvm/x86/xen_shinfo_test.c       |  21 +--
- virt/kvm/eventfd.c                            | 130 +++++++++++++-----
- 10 files changed, 302 insertions(+), 65 deletions(-)
- create mode 100644 tools/testing/selftests/kvm/irqfd_test.c
-
-
-base-commit: 45eb29140e68ffe8e93a5471006858a018480a45
+diff --git a/virt/kvm/eventfd.c b/virt/kvm/eventfd.c
+index 8b9a87daa2bb..99274d60335d 100644
+--- a/virt/kvm/eventfd.c
++++ b/virt/kvm/eventfd.c
+@@ -245,34 +245,14 @@ irqfd_wakeup(wait_queue_entry_t *wait, unsigned mode, int sync, void *key)
+ 	return ret;
+ }
+ 
+-struct kvm_irqfd_pt {
+-	struct kvm_kernel_irqfd *irqfd;
+-	poll_table pt;
+-};
+-
+-static void kvm_irqfd_register(struct file *file, wait_queue_head_t *wqh,
+-			       poll_table *pt)
+-{
+-	struct kvm_irqfd_pt *p = container_of(pt, struct kvm_irqfd_pt, pt);
+-	struct kvm_kernel_irqfd *irqfd = p->irqfd;
+-
+-	/*
+-	 * Add the irqfd as a priority waiter on the eventfd, with a custom
+-	 * wake-up handler, so that KVM *and only KVM* is notified whenever the
+-	 * underlying eventfd is signaled.
+-	 */
+-	init_waitqueue_func_entry(&irqfd->wait, irqfd_wakeup);
+-
+-	add_wait_queue_priority(wqh, &irqfd->wait);
+-}
+-
+-/* Must be called under irqfds.lock */
+ static void irqfd_update(struct kvm *kvm, struct kvm_kernel_irqfd *irqfd)
+ {
+ 	struct kvm_kernel_irq_routing_entry *e;
+ 	struct kvm_kernel_irq_routing_entry entries[KVM_NR_IRQCHIPS];
+ 	int n_entries;
+ 
++	lockdep_assert_held(&kvm->irqfds.lock);
++
+ 	n_entries = kvm_irq_map_gsi(kvm, entries, irqfd->gsi);
+ 
+ 	write_seqcount_begin(&irqfd->irq_entry_sc);
+@@ -286,6 +266,49 @@ static void irqfd_update(struct kvm *kvm, struct kvm_kernel_irqfd *irqfd)
+ 	write_seqcount_end(&irqfd->irq_entry_sc);
+ }
+ 
++struct kvm_irqfd_pt {
++	struct kvm_kernel_irqfd *irqfd;
++	struct kvm *kvm;
++	poll_table pt;
++	int ret;
++};
++
++static void kvm_irqfd_register(struct file *file, wait_queue_head_t *wqh,
++			       poll_table *pt)
++{
++	struct kvm_irqfd_pt *p = container_of(pt, struct kvm_irqfd_pt, pt);
++	struct kvm_kernel_irqfd *irqfd = p->irqfd;
++	struct kvm_kernel_irqfd *tmp;
++	struct kvm *kvm = p->kvm;
++
++	spin_lock_irq(&kvm->irqfds.lock);
++
++	list_for_each_entry(tmp, &kvm->irqfds.items, list) {
++		if (irqfd->eventfd != tmp->eventfd)
++			continue;
++		/* This fd is used for another irq already. */
++		p->ret = -EBUSY;
++		spin_unlock_irq(&kvm->irqfds.lock);
++		return;
++	}
++
++	irqfd_update(kvm, irqfd);
++
++	list_add_tail(&irqfd->list, &kvm->irqfds.items);
++
++	spin_unlock_irq(&kvm->irqfds.lock);
++
++	/*
++	 * Add the irqfd as a priority waiter on the eventfd, with a custom
++	 * wake-up handler, so that KVM *and only KVM* is notified whenever the
++	 * underlying eventfd is signaled.
++	 */
++	init_waitqueue_func_entry(&irqfd->wait, irqfd_wakeup);
++
++	add_wait_queue_priority(wqh, &irqfd->wait);
++	p->ret = 0;
++}
++
+ #if IS_ENABLED(CONFIG_HAVE_KVM_IRQ_BYPASS)
+ void __attribute__((weak)) kvm_arch_irq_bypass_stop(
+ 				struct irq_bypass_consumer *cons)
+@@ -315,7 +338,7 @@ bool __attribute__((weak)) kvm_arch_irqfd_route_changed(
+ static int
+ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
+ {
+-	struct kvm_kernel_irqfd *irqfd, *tmp;
++	struct kvm_kernel_irqfd *irqfd;
+ 	struct eventfd_ctx *eventfd = NULL, *resamplefd = NULL;
+ 	struct kvm_irqfd_pt irqfd_pt;
+ 	int ret;
+@@ -414,32 +437,22 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
+ 	 */
+ 	idx = srcu_read_lock(&kvm->irq_srcu);
+ 
+-	spin_lock_irq(&kvm->irqfds.lock);
+-
+-	ret = 0;
+-	list_for_each_entry(tmp, &kvm->irqfds.items, list) {
+-		if (irqfd->eventfd != tmp->eventfd)
+-			continue;
+-		/* This fd is used for another irq already. */
+-		ret = -EBUSY;
+-		goto fail_duplicate;
+-	}
+-
+-	irqfd_update(kvm, irqfd);
+-
+-	list_add_tail(&irqfd->list, &kvm->irqfds.items);
+-
+-	spin_unlock_irq(&kvm->irqfds.lock);
+-
+ 	/*
+-	 * Register the irqfd with the eventfd by polling on the eventfd.  If
+-	 * there was en event pending on the eventfd prior to registering,
+-	 * manually trigger IRQ injection.
++	 * Register the irqfd with the eventfd by polling on the eventfd, and
++	 * simultaneously and the irqfd to KVM's list.  If there was en event
++	 * pending on the eventfd prior to registering, manually trigger IRQ
++	 * injection.
+ 	 */
+ 	irqfd_pt.irqfd = irqfd;
++	irqfd_pt.kvm = kvm;
+ 	init_poll_funcptr(&irqfd_pt.pt, kvm_irqfd_register);
+ 
+ 	events = vfs_poll(fd_file(f), &irqfd_pt.pt);
++
++	ret = irqfd_pt.ret;
++	if (ret)
++		goto fail_poll;
++
+ 	if (events & EPOLLIN)
+ 		schedule_work(&irqfd->inject);
+ 
+@@ -460,8 +473,7 @@ kvm_irqfd_assign(struct kvm *kvm, struct kvm_irqfd *args)
+ 	srcu_read_unlock(&kvm->irq_srcu, idx);
+ 	return 0;
+ 
+-fail_duplicate:
+-	spin_unlock_irq(&kvm->irqfds.lock);
++fail_poll:
+ 	srcu_read_unlock(&kvm->irq_srcu, idx);
+ fail:
+ 	if (irqfd->resampler)
 -- 
 2.49.0.1151.ga128411c76-goog
 
