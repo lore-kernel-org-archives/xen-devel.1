@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93A46C54756
-	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 07:50:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.993082.1376530 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4299C54E65
+	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 07:54:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.993099.1376545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI0hK-0005Gp-Gf; Thu, 22 May 2025 07:50:38 +0000
+	id 1uI0lL-0006OF-8e; Thu, 22 May 2025 07:54:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 993082.1376530; Thu, 22 May 2025 07:50:38 +0000
+Received: by outflank-mailman (output) from mailman id 993099.1376545; Thu, 22 May 2025 07:54:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uI0hK-0005Gi-Dk; Thu, 22 May 2025 07:50:38 +0000
-Received: by outflank-mailman (input) for mailman id 993082;
- Thu, 22 May 2025 07:50:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ix6t=YG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uI0hJ-0005GW-6R
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 07:50:37 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7065e7eb-36e1-11f0-b892-0df219b8e170;
- Thu, 22 May 2025 09:50:33 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-acb5ec407b1so1305776766b.1
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 00:50:33 -0700 (PDT)
-Received: from [10.1.248.227] ([80.188.125.198])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d498f18sm1030321666b.150.2025.05.22.00.50.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 May 2025 00:50:32 -0700 (PDT)
+	id 1uI0lL-0006Ng-3U; Thu, 22 May 2025 07:54:47 +0000
+Received: by outflank-mailman (input) for mailman id 993099;
+ Thu, 22 May 2025 07:54:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=GVKv=YG=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1uI0lK-0006JE-31
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 07:54:46 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 06c72dd9-36e2-11f0-a2fb-13f23c93f187;
+ Thu, 22 May 2025 09:54:45 +0200 (CEST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-442f5b3c710so63606005e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 00:54:45 -0700 (PDT)
+Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-447f73d3edcsm97786325e9.20.2025.05.22.00.54.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 May 2025 00:54:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,155 +47,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7065e7eb-36e1-11f0-b892-0df219b8e170
+X-Inumbo-ID: 06c72dd9-36e2-11f0-a2fb-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1747900232; x=1748505032; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=eUyGdua4W5d8JFvp3f9dAGXjC9yavNqlLQekS0f5fLw=;
-        b=fjcvs0MHxPp+JAHtacB0UNJ88WfIc8oUuyyCCldqX9GD/BTfrSrZJ4+YIs3Tc1X9wX
-         RqWyO0wAxTvaqM1EwfkkIjXH5aJm6Eu/ZxYtcfd/oe48HXQ/pOY3syFNOn6ZTX0S/lzQ
-         00B4e2iIkn/n4wiGE3O6Crv7QifcRoAe20zyzSB2C//z8GD4gJi/tyOalBuJEwUSipj/
-         BjZq66ug07JkspRQJuPXQsfbAxdjuSDR07bAfxnbAQ+tBY/i7N3DfJGLKQ3oIkh7SWCy
-         qljVcxwA+6a4EGXPV+bQ4qN0wAnrnTE1PJ6iMBiKiUDci2Jbdw19dSuD+GnrA3AW8TQA
-         VyAQ==
+        d=citrix.com; s=google; t=1747900484; x=1748505284; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tt93X8/M//cm6RVXeEKC2o6v986fsxbCRkDTkmxvdfg=;
+        b=keUgetdG2fXqvMvWke7zPH060AGv53DFA7JhK9UEZabeLK3L2zNtcnspkJiC1sluo3
+         3oOuBgyWwXjL95okSQHgXDm4Q+voToxVpswgcTxAYBFmvgYdBv3MdW9qt2OG9pfxSEYl
+         kTH5IPuV8gMte8U/NSlqH8rRoinJMppe2JQGI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747900232; x=1748505032;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=eUyGdua4W5d8JFvp3f9dAGXjC9yavNqlLQekS0f5fLw=;
-        b=HjrMr6/nyMTQScp+I2yFVgCiwWOjJ7SjYzM1CJkrX66YoL6ZifPbOkHdYdAOuhM+ZO
-         0Eci8mSANy0uITCo+Z0EP6pTQLk3nYKpaYCcXjj9kYLTroPswS76Am3j6HudvjLFCdye
-         M3t0wtC4/K1sHIIeJszvxNie0naLS1jGYDANmoPUsv1jINdkE5iANPkjJT6NjDgJRCbg
-         dkff68f77qmCVVBrdBziUALC9CJ8UgkvFKtrpsmmxnJ/lvXqFs5Dns9/ygwkTdlAla1o
-         a2lXww83idNqGEvxOD9WAFs4Wr1njJdPMNTGNrZ6iAQurzQOrKglaHwnU/6yvbV53woG
-         X4rQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXeWCLoR5SoUH6rr335m7y7nnDcrHUe5a0KTz3HtRgU14L1GRi6voHOxED+WqKxaVWGGx0c2onnypA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwsQKpn3O6HmpTgx9ShGGMNk6/qsqVo6+0ldAYi/UTF5QibGz0j
-	IsZKZnlu9SY5F1jINS3VKxSHu9PGGz6oe1J+IDv9aiCHOipHhlHRXu7z/KNnioAUxA==
-X-Gm-Gg: ASbGncsL/feYrL66Yx1VDUMfFnY+sPRIVl4qFBsLIH+ueQ9OdoldaKD9+QxMs2y0XXF
-	mygK3uH3SN9k/mHRKzpdoAdB7rXO1MAhJxtAqoVIyhveJteWwOkVzviW61RVOFpOpi8FZe87jYf
-	reIw2UkQxdYcxf3uSdLqjKG/TjfrntW45ZwckRhDEoPwrDOajKC3dNVfGLauMvQP7odNf/WPjmC
-	ycB/zp3vEa1Cogmu80uzW/0O99bk9i5Pcnj4NKlWIPdXh+XWwYS4OjPBX+rVUhCcT2dkwPNtO3f
-	GGaBnezMC71lACoEtNqx7eGC4/eq3Q/O5Hg1IBi728uKQyhuIvp0s38CActi5g==
-X-Google-Smtp-Source: AGHT+IEoeKkVySC3t2E9exF62m7QFue6AAuVdnqoPW5eTPYk0KGWL+bv3vS+EQNQJ1wAyEmKjd2+qA==
-X-Received: by 2002:a17:907:80b:b0:ad2:2fa8:c0a7 with SMTP id a640c23a62f3a-ad536b7c43fmr1981181466b.21.1747900232523;
-        Thu, 22 May 2025 00:50:32 -0700 (PDT)
-Message-ID: <12e3ad4c-b7cc-4166-940f-b2301349680c@suse.com>
-Date: Thu, 22 May 2025 09:50:31 +0200
+        d=1e100.net; s=20230601; t=1747900484; x=1748505284;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=tt93X8/M//cm6RVXeEKC2o6v986fsxbCRkDTkmxvdfg=;
+        b=UUym3EjWpZy6bw5oSJM2/IQFy/L5WI1bUII0rKxK3EjRnOlZNnH+mWL6Xe07WH8KcQ
+         Nk7nB7kL/+3B/gfLrLsYL+g5oKcX5Pvdw5fopc3skSWNe35zpdx5snc0CXcu8QZzs+8O
+         eOyonDGPnEL3hb2x7JwgYocAuEjrauNpZBaJUoTp+myMXaumVcY+yqiTckfDXilMPNKV
+         /EdAnzkefhmndYznEm4pCEekjyDGwzecI+LbRjUdIvFwCrKy6A/8OYr0pWR2Ee/Qv47T
+         2Ljp6KXS+bx/4VD52bdO/e5VTOJxTwuudKOubwE7Csgsxg8Jp1rzGMJXjNk13mrRbo6F
+         OnVQ==
+X-Gm-Message-State: AOJu0Ywxa53+IPd+Akv9Q1T4f3TZ15Gb8TBfcwXPhRMF7QrtTgOgKWn0
+	JlcNn/cnsiRglg54xDmirAhkA8Ee67qJkZDmTyphOUJSHcphMOXz/WhycnSTOqNZhy+JzoC1J1m
+	4bhrw
+X-Gm-Gg: ASbGncu4PevKy/9aaJd6LXGaZrWKL5DIOyCRdEouUoZbnSkibdXuzo/y3UcYotwYc0Q
+	t+cDs5RHB4AiEjYo99H8sihdZTJc9OgmLbHWn5rhWHmACyJkRQkwcv6WJ2uDgRn0pr8DZMh005x
+	jcour8BseAQ5E5mFv7/VNLHrrxTN8cXPWO4145inBQTOdn8jejpRQUPKgMfyG6GOitxybdgB4D1
+	w0eMUDQh+vvHBStmzwMkC7gT6jyQRxtB/o0Q6A2YwREXNBL2v+H6DvGtiqjSuYnmsNVDJSBlOps
+	+EoDtg6sL2MdGUUDnJ4RaPA9f5gBAYLawUvmGQgXzGSYV/THcvFTiiQGEPswkQJOndzwmTmuVcE
+	fU0TMQnnNBHDFw+tQSvZEuMZkVPDYOA==
+X-Google-Smtp-Source: AGHT+IGhNrAr/hRUljY+8j/hvusjJZFNAobH2p1pEtgVC2wSlfpCVao6R/KxtDVBG57mG422/tHzlg==
+X-Received: by 2002:a05:600c:5305:b0:441:b19c:96fe with SMTP id 5b1f17b1804b1-442fd622eb4mr288804925e9.10.1747900484472;
+        Thu, 22 May 2025 00:54:44 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 2/4] x86/traps: remove smp_mb() ahead of IPI dispatch
+Date: Thu, 22 May 2025 09:54:38 +0200
+Message-ID: <20250522075440.99882-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250522075440.99882-1-roger.pau@citrix.com>
+References: <20250522075440.99882-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/14] xen/riscv: dt_processor_hartid() implementation
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1747843009.git.oleksii.kurochko@gmail.com>
- <5aec324c04c67ba88336244358542f3faa6726b2.1747843009.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <5aec324c04c67ba88336244358542f3faa6726b2.1747843009.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 21.05.2025 18:03, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/smpboot.c
-> +++ b/xen/arch/riscv/smpboot.c
-> @@ -1,5 +1,8 @@
->  #include <xen/cpumask.h>
-> +#include <xen/device_tree.h>
-> +#include <xen/errno.h>
->  #include <xen/init.h>
-> +#include <xen/types.h>
->  #include <xen/sections.h>
+The IPI dispatch functions should already have the required barriers to
+ensure correct memory ordering.
 
-Nit: The latter insertion wants to move one line down. Yet then - isn't
-xen/stdint.h sufficient here?
+Note other callers of send_IPI_mask() don't use any barriers.
 
-> @@ -14,3 +17,69 @@ void __init smp_prepare_boot_cpu(void)
->      cpumask_set_cpu(0, &cpu_possible_map);
->      cpumask_set_cpu(0, &cpu_online_map);
->  }
-> +
-> +/**
-> + * dt_get_hartid - Get the hartid from a CPU device node
-> + *
-> + * @cpun: CPU number(logical index) for which device node is required
-> + *
-> + * Return: The hartid for the CPU node or ~0UL if not found.
-> + */
-> +static unsigned long dt_get_hartid(const struct dt_device_node *cpun)
-> +{
-> +    const __be32 *cell;
-> +    unsigned int ac;
-> +    uint32_t len;
-> +
-> +    ac = dt_n_addr_cells(cpun);
-> +    cell = dt_get_property(cpun, "reg", &len);
-> +    if ( !cell || !ac || ((sizeof(*cell) * ac) > len) )
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - New in this version.
+---
+ xen/arch/x86/traps.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-Does DT make any guarantees for this multiplication to not overflow?
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index c94779b4ad4f..22f20629327d 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -785,8 +785,6 @@ void fatal_trap(const struct cpu_user_regs *regs, bool show_remote)
+             cpumask_andnot(&show_state_mask, &cpu_online_map,
+                            cpumask_of(smp_processor_id()));
+             set_nmi_callback(nmi_show_execution_state);
+-            /* Ensure new callback is set before sending out the NMI. */
+-            smp_wmb();
+             smp_send_nmi_allbutself();
+ 
+             /* Wait at most 10ms for some other CPU to respond. */
+-- 
+2.49.0
 
-> +        return ~0UL;
-> +
-> +    return dt_read_number(cell, ac);
-> +}
-> +
-> +/*
-> + * Returns the hartid of the given device tree node, or -ENODEV if the node
-> + * isn't an enabled and valid RISC-V hart node.
-> + */
-> +int dt_processor_hartid(const struct dt_device_node *node,
-> +                        unsigned long *hartid)
-> +{
-> +    const char *isa;
-> +    int ret;
-> +
-> +    if ( !dt_device_is_compatible(node, "riscv") )
-> +    {
-> +        printk("Found incompatible CPU\n");
-> +        return -ENODEV;
-> +    }
-> +
-> +    *hartid = dt_get_hartid(node);
-> +    if ( *hartid == ~0UL )
-> +    {
-> +        printk("Found CPU without CPU ID\n");
-> +        return -ENODATA;
-> +    }
-> +
-> +    if ( !dt_device_is_available(node))
-> +    {
-> +        printk("CPU with hartid=%lu is not available\n", *hartid);
-
-Considering that hart ID assignment is outside of our control, would we
-perhaps better (uniformly) log such using %#lx?
-
-> +        return -ENODEV;
-> +    }
-> +
-> +    if ( (ret = dt_property_read_string(node, "riscv,isa", &isa)) )
-> +    {
-> +        printk("CPU with hartid=%lu has no \"riscv,isa\" property\n", *hartid);
-> +        return ret;
-> +    }
-> +
-> +    if ( isa[0] != 'r' || isa[1] != 'v' )
-> +    {
-> +        printk("CPU with hartid=%lu has an invalid ISA of \"%s\"\n", *hartid,
-> +               isa);
-> +        return -EINVAL;
-
-As before -EINVAL is appropriate when input arguments have wrong values.
-Here, however, you found an unexpected value in something the platform
-has presented to you. While not entirely appropriate either, maybe
--ENODEV again (if nothing better can be found)?
-
-Jan
 
