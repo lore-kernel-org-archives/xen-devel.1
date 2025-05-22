@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A8EC54EDA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF16EC54F2E
 	for <xen-devel@archiver.kernel.org>; Thu, 22 May 2025 23:53:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.994753.1377616 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.994737.1377556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiX-00026m-WA; Thu, 22 May 2025 23:52:53 +0000
+	id 1uIFiP-0000Gi-9W; Thu, 22 May 2025 23:52:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 994753.1377616; Thu, 22 May 2025 23:52:53 +0000
+Received: by outflank-mailman (output) from mailman id 994737.1377556; Thu, 22 May 2025 23:52:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uIFiX-00026Z-S9; Thu, 22 May 2025 23:52:53 +0000
-Received: by outflank-mailman (input) for mailman id 994753;
- Thu, 22 May 2025 23:52:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=h2TN=YG=flex--seanjc.bounces.google.com=30bgvaAYKCUo4qmzvos00sxq.o0y9qz-pq7qxxu454.9qz130vqo5.03s@srs-se1.protection.inumbo.net>)
- id 1uIFiW-0007r8-00
- for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:52:52 +0000
-Received: from mail-pf1-x449.google.com (mail-pf1-x449.google.com
- [2607:f8b0:4864:20::449])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de6add53-3767-11f0-a2fb-13f23c93f187;
- Fri, 23 May 2025 01:52:51 +0200 (CEST)
-Received: by mail-pf1-x449.google.com with SMTP id
- d2e1a72fcca58-742d077bdfaso6775833b3a.2
- for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 16:52:51 -0700 (PDT)
+	id 1uIFiP-0000Ep-43; Thu, 22 May 2025 23:52:45 +0000
+Received: by outflank-mailman (input) for mailman id 994737;
+ Thu, 22 May 2025 23:23:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=PZjB=YG=alex0.net=me@srs-se1.protection.inumbo.net>)
+ id 1uIFFc-0004Yx-5I
+ for xen-devel@lists.xenproject.org; Thu, 22 May 2025 23:23:00 +0000
+Received: from outbound.qs.icloud.com
+ (p-east3-cluster1-host2-snip4-10.eps.apple.com [57.103.87.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b1bbd007-3763-11f0-b892-0df219b8e170;
+ Fri, 23 May 2025 01:22:57 +0200 (CEST)
+Received: from outbound.qs.icloud.com (localhost [127.0.0.1])
+ by outbound.qs.icloud.com (Postfix) with ESMTPS id 08E1D18001D9
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 23:22:55 +0000 (UTC)
+Received: from smtpclient.apple (qs-asmtp-me-k8s.p00.prod.me.com
+ [17.57.155.37])
+ by outbound.qs.icloud.com (Postfix) with ESMTPSA id 690C2180012D
+ for <xen-devel@lists.xenproject.org>; Thu, 22 May 2025 23:22:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,167 +46,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de6add53-3767-11f0-a2fb-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1747957969; x=1748562769; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=m999gU/AqGpWG+L7ciDbK5wL4BJk8SCse59imt7h3LE=;
-        b=hsB98DvMK1p82HYlVdLnCcji2tPQ8OoFh2bEdK/16AtowbJoKG9ERQTi4zQTa5F6hy
-         DE4n3NKL1rkCfOtNPtAuR7lwqPiaeqyrkzvasoMzdP8b8zLs3qcw/59v0YbEgVTsS+P2
-         IqsVFunr8yrfeUf/nMZOnZsT1LRUvQN8PnB7Mx2MtBkpo/l2NMLj0gMIcED6aZh9uMXh
-         mVUvCQYe2zhHE5IV6kQkIvBB8lrBJ48qtkV/EpvWGt0KV6l10V+5q6snkPqnDMeGwoOi
-         2DwjdAG8dyoGSlpQ9HYqxpGAtskR3YlcAxIMwlYqFxGoVXMMJT1bIIFHnMRAm/eZEtVC
-         XVBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747957969; x=1748562769;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=m999gU/AqGpWG+L7ciDbK5wL4BJk8SCse59imt7h3LE=;
-        b=vTulvtqjSBjjrowQ7+Nd3cu3BtcMODpaNT/QdTKNfWO9d9QaqgzxqA+2vkBpu6UAjp
-         EL0oVpFvftd7ETiMPmp2aGPIS6kOQe0JbbvGTlKMyxzgiWRC5VSnwJRhtSKvsXvZdONg
-         xgpZiJl/SkjETeYNjVwB9mOUiDxdQkq4N0AQxjleqWeDs62WZznaureh4p4Akom7TUIt
-         EOqXhdwTKKAsWftNHi+nuNVHNg+/geGh1rAm9ZGltv0p78RLB7l0+afP2CY9ADtZwDJg
-         k8bXgeRkzGR+QJB3TkASvZyE3Ey4FJzkxt9j2T0bDPd1MNGXFqseU/sXyLRKMT18CvMt
-         2/9g==
-X-Forwarded-Encrypted: i=1; AJvYcCWlVpA22LZ7B3O8j5eOGQwH3gdAQs8Gcz2oYgqcjiU9XKQYVu2b1Zqq6OBmvUqxV7Lz364a3Z4va7A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzN4u9C1TO88OkuZLpWlx++evAN4u/GoFZpVojxrEB48n6D2uej
-	LeWCxm9YIG+Y7upPKA7hvgGB3Wb/wnEw/ZFwmX6PYIZzJl8w1WiqdzTc8EEQL7kXhYeDdjqazGR
-	rC30gcg==
-X-Google-Smtp-Source: AGHT+IGGw5zwjY0zFLgdg4fHQ7nOB9U/xbrTeYpuWgtfAceUKGlpNANWH4gnTKB5jligEj9ALMrYFDn6jAg=
-X-Received: from pfjd1.prod.google.com ([2002:a05:6a00:2441:b0:730:743a:f2b0])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:3c82:b0:742:b3a6:db16
- with SMTP id d2e1a72fcca58-745ed90b8e2mr1286378b3a.20.1747957969447; Thu, 22
- May 2025 16:52:49 -0700 (PDT)
-Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Thu, 22 May 2025 16:52:19 -0700
-In-Reply-To: <20250522235223.3178519-1-seanjc@google.com>
-Mime-Version: 1.0
-References: <20250522235223.3178519-1-seanjc@google.com>
-X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
-Message-ID: <20250522235223.3178519-10-seanjc@google.com>
-Subject: [PATCH v3 09/13] KVM: Disallow binding multiple irqfds to an eventfd
- with a priority waiter
-From: Sean Christopherson <seanjc@google.com>
-To: "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
-	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, 
-	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Ingo Molnar <mingo@redhat.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Juri Lelli <juri.lelli@redhat.com>, 
-	Vincent Guittot <vincent.guittot@linaro.org>, Shuah Khan <shuah@kernel.org>, 
-	Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, 
-	Sean Christopherson <seanjc@google.com>
-Cc: linux-kernel@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, kvm@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	kvmarm@lists.linux.dev, K Prateek Nayak <kprateek.nayak@amd.com>, 
-	David Matlack <dmatlack@google.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Inumbo-ID: b1bbd007-3763-11f0-b892-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alex0.net; s=sig1;
+	bh=W4igLNWEpJdS+ajzjNyCAoqzb9V+DG8pjtCGb23spVg=;
+	h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
+	b=pQA47SytSi4NDaGJen0AKZZPDX28fadWhK+mf3OfhXCjs7WxTPrs/Zif1GqifH1Pa
+	 Ws7XkkKUhZbj5JEcCGZtqGgJbLSkqIIdzdoNi2ZEt/XibzFAKZuKBHETXQhlGn47VB
+	 gFd+9cFaVU8CmDf8J/b9OXCTG0nqMfVyBU1c7UOHZGYCC1WdIVK4zQ8TNnLeBmMpOz
+	 qh60G52sxNf/tZMnljJt5idwvQjrh4+cRy48AffjRp41RGtBUhUhiB1fsNs+QZi4En
+	 jWqLid4LMRoiVGPJc2vBs8GiTU4Nx6HjwTr9nlCpqZeAVXBcFTWKY3rCPkEsCBR0S5
+	 8Ut/YSqrHSSuA==
+From: me@alex0.net
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.500.181.1.5\))
+Subject: xen_acpi_processor driver is bound to dom0 vcpu count
+Message-Id: <A56FE54F-6BE8-4A4E-9598-B1C98028270F@alex0.net>
+Date: Fri, 23 May 2025 00:22:44 +0100
+To: xen-devel@lists.xenproject.org
+X-Mailer: Apple Mail (2.3826.500.181.1.5)
+X-Proofpoint-GUID: 08OLpaYwqyWuO0fGwWXqHDti4i2hrTNe
+X-Proofpoint-ORIG-GUID: 08OLpaYwqyWuO0fGwWXqHDti4i2hrTNe
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-22_10,2025-05-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ bulkscore=0 clxscore=1030 phishscore=0 adultscore=0 suspectscore=0
+ mlxlogscore=999 spamscore=0 malwarescore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2503310001 definitions=main-2505220234
 
-Disallow binding an irqfd to an eventfd that already has a priority waiter,
-i.e. to an eventfd that already has an attached irqfd.  KVM always
-operates in exclusive mode for EPOLL_IN (unconditionally returns '1'),
-i.e. only the first waiter will be notified.
 
-KVM already disallows binding multiple irqfds to an eventfd in a single
-VM, but doesn't guard against multiple VMs binding to an eventfd.  Adding
-the extra protection reduces the pain of a userspace VMM bug, e.g. if
-userspace fails to de-assign before re-assigning when transferring state
-for intra-host migration, then the migration will explicitly fail as
-opposed to dropping IRQs on the destination VM.
+--Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-Temporarily keep KVM's manual check on irqfds.items, but add a WARN, e.g.
-to allow sanity checking the waitqueue enforcement.
+I think I=E2=80=99ve just uncovered a rather nasty bug in the =
+xen_acpi_processor driver in dom0. If the vcpu count in dom0 is set to =
+anything other than the exact number of physical cores, the =
+xen_acpi_processor kernel driver will fail to upload the C-state =
+information for those cores to Xen, resulting in Xen never knowing about =
+the C-states, which significantly impacts battery life on mobile =
+platforms.
 
-Cc: Oliver Upton <oliver.upton@linux.dev>
-Cc: David Matlack <dmatlack@google.com>
-Signed-off-by: Sean Christopherson <seanjc@google.com>
----
- virt/kvm/eventfd.c | 55 +++++++++++++++++++++++++++++++---------------
- 1 file changed, 37 insertions(+), 18 deletions(-)
+This can impact users who set dom0_max_vcpus to a lesser value than =
+their number of CPU cores, but is particularly relevant if SMT is =
+enabled in firmware but disabled in Xen. As the cores are disabled =
+manually by Xen, dom0 will only see the number of active cores; but as =
+this is a lesser number of cores than Xen knows of it will mismatch and =
+half the cores will not see C-state information.
 
-diff --git a/virt/kvm/eventfd.c b/virt/kvm/eventfd.c
-index c7969904637a..7b2e1f858f6d 100644
---- a/virt/kvm/eventfd.c
-+++ b/virt/kvm/eventfd.c
-@@ -291,38 +291,57 @@ static void kvm_irqfd_register(struct file *file, wait_queue_head_t *wqh,
- 	struct kvm_kernel_irqfd *tmp;
- 	struct kvm *kvm = p->kvm;
- 
-+	/*
-+	 * Note, irqfds.lock protects the irqfd's irq_entry, i.e. its routing,
-+	 * and irqfds.items.  It does NOT protect registering with the eventfd.
-+	 */
- 	spin_lock_irq(&kvm->irqfds.lock);
- 
--	list_for_each_entry(tmp, &kvm->irqfds.items, list) {
--		if (irqfd->eventfd != tmp->eventfd)
--			continue;
--		/* This fd is used for another irq already. */
--		p->ret = -EBUSY;
--		spin_unlock_irq(&kvm->irqfds.lock);
--		return;
--	}
--
-+	/*
-+	 * Initialize the routing information prior to adding the irqfd to the
-+	 * eventfd's waitqueue, as irqfd_wakeup() can be invoked as soon as the
-+	 * irqfd is registered.
-+	 */
- 	irqfd_update(kvm, irqfd);
- 
--	list_add_tail(&irqfd->list, &kvm->irqfds.items);
--
- 	/*
- 	 * Add the irqfd as a priority waiter on the eventfd, with a custom
- 	 * wake-up handler, so that KVM *and only KVM* is notified whenever the
--	 * underlying eventfd is signaled.  Temporarily lie to lockdep about
--	 * holding irqfds.lock to avoid a false positive regarding potential
--	 * deadlock with irqfd_wakeup() (see irqfd_wakeup() for details).
-+	 * underlying eventfd is signaled.
- 	 */
- 	init_waitqueue_func_entry(&irqfd->wait, irqfd_wakeup);
- 
-+	/*
-+	 * Temporarily lie to lockdep about holding irqfds.lock to avoid a
-+	 * false positive regarding potential deadlock with irqfd_wakeup()
-+	 * (see irqfd_wakeup() for details).
-+	 *
-+	 * Adding to the wait queue will fail if there is already a priority
-+	 * waiter, i.e. if the eventfd is associated with another irqfd (in any
-+	 * VM).  Note, kvm_irqfd_deassign() waits for all in-flight shutdown
-+	 * jobs to complete, i.e. ensures the irqfd has been removed from the
-+	 * eventfd's waitqueue before returning to userspace.
-+	 */
- 	spin_release(&kvm->irqfds.lock.dep_map, _RET_IP_);
--	irqfd->wait.flags |= WQ_FLAG_EXCLUSIVE;
--	add_wait_queue_priority(wqh, &irqfd->wait);
-+	p->ret = add_wait_queue_priority_exclusive(wqh, &irqfd->wait);
- 	spin_acquire(&kvm->irqfds.lock.dep_map, 0, 0, _RET_IP_);
-+	if (p->ret)
-+		goto out;
- 
-+	list_for_each_entry(tmp, &kvm->irqfds.items, list) {
-+		if (irqfd->eventfd != tmp->eventfd)
-+			continue;
-+
-+		WARN_ON_ONCE(1);
-+		/* This fd is used for another irq already. */
-+		p->ret = -EBUSY;
-+		goto out;
-+	}
-+
-+	list_add_tail(&irqfd->list, &kvm->irqfds.items);
-+
-+out:
- 	spin_unlock_irq(&kvm->irqfds.lock);
--
--	p->ret = 0;
- }
- 
- #if IS_ENABLED(CONFIG_HAVE_KVM_IRQ_BYPASS)
--- 
-2.49.0.1151.ga128411c76-goog
+The bug is reproducible easily by setting dom0_max_vcpus to less than =
+your physical core count and running xenpm start 1. See if there are any =
+cores that only display C0 and C1 C-states.
 
+Alex
+
+
+--Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"overflow-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;">I think I=E2=80=99=
+ve just uncovered a rather nasty bug in the xen_acpi_processor driver in =
+dom0. If the vcpu count in dom0 is set to anything other than the exact =
+number of physical cores, the xen_acpi_processor kernel driver will fail =
+to upload the C-state information for those cores to Xen, resulting in =
+Xen never knowing about the C-states, which significantly impacts =
+battery life on mobile platforms.<br><div><br></div><div>This can impact =
+users who set dom0_max_vcpus to a lesser value than their number of CPU =
+cores, but is particularly relevant if SMT is enabled in firmware but =
+disabled in Xen. As the cores are disabled manually by Xen, dom0 will =
+only see the number of active cores; but as this is a lesser number of =
+cores than Xen knows of it will mismatch and half the cores will not see =
+C-state information.</div><div><br></div><div>The bug is reproducible =
+easily by setting&nbsp;<font color=3D"#000000"><span style=3D"caret-color:=
+ rgb(0, 0, 0);">dom0_max_vcpus to less than your physical core count and =
+running xenpm start 1. See if there are any cores that only display C0 =
+and C1 =
+C-states.</span></font></div><div><br></div><div>Alex</div><div><br></div>=
+</body></html>=
+
+--Apple-Mail=_CDA98334-DDE1-4A16-9E49-F8DC6B31E240--
 
