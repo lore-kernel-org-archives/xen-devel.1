@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4A2C54F30
-	for <xen-devel@archiver.kernel.org>; Fri, 23 May 2025 08:22:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.995380.1377830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A329C54ED0
+	for <xen-devel@archiver.kernel.org>; Fri, 23 May 2025 09:24:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.995492.1377868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uINfd-0003FD-Ts; Fri, 23 May 2025 08:22:25 +0000
+	id 1uIOdI-0004Qq-OQ; Fri, 23 May 2025 09:24:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 995380.1377830; Fri, 23 May 2025 08:22:25 +0000
+Received: by outflank-mailman (output) from mailman id 995492.1377868; Fri, 23 May 2025 09:24:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uINfd-0003EU-P3; Fri, 23 May 2025 08:22:25 +0000
-Received: by outflank-mailman (input) for mailman id 995380;
- Fri, 23 May 2025 08:22:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uIOdI-0004Qj-LF; Fri, 23 May 2025 09:24:04 +0000
+Received: by outflank-mailman (input) for mailman id 995492;
+ Fri, 23 May 2025 09:24:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GSxL=YH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uINfd-0003CJ-3G
- for xen-devel@lists.xenproject.org; Fri, 23 May 2025 08:22:25 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0e303ee5-37af-11f0-a2fb-13f23c93f187;
- Fri, 23 May 2025 10:22:24 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cfebc343dso68743475e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 23 May 2025 01:22:24 -0700 (PDT)
+ id 1uIOdH-0004Qd-9y
+ for xen-devel@lists.xenproject.org; Fri, 23 May 2025 09:24:03 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a8f110c3-37b7-11f0-b892-0df219b8e170;
+ Fri, 23 May 2025 11:24:00 +0200 (CEST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43ede096d73so65694955e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 23 May 2025 02:24:00 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-447f3dd99f9sm131732165e9.40.2025.05.23.01.22.23
+ 5b1f17b1804b1-44ab793a7d5sm45063185e9.1.2025.05.23.02.23.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 01:22:23 -0700 (PDT)
+ Fri, 23 May 2025 02:23:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,167 +47,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e303ee5-37af-11f0-a2fb-13f23c93f187
+X-Inumbo-ID: a8f110c3-37b7-11f0-b892-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1747988544; x=1748593344; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=b9OhwSh2sFBPinPT7yDdzAD3rTaDbrlVbBuLtIBte3k=;
-        b=ceLdLcdf1ycaNA83FNfFso/brLkJPC71VSciLYuaDbdF8FNap5lfx8uxk2ikgjeU84
-         N3JydetGlK8O5KLxznxVBtm0VdTG23LNkwY60Pz/lZDbSf3qpSKJWtnpdYKUw8SGZxJt
-         9h+lmborOXtB2JqGSuoSoN+wNlYCGx4FzEfo0=
+        d=citrix.com; s=google; t=1747992240; x=1748597040; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=IZJNTmOBPKYosd+xCBlKV6aSMJxN28zdgo/kHzmHxHA=;
+        b=GckQR0feSKl0EbsEo9P2dxlVQR714X4F5Ybt6U5rc9s2NE4fOUsv5Jxbi2DR9MYjP3
+         ZlR3eg7hk9eceu+r7djsaJUaESe4He4CgRmRT7Ds7f93W1RYcLNfewDQu+KSoK7juAOO
+         P8LMOTBsMUEqQHWlfeb8pfK4oGmg0rKT7Nmjo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747988544; x=1748593344;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=b9OhwSh2sFBPinPT7yDdzAD3rTaDbrlVbBuLtIBte3k=;
-        b=nqIuMwWo2J/r4q6r1HINXwLn8/GKNcWc+40tPxSy8o/PicP5U6AfEoGgejidEvtwtM
-         y8Fyt/9zE+ziWEQsQRtPO91qveGzmUYpWjq0ACLJLd/jyKqjRIQkHCfM3slJCeodzgsF
-         8nm6J/idKnerdOe113UCF0b/fCfHqaqbxQmRxqHgWSi/3VvTJDTO8YYL6/xHFpvP6vIH
-         P8hAiHGgNEYKmv66tgOS/tDlnS0y3friX2KqF29YFf0w5Ev4TL+DWep1iKgLnZ2MYTuY
-         hRTgJAHN7kuLc4UX9LbTvnpgCP1dEMCKVhWoUffoGS1rCkKjGl7kh/EoBM/sL+hXrpRD
-         ALnA==
-X-Gm-Message-State: AOJu0Yz4Y8Nv5/4yc6Fo6/gc1mgjXdvrZbHfxI3qn66kVofywSHVjE+Z
-	MZuybqdwR4j4P0aiExqAZZcxuvau77F/u13a0MxFho6FYhXWVQJLHdOJMZft9xz9EqUG3gZlGBX
-	4xA/p
-X-Gm-Gg: ASbGncvi0sQ+JzfXhg2sul2svTtYZdk1U4+aFQWYHN4oafBXOZvMZkU2vGtmrb8XsHw
-	5EIx8O4mY1hIgSE913ujLBaDvCtQVdla8AxDRHtEoz1AcvhVazw6cc2MML6WxnaXSJDWC/UpsSx
-	MxHpskf0L21x3t/9gJrfTP7wLN/fB5SDTS7AZ6rSmRLVfmDCYlBvsbzRTRptbaa5MfJYUYEPFFw
-	1ssPSvfr6TUQz4BQTyUJ7CpoaUIgBESt9KGRWz6fPf6DRzCKcf7k02pDJUXz9M6mFmfvEpIeoUT
-	iEcebj/01MNMRrOUJ6g6C2PndnShlZzjGCDLNPKglmrAV8i58A9qpnVz9r8Lz9vTUbTNOfF0aDJ
-	djIa09Ned3d7zRP4kpu8=
-X-Google-Smtp-Source: AGHT+IENE8YAu5CgQBp8ad8E9VUooRZ67jjAeumiY9NWwvm4KNgrBaatHEO+EhUp5AHbWMiYfXkIsg==
-X-Received: by 2002:a05:600c:a378:b0:442:f482:c432 with SMTP id 5b1f17b1804b1-442fd64e32amr260346245e9.18.1747988543765;
-        Fri, 23 May 2025 01:22:23 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+        d=1e100.net; s=20230601; t=1747992240; x=1748597040;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IZJNTmOBPKYosd+xCBlKV6aSMJxN28zdgo/kHzmHxHA=;
+        b=k3yS/sXQUSpFsLbn8DMYpLNgmJ6OkdzrSsNXktp2J7uI1OFsfXA3XfpoAXUhj2dM79
+         ismijvF2Bfkb6VIw+IRjwgP6PHqsgrlgFFFY3c0BzV/H3KY/45/JuS4KDx7KZxSMDF8z
+         2OExd/l4OWpLZtlPsfjCJDSXenam722E97qU6ZNzUswAAoKoE+f1niR/SVrX84lFN7zH
+         gnBbUrt5iRwgrH2cqXgGYyMImn3fiNub7QMlOPi1kwWxtyf+dTdew0s59ZKAGdOMKZeT
+         WP6uZxxZTGogL1HpNjEa92jMyvn6N7wr6mMqZQm8e5duJhY8AVwpw8U/eGTPJgMlaZOy
+         viDQ==
+X-Gm-Message-State: AOJu0YxsPh8Qb+r1g6fAMdCrfE4skSIxLXSWMkfDpYGltGOT83o9S/lx
+	0IxzvEB8oHMrxMxoG24QsJK/FksOnS3s41XeuwHahPYJ6Y1qglX8H08bqNcJ5XeNexS/OFyqgfA
+	yh4g4
+X-Gm-Gg: ASbGncumasBf6g+8LiOw3RLD5Mh+Sh+whhei2zLwxyAFeiFa6aYmUGB9F/D0lKCFvVa
+	lTIqsnH+guZeXioG7xM/noOrE6pTqRTeS/mNfi/k+8spgm/wCzsg6sJTN/vM4DWe/FCk5h3j+Hr
+	D+bnobDoMWodB66luXFgWXykWAEapzRnKU8PKKP/vhXQ9c5iANjpRD4psbZXZOVJbuXLXrDBKgy
+	B7u9umGng/FzZukPHmRxCsInXBoz+D7N5fV+hiaQroDFcR8ZXNlI39FQAmguHYNuW6C9LN2AH3+
+	YS1Fo+ZROeiy/CJrgkAW7BHX5oRbPYxH2M2kJPTEk3tU6fbbN7Yct1/rv9NzthDQ/yeocDCv5HN
+	wMeGPQ1398XrWH23NtbMMXBc8
+X-Google-Smtp-Source: AGHT+IGWQQyFxCg8OVdmZSzMnxZAnpvNtcD2gChq/YGOm+N986cciKgVkG9Cy2HbQFiotccAMNUWOA==
+X-Received: by 2002:a05:600c:4688:b0:442:f4a3:8c5c with SMTP id 5b1f17b1804b1-44b6d2cc4a9mr33037755e9.10.1747992239640;
+        Fri, 23 May 2025 02:23:59 -0700 (PDT)
+Date: Fri, 23 May 2025 11:23:58 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 2/3] x86/traps: split code to dump execution state to a separate helper
-Date: Fri, 23 May 2025 10:21:34 +0200
-Message-ID: <20250523082135.18088-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250523082135.18088-1-roger.pau@citrix.com>
-References: <20250523082135.18088-1-roger.pau@citrix.com>
+Subject: Re: [PATCH] iommu/amd: Remove dead non-atomic update checking
+Message-ID: <aDA-rq89rWodAzvE@macbook.local>
+References: <761f464ae56a449291e38724a1f823606f3ba9d0.1747924653.git.teddy.astie@vates.tech>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <761f464ae56a449291e38724a1f823606f3ba9d0.1747924653.git.teddy.astie@vates.tech>
 
-Split the code that triggers remote CPUs to dump stacks into a separate
-function.  Also introduce a parameter that can be set by the caller of the
-newly introduced function to force CPUs to dump the full stack, rather than
-just dumping the current function name.
+On Thu, May 22, 2025 at 03:44:12PM +0000, Teddy Astie wrote:
+> When updating a DTE, amd_iommu_setup_domain_device checks if the update had been
+> non-atomic (i.e rc > 0) and eventually throws a warning but since [1], rc can
+> no longer be positive, making this check never taken.
+> 
+> [1] x86/iommu: remove non-CX16 logic from DMA remapping
+>     https://gitlab.com/xen-project/xen/-/commit/3fc44151d83d3d63320036bcf06634dfbebe1ff3
 
-No functional change intended.
+I would avoid putting links to commits, and just reference the commit
+by hash:
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - Use parameter opt_show_all variable.
----
- xen/arch/x86/include/asm/processor.h |  1 +
- xen/arch/x86/traps.c                 | 63 ++++++++++++++++++----------
- 2 files changed, 41 insertions(+), 23 deletions(-)
+"When updating a DTE, amd_iommu_setup_domain_device() would check if
+the update had been non-atomic (i.e rc > 0) and throw a warning if
+such non-atomic update could be dangerous.  However since commit
+3fc44151d83d, rc can no longer be positive, making this branch
+unreachable code.
 
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index eacd425c5350..10d8078cc1ca 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -371,6 +371,7 @@ void show_registers(const struct cpu_user_regs *regs);
- #define dump_execution_state() run_in_exception_handler(show_execution_state)
- void show_page_walk(unsigned long addr);
- void noreturn fatal_trap(const struct cpu_user_regs *regs, bool show_remote);
-+void show_execution_state_nmi(const cpumask_t *mask, bool show_all);
- 
- extern void mtrr_ap_init(void);
- extern void mtrr_bp_init(void);
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 22f20629327d..559bb1d2029b 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -734,6 +734,43 @@ static int cf_check nmi_show_execution_state(
-     return 1;
- }
- 
-+void show_execution_state_nmi(const cpumask_t *mask, bool show_all)
-+{
-+    unsigned int msecs, pending;
-+
-+    /*
-+     * Overwrite the global variable, caller is expected to panic after having
-+     * dumped the execution state.
-+     */
-+    if ( show_all )
-+        opt_show_all = true;
-+
-+    watchdog_disable();
-+    console_start_sync();
-+
-+    cpumask_copy(&show_state_mask, mask);
-+    set_nmi_callback(nmi_show_execution_state);
-+    send_IPI_mask(mask, APIC_DM_NMI);
-+
-+    /* Wait at most 10ms for some other CPU to respond. */
-+    msecs = 10;
-+    pending = cpumask_weight(&show_state_mask);
-+    while ( pending && msecs-- )
-+    {
-+        unsigned int left;
-+
-+        mdelay(1);
-+        left = cpumask_weight(&show_state_mask);
-+        if ( left < pending )
-+        {
-+            pending = left;
-+            msecs = 10;
-+        }
-+    }
-+    if ( pending )
-+        printk("Non-responding CPUs: {%*pbl}\n", CPUMASK_PR(&show_state_mask));
-+}
-+
- const char *vector_name(unsigned int vec)
- {
-     static const char names[][4] = {
-@@ -780,31 +817,11 @@ void fatal_trap(const struct cpu_user_regs *regs, bool show_remote)
- 
-         if ( show_remote )
-         {
--            unsigned int msecs, pending;
-+            cpumask_t *scratch = this_cpu(scratch_cpumask);
- 
--            cpumask_andnot(&show_state_mask, &cpu_online_map,
-+            cpumask_andnot(scratch, &cpu_online_map,
-                            cpumask_of(smp_processor_id()));
--            set_nmi_callback(nmi_show_execution_state);
--            smp_send_nmi_allbutself();
--
--            /* Wait at most 10ms for some other CPU to respond. */
--            msecs = 10;
--            pending = cpumask_weight(&show_state_mask);
--            while ( pending && msecs-- )
--            {
--                unsigned int left;
--
--                mdelay(1);
--                left = cpumask_weight(&show_state_mask);
--                if ( left < pending )
--                {
--                    pending = left;
--                    msecs = 10;
--                }
--            }
--            if ( pending )
--                printk("Non-responding CPUs: {%*pbl}\n",
--                       CPUMASK_PR(&show_state_mask));
-+            show_execution_state_nmi(scratch, false);
-         }
-     }
- 
--- 
-2.49.0
+No functional change intended."
 
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> ---
+>  xen/drivers/passthrough/amd/iommu_map.c     |  4 +---
+>  xen/drivers/passthrough/amd/pci_amd_iommu.c | 18 ------------------
+>  2 files changed, 1 insertion(+), 21 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+> index dde393645a..07f405ed63 100644
+> --- a/xen/drivers/passthrough/amd/iommu_map.c
+> +++ b/xen/drivers/passthrough/amd/iommu_map.c
+> @@ -157,9 +157,7 @@ static void set_iommu_ptes_present(unsigned long pt_mfn,
+>  /*
+>   * This function returns
+>   * - -errno for errors,
+> - * - 0 for a successful update, atomic when necessary
+> - * - 1 for a successful but non-atomic update, which may need to be warned
+> - *   about by the caller.
+> + * - 0 for a successful update
+
+I think you can remove the comment completely.  Returning -errno or 0
+is the expected behavior.  We just add those comments when functions
+diverge from the classic -errno/0 return codes.
+
+>   */
+>  int amd_iommu_set_root_page_table(struct amd_iommu_dte *dte,
+>                                    uint64_t root_ptr, uint16_t domain_id,
+> diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+> index d00697edb3..409752ffc8 100644
+> --- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
+> +++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+> @@ -225,24 +225,6 @@ static int __must_check amd_iommu_setup_domain_device(
+>              spin_unlock_irqrestore(&iommu->lock, flags);
+>              return rc;
+>          }
+
+You might want to also adjust the previous if condition (out of
+context here) so it's if ( rc ) rather than rc < 0.
+
+Thanks, Roger.
 
