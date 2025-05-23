@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BFEAC54ED0
-	for <xen-devel@archiver.kernel.org>; Fri, 23 May 2025 08:08:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.995326.1377808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F77C54ED0
+	for <xen-devel@archiver.kernel.org>; Fri, 23 May 2025 08:22:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.995382.1377855 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uINSA-0000ON-GW; Fri, 23 May 2025 08:08:30 +0000
+	id 1uINfi-0003u3-Gg; Fri, 23 May 2025 08:22:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 995326.1377808; Fri, 23 May 2025 08:08:30 +0000
+Received: by outflank-mailman (output) from mailman id 995382.1377855; Fri, 23 May 2025 08:22:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uINSA-0000OG-Dy; Fri, 23 May 2025 08:08:30 +0000
-Received: by outflank-mailman (input) for mailman id 995326;
- Fri, 23 May 2025 07:23:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uINfi-0003tq-DC; Fri, 23 May 2025 08:22:30 +0000
+Received: by outflank-mailman (input) for mailman id 995382;
+ Fri, 23 May 2025 08:22:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XwYT=YH=amd.com=Sairaj.ArunKodilkar@srs-se1.protection.inumbo.net>)
- id 1uIMki-00034r-03
- for xen-devel@lists.xenproject.org; Fri, 23 May 2025 07:23:36 +0000
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20611.outbound.protection.outlook.com
- [2a01:111:f403:2408::611])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d56d087b-37a6-11f0-a2fb-13f23c93f187;
- Fri, 23 May 2025 09:23:34 +0200 (CEST)
-Received: from BN7PR06CA0069.namprd06.prod.outlook.com (2603:10b6:408:34::46)
- by IA1PR12MB6532.namprd12.prod.outlook.com (2603:10b6:208:3a3::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.33; Fri, 23 May
- 2025 07:23:29 +0000
-Received: from BN1PEPF0000468B.namprd05.prod.outlook.com
- (2603:10b6:408:34:cafe::db) by BN7PR06CA0069.outlook.office365.com
- (2603:10b6:408:34::46) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.30 via Frontend Transport; Fri,
- 23 May 2025 07:23:29 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF0000468B.mail.protection.outlook.com (10.167.243.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8769.18 via Frontend Transport; Fri, 23 May 2025 07:23:29 +0000
-Received: from [10.252.206.76] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
- 2025 02:23:22 -0500
+ <SRS0=GSxL=YH=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1uINfg-0003rz-MR
+ for xen-devel@lists.xenproject.org; Fri, 23 May 2025 08:22:28 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0d846f84-37af-11f0-b892-0df219b8e170;
+ Fri, 23 May 2025 10:22:23 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a366843fa6so4070795f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 23 May 2025 01:22:23 -0700 (PDT)
+Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-447f1825457sm137419755e9.1.2025.05.23.01.22.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 May 2025 01:22:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,167 +47,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d56d087b-37a6-11f0-a2fb-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZgplzmR2ZWgceVGpqNh64nahYk2AIcXIKmZ6+qNqxQEBYbzDpXf5SzZ1+rG/4y0z/LmT9cKmBOfSV6dMMy3XHkfuXjcfqykKAClhP2QPI8gWfe+PLWplz9njJSj2Ccr+2rTIwpy8M0YfcStzXb1tZHQJWXEI2zfcMuLIHwl6UrWPyn2JTgn0Ow6Ku85svZ6TZx74NmMiBryTmwew6ZqTWYuilGVz/vsi7Trthy9hCwNpL3eL9xQ8toyFE6drqHTeEdMa0s8TwqF/i+QpTPWgYXzwBhSJ3aw8zjN0GAZRjhYJtQlGPVqbQdmjEtcBgJZe1a0hzPDGWFCFsJ9B6PxntQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jJudB0MHTWMo1Cv70g5UMQe8b9A5acgzYPfE7bqls9E=;
- b=jaGO6e+2ZRPlM4L7SP8RzOdmCG8r050In+1YjvYPosQBdHpeE4ABP4E0vlJpiUgphuFxPw+Msq9aF0O2EbqdfDTkdwaZqpjapubS4q2QzFIDYZeRBmfuWEoyBk0JtIO8Dv4qExkiv28UTyae7lpboHkySg7m8YoU1wUNh0gr342xMyAKEnMb3ARtIwhjfRGhNafVLTWgyfioHWPOwm2C44neGVOscL+WHMXcprCLjHbfLA8VtsaZsBC+GrUGPL2vnldsrgHXkEmdO1TYciG4w94H9CKlbHGsTYkRa9iKpmvjfAsPw2vgPy2L7839LdiQ5SQWKL2x3c91CdrF3iw/1A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=google.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJudB0MHTWMo1Cv70g5UMQe8b9A5acgzYPfE7bqls9E=;
- b=rVHzZIAyTBwPCfK66Hbe9XMeJK7HDjV25lrtlra8+ygkxUZlXQCWYMeUT/Y0JNoQOWFX56PVSE1QzIs5jox/VaO3umf5IdVJ2zS54pDFULFix5sEYqakwvJlNKeJAC/kVj3tcbn/cMN0Dshmi3+Zfdrko85Tv402l281375eoZs=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <2c52daad-0b64-48a9-8e73-d1aba977993b@amd.com>
-Date: Fri, 23 May 2025 12:53:19 +0530
+X-Inumbo-ID: 0d846f84-37af-11f0-b892-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1747988543; x=1748593343; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GB5SoZGsyV9907UeSThTMXgLvSHWtuKbvETz0zUwdfc=;
+        b=A14LvtI7DpPJJ60x2Ko40ABXp1hR0AVwigsqyAFNQh0u8iwam6En6EJMfiP9rraYXO
+         5x4SKfX10CdJhZNGrQjpcPYt4NtcdQkLtP2WWfMomrpeA3QXzEwKkCZeB4F1tx+saHQC
+         PVC9Mp52p6RausvSEPvjIBORjiGupRE744HHM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747988543; x=1748593343;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=GB5SoZGsyV9907UeSThTMXgLvSHWtuKbvETz0zUwdfc=;
+        b=jZYtxJ0zZoPLTY1+CJdi3WGCdbN+KnsM/8TFA8ecxLNR7lAwYXoYRGVwu+KLT7/Wkg
+         cCQ3cy+EHuLYN/8kfvgJE0Hwh/vuxH83Si1/VXzN7BzNHyV49AghW5X2fqH3CbqQdICY
+         Zfr3JMrfBLopd08zjfHf7ynS7XBpK31PR6fMKYSfZnU/DBmsm5uUS35KtXTHY4LcJhZV
+         gXzWvmlvHwMj95jZzZHwZWCeGJsRU+ysmvmx0NHJECa5jtx5Q1RzTICS8akefWStBQaa
+         69DYv8x714IzsIj78pGWSjhStWdEH2qGyJofxw/ZyBQYPLBMue/3BwGqGa3o+vbBZ5Nn
+         HBjA==
+X-Gm-Message-State: AOJu0Yx2yyZZRzFoQvUARXk8T0w+jVOfRmDbK6LbD+pn1IqrYJwA+3cc
+	w3gLVKkBcqg9w5R5RlBkeHdN+ny/+cf2/pjfVI+4DPsv1K0XOX5zglC1cihWWkDbub+w8k4k463
+	Itkxu
+X-Gm-Gg: ASbGnctnrDxkUh/cFqW+VrxsRJRTj51FEl05M6pUfXXj1Wv7ygBMYpBg+mB/YovhYFW
+	wGvqDt2Z93kGJhevhqWs0HX3R3Zv7CBWpDFqL9eushh62+0a+vZV5jlbL2frhb/b/j1IXOJvBmm
+	N9Q5Jexbvcpnih+tFI5MkfwHv1gsSqCvCMasarne9HCaY//dHOqjwiw0hFMV478NSlAoDMOKq/+
+	cBDRXYbtbaWPqU7ouNF3j5Lz8kxtXAFGXlNA4VbhPVqKrakHCzZS/FHoeODNc9z9LZDrJd44QRV
+	wUyGLusAPH1Hn7OwtC8LSqBpt4zUffUTgAQWAnjmNx+cJdNOeNAk5fLDrS/Agz5dE05QW5ycvFF
+	smiF3kt6vM6dV7uvomD1xftljg2gV6A==
+X-Google-Smtp-Source: AGHT+IHZldEWad0nbpScWJrwcpZvfgjnSRtHv53NQ5qCJ1OYi5pr2d/nl8GnYpFZRAEmYzDiB3J/lQ==
+X-Received: by 2002:a5d:5f46:0:b0:3a0:b816:5a44 with SMTP id ffacd0b85a97d-3a35fe964dcmr25515836f8f.35.1747988542734;
+        Fri, 23 May 2025 01:22:22 -0700 (PDT)
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 1/3] x86/boot: print CPU and APIC ID in bring up failure
+Date: Fri, 23 May 2025 10:21:33 +0200
+Message-ID: <20250523082135.18088-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250523082135.18088-1-roger.pau@citrix.com>
+References: <20250523082135.18088-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 13/13] KVM: selftests: Add a KVM_IRQFD test to verify
- uniqueness requirements
-To: Sean Christopherson <seanjc@google.com>, "K. Y. Srinivasan"
-	<kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu
-	<wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Juergen Gross
-	<jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Paolo Bonzini
-	<pbonzini@redhat.com>, Ingo Molnar <mingo@redhat.com>, Peter Zijlstra
-	<peterz@infradead.org>, Juri Lelli <juri.lelli@redhat.com>, Vincent Guittot
-	<vincent.guittot@linaro.org>, Shuah Khan <shuah@kernel.org>, Marc Zyngier
-	<maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>
-CC: <linux-kernel@vger.kernel.org>, <linux-hyperv@vger.kernel.org>,
-	<xen-devel@lists.xenproject.org>, <kvm@vger.kernel.org>,
-	<linux-kselftest@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<kvmarm@lists.linux.dev>, K Prateek Nayak <kprateek.nayak@amd.com>, "David
- Matlack" <dmatlack@google.com>
-References: <20250522235223.3178519-1-seanjc@google.com>
- <20250522235223.3178519-14-seanjc@google.com>
-Content-Language: en-US
-From: Sairaj Kodilkar <sarunkod@amd.com>
-In-Reply-To: <20250522235223.3178519-14-seanjc@google.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468B:EE_|IA1PR12MB6532:EE_
-X-MS-Office365-Filtering-Correlation-Id: 09cdb81f-cf79-4bc0-f097-08dd99cab76c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024|7416014|921020;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?SVZLVE8xang3VndRdm9OanJ6a2pUS1QwMUVHVFJwTkhjRWhDWnlzMWVJVnlI?=
- =?utf-8?B?WXBHSklxbzEweFlvY3plNkMySFV2N3E5K25kbENoRnRkRXkrVmF6RHF1ODNU?=
- =?utf-8?B?S1pOMnVhOElpNkQ5dFFra011aEFtUTE0dmJIa1piNEE0NmdDeUZEejdrZjA3?=
- =?utf-8?B?U05YZFdRaXE1TEtBN3EyZEJVWUdEOUMzOVoyRGdpaUlTdGF2YXhTUU9KUTl3?=
- =?utf-8?B?cVlxaXpkajVxVlBLb0tTZGNaeS9qWlNFcXlPbnRUUUtLUVF4SFI4N0pIR0sz?=
- =?utf-8?B?Wlp2MHhBRG5RaVNzVmhKeDhEV3Z5M0FPNjkwZk5ZN210M2ljMlhNMWxDWldr?=
- =?utf-8?B?T3psVy9rNUcraEtlK1N6dUozUjR4a3ZCcU5OTFpCZk5GT3MrL3d6aUZwNHpH?=
- =?utf-8?B?eEswZXFvTk0ySVd6dWlPZ0ZwNmIyaUh0QTBFaTM4Q0dZU0hFNmtIMmc2clJ0?=
- =?utf-8?B?bEREZUI1N1EyS3JzTkRnWDVQOUQ0aE93OENsbHliaUloN0cwSUVPTTc2OGpF?=
- =?utf-8?B?WUdMcmtHTGtiK05DYklaZ3JGcWtmTzFBMnhSdDhKTEhscHBvQ3JVWncxb0li?=
- =?utf-8?B?c2dZRGJ5M1g0Ym85TXhzVTlJREhaWldvR3ZraElmYnpTSkxzRDhJZ2t2amZ1?=
- =?utf-8?B?bS9DcEE3YWtBcTBMem1UNUpFeDNuYml4WjJRdGlTSDk1dlVDdllvZkxyd0dM?=
- =?utf-8?B?RWNEWkc0UTJWZ0tQa01aUlV3dUt2cDNxMVZZREN1WFVhdTV2VmlEUjA3c3J1?=
- =?utf-8?B?M2xxWFFNVGE4K00xQXRaUUhQSkpXK1FzQm5nVGY0aHdZcUIydFlBa1R1ZlJM?=
- =?utf-8?B?UGlPbWlnR2M5WEtPOFpZeXc0Z0tPYzJxTEF4bUtYWEhaN2JWV25ocks3SERH?=
- =?utf-8?B?cStsTlRSSnpoYkxRRnQzcHdwa1Z3amhyV3N3dGhweWlVQ1ByUjFVTUkxYjRQ?=
- =?utf-8?B?eEx0UW9PYW9VTFcva2JLcXk2dnJRd0tCb0djVHVhTHpJdkp3cVE2N1RoUnQv?=
- =?utf-8?B?dFFDTy9wUHYrZ1Z6RW9hdGMwbE9XZFhmTUZtQUNTOVF5TWJwTm9LQmVwUk1Y?=
- =?utf-8?B?ZWV6UWdlMGtkWFdSSUMrb2FYYWJlZDV3TUxnWkhuR21DU1MyMGJldEJ3K0I5?=
- =?utf-8?B?VS95WVVudjcxUi96NFhCR0FDQ3Z2bGswUEd4SWhGcGM2Z1BWK24rend6ODBk?=
- =?utf-8?B?MkM1YlVIdzk5Um5KaTM4QVFsMkZEVUk4d0ZTWUNsY1pDVzlVTDNLSmJIZ0FD?=
- =?utf-8?B?dUI0alN1aU5ieTUrTGFlL0FIUXJ1VFZXc1hkYkZNOTJYWHRMdk1vZ0FpajVs?=
- =?utf-8?B?L1dZU2JvZW1CNUVkaS8yWUhTWmVVNHNRVVpnbkt3bC9hb3NYbUNmQWovZU91?=
- =?utf-8?B?V0k3bERlRksxcHcyU3d6ZklqTjUyWWFXOTAxOW5DMTBOU2NGNkxUa2prTFhN?=
- =?utf-8?B?blFHbWNyOHVKVHZqczlQdTFaWUNxQ3BVUFAzazlreUJOeGlCN0xacTIzY3dD?=
- =?utf-8?B?NDlydEZuZjhMajltRkx4dnNqb1RZbVJkRlAxMFJHN0hEWTlXYlJ1RmhWVmlW?=
- =?utf-8?B?d0ZOaEJXbVFHM3hjYmJOdVZUaWQvN1ovN2N1M2RUanNBQWc3c0ViYTBza3FH?=
- =?utf-8?B?WDNrZHNPbytRSmRDaGNuNVFOQzdJdDJMWm9lM0xiRS9oZXEreU5FRHZiWjl4?=
- =?utf-8?B?TmRQQXJkZkl3NkswTlNmVHA3cXFsdVNyazc0VzdVZ0Z3Y1ZDMFU0NjZHdG1D?=
- =?utf-8?B?YTZJTzJxa1dFaDB1UkJtNk1LTkxqZnJDWFdhZ1hHakYrMkN2UnlnQlNvaDVt?=
- =?utf-8?B?cmxwMUljdlYvbk55S3NmaWlDUW9ac3lBMkM0ZEZqWEJPUmJyTXkwRGUwMlZG?=
- =?utf-8?B?aTI1RFVOUUlETmI5eEt4QW1ieHFNcGI1cEx6czZ6TVpNUWMraFJqdDNvL0tp?=
- =?utf-8?B?emJHSDZYb0ZxR2NtSXNCbXNBZVhLR0RzaXJNa3UreEcxSWJwMENqamQrY243?=
- =?utf-8?B?Mi9VdVR6SjhRUnI2cmRsMU9MRXRreGJGaFAzRFljL2xITktoUXQrcVNqWXZ1?=
- =?utf-8?B?NUppWWpxWVRPdXRQcWxJY2YyRUt1cytBVEpjZz09?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(7416014)(921020);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2025 07:23:29.5870
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09cdb81f-cf79-4bc0-f097-08dd99cab76c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF0000468B.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6532
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 5/23/2025 5:22 AM, Sean Christopherson wrote:
+Print the CPU and APIC ID that fails to respond to the init sequence, or
+that didn't manage to reach the "callin" state.  Expand a bit the printed
+error messages.  Otherwise the "Not responding." message is not easy to
+understand by users.
 
-> +
-> +int main(int argc, char *argv[])
-> +{
-> +	pthread_t racing_thread;
-> +	int r, i;
-> +
-> +	/* Create "full" VMs, as KVM_IRQFD requires an in-kernel IRQ chip. */
-> +	vm1 = vm_create(1);
-> +	vm2 = vm_create(1);
-> +
-> +	WRITE_ONCE(__eventfd, kvm_new_eventfd());
-> +
-> +	kvm_irqfd(vm1, 10, __eventfd, 0);
-> +
-> +	r = __kvm_irqfd(vm1, 11, __eventfd, 0);
-> +	TEST_ASSERT(r && errno == EBUSY,
-> +		    "Wanted EBUSY, r = %d, errno = %d", r, errno);
-> +
-> +	r = __kvm_irqfd(vm2, 12, __eventfd, 0);
-> +	TEST_ASSERT(r && errno == EBUSY,
-> +		    "Wanted EBUSY, r = %d, errno = %d", r, errno);
-> +
-> +	kvm_irqfd(vm1, 11, READ_ONCE(__eventfd), KVM_IRQFD_FLAG_DEASSIGN);
-> +	kvm_irqfd(vm1, 12, READ_ONCE(__eventfd), KVM_IRQFD_FLAG_DEASSIGN);
-> +	kvm_irqfd(vm1, 13, READ_ONCE(__eventfd), KVM_IRQFD_FLAG_DEASSIGN);
-> +	kvm_irqfd(vm1, 14, READ_ONCE(__eventfd), KVM_IRQFD_FLAG_DEASSIGN);
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - Adjust format string.
 
-Hi Sean,
-I dont see any allocation for the GSI 13 and 14..
-Is there any reason for the deassigning these two GSIs ?
+Changes since v1:
+ - Also print APIC ID.
+---
+ xen/arch/x86/smpboot.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Regards
-Sairaj Kodilkar
-
-> +	kvm_irqfd(vm1, 10, READ_ONCE(__eventfd), KVM_IRQFD_FLAG_DEASSIGN);
-> +
-> +	close(__eventfd);
-> +
-> +	pthread_create(&racing_thread, NULL, secondary_irqfd_juggler, vm2);
-> +
-> +	for (i = 0; i < 10000; i++) {
-> +		WRITE_ONCE(__eventfd, kvm_new_eventfd());
-> +
-> +		juggle_eventfd_primary(vm1, __eventfd);
-> +		juggle_eventfd_primary(vm2, __eventfd);
-> +		close(__eventfd);
-> +	}
-> +
-> +	WRITE_ONCE(done, true);
-> +	pthread_join(racing_thread, NULL);
-> +}
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 0189d6c332a4..b5dcc77bd574 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -618,10 +618,12 @@ static int do_boot_cpu(int apicid, int cpu)
+             smp_mb();
+             if ( bootsym(trampoline_cpu_started) == 0xA5 )
+                 /* trampoline started but...? */
+-                printk("Stuck ??\n");
++                printk("APIC ID %#x (CPU%u) didn't finish start sequence\n",
++                       apicid, cpu);
+             else
+                 /* trampoline code not run */
+-                printk("Not responding.\n");
++                printk("APIC ID %#x (CPU%u) didn't respond to SIPI\n",
++                       apicid, cpu);
+         }
+     }
+ 
+-- 
+2.49.0
 
 
