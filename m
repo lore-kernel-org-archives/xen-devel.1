@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E53C54E90
-	for <xen-devel@archiver.kernel.org>; Sun, 25 May 2025 14:20:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.997152.1378119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2025BC54FB3
+	for <xen-devel@archiver.kernel.org>; Sun, 25 May 2025 14:20:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.997154.1378140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJCD0-0005j2-Jr; Sun, 25 May 2025 14:20:14 +0000
+	id 1uJCD5-0006BW-2Y; Sun, 25 May 2025 14:20:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 997152.1378119; Sun, 25 May 2025 14:20:14 +0000
+Received: by outflank-mailman (output) from mailman id 997154.1378140; Sun, 25 May 2025 14:20:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJCD0-0005iv-HN; Sun, 25 May 2025 14:20:14 +0000
-Received: by outflank-mailman (input) for mailman id 997152;
- Sun, 25 May 2025 14:20:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uJCD4-0006BL-Vq; Sun, 25 May 2025 14:20:18 +0000
+Received: by outflank-mailman (input) for mailman id 997154;
+ Sun, 25 May 2025 14:20:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3gIk=YJ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uJCCz-0005ip-Hn
- for xen-devel@lists.xenproject.org; Sun, 25 May 2025 14:20:13 +0000
+ id 1uJCD4-0006Ah-Dd
+ for xen-devel@lists.xenproject.org; Sun, 25 May 2025 14:20:18 +0000
 Received: from fhigh-b6-smtp.messagingengine.com
  (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c5d187f-3973-11f0-a2fb-13f23c93f187;
- Sun, 25 May 2025 16:20:09 +0200 (CEST)
-Received: from phl-compute-03.internal (phl-compute-03.phl.internal
- [10.202.2.43])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 95F3325400E5;
- Sun, 25 May 2025 10:20:07 -0400 (EDT)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 60c7751d-3973-11f0-b893-0df219b8e170;
+ Sun, 25 May 2025 16:20:16 +0200 (CEST)
+Received: from phl-compute-02.internal (phl-compute-02.phl.internal
+ [10.202.2.42])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 2D70C25400CC;
+ Sun, 25 May 2025 10:20:15 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-03.internal (MEProxy); Sun, 25 May 2025 10:20:07 -0400
+ by phl-compute-02.internal (MEProxy); Sun, 25 May 2025 10:20:15 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 25 May 2025 10:20:06 -0400 (EDT)
+ 25 May 2025 10:20:13 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,87 +47,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c5d187f-3973-11f0-a2fb-13f23c93f187
+X-Inumbo-ID: 60c7751d-3973-11f0-b893-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm3;
-	 t=1748182807; x=1748269207; bh=wmGTDjl+RO4WCPUxF9h21I+ISdQwEoLG
-	xy64Vn/J5Fs=; b=DP+92jO7r/AlGqRiaVKSPMMPT/GekBaqn6zRv5nBX9txNmZl
-	twpC1SftGOpz0vRxjnoXxNKrA7n+mqTNZFzmak2OiIltI5Yfy5wHm6ykDd4dS9h3
-	5/qpB144hJCZVqM2t6376xsjkvde/5bGCNgbGsFd82iU9Ol4HsTsej1Zpf8lind6
-	Bm15BHaUr3VfyTRf0omalSdxZaxp2Jz9dw7U6dkD9ct0Ptmodpid7DjbiLhrowlC
-	+oaf9COPrErBbT9SDbd15wX1rfF4rNV6bnNlq08oT9iBsDNfoFcV2JvkB9iDukGb
-	nDnty0QNFUmwaOHc0nr8s2hz2Y3NnmRWH9eDTQ==
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm3; t=1748182815; x=1748269215; bh=nvcA2fXb3e
+	hl89J7/qQltbJE5fahzJ7yWRoiR9gW1UA=; b=N7xmPgvQPZcNs9lOryH9mVo0H2
+	C/IMDast8elvfpA7z4GK4FC9KtXik2CKq5cQgep7UrNSlve3fom8gGMCsKtTxTXd
+	wKmjdjcW8VQ3104kRF9ldRH63pXNilT4SKDcvj5NuWKVnvtJIEPJiIxpiL6oOuJR
+	oSW/xipriiITpzsF/N0GWi7rnC/EwokrVItsP/gkVlAe4zBt9LS3709/iGmRyram
+	YTsgO6cKMx3D6obygIQa5p3gBcFftAI5jwyVZ3fl9HohxQyAFD0oK8Qu1iFqvbDm
+	BN/wCG/aO2NRCzQdckuB8O3OS9qKwQqQ4ZChLqH1ps2TJg1Z0kQq7DlK1AcQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1748182807; x=1748269207; bh=wmGTDjl+RO4WCPUxF9h21I+ISdQw
-	EoLGxy64Vn/J5Fs=; b=plVsI0LZxEIL7wluJyTo58e+jyd+AU5RZYw5C2bD3hGt
-	0mOJbb0QZohFf3XYqb1yoJD3a/Ki2B1RsHi3066lfJSVpT5ho1rvlFmIGDtNX2OU
-	Mi30uuRZGyhIL0luHAmcOMeLsnXM2/2vOV4PBi8f5XgnTW46K28foQy8cUIHYZgM
-	9wwhPWdImjtNjBq+05YKlu3i8wi/EHw97LNN6y4yqBUv5Cs7ahgasgyo7gfg+D+6
-	oICth3FObJNU91oILq8fgh61gd9aAkeeghPVAwDtJHtbBlzJ5rWFgV0AKAUF4aU+
-	p0UIQNvMTlT8/76pb+GK+HYjbyLcVNLoT04FgOalpw==
-X-ME-Sender: <xms:FyczaORNwsS12Hd12Y_JPkCExbePqFP4WEZpBhvrwQnIReaKojLX1Q>
-    <xme:FyczaDwe3CZHvwId7Us5XRjXSh1Jf6Ce-EuwuXRbMpGP3h15a9HJkoJxOI6hiEnfk
-    N4-LJ3-yUdWUQ>
-X-ME-Received: <xmr:FyczaL0fky3r1CzPf-PWQkmd9icBOjWyLg7JsIwgG630q4iGisjMdVkaMccUFjOjerN8zqCh3p1sPN-DFxPAaz-YIgVnrDyMUl8oZleCAxvo4P_t1gN0>
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1748182815; x=
+	1748269215; bh=nvcA2fXb3ehl89J7/qQltbJE5fahzJ7yWRoiR9gW1UA=; b=X
+	XtrMxeAK/jPJSKa3qy4t50Q+dIe/AwjbOrOR4Fz7gr1zS+NFoIMoLghJrTW1Loyq
+	p38mTYO4/WVQeDjAZ/+iPC5lnXNV39p1OgMVUhOka/Dh4hZ+poign3YXWDGgcJz/
+	kl3Nw7cizV05yon97NW4At+j6LfknwoM0V46iJzlfZeAZNAr0KpPakM18AA+psYw
+	rhhdZTZkffBbfIp+sKfehKMFC6bX8uQ+piF4ZlFwzIVBX5qrTMq3eaPWhlMPXBwc
+	3NK50R6ZazKciR9ocVifr9GdREpp9Kvtk/lmpnx3Ledg2JoePqxUX7wQg3RnvUZj
+	VVCyELCWkb3IIRWEEbzVg==
+X-ME-Sender: <xms:HiczaOjsD7Z9vLQg7u10jytriuN0Zc1A8vu13SIezza__lPygTbT7w>
+    <xme:HiczaPBqdrF8jNxoX-8TxgIRQMt3XfU0BOOCeGM6qA5AwH6TTRFwUlQLRTYN7am4J
+    _aEllm5_i7j_A>
+X-ME-Received: <xmr:HiczaGGAH6DNZG7dnQ1yywLF_PVmxzccYfTZE7YHZBzTQseBbGzO1FU7cxT8j89HD9LC6nW3DzZFdPgZMgS-u2Zhhyt2DCisch0OWclCNQDT9SwpE4XQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddugeekfeculddtuddrgeefvddrtd
     dtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggft
     fghnshhusghstghrihgsvgdpuffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftd
-    dtnecunecujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpefo
-    rghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkh
-    esihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhn
-    peelkefhudelteelleelteetveeffeetffekteetjeehlefggeekleeghefhtdehvdenuc
-    evlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgr
-    rhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtth
-    hopedvpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeigvghnqdguvghvvghlsehl
-    ihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhopehmrghrmhgrrhgvkh
-    esihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:FyczaKC9RwMG-XYxjKDx1sS-VWuI2FKgolqG4KPvmyHs3GgjD0M54Q>
-    <xmx:FyczaHhBraXWRdqUbXp0uC5uKpbqAC7vckXesQB6OSPbb_uP5S7BcQ>
-    <xmx:FyczaGpMHR8txsjjIZAdF3A6w14IHZfDRy-2y817Q71mdQKJbc5rsA>
-    <xmx:FyczaKhWdmIeVkUrZc3rCWnnRO_pGRXxHpHEc3ZlzlxlQwfxx7GqBw>
-    <xmx:FyczaMjqBH1aLayep7-aicAEaTfITKmZ4tX7Vq0-_Jw2H_1tWSgXr1Bt>
+    dtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffo
+    jghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofi
+    hskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhn
+    ghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudehgfdvfeehhedujeehfe
+    duveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsthgvrhfuihiivgeptden
+    ucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvth
+    hhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepledpmhhouggvpehsmhhtphho
+    uhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtg
+    htrdhorhhgpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhn
+    ghhslhgrsgdrtghomhdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghith
+    hrihigrdgtohhmpdhrtghpthhtoheprghnthhhohhnhidrphgvrhgrrhgusehvrghtvghs
+    rdhtvggthhdprhgtphhtthhopehmihgthhgrlhdrohhriigvlhesrghmugdrtghomhdprh
+    gtphhtthhopehjsggvuhhlihgthhesshhushgvrdgtohhmpdhrtghpthhtohepjhhulhhi
+    vghnseigvghnrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrd
+    gtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:HiczaHQ7EDeAqs7yVuHkWZd9AMrCSnReIZWnqW_yZjIc7764kdanbg>
+    <xmx:HiczaLxMh6qyo6COVPsdSgx4VoTmkazoaBuP99O6OmJakl6E8mHQfg>
+    <xmx:HiczaF4ww3CsUtzOF5I3SL3_CbEsVu6jXbwlpapUDhhNb9BwTPtW5Q>
+    <xmx:HiczaIyd1e2cMA_5EQOD3dIUTUwnSHtsZmBHSN6Y3BSabB-CYq2c6g>
+    <xmx:HyczaBPR0ZENeJ_t_I2rnr2mE8BaVs-KAfqOeX43GgtfJbJGncnMSMgj>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v1 0/5] Fix XHCI console on legacy MB2 boot
-Date: Sun, 25 May 2025 16:15:41 +0200
-Message-ID: <cover.defc562b917978814c8359bbd04f1dadba33fb77.1748182535.git-series.marmarek@invisiblethingslab.com>
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 3/5] drivers/char: make dbc_uart_dump() a bit more useful
+Date: Sun, 25 May 2025 16:15:44 +0200
+Message-ID: <faf72a48d11a45de8139c9c1d3904cf7130393cb.1748182535.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.defc562b917978814c8359bbd04f1dadba33fb77.1748182535.git-series.marmarek@invisiblethingslab.com>
+References: <cover.defc562b917978814c8359bbd04f1dadba33fb77.1748182535.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-XHCI console works fine with UEFI boot, as Xen doesn't relocate itself. But on
-legacy boot, relocation is a problem, as the hardware is programmed with
-physical addresses of structures that are moved. Fix this by adding new console
-init hooks. This series includes also few minor improvements that were useful
-when working on the fix.
+Make it safe to call also if xhci console is not enabled. And make it
+non-static, to require one less modification when actually using it.
+When using it, one still needs to add its declaration in some header
+(or just next to the call site).
 
-Marek Marczykowski-Górecki (5):
-  console: add relocation hook
-  drivers/char: Handle Xen relocation in the XHCI console driver
-  drivers/char: make dbc_uart_dump() a bit more useful
-  drivers/char: remove outdated comment in xhci driver
-  console: support multiple serial console simultaneously
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+IIUC Misra would not be happy about a declaration of an usused function.
+And I'd rather avoid extending DBC_DEBUG scope beyond that single file.
+---
+ xen/drivers/char/xhci-dbc.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- docs/misc/xen-command-line.pandoc |   4 +-
- xen/arch/x86/setup.c              |   8 ++-
- xen/drivers/char/Kconfig          |  11 +++-
- xen/drivers/char/console.c        | 108 ++++++++++++++++++++++++-------
- xen/drivers/char/serial.c         |  18 +++++-
- xen/drivers/char/xhci-dbc.c       |  98 +++++++++++++++++++---------
- xen/include/xen/console.h         |   2 +-
- xen/include/xen/serial.h          |   7 ++-
- 8 files changed, 204 insertions(+), 52 deletions(-)
-
-base-commit: 7ab4b392b78b5ac1c7a1fb1d085637526e67521a
+diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
+index c4bb371ff78f..ced28cae0a29 100644
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -1498,11 +1498,14 @@ static void dbc_dump(struct dbc *dbc)
+               readq(&r->cp) == virt_to_maddr(dbc->dbc_ctx));
+ }
+ 
+-static void dbc_uart_dump(void)
++void dbc_uart_dump(void)
+ {
+     struct dbc_uart *uart = &dbc_uart;
+     struct dbc *dbc = &uart->dbc;
+ 
++    if ( !dbc->enable )
++        return;
++
+     dbc_dump(dbc);
+ }
+ #endif
 -- 
 git-series 0.9.1
 
