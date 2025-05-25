@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA958C54FB3
-	for <xen-devel@archiver.kernel.org>; Sun, 25 May 2025 14:20:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.997155.1378149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 437D5C5AE59
+	for <xen-devel@archiver.kernel.org>; Sun, 25 May 2025 14:20:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.997158.1378170 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJCD6-0006R3-Ea; Sun, 25 May 2025 14:20:20 +0000
+	id 1uJCDC-00072W-Vq; Sun, 25 May 2025 14:20:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 997155.1378149; Sun, 25 May 2025 14:20:20 +0000
+Received: by outflank-mailman (output) from mailman id 997158.1378170; Sun, 25 May 2025 14:20:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJCD6-0006Qj-9x; Sun, 25 May 2025 14:20:20 +0000
-Received: by outflank-mailman (input) for mailman id 997155;
- Sun, 25 May 2025 14:20:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uJCDC-00072F-SO; Sun, 25 May 2025 14:20:26 +0000
+Received: by outflank-mailman (input) for mailman id 997158;
+ Sun, 25 May 2025 14:20:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3gIk=YJ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uJCD5-0005ip-7H
- for xen-devel@lists.xenproject.org; Sun, 25 May 2025 14:20:19 +0000
+ id 1uJCDA-0006Ah-Os
+ for xen-devel@lists.xenproject.org; Sun, 25 May 2025 14:20:24 +0000
 Received: from fhigh-b6-smtp.messagingengine.com
  (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5dd335ca-3973-11f0-a2fb-13f23c93f187;
- Sun, 25 May 2025 16:20:11 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 638175e0-3973-11f0-b893-0df219b8e170;
+ Sun, 25 May 2025 16:20:20 +0200 (CEST)
 Received: from phl-compute-06.internal (phl-compute-06.phl.internal
  [10.202.2.46])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 2CB1325400E4;
- Sun, 25 May 2025 10:20:10 -0400 (EDT)
+ by mailfhigh.stl.internal (Postfix) with ESMTP id B9CF425400CA;
+ Sun, 25 May 2025 10:20:19 -0400 (EDT)
 Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Sun, 25 May 2025 10:20:10 -0400
+ by phl-compute-06.internal (MEProxy); Sun, 25 May 2025 10:20:19 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 25 May 2025 10:20:07 -0400 (EDT)
+ 25 May 2025 10:20:17 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,72 +47,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5dd335ca-3973-11f0-a2fb-13f23c93f187
+X-Inumbo-ID: 638175e0-3973-11f0-b893-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1748182810; x=1748269210; bh=mWRLy4XWSq
-	kSuh6T5T7Y3St8a2sE7Qw37t+DvXZ+raM=; b=Da3ocC0z9Oj3C3eZsJM8FFZPuo
-	kE6bc1tOLyO/0duJYj1Id7jy5QyMJd9Z5gEL9iDx9aAfHt2a1Z77Pb5bIuXMgf1x
-	hX49WmOgmIxVLiat9nAdwCjAZnnyWrk9C6KiV+qk6z9+Lq+9ejiB5OK3KCVvqCMD
-	wG6SScj5crRiFKkz/HOx6SELcFxkLc6AKNSWO6YPyBRQTJwtj6bUuvyWjBmC8hH0
-	ZvST6VCHWOanhCqBdGwdCRvDvm9TcJPT9bBXlmZUrPYV6kPOh8w1w1fb4+ulEV4P
-	f5G5UujJr2ELQ0E7PWWebuMXEdvMIjqCC9jX1P0HBkclvagvJDr4heIeWFUQ==
+	:subject:to:to; s=fm3; t=1748182819; x=1748269219; bh=8N0UZzKt4D
+	QbodDXdvRtwVlKHw5NKvan8QfhJwtoCk8=; b=BhL1n/QeRiZ5LIM3pw/lE4MNPI
+	jnNyVsgCW6EOTbt2MYUlrmmicZ0DHbaaY66u0Tn3MULNqBXJQ7ZdxerNg4aoFKto
+	7AVB++4Ow+EemU1aLbdkOXf90Zm9A2ONnf2HrrtKe/wwNPr5ruBFtbpTzMVG9xBW
+	AL2GLp319pmzi+eqYbDN6kXnMYYDoSSp31gtGfdJCvoH3UA+sVArHJuDBm7Cnffg
+	1NKQHXOUPdgv0xI1EjoTslHWNuyKr6lXNlkNd7HNgHVlJ+GE3ps3FkdsVOEAap0A
+	VQQLRT6ZyLJbUgOTfZOhZbP7IjZvcoVnBVQnS062uUHVl46niQ2qL7r71wgQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1748182810; x=
-	1748269210; bh=mWRLy4XWSqkSuh6T5T7Y3St8a2sE7Qw37t+DvXZ+raM=; b=m
-	r1wNI8FH5Td8UIM+Lxd6D01f9iNgGooYb1lpw4FZ9rrQdiM7aqB8W0LqogNfPaaD
-	n3ylZGqgHAICqKjIRr1fr+V4OPi6c8A4eUMH9hdm7zchfyWd8NyWdQZTnr5MaY3H
-	V+zuqhW3da+qZnzaqqf/KTg55kX5qLQqjjbCZ29cLcO3pRQcZ1Z7ysWcSrwoP16c
-	+L5JOFEDQRKaVbNC0KeLgsE5aZ3AI16UBkKPanBbGz+N4ue2g79khPgLy2j6lxfW
-	1IRvtAexWAyUilqw2x8Gm1HLQAuUfU0+Rr1rCfn2CaVwcsPSh1pQJWSyeZ4Pz6F1
-	cpTvSMkwBdCEoXBQRwzfg==
-X-ME-Sender: <xms:GSczaI0qRFRTdbbdUkTNCpyaNbz5IaI71TQmaBgqmzcM6fYZSSJXFw>
-    <xme:GSczaDHoMufvhGJhYeNXcdR8j7xxVgROjMT-i69sI9FpSGJJWqb9EDPuaMgYh8XC7
-    1-xiK-TUwm6iQ>
-X-ME-Received: <xmr:GSczaA471a__RXernTs_eAikObn8Hf9dm_OvZ4qUy0Ixja8nAlm9ksoNBBaomBRy_dO4n8t5bmTgkg0b3bXgbvgsdggyAt-vtdDQgrX-PCnQCnn-hYAp>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1748182819; x=
+	1748269219; bh=8N0UZzKt4DQbodDXdvRtwVlKHw5NKvan8QfhJwtoCk8=; b=U
+	J6bOiBqrsmflyAGrQZRClJtBba3espjZkLKDVsCaIB8dyAhfwDIAyqZVTidk47dV
+	XwHNuU3Ych4r/eXVYN9e7Z+/GyPgAeh/HvIHIiNTrwvli+uIu/YfWEqpA8S3FWXa
+	W1JjiawMc6IJj6NxOWbaRn6mh91IqZCrCgHcjK/tC4pObbxyjKRwhIsqUSJakS/q
+	M+lklnhY6RTixkKJ1ddubGMVO67JYgGPFCBEbBQI66I5RghW6JL9oC2bW/c/KQ+J
+	yGr1g47hL2hLsbCyWjVu6J949DJER4yrQavgKkYL9p5Z2IDn3Up0270ej9Nr7FWU
+	0Uovp1mdjiPYRHICDMQiQ==
+X-ME-Sender: <xms:IyczaHQNRgs3UgO4w5gcxX2N8vdd8K_xCNN0MOOqmSo0BLsEx4ylXg>
+    <xme:IyczaIwO0APyT6wOUZWTfevG_tKAn4l0RGPj_Qdpjbotw889xmEGh-J7NLFzuJLs2
+    HKNMgyE7Ai6Ig>
+X-ME-Received: <xmr:IyczaM1RGFX_VebD-G__PAOexnBI4WBBXb3K2kI2YZfsJBjm3rzh8ZQEkPIR1HYIIBSTydbzWXVSLMTy92NTvEMTOjEx-fZj0GFui5F_FzOUKjXzjdfH>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddugeekfeculddtuddrgeefvddrtd
     dtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggft
     fghnshhusghstghrihgsvgdpuffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftd
     dtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffo
     jghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofi
     hskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhn
-    ghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudehgfdvfeehhedujeehfe
-    duveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsthgvrhfuihiivgeptden
-    ucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvth
-    hhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepledpmhhouggvpehsmhhtphho
-    uhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtg
-    htrdhorhhgpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhn
-    ghhslhgrsgdrtghomhdprhgtphhtthhopehjsggvuhhlihgthhesshhushgvrdgtohhmpd
-    hrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgt
-    phhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthhopegrnh
-    hthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtohepmhhitghh
-    rghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhhulhhivghnseigvghnrd
-    horhhgpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:GSczaB0lpEowz-mwFzIFl8sEHzyV-qS5tTefS3E5-QDgzFObHPJYyQ>
-    <xmx:GSczaLGfO9p6gLmoVtlArah-bQcDo_TsFYtIu21OnZwJ2yXIgTkG3g>
-    <xmx:GSczaK-g7rJsWGVq2fwPEPAYqBaxRoVHNFTQwGKzDncUBEogOoQnWg>
-    <xmx:GSczaAk26emD_A0FOn5kaUZjL1MDIeRawcFOmW1MyU37ozwiB-vTZQ>
-    <xmx:GiczaNRUYKCWvYsWuAXLNtbcBlmfFPDfaytjMKloYqHubAL47TAKnFca>
+    ghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffeitdegveffteelvdeghffhve
+    fghfefkeelheeujeejgedvvdfgffejuedtvdelnecuffhomhgrihhnpehkvghrnhgvlhdr
+    ohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+    hmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggp
+    rhgtphhtthhopeelpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopeigvghnqdguvg
+    hvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhopehmrghr
+    mhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhrtghpthhtoh
+    eprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopegr
+    nhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtohepmhhitg
+    hhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehs
+    uhhsvgdrtghomhdprhgtphhtthhopehjuhhlihgvnhesgigvnhdrohhrghdprhgtphhtth
+    hopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggs
+    vghllhhinhhisehkvghrnhgvlhdrohhrgh
+X-ME-Proxy: <xmx:IyczaHBuuIhT750_EKALARwzo7yXE-wapjLhV6jdgU94IskmAFZa0g>
+    <xmx:IyczaAhqQxUth6GW1BTQqi2_jYbEaMlLw3t-Ls6v2IE_8hvfk26cxQ>
+    <xmx:IyczaLrxPc_eTj5hJU4IESGkg6GTjSxR0ikb1_QZ75Neip1gCQpBKA>
+    <xmx:IyczaLiZonqZlxROlGYM6eSTI4ZDG5mGpFGXWHsXfM0NgNSlc7FRbw>
+    <xmx:IyczaK9qr8jGGG2g-fdzl-FZYp9Ms2LRFrRYlYt7DBsMwWurQ4zKzeAR>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/5] console: add relocation hook
-Date: Sun, 25 May 2025 16:15:42 +0200
-Message-ID: <4f1889dc03ec4aa2cc0cd2bd14523a2c6f670bdb.1748182535.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 5/5] console: support multiple serial console simultaneously
+Date: Sun, 25 May 2025 16:15:46 +0200
+Message-ID: <98ff383ff2ee3dc162b2d12afaea2b3f1406d99e.1748182535.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.defc562b917978814c8359bbd04f1dadba33fb77.1748182535.git-series.marmarek@invisiblethingslab.com>
 References: <cover.defc562b917978814c8359bbd04f1dadba33fb77.1748182535.git-series.marmarek@invisiblethingslab.com>
@@ -120,146 +121,300 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The XHCI console uses DMA, so it's sensitive for relocating its
-structures, even if their virtual addresses remain the same. Add a new
-console initialization hooks called before+after Xen relocation.
-Relocation happens conditionally, but call the hooks unconditionally, as
-that simplifies logic in the driver (and if needed, the driver can
-easily detect if relocation happened anyway). Thanks to that, a driver
-may use it to finalize init steps that need physical address but can be
-delayed - this way, it doesn't need un-doing on relocation.
-The most important part is the post-relocation hook, but add also
-pre-relocation one to simplify clean handling of in-flight data.
+Previously only one serial console was supported at the same time. Using
+console=com1,dbgp,vga silently ignored all but last serial console (in
+this case: only dbgp and vga were active).
+
+Fix this by storing not a single sercon_handle, but an array of them, up
+to MAX_SERCONS entries. The value of MAX_SERCONS can be chosen in
+kconfig, the default (4) is arbitrary, inspired by the number of
+SERHND_IDX values.
+
+Make console_steal() aware of multiple consoles too. It can now either
+steal output from specific console (for gdbstub), or from all of them at
+once (for console suspend).
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
-I considered more limited scope - calling them just around move_xen()
-(or even from within that function), but that complicates
-iommu_add_extra_reserved_device_memory() call - see the next patch.
-As for the post-relocation hook, I have considered a parameter with info
-whether the relocation actually happened, but driver can figure it out
-on its own anyway.
----
- xen/arch/x86/setup.c       |  8 ++++++++
- xen/drivers/char/console.c | 10 ++++++++++
- xen/drivers/char/serial.c  | 18 ++++++++++++++++++
- xen/include/xen/console.h  |  2 ++
- xen/include/xen/serial.h   |  6 ++++++
- 5 files changed, 44 insertions(+)
+This was posted before as part of initial xhci console submission, it
+reached v6 (but last changes were in v4), but wasn't considered useful
+enough to review/ack:
+https://lore.kernel.org/xen-devel/Yu0XHUhsebE+WG0g@mail-itl/
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 25189541244d..3ef819a252e4 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1481,6 +1481,8 @@ void asmlinkage __init noreturn __start_xen(void)
-         highmem_start &= ~((1UL << L3_PAGETABLE_SHIFT) - 1);
- #endif
+Since I needed this feature again, to debug xhci console issue, I'm
+including this patch again in the series.
+
+Changes in v4:
+- use unsigned int for loop counters
+- other minor changes
+Changes in v3:
+- adjust console_steal() for multiple consoles too
+- add MAX_SERCONS to kconfig
+- add warning about sync_console impact
+- add warning if too many consoles are configured
+- log issue with PCI spec parsing
+---
+ docs/misc/xen-command-line.pandoc |  4 +-
+ xen/drivers/char/Kconfig          | 11 ++++-
+ xen/drivers/char/console.c        | 98 ++++++++++++++++++++++++--------
+ xen/include/xen/serial.h          |  1 +-
+ 4 files changed, 92 insertions(+), 22 deletions(-)
+
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index b0eadd2c5d58..052c01f87bfc 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -456,6 +456,9 @@ only available when used together with `pv-in-pvh`.
+ `none` indicates that Xen should not use a console.  This option only
+ makes sense on its own.
  
-+    console_init_pre_relocate();
++Specifying more than one serial console will increase console latency,
++especially when `sync_console` option is used.
 +
-     /*
-      * Iterate backwards over all superpage-aligned RAM regions.
-      *
-@@ -1606,6 +1608,12 @@ void asmlinkage __init noreturn __start_xen(void)
-     if ( !xen_phys_start )
-         panic("Not enough memory to relocate Xen\n");
+ ### console_timestamps
+ > `= none | date | datems | boot | raw`
  
-+    /*
-+     * Notify console drivers about relocation, before reusing old Xen's
-+     * memory.
-+     */
-+    console_init_post_relocate();
+@@ -2637,6 +2640,7 @@ Intel SA-00982.  Intel suggest that some workloads will benefit from this.
+ 
+ Flag to force synchronous console output.  Useful for debugging, but
+ not suitable for production environments due to incurred overhead.
++If multiple consoles are configured, the incurred overhead is even bigger.
+ 
+ ### tboot (x86)
+ > `= 0x<phys_addr>`
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index e6e12bb41397..76305fcb4afa 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -96,6 +96,17 @@ config SERIAL_TX_BUFSIZE
+ 
+ 	  Default value is 32768 (32KiB).
+ 
++config MAX_SERCONS
++	int "Maximum number of serial consoles active at once"
++	default 4
++	help
++	  Controls how many serial consoles can be active at once. Configuring more
++	  using `console=` parameter will be ignored.
++	  When multiple consoles are configured, overhead of `sync_console` option
++	  is even bigger.
 +
-     /* FIXME: Putting a hole in .bss would shatter the large page mapping. */
-     if ( using_2M_mapping() )
-         efi_boot_mem_unused(NULL, NULL);
++	  Default value is 4.
++
+ config XHCI
+ 	bool "XHCI DbC UART driver"
+ 	depends on X86
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index c15987f5bbe2..12898b684b5e 100644
+index 12898b684b5e..e306986bfcbc 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -1120,6 +1120,16 @@ void __init console_init_ring(void)
-     printk("Allocated console ring of %u KiB.\n", opt_conring_size >> 10);
- }
+@@ -134,7 +134,9 @@ static char *__read_mostly conring = _conring;
+ static uint32_t __read_mostly conring_size = _CONRING_SIZE;
+ static uint32_t conringc, conringp;
  
-+void __init console_init_pre_relocate(void)
-+{
-+    serial_init_pre_relocate();
-+}
-+
-+void __init console_init_post_relocate(void)
-+{
-+    serial_init_post_relocate();
-+}
-+
- void __init console_init_irq(void)
+-static int __read_mostly sercon_handle = -1;
++#define MAX_SERCONS CONFIG_MAX_SERCONS
++static int __read_mostly sercon_handle[MAX_SERCONS];
++static unsigned int __read_mostly nr_sercon_handle = 0;
+ 
+ #ifdef CONFIG_X86
+ /* Tristate: 0 disabled, 1 user enabled, -1 default enabled */
+@@ -424,32 +426,61 @@ long read_console_ring(struct xen_sysctl_readconsole *op)
+ static char serial_rx_ring[SERIAL_RX_SIZE];
+ static unsigned int serial_rx_cons, serial_rx_prod;
+ 
+-static void (*serial_steal_fn)(const char *str, size_t nr) = early_puts;
++/* The last entry means "steal from all consoles" */
++static void (*serial_steal_fn[])(const char *str, size_t nr) = {
++    [MAX_SERCONS] = early_puts,
++};
+ 
++/*
++ * Redirect console *handle* output to *fn*. Use SERHND_STEAL_ALL as *handle* to
++ * redirect all the consoles. 
++ */
+ int console_steal(int handle, void (*fn)(const char *str, size_t nr))
  {
-     serial_init_irq();
-diff --git a/xen/drivers/char/serial.c b/xen/drivers/char/serial.c
-index 591a00900869..95f7410afa9c 100644
---- a/xen/drivers/char/serial.c
-+++ b/xen/drivers/char/serial.c
-@@ -447,6 +447,24 @@ void __init serial_init_preirq(void)
-             com[i].driver->init_preirq(&com[i]);
- }
- 
-+void __init serial_init_pre_relocate(void)
-+{
+-    if ( (handle == -1) || (handle != sercon_handle) )
+-        return 0;
 +    unsigned int i;
 +
-+    for ( i = 0; i < ARRAY_SIZE(com); i++ )
-+        if ( com[i].driver && com[i].driver->init_pre_relocate )
-+            com[i].driver->init_pre_relocate(&com[i]);
-+}
-+
-+void __init serial_init_post_relocate(void)
-+{
++    if ( handle == -1 )
++        return -ENOENT;
++    if ( serial_steal_fn[MAX_SERCONS] != NULL )
++        return -EBUSY;
++    if ( handle == SERHND_STEAL_ALL )
++    {
++        serial_steal_fn[MAX_SERCONS] = fn;
++        return MAX_SERCONS;
++    }
++    for ( i = 0; i < nr_sercon_handle; i++ )
++        if ( handle == sercon_handle[i] )
++            break;
++    if ( i == nr_sercon_handle )
++        return -ENOENT;
+ 
+-    if ( serial_steal_fn != NULL )
++    if ( serial_steal_fn[i] != NULL )
+         return -EBUSY;
+ 
+-    serial_steal_fn = fn;
+-    return 1;
++    serial_steal_fn[i] = fn;
++    return i;
+ }
+ 
+ void console_giveback(int id)
+ {
+-    if ( id == 1 )
+-        serial_steal_fn = NULL;
++    if ( id >= 0 && id <= MAX_SERCONS )
++        serial_steal_fn[id] = NULL;
+ }
+ 
+ void console_serial_puts(const char *s, size_t nr)
+ {
+-    if ( serial_steal_fn != NULL )
+-        serial_steal_fn(s, nr);
 +    unsigned int i;
 +
-+    for ( i = 0; i < ARRAY_SIZE(com); i++ )
-+        if ( com[i].driver && com[i].driver->init_post_relocate )
-+            com[i].driver->init_post_relocate(&com[i]);
-+}
-+
- void __init serial_init_irq(void)
- {
-     unsigned int i;
-diff --git a/xen/include/xen/console.h b/xen/include/xen/console.h
-index 83cbc9fbdafc..d563777ad9e2 100644
---- a/xen/include/xen/console.h
-+++ b/xen/include/xen/console.h
-@@ -18,6 +18,8 @@ void console_init_preirq(void);
- void console_init_ring(void);
- void console_init_irq(void);
- void console_init_postirq(void);
-+void console_init_pre_relocate(void);
-+void console_init_post_relocate(void);
- void console_endboot(void);
- int console_has(const char *device);
++    if ( serial_steal_fn[MAX_SERCONS] != NULL )
++        serial_steal_fn[MAX_SERCONS](s, nr);
+     else
+-        serial_puts(sercon_handle, s, nr);
++        for ( i = 0; i < nr_sercon_handle; i++ )
++        {
++            if ( serial_steal_fn[i] != NULL )
++                serial_steal_fn[i](s, nr);
++            else
++                serial_puts(sercon_handle[i], s, nr);
++        }
+ }
  
+ /*
+@@ -1026,6 +1057,7 @@ void __init console_init_preirq(void)
+ {
+     char *p;
+     int sh;
++    unsigned int i;
+ 
+     serial_init_preirq();
+ 
+@@ -1046,8 +1078,12 @@ void __init console_init_preirq(void)
+             continue;
+         else if ( (sh = serial_parse_handle(p)) >= 0 )
+         {
+-            sercon_handle = sh;
+-            serial_steal_fn = NULL;
++            if ( nr_sercon_handle < MAX_SERCONS )
++                sercon_handle[nr_sercon_handle++] = sh;
++            else
++                printk("Too many consoles (max %d), ignoring '%s'\n",
++                       MAX_SERCONS, p);
++            serial_steal_fn[MAX_SERCONS] = NULL;
+         }
+         else
+         {
+@@ -1065,7 +1101,8 @@ void __init console_init_preirq(void)
+         opt_console_xen = 0;
+ #endif
+ 
+-    serial_set_rx_handler(sercon_handle, serial_rx);
++    for ( i = 0; i < nr_sercon_handle; i++ )
++        serial_set_rx_handler(sercon_handle[i], serial_rx);
+     pv_console_set_rx_handler(serial_rx);
+ 
+     /* NB: send conring contents to all enabled physical consoles, if any */
+@@ -1084,7 +1121,8 @@ void __init console_init_preirq(void)
+ 
+     if ( opt_sync_console )
+     {
+-        serial_start_sync(sercon_handle);
++        for ( i = 0; i < nr_sercon_handle; i++ )
++            serial_start_sync(sercon_handle[i]);
+         add_taint(TAINT_SYNC_CONSOLE);
+         printk("Console output is synchronous.\n");
+         warning_add(warning_sync_console);
+@@ -1201,13 +1239,19 @@ int __init console_has(const char *device)
+ 
+ void console_start_log_everything(void)
+ {
+-    serial_start_log_everything(sercon_handle);
++    unsigned int i;
++
++    for ( i = 0; i < nr_sercon_handle; i++ )
++        serial_start_log_everything(sercon_handle[i]);
+     atomic_inc(&print_everything);
+ }
+ 
+ void console_end_log_everything(void)
+ {
+-    serial_end_log_everything(sercon_handle);
++    unsigned int i;
++
++    for ( i = 0; i < nr_sercon_handle; i++ )
++        serial_end_log_everything(sercon_handle[i]);
+     atomic_dec(&print_everything);
+ }
+ 
+@@ -1223,23 +1267,32 @@ void console_unlock_recursive_irqrestore(unsigned long flags)
+ 
+ void console_force_unlock(void)
+ {
++    unsigned int i;
++
+     watchdog_disable();
+     spin_debug_disable();
+     rspin_lock_init(&console_lock);
+-    serial_force_unlock(sercon_handle);
++    for ( i = 0 ; i < nr_sercon_handle ; i++ )
++        serial_force_unlock(sercon_handle[i]);
+     conring_no_notify = true;
+     console_start_sync();
+ }
+ 
+ void console_start_sync(void)
+ {
++    unsigned int i;
++
+     atomic_inc(&print_everything);
+-    serial_start_sync(sercon_handle);
++    for ( i = 0 ; i < nr_sercon_handle ; i++ )
++        serial_start_sync(sercon_handle[i]);
+ }
+ 
+ void console_end_sync(void)
+ {
+-    serial_end_sync(sercon_handle);
++    unsigned int i;
++
++    for ( i = 0; i < nr_sercon_handle; i++ )
++        serial_end_sync(sercon_handle[i]);
+     atomic_dec(&print_everything);
+ }
+ 
+@@ -1362,7 +1415,8 @@ static int suspend_steal_id;
+ 
+ int console_suspend(void)
+ {
+-    suspend_steal_id = console_steal(sercon_handle, suspend_steal_fn);
++    if ( nr_sercon_handle )
++        suspend_steal_id = console_steal(SERHND_STEAL_ALL, suspend_steal_fn);
+     serial_suspend();
+     return 0;
+ }
 diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
-index 63a82b032dde..1ee3df2624fb 100644
+index 1ee3df2624fb..31159814d883 100644
 --- a/xen/include/xen/serial.h
 +++ b/xen/include/xen/serial.h
-@@ -64,6 +64,9 @@ struct uart_driver {
-     void (*init_preirq)(struct serial_port *port);
-     void (*init_irq)(struct serial_port *port);
-     void (*init_postirq)(struct serial_port *port);
-+    /* Hooks around optional Xen relocation. */
-+    void (*init_pre_relocate)(struct serial_port *port);
-+    void (*init_post_relocate)(struct serial_port *port);
-     /* Hook to clean up after Xen bootstrap (before domain 0 runs). */
-     void (*endboot)(struct serial_port *port);
-     /* Driver suspend/resume. */
-@@ -103,6 +106,9 @@ struct uart_driver {
- void serial_init_preirq(void);
- void serial_init_irq(void);
- void serial_init_postirq(void);
-+/* Notify drivers about Xen relocation (relevant for those using DMA). */
-+void serial_init_pre_relocate(void);
-+void serial_init_post_relocate(void);
+@@ -101,6 +101,7 @@ struct uart_driver {
+ #define SERHND_HI       (1<<2) /* Mux/demux each transferred char by MSB. */
+ #define SERHND_LO       (1<<3) /* Ditto, except that the MSB is cleared.  */
+ #define SERHND_COOKED   (1<<4) /* Newline/carriage-return translation?    */
++#define SERHND_STEAL_ALL 0xff  /* Synthetic handle used in console_steal() */
  
- /* Clean-up hook before domain 0 runs. */
- void serial_endboot(void);
+ /* Three-stage initialisation (before/during/after IRQ-subsystem setup). */
+ void serial_init_preirq(void);
 -- 
 git-series 0.9.1
 
