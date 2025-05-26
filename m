@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E504BC5AD49
-	for <xen-devel@archiver.kernel.org>; Mon, 26 May 2025 09:46:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.997343.1378246 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FFEFC54FB3
+	for <xen-devel@archiver.kernel.org>; Mon, 26 May 2025 09:46:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.997347.1378286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJUPc-000492-EZ; Mon, 26 May 2025 09:46:28 +0000
+	id 1uJUPj-0005AX-PH; Mon, 26 May 2025 09:46:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 997343.1378246; Mon, 26 May 2025 09:46:28 +0000
+Received: by outflank-mailman (output) from mailman id 997347.1378286; Mon, 26 May 2025 09:46:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJUPc-00048v-BO; Mon, 26 May 2025 09:46:28 +0000
-Received: by outflank-mailman (input) for mailman id 997343;
- Mon, 26 May 2025 09:46:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uJUPj-0005AK-L2; Mon, 26 May 2025 09:46:35 +0000
+Received: by outflank-mailman (input) for mailman id 997347;
+ Mon, 26 May 2025 09:46:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qdiq=YK=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1uJUPb-0003hN-9K
- for xen-devel@lists.xenproject.org; Mon, 26 May 2025 09:46:27 +0000
+ id 1uJUPi-0003hH-94
+ for xen-devel@lists.xenproject.org; Mon, 26 May 2025 09:46:34 +0000
 Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20624.outbound.protection.outlook.com
- [2a01:111:f403:200a::624])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 492600b0-3a16-11f0-b893-0df219b8e170;
- Mon, 26 May 2025 11:46:25 +0200 (CEST)
-Received: from MN2PR15CA0043.namprd15.prod.outlook.com (2603:10b6:208:237::12)
- by DS0PR12MB7993.namprd12.prod.outlook.com (2603:10b6:8:14b::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Mon, 26 May
- 2025 09:46:20 +0000
-Received: from BL02EPF0001A108.namprd05.prod.outlook.com
- (2603:10b6:208:237:cafe::cf) by MN2PR15CA0043.outlook.office365.com
- (2603:10b6:208:237::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.30 via Frontend Transport; Mon,
- 26 May 2025 09:46:20 +0000
+ (mail-mw2nam12on20630.outbound.protection.outlook.com
+ [2a01:111:f403:200a::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e12c9f4-3a16-11f0-a2fb-13f23c93f187;
+ Mon, 26 May 2025 11:46:33 +0200 (CEST)
+Received: from BL0PR0102CA0026.prod.exchangelabs.com (2603:10b6:207:18::39) by
+ DS4PR12MB9707.namprd12.prod.outlook.com (2603:10b6:8:278::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8769.24; Mon, 26 May 2025 09:46:30 +0000
+Received: from BL02EPF0001A106.namprd05.prod.outlook.com
+ (2603:10b6:207:18:cafe::b3) by BL0PR0102CA0026.outlook.office365.com
+ (2603:10b6:207:18::39) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Mon,
+ 26 May 2025 09:46:18 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A108.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ BL02EPF0001A106.mail.protection.outlook.com (10.167.241.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8769.18 via Frontend Transport; Mon, 26 May 2025 09:46:19 +0000
+ 15.20.8769.18 via Frontend Transport; Mon, 26 May 2025 09:46:29 +0000
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 26 May
- 2025 04:46:18 -0500
+ 2025 04:46:25 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 492600b0-3a16-11f0-b893-0df219b8e170
+X-Inumbo-ID: 4e12c9f4-3a16-11f0-a2fb-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lW2van0nJzyJr+30QYBsW2ppzr1OfdkFN+PnI92ub2b3MO2Rdo6vbMINEKV8ayCI+yh77ZtitmMD/0Prc8EIEQIG3yVxs4uRL23Mw8AwUljVPSgI+sqMxC5LYPnlRl2NaoLJcUFBamsKWpDQqZztowePF2W7iBNhUh6d+QeBnpvi+L6QO9wdRGJ/y5HKuGhoWvJCrhdqYE3clevKxahaxzSXBRiNEaHiTmg+Nwuo1mTee6zYBJsoUVpqDr8zDinTnRdAR7uEcyyK07wWNN6BkzFkLBg4fAXpKFlzFz6QW+bX4vxg5+JIAbZ1oNA3egxsoTHEm9i8ABc76U2XrU3bFA==
+ b=IP/vku6xvFOnVqfNrX34k5zc5lCLDS+ew9JVoGJhKlNnEm21LT9tAy1M61awkuYyOw8zLryTN6Bm0fbPoLt4CXCr7QcFuTT9G1drAXO19SLOFlwVAdU6olfGI+I6iKWLTROxNfXJy2OkyWDxIQe4mp7OldtHSu1uX/+uDOdd1mj46F+U0xgeA1gNPKg9BhbYWmwH17j1vGIYcSKPY6XgcRDARAkEtpB8yyI64fflJYdj96wlsyxmc9KwDRCnWQ8gxVhqUnc9bpXhYkzyfU+Qm98RuKev9Z3CkgBB5CkY3I/YCp+PUev2a2canuAzZfP1A72hHprygBYYPmjIwOq7Rg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GuyCxUQ97UVFVG8LWs3GMa6eIbl8t+L0KXIZRR7uPyI=;
- b=IUy10aRIfGX1fsFNSGR3GqmZenhqVddvsx4F2i84JCNN92sKkfov+Kh5NmboLJnL69dSFzEIZRjcjI5bQzgLn13AFmW4ysU7mQLCaPGJojRUQIZo3updO/PUr8oj/VpgnSByZFl7QVod8uqRhZOvhHpki9dwZEmOJweJpRNNecAvF9lOSI7ldPpaXS47HVo7SmWbw2I1yx4cXs6DV7J7YCefA8Ky4sHLhxS2dgu1YV0ZWKgN1LiBK09iSrDcOUXmZEAffTJMsVoULbI676HI7VcqN6LEIpT15pdmOvXTOA12BeE84wrvS+tkzu78aDhUjDBPnZ7t9tl5CJmU8YNZvA==
+ bh=xzigtSLOhnEm/3jzO+ojdi4ugIrKKVRZMdTKswuh48k=;
+ b=ujsLU93NBWWUX69VWe5/xaO7lxpA4xEVmTM8gSRhvqOY54LpFLU2CTuAWR73o8GCX4LeixYERTux34AVRhRYQ3ti7A9zaPHHHATSUEK9KlL5dcuNQs2FXLnD8M7oSw7h2sMVlccgUk4Uj84sJR2BEKYUY2V9NDUDoAwqnreJfczOsChDd4aYSpxZz/SzEzX5UGi6i6clPPyG04wYPlxOfaN5FJWAJoI/GaTcgOOVtEyvxZ1GlrsohaPkM8MsRFPZh9XYpGvAPbLS+k7i2j9FFaceDHhFjItIQyAnMyQN1XEKW6UGnouP2/CfITLKenPx1t1lHu22MyfG2Hi/xDWYww==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GuyCxUQ97UVFVG8LWs3GMa6eIbl8t+L0KXIZRR7uPyI=;
- b=xyh9NU1ml5gug9mbuxLeklfCpugp+E9hY4nCKuqmZX3bcAmuecyjA9o9fIACGh+6j/zaNcJkE7G/wKoX/sP4OpHa4DIwd2EXUsy5BxBE5L+Clybk2TmvcoBAA20inlpurIYdhjytEAGhSaA5xjidG1kmmXMKE4cYgkuXOrjZNAY=
+ bh=xzigtSLOhnEm/3jzO+ojdi4ugIrKKVRZMdTKswuh48k=;
+ b=Cnn7FgGd29aMfD0r8+jqS6g3nxK7UBUXTIwOs24oGAXy3FZAqaIDO9tshp1Y9HjZvqEPTfY85NTb/82IzkiK7raejh3ghQt40yb6L7768Eae8h8sZxHnJ4Ao+Qybk0Eo74+e8RUf0UMbmtv3TNTHwoZ+S1WdTrbcaJH9a/44P4E=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -83,10 +83,13 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Jiqian Chen <Jiqian.Chen@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 02/10] vpci/header: Emulate legacy capability list for dom0
-Date: Mon, 26 May 2025 17:45:51 +0800
-Message-ID: <20250526094559.140423-3-Jiqian.Chen@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 06/10] vpci: Hide extended capability when it fails to initialize
+Date: Mon, 26 May 2025 17:45:55 +0800
+Message-ID: <20250526094559.140423-7-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250526094559.140423-1-Jiqian.Chen@amd.com>
 References: <20250526094559.140423-1-Jiqian.Chen@amd.com>
@@ -98,210 +101,247 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A108:EE_|DS0PR12MB7993:EE_
-X-MS-Office365-Filtering-Correlation-Id: ba72d00d-6046-4b9e-64c2-08dd9c3a2ae5
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A106:EE_|DS4PR12MB9707:EE_
+X-MS-Office365-Filtering-Correlation-Id: f472eaff-55aa-42d4-969b-08dd9c3a30cf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?OU5semlvVFBlZmFGOVp2bWlTMkd6VHVMZjYxamM1MXJTdXNLQytBaE9vRWVt?=
- =?utf-8?B?dDc5Z1RqMVZNd3pYWnN3cFR1a1ljMHBKMXlBMjlwR25pd3haZFZVK0JraUp4?=
- =?utf-8?B?akxTM3IxZGdKZG92Tmh4LzV1NkxKRWdjVGNjd1lrbGNpMXRBUWxMVFFrMFh2?=
- =?utf-8?B?bjlReGlwSnJJajYzTHE0QmtvU2NmZkw2NHp3S3U0b1hPYkZTamVLR2dKbzIr?=
- =?utf-8?B?VS9QMlFmamlXbVRkWm92LzEvSEFzWjJyTmJWTk1QcVlSTmF6M3ZMZm1qWFgz?=
- =?utf-8?B?ZE5tK2JCV242SjZWNVFBQlFFRUJVa09DWk5ybS9iejdIWjBMRkorU3h2bGRx?=
- =?utf-8?B?Rmg4OGFUTFpTTVZpZUdlMlkrS2Jlb3FKRHh5QldmZnhYa1dmd2M3NVA0N01S?=
- =?utf-8?B?VHgva3ZxVy8vMnpzT3BxMkQ4emltTXNpNjE0UDdrcG9sRW9FbWtXTUZacUc5?=
- =?utf-8?B?bGZnL044ODdDTjlPUEZCQS8xOXNqemgrNlZieDBTYWFoRGZsQU1POFVHUHlh?=
- =?utf-8?B?bUNNL2huY0FBWXJDUkNvVnlESWVSUWtDTnVKUzQ0dEJlVEdQYXQ2dHJrV0ht?=
- =?utf-8?B?MVkxWjZVWk1Sc3I3czFwSXpweW9JaWQ2QjhPUWJVMEZQeDV5YVNydEF2aVRx?=
- =?utf-8?B?cElGZnVoM3NORTdOZ2RhMHdmR0dQQXRnam1TRWZKY2xCTXJvZGN6NGpEYkha?=
- =?utf-8?B?RG04b2NtMDU2RS9KYnlkNEJySHRleHh5eTV1OWxuVlNKb0F5QXo0UmlEY3JU?=
- =?utf-8?B?UUU1OS81SmdJNVl0aTEzVjV1RmZXM0tvQWV2YjZ5TVhhelprRHBaRFpNMGFB?=
- =?utf-8?B?UDZMakFFV1VLMGRhNHNqaXEyODhxZE5wS09mOUZYcWtxNWw3MHhVNTNlV3M3?=
- =?utf-8?B?U2RBSjFKMUpTYWVTc0J6N2wybTNQSThMMEU2OXpXTGFCRkpMa2JBUTZ3a0h1?=
- =?utf-8?B?Q3JNaFMrL2xTblNKUHVsQmZuMlUxWmptVE5EV2pKM01HTGJuUUFCY0U1YjJl?=
- =?utf-8?B?QUFRQWxMVzBjZStCNzBWWkZocGZLbmN5VjVBUUpBQWZsY0NiY1d2ZVhVNk16?=
- =?utf-8?B?SXJMeUVOa0VDNE1OSFplcjYwaHo1bjl3STRHREFZSXpOV1c0eE5JNSs4YkR5?=
- =?utf-8?B?Zjl5eWdpaC9VemU4WjViSmhyclVZb2ViZ0NpMW1XaGlQTldPQ3VHZ1dqMGpK?=
- =?utf-8?B?ZDBkVDFqb3F6QXE3Rk93UXlQSUUwNkozcW1CbjA3dTFwd2JPcUVNbC9TTE14?=
- =?utf-8?B?OXJHeTdYVjVzNGdBZGtmRC9xWXF4VWRhZERXUjlqUjhxYmFmUzFYZVQ3OG9R?=
- =?utf-8?B?V2hWNk4rR0cwcjJtWHM5YW4xQnIwWTlzY2NyYkdTMEgxYi9UaS9qWTN2M2pQ?=
- =?utf-8?B?bkxBczdiWGd2UDNQUEZQVG5yVC9WTGtkRzNuamc3SGFPK3NPT1RvdEZjRzZj?=
- =?utf-8?B?Qmd6b0pTdFBya0gycmNtRnNvaEtGOWxsY25idkJlRFRuZjZ5aE01aGZWTXdv?=
- =?utf-8?B?dTBaQ2ovOFZ1SVdQSkFUMlNjNnBPQnJsaEUySVNHNUFjTEo1aThWVVdxZ2pQ?=
- =?utf-8?B?Zk44UFhOWWFwT1NxaGtqUm9zY0FhSWdsRVV6cWc1T0ZNdzRBMk82QnZIY29V?=
- =?utf-8?B?YjhDUWl4bFZIY1c3Zk0zbjNjbXFRbVc5N1pFS25vTndxbkJGYlc1amdibnNE?=
- =?utf-8?B?TGpuT0liZkZWalhUVktwampxM2kwTXdkQlZTWlR6ZmRxVm5aNWY4VjlmNjNC?=
- =?utf-8?B?b2IrTVl3c3k3VnlNOFdFSmdhZzYzcVlXK3AzR1BXRW5lNVVKRTFwcjFrN1R2?=
- =?utf-8?B?NTdWNnVuVzJkWmFleGdjZEsvelRwTjhYeDZzVmV4eDhWbEZUOEVpUVRsM0Nl?=
- =?utf-8?B?QTd1eWNWVXV4My9uRVhSZWE3Z0NOUDFMWm9aNmtoRnc3bmk1dEhmT1Jrd3Ns?=
- =?utf-8?B?ZE5qeXVRWThVOE41M0gvOENtRFNJOE4vZDduVEVsc2Fld0p5Y241T2ZWSnJm?=
- =?utf-8?B?QlRKMWh0NmJMY1Vsc0R1QW1TbG93QkIvcFBlWkd5ZmJ1RkxPc0lIMjFINmhP?=
- =?utf-8?Q?HHNVSR?=
+	=?utf-8?B?dU1hSmNscXNrWENJaklXQ3JwQjBpaHMyN3o1bngxOEM2eGdSSzdKRU9Kd0tR?=
+ =?utf-8?B?aWtMN0tWcSs1OVVYV3d0SXlJem53Mk5vblJ0SlFSbFNHL1NZV3FFcXNQMVhE?=
+ =?utf-8?B?SjR5TXhjT1c2b2l4a2pDbTRZR3NBZkdUdEJ4dFJkcHZuRGtYdjU1T2kwTW5L?=
+ =?utf-8?B?TzcvYk80K2dKS2J0c3pJUWlzTFBSbEdBZFlKRUFkZHNWYTFjK1hsVUpURmN5?=
+ =?utf-8?B?eUZveDJDb1BqT2w1aUo3RmpQb3dkcTBwNG9PeXlReXF1T09BeWpCdGZndk5k?=
+ =?utf-8?B?UDZXc0ZnWWlxTEtPbFVJVlFnWTlkdGF0QmFaK1g4NUtQa29ucGFOaWxKZWEv?=
+ =?utf-8?B?dElPN0NxenJOT3YvOXpZV2dkcHlYeTdzcWZtcm9Mcmp4eVRYalM2a3g5RDZp?=
+ =?utf-8?B?NEd1UjMwdHRTTUNlbGlsMU9wZ2lHUnA0V2h6VHhVdDZwRjdXVERhcmdTTnBl?=
+ =?utf-8?B?WWpPUHNRRXV5dmt3V0Nsc3BFdFBzSVN2eEFQS3RmbmwyTzZHVVNWcllYMHQw?=
+ =?utf-8?B?Q01tTTRKZ2JNKzdlN2ZVU2FBcjJSVVR1RWNXbFlFb09aNFVOb3ptUjFlMnpy?=
+ =?utf-8?B?TkdzdFZNZW5iS1N6RnNyZlAvSjZHNG11d0liaW1xdWFHOHYyNHZMRm85bi9X?=
+ =?utf-8?B?WEYzaXh6YXRZUTlHQmJPMmM3NllNeGQ2YmQrRWtWSW5RZ20wQUl6Tnh1bXdr?=
+ =?utf-8?B?eE9tYVg0TzBVd1RvK0U4SUtMdmRNMjdtdFpOTTFiMC9ZRjQ5S1RDYUdINEpa?=
+ =?utf-8?B?VkdtV2FyeG5qdC9LbGVEclFSUDFuT3VxUkFDcVhrME9xN1FlWWdVNHhRQ3Q0?=
+ =?utf-8?B?b0R3WFdnOGRPdndKU1Z6a0ptMkNnSW5jNE9RZE4rblc4a3F2REpqWDRPZWZK?=
+ =?utf-8?B?VTk4U0lBZjVHaWRpME9NbGRkU3JRL2V4U0gxUHpPUXF1NGU1d3ZxUDJ0YThJ?=
+ =?utf-8?B?a0F1RlJ0andQRWVldUJsYVlyaDBrNWVDUlQ1K0lpMXJyM0pqaEJYTjJaQXVH?=
+ =?utf-8?B?aXBMUjVTUWsyclJmanpzNEhGbjQ5bGJCekxTbzk3Rk1ncGJnbTM3UzdCQzBB?=
+ =?utf-8?B?QnpLT3BWR0R1aXNjTW1kZmRRamh4NDZIeGVGd0tWYVlaTTZ4N0JqZEVESXlH?=
+ =?utf-8?B?WEU1OUhwSG0zMnAxRDF4aFh4blQ3LytLL3BoREhYUkJKeWZnbUhPeWtvbEpE?=
+ =?utf-8?B?dWE3VnhVVlIwYVlCZVg0MmFnZHY1L0hyMFJZYTdxT04vQXc4Z0gyMEV4RW9o?=
+ =?utf-8?B?aCtmeDdDQnRwY0ZSa2MvTFdDdnloSHBmekRDOWVSVUoydUVtVHBWaTNXMThG?=
+ =?utf-8?B?YnkrRC84Z1V6VHQrRGFuK01rU2VjbE82aXdLdHRKOHlHdmh5cEZ2WXlPMTFq?=
+ =?utf-8?B?UVlsL2JodkVveHVDSk5NeVB3WFdOdSt4andPT1JMSlN2ZDdnV3NucEhlUWZS?=
+ =?utf-8?B?RlFwZGFrYVpzWmVKTjlWR2twVktPV1pPRlhMd1BPbkpLUkx1RnFoVm1CWTdC?=
+ =?utf-8?B?Y25zTHV1WUVRUTZFQzNXNW5YdGI2NHBXbTZFTlptUVZrWW1jM05mb1F2ZzlP?=
+ =?utf-8?B?Q3lKa0sra0RPZ243UDFUR2w3Zzhvam9BMmdIcXhLb0tNVHRBZElPQzcxd1lv?=
+ =?utf-8?B?bW5VeVZKM1Rkd3dVbk9pVFk5OCszcVJFeE96ODE5Vzh1bFlXMlpOQkdicFQv?=
+ =?utf-8?B?V09tNGpiZG9wMTF2bTArWEpNNDJCNytsK0Q5bU8zQ2haRXpEV0poMTFka01H?=
+ =?utf-8?B?S0N3akJ0amxKTUhuZlUvRDMxMVR6ZWV2a1Fic3J4WUZYa29MK2ZjQjRvb08v?=
+ =?utf-8?B?cldBbHFaRjJPRGo5WW9Sc084dzFpS1dhcHdCNXRlWW1pb3VmcnV2eUZpdmQy?=
+ =?utf-8?B?RzFQU1FicWJybHhxQTB4UGFsWmozNXp4MDNqTHBxdllaUzRwN0dPejQyM2lU?=
+ =?utf-8?B?dkJicWcrdHNkRGg5a0owS0VxdmVRcVpEYk5TTG5yRWtMbDlHdldIMXNBWk42?=
+ =?utf-8?B?MWRrQ1NTS25DRFJDY3Z0VnlZWEhVbzZlay81TXVrMGxOK0VMb001cTI2Y1lk?=
+ =?utf-8?Q?T1N0H/?=
 X-Forefront-Antispam-Report:
 	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 09:46:19.7747
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 09:46:29.6973
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ba72d00d-6046-4b9e-64c2-08dd9c3a2ae5
+X-MS-Exchange-CrossTenant-Network-Message-Id: f472eaff-55aa-42d4-969b-08dd9c3a30cf
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0001A108.namprd05.prod.outlook.com
+	BL02EPF0001A106.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7993
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR12MB9707
 
-Current logic of emulating legacy capability list is only for domU.
-So, expand it to emulate for dom0 too. Then it will be easy to hide
-a capability whose initialization fails in a function.
+When vpci fails to initialize a extended capability of device, it
+just returns an error and vPCI gets disabled for the whole device.
 
-And restrict adding PCI_STATUS register only for domU since dom0
-has no limitation to access that register.
+So, add function to hide extended capability when initialization
+fails. And remove the failed extended capability handler from vpci
+extended capability list.
 
 Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
 ---
 cc: "Roger Pau Monné" <roger.pau@citrix.com>
+cc: Andrew Cooper <andrew.cooper3@citrix.com>
+cc: Anthony PERARD <anthony.perard@vates.tech>
+cc: Michal Orzel <michal.orzel@amd.com>
+cc: Jan Beulich <jbeulich@suse.com>
+cc: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <sstabellini@kernel.org>
 ---
 v4->v5 changes:
-* Return early if dom0, so that I didn't need to change the exiting return chunk.
+* Modify the hex digits of PCI_EXT_CAP_NEXT_MASK and PCI_EXT_CAP_NEXT to be low case.
+* Rename vpci_ext_capability_mask to vpci_ext_capability_hide.
 
 v3->v4 changes:
-* Also pass supported_caps to pci_find_next_cap_ttl() for dom0 since the n is zero when dom0,
-  and add a comment to explain it.
-* Restrict adding PCI_STATUS register only for domU since dom0 has no limitation to access that register.
-* For dom0 register handler, set vpci_hw_write8 to it instead of NULL.
+* Change definition of PCI_EXT_CAP_NEXT to be "#define PCI_EXT_CAP_NEXT(header) (MASK_EXTR(header, PCI_EXT_CAP_NEXT_MASK) & 0xFFCU)" to avoid redundancy.
+* Modify the commit message.
+* Change vpci_ext_capability_mask() to return error instead of using ASSERT.
+* Set the capability ID part to be zero when we need to hide the capability of position 0x100U.
+* Add check "if ( !offset )" in vpci_ext_capability_mask().
 
 v2->v3 changes:
-* Not to add handler of PCI_CAP_LIST_ID when domain is dom0.
+* Separated from the last version patch "vpci: Hide capability when it fails to initialize".
+* Whole implementation changed because last version is wrong.
+  This version gets target handler and previous handler from vpci->handlers, then remove the target.
+* Note: a case in function vpci_ext_capability_mask() needs to be discussed,
+  because it may change the offset of next capability when the offset of target
+  capability is 0x100U(the first extended capability), my implementation is just to
+  ignore and let hardware to handle the target capability.
 
 v1->v2 changes:
-new patch.
+* Removed the "priorities" of initializing capabilities since it isn't used anymore.
+* Added new function vpci_capability_mask() and vpci_ext_capability_mask() to
+  remove failed capability from list.
+* Called vpci_make_msix_hole() in the end of init_msix().
 
 Best regards,
 Jiqian Chen.
 ---
- xen/drivers/vpci/header.c | 39 ++++++++++++++++++++++++++-------------
- xen/drivers/vpci/vpci.c   |  6 ++++++
- xen/include/xen/vpci.h    |  2 ++
- 3 files changed, 34 insertions(+), 13 deletions(-)
+ xen/drivers/vpci/vpci.c    | 100 +++++++++++++++++++++++++++++++++++--
+ xen/include/xen/pci_regs.h |   5 +-
+ 2 files changed, 100 insertions(+), 5 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 0fb3cfa6a376..d26cbba08ee1 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -758,9 +758,9 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 60e7654ec377..2d4794ff3dea 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -176,6 +176,98 @@ static int vpci_capability_hide(struct pci_dev *pdev, unsigned int cap)
+     return 0;
+ }
+ 
++static struct vpci_register *vpci_get_previous_ext_cap_register(
++    struct vpci *vpci, unsigned int offset)
++{
++    uint32_t header;
++    unsigned int pos = PCI_CFG_SPACE_SIZE;
++    struct vpci_register *r;
++
++    if ( offset <= PCI_CFG_SPACE_SIZE )
++    {
++        ASSERT_UNREACHABLE();
++        return NULL;
++    }
++
++    r = vpci_get_register(vpci, pos, 4);
++    if ( !r )
++        return NULL;
++
++    header = (uint32_t)(uintptr_t)r->private;
++    pos = PCI_EXT_CAP_NEXT(header);
++    while ( pos > PCI_CFG_SPACE_SIZE && pos != offset )
++    {
++        r = vpci_get_register(vpci, pos, 4);
++        if ( !r )
++            return NULL;
++        header = (uint32_t)(uintptr_t)r->private;
++        pos = PCI_EXT_CAP_NEXT(header);
++    }
++
++    if ( pos <= PCI_CFG_SPACE_SIZE )
++        return NULL;
++
++    return r;
++}
++
++static int vpci_ext_capability_hide(struct pci_dev *pdev, unsigned int cap)
++{
++    const unsigned int offset = pci_find_ext_capability(pdev->sbdf, cap);
++    struct vpci_register *rm, *prev_r;
++    struct vpci *vpci = pdev->vpci;
++    uint32_t header, pre_header;
++
++    if ( !offset )
++    {
++        ASSERT_UNREACHABLE();
++        return 0;
++    }
++
++    spin_lock(&vpci->lock);
++    rm = vpci_get_register(vpci, offset, 4);
++    if ( !rm )
++    {
++        spin_unlock(&vpci->lock);
++        return -ENODEV;
++    }
++
++    header = (uint32_t)(uintptr_t)rm->private;
++    if ( offset == PCI_CFG_SPACE_SIZE )
++    {
++        if ( PCI_EXT_CAP_NEXT(header) <= PCI_CFG_SPACE_SIZE )
++            rm->private = (void *)(uintptr_t)0;
++        else
++            /*
++             * If this case removes target capability of position 0x100U, then
++             * it needs to move the next capability to be in position 0x100U,
++             * that would cause the offset of next capability in vpci different
++             * from the hardware, then cause error accesses, so here chooses to
++             * set the capability ID part to be zero.
++             */
++            rm->private = (void *)(uintptr_t)(header &
++                                              ~PCI_EXT_CAP_ID(header));
++
++        spin_unlock(&vpci->lock);
++        return 0;
++    }
++
++    prev_r = vpci_get_previous_ext_cap_register(vpci, offset);
++    if ( !prev_r )
++    {
++        spin_unlock(&vpci->lock);
++        return -ENODEV;
++    }
++
++    pre_header = (uint32_t)(uintptr_t)prev_r->private;
++    prev_r->private = (void *)(uintptr_t)((pre_header &
++                                           ~PCI_EXT_CAP_NEXT_MASK) |
++                                          (header & PCI_EXT_CAP_NEXT_MASK));
++    list_del(&rm->node);
++    spin_unlock(&vpci->lock);
++    xfree(rm);
++    return 0;
++}
++
+ static int vpci_init_capabilities(struct pci_dev *pdev)
  {
-     int rc;
-     bool mask_cap_list = false;
-+    bool is_hwdom = is_hardware_domain(pdev->domain);
- 
--    if ( !is_hardware_domain(pdev->domain) &&
--         pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
-+    if ( pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
-     {
-         /* Only expose capabilities to the guest that vPCI can handle. */
-         unsigned int next, ttl = 48;
-@@ -768,12 +768,18 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
-             PCI_CAP_ID_MSI,
-             PCI_CAP_ID_MSIX,
-         };
-+        /*
-+         * For dom0, we should expose all capabilities instead of a fixed
-+         * capabilities array, so setting n to 0 here is to get the next
-+         * capability position directly in pci_find_next_cap_ttl.
-+         */
-+        const unsigned int n = is_hwdom ? 0 : ARRAY_SIZE(supported_caps);
- 
-         next = pci_find_next_cap_ttl(pdev->sbdf, PCI_CAPABILITY_LIST,
--                                     supported_caps,
--                                     ARRAY_SIZE(supported_caps), &ttl);
-+                                     supported_caps, n, &ttl);
- 
--        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-+        rc = vpci_add_register(pdev->vpci, vpci_read_val,
-+                               is_hwdom ? vpci_hw_write8 : NULL,
-                                PCI_CAPABILITY_LIST, 1,
-                                (void *)(uintptr_t)next);
-         if ( rc )
-@@ -781,7 +787,7 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
- 
-         next &= ~3;
- 
--        if ( !next )
-+        if ( !next && !is_hwdom )
-             /*
-              * If we don't have any supported capabilities to expose to the
-              * guest, mask the PCI_STATUS_CAP_LIST bit in the status
-@@ -795,15 +801,18 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
- 
-             next = pci_find_next_cap_ttl(pdev->sbdf,
-                                          pos + PCI_CAP_LIST_NEXT,
--                                         supported_caps,
--                                         ARRAY_SIZE(supported_caps), &ttl);
-+                                         supported_caps, n, &ttl);
- 
--            rc = vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
--                                   pos + PCI_CAP_LIST_ID, 1, NULL);
--            if ( rc )
--                return rc;
-+            if ( !is_hwdom )
-+            {
-+                rc = vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
-+                                       pos + PCI_CAP_LIST_ID, 1, NULL);
-+                if ( rc )
-+                    return rc;
-+            }
- 
--            rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-+            rc = vpci_add_register(pdev->vpci, vpci_read_val,
-+                                   is_hwdom ? vpci_hw_write8 : NULL,
-                                    pos + PCI_CAP_LIST_NEXT, 1,
-                                    (void *)(uintptr_t)next);
-             if ( rc )
-@@ -813,6 +822,10 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
+     for ( unsigned int i = 0; i < NUM_VPCI_INIT; i++ )
+@@ -209,11 +301,11 @@ static int vpci_init_capabilities(struct pci_dev *pdev)
+                    pdev->domain, &pdev->sbdf,
+                    is_ext ? "extended" : "legacy", cap);
+             if ( !is_ext )
+-            {
+                 rc = vpci_capability_hide(pdev, cap);
+-                if ( rc )
+-                    return rc;
+-            }
++            else
++                rc = vpci_ext_capability_hide(pdev, cap);
++            if ( rc )
++                return rc;
          }
      }
  
-+    /* Return early for the hw domain, no masking of PCI_STATUS. */
-+    if ( is_hwdom )
-+        return 0;
-+
-     /* Utilize rsvdp_mask to hide PCI_STATUS_CAP_LIST from the guest. */
-     return vpci_add_register_mask(pdev->vpci, vpci_hw_read16, vpci_hw_write16,
-                                   PCI_STATUS, 2, NULL,
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index d2f0f97e0a04..09988f04c27c 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -255,6 +255,12 @@ uint32_t cf_check vpci_hw_read32(
-     return pci_conf_read32(pdev->sbdf, reg);
- }
+diff --git a/xen/include/xen/pci_regs.h b/xen/include/xen/pci_regs.h
+index 27b4f44eedf3..3b6963133dbd 100644
+--- a/xen/include/xen/pci_regs.h
++++ b/xen/include/xen/pci_regs.h
+@@ -448,7 +448,10 @@
+ /* Extended Capabilities (PCI-X 2.0 and Express) */
+ #define PCI_EXT_CAP_ID(header)		((header) & 0x0000ffff)
+ #define PCI_EXT_CAP_VER(header)		(((header) >> 16) & 0xf)
+-#define PCI_EXT_CAP_NEXT(header)	(((header) >> 20) & 0xffc)
++#define PCI_EXT_CAP_NEXT_MASK		0xfff00000U
++/* Bottom two bits of next capability position are reserved. */
++#define PCI_EXT_CAP_NEXT(header) \
++    (MASK_EXTR(header, PCI_EXT_CAP_NEXT_MASK) & 0xffcU)
  
-+void cf_check vpci_hw_write8(
-+    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
-+{
-+    pci_conf_write8(pdev->sbdf, reg, val);
-+}
-+
- void cf_check vpci_hw_write16(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
- {
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 475981cb8155..fc8d5b470b0b 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -76,6 +76,8 @@ uint32_t cf_check vpci_hw_read16(
-     const struct pci_dev *pdev, unsigned int reg, void *data);
- uint32_t cf_check vpci_hw_read32(
-     const struct pci_dev *pdev, unsigned int reg, void *data);
-+void cf_check vpci_hw_write8(
-+    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
- void cf_check vpci_hw_write16(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
- 
+ #define PCI_EXT_CAP_ID_ERR	1
+ #define PCI_EXT_CAP_ID_VC	2
 -- 
 2.34.1
 
