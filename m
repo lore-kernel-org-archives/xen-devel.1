@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B987C54ED1
-	for <xen-devel@archiver.kernel.org>; Tue, 27 May 2025 08:55:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.998098.1378913 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AAAC5B543
+	for <xen-devel@archiver.kernel.org>; Tue, 27 May 2025 09:20:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.998156.1378949 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJq5f-00068K-Hs; Tue, 27 May 2025 08:55:19 +0000
+	id 1uJqTT-00037q-8L; Tue, 27 May 2025 09:19:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 998098.1378913; Tue, 27 May 2025 08:55:19 +0000
+Received: by outflank-mailman (output) from mailman id 998156.1378949; Tue, 27 May 2025 09:19:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uJq5f-00068D-FP; Tue, 27 May 2025 08:55:19 +0000
-Received: by outflank-mailman (input) for mailman id 998098;
- Tue, 27 May 2025 08:55:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uJqTT-00036P-5W; Tue, 27 May 2025 09:19:55 +0000
+Received: by outflank-mailman (input) for mailman id 998156;
+ Tue, 27 May 2025 09:19:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0jbf=YL=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uJq5e-000687-7N
- for xen-devel@lists.xenproject.org; Tue, 27 May 2025 08:55:18 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4ae94275-3ad8-11f0-b894-0df219b8e170;
- Tue, 27 May 2025 10:55:09 +0200 (CEST)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a363d15c64so2183766f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 27 May 2025 01:55:13 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a4e1fe9430sm1235287f8f.75.2025.05.27.01.55.11
+ <SRS0=PdBa=YL=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1uJqTS-0002b2-5t
+ for xen-devel@lists.xenproject.org; Tue, 27 May 2025 09:19:54 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bf942269-3adb-11f0-a2fd-13f23c93f187;
+ Tue, 27 May 2025 11:19:53 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5532a30ac41so304797e87.0
+ for <xen-devel@lists.xenproject.org>; Tue, 27 May 2025 02:19:53 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5521b9f9decsm1663715e87.157.2025.05.27.02.19.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 01:55:11 -0700 (PDT)
+ Tue, 27 May 2025 02:19:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,91 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ae94275-3ad8-11f0-b894-0df219b8e170
+X-Inumbo-ID: bf942269-3adb-11f0-a2fd-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748336112; x=1748940912; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NJRlsrbIftpUn3xrkDPhph5ZHApo2Tvm5YsE6Cw+Mkg=;
-        b=C7q3COS6kPd4Y5xgPKM7b/QgBkltNK1btGLum2BfQ62hCIWIns245lLLiWS7mAqGs3
-         b37wFcYfH7bdwTzwHUv9R4QEIrHYFYZmbRgUdvCwjwGCbhNABHN6CSnF2jXOBUGX3h1Y
-         aR0a11aIjxoFACeCy95bu++QjqILfDgF6PYT8=
+        d=gmail.com; s=20230601; t=1748337593; x=1748942393; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=047svu4VMPtrVn1GtLrAbtidBhKsG4dxvFgzkgEe5XM=;
+        b=Z1bXUWCX/5iyTTbddfgCwLV30sPct8xwbrQRNHvs+pgjWpnkgg69OCY8ZUchXH3HrP
+         DP1rsSxAn5ntaim9Mp4mXcyv1eGlEm5UEh6HAHepcpH0gNV4YOpaYN25nI2thsSCQ1l7
+         sjdwmNUaLN8YzqSQ4sPBHCQMvTuKs7C7oPuIH+N85vHCIwiz24cF9pXiz0Ivbm6wmnL+
+         JNStSWL7sIY92kXSe+VcicAFXAql8nUOAHgTBE4qpoV5hpRudmpIS0sa6AUZ/VwjmOA6
+         iGE1ciaJuJLtnYNmRjt31KG3KMtUrO9gqDz0y6q3M9pLyQT+7GiLIQOgSjiSSNrMrUzw
+         hDfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748336112; x=1748940912;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NJRlsrbIftpUn3xrkDPhph5ZHApo2Tvm5YsE6Cw+Mkg=;
-        b=eYOuTE0Dr3iclE2jmYay+g7o+2WBE9P+s5XVn52FI178rhwNnn/KuattzsVmIfCled
-         ktdGrTeLijJ4IECHv3xIGPWtivArn6Lgun5Rgx0WX/RUPkjE05gC+b18At7hYUX9mjmk
-         Gct64W0d/J6wZL5qMhxNAhNx/Kl+t4/5fLRvNTXmvMonPB3xXv4HsM8ndmqQPPPHQP6l
-         v6iApDKpKFyVfeHdpZ2xOjU/4OxGCpT2jApeoCpKvisllYjJfqTNmvy3GG6glQycySoX
-         6PkuYZFXuiN1/KBQn8PsxD2gqxGZ+AVyb85cvf4S60zzaGb6ogQVSI01Jmbx827JDc1J
-         yuHw==
-X-Gm-Message-State: AOJu0YyLdPWCuCn6ruKlh0b2Vv+Dr4UoKxoa5n0r1MPR0tdAsbsNf9A0
-	UlQb4aoh4B+EY47CNy9tkbTQiPJh292JoB9ns/V3xyhrI19V+ht47i5FlleqPjMC4Qa8J6vpMiw
-	ZXQoN
-X-Gm-Gg: ASbGncvvsNDIFC7q8FcvXyVTcPz2uO0VFa7oDSCmSTvXd+HqckiVJG8YGQh2PVv6HPB
-	mvTZOpXThZoIi2lh15MUlcA7RgV2xxGIBZQab//aL38i0WLl0c6DxQUUzguL+W0TitDep6PzRDO
-	AhId6cf2f2q+StvaXitgOYkXAuv4sgsIbRXjfr2lKSrN7QcrmxvmNZMZ6/lgqWa/0RiqSnq8gZc
-	InWiE9pX9EmdG406vk4yTaQQXuyNtMXKns3gq/7QsopRMagqSTs5UUhZoSqShZ6P3oXgzVpEfFi
-	ODyoNRKBu+nU0aIEAVKOljlYR7r+kUCLJu7zKWbj0etV/ATcNgAI4N4CjtC9ZIO0SI3MHbOaeAL
-	8FAH/3IhZAUEnRM2vvtM=
-X-Google-Smtp-Source: AGHT+IFtiEhpA67zYypSi6+yw6uitOWJdUGyd5D1vCU9xy9ipwh9IBLKHSFbWvQQB6l0LwJo+1zkoQ==
-X-Received: by 2002:a5d:5848:0:b0:3a4:de27:e00f with SMTP id ffacd0b85a97d-3a4de27e06emr4372551f8f.7.1748336112077;
-        Tue, 27 May 2025 01:55:12 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
+        d=1e100.net; s=20230601; t=1748337593; x=1748942393;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=047svu4VMPtrVn1GtLrAbtidBhKsG4dxvFgzkgEe5XM=;
+        b=KP+Y+tIu20t6GWEEaZicsoG+QAAv5S3THYbsvXikMIvk2EPwKY45Qztf9ZZjgNdxCB
+         cCDg6zslVRnWmqq6Db/xN+NY5hEwbfh0YjsHQONFOKLuzOj1+D9wdBiWDCwiOsYLGdH8
+         f1iJJwXzqMr1h4W5TMtv1RYy8d4Ve5nmPU+yjMu1UYb8rTHmUhiqxBPn6vh7IkA2V+oz
+         zXobBvNgp5deTnwJmQI/1FdOftDLxo+usej07jQCEivHs4xWKtc/6kgczT78GKv9Trmc
+         GgvHhNP2VRCBny5oeLHex5apg3RxwfSjxdhyP4TF0kg0DmVOYk1xiuNNYW762ftCLfmf
+         VdlQ==
+X-Gm-Message-State: AOJu0YxNQD+cgVmln0G+XgVEtSBUmfrLUJx3hgptPN8OlLfKtZEXKGnn
+	kO/xCBwaIha2oUuzVAOvNdgKlcGXjLr03vdgR4aLwuilmSLNO0xCTu/7UuknAQXv
+X-Gm-Gg: ASbGncvyLqNsTgjHhFhGfKlZl89tPJPUX8AkWN6Rj83SMk1iUY3CO6f09loC8G7idKn
+	V+PRKr3Ovr9rKWhXY90k28pQqXdsixdRnYrW1tsVhtGxu3S7XUolLFIZfrEQ8e14RVLWHnYQFBk
+	qxQ5TqU06rEc1UvkXHG7MapspyYE+Rdv2/EezfFjb6pwr1TtwkIvSjqo3CqnC1zG1V9UwQNvC4A
+	Vhd7j7ZGanvjPkT1B1XVgxkYmRiKASHnFmAUIgEnP5kAh62FtkTJEx8v36REruAfvY9lf1HWDKc
+	lpCWhvhYv2Z+CGmc99//w9SETjbeKfqOxqsD3OlTaBbtKAZwzm+nTQJouBclZFFSjVMwEMUO0EA
+	6xGSgqU99lnQK0x53ByEg9aOdxA==
+X-Google-Smtp-Source: AGHT+IFxb/5W18oyk/0gBgsHOaXnhplOGuj1SCrklarCGv704LxYWGmqaRHYVe9H1zyfxO2++M3bSg==
+X-Received: by 2002:a05:6512:3191:b0:54b:117b:b54b with SMTP id 2adb3069b0e04-5521cba15a2mr3250533e87.54.1748337592683;
+        Tue, 27 May 2025 02:19:52 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH] x86/hvmloader: fix order of PCI vs MTRR initialization
-Date: Tue, 27 May 2025 10:55:04 +0200
-Message-ID: <20250527085504.77444-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.49.0
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4][PART 1 3/4] SUPPORT.md: Document ARM PSCI and vPSCI support
+Date: Tue, 27 May 2025 12:18:56 +0300
+Message-ID: <b04c6315f93e9887fb79a5748b60f53cbd9feba4.1748337249.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1748337249.git.mykola_kvach@epam.com>
+References: <cover.1748337249.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-After some recent change the order of MTRR vs PCI initialization is
-inverted.  MTRR will get initialization ahead of PCI scanning and sizing of
-MMIO regions.  As a result when setting up MTRRs the MMIO window below 4GB
-will always have the same size, and there will be no window above 4GB.
-This results in malformed and incomplete MTRRs being setup.
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Fix by making sure PCI is initialized ahead of MTRR, also add a comment to
-notice the ordering dependency.
+Add a new entry under "Host hardware support" to document Xen's use of the
+PSCI interface to interact with EL3 firmware via SMC calls. Supported PSCI
+functions include CPU_ON, CPU_OFF, SYSTEM_RESET, and SYSTEM_OFF.
+SYSTEM_SUSPEND is not yet supported.
 
-Fixes: 2c3dffbaa324 ('tools/hvmloader: Replace LAPIC_ID() with cpu_to_apicid[]')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Add a separate entry under "Virtual Hardware, Hypervisor" for vPSCI,
+which describes the emulated PSCI interface exposed to guests.
+SYSTEM_SUSPEND is not yet supported for hardware domain.
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
- tools/firmware/hvmloader/hvmloader.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ SUPPORT.md | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
-index 4e330fc1e241..6d23150fc9fd 100644
---- a/tools/firmware/hvmloader/hvmloader.c
-+++ b/tools/firmware/hvmloader/hvmloader.c
-@@ -341,10 +341,16 @@ int main(void)
+diff --git a/SUPPORT.md b/SUPPORT.md
+index e8fd0c251e..31ad4c96fd 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -73,6 +73,12 @@ For the Cortex A77 r0p0 - r1p0, see Errata 1508412.
+     Status, x86 PV: Supported
+     Status, ARM: Experimental
  
-     printf("CPU speed is %u MHz\n", get_cpu_mhz());
- 
-+    /*
-+     * PCI setup must be done before SMP initialization, as the later also does
-+     * the MTRR setup and so the size of the PCI MMIO windows must be known at
-+     * that point.
-+     */
-+    pci_setup();
++### ARM/PSCI
 +
-     smp_initialise();
++    Status: Supported
++
++SYSTEM_SUSPEND is not yet supported.
++
+ ### Host EFI Boot
  
-     apic_setup();
--    pci_setup();
+     Status, x86: Supported
+@@ -946,6 +952,15 @@ by hwdom. Some platforms use SCMI for access to system-level resources.
  
-     perform_tests();
+     Status: Supported
  
++### Arm: vPSCI (virtual PSCI interface for guests)
++
++Emulated PSCI interface exposed to guests to support CPU_ON, CPU_OFF,
++SYSTEM_RESET, SYSTEM_OFF, etc.
++
++    Status: Supported
++
++SYSTEM_SUSPEND is not yet supported for hardware domain.
++
+ ## Virtual Hardware, QEMU
+ 
+ This section describes supported devices available in HVM mode using a
 -- 
-2.49.0
+2.48.1
 
 
