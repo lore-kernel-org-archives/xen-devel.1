@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB95C5B543
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A31C5AD49
 	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 22:51:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.999589.1380218 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.999591.1380238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKPbk-0007QI-3D; Wed, 28 May 2025 22:50:48 +0000
+	id 1uKPbv-0007vh-Hp; Wed, 28 May 2025 22:50:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 999589.1380218; Wed, 28 May 2025 22:50:48 +0000
+Received: by outflank-mailman (output) from mailman id 999591.1380238; Wed, 28 May 2025 22:50:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKPbk-0007QB-00; Wed, 28 May 2025 22:50:48 +0000
-Received: by outflank-mailman (input) for mailman id 999589;
- Wed, 28 May 2025 22:50:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uKPbv-0007vW-Ev; Wed, 28 May 2025 22:50:59 +0000
+Received: by outflank-mailman (input) for mailman id 999591;
+ Wed, 28 May 2025 22:50:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ql61=YM=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uKPbh-0007Q4-Uz
- for xen-devel@lists.xenproject.org; Wed, 28 May 2025 22:50:47 +0000
-Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
- [109.224.244.17]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2fd31b43-3c16-11f0-a2fe-13f23c93f187;
- Thu, 29 May 2025 00:50:44 +0200 (CEST)
+ id 1uKPbt-0007tz-TH
+ for xen-devel@lists.xenproject.org; Wed, 28 May 2025 22:50:58 +0000
+Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
+ [79.135.106.31]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 36b00870-3c16-11f0-b894-0df219b8e170;
+ Thu, 29 May 2025 00:50:55 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,61 +38,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2fd31b43-3c16-11f0-a2fe-13f23c93f187
+X-Inumbo-ID: 36b00870-3c16-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=gozt5ty2srbr7iekbeybklhxbm.protonmail; t=1748472642; x=1748731842;
-	bh=4xf+LmT6akS66VcEUq/njEr17pXZWyC9MUI/+pKOsyc=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=Jp6+C5xbxbF3M7tuDsOIbpJTi5g2QgBJ5ajogEy2HCsayykROZZVpZ3NdpKCPBf2C
-	 gNjkIaSUZ8g18aqUm8lli2GNa5XbIEdrjwV2rMh9ieM73VvXeeNn3gC+Pyv8phIKSo
-	 qyuOIeujaGFTnewTiTEROHr8zZ4Cd/4FFTO+RrXOT9RIGmJH0CdGuamAdHcY3Cs7ad
-	 ji4BAccPlOHAGXVD6uEY6GGtxuvAZeajrdKFf8dGKdvcPPGI6jT7KDMauykuf5liOp
-	 cnCHTTL09eakicdsorBjvc2uEkwpnQLOyBuebMnOwH7rn/TE1xHEhFOn+x9aitmyX6
-	 oNv+4OzF2Uyow==
-Date: Wed, 28 May 2025 22:50:36 +0000
+	s=gdfsaiyzcbfupgnn6juwp67waq.protonmail; t=1748472653; x=1748731853;
+	bh=Z/JvWCVHhSekNxhXX77FDFM+KKfoHa1i5v/UEaZpFV8=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=WZhRxnd2uCWaEjqQDes08jEY7QTgCEx/3Zilfdd82dVWX+nI8Em+zEyjXo3VqeyHP
+	 TQemV8S9QAa/RKW3KqBpx/FXoBBKyjoSDwnGipsN5XmexL/HL+JrcKsPwBa0Y6rMoY
+	 iiS6CNn66D/suV/KgtyXtJDeF8QrsYzND6wpBx6CDXCqoqGMpivw3ghBmaTfuMwd3t
+	 itW4J9s2ASp69M6UhucXG/L5WZHiK0VgPtvIaAA01yp2uly/EjukSfTq/KMhw5BrJW
+	 5E+1oaUbu1p9INLERPYFB32ZZyBO1y38reohsJu0a4hMortyZB8sQ3znoupiVVOIif
+	 5wz0z4hIN308w==
+Date: Wed, 28 May 2025 22:50:49 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, roger.pau@citrix.com, sstabellini@kernel.org, teddy.astie@vates.tech, dmukhin@ford.com
-Subject: [PATCH v9 0/3] xen/domain: domain ID allocation
-Message-ID: <20250528225030.2652166-1-dmukhin@ford.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, roger.pau@citrix.com, sstabellini@kernel.org, teddy.astie@vates.tech, dmukhin@ford.com, Denis Mukhin <dmkhn@proton.me>
+Subject: [PATCH v9 2/3] xen/domain: adjust domain ID allocation for Arm
+Message-ID: <20250528225030.2652166-3-dmukhin@ford.com>
+In-Reply-To: <20250528225030.2652166-1-dmukhin@ford.com>
+References: <20250528225030.2652166-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: f7bbdb93da407e5db9459fb89a33de37dce30cca
+X-Pm-Message-ID: 98d2e0e7e4c3aa440e1df941fd653d8272b356b0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The patch series adds new library calls for allocating domain IDs.
+From: Denis Mukhin <dmkhn@proton.me>
 
-Patch 1 introduces new domid_{alloc,free} calls.
-Patch 2 adjusts hardware domain ID treatment on Arm.
-Patch 3 is an RFC: introduces new CONFIG_MAX_DOMID parameter to limit the
-number of user domains during run-time.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Link to v8: https://lore.kernel.org/xen-devel/20250521000024.2944685-1-dmuk=
-hin@ford.com/
-Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1=
-841666928
+Remove the hardcoded domain ID 0 allocation for hardware domain and replace=
+ it
+with a call to get_initial_domain_id() (returns the value of hardware_domid=
+ on
+Arm).
 
-Denis Mukhin (3):
-  xen/domain: unify domain ID allocation
-  xen/domain: adjust domain ID allocation for Arm
-  xen/domain: introduce CONFIG_MAX_DOMID
+Update domid_alloc(DOMID_INVALID) case to ensure that get_initial_domain_id=
+()
+ID is skipped during domain ID allocation to cover domU case in dom0less
+configuration. That also fixes a potential issue with re-using ID#0 for dom=
+Us
+when get_initial_domain_id() returns non-zero.
 
- xen/arch/arm/domain_build.c             | 17 +++++--
- xen/arch/x86/cpu/mcheck/mce.c           |  2 +-
- xen/arch/x86/cpu/vpmu.c                 |  2 +-
- xen/arch/x86/setup.c                    | 11 +++--
- xen/common/Kconfig                      |  8 ++++
- xen/common/device-tree/dom0less-build.c | 17 ++++---
- xen/common/domain.c                     | 62 +++++++++++++++++++++++--
- xen/common/domctl.c                     | 42 ++---------------
- xen/common/sched/core.c                 |  4 +-
- xen/drivers/passthrough/vtd/iommu.c     |  2 +-
- xen/include/xen/domain.h                |  3 ++
- 11 files changed, 107 insertions(+), 63 deletions(-)
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v8:
+- rebased=20
+---
+ xen/arch/arm/domain_build.c             | 4 ++--
+ xen/common/device-tree/dom0less-build.c | 9 +++------
+ xen/common/domain.c                     | 4 ++--
+ 3 files changed, 7 insertions(+), 10 deletions(-)
 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index e9d563c269..0ad80b020a 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2035,9 +2035,9 @@ void __init create_dom0(void)
+     if ( !llc_coloring_enabled )
+         flags |=3D CDF_directmap;
+=20
+-    domid =3D domid_alloc(0);
++    domid =3D domid_alloc(get_initial_domain_id());
+     if ( domid =3D=3D DOMID_INVALID )
+-        panic("Error allocating domain ID 0\n");
++        panic("Error allocating domain ID %d\n", get_initial_domain_id());
+=20
+     dom0 =3D domain_create(domid, &dom0_cfg, flags);
+     if ( IS_ERR(dom0) )
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
+ee/dom0less-build.c
+index a509f8fecd..9a6015f4ce 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -974,14 +974,11 @@ void __init create_domUs(void)
+=20
+         arch_create_domUs(node, &d_cfg, flags);
+=20
+-        /*
+-         * The variable max_init_domid is initialized with zero, so here i=
+t's
+-         * very important to use the pre-increment operator to call
+-         * domain_create() with a domid > 0. (domid =3D=3D 0 is reserved f=
+or Dom0)
+-         */
+-        domid =3D domid_alloc(++max_init_domid);
++        domid =3D domid_alloc(DOMID_INVALID);
+         if ( domid =3D=3D DOMID_INVALID )
+             panic("Error allocating ID for domain %s\n", dt_node_name(node=
+));
++        if ( max_init_domid < domid )
++            max_init_domid =3D domid;
+=20
+         d =3D domain_create(domid, &d_cfg, flags);
+         if ( IS_ERR(d) )
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index ae0c44fcbb..129b4fcb37 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -2423,8 +2423,8 @@ domid_t domid_alloc(domid_t domid)
+     else
+     {
+         static domid_t domid_last;
+-        /* NB: account for late hwdom case, skip ID#0 */
+-        const domid_t reserved_domid =3D 0;
++        /* NB: account for late hwdom case */
++        const domid_t reserved_domid =3D get_initial_domain_id();
+         const bool reserved =3D __test_and_set_bit(reserved_domid, domid_b=
+itmap);
+=20
+         domid =3D find_next_zero_bit(domid_bitmap, DOMID_FIRST_RESERVED,
 --=20
 2.34.1
 
