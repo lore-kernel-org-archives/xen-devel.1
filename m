@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5BBAC3ABB2
-	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 21:11:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.999542.1380178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0F2C3ABB2
+	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 21:18:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.999571.1380208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKO2z-0002Ev-HD; Wed, 28 May 2025 21:10:49 +0000
+	id 1uKO9e-0003wx-Qs; Wed, 28 May 2025 21:17:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 999542.1380178; Wed, 28 May 2025 21:10:49 +0000
+Received: by outflank-mailman (output) from mailman id 999571.1380208; Wed, 28 May 2025 21:17:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKO2z-0002Eo-EU; Wed, 28 May 2025 21:10:49 +0000
-Received: by outflank-mailman (input) for mailman id 999542;
- Wed, 28 May 2025 21:10:48 +0000
+	id 1uKO9e-0003wq-Nj; Wed, 28 May 2025 21:17:42 +0000
+Received: by outflank-mailman (input) for mailman id 999571;
+ Wed, 28 May 2025 21:17:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CMiF=YM=gmail.com=christopher.w.clark@srs-se1.protection.inumbo.net>)
- id 1uKO2y-0002Ed-GK
- for xen-devel@lists.xenproject.org; Wed, 28 May 2025 21:10:48 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 399f1543-3c08-11f0-a2fe-13f23c93f187;
- Wed, 28 May 2025 23:10:47 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a4d33f971aso189658f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 28 May 2025 14:10:47 -0700 (PDT)
-Received: from localhost.localdomain ([91.85.47.110])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4ef4f3aa3sm143910f8f.84.2025.05.28.14.10.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 14:10:45 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ql61=YM=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1uKO9d-0003wk-Fn
+ for xen-devel@lists.xenproject.org; Wed, 28 May 2025 21:17:41 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2f6541a0-3c09-11f0-a2fe-13f23c93f187;
+ Wed, 28 May 2025 23:17:40 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,174 +38,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 399f1543-3c08-11f0-a2fe-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748466646; x=1749071446; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=877Qh42+jkY8cdr8W69/LgWDAPp4oF1qwK/ps88nv2w=;
-        b=H87x3MLGiVJ6vkmNoLWaNukYD9g1oGiLPVvBk3YrV+lkmRqARUgEDQrZ1AvOyGFPUG
-         nCESBbFXWYA0I9mMCLY1xOkxTxVKgdAjmsZzP2pazq1iQieL/9AS4eW6ogi/2jlDtTdm
-         UtaKOB2Sd5bjWhPabqkobxSKoNY7meSk6OfG+ei8VKlzaCL5DUcsmMCoLLB0KpzJ3WTu
-         P4o6Xesd/cugQFjeMMDFI+qRzdGNRe1YUbHAPaAsoxk6+d1XrBKUIzXz8y7E5MrGfT8+
-         coF+rII1OQwaXWmh/aE/Kkt+iMa/yNsogrgxUCj76lK7S89+cqbHBFk9GWsV1QCLNTpa
-         8wLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748466646; x=1749071446;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=877Qh42+jkY8cdr8W69/LgWDAPp4oF1qwK/ps88nv2w=;
-        b=iNSXimvypDrhBHP0wA/aPZBVfBQTeODWcsiUmXw/uR+ocKdO2wD9sZLOhjUqrZB3n3
-         rD1zQZ3/IF/qhupIRuLW0p4+1yQFEMPMB8+J4BTV240NT5TGMCTGH8msrJdeB1jQmXFS
-         M4cX6veWbAZWYRIWFw0iIsEuhVAlRDK/PJViixH/EpkJ856s3m2sbY/+zk7ZhWmpog97
-         CULB+ZDEBTxC0FF4Mzp82xdcAJkDw3uZzY8BDkRGJpeWgLfj/giKPEKuUGoh0ReUJVeU
-         Oj1S0Mv/+RFDLHnPllspJ0ckhkMwf2bK640UAxVUmBvhvt+jtXqJKPA1xy2WpmlPDQWn
-         6S7g==
-X-Gm-Message-State: AOJu0Yxw9MAboMCkKJiS7CPpnC6ECvYWbY1LRhuI1P6gVwzsOKTiYL+r
-	I92dnzy1vKZFn48qhRxiWSHsRP8wdXGEVWc6VioIXwczDI0k6gD2aPZgd1embMyJ
-X-Gm-Gg: ASbGncs8z99RwA0ZQiTQ+dSUfqvyqH3vSCXiQt1r3dC6V0Q6fcCc1DFYc2YVoETam09
-	yq19hXH9X+APCarXRV7Aykq65A5f5n9sIwTp763Q5y+9US+fVAq6uIKp4r1+JSRt4NFeNJO2ijR
-	EU40Invu5pCmZODiZqMPY85pFsNhRO1IjHCIZRycie7YCyN97Genz4pL/0PQfSG/RGPX7Uw4w6J
-	Nd2K3GJ2+qaJ8QoCfLG6UsiYC3+yS2ZjBcy4X3usNUZGdbj8ig0f+CS/Y2cICcIWxrX3xjy7BwU
-	IbEtCcl8fq4UHVJeImgsd3SuviYsL7BXGimJdzB9rftKLWU/UifBjy/7RczELvr0mQUn6jmlnRU
-	=
-X-Google-Smtp-Source: AGHT+IEa+KeeVvXp6y4yzu1dcnTwLRlFU8CuyiBUzB06cq2FylipqWQgJDokiKcATuCO/eyo3T5MhA==
-X-Received: by 2002:a05:6000:1a8e:b0:3a4:d367:c5aa with SMTP id ffacd0b85a97d-3a4e943c65dmr3436178f8f.20.1748466646138;
-        Wed, 28 May 2025 14:10:46 -0700 (PDT)
-From: Christopher Clark <christopher.w.clark@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Daniel Smith <dpsmith@apertussolutions.com>,
-	Rich Persaud <persaur@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 1/3] docs: add documentation for Argo as a feature
-Date: Wed, 28 May 2025 22:10:38 +0100
-Message-Id: <20250528211040.10562-1-christopher.w.clark@gmail.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 2f6541a0-3c09-11f0-a2fe-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1748467058; x=1748726258;
+	bh=ErLwzxBQTVyhRVaY+zSrGgzb0yQIjH/IbyQk7822lpQ=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=jx3bDu99x5SbC2Nrqya8eEeb/8JHK35/mETXnb5OC7Yd4tLTGaGzIJ7TZHqgc6Ldx
+	 4X+wKugsQ9F4CpR778NnpDLqqZ7/R4aHgnNXbxHrCy2q3RdgSE4whiXvZSJK15Ww8g
+	 ZnH9gcSD9AN8IimQ/Gc4xRUKla+xYUVeENJeJG53Fbj1vM+POZDc+gHwJvB/V0fm34
+	 RXUaCLO+F12pY5ICmLBLsbmBoavmdFsrwcb2/Wlx2v4GNjY/N6glMhNTn2OAz2sbJS
+	 F0zWUu6FZ0QRQwHYwvdRtxF8/T0DbFIpTDZCxoO6m205Xp361+ZtQ/3CdJ4WtGAX0f
+	 Po7UEuaMFuhxw==
+Date: Wed, 28 May 2025 21:17:33 +0000
+To: =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+From: dmkhn@proton.me
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: Re: [PATCH v2 1/2] xen/domain: introduce non-x86 hardware emulation flags
+Message-ID: <aDd9Z3eY3RQgTTdy@kraken>
+In-Reply-To: <aC3dkKyiIHRF8YO1@macbook.local>
+References: <20250516022855.1146121-1-dmukhin@ford.com> <20250516022855.1146121-2-dmukhin@ford.com> <aC3dkKyiIHRF8YO1@macbook.local>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 9b1149ee8da47a38f89914f1a9e437722ee6e8be
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Adds approachable documentation describing system components and
-introduces the support statement for feature status.
+On Wed, May 21, 2025 at 04:05:04PM +0200, Roger Pau Monn=C3=A9 wrote:
+> On Fri, May 16, 2025 at 02:29:09AM +0000, dmkhn@proton.me wrote:
+> > From: Denis Mukhin <dmukhin@ford.com>
+> >
+> > Define per-architecture emulation_flags for configuring domain emulatio=
+n
+> > features.
+> >
+> > Print d->arch.emulation_flags from 'q' keyhandler for better traceabili=
+ty
+> > while debugging.
+> >
+> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> > ---
+> > Changes since v1:
+> > - dropped comments
+> > ---
+> >  xen/arch/arm/include/asm/domain.h   | 1 +
+> >  xen/arch/ppc/include/asm/domain.h   | 1 +
+> >  xen/arch/riscv/include/asm/domain.h | 1 +
+> >  xen/common/keyhandler.c             | 1 +
+> >  4 files changed, 4 insertions(+)
+> >
+> > diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/a=
+sm/domain.h
+> > index a3487ca713..70e6e7d49b 100644
+> > --- a/xen/arch/arm/include/asm/domain.h
+> > +++ b/xen/arch/arm/include/asm/domain.h
+> > @@ -121,6 +121,7 @@ struct arch_domain
+> >      void *tee;
+> >  #endif
+> >
+> > +    uint32_t emulation_flags;
+> >  }  __cacheline_aligned;
+> >
+> >  struct arch_vcpu
+> > diff --git a/xen/arch/ppc/include/asm/domain.h b/xen/arch/ppc/include/a=
+sm/domain.h
+> > index 3a447272c6..001116a0ab 100644
+> > --- a/xen/arch/ppc/include/asm/domain.h
+> > +++ b/xen/arch/ppc/include/asm/domain.h
+> > @@ -21,6 +21,7 @@ struct arch_vcpu {
+> >
+> >  struct arch_domain {
+> >      struct hvm_domain hvm;
+> > +    uint32_t emulation_flags;
+> >  };
+> >
+> >  #include <xen/sched.h>
+> > diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/inclu=
+de/asm/domain.h
+> > index c3d965a559..7bc242da55 100644
+> > --- a/xen/arch/riscv/include/asm/domain.h
+> > +++ b/xen/arch/riscv/include/asm/domain.h
+> > @@ -18,6 +18,7 @@ struct arch_vcpu {
+> >
+> >  struct arch_domain {
+> >      struct hvm_domain hvm;
+> > +    uint32_t emulation_flags;
+> >  };
+> >
+> >  #include <xen/sched.h>
+> > diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+> > index 0bb842ec00..73f5134b68 100644
+> > --- a/xen/common/keyhandler.c
+> > +++ b/xen/common/keyhandler.c
+> > @@ -306,6 +306,7 @@ static void cf_check dump_domains(unsigned char key=
+)
+> >              if ( test_bit(i, &d->watchdog_inuse_map) )
+> >                  printk("    watchdog %d expires in %d seconds\n",
+> >                         i, (u32)((d->watchdog_timer[i].expires - NOW())=
+ >> 30));
+> > +        printk("    emulation_flags %#x\n", d->arch.emulation_flags);
+> >
+> >          arch_dump_domain_info(d);
+>=20
+> Hello,
+>=20
+> I think it might be easier to print emulation_flags in
+> arch_dump_domain_info(), ideally it would be helpful if this could be
+> printed in a user friendly way apart from the raw dump:
+>=20
+> printk("    emulation_flags:%s%s... (%#x)\n",
+>        !d->arch.emulation_flags ? " none" : "",
+>        has_vlapic(d) ? " lapic" : "", ...
+>        d->arch.emulation_flags);
 
-Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
----
- docs/features/argo-feature.pandoc | 99 +++++++++++++++++++++++++++++++
- 1 file changed, 99 insertions(+)
- create mode 100644 docs/features/argo-feature.pandoc
+I moved emulation_flags to the common domain struct in v3 and I kept the
+emulation_flags flags printout here in common dump_domains().
 
-diff --git a/docs/features/argo-feature.pandoc b/docs/features/argo-feature.pandoc
-new file mode 100644
-index 0000000000..b6a10be78a
---- /dev/null
-+++ b/docs/features/argo-feature.pandoc
-@@ -0,0 +1,99 @@
-+% Argo interdomain communication
-+% Revision 1
-+
-+\clearpage
-+
-+# Basics
-+
-+---------------- ----------------------------------------------------
-+         Status: **Tech Preview**
-+
-+  Architectures: x86, ARM
-+
-+   Component(s): Hypervisor, guest
-+---------------- ----------------------------------------------------
-+
-+# Overview
-+
-+Argo is a lightweight data transport for communication between virtual
-+machines, with a simple hypervisor interface that is accessible for
-+building embedded systems and designed to work with familiar primitives
-+within guest OS kernels. It supports policy control over communication
-+and isolation between VMs.
-+
-+# User details
-+
-+Argo is present in Xen, included since Xen 4.12. A Linux device driver
-+and userspace library are available and Argo is regularly tested in the
-+Xen Continuous Integration system.
-+
-+To configure a Xen system to enable Argo:
-+
-+* ensure that Argo is enabled in the hypervisor with KConfig option
-+
-+* enable Argo on the Xen hypervisor command line
-+
-+* load the Argo guest kernel device driver
-+
-+* ensure that the Argo guest libraries are installed
-+
-+The guest userspace libraries support software designed for Argo
-+interfaces and also enables software designed for networks to
-+communicate between VMs by Argo.  This allows platform software to be
-+plumbed easily between virtual machines, without requiring networking
-+and with system policy controls over this communication.
-+
-+# Technical details
-+
-+## Argo components
-+
-+* Xen: Argo in the hypervisor provides communication between virtual
-+  machines.
-+
-+* Guest kernel: driver provides interfaces for data transport for use
-+  within the kernel, and implements familiar abstractions for
-+  networking software.
-+
-+* Guest libraries: provide application-level support for interdomain
-+  communication.
-+
-+## Argo implementation within Xen
-+
-+See the public Xen headers for the primary interface documentation.
-+
-+# Limitations
-+
-+Argo has been developed and tested on x86 and ARM architectures.
-+
-+# Testing
-+
-+The Argo test developed for the Xen Test Framework provides coverage of
-+the hypercall operations.
-+
-+The Xen Project CI provides system test coverage of an Argo-enabled Xen
-+system with Linux.
-+
-+# Areas for improvement
-+
-+## Argo and VirtIO
-+
-+References to design documentation for the development of an Argo
-+transport for VirtIO are available via:
-+https://wiki.xenproject.org/wiki/Virtio_On_Xen
-+
-+# Known issues
-+
-+* For development: sysctl/domctls for toolstack to control per-VM access
-+  to Argo
-+
-+# References
-+
-+See the ARGO section of the Xen MAINTAINERS document for web reference.
-+
-+# History
-+
-+------------------------------------------------------------------------
-+Date       Revision Version   Notes
-+---------- -------- --------- ------------------------------------------
-+2025-05-28 1        Xen 4.12+ Feature included in Xen 4.12.
-+---------- -------- --------- ------------------------------------------
--- 
-2.34.1
+I will plumb the human-readable printout for x86 flags in the follow on pat=
+ch.
+
+>=20
+> Regards, Roger.
 
 
