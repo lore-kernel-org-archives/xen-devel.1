@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34550C54ED1
-	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 01:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.998907.1379602 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10817C3ABB2
+	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 04:19:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.998929.1379612 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uK59P-0007N4-EH; Wed, 28 May 2025 01:00:11 +0000
+	id 1uK8Fb-0000uw-IH; Wed, 28 May 2025 04:18:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 998907.1379602; Wed, 28 May 2025 01:00:11 +0000
+Received: by outflank-mailman (output) from mailman id 998929.1379612; Wed, 28 May 2025 04:18:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uK59P-0007MG-BL; Wed, 28 May 2025 01:00:11 +0000
-Received: by outflank-mailman (input) for mailman id 998907;
- Wed, 28 May 2025 01:00:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uK8Fb-0000up-FG; Wed, 28 May 2025 04:18:47 +0000
+Received: by outflank-mailman (input) for mailman id 998929;
+ Wed, 28 May 2025 04:18:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I8Hg=YM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1uK59N-0006hB-Ps
- for xen-devel@lists.xenproject.org; Wed, 28 May 2025 01:00:09 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1601bb86-3b5f-11f0-b894-0df219b8e170;
- Wed, 28 May 2025 03:00:03 +0200 (CEST)
+ <SRS0=Iui3=YM=kernel.org=pr-tracker-bot@srs-se1.protection.inumbo.net>)
+ id 1uK8Fa-0000uj-PM
+ for xen-devel@lists.xenproject.org; Wed, 28 May 2025 04:18:46 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [2604:1380:45d1:ec00::3])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d8360efc-3b7a-11f0-a2fe-13f23c93f187;
+ Wed, 28 May 2025 06:18:45 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DEFDF5C5527;
- Wed, 28 May 2025 00:57:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCF16C4CEE9;
- Wed, 28 May 2025 00:59:59 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 6CA56A49F26;
+ Wed, 28 May 2025 04:18:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1853CC4CEEE;
+ Wed, 28 May 2025 04:18:44 +0000 (UTC)
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 70C423822D1A; Wed, 28 May 2025 04:19:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,102 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1601bb86-3b5f-11f0-b894-0df219b8e170
+X-Inumbo-ID: d8360efc-3b7a-11f0-a2fe-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1748394000;
-	bh=bKPm1y3NFIvS3iIJFfSjTTplJBpzzVHrcWXO3eeajEE=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=u0L440G0by+6XYvoIoO7QzLHWSpyOJcQNHatVqCdQ2tJES6k5nxg86pKj0BLJq+Y6
-	 G68VRUxXHD7AEuK2Zv4a7f8JsjqYGFJCGLbrc2k32hJhIvmJcV0a65EIDo2gvK0qQ2
-	 xCeslOR12Kfek2WG81lKO5XOi6q1BUcXjsvepTBilw0cS32ZHb2p4TvaWFlSFy4CnO
-	 bxvcWEMsP4m+k9dg/UbBSLMGbaFRRcGMc5Gq8gNCEDsnaNPEB0Aaw19tu2Fa0FR6Gr
-	 PfD+0EddeQ2s43d1sDUsfc0jkW8SLJ+WU7s8ovg6cJcl76+nD71GnpVXMMoDygxHal
-	 mhVGfmRr5IEPQ==
-Date: Tue, 27 May 2025 17:59:58 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Xen-devel <xen-devel@lists.xenproject.org>, 
-    Anthony PERARD <anthony.perard@vates.tech>, 
-    Michal Orzel <michal.orzel@amd.com>, 
-    =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH 3/3] CI: Adjust how domU is packaged in dom0
-In-Reply-To: <a49d8ce2-d2d9-4f86-9f74-1234ca33e4e0@citrix.com>
-Message-ID: <alpine.DEB.2.22.394.2505271757250.135336@ubuntu-linux-20-04-desktop>
-References: <20250522173640.575452-1-andrew.cooper3@citrix.com> <20250522173640.575452-4-andrew.cooper3@citrix.com> <alpine.DEB.2.22.394.2505271727170.135336@ubuntu-linux-20-04-desktop> <a49d8ce2-d2d9-4f86-9f74-1234ca33e4e0@citrix.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
-MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-1730604225-1748394000=:135336"
+	s=k20201202; t=1748405924;
+	bh=tAWlwB6ykqQxS1QLPFAsLHiuVFSX900WKZppAKmrneg=;
+	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+	b=QAQnFy55AckNf1DnJNOe/iehBt5q5cuCO2xYG8uiGAmvGukk6IK59vp9oGB70Bp0H
+	 4ULDIqMRcUX2jXk4uQd0E+hF5CtEVVEN7SyqY/OUfp6SCqdzuiesA32qDJ1oo80qZC
+	 fZzZXiOGb85gcI+2ASsjF8vjwo7DGvRgqvyjtenoSl8UtMcem/DdEjTnNuc+L3p2rr
+	 1vpNSpmqWFoI5eLzaJKCP8lQETCZASINb2HJJ4zWofq11EhaJsZrJR2H42ik+uOQtY
+	 RtKo/RYWesGfYnFwsti7iz2sUpQAklpnXI4jTSMUMZ/0wPpVxkI7iyFb9aB5RtCdIR
+	 ngRpI18lwl6Ow==
+Subject: Re: [GIT PULL] xen: branch for v6.16-rc1
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20250526063307.10920-1-jgross@suse.com>
+References: <20250526063307.10920-1-jgross@suse.com>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20250526063307.10920-1-jgross@suse.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-6.16-rc1-tag
+X-PR-Tracked-Commit-Id: 7f9bbc1140ff8796230bc2634055763e271fd692
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 5cf5240991bcea3c0f38e36e65e1742d6db7912c
+Message-Id: <174840595796.1893196.3827206882663532833.pr-tracker-bot@kernel.org>
+Date: Wed, 28 May 2025 04:19:17 +0000
+To: Juergen Gross <jgross@suse.com>
+Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, sstabellini@kernel.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+The pull request you sent on Mon, 26 May 2025 08:33:07 +0200:
 
---8323329-1730604225-1748394000=:135336
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-6.16-rc1-tag
 
-On Wed, 28 May 2025, Andrew Cooper wrote:
-> On 28/05/2025 1:30 am, Stefano Stabellini wrote:
-> > On Thu, 22 May 2025, Andrew Cooper wrote:
-> >> diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-> >> index 1dd3f48b3d29..17a37134f46a 100755
-> >> --- a/automation/scripts/qubes-x86-64.sh
-> >> +++ b/automation/scripts/qubes-x86-64.sh
-> >> @@ -185,12 +185,24 @@ Kernel \r on an \m (\l)
-> >>      find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
-> >>      cd ..
-> >>      rm -rf rootfs
-> >> +
-> >> +    # Package domU kernel+rootfs in /root for dom0 (uncompressed)
-> >> +    mkdir -p rootfs/root
-> >> +    cd rootfs
-> >> +    cp ../binaries/bzImage root/vmlinuz-domU
-> >> +    cp ../binaries/domU-rootfs.cpio.gz root/initrd-domU
-> >> +    find . | cpio -H newc -o > ../binaries/domU-in-dom0.cpio
-> >> +    cd ..
-> >> +    rm -rf rootfs
-> >>  fi
-> >>  
-> >>  # Dom0 rootfs.  The order or concatination is important; ucode wants to come
-> >>  # first, and all uncompressed must be ahead of compressed.
-> >>  parts=(
-> >>      binaries/ucode.cpio
-> >> +)
-> >> +[ -n "$domU_check" ] && parts+=(binaries/domU-in-dom0.cpio)
-> > This is a NIT but I have been trying to avoid this format in favor of
-> >
-> > if [ -n "$domU_check" ]
-> > then
-> >     parts+=(binaries/domU-in-dom0.cpio)
-> > fi
-> >
-> > for readibility.
-> 
-> This is a weird one, because the (relevant) readability is the
-> components of parts, and it's easier to scan without the extra blank
-> lines.  Nevertheless, ...
-> 
-> >
-> >
-> > I can see the patch is correct. It adds a bit of complexity in exchange
-> > for a small improvement. I am not sure if the trade off is worth it, but
-> > I'll ack it anyway.
-> 
-> ... see the thread on the previous patch.  This was the RFC "I'd like to
-> find a nicer way of doing it", and Anthony has made a suggestion which I
-> need to experiment with.
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/5cf5240991bcea3c0f38e36e65e1742d6db7912c
 
-OK
+Thank you!
 
-
-> > Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-> 
-> Thanks, but do you have any input on the /boot vs /root question on the
-> other part of the thread?
-
-I saw it. I don't have a strong opinion either way. Technically /boot is
-correct but then things gets mixed up with Dom0 kernel and ramdisk.
-/root allows it to be more clearly separated so I am OK with it.
---8323329-1730604225-1748394000=:135336--
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
