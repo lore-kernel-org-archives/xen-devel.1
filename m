@@ -4,29 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E6BC3ABB2
-	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 21:02:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.999520.1380168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D5EC3ABB2
+	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 21:11:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.999544.1380194 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKNud-0000D3-OI; Wed, 28 May 2025 21:02:11 +0000
+	id 1uKO31-0002Yc-69; Wed, 28 May 2025 21:10:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 999520.1380168; Wed, 28 May 2025 21:02:11 +0000
+Received: by outflank-mailman (output) from mailman id 999544.1380194; Wed, 28 May 2025 21:10:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKNud-0000Cu-Lf; Wed, 28 May 2025 21:02:11 +0000
-Received: by outflank-mailman (input) for mailman id 999520;
- Wed, 28 May 2025 21:02:10 +0000
+	id 1uKO31-0002Wx-1l; Wed, 28 May 2025 21:10:51 +0000
+Received: by outflank-mailman (input) for mailman id 999544;
+ Wed, 28 May 2025 21:10:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ql61=YM=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uKNuc-00084W-7Z
- for xen-devel@lists.xenproject.org; Wed, 28 May 2025 21:02:10 +0000
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 04508caa-3c07-11f0-b894-0df219b8e170;
- Wed, 28 May 2025 23:02:08 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=CMiF=YM=gmail.com=christopher.w.clark@srs-se1.protection.inumbo.net>)
+ id 1uKO2z-0002GV-UN
+ for xen-devel@lists.xenproject.org; Wed, 28 May 2025 21:10:49 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3a06207b-3c08-11f0-b894-0df219b8e170;
+ Wed, 28 May 2025 23:10:48 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cfa7e7f54so2253915e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 28 May 2025 14:10:48 -0700 (PDT)
+Received: from localhost.localdomain ([91.85.47.110])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4ef4f3aa3sm143910f8f.84.2025.05.28.14.10.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 May 2025 14:10:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,170 +47,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04508caa-3c07-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=mcoua5s7i5erhbt667iysmxily.protonmail; t=1748466127; x=1748725327;
-	bh=cHHOdTy5EFK7A79iLpnssX6DJ9sNyVrgM7kUXje4urU=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=IKYQWgL5IinOPg1cyM6xmwl0wCFwnwJXDqRYINthCQvgpKqieO1RYM2LxKdK3eDoG
-	 GJw1urJHwKeAzp3P6NtoiaJf2yQLQmpwoLLBQyh0ddKCUOAomckQY9W6boBZxQaRUg
-	 Gg8f2ekjoFEZzFnjOHnKS4X1+OrSl2CbIvG636+O4jAK64IKgN/pwejnvA4ZZDzsOD
-	 bi2B06opgiOQDEPXl7E+oEdsNmRN07/GGUNBB7/H625CUxWQkNcWhz/hHGYeOEmw/t
-	 HrD2550hnTqcFrd01gU+qiy23Gh1SV5gmmLvLloVFpsobdYGY6ejefu3bT3ORp24m4
-	 yTKFw/bLVxeAw==
-Date: Wed, 28 May 2025 21:02:00 +0000
+X-Inumbo-ID: 3a06207b-3c08-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1748466647; x=1749071447; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4epTKamhANvL6RVYcC/CjM64YkIz4kbtxUbryvO3zZs=;
+        b=fm/GS5bnMYEjY7x0F1LpGU0+wAz7QJt/ZYpcLZnAn78W8Io7gfZJs5G9wTjp8gUr2O
+         KrHZ7Le15NgnLdDDkOa5ZWtwrF+uK2VgD9+3bjXGmdcPyhiWcq/4R8TeFpRH3MJ/oidp
+         3faBTBlCMpewlWJh2aQA6Ln1J6RD7wiC/P2xBO65CyVK/6Vx/qXVV4LGW+NeG6dicvQD
+         SgCKgUr/+TBfY7hq8CowkD8E6yWISo5NAI39SJAZMiTP+zqcM64X2oq+jZiPGQSyzQUl
+         OdDL5oQ1Wj5/bAbgQ9Y5VHnpzKQT1LxujYq44HDXGCKfj522vVO2RCDbJQYwk1n5k0/M
+         VHKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748466647; x=1749071447;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4epTKamhANvL6RVYcC/CjM64YkIz4kbtxUbryvO3zZs=;
+        b=eGMWyX+xgVvePBOeTOr9xpVp/azqItQ22LP2ppQbyd2ONYiXwehuMrCYy5iaxi0ieI
+         I40lqj+JdWRJnwvDuEwZ8B/2bLrhLqo17wYKJhfQ6k671zgpjG40nBdhiJEUmXFnvpL6
+         4sWohQC5fWpJNSV8zCwHzLJaOf4VC6pjLkmIZ3V5iaUjcUawSNf5LK4priZLktrVpOm5
+         x0TktxXb9/Ed3EYRy5FaDRFudd2x/toy/ERTyvaxocJLaH1ibfFTs/pXadkIKfxS/UcE
+         eFlUAWGQKJmv9aedooMLumBSHe0Zngz5Cqf+Bf/C/5ssXX/HTTTLZQCzf6Qgo6ngYTGG
+         ZuEA==
+X-Gm-Message-State: AOJu0YwP63baVrO4iRXmvbXjqfnId4pYzEKr643u3reGAJTeBg8X/wkg
+	7jyj51uPhvsLpjFaQA4vGgaXHCtZy9aO1rMbxYuna45EvnTu1sSJ7IukGITCtqRs
+X-Gm-Gg: ASbGncvbn4LXUaSwiBukB47lMC0T811nBBGNroSme1xx6BY8xZCkqCd79svLaJ/rgG3
+	vCoUHKW40ynqs2SMCLQcjRmT+flSKqMt+ISWYcXgV+gYDGXi/8QzPEn8wcdVg+p0yiMjyA/lLhH
+	lqmLsVF0d/llOxAXHmuFY7Jt+QcQWaip9CsnzhsoryJo5S2483F7i40EW8ll6z5FY+R+jsWrSI9
+	iiY33VYew/5dWbuJQk6aCFw90r5iyv2rr2EoKzmi6HOjHF/IJRowuXIDSyLT8BU2zeBdP8DkKYE
+	X4izr65GcBiXezRilYplMkhgjbMiVeiEJ12kP1SC0rZ1d2dmlz8sb1N5+RvCJey3RUvVJny5+4A
+	=
+X-Google-Smtp-Source: AGHT+IHw+zffAXb/eGgelm9DAO/R8knFcy8nLEOmBm5+FANsVmbFgUrUKmzmAv/KL7fc4Yc7OSddgQ==
+X-Received: by 2002:a05:600c:1e1c:b0:450:cabc:a6c6 with SMTP id 5b1f17b1804b1-450ce88131amr10823245e9.15.1748466646911;
+        Wed, 28 May 2025 14:10:46 -0700 (PDT)
+From: Christopher Clark <christopher.w.clark@gmail.com>
 To: xen-devel@lists.xenproject.org
-From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, Denis Mukhin <dmkhn@proton.me>
-Subject: [PATCH v3 2/2] xen/domain: rewrite emulation_flags_ok()
-Message-ID: <20250528210139.2572609-3-dmukhin@ford.com>
-In-Reply-To: <20250528210139.2572609-1-dmukhin@ford.com>
-References: <20250528210139.2572609-1-dmukhin@ford.com>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 3a13f18873a69d6870930b100f72de79d5936e4c
+Cc: Daniel Smith <dpsmith@apertussolutions.com>,
+	Rich Persaud <persaur@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 2/3] MAINTAINERS: add link and keyword statements for Argo section
+Date: Wed, 28 May 2025 22:10:39 +0100
+Message-Id: <20250528211040.10562-2-christopher.w.clark@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250528211040.10562-1-christopher.w.clark@gmail.com>
+References: <20250528211040.10562-1-christopher.w.clark@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-From: Denis Mukhin <dmkhn@proton.me>
+Add link to Argo documentation and to ensure that Argo maintainers and
+reviewers are included in developments involving Argo, add keyword
+expressions for Argo.
 
-From: Denis Mukhin <dmukhin@ford.com>
-
-Rewrite emulation_flags_ok() to simplify future modifications.
-
-No functional change intended.
-
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
 ---
-Changes since v2:
-- addressed review feedback
-- added some explanatory comments for emulation_flags_ok()
----
- xen/arch/x86/domain.c | 92 ++++++++++++++++++++++++++++++++++---------
- 1 file changed, 74 insertions(+), 18 deletions(-)
+ MAINTAINERS | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 0363ccb384..1d41d26c4d 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -743,32 +743,88 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-     return 0;
- }
-=20
-+/*
-+ * Verify that the domain's emulation flags resolve to a supported configu=
-ration.
-+ *
-+ * This ensures we only allow a known, safe subset of emulation combinatio=
-ns
-+ * (for both functionality and security). Arbitrary mixes are likely to ca=
-use
-+ * errors (e.g., null pointer dereferences).
-+ *
-+ * NB: use the internal X86_EMU_XXX symbols, not the public XEN_X86_EMU_XX=
-X
-+ * symbols.
-+ */
- static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
- {
-+    enum {
-+        CAP_PV          =3D BIT(0, U),
-+        CAP_HVM         =3D BIT(1, U),
-+        CAP_HWDOM       =3D BIT(2, U),
-+        CAP_DOMU        =3D BIT(3, U),
-+    };
-+    static const struct {
-+        unsigned int caps;
-+        uint32_t min;
-+        uint32_t opt;
-+    } configs[] =3D {
-+#ifdef CONFIG_PV
-+        /* PV */
-+        {
-+            .caps   =3D CAP_PV | CAP_DOMU,
-+            .min    =3D 0,
-+            .opt    =3D 0,
-+        },
-+
-+        /* PV (likely dom0) */
-+        {
-+            .caps   =3D CAP_PV | CAP_HWDOM,
-+            .min    =3D X86_EMU_PIT,
-+            .opt    =3D 0,
-+        },
-+#endif /* #ifdef CONFIG_PV */
-+
-+#ifdef CONFIG_HVM
-+        /* PVH dom0/domU or HVM domU */
-+        {
-+            .caps   =3D CAP_HVM | CAP_HWDOM,
-+            .min    =3D X86_EMU_LAPIC | X86_EMU_IOAPIC | X86_EMU_VPCI,
-+            .opt    =3D 0,
-+        },
-+
-+
-+        /* HVM domU */
-+        {
-+            .caps   =3D CAP_HVM | CAP_DOMU,
-+            .min    =3D X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ),
-+            /* HVM PIRQ feature is user-selectable. */
-+            .opt    =3D X86_EMU_USE_PIRQ,
-+        },
-+
-+        /* PVH */
-+        {
-+            .caps   =3D CAP_HVM | CAP_DOMU,
-+            .min    =3D X86_EMU_LAPIC,
-+            .opt    =3D 0,
-+        },
-+#endif /* #ifdef CONFIG_HVM */
-+    };
-+    unsigned int i, caps =3D is_hardware_domain(d) ? CAP_HWDOM : CAP_DOMU;
-+
-+    if ( is_pv_domain(d) )
-+        caps |=3D CAP_PV;
-+    else if ( is_hvm_domain(d) )
-+        caps |=3D CAP_HVM;
-+
- #ifdef CONFIG_HVM
-     /* This doesn't catch !CONFIG_HVM case but it is better than nothing *=
-/
-     BUILD_BUG_ON(X86_EMU_ALL !=3D XEN_X86_EMU_ALL);
- #endif
-=20
--    if ( is_hvm_domain(d) )
--    {
--        if ( is_hardware_domain(d) &&
--             emflags !=3D (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) =
-)
--            return false;
--        if ( !is_hardware_domain(d) &&
--             /* HVM PIRQ feature is user-selectable. */
--             (emflags & ~X86_EMU_USE_PIRQ) !=3D
--             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
--             emflags !=3D X86_EMU_LAPIC )
--            return false;
--    }
--    else if ( emflags !=3D 0 && emflags !=3D X86_EMU_PIT )
--    {
--        /* PV or classic PVH. */
--        return false;
--    }
-+    for ( i =3D 0; i < ARRAY_SIZE(configs); i++ )
-+        if ( caps =3D=3D configs[i].caps &&
-+             (emflags & ~configs[i].opt) =3D=3D configs[i].min )
-+            return true;
-=20
--    return true;
-+    return false;
- }
-=20
- void __init arch_init_idle_domain(struct domain *d)
---=20
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c11b82eca9..697f383505 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -223,9 +223,12 @@ F:	tools/libacpi/
+ ARGO
+ M:	Christopher Clark <christopher.w.clark@gmail.com>
+ S:	Maintained
++W:	https://wiki.xenproject.org/wiki/Argo:_Hypervisor-Mediated_Exchange_(HMX)_for_Xen
+ F:	xen/include/public/argo.h
+ F:	xen/include/xen/argo.h
+ F:	xen/common/argo.c
++K:	\b(argo|Argo|ARGO)\b
++K:	(?i)argo[_-].*
+ 
+ ARINC653 SCHEDULER
+ M:	Nathan Studer <nathan.studer@dornerworks.com>
+-- 
 2.34.1
-
 
 
