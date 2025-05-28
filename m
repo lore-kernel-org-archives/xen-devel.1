@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B716C3ABB2
-	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 08:06:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.998970.1379631 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003F3C5AE59
+	for <xen-devel@archiver.kernel.org>; Wed, 28 May 2025 08:06:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.998972.1379652 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKBnV-0002zT-Ug; Wed, 28 May 2025 08:06:01 +0000
+	id 1uKBnb-0003TA-B6; Wed, 28 May 2025 08:06:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 998970.1379631; Wed, 28 May 2025 08:06:01 +0000
+Received: by outflank-mailman (output) from mailman id 998972.1379652; Wed, 28 May 2025 08:06:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKBnV-0002zM-Rd; Wed, 28 May 2025 08:06:01 +0000
-Received: by outflank-mailman (input) for mailman id 998970;
- Wed, 28 May 2025 08:06:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uKBnb-0003T3-7j; Wed, 28 May 2025 08:06:07 +0000
+Received: by outflank-mailman (input) for mailman id 998972;
+ Wed, 28 May 2025 08:06:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ct5H=YM=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uKBnU-0002zC-Pd
- for xen-devel@lists.xenproject.org; Wed, 28 May 2025 08:06:00 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 96e112f0-3b9a-11f0-a2fe-13f23c93f187;
- Wed, 28 May 2025 10:05:59 +0200 (CEST)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-3106217268dso38454721fa.1
- for <xen-devel@lists.xenproject.org>; Wed, 28 May 2025 01:05:59 -0700 (PDT)
+ id 1uKBnZ-0003Ro-P5
+ for xen-devel@lists.xenproject.org; Wed, 28 May 2025 08:06:05 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 99029b4a-3b9a-11f0-b894-0df219b8e170;
+ Wed, 28 May 2025 10:06:02 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-54afb5fcebaso5384115e87.3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 May 2025 01:06:02 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-32a79f5478asm1437671fa.78.2025.05.28.01.05.56
+ 38308e7fff4ca-32a79f5478asm1437671fa.78.2025.05.28.01.06.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:05:57 -0700 (PDT)
+ Wed, 28 May 2025 01:06:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,111 +47,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96e112f0-3b9a-11f0-a2fe-13f23c93f187
+X-Inumbo-ID: 99029b4a-3b9a-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748419558; x=1749024358; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pf1pYaaf9NAukq3r1Eh0Q6+adfJo6MUqgAu5HCoZAxo=;
-        b=DSDBGFXlyTgEPMTwQa0/Yh0mniz5hSp4bhZY5GgNWvQvOgT/IzNU2tjetxQjgEez3c
-         lqx9dF8JHlyGajpR6rLxddARhfI+ZjWjpykVr4uHET++pXVjKJMDSYnlVjeWyqN04F3r
-         gFjc7HZIwCtLqeZ7HXujKH9/GpjniwM2y4XO6do5ufmoCYvBE89Z1cNVpsEjhOGkLYg0
-         ahmntJ8T3GLZcWb5wlDpfMKvgQEubkPAZxWHCyKsVktEjyT/vQzWQfHFccomB6Hj9YID
-         PBZUQ5AQ4zjVXQ6LB3AG8txk48vxipYf/TGTjCfuzJWHJUZKRE9G+nQc2jFdr9zsobTj
-         jTqg==
+        d=gmail.com; s=20230601; t=1748419561; x=1749024361; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9dWxP7Icxj1+b68Zu3OZEwOOJEHkIKPApD7TkfsOeh4=;
+        b=JdpB73NzhO1Fnvap+aqJxwPlKOJWRow+OKWmBPv5vdxdoTBrPP86Briiekq8RNwyy5
+         /XD8rif+RfkfVv1Bcn4hzmWSmvpmZtlgquFQDpmujOLCdRUDYqKbnw9bBOsBx7oxEAPI
+         e19dM0q8kdO03D6TDFiKDPGvy94gBESMPrYtdZWYGN5TaVbFnZa2FMVSnynRqfCkJUsQ
+         xbltNFIzF20jjDrSDmEuFdWzoyjo0LDL1fMdOZXnciLOAAGPy5HWu75C2+d/XpoNSN2w
+         jgBp20Ga2TNBjxb7SS7Pw17ZIUJPatBFHRjG5jxiWvaN782CG4yMqRtdgtOcLc1/yhcp
+         CC0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748419558; x=1749024358;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Pf1pYaaf9NAukq3r1Eh0Q6+adfJo6MUqgAu5HCoZAxo=;
-        b=MMEcx9mx4qK96GaAPm2fp4f8y4LWCcj+v/6fifrU180bCLGcovASIep1JGReXoEIR8
-         7IFkI0SAKcc3zHcA6ltknjRroapZlDVzF/gkjUzmmNC//diZtX8JyGqmUncwbrp12caK
-         TRg7xnYfETBSdZPWQghBCtdIZvbBWMpOJKhXrp1+bEtdk+PAKH4/wD1tfJGbreS7Ggqn
-         7BdBET6oq+vnTZdLZszQeCqxYEkzdtL55R44flRf6QfG0LunPtmA8psUM+/0B2sOAjSo
-         OBDunyO55giyTjc7jpbM9spopcu0lYgNkj2cYvaCD9Nvoy6FHOih7pvAwvAswXxY3pyP
-         PV7w==
-X-Gm-Message-State: AOJu0YwqENYz2SGKW8/UKzb6i0Q8El6tJ/OLS/z74JkTzcbT/tWQ/It6
-	slGPW5p62jlBGDnXFc8fTaBPi7HQY150mj7jg9w7o1WBCppBzY7YzayIik/h4Q==
-X-Gm-Gg: ASbGncv4zuulgvD81XLOzsfYUvHta0bbxl233c704DrEpbra7BuIRPFotiD9tfRtMQW
-	A7H0oKflUWtlSDREBcZCauuh9F2owbZizsiiZ0ld+1Pe+5VzPQMnV8ngX7IGuuVsBed/mVTQfrP
-	vR3QZQgxSybZc10eGvVMXoonjLS+kJ5N8Aahh3rLZhHZFG4uAkN/B6QUyv+LySd3u8FO4lGYWD3
-	IyCsPyGYQyvcVTjiMM8uFyTZWniHbY9Q83KKHp9QMUnkSvxwOreVJYmNzgXXRXU69rllACMWLEG
-	SUgyvLabwCNPMmcEL9AITTgwbqOJc3z6jXlM3P3ggaMkKLUVt8qEfv4mlOsjNNrEeAWzk13Pzlz
-	RpmPBSDCn3ja9/MY6qvPJN45K/w76qVJqHmYn
-X-Google-Smtp-Source: AGHT+IEJC6MZ/9R31TiqlrRoh+pl7vlJu08vXFaha9FalWLofKJTuuF37SHQM4ZbAPScCvROp4CgRA==
-X-Received: by 2002:a05:651c:2207:b0:32a:7e4c:e915 with SMTP id 38308e7fff4ca-32a7e4ceb14mr1190761fa.29.1748419558020;
-        Wed, 28 May 2025 01:05:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1748419561; x=1749024361;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9dWxP7Icxj1+b68Zu3OZEwOOJEHkIKPApD7TkfsOeh4=;
+        b=s/wlnxmQdicrJ39MkELnSpHZ4AolkBTULc2jqoXODomyXDpNneiNzp+nFwwI/qbxIU
+         teERRwlPlaR8qMUvsYwjzORdiplqFPo1IoE9Mj5k4cphYVeA0aCNkHtM1KlsX6qSOtWY
+         FGgXTDgEqDtV/d3sWuSWcXJauq/6TJWJbX4+Hzi+OHEqsvvSJjzpkQXFj8BT6CEaoK3o
+         L/r8aaO2/AuwK5fN4nd7axC94S5dm4jywJfUzhF9GMlwkBpGYgXzyqLhd1oP8mngdFpA
+         sFKHxTUjK9S02GGDvl1AxG6e6ikRLdG0vdYGKGpPTJvtiQppDO80Fley89s23pfoy/6a
+         QvuQ==
+X-Gm-Message-State: AOJu0YzGmUItspWTThY0Z0UJG52bwmWxvmHGHPFfe+Ee5WljgwPc4gWv
+	xq16P7diKA/8nxoLQ1n3S1mEC14ihVSRltZ7jagnk/DxuyQ11tEn2qu84oEfHw==
+X-Gm-Gg: ASbGncsSGM2/51Ucyy2ry52kfAGPNRPHbsFWw1JJEZTEVza5z3laX9MVwJnYiujuyEX
+	WA/fkNwMeXbCYo+ufNZqy4RObjZ4SHf95KqSCedHdtbqNChcvtbcrGD3ywfKtqOuXsJHhuSJ/ay
+	wkBN/fe3FDFPas/+9yT9SpgG8etnNEX3/ZMfEdQpUqwYN56GOTENrKc7wHrCvR+JcVwChFofvR4
+	lSAzBUZbbdWg19DjaKIm1nwBuKeA+A3EHt11mAI7taRQoNpuycTK2TyDCBEMtrIos/WICYdUlHK
+	9qz/Tiypw8/P3egtlz/Oy8msNW/jHqxmI8WVsGHGIU3LpNsXtF4fH4bkDvPoQ5OWmPE6nM07PEK
+	JrjlXq1wHfwvnTG4=
+X-Google-Smtp-Source: AGHT+IG6u5YLRxmcByItaH8PWCNYHSyVYF7Eh3p2pFq0FQVKsPfgi80VcoNfxaXymwzalNg0N635lw==
+X-Received: by 2002:a05:6512:3055:b0:553:2fb1:cfe9 with SMTP id 2adb3069b0e04-5532fb1e6aemr286965e87.21.1748419561240;
+        Wed, 28 May 2025 01:06:01 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 0/2] Add CONFIG_SYSTEM_SUSPEND and SCIF UART suspend/resume handlers
-Date: Wed, 28 May 2025 11:05:17 +0300
-Message-ID: <cover.1748381788.git.mykola_kvach@epam.com>
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Mykola Kvach <mykola_kvach@epam.com>
+Subject: [PATCH v2 2/2] xen/char: implement suspend/resume calls for SCIF driver
+Date: Wed, 28 May 2025 11:05:19 +0300
+Message-ID: <c7eff436d09256d7a30c3cf8583b2c029d8bf9c3.1748381788.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1748381788.git.mykola_kvach@epam.com>
+References: <cover.1748381788.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
-Hi all,
+The changes have been tested only on the Renesas R-Car H3 Starter Kit board.
 
-This patch series introduces CONFIG_SYSTEM_SUSPEND to Xen and implements
-suspend/resume handlers for the SCIF UART driver. These changes address
-feedback and discussions on the Xen-devel mailing list:
-
-    https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg00169.html
-    https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg02188.html
-
-I am marking this series as v2, as it is a logical continuation of the
-discussion linked above regarding the SCIF driver changes.
-
-Patch 1:
-  Introduces the CONFIG_SYSTEM_SUSPEND infrastructure, which enables Xen to
-support suspend-to-RAM functionality. It adds three new Kconfig options:
-    - HAS_SYSTEM_SUSPEND: Indicates whether the architecture supports suspend.
-    - SYSTEM_SUSPEND_ALWAYS_ON: Forces suspend support on platforms that
-      require it (e.g., x86).
-    - SYSTEM_SUSPEND: The user-facing option to enable suspend support,
-      enabled by default when SYSTEM_SUSPEND_ALWAYS_ON is set.
-      
-  This approach is intended to be easily extendable to other architectures in
-the future.
-
-Patch 2:
-  Implements suspend/resume callbacks for the SCIF UART driver. These functions
-ensure proper shutdown and reinitialization of the UART hardware across
-suspend/resume cycles. Their inclusion is gated by the CONFIG_SYSTEM_SUSPEND
-option.
-  The SCIF suspend/resume functionality has been tested on the Renesas R-Car H3
-Starter Kit board.
-  Compared to v1, the main change in this version is the addition of a
-CONFIG_SYSTEM_SUSPEND check around the SCIF driver's suspend/resume logic.
-
-Best regards,
-Mykola Kvach
-
-
-Mykola Kvach (1):
-  xen: Introduce system suspend config option
-
-Volodymyr Babchuk (1):
-  xen/char: implement suspend/resume calls for SCIF driver
-
- xen/arch/x86/Kconfig         |  2 ++
- xen/common/Kconfig           | 17 +++++++++++++++
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+In patch v2, I just added a CONFIG_SYSTEM_SUSPEND check around
+the suspend/resume functions in the SCIF driver.
+---
  xen/drivers/char/scif-uart.c | 40 ++++++++++++++++++++++++++++++++++--
- 3 files changed, 57 insertions(+), 2 deletions(-)
+ 1 file changed, 38 insertions(+), 2 deletions(-)
 
+diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
+index 757793ca45..888821a3b8 100644
+--- a/xen/drivers/char/scif-uart.c
++++ b/xen/drivers/char/scif-uart.c
+@@ -139,9 +139,8 @@ static void scif_uart_interrupt(int irq, void *data)
+     }
+ }
+ 
+-static void __init scif_uart_init_preirq(struct serial_port *port)
++static void scif_uart_disable(struct scif_uart *uart)
+ {
+-    struct scif_uart *uart = port->uart;
+     const struct port_params *params = uart->params;
+ 
+     /*
+@@ -155,6 +154,14 @@ static void __init scif_uart_init_preirq(struct serial_port *port)
+ 
+     /* Reset TX/RX FIFOs */
+     scif_writew(uart, SCIF_SCFCR, SCFCR_RFRST | SCFCR_TFRST);
++}
++
++static void scif_uart_init_preirq(struct serial_port *port)
++{
++    struct scif_uart *uart = port->uart;
++    const struct port_params *params = uart->params;
++
++    scif_uart_disable(uart);
+ 
+     /* Clear all errors and flags */
+     scif_readw(uart, params->status_reg);
+@@ -271,6 +278,31 @@ static void scif_uart_stop_tx(struct serial_port *port)
+     scif_writew(uart, SCIF_SCSCR, scif_readw(uart, SCIF_SCSCR) & ~SCSCR_TIE);
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++static void scif_uart_suspend(struct serial_port *port)
++{
++    struct scif_uart *uart = port->uart;
++
++    scif_uart_stop_tx(port);
++    scif_uart_disable(uart);
++}
++
++static void scif_uart_resume(struct serial_port *port)
++{
++    struct scif_uart *uart = port->uart;
++    const struct port_params *params = uart->params;
++    uint16_t ctrl;
++
++    scif_uart_init_preirq(port);
++
++    /* Enable TX/RX and Error Interrupts  */
++    ctrl = scif_readw(uart, SCIF_SCSCR);
++    scif_writew(uart, SCIF_SCSCR, ctrl | params->irq_flags);
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ static struct uart_driver __read_mostly scif_uart_driver = {
+     .init_preirq  = scif_uart_init_preirq,
+     .init_postirq = scif_uart_init_postirq,
+@@ -281,6 +313,10 @@ static struct uart_driver __read_mostly scif_uart_driver = {
+     .start_tx     = scif_uart_start_tx,
+     .stop_tx      = scif_uart_stop_tx,
+     .vuart_info   = scif_vuart_info,
++#ifdef CONFIG_SYSTEM_SUSPEND
++    .suspend      = scif_uart_suspend,
++    .resume       = scif_uart_resume,
++#endif
+ };
+ 
+ static const struct dt_device_match scif_uart_dt_match[] __initconst =
 -- 
 2.48.1
 
