@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D51C5B55A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4254C61CE7
 	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:19:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000929.1381106 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1000937.1381166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzd6-0008KG-1M; Fri, 30 May 2025 13:18:36 +0000
+	id 1uKzdK-0001V4-Np; Fri, 30 May 2025 13:18:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000929.1381106; Fri, 30 May 2025 13:18:36 +0000
+Received: by outflank-mailman (output) from mailman id 1000937.1381166; Fri, 30 May 2025 13:18:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzd5-0008K9-Us; Fri, 30 May 2025 13:18:35 +0000
-Received: by outflank-mailman (input) for mailman id 1000929;
- Fri, 30 May 2025 13:18:34 +0000
+	id 1uKzdK-0001Us-Jg; Fri, 30 May 2025 13:18:50 +0000
+Received: by outflank-mailman (input) for mailman id 1000937;
+ Fri, 30 May 2025 13:18:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sDQw=YO=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uKzd3-0008Jy-7C
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:18:34 +0000
-Received: from 8.mo561.mail-out.ovh.net (8.mo561.mail-out.ovh.net
- [87.98.172.249]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 93fdcce9-3d58-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 15:18:30 +0200 (CEST)
-Received: from director4.ghost.mail-out.ovh.net (unknown [10.108.25.52])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4b83hj3kqyz1kFf
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:18:29 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-2nxzt (unknown [10.110.113.210])
- by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 5CC8AC571A;
- Fri, 30 May 2025 13:18:27 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.110])
- by ghost-submission-5b5ff79f4f-2nxzt with ESMTPSA
- id cVVzByOwOWjZ2QAADMzzjw
- (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:18:27 +0000
+ id 1uKzdI-0008Jy-UG
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:18:49 +0000
+Received: from 4.mo576.mail-out.ovh.net (4.mo576.mail-out.ovh.net
+ [46.105.42.102]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9eb32284-3d58-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 15:18:48 +0200 (CEST)
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.25.252])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4b83j33X41z32V2
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:18:47 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-r8cb6 (unknown [10.110.118.183])
+ by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id BDA71C4523;
+ Fri, 30 May 2025 13:18:46 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.114])
+ by ghost-submission-5b5ff79f4f-r8cb6 with ESMTPSA
+ id HZerJTawOWi91goAdfCxkA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:18:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,225 +48,442 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93fdcce9-3d58-11f0-a2ff-13f23c93f187
-Authentication-Results:garm.ovh; auth=pass (GARM-110S004b2589251-9822-4f6f-8629-ee3c86da3d3c,
+X-Inumbo-ID: 9eb32284-3d58-11f0-a2ff-13f23c93f187
+Authentication-Results:garm.ovh; auth=pass (GARM-114S008955e152b-4069-4f80-bee0-b9936b0ef95e,
                     A4E380CC922F0B59227EC5DCC46884561651840B) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.184.221
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Ross Philipson <ross.philipson@oracle.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Lukasz Hawrylko <lukasz@hawrylko.pl>,
-	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v3 00/22] x86: Trenchboot Secure Launch DRTM (Xen)
-Date: Fri, 30 May 2025 16:17:42 +0300
-Message-ID: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v3 06/22] xen/arch/x86: reserve TXT memory during Slaunch
+Date: Fri, 30 May 2025 16:17:48 +0300
+Message-ID: <8d5ba2e7a0a8bd05bb9cdb89db3f15b831f7f4f7.1748611041.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
+References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12692551124840527004
+X-Ovh-Tracer-Id: 12697617674837472412
 X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -51
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenogfuuhhsphgvtghtffhomhgrihhnucdlgeelmdenucfjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevueejleetieejveeuheetveefvdeileefvdffleelfeekhfehgfegudduiefhgfenucffohhmrghinhepghhithhhuhgsrdgtohhmpdhtrhgvnhgthhgsohhothdrohhrghdpshhouhhrtggvfhhorhhgvgdrnhgvthdpkhgvrhhnvghlrdhorhhgnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheeiudgmpdhmohguvgepshhmth
- hpohhuth
-DKIM-Signature: a=rsa-sha256; bh=9Icdj8G3G4IrStgoJVn7lJvTKzaaMme79V+bkIE7hmI=;
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduvdculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepufgvrhhgihhiucffmhihthhruhhkuceoshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeegkeffieeitdevkefhudegffevieeggfelgedvgeehffdtteehfeeuleeiudekvdenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekgedrvddvuddpfeejrdehledrudegvddruddugeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehjeeimgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=Nf38lpeiCUvbLLteadUfdEVFOEAXLH0XFiAoqTSi818=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1748611109; v=1;
- b=S8s8IljRUcy9LDF9K1kKpVdaB9zT2A6Z+g6KVJJFFAzCBBIqhLvKzEcRZyJ4TvtJofS9EcCs
- Ipnb9ZDtcsFG36sPMrpl7gtowmoKli4hLWCn4rYhLbwtcqMJknWxXDhlNnUw1/kbi66NDvFdGQ6
- 0wKeMVZy/4gfXz30YxYYIjSgE4SmYkJxDf0i9n3I5c/VykvY6QhskGkt324A2f8nJTclV456BsX
- y1/0Sn7rGE+21X3c/mDBd66zeOlR0vw6RJw3b3OhKEMyGhS7uYt4pxNJr7GmnEsepQoE5Bw1GbA
- zUvUgAcx0JQgnG6G1J9BluJ7/SOKRhiXsdPwXYyuvun6g==
+ t=1748611127; v=1;
+ b=dzUMtDoyKOU0Pn3wBrv6GNv6AvXgVZcONN70y/Fa52eEaV8APHKYIBZfRZ5P5cSR3XvmduBS
+ FkRC7++v+5Q8edt/dfGfWy+TmCGS7wjH1RcLEpwFm1ib3WiLd70b+8cuYs2NitINj4DNfdhsdhM
+ DX8PLEX0saHV9VEYrQFATBYf8j90PIRCq9f3Yo0ETW8HOKYk7XqTPXBduea4oFbT9x9iAEVxqop
+ zQuv4MaDyjxzoFKIBh08xbe3i6gRfALEvPjejUfi3K2UGG8r60AB28d3KrDuAALMcFFrgoWvxa0
+ EWBbjQTNdb0eGBFaT1VCV0f9tqtTEQMwNzmLYNsKxkB/w==
 
-The aim of the [TrenchBoot] project is to provide an implementation of
-DRTM that is generic enough to cover various use cases:
- - Intel TXT and AMD SKINIT on x86 CPUs
- - legacy and UEFI boot
- - TPM1.2 and TPM2.0
- - (in the future) DRTM on Arm CPUs
+From: Kacper Stojek <kacper.stojek@3mdeb.com>
 
-DRTM is a version of a measured launch that starts on request rather
-than at the start of a boot cycle.  One of its advantages is in not
-including the firmware in the chain of trust.
+TXT heap, SINIT and TXT private space are marked as reserved or unused
+in e820 to protect from unintended uses.
 
-Xen already supports DRTM via [tboot] which targets Intel TXT only.
-tboot employs encapsulates some of the DRTM details within itself while
-with TrenchBoot Xen (or Linux) is meant to be a self-contained payload
-for a TrenchBoot-enabled bootloader (think GRUB).  The one exception is
-that UEFI case requires calling back into bootloader to initiate DRTM,
-which is necessary to give Xen a chance of querying all the information
-it needs from the firmware before performing DRTM start.
-
-From reading the above tboot might seem like a more abstracted, but the
-reality is that the payload needs to have DRTM-specific knowledge either
-way.  TrenchBoot in principle allows coming up with independent
-implementations of bootloaders and payloads that are compatible with
-each other.
-
-The "x86/boot: choose AP stack based on APIC ID" patch is shared with
-[Parallelize AP bring-up] series which is required here because Intel
-TXT always releases all APs simultaneously.  The rest of the patches are
-unique.
-
-This version of the patches corresponds to this branch:
-    https://github.com/TrenchBoot/xen/compare/d7d55c27cc...aem-staging-2025-05-30-v3
-
------
-
-[TrenchBoot]: https://trenchboot.org/
-[tboot]: https://sourceforge.net/p/tboot/wiki/Home/
-[Parallelize AP bring-up]: https://lore.kernel.org/xen-devel/cover.1699982111.git.krystian.hebel@3mdeb.com/
-[v1]: https://lore.kernel.org/xen-devel/cover.1745172094.git.sergii.dmytruk@3mdeb.com/
-[v2]: https://lore.kernel.org/xen-devel/cover.1747155790.git.sergii.dmytruk@3mdeb.com/
-
------
-
-Changes in v3:
- - sorted `F:` entries in MAINTAINERS file
- - made sha1 implementation more similar to sha256
- - dropped unused parameter from xen/arch/x86/cpu/intel.c:intel_log_smx_txt()
- - updated header guards according to new style
- - xen/arch/x86/include/asm/intel-txt.h:
-   + briefly explained what TXT is
-   + renamed: NR_TXT_CONFIG_SIZE -> TXT_CONFIG_SPACE_SIZE
-   + renamed: read_txt_reg() -> txt_read()
-   + renamed: write_txt_reg() -> txt_write()
-   + marked txt_reset() as noreturn and used unreacheable() instead of while(1)
-   + explained a bit more about TXT Heap
- - xen/include/xen/slr-table.h:
-   + briefly explained what SLRT is
-   + fixed checks in slr_next_entry()
- - SPDX-License-Identifier: GPL-2.0 -> GPL-2.0-only
- - made more code const-correct
- - use arithmetic on pointers to `void` instead of pointers to `uint8_t`
-
-Changes in [v2]:
- - using dashes instead of underscores in the names of new files
- - dropping of an extra sha256 implementation
- - rewriting sha1 implementation to be in line with already present
-   sha256 implementation (simplifying it and getting rid of macros)
- - correct placement of new lines in Makefile
- - add header guards to all new files
- - use correct names for header guards in new files
- - update license of xen/include/xen/slr-table.h
- - changed fixmlehdr to search for header within 8 instead of 4 KiB file
-   prefix
- - don't print DRTM-related capabilities when resuming from S3
- - forbade S3 in case of Secure Launch
- - fixed an issue with resuming from S3 caused by inappropriate use of
-   __initdata
- - added a new section to MAINTAINERS
- - improved commit messages
- - fixed MISRA C violations:
-   * shadowing of e820 global
-   * missing U literal suffixes
-   * use of ull literal suffix
-   * excluded fixmlehdr from analysis (similar to other build tools)
-   * use of 0 instead of NULL in one place
-   * provided declarations for some definitions
-   * marked asm-invoked functions with `asmlinkage`
-
------
-
-Kacper Stojek (2):
-  x86/boot: add MLE header and Secure Launch entry point
-  xen/arch/x86: reserve TXT memory during Slaunch
-
-Krystian Hebel (7):
-  x86/include/asm/intel-txt.h: constants and accessors for TXT registers
-    and heap
-  x86/boot/slaunch-early: early TXT checks and boot data retrieval
-  x86/slaunch: restore boot MTRRs after Intel TXT DRTM
-  xen/lib: add implementation of SHA-1
-  x86/tpm.c: code for early hashing and extending PCRs (for TPM1.2)
-  x86/boot: choose AP stack based on APIC ID
-  x86/smpboot.c: TXT AP bringup
-
-Michał Żygowski (2):
-  x86/hvm: check for VMX in SMX if Slaunch is active
-  x86/cpu: report SMX, TXT and SKINIT capabilities
-
-Sergii Dmytruk (11):
-  include/xen/slr-table.h: Secure Launch Resource Table definitions
-  x86/boot/slaunch-early: implement early initialization
-  x86/mtrr: expose functions for pausing caching
-  x86/tpm.c: support extending PCRs of TPM2.0
-  x86/tpm.c: implement event log for TPM2.0
-  x86/slaunch: process DRTM policy
-  x86/acpi: disallow S3 on Secure Launch boot
-  x86/boot/slaunch-early: find MBI and SLRT on AMD
-  x86/slaunch: support AMD SKINIT
-  x86/slaunch: support EFI boot
-  MAINTAINERS: add a section for TrenchBoot Slaunch
-
- .gitignore                                    |    1 +
- MAINTAINERS                                   |   15 +
- .../eclair_analysis/ECLAIR/out_of_scope.ecl   |    1 +
- docs/hypervisor-guide/x86/how-xen-boots.rst   |    7 +
- xen/arch/x86/Makefile                         |   12 +-
- xen/arch/x86/acpi/power.c                     |    8 +
- xen/arch/x86/boot/Makefile                    |   10 +-
- xen/arch/x86/boot/head.S                      |  250 ++++
- xen/arch/x86/boot/slaunch-early.c             |  105 ++
- xen/arch/x86/boot/trampoline.S                |   40 +-
- xen/arch/x86/boot/x86_64.S                    |   42 +-
- xen/arch/x86/cpu/amd.c                        |   16 +
- xen/arch/x86/cpu/cpu.h                        |    1 +
- xen/arch/x86/cpu/hygon.c                      |    1 +
- xen/arch/x86/cpu/intel.c                      |   46 +
- xen/arch/x86/cpu/mtrr/generic.c               |   51 +-
- xen/arch/x86/e820.c                           |    5 +
- xen/arch/x86/efi/efi-boot.h                   |   88 +-
- xen/arch/x86/efi/fixmlehdr.c                  |  127 ++
- xen/arch/x86/hvm/vmx/vmcs.c                   |    3 +-
- xen/arch/x86/include/asm/apicdef.h            |    4 +
- xen/arch/x86/include/asm/intel-txt.h          |  478 ++++++++
- xen/arch/x86/include/asm/mm.h                 |    3 +
- xen/arch/x86/include/asm/msr-index.h          |    3 +
- xen/arch/x86/include/asm/mtrr.h               |    8 +
- xen/arch/x86/include/asm/processor.h          |    1 +
- xen/arch/x86/include/asm/slaunch.h            |   98 ++
- xen/arch/x86/include/asm/tpm.h                |   19 +
- xen/arch/x86/intel-txt.c                      |  188 +++
- xen/arch/x86/setup.c                          |   32 +-
- xen/arch/x86/slaunch.c                        |  465 ++++++++
- xen/arch/x86/smpboot.c                        |   63 +
- xen/arch/x86/tboot.c                          |   20 +-
- xen/arch/x86/tpm.c                            | 1056 +++++++++++++++++
- xen/common/efi/boot.c                         |    4 +
- xen/common/efi/runtime.c                      |    1 +
- xen/include/xen/efi.h                         |    1 +
- xen/include/xen/sha1.h                        |   14 +
- xen/include/xen/slr-table.h                   |  276 +++++
- xen/lib/Makefile                              |    1 +
- xen/lib/sha1.c                                |  190 +++
- 41 files changed, 3698 insertions(+), 56 deletions(-)
- create mode 100644 xen/arch/x86/boot/slaunch-early.c
- create mode 100644 xen/arch/x86/efi/fixmlehdr.c
- create mode 100644 xen/arch/x86/include/asm/intel-txt.h
- create mode 100644 xen/arch/x86/include/asm/slaunch.h
- create mode 100644 xen/arch/x86/include/asm/tpm.h
+Signed-off-by: Kacper Stojek <kacper.stojek@3mdeb.com>
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
+Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+---
+ xen/arch/x86/Makefile                |   1 +
+ xen/arch/x86/include/asm/intel-txt.h |   6 ++
+ xen/arch/x86/include/asm/mm.h        |   3 +
+ xen/arch/x86/include/asm/slaunch.h   |  44 +++++++++++
+ xen/arch/x86/intel-txt.c             | 113 +++++++++++++++++++++++++++
+ xen/arch/x86/setup.c                 |  10 ++-
+ xen/arch/x86/slaunch.c               |  98 ++++++++++++++++++++++-
+ 7 files changed, 271 insertions(+), 4 deletions(-)
  create mode 100644 xen/arch/x86/intel-txt.c
- create mode 100644 xen/arch/x86/slaunch.c
- create mode 100644 xen/arch/x86/tpm.c
- create mode 100644 xen/include/xen/sha1.h
- create mode 100644 xen/include/xen/slr-table.h
- create mode 100644 xen/lib/sha1.c
 
-
-base-commit: d7d55c27cc3253fb3634a0e468ef5df30487552b
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index aa20eb42b5..5788898166 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -38,6 +38,7 @@ obj-$(CONFIG_GDBSX) += gdbsx.o
+ obj-y += hypercall.o
+ obj-y += i387.o
+ obj-y += i8259.o
++obj-y += intel-txt.o
+ obj-y += io_apic.o
+ obj-$(CONFIG_LIVEPATCH) += livepatch.o
+ obj-y += msi.o
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+index 122b4293ea..ad3c41d86c 100644
+--- a/xen/arch/x86/include/asm/intel-txt.h
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -420,6 +420,12 @@ static inline void txt_verify_pmr_ranges(
+     */
+ }
+ 
++/* Prepares for accesses to TXT-specific memory. */
++void txt_map_mem_regions(void);
++
++/* Marks TXT-specific memory as used to avoid its corruption. */
++void txt_reserve_mem_regions(void);
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* X86_INTEL_TXT_H */
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index d6e80db71c..91fa95cd90 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -106,6 +106,9 @@
+ #define _PGC_need_scrub   _PGC_allocated
+ #define PGC_need_scrub    PGC_allocated
+ 
++/* How much of the directmap is prebuilt at compile time. */
++#define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
++
+ #ifndef CONFIG_BIGMEM
+ /*
+  * This definition is solely for the use in struct page_info (and
+diff --git a/xen/arch/x86/include/asm/slaunch.h b/xen/arch/x86/include/asm/slaunch.h
+index df42defd92..7891d60035 100644
+--- a/xen/arch/x86/include/asm/slaunch.h
++++ b/xen/arch/x86/include/asm/slaunch.h
+@@ -7,6 +7,7 @@
+ #ifndef X86_SLAUNCH_H
+ #define X86_SLAUNCH_H
+ 
++#include <xen/slr-table.h>
+ #include <xen/types.h>
+ 
+ /* Indicates an active Secure Launch boot. */
+@@ -18,9 +19,52 @@ extern bool slaunch_active;
+  */
+ extern uint32_t slaunch_slrt;
+ 
++/*
++ * evt_log is assigned a physical address and the caller must map it to
++ * virtual, if needed.
++ */
++static inline void find_evt_log(const struct slr_table *slrt, void **evt_log,
++                                uint32_t *evt_log_size)
++{
++    const struct slr_entry_log_info *log_info;
++
++    log_info = (const struct slr_entry_log_info *)
++        slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_LOG_INFO);
++    if ( log_info != NULL )
++    {
++        *evt_log = _p(log_info->addr);
++        *evt_log_size = log_info->size;
++    }
++    else
++    {
++        *evt_log = NULL;
++        *evt_log_size = 0;
++    }
++}
++
+ /*
+  * Retrieves pointer to SLRT.  Checks table's validity and maps it as necessary.
+  */
+ struct slr_table *slaunch_get_slrt(void);
+ 
++/*
++ * Prepares for accesses to essential data structures setup by boot environment.
++ */
++void slaunch_map_mem_regions(void);
++
++/* Marks regions of memory as used to avoid their corruption. */
++void slaunch_reserve_mem_regions(void);
++
++/*
++ * This helper function is used to map memory using L2 page tables by aligning
++ * mapped regions to 2MB. This way page allocator (which at this point isn't
++ * yet initialized) isn't needed for creating new L1 mappings. The function
++ * also checks and skips memory already mapped by the prebuilt tables.
++ *
++ * There is no unmap_l2() because the function is meant to be used by the code
++ * that accesses DRTM-related memory soon after which Xen rebuilds memory maps,
++ * effectively dropping all existing mappings.
++ */
++int slaunch_map_l2(unsigned long paddr, unsigned long size);
++
+ #endif /* X86_SLAUNCH_H */
+diff --git a/xen/arch/x86/intel-txt.c b/xen/arch/x86/intel-txt.c
+new file mode 100644
+index 0000000000..163383b262
+--- /dev/null
++++ b/xen/arch/x86/intel-txt.c
+@@ -0,0 +1,113 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
++ */
++
++#include <xen/bug.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++#include <xen/types.h>
++#include <asm/e820.h>
++#include <asm/intel-txt.h>
++#include <asm/slaunch.h>
++
++static uint64_t __initdata txt_heap_base, txt_heap_size;
++
++void __init txt_map_mem_regions(void)
++{
++    int rc;
++
++    rc = slaunch_map_l2(TXT_PRIV_CONFIG_REGS_BASE, TXT_CONFIG_SPACE_SIZE);
++    BUG_ON(rc != 0);
++
++    txt_heap_base = txt_read(TXTCR_HEAP_BASE);
++    BUG_ON(txt_heap_base == 0);
++
++    txt_heap_size = txt_read(TXTCR_HEAP_SIZE);
++    BUG_ON(txt_heap_size == 0);
++
++    rc = slaunch_map_l2(txt_heap_base, txt_heap_size);
++    BUG_ON(rc != 0);
++}
++
++/* Mark RAM region as RESERVED if it isn't marked that way already. */
++static int __init mark_ram_as(struct e820map *map, uint64_t start,
++                              uint64_t end, uint32_t type)
++{
++    unsigned int i;
++    uint32_t from_type = E820_RAM;
++
++    for ( i = 0; i < map->nr_map; i++ )
++    {
++        uint64_t rs = map->map[i].addr;
++        uint64_t re = rs + map->map[i].size;
++
++        /* The entry includes the range. */
++        if ( start >= rs && end <= re )
++            break;
++
++        /* The entry intersects the range. */
++        if ( end > rs && start < re )
++        {
++            /* Fatal failure. */
++            return 0;
++        }
++    }
++
++    /*
++     * If the range is not included by any entry and no entry intersects it,
++     * then it's not listed in the memory map.  Consider this case as a success
++     * since we're only preventing RAM from being used and unlisted range should
++     * not be used.
++     */
++    if ( i == map->nr_map )
++        return 1;
++
++    /*
++     * e820_change_range_type() fails if the range is already marked with the
++     * desired type.  Don't consider it an error if firmware has done it for us.
++     */
++    if ( map->map[i].type == type )
++        return 1;
++
++    /* E820_ACPI or E820_NVS are really unexpected, but others are fine. */
++    if ( map->map[i].type == E820_RESERVED ||
++         map->map[i].type == E820_UNUSABLE )
++        from_type = map->map[i].type;
++
++    return e820_change_range_type(map, start, end, from_type, type);
++}
++
++void __init txt_reserve_mem_regions(void)
++{
++    int rc;
++    uint64_t sinit_base, sinit_size;
++
++    /* TXT Heap */
++    BUG_ON(txt_heap_base == 0);
++    printk("SLAUNCH: reserving TXT heap (%#lx - %#lx)\n", txt_heap_base,
++           txt_heap_base + txt_heap_size);
++    rc = mark_ram_as(&e820_raw, txt_heap_base, txt_heap_base + txt_heap_size,
++                     E820_RESERVED);
++    BUG_ON(rc == 0);
++
++    sinit_base = txt_read(TXTCR_SINIT_BASE);
++    BUG_ON(sinit_base == 0);
++
++    sinit_size = txt_read(TXTCR_SINIT_SIZE);
++    BUG_ON(sinit_size == 0);
++
++    /* SINIT */
++    printk("SLAUNCH: reserving SINIT memory (%#lx - %#lx)\n", sinit_base,
++           sinit_base + sinit_size);
++    rc = mark_ram_as(&e820_raw, sinit_base, sinit_base + sinit_size,
++                     E820_RESERVED);
++    BUG_ON(rc == 0);
++
++    /* TXT Private Space */
++    rc = mark_ram_as(&e820_raw, TXT_PRIV_CONFIG_REGS_BASE,
++                     TXT_PRIV_CONFIG_REGS_BASE + TXT_CONFIG_SPACE_SIZE,
++                     E820_UNUSABLE);
++    BUG_ON(rc == 0);
++}
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 1f5cb67bd0..e4638acd12 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -53,6 +53,7 @@
+ #include <asm/prot-key.h>
+ #include <asm/pv/domain.h>
+ #include <asm/setup.h>
++#include <asm/slaunch.h>
+ #include <asm/smp.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
+@@ -1087,9 +1088,6 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+     return d;
+ }
+ 
+-/* How much of the directmap is prebuilt at compile time. */
+-#define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
+-
+ void asmlinkage __init noreturn __start_xen(void)
+ {
+     const char *memmap_type = NULL;
+@@ -1425,6 +1423,12 @@ void asmlinkage __init noreturn __start_xen(void)
+ #endif
+     }
+ 
++    if ( slaunch_active )
++    {
++        slaunch_map_mem_regions();
++        slaunch_reserve_mem_regions();
++    }
++
+     /* Sanitise the raw E820 map to produce a final clean version. */
+     max_page = raw_max_page = init_e820(memmap_type, &e820_raw);
+ 
+diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
+index a3e6ab8d71..ac3b43942b 100644
+--- a/xen/arch/x86/slaunch.c
++++ b/xen/arch/x86/slaunch.c
+@@ -7,14 +7,18 @@
+ #include <xen/compiler.h>
+ #include <xen/init.h>
+ #include <xen/macros.h>
++#include <xen/mm.h>
+ #include <xen/types.h>
++#include <asm/e820.h>
++#include <asm/intel-txt.h>
++#include <asm/page.h>
+ #include <asm/slaunch.h>
+ 
+ /*
+  * These variables are assigned to by the code near Xen's entry point.
+  *
+  * slaunch_active is not __initdata to allow checking for an active Secure
+- * Launch boot.
++ * Launch boot at any point.
+  */
+ bool slaunch_active;
+ uint32_t __initdata slaunch_slrt; /* physical address */
+@@ -25,3 +29,95 @@ static void __maybe_unused compile_time_checks(void)
+ {
+     BUILD_BUG_ON(sizeof(slaunch_active) != 1);
+ }
++
++struct slr_table *__init slaunch_get_slrt(void)
++{
++    static struct slr_table *slrt;
++
++    if (slrt == NULL) {
++        int rc;
++
++        slrt = __va(slaunch_slrt);
++
++        rc = slaunch_map_l2(slaunch_slrt, PAGE_SIZE);
++        BUG_ON(rc != 0);
++
++        if ( slrt->magic != SLR_TABLE_MAGIC )
++            panic("SLRT has invalid magic value: %#08x!\n", slrt->magic);
++        /* XXX: are newer revisions allowed? */
++        if ( slrt->revision != SLR_TABLE_REVISION )
++            panic("SLRT is of unsupported revision: %#04x!\n", slrt->revision);
++        if ( slrt->architecture != SLR_INTEL_TXT )
++            panic("SLRT is for unexpected architecture: %#04x!\n",
++                  slrt->architecture);
++        if ( slrt->size > slrt->max_size )
++            panic("SLRT is larger than its max size: %#08x > %#08x!\n",
++                  slrt->size, slrt->max_size);
++
++        if ( slrt->size > PAGE_SIZE )
++        {
++            rc = slaunch_map_l2(slaunch_slrt, slrt->size);
++            BUG_ON(rc != 0);
++        }
++    }
++
++    return slrt;
++}
++
++void __init slaunch_map_mem_regions(void)
++{
++    void *evt_log_addr;
++    uint32_t evt_log_size;
++
++    /* Vendor-specific part. */
++    txt_map_mem_regions();
++
++    find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
++    if ( evt_log_addr != NULL )
++    {
++        int rc = slaunch_map_l2((uintptr_t)evt_log_addr, evt_log_size);
++        BUG_ON(rc != 0);
++    }
++}
++
++void __init slaunch_reserve_mem_regions(void)
++{
++    int rc;
++
++    void *evt_log_addr;
++    uint32_t evt_log_size;
++
++    /* Vendor-specific part. */
++    txt_reserve_mem_regions();
++
++    find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
++    if ( evt_log_addr != NULL )
++    {
++        printk("SLAUNCH: reserving event log (%#lx - %#lx)\n",
++               (uint64_t)evt_log_addr,
++               (uint64_t)evt_log_addr + evt_log_size);
++        rc = reserve_e820_ram(&e820_raw, (uint64_t)evt_log_addr,
++                              (uint64_t)evt_log_addr + evt_log_size);
++        BUG_ON(rc == 0);
++    }
++}
++
++int __init slaunch_map_l2(unsigned long paddr, unsigned long size)
++{
++    unsigned long aligned_paddr = paddr & ~((1ULL << L2_PAGETABLE_SHIFT) - 1);
++    unsigned long pages = ((paddr + size) - aligned_paddr);
++    pages = ROUNDUP(pages, 1ULL << L2_PAGETABLE_SHIFT) >> PAGE_SHIFT;
++
++    if ( aligned_paddr + pages * PAGE_SIZE <= PREBUILT_MAP_LIMIT )
++        return 0;
++
++    if ( aligned_paddr < PREBUILT_MAP_LIMIT )
++    {
++        pages -= (PREBUILT_MAP_LIMIT - aligned_paddr) >> PAGE_SHIFT;
++        aligned_paddr = PREBUILT_MAP_LIMIT;
++    }
++
++    return map_pages_to_xen((uintptr_t)__va(aligned_paddr),
++                            maddr_to_mfn(aligned_paddr),
++                            pages, PAGE_HYPERVISOR);
++}
 -- 
 2.49.0
 
