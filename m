@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2714FC5AD49
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:47:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001144.1381356 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B43C5B543
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:48:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001148.1381386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL05K-0003v7-Rz; Fri, 30 May 2025 13:47:46 +0000
+	id 1uL05O-0004i0-Nn; Fri, 30 May 2025 13:47:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001144.1381356; Fri, 30 May 2025 13:47:46 +0000
+Received: by outflank-mailman (output) from mailman id 1001148.1381386; Fri, 30 May 2025 13:47:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL05K-0003ux-P5; Fri, 30 May 2025 13:47:46 +0000
-Received: by outflank-mailman (input) for mailman id 1001144;
- Fri, 30 May 2025 13:47:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uL05O-0004hr-JN; Fri, 30 May 2025 13:47:50 +0000
+Received: by outflank-mailman (input) for mailman id 1001148;
+ Fri, 30 May 2025 13:47:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+LO9=YO=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1uL05J-0003es-7k
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:47:45 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a9b5a3ba-3d5c-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 15:47:44 +0200 (CEST)
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-54e816aeca6so2724182e87.2
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 06:47:44 -0700 (PDT)
+ id 1uL05N-0003C4-7O
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:47:49 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id abb7e610-3d5c-11f0-b894-0df219b8e170;
+ Fri, 30 May 2025 15:47:47 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-55329bd977aso3135453e87.1
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 06:47:47 -0700 (PDT)
 Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5533787d2bdsm699791e87.17.2025.05.30.06.47.42
+ 2adb3069b0e04-553379377f4sm704030e87.229.2025.05.30.06.47.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 06:47:42 -0700 (PDT)
+ Fri, 30 May 2025 06:47:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a9b5a3ba-3d5c-11f0-a2ff-13f23c93f187
+X-Inumbo-ID: abb7e610-3d5c-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748612863; x=1749217663; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1748612867; x=1749217667; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XNe9ZmmTuaxvmRoPZ49IX9TgiJHW6RloMcao0C5Z1eg=;
-        b=dmhP2rXEgnVN7Fsj2ZDLxyb7zdf1L9YrSQE5o8vixQtL1f+agOjF768xZu5kAt8TGt
-         nYtPaIhPyGaprEE3EfzjSabp/qbCrAPMTg6IaN3JETv82+k9f9Ev/aAxJw7jsh9zfNgB
-         59MGShlJg+Nxns9kiwrp6gEqNWony1A6C4x3rM3tZEhG2JGZ6TN/GzR0DG0A04KdmlXh
-         dCnqzcY4+/AqSBGY1MPPzPRpu6afECgEnnZkcyxxiGg3d5bY1Z3nMPI+psVZCUMfAT+v
-         xc6+nSaK2ajh5xpQYavVbz8yqWHVDF4DjG1bHSrvWELnAkZZCLShhKgePuuIFComk583
-         YQKw==
+        bh=DTn2B6C64BsBJ/wVOSgKG1LWM5jCpfJNwTLjcuvqmOQ=;
+        b=ScM8O9K8T/ci+/XcGO/l2gm7WNk3B+LNbM1GVSCk21wn12x5W+1VZ2x+jFN/5eTkd9
+         WMkakPrf5/IhP6I4dbmIaLQwiD5y0JMvV0+8796VAaVVdyudUANuH7x6f3c60npWPxkv
+         GDjlx7PtHWYzVUZJqHBJTCexH3fHpRQ/LQ4mK3vk7+h7wW7coi0aARpL8K/XCmrUyUqu
+         rH4Sw7xqWysGy9U7RPR3T8kvrkf5FqBA8xSpw/h6IgPXSvZ/I2Z/h+/HJrzY1sXITEAd
+         0dLkgNj8e6cyHAAqSPpBgv6kS2OxgZ38YP+yxAd+3eJfP7wvB9ZKbq/Zn4PnxSfPlC9a
+         ApDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748612863; x=1749217663;
+        d=1e100.net; s=20230601; t=1748612867; x=1749217667;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XNe9ZmmTuaxvmRoPZ49IX9TgiJHW6RloMcao0C5Z1eg=;
-        b=iwM0Ut+SP0TTu384FpfPXXIn/P0Ibf4Vvv4l/Hkix8x+mj4WgXjhCpvHBr6U7jTiDK
-         P11x7l0sPk92yvjfhFq9DVeBt+6h5HL0FASQsw7hMNWin+Y0igJddMeRNWdVKHakgzfa
-         95Xf+aD8j0hgGyalZ2Q5aGOhPtyWTU63+Q8sEcYiM9cRN+6FCoQ5cAWNNG1fKNtqcgk4
-         pCO6lQuoYkwvJqZJSEbyh/P3ZcbbExkZF2O97c74E5WERbh+b4Ml3ukpUMGDqeuv0FrY
-         kZofu8JfGRylBIiRyADKvQRLpKkw5BrH3E7qtBtdB25CiSryPZtMM63gva6SNrYAXZIb
-         sLVQ==
-X-Gm-Message-State: AOJu0YxqkzpsIXJ8+zz3V4EaD5f9l7WA/WdHTDbmmpwexxafvFZLGHtd
-	sZ91nz+wTZBCOd5jUv5E6PzALvifCdMkJf+RRv4hvofXYtmM/FK1Pt06BRqynAvmkhg=
-X-Gm-Gg: ASbGnctH1VkBRZPnGp5yFpHD+01fTqsJtj0o5u+fWNNs3BJpcmIlkaN493JgrT8dErY
-	4o4Qif5yYIHYsVQe6ok0zGRHEkD5LKBPi8oleM8HtWTbP6XcYks0mhKlVftYVFIERU/ipnLB3Wm
-	SHOJISOshEP839Gv/CBl2hEmkUitLAmwdJTER0p56PvIL+KYLYI2/zKfhV+bho+Fsmt8NGIymo3
-	IpwEvLqHUYOE7N7DJJnzOE8D9EmUS/rNew3SmNqIaCiJZXm6pbGD69ZPQZj9sMUm99g4xdfLoPo
-	x7tpY65L+PdFvvt9ZAoYzJ6XBAQ/yiIWgwtmD4VL7aGyfSTGUJRrfalv2+fxmJ2x/PqLApt3q+f
-	B/PxziTyDVhaY8vOsT12OZFiNyElWkOhd7A==
-X-Google-Smtp-Source: AGHT+IGXExmgR5lVqdOZBa0GhHJkmv3bhJquOjOTf0mlELCJBIQfmPSRvw2cRb/63yw5Mpo3FFMfAg==
-X-Received: by 2002:a05:6512:2389:b0:553:3178:2927 with SMTP id 2adb3069b0e04-5533b8f3d7emr1492743e87.16.1748612863072;
-        Fri, 30 May 2025 06:47:43 -0700 (PDT)
+        bh=DTn2B6C64BsBJ/wVOSgKG1LWM5jCpfJNwTLjcuvqmOQ=;
+        b=QQRO3KkK+KRT+lyUsyAZ+5ha5ugfQxz7IdAz7hhFpoIMJ0+skSmke8ea183uvpDxIw
+         UtpeveEU4xIR2dlpRBXx44JZm2Al3+Jrrz4iZ4v+PFM1LYdUi2Dz/bO97/xySjWqXRxs
+         78bCnVZtO1rV2lJc1IZYJJUtNz0dxoVIc5vY0AsfBX3p0Y8vX4MdlvHyCtpyN+LvE4QT
+         94J3pdhoEMJgSPJufQgXjx5ipOYbieun5RoetUe8NWCUk8k/qSUqeTX0rvGhBtkwnKQz
+         p338tU+psVx43V+io92D9zdCTlAA2bZJX12GFeFejpwJhbuiJ5QGXPs2f4OOrKcNxGNI
+         WnFA==
+X-Gm-Message-State: AOJu0YxYSRnH/65eddsK4y1MuaLz56j3ltACCMcpgEcK/W7B8ULCTcad
+	p3g5O7rnRgyASraX2qq6MjLlIywy3cTTPH5cR6G8+5e6Y1mDtO7zYmXleos0vB16JYE=
+X-Gm-Gg: ASbGnctQvhBn5POZu2GnV5rVtF3+2lV8+9mMCrHTnodCjfRa47mt5qdebb6kWmPpjcB
+	7Uj2E3oGbmz5f55wSuS9oiqaRvvutV7c6yeXn0JLXjOEUvFG3uzcusbHTuUc/h2ggOv+rFa7yNu
+	gRsqy5Ljjc/cnt2dYY7ZV26TAW+jSolZ4o8PKLLD9MKueFT+ZudvqpDpNfa3Ffz9iXT9e+Cfk6A
+	/+UWUEufiM4RDQa+nwkDOWNtcQ2e0QAZUAXfL7XKvJTI3rPpa9h0owtWKR876IwwbH+2hmy/xgx
+	uLmH/cxR1hGlCctikYbsQs1USNgcUld8/Ynh4icskpssiaPVQLI/ZHVZ2uKPHDHm80wfJJ/To+L
+	khSm9VgEzLR3vf/WlwjtssJ8=
+X-Google-Smtp-Source: AGHT+IGUw3jW13S4FcruO1tndtUR81rZvgF2eSy5dew8CqP2bKabLRGvtqDzU42K8uYU8DePLFyswA==
+X-Received: by 2002:a05:6512:2208:b0:553:243c:c1d3 with SMTP id 2adb3069b0e04-55335b3bfafmr2570125e87.18.1748612866446;
+        Fri, 30 May 2025 06:47:46 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -91,10 +91,13 @@ Cc: sstabellini@kernel.org,
 	michal.orzel@amd.com,
 	Volodymyr_Babchuk@epam.com,
 	andrew.cooper3@citrix.com,
-	edgar.iglesias@amd.com
-Subject: [PATCH v3 2/5] xen/arm: dom0less: Add trap-unmapped-accesses
-Date: Fri, 30 May 2025 15:45:56 +0200
-Message-ID: <20250530134559.1434255-3-edgar.iglesias@gmail.com>
+	edgar.iglesias@amd.com,
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v3 4/5] tools/ocaml: Update bindings for CDF_TRAP_UNMAPPED_ACCESSES
+Date: Fri, 30 May 2025 15:45:58 +0200
+Message-ID: <20250530134559.1434255-5-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250530134559.1434255-1-edgar.iglesias@gmail.com>
 References: <20250530134559.1434255-1-edgar.iglesias@gmail.com>
@@ -103,56 +106,36 @@ Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Add the trap-unmapped-accesses per-domain fdt property.
-
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 ---
- docs/misc/arm/device-tree/booting.txt | 10 ++++++++++
- xen/arch/arm/dom0less-build.c         |  9 ++++++++-
- 2 files changed, 18 insertions(+), 1 deletion(-)
+ tools/ocaml/libs/xc/xenctrl.ml  | 1 +
+ tools/ocaml/libs/xc/xenctrl.mli | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 59fa96a82e..9add6440de 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -225,6 +225,16 @@ with the following properties:
-     option is provided with a non zero value, but the platform doesn't support
-     SVE.
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index 2690f9a923..7e1aabad6c 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -70,6 +70,7 @@ type domain_create_flag =
+   | CDF_IOMMU
+   | CDF_NESTED_VIRT
+   | CDF_VPMU
++  | CDF_TRAP_UNMAPPED_ACCESSES
  
-+- trap-unmapped-accesses
-+
-+    Optional. An integer that configures handling of accesses to unmapped
-+    address ranges.
-+    If set to 0, guest accesses will read all bits as ones, e.g 0xFFFFFFFF
-+    for a 32bit access and writes will be ignored.
-+    If set to 1, guest accesses will trap.
-+
-+    This option is only implemented for ARM where the default is 1.
-+
- - xen,enhanced
+ type domain_create_iommu_opts =
+   | IOMMU_NO_SHAREPT
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index febbe1f6ae..f44dba61ae 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -63,6 +63,7 @@ type domain_create_flag =
+   | CDF_IOMMU
+   | CDF_NESTED_VIRT
+   | CDF_VPMU
++  | CDF_TRAP_UNMAPPED_ACCESSES
  
-     A string property. Possible property values are:
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index a4e0a33632..69324aa597 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -344,8 +344,15 @@ void __init arch_create_domUs(struct dt_device_node *node,
- #endif
-     }
- 
--    /* Trap accesses to unmapped areas. */
-+    /* Trap unmapped accesses by default. */
-     d_cfg->flags |= XEN_DOMCTL_CDF_trap_unmapped_accesses;
-+    if ( dt_property_read_u32(node, "trap-unmapped-accesses", &val) )
-+    {
-+        if ( val > 1 )
-+            panic("trap-unmapped-accesses: supported values are 0 or 1");
-+        if ( !val )
-+            d_cfg->flags &= ~XEN_DOMCTL_CDF_trap_unmapped_accesses;
-+    }
- }
- 
- int __init init_intc_phandle(struct kernel_info *kinfo, const char *name,
+ type domain_create_iommu_opts =
+   | IOMMU_NO_SHAREPT
 -- 
 2.43.0
 
