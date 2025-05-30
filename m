@@ -4,35 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA3EC5AD49
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 15:56:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001360.1381545 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F2EC5B543
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 16:27:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001394.1381553 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL25E-0001eb-1s; Fri, 30 May 2025 15:55:48 +0000
+	id 1uL2Zp-0006eu-DD; Fri, 30 May 2025 16:27:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001360.1381545; Fri, 30 May 2025 15:55:48 +0000
+Received: by outflank-mailman (output) from mailman id 1001394.1381553; Fri, 30 May 2025 16:27:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL25D-0001eT-TT; Fri, 30 May 2025 15:55:47 +0000
-Received: by outflank-mailman (input) for mailman id 1001360;
- Fri, 30 May 2025 15:55:47 +0000
+	id 1uL2Zp-0006en-Ak; Fri, 30 May 2025 16:27:25 +0000
+Received: by outflank-mailman (input) for mailman id 1001394;
+ Fri, 30 May 2025 16:27:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=m5RA=YO=arm.com=ryan.roberts@srs-se1.protection.inumbo.net>)
- id 1uL25D-0001eN-2i
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 15:55:47 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 8b3b35dc-3d6e-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 17:55:44 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 09446169C;
- Fri, 30 May 2025 08:55:27 -0700 (PDT)
-Received: from [10.57.95.14] (unknown [10.57.95.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF2053F673;
- Fri, 30 May 2025 08:55:37 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=f/JM=YO=google.com=jannh@srs-se1.protection.inumbo.net>)
+ id 1uL2Zn-0006eg-WB
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 16:27:24 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f629518e-3d72-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 18:27:23 +0200 (CEST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-601a67c6e61so14a12.0
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 09:27:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,180 +42,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b3b35dc-3d6e-11f0-a2ff-13f23c93f187
-Message-ID: <af9a96e1-064b-4627-bd34-e7e7e8a05452@arm.com>
-Date: Fri, 30 May 2025 16:55:36 +0100
+X-Inumbo-ID: f629518e-3d72-11f0-a2ff-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1748622441; x=1749227241; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Wb7EzNeuZNtT7LoNB6YIvTwNTIj8nYWDYSy4GeuX+MM=;
+        b=LZeZCMMuYMlUod9vGbTfMi9+hQ8syFhA9I2Y1YZj/qe/J4kH39K4P6YiKTLHKEpgJX
+         hz6dh1CSKhKmT0XxHTMGKaXCJ5LthCaSPbrUXjhuOnG9jkUX0/g9mJVZn87TkriCmFU8
+         YInQVBHKb3F05g53+4nQbHX/EgNVMWIO95IACPJMTyNfLKznB4atEJ85F7EngADXczSr
+         JBOlMBV/rOh0Od/gz1fbDTDKCYkm8L2Hmu0OjxMoD2aKB5eJwMJRblD2JUc+zD8srkMC
+         coOBRiVE0QmFJFxjUWKZDhkaIWfS4aan8q8wy+FfAhmBE6EWeg0l1ANNQym0rsD95RHA
+         mydQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748622441; x=1749227241;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Wb7EzNeuZNtT7LoNB6YIvTwNTIj8nYWDYSy4GeuX+MM=;
+        b=wtnQBb7ciH8EACUiBnOip3Fy1YCeadxuoeoVFWKJiTi3u2KBx2Lx/syT6bOW9TFCuO
+         9vlLy4k5EpAlR4biqNHQFBOOumyllG2UODJV9NaYborx2IM6VEI+eSTKheKzqi8zruiT
+         dPoA0jLU+al7VMhuKCr59fOd0B4+G2Xu+Yhti2oLSS4wP3OIOCboAlibvWqV10ODcTFF
+         D2e+MbTmEEqXbze0iRKUmJltyHK3aYmE1GGyTAYrz1RtgyfHZQwACXoO66LE5njd7zWQ
+         a0VyvqEGkrxH043pRhq+VgJ9oNxUSqEKI7zoxCwT7aljLiMNXa29RF9Jz5It9E0mdVcd
+         nkkg==
+X-Forwarded-Encrypted: i=1; AJvYcCWRp+ymqzA1yYk7SZKjlj4uWgHwuy1mO2ycgvtGATnK5nzB5W5qpmKdJVi1KoXw+jhtqVYS896OO5A=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwU8oxc/4C6d+ecNq7zlMIQy10beDpsHWIdoJLailR/voVchL5h
+	IJt6GDFQkU9cDYQVwvN76ALl8d56PP116C4zbOHtA0UsaKxEE7Vo1FEJcrjvMWA4/09BhM5ldvF
+	flqC/ZRm/1iMgRhcb+0ifU0RE+I7iw9x3RzNvzLAU
+X-Gm-Gg: ASbGncsF8JL84kaYS/Y6GFKtU10gXAdDAiOhfrrFfk1aCf9WmKK4+1SWyKVNxfHZEeM
+	yG6v4vFGyh2vb8xNTvrFo2XPZ5kxaIwGZONOpbQ50L+2CBygfPF+2wMSJTUXdZtnB2kU9qyjirP
+	DTy96e6ssdyAjjxY5h1Rmi5QKC3vSAWV6f2zM96LFunE/d+V2MSkHTffFbFcxXp2uKrKdHtwE=
+X-Google-Smtp-Source: AGHT+IFvo4UeYXqvvR6hGpmlYjccx/P9qAgBVyNpakUtwWnk/plyYyjpSLFfr/exrsOHq2DB2NbEp4NJnsA/fPm9vYQ=
+X-Received: by 2002:a50:f608:0:b0:5e6:15d3:ffe7 with SMTP id
+ 4fb4d7f45d1cf-60577a55f40mr88916a12.7.1748622440589; Fri, 30 May 2025
+ 09:27:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 0/6] Lazy mmu mode fixes and improvements
-Content-Language: en-GB
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- "David S. Miller" <davem@davemloft.net>,
- Andreas Larsson <andreas@gaisler.com>, Juergen Gross <jgross@suse.com>,
- Ajay Kaher <ajay.kaher@broadcom.com>,
- Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H. Peter Anvin" <hpa@zytor.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Peter Zijlstra <peterz@infradead.org>, Arnd Bergmann <arnd@arndb.de>,
- David Hildenbrand <david@redhat.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
- <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Alexei Starovoitov <ast@kernel.org>, Andrey Ryabinin
- <ryabinin.a.a@gmail.com>, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- sparclinux@vger.kernel.org, virtualization@lists.linux.dev,
- xen-devel@lists.xenproject.org, linux-mm@kvack.org,
- Jann Horn <jannh@google.com>
-References: <20250530140446.2387131-1-ryan.roberts@arm.com>
- <5b5d6352-9018-4658-b8fe-6eadaad46881@lucifer.local>
-From: Ryan Roberts <ryan.roberts@arm.com>
-In-Reply-To: <5b5d6352-9018-4658-b8fe-6eadaad46881@lucifer.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250530140446.2387131-1-ryan.roberts@arm.com> <20250530140446.2387131-2-ryan.roberts@arm.com>
+In-Reply-To: <20250530140446.2387131-2-ryan.roberts@arm.com>
+From: Jann Horn <jannh@google.com>
+Date: Fri, 30 May 2025 18:26:44 +0200
+X-Gm-Features: AX0GCFt5gaAeg9wlqckCjWiqvoyfvAtwj8XYq0jNIyzkBuWgoy0LcwI3HloBVMo
+Message-ID: <CAG48ez2k6ZmM-335EQjXeL6OtKzuOjVPWQDuJ75ww9Z6NMeg5w@mail.gmail.com>
+Subject: Re: [RFC PATCH v1 1/6] fs/proc/task_mmu: Fix pte update and tlb
+ maintenance ordering in pagemap_scan_pmd_entry()
+To: Ryan Roberts <ryan.roberts@arm.com>
+Cc: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+	Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
+	"David S. Miller" <davem@davemloft.net>, Andreas Larsson <andreas@gaisler.com>, 
+	Juergen Gross <jgross@suse.com>, Ajay Kaher <ajay.kaher@broadcom.com>, 
+	Alexey Makhalov <alexey.makhalov@broadcom.com>, Thomas Gleixner <tglx@linutronix.de>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnd Bergmann <arnd@arndb.de>, David Hildenbrand <david@redhat.com>, 
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+	Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Alexei Starovoitov <ast@kernel.org>, 
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	sparclinux@vger.kernel.org, virtualization@lists.linux.dev, 
+	xen-devel@lists.xenproject.org, linux-mm@kvack.org, 
+	Andy Lutomirski <luto@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 30/05/2025 15:47, Lorenzo Stoakes wrote:
-> +cc Jann who is a specialist in all things page table-y and especially scary
-> edge cases :)
-> 
-> On Fri, May 30, 2025 at 03:04:38PM +0100, Ryan Roberts wrote:
->> Hi All,
->>
->> I recently added support for lazy mmu mode on arm64. The series is now in
->> Linus's tree so should be in v6.16-rc1. But during testing in linux-next we
->> found some ugly corners (unexpected nesting). I was able to fix those issues by
->> making the arm64 implementation more permissive (like the other arches). But
->> this is quite fragile IMHO. So I'd rather fix the root cause and ensure that
->> lazy mmu mode never nests, and more importantly, that code never makes pgtable
->> modifications expecting them to be immediate, not knowing that it's actually in
->> lazy mmu mode so the changes get deferred.
-> 
-> When you say fragile, are you confident it _works_ but perhaps not quite as well
-> as you want? Or are you concerned this might be broken upstream in any way?
+On Fri, May 30, 2025 at 4:04=E2=80=AFPM Ryan Roberts <ryan.roberts@arm.com>=
+ wrote:
+> pagemap_scan_pmd_entry() was previously modifying ptes while in lazy mmu
+> mode, then performing tlb maintenance for the modified ptes, then
+> leaving lazy mmu mode. But any pte modifications during lazy mmu mode
+> may be deferred until arch_leave_lazy_mmu_mode(), inverting the required
+> ordering between pte modificaiton and tlb maintenance.
+>
+> Let's fix that by leaving mmu mode, forcing all the pte updates to be
+> actioned, before doing the tlb maintenance.
+>
+> This is a theorectical bug discovered during code review.
+>
+> Fixes: 52526ca7fdb9 ("fs/proc/task_mmu: implement IOCTL to get and option=
+ally clear info about PTEs")
 
-I'm confident that it _works_ for arm64 as it is, upstream. But if Dev's series
-were to go in _without_ the lazy_mmu bracketting in some manner, then it would
-be broken if the config includes CONFIG_DEBUG_PAGEALLOC.
+Hmm... isn't lazy mmu mode supposed to also delay TLB flushes, and
+preserve the ordering of PTE modifications and TLB flushes?
 
-There's a lot more explanation in the later patches as to how it can be broken,
-but for arm64, the situation is currently like this, because our implementation
-of __change_memory_common() uses apply_to_page_range() which implicitly starts
-an inner lazy_mmu_mode. We enter multiple times, but we exit one the first call
-to exit. Everything works correctly but it's not optimal because C is no longer
-deferred:
+Looking at the existing implementations of lazy MMU:
 
-arch_enter_lazy_mmu_mode()                        << outer lazy mmu region
-  <do some pte changes (A)>
-  alloc_pages()
-    debug_pagealloc_map_pages()
-      __kernel_map_pages()
-        __change_memory_common()
-          arch_enter_lazy_mmu_mode()              << inner lazy mmu region
-            <change kernel pte to make valid (B)>
-          arch_leave_lazy_mmu_mode()              << exit; complete A + B
-    clear_page()
-  <do some more pte changes (C)>                  << no longer in lazy mode
-arch_leave_lazy_mmu_mode()                        << nop
+ - In Xen PV implementation of lazy MMU, I see that TLB flush
+hypercalls are delayed as well (xen_flush_tlb(),
+xen_flush_tlb_one_user() and xen_flush_tlb_multi() all use
+xen_mc_issue(XEN_LAZY_MMU) which delays issuing if lazymmu is active).
+ - The sparc version also seems to delay TLB flushes, and sparc's
+arch_leave_lazy_mmu_mode() seems to do TLB flushes via
+flush_tlb_pending() if necessary.
+ - powerpc's arch_leave_lazy_mmu_mode() also seems to do TLB flushes.
 
-An alternative implementation would not add the nested lazy mmu mode, so we end
-up with this:
+Am I missing something?
 
-arch_enter_lazy_mmu_mode()                        << outer lazy mmu region
-  <do some pte changes (A)>
-  alloc_pages()
-    debug_pagealloc_map_pages()
-      __kernel_map_pages()
-        __change_memory_common()
-            <change kernel pte to make valid (B)> << deferred due to lazy mmu
-    clear_page()                                  << BANG! B has not be actioned
-  <do some more pte changes (C)>
-arch_leave_lazy_mmu_mode()
+If arm64 requires different semantics compared to all existing
+implementations and doesn't delay TLB flushes for lazy mmu mode, I
+think the "Fixes" tag should point to your addition of lazy mmu
+support for arm64.
 
-This is clearly a much worse outcome. It's not happening today but it could in
-future. That's why I'm claiming it's fragile. It's much better (IMHO) to
-disallow calling the page allocator when in lazy mmu mode.
+> Signed-off-by: Ryan Roberts <ryan.roberts@arm.com>
+> ---
+>  fs/proc/task_mmu.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
+> index 994cde10e3f4..361f3ffd9a0c 100644
+> --- a/fs/proc/task_mmu.c
+> +++ b/fs/proc/task_mmu.c
+> @@ -2557,10 +2557,9 @@ static int pagemap_scan_pmd_entry(pmd_t *pmd, unsi=
+gned long start,
+>         }
+>
+>  flush_and_return:
+> +       arch_leave_lazy_mmu_mode();
+>         if (flush_end)
+>                 flush_tlb_range(vma, start, addr);
+> -
+> -       arch_leave_lazy_mmu_mode();
 
-I won't speak for other arches; there may be more or less potential impact for them.
+I think this ordering was probably intentional, because doing it this
+way around allows Xen PV to avoid one more hypercall, because the TLB
+flush can be batched together with the page table changes?
 
-> 
-> I am thinking specifically about the proposed use in Dev's new series [0] and
-> obviously hoping (and assuming in fact) that it's the former :)
 
-Dev's changes aren't directly related to this, but if a version was accepted
-that didn't include the lazy mmu mode, that would cause non-obvious issues.
-
-Hope that helps?
-
-Thanks,
-Ryan
-
-> 
-> [0]: https://lore.kernel.org/linux-mm/20250530090407.19237-1-dev.jain@arm.com/
-> 
->>
->> The first 2 patches are unrelated, very obvious bug fixes. They don't affect
->> arm64 because arm64 only uses lazy mmu for kernel mappings. But I noticed them
->> during code review and think they should be fixed.
->>
->> The next 3 patches are aimed at solving the nesting issue.
->>
->> And the final patch is reverting the "permissive" fix I did for arm64, which is
->> no longer needed after the previous 3 patches.
->>
->> I've labelled this RFC for now because it depends on the arm64 lazy mmu patches
->> in Linus's master, so it won't apply to mm-unstable. But I'm keen to get review
->> and siince I'm touching various arches and modifying some core mm stuff, I
->> thought that might take a while so thought I'd beat the rush and get a first
->> version out early.
->>
->> I've build-tested all the affected arches. And I've run mm selftests for the
->> arm64 build, with no issues (with DEBUG_PAGEALLOC and KFENCE enabled).
->>
->> Applies against Linus's master branch (f66bc387efbe).
->>
->> Thanks,
->> Ryan
->>
->>
->> Ryan Roberts (6):
->>   fs/proc/task_mmu: Fix pte update and tlb maintenance ordering in
->>     pagemap_scan_pmd_entry()
->>   mm: Fix pte update and tlb maintenance ordering in
->>     migrate_vma_collect_pmd()
->>   mm: Avoid calling page allocator from apply_to_page_range()
->>   mm: Introduce arch_in_lazy_mmu_mode()
->>   mm: Avoid calling page allocator while in lazy mmu mode
->>   Revert "arm64/mm: Permit lazy_mmu_mode to be nested"
->>
->>  arch/arm64/include/asm/pgtable.h              | 22 ++++----
->>  .../include/asm/book3s/64/tlbflush-hash.h     | 15 ++++++
->>  arch/sparc/include/asm/tlbflush_64.h          |  1 +
->>  arch/sparc/mm/tlb.c                           | 12 +++++
->>  arch/x86/include/asm/paravirt.h               |  5 ++
->>  arch/x86/include/asm/paravirt_types.h         |  1 +
->>  arch/x86/kernel/paravirt.c                    |  6 +++
->>  arch/x86/xen/mmu_pv.c                         |  6 +++
->>  fs/proc/task_mmu.c                            |  3 +-
->>  include/asm-generic/tlb.h                     |  2 +
->>  include/linux/mm.h                            |  6 +++
->>  include/linux/pgtable.h                       |  1 +
->>  kernel/bpf/arena.c                            |  6 +--
->>  mm/kasan/shadow.c                             |  2 +-
->>  mm/memory.c                                   | 54 ++++++++++++++-----
->>  mm/migrate_device.c                           |  3 +-
->>  mm/mmu_gather.c                               | 15 ++++++
->>  17 files changed, 128 insertions(+), 32 deletions(-)
->>
->> --
->> 2.43.0
->>
-
+>         pte_unmap_unlock(start_pte, ptl);
+>
+>         cond_resched();
+> --
+> 2.43.0
+>
 
