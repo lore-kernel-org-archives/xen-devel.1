@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F83C5B549
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:19:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000958.1381216 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60878C5B549
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:20:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1000977.1381232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzdu-0004Sx-3p; Fri, 30 May 2025 13:19:26 +0000
+	id 1uKzfF-00074r-Qn; Fri, 30 May 2025 13:20:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000958.1381216; Fri, 30 May 2025 13:19:26 +0000
+Received: by outflank-mailman (output) from mailman id 1000977.1381232; Fri, 30 May 2025 13:20:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzdu-0004Sk-0k; Fri, 30 May 2025 13:19:26 +0000
-Received: by outflank-mailman (input) for mailman id 1000958;
- Fri, 30 May 2025 13:19:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uKzfF-00073z-IF; Fri, 30 May 2025 13:20:49 +0000
+Received: by outflank-mailman (input) for mailman id 1000977;
+ Fri, 30 May 2025 13:20:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sDQw=YO=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uKzdt-0003ZU-2W
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:25 +0000
-Received: from 7.mo583.mail-out.ovh.net (7.mo583.mail-out.ovh.net
- [178.32.124.100]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a7afecb9-3d58-11f0-b894-0df219b8e170;
- Fri, 30 May 2025 15:19:03 +0200 (CEST)
+ id 1uKzdh-0008Jy-Jl
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:13 +0000
+Received: from 3.mo583.mail-out.ovh.net (3.mo583.mail-out.ovh.net
+ [46.105.40.108]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ab069374-3d58-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 15:19:08 +0200 (CEST)
 Received: from director4.ghost.mail-out.ovh.net (unknown [10.109.140.215])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4b83jL3gKkz1kgt
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:19:02 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-hvgnt (unknown [10.111.174.63])
- by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 8B287C571F;
- Fri, 30 May 2025 13:19:01 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.102])
- by ghost-submission-5b5ff79f4f-hvgnt with ESMTPSA
- id KNMyDUWwOWi4BgAANXmUfQ
- (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:19:01 +0000
+ by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4b83jS26Cjz1gpb
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:19:08 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-sqj9x (unknown [10.110.113.35])
+ by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 70D72C5715;
+ Fri, 30 May 2025 13:19:07 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.106])
+ by ghost-submission-5b5ff79f4f-sqj9x with ESMTPSA
+ id bshXCkuwOWj6JQAAPescrA
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:19:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,8 +48,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7afecb9-3d58-11f0-b894-0df219b8e170
-Authentication-Results:garm.ovh; auth=pass (GARM-102R0041e3c7755-c10f-46ce-aaa4-685e3d70a9d1,
+X-Inumbo-ID: ab069374-3d58-11f0-a2ff-13f23c93f187
+Authentication-Results:garm.ovh; auth=pass (GARM-106R006d10a0eb1-598f-4895-b746-f3445aee3969,
                     A4E380CC922F0B59227EC5DCC46884561651840B) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.184.221
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
@@ -60,222 +60,90 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v3 11/22] x86/tpm.c: support extending PCRs of TPM2.0
-Date: Fri, 30 May 2025 16:17:53 +0300
-Message-ID: <dae740e8eef63af59993791d27ce490095f7cca8.1748611041.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v3 13/22] x86/tpm.c: implement event log for TPM2.0
+Date: Fri, 30 May 2025 16:17:55 +0300
+Message-ID: <a86083c305921cabd2df33a9eda2e2854600b20b.1748611041.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12701839800321160348
+X-Ovh-Tracer-Id: 12703528653124908188
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvdfhhedukefhveeifefffedvfeejgeegkeeuhfegheejhefgieeikeejleeihfffnecuffhomhgrihhnpehuphgurghtvggptgdruggrthgrpdhfihhnihhshhgptgdruggrthgrnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrddutddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfegmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=vbZBG6/p+HYIHnA6JUFYr41EnuLF4cyFkDoUUxgDG/o=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhephfehfeehudeileeikeffgfffgfefuddtveelvedvhfffgfelvdfgtddutdehfeeinecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrddutdeinecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekfegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=ixLmPLThAstC9HSOCxNeT4qjU8C58Im4iR2Vxsanw3Y=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1748611142; v=1;
- b=WffUb+f30ijaMQ62rKcvtD+Dk7yHxQDQsJuWrkyXV53kLPoCi4qPkRTzG24TXakjvoGEtC5Y
- 1+ud9PwQsPkczhAcrkJ7lN4SH6RWwnTlD5Y3M+lXSTjo51sRAU2wswbl8pAIXquXkqMWjE5qpm0
- 3gza46lK3AObNHXNReSmKdrC8WA/9GKjZVts3VYScuSHWzA+4CYcPUvf5B+xGrumuhzenlbXlnH
- qlZ/2nYJXoFN5HboGIK3/cDtv1+hiHHmiIXd9fCcsw+zHY9c1u/Q3Tj2TfV0kK/L+2rohhGr4Vm
- yRl11Bulo6we2us6yVoFiOFs3tpx6oqHr7lCpI4vMo3NQ==
-
-SHA1 and SHA256 are hard-coded here, but their support by the TPM is
-checked.  Addition of event log for TPM2.0 will generalize the code
-further.
+ t=1748611148; v=1;
+ b=EPtTXt3tCy4mxfiCGuAMAj/aTQ5IkWPMwhIJJPJEuc+aoZA25rC0B9UjsKHZ4H5FAr4M+Z30
+ ufBRDnzwI781Wrnxfq6RhusSEsHWNUbaTH70b2RCXYfFs29V4RGtsNYOoHDwrx0olgZvBWaK8EE
+ oP5lwrUTA3HnNPlpso5LN40kYO+aZH44Ess7BAtssJ1zCtVF6d3hZMpARDQePM48Lqx4uNeOAdx
+ welO+/pnPQGkZmhUvj9s5JjmOnebt3WqpFF8g+/mOfpKwzYDOMpJWJCa3gnhI7orSNogV9SGOXY
+ p6mECGTHhS5Uuxodpg9XTa3xm0sGFjOmyenoPYz9oSMAQ==
 
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/arch/x86/tpm.c | 464 +++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 452 insertions(+), 12 deletions(-)
+ xen/arch/x86/include/asm/intel-txt.h |  33 ++++++
+ xen/arch/x86/tpm.c                   | 169 ++++++++++++++++++++++-----
+ 2 files changed, 175 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/x86/tpm.c b/xen/arch/x86/tpm.c
-index 7fb19ce4fa..ed49fe3ccf 100644
---- a/xen/arch/x86/tpm.c
-+++ b/xen/arch/x86/tpm.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <xen/sha1.h>
-+#include <xen/sha2.h>
- #include <xen/string.h>
- #include <xen/types.h>
- #include <asm/intel-txt.h>
-@@ -31,6 +32,15 @@ struct slr_table *slaunch_get_slrt(void)
-  * other part of Xen.  Providing implementation of builtin functions in this
-  * case is necessary if compiler chooses to not use an inline builtin.
-  */
-+void *(memset)(void *s, int c, size_t n)
-+{
-+    uint8_t *d = s;
-+
-+    while ( n-- )
-+        *d++ = c;
-+
-+    return s;
-+}
- void *(memcpy)(void *dest, const void *src, size_t n)
- {
-     const uint8_t *s = src;
-@@ -146,14 +156,15 @@ static inline bool is_tpm12(void)
-             (tis_read32(TPM_STS_(0)) & TPM_FAMILY_MASK) == 0);
- }
- 
--/****************************** TPM1.2 specific *******************************/
--#define TPM_ORD_Extend              0x00000014
--#define TPM_ORD_SHA1Start           0x000000A0
--#define TPM_ORD_SHA1Update          0x000000A1
--#define TPM_ORD_SHA1CompleteExtend  0x000000A3
-+/****************************** TPM1.2 & TPM2.0 *******************************/
- 
--#define TPM_TAG_RQU_COMMAND         0x00C1
--#define TPM_TAG_RSP_COMMAND         0x00C4
-+/*
-+ * TPM1.2 is required to support commands of up to 1101 bytes, vendors rarely
-+ * go above that. Limit maximum size of block of data to be hashed to 1024.
-+ *
-+ * TPM2.0 should support hashing of at least 1024 bytes.
-+ */
-+#define MAX_HASH_BLOCK      1024
- 
- /* All fields of following structs are big endian. */
- struct tpm_cmd_hdr {
-@@ -168,6 +179,17 @@ struct tpm_rsp_hdr {
-     uint32_t    returnCode;
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+index 0b0bdc1bb2..de7f23d4ff 100644
+--- a/xen/arch/x86/include/asm/intel-txt.h
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -215,6 +215,39 @@ struct txt_sinit_mle_data {
+     /* Ext Data Elements */
  } __packed;
  
-+/****************************** TPM1.2 specific *******************************/
-+
-+#define TPM_ORD_Extend              0x00000014
-+#define TPM_ORD_SHA1Start           0x000000A0
-+#define TPM_ORD_SHA1Update          0x000000A1
-+#define TPM_ORD_SHA1CompleteExtend  0x000000A3
-+
-+#define TPM_TAG_RQU_COMMAND         0x00C1
-+#define TPM_TAG_RSP_COMMAND         0x00C4
-+
-+/* All fields of following structs are big endian. */
- struct extend_cmd {
-     struct tpm_cmd_hdr h;
-     uint32_t pcrNum;
-@@ -233,11 +255,6 @@ struct txt_ev_log_container_12 {
- };
- 
- #ifdef __EARLY_SLAUNCH__
--/*
-- * TPM1.2 is required to support commands of up to 1101 bytes, vendors rarely
-- * go above that. Limit maximum size of block of data to be hashed to 1024.
-- */
--#define MAX_HASH_BLOCK      1024
- #define CMD_RSP_BUF_SIZE    (sizeof(struct sha1_update_cmd) + MAX_HASH_BLOCK)
- 
- union cmd_rsp {
-@@ -393,6 +410,400 @@ static void *create_log_event12(struct txt_ev_log_container_12 *evt_log,
- 
- /************************** end of TPM1.2 specific ****************************/
- 
-+/****************************** TPM2.0 specific *******************************/
++/* Types of extended data. */
++#define TXT_HEAP_EXTDATA_TYPE_END                    0
++#define TXT_HEAP_EXTDATA_TYPE_BIOS_SPEC_VER          1
++#define TXT_HEAP_EXTDATA_TYPE_ACM                    2
++#define TXT_HEAP_EXTDATA_TYPE_STM                    3
++#define TXT_HEAP_EXTDATA_TYPE_CUSTOM                 4
++#define TXT_HEAP_EXTDATA_TYPE_MADT                   6
++#define TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1   8
++#define TXT_HEAP_EXTDATA_TYPE_MCFG                   9
++#define TXT_HEAP_EXTDATA_TYPE_TPR_REQ               13
++#define TXT_HEAP_EXTDATA_TYPE_DTPR                  14
++#define TXT_HEAP_EXTDATA_TYPE_CEDT                  15
 +
 +/*
-+ * These constants are for TPM2.0 but don't have a distinct prefix to match
-+ * names in the specification.
++ * Self-describing data structure that is used for extensions to TXT heap
++ * tables.
 + */
-+
-+#define TPM_HT_PCR   0x00
-+
-+#define TPM_RH_NULL  0x40000007
-+#define TPM_RS_PW    0x40000009
-+
-+#define HR_SHIFT     24
-+#define HR_PCR       (TPM_HT_PCR << HR_SHIFT)
-+
-+#define TPM_ST_NO_SESSIONS  0x8001
-+#define TPM_ST_SESSIONS     0x8002
-+
-+#define TPM_ALG_SHA1        0x0004
-+#define TPM_ALG_SHA256      0x000b
-+#define TPM_ALG_NULL        0x0010
-+
-+#define TPM2_PCR_Extend                 0x00000182
-+#define TPM2_PCR_HashSequenceStart      0x00000186
-+#define TPM2_PCR_SequenceUpdate         0x0000015C
-+#define TPM2_PCR_EventSequenceComplete  0x00000185
-+
-+#define PUT_BYTES(p, bytes, size)  do {  \
-+        memcpy((p), (bytes), (size));    \
-+        (p) += (size);                   \
-+    } while ( 0 )
-+
-+#define PUT_16BIT(p, data) do {          \
-+        *(uint16_t *)(p) = swap16(data); \
-+        (p) += 2;                        \
-+    } while ( 0 )
-+
-+/* All fields of following structs are big endian. */
-+struct tpm2_session_header {
-+    uint32_t handle;
-+    uint16_t nonceSize;
-+    uint8_t nonce[0];
-+    uint8_t attrs;
-+    uint16_t hmacSize;
-+    uint8_t hmac[0];
++struct txt_ext_data_element {
++    uint32_t type;   /* One of TXT_HEAP_EXTDATA_TYPE_*. */
++    uint32_t size;
++    uint8_t data[0]; /* size bytes. */
 +} __packed;
 +
-+struct tpm2_extend_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t pcrHandle;
-+    uint32_t sessionHdrSize;
-+    struct tpm2_session_header pcrSession;
-+    uint32_t hashCount;
-+    uint8_t hashes[0];
++/*
++ * Extended data describing TPM 2.0 log.
++ */
++struct heap_event_log_pointer_element2_1 {
++    uint64_t physical_address;
++    uint32_t allocated_event_container_size;
++    uint32_t first_record_offset;
++    uint32_t next_record_offset;
 +} __packed;
 +
-+struct tpm2_extend_rsp {
-+    struct tpm_rsp_hdr h;
-+} __packed;
-+
-+struct tpm2_sequence_start_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint16_t hmacSize;
-+    uint8_t hmac[0];
-+    uint16_t hashAlg;
-+} __packed;
-+
-+struct tpm2_sequence_start_rsp {
-+    struct tpm_rsp_hdr h;
-+    uint32_t sequenceHandle;
-+} __packed;
-+
-+struct tpm2_sequence_update_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t sequenceHandle;
-+    uint32_t sessionHdrSize;
-+    struct tpm2_session_header session;
-+    uint16_t dataSize;
-+    uint8_t data[0];
-+} __packed;
-+
-+struct tpm2_sequence_update_rsp {
-+    struct tpm_rsp_hdr h;
-+} __packed;
-+
-+struct tpm2_sequence_complete_cmd {
-+    struct tpm_cmd_hdr h;
-+    uint32_t pcrHandle;
-+    uint32_t sequenceHandle;
-+    uint32_t sessionHdrSize;
-+    struct tpm2_session_header pcrSession;
-+    struct tpm2_session_header sequenceSession;
-+    uint16_t dataSize;
-+    uint8_t data[0];
-+} __packed;
-+
-+struct tpm2_sequence_complete_rsp {
-+    struct tpm_rsp_hdr h;
-+    uint32_t paramSize;
-+    uint32_t hashCount;
-+    uint8_t hashes[0];
+ /*
+  * Functions to extract data from the Intel TXT Heap Memory.
+  *
+diff --git a/xen/arch/x86/tpm.c b/xen/arch/x86/tpm.c
+index ed49fe3ccf..3c145fd3cc 100644
+--- a/xen/arch/x86/tpm.c
++++ b/xen/arch/x86/tpm.c
+@@ -536,6 +536,44 @@ struct tpm2_log_hashes {
+     struct tpm2_log_hash hashes[MAX_HASH_COUNT];
+ };
+ 
++struct tpm2_pcr_event_header {
++    uint32_t pcrIndex;
++    uint32_t eventType;
++    uint32_t digestCount;
++    uint8_t digests[0];
 +    /*
 +     * Each hash is represented as:
 +     * struct {
@@ -283,331 +151,193 @@ index 7fb19ce4fa..ed49fe3ccf 100644
 +     *     uint8_t hash[size of hashAlg];
 +     * };
 +     */
++    /* uint32_t eventSize; */
++    /* uint8_t event[0]; */
 +} __packed;
 +
-+/*
-+ * These two structure are for convenience, they don't correspond to anything in
-+ * any spec.
-+ */
-+struct tpm2_log_hash {
-+    uint16_t alg;  /* TPM_ALG_* */
-+    uint16_t size;
-+    uint8_t *data; /* Non-owning reference to a buffer inside log entry. */
-+};
-+/* Should be more than enough for now and awhile in the future. */
-+#define MAX_HASH_COUNT 8
-+struct tpm2_log_hashes {
-+    uint32_t count;
-+    struct tpm2_log_hash hashes[MAX_HASH_COUNT];
-+};
++struct tpm2_digest_sizes {
++    uint16_t algId;
++    uint16_t digestSize;
++} __packed;
 +
-+#ifdef __EARLY_SLAUNCH__
++struct tpm2_spec_id_event {
++    uint32_t pcrIndex;
++    uint32_t eventType;
++    uint8_t digest[20];
++    uint32_t eventSize;
++    uint8_t signature[16];
++    uint32_t platformClass;
++    uint8_t specVersionMinor;
++    uint8_t specVersionMajor;
++    uint8_t specErrata;
++    uint8_t uintnSize;
++    uint32_t digestCount;
++    struct tpm2_digest_sizes digestSizes[0]; /* variable number of members */
++    /* uint8_t vendorInfoSize; */
++    /* uint8_t vendorInfo[vendorInfoSize]; */
++} __packed;
 +
-+union tpm2_cmd_rsp {
-+    uint8_t b[sizeof(struct tpm2_sequence_update_cmd) + MAX_HASH_BLOCK];
-+    struct tpm_cmd_hdr c;
-+    struct tpm_rsp_hdr r;
-+    struct tpm2_sequence_start_cmd start_c;
-+    struct tpm2_sequence_start_rsp start_r;
-+    struct tpm2_sequence_update_cmd update_c;
-+    struct tpm2_sequence_update_rsp update_r;
-+    struct tpm2_sequence_complete_cmd finish_c;
-+    struct tpm2_sequence_complete_rsp finish_r;
-+};
-+
-+static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
-+                                 unsigned size, unsigned pcr,
-+                                 struct tpm2_log_hashes *log_hashes)
+ #ifdef __EARLY_SLAUNCH__
+ 
+ union tpm2_cmd_rsp {
+@@ -769,19 +807,11 @@ static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
+         }
+ 
+         if ( hash->alg == TPM_ALG_SHA1 )
+-        {
+             sha1_hash(hash->data, buf, size);
+-        }
+         else if ( hash->alg == TPM_ALG_SHA256 )
+-        {
+             sha2_256_digest(hash->data, buf, size);
+-        }
+         else
+-        {
+-            /* This is called "OneDigest" in TXT Software Development Guide. */
+-            memset(hash->data, 0, size);
+-            hash->data[0] = 1;
+-        }
++            /* create_log_event20() took care of initializing the digest. */;
+ 
+         if ( supported_hashes.count == MAX_HASH_COUNT )
+         {
+@@ -802,6 +832,102 @@ static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
+ 
+ #endif /* __EARLY_SLAUNCH__ */
+ 
++static struct heap_event_log_pointer_element2_1 *find_evt_log_ext_data(void)
 +{
-+    uint32_t seq_handle;
-+    unsigned max_bytes = MAX_HASH_BLOCK;
++    struct txt_os_sinit_data *os_sinit;
++    struct txt_ext_data_element *ext_data;
 +
-+    union tpm2_cmd_rsp cmd_rsp;
-+    unsigned o_size;
-+    unsigned i;
-+    uint8_t *p;
-+    uint32_t rc;
-+
-+    cmd_rsp.start_c = (struct tpm2_sequence_start_cmd) {
-+        .h.tag = swap16(TPM_ST_NO_SESSIONS),
-+        .h.paramSize = swap32(sizeof(cmd_rsp.start_c)),
-+        .h.ordinal = swap32(TPM2_PCR_HashSequenceStart),
-+        .hashAlg = swap16(TPM_ALG_NULL), /* Compute all supported hashes. */
-+    };
-+
-+    request_locality(loc);
-+
-+    o_size = sizeof(cmd_rsp);
-+    send_cmd(loc, cmd_rsp.b, swap32(cmd_rsp.c.paramSize), &o_size);
-+
-+    if ( cmd_rsp.r.tag == swap16(TPM_ST_NO_SESSIONS) &&
-+         cmd_rsp.r.paramSize == swap32(10) )
-+    {
-+        rc = swap32(cmd_rsp.r.returnCode);
-+        if ( rc != 0 )
-+            goto error;
-+    }
-+
-+    seq_handle = swap32(cmd_rsp.start_r.sequenceHandle);
-+
-+    while ( size > 64 )
-+    {
-+        if ( size < max_bytes )
-+            max_bytes = size & ~(64 - 1);
-+
-+        cmd_rsp.update_c = (struct tpm2_sequence_update_cmd) {
-+            .h.tag = swap16(TPM_ST_SESSIONS),
-+            .h.paramSize = swap32(sizeof(cmd_rsp.update_c) + max_bytes),
-+            .h.ordinal = swap32(TPM2_PCR_SequenceUpdate),
-+            .sequenceHandle = swap32(seq_handle),
-+            .sessionHdrSize = swap32(sizeof(struct tpm2_session_header)),
-+            .session.handle = swap32(TPM_RS_PW),
-+            .dataSize = swap16(max_bytes),
-+        };
-+
-+        memcpy(cmd_rsp.update_c.data, buf, max_bytes);
-+
-+        o_size = sizeof(cmd_rsp);
-+        send_cmd(loc, cmd_rsp.b, swap32(cmd_rsp.c.paramSize), &o_size);
-+
-+        if ( cmd_rsp.r.tag == swap16(TPM_ST_NO_SESSIONS) &&
-+             cmd_rsp.r.paramSize == swap32(10) )
-+        {
-+            rc = swap32(cmd_rsp.r.returnCode);
-+            if ( rc != 0 )
-+                goto error;
-+        }
-+
-+        size -= max_bytes;
-+        buf += max_bytes;
-+    }
-+
-+    cmd_rsp.finish_c = (struct tpm2_sequence_complete_cmd) {
-+        .h.tag = swap16(TPM_ST_SESSIONS),
-+        .h.paramSize = swap32(sizeof(cmd_rsp.finish_c) + size),
-+        .h.ordinal = swap32(TPM2_PCR_EventSequenceComplete),
-+        .pcrHandle = swap32(HR_PCR + pcr),
-+        .sequenceHandle = swap32(seq_handle),
-+        .sessionHdrSize = swap32(sizeof(struct tpm2_session_header)*2),
-+        .pcrSession.handle = swap32(TPM_RS_PW),
-+        .sequenceSession.handle = swap32(TPM_RS_PW),
-+        .dataSize = swap16(size),
-+    };
-+
-+    memcpy(cmd_rsp.finish_c.data, buf, size);
-+
-+    o_size = sizeof(cmd_rsp);
-+    send_cmd(loc, cmd_rsp.b, swap32(cmd_rsp.c.paramSize), &o_size);
-+
-+    if ( cmd_rsp.r.tag == swap16(TPM_ST_NO_SESSIONS) &&
-+         cmd_rsp.r.paramSize == swap32(10) )
-+    {
-+        rc = swap32(cmd_rsp.r.returnCode);
-+        if ( rc != 0 )
-+            goto error;
-+    }
-+
-+    p = cmd_rsp.finish_r.hashes;
-+    for ( i = 0; i < swap32(cmd_rsp.finish_r.hashCount); ++i )
-+    {
-+        unsigned j;
-+        uint16_t hash_type;
-+
-+        hash_type = swap16(*(uint16_t *)p);
-+        p += sizeof(uint16_t);
-+
-+        for ( j = 0; j < log_hashes->count; ++j )
-+        {
-+            struct tpm2_log_hash *hash = &log_hashes->hashes[j];
-+            if ( hash->alg == hash_type )
-+            {
-+                memcpy(hash->data, p, hash->size);
-+                p += hash->size;
-+                break;
-+            }
-+        }
-+
-+        if ( j == log_hashes->count )
-+            /* Can't continue parsing without knowing hash size. */
-+            break;
-+    }
-+
-+    rc = 0;
-+
-+error:
-+    relinquish_locality(loc);
-+    return rc;
-+}
-+
-+#else
-+
-+union tpm2_cmd_rsp {
-+    /* Enough space for multiple hashes. */
-+    uint8_t b[sizeof(struct tpm2_extend_cmd) + 1024];
-+    struct tpm_cmd_hdr c;
-+    struct tpm_rsp_hdr r;
-+    struct tpm2_extend_cmd extend_c;
-+    struct tpm2_extend_rsp extend_r;
-+};
-+
-+static uint32_t tpm20_pcr_extend(unsigned loc, uint32_t pcr_handle,
-+                                 const struct tpm2_log_hashes *log_hashes)
-+{
-+    union tpm2_cmd_rsp cmd_rsp;
-+    unsigned o_size;
-+    unsigned i;
-+    uint8_t *p;
-+
-+    cmd_rsp.extend_c = (struct tpm2_extend_cmd) {
-+        .h.tag = swap16(TPM_ST_SESSIONS),
-+        .h.ordinal = swap32(TPM2_PCR_Extend),
-+        .pcrHandle = swap32(pcr_handle),
-+        .sessionHdrSize = swap32(sizeof(struct tpm2_session_header)),
-+        .pcrSession.handle = swap32(TPM_RS_PW),
-+        .hashCount = swap32(log_hashes->count),
-+    };
-+
-+    p = cmd_rsp.extend_c.hashes;
-+    for ( i = 0; i < log_hashes->count; ++i )
-+    {
-+        const struct tpm2_log_hash *hash = &log_hashes->hashes[i];
-+
-+        if ( p + sizeof(uint16_t) + hash->size > &cmd_rsp.b[sizeof(cmd_rsp)] )
-+        {
-+            printk(XENLOG_ERR "Hit TPM message size implementation limit: %ld\n",
-+                   sizeof(cmd_rsp));
-+            return -1;
-+        }
-+
-+        *(uint16_t *)p = swap16(hash->alg);
-+        p += sizeof(uint16_t);
-+
-+        memcpy(p, hash->data, hash->size);
-+        p += hash->size;
-+    }
-+
-+    /* Fill in command size (size of the whole buffer). */
-+    cmd_rsp.extend_c.h.paramSize = swap32(sizeof(cmd_rsp.extend_c) +
-+                                          (p - cmd_rsp.extend_c.hashes)),
-+
-+    o_size = sizeof(cmd_rsp);
-+    send_cmd(loc, cmd_rsp.b, swap32(cmd_rsp.c.paramSize), &o_size);
-+
-+    return swap32(cmd_rsp.r.returnCode);
-+}
-+
-+static bool tpm_supports_hash(unsigned loc, const struct tpm2_log_hash *hash)
-+{
-+    uint32_t rc;
-+    struct tpm2_log_hashes hashes = {
-+        .count = 1,
-+        .hashes[0] = *hash,
-+    };
++    os_sinit = txt_os_sinit_data_start(__va(txt_read(TXTCR_HEAP_BASE)));
++    ext_data = (void *)((uint8_t *)os_sinit + sizeof(*os_sinit));
 +
 +    /*
-+     * This is a valid way of checking hash support, using it to not implement
-+     * TPM2_GetCapability().
++     * Find TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1 which is necessary to
++     * know where to put the next entry.
 +     */
-+    rc = tpm20_pcr_extend(loc, /*pcr_handle=*/TPM_RH_NULL, &hashes);
-+
-+    return rc == 0;
-+}
-+
-+static uint32_t tpm2_hash_extend(unsigned loc, const uint8_t *buf,
-+                                 unsigned size, unsigned pcr,
-+                                 const struct tpm2_log_hashes *log_hashes)
-+{
-+    uint32_t rc;
-+    unsigned i;
-+    struct tpm2_log_hashes supported_hashes = {0};
-+
-+    request_locality(loc);
-+
-+    for ( i = 0; i < log_hashes->count; ++i )
++    while ( ext_data->type != TXT_HEAP_EXTDATA_TYPE_END )
 +    {
-+        const struct tpm2_log_hash *hash = &log_hashes->hashes[i];
-+        if ( !tpm_supports_hash(loc, hash) )
-+        {
-+            printk(XENLOG_WARNING "Skipped hash unsupported by TPM: %d\n",
-+                   hash->alg);
-+            continue;
-+        }
-+
-+        if ( hash->alg == TPM_ALG_SHA1 )
-+        {
-+            sha1_hash(hash->data, buf, size);
-+        }
-+        else if ( hash->alg == TPM_ALG_SHA256 )
-+        {
-+            sha2_256_digest(hash->data, buf, size);
-+        }
-+        else
-+        {
-+            /* This is called "OneDigest" in TXT Software Development Guide. */
-+            memset(hash->data, 0, size);
-+            hash->data[0] = 1;
-+        }
-+
-+        if ( supported_hashes.count == MAX_HASH_COUNT )
-+        {
-+            printk(XENLOG_ERR "Hit hash count implementation limit: %d\n",
-+                   MAX_HASH_COUNT);
-+            return -1;
-+        }
-+
-+        supported_hashes.hashes[supported_hashes.count] = *hash;
-+        ++supported_hashes.count;
++        if ( ext_data->type == TXT_HEAP_EXTDATA_TYPE_EVENT_LOG_POINTER2_1 )
++            break;
++        ext_data = (void *)&ext_data->data[ext_data->size];
 +    }
 +
-+    rc = tpm20_pcr_extend(loc, HR_PCR + pcr, &supported_hashes);
-+    relinquish_locality(loc);
++    if ( ext_data->type == TXT_HEAP_EXTDATA_TYPE_END )
++        return NULL;
 +
-+    return rc;
++    return (void *)&ext_data->data[0];
 +}
 +
-+#endif /* __EARLY_SLAUNCH__ */
++static struct tpm2_log_hashes
++create_log_event20(struct tpm2_spec_id_event *evt_log, uint32_t evt_log_size,
++                   uint32_t pcr, uint32_t type, const uint8_t *data,
++                   unsigned data_size)
++{
++    struct tpm2_log_hashes log_hashes = {0};
 +
-+/************************** end of TPM2.0 specific ****************************/
++    struct heap_event_log_pointer_element2_1 *log_ext_data;
++    struct tpm2_pcr_event_header *new_entry;
++    uint32_t entry_size;
++    unsigned i;
++    uint8_t *p;
 +
++    log_ext_data = find_evt_log_ext_data();
++    if ( log_ext_data == NULL )
++        return log_hashes;
++
++    entry_size = sizeof(*new_entry);
++    for ( i = 0; i < evt_log->digestCount; ++i )
++    {
++        entry_size += sizeof(uint16_t); /* hash type */
++        entry_size += evt_log->digestSizes[i].digestSize;
++    }
++    entry_size += sizeof(uint32_t); /* data size field */
++    entry_size += data_size;
++
++    /*
++     * Check if there is enough space left for new entry.
++     * Note: it is possible to introduce a gap in event log if entry with big
++     * data_size is followed by another entry with smaller data. Maybe we should
++     * cap the event log size in such case?
++     */
++    if ( log_ext_data->next_record_offset + entry_size > evt_log_size )
++        return log_hashes;
++
++    new_entry = (void *)((uint8_t *)evt_log + log_ext_data->next_record_offset);
++    log_ext_data->next_record_offset += entry_size;
++
++    new_entry->pcrIndex = pcr;
++    new_entry->eventType = type;
++    new_entry->digestCount = evt_log->digestCount;
++
++    p = &new_entry->digests[0];
++    for ( i = 0; i < evt_log->digestCount; ++i )
++    {
++        uint16_t alg = evt_log->digestSizes[i].algId;
++        uint16_t size = evt_log->digestSizes[i].digestSize;
++
++        *(uint16_t *)p = alg;
++        p += sizeof(uint16_t);
++
++        log_hashes.hashes[i].alg = alg;
++        log_hashes.hashes[i].size = size;
++        log_hashes.hashes[i].data = p;
++        p += size;
++
++        /* This is called "OneDigest" in TXT Software Development Guide. */
++        memset(log_hashes.hashes[i].data, 0, size);
++        log_hashes.hashes[i].data[0] = 1;
++    }
++    log_hashes.count = evt_log->digestCount;
++
++    *(uint32_t *)p = data_size;
++    p += sizeof(uint32_t);
++
++    if ( data && data_size > 0 )
++        memcpy(p, data, data_size);
++
++    return log_hashes;
++}
++
+ /************************** end of TPM2.0 specific ****************************/
+ 
  void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
-                      unsigned size, uint32_t type, const uint8_t *log_data,
-                      unsigned log_data_size)
-@@ -419,6 +830,35 @@ void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
-         {
- #ifndef __EARLY_SLAUNCH__
+@@ -832,26 +958,15 @@ void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
              printk(XENLOG_ERR "Extending PCR%u failed\n", pcr);
-+#endif
-+        }
-+    } else {
-+        uint8_t sha1_digest[SHA1_DIGEST_SIZE];
-+        uint8_t sha256_digest[SHA2_256_DIGEST_SIZE];
-+        uint32_t rc;
-+
-+        struct tpm2_log_hashes log_hashes = {
-+            .count = 2,
-+            .hashes = {
-+                {
-+                    .alg = TPM_ALG_SHA1,
-+                    .size = SHA1_DIGEST_SIZE,
-+                    .data = sha1_digest,
-+                },
-+                {
-+                    .alg = TPM_ALG_SHA256,
-+                    .size = SHA2_256_DIGEST_SIZE,
-+                    .data = sha256_digest,
-+                },
-+            },
-+        };
-+
-+        rc = tpm2_hash_extend(loc, buf, size, pcr, &log_hashes);
-+        if ( rc != 0 )
-+        {
-+#ifndef __EARLY_SLAUNCH__
-+            printk(XENLOG_ERR "Extending PCR%u failed with TPM error: 0x%08x\n",
-+                   pcr, rc);
  #endif
          }
-     }
+-    } else {
+-        uint8_t sha1_digest[SHA1_DIGEST_SIZE];
+-        uint8_t sha256_digest[SHA2_256_DIGEST_SIZE];
++    }
++    else
++    {
+         uint32_t rc;
+ 
+-        struct tpm2_log_hashes log_hashes = {
+-            .count = 2,
+-            .hashes = {
+-                {
+-                    .alg = TPM_ALG_SHA1,
+-                    .size = SHA1_DIGEST_SIZE,
+-                    .data = sha1_digest,
+-                },
+-                {
+-                    .alg = TPM_ALG_SHA256,
+-                    .size = SHA2_256_DIGEST_SIZE,
+-                    .data = sha256_digest,
+-                },
+-            },
+-        };
++        struct tpm2_spec_id_event *evt_log = evt_log_addr;
++        struct tpm2_log_hashes log_hashes =
++            create_log_event20(evt_log, evt_log_size, pcr, type, log_data,
++                               log_data_size);
+ 
+         rc = tpm2_hash_extend(loc, buf, size, pcr, &log_hashes);
+         if ( rc != 0 )
 -- 
 2.49.0
 
