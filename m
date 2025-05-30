@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B41C5B549
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 12:41:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000921.1381095 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3833DC5B549
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:18:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1000930.1381112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKz33-0000rs-H0; Fri, 30 May 2025 12:41:21 +0000
+	id 1uKzd6-0008NQ-9T; Fri, 30 May 2025 13:18:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000921.1381095; Fri, 30 May 2025 12:41:21 +0000
+Received: by outflank-mailman (output) from mailman id 1000930.1381112; Fri, 30 May 2025 13:18:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKz33-0000rl-EU; Fri, 30 May 2025 12:41:21 +0000
-Received: by outflank-mailman (input) for mailman id 1000921;
- Fri, 30 May 2025 12:41:20 +0000
+	id 1uKzd6-0008Md-4W; Fri, 30 May 2025 13:18:36 +0000
+Received: by outflank-mailman (input) for mailman id 1000930;
+ Fri, 30 May 2025 13:18:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Lvem=YO=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1uKz32-0000rf-MI
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 12:41:20 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20630.outbound.protection.outlook.com
- [2a01:111:f403:2009::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d14176c-3d53-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 14:41:11 +0200 (CEST)
-Received: from BN9PR12MB5273.namprd12.prod.outlook.com (2603:10b6:408:11e::22)
- by CY8PR12MB7194.namprd12.prod.outlook.com (2603:10b6:930:5a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.24; Fri, 30 May
- 2025 12:41:06 +0000
-Received: from BN9PR12MB5273.namprd12.prod.outlook.com
- ([fe80::cf66:58ab:47be:4b13]) by BN9PR12MB5273.namprd12.prod.outlook.com
- ([fe80::cf66:58ab:47be:4b13%5]) with mapi id 15.20.8769.029; Fri, 30 May 2025
- 12:41:06 +0000
+ <SRS0=sDQw=YO=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
+ id 1uKzd4-0008Jy-Rh
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:18:34 +0000
+Received: from 3.mo576.mail-out.ovh.net (3.mo576.mail-out.ovh.net
+ [188.165.52.203]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9630bd2a-3d58-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 15:18:33 +0200 (CEST)
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.2.206])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4b83hn1Cptz31p0
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:18:33 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-dfc6s (unknown [10.111.182.37])
+ by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 7AFD4C43FE;
+ Fri, 30 May 2025 13:18:31 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.113])
+ by ghost-submission-5b5ff79f4f-dfc6s with ESMTPSA
+ id NlKHBCewOWhVigEAelGN8Q
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:18:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,155 +48,410 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d14176c-3d53-11f0-a2ff-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f4vyaBGoydFjwXvbyt1MU3L9/EiNk3CRuvudvvew2PZWubMjyoCeykiC7g6lEXKH7TZYEKWaft+eNq7QJ61FodVpf09BBuBDlSor1q1kYR/focL+SjEZVQs7mnzbOhNVeltmnVwatSZMuEb6DWiTah6T5CP41gob9QssFqpfCu4lRLl6FtfCfWSXUzQ2gfIWIJWomApjt1gvliI2IPLCfNeeiV5s5AttHRBQqnOos1Rcckittvg+E81zV323l+wLSvgWGh+MkxG4affAwOPLR1YEu+ejnUQbbw2GF8ud0ojgGH6FQ4ZYUyj2f6XrMCx0aEhYEg0wI/v+q8EWFYAv1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JOjWkpKyeQG28wm9hNPROs5/ISGe6hlQtZIZIb3e0vA=;
- b=QUMYt7i2lv8glcNrOC4Pv+osOSgF/yZpmuNao3d9q9IJlV+0/vpAO7E5c7hiCDxmEoIP33jcfltG1Z5rSYmWiclf2LrHDUkekKZ8O6erKkB5IKQS2HU1v7vka9Z/Pq+wn0jl3VEFV2yGamQ2CjE3m1Uq/InoozF6fUk6wZDqjLaNVuQ0AatF04BibDYEPwESVIaY3THYl9+c2Ls2kdJ1c1KWmol6aWTx/WPlAKfv3dh4zZgndkx1Z8svFh7kkdiHVJ0wQpSKWTYtdK3kS2z6dT2AsHX4+R3eaw8x12MPAfK212pMOY1Oxvc4N7aLBkKPkwa93qTnLGyZXA8TIr4ykg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JOjWkpKyeQG28wm9hNPROs5/ISGe6hlQtZIZIb3e0vA=;
- b=x7WayGYOcB8r1HRlD3DcMmGGQFXZG4aXKY7mhEE0Phq/XwluEmiT5TxwJqftGRSy7+gj2AG94BnA8f7qC5dw4edAt9yHUTvj58laDAgdPbCC8IOTNIU9q8/sJ29C49NqSW9b1BivctXCHExyHyTgr+pm4eFcmxAWLIitMsChoRA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <20505776-da44-4fab-bcb5-7114157d0bb0@amd.com>
-Date: Fri, 30 May 2025 14:41:03 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/19] licence: Add missing SPDX line to bootfdt.h
-To: Alejandro Vallejo <agarciav@amd.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>
-References: <DA1WWRUQLCAG.ZTVR1HXJ85V0@amd.com>
- <20250530120242.39398-1-agarciav@amd.com>
- <20250530120242.39398-2-agarciav@amd.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <20250530120242.39398-2-agarciav@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0187.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ca::9) To BN9PR12MB5273.namprd12.prod.outlook.com
- (2603:10b6:408:11e::22)
+X-Inumbo-ID: 9630bd2a-3d58-11f0-a2ff-13f23c93f187
+Authentication-Results:garm.ovh; auth=pass (GARM-113S00710e8f645-8c55-4142-8ae5-6e1c6e47b73d,
+                    A4E380CC922F0B59227EC5DCC46884561651840B) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.184.221
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: xen-devel@lists.xenproject.org
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Lukasz Hawrylko <lukasz@hawrylko.pl>,
+	=?UTF-8?q?Mateusz=20M=C3=B3wka?= <mateusz.mowka@intel.com>,
+	trenchboot-devel@googlegroups.com
+Subject: [PATCH v3 01/22] x86/include/asm/intel-txt.h: constants and accessors for TXT registers and heap
+Date: Fri, 30 May 2025 16:17:43 +0300
+Message-ID: <5da8e6c9fd2d986cd99be35774b850584e4a43ee.1748611041.git.sergii.dmytruk@3mdeb.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
+References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN9PR12MB5273:EE_|CY8PR12MB7194:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2f8946a3-1070-4f60-8675-08dd9f773f11
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?YWNnOVJTa1RQd09TZ0QyRDRGemV3bkVXM2ZYbTZjM2Z6QWF3Uy9VTWhsTmFE?=
- =?utf-8?B?V3JqR25QZ0xHSGM1a0xZZWd3bVZOQXl3bENxRTZVbm5rUVlFVlVBaXNhem1i?=
- =?utf-8?B?N3BOOVdUQXdLVzgzYkE0S1BOTXNqVlJGSEFybVpWS1ErNk9PM21mN3FOVlZs?=
- =?utf-8?B?MVcxZFFJb09hbFhyVEFrdE5oNVJJMmcrMno1VzdMbC9sZS9VeWp0UEpDOUt2?=
- =?utf-8?B?WVhuOHE5TGpPWHlhZmQ5Yzg5d25sbmUxUU5Udk1IbGdoSjkrbmhGODAzakt0?=
- =?utf-8?B?L29pcGpLOG04Z01oZnRUc1RMU0RyRDUyL3VkSWg2NnVWMUpycCtXV052Y0da?=
- =?utf-8?B?bkkyWlcwT2RzWVR6YWdYZGdLQTVhSnozbUxLc0c2MWg1UDVoaXZnb0lPblJQ?=
- =?utf-8?B?ZHRuM1hidDkvWXZ0OEV6Z2FyL24vaStxenM3RnZnMks5NG5Ya3dFQWZ3aHBV?=
- =?utf-8?B?MGgxZWprTTQydFd1S1FEQXorSzdiOFo3VHIzMk9pSWlBS1ZXMzA3K0o3U0I3?=
- =?utf-8?B?QWJNTy9XdGJhbk03c1JYK2F6SHI5K2xERzJLaWlLcUl1MWNKclhpZGE5aXli?=
- =?utf-8?B?Z24zelE2YWdad1FIVTh2eEdsc0FtS0ZIZ1VqY3R4Z1QzZmJFT0pQTWVrd1V0?=
- =?utf-8?B?dFc0S2FweWNjODhYYjMwSStIS2lJMmVTQ1U4dnJzZFgreGtPM3ZEZ2plcmEw?=
- =?utf-8?B?M1cwalpzU1IzdlFweW04RGZpZCtGTjdkS0V3VXBZdFhZZ2ZhVXRKMy95UTd2?=
- =?utf-8?B?TmtsbEdILzVjMTNoM29HWEhZeWJ3Zk1lalJuRFpaeDNjVlp0blkrSWxoYUh0?=
- =?utf-8?B?Q3grQkJSU0JCcjJqd1U1emdLOFRGazY0Vzg4bnJtb2xoSkFIMG1KR2N1RldG?=
- =?utf-8?B?L3h2aHBleFBRYU9OT3ZKNUxsanZ0cVkzRVYxVlBLLzVla0xFWWxNQUFTbjhu?=
- =?utf-8?B?WmFrcUE1ODRWdmdMcGhBazRycGZ4eWNaY3U2SksyejZmdktvcC9xZzcxWkw1?=
- =?utf-8?B?REVXNzB1ZXlZUGV1NmRCSC9kdllzbWFwREhkaExWaW16TXNWcHVpclJzMjR5?=
- =?utf-8?B?TXZvNXlUOWFiUjZURjFjZFJzdERNWEJPZE9xbXFNYWhQVlVUTVdXaWlZVDAr?=
- =?utf-8?B?a0Fvc2l2ZDhVUFl0Z1ZrZTVGK1BZblp2aUNDY2h2REhBZ05ZQXNLWlFGcnJQ?=
- =?utf-8?B?QzVBbnNGM2lib2NzM05QQVZscWJubVpiUTd5Q3BTazR3RU9IT0N3MHBoRVNG?=
- =?utf-8?B?eVFLaldzYXN0UTVEMUsvOUJvdWNINnpQZW42azdIWG1oazhZMDdtK2FyVW83?=
- =?utf-8?B?bVRtaEoyZEswU1podG9nU2licWFudnpJVjRMaXg4ME9JaUplQU11dmR3ZTNP?=
- =?utf-8?B?QkVKeEhFVWtFSitPVWdRU2ZJNEJVNktLK0h6TklvNVNvQmx0Q09KYkRwWnF3?=
- =?utf-8?B?KzhmS1c2QXpGZ3c0clRtRUYvczF6aTZtMVp4VEZxV1VyN05FOFVkOHdibys1?=
- =?utf-8?B?d3h5MERiWUV3MHM0VWQ4WHVWcjg2aExBSHdPVkFrcVZUUEFxektZTnhoSjVM?=
- =?utf-8?B?Vm03RERoNVBkVDFXRHhCdHNRVk9wTElsRGROQ3dBdFRWMjZ1SHdMVllGT00y?=
- =?utf-8?B?bGMzSS9RazlxODJwd2ZSakV4MXlxNTBnZFF1WnF0UTJrSmw2Qm91c2s4bVZK?=
- =?utf-8?B?MitQN21oVGt6OHloZTBxa3pnV3lQb252UUw0NS8rc0tXL0VhY1hYK0dUcFRt?=
- =?utf-8?B?R2ZhYjFsa2p5Y2JST0U2K21vRDYxOGRhaWN2OVNnaW5LMzhVRHluOWZWd1ZO?=
- =?utf-8?B?N3ZleUVJWXB6b0FJWVVJcGtIWmtzSXIrWWlSbVI3TmVVY0M5RjFSY3cwSm16?=
- =?utf-8?B?QTBhZVpkVmRleEJTTlB4MUVKZUR3N3Z0ZGphaHlQQXgweXlkanltekJGUytD?=
- =?utf-8?Q?Xgp1YF0q0oM=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5273.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RHhGVk9MK2MzZWdVRmRoWTU3TmFqVXkvUlRCSjRER3dodHNwbEVva1h3UG5i?=
- =?utf-8?B?WnpPUFEvT2dDOWFQQWNZNDBTWEN3OWFUZVNSemdRTkh4ek5VNFFuQ2VSQXJ2?=
- =?utf-8?B?ZEJYL0JDOVBXSVNnWml3MEk4L2xQMEFKSlZqUVlnMElQKzZXMTNpY2JWODhR?=
- =?utf-8?B?RG9iNi9tQmhzVmEreWRFbGdqTEs3SzNjY2lmSG5hTmlYU2VDR0JjYnF3MXBC?=
- =?utf-8?B?Zis0Z2MxM1dGQThRWUdld1ArK2lFSVZUK21RQlVBcGoxRWZDT2psNm43ellm?=
- =?utf-8?B?cE9DOGJRYnpnWUVYMkN1MmExMDdhSmpJdlVWcVZqVjBjcnQ0aW9ESEFjS2VS?=
- =?utf-8?B?bU5MRXJYeTZQTFQwSnRWY2Y3dk1VRDJUU2l6MHpPMStXTVZUWDU2MVJmaUFH?=
- =?utf-8?B?S21xd3IrNnpyZXFOVXNpK0w1Q2NRcmp6MFhwSGpaOUw4bGxidnVleW03VmFw?=
- =?utf-8?B?Yk9qS0pYcncvdHVUWGJ1YUFsZWtiZyt1OHpkZ2NyQ2Fva3kzc2EzbmhvYmRN?=
- =?utf-8?B?d0pIbXhCQXhSb08wUGVmK0daaml5UzRlc3hScFFVUnhQL242ZjA5dk81T1Vn?=
- =?utf-8?B?dnJVZWJXck5oWjF4RWx1QVpZSitZdHJwTld5MjNMMzFYN0I5aVNuZjVWazJX?=
- =?utf-8?B?ejBhVytZUTBOWVVnQ1ZMUVlwa0xzMHBONVJZVTc4U3FOeVdyK2hRaVRsajBl?=
- =?utf-8?B?MERyOWxXbEczV0k5NzNrL3VWcE55WW00OTc0bmdRT2dzWWluVmF6bU9QTzlz?=
- =?utf-8?B?TVp6OXZkWHpYUDNaK1l1ZUY4WjZoMEtVNzhLYnEyeVJVekQzeVlGbkV4NmZY?=
- =?utf-8?B?YzI4SVhPdHdwUGlrUTQwT3hyRjk4M29pcjRxWTg4cWQ0YlFEL25haUVjN3pt?=
- =?utf-8?B?Tkl3MDlQWkozR0cwM0l3VmlYVFhtRjBWcGE1bUtsOFgwbGFNTWR1dGdCZG02?=
- =?utf-8?B?N1NBakNkc2d5Z0s3YWpIbmNFVXpBM3JUdjJCaWtZcmlzWWowNEhZR1hITjVZ?=
- =?utf-8?B?bWNHaVhUT1lEUWJJTEQweVlGZ3l0anAyUXFWMno0aklIQ1Y4Wmd3Rnl1Ungr?=
- =?utf-8?B?U2F6T0wwdHN5QXRaNEgxRGFkM2xFUGdjTnRoeDNOaUNEb01XcTlyaXdBSnlY?=
- =?utf-8?B?bmhFYVYxWWVGSGZEQXA0WVNvaDd5MGdKdDU3T0FlWDZZZ1BqNm4vUnNFWU1x?=
- =?utf-8?B?dk45N0xKOFVLREVyWGZtc01MR0ZReW10VnpHMEdXM3Z2bEZQWC9IbmlhN3E4?=
- =?utf-8?B?RWV4a2JZdmwrSTBrYTlRSzVZcjlkS2Fwd2tXcjBycG15RnF2UFdvVm1XR2xC?=
- =?utf-8?B?a2RoZjFOSm9qeEJLTWZrWGdBS3h2K2VvdjlVZmhVaXJjdUtmQk1KU3lNZnFk?=
- =?utf-8?B?djFhSERDUEIvMHNKTDVKNUU2RHJvbW40VHM3SEFUdk9XTkxWWEt2ZVpHdmhQ?=
- =?utf-8?B?UEcyY0xTV0RaVFJoWTVycEtPVzdBRFQxS1cva1RjV24yekFsYkNncTErVndU?=
- =?utf-8?B?WEN6NFFVRjRybHpNYXRkRWJSdE1iRU96YS9aWkRINnhrdkpsR210SEVlbWFO?=
- =?utf-8?B?YmE5azlna09BOXFta2hxSlZoSVB3U3VOZUFWbWxLTFkxUHlWN2JkQWRrSGpL?=
- =?utf-8?B?UGJFa1B4eXZocXBwc1Z1b2U3SjJSbDNGcXpLWUkvZ3JDOVVMOEFCOVU3R2U3?=
- =?utf-8?B?VXlNNnUvbXJBVGtsS21DQlZuYXkxUVBOeXhrcXNhd3hVMytFUDJScEd4VHJG?=
- =?utf-8?B?bGVEeXBBVEUxY0hsSGFTODMxanprYkFZSUlEb0NxV09yTVNTK3EyRTRTZUs3?=
- =?utf-8?B?c09sZld5WEVsTEZ0ZUFjR2F6ak5ubkhna3diLzI0WGRpTTBIQWc1MXJkT3A1?=
- =?utf-8?B?T3AvcmlySEFYOUpSK1FsdGdqMWZMMGhxZ3cvdzFiWGRSQ2RVMlI1TUFFVUF2?=
- =?utf-8?B?dFVlWU9jcVpNZ2taQ0R6cEp2UUc5NlhRcjVsTTFWU2FQNTI1eHRZOUFTSzlo?=
- =?utf-8?B?aHl5TTlFL1gvU0J4UEhkSUp1V2Q5aHQ3WnpWZEJOdHl6U0w3K0tJWE15c0Ns?=
- =?utf-8?B?YldONXMzdE5PVlRURzU1aG85eG9JWGhGTldOZ0p1b3RHdlJxTWs4SlJxMC9D?=
- =?utf-8?Q?oa3M=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f8946a3-1070-4f60-8675-08dd9f773f11
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5273.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 May 2025 12:41:06.7054
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: H7T7yWUt4K9g7rbFyVnE13LzG/WLeDjh8Hdc6nkg6CXh2WK408i81IBaLpgY0Q4g
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7194
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 12693395550816285852
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduvdculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepheevieeivdejkeehueetgeeivddvfeeiueetvedtfffgjeekffekveefudfgleeunecuffhomhgrihhnpehinhhtvghlrdgtohhmnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduudefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheejiegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=75kgFmRc/GJ3HdcYtM6U8h8g3LZajEoRkGd+0twV0e8=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1748611113; v=1;
+ b=i5JJKazbMG38IlrUj/MuXJQvWOSDYDjr/lh9LoOanwsaUknGGW5bhsaaJlZv/+ggvvP0473p
+ f7gq0XqJ8FjrhOD+qt5fX1Lpx4hSUCcuXhSQ6tKhjCVvtEnbJxG2TPsvjj4p5UFV+7Dn974+CFR
+ YtaDJBVVQsedIyoa2yqeNZJ8IZYfZpwFl0Ela83itbte74cV+HFVA44Kijejqg753TPenLOmwAW
+ T1l6tLnpNuRc9cthMkGZZJ1OzWwLUrQtZ4mM9tBbiBhvcEWvJ6Hj3YTpzdZCpkHgjAIPkegj9jn
+ 6mn2q3DLaxEqy3dSejjZnhkf0rbcTYBW9/NYxYFWOZFOA==
 
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
+The file contains base address of TXT register spaces, offsets of
+registers within them, error codes and inline functions for accessing
+structures stored on TXT heap.
 
-On 30/05/2025 14:02, Alejandro Vallejo wrote:
-> Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
-> ---
->  xen/include/xen/bootfdt.h | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
-> index 80a90e53c0..847f019559 100644
-> --- a/xen/include/xen/bootfdt.h
-> +++ b/xen/include/xen/bootfdt.h
-> @@ -1,3 +1,4 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
->  #ifndef XEN_BOOTFDT_H
->  #define XEN_BOOTFDT_H
->  
+xen/arch/x86/tboot.c is updated to use definitions from this new header
+instead of duplicating them.  The change in tboot_protect_mem_regions()
+there is caused by going from NR_TXT_CONFIG_PAGES to
+TXT_CONFIG_SPACE_SIZE which avoids multiplying number of pages by page
+size on every use.
 
-Acked-by: Michal Orzel <michal.orzel@amd.com>
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+---
+ xen/arch/x86/include/asm/intel-txt.h | 297 +++++++++++++++++++++++++++
+ xen/arch/x86/tboot.c                 |  20 +-
+ 2 files changed, 299 insertions(+), 18 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/intel-txt.h
 
-~Michal
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+new file mode 100644
+index 0000000000..cc2d312f4d
+--- /dev/null
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -0,0 +1,297 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Intel TXT is an implementation of DRTM in CPUs made by Intel (although CPU
++ * alone isn't enough, chipset must support TXT as well).
++ *
++ * Overview:
++ *   https://www.intel.com/content/www/us/en/support/articles/000025873/processors.html
++ * Software Development Guide (SDG):
++ *   https://www.intel.com/content/www/us/en/content-details/315168/
++ */
++
++#ifndef X86_INTEL_TXT_H
++#define X86_INTEL_TXT_H
++
++/*
++ * TXT configuration registers (offsets from TXT_{PUB, PRIV}_CONFIG_REGS_BASE)
++ */
++#define TXT_PUB_CONFIG_REGS_BASE        0xfed30000U
++#define TXT_PRIV_CONFIG_REGS_BASE       0xfed20000U
++
++/*
++ * The same set of registers is exposed twice (with different permissions) and
++ * they are allocated continuously with page alignment.
++ */
++#define TXT_CONFIG_SPACE_SIZE \
++    (TXT_PUB_CONFIG_REGS_BASE - TXT_PRIV_CONFIG_REGS_BASE)
++
++/* Offsets from pub/priv config space. */
++#define TXTCR_STS                       0x0000
++#define TXTCR_ESTS                      0x0008
++#define TXTCR_ERRORCODE                 0x0030
++#define TXTCR_CMD_RESET                 0x0038
++#define TXTCR_CMD_CLOSE_PRIVATE         0x0048
++#define TXTCR_DIDVID                    0x0110
++#define TXTCR_VER_EMIF                  0x0200
++#define TXTCR_CMD_UNLOCK_MEM_CONFIG     0x0218
++#define TXTCR_SINIT_BASE                0x0270
++#define TXTCR_SINIT_SIZE                0x0278
++#define TXTCR_MLE_JOIN                  0x0290
++#define TXTCR_HEAP_BASE                 0x0300
++#define TXTCR_HEAP_SIZE                 0x0308
++#define TXTCR_SCRATCHPAD                0x0378
++#define TXTCR_CMD_OPEN_LOCALITY1        0x0380
++#define TXTCR_CMD_CLOSE_LOCALITY1       0x0388
++#define TXTCR_CMD_OPEN_LOCALITY2        0x0390
++#define TXTCR_CMD_CLOSE_LOCALITY2       0x0398
++#define TXTCR_CMD_SECRETS               0x08e0
++#define TXTCR_CMD_NO_SECRETS            0x08e8
++#define TXTCR_E2STS                     0x08f0
++
++/*
++ * Secure Launch Defined Error Codes used in MLE-initiated TXT resets.
++ *
++ * TXT Specification
++ * Appendix I ACM Error Codes
++ */
++#define SLAUNCH_ERROR_GENERIC                0xc0008001U
++#define SLAUNCH_ERROR_TPM_INIT               0xc0008002U
++#define SLAUNCH_ERROR_TPM_INVALID_LOG20      0xc0008003U
++#define SLAUNCH_ERROR_TPM_LOGGING_FAILED     0xc0008004U
++#define SLAUNCH_ERROR_REGION_STRADDLE_4GB    0xc0008005U
++#define SLAUNCH_ERROR_TPM_EXTEND             0xc0008006U
++#define SLAUNCH_ERROR_MTRR_INV_VCNT          0xc0008007U
++#define SLAUNCH_ERROR_MTRR_INV_DEF_TYPE      0xc0008008U
++#define SLAUNCH_ERROR_MTRR_INV_BASE          0xc0008009U
++#define SLAUNCH_ERROR_MTRR_INV_MASK          0xc000800aU
++#define SLAUNCH_ERROR_MSR_INV_MISC_EN        0xc000800bU
++#define SLAUNCH_ERROR_INV_AP_INTERRUPT       0xc000800cU
++#define SLAUNCH_ERROR_INTEGER_OVERFLOW       0xc000800dU
++#define SLAUNCH_ERROR_HEAP_WALK              0xc000800eU
++#define SLAUNCH_ERROR_HEAP_MAP               0xc000800fU
++#define SLAUNCH_ERROR_REGION_ABOVE_4GB       0xc0008010U
++#define SLAUNCH_ERROR_HEAP_INVALID_DMAR      0xc0008011U
++#define SLAUNCH_ERROR_HEAP_DMAR_SIZE         0xc0008012U
++#define SLAUNCH_ERROR_HEAP_DMAR_MAP          0xc0008013U
++#define SLAUNCH_ERROR_HI_PMR_BASE            0xc0008014U
++#define SLAUNCH_ERROR_HI_PMR_SIZE            0xc0008015U
++#define SLAUNCH_ERROR_LO_PMR_BASE            0xc0008016U
++#define SLAUNCH_ERROR_LO_PMR_SIZE            0xc0008017U
++#define SLAUNCH_ERROR_LO_PMR_MLE             0xc0008018U
++#define SLAUNCH_ERROR_INITRD_TOO_BIG         0xc0008019U
++#define SLAUNCH_ERROR_HEAP_ZERO_OFFSET       0xc000801aU
++#define SLAUNCH_ERROR_WAKE_BLOCK_TOO_SMALL   0xc000801bU
++#define SLAUNCH_ERROR_MLE_BUFFER_OVERLAP     0xc000801cU
++#define SLAUNCH_ERROR_BUFFER_BEYOND_PMR      0xc000801dU
++#define SLAUNCH_ERROR_OS_SINIT_BAD_VERSION   0xc000801eU
++#define SLAUNCH_ERROR_EVENTLOG_MAP           0xc000801fU
++#define SLAUNCH_ERROR_TPM_NUMBER_ALGS        0xc0008020U
++#define SLAUNCH_ERROR_TPM_UNKNOWN_DIGEST     0xc0008021U
++#define SLAUNCH_ERROR_TPM_INVALID_EVENT      0xc0008022U
++
++#define SLAUNCH_BOOTLOADER_MAGIC             0x4c534254
++
++#ifndef __ASSEMBLY__
++
++/* Need to differentiate between pre- and post paging enabled. */
++#ifdef __EARLY_SLAUNCH__
++#include <xen/macros.h>
++#define _txt(x) _p(x)
++#else
++#include <xen/types.h>
++#include <asm/page.h>   // __va()
++#define _txt(x) __va(x)
++#endif
++
++/*
++ * Always use private space as some of registers are either read-only or not
++ * present in public space.
++ */
++static inline uint64_t txt_read(unsigned int reg_no)
++{
++    volatile uint64_t *reg = _txt(TXT_PRIV_CONFIG_REGS_BASE + reg_no);
++    return *reg;
++}
++
++static inline void txt_write(unsigned int reg_no, uint64_t val)
++{
++    volatile uint64_t *reg = _txt(TXT_PRIV_CONFIG_REGS_BASE + reg_no);
++    *reg = val;
++}
++
++static inline void noreturn txt_reset(uint32_t error)
++{
++    txt_write(TXTCR_ERRORCODE, error);
++    txt_write(TXTCR_CMD_NO_SECRETS, 1);
++    txt_write(TXTCR_CMD_UNLOCK_MEM_CONFIG, 1);
++    /*
++     * This serves as TXT register barrier after writing to
++     * TXTCR_CMD_UNLOCK_MEM_CONFIG. Must be done to ensure that any future
++     * chipset operations see the write.
++     */
++    (void)txt_read(TXTCR_ESTS);
++    txt_write(TXTCR_CMD_RESET, 1);
++    unreachable();
++}
++
++/*
++ * Secure Launch defined OS/MLE TXT Heap table
++ */
++struct txt_os_mle_data {
++    uint32_t version;
++    uint32_t reserved;
++    uint64_t slrt;
++    uint64_t txt_info;
++    uint32_t ap_wake_block;
++    uint32_t ap_wake_block_size;
++    uint8_t mle_scratch[64];
++} __packed;
++
++/*
++ * TXT specification defined BIOS data TXT Heap table
++ */
++struct txt_bios_data {
++    uint32_t version; /* Currently 5 for TPM 1.2 and 6 for TPM 2.0 */
++    uint32_t bios_sinit_size;
++    uint64_t reserved1;
++    uint64_t reserved2;
++    uint32_t num_logical_procs;
++    /* Versions >= 3 && < 5 */
++    uint32_t sinit_flags;
++    /* Versions >= 5 with updates in version 6 */
++    uint32_t mle_flags;
++    /* Versions >= 4 */
++    /* Ext Data Elements */
++} __packed;
++
++/*
++ * TXT specification defined OS/SINIT TXT Heap table
++ */
++struct txt_os_sinit_data {
++    uint32_t version;       /* Currently 6 for TPM 1.2 and 7 for TPM 2.0 */
++    uint32_t flags;         /* Reserved in version 6 */
++    uint64_t mle_ptab;
++    uint64_t mle_size;
++    uint64_t mle_hdr_base;
++    uint64_t vtd_pmr_lo_base;
++    uint64_t vtd_pmr_lo_size;
++    uint64_t vtd_pmr_hi_base;
++    uint64_t vtd_pmr_hi_size;
++    uint64_t lcp_po_base;
++    uint64_t lcp_po_size;
++    uint32_t capabilities;
++    /* Version = 5 */
++    uint64_t efi_rsdt_ptr;  /* RSD*P* in versions >= 6 */
++    /* Versions >= 6 */
++    /* Ext Data Elements */
++} __packed;
++
++/*
++ * TXT specification defined SINIT/MLE TXT Heap table
++ */
++struct txt_sinit_mle_data {
++    uint32_t version;  /* Current values are 6 through 9 */
++    /* Versions <= 8, fields until lcp_policy_control must be 0 for >= 9 */
++    uint8_t bios_acm_id[20];
++    uint32_t edx_senter_flags;
++    uint64_t mseg_valid;
++    uint8_t sinit_hash[20];
++    uint8_t mle_hash[20];
++    uint8_t stm_hash[20];
++    uint8_t lcp_policy_hash[20];
++    uint32_t lcp_policy_control;
++    /* Versions >= 7 */
++    uint32_t rlp_wakeup_addr;
++    uint32_t reserved;
++    uint32_t num_of_sinit_mdrs;
++    uint32_t sinit_mdrs_table_offset;
++    uint32_t sinit_vtd_dmar_table_size;
++    uint32_t sinit_vtd_dmar_table_offset;
++    /* Versions >= 8 */
++    uint32_t processor_scrtm_status;
++    /* Versions >= 9 */
++    /* Ext Data Elements */
++} __packed;
++
++/*
++ * Functions to extract data from the Intel TXT Heap Memory.
++ *
++ * The layout of the heap is dictated by TXT. It's a set of variable-sized
++ * tables that appear in pre-defined order:
++ *
++ *   +------------------------------------+
++ *   | Size of Bios Data table (uint64_t) |
++ *   +------------------------------------+
++ *   | Bios Data table                    |
++ *   +------------------------------------+
++ *   | Size of OS MLE table (uint64_t)    |
++ *   +------------------------------------+
++ *   | OS MLE table                       |
++ *   +--------------------------------    +
++ *   | Size of OS SINIT table (uint64_t)  |
++ *   +------------------------------------+
++ *   | OS SINIT table                     |
++ *   +------------------------------------+
++ *   | Size of SINIT MLE table (uint64_t) |
++ *   +------------------------------------+
++ *   | SINIT MLE table                    |
++ *   +------------------------------------+
++ *
++ * NOTE: the table size fields include the 8 byte size field itself.
++ *
++ * NOTE: despite SDG mentioning 8-byte alignment, at least some BIOS ACM modules
++ *       were observed to violate this requirement for Bios Data table, so not
++ *       enforcing any alignment.
++ */
++static inline uint64_t txt_bios_data_size(const void *heap)
++{
++    return *(const uint64_t *)heap - sizeof(uint64_t);
++}
++
++static inline void *txt_bios_data_start(const void *heap)
++{
++    return (void *)heap + sizeof(uint64_t);
++}
++
++static inline uint64_t txt_os_mle_data_size(const void *heap)
++{
++    return *(const uint64_t *)(txt_bios_data_start(heap) +
++                               txt_bios_data_size(heap)) -
++           sizeof(uint64_t);
++}
++
++static inline void *txt_os_mle_data_start(const void *heap)
++{
++    return txt_bios_data_start(heap) + txt_bios_data_size(heap) +
++           sizeof(uint64_t);
++}
++
++static inline uint64_t txt_os_sinit_data_size(const void *heap)
++{
++    return *(const uint64_t *)(txt_os_mle_data_start(heap) +
++                               txt_os_mle_data_size(heap)) -
++           sizeof(uint64_t);
++}
++
++static inline void *txt_os_sinit_data_start(const void *heap)
++{
++    return txt_os_mle_data_start(heap) + txt_os_mle_data_size(heap) +
++           sizeof(uint64_t);
++}
++
++static inline uint64_t txt_sinit_mle_data_size(const void *heap)
++{
++    return *(const uint64_t *)(txt_os_sinit_data_start(heap) +
++                               txt_os_sinit_data_size(heap)) -
++           sizeof(uint64_t);
++}
++
++static inline void *txt_sinit_mle_data_start(const void *heap)
++{
++    return txt_os_sinit_data_start(heap) + txt_os_sinit_data_size(heap) +
++           sizeof(uint64_t);
++}
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* X86_INTEL_TXT_H */
+diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
+index d5db60d335..8a573d8c79 100644
+--- a/xen/arch/x86/tboot.c
++++ b/xen/arch/x86/tboot.c
+@@ -15,6 +15,7 @@
+ #include <asm/tboot.h>
+ #include <asm/setup.h>
+ #include <asm/trampoline.h>
++#include <asm/intel-txt.h>
+ 
+ #include <crypto/vmac.h>
+ 
+@@ -35,23 +36,6 @@ static uint64_t __initdata sinit_base, __initdata sinit_size;
+ 
+ static bool __ro_after_init is_vtd;
+ 
+-/*
+- * TXT configuration registers (offsets from TXT_{PUB, PRIV}_CONFIG_REGS_BASE)
+- */
+-
+-#define TXT_PUB_CONFIG_REGS_BASE       0xfed30000
+-#define TXT_PRIV_CONFIG_REGS_BASE      0xfed20000
+-
+-/* # pages for each config regs space - used by fixmap */
+-#define NR_TXT_CONFIG_PAGES     ((TXT_PUB_CONFIG_REGS_BASE -                \
+-                                  TXT_PRIV_CONFIG_REGS_BASE) >> PAGE_SHIFT)
+-
+-/* offsets from pub/priv config space */
+-#define TXTCR_SINIT_BASE            0x0270
+-#define TXTCR_SINIT_SIZE            0x0278
+-#define TXTCR_HEAP_BASE             0x0300
+-#define TXTCR_HEAP_SIZE             0x0308
+-
+ #define SHA1_SIZE      20
+ typedef uint8_t   sha1_hash_t[SHA1_SIZE];
+ 
+@@ -409,7 +393,7 @@ int __init tboot_protect_mem_regions(void)
+ 
+     /* TXT Private Space */
+     rc = e820_change_range_type(&e820, TXT_PRIV_CONFIG_REGS_BASE,
+-                 TXT_PRIV_CONFIG_REGS_BASE + NR_TXT_CONFIG_PAGES * PAGE_SIZE,
++                 TXT_PRIV_CONFIG_REGS_BASE + NR_TXT_CONFIG_SIZE,
+                  E820_RESERVED, E820_UNUSABLE);
+     if ( !rc )
+         return 0;
+-- 
+2.49.0
 
 
