@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80698C5B543
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 23:19:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001600.1381712 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC5ADC5B552
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 23:19:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001602.1381732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL906-0004sS-9I; Fri, 30 May 2025 23:18:58 +0000
+	id 1uL90L-0005PY-Mh; Fri, 30 May 2025 23:19:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001600.1381712; Fri, 30 May 2025 23:18:58 +0000
+Received: by outflank-mailman (output) from mailman id 1001602.1381732; Fri, 30 May 2025 23:19:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL906-0004sL-6H; Fri, 30 May 2025 23:18:58 +0000
-Received: by outflank-mailman (input) for mailman id 1001600;
- Fri, 30 May 2025 23:18:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uL90L-0005PP-Jn; Fri, 30 May 2025 23:19:13 +0000
+Received: by outflank-mailman (input) for mailman id 1001602;
+ Fri, 30 May 2025 23:19:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=AEV3=YO=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uL903-0004sF-Op
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 23:18:56 +0000
-Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
- [79.135.106.31]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7397ca22-3dac-11f0-a300-13f23c93f187;
- Sat, 31 May 2025 01:18:53 +0200 (CEST)
+ id 1uL90K-00055p-0H
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 23:19:12 +0000
+Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
+ [109.224.244.17]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7dcf4de1-3dac-11f0-b894-0df219b8e170;
+ Sat, 31 May 2025 01:19:10 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,87 +38,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7397ca22-3dac-11f0-a300-13f23c93f187
+X-Inumbo-ID: 7dcf4de1-3dac-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=y4v4klxpbrekxnqiutaanpovbi.protonmail; t=1748647131; x=1748906331;
-	bh=BCjyQqmmXr9DrrX7yXZOHYjQ7dkkcp3YITAJ3p3dSvk=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=mgKNjI3mo4GeQ7yRVg5xOEwvH6HeCJj7CTC49bs2eUB0GOYCLE9CYFIJ6WLlTxMj+
-	 7UoicfBwJRyZlcDQZXfsy2BCK6J7/tHTI6P3YRIkvosOMyigmVLJF75sdcCiUxirCz
-	 NbWqhuEMaFD6fguuDU2eS4gZp0/Mw5O/CzAOKfyZf2MwBgye9SBN9rxCtsyYCkkzLg
-	 3Y5XX1OCtABndbjyzD88vWIPGVG9tmEKpU42y7aajVVu3lmQqOLi4GSS06h8gQ49Xl
-	 BQXp2lce+6kl3WXroODeBjUuQzdKCO/ndisJE9/CsJEzIS/TcJs8wN8HwcEfcj9cS3
-	 mY1FnCh9mCiNw==
-Date: Fri, 30 May 2025 23:18:46 +0000
+	s=protonmail; t=1748647149; x=1748906349;
+	bh=YxCkgCQgEgcma2HR34BjqEKfMw9IKxiz4R9wP5xWv0o=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=jvxVPpgTZDTnOQSspE04WazOKRkEo3XQBj9exJwLKtc//Vs5ZjcrhqWKUgz+D1XIv
+	 Qku+ZLkqzGcAa7ALMwXXlOrF8mYZXbZsdqT5CDbdCqXyO/Ix6djWRxihpP8Hu2AOVY
+	 y9dcbu5WRhDf1C1+wgn2pj+gBHIUqV340O9aIGk0qzkvEPPCZG6dbvhn+z5Vn385wB
+	 Uz732eqr6IOd3Q/puYzYE+MsWUoRge18cdOR+e2wAR+Fz7Tp8oEOyIhr3SY+JlzZCZ
+	 bY+E/bWXEZ4vVp0b7pnmsc4ET+W/39Zmf2QAybrzhkEG6iq6viQQ8aCVOh+tv3LlKj
+	 pF4fOIJLfANBA==
+Date: Fri, 30 May 2025 23:19:01 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v5 0/4] xen/console: cleanup console input switch logic
-Message-ID: <20250530231841.73386-1-dmukhin@ford.com>
+Subject: [PATCH v5 2/4] xen/console: introduce console input permission
+Message-ID: <20250530231841.73386-3-dmukhin@ford.com>
+In-Reply-To: <20250530231841.73386-1-dmukhin@ford.com>
+References: <20250530231841.73386-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: c0b2d05618d0335d67c55fdda1874d0c513bd904
+X-Pm-Message-ID: 49605cb8c5e79f6a3a4f10e2aed5b7481a08333f
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The patch series originates from the NS16550 UART emulator series [1] (x86)
-which requires ability to switch physical console input to a PVH/HVM domain
-with an emulated UART.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Currently, on x86, console input can be rotated in round-robin manner only
-between dom0, PV shim, and Xen itself. On Arm the input rotation can includ=
-e
-domUs with vpl011.
+Add new flag to domain structure for marking permission to intercept
+the physical console input by the domain.
 
-The main idea of this series is introducing a per-domain permission flag th=
-at
-is set during domain initialization and used by the console driver to switc=
-h
-the input across permitted domains.
+Update console input switch logic accordingly.
 
-Patch 1 performs rename of switch_serial_input() to fit the console driver
-notation.
+No functional change intended.
 
-Patch 2 introduces a new domain permission flag to mark ownership of the
-console input for the console driver.
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v4:
+- kept input_allowed as a separate flag
+- updated logic for input_allowed in vpl011
+- fixup for console_switch_input()
+---
+ xen/arch/arm/vpl011.c      |  1 +
+ xen/arch/x86/pv/shim.c     |  2 ++
+ xen/common/domain.c        |  2 ++
+ xen/drivers/char/console.c | 18 +++++++++++++++++-
+ xen/include/xen/sched.h    |  8 +++++++-
+ 5 files changed, 29 insertions(+), 2 deletions(-)
 
-Patch 3 cleans up the console input switch logic by removing dependency
-on max_init_domid. Depends on patches 1, 2 and [2].
-
-Patch 4 performs rename of console_rx to console_domid to match the usage
-of the symbol in the code.
-
-[1] https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-0-c5d36b3=
-1d66c@ford.com/
-[2] https://lore.kernel.org/xen-devel/20250528225030.2652166-1-dmukhin@ford=
-.com/
-[3] Link to v4: https://lore.kernel.org/xen-devel/20250529000848.2675903-1-=
-dmukhin@ford.com/
-[4] Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelin=
-es/1845329909
-
-Denis Mukhin (4):
-  xen/console: rename switch_serial_input() to console_switch_input()
-  xen/console: introduce console input permission
-  xen/console: remove max_init_domid dependency
-  xen/console: rename console_rx to console_domid
-
- xen/arch/arm/include/asm/setup.h        |  2 -
- xen/arch/arm/setup.c                    |  2 -
- xen/arch/arm/vpl011.c                   |  1 +
- xen/arch/ppc/include/asm/setup.h        |  2 -
- xen/arch/riscv/include/asm/setup.h      |  2 -
- xen/arch/x86/include/asm/setup.h        |  2 -
- xen/arch/x86/pv/shim.c                  |  2 +
- xen/common/device-tree/dom0less-build.c |  2 -
- xen/common/domain.c                     | 35 +++++++++
- xen/drivers/char/console.c              | 96 +++++++++++--------------
- xen/include/xen/domain.h                |  1 +
- xen/include/xen/sched.h                 |  8 ++-
- 12 files changed, 88 insertions(+), 67 deletions(-)
-
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 66047bf33c..480fc664fc 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -713,6 +713,7 @@ int domain_vpl011_init(struct domain *d, struct vpl011_=
+init_info *info)
+     }
+     else
+     {
++        d->console.input_allowed =3D true;
+         vpl011->backend_in_domain =3D false;
+=20
+         vpl011->backend.xen =3D xzalloc(struct vpl011_xen_backend);
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index c506cc0bec..bc2a7dd5fa 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -238,6 +238,8 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgen=
+try_t *l4start,
+      * guest from depleting the shim memory pool.
+      */
+     d->max_pages =3D domain_tot_pages(d);
++
++    d->console.input_allowed =3D true;
+ }
+=20
+ static void write_start_info(struct domain *d)
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 129b4fcb37..d75ece1b61 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -835,6 +835,8 @@ struct domain *domain_create(domid_t domid,
+         flags |=3D CDF_hardware;
+         if ( old_hwdom )
+             old_hwdom->cdf &=3D ~CDF_hardware;
++
++        d->console.input_allowed =3D true;
+     }
+=20
+     /* Holding CDF_* internal flags. */
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 30701ae0b0..9a9836ba91 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -512,9 +512,21 @@ static unsigned int __read_mostly console_rx =3D 0;
+=20
+ struct domain *console_get_domain(void)
+ {
++    struct domain *d;
++
+     if ( console_rx =3D=3D 0 )
+             return NULL;
+-    return rcu_lock_domain_by_id(console_rx - 1);
++
++    d =3D rcu_lock_domain_by_id(console_rx - 1);
++    if ( !d )
++        return NULL;
++
++    if ( d->console.input_allowed )
++        return d;
++
++    rcu_unlock_domain(d);
++
++    return NULL;
+ }
+=20
+ void console_put_domain(struct domain *d)
+@@ -551,6 +563,10 @@ static void console_switch_input(void)
+         if ( d )
+         {
+             rcu_unlock_domain(d);
++
++            if ( !d->console.input_allowed )
++                continue;
++
+             console_rx =3D next_rx;
+             printk("*** Serial input to DOM%u", domid);
+             break;
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 559d201e0c..e91c99a8f3 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -512,7 +512,7 @@ struct domain
+     bool             auto_node_affinity;
+     /* Is this guest fully privileged (aka dom0)? */
+     bool             is_privileged;
+-    /* Can this guest access the Xen console? */
++    /* XSM: permission to use HYPERCALL_console_io hypercall */
+     bool             is_console;
+     /* Is this guest being debugged by dom0? */
+     bool             debugger_attached;
+@@ -651,6 +651,12 @@ struct domain
+     unsigned int num_llc_colors;
+     const unsigned int *llc_colors;
+ #endif
++
++    /* Console settings. */
++    struct {
++        /* Permission to take ownership of the physical console input. */
++        bool input_allowed;
++    } console;
+ } __aligned(PAGE_SIZE);
+=20
+ static inline struct page_list_head *page_to_list(
 --=20
 2.34.1
 
