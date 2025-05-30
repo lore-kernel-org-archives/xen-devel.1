@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F58C5B552
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 10:57:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000679.1380877 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D7EC5B549
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 12:03:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1000709.1380896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKxQR-00073i-5Q; Fri, 30 May 2025 10:57:23 +0000
+	id 1uKySE-0007Kj-5O; Fri, 30 May 2025 12:03:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000679.1380877; Fri, 30 May 2025 10:57:23 +0000
+Received: by outflank-mailman (output) from mailman id 1000709.1380896; Fri, 30 May 2025 12:03:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKxQR-00073b-18; Fri, 30 May 2025 10:57:23 +0000
-Received: by outflank-mailman (input) for mailman id 1000679;
- Fri, 30 May 2025 10:57:21 +0000
+	id 1uKySE-0007Kb-2k; Fri, 30 May 2025 12:03:18 +0000
+Received: by outflank-mailman (input) for mailman id 1000709;
+ Fri, 30 May 2025 12:03:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OJNC=YO=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uKxQP-00073V-Rd
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 10:57:21 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
+ <SRS0=U1Xx=YO=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1uKySC-00076q-SS
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 12:03:16 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20612.outbound.protection.outlook.com
+ [2a01:111:f403:2415::612])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dbbffcb7-3d44-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 12:57:20 +0200 (CEST)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a36e090102so1048657f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 03:57:20 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a4f009fb0bsm4413236f8f.87.2025.05.30.03.57.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 03:57:19 -0700 (PDT)
+ id 110c29ae-3d4e-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 14:03:16 +0200 (CEST)
+Received: from MW4P222CA0020.NAMP222.PROD.OUTLOOK.COM (2603:10b6:303:114::25)
+ by IA1PR12MB6284.namprd12.prod.outlook.com (2603:10b6:208:3e4::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.29; Fri, 30 May
+ 2025 12:03:12 +0000
+Received: from CH2PEPF00000143.namprd02.prod.outlook.com
+ (2603:10b6:303:114:cafe::22) by MW4P222CA0020.outlook.office365.com
+ (2603:10b6:303:114::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.19 via Frontend Transport; Fri,
+ 30 May 2025 12:03:12 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH2PEPF00000143.mail.protection.outlook.com (10.167.244.100) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8769.18 via Frontend Transport; Fri, 30 May 2025 12:03:11 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 30 May
+ 2025 07:03:08 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,66 +58,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbbffcb7-3d44-11f0-a2ff-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748602640; x=1749207440; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=gzN+d5AU9IFXMQNv/t5MKT0mQGD5TeEy64oR1pM3fgw=;
-        b=Cmo789i2WGZYzMuUIVzEwbsxKxXm76p3cNrlFlUi8Uc3SL8jNXEbjO04ldT5tDslnm
-         Y0WMvtq3BB73iLnUlKZ0lr166/ew+pGs0phesdUSLp0hFFpmSBvWbM4KLzLX+zqsR+wl
-         A4/NPb8zrd25jlPh7RQ4cLUbxU91JsgNdrMYU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748602640; x=1749207440;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gzN+d5AU9IFXMQNv/t5MKT0mQGD5TeEy64oR1pM3fgw=;
-        b=muP/bVrv9inPSElkk6fa0BBloBa5709z42LcEVghKxBQDDN+eCxZnSqEV6x9XjzuQR
-         s7FX/DfrcS5oeCxmy0039IrhUfEsHPpgAkERyzkR2m0l72+2WQufTGXB/CIoKirBxtQ8
-         Qc1Pa8FhaNoko0HnLRnA66i8ImLVnbQaulDngG0B4pxVwUBjdhCNwmdmloclh7SYygcE
-         VqIvYCwkxoi9dlqKkzKhGQ92h9+8fE/WiJAtTBVwpaSz3vNZLVliUclZANDIvd6Ue0lZ
-         kJblER3afNzuQxWIFlN64CMBG7Q+kELXnH+8cyqfs/bYirvnTbPYb8w28RJgnRa9zhEg
-         WKww==
-X-Gm-Message-State: AOJu0Yx/nIl+fV38h/kn0poO9tTCa3rde45+Dz0oJtcj0HQf+GEVjEGE
-	ZnOrt7/qDZDwPiOEiCjcNkzV8luLOcgQq/gGgXO6j480vbB+yZJmXkkQA5OcHDX8xAgMvqxlG33
-	vyumk
-X-Gm-Gg: ASbGncue2obuzasMAHxZbLOEkKtk1pw/v48JZ+ZCXhrfevadRVvRxF16Xt0WqWKyjFF
-	Sj49MkT2tCKFGM7KxQqjq24vTHv18dRAXCIVAiJ8bBZ5eYARdSf5mYFg+PlDNCNNLhlYJeiVBpD
-	+VzRcM9e60fxoYBYIXWxnHaiQc32v7uvyzqn0ejlHefeyrXKoIMrjBkjM+gJgBbSW1/LxmQ6kCe
-	Y9Gkvh4TRTxcI/9gs2ykZbQAxnO6jf2XlISaxgaEj0cbjrAfrzV7KsiQ0E0Mc2Vb4kZainroAD/
-	JazeDhtX0c5zw0seQW0+GVUoQIxTwUK6FDub48n10Ghv+Sl4Fv+m5bQ/eGmqaWiipEJz0+tUpdo
-	HXqJq32ycxyJy8AMze6e1mfgD
-X-Google-Smtp-Source: AGHT+IGqSNWBsnNZ3udp21KJx5cyEybnV4xZBXKiF2m72zkF9RHvPhyeEEjR36+d6qT8tXq4APJ7bw==
-X-Received: by 2002:a05:6000:2c12:b0:3a4:e4ee:4ca9 with SMTP id ffacd0b85a97d-3a4f7a1ccb3mr2244494f8f.23.1748602639725;
-        Fri, 30 May 2025 03:57:19 -0700 (PDT)
-Date: Fri, 30 May 2025 12:57:18 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH] tools/tests: Add install target for vPCI
-Message-ID: <aDmPDlE2ZWDYg2wm@macbook.local>
-References: <20250530104307.2550886-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 110c29ae-3d4e-11f0-a2ff-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GElndKOkiJUAUW/w1FNZ82qllyMNIKHwCZ2eAoLTdN9/qNzHTunAr8MpDFSEeaGW4wZ4JpZeISFTy0mA6LaHYbbXXUQoiiXSVjfoacPvLS5fC5h9c4WMn8Z6+UmFE/IsUilpMG9jt5uuswQsA7Uc6D/5XzVTwmizHaPCpt7/ocJBqgpM99XwWNy8tBkOC6AgB671qITGOURF0MLi7H1ItFfBgEOm4kBAhlQjCtdhCdlvmIHzLqYgOWBifeK1qP8OGxdN0qfG5qUwHlotnDpKmrroTp4cNBx/5zxQAq0uVUsxeKqTGsAA2ofzU9wvf8Accdn6IeRolvZpjC0836RwKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7W+IdG09q2V5cYYJHkwKMYlqTJGKHIna1geSKV6F7AA=;
+ b=GLS/xmZdvkTdoz+qKAUeT+Vf0kiFv7EmuMgXOO4LEngiJbyQDP9j1hYZrErCafuRv3b0VpgLwgoCNoSChoHjkdhvCuBoCbFrQkA4/IxcW5H2TReGHVLi88b5ZWBYKKNskd3KN2VlKw+pO6Hz+yu0ixqZC6dWYKuC6eBgWwNd9f2LpYDqzMJL7vHnXxdUKEooiAXx2aUJE2/kOA/+AP0NDODx1JGimPoMzcqFnDRudVlpmGCSGBPGIvYwvY96t6R1X2BKUOPoYaf+WMCOOSc4nnp08oNahc3QCupGkCbzw3rTTJf2Rxl7/1KZMSx7vrPJFxAEPSpSg/psecuDqbmHzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7W+IdG09q2V5cYYJHkwKMYlqTJGKHIna1geSKV6F7AA=;
+ b=e48aPTwUY+D4EjXB9BApGt6oqm47vsWjhydVbHcVcFxIALuNqhFjzaxsPS98yIIhyyYxR7Bt7llTtKah25y0EOiBQDdq+c0lIRIDarXx5YUT1Wjy/MZbn8hB/tOk48SOzOx3GtAef9ry4giI87ZAeEqjUsF6WLGWoeDNhpLZi+Y=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Alejandro Vallejo <agarciav@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <agarciav@amd.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Daniel P.
+ Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH 02/19] x86: Add missing pci_dev forward declaration in asm/pci.h
+Date: Fri, 30 May 2025 14:02:10 +0200
+Message-ID: <20250530120242.39398-3-agarciav@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250530120242.39398-1-agarciav@amd.com>
+References: <DA1WWRUQLCAG.ZTVR1HXJ85V0@amd.com>
+ <20250530120242.39398-1-agarciav@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250530104307.2550886-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000143:EE_|IA1PR12MB6284:EE_
+X-MS-Office365-Filtering-Correlation-Id: bed11e48-bb67-4927-65ab-08dd9f71f34e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?UKIMEIcjSWF/2ZKSXm0OXI7R9bWaB5oopy71E8ISHADMJmCf/5FEvCjyJBEA?=
+ =?us-ascii?Q?Ii011HVmJWZHKbSvZKGPF6e/fSomdvyYS8Ro4eeYyc3ImvAXUuAvKpgnrEIw?=
+ =?us-ascii?Q?N4OauvoFQbuatXpRpGdlJ0nnOtbC1CLlx7hwgsjoPFsHbT6nKQVtFKB9yQS5?=
+ =?us-ascii?Q?nY4DPh+Rht9b1VgNWJck9hLGNM2Aqdxt1VNcp+/4hE5GvpzRfB2jEZ3Ff7Of?=
+ =?us-ascii?Q?zy+MgzQyn4MT3szx1l/7KE9Cx6ugMZw8bwFoYijvCabo+bTKsJijEFZgk/jN?=
+ =?us-ascii?Q?vOjaFfM8YIgJWzmzSobFRSv6Sx3YRFyhvVKN4V1jmgAJMzVVDevq2GLazDui?=
+ =?us-ascii?Q?/+vOcHsB/0zPLIKmqqWbuqnpNS6H2QPEk85iN5Fkw2KAjbp8/GUo0q0AboTJ?=
+ =?us-ascii?Q?uR71DSx5AyvHvXGGYogKVFU0iCyS5sPmQWXytqmzoGzyX5KYzGnykGy+amTB?=
+ =?us-ascii?Q?vvGXA/47H9NARbzuSthiAmXiZ35Ub+TDBQOQIq/hOiPH0fxt5J2a2KgxY7qz?=
+ =?us-ascii?Q?89aRFl5IVY+EQtAqR0n6xNE81J500+K2fr33hbHeO+D2GNIUMaVbVfYDoNC/?=
+ =?us-ascii?Q?qRvW59v10ftqKBTUn2dILXuCH8deV5XStb6ovXRaJCXzXdKn0z6XO4w9d8wu?=
+ =?us-ascii?Q?NsMqquXzDUzA0sd2hf8Pb8KfhuxVR1gO2FNtFfKMXH24aKtCYomGig45K6ds?=
+ =?us-ascii?Q?lvF0moSOrOLURe5W6yCuwEonHBqqtiiFgS4VOA3W007h5V9SqfiYr6PEW59J?=
+ =?us-ascii?Q?xxecOCCOtP0Yah7BMdTA0X4AQRAavms77OwSz+lPFtnHbkEdIdf2JwUxx97f?=
+ =?us-ascii?Q?ZHS0+DcPtOSsjKbiEXOom6kXphbl7WqJBrc7zjwxGIOhA3I25+Ci5BHBo/JH?=
+ =?us-ascii?Q?bkqN2bf5a6OxjNSlZVbGkVVP8yJkpMzhBb7zPKud7MpsIfBBOop1OKxa/tk3?=
+ =?us-ascii?Q?IOCuzs3z/Y5s/LSPuVGNknw8vErH3L6Chw4oufe65dAwVrXitHagkYNhsAtl?=
+ =?us-ascii?Q?3gj94QzNHtkRHp/O44M5N/vZiiv4fhoFk48J/IU70S4+iTp/TxoHSPVmBFao?=
+ =?us-ascii?Q?mFqA8q0P0xNFE5L7L5GF41rTi4Sf54RFwBo7vJXZdcSVdm/pNarvm75AkcUA?=
+ =?us-ascii?Q?/bBsN/2+ECLb2FGcgOcAa247KiyginBDhU6XaxTtj7KMQqswDExbfg8A38Pr?=
+ =?us-ascii?Q?md4smBEh/Rqmwi48+iOTROrXwpjMqmXMj9bsm4iF0AIOslXLKzQGflN1RcUo?=
+ =?us-ascii?Q?IlYW6fZBMLmMUyxzJq1uan02CgImkzkcKltJHhDXygNFqwO7PJbSjMIgshM5?=
+ =?us-ascii?Q?lxWPfDc7KNNEs/0bfydVe/bs6xc4c6hyQfur3xD7Nyq8qA4Tl1o0hZT8B20G?=
+ =?us-ascii?Q?cJnw7cNOYvQSfkp8aZnmjsDkoKwpli93Tb129rCVSVQniGOxGfpDZ5AcLrtK?=
+ =?us-ascii?Q?WSwS/v+NKYfT4UiqKx+eXcr72fqlaKJYRGI27R0CpmdsRHiOIEkozJmhf5zr?=
+ =?us-ascii?Q?OowJcdYeuS+bPHN7AjNiL6fcmI6STeTWe2DI?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 May 2025 12:03:11.8064
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bed11e48-bb67-4927-65ab-08dd9f71f34e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH2PEPF00000143.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6284
 
-On Fri, May 30, 2025 at 11:43:07AM +0100, Andrew Cooper wrote:
-> This lets it run automagically in CI.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Not a functional change.
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
+---
+ xen/arch/x86/include/asm/pci.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-I had sent something similar long time ago:
+diff --git a/xen/arch/x86/include/asm/pci.h b/xen/arch/x86/include/asm/pci.h
+index bed99437cc..2e67cba8b9 100644
+--- a/xen/arch/x86/include/asm/pci.h
++++ b/xen/arch/x86/include/asm/pci.h
+@@ -13,6 +13,8 @@
+                         || (id) == 0x01128086 || (id) == 0x01228086 \
+                         || (id) == 0x010A8086 )
+ 
++struct pci_dev;
++
+ struct arch_pci_dev {
+     vmask_t used_vectors;
+     /*
+-- 
+2.43.0
 
-https://lore.kernel.org/xen-devel/20230313121226.86557-1-roger.pau@citrix.com/
-
-But got no reviews.
-
-Thanks, Roger.
 
