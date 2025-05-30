@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BFDC5B543
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:19:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000951.1381186 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41AAC5B549
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:19:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1000953.1381206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzdo-0003cu-BB; Fri, 30 May 2025 13:19:20 +0000
+	id 1uKzdq-00048k-Nm; Fri, 30 May 2025 13:19:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000951.1381186; Fri, 30 May 2025 13:19:20 +0000
+Received: by outflank-mailman (output) from mailman id 1000953.1381206; Fri, 30 May 2025 13:19:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzdo-0003cn-7d; Fri, 30 May 2025 13:19:20 +0000
-Received: by outflank-mailman (input) for mailman id 1000951;
- Fri, 30 May 2025 13:19:19 +0000
+	id 1uKzdq-00048X-Kk; Fri, 30 May 2025 13:19:22 +0000
+Received: by outflank-mailman (input) for mailman id 1000953;
+ Fri, 30 May 2025 13:19:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sDQw=YO=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uKzdn-0003ZU-26
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:19 +0000
-Received: from 10.mo582.mail-out.ovh.net (10.mo582.mail-out.ovh.net
- [87.98.157.236]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4170f4e-3d58-11f0-b894-0df219b8e170;
- Fri, 30 May 2025 15:18:56 +0200 (CEST)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.140.35])
- by mo582.mail-out.ovh.net (Postfix) with ESMTP id 4b83jD4Vjdz1SmT
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:18:56 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-9nq6m (unknown [10.108.42.28])
- by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 66338C0276;
- Fri, 30 May 2025 13:18:55 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.110])
- by ghost-submission-5b5ff79f4f-9nq6m with ESMTPSA
- id w09eBz+wOWgo8QAAj53byA
- (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:18:55 +0000
+ id 1uKzdp-0003ZU-28
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:21 +0000
+Received: from 11.mo581.mail-out.ovh.net (11.mo581.mail-out.ovh.net
+ [87.98.173.157]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aec1e352-3d58-11f0-b894-0df219b8e170;
+ Fri, 30 May 2025 15:19:14 +0200 (CEST)
+Received: from director8.ghost.mail-out.ovh.net (unknown [10.109.176.180])
+ by mo581.mail-out.ovh.net (Postfix) with ESMTP id 4b83jZ30WQz1Yxh
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:19:14 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-5d8n2 (unknown [10.111.174.164])
+ by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 39E9EC024C;
+ Fri, 30 May 2025 13:19:13 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.111])
+ by ghost-submission-5b5ff79f4f-5d8n2 with ESMTPSA
+ id pQ4+OFCwOWjaBgAA4lxFtg
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:19:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,299 +48,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4170f4e-3d58-11f0-b894-0df219b8e170
-Authentication-Results:garm.ovh; auth=pass (GARM-110S004e213af52-45b3-49a3-b1b6-7b97c322dceb,
+X-Inumbo-ID: aec1e352-3d58-11f0-b894-0df219b8e170
+Authentication-Results:garm.ovh; auth=pass (GARM-111S0054b49fc25-ab36-4bb2-9224-4168f55b003f,
                     A4E380CC922F0B59227EC5DCC46884561651840B) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.184.221
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v3 09/22] xen/lib: add implementation of SHA-1
-Date: Fri, 30 May 2025 16:17:51 +0300
-Message-ID: <a63da5121827a25189db4704326addd8dc10aad6.1748611041.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v3 15/22] x86/smpboot.c: TXT AP bringup
+Date: Fri, 30 May 2025 16:17:57 +0300
+Message-ID: <bca9943d4ffb37531ec8facac09e85996bc2acb7.1748611041.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12700150950728086684
+X-Ovh-Tracer-Id: 12705217499186640028
 X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -110
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenfghrlhcuvffnffculddquddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvedvgfeukeehhfevuddvheetudekkefggfeiveehvefhgfehgfffhffgvefhudejnecuffhomhgrihhnpehgihhthhhusgdrtghomhdpnhhishhtrdhgohhvnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekvdgmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=K3Dew7MrO0ilxuikP+BcmF7QZioZCbjXXYgwGcnqPdk=;
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgeeguedvvdettdetvedujeejiedtfefhteekgeegffffleefiedvffduledtiefhnecuffhomhgrihhnpehtrhgrmhhpohhlihhnvgdrshgsnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduuddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekudgmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=gr1rPrDMI12BQGKfWWI47H6s2RO9Y2JqlRCdgepLO2s=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1748611136; v=1;
- b=PdZw+hQFIYx7PC+k/ctBqeINiD2mnpzbA1VGm6XEnnkFD1DSWdx+OLK7cPak4cye9xCHjy6V
- +6XvolUAOl1tfjKtITbQ2b3cfdvd9AnrfqF33F9jLU0tIbi6h3Rk4GhgD6fm0fp7/JTyp+/2HfR
- PCRXJPFAda9x0wOGO9NbWogP6WhKUep0f6FClfzLLizSiE0ymMy61DOFpdQXsR/zN/K7sg2aJec
- o3ZKpREmvB51N3TfXQLA0AiF6LZWc4f2wCUYd6lFYGhABQQ9y3FwnlbL51oeIDHy9Rc43FMPc1n
- GAAvjH9rHZYB0o92fMSWA5duwB7oPMbDAckHVz/RXnZXg==
+ t=1748611154; v=1;
+ b=Vxf6RhrwCxqkvQJezXfDi2WLBdjKF6Twig33138h07zBOd5pvSHlqX3Fx6o+3aiUz3pe2lKs
+ hAzCw74Gd9pI83+NTYGfqnTHm4D4BymoNxlep9zsdNXq7p4E+Ju6eYBuJJqdZCtL3lgzpfaZF0g
+ 9hRMn9rlql/gx+HxQXyn3qzCIiIeNZC2BJ4tP2C6KT0m6BNWJvQ7hY/bkqgNDowuSTrx9A4mbfS
+ bZt8VHBB++H75Xttax3p+88L/IturEkeut4bwmm6vLOpgqK6PAvaa5z+t6lzo0ylnQxxvLi/npz
+ MREedbh55kw5YYFb/nFrPQAMfF2qT0439iIkrisfGBoRg==
 
 From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-The code comes from [1] and is licensed under GPL-2.0 license.
-The initial version was a combination of:
- - include/crypto/sha1.h
- - include/crypto/sha1_base.h
- - lib/crypto/sha1.c
- - crypto/sha1_generic.c
+On Intel TXT, APs are started in one of two ways, depending on ACM
+which reports it in its information table. In both cases, all APs are
+started simultaneously after BSP requests them to do so. Two possible
+ways are:
+- GETSEC[WAKEUP] instruction,
+- MONITOR address.
 
-Changes:
- - includes, formatting, naming
- - renames and splicing of some trivial functions that are called once
- - dropping of `int` return values (only zero was ever returned)
- - getting rid of references to `struct shash_desc`
- - getting rid of macros
- - getting rid of unnecessary function pointers
- - removing workaround for some old version of GCC
+GETSEC[WAKEUP] requires versions >= 7 of SINIT to MLE Data, but there is
+no clear mapping of that version with regard to processor family and
+it's not known which CPUs actually use it. It could have been designed
+for TXT support on CPUs that lack MONITOR/MWAIT, because GETSEC[WAKEUP]
+seems to be more complicated, in software and hardware alike.
 
-[1]: https://github.com/torvalds/linux/tree/afdab700f65e14070d8ab92175544b1c62b8bf03
+This patch implements only MONITOR approach, GETSEC[WAKEUP] support will
+be added later once more details and means of testing are available and
+if there is a practical need for it.
+
+With this patch, every AP goes through assembly part, and only when in
+start_secondary() in C they re-enter MONITOR/MWAIT iff they are not the
+AP that was asked to boot. The same address is reused for simplicity,
+and on next wakeup call APs don't have to go through assembly part
+again (GDT, paging, stack setting).
 
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/include/xen/sha1.h |  14 +++
- xen/lib/Makefile       |   1 +
- xen/lib/sha1.c         | 190 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 205 insertions(+)
- create mode 100644 xen/include/xen/sha1.h
- create mode 100644 xen/lib/sha1.c
+ xen/arch/x86/boot/trampoline.S       | 19 ++++++++-
+ xen/arch/x86/include/asm/intel-txt.h |  6 +++
+ xen/arch/x86/include/asm/processor.h |  1 +
+ xen/arch/x86/smpboot.c               | 63 ++++++++++++++++++++++++++++
+ 4 files changed, 88 insertions(+), 1 deletion(-)
 
-diff --git a/xen/include/xen/sha1.h b/xen/include/xen/sha1.h
-new file mode 100644
-index 0000000000..909ca25a50
---- /dev/null
-+++ b/xen/include/xen/sha1.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * SHA1: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-+ */
-+#ifndef XEN_SHA1_H
-+#define XEN_SHA1_H
+diff --git a/xen/arch/x86/boot/trampoline.S b/xen/arch/x86/boot/trampoline.S
+index ed593acc46..8cd9881828 100644
+--- a/xen/arch/x86/boot/trampoline.S
++++ b/xen/arch/x86/boot/trampoline.S
+@@ -58,6 +58,16 @@ GLOBAL(entry_SIPI16)
+         ljmpl   $BOOT_CS32,$bootsym_rel(trampoline_protmode_entry,6)
+ 
+         .code32
++GLOBAL(txt_ap_entry)
++        /*
++         * APs enter here in protected mode without paging. GDT is set in JOIN
++         * structure, it points to trampoline_gdt. Interrupts are disabled by
++         * TXT (including NMI and SMI), so IDT doesn't matter at this point.
++         * The only missing point is telling that we are AP by saving non-zero
++         * value in EBX.
++         */
++        mov     $1, %ebx
 +
-+#include <xen/types.h>
+ trampoline_protmode_entry:
+         /* Set up a few descriptors: on entry only CS is guaranteed good. */
+         mov     $BOOT_DS,%eax
+@@ -143,7 +153,7 @@ start64:
+         .word   0
+ idt_48: .word   0, 0, 0 # base = limit = 0
+ 
+-trampoline_gdt:
++GLOBAL(trampoline_gdt)
+         .word   0                  /* 0x0000: unused (reused for GDTR) */
+ gdt_48:
+         .word   .Ltrampoline_gdt_end - trampoline_gdt - 1
+@@ -154,6 +164,13 @@ gdt_48:
+         .quad   0x00cf93000000ffff /* 0x0018: ring 0 data */
+         .quad   0x00009b000000ffff /* 0x0020: real-mode code @ BOOT_TRAMPOLINE */
+         .quad   0x000093000000ffff /* 0x0028: real-mode data @ BOOT_TRAMPOLINE */
++        /*
++         * Intel TXT requires these two in exact order. This isn't compatible
++         * with order required by syscall, so we have duplicated entries...
++         * If order ever changes, update selector numbers in asm/intel-txt.h.
++         */
++        .quad   0x00cf9b000000ffff /* 0x0030: ring 0 code, 32-bit mode */
++        .quad   0x00cf93000000ffff /* 0x0038: ring 0 data */
+ .Ltrampoline_gdt_end:
+ 
+         /* Relocations for trampoline Real Mode segments. */
+diff --git a/xen/arch/x86/include/asm/intel-txt.h b/xen/arch/x86/include/asm/intel-txt.h
+index de7f23d4ff..c032ebb2e1 100644
+--- a/xen/arch/x86/include/asm/intel-txt.h
++++ b/xen/arch/x86/include/asm/intel-txt.h
+@@ -91,6 +91,9 @@
+ 
+ #define SLAUNCH_BOOTLOADER_MAGIC             0x4c534254
+ 
++#define TXT_AP_BOOT_CS                  0x0030
++#define TXT_AP_BOOT_DS                  0x0038
 +
-+#define SHA1_DIGEST_SIZE  20
+ #ifndef __ASSEMBLY__
+ 
+ #include <xen/slr-table.h>
+@@ -105,6 +108,9 @@
+ #define _txt(x) __va(x)
+ #endif
+ 
++extern char txt_ap_entry[];
++extern uint32_t trampoline_gdt[];
 +
-+void sha1_hash(uint8_t digest[SHA1_DIGEST_SIZE], const void *msg, size_t len);
+ /*
+  * Always use private space as some of registers are either read-only or not
+  * present in public space.
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index 96b9bf5f5e..20c85eb2f3 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -466,6 +466,7 @@ void set_in_pb_opt_ctrl(uint32_t mask, uint32_t val);
+ enum ap_boot_method {
+     AP_BOOT_NORMAL,
+     AP_BOOT_SKINIT,
++    AP_BOOT_TXT,
+ };
+ extern enum ap_boot_method ap_boot_method;
+ 
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index a90caf45a5..74a7cbe23b 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -29,6 +29,7 @@
+ #include <asm/flushtlb.h>
+ #include <asm/guest.h>
+ #include <asm/idt.h>
++#include <asm/intel-txt.h>
+ #include <asm/io_apic.h>
+ #include <asm/irq-vectors.h>
+ #include <asm/mc146818rtc.h>
+@@ -37,6 +38,7 @@
+ #include <asm/mtrr.h>
+ #include <asm/prot-key.h>
+ #include <asm/setup.h>
++#include <asm/slaunch.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
+ #include <asm/tboot.h>
+@@ -321,6 +323,29 @@ void asmlinkage start_secondary(void)
+     struct cpu_info *info = get_cpu_info();
+     unsigned int cpu = smp_processor_id();
+ 
++    if ( ap_boot_method == AP_BOOT_TXT ) {
++        uint64_t misc_enable;
++        uint32_t my_apicid;
++        struct txt_sinit_mle_data *sinit_mle =
++              txt_sinit_mle_data_start(__va(txt_read(TXTCR_HEAP_BASE)));
 +
-+#endif /* XEN_SHA1_H */
-diff --git a/xen/lib/Makefile b/xen/lib/Makefile
-index 5ccb1e5241..fd4b9ece63 100644
---- a/xen/lib/Makefile
-+++ b/xen/lib/Makefile
-@@ -17,6 +17,7 @@ lib-y += memset.o
- lib-y += muldiv64.o
- lib-y += parse-size.o
- lib-y += rbtree.o
-+lib-$(CONFIG_X86) += sha1.o
- lib-$(CONFIG_X86) += sha2-256.o
- lib-y += sort.o
- lib-y += strcasecmp.o
-diff --git a/xen/lib/sha1.c b/xen/lib/sha1.c
-new file mode 100644
-index 0000000000..c25f0b9309
---- /dev/null
-+++ b/xen/lib/sha1.c
-@@ -0,0 +1,190 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * SHA1 routine optimized to do word accesses rather than byte accesses,
-+ * and to avoid unnecessary copies into the context array.
-+ *
-+ * This was based on the git SHA1 implementation.
-+ */
++        /* TXT released us with MONITOR disabled in IA32_MISC_ENABLE. */
++        rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
++        wrmsrl(MSR_IA32_MISC_ENABLE,
++               misc_enable | MSR_IA32_MISC_ENABLE_MONITOR_ENABLE);
 +
-+#include <xen/bitops.h>
-+#include <xen/sha1.h>
-+#include <xen/string.h>
-+#include <xen/types.h>
-+#include <xen/unaligned.h>
++        /* get_apic_id() reads from x2APIC if it thinks it is enabled. */
++        x2apic_ap_setup();
++        my_apicid = get_apic_id();
 +
-+#define SHA1_BLOCK_SIZE         64
-+#define SHA1_WORKSPACE_WORDS    16
-+#define SHA1_WORKSPACE_MASK     (SHA1_WORKSPACE_WORDS - 1)
-+
-+struct sha1_state {
-+    uint64_t count;
-+    uint32_t state[SHA1_DIGEST_SIZE / 4];
-+    uint8_t buffer[SHA1_BLOCK_SIZE];
-+};
-+
-+/* This "rolls" over the 512-bit array named w */
-+#define W(i) w[(i) & SHA1_WORKSPACE_MASK]
-+
-+static uint32_t blend(const uint32_t w[SHA1_WORKSPACE_WORDS], size_t i)
-+{
-+    return rol32(W(i + 13) ^ W(i + 8) ^ W(i + 2) ^ W(i), 1);
-+}
-+
-+/**
-+ * sha1_transform - single block SHA1 transform
-+ *
-+ * @digest: 160 bit digest to update
-+ * @data:   512 bits of data to hash
-+ *
-+ * This function executes SHA-1's internal compression function.  It updates the
-+ * 160-bit internal state (@digest) with a single 512-bit data block (@data).
-+ */
-+static void sha1_transform(uint32_t *digest, const uint8_t *data)
-+{
-+    uint32_t a, b, c, d, e, t;
-+    uint32_t w[SHA1_WORKSPACE_WORDS];
-+    unsigned int i = 0;
-+
-+    a = digest[0];
-+    b = digest[1];
-+    c = digest[2];
-+    d = digest[3];
-+    e = digest[4];
-+
-+    /* Round 1 - iterations 0-16 take their input from 'data' */
-+    for ( ; i < 16; ++i )
-+    {
-+        t = get_unaligned_be32((uint32_t *)data + i);
-+        W(i) = t;
-+        e += t + rol32(a, 5) + (((c ^ d) & b) ^ d) + 0x5a827999U;
-+        b = ror32(b, 2);
-+        t = e; e = d; d = c; c = b; b = a; a = t;
-+    }
-+
-+    /* Round 1 - tail. Input from 512-bit mixing array */
-+    for ( ; i < 20; ++i )
-+    {
-+        t = blend(w, i);
-+        W(i) = t;
-+        e += t + rol32(a, 5) + (((c ^ d) & b) ^ d) + 0x5a827999U;
-+        b = ror32(b, 2);
-+        t = e; e = d; d = c; c = b; b = a; a = t;
-+    }
-+
-+    /* Round 2 */
-+    for ( ; i < 40; ++i )
-+    {
-+        t = blend(w, i);
-+        W(i) = t;
-+        e += t + rol32(a, 5) + (b ^ c ^ d) + 0x6ed9eba1U;
-+        b = ror32(b, 2);
-+        t = e; e = d; d = c; c = b; b = a; a = t;
-+    }
-+
-+    /* Round 3 */
-+    for ( ; i < 60; ++i )
-+    {
-+        t = blend(w, i);
-+        W(i) = t;
-+        e += t + rol32(a, 5) + ((b & c) + (d & (b ^ c))) + 0x8f1bbcdcU;
-+        b = ror32(b, 2);
-+        t = e; e = d; d = c; c = b; b = a; a = t;
-+    }
-+
-+    /* Round 4 */
-+    for ( ; i < 80; ++i )
-+    {
-+        t = blend(w, i);
-+        W(i) = t;
-+        e += t + rol32(a, 5) + (b ^ c ^ d) + 0xca62c1d6U;
-+        b = ror32(b, 2);
-+        t = e; e = d; d = c; c = b; b = a; a = t;
-+    }
-+
-+    digest[0] += a;
-+    digest[1] += b;
-+    digest[2] += c;
-+    digest[3] += d;
-+    digest[4] += e;
-+}
-+
-+static void sha1_init(struct sha1_state *sctx)
-+{
-+    sctx->state[0] = 0x67452301UL;
-+    sctx->state[1] = 0xefcdab89UL;
-+    sctx->state[2] = 0x98badcfeUL;
-+    sctx->state[3] = 0x10325476UL;
-+    sctx->state[4] = 0xc3d2e1f0UL;
-+    sctx->count = 0;
-+}
-+
-+static void sha1_update(struct sha1_state *sctx, const uint8_t *msg, size_t len)
-+{
-+    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
-+
-+    sctx->count += len;
-+
-+    if ( (partial + len) >= SHA1_BLOCK_SIZE )
-+    {
-+        if ( partial )
-+        {
-+            unsigned int rem = SHA1_BLOCK_SIZE - partial;
-+
-+            /* Fill the partial block. */
-+            memcpy(sctx->buffer + partial, msg, rem);
-+            msg += rem;
-+            len -= rem;
-+
-+            sha1_transform(sctx->state, sctx->buffer);
++        while ( my_apicid != x86_cpu_to_apicid[cpu] ) {
++            asm volatile ("monitor; xor %0,%0; mwait"
++                          :: "a"(__va(sinit_mle->rlp_wakeup_addr)), "c"(0),
++                          "d"(0) : "memory");
++            cpu = smp_processor_id();
 +        }
-+
-+        for ( ; len >= SHA1_BLOCK_SIZE; len -= SHA1_BLOCK_SIZE )
-+        {
-+            sha1_transform(sctx->state, msg);
-+            msg += SHA1_BLOCK_SIZE;
-+        }
-+        partial = 0;
 +    }
 +
-+    /* Remaining data becomes partial. */
-+    memcpy(sctx->buffer + partial, msg, len);
-+}
-+
-+static void sha1_final(struct sha1_state *sctx, uint8_t out[SHA1_DIGEST_SIZE])
+     /* Critical region without IDT or TSS.  Any fault is deadly! */
+ 
+     set_current(idle_vcpu[cpu]);
+@@ -418,6 +443,28 @@ void asmlinkage start_secondary(void)
+     startup_cpu_idle_loop();
+ }
+ 
++static int wake_aps_in_txt(void)
 +{
-+    const int bit_offset = SHA1_BLOCK_SIZE - sizeof(__be64);
-+    unsigned int partial = sctx->count % SHA1_BLOCK_SIZE;
++    struct txt_sinit_mle_data *sinit_mle =
++              txt_sinit_mle_data_start(__va(txt_read(TXTCR_HEAP_BASE)));
++    uint32_t *wakeup_addr = __va(sinit_mle->rlp_wakeup_addr);
 +
-+    __be32 *digest = (__be32 *)out;
-+    unsigned int i;
++    uint32_t join[4] = {
++        trampoline_gdt[1],               /* GDT limit */
++        bootsym_phys(trampoline_gdt),    /* GDT base */
++        TXT_AP_BOOT_CS,                  /* CS selector, DS = CS+8 */
++        bootsym_phys(txt_ap_entry)       /* EIP */
++    };
 +
-+    /* Start padding */
-+    sctx->buffer[partial++] = 0x80;
++    txt_write(TXTCR_MLE_JOIN, __pa(join));
 +
-+    if ( partial > bit_offset )
-+    {
-+        /* Need one extra block, so properly pad this one with zeroes */
-+        memset(sctx->buffer + partial, 0x0, SHA1_BLOCK_SIZE - partial);
-+        sha1_transform(sctx->state, sctx->buffer);
-+        partial = 0;
-+    }
-+    /* Pad up to the location of the bit count */
-+    memset(sctx->buffer + partial, 0x0, bit_offset - partial);
++    smp_mb();
 +
-+    /* Append the bit count */
-+    put_unaligned_be64(sctx->count << 3, &sctx->buffer[bit_offset]);
-+    sha1_transform(sctx->state, sctx->buffer);
++    *wakeup_addr = 1;
 +
-+    /* Store state in digest */
-+    for ( i = 0; i < SHA1_DIGEST_SIZE / sizeof(__be32); i++ )
-+        put_unaligned_be32(sctx->state[i], &digest[i]);
++    return 0;
 +}
 +
-+void sha1_hash(uint8_t digest[SHA1_DIGEST_SIZE], const void *msg, size_t len)
-+{
-+    struct sha1_state sctx;
+ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+ {
+     unsigned long send_status = 0, accept_status = 0;
+@@ -440,6 +487,9 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+     if ( tboot_in_measured_env() && !tboot_wake_ap(phys_apicid, start_eip) )
+         return 0;
+ 
++    if ( ap_boot_method == AP_BOOT_TXT )
++        return wake_aps_in_txt();
 +
-+    sha1_init(&sctx);
-+    sha1_update(&sctx, msg, len);
-+    sha1_final(&sctx, digest);
-+}
+     /*
+      * Be paranoid about clearing APIC errors.
+      */
+@@ -1147,6 +1197,13 @@ static struct notifier_block cpu_smpboot_nfb = {
+ 
+ void __init smp_prepare_cpus(void)
+ {
++    /*
++     * If the platform is performing a Secure Launch via TXT, secondary
++     * CPUs (APs) will need to be woken up in a TXT-specific way.
++     */
++    if ( slaunch_active && boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
++        ap_boot_method = AP_BOOT_TXT;
++
+     register_cpu_notifier(&cpu_smpboot_nfb);
+ 
+     mtrr_aps_sync_begin();
+@@ -1424,6 +1481,12 @@ void __init smp_cpus_done(void)
+ 
+     mtrr_save_state();
+     mtrr_aps_sync_end();
++
++    /*
++     * After the initial startup the DRTM-specific method for booting APs
++     * should not longer be used unless DRTM sequence is started again.
++     */
++    ap_boot_method = AP_BOOT_NORMAL;
+ }
+ 
+ void __init smp_intr_init(void)
 -- 
 2.49.0
 
