@@ -4,29 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C98C5AD49
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 23:29:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001639.1381762 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81861C5AD49
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 23:55:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001650.1381772 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL9A1-00006c-7U; Fri, 30 May 2025 23:29:13 +0000
+	id 1uL9Z7-0003qt-UJ; Fri, 30 May 2025 23:55:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001639.1381762; Fri, 30 May 2025 23:29:13 +0000
+Received: by outflank-mailman (output) from mailman id 1001650.1381772; Fri, 30 May 2025 23:55:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL9A1-00006V-4m; Fri, 30 May 2025 23:29:13 +0000
-Received: by outflank-mailman (input) for mailman id 1001639;
- Fri, 30 May 2025 23:29:12 +0000
+	id 1uL9Z7-0003qm-QZ; Fri, 30 May 2025 23:55:09 +0000
+Received: by outflank-mailman (input) for mailman id 1001650;
+ Fri, 30 May 2025 23:55:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AEV3=YO=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uL9A0-00006P-Bw
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 23:29:12 +0000
-Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
- [79.135.106.31]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e347000f-3dad-11f0-b894-0df219b8e170;
- Sat, 31 May 2025 01:29:10 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2Ydo=YO=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1uL9Z7-0003qg-2F
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 23:55:09 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20605.outbound.protection.outlook.com
+ [2a01:111:f403:2409::605])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 81155297-3db1-11f0-b894-0df219b8e170;
+ Sat, 31 May 2025 01:55:03 +0200 (CEST)
+Received: from CH0PR03CA0328.namprd03.prod.outlook.com (2603:10b6:610:118::14)
+ by SJ0PR12MB7473.namprd12.prod.outlook.com (2603:10b6:a03:48d::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.30; Fri, 30 May
+ 2025 23:54:58 +0000
+Received: from DS3PEPF000099D6.namprd04.prod.outlook.com
+ (2603:10b6:610:118:cafe::e5) by CH0PR03CA0328.outlook.office365.com
+ (2603:10b6:610:118::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.24 via Frontend Transport; Fri,
+ 30 May 2025 23:54:58 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS3PEPF000099D6.mail.protection.outlook.com (10.167.17.7) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8792.29 via Frontend Transport; Fri, 30 May 2025 23:54:57 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 30 May
+ 2025 18:54:56 -0500
+Received: from [172.31.32.79] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Fri, 30 May 2025 18:54:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,386 +61,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e347000f-3dad-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1748647749; x=1748906949;
-	bh=FtPy38Dsm8VtkwD9F5AO0fkUKU8XO7MM0Yq6kWapgko=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=RaOhDx0oEvgCC8N+YJGDLdsYsmEJUIORIc+FdKA/tg9eww+kXjb75FJN29IIWqQCz
-	 oavLwe//hP6matdqEq6J5lqzxvLbzPySp+O0IRbDMTTNRYjGI7A2xS7sikoOizkSuN
-	 rdqYXLwzR2OY5YjliqBFltshb8weh+71XeearcDMos17c1fQLit8PQg+N9pEptzKqN
-	 FGfubs6y5g/8zfGQIYwgWhxU2sJUVSRlFb+fzw5mb2d8eRimfjiv4RWS4/7XqOppwj
-	 xLMUUE53xIQaqo5XcUuTFzhDMF3crkFTiElzCLcIRDh2gX3T5l0Z+5t6d9vU0BtbDh
-	 M75qnZyE/KoVw==
-Date: Fri, 30 May 2025 23:29:04 +0000
-To: Stefano Stabellini <sstabellini@kernel.org>
-From: dmkhn@proton.me
-Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, dmukhin@ford.com
-Subject: Re: [PATCH v4 3/4] xen/console: remove max_init_domid dependency
-Message-ID: <aDo/PByKTS2WLH1W@kraken>
-In-Reply-To: <alpine.DEB.2.22.394.2505291755080.135336@ubuntu-linux-20-04-desktop>
-References: <20250529000848.2675903-1-dmukhin@ford.com> <20250529000848.2675903-4-dmukhin@ford.com> <alpine.DEB.2.22.394.2505291755080.135336@ubuntu-linux-20-04-desktop>
-Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: b3c5669ff0dc80339fef03393ae1683e3d26ddaa
+X-Inumbo-ID: 81155297-3db1-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QlaO9sTsf3Qn595OA0MG9ZGbRg/3D8IuXDZ0Z5hsQlCyTOEeP2CmzMfpSgKB+E8V+kZiY8W7ULwvAsHVZ0EskMJBhmtsZUzWMRNoHNxsWIyC756Y4r7mIJD17Vx2gAAd6Jh1sTA4FYNWjbWOR1mtxhDnKsUp/ryPVMgayQP5So6SV4637CKDcSCeKtuVmuiWGlTT6Y3OsIV9jCuqJyWU3PEy8GvtWRsDUB318f9ZXDwm0sIbdn56tn2QtbWuPs6fIYudvNY5SJI1PyPs4m82kHvcyyaIG7AchkxtoKcB8RLUagfcqAdFtvYJ8mODl413nUIj5jiktp0cQF7KFx5fCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=omHrdZsHmHfJKXsA9dMmnFTx4IsI+IuuaZBByPFTnFE=;
+ b=KWmvzsb+Gmc07utLoBpsVk/MVlwihvhEnNP2lFgLdCLXuZmJAXavc0rpP2x5tfKg2/LjPJeDA/A2J+D8sJDU/GK2uZ9q0kOz95Nm0GF5MgrBytM/qcPf27XGpu+nDu2ncD+5+AJGa1iVzo4Whw8MsERKorWAfZ59btjXN++6u2BTl7Xu/rKUyj9Pw2/hCc+F8Cnr526KZM+ANnB1hVtj3q0DtSumZMVTwz1PxdJDd7KPUuFUA864gqcqIG0BWniHu3GI/oUf03h1ECPqE1QtFRr2udBlh/3CwvS5yH6EOIsRvQZZ6N/GIX7ESu1PS+mPljYIxa5F320LNo95Y7yebA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=omHrdZsHmHfJKXsA9dMmnFTx4IsI+IuuaZBByPFTnFE=;
+ b=wCzwK3hJjfsSn2pOlGHvCGbMQ47DGUEITNlSQHh7pXJktfEUBa5FgFAV2qUASxL2VFOoeCvwlohABrdi/K+NW3w19aQ9L+VJc1qr5leqbYWlBtspDPWdm2/ge0BrRRlZuYCDKi8lhNjzmWtVcKC7O4ZDhzuoBy0DWttP5Ha+Juk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <9b5a1599-d8dc-423d-b144-90bfe33cdae9@amd.com>
+Date: Fri, 30 May 2025 17:04:07 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/19] x86: Add missing pci_dev forward declaration in
+ asm/pci.h
+To: Alejandro Vallejo <agarciav@amd.com>, <xen-devel@lists.xenproject.org>
+CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
+References: <DA1WWRUQLCAG.ZTVR1HXJ85V0@amd.com>
+ <20250530120242.39398-1-agarciav@amd.com>
+ <20250530120242.39398-3-agarciav@amd.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20250530120242.39398-3-agarciav@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D6:EE_|SJ0PR12MB7473:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c68f052-75f8-4dac-451a-08dd9fd561e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?R1F1TTFpR1NtTEVTWVhXaGdjaFJydlcybnBsMVhySUZKQWIrZzBkUEhIajRC?=
+ =?utf-8?B?K0RlZmUwSEUzbEUwekpPYW9XMWcvYjhrcWVRVkFReDRNM0JocnF0K1RTSFR4?=
+ =?utf-8?B?RE5obkRzRzJDa1BxY1p2MTJiMEJxWGs0S2pWRUxGWUlXeDlnOHhIRzVPanY5?=
+ =?utf-8?B?bHJxUGdPTnMwSEZ1SlZNbHdxYWF3bG9nOUcvQTFuendDSVpBZFhmRTJsK0pW?=
+ =?utf-8?B?WHpVdzNQUHlsdkZmSnNkeXZuVnB1b0d3QTdSTGY4TVhLcGtnMDdRYzBXZmhU?=
+ =?utf-8?B?SEtZSVZ5OEN5SjlRTnE2WGRzQ0tRWnhFZkt0b3BIUFRMY2VISWN1cS9TV212?=
+ =?utf-8?B?bzNTWWlhbFA1RzlJamwzYndxL21KL000dWhyOTVsNlIyc3hGU056OHJVaDNs?=
+ =?utf-8?B?TnNNUU80aHpmdFRxaEhJbFdwM1Fia3lpUUN4b1UwaHdMaS9IczlmWHRkUGl2?=
+ =?utf-8?B?WTlhUVpXN1RZdTJOSTc0cVFnMVJOa2QvUjNqQllVR1g4SEVMUy8rWHJzWjds?=
+ =?utf-8?B?aDRMbzlYMzB4YzB0a3J3Z3VjZUxZdTVwMnducmJrdWxQaUpkODhwR2ROVzBY?=
+ =?utf-8?B?c2kwNTFWL0s2a0d5VzdPb3hGSE5KUW1qa3NMKzBmYkNFcDJOUy9SNE9VYktn?=
+ =?utf-8?B?ckUwZG5VQTV1Wi8rb2hSaFloKzJkcWJQYnJtWjVBUmwvZWhuRnJWank1UWFh?=
+ =?utf-8?B?dmdqd3l5UUg4Q3lZamRrdzFMdkJzcEFaR0dNTUNNSlVPOERsUzQ0ejlWZTYr?=
+ =?utf-8?B?c1pPd3U3dG5pd0hGcW5QTjZXZWdJaTloUlFEbUJxU2xmRTN0YWRqclhDY3BL?=
+ =?utf-8?B?QksvbjZzczJ1VHRmTnlvZVplVjhQTDhIZDZHTXZCSE0yeG10N2RzNE9ldjNs?=
+ =?utf-8?B?ZmczOHRzZFIwdVlIMWM5ekJzYmVVMDZUYzk3V29PNjhiV0dDOXFlQWViRDE2?=
+ =?utf-8?B?Z3NvUC9NSHJjc1RHejcwWlVPNHIyTXMydFRiSXp3YXA5YVg0NU5MQXlxdXJt?=
+ =?utf-8?B?UHNVRndFREFQRnVVM25ua2MzYXZVSFdUdm5qTmkrQlRvclZwVkpyNDRjandF?=
+ =?utf-8?B?cGxkVytzLy9yWXl5ajNUNXJLa2Y1WDYwWkxHdW9VekpYTHhwSVU4YWVZN1px?=
+ =?utf-8?B?N1FMdURVajE2SGNiS3ZvYTFqVVNrSGIxMi85aTJiQlhPek02aW9KVjFsWVpG?=
+ =?utf-8?B?QmZaZE1ZTFdRRkpQUE56YWViMTZZd3FEVGtXMEtleXM0ZTQ3RHlRVDhRaTdX?=
+ =?utf-8?B?UlZwaU93UVkzQzdmdHJuSFA1aHRRdDdKclVRemFSeGt0WTJEUG9JdzBUS3V1?=
+ =?utf-8?B?anZTNHVaYVNqYVdsNWlkRVpDZHZ3c1AwOXhVTWtkWi9QMmxkaWxGUnVON05H?=
+ =?utf-8?B?Z0NKY0g1bHJYOU5aRmxQdGtpTU9BTi8rMVhTUkNNM1RzdHN0eUU2M0dQTG96?=
+ =?utf-8?B?cGE5SVNKTEZlcktidlBJa1lIN2hucEpvcCsvQXBWQnROeGNKbldXTVkxWm4x?=
+ =?utf-8?B?cE5zamRXeU8yTXJST3R2WEJMSzRHRlFQU0lyb2xpNlc0TmNwOGdaby91SFFZ?=
+ =?utf-8?B?VHJxMW5WY3d0dEVhZThPYmxzNGFNN3ZwTXA0L0JXOW1vTVhIWit4S2tPNFRx?=
+ =?utf-8?B?ZkVCRkdnL2tHbVpoKzJJZm8waUhaQTgvcW05dG1zS1pSZytOYVVOS2FWSVlZ?=
+ =?utf-8?B?eVJHMWRIcys3YVlpTGVDc1ZXaFdQRkxPRjdRd0FiRGlCSzM5ZXRrR3BZdDMr?=
+ =?utf-8?B?a2ltaTVITE9JUGU0WmRabndQcm12bWl2cExnOVNQaW00dkNaS2VSWlBBWXNx?=
+ =?utf-8?B?dTdlcldZYkRmZW1qYnRYMDcyRWhMdXBDYVluczlOdU9NTnR5VXRERHVoSk9J?=
+ =?utf-8?B?c2YwcS9iL2UxUUNhcWRIMFVhcWZydXBDZmo4NWRXNHBxcFJjSjlDcExxbC9S?=
+ =?utf-8?B?RHJJOFpsM2FsSXl4OUI1eTZWUUwvRjB3QTUxdlNyWFoxZmh4dmQzNFhGU20r?=
+ =?utf-8?B?cGFzeWRGdjVNZ0l2RGtFdWwvMTNUdEJRMU92WGRteEtDenltTEJLSHllVjVn?=
+ =?utf-8?Q?UbbamL?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 May 2025 23:54:57.5141
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c68f052-75f8-4dac-451a-08dd9fd561e9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS3PEPF000099D6.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7473
 
-On Thu, May 29, 2025 at 05:58:20PM -0700, Stefano Stabellini wrote:
-> On Thu, 29 May 2025, dmkhn@proton.me wrote:
-> > From: Denis Mukhin <dmkhn@proton.me>
-> >
-> > From: Denis Mukhin <dmukhin@ford.com>
-> >
-> > The physical console input rotation depends on max_init_domid symbol, w=
-hich is
-> > managed differently across architectures.
-> >
-> > Instead of trying to manage max_init_domid in the arch-common code the =
-console
-> > input rotation code can be reworked by removing dependency on max_init_=
-domid
-> > entirely.
-> >
-> > To do that, introduce domid_find_with_input_allowed() in arch-independe=
-nt
-> > location to find the ID of the next possible console owner domain. The =
-IDs
-> > are rotated across non-system domain IDs and DOMID_XEN.
-> >
-> > Also, introduce helper console_set_domid() for updating identifier of t=
-he
-> > current console input owner (points to Xen or domain).
-> >
-> > Use domid_find_with_input_allowed() and console_set_domid() in
-> > console_switch_input().
-> >
-> > Remove uses of max_init_domid in the code.
-> >
-> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> > ---
-> > Changes since v3:
-> > - switched to RCU lock in domid_find_with_input_allowed()
-> > ---
-> >  xen/arch/arm/include/asm/setup.h        |  2 -
-> >  xen/arch/arm/setup.c                    |  2 -
-> >  xen/arch/ppc/include/asm/setup.h        |  2 -
-> >  xen/arch/riscv/include/asm/setup.h      |  2 -
-> >  xen/arch/x86/include/asm/setup.h        |  2 -
-> >  xen/common/device-tree/dom0less-build.c |  2 -
-> >  xen/common/domain.c                     | 29 ++++++++
-> >  xen/drivers/char/console.c              | 90 +++++++++----------------
-> >  xen/include/xen/domain.h                |  1 +
-> >  9 files changed, 61 insertions(+), 71 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/as=
-m/setup.h
-> > index 6cf272c160..f107e8eebb 100644
-> > --- a/xen/arch/arm/include/asm/setup.h
-> > +++ b/xen/arch/arm/include/asm/setup.h
-> > @@ -25,8 +25,6 @@ struct map_range_data
-> >      struct rangeset *irq_ranges;
-> >  };
-> >
-> > -extern domid_t max_init_domid;
-> > -
-> >  void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-> >
-> >  size_t estimate_efi_size(unsigned int mem_nr_banks);
-> > diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> > index 10b46d0684..53e2f8b537 100644
-> > --- a/xen/arch/arm/setup.c
-> > +++ b/xen/arch/arm/setup.c
-> > @@ -61,8 +61,6 @@ struct cpuinfo_arm __read_mostly system_cpuinfo;
-> >  bool __read_mostly acpi_disabled;
-> >  #endif
-> >
-> > -domid_t __read_mostly max_init_domid;
-> > -
-> >  static __used void init_done(void)
-> >  {
-> >      int rc;
-> > diff --git a/xen/arch/ppc/include/asm/setup.h b/xen/arch/ppc/include/as=
-m/setup.h
-> > index e4f64879b6..956fa6985a 100644
-> > --- a/xen/arch/ppc/include/asm/setup.h
-> > +++ b/xen/arch/ppc/include/asm/setup.h
-> > @@ -1,6 +1,4 @@
-> >  #ifndef __ASM_PPC_SETUP_H__
-> >  #define __ASM_PPC_SETUP_H__
-> >
-> > -#define max_init_domid (0)
-> > -
-> >  #endif /* __ASM_PPC_SETUP_H__ */
-> > diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/includ=
-e/asm/setup.h
-> > index c9d69cdf51..d1fc64b673 100644
-> > --- a/xen/arch/riscv/include/asm/setup.h
-> > +++ b/xen/arch/riscv/include/asm/setup.h
-> > @@ -5,8 +5,6 @@
-> >
-> >  #include <xen/types.h>
-> >
-> > -#define max_init_domid (0)
-> > -
-> >  void setup_mm(void);
-> >
-> >  void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
-> > diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/as=
-m/setup.h
-> > index ac34c69855..b67de8577f 100644
-> > --- a/xen/arch/x86/include/asm/setup.h
-> > +++ b/xen/arch/x86/include/asm/setup.h
-> > @@ -69,6 +69,4 @@ extern bool opt_dom0_verbose;
-> >  extern bool opt_dom0_cpuid_faulting;
-> >  extern bool opt_dom0_msr_relaxed;
-> >
-> > -#define max_init_domid (0)
-> > -
-> >  #endif
-> > diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/devic=
-e-tree/dom0less-build.c
-> > index 9a6015f4ce..703f20faed 100644
-> > --- a/xen/common/device-tree/dom0less-build.c
-> > +++ b/xen/common/device-tree/dom0less-build.c
-> > @@ -977,8 +977,6 @@ void __init create_domUs(void)
-> >          domid =3D domid_alloc(DOMID_INVALID);
-> >          if ( domid =3D=3D DOMID_INVALID )
-> >              panic("Error allocating ID for domain %s\n", dt_node_name(=
-node));
-> > -        if ( max_init_domid < domid )
-> > -            max_init_domid =3D domid;
-> >
-> >          d =3D domain_create(domid, &d_cfg, flags);
-> >          if ( IS_ERR(d) )
-> > diff --git a/xen/common/domain.c b/xen/common/domain.c
-> > index 9bc66d80c4..704e0907e9 100644
-> > --- a/xen/common/domain.c
-> > +++ b/xen/common/domain.c
-> > @@ -2463,6 +2463,35 @@ void domid_free(domid_t domid)
-> >      spin_unlock(&domid_lock);
-> >  }
-> >
-> > +/*
-> > + * Find the ID of the next possible console owner domain.
-> > + *
-> > + * @return Domain ID: DOMID_XEN or non-system domain IDs within
-> > + * the range of [0..DOMID_FIRST_RESERVED-1].
-> > + */
-> > +domid_t domid_find_with_input_allowed(domid_t hint)
-> > +{
-> > +    const struct domain *d;
-> > +    domid_t domid =3D DOMID_XEN;
-> > +
-> > +    rcu_read_lock(&domlist_read_lock);
-> > +
-> > +    for ( d =3D rcu_dereference(domain_list);
-> > +          d && d->domain_id < DOMID_FIRST_RESERVED;
-> > +          d =3D rcu_dereference(d->next_in_list) )
-> > +    {
-> > +        if ( d->console.input_allowed )
-> > +        {
-> > +            domid =3D d->domain_id;
-> > +            break;
-> > +        }
-> > +    }
-> > +
-> > +    rcu_read_unlock(&domlist_read_lock);
->=20
-> Doesn't this always return the first domid with input_allowed given that
-> hint is not used? It looks like it wouldn't work right...
->=20
->=20
-> > +    return domid;
-> > +}
-> > +
-> >  /*
-> >   * Local variables:
-> >   * mode: C
-> > diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-> > index 8a0bcff78f..37289d5558 100644
-> > --- a/xen/drivers/char/console.c
-> > +++ b/xen/drivers/char/console.c
-> > @@ -498,26 +498,17 @@ static void cf_check conring_dump_keyhandler(unsi=
-gned char key)
-> >
-> >  /*
-> >   * CTRL-<switch_char> changes input direction, rotating among Xen, Dom=
-0,
-> > - * and the DomUs started from Xen at boot.
-> > + * and the DomUs.
-> >   */
-> >  #define switch_code (opt_conswitch[0]-'a'+1)
-> > -/*
-> > - * console_rx=3D0 =3D> input to xen
-> > - * console_rx=3D1 =3D> input to dom0 (or the sole shim domain)
-> > - * console_rx=3DN =3D> input to dom(N-1)
-> > - */
-> > -static unsigned int __read_mostly console_rx =3D 0;
-> >
-> > -#define max_console_rx (max_init_domid + 1)
-> > +/* Console owner domain identifier. */
-> > +static domid_t __read_mostly console_rx =3D DOMID_XEN;
-> >
-> >  struct domain *console_get_domain(void)
-> >  {
-> > -    struct domain *d;
-> > +    struct domain *d =3D rcu_lock_domain_by_id(console_rx);
-> >
-> > -    if ( console_rx =3D=3D 0 )
-> > -            return NULL;
-> > -
-> > -    d =3D rcu_lock_domain_by_id(console_rx - 1);
-> >      if ( !d )
-> >          return NULL;
-> >
-> > @@ -535,43 +526,14 @@ void console_put_domain(struct domain *d)
-> >          rcu_unlock_domain(d);
-> >  }
-> >
-> > -static void console_switch_input(void)
-> > +static void console_set_domid(domid_t domid)
-> >  {
-> > -    unsigned int next_rx =3D console_rx;
-> > +    if ( domid =3D=3D DOMID_XEN )
-> > +        printk("*** Serial input to Xen");
-> > +    else
-> > +        printk("*** Serial input to DOM%u", domid);
-> >
-> > -    /*
-> > -     * Rotate among Xen, dom0 and boot-time created domUs while skippi=
-ng
-> > -     * switching serial input to non existing domains.
-> > -     */
-> > -    for ( ; ; )
-> > -    {
-> > -        domid_t domid;
-> > -        struct domain *d;
-> > -
-> > -        if ( next_rx++ >=3D max_console_rx )
-> > -        {
-> > -            console_rx =3D 0;
-> > -            printk("*** Serial input to Xen");
-> > -            break;
-> > -        }
-> > -
-> > -        if ( consoled_is_enabled() && next_rx =3D=3D 1 )
-> > -            domid =3D get_initial_domain_id();
-> > -        else
-> > -            domid =3D next_rx - 1;
-> > -        d =3D rcu_lock_domain_by_id(domid);
-> > -        if ( d )
-> > -        {
-> > -            rcu_unlock_domain(d);
-> > -
-> > -            if ( !d->console.input_allowed )
-> > -                break;
-> > -
-> > -            console_rx =3D next_rx;
-> > -            printk("*** Serial input to DOM%u", domid);
-> > -            break;
-> > -        }
-> > -    }
-> > +    console_rx =3D domid;
-> >
-> >      if ( switch_code )
-> >          printk(" (type 'CTRL-%c' three times to switch input)",
-> > @@ -579,12 +541,30 @@ static void console_switch_input(void)
-> >      printk("\n");
-> >  }
-> >
-> > +/*
-> > + * Switch console focus.
-> > + * Rotates input focus among Xen and domains with console input permis=
-sion.
-> > + */
-> > +static void console_switch_input(void)
-> > +{
-> > +    domid_t hint;
-> > +
-> > +    if ( console_rx =3D=3D DOMID_XEN )
-> > +        hint =3D get_initial_domain_id();
-> > +    else
-> > +        hint =3D console_rx + 1;
-> > +
-> > +    hint =3D domid_find_with_input_allowed(hint);
-> > +
-> > +    console_set_domid(hint);
-> > +}
-> > +
-> >  static void __serial_rx(char c)
-> >  {
-> >      struct domain *d;
-> >      int rc =3D 0;
-> >
-> > -    if ( console_rx =3D=3D 0 )
-> > +    if ( console_rx =3D=3D DOMID_XEN )
-> >          return handle_keypress(c, false);
-> >
-> >      d =3D console_get_domain();
-> > @@ -1169,14 +1149,6 @@ void __init console_endboot(void)
-> >
-> >      video_endboot();
-> >
-> > -    /*
-> > -     * If user specifies so, we fool the switch routine to redirect in=
-put
-> > -     * straight back to Xen. I use this convoluted method so we still =
-print
-> > -     * a useful 'how to switch' message.
-> > -     */
-> > -    if ( opt_conswitch[1] =3D=3D 'x' )
-> > -        console_rx =3D max_console_rx;
-> > -
-> >      register_keyhandler('w', conring_dump_keyhandler,
-> >                          "synchronously dump console ring buffer (dmesg=
-)", 0);
-> >      register_irq_keyhandler('+', &do_inc_thresh,
-> > @@ -1186,8 +1158,8 @@ void __init console_endboot(void)
-> >      register_irq_keyhandler('G', &do_toggle_guest,
-> >                              "toggle host/guest log level adjustment", =
-0);
-> >
-> > -    /* Serial input is directed to DOM0 by default. */
-> > -    console_switch_input();
-> > +    if ( opt_conswitch[1] !=3D 'x' )
-> > +        (void)console_set_domid(get_initial_domain_id());
->=20
-> We should use domid_find_with_input_allowed instead of assuming
-> get_initial_domain_id() has input_allowed?
+On 2025-05-30 08:02, Alejandro Vallejo wrote:
+> Not a functional change.
+> 
+> Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
 
-AFAIU, get_initial_domain_id() is not necessarily created by the time this =
-code
-is reached. In this case, relying on domid_find_with_input_allowed() will k=
-eep
-console focus in Xen, which will be a behavior change.
+Some sort of reason would be good in the commit message.
 
-I kept this hunk as is in v5.
+"struct pci_dev is used in function prototypes within the header.  This 
+is in preparation for including (transitively) in device tree"?
 
->=20
->=20
->=20
-> >  }
-> >
-> >  int __init console_has(const char *device)
-> > diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-> > index 8aab05ae93..a88eb34f3f 100644
-> > --- a/xen/include/xen/domain.h
-> > +++ b/xen/include/xen/domain.h
-> > @@ -36,6 +36,7 @@ void getdomaininfo(struct domain *d, struct xen_domct=
-l_getdomaininfo *info);
-> >  void arch_get_domain_info(const struct domain *d,
-> >                            struct xen_domctl_getdomaininfo *info);
-> >
-> > +domid_t domid_find_with_input_allowed(domid_t hint);
-> >  domid_t get_initial_domain_id(void);
-> >
-> >  domid_t domid_alloc(domid_t domid);
-> > --
-> > 2.34.1
-> >
-> >
+... I'm guessing that is why.  Stating  it would be better.
 
+With a suitable reason:
+
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+
+Regards,
+Jason
 
