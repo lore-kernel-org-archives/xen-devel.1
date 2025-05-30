@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E30C5B549
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:21:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1000995.1381266 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BED3C5B549
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 13:21:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001009.1381277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzfb-0000Ww-KT; Fri, 30 May 2025 13:21:11 +0000
+	id 1uKzfz-0001TN-Tt; Fri, 30 May 2025 13:21:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1000995.1381266; Fri, 30 May 2025 13:21:11 +0000
+Received: by outflank-mailman (output) from mailman id 1001009.1381277; Fri, 30 May 2025 13:21:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uKzfb-0000Wn-HB; Fri, 30 May 2025 13:21:11 +0000
-Received: by outflank-mailman (input) for mailman id 1000995;
- Fri, 30 May 2025 13:21:10 +0000
+	id 1uKzfz-0001TG-Ph; Fri, 30 May 2025 13:21:35 +0000
+Received: by outflank-mailman (input) for mailman id 1001009;
+ Fri, 30 May 2025 13:21:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sDQw=YO=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1uKzds-0008Jy-Lg
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:24 +0000
-Received: from 5.mo561.mail-out.ovh.net (5.mo561.mail-out.ovh.net
- [87.98.178.36]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b0b6fdb1-3d58-11f0-a2ff-13f23c93f187;
- Fri, 30 May 2025 15:19:18 +0200 (CEST)
-Received: from director7.ghost.mail-out.ovh.net (unknown [10.108.25.131])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4b83jd4fctz1fvP
- for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:19:17 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-ptgrr (unknown [10.108.54.144])
- by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 80185C06D1;
- Fri, 30 May 2025 13:19:16 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.113])
- by ghost-submission-5b5ff79f4f-ptgrr with ESMTPSA
- id xqfoDFSwOWio8AAA2loDpw
- (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:19:16 +0000
+ id 1uKzdU-0008Jy-Pt
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 13:19:00 +0000
+Received: from 2.mo576.mail-out.ovh.net (2.mo576.mail-out.ovh.net
+ [178.33.251.80]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a5afd443-3d58-11f0-a2ff-13f23c93f187;
+ Fri, 30 May 2025 15:18:59 +0200 (CEST)
+Received: from director4.ghost.mail-out.ovh.net (unknown [10.108.25.63])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4b83jH2PX6z32tv
+ for <xen-devel@lists.xenproject.org>; Fri, 30 May 2025 13:18:59 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-d5dtf (unknown [10.110.188.251])
+ by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id A0261C5715;
+ Fri, 30 May 2025 13:18:58 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.104])
+ by ghost-submission-5b5ff79f4f-d5dtf with ESMTPSA
+ id TDFDHkKwOWiVuB4AAS47Dg
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Fri, 30 May 2025 13:18:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,355 +48,646 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0b6fdb1-3d58-11f0-a2ff-13f23c93f187
-Authentication-Results:garm.ovh; auth=pass (GARM-113S0074fb95b9e-83ce-4588-b545-b055bf4ee8c1,
+X-Inumbo-ID: a5afd443-3d58-11f0-a2ff-13f23c93f187
+Authentication-Results:garm.ovh; auth=pass (GARM-104R0052f59d384-b7d7-485b-afb3-3b2b0e54e04f,
                     A4E380CC922F0B59227EC5DCC46884561651840B) smtp.auth=sergii.dmytruk@3mdeb.com
 X-OVh-ClientIp:176.111.184.221
 From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Ross Philipson <ross.philipson@oracle.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
 	trenchboot-devel@googlegroups.com
-Subject: [PATCH v3 16/22] x86/slaunch: process DRTM policy
-Date: Fri, 30 May 2025 16:17:58 +0300
-Message-ID: <8cce3c111a2dceaf4fcf33f8f8d5632a321dfacd.1748611041.git.sergii.dmytruk@3mdeb.com>
+Subject: [PATCH v3 10/22] x86/tpm.c: code for early hashing and extending PCRs (for TPM1.2)
+Date: Fri, 30 May 2025 16:17:52 +0300
+Message-ID: <0c249037eeda4809b565a55c6473bb21cdd0304e.1748611041.git.sergii.dmytruk@3mdeb.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12706061926178534556
+X-Ovh-Tracer-Id: 12700995376294179996
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduudculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhephfehfeehudeileeikeffgfffgfefuddtveelvedvhfffgfelvdfgtddutdehfeeinecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduudefnecuvehluhhsthgvrhfuihiivgepfeenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheeiudgmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=m5usq3QTRGIaGl8YW2FD4N9j9KXlGN9QTdRCtYRkM1M=;
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgddvleduvdculddtuddrgeefvddrtddtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepffejgfduveektedugeeuiefhtdfhjefgieelkeeugfeggedtgeevheefheeffeeunecuffhomhgrihhnpegsrghsvgdrmhgrphdphhgvrggurdhssgenucfkphepuddvjedrtddrtddruddpudejiedrudduuddrudekgedrvddvuddpfeejrdehledrudegvddruddtgeenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvrhhgihhirdgumhihthhruhhkseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdfovfetjfhoshhtpehmohehjeeimgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=0x2mnB2zALc+h57HnIXgGV7sg4jfhRh/4OId+n19BXc=;
  c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1748611157; v=1;
- b=E5NhPU9p90IfaVvoT6SCTtwm+E5O7xwUynvNJGN/aTYeDda9yZuC1frlOZ4jK62wXEFs043A
- Q+3NN+066PwwZGBFGvqKJHFfRouBIZFmE8mqi3CWY5qZyaxQCR2R1+b0zxJaGGZ4FPFdtkMLa/E
- dmiV+CjH12++6/sy39BzRxehL7w2ePC8lBtRgc5l9CEmCXzNQhHyMFP9Rgt4WRagUMYDPjLqVze
- SM7qQ1H05Ysl0rwM8a04FCtpASNORnBo5wVkQK0xQWVTVlCe/h2wSKajQVJCtnt59J80Y5GXkgq
- QybDRXXD2/WYM77ZNtCt2CokZOP017ej0GRTUTKSXTuYA==
+ t=1748611139; v=1;
+ b=LGc4CPtqUYlE2GZ7PtzAKsBx9oPJ8gHPfOTF9bvdEerNr6uutmqXG8r7pRyoR9xwuip2fVsr
+ Cr+E1n4YUiXtoMxb/LXeW4f/PXOgDvwNT0I+hVpRT4I50mMEl340XR4hJWmJ+tJgcecvbrl5GF+
+ gVAbloSdUolRtKC8fWC50Rqz+GY6dFaKluWhFJrRqQOs4+M3vUn/0kVSPLhRDNqJ7GBqKYmDi8j
+ BPtRw9jgwOAsiqvZ2tS6IU3uZS/9EfOPvAY35Hka6oxmkGSYoguuUBM2azQN5X1Yb1vdUxuTRUP
+ wpefD5BZj7i5SeMc/ETKckDRRdAtXB6Npb2A90cDeCunA==
 
-Go through entires in the DRTM policy of SLRT to hash and extend data
-that they describe into corresponding PCRs.
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-Addresses are being zeroed on measuring platform-specific data to
-prevent measurements from changing when the only thing that has changed
-is an address.  Addresses can vary due to bootloader, firmware or user
-doing something differently or just if GRUB gets bigger in size due to
-inclusion of more modules and ends up offsetting newly allocated memory.
+This file is built twice: for early 32b mode without paging to measure
+MBI and for 64b code to measure dom0 kernel and initramfs. Since MBI
+is small, the first case uses TPM to do the hashing. Kernel and
+initramfs on the other hand are too big, sending them to the TPM would
+take multiple minutes.
 
 Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
 Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
 ---
- xen/arch/x86/include/asm/slaunch.h |  14 ++
- xen/arch/x86/setup.c               |  15 ++
- xen/arch/x86/slaunch.c             | 213 +++++++++++++++++++++++++++++
- 3 files changed, 242 insertions(+)
+ xen/arch/x86/Makefile              |   1 +
+ xen/arch/x86/boot/Makefile         |   7 +-
+ xen/arch/x86/boot/head.S           |   3 +
+ xen/arch/x86/include/asm/slaunch.h |  14 +
+ xen/arch/x86/include/asm/tpm.h     |  19 ++
+ xen/arch/x86/slaunch.c             |   7 +-
+ xen/arch/x86/tpm.c                 | 437 +++++++++++++++++++++++++++++
+ 7 files changed, 486 insertions(+), 2 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/tpm.h
+ create mode 100644 xen/arch/x86/tpm.c
 
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 5788898166..2d008a5f52 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -66,6 +66,7 @@ obj-y += spec_ctrl.o
+ obj-y += srat.o
+ obj-y += string.o
+ obj-y += time.o
++obj-y += tpm.o
+ obj-y += traps-setup.o
+ obj-y += traps.o
+ obj-$(CONFIG_INTEL) += tsx.o
+diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
+index 5471b966dd..55fbe155b6 100644
+--- a/xen/arch/x86/boot/Makefile
++++ b/xen/arch/x86/boot/Makefile
+@@ -6,6 +6,7 @@ obj32 := cmdline.32.o
+ obj32 += reloc.32.o
+ obj32 += reloc-trampoline.32.o
+ obj32 += slaunch-early.32.o
++obj32 += tpm-early.32.o
+ 
+ obj64 := reloc-trampoline.o
+ 
+@@ -31,6 +32,10 @@ $(obj)/%.32.o: $(src)/%.c FORCE
+ 
+ $(obj)/slaunch-early.32.o: XEN_CFLAGS += -D__EARLY_SLAUNCH__
+ 
++$(obj)/tpm-early.32.o: XEN_CFLAGS += -D__EARLY_SLAUNCH__
++$(obj)/tpm-early.32.o: $(src)/../tpm.c FORCE
++	$(call if_changed_rule,cc_o_c)
++
+ orphan-handling-$(call ld-option,--orphan-handling=error) := --orphan-handling=error
+ LDFLAGS_DIRECT-$(call ld-option,--warn-rwx-segments) := --no-warn-rwx-segments
+ LDFLAGS_DIRECT += $(LDFLAGS_DIRECT-y)
+@@ -84,7 +89,7 @@ cmd_combine = \
+               --bin1      $(obj)/built-in-32.base.bin \
+               --bin2      $(obj)/built-in-32.offset.bin \
+               --map       $(obj)/built-in-32.base.map \
+-              --exports   cmdline_parse_early,reloc,reloc_trampoline32,slaunch_early_init \
++              --exports   cmdline_parse_early,reloc,reloc_trampoline32,slaunch_early_init,tpm_extend_mbi \
+               --output    $@
+ 
+ targets += built-in-32.S
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index b4cf423c80..9a272155e9 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -527,6 +527,9 @@ __start:
+         /* Store MBI address in EBX where MB2 code expects it. */
+         mov     %eax, %ebx
+ 
++        /* tpm_extend_mbi(mbi/eax, slrt/edx) using fastcall. */
++        call    tpm_extend_mbi
++
+         /* Move magic number expected by Multiboot 2 to EAX and fall through. */
+         movl    $MULTIBOOT2_BOOTLOADER_MAGIC, %eax
+ 
 diff --git a/xen/arch/x86/include/asm/slaunch.h b/xen/arch/x86/include/asm/slaunch.h
-index 3b38045864..62ba41d56e 100644
+index 7891d60035..3b38045864 100644
 --- a/xen/arch/x86/include/asm/slaunch.h
 +++ b/xen/arch/x86/include/asm/slaunch.h
-@@ -24,6 +24,8 @@
- #define DLE_EVTYPE_SLAUNCH_START   (DLE_EVTYPE_BASE + 0x103)
- #define DLE_EVTYPE_SLAUNCH_END     (DLE_EVTYPE_BASE + 0x104)
+@@ -10,6 +10,20 @@
+ #include <xen/slr-table.h>
+ #include <xen/types.h>
  
-+struct boot_info;
++#define DRTM_LOC                   2
++#define DRTM_CODE_PCR              17
++#define DRTM_DATA_PCR              18
++
++/*
++ * Secure Launch event log entry types. The TXT specification defines the base
++ * event value as 0x400 for DRTM values, use it regardless of the DRTM for
++ * consistency.
++ */
++#define DLE_EVTYPE_BASE            0x400
++#define DLE_EVTYPE_SLAUNCH         (DLE_EVTYPE_BASE + 0x102)
++#define DLE_EVTYPE_SLAUNCH_START   (DLE_EVTYPE_BASE + 0x103)
++#define DLE_EVTYPE_SLAUNCH_END     (DLE_EVTYPE_BASE + 0x104)
 +
  /* Indicates an active Secure Launch boot. */
  extern bool slaunch_active;
  
-@@ -69,6 +71,18 @@ void slaunch_map_mem_regions(void);
- /* Marks regions of memory as used to avoid their corruption. */
- void slaunch_reserve_mem_regions(void);
- 
-+/* Measures essential parts of SLR table before making use of them. */
-+void slaunch_measure_slrt(void);
-+
+diff --git a/xen/arch/x86/include/asm/tpm.h b/xen/arch/x86/include/asm/tpm.h
+new file mode 100644
+index 0000000000..d1e791fc69
+--- /dev/null
++++ b/xen/arch/x86/include/asm/tpm.h
+@@ -0,0 +1,19 @@
 +/*
-+ * Takes measurements of DRTM policy entries except for MBI and SLRT which
-+ * should have been measured by the time this is called. Also performs sanity
-+ * checks of the policy and panics on failure. In particular, the function
-+ * verifies that DRTM is consistent with modules obtained from MultibootInfo
-+ * (MBI) and written to struct boot_info in setup.c.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
 + */
-+void slaunch_process_drtm_policy(const struct boot_info *bi);
 +
- /*
-  * This helper function is used to map memory using L2 page tables by aligning
-  * mapped regions to 2MB. This way page allocator (which at this point isn't
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 87e4693a11..063ac49b8a 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1426,6 +1426,13 @@ void asmlinkage __init noreturn __start_xen(void)
-     if ( slaunch_active )
-     {
-         slaunch_map_mem_regions();
++#ifndef X86_TPM_H
++#define X86_TPM_H
 +
-+        /*
-+         * SLRT needs to be measured here because it is used by init_e820(), the
-+         * rest is measured slightly below by slaunch_process_drtm_policy().
-+         */
-+        slaunch_measure_slrt();
++#include <xen/types.h>
 +
-         slaunch_reserve_mem_regions();
-     }
- 
-@@ -1447,6 +1454,14 @@ void asmlinkage __init noreturn __start_xen(void)
-     /* Create a temporary copy of the E820 map. */
-     memcpy(&boot_e820, &e820, sizeof(e820));
- 
-+    /*
-+     * Process all yet unmeasured DRTM entries after E820 initialization to not
-+     * do this while memory is uncached (too slow). This must also happen before
-+     * modules are relocated or used.
-+     */
-+    if ( slaunch_active )
-+        slaunch_process_drtm_policy(bi);
++#define TPM_TIS_BASE  0xfed40000U
++#define TPM_TIS_SIZE  0x00010000U
 +
-     /* Early kexec reservation (explicit static start address). */
-     nr_pages = 0;
-     for ( i = 0; i < e820.nr_map; i++ )
++void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
++                     unsigned size, uint32_t type, const uint8_t *log_data,
++                     unsigned log_data_size);
++
++#endif /* X86_TPM_H */
 diff --git a/xen/arch/x86/slaunch.c b/xen/arch/x86/slaunch.c
-index 5f91fe5ad0..2390d0a3f3 100644
+index ac3b43942b..5f91fe5ad0 100644
 --- a/xen/arch/x86/slaunch.c
 +++ b/xen/arch/x86/slaunch.c
-@@ -9,9 +9,11 @@
- #include <xen/macros.h>
- #include <xen/mm.h>
- #include <xen/types.h>
-+#include <asm/bootinfo.h>
- #include <asm/e820.h>
+@@ -13,6 +13,7 @@
  #include <asm/intel-txt.h>
  #include <asm/page.h>
-+#include <asm/processor.h>
  #include <asm/slaunch.h>
- #include <asm/tpm.h>
++#include <asm/tpm.h>
  
-@@ -107,6 +109,217 @@ void __init slaunch_reserve_mem_regions(void)
+ /*
+  * These variables are assigned to by the code near Xen's entry point.
+@@ -66,16 +67,20 @@ struct slr_table *__init slaunch_get_slrt(void)
+ 
+ void __init slaunch_map_mem_regions(void)
+ {
++    int rc;
+     void *evt_log_addr;
+     uint32_t evt_log_size;
+ 
++    rc = slaunch_map_l2(TPM_TIS_BASE, TPM_TIS_SIZE);
++    BUG_ON(rc != 0);
++
+     /* Vendor-specific part. */
+     txt_map_mem_regions();
+ 
+     find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
+     if ( evt_log_addr != NULL )
+     {
+-        int rc = slaunch_map_l2((uintptr_t)evt_log_addr, evt_log_size);
++        rc = slaunch_map_l2((uintptr_t)evt_log_addr, evt_log_size);
+         BUG_ON(rc != 0);
      }
  }
- 
-+void __init slaunch_measure_slrt(void)
-+{
-+    struct slr_table *slrt = slaunch_get_slrt();
+diff --git a/xen/arch/x86/tpm.c b/xen/arch/x86/tpm.c
+new file mode 100644
+index 0000000000..7fb19ce4fa
+--- /dev/null
++++ b/xen/arch/x86/tpm.c
+@@ -0,0 +1,437 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (c) 2022-2025 3mdeb Sp. z o.o. All rights reserved.
++ */
 +
-+    if ( slrt->revision == 1 )
++#include <xen/sha1.h>
++#include <xen/string.h>
++#include <xen/types.h>
++#include <asm/intel-txt.h>
++#include <asm/slaunch.h>
++#include <asm/tpm.h>
++
++#ifdef __EARLY_SLAUNCH__
++
++#ifdef __va
++#error "__va defined in non-paged mode!"
++#endif
++
++#define __va(x)     _p(x)
++
++/* Implementation of slaunch_get_slrt() for early TPM code. */
++static uint32_t slrt_location;
++struct slr_table *slaunch_get_slrt(void)
++{
++    return __va(slrt_location);
++}
++
++/*
++ * The code is being compiled as a standalone binary without linking to any
++ * other part of Xen.  Providing implementation of builtin functions in this
++ * case is necessary if compiler chooses to not use an inline builtin.
++ */
++void *(memcpy)(void *dest, const void *src, size_t n)
++{
++    const uint8_t *s = src;
++    uint8_t *d = dest;
++
++    while ( n-- )
++        *d++ = *s++;
++
++    return dest;
++}
++
++#else   /* __EARLY_SLAUNCH__ */
++
++#include <xen/mm.h>
++#include <xen/pfn.h>
++
++#endif  /* __EARLY_SLAUNCH__ */
++
++#define TPM_LOC_REG(loc, reg)   (0x1000 * (loc) + (reg))
++
++#define TPM_ACCESS_(x)          TPM_LOC_REG(x, 0x00)
++#define ACCESS_REQUEST_USE       (1 << 1)
++#define ACCESS_ACTIVE_LOCALITY   (1 << 5)
++#define TPM_INTF_CAPABILITY_(x) TPM_LOC_REG(x, 0x14)
++#define INTF_VERSION_MASK        0x70000000
++#define TPM_STS_(x)             TPM_LOC_REG(x, 0x18)
++#define TPM_FAMILY_MASK          0x0C000000
++#define STS_DATA_AVAIL           (1 << 4)
++#define STS_TPM_GO               (1 << 5)
++#define STS_COMMAND_READY        (1 << 6)
++#define STS_VALID                (1 << 7)
++#define TPM_DATA_FIFO_(x)       TPM_LOC_REG(x, 0x24)
++
++#define swap16(x)       __builtin_bswap16(x)
++#define swap32(x)       __builtin_bswap32(x)
++
++static inline volatile uint32_t tis_read32(unsigned reg)
++{
++    return *(volatile uint32_t *)__va(TPM_TIS_BASE + reg);
++}
++
++static inline volatile uint8_t tis_read8(unsigned reg)
++{
++    return *(volatile uint8_t *)__va(TPM_TIS_BASE + reg);
++}
++
++static inline void tis_write8(unsigned reg, uint8_t val)
++{
++    *(volatile uint8_t *)__va(TPM_TIS_BASE + reg) = val;
++}
++
++static inline void request_locality(unsigned loc)
++{
++    tis_write8(TPM_ACCESS_(loc), ACCESS_REQUEST_USE);
++    /* Check that locality was actually activated. */
++    while ( (tis_read8(TPM_ACCESS_(loc)) & ACCESS_ACTIVE_LOCALITY) == 0 );
++}
++
++static inline void relinquish_locality(unsigned loc)
++{
++    tis_write8(TPM_ACCESS_(loc), ACCESS_ACTIVE_LOCALITY);
++}
++
++static void send_cmd(unsigned loc, uint8_t *buf, unsigned i_size,
++                     unsigned *o_size)
++{
++    /*
++     * Value of "data available" bit counts only when "valid" field is set as
++     * well.
++     */
++    const unsigned data_avail = STS_VALID | STS_DATA_AVAIL;
++
++    unsigned i;
++
++    /* Make sure TPM can accept a command. */
++    if ( (tis_read8(TPM_STS_(loc)) & STS_COMMAND_READY) == 0 )
 +    {
-+        /*
-+         * In revision one of the SLRT, only platform-specific info table is
-+         * measured.
-+         */
-+        struct slr_entry_intel_info tmp;
-+        struct slr_entry_intel_info *entry;
-+
-+        entry = (struct slr_entry_intel_info *)
-+            slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+        if ( entry == NULL )
-+            panic("SLRT is missing Intel-specific information!\n");
-+
-+        tmp = *entry;
-+        tmp.boot_params_base = 0;
-+        tmp.txt_heap = 0;
-+
-+        tpm_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (uint8_t *)&tmp,
-+                        sizeof(tmp), DLE_EVTYPE_SLAUNCH, NULL, 0);
++        /* Abort current command. */
++        tis_write8(TPM_STS_(loc), STS_COMMAND_READY);
++        /* Wait until TPM is ready for a new one. */
++        while ( (tis_read8(TPM_STS_(loc)) & STS_COMMAND_READY) == 0 );
 +    }
-+    else
++
++    for ( i = 0; i < i_size; i++ )
++        tis_write8(TPM_DATA_FIFO_(loc), buf[i]);
++
++    tis_write8(TPM_STS_(loc), STS_TPM_GO);
++
++    /* Wait for the first byte of response. */
++    while ( (tis_read8(TPM_STS_(loc)) & data_avail) != data_avail);
++
++    for ( i = 0; i < *o_size && tis_read8(TPM_STS_(loc)) & data_avail; i++ )
++        buf[i] = tis_read8(TPM_DATA_FIFO_(loc));
++
++    if ( i < *o_size )
++        *o_size = i;
++
++    tis_write8(TPM_STS_(loc), STS_COMMAND_READY);
++}
++
++static inline bool is_tpm12(void)
++{
++    /*
++     * If one of these conditions is true:
++     *  - INTF_CAPABILITY_x.interfaceVersion is 0 (TIS <= 1.21)
++     *  - INTF_CAPABILITY_x.interfaceVersion is 2 (TIS == 1.3)
++     *  - STS_x.tpmFamily is 0
++     * we're dealing with TPM1.2.
++     */
++    uint32_t intf_version = tis_read32(TPM_INTF_CAPABILITY_(0))
++                          & INTF_VERSION_MASK;
++    return (intf_version == 0x00000000 || intf_version == 0x20000000 ||
++            (tis_read32(TPM_STS_(0)) & TPM_FAMILY_MASK) == 0);
++}
++
++/****************************** TPM1.2 specific *******************************/
++#define TPM_ORD_Extend              0x00000014
++#define TPM_ORD_SHA1Start           0x000000A0
++#define TPM_ORD_SHA1Update          0x000000A1
++#define TPM_ORD_SHA1CompleteExtend  0x000000A3
++
++#define TPM_TAG_RQU_COMMAND         0x00C1
++#define TPM_TAG_RSP_COMMAND         0x00C4
++
++/* All fields of following structs are big endian. */
++struct tpm_cmd_hdr {
++    uint16_t    tag;
++    uint32_t    paramSize;
++    uint32_t    ordinal;
++} __packed;
++
++struct tpm_rsp_hdr {
++    uint16_t    tag;
++    uint32_t    paramSize;
++    uint32_t    returnCode;
++} __packed;
++
++struct extend_cmd {
++    struct tpm_cmd_hdr h;
++    uint32_t pcrNum;
++    uint8_t inDigest[SHA1_DIGEST_SIZE];
++} __packed;
++
++struct extend_rsp {
++    struct tpm_rsp_hdr h;
++    uint8_t outDigest[SHA1_DIGEST_SIZE];
++} __packed;
++
++struct sha1_start_cmd {
++    struct tpm_cmd_hdr h;
++} __packed;
++
++struct sha1_start_rsp {
++    struct tpm_rsp_hdr h;
++    uint32_t maxNumBytes;
++} __packed;
++
++struct sha1_update_cmd {
++    struct tpm_cmd_hdr h;
++    uint32_t numBytes;          /* Must be a multiple of 64 */
++    uint8_t hashData[];
++} __packed;
++
++struct sha1_update_rsp {
++    struct tpm_rsp_hdr h;
++} __packed;
++
++struct sha1_complete_extend_cmd {
++    struct tpm_cmd_hdr h;
++    uint32_t pcrNum;
++    uint32_t hashDataSize;      /* 0-64, inclusive */
++    uint8_t hashData[];
++} __packed;
++
++struct sha1_complete_extend_rsp {
++    struct tpm_rsp_hdr h;
++    uint8_t hashValue[SHA1_DIGEST_SIZE];
++    uint8_t outDigest[SHA1_DIGEST_SIZE];
++} __packed;
++
++struct TPM12_PCREvent {
++    uint32_t PCRIndex;
++    uint32_t Type;
++    uint8_t Digest[SHA1_DIGEST_SIZE];
++    uint32_t Size;
++    uint8_t Data[];
++};
++
++struct txt_ev_log_container_12 {
++    char        Signature[20];      /* "TXT Event Container", null-terminated */
++    uint8_t     Reserved[12];
++    uint8_t     ContainerVerMajor;
++    uint8_t     ContainerVerMinor;
++    uint8_t     PCREventVerMajor;
++    uint8_t     PCREventVerMinor;
++    uint32_t    ContainerSize;      /* Allocated size */
++    uint32_t    PCREventsOffset;
++    uint32_t    NextEventOffset;
++    struct TPM12_PCREvent   PCREvents[];
++};
++
++#ifdef __EARLY_SLAUNCH__
++/*
++ * TPM1.2 is required to support commands of up to 1101 bytes, vendors rarely
++ * go above that. Limit maximum size of block of data to be hashed to 1024.
++ */
++#define MAX_HASH_BLOCK      1024
++#define CMD_RSP_BUF_SIZE    (sizeof(struct sha1_update_cmd) + MAX_HASH_BLOCK)
++
++union cmd_rsp {
++    struct sha1_start_cmd start_c;
++    struct sha1_start_rsp start_r;
++    struct sha1_update_cmd update_c;
++    struct sha1_update_rsp update_r;
++    struct sha1_complete_extend_cmd finish_c;
++    struct sha1_complete_extend_rsp finish_r;
++    uint8_t buf[CMD_RSP_BUF_SIZE];
++};
++
++/* Returns true on success. */
++static bool tpm12_hash_extend(unsigned loc, const uint8_t *buf, unsigned size,
++                              unsigned pcr, uint8_t *out_digest)
++{
++    union cmd_rsp cmd_rsp;
++    unsigned max_bytes = MAX_HASH_BLOCK;
++    unsigned o_size = sizeof(cmd_rsp);
++    bool success = false;
++
++    request_locality(loc);
++
++    cmd_rsp.start_c = (struct sha1_start_cmd) {
++        .h.tag = swap16(TPM_TAG_RQU_COMMAND),
++        .h.paramSize = swap32(sizeof(struct sha1_start_cmd)),
++        .h.ordinal = swap32(TPM_ORD_SHA1Start),
++    };
++
++    send_cmd(loc, cmd_rsp.buf, sizeof(struct sha1_start_cmd), &o_size);
++    if ( o_size < sizeof(struct sha1_start_rsp) )
++        goto error;
++
++    if ( max_bytes > swap32(cmd_rsp.start_r.maxNumBytes) )
++        max_bytes = swap32(cmd_rsp.start_r.maxNumBytes);
++
++    while ( size > 64 )
 +    {
-+        /*
-+         * slaunch_get_slrt() checks that the revision is valid, so we must not get
-+         * here unless the code is wrong.
-+         */
-+        panic("Unhandled SLRT revision: %d!\n", slrt->revision);
++        if ( size < max_bytes )
++            max_bytes = size & ~(64 - 1);
++
++        o_size = sizeof(cmd_rsp);
++
++        cmd_rsp.update_c = (struct sha1_update_cmd){
++            .h.tag = swap16(TPM_TAG_RQU_COMMAND),
++            .h.paramSize = swap32(sizeof(struct sha1_update_cmd) + max_bytes),
++            .h.ordinal = swap32(TPM_ORD_SHA1Update),
++            .numBytes = swap32(max_bytes),
++        };
++        memcpy(cmd_rsp.update_c.hashData, buf, max_bytes);
++
++        send_cmd(loc, cmd_rsp.buf, sizeof(struct sha1_update_cmd) + max_bytes,
++                 &o_size);
++        if ( o_size < sizeof(struct sha1_update_rsp) )
++            goto error;
++
++        size -= max_bytes;
++        buf += max_bytes;
 +    }
++
++    o_size = sizeof(cmd_rsp);
++
++    cmd_rsp.finish_c = (struct sha1_complete_extend_cmd) {
++        .h.tag = swap16(TPM_TAG_RQU_COMMAND),
++        .h.paramSize = swap32(sizeof(struct sha1_complete_extend_cmd) + size),
++        .h.ordinal = swap32(TPM_ORD_SHA1CompleteExtend),
++        .pcrNum = swap32(pcr),
++        .hashDataSize = swap32(size),
++    };
++    memcpy(cmd_rsp.finish_c.hashData, buf, size);
++
++    send_cmd(loc, cmd_rsp.buf, sizeof(struct sha1_complete_extend_cmd) + size,
++             &o_size);
++    if ( o_size < sizeof(struct sha1_complete_extend_rsp) )
++        goto error;
++
++    if ( out_digest != NULL )
++        memcpy(out_digest, cmd_rsp.finish_r.hashValue, SHA1_DIGEST_SIZE);
++
++    success = true;
++
++error:
++    relinquish_locality(loc);
++    return success;
 +}
 +
-+static const struct slr_entry_policy *__init
-+slr_get_policy(const struct slr_table *slrt)
++#else
++
++union cmd_rsp {
++    struct extend_cmd extend_c;
++    struct extend_rsp extend_r;
++};
++
++/* Returns true on success. */
++static bool tpm12_hash_extend(unsigned loc, const uint8_t *buf, unsigned size,
++                              unsigned pcr, uint8_t *out_digest)
 +{
-+    struct slr_entry_policy *policy;
++    union cmd_rsp cmd_rsp;
++    unsigned o_size = sizeof(cmd_rsp);
 +
-+    policy = (struct slr_entry_policy *)
-+        slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DRTM_POLICY);
-+    if (policy == NULL)
-+        panic("SLRT is missing DRTM policy!\n");
++    sha1_hash(out_digest, buf, size);
 +
-+    /* XXX: are newer revisions allowed? */
-+    if ( policy->revision != SLR_POLICY_REVISION )
-+        panic("DRTM policy in SLRT is of unsupported revision: %#04x!\n",
-+              slrt->revision);
++    request_locality(loc);
 +
-+    return policy;
++    cmd_rsp.extend_c = (struct extend_cmd) {
++        .h.tag = swap16(TPM_TAG_RQU_COMMAND),
++        .h.paramSize = swap32(sizeof(struct extend_cmd)),
++        .h.ordinal = swap32(TPM_ORD_Extend),
++        .pcrNum = swap32(pcr),
++    };
++
++    memcpy(cmd_rsp.extend_c.inDigest, out_digest, SHA1_DIGEST_SIZE);
++
++    send_cmd(loc, (uint8_t *)&cmd_rsp, sizeof(struct extend_cmd), &o_size);
++
++    relinquish_locality(loc);
++
++    return (o_size >= sizeof(struct extend_rsp));
 +}
 +
-+static void __init
-+check_slrt_policy_entry(struct slr_policy_entry *policy_entry,
-+                        int idx,
-+                        const struct slr_table *slrt)
-+{
-+    if ( policy_entry->entity_type != SLR_ET_SLRT )
-+        panic("Expected DRTM policy entry #%d to describe SLRT, got %#04x!\n",
-+              idx, policy_entry->entity_type);
-+    if ( policy_entry->pcr != DRTM_DATA_PCR )
-+        panic("SLRT was measured to PCR-%d instead of PCR-%d!\n", DRTM_DATA_PCR,
-+              policy_entry->pcr);
-+    if ( policy_entry->entity != (uint64_t)__pa(slrt) )
-+        panic("SLRT address (%#08lx) differs from its DRTM entry (%#08lx)\n",
-+              __pa(slrt), policy_entry->entity);
-+}
++#endif /* __EARLY_SLAUNCH__ */
 +
-+/* Returns number of policy entries that were already measured. */
-+static unsigned int __init
-+check_drtm_policy(const struct slr_table *slrt,
-+                  const struct slr_entry_policy *policy,
-+                  struct slr_policy_entry *policy_entry,
-+                  const struct boot_info *bi)
++static void *create_log_event12(struct txt_ev_log_container_12 *evt_log,
++                                uint32_t evt_log_size, uint32_t pcr,
++                                uint32_t type, const uint8_t *data,
++                                unsigned data_size)
 +{
-+    uint32_t i;
-+    uint32_t num_mod_entries;
++    struct TPM12_PCREvent *new_entry;
 +
-+    if ( policy->nr_entries < 2 )
-+        panic("DRTM policy in SLRT contains less than 2 entries (%d)!\n",
-+              policy->nr_entries);
++    new_entry = (void *)(((uint8_t *)evt_log) + evt_log->NextEventOffset);
 +
 +    /*
-+     * MBI policy entry must be the first one, so that measuring order matches
-+     * policy order.
++     * Check if there is enough space left for new entry.
++     * Note: it is possible to introduce a gap in event log if entry with big
++     * data_size is followed by another entry with smaller data. Maybe we should
++     * cap the event log size in such case?
 +     */
-+    if ( policy_entry[0].entity_type != SLR_ET_MULTIBOOT2_INFO )
-+        panic("First entry of DRTM policy in SLRT is not MBI: %#04x!\n",
-+              policy_entry[0].entity_type);
-+    if ( policy_entry[0].pcr != DRTM_DATA_PCR )
-+        panic("MBI was measured to %d instead of %d PCR!\n", DRTM_DATA_PCR,
-+              policy_entry[0].pcr);
++    if ( evt_log->NextEventOffset + sizeof(struct TPM12_PCREvent) + data_size
++         > evt_log_size )
++        return NULL;
 +
-+    /* SLRT policy entry must be the second one. */
-+    check_slrt_policy_entry(&policy_entry[1], 1, slrt);
++    evt_log->NextEventOffset += sizeof(struct TPM12_PCREvent) + data_size;
 +
-+    for ( i = 0; i < bi->nr_modules; i++ )
-+    {
-+        uint16_t j;
-+        const struct boot_module *mod = &bi->mods[i];
++    new_entry->PCRIndex = pcr;
++    new_entry->Type = type;
++    new_entry->Size = data_size;
 +
-+        if (mod->relocated || mod->released)
-+        {
-+            panic("Multiboot module \"%s\" (at %d) was consumed before measurement\n",
-+                  (const char *)__va(mod->cmdline_pa), i);
-+        }
++    if ( data && data_size > 0 )
++        memcpy(new_entry->Data, data, data_size);
 +
-+        for ( j = 2; j < policy->nr_entries; j++ )
-+        {
-+            if ( policy_entry[j].entity_type != SLR_ET_MULTIBOOT2_MODULE )
-+                continue;
-+
-+            if ( policy_entry[j].entity == mod->start &&
-+                 policy_entry[j].size == mod->size )
-+                break;
-+        }
-+
-+        if ( j >= policy->nr_entries )
-+        {
-+            panic("Couldn't find Multiboot module \"%s\" (at %d) in DRTM of Secure Launch\n",
-+                  (const char *)__va(mod->cmdline_pa), i);
-+        }
-+    }
-+
-+    num_mod_entries = 0;
-+    for ( i = 0; i < policy->nr_entries; i++ )
-+    {
-+        if ( policy_entry[i].entity_type == SLR_ET_MULTIBOOT2_MODULE )
-+            num_mod_entries++;
-+    }
-+
-+    if ( bi->nr_modules != num_mod_entries )
-+    {
-+        panic("Unexpected number of Multiboot modules: %d instead of %d\n",
-+              (int)bi->nr_modules, (int)num_mod_entries);
-+    }
-+
-+    /*
-+     * MBI was measured in tpm_extend_mbi().
-+     * SLRT was measured in tpm_measure_slrt().
-+     */
-+    return 2;
++    return new_entry->Digest;
 +}
 +
-+void __init slaunch_process_drtm_policy(const struct boot_info *bi)
++/************************** end of TPM1.2 specific ****************************/
++
++void tpm_hash_extend(unsigned loc, unsigned pcr, const uint8_t *buf,
++                     unsigned size, uint32_t type, const uint8_t *log_data,
++                     unsigned log_data_size)
 +{
-+    const struct slr_table *slrt;
-+    const struct slr_entry_policy *policy;
-+    struct slr_policy_entry *policy_entry;
-+    uint16_t i;
-+    unsigned int measured;
++    void *evt_log_addr;
++    uint32_t evt_log_size;
 +
-+    slrt = slaunch_get_slrt();
++    find_evt_log(slaunch_get_slrt(), &evt_log_addr, &evt_log_size);
++    evt_log_addr = __va((uintptr_t)evt_log_addr);
 +
-+    policy = slr_get_policy(slrt);
-+    policy_entry = (void *)policy + sizeof(*policy);
-+
-+    measured = check_drtm_policy(slrt, policy, policy_entry, bi);
-+    for ( i = 0; i < measured; i++ )
-+        policy_entry[i].flags |= SLR_POLICY_FLAG_MEASURED;
-+
-+    for ( i = measured; i < policy->nr_entries; i++ )
++    if ( is_tpm12() )
 +    {
-+        int rc;
-+        uint64_t start = policy_entry[i].entity;
-+        uint64_t size = policy_entry[i].size;
++        uint8_t sha1_digest[SHA1_DIGEST_SIZE];
 +
-+        /* No already measured entries are expected here. */
-+        if ( policy_entry[i].flags & SLR_POLICY_FLAG_MEASURED )
-+            panic("DRTM entry at %d was measured out of order!\n", i);
++        struct txt_ev_log_container_12 *evt_log = evt_log_addr;
++        void *entry_digest = create_log_event12(evt_log, evt_log_size, pcr,
++                                                type, log_data, log_data_size);
 +
-+        switch ( policy_entry[i].entity_type )
++        /* We still need to write computed hash somewhere. */
++        if ( entry_digest == NULL )
++            entry_digest = sha1_digest;
++
++        if ( !tpm12_hash_extend(loc, buf, size, pcr, entry_digest) )
 +        {
-+        case SLR_ET_MULTIBOOT2_INFO:
-+            panic("Duplicated MBI entry in DRTM of Secure Launch at %d\n", i);
-+        case SLR_ET_SLRT:
-+            panic("Duplicated SLRT entry in DRTM of Secure Launch at %d\n", i);
-+
-+        case SLR_ET_UNSPECIFIED:
-+        case SLR_ET_BOOT_PARAMS:
-+        case SLR_ET_SETUP_DATA:
-+        case SLR_ET_CMDLINE:
-+        case SLR_ET_UEFI_MEMMAP:
-+        case SLR_ET_RAMDISK:
-+        case SLR_ET_MULTIBOOT2_MODULE:
-+        case SLR_ET_TXT_OS2MLE:
-+            /* Measure this entry below. */
-+            break;
-+
-+        case SLR_ET_UNUSED:
-+            /* Skip this entry. */
-+            continue;
++#ifndef __EARLY_SLAUNCH__
++            printk(XENLOG_ERR "Extending PCR%u failed\n", pcr);
++#endif
 +        }
-+
-+        if ( policy_entry[i].flags & SLR_POLICY_IMPLICIT_SIZE )
-+            panic("Unexpected implicitly-sized DRTM entry of Secure Launch at %d (type %d, info: %s)\n",
-+                  i, policy_entry[i].entity_type, policy_entry[i].evt_info);
-+
-+        rc = slaunch_map_l2(start, size);
-+        BUG_ON(rc != 0);
-+
-+        tpm_hash_extend(DRTM_LOC, policy_entry[i].pcr, __va(start), size,
-+                        DLE_EVTYPE_SLAUNCH, (uint8_t *)policy_entry[i].evt_info,
-+                        strnlen(policy_entry[i].evt_info,
-+                                TPM_EVENT_INFO_LENGTH));
-+
-+        policy_entry[i].flags |= SLR_POLICY_FLAG_MEASURED;
 +    }
 +}
 +
- int __init slaunch_map_l2(unsigned long paddr, unsigned long size)
- {
-     unsigned long aligned_paddr = paddr & ~((1ULL << L2_PAGETABLE_SHIFT) - 1);
++#ifdef __EARLY_SLAUNCH__
++void asmlinkage tpm_extend_mbi(uint32_t *mbi, uint32_t slrt_pa)
++{
++    /* Need this to implement slaunch_get_slrt() for early TPM code. */
++    slrt_location = slrt_pa;
++
++    /* MBI starts with uint32_t total_size. */
++    tpm_hash_extend(DRTM_LOC, DRTM_DATA_PCR, (uint8_t *)mbi, *mbi,
++                    DLE_EVTYPE_SLAUNCH, NULL, 0);
++}
++#endif
 -- 
 2.49.0
 
