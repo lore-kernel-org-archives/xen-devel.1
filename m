@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB3FC5AD49
-	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 22:03:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001560.1381702 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E87C5AD49
+	for <xen-devel@archiver.kernel.org>; Fri, 30 May 2025 23:19:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1001601.1381722 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL7oo-0004bp-1G; Fri, 30 May 2025 22:03:14 +0000
+	id 1uL90A-00056I-Fn; Fri, 30 May 2025 23:19:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001560.1381702; Fri, 30 May 2025 22:03:14 +0000
+Received: by outflank-mailman (output) from mailman id 1001601.1381722; Fri, 30 May 2025 23:19:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uL7on-0004bi-Uy; Fri, 30 May 2025 22:03:13 +0000
-Received: by outflank-mailman (input) for mailman id 1001560;
- Fri, 30 May 2025 22:03:12 +0000
+	id 1uL90A-00056B-Cv; Fri, 30 May 2025 23:19:02 +0000
+Received: by outflank-mailman (input) for mailman id 1001601;
+ Fri, 30 May 2025 23:19:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=AEV3=YO=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uL7om-00045N-PW
- for xen-devel@lists.xenproject.org; Fri, 30 May 2025 22:03:12 +0000
-Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
- [79.135.106.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e04b8cd2-3da1-11f0-b894-0df219b8e170;
- Sat, 31 May 2025 00:03:11 +0200 (CEST)
+ id 1uL908-00055p-Nf
+ for xen-devel@lists.xenproject.org; Fri, 30 May 2025 23:19:00 +0000
+Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
+ [109.224.244.17]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 766d3ff1-3dac-11f0-b894-0df219b8e170;
+ Sat, 31 May 2025 01:18:58 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,166 +38,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e04b8cd2-3da1-11f0-b894-0df219b8e170
+X-Inumbo-ID: 766d3ff1-3dac-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1748642589; x=1748901789;
-	bh=lvzmtCCCcksCmz9kq9pi9RVymGPi2OyYXRIhweotEv8=;
+	s=cjfyrptl4ng5he7ajhctxrmcyq.protonmail; t=1748647136; x=1748906336;
+	bh=YSUOLXyrO7AC8+AnY9XmvmG3t0KDhdjWKnpe7lbTOKA=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
-	b=fR6w8N1HKxcVJMAPBIIdL/aeI4WDxd3zox1N1EakwHfcPQy9KdsIlEfbwEKyTsSiL
-	 xWQkN7Mv8pLocFvmEuVZburobuvIsaHYJx4ASpoQDmSS3xO9K6/FkV3YJgpsRrK6nZ
-	 wzGySljcV50sUpYqWdtXrKrjlyAPrAmpB6ZPRciHQBYEsvf17BXiv0YTsKlhk8PRu4
-	 Ofy2+Z3urKeEOHVbetzAHFaxPntlEkCqVvAYYFBJ3ABBSpS+tkYTIse9/sToQaEDMA
-	 AmQTYGPGWLSl34OnW037HnGIzBrn6rKrTlTDUGvmt3Eb3bKwwt18Z9Qt+vomDCoxpa
-	 IUGVVpU162NZA==
-Date: Fri, 30 May 2025 22:03:02 +0000
+	b=kejDclk7enbZKjSY8z9Q91xwWE4NvLpKUZo6SlEX1ReFBCVW2bgdaltNJTZ/ZQr7q
+	 kWGVsl5Rwipa4SgDuUUXLK1VLg7ko5YifhPGo6lGAwYf4sv33+skz9sb0dTctZcKor
+	 0za3beM3YWqGtGwBgOEDfgOSCLI0/qwwWMRKnHBjTcV+G88bN0OhucOHRCqm1/HzaX
+	 djQEqRymApavtK5eKJxJj07+Hz4qgPdn2OdhJyVsa0/VfLuXbsA+ZvdkCOXDWHvd8n
+	 pk5/gxUvpkI2lMJY2YGrsLP/+0olkesmxpi6qNTB9lSKGRXTnJ9M21yPZ2RKeBgXCB
+	 4TpG7JHwkzSiQ==
+Date: Fri, 30 May 2025 23:18:53 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v4 2/2] xen/domain: rewrite emulation_flags_ok()
-Message-ID: <20250530220242.63175-3-dmukhin@ford.com>
-In-Reply-To: <20250530220242.63175-1-dmukhin@ford.com>
-References: <20250530220242.63175-1-dmukhin@ford.com>
+Subject: [PATCH v5 1/4] xen/console: rename switch_serial_input() to console_switch_input()
+Message-ID: <20250530231841.73386-2-dmukhin@ford.com>
+In-Reply-To: <20250530231841.73386-1-dmukhin@ford.com>
+References: <20250530231841.73386-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 7742bab0675a4ff62abe2d7cdc5efe5c8207149f
+X-Pm-Message-ID: 423c493d8e7f267520abe8c351b28d1eab06b8b7
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Rewrite emulation_flags_ok() to simplify future modifications.
+Update the function name as per naming notation in the console driver.
 
-No functional change intended.
+No functional change.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes since v3:
-- added R-b
-- fixed stray newline
+Changes since v4:
+- kept A-b
 ---
- xen/arch/x86/domain.c | 91 ++++++++++++++++++++++++++++++++++---------
- 1 file changed, 73 insertions(+), 18 deletions(-)
+ xen/drivers/char/console.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 0363ccb384..8d26887be2 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -743,32 +743,87 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-     return 0;
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index c15987f5bb..30701ae0b0 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -523,7 +523,7 @@ void console_put_domain(struct domain *d)
+         rcu_unlock_domain(d);
  }
 =20
-+/*
-+ * Verify that the domain's emulation flags resolve to a supported configu=
-ration.
-+ *
-+ * This ensures we only allow a known, safe subset of emulation combinatio=
-ns
-+ * (for both functionality and security). Arbitrary mixes are likely to ca=
-use
-+ * errors (e.g., null pointer dereferences).
-+ *
-+ * NB: use the internal X86_EMU_XXX symbols, not the public XEN_X86_EMU_XX=
-X
-+ * symbols.
-+ */
- static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+-static void switch_serial_input(void)
++static void console_switch_input(void)
  {
-+    enum {
-+        CAP_PV          =3D BIT(0, U),
-+        CAP_HVM         =3D BIT(1, U),
-+        CAP_HWDOM       =3D BIT(2, U),
-+        CAP_DOMU        =3D BIT(3, U),
-+    };
-+    static const struct {
-+        unsigned int caps;
-+        uint32_t min;
-+        uint32_t opt;
-+    } configs[] =3D {
-+#ifdef CONFIG_PV
-+        /* PV */
-+        {
-+            .caps   =3D CAP_PV | CAP_DOMU,
-+            .min    =3D 0,
-+            .opt    =3D 0,
-+        },
-+
-+        /* PV (likely dom0) */
-+        {
-+            .caps   =3D CAP_PV | CAP_HWDOM,
-+            .min    =3D X86_EMU_PIT,
-+            .opt    =3D 0,
-+        },
-+#endif /* #ifdef CONFIG_PV */
-+
-+#ifdef CONFIG_HVM
-+        /* PVH dom0/domU or HVM domU */
-+        {
-+            .caps   =3D CAP_HVM | CAP_HWDOM,
-+            .min    =3D X86_EMU_LAPIC | X86_EMU_IOAPIC | X86_EMU_VPCI,
-+            .opt    =3D 0,
-+        },
-+
-+        /* HVM domU */
-+        {
-+            .caps   =3D CAP_HVM | CAP_DOMU,
-+            .min    =3D X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ),
-+            /* HVM PIRQ feature is user-selectable. */
-+            .opt    =3D X86_EMU_USE_PIRQ,
-+        },
-+
-+        /* PVH */
-+        {
-+            .caps   =3D CAP_HVM | CAP_DOMU,
-+            .min    =3D X86_EMU_LAPIC,
-+            .opt    =3D 0,
-+        },
-+#endif /* #ifdef CONFIG_HVM */
-+    };
-+    unsigned int i, caps =3D is_hardware_domain(d) ? CAP_HWDOM : CAP_DOMU;
-+
-+    if ( is_pv_domain(d) )
-+        caps |=3D CAP_PV;
-+    else if ( is_hvm_domain(d) )
-+        caps |=3D CAP_HVM;
-+
- #ifdef CONFIG_HVM
-     /* This doesn't catch !CONFIG_HVM case but it is better than nothing *=
-/
-     BUILD_BUG_ON(X86_EMU_ALL !=3D XEN_X86_EMU_ALL);
- #endif
+     unsigned int next_rx =3D console_rx;
 =20
--    if ( is_hvm_domain(d) )
--    {
--        if ( is_hardware_domain(d) &&
--             emflags !=3D (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) =
-)
--            return false;
--        if ( !is_hardware_domain(d) &&
--             /* HVM PIRQ feature is user-selectable. */
--             (emflags & ~X86_EMU_USE_PIRQ) !=3D
--             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
--             emflags !=3D X86_EMU_LAPIC )
--            return false;
--    }
--    else if ( emflags !=3D 0 && emflags !=3D X86_EMU_PIT )
--    {
--        /* PV or classic PVH. */
--        return false;
--    }
-+    for ( i =3D 0; i < ARRAY_SIZE(configs); i++ )
-+        if ( caps =3D=3D configs[i].caps &&
-+             (emflags & ~configs[i].opt) =3D=3D configs[i].min )
-+            return true;
+@@ -617,7 +617,7 @@ static void cf_check serial_rx(char c)
+         /* We eat CTRL-<switch_char> in groups of 3 to switch console inpu=
+t. */
+         if ( ++switch_code_count =3D=3D 3 )
+         {
+-            switch_serial_input();
++            console_switch_input();
+             switch_code_count =3D 0;
+         }
+         return;
+@@ -1171,7 +1171,7 @@ void __init console_endboot(void)
+                             "toggle host/guest log level adjustment", 0);
 =20
--    return true;
-+    return false;
+     /* Serial input is directed to DOM0 by default. */
+-    switch_serial_input();
++    console_switch_input();
  }
 =20
- void __init arch_init_idle_domain(struct domain *d)
+ int __init console_has(const char *device)
 --=20
 2.34.1
 
