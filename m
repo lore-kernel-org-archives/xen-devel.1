@@ -4,33 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3160EC5AE59
-	for <xen-devel@archiver.kernel.org>; Sat, 31 May 2025 10:16:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1001975.1382032 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F59AC5B543
+	for <xen-devel@archiver.kernel.org>; Sat, 31 May 2025 12:54:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1002022.1382061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uLJGO-0007Ho-Sx; Sat, 31 May 2025 10:16:28 +0000
+	id 1uLLjJ-0000M1-DO; Sat, 31 May 2025 12:54:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1001975.1382032; Sat, 31 May 2025 10:16:28 +0000
+Received: by outflank-mailman (output) from mailman id 1002022.1382061; Sat, 31 May 2025 12:54:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uLJGO-0007Hg-OL; Sat, 31 May 2025 10:16:28 +0000
-Received: by outflank-mailman (input) for mailman id 1001975;
- Sat, 31 May 2025 10:16:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uLLjJ-0000Lu-A5; Sat, 31 May 2025 12:54:29 +0000
+Received: by outflank-mailman (input) for mailman id 1002022;
+ Sat, 31 May 2025 12:54:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Itfw=YP=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uLJGN-0007Ha-8U
- for xen-devel@lists.xenproject.org; Sat, 31 May 2025 10:16:27 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4e4e0b51-3e08-11f0-b894-0df219b8e170;
- Sat, 31 May 2025 12:16:24 +0200 (CEST)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-55320ddb9edso3224097e87.1
- for <xen-devel@lists.xenproject.org>; Sat, 31 May 2025 03:16:24 -0700 (PDT)
+ <SRS0=L58R=YP=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1uLLjI-0008IU-Hz
+ for xen-devel@lists.xenproject.org; Sat, 31 May 2025 12:54:28 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20624.outbound.protection.outlook.com
+ [2a01:111:f403:2009::624])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 62ff30bd-3e1e-11f0-a300-13f23c93f187;
+ Sat, 31 May 2025 14:54:28 +0200 (CEST)
+Received: from IA4P220CA0007.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:558::16)
+ by LV8PR12MB9450.namprd12.prod.outlook.com (2603:10b6:408:202::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Sat, 31 May
+ 2025 12:54:23 +0000
+Received: from BN2PEPF0000449D.namprd02.prod.outlook.com
+ (2603:10b6:208:558:cafe::64) by IA4P220CA0007.outlook.office365.com
+ (2603:10b6:208:558::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.24 via Frontend Transport; Sat,
+ 31 May 2025 12:54:23 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN2PEPF0000449D.mail.protection.outlook.com (10.167.243.148) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8792.29 via Frontend Transport; Sat, 31 May 2025 12:54:23 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sat, 31 May
+ 2025 07:54:23 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sat, 31 May
+ 2025 07:54:23 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Sat, 31 May 2025 07:54:22 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,246 +65,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e4e0b51-3e08-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748686584; x=1749291384; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JyKUNC7AK24oaZ+BV2NsptKAVrues0MRs6gF4p/xnLE=;
-        b=BZfxCXnx6ZsCnpSeSNQZOj03y3/pQAp7GCISnrRMPq3Pvptk3DWazmvzQYgBf9ti2/
-         B/fXq92sQ0eYTh9CMh98KYrj4dcCnyzBH0nqV9PgHBjZuGtWlj2SWKOXalgOKE9BXPSk
-         0c63Q8b8eEnWWLyLSyntby4OgdA/uYm9oIV4qV+qehOkKRlCNWjTjMhweRS83LFAeFn3
-         kcgvCBE4+pNz9o5Weu457SLac0FxM3MstfEJHD0LVs6QciV16Tk9cJg9qnqFugAoemWF
-         DjJFv0TI4OoZ/niJXknGkpT10BLTZ2Y6jHdWfN+bUJKBcPYk/NXiwi3YNehDio0saY0D
-         8V8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748686584; x=1749291384;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JyKUNC7AK24oaZ+BV2NsptKAVrues0MRs6gF4p/xnLE=;
-        b=pEv1CqJDYrVTQK9O15Xt7k8sHcz8CLQPurwGFmza3yJmKUjYA5Ws0bR1oBQImkMtOK
-         igMUnFqJnXLOBH+gBrDeuzxNiqZlNyqmAQv0p88hT+ObXRYVPAD4vuNlhSlUPqYi3XwA
-         O2NnEgcrz4Q/CNmGJN2QJfFqoZ2JYoG9byrlvXfnFlRJwT5FR0mcyLh4e4V8x2PMUbjV
-         Qr77vC26GylcL+C7fg7NQD1oU1ZuBscU3sKVLVweIVp0AvMe3PIjxh9T96Faq6sZXNE8
-         at/K8heseRMXxbw+igwq11ZRLJ73J1h4kP7xeESUfnPlhj8WWbMHjhxg7iByR+VZZW/l
-         OMgg==
-X-Gm-Message-State: AOJu0Yx2CVjQSub1xjp5cXUsfFM1KD8yZH/m5QHpXz3KHtXpyQpBMUEJ
-	9e+PODmcsR09DUYpXr1y4arzaAc0giReUwBGZMU7zsnmCGccCQcm9VAvLcMZRnwLJ4AXqFftYAV
-	JZJLuFP5/VkQlQn52xwz0AELR/8DiSZM=
-X-Gm-Gg: ASbGncvpPMHeQnKJtuWsdsZ4fqs/1oZfxokdQ8L3Xo4gmVli0JWpN+ToaL0CeMUBBSX
-	xZv4MhvB/yTrRQzBtxsij0cpQxA/9V9dS0gl/FYs3JlQDfNU/ubMXPj9yUkqEd2j8uSX9Y+2KMX
-	XPddRB8nv54mPhbc9o4qpcTDNCXCfIL9Rze51+CP0tyw==
-X-Google-Smtp-Source: AGHT+IEevdzFZeolsTSfVgKK9KJyEGX7hFTGd+9eNu/Wz0UfbvRU/o9l4OOMV+f1QuRif6scF+fZousHhlepAbJVgKA=
-X-Received: by 2002:a05:6512:2215:b0:553:3127:b00 with SMTP id
- 2adb3069b0e04-5533b90b7d6mr2666005e87.32.1748686583420; Sat, 31 May 2025
- 03:16:23 -0700 (PDT)
+X-Inumbo-ID: 62ff30bd-3e1e-11f0-a300-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FUhzN+wz0ovtTrnBQ+5mfuY7chuuuCQ/muoDHMvqNDEpAA4CBuUkyjkvb+s+Oyl6hQEiro0TPeHNlI6n+aaQ+NiZJnlHQL52r745pCvq3fbi/w+dhnErzBmMpW+Twotrq2H20jMrH/42V1UYbJD4iWmirRDn8ZPK2EOT4V0gzqs2RBd20k8QO0Kxry3zCE7xwgE6KN91Ej3XrsThXPsC2W2A7bzJc/4d6eM4e6YNqMAKHee1YTCq44llRU/quMUkqIuAlEkUtA1elAfvaPeDkClmLLwzzTyErHgH0NjAeHvTf+5MIAkrs9545kyNuAoiE5KSFK7HIY937BC8z+L5NA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1kR/ClfUZKKqigCC70/OsoHrcl2UsMV2lP7p0tn/BBM=;
+ b=xvPkgbzWWh+QcoPrXV0Ez7ZIhrgM1koP6Oph7ZSpId5WgiMlCuqSsCFlzzrNAPrvaFaSm9S1F3w5nndgQRXz8qjtL+GIOmeue2mrI/ipMFeazJrniPt2zYEc8mg4MIYJKyqd4dOghvho3Yqq2GKa5clCVEKLFoUzZt6eUqi0M3KRIWSm7hD/K3Xv4W1yfKvnFx9BqGYOXRwqUt+V1dQlMnvruBroxwMcEYO4PnG80oXGEIF8foM0gpGq4fO9S40W/lEbZG5xUZhSwj50jWf6aFhLQonFHMT3lBVnxhueVPBv0HFMjvkevCriLKv5FU9N0p9NZgReB3o47zCCyxRL4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1kR/ClfUZKKqigCC70/OsoHrcl2UsMV2lP7p0tn/BBM=;
+ b=wKkYa7iUCCwc8B9VRbTPiqA0w4T6cm9VJtFALxnH70ExV0ByIQPXPKuHUBIx5piWSOjtApaShU2NBY4qLLK16dR4g+6tN2wLzcT8WrWtXdkLjd4QK+q4eztHAjAYt3hGIUL3bHG2Lp17BZr6nxxaCxI2XVRSWHE2IJvGrwkbf4k=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v1 2/5] vpci: rework error path in vpci_process_pending()
+Date: Sat, 31 May 2025 08:54:00 -0400
+Message-ID: <20250531125405.268984-3-stewart.hildebrand@amd.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250531125405.268984-1-stewart.hildebrand@amd.com>
+References: <20250531125405.268984-1-stewart.hildebrand@amd.com>
 MIME-Version: 1.0
-References: <cover.1741164138.git.xakep.amatop@gmail.com> <2ef15cb605f987eb087c5496d123c47c01cc0ae7.1741164138.git.xakep.amatop@gmail.com>
- <1bcdca51-0f31-421c-81cf-699a1b94fbd6@xen.org>
-In-Reply-To: <1bcdca51-0f31-421c-81cf-699a1b94fbd6@xen.org>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Sat, 31 May 2025 13:16:12 +0300
-X-Gm-Features: AX0GCFu8asraicDdTvBG9bNs1w7xSxIyKJDtrCvwfe4noIAXovQahDTFuH1R5Qc
-Message-ID: <CAGeoDV97no7mXSKd7auFu5E85wSXAHKWvqGW2=-VEAbkrTyU8Q@mail.gmail.com>
-Subject: Re: [PATCH 14/16] xen/arm: Resume memory management on Xen resume
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org, 
-	Mirela Simonovic <mirela.simonovic@aggios.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, 
-	Mykyta Poturai <mykyta_poturai@epam.com>, Mykola Kvach <mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF0000449D:EE_|LV8PR12MB9450:EE_
+X-MS-Office365-Filtering-Correlation-Id: d72a5853-d0b2-4d4e-6e3e-08dda04244c4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?Etmck4gWNJYdRJqnjTafhmPKZqVkEUM93Ym84Fe3eajlaq8Ay5LkCCRPTgsO?=
+ =?us-ascii?Q?NGVBrvPNePeaObW9Ws4Iis1NvuRY3avdP4bbk6hRUdq0sMnUPVHn7JYD0v+k?=
+ =?us-ascii?Q?uGQ0X5GoffwKu62rL6OIPjRKmm6613Tr2IG1wCo1LTCekFjlgMh7KwWqzxFI?=
+ =?us-ascii?Q?4FwcfzMPzfAihX/PoR4Ip1rJf0wZKxys+VtTBRFRzEFwTXCM8lG2muN0pWjz?=
+ =?us-ascii?Q?3MZnYSDyGNPAV5XC/HHFun/8pbeCO/DVJ7eCkpXqYIAiNmxAh3QHcQimwFVx?=
+ =?us-ascii?Q?aTcs2cgFCClIC33kItqohLPSXNC0DDGBjni0PjaBLhA17nVp50w73P1Vz0H/?=
+ =?us-ascii?Q?/7Ig3rF5RZVRbWfFbE7fTpGe6raND9rKA4uvGRP9itCX7IiIGNHMgUTNZYd5?=
+ =?us-ascii?Q?+2qJy8gx+rWYMNy9BqkcSLJotkrvKYyLgSEq+JuhO+bg+N8hPnRQNU0jRO14?=
+ =?us-ascii?Q?8pNwtzThxUwnUmGgXmQw2C2PrxvO1rBcgN2zewu4yQsffNBoPmoGDBatlPgE?=
+ =?us-ascii?Q?MoAJ8ebu5737ZTWv8cHUcXNjR1jfyCpRTBr/lHc6Ag2Ob/32JuqzPr2iVtny?=
+ =?us-ascii?Q?+cpDqSSRkK0XwmWlsnJ7sX02g1nfs+lTbUcR86OOH+Jc2WAwAx+88TLo9YH1?=
+ =?us-ascii?Q?lJAtXAeNWdKM8aPNL9VpK68fDJmofNT3N1FEPa0NE7InVKpYmoGq7U40299L?=
+ =?us-ascii?Q?LvFX69cyGyulXanbOCUMBRcsHRlTWXXrHBpQ+V5JA/ltYAKjiQH+9jxqb7XM?=
+ =?us-ascii?Q?VNshhzemePOtirXhqs8/15KIuI9Bh/8wsaAGYrsiH9gwHAnAZQQrW9FY9KgV?=
+ =?us-ascii?Q?ChobUth+s08lqlG9Rs6JeE5sJGCOvoxThDi7XvXba7wl14E8bNJ1KZ65Q9NE?=
+ =?us-ascii?Q?0hqZzoAPPfrMnccnbepP5woPLDNjcicy0ly0klkXJQFMeuXnQwnmfcIujOuK?=
+ =?us-ascii?Q?OVwZUyYEPRSnF0OrHUTyMjuLUayUHF30trCfuZw7wFmyTsJIg/oRxOXAq6wM?=
+ =?us-ascii?Q?gS7hNhFCkfrK9+Rr5BRw/5CzqgrsfL/kncdp8FlIjHzAbHrFYmld8G3i2lXr?=
+ =?us-ascii?Q?9EfBCMziIAip49JnU9YYiSlHCpfMgrSiT9BHmqLsUxGLl9S4HyyYlqBhjfNz?=
+ =?us-ascii?Q?k7XpIejg7F/78ypWtvv1rp7pzyqTJwkp0iGfyI+qEJYNMe3zG3w8rIj2Qx1G?=
+ =?us-ascii?Q?Zzc4i5jVROWuTOkttojJJW7QPE7XNkmNHvMI+V1qRr40dmR4i5pjyzJBD2Le?=
+ =?us-ascii?Q?C7y99BZPSTY68r36/8LGHv1ScULfW2rFTYbzVBU14No5q7pg9AOmASHikttS?=
+ =?us-ascii?Q?cpYoNzvMkkaGIEUX7MwWg5Gn7J79LgSZ9b5CWq4uq2dYx2prgVqzJBO+Ymqq?=
+ =?us-ascii?Q?Ma4ARb8COMihZZY0OQ7zvjeGnPHabK3EX9XO4yP5LG/0+K0o2b+ke94Z25f5?=
+ =?us-ascii?Q?6u/RbJ9EFSEjyoumypE3j1ompP1pFpjIPxPywhy0Ik03MD+S71Abevtumi9u?=
+ =?us-ascii?Q?n8qsmYaZkiRhsdA4x8R4hCMJKS+ryeDK8tHe?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2025 12:54:23.8064
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d72a5853-d0b2-4d4e-6e3e-08dda04244c4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF0000449D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9450
 
-Hi, @Julien Grall
+This will make further refactoring simpler.
 
-On Wed, Mar 12, 2025 at 1:04=E2=80=AFAM Julien Grall <julien@xen.org> wrote=
-:
->
-> Hi,
->
-> On 05/03/2025 09:11, Mykola Kvach wrote:
-> > From: Mirela Simonovic <mirela.simonovic@aggios.com>
-> >
-> > The MMU needs to be enabled in the resume flow before the context
-> > can be restored (we need to be able to access the context data by
-> > virtual address in order to restore it). The configuration of system
-> > registers prior to branching to the routine that sets up the page
-> > tables is copied from xen/arch/arm/arm64/head.S.
-> > After the MMU is enabled, the content of TTBR0_EL2 is changed to
-> > point to init_ttbr (page tables used at runtime).
-> >
-> > At boot the init_ttbr variable is updated when a secondary CPU is
-> > hotplugged. In the scenario where there is only one physical CPU in
-> > the system, the init_ttbr would not be initialized for the use in
-> > resume flow. To get the variable initialized in all scenarios in this
-> > patch we add that the boot CPU updates init_ttbr after it sets the
-> > page tables for runtime.
-> >
-> > Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-> > Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-> > Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > ---
-> > Changes in V3:
-> > - updated commit message
-> > - instead of using create_page_tables, enable_mmu, and mmu_init_seconda=
-ry_cpu,
-> >    the existing function enable_secondary_cpu_mm is now used
-> > - prepare_secondary_mm (previously init_secondary_pagetables in the pre=
-vious
-> >    patch series) is now called at the end of start_xen instead of
-> >    setup_pagetables. Calling it in the previous location caused a crash
-> > - add early printk init during resume
-> >
-> > Changes in V2:
-> > - moved hyp_resume to head.S to place it near the rest of the start cod=
-e
-> > - simplified the code in hyp_resume by using existing functions such as
-> >    check_cpu_mode, cpu_init, create_page_tables, and enable_mmu
-> > ---
-> >   xen/arch/arm/arm64/head.S | 23 +++++++++++++++++++++++
-> >   xen/arch/arm/setup.c      |  8 ++++++++
-> >   2 files changed, 31 insertions(+)
-> >
-> > diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-> > index 3522c497c5..fab2812e54 100644
-> > --- a/xen/arch/arm/arm64/head.S
-> > +++ b/xen/arch/arm/arm64/head.S
-> > @@ -564,6 +564,29 @@ END(efi_xen_start)
-> >   #ifdef CONFIG_SYSTEM_SUSPEND
-> >
-> >   FUNC(hyp_resume)
-> > +        msr   DAIFSet, 0xf           /* Disable all interrupts */
->
-> Surely we should be here with interrupts disabled. No?
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+---
+ xen/drivers/vpci/header.c | 42 +++++++++++++++++++--------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
-You are right, I overlooked this and left the code unchanged from a
-previous patch series.
-According to the Power State Coordination Interface (DEN0022F.b 1.3):
-```
-6.4.3.3 Exceptions
-The appropriate asynchronous exception masks must be set when starting
-up the core at the Exception
-level from which the call was made, or at ELns. Typically, this means
-that for the Exception level where
-execution is restarting:
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index e42c8efa2302..c1463d2ce076 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -214,27 +214,7 @@ bool vpci_process_pending(struct vcpu *v)
+         }
+ 
+         if ( rc )
+-        {
+-            spin_lock(&pdev->vpci->lock);
+-            /* Disable memory decoding unconditionally on failure. */
+-            modify_decoding(pdev, v->vpci.cmd & ~PCI_COMMAND_MEMORY,
+-                            false);
+-            spin_unlock(&pdev->vpci->lock);
+-
+-            /* Clean all the rangesets */
+-            for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+-                if ( !rangeset_is_empty(header->bars[i].mem) )
+-                     rangeset_purge(header->bars[i].mem);
+-
+-            v->vpci.pdev = NULL;
+-
+-            read_unlock(&v->domain->pci_lock);
+-
+-            if ( !is_hardware_domain(v->domain) )
+-                domain_crash(v->domain);
+-
+-            return false;
+-        }
++            goto fail;
+     }
+     v->vpci.pdev = NULL;
+ 
+@@ -245,6 +225,26 @@ bool vpci_process_pending(struct vcpu *v)
+     read_unlock(&v->domain->pci_lock);
+ 
+     return false;
++
++ fail:
++    spin_lock(&pdev->vpci->lock);
++    /* Disable memory decoding unconditionally on failure. */
++    modify_decoding(pdev, v->vpci.cmd & ~PCI_COMMAND_MEMORY, false);
++    spin_unlock(&pdev->vpci->lock);
++
++    /* Clean all the rangesets */
++    for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
++        if ( !rangeset_is_empty(header->bars[i].mem) )
++             rangeset_purge(header->bars[i].mem);
++
++    v->vpci.pdev = NULL;
++
++    read_unlock(&v->domain->pci_lock);
++
++    if ( !is_hardware_domain(v->domain) )
++        domain_crash(v->domain);
++
++    return false;
+ }
+ 
+ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
+-- 
+2.49.0
 
-If starting in AArch64 state, the SPSR_ELx.{D,A,I,F} bits must be set
-to {1, 1, 1, 1}. ELx is the
-Exception level being returned from.
-```
-
-The ARM Trusted Firmware code enforces this correctly here:
-https://elixir.bootlin.com/arm-trusted-firmware/v2.13.0/source/lib/psci/psc=
-i_common.c#L869
-
-So, the code should indeed expect DAIF bits to be set on resume. I
-will update the patch accordingly.
-
->
-> > +
-> > +        tlbi  alle2
-> > +        dsb   sy                     /* Ensure completion of TLB flush=
- */
->
-> This doesn't exist when booting Xen and I am not sure why we would need
-> it for resume as we already nuke the TLbs in enable_mmu. Can you clarify?
-
-You're absolutely right =E2=80=94 that line is a leftover from earlier chan=
-ges
-when the memory handling logic was being reorganized.
-It's no longer necessary because enable_mmu already handles TLB
-invalidation, including the TLBI and DSB instructions.
-I'll remove it in the next version. Thanks for catching this!
-
->
-> > +        isb
-> > +
-> > +        ldr   x0, =3Dstart
-> > +        adr   x19, start             /* x19 :=3D paddr (start) */
-> > +        sub   x20, x19, x0           /* x20 :=3D phys-offset */
->
-> Looking at the code, I wonder if it is still necessary to set x19 and
-> x20 for booting secondary CPUs and resume. There doesn't seem to be any
-> use of the registers.
-
-x20 is still required during resume. It's used inside
-enable_secondary_cpu_mm via the load_paddr macro.
-So although x19 may no longer be necessary in this context, x20 is
-still used and needs to be set beforehand.
-
->
-> > +
-> > +        /* Initialize the UART if earlyprintk has been enabled. */
-> > +#ifdef CONFIG_EARLY_PRINTK
-> > +        bl    init_uart
-> > +#endif
-> > +        PRINT_ID("- Xen resuming -\r\n")
-> > +
-> > +        bl    check_cpu_mode
-> > +        bl    cpu_init
-> > +
-> > +        ldr   lr, =3Dmmu_resumed
-> > +        b     enable_secondary_cpu_mm
-> > +
-> > +mmu_resumed:
-> >           b .
-> >   END(hyp_resume)
-> >
-> > diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> > index ffcae900d7..3a89ac436b 100644
-> > --- a/xen/arch/arm/setup.c
-> > +++ b/xen/arch/arm/setup.c
-> > @@ -508,6 +508,14 @@ void asmlinkage __init start_xen(unsigned long fdt=
-_paddr)
-> >       for_each_domain( d )
-> >           domain_unpause_by_systemcontroller(d);
-> >
-> > +#ifdef CONFIG_SYSTEM_SUSPEND
-> > +    /*
-> > +     * It is called to initialize init_ttbr.
-> > +     * Without this call, Xen gets stuck after resuming.
->
-> This is not a very descriptive comment. But, you seem to make the
-> assumption that prepare_secondary_mm() can be called on the boot CPU.
-> This is not always the case. For instance on arm32, it will allocate
-> memory and overwrite the per-cpu page-tables pointer (not great). This
-> will also soon be the case for arm64.
->
-> Furthermore, this call reminded me that the secondary CPU page-tables
-> are not freed when turning off a CPU. So they will leak. Not yet a
-> problem for arm64 though.
->
-> So overall, I think we need a separate function that will be prepare
-> init_ttbr for a given CPU (not allocate any memory). This will then need
-> to be called from the suspend helper.
-
-Thank you for the detailed explanation.
-
-I will rework this part to avoid calling prepare_secondary_mm() on
-the boot CPU. As suggested, I plan to introduce a dedicated helper
-function that will only initialize init_ttbr without allocating
-memory and call it  from the suspend helper.
-
->
-> > +     */
->  > +    prepare_secondary_mm(0);> +#endif
-> > +
-> >       /* Switch on to the dynamically allocated stack for the idle vcpu
-> >        * since the static one we're running on is about to be freed. */
-> >       memcpy(idle_vcpu[0]->arch.cpu_info, get_cpu_info(),
->
-> Cheers,
->
-> --
-> Julien Grall
->
-
-Thank you for reviewing this patch series.
-
-Best regards,
-Mykola
 
