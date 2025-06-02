@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD49C5AD49
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 17:29:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003727.1383324 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC93C5AD49
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 17:46:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003739.1383340 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM8yk-0001I7-HZ; Mon, 02 Jun 2025 17:29:42 +0000
+	id 1uM9Ey-00048P-9w; Mon, 02 Jun 2025 17:46:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003727.1383324; Mon, 02 Jun 2025 17:29:42 +0000
+Received: by outflank-mailman (output) from mailman id 1003739.1383340; Mon, 02 Jun 2025 17:46:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM8yk-0001I0-EI; Mon, 02 Jun 2025 17:29:42 +0000
-Received: by outflank-mailman (input) for mailman id 1003727;
- Mon, 02 Jun 2025 17:29:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uM9Ey-00047w-38; Mon, 02 Jun 2025 17:46:28 +0000
+Received: by outflank-mailman (input) for mailman id 1003739;
+ Mon, 02 Jun 2025 17:46:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QKOU=YR=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uM8yk-0001Hu-2x
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 17:29:42 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29dbd978-3fd7-11f0-b894-0df219b8e170;
- Mon, 02 Jun 2025 19:29:40 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so50944225e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 10:29:40 -0700 (PDT)
-Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f00a017esm15241435f8f.89.2025.06.02.10.29.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Jun 2025 10:29:39 -0700 (PDT)
+ id 1uM9Ew-00044r-IV
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 17:46:26 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 80b13329-3fd9-11f0-a300-13f23c93f187;
+ Mon, 02 Jun 2025 19:46:24 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-442fda876a6so41370835e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 10:46:24 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4f0097539sm15997416f8f.63.2025.06.02.10.46.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Jun 2025 10:46:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,134 +47,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29dbd978-3fd7-11f0-b894-0df219b8e170
+X-Inumbo-ID: 80b13329-3fd9-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748885380; x=1749490180; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=8EysBdXhVRcuwATGtq5Z+vV7iT4lpqk0/v0j0Cc1ok4=;
-        b=s0XNaPXpE+2G1t++chQBIa1livncLr2x9gluBrw9E8Bea6ZmpwmfLthBhgiSLttD/C
-         B2gYhbtWPIcISgC5cqSoHbpxS7nv1rlxYGCa2Nd0nQYXIgfpFXYOkEVFywCec8JIGM5g
-         4CqEprEezpoujXP0r86i/9YuWjbQObmPTOT9U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748885380; x=1749490180;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1748886384; x=1749491184; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8EysBdXhVRcuwATGtq5Z+vV7iT4lpqk0/v0j0Cc1ok4=;
-        b=hwN5IqXD6hkkHLW5z+OFfhpC3EJZvg19LX+W+uKaNmZkolkPYBRwKh1G/h8iZlsdIM
-         JfWuAy6B/cQ+Q3v9tdrOvP5mvyaW2k1i9H6qz2DFry0uYby/TX66S7GimfF02+38SUPR
-         77hblwij0xJlnfJQMaZdSKFKGkGtQskJ4rdefR1q6QJJJloj4rm6/Rlpwfq7H0gHkSI8
-         LR0UvfXrtbd/6gIXzeecuYkluVBM4pwamAfHQmq+8Z+z0adDrrO3d0plo/TinKrFZIrp
-         TCdoM1tXDXpZq0DHEfIfHdMaoE5LG11x3XUKgsVgxGEepa6L7cQ+RO0JwZ/8/i0Jj4h+
-         /Ucg==
-X-Forwarded-Encrypted: i=1; AJvYcCXx8VdDzDBlR+oC2Is38auy+R4W+eKVBelIg/dcCvB/BYTDMRFnmmeQjkTyVuS2lB7IcD1BFsvk4io=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxVbYeM7SOtqAW0Y9tGSxdM1O1zO9IrmZYxeilk0BnmPsa2WNeK
-	K/gcHD9bjJ5yqzM7M2Uv+fhUvK61yYJULYKKL5w8K6v54F7UCcuOgbjnlhREGS81R2w=
-X-Gm-Gg: ASbGncvH1WcU5nQhVVpn0j09KsCQ2mvgP+aAyqEzn4MFRlWfJGiY/XZEc7j3Hgy2gSM
-	VwuOkp3yCBnIb6sgBcxJqG+KUx7+gi+6WkBSlFgtzTKrmQ35+ZaRDTx9kijPWjpXQTl5lr1YSCr
-	6tzWcB3xj6L410hRhB3QytlSP59YeR1C41dfHpxvN36iF9vFOXABCEH/xd58eumWE+naevTwTZV
-	+/mGV47un3FkRrxAdk+XWCYIyeaV/2lE7ORrumEz4G+htQuw/qsIlGLOVBoaDHqfkLjkq+zjCen
-	sID7Sat+P32tQ8yzTipwD6x9Ckv83M6mzM9bic0/CjxpDtGUyaYLMTNq/Ebp4Z0OLlYRkWELock
-	+JPklw9yoDyWg3OfDjhNqkpKai5FVkP+j4KC+2Q==
-X-Google-Smtp-Source: AGHT+IGDctUQKiOKTosx4cih6zUBkhvYMnID3FemRn49+9EeLGa3AFkxRBWp4DJWHtpX+ZS8x5HO2Q==
-X-Received: by 2002:a05:6000:3112:b0:3a0:7f9c:189a with SMTP id ffacd0b85a97d-3a4f799acd4mr11101980f8f.0.1748885379610;
-        Mon, 02 Jun 2025 10:29:39 -0700 (PDT)
-Message-ID: <bf038fe7-c3b4-435b-8f02-94d8ea337e9e@citrix.com>
-Date: Mon, 2 Jun 2025 18:29:38 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] vVMX: adjust VMPTRLD error handling
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Manuel Andreas <manuel.andreas@tum.de>
-References: <421e2f85-c1ed-4989-b8db-36e261826fa0@suse.com>
-Content-Language: en-GB
+        bh=B9VfFp7KStC3qDdOP/ZlcW7W//yetvsaldEN92b/Svg=;
+        b=WFfNUm9BqVzzA/JjaLHRqcpOQp5St6dgqk4+o5s+325i6jkUJZEWhN4c8ZUv5fd/9b
+         Cn7dWDjDakR05yh5KpajzYnLlP/co9FO1/2cScLGzQz4fVoUQb8bicYZFUCjAYCHvLPg
+         dQJ3HdAr6ZJwn9OiqIjDlfgFhkVmUkCJ20p4A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748886384; x=1749491184;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=B9VfFp7KStC3qDdOP/ZlcW7W//yetvsaldEN92b/Svg=;
+        b=HcAcsMXly4AaquLIzBuuAu9dvDOUPOp3Sdl8mU5a9Ftga3KIHEQerG9wZog3QCHtjv
+         zmzzvQVhMEXrycE6r8sFtQuGXfhGzl9YZHk+SyyPxIVQrELi/lf3j4UsDRqi1ablyRYW
+         jkN7L1MWEnp+W8ceLbeSQbPxp5cdje/bs0WAmOhRqm3AY3VDkFcZrhJqtnoE49S83ZwQ
+         0l8tOnHj5jQk1PaDcex+bHtnb+/9LtR+U5HGF/dY3AASN4OOkqiHDq6Z01nsyvPFU9Yg
+         YeeNsxBtxQi4MD9k9Z6W4uWu0rAIrVln2gCSal3T6SMJ46wZmHyQGTOHc92Pv1FxgvDW
+         FRZw==
+X-Gm-Message-State: AOJu0YxFl96xY+J8oPlDcBAMgT6hjAztoxopHSGOWa680hlFTRPe+XR5
+	xTY7Dcb9bGFLCtth9Srlxl+jpgswDfWX+YCWWay6x/w+KmwCT5iHGRLtMwMq7pLiN76qkhsyBYN
+	vb/gg
+X-Gm-Gg: ASbGncsmhx2OTdV1YcHjUomFN4uPEIGt9J2BrFP1ovFoLKK18jMWRf79s82yXWHApxT
+	p0zDgZXjcihE3kcgkosf9pod8JqpAJdQblQdldmoWjHHdX3LF0cOXQyBF+aRAJuCHg8JTFyXTuI
+	qno36zErUHyJJ9sAJ0zA4dUYIF6Pnr5SUhBJ0ZFoUd9oKCzawp32xtN2w4TpjxzdKY8OVw0q/Je
+	r9C/zwWf70P4Ba08GOWBMzsNoY7HGjKT/ZsJyvgbiFyht/zw6o7nqwmrwgSDywH6eWYiANO09qe
+	JMh+rLNTeMyO6tsfDsTmn6b2B74wTItTZ7uNGtLCp+/A8LsTznsWN2e+RHjnrQWamE7AcS14I4y
+	292iMBUKElhoAizFMXzr5FFubl7sRYeKV9CY=
+X-Google-Smtp-Source: AGHT+IGuQ0VThV/yJUVdC3GCVEM3YobvqBbPkEGiEo1ShTS8wNLmy+vLpB1N2s8mmpGR6FXcpOJg8w==
+X-Received: by 2002:a05:600c:5494:b0:442:cab1:e092 with SMTP id 5b1f17b1804b1-4511ecc2522mr71040995e9.11.1748886384117;
+        Mon, 02 Jun 2025 10:46:24 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <421e2f85-c1ed-4989-b8db-36e261826fa0@suse.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH 1/2] CI: Use bash arrays to simplfy dom0 rootfs construction
+Date: Mon,  2 Jun 2025 18:46:17 +0100
+Message-Id: <20250602174618.2641439-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250602174618.2641439-1-andrew.cooper3@citrix.com>
+References: <20250602174618.2641439-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 02/06/2025 4:37 pm, Jan Beulich wrote:
-> There are two issues there: When hvm_map_guest_frame_rw() yields a r/o
-> page mapping, we fail to indicate the failure to the guest, and we fall
-> over the NULL pointer in nvcpu->nv_vvmcx when subsequently invoking
-> nvmx_set_vmcs_pointer() (if no earlier VMPTRLD put in place a valid
-> value).
->
-> Fixes: 5dbbaa0fe121 ("x86/vvmx: fix I/O and MSR bitmaps mapping")
-> Reported-by: Manuel Andreas <manuel.andreas@tum.de>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->
-> --- a/xen/arch/x86/hvm/vmx/vvmx.c
-> +++ b/xen/arch/x86/hvm/vmx/vvmx.c
-> @@ -1820,7 +1820,7 @@ static int nvmx_handle_vmptrld(struct cp
->                  vvmcx = NULL;
->              }
->          }
-> -        else
-> +        if ( !vvmcx )
->          {
->              vmfail(regs, VMX_INSN_VMPTRLD_INVALID_PHYADDR);
->              goto out;
+For Qubes, this requires switching from sh to bash.
 
-To go back to one of Manuel's original questions, there is no such thing
-as a read-only page in real hardware (write ignore is the closest), but
-I'm certain that hardware will give us VMPTRLD_INVALID_PHYADDR for e.g.
-trying to overlay the APIC MMIO page, so I think it is a reasonable to
-use for this purpose.
+This reduces the number of times the target filename needs to be written to 1.
 
-But, please insert a blank line.  I've spent 5 minutes thinking this
-patch was broken and trying to figure out how you'd covered the r/o case
-before realising I was reading it wrong.
+Expand the comment to explain the concatination constraints.
 
-With that, Reviewed-By: Andrew Cooper <andrew.cooper3@citrix.com>
+No functional change.
 
-~Andrew
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+
+v2:
+ * Use dom0_rootfs_extra_{un,}comp arrays
+---
+ automation/scripts/qubes-x86-64.sh            | 18 ++++++++++++-----
+ .../scripts/xilinx-smoke-dom0-x86_64.sh       | 20 ++++++++++++-------
+ 2 files changed, 26 insertions(+), 12 deletions(-)
+
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index 8e86940c6eff..5ec6eff6c469 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ set -ex -o pipefail
+ 
+@@ -22,6 +22,8 @@ domU_type="pvh"
+ domU_vif="'bridge=xenbr0',"
+ domU_extra_config=
+ retrieve_xml=
++dom0_rootfs_extra_comp=()
++dom0_rootfs_extra_uncomp=()
+ 
+ case "${test_variant}" in
+     ### test: smoke test & smoke test PVH & smoke test HVM & smoke test PVSHIM
+@@ -187,10 +189,16 @@ Kernel \r on an \m (\l)
+     rm -rf rootfs
+ fi
+ 
+-# Dom0 rootfs
+-cp binaries/ucode.cpio binaries/dom0-rootfs.cpio.gz
+-cat binaries/rootfs.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+-cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
++# Dom0 rootfs.  The order or concatination is important; ucode wants to come
++# first, and all uncompressed must be ahead of compressed.
++dom0_rootfs_parts=(
++    binaries/ucode.cpio
++    "${dom0_rootfs_extra_uncomp[@]}"
++    binaries/rootfs.cpio.gz
++    binaries/xen-tools.cpio.gz
++    "${dom0_rootfs_extra_comp[@]}"
++)
++cat "${dom0_rootfs_parts[@]}" > binaries/dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+diff --git a/automation/scripts/xilinx-smoke-dom0-x86_64.sh b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+index 8f02fa73bd06..45121f39400a 100755
+--- a/automation/scripts/xilinx-smoke-dom0-x86_64.sh
++++ b/automation/scripts/xilinx-smoke-dom0-x86_64.sh
+@@ -28,6 +28,8 @@ extra = "root=/dev/ram0 console=hvc0"
+ memory = 512
+ '
+ DOMU_CFG_EXTRA=""
++dom0_rootfs_extra_comp=()
++dom0_rootfs_extra_uncomp=()
+ 
+ # Select test variant.
+ if [ "${TEST}" = "ping" ]; then
+@@ -71,6 +73,7 @@ do
+   sleep 1
+ done | argo-exec -p 28333 -d 0 -- /bin/echo
+ "
++    dom0_rootfs_extra_comp+=(binaries/argo.cpio.gz)
+     DOM0_CMD="
+ insmod /lib/modules/\$(uname -r)/updates/xen-argo.ko
+ xl -vvv create /etc/xen/domU.cfg
+@@ -103,13 +106,16 @@ find . | cpio -H newc -o | gzip >> ../binaries/domU-rootfs.cpio.gz
+ cd ..
+ rm -rf rootfs
+ 
+-# Dom0 rootfs
+-cp binaries/ucode.cpio binaries/dom0-rootfs.cpio.gz
+-cat binaries/rootfs.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+-cat binaries/xen-tools.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+-if [[ "${TEST}" == argo ]]; then
+-    cat binaries/argo.cpio.gz >> binaries/dom0-rootfs.cpio.gz
+-fi
++# Dom0 rootfs.  The order or concatination is important; ucode wants to come
++# first, and all uncompressed must be ahead of compressed.
++dom0_rootfs_parts=(
++    binaries/ucode.cpio
++    "${dom0_rootfs_extra_uncomp[@]}"
++    binaries/rootfs.cpio.gz
++    binaries/xen-tools.cpio.gz
++    "${dom0_rootfs_extra_comp[@]}"
++)
++cat "${dom0_rootfs_parts[@]}" > binaries/dom0-rootfs.cpio.gz
+ 
+ # test-local configuration
+ mkdir -p rootfs
+-- 
+2.39.5
+
 
