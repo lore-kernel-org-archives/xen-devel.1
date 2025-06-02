@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC65C54FB3
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 08:45:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1002925.1382338 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6FEC54FB3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 09:05:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1002942.1382368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM0nZ-0004XH-HK; Mon, 02 Jun 2025 08:45:37 +0000
+	id 1uM16F-0008CQ-L4; Mon, 02 Jun 2025 09:04:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1002925.1382338; Mon, 02 Jun 2025 08:45:37 +0000
+Received: by outflank-mailman (output) from mailman id 1002942.1382368; Mon, 02 Jun 2025 09:04:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM0nZ-0004XA-Di; Mon, 02 Jun 2025 08:45:37 +0000
-Received: by outflank-mailman (input) for mailman id 1002925;
- Mon, 02 Jun 2025 08:45:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uM16F-0008CJ-Hi; Mon, 02 Jun 2025 09:04:55 +0000
+Received: by outflank-mailman (input) for mailman id 1002942;
+ Mon, 02 Jun 2025 09:04:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QAfa=YR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uM0nX-0004X2-PK
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 08:45:35 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f2507cb6-3f8d-11f0-b894-0df219b8e170;
- Mon, 02 Jun 2025 10:45:33 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a366843fa6so2106596f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 01:45:33 -0700 (PDT)
+ id 1uM16F-00081k-3x
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 09:04:55 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a56f24f8-3f90-11f0-a300-13f23c93f187;
+ Mon, 02 Jun 2025 11:04:53 +0200 (CEST)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3a367ec7840so2772397f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 02:04:53 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3124e2d120esm5173123a91.14.2025.06.02.01.45.25
+ d9443c01a7336-23506bc8b26sm66014585ad.9.2025.06.02.02.04.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Jun 2025 01:45:32 -0700 (PDT)
+ Mon, 02 Jun 2025 02:04:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,58 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2507cb6-3f8d-11f0-b894-0df219b8e170
+X-Inumbo-ID: a56f24f8-3f90-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1748853933; x=1749458733; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1748855093; x=1749459893; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=kxChy2WxfDmfeUWMBhxsoVuB+hRqdSs3hVOzj1v8TQg=;
-        b=ZgSU5yew1Zu3ZPCW3t8yVTb2qzjWSaELNct82AgQn/uOjLVSAIWm+H949QZInI/gwM
-         DPkuGBxHmaTSi2R6MG318NtiqqQL8A0gOFeVUu1Z5zzHIV4V//COMKhdfTnHrBasEOCS
-         MG0+fwN83i/THSg04wbOl+g+7f9uIE5TVnG/69Xr3B1WLHRYmDu7toKDu7Wac3eAs4hm
-         tq993n4J3XozOvb4aohVdMXmh0O/6iWHfDdKdoLGhp6Lw4I/OmM0zkJzHryleZiqrfzZ
-         BN4rDbWbehFIFVHXpfIl95EFqIzPsscAG86ZWBWZCv8naZmc9wYhS3RK3/SDupSISc0E
-         IJNA==
+        bh=ngZ6Vuh7hQeKo6LT9x+wiicwheB6dNz7u4CSeZREy7I=;
+        b=X92C0ClR1hPXNoLhvTspdhilb+TWmjBSQ8R7x7TUH1QBD2b4mhvi0lhaPwiQD3mhNs
+         veEyVIJz/XPeQD5krwPAMKcWs/d/0YLa2byuUBdHH1N5OlU/Qk+WDH7Up29W34owSQIB
+         Ca5jz5dr4u1MbFRHw8K3tYm2wKVN6pP3w66lZCY3NGzijNgDmwjqJbN2Txt7BWDwLSgZ
+         6Ct1CQaALQXdQNrP2Y8Be3tV3ffAkW1VZI3b95DgS2PR7yQP/K5gZLddheK9KuRtyaVN
+         uC60pd2sHik50BG5RFXARmp1ODio4W287EnkNxxECmq27WAZI98ZpISSLZyqYCR2vK8S
+         rCNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748853933; x=1749458733;
+        d=1e100.net; s=20230601; t=1748855093; x=1749459893;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kxChy2WxfDmfeUWMBhxsoVuB+hRqdSs3hVOzj1v8TQg=;
-        b=I67PgqLDJuCnRuTUZBXNk3zG20KWxBzRmO26T3S+Mv/sRKC9c+BXxVhubqOv2Ebr3l
-         /55h8D7rKa4Z3yBJeGoM4ftDn4/SjjFDD3llHrcNy3cEEmd537A5APgcCQ5+BWUSMckJ
-         HOmRyM/qD5nsZjx5ZMXrRYGK+xYsil6OTgAGPip2OP8Z1sHMiEhoS/+lLpFhWbAZ+m1F
-         s4A+1nzJvB1jhY97ALMalXrg5Yl9J/ntP+7Gp5ob3k8LsC3OE8y/TsGFuF+X5rPJdKyK
-         B7KAMiD7afDRJFLaiPCH84UZhutom8X0vrAKf9J7mK8H2ht0KYGNqoXliwmj0NArxn+6
-         hKyw==
-X-Forwarded-Encrypted: i=1; AJvYcCWBN/nPd1aW98qhk/bBWFLO689ykW9kT4P2TAyETLFRkzNofmhWuaBl5ZveCcrJiwThv6M3SOpz2e0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yye8eKOg37bk0MinIiXQWiC10GBARLurXiMBswqbuD8B5Ndbykr
-	oCYA3sn10gHvCGPgBJK6ZiRr6mcziHK1taAoXXtbflpKFEbFJmDgVAojJ/d+Map3DA==
-X-Gm-Gg: ASbGncsakRjRUQfup7orv+YVFFxYtG0MNqjlGWdGfYa/YcExc199GArgHOonSL9BkPV
-	HFsiWXXKa88SZpF2kxX7dz9X2rOIb38/NcyyBgLoGmTaRAsBmpT2bR/P/LWpxOcNucATtIbzpZz
-	TFbUedMQl7Sfp1hMyLpbl1XzayBkwvI1X366USlMEUZdS9QwH57Z0isKjDtp7zAohTTx65Mgy8S
-	c8QTQ/UXQm/kbjMGzaB3DDXNvFI7D4hhp6ZUNygd6cuxj4NR+8rqppjgorLblcMxf74KYk6eJup
-	dlBOmPCVjNokO5FnrXRcCpCCqk+zyuCOOtWVEdiblOVrP7ZYh9w03X4uXFlfgZk8BXqtDD/Xf9n
-	NYyHiTOU8ePCzQK1WJeAo9MQjwYVntnlL220u
-X-Google-Smtp-Source: AGHT+IF5VHVCF8ZQU+ZrAV4CMubjEUmm8X2kg4jjAFRd3H6n2PCG2M2oX9kGE/eOci5hfiumtHNyiA==
-X-Received: by 2002:adf:b301:0:b0:3a4:f8fa:9c94 with SMTP id ffacd0b85a97d-3a4f8fa9ce5mr7317441f8f.13.1748853933193;
-        Mon, 02 Jun 2025 01:45:33 -0700 (PDT)
-Message-ID: <4cd82cbb-fc01-425d-b036-62f80a027a9b@suse.com>
-Date: Mon, 2 Jun 2025 10:45:36 +0200
+        bh=ngZ6Vuh7hQeKo6LT9x+wiicwheB6dNz7u4CSeZREy7I=;
+        b=ArPkS/CzY/JDNcFOR/iolVHu68uLlew0P6TMOUcUxSOuxWZH+M6jmea46eeZU+U0Ud
+         8hXz4QSmVenb8/+fXHT29HJ4DmGsPuk41w06sKBDMG2nfWGh6KfKlA97FJSqU23omsbJ
+         sUfOfG6ppP/qpZNEaeCtfTQSdU9ePdtUC/SzngZ3sCzq5oCf94Avxz3fDgFMlQLjJ7xQ
+         VUVP/VZ9Kfx/pwHeFrn1LOOtPDrjDOd28WxFTPONUzddvjvCrGN38I57FLUdyjCDhSkg
+         MMgqageascFFcxzw+werl1vduJ8ybvAWfHFpNOC5N2APF4eUQLuomov6gP8z2vY6N5u3
+         k1KQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUWeMnxXJck0cC+Z8r2HBdkkc9GtdKnNAeseaEx/yT+ciKG2kiyuxWHZ4LV9tdnOoaAfYGEiunn3HU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwPJSBa7HCLbxyP0pAm+yUskDXfMHhE5nmYrn3DsMwNY0/HNZTv
+	FR1UyqVwqejpj09VGZGmu6g+P10LPsR87hM9KRLkRzpg6mCs0BgnnmcjDr0q04gJzw==
+X-Gm-Gg: ASbGnctFlA1Uw0qDFkKMd5fIUsJ+dakDFgQpmTEQ2l5n83SL/EpDT7Z7AgNlcxN2Atk
+	vpCjezR9adVLnVmG66vdh3BYQrjK3P3ARlCHuMp991/mqCZJDSUlMK+I2GdRe64YL7jl+9wHfOb
+	zWEKOy+M/5yygbhjlREPIU2gzuTKeiGHF+q8DGrJ1gDGRMNG8Oud+F9/WsuHqU28uMuit9riOuh
+	PFjNYW2ZToiIrHksEmQ1nzRMgJohXdrO3RaI1gljvxZE+VuSeP4fZeZR1H30IPonbuEZ3ALojwe
+	MMst6YA5+WWOWBN04ZZSH3A+v6GGu/JOl+0+YI0AYiztoVgiSRiokmAlLe2sM3ApAqSXG6c7Pyp
+	MgpGmTRV2pOMMliHyIoyBlE5nLwDuq9tNzPuy66oUw6DHPGE=
+X-Google-Smtp-Source: AGHT+IFx3pepFQ+9Hv0YIA9CI0Hq8K45c/r5jJbK5V+IFastwKJcN18fCSYaUS2VkFAFiXMlAxFAjA==
+X-Received: by 2002:a05:6000:2302:b0:3a3:6991:dcbb with SMTP id ffacd0b85a97d-3a4f89a7f8dmr7847316f8f.12.1748855092705;
+        Mon, 02 Jun 2025 02:04:52 -0700 (PDT)
+Message-ID: <2c4f4c2a-b1d7-4cbb-834e-cee0fd3d2433@suse.com>
+Date: Mon, 2 Jun 2025 11:04:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/5] xen/arm: Add way to disable traps on accesses to
- unmapped addresses
-To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Cc: sstabellini@kernel.org, julien@xen.org, bertrand.marquis@arm.com,
- michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, andrew.cooper3@citrix.com,
- edgar.iglesias@amd.com, Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <20250530134559.1434255-1-edgar.iglesias@gmail.com>
- <20250530134559.1434255-2-edgar.iglesias@gmail.com>
+Subject: Re: [PATCH] xen/x86: Remove is_periodic_irq() prototype
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Jason Andryuk <jason.andryuk@amd.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org,
+ "consulting@bugseng.com" <consulting@bugseng.com>
+References: <20250527223753.47055-1-jason.andryuk@amd.com>
+ <1c850e02-0d87-4fd1-8504-0aee53949136@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -124,37 +122,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250530134559.1434255-2-edgar.iglesias@gmail.com>
+In-Reply-To: <1c850e02-0d87-4fd1-8504-0aee53949136@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 30.05.2025 15:45, Edgar E. Iglesias wrote:
-> --- a/xen/common/domain.c
-> +++ b/xen/common/domain.c
-> @@ -721,7 +721,8 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
->           ~(XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
->             XEN_DOMCTL_CDF_s3_integrity | XEN_DOMCTL_CDF_oos_off |
->             XEN_DOMCTL_CDF_xs_domain | XEN_DOMCTL_CDF_iommu |
-> -           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu) )
-> +           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpmu |
-> +           XEN_DOMCTL_CDF_trap_unmapped_accesses) )
->      {
->          dprintk(XENLOG_INFO, "Unknown CDF flags %#x\n", config->flags);
->          return -EINVAL;
-> --- a/xen/include/public/domctl.h
-> +++ b/xen/include/public/domctl.h
-> @@ -66,9 +66,11 @@ struct xen_domctl_createdomain {
->  #define XEN_DOMCTL_CDF_nested_virt    (1U << _XEN_DOMCTL_CDF_nested_virt)
->  /* Should we expose the vPMU to the guest? */
->  #define XEN_DOMCTL_CDF_vpmu           (1U << 7)
-> +/* Should we trap guest accesses to unmapped addresses? */
-> +#define XEN_DOMCTL_CDF_trap_unmapped_accesses  (1U << 8)
+On 28.05.2025 00:39, Andrew Cooper wrote:
+> On 27/05/2025 11:37 pm, Jason Andryuk wrote:
+>> is_periodic_irq() was removed in the Fixes commit, but the prototype
+>> remained.  Drop it now.
+>>
+>> Fixes: ddc35d1cc994 ("[HVM] Enable more than one platform timer...")
+>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+> 
+> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+>> ---
+>> The full Fixes line is:
+>> Fixes: ddc35d1cc994 ("[HVM] Enable more than one platform timer (PIT/RTC/HPET) programmed as periodic timer and adds them to abstract layer, which keeps track of pending_intr_nr to avoid time interrupt lost and sync'ed timer with TSC.")
+> 
+> Yeah, the older commit messages weren't as well structured as we insist
+> on them being these days.
+> 
+> How did you find this?  inspection, or a tool?
 
-Besides being pretty long an identifier (and that's already with "guest" not
-even in the name), if this is to be arch-independent, would this perhaps fit
-x86'es recently introduced "advanced" PVH handling of holes? See [1].
+What I'm curious about: Why didn't Eclair spot this?
 
 Jan
-
-[1] 104591f5dd67 ("x86/dom0: attempt to fixup p2m page-faults for PVH dom0")
 
