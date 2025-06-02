@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8FAC5B549
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 13:37:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003322.1382864 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325A3C5B559
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 13:37:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003324.1382884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM5LV-0000dE-Jk; Mon, 02 Jun 2025 13:36:57 +0000
+	id 1uM5LX-00016N-B0; Mon, 02 Jun 2025 13:36:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003322.1382864; Mon, 02 Jun 2025 13:36:57 +0000
+Received: by outflank-mailman (output) from mailman id 1003324.1382884; Mon, 02 Jun 2025 13:36:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM5LV-0000d5-Gz; Mon, 02 Jun 2025 13:36:57 +0000
-Received: by outflank-mailman (input) for mailman id 1003322;
- Mon, 02 Jun 2025 13:36:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uM5LX-00016G-7v; Mon, 02 Jun 2025 13:36:59 +0000
+Received: by outflank-mailman (input) for mailman id 1003324;
+ Mon, 02 Jun 2025 13:36:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2MT+=YR=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1uM5LU-0000AN-6C
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 13:36:56 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a664d860-3fb6-11f0-a300-13f23c93f187;
- Mon, 02 Jun 2025 15:36:55 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ad8a6c202ffso855479666b.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 06:36:55 -0700 (PDT)
+ id 1uM5LV-00009x-B6
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 13:36:57 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a0776e5c-3fb6-11f0-b894-0df219b8e170;
+ Mon, 02 Jun 2025 15:36:45 +0200 (CEST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-606741e8e7cso1199296a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 06:36:45 -0700 (PDT)
 Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ada5d82becbsm801962166b.39.2025.06.02.06.36.53
+ a640c23a62f3a-ada5d82becbsm801962166b.39.2025.06.02.06.36.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 06:36:54 -0700 (PDT)
+ Mon, 02 Jun 2025 06:36:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,133 +47,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a664d860-3fb6-11f0-a300-13f23c93f187
+X-Inumbo-ID: a0776e5c-3fb6-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748871415; x=1749476215; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=D4baIbDrOsM/y9vBJw3lc1/l5s3LVRFoojQrWo8j6uc=;
-        b=cLEY13ZWw57uHIDQFppYDQ79QwNpvQZbHtCr9SDi7hTkR/iKKWkzJQlfGQRtNfAhD5
-         ISvMhjmjz0fl4oNJqjTP85DoFaXH9yn20WkV2soZLh3VBdRDAziL7JjYAEmRjE787hku
-         Qd3PjNakR9T3wzc/yFmEzRRid9cr/o1gF9bL4=
+        d=citrix.com; s=google; t=1748871405; x=1749476205; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yy53j1DOU6WWUw+PBhTlbtLkLrjDWtoXUpgaf2G0MZI=;
+        b=fAvRw2IZl3fv5MEP+1gQDTRCWvotG4ZIh+GBdr7K3c8/EH0DkrF62WGpO/4v2AFt2e
+         6tDx9DjlIg6i/IdwJ0SuLAclrflYBJLZw2r/KpDGwZ+QwGNOAnnR+GJs/ZQczfzzEx48
+         QT/Hf9Irxn6t8IZzBZG5PDyVhVsyIkKy9OyaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748871415; x=1749476215;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=D4baIbDrOsM/y9vBJw3lc1/l5s3LVRFoojQrWo8j6uc=;
-        b=en8C3jibS4cnCI/bXmqU1oSmCZvfZ5Ayl4Wy6DR+xYlXvErrp14OerG+0qOQH6Xlve
-         eWPiFADutOVSjZPYfjpJCMi8YZBc6cauUZqJMYnXW0NelAlNbIuW7NIyfgJsACtXk+tb
-         cZ7HqqH7eKfM4yrAIk5anmpRj1X+nQCQg6klXjeKpAziIC49QuW71UYWSqCQx71mx4G0
-         /ho+UpuKihQ9ki9rDpSM7Jns2PIZ+ngZpgXYpXIuQ+8ZdcYcDY7/qOV8XoZvKmJNVxx5
-         AsS/55tKO9SxyElHI51UbzqjEiflHK4+GI5J0S9M8Kv2kWO6Py0PqAJLOxl8J+60lfcW
-         Cr6A==
-X-Gm-Message-State: AOJu0Yx1fsMPLu9I/Mxj236owerRfa6zXbgDJqgC14SjZKQ2KjIb1lRm
-	zP2Gob65P4/0dujMpKxsPOoZEcpWHgnkAIsMlLhEt8qkCpQPaubTXKyyChZc87H28DdbyMleM4I
-	3NUc=
-X-Gm-Gg: ASbGncv07aszco3ek8cxSLOkOh08TArGnu91Z1w3Dt4W7WKPlNb/kkBggBICDRpNMp8
-	/WRo79tHf6U7kvZ+T4yoFwvACZNAxEajHtyeLOnxwuN7W05afzopL/Fw8/vyXgy1kTiA8+wui0S
-	nbVt7I7s+OrCkBkNc82reLA+JxsEVXfRDeK+vxio7vUlURoXVYBs+Ex8isQ/ej33DvnUovLz3s/
-	Fm6zGdo6XaqW6FOjeZgsgLvawrChSjE3ADYg9DBq7SDrhxLeQICJ+a2I81CGqtR+TLL9kwVdh7D
-	3aBI/jnbZZNGGrB2WEn2CJRpxbekEqqAiwRLv/KnEIb8WwlFbtvug90G9xTPgKb+2biCtKqvkBG
-	j3xTHGwozZA==
-X-Google-Smtp-Source: AGHT+IGyzrBL1oEx1GJqgPBxBT5OrZ6loM+nv7/VroTRyESh/NW9kHGjgB8y/GwOZNWzbhJ1PHSi4A==
-X-Received: by 2002:a17:907:9711:b0:ad8:9b16:58cc with SMTP id a640c23a62f3a-adb494e5aa2mr765152666b.39.1748871414513;
-        Mon, 02 Jun 2025 06:36:54 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1748871405; x=1749476205;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yy53j1DOU6WWUw+PBhTlbtLkLrjDWtoXUpgaf2G0MZI=;
+        b=Hn4H+G0bEgnouTSPE/EzSex14JlkFs9mUR6aGn6YujW/G6qZi0t06TbsbBRYqTzzug
+         fpAlZJqjL1ENEMEcm5KCdiOAB5fSFznEFscfh2p54tVaDk8blX2EsLYr3g2WsjM0urnb
+         SKdDDAYXwxn2z2dIDydFA2C4p4reYJ4jQ3Ofy2PWt48+BxS/TVHV7keX1rZ6GZzo6aMG
+         GneBkkWwLTJcGMg+0k7ol7sH0j7ehRSUKuPULahMdosbuoaVMwq2CnpCezgdITWz/ghz
+         zicQDWhbFcHnNvYZb7J+0GMyUm/Jucs6JNqvl7b+teeVKSGrGv11qn3r7jrKNgVH75VG
+         UGiQ==
+X-Gm-Message-State: AOJu0YzZoED1lkIEsNklWbAqcSgxQkMWQPUuicGz/uBZn/xa3GQpozUV
+	MtSlRxvmbTOrhhwTF1PpLebtMoum2juhFbmLCH+xCanGaSj9Ubpc4jB4dvs6o32HMVKVtH7K7un
+	8f7I=
+X-Gm-Gg: ASbGncsyWZcqm+/UujpDiFU2/1JkW6usuJ1GbIiLiq9jsKPgDskDgiHF7aL1Dglpt7u
+	Cn4fTfPCVghg7P4f0gAokUfnAUHEIgUDVQnZyekbLpXwBbG1ESWTpGSow0bCfuybtv4XXeDy8cf
+	h5k9MiKQXI1n4M2bYWWvqrem2A3kdZ3fCNjxRcu97o0y+cC+mvOfGhEHHYgxP+tVxZSejipCFL5
+	qJxepJISq3/aLmXs+ODIwC7Ujp1a1XlCj7c7KY18Rw5apsu+arP/yF/IoGwT3zjcqwY6MfyzrJS
+	0S+hNBzMYbFyLsRGRiPX+jUaQoZvTTvhb6OS3K2bhmT9OihGTguQrcxKe12BwquzuPI6UCCNcL6
+	Gvm/bDph15A==
+X-Google-Smtp-Source: AGHT+IFpP/DPyjJsrVxJduaDWmB2TXpnjhtrBnEJgFtvQkMmvBFskmlVj4MaJ6HCh10KwIxdPLIVMw==
+X-Received: by 2002:a17:907:3f12:b0:ad8:9d41:371e with SMTP id a640c23a62f3a-adb322fe389mr1448220566b.36.1748871405037;
+        Mon, 02 Jun 2025 06:36:45 -0700 (PDT)
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 4/5] livepatch: Load built-in key during boot
-Date: Mon,  2 Jun 2025 14:36:36 +0100
-Message-ID: <20250602133639.2871212-5-ross.lagerwall@citrix.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 0/5] LivePatch signing support
+Date: Mon,  2 Jun 2025 14:36:32 +0100
+Message-ID: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
-References: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Parse the raw data of the embedded RSA key into a form that can be later
-used for verifying live patch signatures.
+Live patch signing support was mentioned as future work in the design
+document several years ago. This series finally implements support for
+it since it is a requirement of Secure Boot to prevent loading unsigned
+code into Xen.
 
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
+See the individual patches for what has changed in v3.
 
-* Fix endianness of builtin key lengths
-* Set builtin key to __ro_after_init
+Jennifer Herbert (1):
+  livepatch: Verify livepatch signatures
 
- xen/common/livepatch.c | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+Kevin Lampis (1):
+  livepatch: Embed public key in Xen
 
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 9a0df5363b59..92d1d342d872 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -11,6 +11,8 @@
- #include <xen/lib.h>
- #include <xen/list.h>
- #include <xen/mm.h>
-+#include <xen/mpi.h>
-+#include <xen/rsa.h>
- #include <xen/sched.h>
- #include <xen/smp.h>
- #include <xen/softirq.h>
-@@ -73,6 +75,10 @@ static struct livepatch_work livepatch_work;
- static DEFINE_PER_CPU(bool, work_to_do);
- static DEFINE_PER_CPU(struct tasklet, livepatch_tasklet);
- 
-+#ifdef CONFIG_PAYLOAD_VERIFY
-+static struct rsa_public_key __ro_after_init builtin_payload_key;
-+#endif
-+
- static int get_name(const struct xen_livepatch_name *name, char *n)
- {
-     if ( !name->size || name->size > XEN_LIVEPATCH_NAME_SIZE )
-@@ -2300,6 +2306,31 @@ static void cf_check livepatch_printall(unsigned char key)
-     spin_unlock(&payload_lock);
- }
- 
-+static int load_builtin_payload_key(void)
-+{
-+#ifdef CONFIG_PAYLOAD_VERIFY
-+    const uint8_t *ptr;
-+    uint32_t len;
-+
-+    rsa_public_key_init(&builtin_payload_key);
-+
-+    ptr = xen_livepatch_key_data;
-+
-+    memcpy(&len, ptr, sizeof(len));
-+    ptr += sizeof(len);
-+    builtin_payload_key.n = mpi_read_raw_data(ptr, le32_to_cpu(len));
-+    ptr += len;
-+
-+    memcpy(&len, ptr, sizeof(len));
-+    ptr += sizeof(len);
-+    builtin_payload_key.e = mpi_read_raw_data(ptr, le32_to_cpu(len));
-+
-+    return rsa_public_key_prepare(&builtin_payload_key);
-+#else
-+    return 0;
-+#endif
-+}
-+
- static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-@@ -2318,6 +2349,11 @@ static struct notifier_block cpu_nfb = {
- static int __init cf_check livepatch_init(void)
- {
-     unsigned int cpu;
-+    int err;
-+
-+    err = load_builtin_payload_key();
-+    if ( err )
-+        return err;
- 
-     for_each_online_cpu ( cpu )
-     {
+Ross Lagerwall (3):
+  docs: Introduce live patch signing
+  crypto: Add RSA support
+  livepatch: Load built-in key during boot
+
+ docs/misc/livepatch.pandoc      |  106 +-
+ xen/common/Kconfig              |   18 +
+ xen/common/livepatch.c          |  139 +++
+ xen/common/livepatch_elf.c      |   55 +
+ xen/crypto/Makefile             |   12 +
+ xen/crypto/rsa.c                |  196 ++++
+ xen/include/xen/livepatch.h     |   15 +
+ xen/include/xen/livepatch_elf.h |   18 +
+ xen/include/xen/mpi.h           |   68 ++
+ xen/include/xen/rsa.h           |   74 ++
+ xen/lib/Makefile                |    1 +
+ xen/lib/mpi.c                   | 1729 +++++++++++++++++++++++++++++++
+ xen/tools/extract-key.py        |   40 +
+ 13 files changed, 2419 insertions(+), 52 deletions(-)
+ create mode 100644 xen/crypto/rsa.c
+ create mode 100644 xen/include/xen/mpi.h
+ create mode 100644 xen/include/xen/rsa.h
+ create mode 100644 xen/lib/mpi.c
+ create mode 100755 xen/tools/extract-key.py
+
 -- 
 2.49.0
 
