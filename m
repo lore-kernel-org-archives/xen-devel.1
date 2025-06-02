@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2A1EC5AD49
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 13:37:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003321.1382854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8FAC5B549
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 13:37:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003322.1382864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM5LR-0000O3-DF; Mon, 02 Jun 2025 13:36:53 +0000
+	id 1uM5LV-0000dE-Jk; Mon, 02 Jun 2025 13:36:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003321.1382854; Mon, 02 Jun 2025 13:36:53 +0000
+Received: by outflank-mailman (output) from mailman id 1003322.1382864; Mon, 02 Jun 2025 13:36:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM5LR-0000Nw-A3; Mon, 02 Jun 2025 13:36:53 +0000
-Received: by outflank-mailman (input) for mailman id 1003321;
- Mon, 02 Jun 2025 13:36:52 +0000
+	id 1uM5LV-0000d5-Gz; Mon, 02 Jun 2025 13:36:57 +0000
+Received: by outflank-mailman (input) for mailman id 1003322;
+ Mon, 02 Jun 2025 13:36:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2MT+=YR=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1uM5LQ-0000AN-S9
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 13:36:52 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1uM5LU-0000AN-6C
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 13:36:56 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a39e7a3b-3fb6-11f0-a300-13f23c93f187;
- Mon, 02 Jun 2025 15:36:51 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ad51ef2424bso850932766b.0
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 06:36:51 -0700 (PDT)
+ id a664d860-3fb6-11f0-a300-13f23c93f187;
+ Mon, 02 Jun 2025 15:36:55 +0200 (CEST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ad8a6c202ffso855479666b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 06:36:55 -0700 (PDT)
 Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ada5d82becbsm801962166b.39.2025.06.02.06.36.49
+ a640c23a62f3a-ada5d82becbsm801962166b.39.2025.06.02.06.36.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 06:36:49 -0700 (PDT)
+ Mon, 02 Jun 2025 06:36:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,205 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a39e7a3b-3fb6-11f0-a300-13f23c93f187
+X-Inumbo-ID: a664d860-3fb6-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748871410; x=1749476210; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1748871415; x=1749476215; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eXyFKt8SkeFv2JRAXt3PYp9ZfiPqxDGxVcFws6/GjMQ=;
-        b=C7S7NmLvXn4Aiavsyg3n9EpbG/w5QwFcli1QncfilI8mGHC49wLHJ/t93944dvjf6A
-         kx6bHqBuOzNfPqMHlMcl5CFuB0k+Fuw4GXtDRnt3snAeXmfY8woiswB8vY+Suyejw5at
-         DLIfOmZEeediUplTaR4aiLj5oqOspaj62hF8U=
+        bh=D4baIbDrOsM/y9vBJw3lc1/l5s3LVRFoojQrWo8j6uc=;
+        b=cLEY13ZWw57uHIDQFppYDQ79QwNpvQZbHtCr9SDi7hTkR/iKKWkzJQlfGQRtNfAhD5
+         ISvMhjmjz0fl4oNJqjTP85DoFaXH9yn20WkV2soZLh3VBdRDAziL7JjYAEmRjE787hku
+         Qd3PjNakR9T3wzc/yFmEzRRid9cr/o1gF9bL4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748871410; x=1749476210;
+        d=1e100.net; s=20230601; t=1748871415; x=1749476215;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=eXyFKt8SkeFv2JRAXt3PYp9ZfiPqxDGxVcFws6/GjMQ=;
-        b=GgnKT5rEbA1QCulOqrVkOEshQMr43bFH1royt6Ov66frSPYsQ1MrwYbeks1FeFusug
-         Q8kVXeG7FF85c4OQrZhixbx6MHpM0LZvAxmMey31R5VTq7xdbG0AqecFMpXDJKZB5PYK
-         UUbsyjSw7JQp+s8is/oI4xwXP0PI6g4KHgBazBQEkpvIJz44bIhU+bxLFbM60z/M/F3N
-         pr5i8+Edqe81u7CrChXnJKtf6q8DPCAcWpzymtakeJ9SSJsEB3OZRKqfOuAPKE3D4ZDU
-         QlWTPd6iG7f4mfsj/DUJNTGWE7ALKND1pgNqB8aY0LPMhxloFyuz2AFSfC9hZaYsfj3V
-         pV9w==
-X-Gm-Message-State: AOJu0YwY+zYtZm1GgdVYn/CGvFr2/kruQINrMI9kOzPBStf6d3yYb/O7
-	CYk4VOX59kqA7B7L7aWL0TjVyry0NTG5tJDjQgDqQHTM5SISYWnFz0zZkFqPksmGuruLAAard4Y
-	bR7Q=
-X-Gm-Gg: ASbGncuyyOXAIzHW53MB+r1Tsa5WJckwCNv77Q3uON1nKKT7dRteN/eoV6r1dCbi9Z3
-	1Fo4he6oy4ywIORY3/AzoPrJLRt7mNNzB5kgBcE1PXjiPJSsCceYEGdfzWOEN8GESBMJVqHlB85
-	rCGTqgUP3Kn6U8uZrEQWuz74/rQjKv2pv8M//Gr+iJTr0xU3PC0GOOhf/CCTI64cvCBxA2mqjYr
-	MWV31a7NvpfsqEy5tLjXzTL1C7n1u9NqCXWbDIXzG1+dsyWCZtz7sgMlCSKSsFH7N5tIW4S4U2D
-	N3lQfT7zp72lwnSu6hjN5gOjQty5d2i9Cvc6UdIih90OLiiuu8GJDmltVY8UvcvyHm/RUV7xyEo
-	=
-X-Google-Smtp-Source: AGHT+IFDR2jTnNkplK5MDSg0EiFkL63MSZQoNcI1lDzXXdOHZRHY4hs4m38UOsREknK3kO+gkCgGBA==
-X-Received: by 2002:a17:907:9488:b0:ad8:99e7:171 with SMTP id a640c23a62f3a-adb493e28f3mr800031766b.21.1748871410169;
-        Mon, 02 Jun 2025 06:36:50 -0700 (PDT)
+        bh=D4baIbDrOsM/y9vBJw3lc1/l5s3LVRFoojQrWo8j6uc=;
+        b=en8C3jibS4cnCI/bXmqU1oSmCZvfZ5Ayl4Wy6DR+xYlXvErrp14OerG+0qOQH6Xlve
+         eWPiFADutOVSjZPYfjpJCMi8YZBc6cauUZqJMYnXW0NelAlNbIuW7NIyfgJsACtXk+tb
+         cZ7HqqH7eKfM4yrAIk5anmpRj1X+nQCQg6klXjeKpAziIC49QuW71UYWSqCQx71mx4G0
+         /ho+UpuKihQ9ki9rDpSM7Jns2PIZ+ngZpgXYpXIuQ+8ZdcYcDY7/qOV8XoZvKmJNVxx5
+         AsS/55tKO9SxyElHI51UbzqjEiflHK4+GI5J0S9M8Kv2kWO6Py0PqAJLOxl8J+60lfcW
+         Cr6A==
+X-Gm-Message-State: AOJu0Yx1fsMPLu9I/Mxj236owerRfa6zXbgDJqgC14SjZKQ2KjIb1lRm
+	zP2Gob65P4/0dujMpKxsPOoZEcpWHgnkAIsMlLhEt8qkCpQPaubTXKyyChZc87H28DdbyMleM4I
+	3NUc=
+X-Gm-Gg: ASbGncv07aszco3ek8cxSLOkOh08TArGnu91Z1w3Dt4W7WKPlNb/kkBggBICDRpNMp8
+	/WRo79tHf6U7kvZ+T4yoFwvACZNAxEajHtyeLOnxwuN7W05afzopL/Fw8/vyXgy1kTiA8+wui0S
+	nbVt7I7s+OrCkBkNc82reLA+JxsEVXfRDeK+vxio7vUlURoXVYBs+Ex8isQ/ej33DvnUovLz3s/
+	Fm6zGdo6XaqW6FOjeZgsgLvawrChSjE3ADYg9DBq7SDrhxLeQICJ+a2I81CGqtR+TLL9kwVdh7D
+	3aBI/jnbZZNGGrB2WEn2CJRpxbekEqqAiwRLv/KnEIb8WwlFbtvug90G9xTPgKb+2biCtKqvkBG
+	j3xTHGwozZA==
+X-Google-Smtp-Source: AGHT+IGyzrBL1oEx1GJqgPBxBT5OrZ6loM+nv7/VroTRyESh/NW9kHGjgB8y/GwOZNWzbhJ1PHSi4A==
+X-Received: by 2002:a17:907:9711:b0:ad8:9b16:58cc with SMTP id a640c23a62f3a-adb494e5aa2mr765152666b.39.1748871414513;
+        Mon, 02 Jun 2025 06:36:54 -0700 (PDT)
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: Kevin Lampis <kevin.lampis@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v3 2/5] livepatch: Embed public key in Xen
-Date: Mon,  2 Jun 2025 14:36:34 +0100
-Message-ID: <20250602133639.2871212-3-ross.lagerwall@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 4/5] livepatch: Load built-in key during boot
+Date: Mon,  2 Jun 2025 14:36:36 +0100
+Message-ID: <20250602133639.2871212-5-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
 References: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Kevin Lampis <kevin.lampis@cloud.com>
+Parse the raw data of the embedded RSA key into a form that can be later
+used for verifying live patch signatures.
 
-Make it possible to embed a public key in Xen to be used when verifying
-live patch payloads. Inclusion of the public key is optional.
-
-To avoid needing to include a DER / X.509 parser in the hypervisor, the
-public key is unpacked at build time and included in a form that is
-convenient for the hypervisor to consume. This is different approach
-from that used by Linux which embeds the entire X.509 certificate and
-builds in a parser for it.
-
-A suitable key can be created using openssl:
-
-openssl req -x509 -newkey rsa:2048 -keyout priv.pem -out pub.pem \
-    -sha256 -days 3650 -nodes \
-    -subj "/C=XX/ST=StateName/L=CityName/O=CompanyName/OU=CompanySectionName/CN=CommonNameOrHostname"
-openssl x509 -inform PEM -in pub.pem -outform PEM -pubkey -nocert -out verify_key.pem
-
-Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
 Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
 
-In v3:
+* Fix endianness of builtin key lengths
+* Set builtin key to __ro_after_init
 
-* Drop unnecessary condition in Makefile
-* Use dashes instead of underscores
-* Drop section placement annotation on declaration
-* Clarify endianness of embedded key
+ xen/common/livepatch.c | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
- xen/common/Kconfig          | 18 +++++++++++++++++
- xen/crypto/Makefile         | 11 ++++++++++
- xen/include/xen/livepatch.h |  5 +++++
- xen/tools/extract-key.py    | 40 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 74 insertions(+)
- create mode 100755 xen/tools/extract-key.py
-
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 0951d4c2f286..74673078202a 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -472,6 +472,24 @@ config LIVEPATCH
- 
- 	  If unsure, say Y.
- 
-+config PAYLOAD_VERIFY
-+	bool "Verify signed LivePatch payloads"
-+	depends on LIVEPATCH
-+	select CRYPTO
-+	help
-+	  Verify signed LivePatch payloads using an RSA public key built
-+	  into the Xen hypervisor. Selecting this option requires a
-+	  public key in PEM format to be available for embedding during
-+	  the build.
-+
-+config PAYLOAD_VERIFY_KEY
-+	string "File name of public key used to verify payloads"
-+	default "verify_key.pem"
-+	depends on PAYLOAD_VERIFY
-+	help
-+	  The file name of an RSA public key in PEM format to be used for
-+	  verifying signed LivePatch payloads.
-+
- config FAST_SYMBOL_LOOKUP
- 	bool "Fast symbol lookup (bigger binary)"
- 	default y
-diff --git a/xen/crypto/Makefile b/xen/crypto/Makefile
-index db29655333a3..3d17232b78bc 100644
---- a/xen/crypto/Makefile
-+++ b/xen/crypto/Makefile
-@@ -1,2 +1,13 @@
- obj-y += rijndael.o
- obj-y += vmac.o
-+
-+obj-$(CONFIG_PAYLOAD_VERIFY) += builtin-payload-key.o
-+
-+key-path := $(objtree)/$(patsubst "%",%,$(CONFIG_PAYLOAD_VERIFY_KEY))
-+$(obj)/builtin-payload-key.bin: $(key-path) $(srctree)/tools/extract-key.py
-+	$(srctree)/tools/extract-key.py < $< > $@.new
-+	$(call move-if-changed,$@.new,$@)
-+
-+$(obj)/builtin-payload-key.S: BINFILE_FLAGS := -i
-+$(obj)/builtin-payload-key.S: $(srctree)/tools/binfile $(obj)/builtin-payload-key.bin FORCE
-+	$(call if_changed,binfile,$(obj)/builtin-payload-key.bin xen_livepatch_key_data)
-diff --git a/xen/include/xen/livepatch.h b/xen/include/xen/livepatch.h
-index d074a5bebecc..52f90cbed45b 100644
---- a/xen/include/xen/livepatch.h
-+++ b/xen/include/xen/livepatch.h
-@@ -143,6 +143,11 @@ struct payload;
- int revert_payload(struct payload *data);
- void revert_payload_tail(struct payload *data);
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 9a0df5363b59..92d1d342d872 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -11,6 +11,8 @@
+ #include <xen/lib.h>
+ #include <xen/list.h>
+ #include <xen/mm.h>
++#include <xen/mpi.h>
++#include <xen/rsa.h>
+ #include <xen/sched.h>
+ #include <xen/smp.h>
+ #include <xen/softirq.h>
+@@ -73,6 +75,10 @@ static struct livepatch_work livepatch_work;
+ static DEFINE_PER_CPU(bool, work_to_do);
+ static DEFINE_PER_CPU(struct tasklet, livepatch_tasklet);
  
 +#ifdef CONFIG_PAYLOAD_VERIFY
-+/* The public key data contained with Xen used to verify payload signatures. */
-+extern const uint8_t xen_livepatch_key_data[];
++static struct rsa_public_key __ro_after_init builtin_payload_key;
 +#endif
 +
- #else
+ static int get_name(const struct xen_livepatch_name *name, char *n)
+ {
+     if ( !name->size || name->size > XEN_LIVEPATCH_NAME_SIZE )
+@@ -2300,6 +2306,31 @@ static void cf_check livepatch_printall(unsigned char key)
+     spin_unlock(&payload_lock);
+ }
  
- /*
-diff --git a/xen/tools/extract-key.py b/xen/tools/extract-key.py
-new file mode 100755
-index 000000000000..05c6bc261b3f
---- /dev/null
-+++ b/xen/tools/extract-key.py
-@@ -0,0 +1,40 @@
-+#!/usr/bin/env python3
++static int load_builtin_payload_key(void)
++{
++#ifdef CONFIG_PAYLOAD_VERIFY
++    const uint8_t *ptr;
++    uint32_t len;
 +
-+# SPDX-License-Identifier: GPL-2.0
++    rsa_public_key_init(&builtin_payload_key);
 +
-+import binascii
-+import struct
-+import sys
-+import subprocess
-+import re
++    ptr = xen_livepatch_key_data;
 +
-+# Decode a certificate into a format suitable for embedding in Xen.
++    memcpy(&len, ptr, sizeof(len));
++    ptr += sizeof(len);
++    builtin_payload_key.n = mpi_read_raw_data(ptr, le32_to_cpu(len));
++    ptr += len;
 +
-+out = subprocess.check_output(['openssl', 'rsa', '-pubin', '-inform', 'PEM',
-+                               '-noout', '-text'], stdin=sys.stdin,
-+                               universal_newlines=True)
-+combined = ''
-+for line in out.split('\n'):
-+    line = line.rstrip()
-+    if line.startswith('    '):
-+        combined += line.strip().replace(':', '')
-+    match = re.match(r'Exponent: .* \(0x(.*)\)', line)
-+    if match:
-+        e = match.group(1)
++    memcpy(&len, ptr, sizeof(len));
++    ptr += sizeof(len);
++    builtin_payload_key.e = mpi_read_raw_data(ptr, le32_to_cpu(len));
 +
-+n = combined.lstrip('0')
-+if len(n) % 2 == 1:
-+    n = '0' + n
-+n = binascii.unhexlify(n)
-+e = e.lstrip('0')
-+if len(e) % 2 == 1:
-+    e = '0' + e
-+e = binascii.unhexlify(e)
++    return rsa_public_key_prepare(&builtin_payload_key);
++#else
++    return 0;
++#endif
++}
 +
-+# Use little-endian for lengths.
-+# Use big-endian for byte sequences (as openssl does).
+ static int cf_check cpu_callback(
+     struct notifier_block *nfb, unsigned long action, void *hcpu)
+ {
+@@ -2318,6 +2349,11 @@ static struct notifier_block cpu_nfb = {
+ static int __init cf_check livepatch_init(void)
+ {
+     unsigned int cpu;
++    int err;
 +
-+sys.stdout.buffer.write(struct.pack('<I', len(n)))
-+sys.stdout.buffer.write(n)
-+sys.stdout.buffer.write(struct.pack('<I', len(e)))
-+sys.stdout.buffer.write(e)
++    err = load_builtin_payload_key();
++    if ( err )
++        return err;
+ 
+     for_each_online_cpu ( cpu )
+     {
 -- 
 2.49.0
 
