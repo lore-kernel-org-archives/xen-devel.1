@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4CFC5B549
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 14:19:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003480.1383044 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9216C5AD49
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 14:20:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003491.1383054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM60t-0000Bl-2I; Mon, 02 Jun 2025 14:19:43 +0000
+	id 1uM61h-0001kS-FM; Mon, 02 Jun 2025 14:20:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003480.1383044; Mon, 02 Jun 2025 14:19:43 +0000
+Received: by outflank-mailman (output) from mailman id 1003491.1383054; Mon, 02 Jun 2025 14:20:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM60s-0000Be-VW; Mon, 02 Jun 2025 14:19:42 +0000
-Received: by outflank-mailman (input) for mailman id 1003480;
- Mon, 02 Jun 2025 14:19:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uM61h-0001kL-CY; Mon, 02 Jun 2025 14:20:33 +0000
+Received: by outflank-mailman (input) for mailman id 1003491;
+ Mon, 02 Jun 2025 14:20:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I+dS=YR=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1uM60r-0008Bu-Oo
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 14:19:41 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20606.outbound.protection.outlook.com
- [2a01:111:f403:2009::606])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9eb79e65-3fbc-11f0-a300-13f23c93f187;
- Mon, 02 Jun 2025 16:19:40 +0200 (CEST)
-Received: from MW3PR05CA0013.namprd05.prod.outlook.com (2603:10b6:303:2b::18)
- by SJ2PR12MB9192.namprd12.prod.outlook.com (2603:10b6:a03:55d::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.27; Mon, 2 Jun
- 2025 14:19:25 +0000
-Received: from SJ1PEPF000023D1.namprd02.prod.outlook.com
- (2603:10b6:303:2b:cafe::93) by MW3PR05CA0013.outlook.office365.com
- (2603:10b6:303:2b::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.17 via Frontend Transport; Mon,
- 2 Jun 2025 14:19:25 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF000023D1.mail.protection.outlook.com (10.167.244.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8792.29 via Frontend Transport; Mon, 2 Jun 2025 14:19:24 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Jun
- 2025 09:19:20 -0500
+ <SRS0=zRGa=YR=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1uM61g-00008u-KC
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 14:20:32 +0000
+Received: from fhigh-b3-smtp.messagingengine.com
+ (fhigh-b3-smtp.messagingengine.com [202.12.124.154])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bca2daae-3fbc-11f0-b894-0df219b8e170;
+ Mon, 02 Jun 2025 16:20:30 +0200 (CEST)
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id B126B2540166;
+ Mon,  2 Jun 2025 10:20:29 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-05.internal (MEProxy); Mon, 02 Jun 2025 10:20:29 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 2 Jun 2025 10:20:28 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,149 +47,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9eb79e65-3fbc-11f0-a300-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IhYFk8h50o3yIrgIZhSP3W9+G79jEJn8igzKzRs8QvSG63AT0HILbVTvrZnVMxwqk8LhbdhPgl7XdJ1ENCVeRL/HY/41y/FGyKa5alW2NIL6/9elutiaJbJ5o5riZvJDLwRJCrrFwMsXEASDJ7RgExuLwcM+KqC7GdUGvV2F4HiUsVsviB0yV/LXZkwwSLTdsSvE5p7mLbKMltpkJSb1Xbrh9+4IrIAwt0i5K7kZumB8DfjVLqD0GXMLA6RkLfREVnbSKx/BFLGfuPhy+AH7wxThebsIPlhvByI0ISjdZwHS99OFSCQKYllWWyXJghzG3wrzLTbgOwC3lvjW4VBvHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SEfCPmWcu3ajNrJzQLhFprDXyE0OyQKnt3mZTPoj9DQ=;
- b=ANY4dExC44N2q4LgMa9OA1PyMYIONs+KJMKpZD6dhyTv/RmSXekVeBcG0zi9TM1sxaFrvx0JGLi95vs/btHHIQYZ/+aIDzSPK0qg9uD1qkYz0qUNBHRoGPhGBHhIqXF+F7u1HcUXtDR34EmtrvkgaHHS+mLJhMLbfcQlHlxo0AL6M+vaNDUxTCFyCK/yioHd+I85G7od8zFzrqqUM2RDSP/Oqqh8iE2ICoh5J10wTE8W97u3/3esxTWgJn5PyA9gRnw9/Il45Wyfn84Bb7tIEQfBTUHutL42BrXJW4+GLhDQfjA4DWYps+/rn6amO5drShSNneZm2TfbbsxvXhZofQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SEfCPmWcu3ajNrJzQLhFprDXyE0OyQKnt3mZTPoj9DQ=;
- b=I/nB26SzJAeBNKxjq+HrFrwxiXXPcBm+0HmrF865hbZt35qpsKnS+bEpkE4s2VoiH4gDsjDjJuHtX1uz8wNsB0A8Cwq1nZHxcvxtUn6SYjLUI9y8aJi0I7oM7HydwqnluMbBaStdS62iQs+K6QQKWrjDDls/IZSaJxiH5Rf75dM=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+X-Inumbo-ID: bca2daae-3fbc-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1748874029;
+	 x=1748960429; bh=AV/igsfrrFWvo9IG6lLn9Rt0La8NTlknG/qFtz69sJY=; b=
+	kHyTEFDTlxfk3VRrr14Z3H8wcYR38pAalGbKRI6eSXIOHxuIh1kzNL3YamEHI6al
+	+2tx6U4YZjZyhuy8z0V11GtgusQmh39VKLjlqPZjx+ZCt3ZBLCpM0J4qi2BhfCyU
+	gMjoRhOVNHWJHW72sOahnv8hgYFkUR97z2ZQwPPIaoZaCwtKmj7UxrJl8RK07fv5
+	hAIwC+yzDb1xnQ1SIYy8KSfeapJyRPLjzCU6sXSZdA239Jypn8v7IYIDBD4t83ga
+	tqMRBwZr5U4ImYA9VmiI0nnok659XYaYGzNhmMmyIdQmVbK/aNKwPuzdfH1s42C7
+	ht+JhCQR/WJm5DanXgYL/w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1748874029; x=1748960429; bh=AV/igsfrrFWvo9IG6lLn9Rt0La8NTlknG/q
+	Ftz69sJY=; b=PUvaREDggQpJbbKSgyuOjqdXHPoBzJKW+R8m22hRkGuSD9GtWT9
+	bXqLYL157WmQEJx+l60VCIXOD/TFXnB95qlOgDyr2CXG0V9w7jJIAdzCwkfpugdG
+	J5kNdHejHwKW4Ul1OXDwm7GptgAiBk+Bu8Jop8jRloUKPVo7+SWK59q4ftO7wZsI
+	MOl8H5SDmU131o9uSOQ07Ojl2S+r5abERX3Rvnl321GS/H1VnIN+8ZU0M+xZOkBu
+	SYiUFkORMC6srkhTPI6YHjoMWNKxe93bUgtpC6FkRajmMI5Z2Lam0H+BWaeJIK6B
+	/m1BDohqj+ILiJcgoLxeQjJawteZSOxUWaA==
+X-ME-Sender: <xms:LbM9aDmlqjVj2ZGLREtr7cLlx-7EAGSsA1wZ8ECg4slcA33nFU_KOA>
+    <xme:LbM9aG2rmzCsfU0NBtFajTe7rE1rWgFb6_0pA5wFkDwPSQ33fd23IxoiH1sYyk6Np
+    -Wmja2o4U8teQ>
+X-ME-Received: <xmr:LbM9aJpDKBSpaqTNEmnptzo4lwP62Gpbvx1dT1ZG6f2x3qHAKr2GflPGMmRBREXsPu9JuvoRsdjNBQ1EjcbUm4552GapwTO_0q0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdefjeeltdculddtuddrgeefvddrtd
+    dtmdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggft
+    fghnshhusghstghrihgsvgdpuffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftd
+    dtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhf
+    gggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifsh
+    hkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhg
+    shhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgudelteefvefhfeehieetleeihf
+    ejhfeludevteetkeevtedtvdegueetfeejudenucevlhhushhtvghrufhiiigvpedtnecu
+    rfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthh
+    hinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeefpdhmohguvgepshhmthhpohhu
+    thdprhgtphhtthhopehkvghvihhnrdhlrghmphhishestghlohhuugdrtghomhdprhgtph
+    htthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdp
+    rhgtphhtthhopehrohhsshdrlhgrghgvrhifrghllhestghithhrihigrdgtohhm
+X-ME-Proxy: <xmx:LbM9aLmQvOQ9gs-H0o9pAiFgOmKMThA6MiPfnWtRQRld4XzWYSxp6g>
+    <xmx:LbM9aB2ZH-P7vFQrs6wCSjDUyFIIkpqGBsYbPfvpXvqM--jCr_LSDQ>
+    <xmx:LbM9aKvbpuUC2JBR3y2JEoMS18AkCZldQaHfltS2mlPQ_Bwjledsog>
+    <xmx:LbM9aFW7qO8L0_nOJlCkg9j8uE3wgfMLxMee4Dfafm6xYguNDdzIwQ>
+    <xmx:LbM9aLOSB9XDM5poxqwV2chDSTQtNELk7goYEVPgFv606M3QkpWvT3Mo>
+Feedback-ID: i1568416f:Fastmail
+Date: Mon, 2 Jun 2025 16:20:26 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Kevin Lampis <kevin.lampis@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH v2 2/3] Add lockdown mode
+Message-ID: <aD2zKsIcsQt-LQlt@mail-itl>
+References: <20250602134656.3836280-1-kevin.lampis@cloud.com>
+ <20250602134656.3836280-3-kevin.lampis@cloud.com>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ws1tl/B/3EL9OFd3"
+Content-Disposition: inline
+In-Reply-To: <20250602134656.3836280-3-kevin.lampis@cloud.com>
+
+
+--ws1tl/B/3EL9OFd3
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 2 Jun 2025 16:19:18 +0200
-Message-ID: <DAC42T9A7DMZ.3P5GWMI89RZ90@amd.com>
-Subject: Re: [PATCH 06/19] xen: Clean up asm-generic/device.h
-From: Alejandro Vallejo <agarciav@amd.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: Alistair Francis <alistair.francis@wdc.com>, Bob Eshleman
-	<bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>, "Oleksii
- Kurochko" <oleksii.kurochko@gmail.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	<xen-devel@lists.xenproject.org>
-X-Mailer: aerc 0.20.1
-References: <DA1WWRUQLCAG.ZTVR1HXJ85V0@amd.com>
- <20250530120242.39398-1-agarciav@amd.com>
- <20250530120242.39398-7-agarciav@amd.com>
- <e69e572f-497d-4521-a28a-a554ac18c271@suse.com>
-In-Reply-To: <e69e572f-497d-4521-a28a-a554ac18c271@suse.com>
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D1:EE_|SJ2PR12MB9192:EE_
-X-MS-Office365-Filtering-Correlation-Id: 991a7e7f-5711-4bc9-d13d-08dda1e07a2b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|82310400026|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?SEF5NHNXZXZhVjVpb2x2Q0pEMnNhV1U2UkJJd0FmZGJoRmpRUU0zTUxMb1FY?=
- =?utf-8?B?TU01aFVkWVoxQ29rWDVORUxzQnUzVy9CUGZ5bnd4MVNrZDdBNGw2c1dHUlhl?=
- =?utf-8?B?bGthUnBYVklBK29jMEZkMVA4bEFRK3NzMWNlYWRxYysrK1p0VFNvK0lvUnF4?=
- =?utf-8?B?WXFjZHY5a2dlWkxUYTZsWE1hQXlzQTBPOXVGZFpWWXRob1pWc2pQU1lrN2Vj?=
- =?utf-8?B?eFIvZlQ1TkZBR09Rd3R5aFpUc0dTMy9YeTZETit3c1NyeXpwRUp3OVdNVllH?=
- =?utf-8?B?Y1V6eW90VUU1d1F0TkZuSGhjbTlNSlRJdkNOYktiWVExVlFidnVzVktLUUt4?=
- =?utf-8?B?dVNxQ0FhaXBiQlZDb0Y5SFNTdFdQMUc5K1IyZk1VUm8yQlJ4amFZOU9LYVQx?=
- =?utf-8?B?VkZWbitSSUNQQ01yVDFUTlVnOWtlb2NsaHN4cElxUE5qa1B2NXhpalNuOVhF?=
- =?utf-8?B?TkZBN2VLL0M3WWJQM1hvWnlCNktqYWN6K25zVlR0UkovbVRPZmN6U0VHdUxE?=
- =?utf-8?B?YnV4d3ZtMitoY1lXOFdQZExjNi9BcW1pY0o4akREKzBxY0MzeXJseXhuaFg4?=
- =?utf-8?B?WmttUjJHQ1phSDU3Rm11VkNrbmQvalkyNTU2bWQ3MGt4c3pzV3BnSVI0ajRF?=
- =?utf-8?B?dCs3c01Oay9jckRQeHRlMXM1VXViY2ZoQVlMRk51UzFYUXErRVNmSWlyazh6?=
- =?utf-8?B?NTR6R0hqaHo4NTI2QWwvd0xWQUJxbnJidWpGMXZTVDN1MkljMzRxbkZZN1BQ?=
- =?utf-8?B?QU44TW5kKzNFVXpMMUZSenB5Rlp3THlxUlUraHRjNXV3M2JKTFZjSU5JOWl3?=
- =?utf-8?B?V3dIZldkQk5PZWlUenBubmVyODJoR3lmcW4zZ1RYN3hwU3dHZSsvYnM4Vkx1?=
- =?utf-8?B?RHpkSnNsL2JyYUpWcVIycFY5dzdBaytxU0JiUHJlNkQ4UFZGaEtzT0xMK2hI?=
- =?utf-8?B?Zlc3MGQwS2N6L0ZHWVJJNU9EaHRBSGR2NjZWZzFzMTU4Rm9wUTl5MFVvaUNB?=
- =?utf-8?B?TkJLbHFkcU1BcFNLT1V5RVdaYi9HdFpOQmZ3bUtWMC9CRXpBSmRaQXo3dGlv?=
- =?utf-8?B?T29hUjRvalh5Q3pMc3Zud3ZlUXIrdnlQWXFwUFJhNUlwRzNtQXBpb0V0eUJS?=
- =?utf-8?B?YTlZTFdQQVkvQzRnNnVSM0tLTjNKYUM3a2I0NW9oMnJycXh4aGhUVUJoY3Rj?=
- =?utf-8?B?dERlRUNoa0JKTXFUaml6QTJGTENGM3lNMGRGbW9oYjFCbUJGOTJTR3NRQVBH?=
- =?utf-8?B?RCtMWENwNVlSdmZNMEczRTJORjZDNDBBUTUzUk9Vek1KT3FZVUFNMkxkaS96?=
- =?utf-8?B?aHF4WXhDYXlpS1p5TUwydDBjL1pIYU9LK2R3SGlvN0tGcnMwcGkyMytiZjR0?=
- =?utf-8?B?UEh5Ynl3L2Y0NU5Cdmh1Z3UrVWRzbHpsNm1FRlZTOHlEVWVLOUN2dDByNWhq?=
- =?utf-8?B?VHRHcytLcW10ZlV3Y0x4ZWxHbGRDZEplek04dVZSU29VZVY0TlZTWXdPSHN4?=
- =?utf-8?B?VVU0eFlwYTdYOWh5T2drL09UUlRZN3orYXBXSlNDY0dWVDQ1RHNQQVNZbVhN?=
- =?utf-8?B?YUlnQjZLd1BoWklXUklXZXZXMzJqQVZ0STVEQnYrVVlNNlltSjRHaXVTclQv?=
- =?utf-8?B?cHNtTVRYeEp5bEE5OW9PekhrWk9qOCtJaWRuVUFPL3NBZDVMY2tNNFpnUnNw?=
- =?utf-8?B?OUs3Y0RqMzdWOHVueENyejRhOGZ1NlNnMmszMWYrQVFyc3NvRXI3eElsRld4?=
- =?utf-8?B?N3hOWTFrS25mM0RrcVMxZ1lKTGNXL0F2WjBJSVZ0Y0pibUlzQlBRQ280ZjRL?=
- =?utf-8?B?K084R09UQkkvMzAvWG12b1ZUbXJUMnhXMjFhczU2eTZvUXNZb0J2SHFrWWNJ?=
- =?utf-8?B?M3k5YlNSemI1QWJCRnFON044WFZrN3UzV2c3OHNFU0ZRTVlnUjBTVlZjc2NE?=
- =?utf-8?B?U05RMzdHbVpCd1QxVjFYUDNvSXdkQUg4ZHZ1TjV3b2drT21Wblc2NkV3V3pS?=
- =?utf-8?B?K3RWS05PcWlPWmo5WHpOOG9DZlBzWVpKUWVkY0J2dXdRZFRmVXZmdGY1YUVJ?=
- =?utf-8?Q?Ksy27i?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 14:19:24.9493
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 991a7e7f-5711-4bc9-d13d-08dda1e07a2b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023D1.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9192
+Date: Mon, 2 Jun 2025 16:20:26 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Kevin Lampis <kevin.lampis@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH v2 2/3] Add lockdown mode
 
-On Mon Jun 2, 2025 at 9:51 AM CEST, Jan Beulich wrote:
-> On 30.05.2025 14:02, Alejandro Vallejo wrote:
->> --- a/xen/include/asm-generic/device.h
->> +++ b/xen/include/asm-generic/device.h
->> @@ -6,9 +6,7 @@
->> =20
->>  enum device_type
->>  {
->> -#ifdef CONFIG_HAS_DEVICE_TREE
->>      DEV_DT,
->> -#endif
->
-> Why would this enumerator need exposing on a non-DT arch? In fact I would=
- have
-> hoped for ...
+On Mon, Jun 02, 2025 at 02:46:55PM +0100, Kevin Lampis wrote:
+> From: Ross Lagerwall <ross.lagerwall@citrix.com>
+>=20
+> The intention of lockdown mode is to prevent attacks from a rogue dom0
+> userspace from compromising the system. Lockdown mode can be controlled b=
+y a
+> Kconfig option and a command-line parameter. It is also enabled automatic=
+ally
+> when Secure Boot is enabled and it cannot be disabled in that case.
+>=20
+> If enabled from the command-line then it is required to be first in the
+> list otherwise Xen may process some insecure parameters before reaching
+> the lockdown parameter.
+>=20
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
+> ---
+> Changes in v2:
+> - Remove custom command line parsing
+> - Print warning if lockdown is not first on command line
+> ---
+=2E..
 
-A non-DT arch would not include this. x86 doesn't.
+> diff --git a/xen/common/lockdown.c b/xen/common/lockdown.c
+> new file mode 100644
+> index 0000000000..84eabe9c83
+> --- /dev/null
+> +++ b/xen/common/lockdown.c
+> @@ -0,0 +1,54 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +
+> +#include <xen/efi.h>
+> +#include <xen/lockdown.h>
+> +#include <xen/param.h>
+> +
+> +#define FIRST_ARG_FLAG 2
+> +
+> +static int __ro_after_init lockdown =3D IS_ENABLED(CONFIG_LOCKDOWN_DEFAU=
+LT);
+> +
+> +void __init lockdown_set_first_flag(void)
+> +{
+> +    lockdown |=3D FIRST_ARG_FLAG;
+> +}
+> +
+> +void __init lockdown_clear_first_flag(void)
+> +{
+> +    lockdown &=3D ~FIRST_ARG_FLAG;
+> +}
+> +
+> +static int __init parse_lockdown_opt(const char *s)
+> +{
+> +    if ( strncmp("no", s, 2) =3D=3D 0 )
 
->
->>      DEV_PCI
->
-> ... this to be hidden for arch-es not supporting PCI.
->
-> Similar concerns elsewhere in this change.
->
-> Jan
+This is rather inconsistent with other bool options. I think you want to
+use parse_bool() here.
 
-This file is exclusively used by arches supporting DT to abstract away wher=
-e
-the device came from. x86 does not use it at all, and while it wouldn't be
-impossible to compile-out DEV_PCI, it would needlessly pollute the codebase=
- with
-no measurable gain, because the abstractions still need to stay.
+> +        if ( efi_secure_boot )
+> +            printk("lockdown can't be disabled because Xen booted in Sec=
+ure Boot mode\n");
+> +        else
+> +            lockdown =3D 0;
+> +    else
+> +    {
+> +        if ( !(lockdown & FIRST_ARG_FLAG) )
+> +            printk("lockdown was not the first argument, unsafe argument=
+s may have been already processed\n");
+> +
+> +        lockdown =3D 1;
+> +    }
+> +
+> +    return 0;
+> +}
+> +custom_param("lockdown", parse_lockdown_opt);
 
-This patch is merely removing ifdefs that don't amount to anything in pract=
-ice,
-and I'd rather not go further than that.
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-Cheers,
-Alejandro
+--ws1tl/B/3EL9OFd3
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmg9syoACgkQ24/THMrX
+1ywGAAgAkkdGb+Ji+h1zoL1o9UKy6Md6/Yf6cqEdulcY7MvpAwQM0tZ9p19Hlx2U
+w+ZD933uNMhpZYEMj/9+v6dgjnnzDKF3Aqni3j2zAG206LzNWyNj4j6SWGKK5dLD
+82iQ8j+AgPQMH+Uhd7fWrn4azDs0Yn7gIoLRFXJ/6XBqEcS3DWMocM25zhkvPq8m
+mFJ6AfXMHCtTOaE+jbEarrms8IB9/Pd/G9uPr4rj2MPaNC52aBt91xeyIVe/vWLW
+Q5ln68x4/FSPEDb6ullh0m7j1evSn9ud9X678L/xEs3M0wW9+mKIK68GCOFBzN/C
+ptxuECA+UgAi+nKICY/Y/7gIepW27A==
+=DS/K
+-----END PGP SIGNATURE-----
+
+--ws1tl/B/3EL9OFd3--
 
