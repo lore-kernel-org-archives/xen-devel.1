@@ -4,38 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E32C5AD49
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 11:32:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003229.1382726 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F57C54FB3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 11:33:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003239.1382737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM3Or-0005QC-Jb; Mon, 02 Jun 2025 11:32:17 +0000
+	id 1uM3Pn-0005yX-1X; Mon, 02 Jun 2025 11:33:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003229.1382726; Mon, 02 Jun 2025 11:32:17 +0000
+Received: by outflank-mailman (output) from mailman id 1003239.1382737; Mon, 02 Jun 2025 11:33:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM3Or-0005Q5-Gk; Mon, 02 Jun 2025 11:32:17 +0000
-Received: by outflank-mailman (input) for mailman id 1003229;
- Mon, 02 Jun 2025 11:32:17 +0000
+	id 1uM3Pm-0005yQ-TY; Mon, 02 Jun 2025 11:33:14 +0000
+Received: by outflank-mailman (input) for mailman id 1003239;
+ Mon, 02 Jun 2025 11:33:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QKOU=YR=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uM3Or-0005Pz-37
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 11:32:17 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 39b648af-3fa5-11f0-b894-0df219b8e170;
- Mon, 02 Jun 2025 13:32:11 +0200 (CEST)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5533c562608so3034583e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 04:32:11 -0700 (PDT)
-Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-450d7fa25besm117437555e9.14.2025.06.02.04.31.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Jun 2025 04:32:00 -0700 (PDT)
+ <SRS0=XkTG=YR=oracle.com=harshvardhan.j.jha@srs-se1.protection.inumbo.net>)
+ id 1uM3Pl-0005Pz-O5
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 11:33:13 +0000
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5cd4f7fe-3fa5-11f0-b894-0df219b8e170;
+ Mon, 02 Jun 2025 13:33:11 +0200 (CEST)
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5525tsf4011357;
+ Mon, 2 Jun 2025 11:33:04 GMT
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 46yrj52eem-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 02 Jun 2025 11:33:03 +0000 (GMT)
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 552BPgAr038592; Mon, 2 Jun 2025 11:33:03 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 46yr77vhva-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 02 Jun 2025 11:33:02 +0000
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 552BWucc001684;
+ Mon, 2 Jun 2025 11:33:02 GMT
+Received: from ca-dev112.us.oracle.com (ca-dev112.us.oracle.com
+ [10.129.136.47])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 46yr77vhuf-2; Mon, 02 Jun 2025 11:33:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,113 +63,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 39b648af-3fa5-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748863931; x=1749468731; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=rTsOX+udqNxI/5fhKLImuGMnxGdWhWIRzg4v6yd1PN4=;
-        b=EXkVISriaiqQ5G0jKarJJPU8/gjoH/0kBDW3KeBq9wZ3LBSMqXYxwvWWwEKWj8hvqr
-         hcDI9CPz2gUlJYffw6Mdnc9D09QFYy0KGrFykh2G14IKy/jhPCl5jARlRPkr6nV/QJ1G
-         qXlFBCpSKDjCPpYbk/+OGd6nDZUCq+9npW2OM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748863931; x=1749468731;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rTsOX+udqNxI/5fhKLImuGMnxGdWhWIRzg4v6yd1PN4=;
-        b=Ea94treCIUrkGaLw9xFppWdM2Rxs0amJRyd7vdRdJJXtGVZVHPft5ji6zFXdMc9CqO
-         9j7s4bJ0VkAwVnYeO3cDSU410GcOZ9qklZU5AXrKZw5np/5uZVr9oDg6rvPOukRfAPpJ
-         IIA8hZ9FG3a85f/+SOkR7wQMQIb5CKaplKGNK3sVgTXmecN/y+ZP5KxGvH4hcJjjNrdK
-         IYfZk5nTFRfIo7ctfLTQ2seBpWfmuGqr3HGfOd0yx9e8nv8sUUxhL6si2D6k6e0j0utn
-         Sgjs7cau1S2ePtNmsyGJQaMVc8j07oZU/hb69mzZJWenrR8+/yGP56uJN74xD224g0s/
-         GA9g==
-X-Gm-Message-State: AOJu0Yy249WFWvGQaiy9L9+FD3xdH1QKs+K8LgHfHFrsww96FKEbmOuJ
-	KtCA8gVXrtU9hITMBXloVawziZR7szMsBBL86CBJeyzCGDXxtBsKieybO6Lbrb7/hnEnwAInZLS
-	NOnlC
-X-Gm-Gg: ASbGncvGRIl7VCQ26XDg6tJGWTwCNLcctPxXfxQJwreFpWmU1Zpy1G8+dw0CRkO2FdX
-	tr91PNI8OxGc8LcqSXbbJNZiU2saga2idLOruzIvhLsp4YXjIXy33Y6YbWb3c4chZSFRpl7Wd9a
-	SnfmCLXo/1LdVLEgYwYeFAOS0+x2o1C1GqmQ6QUQ5mdT0auedWa047AhwkwiK6Iyy7HbRaZ63AG
-	SI5zIpeN7qZz4LKoTGoHcGkso3dqQBuKjl2/b/GaHgTFiY29vNZBLX460/GiQuN+qB2y4ktFSC9
-	aNnyGN57v/c8F85eLR6TxdTXo6T0i1GNWOJilX1jRTU44Fpbk5Vh4GUVNIQpyvwsSihHQbH5q73
-	uw5oFn0eWgCSUuuts
-X-Google-Smtp-Source: AGHT+IHJ0vrFtipV3bhdiTI54MJYxlgcbCjwWWTW4o78zfgD4ViZkePmHjJ8z9feLzX6f3DvWYDFbQ==
-X-Received: by 2002:a05:600c:1910:b0:450:d3c6:84d8 with SMTP id 5b1f17b1804b1-450d880ce23mr110309655e9.14.1748863920602;
-        Mon, 02 Jun 2025 04:32:00 -0700 (PDT)
-Message-ID: <ae5a5de4-22ce-443b-a88d-16b89b28ac11@citrix.com>
-Date: Mon, 2 Jun 2025 12:31:59 +0100
+X-Inumbo-ID: 5cd4f7fe-3fa5-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=corp-2025-04-25; bh=kvVbO
+	UjyRbYz/XjRS4cixhkQABnoYIWp9dyNm7rGnTk=; b=Rm2JDwdsSnFQJX6ZezlVG
+	4ZQW06oLvFhJvT6tf0lDspLnMZbVPCUtTNGJCFAOqwMkA8Lu80FmMxfPWWxhSXuF
+	TEsSu0tFcydziuE4ILO+7YWMOcRtFJ3tTGG/57lIVo25hIAShoQuU6DfNhDHPrEM
+	/qsXpD3EX09PAbYR1AQLNOte+3KSMjGjwbwZEOJ+INPKah5i04OKrMmgXM5fUgdz
+	aeSZZpP0f4IsSCResrPRJQOgKDpy9dmA2EsxgdKDDNSHyVCeGHFqb4YD+avvBkcJ
+	irFsFuRyxao/dXJrMdvQY+eqq/fpCWI5nAXlmmEKjC2MHqHPvkA5UnP47G0Qg5MC
+	w==
+From: Harshvardhan Jha <harshvardhan.j.jha@oracle.com>
+To: jgross@suse.com, sstabellini@kernel.org, boris.ostrovsky@oracle.com
+Cc: harshvardhan.j.jha@oracle.com, xen-devel@lists.xenproject.org,
+        iommu@lists.linux.dev, stable@vger.kernel.org
+Subject: [PATCH 5.10.y 1/1] xen/swiotlb: relax alignment requirements
+Date: Mon,  2 Jun 2025 04:33:01 -0700
+Message-ID: <20250602113301.3475805-2-harshvardhan.j.jha@oracle.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250602113301.3475805-1-harshvardhan.j.jha@oracle.com>
+References: <20250602113301.3475805-1-harshvardhan.j.jha@oracle.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert tools/python part of "tools: remove support for
- running a guest with qemu-traditional"
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
-References: <20250602112253.2628571-1-andrew.cooper3@citrix.com>
- <aD2KpLtC257hlUj8@mail-itl>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <aD2KpLtC257hlUj8@mail-itl>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-02_05,2025-05-30_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 bulkscore=0 suspectscore=0
+ phishscore=0 mlxlogscore=999 adultscore=0 malwarescore=0 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
+ definitions=main-2506020099
+X-Authority-Analysis: v=2.4 cv=fs7cZE4f c=1 sm=1 tr=0 ts=683d8bf0 cx=c_pps a=XiAAW1AwiKB2Y8Wsi+sD2Q==:117 a=XiAAW1AwiKB2Y8Wsi+sD2Q==:17 a=6IFa9wvqVegA:10 a=iox4zFpeAAAA:8 a=yPCof4ZbAAAA:8 a=E5hRKjw2lWykmI9IJP0A:9 a=WzC6qhA0u3u7Ye7llzcV:22
+X-Proofpoint-GUID: eIe7wPBNFEkgpFOKJc8CTUn2I2JL3tdR
+X-Proofpoint-ORIG-GUID: eIe7wPBNFEkgpFOKJc8CTUn2I2JL3tdR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjAyMDEwMCBTYWx0ZWRfX3JG8hQvTJkFH YhYo0zEP2AnAkx95ZpNuvEzj0d/tTPJQjcoA0El66Z4LXT4MrvGlDtVTWVv5E3ORmp4oCju9NRz v66GdNPW6kvbGisENUDvQKU3Ges47rFFldTB8X6UZZKinRYSgwQc2kQy2QBhWnMSTISXF5qj0XK
+ ayulbdthVGdTqZltq/RSm6MXq79v2flvRjx+t+2m/Hdj0CQd5v/k0flKteFDwkMBHuBThKn7rL3 9y3EkPjJ5WmE//4i0ry/OvAoDG3ywIIOLQcCXDjWkIhqeSj/nwK4INmGFFguqni12bKk2xbYxzW w+aoyWb7sOygXgjIiLSBM31ol80LsEqBVu2gVmAjIZMLXj4CxQB7DsaQUpM15T/vBLPbfLOfVl6
+ EEUWLXqpHhYz1iiArnpTDz41LUoCn/wOvv9i0uAVHsNgOvGKkbOeB+LZ6B4m+30ttsA55zpp
 
-On 02/06/2025 12:27 pm, Marek Marczykowski-Górecki wrote:
-> On Mon, Jun 02, 2025 at 12:22:53PM +0100, Andrew Cooper wrote:
->> The migration stream is a stable ABI.  What this does is break the ability to
->> inspection and operate on pre-Xen-4.21 streams.
-> Do you mean Xen 4.21 should be able to accept migration of a domU with
-> qemu trad? I don't think it's a desirable feature...
+[ Upstream commit 85fcb57c983f423180ba6ec5d0034242da05cc54 ]
 
-xl is free to reject a qemu-trad stream if it wants.
+When mapping a buffer for DMA via .map_page or .map_sg DMA operations,
+there is no need to check the machine frames to be aligned according
+to the mapped areas size. All what is needed in these cases is that the
+buffer is contiguous at machine level.
 
-What's not ok is verify-stream-v2 exploding with "unknown emulator 1"
-when I ask it to tell me what the bytes in this stream mean.
+So carve out the alignment check from range_straddles_page_boundary()
+and move it to a helper called by xen_swiotlb_alloc_coherent() and
+xen_swiotlb_free_coherent() directly.
 
-~Andrew
+Fixes: 9f40ec84a797 ("xen/swiotlb: add alignment check for dma buffers")
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Harshvardhan Jha <harshvardhan.j.jha@oracle.com>
+---
+ drivers/xen/swiotlb-xen.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index 000d02ea4f7d8..d8efb8ea23a0d 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -87,19 +87,21 @@ static inline dma_addr_t xen_virt_to_bus(struct device *dev, void *address)
+ 	return xen_phys_to_dma(dev, virt_to_phys(address));
+ }
+ 
++static inline bool range_requires_alignment(phys_addr_t p, size_t size)
++{
++	phys_addr_t algn = 1ULL << (get_order(size) + PAGE_SHIFT);
++	phys_addr_t bus_addr = pfn_to_bfn(XEN_PFN_DOWN(p)) << XEN_PAGE_SHIFT;
++
++	return IS_ALIGNED(p, algn) && !IS_ALIGNED(bus_addr, algn);
++}
++
+ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
+ {
+ 	unsigned long next_bfn, xen_pfn = XEN_PFN_DOWN(p);
+ 	unsigned int i, nr_pages = XEN_PFN_UP(xen_offset_in_page(p) + size);
+-	phys_addr_t algn = 1ULL << (get_order(size) + PAGE_SHIFT);
+ 
+ 	next_bfn = pfn_to_bfn(xen_pfn);
+ 
+-	/* If buffer is physically aligned, ensure DMA alignment. */
+-	if (IS_ALIGNED(p, algn) &&
+-	    !IS_ALIGNED((phys_addr_t)next_bfn << XEN_PAGE_SHIFT, algn))
+-		return 1;
+-
+ 	for (i = 1; i < nr_pages; i++)
+ 		if (pfn_to_bfn(++xen_pfn) != ++next_bfn)
+ 			return 1;
+@@ -321,7 +323,8 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
+ 	phys = dma_to_phys(hwdev, *dma_handle);
+ 	dev_addr = xen_phys_to_dma(hwdev, phys);
+ 	if (((dev_addr + size - 1 <= dma_mask)) &&
+-	    !range_straddles_page_boundary(phys, size))
++	    !range_straddles_page_boundary(phys, size) &&
++	    !range_requires_alignment(phys, size))
+ 		*dma_handle = dev_addr;
+ 	else {
+ 		if (xen_create_contiguous_region(phys, order,
+@@ -362,6 +365,7 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
+ 
+ 	if (!WARN_ON((dev_addr + size - 1 > dma_mask) ||
+ 		     range_straddles_page_boundary(phys, size)) &&
++	    !range_requires_alignment(phys, size) &&
+ 	    TestClearPageXenRemapped(page))
+ 		xen_destroy_contiguous_region(phys, order);
+ 
+-- 
+2.47.1
+
 
