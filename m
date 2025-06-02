@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D446C5AD49
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 19:17:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1003772.1383374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E239CC5B555
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 19:18:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003774.1383394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMAfB-0008G2-19; Mon, 02 Jun 2025 19:17:37 +0000
+	id 1uMAfL-0000Kv-G0; Mon, 02 Jun 2025 19:17:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1003772.1383374; Mon, 02 Jun 2025 19:17:36 +0000
+Received: by outflank-mailman (output) from mailman id 1003774.1383394; Mon, 02 Jun 2025 19:17:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMAfA-0008Fv-Ua; Mon, 02 Jun 2025 19:17:36 +0000
-Received: by outflank-mailman (input) for mailman id 1003772;
- Mon, 02 Jun 2025 19:17:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uMAfL-0000Ko-Cl; Mon, 02 Jun 2025 19:17:47 +0000
+Received: by outflank-mailman (input) for mailman id 1003774;
+ Mon, 02 Jun 2025 19:17:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J+98=YR=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uMAf8-0008Fp-OJ
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 19:17:35 +0000
+ id 1uMAfK-0000JS-I9
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 19:17:46 +0000
 Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 39ff5286-3fe6-11f0-b894-0df219b8e170;
- Mon, 02 Jun 2025 21:17:29 +0200 (CEST)
+ [109.224.244.18]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 43147dee-3fe6-11f0-a300-13f23c93f187;
+ Mon, 02 Jun 2025 21:17:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,58 +38,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 39ff5286-3fe6-11f0-b894-0df219b8e170
+X-Inumbo-ID: 43147dee-3fe6-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=ysr6kma3xzaxpcxtq754jyg2t4.protonmail; t=1748891848; x=1749151048;
-	bh=TYIdmTL1y/opNybyESvYe5Fbsw4UmNMLAVDl4CmjMFI=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
-	 List-Unsubscribe:List-Unsubscribe-Post;
-	b=GRoz+OSUwfpkjv3uGhrO/5dma8jSGfL0plPq3kSBtWLsrXLVbJbMkY8DliKPHP1YA
-	 YDPM5xvzQ3qmrvb9MBf+D6BjfZxd2b8lpU6iWbDUtJ0pRqI4TEorI9V3wB8JkZkM/A
-	 nT8kEtIDsfXX0QkbPrw9nvNbsM+e3IA4tNAYkPbck+PQbgNgvVgL/d3Ft3EFWdL+oH
-	 JVLoxoIreo3bmdikcuGXxbGv6RCm/LAwTRiai+NCXyrhgg4ookkjmSsElsCLHm0jzw
-	 JHxh5DNS6obwlr17wb/iXHHZJLit8SvvakydhmFB1WcIRToHlZdTvFNRMXEOQ6eTzH
-	 0F1gmRLflwf6A==
-Date: Mon, 02 Jun 2025 19:17:22 +0000
+	s=protonmail; t=1748891864; x=1749151064;
+	bh=uzDJxgN96Kqct/U5nq9L2/hSZ+SqbrgJbBHgdSzDlw8=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+	b=N0t0Aeyiiu2xj4exQknK6b4bzlblBLK1kUHpxCissNgvb507Z4ngR7isvwZyedmZV
+	 jSLno16ODafAY5HmtbWfl/F4ZdZ3g9ryH6gAxzCGEPLvK15EpdpML3iVV6yJurcAJf
+	 5qFi/JexUzkjoODs78uVrSOt7GP6NctREv7MkuQCpO9Xy60ROthvRmSOKWhMUIPVzr
+	 cLSv/DgjGFw8kt2ApZIguSy+aPHMDHNn8qZuxk6waXSA10Mb8Ih2/CB6S3gfqbGIyh
+	 mKOWvoKxELGmVE08DQ1uikGvpNMoQUuRwls2uccnLxDdGRNH8R0Pry+RobYQh/iH46
+	 WNXst4DSGsf8g==
+Date: Mon, 02 Jun 2025 19:17:38 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, teddy.astie@vates.tech, dmukhin@ford.com
-Subject: [PATCH v5 0/2] xen/domain: updates to hardware emulation flags
-Message-ID: <20250602191717.148361-1-dmukhin@ford.com>
+Subject: [PATCH v5 2/2] xen/domain: rewrite emulation_flags_ok()
+Message-ID: <20250602191717.148361-3-dmukhin@ford.com>
+In-Reply-To: <20250602191717.148361-1-dmukhin@ford.com>
+References: <20250602191717.148361-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: d2232326d5e419126d8b29309ba460596b9e8bf8
+X-Pm-Message-ID: 9ead51012b322b3702c37d34c3ae7cb06b5d2c06
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Patch 1 introduces emulation_flags in common domain struct for enabling dom=
-ain
-emulation features on non-x86 platforms.
+From: Denis Mukhin <dmukhin@ford.com>
 
-Patch 2 rewrites emulation_flags_ok() on x86 with a goal of improving
-readability and maintainability of the code.
+Rewrite emulation_flags_ok() to simplify future modifications.
 
-Originally, the code was part of [1], part of NS16550 emulator v3 series.
+No functional change intended.
 
-[1] https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-6-c5d36b3=
-1d66c@ford.com/
-[2] Link to v4: https://lore.kernel.org/xen-devel/20250530220242.63175-1-dm=
-ukhin@ford.com/
-[3] Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelin=
-es/1849512714
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Teddy Astie <teddy.astie@vates.tech>
+---
+Changes since v4:
+- updated commentaries
+- added Teddy's R-b, kept Stefano's R-b
+---
+ xen/arch/x86/domain.c | 91 ++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 73 insertions(+), 18 deletions(-)
 
-Denis Mukhin (2):
-  xen/domain: introduce common hardware emulation flags
-  xen/domain: rewrite emulation_flags_ok()
-
- xen/arch/x86/domain.c             | 93 ++++++++++++++++++++++++-------
- xen/arch/x86/domctl.c             |  2 +-
- xen/arch/x86/include/asm/domain.h | 25 ++++-----
- xen/common/keyhandler.c           |  1 +
- xen/include/xen/sched.h           |  2 +
- 5 files changed, 89 insertions(+), 34 deletions(-)
-
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 0363ccb384..4f6670ce37 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -743,32 +743,87 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
+atedomain *config)
+     return 0;
+ }
+=20
++/*
++ * Verify that the domain's emulation flags resolve to a supported configu=
+ration.
++ *
++ * This ensures we only allow a known, safe subset of emulation combinatio=
+ns
++ * (for both functionality and security). Arbitrary mixes are likely to ca=
+use
++ * errors (e.g., null pointer dereferences).
++ *
++ * NB: use the internal X86_EMU_XXX symbols, not the public XEN_X86_EMU_XX=
+X
++ * symbols.
++ */
+ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+ {
++    enum {
++        CAP_PV          =3D BIT(0, U),
++        CAP_HVM         =3D BIT(1, U),
++        CAP_HWDOM       =3D BIT(2, U),
++        CAP_DOMU        =3D BIT(3, U),
++    };
++    static const struct {
++        unsigned int caps;
++        uint32_t min;
++        uint32_t opt;
++    } configs[] =3D {
++#ifdef CONFIG_PV
++        /* PV */
++        {
++            .caps   =3D CAP_PV | CAP_DOMU,
++            .min    =3D 0,
++            .opt    =3D 0,
++        },
++
++        /* PV dom0 */
++        {
++            .caps   =3D CAP_PV | CAP_HWDOM,
++            .min    =3D X86_EMU_PIT,
++            .opt    =3D 0,
++        },
++#endif /* #ifdef CONFIG_PV */
++
++#ifdef CONFIG_HVM
++        /* PVH dom0 */
++        {
++            .caps   =3D CAP_HVM | CAP_HWDOM,
++            .min    =3D X86_EMU_LAPIC | X86_EMU_IOAPIC | X86_EMU_VPCI,
++            .opt    =3D 0,
++        },
++
++        /* HVM domU */
++        {
++            .caps   =3D CAP_HVM | CAP_DOMU,
++            .min    =3D X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ),
++            /* HVM PIRQ feature is user-selectable. */
++            .opt    =3D X86_EMU_USE_PIRQ,
++        },
++
++        /* PVH domU */
++        {
++            .caps   =3D CAP_HVM | CAP_DOMU,
++            .min    =3D X86_EMU_LAPIC,
++            .opt    =3D 0,
++        },
++#endif /* #ifdef CONFIG_HVM */
++    };
++    unsigned int i, caps =3D is_hardware_domain(d) ? CAP_HWDOM : CAP_DOMU;
++
++    if ( is_pv_domain(d) )
++        caps |=3D CAP_PV;
++    else if ( is_hvm_domain(d) )
++        caps |=3D CAP_HVM;
++
+ #ifdef CONFIG_HVM
+     /* This doesn't catch !CONFIG_HVM case but it is better than nothing *=
+/
+     BUILD_BUG_ON(X86_EMU_ALL !=3D XEN_X86_EMU_ALL);
+ #endif
+=20
+-    if ( is_hvm_domain(d) )
+-    {
+-        if ( is_hardware_domain(d) &&
+-             emflags !=3D (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) =
+)
+-            return false;
+-        if ( !is_hardware_domain(d) &&
+-             /* HVM PIRQ feature is user-selectable. */
+-             (emflags & ~X86_EMU_USE_PIRQ) !=3D
+-             (X86_EMU_ALL & ~(X86_EMU_VPCI | X86_EMU_USE_PIRQ)) &&
+-             emflags !=3D X86_EMU_LAPIC )
+-            return false;
+-    }
+-    else if ( emflags !=3D 0 && emflags !=3D X86_EMU_PIT )
+-    {
+-        /* PV or classic PVH. */
+-        return false;
+-    }
++    for ( i =3D 0; i < ARRAY_SIZE(configs); i++ )
++        if ( caps =3D=3D configs[i].caps &&
++             (emflags & ~configs[i].opt) =3D=3D configs[i].min )
++            return true;
+=20
+-    return true;
++    return false;
+ }
+=20
+ void __init arch_init_idle_domain(struct domain *d)
 --=20
 2.34.1
 
