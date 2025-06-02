@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EBFFC5B555
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 09:05:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1002943.1382378 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7407DC54FB3
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 09:15:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1003035.1382468 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM16H-0008Rj-Ru; Mon, 02 Jun 2025 09:04:57 +0000
+	id 1uM1GF-0007Sx-AJ; Mon, 02 Jun 2025 09:15:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1002943.1382378; Mon, 02 Jun 2025 09:04:57 +0000
+Received: by outflank-mailman (output) from mailman id 1003035.1382468; Mon, 02 Jun 2025 09:15:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM16H-0008RZ-Oi; Mon, 02 Jun 2025 09:04:57 +0000
-Received: by outflank-mailman (input) for mailman id 1002943;
- Mon, 02 Jun 2025 09:04:56 +0000
+	id 1uM1GF-0007Sq-7M; Mon, 02 Jun 2025 09:15:15 +0000
+Received: by outflank-mailman (input) for mailman id 1003035;
+ Mon, 02 Jun 2025 09:15:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5qKV=YR=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uM16G-0007kh-Gw
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 09:04:56 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=QAfa=YR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uM1GE-0007SZ-AY
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 09:15:14 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a6756e62-3f90-11f0-b894-0df219b8e170;
- Mon, 02 Jun 2025 11:04:55 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-551fe46934eso4789596e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 02:04:54 -0700 (PDT)
-Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5533791cdc3sm1507541e87.176.2025.06.02.02.04.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 02:04:53 -0700 (PDT)
+ id 14907edb-3f92-11f0-b894-0df219b8e170;
+ Mon, 02 Jun 2025 11:15:09 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so44355865e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 02:15:09 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-747afe9681asm7396382b3a.12.2025.06.02.02.15.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Jun 2025 02:15:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,174 +47,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a6756e62-3f90-11f0-b894-0df219b8e170
+X-Inumbo-ID: 14907edb-3f92-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748855094; x=1749459894; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uqPcozH5cY7WTdc/VNhtz0ZQbmCe6X/v3JhqZHPKizE=;
-        b=ZVxmGu10AD80T/aX8tjvpkfnwdwwNWZ1Q5QtVFlL6jgZf9h6HEaAP7nSLceSVp8sTw
-         e103hUe2USC7pmv4VDkpRZpFFXktKXXa9/tEt7Ba5NuqBCw2I6ZZwONAQ8CAulhsusjf
-         8KEqhmp+azMXiYIiDtmjI6UiYBZc1Mp3TIH8+yVGc+BbN5gA8yw0kGlqxc8t3QSyIrl0
-         yoikQn8JbkdOg1smVhMpdz1M1JxDzgtV5Fg2JfGGlc/BkmmRq7aZPtQwlSZfWQRkJJpl
-         d4MXRyGm/lysnhMC90IfhbaAyUQEC78wcP2k6wsPtnmZPTydHPM22TI3jpUaLguvGk8F
-         87Jw==
+        d=suse.com; s=google; t=1748855708; x=1749460508; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=lPySZfbm9D5ca0VETYqleubXSTJeG2xriOZGDql9+Vo=;
+        b=BEKNLNJi63/ElCUYQr64d5LYemsBIKF4P4zrqssV7Qk4b7ID9dgaTir6XersW/hhJZ
+         6kv0q1HrAfQEaGxJwOlamDFJHUgNhci8ui6oYvY6odOxjssojolvwoVoZtrp2lA5i8Iw
+         ZL6EYVU64oCQohJd3i8sNz5Rzwo7wiDOc6nVWvv+wqnwRfeVMLFotYjqaie1U0nWb4O8
+         OiHhsRpDAWII0yYd1ZXCl0pwFOguW0xiyxtrySndha0JrllcJOrVK9jea/iYK4iMSD8T
+         h4qTZCjofr2iT/rqDMDCWHsQG/QxAk6NXDcvmCfeomui+vNd5xCS1uTHLlbGis0WSVXd
+         09fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748855094; x=1749459894;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uqPcozH5cY7WTdc/VNhtz0ZQbmCe6X/v3JhqZHPKizE=;
-        b=RBIdOQIuGB0gx4Ma8CcNhGaI/6c24zsFlH8+yWWzKMM/KegRY3CZ5Nb9VPkZlxM3fF
-         5u2QuDOqDI8Zm4LFDUcOxrP6EiZYfFjlujYyoEPp/rUFQndtYA7p1ogUwvMHkuD8pWwv
-         CprKs7P2XAjXorkFehmyQAw4ouMdyIGrnUkPLWU7GFF38GeN2Ou+TSv+FSr0MN0r2RJK
-         66mdyFzCQtRe8nz3CQWJh4SD0zFqOFtKVsyyErnJserqSm654Q6J8Glj973hbp2FFIPd
-         kM7irSGe6an848BML4u9MMKaeLaJiYP46A6SxO4B3vCykB9gtrFqVFUOG0yncWXeJtQs
-         4WvA==
-X-Gm-Message-State: AOJu0YyXrwYTaMcazVjQwp4YFb0yfdt8vHOp+4sb5UxHwrhm6a6AXeRL
-	1KPegG17nCoHzSYCtGVM4a8I9YkDg0HYab2ZzS6QaTOmlYBqgBcG4Tw+NM7MmvCr
-X-Gm-Gg: ASbGncut6InjXlKY7uekZRyCE5Hd+zwA7HiAV7BQBdKf3lyKnCrz2vfwJqGXSpdF0il
-	0xkR6lCYWLH/gedE2XKDpsiOleia8zu0UL966hEZspyCgnpsn4Kq1k12XoaBpcvf/1WgAGgcyvt
-	p47y1fDqvRuHQczh40DOyBd3R/KJh2dybNSu51DN4pi+zqCEAf8/gB64hIk6z/3I3PY7Z0HhY+T
-	7pbOtw7dSyrrj2VW3SsNDg/yI0909egj26v78oB4sOCT9aKW3iyFwMj5w+8w+JSgaIVGXqoUrQS
-	K25eDyLLmHFMuIQaDFtcHp7p5QTWofJYFmpKUjKW1sf+4Imq3ri2cyWwvWkdsYIzJjpK8qMiaPn
-	Z3CyleiTAZ7Wt9gI=
-X-Google-Smtp-Source: AGHT+IFEWk5B09gxMmpBvB5cg/vxGWxO+XS2KdbPTd/vJrhO5L40I2jeOSWpJi89b7J3UM5ZWg5JqQ==
-X-Received: by 2002:a05:6512:3b86:b0:54a:c4af:15 with SMTP id 2adb3069b0e04-5533ba8be3emr3554424e87.19.1748855093947;
-        Mon, 02 Jun 2025 02:04:53 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: xakep.amatop@gmail.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v4][PART 2 02/10] xen/arm: Add suspend and resume timer helpers
-Date: Mon,  2 Jun 2025 12:04:13 +0300
-Message-ID: <d57cba4cfc0944c5483e68440a5675db735805be.1748848482.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1748848482.git.mykola_kvach@epam.com>
-References: <cover.1748848482.git.mykola_kvach@epam.com>
+        d=1e100.net; s=20230601; t=1748855708; x=1749460508;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lPySZfbm9D5ca0VETYqleubXSTJeG2xriOZGDql9+Vo=;
+        b=MtXn7Qh1KzDLkcXLfTibVc+Ab7y4v2FgkqtuopljzqoRipX4f1kXcuV67J9lxK7GTQ
+         fQYIgAbkUxtzuTG/KcuJx0U0fNXfpcCT9d2vDYwqhEYxPRigSciFLqPeF9WjIplyMjIO
+         6E67r4eC90qkvoZ9xMwHu9D+4Ye9nDSTKgTTO7njcL5gQMf5g0A7pdwAjNHozvg7ctHE
+         qOpIl9p65jwcLMUbrmZistEfGCNKp5Tu52scuHXzKXokqSFY0ZI2qQFtDd9mV+BCsLMM
+         H43L0IE3kKwMEabcF7rpHhfcQ8OnsBGNSMRAPeGuJZaUAnPZ3+IpJpbKOTB/m9EkN3QH
+         wwpQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVd5AurHEP7XN2YthIUCz6FjUN4t3hVsNPonv3ruF+n+iWPw40B6AUvX0pyXQWWtxm4C/ITyJxwuag=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxvjrF3Gar771kCQJc6z8VDfMy1/MAQONV6YvpYGdbDdEayXBsv
+	x9exKUV+VpaEoDKLFmYhjbH5FSBmjyekygPoM6slUP9GwuUqxsW5/cI1u03HZ3OkZQ==
+X-Gm-Gg: ASbGncs1596GOUsjHnGW89EL5fiKWKkyR66m6hOkwZRoqP3w73Ckv8b2pk7K5WXiqrS
+	LBVLqSiPmqZqmPV8gldStp/YkWjawqQIisc3lXIci/cJsh8QB6WA+ndEYnpHOXhGy4yeTNFgi8R
+	/W0cRWvGkR2XOBgu0dufs41fXCTPPNtWOhQRc7atJXcJ+tIWY60cinoI4Qf6GcLCOt/3yvVmEZt
+	HyOSZIS26Ecaz1AMZfm5RUfaCqTEQUrd0tFePlEbiBnk/rizRxJ+CvXDjGnxihh2mMGng8uFbxQ
+	vvhPMJ8EAzqDsCcXv0Kiolom3PCtBV7LOmdakiNz30C5obY6cbn3PsymOM6ojDWPYNGDH8fagQ5
+	B0x61Mz4cqCv8f6ggLnZX7xcd9559wYkfRYmo
+X-Google-Smtp-Source: AGHT+IGZySKSZr/f1ttYZPglStKrSY8vsfwajd2hmSjJQa2zJ1RpCIsq24MLqKzl/bbV32vC8x2kvw==
+X-Received: by 2002:a05:6000:2303:b0:3a4:deb9:8964 with SMTP id ffacd0b85a97d-3a4f7a4d340mr9190816f8f.17.1748855708550;
+        Mon, 02 Jun 2025 02:15:08 -0700 (PDT)
+Message-ID: <66ec1282-808b-49c0-872e-e440a9b9384b@suse.com>
+Date: Mon, 2 Jun 2025 11:15:13 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 3/3] xen/domain: introduce CONFIG_MAX_DOMID
+To: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
+ roger.pau@citrix.com, sstabellini@kernel.org, teddy.astie@vates.tech,
+ dmukhin@ford.com, xen-devel@lists.xenproject.org
+References: <20250528225030.2652166-1-dmukhin@ford.com>
+ <20250528225030.2652166-4-dmukhin@ford.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250528225030.2652166-4-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+On 29.05.2025 00:50, dmkhn@proton.me wrote:
+> From: Denis Mukhin <dmkhn@proton.me>
+> 
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Embedded deployments of Xen do not need to have support for more than dozen of
+> domains.
+> 
+> Introduce build-time configuration option to limit the number of domains during
+> run-time.
+> 
+> Suggested-by: Julien Grall <julien@xen.org>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+> Changes since v8:
+> - dropped hunk w/ compile-time check for DOMID_FIRST_RESERVED
+> - updated CONFIG_MAX_DOMID explanation
+> - dropped public header file changes
+> ---
+>  xen/arch/x86/cpu/mcheck/mce.c       |  2 +-
+>  xen/arch/x86/cpu/vpmu.c             |  2 +-
+>  xen/common/Kconfig                  |  8 ++++++++
+>  xen/common/domain.c                 | 20 +++++++++++---------
+>  xen/common/sched/core.c             |  4 ++--
+>  xen/drivers/passthrough/vtd/iommu.c |  2 +-
+>  6 files changed, 24 insertions(+), 14 deletions(-)
 
-Timer interrupts must be disabled while the system is suspended to prevent
-spurious wake-ups. Suspending the timers involves disabling both the EL1
-physical timer and the EL2 hypervisor timer. Resuming consists of raising
-the TIMER_SOFTIRQ, which prompts the generic timer code to reprogram the
-EL2 timer as needed. Re-enabling of the EL1 timer is left to the entity
-that uses it.
+What about checks against DOMID_FIRST_RESERVED in common/domctl.c? Indeed they
+must not be changed, but when not changing them, how are several of the checks
+you actually change going to be correct? (I'm sorry for noticing this only now;
+it should have occurred to me earlier on.)
 
-Introduce a new helper, disable_physical_timers, to encapsulate disabling
-of the physical timers.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-Changes in V4:
-  - Rephrased comment and commit message for better clarity
-  - Created separate function for disabling physical timers
-
-Changes in V3:
-  - time_suspend and time_resume are now conditionally compiled
-    under CONFIG_SYSTEM_SUSPEND
----
- xen/arch/arm/include/asm/time.h |  5 +++++
- xen/arch/arm/time.c             | 38 +++++++++++++++++++++++++++------
- 2 files changed, 37 insertions(+), 6 deletions(-)
-
-diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
-index 49ad8c1a6d..f4fd0c6af5 100644
---- a/xen/arch/arm/include/asm/time.h
-+++ b/xen/arch/arm/include/asm/time.h
-@@ -108,6 +108,11 @@ void preinit_xen_time(void);
- 
- void force_update_vcpu_system_time(struct vcpu *v);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+void time_suspend(void);
-+void time_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- #endif /* __ARM_TIME_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index e74d30d258..ad984fdfdd 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -303,6 +303,14 @@ static void check_timer_irq_cfg(unsigned int irq, const char *which)
-            "WARNING: %s-timer IRQ%u is not level triggered.\n", which, irq);
- }
- 
-+/* Disable physical timers for EL1 and EL2 on the current CPU */
-+static inline void disable_physical_timers(void)
-+{
-+    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
-+    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
-+    isb();
-+}
-+
- /* Set up the timer interrupt on this CPU */
- void init_timer_interrupt(void)
- {
-@@ -310,9 +318,7 @@ void init_timer_interrupt(void)
-     WRITE_SYSREG64(0, CNTVOFF_EL2);     /* No VM-specific offset */
-     /* Do not let the VMs program the physical timer, only read the physical counter */
-     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
--    isb();
-+    disable_physical_timers();
- 
-     request_irq(timer_irq[TIMER_HYP_PPI], 0, htimer_interrupt,
-                 "hyptimer", NULL);
-@@ -330,9 +336,7 @@ void init_timer_interrupt(void)
-  */
- static void deinit_timer_interrupt(void)
- {
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Disable physical timer */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Disable hypervisor's timer */
--    isb();
-+    disable_physical_timers();
- 
-     release_irq(timer_irq[TIMER_HYP_PPI], NULL);
-     release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
-@@ -372,6 +376,28 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
-     /* XXX update guest visible wallclock time */
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+void time_suspend(void)
-+{
-+    disable_physical_timers();
-+}
-+
-+void time_resume(void)
-+{
-+    /*
-+     * Raising the timer softirq triggers generic code to call reprogram_timer
-+     * with the correct timeout (not known here).
-+     *
-+     * No further action is needed to restore timekeeping after power down,
-+     * since the system counter is unaffected. See ARM DDI 0487 L.a, D12.1.2
-+     * "The system counter must be implemented in an always-on power domain."
-+     */
-+    raise_softirq(TIMER_SOFTIRQ);
-+}
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- static int cpu_time_callback(struct notifier_block *nfb,
-                              unsigned long action,
-                              void *hcpu)
--- 
-2.48.1
-
+Jan
 
