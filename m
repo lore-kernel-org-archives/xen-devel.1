@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1751FC5B55A
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 09:05:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1002952.1382451 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A14EC61CE5
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Jun 2025 09:05:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1002944.1382383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM16S-00022g-4b; Mon, 02 Jun 2025 09:05:08 +0000
+	id 1uM16I-0008V5-6Y; Mon, 02 Jun 2025 09:04:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1002952.1382451; Mon, 02 Jun 2025 09:05:08 +0000
+Received: by outflank-mailman (output) from mailman id 1002944.1382383; Mon, 02 Jun 2025 09:04:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uM16R-00021S-Ve; Mon, 02 Jun 2025 09:05:07 +0000
-Received: by outflank-mailman (input) for mailman id 1002952;
- Mon, 02 Jun 2025 09:05:06 +0000
+	id 1uM16I-0008Ud-0l; Mon, 02 Jun 2025 09:04:58 +0000
+Received: by outflank-mailman (input) for mailman id 1002944;
+ Mon, 02 Jun 2025 09:04:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qKV=YR=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uM16Q-00081k-4b
- for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 09:05:06 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
+ id 1uM16G-00081k-OJ
+ for xen-devel@lists.xenproject.org; Mon, 02 Jun 2025 09:04:56 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aca78b68-3f90-11f0-a300-13f23c93f187;
- Mon, 02 Jun 2025 11:05:05 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-55329bd977aso5224207e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 02:05:05 -0700 (PDT)
+ id a73e7c91-3f90-11f0-a300-13f23c93f187;
+ Mon, 02 Jun 2025 11:04:56 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55324e35f49so4990016e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Jun 2025 02:04:56 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5533791cdc3sm1507541e87.176.2025.06.02.02.05.03
+ 2adb3069b0e04-5533791cdc3sm1507541e87.176.2025.06.02.02.04.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 02:05:03 -0700 (PDT)
+ Mon, 02 Jun 2025 02:04:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aca78b68-3f90-11f0-a300-13f23c93f187
+X-Inumbo-ID: a73e7c91-3f90-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748855105; x=1749459905; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1748855095; x=1749459895; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bD1e3cReyKifgfKVVK1ivsJtIILbWIwhcDmXv0PowdU=;
-        b=aqU9jxcieiQz9hYAEEwZt2MFz4xNK1EvE5cUp5vCASp1MUDMaJ1AvfUTBjaEb80wyd
-         +r9t4lIld9HOv+3l8UzM/pf6uXIRj62T2pUKyHr+QGl+6snbVs72vTT2JRX662x954kp
-         PwmmzhbCJH7Ks0sRBWuLzicerVKm4oMKi0HzxaQzQBHBtZ+0MbIcEZxHeWc4cQe5xAg2
-         p6BDfgrvJYa9yBzfynVqJY5lF4Lk2oavIJwFIt/RmZ2JKWfxfJEsGelsq7ALq9BtxAyY
-         cwJRT5bWZnHOaK9LYBpsJyXYFbpY9RnzYESwlfwsUCSZ5RLSn5Wdt69nMEb7ORXIpqt2
-         LiVw==
+        bh=Jf3vC/bMLxsK+qQIEq63MqPOkecni+X3pTICciqQJuw=;
+        b=JsMjDz/WcVkQycjqVs9dX9i37frKDZThoti3L77TXgIhdUhhOv4iFzfeYhO4mghaSi
+         XPdRFh7kEoExwUV8VC3iKOXE1nL6mKDiCOTGaFQJsQmtq/OzxbMVBAyBIncH5vmPttT+
+         mQsuok/isvvTJohfqoqkZpvliBg/JNKtuMqnFKxPKGEyXRoVCS6y2MhjfMhL2UrfeeeQ
+         aKafARywnwZMch5KPJ1kiI4YAOfWnB0JmDYNx/WooyFhxQ/ZFpEeX4g9JhqPfjCnvJDe
+         umWujBteDkEGTNMt0e4P8pqroBTQ3E6/KW/L8V5sMHgmRX8egHT1mzAmTjHhsDaBol88
+         gZ3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748855105; x=1749459905;
+        d=1e100.net; s=20230601; t=1748855095; x=1749459895;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bD1e3cReyKifgfKVVK1ivsJtIILbWIwhcDmXv0PowdU=;
-        b=NSL8C/5yCaladbBY6T4zXXPOsIeDrEpw3k/USDYV2b0TAUFndc83F2ql7T9YPV2EBP
-         VoFlwGPujmE+ennOY5yysIoiwcDw0ye86uGwZuILkjg6Y8zvpBVOhGGNnDTpBjLEgLlm
-         8lbkCQBykkMzhe7FxOHXXI7YGuyzo3ckje9xKsKlNGQLw1C5r+oeLMTKv3/J/eQO0n2m
-         KcCRBO3Z1ZQ7VCSRLnydDlN+3S5DeV1tSIG2AG9hAC1BxGgdyg4SrWvXstMcgJzVhxJT
-         4ia4tD+3LEbc84twuYmvbNWYbdtL+QKEjd1oA9K5Epa+3ojyduprcwZf9VcgSM1AObeQ
-         Zzlw==
-X-Gm-Message-State: AOJu0YynydaVDej2eOUO5FL78/RJBnvW8CPL4SKNF2Q7xxoYiMqgKi8/
-	Kcu+nHTFGBEd7MK9ta/l0bHfUENMprTYKIXKOe5h7Bzwnu3YcE0eQobFN7O++WZ1
-X-Gm-Gg: ASbGncuoLwDiNz8VRqy0zgRb1TwMy9TsponFm4voNadTq9RiKnZpMwjieuM5FIhukR4
-	zalGoBILXi/b3ec6jun66U/fQUSBqvm6h/IpeJ0jpKEnTq4W356mplmfFFXXanB8G/P2yuUbu5h
-	0X2nuA5/hM/IS9JtkpFnhJ+2dQ2z4r3Fiks84oJ5469EZ8eTxeYXJpmNbkiHM4MHEO99m5cR5Vk
-	g0triTtWOiyjo37cX2Gjzzoiq1RjP3AdsohAV9zd5GydWnVkRvdOu9rMgQX8T4J//CxBYwoNeXD
-	Kp086njUD33n2p6Ugf1NH67QlIVVO3UNra3kFqpgFd/J4TNKc2WZjgNBom3ARHUGDTpw9kMYbjn
-	D71IApzUVBaAOhIzOmLI194Ljmg==
-X-Google-Smtp-Source: AGHT+IFaBoA7Yo/WUepczn6Qruy6S1UWK4p6ZJeemhxCrjIh1ez95m44qZ2wj4raboedU+yZ8Qfwqw==
-X-Received: by 2002:a05:6512:1592:b0:553:2159:8716 with SMTP id 2adb3069b0e04-5533ba99850mr3614033e87.26.1748855104208;
-        Mon, 02 Jun 2025 02:05:04 -0700 (PDT)
+        bh=Jf3vC/bMLxsK+qQIEq63MqPOkecni+X3pTICciqQJuw=;
+        b=pJ25wImjuYFzDH97JQDArTAgV/ae83/oEsZYFaLWJaEsjpEwJoky88lFrM4Xnmgv4B
+         x1h3IOEp8TOonvjkcNIxil/TvKmI4u/uTo1UUaPqanKXbtUl20QsmRs9+1+INSzkoaTE
+         Qtco3qzrCtj3vs7j7IkxCRAiojonUA50OJbWlIPmGF6JpAwer95YDguU1m39PTyuLTVP
+         sZJ7225qFUkXjFyjnj1tF9+1m6p0MHxcATlCcqlRoMEo9psMCNa1jAYG05wQsnfpgBki
+         7cpZTxXWTmgPrvsCXaSm8PLGZRJRt+WWuf8V+4M9gS2x7M4o2GQz0VV29qFLNwHnt7L0
+         U4Zw==
+X-Gm-Message-State: AOJu0YzunoFa8HOLmdwiJrHIFQuBitnJzyYnn55cbim8SaZw24dFswRB
+	499g7T94BT0bth146cAr3JM3nABaUbQd+ByMNmySipJorKsTAD/8L+qqy4zy0PsO
+X-Gm-Gg: ASbGncsUbqN2oZ0mQfcSzszc2orshWIrxF1sg+rayu4pbmKT5eIvS6Xqdv8VNyS76UX
+	HGl/bgtbC2NWGqDiEiH5mDsbdEUjf0nn8ZMo+Fcr/JUsbF1kE+GIT+3InL2o3viQik05HI9RFdK
+	T5Fspd/GHQFHlF5QlY0wRYFBKPB0fkzWylu2uS1ads4sifZUaclMBB/k7PAar9WojooWH6kgqr4
+	TbZ2fCrjFacJJ7LTCBLV9AcoKGCZ6xEdAP8FRkOBsKxmaAFkWAAFOEi5bX+sTQSPo09ia0tZbg4
+	bZ5sPYJF5ULHUFUIg0FF6JFamAdKveu3+TlcxVEYq2gUrYS50A/aojBh8ie0NT8DILWMeeE90HJ
+	rhKIFyy4fqj3ae/025Y2udGPsVw==
+X-Google-Smtp-Source: AGHT+IHzhIcJPLhYeyY8gRjIbAaAby/DEUcUcJeunz8LbzATZzYj/HE4uNg6xTTusSuHPyQMGBDzRw==
+X-Received: by 2002:a05:6512:2313:b0:553:202e:a41b with SMTP id 2adb3069b0e04-5533b8f3e6emr3760415e87.15.1748855095180;
+        Mon, 02 Jun 2025 02:04:55 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: xakep.amatop@gmail.com,
@@ -91,9 +91,9 @@ Cc: xakep.amatop@gmail.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v4][PART 2 10/10] xen/arm: Save/restore context on suspend/resume
-Date: Mon,  2 Jun 2025 12:04:21 +0300
-Message-ID: <8f5904bc8f4d8ee39e248b3a2213fb3ed6815aff.1748848482.git.mykola_kvach@epam.com>
+Subject: [PATCH v4][PART 2 03/10] xen/arm: Implement GIC suspend/resume functions (gicv2 only)
+Date: Mon,  2 Jun 2025 12:04:14 +0300
+Message-ID: <af9d3c966c4b637559650fd8a8ac53eb36c1a3f6.1748848482.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1748848482.git.mykola_kvach@epam.com>
 References: <cover.1748848482.git.mykola_kvach@epam.com>
@@ -102,26 +102,15 @@ Content-Transfer-Encoding: 8bit
 
 From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-The context of CPU general purpose and system control registers
-has to be saved on suspend and restored on resume. This is
-implemented in hyp_suspend and before the return from hyp_resume
-function. The hyp_suspend is invoked just before the PSCI system
-suspend call is issued to the ATF. The hyp_suspend has to return a
-non-zero value so that the calling 'if' statement evaluates to true,
-causing the system suspend to be invoked. Upon the resume, context
-saved on suspend will be restored, including the link register.
-Therefore, after restoring the context the control flow will
-return to the address pointed by the saved link register, which
-is the place from which the hyp_suspend was called. To ensure
-that the calling 'if' statement doesn't again evaluate to true
-and initiate system suspend, hyp_resume has to return a zero value
-after restoring the context.
+System suspend may lead to a state where GIC would be powered down.
+Therefore, Xen should save/restore the context of GIC on suspend/resume.
 
-Note that the order of saving register context into cpu_context
-structure has to match the order of restoring.
+Note that the context consists of states of registers which are
+controlled by the hypervisor. Other GIC registers which are accessible
+by guests are saved/restored on context switch.
 
-Support for ARM32 is not implemented. Instead, compilation fails with a
-build-time error if suspend is enabled for ARM32.
+Tested on Xilinx Ultrascale+ MPSoC with (and without) powering down
+the GIC.
 
 Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
 Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
@@ -129,202 +118,269 @@ Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
 Changes in v4:
-- produce build-time error for ARM32 when CONFIG_SYSTEM_SUSPEND is enabled
-- use register_t instead of uint64_t in cpu_context structure
----
- xen/arch/arm/arm64/head.S          | 88 +++++++++++++++++++++++++++++-
- xen/arch/arm/include/asm/suspend.h | 20 +++++++
- xen/arch/arm/suspend.c             | 23 +++++++-
- 3 files changed, 127 insertions(+), 4 deletions(-)
+  - Add error logging for allocation failures
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 596e960152..70bb305ce3 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -562,6 +562,52 @@ END(efi_xen_start)
- #endif /* CONFIG_ARM_EFI */
+Changes in v3:
+  - Drop asserts and return error codes instead.
+  - Wrap code with CONFIG_SYSTEM_SUSPEND.
+
+Changes in v2:
+  - Minor fixes after review.
+---
+ xen/arch/arm/gic-v2.c          | 154 +++++++++++++++++++++++++++++++++
+ xen/arch/arm/gic.c             |  29 +++++++
+ xen/arch/arm/include/asm/gic.h |  12 +++
+ 3 files changed, 195 insertions(+)
+
+diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
+index b23e72a3d0..dce8f5e924 100644
+--- a/xen/arch/arm/gic-v2.c
++++ b/xen/arch/arm/gic-v2.c
+@@ -1098,6 +1098,151 @@ static int gicv2_iomem_deny_access(struct domain *d)
+     return iomem_deny_access(d, mfn, mfn + nr);
+ }
  
- #ifdef CONFIG_SYSTEM_SUSPEND
-+/*
-+ * int hyp_suspend(struct cpu_context *ptr)
-+ *
-+ * x0 - pointer to the storage where callee's context will be saved
-+ *
-+ * CPU context saved here will be restored on resume in hyp_resume function.
-+ * hyp_suspend shall return a non-zero value. Upon restoring context
-+ * hyp_resume shall return value zero instead. From C code that invokes
-+ * hyp_suspend, the return value is interpreted to determine whether the context
-+ * is saved (hyp_suspend) or restored (hyp_resume).
-+ */
-+FUNC(hyp_suspend)
-+        /* Store callee-saved registers */
-+        stp     x19, x20, [x0], #16
-+        stp     x21, x22, [x0], #16
-+        stp     x23, x24, [x0], #16
-+        stp     x25, x26, [x0], #16
-+        stp     x27, x28, [x0], #16
-+        stp     x29, lr, [x0], #16
++#ifdef CONFIG_SYSTEM_SUSPEND
 +
-+        /* Store stack-pointer */
-+        mov     x2, sp
-+        str     x2, [x0], #8
++/* GICv2 registers to be saved/restored on system suspend/resume */
++struct gicv2_context {
++    /* GICC context */
++    uint32_t gicc_ctlr;
++    uint32_t gicc_pmr;
++    uint32_t gicc_bpr;
++    /* GICD context */
++    uint32_t gicd_ctlr;
++    uint32_t *gicd_isenabler;
++    uint32_t *gicd_isactiver;
++    uint32_t *gicd_ipriorityr;
++    uint32_t *gicd_itargetsr;
++    uint32_t *gicd_icfgr;
++};
 +
-+        /* Store system control registers */
-+        mrs     x2, VBAR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, VTCR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, VTTBR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, TPIDR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, MDCR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, HSTR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, CPTR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, HCR_EL2
-+        str     x2, [x0], #8
++static struct gicv2_context gicv2_context;
 +
-+        /* hyp_suspend must return a non-zero value */
-+        mov     x0, #1
-+        ret
-+END(hyp_suspend)
- 
- FUNC(hyp_resume)
-         /* Initialize the UART if earlyprintk has been enabled. */
-@@ -580,7 +626,47 @@ FUNC(hyp_resume)
-         b     enable_secondary_cpu_mm
- 
- mmu_resumed:
--        b .
-+        /* Now we can access the cpu_context, so restore the context here */
-+        ldr     x0, =cpu_context
++static int gicv2_suspend(void)
++{
++    unsigned int i;
 +
-+        /* Restore callee-saved registers */
-+        ldp     x19, x20, [x0], #16
-+        ldp     x21, x22, [x0], #16
-+        ldp     x23, x24, [x0], #16
-+        ldp     x25, x26, [x0], #16
-+        ldp     x27, x28, [x0], #16
-+        ldp     x29, lr, [x0], #16
-+
-+        /* Restore stack pointer */
-+        ldr     x2, [x0], #8
-+        mov     sp, x2
-+
-+        /* Restore system control registers */
-+        ldr     x2, [x0], #8
-+        msr     VBAR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     VTCR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     VTTBR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     TPIDR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     MDCR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     HSTR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     CPTR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     HCR_EL2, x2
-+        isb
-+
-+        /* Since context is restored return from this function will appear as
-+         * return from hyp_suspend. To distinguish a return from hyp_suspend
-+         * which is called upon finalizing the suspend, as opposed to return
-+         * from this function which executes on resume, we need to return zero
-+         * value here. */
-+        mov x0, #0
-+        ret
- END(hyp_resume)
- 
- #endif /* CONFIG_SYSTEM_SUSPEND */
-diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-index 55041a5d06..ae71ccb87b 100644
---- a/xen/arch/arm/include/asm/suspend.h
-+++ b/xen/arch/arm/include/asm/suspend.h
-@@ -5,9 +5,29 @@
- 
- #ifdef CONFIG_SYSTEM_SUSPEND
- 
-+#ifdef CONFIG_ARM_64
-+struct cpu_context {
-+    register_t callee_regs[12];
-+    register_t sp;
-+    register_t vbar_el2;
-+    register_t vtcr_el2;
-+    register_t vttbr_el2;
-+    register_t tpidr_el2;
-+    register_t mdcr_el2;
-+    register_t hstr_el2;
-+    register_t cptr_el2;
-+    register_t hcr_el2;
-+} __aligned(16);
-+#else
-+#error "Define cpu_context structure for arm32"
-+#endif
-+
-+extern struct cpu_context cpu_context;
-+
- int host_system_suspend(void);
- 
- void hyp_resume(void);
-+int hyp_suspend(struct cpu_context *ptr);
- 
- #endif /* CONFIG_SYSTEM_SUSPEND */
- 
-diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-index f3ad8517ac..b1b8644a75 100644
---- a/xen/arch/arm/suspend.c
-+++ b/xen/arch/arm/suspend.c
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
- #include <asm/psci.h>
-+#include <asm/suspend.h>
- #include <xen/console.h>
- #include <xen/cpu.h>
- #include <xen/sched.h>
-@@ -17,6 +18,8 @@
-  *  - Investigate feasibility and need for implementing system suspend on ARM32
-  */
- 
-+struct cpu_context cpu_context;
-+
- /* Xen suspend. Note: data is not used (suspend is the suspend to RAM) */
- static long system_suspend(void *data)
- {
-@@ -73,9 +76,23 @@ static long system_suspend(void *data)
-      */
-     update_boot_mapping(true);
- 
--    status = call_psci_system_suspend();
--    if ( status )
--        dprintk(XENLOG_WARNING, "PSCI system suspend failed, err=%d\n", status);
-+    if ( hyp_suspend(&cpu_context) )
++    if ( !gicv2_context.gicd_isenabler )
 +    {
-+        status = call_psci_system_suspend();
-+        /*
-+         * If suspend is finalized properly by above system suspend PSCI call,
-+         * the code below in this 'if' branch will never execute. Execution
-+         * will continue from hyp_resume which is the hypervisor's resume point.
-+         * In hyp_resume CPU context will be restored and since link-register is
-+         * restored as well, it will appear to return from hyp_suspend. The
-+         * difference in returning from hyp_suspend on system suspend versus
-+         * resume is in function's return value: on suspend, the return value is
-+         * a non-zero value, on resume it is zero. That is why the control flow
-+         * will not re-enter this 'if' branch on resume.
-+         */
-+        if ( status )
-+            dprintk(XENLOG_WARNING, "PSCI system suspend failed, err=%d\n", status);
++        dprintk(XENLOG_WARNING, "%s:%d: GICv2 suspend context not allocated!\n",
++            __func__, __LINE__);
++        return -ENOMEM;
 +    }
++
++    /* Save GICC configuration */
++    gicv2_context.gicc_ctlr = readl_gicc(GICC_CTLR);
++    gicv2_context.gicc_pmr = readl_gicc(GICC_PMR);
++    gicv2_context.gicc_bpr = readl_gicc(GICC_BPR);
++
++    /* Save GICD configuration */
++    gicv2_context.gicd_ctlr = readl_gicd(GICD_CTLR);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ )
++        gicv2_context.gicd_isenabler[i] = readl_gicd(GICD_ISENABLER + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ )
++        gicv2_context.gicd_isactiver[i] = readl_gicd(GICD_ISACTIVER + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
++        gicv2_context.gicd_ipriorityr[i] = readl_gicd(GICD_IPRIORITYR + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
++        gicv2_context.gicd_itargetsr[i] = readl_gicd(GICD_ITARGETSR + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 16); i++ )
++        gicv2_context.gicd_icfgr[i] = readl_gicd(GICD_ICFGR + i * 4);
++
++    return 0;
++}
++
++static void gicv2_resume(void)
++{
++    unsigned int i;
++
++    if ( !gicv2_context.gicd_isenabler )
++    {
++        dprintk(XENLOG_WARNING, "%s:%d: GICv2 suspend context not allocated!\n",
++            __func__, __LINE__);
++        return;
++    }
++
++    gicv2_cpu_disable();
++    /* Disable distributor */
++    writel_gicd(0, GICD_CTLR);
++
++    /* Restore GICD configuration */
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ ) {
++        writel_gicd(0xffffffff, GICD_ICENABLER + i * 4);
++        writel_gicd(gicv2_context.gicd_isenabler[i], GICD_ISENABLER + i * 4);
++    }
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 32); i++ ) {
++        writel_gicd(0xffffffff, GICD_ICACTIVER + i * 4);
++        writel_gicd(gicv2_context.gicd_isactiver[i], GICD_ISACTIVER + i * 4);
++    }
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
++        writel_gicd(gicv2_context.gicd_ipriorityr[i], GICD_IPRIORITYR + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 4); i++ )
++        writel_gicd(gicv2_context.gicd_itargetsr[i], GICD_ITARGETSR + i * 4);
++
++    for ( i = 0; i < DIV_ROUND_UP(gicv2_info.nr_lines, 16); i++ )
++        writel_gicd(gicv2_context.gicd_icfgr[i], GICD_ICFGR + i * 4);
++
++    /* Make sure all registers are restored and enable distributor */
++    writel_gicd(gicv2_context.gicd_ctlr | GICD_CTL_ENABLE, GICD_CTLR);
++
++    /* Restore GIC CPU interface configuration */
++    writel_gicc(gicv2_context.gicc_pmr, GICC_PMR);
++    writel_gicc(gicv2_context.gicc_bpr, GICC_BPR);
++
++    /* Enable GIC CPU interface */
++    writel_gicc(gicv2_context.gicc_ctlr | GICC_CTL_ENABLE | GICC_CTL_EOI,
++                GICC_CTLR);
++}
++
++static void gicv2_alloc_context(struct gicv2_context *gc)
++{
++    uint32_t n = gicv2_info.nr_lines;
++
++    gc->gicd_isenabler = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 32));
++    if ( !gc->gicd_isenabler )
++        goto err_free;
++
++    gc->gicd_isactiver = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 32));
++    if ( !gc->gicd_isactiver )
++        goto err_free;
++
++    gc->gicd_itargetsr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 4));
++    if ( !gc->gicd_itargetsr )
++        goto err_free;
++
++    gc->gicd_ipriorityr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 4));
++    if ( !gc->gicd_ipriorityr )
++        goto err_free;
++
++    gc->gicd_icfgr = xzalloc_array(uint32_t, DIV_ROUND_UP(n, 16));
++    if ( !gc->gicd_icfgr )
++        goto err_free;
++
++    return;
++
++ err_free:
++    dprintk(XENLOG_ERR,
++            "%s:%d: failed to allocate memory for GICv2 suspend context\n",
++            __func__, __LINE__);
++
++    xfree(gc->gicd_icfgr);
++    xfree(gc->gicd_ipriorityr);
++    xfree(gc->gicd_itargetsr);
++    xfree(gc->gicd_isactiver);
++    xfree(gc->gicd_isenabler);
++
++    memset(gc, 0, sizeof(*gc));
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ #ifdef CONFIG_ACPI
+ static unsigned long gicv2_get_hwdom_extra_madt_size(const struct domain *d)
+ {
+@@ -1302,6 +1447,11 @@ static int __init gicv2_init(void)
  
-     system_state = SYS_STATE_resume;
-     update_boot_mapping(false);
+     spin_unlock(&gicv2.lock);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++    /* Allocate memory to be used for saving GIC context during the suspend */
++    gicv2_alloc_context(&gicv2_context);
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+     return 0;
+ }
+ 
+@@ -1345,6 +1495,10 @@ static const struct gic_hw_operations gicv2_ops = {
+     .map_hwdom_extra_mappings = gicv2_map_hwdom_extra_mappings,
+     .iomem_deny_access   = gicv2_iomem_deny_access,
+     .do_LPI              = gicv2_do_LPI,
++#ifdef CONFIG_SYSTEM_SUSPEND
++    .suspend             = gicv2_suspend,
++    .resume              = gicv2_resume,
++#endif /* CONFIG_SYSTEM_SUSPEND */
+ };
+ 
+ /* Set up the GIC */
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index e80fe0ca24..a018bd7715 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -425,6 +425,35 @@ int gic_iomem_deny_access(struct domain *d)
+     return gic_hw_ops->iomem_deny_access(d);
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++int gic_suspend(void)
++{
++    /* Must be called by boot CPU#0 with interrupts disabled */
++    ASSERT(!local_irq_is_enabled());
++    ASSERT(!smp_processor_id());
++
++    if ( !gic_hw_ops->suspend || !gic_hw_ops->resume )
++        return -ENOSYS;
++
++    return gic_hw_ops->suspend();
++}
++
++void gic_resume(void)
++{
++    /*
++     * Must be called by boot CPU#0 with interrupts disabled after gic_suspend
++     * has returned successfully.
++     */
++    ASSERT(!local_irq_is_enabled());
++    ASSERT(!smp_processor_id());
++    ASSERT(gic_hw_ops->resume);
++
++    gic_hw_ops->resume();
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ static int cpu_gic_callback(struct notifier_block *nfb,
+                             unsigned long action,
+                             void *hcpu)
+diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
+index 541f0eeb80..a706303008 100644
+--- a/xen/arch/arm/include/asm/gic.h
++++ b/xen/arch/arm/include/asm/gic.h
+@@ -280,6 +280,12 @@ extern int gicv_setup(struct domain *d);
+ extern void gic_save_state(struct vcpu *v);
+ extern void gic_restore_state(struct vcpu *v);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++/* Suspend/resume */
++extern int gic_suspend(void);
++extern void gic_resume(void);
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ /* SGI (AKA IPIs) */
+ enum gic_sgi {
+     GIC_SGI_EVENT_CHECK,
+@@ -395,6 +401,12 @@ struct gic_hw_operations {
+     int (*iomem_deny_access)(struct domain *d);
+     /* Handle LPIs, which require special handling */
+     void (*do_LPI)(unsigned int lpi);
++#ifdef CONFIG_SYSTEM_SUSPEND
++    /* Save GIC configuration due to the system suspend */
++    int (*suspend)(void);
++    /* Restore GIC configuration due to the system resume */
++    void (*resume)(void);
++#endif /* CONFIG_SYSTEM_SUSPEND */
+ };
+ 
+ extern const struct gic_hw_operations *gic_hw_ops;
 -- 
 2.48.1
 
