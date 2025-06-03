@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0F3C5AD49
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Jun 2025 13:13:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1004420.1384128 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCEEC5AD49
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Jun 2025 13:14:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1004425.1384138 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMRRx-0001Ge-A0; Tue, 03 Jun 2025 13:13:05 +0000
+	id 1uMRSt-0001v7-HR; Tue, 03 Jun 2025 13:14:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1004420.1384128; Tue, 03 Jun 2025 13:13:05 +0000
+Received: by outflank-mailman (output) from mailman id 1004425.1384138; Tue, 03 Jun 2025 13:14:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMRRx-0001GX-6M; Tue, 03 Jun 2025 13:13:05 +0000
-Received: by outflank-mailman (input) for mailman id 1004420;
- Tue, 03 Jun 2025 13:13:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uMRSt-0001v0-Eb; Tue, 03 Jun 2025 13:14:03 +0000
+Received: by outflank-mailman (input) for mailman id 1004425;
+ Tue, 03 Jun 2025 13:14:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pD2F=YS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uMRRv-0001FC-HN
- for xen-devel@lists.xenproject.org; Tue, 03 Jun 2025 13:13:03 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 79f43be7-407c-11f0-b894-0df219b8e170;
- Tue, 03 Jun 2025 15:13:01 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a4f379662cso4385548f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Jun 2025 06:13:01 -0700 (PDT)
+ id 1uMRSs-0001YM-5D
+ for xen-devel@lists.xenproject.org; Tue, 03 Jun 2025 13:14:02 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9dc71bbc-407c-11f0-a300-13f23c93f187;
+ Tue, 03 Jun 2025 15:14:01 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-450d668c2a1so29625035e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Jun 2025 06:14:01 -0700 (PDT)
 Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe73f9csm18411167f8f.50.2025.06.03.06.07.53
+ ffacd0b85a97d-3a4efe6c94dsm18460034f8f.37.2025.06.03.06.14.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Jun 2025 06:07:54 -0700 (PDT)
+ Tue, 03 Jun 2025 06:14:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79f43be7-407c-11f0-b894-0df219b8e170
+X-Inumbo-ID: 9dc71bbc-407c-11f0-a300-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1748956381; x=1749561181; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1748956441; x=1749561241; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=cn6ZSsClTrlyOrDaeJmKZBG0SLsvrD0YJd0ic/nsoxQ=;
-        b=HaasrrALuU8XzLtIIE50hgWIFK7IApPYhkUP5ShWfvDQwV27mMeGs3XS+kxBq6pggw
-         rSJQXK6a4swD3hKC/8Uh9tFU5gZpoCFHJuH20ZWNRRyQqztIzMiQHwHUwl01Vvhgvvjh
-         ZJqjIVO4krdF2kVVBUukLYAfnb3ALQ1frIKQk=
+        bh=7Ar2Yizbo6vvS5p58yug47JAna3h/wkC62zs6el0WO4=;
+        b=iTQDnZjpkiqG8QKT8nqiLJDrHCyp5pWSY4AqBfKeG8dtJVGD5+cEVUrd5EA6cB5y4a
+         LQXSe4XyZToGRLV35JHGuQ+IyEeMzZxsSn85fAOxEXJx7eAUC9DGV8oYI9hP/RAWtWoC
+         cKDzEkEQxQX4T3psXbD9gIM7iw5Xq3MGNLqeM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748956381; x=1749561181;
+        d=1e100.net; s=20230601; t=1748956441; x=1749561241;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cn6ZSsClTrlyOrDaeJmKZBG0SLsvrD0YJd0ic/nsoxQ=;
-        b=jIPchCnYjIv5YZAsZP5O61EZ2IWsSTenNlZ3XLhR2g9RP+eA9kAfciWNMaHv99Yt1S
-         ecOAv66Im12XCTvr7hgw0rPF7OiKyeVVH+3N5d8nMnJtCcH+4iHIkU7x9i3ab/qZKeiK
-         4CCESNA3BQnV42uE2AVpj6/k32ofLENq5dfdsf/t+zefLYV6tT9BgbgHiGn3QPA5cFEn
-         DwVChcamiK/bdP0LCqisZPVCaVeHT2fcgNhKdb5GBTEVDZDcVAiqHjiL0Rz9YK61xwgu
-         Mn6aD/g+AFYFUngExrQFEQnEeBa02cyoMHT1WKPUbC8CYPeAFxTtyh6BI99oxNa5GU9o
-         bZSg==
-X-Forwarded-Encrypted: i=1; AJvYcCVK3GM/ntX3ZYBsF0CTwjfdscRQtUbWJy6TsfIvtOVQ8nZfF8/D2T29VP5zrDvp6i7l81O1ovlsiX8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxpmbQlFyl1P6crGV0CiRuP+GsKkBKgdXiv5qmT6tHxbMNY8Mau
-	06kZ1qjxiOXRmuRCuWeX6trF0xhbSRbs3GPu+KNPg2wtAR6AL/3CssGNDYM4Orx1QqX5Mx7Osfy
-	okYXN
-X-Gm-Gg: ASbGncu43dK6o1Y6Em6TDYUFHy8jIlPIv8kYp0nlTH5qdL9mL4ui2/1MsHIqH7X8yDT
-	cQzNCpLa2vjcoBR6UrAIcRgx/pBJTTO1xfhYD8vLCfC7ADVKKUwIGLRIu0IFVyBeB3CMppTdinf
-	b1mhWC6rq/phA3XDq3igpoI9JpOwzavVRfmj4T0aLkhQs8aikMxBjzifcl3PFseV/Q58Khh9KcD
-	z0x2chiuYSggDtjY2p7CDqe/HBVpap08puXJy4lWGzr+aeupAkdeBYARa/cwVrCTiVz6yoqjifQ
-	Cl2EB4SfnELrcKzVDNzSQoJT+qSkSHnUqvv+EB4MSy+E9h47xDeMP6CAh7WVv/OEswnWKbFs4FS
-	RtK3RLn8DNs1vhLjH
-X-Google-Smtp-Source: AGHT+IFVj1XR/CCAN0TFYD8YAl0+YQ8eDgtCkqrCdQeWFTSUxEUAI2Tyg6tx8/kwGtY8QMomMe4ysw==
-X-Received: by 2002:a05:6000:2907:b0:3a4:fbd9:58e6 with SMTP id ffacd0b85a97d-3a4fe395abfmr8767589f8f.50.1748956074406;
-        Tue, 03 Jun 2025 06:07:54 -0700 (PDT)
-Message-ID: <9854421d-e6c4-4ac4-ba77-4c038df8731f@citrix.com>
-Date: Tue, 3 Jun 2025 14:07:53 +0100
+        bh=7Ar2Yizbo6vvS5p58yug47JAna3h/wkC62zs6el0WO4=;
+        b=U4uaYqGPIMU/LpFQHvMTPlz9pxn9g4N5u5FtW+2Z+dg3Mn/qlh0GV1hbI8N1QEGyF8
+         rp5ZM15tK0DGzD2KfHKG+CEdgU3UsTilZV2036qD+gILk1h/cXaPAawu93z5cscvOal7
+         KuZEKX//0g1I+lteg+Rsl4DgLkMirX0E2MD0FONTTF2URAIRoSb5chK1o+Q+UFGE6JgF
+         A1r2kaGmtBugU8eNgeLdKGGMAOK2Cu/2LWcuQrlEkDTH8nuX0JfC+z8Z1aBsJFIjFU7t
+         wWaLaPzdkSy3HINyUsLAP+rAYp5XPnzsVqmMR8HqiaB9AHRzCd/l+oDiN9QfjrbrxYWq
+         zwYg==
+X-Forwarded-Encrypted: i=1; AJvYcCWWhbfdZ2u6zV7GdKdyPhZg89cz3Lyk8DG8nP6LQx5V0Hj4p0Vuek4Y3epW6+pv7S+BDSjN0NO9KCo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxbfzhNKnLYPDqvqAXlpkiRJvTVu1x6a0ZYaRq58+FkH9y0pjrk
+	YBSDvhzcRtO9gIOXD7/YQivFXWAnYKw2n3cv731GBwz5ytK+0eWAyygjVlX9onSVQz5iTfC8l/r
+	Z8ML2
+X-Gm-Gg: ASbGnctNNPR6XiTo5gy/eYM7ShwqVpAJybKvRKxRj50+HWHfuEvrCenWmf8YzehalaD
+	LmioAJho9Jc3eG7OJMThETElCba22la2TUj/8GftHyPJ1AbFDNul7Xtw78wu8nkP+iV942qqXsK
+	YaxCbD4t7JI7QAIQktEUFJFFermzUbz2Lt5YpDfnVUJnHuV+jmhTb3m37sLGGU1STwN6e/WX+Q1
+	gBDlt4weRqV20RiD/sERDfkiPHFRr0MRlAO+5f45cdKJ+swfcmj/sZFQQLrtdjUdo9APkYDPZWZ
+	wfr6Vwe53MFxlDhZjJcZ+O8/cBVaFKQD7r8HO1bFH6LxfVM9GzGwuLNBV7lRqSCljRVFmDFxoDz
+	cdTi7iWlX64My/fMu
+X-Google-Smtp-Source: AGHT+IHNEIOJzC7PQHqjq+Q5/u+C9LKGCEeaTegrDAHzl0Wk2GwOVZtAXoYFtOXfKs/7GFFT/DeDxA==
+X-Received: by 2002:a5d:4c49:0:b0:3a3:779d:7421 with SMTP id ffacd0b85a97d-3a514214285mr1737928f8f.0.1748956440963;
+        Tue, 03 Jun 2025 06:14:00 -0700 (PDT)
+Message-ID: <30007ef7-9576-41fb-8d4d-08ae7cbdacc4@citrix.com>
+Date: Tue, 3 Jun 2025 14:13:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH 3/9] CI: Fix status check for tools/tests
+Subject: Re: [XEN PATCH 6/9] CI: Upload junit result as artefact
 To: Anthony PERARD <anthony@xenproject.org>, xen-devel@lists.xenproject.org
 Cc: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>, Anthony PERARD
  <anthony.perard@vates.tech>, Doug Goldstein <cardoe@cardoe.com>,
  Stefano Stabellini <sstabellini@kernel.org>
 References: <20250603124222.52057-1-anthony@xenproject.org>
- <20250603124222.52057-4-anthony@xenproject.org>
+ <20250603124222.52057-7-anthony@xenproject.org>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -140,18 +140,18 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <20250603124222.52057-4-anthony@xenproject.org>
+In-Reply-To: <20250603124222.52057-7-anthony@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 03/06/2025 1:42 pm, Anthony PERARD wrote:
 > From: Anthony PERARD <anthony.perard@vates.tech>
 >
-> Without "pipefail", $? have the exit value of `tee`, which should
-> always be 0. But instead of using "pipefail", do collect the value of
-> from the test with $PIPESTATUS.
->
-> Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
+> This allow to investigate the file in cases of error. Not all
+> jobs that extend ".adl-x86-64" are creating a "tests-junit.xml" but
+> Gitlab only produce a warning when the file isn't found.
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+I'm not sure what you're trying to say here.
+
+~Andrew
 
