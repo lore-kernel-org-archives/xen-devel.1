@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCD2C5AD49
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Jun 2025 13:10:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1004413.1384117 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0F3C5AD49
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Jun 2025 13:13:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1004420.1384128 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMROu-0008Ax-SY; Tue, 03 Jun 2025 13:09:56 +0000
+	id 1uMRRx-0001Ge-A0; Tue, 03 Jun 2025 13:13:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1004413.1384117; Tue, 03 Jun 2025 13:09:56 +0000
+Received: by outflank-mailman (output) from mailman id 1004420.1384128; Tue, 03 Jun 2025 13:13:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uMROu-0008Aq-Pe; Tue, 03 Jun 2025 13:09:56 +0000
-Received: by outflank-mailman (input) for mailman id 1004413;
- Tue, 03 Jun 2025 13:09:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uMRRx-0001GX-6M; Tue, 03 Jun 2025 13:13:05 +0000
+Received: by outflank-mailman (input) for mailman id 1004420;
+ Tue, 03 Jun 2025 13:13:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Zlp/=YS=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uMROt-0008Ae-9U
- for xen-devel@lists.xenproject.org; Tue, 03 Jun 2025 13:09:55 +0000
-Received: from fout-b2-smtp.messagingengine.com
- (fout-b2-smtp.messagingengine.com [202.12.124.145])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 098fc0f8-407c-11f0-a300-13f23c93f187;
- Tue, 03 Jun 2025 15:09:53 +0200 (CEST)
-Received: from phl-compute-12.internal (phl-compute-12.phl.internal
- [10.202.2.52])
- by mailfout.stl.internal (Postfix) with ESMTP id 432BA1140181;
- Tue,  3 Jun 2025 09:09:52 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-12.internal (MEProxy); Tue, 03 Jun 2025 09:09:52 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 3 Jun 2025 09:09:51 -0400 (EDT)
+ <SRS0=pD2F=YS=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uMRRv-0001FC-HN
+ for xen-devel@lists.xenproject.org; Tue, 03 Jun 2025 13:13:03 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 79f43be7-407c-11f0-b894-0df219b8e170;
+ Tue, 03 Jun 2025 15:13:01 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a4f379662cso4385548f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Jun 2025 06:13:01 -0700 (PDT)
+Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4efe73f9csm18411167f8f.50.2025.06.03.06.07.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Jun 2025 06:07:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,139 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 098fc0f8-407c-11f0-a300-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1748956192;
-	 x=1749042592; bh=+58UHdLqAT2Wlb0AI7vyz1T675DG2Tu3VLsBD8GaoY8=; b=
-	XLaSkVBFvRGLiWVxft9aC944LoRbW45iSxfuaVpBNeTZ/G0xjgnWv6ywRvj2QZTB
-	XodZpaSNKjndn/t2Odgx6B28xowh9h3U7PeL6btiZ8LGY85ZoLO1dK0V+bTo7Wgs
-	R2pG+3AzeqHKSi/ICmTOk9dLqZxNTrH0R4hArownohxo8dWQpj6D8uJuXZ5xJRuQ
-	Xcq6xRd4qX4oxHIWf6KYpmCV2NdTuNe3BCZGKwq5uSvPLVbtpWNsmBB3txpp4IRS
-	vMMIhLDLqjdE4fgshwpzRKQpFtz0mGAvtm2FICotWsGFFhF0PchA8Xaz6CoyTIbd
-	bT9wZhM7BZarL+fMdrp2EQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1748956192; x=1749042592; bh=+58UHdLqAT2Wlb0AI7vyz1T675DG2Tu3VLs
-	BD8GaoY8=; b=hSN8jUgaPzga/rQql9/9EyQ/gy0NDZlb+6jpNN+OjdQElVPO6+t
-	PCmA0lGa6Q22X05ghk5nnWVJByO9rZAbemZgGH0+6O+3qyfhB1tDmmBdDwGun4KE
-	Tzady2pYOvdBitoetoJrEKL3QgTSPrJ8KyXY6UcRWtGtglriE+MPuMxjloZzE+dE
-	r6/Px2sPdMbthbBZ898PAML81ImqjRwrK/GDsLzeTYhySwmAFCr/FZAHwlOX1Iai
-	h0OUsbeaScR0h8DJbiuswhPY9QdEgGK36jwFPAKXBord1zGB2WTW4crKrWYoYhOp
-	rkJwulnyZuev/fbddYoy6RKtefIJ1fN3oRA==
-X-ME-Sender: <xms:H_Q-aGuMFuvyUm2-XJs6gXXEMFW2mDEoG0dzHryv8-z72CH2pX7o3g>
-    <xme:H_Q-aLcHXN8yThsa8vNvggOGJNOQpxyG2SDMEe0-R-ph4Mm0qtLiNqeopTLD29Ib4
-    UDxcEj_bIQYmA>
-X-ME-Received: <xmr:H_Q-aBwLMo93XvY1obaAHOhf5ZyF2o_XQJg0wTQa8TxMrxYdUN_8D19w2qQD9YLvZ1Toi4GGUUe0UqKM2c_G0_uIAt1goH_2kb0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugdeffecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdpuffr
-    tefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnth
-    hsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecu
-    hfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrg
-    hrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffr
-    rghtthgvrhhnpefgudelteefvefhfeehieetleeihfejhfeludevteetkeevtedtvdegue
-    etfeejudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhm
-    pehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsg
-    gprhgtphhtthhopeegpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehjsggvuhhl
-    ihgthhesshhushgvrdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtsh
-    drgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprhhoshhsrdhlrghgvghrfigr
-    lhhlsegtihhtrhhigidrtghomhdprhgtphhtthhopehkvghvihhnrdhlrghmphhishestg
-    hlohhuugdrtghomh
-X-ME-Proxy: <xmx:H_Q-aBNP_bgpySq_YsKh0_wax_ctY66YK95jeDvTLNaDtw9nwK_3-w>
-    <xmx:H_Q-aG-BrfTAr-KG1RVLG0YrP31RCi3XZoiPOiGt6tV-saRB2VxC-A>
-    <xmx:H_Q-aJVyZCXwIYo0Brpg1G1-T6tpRnn6mUsnNGmr6BRa_zX3YeULpg>
-    <xmx:H_Q-aPc4sHRtjPVJTuxpHLIwleNJm0f99WZYNBrIrNH2GIMjF8Ra6Q>
-    <xmx:IPQ-aKX9LDqHEbi2djASnfWmyAs7ozk-iJYg56S0KZAMYruJMbxh8UO->
-Feedback-ID: i1568416f:Fastmail
-Date: Tue, 3 Jun 2025 15:09:48 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Kevin Lampis <kevin.lampis@cloud.com>
-Subject: Re: [PATCH v2 3/3] Disallow most command-line options when lockdown
- mode is enabled
-Message-ID: <aD70HTOiY1FDJjla@mail-itl>
-References: <20250602134656.3836280-1-kevin.lampis@cloud.com>
- <20250602134656.3836280-4-kevin.lampis@cloud.com>
- <aD2ySVoaV2RydE-L@mail-itl>
- <c6ad5c25-d5e3-4278-8e5d-1cd593e50c6a@suse.com>
+X-Inumbo-ID: 79f43be7-407c-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1748956381; x=1749561181; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=cn6ZSsClTrlyOrDaeJmKZBG0SLsvrD0YJd0ic/nsoxQ=;
+        b=HaasrrALuU8XzLtIIE50hgWIFK7IApPYhkUP5ShWfvDQwV27mMeGs3XS+kxBq6pggw
+         rSJQXK6a4swD3hKC/8Uh9tFU5gZpoCFHJuH20ZWNRRyQqztIzMiQHwHUwl01Vvhgvvjh
+         ZJqjIVO4krdF2kVVBUukLYAfnb3ALQ1frIKQk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748956381; x=1749561181;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cn6ZSsClTrlyOrDaeJmKZBG0SLsvrD0YJd0ic/nsoxQ=;
+        b=jIPchCnYjIv5YZAsZP5O61EZ2IWsSTenNlZ3XLhR2g9RP+eA9kAfciWNMaHv99Yt1S
+         ecOAv66Im12XCTvr7hgw0rPF7OiKyeVVH+3N5d8nMnJtCcH+4iHIkU7x9i3ab/qZKeiK
+         4CCESNA3BQnV42uE2AVpj6/k32ofLENq5dfdsf/t+zefLYV6tT9BgbgHiGn3QPA5cFEn
+         DwVChcamiK/bdP0LCqisZPVCaVeHT2fcgNhKdb5GBTEVDZDcVAiqHjiL0Rz9YK61xwgu
+         Mn6aD/g+AFYFUngExrQFEQnEeBa02cyoMHT1WKPUbC8CYPeAFxTtyh6BI99oxNa5GU9o
+         bZSg==
+X-Forwarded-Encrypted: i=1; AJvYcCVK3GM/ntX3ZYBsF0CTwjfdscRQtUbWJy6TsfIvtOVQ8nZfF8/D2T29VP5zrDvp6i7l81O1ovlsiX8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxpmbQlFyl1P6crGV0CiRuP+GsKkBKgdXiv5qmT6tHxbMNY8Mau
+	06kZ1qjxiOXRmuRCuWeX6trF0xhbSRbs3GPu+KNPg2wtAR6AL/3CssGNDYM4Orx1QqX5Mx7Osfy
+	okYXN
+X-Gm-Gg: ASbGncu43dK6o1Y6Em6TDYUFHy8jIlPIv8kYp0nlTH5qdL9mL4ui2/1MsHIqH7X8yDT
+	cQzNCpLa2vjcoBR6UrAIcRgx/pBJTTO1xfhYD8vLCfC7ADVKKUwIGLRIu0IFVyBeB3CMppTdinf
+	b1mhWC6rq/phA3XDq3igpoI9JpOwzavVRfmj4T0aLkhQs8aikMxBjzifcl3PFseV/Q58Khh9KcD
+	z0x2chiuYSggDtjY2p7CDqe/HBVpap08puXJy4lWGzr+aeupAkdeBYARa/cwVrCTiVz6yoqjifQ
+	Cl2EB4SfnELrcKzVDNzSQoJT+qSkSHnUqvv+EB4MSy+E9h47xDeMP6CAh7WVv/OEswnWKbFs4FS
+	RtK3RLn8DNs1vhLjH
+X-Google-Smtp-Source: AGHT+IFVj1XR/CCAN0TFYD8YAl0+YQ8eDgtCkqrCdQeWFTSUxEUAI2Tyg6tx8/kwGtY8QMomMe4ysw==
+X-Received: by 2002:a05:6000:2907:b0:3a4:fbd9:58e6 with SMTP id ffacd0b85a97d-3a4fe395abfmr8767589f8f.50.1748956074406;
+        Tue, 03 Jun 2025 06:07:54 -0700 (PDT)
+Message-ID: <9854421d-e6c4-4ac4-ba77-4c038df8731f@citrix.com>
+Date: Tue, 3 Jun 2025 14:07:53 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="OYPP6qUbWlcHD4Zh"
-Content-Disposition: inline
-In-Reply-To: <c6ad5c25-d5e3-4278-8e5d-1cd593e50c6a@suse.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH 3/9] CI: Fix status check for tools/tests
+To: Anthony PERARD <anthony@xenproject.org>, xen-devel@lists.xenproject.org
+Cc: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Anthony PERARD
+ <anthony.perard@vates.tech>, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20250603124222.52057-1-anthony@xenproject.org>
+ <20250603124222.52057-4-anthony@xenproject.org>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20250603124222.52057-4-anthony@xenproject.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+On 03/06/2025 1:42 pm, Anthony PERARD wrote:
+> From: Anthony PERARD <anthony.perard@vates.tech>
+>
+> Without "pipefail", $? have the exit value of `tee`, which should
+> always be 0. But instead of using "pipefail", do collect the value of
+> from the test with $PIPESTATUS.
+>
+> Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
 
---OYPP6qUbWlcHD4Zh
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 3 Jun 2025 15:09:48 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Kevin Lampis <kevin.lampis@cloud.com>
-Subject: Re: [PATCH v2 3/3] Disallow most command-line options when lockdown
- mode is enabled
-
-On Mon, Jun 02, 2025 at 04:22:06PM +0200, Jan Beulich wrote:
-> On 02.06.2025 16:16, Marek Marczykowski-G=C3=B3recki wrote:
-> > On Mon, Jun 02, 2025 at 02:46:56PM +0100, Kevin Lampis wrote:
-> >> --- a/xen/common/lockdown.c
-> >> +++ b/xen/common/lockdown.c
-> >> @@ -35,7 +35,7 @@ static int __init parse_lockdown_opt(const char *s)
-> >> =20
-> >>      return 0;
-> >>  }
-> >> -custom_param("lockdown", parse_lockdown_opt);
-> >> +custom_secure_param("lockdown", parse_lockdown_opt);
-> >=20
-> > Is that really a good idea? It means `lockdown=3Dyes lockdown=3Dno` wou=
-ld
-> > still disable it in the end. This may matter more if for example the
-> > `lockdown=3Dyes` part is in the built-in cmdline (possibly with other
-> > integrity protection than UEFI SB).
->=20
-> But having a way to override an earlier "lockdown" by "lockdown=3Dno" is
-> intended? E.g. when your xen.cfg has the former, but you don't really
-> want that (for, say, an experiment).
-
-Ok, I guess those are conflicting use cases: using "lockdown" option to
-restrict what user can set via bootloader menu (even without
-secureboot), vs giving the local user full control (developer case). But
-in that latter case, maybe you can simply remove the "lockdown" option
-instead of adding "lockdown=3Dno" (granted, more work with xen.cfg or
-built-in cmdline...) ?=20
-
-Anyway, what really matters here is the behavior for UEFI SecureBoot,
-and this one is okay. The behavior outside of SB is secondary, and if
-that's the intention, I'm okay with the current version too.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---OYPP6qUbWlcHD4Zh
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmg+9B0ACgkQ24/THMrX
-1yympQf9FX/FIlmCa1fgmKxqcikietoQqwWCHv45Wm1G4L+B1bY9BpfWHiaGk9ls
-cVxIl5z0DBH7PGmY28Z2gSVL2rLZrFpCNcdPYnwiGfOuxb72+Pr2jkh/jPDb68d0
-dJlUO9yt95mH+4lXRi9SxDAhMki+XhdQvbMGslKg4JspeF4X82u4xBJKoXJOMqo8
-OaRmybqO8ZiDoXMtuY4nCZNg8mOa1Un6gvzjKv7JkFb8Thw0ry7dmBRnOyVhp85x
-K0P5TqkgNG1eX+ig1AzC1O08rFj5Hk4EDAWm3XCvpe+LfSsDwg3t42SMtWgRTwZp
-wH3o38Fa9Ogs0h1LudpmdOq/40HE8Q==
-=KGYd
------END PGP SIGNATURE-----
-
---OYPP6qUbWlcHD4Zh--
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
