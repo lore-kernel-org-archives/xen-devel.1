@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38896C5B543
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Jun 2025 15:34:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1007064.1386342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D6D4C5AE59
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Jun 2025 15:59:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1007084.1386372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNCbh-0003lq-9F; Thu, 05 Jun 2025 15:34:17 +0000
+	id 1uNCzw-0007UL-MC; Thu, 05 Jun 2025 15:59:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1007064.1386342; Thu, 05 Jun 2025 15:34:17 +0000
+Received: by outflank-mailman (output) from mailman id 1007084.1386372; Thu, 05 Jun 2025 15:59:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNCbh-0003lj-6l; Thu, 05 Jun 2025 15:34:17 +0000
-Received: by outflank-mailman (input) for mailman id 1007064;
- Thu, 05 Jun 2025 15:34:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uNCzw-0007UC-JL; Thu, 05 Jun 2025 15:59:20 +0000
+Received: by outflank-mailman (input) for mailman id 1007084;
+ Thu, 05 Jun 2025 15:59:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OIxA=YU=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uNCbf-0003l7-6l
- for xen-devel@lists.xenproject.org; Thu, 05 Jun 2025 15:34:15 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 88939383-4222-11f0-a300-13f23c93f187;
- Thu, 05 Jun 2025 17:34:13 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a4f78ebec8so680608f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 05 Jun 2025 08:34:13 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-451fb18a855sm22796605e9.18.2025.06.05.08.34.12
+ <SRS0=EkoY=YU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uNCzv-00071f-8U
+ for xen-devel@lists.xenproject.org; Thu, 05 Jun 2025 15:59:19 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 08e2e749-4226-11f0-b894-0df219b8e170;
+ Thu, 05 Jun 2025 17:59:17 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-601f278369bso2304251a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Jun 2025 08:59:17 -0700 (PDT)
+Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-60566c2aba9sm10443034a12.2.2025.06.05.08.59.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Jun 2025 08:34:12 -0700 (PDT)
+ Thu, 05 Jun 2025 08:59:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +47,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88939383-4222-11f0-a300-13f23c93f187
+X-Inumbo-ID: 08e2e749-4226-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1749137653; x=1749742453; darn=lists.xenproject.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=SsXot+elbz3CRhKpGH4GF+wH47QOk45FPC17mvak5Mo=;
-        b=p4wpgcwdQpD1NXt7jdFMK4eyaY4jLbWHqTjFDWN6zJ64MnmJg/K4Vp1SDW9t07etwC
-         bplrgw5/bWhUqqqGQSqkX0bmCI01jSM3lG6xMGZky1AXBLn4yCqAjE7MQXStIs8z2hlL
-         8WiMUuRDv98Yd6TkAklWAzwGlYHEad5yeoTCg=
+        d=gmail.com; s=20230601; t=1749139157; x=1749743957; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8rMgsLeE3IPvDrOvyCQ5hw/i+mcvXBtOgOiBpyo7Ow8=;
+        b=nlwo5ZQMM98ycaJvDWaUGm8O+EeByck7QUksUcCme9qAkd7sMpWnS5M+ZXLUuUFn5p
+         DUKXV+87z53gfIFq8yE/erXsSZBNAS7mQfnBSuSwP4b2RzQ7qKm1e6zQD5oXqQ6kZtIP
+         Zog2W0FMGL77GtmhPEI7f2zqAunFmfOh3X7q6jnb7NeQTbUUo67U2fLjtCA+/BEisiNH
+         46+KpZtWAIZpMKepOFslvVeFktw5skcqj/4qmb1pVS1opSSiweEgPcysBTN4n4Qw4I+o
+         iXOlHMwpB5sPKZ2sxyg5DTeWwScOZZbYlo14WvTV+S1mhCZulNaTxDjnkSJAV5QMq0ON
+         xz3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749137653; x=1749742453;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SsXot+elbz3CRhKpGH4GF+wH47QOk45FPC17mvak5Mo=;
-        b=HcTGAHPt9f+pbcpUALnew6J72u9FufqX57gFZOlaNAWBN/YfHjvO5/OrKLsk5fzWVa
-         Nwob146J029iS2yAts+xeRuvX1WJ0ZB79OJN9C/lTCfUkEpwgbIJCEzP6igXpWF0Pd/L
-         TIcOOACm1SvWRApFhKzYlcvs7cpvxZdvTVfsDBNFlBGOCzTSoOKuoA6EfiSsLfjPcMWh
-         OXNKY5DSkq2BegE9B8Mchq1l64q+INIytT7t2xKjIkXksBf5ojVNVGJq3yWxYZccDyqx
-         n41Z92wzMiq7nYZVc5ZejVP+7CPF54l2EduhZPHwTWIFjgcHsz1LHnwFOL6QkcbkScT/
-         A1UQ==
-X-Gm-Message-State: AOJu0YwqA+XEVQGcBgf3Pk4mCUoD0UmyR51i/OD8b4gfEhL7TQUeIZf3
-	PVUnFFJnrpq7gzhVVUSgCsk4ez8O8kuvMMmk1D1wBTCUZu3M3wKKQdUKsabq0BxQ3Nc=
-X-Gm-Gg: ASbGncsywFJlA3jptLwR/5QL9syisdkTumTG8cUUZLt35O9isK7Lu3tD+C8OY57qPS0
-	ZPHHn+vpwETNY6XUQoOiwbvCkuGqc7Mv9dbilH9VP/hEcjJ9UyWDN4gPucWCxOxIE5IsY2Ro0kE
-	PRIJzBTJANruZT66duukzs4cAQ5vhjNEGz8dYIkHcBj9Y0NBR7x+m5baJLt9J3LNldaYWS27AIL
-	QsTTNfRBIOGjVwhwQnS8NCBwh8E3X85gjSLmcJ33dk6hvXgEWju6QKsRNzmWFA/lkN7iW41x1o5
-	D2A7B3H3ebuCkxzXEvbLp7P0MKClO6M5tYgepR2idOesYM3gq5bcavYMMmJ4vJ7MF2XSsVD0hN1
-	dEaIYnwEbkIgyOxUXN2btAYAnB3xjqw==
-X-Google-Smtp-Source: AGHT+IFbZFdT3E0iSjhbuaJj6tq2MkrhlE3Knr/sDMnCH9CVThq5jQvtCdTJHZ42GJnnG2Y6BDb/eg==
-X-Received: by 2002:a05:6000:4313:b0:3a4:ddde:13e4 with SMTP id ffacd0b85a97d-3a51d98c667mr5863094f8f.58.1749137653081;
-        Thu, 05 Jun 2025 08:34:13 -0700 (PDT)
-Date: Thu, 5 Jun 2025 17:34:11 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jiqian Chen <Jiqian.Chen@amd.com>
-Cc: xen-devel@lists.xenproject.org, Huang Rui <ray.huang@amd.com>
-Subject: Re: [PATCH v5 10/10] vpci/msix: Free MSIX resources when init_msix()
- fails
-Message-ID: <aEG482WJWGu_ZHQ6@macbook.local>
-References: <20250526094559.140423-1-Jiqian.Chen@amd.com>
- <20250526094559.140423-11-Jiqian.Chen@amd.com>
+        d=1e100.net; s=20230601; t=1749139157; x=1749743957;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8rMgsLeE3IPvDrOvyCQ5hw/i+mcvXBtOgOiBpyo7Ow8=;
+        b=qNM7khYiLHf5ePyRL27oCeBpsXzmaYse4woOcbZ5a5u5HeTKCHQjUu3anXu4Bd5IEL
+         WA+MNztoyXnNEd1U9YoaHCnIdRb5F+Q8dneFhWzgltmYpmFdFt6Km7BDZmsOmj18d6+g
+         VM52hk0t8ISS1JskkrfBE/RiKx3KPTKXPi9U8/rt44aniNfBR5hMSm5CvuLZnQIwZISS
+         rXxyMsV7WyRSwg5iCtujeesCWn9bCsAo9fQ5Mr0eXVVqzGZWNq8mlNd1QNTdBF2OwFS0
+         sdlQ02ImgVdknl43XJqMG7QUYq3nWV2KQojFHBmy94KOaTvigMpNaP6/JiWnGPUHJ1Bn
+         MITQ==
+X-Gm-Message-State: AOJu0YwIn8NPuS4vVjQQY1VtBq/JT0CGf07HlIEyKElmUzrLfd0JAVs3
+	AU0GPhceYcrn7HrNNidP0JzUv1nnzDrG6dpV2+5IOFSTq/VXXmwyksVLZDtpxQ==
+X-Gm-Gg: ASbGncs2cC5FtrIxdvEmI65HdjisXQG9WtjEa6JFNpj3R82ndTRv6Avs7tdo62tBDND
+	rGkoRzgv/Dq8M0qjiCGbOYvfYotGMWPuXLsdiZtiXqpPIpQXLxd76fF2yb7Pb8WgXHLoIff5Rh/
+	yyJxhPRtYnLCIIHqtiom3bO+8nJP5FIkzSxhwMwUK63JcQb1lvgl5mHdF9T54MxzaXOB86vFzS+
+	xJU1TsSpxE2ocPUHevpIJb0uOkEsbsiSaSfHC2wAUD1PcD/VawPnFgubuX/2a+O4Cf+KDDTejta
+	4crVoHk8vpnLJ04R6Sn2QfeDRZ2ZWSD0L300/v+7254CsXZFlDEAZnSHf9E41rO9dRT+YyUPJsU
+	rgPZK5oN2g75A825WXw==
+X-Google-Smtp-Source: AGHT+IH7rXiZOc4pWZsuxKU/tb4/N3pcyfMMbckG8T5MjO0JeKXo7aXBlXFcqF9yolConDtACq6QAA==
+X-Received: by 2002:a05:6402:3591:b0:607:27bb:7bf with SMTP id 4fb4d7f45d1cf-60727bb09f7mr3105825a12.32.1749139154603;
+        Thu, 05 Jun 2025 08:59:14 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v4 2/9] xen/riscv: introduce register_intc_ops() and intc_hw_ops.
+Date: Thu,  5 Jun 2025 17:58:58 +0200
+Message-ID: <100c1377b3ac06a2603d5740ad4606cb84bff168.1749121437.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1749121437.git.oleksii.kurochko@gmail.com>
+References: <cover.1749121437.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250526094559.140423-11-Jiqian.Chen@amd.com>
 
-On Mon, May 26, 2025 at 05:45:59PM +0800, Jiqian Chen wrote:
-> When init_msix() fails, current logic return fail and free MSIX-related
-> resources in vpci_deassign_device(). But the previous new changes will
-> hide MSIX capability and return success, it can't reach
-> vpci_deassign_device() to remove resources if hiding success, so those
-> resources must be removed in cleanup function of MSIX.
-> 
-> To do that, implement cleanup function for MSIX.
-> 
-> Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+Introduce the intc_hw_operations structure to encapsulate interrupt
+controller-specific data and operations. This structure includes:
+- A pointer to interrupt controller information (`intc_info`)
+- Callbacks to initialize the controller and set IRQ type/priority
+- A reference to an interupt controller descriptor (`host_irq_type`)
+- number of interrupt controller irqs.
 
+Add function register_intc_ops() to mentioned above structure.
 
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V4:
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+---
+Changes in V3:
+ - Drop inclusion of xen/irq.h in asm/intc.h as forward declaration is enogh
+   for types used in asm/intc.h.
+ - Drop forward declaration for dt_device_node  and hw_irq_controller.
+ - Declare intc_hw_ops as:
+     const struct intc_hw_operations * __ro_after_init intc_hw_ops;
+---
+Changes in V2:
+ - Declare host_irq_type member of intc_hw_operations as pointer-to-const.
+ - Moved up forward declaration of irq_desc.
+ - Use attribute __init for register_intc_ops().
+ - Use attribute __ro_after_init for intc_hw_ops variable.
+ - Update prototype of register_intc_ops() because of what mention in the
+   previous point.
+---
+ xen/arch/riscv/include/asm/intc.h | 19 +++++++++++++++++++
+ xen/arch/riscv/intc.c             |  9 +++++++++
+ 2 files changed, 28 insertions(+)
 
-> ---
-> cc: "Roger Pau Monné" <roger.pau@citrix.com>
-> ---
-> v4->v5 changes:
-> * Change definition "static void cleanup_msix" to "static int cf_check cleanup_msix" since cleanup hook is changed to be int.
-> * Add a read-only register for MSIX Control Register in the end of cleanup_msix().
-> 
-> v3->v4 changes:
-> * Change function name from fini_msix() to cleanup_msix().
-> * Change to use XFREE to free vpci->msix.
-> * In cleanup function, change the sequence of check and remove action according to init_msix().
-> 
-> v2->v3 changes:
-> * Remove unnecessary clean operations in fini_msix().
-> 
-> v1->v2 changes:
-> new patch.
-> 
-> Best regards,
-> Jiqian Chen.
-> ---
->  xen/drivers/vpci/msix.c | 29 ++++++++++++++++++++++++++++-
->  1 file changed, 28 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-> index 674815ead025..cf79320d3b6f 100644
-> --- a/xen/drivers/vpci/msix.c
-> +++ b/xen/drivers/vpci/msix.c
-> @@ -655,6 +655,33 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
->      return 0;
->  }
->  
-> +static int cf_check cleanup_msix(struct pci_dev *pdev)
-> +{
-> +    int rc;
-> +    struct vpci *vpci = pdev->vpci;
-> +    const unsigned int msix_pos = pdev->msix_pos;
-> +
-> +    if ( !msix_pos )
-> +        return 0;
-> +
-> +    rc = vpci_remove_registers(vpci, msix_control_reg(msix_pos), 2);
-> +    if ( rc )
-> +        return rc;
-> +
-> +    if ( !vpci->msix )
-> +        return 0;
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 81f74736ba..434c9d0781 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -14,11 +14,30 @@ enum intc_version {
+     INTC_APLIC,
+ };
+ 
++struct irq_desc;
++
+ struct intc_info {
+     enum intc_version hw_version;
+     const struct dt_device_node *node;
+ };
+ 
++struct intc_hw_operations {
++    /* Hold intc hw information */
++    const struct intc_info *info;
++    /* Initialize the intc and the boot CPU */
++    int (*init)(void);
++
++    /* hw_irq_controller to enable/disable/eoi host irq */
++    const struct hw_interrupt_type *host_irq_type;
++
++    /* Set IRQ type */
++    void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
++    /* Set IRQ priority */
++    void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
++};
++
+ void intc_preinit(void);
+ 
++void register_intc_ops(const struct intc_hw_operations *ops);
++
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index 4061a3c457..1ecd651bf3 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -5,6 +5,15 @@
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ 
++#include <asm/intc.h>
++
++static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
++
++void __init register_intc_ops(const struct intc_hw_operations *ops)
++{
++    intc_hw_ops = ops;
++}
++
+ void __init intc_preinit(void)
+ {
+     if ( acpi_disabled )
+-- 
+2.49.0
 
-You cannot short-circuit here, as it then prevents adding the dummy
-handlers done in the last return.
-
-> +
-> +    for ( unsigned int i = 0; i < ARRAY_SIZE(vpci->msix->table); i++ )
-> +        if ( vpci->msix->table[i] )
-> +            iounmap(vpci->msix->table[i]);
-> +
-> +    list_del(&vpci->msix->next);
-> +    XFREE(vpci->msix);
-> +
-> +    return vpci_add_register(pdev->vpci, vpci_hw_read16, NULL,
-> +                             msix_control_reg(msix_pos), 2, NULL);
-
-The above needs to be added even if !vpci->msix.
-
-Thanks, Roger.
 
