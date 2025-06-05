@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C4D0C61CE7
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Jun 2025 15:59:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1007082.1386353 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01BB3C61CE8
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Jun 2025 15:59:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1007090.1386423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNCzt-00071s-8i; Thu, 05 Jun 2025 15:59:17 +0000
+	id 1uND02-0000NO-Ls; Thu, 05 Jun 2025 15:59:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1007082.1386353; Thu, 05 Jun 2025 15:59:17 +0000
+Received: by outflank-mailman (output) from mailman id 1007090.1386423; Thu, 05 Jun 2025 15:59:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNCzt-00071l-5v; Thu, 05 Jun 2025 15:59:17 +0000
-Received: by outflank-mailman (input) for mailman id 1007082;
- Thu, 05 Jun 2025 15:59:16 +0000
+	id 1uND02-0000Mw-Gn; Thu, 05 Jun 2025 15:59:26 +0000
+Received: by outflank-mailman (input) for mailman id 1007090;
+ Thu, 05 Jun 2025 15:59:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EkoY=YU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uNCzs-00071f-8A
- for xen-devel@lists.xenproject.org; Thu, 05 Jun 2025 15:59:16 +0000
+ id 1uND00-00071f-Qe
+ for xen-devel@lists.xenproject.org; Thu, 05 Jun 2025 15:59:24 +0000
 Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
  [2a00:1450:4864:20::52e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 06dda368-4226-11f0-b894-0df219b8e170;
- Thu, 05 Jun 2025 17:59:14 +0200 (CEST)
+ id 0c3ffca9-4226-11f0-b894-0df219b8e170;
+ Thu, 05 Jun 2025 17:59:23 +0200 (CEST)
 Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5fff52493e0so1418216a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Jun 2025 08:59:14 -0700 (PDT)
+ 4fb4d7f45d1cf-602c3f113bbso2161628a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Jun 2025 08:59:23 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-60566c2aba9sm10443034a12.2.2025.06.05.08.59.12
+ 4fb4d7f45d1cf-60566c2aba9sm10443034a12.2.2025.06.05.08.59.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Jun 2025 08:59:12 -0700 (PDT)
+ Thu, 05 Jun 2025 08:59:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06dda368-4226-11f0-b894-0df219b8e170
+X-Inumbo-ID: 0c3ffca9-4226-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749139153; x=1749743953; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1749139162; x=1749743962; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GaIQRtc9d3iSedrxQcJBg3temD5lEMJYTzMYZJj6Vlw=;
-        b=QwV/na8SYaZzCLPwdlGYAhC5LxLVV5x50//XKIrK3kLnwHwckxu0G0zD/IxVpc6vOw
-         3KkH0UTVhUHkS8i6JjCJ1KKK3A7Yw6T5LdZ3wytJdgrP0eb/8QmEavVtPDrCY9JOCcwH
-         ir6xvMHkOz9Xn/i85CUwqkJJN0aFpsOc23oLWI34rOuDJHpyqORBYY0jzWIw0GErTqZB
-         IP3kRgPigxWrY5UYkaCUNPbc3pjutUYZYnW6BCawVBEz6Fcw/mF8os+Caf8mEoz7EhRp
-         WpPXzRUmdNkgE9p/lgtXQI0dP+8jAPZKHZ2/1QsMjQaSml6buTvPdKTdkTYBX0HSP3yx
-         wmCg==
+        bh=kv20kch9bDGD4TNotY+8eQw9KowyHoxlqMsSxAa/+hA=;
+        b=WAVxSHJw+ht2HSYL5jXSZ0FAHG26FbX7Koi1MdjeDHQo1xhPAAsGJSgKhyqhN8l4Wc
+         dJiuw8uDlJBaJbIEHjtZyWyGegHo9xMWeGGcjzOcukjbJQ2DSeDh/46KbFCQyHGhqYCY
+         EC2SYQzHIksRWyB4WtDbVR0LwnipmAu34E1eEXiOA1deVGuYRWsujSobxcf+MdAJ7G8/
+         gHbIybaVcKkO1IZJyFHg/IIcDyhs5iHjUg5a94pJWgTGM7bFqU45pFq8TIb2l8xSEcs0
+         jOqlWqaOD2QbdszOzL4YsZmGfXWvHXt0wviFrsSMsdiDENYj4r88FKMTtO2b9CxeU3NG
+         T79A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749139153; x=1749743953;
+        d=1e100.net; s=20230601; t=1749139162; x=1749743962;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GaIQRtc9d3iSedrxQcJBg3temD5lEMJYTzMYZJj6Vlw=;
-        b=H8tWz4UdxfbT8OnN2r/A5jbV9MxSZCX6I8/0No8tn7XOLUDmOA+bs3xXawt1eblgIO
-         NFmd7PNT+xoV9x/s1SQYbZVCRqtF+K+CSIkS716TFH/GKZBt4+GW0XQfyWGkJ2eHitEL
-         o4TI68CxU+nRwk1lO2yNwLaw/4lVAIsPZ7AJ+Om88eTeWKpNyw4nGyGLkkmIk/DyoW+l
-         u8CUowGuX2816vFzNN5Q9L7xjBLAaaFu/Q+78Cqcfg6j/M60LXUQGm86z75aNqJ6mULf
-         60N0l41+w+8oPN7azW1vLd+WgtRwCI3r2n91F7Y14QCaywANOhUfqpGJFT3eji8aNB2d
-         foVA==
-X-Gm-Message-State: AOJu0YyTbc/JimhhEVaVpJqLILpGYz9yBhVsxLuQvYqrRRWGZcxjodP5
-	KNhKYGS365Hni6B5yxszusAfMsV77USjBqbjF+4rUFg0NOQNFIMkXygsszi9RQ==
-X-Gm-Gg: ASbGncsblRNkMnnMLGzYQW456oaxZW+ZSqJVdle+D5Bddbo9zD4v6xAAEP3SDlHPFCH
-	gkjXH0NbqlwmRWIsGF2ESaw34FCOurjxzoTBd/oVA0+FLUvZZdN2IpGlJ7GV8M/GsXjqJQ+BbMb
-	N5/30y65OwouDnUM3I8uwPv3QvTu3ZMPY3ujnLzn1iJ5yTyK2Fs76Qk+7QWmp4hxGoY2CxdNBy0
-	vX/TIB9XWCa7DaYDEwtuLH96Qfc+DQJzcaaeduyBL7AA0pRMSjM+DHYpE9sstI6BD+Ola/Dpo3R
-	bEPPd/FTuq2LVmD1gbi2sYI3GqaH/flRtvOT7kirCCj2AMyxI7rpt7BGlbrftI0rLkuXw9I+iuN
-	WfbUF9HGkGQW09ervMcCe5EMIrtjg
-X-Google-Smtp-Source: AGHT+IEWPlkK/iMLYQiBhbCLgaRh59G0rEJ5K074BH6um0qrYe3P2tGlwobmKcfS7rA2jE8i4RCk1A==
-X-Received: by 2002:a05:6402:350b:b0:607:32e8:652 with SMTP id 4fb4d7f45d1cf-60732e806ccmr1706776a12.19.1749139153169;
-        Thu, 05 Jun 2025 08:59:13 -0700 (PDT)
+        bh=kv20kch9bDGD4TNotY+8eQw9KowyHoxlqMsSxAa/+hA=;
+        b=sKRd1nc3EbjNx9Ise3tFL1S7aqUvfOSA881mPKkDuG9UXYHdkRzM9a54zI0HJhgI9o
+         GfX85f9V9jM0aPtBbfoR63v4AF1mxCmDfavYWQTf8QpxPlcxjguGrz5W3A8ZFDWm8+5K
+         XhQFAd+nWkI93l0WodLs67L29c3At82T4Fb47tVgwpkLl6rwmnOrOcRoTNyZMPwFj98s
+         T3ljeTbUgxPBunYjVPpysreZ/kmI9umAytTO5L6COObPkHGDfdMTAJVDa16bdUiVS5eF
+         LJwYWsmwDasUuUDwHtYUsWTBeLIYBfeXC7CHCcpBS/nQ9Pfxqp5fb80sar7FMUxEjt6P
+         JfGw==
+X-Gm-Message-State: AOJu0Yy6PLPGJo1e08jhb5GmZPLJpzh2QLkXTFBhi3D0AZ9Tnpo4yfeT
+	qka3X5Sc9e0QYA9+jPlbYxA/bMospEOIiFf6qrbH2Ad5US2o8ZxCCAsYVL/rMA==
+X-Gm-Gg: ASbGncuTEd904Ed4rpAnrG10e/vb0TU7qc6oO9pkVpNgg9KEiOcqFNn7Zyqqhe7S8o4
+	pkDcU8038g/GDDKWVxXt3Xf760xLK1tjx4HEQNtFvn1fjJ52IvTZBKraq/N9h1xQGCfrDKNPl0t
+	o5n1o8VwN4PCJ8kC/5h1LWXqOFAefLmEGe5cKXMCUDW7ocfcIv9lVKBhlaVGIWLCUySOjnnZ2pC
+	kQAO/6rsO3XdBVXW/UMRg4TzC8cHkCUusgzIh6skKO9uhj901lxZV5fnYl1CKc4v4l96cFVvsgR
+	j/MVz5sHQILUZY06fMgXmkhhdwVhWhCBgBJxvpxwwaj1ANiElEQ/zocEeQdrrIphoi6jtzI2dAC
+	0l2ZKHG1eF4MLZovFpFCp2N5NbW64
+X-Google-Smtp-Source: AGHT+IFRa/H01EBeyohHhNxBqX5VxipZYGxyxs5l0TWWU+GFwSXjhsFtNbIO+zOEIcjCIhesJBtVsQ==
+X-Received: by 2002:a05:6402:2707:b0:606:b997:ae58 with SMTP id 4fb4d7f45d1cf-606e967a348mr6854304a12.8.1749139162237;
+        Thu, 05 Jun 2025 08:59:22 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -95,163 +95,379 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 1/9] xen/riscv: dt_processor_hartid() implementation
-Date: Thu,  5 Jun 2025 17:58:57 +0200
-Message-ID: <751343d295c0fa6a9a7d8f2265ece3faecd44b64.1749121437.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v4 7/9] xen/riscv: add external interrupt handling for hypervisor mode
+Date: Thu,  5 Jun 2025 17:59:03 +0200
+Message-ID: <583dd5d3e87230961f7f895f1abf5702cda677bb.1749121437.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1749121437.git.oleksii.kurochko@gmail.com>
 References: <cover.1749121437.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=all
 Content-Transfer-Encoding: 8bit
 
-Implements dt_processor_hartid() to get the hart ID of the given
-device tree node and do some checks if CPU is available and given device
-tree node has proper riscv,isa property.
+Implement functions necessarry to have working external interrupts in
+hypervisor mode. The following changes are done:
+  - Add a common function intc_handle_external_irq() to call APLIC specific
+    function to handle an interrupt.
+  - Update do_trap() function to handle IRQ_S_EXT case; add the check to catch
+    case when cause of trap is an interrupt.
+  - Add handle_interrrupt() member to intc_hw_operations structure.
+  - Enable local interrupt delivery for IMSIC by calling of
+    imsic_ids_local_delivery() in imsic_init(); additionally introduce helper
+    imsic_csr_write() to update IMSIC_EITHRESHOLD and IMSIC_EITHRESHOLD.
+  - Enable hypervisor external interrupts.
+  - Implement aplic_handler_interrupt() and use it to init ->handle_interrupt
+    member of intc_hw_operations for APLIC.
+  - Add implementation of do_IRQ() to dispatch the interrupt.
 
-As a helper function dt_get_hartid() is introduced to deal specifically
-with reg propery of a CPU device node.
+The current patch is based on the code from [1].
 
+[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7390e2365828b83e27ead56b03114a56e3699dd5
+
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V4:
- - Sort properly inculsion of xen/types.h in riscv/smpboot.c.
- - Add overflow check of got address cell value in dt_get_hartid().
- - Use "%#lx" for loging recieved hartid from DTB.
- - s/-EINVAL/-ENODEV for recieved isa string from DTB.
+ - Nothing changed. Only rebase.
 ---
 Changes in V3:
- - s/dt_processor_cpuid/dt_processor_hartid.
- - s/dt_get_cpuid/dt_get_hartid.
- - use ~0UL in dt_get_cpuid() and in the comment above it.
- - change type for local variable ac in dt_get_cpuid() to unsigned int.
- - Update the return errors for dt_processor_cpuid().
- - Update the commit message + subject: s/cpuid/hartid.
+ - Add ASSERT(spin_is_locked(&desc->lock)) to aplic_set_irq_type().
+ - Fix code style for switch () in aplic_set_irq_type().
+ - Drop fallthrough between "case IRQ_TYPE_NONE: case IRQ_TYPE_INVALID:" as there
+   is no other statements in "case IRQ_TYPE_NONE".
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in V2:
- - s/of_get_cpu_hwid()/dt_get_cpu_id().
- - Update prototype of dt_get_cpu_hwid(), use pointer-to-const for cpun arg.
- - Add empty line before last return in dt_get_cpu_hwid().
- - s/riscv_of_processor_hartid/dt_processor_cpuid().
- - Use pointer-to_const for node argument of dt_processor_cpuid().
- - Use for hart_id unsigned long type as according to the spec for RV128
-   mhartid register will be 128 bit long.
- - Update commit message and subject.
- - use 'CPU' instead of 'HART'.
- - Drop thread argument of dt_get_cpu_id() (of_get_cpu_hwid) as it is
-   expected to be always 0 according to RISC-V's DTS binding.
+ - use BIT() macros instead of 1UL << bit_num in aplic.c.
+ - Drop passing of a cause to aplic_handle_interrupt() function. And update
+   prototype of handle_interrupt() callback.
+ - Drop ASSERT() in intc_handle_external_irqs() as it is useless.
+ - Code style fixes.
+ - Drop cause argument for intc_handle_external_irqs().
+ - Update the commit message: drop words that imsic_ids_local_delivery() is
+   implemented in this patch, it is only called.
+ - Add cf_check for aplic_handle_interrupt(), aplic_set_irq_type().
+ - Move forward declarations in asm/intc.h up.
+ - Use plain C operator instead if {clear,set}_bit() for desc->status as it
+   is always used under spinlock().
+ - use writel() for writing to APLIC's sourcecfg in aplic_set_irq_type().
 ---
- xen/arch/riscv/include/asm/smp.h |  4 ++
- xen/arch/riscv/smpboot.c         | 77 ++++++++++++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+ xen/arch/riscv/aplic.c             | 71 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/aplic.h |  7 +++
+ xen/arch/riscv/include/asm/imsic.h |  1 +
+ xen/arch/riscv/include/asm/intc.h  |  6 +++
+ xen/arch/riscv/include/asm/irq.h   |  6 ++-
+ xen/arch/riscv/intc.c              |  5 +++
+ xen/arch/riscv/irq.c               | 47 ++++++++++++++++++++
+ xen/arch/riscv/traps.c             | 19 ++++++++
+ 8 files changed, 161 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/smp.h b/xen/arch/riscv/include/asm/smp.h
-index 5e170b57b3..eb58b6576b 100644
---- a/xen/arch/riscv/include/asm/smp.h
-+++ b/xen/arch/riscv/include/asm/smp.h
-@@ -26,6 +26,10 @@ static inline void set_cpuid_to_hartid(unsigned long cpuid,
+diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+index 7d2a1ea7aa..763c78617b 100644
+--- a/xen/arch/riscv/aplic.c
++++ b/xen/arch/riscv/aplic.c
+@@ -9,6 +9,7 @@
+  * Copyright (c) 2024-2025 Vates
+  */
  
- void setup_tp(unsigned int cpuid);
++#include <xen/const.h>
+ #include <xen/device_tree.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
+@@ -228,6 +229,71 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
+     spin_unlock(&aplic.lock);
+ }
  
-+struct dt_device_node;
-+int dt_processor_hartid(const struct dt_device_node *node,
-+                        unsigned long *hartid);
++static void cf_check aplic_handle_interrupt(struct cpu_user_regs *regs)
++{
++    /* disable to avoid more external interrupts */
++    csr_clear(CSR_SIE, BIT(IRQ_S_EXT, UL));
 +
- #endif
++    /* clear the pending bit */
++    csr_clear(CSR_SIP, BIT(IRQ_S_EXT, UL));
++
++    /* dispatch the interrupt */
++    do_IRQ(regs, csr_swap(CSR_STOPEI, 0) >> TOPI_IID_SHIFT);
++
++    /* enable external interrupts */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
++}
++
++static void cf_check aplic_set_irq_type(struct irq_desc *desc, unsigned int type)
++{
++    /*
++    * Interrupt 0 isn't possible based on the spec:
++    *   Each of an APLIC’s interrupt sources has a fixed unique identity number in the range 1 to N,
++    *   where N is the total number of sources at the APLIC. The number zero is not a valid interrupt
++    *   identity number at an APLIC. The maximum number of interrupt sources an APLIC may support
++    *   is 1023.
++    *
++    * Thereby interrupt 1 will correspond to bit 0 in sourcecfg[] register,
++    * interrupt 2 ->sourcecfg[1] and so on.
++    *
++    * And that is the reason why we need -1.
++    */
++    unsigned int irq_bit = desc->irq - 1;
++
++    ASSERT(spin_is_locked(&desc->lock));
++
++    spin_lock(&aplic.lock);
++
++    switch ( type )
++    {
++    case IRQ_TYPE_EDGE_RISING:
++        writel(APLIC_SOURCECFG_SM_EDGE_RISE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_EDGE_FALLING:
++        writel(APLIC_SOURCECFG_SM_EDGE_FALL, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_HIGH:
++        writel(APLIC_SOURCECFG_SM_LEVEL_HIGH, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_LEVEL_LOW:
++        writel(APLIC_SOURCECFG_SM_LEVEL_LOW, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    case IRQ_TYPE_NONE:
++    case IRQ_TYPE_INVALID:
++        writel(APLIC_SOURCECFG_SM_INACTIVE, &aplic.regs->sourcecfg[irq_bit]);
++        break;
++
++    default:
++        panic("%s: APLIC doesnt support IRQ type: 0x%x?\n", __func__, type);
++    }
++
++    spin_unlock(&aplic.lock);
++}
++
+ static const hw_irq_controller aplic_xen_irq_type = {
+     .typename     = "aplic",
+     .startup      = aplic_irq_startup,
+@@ -241,6 +307,8 @@ static const struct intc_hw_operations aplic_ops = {
+     .info                = &aplic_info,
+     .init                = aplic_init,
+     .host_irq_type       = &aplic_xen_irq_type,
++    .handle_interrupt    = aplic_handle_interrupt,
++    .set_irq_type        = aplic_set_irq_type,
+ };
+ 
+ static int cf_check aplic_irq_xlate(const uint32_t *intspec,
+@@ -280,6 +348,9 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
+ 
+     register_intc_ops(&aplic_ops);
+ 
++    /* Enable supervisor external interrupt */
++    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
++
+     return 0;
+ }
+ 
+diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+index c3f00238f2..b335b29d34 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
++++ b/xen/arch/riscv/include/asm/aplic.h
+@@ -18,6 +18,13 @@
+ #define APLIC_DOMAINCFG_IE      BIT(8, U)
+ #define APLIC_DOMAINCFG_DM      BIT(2, U)
+ 
++#define APLIC_SOURCECFG_SM_INACTIVE     0x0
++#define APLIC_SOURCECFG_SM_DETACH       0x1
++#define APLIC_SOURCECFG_SM_EDGE_RISE    0x4
++#define APLIC_SOURCECFG_SM_EDGE_FALL    0x5
++#define APLIC_SOURCECFG_SM_LEVEL_HIGH   0x6
++#define APLIC_SOURCECFG_SM_LEVEL_LOW    0x7
++
+ #define APLIC_TARGET_HART_IDX_SHIFT 18
+ 
+ struct aplic_regs {
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 378e49d933..c6c59215df 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -12,6 +12,7 @@
+ #define ASM_RISCV_IMSIC_H
+ 
+ #include <xen/spinlock.h>
++#include <xen/stdbool.h>
+ #include <xen/types.h>
+ 
+ #define IMSIC_MMIO_PAGE_SHIFT   12
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index a11b7aa55e..ecdc8a5e65 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -14,6 +14,7 @@ enum intc_version {
+     INTC_APLIC,
+ };
+ 
++struct cpu_user_regs;
+ struct irq_desc;
+ 
+ struct intc_info {
+@@ -37,6 +38,9 @@ struct intc_hw_operations {
+     void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
+     /* Set IRQ priority */
+     void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
++
++    /* handle external interrupt */
++    void (*handle_interrupt)(struct cpu_user_regs *regs);
+ };
+ 
+ void intc_preinit(void);
+@@ -47,4 +51,6 @@ void intc_init(void);
+ 
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
+ 
++void intc_handle_external_irqs(struct cpu_user_regs *regs);
++
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+index 84c3c2904d..94151eb083 100644
+--- a/xen/arch/riscv/include/asm/irq.h
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -33,16 +33,20 @@ struct arch_irq_desc {
+     unsigned int type;
+ };
+ 
++struct cpu_user_regs;
++struct dt_device_node;
++
+ static inline void arch_move_irqs(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+ }
+ 
+-struct dt_device_node;
+ int platform_get_irq(const struct dt_device_node *device, int index);
+ 
+ void init_IRQ(void);
+ 
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq);
++
+ #endif /* ASM__RISCV__IRQ_H */
  
  /*
-diff --git a/xen/arch/riscv/smpboot.c b/xen/arch/riscv/smpboot.c
-index 0f9c2cc54a..8011876372 100644
---- a/xen/arch/riscv/smpboot.c
-+++ b/xen/arch/riscv/smpboot.c
-@@ -1,6 +1,9 @@
- #include <xen/cpumask.h>
-+#include <xen/device_tree.h>
-+#include <xen/errno.h>
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index f2823267a9..ea317aea5a 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -50,6 +50,11 @@ static void intc_set_irq_priority(struct irq_desc *desc, unsigned int priority)
+         intc_hw_ops->set_irq_priority(desc, priority);
+ }
+ 
++void intc_handle_external_irqs(struct cpu_user_regs *regs)
++{
++    intc_hw_ops->handle_interrupt(regs);
++}
++
+ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+ {
+     ASSERT(desc->status & IRQ_DISABLED);
+diff --git a/xen/arch/riscv/irq.c b/xen/arch/riscv/irq.c
+index 669ef3ae9e..466f1b4ba9 100644
+--- a/xen/arch/riscv/irq.c
++++ b/xen/arch/riscv/irq.c
+@@ -11,6 +11,10 @@
+ #include <xen/errno.h>
  #include <xen/init.h>
- #include <xen/sections.h>
-+#include <xen/types.h>
+ #include <xen/irq.h>
++#include <xen/spinlock.h>
++
++#include <asm/hardirq.h>
++#include <asm/intc.h>
  
- #include <asm/current.h>
+ static irq_desc_t irq_desc[NR_IRQS];
  
-@@ -14,3 +17,77 @@ void __init smp_prepare_boot_cpu(void)
-     cpumask_set_cpu(0, &cpu_possible_map);
-     cpumask_set_cpu(0, &cpu_online_map);
+@@ -90,3 +94,46 @@ void __init init_IRQ(void)
+     if ( init_irq_data() < 0 )
+         panic("initialization of IRQ data failed\n");
  }
 +
-+/**
-+ * dt_get_hartid - Get the hartid from a CPU device node
-+ *
-+ * @cpun: CPU number(logical index) for which device node is required
-+ *
-+ * Return: The hartid for the CPU node or ~0UL if not found.
-+ */
-+static unsigned long dt_get_hartid(const struct dt_device_node *cpun)
++/* Dispatch an interrupt */
++void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
 +{
-+    const __be32 *cell;
-+    unsigned int ac;
-+    uint32_t len;
-+    unsigned int max_cells = UINT32_MAX / sizeof(*cell);
++    struct irq_desc *desc = irq_to_desc(irq);
++    struct irqaction *action;
 +
-+    ac = dt_n_addr_cells(cpun);
-+    cell = dt_get_property(cpun, "reg", &len);
++    irq_enter();
 +
-+    if (ac > max_cells) {
-+        printk("%s: cell count overflow (ac=%u, max=%u)\n", __func__, ac,
-+               max_cells);
-+        return ~0UL;
-+    }
++    spin_lock(&desc->lock);
 +
-+    if ( !cell || !ac || ((sizeof(*cell) * ac) > len) )
-+        return ~0UL;
++    if ( desc->handler->ack )
++        desc->handler->ack(desc);
 +
-+    return dt_read_number(cell, ac);
++    if ( desc->status & IRQ_DISABLED )
++        goto out;
++
++    desc->status |= IRQ_INPROGRESS;
++
++    action = desc->action;
++
++    spin_unlock_irq(&desc->lock);
++
++#ifndef CONFIG_IRQ_HAS_MULTIPLE_ACTION
++    action->handler(irq, action->dev_id);
++#else
++    do {
++        action->handler(irq, action->dev_id);
++        action = action->next;
++    } while ( action );
++#endif /* CONFIG_IRQ_HAS_MULTIPLE_ACTION */
++
++    spin_lock_irq(&desc->lock);
++
++    desc->status &= ~IRQ_INPROGRESS;
++
++ out:
++    if ( desc->handler->end )
++        desc->handler->end(desc);
++
++    spin_unlock(&desc->lock);
++    irq_exit();
 +}
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ea3638a54f..f061004d83 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -11,6 +11,7 @@
+ #include <xen/nospec.h>
+ #include <xen/sched.h>
+ 
++#include <asm/intc.h>
+ #include <asm/processor.h>
+ #include <asm/riscv_encoding.h>
+ #include <asm/traps.h>
+@@ -128,6 +129,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+         }
+         fallthrough;
+     default:
++        if ( cause & CAUSE_IRQ_FLAG )
++        {
++            /* Handle interrupt */
++            unsigned long icause = cause & ~CAUSE_IRQ_FLAG;
 +
-+/*
-+ * Returns the hartid of the given device tree node, or -ENODEV if the node
-+ * isn't an enabled and valid RISC-V hart node.
-+ */
-+int dt_processor_hartid(const struct dt_device_node *node,
-+                        unsigned long *hartid)
-+{
-+    const char *isa;
-+    int ret;
++            switch ( icause )
++            {
++            case IRQ_S_EXT:
++                intc_handle_external_irqs(cpu_regs);
++                break;
 +
-+    if ( !dt_device_is_compatible(node, "riscv") )
-+    {
-+        printk("Found incompatible CPU\n");
-+        return -ENODEV;
-+    }
++            default:
++                break;
++            }
 +
-+    *hartid = dt_get_hartid(node);
-+    if ( *hartid == ~0UL )
-+    {
-+        printk("Found CPU without CPU ID\n");
-+        return -ENODATA;
-+    }
++            break;
++        }
 +
-+    if ( !dt_device_is_available(node))
-+    {
-+        printk("CPU with hartid=%#lx is not available\n", *hartid);
-+        return -ENODEV;
-+    }
-+
-+    if ( (ret = dt_property_read_string(node, "riscv,isa", &isa)) )
-+    {
-+        printk("CPU with hartid=%#lx has no \"riscv,isa\" property\n", *hartid);
-+        return ret;
-+    }
-+
-+    if ( isa[0] != 'r' || isa[1] != 'v' )
-+    {
-+        printk("CPU with hartid=%#lx has an invalid ISA of \"%s\"\n", *hartid,
-+               isa);
-+        return -ENODEV;
-+    }
-+
-+    return 0;
-+}
+         do_unexpected_trap(cpu_regs);
+         break;
+     }
 -- 
 2.49.0
 
