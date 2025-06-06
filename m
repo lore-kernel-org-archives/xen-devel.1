@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC54C5AD49
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Jun 2025 10:12:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1008359.1387640 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24839C5AD49
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Jun 2025 10:14:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1008380.1387670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNU3C-0005SC-3l; Fri, 06 Jun 2025 10:11:50 +0000
+	id 1uNU5D-00074b-2y; Fri, 06 Jun 2025 10:13:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1008359.1387640; Fri, 06 Jun 2025 10:11:50 +0000
+Received: by outflank-mailman (output) from mailman id 1008380.1387670; Fri, 06 Jun 2025 10:13:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uNU3C-0005S5-1C; Fri, 06 Jun 2025 10:11:50 +0000
-Received: by outflank-mailman (input) for mailman id 1008359;
- Fri, 06 Jun 2025 10:11:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uNU5C-00074U-Vc; Fri, 06 Jun 2025 10:13:54 +0000
+Received: by outflank-mailman (input) for mailman id 1008380;
+ Fri, 06 Jun 2025 10:13:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WdQj=YV=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uNU3A-0005Rm-Ho
- for xen-devel@lists.xenproject.org; Fri, 06 Jun 2025 10:11:48 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a744b4c1-42be-11f0-a301-13f23c93f187;
- Fri, 06 Jun 2025 12:11:46 +0200 (CEST)
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-5534edc646dso2113755e87.1
- for <xen-devel@lists.xenproject.org>; Fri, 06 Jun 2025 03:11:46 -0700 (PDT)
-Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-553677389d5sm143592e87.259.2025.06.06.03.11.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 03:11:45 -0700 (PDT)
+ <SRS0=1Fse=YV=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1uNU5B-00074L-Fa
+ for xen-devel@lists.xenproject.org; Fri, 06 Jun 2025 10:13:53 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2060e.outbound.protection.outlook.com
+ [2a01:111:f403:240a::60e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f0c76958-42be-11f0-b894-0df219b8e170;
+ Fri, 06 Jun 2025 12:13:51 +0200 (CEST)
+Received: from BN9PR12MB5273.namprd12.prod.outlook.com (2603:10b6:408:11e::22)
+ by CY8PR12MB9035.namprd12.prod.outlook.com (2603:10b6:930:77::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.35; Fri, 6 Jun
+ 2025 10:13:46 +0000
+Received: from BN9PR12MB5273.namprd12.prod.outlook.com
+ ([fe80::cf66:58ab:47be:4b13]) by BN9PR12MB5273.namprd12.prod.outlook.com
+ ([fe80::cf66:58ab:47be:4b13%5]) with mapi id 15.20.8792.034; Fri, 6 Jun 2025
+ 10:13:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,119 +49,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a744b4c1-42be-11f0-a301-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749204706; x=1749809506; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=m/d5gb5VGmAwDho9Wku4Y6/OMgxq0De4Fzf9ZgJsnJk=;
-        b=V8rH0zTFZyCf5vv1tTjLDsRdJ/5cF+JVpBuZvlkC0Rn4gLee3e7+gqGtEDpFzwHVUS
-         6AmQ7TLeVkb9PhHND5NXtizVAIirKiAcw2PnH0mKJgPI8au5g2G8w2qbwZ/1SMI1GrKb
-         Va3rc+aTEbjy1pniKg8NgLv6BDD8A1AHn7184oc1gXYdUPBijt+ponDaU/ocTQ/KLtE2
-         OtfkvULnGGzRR8eo49CTO2DSswe7Kdugv+5fjGkj12K8j+OjPgj+8o86HyQCPdv3A029
-         62gnhaWFUVJH8iqyRfr0aQeWF7t/nvpzt/c4U2RmDW0SaSaHEc5JvxsVxIDtw/6Xuuzq
-         prTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749204706; x=1749809506;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=m/d5gb5VGmAwDho9Wku4Y6/OMgxq0De4Fzf9ZgJsnJk=;
-        b=uPKG6+Hy/3e4Nlq0tfm0oee1uq75nKXtbESnPGOXME1R2uTDb/txS46GEDYblyJ/Kp
-         mV1PvLNTkkYTTJOSovWhl7xx+DgXofTUyDGIg2HNRvlzNEeE+tCkTjypQb9if/VrBEDL
-         xngq8gJwSId/kgWNRc3mHw3VDnTGoFn2MpqcMdcBEOeYLKIKRti1GXy/t/7ClDz4dcaC
-         J9F1iEmZBqX5jC70zr0lU/KYGLM1bEfZYoy34wf7uuc/4f0SPHxxfwSzbDaFnQoqoY/q
-         XRZ77sO1yfyhhuuUs7/mYkedh+P+Xhzvc30KhOWktMfqpQn3LBnYwl4K7zw+SOryj/J5
-         ul8A==
-X-Gm-Message-State: AOJu0YzF9ofkiONBCwLFjRxPwI2OgFuy6BgLX0qV9tqqvJtHa1eijnZz
-	goobqiwRzl3Ma5Ea+uLUUaGdNfGYORP7rCccN0B+KofasakVuXxgm4TLxTVDLKRl
-X-Gm-Gg: ASbGncv8FZOvKWzR8BYiyehSITngKfp6n2S7wB3tuY+g9MwsR0oBCkYjxcEHHWmR0dJ
-	BwEaWo602W4GwagWvqiPJSzR1I2Yq4cPASX5khQFTP2xI5scN0/iGxX7NSNRs1l6oAlpTfB7Y2D
-	uGjYL9r/U6tE2nEgKl0/YShn77V9OtO97bnVIW2tmlCEehYkwu3COpgDGO4Uqpjy6ye37pSPPQQ
-	CrrsBcBKidcwx9Tav36IJDWbSQE+/0sqB/CBXKRBRtXeftHQMkokweIuJFZHUmBruERoSZThKLW
-	wHfGqrnj3A/2jZOwJxfAIyAKsIor7rIkSdu6zoqZvhWMEb7ILIp3Ua+cAx9+9qsDEDgRENJif37
-	bVACPEclBa+ecNlHQIE5meRTy8oLd93teR+yb
-X-Google-Smtp-Source: AGHT+IH99V9BjKSR+AsHPLn+5vRM1Boboc/C8z0N2fXx8O+FRBuz18cAvL4urRI1t9gUSkeCHNtbLQ==
-X-Received: by 2002:a05:6512:3a94:b0:553:2f47:ed21 with SMTP id 2adb3069b0e04-55366c0e640mr693268e87.41.1749204705504;
-        Fri, 06 Jun 2025 03:11:45 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 0/2] Add CONFIG_SYSTEM_SUSPEND and SCIF UART suspend/resume handlers
-Date: Fri,  6 Jun 2025 13:11:40 +0300
-Message-ID: <cover.1749204282.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.48.1
-MIME-Version: 1.0
+X-Inumbo-ID: f0c76958-42be-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NTbPGgJk7iRFbqOEqvMpEVpMcK2QQjIjO4wDn5e6KAXoQjVhsMLx4pNWOMsO1OOSqxninr4QWsgQ0ijdmOIxHNrZQDl+KkJP9PH2qyFZu9bYhsqgMMMbXA2Fw7vZZO6DfzwRDj+taGASHuPwmfLsxMTeirOswxyCLfNao3ilHqIG6/CtcMuKZV6gQF4SDOGJ04+LU5Xg1tUMnjMKK4xsISXYXP+5kmVqf6/CgTTqWAfT/VIYgH6k8w6IRl+9syLAol7mM3rvu+6ArkByFNSh4Iok178p0NEUm288R6S2C57/OTpj9K6FAAHvfp1gPaDa42VBPO3tCdDnW4xKnJs1IA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ns4AgFo9XDRbp1s0mhDM41O9Qa5PyQc6OVVfa2WSwKI=;
+ b=QLGjoolehJWQwLdmdN/TdVG2yF0ifo8P5ElQwCD+IcKjx6l2vtS3iz5sYonqFR7piFtriNYMvZ9suivJHDHOA29ZdSg0UcOJnTSAaH6C9yQlEtNXIObSSeO9iQmnTpGEpPyjUDIX8HQAdZ2Ah1iXnoIDuDCaUa59ludnB5/+VyQVltHj2cFyIDIIdvtlKnATQvCaLdtX8WuMfo1+c1PmesQM/ZP7U2q1ZUlsKK77gbXS2U4uT4aOvYKIMQuMBwnGxI60NVrgiCbP+btQ6nShfRjV5Jo4/E9p5eyvc7ITMGa8pXUXPazjw0nJaV7XMpgowBAt5JIly1y0wuqvnLdB0Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ns4AgFo9XDRbp1s0mhDM41O9Qa5PyQc6OVVfa2WSwKI=;
+ b=fQj6hnTZUvYbkfCxqn8En+8HItse46gvye8LhiRW5kMUNrrCpzLCvAw2axIVzSIwbWksWj6zLbsry8oUJmHuFsyW+fus4Rwq5bXrgg2DrXfi8BHxv6vSiSwlYv3aAf6PNsNXUm8AILyFwm4oTFJsKLIIoggjUNIg6xn+2hZa/hQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <dc8b0afb-aa0a-4ee5-93ef-ca6fa632b616@amd.com>
+Date: Fri, 6 Jun 2025 12:13:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/3] arm/mpu: Introduce MPU memory region map structure
+To: Ayan Kumar Halder <ayankuma@amd.com>,
+ Ayan Kumar Halder <ayan.kumar.halder@amd.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20250604174311.754899-1-ayan.kumar.halder@amd.com>
+ <20250604174311.754899-2-ayan.kumar.halder@amd.com>
+ <a2f337f2-1f34-41f1-9728-5f87ef2c7420@amd.com>
+ <bb3ce203-de59-41b7-ad7d-3b1f3f1c9833@amd.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <bb3ce203-de59-41b7-ad7d-3b1f3f1c9833@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AUXP273CA0011.AREP273.PROD.OUTLOOK.COM
+ (2603:1086:200:2::23) To BN9PR12MB5273.namprd12.prod.outlook.com
+ (2603:10b6:408:11e::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR12MB5273:EE_|CY8PR12MB9035:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ef0a836-16ca-431f-8904-08dda4e2d2b2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WUc2T3QvZmhaMEl0RS93SUc3Z1JmNlc3RjRzakRwa3NNeFZGbTN6QkF2eGlY?=
+ =?utf-8?B?WjREMVFhbis0ZzBySzdKaE5FSTlXOUE3bGVuWGRrZ0VJSFVlWkF6cTV5d3Jj?=
+ =?utf-8?B?RVhjTjVrZE12dHBrTkltdzF4QjN1UWxOMjA0VVp3U1l0b0VQRWpuV283RWQr?=
+ =?utf-8?B?blZiSlBaTWpFN3VzUTc3ZXVxaXJ6WEJuY2NOK01uZ2t4VEpjTnVxSWlqV1ls?=
+ =?utf-8?B?WmxDcGw4K01JUVpYM1l6b3FrNWF2akVhSlBKcDhHNms3V05SVXBVOFZxRDFV?=
+ =?utf-8?B?ZjhQeGJFV2J0SEdpOE4wa1ROVGk1dmVIVzFHZGFmQ1c2QVpzNXd0NDFhdkRI?=
+ =?utf-8?B?N254OFpjckJFdzJWdEpoNUZUSmdCRHdlT1huQzZ3QldjVkx0d3V3NktkMmlK?=
+ =?utf-8?B?VTBmb1Rma3VybDZDbklXaS9hcEJUK2M4TjJBVEVPd1dhMFJjTmxCcnJtcmZw?=
+ =?utf-8?B?eVc5TzBVRGJMS3ZSMlRrVkpvbmZCTGtLNm5SRXNFWFlWSGpnT1FLUCtGNEIz?=
+ =?utf-8?B?eDhtSUVSbVBycjdvek5UOTdETXpzK2hlMUh3ZnhFbjBKc25peXNvbFlKR3Va?=
+ =?utf-8?B?UUxkOUthKzBiQ1lSU21ScnJiNWNDQ2l1UFUzUE81TW5LMW1ZV28yNHVabFJj?=
+ =?utf-8?B?dDVxcHlBcExNT1hzWml4Wm9xb1N3cFYvY1IyV0RXeXRZajBKQnBhOFNUNlVE?=
+ =?utf-8?B?cm9CMitpd0krWlJ2d0Y1eXltRzFPbVVrRkhiczNCbkFWNzRnWEFhWDJicmln?=
+ =?utf-8?B?TWJ4eDhLYWROUUp0RlJxQkQ3VEtDa1BvTzMvMVU3amxyVDVLbUVpbG04UmxT?=
+ =?utf-8?B?S2puY08wdjJwUzR5emk4WXlLZDRBbldydTg2N2JXYVBaUlVXU3BseFd5dWxp?=
+ =?utf-8?B?dDBnTGFGdGpGeDNnU0ZDeFRUVXJIbGpGMGJDQlRPOU1KRmlZVlJLZUxVczdm?=
+ =?utf-8?B?bXE5VjR5ejFpMlhDM1VVaUk2aGRsZmlON2JQLzBkYXk0aFZHV2Q0ajYrQWdt?=
+ =?utf-8?B?RWVKbnQwWkVRVW90VWVBQmF6OXlaSWQ4SUZFQXpid2VSV2xaWm5EdUdsL0N1?=
+ =?utf-8?B?RDRHZUdwWEluTk9XU1BjSTBKRUxYbnoydk4vYjdlalZsZW5salU0MmlIRzAx?=
+ =?utf-8?B?K0xyZkdsWUcxZXlLMTBKSTcvVjVjSzRzbnVheXUyK1ltdlc4NEl1K2xKWnM0?=
+ =?utf-8?B?SUorNlhQNE43QVZ5STZyR0VFT3RDSmdKU0R5VzZ5aWp2T2xicC91UmZidzFj?=
+ =?utf-8?B?U3lnMy9GRk1GM0g0RmJaYU9XL0o3Nk5BZG10OVIwMi9JdU1peW9YK2VHOUdN?=
+ =?utf-8?B?OTN0YzhNd0VORVNpaVphVkxsd1NGTkhFb1Y5RlFCZzFaRHVMQmdoLzkwWFlp?=
+ =?utf-8?B?VUxzdmdaWll1ZVY5Q2VlWGNPNm5GZi9iMHVXbXhYWGZoRTdHdGNZd1JhR2pH?=
+ =?utf-8?B?cHA4NW5wUXpQajlUaTAxRnR3NUVxUmlVUHFvMG13cmw1d2RYSGNzZ091SHVz?=
+ =?utf-8?B?RkwvL2FEeEVrT05GSzNwaytVZW9wYlBzRDlNbEFvS0V6cmoxcjZJSzBlQ1hp?=
+ =?utf-8?B?R0lLaDRkdnVPbWhJa3dPdzYyRlJ0N3ZsQ1dDODZZZ0drS0pPc25wd0JMUGxr?=
+ =?utf-8?B?N1FBZHlsNGc4RG1MUE10NHlnWWJndXJWSEF3VzNlUVdWYktINjg0dkllZE5i?=
+ =?utf-8?B?Y2VIeHJhOTdYVGZ4dXc5aC9Yd2p6ZnY4SmdYZmZrbkROL2kwczkvWDJJbVQw?=
+ =?utf-8?B?RmI0elpQZ3lxeUJza0g2VkI4VlkycFZTOU1Vbm9RVStMbmVldUpKb295dDVv?=
+ =?utf-8?B?azZsQmxHVjFIT01KTDE5YnlPSUI3TjkwektiOTJYK3cyc3NVTGpydjcvQkl4?=
+ =?utf-8?B?QWlNWUk0SFFQYXJNVEltd2RSZkRPa1FXeWExTVVjT0Y4bVJISkcwVlc3ZG96?=
+ =?utf-8?Q?PzdZXSYVUmw=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5273.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?R3ZTb1Y3TVgrNmVrajhEYXBPZDN2b3pGM3ppaTk3RHpnVHA1SGNpV3JXTlB0?=
+ =?utf-8?B?akNsVXZSMmlvdCtycnFtdFh6bnY2OElvVFNpekZnR2VFMVlnQzFRQzlkeFE5?=
+ =?utf-8?B?QXpiM0RFc2Z6T09heCtLOUNVaCttLzlPbmJ6UzVvREdieXgwVWc5SUgrNmFW?=
+ =?utf-8?B?SDJ5djd6MU5OTTRvQVBYL0VPTUNmYjJJSk1GMTlZRWJKcDgwaElSdFlPdStF?=
+ =?utf-8?B?RHJnU01BaEl2akZwVW8wRnpvdVVsVUxjUVgrb0QvZitsME4zODhTdk5mMmpo?=
+ =?utf-8?B?N09YOXpiaFZaRjgxQUVMOEpOeTMvbElMN1ZaN1c0bVZNVzQ1UmZLRzRVby81?=
+ =?utf-8?B?eVNLUkNjZzNhMEFQdjE5YlNKMVQxak44MHY3bW9MajhHYndHNWJ5cUUwVjBp?=
+ =?utf-8?B?ejZnem0rWVRDM2F1S1A2aTJKUVR4SnV4Z3UwcU1KcnFhR0ZEU0tQbUpRdmhJ?=
+ =?utf-8?B?UjR0elA0WE9lUk9XS29mYi9HUnNZRkw1RE93bGpvQ05GNFdkUjJqbjVmTkZn?=
+ =?utf-8?B?S2o4dHRhYkd0b2RkcStWeWNnbUc5YUJ0M1F6TTNCaVNyeUZhcnRPQ1NBRGU1?=
+ =?utf-8?B?SXYxcWJ4NEJjOGJzN3FpeVV3UUJMTnZGbEFFbDBEQS9PeFFtOG1FTC9HOU5k?=
+ =?utf-8?B?YTV0Q2V3MmhFdkVGeTJ3dDdqaEt1eGR3dkNkc1VmNHp4bE9vNUtOS3RFTnlm?=
+ =?utf-8?B?cldwUFMyZ1Q1dURCdkR6ZERxeFlaUHBERHlsYlNYRldiUGljUWZKREhwOXov?=
+ =?utf-8?B?aTdmRmlJTm9ZZm15c3hMc1dwWFdGQUNuZW5ZSmtjc1M3Sk9wOWJwZEorTUNp?=
+ =?utf-8?B?T0l3cVh3YU5Ya1d0SlNGR0h6ZndoclRXbXBlRU45YmJiZmVVYUhqSDlxNVZn?=
+ =?utf-8?B?L2pEanladWRzMmFIbFZBdFJCNGNVZHVkSjRaVnpUTURnMlFoZDRHbWZUc1Zy?=
+ =?utf-8?B?TDBGSk1TMmxEQlhUVWUvdUhScFJ1T1g5VlF0TjlUakpub1NXVTRQTjhKbXlx?=
+ =?utf-8?B?T2VCQTgvTm5RK2VLT05ScGQ2UGJPcGlXN3Y1SHlXUTVDZGJHaWRWb0hNZFhj?=
+ =?utf-8?B?djM5V05jV0JlYVYrQjNVOVJvMnUwSnd4cGI3UW1RYXF5bHZ2UmNjbHJZN2lD?=
+ =?utf-8?B?MUtkakF1KzBvcVRLbnZOKy9IektkSFl4L2JRVXpnd253S0RBQjZBaCs5RnIz?=
+ =?utf-8?B?b2RCYU9JR29kcFd6aGtaN3I3NnVNR1N1MXFHMXc4cXl2SndXS0RKZ2FkaVpI?=
+ =?utf-8?B?VVNlYVJqRkswRkJKSG5LZ29Ba1FjTEhSbWRZUGV2WVB5QnRFRmtkanhVd1pJ?=
+ =?utf-8?B?M2lucERlWHN5VUxaTlMvVlk2YS9TQXZwOW1NYU56OW1nUHNONUsxNkZjMHdK?=
+ =?utf-8?B?VGtLbVpOR2xsNFlaRGw1ZXlMSGNFd1J2cHFpU0UxbnZwN0lMZlJYUXYwaTFq?=
+ =?utf-8?B?blA5YXJZTHl1WUlVREVMMHNtdHJxSmI1U1pRS2t6TldMZVhHdWZoSEtCcThZ?=
+ =?utf-8?B?bWc0bzVGbzFRbVdDOVJLT1huTVBpRFJaSkladVkrTHZnT1lXbmd3bzhxOWtL?=
+ =?utf-8?B?UWdlazBEWmtKU3BVbzVzSnhxTzk3azB5a2Zqd2d0WXI0ank4ZmNwSERjazVY?=
+ =?utf-8?B?T1YxWWJFNHRQVG5HdDZMdDM0eVI3TjJzOTZnVUlsMzVRUE5LR2JtNHhqeTRu?=
+ =?utf-8?B?V25veGtQWWdsT1JhUEx1eU5rS3IyWHg1aitMSDF1Q3hTZFVvc0U1QWF6YXQw?=
+ =?utf-8?B?QjZSaWZxRHNyU1A5QzVlOVhQNUFRcG5JOHlTOFdnOFYxK1N4eHpEczRqcXc0?=
+ =?utf-8?B?ZG95TGkyVDAvbHMrNjBVWkFVQUUxc3NLWTgyWDBQZWg5VklMeFFyejBUM043?=
+ =?utf-8?B?Vjc5K2NZdXUvSHFqaitVOXhmVGI2ZUJSdDFGdzRBZGRwSVBqT2U3eXd1c053?=
+ =?utf-8?B?MHJpM1Y1dDlaNWdZMW9qUUtDdUV5Q3lham1qTmE1T3J3SFBSWjk5NzY3aldN?=
+ =?utf-8?B?bXZMbG9JV2NvMVlMUVRnSzRaZGw0a0pKbUp5MEp3UHQ5anR4UDdoQW1YZXlq?=
+ =?utf-8?B?Zis0ZjZXS25CTTI2eW1PUllxclJMSzhneElxbGticHJDQ0RkSTJtMnhXa1My?=
+ =?utf-8?Q?VguPW43QbiFTgue9gQ9v4KyhI?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ef0a836-16ca-431f-8904-08dda4e2d2b2
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5273.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 10:13:46.3892
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DStJy91VYEWwMwPUkrnhCVlOmxMY/6ONyIzdVCgnR15lPSArvqKhrpMzJVLepV+E
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB9035
 
-From: Mykola Kvach <mykola_kvach@epam.com>
 
-Hi all,
 
-This patch series introduces CONFIG_SYSTEM_SUSPEND to Xen and implements
-suspend/resume handlers for the SCIF UART driver. These changes address
-feedback and discussions on the Xen-devel mailing list:
+On 05/06/2025 15:39, Ayan Kumar Halder wrote:
+> Hi Michal,
+> 
+> On 05/06/2025 08:06, Orzel, Michal wrote:
+>>
+>> On 04/06/2025 19:43, Ayan Kumar Halder wrote:
+>>> Introduce pr_t typedef which is a structure having the prbar and prlar members,
+>>> each being structured as the registers of the AArch32 Armv8-R architecture.
+>>>
+>>> Also, define MPU_REGION_RES0 to 0 as there are no reserved 0 bits beyond the
+>>> BASE or LIMIT bitfields in prbar or prlar respectively.
+>>>
+>>> Move pr_t definition to common code.
+>>> Also, enclose xn_0 within ARM64 as it is not present for ARM32.
+>>>
+>>> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+>>> ---
+>>>   xen/arch/arm/include/asm/arm32/mpu.h | 30 +++++++++++++++++++++++-----
+>>>   xen/arch/arm/include/asm/arm64/mpu.h |  6 ------
+>>>   xen/arch/arm/include/asm/mpu.h       |  6 ++++++
+>>>   xen/arch/arm/mpu/mm.c                |  2 ++
+>>>   4 files changed, 33 insertions(+), 11 deletions(-)
+>>>
+>>> diff --git a/xen/arch/arm/include/asm/arm32/mpu.h b/xen/arch/arm/include/asm/arm32/mpu.h
+>>> index f0d4d4055c..ae3b661fde 100644
+>>> --- a/xen/arch/arm/include/asm/arm32/mpu.h
+>>> +++ b/xen/arch/arm/include/asm/arm32/mpu.h
+>>> @@ -5,11 +5,31 @@
+>>>   
+>>>   #ifndef __ASSEMBLY__
+>>>   
+>>> -/* MPU Protection Region */
+>>> -typedef struct {
+>>> -    uint32_t prbar;
+>>> -    uint32_t prlar;
+>>> -} pr_t;
+>>> +#define MPU_REGION_RES0       0x0
+>> The name of the macro does not make a lot of sense in AArch32 context
+>> and can create a confusion for the reader.
+> 
+> I know, but I want to avoid introducing ifdef or have separate 
+> implementation (for arm32 and arm64) for the following
+> 
+> Refer xen/arch/arm/include/asm/mpu.h
+> 
+> static inline void pr_set_base(pr_t *pr, paddr_t base)
+> {
+>      pr->prbar.reg.base = ((base & ~MPU_REGION_RES0) >> MPU_REGION_SHIFT);
+> }
+> 
+> Let me know your preference.
+I did not mean #ifdef-ing. I was more like suggesting to use a different macro
+name that would be more meaningful than this one.
 
-    https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg00169.html
-    https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg02188.html
+> 
+>>
+>>> +
+>>> +/* Hypervisor Protection Region Base Address Register */
+>>> +typedef union {
+>>> +    struct {
+>>> +        unsigned int xn:1;       /* Execute-Never */
+>>> +        unsigned int ap_0:1;     /* Acess Permission */
+>> If you write AP[1] below, I would expect here AP[0]
+> 
+> Again same reason as before, let me know if you want to have additional 
+> ifdef in pr_of_addr() or separate functions for arm32 and arm64
+I don't understand. My comment was only about changing comment to say /* Access
+Permission AP[0] */ because below you have a comment with AP[1].
 
-I am marking this series as v2, as it is a logical continuation of the
-discussion linked above regarding the SCIF driver changes.
-
-Patch 1:
-  Introduces the CONFIG_SYSTEM_SUSPEND infrastructure, which enables Xen to
-support suspend-to-RAM functionality. It adds three new Kconfig options:
-    - HAS_SYSTEM_SUSPEND: Indicates whether the architecture supports suspend.
-    - SYSTEM_SUSPEND_ALWAYS_ON: Forces suspend support on platforms that
-      require it (e.g., x86).
-    - SYSTEM_SUSPEND: The user-facing option to enable suspend support,
-      enabled by default when SYSTEM_SUSPEND_ALWAYS_ON is set.
-      
-  This approach is intended to be easily extendable to other architectures in
-the future.
-
-Patch 2:
-  Implements suspend/resume callbacks for the SCIF UART driver. These functions
-ensure proper shutdown and reinitialization of the UART hardware across
-suspend/resume cycles. Their inclusion is gated by the CONFIG_SYSTEM_SUSPEND
-option.
-  The SCIF suspend/resume functionality has been tested on the Renesas R-Car H3
-Starter Kit board.
-
-  Compared to v1, the main change in this version is the addition of a
-CONFIG_SYSTEM_SUSPEND check around the SCIF driver's suspend/resume logic.
-
-Changes introduced in v3:
-- select HAS_SYSTEM_SUSPEND from SYSTEM_SUSPEND_ALWAYS_ON
-- drop selecting HAS_SYSTEM_SUSPEND from X86
-- simplify default setting in SYSTEM_SUSPEND
-- hide prompt of SYSTEM_SUSPEND when SYSTEM_SUSPEND_ALWAYS_ON is enabled
-- move HAS_SYSTEM_SUSPEND alongside other HAS_* configs
-
-Best regards,
-Mykola Kvach
-
-Mykyta Poturai (1):
-  xen: Introduce system suspend config option
-
-Volodymyr Babchuk (1):
-  xen/char: implement suspend/resume calls for SCIF driver
-
- xen/arch/x86/Kconfig         |  1 +
- xen/common/Kconfig           | 18 ++++++++++++++++
- xen/drivers/char/scif-uart.c | 40 ++++++++++++++++++++++++++++++++++--
- 3 files changed, 57 insertions(+), 2 deletions(-)
-
--- 
-2.48.1
+~Michal
 
 
