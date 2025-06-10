@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0705C678DA
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Jun 2025 13:06:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1010789.1389049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6B1C5B552
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Jun 2025 13:06:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1010791.1389067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uOyfp-0006gq-Ap; Tue, 10 Jun 2025 13:05:53 +0000
+	id 1uOyfr-0007Cf-IA; Tue, 10 Jun 2025 13:05:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1010789.1389049; Tue, 10 Jun 2025 13:05:53 +0000
+Received: by outflank-mailman (output) from mailman id 1010791.1389067; Tue, 10 Jun 2025 13:05:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uOyfp-0006g1-3j; Tue, 10 Jun 2025 13:05:53 +0000
-Received: by outflank-mailman (input) for mailman id 1010789;
- Tue, 10 Jun 2025 13:05:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uOyfr-0007BD-8R; Tue, 10 Jun 2025 13:05:55 +0000
+Received: by outflank-mailman (input) for mailman id 1010791;
+ Tue, 10 Jun 2025 13:05:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YRmu=YZ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uOyfm-0004Sm-TA
- for xen-devel@lists.xenproject.org; Tue, 10 Jun 2025 13:05:50 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a127a942-45fb-11f0-b894-0df219b8e170;
- Tue, 10 Jun 2025 15:05:49 +0200 (CEST)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ad88eb71eb5so745252066b.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Jun 2025 06:05:49 -0700 (PDT)
+ id 1uOyfp-0004iH-5G
+ for xen-devel@lists.xenproject.org; Tue, 10 Jun 2025 13:05:53 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a3336bcd-45fb-11f0-a306-13f23c93f187;
+ Tue, 10 Jun 2025 15:05:52 +0200 (CEST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-60779962c00so5213372a12.0
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Jun 2025 06:05:52 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade32c42770sm626465466b.41.2025.06.10.06.05.47
+ a640c23a62f3a-ade32c42770sm626465466b.41.2025.06.10.06.05.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 06:05:47 -0700 (PDT)
+ Tue, 10 Jun 2025 06:05:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a127a942-45fb-11f0-b894-0df219b8e170
+X-Inumbo-ID: a3336bcd-45fb-11f0-a306-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749560748; x=1750165548; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1749560752; x=1750165552; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vgDItj/Bt+Pokzd4VeTK3tNuj4yPdCLljiPQUCHOaVk=;
-        b=DZXqmF8yw+n8vHvFRijSCXknuC2VvQWVn++eiYu+oj42DewjK3jojqcLnew3D7qfBy
-         N+eFPQaWKku3yl6QZMo8IgCtkla/RE2FAnkItjzdig4qO0e8RTMQGf96VBX2rpWDIlrM
-         hw+r5Ma/9i6lH7ObwK0DqWtxNS4T0Z0ig6RNQYz+VuZ9ffbjJAHSGBNqM9AXORb3+eQs
-         zBOydzOYx+t1Di7aqZpbdTimYPdA/FDX6+Ddu8NvPCmPpvwfLZgmkmRnylZXutVONx97
-         cp72BM3vgfj6fMnDLe8LloFDJvhtAi6X+s01krFzfvqCguyDgExIgAT/lG/r8bjzEIF8
-         kyIQ==
+        bh=gNkxZ42334+z6GmMxmxS+7HSKZw12YWQKs0/M8Vj5io=;
+        b=VXGKD+3BuvSfjXDuVxFLUGSX/qdS+TkT9hIZOt5rs6BrZaMMYU3mLvV6mlqefJja7l
+         n+XYMCFxUHGLsTB4L86733oc/5PfGcPh5mquKlLF+etXoiAMBGfr3lWX9GkQlNik5V/r
+         rUmz3rzn3JMA9kc2Lmve4DdYEXThVRQk5msgRMcggnxe3zVDMvDXq/YaVijQ26R2pBw/
+         G16s/YUGOyRojK4OHDBQzegbfRBBwHYpZS/lJOxYva0weBaMWMSI22O+7s/s8+E/WO5R
+         QYL+P9oRcmDlqUFrULQHACAG20dxdynJaf6YCeDuvAPwcE4yqHIGYIGR5FF8rXDuJuSQ
+         RHSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749560748; x=1750165548;
+        d=1e100.net; s=20230601; t=1749560752; x=1750165552;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vgDItj/Bt+Pokzd4VeTK3tNuj4yPdCLljiPQUCHOaVk=;
-        b=hfbAlK9P231waWe8rwFqcnhfktbr6HaaXpYWHbHwdpwYdvb1b3xV4jC9fbr5W1yptu
-         UqcPylvYZZ0FUGWcJ3MVUie9Q6wMM/8eiV1++Y88usVC051LP/cPnD1L8uRA8xUpGXaD
-         hG+c9mV5WYn2LlU7N5oya9qdV38K05uQbWrGo7UpANEwrYZZ0aUKIA2Qdf+PTCYYhiIl
-         LZYm/1Rhmyz5j19zGQ8Mc1n+GW2szkYmMN3a3JEkKpwZ7/UHBMiRtdCll698AwWlJ/3a
-         mo43KETx082Q/CeylibeYz0bja5a0RcO4q7FQ4DYgz+cINP+xu8LPl/n3uvBKFAeAA2f
-         7Jwg==
-X-Gm-Message-State: AOJu0YxxboOUVlI3CIKVsOdp09dzzcQ95VkKWt969YQcqWoXj6CvjJsP
-	XxjHQk6RHGfkUmxozJyMfpTLqTEmw4Jca8OjaF8QaYnoyITWivojmaBphoZFnw==
-X-Gm-Gg: ASbGnctXZZ9KBuYjpTcRNuQFSLV8xsGtD3PVtQOeQjp0/mESXvgJYgMwdvLj+iL61UH
-	hH86FJ70QBum7WUQRg9ci2NRRGeAoTEun2OBg8m+Xt9dCt9xj5kpwgEoifLb/mlQX6eE1RmeZbu
-	58U1HauCbp4zh2vcmwlZk+uRckH1JNnZee5B6InotJHis7G6ha8oOGMaGHV1riljRsVpURR68aq
-	d/EOhFrb0iGS88+6J5vyRvaqOUfZt7rC9jJnSFG8jrVGAoh3FWjf6kGyd4eKo26ZUE0B61ZcANx
-	Pz6Ed8FrhV1e19oGF5+vud/nq6ijkgl3vRwdPZvfk/exeyO3m2k/ITYwK6n3GxygFTlbqaTxg+R
-	pmKIwH/HfjU7M5upbjrHLjxhvYGcJ
-X-Google-Smtp-Source: AGHT+IHyp9el8zq0YS8Dtc+4LmQcBKrv1C8HmiuR5ZqVVMf5an/ANNzub+p9XkEnawpv2328xnzCVw==
-X-Received: by 2002:a17:907:6d12:b0:ad8:a684:a1f7 with SMTP id a640c23a62f3a-ade7acdf570mr245655766b.30.1749560748353;
-        Tue, 10 Jun 2025 06:05:48 -0700 (PDT)
+        bh=gNkxZ42334+z6GmMxmxS+7HSKZw12YWQKs0/M8Vj5io=;
+        b=BbsvKjPZKSFve0fqlJm6ATTN5IpTUAid6+sVt0GQhGf4zC4os82M0wTIoHs4V6/8XZ
+         J14exGyFZrxcr8u4e9bXKIJdoap2VvN81SMQrtPGhPOE4oPnLp/JZajn7xVqCnFiJ9j9
+         BYtDJHrFmoKUGS+aQ3h0KTNAK6fjmuScrHsnLXJDoRqMpXVqxL2wW6oE2E5R6O3iZkUS
+         Vfe6GKL3frf3B2Nn0mQwokcM8LQ1VKuCoR2t/K918oRbbuLlaA7bzHcLrIHp3AfbUg+i
+         PwwH2x3K/pcfhZXtgFL1WvLnPxWgpLnJqOUh5xDZ+5IsylMIAxxLSiUAu/YSiW96G+c3
+         wAXw==
+X-Gm-Message-State: AOJu0Yz6xb9nstFqwbX+yjfaiNNulmPOASU4GEZTcz+BbsLieuBIZi8r
+	io+iEQtWkOBLi+w06ar9VMI+Gli6nqzou6ezIXng9vlgyPI3QNhQ6JPlgz87Cw==
+X-Gm-Gg: ASbGncsOiyY6ulD8EfGY0R5JCWWX2gmq5zF/lOsA8vkq4KI4qfHpl57ojpzyt9zPl0V
+	U240fYchdxPi+VS6gMzbnDChWlQtBeTQQVr6QBhTzf7w8gDktv0punB0+jz+YwkLYr4QG9CwbFQ
+	2dWFKs7FS5+vVGwlCLFIUv4j44HxqDsEWTdhEriCkHkwR6z3Dlvvyr/v7dhBoNQsV+vtzX5Iifj
+	BxFeT53aK94185MhnX0G7ur19z7+rzhf2w5OB38MUFi5rGVXr6eXNYlDTFbYkLf6B8e0ktZ66sD
+	HzJQRb2hVo3o7VaClcJI1aOenuSx0Gecusc0TzCFY3MxG8PvclAzrIMluBWhWlv6pGTX0fY6peC
+	QBerDTnWltJzb/ufbwL24ogLStaI4
+X-Google-Smtp-Source: AGHT+IEwUk/N6nuaSDBPQ9NVq1w1pYsClr/9Kn8IdxMkNjnhzTDXDYOmLNhr3sE9Kt5YGObsT2BNMQ==
+X-Received: by 2002:a17:907:9349:b0:ad2:5499:7599 with SMTP id a640c23a62f3a-ade1a93baf1mr1471045166b.18.1749560751517;
+        Tue, 10 Jun 2025 06:05:51 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,71 +96,112 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 07/17] xen/riscv: introduce pte_{set,get}_mfn()
-Date: Tue, 10 Jun 2025 15:05:22 +0200
-Message-ID: <5e2f0cea49ac1e0669be15811b1426bf4b4d2fec.1749555949.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 10/17] xen/riscv: implement guest_physmap_add_entry() for mapping GFNs to MFNs
+Date: Tue, 10 Jun 2025 15:05:25 +0200
+Message-ID: <0b1f7ead7eb1b7c8687d388cca50b46eefb8e408.1749555949.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1749555949.git.oleksii.kurochko@gmail.com>
 References: <cover.1749555949.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce helpers pte_{set,get}_mfn() to simplify setting and getting
-of mfn.
+Introduce an initial implementation of guest_physmap_add_entry() on RISC-V
+by adding a basic framework to insert guest physical memory mappings.
+This allows mapping a range of GFNs to MFNs using a placeholder
+p2m_set_entry() function, which currently returns -EOPNOTSUPP.
 
-Also, introduce PTE_PPN_MASK and add BUILD_BUG_ON() to be sure that
-PTE_PPN_MASK remains the same for all MMU modes except Sv32.
+Changes included:
+- Promoting guest_physmap_add_entry() from a stub to a functional
+  interface calling a new p2m_insert_mapping() helper.
+- Adding map_regions_p2mt() for generic mapping purposes.
+- Introducing p2m_insert_mapping() and a skeleton for p2m_set_entry() to
+  prepare for future support of actual page table manipulation.
+- Enclosing the actual mapping logic within
+  p2m_write_lock() / p2m_write_unlock() to ensure safe concurrent
+  updates to the P2M.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V2:
- - Patch "[PATCH v1 4/6] xen/riscv: define pt_t and pt_walk_t structures" was
-   renamed to xen/riscv: introduce pte_{set,get}_mfn() as after dropping of
-   bitfields for PTE structure, this patch introduce only pte_{set,get}_mfn().
- - As pt_t and pt_walk_t were dropped, update implementation of
-   pte_{set,get}_mfn() to use bit operations and shifts instead of bitfields.
- - Introduce PTE_PPN_MASK to be able to use MASK_INSR for setting/getting PPN.
- - Add BUILD_BUG_ON(RV_STAGE1_MODE > SATP_MODE_SV57) to be sure that when
-   new MMU mode will be added, someone checks that PPN is still bits 53:10.
+Changes in v2:
+ - This changes were part of "xen/riscv: implement p2m mapping functionality".
+   No additional signigicant changes were done.
 ---
- xen/arch/riscv/include/asm/page.h | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ xen/arch/riscv/include/asm/p2m.h | 12 ++++------
+ xen/arch/riscv/p2m.c             | 41 ++++++++++++++++++++++++++++++++
+ 2 files changed, 45 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index 4cb0179648..1b8b145663 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -114,6 +114,30 @@ typedef struct {
- #endif
- } pte_t;
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 0c05b58992..af2025b9fd 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -118,14 +118,10 @@ static inline int guest_physmap_mark_populate_on_demand(struct domain *d,
+     return -EOPNOTSUPP;
+ }
  
-+#if RV_STAGE1_MODE != SATP_MODE_SV32
-+#define PTE_PPN_MASK _UL(0x3FFFFFFFFFFC00)
-+#else
-+#define PTE_PPN_MASK _U(0xFFFFFC00)
-+#endif
+-static inline int guest_physmap_add_entry(struct domain *d,
+-                                          gfn_t gfn, mfn_t mfn,
+-                                          unsigned long page_order,
+-                                          p2m_type_t t)
+-{
+-    BUG_ON("unimplemented");
+-    return -EINVAL;
+-}
++int guest_physmap_add_entry(struct domain *d,
++                            gfn_t gfn, mfn_t mfn,
++                            unsigned long page_order,
++                            p2m_type_t t);
+ 
+ /* Untyped version for RAM only, for compatibility */
+ static inline int __must_check
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 2419a61d8c..cea37c8bda 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -324,3 +324,44 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ 
+     return 0;
+ }
 +
-+static inline void pte_set_mfn(pte_t *p, mfn_t mfn)
++static int p2m_set_entry(struct p2m_domain *p2m,
++                         gfn_t sgfn,
++                         unsigned long nr,
++                         mfn_t smfn,
++                         p2m_type_t t,
++                         p2m_access_t a)
 +{
-+    /*
-+     * At the moment spec provides Sv32 - Sv57.
-+     * If one day new MMU mode will be added it will be needed
-+     * to check that PPN mask still continue to cover bits 53:10.
-+     */
-+    BUILD_BUG_ON(RV_STAGE1_MODE > SATP_MODE_SV57);
-+
-+    p->pte &= ~PTE_PPN_MASK;
-+    p->pte |= MASK_INSR(mfn_x(mfn), PTE_PPN_MASK);
++    return -EOPNOTSUPP;
 +}
 +
-+static inline mfn_t pte_get_mfn(pte_t p)
++static int p2m_insert_mapping(struct domain *d, gfn_t start_gfn,
++                              unsigned long nr, mfn_t mfn, p2m_type_t t)
 +{
-+    return _mfn(MASK_EXTR(p.pte, PTE_PPN_MASK));
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    int rc;
++
++    p2m_write_lock(p2m);
++    rc = p2m_set_entry(p2m, start_gfn, nr, mfn, t, p2m->default_access);
++    p2m_write_unlock(p2m);
++
++    return rc;
 +}
 +
- static inline pte_t paddr_to_pte(paddr_t paddr,
-                                  unsigned int permissions)
- {
++int map_regions_p2mt(struct domain *d,
++                     gfn_t gfn,
++                     unsigned long nr,
++                     mfn_t mfn,
++                     p2m_type_t p2mt)
++{
++    return p2m_insert_mapping(d, gfn, nr, mfn, p2mt);
++}
++
++int guest_physmap_add_entry(struct domain *d,
++                            gfn_t gfn,
++                            mfn_t mfn,
++                            unsigned long page_order,
++                            p2m_type_t t)
++{
++    return p2m_insert_mapping(d, gfn, (1 << page_order), mfn, t);
++}
 -- 
 2.49.0
 
