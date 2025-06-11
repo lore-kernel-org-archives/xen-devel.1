@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F0FFC677C4
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 16:11:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1011915.1390446 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C64C71136
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 16:59:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1011942.1390456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPO2R-0001aL-7K; Wed, 11 Jun 2025 16:10:55 +0000
+	id 1uPOnQ-0006jp-OQ; Wed, 11 Jun 2025 16:59:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1011915.1390446; Wed, 11 Jun 2025 16:10:55 +0000
+Received: by outflank-mailman (output) from mailman id 1011942.1390456; Wed, 11 Jun 2025 16:59:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPO2R-0001aE-4f; Wed, 11 Jun 2025 16:10:55 +0000
-Received: by outflank-mailman (input) for mailman id 1011915;
- Wed, 11 Jun 2025 16:10:53 +0000
+	id 1uPOnQ-0006ji-Km; Wed, 11 Jun 2025 16:59:28 +0000
+Received: by outflank-mailman (input) for mailman id 1011942;
+ Wed, 11 Jun 2025 16:59:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Z5UX=Y2=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uPO2P-0001YX-NB
- for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 16:10:53 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=sTmX=Y2=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1uPOnO-0006jc-GJ
+ for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 16:59:26 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2062f.outbound.protection.outlook.com
+ [2a01:111:f403:2416::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9dfe0cb0-46de-11f0-b894-0df219b8e170;
- Wed, 11 Jun 2025 18:10:39 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a507e88b0aso69552f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 11 Jun 2025 09:10:39 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-236030780bcsm90039105ad.15.2025.06.11.09.10.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jun 2025 09:10:38 -0700 (PDT)
+ id 6cb229f8-46e5-11f0-b894-0df219b8e170;
+ Wed, 11 Jun 2025 18:59:23 +0200 (CEST)
+Received: from CH5P221CA0012.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1f2::16)
+ by PH0PR12MB8100.namprd12.prod.outlook.com (2603:10b6:510:29b::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.19; Wed, 11 Jun
+ 2025 16:59:19 +0000
+Received: from CH2PEPF0000009E.namprd02.prod.outlook.com
+ (2603:10b6:610:1f2:cafe::79) by CH5P221CA0012.outlook.office365.com
+ (2603:10b6:610:1f2::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.17 via Frontend Transport; Wed,
+ 11 Jun 2025 16:59:18 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CH2PEPF0000009E.mail.protection.outlook.com (10.167.244.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8835.15 via Frontend Transport; Wed, 11 Jun 2025 16:59:18 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Jun
+ 2025 11:59:18 -0500
+Received: from [172.27.195.250] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Wed, 11 Jun 2025 11:59:18 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,311 +61,233 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9dfe0cb0-46de-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1749658239; x=1750263039; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=CDi9+1roc6QnyLVJtsYDkxHsWwb49iH+ZbTAyzzTfiw=;
-        b=aei4/mVpMi9B2atX9PPVxMm8IPQJjbufey+as7WgcB4t7YHTFpLiawN9WJjE+NrUJb
-         5l5Az93HQ4kNDa66uX4RPAwlGERWBGA6F+I0TaxyC/mdQpDLP8eXwlG6DLOkUrBZfxKT
-         pZLsGNxs6uw5MXBQwdmApR4+bKNaj7+RQDHaR9S19grhutBFNRnqguzGhjP0wu5IHSGn
-         QL2Nq7HY25oKEJbMPwe/Bs45k/5OOlWbVyRSUJwzD9aBQ1dYYyOxgmXU/Q8f0+fOo99y
-         TwaXS0Jiz8rzM6l2agP6MpNGdtaISYgsnUoZ6rJFKGF1hjHxDDIIwb/ZSPguWGFUesCN
-         Ac6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749658239; x=1750263039;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CDi9+1roc6QnyLVJtsYDkxHsWwb49iH+ZbTAyzzTfiw=;
-        b=CBWaiBturOIGiat7JMYse7udl0OQJIHGpSG/1YppnekHwcCWoBd5Lh3X2YWEOVZ/yM
-         6QMnglF++/bvKQR5LDYJcKNdWvB5XmqEIi1rpEWJeEuo//q9AOMAxHuUz7QVEJC7rgSO
-         R+bRLHCrFX3fRmH72oor/MUY4d2dlzhmqFEPySLGmwqPJ39mABUx18D3ZNJQKZW11Nsy
-         j9au8BaT3CHXKG4oB70hPE4GwR+Urua0dqJb926ktrqqsO0gkjO/J/rGO6a9QIPYF17S
-         02KViwOtcgt5R1ASiXcRzoiBN+en7GWZfHhsHAg1/VQLRXSDMiKAWP3H11cDIPYvUrHG
-         xdyA==
-X-Forwarded-Encrypted: i=1; AJvYcCVfWsk+M8oHJsoZdjrF8xFBo675SNCe68wjL861gyF16GRMkYFm54zyN0kTGqujarjpGoeMZmk659I=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwnVU3+Aa9cQAS8JUQatHZZRIaM7GjHLYt3JJXk7D9PSYaTKYdO
-	WJMNNpFVDUE03xGS9LnRgAn25JcniJwKz5irCzokxuLu49qkSzMqNadjgFSknRDW3g==
-X-Gm-Gg: ASbGnctTjZ+RiZsD8L5hdvb+C+g2baLsFLVALIsoJmdfXjtVrwWD1DcZfMnJFy3LIbH
-	RiAyvYBtxW2a8b/TyXAJXZOFMbvOUP6NW0xJlUDsCMsiA9QOsZLMPT8Ibra8vn3m9/7fLwUWYsp
-	5DKyhOzOL6TscAzI6hQvwOz/fPVuBwCt69V8SbWgjf0GvaDEm9EG7QH8rA5efI/eI1Id+wbP5Gj
-	IDKffncWJbPVUG1yO+NO8uT1baFScwu025f8vQfWAVejo4urIv4Axj54bvHlW51/cL3GZzoC6Nd
-	zyIvcztiRq9LalTBhjP65NPw4pahNODKmWsK3sAKSwXDpx5jovk6n/8rZmXMxYxsJJH0rEt+Zil
-	kG7bvVvsBSxEgPlK1mo+BqXYW72AqtzIXVMzGX6kjvbybRZE=
-X-Google-Smtp-Source: AGHT+IHCXJlgj5HPygomuHDBAPEkDw/rMxaKDZv8waEMOSqcLyVnCm0f+xN2+j715GPaIeZJSPSCjA==
-X-Received: by 2002:a05:6000:18ac:b0:3a5:28f4:24ad with SMTP id ffacd0b85a97d-3a558aa51admr3300434f8f.21.1749658239073;
-        Wed, 11 Jun 2025 09:10:39 -0700 (PDT)
-Message-ID: <0de0ea5c-64c9-4ac8-8e76-750cb3036419@suse.com>
-Date: Wed, 11 Jun 2025 18:10:29 +0200
+X-Inumbo-ID: 6cb229f8-46e5-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bAet4mpyhMv8ZvNaToqj2QQtkgHDPf/5bahJ5TEA/mz4DA7+oYeHmV7ecbomaBnKq8cqCsukWTN/T5tliN0qD4EkqylY78gNMQmCkEXkNgcI3otFEeHO61HEonxDzT6CcWMLIcHj5U5iQeF2I5ec7dFtilSLLmI7Xi1NYW0tfaMwlKvoBKKLVTLEI5PWTcuenaEQsMRhShawEA9/erqgPWhwyTxZuxiD+LU3AN0VhWG9ZhbWckauBsDd+kUsdrmzFstEqH3b5WGAxZ4sptpYeze4wOWEzBtcPXy823No5yAmFJBxAVKKSh6l4R06bdtUvRBXrmWrNfn8bU3s+Hk5VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NNAsJZS8YQmk9IWUY3R/H/m7OaIgYl3mYOwfCK6EU4Y=;
+ b=EOpNFjYACjWSM8WvMr0ALyHfDfgrAZQ4WqTSOLL0A1mVlO7cOEMjTA7FkpSQWQX5rzHh1ssDo5lzmzPNwc6POxkBqkmkIo5uIFcV+R4jIChuB/Kb257uexEHF/ojWs3oa3EMAjDpcIQldHGNeix83Mc64rBECqiH/uLdQ1HaHioD8071O+vmhE8MA2s5JAySx+GG+3AapMYpf89UvP2ZdeMJVBbNgcptChovoF2feWxnQ/oZeuSNN7g5bFtvFlTYez0wAGUpODBwcynvLgQJPNOcWnyokclyvhbb7IFYHdf7wHBe3XKuPv7frmNWoI7eny4Y2R3n6bPdB8++S59P2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NNAsJZS8YQmk9IWUY3R/H/m7OaIgYl3mYOwfCK6EU4Y=;
+ b=1FlQx0eIAr1cUpGWFZag1hxx9gtLAG2TImlvY35pkqwa3Y1xG8IXXF4qqVNco+nhXBjyW4Ilmeom0IVRW9UBP6PJMOveFC/UI2H4KBtXW0G9nOc5Y1FbKFKVw90EmciI1lpbVLy969vtv/c0gMHXzfnDCK3HnhEmYWAVNWABdeQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <6cc69b45-7347-4250-ab32-a1e2857b7d23@amd.com>
+Date: Wed, 11 Jun 2025 00:20:27 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 04/18] xen/cpufreq: introduce new sub-hypercall to
- propagate CPPC data
-To: Penny Zheng <Penny.Zheng@amd.com>
-Cc: ray.huang@amd.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20250527084833.338427-1-Penny.Zheng@amd.com>
- <20250527084833.338427-5-Penny.Zheng@amd.com>
+Subject: Re: [PATCH 2/4] xsm/silo: Support hwdom/control domains
+To: Jan Beulich <jbeulich@suse.com>
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	<xen-devel@lists.xenproject.org>
+References: <20250610225737.469690-1-jason.andryuk@amd.com>
+ <20250610225737.469690-3-jason.andryuk@amd.com>
+ <0f47268e-0674-46e7-bfd4-8a395ee1ddf6@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250527084833.338427-5-Penny.Zheng@amd.com>
-Content-Type: text/plain; charset=UTF-8
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <0f47268e-0674-46e7-bfd4-8a395ee1ddf6@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000009E:EE_|PH0PR12MB8100:EE_
+X-MS-Office365-Filtering-Correlation-Id: dbe967d8-58a8-4916-71cf-08dda9094e45
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SnlqNlNjZVUzZTFQdSthNmVvb2V6V2NXd1Q1THFyN2R0MzhBelNEZllvNUFT?=
+ =?utf-8?B?aW8rSGczK01obmk3OW1tVUkyNjRXZkxLK0pYenFvL21FRFdPUzlCbVlDRnZX?=
+ =?utf-8?B?U0cwNnluRHpLS2RyWkRxdHZJbloxRjJub2Y2Q1pPckZoYkM0SkhWWlNiVzBQ?=
+ =?utf-8?B?b3FzTWsydFBFbnJ3U1lDZmxMU2g3c1ByWUppdnprQXBsQVJGTTFDYTRJSGFH?=
+ =?utf-8?B?VU1LdWVJWGhPVmpNZEJJTXVqUzRFSTF6VEliSjJ2Q2xJc1I5WEJxMkoreUJE?=
+ =?utf-8?B?RWZ4dDdPK1duTG9mWlcySEpNMlgrWkp5NDZBV0gxd0g4UnUzWXQ1eERMYVpv?=
+ =?utf-8?B?NFBzNlNpSHZrSm8yK0g1VkprTnR5SkpzN2tGNEE5SVVWamxRc0owajQvcUNo?=
+ =?utf-8?B?blR5WHFjQXBSNWY2MFZRek9ZQWFJMXpXdCtvL0FXd3hkK3c5Y1J2UnZQRi9l?=
+ =?utf-8?B?ZTJTYnVTZFp4VWVlQXBRSU9iVklXK0UrV3NsN3l2UWpPcUk5MnpHOXRmSDdl?=
+ =?utf-8?B?U2F2VDgxU0NMcVMxRSs0ZC9SOTk5L3pITEtYanBOZE9UUG5tZEdxam9jYWwz?=
+ =?utf-8?B?V3lpaFdnY2wwUjFjV3dCcjZNZkFHVytYMHBmVXgzVElpRVY4dnV3YmRoNXlY?=
+ =?utf-8?B?blN0K3FUbmYwR2FJTThzMDlWN0p1NzFNbnc0cGNyR0VqRStMaGhpeUxMTmlO?=
+ =?utf-8?B?ekJSaU1lR01HZkk0Mzk0TGN2dHR3TGlzWGZyMW84RFliNmR5YmliVWRwQVV4?=
+ =?utf-8?B?dHFOTTQzOGE5b3ZCaU5JYlNRQzRCaTJxaXJzRDFzQzhHNzA2MzVHQWxCbFd0?=
+ =?utf-8?B?RTM3MGJJbGd3RlYyVFpIcGgrWE5sT2pWODlabGRwemt4ZElDcnJPUi9XN3N1?=
+ =?utf-8?B?WFdDamxnVmUyK0lQcjEwaWUwYk91VkNZK0dWMXM4V1NvNzJPZmR5WmJIczdN?=
+ =?utf-8?B?V214dDVzL2ZHYWhsZlNnRlh3S29xWXVTZG1CYWh0bjVxd3E4azBkeUFjQ2pR?=
+ =?utf-8?B?aGxaUDNFVUI0d3dtUEdLWmFvSkJvWWY1bzdvK3ZKMlBMM3E2YXBSSjVvcGwr?=
+ =?utf-8?B?VUFmS09FbVhjeGpMRzhuN01ST3F0aHVPVnZTQmFwdXg3SVNHUGNiUHkrVHZz?=
+ =?utf-8?B?bm9sWXhSWlN3V2VKOVF6WG4zZDkyNndXUXhJRVVQTEpFb3lqa0ZhOWw3RDJx?=
+ =?utf-8?B?aEQ0Z0wvc3NkektoaGJ6L2QrcDhscnlUZ1ByK1ZRWXNaSlRHclJBcGNFR0g1?=
+ =?utf-8?B?bE5pamZIblBIakFnOW5KM21Tb1liZFUweHQvb3RMbk9DajYxbVdVVmkzRmcz?=
+ =?utf-8?B?S1cwcElwL3VQNituc2FRY0hhd2NUMWJtOEQzbkZEWDdXZFY5c3AwdmROd1d4?=
+ =?utf-8?B?dCtFbHdoWmNubXFJbW5qclpkRVZ2KzBiRFFOSXdDOEpxaTJNRjk3YytGeUts?=
+ =?utf-8?B?SUZPcWZCSW1SUW9BSm5RRjlxMkE4azF3SnV0SWgyenpGcEYyamNGSGRlUUdn?=
+ =?utf-8?B?NmNReUUyQkxaQjh0ZDVCSzE5MGIvRk9KZ3V5b0prV3RraGxOMGdOeGNtTVRa?=
+ =?utf-8?B?dk9OelVRWkhpclg2UzY0RmxKb253ejRLRXEvNWJBZzc4dTFwUWZVQjZUQ1J2?=
+ =?utf-8?B?bk9IZzdudVZqUHoxRVpSbFlRb1doUzU4Sk1LWkJJS1RWa3djMFVWVThuSjN4?=
+ =?utf-8?B?MWkvN2FGL0NqbHpSUXdiU3ZPTzBnSTlzS2E5YnhJcGxuMldHMnM3OTBUQUN0?=
+ =?utf-8?B?cExlMFBPaUYvdUl2bEE0ejZxZm9JcHNWOXREU2UxdWhIYVBhaUdjOWFjREVp?=
+ =?utf-8?B?WnAxMC9zL2pRQVo4ek43KzZ3QlFBWFE0UjluR2p6N0w1bmFyZDlMUFA1dlBM?=
+ =?utf-8?B?SnIxS0FVbis1OTdSV3BXdGNNdDRJQ1dpVWtQTm1jT0lma3lEbldhclpML3JD?=
+ =?utf-8?B?WGxJallKaVlGRFk3STVTcUdvYkNnM1k5VUlOdjVyaXIxdWduemlrV1VxTUkx?=
+ =?utf-8?B?aUtPaTB2QXVMQ0xVWWNpVU5LdGE5SWFXS3hjamswUjRMS2lHU1hqcUlta3pJ?=
+ =?utf-8?Q?JZLQly?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 16:59:18.8900
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dbe967d8-58a8-4916-71cf-08dda9094e45
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH2PEPF0000009E.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8100
 
-On 27.05.2025 10:48, Penny Zheng wrote:
-> @@ -635,6 +641,124 @@ out:
->      return ret;
->  }
->  
-> +static void print_CPPC(const struct xen_processor_cppc *cppc_data)
-> +{
-> +    printk("\t_CPC: highest_perf=%u, lowest_perf=%u, "
-> +           "nominal_perf=%u, lowest_nonlinear_perf=%u, "
-> +           "nominal_mhz=%uMHz, lowest_mhz=%uMHz\n",
-> +           cppc_data->cpc.highest_perf, cppc_data->cpc.lowest_perf,
-> +           cppc_data->cpc.nominal_perf, cppc_data->cpc.lowest_nonlinear_perf,
-> +           cppc_data->cpc.nominal_mhz, cppc_data->cpc.lowest_mhz);
-> +}
-> +
-> +int set_cppc_pminfo(unsigned int acpi_id,
-> +                    const struct xen_processor_cppc *cppc_data)
-> +{
-> +    int ret = 0, cpuid;
-> +    struct processor_pminfo *pm_info;
-> +
-> +    cpuid = get_cpu_id(acpi_id);
-> +    if ( cpuid < 0 || !cppc_data )
+On 2025-06-11 09:17, Jan Beulich wrote:
+> On 11.06.2025 00:57, Jason Andryuk wrote:
+>> In a disaggregated environment, dom0 is split into Control, Hardware,
+>> and Xenstore domains, along with domUs.  The is_control_domain() check
+>> is not sufficient to handle all these cases.  Add is_priv_domain() to
+>> support allowing for the various domains.
+>>
+>> The purpose of SILO mode is to prevent domUs from interacting with each
+>> other.  But dom0 was allowed to communicate with domUs to provide
+>> services.  As the disaggregation of dom0, Control, Hardware and Xenstore
+>> are all service domains that need to communicate with other domains.
+>>
+>> To provide xenstore connections, the Xenstore domain must be allowed to
+>> connect via grants and event channels.  Xenstore domain must also be
+>> allowed to connect to Control and Hardware to provide xenstore to them.
+> 
+> Are you suggesting that SILO at present is incompatible with a Xenstore
+> domain? silo_mode_dom_check() in its original form has no special
+> precautions, after all.
 
-The !cppc_data part isn't really needed, is it?
+Yes, it is incompatible with the current silo_mode_dom_check().  Only 
+Control domain is allowed to use grants and event channels with a domU. 
+A Xenstore domain would be denied.
 
-> +    {
-> +        ret = -EINVAL;
-> +        goto out;
-> +    }
-> +
-> +    if ( cppc_data->pad[0] || cppc_data->pad[1] || cppc_data->pad[2] )
-> +    {
-> +        ret = -EINVAL;
-> +        goto out;
-> +    }
-> +
-> +    if ( cpufreq_verbose )
-> +        printk("Set CPU acpi_id(%u) cpuid(%d) CPPC State info:\n",
-> +               acpi_id, cpuid);
-> +
-> +    pm_info = processor_pminfo[cpuid];
-> +    if ( !pm_info )
-> +    {
-> +        pm_info = xvzalloc(struct processor_pminfo);
-> +        if ( !pm_info )
-> +        {
-> +            ret = -ENOMEM;
-> +            goto out;
-> +        }
-> +        processor_pminfo[cpuid] = pm_info;
-> +    }
-> +    pm_info->acpi_id = acpi_id;
-> +    pm_info->id = cpuid;
-> +    pm_info->cppc_data = *cppc_data;
-> +
-> +    if ( cppc_data->flags & XEN_CPPC_PSD )
-> +    {
-> +        ret = check_psd_pminfo(cppc_data->shared_type);
-> +        if ( ret )
-> +            goto out;
-> +    }
-> +
-> +    if ( cppc_data->flags & XEN_CPPC_CPC )
-> +    {
-> +        if ( cppc_data->cpc.highest_perf == 0 ||
-> +             cppc_data->cpc.highest_perf > UINT8_MAX ||
-> +             cppc_data->cpc.nominal_perf == 0 ||
-> +             cppc_data->cpc.nominal_perf > UINT8_MAX ||
-> +             cppc_data->cpc.lowest_nonlinear_perf == 0 ||
-> +             cppc_data->cpc.lowest_nonlinear_perf > UINT8_MAX ||
-> +             cppc_data->cpc.lowest_perf == 0 ||
-> +             cppc_data->cpc.lowest_perf > UINT8_MAX ||
-> +             cppc_data->cpc.lowest_perf >
-> +                cppc_data->cpc.nominal_perf ||
-> +             cppc_data->cpc.lowest_nonlinear_perf >
-> +                cppc_data->cpc.nominal_perf ||
-> +             cppc_data->cpc.nominal_perf > cppc_data->cpc.highest_perf )
-> +            /*
-> +             * Right now, Xen doesn't actually use highest_perf/nominal_perf/
-> +             * lowest_nonlinear_perf/lowest_perf values read from ACPI _CPC
-> +             * table. Xen reads CPPC capability MSR to get these four values.
-> +             * So warning is enough.
-> +             */
-> +            printk_once(XENLOG_WARNING
-> +                        "Broken CPPC perf values: lowest(%u), nonlinear_lowest(%u), nominal(%u), highest(%u)\n",
-> +                        cppc_data->cpc.lowest_perf,
-> +                        cppc_data->cpc.lowest_nonlinear_perf,
-> +                        cppc_data->cpc.nominal_perf,
-> +                        cppc_data->cpc.highest_perf);
-> +
-> +        /* lowest_mhz and nominal_mhz are optional value */
-> +        if ( cppc_data->cpc.lowest_mhz > cppc_data->cpc.nominal_mhz )
-> +        {
-> +            printk_once(XENLOG_WARNING
-> +                        "Broken CPPC freq values: lowest(%u), nominal(%u)\n",
-> +                        cppc_data->cpc.lowest_mhz,
-> +                        cppc_data->cpc.nominal_mhz);
-> +            /* Re-set with zero values, instead of keeping invalid values */
-> +            pm_info->cppc_data.cpc.nominal_mhz = 0;
-> +            pm_info->cppc_data.cpc.lowest_mhz = 0;
-> +        }
-> +    }
-> +
-> +    if ( cppc_data->flags == (XEN_CPPC_PSD | XEN_CPPC_CPC) )
-> +    {
-> +        if ( cpufreq_verbose )
-> +        {
-> +            print_PSD(&pm_info->cppc_data.domain_info);
-> +            print_CPPC(&pm_info->cppc_data);
-> +        }
-> +
-> +        pm_info->init = XEN_CPPC_INIT;
-> +        ret = cpufreq_cpu_init(cpuid);
-> +#ifndef NDEBUG
-> +        if ( ret )
-> +            dprintk(XENLOG_WARNING,
-> +                    "CPU %u failed to be initialized with amd-cppc mode, and users could only reboot and re-define cmdline with \"cpufreq=xen\"",
-> +                    cpuid);
-> +#endif
+Xenstore stubdom only exists for x86 today.  My limited attempts to run 
+xenstored in an dedicated Xenstore ARM Linux domain have failed.
 
-What use if the #ifdef here? The more that NDEBUG controls behavior of ASSERT(),
-not that of (debug) logging.
+>> Hardware domain will provide PV devices to domains, so it must be
+>> allowed to connect to domains.
+> 
+> As a built-in policy, isn't this already going too far? There could
+> conceivably be configurations with only pass-through devices in use, in
+> which case neither grants nor the event channels operations intercepted
+> by SILO would be required.
 
-> --- a/xen/include/public/platform.h
-> +++ b/xen/include/public/platform.h
-> @@ -363,6 +363,7 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_getidletime_t);
->  #define XEN_PM_PX   1
->  #define XEN_PM_TX   2
->  #define XEN_PM_PDC  3
-> +#define XEN_PM_CPPC 4
->  
->  /* Px sub info type */
->  #define XEN_PX_PCT   1
-> @@ -370,6 +371,10 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_getidletime_t);
->  #define XEN_PX_PPC   4
->  #define XEN_PX_PSD   8
->  
-> +/* CPPC sub info type */
-> +#define XEN_CPPC_PSD   1
-> +#define XEN_CPPC_CPC   2
-> +
->  struct xen_power_register {
->      uint32_t     space_id;
->      uint32_t     bit_width;
-> @@ -457,6 +462,30 @@ struct xen_processor_performance {
->  typedef struct xen_processor_performance xen_processor_performance_t;
->  DEFINE_XEN_GUEST_HANDLE(xen_processor_performance_t);
->  
-> +struct xen_processor_cppc {
-> +    uint8_t flags; /* flag for CPPC sub info type */
+Such a domain wouldn't have any PV devices configured?  I don't think 
+this changes anything compared to today.
 
-A common way of commenting on such would be /* XEN_CPPC_... */.
+Both sides need to be configured and opt-in.  Hardware is a system 
+domain, so it should be possible to allow grants and event channels. 
+But they won't be used unless configured.
 
-In any event, here and ...
+>> That leaves Control.  Xenstore and Hardware would already allow access
+>> to Control, so it can obtain services that way.  Control should be
+>> "privileged", which would mean it can make the connections.  But with
+>> Xenstore and Hardware providing their services to domUs, there may not
+>> be a reason to allow Control to use grants or event channels with domUs.
+>> Still, Control is privileged, so it should be allowed to do something if
+>> it chooses.  Establishing a grant, or event channel requires action on
+>> both sides, so allow for the possibility.  This does open up an argo
+>> wildcard ring from domUs, FWIW.
+> 
+> Along the lines of my reply to patch 1, I think Hardware and Control
+> need to have a pretty strong boundary between them. It's hard to see,
+> for example, whether grant map/copy/transfer would indeed make sense
+> between the two.
 
-> +    uint8_t pad[3]; /* padding and must be zero */
+The Hardware domain might provide a PV device to Control?
 
-... here (and of course anywhere else) - please adhere to designated comment
-style.
+I've tested removing control:
+static bool is_priv_domain(const struct domain *d)
+{
+     return is_xenstore_domain(d) || is_hardware_domain(d);
+}
 
-> +    /*
-> +     * Subset _CPC fields useful for CPPC-compatible cpufreq
-> +     * driver's initialization
-> +     */
-> +    struct {
-> +        uint32_t highest_perf;
-> +        uint32_t nominal_perf;
-> +        uint32_t lowest_nonlinear_perf;
-> +        uint32_t lowest_perf;
-> +        uint32_t lowest_mhz;
-> +        uint32_t nominal_mhz;
-> +    } cpc;
-> +    /* Coordination type of this processor */
-> +#define XEN_CPUPERF_SHARED_TYPE_HW   1 /* HW does needed coordination */
-> +#define XEN_CPUPERF_SHARED_TYPE_ALL  2 /* All dependent CPUs should set freq */
-> +#define XEN_CPUPERF_SHARED_TYPE_ANY  3 /* Freq can be set from any dependent CPU */
+And that works in my limited ARM dom0less testing.  The toolstack isn't 
+really exercised in that case.  It seems strange that the privileged 
+control domain is *not* allowed though.
 
-What's this? The exact same #define-s already exist in struct
-xen_processor_performance, unless I'm missing a hard to notice spelling
-difference. You can simply ...
+> Similarly I'm not convinced a strong boundary isn't also needed
+> between Xenstore and Hardware.
 
-> +    uint32_t shared_type;
+If hardware is providing PV devices to domains, it will need access to 
+Xenstore.  I don't see how you can get around it.
 
-... use the comment suggestion from above here as well.
+I tried to explain this in the first paragraph.  SILO's purpose was to 
+isolate domUs from each other, but allow it to access dom0.  dom0 
+embodies the control, hardware, and xenstore capabilities.  So as a 
+first approximation, each of Control, Hardware, and Xenstore should be 
+allowed to communicate with domUs.
 
-> --- a/xen/include/xen/pmstat.h
-> +++ b/xen/include/xen/pmstat.h
-> @@ -7,8 +7,13 @@
->  
->  int set_px_pminfo(uint32_t acpi_id, struct xen_processor_performance *perf);
->  long set_cx_pminfo(uint32_t acpi_id, struct xen_processor_power *power);
-> +int set_cppc_pminfo(unsigned int acpi_id,
-> +                    const struct xen_processor_cppc *cppc_data);
+domUs needs to communicate with Xenstore and Hardware for PV devices.
 
-Nit: Relative ordering would be nice to be consistent between this group
-and ...
+Xenstore provides Xenstore access to Hardware.
 
->  #ifdef CONFIG_COMPAT
-> +struct compat_processor_cppc;
-> +int compat_set_cppc_pminfo(unsigned int acpi_id,
-> +                           const struct compat_processor_cppc *cppc_data);
->  struct compat_processor_performance;
->  int compat_set_px_pminfo(uint32_t acpi_id, struct compat_processor_performance *perf);
->  struct compat_processor_power;
+Control would want Xenstore access.
 
-... this one. (Personally I dislike additions at the top of any group,
-as this gives the impression that the new stuff is "more important" than
-what has been there already. See also how in a number of places we simply
-sort alphabetically, to avoid the common "insert at top" and "insert at
-bottom" patterns.)
+I don't know if this helps, but here's a table:
 
-> --- a/xen/include/xlat.lst
-> +++ b/xen/include/xlat.lst
-> @@ -168,6 +168,7 @@
->  !	processor_performance		platform.h
->  !	processor_power			platform.h
->  ?	processor_px			platform.h
-> +!	processor_cppc			platform.h
->  !	psd_package			platform.h
->  ?	xenpf_enter_acpi_sleep		platform.h
->  ?	xenpf_pcpu_version		platform.h
+     | CTL | HW  | XS  | domU
+----------------------------
+CTL |     |  ?  |  y  |  ?
+HW  |  ?  |     |  y  |  y
+XS  |  y  |  y  |     |  y
+domU|  ?  |  y  |  y  |  x
 
-Please obey to sorting in this file.
+Control and Hardware would be y if we allow PV devices
 
-Jan
+Control and domUs - I don't have an immediate rational for them.  Except 
+that Control is privileged.  I've been running xenconsoled in Hardware. 
+If xenconsoled is in Control, then access would be required.
+
+>> --- a/xen/xsm/silo.c
+>> +++ b/xen/xsm/silo.c
+>> @@ -20,6 +20,12 @@
+>>   #define XSM_NO_WRAPPERS
+>>   #include <xsm/dummy.h>
+>>   
+>> +static bool is_priv_domain(const struct domain *d)
+>> +{
+>> +    return is_xenstore_domain(d) || is_hardware_domain(d) ||
+>> +           is_control_domain(d);
+>> +}
+> 
+> This construct expands to two evaluate_nospec(), which likely isn't
+> wanted. Some open-coding may be pretty much unavoidable here.
+
+Thanks, yes, good point.
+
+> (I'm
+> surprised it's not three, i.e. I find it odd that is_xenstore_domain()
+> doesn't also use that guard.)
+
+It looks okay to me.  There were only 2 uses until I added a 3rd in the 
+dom0less code.  The XSM check has evaluate_nospec() and the other 2 uses 
+aren't security critical - Setting a domain info flag, and __init code 
+for dom0less.  Maybe moving the evaluate_nospec() would be safer in case 
+use grows in the future, but it looks okay to me today.
+
+Regards,
+Jason
 
