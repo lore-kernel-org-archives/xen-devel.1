@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA77C7113E
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 17:23:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1011975.1390556 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE229C7113E
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 17:26:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1012006.1390566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPPAH-0004kT-Fh; Wed, 11 Jun 2025 17:23:05 +0000
+	id 1uPPDI-0007Ij-Uu; Wed, 11 Jun 2025 17:26:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1011975.1390556; Wed, 11 Jun 2025 17:23:05 +0000
+Received: by outflank-mailman (output) from mailman id 1012006.1390566; Wed, 11 Jun 2025 17:26:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPPAH-0004kD-AU; Wed, 11 Jun 2025 17:23:05 +0000
-Received: by outflank-mailman (input) for mailman id 1011975;
- Wed, 11 Jun 2025 17:23:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DJt8=Y2=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uPPAG-0004ea-40
- for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 17:23:04 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b337446f-46e8-11f0-b894-0df219b8e170;
- Wed, 11 Jun 2025 19:22:50 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a4fea34e07so93159f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 11 Jun 2025 10:22:50 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a5322ae43fsm15685768f8f.25.2025.06.11.10.22.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 10:22:49 -0700 (PDT)
+	id 1uPPDI-0007Ic-Ru; Wed, 11 Jun 2025 17:26:12 +0000
+Received: by outflank-mailman (input) for mailman id 1012006;
+ Wed, 11 Jun 2025 17:26:10 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <anthony@xenproject.org>) id 1uPPDG-0007IU-R2
+ for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 17:26:10 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1uPPDF-00DsgD-23;
+ Wed, 11 Jun 2025 17:26:09 +0000
+Received: from [2a01:e0a:1da:8420:b77:bd5:6e45:7633] (helo=l14)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1uPPDF-002vgZ-0s;
+ Wed, 11 Jun 2025 17:26:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,110 +41,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b337446f-46e8-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1749662569; x=1750267369; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=anfQsa7S+yMQpSfHuxEOD+WPNmDFJ5MQMbijHBl0+0s=;
-        b=j2+zYRsjD781j8G3GQeEZJweEAsyfXEU7C7ZsSYmJtD51C3CJkarMWktZBIPJPtp8I
-         aPOQlQhcDNHn99Q1vCJerkg1QUXpbUoxswn5uRWuH7qST+gBEqLS8AqLNF8uaXi7uSA2
-         JT1r5atnbwkFRHGbFje5EZ6g7FP/qnnRWKjqA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749662569; x=1750267369;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=anfQsa7S+yMQpSfHuxEOD+WPNmDFJ5MQMbijHBl0+0s=;
-        b=b02U97H2bsTafMXrQ6zC1Cn9QfpO6tmNNeqQZYcgVzG940o/Fs8K2wwFlos/XBCfVf
-         Sf20Eo50IdLEmfBuw18h9hEaShtyX987FqeYTgmVVlJfMpfPfm9gxXPBXh/LSGqQjd2N
-         nFsm3yOiR1C5oxfCA5Lt2PCugpZAJDXu7xsYLn2cEH/xhF3psUkTZ5n12jTV4E9d5PMj
-         7q1T18xIsCTj5XlBwET39GsZRF7BQcEtyZSoYnntICUowX3qDSmPr/A2/qs4dl3xXPW5
-         M4GWkny5KMnjXA7Uz5MpHUlJW4Ga/KbzBdcwJpqBgiZ896urDATYw5m/CVEbeiSrwOXU
-         d8lA==
-X-Gm-Message-State: AOJu0YyROOxvM02dLOWeFNGrgKBhAvYUDegG7WZpzmLK9xoHUaNx7Hff
-	eYgyVPMppiNLv3aj/SQTjg20j0dYtj+DgvEjcdGDvHEHc689sVofDluT4JL8mmgBdNNoKQtIYzq
-	hNqCF
-X-Gm-Gg: ASbGnctGlxW92LCb+SiYMRFKHDglCnZ8QioY1YwU/jm1+Szz8diECM0vZI4cQPt+sLp
-	bcshmTGq0L+1CCxsWv47x/Q+UiA+pS7KW/Z6WINytPMZCxk1cdumbQhXquN9id7IHy2cwyV8+u4
-	nzWX5nmN65cYlUgcTOOihmY6m3mJtDEE2Hs6CdRC6POPegw7kOFp5+4fsy0Auo86P8VuCpH5XtQ
-	pi67vC+JIv5FzKYpKMz0v8hHjkITl4aIGmqCYFrWF0FOqXqLN1HGldQaUcs6kYBdWdJQpml9UQn
-	PzS6kc4lJg+r8jGLjnf7Lu/fiMOFsNGE7TPdwif8oRgAIu8PHsfgkNypAJ7V/PlD6cDia2RVUlF
-	T+IymQRiWw3+wHxFt5DevhKYkotCG66eLuwc=
-X-Google-Smtp-Source: AGHT+IGN+fMnV76KlrqchGBkpcg5Z6KymEIXo7HbqL/iYCuu0b1OCDuVUdfNQk1vt7MBMfV1md9AHg==
-X-Received: by 2002:a05:6000:2c0f:b0:3a4:ed10:c14 with SMTP id ffacd0b85a97d-3a55869b2b9mr3406097f8f.14.1749662569421;
-        Wed, 11 Jun 2025 10:22:49 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date;
+	bh=TvY8XJCtLseOyo7AdSpTBjkYvZb5kh/DRwYv1c3FU20=; b=yJMZ7x/1fDot2KpB3G2tXo3sff
+	oiFLAuCLktUKTGgZJAglj4XPdQvakri6g9cyFhAR7xDsTv1YYsjVFKaBIPB5J7cZdizdS3M1ygz1M
+	rdN0uouWA75s3wkRTBGLWkyuW1O8T2KMlzZ1T60T6WEJ73TbThqnmfkot6336jwTDOrc=;
+Date: Wed, 11 Jun 2025 19:26:06 +0200
+From: Anthony PERARD <anthony@xenproject.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH 0/8] pdx: introduce a new compression algorithm
-Date: Wed, 11 Jun 2025 19:16:28 +0200
-Message-ID: <20250611171636.5674-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.49.0
+	Community Manager <community.manager@xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Anthoine Bourgeois <anthoine.bourgeois@vates.tech>
+Subject: Re: [PATCH v4] x86/hvmloader: select xenpci MMIO BAR UC or WB MTRR
+ cache attribute
+Message-ID: <aEm8LuDrNBqjgaWF@l14>
+References: <20250610162930.89055-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250610162930.89055-1-roger.pau@citrix.com>
 
-Hello,
+On Tue, Jun 10, 2025 at 06:29:30PM +0200, Roger Pau Monne wrote:
+> diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+> index c388899306c2..ddbff6fffc16 100644
+> --- a/docs/man/xl.cfg.5.pod.in
+> +++ b/docs/man/xl.cfg.5.pod.in
+> @@ -2351,6 +2351,14 @@ Windows L<https://xenproject.org/windows-pv-drivers/>.
+>  Setting B<xen_platform_pci=0> with the default device_model "qemu-xen"
+>  requires at least QEMU 1.6.
+>  
+> +
+> +=item B<xenpci_bar_uc=BOOLEAN>
+> +
+> +B<x86 only:> Select whether the memory BAR of the Xen PCI device should have
+> +uncacheable (UC) cache attribute set in MTRR.
 
-This series implements a new PDX compression algorithm to cope with the
-spare memory maps found on the Intel Sapphire/Granite Rapids.
+For information, here are different name used for this pci device:
 
-Patches 1 to 5 prepare the existing code to make it easier to introduce
-a new PDX compression, including generalizing the initialization and
-setup functions so they are both usable by the existing and the new
-compression.
+- man xl.cfg:
+    xen_platform_pci=<bool>
+        Xen platform PCI device
+- QEMU:
+    -device xen-platform
+    in comments: XEN platform pci device
+    with pci device-id PCI_DEVICE_ID_XEN_PLATFORM
+- EDK2 / OVMF:
+    XenIoPci
+        described virtual Xen PCI device
+        But XenIo is a generic protocol in EDK2
+    Before XenIo, the pci device would be linked to XenBus, and
+    loaded with PCI_DEVICE_ID_XEN_PLATFORM
+- Linux:
+    Seems to be called "xen-platform-pci"
 
-Patches 6 to 8 introduce the new compression, with patch 6 adding most
-of the code.  Such patch also adds a unit test to exercise the logic
-easily in user-space.  The new compression is only enabled by default on
-x86, other architectures are left with their previous defaults.
+Overall, this PCI device is mostly referenced as the Xen Platform PCI
+device. So "xenpci" or "Xen PCI device" is surprising to me, and I'm not
+quite sure what it is.
 
-Thanks, Roger.
 
-Roger Pau Monne (8):
-  x86/pdx: simplify calculation of domain struct allocation boundary
-  pdx: introduce function to calculate max PFN based on PDX compression
-  kconfig: turn PDX compression into a choice
-  pdx: provide a unified set of unit functions
-  pdx: allow optimizing PDX conversion helpers
-  pdx: introduce a new compression algorithm based on offsets between
-    regions
-  pdx: introduce translation helpers for offset compression
-  pdx: introduce a command line option for offset compression
+> +
+> +Default is B<true>.
+> +
+>  =item B<viridian=[ "GROUP", "GROUP", ...]> or B<viridian=BOOLEAN>
+>  
+>  The groups of Microsoft Hyper-V (AKA viridian) compatible enlightenments
+> diff --git a/tools/firmware/hvmloader/pci.c b/tools/firmware/hvmloader/pci.c
+> index cc67b18c0361..cfd39cc37cdc 100644
+> --- a/tools/firmware/hvmloader/pci.c
+> +++ b/tools/firmware/hvmloader/pci.c
+> @@ -116,6 +116,8 @@ void pci_setup(void)
+>       * experience the memory relocation bug described below.
+>       */
+>      bool allow_memory_relocate = 1;
+> +    /* Select the MTRR cache attribute of the xenpci device BAR. */
+> +    bool xenpci_bar_uc = false;
 
- CHANGELOG.md                           |   3 +
- docs/misc/xen-command-line.pandoc      |  22 ++
- tools/tests/Makefile                   |   1 +
- tools/tests/pdx/.gitignore             |   3 +
- tools/tests/pdx/Makefile               |  54 ++++
- tools/tests/pdx/harness.h              |  73 +++++
- tools/tests/pdx/test-pdx-offset.c      | 320 +++++++++++++++++++
- xen/arch/arm/setup.c                   |  34 +-
- xen/arch/x86/domain.c                  |  35 +--
- xen/arch/x86/include/asm/cpufeatures.h |   1 +
- xen/arch/x86/setup.c                   |  19 +-
- xen/arch/x86/srat.c                    |  30 +-
- xen/common/Kconfig                     |  25 +-
- xen/common/pdx.c                       | 419 +++++++++++++++++++++++--
- xen/include/xen/pdx.h                  | 216 +++++++++----
- 15 files changed, 1092 insertions(+), 163 deletions(-)
- create mode 100644 tools/tests/pdx/.gitignore
- create mode 100644 tools/tests/pdx/Makefile
- create mode 100644 tools/tests/pdx/harness.h
- create mode 100644 tools/tests/pdx/test-pdx-offset.c
+This default value for `xenpci_bar_uc` mean that hvmloader changes
+behavior compared to previous version, right? Shouldn't we instead have
+hvmloader keep the same behavior unless the toolstack want to use the
+new behavior? (Like it's done for `allow_memory_relocate`,
+"platform/mmio_hole_size")
+
+It would just mean that toolstack other than `xl` won't be surprised by
+a change of behavior.
+
+>      BUILD_BUG_ON((typeof(*pci_devfn_decode_type))PCI_COMMAND_IO !=
+>                   PCI_COMMAND_IO);
+> @@ -130,6 +132,12 @@ void pci_setup(void)
+>      printf("Relocating guest memory for lowmem MMIO space %s\n",
+>             allow_memory_relocate?"enabled":"disabled");
+>  
+> +    s = xenstore_read(HVM_XS_XENPCI_BAR_UC, NULL);
+> +    if ( s )
+> +        xenpci_bar_uc = strtoll(s, NULL, 0);
+> +    printf("XenPCI device BAR MTRR cache attribute set to %s\n",
+> +           xenpci_bar_uc ? "UC" : "WB");
+> +
+>      s = xenstore_read("platform/mmio_hole_size", NULL);
+>      if ( s )
+>          mmio_hole_size = strtoll(s, NULL, 0);
+> @@ -271,6 +279,44 @@ void pci_setup(void)
+>              if ( bar_sz == 0 )
+>                  continue;
+>  
+> +            if ( !xenpci_bar_uc &&
+> +                 ((bar_data & PCI_BASE_ADDRESS_SPACE) ==
+> +                   PCI_BASE_ADDRESS_SPACE_MEMORY) &&
+> +                 vendor_id == 0x5853 &&
+> +                 (device_id == 0x0001 || device_id == 0x0002) )
+
+We don't have defines for 0x5853 in the tree (and those device_id)?
+Maybe introduce at least one for the vendor_id:
+
+These two names are use by QEMU, OVMF, Linux, for example.
+
+#define PCI_VENDOR_ID_XEN           0x5853
+#define PCI_DEVICE_ID_XEN_PLATFORM  0x0001
+
+There's even PCI_DEVICE_ID_XEN_PLATFORM_XS61 in Linux
+
+
+> diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
+> index 79c0e6bd4ad2..31b4411db7b4 100644
+> --- a/tools/firmware/hvmloader/util.c
+> +++ b/tools/firmware/hvmloader/util.c
+> @@ -867,7 +867,7 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
+>          config->table_flags |= ACPI_HAS_HPET;
+>  
+>      config->pci_start = pci_mem_start;
+> -    config->pci_len = pci_mem_end - pci_mem_start;
+> +    config->pci_len = RESERVED_MEMBASE - pci_mem_start;
+>      if ( pci_hi_mem_end > pci_hi_mem_start )
+>      {
+>          config->pci_hi_start = pci_hi_mem_start;
+> diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+> index 8bc768b5156c..962fa820faec 100644
+> --- a/tools/libs/light/libxl_create.c
+> +++ b/tools/libs/light/libxl_create.c
+> @@ -313,6 +313,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
+>          libxl_defbool_setdefault(&b_info->u.hvm.usb,                false);
+>          libxl_defbool_setdefault(&b_info->u.hvm.vkb_device,         true);
+>          libxl_defbool_setdefault(&b_info->u.hvm.xen_platform_pci,   true);
+> +        libxl_defbool_setdefault(&b_info->u.hvm.xenpci_bar_uc,      true);
+>          libxl_defbool_setdefault(&b_info->u.hvm.pirq,               false);
+>  
+>          libxl_defbool_setdefault(&b_info->u.hvm.spice.enable, false);
+> diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
+> index 4d67b0d28294..60ec0354d19a 100644
+> --- a/tools/libs/light/libxl_dom.c
+> +++ b/tools/libs/light/libxl_dom.c
+> @@ -819,6 +819,15 @@ static int hvm_build_set_xs_values(libxl__gc *gc,
+>              goto err;
+>      }
+>  
+> +    if (info->type == LIBXL_DOMAIN_TYPE_HVM &&
+> +        libxl_defbool_val(info->u.hvm.xenpci_bar_uc)) {
+
+I think this condition is wrong. You should always write the value of
+xenpci_bar_uc into xenstore, or only write it if a value have been
+selected. But I guess we already lost the information here about whether
+the value is the default or not, and it's probably not important, so I
+think you should always write the value.
+
+> +        path = GCSPRINTF("/local/domain/%d/"HVM_XS_XENPCI_BAR_UC, domid);
+> +        ret = libxl__xs_printf(gc, XBT_NULL, path, "%d",
+> +                               libxl_defbool_val(info->u.hvm.xenpci_bar_uc));
+> +        if (ret)
+> +            goto err;
+> +    }
+> +
+>      return 0;
+>  
+>  err:
+
+Thanks,
 
 -- 
-2.49.0
-
+Anthony PERARD
 
