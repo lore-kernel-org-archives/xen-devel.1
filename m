@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A61EC71141
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 17:51:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1012053.1390616 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB56C71141
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Jun 2025 17:58:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1012073.1390626 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPPbp-0005GC-4H; Wed, 11 Jun 2025 17:51:33 +0000
+	id 1uPPi4-0006Mh-Up; Wed, 11 Jun 2025 17:58:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1012053.1390616; Wed, 11 Jun 2025 17:51:33 +0000
+Received: by outflank-mailman (output) from mailman id 1012073.1390626; Wed, 11 Jun 2025 17:58:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPPbp-0005Fz-19; Wed, 11 Jun 2025 17:51:33 +0000
-Received: by outflank-mailman (input) for mailman id 1012053;
- Wed, 11 Jun 2025 17:51:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uPPi4-0006Ma-S0; Wed, 11 Jun 2025 17:58:00 +0000
+Received: by outflank-mailman (input) for mailman id 1012073;
+ Wed, 11 Jun 2025 17:57:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YTnm=Y2=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1uPPbn-0005Bu-U8
- for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 17:51:32 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2060c.outbound.protection.outlook.com
- [2a01:111:f403:200a::60c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b33a52c0-46ec-11f0-b894-0df219b8e170;
- Wed, 11 Jun 2025 19:51:29 +0200 (CEST)
-Received: from DS7PR03CA0082.namprd03.prod.outlook.com (2603:10b6:5:3bb::27)
- by DS0PR12MB8019.namprd12.prod.outlook.com (2603:10b6:8:14e::9) with
+ <SRS0=sTmX=Y2=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1uPPi3-0006MU-JY
+ for xen-devel@lists.xenproject.org; Wed, 11 Jun 2025 17:57:59 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20615.outbound.protection.outlook.com
+ [2a01:111:f403:240a::615])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9ab32b98-46ed-11f0-a307-13f23c93f187;
+ Wed, 11 Jun 2025 19:57:58 +0200 (CEST)
+Received: from SA9PR13CA0122.namprd13.prod.outlook.com (2603:10b6:806:27::7)
+ by CY1PR12MB9557.namprd12.prod.outlook.com (2603:10b6:930:fe::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.38; Wed, 11 Jun
- 2025 17:51:25 +0000
-Received: from CH3PEPF00000016.namprd21.prod.outlook.com
- (2603:10b6:5:3bb:cafe::86) by DS7PR03CA0082.outlook.office365.com
- (2603:10b6:5:3bb::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Wed,
- 11 Jun 2025 17:51:24 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH3PEPF00000016.mail.protection.outlook.com (10.167.244.121) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.34; Wed, 11 Jun
+ 2025 17:57:54 +0000
+Received: from SA2PEPF00003F63.namprd04.prod.outlook.com
+ (2603:10b6:806:27:cafe::be) by SA9PR13CA0122.outlook.office365.com
+ (2603:10b6:806:27::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.14 via Frontend Transport; Wed,
+ 11 Jun 2025 17:57:54 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF00003F63.mail.protection.outlook.com (10.167.248.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8835.2 via Frontend Transport; Wed, 11 Jun 2025 17:51:24 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8835.15 via Frontend Transport; Wed, 11 Jun 2025 17:57:53 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Jun
- 2025 12:51:22 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Jun
- 2025 12:51:22 -0500
-Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Wed, 11 Jun 2025 12:51:21 -0500
+ 2025 12:57:53 -0500
+Received: from [172.27.195.250] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Wed, 11 Jun 2025 12:57:52 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,296 +61,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b33a52c0-46ec-11f0-b894-0df219b8e170
+X-Inumbo-ID: 9ab32b98-46ed-11f0-a307-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SDh/NYOK76VAUfe3NsGqu1T3/MPqr8CCvZI3gmkQOWiYtvucNaor135smGAN7awzZfA5zqq4FAH/vw1mz2FTuF6I6WiJ4x+ezkVlgCtHxZY74DaXvhYGjPhDHhwcS0z3WVxYjpZYhFdXEIcvy1MnVWjjTBFa33yT1jBDuUF70+JonvVVXPS6yZqZcJOgL9LE9/GdKVvjHUGbwlgAuRt8AmCkCCPXO8XDqkxyBH/woChVBn3M1lEU8OS/BZNO/5mXyoPIVsypqLZFiD03yQMl53i/phJCLTKcn7gKNd8UMYt6UUGywiIXYDk49B8mIDu0uicsN15vBw5H0b4HDh6RKQ==
+ b=A7Pn6sYUFu+pCIiInod76uhnaRa8DSRWvE5Hol2eeFUgS8qzkl7cp3QcPDQOTWxS3fMCOrzjVcT8ju40ki+HqsLLHz/4tws1TFRKnRnil2U3Q6doRyBXRTzu+4f15EWFvIP5StH5NwZsH6QNSLMKCAM/IXuPsI9JbyyFwFWkkwurKf7c+BDN71gFnwocRtZB+JkvSQjEnyZiX0A5ILLD/cyTSDoEtJ+kAU7qq4BAlibBORe9zAWkDELU6Y8IMn/TDZHwN2pj4HD41sS6tvPRcqFmiG2TSHkdMeuZyvyqw0H+eRCp/kcYy/zUymzW4zZb1Kgik7wApmqaqmky4s0TGA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OGLNAcHMQN3tEn5Sq+wi+jklFsofF17Ha4Z5ZK5ekUI=;
- b=m6VnlhnL6Sj9R+naMbZgq1d6M+CSZqCPsCa5AJ3HCYByS6VaM6y29CCatt+oWQ6lUHdt150OD1FoiFrM6hCEFtA0p2HnZpf/qpwPUVwF40VWzlnG9TZWL2mFW5K7IJyIw22jRsaLeH0XmuEaZN669kGqjUq+zGEZdVLhwtQwfsMqESRXOpiHKUj+3fFvwvdmWK+v/Q9U9gKSvD7I/+S66b0Jy1UFmAulw766PrGVfbVWT6RpeNsC2/HG9zuvzkpA3KEuImWTJI2pASE0rVddDbWuGUm8CcfdqMy5A2NjdafMWZ0CfKdYORQ76KLgToFE/npdaecfcESxpK06Gn20/A==
+ bh=rDDE3QKO9PxUdocv8Y5SLU29UOji/MivnMZSKCYRwEA=;
+ b=H9Ry7MEaidJaNsritpK3wa3Ca9aaPD9PhZ2WH7fYX6lAqi6oFRI5atwtm0aQ2t83zTVkwgdwKqUKtqlUfYRhFYHRQGQQtzdiXPKW1eiff3bezV/yMsOLjUF0gaQdSLRdmfXQq6glUdtpVLf3JYMx/x99yZ7b2PWPpnAcwgYJV9aRUldx5L/Du1cT/qk7WJeRFdIsAJp5luhu6+ExhO98sn/Ds5ixABTOuoPMpa4bTQ2nQsRZSX3Q/53Z8LBP3//1Oe2RoH/ZNHIMnHlJBqFI989GJiJF+k6ogEkZ8MESVtJ/jblFIZTl3Xv3snPPDUXDAmD0BO22UN4wHeODiDev+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OGLNAcHMQN3tEn5Sq+wi+jklFsofF17Ha4Z5ZK5ekUI=;
- b=YTmAHGjgvQZ35G+xnQckZU0RMs2aZcbm+dlTZv/lxCsyrHy+wRZiOm/xocHOqD1/whsf00d5S8nWG0OhNJSwtcYiw2ZcQu7Ce70j1wNfnR2Cj3VuLxKLIEHxKKcxFGyLAar9esWbWFbIihm1Z1XaN0HQqfJfP0tcJnvkDJ8Djvk=
+ bh=rDDE3QKO9PxUdocv8Y5SLU29UOji/MivnMZSKCYRwEA=;
+ b=lmEZNH0hmMKeaHDYbuUtQk9nzxpP1bCLn5T0PjQMiUhjXCZMJvItiT7z64MXbVdZvw3nePzmg3r7HukAy10D37RzWjsF7CzLCDF4rN6BahxfrKTzEesUCzXoyU0b+2slaDtprMEbqobg41I/I1nbDl6mOaxLcFCPwYYeMhkfun4=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [PATCH v5 2/2] tools/arm: exclude iomem from domU extended regions
-Date: Wed, 11 Jun 2025 13:51:04 -0400
-Message-ID: <20250611175106.269829-3-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250611175106.269829-1-stewart.hildebrand@amd.com>
-References: <20250611175106.269829-1-stewart.hildebrand@amd.com>
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <07ef8905-c7c2-4745-9e8d-a8e1e3430195@amd.com>
+Date: Wed, 11 Jun 2025 01:18:56 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] x86: FLUSH_CACHE -> FLUSH_CACHE_EVICT
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <1491ce61-6aff-4542-8bc1-d7db1324cce3@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <1491ce61-6aff-4542-8bc1-d7db1324cce3@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: stewart.hildebrand@amd.com does not
+Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000016:EE_|DS0PR12MB8019:EE_
-X-MS-Office365-Filtering-Correlation-Id: 369f911f-cf31-4ca9-d5e8-08dda9109558
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F63:EE_|CY1PR12MB9557:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5479a85-843c-44e0-7132-08dda9117d3d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|82310400026|376014|1800799024;
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024|7053199007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?7iqFYPSaJBweMpj9Ldb35LKxV6mXE1vQapHUx06ySHGTXMGKJh7RD5M8Poxr?=
- =?us-ascii?Q?6SjE4Ew9dQTfU0Nld4VzTUyXWN85pQ3dTDj/0k2F3bRBSFeacnQ2w6Pd1ZRR?=
- =?us-ascii?Q?HaPobUQgLFSqWyr0emPQQDAzysoMrrRD823DtBcQ5crk2huheJbaXKPKE+DH?=
- =?us-ascii?Q?SaSOLbU/ZKrwJ4gl1h5463jZSOAv/hKu/vQb0prOH+/pUZX6+d1y5PjtoIKa?=
- =?us-ascii?Q?hefl3+F0UiToxzqp2L1cgYUaEkfZVP6DQCaIihS629ggLMICrbqRqDw+wXml?=
- =?us-ascii?Q?kTXSZhU8yGJ0/LDdjlc/ta4Ta7qo6NWxivIyiUMYRcUovwNotTd1neg2LCU5?=
- =?us-ascii?Q?QYiO124W+qhJDdFDFVHzs34Wkgyv+sSOyvo/4NkYhwLMEYgYmmikqE8yhAEE?=
- =?us-ascii?Q?1obXLoWfaRL6HzQmwA0+JPHRwKMzDIvCcFt6n73sEiz+W89U9y8pLGqn2wT9?=
- =?us-ascii?Q?gLkgWVBErE2KNIFKh+ReBsTL5v62jwAM2lwzwOJZa4HjMrK7kGX/dfqB1Tzz?=
- =?us-ascii?Q?yIL0nq56HINGXfily0bNL/dcjNM0EQgn7QcAJuOWN5htFJblb8xkZYVoLEvb?=
- =?us-ascii?Q?olXEUQ6p1CSOBaaP4qLsQDm0fKcWd/ig9pU08NgT7WY82563VdaHU0RM0LF0?=
- =?us-ascii?Q?oXb0T+F6Faya6YaAGpJWV+c9n1a1to1kiUMVkohJEj5JfUapbMpNsMwXdwpf?=
- =?us-ascii?Q?/loTrai9wSXkkW0Pci/4K4fERYGgjtgNdvSprBCq6eV/kGaCvM1Nt8pw1XZM?=
- =?us-ascii?Q?tRe0/udPDcMr31Xfrchu9MUKT1xnuBNOTVRyf1n91GfC88cR16lRzOLudoMB?=
- =?us-ascii?Q?45//6CkAYKebLKOvrz9zuKYNwODU7W3emw32cA0T/BNRk1r0Ef8UJtwAS0Ux?=
- =?us-ascii?Q?4PQoqiqFHNhlopcUOCi8rf+OL6b8SNJJPRZE0o692UI/h/OuDHVAbmBy3qqd?=
- =?us-ascii?Q?ru9mHAmZBXtpwQ/zd08NP2vXJCRRNxxdCUQLnSqETtm+mCHJwnAUK4pF4Bfy?=
- =?us-ascii?Q?aXpmIf2pqdofIqIH5IyBFXrjisEqwLfKYs3LAA5ZlcBZHjaYAoVqEIlY7usc?=
- =?us-ascii?Q?8Ot11FzTfubiuPStSOuzCzr34cn1ArCeccAXedBclaf0cp2hGcwWzm4h8Oec?=
- =?us-ascii?Q?LPxGMTyx/aA28NjTkLe99oBr+YLRTZ/MaLESsCY0RZkzj4qOaWynXflwY13t?=
- =?us-ascii?Q?nygsHS7rSGJ3m8GuEXp4UnjR884jt7v2u0S6nQs5TBKBFcnVRSDwwcUVv+FE?=
- =?us-ascii?Q?T3OkDLQd3dN/UeiFSlb4Nrc3utItYghp6ebUfin7UcQ5+/xoI7UuXix5H81r?=
- =?us-ascii?Q?r298kCeE+gWnt8NZagrHX5LJVcf4TlQcNwnjXjOdJYXHXMCeTK6vaeH4ATCW?=
- =?us-ascii?Q?Kl4WlEu2MlY4Yjx3Jo3RuHHKOXNBgsYVcf4aPHWunGuDl6CCd8lIJkQLuzz/?=
- =?us-ascii?Q?KQebHvjqufmftvnVNUGT+5wlLgavQFXddXBmbbdaAkiHt7W6VENrs7tC05ep?=
- =?us-ascii?Q?YF2W4VQaVgFL5uE=3D?=
+	=?utf-8?B?dTdIUjZ2ZnNXb3RHWnRwYWU0aFlucFFEQXZBVUZ2SWhtV1drREt4V2U0ek5q?=
+ =?utf-8?B?ZlZaTzRVb2RVWjdqOUI4cjlCVzk0RkVmUW90dFg3RCtpOFpIcnpIZGVpaFZ4?=
+ =?utf-8?B?RlQySVM5UkxJdFRPU3JYNWhCZ0hNTjZvRGU2YmlDblV6cC9CUlVKRXhQb0xr?=
+ =?utf-8?B?RWZDQXlURnpUdFdpYUZEWUp6OHJpSTBpbmhZV0kxbXRYMWwzOVROTEUxQXZh?=
+ =?utf-8?B?cE0yZDZUTHpMRmpzbUhpZng4ZmlRM2pKdnMzd1NSejdOdE5MK2laU1d4Mm1M?=
+ =?utf-8?B?V2UweE5IMDdqMy8vMGZ0RWdPSkl0cGNKS2FEN1BDa2lHNStHamh0bC9WV2dh?=
+ =?utf-8?B?YlZINXZQb1ZKMzNYZUtxQlJacnRZOThYUGQ4WUdiaXVJWkp2cDNHZ1lNd0ov?=
+ =?utf-8?B?UEoveUdzdTdJRzZpL09ISFlIckQ2bWhRZHY0L2xXRnVDRnhjNDlodk9tL0xG?=
+ =?utf-8?B?RnJyVzBMd3R5eFQvUnhDQWp4UGRQQU5qTUlrNjE5aFNJcDNNamNSc3RqcW02?=
+ =?utf-8?B?OUY3OGNMUG9kRHdRU1pyaVRTTklvOGNkZEJiNjlwZ1psZGF3ZktDMTBuWDZQ?=
+ =?utf-8?B?R2x2WnFldXhGYjBid3pOQ3VicHZVaDBURkV5UnRkSHJKdTVzdU9PRDFDc3BX?=
+ =?utf-8?B?bmY0ZmJJTEdndFNDdC84QUJoMk9vZXYwdDl4YXdQZ3FZZFRhYjY0WW5jWGdh?=
+ =?utf-8?B?SHZBRkR0NXYvVkVpUTRJZytJZkxzZDU4anpHdlNVcW9INzEwd3ROdnljanM0?=
+ =?utf-8?B?eEZzcXo3b2ZMakNtOXhiWmd1RjhKUnI2cEhXcjRzcTdEQXlsN2hxalZWcE1s?=
+ =?utf-8?B?YzVMUm1SQncyUFQvTzJ2cllDelhsSHNZSE5RNlJMRlpsUHZsdmVVUER6b2g0?=
+ =?utf-8?B?V1N0ejQ5WnRBbytLUlUvZnV6WUduK3hyL0V5WFJlMThKU2hxQno2dTkzbDF5?=
+ =?utf-8?B?QTdtUUN0YytjdVN4ekhqZk14dlBSTEZhbmpvT2dUd2VMWVlyeUYzYnV3Znpu?=
+ =?utf-8?B?WWVsdE9rR3FjQXhlbWtlVjF6MCtLeWVQMVR1QUdoK2ZmY0l4THZMMUJLSE9r?=
+ =?utf-8?B?cFhnRktkK1lHSUpjL1ZTTWMyWXZxZklsS1Znem9DbWVvM0xKQ0paSzI1bW9v?=
+ =?utf-8?B?Z3pWQk16ZW8ySkgwSHpLWXV6ZG5wU1QrSEcza3VaS1FvS09UNWpSRittTjRt?=
+ =?utf-8?B?a2RlU1Iva0gramlpeUpBdmJEUlc1VlRXM0ZsQjZReHEyWjJxc29JTjBWUmtD?=
+ =?utf-8?B?SzdiUDBtcmVFdUtCeXpzeXN6cWswSENyeUdIVm5xMFdGWG9GbDRValpSeTgr?=
+ =?utf-8?B?U0NPTzg0Q1ZyWG5MK1ZORXkxVCt3S0lSK1VTMkVrM1E1MG9yWmpyRllpbVVV?=
+ =?utf-8?B?ZVFXcGJ0NTl5L3FlMDhTTXdvZVczVHJVTUFsTTZuQ2JyTFJkZEFhQldpS2JY?=
+ =?utf-8?B?djlpZ2psaDNEZWc3UDhGM3FYbHRDWDZCY1A1a0hIRWFKam1aTjE1SnFoR2o1?=
+ =?utf-8?B?RWxtRjRCYXFMVys4Uk9rdFRPdThQalpxVDc3aTZxcW1vOFpOQ2w2TTdDcWRE?=
+ =?utf-8?B?Y3gybCtqT2toQW5nK0VhcFduMFhnbEJLY1RUb0pod0kySXYzRUs2SlFkL3pa?=
+ =?utf-8?B?SHR4SzNSbDF1U3pHNS95S3hRNG5jK3dKWGlRUlVCN1F3Y2FOVGx1OHpXRVhO?=
+ =?utf-8?B?QXpRQVl1TVNXdzFRVVZ4TUdZNW1kTDMzeDFSb25OS2UyVHJhbnVRSlJIUDZR?=
+ =?utf-8?B?NW90NXBUb21MRnZOd2pxbHpnc2ZXU01FaFNlTm02ZytMV3RrRHBvQ1c4MXR6?=
+ =?utf-8?B?Z2gwR1JkbWZ1RExGMlBPUHJZNWI1V2UzNlMxSHRqRC8waXRvRkxGZyt4eG5Q?=
+ =?utf-8?B?TkxWcjhqemkrQnBWNHNudXdDdWZacE9PZm1pbmErc3JpcTc1OE9Wa2gxMEZU?=
+ =?utf-8?B?Q29QUDJxN1EzQktvNXMxQVNEWjFsczNBbTZWckFxc2dzOTFCd1FBYit4Zmt4?=
+ =?utf-8?B?bVVwUUgrYU9KelBnRWZuS3dEVCtlZzRBb010eElqaVNXMG1pazZWK1orZGR2?=
+ =?utf-8?Q?XEkg2I?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(7053199007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 17:51:24.6125
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 17:57:53.6468
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 369f911f-cf31-4ca9-d5e8-08dda9109558
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5479a85-843c-44e0-7132-08dda9117d3d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF00000016.namprd21.prod.outlook.com
+	SA2PEPF00003F63.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8019
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR12MB9557
 
-When a device is passed through to a xl domU, the iomem ranges may
-overlap with the extended regions. Remove iomem from extended regions.
+On 2025-06-11 06:02, Jan Beulich wrote:
+> This is to make the difference to FLUSH_CACHE_WRITEBACK more explicit.
+> 
+> Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
----
-Not sure if we need a Fixes: tag, but if we do:
-Fixes: 57f87857dc2d ("libxl/arm: Add handling of extended regions for DomU")
-
-v4->v5:
-* add Anthony's R-b
-
-v3->v4:
-* use "else" instead of continue + another if statement
-* remove assert
-* s/iomem.end >=/unallocated.start >/ in two conditions
-* new variable to distinguish unallocated size from region size
-* print base + size - 1
-
-v2->v3:
-* no change
-
-v1->v2:
-* no change
----
- tools/libs/light/libxl_arm.c | 110 +++++++++++++++++++++++++++++------
- 1 file changed, 91 insertions(+), 19 deletions(-)
-
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 75c811053c7c..3086c52acf83 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -798,6 +798,8 @@ static int make_timer_node(libxl__gc *gc, void *fdt,
-     return 0;
- }
- 
-+#define MAX_NR_EXT_REGIONS   256
-+
- static int make_hypervisor_node(libxl__gc *gc, void *fdt,
-                                 const libxl_version_info *vers)
- {
-@@ -821,7 +823,7 @@ static int make_hypervisor_node(libxl__gc *gc, void *fdt,
-      */
-     res = fdt_property_reg_placeholder(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-                                        GUEST_ROOT_SIZE_CELLS,
--                                       GUEST_RAM_BANKS + 1);
-+                                       MAX_NR_EXT_REGIONS + 1);
-     if (res) return res;
- 
-     /*
-@@ -1517,17 +1519,29 @@ static void finalise_one_node(libxl__gc *gc, void *fdt, const char *uname,
- 
- #define EXT_REGION_MIN_SIZE   xen_mk_ullong(0x0004000000) /* 64MB */
- 
--static int finalize_hypervisor_node(libxl__gc *gc, struct xc_dom_image *dom)
-+static int compare_iomem(const void *a, const void *b)
-+{
-+    const libxl_iomem_range *x = a, *y = b;
-+
-+    if (x->gfn < y->gfn)
-+        return -1;
-+    if (x->gfn > y->gfn)
-+        return 1;
-+    return 0;
-+}
-+
-+static int finalize_hypervisor_node(libxl__gc *gc,
-+                                    libxl_domain_build_info *b_info,
-+                                    struct xc_dom_image *dom)
- {
-     void *fdt = dom->devicetree_blob;
--    uint64_t region_size[GUEST_RAM_BANKS] = {0}, region_base[GUEST_RAM_BANKS],
--        bankend[GUEST_RAM_BANKS];
-+    uint64_t region_base[MAX_NR_EXT_REGIONS], region_size[MAX_NR_EXT_REGIONS];
-     uint32_t regs[(GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) *
--                  (GUEST_RAM_BANKS + 1)];
-+                  (MAX_NR_EXT_REGIONS + 1)];
-     be32 *cells = &regs[0];
-     const uint64_t bankbase[] = GUEST_RAM_BANK_BASES;
-     const uint64_t banksize[] = GUEST_RAM_BANK_SIZES;
--    unsigned int i, len, nr_regions = 0;
-+    unsigned int i, j, len, nr_regions = 0;
-     libxl_dominfo info;
-     int offset, rc;
- 
-@@ -1542,20 +1556,82 @@ static int finalize_hypervisor_node(libxl__gc *gc, struct xc_dom_image *dom)
-     if (info.gpaddr_bits > 64)
-         return ERROR_INVAL;
- 
-+    qsort(b_info->iomem, b_info->num_iomem, sizeof(libxl_iomem_range),
-+          compare_iomem);
-+
-     /*
-      * Try to allocate separate 2MB-aligned extended regions from the first
-      * and second RAM banks taking into the account the maximum supported
-      * guest physical address space size and the amount of memory assigned
-      * to the guest.
-      */
--    for (i = 0; i < GUEST_RAM_BANKS; i++) {
--        region_base[i] = bankbase[i] +
-+    for (i = 0; i < GUEST_RAM_BANKS && nr_regions < MAX_NR_EXT_REGIONS; i++) {
-+        struct {
-+            uint64_t start;
-+            uint64_t end; /* inclusive */
-+        } unallocated;
-+        uint64_t unallocated_size = 0;
-+
-+        unallocated.start = bankbase[i] +
-             ALIGN_UP_TO_2MB((uint64_t)dom->rambank_size[i] << XC_PAGE_SHIFT);
- 
--        bankend[i] = ~0ULL >> (64 - info.gpaddr_bits);
--        bankend[i] = min(bankend[i], bankbase[i] + banksize[i] - 1);
--        if (bankend[i] > region_base[i])
--            region_size[i] = bankend[i] - region_base[i] + 1;
-+        unallocated.end = ~0ULL >> (64 - info.gpaddr_bits);
-+        unallocated.end = min(unallocated.end, bankbase[i] + banksize[i] - 1);
-+
-+        if (unallocated.end >= unallocated.start)
-+            unallocated_size = unallocated.end - unallocated.start + 1;
-+
-+        if (unallocated_size < EXT_REGION_MIN_SIZE)
-+            continue;
-+
-+        /* Exclude iomem */
-+        for (j = 0; j < b_info->num_iomem && nr_regions < MAX_NR_EXT_REGIONS;
-+             j++) {
-+            struct {
-+                uint64_t start;
-+                uint64_t end; /* inclusive */
-+            } iomem;
-+
-+            iomem.start = b_info->iomem[j].gfn << XC_PAGE_SHIFT;
-+            iomem.end = ((b_info->iomem[j].gfn + b_info->iomem[j].number)
-+                         << XC_PAGE_SHIFT) - 1;
-+
-+            if (iomem.end >= unallocated.start
-+                && iomem.start <= unallocated.end) {
-+
-+                if (iomem.start <= unallocated.start) {
-+                    unallocated.start = iomem.end + 1;
-+
-+                    if (unallocated.start > unallocated.end)
-+                        break;
-+                } else {
-+                    uint64_t size = iomem.start - unallocated.start;
-+
-+                    if (size >= EXT_REGION_MIN_SIZE) {
-+                        region_base[nr_regions] = unallocated.start;
-+                        region_size[nr_regions] = size;
-+                        nr_regions++;
-+                    }
-+
-+                    unallocated.start = iomem.end + 1;
-+
-+                    if (unallocated.start > unallocated.end)
-+                        break;
-+                }
-+            }
-+        }
-+
-+        if (unallocated.end >= unallocated.start
-+            && nr_regions < MAX_NR_EXT_REGIONS)
-+        {
-+            uint64_t size = unallocated.end - unallocated.start + 1;
-+
-+            if (size >= EXT_REGION_MIN_SIZE) {
-+                region_base[nr_regions] = unallocated.start;
-+                region_size[nr_regions] = size;
-+                nr_regions++;
-+            }
-+        }
-     }
- 
-     /*
-@@ -1565,16 +1641,12 @@ static int finalize_hypervisor_node(libxl__gc *gc, struct xc_dom_image *dom)
-     set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
-               GUEST_GNTTAB_BASE, GUEST_GNTTAB_SIZE);
- 
--    for (i = 0; i < GUEST_RAM_BANKS; i++) {
--        if (region_size[i] < EXT_REGION_MIN_SIZE)
--            continue;
--
-+    for (i = 0; i < nr_regions; i++) {
-         LOG(DEBUG, "Extended region %u: %#"PRIx64"->%#"PRIx64"",
--            nr_regions, region_base[i], region_base[i] + region_size[i]);
-+            i, region_base[i], region_base[i] + region_size[i] - 1);
- 
-         set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
-                   region_base[i], region_size[i]);
--        nr_regions++;
-     }
- 
-     if (!nr_regions)
-@@ -1626,7 +1698,7 @@ int libxl__arch_domain_finalise_hw_description(libxl__gc *gc,
- 
-     }
- 
--    res = finalize_hypervisor_node(gc, dom);
-+    res = finalize_hypervisor_node(gc, &d_config->b_info, dom);
-     if (res)
-         return res;
- 
--- 
-2.49.0
-
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
