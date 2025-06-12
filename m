@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63521C61CE8
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 11:11:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1012868.1391361 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9331FC61CE8
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 11:16:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1012878.1391394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPfph-0002aq-1i; Thu, 12 Jun 2025 11:10:57 +0000
+	id 1uPfvB-0003Wq-3U; Thu, 12 Jun 2025 11:16:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1012868.1391361; Thu, 12 Jun 2025 11:10:57 +0000
+Received: by outflank-mailman (output) from mailman id 1012878.1391394; Thu, 12 Jun 2025 11:16:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPfpg-0002aj-VC; Thu, 12 Jun 2025 11:10:56 +0000
-Received: by outflank-mailman (input) for mailman id 1012868;
- Thu, 12 Jun 2025 11:10:55 +0000
+	id 1uPfvB-0003Wj-0M; Thu, 12 Jun 2025 11:16:37 +0000
+Received: by outflank-mailman (input) for mailman id 1012878;
+ Thu, 12 Jun 2025 11:16:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NbtP=Y3=gmail.com=andy.shevchenko@srs-se1.protection.inumbo.net>)
- id 1uPfpf-0002ad-F9
- for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 11:10:55 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
+ <SRS0=PGhi=Y3=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
+ id 1uPfv9-0003Ie-Kg
+ for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 11:16:35 +0000
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20f::7])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e7452c4d-477d-11f0-b894-0df219b8e170;
- Thu, 12 Jun 2025 13:10:53 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ad56cbc7b07so132280066b.0
- for <xen-devel@lists.xenproject.org>; Thu, 12 Jun 2025 04:10:52 -0700 (PDT)
+ id b2d16bd5-477e-11f0-b894-0df219b8e170;
+ Thu, 12 Jun 2025 13:16:34 +0200 (CEST)
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by VI0PR03MB10784.eurprd03.prod.outlook.com
+ (2603:10a6:800:262::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.27; Thu, 12 Jun
+ 2025 11:16:21 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::35ac:8893:c31c:b971]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::35ac:8893:c31c:b971%6]) with mapi id 15.20.8835.018; Thu, 12 Jun 2025
+ 11:16:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,122 +49,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e7452c4d-477d-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749726652; x=1750331452; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9nBrpMK9zZeZHFNOhk7Yg3FOCL/mJbGGTtA0TEp4ISs=;
-        b=kRCeEXcxL7MBg+hY/9JszHsWJUfWhRVQQdjPh3hgdn1eViGPuvLqq8lJeaKqIKLQA5
-         ASkPQnKNtF1V7XOKQK4izHqyiKC0ka191/uq9iYSgk3ox58r4mG3ttcSEOXvYY1XNL09
-         wVvXD/OjF4laUDlB88k2OZQ4Fa49pd08Zfa9ODqn/G75REnMx7SYyL/VSSe9mJZMNrU0
-         d8gJ0fD7Kj2NhXgJQs3LqeIadnp9sgEwd+rxOAwbx82XeUmQOa6GD06U7QQc6ZxrQHQO
-         fZtzaOxngVlKOmYlgoNCGFqzHE111n/DJowM1mfiSHMSq8qsqRmsDzva2hzgpKvOWoY2
-         UraQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749726652; x=1750331452;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9nBrpMK9zZeZHFNOhk7Yg3FOCL/mJbGGTtA0TEp4ISs=;
-        b=Ybm5wQfmB7c82A4G9AjlcKoTtBwgVbPjHQtWRAneAc68Yo+nl6JAHMw1NamFaeOSzy
-         g0QUb3Hk4fFr1daC5Xz9su6lcd6/joDrXVmGnR2I2I8znG6i4tQ6AYevGuuNQUjoxYi0
-         c2i5T71BvvCXhwMdGvWGwnUlZjD56mM9aSXFPTv4fE0iBexT6d8YknJK53RUlA8qpKQm
-         eoHv5L2JPjKfreP3LKkBvwl3hn18p608TrmhpQKKJT7xpM+l+HErG0DN4A5xk7jkzsHu
-         lZ/oRyRD8GMTevdzJMPu7xbm7l9/1lCRZciyaH2OCRvEwgPjBP8e3XPMwvHjvY7xf0gI
-         qs5Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUKs4uaj3G2LIN1JSwsry3TApBIs8JlhyNPXQye5DoQ/Qp5VwFoR558GLTgWlzGAa8alSrhTrFZHQ0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwfKZmEjml+vwVpbbDgALmEb19+JGzqsNXl16IMrIa4cLDj3fWM
-	iK5oO5aYMcjMKuKKFByOvL1erx5q8bs2qlPGGmQKWHT+zzpiuW5JXCsCqwqhuVDG9M7nRHH5Dtp
-	Y8kEM19+paFc3DVMcH96USJpLBGrgUvU=
-X-Gm-Gg: ASbGncuQP1CbohDbeYhzAMFq0UmUxLIdo+rMoX7+GpzlnzqxlDluLqU2Hiko7xb9Ims
-	Bu6hyB3MRb2WlPrlNuffBcCigbenr6hJEosggukLOJd4/17ICiLr46ZOYWQuBAzRufV9hpsL4wf
-	Hse0yyrJXeTRhvuMN0TkduF8rnoZiGh1xcxCJREST6Xe8=
-X-Google-Smtp-Source: AGHT+IFrX17XfYVkjVnepz8BihCrbdN9elHb1a1FwyoMbX0yLjH2EltV5lWsECJ7oLshTrIE21PMDORFUypei4zXNLs=
-X-Received: by 2002:a17:907:980f:b0:ad8:a515:767f with SMTP id
- a640c23a62f3a-adea9464061mr258576566b.51.1749726651742; Thu, 12 Jun 2025
- 04:10:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250612093228.7655-1-chengzhenghan@uniontech.com> <84b14425-03e4-42be-8bd5-9bc010ebecda@suse.com>
-In-Reply-To: <84b14425-03e4-42be-8bd5-9bc010ebecda@suse.com>
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Thu, 12 Jun 2025 14:10:15 +0300
-X-Gm-Features: AX0GCFubP_i495cQIkoSGfjK4G9pwjz7TYfQyvgZfj4JA8pwuaopIL7tecp4u7I
-Message-ID: <CAHp75Vc7AO_sRgB1Nj6CevbseMFyv5ku8ZS3PwzAuAgysKVxNg@mail.gmail.com>
-Subject: Re: [PATCH] x86: Fix build warnings about export.h
-To: Juergen Gross <jgross@suse.com>
-Cc: Zhenghan Cheng <chengzhenghan@uniontech.com>, tglx@linutronix.de, mingo@redhat.com, 
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, 
-	mario.limonciello@amd.com, yazen.ghannam@amd.com, jpoimboe@kernel.org, 
-	tony.luck@intel.com, jarkko@kernel.org, bhelgaas@google.com, 
-	pbonzini@redhat.com, oleg@redhat.com, jbaron@akamai.com, ning.sun@intel.com, 
-	seanjc@google.com, luto@kernel.org, andy@kernel.org, jim.cromie@gmail.com, 
-	kirill.shutemov@linux.intel.com, hpa@zytor.com, 
-	pawan.kumar.gupta@linux.intel.com, vkuznets@redhat.com, rostedt@goodmis.org, 
-	ardb@kernel.org, thomas.lendacky@amd.com, nikunj@amd.com, 
-	ashish.kalra@amd.com, kees@kernel.org, alexandre.chartre@oracle.com, 
-	rppt@kernel.org, steve.wahl@hpe.com, jirislaby@kernel.org, 
-	apatel@ventanamicro.com, bvanassche@acm.org, ptsm@linux.microsoft.com, 
-	Jonathan.Cameron@huawei.com, beata.michalska@arm.com, xin@zytor.com, 
-	davydov-max@yandex-team.ru, ravi.bangoria@amd.com, joel.granados@kernel.org, 
-	ffmancera@riseup.net, kprateek.nayak@amd.com, akpm@linux-foundation.org, 
-	bhe@redhat.com, brgerst@gmail.com, coxu@redhat.com, dmaluka@chromium.org, 
-	linux-kernel@vger.kernel.org, linux-edac@vger.kernel.org, 
-	linux-sgx@vger.kernel.org, kvm@vger.kernel.org, 
-	virtualization@lists.linux.dev, tboot-devel@lists.sourceforge.net, 
-	nouveau@lists.freedesktop.org, linux-coco@lists.linux.dev, 
-	xen-devel@lists.xenproject.org, Huacai Chen <chenhuacai@loongson.cn>, 
-	Zhenghan Cheng <your_email@example.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Inumbo-ID: b2d16bd5-477e-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ADAuQgNA5rxQJyf6nz96YsB7UH2GLqcCiYOM/0PaXWsE3xoKe5otAbeynLz548HCVximD0dUKkiA5pdsq74bcNtF+vtCb2UUYwmM5W2QehEjGqUmJWpYTzV8052bEQ3ed59mRF4q9is+MGxns17w/dICS/UFbxogj9JaiGbXTMV0PKSaZVaewYvZAsxF6RD5WMtj+DhSBt+6RAuQNutb9x9q11uUvL8mnPAj2h3RYyu3FP4agUaO71YWwfnMXyGyBn991WzKUlbipeB9IEGtGWBR+YKBZ+VbTCQs9PRkiW5RRvneFDjWBRobNw57zbHB/hjc8dkLsZy+YepAdLhMGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TzXvj2JuD24fqznd8IDEh0oZUbY/zpRj9p3MFbrJ02s=;
+ b=SHHxg3E8WDfmtPOVbwwRU4D5mXsFRuad6d/lCNVNQkd7yZOfRsfTy6dGgNfHeOqzN+q3kcTW753Fdf1IZevwmJsAqmgNG929C9X3kzagtpfsTWs/62TIgoxzWCqZ1jmw99I2S1GkfJ1rwjc4bFS7+TEZfo0HPCVrVg7kJXoLyepu+Ng1yjZ1Xw7HVwJH6s6gUbYF76YHqqD5lIWT6WP5aSnY6dYatwgKbIFMF6H+H4TUXMoo3sgi2G6avAacXIOQQN5hULfGlBHw0I2M/gDjdtlLYVkpDIPmIDJKvuLb4QdaAXrmB7+aI8MWQWiypigda352OR+ooBQBNuJp0VpIVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TzXvj2JuD24fqznd8IDEh0oZUbY/zpRj9p3MFbrJ02s=;
+ b=gKZmoa1NRv/rolPJpUE7iUji+2fiHSXw6e2ac/TorY5yVSjDCIuOS49dI4PvwcgzhTDQcMr83b8HUDpLIsP4+qqEPf/I92r6Yfu4W0A+gvWZzArF0GxNoIhTas7v49DNLxhQz5K55PbhLs3gH/l/xC40f6H+eHJ02Py08M0XOgHW9JQIOdVNn1Kc026l5Uxlc1mlnz6UNdmSU/aXDqhaDkgFBHfdTvF7zYaSUlT/buvUP4v7+I8LJOkBs5eNgu8kCJWUSxBzf+brgYcOhDbcKzzGl6/EmSbT+vHOmbfC2Yw/NaP5AAGKSUzuqOlIpRsg7xTvEV1gIuO0UATqFvE5hA==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Mykyta Poturai
+	<Mykyta_Poturai@epam.com>
+Subject: [PATCH v6 1/4] xen/arm: allow PCI host bridge to have private data
+Thread-Topic: [PATCH v6 1/4] xen/arm: allow PCI host bridge to have private
+ data
+Thread-Index: AQHb24ts9Pkj/p3l80mPyHDDabUuhA==
+Date: Thu, 12 Jun 2025 11:16:20 +0000
+Message-ID:
+ <5c499d459f8d426a395e973f429d542040e16db3.1749720912.git.mykyta_poturai@epam.com>
+References: <cover.1749720912.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1749720912.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|VI0PR03MB10784:EE_
+x-ms-office365-filtering-correlation-id: 9353f9d0-a90f-423c-c47b-08dda9a28f48
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?x/HZeJlaisJo8rpQH1XKqdnZ33bHS2ukRDBMlinyVeM7l1naSUiHXH/GGD?=
+ =?iso-8859-1?Q?2heb6JQiYuYuAcT1DmHKCLwcFJKvGx0drM2WN5gaFAYW9SSFFjj2cWWl3w?=
+ =?iso-8859-1?Q?9MPN1m0Se5EtRdxkmLdjRArqMOn22Nw0ZmDVziB8iXazhZHsRAMxRtodSw?=
+ =?iso-8859-1?Q?7Xwrh2Uluhngelz7d67+qaJ5v36tbzZ4lNtpNhEiGrB9LsxP85x211ZYe6?=
+ =?iso-8859-1?Q?QFqQPB1i7BYo4d5yQCRjJhSHSqtCb4il7Hp8FQd6oBAEXzjKXcrmii68Lf?=
+ =?iso-8859-1?Q?/I0KA0a7Bjf6R4vOcko5OqR1PlxkAJy7OwiV9VA/5lFOLBoi0M1PDxqZNF?=
+ =?iso-8859-1?Q?MC9anjiH8WHKI5DgyszOQX0Vh8Kq87Qwdt8qMU1LRS6iTQ7slafKJLg/oM?=
+ =?iso-8859-1?Q?nYKL7SSXCZnE2X4LlelcEAgoadDfNUL2h9OGv6i+H+Bkx2rMgR7NjRephw?=
+ =?iso-8859-1?Q?YLxpxH08fh89TUb2oU11qMIRhMFTmJ4knmVXpU8t/KNhfxV9NF8iTI9d8A?=
+ =?iso-8859-1?Q?CTV1Eeq2A3OZmi3ma8PxX0GP+zhU3y2VrO+B0ZlMC2Ml8s2ID2QIK/aiI7?=
+ =?iso-8859-1?Q?wKY/zza8/ryqwmlQfwOdCMfnNC0Psz7L7f2ibNobvJENVnYRQU6zIAt+cI?=
+ =?iso-8859-1?Q?0PHDl5pWa2Amdgulbn6pYpY94cOtLWg8vKX3b3fg+dNZWDye4TtahsDwnp?=
+ =?iso-8859-1?Q?QBq2eyjDAvYx/nEwxI0Euf1pqW9ifSVksO6OwIyFRItbRzD+8V7QtQxLjd?=
+ =?iso-8859-1?Q?OM9B11/vCjinOlybUE3C3M4NU3ugUUV/4/akf7cxtwBIO64cUCvKzdL8um?=
+ =?iso-8859-1?Q?C32gO2ksFho+zIkUKwsxvNxmlBWOiAc8TNlQ6snOy5IA174gATC9pE2RLt?=
+ =?iso-8859-1?Q?aOFmjp7YqBFYSHW3zD1QuOYbY8PmAbnAKii3T9QvNJXmRcoTlVjmz/lpHa?=
+ =?iso-8859-1?Q?6xa4xrGgsta/BJS3qBzKB/14KzrmzV/hITLghzSilwOl1BOi6Jh/QVIIU3?=
+ =?iso-8859-1?Q?Nl1t2E9mkA81hvG36SYAAVVaZWuSPPNBL+g68IsGOUNCe203SHRWnOnuFm?=
+ =?iso-8859-1?Q?4mDVCCham5r/H0YgLQcO1rhUrmJyzKSR69WEHlepXWcB7mq7cAuoxKGCr/?=
+ =?iso-8859-1?Q?tSf0oG/YvgoUM6RwK4siCOHQmwyDoofF15eZ+xwtWaPBJiCrtA78RPEImQ?=
+ =?iso-8859-1?Q?DpzSCJFcOMcBeUXkQ3Wnz8ByT34nhz0VGoiD+OxJJosmxLwPgMLS+xlk9x?=
+ =?iso-8859-1?Q?GKlmrbmMoPvHll5XB37+uoJfcr/8EAA4ZwTHPu4/JCcghqJf5r0438kjQ7?=
+ =?iso-8859-1?Q?2cUXAgY5QJ8xMpX6fk7CljdTvEJdNTjIwR/BujyDYvt0DQPllDewhbY5DT?=
+ =?iso-8859-1?Q?avBEklEOg2GlAvBSHbfxlGIqXsIoym049eX2D//lalpVBNu6EyzIUxXePM?=
+ =?iso-8859-1?Q?pQtOpM345YT2yeoKfU6pZjYOlD4FGgja27LRbaI494AD4YS0ykPfIYZTok?=
+ =?iso-8859-1?Q?sq6DfeLrWOtXeAnUsFJE4Y8k++sqtSIWCaapw/XieEDu4NbvYlrWGZ4POD?=
+ =?iso-8859-1?Q?tB8KDhU=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?mKlQjHtIEkpIr5lxWek5ROHRNTwC+JlydlCFCFEu+8vxi2H0DwfD9/zobx?=
+ =?iso-8859-1?Q?dKXrwFTdDBUIqgSwi9dhT7/4so7nrK8fXWnXg+X0oxOfWG2UwuM91VvmKp?=
+ =?iso-8859-1?Q?Rp53sxaXteMPBPOPcUAUdY3RFY0M9DFdNPgkuXAC7yG6d8Zg6hP1lbro/g?=
+ =?iso-8859-1?Q?WrLX/aHlMjQ+lCRep4pQ1xZ/b2BpmcDdPB3UOtbLMBpvNGS3ALSAwn6WPu?=
+ =?iso-8859-1?Q?1jX7rGj9Dss1XsWJ/sKKqH8gucCTySHNEn5JXFB/xpIJn+GBosve5bLmT/?=
+ =?iso-8859-1?Q?JVauAgY2x0FXndkTzRrUyTCM0v67DPvykO1dbBRfPYDWmtoFAdokdIFT4f?=
+ =?iso-8859-1?Q?El8O6CoQIuvflS6GpXnIuxKacndbZduqShY/h9zhEa8TCJKs+P/+1ih+Xh?=
+ =?iso-8859-1?Q?w1Xqq2ud+fEPBdFbOx1h/5tHA4UWCXL77ROI6SI6aNiWd5R31WX5KcDI6n?=
+ =?iso-8859-1?Q?iwdybw9W/HU9vR19BGq7ewHJRF9ZYrt74zrIy1NBs5zhE9989KQ8ky+iW4?=
+ =?iso-8859-1?Q?UAk9CO+8oi1UIXGMpZB2lg5CMpcf7KjnFxGBDag4mPBVnKlFLoAqp/OvoB?=
+ =?iso-8859-1?Q?QOukpg2lQKUUonSWM0Vok3i6HUfz1YoXd471QSZdRQrbdRaMidGL6GRgoE?=
+ =?iso-8859-1?Q?+lQuyAD31Mb6tsGD6mM//ZUVZC5AV8B+nFa/WyITibAKu4THHRu36MCU+W?=
+ =?iso-8859-1?Q?fma8NP4pyg8ZSO2pP/H9w59XGm0kjQdMZE5XpNwxiXA/Kn7Q6LEBR23ymU?=
+ =?iso-8859-1?Q?vmUhOdkfKjIZ/QsJTQCtDkeGjXEYq09M5hyh8O7AABf7kzBlhCudDdjwlC?=
+ =?iso-8859-1?Q?vHSVgBm44dNZdYkSH9S0SpM2Gy8iqBN96hB+47tLlAyVj2r9qsv6VswqzP?=
+ =?iso-8859-1?Q?8++pdVNVtjn5Lp6jR9uSNA057R3baQArJQUMq5FcGc55jVjCE9SeiBKMh+?=
+ =?iso-8859-1?Q?FNLW+pZiFS36XK//dxfOKzdOa6EcQ3TCcIGphNfm2QKTbhby4uzrDDBlpa?=
+ =?iso-8859-1?Q?6psMpkbT24t8uytyOkmG8c262hS0HUTQfvDq6UeFij+I4M7zqaBsW21Wtg?=
+ =?iso-8859-1?Q?JdogRpIKZzrvNUxkuB+iFiHKSkuvH+Ou5ZGNWYYVMk4f9wdrFvQkM6CXWs?=
+ =?iso-8859-1?Q?w4dTgyAMMDB6etjpRW6t+ajxVBqsdbmA/H5+e4YmvkjHZnoOog1rg9KB+2?=
+ =?iso-8859-1?Q?y8SuXFTEVzfQTTU/ua+8Hq/BmqtP57lfNm4uoBCbaOc9S4Mxa0U9TvP55v?=
+ =?iso-8859-1?Q?5yIbL7cyE7rLLvm3ZG4Yi28Cvw38cVN3SjR+EORAleSCkd9zBIfNlMv8uJ?=
+ =?iso-8859-1?Q?/3xiW2sy9KUKfnuGHL6P73aq5L42Q3FQAAtdlqVewIF+R/Y/wzwqxkkbkC?=
+ =?iso-8859-1?Q?hRVq+AQ0gZP9/6XPBmC73Y2mR87LJ1cNGcMkuNWyTDqY7G7wb+Gw2ToBqD?=
+ =?iso-8859-1?Q?uHwpTuPeHeRXfpk2t+P2NXQqP54YH5nhnjREsSAxCGwmd/8G1uEtoUVAn3?=
+ =?iso-8859-1?Q?7M8b2z/m1acLYYvAF/l4hXj7v4enAl8H69qvHgPJlRRyZiALlB5KIawE0H?=
+ =?iso-8859-1?Q?ycR+5KPnVDwdW16+cQpi5/P1/M1HAcHV6qRluR2pfUbAHMgrLxNHH684ru?=
+ =?iso-8859-1?Q?K7mF26Q4NyaS9c6MASteOqbSPMHBPHfNKUs+hoZkyWGbfZDUS/p9YzIA?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9353f9d0-a90f-423c-c47b-08dda9a28f48
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jun 2025 11:16:20.7140
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: njgq4xkq5ytRcNXSdbAgxOlt2XssmzTeL0PQblTcBhGOuoFhUJOka+1P9Gsq4gJnqcnIg3yYPUepuDcrfjZgHA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR03MB10784
 
-On Thu, Jun 12, 2025 at 1:19=E2=80=AFPM Juergen Gross <jgross@suse.com> wro=
-te:
->
-> On 12.06.25 11:32, Zhenghan Cheng wrote:
-> > After commit a934a57a42f64a4 ("scripts/misc-check:
-> > check missing #include <linux/export.h> when W=3D1")
-> > and commit 7d95680d64ac8e836c ("scripts/misc-check:
-> > check unnecessary #include <linux/export.h> when W=3D1"),
-> > we get some build warnings with W=3D1,such as:
-> >
-> > arch/x86/coco/sev/core.c: warning: EXPORT_SYMBOL() is used, but #includ=
-e <linux/export.h> is missing
-> > arch/x86/crypto/aria_aesni_avx2_glue.c: warning: EXPORT_SYMBOL() is use=
-d, but #include <linux/export.h> is missing
-> > arch/x86/kernel/unwind_orc.c: warning: EXPORT_SYMBOL() is used, but #in=
-clude <linux/export.h> is missing
-> > arch/x86/kvm/hyperv.c: warning: EXPORT_SYMBOL() is used, but #include <=
-linux/export.h> is missing
-> > arch/x86/events/intel/core.c: warning: EXPORT_SYMBOL() is not used, but=
- #include <linux/export.h> is present
-> > arch/x86/events/zhaoxin/core.c: warning: EXPORT_SYMBOL() is not used, b=
-ut #include <linux/export.h> is present
-> > arch/x86/kernel/crash.c: warning: EXPORT_SYMBOL() is not used, but #inc=
-lude <linux/export.h> is present
-> > arch/x86/kernel/devicetree.c: warning: EXPORT_SYMBOL() is not used, but=
- #include <linux/export.h> is present
-> >
-> > so fix these build warnings for x86.
-> >
-> > Signed-off-by: "Zhenghan Cheng" <chengzhenghan@uniontech.com>
-> > Suggested-by: "Huacai Chen" <chenhuacai@loongson.cn>
->
-> For Xen and paravirt:
->
-> Acked-by: Juergen Gross <jgross@suse.com>
->
-> Your patch is looking a little bit strange, as the list of modified files
-> is located between the patch hunks, followed by another "Signed-off-by:".
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Indeed.
-And at bare minimum please split at least to two:
-1) adding export.h;
-2) removing export.h.
+Some of the PCI host bridges require private data. Add priv field
+to struct pci_host_bridge, so such bridges may populate it with
+their private data.
 
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+v5->v6:
+* no change
 
+v4->v5:
+* no change
+
+v3->v4:
+* Added Stefano's RB
+
+v2->v3:
+* removed priv allocation from common code
+
+v1->v2:
+* no change
+---
+ xen/arch/arm/include/asm/pci.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.=
+h
+index 1605ec660d..b7b2dc7832 100644
+--- a/xen/arch/arm/include/asm/pci.h
++++ b/xen/arch/arm/include/asm/pci.h
+@@ -66,6 +66,7 @@ struct pci_host_bridge {
+     uint16_t segment;                /* Segment number */
+     struct pci_config_window* cfg;   /* Pointer to the bridge config windo=
+w */
+     const struct pci_ops *ops;
++    void *priv;                      /* Private data of the bridge. */
+ };
+=20
+ struct pci_ops {
 --=20
-With Best Regards,
-Andy Shevchenko
+2.34.1
 
