@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC6FC71149
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 17:36:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1013361.1391851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE2BC7114A
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 17:36:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1013366.1391906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPlqu-0000Ag-1B; Thu, 12 Jun 2025 17:36:36 +0000
+	id 1uPlqy-0001Z9-KX; Thu, 12 Jun 2025 17:36:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1013361.1391851; Thu, 12 Jun 2025 17:36:36 +0000
+Received: by outflank-mailman (output) from mailman id 1013366.1391906; Thu, 12 Jun 2025 17:36:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPlqt-00009b-Sy; Thu, 12 Jun 2025 17:36:35 +0000
-Received: by outflank-mailman (input) for mailman id 1013361;
- Thu, 12 Jun 2025 17:36:34 +0000
+	id 1uPlqy-0001Yw-GN; Thu, 12 Jun 2025 17:36:40 +0000
+Received: by outflank-mailman (input) for mailman id 1013366;
+ Thu, 12 Jun 2025 17:36:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JIJj=Y3=linux.ibm.com=agordeev@srs-se1.protection.inumbo.net>)
- id 1uPlqs-000083-DO
- for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 17:36:34 +0000
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c6ba90a3-47b3-11f0-b894-0df219b8e170;
- Thu, 12 Jun 2025 19:36:31 +0200 (CEST)
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55C9xpHh005022;
- Thu, 12 Jun 2025 17:36:17 GMT
+ id 1uPlqx-000083-5I
+ for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 17:36:39 +0000
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c7eaf474-47b3-11f0-b894-0df219b8e170;
+ Thu, 12 Jun 2025 19:36:34 +0200 (CEST)
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55CF7v0W022393;
+ Thu, 12 Jun 2025 17:36:18 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 474x4mhdbs-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4769x01288-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:16 +0000 (GMT)
-Received: from m0360072.ppops.net (m0360072.ppops.net [127.0.0.1])
- by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 55CHaGIg029272;
+ Thu, 12 Jun 2025 17:36:17 +0000 (GMT)
+Received: from m0356517.ppops.net (m0356517.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 55CHWVMp030657;
+ Thu, 12 Jun 2025 17:36:17 GMT
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4769x01286-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Jun 2025 17:36:17 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 55CE2lWa014912;
  Thu, 12 Jun 2025 17:36:16 GMT
-Received: from ppma12.dal12v.mail.ibm.com
- (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 474x4mhdbp-1
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4750rpdxe5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:16 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
- by ppma12.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 55CGbdNq015205;
- Thu, 12 Jun 2025 17:36:15 GMT
-Received: from smtprelay07.fra02v.mail.ibm.com ([9.218.2.229])
- by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 474yrtp6b1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:15 +0000
-Received: from smtpav07.fra02v.mail.ibm.com (smtpav07.fra02v.mail.ibm.com
- [10.20.54.106])
- by smtprelay07.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 55CHaE2S46072192
+ Thu, 12 Jun 2025 17:36:16 +0000
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 55CHaEqc33358430
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Thu, 12 Jun 2025 17:36:14 GMT
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id F201B20043;
- Thu, 12 Jun 2025 17:36:13 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id DE45420040;
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 0C91920043;
+ Thu, 12 Jun 2025 17:36:14 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id EC12E20040;
  Thu, 12 Jun 2025 17:36:13 +0000 (GMT)
 Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
- by smtpav07.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTPS;
  Thu, 12 Jun 2025 17:36:13 +0000 (GMT)
 Received: by tuxmaker.boeblingen.de.ibm.com (Postfix, from userid 55669)
- id 9B577E0157; Thu, 12 Jun 2025 19:36:13 +0200 (CEST)
+ id A4B20E19BA; Thu, 12 Jun 2025 19:36:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -77,16 +77,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6ba90a3-47b3-11f0-b894-0df219b8e170
+X-Inumbo-ID: c7eaf474-47b3-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=pp1; bh=ANjAB/i+3wqbtm/fqKC9pjVNNGYd+LvuX5UmSeokV
-	jQ=; b=gPjOJz2DlLLAahuxLsMvga8P96e5QtjjssuX3WnL7wfNwU9S7odZ1iF9n
-	AHXZaL0QgY2Yvv6+PISmVU8AGURt3TkfFKWYn1x50taMSKAa7h1Py0L08hzBockn
-	sQx28XfA83iutCkSgewhPkGk2hg9n0qPC6L8fNJUmDuqW9yEPkMry4L+GC9tTYO0
-	SD4Ldvr2NfjhdTYVv7Rn944LtNQhipOioR+F7fsnJ9kdle/XbEcv+ONZ2kYaVUYJ
-	/VTaRAakSqlZ1oK9rnq/4HmKpkaucRMwQY60+eLDS+xgc8bSOsXNrs+da1Mm5Jx9
-	DxiiZIL4w7ZQHN8ei7UjgxYir2X1w==
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=pp1; bh=l+Et7RDVrkrD3xSj+
+	ZT9JbsfA8TCXL5kawo+d542qxg=; b=CGSHKJxpAeqSz5W/a/AkSHYJFZv8lW+nh
+	uxHC7vWPjJm4OsnwR6v4hz9f8/GcPwgLyA3qutjEahhsvj2zIAXR15Q620+T14It
+	FHaWO/C+YYyqkGfyKNLYoZRGLnqRlAVl5LmSlHByDnbjBGpbKCvRtLprRYaEd7oh
+	5J9ogX1eJllyxwgYyjA/mR4IpcpPyUjA36BA3prpqLL3/+jvrBlrXfiW9iVZJm+I
+	zDSfTi4nXZF1qPYg3iaKGABx6nExrmBcci8O63LJ77BZRUe9YeZEYxl2gkpYGfKS
+	I6Y6vUvsUHq1Oogn+ejN/LQkS369JvfdVqa5J6qY7W5de0VsVHpPw==
 From: Alexander Gordeev <agordeev@linux.ibm.com>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
@@ -96,80 +96,89 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
         Guenter Roeck <linux@roeck-us.net>, Juergen Gross <jgross@suse.com>,
         Jeremy Fitzhardinge <jeremy@goop.org>,
         Ryan Roberts <ryan.roberts@arm.com>
-Subject: [PATCH 0/6] mm: Consolidate lazy MMU mode context
-Date: Thu, 12 Jun 2025 19:36:07 +0200
-Message-ID: <cover.1749747752.git.agordeev@linux.ibm.com>
+Subject: [PATCH 4/6] sparc/mm: Do not disable preemption in lazy MMU mode
+Date: Thu, 12 Jun 2025 19:36:11 +0200
+Message-ID: <db1559396c38c1dfe97a6d929412d7d6244f64b8.1749747752.git.agordeev@linux.ibm.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1749747752.git.agordeev@linux.ibm.com>
+References: <cover.1749747752.git.agordeev@linux.ibm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Authority-Analysis: v=2.4 cv=Y4X4sgeN c=1 sm=1 tr=0 ts=684b1011 cx=c_pps a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17 a=6IFa9wvqVegA:10 a=VwQbUJbxAAAA:8 a=VnNF1IyMAAAA:8 a=_adeEUt4WAeD9YfioJwA:9
-X-Proofpoint-GUID: qr5W2YIzc2A8ZYU2dsRpP1AphHqeKos2
-X-Proofpoint-ORIG-GUID: y6xW9IJSAE1JE6kcXuiy_mrCImk2ZWSK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjEyMDEzMiBTYWx0ZWRfXwOXjIkbbpepd OoV77Zxzv1DOdGZHdC1rjgNBCs+WzETf7mIinKv8drROUhS3PC4S3Ul3Eq1Rd7PKATmFyM+TDvL kAnBooerznbgDsNZ+/ZPaU+KOsEBXC93w8q9w6KmW11m/vgE/aUeMTSFQFutpSKrQJxT61mMBuv
- KSDxU4i8iMDqRaETa8beoNjTewS286bfktL7BQreW7c9kRIZcei0lJ9aqGyaWPDFPjwcafICCtq M+2fDqSlBJ149EKa1BJjaYXJjRiLvX/CmWd9wRa81Sdbs49mWKwGJKFbJ7AczMoR5fjZJzIohlx h7ggGzYUtbK6qCOXcSYaA1viUBK2oMNNt7ackAbJO+mupvs+X1Tc6Jccl69/IVghIosL27dXHPA
- isXNAQ9475tlf5eWUprb3n3jaqwe+zULK27nDf9N0r4ezafy+XnKcezzdAsVHSGEj7SQHlPp
+X-Proofpoint-ORIG-GUID: 5A073cfWFciuN2b1brPTe_Vnj2ABgNor
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjEyMDEzMiBTYWx0ZWRfX3cw7ceB7JmZU d6VxfkA70ad39bsJhjQOMACDU7dhR+379Mps/nEMF5/Xm61VZKQveRqbfzXh/DVjMZ0MwShjckH OtM5ElN6pHeKhDxIDWUCD/pMglKXSvoq8imTovo//BpZ6RwUVH9+vjpOGhCFRVt8y8A/4Bl3ZF+
+ v6CF8HwtyU4JDL9lKBw8F0GK0vxxj4t9XvR5rgBIuku+iqnJzzsphSBS/GReDoCb+rZTnHKWlnq RPWDwzbp3QorzE155Z++H0jAHLpMAaYFuoXsnenF/bqmgRHT1lUWRW1zbgilJ+Wn6BAjRAxFWe0 pbzA/SYKln6jnYz2VhQume3b18VSQ7InP15yZ+oOnDWlKT3nsaNQ+eIJZzYp3cBxB4kIuXOZQH0
+ iVXVtP4unDNnzh/4Kk90d/VKBbvj+DoHFSQSGh/QOa32UKZrgdVGPB3bpZbuiTPpWKB+gRy+
+X-Authority-Analysis: v=2.4 cv=YKGfyQGx c=1 sm=1 tr=0 ts=684b1012 cx=c_pps a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17 a=6IFa9wvqVegA:10 a=VnNF1IyMAAAA:8 a=Nsn6zn2YLSyj-wdhBosA:9
+X-Proofpoint-GUID: El7oGGFj-H4_3nAMfB3G6kQ4auHJ7oeL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-06-12_10,2025-06-12_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=994 spamscore=0
- clxscore=1011 lowpriorityscore=0 malwarescore=0 bulkscore=0 adultscore=0
- impostorscore=0 suspectscore=0 phishscore=0 mlxscore=0 priorityscore=1501
- classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2505280000
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
+ malwarescore=0 bulkscore=0 priorityscore=1501 phishscore=0 mlxscore=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 mlxlogscore=711
+ suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
  definitions=main-2506120132
 
-Hi All,
+Commit a1d416bf9faf ("sparc/mm: disable preemption in lazy mmu mode")
+is not necessary anymore, since the lazy MMU mode is entered with a
+spinlock held and sparc does not support Real-Time. Thus, upon entering
+the lazy mode the preemption is already disabled.
 
-Consolidate arch_enter|leave|flush_lazy_mmu_mode() context and protect
-with a lock not only user, but also kernel mappings before entering
-the lazy MMU mode.
+Signed-off-by: Alexander Gordeev <agordeev@linux.ibm.com>
+---
+ arch/sparc/include/asm/tlbflush_64.h |  2 +-
+ arch/sparc/mm/tlb.c                  | 12 ++++++++----
+ 2 files changed, 9 insertions(+), 5 deletions(-)
 
-For not fully preemptible (Real-Time) kernels that simplifies semantics -
-while the mode is active the code should assume it is executing in atomic
-context. That paves the way for cleanups, such as suggested for sparc and
-powerpc and hopefully brings a bit more clarity in what labeled in commit
-691ee97e1a9d ("mm: fix lazy mmu docs and usage") as "a bit of a mess (to
-put it politely)".
-
-The fully preemptible (Real-Time) kernels could probably also be brought
-into the fold, but I am not sure about implications (to say at least).
-
-This series is continuation of [1] and [2], with commit b6ea95a34cbd
-("kasan: avoid sleepable page allocation from atomic context") already
-upstream.
-
-I dared to keep Nicholas Piggin R-b on patch 3, but dropped it from
-patch 2 due to new bits.
-
-Except the optional sparc (untested) and powerpc (complile-tested)
-updates this series is a prerequisite for implementation of lazy MMU
-mode on s390.
-
-1. https://lore.kernel.org/linux-mm/cover.1744037648.git.agordeev@linux.ibm.com/#r
-2. https://lore.kernel.org/linux-mm/cover.1744128123.git.agordeev@linux.ibm.com/#r
-
-Thanks!
-
-Alexander Gordeev (6):
-  mm: Cleanup apply_to_pte_range() routine
-  mm: Lock kernel page tables before entering lazy MMU mode
-  mm/debug: Detect wrong arch_enter_lazy_mmu_mode() contexts
-  sparc/mm: Do not disable preemption in lazy MMU mode
-  powerpc/64s: Do not disable preemption in lazy MMU mode
-  powerpc/64s: Do not re-activate batched TLB flush
-
- .../include/asm/book3s/64/tlbflush-hash.h     | 13 ++++----
- arch/powerpc/include/asm/thread_info.h        |  2 --
- arch/powerpc/kernel/process.c                 | 25 --------------
- arch/sparc/include/asm/tlbflush_64.h          |  2 +-
- arch/sparc/mm/tlb.c                           | 12 ++++---
- include/linux/pgtable.h                       | 32 +++++++++++++-----
- mm/kasan/shadow.c                             |  5 ---
- mm/memory.c                                   | 33 ++++++++++++-------
- mm/vmalloc.c                                  |  6 ++++
- 9 files changed, 65 insertions(+), 65 deletions(-)
-
+diff --git a/arch/sparc/include/asm/tlbflush_64.h b/arch/sparc/include/asm/tlbflush_64.h
+index 8b8cdaa69272..a6d8068fb211 100644
+--- a/arch/sparc/include/asm/tlbflush_64.h
++++ b/arch/sparc/include/asm/tlbflush_64.h
+@@ -44,7 +44,7 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end);
+ void flush_tlb_pending(void);
+ void arch_enter_lazy_mmu_mode(void);
+ void arch_leave_lazy_mmu_mode(void);
+-#define arch_flush_lazy_mmu_mode()      do {} while (0)
++void arch_flush_lazy_mmu_mode(void);
+ 
+ /* Local cpu only.  */
+ void __flush_tlb_all(void);
+diff --git a/arch/sparc/mm/tlb.c b/arch/sparc/mm/tlb.c
+index a35ddcca5e76..e46dfd5f2583 100644
+--- a/arch/sparc/mm/tlb.c
++++ b/arch/sparc/mm/tlb.c
+@@ -52,10 +52,9 @@ void flush_tlb_pending(void)
+ 
+ void arch_enter_lazy_mmu_mode(void)
+ {
+-	struct tlb_batch *tb;
++	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+ 
+-	preempt_disable();
+-	tb = this_cpu_ptr(&tlb_batch);
++	VM_WARN_ON_ONCE(preemptible());
+ 	tb->active = 1;
+ }
+ 
+@@ -63,10 +62,15 @@ void arch_leave_lazy_mmu_mode(void)
+ {
+ 	struct tlb_batch *tb = this_cpu_ptr(&tlb_batch);
+ 
++	VM_WARN_ON_ONCE(preemptible());
+ 	if (tb->tlb_nr)
+ 		flush_tlb_pending();
+ 	tb->active = 0;
+-	preempt_enable();
++}
++
++void arch_flush_lazy_mmu_mode(void)
++{
++	VM_WARN_ON_ONCE(preemptible());
+ }
+ 
+ static void tlb_batch_add_one(struct mm_struct *mm, unsigned long vaddr,
 -- 
 2.48.1
 
