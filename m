@@ -4,68 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2A5C7114C
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 17:36:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1013363.1391882 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3323AC61CE8
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Jun 2025 19:04:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1013516.1391931 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPlqw-0000rt-38; Thu, 12 Jun 2025 17:36:38 +0000
+	id 1uPnDn-0005a4-38; Thu, 12 Jun 2025 19:04:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1013363.1391882; Thu, 12 Jun 2025 17:36:38 +0000
+Received: by outflank-mailman (output) from mailman id 1013516.1391931; Thu, 12 Jun 2025 19:04:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uPlqv-0000qH-R1; Thu, 12 Jun 2025 17:36:37 +0000
-Received: by outflank-mailman (input) for mailman id 1013363;
- Thu, 12 Jun 2025 17:36:36 +0000
+	id 1uPnDm-0005Zx-WF; Thu, 12 Jun 2025 19:04:19 +0000
+Received: by outflank-mailman (input) for mailman id 1013516;
+ Thu, 12 Jun 2025 19:04:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JIJj=Y3=linux.ibm.com=agordeev@srs-se1.protection.inumbo.net>)
- id 1uPlqu-00008H-3M
- for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 17:36:36 +0000
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c8b3d150-47b3-11f0-a309-13f23c93f187;
- Thu, 12 Jun 2025 19:36:35 +0200 (CEST)
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55CDJP2V021059;
- Thu, 12 Jun 2025 17:36:17 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 474cxjmf0n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:17 +0000 (GMT)
-Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
- by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 55CHZKKa027345;
- Thu, 12 Jun 2025 17:36:16 GMT
-Received: from ppma13.dal12v.mail.ibm.com
- (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 474cxjmf0g-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:16 +0000 (GMT)
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
- by ppma13.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 55CF2fhL003405;
- Thu, 12 Jun 2025 17:36:15 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4751ykwr2m-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jun 2025 17:36:15 +0000
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
- [10.20.54.104])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 55CHaE2d23134776
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 12 Jun 2025 17:36:14 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 01F1220040;
- Thu, 12 Jun 2025 17:36:14 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id DF1282004B;
- Thu, 12 Jun 2025 17:36:13 +0000 (GMT)
-Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
- by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Thu, 12 Jun 2025 17:36:13 +0000 (GMT)
-Received: by tuxmaker.boeblingen.de.ibm.com (Postfix, from userid 55669)
- id A01ECE1994; Thu, 12 Jun 2025 19:36:13 +0200 (CEST)
+ <SRS0=4HaQ=Y3=kernel.org=ebiggers@srs-se1.protection.inumbo.net>)
+ id 1uPnDm-0005Zq-M7
+ for xen-devel@lists.xenproject.org; Thu, 12 Jun 2025 19:04:18 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 095a7d3c-47c0-11f0-a309-13f23c93f187;
+ Thu, 12 Jun 2025 21:04:17 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id D085A6116E;
+ Thu, 12 Jun 2025 19:04:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CDC4C4CEEA;
+ Thu, 12 Jun 2025 19:04:13 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -77,198 +43,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8b3d150-47b3-11f0-a309-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=pp1; bh=lzDJpUIXBz/mvS0mb
-	FYxHi8XUevGZ8hUcNGEGhasovg=; b=jqMrmg9P9k4as1yQGOTnccjGWG4WF7DEd
-	kBXZ1I/97XSYVJbQ+zJBG+JgVx32TNUOqAFmET9+GHhIolrdsQYgYJ2idUI/YD4s
-	/xUki5YiOsCOWB0+AVe6rTijtZk1rs6M50nDxRavBOMoS4SGnhy/c7sgJNTotjGi
-	6sHMEPK/4npj5FfsZvDdx7jicu1aU5DQMLUhDTl2TpSTAMuwTZfKAnXRxT3UkPF3
-	ZIbIMaHnARDwFnGT4yVd8DLscyKbq+WfXuWGn4G+cz7HIOzlYlL6g2UMRNBBQL+M
-	8Zy82y8ly2Bvl1bgxesKbgKejydEi6fT68K8HNFyFta7GIJKlnKig==
-From: Alexander Gordeev <agordeev@linux.ibm.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org,
-        Hugh Dickins <hughd@google.com>, Nicholas Piggin <npiggin@gmail.com>,
-        Guenter Roeck <linux@roeck-us.net>, Juergen Gross <jgross@suse.com>,
-        Jeremy Fitzhardinge <jeremy@goop.org>,
-        Ryan Roberts <ryan.roberts@arm.com>
-Subject: [PATCH 2/6] mm: Lock kernel page tables before entering lazy MMU mode
-Date: Thu, 12 Jun 2025 19:36:09 +0200
-Message-ID: <7bd3a45dbc375dc2c15cebae09cb2bb972d6039f.1749747752.git.agordeev@linux.ibm.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1749747752.git.agordeev@linux.ibm.com>
-References: <cover.1749747752.git.agordeev@linux.ibm.com>
+X-Inumbo-ID: 095a7d3c-47c0-11f0-a309-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1749755055;
+	bh=6D6BxuzqFc6289gWzxr9MD9k6SduwODZ6NYAWgJEVvE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=TVg3k6+1fIFCDCqzj07OpTxgI7rzCORKFJbnqm8GeR9/Oss7I+h/K8zjYgLY7WVC2
+	 w1+q2edN6g8e8Croaj+1DDwH6LAQMtjnSMyvSJZQSZsUuTEvp0KAXFESX8PacCrgJs
+	 aM3hbncXgquVHDukx3NmSg6cOb/FLcRQHUlhHwyvNG0pHb532yUDsKwlX0RWY/oQZ3
+	 Ov6H5FMMYGTeK/p+HkjAExQ3JC4gemnACMbtpztskO8CiI5c/QKFz9RrAEpIYHWD2y
+	 ISKKCAodFRejkVVX257Qga1XEswstCcv2G8CP5fuaoGIjydsqYgaxXwTvC2YTs8QDZ
+	 b/EskwBtyvQrA==
+Date: Thu, 12 Jun 2025 12:03:47 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Zhenghan Cheng <chengzhenghan@uniontech.com>
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+	dave.hansen@linux.intel.com, x86@kernel.org,
+	mario.limonciello@amd.com, yazen.ghannam@amd.com,
+	jpoimboe@kernel.org, tony.luck@intel.com, jarkko@kernel.org,
+	bhelgaas@google.com, pbonzini@redhat.com, oleg@redhat.com,
+	jbaron@akamai.com, ning.sun@intel.com, seanjc@google.com,
+	luto@kernel.org, andy@kernel.org, jim.cromie@gmail.com,
+	kirill.shutemov@linux.intel.com, hpa@zytor.com,
+	pawan.kumar.gupta@linux.intel.com, vkuznets@redhat.com,
+	rostedt@goodmis.org, ardb@kernel.org, thomas.lendacky@amd.com,
+	nikunj@amd.com, ashish.kalra@amd.com, kees@kernel.org,
+	alexandre.chartre@oracle.com, rppt@kernel.org, steve.wahl@hpe.com,
+	jirislaby@kernel.org, apatel@ventanamicro.com, bvanassche@acm.org,
+	ptsm@linux.microsoft.com, Jonathan.Cameron@huawei.com,
+	beata.michalska@arm.com, xin@zytor.com, davydov-max@yandex-team.ru,
+	ravi.bangoria@amd.com, joel.granados@kernel.org,
+	ffmancera@riseup.net, kprateek.nayak@amd.com,
+	akpm@linux-foundation.org, bhe@redhat.com, brgerst@gmail.com,
+	coxu@redhat.com, dmaluka@chromium.org, linux-kernel@vger.kernel.org,
+	linux-edac@vger.kernel.org, linux-sgx@vger.kernel.org,
+	kvm@vger.kernel.org, virtualization@lists.linux.dev,
+	tboot-devel@lists.sourceforge.net, nouveau@lists.freedesktop.org,
+	linux-coco@lists.linux.dev, xen-devel@lists.xenproject.org,
+	Huacai Chen <chenhuacai@loongson.cn>,
+	Zhenghan Cheng <your_email@example.com>
+Subject: Re: [PATCH] x86: Fix build warnings about export.h
+Message-ID: <20250612190347.GB1283@sol>
+References: <20250612093228.7655-1-chengzhenghan@uniontech.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: Tb8VA6zUpjW5k1WLGI1WWxPCHUixj1UW
-X-Proofpoint-GUID: EYQIsAXzx8ssoXkn44spur2V7kFJyFNc
-X-Authority-Analysis: v=2.4 cv=fZWty1QF c=1 sm=1 tr=0 ts=684b1011 cx=c_pps a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17 a=6IFa9wvqVegA:10 a=VnNF1IyMAAAA:8 a=nMoVGufP4iL6dWhmM1oA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjEyMDEzMiBTYWx0ZWRfX7wfxBioE0ali sfc9SNNLuo/uwJWDA3c2xkqqH6rfdv8VXDTQiKWPjoWwN5+YNEn8jTxawLHSc7kSvcbTRzlAEEL 6pE4EG7uVAXP0cTCdUVctrhAA4dPIy9K280bl6EZsHWeiac5dQkU3M23hors8FvuTbzgDf1h9Fp
- 4/5hS9LAZnskUMvo6VVxjD1ejeCUnSJ9GDLuknHP+02KFBqLWFqJX4Uj1GH9ITY9ehAeYHg8CPo +NXj5bCNfgunV/T0oR4Y7LXv81qmzH4CP/fN90LYdPGDzAKY9KoFLxiARID9WfB4E8JGYFRMR8X KU0u1kTIIScAeHrSUf7iG+tUJ+YeiYm2VyY0+i/fL8MGK6FCaPHEVVMgFI0JFtKLssBxImKqXFF
- +8XQ7Gu5M/Tz5OkRu7P75cBzlchWZR0cnEVFWg54GBSdDJyxQ+nNXw3MOOvDg1EdtYnL8aNA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-12_10,2025-06-12_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 impostorscore=0
- priorityscore=1501 spamscore=0 bulkscore=0 phishscore=0 suspectscore=0
- adultscore=0 mlxscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=965
- classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2506120132
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250612093228.7655-1-chengzhenghan@uniontech.com>
 
-As a follow-up to commit 691ee97e1a9d ("mm: fix lazy mmu docs and
-usage") take a step forward and protect with a lock not only user,
-but also kernel mappings before entering the lazy MMU mode. With
-that the semantics of arch_enter|leave_lazy_mmu_mode() callbacks
-is consolidated, which allows further simplifications.
+On Thu, Jun 12, 2025 at 05:32:28PM +0800, Zhenghan Cheng wrote:
+> After commit a934a57a42f64a4 ("scripts/misc-check:
+> check missing #include <linux/export.h> when W=1")
+> and commit 7d95680d64ac8e836c ("scripts/misc-check:
+> check unnecessary #include <linux/export.h> when W=1"),
+> we get some build warnings with W=1,such as:
+> 
+> arch/x86/coco/sev/core.c: warning: EXPORT_SYMBOL() is used, but #include <linux/export.h> is missing
+> arch/x86/crypto/aria_aesni_avx2_glue.c: warning: EXPORT_SYMBOL() is used, but #include <linux/export.h> is missing
+> arch/x86/kernel/unwind_orc.c: warning: EXPORT_SYMBOL() is used, but #include <linux/export.h> is missing
+> arch/x86/kvm/hyperv.c: warning: EXPORT_SYMBOL() is used, but #include <linux/export.h> is missing
+> arch/x86/events/intel/core.c: warning: EXPORT_SYMBOL() is not used, but #include <linux/export.h> is present
+> arch/x86/events/zhaoxin/core.c: warning: EXPORT_SYMBOL() is not used, but #include <linux/export.h> is present
+> arch/x86/kernel/crash.c: warning: EXPORT_SYMBOL() is not used, but #include <linux/export.h> is present
+> arch/x86/kernel/devicetree.c: warning: EXPORT_SYMBOL() is not used, but #include <linux/export.h> is present
+> 
+> so fix these build warnings for x86.
+> 
+> Signed-off-by: "Zhenghan Cheng" <chengzhenghan@uniontech.com>
+> Suggested-by: "Huacai Chen" <chenhuacai@loongson.cn>
 
-The effect of this consolidation is not fully preemptible (Real-Time)
-kernels can not enter the context switch while the lazy MMU mode is
-active - which is easier to comprehend.
+FYI, I'm planning to handle arch/x86/lib/crc*.c and arch/x86/lib/crypto/.
 
-Signed-off-by: Alexander Gordeev <agordeev@linux.ibm.com>
----
- include/linux/pgtable.h | 12 ++++++------
- mm/kasan/shadow.c       |  5 -----
- mm/memory.c             |  5 ++++-
- mm/vmalloc.c            |  6 ++++++
- 4 files changed, 16 insertions(+), 12 deletions(-)
+(Specifically, I'm migrating them to lib/crc/ and lib/crypto/ respectively, and
+one of the effects of that is the EXPORT_SYMBOL in arch-specific crc and crypto
+library files go away.  The lib/crc/ change is already in linux-next, and
+https://lore.kernel.org/r/20250612183852.114878-1-ebiggers@kernel.org adds
+<linux/export.h> to all files with EXPORT_SYMBOL in lib/crc/.)
 
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 0b6e1f781d86..33bf2b13c219 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -224,12 +224,12 @@ static inline int pmd_dirty(pmd_t pmd)
-  * a raw PTE pointer after it has been modified are not guaranteed to be
-  * up to date.
-  *
-- * In the general case, no lock is guaranteed to be held between entry and exit
-- * of the lazy mode. So the implementation must assume preemption may be enabled
-- * and cpu migration is possible; it must take steps to be robust against this.
-- * (In practice, for user PTE updates, the appropriate page table lock(s) are
-- * held, but for kernel PTE updates, no lock is held). Nesting is not permitted
-- * and the mode cannot be used in interrupt context.
-+ * For PREEMPT_RT kernels implementation must assume that preemption may
-+ * be enabled and cpu migration is possible between entry and exit of the
-+ * lazy MMU mode; it must take steps to be robust against this. There is
-+ * no such assumption for non-PREEMPT_RT kernels, since both kernel and
-+ * user page tables are protected with a spinlock while in lazy MMU mode.
-+ * Nesting is not permitted and the mode cannot be used in interrupt context.
-  */
- #ifndef __HAVE_ARCH_ENTER_LAZY_MMU_MODE
- #define arch_enter_lazy_mmu_mode()	do {} while (0)
-diff --git a/mm/kasan/shadow.c b/mm/kasan/shadow.c
-index d2c70cd2afb1..45115bd770a9 100644
---- a/mm/kasan/shadow.c
-+++ b/mm/kasan/shadow.c
-@@ -313,12 +313,10 @@ static int kasan_populate_vmalloc_pte(pte_t *ptep, unsigned long addr,
- 	__memset(page_to_virt(page), KASAN_VMALLOC_INVALID, PAGE_SIZE);
- 	pte = pfn_pte(page_to_pfn(page), PAGE_KERNEL);
- 
--	spin_lock(&init_mm.page_table_lock);
- 	if (likely(pte_none(ptep_get(ptep)))) {
- 		set_pte_at(&init_mm, addr, ptep, pte);
- 		data->pages[index] = NULL;
- 	}
--	spin_unlock(&init_mm.page_table_lock);
- 
- 	return 0;
- }
-@@ -465,13 +463,10 @@ static int kasan_depopulate_vmalloc_pte(pte_t *ptep, unsigned long addr,
- 
- 	page = (unsigned long)__va(pte_pfn(ptep_get(ptep)) << PAGE_SHIFT);
- 
--	spin_lock(&init_mm.page_table_lock);
--
- 	if (likely(!pte_none(ptep_get(ptep)))) {
- 		pte_clear(&init_mm, addr, ptep);
- 		free_page(page);
- 	}
--	spin_unlock(&init_mm.page_table_lock);
- 
- 	return 0;
- }
-diff --git a/mm/memory.c b/mm/memory.c
-index 71b3d3f98999..1ddc532b1f13 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -3017,6 +3017,7 @@ static int apply_to_pte_range(struct mm_struct *mm, pmd_t *pmd,
- 			pte = pte_offset_kernel(pmd, addr);
- 		if (!pte)
- 			return err;
-+		spin_lock(&init_mm.page_table_lock);
- 	} else {
- 		if (create)
- 			pte = pte_alloc_map_lock(mm, pmd, addr, &ptl);
-@@ -3042,7 +3043,9 @@ static int apply_to_pte_range(struct mm_struct *mm, pmd_t *pmd,
- 
- 	arch_leave_lazy_mmu_mode();
- 
--	if (mm != &init_mm)
-+	if (mm == &init_mm)
-+		spin_unlock(&init_mm.page_table_lock);
-+	else
- 		pte_unmap_unlock(mapped_pte, ptl);
- 
- 	*mask |= PGTBL_PTE_MODIFIED;
-diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index ab986dd09b6a..57b11000ae36 100644
---- a/mm/vmalloc.c
-+++ b/mm/vmalloc.c
-@@ -105,6 +105,7 @@ static int vmap_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
- 	if (!pte)
- 		return -ENOMEM;
- 
-+	spin_lock(&init_mm.page_table_lock);
- 	arch_enter_lazy_mmu_mode();
- 
- 	do {
-@@ -132,6 +133,7 @@ static int vmap_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
- 	} while (pte += PFN_DOWN(size), addr += size, addr != end);
- 
- 	arch_leave_lazy_mmu_mode();
-+	spin_unlock(&init_mm.page_table_lock);
- 	*mask |= PGTBL_PTE_MODIFIED;
- 	return 0;
- }
-@@ -359,6 +361,7 @@ static void vunmap_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
- 	unsigned long size = PAGE_SIZE;
- 
- 	pte = pte_offset_kernel(pmd, addr);
-+	spin_lock(&init_mm.page_table_lock);
- 	arch_enter_lazy_mmu_mode();
- 
- 	do {
-@@ -379,6 +382,7 @@ static void vunmap_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
- 	} while (pte += (size >> PAGE_SHIFT), addr += size, addr != end);
- 
- 	arch_leave_lazy_mmu_mode();
-+	spin_unlock(&init_mm.page_table_lock);
- 	*mask |= PGTBL_PTE_MODIFIED;
- }
- 
-@@ -525,6 +529,7 @@ static int vmap_pages_pte_range(pmd_t *pmd, unsigned long addr,
- 	if (!pte)
- 		return -ENOMEM;
- 
-+	spin_lock(&init_mm.page_table_lock);
- 	arch_enter_lazy_mmu_mode();
- 
- 	do {
-@@ -542,6 +547,7 @@ static int vmap_pages_pte_range(pmd_t *pmd, unsigned long addr,
- 	} while (pte++, addr += PAGE_SIZE, addr != end);
- 
- 	arch_leave_lazy_mmu_mode();
-+	spin_unlock(&init_mm.page_table_lock);
- 	*mask |= PGTBL_PTE_MODIFIED;
- 	return 0;
- }
--- 
-2.48.1
-
+- Eric
 
