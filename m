@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC88C71136
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1014627.1392738 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A46C71157
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1014626.1392730 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eK-0006wl-Jl; Fri, 13 Jun 2025 15:49:00 +0000
+	id 1uQ6eK-0006n0-5h; Fri, 13 Jun 2025 15:49:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1014627.1392738; Fri, 13 Jun 2025 15:49:00 +0000
+Received: by outflank-mailman (output) from mailman id 1014626.1392730; Fri, 13 Jun 2025 15:49:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eK-0006vg-BT; Fri, 13 Jun 2025 15:49:00 +0000
-Received: by outflank-mailman (input) for mailman id 1014627;
- Fri, 13 Jun 2025 15:48:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uQ6eJ-0006l7-V2; Fri, 13 Jun 2025 15:48:59 +0000
+Received: by outflank-mailman (input) for mailman id 1014626;
+ Fri, 13 Jun 2025 15:48:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=44KY=Y4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uQ6eJ-0006cn-HU
- for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:48:59 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eacbe99d-486d-11f0-b894-0df219b8e170;
+ <SRS0=utXz=Y4=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1uQ6eI-0006ch-O0
+ for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:48:58 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20627.outbound.protection.outlook.com
+ [2a01:111:f403:2413::627])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ea1b56da-486d-11f0-a309-13f23c93f187;
  Fri, 13 Jun 2025 17:48:57 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ade58ef47c0so457361566b.1
- for <xen-devel@lists.xenproject.org>; Fri, 13 Jun 2025 08:48:57 -0700 (PDT)
-Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec8979563sm144821766b.158.2025.06.13.08.48.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 08:48:56 -0700 (PDT)
+Received: from SA0PR11CA0089.namprd11.prod.outlook.com (2603:10b6:806:d2::34)
+ by DS7PR12MB6262.namprd12.prod.outlook.com (2603:10b6:8:96::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8835.22; Fri, 13 Jun 2025 15:48:52 +0000
+Received: from SA2PEPF00001506.namprd04.prod.outlook.com
+ (2603:10b6:806:d2:cafe::48) by SA0PR11CA0089.outlook.office365.com
+ (2603:10b6:806:d2::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.23 via Frontend Transport; Fri,
+ 13 Jun 2025 15:48:52 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF00001506.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8835.15 via Frontend Transport; Fri, 13 Jun 2025 15:48:51 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 13 Jun
+ 2025 10:48:51 -0500
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Fri, 13 Jun 2025 10:48:49 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,158 +61,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eacbe99d-486d-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749829737; x=1750434537; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=R6A8r2DsEy0IO5GoSvvpcCWrmAlrTSeNGBRJKoWIeJE=;
-        b=NebhAuNT1GH8t3ne8wvXlvR4xQfXK6UGdFjsO1Lw3xeK4SOmS09+33Y56RzDrbWaPV
-         pfFA04R/LzvmvzkDW0FulT/zz0gpkHgkkK14Gwo4EjX15vPCuoCX/2lKrS268qe5lHJM
-         SLpjL/YfXxKihQTsl3p/kIdMeET7F23llSRo2IdNfjn+BLHxpECPzjqI4/97A9vE1CH+
-         M1PXgrWgXkmYv613oOWAPz1VPIiXSFHbAVCqJjJEvLvKa764oL9I5vzi8+IgqCjgKjMb
-         azUvzCLaj7YxLy3GTyv0VlZk0Rblsi0FIrMGg89VP2bQh31kuFsBE29lTlI2rojLwDfU
-         goQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749829737; x=1750434537;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=R6A8r2DsEy0IO5GoSvvpcCWrmAlrTSeNGBRJKoWIeJE=;
-        b=Y0VCCi3BJxn0u9mJ3AqYn1bpSP6d/TBhH1uMLxi8TsnOlh2wmqi3d6l4dmZqgmSuTo
-         /MN95Ba8tjqS08CUIEgzMKgPwUxKDcPqJmpYQvStiUpfXKg1i+y8uDmUh9v2FV59rirH
-         EDGRY/vRMZgQAnVaEqdB2ORArkhAZmTdsM6AUABP6VLdDNMlpgqGlSpye2OH+QpqjHBE
-         oMXa4A0w8d5IDqMbZbWCBVkhAkX0GKzZeipUhn1S7a92HjH8UbhFR6ArMMZVx6kQyzPU
-         JSNAd499MZVKiug8fz3SpxcYb3VPHCAAvEbCky6VmQsCNEz/rlhoNWwNETXorcGH4aAL
-         rGtQ==
-X-Gm-Message-State: AOJu0Yz6fyxVHOZ4S0W8gHXICQ3DENcKBXDe4OnX785J+dY/L8W8jx8W
-	gqtwwpnfwPLYS+nUMw8TtwgogSJJWgg1qWXV3hhY+jXemBIB010kGX73VEroXA==
-X-Gm-Gg: ASbGncs1JXY4GKzauoaH+F/aotkRCi1hZLosXkpRE1RjXsgzv8/NOKKjoLi/Xe2QMYZ
-	RFvLRoRcHEr4oVAJd+HfiVtYTMilKRcp5sOtVyEYGdUXZzRXopzKsHVtb6m/HTcrvNtrhbUkRtm
-	/3jtKve8k0VRETFQSsux2QLGIvd1xaRVvC+lOPY2+X+1B5SxJaQCW7oAQyIuAg0crXfa+xuWDqf
-	QgL9NmAmBwPDAvAICay/OaWICbyhZeyhLqnfFxmOcY5CVa+aN/rkoliT25og/GJpoMEBA+yjCzg
-	rFcteyce/U6TTJ2P6Wm4QT4JfHPIqLOv12ATMD7gqqy1TTJ9tY1qGpTVIpaQ4cTDLUSzlXtLDFr
-	4ZMZReXjPlKnH7vx/SOcvsjG+OXwXM2P4PKW64pU=
-X-Google-Smtp-Source: AGHT+IHLGuZmkW+kSw560ggBD0NBIY1H4eKZ93nmmbFSZmm1UVBrZY9TNOMsy6/xMK/A0+7PYsLKIA==
-X-Received: by 2002:a17:907:6d0a:b0:ad2:27b1:7214 with SMTP id a640c23a62f3a-adf9e1d7e73mr22733666b.17.1749829736693;
-        Fri, 13 Jun 2025 08:48:56 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v5 2/9] xen/riscv: introduce register_intc_ops() and intc_hw_ops.
-Date: Fri, 13 Jun 2025 17:48:41 +0200
-Message-ID: <67f202602066afc7334a15ed5cbdb96309e7d2b3.1749825782.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: ea1b56da-486d-11f0-a309-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UHE8QqG37/utkIBi5h2dNmoVDQK1juf9b9itrRCB/dSG0CDEedyUycxq2Qc18sNLvYbfRk7pBPEWO0w1uiGrA+1/L44wRVNeNLMV+3P7nVwCWysV0nEf+W53/YpLQeo8hf2nqF9zV5qBGH/klN7Za25BJ0lqDypBKw3+m59TvpGoRWrM9TAdKJGqo0zT79DzQovcMJnfvZqmGkXiSAmbfQV4sjWzXk3antB8BDt9xp6kP+VrdEVyPE1cs/BTlCUjNAYXjdd+qfXQRtZD5yGlivB3I6eaNyREI3hNKAu7jSDnUBKnMxWPHDcqH455ifxtpH9XmywP12TH1t5A9T8qJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9v0C6+RsIX+l4808sG+MpH7zRloooqS5T1YfefHTJCo=;
+ b=FPCSPt2OxXLDxBoJ18EbZZy2ZXOGzdFHy3jzhS09Z5kZqKb4L+1en236eaDgs3QryMj5d9WH9UE1W7Efr3ADDle+akE8LNDCyWtEdZq4GBVgaubsu3/3oYR7VXaAR0ZZ5rHfBJHdDeKhob2QSOh6BU20WHgMk8uhAjbKiIMT2s3wJo9Dgtm1dOvqGBa4rvZ+7+PkwwE/HUjgcRsaO0S6Mec089vmemVZcrEaC2ldQcuWaxCS4wcJ/4QKAgDMDcZV5D58z+cviQ7mC3mmwrOwjB2mM8UP1bzfzT41kXF9fB00r/SdOJP+PLEEKQHSfesrmAzc0JPcnWqjmHgKUaEp4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9v0C6+RsIX+l4808sG+MpH7zRloooqS5T1YfefHTJCo=;
+ b=ykIq4FdbVZs8108NcomX91diY4D62WsMie+PmanXmz7EOqNmsyoR21O0Xi2J+La2KPvt3wf/71M6iCxXNgCEFP/WUz/3nAy89egxigwMlHkvPA3zOeomCeuv1V9Zxvm8iafk34feAxioMjVdh7B+OZDyA4EGQPX+nNppQS68s+4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Rahul Singh <rahul.singh@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <stefano.stabellini@amd.com>,
+	Stewart Hildebrand <stewart.hildebrand@amd.com>
+Subject: [PATCH v8] xen/arm: pci: introduce PCI_PASSTHROUGH Kconfig option
+Date: Fri, 13 Jun 2025 11:17:30 -0400
+Message-ID: <20250613154847.317979-1-stewart.hildebrand@amd.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1749825782.git.oleksii.kurochko@gmail.com>
-References: <cover.1749825782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: stewart.hildebrand@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001506:EE_|DS7PR12MB6262:EE_
+X-MS-Office365-Filtering-Correlation-Id: ff5376b7-88b1-4d6b-ad15-08ddaa91cb7b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|1800799024|82310400026|36860700013|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?uAC+BVTKk//tf3FWsnvCngdHobzTluGT/AivdNgPXMG0t69izv73n6cfMk10?=
+ =?us-ascii?Q?lrmYN/0/8UfAI1cha8vdzwyaLDuUVlheWueeB88zEv7BPwGpOh13SvJ4Pwms?=
+ =?us-ascii?Q?ih9Ah7sOCmlRIWMTYhtMZOvhaaE62MtA0u49FgTruR5lEkP3lKpNNhy9amKE?=
+ =?us-ascii?Q?A56FcQk9L9ZwCiKoDDK9N+6daK4zjeVlGlY9K4y7AstJIDcvL70cziaG/GJW?=
+ =?us-ascii?Q?7IU3pV5skxt1jMP+DG67hQIl3sSYP6rNI5yhXbcWjledOYVyGrcAG0cE4Tpe?=
+ =?us-ascii?Q?8eY+t3O3UFJQobwPWUV/v/0Vw/3A6dTuvMVAfE7uDWVEIKpyjJNIa/IgquxZ?=
+ =?us-ascii?Q?JUWvmLOKrNU60qYx+fc452q4LCSSHRFJl7OB/+O0Fp40TDFSw3ah2xsTvy/h?=
+ =?us-ascii?Q?D8Rkik08REY0WFLD8rroj70FrgfKN3dbV2uBRhUua3vOxsNcVRUBcdw1gpbq?=
+ =?us-ascii?Q?eF9/mh1u3HQXEFlTxzt0vZhXyR+NMaSu11EgAbgl3gU/HHBYg4eJdSgJEug0?=
+ =?us-ascii?Q?XhElzZZOX9/kWWjVpTERwBl+R/uSLXikIKyC83gJvdKLt0jPd1pZbtiOLpc4?=
+ =?us-ascii?Q?llkeiPlvPjTes0mbA+8/qELaYq8ApTX/ie/2mFDO0nwYIeMCGp7DrLxbxF7Z?=
+ =?us-ascii?Q?cnx/6OrRuj8ml0DIJDVsLX1iHLAspgDKM2hUQQsx38Mswaj6aTAvLJvJFngV?=
+ =?us-ascii?Q?RfuGX9SCMbg8xBZRtUobRZbn3dDBbOjUI+fFUH+xQcEnySPU+6eVv51xx7ws?=
+ =?us-ascii?Q?+FJWX2ZgYeEF8YHFSqnppK7A5LxlRoLDVJSiIn0+O2mp/d2/qFmGOGli+UyB?=
+ =?us-ascii?Q?x6I/KHeIlkcDme2AOMAW5NGQF0ifSSRHcO2kESO/YXUx5asE0f+0OOTD4+E9?=
+ =?us-ascii?Q?VBftRJTkHVoAOT7DotROEzzR9BvdhUUEFhHeFjjEZQAfngMQFlGfxcoFmG30?=
+ =?us-ascii?Q?iUiOnJ1J10NFQGQ2z93T7Pgtej+4GacexARrZp3Rq8p0GqM8pMIPM2W0yYq8?=
+ =?us-ascii?Q?BAY197JyfcMFz/0yPAVU4rj62gigrY/dJ9kdHLzyK//hEsPiUlWGgIqbNdye?=
+ =?us-ascii?Q?GsGt8LRQUIvHdkoXKEGzm8SXLrdhIasBPkO4Xf3KDg0GNv8GBDZiLEm7nmot?=
+ =?us-ascii?Q?FKaK8yuVhl6eqoDBr7Z5XkfvAgzlRbiU6GU1BB+/zUGJMrYq0SCUE87lrnJS?=
+ =?us-ascii?Q?0f5g+j2M+5GcLta8vljOVYRIaGP1XD2My4i1qSls3iQa2dmAGq92eIU10wWJ?=
+ =?us-ascii?Q?eHMGxM+OZcDEQdY+bs2CK1i+eIV8zbxntnqJwT8u52oXIigFJhjBw9pthvE8?=
+ =?us-ascii?Q?O99r1/BQzSIhRoFxlFlR6Y7blewLU129+GEBd+/JcveSyUIjMjEsEeVmJ6om?=
+ =?us-ascii?Q?Zm05Eap9yVtCXi6qdSzyGeLme9w0wo9gONI24r3STEYRMHmb6CVsIDR/fe5g?=
+ =?us-ascii?Q?eMUMmmZLyV/qJqPXdzMvxEZE3wEdSYODn4cgExJGxyY4wKTCyKkxvQ=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(82310400026)(36860700013)(13003099007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 15:48:51.6600
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ff5376b7-88b1-4d6b-ad15-08ddaa91cb7b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00001506.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6262
 
-Introduce the intc_hw_operations structure to encapsulate interrupt
-controller-specific data and operations. This structure includes:
-- A pointer to interrupt controller information (`intc_info`)
-- Callbacks to initialize the controller and set IRQ type/priority
-- A reference to an interupt controller descriptor (`host_irq_type`)
-- number of interrupt controller irqs.
+From: Rahul Singh <rahul.singh@arm.com>
 
-Add function register_intc_ops() to mentioned above structure.
+Setting CONFIG_PCI_PASSTHROUGH=y will enable PCI passthrough on ARM,
+even though the feature is not yet complete in the current upstream
+codebase. The purpose of this is to make it easier to enable the
+necessary configs (HAS_PCI, HAS_VPCI) for testing and development of PCI
+passthrough on ARM, and to build it in CI.
 
-Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V5:
- - Nothing changed. Only rebase.
----
-Changes in V4:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
----
-Changes in V3:
- - Drop inclusion of xen/irq.h in asm/intc.h as forward declaration is enogh
-   for types used in asm/intc.h.
- - Drop forward declaration for dt_device_node  and hw_irq_controller.
- - Declare intc_hw_ops as:
-     const struct intc_hw_operations * __ro_after_init intc_hw_ops;
----
-Changes in V2:
- - Declare host_irq_type member of intc_hw_operations as pointer-to-const.
- - Moved up forward declaration of irq_desc.
- - Use attribute __init for register_intc_ops().
- - Use attribute __ro_after_init for intc_hw_ops variable.
- - Update prototype of register_intc_ops() because of what mention in the
-   previous point.
----
- xen/arch/riscv/include/asm/intc.h | 19 +++++++++++++++++++
- xen/arch/riscv/intc.c             |  9 +++++++++
- 2 files changed, 28 insertions(+)
+Since PCI passthrough on ARM is still work in progress at this time,
+make it depend on EXPERT.
 
-diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index 81f74736ba..434c9d0781 100644
---- a/xen/arch/riscv/include/asm/intc.h
-+++ b/xen/arch/riscv/include/asm/intc.h
-@@ -14,11 +14,30 @@ enum intc_version {
-     INTC_APLIC,
- };
+Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+---
+The alpine-3.18-gcc-arm64-randconfig CI job should pick up the new
+config option, but if we wanted it to be built more consistently in CI
+we could add CONFIG_PCI_PASSTHROUGH=y to one of the arm jobs in
+automation/gitlab-ci/build.yaml, e.g. alpine-3.18-gcc-debug-arm64.
+
+v7->v8:
+* remove select HAS_VPCI as HAS_VPCI_GUEST_SUPPORT already does so
+* move select HAS_PCI to HAS_VPCI in common
+* move remaining selects under config ARM_64
+* add HAS_PASSTHROUGH
+* remove "default n" since it is redundant
+
+v6->v7:
+* rebase
+* send patch separately from series [3]
+* add HAS_VPCI_GUEST_SUPPORT since it's upstream now
+* drop Julien's A-b due to changes and was given several releases ago
+
+v5->v6:
+* no change
+
+v4->v5:
+* no change
+
+v3->v4:
+* no change
+
+v2->v3:
+* add Julien's A-b
+
+v1->v2:
+* drop "ARM" naming since it is already in an ARM category
+* depend on EXPERT instead of UNSUPPORTED
+
+Changes from downstream to v1:
+* depends on ARM_64 (Stefano)
+* Don't select HAS_VPCI_GUEST_SUPPORT since this config option is not currently
+  used in the upstream codebase. This will want to be re-added here once the
+  vpci series [2] is merged.
+* Don't select ARM_SMMU_V3 since this option can already be selected
+  independently. While PCI passthrough on ARM depends on an SMMU, it does not
+  depend on a particular version or variant of an SMMU.
+* Don't select HAS_ITS since this option can already be selected independently.
+  HAS_ITS may want to be added here once the MSI series [1] is merged.
+* Don't select LATE_HWDOM since this option is unrelated to PCI passthrough.
+
+[1] https://gitlab.com/xen-project/people/bmarquis/xen-arm-poc/-/commits/poc/pci-passthrough
+[2] https://lists.xenproject.org/archives/html/xen-devel/2023-10/msg00660.html
+[3] https://lore.kernel.org/xen-devel/20231113222118.825758-1-stewart.hildebrand@amd.com/T/#t
+
+(cherry picked from commit 9a08f1f7ce28ec619640ba9ce11018bf443e9a0e from the
+ downstream branch [1])
+---
+ xen/arch/arm/Kconfig | 8 ++++++++
+ xen/drivers/Kconfig  | 1 +
+ 2 files changed, 9 insertions(+)
+
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 3f25da3ca5fd..95a2cd3d006d 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -8,6 +8,8 @@ config ARM_64
+ 	depends on !ARM_32
+ 	select 64BIT
+ 	select HAS_FAST_MULTIPLY
++	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
++	select HAS_PASSTHROUGH if PCI_PASSTHROUGH
  
-+struct irq_desc;
-+
- struct intc_info {
-     enum intc_version hw_version;
-     const struct dt_device_node *node;
- };
+ config ARM
+ 	def_bool y
+@@ -258,6 +260,12 @@ config PARTIAL_EMULATION
  
-+struct intc_hw_operations {
-+    /* Hold intc hw information */
-+    const struct intc_info *info;
-+    /* Initialize the intc and the boot CPU */
-+    int (*init)(void);
-+
-+    /* hw_irq_controller to enable/disable/eoi host irq */
-+    const struct hw_interrupt_type *host_irq_type;
-+
-+    /* Set IRQ type */
-+    void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
-+    /* Set IRQ priority */
-+    void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
-+};
-+
- void intc_preinit(void);
+ source "arch/arm/firmware/Kconfig"
  
-+void register_intc_ops(const struct intc_hw_operations *ops);
++config PCI_PASSTHROUGH
++	bool "PCI passthrough" if EXPERT
++	depends on ARM_64
++	help
++	  This option enables PCI device passthrough
 +
- #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index 4061a3c457..1ecd651bf3 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -5,6 +5,15 @@
- #include <xen/init.h>
- #include <xen/lib.h>
+ endmenu
  
-+#include <asm/intc.h>
-+
-+static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
-+
-+void __init register_intc_ops(const struct intc_hw_operations *ops)
-+{
-+    intc_hw_ops = ops;
-+}
-+
- void __init intc_preinit(void)
- {
-     if ( acpi_disabled )
+ menu "ARM errata workaround via the alternative framework"
+diff --git a/xen/drivers/Kconfig b/xen/drivers/Kconfig
+index 20050e9bb8b3..d42314bb1904 100644
+--- a/xen/drivers/Kconfig
++++ b/xen/drivers/Kconfig
+@@ -14,6 +14,7 @@ source "drivers/video/Kconfig"
+ 
+ config HAS_VPCI
+ 	bool
++	select HAS_PCI
+ 
+ config HAS_VPCI_GUEST_SUPPORT
+ 	bool
+
+base-commit: 229a11aac7bf52f4532ab732ed10f173bd332cd0
 -- 
 2.49.0
 
