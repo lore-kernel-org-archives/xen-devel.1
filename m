@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6B7C71151
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1014624.1392716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC88C71136
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1014627.1392738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eJ-0006dA-GI; Fri, 13 Jun 2025 15:48:59 +0000
+	id 1uQ6eK-0006wl-Jl; Fri, 13 Jun 2025 15:49:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1014624.1392716; Fri, 13 Jun 2025 15:48:59 +0000
+Received: by outflank-mailman (output) from mailman id 1014627.1392738; Fri, 13 Jun 2025 15:49:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eJ-0006d3-Dg; Fri, 13 Jun 2025 15:48:59 +0000
-Received: by outflank-mailman (input) for mailman id 1014624;
- Fri, 13 Jun 2025 15:48:57 +0000
+	id 1uQ6eK-0006vg-BT; Fri, 13 Jun 2025 15:49:00 +0000
+Received: by outflank-mailman (input) for mailman id 1014627;
+ Fri, 13 Jun 2025 15:48:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=44KY=Y4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uQ6eH-0006cn-SK
- for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:48:57 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1uQ6eJ-0006cn-HU
+ for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:48:59 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e9aa130b-486d-11f0-b894-0df219b8e170;
- Fri, 13 Jun 2025 17:48:55 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ad8826c05f2so421707866b.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Jun 2025 08:48:55 -0700 (PDT)
+ id eacbe99d-486d-11f0-b894-0df219b8e170;
+ Fri, 13 Jun 2025 17:48:57 +0200 (CEST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ade58ef47c0so457361566b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Jun 2025 08:48:57 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec8979563sm144821766b.158.2025.06.13.08.48.53
+ a640c23a62f3a-adec8979563sm144821766b.158.2025.06.13.08.48.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 08:48:54 -0700 (PDT)
+ Fri, 13 Jun 2025 08:48:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e9aa130b-486d-11f0-b894-0df219b8e170
+X-Inumbo-ID: eacbe99d-486d-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749829735; x=1750434535; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=U18FNGQaQ2WOAoPIbpjFmVvamBgLJPNEgZzb8J9otcc=;
-        b=H3Bgt2OhVepj2it+rTZTcsPGU75F7RJRiBVH1vuC3wX11byN+rfhz0JbpIoZr1wjV5
-         iRY/1MwUmkKOz68tL7ybcJZrlh6rNanA4hHrMkqo6LVm7abfxfJcK2z2iv1D6IsGOvTN
-         U94vBkeDtwTw+vZmrhqbQM0S2VJuva/xoPnwDaa21Ko+kV2Yz7YzTzAZhNQyY2WpkQsN
-         DzBtTanEf4+pvQCuqIqRWjahrVLjcDKzxaQjtWiRDuK93z6uwN5e4c5HD/K0wuZ6lji0
-         2w9/+GkaHTRB+xQYoDU/xtNvqiWvqqPcj0OgLYtZX1hDPLus9DDFYK2win7ikDCE4e8q
-         FjtQ==
+        d=gmail.com; s=20230601; t=1749829737; x=1750434537; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=R6A8r2DsEy0IO5GoSvvpcCWrmAlrTSeNGBRJKoWIeJE=;
+        b=NebhAuNT1GH8t3ne8wvXlvR4xQfXK6UGdFjsO1Lw3xeK4SOmS09+33Y56RzDrbWaPV
+         pfFA04R/LzvmvzkDW0FulT/zz0gpkHgkkK14Gwo4EjX15vPCuoCX/2lKrS268qe5lHJM
+         SLpjL/YfXxKihQTsl3p/kIdMeET7F23llSRo2IdNfjn+BLHxpECPzjqI4/97A9vE1CH+
+         M1PXgrWgXkmYv613oOWAPz1VPIiXSFHbAVCqJjJEvLvKa764oL9I5vzi8+IgqCjgKjMb
+         azUvzCLaj7YxLy3GTyv0VlZk0Rblsi0FIrMGg89VP2bQh31kuFsBE29lTlI2rojLwDfU
+         goQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749829735; x=1750434535;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=U18FNGQaQ2WOAoPIbpjFmVvamBgLJPNEgZzb8J9otcc=;
-        b=dKUe6CgG+Tpb5y2yjRjg9hQw4w6tKxXJJerjE6sN4/NrcjIfpCQIs7iEpjolTNV4mD
-         t5rLW7gwHIO27luT5K8EBolxKm/SZgdCkuPaf9O+3lJmKHcV3E4rK76yl2I2bZpm6fXA
-         NB+AjHXlVi448O58sbOhG9acjVBNKRmn0ErKP1+jfSEpIiVhVOlDqDftHbPYrsDA8QCW
-         AtEHrhqzLIOvbbjPaTIppCjppgDxMY5Iv5lX8+q0vE+PsBf4mIEYUevk5ZE/7VGOFGuo
-         WeFa7VbaDwumuqvr7JuCP1qP3cpHJnc0evv/uZ5A4cdZPO+jHQAuzWX5xFejhvazzlha
-         7kkw==
-X-Gm-Message-State: AOJu0YxRHKw1IBSsMOFeA7mzPzM3wrPGciIrdBpORZ3XhWxhjTg/4xLZ
-	fhD7jGw+W+jzOVvIcXOOGow9BtUIGsyJIVvO3Zn+yytJetwCuFJjr6y7eSaw4A==
-X-Gm-Gg: ASbGncs3XDuiHwYhXCetk+wQCRBT25KhxV//Q618Z0K7XwwC9n3+/vSUiYCUidRjpSp
-	dTfeLPQ3WouIthAIs+1vYwmqNh8AiGtQ+0XcKaNTGRqeo1wFFTR4EUt4SH+3E9CWE2uSz2D6DF3
-	mC3YI9I25l7nZxlRqcKevFhtLcaUJkxh4NSn6B4JQuCeJB5jBiQrlmZrVS6KdXnSEF9XsUpzBmN
-	1TKTpkkR1cKjAA5VjTNzcUxPMLV8NCfwboTic6+dKsDCyBURWmOxl/UBDxdDSOTXtTi5BPiLDjp
-	VwORV7g1gsqJDykxHcHNBg7t+am9uF49JARTEvxmKkSRb04T7hq2v3+LOriyUl3NXsnuHBEwnMN
-	K1URDzM/dlvnLr9/X1A7c9UMV3owY
-X-Google-Smtp-Source: AGHT+IGxz5wVTWFnAXzb/dl28GnEFScdeg3yQpCty9yM2B5NLJAZJpX/D93FqldXfK2v/H/epVLvSQ==
-X-Received: by 2002:a17:907:706:b0:ad4:d00f:b4ca with SMTP id a640c23a62f3a-adec5d28463mr364608166b.50.1749829734640;
-        Fri, 13 Jun 2025 08:48:54 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1749829737; x=1750434537;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=R6A8r2DsEy0IO5GoSvvpcCWrmAlrTSeNGBRJKoWIeJE=;
+        b=Y0VCCi3BJxn0u9mJ3AqYn1bpSP6d/TBhH1uMLxi8TsnOlh2wmqi3d6l4dmZqgmSuTo
+         /MN95Ba8tjqS08CUIEgzMKgPwUxKDcPqJmpYQvStiUpfXKg1i+y8uDmUh9v2FV59rirH
+         EDGRY/vRMZgQAnVaEqdB2ORArkhAZmTdsM6AUABP6VLdDNMlpgqGlSpye2OH+QpqjHBE
+         oMXa4A0w8d5IDqMbZbWCBVkhAkX0GKzZeipUhn1S7a92HjH8UbhFR6ArMMZVx6kQyzPU
+         JSNAd499MZVKiug8fz3SpxcYb3VPHCAAvEbCky6VmQsCNEz/rlhoNWwNETXorcGH4aAL
+         rGtQ==
+X-Gm-Message-State: AOJu0Yz6fyxVHOZ4S0W8gHXICQ3DENcKBXDe4OnX785J+dY/L8W8jx8W
+	gqtwwpnfwPLYS+nUMw8TtwgogSJJWgg1qWXV3hhY+jXemBIB010kGX73VEroXA==
+X-Gm-Gg: ASbGncs1JXY4GKzauoaH+F/aotkRCi1hZLosXkpRE1RjXsgzv8/NOKKjoLi/Xe2QMYZ
+	RFvLRoRcHEr4oVAJd+HfiVtYTMilKRcp5sOtVyEYGdUXZzRXopzKsHVtb6m/HTcrvNtrhbUkRtm
+	/3jtKve8k0VRETFQSsux2QLGIvd1xaRVvC+lOPY2+X+1B5SxJaQCW7oAQyIuAg0crXfa+xuWDqf
+	QgL9NmAmBwPDAvAICay/OaWICbyhZeyhLqnfFxmOcY5CVa+aN/rkoliT25og/GJpoMEBA+yjCzg
+	rFcteyce/U6TTJ2P6Wm4QT4JfHPIqLOv12ATMD7gqqy1TTJ9tY1qGpTVIpaQ4cTDLUSzlXtLDFr
+	4ZMZReXjPlKnH7vx/SOcvsjG+OXwXM2P4PKW64pU=
+X-Google-Smtp-Source: AGHT+IHLGuZmkW+kSw560ggBD0NBIY1H4eKZ93nmmbFSZmm1UVBrZY9TNOMsy6/xMK/A0+7PYsLKIA==
+X-Received: by 2002:a17:907:6d0a:b0:ad2:27b1:7214 with SMTP id a640c23a62f3a-adf9e1d7e73mr22733666b.17.1749829736693;
+        Fri, 13 Jun 2025 08:48:56 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -94,85 +95,110 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 0/9] riscv: introduce basic UART support and interrupts for hypervisor mode
-Date: Fri, 13 Jun 2025 17:48:39 +0200
-Message-ID: <cover.1749825782.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v5 2/9] xen/riscv: introduce register_intc_ops() and intc_hw_ops.
+Date: Fri, 13 Jun 2025 17:48:41 +0200
+Message-ID: <67f202602066afc7334a15ed5cbdb96309e7d2b3.1749825782.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <cover.1749825782.git.oleksii.kurochko@gmail.com>
+References: <cover.1749825782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The patch series introduces basic UART support (in interrupt mode) and support of
-interrupts for hypervisor mode.
+Introduce the intc_hw_operations structure to encapsulate interrupt
+controller-specific data and operations. This structure includes:
+- A pointer to interrupt controller information (`intc_info`)
+- Callbacks to initialize the controller and set IRQ type/priority
+- A reference to an interupt controller descriptor (`host_irq_type`)
+- number of interrupt controller irqs.
 
-To implement this the following has been added:
-- APLIC and IMISC initialization.
-- Introduce of intc_hw_operations abstraction.
-- Introduce some APLIC and IMSIC operations.
-- Introduce init_IRQ(), platform_get_irq() and setup_irq() functions.
-- Update do_trap() handler to handle IRQ_S_EXT.
-- Introduce some other functions such as: get_s_time(), smp_clear_cpu_maps(),
-  ioremap().
-- Enable UART. 
+Add function register_intc_ops() to mentioned above structure.
 
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/1868775206
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V5:
- - Update CI tests link.
- - Mostly changes are patch-specific. Please check each patch separately.
+ - Nothing changed. Only rebase.
 ---
 Changes in V4:
- - Merged to staging:
-    - xen/riscv: initialize bitmap to zero in riscv_fill_hwcap_from_isa_string()
-    - xen/asm-generic: introduce asm-generic/irq-dt.h
-    - xen/riscv: introduce smp_prepare_boot_cpu()
-    - xen/riscv: introduce support of Svpbmt extension
-    - add ioremap_*() variants using ioremap_attr()
-    - xen/riscv: introduce init_IRQ()
-    - xen/riscv: introduce platform_get_irq()
- - All other changes are patch-specific. Please check each patch separately.
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+---
+Changes in V3:
+ - Drop inclusion of xen/irq.h in asm/intc.h as forward declaration is enogh
+   for types used in asm/intc.h.
+ - Drop forward declaration for dt_device_node  and hw_irq_controller.
+ - Declare intc_hw_ops as:
+     const struct intc_hw_operations * __ro_after_init intc_hw_ops;
 ---
 Changes in V2:
- - Merged to staging:
-    xen/riscv: initialize bitmap to zero in riscv_fill_hwcap_from_isa_string()
-    xen/asm-generic: introduce asm-generic/irq-dt.h
- - All other changes are patch-specific. Please check each patch separately.
+ - Declare host_irq_type member of intc_hw_operations as pointer-to-const.
+ - Moved up forward declaration of irq_desc.
+ - Use attribute __init for register_intc_ops().
+ - Use attribute __ro_after_init for intc_hw_ops variable.
+ - Update prototype of register_intc_ops() because of what mention in the
+   previous point.
 ---
+ xen/arch/riscv/include/asm/intc.h | 19 +++++++++++++++++++
+ xen/arch/riscv/intc.c             |  9 +++++++++
+ 2 files changed, 28 insertions(+)
 
-Oleksii Kurochko (9):
-  xen/riscv: dt_processor_hartid() implementation
-  xen/riscv: introduce register_intc_ops() and intc_hw_ops.
-  xen/riscv: imsic_init() implementation
-  xen/riscv: aplic_init() implementation
-  xen/riscv: introduce intc_init() and helpers
-  xen/riscv: implementation of aplic and imsic operations
-  xen/riscv: add external interrupt handling for hypervisor mode
-  xen/riscv: implement setup_irq()
-  xen/riscv: add basic UART support
-
- xen/arch/riscv/Kconfig             |   1 +
- xen/arch/riscv/Makefile            |   1 +
- xen/arch/riscv/aplic-priv.h        |  38 +++
- xen/arch/riscv/aplic.c             | 295 +++++++++++++++++
- xen/arch/riscv/imsic.c             | 489 +++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/aplic.h |  73 +++++
- xen/arch/riscv/include/asm/imsic.h |  74 +++++
- xen/arch/riscv/include/asm/intc.h  |  32 ++
- xen/arch/riscv/include/asm/irq.h   |   8 +-
- xen/arch/riscv/include/asm/smp.h   |  17 +
- xen/arch/riscv/intc.c              |  55 ++++
- xen/arch/riscv/irq.c               | 131 ++++++++
- xen/arch/riscv/setup.c             |  14 +
- xen/arch/riscv/smpboot.c           |  77 +++++
- xen/arch/riscv/traps.c             |  19 ++
- xen/drivers/char/Kconfig           |   3 +-
- 16 files changed, 1324 insertions(+), 3 deletions(-)
- create mode 100644 xen/arch/riscv/aplic-priv.h
- create mode 100644 xen/arch/riscv/imsic.c
- create mode 100644 xen/arch/riscv/include/asm/aplic.h
- create mode 100644 xen/arch/riscv/include/asm/imsic.h
-
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 81f74736ba..434c9d0781 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -14,11 +14,30 @@ enum intc_version {
+     INTC_APLIC,
+ };
+ 
++struct irq_desc;
++
+ struct intc_info {
+     enum intc_version hw_version;
+     const struct dt_device_node *node;
+ };
+ 
++struct intc_hw_operations {
++    /* Hold intc hw information */
++    const struct intc_info *info;
++    /* Initialize the intc and the boot CPU */
++    int (*init)(void);
++
++    /* hw_irq_controller to enable/disable/eoi host irq */
++    const struct hw_interrupt_type *host_irq_type;
++
++    /* Set IRQ type */
++    void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
++    /* Set IRQ priority */
++    void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
++};
++
+ void intc_preinit(void);
+ 
++void register_intc_ops(const struct intc_hw_operations *ops);
++
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index 4061a3c457..1ecd651bf3 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -5,6 +5,15 @@
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ 
++#include <asm/intc.h>
++
++static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
++
++void __init register_intc_ops(const struct intc_hw_operations *ops)
++{
++    intc_hw_ops = ops;
++}
++
+ void __init intc_preinit(void)
+ {
+     if ( acpi_disabled )
 -- 
 2.49.0
 
