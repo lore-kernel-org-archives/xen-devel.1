@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C742C71148
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1014634.1392798 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E516C71153
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jun 2025 15:49:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1014638.1392816 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eU-0000Kf-Jv; Fri, 13 Jun 2025 15:49:10 +0000
+	id 1uQ6eW-0000qp-SS; Fri, 13 Jun 2025 15:49:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1014634.1392798; Fri, 13 Jun 2025 15:49:10 +0000
+Received: by outflank-mailman (output) from mailman id 1014638.1392816; Fri, 13 Jun 2025 15:49:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uQ6eU-0000KB-DQ; Fri, 13 Jun 2025 15:49:10 +0000
-Received: by outflank-mailman (input) for mailman id 1014634;
- Fri, 13 Jun 2025 15:49:08 +0000
+	id 1uQ6eW-0000op-KB; Fri, 13 Jun 2025 15:49:12 +0000
+Received: by outflank-mailman (input) for mailman id 1014638;
+ Fri, 13 Jun 2025 15:49:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=44KY=Y4=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uQ6eS-0006cn-Mu
- for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:49:08 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ id 1uQ6eU-0006cn-Mu
+ for xen-devel@lists.xenproject.org; Fri, 13 Jun 2025 15:49:10 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f011e806-486d-11f0-b894-0df219b8e170;
- Fri, 13 Jun 2025 17:49:06 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-adb5cb6d8f1so399733566b.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Jun 2025 08:49:06 -0700 (PDT)
+ id f16b4efe-486d-11f0-b894-0df219b8e170;
+ Fri, 13 Jun 2025 17:49:08 +0200 (CEST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ad56cbc7b07so333047666b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Jun 2025 08:49:08 -0700 (PDT)
 Received: from fedora.. (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec8979563sm144821766b.158.2025.06.13.08.49.03
+ a640c23a62f3a-adec8979563sm144821766b.158.2025.06.13.08.49.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 08:49:05 -0700 (PDT)
+ Fri, 13 Jun 2025 08:49:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f011e806-486d-11f0-b894-0df219b8e170
+X-Inumbo-ID: f16b4efe-486d-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749829746; x=1750434546; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1749829748; x=1750434548; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=G/8G0maLAdS7qiUNN1zQIFAqq4669vsyHIhw5b6gzZ8=;
-        b=H5nIUquYVfIr+5UBu8MVnElaJthCWjE6NQQo3omwJzfKHHUxZ+iECw7bfwwK37Rjik
-         m5vvCL2VSRlOCiYbZ3Irl4OnS9y9cCUOwPlrvWmr70ePlxTuUCo2scr3ZqzOuYpHbvaR
-         DDc07ZyOA4mzZAekLGK6sb1Spyluv/GoauSX7x/41rJEMfNOdaiFPA7A3pLc8IgfK5al
-         4L4voC4udOc23EZao0h9IpQXZPGUT5uG+OTLK8w9Heu/ssmhtoEiVBdcQlwEansXUTXa
-         bkER1sY186dQvCoQdLBZHDv+c5Qz839Y7garIfPQ+5IWkBZz6uR5mnMQ2oAIilfQJYYz
-         lcRw==
+        bh=c5Lkbfnvd1QCDHpROG9OH/otgdh2NEdBGe+vvJ9B82I=;
+        b=RH39gf91ScptKdVXhMs/cSuMdSwsZjaeuaUhGzFbiVftV7BgncT20yBp3BQNsLTV5T
+         oRB5FaGf5RM+PstmdZu4X4umrReWdL68TlrkwBb4XdiTu9HibJ/Y+qZdixOu5/CbKmDu
+         HGmkBIYugV4OcivTzKZbYMGrikwEKzsO3doKIdgU3g2p1vMRMcWeTIKZRR7Y7j6QQtAj
+         rw95i13NQjps+HFV0TFMEgbfhI/FgFzJrPeU+0yFZ/llqixf9zVr4pyig+oMq/w2w1Kn
+         Hb4+j/3Efh2D6ITjHNPaFrCq0bGCJhmz+MzYuefs7jURxVL6gFZnwreILaLw+sVZaS9J
+         q/eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749829746; x=1750434546;
+        d=1e100.net; s=20230601; t=1749829748; x=1750434548;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=G/8G0maLAdS7qiUNN1zQIFAqq4669vsyHIhw5b6gzZ8=;
-        b=p6zVEFnb/ZJ3d5R1PxsL4RDONFDmJRbKS3lWi/IWHb0b96nYKW1kMXx7l4SJwy4OLf
-         6Ayu6p7TZzeZ9fAr7jfk03bIoLjTFcoFWikihlgHGhk9oUFyrNdN3DqS6BNyOLar8q6w
-         OKm3IrCsvTq1AoRlE4Vlrv3cp2WlgdC5aGfJ0SdASjVWui+O1UVLxk4KjCkAYwoEd8s0
-         3QamNewo1z2ILBW/6PnEhS84qFc+olzx9Qyz6028cgvGM0o2nMy76Vf8gvG3PV03B1Ul
-         nW1KMIaP2MQ6I1igUD1NxvKncuCN1HQlO0Ozb7aIkLykqNsqPJtrjG7LDl1oXEKpkr84
-         P2iA==
-X-Gm-Message-State: AOJu0YzxPu64QTzXH5javTajyhRZ7bZHrSHy6NqhEBXJRm6AhQ0nusMi
-	K0V45BsBJIOG1nacIOBvd5La10ldyeYjja3R/TFSnA66yANam82g8k9WAhXhvA==
-X-Gm-Gg: ASbGncse/4WATuoT9B3RovwQj/9TBBwSXeYy1drFYWv5DA+MiEDhs9DcGFsJWkNSFOC
-	v4R/TAVoatXYG95Ew+Ob+xBf7DRh7Pmiz+3CHyokjC19h9YCXrimxIubmbqrv/DC0jOHn1sJvDG
-	0YIQQthUqUFmJXKICQZYajR8NFTC45F/2b6AlYA7Fovb7UR9Snsm9T5ghXp0hxV0adqIs6v2hft
-	N7Rg1Tf/3/I/YsfN/udw9UGn59cSuTYGwm8aUe8FkWY/z6L8B7Ao0LrZQdxbdApeqlMSq7ANcsf
-	OmT6gBdsrDy4Oep1P6F3qbvwMCRX8X0YB9voO1G5dwYuRj89OiyTdQOaqmeKjhIe2go5W9oVA6D
-	50t0kPkW9eaPsldvt+L/lnxp6NlF1
-X-Google-Smtp-Source: AGHT+IE5T5Qjocief1oZduJTAONzPqr4yUERGVSSj6rRcJmvFl4TpiHXOdDafhuF40U3bNtdSpEV7w==
-X-Received: by 2002:a17:907:9623:b0:ad5:a29c:efed with SMTP id a640c23a62f3a-adec5cb0022mr351633666b.33.1749829745688;
-        Fri, 13 Jun 2025 08:49:05 -0700 (PDT)
+        bh=c5Lkbfnvd1QCDHpROG9OH/otgdh2NEdBGe+vvJ9B82I=;
+        b=H5oFYSMCN9jAyJd+0aefTEOW+YxjbJ7zid6/NoWusHNQm7odcDwJsw2/RQikCnMjA3
+         z38RGXKsA3Cy/QHJM9HKXULApT/KXmUeJ5Xs/4LGtorBIsEvdI89OmZV+ad3m5lhFuyV
+         K79p9cFa+Q32tX3W+0TdNfuCO1p2MYcY4SoA3oXrmqba5nKb7PQ514eeAS51/a10gVV2
+         NSM3xbNrSq31dZYNGuIh/kwOdcJ0PCLjALL5yUy5PLjDvk8xna/8uKCmc4jiBVYfbJlN
+         qxpqikfz2qosOGRp5Lu0JTm4VqoXcItLhIwNLYgJeh+ZxkknHeLutswcPaXy/K+Zyr06
+         i5lg==
+X-Gm-Message-State: AOJu0Yx12Z+FCJIV8H95UXIyliU5o5OEbqYhjdEC2hJTfE23KFYDm/ZU
+	Kj0XIg0jcWhOSm01mour1ktjrJyAQOkXrCYLGVb69o56bX7kFj4ARIfSaMkvMg==
+X-Gm-Gg: ASbGncs26o/xLEv1pbCE+oBNpOljwMCF5YoLoZtsL87+0Lz38ciqKWimlwkNs+E130k
+	hidDJ5jOEjpaJMFrHjZiUCWs5p9pCnNb03v2jbkhiRVbLFadM3W9Kg1Lfba5qvGf6kBA37Q2xPb
+	YWCsPRmOxUFaxMChhJ7ZFQg+iY1SOmqvDVMFuuklZVjhNn8NJ4u+5s6zc8uIbHCbwqLosRAbN2O
+	pMF4JhXXvatVBm5eizfGXYh613ebsp1A6UohQ2ywNgZogHmV/xDjtnfWQLZNw0Ybflm4Oe+9r1j
+	Ga/lNqdZVmQYkbBKVQgtaARhTMli1w56UN5OAOR1+G21IjB+1bHxsRBeuzBruY1e/jXIwW4KvaI
+	QoBHCIxeyo6jV3qNELyZLUs/qMnhZ
+X-Google-Smtp-Source: AGHT+IF4HdQ4K6/e1c/Kjg77Lf3UA4pI1sMICe8tX4U+SECyg2QF9kkXnhTQ5AC2l5A/KM2+pPXYzg==
+X-Received: by 2002:a17:906:c106:b0:add:ee2c:7313 with SMTP id a640c23a62f3a-adec55a7a66mr346620266b.22.1749829747753;
+        Fri, 13 Jun 2025 08:49:07 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -95,379 +95,119 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v5 7/9] xen/riscv: add external interrupt handling for hypervisor mode
-Date: Fri, 13 Jun 2025 17:48:46 +0200
-Message-ID: <af61c892114d4d61b688646021645cfa33ad0ee6.1749825782.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 9/9] xen/riscv: add basic UART support
+Date: Fri, 13 Jun 2025 17:48:48 +0200
+Message-ID: <f35759006bbf1d72bd3c889b50cd064891c83a3f.1749825782.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <cover.1749825782.git.oleksii.kurochko@gmail.com>
 References: <cover.1749825782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=all
 Content-Transfer-Encoding: 8bit
 
-Implement functions necessarry to have working external interrupts in
-hypervisor mode. The following changes are done:
-  - Add a common function intc_handle_external_irq() to call APLIC specific
-    function to handle an interrupt.
-  - Update do_trap() function to handle IRQ_S_EXT case; add the check to catch
-    case when cause of trap is an interrupt.
-  - Add handle_interrrupt() member to intc_hw_operations structure.
-  - Enable local interrupt delivery for IMSIC by calling of
-    imsic_ids_local_delivery() in imsic_init(); additionally introduce helper
-    imsic_csr_write() to update IMSIC_EITHRESHOLD and IMSIC_EITHRESHOLD.
-  - Enable hypervisor external interrupts.
-  - Implement aplic_handler_interrupt() and use it to init ->handle_interrupt
-    member of intc_hw_operations for APLIC.
-  - Add implementation of do_IRQ() to dispatch the interrupt.
+Update Kconfig to select GENERIC_UART_INIT for basic UART init ( find a dt node
+and call device specific device_init() ).
 
-The current patch is based on the code from [1].
+Drop `default n if RISCV` statement for config HAS_NS16550 as now ns16550 is
+ready to be compiled and used by RISC-V. Also, make the config user selectable
+for everyone except X86.
 
-[1] https://gitlab.com/xen-project/people/olkur/xen/-/commit/7390e2365828b83e27ead56b03114a56e3699dd5
+Initialize a minimal amount of stuff to have UART and Xen console:
+ - Initialize uart by calling uart_init().
+ - Initialize Xen console by calling console_init_{pre,post}irq().
+ - Initialize timer and its internal lists which are used by
+   init_timer() which is called by ns16550_init_postirq(); otherwise
+   "Unhandled exception: Store/AMO Page Fault" occurs.
+ - Enable local interrupt to recieve an input from UART
 
-Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V4 - V5:
+Changes in V4-V5:
  - Nothing changed. Only rebase.
 ---
-Changes in V3:
- - Add ASSERT(spin_is_locked(&desc->lock)) to aplic_set_irq_type().
- - Fix code style for switch () in aplic_set_irq_type().
- - Drop fallthrough between "case IRQ_TYPE_NONE: case IRQ_TYPE_INVALID:" as there
-   is no other statements in "case IRQ_TYPE_NONE".
+Changes in v3:
+ - Drop inclusion of <xen/percpu.h> as nothing in setup.c requires it.
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
-Changes in V2:
- - use BIT() macros instead of 1UL << bit_num in aplic.c.
- - Drop passing of a cause to aplic_handle_interrupt() function. And update
-   prototype of handle_interrupt() callback.
- - Drop ASSERT() in intc_handle_external_irqs() as it is useless.
- - Code style fixes.
- - Drop cause argument for intc_handle_external_irqs().
- - Update the commit message: drop words that imsic_ids_local_delivery() is
-   implemented in this patch, it is only called.
- - Add cf_check for aplic_handle_interrupt(), aplic_set_irq_type().
- - Move forward declarations in asm/intc.h up.
- - Use plain C operator instead if {clear,set}_bit() for desc->status as it
-   is always used under spinlock().
- - use writel() for writing to APLIC's sourcecfg in aplic_set_irq_type().
+Changes in v2:
+ - Drop #include <xen/keyhandler.h> in setup.c, isn't needed anymore.
+ - Drop call of percpu_init_areas() as it was needed when I used polling
+   mode for UART,  for this case percpu is used to receive serial port info:
+     struct serial_port *port = this_cpu(poll_port);
+   So percpu isn't really needed at the current development state.
+ - Make HAS_NS16550 user selectable for everyone, except X86.
+ - Update the commit message.
 ---
- xen/arch/riscv/aplic.c             | 71 ++++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/aplic.h |  7 +++
- xen/arch/riscv/include/asm/imsic.h |  1 +
- xen/arch/riscv/include/asm/intc.h  |  6 +++
- xen/arch/riscv/include/asm/irq.h   |  6 ++-
- xen/arch/riscv/intc.c              |  5 +++
- xen/arch/riscv/irq.c               | 47 ++++++++++++++++++++
- xen/arch/riscv/traps.c             | 19 ++++++++
- 8 files changed, 161 insertions(+), 1 deletion(-)
+ xen/arch/riscv/Kconfig   |  1 +
+ xen/arch/riscv/setup.c   | 12 ++++++++++++
+ xen/drivers/char/Kconfig |  3 +--
+ 3 files changed, 14 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index f3f4a44649..7e0cacc8d2 100644
---- a/xen/arch/riscv/aplic.c
-+++ b/xen/arch/riscv/aplic.c
-@@ -9,6 +9,7 @@
-  * Copyright (c) 2024-2025 Vates
-  */
- 
-+#include <xen/const.h>
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 62c5b7ba34..96bef90751 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -2,6 +2,7 @@ config RISCV
+ 	def_bool y
+ 	select FUNCTION_ALIGNMENT_16B
+ 	select GENERIC_BUG_FRAME
++	select GENERIC_UART_INIT
+ 	select HAS_DEVICE_TREE
+ 	select HAS_PMAP
+ 	select HAS_UBSAN
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 0e7398159c..a17096bf02 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -4,12 +4,15 @@
+ #include <xen/bug.h>
+ #include <xen/bootfdt.h>
+ #include <xen/compile.h>
++#include <xen/console.h>
  #include <xen/device_tree.h>
- #include <xen/errno.h>
- #include <xen/init.h>
-@@ -227,6 +228,71 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
-     spin_unlock(&aplic.lock);
- }
- 
-+static void cf_check aplic_handle_interrupt(struct cpu_user_regs *regs)
-+{
-+    /* disable to avoid more external interrupts */
-+    csr_clear(CSR_SIE, BIT(IRQ_S_EXT, UL));
-+
-+    /* clear the pending bit */
-+    csr_clear(CSR_SIP, BIT(IRQ_S_EXT, UL));
-+
-+    /* dispatch the interrupt */
-+    do_IRQ(regs, csr_swap(CSR_STOPEI, 0) >> TOPI_IID_SHIFT);
-+
-+    /* enable external interrupts */
-+    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
-+}
-+
-+static void cf_check aplic_set_irq_type(struct irq_desc *desc, unsigned int type)
-+{
-+    /*
-+    * Interrupt 0 isn't possible based on the spec:
-+    *   Each of an APLIC’s interrupt sources has a fixed unique identity number in the range 1 to N,
-+    *   where N is the total number of sources at the APLIC. The number zero is not a valid interrupt
-+    *   identity number at an APLIC. The maximum number of interrupt sources an APLIC may support
-+    *   is 1023.
-+    *
-+    * Thereby interrupt 1 will correspond to bit 0 in sourcecfg[] register,
-+    * interrupt 2 ->sourcecfg[1] and so on.
-+    *
-+    * And that is the reason why we need -1.
-+    */
-+    unsigned int irq_bit = desc->irq - 1;
-+
-+    ASSERT(spin_is_locked(&desc->lock));
-+
-+    spin_lock(&aplic.lock);
-+
-+    switch ( type )
-+    {
-+    case IRQ_TYPE_EDGE_RISING:
-+        writel(APLIC_SOURCECFG_SM_EDGE_RISE, &aplic.regs->sourcecfg[irq_bit]);
-+        break;
-+
-+    case IRQ_TYPE_EDGE_FALLING:
-+        writel(APLIC_SOURCECFG_SM_EDGE_FALL, &aplic.regs->sourcecfg[irq_bit]);
-+        break;
-+
-+    case IRQ_TYPE_LEVEL_HIGH:
-+        writel(APLIC_SOURCECFG_SM_LEVEL_HIGH, &aplic.regs->sourcecfg[irq_bit]);
-+        break;
-+
-+    case IRQ_TYPE_LEVEL_LOW:
-+        writel(APLIC_SOURCECFG_SM_LEVEL_LOW, &aplic.regs->sourcecfg[irq_bit]);
-+        break;
-+
-+    case IRQ_TYPE_NONE:
-+    case IRQ_TYPE_INVALID:
-+        writel(APLIC_SOURCECFG_SM_INACTIVE, &aplic.regs->sourcecfg[irq_bit]);
-+        break;
-+
-+    default:
-+        panic("%s: APLIC doesnt support IRQ type: 0x%x?\n", __func__, type);
-+    }
-+
-+    spin_unlock(&aplic.lock);
-+}
-+
- static const hw_irq_controller aplic_xen_irq_type = {
-     .typename     = "aplic",
-     .startup      = aplic_irq_startup,
-@@ -240,6 +306,8 @@ static const struct intc_hw_operations aplic_ops = {
-     .info                = &aplic_info,
-     .init                = aplic_init,
-     .host_irq_type       = &aplic_xen_irq_type,
-+    .handle_interrupt    = aplic_handle_interrupt,
-+    .set_irq_type        = aplic_set_irq_type,
- };
- 
- static int cf_check aplic_irq_xlate(const uint32_t *intspec,
-@@ -279,6 +347,9 @@ static int __init aplic_preinit(struct dt_device_node *node, const void *dat)
- 
-     register_intc_ops(&aplic_ops);
- 
-+    /* Enable supervisor external interrupt */
-+    csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
-+
-     return 0;
- }
- 
-diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-index c3f00238f2..b335b29d34 100644
---- a/xen/arch/riscv/include/asm/aplic.h
-+++ b/xen/arch/riscv/include/asm/aplic.h
-@@ -18,6 +18,13 @@
- #define APLIC_DOMAINCFG_IE      BIT(8, U)
- #define APLIC_DOMAINCFG_DM      BIT(2, U)
- 
-+#define APLIC_SOURCECFG_SM_INACTIVE     0x0
-+#define APLIC_SOURCECFG_SM_DETACH       0x1
-+#define APLIC_SOURCECFG_SM_EDGE_RISE    0x4
-+#define APLIC_SOURCECFG_SM_EDGE_FALL    0x5
-+#define APLIC_SOURCECFG_SM_LEVEL_HIGH   0x6
-+#define APLIC_SOURCECFG_SM_LEVEL_LOW    0x7
-+
- #define APLIC_TARGET_HART_IDX_SHIFT 18
- 
- struct aplic_regs {
-diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-index 378e49d933..c6c59215df 100644
---- a/xen/arch/riscv/include/asm/imsic.h
-+++ b/xen/arch/riscv/include/asm/imsic.h
-@@ -12,6 +12,7 @@
- #define ASM_RISCV_IMSIC_H
- 
- #include <xen/spinlock.h>
-+#include <xen/stdbool.h>
- #include <xen/types.h>
- 
- #define IMSIC_MMIO_PAGE_SHIFT   12
-diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index a11b7aa55e..ecdc8a5e65 100644
---- a/xen/arch/riscv/include/asm/intc.h
-+++ b/xen/arch/riscv/include/asm/intc.h
-@@ -14,6 +14,7 @@ enum intc_version {
-     INTC_APLIC,
- };
- 
-+struct cpu_user_regs;
- struct irq_desc;
- 
- struct intc_info {
-@@ -37,6 +38,9 @@ struct intc_hw_operations {
-     void (*set_irq_type)(struct irq_desc *desc, unsigned int type);
-     /* Set IRQ priority */
-     void (*set_irq_priority)(struct irq_desc *desc, unsigned int priority);
-+
-+    /* handle external interrupt */
-+    void (*handle_interrupt)(struct cpu_user_regs *regs);
- };
- 
- void intc_preinit(void);
-@@ -47,4 +51,6 @@ void intc_init(void);
- 
- void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
- 
-+void intc_handle_external_irqs(struct cpu_user_regs *regs);
-+
- #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
-index 84c3c2904d..94151eb083 100644
---- a/xen/arch/riscv/include/asm/irq.h
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -33,16 +33,20 @@ struct arch_irq_desc {
-     unsigned int type;
- };
- 
-+struct cpu_user_regs;
-+struct dt_device_node;
-+
- static inline void arch_move_irqs(struct vcpu *v)
- {
-     BUG_ON("unimplemented");
- }
- 
--struct dt_device_node;
- int platform_get_irq(const struct dt_device_node *device, int index);
- 
- void init_IRQ(void);
- 
-+void do_IRQ(struct cpu_user_regs *regs, unsigned int irq);
-+
- #endif /* ASM__RISCV__IRQ_H */
- 
- /*
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index f2823267a9..ea317aea5a 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -50,6 +50,11 @@ static void intc_set_irq_priority(struct irq_desc *desc, unsigned int priority)
-         intc_hw_ops->set_irq_priority(desc, priority);
- }
- 
-+void intc_handle_external_irqs(struct cpu_user_regs *regs)
-+{
-+    intc_hw_ops->handle_interrupt(regs);
-+}
-+
- void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
- {
-     ASSERT(desc->status & IRQ_DISABLED);
-diff --git a/xen/arch/riscv/irq.c b/xen/arch/riscv/irq.c
-index 669ef3ae9e..466f1b4ba9 100644
---- a/xen/arch/riscv/irq.c
-+++ b/xen/arch/riscv/irq.c
-@@ -11,6 +11,10 @@
- #include <xen/errno.h>
  #include <xen/init.h>
  #include <xen/irq.h>
-+#include <xen/spinlock.h>
-+
-+#include <asm/hardirq.h>
-+#include <asm/intc.h>
+ #include <xen/mm.h>
++#include <xen/serial.h>
+ #include <xen/shutdown.h>
+ #include <xen/smp.h>
++#include <xen/timer.h>
+ #include <xen/vmap.h>
+ #include <xen/xvmalloc.h>
  
- static irq_desc_t irq_desc[NR_IRQS];
+@@ -134,8 +137,17 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
  
-@@ -90,3 +94,46 @@ void __init init_IRQ(void)
-     if ( init_irq_data() < 0 )
-         panic("initialization of IRQ data failed\n");
- }
-+
-+/* Dispatch an interrupt */
-+void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
-+{
-+    struct irq_desc *desc = irq_to_desc(irq);
-+    struct irqaction *action;
-+
-+    irq_enter();
-+
-+    spin_lock(&desc->lock);
-+
-+    if ( desc->handler->ack )
-+        desc->handler->ack(desc);
-+
-+    if ( desc->status & IRQ_DISABLED )
-+        goto out;
-+
-+    desc->status |= IRQ_INPROGRESS;
-+
-+    action = desc->action;
-+
-+    spin_unlock_irq(&desc->lock);
-+
-+#ifndef CONFIG_IRQ_HAS_MULTIPLE_ACTION
-+    action->handler(irq, action->dev_id);
-+#else
-+    do {
-+        action->handler(irq, action->dev_id);
-+        action = action->next;
-+    } while ( action );
-+#endif /* CONFIG_IRQ_HAS_MULTIPLE_ACTION */
-+
-+    spin_lock_irq(&desc->lock);
-+
-+    desc->status &= ~IRQ_INPROGRESS;
-+
-+ out:
-+    if ( desc->handler->end )
-+        desc->handler->end(desc);
-+
-+    spin_unlock(&desc->lock);
-+    irq_exit();
-+}
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index ea3638a54f..f061004d83 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -11,6 +11,7 @@
- #include <xen/nospec.h>
- #include <xen/sched.h>
+     intc_preinit();
  
-+#include <asm/intc.h>
- #include <asm/processor.h>
- #include <asm/riscv_encoding.h>
- #include <asm/traps.h>
-@@ -128,6 +129,24 @@ void do_trap(struct cpu_user_regs *cpu_regs)
-         }
-         fallthrough;
-     default:
-+        if ( cause & CAUSE_IRQ_FLAG )
-+        {
-+            /* Handle interrupt */
-+            unsigned long icause = cause & ~CAUSE_IRQ_FLAG;
++    uart_init();
++    console_init_preirq();
 +
-+            switch ( icause )
-+            {
-+            case IRQ_S_EXT:
-+                intc_handle_external_irqs(cpu_regs);
-+                break;
+     intc_init();
+ 
++    timer_init();
 +
-+            default:
-+                break;
-+            }
++    local_irq_enable();
 +
-+            break;
-+        }
++    console_init_postirq();
 +
-         do_unexpected_trap(cpu_regs);
-         break;
-     }
+     printk("All set up\n");
+ 
+     machine_halt();
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index e6e12bb413..8e49a52c73 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -2,8 +2,7 @@ config GENERIC_UART_INIT
+ 	bool
+ 
+ config HAS_NS16550
+-	bool "NS16550 UART driver" if ARM
+-	default n if RISCV
++	bool "NS16550 UART driver" if !X86
+ 	default y
+ 	help
+ 	  This selects the 16550-series UART support. For most systems, say Y.
 -- 
 2.49.0
 
