@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F128C71136
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 08:51:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1016981.1394003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99DDFC71135
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 08:51:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1016988.1394015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR5YL-0005jV-Kt; Mon, 16 Jun 2025 08:50:53 +0000
+	id 1uR5YP-0006Fu-01; Mon, 16 Jun 2025 08:50:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1016981.1394003; Mon, 16 Jun 2025 08:50:53 +0000
+Received: by outflank-mailman (output) from mailman id 1016988.1394015; Mon, 16 Jun 2025 08:50:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR5YL-0005jB-HB; Mon, 16 Jun 2025 08:50:53 +0000
-Received: by outflank-mailman (input) for mailman id 1016981;
- Mon, 16 Jun 2025 08:50:53 +0000
+	id 1uR5YO-0006Fb-QX; Mon, 16 Jun 2025 08:50:56 +0000
+Received: by outflank-mailman (input) for mailman id 1016988;
+ Mon, 16 Jun 2025 08:50:55 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=GKzt=Y7=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uR5Uy-0007jR-7j
- for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 08:47:24 +0000
+ id 1uR5Uh-0007jR-Ep
+ for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 08:47:07 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 85a4ee03-4a8e-11f0-a309-13f23c93f187;
- Mon, 16 Jun 2025 10:47:23 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 7b999b87-4a8e-11f0-a309-13f23c93f187;
+ Mon, 16 Jun 2025 10:47:06 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 53FAB21203;
- Mon, 16 Jun 2025 08:47:23 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 861F32118C;
+ Mon, 16 Jun 2025 08:47:06 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1BCF7139E2;
- Mon, 16 Jun 2025 08:47:23 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4B8F4139E2;
+ Mon, 16 Jun 2025 08:47:06 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id +Cs4BRvaT2hAQAAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 16 Jun 2025 08:47:23 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id khXvEAraT2gsQAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 16 Jun 2025 08:47:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,155 +53,259 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 85a4ee03-4a8e-11f0-a309-13f23c93f187
+X-Inumbo-ID: 7b999b87-4a8e-11f0-a309-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1750063643; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1750063626; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=k/MeYSsGBJ27+vnobz1RvxbDTqVako7BAJOkWTQLl8E=;
-	b=GXDjXMGo+0jyW1vB1crqi8s5c4HCfFeRis9b1zeJ45ctD3I/jEBpSePWxd+6dr05WO8bUM
-	VEC11DAu0zCijo+VAjliNqxmux25hCpMVsyRzX9BKg1AZCzDfzQo0X5u7N+MYSqwgsPhF1
-	kfjYWesKAEyZNk9NLbamW9ewCBDyygM=
+	bh=gNbWUmZdTVJqcXlU2fjp4XsMXe38emePLWQ2ppavBkA=;
+	b=tls3nwVCrtCHQR59uMJcXlRMhSzYdIzt6nLDRUrn5+RcFk84twmAK068pfugW7FkGASKel
+	omvkvRx7Ez7ZPUfB9awNnuzVEX00E9WvgLBp1SaJgt9kdeBwIr8QLdStc5veO8tRuo3SzN
+	HJza56kLAE3SyO3bGwPWHlve/xxoPXc=
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=GXDjXMGo
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1750063643; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1750063626; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=k/MeYSsGBJ27+vnobz1RvxbDTqVako7BAJOkWTQLl8E=;
-	b=GXDjXMGo+0jyW1vB1crqi8s5c4HCfFeRis9b1zeJ45ctD3I/jEBpSePWxd+6dr05WO8bUM
-	VEC11DAu0zCijo+VAjliNqxmux25hCpMVsyRzX9BKg1AZCzDfzQo0X5u7N+MYSqwgsPhF1
-	kfjYWesKAEyZNk9NLbamW9ewCBDyygM=
+	bh=gNbWUmZdTVJqcXlU2fjp4XsMXe38emePLWQ2ppavBkA=;
+	b=tls3nwVCrtCHQR59uMJcXlRMhSzYdIzt6nLDRUrn5+RcFk84twmAK068pfugW7FkGASKel
+	omvkvRx7Ez7ZPUfB9awNnuzVEX00E9WvgLBp1SaJgt9kdeBwIr8QLdStc5veO8tRuo3SzN
+	HJza56kLAE3SyO3bGwPWHlve/xxoPXc=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	Juergen Gross <jgross@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [MINI-OS PATCH v2 11/12] mini-os: kexec: add kexec callback functionality
-Date: Mon, 16 Jun 2025 10:46:18 +0200
-Message-ID: <20250616084619.11112-12-jgross@suse.com>
+Subject: [MINI-OS PATCH v2 08/12] mini-os: kexec: move used pages away for new kernel
+Date: Mon, 16 Jun 2025 10:46:15 +0200
+Message-ID: <20250616084619.11112-9-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250616084619.11112-1-jgross@suse.com>
 References: <20250616084619.11112-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 53FAB21203
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_DN_SOME(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_TWO(0.00)[2];
+	TO_DN_SOME(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
-	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
 	RCPT_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,amd.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo,amd.com:email]
 
-Add a kexec_call() macro which will provide the capability to register
-a function for being called when doing a kexec() call. The called
-functions will be called with a boolean parameter "undo" indicating
-whether a previous call needs to be undone due to a failure during
-kexec().
+Copying the new kexec kernel must not overwrite any pages still needed
+during this process. Those are especially the GDT, IDT and page tables.
 
-The related loop to call all callbacks is added to kexec().
+Move those to new allocated pages and update any related pointers.
+
+In case the kexec process is cancelled later, don't undo any page table
+moves, as the system can just be used with the new layout. By freeing
+the original pages there is no memory leaking.
+
+GDT and IDT should be reverted to their original locations, as their
+original memory can't be freed due to not being whole pages.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
- arch/x86/minios-x86.lds.S |  8 ++++++++
- include/kexec.h           |  6 ++++++
- kexec.c                   | 13 +++++++++++++
- 3 files changed, 27 insertions(+)
+ arch/x86/mm.c   | 126 ++++++++++++++++++++++++++++++++++++++++++++++++
+ include/kexec.h |   5 ++
+ kexec.c         |   6 +++
+ 3 files changed, 137 insertions(+)
 
-diff --git a/arch/x86/minios-x86.lds.S b/arch/x86/minios-x86.lds.S
-index 8a1db7d4..8c6e0a60 100644
---- a/arch/x86/minios-x86.lds.S
-+++ b/arch/x86/minios-x86.lds.S
-@@ -58,6 +58,14 @@ SECTIONS
-         }
-         PROVIDE (__fini_array_end = .);
- 
-+#if defined(CONFIG_KEXEC)
-+        PROVIDE (__kexec_array_start = .);
-+        .kexec_array : {
-+                *(.kexec_array)
-+        }
-+        PROVIDE (__kexec_array_end = .);
-+#endif
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index 3ba6d917..a71eb192 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -42,6 +42,7 @@
+ #include <mini-os/paravirt.h>
+ #include <mini-os/types.h>
+ #include <mini-os/lib.h>
++#include <mini-os/kexec.h>
+ #include <mini-os/xmalloc.h>
+ #include <mini-os/e820.h>
+ #include <xen/memory.h>
+@@ -923,3 +924,128 @@ unsigned long map_frame_virt(unsigned long mfn)
+     return addr;
+ }
+ EXPORT_SYMBOL(map_frame_virt);
 +
-         .ctors : {
-                 __CTOR_LIST__ = .;
-                 *(.ctors)
++#ifdef CONFIG_KEXEC
++static unsigned long kexec_gdt;
++static unsigned long kexec_idt;
++
++static int move_pt(unsigned long va, unsigned int lvl, bool is_leaf,
++                   pgentry_t *pte, void *par)
++{
++    unsigned long boundary_pfn = *(unsigned long *)par;
++    unsigned long pfn;
++    void *old_pg, *new_pg;
++
++    if ( is_leaf )
++        return 0;
++
++    pfn = (lvl == PAGETABLE_LEVELS + 1) ? PHYS_PFN(*(unsigned long *)pte)
++                                        : pte_to_mfn(*pte);
++    if ( pfn >= boundary_pfn )
++        return 0;
++
++    new_pg = (void *)alloc_page();
++    if ( !new_pg )
++        return ENOMEM;
++    old_pg = pfn_to_virt(pfn);
++    memcpy(new_pg, old_pg, PAGE_SIZE);
++    if ( lvl == PAGETABLE_LEVELS + 1 )
++        *(pgentry_t **)pte = new_pg;
++    else
++        *pte = ((unsigned long)new_pg & PAGE_MASK) | ptdata[lvl].prot;
++
++    tlb_flush();
++
++    free_page(old_pg);
++
++    return 0;
++}
++
++static int move_leaf(unsigned long va, unsigned int lvl, bool is_leaf,
++                     pgentry_t *pte, void *par)
++{
++    unsigned long boundary_pfn = *(unsigned long *)par;
++    unsigned long pfn;
++    void *old_pg, *new_pg;
++
++    if ( !is_leaf )
++        return 0;
++
++    /* No large page support, all pages must be valid. */
++    if ( (*pte & _PAGE_PSE) || !(*pte & _PAGE_PRESENT) )
++        return EINVAL;
++
++    pfn = pte_to_mfn(*pte);
++    if ( pfn >= boundary_pfn )
++        return 0;
++
++    new_pg = (void *)alloc_page();
++    if ( !new_pg )
++        return ENOMEM;
++    old_pg = pfn_to_virt(pfn);
++    memcpy(new_pg, old_pg, PAGE_SIZE);
++    *pte = ((unsigned long)new_pg & PAGE_MASK) | ptdata[lvl].prot;
++
++    invlpg(va);
++
++    free_page(old_pg);
++
++    return 0;
++}
++
++int kexec_move_used_pages(unsigned long boundary, unsigned long kernel,
++                          unsigned long kernel_size)
++{
++    int ret;
++    unsigned long boundary_pfn = PHYS_PFN(boundary);
++
++    kexec_gdt = alloc_page();
++    if ( !kexec_gdt )
++        return ENOMEM;
++    memcpy((char *)kexec_gdt, &gdt, sizeof(gdt));
++    gdt_ptr.base = kexec_gdt;
++    asm volatile("lgdt %0" : : "m" (gdt_ptr));
++
++    kexec_idt = alloc_page();
++    if ( !kexec_idt )
++        return ENOMEM;
++    memcpy((char *)kexec_idt, &idt, sizeof(idt));
++    idt_ptr.base = kexec_idt;
++    asm volatile("lidt %0" : : "m" (idt_ptr));
++
++    /* Top level page table needs special handling. */
++    ret = move_pt(0, PAGETABLE_LEVELS + 1, false, (pgentry_t *)(&pt_base),
++                  &boundary_pfn);
++    if ( ret )
++        return ret;
++    ret = walk_pt(0, ~0UL, move_pt, &boundary_pfn);
++    if ( ret )
++        return ret;
++
++    /* Move new kernel image pages. */
++    ret = walk_pt(kernel, kernel + kernel_size - 1, move_leaf, &boundary_pfn);
++    if ( ret )
++        return ret;
++
++    return 0;
++}
++
++void kexec_move_used_pages_undo(void)
++{
++    if ( kexec_gdt )
++    {
++        gdt_ptr.base = (unsigned long)&gdt;
++        asm volatile("lgdt %0" : : "m" (gdt_ptr));
++        free_page((void *)kexec_gdt);
++        kexec_gdt = 0;
++    }
++
++    if ( kexec_idt )
++    {
++        idt_ptr.base = (unsigned long)&idt;
++        asm volatile("lidt %0" : : "m" (idt_ptr));
++        free_page((void *)kexec_idt);
++        kexec_idt = 0;
++    }
++}
++#endif
 diff --git a/include/kexec.h b/include/kexec.h
-index 411fa013..b89c3000 100644
+index 7b103dea..411fa013 100644
 --- a/include/kexec.h
 +++ b/include/kexec.h
-@@ -18,6 +18,12 @@ struct kexec_action {
+@@ -49,4 +49,9 @@ void kexec_set_param_loc(const char *cmdline);
+ int kexec_get_entry(const char *cmdline);
+ void kexec_get_entry_undo(void);
  
- extern char _kexec_start[], _kexec_end[];
- extern struct kexec_action kexec_actions[KEXEC_MAX_ACTIONS];
-+extern unsigned long __kexec_array_start[], __kexec_array_end[];
++/* Move used pages away from new kernel area. */
++int kexec_move_used_pages(unsigned long boundary, unsigned long kernel,
++                          unsigned long kernel_size);
++void kexec_move_used_pages_undo(void);
 +
-+typedef int(*kexeccall_t)(bool undo);
-+#define kexec_call(func)                                                   \
-+    static kexeccall_t __kexeccall_##func __attribute__((__used__))        \
-+                       __attribute__((__section__(".kexec_array"))) = func
- 
- extern unsigned long kexec_last_addr;
- 
+ #endif /* _KEXEC_H */
 diff --git a/kexec.c b/kexec.c
-index 1ef7ce84..f42aa8ad 100644
+index e762fbeb..3b11a69c 100644
 --- a/kexec.c
 +++ b/kexec.c
-@@ -167,6 +167,7 @@ static int analyze_kernel(void *kernel, unsigned long size)
- int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
- {
-     int ret;
-+    unsigned long *func;
- 
-     ret = analyze_kernel(kernel, kernel_size);
-     if ( ret )
-@@ -190,6 +191,18 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
-     if ( ret )
+@@ -183,11 +183,17 @@ int kexec(void *kernel, unsigned long kernel_size, const char *cmdline)
          goto err;
+     }
  
-+    for ( func = __kexec_array_start; func < __kexec_array_end; func++ )
-+    {
-+        ret = ((kexeccall_t)(*func))(false);
-+        if ( ret )
-+        {
-+            for ( func--; func >= __kexec_array_start; func-- )
-+                ((kexeccall_t)(*func))(true);
-+
-+            goto err;
-+        }
-+    }
++    ret = kexec_move_used_pages(kexec_last_addr, (unsigned long)kernel,
++                                kernel_size);
++    if ( ret )
++        goto err;
 +
      /* Error exit. */
      ret = ENOSYS;
  
+  err:
+     unreserve_memory_below();
++    kexec_move_used_pages_undo();
+     kexec_get_entry_undo();
+ 
+     return ret;
 -- 
 2.43.0
 
