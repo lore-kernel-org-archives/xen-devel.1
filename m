@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFBEC71155
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 13:03:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1017243.1394218 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01AC3C71155
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 13:11:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1017255.1394228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR9UH-0007Z2-5V; Mon, 16 Jun 2025 13:02:57 +0000
+	id 1uR9c8-0000xA-2O; Mon, 16 Jun 2025 13:11:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1017243.1394218; Mon, 16 Jun 2025 13:02:57 +0000
+Received: by outflank-mailman (output) from mailman id 1017255.1394228; Mon, 16 Jun 2025 13:11:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR9UH-0007Yv-2i; Mon, 16 Jun 2025 13:02:57 +0000
-Received: by outflank-mailman (input) for mailman id 1017243;
- Mon, 16 Jun 2025 13:02:55 +0000
+	id 1uR9c7-0000x3-W6; Mon, 16 Jun 2025 13:11:03 +0000
+Received: by outflank-mailman (input) for mailman id 1017255;
+ Mon, 16 Jun 2025 13:11:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jh7D=Y7=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uR9UF-0007Yl-Cd
- for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 13:02:55 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1uR9Sv-0003pW-TN
+ for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 13:01:33 +0000
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [2a00:1450:4864:20::42d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3628b433-4ab2-11f0-b894-0df219b8e170;
- Mon, 16 Jun 2025 15:02:52 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a4ef2c2ef3so3731840f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 16 Jun 2025 06:02:52 -0700 (PDT)
+ id 067907d3-4ab2-11f0-b894-0df219b8e170;
+ Mon, 16 Jun 2025 15:01:32 +0200 (CEST)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3a4f72cba73so3799122f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Jun 2025 06:01:32 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74890006232sm6936111b3a.53.2025.06.16.06.02.42
+ d9443c01a7336-2365dea8fd6sm60146695ad.145.2025.06.16.06.01.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Jun 2025 06:02:49 -0700 (PDT)
+ Mon, 16 Jun 2025 06:01:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,60 +47,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3628b433-4ab2-11f0-b894-0df219b8e170
+X-Inumbo-ID: 067907d3-4ab2-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1750078972; x=1750683772; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1750078892; x=1750683692; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=+UiMK0XqUdP3w4VQXOM4KTrdMDDbozq0m8l9m7I8RdI=;
-        b=J4pCGXalIPg3SFmTWpsbw5oey+n6asJ0AHNapQQMS1lG3tgUfcDfWx1nbPWFeOZoUW
-         sQgqIJqS8WGd0mEhwb03CG3k+V7pl1rSNl6RjcTLQxgIF5XFj3FM8xLU6sultJJWy2br
-         qhg1pXEHbrkZrJBXpdZnL7+GmNESbPqtdM/hmffwgfTXmqBAW8wwA0uO6aRAtCPQQB1m
-         /PyH7bIe24H3SEniL2X7oIP08r6yGZGIEH9JzJ2oDkvnTddqEOYfINcvIz12m0frcafP
-         x9K2NjzAo5VBpDCJPFVZzd2uiQYivU6cZz0HCRsrCTYa/lxvWdH5nv9+1kqzjYsCFmUq
-         PUiw==
+        bh=/Qgc++fc93ux80i5RmqliRbRkUUe9ZSRv/76bEt+jaE=;
+        b=Fvd92rhX/gAPMsa0EmEbLm/snAK+YAuvMOcGc+F4C9qGFP9a48R8me16HREG6w2x4q
+         uG6m0f0MywfucW1CmdpWS8M7/hRxRaDXgslMwk3xYzQevpts6EoqYRpN6sblifzs4qWd
+         NiatMNclheC+3J4dhJg3cSVjs/FcF4WR+q38b+HNwkKXY8XB1s/ltOl7iaP2EWHjHvM0
+         2GXoEZysUpnmNV7P8F9q8rnO7wzW4IludakIz/aGJPmI21zxHtxsL6nufT13CSqNQ4fa
+         M80DZbkqPOQ0YrFbyLIMfau92FaHwnlO5JQKS8pgRQFF59+Ajq+juOkLvmDR4VjVIkIN
+         DnLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750078972; x=1750683772;
+        d=1e100.net; s=20230601; t=1750078892; x=1750683692;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+UiMK0XqUdP3w4VQXOM4KTrdMDDbozq0m8l9m7I8RdI=;
-        b=AQ+epXnXZbkohB4XMJA1ypoeAToupyJe2asSFJIuMr0vvJI1WtV+c7UY0WaUzRef1S
-         D9B09cdl2nGY6ZIWl6cXmHmbgwN+05Mp7LKax8M9Yq2rSbicWQslCGsa0Q3v2j2F44lx
-         QlZJbS3qoMEZvQWE2CDGt6GlUClF0FY/ycgR6rkdvYRBqtQOs9d/arUUbV1P1VyEPciy
-         isYix7xrV7L5rmB+iQSpLxqIxiCfqTLkGE8lnH26V1+yYTuKGhsHXM1RKnkbTIpn8KRM
-         o8Kd4gmHBNauMEQb54ON/3iOw5fbbdFO9AXmpVy44XaBSuqbUlw7E4kQ5/7Tsqr7kVg/
-         tG9Q==
-X-Gm-Message-State: AOJu0YyCEqNOoEmVmWgB7pj8hlLTsb2WfyARsRXG+oZG3A1PszsZKvZL
-	ATURFvseX7YTpjPgPVEPPKLaqWeSUAyYVX85EAxZMEnIr+KV4Na4THUR3fWAI5gkXGLdXhKLfan
-	gaKs=
-X-Gm-Gg: ASbGnct7GURDMl2QrCb9NQJDM1A+awKma1qqx1SOxz3VQyrG5XrMhV+fs8KJOPKUzU3
-	U2M1KC0WAggyqvquQbTiLcd9RTL7pnLzqyUkrhy2kdlzQZTog6TrlWr9qxCJ8l9VR/1dNRnAlwt
-	S4iqX1PEzahCjTn8XOyH3VlhpukHEMZ3GDdTN2uNoPwEOp7v7CHEpGcXHDwxjFmPyCviXDwXU0G
-	ttOJjkVo3kZcVMJ8hcOvEeSaFYZ2psG+2jWKCiBwYtpDQjX3aziB8euXr7Ipz8seB4ra/rllVcN
-	l8pmDAQWhlCtN7NThuJkWkHxAI8pI6PY/x6iqNyWsTkQeEh3jfHAjkB00DZFhySrb6msYJ9eWlf
-	hfU9ElBXvgnm2WGoF1whqyDC6a/QlAt8iNUdd08+ZxubEm10=
-X-Google-Smtp-Source: AGHT+IFIbky8FQo0JyQ9zkDb7pEz7pPbS+l5iuXqXV5EiNEBpskkZOf9XQK9TMnLuBufJjZUcy9pGg==
-X-Received: by 2002:a5d:5f90:0:b0:3a4:e6e7:3acd with SMTP id ffacd0b85a97d-3a572371f31mr7318412f8f.18.1750078969953;
-        Mon, 16 Jun 2025 06:02:49 -0700 (PDT)
-Message-ID: <0d2b44e3-bf6c-40ae-be4f-d0ad2845e925@suse.com>
-Date: Mon, 16 Jun 2025 15:02:39 +0200
+        bh=/Qgc++fc93ux80i5RmqliRbRkUUe9ZSRv/76bEt+jaE=;
+        b=P5GeYDflz5zQyQZ+eSYMzc+vpxZN9TTBHwOBYxMgy2Vu5az9m/yj6PSZo/NXtoi6Eg
+         c9OTQcw7wdN4MdEUeh/lErNCcGz4ya/iX3mEIMhlscbjA37cBICuKOXu94EIpuz+lKOZ
+         myiFjmolrT8ETBTDR8UnPWis8Leg+AABqRscgo7Wkolpibt3WynZ/f2VQZihCQStsZTP
+         /8IJdDVx54JBM4ZhzIyK4Lg1IdhBDAdFm4FdK+n2hAL9oPlq+Y77uARy2LEuED+tEUA/
+         xuYKrgPRN3A/bPVcYRCepFtPUekVizj+ypG+krk1VmBtpT5ZdRXtMcp5ZqapU7sChk8k
+         d1GA==
+X-Gm-Message-State: AOJu0YyJ8EvXAPlMf7NoIpCLcvgtOkZcStwCCq4yIoxgNuvsAKbBLiL2
+	1UCp/aloHSlCEFo31cA1RaMzdAeC8g34OnlUlE/+8jlucqO62Nps/IK70PdqyDgWD23zgfHTrh5
+	rCDs=
+X-Gm-Gg: ASbGncsW5qZAzWKzGWBAf1uv3EsJnOMfk9mve5KJY9itoSGLF6e6F9bCxoC0B3IVWgk
+	g9289I/XBQnvpAKUB1Gg6XitRYOjk7gK64Exp8QHFNvwwH8X7vrF3X1TnTPI30NVghZS/TD5yya
+	Gs2JS2rWW5Pez5uoZaOaoES6qB6ujw8DEn+XMIs9uH4Rf/CuLcOrXQckLd4UuAvT5WPkoROzjZX
+	fZNQzCdiwGWiPMN6HeBYA1oGY5nLM/OXO7MwQcFHQ10S6RrL2Sn4MdCqt0pBLa4jolrMfadU2Rt
+	HsKej17trJZ7LOpSF36EXDvfAcLoVfbZfVFkdyh98KHwSn2F51njqSGs5L2NHfPSjzvFIP9SJqC
+	xwOvgae7j7DG2Sr/CDd+wnFAP1EO17zFTc9GPslypb7CAnsk=
+X-Google-Smtp-Source: AGHT+IF1/BiEdagP71nQb6AOqDYr1F9/K/R9nw/EWajmZrQN1TpdqMHOI4v1akSjxyuOoUWijBDTNg==
+X-Received: by 2002:a05:6000:2f88:b0:3a5:1360:6b34 with SMTP id ffacd0b85a97d-3a56d7bacfdmr8843603f8f.2.1750078890953;
+        Mon, 16 Jun 2025 06:01:30 -0700 (PDT)
+Message-ID: <c926a369-598f-4b3b-87ac-cc5ab94f8dfc@suse.com>
+Date: Mon, 16 Jun 2025 15:01:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v6 7/7] mm: allow page scrubbing routine(s) to be arch
- controlled
+Subject: [PATCH v6 5/7] x86: control memset() and memcpy() inlining
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Shawn Anastasio <sanastasio@raptorengineering.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 References: <c5e1e7e0-a295-4028-b003-152b861ee14f@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,276 +123,49 @@ In-Reply-To: <c5e1e7e0-a295-4028-b003-152b861ee14f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Especially when dealing with large amounts of memory, memset() may not
-be very efficient; this can be bad enough that even for debug builds a
-custom function is warranted. We additionally want to distinguish "hot"
-and "cold" cases (with, as initial heuristic, "hot" being for any
-allocations a domain does for itself, assuming that in all other cases
-the page wouldn't be accessed [again] soon). The goal is for accesses
-of "cold" pages to not disturb caches (albeit finding a good balance
-between this and the higher latency looks to be difficult).
+Stop the compiler from inlining non-trivial memset() and memcpy() (for
+memset() see e.g. map_vcpu_info() or kimage_load_segments() for
+examples). This way we even keep the compiler from using REP STOSQ /
+REP MOVSQ when we'd prefer REP STOSB / REP MOVSB (when ERMS is
+available).
 
-Keep the default fallback to clear_page_*() in common code; this may
-want to be revisited down the road.
+With gcc10 this yields a modest .text size reduction (release build) of
+around 2k.
 
+Unfortunately these options aren't understood by the clang versions I
+have readily available for testing with; I'm unaware of equivalents.
+
+Note also that using cc-option-add is not an option here, or at least I
+couldn't make things work with it (in case the option was not supported
+by the compiler): The embedded comma in the option looks to be getting
+in the way.
+
+Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Oleksii Kurochko<oleksii.kurochko@gmail.com>
 ---
-v6: Re-base.
-v4: Re-base.
 v3: Re-base.
 v2: New.
 ---
-The choice between hot and cold in scrub_one_page()'s callers is
-certainly up for discussion / improvement.
+The boundary values are of course up for discussion - I wasn't really
+certain whether to use 16 or 32; I'd be less certain about using yet
+larger values. A respective Linux patch [1] uses 256 ...
 
---- a/xen/arch/arm/include/asm/page.h
-+++ b/xen/arch/arm/include/asm/page.h
-@@ -144,6 +144,12 @@ extern size_t dcache_line_bytes;
+Similarly whether to permit the compiler to emit REP STOSQ / REP MOVSQ
+for known size, properly aligned blocks is up for discussion.
+
+[1] https://lore.kernel.org/lkml/20250605164733.737543-1-mjguzik@gmail.com/T/#u
+
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -58,6 +58,9 @@ endif
+ $(call cc-option-add,CFLAGS_stack_boundary,CC,-mpreferred-stack-boundary=3)
+ export CFLAGS_stack_boundary
  
- #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
- 
-+#define clear_page_hot  clear_page
-+#define clear_page_cold clear_page
++CFLAGS += $(call cc-option,$(CC),-mmemcpy-strategy=unrolled_loop:16:noalign$(comma)libcall:-1:noalign)
++CFLAGS += $(call cc-option,$(CC),-mmemset-strategy=unrolled_loop:16:noalign$(comma)libcall:-1:noalign)
 +
-+#define scrub_page_hot(page) memset(page, SCRUB_BYTE_PATTERN, PAGE_SIZE)
-+#define scrub_page_cold      scrub_page_hot
-+
- static inline size_t read_dcache_line_bytes(void)
- {
-     register_t ctr;
---- a/xen/arch/ppc/include/asm/page.h
-+++ b/xen/arch/ppc/include/asm/page.h
-@@ -188,6 +188,12 @@ static inline void invalidate_icache(voi
- #define clear_page(page) memset(page, 0, PAGE_SIZE)
- #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
- 
-+#define clear_page_hot  clear_page
-+#define clear_page_cold clear_page
-+
-+#define scrub_page_hot(page) memset(page, SCRUB_BYTE_PATTERN, PAGE_SIZE)
-+#define scrub_page_cold      scrub_page_hot
-+
- /* TODO: Flush the dcache for an entire page. */
- static inline void flush_page_to_ram(unsigned long mfn, bool sync_icache)
- {
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -185,6 +185,12 @@ static inline void invalidate_icache(voi
- #define clear_page(page) memset((void *)(page), 0, PAGE_SIZE)
- #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
- 
-+#define clear_page_hot  clear_page
-+#define clear_page_cold clear_page
-+
-+#define scrub_page_hot(page) memset(page, SCRUB_BYTE_PATTERN, PAGE_SIZE)
-+#define scrub_page_cold      scrub_page_hot
-+
- void flush_page_to_ram(unsigned long mfn, bool sync_icache);
- 
- /* Write a pagetable entry. */
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -58,6 +58,7 @@ obj-y += pci.o
- obj-y += physdev.o
- obj-$(CONFIG_COMPAT) += x86_64/physdev.o
- obj-$(CONFIG_X86_PSR) += psr.o
-+obj-bin-$(CONFIG_DEBUG) += scrub_page.o
- obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
---- a/xen/arch/x86/include/asm/page.h
-+++ b/xen/arch/x86/include/asm/page.h
-@@ -226,6 +226,11 @@ void copy_page_sse2(void *to, const void
- #define clear_page(_p)      clear_page_cold(_p)
- #define copy_page(_t, _f)   copy_page_sse2(_t, _f)
- 
-+#ifdef CONFIG_DEBUG
-+void scrub_page_hot(void *);
-+void scrub_page_cold(void *);
-+#endif
-+
- /* Convert between Xen-heap virtual addresses and machine addresses. */
- #define __pa(x)             (virt_to_maddr(x))
- #define __va(x)             (maddr_to_virt(x))
---- /dev/null
-+++ b/xen/arch/x86/scrub_page.S
-@@ -0,0 +1,39 @@
-+        .file __FILE__
-+
-+#include <asm/asm_defns.h>
-+#include <xen/page-size.h>
-+#include <xen/scrub.h>
-+
-+FUNC(scrub_page_cold)
-+        mov     $PAGE_SIZE/32, %ecx
-+        mov     $SCRUB_PATTERN, %rax
-+
-+0:      movnti  %rax,   (%rdi)
-+        movnti  %rax,  8(%rdi)
-+        movnti  %rax, 16(%rdi)
-+        movnti  %rax, 24(%rdi)
-+        add     $32, %rdi
-+        sub     $1, %ecx
-+        jnz     0b
-+
-+        sfence
-+        ret
-+END(scrub_page_cold)
-+
-+        .macro scrub_page_stosb
-+        mov     $PAGE_SIZE, %ecx
-+        mov     $SCRUB_BYTE_PATTERN, %eax
-+        rep stosb
-+        ret
-+        .endm
-+
-+        .macro scrub_page_stosq
-+        mov     $PAGE_SIZE/8, %ecx
-+        mov     $SCRUB_PATTERN, %rax
-+        rep stosq
-+        ret
-+        .endm
-+
-+FUNC(scrub_page_hot)
-+        ALTERNATIVE scrub_page_stosq, scrub_page_stosb, X86_FEATURE_ERMS
-+END(scrub_page_hot)
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -135,6 +135,7 @@
- #include <xen/pfn.h>
- #include <xen/types.h>
- #include <xen/sched.h>
-+#include <xen/scrub.h>
- #include <xen/sections.h>
- #include <xen/softirq.h>
- #include <xen/spinlock.h>
-@@ -800,27 +801,31 @@ static void page_list_add_scrub(struct p
-         page_list_add(pg, &heap(node, zone, order));
- }
- 
--/* SCRUB_PATTERN needs to be a repeating series of bytes. */
--#ifndef NDEBUG
--#define SCRUB_PATTERN        0xc2c2c2c2c2c2c2c2ULL
--#else
--#define SCRUB_PATTERN        0ULL
-+/*
-+ * While in debug builds we want callers to avoid relying on allocations
-+ * returning zeroed pages, for a production build, clear_page_*() is the
-+ * fastest way to scrub.
-+ */
-+#ifndef CONFIG_DEBUG
-+# undef  scrub_page_hot
-+# define scrub_page_hot clear_page_hot
-+# undef  scrub_page_cold
-+# define scrub_page_cold clear_page_cold
- #endif
--#define SCRUB_BYTE_PATTERN   (SCRUB_PATTERN & 0xff)
- 
--static void scrub_one_page(const struct page_info *pg)
-+static void scrub_one_page(const struct page_info *pg, bool cold)
- {
-+    void *ptr;
-+
-     if ( unlikely(pg->count_info & PGC_broken) )
-         return;
- 
--#ifndef NDEBUG
--    /* Avoid callers relying on allocations returning zeroed pages. */
--    unmap_domain_page(memset(__map_domain_page(pg),
--                             SCRUB_BYTE_PATTERN, PAGE_SIZE));
--#else
--    /* For a production build, clear_page() is the fastest way to scrub. */
--    clear_domain_page(_mfn(page_to_mfn(pg)));
--#endif
-+    ptr = __map_domain_page(pg);
-+    if ( cold )
-+        scrub_page_cold(ptr);
-+    else
-+        scrub_page_hot(ptr);
-+    unmap_domain_page(ptr);
- }
- 
- static void poison_one_page(struct page_info *pg)
-@@ -1100,12 +1105,14 @@ static struct page_info *alloc_heap_page
-     if ( first_dirty != INVALID_DIRTY_IDX ||
-          (scrub_debug && !(memflags & MEMF_no_scrub)) )
-     {
-+        bool cold = d && d != current->domain;
-+
-         for ( i = 0; i < (1U << order); i++ )
-         {
-             if ( test_and_clear_bit(_PGC_need_scrub, &pg[i].count_info) )
-             {
-                 if ( !(memflags & MEMF_no_scrub) )
--                    scrub_one_page(&pg[i]);
-+                    scrub_one_page(&pg[i], cold);
- 
-                 dirty_cnt++;
-             }
-@@ -1370,7 +1377,7 @@ bool scrub_free_pages(void)
-                 {
-                     if ( test_bit(_PGC_need_scrub, &pg[i].count_info) )
-                     {
--                        scrub_one_page(&pg[i]);
-+                        scrub_one_page(&pg[i], true);
-                         /*
-                          * We can modify count_info without holding heap
-                          * lock since we effectively locked this buddy by
-@@ -2074,7 +2081,7 @@ static struct page_info *alloc_color_hea
-     if ( !(memflags & MEMF_no_scrub) )
-     {
-         if ( need_scrub )
--            scrub_one_page(pg);
-+            scrub_one_page(pg, d != current->domain);
-         else
-             check_one_page(pg);
-     }
-@@ -2225,7 +2232,7 @@ static void __init cf_check smp_scrub_he
-         if ( !mfn_valid(_mfn(mfn)) || !page_state_is(pg, free) )
-             continue;
- 
--        scrub_one_page(pg);
-+        scrub_one_page(pg, true);
-     }
- }
- 
-@@ -2923,7 +2930,7 @@ void unprepare_staticmem_pages(struct pa
-         if ( need_scrub )
-         {
-             /* TODO: asynchronous scrubbing for pages of static memory. */
--            scrub_one_page(pg);
-+            scrub_one_page(pg, true);
-         }
- 
-         pg[i].count_info |= PGC_static;
---- /dev/null
-+++ b/xen/include/xen/scrub.h
-@@ -0,0 +1,24 @@
-+#ifndef __XEN_SCRUB_H__
-+#define __XEN_SCRUB_H__
-+
-+#include <xen/const.h>
-+
-+/* SCRUB_PATTERN needs to be a repeating series of bytes. */
-+#ifdef CONFIG_DEBUG
-+# define SCRUB_PATTERN       _AC(0xc2c2c2c2c2c2c2c2,ULL)
-+#else
-+# define SCRUB_PATTERN       _AC(0,ULL)
-+#endif
-+#define SCRUB_BYTE_PATTERN   (SCRUB_PATTERN & 0xff)
-+
-+#endif /* __XEN_SCRUB_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ ifeq ($(CONFIG_UBSAN),y)
+ # Don't enable alignment sanitisation.  x86 has efficient unaligned accesses,
+ # and various things (ACPI tables, hypercall pages, stubs, etc) are wont-fix.
 
 
