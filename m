@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3251CC71136
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 06:37:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1016502.1393382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D861EC71136
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Jun 2025 06:42:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1016510.1393403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR3Sb-0006Ol-UZ; Mon, 16 Jun 2025 06:36:49 +0000
+	id 1uR3Xk-0008Ol-OV; Mon, 16 Jun 2025 06:42:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1016502.1393382; Mon, 16 Jun 2025 06:36:49 +0000
+Received: by outflank-mailman (output) from mailman id 1016510.1393403; Mon, 16 Jun 2025 06:42:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uR3Sb-0006Oe-S4; Mon, 16 Jun 2025 06:36:49 +0000
-Received: by outflank-mailman (input) for mailman id 1016502;
- Mon, 16 Jun 2025 06:36:48 +0000
+	id 1uR3Xk-0008Oe-LT; Mon, 16 Jun 2025 06:42:08 +0000
+Received: by outflank-mailman (input) for mailman id 1016510;
+ Mon, 16 Jun 2025 06:42:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jh7D=Y7=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uR3Sa-0006OY-ML
- for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 06:36:48 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Hn5w=Y7=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
+ id 1uR3Xj-0008OL-Lc
+ for xen-devel@lists.xenproject.org; Mon, 16 Jun 2025 06:42:07 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20603.outbound.protection.outlook.com
+ [2a01:111:f403:2412::603])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 46614b1d-4a7c-11f0-b894-0df219b8e170;
- Mon, 16 Jun 2025 08:36:46 +0200 (CEST)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ad8826c05f2so797813666b.3
- for <xen-devel@lists.xenproject.org>; Sun, 15 Jun 2025 23:36:46 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adfeaed2d10sm25248166b.105.2025.06.15.23.36.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Jun 2025 23:36:45 -0700 (PDT)
+ id 034e3134-4a7d-11f0-b894-0df219b8e170;
+ Mon, 16 Jun 2025 08:42:05 +0200 (CEST)
+Received: from DS7PR03CA0086.namprd03.prod.outlook.com (2603:10b6:5:3bb::31)
+ by SJ1PR12MB6316.namprd12.prod.outlook.com (2603:10b6:a03:455::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.37; Mon, 16 Jun
+ 2025 06:41:59 +0000
+Received: from CY4PEPF0000EE3B.namprd03.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::d) by DS7PR03CA0086.outlook.office365.com
+ (2603:10b6:5:3bb::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.35 via Frontend Transport; Mon,
+ 16 Jun 2025 06:41:59 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3B.mail.protection.outlook.com (10.167.242.14) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8835.15 via Frontend Transport; Mon, 16 Jun 2025 06:41:58 +0000
+Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 16 Jun 2025 01:41:55 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,132 +58,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46614b1d-4a7c-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1750055806; x=1750660606; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=pFQeijgzx5FakN/hAjl4IqtirWujbmrpF9iZqvEVeP4=;
-        b=Vm3S4GK9pVtpqvk61XwSBQDRlI4E66WZGrRD3MMVMVgPIyqSnZkqA5/AFnH2n5zdB0
-         Rv27wp0DOlziBsUnoXwsyCLs1pGM/4i0P8/ORshI/h3X3EwYlx7avOQV2GQ0ttApbTzF
-         wLIFZ1OA7aC4Z+IO30yKkJOrsIMEPzKzFq8WrwFxFzeQMKBEw+2DJuwQnCK38uZY+txs
-         gIzIA+od6ZMVXovFMb7WaHf6pcch6bytRZ53YdSSjXpQ0N0OIpq9W9jpNtss3aV8aCBd
-         csEyG6Ff1U/cp4wBGu2Td6utOzwNc0Ser0zxouIz2q0gU772VhGi4AcrtSZZ3O78QRCt
-         bKHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750055806; x=1750660606;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pFQeijgzx5FakN/hAjl4IqtirWujbmrpF9iZqvEVeP4=;
-        b=C+aMSL3w0vTgDSP365quFa+8M3Qnbb6C2BN0+ahldGBDq6demBOqa1oQvh6hEgN9hF
-         iUR9UfP9suk6qWJJc41LIkV4pPr49slbmfAkwl2ElS6aK8cRg9EVD+IJsMUGDEbyIaBV
-         aG53685zgv16+9ptGP63ILoqTIyx3oKuyOTc4Sypronnn2NqvhrRpKMunA0iVVJUsAHy
-         LksMuD34nyuJlSKfEjp2Km9fIIDQliReoaR4x7B1eh7iUh9dss/WxmXA1QUZL9xmVfiT
-         N4uTtY25NE3hC/mP+ycUBn/iWRA+p+xv5cxtsrO9YK74R68TiOQRSHBSy9XvQBosgaRd
-         loXw==
-X-Forwarded-Encrypted: i=1; AJvYcCX1Z7kOgEZgkAoHD+OU7NNBQRSB9g7LTjoeal6Gg9+4rPBG/ktmG5mY5iTLe4hV2T5AwhLdiQBjl54=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx2Cr3FIxW4Zjyj1lUqsXxE7LBysq1ksJa08RbEMRxm2REny1Ds
-	rlvYb7glVapNSZW9R0P3RS8MFdtp+LUz6u5cOzDkZPep+uc2ThAuipmZsFO2YNmKTw==
-X-Gm-Gg: ASbGncvXsOXOmD/vO91s2DX7zYNzWvfAgUaS0VFfINBLnlieYzU66b5eMRw/WxjzGrS
-	YMB32MiNOJND3vP0P58e/u417JYFD5jb63Hy2ZtMyh7GXmt4ylcBsjDmHzGPE9B80ACqkMfpWSp
-	60sbpQ0JxzJDVDxscD99+WXn/G4dom+LPTscLt+m9R4E+yWyzGKX8/e1GeL4sUIE3S9lV2xX+BH
-	2bpl6LWoKh2ACDUJMj534vVBcNsOTaXb1lQH5LVABLpl3pOalPvdedJ6kaTVE7RvIQScUeKOoI8
-	Xynslb0Q+FexwrWG2UXRK2wB4ymVumvrp9/HhLp1u+cMQFDHEYH0XVv2qIc1JDuLkAiNBC3zz+D
-	t2qzyHuOubvVJGRtTbpJ7MWISnvHMJl4lOtrLz3sK5lSQVa8=
-X-Google-Smtp-Source: AGHT+IG47KLzpWhyrpGOiBAR0XfZMApSuMe8JIE4bSttiX2eX9eWC1SLRUVKnjyqX1woQ3x8nIxKXA==
-X-Received: by 2002:a17:907:7216:b0:ade:4295:a814 with SMTP id a640c23a62f3a-adfad53f2e2mr766245166b.53.1750055806061;
-        Sun, 15 Jun 2025 23:36:46 -0700 (PDT)
-Message-ID: <bf6fd680-c608-4d64-ad8f-38eac102991e@suse.com>
-Date: Mon, 16 Jun 2025 08:36:47 +0200
+X-Inumbo-ID: 034e3134-4a7d-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=U7jlSTNVfEByUaKRmV0UjO86HvUKcxE6TEwmciQS8kctlbLywGe3vrYYhqCQ06hLK4jdPW79gMK7aQ+2RXkc8ekoJyerHfcFqHbP1lK8BNSeHKfTNL20ppSo7iZ4xQRkifzoUmGRoc+dAGHKPMcbVg7YeVEyjoNaKmnKlwB2uHB4a2v3ciueb/dGqZdffIfxBJ1ypz6KnosGley7DPD56jND0iOBDbIKLShyHkYap5uiziJUQB1b1Jd9w+iOaD/FZqEg1VKu80vgiTKk2GslOC8XHS/ZhmUTye0n9p6H0T1PkGuVSMQ4rgTxDgQW6pb9vhT180kA9iFlBoiKwP3sOQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mfxBvcM7kPRYtD82sxFFBc0FTulWEdHkRvG/HEviTvM=;
+ b=jRCGbGgzwXHW+DpJvwaN3jydTaB5bWbd3DMRZktHXyJFA1IhPhVSx5VY6xEdNQW0ZMWgbPGMWpTvypLEJ0LEp83qi4kI1qgEPkjOraMABvX4aIchoGA7BjMsNxWYtdYFJ57cMw4mBmOvsWBeqn8IrifaFCjZ+TGzV6GJ+PC1NTK+kTJlGE85WWbyc2cMk0AsZrEXLQeKIqjiLHWJWROQF+7fFmJodI+qNwh9dZ6g6e/FD+1SEpVLZ+o4TnCcPb27IYab3IuYuMW1r2aYfUXnqxk6pJrkjAn3QWd/lJRqnp/lExL9E7Gjgge868jdcFmtgPGNR+cWot1sfrdOVByiHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mfxBvcM7kPRYtD82sxFFBc0FTulWEdHkRvG/HEviTvM=;
+ b=o7RzxhebHduJlqlWRusYbKsQzAlB6hAlDpp3RwB6/pYpNNHA/g+vDYY4LOLu3N8janVBz27Gb0xflLbmYpwqpX99OZ9ZGKMkBf1fyiiC3F7NW5tZzkFs9mQJxH0aps6cO9sbzO7FiVPCUunE8xm7EIeka58xaCfsTf0Ll282AgA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Penny Zheng <Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 01/18] xen/x86: remove "depends on !PV_SHIM_EXCLUSIVE"
+Date: Mon, 16 Jun 2025 14:41:11 +0800
+Message-ID: <20250616064128.581164-2-Penny.Zheng@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250616064128.581164-1-Penny.Zheng@amd.com>
+References: <20250616064128.581164-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] xsm/dummy: Allow hwdom SYSCTL_readconsole/physinfo
-To: Stefano Stabellini <sstabellini@kernel.org>,
- Jason Andryuk <jason.andryuk@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <20250610225737.469690-1-jason.andryuk@amd.com>
- <20250610225737.469690-5-jason.andryuk@amd.com>
- <5f6d43da-2600-4c1c-9bcb-f13e8fce921e@suse.com>
- <bf6924f8-26c6-4f89-8441-155735384a8a@amd.com>
- <alpine.DEB.2.22.394.2506131547320.8480@ubuntu-linux-20-04-desktop>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alpine.DEB.2.22.394.2506131547320.8480@ubuntu-linux-20-04-desktop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3B:EE_|SJ1PR12MB6316:EE_
+X-MS-Office365-Filtering-Correlation-Id: bcbe2dd2-33a5-4cdc-d8c1-08ddaca0e48f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?Yc32FitU5tfYIt/PR9nOkTfe+1UpVC8xz4XJwbSy/1TUNmVwwgyJ89lEGZPP?=
+ =?us-ascii?Q?9TDEepouumlvBVTno+ONEbxtcrsyxdyFbLMrtpBsPNvSDcVVI+3ZvFxBTgBS?=
+ =?us-ascii?Q?hSXzq+sxHmN6pdHRjNjLysd6QjI7IzpaJruWG1jxHrQdDN4VbSlsL1W2IDb0?=
+ =?us-ascii?Q?r92CM+iXHcOQUcahq7MMFO7P/Tlma8FhTY05Hj/t32CwMTu1HOd8KFX9Zt4K?=
+ =?us-ascii?Q?w6sfoNupnlVz+IHWXFSc0wVyrrzToMgMe9MTGN4d71RxVjSFSo5V0/boOZpS?=
+ =?us-ascii?Q?MNJ1QxDCNYW6Ta4igwmh+NZZE9Ilh/Iy/56AhAFOlHsBHCgVjfICbL6Px4aW?=
+ =?us-ascii?Q?zgE2u7hSkffoh+8G7eENIUHbW1lddvCu3XXKtnVwzJc4VAI6LKSTLoPAgxQz?=
+ =?us-ascii?Q?yQoKuZ2HjsnsG7P6Fx0y8msOcSZWGe0u3lcxE2Gmnf0MTxbiRjDxh4OJVC/2?=
+ =?us-ascii?Q?pKiymIuU7HTTYoht4zlNfb+qYSDtcaabjQaYt4YZ+ag244aS4fB6lGwXrj9R?=
+ =?us-ascii?Q?UvEpMJXc5oIzZ6V/LHTHAUet1kgz7ugrf8LJVJ217alwNJ+CwPmGx+obA59o?=
+ =?us-ascii?Q?sT0VcY+y3NJLG+LjyZg47tjKYm2vYwU70AErOw0vk4i+S0r9OMwS3kHmKeI9?=
+ =?us-ascii?Q?HuOjcYy4J10srNfuzYxnTfE0WNn6+Cm9Dhpt1oi8rTsVm1wNCeYN08n/0Tit?=
+ =?us-ascii?Q?SbFiN9+jJ8KMpFtjXDV8fFg54GxJ0q6Bz96UQNwuIBzLay4MvrPQZeNDsZSy?=
+ =?us-ascii?Q?B7LMGvyevZyxCEHh3u5QVlNXa7dbfnO0DR2wIVMObSP7iW/tFm5DIG3p5JXv?=
+ =?us-ascii?Q?NvUA+F4ArJIsce9Fa9dqyJAfmAhw2kgTslL/0jO7jHzuy4gZNPyPLWKd/7qC?=
+ =?us-ascii?Q?GIUecfEn+I6GlrIKN9FaxNTI5mSpNKwJBGA2hgw6OWkVl4MixNbk7gWVWOM4?=
+ =?us-ascii?Q?hqYGjXDCFBOkJ7KWLAAX5LwtEfLYVyXdfYlu761w+4TNFfWwWeh3Zx69XvEB?=
+ =?us-ascii?Q?kbgvQz4RBEKO1xqkYfM68DidYSTclyEqQmrVY11QamUfJj6d2eUjcow9XfUe?=
+ =?us-ascii?Q?YQzjelICqAbHCUS77EUgEz6GaERVNUGMNvOSipBZQwEKdDS/6Qc03VwaPdKd?=
+ =?us-ascii?Q?gdb2kPcDWwoy5dEgUF1WsSRhnaaQV5ATFkjs8XWqQ9+bu8sIFwTiTRHUHH9G?=
+ =?us-ascii?Q?y524L7OqSNkTZOk9vBlwV/Wa9koliYZmURhbCGcb0f+mRq6/M+95LochSKaJ?=
+ =?us-ascii?Q?nt3pcBpMBlg3hs94RXdQcyZftBrRac7FqtdfldynJPCbsGXLHJ6L9hpbF+t9?=
+ =?us-ascii?Q?YSGimKgKuGkhSciCRZXg7pjr7FcHiZXSVDfRSiqMQZIk6wlwEMMbq39dAu4l?=
+ =?us-ascii?Q?8wDfxLeaYA0yMR8wBayzXChYFWqRNl2sLpuLgbWAOinQqs58u69vxzQBe7fi?=
+ =?us-ascii?Q?aYbJEM/wH+yxCXHRnuBW2ItUkaOrxNzwI24ENCEXEifAem/0tUzsB0CAVNWF?=
+ =?us-ascii?Q?lUFbsILXOii/qR++OP0mPHsQ3Eay8xdgbv8L?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2025 06:41:58.4860
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bcbe2dd2-33a5-4cdc-d8c1-08ddaca0e48f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000EE3B.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6316
 
-On 14.06.2025 00:51, Stefano Stabellini wrote:
-> On Wed, 11 Jun 2025, Jason Andryuk wrote:
->> On 2025-06-11 09:27, Jan Beulich wrote:
->>> On 11.06.2025 00:57, Jason Andryuk wrote:
->>>> Allow the hwdom to access the console, and to access physical
->>>> information about the system.
->>>>
->>>> xenconsoled can read Xen's dmesg.  If it's in hwdom, then that
->>>> permission would be required.
->>>
->>> Why would xenconsoled run in the hardware domain? It's purely a software
->>> construct, isn't it? As a daemon, putting it in the control domain may
->>> make sense. Otherwise it probably ought to go in a service domain.
->>
->> My approach has been to transform dom0 into the hardware domain and add a new
->> control domain.  xenconsoled was left running in the hardware domain.
-> 
-> I think we should keep xenconsoled in the hardware domain because the
-> control domain should be just optional. (However, one could say that with
-> Denis' recent changes xenconsoled is also optional because one can use
-> console hypercalls or emulators (PL011, NS16550) for all DomUs.)
-> 
-> 
-> 
->> I suppose it could move.  Maybe that would be fine?  I haven't tried. The
->> Hyperlaunch code populates the console grants to point at the hardware domain,
->> and I just followed that.
->>
->> One aspect of why I left most things running in the Hardware domain was to not
->> run things in the Control domain.  If Control is the highest privileged
->> entity, we'd rather run software in lower privileged places. Especially
->> something like xenconsoled which is receiving data from the domUs.
-> 
-> Yes, I agree with Jason. It is a bad idea to run xenconsoled in the
-> Control Domain because the Control Domain is meant to be safe from
-> interference. We want to keep the number of potential vehicles for
-> interference down to a minimum and shared memory between Control Domain
-> and DomUs is certainly a vehicle for interference.
+Remove all "depends on !PV_SHIM_EXCLUSIVE" (also the functionally
+equivalent "if !...") in Kconfig file, since negative dependancy will badly
+affect allyesconfig.
 
-As much as it is when xenconsoled runs in the hardware domain? Especially
-if the hardware domain is also running e.g. PV backends or qemu instances?
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+v2 -> v3:
+- remove comment for PV_SHIM_EXCLUSIVE
+---
+v3 -> v4:
+- explicitly state "CONFIG_xxx is not set" in "pvshim_defconfig"
+- Add "default y" for SHADOW_PAGING and TBOOT
+- refactor commit message
+---
+v4 -> v5:
+- For not breaking allyesconfig, changes to defaults are actually not needed.
+So remove them all
+- Leave one blank lines
+---
+ xen/arch/x86/Kconfig      | 4 ----
+ xen/arch/x86/hvm/Kconfig  | 1 -
+ xen/drivers/video/Kconfig | 2 +-
+ 3 files changed, 1 insertion(+), 6 deletions(-)
 
-Jan
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 752d5141bb..b45f17a16e 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -289,8 +289,6 @@ config PV_SHIM_EXCLUSIVE
+ 
+ 	  If unsure, say N.
+ 
+-if !PV_SHIM_EXCLUSIVE
+-
+ config HYPERV_GUEST
+ 	bool "Hyper-V Guest"
+ 	select GUEST
+@@ -299,8 +297,6 @@ config HYPERV_GUEST
+ 
+ 	  If unsure, say N.
+ 
+-endif
+-
+ config REQUIRE_NX
+ 	bool "Require NX (No eXecute) support"
+ 	help
+diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+index 2def0f98e2..b903764bda 100644
+--- a/xen/arch/x86/hvm/Kconfig
++++ b/xen/arch/x86/hvm/Kconfig
+@@ -1,6 +1,5 @@
+ menuconfig HVM
+ 	bool "HVM support"
+-	depends on !PV_SHIM_EXCLUSIVE
+ 	default !PV_SHIM
+ 	select COMPAT
+ 	select IOREQ_SERVER
+diff --git a/xen/drivers/video/Kconfig b/xen/drivers/video/Kconfig
+index 245030beea..0a51e87eb2 100644
+--- a/xen/drivers/video/Kconfig
++++ b/xen/drivers/video/Kconfig
+@@ -3,7 +3,7 @@ config VIDEO
+ 	bool
+ 
+ config VGA
+-	bool "VGA support" if !PV_SHIM_EXCLUSIVE
++	bool "VGA support"
+ 	select VIDEO
+ 	depends on X86
+ 	default y if !PV_SHIM_EXCLUSIVE
+-- 
+2.34.1
+
 
