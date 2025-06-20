@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9EAC7115D
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 09:54:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1020760.1396904 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA958C71155
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 10:01:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1020772.1396916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSYRd-00013E-T4; Fri, 20 Jun 2025 09:54:01 +0000
+	id 1uSYZ0-0002sL-On; Fri, 20 Jun 2025 10:01:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1020760.1396904; Fri, 20 Jun 2025 09:54:01 +0000
+Received: by outflank-mailman (output) from mailman id 1020772.1396916; Fri, 20 Jun 2025 10:01:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSYRd-000137-QH; Fri, 20 Jun 2025 09:54:01 +0000
-Received: by outflank-mailman (input) for mailman id 1020760;
- Fri, 20 Jun 2025 09:54:00 +0000
+	id 1uSYZ0-0002sE-Kx; Fri, 20 Jun 2025 10:01:38 +0000
+Received: by outflank-mailman (input) for mailman id 1020772;
+ Fri, 20 Jun 2025 10:01:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vQmk=ZD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uSYRc-00012y-Nv
- for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 09:54:00 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7c74cc09-4dbc-11f0-b894-0df219b8e170;
- Fri, 20 Jun 2025 11:53:58 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-451ebd3d149so10273735e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 20 Jun 2025 02:53:58 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a6d1189977sm1543148f8f.82.2025.06.20.02.53.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 02:53:57 -0700 (PDT)
+ <SRS0=FxVL=ZD=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
+ id 1uSYOn-0004kQ-GN
+ for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 09:51:05 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 1414d8ae-4dbc-11f0-b894-0df219b8e170;
+ Fri, 20 Jun 2025 11:51:03 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 81B11176A;
+ Fri, 20 Jun 2025 02:50:43 -0700 (PDT)
+Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.67.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8FD223F673;
+ Fri, 20 Jun 2025 02:51:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,82 +44,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7c74cc09-4dbc-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1750413238; x=1751018038; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=6sTuUUBWSSYBoqV1/4Ia/RrBVDTs9rH4NkrSo0YdX5A=;
-        b=eYRNoUWRBfnQhVi4wQedPe0OJFek2VLFy1vPwJts9fcAMFnUvc7molLWOhbf1ZRnW8
-         NBU3SvxbCeHJD7Dxvh9qaF/acxNURrqb2zGa3msUDOCxG3sO2oHtEkWr1rvBGEnWL5zh
-         20+jHX/xd+4VR89R/FnAMqWFWUE33XwLjRGjQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750413238; x=1751018038;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6sTuUUBWSSYBoqV1/4Ia/RrBVDTs9rH4NkrSo0YdX5A=;
-        b=q58iixQx39Phhdfdve9X+M1z2I7qODYWhMWRhTTcYSSO4LfhHKXJ1L5pKRlvKmsNCx
-         n6YOVPdaJqxRshYcXSBzu7j8yWMiYng2v88Sm5LupQWcxSjQaApVZyuaYSxrmgM9Tl7B
-         ShfcXOthVSrMUKittTCD3gQdkLztfvSLvlqueStPzBhECH6iPkK7iTVpHp52e4M33FvH
-         nd7M5h4SLt+k3frYKAPE6FJoV7BYi0qb/uiMwRTuMViPyeLcoWiVwIZVjR8FLaA7Jtxi
-         RIA+uJ6ADm8+2sycLQw2Ik4v+93QLjXj34ZbNEQehw57rg0PMEsMbRFRAfkWBxIauyYM
-         gS1w==
-X-Gm-Message-State: AOJu0YwJ/d0BcBcma3K7td18gPDqiGmuH0Jw+jEOdVXcykEtKyMby5D3
-	Mr2y4xTKwQzPykl6Sw72EWdlRFyDmo8U3K61SenDdy45yuFxiaE85QpkBEzgIu0HQfs=
-X-Gm-Gg: ASbGncvr1U0i7ajgpb5ymRyWSlzI4VF9Id/bEnJ/3Dr4wWTFcDsxbcTc/Pg93DXnf4h
-	Y6VxkwcA9zyJLMGMZ/jsYvW3Ac70tgHzG5yKRB7kuNAZNm/Ywe6daq7fkHOTICqNELHDGj9xlps
-	F++qSxEiuwjelWPorRib3HwyvMGi8Q+YElgKbaEetG0Q37pF5G+kdmRjIo/GgE3rCrF2xRgnKCc
-	06PdSys9O2Z7H7x/ScZ9J4jexw63NF41sQrEc9b/l3lddlmaWee4Sf6uR1QCAgn6h0mXZdfq0Pv
-	jVeP/8l+GZc6zon8TN7R4c3zPag9ZdwakI9luHiK/al4KRTIp7jCTKh/CWcgAPEXp1fzxPX/cRF
-	C1rINaA1lhR9ChAfnxiF+C5NcCQzqb0dXChY=
-X-Google-Smtp-Source: AGHT+IHsn/onSdo+ti11S55Rsqb8gQVLZ+uzY/M5CyPBMQPEjr1LY8qDv4e9i7DrW7Ar3aZ6tPEZzg==
-X-Received: by 2002:a05:6000:2890:b0:3a4:d4e5:498a with SMTP id ffacd0b85a97d-3a6d130d49cmr1678680f8f.42.1750413238078;
-        Fri, 20 Jun 2025 02:53:58 -0700 (PDT)
-Date: Fri, 20 Jun 2025 11:53:56 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
+X-Inumbo-ID: 1414d8ae-4dbc-11f0-b894-0df219b8e170
+From: Hari Limaye <hari.limaye@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: luca.fancellu@arm.com,
+	Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 3/5] crypto: Add RSA support
-Message-ID: <aFUvtMeBDEIc8njk@macbook.local>
-References: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
- <20250602133639.2871212-4-ross.lagerwall@citrix.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>
+Subject: [PATCH 4/6] arm/mpu: Destroy an existing entry in Xen MPU memory mapping table
+Date: Fri, 20 Jun 2025 10:49:22 +0100
+Message-ID: <95cc28af74339ea617081f3935123e38a53cc657.1750411205.git.hari.limaye@arm.com>
+X-Mailer: git-send-email 2.42.1
+In-Reply-To: <cover.1750411205.git.hari.limaye@arm.com>
+References: <cover.1750411205.git.hari.limaye@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20250602133639.2871212-4-ross.lagerwall@citrix.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jun 02, 2025 at 02:36:35PM +0100, Ross Lagerwall wrote:
-> In preparation for adding support for livepatch signing, add support for
-> RSA crypto.
-> 
-> The RSA code is extracted from Nettle at tag nettle_3.2_release_20160128
-> (https://git.lysator.liu.se/nettle/nettle).
-> 
-> The MPI code is extracted from Linux at commit eef0df6a5953 (lib/mpi/*).
-> 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-> ---
-> 
-> In v3:
-> 
-> * Move mpi.c to lib
-> * Fix header guard name
-> 
->  xen/crypto/Makefile   |    1 +
->  xen/crypto/rsa.c      |  196 +++++
->  xen/include/xen/mpi.h |   68 ++
->  xen/include/xen/rsa.h |   74 ++
->  xen/lib/Makefile      |    1 +
->  xen/lib/mpi.c         | 1729 +++++++++++++++++++++++++++++++++++++++++
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-Just FTAOD: all the functions imported in mpi.c are used I think?  So
-that we don't introduce unreachable code.
+This commit expands xen_mpumap_update/xen_mpumap_update_entry to include
+destroying an existing entry.
 
-Thanks, Roger.
+We define a new helper "disable_mpu_region_from_index" to disable the MPU
+region based on index. If region is within [0, 31], we could quickly
+disable the MPU region through PRENR_EL2 which provides direct access to the
+PRLAR_EL2.EN bits of EL2 MPU regions.
+
+Rignt now, we only support destroying a *WHOLE* MPU memory region,
+part-region removing is not supported, as in worst case, it will
+leave two fragments behind.
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+---
+ xen/arch/arm/include/asm/mpu.h        |  2 +
+ xen/arch/arm/include/asm/mpu/cpregs.h |  4 ++
+ xen/arch/arm/mpu/mm.c                 | 71 ++++++++++++++++++++++++++-
+ 3 files changed, 75 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/arm/include/asm/mpu.h b/xen/arch/arm/include/asm/mpu.h
+index 63560c613b..5053edaf63 100644
+--- a/xen/arch/arm/include/asm/mpu.h
++++ b/xen/arch/arm/include/asm/mpu.h
+@@ -23,6 +23,8 @@
+ #define NUM_MPU_REGIONS_MASK    (NUM_MPU_REGIONS - 1)
+ #define MAX_MPU_REGION_NR       NUM_MPU_REGIONS_MASK
+ 
++#define PRENR_MASK  GENMASK(31, 0)
++
+ #ifndef __ASSEMBLY__
+ 
+ /*
+diff --git a/xen/arch/arm/include/asm/mpu/cpregs.h b/xen/arch/arm/include/asm/mpu/cpregs.h
+index bb15e02df6..9f3b32acd7 100644
+--- a/xen/arch/arm/include/asm/mpu/cpregs.h
++++ b/xen/arch/arm/include/asm/mpu/cpregs.h
+@@ -6,6 +6,9 @@
+ /* CP15 CR0: MPU Type Register */
+ #define HMPUIR          p15,4,c0,c0,4
+ 
++/* CP15 CR6: Protection Region Enable Register */
++#define HPRENR          p15,4,c6,c1,1
++
+ /* CP15 CR6: MPU Protection Region Base/Limit/Select Address Register */
+ #define HPRSELR         p15,4,c6,c2,1
+ #define HPRBAR          p15,4,c6,c3,0
+@@ -82,6 +85,7 @@
+ /* Alphabetically... */
+ #define MPUIR_EL2       HMPUIR
+ #define PRBAR_EL2       HPRBAR
++#define PRENR_EL2       HPRENR
+ #define PRLAR_EL2       HPRLAR
+ #define PRSELR_EL2      HPRSELR
+ #endif /* CONFIG_ARM_32 */
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 1de28d2120..23230936f7 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -199,6 +199,42 @@ static int xen_mpumap_alloc_entry(uint8_t *idx)
+     return 0;
+ }
+ 
++/*
++ * Disable and remove an MPU region from the data structure and MPU registers.
++ *
++ * @param index Index of the MPU region to be disabled.
++ */
++static void disable_mpu_region_from_index(uint8_t index)
++{
++    ASSERT(spin_is_locked(&xen_mpumap_lock));
++    ASSERT(index != INVALID_REGION_IDX);
++
++    if ( !region_is_valid(&xen_mpumap[index]) )
++    {
++        printk(XENLOG_WARNING
++               "mpu: MPU memory region[%u] is already disabled\n", index);
++        return;
++    }
++
++    /* Zeroing the region will also zero the region enable */
++    memset(&xen_mpumap[index], 0, sizeof(pr_t));
++    clear_bit(index, xen_mpumap_mask);
++
++    /*
++     * Both Armv8-R AArch64 and AArch32 have direct access to the enable bit for
++     * MPU regions numbered from 0 to 31.
++     */
++    if ( (index & PRENR_MASK) != 0 )
++    {
++        /* Clear respective bit */
++        uint64_t val = READ_SYSREG(PRENR_EL2) & (~(1UL << index));
++
++        WRITE_SYSREG(val, PRENR_EL2);
++    }
++    else
++        write_protection_region(&xen_mpumap[index], index);
++}
++
+ /*
+  * Update the entry in the MPU memory region mapping table (xen_mpumap) for the
+  * given memory range and flags, creating one if none exists.
+@@ -217,11 +253,11 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+     ASSERT(spin_is_locked(&xen_mpumap_lock));
+ 
+     rc = mpumap_contain_region(xen_mpumap, max_mpu_regions, base, limit, &idx);
+-    if ( (rc < 0) || (rc > MPUMAP_REGION_NOTFOUND) )
++    if ( rc < 0 )
+         return -EINVAL;
+ 
+     /* We are inserting a mapping => Create new region. */
+-    if ( flags & _PAGE_PRESENT )
++    if ( (flags & _PAGE_PRESENT) && (MPUMAP_REGION_NOTFOUND == rc) )
+     {
+         rc = xen_mpumap_alloc_entry(&idx);
+         if ( rc )
+@@ -232,6 +268,22 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+         write_protection_region(&xen_mpumap[idx], idx);
+     }
+ 
++    if ( !(flags & _PAGE_PRESENT) && (rc >= MPUMAP_REGION_FOUND) )
++    {
++        /*
++         * Currently, we only support destroying a *WHOLE* MPU memory region,
++         * part-region removing is not supported, as in worst case, it will
++         * leave two fragments behind.
++         */
++        if ( MPUMAP_REGION_INCLUSIVE == rc )
++        {
++            region_printk("mpu: part-region removing is not supported\n");
++            return -EINVAL;
++        }
++
++        disable_mpu_region_from_index(idx);
++    }
++
+     return 0;
+ }
+ 
+@@ -261,6 +313,21 @@ int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags)
+     return rc;
+ }
+ 
++int destroy_xen_mappings(unsigned long s, unsigned long e)
++{
++    int rc;
++
++    ASSERT(IS_ALIGNED(s, PAGE_SIZE));
++    ASSERT(IS_ALIGNED(e, PAGE_SIZE));
++    ASSERT(s <= e);
++
++    rc = xen_mpumap_update(virt_to_maddr(s), virt_to_maddr(e), 0);
++    if ( !rc )
++        context_sync_mpu();
++
++    return rc;
++}
++
+ int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
+                      unsigned int flags)
+ {
+-- 
+2.34.1
+
 
