@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E1FC7115D
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 09:51:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1020743.1396895 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9EAC7115D
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 09:54:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1020760.1396904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSYOv-0008NS-G3; Fri, 20 Jun 2025 09:51:13 +0000
+	id 1uSYRd-00013E-T4; Fri, 20 Jun 2025 09:54:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1020743.1396895; Fri, 20 Jun 2025 09:51:13 +0000
+Received: by outflank-mailman (output) from mailman id 1020760.1396904; Fri, 20 Jun 2025 09:54:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSYOv-0008NJ-CI; Fri, 20 Jun 2025 09:51:13 +0000
-Received: by outflank-mailman (input) for mailman id 1020743;
- Fri, 20 Jun 2025 09:51:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uSYRd-000137-QH; Fri, 20 Jun 2025 09:54:01 +0000
+Received: by outflank-mailman (input) for mailman id 1020760;
+ Fri, 20 Jun 2025 09:54:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=FxVL=ZD=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
- id 1uSYOu-00082H-Ur
- for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 09:51:12 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 193fb1e8-4dbc-11f0-a30e-13f23c93f187;
- Fri, 20 Jun 2025 11:51:12 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2D589176A;
- Fri, 20 Jun 2025 02:50:52 -0700 (PDT)
-Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.67.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9D68D3F673;
- Fri, 20 Jun 2025 02:51:10 -0700 (PDT)
+ <SRS0=vQmk=ZD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1uSYRc-00012y-Nv
+ for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 09:54:00 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7c74cc09-4dbc-11f0-b894-0df219b8e170;
+ Fri, 20 Jun 2025 11:53:58 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-451ebd3d149so10273735e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Jun 2025 02:53:58 -0700 (PDT)
+Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
+ by smtp.gmail.com with UTF8SMTPSA id
+ ffacd0b85a97d-3a6d1189977sm1543148f8f.82.2025.06.20.02.53.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Jun 2025 02:53:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,55 +47,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 193fb1e8-4dbc-11f0-a30e-13f23c93f187
-From: Hari Limaye <hari.limaye@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: luca.fancellu@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
+X-Inumbo-ID: 7c74cc09-4dbc-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1750413238; x=1751018038; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=6sTuUUBWSSYBoqV1/4Ia/RrBVDTs9rH4NkrSo0YdX5A=;
+        b=eYRNoUWRBfnQhVi4wQedPe0OJFek2VLFy1vPwJts9fcAMFnUvc7molLWOhbf1ZRnW8
+         NBU3SvxbCeHJD7Dxvh9qaF/acxNURrqb2zGa3msUDOCxG3sO2oHtEkWr1rvBGEnWL5zh
+         20+jHX/xd+4VR89R/FnAMqWFWUE33XwLjRGjQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1750413238; x=1751018038;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6sTuUUBWSSYBoqV1/4Ia/RrBVDTs9rH4NkrSo0YdX5A=;
+        b=q58iixQx39Phhdfdve9X+M1z2I7qODYWhMWRhTTcYSSO4LfhHKXJ1L5pKRlvKmsNCx
+         n6YOVPdaJqxRshYcXSBzu7j8yWMiYng2v88Sm5LupQWcxSjQaApVZyuaYSxrmgM9Tl7B
+         ShfcXOthVSrMUKittTCD3gQdkLztfvSLvlqueStPzBhECH6iPkK7iTVpHp52e4M33FvH
+         nd7M5h4SLt+k3frYKAPE6FJoV7BYi0qb/uiMwRTuMViPyeLcoWiVwIZVjR8FLaA7Jtxi
+         RIA+uJ6ADm8+2sycLQw2Ik4v+93QLjXj34ZbNEQehw57rg0PMEsMbRFRAfkWBxIauyYM
+         gS1w==
+X-Gm-Message-State: AOJu0YwJ/d0BcBcma3K7td18gPDqiGmuH0Jw+jEOdVXcykEtKyMby5D3
+	Mr2y4xTKwQzPykl6Sw72EWdlRFyDmo8U3K61SenDdy45yuFxiaE85QpkBEzgIu0HQfs=
+X-Gm-Gg: ASbGncvr1U0i7ajgpb5ymRyWSlzI4VF9Id/bEnJ/3Dr4wWTFcDsxbcTc/Pg93DXnf4h
+	Y6VxkwcA9zyJLMGMZ/jsYvW3Ac70tgHzG5yKRB7kuNAZNm/Ywe6daq7fkHOTICqNELHDGj9xlps
+	F++qSxEiuwjelWPorRib3HwyvMGi8Q+YElgKbaEetG0Q37pF5G+kdmRjIo/GgE3rCrF2xRgnKCc
+	06PdSys9O2Z7H7x/ScZ9J4jexw63NF41sQrEc9b/l3lddlmaWee4Sf6uR1QCAgn6h0mXZdfq0Pv
+	jVeP/8l+GZc6zon8TN7R4c3zPag9ZdwakI9luHiK/al4KRTIp7jCTKh/CWcgAPEXp1fzxPX/cRF
+	C1rINaA1lhR9ChAfnxiF+C5NcCQzqb0dXChY=
+X-Google-Smtp-Source: AGHT+IHsn/onSdo+ti11S55Rsqb8gQVLZ+uzY/M5CyPBMQPEjr1LY8qDv4e9i7DrW7Ar3aZ6tPEZzg==
+X-Received: by 2002:a05:6000:2890:b0:3a4:d4e5:498a with SMTP id ffacd0b85a97d-3a6d130d49cmr1678680f8f.42.1750413238078;
+        Fri, 20 Jun 2025 02:53:58 -0700 (PDT)
+Date: Fri, 20 Jun 2025 11:53:56 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 6/6] arm/mpu: Implement remove_early_mappings for MPU systems
-Date: Fri, 20 Jun 2025 10:49:24 +0100
-Message-ID: <9a8b831cc6ff25b03c7ffab6a5c79e653496aa4f.1750411205.git.hari.limaye@arm.com>
-X-Mailer: git-send-email 2.42.1
-In-Reply-To: <cover.1750411205.git.hari.limaye@arm.com>
-References: <cover.1750411205.git.hari.limaye@arm.com>
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v3 3/5] crypto: Add RSA support
+Message-ID: <aFUvtMeBDEIc8njk@macbook.local>
+References: <20250602133639.2871212-1-ross.lagerwall@citrix.com>
+ <20250602133639.2871212-4-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20250602133639.2871212-4-ross.lagerwall@citrix.com>
 
-From: Luca Fancellu <luca.fancellu@arm.com>
+On Mon, Jun 02, 2025 at 02:36:35PM +0100, Ross Lagerwall wrote:
+> In preparation for adding support for livepatch signing, add support for
+> RSA crypto.
+> 
+> The RSA code is extracted from Nettle at tag nettle_3.2_release_20160128
+> (https://git.lysator.liu.se/nettle/nettle).
+> 
+> The MPI code is extracted from Linux at commit eef0df6a5953 (lib/mpi/*).
+> 
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> ---
+> 
+> In v3:
+> 
+> * Move mpi.c to lib
+> * Fix header guard name
+> 
+>  xen/crypto/Makefile   |    1 +
+>  xen/crypto/rsa.c      |  196 +++++
+>  xen/include/xen/mpi.h |   68 ++
+>  xen/include/xen/rsa.h |   74 ++
+>  xen/lib/Makefile      |    1 +
+>  xen/lib/mpi.c         | 1729 +++++++++++++++++++++++++++++++++++++++++
 
-Implement remove_early_mappings for MPU systems.
+Just FTAOD: all the functions imported in mpi.c are used I think?  So
+that we don't introduce unreachable code.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Signed-off-by: Hari Limaye <hari.limaye@arm.com>
----
- xen/arch/arm/mpu/setup.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
-index ab00cb944b..5928b534d5 100644
---- a/xen/arch/arm/mpu/setup.c
-+++ b/xen/arch/arm/mpu/setup.c
-@@ -97,7 +97,14 @@ void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
- 
- void __init remove_early_mappings(void)
- {
--    BUG_ON("unimplemented");
-+    int rc;
-+
-+    if ( mapped_fdt_paddr == INVALID_PADDR )
-+        return;
-+
-+    rc = destroy_xen_mappings(round_pgdown(mapped_fdt_paddr), mapped_fdt_limit);
-+    if ( rc )
-+        panic("Unable to unmap the device-tree.\n");
- }
- 
- /*
--- 
-2.34.1
-
+Thanks, Roger.
 
