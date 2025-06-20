@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDE4C7115D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3BEC71155
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 11:11:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1020850.1397021 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1020844.1396965 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSZer-0006lP-HV; Fri, 20 Jun 2025 11:11:45 +0000
+	id 1uSZel-0005Xo-OD; Fri, 20 Jun 2025 11:11:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1020850.1397021; Fri, 20 Jun 2025 11:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 1020844.1396965; Fri, 20 Jun 2025 11:11:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSZer-0006kj-B7; Fri, 20 Jun 2025 11:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 1020850;
- Fri, 20 Jun 2025 11:11:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uSZel-0005Xh-L0; Fri, 20 Jun 2025 11:11:39 +0000
+Received: by outflank-mailman (input) for mailman id 1020844;
+ Fri, 20 Jun 2025 11:11:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vQmk=ZD=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uSZep-0005XW-V1
- for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 11:11:43 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 58f86d06-4dc7-11f0-a30e-13f23c93f187;
- Fri, 20 Jun 2025 13:11:43 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-451d41e1ad1so13059695e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 20 Jun 2025 04:11:43 -0700 (PDT)
+ id 1uSZek-0005XV-AG
+ for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 11:11:38 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 548d64f5-4dc7-11f0-b894-0df219b8e170;
+ Fri, 20 Jun 2025 13:11:36 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so19883375e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Jun 2025 04:11:36 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-453646cb57fsm22346425e9.1.2025.06.20.04.11.42
+ ffacd0b85a97d-3a6d0f18215sm1745673f8f.29.2025.06.20.04.11.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 04:11:42 -0700 (PDT)
+ Fri, 20 Jun 2025 04:11:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,52 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 58f86d06-4dc7-11f0-a30e-13f23c93f187
+X-Inumbo-ID: 548d64f5-4dc7-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1750417903; x=1751022703; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1750417895; x=1751022695; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wldT8/hJRoQr9+P0tngsgZ2ttRe5059NLBS5IaMdmu4=;
-        b=UlQkcyCgzs/MRDx+r6F69Aq3z1GbQzWX6PrJsRxbcwEYYpx1hKaA/UCYfPEMkiEto0
-         z8Ud59mpKsxH3DsJ6VXaAyA6AadPehNelyapm7Z1VXRySGOXiwc8onkLOGM0814xUCLX
-         G3LTlbdEPvyTL6SwELlQGsc58RalCCjGOgaro=
+        bh=zxbjBN87wnj0AUXMvgpO31kjAgExGSkQK2SRaU2awvM=;
+        b=F4WW8zMa2sNxMiNbWZ93+M+ZG2Q2ni2wuLtPOYkBsi5M/JkSjwn0/H8GnZvg8zfksx
+         b+qrpXKuWXSrcJvGoI5pxRyeuwOXU95374bFdVYNJ5n+kLy+ycL2wCbLSZUXEI6npurh
+         Fz11vSE0adPSVTB4fnGCd0Me+CX0kiyPwHx/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750417903; x=1751022703;
+        d=1e100.net; s=20230601; t=1750417895; x=1751022695;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wldT8/hJRoQr9+P0tngsgZ2ttRe5059NLBS5IaMdmu4=;
-        b=aXQKJ3Ap7H/Uj19d4A/BN2diOUsozVa64gGC2jy3uSyQHSif1Fk5kVh0NIpQZcQPMZ
-         BcsbbmvqKABGx7zR7CphkrKfc/bxxv4PzeULgC8lbKRSSx052pJt9hQscvQEZl3IBAbe
-         z/eq9UiLVAQZ8ikIlpEq0NidICrQJ1u83/r3yBsea+oHUGa51LldZ9uMJZdFDfWG44Dg
-         4SBGgfJRXtwDyr9r1wUNGtsBPfnMINOT1hSBPOtHadQ9wEAqSYgPcZipodJMZUP8+jF3
-         bNG0it0cQaKDR068S4Jpw13azSxayMhpZFBPXH/39hczuUk7iEDSfmqODqebNaetYYIH
-         Dwhg==
-X-Gm-Message-State: AOJu0YwD/0OL/+vsMz+agfKT6n8HSh65yucakFTHsk7nKS3+DDEyEed4
-	U7pybLqWq3Ge4Kt7aaJsGN7bYaQoPDSeymr8lwn1wztv7w0W92dUmxkEHsdDCh7+KJKPcqA/jRb
-	b/CmK
-X-Gm-Gg: ASbGncu+SPmmhj3bnbE4Wvb5y0YGgFkwla1XpX+SdLWh5fBXi9lWby0hp9YHb9Zipib
-	i0suybdH4k4TfPm1mTtSPW6l0nM2GFW9WZAiwi0sSjzyDi5zEK2bIMEXJg4EJWtirWy+KvE9A9W
-	E5zmpjvXEJHHskx/+HWX+nQuUjFMpuLU0iTrwH8Yy/MZ2CzUbOQ9PN50tIq81Yr1pyRrbNaJDXy
-	b7j3mauad+HURx0oM67/7rO3p5j5eLk+eBhgBE6i+qNSsD+ci90igSPrBGLiDJ6wQMSR3wZehfs
-	1sZ6r/doHPN/96hWLMgvcnOTX/1h9rHDY9Oy/F/GwASsCraaXiYniwMGvey/RVCiZTBUJKP2qHj
-	k2+1DPeXrOOyx9qMrRZ+84jH+9ke8JA==
-X-Google-Smtp-Source: AGHT+IHJiQ62hFFpGk1dacP+iqYl/Dmt8h7STK8m9XWPRJGoeBlj0alEIF5MZ6oahkw+8FizzIXZgA==
-X-Received: by 2002:a05:6000:2807:b0:3a5:232c:6976 with SMTP id ffacd0b85a97d-3a6d12e3a8fmr1412325f8f.44.1750417902622;
-        Fri, 20 Jun 2025 04:11:42 -0700 (PDT)
+        bh=zxbjBN87wnj0AUXMvgpO31kjAgExGSkQK2SRaU2awvM=;
+        b=nWbpLs84TDQOpiMlzKhijNqv+2k8CjzntPRiCylTo19Vpm0krgEEH53RNyPYbUl2/C
+         bohxwvvTuVRgPk01/k6VL8ul4Aci4cDShZxBnZqvfg62qlflZtstfA6Mug0czahZrWRH
+         dtuxAsh7pE7RXS+57GsX7Ffcm8L/e+OfFCvt//B4i5sMIEZIjIwOqX40eThEtKAdJnJH
+         PsYJjDFWkEhm4dSVBTfxGL80BSW9TXiTpy4uULSCSd/JwOnv01m0H2gEEOP6562TKoFV
+         GsJJ5FH7GaKzDitWtea3Rivi50tKPpklF/CWo5k8B/00AOcsXqukjkuZYBEXYd0tCdql
+         Wofw==
+X-Gm-Message-State: AOJu0YzZtLIEMO39yafehOtGB8XvzxVHpXm4h3eP85I1NE8WgAe07Ge6
+	gDzNnpq9j/s92VhRuU2Z64zb3JgpiLzDtxRKWLkUhlBhfsV5u1V0C0tGc+PABnl8gyiyJ2oaC1r
+	9pZLB
+X-Gm-Gg: ASbGnctU0P3Nf1hqSlORuUH+sr8kH6CiXtlzcjWP2UYj1852Luu/IrQ3LCiJiK+W0El
+	C5pLVJvomx2KS5IwUuXsQiH2StblmVOF3Tjjl+beE1lvPe4IGsSRcN8ay0R9L+/NZs6mUZZuygM
+	18/YRGFJvbGejpckXrw10rp9g5kK7FX+xeHW86zXkgbSwE44jybBSTrqhpPf86IDOHtNRK61S0z
+	z1OWr0oYqMdohOhhZmsvcaFXKJC96qdpYoDS0vZ+NRKBr9L7ENTn821m56mNKcTDkCNqRbzbyke
+	iPSQUU1TV2dJlxr5bvNL56T6uYIxC/b7G516eYqiy34/2rOj3uwNZ7Z+/Zyydm5b2GUPP4DRTZC
+	qWMVEiil4I+SmJcneRo4wHo9hbphHHg==
+X-Google-Smtp-Source: AGHT+IHIHPRlAOwa/O+aSU6bCJZbLczlcEvaLpUOCx3IIEZT5rimkIyoz4ISU2abc5Fd+dvjKFczNg==
+X-Received: by 2002:a05:600c:4747:b0:43d:300f:fa1d with SMTP id 5b1f17b1804b1-453659c0c2fmr24473355e9.31.1750417895165;
+        Fri, 20 Jun 2025 04:11:35 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 7/8] pdx: move some helpers in preparation for new compression
-Date: Fri, 20 Jun 2025 13:11:29 +0200
-Message-ID: <20250620111130.29057-8-roger.pau@citrix.com>
+Subject: [PATCH v2 1/8] x86/pdx: simplify calculation of domain struct allocation boundary
+Date: Fri, 20 Jun 2025 13:11:23 +0200
+Message-ID: <20250620111130.29057-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250620111130.29057-1-roger.pau@citrix.com>
 References: <20250620111130.29057-1-roger.pau@citrix.com>
@@ -100,163 +100,104 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Move fill_mask(), pdx_region_mask() and pdx_init_mask() to the
-!CONFIG_PDX_NONE section in preparation of them also being used by a newly
-added PDX compression.
+When not using CONFIG_BIGMEM there are some restrictions in the address
+width for allocations of the domain structure, as it's PDX truncated to 32
+bits it's stashed into page_info structure for domain allocated pages.
 
-No functional change intended.
+The current logic to calculate this limit is based on the internals of the
+PDX compression used, which is not strictly required.  Instead simplify the
+logic to rely on the existing PDX to PFN conversion helpers used elsewhere.
+
+This has the added benefit of allowing alternative PDX compression
+algorithms to be implemented without requiring to change the calculation of
+the domain structure allocation boundary.
+
+As a side effect introduce pdx_to_paddr() conversion macro and use it.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-git is not very helpful when generating the diff here, and it ends up
-moving everything around the functions instead of the functions themselves.
+Changes since v1:
+ - Use sizeof_field().
+ - Introduce and use pdx_to_paddr().
+ - Add comment.
 ---
- xen/common/pdx.c | 118 +++++++++++++++++++++++------------------------
- 1 file changed, 59 insertions(+), 59 deletions(-)
+ xen/arch/x86/domain.c | 40 +++++++++++-----------------------------
+ xen/include/xen/pdx.h |  1 +
+ 2 files changed, 12 insertions(+), 29 deletions(-)
 
-diff --git a/xen/common/pdx.c b/xen/common/pdx.c
-index 5cfec591f993..d5e469baffe2 100644
---- a/xen/common/pdx.c
-+++ b/xen/common/pdx.c
-@@ -101,59 +101,6 @@ void __init pfn_pdx_add_region(paddr_t base, paddr_t size)
-     ranges[nr_ranges++].size = PFN_UP(base + size) - PFN_DOWN(base);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index d025befe3d8e..14a0f6dda791 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -461,30 +461,6 @@ void domain_cpu_policy_changed(struct domain *d)
+     }
  }
  
--#endif /* !CONFIG_PDX_NONE */
--
--#ifdef CONFIG_PDX_MASK_COMPRESSION
--
+-#if !defined(CONFIG_BIGMEM) && defined(CONFIG_PDX_COMPRESSION)
 -/*
-- * Diagram to make sense of the following variables. The masks and shifts
-- * are done on mfn values in order to convert to/from pdx:
-- *
-- *                      pfn_hole_mask
-- *                      pfn_pdx_hole_shift (mask bitsize)
-- *                      |
-- *                 |---------|
-- *                 |         |
-- *                 V         V
-- *         --------------------------
-- *         |HHHHHHH|000000000|LLLLLL| <--- mfn
-- *         --------------------------
-- *         ^       ^         ^      ^
-- *         |       |         |------|
-- *         |       |             |
-- *         |       |             pfn_pdx_bottom_mask
-- *         |       |
-- *         |-------|
-- *             |
-- *             pfn_top_mask
-- *
-- * ma_{top,va_bottom}_mask is simply a shifted pfn_{top,pdx_bottom}_mask,
-- * where ma_top_mask has zeroes shifted in while ma_va_bottom_mask has
-- * ones.
+- * The hole may be at or above the 44-bit boundary, so we need to determine
+- * the total bit count until reaching 32 significant (not squashed out) bits
+- * in PFN representations.
+- * Note that the way "bits" gets initialized/updated/bounds-checked guarantees
+- * that the function will never return zero, and hence will never be called
+- * more than once (which is important due to it being deliberately placed in
+- * .init.text).
 - */
--
--/** Mask for the lower non-compressible bits of an mfn */
--unsigned long __ro_after_init pfn_pdx_bottom_mask = ~0UL;
--
--/** Mask for the lower non-compressible bits of an maddr or vaddr */
--unsigned long __ro_after_init ma_va_bottom_mask = ~0UL;
--
--/** Mask for the higher non-compressible bits of an mfn */
--unsigned long __ro_after_init pfn_top_mask = 0;
--
--/** Mask for the higher non-compressible bits of an maddr or vaddr */
--unsigned long __ro_after_init ma_top_mask = 0;
--
--/**
-- * Mask for a pdx compression bit slice.
-- *
-- *  Invariant: valid(mfn) implies (mfn & pfn_hole_mask) == 0
-- */
--unsigned long __ro_after_init pfn_hole_mask = 0;
--
--/** Number of bits of the "compressible" bit slice of an mfn */
--unsigned int __ro_after_init pfn_pdx_hole_shift = 0;
--
- /* Sets all bits from the most-significant 1-bit down to the LSB */
- static uint64_t fill_mask(uint64_t mask)
- {
-@@ -196,12 +143,6 @@ static uint64_t pdx_region_mask(uint64_t base, uint64_t len)
-     return fill_mask(base ^ (base + len - 1));
- }
- 
--bool pdx_is_region_compressible(paddr_t base, unsigned long npages)
+-static unsigned int __init noinline _domain_struct_bits(void)
 -{
--    return !(paddr_to_pfn(base) & pfn_hole_mask) &&
--           !(pdx_region_mask(base, npages * PAGE_SIZE) & ~ma_va_bottom_mask);
--}
+-    unsigned int bits = 32 + PAGE_SHIFT;
+-    unsigned int sig = hweight32(~pfn_hole_mask);
+-    unsigned int mask = pfn_hole_mask >> 32;
 -
- /**
-  * Creates the mask to start from when calculating non-compressible bits
-  *
-@@ -219,6 +160,65 @@ static uint64_t __init pdx_init_mask(uint64_t base_addr)
-                          (uint64_t)1 << (MAX_ORDER + PAGE_SHIFT)) - 1);
- }
- 
-+#endif /* !CONFIG_PDX_NONE */
-+
-+#ifdef CONFIG_PDX_MASK_COMPRESSION
-+
-+/*
-+ * Diagram to make sense of the following variables. The masks and shifts
-+ * are done on mfn values in order to convert to/from pdx:
-+ *
-+ *                      pfn_hole_mask
-+ *                      pfn_pdx_hole_shift (mask bitsize)
-+ *                      |
-+ *                 |---------|
-+ *                 |         |
-+ *                 V         V
-+ *         --------------------------
-+ *         |HHHHHHH|000000000|LLLLLL| <--- mfn
-+ *         --------------------------
-+ *         ^       ^         ^      ^
-+ *         |       |         |------|
-+ *         |       |             |
-+ *         |       |             pfn_pdx_bottom_mask
-+ *         |       |
-+ *         |-------|
-+ *             |
-+ *             pfn_top_mask
-+ *
-+ * ma_{top,va_bottom}_mask is simply a shifted pfn_{top,pdx_bottom}_mask,
-+ * where ma_top_mask has zeroes shifted in while ma_va_bottom_mask has
-+ * ones.
-+ */
-+
-+/** Mask for the lower non-compressible bits of an mfn */
-+unsigned long __ro_after_init pfn_pdx_bottom_mask = ~0UL;
-+
-+/** Mask for the lower non-compressible bits of an maddr or vaddr */
-+unsigned long __ro_after_init ma_va_bottom_mask = ~0UL;
-+
-+/** Mask for the higher non-compressible bits of an mfn */
-+unsigned long __ro_after_init pfn_top_mask = 0;
-+
-+/** Mask for the higher non-compressible bits of an maddr or vaddr */
-+unsigned long __ro_after_init ma_top_mask = 0;
-+
-+/**
-+ * Mask for a pdx compression bit slice.
-+ *
-+ *  Invariant: valid(mfn) implies (mfn & pfn_hole_mask) == 0
-+ */
-+unsigned long __ro_after_init pfn_hole_mask = 0;
-+
-+/** Number of bits of the "compressible" bit slice of an mfn */
-+unsigned int __ro_after_init pfn_pdx_hole_shift = 0;
-+
-+bool pdx_is_region_compressible(paddr_t base, unsigned long npages)
-+{
-+    return !(paddr_to_pfn(base) & pfn_hole_mask) &&
-+           !(pdx_region_mask(base, npages * PAGE_SIZE) & ~ma_va_bottom_mask);
-+}
-+
- bool __init pfn_pdx_compression_setup(paddr_t base)
+-    for ( ; bits < BITS_PER_LONG && sig < 32; ++bits, mask >>= 1 )
+-        if ( !(mask & 1) )
+-            ++sig;
+-
+-    return bits;
+-}
+-#endif
+-
+ struct domain *alloc_domain_struct(void)
  {
-     unsigned int i, j, bottom_shift = 0, hole_shift = 0;
+     struct domain *d;
+@@ -498,14 +474,20 @@ struct domain *alloc_domain_struct(void)
+      * On systems with CONFIG_BIGMEM there's no packing, and so there's no
+      * such restriction.
+      */
+-#if defined(CONFIG_BIGMEM) || !defined(CONFIG_PDX_COMPRESSION)
+-    const unsigned int bits = IS_ENABLED(CONFIG_BIGMEM) ? 0 :
+-                                                          32 + PAGE_SHIFT;
++#if defined(CONFIG_BIGMEM)
++    const unsigned int bits = 0;
+ #else
+-    static unsigned int __read_mostly bits;
++    static unsigned int __ro_after_init bits;
+ 
+     if ( unlikely(!bits) )
+-         bits = _domain_struct_bits();
++         /*
++          * Get the width for the next pfn, and unconditionally subtract one
++          * from it to ensure the used width will not allocate past the PDX
++          * field limit.
++          */
++         bits = flsl(pdx_to_paddr(1UL << (sizeof_field(struct page_info,
++                                                       v.inuse._domain) * 8)))
++                - 1;
+ #endif
+ 
+     BUILD_BUG_ON(sizeof(*d) > PAGE_SIZE);
+diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
+index 9faeea3ac9f2..c1423d64a95b 100644
+--- a/xen/include/xen/pdx.h
++++ b/xen/include/xen/pdx.h
+@@ -99,6 +99,7 @@ bool __mfn_valid(unsigned long mfn);
+ #define pdx_to_mfn(pdx) _mfn(pdx_to_pfn(pdx))
+ 
+ #define paddr_to_pdx(pa) pfn_to_pdx(paddr_to_pfn(pa))
++#define pdx_to_paddr(px) pfn_to_paddr(pdx_to_pfn(px))
+ 
+ #ifdef CONFIG_PDX_COMPRESSION
+ 
 -- 
 2.49.0
 
