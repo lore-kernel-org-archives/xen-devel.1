@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DE8C7115B
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 18:40:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1021138.1397182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57104C7115B
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jun 2025 18:41:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1021141.1397193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSgfH-0002j1-DU; Fri, 20 Jun 2025 18:40:39 +0000
+	id 1uSgfU-000369-Qw; Fri, 20 Jun 2025 18:40:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1021138.1397182; Fri, 20 Jun 2025 18:40:39 +0000
+Received: by outflank-mailman (output) from mailman id 1021141.1397193; Fri, 20 Jun 2025 18:40:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uSgfH-0002iu-Ao; Fri, 20 Jun 2025 18:40:39 +0000
-Received: by outflank-mailman (input) for mailman id 1021138;
- Fri, 20 Jun 2025 18:40:38 +0000
+	id 1uSgfU-000360-Nh; Fri, 20 Jun 2025 18:40:52 +0000
+Received: by outflank-mailman (input) for mailman id 1021141;
+ Fri, 20 Jun 2025 18:40:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kPYt=ZD=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1uSgVs-000575-2O
- for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 18:30:56 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20630.outbound.protection.outlook.com
- [2a01:111:f403:2412::630])
+ id 1uSgW2-000575-A1
+ for xen-devel@lists.xenproject.org; Fri, 20 Jun 2025 18:31:06 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20627.outbound.protection.outlook.com
+ [2a01:111:f403:2414::627])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b09974c4-4e04-11f0-b894-0df219b8e170;
- Fri, 20 Jun 2025 20:30:51 +0200 (CEST)
-Received: from BN9PR03CA0769.namprd03.prod.outlook.com (2603:10b6:408:13a::24)
- by PH0PR12MB5647.namprd12.prod.outlook.com (2603:10b6:510:144::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.28; Fri, 20 Jun
- 2025 18:30:43 +0000
-Received: from BN1PEPF00005FFE.namprd05.prod.outlook.com
- (2603:10b6:408:13a:cafe::1f) by BN9PR03CA0769.outlook.office365.com
- (2603:10b6:408:13a::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.26 via Frontend Transport; Fri,
- 20 Jun 2025 18:30:42 +0000
+ id b880e9b9-4e04-11f0-b894-0df219b8e170;
+ Fri, 20 Jun 2025 20:31:04 +0200 (CEST)
+Received: from BN9P220CA0002.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::7)
+ by SJ2PR12MB8831.namprd12.prod.outlook.com (2603:10b6:a03:4d0::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.35; Fri, 20 Jun
+ 2025 18:31:00 +0000
+Received: from BN1PEPF00006001.namprd05.prod.outlook.com
+ (2603:10b6:408:13e:cafe::ac) by BN9P220CA0002.outlook.office365.com
+ (2603:10b6:408:13e::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.25 via Frontend Transport; Fri,
+ 20 Jun 2025 18:30:59 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF00005FFE.mail.protection.outlook.com (10.167.243.230) with Microsoft
+ BN1PEPF00006001.mail.protection.outlook.com (10.167.243.233) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8857.21 via Frontend Transport; Fri, 20 Jun 2025 18:30:42 +0000
+ 15.20.8857.21 via Frontend Transport; Fri, 20 Jun 2025 18:30:59 +0000
 Received: from xcbagarciav01.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Jun
- 2025 13:30:35 -0500
+ 2025 13:30:47 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b09974c4-4e04-11f0-b894-0df219b8e170
+X-Inumbo-ID: b880e9b9-4e04-11f0-b894-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BpzkX+GzIlvQ8kk6ON9FxhVrT7MI/G7z/GSK46jiX7Z/5h6QCNsgkrbaUCaX/0Zks/fT+AwN+xylMommu054qLIJMbKScaFSz4HfmfuMrh6VFkr6iqsFBE59t4ZJ6fUTjsboYmTxbWTXPZB/+++pEaJPCJB41SR50SghybwGdGS6lLpISeXwoVyEtez534EGqBPPslqLhLweOKMAT+7JLjkFMSQdo/n+YZrif1MUH/fw+OhY2qEfLIAgXPEMlkmLL0JHoz2JdRvE7EW+DVpYWnvPdbeC1G3NV9IC3gW7B+CLUG8Do7MaKAMvEUbxQhWS5hukH/LCqUVDES+Fj8dM9Q==
+ b=mozxrJBD4h806OxtW9OKjLve39slNB6SyZyg/dPERlNW7V5jhRlvDtkbjrdunxqXCedE1tVYENyACVagFJeLBCcM/NTMhMNOiS5sSAlmFhyhxWB6tVh4W9fRuRrgHyOYUtKDV6s/fyFclXl4UhykOdnJYV73bgXKHHK8EvehrQQ3/4yQ3SFvhhA5BIrirntn+BKBCmfbEjrQjvov5ZvHYV+RqHQj5/0TRSQPc/VdBGdoPg2lrkeSo44eRCpbmN5gevcnhgilnng5/hKUOx8SS9wBG9QahgPtFdpj2GIVEbfcNBNvfDctTSyEPEyTE3ncxwnXVSDHbiLgF6WuwoLBsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EZ8mPV20eg3UxX25KPokn65IJOL0jNvmLs3RF/kL5p8=;
- b=xNI7sdB/YKrlLqedKWvKWm2BPVHx8wGvEhdGmSirTJBGpi5EFvBlZzoqTdh0XltPjGaNFu4lxPIB86XHnboE9WNuJx6Gr89wIsD5PVySXjspD0SBjlagq4UB4LSVfVTT04RU7EMYYEdVFITwotcjXk0Ii1bxmf4PAID5DZYuPnELCHWProIu8acLyZsPtOYffDgcTxGukRH5FlaO7V2N9pt4i8MerHqwm2MZhFq3Uf3ioNbL7TKCqA8udLg2iWHgv70OE1hyE4Uc8ZyZSas9Ri4cwiC67ZUg2V7zS5r4aQYxAkXnIQ2Lo9qBjMR9FipqYm9UUbzEsRG9JqP0pxl5ZA==
+ bh=A32bMUto8OiFkZ1KkrsMiha7h5Dnym+pId15RGk2+9o=;
+ b=wk35lImRWRVdtFVGzQehcpbiWy/FUyt2bSbYCJGxX4W3beybRuLaZXrTTlE1uQXKMDDPCdGYJw1G9xjawkyXe6qoUPXZ1XGOYLsnYMBgi8Ng+pMwMsUORWzbFMMjA9zPVEDynzeoRldU8psSyTsojwRdn083TCu+Vuz/ukTuV8l68PM3sYbXyPpA++scytgCv6tsK4uBUkfGmptUa97eOqUqt4h4uY+yhL/xxSTiq6AxMaLQWB4NbSYOJDephSVKX1sygzfYX0gnuMW7I/s8Cxz1e+E1TmIpY55dkb1+k3ygxlDq0QpUkQz2LiEXpfIOpHseXxaSKS+D+h5OvOUYpQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EZ8mPV20eg3UxX25KPokn65IJOL0jNvmLs3RF/kL5p8=;
- b=t8pVMdqkVMasl6d7C/RRUcOqZnKf4r66EuE08XN0zDy78QsimkTYzKpszSrT1ST3rwOzIkwxd7Mh1Gupv98qZWYUZXj1GldSez7ti2bV8NpldBbcIJ9Ns1+oDmq0p/405Ni3UWXigdM5iOeU0ncN63w4RFlEyqK6eQrsQyXs0H8=
+ bh=A32bMUto8OiFkZ1KkrsMiha7h5Dnym+pId15RGk2+9o=;
+ b=WslG99NBfGR/mi9A3QHWERZfwNjFzgJm8LTT+nS/doAlaS0s60cbLyCOTyQeaPvNxA66LOqXhXbXn+nkL6bMtgKJhiraf0W6WrRLLZmf/Tx2pg2IWo1LtRnWT6QgCdGeD5298RVSZymaXHG575gSV4dYKgB9+ynJxUbrv9GyHnY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,13 +82,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Alejandro Vallejo <agarciav@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <agarciav@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Daniel P.
- Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v4 08/12] xen/dt: Rename bootfdt.c -> bootinfo-fdt.c
-Date: Fri, 20 Jun 2025 20:28:54 +0200
-Message-ID: <20250620182859.23378-9-agarciav@amd.com>
+CC: Alejandro Vallejo <agarciav@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	"Bertrand Marquis" <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Shawn Anastasio
+	<sanastasio@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, "Connor
+ Davis" <connojdavis@gmail.com>, Oleksii Kurochko
+	<oleksii.kurochko@gmail.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>, Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>, George Dunlap <gwd@xenproject.org>
+Subject: [PATCH v4 10/12] xen: Rename CONFIG_HAS_DEVICE_TREE to CONFIG_HAS_DEVICE_TREE_DISCOVERY
+Date: Fri, 20 Jun 2025 20:28:56 +0200
+Message-ID: <20250620182859.23378-11-agarciav@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250620182859.23378-1-agarciav@amd.com>
 References: <20250620182859.23378-1-agarciav@amd.com>
@@ -100,1364 +110,538 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFE:EE_|PH0PR12MB5647:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30c02afa-27c5-433c-2dbc-08ddb0289066
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006001:EE_|SJ2PR12MB8831:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e779e40-3b20-45e6-e1b9-08ddb0289a9c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
+	BCL:0;ARA:13230040|376014|36860700013|7416014|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?+HIfRooqYYRoPuf9cWp5met9PTSLaBgwKB5nHG7jINHEGGViqykfq7e38Buw?=
- =?us-ascii?Q?FEP5YYm5wWP7uIoY0Rnw6GhOLq0JaW4k+DPwRNVMk16DYxWeawJCBKbhC39W?=
- =?us-ascii?Q?TfdhS1VCVwMCwapj8HtQUiSCNyaZrchRhkJ0xqehnNDmiGeg+UBJ7rvBZzYG?=
- =?us-ascii?Q?kkO6a6IOPEcVMV3iaunn+25U01ukXjUBy3xZ7I7ODc5ZYDluOdD/SBrkky6X?=
- =?us-ascii?Q?otJxJ142n8Fy8Iv8D9zipWXetBBQnTJ3KmVkIkqgczKF5Qb3PXsxkmxfzfuF?=
- =?us-ascii?Q?aO7CMPnky3pLuPM/LipJguCbTVWpl0Nrc8L2hRSfvVOOYtWxqRtxXVHU5pOo?=
- =?us-ascii?Q?2RhZtsWmyBXpl43Gt1qtZmXdcQ3Zh9chTnvFXJ5VO2cvoyzWWlUTcLsKxpSe?=
- =?us-ascii?Q?w175t6LaVjz0O51xZJD+IeL69gqwPg0/uIhPr4pmkSTfsGQ878/J7K/3Hf5a?=
- =?us-ascii?Q?pYuvljwzTaH+241LBnvZ3z56QaL/Nqo2KoMbFdwyUPzuLwybW+TjuSqRXNCA?=
- =?us-ascii?Q?LllkMmjWUjSr+Dye3lXfTsye6ntliqSD12D8T/g9IiB4hyLF2RrAzAg2dqjs?=
- =?us-ascii?Q?cwuFdHpyZExhNkidGJ5FpNL119P/DvFcHhvwGrBAU1VE+Qr5NmYR8A08hYcF?=
- =?us-ascii?Q?o+3hEdyO0lPbm8YQmpL/z35L4jZHdeH5F+YLsIXGsztz8RkEpCx69AoNAyMx?=
- =?us-ascii?Q?XPxgrkLLR7IEYTKkBT8Us3i2kuJLn1lkq7yoQfe68InuJGWLYP3de46rYZmk?=
- =?us-ascii?Q?VTXT7yZjm8l9FVWxuQdBYpy+sf7NLANVkupDkKexQ9NCnj540614usWnKxFg?=
- =?us-ascii?Q?J85h/3im6Ey8y2NyZItLTtZ/WEqpGnbSkPSAqJBurk3Glmxlk2MREUVcmQ/1?=
- =?us-ascii?Q?0TL3cSh60sRFQObmxcRZ1qGGCWCZKShxkKGLUD0jb2T7I8izBvwGTDiby/l/?=
- =?us-ascii?Q?9R52dpM8i1+6Cu8eW5YTRyYiKZ7JgkITYY2yV9mh0pl3h1+X4au5VsLp8AWy?=
- =?us-ascii?Q?n0zDHF4OcYY/5ae3LS1egW21bIRk26GnBGpxjwA0U7HCZ16p/zDbgjd4+QfI?=
- =?us-ascii?Q?xUKKJX4PG3/+v4NdmwMIXmedyrvG61VkSQ3rHYGdcqauHFuuUIPKfwQCtPHD?=
- =?us-ascii?Q?hD3UnxXFGZw28HISVRnVxHPoDcF+o/RjrDVnKWFQ08AwXCMuSq9fFxb62wp7?=
- =?us-ascii?Q?DfX+0HGTAm6B3pGo2QS2SSte8cfrlM/mb7KAua9A5U3oc1H1OLYcW9ZVwjge?=
- =?us-ascii?Q?ndCUjY9bD0ynQxV+cRUNMV3ZVNBqmZEj+PqXQF2NmL5K0Wtmet5TmAHC50No?=
- =?us-ascii?Q?sts259TqUBsRzXPzl+vvkKswVK+w8AajrjYpokjpyCJ+rr8jLtAFD77GxeVW?=
- =?us-ascii?Q?sNCNRjYpqfYUKA/+19HJDuFbr2WrjKf7BBOz4wWQs5m6uX9QTk+Qzrr7MPoC?=
- =?us-ascii?Q?zfOCFP8GfpwEp94FEmlhBjN+uCN+CnUO9OkeKfJ88r6n8ydyqSWOkR6bbzDb?=
- =?us-ascii?Q?vlla6SCT0CscFzVBgEftdyRECF7PRTXfLupk?=
+	=?us-ascii?Q?dhSB5tap1s11sJOUrHMp0sckU/ioFXl3DoOZmxWrZ5icsDlmFxb8my/QNpxl?=
+ =?us-ascii?Q?rWIWaN3YyBCMSzFI48mqKZMN0mMPHpO5AiIsXsIe9pW6Tafi8lQAadjEnK2X?=
+ =?us-ascii?Q?jo9MKQHvP7pThB/oP14hWmnPEZTAsvNXEBHifaJNzVc/YUqfPPuaIyglWMLo?=
+ =?us-ascii?Q?UGxzIkkdsOKsWXpO7HfzvwlPx7bBM0vHWYtxjHEXI42Ifep0FmIj/doIIyiN?=
+ =?us-ascii?Q?/lUjlszqSJTjskfTEexV8zH8yino4GdDEmqQeG0d9IqXZKHzyll+KvN/YnSU?=
+ =?us-ascii?Q?+4nYwX8p/wYsH+yJg6Xaamuu/PkoO270+q1ISe+nxudIvzsr4p/7YOV5qaKN?=
+ =?us-ascii?Q?t8uxBhAU0MV98iwXHp+XqGG/GbIgVsV8rG0ju2PIwIQqesuEjjdpLYhhf3XX?=
+ =?us-ascii?Q?ebDXFIHimcKlOGaeAXPF2vN7W4TDzg+AlpyAfvDvv7+sIh/5O0NxmmPvjhfa?=
+ =?us-ascii?Q?V9SkIHpNf/geVQoxBxYQdoQoFGNgf813rlM/EPscedndzhl2+2zqxPn3BY2C?=
+ =?us-ascii?Q?xULPoPE+UK4aldjikNLkum0ubfd9iEHSUS0hnNa2+4j9oRcTS4mKPQIefY08?=
+ =?us-ascii?Q?FSTHs5DHydeRWsb/DZko1AYeuhT3IRBK37J0VKfB9uyPqea5TmuaNqKf0IaN?=
+ =?us-ascii?Q?AkBTGVJk/aMcpc4g4hxXmfsXkCwXuxhhnq1L9NwTyWABPF8JkrsVeY1SvKeh?=
+ =?us-ascii?Q?cxXrAKU6vYdMqTfr7chBAZOUWgriyAw0/VeIOfDB9KD26uoEr6zzL7Jvc+Dq?=
+ =?us-ascii?Q?5y9DjD2lEpv3XwTCNS807M15Tbfl8qofXowbtgqvMIDD1n/zsN/e7RPQGbd1?=
+ =?us-ascii?Q?1TSEhgILVpd2bo0CSXXdaXKH2UXfnySiFX8zXYblQ5SClPcQrFzp/IRv3H9e?=
+ =?us-ascii?Q?j5wqNID3zxO0K9NxHCaPzvrLagmkz2BPCbhZsH3G5TzJLSFZnqtW7bc8UITy?=
+ =?us-ascii?Q?tQohckZAQNM4pdDEgF+tryV5Lh9kGanPDCnSk3+/QxtJR0SgPgP5CKZ/oi/I?=
+ =?us-ascii?Q?T7e9pfU6/g8k/9h01152nwHnLEbFm8/L2otZSGKARebl5mSTts+2v4MxQEiU?=
+ =?us-ascii?Q?Rp4vqk30ELvKwZJp5PlltK/hOVebphhjEeFZ9ftZ7FS9p5EEHaKnAkPWy6v5?=
+ =?us-ascii?Q?HbOR5xXCpvxbOOE+YtLy77RFSVgdTJgZ8hXMLUilL9n8MEKwsMrZKMhqH/1b?=
+ =?us-ascii?Q?6mkrq/UB1sAJUNu31/MSpSMv0oO1vDsSceJmJfrU3Vn2j7NnrMfg+E3k7etl?=
+ =?us-ascii?Q?7r54vrSIl4GEE2CucQLzdn+tyAmXP7lW7g106Re2qKoUZs+mxmPI6TJSD+fG?=
+ =?us-ascii?Q?6H2e9iUNbvQtArSyioi0A4PZTHDY3V6GcFkcwVSLwnChkVeLfVqN7dEziWzm?=
+ =?us-ascii?Q?n9CVBH3Mn7isIyuJW93tdkYXuaFH9+JPqZculZMQwbNBOec7/7AhrUJ79IAU?=
+ =?us-ascii?Q?ZBI+4jb+lGqWY8ey6zwS1O2Vw13Ig5B6x0TrfHJcPgW4NBTXMhOkb29wWR8N?=
+ =?us-ascii?Q?9uEmTYE+BVLSfL+DUPPR2s6EH95f6zh9UYaF?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(7416014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2025 18:30:42.3852
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2025 18:30:59.5119
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30c02afa-27c5-433c-2dbc-08ddb0289066
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e779e40-3b20-45e6-e1b9-08ddb0289a9c
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00005FFE.namprd05.prod.outlook.com
+	BN1PEPF00006001.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5647
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8831
 
-This file will eventually contain bootfdt helpers that make heavy use of
-bootinfo. To simplify git history do the rename here explicitly. A later
-patch extracts bootinfo-independent helpers into bootfdt.c.
+Moving forward the idea is for there to be:
+  1. Basic DT support: used by dom0less/hyperlaunch.
+  2. Full DT support: used for device discovery and HW setup.
 
-Doing so here would needlessly pollute the diffs.
-
-Not a functional change.
+Rename HAS_DEVICE_TREE to HAS_DEVICE_TREE_DISCOVERY to describe (2), while
+DOM0LESS_BOOT is left to describe (1).
 
 Signed-off-by: Alejandro Vallejo <agarciav@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/bootfdt.c      | 646 +-------------------------
- xen/common/device-tree/bootinfo-fdt.c | 597 ++++++++++++++++++++++++
- 3 files changed, 619 insertions(+), 625 deletions(-)
- create mode 100644 xen/common/device-tree/bootinfo-fdt.c
+ xen/Kconfig.debug                |  2 +-
+ xen/arch/arm/Kconfig             |  2 +-
+ xen/arch/ppc/Kconfig             |  2 +-
+ xen/arch/riscv/Kconfig           |  2 +-
+ xen/common/Kconfig               |  6 +++---
+ xen/common/Makefile              |  4 ++--
+ xen/common/device.c              |  4 ++--
+ xen/common/efi/boot.c            |  2 +-
+ xen/common/sched/Kconfig         |  2 +-
+ xen/drivers/char/ns16550.c       |  6 +++---
+ xen/drivers/passthrough/Makefile |  2 +-
+ xen/drivers/passthrough/iommu.c  |  2 +-
+ xen/include/asm-generic/device.h | 10 +++++-----
+ xen/include/xen/iommu.h          |  8 ++++----
+ xen/include/xsm/dummy.h          |  4 ++--
+ xen/include/xsm/xsm.h            | 12 ++++++------
+ xen/xsm/dummy.c                  |  2 +-
+ xen/xsm/flask/hooks.c            |  6 +++---
+ xen/xsm/xsm_core.c               |  4 ++--
+ xen/xsm/xsm_policy.c             |  4 ++--
+ 20 files changed, 43 insertions(+), 43 deletions(-)
 
-diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
-index 13127296cb..8abc069c4b 100644
---- a/xen/common/device-tree/Makefile
-+++ b/xen/common/device-tree/Makefile
-@@ -1,4 +1,5 @@
- obj-y += bootfdt.init.o
-+obj-y += bootinfo-fdt.init.o
- obj-y += bootinfo.init.o
- obj-y += device-tree.o
- obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.init.o
-diff --git a/xen/common/device-tree/bootfdt.c b/xen/common/device-tree/bootfdt.c
-index 1848478e82..0d8d9ea357 100644
---- a/xen/common/device-tree/bootfdt.c
-+++ b/xen/common/device-tree/bootfdt.c
-@@ -1,206 +1,8 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * Early Device Tree
-- *
-- * Copyright (C) 2012-2014 Citrix Systems, Inc.
-- */
--
--#include <xen/bootinfo.h>
--#include <xen/device_tree.h>
--#include <xen/efi.h>
--#include <xen/init.h>
--#include <xen/kernel.h>
-+#include <xen/bootfdt.h>
-+#include <xen/bug.h>
- #include <xen/lib.h>
--#include <xen/libfdt/libfdt-xen.h>
--#include <xen/sort.h>
--#include <xen/static-shmem.h>
--#include <xsm/xsm.h>
--#include <asm/setup.h>
--
--static void __init __maybe_unused build_assertions(void)
--{
--    /*
--     * Check that no padding is between struct membanks "bank" flexible array
--     * member and struct meminfo "bank" member
--     */
--    BUILD_BUG_ON((offsetof(struct membanks, bank) !=
--                 offsetof(struct meminfo, bank)));
--    /* Ensure "struct membanks" and "struct membank" are equally aligned */
--    BUILD_BUG_ON(alignof(struct membanks) != alignof(struct membank));
--}
--
--static bool __init device_tree_node_is_available(const void *fdt, int node)
--{
--    const char *status;
--    int len;
--
--    status = fdt_getprop(fdt, node, "status", &len);
--    if ( !status )
--        return true;
--
--    if ( len > 0 )
--    {
--        if ( !strcmp(status, "ok") || !strcmp(status, "okay") )
--            return true;
--    }
--
--    return false;
--}
--
--static bool __init device_tree_node_matches(const void *fdt, int node,
--                                            const char *match)
--{
--    const char *name;
--    size_t match_len;
--
--    name = fdt_get_name(fdt, node, NULL);
--    match_len = strlen(match);
--
--    /* Match both "match" and "match@..." patterns but not
--       "match-foo". */
--    return strncmp(name, match, match_len) == 0
--        && (name[match_len] == '@' || name[match_len] == '\0');
--}
--
--static bool __init device_tree_node_compatible(const void *fdt, int node,
--                                               const char *match)
--{
--    int len, l;
--    const void *prop;
--
--    prop = fdt_getprop(fdt, node, "compatible", &len);
--    if ( prop == NULL )
--        return false;
--
--    while ( len > 0 ) {
--        if ( !dt_compat_cmp(prop, match) )
--            return true;
--        l = strlen(prop) + 1;
--        prop += l;
--        len -= l;
--    }
--
--    return false;
--}
--
--/*
-- * Check if a node is a proper /memory node according to Devicetree
-- * Specification v0.4, chapter 3.4.
-- */
--static bool __init device_tree_is_memory_node(const void *fdt, int node,
--                                              int depth)
--{
--    const char *type;
--    int len;
--
--    if ( depth != 1 )
--        return false;
--
--    if ( !device_tree_node_matches(fdt, node, "memory") )
--        return false;
--
--    type = fdt_getprop(fdt, node, "device_type", &len);
--    if ( !type )
--        return false;
--
--    if ( (len <= strlen("memory")) || strcmp(type, "memory") )
--        return false;
--
--    return true;
--}
--
--void __init device_tree_get_reg(const __be32 **cell, uint32_t address_cells,
--                                uint32_t size_cells, paddr_t *start,
--                                paddr_t *size)
--{
--    uint64_t dt_start, dt_size;
--
--    /*
--     * dt_next_cell will return uint64_t whereas paddr_t may not be 64-bit.
--     * Thus, there is an implicit cast from uint64_t to paddr_t.
--     */
--    dt_start = dt_next_cell(address_cells, cell);
--    dt_size = dt_next_cell(size_cells, cell);
--
--    if ( dt_start != (paddr_t)dt_start )
--    {
--        printk("Physical address greater than max width supported\n");
--        WARN();
--    }
--
--    if ( dt_size != (paddr_t)dt_size )
--    {
--        printk("Physical size greater than max width supported\n");
--        WARN();
--    }
--
--    /*
--     * Xen will truncate the address/size if it is greater than the maximum
--     * supported width and it will give an appropriate warning.
--     */
--    *start = dt_start;
--    *size = dt_size;
--}
--
--static int __init device_tree_get_meminfo(const void *fdt, int node,
--                                          const char *prop_name,
--                                          u32 address_cells, u32 size_cells,
--                                          struct membanks *mem,
--                                          enum membank_type type)
--{
--    const struct fdt_property *prop;
--    unsigned int i, banks;
--    const __be32 *cell;
--    u32 reg_cells = address_cells + size_cells;
--    paddr_t start, size;
--
--    if ( !device_tree_node_is_available(fdt, node) )
--        return 0;
--
--    if ( address_cells < 1 || size_cells < 1 )
--    {
--        printk("fdt: property `%s': invalid #address-cells or #size-cells",
--               prop_name);
--        return -EINVAL;
--    }
--
--    prop = fdt_get_property(fdt, node, prop_name, NULL);
--    if ( !prop )
--        return -ENOENT;
--
--    cell = (const __be32 *)prop->data;
--    banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
--
--    for ( i = 0; i < banks && mem->nr_banks < mem->max_banks; i++ )
--    {
--        device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
--        /*
--         * Some valid device trees, such as those generated by OpenPOWER
--         * skiboot firmware, expose all reserved memory regions in the
--         * FDT memory reservation block AND in the reserved-memory node which
--         * has already been parsed. Thus, any matching overlaps in the
--         * reserved_mem banks should be ignored.
--         */
--        if ( mem == bootinfo_get_reserved_mem() &&
--             check_reserved_regions_overlap(start, size, true) )
--            return -EINVAL;
--        /* Some DT may describe empty bank, ignore them */
--        if ( !size )
--            continue;
--        mem->bank[mem->nr_banks].start = start;
--        mem->bank[mem->nr_banks].size = size;
--        mem->bank[mem->nr_banks].type = type;
--        mem->nr_banks++;
--    }
--
--    if ( i < banks )
--    {
--        printk("Warning: Max number of supported memory regions reached.\n");
--        return -ENOSPC;
--    }
--
--    return 0;
--}
-+#include <xen/libfdt/libfdt.h>
+diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+index d14093017e..9192d593a7 100644
+--- a/xen/Kconfig.debug
++++ b/xen/Kconfig.debug
+@@ -92,7 +92,7 @@ config VERBOSE_DEBUG
  
- u32 __init device_tree_get_u32(const void *fdt, int node,
-                                const char *prop_name, u32 dflt)
-@@ -214,18 +16,6 @@ u32 __init device_tree_get_u32(const void *fdt, int node,
-     return fdt32_to_cpu(*(uint32_t*)prop->data);
+ config DEVICE_TREE_DEBUG
+ 	bool "Device tree debug messages"
+-	depends on HAS_DEVICE_TREE
++	depends on HAS_DEVICE_TREE_DISCOVERY
+ 	help
+ 	  Device tree parsing and DOM0 device tree building messages are
+ 	  logged in the Xen ring buffer.
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 3f25da3ca5..74b16f7167 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -15,7 +15,7 @@ config ARM
+ 	select FUNCTION_ALIGNMENT_4B
+ 	select GENERIC_UART_INIT
+ 	select HAS_ALTERNATIVE if HAS_VMAP
+-	select HAS_DEVICE_TREE
++	select HAS_DEVICE_TREE_DISCOVERY
+ 	select HAS_DOM0LESS
+ 	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+ 	select HAS_STACK_PROTECTOR
+diff --git a/xen/arch/ppc/Kconfig b/xen/arch/ppc/Kconfig
+index 917f5d53a6..5bedf6055e 100644
+--- a/xen/arch/ppc/Kconfig
++++ b/xen/arch/ppc/Kconfig
+@@ -1,7 +1,7 @@
+ config PPC
+ 	def_bool y
+ 	select FUNCTION_ALIGNMENT_4B
+-	select HAS_DEVICE_TREE
++	select HAS_DEVICE_TREE_DISCOVERY
+ 	select HAS_UBSAN
+ 	select HAS_VMAP
+ 
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 62c5b7ba34..8fd3c314ea 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -2,7 +2,7 @@ config RISCV
+ 	def_bool y
+ 	select FUNCTION_ALIGNMENT_16B
+ 	select GENERIC_BUG_FRAME
+-	select HAS_DEVICE_TREE
++	select HAS_DEVICE_TREE_DISCOVERY
+ 	select HAS_PMAP
+ 	select HAS_UBSAN
+ 	select HAS_VMAP
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 867710134a..6294cd7939 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -14,7 +14,7 @@ config CORE_PARKING
+ 
+ config DOM0LESS_BOOT
+ 	bool "Dom0less boot support" if EXPERT
+-	depends on HAS_DOM0LESS && HAS_DEVICE_TREE && DOMAIN_BUILD_HELPERS
++	depends on HAS_DOM0LESS && HAS_DEVICE_TREE_DISCOVERY && DOMAIN_BUILD_HELPERS
+ 	default y
+ 	help
+ 	  Dom0less boot support enables Xen to create and start domU guests during
+@@ -85,7 +85,7 @@ config HAS_ALTERNATIVE
+ config HAS_COMPAT
+ 	bool
+ 
+-config HAS_DEVICE_TREE
++config HAS_DEVICE_TREE_DISCOVERY
+ 	bool
+ 	select LIBFDT
+ 
+@@ -553,7 +553,7 @@ config DOM0_MEM
+ 
+ config DTB_FILE
+ 	string "Absolute path to device tree blob"
+-	depends on HAS_DEVICE_TREE
++	depends on HAS_DEVICE_TREE_DISCOVERY
+ 	help
+ 	  When using a bootloader that has no device tree support or when there
+ 	  is no bootloader at all, use this option to specify the absolute path
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 98f0873056..d541fbcf49 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -6,9 +6,9 @@ obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
+ obj-$(CONFIG_CORE_PARKING) += core_parking.o
+ obj-y += cpu.o
+ obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
+-obj-$(CONFIG_HAS_DEVICE_TREE) += device.o
++obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += device.o
+ obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) += device.o
+-obj-$(CONFIG_HAS_DEVICE_TREE) += device-tree/
++obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += device-tree/
+ obj-$(CONFIG_IOREQ_SERVER) += dm.o
+ obj-y += domain.o
+ obj-y += event_2l.o
+diff --git a/xen/common/device.c b/xen/common/device.c
+index 33e0d58f2f..0c0afad49f 100644
+--- a/xen/common/device.c
++++ b/xen/common/device.c
+@@ -11,7 +11,7 @@
+ 
+ #include <asm/device.h>
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ 
+ extern const struct device_desc _sdevice[], _edevice[];
+ 
+@@ -56,7 +56,7 @@ enum device_class device_get_class(const struct dt_device_node *dev)
+     return DEVICE_UNKNOWN;
  }
  
--/**
-- * device_tree_for_each_node - iterate over all device tree sub-nodes
-- * @fdt: flat device tree.
-- * @node: parent node to start the search from
-- * @func: function to call for each sub-node.
-- * @data: data to pass to @func.
-- *
-- * Any nodes nested at DEVICE_TREE_MAX_DEPTH or deeper are ignored.
-- *
-- * Returns 0 if all nodes were iterated over successfully.  If @func
-- * returns a value different from 0, that value is returned immediately.
-- */
- int __init device_tree_for_each_node(const void *fdt, int node,
-                                      device_tree_node_func func,
-                                      void *data)
-@@ -273,429 +63,35 @@ int __init device_tree_for_each_node(const void *fdt, int node,
-     return 0;
- }
- 
--static int __init process_memory_node(const void *fdt, int node,
--                                      const char *name, int depth,
--                                      u32 address_cells, u32 size_cells,
--                                      struct membanks *mem)
--{
--    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
--                                   mem, MEMBANK_DEFAULT);
--}
--
--static int __init process_reserved_memory_node(const void *fdt, int node,
--                                               const char *name, int depth,
--                                               u32 address_cells,
--                                               u32 size_cells,
--                                               void *data)
--{
--    int rc = process_memory_node(fdt, node, name, depth, address_cells,
--                                 size_cells, data);
--
--    if ( rc == -ENOSPC )
--        panic("Max number of supported reserved-memory regions reached.\n");
--    else if ( rc != -ENOENT )
--        return rc;
--    return 0;
--}
--
--static int __init process_reserved_memory(const void *fdt, int node,
--                                          const char *name, int depth,
--                                          u32 address_cells, u32 size_cells)
--{
--    return device_tree_for_each_node(fdt, node,
--                                     process_reserved_memory_node,
--                                     bootinfo_get_reserved_mem());
--}
--
--static void __init process_multiboot_node(const void *fdt, int node,
--                                          const char *name,
--                                          u32 address_cells, u32 size_cells)
--{
--    static int __initdata kind_guess = 0;
--    const struct fdt_property *prop;
--    const __be32 *cell;
--    boot_module_kind kind;
--    paddr_t start, size;
--    int len;
--    /* sizeof("/chosen/") + DT_MAX_NAME + '/' + DT_MAX_NAME + '/0' => 92 */
--    char path[92];
--    int parent_node, ret;
--    bool domU;
--
--    parent_node = fdt_parent_offset(fdt, node);
--    ASSERT(parent_node >= 0);
--
--    /* Check that the node is under "/chosen" (first 7 chars of path) */
--    ret = fdt_get_path(fdt, node, path, sizeof (path));
--    if ( ret != 0 || strncmp(path, "/chosen", 7) )
--        return;
--
--    prop = fdt_get_property(fdt, node, "reg", &len);
--    if ( !prop )
--        panic("node %s missing `reg' property\n", name);
--
--    if ( len < dt_cells_to_size(address_cells + size_cells) )
--        panic("fdt: node `%s': `reg` property length is too short\n",
--                    name);
--
--    cell = (const __be32 *)prop->data;
--    device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
--
--    if ( fdt_node_check_compatible(fdt, node, "xen,linux-zimage") == 0 ||
--         fdt_node_check_compatible(fdt, node, "multiboot,kernel") == 0 )
--        kind = BOOTMOD_KERNEL;
--    else if ( fdt_node_check_compatible(fdt, node, "xen,linux-initrd") == 0 ||
--              fdt_node_check_compatible(fdt, node, "multiboot,ramdisk") == 0 )
--        kind = BOOTMOD_RAMDISK;
--    else if ( fdt_node_check_compatible(fdt, node, "xen,xsm-policy") == 0 )
--        kind = BOOTMOD_XSM;
--    else if ( fdt_node_check_compatible(fdt, node, "multiboot,device-tree") == 0 )
--        kind = BOOTMOD_GUEST_DTB;
--    else if ( fdt_node_check_compatible(fdt, node, "multiboot,microcode") == 0 )
--        kind = BOOTMOD_MICROCODE;
--    else
--        kind = BOOTMOD_UNKNOWN;
--
--    /**
--     * Guess the kind of these first two unknowns respectively:
--     * (1) The first unknown must be kernel.
--     * (2) Detect the XSM Magic from the 2nd unknown:
--     *     a. If it's XSM, set the kind as XSM, and that also means we
--     *     won't load ramdisk;
--     *     b. if it's not XSM, set the kind as ramdisk.
--     *     So if user want to load ramdisk, it must be the 2nd unknown.
--     * We also detect the XSM Magic for the following unknowns,
--     * then set its kind according to the return value of has_xsm_magic.
--     */
--    if ( kind == BOOTMOD_UNKNOWN )
--    {
--        switch ( kind_guess++ )
--        {
--        case 0: kind = BOOTMOD_KERNEL; break;
--        case 1: kind = BOOTMOD_RAMDISK; break;
--        default: break;
--        }
--        if ( kind_guess > 1 && has_xsm_magic(start) )
--            kind = BOOTMOD_XSM;
--    }
--
--    domU = fdt_node_check_compatible(fdt, parent_node, "xen,domain") == 0;
--    add_boot_module(kind, start, size, domU);
--
--    prop = fdt_get_property(fdt, node, "bootargs", &len);
--    if ( !prop )
--        return;
--    add_boot_cmdline(fdt_get_name(fdt, parent_node, &len), prop->data,
--                     kind, start, domU);
--}
--
--static int __init process_chosen_node(const void *fdt, int node,
--                                      const char *name,
--                                      u32 address_cells, u32 size_cells)
--{
--    const struct fdt_property *prop;
--    paddr_t start, end;
--    int len;
--
--    if ( fdt_get_property(fdt, node, "xen,static-heap", NULL) )
--    {
--        int rc;
--
--        printk("Checking for static heap in /chosen\n");
--
--        rc = device_tree_get_meminfo(fdt, node, "xen,static-heap",
--                                     address_cells, size_cells,
--                                     bootinfo_get_reserved_mem(),
--                                     MEMBANK_STATIC_HEAP);
--        if ( rc )
--            return rc;
--
--        using_static_heap = true;
--    }
--
--    printk("Checking for initrd in /chosen\n");
--
--    prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
--    if ( !prop )
--        /* No initrd present. */
--        return 0;
--    if ( len != sizeof(u32) && len != sizeof(u64) )
--    {
--        printk("linux,initrd-start property has invalid length %d\n", len);
--        return -EINVAL;
--    }
--    start = dt_read_paddr((const void *)&prop->data, dt_size_to_cells(len));
--
--    prop = fdt_get_property(fdt, node, "linux,initrd-end", &len);
--    if ( !prop )
--    {
--        printk("linux,initrd-end not present but -start was\n");
--        return -EINVAL;
--    }
--    if ( len != sizeof(u32) && len != sizeof(u64) )
--    {
--        printk("linux,initrd-end property has invalid length %d\n", len);
--        return -EINVAL;
--    }
--    end = dt_read_paddr((const void *)&prop->data, dt_size_to_cells(len));
--
--    if ( start >= end )
--    {
--        printk("linux,initrd limits invalid: %"PRIpaddr" >= %"PRIpaddr"\n",
--                  start, end);
--        return -EINVAL;
--    }
--
--    printk("Initrd %"PRIpaddr"-%"PRIpaddr"\n", start, end - 1);
--
--    add_boot_module(BOOTMOD_RAMDISK, start, end-start, false);
--
--    return 0;
--}
--
--static int __init process_domain_node(const void *fdt, int node,
--                                      const char *name,
--                                      u32 address_cells, u32 size_cells)
--{
--    const struct fdt_property *prop;
--
--    printk("Checking for \"xen,static-mem\" in domain node\n");
--
--    prop = fdt_get_property(fdt, node, "xen,static-mem", NULL);
--    if ( !prop )
--        /* No "xen,static-mem" present. */
--        return 0;
--
--    return device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
--                                   size_cells, bootinfo_get_reserved_mem(),
--                                   MEMBANK_STATIC_DOMAIN);
--}
--
--#ifndef CONFIG_STATIC_SHM
--static inline int process_shm_node(const void *fdt, int node,
--                                   uint32_t address_cells, uint32_t size_cells)
--{
--    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared"
--            " memory nodes\n");
--    return -EINVAL;
--}
 -#endif
--
--static int __init early_scan_node(const void *fdt,
--                                  int node, const char *name, int depth,
--                                  u32 address_cells, u32 size_cells,
--                                  void *data)
-+void __init device_tree_get_reg(const __be32 **cell, uint32_t address_cells,
-+                                uint32_t size_cells, paddr_t *start,
-+                                paddr_t *size)
++#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
+ 
+ #ifdef CONFIG_ACPI
+ 
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index e39fbc3529..0ead1381c8 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -601,7 +601,7 @@ static int __init __maybe_unused set_color(uint32_t mask, int bpp,
+    return max(*pos + *sz, bpp);
+ }
+ 
+-#ifndef CONFIG_HAS_DEVICE_TREE
++#ifndef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ static int __init efi_check_dt_boot(const EFI_LOADED_IMAGE *loaded_image)
  {
--    int rc = 0;
-+    uint64_t dt_start, dt_size;
+     return 0;
+diff --git a/xen/common/sched/Kconfig b/xen/common/sched/Kconfig
+index 18ca1ce7ab..1fb622e6cf 100644
+--- a/xen/common/sched/Kconfig
++++ b/xen/common/sched/Kconfig
+@@ -67,7 +67,7 @@ endmenu
  
+ config BOOT_TIME_CPUPOOLS
+ 	bool "Create cpupools at boot time"
+-	depends on HAS_DEVICE_TREE
++	depends on HAS_DEVICE_TREE_DISCOVERY
+ 	help
+ 	  Creates cpupools during boot time and assigns cpus to them. Cpupools
+ 	  options can be specified in the device tree.
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index eaeb0e09d0..b060e502f3 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -34,7 +34,7 @@
+ #include <xen/8250-uart.h>
+ #include <xen/vmap.h>
+ #include <asm/io.h>
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ #include <asm/device.h>
+ #endif
+ #ifdef CONFIG_X86
+@@ -1754,7 +1754,7 @@ void __init ns16550_init(int index, struct ns16550_defaults *defaults)
+ 
+ #endif /* CONFIG_X86 */
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ static int __init ns16550_uart_dt_init(struct dt_device_node *dev,
+                                        const void *data)
+ {
+@@ -1833,7 +1833,7 @@ DT_DEVICE_START(ns16550, "NS16550 UART", DEVICE_SERIAL)
+         .init = ns16550_uart_dt_init,
+ DT_DEVICE_END
+ 
+-#endif /* HAS_DEVICE_TREE */
++#endif /* HAS_DEVICE_TREE_DISCOVERY */
+ 
+ #if defined(CONFIG_ACPI) && defined(CONFIG_ARM)
+ #include <xen/acpi.h>
+diff --git a/xen/drivers/passthrough/Makefile b/xen/drivers/passthrough/Makefile
+index a1621540b7..eb4aeafb42 100644
+--- a/xen/drivers/passthrough/Makefile
++++ b/xen/drivers/passthrough/Makefile
+@@ -5,6 +5,6 @@ obj-$(CONFIG_ARM) += arm/
+ 
+ obj-y += iommu.o
+ obj-$(CONFIG_HAS_PCI) += pci.o
+-obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
++obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += device_tree.o
+ obj-$(CONFIG_HAS_PCI) += ats.o
+ obj-$(CONFIG_HAS_PCI_MSI) += msi.o
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 16aad86973..c9425d6971 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -638,7 +638,7 @@ int iommu_do_domctl(
+     ret = iommu_do_pci_domctl(domctl, d, u_domctl);
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+     if ( ret == -ENODEV )
+         ret = iommu_do_dt_domctl(domctl, d, u_domctl);
+ #endif
+diff --git a/xen/include/asm-generic/device.h b/xen/include/asm-generic/device.h
+index 1acd1ba1d8..3bd97e33c5 100644
+--- a/xen/include/asm-generic/device.h
++++ b/xen/include/asm-generic/device.h
+@@ -6,7 +6,7 @@
+ 
+ enum device_type
+ {
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+     DEV_DT,
+ #endif
+     DEV_PCI
+@@ -26,7 +26,7 @@ enum device_class
+ struct device
+ {
+     enum device_type type;
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+     struct dt_device_node *of_node; /* Used by drivers imported from Linux */
+ #endif
+ #ifdef CONFIG_HAS_PASSTHROUGH
+@@ -37,7 +37,7 @@ struct device
+ 
+ typedef struct device device_t;
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ 
+ #include <xen/device_tree.h>
+ 
+@@ -87,9 +87,9 @@ struct device_desc {
+     int (*init)(struct dt_device_node *dev, const void *data);
+ };
+ 
+-#else /* !CONFIG_HAS_DEVICE_TREE */
++#else /* !CONFIG_HAS_DEVICE_TREE_DISCOVERY */
+ #define dev_is_dt(dev) ((void)(dev), false)
+-#endif /* CONFIG_HAS_DEVICE_TREE */
++#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
+ 
+ #define dev_is_pci(dev) ((dev)->type == DEV_PCI)
+ 
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 832775754b..5483840645 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -230,7 +230,7 @@ struct msi_msg;
+ #define PT_IRQ_TIME_OUT MILLISECS(8)
+ #endif /* HAS_PCI */
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ #include <xen/device_tree.h>
+ 
+ #ifdef CONFIG_HAS_PASSTHROUGH
+@@ -288,7 +288,7 @@ static inline int iommu_release_dt_devices(struct domain *d)
+ 
+ #endif /* HAS_PASSTHROUGH */
+ 
+-#endif /* HAS_DEVICE_TREE */
++#endif /* HAS_DEVICE_TREE_DISCOVERY */
+ 
+ struct page_info;
+ 
+@@ -355,7 +355,7 @@ struct iommu_ops {
+     int (*get_reserved_device_memory)(iommu_grdm_t *func, void *ctxt);
+     void (*dump_page_tables)(struct domain *d);
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
      /*
--     * If Xen has been booted via UEFI, the memory banks are
--     * populated. So we should skip the parsing.
-+     * dt_next_cell will return uint64_t whereas paddr_t may not be 64-bit.
-+     * Thus, there is an implicit cast from uint64_t to paddr_t.
-      */
--    if ( !efi_enabled(EFI_BOOT) &&
--         device_tree_is_memory_node(fdt, node, depth) )
--        rc = process_memory_node(fdt, node, name, depth,
--                                 address_cells, size_cells, bootinfo_get_mem());
--    else if ( depth == 1 && !dt_node_cmp(name, "reserved-memory") )
--        rc = process_reserved_memory(fdt, node, name, depth,
--                                     address_cells, size_cells);
--    else if ( depth <= 3 && (device_tree_node_compatible(fdt, node, "xen,multiboot-module" ) ||
--              device_tree_node_compatible(fdt, node, "multiboot,module" )))
--        process_multiboot_node(fdt, node, name, address_cells, size_cells);
--    else if ( depth == 1 && device_tree_node_matches(fdt, node, "chosen") )
--        rc = process_chosen_node(fdt, node, name, address_cells, size_cells);
--    else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
--        rc = process_domain_node(fdt, node, name, address_cells, size_cells);
--    else if ( depth <= 3 && device_tree_node_compatible(fdt, node, "xen,domain-shared-memory-v1") )
--        rc = process_shm_node(fdt, node, address_cells, size_cells);
--
--    if ( rc < 0 )
--        printk("fdt: node `%s': parsing failed\n", name);
--    return rc;
--}
--
--static void __init early_print_info(void)
--{
--    const struct membanks *mi = bootinfo_get_mem();
--    const struct membanks *mem_resv = bootinfo_get_reserved_mem();
--    struct boot_modules *mods = &bootinfo.modules;
--    struct bootcmdlines *cmds = &bootinfo.cmdlines;
--    unsigned int i;
--
--    for ( i = 0; i < mi->nr_banks; i++ )
--        printk("RAM: %"PRIpaddr" - %"PRIpaddr"\n",
--                mi->bank[i].start,
--                mi->bank[i].start + mi->bank[i].size - 1);
--    printk("\n");
--    for ( i = 0 ; i < mods->nr_mods; i++ )
--        printk("MODULE[%d]: %"PRIpaddr" - %"PRIpaddr" %-12s\n",
--                i,
--                mods->module[i].start,
--                mods->module[i].start + mods->module[i].size - 1,
--                boot_module_kind_as_string(mods->module[i].kind));
--
--    for ( i = 0; i < mem_resv->nr_banks; i++ )
--    {
--        printk(" RESVD[%u]: %"PRIpaddr" - %"PRIpaddr"\n", i,
--               mem_resv->bank[i].start,
--               mem_resv->bank[i].start + mem_resv->bank[i].size - 1);
--    }
--#ifdef CONFIG_STATIC_SHM
--    early_print_info_shmem();
--#endif
--    printk("\n");
--    for ( i = 0 ; i < cmds->nr_mods; i++ )
--        printk("CMDLINE[%"PRIpaddr"]:%s %s\n", cmds->cmdline[i].start,
--               cmds->cmdline[i].dt_name,
--               &cmds->cmdline[i].cmdline[0]);
--    printk("\n");
--}
--
--/* This function assumes that memory regions are not overlapped */
--static int __init cmp_memory_node(const void *key, const void *elem)
--{
--    const struct membank *handler0 = key;
--    const struct membank *handler1 = elem;
--
--    if ( handler0->start < handler1->start )
--        return -1;
--
--    if ( handler0->start >= (handler1->start + handler1->size) )
--        return 1;
--
--    return 0;
--}
--
--static void __init swap_memory_node(void *_a, void *_b, size_t size)
--{
--    struct membank *a = _a, *b = _b;
--
--    SWAP(*a, *b);
--}
--
--/**
-- * boot_fdt_info - initialize bootinfo from a DTB
-- * @fdt: flattened device tree binary
-- *
-- * Returns the size of the DTB.
-- */
--size_t __init boot_fdt_info(const void *fdt, paddr_t paddr)
--{
--    struct membanks *reserved_mem = bootinfo_get_reserved_mem();
--    struct membanks *mem = bootinfo_get_mem();
--    unsigned int i;
--    int nr_rsvd;
--    int ret;
--
--    ret = fdt_check_header(fdt);
--    if ( ret < 0 )
--        panic("No valid device tree\n");
--
--    add_boot_module(BOOTMOD_FDT, paddr, fdt_totalsize(fdt), false);
--
--    nr_rsvd = fdt_num_mem_rsv(fdt);
--    if ( nr_rsvd < 0 )
--        panic("Parsing FDT memory reserve map failed (%d)\n", nr_rsvd);
-+    dt_start = dt_next_cell(address_cells, cell);
-+    dt_size = dt_next_cell(size_cells, cell);
+      * All IOMMU drivers which support generic IOMMU DT bindings should use
+      * this callback. This is a way for the framework to provide the driver
+@@ -403,7 +403,7 @@ struct domain_iommu {
+     /* iommu_ops */
+     const struct iommu_ops *platform_ops;
  
--    for ( i = 0; i < nr_rsvd; i++ )
-+    if ( dt_start != (paddr_t)dt_start )
-     {
--        struct membank *bank;
--        paddr_t s, sz;
--
--        if ( fdt_get_mem_rsv_paddr(device_tree_flattened, i, &s, &sz) < 0 )
--            continue;
--
--        if ( reserved_mem->nr_banks < reserved_mem->max_banks )
--        {
--            bank = &reserved_mem->bank[reserved_mem->nr_banks];
--            bank->start = s;
--            bank->size = sz;
--            bank->type = MEMBANK_FDT_RESVMEM;
--            reserved_mem->nr_banks++;
--        }
--        else
--            panic("Cannot allocate reserved memory bank\n");
-+        printk("Physical address greater than max width supported\n");
-+        WARN();
-     }
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+     /* List of DT devices assigned to this domain */
+     struct list_head dt_devices;
+ #endif
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index 9227205fcd..12792c3a43 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -423,7 +423,7 @@ static XSM_INLINE int cf_check xsm_deassign_device(
  
--    ret = device_tree_for_each_node(fdt, 0, early_scan_node, NULL);
--    if ( ret )
--        panic("Early FDT parsing failed (%d)\n", ret);
--
--    /*
--     * On Arm64 setup_directmap_mappings() expects to be called with the lowest
--     * bank in memory first. There is no requirement that the DT will provide
--     * the banks sorted in ascending order. So sort them through.
--     */
--    sort(mem->bank, mem->nr_banks, sizeof(struct membank),
--         cmp_memory_node, swap_memory_node);
--
--    early_print_info();
--
--    return fdt_totalsize(fdt);
--}
--
--const __init char *boot_fdt_cmdline(const void *fdt)
--{
--    int node;
--    const struct fdt_property *prop;
--
--    node = fdt_path_offset(fdt, "/chosen");
--    if ( node < 0 )
--        return NULL;
--
--    prop = fdt_get_property(fdt, node, "xen,xen-bootargs", NULL);
--    if ( prop == NULL )
-+    if ( dt_size != (paddr_t)dt_size )
-     {
--        struct bootcmdline *dom0_cmdline =
--            boot_cmdline_find_by_kind(BOOTMOD_KERNEL);
--
--        if (fdt_get_property(fdt, node, "xen,dom0-bootargs", NULL) ||
--            ( dom0_cmdline && dom0_cmdline->cmdline[0] ) )
--            prop = fdt_get_property(fdt, node, "bootargs", NULL);
-+        printk("Physical size greater than max width supported\n");
-+        WARN();
-     }
--    if ( prop == NULL )
--        return NULL;
--
--    return prop->data;
--}
+ #endif /* HAS_PASSTHROUGH && HAS_PCI */
  
--/*
-- * Wrapper to convert physical address from paddr_t to uint64_t and
-- * invoke fdt_begin_node(). This is required as the physical address
-- * provided as part of node name should not contain any leading
-- * zeroes. Thus, one should use PRIx64 (instead of PRIpaddr) to append
-- * unit (which contains the physical address) with name to generate a
-- * node name.
-- */
--int __init domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit)
--{
-     /*
--     * The size of the buffer to hold the longest possible string (i.e.
--     * interrupt-controller@ + a 64-bit number + \0).
-+     * Xen will truncate the address/size if it is greater than the maximum
-+     * supported width and it will give an appropriate warning.
-      */
--    char buf[38];
--    int ret;
--
--    /* ePAPR 3.4 */
--    ret = snprintf(buf, sizeof(buf), "%s@%"PRIx64, name, unit);
--
--    if ( ret >= sizeof(buf) )
--    {
--        printk(XENLOG_ERR
--               "Insufficient buffer. Minimum size required is %d\n",
--               (ret + 1));
--
--        return -FDT_ERR_TRUNCATED;
--    }
--
--    return fdt_begin_node(fdt, buf);
-+    *start = dt_start;
-+    *size = dt_size;
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+ static XSM_INLINE int cf_check xsm_assign_dtdevice(
+     XSM_DEFAULT_ARG struct domain *d, const char *dtpath)
+ {
+@@ -438,7 +438,7 @@ static XSM_INLINE int cf_check xsm_deassign_dtdevice(
+     return xsm_default_action(action, current->domain, d);
  }
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
-diff --git a/xen/common/device-tree/bootinfo-fdt.c b/xen/common/device-tree/bootinfo-fdt.c
-new file mode 100644
-index 0000000000..16036472f3
---- /dev/null
-+++ b/xen/common/device-tree/bootinfo-fdt.c
-@@ -0,0 +1,597 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Early Device Tree with bootinfo hooks
-+ *
-+ * Copyright (C) 2012-2014 Citrix Systems, Inc.
-+ */
-+
-+#include <xen/bootinfo.h>
-+#include <xen/device_tree.h>
-+#include <xen/efi.h>
-+#include <xen/init.h>
-+#include <xen/kernel.h>
-+#include <xen/lib.h>
-+#include <xen/libfdt/libfdt-xen.h>
-+#include <xen/sort.h>
-+#include <xen/static-shmem.h>
-+#include <xsm/xsm.h>
-+#include <asm/setup.h>
-+
-+static void __init __maybe_unused build_assertions(void)
-+{
-+    /*
-+     * Check that no padding is between struct membanks "bank" flexible array
-+     * member and struct meminfo "bank" member
-+     */
-+    BUILD_BUG_ON((offsetof(struct membanks, bank) !=
-+                 offsetof(struct meminfo, bank)));
-+    /* Ensure "struct membanks" and "struct membank" are equally aligned */
-+    BUILD_BUG_ON(alignof(struct membanks) != alignof(struct membank));
-+}
-+
-+static bool __init device_tree_node_is_available(const void *fdt, int node)
-+{
-+    const char *status;
-+    int len;
-+
-+    status = fdt_getprop(fdt, node, "status", &len);
-+    if ( !status )
-+        return true;
-+
-+    if ( len > 0 )
-+    {
-+        if ( !strcmp(status, "ok") || !strcmp(status, "okay") )
-+            return true;
-+    }
-+
-+    return false;
-+}
-+
-+static bool __init device_tree_node_matches(const void *fdt, int node,
-+                                            const char *match)
-+{
-+    const char *name;
-+    size_t match_len;
-+
-+    name = fdt_get_name(fdt, node, NULL);
-+    match_len = strlen(match);
-+
-+    /* Match both "match" and "match@..." patterns but not
-+       "match-foo". */
-+    return strncmp(name, match, match_len) == 0
-+        && (name[match_len] == '@' || name[match_len] == '\0');
-+}
-+
-+static bool __init device_tree_node_compatible(const void *fdt, int node,
-+                                               const char *match)
-+{
-+    int len, l;
-+    const void *prop;
-+
-+    prop = fdt_getprop(fdt, node, "compatible", &len);
-+    if ( prop == NULL )
-+        return false;
-+
-+    while ( len > 0 ) {
-+        if ( !dt_compat_cmp(prop, match) )
-+            return true;
-+        l = strlen(prop) + 1;
-+        prop += l;
-+        len -= l;
-+    }
-+
-+    return false;
-+}
-+
-+/*
-+ * Check if a node is a proper /memory node according to Devicetree
-+ * Specification v0.4, chapter 3.4.
-+ */
-+static bool __init device_tree_is_memory_node(const void *fdt, int node,
-+                                              int depth)
-+{
-+    const char *type;
-+    int len;
-+
-+    if ( depth != 1 )
-+        return false;
-+
-+    if ( !device_tree_node_matches(fdt, node, "memory") )
-+        return false;
-+
-+    type = fdt_getprop(fdt, node, "device_type", &len);
-+    if ( !type )
-+        return false;
-+
-+    if ( (len <= strlen("memory")) || strcmp(type, "memory") )
-+        return false;
-+
-+    return true;
-+}
-+
-+static int __init device_tree_get_meminfo(const void *fdt, int node,
-+                                          const char *prop_name,
-+                                          u32 address_cells, u32 size_cells,
-+                                          struct membanks *mem,
-+                                          enum membank_type type)
-+{
-+    const struct fdt_property *prop;
-+    unsigned int i, banks;
-+    const __be32 *cell;
-+    u32 reg_cells = address_cells + size_cells;
-+    paddr_t start, size;
-+
-+    if ( !device_tree_node_is_available(fdt, node) )
-+        return 0;
-+
-+    if ( address_cells < 1 || size_cells < 1 )
-+    {
-+        printk("fdt: property `%s': invalid #address-cells or #size-cells",
-+               prop_name);
-+        return -EINVAL;
-+    }
-+
-+    prop = fdt_get_property(fdt, node, prop_name, NULL);
-+    if ( !prop )
-+        return -ENOENT;
-+
-+    cell = (const __be32 *)prop->data;
-+    banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
-+
-+    for ( i = 0; i < banks && mem->nr_banks < mem->max_banks; i++ )
-+    {
-+        device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-+        /*
-+         * Some valid device trees, such as those generated by OpenPOWER
-+         * skiboot firmware, expose all reserved memory regions in the
-+         * FDT memory reservation block AND in the reserved-memory node which
-+         * has already been parsed. Thus, any matching overlaps in the
-+         * reserved_mem banks should be ignored.
-+         */
-+        if ( mem == bootinfo_get_reserved_mem() &&
-+             check_reserved_regions_overlap(start, size, true) )
-+            return -EINVAL;
-+        /* Some DT may describe empty bank, ignore them */
-+        if ( !size )
-+            continue;
-+        mem->bank[mem->nr_banks].start = start;
-+        mem->bank[mem->nr_banks].size = size;
-+        mem->bank[mem->nr_banks].type = type;
-+        mem->nr_banks++;
-+    }
-+
-+    if ( i < banks )
-+    {
-+        printk("Warning: Max number of supported memory regions reached.\n");
-+        return -ENOSPC;
-+    }
-+
-+    return 0;
-+}
-+
-+static int __init process_memory_node(const void *fdt, int node,
-+                                      const char *name, int depth,
-+                                      u32 address_cells, u32 size_cells,
-+                                      struct membanks *mem)
-+{
-+    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
-+                                   mem, MEMBANK_DEFAULT);
-+}
-+
-+static int __init process_reserved_memory_node(const void *fdt, int node,
-+                                               const char *name, int depth,
-+                                               u32 address_cells,
-+                                               u32 size_cells,
-+                                               void *data)
-+{
-+    int rc = process_memory_node(fdt, node, name, depth, address_cells,
-+                                 size_cells, data);
-+
-+    if ( rc == -ENOSPC )
-+        panic("Max number of supported reserved-memory regions reached.\n");
-+    else if ( rc != -ENOENT )
-+        return rc;
-+    return 0;
-+}
-+
-+static int __init process_reserved_memory(const void *fdt, int node,
-+                                          const char *name, int depth,
-+                                          u32 address_cells, u32 size_cells)
-+{
-+    return device_tree_for_each_node(fdt, node,
-+                                     process_reserved_memory_node,
-+                                     bootinfo_get_reserved_mem());
-+}
-+
-+static void __init process_multiboot_node(const void *fdt, int node,
-+                                          const char *name,
-+                                          u32 address_cells, u32 size_cells)
-+{
-+    static int __initdata kind_guess = 0;
-+    const struct fdt_property *prop;
-+    const __be32 *cell;
-+    boot_module_kind kind;
-+    paddr_t start, size;
-+    int len;
-+    /* sizeof("/chosen/") + DT_MAX_NAME + '/' + DT_MAX_NAME + '/0' => 92 */
-+    char path[92];
-+    int parent_node, ret;
-+    bool domU;
-+
-+    parent_node = fdt_parent_offset(fdt, node);
-+    ASSERT(parent_node >= 0);
-+
-+    /* Check that the node is under "/chosen" (first 7 chars of path) */
-+    ret = fdt_get_path(fdt, node, path, sizeof (path));
-+    if ( ret != 0 || strncmp(path, "/chosen", 7) )
-+        return;
-+
-+    prop = fdt_get_property(fdt, node, "reg", &len);
-+    if ( !prop )
-+        panic("node %s missing `reg' property\n", name);
-+
-+    if ( len < dt_cells_to_size(address_cells + size_cells) )
-+        panic("fdt: node `%s': `reg` property length is too short\n",
-+                    name);
-+
-+    cell = (const __be32 *)prop->data;
-+    device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-+
-+    if ( fdt_node_check_compatible(fdt, node, "xen,linux-zimage") == 0 ||
-+         fdt_node_check_compatible(fdt, node, "multiboot,kernel") == 0 )
-+        kind = BOOTMOD_KERNEL;
-+    else if ( fdt_node_check_compatible(fdt, node, "xen,linux-initrd") == 0 ||
-+              fdt_node_check_compatible(fdt, node, "multiboot,ramdisk") == 0 )
-+        kind = BOOTMOD_RAMDISK;
-+    else if ( fdt_node_check_compatible(fdt, node, "xen,xsm-policy") == 0 )
-+        kind = BOOTMOD_XSM;
-+    else if ( fdt_node_check_compatible(fdt, node, "multiboot,device-tree") == 0 )
-+        kind = BOOTMOD_GUEST_DTB;
-+    else if ( fdt_node_check_compatible(fdt, node, "multiboot,microcode") == 0 )
-+        kind = BOOTMOD_MICROCODE;
-+    else
-+        kind = BOOTMOD_UNKNOWN;
-+
-+    /**
-+     * Guess the kind of these first two unknowns respectively:
-+     * (1) The first unknown must be kernel.
-+     * (2) Detect the XSM Magic from the 2nd unknown:
-+     *     a. If it's XSM, set the kind as XSM, and that also means we
-+     *     won't load ramdisk;
-+     *     b. if it's not XSM, set the kind as ramdisk.
-+     *     So if user want to load ramdisk, it must be the 2nd unknown.
-+     * We also detect the XSM Magic for the following unknowns,
-+     * then set its kind according to the return value of has_xsm_magic.
-+     */
-+    if ( kind == BOOTMOD_UNKNOWN )
-+    {
-+        switch ( kind_guess++ )
-+        {
-+        case 0: kind = BOOTMOD_KERNEL; break;
-+        case 1: kind = BOOTMOD_RAMDISK; break;
-+        default: break;
-+        }
-+        if ( kind_guess > 1 && has_xsm_magic(start) )
-+            kind = BOOTMOD_XSM;
-+    }
-+
-+    domU = fdt_node_check_compatible(fdt, parent_node, "xen,domain") == 0;
-+    add_boot_module(kind, start, size, domU);
-+
-+    prop = fdt_get_property(fdt, node, "bootargs", &len);
-+    if ( !prop )
-+        return;
-+    add_boot_cmdline(fdt_get_name(fdt, parent_node, &len), prop->data,
-+                     kind, start, domU);
-+}
-+
-+static int __init process_chosen_node(const void *fdt, int node,
-+                                      const char *name,
-+                                      u32 address_cells, u32 size_cells)
-+{
-+    const struct fdt_property *prop;
-+    paddr_t start, end;
-+    int len;
-+
-+    if ( fdt_get_property(fdt, node, "xen,static-heap", NULL) )
-+    {
-+        int rc;
-+
-+        printk("Checking for static heap in /chosen\n");
-+
-+        rc = device_tree_get_meminfo(fdt, node, "xen,static-heap",
-+                                     address_cells, size_cells,
-+                                     bootinfo_get_reserved_mem(),
-+                                     MEMBANK_STATIC_HEAP);
-+        if ( rc )
-+            return rc;
-+
-+        using_static_heap = true;
-+    }
-+
-+    printk("Checking for initrd in /chosen\n");
-+
-+    prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
-+    if ( !prop )
-+        /* No initrd present. */
-+        return 0;
-+    if ( len != sizeof(u32) && len != sizeof(u64) )
-+    {
-+        printk("linux,initrd-start property has invalid length %d\n", len);
-+        return -EINVAL;
-+    }
-+    start = dt_read_paddr((const void *)&prop->data, dt_size_to_cells(len));
-+
-+    prop = fdt_get_property(fdt, node, "linux,initrd-end", &len);
-+    if ( !prop )
-+    {
-+        printk("linux,initrd-end not present but -start was\n");
-+        return -EINVAL;
-+    }
-+    if ( len != sizeof(u32) && len != sizeof(u64) )
-+    {
-+        printk("linux,initrd-end property has invalid length %d\n", len);
-+        return -EINVAL;
-+    }
-+    end = dt_read_paddr((const void *)&prop->data, dt_size_to_cells(len));
-+
-+    if ( start >= end )
-+    {
-+        printk("linux,initrd limits invalid: %"PRIpaddr" >= %"PRIpaddr"\n",
-+                  start, end);
-+        return -EINVAL;
-+    }
-+
-+    printk("Initrd %"PRIpaddr"-%"PRIpaddr"\n", start, end - 1);
-+
-+    add_boot_module(BOOTMOD_RAMDISK, start, end-start, false);
-+
-+    return 0;
-+}
-+
-+static int __init process_domain_node(const void *fdt, int node,
-+                                      const char *name,
-+                                      u32 address_cells, u32 size_cells)
-+{
-+    const struct fdt_property *prop;
-+
-+    printk("Checking for \"xen,static-mem\" in domain node\n");
-+
-+    prop = fdt_get_property(fdt, node, "xen,static-mem", NULL);
-+    if ( !prop )
-+        /* No "xen,static-mem" present. */
-+        return 0;
-+
-+    return device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
-+                                   size_cells, bootinfo_get_reserved_mem(),
-+                                   MEMBANK_STATIC_DOMAIN);
-+}
-+
-+#ifndef CONFIG_STATIC_SHM
-+static inline int process_shm_node(const void *fdt, int node,
-+                                   uint32_t address_cells, uint32_t size_cells)
-+{
-+    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared"
-+            " memory nodes\n");
-+    return -EINVAL;
-+}
-+#endif
-+
-+static int __init early_scan_node(const void *fdt,
-+                                  int node, const char *name, int depth,
-+                                  u32 address_cells, u32 size_cells,
-+                                  void *data)
-+{
-+    int rc = 0;
-+
-+    /*
-+     * If Xen has been booted via UEFI, the memory banks are
-+     * populated. So we should skip the parsing.
-+     */
-+    if ( !efi_enabled(EFI_BOOT) &&
-+         device_tree_is_memory_node(fdt, node, depth) )
-+        rc = process_memory_node(fdt, node, name, depth,
-+                                 address_cells, size_cells, bootinfo_get_mem());
-+    else if ( depth == 1 && !dt_node_cmp(name, "reserved-memory") )
-+        rc = process_reserved_memory(fdt, node, name, depth,
-+                                     address_cells, size_cells);
-+    else if ( depth <= 3 && (device_tree_node_compatible(fdt, node, "xen,multiboot-module" ) ||
-+              device_tree_node_compatible(fdt, node, "multiboot,module" )))
-+        process_multiboot_node(fdt, node, name, address_cells, size_cells);
-+    else if ( depth == 1 && device_tree_node_matches(fdt, node, "chosen") )
-+        rc = process_chosen_node(fdt, node, name, address_cells, size_cells);
-+    else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
-+        rc = process_domain_node(fdt, node, name, address_cells, size_cells);
-+    else if ( depth <= 3 && device_tree_node_compatible(fdt, node, "xen,domain-shared-memory-v1") )
-+        rc = process_shm_node(fdt, node, address_cells, size_cells);
-+
-+    if ( rc < 0 )
-+        printk("fdt: node `%s': parsing failed\n", name);
-+    return rc;
-+}
-+
-+static void __init early_print_info(void)
-+{
-+    const struct membanks *mi = bootinfo_get_mem();
-+    const struct membanks *mem_resv = bootinfo_get_reserved_mem();
-+    struct boot_modules *mods = &bootinfo.modules;
-+    struct bootcmdlines *cmds = &bootinfo.cmdlines;
-+    unsigned int i;
-+
-+    for ( i = 0; i < mi->nr_banks; i++ )
-+        printk("RAM: %"PRIpaddr" - %"PRIpaddr"\n",
-+                mi->bank[i].start,
-+                mi->bank[i].start + mi->bank[i].size - 1);
-+    printk("\n");
-+    for ( i = 0 ; i < mods->nr_mods; i++ )
-+        printk("MODULE[%d]: %"PRIpaddr" - %"PRIpaddr" %-12s\n",
-+                i,
-+                mods->module[i].start,
-+                mods->module[i].start + mods->module[i].size - 1,
-+                boot_module_kind_as_string(mods->module[i].kind));
-+
-+    for ( i = 0; i < mem_resv->nr_banks; i++ )
-+    {
-+        printk(" RESVD[%u]: %"PRIpaddr" - %"PRIpaddr"\n", i,
-+               mem_resv->bank[i].start,
-+               mem_resv->bank[i].start + mem_resv->bank[i].size - 1);
-+    }
-+#ifdef CONFIG_STATIC_SHM
-+    early_print_info_shmem();
-+#endif
-+    printk("\n");
-+    for ( i = 0 ; i < cmds->nr_mods; i++ )
-+        printk("CMDLINE[%"PRIpaddr"]:%s %s\n", cmds->cmdline[i].start,
-+               cmds->cmdline[i].dt_name,
-+               &cmds->cmdline[i].cmdline[0]);
-+    printk("\n");
-+}
-+
-+/* This function assumes that memory regions are not overlapped */
-+static int __init cmp_memory_node(const void *key, const void *elem)
-+{
-+    const struct membank *handler0 = key;
-+    const struct membank *handler1 = elem;
-+
-+    if ( handler0->start < handler1->start )
-+        return -1;
-+
-+    if ( handler0->start >= (handler1->start + handler1->size) )
-+        return 1;
-+
-+    return 0;
-+}
-+
-+static void __init swap_memory_node(void *_a, void *_b, size_t size)
-+{
-+    struct membank *a = _a, *b = _b;
-+
-+    SWAP(*a, *b);
-+}
-+
-+/**
-+ * boot_fdt_info - initialize bootinfo from a DTB
-+ * @fdt: flattened device tree binary
-+ *
-+ * Returns the size of the DTB.
-+ */
-+size_t __init boot_fdt_info(const void *fdt, paddr_t paddr)
-+{
-+    struct membanks *reserved_mem = bootinfo_get_reserved_mem();
-+    struct membanks *mem = bootinfo_get_mem();
-+    unsigned int i;
-+    int nr_rsvd;
-+    int ret;
-+
-+    ret = fdt_check_header(fdt);
-+    if ( ret < 0 )
-+        panic("No valid device tree\n");
-+
-+    add_boot_module(BOOTMOD_FDT, paddr, fdt_totalsize(fdt), false);
-+
-+    nr_rsvd = fdt_num_mem_rsv(fdt);
-+    if ( nr_rsvd < 0 )
-+        panic("Parsing FDT memory reserve map failed (%d)\n", nr_rsvd);
-+
-+    for ( i = 0; i < nr_rsvd; i++ )
-+    {
-+        struct membank *bank;
-+        paddr_t s, sz;
-+
-+        if ( fdt_get_mem_rsv_paddr(device_tree_flattened, i, &s, &sz) < 0 )
-+            continue;
-+
-+        if ( reserved_mem->nr_banks < reserved_mem->max_banks )
-+        {
-+            bank = &reserved_mem->bank[reserved_mem->nr_banks];
-+            bank->start = s;
-+            bank->size = sz;
-+            bank->type = MEMBANK_FDT_RESVMEM;
-+            reserved_mem->nr_banks++;
-+        }
-+        else
-+            panic("Cannot allocate reserved memory bank\n");
-+    }
-+
-+    ret = device_tree_for_each_node(fdt, 0, early_scan_node, NULL);
-+    if ( ret )
-+        panic("Early FDT parsing failed (%d)\n", ret);
-+
-+    /*
-+     * On Arm64 setup_directmap_mappings() expects to be called with the lowest
-+     * bank in memory first. There is no requirement that the DT will provide
-+     * the banks sorted in ascending order. So sort them through.
-+     */
-+    sort(mem->bank, mem->nr_banks, sizeof(struct membank),
-+         cmp_memory_node, swap_memory_node);
-+
-+    early_print_info();
-+
-+    return fdt_totalsize(fdt);
-+}
-+
-+const __init char *boot_fdt_cmdline(const void *fdt)
-+{
-+    int node;
-+    const struct fdt_property *prop;
-+
-+    node = fdt_path_offset(fdt, "/chosen");
-+    if ( node < 0 )
-+        return NULL;
-+
-+    prop = fdt_get_property(fdt, node, "xen,xen-bootargs", NULL);
-+    if ( prop == NULL )
-+    {
-+        struct bootcmdline *dom0_cmdline =
-+            boot_cmdline_find_by_kind(BOOTMOD_KERNEL);
-+
-+        if (fdt_get_property(fdt, node, "xen,dom0-bootargs", NULL) ||
-+            ( dom0_cmdline && dom0_cmdline->cmdline[0] ) )
-+            prop = fdt_get_property(fdt, node, "bootargs", NULL);
-+    }
-+    if ( prop == NULL )
-+        return NULL;
-+
-+    return prop->data;
-+}
-+
-+/*
-+ * Wrapper to convert physical address from paddr_t to uint64_t and
-+ * invoke fdt_begin_node(). This is required as the physical address
-+ * provided as part of node name should not contain any leading
-+ * zeroes. Thus, one should use PRIx64 (instead of PRIpaddr) to append
-+ * unit (which contains the physical address) with name to generate a
-+ * node name.
-+ */
-+int __init domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit)
-+{
-+    /*
-+     * The size of the buffer to hold the longest possible string (i.e.
-+     * interrupt-controller@ + a 64-bit number + \0).
-+     */
-+    char buf[38];
-+    int ret;
-+
-+    /* ePAPR 3.4 */
-+    ret = snprintf(buf, sizeof(buf), "%s@%"PRIx64, name, unit);
-+
-+    if ( ret >= sizeof(buf) )
-+    {
-+        printk(XENLOG_ERR
-+               "Insufficient buffer. Minimum size required is %d\n",
-+               (ret + 1));
-+
-+        return -FDT_ERR_TRUNCATED;
-+    }
-+
-+    return fdt_begin_node(fdt, buf);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ 
+-#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE */
++#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
+ 
+ static XSM_INLINE int cf_check xsm_resource_plug_core(XSM_DEFAULT_VOID)
+ {
+diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
+index 24acc16125..abeb4b04ad 100644
+--- a/xen/include/xsm/xsm.h
++++ b/xen/include/xsm/xsm.h
+@@ -125,7 +125,7 @@ struct xsm_ops {
+     int (*deassign_device)(struct domain *d, uint32_t machine_bdf);
+ #endif
+ 
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+     int (*assign_dtdevice)(struct domain *d, const char *dtpath);
+     int (*deassign_dtdevice)(struct domain *d, const char *dtpath);
+ #endif
+@@ -535,7 +535,7 @@ static inline int xsm_deassign_device(
+ }
+ #endif /* HAS_PASSTHROUGH && HAS_PCI) */
+ 
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+ static inline int xsm_assign_dtdevice(
+     xsm_default_t def, struct domain *d, const char *dtpath)
+ {
+@@ -548,7 +548,7 @@ static inline int xsm_deassign_dtdevice(
+     return alternative_call(xsm_ops.deassign_dtdevice, d, dtpath);
+ }
+ 
+-#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE */
++#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
+ 
+ static inline int xsm_resource_plug_pci(xsm_default_t def, uint32_t machine_bdf)
+ {
+@@ -789,7 +789,7 @@ int xsm_multiboot_policy_init(
+     struct boot_info *bi, void **policy_buffer, size_t *policy_size);
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ /*
+  * Initialize XSM
+  *
+@@ -839,7 +839,7 @@ static inline int xsm_multiboot_init(struct boot_info *bi)
+ }
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ static inline int xsm_dt_init(void)
+ {
+     return 0;
+@@ -849,7 +849,7 @@ static inline bool has_xsm_magic(paddr_t start)
+ {
+     return false;
+ }
+-#endif /* CONFIG_HAS_DEVICE_TREE */
++#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
+ 
+ #endif /* CONFIG_XSM */
+ 
+diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
+index 93fbfc43cc..7f67683839 100644
+--- a/xen/xsm/dummy.c
++++ b/xen/xsm/dummy.c
+@@ -81,7 +81,7 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .deassign_device               = xsm_deassign_device,
+ #endif
+ 
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+     .assign_dtdevice               = xsm_assign_dtdevice,
+     .deassign_dtdevice             = xsm_deassign_dtdevice,
+ #endif
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 6a53487ea4..78bad6e56b 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -1456,7 +1456,7 @@ static int cf_check flask_deassign_device(
+ }
+ #endif /* HAS_PASSTHROUGH && HAS_PCI */
+ 
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+ static int flask_test_assign_dtdevice(const char *dtpath)
+ {
+     uint32_t rsid;
+@@ -1517,7 +1517,7 @@ static int cf_check flask_deassign_dtdevice(
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__REMOVE_DEVICE,
+                                 NULL);
+ }
+-#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE */
++#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
+ 
+ static int cf_check flask_platform_op(uint32_t op)
+ {
+@@ -1981,7 +1981,7 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .deassign_device = flask_deassign_device,
+ #endif
+ 
+-#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
++#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
+     .assign_dtdevice = flask_assign_dtdevice,
+     .deassign_dtdevice = flask_deassign_dtdevice,
+ #endif
+diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
+index f255fb63bf..b7e864a874 100644
+--- a/xen/xsm/xsm_core.c
++++ b/xen/xsm/xsm_core.c
+@@ -25,7 +25,7 @@
+ #include <asm/setup.h>
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ #include <asm/setup.h>
+ #endif
+ 
+@@ -166,7 +166,7 @@ int __init xsm_multiboot_init(struct boot_info *bi)
+ }
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ int __init xsm_dt_init(void)
+ {
+     int ret = 0;
+diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
+index 1b4030edb4..3f04375347 100644
+--- a/xen/xsm/xsm_policy.c
++++ b/xen/xsm/xsm_policy.c
+@@ -24,7 +24,7 @@
+ #include <asm/setup.h>
+ #endif
+ #include <xen/bitops.h>
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ # include <asm/setup.h>
+ # include <xen/device_tree.h>
+ #endif
+@@ -65,7 +65,7 @@ int __init xsm_multiboot_policy_init(
+ }
+ #endif
+ 
+-#ifdef CONFIG_HAS_DEVICE_TREE
++#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
+ int __init xsm_dt_policy_init(void **policy_buffer, size_t *policy_size)
+ {
+     struct boot_module *mod = boot_module_find_by_kind(BOOTMOD_XSM);
 -- 
 2.43.0
 
