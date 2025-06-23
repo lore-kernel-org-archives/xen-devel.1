@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E560C77B7F
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Jun 2025 13:47:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022379.1398214 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD11C7115B
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Jun 2025 13:50:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1022410.1398224 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uThVz-00061w-M1; Mon, 23 Jun 2025 13:47:15 +0000
+	id 1uThZL-0000M3-4j; Mon, 23 Jun 2025 13:50:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022379.1398214; Mon, 23 Jun 2025 13:47:15 +0000
+Received: by outflank-mailman (output) from mailman id 1022410.1398224; Mon, 23 Jun 2025 13:50:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uThVz-00061l-Hw; Mon, 23 Jun 2025 13:47:15 +0000
-Received: by outflank-mailman (input) for mailman id 1022379;
- Mon, 23 Jun 2025 13:47:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uThZL-0000Lw-1x; Mon, 23 Jun 2025 13:50:43 +0000
+Received: by outflank-mailman (input) for mailman id 1022410;
+ Mon, 23 Jun 2025 13:50:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TVau=ZG=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1uThVx-00048y-KW
- for xen-devel@lists.xenproject.org; Mon, 23 Jun 2025 13:47:13 +0000
-Received: from fhigh-a4-smtp.messagingengine.com
- (fhigh-a4-smtp.messagingengine.com [103.168.172.155])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 89cabbf1-5038-11f0-b894-0df219b8e170;
- Mon, 23 Jun 2025 15:47:01 +0200 (CEST)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfhigh.phl.internal (Postfix) with ESMTP id AF2E91140111;
- Mon, 23 Jun 2025 09:47:00 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Mon, 23 Jun 2025 09:47:00 -0400
+ id 1uThWM-0004sG-AW
+ for xen-devel@lists.xenproject.org; Mon, 23 Jun 2025 13:47:38 +0000
+Received: from fout-a3-smtp.messagingengine.com
+ (fout-a3-smtp.messagingengine.com [103.168.172.146])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9f70dfc4-5038-11f0-a30f-13f23c93f187;
+ Mon, 23 Jun 2025 15:47:37 +0200 (CEST)
+Received: from phl-compute-02.internal (phl-compute-02.phl.internal
+ [10.202.2.42])
+ by mailfout.phl.internal (Postfix) with ESMTP id 089EF138082B;
+ Mon, 23 Jun 2025 09:47:37 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-02.internal (MEProxy); Mon, 23 Jun 2025 09:47:37 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 23 Jun 2025 09:46:59 -0400 (EDT)
+ 23 Jun 2025 09:47:36 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,98 +47,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 89cabbf1-5038-11f0-b894-0df219b8e170
+X-Inumbo-ID: 9f70dfc4-5038-11f0-a30f-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm1; t=1750686420; x=1750772820; bh=rMfuOb3zWq
-	f2Otrwcg1PxJw2zLi1cC9pyVwVASV78Ow=; b=mcCeIaY2mUYZPIrCFKOELknLJe
-	I7QFn0tls3/hxV1qEMwzlpXR7qvc2ZrdEPGva7l3w+qEyTQOEphHZC8eV6nMR0En
-	4V+U4ObpFutJ+XQhb4pFU+8BjtHMBoJoiPFBPXZIgdaIdMH9KI070Jo1AX4C0XqI
-	VK39q9alEooQjLPzK7sakm1qu7XdQ739rusTlvi8GXCH9n4GNOzE3vmjcbg82ZWY
-	XP6f2372NRxKys5kLpa2Bo4ifSzwApbXaEhHKzEHlExo31lx3HWfkP7lPTLoy8ac
-	621NxYqxzpxz5TiTYwlXTsgQwG8K18jxrN3r1sp8MBdHr5PhdWjMDJLYmVHA==
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
+	 t=1750686457; x=1750772857; bh=pEfttlFJVn71WFrJPgQWz5RphtFBKEVS
+	T45Ebzr0+cQ=; b=hZfRdJlmPDt5b5tAlam2Ar0IseeMTCmgK6I6lb/geXg9JukE
+	WFLul8xt3APjFQEhwUDBckZtlk7o9Ey6v7tYdkTrY0WepCxF1WyNqZSHASmvmGSf
+	6wSbD4UF76Yc4VQQiMBq+XROALZsOOrDlUHPzwhIwsK4LvRxp6ztg5JiW58+BL8B
+	sKiHk5NNVlTRMW3dGxQe+OBRfmrZK4libcwPGWor5YnGPHS/9t5LNynswOOpTLi4
+	FQhS9+gG7LCP3Jorkw0XMksgOTpC3zi4rDdHxCkBJWvKBdqPnl5TUoMtMcJc0F2X
+	VQgGVmu8LMwbmaq4brDpYec6kdr129SYfXPqvg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1750686420; x=
-	1750772820; bh=rMfuOb3zWqf2Otrwcg1PxJw2zLi1cC9pyVwVASV78Ow=; b=R
-	kFRfIDbdARJAa4kDNHrz+2N/OCVl7emFTDElEBMEttrH96ShUQm1qwTF/Fe1R3zy
-	YRwSbwWdSS6s3Q73MwEvL2KAOpDwUzVtVXPjjuzVa5LnwNASy2XPgI/K2VnhTTIb
-	HGOxCnAM6AzQdtcEsmdjdb+ZwicujVnU7TDrAq2d/lNh992C6MsVnYqCsNVAw/ff
-	GhGYIFC1i4LS/UY9pr3xsHJ16Fw+0RaTEay4HKGaomDC+r7eT/UDQsqJeVA7WAyn
-	kBSPGAZ92jcrOy+ENRSbsdtTi/bfFK7WpZZdLeeMNTCsyk1iUYjf4PkKJLglPFKA
-	9VK0CNxcoDvCjNmDALlmA==
-X-ME-Sender: <xms:1FpZaIarlb3JhkFUQHHTedkgQBcIby1SVkNjytwaj11J8u-dnX_CFA>
-    <xme:1FpZaDaIUsz14q92EoP_w6MDrjZptPEbn9DWKIpGaHFRhK6D1YEWfqlaGgEamDg6Q
-    ZVDThoHbM9hbA>
-X-ME-Received: <xmr:1FpZaC_brIKwNQ_EhGY-NobAnIFVie7sP1s6-2L7xa9YOEB0uDPzM68GP7ySyZcKIXcjMeBWKbF0c3nr1URQbTq7ExDTY4HlnIGBnlVGy8KbWkT_J4bm>
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm1; t=1750686457; x=1750772857; bh=pEfttlFJVn71WFrJPgQWz5RphtFB
+	KEVST45Ebzr0+cQ=; b=p6SU85ERBH4KCXKZ9GI0AXVqO480wUD71wgeQYoW83da
+	cc112e45ywzgwAxfEEk/6zAGXJsnVt2x97Zm3liJdm81hXK0rmz+NgADlTjHFCQG
+	qVawFkXPvd/Mx1kPijHA1T0NLZ0v+iud49RBZGYIccPHh4EQwVNLf+fp17RFZfrd
+	uvSQcpgN5a8HqFw29ACn18oE2EPHVzN3LlHM+hOPrdN1eWut1Psg8SjI2WgfmCjy
+	GHK/cU3+tsEfHcOulfYx1uBKJsuFU6EueZEvnhl1cuzJMCeb/xjNti8CDsIA7Lss
+	4Az4e7+gVF3WTYTFrQsXaXnT+NvtSCFW6xkMbUT/hA==
+X-ME-Sender: <xms:-FpZaKKW2WNcG2jHMUs0uu-qE12Ex9jZ7ZlAIIN_j6BBPbS-nckL_Q>
+    <xme:-FpZaCLLSKIHP5SURfQ07u23cP2z8Usy8SixkbIHVnDtMfWzGWsJnePeeovFAba-5
+    Y19AVUhMsdv0Q>
+X-ME-Received: <xmr:-FpZaKthNzauFepx_fKKRmIwLJL_MLm1-oZGzZk9NJ0KIBQdj2RZmcjAWDvPCAwCNanl0QvE6gJAwnE2e2MoeBbWN9q_0gPv7009RHA3nMQ2qTUC6Z7b>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddvgddujedukecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
-    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
-    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmh
-    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
-    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
-    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
-    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
-    rdgtohhm
-X-ME-Proxy: <xmx:1FpZaCr5vAaCgqeW_TDmA8Ia7wHjiv2ie-4Xv_pnXijlw5dKN__iHw>
-    <xmx:1FpZaDqXTQHT4iMRO8EaJFRkxTKHVigmVv9MTIu5DdXuMrsDCrc8nw>
-    <xmx:1FpZaAQcRnrBPi7gDjopM3Iw9NED4M8Ud2LccN6ZfkMrLWUUDJNsFw>
-    <xmx:1FpZaDoXU8tYHzW67R8Ri78UokJqB6Ov_FRHKlBauW7LZUOEPKsI6Q>
-    <xmx:1FpZaNhD3gOfsgOkxDFyNCJO8A_NvpxH_nDOC7mAINmyHBdQhUBwpQ44>
+    ihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofggtgfgsehtkeertdertd
+    ejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcu
+    oehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenuc
+    ggtffrrghtthgvrhhnpeejueefhfelieekgeeftdfgieeugefhudetjeethfefveehffej
+    hfeigefgjeekleenucffohhmrghinhepghhithhlrggsrdgtohhmnecuvehluhhsthgvrh
+    fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhv
+    ihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepvddpmhhoug
+    gvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigv
+    nhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhsih
+    gslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:-FpZaPaj22-6LBixITWZy4lWxwT2PCMOeotQve5ZcAyt1z4KcGZc3Q>
+    <xmx:-FpZaBaY36wpymrueFjMVFFYtxIBdPZzIWELcyGexdi-YmMYm5Z9Yg>
+    <xmx:-FpZaLAhBkc7wwyIZIqTqlrEaNcJb9DS6OXSOcSbPpfmFtTT_0xx0g>
+    <xmx:-FpZaHYJvuD6-4G05gJ4ATzQizi-lLPaRh2a1WMJFBNfZiBG6NYEXw>
+    <xmx:-VpZaOaL_728ZkAE0vUGWNYpF2-kQsDi1Wv7-gWi_sfmfVYSfMkAlSRu>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH test-artifacts v1 1/5] Add linux-6.12.34-x86_64
-Date: Mon, 23 Jun 2025 15:46:20 +0200
-Message-ID: <0a3e893e5fe133dc710d11a31006ba4f2c1b0cbe.1750684376.git-series.marmarek@invisiblethingslab.com>
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 0/6] Add infrastructure for testing arbitrary Linux branch, and one more runner
+Date: Mon, 23 Jun 2025 15:47:09 +0200
+Message-ID: <cover.16ccd290bf95e314a4f23777f5564b3aa2417e57.1750686195.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.7129d44a341f3fb3a85f808a998c28ebe8a77ee8.1750684376.git-series.marmarek@invisiblethingslab.com>
-References: <cover.7129d44a341f3fb3a85f808a998c28ebe8a77ee8.1750684376.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is necessary for new Zen4 runner.
-Do not include Argo module in this build, as it isn't compatible with
-6.12 yet.
+This series implements testing arbitrary Linux branch, based on pipeline
+variables. The idea is to setup schedule running a pipeline for few selected
+branches (some of the Linux stable branches? linux-next? Linus's master
+branch?) The SELECTED_JOBS_ONLY variable can be used to exclude most of the
+build jobs in those pipelines.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- .gitlab-ci.yml | 6 ++++++
- 1 file changed, 6 insertions(+)
+This series is combined with adding hw12 runner, as it needs a newer kernel
+anyway, so putting it together avoids merge conflict. There are also few minor
+CI improvements collected along the way.
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index c698612..ad44fb4 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -64,6 +64,12 @@ linux-6.6.56-x86_64:
-     ARGO_SHA: "cf73819cacc945baca1a7421e5836d1bd481739b"
-     ARGOEXEC_SHA: "d900429f6640acc6f68a3d3a4c945d7da60625d8"
- 
-+linux-6.12.34-x86_64:
-+  extends: .x86_64-artifacts
-+  script: ./scripts/build-linux.sh
-+  variables:
-+    LINUX_VERSION: 6.12.34
-+
- microcode-x86:
-   extends: .x86_64-artifacts
-   script: ./scripts/x86-microcode.sh
+Pipeline:
+https://gitlab.com/xen-project/people/marmarek/xen/-/pipelines/1882799125
+
+Marek Marczykowski-Górecki (6):
+  CI: Switch x86 tests to 6.12.34 kernel
+  CI: add AMD Zen 4 HW runner
+  CI: upload tests-junit.xml as a normal artifact too
+  CI: make test-artifacts branch/job customizable
+  CI: use Alpine's network setup
+  [DO NOT MERGE] CI: example how to use ssh to extract logs
+
+ .gitlab-ci.yml                     |  9 ++++-
+ automation/gitlab-ci/test.yaml     | 65 +++++++++++++++++++++++++++++--
+ automation/scripts/qubes-x86-64.sh | 22 +++++-----
+ 3 files changed, 81 insertions(+), 15 deletions(-)
+
+base-commit: cc7394164633e75fb61d52565f75271e0b7f1236
 -- 
 git-series 0.9.1
 
