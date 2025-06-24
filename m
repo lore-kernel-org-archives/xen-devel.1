@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 261F0C71157
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022973.1398903 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00E89C77B7C
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1022984.1398914 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqP-0004p9-LF; Tue, 24 Jun 2025 04:01:13 +0000
+	id 1uTuqU-0005WE-UL; Tue, 24 Jun 2025 04:01:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022973.1398903; Tue, 24 Jun 2025 04:01:13 +0000
+Received: by outflank-mailman (output) from mailman id 1022984.1398914; Tue, 24 Jun 2025 04:01:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqP-0004ov-Gm; Tue, 24 Jun 2025 04:01:13 +0000
-Received: by outflank-mailman (input) for mailman id 1022973;
- Tue, 24 Jun 2025 04:01:12 +0000
+	id 1uTuqU-0005W7-Qi; Tue, 24 Jun 2025 04:01:18 +0000
+Received: by outflank-mailman (input) for mailman id 1022984;
+ Tue, 24 Jun 2025 04:01:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1A0Y=ZH=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uTulk-000639-8f
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:56:24 +0000
-Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
+ id 1uTumJ-000639-FV
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:56:59 +0000
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31584067-50af-11f0-b894-0df219b8e170;
- Tue, 24 Jun 2025 05:56:22 +0200 (CEST)
+ id 465b7409-50af-11f0-b894-0df219b8e170;
+ Tue, 24 Jun 2025 05:56:58 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,211 +38,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31584067-50af-11f0-b894-0df219b8e170
+X-Inumbo-ID: 465b7409-50af-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1750737381; x=1750996581;
-	bh=7T+qIgAVUUiUK7ZTM4nraoYQpj7JidPaaBMAqs8DTzI=;
+	s=ecvvigt2f5a3rbsqkhru7efk5u.protonmail; t=1750737417; x=1750996617;
+	bh=BmcXMAPQmruv+WgoSlVyAgGhsw5O69P+wvMsGyq48aU=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=gYTSUmos3OTm/ib6bGqk3P2QXZpmK3ZA3efPElwsFB2j22ReGJzpzlNg/hquCDDue
-	 7duJ8O/RT7lI2OM25Y7EdJfmy1QuD9NuWx6QIJ6ry0bfqReywOxhqHw1OtudLm72EB
-	 F6nNLRX4EHVYMKSuPNlFoaJ4uJuv4lhfH1R/GhCAmS0ZikHydlXeHnNstFZFox5RfV
-	 kM+roRK/2OKyym7xane8d04kqrd22y3FCSMZCmbbPOVjSFzWKafr56a7NdvGFT7eaJ
-	 I/KLSS/GUTESRGJDgZlpLS1xZNil924ILXHbxpnlNWW5mCeGOIyY/wGe3aRyHrKrc2
-	 2PBDgcb6cXXnw==
-Date: Tue, 24 Jun 2025 03:56:17 +0000
+	b=PjQXMLRiOIdDXwsAC5JMhvzlQLkF+5gHcJhwudnRGG5aoUajK2Ng3TwWnFghbBGfT
+	 J84eCTNPDiL/etV6bkLSNqdoy4GsJxlUeXHjYbJ3uS5qFevV+IUUD902Do8yVvnLd9
+	 GJtyOWYKtl2O57HQ4WQI4otmrChDOLWiU00QIzPwPCTH7efVh0vwPsEUgvYdzMP1WS
+	 SPY0QrYpWPdxfqSKJGvUDFRXGIfvKy82MKIY+glrf5t3Qg0JdQkbxEAwuu8iyT02XK
+	 kWhJyPNfDIjR7bKPZncrulrFjCrn2Ee0IVl9QCGzakZDC9LUcAHBVbPjZlM0fwZKdC
+	 ho6K91g/1xHvg==
+Date: Tue, 24 Jun 2025 03:56:52 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v1 09/16] arm/vuart: use void pointer in domain struct
-Message-ID: <20250624035443.344099-10-dmukhin@ford.com>
+Subject: [PATCH v1 13/16] drivers/vuart: move PL011 emulator code
+Message-ID: <20250624035443.344099-14-dmukhin@ford.com>
 In-Reply-To: <20250624035443.344099-1-dmukhin@ford.com>
 References: <20250624035443.344099-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 73cbc7bdf76c47a54c44afdb6056201ea0f919a1
+X-Pm-Message-ID: e703f20ca9c0a634a9318d220f2e9539bd9eca76
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>=20
 
-Make all public data structures private to simple MMIO-based vUART
-implementation and switch struct domain to using void pointer to reduce
-compile-time dependencies.
+Move PL011 emulator to the new location for UART emulators.
+
+No functional change intended.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/include/asm/domain.h | 14 ++-----
- xen/arch/arm/vuart.c              | 68 ++++++++++++++++++++++---------
- 2 files changed, 52 insertions(+), 30 deletions(-)
+ xen/arch/arm/Kconfig                               |  7 -------
+ xen/arch/arm/Makefile                              |  1 -
+ xen/drivers/Kconfig                                |  2 ++
+ xen/drivers/Makefile                               |  1 +
+ xen/drivers/vuart/Kconfig                          | 14 ++++++++++++++
+ xen/drivers/vuart/Makefile                         |  1 +
+ .../arm/vpl011.c =3D> drivers/vuart/vuart-pl011.c}   |  0
+ 7 files changed, 18 insertions(+), 8 deletions(-)
+ create mode 100644 xen/drivers/vuart/Kconfig
+ create mode 100644 xen/drivers/vuart/Makefile
+ rename xen/{arch/arm/vpl011.c =3D> drivers/vuart/vuart-pl011.c} (100%)
 
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
-omain.h
-index d668c11d7e2c..38873c66f1f8 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -90,16 +90,6 @@ struct arch_domain
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index b11cb583a763..6eeae97293f2 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -170,13 +170,6 @@ config NEW_VGIC
+ =09problems with the standard emulation.
+ =09At the moment this implementation is not security supported.
 =20
-     struct vgic_dist vgic;
-=20
--#ifdef CONFIG_HAS_VUART_MMIO
--    struct vuart {
--#define VUART_BUF_SIZE 128
--        char                        *buf;
--        int                         idx;
--        const struct vuart_info     *info;
--        spinlock_t                  lock;
--    } vuart;
--#endif
+-config HAS_VUART_PL011
+-=09bool "Emulated SBSA UART console support"
+-=09default y
+-=09help
+-=09  Allows a guest to use SBSA Generic UART as a console. The
+-=09  SBSA Generic UART implements a subset of ARM PL011 UART.
 -
-     unsigned int evtchn_irq;
- #ifdef CONFIG_ACPI
-     void *efi_acpi_table;
-@@ -116,6 +106,10 @@ struct arch_domain
-     void *vpl011;
- #endif
+ config HAS_VUART_MMIO
+ =09bool "Emulated UART for hardware domain"
+ =09default y
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index dd015a2a19e8..8475043d8701 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -65,7 +65,6 @@ obj-$(CONFIG_HAS_ITS) +=3D vgic-v3-its.o
+ endif
+ obj-$(CONFIG_VM_EVENT) +=3D vm_event.o
+ obj-y +=3D vtimer.o
+-obj-$(CONFIG_HAS_VUART_PL011) +=3D vpl011.o
+ obj-y +=3D vsmc.o
+ obj-y +=3D vpsci.o
+ obj-$(CONFIG_HAS_VUART_MMIO) +=3D vuart.o
+diff --git a/xen/drivers/Kconfig b/xen/drivers/Kconfig
+index 20050e9bb8b3..5e533b260004 100644
+--- a/xen/drivers/Kconfig
++++ b/xen/drivers/Kconfig
+@@ -12,6 +12,8 @@ source "drivers/pci/Kconfig"
 =20
-+#ifdef CONFIG_HAS_VUART_MMIO
-+    void *vuart;
-+#endif
+ source "drivers/video/Kconfig"
+=20
++source "drivers/vuart/Kconfig"
 +
- #ifdef CONFIG_TEE
-     void *tee;
- #endif
-diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
-index 5403ed284846..d2f90ab0c64f 100644
---- a/xen/arch/arm/vuart.c
-+++ b/xen/arch/arm/vuart.c
-@@ -29,8 +29,16 @@
- #include <asm/mmio.h>
- #include <xen/perfc.h>
- #include <xen/vuart.h>
-+#include <xen/xvmalloc.h>
+ config HAS_VPCI
+ =09bool
 =20
--#define domain_has_vuart(d) ((d)->arch.vuart.info !=3D NULL)
-+#define VUART_BUF_SIZE          128
+diff --git a/xen/drivers/Makefile b/xen/drivers/Makefile
+index 2a1ae8ad130a..510820472938 100644
+--- a/xen/drivers/Makefile
++++ b/xen/drivers/Makefile
+@@ -2,6 +2,7 @@ obj-y +=3D char/
+ obj-$(CONFIG_HAS_CPUFREQ) +=3D cpufreq/
+ obj-$(CONFIG_HAS_PCI) +=3D pci/
+ obj-$(CONFIG_HAS_VPCI) +=3D vpci/
++obj-$(CONFIG_HAS_VUART) +=3D vuart/
+ obj-$(CONFIG_HAS_PASSTHROUGH) +=3D passthrough/
+ obj-$(CONFIG_ACPI) +=3D acpi/
+ obj-$(CONFIG_VIDEO) +=3D video/
+diff --git a/xen/drivers/vuart/Kconfig b/xen/drivers/vuart/Kconfig
+new file mode 100644
+index 000000000000..d8df0f6d1b3c
+--- /dev/null
++++ b/xen/drivers/vuart/Kconfig
+@@ -0,0 +1,14 @@
++config HAS_VUART
++=09bool
 +
-+struct vuart {
-+    char                        *buf;
-+    int                         idx;
-+    const struct vuart_info     *info;
-+    spinlock_t                  lock;
-+};
-=20
- static int vuart_mmio_read(struct vcpu *v, mmio_info_t *info,
-                            register_t *r, void *priv);
-@@ -44,39 +52,57 @@ static const struct mmio_handler_ops vuart_mmio_handler=
- =3D {
-=20
- int domain_vuart_init(struct domain *d)
- {
--    ASSERT( is_hardware_domain(d) );
-+    const struct vuart_info *info;
-+    struct vuart *vdev;
-=20
--    d->arch.vuart.info =3D serial_vuart_info(SERHND_DTUART);
--    if ( !d->arch.vuart.info )
-+    if ( !is_hardware_domain(d) )
-         return 0;
-=20
--    spin_lock_init(&d->arch.vuart.lock);
--    d->arch.vuart.idx =3D 0;
-+    info =3D serial_vuart_info(SERHND_DTUART);
-+    if ( !info )
-+        return 0;
-=20
--    d->arch.vuart.buf =3D xzalloc_array(char, VUART_BUF_SIZE);
--    if ( !d->arch.vuart.buf )
-+    vdev =3D xvzalloc(typeof(*vdev));
-+    if ( !vdev )
-         return -ENOMEM;
-=20
--    register_mmio_handler(d, &vuart_mmio_handler,
--                          d->arch.vuart.info->base_addr,
--                          d->arch.vuart.info->size,
-+    vdev->buf =3D xzalloc_array(char, VUART_BUF_SIZE);
-+    if ( !vdev->buf )
-+    {
-+        xfree(vdev);
-+        return -ENOMEM;
-+    }
++if (ARM_32 || ARM_64)
 +
-+    spin_lock_init(&vdev->lock);
++config HAS_VUART_PL011
++=09bool "Emulated PL011 UART support"
++=09default y
++=09select HAS_VUART
++=09help
++=09  Allows a guest to use SBSA Generic UART as a console. The
++=09  SBSA Generic UART implements a subset of ARM PL011 UART.
 +
-+    register_mmio_handler(d,
-+                          &vuart_mmio_handler,
-+                          info->base_addr,
-+                          info->size,
-                           NULL);
-=20
-+    vdev->info =3D info;
-+    d->arch.vuart =3D vdev;
-+
-     return 0;
- }
-=20
- void domain_vuart_free(struct domain *d)
- {
--    if ( !domain_has_vuart(d) )
--        return;
-+    struct vuart *vdev =3D d->arch.vuart;
-=20
--    xfree(d->arch.vuart.buf);
-+    if ( vdev )
-+    {
-+        xfree(vdev->buf);
-+        xfree(vdev);
-+        d->arch.vuart =3D NULL;
-+    }
- }
-=20
- static void vuart_print_char(struct vcpu *v, char c)
- {
-     struct domain *d =3D v->domain;
--    struct vuart *uart =3D &d->arch.vuart;
-+    struct vuart *uart =3D d->arch.vuart;
-=20
-     if ( !is_console_printable(c) )
-         return ;
-@@ -98,16 +124,17 @@ static int vuart_mmio_read(struct vcpu *v, mmio_info_t=
- *info,
-                            register_t *r, void *priv)
- {
-     struct domain *d =3D v->domain;
--    paddr_t offset =3D info->gpa - d->arch.vuart.info->base_addr;
-+    struct vuart *vdev =3D d->arch.vuart;
-+    paddr_t offset =3D info->gpa - vdev->info->base_addr;
-=20
-     perfc_incr(vuart_reads);
-=20
-     /* By default zeroed the register */
-     *r =3D 0;
-=20
--    if ( offset =3D=3D d->arch.vuart.info->status_off )
-+    if ( offset =3D=3D vdev->info->status_off )
-         /* All holding registers empty, ready to send etc */
--        *r =3D d->arch.vuart.info->status;
-+        *r =3D vdev->info->status;
-=20
-     return 1;
- }
-@@ -116,11 +143,12 @@ static int vuart_mmio_write(struct vcpu *v, mmio_info=
-_t *info,
-                             register_t r, void *priv)
- {
-     struct domain *d =3D v->domain;
--    paddr_t offset =3D info->gpa - d->arch.vuart.info->base_addr;
-+    struct vuart *vdev =3D d->arch.vuart;
-+    paddr_t offset =3D info->gpa - vdev->info->base_addr;
-=20
-     perfc_incr(vuart_writes);
-=20
--    if ( offset =3D=3D d->arch.vuart.info->data_off )
-+    if ( offset =3D=3D vdev->info->data_off )
-         /* ignore any status bits */
-         vuart_print_char(v, r & 0xFF);
-=20
++endif
+diff --git a/xen/drivers/vuart/Makefile b/xen/drivers/vuart/Makefile
+new file mode 100644
+index 000000000000..3b7069f1cf95
+--- /dev/null
++++ b/xen/drivers/vuart/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_HAS_VUART_PL011) +=3D vuart-pl011.o
+diff --git a/xen/arch/arm/vpl011.c b/xen/drivers/vuart/vuart-pl011.c
+similarity index 100%
+rename from xen/arch/arm/vpl011.c
+rename to xen/drivers/vuart/vuart-pl011.c
 --=20
 2.34.1
 
