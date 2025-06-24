@@ -4,35 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4403C7115B
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 01:20:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022887.1398743 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F94C77B7C
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 03:55:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1022908.1398764 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTsK2-0003pf-VF; Tue, 24 Jun 2025 01:19:38 +0000
+	id 1uTukU-00063M-8l; Tue, 24 Jun 2025 03:55:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022887.1398743; Tue, 24 Jun 2025 01:19:38 +0000
+Received: by outflank-mailman (output) from mailman id 1022908.1398764; Tue, 24 Jun 2025 03:55:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTsK2-0003pY-Si; Tue, 24 Jun 2025 01:19:38 +0000
-Received: by outflank-mailman (input) for mailman id 1022887;
- Tue, 24 Jun 2025 01:19:37 +0000
+	id 1uTukU-00063F-5N; Tue, 24 Jun 2025 03:55:06 +0000
+Received: by outflank-mailman (input) for mailman id 1022908;
+ Tue, 24 Jun 2025 03:55:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JuY8=ZH=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1uTsK1-0003pS-QO
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 01:19:37 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 47f52eee-5099-11f0-b894-0df219b8e170;
- Tue, 24 Jun 2025 03:19:32 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 503D75C58EF;
- Tue, 24 Jun 2025 01:17:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22030C4CEEA;
- Tue, 24 Jun 2025 01:19:29 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1A0Y=ZH=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1uTukS-000639-7n
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:55:05 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0062b6e7-50af-11f0-b894-0df219b8e170;
+ Tue, 24 Jun 2025 05:55:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,172 +38,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47f52eee-5099-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1750727970;
-	bh=H2NzpB9T6zopmrvfQu3ZhSnewVqp8QgCwnhKlfRNEA8=;
-	h=Date:From:To:cc:Subject:From;
-	b=iA7rDorrz581RR5U1VKVgyW67Yqir+g42APsjWifQQgWBYOzv+HDOZZkRz//Z7KoL
-	 F792YHAIsY2CEFjEub0gnIRAEFjv/V6LITIRx6tAWW5WqlwZKcX+iwBDg0qhGz1Jrv
-	 dr01vP/ZtrcqPVer6kq3mKqymVvM+SgNL5Kdi9wz5yIJ3AZb1ZHSY1zL7JF5AcplsH
-	 cY+CfIwkjYASt3+W526KRjo7aRxifqIS7ldNdHqhX7jbz9QVmNOEqB5sVrYMELpf+v
-	 G2FaNMWx/vY2t3rPTCP7lk1jX2AT0r3N5quj3n+GKMxrBYxaSWdlw80OemGQKno2dj
-	 a4tgryreXmjGw==
-Date: Mon, 23 Jun 2025 18:19:27 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+X-Inumbo-ID: 0062b6e7-50af-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1750737299; x=1750996499;
+	bh=kgm/ahmSt27FsPZowTug9QzPxVkvQcKb8PSoXe1OzuQ=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=QxNEF7NarjQXhtoqwNIn/Gs4wjVTusx3nDB4GqHDHUkgJldgkd+J6/qrFWprlTjTp
+	 TXlfYyA4ekY/rrLaBh/+dhDLTmXf9ZeXdeIIcP8oT8WexyXmr3CbAwuUO7d3kiH2Sa
+	 okZbQ6ifganzPBOVix27XFwZbECOEsuvTaq+SiOe1jlqK/OWHbwjuLzgZVgzN2vEwj
+	 Y6U09KdP4sUgqDRKdiI3V1z/w8Fy/Sw9CFknxw58W0BmOAU7cLLgUcsoE296E4ZYYu
+	 eMUv36gPHrOlR0HE+nQI+fCDmd/onJKfqjCPr2EYVpKHMjTlDgd4RvUTC5LCUd4T5O
+	 P7zc0aBzxRspg==
+Date: Tue, 24 Jun 2025 03:54:54 +0000
 To: xen-devel@lists.xenproject.org
-cc: Andrew Cooper <andrew.cooper3@citrix.com>, michal.orzel@amd.com, 
-    jbeulich@suse.com, julien@xen.org, roger.pau@citrix.com, 
-    sstabellini@kernel.org, bertrand.marquis@arm.com, 
-    federico.serafini@bugseng.com, Nicola Vetrini <nicola.vetrini@bugseng.com>, 
-    sstabellini@kernel.org
-Subject: [PATCH v6] automation/eclair: update configuration of D4.10
-Message-ID: <alpine.DEB.2.22.394.2506231650080.862517@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v1 00/16] xen: framework for UART emulators
+Message-ID: <20250624035443.344099-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 1f3322f86847b85be4792570abbb73b99c01e441
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-MISRA C Directive 4.10 states that "Precautions shall be taken in order
-to prevent the contents of a header file being included more than
-once".
+The series introduces a driver framework to abstract UART emulators in the
+hypervisor under drivers/vuart.
 
-Add a SAF tag and update the comment on top of cpufeatures.h.
-Add a header inclusion guard to compile.h.
-Generate header guards for hypercall-defs.h
+That allows for architecture-independent handling of virtual UARTs in the
+console driver and simplifies enabling new UART emulators.
 
-Update ECLAIR configuration to:
-- extend existing deviation to other comments explicitly saying a file
-  is intended for multiple inclusion;
-- extend existing deviation to other autogenerated files;
-- tag the guidelines as clean.
+The framework is gated by CONFIG_HAS_VUART, which is automatically enabled
+once the user enables any UART emulator.
 
-Update deviations.rst accordingly.
+Current implementation supports maximum of one vUART of each kind per domai=
+n.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
----
-Changes in v6:
-- remove in-code comment and use SAF-8-safe instead
-- add header guards for hypercall-defs.h
+All current UART emulators (Arm) are switched to the new framework.
 
-Successful pipeline:
-https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/1885561040
----
+This works origins from [1].
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index 9c67358d46..3b5bc87e1d 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -72,11 +72,14 @@ they are not instances of commented-out code."
- -config=MC3A2.D4.3,reports+={deliberate, "any_area(any_loc(file(arm64_bitops))&&context(name(int_clear_mask16)))"}
- -doc_end
- 
---doc_begin="Files that are intended to be included more than once do not need to
--conform to the directive."
-+-doc_begin="Files that are intended to be included more than once (and have
-+a comment that says this explicitly) do not need to conform to the directive."
- -config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* This file is intended to be included multiple times\\. \\*/$, begin-4))"}
---config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* Generated file, do not edit! \\*/$, begin-3))"}
---config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/generated/autoconf.h$)))"}
-+-config=MC3A2.D4.10,reports+={safe, "first_area(text(^/\\* Generated file, do not edit! \\*/$, begin-3...begin-2))"}
-+-doc_end
-+
-+-doc_begin="Autogenerated files that do not need to conform to the directive."
-+-config=MC3A2.D4.10,reports+={safe, "all_area(all_loc(file(^xen/include/generated/autoconf\\.h$)))"}
- -doc_end
- 
- -doc_begin="Including multiple times a .c file is safe because every function or data item
-diff --git a/automation/eclair_analysis/ECLAIR/tagging.ecl b/automation/eclair_analysis/ECLAIR/tagging.ecl
-index f9da5d5f4d..b95f07feb0 100644
---- a/automation/eclair_analysis/ECLAIR/tagging.ecl
-+++ b/automation/eclair_analysis/ECLAIR/tagging.ecl
-@@ -23,6 +23,7 @@
- "MC3A2.D1.1||
- MC3A2.D2.1||
- MC3A2.D4.1||
-+MC3A2.D4.10||
- MC3A2.D4.11||
- MC3A2.D4.14||
- MC3A2.R1.1||
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index fe0b1e10a2..63caa8f4a2 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -30,6 +30,18 @@ Deviations related to MISRA C:2012 Directives:
-        not to add an additional encapsulation layer.
-      - Tagged as `deliberate` for ECLAIR.
- 
-+   * - D4.10
-+     - Files that are intended to be included more than once (and have
-+       a comment that says this explicitly) do not need to conform to the
-+       directive.
-+     - Tagged as `safe` for ECLAIR.
-+
-+   * - D4.10
-+     - There are autogenerated files that do not need to comply to the
-+       directive.
-+     - Tagged as `safe` for ECLAIR. Such files are:
-+        - xen/include/generated/autoconf.h
-+
-    * - D4.10
-      - Including multiple times a .c file is safe because every function or data item
-        it defines would in (the common case) be already defined.
-diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
-index 9e3ed21c02..dce0713adf 100644
---- a/xen/arch/x86/include/asm/cpufeatures.h
-+++ b/xen/arch/x86/include/asm/cpufeatures.h
-@@ -1,7 +1,6 @@
--/*
-- * Explicitly intended for multiple inclusion.
-- */
-+/* This file is intended to be included multiple times. */
- 
-+/* SAF-8-safe */
- #include <xen/lib/x86/cpuid-autogen.h>
- 
- /* Number of capability words covered by the featureset words. */
-diff --git a/xen/include/xen/compile.h.in b/xen/include/xen/compile.h.in
-index 3151d1e7d1..9206341ba6 100644
---- a/xen/include/xen/compile.h.in
-+++ b/xen/include/xen/compile.h.in
-@@ -1,3 +1,6 @@
-+#ifndef XEN_COMPILE_H
-+#define XEN_COMPILE_H
-+
- #define XEN_COMPILE_DATE	"@@date@@"
- #define XEN_COMPILE_TIME	"@@time@@"
- #define XEN_COMPILE_BY		"@@whoami@@"
-diff --git a/xen/scripts/gen_hypercall.awk b/xen/scripts/gen_hypercall.awk
-index 1a7e051fde..47a18cd75e 100644
---- a/xen/scripts/gen_hypercall.awk
-+++ b/xen/scripts/gen_hypercall.awk
-@@ -2,6 +2,8 @@
- # the calls of the handlers inside a switch() statement.
- 
- BEGIN {
-+    printf("#ifndef XEN_HYPERCALL_DEFS_H\n");
-+    printf("#define XEN_HYPERCALL_DEFS_H\n\n");
-     printf("/* Generated file, do not edit! */\n\n");
-     e = 0;
-     n = 0;
-@@ -311,4 +313,5 @@ END {
-                 printf("[__HYPERVISOR_%s] = %d, \\\n", fn[call_fn[i]], n_args[call_fn[i]]);
-         printf("}\n");
-     }
-+    printf("\n#endif /* XEN_HYPERCALL_DEFS_H */\n");
- }
-diff --git a/xen/tools/process-banner.sed b/xen/tools/process-banner.sed
-index 56c76558bc..4cf3f9a116 100755
---- a/xen/tools/process-banner.sed
-+++ b/xen/tools/process-banner.sed
-@@ -12,3 +12,8 @@ s_(.*)_"\1\\n"_
- 
- # Trailing \ on all but the final line.
- $!s_$_ \\_
-+
-+# Append closing header guard
-+$a\
-+\
-+#endif /* XEN_COMPILE_H */
+Conceptually, there are 3 parts in the series:
+- PL011 emulator cleanup: patches 1-6
+- Simple MMIO-based UART emulator cleanup: patches 7-10, depends on the com=
+mon
+  header introduced in vpl011 cleanup
+- vUART driver framework: patches 11-16, depends on the cleanup part
+
+[1] https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1-0-c5d36b3=
+1d66c@ford.com/
+[2] CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/18856=
+41957
+
+Denis Mukhin (16):
+  arm/vpl011: rename virtual PL011 Kconfig option
+  arm/vpl011: move DT node parsing to PL011 emulator code
+  arm/vpl011: use vuart_ prefix in vpl011 public calls
+  arm/vpl011: use raw spin_lock_{irqrestore,irqsave}
+  arm/vpl011: use void pointer in domain struct
+  arm/vpl011: remove vpl011 header file
+  arm/vuart: rename 'virtual UART' Kconfig option
+  arm/vuart: move simple MMIO-based vUART declarations to common header
+  arm/vuart: use void pointer in domain struct
+  arm/vuart: merge vuart_print_char() with vuart_mmio_write()
+  xen/domain: introduce common emulation flags
+  xen/domain: introduce domain-emu.h
+  drivers/vuart: move PL011 emulator code
+  drivers/vuart: move simple MMIO-based UART emulator
+  drivers/vuart: introduce framework for UART emulators
+  drivers/vuart: hook simple MMIO-based UART to vUART framework
+
+ xen/arch/arm/Kconfig                          |  15 -
+ xen/arch/arm/Makefile                         |   2 -
+ xen/arch/arm/configs/tiny64_defconfig         |   2 +-
+ xen/arch/arm/dom0less-build.c                 |  76 +---
+ xen/arch/arm/domain.c                         |  11 +-
+ xen/arch/arm/domctl.c                         |  15 +-
+ xen/arch/arm/include/asm/domain.h             |  20 +-
+ xen/arch/arm/include/asm/kernel.h             |   3 -
+ xen/arch/arm/include/asm/vpl011.h             |  91 -----
+ xen/arch/arm/vuart.c                          | 139 -------
+ xen/arch/arm/vuart.h                          |  54 ---
+ xen/arch/arm/xen.lds.S                        |   1 +
+ xen/arch/ppc/include/asm/domain.h             |   1 +
+ xen/arch/ppc/xen.lds.S                        |   1 +
+ xen/arch/riscv/include/asm/domain.h           |   1 +
+ xen/arch/riscv/xen.lds.S                      |   1 +
+ xen/arch/x86/domain.c                         |   2 +-
+ xen/arch/x86/domctl.c                         |   2 +-
+ xen/arch/x86/include/asm/domain.h             |  48 ++-
+ xen/arch/x86/xen.lds.S                        |   1 +
+ xen/common/domain.c                           |  13 +
+ xen/common/keyhandler.c                       |   4 +
+ xen/drivers/Kconfig                           |   2 +
+ xen/drivers/Makefile                          |   1 +
+ xen/drivers/char/console.c                    |  11 +-
+ xen/drivers/vuart/Kconfig                     |  23 ++
+ xen/drivers/vuart/Makefile                    |   3 +
+ xen/drivers/vuart/vuart-mmio.c                | 189 ++++++++++
+ .../vpl011.c =3D> drivers/vuart/vuart-pl011.c}  | 347 +++++++++++++-----
+ xen/drivers/vuart/vuart.c                     |  95 +++++
+ xen/include/xen/domain-emu.h                  |  33 ++
+ xen/include/xen/domain.h                      |   2 +
+ xen/include/xen/sched.h                       |   2 +
+ xen/include/xen/vuart.h                       |  72 ++++
+ xen/include/xen/xen.lds.h                     |  10 +
+ 35 files changed, 771 insertions(+), 522 deletions(-)
+ delete mode 100644 xen/arch/arm/include/asm/vpl011.h
+ delete mode 100644 xen/arch/arm/vuart.c
+ delete mode 100644 xen/arch/arm/vuart.h
+ create mode 100644 xen/drivers/vuart/Kconfig
+ create mode 100644 xen/drivers/vuart/Makefile
+ create mode 100644 xen/drivers/vuart/vuart-mmio.c
+ rename xen/{arch/arm/vpl011.c =3D> drivers/vuart/vuart-pl011.c} (71%)
+ create mode 100644 xen/drivers/vuart/vuart.c
+ create mode 100644 xen/include/xen/domain-emu.h
+ create mode 100644 xen/include/xen/vuart.h
+
+--=20
+2.34.1
+
+
 
