@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1A3C77B7C
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022953.1398834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA493C71157
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1022955.1398840 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuq4-0002Dp-FE; Tue, 24 Jun 2025 04:00:52 +0000
+	id 1uTuq4-0002Gs-Py; Tue, 24 Jun 2025 04:00:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022953.1398834; Tue, 24 Jun 2025 04:00:52 +0000
+Received: by outflank-mailman (output) from mailman id 1022955.1398840; Tue, 24 Jun 2025 04:00:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuq4-0002Di-CH; Tue, 24 Jun 2025 04:00:52 +0000
-Received: by outflank-mailman (input) for mailman id 1022953;
- Tue, 24 Jun 2025 04:00:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uTuq4-0002FM-Iu; Tue, 24 Jun 2025 04:00:52 +0000
+Received: by outflank-mailman (input) for mailman id 1022955;
+ Tue, 24 Jun 2025 04:00:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1A0Y=ZH=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uTumS-000639-86
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:57:08 +0000
-Received: from mail-10629.protonmail.ch (mail-10629.protonmail.ch
- [79.135.106.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4b73ea28-50af-11f0-b894-0df219b8e170;
- Tue, 24 Jun 2025 05:57:06 +0200 (CEST)
+ id 1uTulb-0006IZ-GS
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:56:15 +0000
+Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
+ [109.224.244.17]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2c8d3310-50af-11f0-a30f-13f23c93f187;
+ Tue, 24 Jun 2025 05:56:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,114 +38,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b73ea28-50af-11f0-b894-0df219b8e170
+X-Inumbo-ID: 2c8d3310-50af-11f0-a30f-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1750737425; x=1750996625;
-	bh=EZ+uMveraa+cDZkwCgDIWFYhH2jzngRaVV7LukeCweg=;
+	s=protonmail; t=1750737373; x=1750996573;
+	bh=EZPSUcu7la0M45CwJVaWkAOhNHBB8cLtWWRrJ9AK15Q=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=XYoKRTdUwDz/DU7S9mYIwzelOwKSVrRTMDn1HZvw6DdtwhN77jLq6ATpPRZoN/qg3
-	 YmaDRlyNpPIshkXaoGy4WRAn/4qwpjEAAa0aSxqkarl1JfknvJVAcirucw+7wTxtte
-	 b+s0q4KQQmHBPSv9xOmruko/r0oi+A7NVBwxaQKKgo2Ky7DOqi5aKlpkNBxTyjrQDo
-	 we0wtEUi/OatP7tFJ58T7DSt5p3WkHVYp7zuhcWu8xdmDYgUoaHr4G3sZK/1DPhqJK
-	 L3xL/Mbz8KhFT0arBWGp2tnY1nlsVZsz9gaNOmOJ5V0S3ni8eB8xQ+oTO4ytRTAUM1
-	 M0yoalpTT9k2w==
-Date: Tue, 24 Jun 2025 03:57:00 +0000
+	b=cDkAGXIxwmH2Q6b45ukKQqCRljR8aIantC+Yo2I9dkyIfGby3MAZxLEiS9PJiq5A9
+	 7TneQ+1A3wYc9m+sTTeRnDH+leZfPfqgpoNL/wdirJ682s47muibdxni48t0sc5KHS
+	 Wi0RaXeKMJvriUfARBRDSN0/bkYiOVPdYvAVOjqA5Q+tlHXj6CJT+SX/g/sjozDO3N
+	 qnFYsQ6kMzapzR/Xx42PKfPK+mb43s7C6DWMZX45DVd5PSH4PcQPBUFIbuj0Q+bxMf
+	 AM74dmkPd1GOGYx3vRSnJBltwBDAu7epwcNR3vVet8V7vLhlvMO4S1Y8xza2SeI77f
+	 pFzjvfz6Pyacg==
+Date: Tue, 24 Jun 2025 03:56:09 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v1 14/16] drivers/vuart: move simple MMIO-based UART emulator
-Message-ID: <20250624035443.344099-15-dmukhin@ford.com>
+Subject: [PATCH v1 08/16] arm/vuart: move simple MMIO-based vUART declarations to common header
+Message-ID: <20250624035443.344099-9-dmukhin@ford.com>
 In-Reply-To: <20250624035443.344099-1-dmukhin@ford.com>
 References: <20250624035443.344099-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: f583a78ed85278e4f659d4fbdd3a908ebf03d47f
+X-Pm-Message-ID: 41115d32da3b21d594ea62d30a415d088e6afb20
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>=20
 
-Move simple MMIO-based UART emulator under drivers/vuart and rename it to
-vuart-mmio.c to keep "vuart" for the vUART framework.
+Merge arch/arm/vuart.h with include/xen/vuart.h.
 
-No functional change intended.
+No functional change.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/Kconfig                                 | 8 --------
- xen/arch/arm/Makefile                                | 1 -
- xen/drivers/vuart/Kconfig                            | 9 +++++++++
- xen/drivers/vuart/Makefile                           | 1 +
- xen/{arch/arm/vuart.c =3D> drivers/vuart/vuart-mmio.c} | 0
- 5 files changed, 10 insertions(+), 9 deletions(-)
- rename xen/{arch/arm/vuart.c =3D> drivers/vuart/vuart-mmio.c} (100%)
+ xen/arch/arm/domain.c   |  1 -
+ xen/arch/arm/vuart.c    |  3 +--
+ xen/arch/arm/vuart.h    | 54 -----------------------------------------
+ xen/include/xen/vuart.h | 20 +++++++++++++++
+ 4 files changed, 21 insertions(+), 57 deletions(-)
+ delete mode 100644 xen/arch/arm/vuart.h
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 6eeae97293f2..7b915abc6f18 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -170,14 +170,6 @@ config NEW_VGIC
- =09problems with the standard emulation.
- =09At the moment this implementation is not security supported.
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 68297e619bad..3579d10d7e1d 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -31,7 +31,6 @@
+ #include <asm/vtimer.h>
 =20
--config HAS_VUART_MMIO
--=09bool "Emulated UART for hardware domain"
--=09default y
--=09help
--=09  Allows a hardware domain to use a minimalistic UART (single transmit
--=09  and status register) which takes information from dtuart. Note that t=
-his
--=09  UART is not intended to be exposed (e.g. via device-tree) to a domain=
-.
+ #include "vpci.h"
+-#include "vuart.h"
+=20
+ DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
+=20
+diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
+index bd2f425214b7..5403ed284846 100644
+--- a/xen/arch/arm/vuart.c
++++ b/xen/arch/arm/vuart.c
+@@ -28,8 +28,7 @@
+ #include <xen/serial.h>
+ #include <asm/mmio.h>
+ #include <xen/perfc.h>
 -
- config ARM_SSBD
- =09bool "Speculative Store Bypass Disable" if EXPERT
- =09depends on HAS_ALTERNATIVE
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 8475043d8701..24bc9c88f7ac 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -67,7 +67,6 @@ obj-$(CONFIG_VM_EVENT) +=3D vm_event.o
- obj-y +=3D vtimer.o
- obj-y +=3D vsmc.o
- obj-y +=3D vpsci.o
--obj-$(CONFIG_HAS_VUART_MMIO) +=3D vuart.o
+-#include "vuart.h"
++#include <xen/vuart.h>
 =20
- extra-y +=3D xen.lds
+ #define domain_has_vuart(d) ((d)->arch.vuart.info !=3D NULL)
 =20
-diff --git a/xen/drivers/vuart/Kconfig b/xen/drivers/vuart/Kconfig
-index d8df0f6d1b3c..6002817152df 100644
---- a/xen/drivers/vuart/Kconfig
-+++ b/xen/drivers/vuart/Kconfig
-@@ -3,6 +3,15 @@ config HAS_VUART
+diff --git a/xen/arch/arm/vuart.h b/xen/arch/arm/vuart.h
+deleted file mode 100644
+index 726846355c3b..000000000000
+--- a/xen/arch/arm/vuart.h
++++ /dev/null
+@@ -1,54 +0,0 @@
+-/*
+- * xen/arch/arm/vuart.h
+- *
+- * Virtual UART Emulation Support
+- *
+- * Ian Campbell <ian.campbell@citrix.com>
+- * Copyright (c) 2012 Citrix Systems.
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- */
+-
+-#ifndef __ARCH_ARM_VUART_H__
+-#define __ARCH_ARM_VUART_H__
+-
+-struct domain;
+-
+-#ifdef CONFIG_HAS_VUART_MMIO
+-
+-int domain_vuart_init(struct domain *d);
+-void domain_vuart_free(struct domain *d);
+-
+-#else
+-
+-static inline int domain_vuart_init(struct domain *d)
+-{
+-    /*
+-     * The vUART is unconditionally inialized for the hw domain. So we
+-     * can't return an error.
+-     */
+-    return 0;
+-}
+-
+-static inline void domain_vuart_free(struct domain *d) {};
+-
+-#endif /* CONFIG_HAS_VUART_MMIO */
+-
+-#endif /* __ARCH_ARM_VUART_H__ */
+-
+-/*
+- * Local variables:
+- * mode: C
+- * c-file-style: "BSD"
+- * c-basic-offset: 4
+- * indent-tabs-mode: nil
+- * End:
+- */
+diff --git a/xen/include/xen/vuart.h b/xen/include/xen/vuart.h
+index cae72ac9c6b9..928b60bbb4e2 100644
+--- a/xen/include/xen/vuart.h
++++ b/xen/include/xen/vuart.h
+@@ -43,6 +43,26 @@ static inline int vuart_putchar(struct domain *d, char c=
+)
 =20
- if (ARM_32 || ARM_64)
+ #endif /* CONFIG_HAS_VUART_PL011 */
 =20
-+config HAS_VUART_MMIO
-+=09bool "Simple MMIO-based emulated UART support"
-+=09default y
-+=09select HAS_VUART
-+=09help
-+=09  Enables minimalistic UART (single transmit and status register) which
-+=09  takes information from dtuart. Note that this UART is not intended to
-+=09  be exposed (e.g. via device-tree) to a domain.
++#ifdef CONFIG_HAS_VUART_MMIO
 +
- config HAS_VUART_PL011
- =09bool "Emulated PL011 UART support"
- =09default y
-diff --git a/xen/drivers/vuart/Makefile b/xen/drivers/vuart/Makefile
-index 3b7069f1cf95..1c775ffb7f1d 100644
---- a/xen/drivers/vuart/Makefile
-+++ b/xen/drivers/vuart/Makefile
-@@ -1 +1,2 @@
-+obj-$(CONFIG_HAS_VUART_MMIO) +=3D vuart-mmio.o
- obj-$(CONFIG_HAS_VUART_PL011) +=3D vuart-pl011.o
-diff --git a/xen/arch/arm/vuart.c b/xen/drivers/vuart/vuart-mmio.c
-similarity index 100%
-rename from xen/arch/arm/vuart.c
-rename to xen/drivers/vuart/vuart-mmio.c
++int domain_vuart_init(struct domain *d);
++void domain_vuart_free(struct domain *d);
++
++#else
++
++static inline int domain_vuart_init(struct domain *d)
++{
++    /*
++     * The vUART is unconditionally inialized for the hw domain. So we
++     * can't return an error.
++     */
++    return 0;
++}
++
++static inline void domain_vuart_free(struct domain *d) {};
++
++#endif /* CONFIG_HAS_VUART_MMIO */
++
+ #endif /* XEN_VUART_H */
+=20
+ /*
 --=20
 2.34.1
 
