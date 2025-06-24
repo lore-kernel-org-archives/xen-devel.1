@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22007C7EE33
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 16:40:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1023954.1400038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC767C77B7C
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 16:46:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1023990.1400068 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uU6gk-0000jS-Ie; Tue, 24 Jun 2025 16:40:02 +0000
+	id 1uU6n5-00040c-Rr; Tue, 24 Jun 2025 16:46:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1023954.1400038; Tue, 24 Jun 2025 16:40:02 +0000
+Received: by outflank-mailman (output) from mailman id 1023990.1400068; Tue, 24 Jun 2025 16:46:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uU6gk-0000hQ-E5; Tue, 24 Jun 2025 16:40:02 +0000
-Received: by outflank-mailman (input) for mailman id 1023954;
- Tue, 24 Jun 2025 16:40:00 +0000
+	id 1uU6n5-00040V-O0; Tue, 24 Jun 2025 16:46:35 +0000
+Received: by outflank-mailman (input) for mailman id 1023990;
+ Tue, 24 Jun 2025 16:46:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=X7et=ZH=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uU6gi-00006A-Rw
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 16:40:00 +0000
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
- [2a00:1450:4864:20::443])
+ <SRS0=L371=ZH=bounce.vates.tech=bounce-md_30504962.685ad667.v1-0507621ca80f40ce8c63b7ec82219b8d@srs-se1.protection.inumbo.net>)
+ id 1uU6n5-00040P-8x
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 16:46:35 +0000
+Received: from mail134-21.atl141.mandrillapp.com
+ (mail134-21.atl141.mandrillapp.com [198.2.134.21])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id deada2f6-5119-11f0-a30f-13f23c93f187;
- Tue, 24 Jun 2025 18:40:00 +0200 (CEST)
-Received: by mail-wr1-x443.google.com with SMTP id
- ffacd0b85a97d-3a4f379662cso4592513f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Jun 2025 09:40:00 -0700 (PDT)
-Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
- [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e810caefsm2295472f8f.87.2025.06.24.09.39.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jun 2025 09:39:58 -0700 (PDT)
+ id c8933281-511a-11f0-a30f-13f23c93f187;
+ Tue, 24 Jun 2025 18:46:33 +0200 (CEST)
+Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail134-21.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4bRW7C4KDWz1XMfdq
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Jun 2025 16:46:31 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 0507621ca80f40ce8c63b7ec82219b8d; Tue, 24 Jun 2025 16:46:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,192 +45,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: deada2f6-5119-11f0-a30f-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1750783199; x=1751387999; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YY0iNm4JGds+kin8aZfprVF5SX7hTwH9tOxocIXXJ6g=;
-        b=onG1AVWLY+vhlyaFkWI9HV7F7lNEopuMzpCDsB4nhCvsDSCLi0XV5wDIxUUQGAGoH4
-         5oONiXXq8kDrNNq8W7RlDO1yrlGM6zlFxV+hrZuFujtXo+R1FYQof/wSnVyqE3b9tPTZ
-         XDU/rDMk5PJcaXpkVan2+EST2t/Tq9QHjF2b0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750783199; x=1751387999;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YY0iNm4JGds+kin8aZfprVF5SX7hTwH9tOxocIXXJ6g=;
-        b=s5e9RCkZFnpomr7JmJyK8qqxNrPvYnM4zGjM0cbCIxvstxjniPtpWzduMCNHoPl1vd
-         Zm+OIpVIiBvKd7ijkRqvua8GNKjlQAFjPAzV22yZsZhCR/cKezi5YHcJI2nIqu24blYe
-         QS5Vtl4hi7vy1Y1tANFQ1K3K0jYpAi/wRacFsrqKFatJnZUrHMppdf3AiqwEX+CDRRFs
-         X+caGT+87+n5f9To85lX0pLr2zyytjzVR2W0sFOUj5igPBtMyx6c5IqG6DWgBuBpB/y3
-         mWEwTGKiISfCwpyBfLsENq3vP8MEvMTVKsv9kiNdp7enOFY56o6e06QP8R4NVGuTK9s4
-         SBuw==
-X-Gm-Message-State: AOJu0Yxy7JTT+m2IeCp5bG5IiXwpoTPwh00L4msMXDVVIV6NDdwgyxv+
-	7LyRSt3S+/OFuFvYtfRq0LzrwmSUaUnEKZeOKniKuA7nhHh2wKKG2xXGVm+bbvbNrU3zfcJsA3E
-	EmYhQ+s0S+tTH
-X-Gm-Gg: ASbGnctHIBL5GaecG0AEjmF8Zexv/MZvis4lOx4lNMz8nwpNYns+rsqt6UlICIeRIIo
-	eqaUyFQ9bN6MSa+2cQAGpJKCPTCt3Ld0ial+8jh75/ZY9tXEt5RO8ncRE6i7NoVO5WrAGRMVwkp
-	JtG3ZSf6PZqN00ye7+0UYrdwtC2BWDHH0D0PrK3ne+Q1GDixBO5RvhCduD2qF7Up7EiPnmS8HsH
-	q71fH3zybgEuGSqf78jkJK0hMX2oWbAoLhrEcQCwKEUDqrUJ4lzRIw15sKXqKd1pMWp8GuUkrTu
-	Awe04xr5Bkdbw9U24LSrbAWM7p9GvIHEYKmwmY2jiq8fU/EcYFbwMrHk1djBYKUn8R13EhYFOuq
-	gc8s4uCxE/w9Be8glfVdt48B+qUCkdrn95uyOVImCljsUIw==
-X-Google-Smtp-Source: AGHT+IHMBKXngsA9cu19BlMGLWeCIFT1NTU75mT8aDGPfmHjn9bd+SvP254RUlOgN4/hfW0Vr8ZBPQ==
-X-Received: by 2002:a05:6000:230b:b0:3a5:8a68:b823 with SMTP id ffacd0b85a97d-3a6d12af83bmr12768448f8f.23.1750783199289;
-        Tue, 24 Jun 2025 09:39:59 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 2/4] x86/idle: Remove MFENCEs for CLFLUSH_MONITOR
-Date: Tue, 24 Jun 2025 17:39:49 +0100
-Message-Id: <20250624163951.301743-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250624163951.301743-1-andrew.cooper3@citrix.com>
-References: <20250624163951.301743-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: c8933281-511a-11f0-a30f-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1750783591; x=1751053591;
+	bh=utlhzJJl5garRAOCZabEjFWcBAsz0PPqqW4UKkCMth0=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=ZBOi1pfELwJ4xvdgVWseQlyN9OeAWO/XAECT6JzAK0XTcyMLL2fJ2V5HMi+gawCl7
+	 NPlG3M3i19zImSd2irlaIqNdrOZQRzlldb3wHpbGLkv7HF0H64GE9oHwm7A4Lidtgd
+	 E7kF3yCHTijtUVMfkCepP7Qs3nHtlwQzFYvkdyNsWqnf8hYynFlUrnJgZKxuDfI3mP
+	 uLEfJY1Ic/FQMj4JHgTGOEPZE2vJpT9v8VNMsOejI0lF6yDhJGTkhKkB/PQ+ee4RSs
+	 9Fo6a7BfaRc8C6vnicZNlX48DfyDkKtmP6u3NqLQNImv1TgPodcsr962PbCKcjyjnG
+	 YiNQ3va7GdV3Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1750783591; x=1751044091; i=teddy.astie@vates.tech;
+	bh=utlhzJJl5garRAOCZabEjFWcBAsz0PPqqW4UKkCMth0=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=G7kGrDctVfeI5afiYHBDXctzA1AZAQa9Awn8QClkMZo625USzY9fZzwBXQl6gACCJ
+	 /T8w6yXQivwNiWDfJP/fKiyhOzYZZ4lj24xMCwiERVBA88oluBs5dce8IavajRd7Tx
+	 oQDlGfvgduu54kUR7CImqJqNY0bDzCHDeX6KQGviay3/2c4ZDlvBtZ6/kNQwV5pPJr
+	 KoL/I7Mqi/HQQzDOGa0WDEJsRUXb9k7HzxaRRuhKaVdoOFX2G0U2vtVhcV7/VE8YV+
+	 bvZqbmhIyDaQepcIYW9+6TMFWjyu7PJ72Y/kxbe1Q6Ji/ioFXFlQBqTuwIjJ+rJNMK
+	 aY5qDSaB5BntA==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20xenstore=20-=20Suggestion=20of=20batching=20watch=20events?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1750783590303
+Message-Id: <6516c9bf-204d-45f6-9e24-e63150d3f354@vates.tech>
+To: "Andriy Sultanov" <sultanovandriy@gmail.com>, xen-devel@lists.xenproject.org
+Cc: "=?utf-8?Q?J=C3=BCrgen=20Gro=C3=9F?=" <jgross@suse.com>, "=?utf-8?Q?Edwin=20T=C3=B6r=C3=B6k?=" <edwin.torok@cloud.com>, ngoc-tu.dinh@vates.tech, "Christian Lindig" <christian.lindig@citrix.com>
+References: <47b7f870-e1d9-44c9-b8ea-5b9028843963@gmail.com>
+In-Reply-To: <47b7f870-e1d9-44c9-b8ea-5b9028843963@gmail.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.0507621ca80f40ce8c63b7ec82219b8d?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250624:md
+Date: Tue, 24 Jun 2025 16:46:31 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Commit 48d32458bcd4 ("x86, idle: add barriers to CLFLUSH workaround") was
-inherited from Linux and added MFENCEs around the AAI65 errata fix.
+Hello,
 
-The SDM now states:
+Le 24/06/2025 =C3=A0 16:53, Andriy Sultanov a =C3=A9crit=C2=A0:
+> Currently, as far as I am aware, the ability of xenstore clients to 
+> properly
+> handle and detect batch updates is somewhat lacking. Transactions are not
+> directly visible to the clients watching a particular directory - they wi=
+ll
+> receive a lot of individual watch_event's once the transaction is 
+> committed,
+> without any indication when such updates are going to end.
+> 
+> Clients such as xenopsd from the xapi toolstack are reliant on xenstore t=
+o
+> track their managed domains, and a flood of individual updates most often
+> results in a flood of events raised from xenopsd to xapi (There are
+> consolidation mechanisms implemented there, with updates getting merged
+> together, but if xapi picks up update events from the queue quickly 
+> enough, it
+> will only get more update events later)
+> 
+> The need for batching is fairly evident from the fact that XenServer's 
+> Windows
+> PV drivers, for example, adopted an ad-hoc "batch" optimization (not 
+> documented
+> anywhere, of course), where some sequence of writes is followed by a 
+> write of
+> the value "1" to "data/updated". This used to be honoured by xapi, which 
+> would
+> not consider the guest agent update done until it received notice of such=
+ a
+> "batch ended" update, but it caused xapi to miss updates that were not 
+> followed
+> by such a write, so xapi now ignores this ad-hoc batching. One could 
+> imagine
+> many workarounds here (for example, some sort of a mechanism where xenops=
+d
+> stalls an update for a second to see if any more related updates show up 
+> and
+> only then notifies xapi of it, with obvious trade-offs), but IMO it 
+> could be
+> worth considering making this easier on the xenstore side for different
+> use-cases.
+> 
+> Suggestion:
+> WATCH_EVENT's req_id and tx_id are currently 0. Could it be possible, for
+> example, to modify this such that watch events coming as a result of a
+> transaction commit (a "batch") have tx_id of the corresponding transactio=
+n
+> and req_id of, say, 2 if it's the last such watch event of a batch and 1
+> otherwise? Old clients would still ignore these values, but it would allo=
+w
+> some others to detect if an update is part of a logical batch that 
+> doesn't end
+> until its last event.
+> 
 
-  Executions of the CLFLUSH instruction are ordered with respect to each
-  other and with respect to writes, locked read-modify-write instructions,
-  and fence instructions[1].
+I find this a bit problematic as it adds assumption on a well-behaving 
+xenstored. What happens if you receive WATCH_EVENTs with only 1 (and no 
+2) ? Should the xenstore client assume that a WATCH_EVENT with 2 may 
+come at some point (lingering some arbitrary time), or still process it 
+in a singular way (like currently) ?
 
-with footnote 1 reading:
+Without changing the protocol itself, we can improve the situation at 
+the xenstored/client level.
 
-  Earlier versions of this manual specified that executions of the CLFLUSH
-  instruction were ordered only by the MFENCE instruction.  All processors
-  implementing the CLFLUSH instruction also order it relative to the other
-  operations enumerated above.
+xenstore being architecturally a ring buffer (and a socket when 
+communicating directly with Dom0), we can batch multiples WATCH_EVENT in 
+a atomic way (up to ring size with ring buffer). In a way where the 
+client will be able to process multiple WATCH_EVENT without eventually 
+stalling.
 
-I.e. the MFENCEs came about because of an incorrect statement in the SDM.
+(with ring buffer : write multiples xs_wire messages and only then 
+update ring index and raise event channel)
 
-The Spec Update (no longer available on Intel's website) simply says "issue a
-CLFLUSH", with no mention of MFENCEs.
+In userland, this could take the form as xenstored pushing multiples 
+messages through a single send(), so the client would be able to perform 
+all the recv() at once.
 
-As this erratum is specific to Intel, it's fine to remove the the MFENCEs; AMD
-CPUs of a similar vintage do port otherwise-unordered CLFLUSHs.
+> Is this beyond the scope of what xenstored wants to do? From a first 
+> glance,
+> this does not seem to introduce obvious unwanted information leaks 
+> either, but
+> I could be wrong. I would love to hear if this is something that could be
+> interesting to others and if this could be considered at all.
+> 
+> Thank you!
+> 
+> 
+> 
 
-Move the feature bit into the BUG range (rather than FEATURE), and move the
-workaround into monitor() itself.
 
-The erratum check itself must use setup_force_cpu_cap().  It needs activating
-if any CPU needs it, not if all of them need it.
 
-Fixes: 48d32458bcd4 ("x86, idle: add barriers to CLFLUSH workaround")
-Fixes: 96d1b237ae9b ("x86/Intel: work around Xeon 7400 series erratum AAI65")
-Link: https://web.archive.org/web/20090219054841/http://download.intel.com/design/xeon/specupdt/32033601.pdf
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+Teddy Astie | Vates XCP-ng Developer
 
-https://git.kernel.org/linus/1f13c60d84e880df6698441026e64f84c7110c49 is my
-equivalent patch to Linux.
----
- xen/arch/x86/acpi/cpu_idle.c           | 22 +++-------------------
- xen/arch/x86/cpu/intel.c               |  3 ++-
- xen/arch/x86/include/asm/cpufeatures.h |  3 ++-
- 3 files changed, 7 insertions(+), 21 deletions(-)
+XCP-ng & Xen Orchestra - Vates solutions
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index 40af42a18fb8..e9493f7f577f 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -63,6 +63,9 @@
- static always_inline void monitor(
-     const void *addr, unsigned int ecx, unsigned int edx)
- {
-+    alternative_input("", "clflush (%[addr])", X86_BUG_CLFLUSH_MONITOR,
-+                      [addr] "a" (addr));
-+
-     asm volatile ( "monitor"
-                    :: "a" (addr), "c" (ecx), "d" (edx) );
- }
-@@ -476,13 +479,6 @@ void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
-     s_time_t expires = per_cpu(timer_deadline, cpu);
-     const void *monitor_addr = &mwait_wakeup(cpu);
- 
--    if ( boot_cpu_has(X86_FEATURE_CLFLUSH_MONITOR) )
--    {
--        mb();
--        clflush(monitor_addr);
--        mb();
--    }
--
-     monitor(monitor_addr, 0, 0);
-     smp_mb();
- 
-@@ -917,19 +913,7 @@ void cf_check acpi_dead_idle(void)
- 
-         while ( 1 )
-         {
--            /*
--             * 1. The CLFLUSH is a workaround for erratum AAI65 for
--             * the Xeon 7400 series.  
--             * 2. The WBINVD is insufficient due to the spurious-wakeup
--             * case where we return around the loop.
--             * 3. Unlike wbinvd, clflush is a light weight but not serializing 
--             * instruction, hence memory fence is necessary to make sure all 
--             * load/store visible before flush cache line.
--             */
--            mb();
--            clflush(mwait_ptr);
-             monitor(mwait_ptr, 0, 0);
--            mb();
-             mwait(cx->address, 0);
-         }
-     }
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index ef9368167a0d..5215b5405c76 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -446,6 +446,7 @@ static void __init probe_mwait_errata(void)
-  *
-  * Xeon 7400 erratum AAI65 (and further newer Xeons)
-  * MONITOR/MWAIT may have excessive false wakeups
-+ * https://web.archive.org/web/20090219054841/http://download.intel.com/design/xeon/specupdt/32033601.pdf
-  */
- static void Intel_errata_workarounds(struct cpuinfo_x86 *c)
- {
-@@ -463,7 +464,7 @@ static void Intel_errata_workarounds(struct cpuinfo_x86 *c)
- 
- 	if (c->x86 == 6 && cpu_has_clflush &&
- 	    (c->x86_model == 29 || c->x86_model == 46 || c->x86_model == 47))
--		__set_bit(X86_FEATURE_CLFLUSH_MONITOR, c->x86_capability);
-+		setup_force_cpu_cap(X86_BUG_CLFLUSH_MONITOR);
- 
- 	probe_c3_errata(c);
- 	if (system_state < SYS_STATE_smp_boot)
-diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
-index 9e3ed21c026d..84c93292c80c 100644
---- a/xen/arch/x86/include/asm/cpufeatures.h
-+++ b/xen/arch/x86/include/asm/cpufeatures.h
-@@ -19,7 +19,7 @@ XEN_CPUFEATURE(ARCH_PERFMON,      X86_SYNTH( 3)) /* Intel Architectural PerfMon
- XEN_CPUFEATURE(TSC_RELIABLE,      X86_SYNTH( 4)) /* TSC is known to be reliable */
- XEN_CPUFEATURE(XTOPOLOGY,         X86_SYNTH( 5)) /* cpu topology enum extensions */
- XEN_CPUFEATURE(CPUID_FAULTING,    X86_SYNTH( 6)) /* cpuid faulting */
--XEN_CPUFEATURE(CLFLUSH_MONITOR,   X86_SYNTH( 7)) /* clflush reqd with monitor */
-+/* Bit 7 unused */
- XEN_CPUFEATURE(APERFMPERF,        X86_SYNTH( 8)) /* APERFMPERF */
- XEN_CPUFEATURE(MFENCE_RDTSC,      X86_SYNTH( 9)) /* MFENCE synchronizes RDTSC */
- XEN_CPUFEATURE(XEN_SMEP,          X86_SYNTH(10)) /* SMEP gets used by Xen itself */
-@@ -52,6 +52,7 @@ XEN_CPUFEATURE(USE_VMCALL,        X86_SYNTH(30)) /* Use VMCALL instead of VMMCAL
- #define X86_BUG_NULL_SEG          X86_BUG( 1) /* NULL-ing a selector preserves the base and limit. */
- #define X86_BUG_CLFLUSH_MFENCE    X86_BUG( 2) /* MFENCE needed to serialise CLFLUSH */
- #define X86_BUG_IBPB_NO_RET       X86_BUG( 3) /* IBPB doesn't flush the RSB/RAS */
-+#define X86_BUG_CLFLUSH_MONITOR   X86_BUG( 4) /* MONITOR requires CLFLUSH */
- 
- #define X86_SPEC_NO_LFENCE_ENTRY_PV X86_BUG(16) /* (No) safety LFENCE for SPEC_CTRL_ENTRY_PV. */
- #define X86_SPEC_NO_LFENCE_ENTRY_INTR X86_BUG(17) /* (No) safety LFENCE for SPEC_CTRL_ENTRY_INTR. */
--- 
-2.39.5
+web: https://vates.tech
+
 
 
