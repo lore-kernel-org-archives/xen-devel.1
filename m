@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBAE3C7EE2A
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022961.1398873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 261F0C71157
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1022973.1398903 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqF-0003Qc-Ky; Tue, 24 Jun 2025 04:01:03 +0000
+	id 1uTuqP-0004p9-LF; Tue, 24 Jun 2025 04:01:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022961.1398873; Tue, 24 Jun 2025 04:01:03 +0000
+Received: by outflank-mailman (output) from mailman id 1022973.1398903; Tue, 24 Jun 2025 04:01:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqF-0003QQ-Gl; Tue, 24 Jun 2025 04:01:03 +0000
-Received: by outflank-mailman (input) for mailman id 1022961;
- Tue, 24 Jun 2025 04:01:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uTuqP-0004ov-Gm; Tue, 24 Jun 2025 04:01:13 +0000
+Received: by outflank-mailman (input) for mailman id 1022973;
+ Tue, 24 Jun 2025 04:01:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1A0Y=ZH=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uTumk-0006IZ-W9
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:57:26 +0000
-Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch
- [109.224.244.17]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 574ca993-50af-11f0-a30f-13f23c93f187;
- Tue, 24 Jun 2025 05:57:26 +0200 (CEST)
+ id 1uTulk-000639-8f
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:56:24 +0000
+Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 31584067-50af-11f0-b894-0df219b8e170;
+ Tue, 24 Jun 2025 05:56:22 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,204 +38,211 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 574ca993-50af-11f0-a30f-13f23c93f187
+X-Inumbo-ID: 31584067-50af-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1750737445; x=1750996645;
-	bh=XBHNSuDbgBBMVwzL8Si36lrzIPH6BlSYi7VpRWP3DmY=;
+	s=protonmail; t=1750737381; x=1750996581;
+	bh=7T+qIgAVUUiUK7ZTM4nraoYQpj7JidPaaBMAqs8DTzI=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=bnXBk56uU4B3o8hqrw5rpChmiKLfMsbyky9ML+81U/L7dns2DqJIL4R1ta73+Zklq
-	 LKpZYSEfpMHdCY2aVUJY4tL9ayh0LDCf+3VhOZ2LV0xJ4LVOOkl9p5jN35AK2iI9Wk
-	 b7N7D0Vs8PPdDLe1hQ5OGkIRsglVNiwKK6+ak0q+g3wMKi1Mv1pUu5bEg6ymEqmuhh
-	 RpcASFCkyjUmFRW2G5bEus6IsUo2rD+3QdeAe7G0aid+QJ7gr6ZLiGR6sClj0zF8ar
-	 vg6Au5UQCIdiTa+958eke45qh+SHAPzN0sbrLDKZvjvYZWVzQ/9rbIc8m1Dk6DjFyQ
-	 cMzzHsBpp1U8A==
-Date: Tue, 24 Jun 2025 03:57:18 +0000
+	b=gYTSUmos3OTm/ib6bGqk3P2QXZpmK3ZA3efPElwsFB2j22ReGJzpzlNg/hquCDDue
+	 7duJ8O/RT7lI2OM25Y7EdJfmy1QuD9NuWx6QIJ6ry0bfqReywOxhqHw1OtudLm72EB
+	 F6nNLRX4EHVYMKSuPNlFoaJ4uJuv4lhfH1R/GhCAmS0ZikHydlXeHnNstFZFox5RfV
+	 kM+roRK/2OKyym7xane8d04kqrd22y3FCSMZCmbbPOVjSFzWKafr56a7NdvGFT7eaJ
+	 I/KLSS/GUTESRGJDgZlpLS1xZNil924ILXHbxpnlNWW5mCeGOIyY/wGe3aRyHrKrc2
+	 2PBDgcb6cXXnw==
+Date: Tue, 24 Jun 2025 03:56:17 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v1 16/16] drivers/vuart: hook simple MMIO-based UART to vUART framework
-Message-ID: <20250624035443.344099-17-dmukhin@ford.com>
+Subject: [PATCH v1 09/16] arm/vuart: use void pointer in domain struct
+Message-ID: <20250624035443.344099-10-dmukhin@ford.com>
 In-Reply-To: <20250624035443.344099-1-dmukhin@ford.com>
 References: <20250624035443.344099-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 1977647053db5ab95117f34afa1110e2b05be770
+X-Pm-Message-ID: 73cbc7bdf76c47a54c44afdb6056201ea0f919a1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>=20
 
-Add new emulation flag DOMAIN_EMU_UART_MMIO and add it to domain_has_vuart(=
-).
-
-Add needed shims for vuart framework integration to MMIO-based UART emulato=
-r.
-
-Remove domain_vuart_{init,free}() and use generic vuart_{init,exit}() calls=
-.
-
-No functional change intended.
+Make all public data structures private to simple MMIO-based vUART
+implementation and switch struct domain to using void pointer to reduce
+compile-time dependencies.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/arm/domain.c          |  7 +++++--
- xen/common/domain.c            |  3 +++
- xen/drivers/vuart/vuart-mmio.c | 36 ++++++++++++++++++++++++++++++++--
- xen/include/xen/domain-emu.h   |  1 +
- xen/include/xen/vuart.h        | 20 -------------------
- 5 files changed, 43 insertions(+), 24 deletions(-)
+ xen/arch/arm/include/asm/domain.h | 14 ++-----
+ xen/arch/arm/vuart.c              | 68 ++++++++++++++++++++++---------
+ 2 files changed, 52 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 3579d10d7e1d..5d7006241be0 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -780,7 +780,10 @@ int arch_domain_create(struct domain *d,
-      * Only use it for the hardware domain because the linux kernel may no=
-t
-      * support multi-platform.
-      */
--    if ( is_hardware_domain(d) && (rc =3D domain_vuart_init(d)) )
-+    if ( is_hardware_domain(d) && IS_ENABLED(CONFIG_HAS_VUART_MMIO) )
-+        d->emulation_flags |=3D DOMAIN_EMU_UART_MMIO;
-+
-+    if ( domain_has_vuart(d) && (rc =3D vuart_init(d, NULL)) !=3D 0 )
-         goto fail;
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
+omain.h
+index d668c11d7e2c..38873c66f1f8 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -90,16 +90,6 @@ struct arch_domain
 =20
-     if ( (rc =3D domain_vpci_init(d)) !=3D 0 )
-@@ -849,7 +852,7 @@ void arch_domain_destroy(struct domain *d)
-     iommu_domain_destroy(d);
-     p2m_final_teardown(d);
-     domain_vgic_free(d);
--    domain_vuart_free(d);
-+    vuart_exit(d);
-     free_xenheap_page(d->shared_info);
+     struct vgic_dist vgic;
+=20
+-#ifdef CONFIG_HAS_VUART_MMIO
+-    struct vuart {
+-#define VUART_BUF_SIZE 128
+-        char                        *buf;
+-        int                         idx;
+-        const struct vuart_info     *info;
+-        spinlock_t                  lock;
+-    } vuart;
+-#endif
+-
+     unsigned int evtchn_irq;
  #ifdef CONFIG_ACPI
-     free_xenheap_pages(d->arch.efi_acpi_table,
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 071fee81fe2c..fc0ceb266d88 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -2443,6 +2443,9 @@ bool domain_has_vuart(const struct domain *d)
-     if ( IS_ENABLED(CONFIG_HAS_VUART_PL011) )
-         mask |=3D DOMAIN_EMU_UART_PL011;
+     void *efi_acpi_table;
+@@ -116,6 +106,10 @@ struct arch_domain
+     void *vpl011;
+ #endif
 =20
-+    if ( IS_ENABLED(CONFIG_HAS_VUART_MMIO) )
-+        mask |=3D DOMAIN_EMU_UART_MMIO;
++#ifdef CONFIG_HAS_VUART_MMIO
++    void *vuart;
++#endif
 +
-     return !!(d->emulation_flags & mask);
- }
+ #ifdef CONFIG_TEE
+     void *tee;
+ #endif
+diff --git a/xen/arch/arm/vuart.c b/xen/arch/arm/vuart.c
+index 5403ed284846..d2f90ab0c64f 100644
+--- a/xen/arch/arm/vuart.c
++++ b/xen/arch/arm/vuart.c
+@@ -29,8 +29,16 @@
+ #include <asm/mmio.h>
+ #include <xen/perfc.h>
+ #include <xen/vuart.h>
++#include <xen/xvmalloc.h>
 =20
-diff --git a/xen/drivers/vuart/vuart-mmio.c b/xen/drivers/vuart/vuart-mmio.=
-c
-index 66fac6c994ce..1888e44e3d94 100644
---- a/xen/drivers/vuart/vuart-mmio.c
-+++ b/xen/drivers/vuart/vuart-mmio.c
-@@ -49,7 +49,7 @@ static const struct mmio_handler_ops vuart_mmio_handler =
-=3D {
-     .write =3D vuart_mmio_write,
- };
+-#define domain_has_vuart(d) ((d)->arch.vuart.info !=3D NULL)
++#define VUART_BUF_SIZE          128
++
++struct vuart {
++    char                        *buf;
++    int                         idx;
++    const struct vuart_info     *info;
++    spinlock_t                  lock;
++};
 =20
--int domain_vuart_init(struct domain *d)
-+static int cf_check vuart_mmio_init(struct domain *d, struct vuart_params =
-*params)
+ static int vuart_mmio_read(struct vcpu *v, mmio_info_t *info,
+                            register_t *r, void *priv);
+@@ -44,39 +52,57 @@ static const struct mmio_handler_ops vuart_mmio_handler=
+ =3D {
+=20
+ int domain_vuart_init(struct domain *d)
  {
-     const struct vuart_info *info;
-     struct vuart *vdev;
-@@ -86,7 +86,7 @@ int domain_vuart_init(struct domain *d)
+-    ASSERT( is_hardware_domain(d) );
++    const struct vuart_info *info;
++    struct vuart *vdev;
+=20
+-    d->arch.vuart.info =3D serial_vuart_info(SERHND_DTUART);
+-    if ( !d->arch.vuart.info )
++    if ( !is_hardware_domain(d) )
+         return 0;
+=20
+-    spin_lock_init(&d->arch.vuart.lock);
+-    d->arch.vuart.idx =3D 0;
++    info =3D serial_vuart_info(SERHND_DTUART);
++    if ( !info )
++        return 0;
+=20
+-    d->arch.vuart.buf =3D xzalloc_array(char, VUART_BUF_SIZE);
+-    if ( !d->arch.vuart.buf )
++    vdev =3D xvzalloc(typeof(*vdev));
++    if ( !vdev )
+         return -ENOMEM;
+=20
+-    register_mmio_handler(d, &vuart_mmio_handler,
+-                          d->arch.vuart.info->base_addr,
+-                          d->arch.vuart.info->size,
++    vdev->buf =3D xzalloc_array(char, VUART_BUF_SIZE);
++    if ( !vdev->buf )
++    {
++        xfree(vdev);
++        return -ENOMEM;
++    }
++
++    spin_lock_init(&vdev->lock);
++
++    register_mmio_handler(d,
++                          &vuart_mmio_handler,
++                          info->base_addr,
++                          info->size,
+                           NULL);
+=20
++    vdev->info =3D info;
++    d->arch.vuart =3D vdev;
++
      return 0;
  }
 =20
--void domain_vuart_free(struct domain *d)
-+static void cf_check vuart_mmio_exit(struct domain *d)
+ void domain_vuart_free(struct domain *d)
  {
-     struct vuart *vdev =3D d->arch.vuart;
+-    if ( !domain_has_vuart(d) )
+-        return;
++    struct vuart *vdev =3D d->arch.vuart;
 =20
-@@ -147,6 +147,38 @@ static int vuart_mmio_write(struct vcpu *v, mmio_info_=
-t *info,
-     return 1;
+-    xfree(d->arch.vuart.buf);
++    if ( vdev )
++    {
++        xfree(vdev->buf);
++        xfree(vdev);
++        d->arch.vuart =3D NULL;
++    }
  }
 =20
-+static void cf_check vuart_mmio_dump(const struct domain *d)
-+{
+ static void vuart_print_char(struct vcpu *v, char c)
+ {
+     struct domain *d =3D v->domain;
+-    struct vuart *uart =3D &d->arch.vuart;
++    struct vuart *uart =3D d->arch.vuart;
+=20
+     if ( !is_console_printable(c) )
+         return ;
+@@ -98,16 +124,17 @@ static int vuart_mmio_read(struct vcpu *v, mmio_info_t=
+ *info,
+                            register_t *r, void *priv)
+ {
+     struct domain *d =3D v->domain;
+-    paddr_t offset =3D info->gpa - d->arch.vuart.info->base_addr;
 +    struct vuart *vdev =3D d->arch.vuart;
-+
-+    if ( !vdev )
-+        return;
-+
-+    /* Allow printing state in case of a deadlock. */
-+    if ( !spin_trylock(&vdev->lock) )
-+        return;
-+
-+    printk("Virtual MMIO UART@%"PRIpaddr" owner %pd\n",
-+           vdev->info->base_addr, d);
-+    printk("  RX FIFO size %u idx %u\n",
-+           VUART_BUF_SIZE, vdev->idx);
-+    printk("  status 0x%lx 0x%lx\n",
-+           vdev->info->status_off, vdev->info->status);
-+
-+    spin_unlock(&vdev->lock);
-+}
-+
-+static const struct vuart_ops vuart_mmio_ops =3D {
-+    .add_fwnode =3D NULL,
-+    .init       =3D vuart_mmio_init,
-+    .exit       =3D vuart_mmio_exit,
-+    .dump       =3D vuart_mmio_dump,
-+    /* Physical console focus is not supported */
-+    .putchar    =3D NULL,
-+};
-+
-+VUART_REGISTER(mmio, &vuart_mmio_ops);
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/domain-emu.h b/xen/include/xen/domain-emu.h
-index 1d3a6c80fadd..9ef607666842 100644
---- a/xen/include/xen/domain-emu.h
-+++ b/xen/include/xen/domain-emu.h
-@@ -18,6 +18,7 @@
- #define DOMAIN_EMU_PCI              (1U << 10)
++    paddr_t offset =3D info->gpa - vdev->info->base_addr;
 =20
- #define DOMAIN_EMU_UART_PL011       (1U << 15)
-+#define DOMAIN_EMU_UART_MMIO        (1U << 16)
+     perfc_incr(vuart_reads);
 =20
- #endif /* XEN_DOMAIN_EMU_H */
+     /* By default zeroed the register */
+     *r =3D 0;
 =20
-diff --git a/xen/include/xen/vuart.h b/xen/include/xen/vuart.h
-index 1f4b47575359..4c923025b4eb 100644
---- a/xen/include/xen/vuart.h
-+++ b/xen/include/xen/vuart.h
-@@ -60,26 +60,6 @@ static inline int vuart_putchar(struct domain *d, char c=
-)
+-    if ( offset =3D=3D d->arch.vuart.info->status_off )
++    if ( offset =3D=3D vdev->info->status_off )
+         /* All holding registers empty, ready to send etc */
+-        *r =3D d->arch.vuart.info->status;
++        *r =3D vdev->info->status;
 =20
- #endif /* CONFIG_HAS_VUART */
+     return 1;
+ }
+@@ -116,11 +143,12 @@ static int vuart_mmio_write(struct vcpu *v, mmio_info=
+_t *info,
+                             register_t r, void *priv)
+ {
+     struct domain *d =3D v->domain;
+-    paddr_t offset =3D info->gpa - d->arch.vuart.info->base_addr;
++    struct vuart *vdev =3D d->arch.vuart;
++    paddr_t offset =3D info->gpa - vdev->info->base_addr;
 =20
--#ifdef CONFIG_HAS_VUART_MMIO
--
--int domain_vuart_init(struct domain *d);
--void domain_vuart_free(struct domain *d);
--
--#else
--
--static inline int domain_vuart_init(struct domain *d)
--{
--    /*
--     * The vUART is unconditionally inialized for the hw domain. So we
--     * can't return an error.
--     */
--    return 0;
--}
--
--static inline void domain_vuart_free(struct domain *d) {};
--
--#endif /* CONFIG_HAS_VUART_MMIO */
--
- #endif /* XEN_VUART_H */
+     perfc_incr(vuart_writes);
 =20
- /*
+-    if ( offset =3D=3D d->arch.vuart.info->data_off )
++    if ( offset =3D=3D vdev->info->data_off )
+         /* ignore any status bits */
+         vuart_print_char(v, r & 0xFF);
+=20
 --=20
 2.34.1
 
