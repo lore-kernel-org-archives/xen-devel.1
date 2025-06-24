@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E5FC77B7F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 14:27:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1023775.1399834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60945C77B7C
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 14:35:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1023795.1399858 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uU4cM-0006bv-7x; Tue, 24 Jun 2025 14:27:22 +0000
+	id 1uU4kM-0000wz-59; Tue, 24 Jun 2025 14:35:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1023775.1399834; Tue, 24 Jun 2025 14:27:22 +0000
+Received: by outflank-mailman (output) from mailman id 1023795.1399858; Tue, 24 Jun 2025 14:35:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uU4cM-0006bi-1Q; Tue, 24 Jun 2025 14:27:22 +0000
-Received: by outflank-mailman (input) for mailman id 1023775;
- Tue, 24 Jun 2025 14:27:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uU4kM-0000ws-1X; Tue, 24 Jun 2025 14:35:38 +0000
+Received: by outflank-mailman (input) for mailman id 1023795;
+ Tue, 24 Jun 2025 14:35:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aTSQ=ZH=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1uU4cL-0006YR-HG
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 14:27:21 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 559fc07b-5107-11f0-b894-0df219b8e170;
- Tue, 24 Jun 2025 16:27:19 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a531fcaa05so2431329f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Jun 2025 07:27:19 -0700 (PDT)
-Received: from localhost.localdomain (253.226.6.51.dyn.plus.net.
- [51.6.226.253]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45380705351sm4602115e9.0.2025.06.24.07.27.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jun 2025 07:27:18 -0700 (PDT)
+ <SRS0=Fpib=ZH=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1uU4kK-0000wk-F1
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 14:35:36 +0000
+Received: from fhigh-b6-smtp.messagingengine.com
+ (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7c5c4bcb-5108-11f0-a30f-13f23c93f187;
+ Tue, 24 Jun 2025 16:35:34 +0200 (CEST)
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 262FF7A01B1;
+ Tue, 24 Jun 2025 10:35:33 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-05.internal (MEProxy); Tue, 24 Jun 2025 10:35:33 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 24 Jun 2025 10:35:31 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,75 +47,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 559fc07b-5107-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1750775238; x=1751380038; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1mBjtI5raQ25OjXe0+sC0wwT7xvu83F7yHgPnqqLXpY=;
-        b=GXqILefRexbyI6FwSUm5bhWo7fmLd9kiXP5B8rpcblj2YGLRCIsZ/2WdBSyclnOC2C
-         AEr9fW9Hi5mobGmt7b0Q8sgArmAX3q3kwiG7Bzg1TvLCQVY12GCUm57FQm8yRLXDRYUS
-         u4jO5ztXMIKjjEbULCz+efmTxlm6NVf07M3T4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750775238; x=1751380038;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1mBjtI5raQ25OjXe0+sC0wwT7xvu83F7yHgPnqqLXpY=;
-        b=ufovB21kTRc87IseTTuo8gCaApfvrPRAdr78SbAz2hHPDrtqZ/s8cJVdFsbar+yqEQ
-         tdfhyvCatuKAIp6F7MkZb5Jn94Sv5NvpzWiX9rIwJsw19LCqLDARdK5QGNRG1z868JcZ
-         eQ6kIwsMTCGrxBNa1nVtWfDxh0OPR/Xl3Y2pnaJXpsYYxJR4gP6anTCOnUaHgpivcH1E
-         iZZmt4+gPk7TvWlIeD/zz+SlYcpLv2HRDEqBciq2i/NBUbBx4Ei9D8LqR4GMILPlTE8g
-         FHEycvI9BmilbdZEDilUbQJmdpujvyJaFK7R+Cv17BXWsynU9hCKxsqLHc4yjP8OkYr3
-         lEYw==
-X-Gm-Message-State: AOJu0YzlwMTaIdQNjhwSmWui13dwT+iaUmX83JMfHGwiwJOT1UVVeMZY
-	za5m+pDOm8P8xSm4NntbxTyKQNsQN+sdacH0GZxx8Kr/pTejV/we7fQEfshXTKTa3saEbv5uR3/
-	K7k5PfRq6/A==
-X-Gm-Gg: ASbGncsV37KKtHC+aO8BUpexPzebdCZn5O15oC4wrzzaViseZCrKh9BBhKENeOhBrgj
-	CixAz7BdLA5yZ4PL7CL0lqaEER9ckUJU1SnziMzqLqJvzUGNreGDQYZmUM2CHZAWLkDHA4tCIv9
-	o+q8SuRmT2KqLB2flpTJBZU/munrxc0/m9dG53CwaUUIO/MNECjm6/5shf5sR/4YAJFtUe34CKf
-	ewVswmrbwQJg2818z88acV+gxijosKBVrpktcGhcD+1j57/cUd4kMJoBMfGJjiv2c1C2goS74UP
-	5TwIVjU0zemwpnzp+c1OLxQQHboXZssXHSRb12EyASv98P+JykdXviIgeUGCfWHEYS0h/XOOrPq
-	a2Nit+E9K7IBka3/eZw3l46lvtrzItQ==
-X-Google-Smtp-Source: AGHT+IGA4Iy4DR72Mj9/KuO4EyvaQcvpIUi1o0Y0hczLkFPQjhj6mw6JoILmIC4qxzBLAJXLGRwukg==
-X-Received: by 2002:a05:6000:2107:b0:3a6:d967:380e with SMTP id ffacd0b85a97d-3a6d9673ec5mr7880515f8f.3.1750775238428;
-        Tue, 24 Jun 2025 07:27:18 -0700 (PDT)
-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
+X-Inumbo-ID: 7c5c4bcb-5108-11f0-a30f-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1750775733;
+	 x=1750862133; bh=1o5WLUPC3/xWp3VpukBP3ELtP/YYgjUGaXyyigzAvT4=; b=
+	SUBlFZQRi+yj7t7+jhRcQEu1eUUnkm8zWZtY9bCwZ/HvJkuWu1OFZp+uI3ojTGpQ
+	+Q3V3unEX0StNZtk5cDgJI9+MUmwEUEF+OUzJ/n8OBP8dbNvO3WIz6twSKfhanOM
+	vhjBsaAT9vb0YB87QXspSstvjTev3vpR6FJD5xiQMEYAtjggbVrkur/uq92Zg1SU
+	JD26Di5lNBYfRzlQwZC7FCM9wRaWg71jtmMUusGpQxEQNIBTPjukvfXXT9OoKKgx
+	3OBAn8oj0/5DrVyYVqwYUSWBFYtgn7Nf+GWJ4yZs4OOZS2sF7d4XEYsWrYPlhub5
+	6JoGgEizoiVPJQaVVJ+kZw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1750775733; x=1750862133; bh=1o5WLUPC3/xWp3VpukBP3ELtP/YYgjUGaXy
+	yigzAvT4=; b=FcnNIE72P7bk8abj8OvGrhFvErc98NYBgLiNMZyUXScMTjfo5Lt
+	Dy0/+JbXyRpsaXPKoNjAB83/5kQLKK8NY3PktrMDFWcA/ggKh0uYgQHO/DE/MCPJ
+	SfKDkM6ghdqLJg+VJe7/25gGiRm980u/AzHmloNoklPvGRL7Y9M+Dyzq+Wem7d6M
+	g8EvZUI8SbGR63o6S6cYrG9/ZKXU61cyIvKEkvieCTZyu7qoqhFJ0IyX9q2HnqNl
+	EQtMpbdOgyAmVPLkSwLOGc4I92Xqf0prdZtDkW5vtbq5NMIoaerWGmvx6i3UnG66
+	7ukD6CHdfID4ogvH+j7WIVAALEkmqr1uGDg==
+X-ME-Sender: <xms:tLdaaFfgDZmkM1n3_lHpMFOE7SV3DXc2LcQCCR4s_LAgQ_yHSGL2FA>
+    <xme:tLdaaDPLoCxUoGG_Cyo5foPEy6yOnsSYZmf5wAHnpHKN8iCIR9BQhUocLIA_cd2lD
+    dm1KITXEo6klw>
+X-ME-Received: <xmr:tLdaaOiuavtr-FYLt_VWZ8KL2f-24qnnR75fCkUWtYfhnGi61rgz3Gb82Ha_AiDOrlGjnqPWg9HJgydaIZAMg2kA3-8uPB4j5Jw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddvgddvtddugecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+    hrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghkucfo
+    rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
+    hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgudelteef
+    vefhfeehieetleeihfejhfeludevteetkeevtedtvdegueetfeejudenucevlhhushhtvg
+    hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhn
+    vhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeegpdhmoh
+    guvgepshhmthhpohhuthdprhgtphhtthhopehfrhgvughirghnohdriihighhlihhosegt
+    lhhouhgurdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnh
+    hprhhojhgvtghtrdhorhhgpdhrtghpthhtohepughpshhmihhthhesrghpvghrthhushhs
+    ohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtg
+    homh
+X-ME-Proxy: <xmx:tLdaaO9UVJg3bs_bMqfUm8e0_cw_ECNtFVvFv-ytZz_kdSJ4nnoKTQ>
+    <xmx:tLdaaBuozmqDCBOCGVsA0TtxbD4IpHW-t8-0qj96_4IQtDCXNQjBTg>
+    <xmx:tLdaaNFx0AjnOpa0cTspUcLM9u6lcVx3LCrcFfXePQW_ivyC5quhTw>
+    <xmx:tLdaaIPNS6T4O7bz4LAeUs3kO8iqiNJshWymTveW4Msh_-AlGXcbyA>
+    <xmx:tLdaaA7cFQN2Mhk48IEaXK_Z6FdnXLSEiRhplSiO-PKt-1GF86lBY7uh>
+Feedback-ID: i1568416f:Fastmail
+Date: Tue, 24 Jun 2025 16:35:29 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Frediano Ziglio <frediano.ziglio@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 0/2] xen/efi: Make boot more flexible, especially with GRUB2
-Date: Tue, 24 Jun 2025 15:27:07 +0100
-Message-ID: <20250624142711.54925-1-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [PATCH 1/2] xen/efi: Handle cases where file didn't come from ESP
+Message-ID: <aFq3sYCAglRrMb8I@mail-itl>
+References: <20250624083157.9334-1-frediano.ziglio@cloud.com>
+ <20250624083157.9334-2-frediano.ziglio@cloud.com>
+ <aFqcQe5quyjhu24P@mail-itl>
+ <CACHz=ZjcZRtjHnUPFRRYd4d-ESv4j2_ssjSTne=6NGCf0s2vBw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="NsN83TDdGENhcKex"
+Content-Disposition: inline
+In-Reply-To: <CACHz=ZjcZRtjHnUPFRRYd4d-ESv4j2_ssjSTne=6NGCf0s2vBw@mail.gmail.com>
 
-The combination of GRUB2, EFI and UKI allows potentially more flexibility.
-For instance is possible to load xen.efi from a no ESP partition leaving
-a boot loader like GRUB2 taking care of the file loading.
-This however requires some changes in Xen to be less restrictive.
-Specifically for GRUB2 these changes allows the usage of "chainloader"
-command with UKI and reading xen.efi from no ESP (so no DeviceHandle
-set) and usage of "linux" and "initrd" commands to load separately
-the kernel (embedding using UKI) and initrd (using LoadFile2 protocol).
 
-Changes since v1:
-- keep read_file fatal when it was so;
-- attempt to use LoadFile2 after trying object section;
-- minor changes (see details on specific changes).
+--NsN83TDdGENhcKex
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 24 Jun 2025 16:35:29 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Frediano Ziglio <frediano.ziglio@cloud.com>
+Cc: xen-devel@lists.xenproject.org,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH 1/2] xen/efi: Handle cases where file didn't come from ESP
 
-Frediano Ziglio (2):
-  xen/efi: Handle cases where file didn't come from ESP
-  xen/efi: Support loading initrd using GRUB2 LoadFile2 protocol
+On Tue, Jun 24, 2025 at 03:05:25PM +0100, Frediano Ziglio wrote:
+> OT: the flow of read_file (specifically "what" handling) looks
+> weird... can I change it?
 
- xen/common/efi/boot.c     | 105 +++++++++++++++++++++++++++++++++++---
- xen/include/efi/efidevp.h |  21 ++++++++
- 2 files changed, 120 insertions(+), 6 deletions(-)
+It tries to avoid duplication of PrintErr calls, while including what
+failed in the error message. Looks like somebody really wanted to avoid
+using goto here... Sure, if you want to clean it up go ahead.
 
--- 
-2.43.0
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
+--NsN83TDdGENhcKex
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmhat7EACgkQ24/THMrX
+1yyKagf/T4PHyxHMgK22dMs0mphUEBQAF4V0+GhogN9r+coPIbAcK3q76HzWvfNK
+B2ipZkOjLI3Tb4QM8xHr4oLybpQkxGK2X8N+jy8wXR6sf3PdccNgeW62rzUcQr2S
+NMX2McS3Lfyrp2sZMBs+OsT85m6ZEjcFrrbA/7BVRKlVvtcmCxw24ih7iDhN25AQ
+ODFuiB9+jK9tZpjv2jLxRZyorTWwXruLjt3sLOMgwqcwgSPpgmcrBfDioC4eLs2h
+uyyOIOP+pRbsiqjJhlJLEhiG7WJVhEGUvEQ0iIM8OsVbEeXS6MVk3+VY4sA9u6zO
++PMpkT9DM3A8qrNpL0DR86hLFklqHA==
+=8XvQ
+-----END PGP SIGNATURE-----
+
+--NsN83TDdGENhcKex--
 
