@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA3FBC77B7C
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:01:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1022988.1398920 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E7EC71157
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jun 2025 04:20:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1023045.1398933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqV-0005a0-FD; Tue, 24 Jun 2025 04:01:19 +0000
+	id 1uTv8m-0003Zr-2S; Tue, 24 Jun 2025 04:20:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1022988.1398920; Tue, 24 Jun 2025 04:01:19 +0000
+Received: by outflank-mailman (output) from mailman id 1023045.1398933; Tue, 24 Jun 2025 04:20:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uTuqV-0005Y3-4l; Tue, 24 Jun 2025 04:01:19 +0000
-Received: by outflank-mailman (input) for mailman id 1022988;
- Tue, 24 Jun 2025 04:01:18 +0000
+	id 1uTv8l-0003Zk-W8; Tue, 24 Jun 2025 04:20:11 +0000
+Received: by outflank-mailman (input) for mailman id 1023045;
+ Tue, 24 Jun 2025 04:20:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1A0Y=ZH=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uTum8-0006IZ-Oh
- for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 03:56:48 +0000
-Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4084eed8-50af-11f0-a30f-13f23c93f187;
- Tue, 24 Jun 2025 05:56:48 +0200 (CEST)
+ id 1uTv8j-0003ZO-Is
+ for xen-devel@lists.xenproject.org; Tue, 24 Jun 2025 04:20:10 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7ea44f8c-50b2-11f0-a30f-13f23c93f187;
+ Tue, 24 Jun 2025 06:20:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,135 +38,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4084eed8-50af-11f0-a30f-13f23c93f187
+X-Inumbo-ID: 7ea44f8c-50b2-11f0-a30f-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1750737407; x=1750996607;
-	bh=5yXPb6SqgHIQ4PIoB8k8GBXcIv2K6UWy6GJUDsY9e8g=;
+	s=w3tumghdxnddrnv33t4pl64rly.protonmail; t=1750738800; x=1750998000;
+	bh=EYYkmXjOENemakgw0TcCwSLXJu0cRjU9Ir4rUnc6dxk=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=SYKGEdQ5sWCwPY6yPcDMhM+HBEIdbuJpsGuY1gSC5qpUJMqIPkoUdzIRKnJX92uNP
-	 MtKjJZhD31QHJnIrXD3+gq0mUqzI+lntp6G9A7J+8LQoLloHKNR4y7nHbaF3gKskyH
-	 eDP/biNweisrUTzDLZiOuR8GTlCbzMJ45wL7RNwjbVI67aLTi0eQGRNbTIe6tAnIUY
-	 TUn/rRdBOC42Dlj6R7FwM6X4Ce4djcKH1za6o7mWN1Z4LtGpc8jF1BNmUzkFiJ6XOP
-	 N0rING2hWudN/qmy8gMJy/8U/pUYjJRLFySPmXhXYLpxr0eAG86XD/v/3CDftMAoCF
-	 PlFQw/m8y4cUQ==
-Date: Tue, 24 Jun 2025 03:56:43 +0000
-To: xen-devel@lists.xenproject.org
+	b=hx042SHsEY3U2rOCY4IWok2QD8yGuTvim4rdq4SWeKYsT30N0laZZlbjWiUXH0Bef
+	 K1q/8uU5Q6s0meCnUTJpiaXjxuUCCn0o+iXncfDUV2bxRejFtM6gUYzf4uYhEXqI8E
+	 Duv2+pJs6yla/0mPMz+eGOPFcLEkQl1lcP8PZUY4bb7fmYKGUbyegTadHsMo0vfe/F
+	 SB4qJCCaIeFgu6qGZaSjJMODwISf6/xsjDjTC95yabJGdlwcofL2S4gBgb3DbgNADS
+	 c+lOsQpJ8XC9P60dME+89xk7z+WQmBLOl57ud6Pr0qw1x3o3VfSpNXnMRZ+5d2dRNe
+	 uxuOqw/QgXchg==
+Date: Tue, 24 Jun 2025 04:19:56 +0000
+To: Jan Beulich <jbeulich@suse.com>
 From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v1 12/16] xen/domain: introduce domain-emu.h
-Message-ID: <20250624035443.344099-13-dmukhin@ford.com>
-In-Reply-To: <20250624035443.344099-1-dmukhin@ford.com>
-References: <20250624035443.344099-1-dmukhin@ford.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v1] xen/domain: fix memory leak in domain_create()
+Message-ID: <aFonaL0FNAHZoBYf@kraken>
+In-Reply-To: <f4b2c2b1-c7af-44d8-878b-ef5a0facbebd@suse.com>
+References: <20250623011514.173367-1-dmukhin@ford.com> <f4b2c2b1-c7af-44d8-878b-ef5a0facbebd@suse.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: b341b04a459a662589cb5e9b9a7be4c7a9828afd
+X-Pm-Message-ID: 59c3443fc97bb0de9a88ccac0d1063c1a91a810a
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-From: Denis Mukhin <dmukhin@ford.com>=20
+On Mon, Jun 23, 2025 at 10:09:54AM +0200, Jan Beulich wrote:
+> On 23.06.2025 03:16, dmkhn@proton.me wrote:
+> > From: Denis Mukhin <dmukhin@ford.com>
+> >
+> > Fix potential memory leak in domain_create() in late hardware domain ca=
+se.
+> >
+> > Fixes: b959f3b820f5 ("xen: introduce hardware domain create flag")
+> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+>=20
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Define an architecture-independent location for describing domain emulation
-flags.
+Thanks.
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
-Original code: https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v=
-1-6-c5d36b31d66c@ford.com/
----
- xen/arch/x86/include/asm/domain.h | 23 ++++++++++++-----------
- xen/include/xen/domain-emu.h      | 30 ++++++++++++++++++++++++++++++
- 2 files changed, 42 insertions(+), 11 deletions(-)
- create mode 100644 xen/include/xen/domain-emu.h
+Just in case, I've seen the patch is committed as
+  3491e85a1505  ("xen/domain: fix memory leak in domain_create()")
+but there's no R-b tag.
 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/d=
-omain.h
-index eafd5cfc903d..c6bc83b4abe0 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -3,6 +3,7 @@
-=20
- #include <xen/mm.h>
- #include <xen/radix-tree.h>
-+#include <xen/domain-emu.h>
- #include <asm/hvm/vcpu.h>
- #include <asm/hvm/domain.h>
- #include <asm/e820.h>
-@@ -458,16 +459,16 @@ struct arch_domain
- } __cacheline_aligned;
-=20
- #ifdef CONFIG_HVM
--#define X86_EMU_LAPIC    XEN_X86_EMU_LAPIC
--#define X86_EMU_HPET     XEN_X86_EMU_HPET
--#define X86_EMU_PM       XEN_X86_EMU_PM
--#define X86_EMU_RTC      XEN_X86_EMU_RTC
--#define X86_EMU_IOAPIC   XEN_X86_EMU_IOAPIC
--#define X86_EMU_PIC      XEN_X86_EMU_PIC
--#define X86_EMU_VGA      XEN_X86_EMU_VGA
--#define X86_EMU_IOMMU    XEN_X86_EMU_IOMMU
--#define X86_EMU_USE_PIRQ XEN_X86_EMU_USE_PIRQ
--#define X86_EMU_VPCI     XEN_X86_EMU_VPCI
-+#define X86_EMU_LAPIC    DOMAIN_EMU_LAPIC
-+#define X86_EMU_HPET     DOMAIN_EMU_HPET
-+#define X86_EMU_PM       DOMAIN_EMU_PM
-+#define X86_EMU_RTC      DOMAIN_EMU_RTC
-+#define X86_EMU_IOAPIC   DOMAIN_EMU_IOAPIC
-+#define X86_EMU_PIC      DOMAIN_EMU_PIC
-+#define X86_EMU_VGA      DOMAIN_EMU_VGA
-+#define X86_EMU_IOMMU    DOMAIN_EMU_IOMMU
-+#define X86_EMU_USE_PIRQ DOMAIN_EMU_PIRQ
-+#define X86_EMU_VPCI     DOMAIN_EMU_PCI
- #else
- #define X86_EMU_LAPIC    0
- #define X86_EMU_HPET     0
-@@ -481,7 +482,7 @@ struct arch_domain
- #define X86_EMU_VPCI     0
- #endif
-=20
--#define X86_EMU_PIT     XEN_X86_EMU_PIT
-+#define X86_EMU_PIT     DOMAIN_EMU_PIT
-=20
- /* This must match XEN_X86_EMU_ALL in xen.h */
- #define X86_EMU_ALL             (X86_EMU_LAPIC | X86_EMU_HPET |         \
-diff --git a/xen/include/xen/domain-emu.h b/xen/include/xen/domain-emu.h
-new file mode 100644
-index 000000000000..410963ff480c
---- /dev/null
-+++ b/xen/include/xen/domain-emu.h
-@@ -0,0 +1,30 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef XEN_DOMAIN_EMU_H
-+#define XEN_DOMAIN_EMU_H
-+
-+/*
-+ * Domain emulation flags.
-+ */
-+#define DOMAIN_EMU_LAPIC            (1U << 0)
-+#define DOMAIN_EMU_HPET             (1U << 1)
-+#define DOMAIN_EMU_PM               (1U << 2)
-+#define DOMAIN_EMU_RTC              (1U << 3)
-+#define DOMAIN_EMU_IOAPIC           (1U << 4)
-+#define DOMAIN_EMU_PIC              (1U << 5)
-+#define DOMAIN_EMU_VGA              (1U << 6)
-+#define DOMAIN_EMU_IOMMU            (1U << 7)
-+#define DOMAIN_EMU_PIT              (1U << 8)
-+#define DOMAIN_EMU_PIRQ             (1U << 9)
-+#define DOMAIN_EMU_PCI              (1U << 10)
-+
-+#endif /* XEN_DOMAIN_EMU_H */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
---=20
-2.34.1
+>=20
+> It may be relevant to mention that we still can't very well use "goto fai=
+l"
+> on this error path, as insufficient struct initialization was done just y=
+et.
+>=20
+> What we may want to consider is to move down the get_unique_id() invocati=
+on.
+> It's not the end of the world to lose one, but that may better be avoided
+> when we easily can.
+>=20
+> > ---
+> > I think that no memory allocation is required before performing late hw=
+dom
+> > checks (ID range and hwdom existance).
+> >
+> > Looks like sanitise_domain_config() could better fit for performing suc=
+h
+> > configuration checks.
+> >
+> > Alternatively, hardware_domid range could be checked via custom parser
+> > instead of code in domain_create() and then hwdom existance can be move=
+d
+> > before alloc_domain_struct().
+> >
+> > Thoughts?
+>=20
+> Keeping related things together is the other desire we commonly have.
 
+Yeah, I see this is to avoid duplicated checks, but verifying hardware_domi=
+d
+range definitely can be moved outside of domain_create()=20
+
+This superfluous memory allocation will need a test case in cert world sinc=
+e
+this is arch-common code :-/
+So, IMO, it is better to avoid it.
+
+>=20
+> Jan
 
 
