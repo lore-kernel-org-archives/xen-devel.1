@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E9FC77B7C
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Jun 2025 07:34:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1024417.1400298 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71BDC7115C
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Jun 2025 07:34:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1024418.1400307 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uUKeG-0007HI-NF; Wed, 25 Jun 2025 07:34:24 +0000
+	id 1uUKeI-0007WB-Tw; Wed, 25 Jun 2025 07:34:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1024417.1400298; Wed, 25 Jun 2025 07:34:24 +0000
+Received: by outflank-mailman (output) from mailman id 1024418.1400307; Wed, 25 Jun 2025 07:34:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uUKeG-0007HB-KT; Wed, 25 Jun 2025 07:34:24 +0000
-Received: by outflank-mailman (input) for mailman id 1024417;
- Wed, 25 Jun 2025 07:34:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uUKeI-0007W4-Qz; Wed, 25 Jun 2025 07:34:26 +0000
+Received: by outflank-mailman (input) for mailman id 1024418;
+ Wed, 25 Jun 2025 07:34:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=edXa=ZI=cloud.com=frediano.ziglio@srs-se1.protection.inumbo.net>)
- id 1uUKeF-00071z-4I
- for xen-devel@lists.xenproject.org; Wed, 25 Jun 2025 07:34:23 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cff02075-5196-11f0-a30f-13f23c93f187;
- Wed, 25 Jun 2025 09:34:22 +0200 (CEST)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a4fea34e07so648369f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jun 2025 00:34:22 -0700 (PDT)
+ id 1uUKeH-00071t-KN
+ for xen-devel@lists.xenproject.org; Wed, 25 Jun 2025 07:34:25 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d0d81e65-5196-11f0-b894-0df219b8e170;
+ Wed, 25 Jun 2025 09:34:24 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45363645a8eso9982275e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jun 2025 00:34:24 -0700 (PDT)
 Received: from localhost.localdomain (253.226.6.51.dyn.plus.net.
  [51.6.226.253]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4538233c05csm11319445e9.5.2025.06.25.00.34.20
+ 5b1f17b1804b1-4538233c05csm11319445e9.5.2025.06.25.00.34.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Jun 2025 00:34:21 -0700 (PDT)
+ Wed, 25 Jun 2025 00:34:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +47,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cff02075-5196-11f0-a30f-13f23c93f187
+X-Inumbo-ID: d0d81e65-5196-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1750836862; x=1751441662; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1750836863; x=1751441663; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Vsyq/VDtJXv+144v9RhWaKYSLA/NOYLJKdqG4Hj8gbU=;
-        b=GzoQLVhIhO0TZ0utu+HsxFuX8zslSeOBPA3K45AS8iwvDbjq6DawN9PDlXChaw/LFz
-         SBz4wlpb7X1P+T0xfuOmpPKCgOCgA1Xd/yKyMnmRWAGkl0/ic9t6IyE4uz4wZLm6YjJZ
-         WrfP4v88wJKJvGFtvFmP4zTxIcvXGs2a5vPHw=
+        bh=2u/dNL0zGTpCOJg2Jk0Pnt2b5neRnRqaGdBf3ycdnjw=;
+        b=G6SMwt9vfW/+omiNV8CIM78WHHaBEWSQAArbfT7RO+EzQTqyqHga5pZzYJMHXpnfZo
+         P8H2omnfLzdN43/JHCAQ586ujNUK4gsF1v/nINJYszJKVIyI+0SuaQpH3UpQ/fSQ6Izy
+         n3Xp0SY75c2nlvBn5Zjz28mDYYdtw0fxugFEk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750836862; x=1751441662;
+        d=1e100.net; s=20230601; t=1750836863; x=1751441663;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Vsyq/VDtJXv+144v9RhWaKYSLA/NOYLJKdqG4Hj8gbU=;
-        b=K11YFcgCmwnP0xjP+JHNOiqL2l61i0ZNPDWIFndylB5pFU0TKP9pBKvJdoT/Hhif9G
-         iZPnU9i0v3GA7QKRJKm9ODlGcaCwGNNyphVVduy1bM6APmErXgtx1RPm+ZhnZxlbFu+W
-         kBxNd/2DSqJXcnZ48MpTFQy/h7JuA0MJ3oYE9SK99G6Q5dt9K2m4qrhWxWrJmFIBwfnD
-         zevOv8VGSAlUzI9X/m+8tN1oU1Np2/zCxeIc8bnxEzDIyrqGUW8koGBaCTuQ31f3eZww
-         ne0yf3lM4cDCGYk8NQ1NkAjodv1t4somWKCSxDPMC9I36W3FRgsFF08bW0xoD1KU/Y+9
-         8VSg==
-X-Gm-Message-State: AOJu0YxnQUxvSBwA0CGGOrv/duiwd8nDJHUfrrjjNCKc5KOSVR1timj/
-	/yANC/pYy72BPY/yHDXrnjP4s5x77PEzNPtrDfcbcImqir7Jz4EfrAu+diHprXAO6jHpNA/bokh
-	ygQKdgG4A7w==
-X-Gm-Gg: ASbGnctV94loPCyZk330r632IWcz5Ndr80OGTKxLJfjoh0MlaJlz6uUNf3OPcAta/5U
-	43yZGxl2WVgNecrXZB/mHGmnDjU/DiDbora9A09Zzw3ZC+UgJA9YovYQRanZNy1pfQ4OkeEQEQX
-	nfRviSf1KdSmLRbvKQEBXDwPbwJQCOTffOwlW/ghgD+AfmL9aCNgnQbP3LvjH/yGTP6gRvF41Vf
-	7JaX9coib+iad9R1kzqppOAdEt49GJzQt3AFJnUK2PZsi8vJUeRwPJ069Gen+9gKtBbXhm/98li
-	Pzi/ZW/VA2ez5ZwHNSv+DT4cKnQCLrWvPt3AtpAJjPOGphVNw1+jHfdwdsGI41K5OzgUd2aQOW7
-	X0B+Ml1a44i9pxQHMubAJhmmAH51FqA==
-X-Google-Smtp-Source: AGHT+IFVmrgt1T38A7ERw6soRLcvDczrOUkuFgE2tl8CzJitksBUAXlHjE6GPe7vMJCVFLlc1m8Y8w==
-X-Received: by 2002:a5d:64c2:0:b0:3a3:7753:20ff with SMTP id ffacd0b85a97d-3a6ed655bc3mr1599155f8f.35.1750836861536;
-        Wed, 25 Jun 2025 00:34:21 -0700 (PDT)
+        bh=2u/dNL0zGTpCOJg2Jk0Pnt2b5neRnRqaGdBf3ycdnjw=;
+        b=lPzq9or4glMsAbWpGE26qPcTtU0xxON9PihKQz5VnTCXjwPelqKpM0Gjuig8Qn6ylC
+         rmMzHQj+3Ab0pVR7aHSYGCe2Gi22mBD7n7BarvQA1bQR/bVphzVF+vtYkrXSsfNH1WVn
+         jC8b5u5lWXWX2S5gjBqKPkwYCy4Z63981VT33KppLOxULL5jsZBWFCE+ZuyYvdgm/KyP
+         GkGeuAjHgJcnHtKZO6e9Zep25p9Od4uMNiFBF0BTZFfI+v78CiJcvvUYf31UWO6r+Bf9
+         4XGMe1hk/VNiAwgssCSi744DCq0B/BdkoZsrz/71RX9wTddTLuL14H22i+N7J3fSvtkn
+         eNig==
+X-Gm-Message-State: AOJu0Yz5isTnRBgEIlbDYalrNfb2YMI2taJamKZnTfFKoiYKEHp1ulge
+	YicO+m3h+WhludThvrjKh2/2hxBYqn4y87Z8wfr4CvVfnRmQhzdVyRM97wtDzA+tdMOJZ/i/rum
+	bJCXj2HbUIA==
+X-Gm-Gg: ASbGncsMBjy+IB3KYHyvZSuy89NHbM3zSlkJnIgRZzCFOyexuecNVxzsLuHtNxff9sw
+	Y0Zr9z4PItPPTM1C/wQgRL8915fwegPNklugWht0fU0jr+yphX5JuI71S0AzItguOMbmzq66uey
+	u5uYcQAF+YIQ5+szw10utOx0K87VuIhEDqn/SeE8v1SxnAALvJ+nNCvLis0BY5lEupvoSr8syuA
+	HdyPSH2L/8MV1ckLDlOCpyAEOjtyUOxdFySep5H7exDH4VBZpbR1ASpj4RLf7moSpb1iYypOREu
+	tpTIOt9Eq8iTTaMe+YwB0L4aSa9e7CbIMCBK734WapMRSNAXag+GBrHFwMQAbua0iQagri4Po0v
+	5lEgH0UjDziS/G4dB9eGlfIrk/CIhVg==
+X-Google-Smtp-Source: AGHT+IECGcdpnjc8qdQWw0CpidFRo4B7mb6gEOKf268r3/OuAS0AJUvt6RM81TyWc1Q6MtmwJ+1Thw==
+X-Received: by 2002:a05:600c:8b58:b0:440:9b1a:cd78 with SMTP id 5b1f17b1804b1-45381ac23aemr17908645e9.10.1750836863225;
+        Wed, 25 Jun 2025 00:34:23 -0700 (PDT)
 From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: Frediano Ziglio <frediano.ziglio@cloud.com>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3 1/3] xen/efi: Handle cases where file didn't come from ESP
-Date: Wed, 25 Jun 2025 08:34:03 +0100
-Message-ID: <20250625073408.7496-2-frediano.ziglio@cloud.com>
+Subject: [PATCH v3 3/3] xen/efi: Update error flow for read_file function
+Date: Wed, 25 Jun 2025 08:34:05 +0100
+Message-ID: <20250625073408.7496-4-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250625073408.7496-1-frediano.ziglio@cloud.com>
 References: <20250625073408.7496-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-A boot loader can load files from outside ESP.
-In these cases device could be not provided or path could
-be something not supported.
-In these cases allows to boot anyway, all information
-could be provided using UKI or using other boot loader
-features.
+Use more explicit goto statements to handle common error code
+path instead of a lot of if/else.
 
 Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
-Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
-Changes since v1:
-- set "leaf" to NULL instead of a buffer with an empty string;
-- keep read_file fatal if cannot load file (except configuration).
-
-Changes since v2:
-- Added acked-by.
----
- xen/common/efi/boot.c | 34 +++++++++++++++++++++++++++++-----
- 1 file changed, 29 insertions(+), 5 deletions(-)
+ xen/common/efi/boot.c | 80 +++++++++++++++++++++++--------------------
+ 1 file changed, 43 insertions(+), 37 deletions(-)
 
 diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 1a9b4e7dae..b18af2f1f4 100644
+index b6ce3a0257..fa61da4931 100644
 --- a/xen/common/efi/boot.c
 +++ b/xen/common/efi/boot.c
-@@ -443,6 +443,18 @@ static EFI_FILE_HANDLE __init get_parent_handle(const EFI_LOADED_IMAGE *loaded_i
-     CHAR16 *pathend, *ptr;
-     EFI_STATUS ret;
- 
-+    /*
-+     * In some cases the image could not come from a specific device.
-+     * For instance this can happen if Xen was loaded using GRUB2 "linux"
-+     * command.
-+     */
-+    *leaf = NULL;
-+    if ( !loaded_image->DeviceHandle )
-+    {
-+        PrintStr(L"Xen image loaded without providing a device\r\n");
-+        return NULL;
-+    }
-+
-     do {
-         EFI_FILE_IO_INTERFACE *fio;
- 
-@@ -466,7 +478,15 @@ static EFI_FILE_HANDLE __init get_parent_handle(const EFI_LOADED_IMAGE *loaded_i
- 
-         if ( DevicePathType(dp) != MEDIA_DEVICE_PATH ||
-              DevicePathSubType(dp) != MEDIA_FILEPATH_DP )
--            blexit(L"Unsupported device path component");
-+        {
-+            /*
-+             * The image could come from an unsupported device.
-+             * For instance this can happen if Xen was loaded using GRUB2
-+             * "chainloader" command and the file was not from ESP.
-+             */
-+            PrintStr(L"Unsupported device path component\r\n");
-+            return NULL;
-+        }
- 
-         if ( *buffer )
-         {
-@@ -772,8 +792,11 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+@@ -792,6 +792,8 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
  
      if ( !name )
          PrintErrMesg(L"No filename", EFI_OUT_OF_RESOURCES);
--    ret = dir_handle->Open(dir_handle, &FileHandle, name,
--                           EFI_FILE_MODE_READ, 0);
-+    if ( dir_handle )
-+        ret = dir_handle->Open(dir_handle, &FileHandle, name,
-+                               EFI_FILE_MODE_READ, 0);
-+    else
-+        ret = EFI_NOT_FOUND;
++
++    what = L"Open";
+     if ( dir_handle )
+         ret = dir_handle->Open(dir_handle, &FileHandle, name,
+                                EFI_FILE_MODE_READ, 0);
+@@ -800,54 +802,58 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
      if ( file == &cfg && ret == EFI_NOT_FOUND )
          return false;
      if ( EFI_ERROR(ret) )
-@@ -1404,7 +1427,7 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-         /* Read and parse the config file. */
-         if ( read_section(loaded_image, L"config", &cfg, NULL) )
-             PrintStr(L"Using builtin config file\r\n");
--        else if ( !cfg_file_name )
-+        else if ( !cfg_file_name && file_name)
-         {
-             CHAR16 *tail;
+-        what = L"Open";
+-    else
+-        ret = FileHandle->SetPosition(FileHandle, -1);
++        goto fail;
++
++    what = L"Seek";
++    ret = FileHandle->SetPosition(FileHandle, -1);
+     if ( EFI_ERROR(ret) )
+-        what = what ?: L"Seek";
+-    else
+-        ret = FileHandle->GetPosition(FileHandle, &size);
++        goto fail;
++
++    what = L"Get size";
++    ret = FileHandle->GetPosition(FileHandle, &size);
+     if ( EFI_ERROR(ret) )
+-        what = what ?: L"Get size";
+-    else
+-        ret = FileHandle->SetPosition(FileHandle, 0);
++        goto fail;
++
++    what = L"Seek";
++    ret = FileHandle->SetPosition(FileHandle, 0);
+     if ( EFI_ERROR(ret) )
+-        what = what ?: L"Seek";
+-    else
+-    {
+-        file->addr = min(1UL << (32 + PAGE_SHIFT),
+-                         HYPERVISOR_VIRT_END - DIRECTMAP_VIRT_START);
+-        ret = efi_bs->AllocatePages(AllocateMaxAddress, EfiLoaderData,
+-                                    PFN_UP(size), &file->addr);
+-    }
++        goto fail;
++
++    what = L"Allocation";
++    file->addr = min(1UL << (32 + PAGE_SHIFT),
++                     HYPERVISOR_VIRT_END - DIRECTMAP_VIRT_START);
++    ret = efi_bs->AllocatePages(AllocateMaxAddress, EfiLoaderData,
++                                PFN_UP(size), &file->addr);
+     if ( EFI_ERROR(ret) )
+-        what = what ?: L"Allocation";
+-    else
+-    {
+-        file->need_to_free = true;
+-        file->size = size;
+-        handle_file_info(name, file, options);
++        goto fail;
  
-@@ -1515,7 +1538,8 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-         efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
-         cfg.addr = 0;
+-        ret = FileHandle->Read(FileHandle, &file->size, file->str);
+-        if ( !EFI_ERROR(ret) && file->size != size )
+-            ret = EFI_ABORTED;
+-        if ( EFI_ERROR(ret) )
+-            what = L"Read";
+-    }
++    file->need_to_free = true;
++    file->size = size;
++    handle_file_info(name, file, options);
  
--        dir_handle->Close(dir_handle);
-+        if ( dir_handle )
-+            dir_handle->Close(dir_handle);
+-    if ( FileHandle )
+-        FileHandle->Close(FileHandle);
++    what = L"Read";
++    ret = FileHandle->Read(FileHandle, &file->size, file->str);
++    if ( !EFI_ERROR(ret) && file->size != size )
++        ret = EFI_ABORTED;
++    if ( EFI_ERROR(ret) )
++        goto fail;
  
-         if ( gop && !base_video )
-         {
+-    if ( what )
+-    {
+-        PrintErr(what);
+-        PrintErr(L" failed for ");
+-        PrintErrMesg(name, ret);
+-    }
++    FileHandle->Close(FileHandle);
+ 
+     efi_arch_flush_dcache_area(file->ptr, file->size);
+ 
+     return true;
++
++fail:
++    if ( FileHandle )
++        FileHandle->Close(FileHandle);
++
++    PrintErr(what);
++    PrintErr(L" failed for ");
++    PrintErrMesg(name, ret);
++
++    /* not reached */
++    return false;
+ }
+ 
+ #pragma pack(1)
 -- 
 2.43.0
 
