@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7734C77B7F
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Jun 2025 10:42:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1027498.1402101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F235C7EE31
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Jun 2025 10:52:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1027507.1402123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6XN-00015r-Ac; Fri, 27 Jun 2025 10:42:29 +0000
+	id 1uV6gR-0002tr-N4; Fri, 27 Jun 2025 10:51:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1027498.1402101; Fri, 27 Jun 2025 10:42:29 +0000
+Received: by outflank-mailman (output) from mailman id 1027507.1402123; Fri, 27 Jun 2025 10:51:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6XN-00015k-7o; Fri, 27 Jun 2025 10:42:29 +0000
-Received: by outflank-mailman (input) for mailman id 1027498;
- Fri, 27 Jun 2025 10:42:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2ywg=ZK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uV6XL-00015e-AJ
- for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 10:42:27 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 67af7993-5343-11f0-b894-0df219b8e170;
- Fri, 27 Jun 2025 12:42:21 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a57ae5cb17so1180964f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 27 Jun 2025 03:42:21 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-315f5384140sm6918745a91.7.2025.06.27.03.42.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Jun 2025 03:42:20 -0700 (PDT)
+	id 1uV6gR-0002rw-Hj; Fri, 27 Jun 2025 10:51:51 +0000
+Received: by outflank-mailman (input) for mailman id 1027507;
+ Fri, 27 Jun 2025 10:51:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=61Re=ZK=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1uV6gQ-0002k0-Nn
+ for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 10:51:50 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ba91903d-5344-11f0-a30f-13f23c93f187;
+ Fri, 27 Jun 2025 12:51:50 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-32cd0dfbd66so15789881fa.3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Jun 2025 03:51:50 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-32cd2dea1c0sm5235831fa.3.2025.06.27.03.51.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Jun 2025 03:51:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,221 +47,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67af7993-5343-11f0-b894-0df219b8e170
+X-Inumbo-ID: ba91903d-5344-11f0-a30f-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1751020941; x=1751625741; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=RAUu45byWCYVeJgWLJnBZx5xF7D8AMI7j46sDoUddT0=;
-        b=GqunyKdgK0YAwDc/1bShdWcugAMh2SEmqoiPYad8RGI3mqNJS/KJgqU7ceSzoyXNpn
-         EONSnaTDgIaj6CWrlWSvdqeIKnm8NpIvHuCChf11kK/PoYSuMEXJJ937Uuw/0XjMHD5j
-         zAwPBLav81c/hYv53F88sG0IFWYoDr/0YIxhPia+wuAYSTW4rWedll7kLyGf/Z+YETvu
-         ixFZAKdm6rQA7xpMHTiCyamT9OgqLwBbTbFdw/87UyAmcJEBmew5BwrB4cfQ2JeqKwCF
-         nCeAvswdp9zQyhLzB7o6Jz68MvCmSqNr0TG8AogckldYG6Ao0Zz/PqXR3xA1tCWx+YzI
-         0zCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751020941; x=1751625741;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1751021510; x=1751626310; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RAUu45byWCYVeJgWLJnBZx5xF7D8AMI7j46sDoUddT0=;
-        b=AJ2MxHszeid/umYJIA3arPAdlShSAMLNxJq0UUOPGQdMbPKIvZe7N9L0VY8jaxC3l4
-         Ffn6mkt8AVI+TFlhGjR0Lyfa3J/39iDVDcRuLZb6B7C4Hh76unz/Fj8mBPC7SFjXhh5k
-         jN05yqX5/xdYhCrHsdmAr4uLSz2y8hzquVC2bqPiTAn7Mjnzt1DZeLMCa40WVSHctTKH
-         9zc2eceP7f1jtw3VtFn0FA+aVJsRUl55UxshEHoM96fzflR8mn+BcNQuJh91WRNbHYfE
-         eMUKWDQyDATOuNR80Y+YabfUTXQe2+/ziME3x18wo9sM50wnD0+97pAH/ZCly+IxbL2u
-         mTNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVOaqNJPA/rIjBpdWTYfsedNrWUjyHpjACV8d8B9fxFJQa9G0hB96L1yDkEUD7ZQyBUTE9rHjpHTzs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxnfRUK0v+xugVyZAIWGY+UZktHdIiKmMCRCI01NaPDkkcnRwoC
-	rLHNUVVfyUzRtIxBS3v3rHpXXQ98QFmDJFuWnFrB9u9113vzo+BupFH/gzCwtPz7nQ==
-X-Gm-Gg: ASbGncv9PhifZcMTqszakPNLFOmuTixVI6oAwKZd+lZ+O/6THchnCUBEk1dKv6PeYGX
-	i+drPFapRgZQ7+bPZVr0XfCFbnhxeBh8izya8k/sU39OscLa2NieZMCUDIwyvBF8WZ5elw7AtFw
-	nImkTXfpEYMYnkRIH8asWihss9aPadgC4gwSUXyIwSWYt4neDSF9xHsf8syr/fxxIbh0hJ0fn7f
-	AeuN+wtjYLumKstwzugsiV9inUSiIBII0I6HIs/ZJUBl/Es+i7VWhjTr1vCaE7Q7svQFNO+Fk9n
-	n9FGXtC6Cm/dd9hE5PBPlTHtQ2He6unBy+Qw2WAgMONDUfZVyvnNUvWNAbIOf+qnGFMnygLlu8G
-	hNgQq1yzRb53rVMwBNVPD3Mum5z+e4Wwn7mSdM4ajf+tTIZnozSn0ESGZxA==
-X-Google-Smtp-Source: AGHT+IHR+yv3mLG6i8nI1B0rD0RI5sUWDv80BQf0ZTLHMF8oMGVfPtBPSXLfMNt9Tp117nijRDoHtw==
-X-Received: by 2002:a05:6000:2110:b0:3a4:ef30:a4c8 with SMTP id ffacd0b85a97d-3a8f4548f90mr2179683f8f.10.1751020940992;
-        Fri, 27 Jun 2025 03:42:20 -0700 (PDT)
-Message-ID: <7ea6964b-71e3-4a86-a2f0-7124264bda80@suse.com>
-Date: Fri, 27 Jun 2025 12:42:10 +0200
+        bh=Ua935WurpFjU8q1PTBY29dqBWcHnlgrzlb/sVrXtOkY=;
+        b=dWNiCKvTMyhgIWmQtW2A7yCBL61UgFyMf3Lf/PqtzzTa3kKw4Zl4gnjMGySMiHoDCJ
+         Lqhz0BzLApGUZCmEt8+GlPWgJTzyVkS5yB5pldk88jPA7dJAPIi0ULgur/PP8DifG+SB
+         Z21WKrQBYsrjaXLqJ3D17bIKpgQW+T7rXooxIv0LWxC3xb2DC2kOC7/X3XFYz5Hm2kzP
+         QGDRfvv/YS1EPXyojlmIJRZ9UEi45W/RLCtStyg7nvPTNyU+9bziK2PjipfuNpUKr+k/
+         lMF2CA3OmxbqdID4k74alTOWjxxTezXtPjVTSu1N9TXVN24pSMUsqcNeFlulhHleZoqF
+         VvTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751021510; x=1751626310;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Ua935WurpFjU8q1PTBY29dqBWcHnlgrzlb/sVrXtOkY=;
+        b=rn81Dh6Xb0I3vA5JatHkTQdeJqpu5RUvU0jQlXOqnk03Hpq+aRJ87xZvqWybdzcw17
+         9tR5XpG/ht+hn8Cnp9uJpPrHaSUalvIntztCtaVsIQE+MoCLPxIcLOObjdVdg6SRe9zY
+         FLuDIkkPVvXLZN/3PnbpOBsdRP9uMOAVMmaF7jlK6SYstIodyGdI5YJ1e5/UxNbCPdho
+         5LQGMUx6Kq+bEiA0snZhBKXYMtMtII6UxLspxY0nUdV9i9+Y3mjK4KP43nX4aCf1VR1x
+         elenl0BFEqNtPMTMkTDXeMP8+Hm9ZjRjthYcq+NBO5GDM8aKLtRX2R5OpPsA2EJS5aNx
+         M5qQ==
+X-Gm-Message-State: AOJu0Yy1152l1LYSAdgo2WDFSIbyguPg4ZfQCJro9PK7F/5xaoXV6Sla
+	7xZlsq67YKAMi9eLisjfNowIv3XRim4MIfOf+XFDgJlpiuQbKcXcavGTLsxrgewP
+X-Gm-Gg: ASbGnctjObi7X5m872tNCz2ABUgaMlnltDFkppKr1Fvl7zx3lMNbiOn6VNQU6ZQ4/73
+	2WoVNGMIUH6BwcMCPeryGoXyuR/uCzTF1M81VucJH0cCg/6Idt2C9HmLvsFmNjSYEG4f5/5R6Kj
+	Er95OBnnUCNBW1ujoWENsbhIPifaI84icrBlGPY1wrgAWP6a/VQ0aOzJ781uSibT7zHF7fdFsRr
+	nztE7zucghLk76xSizFVFFggbuOLjWaCR08yV/gkJgYtMbtfucKm1cEF6IotOypC/a/Wav1oJKr
+	3EpZVNeSCj9xyPznfgnWMVdJvzpg2OEr10wsCc4BBfcmnh4c51CW5Lkz6LXKWb76QXEVxEXC6TY
+	UWQ/+Eh7Ba8O7k+1ZVNW47K2Ifw==
+X-Google-Smtp-Source: AGHT+IHFzWIUYlNlURrIMGK10ZsPPhDfk4HecC4VKN8XchkntZcY1UnimoehDaDa5ihpFEQInWjhXw==
+X-Received: by 2002:a05:651c:2041:b0:32a:6b23:d3cc with SMTP id 38308e7fff4ca-32cdc518517mr6690531fa.25.1751021509431;
+        Fri, 27 Jun 2025 03:51:49 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v5 4/4] CHANGELOG: Document guest suspend/resume to RAM support on Arm
+Date: Fri, 27 Jun 2025 13:51:33 +0300
+Message-ID: <d2d780b307d096b3ce157f8ef3f151b86727ea99.1751020456.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1751020456.git.mykola_kvach@epam.com>
+References: <cover.1751020456.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/8] vpci: Refactor REGISTER_VPCI_INIT
-To: "Chen, Jiqian" <Jiqian.Chen@amd.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- "Orzel, Michal" <Michal.Orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "Huang, Ray" <Ray.Huang@amd.com>
-References: <20250612092942.1450344-1-Jiqian.Chen@amd.com>
- <5c4b186e-686e-4fc8-bcf1-854bc1f5ec8b@suse.com>
- <BL1PR12MB5849DE8416FE549834235780E778A@BL1PR12MB5849.namprd12.prod.outlook.com>
- <9d5d0e44-66c3-4e3f-8704-2c862c5f5aff@suse.com>
- <BL1PR12MB5849B3C334EF0C5BBCAFB7BAE77BA@BL1PR12MB5849.namprd12.prod.outlook.com>
- <3638e73c-2a83-4164-9a84-839245245727@suse.com>
- <BL1PR12MB584988E00D0F4A4330B9B968E77BA@BL1PR12MB5849.namprd12.prod.outlook.com>
- <771cd5b7-2b89-49b1-9aba-8cd79319d3ce@suse.com>
- <BL1PR12MB58492A16BFE80B49045AB936E77BA@BL1PR12MB5849.namprd12.prod.outlook.com>
- <7753470a-efef-478a-bbe5-ae48d008cfdb@suse.com>
- <BL1PR12MB584979FA987CE2D6E242648FE77AA@BL1PR12MB5849.namprd12.prod.outlook.com>
- <cf41d703-dae1-42fd-86a2-aec32184adcc@suse.com>
- <BL1PR12MB5849302474B73599557CC1F2E745A@BL1PR12MB5849.namprd12.prod.outlook.com>
- <f50a5c04-73f8-42b6-bcaa-fd9b30088f21@suse.com>
- <BL1PR12MB58495B7B5DD5340037197B1BE745A@BL1PR12MB5849.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <BL1PR12MB58495B7B5DD5340037197B1BE745A@BL1PR12MB5849.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 27.06.2025 11:00, Chen, Jiqian wrote:
-> On 2025/6/27 14:05, Jan Beulich wrote:
->> On 27.06.2025 04:59, Chen, Jiqian wrote:
->>> On 2025/6/26 20:06, Jan Beulich wrote:
->>>> On 26.06.2025 10:03, Chen, Jiqian wrote:
->>>>> On 2025/6/25 22:07, Jan Beulich wrote:
->>>>>> On 25.06.2025 12:16, Chen, Jiqian wrote:
->>>>>>> On 2025/6/25 18:03, Jan Beulich wrote:
->>>>>>>> Also, as said - you will need to check whether other architectures are
->>>>>>>> different from x86-64 in this regard. We better wouldn't leave a trap here,
->>>>>>>> for them to fall into when they enable vPCI support. I.e. my recommendation
->>>>>>>> would be that if in doubt, we put the __aligned() there unconditionally.
->>>>
->>>> Note how I used __aligned() here. Why would you ...
->>>>
->>>>>>> That's difficult for me to check on all different platforms since I don't have them all.
->>>>>>
->>>>>> You don't need to have them. You'd need to carefully go through the respective
->>>>>> section(s) of their psABI-s.
->>>>>>
->>>>>>> So you mean I should remove "#ifdef CONFIG_X86"? Just let __aligned(16) for all platforms?
->>>>>>
->>>>>> Yes. And, as also said, with a suitable comment please.
->>>>> Ah, my comment definitely needs your change suggestion.
->>>>> I wrote a draft as below:
->>>>>
->>>>> /*
->>>>>  * Size of vpci_capability is lager than 8 bytes. When it is used as the entry
->>>>>  * of __start_vpci_array in section, it is 16-byte aligned by assembler, that
->>>>>  * causes the array length (__end_vpci_array - __start_vpci_array) wrong, so
->>>>>  * force its definition to use 16-byte aligned here.
->>>>>  */
->>>>> struct vpci_capability {
->>>>>     unsigned int id;
->>>>>     bool is_ext;
->>>>>     int (* init)(const struct pci_dev *pdev);
->>>>>     int (* cleanup)(const struct pci_dev *pdev);
->>>>> } __attribute__((aligned(16)));
->>>>
->>>> ... open-code that here?
->>> That because when using __aligned() without CONFIG_X86, I got compile error
->>> vpci.h:18:13: error: expected declaration specifiers or ‘...’ before numeric constant
->>>    18 | } __aligned(16);
->>>       |             ^~
->>> I tried some methods, only open-code can fix it.
->>
->> Well, that's odd. In e.g. xen/sched.h we have
->>
->> struct domain
->> {
->>     ...
->> } __aligned(PAGE_SIZE);
->>
->> which clearly must be working fine. The error message from the compiler
->> doesn't say very much alone. For informational diagnostics the compiler
->> normally also emits may help, or else it would take looking at the
->> pre-processed output to understand what's going on here.
-> 
-> I add some codes to print the macro __align, the codes are:
-> 
-> diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-> index 51573baabc..8f6af1c822 100644
-> --- a/xen/include/xen/vpci.h
-> +++ b/xen/include/xen/vpci.h
-> @@ -13,12 +13,16 @@ typedef uint32_t vpci_read_t(const struct pci_dev *pdev, unsigned int reg,
->  typedef void vpci_write_t(const struct pci_dev *pdev, unsigned int reg,
->                            uint32_t val, void *data);
-> 
-> +#define STRINGIFY(x) #x
-> +#define TOSTRING(x) STRINGIFY(x)
-> +#pragma message("__aligned(16) expands to: " TOSTRING(__aligned(16)))
-> +
->  struct vpci_capability {
->      unsigned int id;
->      bool is_ext;
->      int (* init)(const struct pci_dev *pdev);
->      int (* cleanup)(const struct pci_dev *pdev);
-> } __aligned(16);
-> 
-> The result are:
-> 
-> In file included from ./include/xen/sched.h:25,
->                  from arch/x86/x86_64/asm-offsets.c:11:
-> ./include/xen/vpci.h:18:9: note: ‘#pragma message: __aligned(16) expands to: __attribute__((__aligned__(16)))’
->    18 | #pragma message("__aligned(16) expands to: " TOSTRING(__aligned(16)))
->       |         ^~~~~~~
-> In file included from ./include/xen/sched.h:25,
->                  from drivers/vpci/vpci.c:20:
-> ./include/xen/vpci.h:18:9: note: ‘#pragma message: __aligned(16) expands to: __attribute__((__aligned__(16)))’
->    18 | #pragma message("__aligned(16) expands to: " TOSTRING(__aligned(16)))
->       |         ^~~~~~~
-> In file included from emul.h:88,
->                  from vpci.c:18:
-> vpci.h:15:9: note: ‘#pragma message: __aligned(16) expands to: __aligned(16)’
->    15 | #pragma message("__aligned(16) expands to: " TOSTRING(__aligned(16)))
->       |         ^~~~~~~
-> vpci.h:22:13: error: expected declaration specifiers or ‘...’ before numeric constant
->    22 | } __aligned(16);
->       |             ^~
-> In file included from emul.h:88,
->                  from main.c:19:
-> vpci.h:15:9: note: ‘#pragma message: __aligned(16) expands to: __aligned(16)’
->    15 | #pragma message("__aligned(16) expands to: " TOSTRING(__aligned(16)))
->       |         ^~~~~~~
-> vpci.h:22:13: error: expected declaration specifiers or ‘...’ before numeric constant
->    22 | } __aligned(16);
->       |             ^~
-> make[6]: *** [Makefile:18: test_vpci] Error 1
-> make[5]: *** [/home/cjq/code/upstream/xen/tools/tests/../../tools/Rules.mk:194: subdir-install-vpci] Error 2
-> make[4]: *** [/home/cjq/code/upstream/xen/tools/tests/../../tools/Rules.mk:189: subdirs-install] Error 2
-> make[3]: *** [/home/cjq/code/upstream/xen/tools/../tools/Rules.mk:194: subdir-install-tests] Error 2
-> make[2]: *** [/home/cjq/code/upstream/xen/tools/../tools/Rules.mk:189: subdirs-install] Error 2
-> make[1]: *** [Makefile:64: install] Error 2
-> make: *** [Makefile:147: install-tools] Error 2
-> make: *** Waiting for unfinished jobs....
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Well, it would have helped a lot if you had said from the very beginning that it's
-the test harness where you observe the build issue. These test harnesses are always
-a little special, due to their intention to re-use the core source file(s). (And
-no, pulling in compiler.h likely wouldn't be the right workaround.)
+Mention the newly added support for guest suspend and resume to/from
+RAM via vPSCI on Arm platforms (ARM32 and ARM64). This support is
+limited to non-hardware domain guests.
 
-Jan
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+Changes in v5:
+- adjustments to the commit title and message
+- expanded the changelog entry to include more context about
+  suspend/resume support introduced in this patch series
+---
+ CHANGELOG.md | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 5f31ca08fe..1c155f7ff2 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -29,6 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+ 
+  - On Arm:
+     - Ability to enable stack protector
++    - Support for guest suspend and resume to/from RAM via vPSCI (for both ARM32
++      and ARM64). Applies only to non-hardware domain guests.
+ 
+ ### Removed
+  - On x86:
+-- 
+2.48.1
+
 
