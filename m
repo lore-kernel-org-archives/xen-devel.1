@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F3CEC7EE3A
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Jun 2025 10:52:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1027509.1402147 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C601BC7EE31
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Jun 2025 11:24:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1027539.1402162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6gV-0003Vr-Ef; Fri, 27 Jun 2025 10:51:55 +0000
+	id 1uV7BQ-0000gk-Em; Fri, 27 Jun 2025 11:23:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1027509.1402147; Fri, 27 Jun 2025 10:51:55 +0000
+Received: by outflank-mailman (output) from mailman id 1027539.1402162; Fri, 27 Jun 2025 11:23:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6gV-0003VM-8n; Fri, 27 Jun 2025 10:51:55 +0000
-Received: by outflank-mailman (input) for mailman id 1027509;
- Fri, 27 Jun 2025 10:51:54 +0000
+	id 1uV7BQ-0000gd-Ak; Fri, 27 Jun 2025 11:23:52 +0000
+Received: by outflank-mailman (input) for mailman id 1027539;
+ Fri, 27 Jun 2025 11:23:50 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=61Re=ZK=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uV6gU-0002k5-1O
- for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 10:51:54 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
+ <SRS0=tiom=ZK=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1uV7BN-0000gX-TR
+ for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 11:23:50 +0000
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:2405::61d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b900e327-5344-11f0-b894-0df219b8e170;
- Fri, 27 Jun 2025 12:51:47 +0200 (CEST)
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-32b49ac6431so17205961fa.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Jun 2025 03:51:47 -0700 (PDT)
-Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-32cd2dea1c0sm5235831fa.3.2025.06.27.03.51.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 03:51:45 -0700 (PDT)
+ id 2e25e031-5349-11f0-b894-0df219b8e170;
+ Fri, 27 Jun 2025 13:23:43 +0200 (CEST)
+Received: from BN9PR12MB5273.namprd12.prod.outlook.com (2603:10b6:408:11e::22)
+ by DS2PR12MB9687.namprd12.prod.outlook.com (2603:10b6:8:27b::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.21; Fri, 27 Jun
+ 2025 11:23:40 +0000
+Received: from BN9PR12MB5273.namprd12.prod.outlook.com
+ ([fe80::cf66:58ab:47be:4b13]) by BN9PR12MB5273.namprd12.prod.outlook.com
+ ([fe80::cf66:58ab:47be:4b13%5]) with mapi id 15.20.8857.026; Fri, 27 Jun 2025
+ 11:23:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,343 +49,305 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b900e327-5344-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751021507; x=1751626307; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lovaqz97Yz4C4ZS/M20yvmKKYHwyYhdSKNbqE+LHAXs=;
-        b=aIdVh9Z8xCRfZPzxbVhXl2K/FhqpuyUOaWcJGm+nbmSxtn1mhLU4dymXDyRTP4LJ2t
-         1Imt5bXaVH5I7EJ84B6YmUuOdBu+jI4udrI53jNvMN5ZiHFPULFBpxnbHtDGXDRK8RZi
-         X9gzE79SwMnALUmxU/60qOn7LiFQfT0FDJld/nUzHr8/8UXlNzBAz94ZoZpjwxEIS7QL
-         JCAri1Nt9ksI2bDGGg3zyy5Qehl2wqznCC0oJI5im24cacOGj2WC49mOHYOv8wxjkj/0
-         gOHZ2ExlTaLPXhTbhUzyO798RY1RvxYobVWRbXPy1SHbDF3HTGIfQm8gJSh1+Nffihys
-         eSgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751021507; x=1751626307;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lovaqz97Yz4C4ZS/M20yvmKKYHwyYhdSKNbqE+LHAXs=;
-        b=bNlSR2asW6HRVK2Ttbls7Zygf7SNT7cDiZFOb5uMhzHtrfq41NhwmqjnCRoBhrCMu7
-         IPtTfyCMYms6VJG9YuHez/2Mxt4Jk8/L5cm/HWA1+9VBloEm8j4PgkVuT3V3YmYj04h9
-         XJGcv6j9wP1Lb3jFS2hXQQqu6esV4tEgLSUPQJlNlOHteDp4fg900jQGF4YweGOfRtjt
-         HAmCwj5b4+xbCIE+ysyocWO3mSfNbRH/eHe9Uc3cR7q+Pu7TUwIkgwtlfUV2oWPz9W/I
-         /yq+jht/PtSv1GgXWw1cRpQPQHT1vph5IgzccoTpxqxINTqGSbNj3ttm77jrn+yT8fah
-         Yyhg==
-X-Gm-Message-State: AOJu0Yxi9wUb7AjFh807Rg4+1bBImXo0iLRm1ykP0iW57MPHteuoPDoA
-	O8T0xebj80MObid1vlsC7W4/HUjH2j2+gwRkFB67a42C3YdekKByhm2BVMMeuM05
-X-Gm-Gg: ASbGncvZHlNm5xx/KcFzFFUKLYPEnE+lGCwxOt36DO7dC0HglgIG8AIlZp2bXhudCLA
-	ONVA1436zGf778V2s3M7z4JCRO3kUf9eeX7CypyHzioCilJ59oha5VsAG0RAKXmOLmNqGR+9E2/
-	qgg0ak02mGE2lGuimKnLNgH0Inf4LfCHIDO0KiVITG97YJ/JcGWZdjPFlqVaa6CPbjoB00FSV1A
-	JC4tqHaokybGetzwOgk1a5fPVjGETMaZuDH+p2spOOdiPuvFBFuRQFGy+U1oD80nxUE3Uqi16Fb
-	6OAOKFMTPNlVb8LUaH66DCT5Y+PaZskh+zxfAV+Yz00YOWJwE0P4WwRrajKz+GNKvv3zg+6Mv7E
-	GmTTntpUmxicEbBHemPW2/4lfZw==
-X-Google-Smtp-Source: AGHT+IE+AWmr/h1Db222u088W/zHOH1XMPOY1hr6Gerf2Dgjl13Ny0bypbRnPn8rL5wufyNsQgk8Yg==
-X-Received: by 2002:a05:651c:40d6:b0:32c:a097:41a8 with SMTP id 38308e7fff4ca-32cdc499336mr4607691fa.12.1751021506395;
-        Fri, 27 Jun 2025 03:51:46 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 1/4] xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
-Date: Fri, 27 Jun 2025 13:51:30 +0300
-Message-ID: <072270e0940b6bcc2743d56a336363f4719ba60a.1751020456.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1751020456.git.mykola_kvach@epam.com>
-References: <cover.1751020456.git.mykola_kvach@epam.com>
+X-Inumbo-ID: 2e25e031-5349-11f0-b894-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RKGNHJAuXKX0NI/yq/Gah7/WINvTaYQ/R0nAqdzilBSigibbCJT9gu1KPw89V4+8+QWsHG6XK/l+rfcKKccpQhnoHWeK704PCGOOi0B4eCpxAa9JNfVr9mDVa6y07m3ekq8mJZ38wI/VBGP1cuacIoFxlktkiozG/4NZfM2vAZ6AT5EW8Sn0xxhVSMF/pUADNI4sfcT8cu80//RneA92gGQT2hkvhlV5EXkcqer/pbKg+gyVE4Xkt4Qxx5hYIPxwDAo3snC08FtqyC4QqT5kbVxtskRLn5tqiVLlS54Am4fFkjwabiZ/zLiCh7Hoi0zm6EnitlAcZLimh6EeDKsyPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IWolXwCXDNgqHv5el06xfZsvUUmU6+9JZ7OoOgw+zyc=;
+ b=wJ+qg0fe4K8tyz1qswAJzLgkXnRm1hOufZDGhUgb28qvzBF+d5tk//A17Mf6D4hgCIMvvCEH4NPYtXmLr7ViV3EBB37PKVBPa+w76uyXpKJxTP5b3gOWms4C3tIbrKGh/h8kNkI9Nz+eA1lRStsgKD6MypNeaWpsN5TNrvO6diBXaj/NCrbB4W1LbX92TJ1x878X4dMnSsbKFRU8VTdeB0cOXLV7DzAOnJtahMzDaCiannAPSLL6upY70zk9knIXedTPwYwOnAiYDZiuSP6ggSgO6NvYxpnW/MPYa9fosLLxyPFqvwSMru4bL6IjfA4DniHqocQcebwu6Duj8qy8KA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IWolXwCXDNgqHv5el06xfZsvUUmU6+9JZ7OoOgw+zyc=;
+ b=ajkBjV7thEeLJv4wNF5bhjpyhURkXTAIWdBOL1Cp48pg5WGePlg2fKebTcT8KTdMmfzNKuhLUUh3ksbjWRQxxhi3dhM4INFQjMeP+aK2WUe9uhFJ+Pu9TFvif41NVbEhihPY3ZGFSjhEeQnKsgT1T8/m0NgtgrXu+nF+whzfmGM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <bdbf558e-c574-47b9-86fa-b9e54a759f9d@amd.com>
+Date: Fri, 27 Jun 2025 13:23:36 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] arm/mpu: Find MPU region by range
+To: Hari Limaye <hari.limaye@arm.com>, xen-devel@lists.xenproject.org
+Cc: luca.fancellu@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1750411205.git.hari.limaye@arm.com>
+ <e4d628ea02af087c4a299de0b16c75a9e0c6c17f.1750411205.git.hari.limaye@arm.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <e4d628ea02af087c4a299de0b16c75a9e0c6c17f.1750411205.git.hari.limaye@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0097.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9c::12) To BN9PR12MB5273.namprd12.prod.outlook.com
+ (2603:10b6:408:11e::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR12MB5273:EE_|DS2PR12MB9687:EE_
+X-MS-Office365-Filtering-Correlation-Id: be3be1d3-1bd3-434d-2db4-08ddb56d10ac
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?c3lkbEdtWXBuWWp2QnNHeFVMdTNzdXg0cHVjYiszTk1uN3JUdVdQNS95a0Iz?=
+ =?utf-8?B?NkhBeExWMmRTZ1hGYy9LNDZhcmlVNXlUWWUxWWk4dEpmMHFqbHRPeXR1WGV6?=
+ =?utf-8?B?TU16RHJ2UG9FMExSSkZmVGs4NkcyMXRIVW12TU1HMGM5RWFqd093b1FmamRJ?=
+ =?utf-8?B?V0wrL25wVitEL21IZVZzaHIwRDhvWHBrUVZ5MDBVRzRzdlBLMkNNa0tqWkE4?=
+ =?utf-8?B?RWlqamtZQUZ0Ni9xbVVGR3l6M0wwcXdieGVrZmYyMVpqeEF5cmJJZTRrdFlZ?=
+ =?utf-8?B?SGdFVldyWG9HeEYzWmVCQzJFWFZIZi94TFpnZWdHRFFhR0p3eFpHTllFc3Z0?=
+ =?utf-8?B?Ris3YldUdit1bWY3cXJ1YlA4NzBheVAzYXJoTXlZQjFpeG5zOFVoY3hHVDcv?=
+ =?utf-8?B?b1RuK3laeU5aZithSnA1WlF6a0Z0SXZDa3VFaTRMcmdJbFk0Tlcza0NWaE5z?=
+ =?utf-8?B?cjhSL25BMXVKQnFJUklWL045bmZUTFhiQ2NDZHBhYkxUR0wrZ0x4bkNiN21Y?=
+ =?utf-8?B?OGdJMVAwczVaTWhxajZkemtrWVNSbjFYOGxvV0t5TDhBUHU1Tnk3OCtZaGV4?=
+ =?utf-8?B?SXJQSGR5RzF5RDJlaWhQTlJHVnNQV2R5cURsVEVnYnhwN2tNRWpGL29nVnJP?=
+ =?utf-8?B?N3VKKzcxUTVRbmM5REIyUGF1UFdqanY2Z3FsWEhoUEJpVSt2eVgrTFFjSTF5?=
+ =?utf-8?B?MlZ0S0tRSmx1WHJnYTAxYVpYaUNIOVh3WGRYR1pmc0FsUElNVHA2WExGZmJ0?=
+ =?utf-8?B?NkpNME52dTNDeWtydExzdEdJTFFTMUYrMzUrK0dOeXFjcGNSaWczUlBLSlVi?=
+ =?utf-8?B?NVB6VDJQSHpWNHlxaUprUy9oOWlBQUFzS1ZiYUJ6VEFMZHY3bEg3THJLTlMw?=
+ =?utf-8?B?NmM3ck1vRGZUeUo0M3RjK1l3a2lMdFpFYkllMEJFRzJCUHV1dVd4TjdBbXl0?=
+ =?utf-8?B?aVhnbU5RZ2JEdEREclpvdDk2YnA3OTBnQnlHV1IzVVhuOWJVcWRZOUVOcWVy?=
+ =?utf-8?B?TUZ0OUMrM2FGOWxxNXMwckxRSFdPTlZZZWhtQjhYQ0pSREZNR2oyeHozclZG?=
+ =?utf-8?B?NDNMMnZmUlVxbW54VThyVTZ0OTlrc25tbFdpN0d4aUpqSWRaeEJVbDZNSzNh?=
+ =?utf-8?B?UWd6SytGK1hpYTNvNWdveWdpdS9QOG45R25RSjNidm1mNGhmd3Bpa3dUWDRu?=
+ =?utf-8?B?OHJpUmZkVG04T0pUZUU2TVZTbXRDOVg2L0Z0Q0I0dXRpYzI3OGovb1haUU1C?=
+ =?utf-8?B?b3pJS3oxM0t5cFBqS3I3ci9Qc2QrNWNURmhod1R2blJsNU5DYVRJVE5YWDFE?=
+ =?utf-8?B?d1RkKzhiNEhlUEdUYVlndWhsSWpxbCs0QmhPUkh1cXFjNWhESzE5cGczYWJU?=
+ =?utf-8?B?SXNjdWR6RnpxSGtmQ1FhWXlnNzBCdk9xQUdNUVVwRDBoRFZWNmw1Q1ZwVThr?=
+ =?utf-8?B?OUJxT3c4WWVMeWRKK0EydXdWYm9hMFFCQXFYZ2xnZUh5L3hYeWwwb284eUN4?=
+ =?utf-8?B?T1ZJeU4vazNSU3QyMDlxNnM4Z0NqL3hxaVJsS2lOWndXSFNnWUpTd3pSSHVC?=
+ =?utf-8?B?cG80NmlBOVkzOTl4ZTlnOG1CTXhNYU1QV0YyVnp4Zm0vUE1BTzM1ZGRzcExV?=
+ =?utf-8?B?SmRERnZjaTExZlk3YkZVaXJBTmFXWmhtNndlamxVcnhKSldJY1lEOUllOGxP?=
+ =?utf-8?B?aVdvakowQlRUMkpOblJ2OFRVZnJSVno2Um41SUJGdWdOQ2lGR3R4WmhkOTlM?=
+ =?utf-8?B?TjhYOU51WjhtSi9IRHNpNndIK3dYaVIydzJzaU5wMHI2cFp4S3ErQnFQMWwv?=
+ =?utf-8?B?VzRrbEJMMXJMVG5yazRFUE96M094WTRtMEIzZkNBSWJUS1Iyd2hZa285WHRz?=
+ =?utf-8?B?NXl2bmtwcVBZdmdWQmZzSG5wUGNHMTkvamJIRzNUdDFPRkRQK0hIK2Uray81?=
+ =?utf-8?Q?1a+X+AnbATo=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5273.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?QWI5MEFjN1cvdXZ6c1Z1ZDA5TjIvWTZmQzF2ZjR0Y3JmZWNxV1RsTW1VTXdC?=
+ =?utf-8?B?anB4WjFCTTNqZ3BxWWx2emQ4NkpVU2p1NTdUZ1N4YXdRSE8ra2k5SEdIdWJT?=
+ =?utf-8?B?L2ErV1VJTXZMRktRbFFkZG5xMC84NENzdmpPeW5rYTU5ZWxIQ2dKL2dxRWRz?=
+ =?utf-8?B?V3Q4cStyUWhwUWZNUnBJMVIyUzE4Wm0wYzVzME8veit6Ym5CQW9EVDFyazdZ?=
+ =?utf-8?B?WEYvQ00rSk9ZejRjK2tGOHEzaU8ySEE0a2JtTjc1UlRJbFBMRnBvUFlrTGhq?=
+ =?utf-8?B?bGpRUGc3TWYxMnRmVzE2cUl1V1pjMFRtdTNWMDRjSGdmL3VrRmFBS2F2SjMw?=
+ =?utf-8?B?QVg0YVppRHdhU3JFbXRKTFdHNVh1ckUyMDF0RE5IRmZmVFVqYWxkcEJFK3g5?=
+ =?utf-8?B?WWt5ckc0RXl3Mk5jcWJ6eVJ5cEdzWTBYNE9YaFl1Y3BBY0w0YnlDRks4M1kr?=
+ =?utf-8?B?dTdXRE5DVWh4QzI3S2FSNUlBT0dDU3Yzdm94MlltRnBIV0dDMjdFQWpXZ3Nq?=
+ =?utf-8?B?cHpyNGVRK3M2cnZuaHFZdzZlcmxjclBYVEpTWG1kUGhOdEVkSWRXamR1UjhB?=
+ =?utf-8?B?dEczc1pKMnh3czhDQWpTQStvNmU2elJyNTd0MVRZcXdQWCtMTkQrNzRxaFNo?=
+ =?utf-8?B?MUY4bytxSHU4TW5VeEg1VWt1Q3pFdy9teENUMGpBbzdrTkpWM2xEaVA3ZjFx?=
+ =?utf-8?B?OW8wZ2dpSWttS3V1Qis1bFVqdzZkZGVReTJvK1pnb0dMSENtb3pGZ0NHK05o?=
+ =?utf-8?B?anNJSkJxQ1dmNC91OUI0aGFkSHJpR0w0VzJjTlp2WHRpYXlrYkxhN0czUVJp?=
+ =?utf-8?B?RVRBRkRDaGFNTjF5UmRXbnAvWldKRmkxUEpBMXBRRzFmVHJBbnhLcG5lWmxv?=
+ =?utf-8?B?S3F1UHNTS2ErWWV3MDJyNkpsQlFuTVBlcHpBa0luRXZhNzBLSEJ1OTh6WjRR?=
+ =?utf-8?B?RUlNamNYQzNEdWFRbU5ZRmREMUhJd3cvT3YwbXlPcWhwQjQ2Tlc5aHVXZk0v?=
+ =?utf-8?B?TXcxWmVXNHkzMDVQRndnNGoxSHg3eWpob1o4VW1lN0ovZ0lUdkRnNUh1T0lU?=
+ =?utf-8?B?aUVNWG00dWFXQ0FpWlNCNTE2a1UwNWsrcm5DOXRSSTRyeXFJNHptaG5xeVBQ?=
+ =?utf-8?B?WTBvQldBRVcvWUFHRElNdWYyOWkzelEvaDVzUFE1L3BEV3hPTHFmYUJtSnBh?=
+ =?utf-8?B?Z3FLN0N1QnF2bDJ4T25oYnBtMmdzTHNqN3JjRkMrMEZjdFhKKzA5Y2NDVkQ2?=
+ =?utf-8?B?eVN1dFNnSDlIb2hnbkUwSWJrdFhjbkhQbE9NVWRnTm5ZNnU3aG9oak5CM3E2?=
+ =?utf-8?B?T0JSc0NYVk1TR3F5aHJYbjk4YUVEZ3d0Q1YzWTZ6NGVqU3haWjBHSm5WZmxu?=
+ =?utf-8?B?U3RVaUhLQU4wRW11c3BsSUVkK2grckx1cXRtSkxQaERKZHlNQk9UeGRaaVhn?=
+ =?utf-8?B?cVlHL2NFSmlFdVVBWExtNlpGSUxWUHQzVTJmTjFHSTk4djJBNjNDdjZxZEJ3?=
+ =?utf-8?B?K0dKYlFPZHcwQ0dzak5qUFlsVEE2SzZqemp3cGdtWWFTM29uZlU0QnZOdnVR?=
+ =?utf-8?B?Q0hYSXdIZXNRWEErUFNHdjQ3amF5ZHB2aEVGamRhSi94aWllSkU0ZnpCWUZq?=
+ =?utf-8?B?TTBoMUdjamk0blhrbGhkbEM1ZWtKM2M1WUdBdTBWaTJvUzlQSzYydFZkaFQw?=
+ =?utf-8?B?aVpJMTY2YjcvU2s0eU1JWkg2bEhTbjlYVW1jTkdxU21yS0czUkgzaEw2ZWtm?=
+ =?utf-8?B?eUd6aFpERkJwUW5hYU1RbXFyQXU3MWh4VjcvR25YSUwxSGxNR0hZMS9oMG5y?=
+ =?utf-8?B?YVhSeVVnT09XL0lYSVYwOWZ4bzlSN2FvcWQ0MU1vNGJNOGN3bnY5V0lITko3?=
+ =?utf-8?B?QldDQnlQbUMzMzg2em1Bb2J3eExPMlJ2R2o2RzdCVWlPZ0xYWVBhRFY1NGll?=
+ =?utf-8?B?TzAvWVc2YTR2Zm9saVRpaGRGU3UxaGlSdUp4Y1BSL1ZDK2Zwa2dzL2Q0a1Uz?=
+ =?utf-8?B?R2oyOENEM2tWSGNiNFJFeUJHcHh2KzZlK3FLZnUyS0xrS2U3cHBwSFdIMXk5?=
+ =?utf-8?B?Ykwvb1dMdUF1Ynl0eFZsTVpzbTVac0VBbk4rM1dJUlk3V0RqM0FQY2NNY1l0?=
+ =?utf-8?Q?U0pl7ACOfFr0/E6Ml0+spDw6o?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: be3be1d3-1bd3-434d-2db4-08ddb56d10ac
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5273.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2025 11:23:39.4488
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZwytfK1Qe1IML4rDCPgTWyLzI1n3mDEUhRPiD84+ZgP0lDQXnCX6NQF/SKDc7PMh
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9687
 
-From: Mykola Kvach <mykola_kvach@epam.com>
 
-This patch adds support for the PSCI SYSTEM_SUSPEND function in the vPSCI
-(virtual PSCI) interface, allowing guests to request suspend via the PSCI
-v1.0 SYSTEM_SUSPEND call (both 32-bit and 64-bit variants).
 
-The implementation:
-- Adds SYSTEM_SUSPEND function IDs to PSCI definitions
-- Implements trapping and handling of SYSTEM_SUSPEND in vPSCI
-- Allows only non-hardware domains to invoke SYSTEM_SUSPEND; for the
-  hardware domain, PSCI_NOT_SUPPORTED is returned to avoid halting the
-  system in hwdom_shutdown() called from domain_shutdown
-- Ensures all secondary VCPUs of the calling domain are offline before
-  allowing suspend due to PSCI spec
-- the domain is shut down with SHUTDOWN_suspend, and resumes execution at
-  the address provided during suspend by guest
+On 20/06/2025 11:49, Hari Limaye wrote:
+> From: Luca Fancellu <luca.fancellu@arm.com>
+> 
+> Implement a function to find the index of a MPU region
+> in the xen_mpumap MPU region array.
+The commit msg should also mention why a change is needed.
 
-Usage:
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+> Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+> ---
+>  xen/arch/arm/include/asm/mpu/mm.h | 29 ++++++++++++++
+>  xen/arch/arm/mpu/mm.c             | 66 +++++++++++++++++++++++++++++++
+>  2 files changed, 95 insertions(+)
+> 
+> diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
+> index a7f970b465..a0f0d86d4a 100644
+> --- a/xen/arch/arm/include/asm/mpu/mm.h
+> +++ b/xen/arch/arm/include/asm/mpu/mm.h
+> @@ -10,6 +10,13 @@
+>  #include <asm/mm.h>
+>  #include <asm/mpu.h>
+>  
+> +#define MPUMAP_REGION_OVERLAP      -1
+> +#define MPUMAP_REGION_NOTFOUND      0
+> +#define MPUMAP_REGION_FOUND         1
+> +#define MPUMAP_REGION_INCLUSIVE     2
+> +
+> +#define INVALID_REGION_IDX     0xFFU
+> +
+>  extern struct page_info *frame_table;
+>  
+>  extern uint8_t max_mpu_regions;
+> @@ -75,6 +82,28 @@ void write_protection_region(const pr_t *pr_write, uint8_t sel);
+>   */
+>  pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags);
+>  
+> +/*
+> + * Checks whether a given memory range is present in the provided table of
+> + * MPU protection regions.
+> + *
+> + * @param table         Array of pr_t protection regions.
+> + * @param r_regions     Number of elements in `table`.
+NIT: in other places you refer to already mentioned parameters using #param and
+not `param`.
 
-For Linux-based guests, suspend can be initiated with:
-    echo mem > /sys/power/state
-or via:
-    systemctl suspend
+> + * @param base          Start of the memory region to be checked (inclusive).
+> + * @param limit         End of the memory region to be checked (exclusive).
+> + * @param index         Set to the index of the region if an exact or inclusive
+> + *                      match is found, and INVALID_REGION otherwise.
+> + * @return: Return code indicating the result of the search:
+> + *          MPUMAP_REGION_NOTFOUND: no part of the range is present in #table
+> + *          MPUMAP_REGION_FOUND: found an exact match in #table
+> + *          MPUMAP_REGION_INCLUSIVE: found an inclusive match in #table
+> + *          MPUMAP_REGION_OVERLAP: found an overlap with a mapping in #table
+> + *
+> + * Note: make sure that the range [#base, #limit) refers to the half-open
+> + * interval inclusive of #base and exclusive of #limit.
+What does half-open interval mean?
 
-Resuming the guest is performed from control domain using:
-      xl resume <domain>
+> + */
+> +int mpumap_contain_region(pr_t *table, uint8_t nr_regions, paddr_t base,
+NIT: mpumap is a table (singular), so it should be s/contain/contains
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
----
-Changes in V5:
-- don't use standby mode, restore execution in a provided by guest point
-- move checking that all CPUs, except current one, are offline to after
-  pausing the vCPUs
-- provide ret status from arch_domain_shutdown and handle it in
-  domain_shutdown
-- adjust VPSCI_NR_FUNCS to reflect the number of newly added PSCI functions
+> +                          paddr_t limit, uint8_t *index);
+> +
+>  #endif /* __ARM_MPU_MM_H__ */
+>  
+>  /*
+> diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+> index ccfb37a67b..15197339b1 100644
+> --- a/xen/arch/arm/mpu/mm.c
+> +++ b/xen/arch/arm/mpu/mm.c
+> @@ -12,6 +12,18 @@
+>  #include <asm/page.h>
+>  #include <asm/sysregs.h>
+>  
+> +#ifdef NDEBUG
+> +static inline void __attribute__ ((__format__ (__printf__, 1, 2)))
+> +region_printk(const char *fmt, ...) {}
+> +#else /* !NDEBUG */
+> +#define region_printk(fmt, args...)         \
+> +    do                                      \
+> +    {                                       \
+> +        dprintk(XENLOG_ERR, fmt, ## args);  \
+> +        WARN();                             \
+> +    } while (0)
+> +#endif /* NDEBUG */
+> +
+>  struct page_info *frame_table;
+>  
+>  /* Maximum number of supported MPU memory regions by the EL2 MPU. */
+> @@ -110,6 +122,60 @@ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags)
+>      return region;
+>  }
+>  
+> +int mpumap_contain_region(pr_t *table, uint8_t nr_regions, paddr_t base,
+> +                          paddr_t limit, uint8_t *index)
+> +{
+> +    uint8_t i = 0, _index;
+Why underscore? I don't know what MISRA thinks of this but looks similar to
+reserve identifiers and I don't think there is a need to use it here.
 
-Changes in V4:
-Dropped all changes related to watchdog, domain is marked as shutting
-down in domain_shutdown and watchdog timeout handler won't trigger
-because of it.
+> +
+> +    /* Allow index to be NULL */
+> +    index = index ? index : &_index;
+If index argument is NULL, why bother setting this internal variable _index?
 
-Previous versions included code to manage Xen watchdog timers during suspend,
-but this was removed. When a guest OS starts the Xen watchdog (either via the
-kernel driver or xenwatchdogd), it is responsible for managing that state
-across suspend/resume. On Linux, the Xen kernel driver properly stops the
-watchdog during suspend. However, when xenwatchdogd is used instead, suspend
-handling is incomplete, potentially leading to watchdog-triggered resets on
-resume. Xen leaves watchdog handling to the guest OS and its services.
+> +
+> +    /* Inside mpumap_contain_region check for inclusive range */
+What does this comment supposed to mean (we are already in this function)
 
-Dropped all changes related to VCPU context, because instead domain_shutdown
-is used, so we don't need any extra changes for suspending domain.
+> +    limit = limit - 1;
+> +
+> +    *index = INVALID_REGION_IDX;
+> +
+> +    if ( limit < base )
+> +    {
+> +        region_printk("Base address 0x%"PRIpaddr" must be smaller than limit address 0x%"PRIpaddr"\n",
+Why not normal printk? I think it's important to see such message.
 
-Changes in V3:
-Dropped all domain flags and related code (which touched common functions like
-vcpu_unblock), keeping only the necessary changes for Xen suspend/resume, i.e.
-suspend/resume is now fully supported only for the hardware domain.
-Proper support for domU suspend/resume will be added in a future patch.
-This patch does not yet include VCPU context reset or domain context
-restoration in VCPU.
----
- xen/arch/arm/include/asm/perfc_defn.h |  1 +
- xen/arch/arm/include/asm/psci.h       |  2 +
- xen/arch/arm/include/asm/vpsci.h      |  2 +-
- xen/arch/arm/mmu/p2m.c                |  6 +-
- xen/arch/arm/vpsci.c                  | 96 +++++++++++++++++++++++----
- 5 files changed, 92 insertions(+), 15 deletions(-)
+Also %# is preferred over 0x%
 
-diff --git a/xen/arch/arm/include/asm/perfc_defn.h b/xen/arch/arm/include/asm/perfc_defn.h
-index effd25b69e..8dfcac7e3b 100644
---- a/xen/arch/arm/include/asm/perfc_defn.h
-+++ b/xen/arch/arm/include/asm/perfc_defn.h
-@@ -33,6 +33,7 @@ PERFCOUNTER(vpsci_system_reset,        "vpsci: system_reset")
- PERFCOUNTER(vpsci_cpu_suspend,         "vpsci: cpu_suspend")
- PERFCOUNTER(vpsci_cpu_affinity_info,   "vpsci: cpu_affinity_info")
- PERFCOUNTER(vpsci_features,            "vpsci: features")
-+PERFCOUNTER(vpsci_system_suspend,      "vpsci: system_suspend")
- 
- PERFCOUNTER(vcpu_kick,                 "vcpu: notify other vcpu")
- 
-diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
-index 4780972621..48a93e6b79 100644
---- a/xen/arch/arm/include/asm/psci.h
-+++ b/xen/arch/arm/include/asm/psci.h
-@@ -47,10 +47,12 @@ void call_psci_system_reset(void);
- #define PSCI_0_2_FN32_SYSTEM_OFF          PSCI_0_2_FN32(8)
- #define PSCI_0_2_FN32_SYSTEM_RESET        PSCI_0_2_FN32(9)
- #define PSCI_1_0_FN32_PSCI_FEATURES       PSCI_0_2_FN32(10)
-+#define PSCI_1_0_FN32_SYSTEM_SUSPEND      PSCI_0_2_FN32(14)
- 
- #define PSCI_0_2_FN64_CPU_SUSPEND         PSCI_0_2_FN64(1)
- #define PSCI_0_2_FN64_CPU_ON              PSCI_0_2_FN64(3)
- #define PSCI_0_2_FN64_AFFINITY_INFO       PSCI_0_2_FN64(4)
-+#define PSCI_1_0_FN64_SYSTEM_SUSPEND      PSCI_0_2_FN64(14)
- 
- /* PSCI v0.2 affinity level state returned by AFFINITY_INFO */
- #define PSCI_0_2_AFFINITY_LEVEL_ON      0
-diff --git a/xen/arch/arm/include/asm/vpsci.h b/xen/arch/arm/include/asm/vpsci.h
-index 0cca5e6830..69d40f9d7f 100644
---- a/xen/arch/arm/include/asm/vpsci.h
-+++ b/xen/arch/arm/include/asm/vpsci.h
-@@ -23,7 +23,7 @@
- #include <asm/psci.h>
- 
- /* Number of function implemented by virtual PSCI (only 0.2 or later) */
--#define VPSCI_NR_FUNCS  12
-+#define VPSCI_NR_FUNCS  14
- 
- /* Functions handle PSCI calls from the guests */
- bool do_vpsci_0_1_call(struct cpu_user_regs *regs, uint32_t fid);
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 67296dabb5..f9c09a49e2 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -6,6 +6,8 @@
- #include <xen/sched.h>
- #include <xen/softirq.h>
- 
-+#include <public/sched.h>
-+
- #include <asm/alternative.h>
- #include <asm/event.h>
- #include <asm/flushtlb.h>
-@@ -198,7 +200,9 @@ void dump_p2m_lookup(struct domain *d, paddr_t addr)
-  */
- void p2m_save_state(struct vcpu *p)
- {
--    p->arch.sctlr = READ_SYSREG(SCTLR_EL1);
-+    if ( !(p->domain->is_shutting_down &&
-+           p->domain->shutdown_code == SHUTDOWN_suspend) )
-+        p->arch.sctlr = READ_SYSREG(SCTLR_EL1);
- 
-     if ( cpus_have_const_cap(ARM64_WORKAROUND_AT_SPECULATE) )
-     {
-diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
-index 7ba9ccd94b..c6b9ac1fc8 100644
---- a/xen/arch/arm/vpsci.c
-+++ b/xen/arch/arm/vpsci.c
-@@ -10,28 +10,18 @@
- 
- #include <public/sched.h>
- 
--static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
-+static int do_setup_vcpu_ctx(struct vcpu *v, register_t entry_point,
-                             register_t context_id)
- {
--    struct vcpu *v;
-     struct domain *d = current->domain;
-     struct vcpu_guest_context *ctxt;
-     int rc;
-     bool is_thumb = entry_point & 1;
--    register_t vcpuid;
--
--    vcpuid = vaffinity_to_vcpuid(target_cpu);
--
--    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
--        return PSCI_INVALID_PARAMETERS;
- 
-     /* THUMB set is not allowed with 64-bit domain */
-     if ( is_64bit_domain(d) && is_thumb )
-         return PSCI_INVALID_ADDRESS;
- 
--    if ( !test_bit(_VPF_down, &v->pause_flags) )
--        return PSCI_ALREADY_ON;
--
-     if ( (ctxt = alloc_vcpu_guest_context()) == NULL )
-         return PSCI_DENIED;
- 
-@@ -78,11 +68,32 @@ static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
-     if ( rc < 0 )
-         return PSCI_DENIED;
- 
--    vcpu_wake(v);
--
-     return PSCI_SUCCESS;
- }
- 
-+static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
-+                            register_t context_id)
-+{
-+    int rc;
-+    struct vcpu *v;
-+    struct domain *d = current->domain;
-+    register_t vcpuid;
-+
-+    vcpuid = vaffinity_to_vcpuid(target_cpu);
-+
-+    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
-+        return PSCI_INVALID_PARAMETERS;
-+
-+    if ( !test_bit(_VPF_down, &v->pause_flags) )
-+        return PSCI_ALREADY_ON;
-+
-+    rc = do_setup_vcpu_ctx(v, entry_point, context_id);
-+    if ( rc == PSCI_SUCCESS )
-+        vcpu_wake(v);
-+
-+    return rc;
-+}
-+
- static int32_t do_psci_cpu_on(uint32_t vcpuid, register_t entry_point)
- {
-     int32_t ret;
-@@ -197,6 +208,52 @@ static void do_psci_0_2_system_reset(void)
-     domain_shutdown(d,SHUTDOWN_reboot);
- }
- 
-+static void do_resume_on_error(struct domain *d)
-+{
-+    struct vcpu *v;
-+
-+    spin_lock(&d->shutdown_lock);
-+
-+    d->is_shutting_down = d->is_shut_down = 0;
-+    d->shutdown_code = SHUTDOWN_CODE_INVALID;
-+
-+    for_each_vcpu ( d, v )
-+    {
-+        if ( v->paused_for_shutdown )
-+            vcpu_unpause(v);
-+        v->paused_for_shutdown = 0;
-+    }
-+
-+    spin_unlock(&d->shutdown_lock);
-+}
-+
-+static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
-+{
-+    int ret;
-+    struct vcpu *v;
-+    struct domain *d = current->domain;
-+
-+    /* Drop this check once SYSTEM_SUSPEND is supported in hardware domain */
-+    if ( is_hardware_domain(d) )
-+        return PSCI_NOT_SUPPORTED;
-+
-+    domain_shutdown(d, SHUTDOWN_suspend);
-+
-+    /* Ensure that all CPUs other than the calling one are offline */
-+    for_each_vcpu ( d, v )
-+        if ( v != current && is_vcpu_online(v) )
-+        {
-+            do_resume_on_error(d);
-+            return PSCI_DENIED;
-+        }
-+
-+    ret = do_setup_vcpu_ctx(current, epoint, cid);
-+    if ( ret != PSCI_SUCCESS )
-+        do_resume_on_error(d);
-+
-+    return ret;
-+}
-+
- static int32_t do_psci_1_0_features(uint32_t psci_func_id)
- {
-     /* /!\ Ordered by function ID and not name */
-@@ -214,6 +271,8 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
-     case PSCI_0_2_FN32_SYSTEM_OFF:
-     case PSCI_0_2_FN32_SYSTEM_RESET:
-     case PSCI_1_0_FN32_PSCI_FEATURES:
-+    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
-+    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
-     case ARM_SMCCC_VERSION_FID:
-         return 0;
-     default:
-@@ -344,6 +403,17 @@ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid)
-         return true;
-     }
- 
-+    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
-+    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
-+    {
-+        register_t epoint = PSCI_ARG(regs,1);
-+        register_t cid = PSCI_ARG(regs,2);
-+
-+        perfc_incr(vpsci_system_suspend);
-+        PSCI_SET_RESULT(regs, do_psci_1_0_system_suspend(epoint, cid));
-+        return true;
-+    }
-+
-     default:
-         return false;
-     }
--- 
-2.48.1
+> +                      base, limit);
+> +        return -EINVAL;
+> +    }
+> +
+> +    for ( ; i < nr_regions; i++ )
+> +    {
+> +        paddr_t iter_base = pr_get_base(&table[i]);
+> +        paddr_t iter_limit = pr_get_limit(&table[i]);
+> +
+> +        /* Found an exact valid match */
+> +        if ( (iter_base == base) && (iter_limit == limit) &&
+> +             region_is_valid(&table[i]) )
+I think the check for valid region should be first. No need for other two if
+region is invalid. Also, shouldn't we check for region being valid right at the
+start of the loop?
+
+> +        {
+> +            *index = i;
+> +            return MPUMAP_REGION_FOUND;
+> +        }
+> +
+> +        /* No overlapping */
+> +        if ( (iter_limit < base) || (iter_base > limit) )
+> +            continue;
+> +
+> +        /* Inclusive and valid */
+> +        if ( (base >= iter_base) && (limit <= iter_limit) &&
+> +             region_is_valid(&table[i]) )
+> +        {
+> +            *index = i;
+> +            return MPUMAP_REGION_INCLUSIVE;
+> +        }
+> +
+> +        /* Overlap */
+> +        region_printk("Range 0x%"PRIpaddr" - 0x%"PRIpaddr" overlaps with the existing region 0x%"PRIpaddr" - 0x%"PRIpaddr"\n",
+> +                      base, limit + 1, iter_base, iter_limit + 1);
+> +        return MPUMAP_REGION_OVERLAP;
+> +    }
+> +
+> +    return MPUMAP_REGION_NOTFOUND;
+> +}
+> +
+>  void __init setup_mm(void)
+>  {
+>      BUG_ON("unimplemented");
+
+~Michal
 
 
