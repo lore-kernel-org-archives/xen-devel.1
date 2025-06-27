@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C614C7EE31
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD6DC83000
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Jun 2025 10:52:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1027506.1402119 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1027508.1402142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6gR-0002nm-F7; Fri, 27 Jun 2025 10:51:51 +0000
+	id 1uV6gV-0003Sw-3n; Fri, 27 Jun 2025 10:51:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1027506.1402119; Fri, 27 Jun 2025 10:51:51 +0000
+Received: by outflank-mailman (output) from mailman id 1027508.1402142; Fri, 27 Jun 2025 10:51:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uV6gR-0002mb-9C; Fri, 27 Jun 2025 10:51:51 +0000
-Received: by outflank-mailman (input) for mailman id 1027506;
- Fri, 27 Jun 2025 10:51:50 +0000
+	id 1uV6gV-0003Sp-0D; Fri, 27 Jun 2025 10:51:55 +0000
+Received: by outflank-mailman (input) for mailman id 1027508;
+ Fri, 27 Jun 2025 10:51:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=61Re=ZK=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uV6gQ-0002k5-AY
- for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 10:51:50 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
+ id 1uV6gT-0002k5-1M
+ for xen-devel@lists.xenproject.org; Fri, 27 Jun 2025 10:51:53 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b980649a-5344-11f0-b894-0df219b8e170;
- Fri, 27 Jun 2025 12:51:48 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-32adebb15c5so14914641fa.3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Jun 2025 03:51:48 -0700 (PDT)
+ id b88a0e31-5344-11f0-b894-0df219b8e170;
+ Fri, 27 Jun 2025 12:51:46 +0200 (CEST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-553bcf41440so2070138e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Jun 2025 03:51:46 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-32cd2dea1c0sm5235831fa.3.2025.06.27.03.51.46
+ 38308e7fff4ca-32cd2dea1c0sm5235831fa.3.2025.06.27.03.51.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 03:51:46 -0700 (PDT)
+ Fri, 27 Jun 2025 03:51:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b980649a-5344-11f0-b894-0df219b8e170
+X-Inumbo-ID: b88a0e31-5344-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751021508; x=1751626308; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DtDYb/sxb7EM69AJmP/RVzUWb9yGC1iN05GypUjWJS0=;
-        b=OsdN+uqfzF0qafwjHnmQgOq5Xf0lDZyN219zQ3t70GNuH+MShRRj0SWc66S0hAP+hs
-         8ViCuy0mWoC72AW1A5T88nfREpIClO8/F1zv6j2C1/AB15AziJrdMIgpQ8VEPnVN60NC
-         oaCiEImSm41x1Jag+4KE4A+h3XhaT1LuGdzSrZme89G53/FNdNFcLNeENpKM/sPyIyc5
-         uReG8N6/DPC6yoI5534lkJJDElb/5e3+dax5ORK4pDIxfVLVzwXmZnd+y27/5kwAaUxb
-         fSlYZkfpd3TpCigIfWalf/DeoQuR2/RA1txzrM9/B0ScFghMdrjZPjVJrqNBifO68Oau
-         jYnw==
+        d=gmail.com; s=20230601; t=1751021506; x=1751626306; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5Dr8iArT/LE1lmvmXj9BXJT3sgpq7t+Thr/P2BbYrfk=;
+        b=jN9rgfwFBMU9uCdyc5t+Ji8+TCNzCgP/TuzOXwZ/2mkEHAtVfLFpJP4/XzswUv8Jmd
+         n2d68chMn4s0VJKaDL1BvrQGhSsp3eMVegMRoGG7lHH2uHe19ry0aC6xW7NHhN3GHq0j
+         bsEGqBerrHXsBaZ8BL0IlCz4hk96NejCpLbHhO665pUNou1B0glhRyxw1kvk0yoNMxY9
+         gXsxbD5PphQNS4nZ/3fxquL3MYGyJgarn9DFAJ8ZQR54CqHWxHX95LBQ17Yw2he8McEK
+         H2uQ2azCfVRbfJ021G/ItcBe23Q/lBYgbih4Mgg2xONm8gos6mpF3rGu75O82mxnVvTr
+         ycIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751021508; x=1751626308;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=DtDYb/sxb7EM69AJmP/RVzUWb9yGC1iN05GypUjWJS0=;
-        b=BTs7glbLtrVCSF1KAY0cPlgRUVt7BQ/V1nG0G73Q+fdEepQRKN5X+WQrmgzNJfWzTA
-         uvy6zzCPxBgXQS0x4WfSBVINk1CRsVREn9D00myiu6XxhcMJIbpHvvcynDLp/weryRza
-         VfaiZU6UfuhHShCz6ygZ/MJNViFMWOyDVpnN864faX3Bl/7PZI58sYLC2MooV2ywbQn/
-         8dUlvNY1Vt56nEa9NaIVQrBKoZuyrBtDXWaC1nMTeI7JpffPdi4Y42/LPSx4sbxd/UXB
-         g0zLtF10sF/nvROpBK4me+EOaUL4wdU2GEUhvynUtMVpKe/ugyXwhgHfFvKZmMDo72c8
-         KqLA==
-X-Gm-Message-State: AOJu0YxYwzOubZSUO0r0yAjHzWRpmj29cFjKba4dNshP4Xc4/80tgfJD
-	85Knac4HLQ97reTcUu12z5oHQqS2tIHs6ePehiF/hRc1MwQwJNOB3jbPU9nXygLl
-X-Gm-Gg: ASbGncs7TdUPL1yMJfqnTwaeWZXu4FWGQX2Fy6KL48j2J1M/WYft1I3UYypalV9+Q7M
-	r+Hsn/dRTASN1fZQYRVX5qSQhRNBR1jbOdWSOetmdwiWUKyPS0UHeoTeOl7KjjRAjGMK+8pAEsJ
-	gPsfuNxjIIvuMSrCaGFsNKKMzfLwDqQLY+udO3rCY2lhBomnvgr3ZbGaeo87PUZZWvaVgTyJ5WY
-	IalF+nnSctb2bjHWCdTDtR6yaP96ZxhYn0ruCs2vC/UImU1GKOe7V4WGXpbeVWFbEOzApllu/Ro
-	gffIJ7Te5/Avcf5mxm4Q35sCb2/IJgTPvMJEQGoy89IROdcMuy1jPdYhGRjaf7Q6fB3rJzSWRz5
-	h79Sa5quwpJtTuacoLuBmHXNocQ==
-X-Google-Smtp-Source: AGHT+IEkSp1AGDJtWZaTbK8GvkVKo++j2/3AogtoWI8j+NM2W8N1kPeEqWvYagulylssuiDC65QlxA==
-X-Received: by 2002:a05:651c:304b:b0:32a:84f6:a862 with SMTP id 38308e7fff4ca-32cdc481409mr6328681fa.3.1751021507206;
-        Fri, 27 Jun 2025 03:51:47 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1751021506; x=1751626306;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=5Dr8iArT/LE1lmvmXj9BXJT3sgpq7t+Thr/P2BbYrfk=;
+        b=tRMax5cNrTTxNjezu7YGksGtq5/1Pi5m84eunRb7XEZOVGZTYkw2BLUf72QlZKxVbU
+         Y4A7GeiIVLYJyzP21KpQMhwhLISrFVNc6gnlQ78VIhqh/IBO7neIPTamPQhjXnZHrg38
+         lyGd0Md8u52nT81RB80+TV+IjsIKZPERrUeb6TbZ+49y8vCOEjMWG0ReE8kLWQMLkrae
+         PCyGKvOFJbIUmnHPS6DCM8aRp7NZ0wAoaiBKslQoG/KOmDS70fi2+JtqD1LrbIRGMxWU
+         Z+vyz7KtP3wcCVnUxR2UtOkP/dkEZXOX/Q+FMETZ44V0EYpnahGfBwjlvOSrKt1brmr6
+         +Fhg==
+X-Gm-Message-State: AOJu0Yww2qUCD4HsrECDDNrdIOkWMC4KzahkCeqH0g6GoeQryBznDSyf
+	HIfKcbostj+VTpaSm5nvC8FpgLM1h2GGlx5w7xHoz25eRmq1oA+3YgE1mwZRBFFk
+X-Gm-Gg: ASbGncvTTujkgh4oXLw/QuTSlxpNEMYJBZVVhacYKs5S1uG4u5KfW9cZSnWygwYXfsf
+	JQ2Vmtgj23Yf4YtZeox8IkEeyKIaVmbM1kNcq63TcuBc30yfkUhe4ThqEpYs5yfhZKzJ5WiECj9
+	wzCBErv2vdcFL6Di0alchgKYFcoGYqob/P4o2I8sEfIgtXLJtkxI+Kc8FAEpHIvTQeZxe1Ly5aq
+	AC9kx2QgblI7PiO42EV89QNYqb5uWQ+i6Zx4I0Vgz+txqIUz30MIl39cZWeS60F4p9bVuBWOO/M
+	tovEA2iJJwLF/Vdnj4NrW0PpFSEMw3OU73s7F78nUKlgALWSeezKRZChkgJnyx1P+p+cMxFR4XL
+	iAN9RncRmLo3Hu5T64drAmOAD8w==
+X-Google-Smtp-Source: AGHT+IHqwxGUVrmU+ZOCc5tjPVo0FIfRGtWSbu0TTR0/cNaRr7kcWmT9ZPSqJS3cDCfNvEqr8zT3EQ==
+X-Received: by 2002:a05:6512:b12:b0:554:f79d:ce59 with SMTP id 2adb3069b0e04-5550b9ee228mr913768e87.27.1751021505458;
+        Fri, 27 Jun 2025 03:51:45 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v5 2/4] tools/xl: allow resume command compilation for arm
-Date: Fri, 27 Jun 2025 13:51:31 +0300
-Message-ID: <00c495b471c09a84601156b2b74a1ba897f51755.1751020456.git.mykola_kvach@epam.com>
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v5 0/4] Enable guest suspend/resume support on ARM via vPSCI
+Date: Fri, 27 Jun 2025 13:51:29 +0300
+Message-ID: <cover.1751020456.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1751020456.git.mykola_kvach@epam.com>
-References: <cover.1751020456.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-The "xl resume" command was previously excluded from ARM builds because
-system suspend/resume (e.g., `SYSTEM_SUSPEND`) via vPSCI was not
-implemented. On x86, the command is used for ACPI S3 suspend/resume.
+This patch series introduces the initial support for guest suspend
+and resume on ARM platforms using the PSCI SYSTEM_SUSPEND interface. The main
+goal is to allow ARM guests to request suspension using PSCI and be resumed
+by the control domain (e.g., via "xl resume").
 
-This change enables compilation of `xl resume` on ARM regardless of the
-underlying implementation status, making the tool available for use in
-testing or for future support. The libxl infrastructure and handler
-functions are already present and usable.
+### Background
 
-Note: This does not imply full system suspend/resume support on ARM.
-      "xl suspend" command still not work for arm platforms.
+The PSCI SYSTEM_SUSPEND call is part of the PSCI v1.0+ specification and is
+used by guests to enter the deepest possible power state. On Xen/ARM, we
+emulate this interface in the virtual PSCI (vPSCI) layer for guests.
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+This series includes:
+
+1. A new vPSCI implementation of the PSCI SYSTEM_SUSPEND function for guests
+2. Documentation updates to SUPPORT.md to reflect PSCI and vPSCI support status
+3. Enabling "xl resume" command compilation for ARM, which was previously disabled
+
+### Usage
+
+For Linux-based guests:
+  - Suspend can be triggered using: "echo mem > /sys/power/state" or "systemctl suspend"
+  - Resume can be performed from control domain using: "xl resume <domain>"
+
+For more information, refer to the official Linux kernel documentation on power management.
+
+Note that currently, SYSTEM_SUSPEND is supported only for guest domains (not for
+the hardware domain).
 ---
- tools/include/libxl.h   |  1 -
- tools/xl/xl.h           |  2 +-
- tools/xl/xl_cmdtable.c  |  2 +-
- tools/xl/xl_vmcontrol.c | 12 ++++++------
- 4 files changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index a8704e0268..0fda8bb616 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1134,7 +1134,6 @@ typedef struct libxl__ctx libxl_ctx;
-  * restoring or migrating a domain. In this case the related functions
-  * should be expected to return failure. That is:
-  *  - libxl_domain_suspend
-- *  - libxl_domain_resume
-  *  - libxl_domain_remus_start
-  */
- #if defined(__arm__) || defined(__aarch64__)
-diff --git a/tools/xl/xl.h b/tools/xl/xl.h
-index 45745f0dbb..5b0a481456 100644
---- a/tools/xl/xl.h
-+++ b/tools/xl/xl.h
-@@ -130,8 +130,8 @@ int main_migrate_receive(int argc, char **argv);
- int main_save(int argc, char **argv);
- int main_migrate(int argc, char **argv);
- int main_suspend(int argc, char **argv);
--int main_resume(int argc, char **argv);
- #endif
-+int main_resume(int argc, char **argv);
- int main_dump_core(int argc, char **argv);
- int main_pause(int argc, char **argv);
- int main_unpause(int argc, char **argv);
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 06a0039718..4f662a4189 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -198,12 +198,12 @@ const struct cmd_spec cmd_table[] = {
-       "Suspend a domain to RAM",
-       "<Domain>",
-     },
-+#endif
-     { "resume",
-       &main_resume, 0, 1,
-       "Resume a domain from RAM",
-       "<Domain>",
-     },
--#endif
-     { "dump-core",
-       &main_dump_core, 0, 1,
-       "Core dump a domain",
-diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
-index c813732838..ebacde5482 100644
---- a/tools/xl/xl_vmcontrol.c
-+++ b/tools/xl/xl_vmcontrol.c
-@@ -38,11 +38,6 @@ static void suspend_domain(uint32_t domid)
-     libxl_domain_suspend_only(ctx, domid, NULL);
- }
- 
--static void resume_domain(uint32_t domid)
--{
--    libxl_domain_resume(ctx, domid, 1, NULL);
--}
--
- int main_suspend(int argc, char **argv)
- {
-     int opt;
-@@ -55,6 +50,12 @@ int main_suspend(int argc, char **argv)
- 
-     return EXIT_SUCCESS;
- }
-+#endif
-+
-+static void resume_domain(uint32_t domid)
-+{
-+    libxl_domain_resume(ctx, domid, 1, NULL);
-+}
- 
- int main_resume(int argc, char **argv)
- {
-@@ -68,7 +69,6 @@ int main_resume(int argc, char **argv)
- 
-     return EXIT_SUCCESS;
- }
--#endif
- 
- static void pause_domain(uint32_t domid)
- {
+TODO: enable "xl suspend" for ARM
+---
+Previous versions of this patch series:
+  V1: https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg01093.html
+  V2: https://marc.info/?l=xen-devel&m=166514782207736&w=2
+  V3: https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg00168.html
+
+
+This is the first part of previous patch series and originally consist only
+with necessary changes needed for guest domain suspend.
+
+
+Main change in V5:
+  - Reverted the logic related to suspending domains. Instead of the standby
+    mode introduced in v4, domains now resume execution at the point provided
+    during suspend
+
+The rest of the minor changes are described in the changelog of each commit.
+
+
+Mykola Kvach (4):
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
+  tools/xl: allow resume command compilation for arm
+  SUPPORT.md: Add entry for guest PSCI SYSTEM_SUSPEND support
+  CHANGELOG: Document guest suspend/resume to RAM support on Arm
+
+ CHANGELOG.md                          |  2 +
+ SUPPORT.md                            |  7 ++
+ tools/include/libxl.h                 |  1 -
+ tools/xl/xl.h                         |  2 +-
+ tools/xl/xl_cmdtable.c                |  2 +-
+ tools/xl/xl_vmcontrol.c               | 12 ++--
+ xen/arch/arm/include/asm/perfc_defn.h |  1 +
+ xen/arch/arm/include/asm/psci.h       |  2 +
+ xen/arch/arm/include/asm/vpsci.h      |  2 +-
+ xen/arch/arm/mmu/p2m.c                |  6 +-
+ xen/arch/arm/vpsci.c                  | 96 +++++++++++++++++++++++----
+ 11 files changed, 109 insertions(+), 24 deletions(-)
+
 -- 
 2.48.1
 
