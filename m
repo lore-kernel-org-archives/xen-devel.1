@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EB1C8302D
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Jun 2025 11:43:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1029061.1402789 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10029C8302D
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Jun 2025 11:45:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1029068.1402800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWCuI-0000qc-Sm; Mon, 30 Jun 2025 11:42:42 +0000
+	id 1uWCwy-0001Nk-8W; Mon, 30 Jun 2025 11:45:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1029061.1402789; Mon, 30 Jun 2025 11:42:42 +0000
+Received: by outflank-mailman (output) from mailman id 1029068.1402800; Mon, 30 Jun 2025 11:45:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWCuI-0000qV-QC; Mon, 30 Jun 2025 11:42:42 +0000
-Received: by outflank-mailman (input) for mailman id 1029061;
- Mon, 30 Jun 2025 11:42:41 +0000
+	id 1uWCwy-0001Nd-5w; Mon, 30 Jun 2025 11:45:28 +0000
+Received: by outflank-mailman (input) for mailman id 1029068;
+ Mon, 30 Jun 2025 11:45:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=erj2=ZN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uWCuH-0000qP-Ez
- for xen-devel@lists.xenproject.org; Mon, 30 Jun 2025 11:42:41 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ id 1uWCww-0001NX-G5
+ for xen-devel@lists.xenproject.org; Mon, 30 Jun 2025 11:45:26 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 531c11b8-55a7-11f0-b894-0df219b8e170;
- Mon, 30 Jun 2025 13:42:39 +0200 (CEST)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3a588da60dfso1216770f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 30 Jun 2025 04:42:39 -0700 (PDT)
+ id b52b6712-55a7-11f0-b894-0df219b8e170;
+ Mon, 30 Jun 2025 13:45:23 +0200 (CEST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3a6f2c6715fso2237512f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Jun 2025 04:45:23 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-318c14e224csm9146641a91.32.2025.06.30.04.42.35
+ d2e1a72fcca58-74af55c5f38sm9141562b3a.108.2025.06.30.04.45.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Jun 2025 04:42:38 -0700 (PDT)
+ Mon, 30 Jun 2025 04:45:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,53 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 531c11b8-55a7-11f0-b894-0df219b8e170
+X-Inumbo-ID: b52b6712-55a7-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1751283758; x=1751888558; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/eVulYssM1kQlc6S6ZkCc8s3/n4KwIjd96GCkHhSpLc=;
-        b=cR0u/w+JYT9MAIHnQobcNIurfP42eJZGORm6I9N+m7iepJgQjLwag+zU63DSY52Chz
-         WFqjVsR/tTH/6fBUjKZK1k94jP4w9/T2nPzP6HT8p1K2CF5Y5P+X7XSshsWgOQMkGaAQ
-         W7VWXjtOvNfFUoU6z6RsKKRfDRsDU3AoKiAnuZBnuzokfu9KURhdE4ew6U9k2to/GZL1
-         7rgIgAJELYkCErqrO07erYcufqMR/8ZX34gkFnIylKi13KShGynkeiRIMnVX4H2oPPVz
-         QYJl/wtNHGITy+wfZHWjBsSO1ocMINaqHNh88OWfk72xEY/bzH53DJ/fiPYOlDvODLYT
-         R8GA==
+        d=suse.com; s=google; t=1751283923; x=1751888723; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=F7A6t9NWEWwY8Zy1mr641xlx/zKNYi4cn7Tits2bsB8=;
+        b=KY8EnW87bYMlqJm7SFGEuGvxKans+CfHlp+A2QVM9h/QIGiQVUSMzFlQeyzMeao+fO
+         CA61ATLlOxDmNEN4Dmzjs1unze25Cl1Os9gki0XGKdBwS4TeY7XfR0w7RgXybgu96a7Y
+         PDRlYijHjG+a08qSKs+gJqCxELZ5lblwVLap0yEWVJbmCBUW3IyB2fG9mxkhNeG++JS3
+         k7iFi7rpscGKogb5aIu1NA5AN1OpowSh0UjNxbnfy56JfuhldhgZp+qXgndLNgi/kvMi
+         sRHh+hWfatNF/veUMf1UAvvIWJ5EPhc0WjFhiPbI67p0zmeTVZkN7Cj2byA4LGdaGa4T
+         8OKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751283759; x=1751888559;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=/eVulYssM1kQlc6S6ZkCc8s3/n4KwIjd96GCkHhSpLc=;
-        b=PjfHaTNZDCLEwtilgxm+mBepwo51dcgzetbycsXA8Akk29MvJw6glCgPn3pbBRxPBG
-         Gn2ubiRiiZSW9mGQ02honv1f3WPGIjXP4nA4fhwpkPrnN55LKroyRx0g/oSZEM0iHYdg
-         b5JHaxZwgEK6itnwpz3Fye0kZOFEiKVpeesJ66PetblevaJEWvg5AhNVWGaqNa5N6P2m
-         9eDKPDU8QYhQhlQnKRxZPykvcBWc8oduITZN25HTMOJSV/hJ6r/t9rpSdelbBWJgdiU7
-         G3dZ3r8Ah//VEAqFfSbkYRZ7IkN8D4PSJ1yl3pOKB9QqNzYlvEw6hURnX15B406vour+
-         eo3Q==
-X-Gm-Message-State: AOJu0YxHUCx85ocuuJGuqd56tSndyhoV/enghtIplAgY3tqt/LX7FpUR
-	yjnM1Uw3qrzEA4s04il/WjRrxkwHJ+ArwuoN66BfJf0GIRPBJY/t931BU30UtEBH9EkXyqkPXtX
-	zEPg=
-X-Gm-Gg: ASbGnctykxmTSKde8MEY4WiA8PQOJym24ZOqPR8k0JZ3BpaQEoLUOh/eO1pYoW1cnuq
-	7KwjXeTuNDSew//zRpcAhHxzvFsU1jSh5Orbwrs8tBtf1vC6/+Bh91fv6La0fi7PslWX5xkMYnu
-	Gp6YP54Z5XBzNN7a7DeNsd21VgTKiTcraOhhHQMvmsqmLla/Lbx5Kz591rTcA87fxXXac0a4QaP
-	0SSxGV9Im4AED7tRTdReEnPJrt0kRkjt7/ZA1IWtLFM4n1TpC6L/ep00lQPaLl8WHX8ibDWJhZe
-	kHhGAXePG7hk7vh6Wumv9gi8w7SXMEurVZij85tnoo2W/j7VUDDHNq0mPFAF3Mge4CVCe6/rtzi
-	DNkYYQRdxDb9tTzRrX5X8HnXpoJUUbM0llzPnoFpKjPwzHmM=
-X-Google-Smtp-Source: AGHT+IHIY/GdcoG34snCr+E2mCNV++T094l+hnLEk6ccN0U7ZVqt122MCCdAMMfs/zMDNRS1rpQ4Gg==
-X-Received: by 2002:a05:6000:710:b0:3aa:c9a8:a387 with SMTP id ffacd0b85a97d-3aac9a8a39cmr7320674f8f.0.1751283758561;
-        Mon, 30 Jun 2025 04:42:38 -0700 (PDT)
-Message-ID: <7fa05d3f-2f85-4a42-9549-b68a486e30ea@suse.com>
-Date: Mon, 30 Jun 2025 13:42:31 +0200
+        d=1e100.net; s=20230601; t=1751283923; x=1751888723;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=F7A6t9NWEWwY8Zy1mr641xlx/zKNYi4cn7Tits2bsB8=;
+        b=m4MajthP0xHqJrAn8wa5DAIXmsabuHy8RtJeQXI+83uc4+R0tstX4EihKFcG5ayoZ8
+         UOKvJ2NMzfRJxGiThyctU0BrE6UTfXbqzzNawiTkNuc8ob+qB3/HNg8Ehc2x9sgnbChZ
+         GY1gVF3W9VWK/bbt0fHuVbJl0ngI6XY4N5EYDWZlUQW/OQGKV5FfRe1lzVNOl8gqEMCj
+         687sky4f4lH70FnAdTfIEHJZERfNae9jDIT5zjXxrwMYczycyz0+ze/B2idLkvt3e1L2
+         rp9sGOD3CDp/6sqyH18Kkt5hdxJ16WbXkjiy6ZiRNu6Wl06EcS38p8YRykxsR7vi3Quh
+         OJJQ==
+X-Gm-Message-State: AOJu0YxD5EGLbBc88LE9xD3bz5nR9LznYNLU5afu4bmzxeaQnQnupPRo
+	KV7a4SBMqwuaj5pD3ZTb/aljwmw4a19JFUY2o4yfOZz71UxnAQkVkiTqflGTmUkHDmN4ZP9QT/O
+	E9+I=
+X-Gm-Gg: ASbGnctS/fYLBWxtF+pzMrp0rjgFGDpqF8AyGjZs0qWTGk14jGWNzdBqc+aIZcP6IXX
+	/PjSDohU3Ol2aU7dm76bHNVhpJrAAuj5mQN6O0QK93QwD40pDRW1elAMGb0ova5UZeG3r67vUIO
+	0sZHRHNf4SfdpKo44U6qBPuRz84ICtypJVRpDZA3fv8a48oB27ht/EmPKsTW1Z6TEVjd77M58rZ
+	0RBs+Zj7IhFchJoNOjTY/KpeA0Kz9+yzQD4/hEHKAYEDWoLJyn29S7t4lPH+mg/kAaxBmZk8dRZ
+	kSmVT6o385K0gFKhrnWBvn8Vc1QpNfGdNamERzsuxoY/DdXJM+DUeEIuuPFcMd6U5Z+phAPA8dQ
+	JGmTukPif6e5JLuUo9oIR/9vQhBYBC1Nv4Pp9zj8V2f8kANo=
+X-Google-Smtp-Source: AGHT+IGADTwG1thslrgUpt7vUOpQDbrkuQkQ1lQPKJQbr3rsWxLg4V47bYZIdYKjHHpvVqMt/i674w==
+X-Received: by 2002:a05:6000:2712:b0:3a3:4baa:3f3d with SMTP id ffacd0b85a97d-3a8f435de5fmr7367675f8f.6.1751283923074;
+        Mon, 30 Jun 2025 04:45:23 -0700 (PDT)
+Message-ID: <943ed2bf-07c8-4cd1-a745-1f8648bd0403@suse.com>
+Date: Mon, 30 Jun 2025 13:45:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
+Subject: Re: [PATCH] x86/SMP: guard socket_cpumask[] access in
+ cpu_smpboot_free()
+From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/SMP: guard socket_cpumask[] access in cpu_smpboot_free()
+References: <7fa05d3f-2f85-4a42-9549-b68a486e30ea@suse.com>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -117,49 +120,54 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <7fa05d3f-2f85-4a42-9549-b68a486e30ea@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Before CPU identification has run (and it may not have run at all e.g.
-when AP bringup failed altogether), cpu_data[].phys_proc_id (which is
-what cpu_to_socket() resolves to) can't really be used. The use of
-cpu_to_socket()'s result as an array index cpu_smpboot_free() therefore
-needs guarding, as the function will also be invoked upon AP bringup
-failure, in which case CPU identification may not have run.
+On 30.06.2025 13:42, Jan Beulich wrote:
+> Before CPU identification has run (and it may not have run at all e.g.
+> when AP bringup failed altogether), cpu_data[].phys_proc_id (which is
+> what cpu_to_socket() resolves to) can't really be used. The use of
+> cpu_to_socket()'s result as an array index cpu_smpboot_free() therefore
+> needs guarding, as the function will also be invoked upon AP bringup
+> failure, in which case CPU identification may not have run.
+> 
+> Without "x86/CPU: re-work populating of cpu_data[]" [1] the issue is
+> less pronounced: The field starts out as zero, then has the BSP value
+> (likely again zero) copied into it, and it is properly invalidated only
+> in cpu_smpboot_free(). Still it is clearly wrong to use the BSP's socket
+> number here.
+> 
+> Making the guard work with and without the above patch applied turns out
+> interesting: Prior to that patch, the sole invalidation done is that in
+> cpu_smpboot_free(). Upon a later bringup attempt, the fields invalidated
+> are overwritten by the BSP values again, though. Hence compare APIC IDs,
+> as they cannot validly be the same once CPU identification has run.
+> 
+> [1] https://lists.xen.org/archives/html/xen-devel/2024-02/msg00727.html
 
-Without "x86/CPU: re-work populating of cpu_data[]" [1] the issue is
-less pronounced: The field starts out as zero, then has the BSP value
-(likely again zero) copied into it, and it is properly invalidated only
-in cpu_smpboot_free(). Still it is clearly wrong to use the BSP's socket
-number here.
+Fixes: 4824bdfdabeb ("x86: add socket_cpumask")
 
-Making the guard work with and without the above patch applied turns out
-interesting: Prior to that patch, the sole invalidation done is that in
-cpu_smpboot_free(). Upon a later bringup attempt, the fields invalidated
-are overwritten by the BSP values again, though. Hence compare APIC IDs,
-as they cannot validly be the same once CPU identification has run.
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Sadly there was no feedback at all yet for the referenced patch.
+> 
+> --- a/xen/arch/x86/smpboot.c
+> +++ b/xen/arch/x86/smpboot.c
+> @@ -958,7 +958,13 @@ static void cpu_smpboot_free(unsigned in
+>      unsigned int socket = cpu_to_socket(cpu);
+>      struct cpuinfo_x86 *c = cpu_data;
+>  
+> -    if ( cpumask_empty(socket_cpumask[socket]) )
+> +    /*
+> +     * We may come here without the CPU having run through CPU identification.
+> +     * In that case the socket number cannot be relied upon, but the respective
+> +     * socket_cpumask[] slot also wouldn't have been set.
+> +     */
+> +    if ( c[cpu].apicid != boot_cpu_data.apicid &&
+> +         cpumask_empty(socket_cpumask[socket]) )
+>      {
+>          xfree(socket_cpumask[socket]);
+>          socket_cpumask[socket] = NULL;
 
-[1] https://lists.xen.org/archives/html/xen-devel/2024-02/msg00727.html
-
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Sadly there was no feedback at all yet for the referenced patch.
-
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -958,7 +958,13 @@ static void cpu_smpboot_free(unsigned in
-     unsigned int socket = cpu_to_socket(cpu);
-     struct cpuinfo_x86 *c = cpu_data;
- 
--    if ( cpumask_empty(socket_cpumask[socket]) )
-+    /*
-+     * We may come here without the CPU having run through CPU identification.
-+     * In that case the socket number cannot be relied upon, but the respective
-+     * socket_cpumask[] slot also wouldn't have been set.
-+     */
-+    if ( c[cpu].apicid != boot_cpu_data.apicid &&
-+         cpumask_empty(socket_cpumask[socket]) )
-     {
-         xfree(socket_cpumask[socket]);
-         socket_cpumask[socket] = NULL;
 
