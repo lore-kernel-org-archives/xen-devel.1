@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD55C83F03
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E9E0C83F04
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Jul 2025 23:45:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030116.1403758 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1030117.1403768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWkfE-00085Q-Bp; Tue, 01 Jul 2025 23:45:24 +0000
+	id 1uWkfH-0008JH-I3; Tue, 01 Jul 2025 23:45:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030116.1403758; Tue, 01 Jul 2025 23:45:24 +0000
+Received: by outflank-mailman (output) from mailman id 1030117.1403768; Tue, 01 Jul 2025 23:45:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWkfE-00085J-8B; Tue, 01 Jul 2025 23:45:24 +0000
-Received: by outflank-mailman (input) for mailman id 1030116;
- Tue, 01 Jul 2025 23:45:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uWkfH-0008JA-EW; Tue, 01 Jul 2025 23:45:27 +0000
+Received: by outflank-mailman (input) for mailman id 1030117;
+ Tue, 01 Jul 2025 23:45:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=u5am=ZO=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1uWkfD-00085D-96
- for xen-devel@lists.xenproject.org; Tue, 01 Jul 2025 23:45:23 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7382e5de-56d5-11f0-a313-13f23c93f187;
- Wed, 02 Jul 2025 01:45:21 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a4e749d7b2so1057851f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 01 Jul 2025 16:45:21 -0700 (PDT)
+ id 1uWkfG-0008Gm-DR
+ for xen-devel@lists.xenproject.org; Tue, 01 Jul 2025 23:45:26 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 74910aa5-56d5-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 01:45:23 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3a4eed70f24so841788f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Jul 2025 16:45:23 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a87e947431sm14509037f8f.0.2025.07.01.16.45.19
+ ffacd0b85a97d-3a87e947431sm14509037f8f.0.2025.07.01.16.45.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 16:45:19 -0700 (PDT)
+ Tue, 01 Jul 2025 16:45:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,41 +49,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7382e5de-56d5-11f0-a313-13f23c93f187
+X-Inumbo-ID: 74910aa5-56d5-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751413521; x=1752018321; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=OofgqVfnZofG2Ok8ImHga//K217vg60fQZ2u9VIlI3I=;
-        b=k/xVltIKCw7DmNxkOu/Tjf6PtRbfNqj9/TR9KeQDNT6uTrk3jFcg/rILFAqf4Ih4rG
-         7SpqQS9MpXZJVKfD0pxVieb1oI8exbPCJktVhGmAUjJU3KYov3SusLgg73Rlf6PYo6Zj
-         ed0ig/JP6B56qHhu06dW5gwkAPq3DXp1UlUZ/FKv81gPjVja4E3eJ2Wd83kM8TEXNvIK
-         lIZNS0x1HLUaG9CsuFhLVwYaSyNd6kuYrUArlRhyNrQIF9zwPiWlqfb5qW9SLIv4FZLg
-         AK6wlkUws292X/E0t0gt8NwpHD/zkRPu6g/AcQOYnk62bI1VPtcZxSuoQPZqQJLB57AT
-         TJ6Q==
+        d=gmail.com; s=20230601; t=1751413522; x=1752018322; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XGfgz5+4xZkhVXL2ewILuOLrNhVDG3jFfYq35hz23X4=;
+        b=W4p8Xv7W4aEZjDztbbg0tdfmHClRRhcVaN/WY8ei02MbywJrnGSJ8zMuUovkWbEpHG
+         Gc3MzlB/h2DDj6kSSs7DaHz8dQKlsO+WI6JorJjOdbhCT/c61yLMKEX7eHb7+WhBWTjB
+         48t4vZ0TDk352x7eae9SL3Yz9yyFuwB1A1c5sCE4yG1jyJN0uhqlp8mZ+EBH9/9bRPhf
+         WhwRnQDkpDtSvsRNIFN9BXVx+fDRLeNibMRU2KEngzRGI3B9dxizXt88IM/CAm7x3sT5
+         LPZ4Rx5XTVN/rp3DMijRkxqIzNHHG+dnFHXF8jOcq36MN9Vn6cNumbiCOsla9++5Qa0h
+         yh0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751413521; x=1752018321;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=OofgqVfnZofG2Ok8ImHga//K217vg60fQZ2u9VIlI3I=;
-        b=n4R7TDlSwF0y6wHr5RDlJQYm082VG1Kkxxwo0hkjy42VfZXPqb/tvylWhLyfudI2pY
-         wafVp7wkXqz8u0AMD7vhzJ9auprm6e3ccBK7LcYBMXuymHX+B2/hDzzQjI6NVgHaY6qZ
-         QTvqJvgWdBIss82Kp4zRuSAYQ7CZ707pA4RRc5L6nEJFLB3bkA0mB32UR3U6yTISmd9v
-         lwp4XuljTRCjX6HXHvzjxtwNB3/4/LvLJG42JeC87yZ9YIYYqH/cU9HhN63vzm9T3dWZ
-         sRrjbOFd6cw1n3NFweFVUP+OW2NRpi1j+ZRX1zq+qU4LNithyE1IX2Oy5r+L8MRu5f4z
-         knfQ==
-X-Gm-Message-State: AOJu0YyhpQEgq9qO2SdCLgKL9/G+QJ4bSThAh94PeCxO7hMcbVWIevar
-	6sSQvvfWg10w/P63uzDBn6gUi+i3zKTaK8HmT/sKqLHL9sW82n+qSAXt9Ns7oQ==
-X-Gm-Gg: ASbGncuspOYCpGcsYXgMIoVak9GNW32y2yGOdZD9y6XSB57w/g+HilbPm5pnrNuwyJr
-	yapS4PPo2HrMNnFxIzQBp33kwA4uCLWCo1aEL2ziT/WsZjJbZhQNUFMnppXlUok62zoAR6WWsDo
-	CV+bzqO36uZOQc8RYqJnFMo9XYrN7RGT7cmJRyPyvPsLvWu1oGheWkLGJMQB+Ihk6NAzr5bCkDv
-	TxbKUUlQbOFEXEi3g3ZIiODO2HoVauUf0btk9b/gx3d4rMBOOQskm9IpKcGRWdbkB0g16inVUmu
-	mPZZRcVNE9ndX5Q42T4d+w2Ov6bpAcRFYomidRXGFyrM6Q6N8+lfypJ5k/YWDN0HPYrYPk3iPl1
-	eHZ9X/Lxqc2jBotNTJa+VJ+6dw2HE98GzsYQ+eNCTo9o1GoXwXcNj9u/8/6pkVzmgzstz799o
-X-Google-Smtp-Source: AGHT+IH/kLFGhb/5o+HVe9X/dgY+dHOtkuC/GQLrj9aew81IkS2lsXmBfhvB5oADsVAT7KtA2c/thA==
-X-Received: by 2002:a05:6000:440b:b0:3a4:dd00:9ac3 with SMTP id ffacd0b85a97d-3b2002a19efmr63894f8f.12.1751413520461;
-        Tue, 01 Jul 2025 16:45:20 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1751413522; x=1752018322;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=XGfgz5+4xZkhVXL2ewILuOLrNhVDG3jFfYq35hz23X4=;
+        b=GyPZyKI4qQpItbEcC7DPRMU9jIbc6FVW02lYTYfkuQ/M7EEU3XWOe5LcP6SRRWHTuG
+         +S+nsuB7Pfedzm2VQ4/4XEomWToNwm5bo7Kpp0mVPklzqqWZ405Jy6V43wnQGXmPOZI7
+         m3pFAXAhtVmvKU8hR+aU090BsM17IZKdgM79SpgxjIuoYG0nSqDzQyFy8ikncemr7xDS
+         madJQZZ9xyh6HgPaFZASd1oh81bVXRsDgn34nbo/V5fTheBp0VBVsU63KwQe/DsIXvOP
+         +T+Br3yj+3GFl8eQ2Fmhq7TrjUZbdhi/NmMf/WF9/h/j4mQ0PP11bwKRZN3z6zNB8ghk
+         4Lnw==
+X-Gm-Message-State: AOJu0YyLv6wS6u+xPU8Imwe77IdIrBYC1MSKyAHmNxUYdApzyhM0ESt6
+	bSmHHzZ/IZGi/JTG6QARfP/OPtb4bv1HGo7JVYYTI/XAjKJoqYRl5V+LtnMAFQ==
+X-Gm-Gg: ASbGncsABZzzegIYjXlPtEm8/MONGBteRiFkjinPDDd0pLEfyhF66hLau2JMjMoTd7s
+	2PlNMqVnKtVtUqpWFfoMPQKOhTxqYOI2NNo49oXsPgsZFnwAijgMCirOjgL7v7fJnn3tfoFSGKY
+	2/+x03sK3vDDKMw+EdV0oxCN2GtWzkKc2aJPSpnCF7PkccrB00eCkG2QDv3aL+YfxaepBtHH8U4
+	jnFDR6vvf8hJxI0tO2Ide7leodCdwbPW9H/wXrT/KvP9B5x/1vGHf1U55ITChxOgB19lY69lILK
+	/Gp1w7eR+A100uL6D/y+fwZ4sYAUHPyc7Bta7hJfmw4bpvCXsUNajGIUzp/o7NndigPCpSXyMbk
+	t/qBnC/X316KQQr91Fd0oGcsW6Cm15cLs6k3SwRxAp+UMUIihcBP/WRyBvCgKIA==
+X-Google-Smtp-Source: AGHT+IHY5gvHcq5+7n+4oidJ9KfU0IfCxLoLpMo8YpYiX70/faDoxvMnCCM/Uh49NxV5+tGyiqBB6w==
+X-Received: by 2002:a05:6000:4310:b0:3a5:8934:4948 with SMTP id ffacd0b85a97d-3b1ffcd69f7mr101444f8f.12.1751413522160;
+        Tue, 01 Jul 2025 16:45:22 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
@@ -92,46 +93,104 @@ Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 0/3] hvmloader: add new SMBIOS tables (7,8,9,26,27,28)
-Date: Tue,  1 Jul 2025 23:45:09 +0000
-Message-Id: <cover.1751412735.git.w1benny@gmail.com>
+Subject: [PATCH 2/3] hvmloader: fix SMBIOS table length checks
+Date: Tue,  1 Jul 2025 23:45:11 +0000
+Message-Id: <8981deefd675eabc6a60713aacf96e03fd756fdb.1751412735.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1751412735.git.w1benny@gmail.com>
+References: <cover.1751412735.git.w1benny@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-Resubmitting patch from Anton Belousov and addressing review comments
-from Jan: https://old-list-archives.xen.org/archives/html/xen-devel/2022-01/msg00725.html
+SMBIOS specification dictates that tables should have a minimal length.
+This commit introduces further validation for user-input SMBIOS tables.
 
-Original message:
-> SMBIOS tables like 7,8,9,26,27,28 are neccessary to prevent sandbox detection
-> by malware using WMI-queries. New tables can be mapped to memory from binary
-> file specified in "smbios_firmware" parameter of domain configuration.
-> If particular table is absent in binary file, then it will not be mapped to
-> memory. This method works for Windows domains as tables 7,8,9,26,27,28 are not
-> critical for OS boot and runtime. Also if "smbios_firmware" parameter is not
-> provided, these tables will be skipped in write_smbios_tables function.
+As per SMBIOS Reference Specification:
+* Type 0: For version 2.3 and later implementations, the length is at least 14h
+* Type 1: 1Bh for 2.4 and later
+* Type 2: at least 08h
+* Type 3: 0Dh for version 2.1 and later
+* Type 11: 5h (+ strings)
+* Type 22: 1Ah (+ strings)
+* Type 39: a minimum of 10h
 
-Further explanation:
-Some malware samples are known to check presence of various hardware components
-(like CPU fan, CPU temperature sensor, etc.) by WMI queries. If these components
-are not present, then malware can assume that it is running in a sandbox and
-will not execute its payload.
+hvmloader currently implements version 2.4
 
-This patch will allow security researchers to create a custom SMBIOS
-firmware binary file that contains these tables.
+Signed-off-by: Petr Beneš <w1benny@gmail.com>
+---
+ tools/firmware/hvmloader/smbios.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Petr Beneš (3):
-  hvmloader: fix code style violations
-  hvmloader: fix SMBIOS table length checks
-  hvmloader: add new SMBIOS tables (7,8,9,26,27,28)
-
- tools/firmware/hvmloader/smbios.c       | 204 ++++++++++++++++++++----
- tools/firmware/hvmloader/smbios_types.h |  83 +++++++++-
- 2 files changed, 254 insertions(+), 33 deletions(-)
-
+diff --git a/tools/firmware/hvmloader/smbios.c b/tools/firmware/hvmloader/smbios.c
+index fc3cdc9a25..2cd826768b 100644
+--- a/tools/firmware/hvmloader/smbios.c
++++ b/tools/firmware/hvmloader/smbios.c
+@@ -385,7 +385,7 @@ smbios_type_0_init(void *start, const char *xen_version,
+     uint32_t length;
+ 
+     pts = get_smbios_pt_struct(0, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= sizeof(struct smbios_type_0) )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE0;
+@@ -444,7 +444,7 @@ smbios_type_1_init(void *start, const char *xen_version,
+     uint32_t length;
+ 
+     pts = get_smbios_pt_struct(1, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= sizeof(struct smbios_type_1) )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE1;
+@@ -504,7 +504,7 @@ smbios_type_2_init(void *start)
+     unsigned int counter = 0;
+ 
+     pts = get_smbios_pt_struct(2, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= 8 )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE2;
+@@ -598,7 +598,7 @@ smbios_type_3_init(void *start)
+     uint32_t counter = 0;
+ 
+     pts = get_smbios_pt_struct(3, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= 13 )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE3;
+@@ -712,7 +712,7 @@ smbios_type_11_init(void *start)
+     uint32_t length;
+ 
+     pts = get_smbios_pt_struct(11, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= sizeof(struct smbios_type_11) )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE11;
+@@ -869,7 +869,7 @@ smbios_type_22_init(void *start)
+     uint32_t length;
+ 
+     pts = get_smbios_pt_struct(22, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= sizeof(struct smbios_type_22) )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE22;
+@@ -951,7 +951,7 @@ smbios_type_39_init(void *start)
+     uint32_t length;
+ 
+     pts = get_smbios_pt_struct(39, &length);
+-    if ( pts != NULL && length > 0 )
++    if ( pts != NULL && length >= 16 )
+     {
+         memcpy(start, pts, length);
+         p->header.handle = SMBIOS_HANDLE_TYPE39;
 -- 
 2.34.1
 
