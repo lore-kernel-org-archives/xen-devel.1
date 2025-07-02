@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16468C83F04
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 14:14:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031201.1404940 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9314DC83F04
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 14:14:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1031202.1404951 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyE4-0007Oo-1R; Wed, 02 Jul 2025 14:14:16 +0000
+	id 1uWyEB-0007gN-7u; Wed, 02 Jul 2025 14:14:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031201.1404940; Wed, 02 Jul 2025 14:14:16 +0000
+Received: by outflank-mailman (output) from mailman id 1031202.1404951; Wed, 02 Jul 2025 14:14:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyE3-0007Oh-Ut; Wed, 02 Jul 2025 14:14:15 +0000
-Received: by outflank-mailman (input) for mailman id 1031201;
- Wed, 02 Jul 2025 14:14:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uWyEB-0007g3-4P; Wed, 02 Jul 2025 14:14:23 +0000
+Received: by outflank-mailman (input) for mailman id 1031202;
+ Wed, 02 Jul 2025 14:14:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WqgU=ZP=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
- id 1uWyE2-0007Ob-Va
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 14:14:14 +0000
+ id 1uWyEA-0007en-Bs
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 14:14:22 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id d4303f7e-574e-11f0-a313-13f23c93f187;
- Wed, 02 Jul 2025 16:14:13 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id d8a116f6-574e-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 16:14:20 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8B0F822C7;
- Wed,  2 Jul 2025 07:13:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EC73E22D9;
+ Wed,  2 Jul 2025 07:14:04 -0700 (PDT)
 Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.65.245])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3A17B3F6A8;
- Wed,  2 Jul 2025 07:14:11 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D9003F6A8;
+ Wed,  2 Jul 2025 07:14:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d4303f7e-574e-11f0-a313-13f23c93f187
+X-Inumbo-ID: d8a116f6-574e-11f0-b894-0df219b8e170
 From: Hari Limaye <hari.limaye@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: luca.fancellu@arm.com,
@@ -52,48 +52,101 @@ Cc: luca.fancellu@arm.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 0/6] Second series for R82 MPU Support
-Date: Wed,  2 Jul 2025 15:13:55 +0100
-Message-ID: <cover.1751464757.git.hari.limaye@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Subject: [PATCH v2 2/6] xen/arm: Introduce flags_has_rwx helper
+Date: Wed,  2 Jul 2025 15:13:57 +0100
+Message-ID: <ce77bdb984a56fdbf15e404b3e2b276507b4446a.1751464757.git.hari.limaye@arm.com>
 X-Mailer: git-send-email 2.42.1
+In-Reply-To: <cover.1751464757.git.hari.limaye@arm.com>
+References: <cover.1751464757.git.hari.limaye@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+From: Luca Fancellu <luca.fancellu@arm.com>
 
-This series is the second set of patches in the ongoing work to
-introduce support for MPU systems and Cortex R82 in Xen.
+Introduce flags_has_rwx() function that will check if a
+mapping is both writable and executable when modifying
+or updating the mapping.
 
-The patches in this series implement the necessary logic to map and
-unmap the Device Tree Blob in the early stages of the boot process.
+This check was already present in pt.c but since it will
+be used also for MPU systems, it's wrapped into a function
+now.
 
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
 Changes from v1:
-- Changes mentioned in individual patches
+- Add Ayan and Michal's R-b
+- Fix typos
+- Don't use extern for function prototype
+---
+ xen/arch/arm/include/asm/mm.h |  2 ++
+ xen/arch/arm/mm.c             | 15 +++++++++++++++
+ xen/arch/arm/mmu/pt.c         |  9 +--------
+ 3 files changed, 18 insertions(+), 8 deletions(-)
 
-Cheers,
-Hari
-
-Luca Fancellu (4):
-  arm/mpu: Find MPU region by range
-  xen/arm: Introduce flags_has_rwx helper
-  arm/mpu: Implement early_fdt_map support in MPU systems
-  arm/mpu: Implement remove_early_mappings for MPU systems
-
-Penny Zheng (2):
-  arm/mpu: Populate a new region in Xen MPU mapping table
-  arm/mpu: Destroy an existing entry in Xen MPU memory mapping table
-
- xen/arch/arm/include/asm/mm.h         |   2 +
- xen/arch/arm/include/asm/mpu.h        |   2 +
- xen/arch/arm/include/asm/mpu/cpregs.h |   4 +
- xen/arch/arm/include/asm/mpu/mm.h     |  41 +++++
- xen/arch/arm/mm.c                     |  15 ++
- xen/arch/arm/mmu/pt.c                 |   9 +-
- xen/arch/arm/mpu/mm.c                 | 217 ++++++++++++++++++++++++++
- xen/arch/arm/mpu/setup.c              |  83 +++++++++-
- 8 files changed, 362 insertions(+), 11 deletions(-)
-
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 011bc1fd30..fb79aeb088 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -192,6 +192,8 @@ extern unsigned long frametable_base_pdx;
+ 
+ /* Boot-time pagetable setup */
+ extern void setup_pagetables(void);
++/* Check that the mapping flag has no W and X together */
++bool flags_has_rwx(unsigned int flags);
+ /* Map FDT in boot pagetable */
+ extern void *early_fdt_map(paddr_t fdt_paddr);
+ /* Remove early mappings */
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 0613c19169..77e21f5f29 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -24,6 +24,21 @@
+ 
+ unsigned long frametable_base_pdx __read_mostly;
+ 
++bool flags_has_rwx(unsigned int flags)
++{
++    /*
++     * The hardware was configured to forbid mapping both writable and
++     * executable.
++     * When modifying/creating mapping (i.e _PAGE_PRESENT is set),
++     * prevent any update if this happen.
++     */
++    if ( (flags & _PAGE_PRESENT) && !PAGE_RO_MASK(flags) &&
++         !PAGE_XN_MASK(flags) )
++        return true;
++    else
++        return false;
++}
++
+ void flush_page_to_ram(unsigned long mfn, bool sync_icache)
+ {
+     void *v = map_domain_page(_mfn(mfn));
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index 4726e713ef..621b47dbf5 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -610,14 +610,7 @@ static int xen_pt_update(unsigned long virt,
+      */
+     const mfn_t root = maddr_to_mfn(READ_SYSREG64(TTBR0_EL2));
+ 
+-    /*
+-     * The hardware was configured to forbid mapping both writeable and
+-     * executable.
+-     * When modifying/creating mapping (i.e _PAGE_PRESENT is set),
+-     * prevent any update if this happen.
+-     */
+-    if ( (flags & _PAGE_PRESENT) && !PAGE_RO_MASK(flags) &&
+-         !PAGE_XN_MASK(flags) )
++    if ( flags_has_rwx(flags) )
+     {
+         mm_printk("Mappings should not be both Writeable and Executable.\n");
+         return -EINVAL;
 -- 
 2.34.1
 
