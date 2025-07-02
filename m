@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128EBC77B7C
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 14:14:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031203.1404961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8304C83F04
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 14:14:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1031204.1404971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyEC-0007vr-Gy; Wed, 02 Jul 2025 14:14:24 +0000
+	id 1uWyED-0008By-MI; Wed, 02 Jul 2025 14:14:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031203.1404961; Wed, 02 Jul 2025 14:14:24 +0000
+Received: by outflank-mailman (output) from mailman id 1031204.1404971; Wed, 02 Jul 2025 14:14:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyEC-0007vg-AT; Wed, 02 Jul 2025 14:14:24 +0000
-Received: by outflank-mailman (input) for mailman id 1031203;
- Wed, 02 Jul 2025 14:14:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uWyED-0008Bl-I0; Wed, 02 Jul 2025 14:14:25 +0000
+Received: by outflank-mailman (input) for mailman id 1031204;
+ Wed, 02 Jul 2025 14:14:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WqgU=ZP=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
- id 1uWyEB-0007en-1n
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 14:14:23 +0000
+ id 1uWyEC-0007Ob-BA
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 14:14:24 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id d6e9efb0-574e-11f0-b894-0df219b8e170;
- Wed, 02 Jul 2025 16:14:17 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id da64d48e-574e-11f0-a313-13f23c93f187;
+ Wed, 02 Jul 2025 16:14:23 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 25E2B22C7;
- Wed,  2 Jul 2025 07:14:02 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E541122C7;
+ Wed,  2 Jul 2025 07:14:07 -0700 (PDT)
 Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.65.245])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C6A183F6A8;
- Wed,  2 Jul 2025 07:14:15 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 36FF73F6A8;
+ Wed,  2 Jul 2025 07:14:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,150 +44,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6e9efb0-574e-11f0-b894-0df219b8e170
+X-Inumbo-ID: da64d48e-574e-11f0-a313-13f23c93f187
 From: Hari Limaye <hari.limaye@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: luca.fancellu@arm.com,
+	Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 1/6] arm/mpu: Find MPU region by range
-Date: Wed,  2 Jul 2025 15:13:56 +0100
-Message-ID: <a78ce013dcf68a79955653751953e023af112849.1751464757.git.hari.limaye@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>
+Subject: [PATCH v2 3/6] arm/mpu: Populate a new region in Xen MPU mapping table
+Date: Wed,  2 Jul 2025 15:13:58 +0100
+Message-ID: <5b67459af62106197fb551d35ef1708f0bb5beb6.1751464757.git.hari.limaye@arm.com>
 X-Mailer: git-send-email 2.42.1
 In-Reply-To: <cover.1751464757.git.hari.limaye@arm.com>
 References: <cover.1751464757.git.hari.limaye@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Fancellu <luca.fancellu@arm.com>
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-Implement a function to find the index of a MPU region in the xen_mpumap
-MPU region array. This function will be used in future commits to
-implement creating and destroying MPU regions.
+Introduce map_pages_to_xen() that is implemented using a new helper,
+xen_mpumap_update(), which is responsible for updating Xen MPU memory
+mapping table(xen_mpumap), including creating a new entry, updating
+or destroying an existing one, it is equivalent to xen_pt_update in MMU.
 
+This commit only implements populating a new entry in Xen MPU memory mapping
+table(xen_mpumap).
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Signed-off-by: Hari Limaye <hari.limaye@arm.com>
 ---
 Changes from v1:
-- Update commit message
-- Remove internal _index variable
-- Simplify logic by disallowing NULL index parameter
+- Simplify if condition
 - Use normal printk
-- Reorder conditional checks
-- Update some comments
+- Use %# over 0x%
+- Add same asserts as in Patch 4
 ---
- xen/arch/arm/include/asm/mpu/mm.h | 29 +++++++++++++++++
- xen/arch/arm/mpu/mm.c             | 52 +++++++++++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+ xen/arch/arm/include/asm/mpu/mm.h |  12 ++++
+ xen/arch/arm/mpu/mm.c             | 100 ++++++++++++++++++++++++++++++
+ 2 files changed, 112 insertions(+)
 
 diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index a7f970b465..81e47b9d0b 100644
+index 81e47b9d0b..101002f7d4 100644
 --- a/xen/arch/arm/include/asm/mpu/mm.h
 +++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -10,6 +10,13 @@
- #include <asm/mm.h>
- #include <asm/mpu.h>
- 
-+#define MPUMAP_REGION_OVERLAP      -1
-+#define MPUMAP_REGION_NOTFOUND      0
-+#define MPUMAP_REGION_FOUND         1
-+#define MPUMAP_REGION_INCLUSIVE     2
-+
-+#define INVALID_REGION_IDX     0xFFU
-+
- extern struct page_info *frame_table;
- 
- extern uint8_t max_mpu_regions;
-@@ -75,6 +82,28 @@ void write_protection_region(const pr_t *pr_write, uint8_t sel);
+@@ -64,6 +64,7 @@ static inline void context_sync_mpu(void)
+  * The following API requires context_sync_mpu() after being used to modify MPU
+  * regions:
+  *  - write_protection_region
++ *  - xen_mpumap_update
   */
- pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags);
+ 
+ /* Reads the MPU region (into @pr_read) with index @sel from the HW */
+@@ -72,6 +73,17 @@ void read_protection_region(pr_t *pr_read, uint8_t sel);
+ /* Writes the MPU region (from @pr_write) with index @sel to the HW */
+ void write_protection_region(const pr_t *pr_write, uint8_t sel);
  
 +/*
-+ * Checks whether a given memory range is present in the provided table of
-+ * MPU protection regions.
++ * Maps an address range into the MPU data structure and updates the HW.
++ * Equivalent to xen_pt_update in an MMU system.
 + *
-+ * @param table         Array of pr_t protection regions.
-+ * @param r_regions     Number of elements in `table`.
-+ * @param base          Start of the memory region to be checked (inclusive).
-+ * @param limit         End of the memory region to be checked (exclusive).
-+ * @param index         Set to the index of the region if an exact or inclusive
-+ *                      match is found, and INVALID_REGION otherwise.
-+ * @return: Return code indicating the result of the search:
-+ *          MPUMAP_REGION_NOTFOUND: no part of the range is present in `table`
-+ *          MPUMAP_REGION_FOUND: found an exact match in `table`
-+ *          MPUMAP_REGION_INCLUSIVE: found an inclusive match in `table`
-+ *          MPUMAP_REGION_OVERLAP: found an overlap with a mapping in `table`
-+ *
-+ * Note: make sure that the range [`base`, `limit`) refers to the memory region
-+ * inclusive of `base` and exclusive of `limit`.
++ * @param base      Base address of the range to map (inclusive).
++ * @param limit     Limit address of the range to map (exclusive).
++ * @param flags     Flags for the memory range to map.
++ * @return          0 on success, negative on error.
 + */
-+int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
-+                          paddr_t limit, uint8_t *index);
++int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags);
 +
- #endif /* __ARM_MPU_MM_H__ */
- 
  /*
+  * Creates a pr_t structure describing a protection region.
+  *
 diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index ccfb37a67b..25e7f36c1e 100644
+index 25e7f36c1e..dd54b66901 100644
 --- a/xen/arch/arm/mpu/mm.c
 +++ b/xen/arch/arm/mpu/mm.c
-@@ -110,6 +110,58 @@ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags)
-     return region;
+@@ -6,6 +6,7 @@
+ #include <xen/lib.h>
+ #include <xen/mm.h>
+ #include <xen/sizes.h>
++#include <xen/spinlock.h>
+ #include <xen/types.h>
+ #include <asm/mpu.h>
+ #include <asm/mpu/mm.h>
+@@ -29,6 +30,8 @@ DECLARE_BITMAP(xen_mpumap_mask, MAX_MPU_REGION_NR) \
+ /* EL2 Xen MPU memory region mapping table. */
+ pr_t __cacheline_aligned __section(".data") xen_mpumap[MAX_MPU_REGION_NR];
+ 
++static DEFINE_SPINLOCK(xen_mpumap_lock);
++
+ static void __init __maybe_unused build_assertions(void)
+ {
+     /*
+@@ -162,6 +165,103 @@ int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
+     return MPUMAP_REGION_NOTFOUND;
  }
  
-+int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
-+                          paddr_t limit, uint8_t *index)
++/*
++ * Allocate a new free EL2 MPU memory region, based on bitmap xen_mpumap_mask.
++ * @param idx   Set to the index of the allocated EL2 MPU region on success.
++ * @return      0 on success, otherwise -ENOENT on failure.
++ */
++static int xen_mpumap_alloc_entry(uint8_t *idx)
 +{
-+    ASSERT(index);
-+    *index = INVALID_REGION_IDX;
++    ASSERT(spin_is_locked(&xen_mpumap_lock));
 +
-+    /* Convert [base, limit) to [base, limit - 1] for inclusive comparison */
-+    limit = limit - 1;
-+
-+    if ( limit < base )
++    *idx = find_first_zero_bit(xen_mpumap_mask, max_mpu_regions);
++    if ( *idx == max_mpu_regions )
 +    {
-+        printk("Base address %#"PRIpaddr" must be smaller than limit address %#"PRIpaddr"\n",
++        printk(XENLOG_ERR "mpu: EL2 MPU memory region mapping pool exhausted\n");
++        return -ENOENT;
++    }
++
++    set_bit(*idx, xen_mpumap_mask);
++    return 0;
++}
++
++/*
++ * Update the entry in the MPU memory region mapping table (xen_mpumap) for the
++ * given memory range and flags, creating one if none exists.
++ *
++ * @param base  Base address (inclusive).
++ * @param limit Limit address (exclusive).
++ * @param flags Region attributes (a combination of PAGE_HYPERVISOR_XXX)
++ * @return      0 on success, otherwise negative on error.
++ */
++static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
++                                   unsigned int flags)
++{
++    uint8_t idx;
++    int rc;
++
++    ASSERT(spin_is_locked(&xen_mpumap_lock));
++
++    rc = mpumap_contains_region(xen_mpumap, max_mpu_regions, base, limit, &idx);
++    if ( !(rc == MPUMAP_REGION_NOTFOUND) )
++        return -EINVAL;
++
++    /* We are inserting a mapping => Create new region. */
++    if ( flags & _PAGE_PRESENT )
++    {
++        rc = xen_mpumap_alloc_entry(&idx);
++        if ( rc )
++            return -ENOENT;
++
++        xen_mpumap[idx] = pr_of_addr(base, limit, flags);
++
++        write_protection_region(&xen_mpumap[idx], idx);
++    }
++
++    return 0;
++}
++
++int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags)
++{
++    int rc;
++
++    ASSERT(IS_ALIGNED(base, PAGE_SIZE));
++    ASSERT(IS_ALIGNED(limit, PAGE_SIZE));
++    ASSERT(base <= limit);
++
++    if ( flags_has_rwx(flags) )
++    {
++        printk("Mappings should not be both Writeable and Executable\n");
++        return -EINVAL;
++    }
++
++    if ( !IS_ALIGNED(base, PAGE_SIZE) || !IS_ALIGNED(limit, PAGE_SIZE) )
++    {
++        printk("base address %#"PRIpaddr", or limit address %#"PRIpaddr" is not page aligned\n",
 +               base, limit);
 +        return -EINVAL;
 +    }
 +
-+    for (uint8_t i = 0; i < nr_regions; i++ )
-+    {
-+        paddr_t iter_base = pr_get_base(&table[i]);
-+        paddr_t iter_limit = pr_get_limit(&table[i]);
++    spin_lock(&xen_mpumap_lock);
 +
-+        /* Skip invalid (disabled) regions */
-+        if ( !region_is_valid(&table[i]) )
-+            continue;
++    rc = xen_mpumap_update_entry(base, limit, flags);
 +
-+        /* No match */
-+        if ( (iter_limit < base) || (iter_base > limit) )
-+            continue;
++    spin_unlock(&xen_mpumap_lock);
 +
-+        /* Exact match */
-+        if ( (iter_base == base) && (iter_limit == limit) )
-+        {
-+            *index = i;
-+            return MPUMAP_REGION_FOUND;
-+        }
++    return rc;
++}
 +
-+        /* Inclusive match */
-+        if ( (base >= iter_base) && (limit <= iter_limit) )
-+        {
-+            *index = i;
-+            return MPUMAP_REGION_INCLUSIVE;
-+        }
++int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
++                     unsigned int flags)
++{
++    int rc = xen_mpumap_update(mfn_to_maddr(mfn),
++                               mfn_to_maddr(mfn_add(mfn, nr_mfns)), flags);
++    if ( !rc )
++        context_sync_mpu();
 +
-+        /* Overlap */
-+        printk("Range %#"PRIpaddr" - %#"PRIpaddr" overlaps with the existing region %#"PRIpaddr" - %#"PRIpaddr"\n",
-+               base, limit + 1, iter_base, iter_limit + 1);
-+        return MPUMAP_REGION_OVERLAP;
-+    }
-+
-+    return MPUMAP_REGION_NOTFOUND;
++    return rc;
 +}
 +
  void __init setup_mm(void)
