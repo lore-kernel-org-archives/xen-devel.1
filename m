@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF6FEC83F04
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C76C83F07
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 14:41:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031265.1405061 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1031266.1405066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyeU-00006z-62; Wed, 02 Jul 2025 14:41:34 +0000
+	id 1uWyeU-00009D-Eg; Wed, 02 Jul 2025 14:41:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031265.1405061; Wed, 02 Jul 2025 14:41:34 +0000
+Received: by outflank-mailman (output) from mailman id 1031266.1405066; Wed, 02 Jul 2025 14:41:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWyeU-00006q-1n; Wed, 02 Jul 2025 14:41:34 +0000
-Received: by outflank-mailman (input) for mailman id 1031265;
+	id 1uWyeU-00008X-8j; Wed, 02 Jul 2025 14:41:34 +0000
+Received: by outflank-mailman (input) for mailman id 1031266;
  Wed, 02 Jul 2025 14:41:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4T1d=ZP=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uWyeS-0007x9-18
+ id 1uWyeS-0007qI-CI
  for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 14:41:32 +0000
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [2a00:1450:4864:20::344])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a1e812d6-5752-11f0-a313-13f23c93f187;
- Wed, 02 Jul 2025 16:41:26 +0200 (CEST)
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-453647147c6so74111735e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 02 Jul 2025 07:41:26 -0700 (PDT)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a4781bba-5752-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 16:41:30 +0200 (CEST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3a4f379662cso3846355f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Jul 2025 07:41:30 -0700 (PDT)
 Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
  [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453823ad20bsm230946905e9.20.2025.07.02.07.41.24
+ 5b1f17b1804b1-453823ad20bsm230946905e9.20.2025.07.02.07.41.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 07:41:25 -0700 (PDT)
+ Wed, 02 Jul 2025 07:41:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,39 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1e812d6-5752-11f0-a313-13f23c93f187
+X-Inumbo-ID: a4781bba-5752-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1751467286; x=1752072086; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TOO7w0qwM/ssMiQ+ZlK1nygpwE/Hvw9rR2zu/YyUGog=;
-        b=gYQ6gxzAauNflEFHnlcY3juMM4Jrx02e6Dax2gKNwuRAUuuLqef0uJPFhx17Iw/g2N
-         UeDzwotfDeudrLiOwhlTwq9jZm8/cIV9vn0DB6D1XU3t8yW8vzAX3BnNKT8AyAqmsWT9
-         If/J+AY9UTD80tkDcGadfs9EPtFZ6A1YsB2Nc=
+        d=citrix.com; s=google; t=1751467290; x=1752072090; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EzppBlV46dVW+8Pf+ysgv4D4sf/8Ax0fEdwCrQArIh0=;
+        b=NZzZdyVMLDAPd4irL91kHxDSRaDcr+FMxg/fBZ3gi8lLIcXO6Ow0IoRFhUK5nf2KfD
+         Paxtg6Aqmk5gU8QDVHR09oCXF3jOI+dhCqSZNj8XJlV6W/N/m4xw/P+l0coLV+Yb05Ah
+         Gy0T1bZqNfKUXEa3tFxqiGjAnr+E0G0UsSt44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751467286; x=1752072086;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TOO7w0qwM/ssMiQ+ZlK1nygpwE/Hvw9rR2zu/YyUGog=;
-        b=CcFaDpazWL7Pm2wT24AEAU9vQqWzLnAg3P8ZwniOuoEkJlfW1nbdMpzIkXLy+lhLbv
-         N+YQGZKSEDCYBBAFZaqtyAPX6kDjfX/lggPoiPNYur34Fg6JQEYP+lGlVv36a2uT7HMN
-         in7rLSEVONx0H6HrYfPBu2bwlnUyoaq8wX1gtZGJUHMIH6nwTfAYNDE7g/NroAJFqWDM
-         m+exTj7Oa0X6MeqO6dwenW5ljQzK44V2DaPP1KR9B1WalWAkRIFik5Gh/gmNZq3IOi/J
-         iOX4MRNKwLDRPA16BkW2dsBNMdQWIOg1/acjElqY37wstoAkV8bpVSbxLyLcWdbM98Oy
-         UJFQ==
-X-Gm-Message-State: AOJu0YwkjMYWWMf5YLwEP8og8HdDiclnybzBKVIRMmWPBtQbbAVHxFwg
-	/DTdtMCw47uKffcQ7s5B+x2b2uZmq5R++ooDa4+lEny3KaG4tytYf9xWTGB4BIvPNDkbyvnsoPp
-	2Zy9Fed0qOHMW
-X-Gm-Gg: ASbGncuRVshkeZOwGqc/Cvx53i5oXqC7YpVfebSU/yn70fYXtaTkaf1GQTOODv/FxI9
-	bo8lxHlk+lerIQlaQ5MsbOmRoc7uixYYRXBSkyoI/5VkPDcuwDbsJeMiWNgcA7Mvdy4uBRLnTBD
-	M6E1LtF94HNP6faFpLXRI5O2IsRIWLhO9Mm1V3+HTIYFXlhxHYdLPhAm9gHwdvR7BBerH06Zg3B
-	/bSOF41bk6nxH5u1vZXFSpz0Eq7xkZnv3QhEh17rAxzJkSClZo75o/atf4GY03J35lHgI0IuIn1
-	l0AFaV6nnd5VUAV9DAyJ694bj6cintYk+znYyt44ltZj0ZSIojJjcjp3nCffZAPdAMSRtpyMOg7
-	BigINOnabr7Ffj1om/z8aVgBnnESVHNUf0uM=
-X-Google-Smtp-Source: AGHT+IHKFBVPN+Y9/aN7QPgXDRyZW5W044Q2V6fp6DhxUVDKeAJq8bmGI0dg3xTCA2ZB+HWgOCJ+/A==
-X-Received: by 2002:a05:600c:1d12:b0:439:9b2a:1b2f with SMTP id 5b1f17b1804b1-454a91b5d12mr9410885e9.3.1751467285647;
-        Wed, 02 Jul 2025 07:41:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1751467290; x=1752072090;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EzppBlV46dVW+8Pf+ysgv4D4sf/8Ax0fEdwCrQArIh0=;
+        b=Xip9QuPpbYJvaMIqp8urRTvRdGP3vFnIGpqx2DgZcuXEnfoj6SCEKc7IAsdyyrdTs6
+         67/Zns73+Dr+Bdj6cWMImmXcGxiASXZzS39w3SU90WQRjZtMU0c0yw40pAfN76vQYam+
+         c+s1RX3mjg4D9Urd4cWysXk7awNz2NfKVJNsAeV7/V110/yvu9efBP2Ya0E9m8GgNnpy
+         mYIsq5H5b9cD62HXO4HG4VxpuR3TouJsYr1W2Ve+q6vxAWA5AArdPBfV/KWMhWnvElpJ
+         J4vOv3pAsSpgGbfbxICG/bqBeorKyBNN/jW+25fOXBWnRVykKBUC/nPLv30M3WJSRrTJ
+         yBsA==
+X-Gm-Message-State: AOJu0YxV5gwsIEH5TNvPRQ/vHNZQRnCPZbST+bRmvQQQDLHvHVwBjY+J
+	6NyXu/ksKR6BZGzRDCNsHe8M0PKb6m4GhidL1mDY9zf2VfUYGkDs1/6L2W1/qEvwV+vepyvgqsD
+	Ui+OIU/7zsg==
+X-Gm-Gg: ASbGnct2VwFye9/wt1c0wNbfkMdEfJQjP67PkMKIcsiw/4ggjsEF2/HCoVJUeQXAekM
+	eJpZnXfLSlHy8sarl6dKafdwjZF4+JDnR2qRDQG3Yf40xcr0HGJtWClFNkqps2VRTQeRvFEP9So
+	ebqi8npkwDVF/vvgLefZrov9I9New3FIBM9ZpYsqngirVP3Sfq7LG6k8w92NBlUyG68QncNb0KO
+	8Qrz9HVngviWRTqYyMBC1rq/o1AQNeFlzNutPS0TBj7cXIOcEmh3ZJvrrosPgwGvtc+PEOQV3DL
+	6y3PheFqaHywC6PWf2DHl7TcvNVrihXRbmYrmi5eL/kmz/GFypUkNMGenb7XvXIxS+q0gSbj044
+	FV1//cAfMTQHdSkrd5D1Xu+WamipkoOUF0Zk=
+X-Google-Smtp-Source: AGHT+IEnzXIn+0MqJayMOtG02cyaJCA2PQ9QF7Qz1u3JINoT9MnD91Uzo4J6kaGi59hHeUrD0EpjxA==
+X-Received: by 2002:a5d:64c4:0:b0:3a4:e502:81e1 with SMTP id ffacd0b85a97d-3b2018c241bmr2665185f8f.52.1751467289832;
+        Wed, 02 Jul 2025 07:41:29 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -89,44 +90,162 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/6] x86/idle: Multiple MWAIT fixes
-Date: Wed,  2 Jul 2025 15:41:15 +0100
-Message-Id: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/6] x86/idle: Implement a new MWAIT IPI-elision algorithm
+Date: Wed,  2 Jul 2025 15:41:19 +0100
+Message-Id: <20250702144121.1096448-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
+References: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The two main bugs were identified in Linux first, and I've modelled Xen's fix
-similarly.
+In order elide IPIs, we must be able to identify whether a target CPU is in
+MWAIT at the point it is woken up.  i.e. the store to wake it up must also
+identify the state.
 
-Patches 1-4 want committing together.  They do bisect and operate correctly,
-but the range takes out an optimisation in order to reimplement it correctly.
+Create a new in_mwait variable beside __softirq_pending, so we can use a
+CMPXCHG to set the softirq while also observing the status safely.  Implement
+an x86 version of arch_pend_softirq() which does this.
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1902584433
+In mwait_idle_with_hints(), advertise in_mwait, with an explanation of
+precisely what it means.  X86_BUG_MONITOR can be accounted for simply by not
+advertising in_mwait.
 
-Andrew Cooper (6):
-  x86/idle: Remove broken MWAIT implementation
-  x86/idle: Convert force_mwait_ipi_wakeup to X86_BUG_MONITOR
-  xen/softirq: Rework arch_skip_send_event_check() into arch_pend_softirq()
-  x86/idle: Implement a new MWAIT IPI-elision algorithm
-  x86/idle: Drop incorrect smp_mb() in mwait_idle_with_hints()
-  x86/idle: Fix buggy "x86/mwait-idle: enable interrupts before C1 on Xeons"
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 
- xen/arch/x86/acpi/cpu_idle.c           | 92 +++++++++++---------------
- xen/arch/x86/cpu/intel.c               |  2 +-
- xen/arch/x86/cpu/mwait-idle.c          |  8 +--
- xen/arch/x86/hpet.c                    |  2 -
- xen/arch/x86/include/asm/cpufeatures.h |  1 +
- xen/arch/x86/include/asm/hardirq.h     | 21 ++++--
- xen/arch/x86/include/asm/mwait.h       |  3 -
- xen/arch/x86/include/asm/softirq.h     | 34 +++++++++-
- xen/common/softirq.c                   |  8 +--
- xen/include/xen/cpuidle.h              |  2 -
- xen/include/xen/irq_cpustat.h          |  1 -
- xen/include/xen/softirq.h              | 16 +++++
- 12 files changed, 110 insertions(+), 80 deletions(-)
+This is modelled after Linux's TIF_NEED_RESCHED (single bit equivelent of all
+of __softirq_pending), and TIF_POLLING_NRFLAG (arch-neutral "in_mwait").
 
+In Linux, they're both in the same flags field, which adds complexity.  In
+Xen, __softirq_pending is already unsigned long for everything other than x86,
+so adding an arch-neutral "in_mwait" would need wider changes.
+---
+ xen/arch/x86/acpi/cpu_idle.c       | 20 +++++++++++++++++-
+ xen/arch/x86/include/asm/hardirq.h | 14 +++++++++++-
+ xen/arch/x86/include/asm/softirq.h | 34 ++++++++++++++++++++++++++++++
+ 3 files changed, 66 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+index caa0fef0b3b1..13040ef467a0 100644
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -439,7 +439,21 @@ __initcall(cpu_idle_key_init);
+ void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
+ {
+     unsigned int cpu = smp_processor_id();
+-    const unsigned int *this_softirq_pending = &softirq_pending(cpu);
++    irq_cpustat_t *stat = &irq_stat[cpu];
++    const unsigned int *this_softirq_pending = &stat->__softirq_pending;
++
++    /*
++     * By setting in_mwait, we promise to other CPUs that we'll notice changes
++     * to __softirq_pending without being sent an IPI.  We achieve this by
++     * either not going to sleep, or by having hardware notice on our behalf.
++     *
++     * Some errata exist where MONITOR doesn't work properly, and the
++     * workaround is to force the use of an IPI.  Cause this to happen by
++     * simply not advertising outselves as being in_mwait.
++     */
++    alternative_io("movb $1, %[in_mwait]",
++                   "", X86_BUG_MONITOR,
++                   [in_mwait] "=m" (stat->in_mwait));
+ 
+     monitor(this_softirq_pending, 0, 0);
+     smp_mb();
+@@ -452,6 +466,10 @@ void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
+         mwait(eax, ecx);
+         spec_ctrl_exit_idle(info);
+     }
++
++    alternative_io("movb $0, %[in_mwait]",
++                   "", X86_BUG_MONITOR,
++                   [in_mwait] "=m" (stat->in_mwait));
+ }
+ 
+ static void acpi_processor_ffh_cstate_enter(struct acpi_processor_cx *cx)
+diff --git a/xen/arch/x86/include/asm/hardirq.h b/xen/arch/x86/include/asm/hardirq.h
+index f3e93cc9b507..1647cff04dc8 100644
+--- a/xen/arch/x86/include/asm/hardirq.h
++++ b/xen/arch/x86/include/asm/hardirq.h
+@@ -5,7 +5,19 @@
+ #include <xen/types.h>
+ 
+ typedef struct {
+-    unsigned int __softirq_pending;
++    /*
++     * The layout is important.  Any CPU can set bits in __softirq_pending,
++     * but in_mwait is a status bit owned by the CPU.  softirq_mwait_raw must
++     * cover both, and must be in a single cacheline.
++     */
++    union {
++        struct {
++            unsigned int __softirq_pending;
++            bool in_mwait;
++        };
++        uint64_t softirq_mwait_raw;
++    };
++
+     unsigned int __local_irq_count;
+     unsigned int nmi_count;
+     unsigned int mce_count;
+diff --git a/xen/arch/x86/include/asm/softirq.h b/xen/arch/x86/include/asm/softirq.h
+index e4b194f069fb..069e5716a68d 100644
+--- a/xen/arch/x86/include/asm/softirq.h
++++ b/xen/arch/x86/include/asm/softirq.h
+@@ -1,6 +1,8 @@
+ #ifndef __ASM_SOFTIRQ_H__
+ #define __ASM_SOFTIRQ_H__
+ 
++#include <asm/system.h>
++
+ #define NMI_SOFTIRQ            (NR_COMMON_SOFTIRQS + 0)
+ #define TIME_CALIBRATE_SOFTIRQ (NR_COMMON_SOFTIRQS + 1)
+ #define VCPU_KICK_SOFTIRQ      (NR_COMMON_SOFTIRQS + 2)
+@@ -9,4 +11,36 @@
+ #define HVM_DPCI_SOFTIRQ       (NR_COMMON_SOFTIRQS + 4)
+ #define NR_ARCH_SOFTIRQS       5
+ 
++/*
++ * Ensure softirq @nr is pending on @cpu.  Return true if an IPI can be
++ * skipped, false if the IPI cannot be skipped.
++ *
++ * We use a CMPXCHG covering both __softirq_pending and in_mwait, in order to
++ * set softirq @nr while also observing in_mwait in a race-free way.
++ */
++static always_inline bool arch_pend_softirq(unsigned int nr, unsigned int cpu)
++{
++    uint64_t *ptr = &irq_stat[cpu].softirq_mwait_raw;
++    uint64_t old, new;
++    unsigned int softirq = 1U << nr;
++
++    old = ACCESS_ONCE(*ptr);
++
++    do {
++        if ( old & softirq )
++            /* Softirq already pending, nothing to do. */
++            return true;
++
++        new = old | softirq;
++
++    } while ( (old = cmpxchg(ptr, old, new)) != new );
++
++    /*
++     * We have caused the softirq to become pending.  If in_mwait was set, the
++     * target CPU will notice the modification and act on it.
++     */
++    return new & (1UL << 32);
++}
++#define arch_pend_softirq arch_pend_softirq
++
+ #endif /* __ASM_SOFTIRQ_H__ */
 -- 
 2.39.5
 
