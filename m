@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0565CC83013
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FED3C7EE30
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:13:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030391.1404074 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1030390.1404064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsao-0001Is-64; Wed, 02 Jul 2025 08:13:22 +0000
+	id 1uWsam-00010Y-Sk; Wed, 02 Jul 2025 08:13:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030391.1404074; Wed, 02 Jul 2025 08:13:22 +0000
+Received: by outflank-mailman (output) from mailman id 1030390.1404064; Wed, 02 Jul 2025 08:13:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsao-0001Hz-14; Wed, 02 Jul 2025 08:13:22 +0000
-Received: by outflank-mailman (input) for mailman id 1030391;
- Wed, 02 Jul 2025 08:13:21 +0000
+	id 1uWsam-00010P-PC; Wed, 02 Jul 2025 08:13:20 +0000
+Received: by outflank-mailman (input) for mailman id 1030390;
+ Wed, 02 Jul 2025 08:13:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uWsan-00082X-1t
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:13:21 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1uWsam-00082X-2V
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:13:20 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 69bb5852-571c-11f0-b894-0df219b8e170;
- Wed, 02 Jul 2025 10:13:19 +0200 (CEST)
+ id 68ed5144-571c-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 10:13:18 +0200 (CEST)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3C2881F452;
- Wed,  2 Jul 2025 08:13:19 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7222921189;
+ Wed,  2 Jul 2025 08:13:14 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 07EDC13A24;
- Wed,  2 Jul 2025 08:13:19 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 45A1913A24;
+ Wed,  2 Jul 2025 08:13:14 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id r99lAB/qZGgISQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:19 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id jeA+DxrqZGgDSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,78 +54,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69bb5852-571c-11f0-b894-0df219b8e170
-Authentication-Results: smtp-out2.suse.de;
-	none
+X-Inumbo-ID: 68ed5144-571c-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1751443994; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LGW/gk3WVxXGF0g4wh7ZDjVSEfCjF8UjuqgxFwW7rBU=;
+	b=MJBVpMHqpu8cKkaJ8YCM1wr0ucHaY7HYgMgsIa83rTqGBYW/FoUvfFctqetwUWONP3pjkk
+	bv+HZOy5FbEORdnda8SPjQo2MMDc2RCX5TyGk9HYCDjXzfZmbYZIEi3diq412+wMu+lOE8
+	ADwLeEvdfTYG0kH7/q94Awh/lQ6phOs=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=MJBVpMHq
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1751443994; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LGW/gk3WVxXGF0g4wh7ZDjVSEfCjF8UjuqgxFwW7rBU=;
+	b=MJBVpMHqpu8cKkaJ8YCM1wr0ucHaY7HYgMgsIa83rTqGBYW/FoUvfFctqetwUWONP3pjkk
+	bv+HZOy5FbEORdnda8SPjQo2MMDc2RCX5TyGk9HYCDjXzfZmbYZIEi3diq412+wMu+lOE8
+	ADwLeEvdfTYG0kH7/q94Awh/lQ6phOs=
 From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 1/9] stubdom: configure kexec for PVH Xenstore stubdom
-Date: Wed,  2 Jul 2025 10:12:57 +0200
-Message-ID: <20250702081305.14440-2-jgross@suse.com>
+To: minios-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org
+Cc: samuel.thibault@ens-lyon.org,
+	Juergen Gross <jgross@suse.com>
+Subject: [MINI-OS PATCH 03/19] mini-os: grants: support populated grant table at boot
+Date: Wed,  2 Jul 2025 10:12:38 +0200
+Message-ID: <20250702081254.14383-4-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250702081305.14440-1-jgross@suse.com>
-References: <20250702081305.14440-1-jgross@suse.com>
+In-Reply-To: <20250702081254.14383-1-jgross@suse.com>
+References: <20250702081254.14383-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Rspamd-Queue-Id: 3C2881F452
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 7222921189
 X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_COUNT_TWO(0.00)[2];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[suse.com:+]
 
-Add the required configuration settings to enable kexec in the PVH
-variant of xenstore-stubdom. This is required to support live update.
-
-Set the number of kexec module pages to 18 in order to support using
-the kexec module memory for the stubdom's 9pfs granted pages.
-
-In Xenstore code test the CONFIG_KEXEC setting in order to determine
-whether stubdom live update is supported (PV xenstore-stubdom doesn't
-have live update support, as it lacks kexec).
+When kexec-ing into a new kernel, the grant table might still have
+active grants. Support that by not adding populated grant entries to
+the list of free grant entries.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- stubdom/xenstorepvh-minios.cfg | 2 ++
- tools/xenstored/core.h         | 5 +++++
- 2 files changed, 7 insertions(+)
+ gnttab.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/stubdom/xenstorepvh-minios.cfg b/stubdom/xenstorepvh-minios.cfg
-index 62a228f33d..ed2461d7fa 100644
---- a/stubdom/xenstorepvh-minios.cfg
-+++ b/stubdom/xenstorepvh-minios.cfg
-@@ -8,4 +8,6 @@ CONFIG_CONSFRONT=n
- CONFIG_LWIP=n
- CONFIG_9PFRONT=y
- CONFIG_BALLOON=y
-+CONFIG_KEXEC=y
-+CONFIG_KEXEC_MODULE_PAGES=18
- XEN_INTERFACE_VERSION=__XEN_LATEST_INTERFACE_VERSION__
-diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
-index 632886cecf..1ba9592d16 100644
---- a/tools/xenstored/core.h
-+++ b/tools/xenstored/core.h
-@@ -45,6 +45,11 @@
+diff --git a/gnttab.c b/gnttab.c
+index 8168ed5d..5b04ab01 100644
+--- a/gnttab.c
++++ b/gnttab.c
+@@ -183,11 +183,13 @@ init_gnttab(void)
+ #ifdef GNT_DEBUG
+     memset(inuse, 1, sizeof(inuse));
  #endif
- #endif
+-    for (i = NR_RESERVED_ENTRIES; i < NR_GRANT_ENTRIES; i++)
+-        put_free_entry(i);
  
-+/* Live update in stubdom case needs kexec support. */
-+#if defined(__MINIOS__) && !defined(CONFIG_KEXEC)
-+#define NO_LIVE_UPDATE
-+#endif
+     gnttab_table = arch_init_gnttab(NR_GRANT_FRAMES);
+     printk("gnttab_table mapped at %p.\n", gnttab_table);
 +
- /* DEFAULT_BUFFER_SIZE should be large enough for each errno string. */
- #define DEFAULT_BUFFER_SIZE 16
++    for (i = NR_RESERVED_ENTRIES; i < NR_GRANT_ENTRIES; i++)
++        if (gnttab_table[i].flags == 0)
++            put_free_entry(i);
+ }
  
+ void
 -- 
 2.43.0
 
