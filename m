@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F2C5C83013
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:20:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030433.1404106 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9393CC7EE30
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:20:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1030434.1404112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWshv-0004NI-Ll; Wed, 02 Jul 2025 08:20:43 +0000
+	id 1uWshw-0004TE-0P; Wed, 02 Jul 2025 08:20:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030433.1404106; Wed, 02 Jul 2025 08:20:43 +0000
+Received: by outflank-mailman (output) from mailman id 1030434.1404112; Wed, 02 Jul 2025 08:20:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWshv-0004MX-GD; Wed, 02 Jul 2025 08:20:43 +0000
-Received: by outflank-mailman (input) for mailman id 1030433;
+	id 1uWshv-0004PU-PC; Wed, 02 Jul 2025 08:20:43 +0000
+Received: by outflank-mailman (input) for mailman id 1030434;
  Wed, 02 Jul 2025 08:20:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uWsbQ-00082X-QU
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:14:00 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8188ff02-571c-11f0-b894-0df219b8e170;
- Wed, 02 Jul 2025 10:13:59 +0200 (CEST)
+ id 1uWsc9-00082Y-CU
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:14:45 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [2a07:de40:b251:101:10:150:64:1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9c167c35-571c-11f0-a313-13f23c93f187;
+ Wed, 02 Jul 2025 10:14:43 +0200 (CEST)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 047E51F76B;
- Wed,  2 Jul 2025 08:13:59 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A0C5C2117F;
+ Wed,  2 Jul 2025 08:14:43 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CF10213A24;
- Wed,  2 Jul 2025 08:13:58 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6DF4D13A24;
+ Wed,  2 Jul 2025 08:14:43 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id mGctMUbqZGhbSQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:58 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id URBfGXPqZGiXSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:14:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,35 +54,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8188ff02-571c-11f0-b894-0df219b8e170
+X-Inumbo-ID: 9c167c35-571c-11f0-a313-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444039; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1751444083; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ZRCeeHYAZX30u0CV5OETlVsm4bHFhhMFufeH4FMn+N0=;
-	b=dpMRKraZzMJzlGpf14sfq/88yWICScoZbVVspc/xbXT70FZ6rxyYuH04YJ+B06g3u5ACSI
-	SWp4voOugJ9WgumnG1awE6Xg+ZZ+ODkDFpOeeoMNu88L0HbTjsGKnFvN4IWYOLM+/Arghf
-	6GM/VbrJJlYAlQeE+A3MyX56InCwWpE=
-Authentication-Results: smtp-out2.suse.de;
+	bh=Dn//+GflyhXs2E0/uE+NcjSGBv2wFdky7ji5ZDIU8Zg=;
+	b=f7se+NC+/YQxrV6M43+eU/zCuMOd9cu6Lhut6ul6uwQGpvbXSBlfFuc9lyEltMWbEbPEFT
+	nQSrzkXXIDKSpACunye31nFwclpObMGIzKtKGAq9uQwnr3S8kHpyFkbcGMfPg2CwI7m1GQ
+	s1c5iPYajFjhe0zgy0OlmdmsELmyCLA=
+Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444039; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1751444083; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ZRCeeHYAZX30u0CV5OETlVsm4bHFhhMFufeH4FMn+N0=;
-	b=dpMRKraZzMJzlGpf14sfq/88yWICScoZbVVspc/xbXT70FZ6rxyYuH04YJ+B06g3u5ACSI
-	SWp4voOugJ9WgumnG1awE6Xg+ZZ+ODkDFpOeeoMNu88L0HbTjsGKnFvN4IWYOLM+/Arghf
-	6GM/VbrJJlYAlQeE+A3MyX56InCwWpE=
+	bh=Dn//+GflyhXs2E0/uE+NcjSGBv2wFdky7ji5ZDIU8Zg=;
+	b=f7se+NC+/YQxrV6M43+eU/zCuMOd9cu6Lhut6ul6uwQGpvbXSBlfFuc9lyEltMWbEbPEFT
+	nQSrzkXXIDKSpACunye31nFwclpObMGIzKtKGAq9uQwnr3S8kHpyFkbcGMfPg2CwI7m1GQ
+	s1c5iPYajFjhe0zgy0OlmdmsELmyCLA=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 11/19] mini-os: config: add support for config items with numerical values
-Date: Wed,  2 Jul 2025 10:12:46 +0200
-Message-ID: <20250702081254.14383-12-jgross@suse.com>
+Subject: [MINI-OS PATCH 19/19] events: export bind_evtchn()
+Date: Wed,  2 Jul 2025 10:12:54 +0200
+Message-ID: <20250702081254.14383-20-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250702081254.14383-1-jgross@suse.com>
 References: <20250702081254.14383-1-jgross@suse.com>
@@ -92,7 +93,7 @@ X-Spamd-Result: default: False [-2.80 / 50.00];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
 	MIME_GOOD(-0.10)[text/plain];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
@@ -105,46 +106,29 @@ X-Spamd-Result: default: False [-2.80 / 50.00];
 	RCPT_COUNT_THREE(0.00)[4];
 	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
 	RCVD_TLS_ALL(0.00)[]
 
-Add support for a Mini-OS config file containing config items with
-numerical values, e.g. CONFIG_FOO=7.
+Export the bind_evtchn() function, as it will be needed for
+reactivating events after kexec().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- Config.mk | 4 ++++
- 1 file changed, 4 insertions(+)
+ events.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Config.mk b/Config.mk
-index e2afb1b4..b9675e61 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -178,6 +178,7 @@ endif
- # CONFIG-y contains all items defaulting to "y"
- # CONFIG-n contains all items defaulting to "n"
- # CONFIG-x contains all items being calculated if not set explicitly
-+# CONFIG-val-y contains all items with numerical values, defaulting to 0
- CONFIG-y += CONFIG_START_NETWORK
- CONFIG-y += CONFIG_SPARSE_BSS
- CONFIG-y += CONFIG_BLKFRONT
-@@ -219,6 +220,8 @@ CONFIG-$(lwip) += CONFIG_LWIP
- $(foreach i,$(CONFIG-y),$(eval $(i) ?= y))
- $(foreach i,$(CONFIG-n),$(eval $(i) ?= n))
+diff --git a/events.c b/events.c
+index 9f3dbf05..a9c1ccac 100644
+--- a/events.c
++++ b/events.c
+@@ -98,6 +98,7 @@ evtchn_port_t bind_evtchn(evtchn_port_t port, evtchn_handler_t handler,
  
-+$(foreach i,$(CONFIG-val-y),$(eval $(i) ?= 0))
-+
- CONFIG-x += CONFIG_LIBXS
- CONFIG_LIBXS ?= $(CONFIG_XENBUS)
+ 	return port;
+ }
++EXPORT_SYMBOL(bind_evtchn);
  
-@@ -226,6 +229,7 @@ CONFIG-all := $(CONFIG-y) $(CONFIG-n) $(CONFIG-x)
- 
- # Export config items as compiler directives
- $(foreach i,$(CONFIG-all),$(eval DEFINES-$($(i)) += -D$(i)))
-+$(foreach i,$(CONFIG-val-y),$(eval DEFINES-y += -D$(i)=$($(i))))
- 
- DEFINES-y += -D__XEN_INTERFACE_VERSION__=$(XEN_INTERFACE_VERSION)
- 
+ void unbind_evtchn(evtchn_port_t port )
+ {
 -- 
 2.43.0
 
