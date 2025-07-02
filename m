@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90064C83038
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D695C83013
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:20:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030444.1404159 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1030437.1404123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsi2-0005cv-DP; Wed, 02 Jul 2025 08:20:50 +0000
+	id 1uWshw-0004XG-GI; Wed, 02 Jul 2025 08:20:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030444.1404159; Wed, 02 Jul 2025 08:20:50 +0000
+Received: by outflank-mailman (output) from mailman id 1030437.1404123; Wed, 02 Jul 2025 08:20:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsi2-0005cN-3N; Wed, 02 Jul 2025 08:20:50 +0000
-Received: by outflank-mailman (input) for mailman id 1030444;
- Wed, 02 Jul 2025 08:20:49 +0000
+	id 1uWshw-0004Vh-1c; Wed, 02 Jul 2025 08:20:44 +0000
+Received: by outflank-mailman (input) for mailman id 1030437;
+ Wed, 02 Jul 2025 08:20:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uWsbt-00082X-ID
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:14:29 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1uWsbG-00082X-OB
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:13:50 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 921f644a-571c-11f0-b894-0df219b8e170;
- Wed, 02 Jul 2025 10:14:27 +0200 (CEST)
+ id 7a51eb2c-571c-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 10:13:47 +0200 (CEST)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id DA91E1F445;
- Wed,  2 Jul 2025 08:14:26 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 130932117F;
+ Wed,  2 Jul 2025 08:13:47 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B1AB813A24;
- Wed,  2 Jul 2025 08:14:26 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D892813A54;
+ Wed,  2 Jul 2025 08:13:46 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id OcHtKWLqZGh5SQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:14:26 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id PcglMzrqZGhGSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,120 +54,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 921f644a-571c-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444066; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zDtKgh+ZY1/kdJFUAdITx2mhsJQDxIfukWhnUYKt9Xs=;
-	b=E9DWZ6Na0viwWiCWPwEvvGIAMRSQpkp9uWBmswocEggnZaHHU0DJICmY4fc/xo8wyVo5hS
-	aeybllRqaGHgyXQRMEha9KuwX4F58BjCjSQkbp95iW+A4l7huTXTxERt5Yomy5FEITz5J8
-	SNJPtsk+IwWk2YMdLIt2z9f380jlCPQ=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=E9DWZ6Na
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444066; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zDtKgh+ZY1/kdJFUAdITx2mhsJQDxIfukWhnUYKt9Xs=;
-	b=E9DWZ6Na0viwWiCWPwEvvGIAMRSQpkp9uWBmswocEggnZaHHU0DJICmY4fc/xo8wyVo5hS
-	aeybllRqaGHgyXQRMEha9KuwX4F58BjCjSQkbp95iW+A4l7huTXTxERt5Yomy5FEITz5J8
-	SNJPtsk+IwWk2YMdLIt2z9f380jlCPQ=
+X-Inumbo-ID: 7a51eb2c-571c-11f0-b894-0df219b8e170
+Authentication-Results: smtp-out1.suse.de;
+	none
 From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 16/19] gnttab: remove gnttab_alloc_and_grant() function
-Date: Wed,  2 Jul 2025 10:12:51 +0200
-Message-ID: <20250702081254.14383-17-jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 6/9] xenstored: don't use xenevtchn_fdopen() in stubdom
+Date: Wed,  2 Jul 2025 10:13:02 +0200
+Message-ID: <20250702081305.14440-7-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250702081254.14383-1-jgross@suse.com>
-References: <20250702081254.14383-1-jgross@suse.com>
+In-Reply-To: <20250702081305.14440-1-jgross@suse.com>
+References: <20250702081305.14440-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Queue-Id: DA91E1F445
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Queue-Id: 130932117F
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
 X-Rspamd-Action: no action
 X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 
-The last user of gnttab_alloc_and_grant() is gone.
+When running in a stubdom environment xenevtchn_fdopen() won't work,
+as any file descriptor state is lost across kexec().
 
-Remove gnttab_alloc_and_grant() as it is doing more harm than good.
-It is hard coded to only grant access for dom0, which is not really
-clear from looking at the function name. It would be possible to add
-a domid parameter, but given its now 0 users, there doesn't seem to be
-a real demand for that function.
+Use a wrapper to replace the call of xenevtchn_fdopen() with the
+really needed xenevtchn_open() when running on top of Mini-OS.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- gnttab.c         | 13 -------------
- include/gnttab.h |  1 -
- 2 files changed, 14 deletions(-)
+ tools/xenstored/core.h   | 3 +++
+ tools/xenstored/domain.c | 2 +-
+ tools/xenstored/minios.c | 5 +++++
+ tools/xenstored/posix.c  | 5 +++++
+ 4 files changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/gnttab.c b/gnttab.c
-index 5b04ab01..6bac0905 100644
---- a/gnttab.c
-+++ b/gnttab.c
-@@ -149,19 +149,6 @@ gnttab_end_transfer(grant_ref_t ref)
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index 1ba9592d16..bef24a688c 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -29,6 +29,7 @@
+ #include <stdint.h>
+ #include <time.h>
+ #include <errno.h>
++#include <xenevtchn.h>
+ 
+ #include "xenstore_lib.h"
+ #include "xenstore_state.h"
+@@ -405,6 +406,8 @@ void handle_special_fds(void);
+ int get_socket_fd(void);
+ void set_socket_fd(int fd);
+ 
++xenevtchn_handle *evtchn_fdopen(int fd);
++
+ #ifdef __MINIOS__
+ void mount_9pfs(void);
+ #endif
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index e1d5e8d614..e0c2342edb 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -1326,7 +1326,7 @@ void domain_init(int evtfd)
+ 	if (evtfd < 0)
+ 		xce_handle = xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
+ 	else
+-		xce_handle = xenevtchn_fdopen(NULL, evtfd, 0);
++		xce_handle = evtchn_fdopen(evtfd);
+ 
+ 	if (xce_handle == NULL)
+ 		barf_perror("Failed to open evtchn device");
+diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
+index a229954cf4..aa1f03fd6b 100644
+--- a/tools/xenstored/minios.c
++++ b/tools/xenstored/minios.c
+@@ -85,6 +85,11 @@ void set_socket_fd(int fd)
+ {
  }
- EXPORT_SYMBOL(gnttab_end_transfer);
  
--grant_ref_t
--gnttab_alloc_and_grant(void **map)
--{
--    unsigned long mfn;
--    grant_ref_t gref;
--
--    *map = (void *)alloc_page();
--    mfn = virt_to_mfn(*map);
--    gref = gnttab_grant_access(0, mfn, 0);
--    return gref;
--}
--EXPORT_SYMBOL(gnttab_alloc_and_grant);
--
- static const char * const gnttabop_error_msgs[] = GNTTABOP_error_msgs;
++xenevtchn_handle *evtchn_fdopen(int fd)
++{
++	return xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
++}
++
+ static void mount_thread(void *p)
+ {
+ 	xenbus_event_queue events = NULL;
+diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
+index 6037d739d0..ebdec82215 100644
+--- a/tools/xenstored/posix.c
++++ b/tools/xenstored/posix.c
+@@ -408,6 +408,11 @@ void set_socket_fd(int fd)
+ 	sock = fd;
+ }
  
- const char *
-diff --git a/include/gnttab.h b/include/gnttab.h
-index 974cb89d..108c4425 100644
---- a/include/gnttab.h
-+++ b/include/gnttab.h
-@@ -4,7 +4,6 @@
- #include <xen/grant_table.h>
- 
- void init_gnttab(void);
--grant_ref_t gnttab_alloc_and_grant(void **map);
- grant_ref_t gnttab_grant_access(domid_t domid, unsigned long frame,
- 				int readonly);
- grant_ref_t gnttab_grant_transfer(domid_t domid, unsigned long pfn);
++xenevtchn_handle *evtchn_fdopen(int fd)
++{
++	return xenevtchn_fdopen(NULL, fd, 0);
++}
++
+ const char *xenstore_rundir(void)
+ {
+ 	return xenstore_daemon_rundir();
 -- 
 2.43.0
 
