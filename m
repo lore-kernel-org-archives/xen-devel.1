@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F211DC7EE30
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:21:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030568.1404325 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6A5C83038
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:21:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1030569.1404334 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsil-0004T1-On; Wed, 02 Jul 2025 08:21:35 +0000
+	id 1uWsim-0004Yf-Fr; Wed, 02 Jul 2025 08:21:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030568.1404325; Wed, 02 Jul 2025 08:21:35 +0000
+Received: by outflank-mailman (output) from mailman id 1030569.1404334; Wed, 02 Jul 2025 08:21:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsil-0004Rf-L6; Wed, 02 Jul 2025 08:21:35 +0000
-Received: by outflank-mailman (input) for mailman id 1030568;
- Wed, 02 Jul 2025 08:21:33 +0000
+	id 1uWsim-0004XH-4w; Wed, 02 Jul 2025 08:21:36 +0000
+Received: by outflank-mailman (input) for mailman id 1030569;
+ Wed, 02 Jul 2025 08:21:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uWsc3-00082Y-2D
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:14:39 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ id 1uWsbT-00082Y-87
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:14:03 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [2a07:de40:b251:101:10:150:64:1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 98d33730-571c-11f0-a313-13f23c93f187;
- Wed, 02 Jul 2025 10:14:38 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 83898f99-571c-11f0-a313-13f23c93f187;
+ Wed, 02 Jul 2025 10:14:02 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 11E3221175;
- Wed,  2 Jul 2025 08:14:38 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 227C321196;
+ Wed,  2 Jul 2025 08:13:58 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DD31A13A24;
- Wed,  2 Jul 2025 08:14:37 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EE15813A24;
+ Wed,  2 Jul 2025 08:13:57 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id A0ptNG3qZGiQSQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:14:37 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id jjiuOEXqZGhZSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,357 +55,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98d33730-571c-11f0-a313-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444078; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IOlYonHclfoRpw7enkWmqDj5I9EaGv63Xf2WTPy7orA=;
-	b=f+GFtsUZ7F//peCVEaNHQTq0QAx9UWtfSwAvQ7VXwDUSdDItK1h9buqwSdRzcXMx0yqVjO
-	CR3tl8hrURsfptqpNeroPzz6BNLg1Vitpfl+AucQ0o2YI2T/sPBiiOhuKMqEFRdtzD4xjt
-	sNtha5Pd0MjsUms8oWTEZTr7WgR7Qi4=
+X-Inumbo-ID: 83898f99-571c-11f0-a313-13f23c93f187
 Authentication-Results: smtp-out1.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444078; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IOlYonHclfoRpw7enkWmqDj5I9EaGv63Xf2WTPy7orA=;
-	b=f+GFtsUZ7F//peCVEaNHQTq0QAx9UWtfSwAvQ7VXwDUSdDItK1h9buqwSdRzcXMx0yqVjO
-	CR3tl8hrURsfptqpNeroPzz6BNLg1Vitpfl+AucQ0o2YI2T/sPBiiOhuKMqEFRdtzD4xjt
-	sNtha5Pd0MjsUms8oWTEZTr7WgR7Qi4=
 From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 18/19] 9pfs: add support to keep device opened across kexec
-Date: Wed,  2 Jul 2025 10:12:53 +0200
-Message-ID: <20250702081254.14383-19-jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 8/9] xenstored: rebind event channels after live update in stubdom
+Date: Wed,  2 Jul 2025 10:13:04 +0200
+Message-ID: <20250702081305.14440-9-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250702081254.14383-1-jgross@suse.com>
-References: <20250702081254.14383-1-jgross@suse.com>
+In-Reply-To: <20250702081305.14440-1-jgross@suse.com>
+References: <20250702081305.14440-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
-	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid];
-	RCVD_TLS_ALL(0.00)[]
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Queue-Id: 227C321196
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Action: no action
 
-In order to support Xenstore-stubdom live update, the 9pfs device used
-to save and restore the Xenstore state needs to be kept open across
-kexec, as otherwise re-opening of the device using the new kernel
-would not work (this would require Xenstore to be active, which is
-obviously not possible before having read the saved state).
-
-Add an alternative init function for a 9pfs device supporting to take
-the configuration from the kexec module instead of Xenstore. Add
-support for creating the device using the kexec module, too.
+After performing a live update in stubdom environment some information
+about inter-domain event channels is lost. In order to set this
+information again, call xenevtchn_bind() from new_domain() in the
+restore case.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- 9pfront.c         | 120 +++++++++++++++++++++++++++++++++++++++++-----
- include/9pfront.h |   9 ++++
- include/kexec.h   |   1 +
- 3 files changed, 117 insertions(+), 13 deletions(-)
+ tools/xenstored/core.c   | 1 -
+ tools/xenstored/core.h   | 3 +++
+ tools/xenstored/domain.c | 8 ++++++--
+ tools/xenstored/minios.c | 5 +++++
+ tools/xenstored/posix.c  | 5 +++++
+ 5 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/9pfront.c b/9pfront.c
-index 8da2f726..b3106d13 100644
---- a/9pfront.c
-+++ b/9pfront.c
-@@ -8,6 +8,7 @@
- #include <mini-os/events.h>
- #include <mini-os/fcntl.h>
- #include <mini-os/gnttab.h>
-+#include <mini-os/kexec.h>
- #include <mini-os/semaphore.h>
- #include <mini-os/wait.h>
- #include <mini-os/xenbus.h>
-@@ -26,6 +27,7 @@ struct dev_9pfs {
-     unsigned int dom;
-     char *backend;
-     char bepath[64];
-+    bool kexecmem;
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 37e4dd5a5b..09c838d6e8 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -49,7 +49,6 @@
+ #include "control.h"
+ #include "lu.h"
  
-     char *tag;
-     const char *mnt;
-@@ -58,6 +60,13 @@ struct dev_9pfs {
-     unsigned long long fid_mask;              /* Bit mask for free fids. */
- };
+-extern xenevtchn_handle *xce_handle; /* in domain.c */
+ static int xce_pollfd_idx = -1;
+ struct pollfd *poll_fds;
+ static unsigned int current_array_size;
+diff --git a/tools/xenstored/core.h b/tools/xenstored/core.h
+index bef24a688c..3f7426fbe3 100644
+--- a/tools/xenstored/core.h
++++ b/tools/xenstored/core.h
+@@ -394,6 +394,8 @@ static inline bool domain_is_unprivileged(const struct connection *conn)
+ 	return conn && domid_is_unprivileged(conn->id);
+ }
  
-+struct kexec_9pfs_rec {
-+    grant_ref_t ring_ref;
-+    evtchn_port_t evtchn;
-+    RING_IDX prod_pvt_out;
-+    RING_IDX cons_pvt_in;
-+};
++extern xenevtchn_handle *xce_handle; /* in domain.c */
 +
- struct file_9pfs {
-     uint32_t fid;
-     struct dev_9pfs *dev;
-@@ -898,7 +907,7 @@ static bool path_canonical(const char *pathname)
-     return true;
+ /* Return the event channel used by xenbus. */
+ evtchn_port_t get_xenbus_evtchn(void);
+ void early_init(bool live_update, bool dofork, const char *pidfile);
+@@ -407,6 +409,7 @@ int get_socket_fd(void);
+ void set_socket_fd(int fd);
+ 
+ xenevtchn_handle *evtchn_fdopen(int fd);
++int evtchn_rebind(int port);
+ 
+ #ifdef __MINIOS__
+ void mount_9pfs(void);
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index e0c2342edb..ca0744d6bb 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -855,9 +855,13 @@ static int new_domain(struct domain *domain, int port, bool restore)
+ 
+ 	wrl_domain_new(domain);
+ 
+-	if (restore)
++	if (restore) {
++		if (evtchn_rebind(port)) {
++			errno = ENOMEM;
++			return errno;
++		}
+ 		domain->port = port;
+-	else {
++	} else {
+ 		/* Tell kernel we're interested in this event. */
+ 		rc = xenevtchn_bind_interdomain(xce_handle, domain->domid,
+ 						port);
+diff --git a/tools/xenstored/minios.c b/tools/xenstored/minios.c
+index aa1f03fd6b..ec5faebaf3 100644
+--- a/tools/xenstored/minios.c
++++ b/tools/xenstored/minios.c
+@@ -90,6 +90,11 @@ xenevtchn_handle *evtchn_fdopen(int fd)
+ 	return xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
  }
  
--static int connect_9pfs(struct dev_9pfs *dev)
-+static int connect_9pfs(struct dev_9pfs *dev, bool do_attach)
- {
-     int ret;
- 
-@@ -906,7 +915,7 @@ static int connect_9pfs(struct dev_9pfs *dev)
-     if ( ret )
-         return ret;
- 
--    return p9_attach(dev);
-+    return do_attach ? p9_attach(dev) : 0;
- }
- 
- static void intr_9pfs(evtchn_port_t port, struct pt_regs *regs, void *data)
-@@ -1079,6 +1088,9 @@ static int open_9pfs(struct mount_point *mnt, const char *pathname, int flags,
-     return -1;
- }
- 
-+static int kexec_recid = -1;
-+static struct dev_9pfs *kexec_dev;
-+
- static void free_9pfront(struct dev_9pfs *dev)
- {
-     unsigned int i;
-@@ -1087,13 +1099,22 @@ static void free_9pfront(struct dev_9pfs *dev)
-     {
-         for ( i = 0; i < (1 << dev->ring_order); i++ )
-             gnttab_end_access(dev->intf->ref[i]);
--        free_pages(dev->data.in, dev->ring_order);
-+        if ( dev->kexecmem )
-+            kexec_free_mod_pages(kexec_recid, (unsigned long)dev->data.in,
-+                                 1 << dev->ring_order);
-+        else
-+            free_pages(dev->data.in, dev->ring_order);
-     }
-     unbind_evtchn(dev->evtchn);
-     gnttab_end_access(dev->ring_ref);
--    free_page(dev->intf);
-+    if ( dev->kexecmem )
-+        kexec_free_mod_pages(kexec_recid, (unsigned long)dev->intf, 1);
-+    else
-+        free_page(dev->intf);
-     free(dev->backend);
-     free(dev->tag);
-+    if ( dev == kexec_dev )
-+        kexec_dev = NULL;
-     free(dev);
- }
- 
-@@ -1111,7 +1132,7 @@ static bool issue_err(struct dev_9pfs *dev, char *msg, char *reason)
-     return false;
- }
- 
--static bool read_config_xs(struct dev_9pfs *dev)
-+static bool read_config_xs(struct dev_9pfs *dev, struct kexec_9pfs_rec *rec)
- {
-     char *msg;
-     char *reason = "";
-@@ -1121,7 +1142,9 @@ static bool read_config_xs(struct dev_9pfs *dev)
-     char *v;
-     void *addr;
-     unsigned int i;
-+    unsigned int n_pages;
-     int retry = 1;
-+    int err;
- 
-     msg = xenbus_read_unsigned(XBT_NIL, dev->nodename, "backend-id", &dev->dom);
-     if ( msg )
-@@ -1177,7 +1200,9 @@ static bool read_config_xs(struct dev_9pfs *dev)
-         return issue_err(dev, msg, reason);
-     }
- 
--    dev->intf = (void *)alloc_page();
-+    dev->intf = (void *)(dev->kexecmem
-+                         ? kexec_alloc_mod_pages(kexec_recid, 1)
-+                         : alloc_page());
-     if ( !dev->intf )
-     {
-         reason = "couldn't allocate shared interface page";
-@@ -1191,14 +1216,17 @@ static bool read_config_xs(struct dev_9pfs *dev)
-         return issue_err(dev, msg, reason);
-     }
-     dev->intf->ring_order = dev->ring_order;
--    dev->data.in = (void *)alloc_pages(dev->ring_order);
-+    n_pages = 1 << dev->ring_order;
-+    dev->data.in = (void *)(dev->kexecmem
-+                            ? kexec_alloc_mod_pages(kexec_recid, n_pages)
-+                            : alloc_pages(dev->ring_order));
-     if ( !dev->data.in )
-     {
-         reason = "couldn't allocate ring pages";
-         return issue_err(dev, msg, reason);
-     }
-     dev->data.out = dev->data.in + XEN_FLEX_RING_SIZE(dev->ring_order);
--    for ( i = 0; i < (1 << dev->ring_order); i++ )
-+    for ( i = 0; i < n_pages; i++ )
-     {
-         addr = dev->data.in + i * PAGE_SIZE;
-         dev->intf->ref[i] = gnttab_grant_access(dev->dom, virt_to_mfn(addr), 0);
-@@ -1256,18 +1284,65 @@ static bool read_config_xs(struct dev_9pfs *dev)
-     if ( msg )
-         return issue_err(dev, msg, reason);
- 
-+    if ( dev->kexecmem )
-+    {
-+        rec->ring_ref = dev->ring_ref;
-+        rec->evtchn = dev->evtchn;
-+        err = kexec_upd_mod_record(kexec_recid, KEXECMOD_REC_9PFS, rec,
-+                                   sizeof(*rec));
-+        BUG_ON(err);
-+    }
-+
-     return true;
- }
- 
--void *init_9pfront(unsigned int id, const char *mnt)
-+#ifdef CONFIG_KEXEC
-+static int kexec_9pfront(bool undo)
++int evtchn_rebind(int port)
 +{
-+    struct kexec_9pfs_rec rec;
-+
-+    if ( kexec_recid < 0 || !kexec_dev || undo )
-+        return 0;
-+
-+    kexec_read_mod_record(kexec_recid, &rec, sizeof(rec));
-+    rec.prod_pvt_out = kexec_dev->prod_pvt_out;
-+    rec.cons_pvt_in = kexec_dev->cons_pvt_in;
-+    kexec_upd_mod_record(kexec_recid, KEXECMOD_REC_9PFS, &rec, sizeof(rec));
-+
-+    return 0;
-+}
-+kexec_call(kexec_9pfront);
-+#endif
-+
-+static void read_config_kexec(struct dev_9pfs *dev, struct kexec_9pfs_rec *rec)
-+{
-+    dev->ring_ref = rec->ring_ref;
-+    dev->evtchn = rec->evtchn;
-+    dev->prod_pvt_out = rec->prod_pvt_out;
-+    dev->cons_pvt_in = rec->cons_pvt_in;
-+
-+    dev->intf = gnttab_get_addr(dev->ring_ref);
-+    dev->ring_order = dev->intf->ring_order;
-+    dev->data.in = gnttab_get_addr(dev->intf->ref[0]);
-+    dev->data.out = dev->data.in + XEN_FLEX_RING_SIZE(dev->ring_order);
-+
-+    bind_evtchn(dev->evtchn, intr_9pfs, dev);
++	return xenevtchn_bind(xce_handle, port);
 +}
 +
-+void *init_9pfront2(unsigned int id, const char *mnt, unsigned int flags)
+ static void mount_thread(void *p)
  {
-     struct dev_9pfs *dev;
-     char *reason = "";
-     unsigned int i;
-+    struct kexec_9pfs_rec record = { };
-+    unsigned int rec_size;
- 
--    printk("9pfsfront add %u, for mount at %s\n", id, mnt);
-+    printk("9pfsfront add %u, for mount at %s, flags %x\n", id, mnt, flags);
-     dev = malloc(sizeof(*dev));
-     memset(dev, 0, sizeof(*dev));
-+    dev->kexecmem = flags & (INIT9P_FLAG_KEXEC | INIT9P_FLAG_REINIT);
-+    if ( dev->kexecmem )
-+        kexec_dev = dev;
-     snprintf(dev->nodename, sizeof(dev->nodename), "device/9pfs/%u", id);
-     dev->id = id;
-     init_waitqueue_head(&dev->waitq);
-@@ -1282,12 +1357,25 @@ void *init_9pfront(unsigned int id, const char *mnt)
-     }
-     dev->free_reqs = 0;
- 
--    if ( !read_config_xs(dev) )
--        goto err_out;
-+    if ( !(flags & INIT9P_FLAG_REINIT) )
-+    {
-+        if ( dev->kexecmem )
-+            kexec_recid = kexec_add_mod_record(KEXECMOD_REC_9PFS, &record,
-+                                               sizeof(record));
-+        if ( !read_config_xs(dev, &record) )
-+            goto err_out;
-+    }
-+    else
-+    {
-+        kexec_recid = kexec_find_mod_record(0, KEXECMOD_REC_9PFS, &rec_size);
-+        BUG_ON(kexec_recid < 0 || rec_size != sizeof(record));
-+        kexec_read_mod_record(kexec_recid, &record, rec_size);
-+        read_config_kexec(dev, &record);
-+    }
- 
-     unmask_evtchn(dev->evtchn);
- 
--    if ( connect_9pfs(dev) )
-+    if ( connect_9pfs(dev, !(flags & INIT9P_FLAG_REINIT)) )
-     {
-         reason = "9pfs connect failed";
-         goto err;
-@@ -1309,6 +1397,12 @@ void *init_9pfront(unsigned int id, const char *mnt)
-     free_9pfront(dev);
-     return NULL;
+ 	xenbus_event_queue events = NULL;
+diff --git a/tools/xenstored/posix.c b/tools/xenstored/posix.c
+index ebdec82215..97561701ae 100644
+--- a/tools/xenstored/posix.c
++++ b/tools/xenstored/posix.c
+@@ -413,6 +413,11 @@ xenevtchn_handle *evtchn_fdopen(int fd)
+ 	return xenevtchn_fdopen(NULL, fd, 0);
  }
-+EXPORT_SYMBOL(init_9pfront2);
-+
-+void *init_9pfront(unsigned int id, const char *mnt)
+ 
++int evtchn_rebind(int port)
 +{
-+    return init_9pfront2(id, mnt, 0);
++	return 0;
 +}
- EXPORT_SYMBOL(init_9pfront);
- 
- void shutdown_9pfront(void *dev)
-diff --git a/include/9pfront.h b/include/9pfront.h
-index 722ec564..a0cb5487 100644
---- a/include/9pfront.h
-+++ b/include/9pfront.h
-@@ -2,6 +2,15 @@
- #define __9PFRONT_H__
- 
- void *init_9pfront(unsigned int id, const char *mnt);
-+void *init_9pfront2(unsigned int id, const char *mnt, unsigned int flags);
-+#ifdef CONFIG_KEXEC
-+#define INIT9P_FLAG_REINIT 0x01      /* Reinit with data from kexec module. */
-+#define INIT9P_FLAG_KEXEC  0x02      /* Use kexec module for interface. */
-+#else
-+#define INIT9P_FLAG_REINIT 0
-+#define INIT9P_FLAG_KEXEC  0
-+#endif
 +
- void shutdown_9pfront(void *dev);
- 
- #endif /* __9PFRONT_H__ */
-diff --git a/include/kexec.h b/include/kexec.h
-index 1e753ee1..b358b202 100644
---- a/include/kexec.h
-+++ b/include/kexec.h
-@@ -34,6 +34,7 @@ struct kexec_module_rec {
-     uint16_t offset;        /* Offset to record from start of page.          */
-     uint8_t type;           /* Type of record.                               */
- #define KEXECMOD_REC_NONE   0
-+#define KEXECMOD_REC_9PFS   1
-     uint8_t size;           /* Size of record.                               */
- };
- 
+ const char *xenstore_rundir(void)
+ {
+ 	return xenstore_daemon_rundir();
 -- 
 2.43.0
 
