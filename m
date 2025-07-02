@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3AE5C83F04
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 13:19:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031132.1404860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12968C83F04
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 13:30:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1031145.1404870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWxMj-0002Fw-Mq; Wed, 02 Jul 2025 13:19:09 +0000
+	id 1uWxX0-0004WZ-Ip; Wed, 02 Jul 2025 13:29:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031132.1404860; Wed, 02 Jul 2025 13:19:09 +0000
+Received: by outflank-mailman (output) from mailman id 1031145.1404870; Wed, 02 Jul 2025 13:29:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWxMj-0002Fp-KE; Wed, 02 Jul 2025 13:19:09 +0000
-Received: by outflank-mailman (input) for mailman id 1031132;
- Wed, 02 Jul 2025 13:17:57 +0000
+	id 1uWxX0-0004WS-Fl; Wed, 02 Jul 2025 13:29:46 +0000
+Received: by outflank-mailman (input) for mailman id 1031145;
+ Wed, 02 Jul 2025 13:29:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gCPO=ZP=canonical.com=nick.rosbrook@srs-se1.protection.inumbo.net>)
- id 1uWxLZ-0001mM-4r
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 13:17:57 +0000
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 1uWxWy-0004WM-NG
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 13:29:44 +0000
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f6f1e27f-5746-11f0-a313-13f23c93f187;
- Wed, 02 Jul 2025 15:17:55 +0200 (CEST)
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
+ id 9ca3e1ee-5748-11f0-a313-13f23c93f187;
+ Wed, 02 Jul 2025 15:29:43 +0200 (CEST)
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 667023F452
- for <xen-devel@lists.xenproject.org>; Wed,  2 Jul 2025 13:17:55 +0000 (UTC)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-3132c8437ffso5150168a91.1
- for <xen-devel@lists.xenproject.org>; Wed, 02 Jul 2025 06:17:55 -0700 (PDT)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D92653F181
+ for <xen-devel@lists.xenproject.org>; Wed,  2 Jul 2025 13:29:42 +0000 (UTC)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-31202bbaafaso4681094a91.1
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Jul 2025 06:29:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,72 +49,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6f1e27f-5746-11f0-a313-13f23c93f187
+X-Inumbo-ID: 9ca3e1ee-5748-11f0-a313-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-	s=20210705; t=1751462275;
-	bh=L2dNYcUrvaoQhhL9Z8RzTJ41BbPNvKIefzA/ihYBfdk=;
+	s=20210705; t=1751462982;
+	bh=z8EBQJlddOmZhjCoAzh/eIKSXiNuDbvYRxmwUUoG3RA=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
 	 To:Cc:Content-Type;
-	b=hmbtL7O23hDe7gOqHHRovP8XsqdLdB4ATzRGhyDfm5Xu5L0OFmmXRJw+zwHE6uADj
-	 cDJJ1+c4yrBMWvR4J7MFoBLd+Jkl3DlcfdVETnUlp3d5KNs7hkOqoz2thNoFHaQ4sG
-	 phg5zY6eTm9j78ZLouMg0dhMBIH/HqDYnmhuOfYrZEsn4+NJ8Qr85my+KZd+j9IEpV
-	 +nWI9rEN0zMY0PNAW15TbiM2vYeM9tL3gBTwnLiATl8Rta/RmdPfJgOVu4zA5VVcb+
-	 vcUCRaq+x+aXLxfeCaVazmo3E3iuET5PkdNzO12AmZgLabfBI4bzB/ylisRrXJpQxM
-	 Z0DJhadvTtP8g==
+	b=ZyZisa8T7ApL5qsWp2Di7CBNUJEqTZnGdacLIe97aedIuM8B0tEeaZbOaVjvpi0YW
+	 J4pTbw6FonIGiehF3ojmIT2bM8pbIxzwBK20G8l4Dw6aRahwwGLnIq8BkTWQkkIY/G
+	 TOmRxY+g96LadIS6tIUUyeXEb74KC0cDRqD/mGDJlE33Pe6q0D7Bf4JvnQhCE0zbZE
+	 I+zfBlewYFL3osm8a572OUxQWlUv6l50dUuKjL5quBLKxMTHH7IdFfGJz1aBUjszvx
+	 fEYKHkC3gTHrDVS1Q3bHzFMphJLTC9gthymRI41cekD7oCk0LcRTZjFz2tAJPYABGI
+	 pyBn9fXWadZkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751462274; x=1752067074;
+        d=1e100.net; s=20230601; t=1751462981; x=1752067781;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=L2dNYcUrvaoQhhL9Z8RzTJ41BbPNvKIefzA/ihYBfdk=;
-        b=tKZ6gyP+gKPunaRLFPl/m+dGL60PQIk3GRpyy8Cq1iLjfgwhaiUQra9J2AyILlaHwt
-         fXuSMwxE8kVTFy4kENRgx7jT6BjkFI+ubt6fjfeRSWoVzlhZLo/zpfu1YLkKI3sC0GG4
-         fADYtFbAFXDjGXKMsVo6VFFyYSjFQJQW1mu0ZMjxNUKhGV61gHtXYEzKvaqeE/ZTL5re
-         c6LkrigYSNjdQ5apGQ845YfEotu7hpWhuzPqJ5Tek+ZsRUQ+vwNpaGKkfzCeOlvCnd2d
-         O0/l++53MTvXBPbA1+vN/XyIB/x7r5cjUWXuFE8rpCt4CVZe2ZQbeMjCYk7W1r2E9lI2
-         /qqg==
-X-Gm-Message-State: AOJu0YyIxVaAdWcwnWqQzrbQGFfr8GfcpXu4qefCwtJ2aTj+we9D3Tsv
-	6pV0a9NfNqSc+6gODSp+DE3HYspkjbuJCLPjW0YUOdNaelScEqnutLX5HEexRnv3E0xL+Fo2aS5
-	memLiDNMT2ZPn2A2LowlnuGp9M8cvgp4qxPtOhDfLxxa3TFtEX1qY31ib+ZCnhYE9qiYKGX4W3S
-	KQA9OAG/Z0vFxI+sAvwF/8zFSbXZUboRwgyaP5JvBAwMqdnWAfv1bIk8qui4Jz8MEknvedQg==
-X-Gm-Gg: ASbGnctqKjAzTwmBvTjADP7MBCFUb6xqbG9f971oeZis7rUTJ3FdQddYTE5Rm31WTYq
-	ReKOrQSXbBACJZEwjBHXvlJfeZsXDEVCBNn4bmIVWSiJ1iZnZfXfCy/aW79HH1WS+qoeUU1Gv5f
-	yuAQ==
-X-Received: by 2002:a17:90a:c105:b0:311:b0ec:135b with SMTP id 98e67ed59e1d1-31a90bf0b37mr4423779a91.24.1751462273922;
-        Wed, 02 Jul 2025 06:17:53 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE1d2YNsrPsuK8q1KVwwEPlnFGjigLz3kMtwF34t0VoyrMVcLajDj6AUXJ0Q1RnhoguuOf1/DO6xQultLychlo=
-X-Received: by 2002:a17:90a:c105:b0:311:b0ec:135b with SMTP id
- 98e67ed59e1d1-31a90bf0b37mr4423724a91.24.1751462273544; Wed, 02 Jul 2025
- 06:17:53 -0700 (PDT)
+        bh=z8EBQJlddOmZhjCoAzh/eIKSXiNuDbvYRxmwUUoG3RA=;
+        b=wxiAQC9RGGdkMbfTl3LF3xkGmyJGwqoDuOFSd/Ov1Tqr8uKQEM5BvWrlc7N9KCQTbS
+         yTZclVkZE3EiLInxyvjeiYPkY1QO0qIpB2UcAnPTtdp9yugTSOGoFwMn7EUZ++OuEEIB
+         NCIkUxUTMUmHapq3egAzgBy2eiCDZK0KpQWG7NwS1UvitrbwPCBP41mE+MTPxo5iScBx
+         gf0Iq4XDpqN41aQzn9JMWkKLSk+V4Sz0OhT7UQZGSW17DlHdt1KGnsEj5Fj7tDEexvMD
+         bFizvpTgfemIaulpUwP9cGagkVI/TVhUMU5LYfCtEuZT+/7fvmoMH/ek5Ps9ryNA8GA1
+         K5cQ==
+X-Gm-Message-State: AOJu0YwPZdfd1ueqY81OqPXMA+4+QjSXSeQGvt37uOaP48DZ5IJZqHmJ
+	4tUYPFz3GxAGge085DzeGTiTM/3EiCKjHF7gmrq79co6mdxmGomlb0W6c1HKBoNq0+sIqd2kwfw
+	wvfNcfH6GDRcBS0Ki2ocs6WrXX+L4XkhE0TGC6g0oFZlpgbyoIe/5Bca4xh0iuIpw/dw1UyZQ2D
+	7Xi4Uq35r+LV6naO19kkTTeYO66cR7PfjFFJluQIcELHyH4pZzWbA8rYSC/t0=
+X-Gm-Gg: ASbGncvQW+MKuIrji8peUqdS8l9a2hcVFDjrMvFIlwjAeuDiZAcFzYApB4xEqc20ZVV
+	/6olbhrQlaYTHph0QGVM1QmSIIc2vZC+P/2jjsodoh2dX32bRYdQuyJWaS5Ij5Sa6eQxMIHH698
+	ngWA==
+X-Received: by 2002:a17:90b:3889:b0:312:f0d0:bc4 with SMTP id 98e67ed59e1d1-31a90b1c47emr4036920a91.5.1751462981330;
+        Wed, 02 Jul 2025 06:29:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHAuth7ZRl6+Ze0hj8Rm0N3dnZXcO4n2rUL2BjmK0D6Ov9pdzqk0xlF+zYE7IlYu5AXzt5XGR0/pyimYRk3iXY=
+X-Received: by 2002:a17:90b:3889:b0:312:f0d0:bc4 with SMTP id
+ 98e67ed59e1d1-31a90b1c47emr4036890a91.5.1751462980920; Wed, 02 Jul 2025
+ 06:29:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250702095639.90927-1-roger.pau@citrix.com>
-In-Reply-To: <20250702095639.90927-1-roger.pau@citrix.com>
+References: <cover.1751397919.git.w1benny@gmail.com> <090b27895506d78055d1bab9c2b3617e85f389c6.1751397919.git.w1benny@gmail.com>
+In-Reply-To: <090b27895506d78055d1bab9c2b3617e85f389c6.1751397919.git.w1benny@gmail.com>
 From: Nick Rosbrook <nick.rosbrook@canonical.com>
-Date: Wed, 2 Jul 2025 09:17:41 -0400
-X-Gm-Features: Ac12FXxsTNPiYCwmlHJ_UkfsMF-_2mxcVwTiXSx2U3tO4R4qFmRcjl9Kdzt1t38
-Message-ID: <CAEN5XSFx=vEnxeyCcmdK0bcST=H_S5QECvLCGOhMyhgLHiNgbA@mail.gmail.com>
-Subject: Re: [PATCH] tools/golang: update auto-generated libxl based types
-To: Roger Pau Monne <roger.pau@citrix.com>
+Date: Wed, 2 Jul 2025 09:29:29 -0400
+X-Gm-Features: Ac12FXxBr22yzDuZ9pHZUbnNgZRc9BrJrY4FYj7X_jXFthS0xUQk5BpJu6-By6g
+Message-ID: <CAEN5XSHWKaRJhzONjQvp+Bj_CeNaTG+XuzxW=Hj5p7ceh4cXzg@mail.gmail.com>
+Subject: Re: [PATCH v7 2/7] tools/xl: Add altp2m_count parameter
+To: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>
 Cc: xen-devel@lists.xenproject.org, Nick Rosbrook <enr0n@ubuntu.com>, 
 	George Dunlap <gwd@xenproject.org>, Anthony PERARD <anthony.perard@vates.tech>, 
 	Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 2, 2025 at 5:56=E2=80=AFAM Roger Pau Monne <roger.pau@citrix.co=
-m> wrote:
+On Tue, Jul 1, 2025 at 3:54=E2=80=AFPM Petr Bene=C5=A1 <w1benny@gmail.com> =
+wrote:
 >
-> As a result of the addition of a new field in libxl domain build info
-> structure the golang types need to be regnerated, this was missing as par=
-t
-> of 22650d6054.
+> From: Petr Bene=C5=A1 <w1benny@gmail.com>
 >
-> Regenerate the headers now.
+> Introduce a new altp2m_count parameter to control the maximum number of a=
+ltp2m
+> views a domain can use. By default, if altp2m_count is unspecified and al=
+tp2m
+> is enabled, the value is set to 10, reflecting the legacy behavior.
 >
-> Reported-by: Juergen Gross <jgross@suse.com>
-> Fixes: 22650d605462 ('x86/hvmloader: select xen platform pci MMIO BAR UC =
-or WB MTRR cache attribute')
-> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> This change is preparatory; it establishes the groundwork for the feature=
+ but
+> does not activate it.
+>
+> Signed-off-by: Petr Bene=C5=A1 <w1benny@gmail.com>
+> Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+
+For the tools/golang changes,
 
 Acked-by: Nick Rosbrook <enr0n@ubuntu.com>
 
