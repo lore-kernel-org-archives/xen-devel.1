@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1184C83013
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:21:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1030493.1404226 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E968C7EE30
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jul 2025 08:21:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1030517.1404248 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsiG-0008MW-Ib; Wed, 02 Jul 2025 08:21:04 +0000
+	id 1uWsiQ-0001No-2G; Wed, 02 Jul 2025 08:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1030493.1404226; Wed, 02 Jul 2025 08:21:04 +0000
+Received: by outflank-mailman (output) from mailman id 1030517.1404248; Wed, 02 Jul 2025 08:21:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uWsiG-0008La-9H; Wed, 02 Jul 2025 08:21:04 +0000
-Received: by outflank-mailman (input) for mailman id 1030493;
- Wed, 02 Jul 2025 08:21:02 +0000
+	id 1uWsiP-0001N9-VU; Wed, 02 Jul 2025 08:21:13 +0000
+Received: by outflank-mailman (input) for mailman id 1030517;
+ Wed, 02 Jul 2025 08:21:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uWsbD-00082X-U7
- for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:13:47 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1uWsbP-00082X-BN
+ for xen-devel@lists.xenproject.org; Wed, 02 Jul 2025 08:13:59 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 79da21dc-571c-11f0-b894-0df219b8e170;
- Wed, 02 Jul 2025 10:13:46 +0200 (CEST)
+ id 80a00a17-571c-11f0-b894-0df219b8e170;
+ Wed, 02 Jul 2025 10:13:57 +0200 (CEST)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 55B5D1F454;
- Wed,  2 Jul 2025 08:13:42 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 95C2721175;
+ Wed,  2 Jul 2025 08:13:52 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 2CAEC13A24;
- Wed,  2 Jul 2025 08:13:42 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 726A713A24;
+ Wed,  2 Jul 2025 08:13:52 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Pfp7CTbqZGhBSQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:42 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id HyC2GUDqZGhPSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 02 Jul 2025 08:13:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,41 +53,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79da21dc-571c-11f0-b894-0df219b8e170
+X-Inumbo-ID: 80a00a17-571c-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444022; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1751444032; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VFGHThmdUPo7tU8/k1YjcPPbr+K+PG8BXx4fi06T8E8=;
-	b=tdvNwrFuYC25cBlRD2W9UnU/lW5P7VQOwsNG3RMXt5GAkHq4KsaTh8t4Tm8OjWNrCXtP68
-	wWviHOIYRdYnF9OwQae4h0xzvHas6e+ULLL7ydMrQ4l67cBwL4WFfDUUWfw0X1D8yGsriI
-	hPYonJ1fCz/VEjm2DyxFqKDlVSTC5eA=
-Authentication-Results: smtp-out2.suse.de;
+	bh=QyZcNcUWYXlMK58GDg4vsd2KFsd/E7h4zy2FrD+iwSU=;
+	b=jKGhsSm554iOqRnNksc6r0G0n7ed9Ttt2b5N2VrWl1Y3EH7/Xf0AdHXM7FkJF4hTTcYvXa
+	qyY1WJBkBXpzSdxYpDPPPrDzI0pcRBXVK5ebWJdLq+tJc5GXMkCZgADuljJ0q7dwBizw8z
+	spnOnrehY/RRzh+v4bSHMIR4qBrlj9g=
+Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1751444022; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1751444032; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VFGHThmdUPo7tU8/k1YjcPPbr+K+PG8BXx4fi06T8E8=;
-	b=tdvNwrFuYC25cBlRD2W9UnU/lW5P7VQOwsNG3RMXt5GAkHq4KsaTh8t4Tm8OjWNrCXtP68
-	wWviHOIYRdYnF9OwQae4h0xzvHas6e+ULLL7ydMrQ4l67cBwL4WFfDUUWfw0X1D8yGsriI
-	hPYonJ1fCz/VEjm2DyxFqKDlVSTC5eA=
+	bh=QyZcNcUWYXlMK58GDg4vsd2KFsd/E7h4zy2FrD+iwSU=;
+	b=jKGhsSm554iOqRnNksc6r0G0n7ed9Ttt2b5N2VrWl1Y3EH7/Xf0AdHXM7FkJF4hTTcYvXa
+	qyY1WJBkBXpzSdxYpDPPPrDzI0pcRBXVK5ebWJdLq+tJc5GXMkCZgADuljJ0q7dwBizw8z
+	spnOnrehY/RRzh+v4bSHMIR4qBrlj9g=
 From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [MINI-OS PATCH 08/19] e820: don't count lapic page as initially reserved
-Date: Wed,  2 Jul 2025 10:12:43 +0200
-Message-ID: <20250702081254.14383-9-jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 7/9] tools/libxenevtchn: add xenevtchn_bind() under Mini-OS
+Date: Wed,  2 Jul 2025 10:13:03 +0200
+Message-ID: <20250702081305.14440-8-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250702081254.14383-1-jgross@suse.com>
-References: <20250702081254.14383-1-jgross@suse.com>
+In-Reply-To: <20250702081305.14440-1-jgross@suse.com>
+References: <20250702081305.14440-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
+X-Spamd-Result: default: False [-6.80 / 50.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[99.99%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
@@ -102,43 +102,73 @@ X-Spamd-Result: default: False [-2.80 / 50.00];
 	FUZZY_BLOCKED(0.00)[rspamd.com];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_THREE(0.00)[3];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid];
 	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
 	RCVD_TLS_ALL(0.00)[]
 
-The number of pages marked initially as reserved in the memory map
-are counted to be allocated, as they are normally populated by Xen
-tools for e.g. xenbus and console ring pages.
+In order to reactivate an event channel after kexec() of Mini-OS,
+libxenevtchn needs to allocate the port data for the event channel
+and set the handler again. Add a new interface xenevtchn_bind()
+for that purpose, available under Mini-OS only.
 
-This is wrong in case the lapic page is marked as reserved in the
-memory map, as there is never memory allocated for a lapic.
-
-So when finding the lapic page to be marked as reserved, don't add
-it to the number of reserved pages.
-
-Fixes: 9b87429d2864 ("mini-os: fix number of pages for PVH")
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- e820.c | 3 +++
- 1 file changed, 3 insertions(+)
+ tools/include/xenevtchn.h  | 11 +++++++++++
+ tools/libs/evtchn/minios.c | 17 +++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
-diff --git a/e820.c b/e820.c
-index 49b16878..876d55b1 100644
---- a/e820.c
-+++ b/e820.c
-@@ -275,7 +275,10 @@ static void e820_sanitize(void)
-             e820_initial_reserved_pfns += e820_map[i].size / PAGE_SIZE;
-             if ( e820_map[i].addr <= LAPIC_ADDRESS &&
-                  e820_map[i].addr + e820_map[i].size > LAPIC_ADDRESS )
-+            {
-                 found_lapic = true;
-+                e820_initial_reserved_pfns--;
-+            }
-         }
-     }
+diff --git a/tools/include/xenevtchn.h b/tools/include/xenevtchn.h
+index 1255c85178..113a718d67 100644
+--- a/tools/include/xenevtchn.h
++++ b/tools/include/xenevtchn.h
+@@ -173,6 +173,17 @@ int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port);
+  */
+ int xenevtchn_restrict(xenevtchn_handle *xce, domid_t domid);
  
++/**
++ * Bind an event channel under Mini-OS.
++ *
++ * Bind an event channel specified by its known port after a kexec() of
++ * Mini-OS. This function is available under Mini-OS only!
++ *
++ * @parm xce handle to the open evtchn interface
++ * @parm port the event channel to bind again
++ * @return 0 on success, -1 on failure with errno set appropriately.
++ */
++int xenevtchn_bind(xenevtchn_handle *xce, evtchn_port_t port);
+ #endif
+ 
+ /*
+diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
+index 0d2a201438..36e4201249 100644
+--- a/tools/libs/evtchn/minios.c
++++ b/tools/libs/evtchn/minios.c
+@@ -259,6 +259,23 @@ xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce,
+     return local_port;
+ }
+ 
++int xenevtchn_bind(xenevtchn_handle *xce, evtchn_port_t port)
++{
++    struct port_info *port_info;
++    port_info = port_alloc(xce);
++    if ( port_info == NULL )
++        return -1;
++
++    printf("xenevtchn_bind(%"PRId32")\n", port);
++    bind_evtchn(port, evtchn_handler, xce);
++
++    port_info->bound = true;
++    port_info->port = port;
++    unmask_evtchn(port);
++
++    return 0;
++}
++
+ int xenevtchn_unbind(xenevtchn_handle *xce, evtchn_port_t port)
+ {
+     int fd = xce->fd;
 -- 
 2.43.0
 
