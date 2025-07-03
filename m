@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB5CC83030
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 08:42:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031836.1405576 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 234B1C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 08:53:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1031847.1405586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXFWR-0001a7-Qf; Thu, 03 Jul 2025 08:42:23 +0000
+	id 1uXFgV-0003fd-NN; Thu, 03 Jul 2025 08:52:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031836.1405576; Thu, 03 Jul 2025 08:42:23 +0000
+Received: by outflank-mailman (output) from mailman id 1031847.1405586; Thu, 03 Jul 2025 08:52:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXFWR-0001a0-Nv; Thu, 03 Jul 2025 08:42:23 +0000
-Received: by outflank-mailman (input) for mailman id 1031836;
- Thu, 03 Jul 2025 08:42:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8MTI=ZQ=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uXFWQ-0001Zu-TZ
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 08:42:22 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d2ff7e7-57e9-11f0-b894-0df219b8e170;
- Thu, 03 Jul 2025 10:42:12 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a50fc7ac4dso3556292f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 01:42:12 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a88c7e7814sm17753738f8f.8.2025.07.03.01.42.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jul 2025 01:42:11 -0700 (PDT)
+	id 1uXFgV-0003fW-KS; Thu, 03 Jul 2025 08:52:47 +0000
+Received: by outflank-mailman (input) for mailman id 1031847;
+ Thu, 03 Jul 2025 08:52:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1uXFgU-0003fQ-49
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 08:52:46 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1uXFgO-00GK6U-1Z;
+ Thu, 03 Jul 2025 08:52:40 +0000
+Received: from [2a00:23ee:2988:5cd:6cf5:e82:f131:ba77]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1uXFgO-00AuOv-0h;
+ Thu, 03 Jul 2025 08:52:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,78 +41,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d2ff7e7-57e9-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1751532132; x=1752136932; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=+CrN6jCnQ5V+zAt2E0+O7BUqhcjrsOrdkLUhU+eMK90=;
-        b=dJoPiLu/eHMUYjwreFde+VnvhRQdHfZ72XABS5u7BNB6HMab9LQMP5IuRXCCVOuzfd
-         MLneS7FEqo1AnkoaDsw8OodkIl5/YBOfejlFu0wndiHEZftS3g5CrrkvQWbqc+60yTve
-         kUs3SppKDLSRAGjByLjMalfwXGemm+EVjkbmo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751532132; x=1752136932;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+CrN6jCnQ5V+zAt2E0+O7BUqhcjrsOrdkLUhU+eMK90=;
-        b=XgU1Eq4ata8rSqymzy/9Oam1z9Wd+TG0M4fzTLMLPo7eBfztYp2kh5E6hbTrKUGRUS
-         02eKYFO+lZkBh651Yh2OGyOEmwc4TIZO050jkDW7vo6TblrsRFamE3MmnodBRT1dBhyg
-         x3fhiGpgiHH/qV++jQTKiAxVuEANrKEmRm9nPi9hjhgw6swCp3Do9rTVBQojtIw4zmWL
-         lmLqUD94JCXqOcrJZkD1a7Y8PGjeWL1FBT8B0NqDwZes6qr0gczy4l0Pz/6s2kun03sS
-         Az2DRqL22h2jFbAYngotl3tFxGcQKS5IlWaxtVwfQ+a5+Oy2g6KanaeWuBTOUH1N9LSQ
-         05eA==
-X-Gm-Message-State: AOJu0Yx8o6/IkpyN81gBzky1peq940uhlGCpNq4HVX9xKM5TU8LL+EPV
-	K0GDMCkTsOv0mo13rEwvDqCy4RS16fuG5r59BuXM2M/uqCMionWqXk0790w3oplJM2M=
-X-Gm-Gg: ASbGncs9+xeu6flOsp1abST6VWuqgGZ9Zcfy1XKIqtdcPATY1Vw0naOAhmOi5DBIsNQ
-	CABnKNKdQPb6oeASkol8rLisXRTKrBCIg/8yClbp/+RAhIqMtisHkA4UpCndthQjMpwTfVGN4BX
-	E/hWNwA3GixNPcnl+NrWkn0q5doz184w7zUfC1JVkxk8fYYGoJ230HE+3xZ+jvFlnaFN/UPQJSO
-	rWGh4Oqz+RgXjCZ9h4y7P30EeQigKp3YaYeIqgle+ff3kW7sg6P8spmtAOd4RZfg81n2ZbQVp3o
-	8xvr98fJ9plIPTOdS2x/wXtVM8fA8GfX8eo46pondqs5DRqZz92KWXmNf2APvTsKDnB1ityLuxq
-	bhrEAr46ruyyV9F3AWDy7McX5up2pIA==
-X-Google-Smtp-Source: AGHT+IEFytp9Y53j6uGHWReMEcquMe3gEMxjDJ3GFMWvaJGb3Qftmc2voeXg7VMzHKl9GU7jwhMVxw==
-X-Received: by 2002:a05:6000:248a:b0:3a5:2ec5:35ba with SMTP id ffacd0b85a97d-3b1ff9f59a3mr4615473f8f.30.1751532132023;
-        Thu, 03 Jul 2025 01:42:12 -0700 (PDT)
-Date: Thu, 3 Jul 2025 10:42:10 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: Re: [PATCH v2 0/8] pdx: introduce a new compression algorithm
-Message-ID: <aGZCYvaH6j80cmAO@macbook.local>
-References: <20250620111130.29057-1-roger.pau@citrix.com>
- <alpine.DEB.2.22.394.2506271905350.862517@ubuntu-linux-20-04-desktop>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=a2VnxTlYPNcpP1UDeo6woRHX3H2FrW/DFEw6z3wbqJI=; b=CJYMJzCthZT8BatuEOcVBEx8Wi
+	wjDZInYhYefYsncXEfNtIBCXdhvtR1A7P61+DK+Sx7sWFfXaHOzB7NUMssPnm10cUUZIsKoZuJ+ja
+	xlExPXR+ZxymENLxa36PgiZHOIwVYhW0aKfNvyI/HrCY4I6peZeOjNyTfABOnd06PgK8=;
+Message-ID: <079ead0e-e613-4c58-89f4-8a0df1294ba9@xen.org>
+Date: Thu, 3 Jul 2025 09:52:38 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.22.394.2506271905350.862517@ubuntu-linux-20-04-desktop>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Arm: tidy page_get_owner_and_nr_reference()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <0d330757-ed73-42bc-8634-e8d445f69c4c@suse.com>
+ <d6ac150c-b2c0-4d90-af1e-64f2df151e60@xen.org>
+ <5e52900c-97fb-4895-bde5-33ccfb132986@suse.com>
+Content-Language: en-US
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <5e52900c-97fb-4895-bde5-33ccfb132986@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 27, 2025 at 07:08:29PM -0700, Stefano Stabellini wrote:
-> Hi Roger,
+Hi Jan,
+
+On 02/07/2025 14:37, Jan Beulich wrote:
+> On 02.07.2025 15:18, Julien Grall wrote:
+>> On 02/07/2025 14:06, Jan Beulich wrote:
+>>> When the bumping by <nr> (instead of just 1) was introduced, a comment
+>>> was left untouched, and a bogus ASSERT_UNREACHABLE() was inserted. That
+>>> code path can in principle be taken (depending on configuration coming
+>>> from the outside), and we shouldn't assert anything we didn't check
+>>> elsewhere.
+>>
+>> I suggested to add the ASSERT_UNREACHABLE (see [1]). My take is the
+>> overflow is not something that should happen and it is good to be able
+>> to catch very clearly in debug build.
 > 
-> We have an ARM board with the following memory layout:
-> 
-> 0x0-0x80000000, 0, 2G
-> 0x800000000,0x880000000, 32GB, 2G
-> 0x50000000000-0x50080000000 5T, 2GB 
-> 0x60000000000-0x60080000000 6T, 2GB 
-> 0x70000000000-0x70080000000 7T, 2GB 
+> But catching an anomalous entry in DT (which aiui the values come from,
+> even if perhaps indirectly) isn't going to depend on people using debug
+> builds. It depends on what DT blobs they use. And issues there shouldn't
+> be checked by assertions, as those blobs live outside of Xen.
 
-I would like to add this memory map to the PDX unit testing, do you
-have a name I could use as a reference?  For example for the Intel
-sparse map I'm using: "Real memory map from a 4s Intel GNR.".  I
-currently have yours listed as: "Stefano's ARM board.", but that's not
-a very descriptive naming :).
+I agree we probably want check upfront. But I still don't think we want 
+to remove this ASSERT_UNREACHABLE().
 
-Thanks, Roger.
+By the way, I am not asking you to add those checks.
+
+Cheers,
+
+-- 
+Julien Grall
+
 
