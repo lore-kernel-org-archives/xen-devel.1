@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F65C83F04
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 11:01:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1032005.1405777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D11C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 11:02:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1032014.1405786 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXHgo-0006Qo-Ua; Thu, 03 Jul 2025 11:01:14 +0000
+	id 1uXHho-0007E8-6C; Thu, 03 Jul 2025 11:02:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1032005.1405777; Thu, 03 Jul 2025 11:01:14 +0000
+Received: by outflank-mailman (output) from mailman id 1032014.1405786; Thu, 03 Jul 2025 11:02:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXHgo-0006Qh-RI; Thu, 03 Jul 2025 11:01:14 +0000
-Received: by outflank-mailman (input) for mailman id 1032005;
- Thu, 03 Jul 2025 11:01:13 +0000
+	id 1uXHho-0007E1-3a; Thu, 03 Jul 2025 11:02:16 +0000
+Received: by outflank-mailman (input) for mailman id 1032014;
+ Thu, 03 Jul 2025 11:02:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rGZt=ZQ=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1uXHgm-0003ud-Un
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 11:01:12 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jdSv=ZQ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uXHhm-0007Di-7V
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 11:02:14 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 076dd699-57fd-11f0-b894-0df219b8e170;
- Thu, 03 Jul 2025 13:01:11 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-453643020bdso68442765e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 04:01:11 -0700 (PDT)
-Received: from localhost.localdomain ([83.247.137.20])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454a997e24bsm23541895e9.16.2025.07.03.04.01.08
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 03 Jul 2025 04:01:09 -0700 (PDT)
+ id 2bb267b3-57fd-11f0-b894-0df219b8e170;
+ Thu, 03 Jul 2025 13:02:12 +0200 (CEST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ae0bc7aa21bso1142455966b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 04:02:12 -0700 (PDT)
+Received: from [192.168.1.5] (user-109-243-64-38.play-internet.pl.
+ [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae3d0351285sm169766466b.23.2025.07.03.04.02.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Jul 2025 04:02:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +47,228 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 076dd699-57fd-11f0-b894-0df219b8e170
+X-Inumbo-ID: 2bb267b3-57fd-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1751540471; x=1752145271; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1751540531; x=1752145331; darn=lists.xenproject.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Jox9I/hc4IW12DCVXl2QtoaQase5UN3XaHbWxSzsiYo=;
-        b=secjHwsm48UYqsGvmKjBQWbOXIpJXoyJ9u4Ppzb1XkrTcieFVmZkfiGFENH5IbNVsM
-         T2F7iVbe5kaFh0quNQa/PhGiIOS8f31LUmvCGpB+YItASBtozIrNS4M4vY+YHfAbBtUl
-         rwb4TgTqNc76ilX7c1aZWjW48K6SmVRNu5hrO8LMxm6hY/oeqYUiORSOhBNBwf58Xh1x
-         iy+wHbZXRSLj5zecvhbQBbLl5G6pYv21NDaeFPgnMLZ0ir1xfj+FYFZH/lwdSOdpvo3A
-         55LbW8oKaAAOvYrWBkXpQdv2WI6HkmSzMqjrG8Y4Dnxtf4Yuth/5ayXgEgj9cIqVUsKL
-         IlNw==
+        bh=imrwkHAr/x9EX+7mmgtJXEPgZ90CbEZ9S1Et3uwTnXI=;
+        b=MB9z3YAfELQ4IMVtjpfpGXN6DekAOmzaozqm72NQijuA0tvt1cEC19Sy6TO4Zk8iAc
+         Hc4NQgvLhV9wzjBsTM3GtWnNrlPJF5RVD73L/BG68c/a6Ic3Ma+r73cSQftlipSjB+2l
+         z76o1bTDk/NnydStnlHnKteD+bl006owtnA4RSpSnTMYvR1hR+nR2sxS2AAG1slWjlyh
+         qjjx/xVT3ydnp2vkbI55KT9l4uoR6PKMUaYYx4QsjUBVFN44fnMsFCpsOrNWLiSX/esa
+         uIp953xxbkjfo1fUxOoalyCx0zqEM3yELbdwzXfkxscLqM4aIfcrlmFwn2S+rKCz9p1i
+         yO4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751540471; x=1752145271;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Jox9I/hc4IW12DCVXl2QtoaQase5UN3XaHbWxSzsiYo=;
-        b=ZXCqEg1IOZD3NrJeBPTs9Y9SqUUb4X7DkJ2GRTwcXzFqx/wl8DmfWNBCvLgRw9zAo5
-         AytaIzbMxNkhnaT5SMkSuEvhVBSuxQ8VEUOlWUzwVF5lGLCHfwzFw3si9JlDL1olNu49
-         znzPNS1Q/31MzcjNF7aGMUsLLHw+d4z1xB5DlIlTkqAFtFCFrGHNWe2ZKlGc5gtnyZ74
-         TiGvGcFGW437aCafvnZtpAoy9kyYqlQy/0NxweDxO22FOX/uqNjA+a90beSwXCPhC6FD
-         YGfDz5elb7VtySV2IiAHS22s1hHWFVMUDHUhPUMRjQ8gKYStKAwVXysiJOgMlOu3+QNB
-         O1Dw==
-X-Forwarded-Encrypted: i=1; AJvYcCXRLrkj7TTmGXmoiC0klAChck5tZctn8ce0f/B5ayVslqrRmb/d26XhsLkukVp5naS4e8/Ec7NbKGY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxRGQy917e00uR+PqsltwNRPcj2NRHJxaCpvVassMENMBmEwKjx
-	VyDI8R+HDII0JjC1rsmdVlSEAceER0W4ObNGSslNLmnj6tah6auBzjbV1zdX98TmfeA=
-X-Gm-Gg: ASbGncvXftR+powm2k7aK4rlqoNHPFmGLw84YyqJb4+ry3DZxCW03o/sJtQRg3TPYkD
-	Kuu3HFKxwUXMF5fe21kTIWw5iNCgDFVn1vsgsIfhQyADv6LuwT2O+7kjIpdGzyhPMTnVh8HJVpL
-	izxY/uWsM3YINT28R+jwi2vex5Ri9hnEsg31HR3ygaoIaZsnYZovro5HElE+pbza/GxU86UAXCZ
-	Mqth99y8JVDkv5wf/NUGR94g2pjI5EXbwO18fI24CIF8gfsHS6AU4khvAADBHN8HmC93dW3dVa8
-	kjxzzbeaTsu0knTRJCRrTYzbcGp4ClZMYsl7Je6c4IxygMkcagAQs7sBeaJZdVbC7Hb3ItqUiJe
-	T/8ldFm2PRDI=
-X-Google-Smtp-Source: AGHT+IHAtbR+hufxeMURDPAweaVvkz8bA98tXT/yfuO0i+zP0XtJFFoPdGy8SpZsMLysHsZr5JSWzg==
-X-Received: by 2002:a05:600c:8b43:b0:453:6424:48a2 with SMTP id 5b1f17b1804b1-454a3d23106mr69823115e9.10.1751540469774;
-        Thu, 03 Jul 2025 04:01:09 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
-	kvm@vger.kernel.org,
-	Richard Henderson <richard.henderson@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Zhao Liu <zhao1.liu@intel.com>,
-	Fabiano Rosas <farosas@suse.de>,
-	Laurent Vivier <lvivier@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 62/69] accel: Always register AccelOpsClass::kick_vcpu_thread() handler
-Date: Thu,  3 Jul 2025 12:55:28 +0200
-Message-ID: <20250703105540.67664-63-philmd@linaro.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250703105540.67664-1-philmd@linaro.org>
-References: <20250703105540.67664-1-philmd@linaro.org>
+        d=1e100.net; s=20230601; t=1751540531; x=1752145331;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=imrwkHAr/x9EX+7mmgtJXEPgZ90CbEZ9S1Et3uwTnXI=;
+        b=W+tl+5ql6qIpwaFohIiYP4ur4KOiiwgw2Onbtw7gQmLCePwT4AYAkJLMqaSZf325Vw
+         3AdjjVCdXWnJRqX21n3Ztp/ZSLlBaYOdKj8tFsUcYqHAkFWhLQQ0ZfpuIaY8Kxwh5cNf
+         4xcPV4bzBvmStYaQFH+mxa0EoqqHwPrvBholIzuGgKWtvEVfwZIWcGfpOgABi0DTpa74
+         4avC8IIrYm045xDE4QmmoI8GP1D73xqp1v36LR40Cm9FvpfWlOPssc1bq6nyoxhw/2u2
+         ratzF64EZxTRGKDvJkXSM4IzQWeG6Q9lf5r098WU9sby7PsVzM9qjfFCcaeh9SlGaGlN
+         LRnQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV0ry494Y/1rzE+uBP6R9MqMJARSDdUB9EEMhqrZryddM628c7LTbYXzZfihdK5gGID2i0AmMpNaNI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxiOfC4oSkATxsVhYCsDhd0iDP2VwROugzw3hA9aFuHrq++NGKp
+	KAC9BLV6Ia2MJ5K/nU/+C1FkyL5KTcFmUx8cF13FVcUH03dT0bpKlgU0
+X-Gm-Gg: ASbGncsj9hxskX5I6WIFgEaqNJzyQnWqo+jCMolipIc/kMdNhHgj9QX7YwpdBmd+J41
+	efYFnYbPapDzwjTZrT+R+B3bOZf4kO43Nq6jkztZOJcbPzNNUnB/1rgVxSaSA6Ktzt95kvdWO8E
+	m9ipDOwWIoQk95LRMohldqsaONZBNbhd6nu9hSN/Ti3YAFZg+KlL2fPzqX9LB4XS0FbgQtJjU0i
+	PnZG5IwIzlOC3JmQH3lVQCQsWOQEygM1Z6889WbeaZKMGv7s8C9a+HZ7ducE2StryEzgCTrAajP
+	EhC+Rso/bXrO25MBH5bvy1VvAeEIOsYl8rfYgoeDkcyLxmE1F4KWo3LS+Bblpfw/meFfL/AYMK4
+	7YnUvl/4B0ohBHuWRTn1VePVpXh0rUOKm5B0=
+X-Google-Smtp-Source: AGHT+IHzNSWvQBgnhxnCYlHS8Ofkk4s790Ivs1gcQFZETcFhrU5e8Tgv0YajGroET8CAI6JBYNxevA==
+X-Received: by 2002:a17:907:d2e3:b0:ad8:8efe:31fd with SMTP id a640c23a62f3a-ae3c2ce9d46mr632083566b.52.1751540531290;
+        Thu, 03 Jul 2025 04:02:11 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------N2hto0SVtZTOqsZgINrHwUip"
+Message-ID: <5fbe849c-3b8a-45dd-a217-c1dbf831da47@gmail.com>
+Date: Thu, 3 Jul 2025 13:02:09 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/17] xen/riscv: implement guest_physmap_add_entry()
+ for mapping GFNs to MFNs
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1749555949.git.oleksii.kurochko@gmail.com>
+ <0b1f7ead7eb1b7c8687d388cca50b46eefb8e408.1749555949.git.oleksii.kurochko@gmail.com>
+ <f1e26c40-c70d-4d86-96ec-7643a9d08e76@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <f1e26c40-c70d-4d86-96ec-7643a9d08e76@suse.com>
 
-In order to dispatch over AccelOpsClass::kick_vcpu_thread(),
-we need it always defined, not calling a hidden handler under
-the hood. Make AccelOpsClass::kick_vcpu_thread() mandatory.
-Register the default cpus_kick_thread() for each accelerator.
+This is a multi-part message in MIME format.
+--------------N2hto0SVtZTOqsZgINrHwUip
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
----
- include/system/accel-ops.h | 1 +
- accel/kvm/kvm-accel-ops.c  | 1 +
- accel/qtest/qtest.c        | 1 +
- accel/xen/xen-all.c        | 1 +
- system/cpus.c              | 7 ++-----
- 5 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/include/system/accel-ops.h b/include/system/accel-ops.h
-index dc8df9ba7dd..e1e6985a27c 100644
---- a/include/system/accel-ops.h
-+++ b/include/system/accel-ops.h
-@@ -43,6 +43,7 @@ struct AccelOpsClass {
-     void *(*cpu_thread_routine)(void *);
-     void (*thread_precreate)(CPUState *cpu);
-     void (*create_vcpu_thread)(CPUState *cpu);
-+    /* kick_vcpu_thread is mandatory. */
-     void (*kick_vcpu_thread)(CPUState *cpu);
-     bool (*cpu_thread_is_idle)(CPUState *cpu);
- 
-diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index b79c04b6267..a4bcaa87c8d 100644
---- a/accel/kvm/kvm-accel-ops.c
-+++ b/accel/kvm/kvm-accel-ops.c
-@@ -81,6 +81,7 @@ static void kvm_accel_ops_class_init(ObjectClass *oc, const void *data)
- 
-     ops->cpu_thread_routine = kvm_vcpu_thread_fn;
-     ops->cpu_thread_is_idle = kvm_vcpu_thread_is_idle;
-+    ops->kick_vcpu_thread = cpus_kick_thread;
-     ops->synchronize_post_reset = kvm_cpu_synchronize_post_reset;
-     ops->synchronize_post_init = kvm_cpu_synchronize_post_init;
-     ops->synchronize_state = kvm_cpu_synchronize_state;
-diff --git a/accel/qtest/qtest.c b/accel/qtest/qtest.c
-index 47fa9e38ce3..8e2379d6e37 100644
---- a/accel/qtest/qtest.c
-+++ b/accel/qtest/qtest.c
-@@ -66,6 +66,7 @@ static void qtest_accel_ops_class_init(ObjectClass *oc, const void *data)
- 
-     ops->thread_precreate = dummy_thread_precreate;
-     ops->cpu_thread_routine = dummy_cpu_thread_routine;
-+    ops->kick_vcpu_thread = cpus_kick_thread;
-     ops->get_virtual_clock = qtest_get_virtual_clock;
-     ops->set_virtual_clock = qtest_set_virtual_clock;
-     ops->handle_interrupt = generic_handle_interrupt;
-diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
-index a51f4c5b2ad..18ae0d82db5 100644
---- a/accel/xen/xen-all.c
-+++ b/accel/xen/xen-all.c
-@@ -154,6 +154,7 @@ static void xen_accel_ops_class_init(ObjectClass *oc, const void *data)
- 
-     ops->thread_precreate = dummy_thread_precreate;
-     ops->cpu_thread_routine = dummy_cpu_thread_routine;
-+    ops->kick_vcpu_thread = cpus_kick_thread;
-     ops->handle_interrupt = generic_handle_interrupt;
- }
- 
-diff --git a/system/cpus.c b/system/cpus.c
-index efe1a5e211b..6c64ffccbb3 100644
---- a/system/cpus.c
-+++ b/system/cpus.c
-@@ -486,11 +486,7 @@ void cpus_kick_thread(CPUState *cpu)
- void qemu_cpu_kick(CPUState *cpu)
- {
-     qemu_cond_broadcast(cpu->halt_cond);
--    if (cpus_accel->kick_vcpu_thread) {
--        cpus_accel->kick_vcpu_thread(cpu);
--    } else { /* default */
--        cpus_kick_thread(cpu);
--    }
-+    cpus_accel->kick_vcpu_thread(cpu);
- }
- 
- void qemu_cpu_kick_self(void)
-@@ -670,6 +666,7 @@ void cpus_register_accel(const AccelOpsClass *ops)
- {
-     assert(ops != NULL);
-     assert(ops->create_vcpu_thread || ops->cpu_thread_routine);
-+    assert(ops->kick_vcpu_thread);
-     assert(ops->handle_interrupt);
-     cpus_accel = ops;
- }
--- 
-2.49.0
+On 6/30/25 5:59 PM, Jan Beulich wrote:
+> On 10.06.2025 15:05, Oleksii Kurochko wrote:
+>> +                              unsigned long nr, mfn_t mfn, p2m_type_t t)
+>> +{
+>> +    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+>> +    int rc;
+>> +
+>> +    p2m_write_lock(p2m);
+>> +    rc = p2m_set_entry(p2m, start_gfn, nr, mfn, t, p2m->default_access);
+>> +    p2m_write_unlock(p2m);
+>> +
+>> +    return rc;
+>> +}
+>> +
+>> +int map_regions_p2mt(struct domain *d,
+>> +                     gfn_t gfn,
+>> +                     unsigned long nr,
+>> +                     mfn_t mfn,
+>> +                     p2m_type_t p2mt)
+>> +{
+>> +    return p2m_insert_mapping(d, gfn, nr, mfn, p2mt);
+>> +}
+> What is this function doing here? The description says "for generic mapping
+> purposes", which really may mean anything. Plus, if and when you need it, it
+> wants to come with a name that fits with e.g. ...
 
+These names are used across the common code and various architectures. Not all
+architectures need to implement all of these functions.
+I believe|guest_physmap_add_page()| (which internally calls|guest_physmap_add_entry()|)
+is needed to be implemented for all architectures, while|map_regions_p2mt()| is used
+by Arm and the common Dom0less-related code, and because of RISC-V is going to re-use
+common Dom0less code it is implementing this function too.
+
+>> +int guest_physmap_add_entry(struct domain *d,
+>> +                            gfn_t gfn,
+>> +                            mfn_t mfn,
+>> +                            unsigned long page_order,
+>> +                            p2m_type_t t)
+> ... this one, to understand their relationship / difference.
+
+Basically, the difference is only in API and where they are expected to be used:
+- guest_physmap_add_entry() to map and set a specific p2m type for a page.
+- map_regions_p2mt() to map a region (mostly MMIO) in the guest p2m with
+   a specific p2m type.
+
+I added both of them here as they are implemented in a similar way.
+I will re-word commit subject and message:
+   xen/riscv: implement functions to map memory in guest p2m
+
+   Introduce guest_physmap_add_entry() to map a page and assign a specific
+   p2m type, and map_regions_p2mt() to map a region (typically MMIO) in
+   the guest p2m with a designated p2m type.
+
+   Currently, this functionality is not fully operational, as p2m_set_entry()
+   still returns -EOPNOTSUPP.
+
+   Additionally, introduce p2m_write_(un)lock() to protect modifications to
+   the p2m page tables, along with p2m TLB flush helpers to ensure proper
+   TLB invalidation (if necessary) when the p2m lock is released.
+
+~ Oleksii
+
+--------------N2hto0SVtZTOqsZgINrHwUip
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 6/30/25 5:59 PM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:f1e26c40-c70d-4d86-96ec-7643a9d08e76@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 10.06.2025 15:05, Oleksii Kurochko wrote:
+</pre>
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+                              unsigned long nr, mfn_t mfn, p2m_type_t t)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    int rc;
++
++    p2m_write_lock(p2m);
++    rc = p2m_set_entry(p2m, start_gfn, nr, mfn, t, p2m-&gt;default_access);
++    p2m_write_unlock(p2m);
++
++    return rc;
++}
++
++int map_regions_p2mt(struct domain *d,
++                     gfn_t gfn,
++                     unsigned long nr,
++                     mfn_t mfn,
++                     p2m_type_t p2mt)
++{
++    return p2m_insert_mapping(d, gfn, nr, mfn, p2mt);
++}
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+What is this function doing here? The description says "for generic mapping
+purposes", which really may mean anything. Plus, if and when you need it, it
+wants to come with a name that fits with e.g. ...</pre>
+    </blockquote>
+    <pre>These names are used across the common code and various architectures. Not all
+architectures need to implement all of these functions.
+I believe <code data-start="195" data-end="221">guest_physmap_add_page()</code> (which internally calls <code
+    data-start="246" data-end="273">guest_physmap_add_entry()</code>)
+is needed to be implemented for all architectures, while <code
+    data-start="319" data-end="339">map_regions_p2mt()</code> is used
+by Arm and the common Dom0less-related code, and because of RISC-V is going to re-use
+common Dom0less code it is implementing this function too.
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:f1e26c40-c70d-4d86-96ec-7643a9d08e76@suse.com">
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+int guest_physmap_add_entry(struct domain *d,
++                            gfn_t gfn,
++                            mfn_t mfn,
++                            unsigned long page_order,
++                            p2m_type_t t)
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+... this one, to understand their relationship / difference.</pre>
+    </blockquote>
+    <pre>Basically, the difference is only in API and where they are expected to be used:
+- guest_physmap_add_entry() to map and set a specific p2m type for a page.
+- map_regions_p2mt() to map a region (mostly MMIO) in the guest p2m with
+  a specific p2m type.
+
+I added both of them here as they are implemented in a similar way.
+I will re-word commit subject and message:
+  xen/riscv: implement functions to map memory in guest p2m
+
+  Introduce guest_physmap_add_entry() to map a page and assign a specific
+  p2m type, and map_regions_p2mt() to map a region (typically MMIO) in
+  the guest p2m with a designated p2m type.
+
+  Currently, this functionality is not fully operational, as p2m_set_entry()
+  still returns -EOPNOTSUPP.
+
+  Additionally, introduce p2m_write_(un)lock() to protect modifications to
+  the p2m page tables, along with p2m TLB flush helpers to ensure proper
+  TLB invalidation (if necessary) when the p2m lock is released.
+
+~ Oleksii</pre>
+  </body>
+</html>
+
+--------------N2hto0SVtZTOqsZgINrHwUip--
 
