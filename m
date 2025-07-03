@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B9FC77B7C
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 08:11:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1031796.1405526 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD98C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 08:25:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1031810.1405537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXF2g-0003ME-Lc; Thu, 03 Jul 2025 08:11:38 +0000
+	id 1uXFFd-0005GH-NI; Thu, 03 Jul 2025 08:25:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1031796.1405526; Thu, 03 Jul 2025 08:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 1031810.1405537; Thu, 03 Jul 2025 08:25:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXF2g-0003M7-Ii; Thu, 03 Jul 2025 08:11:38 +0000
-Received: by outflank-mailman (input) for mailman id 1031796;
- Thu, 03 Jul 2025 08:11:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lE7m=ZQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uXF2f-0003M1-AJ
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 08:11:37 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 557ca496-57e5-11f0-b894-0df219b8e170;
- Thu, 03 Jul 2025 10:11:34 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-453066fad06so52623995e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 01:11:34 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31a9cc4a419sm1704584a91.9.2025.07.03.01.11.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Jul 2025 01:11:33 -0700 (PDT)
+	id 1uXFFd-0005GA-KY; Thu, 03 Jul 2025 08:25:01 +0000
+Received: by outflank-mailman (input) for mailman id 1031810;
+ Thu, 03 Jul 2025 08:24:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=gZFO=ZQ=intel.com=zhao1.liu@srs-se1.protection.inumbo.net>)
+ id 1uXFFb-0005G4-LQ
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 08:24:59 +0000
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3045158f-57e7-11f0-a314-13f23c93f187;
+ Thu, 03 Jul 2025 10:24:52 +0200 (CEST)
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+ by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Jul 2025 01:24:50 -0700
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.39])
+ by fmviesa005.fm.intel.com with ESMTP; 03 Jul 2025 01:24:46 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,98 +44,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 557ca496-57e5-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1751530294; x=1752135094; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=MOtjWycJ0LFHuZ/qlkzok3lRt5JNAWv/INQjgOoqQlk=;
-        b=YUfcDcd4qKe6I59nsKKmj4l89fYDWCaL46tYc1GGPWYBHOGEnDT6X3Dx7mjcyXLWm4
-         PkzC0r0JB54jpnYLTnCRsNErgmDelltoeOV6Pg4+c9k1mCmvggQ5jEeRKBCaEfXzNZsc
-         L69F600BNBYrpkVTZdQyMX5X7mHAsiZC79oa2V6y8jKaylM8d7DNS/ow2DZb6PeHvD7g
-         g+h86LTA/Y8ztb+ulwAI3hKk38Ny3vwwtwxdQF8s4tVK5Ka67fRPOCX+sjseowW0syh/
-         piypoTrt1Cv0HIAUuQ60odq/W3gzLXIzhZO31FWONsFf1sCo7vcdLx1/bywcfFj6h9ny
-         SeBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751530294; x=1752135094;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MOtjWycJ0LFHuZ/qlkzok3lRt5JNAWv/INQjgOoqQlk=;
-        b=EjfTW9TN93p0VGqX+5dpP+fhTkqyCLuBYf69T1yXaseje0UinjW36z5BV3k1FIzk+d
-         MID9vTguMeZnIFytlPxqAQ3V9M0vNcY5HUZhirynLAACcns83++3kCgBCLv4w0tL7H30
-         DEZnfPuCuvWtCCUZQalG7gT+JPnFF5tcTmScqe2hAl2Fnf1dVU12UTdMS+hpnWHMEYJX
-         yDbmMHk6lolwCM2kUarparETxRrghvK5v7EuaWMLrQ6qM73xbQF1gl5ZZ1k5HlATOa9s
-         GhnLiV/P+ynpB6CQjhoR0m+dnVmbIQ2hfjRH4SzMdRb2NdiG49J8uciUxSeQsWevTLHb
-         EO/Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUuPl8C5NvaIvAjbQmfRxRrqioFYxaeqkmi0j1Gmuuabtkh8D7xqnsiKUVcDvZxKOall1RPbCMVai4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw5HoQTiz5VF3qaCN4KUhVMwhtIdM3IPScotmwF2Bm3V4D+VAAt
-	sX7wVsjqcWqxlhfNVnIYk7MCu+XtSoAP9dmhoAizzKb9iBX1QrbL9nMO7FHQWO8j2g==
-X-Gm-Gg: ASbGnctIJqf+hsBfFPy+HLBp7iYNsdIQ5464Xvp68JCZqy8zlMzy9MUGJLPTErlLScu
-	C5lasi368fJM3TuPMHQvhSObiyMx+RB5CC3xwLvAMw9iehqoqPD/SQrofUlU2C8FVaaKq4vgCjo
-	CAXgFrYhm3Am8A1ucrssXKefnvP2Al0nGpN0Wj3g2VhcA8XOD99RlC+AlklKIUkcYESxybygfLE
-	CVXM6NGE449ULdAdFUeR34MOek43CFVCer7m/ybXbJLy3QQqrKyOoDalJGJroRQERMyK4tMw9+S
-	4WFTtuX19WuwIBclUa+D0zovDRkLSdfbAiI5XoI0eq7WqAB2YFnwmBftey5/02vJEkQxz/Qq2p5
-	EEVQUqt2Hd/9BqZtouARi5Yd79HGEgVji84//KeWk0Mo2AOw=
-X-Google-Smtp-Source: AGHT+IELTpx8CbEOn3M2yZnyg5IiXf/Xs8paqRO9Tx02V6vHCdcSKkRUSdrL6nqUiw9t7T64xQCHbA==
-X-Received: by 2002:a5d:5f82:0:b0:3b3:a6c2:1a10 with SMTP id ffacd0b85a97d-3b3a6c21a61mr662548f8f.12.1751530293597;
-        Thu, 03 Jul 2025 01:11:33 -0700 (PDT)
-Message-ID: <7789a13c-04ba-4ad4-8df0-59fe82512e40@suse.com>
-Date: Thu, 3 Jul 2025 10:11:23 +0200
+X-Inumbo-ID: 3045158f-57e7-11f0-a314-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1751531093; x=1783067093;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=OL7YB4QqrsOIrbmMdhLO6b5EBpFpjMPIWAfHz4kxYTk=;
+  b=VPSz1LOM1OtmUpjEuOU6g7/aqnHpdvSElK3QeeQkcc0mgmgIpnT7rzPY
+   vXTKmIxDPveZOrC0hE+m2EZqMhTgsvbwT8QoQcb480I/kYKqrv4Iyb6rg
+   NYecIKzRBU9WKG+VR6x0Y0f0eCwV890/+kZiRwE/i8/ZZTFSE995Mku+1
+   p8faTwXHEyh0u12egPe7dr7RxMUmySYSubMwrl6zWoYvROshFpEx0MOrN
+   6CvP37j7k+iT9SnBsXWhA1d7+7yNxddXpVwV/OvQTrz/Dc2AYKKU1kzr2
+   OHWtbUdfPQvmI4YGDYBN/vL2I//pHxVCZZKuyCy1bgoFs1YuAjUUIcxel
+   w==;
+X-CSE-ConnectionGUID: JwHGfhu5QlG9mMwVBQELGw==
+X-CSE-MsgGUID: iEZnml8TReGiuCwpG9YfrA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11482"; a="64897788"
+X-IronPort-AV: E=Sophos;i="6.16,283,1744095600"; 
+   d="scan'208";a="64897788"
+X-CSE-ConnectionGUID: K/Lh4bp/RTiD0Ygz1JEFag==
+X-CSE-MsgGUID: enRRDQADQwmF7whpYfHbxA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,283,1744095600"; 
+   d="scan'208";a="158577105"
+Date: Thu, 3 Jul 2025 16:46:12 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,
+	Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+	Fabiano Rosas <farosas@suse.de>,
+	Laurent Vivier <lvivier@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>, kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v4 57/65] accel: Always register
+ AccelOpsClass::kick_vcpu_thread() handler
+Message-ID: <aGZDVG3775oKYQmI@intel.com>
+References: <20250702185332.43650-1-philmd@linaro.org>
+ <20250702185332.43650-58-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] xen/softirq: Rework arch_skip_send_event_check() into
- arch_pend_softirq()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
- <20250702144121.1096448-4-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250702144121.1096448-4-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250702185332.43650-58-philmd@linaro.org>
 
-On 02.07.2025 16:41, Andrew Cooper wrote:
-> x86 is the only architecture wanting an optimisation here, but the
-> test_and_set_bit() is a store into the monitored line
+On Wed, Jul 02, 2025 at 08:53:19PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Wed,  2 Jul 2025 20:53:19 +0200
+> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Subject: [PATCH v4 57/65] accel: Always register
+>  AccelOpsClass::kick_vcpu_thread() handler
+> X-Mailer: git-send-email 2.49.0
+> 
+> In order to dispatch over AccelOpsClass::kick_vcpu_thread(),
+> we need it always defined, not calling a hidden handler under
+> the hood. Make AccelOpsClass::kick_vcpu_thread() mandatory.
+> Register the default cpus_kick_thread() for each accelerator.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>  include/system/accel-ops.h | 1 +
+>  accel/kvm/kvm-accel-ops.c  | 1 +
+>  accel/qtest/qtest.c        | 1 +
+>  accel/xen/xen-all.c        | 1 +
+>  system/cpus.c              | 7 ++-----
+>  5 files changed, 6 insertions(+), 5 deletions(-)
 
-Which is intentional aiui, while this reads as if this was part of the issue.
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
-> and is racy with determining whether an IPI can be skipped.
-
-Racy here as in limiting the effect of the optimization, but not affecting
-correctness aiui: If the woken CPU managed to clear the bit already, we'd
-needlessly IPI it. This could also do with saying.
-
-Jan
 
