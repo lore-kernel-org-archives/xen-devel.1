@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83303C77B7C
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 17:36:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1032352.1406026 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF106C83F03
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 17:36:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1032355.1406036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXNqn-0002wT-Md; Thu, 03 Jul 2025 17:35:57 +0000
+	id 1uXNqu-0003Lb-TQ; Thu, 03 Jul 2025 17:36:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1032352.1406026; Thu, 03 Jul 2025 17:35:57 +0000
+Received: by outflank-mailman (output) from mailman id 1032355.1406036; Thu, 03 Jul 2025 17:36:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXNqn-0002wM-K2; Thu, 03 Jul 2025 17:35:57 +0000
-Received: by outflank-mailman (input) for mailman id 1032352;
- Thu, 03 Jul 2025 17:35:56 +0000
+	id 1uXNqu-0003LS-Qd; Thu, 03 Jul 2025 17:36:04 +0000
+Received: by outflank-mailman (input) for mailman id 1032355;
+ Thu, 03 Jul 2025 17:36:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Gwr=ZQ=wanadoo.fr=christophe.jaillet@srs-se1.protection.inumbo.net>)
- id 1uXNql-00021t-MM
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 17:35:56 +0000
-Received: from smtp.smtpout.orange.fr (smtp-28.smtpout.orange.fr
- [80.12.242.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b8325c8-5834-11f0-a315-13f23c93f187;
- Thu, 03 Jul 2025 19:35:54 +0200 (CEST)
-Received: from [IPV6:2a01:cb10:785:b00:8347:f260:7456:7662]
- ([IPv6:2a01:cb10:785:b00:8347:f260:7456:7662])
- by smtp.orange.fr with ESMTPA
- id XNqjuxFR98jLiXNqjuUJqz; Thu, 03 Jul 2025 19:35:53 +0200
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=rGZt=ZQ=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1uXNqt-00021t-IR
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 17:36:03 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 30d467a0-5834-11f0-a315-13f23c93f187;
+ Thu, 03 Jul 2025 19:36:03 +0200 (CEST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-451d54214adso613665e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 10:36:03 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b471b97481sm324603f8f.63.2025.07.03.10.36.01
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 03 Jul 2025 10:36:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,144 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b8325c8-5834-11f0-a315-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
-	s=t20230301; t=1751564153;
-	bh=ZQ0aSIIkruxyS5VG7Wq7+L5vmBZtmZ6PRQHg4mDtPZM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:From;
-	b=gRDGE1nZ3NNDO66Ct/nhWmX+978ORto8+Ecj/OeVwD8Ajs2VkL6vgEf76ddx+KLtU
-	 rujymNj2t1Qp6gkEYnn3E0RzfqyuAXVN2ZrP8y5/CZ/qS3TrguHTkuE3CsuLqUSduk
-	 kpzEmxZ0Sx3fSrogpq+FTtOeNlvRbjjl+ObtVadsa278//bHLXRR+PwrBwOf3z/ftT
-	 NUrJRVu12MYz1yRTAYOZm06MPJ2bNhBKcglF8epcZ996boshAtkbARg6G3Z2Zr5QI7
-	 YnMTijBeneFqJwb1SZHlBlQBO0x9KEqv5LycitMqqu7irSUs1mNlz64v6lp5RpIKsP
-	 4hDILbnKXosNw==
-X-ME-Helo: [IPV6:2a01:cb10:785:b00:8347:f260:7456:7662]
-X-ME-Auth: bWFyaW9uLmphaWxsZXRAd2FuYWRvby5mcg==
-X-ME-Date: Thu, 03 Jul 2025 19:35:53 +0200
-X-ME-IP: 2a01:cb10:785:b00:8347:f260:7456:7662
-Message-ID: <f1c68345-a511-46b8-964c-a00bb62274ba@wanadoo.fr>
-Date: Thu, 3 Jul 2025 19:35:51 +0200
+X-Inumbo-ID: 30d467a0-5834-11f0-a315-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1751564162; x=1752168962; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eZwQanFWBRxwl5aAhr4ZCK6o5mkA78r32e7Wtw3A5EI=;
+        b=jM5Oifv3D35XyLru2PfHtTyPLMkWLvabysiKflCAhcqwvDWtAJfZNDLznnkfUYnCGm
+         SsjDxqAnZcR9n/+Zs/ecHWRCLJnMdI3PbJvwgsJ75DGRw4BVjHVXa7csi/JzBaJRrduH
+         uMEO0wXVHlQ+Pc7FSPEpcikQ+FDJw99Wdcajb7U/EOYTiWfB660ggNfzMl2ybDC/yKL9
+         cFUUSiQoKINIglAejaY3yI1f0fVXKJw7aH4m2NObxfKrWZG7CveluXaZhYp5wSC/0qV4
+         PdHJ0/VcQiECi4k6D3st3ZquCk4t83mzzdJoAcGzJmHNQnN8M8cKhdi3uL6cKW/3FZkn
+         pS0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751564162; x=1752168962;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=eZwQanFWBRxwl5aAhr4ZCK6o5mkA78r32e7Wtw3A5EI=;
+        b=tIahBy0Bfg2IMKbAvI+VRMHjb86G09z6TKeSK896oeNUeOxhjTO2W5bqv/89gl+CxA
+         CKhMNidUQawpZGp1hLRl4dtm+bVdezdozwq1gKKvX4T5DQj49sfCs8UK3GzBri93Th3I
+         auFRFi6J/fu+JlFrr3kVl5mmUpXggOjIy5vuPHLjpGN97FZbiXPyQFmCoPld0PhRxf/H
+         AMHMBXsTCIWtQ6V8lPNRUDC65pa2Sr26fhV2jiB9ASjMUbXEahvv9ondok0IqYydkFa5
+         f8ZZjxTWEUrQHxAw/Ias6DHP5j5WAeg/4Y9x5NmtB8wzA1S9rd10RzrK0pDQTTLUqcD3
+         2pSw==
+X-Forwarded-Encrypted: i=1; AJvYcCXFJb/fDK3lk81e9k3C5KOJJM5+dip0jN2hzgfFzWf3eWeBHLzCFpSt+7K7ZNKggGHU3HWjdOsN5Io=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YydbmVGQyPMNHC9zBRBJl78AL1dSEh5s2UeN3cqoVgTXHLITsz3
+	NzQAX8fw606Ldvgs/1Ut1cAUVBsW0FuZEyjyDHeTmeJRLjkaHLrNxmbD0EWrMLj5sDU=
+X-Gm-Gg: ASbGncsILqIGdRaPEb5ti7mp8NqWuSmjIKqEb3c+S0C1AYP9sqVIKreIqA/V1v/ygk+
+	iao8xXlo4xQiwOjsYKSQzLdl5MDPelFWGelV6NqfzqDFFlv3ubctfXA7JVJwWuG47v7l3cYDiFG
+	KzrfYfHJXlb7+GM0be3qr/2ewdl8b8HgZI5L9XdICqD3ta6H6pPd1jkJ2SfAegrrxVbbn5GrvAH
+	ee9yDO1biijo468dTeSkUr3pwLnEPQyQT4iS7awa2NM0SMA36peVqvCjuvTfR/PaNdEamgXELHl
+	zJ2MReUE8PoEQXT4DPAfoSD29o5zY2ScSQOqvdKe7UHIAKdcvje+HJjmJmjSJZ0yzhwLiVkR2TE
+	Ad7NgiJcI+3l+aZjjGl+JjpQ+9sypR7yjWxP1
+X-Google-Smtp-Source: AGHT+IFlGs8qe7BnVu94UCy3WqtQJpzJU7HgdWJZtFJUmkIJbvAs7L+AWB+WvKsRQQGdwDgHXZ8jPA==
+X-Received: by 2002:a05:600c:8b43:b0:453:6424:48a2 with SMTP id 5b1f17b1804b1-454a3d23106mr87720105e9.10.1751564162373;
+        Thu, 03 Jul 2025 10:36:02 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Zhao Liu <zhao1.liu@intel.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v6 35/39] accel: Remove unused MachineState argument of AccelClass::setup_post()
+Date: Thu,  3 Jul 2025 19:32:41 +0200
+Message-ID: <20250703173248.44995-36-philmd@linaro.org>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250703173248.44995-1-philmd@linaro.org>
+References: <20250703173248.44995-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] xen/gntdev: reduce stack usage by dynamically
- allocating gntdev_copy_batch
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- Tu Dinh <ngoc-tu.dinh@vates.tech>, Abinash <abinashlalotra@gmail.com>
-Cc: sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
- xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
- Abinash Singh <abinashsinghlalotra@gmail.com>
-References: <20250629204215.1651573-1-abinashsinghlalotra@gmail.com>
- <5e67d651-830a-4d99-af37-26f2d0efd640@vates.tech>
- <CAJZ91LC610AsBZ8X3u8ZxAUhc6QT0FHeffQT0ARmnMgsGrdZQQ@mail.gmail.com>
- <ab668ddb-1ea5-4444-95fc-f31469b4f05e@vates.tech>
- <f8bde276-9d4e-47d0-9841-fd8724ef5275@suse.com>
-Content-Language: en-US, fr-FR
-From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-In-Reply-To: <f8bde276-9d4e-47d0-9841-fd8724ef5275@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Le 03/07/2025 à 07:22, Jürgen Groß a écrit :
-> On 03.07.25 00:42, Tu Dinh wrote:
->> On 01/07/2025 23:53, Abinash wrote:
->>> Hi ,
->>>
->>> Thanks for pointing that out.
->>>
->>> I haven’t measured the performance impact yet — my main focus was on
->>> getting rid of the stack usage warning triggered by LLVM due to
->>> inlining. But you're right, gntdev_ioctl_grant_copy() is on a hot
->>> path, and calling kmalloc() there could definitely slow things down,
->>> especially under memory pressure.
->>>
->>> I’ll run some benchmarks to compare the current approach with the
->>> dynamic allocation, and also look into alternatives — maybe
->>> pre-allocating the struct or limiting inlining instead. If you have
->>> any ideas or suggestions on how best to approach this, I’d be happy to
->>> hear them.
->>>
->>> Do you have any suggestions on how to test the performance?
->>>
->>> Best,
->>> Abinash
->>>
->>>
->>
->> Preallocating may work but I'd be wary of synchronization if the
->> preallocated struct is shared.
->>
->> I'd look at optimizing status[] which should save quite a few bytes.
->>
->> Reducing GNTDEV_COPY_BATCH could be a last resort, but that may also
->> impact performance.
-> 
-> IMHO the most promising way would be to dynamically allocate the struct, 
-> but
-> don't free it at the end of the ioctl. Instead it could be put into a list
-> anchored in struct gntdev_priv, so freeing would be done only at close() 
-> time.
-> 
-> Synchronization would be minimal (just for taking a free struct from the 
-> list
-> or putting it back again), while memory usage would be basically just as 
-> needed,
-> depending on the number of concurrent threads using the same file 
-> descriptor
-> for the ioctl.
-> 
-> This approach would even allow to raise GNTDEV_COPY_BATCH, maybe 
-> resulting even
-> in a gain of performance.
-> 
-> I'll write a patch implementing the allocation scheme.
-> 
-> 
-> Juergen
+This method only accesses xen_domid/xen_domid_restrict, which are both
+related to the 'accelerator', not the machine. Besides, xen_domid aims
+to be in Xen AccelState and xen_domid_restrict a xen_domid_restrict
+QOM property.
 
-It may be an overkill, but sometimes we see pattern that try to keep the 
-best of the 2 worlds. Something like:
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ include/qemu/accel.h | 2 +-
+ accel/accel-system.c | 2 +-
+ accel/xen/xen-all.c  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-
-static struct gntdev_copy_batch static_batch;
-static struct mutex my_mutex;
-
-static long gntdev_ioctl_grant_copy(...)
-{
-	struct gntdev_copy_batch *dynamic_batch = NULL;
-	struct gntdev_copy_batch *batch;
-
-	...
-
-	if (mutex_trylock(&my_mutex)) {
-		/*
-		 * No concurrent access?
-		 * Use a shared static variable to avoid an allocation
-		 */
-		batch = &static_batch;
-	else {
-		/* otherwise, we need some fresh memory */
-		dynamic_batch = kmalloc(sizeof(*batch), GFP_KERNEL);
-		if (!batch)
-			return -ENOMEM;
-
-		batch = dynamic_batch;
-	}
-
-	/* do stuff with 'batch' */
-	...
-
-free_batch:
-	if (!dynamic_batch)
-		mutex_unlock(&my_mutex);
-	else
-		kfree(dynamic_batch);
-  	return ret;
-  }
-
-
-Just my 2c.
-
-CJ
-
+diff --git a/include/qemu/accel.h b/include/qemu/accel.h
+index 44189b77daa..19ccc5ef6a1 100644
+--- a/include/qemu/accel.h
++++ b/include/qemu/accel.h
+@@ -45,7 +45,7 @@ typedef struct AccelClass {
+     void (*cpu_common_unrealize)(CPUState *cpu);
+ 
+     /* system related hooks */
+-    void (*setup_post)(MachineState *ms, AccelState *accel);
++    void (*setup_post)(AccelState *as);
+     bool (*has_memory)(AccelState *accel, AddressSpace *as,
+                        hwaddr start_addr, hwaddr size);
+     bool (*cpus_are_resettable)(AccelState *as);
+diff --git a/accel/accel-system.c b/accel/accel-system.c
+index fb8abe38594..637e2390f35 100644
+--- a/accel/accel-system.c
++++ b/accel/accel-system.c
+@@ -58,7 +58,7 @@ void accel_setup_post(MachineState *ms)
+     AccelState *accel = ms->accelerator;
+     AccelClass *acc = ACCEL_GET_CLASS(accel);
+     if (acc->setup_post) {
+-        acc->setup_post(ms, accel);
++        acc->setup_post(accel);
+     }
+ }
+ 
+diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
+index 8279746f115..bd0ff64befc 100644
+--- a/accel/xen/xen-all.c
++++ b/accel/xen/xen-all.c
+@@ -64,7 +64,7 @@ static void xen_set_igd_gfx_passthru(Object *obj, bool value, Error **errp)
+     xen_igd_gfx_pt_set(value, errp);
+ }
+ 
+-static void xen_setup_post(MachineState *ms, AccelState *accel)
++static void xen_setup_post(AccelState *as)
+ {
+     int rc;
+ 
+-- 
+2.49.0
 
 
