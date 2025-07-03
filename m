@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9412BC83030
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 11:14:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1032038.1405807 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A417C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 11:25:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1032060.1405817 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXHtY-0001dr-DC; Thu, 03 Jul 2025 11:14:24 +0000
+	id 1uXI3a-0003wU-As; Thu, 03 Jul 2025 11:24:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1032038.1405807; Thu, 03 Jul 2025 11:14:24 +0000
+Received: by outflank-mailman (output) from mailman id 1032060.1405817; Thu, 03 Jul 2025 11:24:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXHtY-0001dk-AH; Thu, 03 Jul 2025 11:14:24 +0000
-Received: by outflank-mailman (input) for mailman id 1032038;
- Thu, 03 Jul 2025 11:14:23 +0000
+	id 1uXI3a-0003wN-6w; Thu, 03 Jul 2025 11:24:46 +0000
+Received: by outflank-mailman (input) for mailman id 1032060;
+ Thu, 03 Jul 2025 11:24:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rGZt=ZQ=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1uXHgx-0003ud-U1
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 11:01:23 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
+ (envelope-from <SRS0=lE7m=ZQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uXI3Y-0003wH-OU
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 11:24:44 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0df2ca51-57fd-11f0-b894-0df219b8e170;
- Thu, 03 Jul 2025 13:01:22 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-454aaade1fbso8482045e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 04:01:22 -0700 (PDT)
-Received: from localhost.localdomain ([83.247.137.20])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a88c7e72c1sm18152198f8f.1.2025.07.03.04.01.19
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 03 Jul 2025 04:01:21 -0700 (PDT)
+ id 50aef73e-5800-11f0-b894-0df219b8e170;
+ Thu, 03 Jul 2025 13:24:42 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-453608ed113so57380085e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 04:24:42 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23acb2e258csm162446045ad.38.2025.07.03.04.24.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Jul 2025 04:24:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,212 +47,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0df2ca51-57fd-11f0-b894-0df219b8e170
+X-Inumbo-ID: 50aef73e-5800-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1751540482; x=1752145282; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mzJU9cMvdw7qI1DsUYXk4sIGt7aNTKeIdxs9XPIRBAs=;
-        b=rpNTtckOTMykRVX22Kbs1jKpEJgpU0bAcpMs3y8bJAA14D26RiDa8LfLg8jF/7vNLp
-         AOdRAT4vVSxBJrPqnLcJj8kGNHxdbDnTZjfRnXQbFkhbafeVFZGQ9ptOrFnICZ5wdTKJ
-         8TTi9+ElV1c8p7cO0+JmIjDjK9F1O+glIpB1S2uSqB+63TGadIt8cuUMcXQGsTNagAq2
-         EpkBbhNRBfW+5z16gBM3K0rXfxFUHeMEuOe6N8nqQBUCmvWZySWhjj7Vvw0YWVU4fZQC
-         w3gyXdTh/uLbjJDF0/Hir5AveCvG9e7PktNXGixbfD3vxxeH7qigRF7FiFnhpIFGi3B3
-         2kCw==
+        d=suse.com; s=google; t=1751541882; x=1752146682; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=UZ4fQYYhY2WNWBW9jgtBDJxWEzs3fd152ZeG1tX6o9Y=;
+        b=b2fjTu0VeJU6KxuZ2OXcAMLthlMtIx6U8zHGgrAKoMrwFHP0Szzb74CavX9DISRbxL
+         JELjOCl3bmiAjhmgK0IKa2JBcrccVCQ7MU2ErCODHTN298bKXvMDt+L8NCnFzPms2+Jy
+         /3/xH4Q2Tz2otkGrmIUBOzjJoRPMoowDJEjRSTT3wWpEELBGSvnkh70aEU7IzAxaFoCk
+         Xc7XneCWHc4eyXqCw7NkUVtzc2Ta1d3ty2dhDA/5AUQkoevc+b4ubS+swwm1IfOtTJJg
+         YaYmbvWjALQ2eUg+IqQ93F5kLGFiMvG0Wn0f46kisJSkdaw6w7HwLV5wlPNTCXfBjywF
+         R+lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751540482; x=1752145282;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mzJU9cMvdw7qI1DsUYXk4sIGt7aNTKeIdxs9XPIRBAs=;
-        b=pMc7smcWLcF7NfQPlxRomv0KpDCWlTHYFSCPvGQurvl74HVy/qHMWf970qAAUlqXMa
-         um8pjyheEpa+KjB+s1CGd4FQ7S7doyXwOppmVYZgEzl+mLTr6kd1XEc0U5NjF4oaCEpk
-         +XFnVKSUyw1tvkYkd9HVS0pxwBPY8M0jb5H7Ub7A4URcpg3Ly8TJvA3UNxfyeBmAogws
-         rl+n4zs4L/HXnFtDn3OXQ/wFG0JwGSkzBphM+/n051QdoEG9BZ+1lov2tdHGtbIWehPy
-         ExTL8xqxdhT6V8/JC4TN1E5LXQE0vterAbxCrh/hyGNR6QHPs0mDcYteZ/lEqPx2FQUt
-         uveQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXqFtRQCb3vuy1+HqLX8sL+62lTO+Cy+ZHXiseQBQc2cO7XROEQs92AtpUdOYzV6fQKJTObHmSJmbo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyzkpVWFHveSV1PqkPwFvPwAfQBFJmrQjMcSdAxr/zJbjynWWyi
-	c59/vMBFYDaOik+tUVaeLJ81HJhQZ7H0NN+I3c51XdB8yn1+QiAHUwq169azbNlgMF4=
-X-Gm-Gg: ASbGncvKIuN0QzkPIRoLkOFPKiJWFzA9A6gDz/iWvxewrmLlxQoyYsGN+lrpDwa6cjp
-	qbuWF+PwYnjVuhIiB3AdJZwq5sMwXBe6lB1/dC8zMwvGE55UtqVbwK7qCU99uGAS7L6Bkw2EalK
-	GDzGi/eFNCpymfqJ5a7NM8O8ZlzIRqDFK0JpWDMM+jyUX3H+GA2PlPXYg1sMZ4XkgtEvgrrK7Ze
-	5Czw2fFhiOrjWdd5bCoylcv8Z0FA5ye/mCbuJTFhlc5erFLcyCEXLwVopQHeHeGyfz4ZDaKWois
-	pLxrbcU0uqmGCkYXBpD5QAKbrQC11be2OaTvb4w3l2RgkU/+monhb2RVAF8A1N218vaKdb2kyVO
-	jq+EauLowAj0=
-X-Google-Smtp-Source: AGHT+IE9gr9T60NDzRkUuqivylovRxkkmt/fAWeG25n0gokPfhcpDnEXTvr0sTrW5HUyGajZcY1CBA==
-X-Received: by 2002:a05:600c:4f84:b0:450:d37c:9fc8 with SMTP id 5b1f17b1804b1-454a3e1a96amr69146295e9.13.1751540481514;
-        Thu, 03 Jul 2025 04:01:21 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
-	kvm@vger.kernel.org,
-	Richard Henderson <richard.henderson@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Zhao Liu <zhao1.liu@intel.com>,
-	Cameron Esfahani <dirty@apple.com>,
-	Roman Bolshakov <rbolshakov@ddn.com>,
-	Phil Dennis-Jordan <phil@philjordan.eu>,
-	Mads Ynddal <mads@ynddal.dk>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Reinoud Zandijk <reinoud@netbsd.org>,
-	Sunil Muthuswamy <sunilmut@microsoft.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 64/69] accel: Always register AccelOpsClass::get_virtual_clock() handler
-Date: Thu,  3 Jul 2025 12:55:30 +0200
-Message-ID: <20250703105540.67664-65-philmd@linaro.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250703105540.67664-1-philmd@linaro.org>
-References: <20250703105540.67664-1-philmd@linaro.org>
+        d=1e100.net; s=20230601; t=1751541882; x=1752146682;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UZ4fQYYhY2WNWBW9jgtBDJxWEzs3fd152ZeG1tX6o9Y=;
+        b=xMh1PhQYRLiBvrG2SPqMBbsGeVkxK+2/r18P60I7UhEjiRZpCZXQ6vpWpfdFh9IXKk
+         Ds/PHeOyaSk+OE1OH1Vbwp8/KITMb5UCt3zWzXT6+rN0zlZ0fD6KfBf2+5ADTscVO64c
+         sYQwsnElqvB+mU+c891DH4sh1r6ha3zNr6hYA0vY2TnxtjBJneylUFJjM1Zy/Ni1CJ7m
+         xhoxfwvJsHFOOCtjq0noDWlcNOrywHyH0vZpHEtSPYqaY2uypoqNldDs0rutC5qELLZ5
+         xwO6kv170GdGGmicDNzTflmwLDw68WiFRtcbEEMTtTgM4C0UvSoMTMu02zPAmRCQ2cRi
+         KFSw==
+X-Forwarded-Encrypted: i=1; AJvYcCVL/fVAC57+/DVip21IsCldyp2aLviVrdFL/oDyXyMoMVw/NxB86eoDoTgGsTblfhwRR7d0x0R5l+Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz6IjsqMHrToleLKFvvpDXz8ZZU1kO17ZwCPcQCqs++kLLwyQh1
+	EARPFD5yr4IbhrKmzRUBASxKFygxLnI993AaoFRfNhQu5DKEza1b2mj7ELAT6ZOVOA==
+X-Gm-Gg: ASbGncufHP/b7lrmPPbIQMyHQaC55XCgeMYXO70Re4SoR7gI7qCdk30XXD+f5P2W3iS
+	xJvM+7GQ/Zi1nhmKyGmpJSShNpAGMaWoUxFQyyijZ2hIUnP1TPfnjvJ/FtXouZFLYL2/UBEyIEF
+	pSbrkgRdlU812l2OqVi+swxUkiBKIT0ICCslox1nY5akTIZHPgxVZND5fzoeCu8BaXVN6TPKAH2
+	Fn92uWdNDKLHHO21550ZQEMLbAIhk8m1thaniUr5Yt3SGUwksRHJdrIcBt3tuxGeyZmQtBW9xuV
+	Anxj32NjTp00hyWuM+kJVATPUqoP57SVIGqlXmZ7SOhymerZyk+L0qLAYeuwb4RgvJI5Ct4qks5
+	Nz2701IwXAq6o6T2jxKgILY1kQcB4GzvCQ08JM6vxQVBOCZA=
+X-Google-Smtp-Source: AGHT+IFT5O8EVfvV1Qf8m9O59zN7RivE4XLDZ6btciwaqrpe5aQH2+/9iwvJNK+KqmrQhQtQ4J9vxA==
+X-Received: by 2002:adf:e184:0:b0:3a5:2ef8:34f0 with SMTP id ffacd0b85a97d-3b32c0a18a9mr2488331f8f.22.1751541882008;
+        Thu, 03 Jul 2025 04:24:42 -0700 (PDT)
+Message-ID: <5c864856-688a-4407-b79c-1bd1b0124506@suse.com>
+Date: Thu, 3 Jul 2025 13:24:32 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] xen/softirq: Rework arch_skip_send_event_check() into
+ arch_pend_softirq()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
+ <20250702144121.1096448-4-andrew.cooper3@citrix.com>
+ <7789a13c-04ba-4ad4-8df0-59fe82512e40@suse.com>
+ <56566ac7-7bc7-4908-a755-5e9a9071f096@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <56566ac7-7bc7-4908-a755-5e9a9071f096@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-In order to dispatch over AccelOpsClass::get_virtual_clock(),
-we need it always defined, not calling a hidden handler under
-the hood. Make AccelOpsClass::get_virtual_clock() mandatory.
-Register the default cpu_get_clock() for each accelerator.
+On 03.07.2025 12:36, Andrew Cooper wrote:
+> On 03/07/2025 9:11 am, Jan Beulich wrote:
+>> On 02.07.2025 16:41, Andrew Cooper wrote:
+>>> x86 is the only architecture wanting an optimisation here, but the
+>>> test_and_set_bit() is a store into the monitored line
+>> Which is intentional aiui, while this reads as if this was part of the issue.
+> 
+> I don't understand what you're trying to say.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
----
- include/system/accel-ops.h        | 2 ++
- accel/hvf/hvf-accel-ops.c         | 1 +
- accel/kvm/kvm-accel-ops.c         | 1 +
- accel/tcg/tcg-accel-ops.c         | 2 ++
- accel/xen/xen-all.c               | 1 +
- system/cpus.c                     | 7 ++++---
- target/i386/nvmm/nvmm-accel-ops.c | 1 +
- target/i386/whpx/whpx-accel-ops.c | 1 +
- 8 files changed, 13 insertions(+), 3 deletions(-)
+What I was trying to say is the way you wrote it to me it read as if you're
+describing two issues: There wrongly being a store into the monitored line,
+and ...
 
-diff --git a/include/system/accel-ops.h b/include/system/accel-ops.h
-index 8683cd37716..d5154acc75a 100644
---- a/include/system/accel-ops.h
-+++ b/include/system/accel-ops.h
-@@ -82,6 +82,8 @@ struct AccelOpsClass {
-      * fetch time. The set function is needed if the accelerator wants
-      * to track the changes to time as the timer is warped through
-      * various timer events.
-+     *
-+     * get_virtual_clock() is mandatory.
-      */
-     int64_t (*get_virtual_clock)(void);
-     void (*set_virtual_clock)(int64_t time);
-diff --git a/accel/hvf/hvf-accel-ops.c b/accel/hvf/hvf-accel-ops.c
-index 17776e700eb..cf623a1ea47 100644
---- a/accel/hvf/hvf-accel-ops.c
-+++ b/accel/hvf/hvf-accel-ops.c
-@@ -369,6 +369,7 @@ static void hvf_accel_ops_class_init(ObjectClass *oc, const void *data)
-     ops->update_guest_debug = hvf_update_guest_debug;
- 
-     ops->get_elapsed_ticks = cpu_get_ticks;
-+    ops->get_virtual_clock = cpu_get_clock;
-     ops->get_vcpu_stats = hvf_get_vcpu_stats;
- };
- 
-diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index f27228d4cd9..dde498e0626 100644
---- a/accel/kvm/kvm-accel-ops.c
-+++ b/accel/kvm/kvm-accel-ops.c
-@@ -97,6 +97,7 @@ static void kvm_accel_ops_class_init(ObjectClass *oc, const void *data)
- #endif
- 
-     ops->get_elapsed_ticks = cpu_get_ticks;
-+    ops->get_virtual_clock = cpu_get_clock;
- }
- 
- static const TypeInfo kvm_accel_ops_type = {
-diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
-index f22f5d73abe..780e9debbc4 100644
---- a/accel/tcg/tcg-accel-ops.c
-+++ b/accel/tcg/tcg-accel-ops.c
-@@ -207,6 +207,7 @@ static void tcg_accel_ops_init(AccelClass *ac)
-         ops->kick_vcpu_thread = mttcg_kick_vcpu_thread;
-         ops->handle_interrupt = tcg_handle_interrupt;
-         ops->get_elapsed_ticks = cpu_get_ticks;
-+        ops->get_virtual_clock = cpu_get_clock;
-     } else {
-         ops->create_vcpu_thread = rr_start_vcpu_thread;
-         ops->kick_vcpu_thread = rr_kick_vcpu_thread;
-@@ -217,6 +218,7 @@ static void tcg_accel_ops_init(AccelClass *ac)
-             ops->get_elapsed_ticks = icount_get;
-         } else {
-             ops->handle_interrupt = tcg_handle_interrupt;
-+            ops->get_virtual_clock = cpu_get_clock;
-             ops->get_elapsed_ticks = cpu_get_ticks;
-         }
-     }
-diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
-index 48d458bc4c7..85fb9d1606c 100644
---- a/accel/xen/xen-all.c
-+++ b/accel/xen/xen-all.c
-@@ -158,6 +158,7 @@ static void xen_accel_ops_class_init(ObjectClass *oc, const void *data)
-     ops->kick_vcpu_thread = cpus_kick_thread;
-     ops->handle_interrupt = generic_handle_interrupt;
-     ops->get_elapsed_ticks = cpu_get_ticks;
-+    ops->get_virtual_clock = cpu_get_clock;
- }
- 
- static const TypeInfo xen_accel_ops_type = {
-diff --git a/system/cpus.c b/system/cpus.c
-index d32b89ecf7b..6c99756346a 100644
---- a/system/cpus.c
-+++ b/system/cpus.c
-@@ -216,10 +216,10 @@ int64_t cpus_get_virtual_clock(void)
-      *
-      * XXX
-      */
--    if (cpus_accel && cpus_accel->get_virtual_clock) {
--        return cpus_accel->get_virtual_clock();
-+    if (!cpus_accel) {
-+        return cpu_get_clock();
-     }
--    return cpu_get_clock();
-+    return cpus_accel->get_virtual_clock();
- }
- 
- /*
-@@ -666,6 +666,7 @@ void cpus_register_accel(const AccelOpsClass *ops)
-     assert(ops->kick_vcpu_thread);
-     assert(ops->handle_interrupt);
-     assert(ops->get_elapsed_ticks);
-+    assert(ops->get_virtual_clock);
-     cpus_accel = ops;
- }
- 
-diff --git a/target/i386/nvmm/nvmm-accel-ops.c b/target/i386/nvmm/nvmm-accel-ops.c
-index 4deff57471c..a2e84cb087a 100644
---- a/target/i386/nvmm/nvmm-accel-ops.c
-+++ b/target/i386/nvmm/nvmm-accel-ops.c
-@@ -86,6 +86,7 @@ static void nvmm_accel_ops_class_init(ObjectClass *oc, const void *data)
-     ops->synchronize_pre_loadvm = nvmm_cpu_synchronize_pre_loadvm;
- 
-     ops->get_elapsed_ticks = cpu_get_ticks;
-+    ops->get_virtual_clock = cpu_get_clock;
- }
- 
- static const TypeInfo nvmm_accel_ops_type = {
-diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
-index f47033a502c..d27e89dd9c5 100644
---- a/target/i386/whpx/whpx-accel-ops.c
-+++ b/target/i386/whpx/whpx-accel-ops.c
-@@ -89,6 +89,7 @@ static void whpx_accel_ops_class_init(ObjectClass *oc, const void *data)
-     ops->synchronize_pre_loadvm = whpx_cpu_synchronize_pre_loadvm;
- 
-     ops->get_elapsed_ticks = cpu_get_ticks;
-+    ops->get_virtual_clock = cpu_get_clock;
- }
- 
- static const TypeInfo whpx_accel_ops_type = {
--- 
-2.49.0
+> It is racy, and that's why we're changing it.
+> 
+>>> and is racy with determining whether an IPI can be skipped.
 
+... there being a race.
+
+>> Racy here as in limiting the effect of the optimization, but not affecting
+>> correctness aiui: If the woken CPU managed to clear the bit already, we'd
+>> needlessly IPI it.
+> 
+> Correct.
+> 
+>>  This could also do with saying.
+> 
+> What about this?
+> 
+> x86 is the only architecture wanting an optimisation here, but the
+> test_and_set_bit() is a store into the monitored line (i.e. will wake up
+> the target) and, prior to the removal of the broken IPI-elision
+> algorithm, was racy, causing unnecessary IPIs to be sent.
+> 
+> To do this in a race-free way, the store to the monited line needs to
+> also sample the status of the target in one atomic action.  Implement a
+> new arch helper with different semantics; to make the softirq pending
+> and decide about IPIs together.  For now, implement the default helper. 
+> It will be overridden by x86 in a subsequent change.
+
+Better, yes. Thanks.
+
+Jan
 
