@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0CADC83F03
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 17:41:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1032376.1406057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8648EC83F03
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jul 2025 17:48:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1032396.1406067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXNvY-0005xa-QO; Thu, 03 Jul 2025 17:40:52 +0000
+	id 1uXO2t-0006jS-Ha; Thu, 03 Jul 2025 17:48:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1032376.1406057; Thu, 03 Jul 2025 17:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 1032396.1406067; Thu, 03 Jul 2025 17:48:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXNvY-0005xT-Nb; Thu, 03 Jul 2025 17:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 1032376;
- Thu, 03 Jul 2025 17:40:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rGZt=ZQ=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1uXNrB-0001VU-Sh
- for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 17:36:21 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3ad89c75-5834-11f0-b894-0df219b8e170;
- Thu, 03 Jul 2025 19:36:19 +0200 (CEST)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-45310223677so868765e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 10:36:19 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454a997e367sm32057155e9.15.2025.07.03.10.36.17
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 03 Jul 2025 10:36:18 -0700 (PDT)
+	id 1uXO2t-0006jL-Dl; Thu, 03 Jul 2025 17:48:27 +0000
+Received: by outflank-mailman (input) for mailman id 1032396;
+ Thu, 03 Jul 2025 17:48:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=TJsU=ZQ=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uXO2s-0006jF-Nr
+ for xen-devel@lists.xenproject.org; Thu, 03 Jul 2025 17:48:26 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id eb1b9e11-5835-11f0-a315-13f23c93f187;
+ Thu, 03 Jul 2025 19:48:25 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-450cb2ddd46so495425e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jul 2025 10:48:25 -0700 (PDT)
+Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b4708d099esm358916f8f.21.2025.07.03.10.48.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Jul 2025 10:48:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,429 +47,249 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ad89c75-5834-11f0-b894-0df219b8e170
+X-Inumbo-ID: eb1b9e11-5835-11f0-a315-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1751564179; x=1752168979; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5E/SAxbdiV3TRF5Yfo8PH+PsmR3gvFEsRHLctVVyuPU=;
-        b=emqZIHr1HR3s9Nu+r3VyDkHHlFgaXx/VFNpweR5zCvSXY7TxazCrHoMzONlPaQQnko
-         PBmuHACWAdqUdh8KnyXWxquDPglbP++dszh9D+GakN9ciA90vPNmOYvIKGPirCZEg1Jx
-         jwWDZ/mnkTojfWXZ7Maog3wXF8LpXFe3yICi9sJ+IIF5c7osH5hmzVL48q8i1cGFFkHS
-         QPqoWPl0rK7bc8EfBqQijeT4jwjxu2VGebIm4wr3ZAquWblAJHgvWIzWmJJS9Mn57S8d
-         YqHAjYdYPo22AjJv19WkUkyzLknecsoy66H4acJ4zynI0Ao4Us2lD24DSDrkM98oOx4w
-         Vmrw==
+        d=citrix.com; s=google; t=1751564904; x=1752169704; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=SLgsKUNNCgkFWnFEMiUM2w5Qq8qAKy856KV7Ql1P6xI=;
+        b=Nut7WMtqRprnp+5Bsf+5K+p46+DrjumWx/fg5VP/FLH2yytxaX/0GPB6bJ+1mRxOFN
+         hXLZePkhJSa+dlIEGYEWRSyzmjtW91G8Kl8r4jM5vW8XuU9hTdUdCBB5AduMXsLow6sO
+         tS75+112iwOqnK/n8ijm2jJUupYh5vBAtSIOU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751564179; x=1752168979;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5E/SAxbdiV3TRF5Yfo8PH+PsmR3gvFEsRHLctVVyuPU=;
-        b=wbhnV8VW5aGyECRnBvQZDHWV+mUdd6bDRWyMDFJPpfGapP1y02NTxbrH4Mt/avZQQJ
-         Z4VhUfGyZiJ5WYoi1kT3xKHR4pnC/noha6LDnnw7q9TSPlyl0/xJjVlpNRvfwvAVDkVb
-         0ddtPOXXOVyklQxOmKQNzf/24pFzt5j7oZ0+1bQVXe4iPOaYGlvazCBaWYOl7r49AKKd
-         VYAzbmRAcnJoo9l7AKNf0DLwJX2aTHxyCzYJhcC7goC0tiukBHtjPmQTNtsUxr8HAfXI
-         7LVsszMx/kOv8vHosKaY61RZoiMqxElM+L4gR2VAKvSvvtVz3O5XPb34idbYwEBHQbv3
-         hWPw==
-X-Forwarded-Encrypted: i=1; AJvYcCVSkMK7gTDBvlkc0lvilba1CjCOpcWdv6VOaWdkh0j5Hx3n8q1ciBhDgLGau+9D9XryWe2mumxntpU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwSwT28g0xKiAfHeXXcuiqDbkMvBIVAuLRhr5ZBPJ+qpBRKDxJd
-	D8QqZBC4X9X+5JGXygj96QHKWB44B4QDbYEtj2DdUHMS6dQLBUIFsxS/gyXJV9PCzdA=
-X-Gm-Gg: ASbGncvfZ7w3WAKuOR3pDoJ7VNIKcdWe6Jw0Di85XnEajR/rkxFCUF8gsxmjDVw4s7i
-	u7DYr4YVqw/YeOzySuHvv8+9xppBkd62eiLkxKxjP3+Bxgm72Td81gEpn6jJ0hf2IUKVpVMbcB0
-	ZUQV7bfnFOxsguxWT75b4V0StsFZ5uqd1wEnIcLxn428/Ptplr+rE9YxqmUQGnVMWI/eROZ1s6y
-	PpuUir5pTERCq35Uw6QVMql+gslPsdjn20AOwbl9C0Od/fp2N9LRMcWCdyY5M66aq1z4950ml8X
-	WFWpmVffvtrcA1FanIAwmE0hGPFVCJM9wHERESOw1AIZLLNBBa8kubgpZvBSCxphTRs6Z67EqFQ
-	r3+gjdBPeg/62M+mtlQT1a0MzIWxKUNhSjGaG
-X-Google-Smtp-Source: AGHT+IGYkuYIeLocc6dsLio4WRAhQTPLG5g0dI2lw9ZYqsX2Hf52uwkNyyuJTdB+GW55XoGAazaZvQ==
-X-Received: by 2002:a05:600c:4e8b:b0:443:48:66d2 with SMTP id 5b1f17b1804b1-454a3704fc7mr101594355e9.16.1751564179105;
-        Thu, 03 Jul 2025 10:36:19 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Zhao Liu <zhao1.liu@intel.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Pierrick Bouvier <pierrick.bouvier@linaro.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Cameron Esfahani <dirty@apple.com>,
-	Roman Bolshakov <rbolshakov@ddn.com>,
-	Phil Dennis-Jordan <phil@philjordan.eu>,
-	Mads Ynddal <mads@ynddal.dk>,
-	Fabiano Rosas <farosas@suse.de>,
-	Laurent Vivier <lvivier@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Warner Losh <imp@bsdimp.com>,
-	Kyle Evans <kevans@freebsd.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	Reinoud Zandijk <reinoud@netbsd.org>,
-	Sunil Muthuswamy <sunilmut@microsoft.com>,
-	kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v6 38/39] accel: Extract AccelClass definition to 'accel/accel-ops.h'
-Date: Thu,  3 Jul 2025 19:32:44 +0200
-Message-ID: <20250703173248.44995-39-philmd@linaro.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250703173248.44995-1-philmd@linaro.org>
-References: <20250703173248.44995-1-philmd@linaro.org>
+        d=1e100.net; s=20230601; t=1751564904; x=1752169704;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SLgsKUNNCgkFWnFEMiUM2w5Qq8qAKy856KV7Ql1P6xI=;
+        b=FXhzD7Osn9vbCoEi5hO7rwOJcnpryeoQaEP9IJEPL8GLMvQx6xk6yGtL4vQ/7i5/Yx
+         KM3OKszfvzc/L1d7xz/3zumtu04uhXVwGms1WHGEsFrLyYYfEbCCI+4uE3XdXJU7+yxi
+         NJ2GFCokLadOfrr2jSA6rPaWo6gNbx0qKJs/+TKX65aIZ99Gpuh+aHIUgz+Gf7rcQaiO
+         7Jsog4S87XJTonvVcgPtvGC37lUqStCR3+gawX3AmfJwBtMslaYF92eef6zu59vcYL7L
+         ZqL0/e+Y5Wv3uV2Vu6J5B7BWXx5Aj3tG6mq8/v99K+X8QUPIVf987sja3cliu2bLqU3X
+         Dakw==
+X-Gm-Message-State: AOJu0Yyq+JN//0I3vaW3HjtoNTmibflf9tlC6lPBb8iQ2Izo4E7+XnlO
+	EDPTqPSJk8YxkXUqc1siAz9cMrNkRh2S72fYlFz8MSXrt3rPtpa5LBz5Jl/axRXoauM=
+X-Gm-Gg: ASbGncs23d6l1IKouchRJZt1aDtM2BARSJufrPz7ewyYUOZ9OUEmgerSEvkTS9j09a0
+	IDOO2lSUcSC8zWM/rtwB4jETw9ZzX2s9AOXd9+Wbn9Eu+mmlJnfQ9p3paXYRnmYvLoJ1nP+S31P
+	CAyG2wKMq6o8IbofdrKSFQwKJzt5BSh0+fsbVsDSBsGiJjdG+rUPragzSLYWM48vNC7OKV56I4B
+	PA3pBA3am1rIk4g9gD4i0qU2rfTqiQTpd/BCgMkS4MPF2QWi0k+yoOUymzZQ/EPFPuU2dBAddPg
+	+bxQ1IbrGTfbN2v4vGHMjCvcyh4Z9YhO3OL2/PCJHDVHSNw0PzcF3V6SeLctKeE5qGVSecrXqgG
+	MApW6Tb9x4qnfCx63wUD5ZNe3it2SXnqBTtgWfQ==
+X-Google-Smtp-Source: AGHT+IGnOjbHSyTrIJgfg1U46XGh5ANHxYtRibrDxpvVByE79vCgUyhr/K18kRZNE22vi0LDE1nkUw==
+X-Received: by 2002:a05:6000:4409:b0:3a4:e8c4:7a78 with SMTP id ffacd0b85a97d-3b200b48406mr4690967f8f.52.1751564904244;
+        Thu, 03 Jul 2025 10:48:24 -0700 (PDT)
+Message-ID: <7d51879c-87c8-4e36-a7d7-66ba02ef2886@citrix.com>
+Date: Thu, 3 Jul 2025 18:48:23 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] x86/idle: Implement a new MWAIT IPI-elision algorithm
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Jan Beulich <JBeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
+ <20250702144121.1096448-5-andrew.cooper3@citrix.com>
+ <aGaxeQanRmfJg8nF@macbook.local>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <aGaxeQanRmfJg8nF@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Only accelerator implementations (and the common accelator
-code) need to know about AccelClass internals. Move the
-definition out but forward declare AccelState and AccelClass.
+On 03/07/2025 5:36 pm, Roger Pau Monné wrote:
+> On Wed, Jul 02, 2025 at 03:41:19PM +0100, Andrew Cooper wrote:
+>> In order elide IPIs, we must be able to identify whether a target CPU is in
+>> MWAIT at the point it is woken up.  i.e. the store to wake it up must also
+>> identify the state.
+>>
+>> Create a new in_mwait variable beside __softirq_pending, so we can use a
+>> CMPXCHG to set the softirq while also observing the status safely.  Implement
+>> an x86 version of arch_pend_softirq() which does this.
+>>
+>> In mwait_idle_with_hints(), advertise in_mwait, with an explanation of
+>> precisely what it means.  X86_BUG_MONITOR can be accounted for simply by not
+>> advertising in_mwait.
+>>
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> ---
+>> CC: Jan Beulich <JBeulich@suse.com>
+>> CC: Roger Pau Monné <roger.pau@citrix.com>
+>> CC: Anthony PERARD <anthony.perard@vates.tech>
+>> CC: Michal Orzel <michal.orzel@amd.com>
+>> CC: Julien Grall <julien@xen.org>
+>> CC: Stefano Stabellini <sstabellini@kernel.org>
+>>
+>> This is modelled after Linux's TIF_NEED_RESCHED (single bit equivelent of all
+>> of __softirq_pending), and TIF_POLLING_NRFLAG (arch-neutral "in_mwait").
+>>
+>> In Linux, they're both in the same flags field, which adds complexity.  In
+>> Xen, __softirq_pending is already unsigned long for everything other than x86,
+>> so adding an arch-neutral "in_mwait" would need wider changes.
+>> ---
+>>  xen/arch/x86/acpi/cpu_idle.c       | 20 +++++++++++++++++-
+>>  xen/arch/x86/include/asm/hardirq.h | 14 +++++++++++-
+>>  xen/arch/x86/include/asm/softirq.h | 34 ++++++++++++++++++++++++++++++
+>>  3 files changed, 66 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+>> index caa0fef0b3b1..13040ef467a0 100644
+>> --- a/xen/arch/x86/acpi/cpu_idle.c
+>> +++ b/xen/arch/x86/acpi/cpu_idle.c
+>> @@ -439,7 +439,21 @@ __initcall(cpu_idle_key_init);
+>>  void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
+>>  {
+>>      unsigned int cpu = smp_processor_id();
+>> -    const unsigned int *this_softirq_pending = &softirq_pending(cpu);
+>> +    irq_cpustat_t *stat = &irq_stat[cpu];
+>> +    const unsigned int *this_softirq_pending = &stat->__softirq_pending;
+>> +
+>> +    /*
+>> +     * By setting in_mwait, we promise to other CPUs that we'll notice changes
+>> +     * to __softirq_pending without being sent an IPI.  We achieve this by
+>> +     * either not going to sleep, or by having hardware notice on our behalf.
+>> +     *
+>> +     * Some errata exist where MONITOR doesn't work properly, and the
+>> +     * workaround is to force the use of an IPI.  Cause this to happen by
+>> +     * simply not advertising outselves as being in_mwait.
+>> +     */
+>> +    alternative_io("movb $1, %[in_mwait]",
+>> +                   "", X86_BUG_MONITOR,
+>> +                   [in_mwait] "=m" (stat->in_mwait));
+>>  
+>>      monitor(this_softirq_pending, 0, 0);
+>>      smp_mb();
+>> @@ -452,6 +466,10 @@ void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
+>>          mwait(eax, ecx);
+>>          spec_ctrl_exit_idle(info);
+>>      }
+>> +
+>> +    alternative_io("movb $0, %[in_mwait]",
+>> +                   "", X86_BUG_MONITOR,
+>> +                   [in_mwait] "=m" (stat->in_mwait));
+> Isn't it a bit overkill to use alternatives here when you could have a
+> conditional based on a global variable to decide whether to set/clear
+> in_mwait?
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- MAINTAINERS                 |  2 +-
- include/accel/accel-ops.h   | 50 +++++++++++++++++++++++++++++++++++++
- include/qemu/accel.h        | 40 ++---------------------------
- include/system/hvf_int.h    |  3 ++-
- include/system/kvm_int.h    |  1 +
- accel/accel-common.c        |  1 +
- accel/accel-system.c        |  1 +
- accel/hvf/hvf-all.c         |  1 +
- accel/kvm/kvm-all.c         |  1 +
- accel/qtest/qtest.c         |  1 +
- accel/tcg/tcg-accel-ops.c   |  1 +
- accel/tcg/tcg-all.c         |  1 +
- accel/xen/xen-all.c         |  1 +
- bsd-user/main.c             |  1 +
- gdbstub/system.c            |  1 +
- linux-user/main.c           |  1 +
- system/memory.c             |  1 +
- target/i386/nvmm/nvmm-all.c |  1 +
- target/i386/whpx/whpx-all.c |  1 +
- 19 files changed, 70 insertions(+), 40 deletions(-)
- create mode 100644 include/accel/accel-ops.h
+I view it differently.  Why should the common case suffer overhead
+(extra memory read and conditional branch) to work around 3 buggy pieces
+of hardware in a common path?
+>>  }
+>>  
+>>  static void acpi_processor_ffh_cstate_enter(struct acpi_processor_cx *cx)
+>> diff --git a/xen/arch/x86/include/asm/hardirq.h b/xen/arch/x86/include/asm/hardirq.h
+>> index f3e93cc9b507..1647cff04dc8 100644
+>> --- a/xen/arch/x86/include/asm/hardirq.h
+>> +++ b/xen/arch/x86/include/asm/hardirq.h
+>> @@ -5,7 +5,19 @@
+>>  #include <xen/types.h>
+>>  
+>>  typedef struct {
+>> -    unsigned int __softirq_pending;
+>> +    /*
+>> +     * The layout is important.  Any CPU can set bits in __softirq_pending,
+>> +     * but in_mwait is a status bit owned by the CPU.  softirq_mwait_raw must
+>> +     * cover both, and must be in a single cacheline.
+>> +     */
+>> +    union {
+>> +        struct {
+>> +            unsigned int __softirq_pending;
+>> +            bool in_mwait;
+> Given the usage in assembly where you store 0 and 1, this might better
+> be a uint8_t then?
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 37d02b2313c..e3e08d4607f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -501,7 +501,7 @@ F: include/exec/target_long.h
- F: include/qemu/accel.h
- F: include/system/accel-*.h
- F: include/system/cpus.h
--F: include/accel/accel-cpu*.h
-+F: include/accel/accel-*.h
- F: accel/accel-*.?
- F: accel/dummy-cpus.?
- F: accel/Makefile.objs
-diff --git a/include/accel/accel-ops.h b/include/accel/accel-ops.h
-new file mode 100644
-index 00000000000..35e7d4c3b26
---- /dev/null
-+++ b/include/accel/accel-ops.h
-@@ -0,0 +1,50 @@
-+/*
-+ * Accelerator handlers
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef ACCEL_OPS_H
-+#define ACCEL_OPS_H
-+
-+#include "exec/hwaddr.h"
-+#include "qemu/accel.h"
-+#include "qom/object.h"
-+
-+struct AccelState {
-+    Object parent_obj;
-+};
-+
-+struct AccelClass {
-+    ObjectClass parent_class;
-+
-+    const char *name;
-+    /* Cached by accel_init_ops_interfaces() when created */
-+    AccelOpsClass *ops;
-+
-+    int (*init_machine)(AccelState *as, MachineState *ms);
-+    bool (*cpu_common_realize)(CPUState *cpu, Error **errp);
-+    void (*cpu_common_unrealize)(CPUState *cpu);
-+
-+    /* system related hooks */
-+    void (*setup_post)(AccelState *as);
-+    bool (*has_memory)(AccelState *accel, AddressSpace *as,
-+                       hwaddr start_addr, hwaddr size);
-+    bool (*cpus_are_resettable)(AccelState *as);
-+
-+    /* gdbstub related hooks */
-+    bool (*supports_guest_debug)(AccelState *as);
-+    int (*gdbstub_supported_sstep_flags)(AccelState *as);
-+
-+    bool *allowed;
-+    /*
-+     * Array of global properties that would be applied when specific
-+     * accelerator is chosen. It works like MachineClass.compat_props
-+     * but it's for accelerators not machines. Accelerator-provided
-+     * global properties may be overridden by machine-type
-+     * compat_props or user-provided global properties.
-+     */
-+    GPtrArray *compat_props;
-+};
-+
-+#endif /* ACCEL_OPS_H */
-diff --git a/include/qemu/accel.h b/include/qemu/accel.h
-index 3c6350d6d63..71293a3e2a9 100644
---- a/include/qemu/accel.h
-+++ b/include/qemu/accel.h
-@@ -26,44 +26,8 @@
- #include "qom/object.h"
- #include "exec/hwaddr.h"
- 
--struct AccelState {
--    /*< private >*/
--    Object parent_obj;
--};
--
--typedef struct AccelClass {
--    /*< private >*/
--    ObjectClass parent_class;
--    /*< public >*/
--
--    const char *name;
--    /* Cached by accel_init_ops_interfaces() when created */
--    AccelOpsClass *ops;
--
--    int (*init_machine)(AccelState *as, MachineState *ms);
--    bool (*cpu_common_realize)(CPUState *cpu, Error **errp);
--    void (*cpu_common_unrealize)(CPUState *cpu);
--
--    /* system related hooks */
--    void (*setup_post)(AccelState *as);
--    bool (*has_memory)(AccelState *accel, AddressSpace *as,
--                       hwaddr start_addr, hwaddr size);
--    bool (*cpus_are_resettable)(AccelState *as);
--
--    /* gdbstub related hooks */
--    bool (*supports_guest_debug)(AccelState *as);
--    int (*gdbstub_supported_sstep_flags)(AccelState *as);
--
--    bool *allowed;
--    /*
--     * Array of global properties that would be applied when specific
--     * accelerator is chosen. It works like MachineClass.compat_props
--     * but it's for accelerators not machines. Accelerator-provided
--     * global properties may be overridden by machine-type
--     * compat_props or user-provided global properties.
--     */
--    GPtrArray *compat_props;
--} AccelClass;
-+typedef struct AccelState AccelState;
-+typedef struct AccelClass AccelClass;
- 
- #define TYPE_ACCEL "accel"
- 
-diff --git a/include/system/hvf_int.h b/include/system/hvf_int.h
-index ecc49a309cf..8a443af3454 100644
---- a/include/system/hvf_int.h
-+++ b/include/system/hvf_int.h
-@@ -14,6 +14,7 @@
- #include "qemu/queue.h"
- #include "exec/vaddr.h"
- #include "qom/object.h"
-+#include "accel/accel-ops.h"
- 
- #ifdef __aarch64__
- #include <Hypervisor/Hypervisor.h>
-@@ -45,7 +46,7 @@ typedef struct hvf_vcpu_caps {
- } hvf_vcpu_caps;
- 
- struct HVFState {
--    AccelState parent;
-+    AccelState parent_obj;
- 
-     hvf_slot slots[32];
-     int num_slots;
-diff --git a/include/system/kvm_int.h b/include/system/kvm_int.h
-index 756a3c0a250..9247493b029 100644
---- a/include/system/kvm_int.h
-+++ b/include/system/kvm_int.h
-@@ -14,6 +14,7 @@
- #include "qemu/accel.h"
- #include "qemu/queue.h"
- #include "system/kvm.h"
-+#include "accel/accel-ops.h"
- #include "hw/boards.h"
- #include "hw/i386/topology.h"
- #include "io/channel-socket.h"
-diff --git a/accel/accel-common.c b/accel/accel-common.c
-index b490612447b..de2504e435e 100644
---- a/accel/accel-common.c
-+++ b/accel/accel-common.c
-@@ -10,6 +10,7 @@
- #include "qemu/osdep.h"
- #include "qemu/accel.h"
- #include "qemu/target-info.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "accel/accel-cpu.h"
- #include "accel-internal.h"
-diff --git a/accel/accel-system.c b/accel/accel-system.c
-index 451567e1a50..bce03c9ddeb 100644
---- a/accel/accel-system.c
-+++ b/accel/accel-system.c
-@@ -26,6 +26,7 @@
- #include "qemu/osdep.h"
- #include "qemu/accel.h"
- #include "hw/boards.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/cpus.h"
- #include "qemu/error-report.h"
-diff --git a/accel/hvf/hvf-all.c b/accel/hvf/hvf-all.c
-index 4fae4c79805..11514533a84 100644
---- a/accel/hvf/hvf-all.c
-+++ b/accel/hvf/hvf-all.c
-@@ -10,6 +10,7 @@
- 
- #include "qemu/osdep.h"
- #include "qemu/error-report.h"
-+#include "accel/accel-ops.h"
- #include "system/address-spaces.h"
- #include "system/memory.h"
- #include "system/hvf.h"
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index 9d1dc56d7e8..683116f68ff 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -32,6 +32,7 @@
- #include "system/runstate.h"
- #include "system/cpus.h"
- #include "system/accel-blocker.h"
-+#include "accel/accel-ops.h"
- #include "qemu/bswap.h"
- #include "exec/tswap.h"
- #include "system/memory.h"
-diff --git a/accel/qtest/qtest.c b/accel/qtest/qtest.c
-index a7fc8bee6dd..1d4337d698e 100644
---- a/accel/qtest/qtest.c
-+++ b/accel/qtest/qtest.c
-@@ -18,6 +18,7 @@
- #include "qemu/option.h"
- #include "qemu/config-file.h"
- #include "qemu/accel.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/qtest.h"
- #include "system/cpus.h"
-diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
-index 8f071d2cfeb..20802e24d46 100644
---- a/accel/tcg/tcg-accel-ops.c
-+++ b/accel/tcg/tcg-accel-ops.c
-@@ -26,6 +26,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/tcg.h"
- #include "system/replay.h"
-diff --git a/accel/tcg/tcg-all.c b/accel/tcg/tcg-all.c
-index 93972bc0919..829a7293b80 100644
---- a/accel/tcg/tcg-all.c
-+++ b/accel/tcg/tcg-all.c
-@@ -39,6 +39,7 @@
- #ifndef CONFIG_USER_ONLY
- #include "hw/boards.h"
- #endif
-+#include "accel/accel-ops.h"
- #include "accel/tcg/cpu-ops.h"
- #include "internal-common.h"
- 
-diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
-index 55a60bb42c2..97377d67d1c 100644
---- a/accel/xen/xen-all.c
-+++ b/accel/xen/xen-all.c
-@@ -19,6 +19,7 @@
- #include "chardev/char.h"
- #include "qemu/accel.h"
- #include "accel/dummy-cpus.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/cpus.h"
- #include "system/xen.h"
-diff --git a/bsd-user/main.c b/bsd-user/main.c
-index d0cc8e0088f..7e5d4bbce09 100644
---- a/bsd-user/main.c
-+++ b/bsd-user/main.c
-@@ -38,6 +38,7 @@
- #include "qemu/plugin.h"
- #include "user/guest-base.h"
- #include "user/page-protection.h"
-+#include "accel/accel-ops.h"
- #include "tcg/startup.h"
- #include "qemu/timer.h"
- #include "qemu/envlist.h"
-diff --git a/gdbstub/system.c b/gdbstub/system.c
-index 1c48915b6a5..11870a1585f 100644
---- a/gdbstub/system.c
-+++ b/gdbstub/system.c
-@@ -20,6 +20,7 @@
- #include "gdbstub/commands.h"
- #include "exec/hwaddr.h"
- #include "exec/tb-flush.h"
-+#include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/cpus.h"
- #include "system/runstate.h"
-diff --git a/linux-user/main.c b/linux-user/main.c
-index a9142ee7268..254cf2526a8 100644
---- a/linux-user/main.c
-+++ b/linux-user/main.c
-@@ -42,6 +42,7 @@
- #include "user/page-protection.h"
- #include "exec/gdbstub.h"
- #include "gdbstub/user.h"
-+#include "accel/accel-ops.h"
- #include "tcg/startup.h"
- #include "qemu/timer.h"
- #include "qemu/envlist.h"
-diff --git a/system/memory.c b/system/memory.c
-index b072a6bef83..13e833851a6 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -29,6 +29,7 @@
- #include "system/runstate.h"
- #include "system/tcg.h"
- #include "qemu/accel.h"
-+#include "accel/accel-ops.h"
- #include "hw/boards.h"
- #include "migration/vmstate.h"
- #include "system/address-spaces.h"
-diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
-index b4a4d50e860..aab12d77326 100644
---- a/target/i386/nvmm/nvmm-all.c
-+++ b/target/i386/nvmm/nvmm-all.c
-@@ -12,6 +12,7 @@
- #include "system/address-spaces.h"
- #include "system/ioport.h"
- #include "qemu/accel.h"
-+#include "accel/accel-ops.h"
- #include "system/nvmm.h"
- #include "system/cpus.h"
- #include "system/runstate.h"
-diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-index 721c4782b9c..2a90cde6d50 100644
---- a/target/i386/whpx/whpx-all.c
-+++ b/target/i386/whpx/whpx-all.c
-@@ -14,6 +14,7 @@
- #include "system/ioport.h"
- #include "gdbstub/helpers.h"
- #include "qemu/accel.h"
-+#include "accel/accel-ops.h"
- #include "system/whpx.h"
- #include "system/cpus.h"
- #include "system/runstate.h"
--- 
-2.49.0
+We have loads of asm code which accesses bool's like this.  C guarantees
+that sizeof(bool) >= sizeof(char).
 
+>
+>> +        };
+>> +        uint64_t softirq_mwait_raw;
+>> +    };
+> This could be a named union type ...
+>
+>> +
+>>      unsigned int __local_irq_count;
+>>      unsigned int nmi_count;
+>>      unsigned int mce_count;
+>> diff --git a/xen/arch/x86/include/asm/softirq.h b/xen/arch/x86/include/asm/softirq.h
+>> index e4b194f069fb..069e5716a68d 100644
+>> --- a/xen/arch/x86/include/asm/softirq.h
+>> +++ b/xen/arch/x86/include/asm/softirq.h
+>> @@ -1,6 +1,8 @@
+>>  #ifndef __ASM_SOFTIRQ_H__
+>>  #define __ASM_SOFTIRQ_H__
+>>  
+>> +#include <asm/system.h>
+>> +
+>>  #define NMI_SOFTIRQ            (NR_COMMON_SOFTIRQS + 0)
+>>  #define TIME_CALIBRATE_SOFTIRQ (NR_COMMON_SOFTIRQS + 1)
+>>  #define VCPU_KICK_SOFTIRQ      (NR_COMMON_SOFTIRQS + 2)
+>> @@ -9,4 +11,36 @@
+>>  #define HVM_DPCI_SOFTIRQ       (NR_COMMON_SOFTIRQS + 4)
+>>  #define NR_ARCH_SOFTIRQS       5
+>>  
+>> +/*
+>> + * Ensure softirq @nr is pending on @cpu.  Return true if an IPI can be
+>> + * skipped, false if the IPI cannot be skipped.
+>> + *
+>> + * We use a CMPXCHG covering both __softirq_pending and in_mwait, in order to
+>> + * set softirq @nr while also observing in_mwait in a race-free way.
+>> + */
+>> +static always_inline bool arch_pend_softirq(unsigned int nr, unsigned int cpu)
+>> +{
+>> +    uint64_t *ptr = &irq_stat[cpu].softirq_mwait_raw;
+>> +    uint64_t old, new;
+> ... so that you also use it here?
+
+No, it cant.  The of softirq_pending() in common code requires no
+intermediate field names, and I'm not untangling that mess in a series
+wanting backporting.
+
+~Andrew
 
