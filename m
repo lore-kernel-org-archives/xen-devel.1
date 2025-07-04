@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDAF4C8303D
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 09:41:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1033196.1406655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B59C83F03
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 09:41:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1033202.1406665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXcvM-0000Fx-D8; Fri, 04 Jul 2025 09:41:40 +0000
+	id 1uXcvS-0000gp-Pc; Fri, 04 Jul 2025 09:41:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1033196.1406655; Fri, 04 Jul 2025 09:41:40 +0000
+Received: by outflank-mailman (output) from mailman id 1033202.1406665; Fri, 04 Jul 2025 09:41:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXcvM-0000Fo-9j; Fri, 04 Jul 2025 09:41:40 +0000
-Received: by outflank-mailman (input) for mailman id 1033196;
- Fri, 04 Jul 2025 09:41:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uXcvS-0000gf-Mm; Fri, 04 Jul 2025 09:41:46 +0000
+Received: by outflank-mailman (input) for mailman id 1033202;
+ Fri, 04 Jul 2025 09:41:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MIza=ZR=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1uXcku-0007ek-GL
- for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 09:30:52 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061b.outbound.protection.outlook.com
- [2a01:111:f403:2413::61b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9145de10-58b9-11f0-b894-0df219b8e170;
- Fri, 04 Jul 2025 11:30:49 +0200 (CEST)
-Received: from SJ0PR03CA0366.namprd03.prod.outlook.com (2603:10b6:a03:3a1::11)
- by IA1PR12MB6233.namprd12.prod.outlook.com (2603:10b6:208:3e7::11)
+ id 1uXcl7-0006x0-8B
+ for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 09:31:05 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20606.outbound.protection.outlook.com
+ [2a01:111:f403:2416::606])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 99d37eb5-58b9-11f0-a315-13f23c93f187;
+ Fri, 04 Jul 2025 11:31:03 +0200 (CEST)
+Received: from SJ0PR03CA0101.namprd03.prod.outlook.com (2603:10b6:a03:333::16)
+ by MW4PR12MB5601.namprd12.prod.outlook.com (2603:10b6:303:168::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.34; Fri, 4 Jul
- 2025 09:30:43 +0000
-Received: from SJ1PEPF000023D1.namprd02.prod.outlook.com
- (2603:10b6:a03:3a1:cafe::5b) by SJ0PR03CA0366.outlook.office365.com
- (2603:10b6:a03:3a1::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.22 via Frontend Transport; Fri,
- 4 Jul 2025 09:30:43 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Fri, 4 Jul
+ 2025 09:30:57 +0000
+Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
+ (2603:10b6:a03:333:cafe::66) by SJ0PR03CA0101.outlook.office365.com
+ (2603:10b6:a03:333::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.21 via Frontend Transport; Fri,
+ 4 Jul 2025 09:30:57 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF000023D1.mail.protection.outlook.com (10.167.244.7) with Microsoft
+ SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.20 via Frontend Transport; Fri, 4 Jul 2025 09:30:43 +0000
+ 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 09:30:57 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Fri, 4 Jul 2025 04:30:40 -0500
+ 15.1.2507.39; Fri, 4 Jul 2025 04:30:52 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9145de10-58b9-11f0-b894-0df219b8e170
+X-Inumbo-ID: 99d37eb5-58b9-11f0-a315-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AF3hxc6QHr+LpOyQqPJkm1R+DhDKB0hsRzlpCCW5snmkkdKg4yE8oDPDYVk9X618pSDcrvSO5ZOvQdyOfL+1gIQTosMK+5iXHEsY2ZfysqcDM/ugvuPeYqL84lj2QR+gPqt10JGS1HQmz1jXIhKtboD/V5wAr9w7O5OQzppXFYn66uy2cP9RlWa1FG6cpgR8B8jKdEF3w6W5RvKV7A019zajVniU75h4RValuvH4+Yv29CVZ2qeMofUfBJz8XBRe30UEr8mXkhIl+hWm6C+6jHl9bVG/yN2LePzsc6RXJ4kA4nTjTaMDG6UahKearNOqb6/spJtzak+up84fBv71OQ==
+ b=QkbFTsu/YCmQtn2n8TPAAdP0i65GoOyXAwn/xyClmxDNddE047NmVKMwiF67VTb9CPR4D5TmlPNgfUK6eK9l7QiD7+7vauY0JJyDxG8n/CjabemK33I/fcktuy6OrPyO5/XP43SkXjdhnHwkQFXtjgCQrVT49nNgTJdbaFkP8aWNbqYcU0qhQamaSfb5wRrXqlveqgaGmWhamiJviRU+0HMpd9taWUq6IxynlXGKqlhBWVCFwFf/DPRI+sU5OpJvQVgztA4xu8UzFxVwl6YkQrZqVLFd1gtrx79PtltysL5UDwruWKN8AUVGNR1OdqNBfn52KQFidPDYD3llJymsCg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WvykzEStZK73rMFsbUxdbGQm1JqJFz8VY0tKPFQ221s=;
- b=Y65Ai0ZcZc1TA2fQRT4EYc8dSGUkc8QX26Q963ZZi3RoaY+KVjFX5Pejsj/4W0IwDEr36YWTBgwT34updcLR5FpJ885tnFI5AcyizNWaK45ijqU6LCDADwvDC+F1aLqnXE+uEp/NguNyN70UTgOT585UhokGVdo7bwUeTgP80QgRF6r24cDgkznhNowbyC/BFTw6SWJIiiZtPhI4IgvQ5nEkIxF0+iX/ae/npwaWhQuXtPX9tZvwCFtZhflBcmXAvfom9uqfkrto5+D4x/i+tJARq6/c4Rc1hY2iFC4fvibYQWe1oe4ieAfg96us2j/WgMsZ5Y7lGOMD5DamOPk1ng==
+ bh=dFLZ7b6gl3GP+IHNPjkhHrTHCTAFBKAP01UJHvvbNv4=;
+ b=JeLtmxB/8ufRdoP8zlRChN3B/SCiumqWsxsYDXi3v/yJ14jRAPMf6z0z8AuFzSpaXVeuWwCSlRfvS9AGL4L+dF+BrXvPJEuh0WDc6hiF0aDvBiwI9BiQI/fH0cxeCajSS1RG6dx6YjKaO4KLcgLDKrn03FjX2nSKpLpp4hng+oMI3YWOGexmSr+ibW2l9ekMSrxjg/mdxFPWS4CVpZm9N9LfUw/KVjmsYfmAeyDkbiKcW348oLkFKqKPNJ6chjZ2EAWQJZryZUb7IeIzRM2oql3FbGHCHndrrLll7o9wW5Cm/knekO5dOnY6AQeDkaB93LZEYzeX4HSV8jOA1ZnuEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WvykzEStZK73rMFsbUxdbGQm1JqJFz8VY0tKPFQ221s=;
- b=HwyZNlbsYZeHKXAimwYS23nWRhCMHaFxlQ3MDq2SK4aSwI90nuX3EU9MSm57/oLhl6JanKTA0WPM9gOs7UFheaXbS1jhvGS5JzIJRw4IdZva8OG51kVyAH7xSktQ0q948Zl1SvM/vBxozTJ09zt8LDbtuRiW18N8V1rWV7LLIEA=
+ bh=dFLZ7b6gl3GP+IHNPjkhHrTHCTAFBKAP01UJHvvbNv4=;
+ b=sisBwPAgVo5DjAWOX/ls8+qup7s6IwDLnFB4kOawpsrWWul/U8DGGBHtxh91B+o7EXRkPUgIm8RCcZ3nAi/Cna3E/JHjjLePRSdO7hpNPr3NMkSxZJVqFgoXf9g4iMUa88ZN7L9TLe6w+Tu4nlcHrXPaarxsWvMW7rTs+wEdf48=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -81,15 +81,20 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>, <xen-devel@dornerworks.com>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Nathan Studer
-	<nathan.studer@dornerworks.com>, Stewart Hildebrand <stewart@stew.dk>, "Dario
- Faggioli" <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George
- Dunlap <gwd@xenproject.org>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 12/18] xen/sysctl: wrap around XEN_SYSCTL_scheduler_op
-Date: Fri, 4 Jul 2025 17:29:46 +0800
-Message-ID: <20250704092952.822578-13-Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, "Connor
+ Davis" <connojdavis@gmail.com>, Oleksii Kurochko
+	<oleksii.kurochko@gmail.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, "Stefano Stabellini" <stefano.stabellini@amd.com>,
+	Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+Subject: [PATCH v6 16/18] xen/sysctl: wrap around arch-specific arch_do_sysctl
+Date: Fri, 4 Jul 2025 17:29:50 +0800
+Message-ID: <20250704092952.822578-17-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250704092952.822578-1-Penny.Zheng@amd.com>
 References: <20250704092952.822578-1-Penny.Zheng@amd.com>
@@ -101,306 +106,311 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D1:EE_|IA1PR12MB6233:EE_
-X-MS-Office365-Filtering-Correlation-Id: 10446184-5f46-424d-a4a1-08ddbadd72f6
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|MW4PR12MB5601:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9c8a26b-3ec7-447f-85c8-08ddbadd7b56
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
+	BCL:0;ARA:13230040|7416014|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?BhJ6PBbVFXHuRXzGSSdZ1xxxSIjYe/JjFoWM7P29SMEkowGWEDTLk/UoJlWQ?=
- =?us-ascii?Q?A3/al/X5AMpc52bZAp9R8nYxfufwHayskrCqwYNEAg3x8GIDqOvd2NbODaMM?=
- =?us-ascii?Q?o83VGkD+o9NB9vtF7o77+OobeASEWPYicugNN5bAdjDcOgekdprmZQsGZ2I+?=
- =?us-ascii?Q?BQS4x0eOMAY0sHfdY/nNoBndLzhOUoVEyiFxLa0tthe6Z5gPlpXRgClTqarB?=
- =?us-ascii?Q?Xeolz2ywZ66uR/K8UKKbtQGzn3qxGndQA4UNRUFHf9yveDuDCsnzbP+izqrE?=
- =?us-ascii?Q?awVmEIR9qpOMi/SpYz1NMg0wsBKeVyTBxeY4XbAcdmPFSHtkwVHf6ZnaBlZl?=
- =?us-ascii?Q?ZU4HDJr1rxMs1M6sZdlGG4o+SboWD8PDqsr/B5uLMpcHKIn7rfIOe9ICDUWT?=
- =?us-ascii?Q?RI7Dpi6jIEHrguYMvXODcA23wNp2sPe9jA/E71cRLfHQt/GTG3Toe9E2ApZR?=
- =?us-ascii?Q?OmDz4HbPrMVJZvOKG9XEYhE2h0e/r3jrevyLrehbNcgtnS0df/QlmDY0EPfG?=
- =?us-ascii?Q?j03rY1/cG6hpJLgYaKhILE3aOK4Rr8KgJhEvTnMeYztCp9pMfaeo90exuQkU?=
- =?us-ascii?Q?iDXoS1+LuX+QAH4w0cv2pvuDZRFv8C4PiRW9laaCtxppG+Jz0mAxjr0q9O+r?=
- =?us-ascii?Q?ioMyD/uQuZBYpvZcntM5eTYYJVfUisa5s1qHcJ0E9ID0peBd5UXUHGSkX/6I?=
- =?us-ascii?Q?6Z+XwPwORpQKyTEirTR20sRORzQB5FR16jE+uz+RZkJO26HXxLdCTjo7Eu+Q?=
- =?us-ascii?Q?kaIrWwd/qMTMIHyKGhT4hPmzP8xrHxsBrAoGQ+mQJG69kmmH7aHAFcskHCKp?=
- =?us-ascii?Q?X4DJUYqW5vPzgo9t+17G2Bhxm1zdu6fcmWXWHSXigXuX25/gnOFb2bk5fhtz?=
- =?us-ascii?Q?BpkxxZzetpkRshVqGSydRlh3iKwPShPP278QudzH4fCIBtZxk3gb6azXXfVV?=
- =?us-ascii?Q?/zT5vo5ZIgqwVBja/bBZ3V4uRzb0BdkeVDLxolEhtT4Z/qImc9ousv7xNP18?=
- =?us-ascii?Q?8R3KhStRzhQa/2ud8xwM/IbvtlroYiXO6svhOvknMyNsRn3OhmHCJe9mqxOj?=
- =?us-ascii?Q?y03K2bcO+s/abxttABbBGjRt1f0xOn9OOo2buRW6vHRh72IvsJ6/ahWznIVv?=
- =?us-ascii?Q?5s0+e4PiirEzW+n5bQpQJu3iD7QHlmh1QMJ0J6J/zl+OTcktYcdRsKJkvph5?=
- =?us-ascii?Q?XavqfaaP8cy45yZQ4qbf90EudaDOn6R+EX3d/eKs6omGwoMHQtdSmIVZcUW2?=
- =?us-ascii?Q?DuLnr+OwftvE1cR81wgs6ttf9kJVrCq9Tvhm63dKkNaQlqG1p8/MKb3PhD5X?=
- =?us-ascii?Q?O3aYh/6FCimNwJiZGiwTCxdEy6rmHcNysXkvIeHMzmwq+yVX2RxSxJ6zGU6Q?=
- =?us-ascii?Q?JS63PPTKNHFgG+t+/uyTdxJtAK3npmQYtmqm0RSkHPit9rQIMTOnhgEDMMFG?=
- =?us-ascii?Q?y83ljqDfXPyEkkSltqRnG1EgS6+gl5Q1s04YlWAwjnaIYqxbCy1QgKQoUquX?=
- =?us-ascii?Q?5jG6uAVbZgCwIIK0+LcEhJipRlaUFq9zZXwA?=
+	=?us-ascii?Q?KxHV+irsv3/P+sNVzmL6+bHDtnG2SZSHxpWEJhttr487ZoQFE9EtcReR41P/?=
+ =?us-ascii?Q?H10ezaUXbMWLJSItaioeQo4CVs5AT22cesUWkS4cW/tVoqdLYoY34ydZgI+c?=
+ =?us-ascii?Q?fL6GswFwPPYwjs3ZnZaIuMMCNOzk/YjgumpzeoUCVgzt62IalIavG7dLFhSM?=
+ =?us-ascii?Q?HsmXDqK3ch3IFiUg14izR70pEpQxJpnJ8hg2ZFSSD0YK37fAPRsdNgog2TNl?=
+ =?us-ascii?Q?6kdWP3t6jsjwRO8EN+tuoOWhkXy4slspd1car1nW22VqNxVcLmoWe2RTXal5?=
+ =?us-ascii?Q?uPlakwUMbXayvi9JrPiizFGz6qstkoWH/Qbfl3Jd+XhV2vDKQLZzbXDBl2L5?=
+ =?us-ascii?Q?xHTDvngKMuLEUZZncEgF9TuzdFvVjfEZoA+BBgKUFeDoYuO7ZI9m6hcJugTd?=
+ =?us-ascii?Q?3n83yG2wazMOkInPVVRQjLh/wKn7apBis5s5khs0cL0ui/WMpRp9Au/iaOXy?=
+ =?us-ascii?Q?TaoDEgwFy0fE9KNZUgOn80m/Jflss9opUGR0jElHFhH/ZurijggfJq4uu0/k?=
+ =?us-ascii?Q?Ow+BuhK2BWb/lFQZ2PhzaNXXJhy8b7ubjB1w3OfgGjSSBT3ZsSdrym63nVGf?=
+ =?us-ascii?Q?1R0aBqgTVQjfXl0pq6Mkuy/EvjHpptlGMjmKV1v2SqJ1S1T6fq8gnNNawmlD?=
+ =?us-ascii?Q?JIgMEu2F7PWPNUDOjfO4muWaF9aKvD1lf+PnuOZaOIX6idl/1rwwVLgPS5Kx?=
+ =?us-ascii?Q?4wnYGqvaeqA3SgKFIWrI2xZyuOUZX3BN0bMmqIbkM458wP33jWQtp3hRabfG?=
+ =?us-ascii?Q?9tAKNqx0Vq9K/byhmbcarlZnDt3ECKKpxZgqL4fDmSAwsWcnzdl5q1qJtUyc?=
+ =?us-ascii?Q?haxG0o8y4jS9bBEy3PaWqXEmMjAjStuALF89OYNGx8cC8x5UY+fi8Oc+G+ub?=
+ =?us-ascii?Q?Z13XeMj9Hwrlsbf4IfX1BzgGxjYHVvEEQNM45SIFsXVVez1p6Y+pISu5vCA2?=
+ =?us-ascii?Q?5GzgBK8WXCeUZzk+KWNBxBM4aq8SSFjpLVN4pJ3FpoXb6R5dBOf0GMnHqlCe?=
+ =?us-ascii?Q?EVj67iEHjVJyCaaZwQ96PswAhD9/Pm/3b1TBB7JzoiBNH7r5aR1516ErP+6E?=
+ =?us-ascii?Q?Xpm64YJlrt21bYJuGXb3aaNzlXC4rgW+PYHMWoXDvED/90UnC9+YOqza59xw?=
+ =?us-ascii?Q?tMtodGE5DkbXFVu7KtyR5G1Wk+r9Da1U3lUsNmxOSZy6dUeM9RhY3/pLqTP9?=
+ =?us-ascii?Q?vIDom4uadyBbLrg4mbsiZvPYxQYPBB5LgAipfDvXzk5U7ZxAt6hsfTDhR9ys?=
+ =?us-ascii?Q?ewkuxWNA4lDnh3XSm1F3Pn/KNml2YAutjRMI9pOI/P+nL1HHnBhDk7VctfiF?=
+ =?us-ascii?Q?+NJgllb9QkElaZaFhHzt6ULFHbHvd8m/3oVsOPU5WFt1Z1UmQywixixuZBoE?=
+ =?us-ascii?Q?jqt//cr2wjn3iI/Hu/kYuQvc94ZRBP8PXlDIxvxK3vuEjsDvxnPVmTvJLqNF?=
+ =?us-ascii?Q?pjBuFWY8brFbGvszL/NMYF+kWbgOFPdBNfEjq33lrYIKG2zpH9iXFfF/5j/t?=
+ =?us-ascii?Q?FbbzPt+CttQld3isRjBr15yjJqGaaIZwfUBO?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:30:43.4441
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:30:57.4933
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 10446184-5f46-424d-a4a1-08ddbadd72f6
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9c8a26b-3ec7-447f-85c8-08ddbadd7b56
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023D1.namprd02.prod.outlook.com
+	SJ1PEPF000023CB.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6233
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5601
 
-Function sched_adjust_global is designed for XEN_SYSCTL_scheduler_op, so
-itself and its calling flow, like .adjust_global, shall all be wrapped.
+Function arch_do_sysctl is to perform arch-specific sysctl op.
+Some functions, like psr_get_info() for x86, DTB overlay support for arm,
+are solely available through sysctl op, then they all shall be wrapped
+with CONFIG_SYSCTL
 
+Also, remove all #ifdef CONFIG_SYSCTL-s in arch-specific sysctl.c, as
+we put the guardian in Makefile for the whole file.
+Since PV_SHIM_EXCLUSIVE needs sorting in the future, we move
+obj-$(CONFIG_SYSCTL) += sysctl.o out of PV_SHIM_EXCLUSIVE condition.
+
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Stewart Hildebrand <stewart@stew.dk> #a653
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 v1 -> v2:
-- no need to wrap declarations
+- use "depends on" for config OVERLAY_DTB
+- no need to wrap declaration
 - add transient #ifdef in sysctl.c for correct compilation
 ---
 v2 -> v3:
-- move #endif up ahead of the blank line
+- move obj-$(CONFIG_SYSCTL) += sysctl.o out of PV_SHIM_EXCLUSIVE condition
+- move copyback out of #ifdef
+- add #else process for default label
 ---
 v3 -> v4:
 - remove transient "#ifdef CONFIG_SYSCTL"
+- move #ifdef ahead of the comment
 ---
- xen/common/sched/arinc653.c | 6 ++++++
- xen/common/sched/core.c     | 2 ++
- xen/common/sched/credit.c   | 4 ++++
- xen/common/sched/credit2.c  | 4 ++++
- xen/common/sched/private.h  | 4 ++++
- xen/include/xsm/xsm.h       | 4 ++++
- xen/xsm/dummy.c             | 2 ++
- xen/xsm/flask/hooks.c       | 4 ++++
- 8 files changed, 30 insertions(+)
+ xen/arch/arm/Kconfig   |  1 +
+ xen/arch/arm/Makefile  |  2 +-
+ xen/arch/arm/sysctl.c  |  2 --
+ xen/arch/riscv/stubs.c |  2 +-
+ xen/arch/x86/Makefile  |  2 +-
+ xen/arch/x86/psr.c     | 18 ++++++++++++++++++
+ xen/arch/x86/sysctl.c  |  2 --
+ 7 files changed, 22 insertions(+), 7 deletions(-)
 
-diff --git a/xen/common/sched/arinc653.c b/xen/common/sched/arinc653.c
-index 432ccfe662..3c014c9934 100644
---- a/xen/common/sched/arinc653.c
-+++ b/xen/common/sched/arinc653.c
-@@ -220,6 +220,7 @@ static void update_schedule_units(const struct scheduler *ops)
-                       SCHED_PRIV(ops)->schedule[i].unit_id);
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 3f25da3ca5..e076419d5e 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -139,6 +139,7 @@ config HAS_ITS
+ 
+ config OVERLAY_DTB
+ 	bool "DTB overlay support (UNSUPPORTED)" if UNSUPPORTED
++	depends on SYSCTL
+ 	help
+ 	  Dynamic addition/removal of Xen device tree nodes using a dtbo.
+ 
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index ab0a0c2be6..f833cdf207 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -51,7 +51,7 @@ obj-y += setup.o
+ obj-y += shutdown.o
+ obj-y += smp.o
+ obj-y += smpboot.o
+-obj-y += sysctl.o
++obj-$(CONFIG_SYSCTL) += sysctl.o
+ obj-y += time.o
+ obj-y += traps.o
+ obj-y += vcpreg.o
+diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
+index 2d350b700a..32cab4feff 100644
+--- a/xen/arch/arm/sysctl.c
++++ b/xen/arch/arm/sysctl.c
+@@ -15,7 +15,6 @@
+ #include <asm/arm64/sve.h>
+ #include <public/sysctl.h>
+ 
+-#ifdef CONFIG_SYSCTL
+ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+ {
+     pi->capabilities |= XEN_SYSCTL_PHYSCAP_hvm | XEN_SYSCTL_PHYSCAP_hap;
+@@ -23,7 +22,6 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+     pi->arch_capabilities |= MASK_INSR(sve_encode_vl(get_sys_vl_len()),
+                                        XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
+ }
+-#endif
+ 
+ long arch_do_sysctl(struct xen_sysctl *sysctl,
+                     XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index f86a1c17cb..8918cebf35 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -302,6 +302,7 @@ unsigned long raw_copy_from_guest(void *to, const void __user *from,
+     BUG_ON("unimplemented");
  }
  
 +#ifdef CONFIG_SYSCTL
- /**
-  * This function is called by the adjust_global scheduler hook to put
-  * in place a new ARINC653 schedule.
-@@ -334,6 +335,7 @@ arinc653_sched_get(
+ /* sysctl.c */
  
-     return 0;
+ long arch_do_sysctl(struct xen_sysctl *sysctl,
+@@ -310,7 +311,6 @@ long arch_do_sysctl(struct xen_sysctl *sysctl,
+     BUG_ON("unimplemented");
  }
-+#endif /* CONFIG_SYSCTL */
  
- /**************************************************************************
-  * Scheduler callback functions                                           *
-@@ -653,6 +655,7 @@ a653_switch_sched(struct scheduler *new_ops, unsigned int cpu,
-     return &sr->_lock;
- }
+-#ifdef CONFIG_SYSCTL
+ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+ {
+     BUG_ON("unimplemented");
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index ce724a9daa..96d63219e7 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -63,6 +63,7 @@ obj-y += smpboot.o
+ obj-y += spec_ctrl.o
+ obj-y += srat.o
+ obj-y += string.o
++obj-$(CONFIG_SYSCTL) += sysctl.o
+ obj-y += time.o
+ obj-y += traps-setup.o
+ obj-y += traps.o
+@@ -78,7 +79,6 @@ ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
+ obj-y += domctl.o
+ obj-y += platform_hypercall.o
+ obj-$(CONFIG_COMPAT) += x86_64/platform_hypercall.o
+-obj-y += sysctl.o
+ endif
+ 
+ extra-y += asm-macros.i
+diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
+index 5815a35335..499d320e61 100644
+--- a/xen/arch/x86/psr.c
++++ b/xen/arch/x86/psr.c
+@@ -133,9 +133,11 @@ static const struct feat_props {
+      */
+     enum psr_type alt_type;
  
 +#ifdef CONFIG_SYSCTL
- /**
-  * Xen scheduler callback function to perform a global (not domain-specific)
-  * adjustment. It is used by the ARINC 653 scheduler to put in place a new
-@@ -692,6 +695,7 @@ a653sched_adjust_global(const struct scheduler *ops,
- 
-     return rc;
- }
-+#endif /* CONFIG_SYSCTL */
- 
- /**
-  * This structure defines our scheduler for Xen.
-@@ -726,7 +730,9 @@ static const struct scheduler sched_arinc653_def = {
-     .switch_sched   = a653_switch_sched,
- 
-     .adjust         = NULL,
-+#ifdef CONFIG_SYSCTL
-     .adjust_global  = a653sched_adjust_global,
+     /* get_feat_info is used to return feature HW info through sysctl. */
+     bool (*get_feat_info)(const struct feat_node *feat,
+                           uint32_t data[], unsigned int array_len);
 +#endif
  
-     .dump_settings  = NULL,
-     .dump_cpu_state = NULL,
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 13fdf57e57..ea95dea65a 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -2112,6 +2112,7 @@ long sched_adjust(struct domain *d, struct xen_domctl_scheduler_op *op)
+     /* write_msr is used to write out feature MSR register. */
+     void (*write_msr)(unsigned int cos, uint32_t val, enum psr_type type);
+@@ -418,6 +420,7 @@ static bool mba_init_feature(const struct cpuid_leaf *regs,
+     return true;
+ }
+ 
++#ifdef CONFIG_SYSCTL
+ static bool cf_check cat_get_feat_info(
+     const struct feat_node *feat, uint32_t data[], unsigned int array_len)
+ {
+@@ -430,6 +433,7 @@ static bool cf_check cat_get_feat_info(
+ 
+     return true;
+ }
++#endif /* CONFIG_SYSCTL */
+ 
+ /* L3 CAT props */
+ static void cf_check l3_cat_write_msr(
+@@ -442,11 +446,14 @@ static const struct feat_props l3_cat_props = {
+     .cos_num = 1,
+     .type[0] = PSR_TYPE_L3_CBM,
+     .alt_type = PSR_TYPE_UNKNOWN,
++#ifdef CONFIG_SYSCTL
+     .get_feat_info = cat_get_feat_info,
++#endif
+     .write_msr = l3_cat_write_msr,
+     .sanitize = cat_check_cbm,
+ };
+ 
++#ifdef CONFIG_SYSCTL
+ /* L3 CDP props */
+ static bool cf_check l3_cdp_get_feat_info(
+     const struct feat_node *feat, uint32_t data[], uint32_t array_len)
+@@ -458,6 +465,7 @@ static bool cf_check l3_cdp_get_feat_info(
+ 
+     return true;
+ }
++#endif /* CONFIG_SYSCTL */
+ 
+ static void cf_check l3_cdp_write_msr(
+     unsigned int cos, uint32_t val, enum psr_type type)
+@@ -473,7 +481,9 @@ static const struct feat_props l3_cdp_props = {
+     .type[0] = PSR_TYPE_L3_DATA,
+     .type[1] = PSR_TYPE_L3_CODE,
+     .alt_type = PSR_TYPE_L3_CBM,
++#ifdef CONFIG_SYSCTL
+     .get_feat_info = l3_cdp_get_feat_info,
++#endif
+     .write_msr = l3_cdp_write_msr,
+     .sanitize = cat_check_cbm,
+ };
+@@ -489,11 +499,14 @@ static const struct feat_props l2_cat_props = {
+     .cos_num = 1,
+     .type[0] = PSR_TYPE_L2_CBM,
+     .alt_type = PSR_TYPE_UNKNOWN,
++#ifdef CONFIG_SYSCTL
+     .get_feat_info = cat_get_feat_info,
++#endif
+     .write_msr = l2_cat_write_msr,
+     .sanitize = cat_check_cbm,
+ };
+ 
++#ifdef CONFIG_SYSCTL
+ /* MBA props */
+ static bool cf_check mba_get_feat_info(
+     const struct feat_node *feat, uint32_t data[], unsigned int array_len)
+@@ -508,6 +521,7 @@ static bool cf_check mba_get_feat_info(
+ 
+     return true;
+ }
++#endif /* CONFIG_SYSCTL */
+ 
+ static void cf_check mba_write_msr(
+     unsigned int cos, uint32_t val, enum psr_type type)
+@@ -545,7 +559,9 @@ static const struct feat_props mba_props = {
+     .cos_num = 1,
+     .type[0] = PSR_TYPE_MBA_THRTL,
+     .alt_type = PSR_TYPE_UNKNOWN,
++#ifdef CONFIG_SYSCTL
+     .get_feat_info = mba_get_feat_info,
++#endif
+     .write_msr = mba_write_msr,
+     .sanitize = mba_sanitize_thrtl,
+ };
+@@ -808,6 +824,7 @@ static struct psr_socket_info *get_socket_info(unsigned int socket)
+     return socket_info + socket;
+ }
+ 
++#ifdef CONFIG_SYSCTL
+ int psr_get_info(unsigned int socket, enum psr_type type,
+                  uint32_t data[], unsigned int array_len)
+ {
+@@ -839,6 +856,7 @@ int psr_get_info(unsigned int socket, enum psr_type type,
+ 
+     return -EINVAL;
+ }
++#endif /* CONFIG_SYSCTL */
+ 
+ int psr_get_val(struct domain *d, unsigned int socket,
+                 uint32_t *val, enum psr_type type)
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index f64addbe2b..1b04947516 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -91,7 +91,6 @@ static long cf_check smt_up_down_helper(void *data)
      return ret;
  }
  
-+#ifdef CONFIG_SYSCTL
- long sched_adjust_global(struct xen_sysctl_scheduler_op *op)
+-#ifdef CONFIG_SYSCTL
+ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
  {
-     struct cpupool *pool;
-@@ -2140,6 +2141,7 @@ long sched_adjust_global(struct xen_sysctl_scheduler_op *op)
- 
-     return rc;
+     memcpy(pi->hw_cap, boot_cpu_data.x86_capability,
+@@ -105,7 +104,6 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+     if ( IS_ENABLED(CONFIG_SHADOW_PAGING) )
+         pi->capabilities |= XEN_SYSCTL_PHYSCAP_shadow;
  }
-+#endif /* CONFIG_SYSCTL */
+-#endif /* CONFIG_SYSCTL */
  
- static void vcpu_periodic_timer_work_locked(struct vcpu *v)
- {
-diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
-index a6bb321e7d..6dcf6b2c8b 100644
---- a/xen/common/sched/credit.c
-+++ b/xen/common/sched/credit.c
-@@ -1256,6 +1256,7 @@ __csched_set_tslice(struct csched_private *prv, unsigned int timeslice_ms)
-     prv->credit = prv->credits_per_tslice * prv->ncpus;
- }
- 
-+#ifdef CONFIG_SYSCTL
- static int cf_check
- csched_sys_cntl(const struct scheduler *ops,
-                         struct xen_sysctl_scheduler_op *sc)
-@@ -1298,6 +1299,7 @@ csched_sys_cntl(const struct scheduler *ops,
-     out:
-     return rc;
- }
-+#endif /* CONFIG_SYSCTL */
- 
- static void *cf_check
- csched_alloc_domdata(const struct scheduler *ops, struct domain *dom)
-@@ -2288,7 +2290,9 @@ static const struct scheduler sched_credit_def = {
- 
-     .adjust         = csched_dom_cntl,
-     .adjust_affinity= csched_aff_cntl,
-+#ifdef CONFIG_SYSCTL
-     .adjust_global  = csched_sys_cntl,
-+#endif
- 
-     .pick_resource  = csched_res_pick,
-     .do_schedule    = csched_schedule,
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index 0a83f23725..0b3b61df57 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -3131,6 +3131,7 @@ csched2_aff_cntl(const struct scheduler *ops, struct sched_unit *unit,
-         __clear_bit(__CSFLAG_pinned, &svc->flags);
- }
- 
-+#ifdef CONFIG_SYSCTL
- static int cf_check csched2_sys_cntl(
-     const struct scheduler *ops, struct xen_sysctl_scheduler_op *sc)
- {
-@@ -3162,6 +3163,7 @@ static int cf_check csched2_sys_cntl(
- 
-     return 0;
- }
-+#endif /* CONFIG_SYSCTL */
- 
- static void *cf_check
- csched2_alloc_domdata(const struct scheduler *ops, struct domain *dom)
-@@ -4232,7 +4234,9 @@ static const struct scheduler sched_credit2_def = {
- 
-     .adjust         = csched2_dom_cntl,
-     .adjust_affinity= csched2_aff_cntl,
-+#ifdef CONFIG_SYSCTL
-     .adjust_global  = csched2_sys_cntl,
-+#endif
- 
-     .pick_resource  = csched2_res_pick,
-     .migrate        = csched2_unit_migrate,
-diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
-index c0e7c96d24..d6884550cd 100644
---- a/xen/common/sched/private.h
-+++ b/xen/common/sched/private.h
-@@ -356,8 +356,10 @@ struct scheduler {
-                                     struct sched_unit *unit,
-                                     const struct cpumask *hard,
-                                     const struct cpumask *soft);
-+#ifdef CONFIG_SYSCTL
-     int          (*adjust_global)  (const struct scheduler *ops,
-                                     struct xen_sysctl_scheduler_op *sc);
-+#endif
-     void         (*dump_settings)  (const struct scheduler *ops);
-     void         (*dump_cpu_state) (const struct scheduler *ops, int cpu);
-     void         (*move_timers)    (const struct scheduler *ops,
-@@ -510,11 +512,13 @@ static inline int sched_adjust_dom(const struct scheduler *s, struct domain *d,
-     return s->adjust ? s->adjust(s, d, op) : 0;
- }
- 
-+#ifdef CONFIG_SYSCTL
- static inline int sched_adjust_cpupool(const struct scheduler *s,
-                                        struct xen_sysctl_scheduler_op *op)
- {
-     return s->adjust_global ? s->adjust_global(s, op) : 0;
- }
-+#endif
- 
- static inline void sched_move_timers(const struct scheduler *s,
-                                      struct sched_resource *sr)
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 5ac99904c4..6e1789c314 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -57,7 +57,9 @@ struct xsm_ops {
-     int (*domain_create)(struct domain *d, uint32_t ssidref);
-     int (*getdomaininfo)(struct domain *d);
-     int (*domctl_scheduler_op)(struct domain *d, int op);
-+#ifdef CONFIG_SYSCTL
-     int (*sysctl_scheduler_op)(int op);
-+#endif
-     int (*set_target)(struct domain *d, struct domain *e);
-     int (*domctl)(struct domain *d, unsigned int cmd, uint32_t ssidref);
-     int (*sysctl)(int cmd);
-@@ -244,10 +246,12 @@ static inline int xsm_domctl_scheduler_op(
-     return alternative_call(xsm_ops.domctl_scheduler_op, d, cmd);
- }
- 
-+#ifdef CONFIG_SYSCTL
- static inline int xsm_sysctl_scheduler_op(xsm_default_t def, int cmd)
- {
-     return alternative_call(xsm_ops.sysctl_scheduler_op, cmd);
- }
-+#endif
- 
- static inline int xsm_set_target(
-     xsm_default_t def, struct domain *d, struct domain *e)
-diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index d46413ad8c..8d44f5bfb6 100644
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -19,7 +19,9 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .domain_create                 = xsm_domain_create,
-     .getdomaininfo                 = xsm_getdomaininfo,
-     .domctl_scheduler_op           = xsm_domctl_scheduler_op,
-+#ifdef CONFIG_SYSCTL
-     .sysctl_scheduler_op           = xsm_sysctl_scheduler_op,
-+#endif
-     .set_target                    = xsm_set_target,
-     .domctl                        = xsm_domctl,
- #ifdef CONFIG_SYSCTL
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 45c12aa662..a7cb33a718 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -626,6 +626,7 @@ static int cf_check flask_domctl_scheduler_op(struct domain *d, int op)
-     }
- }
- 
-+#ifdef CONFIG_SYSCTL
- static int cf_check flask_sysctl_scheduler_op(int op)
- {
-     switch ( op )
-@@ -640,6 +641,7 @@ static int cf_check flask_sysctl_scheduler_op(int op)
-         return avc_unknown_permission("sysctl_scheduler_op", op);
-     }
- }
-+#endif /* CONFIG_SYSCTL */
- 
- static int cf_check flask_set_target(struct domain *d, struct domain *t)
- {
-@@ -1887,7 +1889,9 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .domain_create = flask_domain_create,
-     .getdomaininfo = flask_getdomaininfo,
-     .domctl_scheduler_op = flask_domctl_scheduler_op,
-+#ifdef CONFIG_SYSCTL
-     .sysctl_scheduler_op = flask_sysctl_scheduler_op,
-+#endif
-     .set_target = flask_set_target,
-     .domctl = flask_domctl,
- #ifdef CONFIG_SYSCTL
+ long arch_do_sysctl(
+     struct xen_sysctl *sysctl, XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
 -- 
 2.34.1
 
