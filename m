@@ -4,56 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1398FC83030
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 09:09:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1033071.1406485 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C420C83F03
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 09:30:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1033086.1406515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXcPW-0002fI-KM; Fri, 04 Jul 2025 09:08:46 +0000
+	id 1uXckU-0007PM-R4; Fri, 04 Jul 2025 09:30:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1033071.1406485; Fri, 04 Jul 2025 09:08:46 +0000
+Received: by outflank-mailman (output) from mailman id 1033086.1406515; Fri, 04 Jul 2025 09:30:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXcPW-0002fB-HE; Fri, 04 Jul 2025 09:08:46 +0000
-Received: by outflank-mailman (input) for mailman id 1033071;
- Fri, 04 Jul 2025 09:08:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uXckU-0007PF-OI; Fri, 04 Jul 2025 09:30:26 +0000
+Received: by outflank-mailman (input) for mailman id 1033086;
+ Fri, 04 Jul 2025 09:30:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aOXq=ZR=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1uXcPW-0002f5-2M
- for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 09:08:46 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20603.outbound.protection.outlook.com
- [2a01:111:f403:2414::603])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b517149-58b6-11f0-b894-0df219b8e170;
- Fri, 04 Jul 2025 11:08:43 +0200 (CEST)
-Received: from MW4PR04CA0308.namprd04.prod.outlook.com (2603:10b6:303:82::13)
- by BN7PPF8FCE094C0.namprd12.prod.outlook.com
- (2603:10b6:40f:fc02::6d8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.34; Fri, 4 Jul
- 2025 09:08:39 +0000
-Received: from SJ5PEPF00000209.namprd05.prod.outlook.com
- (2603:10b6:303:82:cafe::3d) by MW4PR04CA0308.outlook.office365.com
- (2603:10b6:303:82::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.22 via Frontend Transport; Fri,
- 4 Jul 2025 09:08:38 +0000
+ <SRS0=MIza=ZR=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
+ id 1uXckT-0006x0-3z
+ for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 09:30:25 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20606.outbound.protection.outlook.com
+ [2a01:111:f403:2412::606])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8254f656-58b9-11f0-a315-13f23c93f187;
+ Fri, 04 Jul 2025 11:30:24 +0200 (CEST)
+Received: from BN9PR03CA0404.namprd03.prod.outlook.com (2603:10b6:408:111::19)
+ by CH2PR12MB4247.namprd12.prod.outlook.com (2603:10b6:610:7c::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.38; Fri, 4 Jul
+ 2025 09:30:16 +0000
+Received: from BN1PEPF0000468E.namprd05.prod.outlook.com
+ (2603:10b6:408:111:cafe::9d) by BN9PR03CA0404.outlook.office365.com
+ (2603:10b6:408:111::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.21 via Frontend Transport; Fri,
+ 4 Jul 2025 09:30:15 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF00000209.mail.protection.outlook.com (10.167.244.42) with Microsoft
+ BN1PEPF0000468E.mail.protection.outlook.com (10.167.243.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 09:08:37 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 4 Jul
- 2025 04:08:35 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 4 Jul
- 2025 04:08:35 -0500
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39
- via Frontend Transport; Fri, 4 Jul 2025 04:08:34 -0500
+ 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 09:30:15 +0000
+Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Fri, 4 Jul 2025 04:30:13 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,166 +58,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b517149-58b6-11f0-b894-0df219b8e170
+X-Inumbo-ID: 8254f656-58b9-11f0-a315-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N5fA5xxCdMseAeQq1TVlaDSbR+Fb38LUu7HGM4b2MoL4qIsJwT0VD3VqNiFZb4MbD/R3kkeeAGHgiC5gvZhnLAzc9ewuAMDrlHAJps5hLTy9Trtyqa+wkBP/fpNpwvSz7M0vGhKOvEvdpdR/VyhAcGkl5WISHDPj6nf7cV9vdRAuKYT2BPdA9/bAkz06OSEF12ZNXEA0keurXSqn3XQwPQ7TKMq1475BKem2nJWxFH9Nqp9fMZqNMPtnF22N/FKVzkwYtSzmPWEMcqkY/QnMQbyee5TWEx79nH2aPrOJ6/iqvMYPWSi+MgaNGSYLFSCdwlX/S/un5IrmHhcsnPyKXw==
+ b=DMJfShWI0mR6bigPyBWDfa+QBMSwPio1tb9XjDH0FQxrV4IRu63eWkSqricpHwPA3prXWrrOigP3/OxUpSOq/V10HhggduCbRyM0XJfNXpImQzWvQsisY6OgdNNz52cuaNl4fQ8lA7Vjmy6IBwoxyS4yg8xvbU6WLBbIwyoYkas8j6zHSu7MhyhmOpp4o6NKMHfi65fc1+jCCqHoitUjCDxsSF/8/W5uGu2elwLT2l8ZQN6rV595aZGhW8oE2Vr/y68COuVqbIhqfjpOhKaRiQ++R/6yimFb2dwvjIUNWHeFBl5dej9+oD1ndOu8co8ZAmh0hVkPwILSq7Sm2oPmVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=18lvsKu0Ub9IRk6zvJZ93t73GuhtCzAUDne4pgEDIRI=;
- b=A3pVaQgQ+PEB5Tig2OWw9k2dMbCbj7Kf3sHueBjXlQuv1bsiHON0/A2dwl7OkWHluLOBHLges4CcIRGwL51cmR2gvKHda8ixYBRBLlDHoFMS+qC2m9n0KIxLcw0Rkvd3JeFpp30ijhdxyNJ5XZdWeGEtn0jJFKPirVNwOZbbFNO8xdHNcoe6TNRqF1F+DcHYlPqK/j2zyu0dEJfAac91EIX9Vcc/T80yHwvRz4/+DUy3bEmea9kJJJiRtHGw9idSg6sDlcxXAseMxg3FVaBZjQk+Q27ldQcDJwT6f0DNbLab0IV888Oe/CKCAsSsGnVDaYdDu0du+kpzAlbrVEDMdQ==
+ bh=XWDCQOD66ZKbLyRJ3ZdoNMgnP/71ZQbglzYq68MUnMQ=;
+ b=lBM1iRgDepHcyKh3jFNzCJ3Y+8ft6WIoz2VlMGkkOc67limhdQDMpZSEMLX7l3RlJbqBNXEiXB7c9GgRJqAU91ztFKk7SAvpI8ynrfXg5FI4F53c1zH83ADFx1v1k0B0dz+6eXKxmr9wIkOJWo2tdsA7fgAxGqXPN5KvcGSf/ldi1STVO+v4nyswlyHSBhH3Lsp4PM2Nu+2vpEFmMS8B/w5oSZ/qLgaHFuNctYMHqa2J/Y5IIIog7uhF6vlG25B1/tb3Eu6NRjGX+1b0qNxJatpDrZ/MjRWXbYvUSJXgeSoUZxlTpYvWRtBcuR2vJTi9072Vd15WTBNd8R7NDbWGJg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=18lvsKu0Ub9IRk6zvJZ93t73GuhtCzAUDne4pgEDIRI=;
- b=GslqHNCgYhCAeg7qNXVzFFr8sLHoZtMYECIvpD9lOfYFEYMfKZafqH90CpO3NVIy8zfCe3xNioqH4uOI09XKD0lf1diahZ4HCcq+NoPaT/bJ1cT+Xs/EtVNcr3Fists6tEszwHUsNfZY58AGLj/pvZGN63Ein67VFE69sGNOSQ0=
+ bh=XWDCQOD66ZKbLyRJ3ZdoNMgnP/71ZQbglzYq68MUnMQ=;
+ b=B4wl8F1GEMGB0cXmpSHQcogMqnSvMNiLdbsT302trCHnw4vk3IxscWC+2eyGbBrijevAjl+/O6+0dMeC35a+XSkaAzcr5+NlzrG2t7JRALy6IDxlcXkKZ5Gyax7FolHTaUvZL6jmmBJd1Q1sJqiHEnzzLx04FWNgRTkvheUPkYI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
+From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH] xen/arm32: Tidy up setup_mm()
-Date: Fri, 4 Jul 2025 11:08:31 +0200
-Message-ID: <20250704090831.45804-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 02/18] xen/xsm: wrap around xsm_sysctl with CONFIG_SYSCTL
+Date: Fri, 4 Jul 2025 17:29:36 +0800
+Message-ID: <20250704092952.822578-3-Penny.Zheng@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250704092952.822578-1-Penny.Zheng@amd.com>
+References: <20250704092952.822578-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000209:EE_|BN7PPF8FCE094C0:EE_
-X-MS-Office365-Filtering-Correlation-Id: 383fb7a2-4b5e-466b-daa6-08ddbada5cca
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468E:EE_|CH2PR12MB4247:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c11d256-ec0a-482b-fb4c-08ddbadd6279
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?99SwilMptFwQLK9BkuFJyHt1lza5aY5A72dg73apbfw4eIBS8PwNOAsROV7Z?=
- =?us-ascii?Q?Xq7TYMN/Ag+AjI4fWCV3tYbAv3pDZU9eDoxovwDwxhF3ffT1hZpOvW/sPKLd?=
- =?us-ascii?Q?RUJZD1BtqDz6uuvHeUu82UIAO31fDhRV7o864MAkBgyvujvohahVx3DEx8gY?=
- =?us-ascii?Q?3CEf8c533019Mo+LUfsGguB12r/IgM665MHCVW620FDQKaxIjL50GKMJjHNE?=
- =?us-ascii?Q?nUF+4sBwt0GskPUhB7kD6d3iT/AfyMdRXt+Dyp2VZIjuFs2HtsLk+8r1wMvp?=
- =?us-ascii?Q?S5l+KXnXHsNJxh+65ksbDUDk6HE6E/N5BogT5IaSHVGb2c7sdC8HMjd4Y3XG?=
- =?us-ascii?Q?JDgFHY0fRkIz+zPjmjfN+bCWqSO8HWYNmLpIqJAFnbeCYA0PFL0tMPIiC/dH?=
- =?us-ascii?Q?tA4BWPHXFOHdSRFxu+flBTUPPleJ82bLzEqSEedjz0MjTI3EKgH1ubM08FLL?=
- =?us-ascii?Q?gG2p5IjF4zz351wJHSA0Qo0fw5AxTmcF/0ALaVTZ54ZIhX3b7Xc0IKix9Xt8?=
- =?us-ascii?Q?AdvtuANTch1Dgii2vESuzEM3605HLNKadQ8A4FKrHTZglAjJRR5fJ5Pbw1lM?=
- =?us-ascii?Q?aW0JfEReMwQHYp6KCkrGi0vVYnFddfPE0B91s2wK/0Lhvm+Qxyj4luDF1wrP?=
- =?us-ascii?Q?HVW/WggYsT6XtJ0y27p6LXA0xATwdQiYil7LATEm84FbSyMk2w/ccu037FEC?=
- =?us-ascii?Q?DlmTuh2mKNwRBtjY9wo6GspHRTyWA9SHAxwe+RGzSLwfQnQVK8CNZNJ5dAQE?=
- =?us-ascii?Q?ne0Zw8Puc7STRCusO/ogB9rkax6kDx15FCttsth7rK90ChfIFWAvnpBveYs0?=
- =?us-ascii?Q?pveQ9vsTqRboKpk0H5BxdXu3ZzJMeQ+cUX8Li0CVxEQHVf1/KkJiXhsDFhl2?=
- =?us-ascii?Q?758fQgLpg9Dte4vzwHU1T9h/7Be6KcDZZvKHTOCVbfJpMZbcs+4jUrW2CI8I?=
- =?us-ascii?Q?thc+m3bXeyLhCPSkkQDasLQPbiVFEev44rMebRmwoK8bCLZbIbykDrBoOCrP?=
- =?us-ascii?Q?KW7I4FFY3BT9jfmTOa7kcelbxCNatz2/ffUYSQEfu0W/3/1FPd1ALoCfJseP?=
- =?us-ascii?Q?YBJ2K+yh9sa5uh/Ti7Z6A+z3VDAmkaxtcs1TMrbStpc640dZGBXJfI02Imwr?=
- =?us-ascii?Q?HfQhJvqRLPJg6d2pYmApHzh8+5VMLSUjePI0V6LTPZbkRNFbjBTPeOZHoOSO?=
- =?us-ascii?Q?bd88Xu82X+ldJxlPzIQtjZRaH9CJKJaEj0m6vingm8l3nN9zDMWW7QtheNro?=
- =?us-ascii?Q?+b8FKm7QmHQbVGtVqyoP5DHFeKMzLCi2aVHMQDazw8Er/1vXm40sHwPEKY/w?=
- =?us-ascii?Q?oWgUiR+1iPU08ZPWru8P13w7AB7UgZQ7OGFkPqAFF/IdWfhWk8KBFgpkPDL+?=
- =?us-ascii?Q?rGRmv4On3glGglAaJcfJM0z431T6pBkp0R/Skz4KwvmZQ3Q9ukMDYaZXPadH?=
- =?us-ascii?Q?9RjSXw8XRx6jtuxGmDSTbC33RN9CnHAnHy19xX6lCCRgnAajQoqauJO5pdrs?=
- =?us-ascii?Q?u4ahBtGmY4Yi4+/u/X0z2eV7Mq00RDWleYht?=
+	=?us-ascii?Q?hQsTPiyE3WzYJGxpSaFKb7ZLNzBhQEXjKt25QUWFlb4cFwhef/Z/5lyQgZt1?=
+ =?us-ascii?Q?GBpRzCtgtfCWoyb3SO8f3xvCIgQm1aXlVUvtMIvf7WPczsDtyUveny8CUvpN?=
+ =?us-ascii?Q?ERGSK4ikExMuxUJl/Q2EJ4tziRJ6ICFsby0O/2yqhw9KGxV/3WAUDzAfCcDv?=
+ =?us-ascii?Q?P2JMxnS57mTAuBKciBV9G/kRCxcerZPZUzV9TOQf8uzBS+n3to5oET2HqrYO?=
+ =?us-ascii?Q?77/aFz2H1Rwadg3L47YiGc2FPl4dbQz3JV1HpnMGjj7wvvCzyzyGr4AixrPs?=
+ =?us-ascii?Q?QQO9qVWO21Wp5uI4smd64B+7Fn5o5KotEzXmLd6Cb8yRM6UZpXXidUtQ/RaN?=
+ =?us-ascii?Q?FNYwvf6SahrEHgsDrfxViydNXEnPZ0Swgabuh/2WhgIK+G+PA1oQ8YZNi5X/?=
+ =?us-ascii?Q?dC7ddjNP6JIaYDbXKdnp46vxJV+0csCW12cwDNp4zjxZV6WVG/8uLJb5LYVC?=
+ =?us-ascii?Q?iueVR9hPhGy0ySBuLWlFU4I0EVLefAaQrwo7u6s3tuC6u4dK8K+5k86IdB3N?=
+ =?us-ascii?Q?0dXppm3jiQEvwWiA22wxfA2+Qqk70373zVhPmOj43fDzMQwlqfmhWeGsy0RV?=
+ =?us-ascii?Q?uIMNEj8+hM1Kw2xXrvmoPFFn3RTiUqsq09OjB8x9DnoxaklSMplc3VWWOM95?=
+ =?us-ascii?Q?Z9jRD1ZkHxBe50tYIvadVuaB7yGXnceAx9VfYVb6rFwJV2X+7kB2hLG9Oc4R?=
+ =?us-ascii?Q?nktRxp2/d3ktjZJIkPJRDCZhqXI7iR6Cxq8tS/pReTkvc0zO8d2xaD+dH3t5?=
+ =?us-ascii?Q?zNyctDmwJje5afFpCI/rVfqoxa3f95VIRFPVisQLxteb+fIscW2108Ik7iMD?=
+ =?us-ascii?Q?T6owpFfm1/rPVnUrsJZb+j9UA0KAZJQvWX4egtOV4T5chGzCT2K/ZMpy2JEb?=
+ =?us-ascii?Q?5DSQ0alBDXvCwNwNP9rV2kODagbilD/jCIPiRM1W1NcnO2VnJfm9wSsFYCEp?=
+ =?us-ascii?Q?FQWhQnlQ6a3zFBQ4SmALSQXDfaciONcVnVFPQBhOynx4YpWEJrwMmO6VnFlz?=
+ =?us-ascii?Q?0tCRG5MhI2Nzc7/e1KuHSf/tKJL2Z2UIJipOFlclPzqXooFHKD3Zb4bpJUhu?=
+ =?us-ascii?Q?VCKBt6b+3w0OBlGfJT6n1cMFcIzfHkBreUNKZUtc0++fquBN9uzKDtVtMzEC?=
+ =?us-ascii?Q?wAgYN02gyPkAkvdcp2YGnriZOnE2q8dZifqHRo6SDf0E6Tvy4JHPkgntLEFi?=
+ =?us-ascii?Q?baKt9O10s2uv4pqpKd1ytCTedjcVYg3RsYgJM4GbKADLi2x+3w5LYikXTgUE?=
+ =?us-ascii?Q?cjeLpc4uhdwpdOd0NBkDO5Rt2UzDM/oRx3j842jQXZLTvaIV8WH31sJDb9uT?=
+ =?us-ascii?Q?mYODmCfnHbDOXdG6D2m+kdchwdPW5WLayUELYnqJussoSE6bJyOyHQW7xzN1?=
+ =?us-ascii?Q?k325V7LV4dGrbkym+S0scVu1CkpkriLBw0s0lcbPUBMbuK+U0OuXy0XwdW6h?=
+ =?us-ascii?Q?s4Qtn0y26Gzm+LaYxTa2E8wRQCrDvPAFXFvmBKqG3FHQEsQyXl0tVJuRzfZv?=
+ =?us-ascii?Q?WXxtRPZvRYcahJ4NK7VOL/DM1W5JcOLvEY8k?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:08:37.7572
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 09:30:15.8765
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 383fb7a2-4b5e-466b-daa6-08ddbada5cca
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c11d256-ec0a-482b-fb4c-08ddbadd6279
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF00000209.namprd05.prod.outlook.com
+	BN1PEPF0000468E.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF8FCE094C0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4247
 
-The current look and feel of setup_mm() leaves a lot to be desired. The
-scope of variables is not the best, many variables are not really needed
-while some others are set but not used. The first iteration of membanks
-is split from the loop for no reason. Tidy up this function for better
-readability.
+As function xsm_sysctl() is solely invoked in sysctl.c, we need to
+wrap around it with CONFIG_SYSCTL
 
-No functional change.
-
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/arm/arm32/mmu/mm.c | 28 +++++++++-------------------
- 1 file changed, 9 insertions(+), 19 deletions(-)
+ xen/include/xsm/xsm.h | 4 ++++
+ xen/xsm/dummy.c       | 2 ++
+ xen/xsm/flask/hooks.c | 4 ++++
+ 3 files changed, 10 insertions(+)
 
-diff --git a/xen/arch/arm/arm32/mmu/mm.c b/xen/arch/arm/arm32/mmu/mm.c
-index e6d9b49acd3c..5e4766ddcf65 100644
---- a/xen/arch/arm/arm32/mmu/mm.c
-+++ b/xen/arch/arm/arm32/mmu/mm.c
-@@ -74,8 +74,7 @@ static paddr_t __init fit_xenheap_in_static_heap(uint32_t size, paddr_t align)
- void __init setup_mm(void)
+diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
+index 24acc16125..22e2429f52 100644
+--- a/xen/include/xsm/xsm.h
++++ b/xen/include/xsm/xsm.h
+@@ -261,7 +261,11 @@ static inline int xsm_domctl(xsm_default_t def, struct domain *d,
+ 
+ static inline int xsm_sysctl(xsm_default_t def, int cmd)
  {
-     const struct membanks *mem = bootinfo_get_mem();
--    paddr_t ram_start, ram_end, ram_size, e, bank_start, bank_end, bank_size;
--    paddr_t static_heap_end = 0, static_heap_size = 0;
-+    paddr_t ram_start = INVALID_PADDR, ram_end = 0, ram_size = 0, e;
-     unsigned long heap_pages, xenheap_pages, domheap_pages;
-     unsigned int i;
-     const uint32_t ctr = READ_CP32(CTR);
-@@ -89,19 +88,14 @@ void __init setup_mm(void)
++#ifdef CONFIG_SYSCTL
+     return alternative_call(xsm_ops.sysctl, cmd);
++#else
++    return -EOPNOTSUPP;
++#endif
+ }
  
-     init_pdx();
+ static inline int xsm_readconsole(xsm_default_t def, uint32_t clear)
+diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
+index 93fbfc43cc..93a0665ecc 100644
+--- a/xen/xsm/dummy.c
++++ b/xen/xsm/dummy.c
+@@ -22,7 +22,9 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .sysctl_scheduler_op           = xsm_sysctl_scheduler_op,
+     .set_target                    = xsm_set_target,
+     .domctl                        = xsm_domctl,
++#ifdef CONFIG_SYSCTL
+     .sysctl                        = xsm_sysctl,
++#endif
+     .readconsole                   = xsm_readconsole,
  
--    ram_start = mem->bank[0].start;
--    ram_size  = mem->bank[0].size;
--    ram_end   = ram_start + ram_size;
--
--    for ( i = 1; i < mem->nr_banks; i++ )
-+    for ( i = 0; i < mem->nr_banks; i++ )
-     {
--        bank_start = mem->bank[i].start;
--        bank_size = mem->bank[i].size;
--        bank_end = bank_start + bank_size;
-+        const struct membank *bank = &mem->bank[i];
-+        paddr_t bank_end = bank->start + bank->size;
- 
--        ram_size  = ram_size + bank_size;
--        ram_start = min(ram_start,bank_start);
--        ram_end   = max(ram_end,bank_end);
-+        ram_size = ram_size + bank->size;
-+        ram_start = min(ram_start, bank->start);
-+        ram_end = max(ram_end, bank_end);
+     .evtchn_unbound                = xsm_evtchn_unbound,
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 6a53487ea4..3a43e5a1d6 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -856,6 +856,7 @@ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
      }
+ }
  
-     total_pages = ram_size >> PAGE_SHIFT;
-@@ -109,18 +103,14 @@ void __init setup_mm(void)
-     if ( using_static_heap )
-     {
-         const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
-+        paddr_t static_heap_size = 0;
++#ifdef CONFIG_SYSCTL
+ static int cf_check flask_sysctl(int cmd)
+ {
+     switch ( cmd )
+@@ -933,6 +934,7 @@ static int cf_check flask_sysctl(int cmd)
+         return avc_unknown_permission("sysctl", cmd);
+     }
+ }
++#endif /* CONFIG_SYSCTL */
  
-         for ( i = 0 ; i < reserved_mem->nr_banks; i++ )
-         {
-             if ( reserved_mem->bank[i].type != MEMBANK_STATIC_HEAP )
-                 continue;
+ static int cf_check flask_readconsole(uint32_t clear)
+ {
+@@ -1884,7 +1886,9 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .sysctl_scheduler_op = flask_sysctl_scheduler_op,
+     .set_target = flask_set_target,
+     .domctl = flask_domctl,
++#ifdef CONFIG_SYSCTL
+     .sysctl = flask_sysctl,
++#endif
+     .readconsole = flask_readconsole,
  
--            bank_start = reserved_mem->bank[i].start;
--            bank_size = reserved_mem->bank[i].size;
--            bank_end = bank_start + bank_size;
--
--            static_heap_size += bank_size;
--            static_heap_end = max(static_heap_end, bank_end);
-+            static_heap_size += reserved_mem->bank[i].size;
-         }
- 
-         heap_pages = static_heap_size >> PAGE_SHIFT;
+     .evtchn_unbound = flask_evtchn_unbound,
 -- 
-2.25.1
+2.34.1
 
 
