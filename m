@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2E3C83F03
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 16:14:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1033510.1406856 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9610FC83F03
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 16:34:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1033539.1406875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXj3W-00029E-Du; Fri, 04 Jul 2025 16:14:30 +0000
+	id 1uXjMh-0005Sq-4p; Fri, 04 Jul 2025 16:34:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1033510.1406856; Fri, 04 Jul 2025 16:14:30 +0000
+Received: by outflank-mailman (output) from mailman id 1033539.1406875; Fri, 04 Jul 2025 16:34:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXj3W-000297-9W; Fri, 04 Jul 2025 16:14:30 +0000
-Received: by outflank-mailman (input) for mailman id 1033510;
- Fri, 04 Jul 2025 16:14:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uXjMh-0005Sj-1b; Fri, 04 Jul 2025 16:34:19 +0000
+Received: by outflank-mailman (input) for mailman id 1033539;
+ Fri, 04 Jul 2025 16:34:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7FCR=ZR=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uXj3V-0001ac-71
- for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 16:14:29 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f544301c-58f1-11f0-b894-0df219b8e170;
- Fri, 04 Jul 2025 18:14:27 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a50956e5d3so808026f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 04 Jul 2025 09:14:27 -0700 (PDT)
-Received: from [192.168.1.183] (host-92-26-98-202.as13285.net. [92.26.98.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454b1628ff9sm30213815e9.11.2025.07.04.09.14.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Jul 2025 09:14:26 -0700 (PDT)
+ id 1uXjMf-0005Ex-Aw
+ for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 16:34:17 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b8c04d2f-58f4-11f0-a315-13f23c93f187;
+ Fri, 04 Jul 2025 18:34:15 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-453749aef9eso4031545e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Jul 2025 09:34:14 -0700 (PDT)
+Received: from localhost.localdomain (host-92-26-98-202.as13285.net.
+ [92.26.98.202]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454a9989fcesm59199345e9.16.2025.07.04.09.34.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 09:34:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,157 +47,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f544301c-58f1-11f0-b894-0df219b8e170
+X-Inumbo-ID: b8c04d2f-58f4-11f0-a315-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1751645667; x=1752250467; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=cESjeftZcvFG56siuT9EWtcDWeFUbkiiz5QETTlnUXw=;
-        b=nUH6pa3MeNHNhPqUI7uOg9h6aVYZsBTPD8QsMw9MjQOzzCK1Cow1Fvs0E6UDdcQwo7
-         cozS2QipT6NVkDC45IW53wkY5LXybeYgVStwGQbfu2JeghshzkW2Ji+YPESWHnBXgyAk
-         rZE/GOPtxWRLgrnzF8m/IDNNOqlyzYEUN+nWk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751645667; x=1752250467;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1751646854; x=1752251654; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cESjeftZcvFG56siuT9EWtcDWeFUbkiiz5QETTlnUXw=;
-        b=NJYjymxHZDhCRKx1/9x3iHG9CDEVmedNVoLQaQvqXcMMU5n3frD2373P32ugNO4vh2
-         iY+NRjkF/06PHS6n3fyId7FdZoKnbIpVCPhgURCNgSrfTDqqgYtm4Q9X9QjGyo/p7mXl
-         S8NFJhDyQMOQx1QYO2tCd/9ldnf8EXqFVtUQxpidfTZboJHgb/6Ra5yCHz9PyNru/ycK
-         TjOPC5We0mrbRoUuHrIhtspSI1bKKhcsbKWeklYjJU6C4iCLdCtLY9kukvc+q8BuG8GV
-         qXJmmRyX4FliA/6zm084dZTanNzOX4aLjgMo3uy+buUd+q+31T3MnOZ3El+4PeoQ58ih
-         /29g==
-X-Gm-Message-State: AOJu0YwtpeXLfvSlVE39vDunSaXTncWNv3NPMe6NmldcrJn2aB1EbuMW
-	5U5ytrIjbD8d6osypAt4BFKnh27pBE++aNeBlKsWE6wHtC7S832/Ik/SBviHGlkrmC0=
-X-Gm-Gg: ASbGncv330jQ+EJ8FKyqlxe/R0V6L38jaOfNuutFtUFTex+BatG3O7T7IZw6Ji1wxL6
-	ja++c2QTDgkPhKxoCfRqGfW33w7875Vd22ZnBYGzADIVs40qd0p0MB1Uf7jlxemR7tsfYUK7tyn
-	K1xhy7X08O2m0XOkepTs7eg9fiHFTH0m5/9q/c36CgfQRd8SEDI0wnhakcFlklQV4V4cKSOaavN
-	JxxLolNj2a69uBgCsm/LyYM32H2flKWurDJfhL7MHm8NnpSybxa3PK1BrK8UqnMzAG0HTJk9H5e
-	hzno5OwILtXo5x+LjNLPd2igxSaqwmikjdqVcExwQfT976iVIyT78cjn0pGZdlbtbse39JwrWXJ
-	wj7jy2ciyEUwEdMY0Xg3wsBog/Gk=
-X-Google-Smtp-Source: AGHT+IFDF2F8u3eouSyAcIbY6oFL7iyk/vOaG4pWy25Lewr8e3uIdTWtTXHWQjtdBba8ts+q+ko3zw==
-X-Received: by 2002:adf:ed88:0:b0:3a4:f513:7f03 with SMTP id ffacd0b85a97d-3b496604e09mr2649722f8f.44.1751645666891;
-        Fri, 04 Jul 2025 09:14:26 -0700 (PDT)
-Message-ID: <a597cd29-1dfe-4895-9b33-0659b4b2e096@citrix.com>
-Date: Fri, 4 Jul 2025 17:14:25 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] x86/idle: Implement a new MWAIT IPI-elision algorithm
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Jan Beulich <JBeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20250702144121.1096448-1-andrew.cooper3@citrix.com>
- <20250702144121.1096448-5-andrew.cooper3@citrix.com>
- <aGeIQLMQOS2ukft8@macbook.local>
-Content-Language: en-GB
+        bh=Q5xp3+ysILd0+Q1dhc8jOc5wluMva3PMjYQseqSE5sA=;
+        b=EUvRRPC7PRXenSHPzPiqmH7Bt4cDYuoNwXF/5cPbvU9E8RWG+IMVhDJZXm2vpYNpV+
+         Cb7I7bI/tLbVr9qDS0gyOOOweijH6CeJwADYzbsVQpTjptcS/VYn5geK+G797ltGZaD7
+         HPxcT1+sn/tepAQfRFPHk5lJZoXUlER6S4cQg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751646854; x=1752251654;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Q5xp3+ysILd0+Q1dhc8jOc5wluMva3PMjYQseqSE5sA=;
+        b=PkpN75cSyv9J24gToqY0cTiWJ0yMhWtNK51ULlCduUyLd1lrzqJ57fZnaXCgnRfwbm
+         AYuoBe+gJ4gfomMmJBmw2k0n568j+w4eulmqZdhwQcd2fpr+xfms3M6c5zNEgPnv7V62
+         UXX6Ofmor2ia8sSmBukWRBbHdNaGgPA5yY5RpklWKqn7TI1hG0nc1o/fAYHVNzLaqc0m
+         qdKhMyzS51tyXdrrnFv8FtmBCTf5P5SgFIxGmHORInwOmp+OD9KdwKni3cntLW7s11fB
+         SeAn4p5fCJ6chKF+7iWlPFR2FTluQC1ukoQgj3/l6KspMTPvekM+39LIRfZjT4eZM8iq
+         kTyQ==
+X-Gm-Message-State: AOJu0YwnYlzEfwqb7g2Zb7KOSz2rbp5RO2rOwWI8pT5eFr8E0qt26ADX
+	maBveCp6/k/44Q6qkcXuOQ+i0KiYfGws0npSqJKOaE/2kir9bJaYYq2Viw0tQsQ7zRjc37ChXmx
+	moU6SNuY0gQ==
+X-Gm-Gg: ASbGncttg03UnJc9gYpmyR8QQLlj5DPIsF3ZnpWd9typHPDfhYur+1jK+xLn5lsvVGM
+	HW0JreVHSUSRcgk+VeJnyTNsbOq29fHW6SB48a7YCelZMNhDV2q9VPiE8OfqwDdQ8vbRRkzVXom
+	QBBnj4eMUuj5ganvbpnPQoFmw84VnY4065Di3tkox8xR80xnEaOOqbekK3qZqbWy15aXZVGoFIQ
+	nBe19dzH4TUbloSFMN9HNS4U07bRb4BSyt0ECmI/mO6Si9+quaV80zIMTOtNwYTNY2x8PBIlPPk
+	6eREmzhS7X9uLmTy/scXgW8uh1Nj/xZnWdtovE176aSVibk8zvRksaySXle0LXJeCh6AKP6Hx4U
+	cXVbO/r2A/ePjLV2stkNTw0hKIdzEDNHMQDZ7mZINXSZJcA==
+X-Google-Smtp-Source: AGHT+IHyMqLpnd28HHVgC5K/nTw5sErQGZLxOcUW3hBZBENFnz0HIx1Ga0NcKCFOj7ksK7q4AJLarQ==
+X-Received: by 2002:a05:600c:871a:b0:450:d367:c385 with SMTP id 5b1f17b1804b1-454b315e488mr38167375e9.16.1751646853578;
+        Fri, 04 Jul 2025 09:34:13 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <aGeIQLMQOS2ukft8@macbook.local>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 1/6] x86/idle: Remove broken MWAIT implementation
+Date: Fri,  4 Jul 2025 17:34:05 +0100
+Message-Id: <20250704163410.1412367-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250704163410.1412367-1-andrew.cooper3@citrix.com>
+References: <20250704163410.1412367-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 04/07/2025 8:52 am, Roger Pau Monné wrote:
-> On Wed, Jul 02, 2025 at 03:41:19PM +0100, Andrew Cooper wrote:
->> diff --git a/xen/arch/x86/include/asm/softirq.h b/xen/arch/x86/include/asm/softirq.h
->> index e4b194f069fb..069e5716a68d 100644
->> --- a/xen/arch/x86/include/asm/softirq.h
->> +++ b/xen/arch/x86/include/asm/softirq.h
->> @@ -1,6 +1,8 @@
->>  #ifndef __ASM_SOFTIRQ_H__
->>  #define __ASM_SOFTIRQ_H__
->>  
->> +#include <asm/system.h>
->> +
->>  #define NMI_SOFTIRQ            (NR_COMMON_SOFTIRQS + 0)
->>  #define TIME_CALIBRATE_SOFTIRQ (NR_COMMON_SOFTIRQS + 1)
->>  #define VCPU_KICK_SOFTIRQ      (NR_COMMON_SOFTIRQS + 2)
->> @@ -9,4 +11,36 @@
->>  #define HVM_DPCI_SOFTIRQ       (NR_COMMON_SOFTIRQS + 4)
->>  #define NR_ARCH_SOFTIRQS       5
->>  
->> +/*
->> + * Ensure softirq @nr is pending on @cpu.  Return true if an IPI can be
->> + * skipped, false if the IPI cannot be skipped.
->> + *
->> + * We use a CMPXCHG covering both __softirq_pending and in_mwait, in order to
->> + * set softirq @nr while also observing in_mwait in a race-free way.
->> + */
->> +static always_inline bool arch_pend_softirq(unsigned int nr, unsigned int cpu)
->> +{
->> +    uint64_t *ptr = &irq_stat[cpu].softirq_mwait_raw;
->> +    uint64_t old, new;
->> +    unsigned int softirq = 1U << nr;
->> +
->> +    old = ACCESS_ONCE(*ptr);
->> +
->> +    do {
->> +        if ( old & softirq )
->> +            /* Softirq already pending, nothing to do. */
->> +            return true;
->> +
->> +        new = old | softirq;
->> +
->> +    } while ( (old = cmpxchg(ptr, old, new)) != new );
->> +
->> +    /*
->> +     * We have caused the softirq to become pending.  If in_mwait was set, the
->> +     * target CPU will notice the modification and act on it.
->> +     */
->> +    return new & (1UL << 32);
-> Maybe I haven't got enough coffee yet, but if we do the cmpxchg()
-> won't it be enough to send the IPI when softirq is first set, but not
-> necessarily for each extra softirq that's set if there's already one
-> enabled?
+cpuidle_wakeup_mwait() is a TOCTOU race.  The cpumask_and() sampling
+cpuidle_mwait_flags can take a arbitrary period of time, and there's no
+guarantee that the target CPUs are still in MWAIT when writing into
+mwait_wakeup(cpu).
 
-It was me who didn't have enough coffee when writing the code.  Already
-fixed locally.
+The consequence of the race is that we'll fail to IPI certain targets.  Also,
+there's no guarantee that mwait_idle_with_hints() will raise a TIMER_SOFTIRQ
+on it's way out.
 
-~Andrew
+The fundamental bug is that the "in_mwait" variable needs to be in the
+monitored line, and not in a separate cpuidle_mwait_flags variable, in order
+to do this in a race-free way.
+
+Arranging to fix this while keeping the old implementation is prohibitive, so
+strip the current one out in order to implement the new one cleanly.  In the
+interim, this causes IPIs to be used unconditionally which is safe albeit
+suboptimal.
+
+Fixes: 3d521e933e1b ("cpuidle: mwait on softirq_pending & remove wakeup ipis")
+Fixes: 1adb34ea846d ("CPUIDLE: re-implement mwait wakeup process")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+---
+ xen/arch/x86/acpi/cpu_idle.c       | 48 ++++--------------------------
+ xen/arch/x86/hpet.c                |  2 --
+ xen/arch/x86/include/asm/hardirq.h |  9 +++---
+ xen/include/xen/cpuidle.h          |  2 --
+ xen/include/xen/irq_cpustat.h      |  1 -
+ 5 files changed, 9 insertions(+), 53 deletions(-)
+
+diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+index 6c3a10e6fb4e..141f0f0facf6 100644
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -436,27 +436,6 @@ static int __init cf_check cpu_idle_key_init(void)
+ }
+ __initcall(cpu_idle_key_init);
+ 
+-/*
+- * The bit is set iff cpu use monitor/mwait to enter C state
+- * with this flag set, CPU can be waken up from C state
+- * by writing to specific memory address, instead of sending an IPI.
+- */
+-static cpumask_t cpuidle_mwait_flags;
+-
+-void cpuidle_wakeup_mwait(cpumask_t *mask)
+-{
+-    cpumask_t target;
+-    unsigned int cpu;
+-
+-    cpumask_and(&target, mask, &cpuidle_mwait_flags);
+-
+-    /* CPU is MWAITing on the cpuidle_mwait_wakeup flag. */
+-    for_each_cpu(cpu, &target)
+-        mwait_wakeup(cpu) = 0;
+-
+-    cpumask_andnot(mask, mask, &target);
+-}
+-
+ /* Force sending of a wakeup IPI regardless of mwait usage. */
+ bool __ro_after_init force_mwait_ipi_wakeup;
+ 
+@@ -465,42 +444,25 @@ bool arch_skip_send_event_check(unsigned int cpu)
+     if ( force_mwait_ipi_wakeup )
+         return false;
+ 
+-    /*
+-     * This relies on softirq_pending() and mwait_wakeup() to access data
+-     * on the same cache line.
+-     */
+-    smp_mb();
+-    return !!cpumask_test_cpu(cpu, &cpuidle_mwait_flags);
++    return false;
+ }
+ 
+ void mwait_idle_with_hints(unsigned int eax, unsigned int ecx)
+ {
+     unsigned int cpu = smp_processor_id();
+-    s_time_t expires = per_cpu(timer_deadline, cpu);
+-    const void *monitor_addr = &mwait_wakeup(cpu);
++    const unsigned int *this_softirq_pending = &softirq_pending(cpu);
+ 
+-    monitor(monitor_addr, 0, 0);
++    monitor(this_softirq_pending, 0, 0);
+     smp_mb();
+ 
+-    /*
+-     * Timer deadline passing is the event on which we will be woken via
+-     * cpuidle_mwait_wakeup. So check it now that the location is armed.
+-     */
+-    if ( (expires > NOW() || expires == 0) && !softirq_pending(cpu) )
++    if ( !*this_softirq_pending )
+     {
+         struct cpu_info *info = get_cpu_info();
+ 
+-        cpumask_set_cpu(cpu, &cpuidle_mwait_flags);
+-
+         spec_ctrl_enter_idle(info);
+         mwait(eax, ecx);
+         spec_ctrl_exit_idle(info);
+-
+-        cpumask_clear_cpu(cpu, &cpuidle_mwait_flags);
+     }
+-
+-    if ( expires <= NOW() && expires > 0 )
+-        raise_softirq(TIMER_SOFTIRQ);
+ }
+ 
+ static void acpi_processor_ffh_cstate_enter(struct acpi_processor_cx *cx)
+@@ -901,7 +863,7 @@ void cf_check acpi_dead_idle(void)
+ 
+     if ( cx->entry_method == ACPI_CSTATE_EM_FFH )
+     {
+-        void *mwait_ptr = &mwait_wakeup(smp_processor_id());
++        void *mwait_ptr = &softirq_pending(smp_processor_id());
+ 
+         /*
+          * Cache must be flushed as the last operation before sleeping.
+diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
+index 1bca8c8b670d..192de433cfd1 100644
+--- a/xen/arch/x86/hpet.c
++++ b/xen/arch/x86/hpet.c
+@@ -188,8 +188,6 @@ static void evt_do_broadcast(cpumask_t *mask)
+     if ( __cpumask_test_and_clear_cpu(cpu, mask) )
+         raise_softirq(TIMER_SOFTIRQ);
+ 
+-    cpuidle_wakeup_mwait(mask);
+-
+     if ( !cpumask_empty(mask) )
+        cpumask_raise_softirq(mask, TIMER_SOFTIRQ);
+ }
+diff --git a/xen/arch/x86/include/asm/hardirq.h b/xen/arch/x86/include/asm/hardirq.h
+index 342361cb6fdd..f3e93cc9b507 100644
+--- a/xen/arch/x86/include/asm/hardirq.h
++++ b/xen/arch/x86/include/asm/hardirq.h
+@@ -5,11 +5,10 @@
+ #include <xen/types.h>
+ 
+ typedef struct {
+-	unsigned int __softirq_pending;
+-	unsigned int __local_irq_count;
+-	unsigned int nmi_count;
+-	unsigned int mce_count;
+-	bool __mwait_wakeup;
++    unsigned int __softirq_pending;
++    unsigned int __local_irq_count;
++    unsigned int nmi_count;
++    unsigned int mce_count;
+ } __cacheline_aligned irq_cpustat_t;
+ 
+ #include <xen/irq_cpustat.h>	/* Standard mappings for irq_cpustat_t above */
+diff --git a/xen/include/xen/cpuidle.h b/xen/include/xen/cpuidle.h
+index 705d0c1135f0..120e354fe340 100644
+--- a/xen/include/xen/cpuidle.h
++++ b/xen/include/xen/cpuidle.h
+@@ -92,8 +92,6 @@ extern struct cpuidle_governor *cpuidle_current_governor;
+ bool cpuidle_using_deep_cstate(void);
+ void cpuidle_disable_deep_cstate(void);
+ 
+-extern void cpuidle_wakeup_mwait(cpumask_t *mask);
+-
+ #define CPUIDLE_DRIVER_STATE_START  1
+ 
+ extern void menu_get_trace_data(u32 *expected, u32 *pred);
+diff --git a/xen/include/xen/irq_cpustat.h b/xen/include/xen/irq_cpustat.h
+index b9629f25c266..5f039b4b9a76 100644
+--- a/xen/include/xen/irq_cpustat.h
++++ b/xen/include/xen/irq_cpustat.h
+@@ -24,6 +24,5 @@ extern irq_cpustat_t irq_stat[];
+   /* arch independent irq_stat fields */
+ #define softirq_pending(cpu)	__IRQ_STAT((cpu), __softirq_pending)
+ #define local_irq_count(cpu)	__IRQ_STAT((cpu), __local_irq_count)
+-#define mwait_wakeup(cpu)	__IRQ_STAT((cpu), __mwait_wakeup)
+ 
+ #endif	/* __irq_cpustat_h */
+-- 
+2.39.5
+
 
