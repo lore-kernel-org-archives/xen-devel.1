@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E78C83030
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 07:08:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1032828.1406215 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A22CC83F05
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jul 2025 07:08:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1032832.1406245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXaXC-00045u-5L; Fri, 04 Jul 2025 07:08:34 +0000
+	id 1uXaXJ-0004s7-14; Fri, 04 Jul 2025 07:08:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1032828.1406215; Fri, 04 Jul 2025 07:08:34 +0000
+Received: by outflank-mailman (output) from mailman id 1032832.1406245; Fri, 04 Jul 2025 07:08:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uXaXC-00045n-0X; Fri, 04 Jul 2025 07:08:34 +0000
-Received: by outflank-mailman (input) for mailman id 1032828;
- Fri, 04 Jul 2025 07:08:33 +0000
+	id 1uXaXI-0004rP-Rg; Fri, 04 Jul 2025 07:08:40 +0000
+Received: by outflank-mailman (input) for mailman id 1032832;
+ Fri, 04 Jul 2025 07:08:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ASC/=ZR=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1uXaXB-00045b-2z
- for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 07:08:33 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20608.outbound.protection.outlook.com
- [2a01:111:f403:200a::608])
+ id 1uXaXH-00045b-QD
+ for xen-devel@lists.xenproject.org; Fri, 04 Jul 2025 07:08:39 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20616.outbound.protection.outlook.com
+ [2a01:111:f403:240a::616])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id afa19502-58a5-11f0-b894-0df219b8e170;
- Fri, 04 Jul 2025 09:08:31 +0200 (CEST)
-Received: from SJ0PR13CA0189.namprd13.prod.outlook.com (2603:10b6:a03:2c3::14)
- by MN2PR12MB4472.namprd12.prod.outlook.com (2603:10b6:208:267::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.23; Fri, 4 Jul
- 2025 07:08:24 +0000
+ id b40e1f2b-58a5-11f0-b894-0df219b8e170;
+ Fri, 04 Jul 2025 09:08:37 +0200 (CEST)
+Received: from SJ0PR13CA0186.namprd13.prod.outlook.com (2603:10b6:a03:2c3::11)
+ by DS0PR12MB9727.namprd12.prod.outlook.com (2603:10b6:8:226::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Fri, 4 Jul
+ 2025 07:08:32 +0000
 Received: from CO1PEPF000042A9.namprd03.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::24) by SJ0PR13CA0189.outlook.office365.com
- (2603:10b6:a03:2c3::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.15 via Frontend Transport; Fri,
- 4 Jul 2025 07:08:23 +0000
+ (2603:10b6:a03:2c3:cafe::15) by SJ0PR13CA0186.outlook.office365.com
+ (2603:10b6:a03:2c3::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.14 via Frontend Transport; Fri,
+ 4 Jul 2025 07:08:32 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  CO1PEPF000042A9.mail.protection.outlook.com (10.167.243.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 07:08:23 +0000
+ 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 07:08:32 +0000
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 4 Jul
- 2025 02:08:21 -0500
+ 2025 02:08:30 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afa19502-58a5-11f0-b894-0df219b8e170
+X-Inumbo-ID: b40e1f2b-58a5-11f0-b894-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TB8WEzEoaT489doOi+xLoUAwh0DNyuMCCyWoRtUQ2RA+9PS2SMJ0aqJVBzsUqbOTdJxj4NfmyQGQX5086eZrgh8H7sR/LqJdIzMaM/QHYKpLIs1qKF0BeIxg0oGTlAiGUsqMsSlfBXlUXhPSbPGi+bCNCoaW9pTK4zJ0/aoB7XYdCX6tNYs2dTCIhWVqgBBulE+XEP1eRDgMiI9qkr4siGUy2s97iOWuXjfroAPS6NmxzlIlHL7pnL0MQIalBwspopFYoDSnepkbaMkiegI/PlF8+C38cr5e6WmXplLPmKbnMOOOKRBtVoVle5n0pSsZdKsXqUJpKLzBwGIx1nAOcQ==
+ b=o5Wg16c4APjKo7nw26frAWSKMlSn4vgEokdNkJUx8ShHX1BW7vrdS1FA+A6jnapQD75vQND2VV3HFDh+v7De1pzd/pg8P7/2hCoI78qOYUckzUG6IdivRmSF+oOW2r/CUADBQlo4n+0ERSuATUcOhEHvJyXhmtaxlh4B+A7XIVzSd0dppeyH+HFEc+HV5haNxlI6TBRGwsIYgJUAAS7ventb9bxfgg5FQIuKIBp5Dhxd42ZvwT6AeWkDdOCnIkBRaW6OHni3OSeUERocfP3uHdTioD+PBpZyzu0QH6oDyRGwekliMWWxXhCiHR3umadedS9n1iLgrsll5GJq4D99mw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hgne9jPvyF/xyLS84/NA3kN/tkqP9BLwA1FK/Emm/p4=;
- b=K2SqGaiKvTL4Ooceek2nvfgiddXq89B71NchHutSnU65KneKp/jukwyoq9KwEWfSBj6ty/JWZsyl95433j12xagPBCd9V71/FKg7mXUyJjf0QrWl8pZJo35UWQoDidXXeG2fO1eOSrNhEdnodfUxmjkueFXOdr3nVSh/ihvHD/lpgC9C4khbFGamK5krKzBI9b1hD/kmLC7a2OnE0R0jZLBhe8UK+8T7JSxrjHwqH0ayJgIWN/16R/dTERyUMI6e3coyi3G4cvU039kZihij5Bblv5qycpfIV4RBKRsuOiFtoO7yeqtZsHp92fN8evJ2VAeYBJlFN1esIbgZcZ/+Hw==
+ bh=b/9SexHoA4qYazYfI+r/csxcO7lxt/MmdntISjGyS1Q=;
+ b=ek7LzEEk1DC4SLmK23GZAUWcwVeUEGyWW4bfxtiFCcvf3Ao4BE7teuCQBg5AeHPJE2dpLTZFgraAL65v76srJNaHl7FvAGOdyw3ypx3zwZPNC91Jad5kdKuIQr6/2RWA9Dzu8RUi8hXtuDIZxpBjYpGR9MGwPvmnsuLxRkJyyWc8wyJlb+RMb760JBA4ZX52N7iS7CoyV51O400Cb1fX1TUhg+2Usphk2auGR3wE2hT+sm/aIyErjwwPm0zkGP5a+3TsGM3/MbhN8R4ZIncbLRKBFsY4EmaCzxJdbbFi7l3iBdTEebA7ZzdC6MFObYvjrBmpT9WCYbYtQELbXOkOCQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hgne9jPvyF/xyLS84/NA3kN/tkqP9BLwA1FK/Emm/p4=;
- b=KlJs6VnK9pjzLjKdDcDBj7Z+SP/l9qjz+AS/L5VXSojj36Tz9vaoq8MFuSEJDRPXBNVVMSfNjxSOLPiOyfCzfr0923Qt7cwsyEimn927rs1fzd51wzTZIlajoZjTXU+EtzlhDQXe2b1/J/mc6BJKuoBOrfeqw23WSQfKTraYO0M=
+ bh=b/9SexHoA4qYazYfI+r/csxcO7lxt/MmdntISjGyS1Q=;
+ b=Xhb1QCh57AbJQAG1MUXneaYyRyAQ+3XYOBxH/4HRsqv3qYBAgs01lm3/tc66NqYwSIj7cYSgvodju9gj2KNILNWwJxnx+yPzUcEwdMTRbeJQL/+i8FBxY+pNE9AKL+09Z682+QgTN7IlA88xK1ZQhSyBa5g2NbFRpsyDfVTTpcU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -83,10 +83,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Jiqian Chen <Jiqian.Chen@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v7 1/8] vpci/header: Emulate extended capability list for dom0
-Date: Fri, 4 Jul 2025 15:07:56 +0800
-Message-ID: <20250704070803.314366-2-Jiqian.Chen@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>
+Subject: [PATCH v7 5/8] vpci: Refactor vpci_remove_register to remove matched registers
+Date: Fri, 4 Jul 2025 15:08:00 +0800
+Message-ID: <20250704070803.314366-6-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250704070803.314366-1-Jiqian.Chen@amd.com>
 References: <20250704070803.314366-1-Jiqian.Chen@amd.com>
@@ -98,96 +99,91 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042A9:EE_|MN2PR12MB4472:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22e65502-ac73-41dd-0590-08ddbac9909e
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042A9:EE_|DS0PR12MB9727:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90c73192-89f1-4336-7c22-08ddbac9961d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?RHVnUnhPdGhMSnp2V0hRa1J2T3RvZ25ubjY5ZW80YXFzVkpBQzhqaGd5RmZ3?=
- =?utf-8?B?SlhDVUR4T1NlTEI5UCtsTXNwa1RqM0Y5NmpJc3FOeEZwZzhaWWEweTJmcmdv?=
- =?utf-8?B?YTJOc3hwWnVsTnM2VmVkd3g0WGd4UTUvTUsrczBuMU8vUE43V1NSNWlWZlJB?=
- =?utf-8?B?RjVEZmt4Z0lKVXJUYlFXdXFySWh1aWdPVjYrY3B0TVkvY29uVWJDQ3d5L2ZK?=
- =?utf-8?B?Rk5CZGJMYy9GV2pFUndMTXlBclhTanRNeThLcTUySWhSM1FUQ2JMWFRBR3pJ?=
- =?utf-8?B?WnhLMHlxWUwrOC9BaUJiYjBtNFF1bnk0QzB3blpVZlV4ck5Oem1lT2w3RXdP?=
- =?utf-8?B?dUJxSng5d3A3bFU4VnhqSHM3eUF4UzVSZy9hNS9VaVUwb0pkRkVMODdvNUVn?=
- =?utf-8?B?OVppWE1NZTZoZ25QOXhxek9MeFI0Y0YvR1FOUXlsS2FrZzNnNE54NE5pR1Y1?=
- =?utf-8?B?Y2d5SndnbHhLanBNNmNEQ3FLbHFRMDdkazlkejVUeENFRXlPcmZXRkZIbWRv?=
- =?utf-8?B?VHFEZ1JaanpQZkJ6QnNDdGVzNzZBd29EZlhVSnFlS2JVQ3M3amVieVJwb1M4?=
- =?utf-8?B?N1VVWmJaMG8vV2tuVHNQdEE3QXl2OVZjRmdNSytieWJnRFgxVzZWMUZSUVNG?=
- =?utf-8?B?YXVYQ1lFSjl6cnJGVERMZ2FDaHNNR1czYkx5UXZDMFovL0xEZGphZkxMSzRW?=
- =?utf-8?B?K2JrWWF0aVRWRGVvRXBOZW5FYloya3NzSHdqemhoRDJjTlVLeGlQQXRkTGVs?=
- =?utf-8?B?dU9EdnJzL2VYTTJRSm54cU5hUnp1Mk5VNEhZNUI1Mk9HOUgzcVdwVXVHMEJL?=
- =?utf-8?B?dkFraWZ6aThZellRSU4rSnpzVk1KSFlLVndSODU1emZ0ZlA4MHBRRnRqR3JU?=
- =?utf-8?B?VzdpcGdRd3hTOFNvNTRnaGhJV1J2VWZwMkg5K3BIUXpjbHp0NzkwWWxPbGpz?=
- =?utf-8?B?aDdvQVhGWE15QnFWNERpWnNKaU1PZjhGd1hXTFZnaGVYRGFDeDNRTFFDUGNV?=
- =?utf-8?B?dnd4clgvd2xrVlZKajdsN3NYYmVxS0lpRGd2WWJjZ2NLQjh3M0lvNzk3THg5?=
- =?utf-8?B?QXg1b1l5WGFuWlViZzVKM2EyVFlxN0NPTGdkdFE3VVp3Y2xKbE9zUkY4TmRn?=
- =?utf-8?B?UnhCcnIyUTAyV2hiNWFaeXo4OXFyV0laVEg5djR5VldGNGFRN3pwTFUzVmdS?=
- =?utf-8?B?Y2pxeUdXNXZnU0V0dnMzQmZoMlRmWjVLTXcrTjJuaG9MaytIQWtseFZsVUhO?=
- =?utf-8?B?K0NGTDJTd0RtVUc0K0tZZ0ZBTjhqdXhCaGV4ZDgwaDRtNDg4azZ6Zk52TDFQ?=
- =?utf-8?B?UDc5cWI4c1hlNUN2OUpKaXI2bjhHaFFpTUEzWHVWbXlnYTI2c0VMRnlOQlZl?=
- =?utf-8?B?c1NGS1Mxc0RpVkd4eXRhZGQvU1RYNWt0OUl5cm9oU3d2VEttNzdoU2MvRzNT?=
- =?utf-8?B?SXpCMkZtYUlWNFVSSk95eTIvVTBMTUsxVFlFb3JKYktKL0lqSEVzR3AyNEFK?=
- =?utf-8?B?Q3VWVmFSaW5JV3BCOXZtR25aV2dWWmZCVFVZcnViL0FOSXpQWldMU01JN2lt?=
- =?utf-8?B?Vy9ZNHZZd2k5cm5aMU5MQmROMTF6NFEzQVpsY294QjNuMjJ2REQ1TjlmbnNv?=
- =?utf-8?B?L2ZqR1JIQjRXRkNrYVh2NUplVmtmMVg5RGdha0prTVFsV1l5RlhsUktzWmZU?=
- =?utf-8?B?N1ZGb0dRZkJ5bUY5dk9YUW5mdk0zNmxNZTBiQkwwemswZzlkMDNhemNtaHow?=
- =?utf-8?B?Wk44cXNFKzNYNEpGalB6SExUVVdlVTIyV0dPbkdua05FM3BibDJWQzVhVVZz?=
- =?utf-8?B?Y01hQTRhOGFTZGd5STdnS0RtV2tNRXpVNUpYVHNyK1dPT0dLd0NoTWY3RGZX?=
- =?utf-8?B?M2ZEUThnQi94OWVERFEweTlqem1FVWZueWhGNmJ6Mmx1YXR1TkxhNGxMYzlM?=
- =?utf-8?B?aW1RK1UyMzc0R05ScDJ4VlFIbzZxM2pYLzdJRXAvYWxNQkpPRURIc3lyUlZw?=
- =?utf-8?B?YVBKbGx4cWdzNnlOcWJKcXQrQ1hCOGEvMDNjSS8yaDR6NWd3QUhUUVhEcFIw?=
- =?utf-8?Q?trkAwg?=
+	=?utf-8?B?cTBMbGZRZm9UbExhY2NLRWtudjJqbjZCeFRYZVJidXZpbDdIcFhnODNOTDI1?=
+ =?utf-8?B?aFJaZjAzR0xZQVo5RStZOVZKWTg3OTVlaUtWb1dRWjNveU9WZCtabk52SUkz?=
+ =?utf-8?B?dlFwNnBnb1Q0VTdRdU4ydzhYZjhWTHVoTWFyUGdYNStiMWVDRlZOMUxzWkls?=
+ =?utf-8?B?eDZPZ2dVM2RCL2VpdVVZYlBKUzRQU1ZRVlpVcHFRR1Rja00zS2lsMXZHQ3Q4?=
+ =?utf-8?B?QUNWY0FwZkkzczcvazJqMnNyVjRiS1Eyb3N5NVY4ZEhwR3VUajJxSW56cGJE?=
+ =?utf-8?B?S0hoT1JwdU1EbXI2R2x2YStUWGhpdlpwOENqR0pMaGhKZXo2dUY3RWxRYlRZ?=
+ =?utf-8?B?N1Nud0IwYnRrTXM5SFlWRm5SWGhXeE44WEk0L2dUWlNYVmQ2TnlFR1Y5czN1?=
+ =?utf-8?B?ak82L0hQcWVLN0hIUjRPa2ZxeTdnSmdHKzZFY3VqdklZWnN0RkUwaHczWFRK?=
+ =?utf-8?B?VEF0cjQ3YWdhYUdsUng4WUp3czlDVnAwZ1N2SUtBaTlsMHMvNW1PN3RnN1hO?=
+ =?utf-8?B?UWVMNi9DOS9FU1ZReGROMU5PbWZYYTA2T3o0NUhZVWR6UXZ3dGs3SmJyUnNU?=
+ =?utf-8?B?NnovZXN5RFRqSWQ0bHRKUzc5OW9jczdQTE5kWUVZTzZXMnd6Qml3b2NkeGZH?=
+ =?utf-8?B?ckhIc0RzV3hPdnJDbFZrdEJnZG83bVZ3ZmxuaTVEOU5vbEg5c1UxSzdhd2s0?=
+ =?utf-8?B?UmtPeGVZdmZqemtsbTN6bUMwUVRIYy9QMHBFS3BkckZtWkJEb3NPZHJwUHQ0?=
+ =?utf-8?B?ZGZ4ZHlvaXZyUjlUbC9xaloyNG9wWjBWZGkvam4vYlVLUXNGdDZPTWRNMnJv?=
+ =?utf-8?B?MXpBWm9SQTZLbXZqdXpkbmtvY3Z1Z0Z4TnJUUnFiczdqWEExcDlEcVBFTVk3?=
+ =?utf-8?B?emFQaTJTM0NGaFNtTXNidi9iNFNXeFRsYkgyUW91YW54cHZHalI1T2RBbGRO?=
+ =?utf-8?B?OGVpT3Y3VnBYS1hKdW5TUW5NZnVsck55R3I5ZXBjWUlCZDBlNFMybFBQK1hN?=
+ =?utf-8?B?S2pQbmdJZzhtMGlPMVFGTm1PZUZSNTU0V1FlWERQZkwvb0diWFNFWHJpQ2li?=
+ =?utf-8?B?OUI3STd4TS9OR0tmVUI1RVlaeE90RkljblBObEFPYVgybURMczgxdEFTQTZP?=
+ =?utf-8?B?N3Btcm5JTEh3OUl2TmpBN3diZjkyWkpyWWF4UUxYUWtud2hPSmJNU3lLVTZC?=
+ =?utf-8?B?RytWVkJVRzRscjViVTJGY21iOXN6WEZmbWF2a21QdXRMNHNPWmIySTdSVkJu?=
+ =?utf-8?B?U1p0K2M1c0h0VkJ2QW4rRDI4dEwrZTU5dEJqbXNheHhiUEgyR1MxMXZ3WVVh?=
+ =?utf-8?B?dVlFSDhOTEtsU2E5aWY2amZmenk4M0Rza2ZQOFJ6VFlhYy9KQmtiTTJiNllQ?=
+ =?utf-8?B?Wk9GRnc5SHUxWCs2ZGFtT29OWUhlWU5mM25CZkNFNjZCTTA4SEJ1UjBTODdp?=
+ =?utf-8?B?aFNZcXVzNXhuSmtZdy82MU9qUkM4QjYxU21sYVJZT2NpWVB5YW9XSjRRU2RH?=
+ =?utf-8?B?NzVoUk1Yd0c1bUZpa1dTbmZia3kxVlBvVEtyRmV3SSt2dWwvdDRwbk9ma3JS?=
+ =?utf-8?B?S3V6dTRDUHhBS3BmK09uSUZlTHMzSFlHY2RVdWhHaFNUUkpqdVREcUxTS3RZ?=
+ =?utf-8?B?S1U1MGUvUXJmcktTT29LVGZmVjlEeGdZVWFNczZCRU1DVmN5WlB1Z0ZNTHNk?=
+ =?utf-8?B?ZGVZV3VLSE9vM2dBVmlDalRrUTZkTldFeFVKMWQ3WkJzWlYxaVQvODg2Mkd0?=
+ =?utf-8?B?eW1BSy8vWVdvc1ZuNzRhUlErL3d5VzJLV1RZVTZ5VmhSbk93bTNYcTNvQTdm?=
+ =?utf-8?B?V3NGT0hLdk5tWmtIbFFMemFaUCt6a3Q3Um9QblJseHVsKzZ1bTYxMDd5dnFO?=
+ =?utf-8?B?cGNETzc5Sm1GT0ZZZ3FyckQ0dU5JUlBmdnpQdDRNVFFoR0h0TGdqU3RhQnJI?=
+ =?utf-8?B?emJ6bVVSeDl1QkJmbEtwMTY1b05QSHI4YVVJUng0OG51SHg0ZVhlOUw4K21z?=
+ =?utf-8?B?VHNBdEtLblNKOCtBN3ZWOXEvVnBGTzNISlhIU0hjTWFYL0JxTXl0Z2RhTkdS?=
+ =?utf-8?Q?S2fFf3?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 07:08:23.2598
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 07:08:32.4856
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22e65502-ac73-41dd-0590-08ddbac9909e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90c73192-89f1-4336-7c22-08ddbac9961d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	CO1PEPF000042A9.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4472
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9727
 
-Add a new function to emulate extended capability list for dom0,
-and call it in init_header(). So that it will be easy to hide a
-extended capability whose initialization fails.
+vpci_remove_register() only supports removing a register in a time,
+but the follow-on changes need to remove all registers within a range.
+So, refactor it to support removing all registers in a given region.
 
-As for the extended capability list of domU, just move the logic
-into above function and keep hiding it for domU.
+And it is no issue to remove a non exist register, so remove the
+__must_check prefix.
 
 Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 cc: "Roger Pau Monné" <roger.pau@citrix.com>
+cc: Anthony PERARD <anthony.perard@vates.tech>
 ---
 v6->v7 changes:
-* Change word "guest" to "DomU" in vpci_init_ext_capability_list().
-* Change parameter of vpci_init_ext_capability_list() to be const.
-* Delete check "if ( !header )" in the while loop of vpci_init_ext_capability_list().
-* Change the loop from while to do while in vpci_init_ext_capability_list().
+No.
 
 v5->v6 changes:
-* Delete unnecessary parameter "ttl" in vpci_init_ext_capability_list()
-  since vpci_add_register() can already detect the overlaps.
+* Modify commit message.
+* Add Roger's Reviewed-by.
 
 v4->v5 changes:
-* Add check: if capability list of hardware has a overlap, print warning and return 0.
+No.
 
 v3->v4 changes:
-* Add check "if ( !header )   return 0;" to avoid adding handler for
-  device that has no extended capabilities.
+* Use list_for_each_entry_safe instead of list_for_each_entry.
+* Return ERANGE if overlap.
 
 v2->v3 changes:
-* In vpci_init_ext_capability_list(), when domain is domU, directly return after
-  adding a handler(hiding all extended capability for domU).
-* In vpci_init_ext_capability_list(), change condition to be "while ( pos >= 0x100U && ttl-- )"
-  instead of "while ( pos && ttl-- )".
-* Add new function vpci_hw_write32, and pass it to extended capability handler for dom0.
+* Add new check to return error if registers overlap but not inside range.
 
 v1->v2 changes:
 new patch
@@ -195,103 +191,118 @@ new patch
 Best regards,
 Jiqian Chen.
 ---
- xen/drivers/vpci/header.c | 44 ++++++++++++++++++++++++++++++++-------
- xen/drivers/vpci/vpci.c   |  6 ++++++
- xen/include/xen/vpci.h    |  2 ++
- 3 files changed, 44 insertions(+), 8 deletions(-)
+ tools/tests/vpci/main.c |  4 ++--
+ xen/drivers/vpci/vpci.c | 38 ++++++++++++++++++++------------------
+ xen/include/xen/vpci.h  |  4 ++--
+ 3 files changed, 24 insertions(+), 22 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index d26cbba08ee1..8ee8052cd4a3 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -836,6 +836,39 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
-                                   PCI_STATUS_RSVDZ_MASK);
- }
+diff --git a/tools/tests/vpci/main.c b/tools/tests/vpci/main.c
+index 33223db3eb77..ca72877d60cd 100644
+--- a/tools/tests/vpci/main.c
++++ b/tools/tests/vpci/main.c
+@@ -132,10 +132,10 @@ static void vpci_write32_mask(const struct pci_dev *pdev, unsigned int reg,
+                                   rsvdz_mask))
  
-+static int vpci_init_ext_capability_list(const struct pci_dev *pdev)
-+{
-+    unsigned int pos = PCI_CFG_SPACE_SIZE;
-+
-+    if ( !is_hardware_domain(pdev->domain) )
-+        /* Extended capabilities read as zero, write ignore for DomU */
-+        return vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-+                                 pos, 4, (void *)0);
-+
-+    do
-+    {
-+        uint32_t header = pci_conf_read32(pdev->sbdf, pos);
-+        int rc;
-+
-+        rc = vpci_add_register(pdev->vpci, vpci_read_val, vpci_hw_write32,
-+                               pos, 4, (void *)(uintptr_t)header);
-+        if ( rc == -EEXIST )
-+        {
-+            printk(XENLOG_WARNING
-+                   "%pd %pp: overlap in extended cap list, offset %#x\n",
-+                   pdev->domain, &pdev->sbdf, pos);
-+            return 0;
-+        }
-+
-+        if ( rc )
-+            return rc;
-+
-+        pos = PCI_EXT_CAP_NEXT(header);
-+    } while ( pos >= PCI_CFG_SPACE_SIZE );
-+
-+    return 0;
-+}
-+
- static int cf_check init_header(struct pci_dev *pdev)
- {
-     uint16_t cmd;
-@@ -888,14 +921,9 @@ static int cf_check init_header(struct pci_dev *pdev)
-     if ( rc )
-         return rc;
+ #define VPCI_REMOVE_REG(off, size)                                          \
+-    assert(!vpci_remove_register(test_pdev.vpci, off, size))
++    assert(!vpci_remove_registers(test_pdev.vpci, off, size))
  
--    if ( !is_hwdom )
--    {
--        /* Extended capabilities read as zero, write ignore */
--        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL, 0x100, 4,
--                               (void *)0);
--        if ( rc )
--            return rc;
--    }
-+    rc = vpci_init_ext_capability_list(pdev);
-+    if ( rc )
-+        return rc;
+ #define VPCI_REMOVE_INVALID_REG(off, size)                                  \
+-    assert(vpci_remove_register(test_pdev.vpci, off, size))
++    assert(vpci_remove_registers(test_pdev.vpci, off, size))
  
-     if ( pdev->ignore_bars )
-         return 0;
+ /* Read a 32b register using all possible sizes. */
+ void multiread4_check(unsigned int reg, uint32_t val)
 diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index 09988f04c27c..8474c0e3b995 100644
+index 8be4b53533a3..71ba30bbbd6b 100644
 --- a/xen/drivers/vpci/vpci.c
 +++ b/xen/drivers/vpci/vpci.c
-@@ -267,6 +267,12 @@ void cf_check vpci_hw_write16(
-     pci_conf_write16(pdev->sbdf, reg, val);
+@@ -152,7 +152,7 @@ static int vpci_capability_hide(const struct pci_dev *pdev, unsigned int cap)
+ 
+     prev_r->private = next_r->private;
+     /*
+-     * Not calling vpci_remove_register() here is to avoid redoing
++     * Not calling vpci_remove_registers() here is to avoid redoing
+      * the register search
+      */
+     list_del(&next_r->node);
+@@ -160,7 +160,7 @@ static int vpci_capability_hide(const struct pci_dev *pdev, unsigned int cap)
+     xfree(next_r);
+ 
+     if ( !is_hardware_domain(pdev->domain) )
+-        return vpci_remove_register(vpci, offset + PCI_CAP_LIST_ID, 1);
++        return vpci_remove_registers(vpci, offset + PCI_CAP_LIST_ID, 1);
+ 
+     return 0;
+ }
+@@ -553,34 +553,36 @@ int vpci_add_register_mask(struct vpci *vpci, vpci_read_t *read_handler,
+     return 0;
  }
  
-+void cf_check vpci_hw_write32(
-+    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
-+{
-+    pci_conf_write32(pdev->sbdf, reg, val);
-+}
+-int vpci_remove_register(struct vpci *vpci, unsigned int offset,
+-                         unsigned int size)
++int vpci_remove_registers(struct vpci *vpci, unsigned int start,
++                          unsigned int size)
+ {
+-    const struct vpci_register r = { .offset = offset, .size = size };
+-    struct vpci_register *rm;
++    struct vpci_register *rm, *tmp;
++    unsigned int end = start + size;
+ 
+     spin_lock(&vpci->lock);
+-    list_for_each_entry ( rm, &vpci->handlers, node )
++    list_for_each_entry_safe ( rm, tmp, &vpci->handlers, node )
+     {
+-        int cmp = vpci_register_cmp(&r, rm);
+-
+-        /*
+-         * NB: do not use a switch so that we can use break to
+-         * get out of the list loop earlier if required.
+-         */
+-        if ( !cmp && rm->offset == offset && rm->size == size )
++        /* Remove rm if rm is inside the range. */
++        if ( rm->offset >= start && rm->offset + rm->size <= end )
+         {
+             list_del(&rm->node);
+-            spin_unlock(&vpci->lock);
+             xfree(rm);
+-            return 0;
++            continue;
+         }
+-        if ( cmp <= 0 )
 +
- int vpci_add_register_mask(struct vpci *vpci, vpci_read_t *read_handler,
-                            vpci_write_t *write_handler, unsigned int offset,
-                            unsigned int size, void *data, uint32_t ro_mask,
++        /* Return error if registers overlap but not inside. */
++        if ( rm->offset + rm->size > start && rm->offset < end )
++        {
++            spin_unlock(&vpci->lock);
++            return -ERANGE;
++        }
++
++        if ( start < rm->offset )
+             break;
+     }
+     spin_unlock(&vpci->lock);
+ 
+-    return -ENOENT;
++    return 0;
+ }
+ 
+ /* Wrappers for performing reads/writes to the underlying hardware. */
 diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index fc8d5b470b0b..61d16cc8b897 100644
+index 61287e5d2e12..91bb407c728c 100644
 --- a/xen/include/xen/vpci.h
 +++ b/xen/include/xen/vpci.h
-@@ -80,6 +80,8 @@ void cf_check vpci_hw_write8(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
- void cf_check vpci_hw_write16(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
-+void cf_check vpci_hw_write32(
-+    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data);
+@@ -70,8 +70,8 @@ static inline int __must_check vpci_add_register(struct vpci *vpci,
+                                   size, data, 0, 0, 0, 0);
+ }
  
- /*
-  * Check for pending vPCI operations on this vcpu. Returns true if the vcpu
+-int __must_check vpci_remove_register(struct vpci *vpci, unsigned int offset,
+-                                      unsigned int size);
++int vpci_remove_registers(struct vpci *vpci, unsigned int start,
++                          unsigned int size);
+ 
+ /* Generic read/write handlers for the PCI config space. */
+ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size);
 -- 
 2.34.1
 
