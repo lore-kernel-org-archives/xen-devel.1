@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED04AC83F03
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Jul 2025 03:14:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1035074.1407289 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA9F9C83F03
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Jul 2025 03:14:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1035078.1407319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uYcJD-0007oG-9P; Mon, 07 Jul 2025 03:14:23 +0000
+	id 1uYcJL-0000DJ-Di; Mon, 07 Jul 2025 03:14:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1035074.1407289; Mon, 07 Jul 2025 03:14:23 +0000
+Received: by outflank-mailman (output) from mailman id 1035078.1407319; Mon, 07 Jul 2025 03:14:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uYcJD-0007o9-65; Mon, 07 Jul 2025 03:14:23 +0000
-Received: by outflank-mailman (input) for mailman id 1035074;
- Mon, 07 Jul 2025 03:14:21 +0000
+	id 1uYcJL-0000D4-9q; Mon, 07 Jul 2025 03:14:31 +0000
+Received: by outflank-mailman (input) for mailman id 1035078;
+ Mon, 07 Jul 2025 03:14:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BHPz=ZU=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1uYcJB-0007mT-O9
- for xen-devel@lists.xenproject.org; Mon, 07 Jul 2025 03:14:21 +0000
+ id 1uYcJK-0007mT-1t
+ for xen-devel@lists.xenproject.org; Mon, 07 Jul 2025 03:14:30 +0000
 Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20608.outbound.protection.outlook.com
- [2a01:111:f403:2414::608])
+ (mail-bn8nam11on20602.outbound.protection.outlook.com
+ [2a01:111:f403:2414::602])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 78462a4e-5ae0-11f0-b894-0df219b8e170;
- Mon, 07 Jul 2025 05:14:19 +0200 (CEST)
-Received: from BY3PR10CA0026.namprd10.prod.outlook.com (2603:10b6:a03:255::31)
- by SJ0PR12MB8140.namprd12.prod.outlook.com (2603:10b6:a03:4e3::7)
+ id 7d9be8ea-5ae0-11f0-b894-0df219b8e170;
+ Mon, 07 Jul 2025 05:14:28 +0200 (CEST)
+Received: from CH2PR19CA0018.namprd19.prod.outlook.com (2603:10b6:610:4d::28)
+ by SA3PR12MB7974.namprd12.prod.outlook.com (2603:10b6:806:307::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.24; Mon, 7 Jul
- 2025 03:14:13 +0000
-Received: from SJ5PEPF000001ED.namprd05.prod.outlook.com
- (2603:10b6:a03:255:cafe::9b) by BY3PR10CA0026.outlook.office365.com
- (2603:10b6:a03:255::31) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 03:14:24 +0000
+Received: from CH1PEPF0000A34C.namprd04.prod.outlook.com
+ (2603:10b6:610:4d:cafe::5) by CH2PR19CA0018.outlook.office365.com
+ (2603:10b6:610:4d::28) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.26 via Frontend Transport; Mon,
- 7 Jul 2025 03:14:13 +0000
+ 7 Jul 2025 03:14:24 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001ED.mail.protection.outlook.com (10.167.242.201) with Microsoft
+ CH1PEPF0000A34C.mail.protection.outlook.com (10.167.244.6) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Mon, 7 Jul 2025 03:14:13 +0000
+ 15.20.8901.15 via Frontend Transport; Mon, 7 Jul 2025 03:14:24 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Sun, 6 Jul 2025 22:14:10 -0500
+ 15.1.2507.39; Sun, 6 Jul 2025 22:14:21 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78462a4e-5ae0-11f0-b894-0df219b8e170
+X-Inumbo-ID: 7d9be8ea-5ae0-11f0-b894-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LWQi449MpRBq/6cZUZk44H2KQRCIstvI+a2UOkwB9eExboKKDA0yu65GrA4J5HiM5vZ9z7mfeIU0QZfKZal9wlzW5JTmXV8JbuclbyPXo6m9PnrW2WygdTnDLKIN586CKfU//QLQejvhlbguWEg5tKPxkLplFhByUGMXLl29z15fF9P+fErgN4Ews9ZMLVgUyGV3ylyVEgVcxYlz96grKj1yqoGs5p6h5cIwE43HIkf2I1eTzLJapWblA+qSX58u4phPVMf3WTWfFhKkpZBo4VyAjcnMPs15AC0xpvu3AmoTv5W6/F6eLgiTuX4e8LepXYvsaEfXi7DeFBZ8UzklRw==
+ b=KDHaP+kjDFXVs7HOmHTqlKpXs9K1mp9vu08xidNWHf6O4bDNBgRVvRHOBCcRHfrpNU2Z5Xu2TbfYssU0TPst2NMcAXPZYiN7iNQWJOgHIRyoe/7ATvOpYHeEfifMK2lQovXqOpFYGvLqr4j1tdfoA4kqvlNNO3vhy6+EvZVbWveHUbFaVeZSYGBUVfGd1w0KEs7xsWovspJERNhtK6QP6MPfAOb7SmlJMsVRbirWQ7g4PSRBazKetWixBaWV69J0ES6EU9d987Oe0w4gYv8/tlhZ1/Mgz58JBW0LbzacWb+Hh4jcc5P4Omeudh9b6oO6VmfeCmJht1kPFjFaRzK3eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HRS93Hqoh3N+utDDcTTMVxjdZcKA6NhPk5u7Ncd0IJ8=;
- b=SWGmk3lTBPnJluHz6bul5zdNgbPe3M4mIzxEveEjaf8IliOiHU0HAQH0Lh3sFMhrOV6Kq9ioQTRmDGHbKzqKv0qppJ/1QDCOVMR3vefzopI5J+Uz5l8dF4ruBbP/mDr9Yp8FHvib9+2A8XxIKcl9VvItqUfJre1TNLCZJT1eTvg4xZZPqIExmw4pLoqHDQhvMXfgTRHmQoJSFt5wnUWfUmQuluaLCvH7UJx1+oPt9LG9KgKxCXrFv9AKryXoUZ7DmqXzFXY+ptdsB3llA1S7IZKI3LM1S8Vu1KYaArO1NUSQyfItySKA8LfH4vG0xpUd8gb7bWrBfnbKh+LyMiv5tw==
+ bh=vyQBDL0uFgow+1a2Y3dSLlMZH4IZJahaUJN2J/+JEcc=;
+ b=W0Bv4Wzq7nt7aURF/Lkza9oMaq2Dt7qEBpkKgIm9dM3iSOtt/FEafZu5VJ8QwGgW6VlSx/r4V3Lq8hOb6SMAebJemffOcjCN++QcpQqsCcAZ6vaG4bA0ReMaF1txkwCzY416oKvcuSX7hztduFVJxg6AkR4COn+iXDkVF3tXWTbb+ICpKg2ER2Ppxnuq4hoTa35sAvz+Va9FBB+ReySllt14YIR+x8IbzKc66t3GcLGJKDg0WrWyIwh3s8YXzF0xbNAO86ZrAcrMmdsOFu4eLzOVbEnIXyumkp55eSObOSUasMnsAD4Yqb2kl6wQhy5fkbD0yCVnbvvc8IxvAMSUgg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HRS93Hqoh3N+utDDcTTMVxjdZcKA6NhPk5u7Ncd0IJ8=;
- b=2KDqq+OKfFAC0LbHyIOn8ifCLAdXFQiCyuum+W1WK2XX8O1Gfgrie5Ncb+2dIv8Bi082tsBNdp/iBXWD0kqblgT1JntXcUlV8TuaelNYp55FYqKhEg7VyhKEhRp4MCk4PvCWtK6QaArIydYoDcpMljA1v2i+7B9RJCWZKx+hmak=
+ bh=vyQBDL0uFgow+1a2Y3dSLlMZH4IZJahaUJN2J/+JEcc=;
+ b=ZfsWXBwpwA2L4FVUAgYpOSsX33xPgwaWyIuv+YhyutQ8USJMLOSJqFOgIDvM3aN77cxSUv3nZH5CVWq1e770QmxYQqNiCFcO1YTXuujMnAEr9WYfxB1zz809E68Grj30hx8Q9P8yTwRlxxeDP2ZiQuUqe32HGUWzcQim4eLuvAU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -88,9 +88,9 @@ CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Andrew Cooper
  Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "Daniel
  P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH 02/11] xen/sysctl: wrap around XEN_SYSCTL_readconsole
-Date: Mon, 7 Jul 2025 11:13:37 +0800
-Message-ID: <20250707031346.901567-3-Penny.Zheng@amd.com>
+Subject: [PATCH 06/11] xen/sysctl: wrap around XEN_SYSCTL_page_offline_op
+Date: Mon, 7 Jul 2025 11:13:41 +0800
+Message-ID: <20250707031346.901567-7-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250707031346.901567-1-Penny.Zheng@amd.com>
 References: <20250707031346.901567-1-Penny.Zheng@amd.com>
@@ -102,153 +102,179 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001ED:EE_|SJ0PR12MB8140:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef75b8a3-8339-4f45-94a5-08ddbd04597d
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34C:EE_|SA3PR12MB7974:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1171b663-dadb-4878-094c-08ddbd045fd2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
+	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?PFd4UogxRLqXCD8QLwj45aG0lIlDsPfIqqS0VNLM3IuZ4itof7FWgI+zVj2I?=
- =?us-ascii?Q?y4QUYZjydHAHnaRsVm99fUPnq6+0u0euz7haYQRrROHCYoFNywedPmXHUoN2?=
- =?us-ascii?Q?kxA5qPo52MeML/HQwuY5IlBk+axyIq6guOgPNokOnmYvrcmn9Kw+s5y1Cxlz?=
- =?us-ascii?Q?ZiVSWwBuQ4MuQjg7hVifgTdMz7K/sghP875eBYQcu53lpldQTFa9RMroEhuz?=
- =?us-ascii?Q?TaFv3Z0zWqy+FlXKNly6M2xdUdJW9lhkxG8umDWXkMOn7ajORzcr8kdBGRyc?=
- =?us-ascii?Q?LOnHU3JsPPCjdeAmsGByOqDdWKmvHSENmhOQpdkCh19+KJqKyLW8kuhHOMc4?=
- =?us-ascii?Q?/lRZaW9WWP89xMDNgovJNqtcxMdb0YuI1zBYQgX169sSzq8M5r5HU042e6jo?=
- =?us-ascii?Q?B3aPmCZvRiTF98Dkj8ikgmMPcODJ1lSLiIjq0IQcJW6ucEmRuh4mYCtQq4A8?=
- =?us-ascii?Q?RteIc6wIrTKMfAD8gMePyC6kMD6B09LYtn+n645FL5VJm2tp7vp6+RWen12a?=
- =?us-ascii?Q?IT4VoFDNHdKBUnf7jSl9ORhSOX4z6Zvv58PEuQAkBlzqLN13DoFdzYog9nak?=
- =?us-ascii?Q?0J69g5MzxJGEkrl57JG90GDKk/BoV37LxEK3mFz2E0NDavIEztVpJwpsP+nu?=
- =?us-ascii?Q?JFR8dNx20MOFY9WBcp/7YOCKhlfGcAbW+adEaLDkaD7vLGzWOkCPgSY6PruG?=
- =?us-ascii?Q?wPJRvfJVvmTYODUUDDohMhK916W9dM5KyH5rVxg41ur6F9YVdCqHxw0aLvxn?=
- =?us-ascii?Q?5QBiDckOnk5CfjE/3hyHt/CQIOUUabt9F3fNjGYx3FBiS0vpJktT115yeF0P?=
- =?us-ascii?Q?P9VA6//tAVz35FO599HPRAABF1P7etQoFgrKgEDLMGRn79lCbiD7s1elSPb1?=
- =?us-ascii?Q?nfzLbG14iBhGQFBEJksklfoIncs/CmM6mBhi3S3Wy9InvIjcHyaRMKERdU4B?=
- =?us-ascii?Q?0x2rlG6c3pFiWeeH2tpGztZ/c0V8n83zag1tcpFcOcqFA9RjcBTTJyU7XECv?=
- =?us-ascii?Q?amXwnCuwQDX8VFJhQvir924vgHlI1kGdT+Um4qevfnVi/lGkoxmXrtAgLy2N?=
- =?us-ascii?Q?pIQwPJu+k1BGtQ+HP0cewbrxdk/kNTodlw4yOyocliYBg+pcyw4YTSeUm4Qo?=
- =?us-ascii?Q?4mew0HhWvw735pjxnl870RCH6vtorKdhn6KP5snkLdp6MRXvX8diV1K+g9Uj?=
- =?us-ascii?Q?5FyVonMzO+CLfYSQqrEIHXTO1CK8n98FQA1jGJYel4ROzwHEyZFE0Qu+sZ4T?=
- =?us-ascii?Q?Y23zpqnYzG2OPM8K8koDrVOMfe6USH3UpyoKOVe0246nLx7TBVSbAnb10TCf?=
- =?us-ascii?Q?sTXsZVtH3a0zbMx+mYETDoBnSx5Nk+mKIY3PsFEmeTOJ4N6/ym28fzES/kKw?=
- =?us-ascii?Q?lcD+NQCGN6se7K9Vief5lG3EMONRLSI1VZRa8jFc+lYjd1xt18SoK/ptRw+J?=
- =?us-ascii?Q?WM805tsI1VWocuZfuILAuRlk+JzBfEk/9MnVXETMncy/eMTP7ef8eScLHQDo?=
- =?us-ascii?Q?KoqfTm7r8qwYTrB2o3a/aabmXyd7VbKVvJAF?=
+	=?us-ascii?Q?Og5nANhvB9LlUAvDWjvxtUjq44U5Xea/cUyvdCuJICk4kMXi8ockZ6jEv+5e?=
+ =?us-ascii?Q?9bCW7PZut8BAhHYyfs9gba+yNV0+xIw4P+PlcBnzx4CTtsKv30FqtzAjif2V?=
+ =?us-ascii?Q?nw53rK8u5eggyHU83HGYRfTCNg9in7jdX2Y++QXBiiv52/AOrPvQaQqMcPf6?=
+ =?us-ascii?Q?j0T+5MwQAQUuHHe//JLcY5tBe3XDTxYnxJP1Zo/ykdkmQshDcIb8GrI4BBOr?=
+ =?us-ascii?Q?Jx2vAr9iPAH0F9gTofWX0aFVGJa4DDLjgorMhLdZlZX1U4CNs9DQq0Z0r2ZJ?=
+ =?us-ascii?Q?xEqtREJ3Js3N1ygClWVUaNfF6CaBvL59Yr/x9vOApk93akvETnn4Y2PURd08?=
+ =?us-ascii?Q?Ka3qOt5NA0ENtvnMUWNEPFcq5lPJ5JgtXIpxrjmJVtTGQQ4fTYkGzHkkA8Ug?=
+ =?us-ascii?Q?7Xjmdn9DCzpcph/W+S7a7Wfe0ZU4g6IpvOWHYzYRYL319Zp1GGL0hGz6yV9p?=
+ =?us-ascii?Q?OwDqb3V1qpj3mbK0LvTBie1A7xVlP0W2/RxEzU4qPCFuDiC5qGOsMJqVdhtC?=
+ =?us-ascii?Q?yuh1rwJTiJ8IN6CBXlxKMjluGUBs2lNxtELnVrk5tpw5zd+9w/n+ivNxZHag?=
+ =?us-ascii?Q?RUgZOmOWbzOFk0H1fu7Sb2ge/1XuKJNN/EbUWPRkSUv3Y7N7yAtuDeQjqFt5?=
+ =?us-ascii?Q?xYSRylcuQaQPsvgGU/XU2F55vGgvH52LJWlxIYfdwQ+LhicAm1ZD9nZVnIj1?=
+ =?us-ascii?Q?kRyak3PDTTgHi26Hqckkr52B5xYsDPeRNhW0QuS6Fr5iVWxbZft8rSUBocrQ?=
+ =?us-ascii?Q?WnpyK31DHi5Ncen58W0sjDBSCCFPCgt4qIWVic2oW7TOQkHEIo40AJjrl0DV?=
+ =?us-ascii?Q?t7JhK2QhxkJtBx/qqfxlZszoBMLuQg65/nQyBKE1yKsRJhelq50X4RthlIe9?=
+ =?us-ascii?Q?DSyNl6QNeg2CsTzNEjP9wyyOszJNRibqao6629nXVMYIHDV2kb650mo5Geky?=
+ =?us-ascii?Q?fKLqcbycBQ7bfDWi+pAPDUOQDFzVsZ0Mvr5tAfabXGmgJckQLuaOsAE0geAz?=
+ =?us-ascii?Q?IWzRsQGc4ET5fb/CoNEVQqI5i/InKf6cqchZDX6lkV3rCsl2WUO816YG9ISR?=
+ =?us-ascii?Q?r8SAyzNqq7NhvC4jFTUKXazlEiCiHzjDx+o7s0QU49HUjuZf9WELMmibPV+A?=
+ =?us-ascii?Q?Cqpvyj3SjSLYbv7k9FUG0FSbuJnLrI9uV0BaeZbhFyf8M5T1jEnPTewb4C3m?=
+ =?us-ascii?Q?lGoqsNhtnNUwJCTQ65jabTNiCS7zlv0rS6ws9Fa8apndrOgAPrlEx0rsWphE?=
+ =?us-ascii?Q?54r7Tm62vPoJU+fSKFGRUWNfXQvLJ0/ZgvhLy3px0Fxb+KUqK3bGkvmBUSsU?=
+ =?us-ascii?Q?zNXDotl+jYwJBwduK5qLMRg8pSYXMp4oJ8oQZcB8JNMBfZEek7rAYLj9fUYE?=
+ =?us-ascii?Q?ZtNOHuPUcGR1aoUsKqu36SPKm8SuQrxQmWeV2U5yHthtPHS/cBdKDMq5VvoF?=
+ =?us-ascii?Q?e/aNeN4LtPBEv6IRk14Ie4spcRRzeOv4ZCew+XS8eqeCom88l5R7EcwK+xBa?=
+ =?us-ascii?Q?Tcl4MxARMPQ9m7yi3uLQZ01SqkufckS1Lamf?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 03:14:13.4060
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2025 03:14:24.1057
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef75b8a3-8339-4f45-94a5-08ddbd04597d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1171b663-dadb-4878-094c-08ddbd045fd2
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001ED.namprd05.prod.outlook.com
+	CH1PEPF0000A34C.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8140
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7974
 
-The following functions is to deal with XEN_SYSCTL_readconsole sub-op, and
-shall be wrapped:
-- xsm_readconsole()
-- read_console_ring()
+The following functions are only to deal with XEN_SYSCTL_page_offline_op,
+then shall be wrapped:
+- xsm_page_offline()
+- online_page()
+- query_page_offline()
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-v2 -> v3:
-- move #endif up ahead of the blank line
+v1 -> v2:
+- add transient #ifdef in sysctl.c for correct compilation
+- no need to wrap declarations
+- place the #ifdef inside the function body to have less redundancy
 ---
 v3 -> v4:
 - remove transient "#ifdef CONFIG_SYSCTL"
 ---
- xen/drivers/char/console.c | 2 ++
- xen/include/xsm/xsm.h      | 4 ++++
- xen/xsm/dummy.c            | 2 +-
- xen/xsm/flask/hooks.c      | 4 ++--
- 4 files changed, 9 insertions(+), 3 deletions(-)
+ xen/common/page_alloc.c | 2 ++
+ xen/include/xsm/xsm.h   | 6 ++++++
+ xen/xsm/dummy.c         | 2 ++
+ xen/xsm/flask/hooks.c   | 6 ++++++
+ 4 files changed, 16 insertions(+)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index ba5a809a99..c5afac9f72 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -368,6 +368,7 @@ static void conring_puts(const char *str, size_t len)
-         conringc = conringp - conring_size;
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 8f93a4c354..8177d12f50 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1781,6 +1781,7 @@ int offline_page(mfn_t mfn, int broken, uint32_t *status)
+     return 0;
  }
  
 +#ifdef CONFIG_SYSCTL
- long read_console_ring(struct xen_sysctl_readconsole *op)
- {
-     XEN_GUEST_HANDLE_PARAM(char) str;
-@@ -410,6 +411,7 @@ long read_console_ring(struct xen_sysctl_readconsole *op)
+ /*
+  * Online the memory.
+  *   The caller should make sure end_pfn <= max_page,
+@@ -1865,6 +1866,7 @@ int query_page_offline(mfn_t mfn, uint32_t *status)
  
      return 0;
  }
 +#endif /* CONFIG_SYSCTL */
  
- 
  /*
+  * This function should only be called with valid pages from the same NUMA
 diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 22e2429f52..042a99449f 100644
+index 042a99449f..5ac99904c4 100644
 --- a/xen/include/xsm/xsm.h
 +++ b/xen/include/xsm/xsm.h
-@@ -270,7 +270,11 @@ static inline int xsm_sysctl(xsm_default_t def, int cmd)
+@@ -138,7 +138,9 @@ struct xsm_ops {
+     int (*resource_setup_gsi)(int gsi);
+     int (*resource_setup_misc)(void);
  
- static inline int xsm_readconsole(xsm_default_t def, uint32_t clear)
++#ifdef CONFIG_SYSCTL
+     int (*page_offline)(uint32_t cmd);
++#endif
+     int (*hypfs_op)(void);
+ 
+     long (*do_xsm_op)(XEN_GUEST_HANDLE_PARAM(void) op);
+@@ -597,7 +599,11 @@ static inline int xsm_resource_setup_misc(xsm_default_t def)
+ 
+ static inline int xsm_page_offline(xsm_default_t def, uint32_t cmd)
  {
 +#ifdef CONFIG_SYSCTL
-     return alternative_call(xsm_ops.readconsole, clear);
+     return alternative_call(xsm_ops.page_offline, cmd);
 +#else
 +    return -EOPNOTSUPP;
 +#endif
  }
  
- static inline int xsm_evtchn_unbound(
+ static inline int xsm_hypfs_op(xsm_default_t def)
 diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index 93a0665ecc..cd0e844fcf 100644
+index cd0e844fcf..d46413ad8c 100644
 --- a/xen/xsm/dummy.c
 +++ b/xen/xsm/dummy.c
-@@ -24,8 +24,8 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .domctl                        = xsm_domctl,
- #ifdef CONFIG_SYSCTL
-     .sysctl                        = xsm_sysctl,
--#endif
-     .readconsole                   = xsm_readconsole,
-+#endif
+@@ -96,7 +96,9 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .resource_setup_gsi            = xsm_resource_setup_gsi,
+     .resource_setup_misc           = xsm_resource_setup_misc,
  
-     .evtchn_unbound                = xsm_evtchn_unbound,
-     .evtchn_interdomain            = xsm_evtchn_interdomain,
++#ifdef CONFIG_SYSCTL
+     .page_offline                  = xsm_page_offline,
++#endif
+     .hypfs_op                      = xsm_hypfs_op,
+     .hvm_param                     = xsm_hvm_param,
+     .hvm_param_altp2mhvm           = xsm_hvm_param_altp2mhvm,
 diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 3a43e5a1d6..df7e10775b 100644
+index df7e10775b..45c12aa662 100644
 --- a/xen/xsm/flask/hooks.c
 +++ b/xen/xsm/flask/hooks.c
-@@ -934,7 +934,6 @@ static int cf_check flask_sysctl(int cmd)
-         return avc_unknown_permission("sysctl", cmd);
-     }
+@@ -1206,10 +1206,12 @@ static int cf_check flask_resource_unplug_core(void)
+     return avc_current_has_perm(SECINITSID_DOMXEN, SECCLASS_RESOURCE, RESOURCE__UNPLUG, NULL);
  }
--#endif /* CONFIG_SYSCTL */
  
- static int cf_check flask_readconsole(uint32_t clear)
++#ifdef CONFIG_SYSCTL
+ static int flask_resource_use_core(void)
  {
-@@ -945,6 +944,7 @@ static int cf_check flask_readconsole(uint32_t clear)
- 
-     return domain_has_xen(current->domain, perms);
+     return avc_current_has_perm(SECINITSID_DOMXEN, SECCLASS_RESOURCE, RESOURCE__USE, NULL);
  }
 +#endif /* CONFIG_SYSCTL */
  
- static inline uint32_t resource_to_perm(uint8_t access)
+ static int cf_check flask_resource_plug_pci(uint32_t machine_bdf)
  {
-@@ -1888,8 +1888,8 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .domctl = flask_domctl,
- #ifdef CONFIG_SYSCTL
-     .sysctl = flask_sysctl,
--#endif
-     .readconsole = flask_readconsole,
-+#endif
+@@ -1274,6 +1276,7 @@ static int cf_check flask_resource_setup_misc(void)
+     return avc_current_has_perm(SECINITSID_XEN, SECCLASS_RESOURCE, RESOURCE__SETUP, NULL);
+ }
  
-     .evtchn_unbound = flask_evtchn_unbound,
-     .evtchn_interdomain = flask_evtchn_interdomain,
++#ifdef CONFIG_SYSCTL
+ static inline int cf_check flask_page_offline(uint32_t cmd)
+ {
+     switch ( cmd )
+@@ -1288,6 +1291,7 @@ static inline int cf_check flask_page_offline(uint32_t cmd)
+         return avc_unknown_permission("page_offline", cmd);
+     }
+ }
++#endif /* CONFIG_SYSCTL */
+ 
+ static inline int cf_check flask_hypfs_op(void)
+ {
+@@ -1948,7 +1952,9 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .resource_setup_gsi = flask_resource_setup_gsi,
+     .resource_setup_misc = flask_resource_setup_misc,
+ 
++#ifdef CONFIG_SYSCTL
+     .page_offline = flask_page_offline,
++#endif
+     .hypfs_op = flask_hypfs_op,
+     .hvm_param = flask_hvm_param,
+     .hvm_param_altp2mhvm = flask_hvm_param_altp2mhvm,
 -- 
 2.34.1
 
