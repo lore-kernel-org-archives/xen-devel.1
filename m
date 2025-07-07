@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED145C8303C
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Jul 2025 20:48:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1035772.1408128 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8C8C71130
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Jul 2025 21:22:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1035789.1408149 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uYslM-0007F8-VD; Mon, 07 Jul 2025 20:48:32 +0000
+	id 1uYtHa-0005GW-Mz; Mon, 07 Jul 2025 21:21:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1035772.1408128; Mon, 07 Jul 2025 20:48:32 +0000
+Received: by outflank-mailman (output) from mailman id 1035789.1408149; Mon, 07 Jul 2025 21:21:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uYslM-0007F1-SY; Mon, 07 Jul 2025 20:48:32 +0000
-Received: by outflank-mailman (input) for mailman id 1035772;
- Mon, 07 Jul 2025 20:48:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uYtHa-0005GP-J5; Mon, 07 Jul 2025 21:21:50 +0000
+Received: by outflank-mailman (input) for mailman id 1035789;
+ Mon, 07 Jul 2025 21:21:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=S3ai=ZU=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1uYslL-0007EX-1p
- for xen-devel@lists.xenproject.org; Mon, 07 Jul 2025 20:48:31 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bc5106e4-5b73-11f0-a316-13f23c93f187;
- Mon, 07 Jul 2025 22:48:29 +0200 (CEST)
+ id 1uYtHZ-0005GI-W8
+ for xen-devel@lists.xenproject.org; Mon, 07 Jul 2025 21:21:49 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 61238831-5b78-11f0-b894-0df219b8e170;
+ Mon, 07 Jul 2025 23:21:44 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2B2CA5C5707;
- Mon,  7 Jul 2025 20:48:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15E95C4CEE3;
- Mon,  7 Jul 2025 20:48:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id CB1965C5D4D;
+ Mon,  7 Jul 2025 21:21:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1F94C4CEE3;
+ Mon,  7 Jul 2025 21:21:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,79 +44,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc5106e4-5b73-11f0-a316-13f23c93f187
+X-Inumbo-ID: 61238831-5b78-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1751921307;
-	bh=+6iqzKgrT/sttRWzZFweIjdUpglt/tuxdO1WcGXFpRA=;
+	s=k20201202; t=1751923302;
+	bh=bUoJK4NPWFszw8+dQoPzIZOEeVBRBq930g3zScfBlR4=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=agW5WNWTBmpkq5vhgmxcx1jCBaWNtNb2iBy+GnAhDMknNimI+o3i4otmioB6s9l5U
-	 Cg1xqkQZcZnSlYDB5mBvdN4BdxUG8/7hcXiLnyuvqE1MMRtJiBSiuVjTY3UzBQCI3G
-	 qxGjLvfjUMKCZRzcVClYRMZOHTuq/uMwkkEYHceRzJPkiq0AfuCZOrAJMNmMaY4vL9
-	 KCwEa9xtfXf3RsZfa25AIFBOetmTdumKVuYGbmJpCZCXI6Zn9qMEqzzMeVuxbrfhwj
-	 7a4bEYKcHnzCaApXUvrpnub+vjqZVoTFTDI8dugAPmeE6Irq3r5U+tCAsyLWFkNmUF
-	 qdJnSZCEydHOA==
-Date: Mon, 7 Jul 2025 13:48:25 -0700 (PDT)
+	b=BACUlxK18IBuQuesqdvInuXIsh/0XASmrR+RhbNeDQa8DnC7HMQo8kwsMkMRwPX1n
+	 onfRxqftEwmJWQADUru4SNJ1cmtAKNeO/6AVMV6B0zeVNLdumrQj/LUVYGWBst2+l6
+	 BjtXmXubeiWiGWf9rsosx9ndSTlWV27vLAxcyur+NSn0tRS8Y5Cf4FuuTaETEkvdf2
+	 UY3WcvDc6KGT6ZM5b9RevApzuTXGSIce/vs8j3MJHFROXmX2S2MKLpFAISnhtdBj9K
+	 /9agqQlH2Y7GE9bsUFZPEXlK6gWOFYf3+iWiqX9vy2XwhUqj1dWbcyMNjU4llmz7vR
+	 HRF1cbMrW5lAg==
+Date: Mon, 7 Jul 2025 14:21:40 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Michal Orzel <michal.orzel@amd.com>
-cc: xen-devel@lists.xenproject.org, 
-    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH 2/2] xen/arm: Skip loops in init_pdx() when no PDX
- compression is used
-In-Reply-To: <20250704075428.33485-3-michal.orzel@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2507071344340.605088@ubuntu-linux-20-04-desktop>
-References: <20250704075428.33485-1-michal.orzel@amd.com> <20250704075428.33485-3-michal.orzel@amd.com>
+To: Jan Beulich <jbeulich@suse.com>
+cc: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [XEN PATCH 2/5] iommu: address violation of MISRA C Rule 5.5
+In-Reply-To: <12566d37-cd33-4350-bdb5-aa1359c1b176@suse.com>
+Message-ID: <alpine.DEB.2.22.394.2507071416480.605088@ubuntu-linux-20-04-desktop>
+References: <cover.1751659393.git.dmytro_prokopchuk1@epam.com> <29ba418db4a7a193fe07fa9927b4ab75e0355fcb.1751659393.git.dmytro_prokopchuk1@epam.com> <12566d37-cd33-4350-bdb5-aa1359c1b176@suse.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Fri, 4 Jul 2025, Michal Orzel wrote:
-> When CONFIG_PDX_COMPRESSION=n, pdx_init_mask(), pdx_region_mask() and
-> pfn_pdx_hole_setup() are just stubs doing nothing. It does not make
-> sense to keep the two loops iterating over all the memory banks.
+On Mon, 7 Jul 2025, Jan Beulich wrote:
+> On 04.07.2025 22:39, Dmytro Prokopchuk1 wrote:
+> > Address a violation of MISRA C:2012 Rule 5.5:
+> > "Identifiers shall be distinct from macro names".
+> > 
+> > Reports for service MC3A2.R5.5:
+> > xen/include/xen/iommu.h: non-compliant struct 'page_list_head'
+> > xen/include/xen/mm.h: non-compliant macro 'page_list_head'
 > 
-> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-
-
-> ---
->  xen/arch/arm/setup.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+> What is this about? There's no code change that I could see which would
+> alter the situation here.
 > 
-> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> index 93b730ffb5fb..12b76a0a9837 100644
-> --- a/xen/arch/arm/setup.c
-> +++ b/xen/arch/arm/setup.c
-> @@ -255,7 +255,9 @@ void __init init_pdx(void)
->  {
->      const struct membanks *mem = bootinfo_get_mem();
->      paddr_t bank_start, bank_size, bank_end, ram_end = 0;
-> +    int bank;
->  
-> +#ifdef CONFIG_PDX_COMPRESSION
->      /*
->       * Arm does not have any restrictions on the bits to compress. Pass 0 to
->       * let the common code further restrict the mask.
-> @@ -264,7 +266,6 @@ void __init init_pdx(void)
->       * update this function too.
->       */
->      uint64_t mask = pdx_init_mask(0x0);
-> -    int bank;
->  
->      for ( bank = 0 ; bank < mem->nr_banks; bank++ )
->      {
-> @@ -284,6 +285,7 @@ void __init init_pdx(void)
->      }
->  
->      pfn_pdx_hole_setup(mask >> PAGE_SHIFT);
-> +#endif
->  
->      for ( bank = 0 ; bank < mem->nr_banks; bank++ )
->      {
-> -- 
-> 2.25.1
+> > xen/drivers/passthrough/iommu.c: non-compliant macro 'iommu_quarantine'
+> > xen/include/xen/iommu.h: non-compliant variable 'iommu_quarantine'
+> > 
+> > These external variables ('iommu_pt_cleanup_lock'
+> > and 'iommu_pt_cleanup_list') are no longer used
+> > in the codebase. Removing them eliminates dead
+> > code and ensures compliance with coding standards.
+> > Fixes: b5622eb627 (iommu: remove unused iommu_ops method and tasklet, 2020-09-22)
 > 
+> That's a different Misra rule, so may better be put in a separate patch?
+> Otherwise please at least mention the rule number as well.
+> 
+> > The variable 'iommu_quarantine' makes sence to use
+> > only if 'CONFIG_HAS_PCI=y', so place it inside '#ifdef'.
+> 
+> Hmm, yes - not nice, but what do you do. I question "makes sense" though:
+> Quarantining is possible also without PCI, aiui. Just we don't that right
+> now.
+
+Hi Jan,
+
+As far as I can tell the change to #ifdef iommu_quarantine is necessary
+to resolve a R5.5 violation here:
+
+#ifdef CONFIG_HAS_PCI
+uint8_t __read_mostly iommu_quarantine =
+# if defined(CONFIG_IOMMU_QUARANTINE_NONE)
+    IOMMU_quarantine_none;
+# elif defined(CONFIG_IOMMU_QUARANTINE_BASIC)
+    IOMMU_quarantine_basic;
+# elif defined(CONFIG_IOMMU_QUARANTINE_SCRATCH_PAGE)
+    IOMMU_quarantine_scratch_page;
+# endif
+#else
+# define iommu_quarantine IOMMU_quarantine_none       <<< violation
+#endif /* CONFIG_HAS_PCI */
+
+As you can see from the patch series, often it is not nice to find a
+resoltution for these R5.5 violations. This is the reason why I
+originally suggested to deviate R5.5 entirely.
+
+https://lore.kernel.org/xen-devel/139aa595-8b41-44e7-b205-415443c8c357@suse.com/](https://lore.kernel.org/xen-devel/139aa595-8b41-44e7-b205-415443c8c357@suse.com/
+
+That said, this patch is one of the nicer changes in this series, I
+think it is OK.
 
