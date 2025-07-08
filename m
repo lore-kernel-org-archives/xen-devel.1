@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23D9C83F09
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Jul 2025 19:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1037205.1409868 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1FC3C8303C
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Jul 2025 19:14:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1037213.1409889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uZDZO-0007sG-Ed; Tue, 08 Jul 2025 19:01:34 +0000
+	id 1uZDlb-0001rU-N2; Tue, 08 Jul 2025 19:14:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1037205.1409868; Tue, 08 Jul 2025 19:01:34 +0000
+Received: by outflank-mailman (output) from mailman id 1037213.1409889; Tue, 08 Jul 2025 19:14:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uZDZO-0007s9-C3; Tue, 08 Jul 2025 19:01:34 +0000
-Received: by outflank-mailman (input) for mailman id 1037205;
- Tue, 08 Jul 2025 19:01:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uZDlb-0001rN-Js; Tue, 08 Jul 2025 19:14:11 +0000
+Received: by outflank-mailman (input) for mailman id 1037213;
+ Tue, 08 Jul 2025 19:14:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=G3iI=ZV=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1uZDZN-0007s3-Az
- for xen-devel@lists.xenproject.org; Tue, 08 Jul 2025 19:01:33 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f314c458-5c2d-11f0-b894-0df219b8e170;
- Tue, 08 Jul 2025 21:01:28 +0200 (CEST)
+ id 1uZDla-0001d3-R1
+ for xen-devel@lists.xenproject.org; Tue, 08 Jul 2025 19:14:10 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b9624615-5c2f-11f0-a317-13f23c93f187;
+ Tue, 08 Jul 2025 21:14:09 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5359744B35;
- Tue,  8 Jul 2025 19:01:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64FC1C4CEED;
- Tue,  8 Jul 2025 19:01:24 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 848B56112E;
+ Tue,  8 Jul 2025 19:14:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1557BC4CEED;
+ Tue,  8 Jul 2025 19:14:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,230 +43,258 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f314c458-5c2d-11f0-b894-0df219b8e170
+X-Inumbo-ID: b9624615-5c2f-11f0-a317-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752001286;
-	bh=/wu0TIdhlNEW6BMQRtfAT/x2sMA83h/ij6cwc9qME3I=;
+	s=k20201202; t=1752002048;
+	bh=+OsadfDoWa/66/7oup+PKQ2A9dp5wlQHh65yPZN1Y2o=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=nfZLKR2iqPSrjUrOLnG5eU3NLL7Ceg9U9zHwwL3oIQm7LiGIbTmWIfI4geOh2Gtmx
-	 Gxh/BX3jin/0lWsESfPzg/sOEWYOyrXMYzI2/UQzh/TJfuJ9cIbjT/WkUvGRiqKmKL
-	 su+iwuaC8gT5ElUrbgvFHCgs7aJV4/j6WpK+DCq6wpwFkgUH2TVGJhzD4oXMbcu4xV
-	 cwhwyIR2QFxgTIE4pGgz+FpEVme5wlzj5ckiNlItHmcQp8oTrLTZH9YovNKa21/S4s
-	 7P6W0/hibzoIB57umO1+4w13FefJYmPGOkass2eqjQuDm7tDKl+K8y8/BbKJLjMIos
-	 rHuZODL4vgFvA==
-Date: Tue, 8 Jul 2025 12:01:22 -0700 (PDT)
+	b=hlYJlXHf0YuN65cdnzdply/V6nJ1p+xRy95B3x1wQtCAMQZVcnHIEjJ5VLW/+C3bB
+	 PHOCzBcCu0DoU6Cpkc/LJiaYTEf/LhZSY8NXNGNuAngQaHZW2qki8IJzPID5kjTjqT
+	 +lzyZRlY3k8OcK1TI2cSSoim3872kWsxBSN6ZuC0+0spr/CGN11tXTPJQzFnJaYBKy
+	 6ivJsMoR60UR8ZifFqDMZgMTgHF3nPwPrrYe4l0xJKMFYhE5eoi9OT4NqpJTV6q9vu
+	 06oX1IfshbBx/PXwlx+gQqflIWmpIprXvGacPKBYVp7ncXFNGLwhpXGAPAXbY0qPr6
+	 UaP46Eri+h1ow==
+Date: Tue, 8 Jul 2025 12:14:05 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Juergen Gross <jgross@suse.com>
-cc: linux-kernel@vger.kernel.org, llvm@lists.linux.dev, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-    Nathan Chancellor <nathan@kernel.org>, 
-    Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
-    Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
-    xen-devel@lists.xenproject.org, 
-    Abinash Singh <abinashsinghlalotra@gmail.com>
-Subject: Re: [PATCH] xen/gntdev: remove struct gntdev_copy_batch from stack
-In-Reply-To: <20250703073259.17356-1-jgross@suse.com>
-Message-ID: <alpine.DEB.2.22.394.2507081150230.605088@ubuntu-linux-20-04-desktop>
-References: <20250703073259.17356-1-jgross@suse.com>
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
+cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v1 2/3] pci/rcar: implement OSID configuration for Renesas
+ RCar Gen4 PCIe host
+In-Reply-To: <4a7c0fbe82b10ca7c6a6a703fec6d114880d0285.1751874601.git.mykyta_poturai@epam.com>
+Message-ID: <alpine.DEB.2.22.394.2507081209200.605088@ubuntu-linux-20-04-desktop>
+References: <cover.1751874601.git.mykyta_poturai@epam.com> <4a7c0fbe82b10ca7c6a6a703fec6d114880d0285.1751874601.git.mykyta_poturai@epam.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Thu, 3 Jul 2025, Juergen Gross wrote:
-> When compiling the kernel with LLVM, the following warning was issued:
+On Mon, 7 Jul 2025, Mykyta Poturai wrote:
+> For IPMMU to be able to associate a specific PCI device with it's TLB
+> the BDF to OSID mapping needs to be set up in the host bridge. The
+> configured OSID is then emmited as a sideband data on the AXI bus during
+> PCI DMA transactions. OSID configuration registers are located in the
+> "app" region of the host bridge.
 > 
->   drivers/xen/gntdev.c:991: warning: stack frame size (1160) exceeds
->   limit (1024) in function 'gntdev_ioctl'
+> Map the "app" region on init and implement methods for setting up
+> BDF->OSID mappings
 > 
-> The main reason is struct gntdev_copy_batch which is located on the
-> stack and has a size of nearly 1kb.
-> 
-> For performance reasons it shouldn't by just dynamically allocated
-> instead, so allocate a new instance when needed and instead of freeing
-> it put it into a list of free structs anchored in struct gntdev_priv.
-> 
-> Fixes: a4cdb556cae0 ("xen/gntdev: add ioctl for grant copy")
-> Reported-by: Abinash Singh <abinashsinghlalotra@gmail.com>
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
 > ---
->  drivers/xen/gntdev-common.h |  4 +++
->  drivers/xen/gntdev.c        | 71 ++++++++++++++++++++++++++-----------
->  2 files changed, 54 insertions(+), 21 deletions(-)
+>  xen/arch/arm/pci/pci-host-rcar4.c | 148 ++++++++++++++++++++++++++++++
+>  xen/arch/arm/pci/pci-host-rcar4.h |  18 ++++
+>  2 files changed, 166 insertions(+)
+>  create mode 100644 xen/arch/arm/pci/pci-host-rcar4.h
 > 
-> diff --git a/drivers/xen/gntdev-common.h b/drivers/xen/gntdev-common.h
-> index 9c286b2a1900..ac8ce3179ba2 100644
-> --- a/drivers/xen/gntdev-common.h
-> +++ b/drivers/xen/gntdev-common.h
-> @@ -26,6 +26,10 @@ struct gntdev_priv {
->  	/* lock protects maps and freeable_maps. */
->  	struct mutex lock;
+> diff --git a/xen/arch/arm/pci/pci-host-rcar4.c b/xen/arch/arm/pci/pci-host-rcar4.c
+> index 62d2130a63..9290c6cac5 100644
+> --- a/xen/arch/arm/pci/pci-host-rcar4.c
+> +++ b/xen/arch/arm/pci/pci-host-rcar4.c
+> @@ -16,6 +16,32 @@
 >  
-> +	/* Free instances of struct gntdev_copy_batch. */
-> +	struct gntdev_copy_batch *batch;
-> +	struct mutex batch_lock;
-> +
->  #ifdef CONFIG_XEN_GRANT_DMA_ALLOC
->  	/* Device for which DMA memory is allocated. */
->  	struct device *dma_dev;
-> diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-> index 61faea1f0663..1f2160765618 100644
-> --- a/drivers/xen/gntdev.c
-> +++ b/drivers/xen/gntdev.c
-> @@ -56,6 +56,18 @@ MODULE_AUTHOR("Derek G. Murray <Derek.Murray@cl.cam.ac.uk>, "
->  	      "Gerd Hoffmann <kraxel@redhat.com>");
->  MODULE_DESCRIPTION("User-space granted page access driver");
+>  #define RCAR4_DWC_VERSION       0x520A
 >  
-> +#define GNTDEV_COPY_BATCH 16
+> +/* PCIE BDF-OSID assignment */
+> +#define CNVID(n)             (0x700 + ((n) * 4))
+> +#define CNVID_CNV_EN         (1U << 31)
+> +#define CNVID_OSID_MASK      (0x0F << 16)
+> +#define CNVID_OSID_SHIFT     16
+> +#define CNVID_BDF_MASK       (0xFFFF << 0)
+> +#define CNVID_BDF_SHIFT      0
 > +
-> +struct gntdev_copy_batch {
-> +	struct gnttab_copy ops[GNTDEV_COPY_BATCH];
-> +	struct page *pages[GNTDEV_COPY_BATCH];
-> +	s16 __user *status[GNTDEV_COPY_BATCH];
-> +	unsigned int nr_ops;
-> +	unsigned int nr_pages;
-> +	bool writeable;
-> +	struct gntdev_copy_batch *next;
+> +#define CNVIDMSK(n)                (0x780 + ((n) * 4))
+> +#define CNVIDMSK_BDF_MSK_MASK      (0xFFFF << 0)
+> +#define CNVIDMSK_BDF_MSK_SHIFT     0
+> +
+> +#define CNVOSIDCTRL                0x800
+> +#define CNVOSIDCTRL_OSID_MASK      (0x0F << 16)
+> +#define CNVOSIDCTRL_OSID_SHIFT     16
+> +
+> +#define DEFAULT_OSID    0
+> +
+> +#define NUM_OSID_REGS    16
+> +
+> +struct rcar4_pcie_priv {
+> +    bool init_done;
+> +    void __iomem *app_base;
+> +    DECLARE_BITMAP(osid_regs, NUM_OSID_REGS);
 > +};
 > +
->  static unsigned int limit = 64*1024;
->  module_param(limit, uint, 0644);
->  MODULE_PARM_DESC(limit,
-> @@ -584,6 +596,8 @@ static int gntdev_open(struct inode *inode, struct file *flip)
->  	INIT_LIST_HEAD(&priv->maps);
->  	mutex_init(&priv->lock);
+>  /*
+>   * PCI host bridges often have different ways to access the root and child
+>   * bus config spaces:
+> @@ -65,17 +91,139 @@ static const struct dt_device_match __initconstrel rcar4_pcie_dt_match[] = {
+>      {},
+>  };
 >  
-> +	mutex_init(&priv->batch_lock);
+> +static void rcar4_pcie_writel_app(struct rcar4_pcie_priv *pci, uint32_t reg,
+> +                                  uint32_t val)
+> +{
+> +    writel(val, pci->app_base + reg);
+> +}
 > +
->  #ifdef CONFIG_XEN_GNTDEV_DMABUF
->  	priv->dmabuf_priv = gntdev_dmabuf_init(flip);
->  	if (IS_ERR(priv->dmabuf_priv)) {
-> @@ -608,6 +622,7 @@ static int gntdev_release(struct inode *inode, struct file *flip)
+> +static uint32_t rcar4_pcie_readl_app(struct rcar4_pcie_priv *pci, uint32_t reg)
+> +{
+> +    return readl(pci->app_base + reg);
+> +}
+> +
+> +int rcar4_pcie_osid_regs_init(struct pci_host_bridge *bridge)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +    uint32_t val = rcar4_pcie_readl_app(priv, CNVOSIDCTRL);
+> +
+> +    if ( priv->init_done )
+> +        return 0;
+> +    priv->init_done = true;
+> +
+> +    val = (val & ~CNVOSIDCTRL_OSID_MASK) |
+> +          (DEFAULT_OSID << CNVOSIDCTRL_OSID_SHIFT);
+> +    rcar4_pcie_writel_app(priv, CNVOSIDCTRL, val);
+> +    bitmap_zero(priv->osid_regs, NUM_OSID_REGS);
+> +
+> +    printk("%s: Initialized OSID regs (default OSID %u)\n",
+> +           bridge->dt_node->full_name, DEFAULT_OSID);
+> +
+> +    return 0;
+> +}
+> +
+> +int rcar4_pcie_osid_reg_alloc(struct pci_host_bridge *bridge)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +    int ret;
+> +
+> +    ret = find_first_zero_bit(priv->osid_regs, NUM_OSID_REGS);
+> +    if ( ret != NUM_OSID_REGS )
+> +        set_bit(ret, priv->osid_regs);
+> +    else
+> +        ret = -EBUSY;
+> +
+> +    return ret;
+> +}
+> +
+> +void rcar4_pcie_osid_reg_free(struct pci_host_bridge *bridge,
+> +                              unsigned int reg_id)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +
+> +    clear_bit(reg_id, priv->osid_regs);
+> +}
+> +
+> +void rcar4_pcie_osid_bdf_set(struct pci_host_bridge *bridge,
+> +                             unsigned int reg_id, uint32_t osid, uint32_t bdf)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +    uint32_t data = rcar4_pcie_readl_app(priv, CNVID(reg_id));
+> +
+> +    data &= ~(CNVID_OSID_MASK | CNVID_BDF_MASK);
+> +    data |= CNVID_CNV_EN | (osid << CNVID_OSID_SHIFT) |
+> +            (bdf << CNVID_BDF_SHIFT);
+> +    rcar4_pcie_writel_app(priv, CNVID(reg_id), data);
+> +}
+> +
+> +void rcar4_pcie_osid_bdf_clear(struct pci_host_bridge *bridge,
+> +                               unsigned int reg_id)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +    uint32_t data = rcar4_pcie_readl_app(priv, CNVID(reg_id));
+> +
+> +    data &= ~CNVID_CNV_EN;
+> +    rcar4_pcie_writel_app(priv, CNVID(reg_id), data);
+> +}
+> +
+> +void rcar4_pcie_bdf_msk_set(struct pci_host_bridge *bridge, unsigned int reg_id,
+> +                            uint32_t data)
+> +{
+> +    struct rcar4_pcie_priv *priv = dw_pcie_get_priv(bridge);
+> +
+> +    uint32_t val = rcar4_pcie_readl_app(priv, CNVIDMSK(reg_id));
+> +
+> +    val = (val & ~CNVIDMSK_BDF_MSK_MASK) | (data << CNVIDMSK_BDF_MSK_SHIFT);
+> +
+> +    rcar4_pcie_writel_app(priv, CNVIDMSK(reg_id), val);
+> +}
+> +
+>  static int __init pci_host_rcar4_probe(struct dt_device_node *dev,
+>                                         const void *data)
 >  {
->  	struct gntdev_priv *priv = flip->private_data;
->  	struct gntdev_grant_map *map;
-> +	struct gntdev_copy_batch *batch;
->  
->  	pr_debug("priv %p\n", priv);
->  
-> @@ -620,6 +635,14 @@ static int gntdev_release(struct inode *inode, struct file *flip)
->  	}
->  	mutex_unlock(&priv->lock);
->  
-> +	mutex_lock(&priv->batch_lock);
-> +	while (priv->batch) {
-> +		batch = priv->batch;
-> +		priv->batch = batch->next;
-> +		kfree(batch);
-> +	}
-> +	mutex_unlock(&priv->batch_lock);
+>      struct pci_host_bridge *bridge;
+> +    paddr_t app_phys_addr;
+> +    paddr_t app_size;
+> +    int app_idx, ret;
 > +
->  #ifdef CONFIG_XEN_GNTDEV_DMABUF
->  	gntdev_dmabuf_fini(priv->dmabuf_priv);
->  #endif
-> @@ -785,17 +808,6 @@ static long gntdev_ioctl_notify(struct gntdev_priv *priv, void __user *u)
->  	return rc;
+> +    struct rcar4_pcie_priv *priv = xzalloc(struct rcar4_pcie_priv);
+> +    if ( !priv )
+> +        return -ENOMEM;
+>  
+>      bridge = dw_pcie_host_probe(dev, data, &rcar4_pcie_ops,
+>                                  &rcar4_pcie_child_ops);
+>  
+> +    app_idx = dt_property_match_string(dev, "reg-names", "app");
+> +    if ( app_idx < 0 )
+> +    {
+> +        printk(XENLOG_ERR "Cannot find \"app\" range index in device tree\n");
+> +        ret = app_idx;
+> +        goto err;
+> +    }
+> +    ret = dt_device_get_address(dev, app_idx, &app_phys_addr, &app_size);
+> +    if ( ret )
+> +    {
+> +        printk(XENLOG_ERR "Cannot find \"app\" range in device tree\n");
+> +        goto err;
+> +    }
+> +
+> +    priv->app_base = ioremap_nocache(app_phys_addr, app_size);
+> +    if ( !priv->app_base )
+> +    {
+> +        printk(XENLOG_ERR "APP ioremap failed\n");
+> +        ret = -ENXIO;
+> +        goto err;
+> +    }
+> +    printk("APP at [mem 0x%" PRIpaddr "-0x%" PRIpaddr "]\n", app_phys_addr,
+> +           app_phys_addr + app_size - 1);
+> +
+> +    dw_pcie_set_priv(bridge, priv);
+>      dw_pcie_set_version(bridge, RCAR4_DWC_VERSION);
+>  
+>      return 0;
+> +err:
+> +    xfree(priv);
+> +    return ret;
 >  }
 >  
-> -#define GNTDEV_COPY_BATCH 16
-> -
-> -struct gntdev_copy_batch {
-> -	struct gnttab_copy ops[GNTDEV_COPY_BATCH];
-> -	struct page *pages[GNTDEV_COPY_BATCH];
-> -	s16 __user *status[GNTDEV_COPY_BATCH];
-> -	unsigned int nr_ops;
-> -	unsigned int nr_pages;
-> -	bool writeable;
-> -};
-> -
->  static int gntdev_get_page(struct gntdev_copy_batch *batch, void __user *virt,
->  				unsigned long *gfn)
->  {
-> @@ -953,36 +965,53 @@ static int gntdev_grant_copy_seg(struct gntdev_copy_batch *batch,
->  static long gntdev_ioctl_grant_copy(struct gntdev_priv *priv, void __user *u)
->  {
->  	struct ioctl_gntdev_grant_copy copy;
-> -	struct gntdev_copy_batch batch;
-> +	struct gntdev_copy_batch *batch;
->  	unsigned int i;
->  	int ret = 0;
->  
->  	if (copy_from_user(&copy, u, sizeof(copy)))
->  		return -EFAULT;
->  
-> -	batch.nr_ops = 0;
-> -	batch.nr_pages = 0;
-> +	mutex_lock(&priv->batch_lock);
-> +	if (!priv->batch) {
-> +		batch = kmalloc(sizeof(*batch), GFP_KERNEL);
-> +	} else {
-> +		batch = priv->batch;
-> +		priv->batch = batch->next;
-> +	}
-> +	mutex_unlock(&priv->batch_lock);
-
-I am concerned about the potentially unbounded amount of memory that
-could be allocated this way.
-
-The mutex is already a potentially very slow operation. Could we instead
-allocate a single batch, and if it is currently in use, use the mutex to
-wait until it becomes available?
-
-I am also OK with the current approach but I thought I would ask.
-
-
-
-
-> +	if (!batch)
-> +		return -ENOMEM;
+>  DT_DEVICE_START(pci_gen, "PCI HOST R-CAR GEN4", DEVICE_PCI_HOSTBRIDGE)
+> diff --git a/xen/arch/arm/pci/pci-host-rcar4.h b/xen/arch/arm/pci/pci-host-rcar4.h
+> new file mode 100644
+> index 0000000000..8ac6626a22
+> --- /dev/null
+> +++ b/xen/arch/arm/pci/pci-host-rcar4.h
+> @@ -0,0 +1,18 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#include <asm/pci.h>
 > +
-> +	batch->nr_ops = 0;
-> +	batch->nr_pages = 0;
->  
->  	for (i = 0; i < copy.count; i++) {
->  		struct gntdev_grant_copy_segment seg;
->  
->  		if (copy_from_user(&seg, &copy.segments[i], sizeof(seg))) {
->  			ret = -EFAULT;
-> +			gntdev_put_pages(batch);
->  			goto out;
->  		}
->  
-> -		ret = gntdev_grant_copy_seg(&batch, &seg, &copy.segments[i].status);
-> -		if (ret < 0)
-> +		ret = gntdev_grant_copy_seg(batch, &seg, &copy.segments[i].status);
-> +		if (ret < 0) {
-> +			gntdev_put_pages(batch);
->  			goto out;
-> +		}
->  
->  		cond_resched();
->  	}
-> -	if (batch.nr_ops)
-> -		ret = gntdev_copy(&batch);
-> -	return ret;
-> +	if (batch->nr_ops)
-> +		ret = gntdev_copy(batch);
+> +#ifndef __PCI_HOST_RCAR4_H__
+> +#define __PCI_HOST_RCAR4_H__
 > +
-> + out:
-> +	mutex_lock(&priv->batch_lock);
-> +	batch->next = priv->batch;
-> +	priv->batch = batch;
-> +	mutex_unlock(&priv->batch_lock);
->  
-> -  out:
-> -	gntdev_put_pages(&batch);
-
-One change from before is that in case of no errors, gntdev_put_pages is
-not called anymore. Do we want that? Specifically, we are missing the
-call to unpin_user_pages_dirty_lock
-
-
->  	return ret;
->  }
->  
+> +void rcar4_pcie_osid_bdf_set(struct pci_host_bridge *bridge,
+> +                             unsigned int reg_id, uint32_t osid, uint32_t bdf);
+> +void rcar4_pcie_osid_bdf_clear(struct pci_host_bridge *bridge,
+> +                               unsigned int reg_id);
+> +void rcar4_pcie_bdf_msk_set(struct pci_host_bridge *bridge, unsigned int reg_id,
+> +                            uint32_t data);
+> +int rcar4_pcie_osid_reg_alloc(struct pci_host_bridge *bridge);
+> +void rcar4_pcie_osid_reg_free(struct pci_host_bridge *bridge,
+> +                              unsigned int reg_id);
+> +int rcar4_pcie_osid_regs_init(struct pci_host_bridge *bridge);
+> +
+> +#endif /* __PCI_HOST_RCAR4_H__ */
 > -- 
-> 2.43.0
+> 2.34.1
 > 
 
