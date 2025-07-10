@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02972C83F1A
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Jul 2025 00:25:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1040009.1411493 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1F3C83F17
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Jul 2025 00:37:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1040033.1411507 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ua1Zm-0003WU-Tk; Fri, 11 Jul 2025 00:25:18 +0000
+	id 1ua1l0-0005Si-0P; Fri, 11 Jul 2025 00:36:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1040009.1411493; Fri, 11 Jul 2025 00:25:18 +0000
+Received: by outflank-mailman (output) from mailman id 1040033.1411507; Fri, 11 Jul 2025 00:36:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ua1Zm-0003WN-Qx; Fri, 11 Jul 2025 00:25:18 +0000
-Received: by outflank-mailman (input) for mailman id 1040009;
- Fri, 11 Jul 2025 00:25:17 +0000
+	id 1ua1kz-0005Sb-Tg; Fri, 11 Jul 2025 00:36:53 +0000
+Received: by outflank-mailman (input) for mailman id 1040033;
+ Fri, 11 Jul 2025 00:36:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qphH=ZY=amd.com=stefano.stabellini@srs-se1.protection.inumbo.net>)
- id 1ua1Zl-0003WH-Fy
- for xen-devel@lists.xenproject.org; Fri, 11 Jul 2025 00:25:17 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20627.outbound.protection.outlook.com
- [2a01:111:f403:2415::627])
+ <SRS0=KwYO=ZY=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1ua1ky-0005Qh-5v
+ for xen-devel@lists.xenproject.org; Fri, 11 Jul 2025 00:36:52 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20606.outbound.protection.outlook.com
+ [2a01:111:f403:240a::606])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8382352e-5ded-11f0-a318-13f23c93f187;
- Fri, 11 Jul 2025 02:25:15 +0200 (CEST)
-Received: from DS7PR03CA0066.namprd03.prod.outlook.com (2603:10b6:5:3bb::11)
- by BY5PR12MB4067.namprd12.prod.outlook.com (2603:10b6:a03:212::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.24; Fri, 11 Jul
- 2025 00:25:10 +0000
-Received: from DS1PEPF0001709B.namprd05.prod.outlook.com
- (2603:10b6:5:3bb:cafe::34) by DS7PR03CA0066.outlook.office365.com
- (2603:10b6:5:3bb::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.22 via Frontend Transport; Fri,
- 11 Jul 2025 00:25:10 +0000
+ id 2045c74c-5def-11f0-a318-13f23c93f187;
+ Fri, 11 Jul 2025 02:36:49 +0200 (CEST)
+Received: from MN2PR10CA0030.namprd10.prod.outlook.com (2603:10b6:208:120::43)
+ by MN2PR12MB4437.namprd12.prod.outlook.com (2603:10b6:208:26f::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.29; Fri, 11 Jul
+ 2025 00:36:42 +0000
+Received: from BN1PEPF00004689.namprd05.prod.outlook.com
+ (2603:10b6:208:120:cafe::40) by MN2PR10CA0030.outlook.office365.com
+ (2603:10b6:208:120::43) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.25 via Frontend Transport; Fri,
+ 11 Jul 2025 00:36:42 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709B.mail.protection.outlook.com (10.167.18.105) with Microsoft
+ BN1PEPF00004689.mail.protection.outlook.com (10.167.243.134) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8922.22 via Frontend Transport; Fri, 11 Jul 2025 00:25:09 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ 15.20.8922.22 via Frontend Transport; Fri, 11 Jul 2025 00:36:42 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Jul
- 2025 19:25:08 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 19:36:41 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Jul
- 2025 19:25:07 -0500
-Received: from ubuntu-20.04.2-arm64.shared (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Thu, 10 Jul 2025 19:25:06 -0500
+ 2025 19:36:41 -0500
+Received: from [172.19.134.125] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Thu, 10 Jul 2025 19:36:41 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,194 +65,332 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8382352e-5ded-11f0-a318-13f23c93f187
+X-Inumbo-ID: 2045c74c-5def-11f0-a318-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ycr7pKfagT7hlYb4sDjyaIsWQrsAP31I702VE+Ktd4JRxOAn8EvTQEOaHlHWR5ahNFEo4t65QzBXVglF2Lirljr2afUaGmo6MqRrq1q2iSCP23ahMtxyBNwc2UTCtExmfyEWe3gsOl8I0aP1w+TS35OL0LZ3FAAoS4HfGknbEtUf6EOjPlDNsR346Ji2F3W/xwLpkygYcN0HU+DYqQskqcT9nhR+C+hM/CWBMfJUyTmVfeh6ohEi9yVPTV4Elb6fTKTVTfuxXJu/DdY4FnWZQItQJW5ucCGrCUmjHLjKDQC7NX+35N9IbRnoNaVqIyna1q74cB2IEkmlaxMdRUaIOA==
+ b=gAJ3tdtnJHx7+YBLXu7Yc9tX9XiazvJXT3FUbk47j9oFlaFxyXp/XW2e4K6KaxQ3co4YiA/ZCY+pP6PIvl6tC0R3S3pUen6GcyPVoGNdcbswxJywraLq7gu0PxiBY7qnC+S9nph/Pe+YnuSu2zig6aRkXc3DIJekfzMHPzaBTsUksxfH5/N+hVEhTdMJIHec8vWvXuIoW+p/pAADwjMrs29BNvoYDcpl5CuUV2zFdwo6KmWIEuOjU0hf4ePgzbwfqGtbrbTsMejZnqa438ukQv6THGw5JyU6WBEjBPpzVKUzKUnqcUtPVA5y1iOg764H6NJ/AyFLMN5FOU7LMNlOOA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BJOUJVuqDeVm4e/RFbpZ3pToTtnx3zgcWatOfvA8u7k=;
- b=ITq2fxj3xQ+VnPo+aJrLewYTW17bme706SXDPIC/oVePuVDuLJ4RPhdHc5zeoDSXAql9g25x0hMvT3G5xVUswW3ZW+Z8xtva20xTrCEfG03aC+66l8Gzl46WVKW6ab3OEqDkTfYR56WrnYfZDbS5VYWJpkkDvPTWoiHlFPJXJcbYxpUcdXlv5EcqP/dtkSLwz9Px0/OYi1DDh8JmmicTkrRcM3cQtwpj5RqNB8o2g8vsEKIFg6tig+T8zY1m1vPfdfiJPcNApLUpK8w4qSPnU5KMPmbo6Jg9ofd35bIl9n2SuakjQ2GT3Mtoz2+F1aHMtwanTkTClBul1nQK/i2VYg==
+ bh=Mu8HczdrIOu4FRdPm2mPE+j0YN4Icvri6gDA0ab8h0c=;
+ b=t2BvLkyJESoUiRBJ2G1/WC7ouwIlZ/8kdcTLjpsqIBYMp825OwE7BHXTgFbSlZGY7B1x1ElKuaDveY4rkCnuIxQiG/gPBfzGynoFD6V4xmvO4imTCrCyrDwGVyAMN8nNlSut9r1Nqa8Wn36m//BhU1ontyZ5Zf02WVYlqnp2XvSgFRthBzQ7klLvtsU0Em0vp6uNjpMbrBLyTuxaYF3KSmqR5XI0J564RYK0HwZ9+yj8BmmN/AS6Db//zte69RaXCU9ylIP4hbBfAhXLvszH54zgCEOre8cjK1V2kEueS1bpJ3ncK+9XtgjCpmasYpJ3pXcubAr9jrext7SQA0hSaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BJOUJVuqDeVm4e/RFbpZ3pToTtnx3zgcWatOfvA8u7k=;
- b=5Jf/sWa3VsWRlDBmgS5G4RjnGlWT03mBfZcehL7vIgrYdWFw+NhAgB5QGU/fr0Z3ELHSCWuRxZ3rn2X4sBGp0WPuKF2Kb0vYTrnS+clA28UuAbHSQlnuJvPZQKf/DSCPO8o/xTQ897Kcyk4OqWFFPQ+LfJNI4nxl4YEkATqbMeA=
+ bh=Mu8HczdrIOu4FRdPm2mPE+j0YN4Icvri6gDA0ab8h0c=;
+ b=TiOeczqpPW9D1aw0GDjcaVmdMemnNubu2FdLfSl9eSTpY3YkH0PR+BaljmX5/lWSIgu39c+v0p/cW0NkvoLkDPGaZiYWwybRSIdxrJMlRSUnyRpMW9Xfm9Gn+KoERgTdcpZNZlAQPDYQ/z9FntmK7c0vEklNNRvKunzEV7cXyCE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Date: Thu, 10 Jul 2025 17:25:06 -0700
-From: Stefano Stabellini <stefano.stabellini@amd.com>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: <xen-devel@lists.xenproject.org>
-CC: Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>,
-	<jason.andryuk@amd.com>, <stewart.hildebrand@amd.com>,
-	<stefano.stabellini@amd.com>
-Subject: [PATCH v2] xen/arm: fix arm_iommu_map_page after f9f6b22ab
-Message-ID: <alpine.DEB.2.22.394.2507101724180.605088@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+Message-ID: <cbb2c96d-c4da-4360-9f74-0dbfe3448747@amd.com>
+Date: Thu, 10 Jul 2025 19:21:18 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Received-SPF: None (SATLEXMB05.amd.com: stefano.stabellini@amd.com does not
- designate permitted sender hosts)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [MINI-OS PATCH 12/19] mini-os: kexec: add support for handing
+ over some memory across kexec
+To: Juergen Gross <jgross@suse.com>, <minios-devel@lists.xenproject.org>,
+	<xen-devel@lists.xenproject.org>
+CC: <samuel.thibault@ens-lyon.org>
+References: <20250702081254.14383-1-jgross@suse.com>
+ <20250702081254.14383-13-jgross@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20250702081254.14383-13-jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709B:EE_|BY5PR12MB4067:EE_
-X-MS-Office365-Filtering-Correlation-Id: c186fb01-2f27-4477-cef7-08ddc011651e
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004689:EE_|MN2PR12MB4437:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9ca76cd-bfde-4501-8700-08ddc01301b6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026|7053199007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?2oOZoD+2XY2WhmksrVYAhngnlPnvqB1UzV2GgtObBA8zzxyqoHkF36ayqD5X?=
- =?us-ascii?Q?Oz/TSOvLRJCA0G+YAQCE0p384A/9ySw+g0QGI56MK9BHQpsqVIyVRFSoTG+2?=
- =?us-ascii?Q?H9Km3Feupmq4erDBPKRsuye0VYgiwa51zQYL4/kcRjpQTIo8QSM8pHavJCkX?=
- =?us-ascii?Q?Xc3fHI008N0fmgqg5xNGplW337U2ttm8gMXncI6OzrKp1LbqDZcfK6zeXDXP?=
- =?us-ascii?Q?CXoFG9TbtiAKkF0FzO1PYYFpk37J61nJHiEAzCVpZeKGtsc3HnJHS8UnTvV+?=
- =?us-ascii?Q?TS3cMxmPxIL9OH8c7WJK4ulZrawSS0IR41zzd9PYwF8S5Gy+vR63FreayFTk?=
- =?us-ascii?Q?irJICuTWBbQ7QkfbdYIPqEPLwnm+/RqJ/7VfrkkMffF4AlywR/9DkffqAh/1?=
- =?us-ascii?Q?dkJc37hcav0X8pHfOh8FUvpGG+rsb1q3080zxnSb2wAJNJwMQX6LsY0xswlk?=
- =?us-ascii?Q?L9AWMyJgVR7NakznrKLFGTbT86OpCD3kUa/PrtijjWBhTPdJWDqVRzB4cJZv?=
- =?us-ascii?Q?OvVolIYzDLeftvNc2+YXwqFwjKljP2uA8jiOMRBFqjtBcx9L7upgD6Iu3kWi?=
- =?us-ascii?Q?K6hHp6vky+Ypq9HinP/ly4/mOtaga1Qg3XZXyk2HOD+GKQA/rhasBgUDzFkE?=
- =?us-ascii?Q?TBfW9BbV+a/1mesW+WsaR2b+O/dJTxiSkG3h/lb5wMSKnMzEMgGSYthdrsIZ?=
- =?us-ascii?Q?ONrOtFomy8yD3OPvTmI2cFHg0p1XEMGHa35B12dI4xlOzZnIZQofpNlQFT+h?=
- =?us-ascii?Q?ehQIbV0UOYiovh6IBZtzjmXg3p/O0WkboWchBezSlZ6peVj75xkJYbp65aio?=
- =?us-ascii?Q?raEKsteCt4L8zt3KbFEWUPKQIu9SToPhc7+fo/ej924MbxF0AfrfvLaT5m+v?=
- =?us-ascii?Q?CLjtMeco521n+w8nj8gPojsrJ5gxLpcrmXvKXOFKgM6Yc4EQlF9jtNqEKI7v?=
- =?us-ascii?Q?ishqdCZFKQQ1D9erl9NyTt5spVt/VqaWHo50A31Qblvbg8iNJ6s4CANJL/32?=
- =?us-ascii?Q?qYzUpq6fSJNL+A4Z0kRRhzf5t07ux9oI7d4qcN9zQnC9eFvPZV8ydFjFUWcg?=
- =?us-ascii?Q?fL41F+NEdg+DpQl/CTm4ojCAPlRew4Xf4n7Nl4pVmtW+aYUupqUxxAfcFV4x?=
- =?us-ascii?Q?UqYAOdwUv6IixLddXWLu/eEDgAFn1JgBPPMeifyuUu2JDk6CVRUsn5yZC4z2?=
- =?us-ascii?Q?7DaBXxeRTvDt1BvIdtswxGbBgha2W/BRQAXfq32EFIx4+dEdwPhV7zSp/1oU?=
- =?us-ascii?Q?AP1eUZ1InGV1Nr7AJ14JI+CIrxIG6slMSzhl+YAYk4hpz9JiFiQNZOxxP/mw?=
- =?us-ascii?Q?gckCxmvxNz6MRDu+A21veTOlX8NKPz9CVQ7qMXIBs4F02b0Qw5/glO7bRfSo?=
- =?us-ascii?Q?x76dvu1iXK7L3PoETVE7urtkrLSzRzlsPYnWMqVehD6ZQJDTRVk5aEqc5Jr7?=
- =?us-ascii?Q?C6uv316YqvYAFT3CXYzCvFX3tiyBPr0gXGc/IaBY+AZfuNoIk3160Tz0AHBh?=
- =?us-ascii?Q?eiRttHUlM9NKL1WuHv1fRxjoYb1GDuUn0V55?=
+	=?utf-8?B?aVVIMHFUT3ZXRmlsd2V0OUl1NXhVTzRwSW9RYTROYWRLcnZuSXNxUFMrQysv?=
+ =?utf-8?B?ZjNlNEk0MTZQQzh4VnFoZUdlU2h2dDUraXcxanBRWXpKSlJCY0FGblEzYjl0?=
+ =?utf-8?B?TlZtQWZzVWRtVmwzRjZZWXRrVVhkczE2RXhBT1QzbGtuQ1pJSFVGdlZtRVk0?=
+ =?utf-8?B?aW92L1lQMS93WmtmUEc0S1kra2VnWldRV0RtVzZXbGJhOHdpRGx1NFVQS1Yr?=
+ =?utf-8?B?NGFiRTJUNXpPR1F2TmtzbXFqczM0SnY0cWNNMWYrcDVLbDI3RTN3alRnU1ZC?=
+ =?utf-8?B?MStvbjEwL3lOalFLd3VpUzZkU0dmcGN3Tk5saTMvNTFaVGp1Yncvdnh1RG8y?=
+ =?utf-8?B?Vmd2ZVNnY3ZwdWNUTjQ0TXNhc0UwUTh1VWtjV3cxMVZnMmJlU2JMR2h3QS9Q?=
+ =?utf-8?B?N09vZFc4QjdLcDIySmFhMStyam55OWc0Y1Z1Kzl2N0pYOFNDaU9FaGJVUVlO?=
+ =?utf-8?B?MmZCMFdVaVlyRUNqWWFVb3VsV2NhaENUNlNGdENoKytSNjN4ZEJiTlBtWGtu?=
+ =?utf-8?B?SlVSVjR3U2V4ZGZYZWltY2NYeHNvWURYK2VtVFJndXNzVDZjWXhzZndTSEhK?=
+ =?utf-8?B?Y0EydFVGWHExQ2lXNTZENlhGZFRuNUQ4WWNxM3lyc2tJQXg4Umg5aXJ5NDAw?=
+ =?utf-8?B?Nldjczc4VU42Uzd1L2FRdXRiNFBUNHBnemF5N0hETEE1a2VDZG5kQ3h5ekZQ?=
+ =?utf-8?B?TnRocTlHK3IzTHdDaWI5ZTc4YlJJc20wb2N5cVRLWmFEdlJRenRRYTR4SmJW?=
+ =?utf-8?B?aktTSmZObEQ5VFdTaVdXQnhBWTJRWXNNL0pvclF6U1lkazJoeHdsMFZjaTRM?=
+ =?utf-8?B?U04wdi9oUkRTNXNTTW13K1IxakJjMDR1L0lJa2cyWE5taC9JQkhwa2dPL2xu?=
+ =?utf-8?B?Vkh2RnlFUDBDTFJGZXZLMDlxdXhma3M4RCtaL0NlV0VkZVRNZ3pSYUxMdUV2?=
+ =?utf-8?B?aTFDdytXOW95bUR3Y2dnZ0dxZDNCUWQyV1Q4TlRlMTB4aGUzSHVxR0VzUE0y?=
+ =?utf-8?B?THRZZHlwM0lhOGgrUFovbDZxQ1ppSXBaUWsxNHllZ2ZHeG5PQUxDRXYrVHU4?=
+ =?utf-8?B?RXBJb2lIeGluaXoyWkpLc3ROV3JoeElydTNycG9TdUVlRzV0cUlReWdEUFUr?=
+ =?utf-8?B?QzZlQldXWllQVVVocXJEdGMxRkZGbkhYL0JKcWxIZFVKMGsyV0VEUDhhTlk1?=
+ =?utf-8?B?MnVhcW51cXV1NmRCV1FMSzZqdEl5a1BhTVNQZi84VFlhdVpTdmtiVnQ1d1Bv?=
+ =?utf-8?B?ajdldldmSTZULzloKzBOZDc5dmVsdHRweVJMVWNScWw4TFRDMTR5R1dHYUF5?=
+ =?utf-8?B?b0ZZd29Ud1p3Y3RJM2UzSUlsc3VUajJRdTBaS20yLzRzV3BjWkJWRW5PN3NK?=
+ =?utf-8?B?aGxYUnZnQUdHMWdtYmh3RHdWUXk3WnFwL1h2azZianFqVkZ0dlc0NTQ5azd3?=
+ =?utf-8?B?VWhMUzk2amlJQmp0OXR1WlhZRmhzQkFmd0FBdHY4cHg2VDJQQjZtVlU4Ly8r?=
+ =?utf-8?B?TVkvVE5xRHh6bHVScXZzTnVGVlJhZjVXamtqYlhqa1M1djdjSXNNKzVqbHJn?=
+ =?utf-8?B?L2lnc2x3UWFCSTdKUGQvbzF4UTJJS0RFL0Z0ZWpHek8vY0Y0UGdXajZXcmxk?=
+ =?utf-8?B?VUhXbmVESXhkQUg0UUxVMXdxc3JjT2hlRWd6eDRyWitua240VG1ucWpBT0oz?=
+ =?utf-8?B?VzZuWWVWNUZpT3FNVklnQ1dtTFBjQW1JcnE0MlUwRzVlVUdmS1FNaEFJV2V2?=
+ =?utf-8?B?b05oSUJ6WTJTWkI1YTA3SWFwcGpOZ3c1dzV3TGVuWVJkMEt0SUswb2Rkek5a?=
+ =?utf-8?B?cmlTOUwrQ1lQbGN1RmwydUpka1R2LzRyQjZUTFIwRHIxL0EzUUJra0llcjk2?=
+ =?utf-8?B?TWdudmkxVXgxUFhGaFJRN0F1NmlOdkNKNUJoQlhNcCtaQXJhNGdQc2lpdDIz?=
+ =?utf-8?B?TzVxZHhNQWcyUVZBSFBzdmZPVmN5SUVQYVF1L3FiRUNxVVZJZ2ZXc09nY2RM?=
+ =?utf-8?B?L3g5S09DNkFMRGF4M0VWUitBQVh4dWhyMkhheld4VXJROEFmMkhWdHVJbkt4?=
+ =?utf-8?Q?A8TsNM?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026)(7053199007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2025 00:25:09.9605
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2025 00:36:42.1694
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c186fb01-2f27-4477-cef7-08ddc011651e
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9ca76cd-bfde-4501-8700-08ddc01301b6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DS1PEPF0001709B.namprd05.prod.outlook.com
+	BN1PEPF00004689.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4067
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4437
 
-Up until f9f6b22ab "xen/arm: Map ITS doorbell register to IOMMU page
-tables" the only caller of iommu_map on ARM was grant_table.c which has
-a specific usage model and restrictions as described by the in-code
-comment in arm_iommu_map_page.
+On 2025-07-02 04:12, Juergen Gross wrote:
+> Especially for support of Xenstore-stubdom live update some memory must
+> be handed over to the new kernel without moving it around: as the
+> 9pfs device used for storing and retrieving the state of Xenstore
+> needs to be kept operational across kexec (it can't be reopened due to
+> Xenstore not being available without access to the device), the ring
+> pages need to be accessible via active grants by the backend all the
+> time.
+> 
+> Add the basic support for that by reserving a pre-defined number of
+> memory pages at the top of the memory. This memory area will be
+> handed over to the new kernel via specifying it as a module in
+> struct hvm_start_info.
+> 
+> The contents of the memory area are described via a generic table of
+> contents in the last page of the memory.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+>   Config.mk             |  2 ++
+>   arch/x86/kexec.c      | 77 +++++++++++++++++++++++++++++++++++++++++++
+>   arch/x86/mm.c         | 18 ++++++++++
+>   arch/x86/setup.c      | 28 ++++++++++++++++
+>   include/kernel.h      |  1 +
+>   include/kexec.h       | 45 +++++++++++++++++++++++++
+>   include/x86/arch_mm.h |  1 +
+>   kexec.c               |  3 ++
+>   mm.c                  |  6 ++++
+>   9 files changed, 181 insertions(+)
+> 
+> diff --git a/Config.mk b/Config.mk
+> index b9675e61..0e4e86d8 100644
+> --- a/Config.mk
+> +++ b/Config.mk
+> @@ -220,6 +220,8 @@ CONFIG-$(lwip) += CONFIG_LWIP
+>   $(foreach i,$(CONFIG-y),$(eval $(i) ?= y))
+>   $(foreach i,$(CONFIG-n),$(eval $(i) ?= n))
+>   
+> +CONFIG-val-$(CONFIG_KEXEC) += CONFIG_KEXEC_MODULE_PAGES
+> +
 
-f9f6b22ab introduced a second caller to iommu_map on ARM:
-vgic_v3_its_init_virtual. This specific statement in the
-f9f6b22ab commit message is wrong:
+I don't know Makefiles well enough to review the preceding patch.  This 
+doesn't seem to be used?
 
-"Note that the 1:1 check in arm_iommu_map_page remains for now, as
-virtual ITSes are currently only created for hwdom where the doorbell
-mapping is always 1:1."
+>   $(foreach i,$(CONFIG-val-y),$(eval $(i) ?= 0))
+>   
+>   CONFIG-x += CONFIG_LIBXS
+> diff --git a/arch/x86/kexec.c b/arch/x86/kexec.c
+> index 804e7b6d..7fb98473 100644
+> --- a/arch/x86/kexec.c
+> +++ b/arch/x86/kexec.c
+> @@ -201,10 +201,73 @@ static unsigned long kexec_param_loc;
+>   static unsigned int kexec_param_size;
+>   static unsigned long kexec_param_mem;
+>   
+> +static struct kexec_module *kexec_check_module(void)
+> +{
+> +    unsigned long mod_size;
+> +    unsigned long mod;
+> +    struct kexec_module *module_ptr;
+> +
+> +    mod = get_module(&mod_size);
+> +    if ( !mod )
+> +        return NULL;
+> +    /* Size must be a multiple of PAGE_SIZE. */
+> +    if ( mod_size & ~PAGE_MASK )
+> +        return NULL;
+> +
+> +    /* Kxec module description is at start of the last page of the module. */
 
-Leading to crashes any time the hardware domain is not direct-mapped
-(e.g. cache coloring and non-Dom0 hardware domain):
+Kexec
 
-(XEN) Xen BUG at drivers/passthrough/arm/iommu_helpers.c:49
-[...]
-(XEN) Xen call trace:
-(XEN)    [<00000a000024c758>] arm_iommu_map_page+0x80/0x90 (PC)
-(XEN)    [<00000a000024c750>] arm_iommu_map_page+0x78/0x90 (LR)
-(XEN)    [<00000a0000250884>] iommu_map+0xcc/0x29c
-(XEN)    [<00000a0000288024>] vgic_v3_its_init_domain+0x18c/0x1e8
-(XEN)    [<00000a0000285228>] vgic-v3.c#vgic_v3_domain_init+0x168/0x21c
-(XEN)    [<00000a0000281dcc>] domain_vgic_init+0x14c/0x210
-(XEN)    [<00000a00002705a4>] arch_domain_create+0x150/0x1f0
-(XEN)    [<00000a00002055e8>] domain_create+0x47c/0x6c0
-(XEN)    [<00000a00002cf090>] create_domUs+0x7f8/0x8cc
-(XEN)    [<00000a00002eb588>] start_xen+0x8f4/0x998
-(XEN)    [<00000a000020018c>] head.o#primary_switched+0x4/0x10
+> +    module_ptr = (void *)(mod + mod_size - (unsigned long)PAGE_SIZE);
+> +
+> +    /* Check eye catcher. */
+> +    if ( memcmp(module_ptr->eye_catcher, KEXECMOD_EYECATCHER,
+> +                sizeof(module_ptr->eye_catcher)) )
+> +        return NULL;
+> +    if ( module_ptr->n_pages != (mod_size >> PAGE_SHIFT) - 1 )
+> +        return NULL;
+> +
+> +    return module_ptr;
+> +}
 
-Specifically, non-1:1 hardware domain exists with cache coloring
-enabled. For that, is_domain_direct_mapped(d) is false but
-domain_use_host_layout(d) is true.
+> +#define min(a, b) ((a) < (b) ? (a) : (b))
+> +void kexec_module(unsigned long start_pfn, unsigned long max_pfn)
+> +{
+> +    /* Reuse already existing kexec module. */
+> +    mod_ptr = kexec_check_module();
+> +    if ( !mod_ptr && CONFIG_KEXEC_MODULE_PAGES )
 
-At a minimum, we need to change the is_domain_direct_mapped(d) check in
-arm_iommu_map_page into a domain_use_host_layout(d) check. But in
-preparation of exposing vITS to domUs, let's take this opportunity to
-generalize the arm_iommu_map_page function further to be more generic
-and unopinionated. Move the in-code comment specific to the grant table
-can live in grant-table.c instead.
+What if CONFIG_KEXEC_MODULE_PAGES changes between the old and the new 
+stubdom?
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
----
- xen/common/grant_table.c                    | 10 ++++++++--
- xen/drivers/passthrough/arm/iommu_helpers.c | 13 +------------
- 2 files changed, 9 insertions(+), 14 deletions(-)
+> +    {
+> +        max_pfn = min(max_pfn, PHYS_PFN(0xffffffff));
+> +
+> +        iterate_memory_range(PFN_PHYS(start_pfn), PFN_PHYS(max_pfn),
+> +                             get_mod_addr);
+> +        BUG_ON(!kexec_mod_start);
+> +
+> +        mod_ptr = (void *)(kexec_mod_start +
+> +                           ((CONFIG_KEXEC_MODULE_PAGES - 1) << PAGE_SHIFT));
+> +        memset(mod_ptr, 0, PAGE_SIZE);
+> +        memcpy(mod_ptr->eye_catcher, KEXECMOD_EYECATCHER,
+> +               sizeof(mod_ptr->eye_catcher));
+> +        mod_ptr->n_pages = CONFIG_KEXEC_MODULE_PAGES - 1;
+> +        memset(mod_ptr->pg2rec, KEXECMOD_PG_FREE, mod_ptr->n_pages);
 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index cf131c43a1..2e08dac656 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -1274,8 +1274,14 @@ map_grant_ref(
-         }
- 
-         /*
--         * We're not translated, so we know that dfns and mfns are
--         * the same things, so the IOMMU entry is always 1-to-1.
-+         * Grant mappings can be used for DMA requests. The dev_bus_addr
-+         * returned by the hypercall is the MFN (not the IPA). For
-+         * device protected by an IOMMU, Xen needs to add a 1:1 mapping
-+         * in the domain p2m to allow DMA request to work. This is only
-+         * valid when the domain is directed mapped.
-+         *
-+         * We're not translated, so we know that dfns and mfns are the
-+         * same things, so the IOMMU entry is always 1-to-1.
-          */
-         if ( !(op->flags & GNTMAP_readonly) && node.cnt.wr == 1 )
-             kind = IOMMUF_readable | IOMMUF_writable;
-diff --git a/xen/drivers/passthrough/arm/iommu_helpers.c b/xen/drivers/passthrough/arm/iommu_helpers.c
-index 5cb1987481..dae5fc0caa 100644
---- a/xen/drivers/passthrough/arm/iommu_helpers.c
-+++ b/xen/drivers/passthrough/arm/iommu_helpers.c
-@@ -36,17 +36,6 @@ int __must_check arm_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
- {
-     p2m_type_t t;
- 
--    /*
--     * Grant mappings can be used for DMA requests. The dev_bus_addr
--     * returned by the hypercall is the MFN (not the IPA). For device
--     * protected by an IOMMU, Xen needs to add a 1:1 mapping in the domain
--     * p2m to allow DMA request to work.
--     * This is only valid when the domain is directed mapped. Hence this
--     * function should only be used by gnttab code with gfn == mfn == dfn.
--     */
--    BUG_ON(!is_domain_direct_mapped(d));
--    BUG_ON(mfn_x(mfn) != dfn_x(dfn));
--
-     /* We only support readable and writable flags */
-     if ( !(flags & (IOMMUF_readable | IOMMUF_writable)) )
-         return -EINVAL;
-@@ -57,7 +46,7 @@ int __must_check arm_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
-      * The function guest_physmap_add_entry replaces the current mapping
-      * if there is already one...
-      */
--    return guest_physmap_add_entry(d, _gfn(dfn_x(dfn)), _mfn(dfn_x(dfn)),
-+    return guest_physmap_add_entry(d, _gfn(dfn_x(dfn)), mfn,
-                                    IOMMUF_order(flags), t);
- }
- 
--- 
-2.25.1
+I was wondering about a BUILD_BUG_ON for CONFIG_KEXEC_MODULE_PAGES 
+versus some limit but I can't think of one.
+> +        mod_ptr->recs_off = sizeof(struct kexec_module) +
+> +                            CONFIG_KEXEC_MODULE_PAGES + (mod_ptr->n_pages & 1);
 
+mod_ptr->n_pages & 1 is to ensure 16bit alignment?
+
+mod_ptr->n_pages = CONFIG_KEXEC_MODULE_PAGES - 1, and pg2rec is n_pages, 
+so using CONFIG_KEXEC_MODULE_PAGES makes this off by 1?
+
+> +
+> +        set_reserved_range(kexec_mod_start, (unsigned long)mod_ptr + PAGE_SIZE);
+> +    }
+> +}
+> +
+
+> @@ -252,6 +316,19 @@ int kexec_get_entry(const char *cmdline)
+>       info->memmap_entries = mmap - (struct hvm_memmap_table_entry *)next;
+>       next = mmap;
+>   
+> +    if ( mod_ptr )
+> +    {
+> +        mod = next;
+> +        memset(mod, 0, sizeof(*mod));
+> +        info->nr_modules = 1;
+> +        info->modlist_paddr = kexec_param_loc +
+
+Looking at this again, I wonder if kexec_param_loc would be better named 
+_pa or _paddr.
+
+> +                              (unsigned long)next - kexec_param_mem;
+> +        mod->paddr = kexec_mod_start;
+> +        mod->size = PFN_PHYS(mod_ptr->n_pages + 1);
+> +        mod->cmdline_paddr = 0;
+> +        next = mod + 1;
+> +    }
+> +
+>       info->cmdline_paddr = kexec_param_loc + (unsigned long)next - kexec_param_mem;
+>       strcpy(next, cmdline);
+>   
+
+
+> diff --git a/include/kexec.h b/include/kexec.h
+> index b89c3000..0200005f 100644
+> --- a/include/kexec.h
+> +++ b/include/kexec.h
+> @@ -2,6 +2,48 @@
+>   #define _KEXEC_H
+>   #include <mini-os/elf.h>
+>   
+> +/*
+> + * Kexec module used to hand over memory across kexec().
+> + *
+> + * This is an ABI which should be modified only in a compatible way.
+> + * struct kexec_module is located at the start of the last page of the module.
+
+Why is kexec_module, which seems like a header, placed in the last page?
+
+> + *
+> + * The module can contain data/pages of multiple users. Each user has an own
+> + * record which layout is depending on the user. Records are linked via a table
+> + * of record offsets.
+> + *
+> + * All admin data (struct kexec_module, record offset table and records) must
+> + * fit into the last page of the module.
+> + */
+> +struct kexec_module {
+> +    uint8_t eye_catcher[8];
+> +#define KEXECMOD_EYECATCHER "KexecMem"
+> +    uint16_t n_pages;       /* Number of allocatable pages in the module.    */
+> +    uint16_t n_records;     /* Size of record table (max. 255).              */
+> +#define KEXECMOD_REC_MAX    255
+> +    uint16_t recs_off;      /* Offset to record table from start of page.    */
+> +                            /* The record table is an array of               */
+> +                            /* struct kexec_module_rec.                      */
+> +    uint8_t pg2rec[];       /* One entry per allocatable module page, value  */
+> +                            /* is record number (starting from 0) associated */
+> +                            /* with it. Free pages have value 255.           */
+
+This reads like it is 1 page per record...
+
+> +#define KEXECMOD_PG_FREE    255
+> +};
+> +
+> +struct kexec_module_rec {
+> +    uint16_t offset;        /* Offset to record from start of page.          */
+
+... but then why would you need an offset?  How do you identify which 
+"page" or do you mean from the start of the module?
+
+> +    uint8_t type;           /* Type of record.                               */
+> +#define KEXECMOD_REC_NONE   0
+> +    uint8_t size;           /* Size of record.                               */
+> +};
+> +
+> +#ifndef CONFIG_KEXEC_MODULE_PAGES
+> +#define CONFIG_KEXEC_MODULE_PAGES 0
+> +#endif
+> +
+> +extern unsigned long kexec_mod_start;
+> +extern struct kexec_module *mod_ptr;
+> +
+>   /* One element of kexec actions (last element must have action KEXEC_CALL): */
+>   struct kexec_action {
+>       enum {
+
+> diff --git a/kexec.c b/kexec.c
+> index 2607c819..ded29882 100644
+> --- a/kexec.c
+> +++ b/kexec.c
+> @@ -250,3 +250,6 @@ int kexec_add_action(int action, void *dest, void *src, unsigned int len)
+>   
+>       return 0;
+>   }
+> +
+> +unsigned long kexec_mod_start;
+> +struct kexec_module *mod_ptr;
+
+Personally, I find it a little unusual to add variables at the end of 
+the file.  But it's fine and you don't have to change it.
+
+Regards,
+Jason
 
