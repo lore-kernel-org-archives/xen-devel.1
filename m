@@ -4,56 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1F3C83F17
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Jul 2025 00:37:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1040033.1411507 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6046CC83F1A
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Jul 2025 00:40:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1040045.1411518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ua1l0-0005Si-0P; Fri, 11 Jul 2025 00:36:54 +0000
+	id 1ua1oL-0006ys-Dh; Fri, 11 Jul 2025 00:40:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1040033.1411507; Fri, 11 Jul 2025 00:36:53 +0000
+Received: by outflank-mailman (output) from mailman id 1040045.1411518; Fri, 11 Jul 2025 00:40:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ua1kz-0005Sb-Tg; Fri, 11 Jul 2025 00:36:53 +0000
-Received: by outflank-mailman (input) for mailman id 1040033;
- Fri, 11 Jul 2025 00:36:52 +0000
+	id 1ua1oL-0006yl-9X; Fri, 11 Jul 2025 00:40:21 +0000
+Received: by outflank-mailman (input) for mailman id 1040045;
+ Fri, 11 Jul 2025 00:40:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KwYO=ZY=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1ua1ky-0005Qh-5v
- for xen-devel@lists.xenproject.org; Fri, 11 Jul 2025 00:36:52 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20606.outbound.protection.outlook.com
- [2a01:111:f403:240a::606])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=qtn+=ZY=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1ua1oI-0006yf-Jd
+ for xen-devel@lists.xenproject.org; Fri, 11 Jul 2025 00:40:19 +0000
+Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2045c74c-5def-11f0-a318-13f23c93f187;
- Fri, 11 Jul 2025 02:36:49 +0200 (CEST)
-Received: from MN2PR10CA0030.namprd10.prod.outlook.com (2603:10b6:208:120::43)
- by MN2PR12MB4437.namprd12.prod.outlook.com (2603:10b6:208:26f::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.29; Fri, 11 Jul
- 2025 00:36:42 +0000
-Received: from BN1PEPF00004689.namprd05.prod.outlook.com
- (2603:10b6:208:120:cafe::40) by MN2PR10CA0030.outlook.office365.com
- (2603:10b6:208:120::43) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.25 via Frontend Transport; Fri,
- 11 Jul 2025 00:36:42 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF00004689.mail.protection.outlook.com (10.167.243.134) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8922.22 via Frontend Transport; Fri, 11 Jul 2025 00:36:42 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Jul
- 2025 19:36:41 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Jul
- 2025 19:36:41 -0500
-Received: from [172.19.134.125] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 10 Jul 2025 19:36:41 -0500
+ id 9d3af686-5def-11f0-a318-13f23c93f187;
+ Fri, 11 Jul 2025 02:40:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,332 +38,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2045c74c-5def-11f0-a318-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gAJ3tdtnJHx7+YBLXu7Yc9tX9XiazvJXT3FUbk47j9oFlaFxyXp/XW2e4K6KaxQ3co4YiA/ZCY+pP6PIvl6tC0R3S3pUen6GcyPVoGNdcbswxJywraLq7gu0PxiBY7qnC+S9nph/Pe+YnuSu2zig6aRkXc3DIJekfzMHPzaBTsUksxfH5/N+hVEhTdMJIHec8vWvXuIoW+p/pAADwjMrs29BNvoYDcpl5CuUV2zFdwo6KmWIEuOjU0hf4ePgzbwfqGtbrbTsMejZnqa438ukQv6THGw5JyU6WBEjBPpzVKUzKUnqcUtPVA5y1iOg764H6NJ/AyFLMN5FOU7LMNlOOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mu8HczdrIOu4FRdPm2mPE+j0YN4Icvri6gDA0ab8h0c=;
- b=t2BvLkyJESoUiRBJ2G1/WC7ouwIlZ/8kdcTLjpsqIBYMp825OwE7BHXTgFbSlZGY7B1x1ElKuaDveY4rkCnuIxQiG/gPBfzGynoFD6V4xmvO4imTCrCyrDwGVyAMN8nNlSut9r1Nqa8Wn36m//BhU1ontyZ5Zf02WVYlqnp2XvSgFRthBzQ7klLvtsU0Em0vp6uNjpMbrBLyTuxaYF3KSmqR5XI0J564RYK0HwZ9+yj8BmmN/AS6Db//zte69RaXCU9ylIP4hbBfAhXLvszH54zgCEOre8cjK1V2kEueS1bpJ3ncK+9XtgjCpmasYpJ3pXcubAr9jrext7SQA0hSaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mu8HczdrIOu4FRdPm2mPE+j0YN4Icvri6gDA0ab8h0c=;
- b=TiOeczqpPW9D1aw0GDjcaVmdMemnNubu2FdLfSl9eSTpY3YkH0PR+BaljmX5/lWSIgu39c+v0p/cW0NkvoLkDPGaZiYWwybRSIdxrJMlRSUnyRpMW9Xfm9Gn+KoERgTdcpZNZlAQPDYQ/z9FntmK7c0vEklNNRvKunzEV7cXyCE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <cbb2c96d-c4da-4360-9f74-0dbfe3448747@amd.com>
-Date: Thu, 10 Jul 2025 19:21:18 -0400
+X-Inumbo-ID: 9d3af686-5def-11f0-a318-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1752194415; x=1752453615;
+	bh=LU1z9ZrEyR+QDSwNtVyDcer35o8iIkeRvqNidbZ5mU4=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=NAEvbw1RuZdNNjITEN+MCPiRUMh+x3ndcvYsPVY5Ynpaf3c+vua+xDAq+tZH6PVbv
+	 pqirhndvHRFXatPMWewkXXpc/X6sX6vPvj+K/irbld3XHwN/UVq6URmMO9weW7tSur
+	 NjjUo2ELn0md0XdC2rB3F1mcgIBYfrfMTyV7PXElQnBHj6U/ebNnquBp3oaFTVh8/4
+	 DTnr5hDVRiskdXwMTnejLuugBrmJ6qEp4LjxmYupnhJI4INe+uCoXMCcuIwgY8zzr5
+	 wTbISUtT/1NWz2udSK2UnUSSCoYpNo1hFD/fc378hkFPSo37sLoMGfaaQCV4bO9u3y
+	 bJ8AX60+s//6Q==
+Date: Fri, 11 Jul 2025 00:40:11 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v7] xen/console: introduce domain_console struct
+Message-ID: <20250711004003.23920-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 7f4efb1a2f2ca480c0d41187778b8fd088cb08e5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [MINI-OS PATCH 12/19] mini-os: kexec: add support for handing
- over some memory across kexec
-To: Juergen Gross <jgross@suse.com>, <minios-devel@lists.xenproject.org>,
-	<xen-devel@lists.xenproject.org>
-CC: <samuel.thibault@ens-lyon.org>
-References: <20250702081254.14383-1-jgross@suse.com>
- <20250702081254.14383-13-jgross@suse.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <20250702081254.14383-13-jgross@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004689:EE_|MN2PR12MB4437:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9ca76cd-bfde-4501-8700-08ddc01301b6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?aVVIMHFUT3ZXRmlsd2V0OUl1NXhVTzRwSW9RYTROYWRLcnZuSXNxUFMrQysv?=
- =?utf-8?B?ZjNlNEk0MTZQQzh4VnFoZUdlU2h2dDUraXcxanBRWXpKSlJCY0FGblEzYjl0?=
- =?utf-8?B?TlZtQWZzVWRtVmwzRjZZWXRrVVhkczE2RXhBT1QzbGtuQ1pJSFVGdlZtRVk0?=
- =?utf-8?B?aW92L1lQMS93WmtmUEc0S1kra2VnWldRV0RtVzZXbGJhOHdpRGx1NFVQS1Yr?=
- =?utf-8?B?NGFiRTJUNXpPR1F2TmtzbXFqczM0SnY0cWNNMWYrcDVLbDI3RTN3alRnU1ZC?=
- =?utf-8?B?MStvbjEwL3lOalFLd3VpUzZkU0dmcGN3Tk5saTMvNTFaVGp1Yncvdnh1RG8y?=
- =?utf-8?B?Vmd2ZVNnY3ZwdWNUTjQ0TXNhc0UwUTh1VWtjV3cxMVZnMmJlU2JMR2h3QS9Q?=
- =?utf-8?B?N09vZFc4QjdLcDIySmFhMStyam55OWc0Y1Z1Kzl2N0pYOFNDaU9FaGJVUVlO?=
- =?utf-8?B?MmZCMFdVaVlyRUNqWWFVb3VsV2NhaENUNlNGdENoKytSNjN4ZEJiTlBtWGtu?=
- =?utf-8?B?SlVSVjR3U2V4ZGZYZWltY2NYeHNvWURYK2VtVFJndXNzVDZjWXhzZndTSEhK?=
- =?utf-8?B?Y0EydFVGWHExQ2lXNTZENlhGZFRuNUQ4WWNxM3lyc2tJQXg4Umg5aXJ5NDAw?=
- =?utf-8?B?Nldjczc4VU42Uzd1L2FRdXRiNFBUNHBnemF5N0hETEE1a2VDZG5kQ3h5ekZQ?=
- =?utf-8?B?TnRocTlHK3IzTHdDaWI5ZTc4YlJJc20wb2N5cVRLWmFEdlJRenRRYTR4SmJW?=
- =?utf-8?B?aktTSmZObEQ5VFdTaVdXQnhBWTJRWXNNL0pvclF6U1lkazJoeHdsMFZjaTRM?=
- =?utf-8?B?U04wdi9oUkRTNXNTTW13K1IxakJjMDR1L0lJa2cyWE5taC9JQkhwa2dPL2xu?=
- =?utf-8?B?Vkh2RnlFUDBDTFJGZXZLMDlxdXhma3M4RCtaL0NlV0VkZVRNZ3pSYUxMdUV2?=
- =?utf-8?B?aTFDdytXOW95bUR3Y2dnZ0dxZDNCUWQyV1Q4TlRlMTB4aGUzSHVxR0VzUE0y?=
- =?utf-8?B?THRZZHlwM0lhOGgrUFovbDZxQ1ppSXBaUWsxNHllZ2ZHeG5PQUxDRXYrVHU4?=
- =?utf-8?B?RXBJb2lIeGluaXoyWkpLc3ROV3JoeElydTNycG9TdUVlRzV0cUlReWdEUFUr?=
- =?utf-8?B?QzZlQldXWllQVVVocXJEdGMxRkZGbkhYL0JKcWxIZFVKMGsyV0VEUDhhTlk1?=
- =?utf-8?B?MnVhcW51cXV1NmRCV1FMSzZqdEl5a1BhTVNQZi84VFlhdVpTdmtiVnQ1d1Bv?=
- =?utf-8?B?ajdldldmSTZULzloKzBOZDc5dmVsdHRweVJMVWNScWw4TFRDMTR5R1dHYUF5?=
- =?utf-8?B?b0ZZd29Ud1p3Y3RJM2UzSUlsc3VUajJRdTBaS20yLzRzV3BjWkJWRW5PN3NK?=
- =?utf-8?B?aGxYUnZnQUdHMWdtYmh3RHdWUXk3WnFwL1h2azZianFqVkZ0dlc0NTQ5azd3?=
- =?utf-8?B?VWhMUzk2amlJQmp0OXR1WlhZRmhzQkFmd0FBdHY4cHg2VDJQQjZtVlU4Ly8r?=
- =?utf-8?B?TVkvVE5xRHh6bHVScXZzTnVGVlJhZjVXamtqYlhqa1M1djdjSXNNKzVqbHJn?=
- =?utf-8?B?L2lnc2x3UWFCSTdKUGQvbzF4UTJJS0RFL0Z0ZWpHek8vY0Y0UGdXajZXcmxk?=
- =?utf-8?B?VUhXbmVESXhkQUg0UUxVMXdxc3JjT2hlRWd6eDRyWitua240VG1ucWpBT0oz?=
- =?utf-8?B?VzZuWWVWNUZpT3FNVklnQ1dtTFBjQW1JcnE0MlUwRzVlVUdmS1FNaEFJV2V2?=
- =?utf-8?B?b05oSUJ6WTJTWkI1YTA3SWFwcGpOZ3c1dzV3TGVuWVJkMEt0SUswb2Rkek5a?=
- =?utf-8?B?cmlTOUwrQ1lQbGN1RmwydUpka1R2LzRyQjZUTFIwRHIxL0EzUUJra0llcjk2?=
- =?utf-8?B?TWdudmkxVXgxUFhGaFJRN0F1NmlOdkNKNUJoQlhNcCtaQXJhNGdQc2lpdDIz?=
- =?utf-8?B?TzVxZHhNQWcyUVZBSFBzdmZPVmN5SUVQYVF1L3FiRUNxVVZJZ2ZXc09nY2RM?=
- =?utf-8?B?L3g5S09DNkFMRGF4M0VWUitBQVh4dWhyMkhheld4VXJROEFmMkhWdHVJbkt4?=
- =?utf-8?Q?A8TsNM?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2025 00:36:42.1694
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9ca76cd-bfde-4501-8700-08ddc01301b6
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00004689.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4437
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 2025-07-02 04:12, Juergen Gross wrote:
-> Especially for support of Xenstore-stubdom live update some memory must
-> be handed over to the new kernel without moving it around: as the
-> 9pfs device used for storing and retrieving the state of Xenstore
-> needs to be kept operational across kexec (it can't be reopened due to
-> Xenstore not being available without access to the device), the ring
-> pages need to be accessible via active grants by the backend all the
-> time.
-> 
-> Add the basic support for that by reserving a pre-defined number of
-> memory pages at the top of the memory. This memory area will be
-> handed over to the new kernel via specifying it as a module in
-> struct hvm_start_info.
-> 
-> The contents of the memory area are described via a generic table of
-> contents in the last page of the memory.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
->   Config.mk             |  2 ++
->   arch/x86/kexec.c      | 77 +++++++++++++++++++++++++++++++++++++++++++
->   arch/x86/mm.c         | 18 ++++++++++
->   arch/x86/setup.c      | 28 ++++++++++++++++
->   include/kernel.h      |  1 +
->   include/kexec.h       | 45 +++++++++++++++++++++++++
->   include/x86/arch_mm.h |  1 +
->   kexec.c               |  3 ++
->   mm.c                  |  6 ++++
->   9 files changed, 181 insertions(+)
-> 
-> diff --git a/Config.mk b/Config.mk
-> index b9675e61..0e4e86d8 100644
-> --- a/Config.mk
-> +++ b/Config.mk
-> @@ -220,6 +220,8 @@ CONFIG-$(lwip) += CONFIG_LWIP
->   $(foreach i,$(CONFIG-y),$(eval $(i) ?= y))
->   $(foreach i,$(CONFIG-n),$(eval $(i) ?= n))
->   
-> +CONFIG-val-$(CONFIG_KEXEC) += CONFIG_KEXEC_MODULE_PAGES
-> +
+From: Denis Mukhin <dmukhin@ford.com>=20
 
-I don't know Makefiles well enough to review the preceding patch.  This 
-doesn't seem to be used?
+Introduce domain_console for grouping data structures used for integrating
+domain's diagnostic console with Xen's console driver.
 
->   $(foreach i,$(CONFIG-val-y),$(eval $(i) ?= 0))
->   
->   CONFIG-x += CONFIG_LIBXS
-> diff --git a/arch/x86/kexec.c b/arch/x86/kexec.c
-> index 804e7b6d..7fb98473 100644
-> --- a/arch/x86/kexec.c
-> +++ b/arch/x86/kexec.c
-> @@ -201,10 +201,73 @@ static unsigned long kexec_param_loc;
->   static unsigned int kexec_param_size;
->   static unsigned long kexec_param_mem;
->   
-> +static struct kexec_module *kexec_check_module(void)
-> +{
-> +    unsigned long mod_size;
-> +    unsigned long mod;
-> +    struct kexec_module *module_ptr;
-> +
-> +    mod = get_module(&mod_size);
-> +    if ( !mod )
-> +        return NULL;
-> +    /* Size must be a multiple of PAGE_SIZE. */
-> +    if ( mod_size & ~PAGE_MASK )
-> +        return NULL;
-> +
-> +    /* Kxec module description is at start of the last page of the module. */
+Group all pbuf-related data structures under domain_console. Rename the mov=
+ed
+fields to plain .buf, .idx and .lock names, since all uses of the fields ar=
+e
+touched.
 
-Kexec
+Bump the domain console buffer allocation size to 256.
 
-> +    module_ptr = (void *)(mod + mod_size - (unsigned long)PAGE_SIZE);
-> +
-> +    /* Check eye catcher. */
-> +    if ( memcmp(module_ptr->eye_catcher, KEXECMOD_EYECATCHER,
-> +                sizeof(module_ptr->eye_catcher)) )
-> +        return NULL;
-> +    if ( module_ptr->n_pages != (mod_size >> PAGE_SHIFT) - 1 )
-> +        return NULL;
-> +
-> +    return module_ptr;
-> +}
+Rename domain console buffer size symbol to DOMAIN_CONSOLE_BUF_SIZE.
 
-> +#define min(a, b) ((a) < (b) ? (a) : (b))
-> +void kexec_module(unsigned long start_pfn, unsigned long max_pfn)
-> +{
-> +    /* Reuse already existing kexec module. */
-> +    mod_ptr = kexec_check_module();
-> +    if ( !mod_ptr && CONFIG_KEXEC_MODULE_PAGES )
+Finally, update the domain_console allocation and initialization code.
 
-What if CONFIG_KEXEC_MODULE_PAGES changes between the old and the new 
-stubdom?
+No functional change.
 
-> +    {
-> +        max_pfn = min(max_pfn, PHYS_PFN(0xffffffff));
-> +
-> +        iterate_memory_range(PFN_PHYS(start_pfn), PFN_PHYS(max_pfn),
-> +                             get_mod_addr);
-> +        BUG_ON(!kexec_mod_start);
-> +
-> +        mod_ptr = (void *)(kexec_mod_start +
-> +                           ((CONFIG_KEXEC_MODULE_PAGES - 1) << PAGE_SHIFT));
-> +        memset(mod_ptr, 0, PAGE_SIZE);
-> +        memcpy(mod_ptr->eye_catcher, KEXECMOD_EYECATCHER,
-> +               sizeof(mod_ptr->eye_catcher));
-> +        mod_ptr->n_pages = CONFIG_KEXEC_MODULE_PAGES - 1;
-> +        memset(mod_ptr->pg2rec, KEXECMOD_PG_FREE, mod_ptr->n_pages);
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v6:
+- reverted allocation of domain_console as in v5
+- dropped the commentary for DOMAIN_CONSOLE_BUF_SIZE
 
-I was wondering about a BUILD_BUG_ON for CONFIG_KEXEC_MODULE_PAGES 
-versus some limit but I can't think of one.
-> +        mod_ptr->recs_off = sizeof(struct kexec_module) +
-> +                            CONFIG_KEXEC_MODULE_PAGES + (mod_ptr->n_pages & 1);
+Link to v6: https://lore.kernel.org/xen-devel/20250710013421.2321353-1-dmuk=
+hin@ford.com/
+CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/191947309=
+3
+---
+ xen/arch/arm/vpl011.c      |  2 +-
+ xen/arch/x86/hvm/hvm.c     | 17 +++++++++--------
+ xen/arch/x86/pv/shim.c     |  2 +-
+ xen/common/domain.c        | 19 +++++++++----------
+ xen/drivers/char/console.c | 21 +++++++++++----------
+ xen/include/xen/sched.h    | 24 ++++++++++++++----------
+ 6 files changed, 45 insertions(+), 40 deletions(-)
 
-mod_ptr->n_pages & 1 is to ensure 16bit alignment?
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 2b6f2a09bca6..f4a840da10c5 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -713,7 +713,7 @@ int domain_vpl011_init(struct domain *d, struct vpl011_=
+init_info *info)
+     }
+     else
+     {
+-        d->console.input_allowed =3D true;
++        d->console->input_allowed =3D true;
+         vpl011->backend_in_domain =3D false;
+=20
+         vpl011->backend.xen =3D xzalloc(struct vpl011_xen_backend);
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 56c7de39778b..2be98f6ccbd1 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -559,7 +559,8 @@ void hvm_do_resume(struct vcpu *v)
+ static int cf_check hvm_print_line(
+     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
+ {
+-    struct domain *cd =3D current->domain;
++    const struct domain *d =3D current->domain;
++    struct domain_console *cons =3D d->console;
+     char c =3D *val;
+=20
+     ASSERT(bytes =3D=3D 1 && port =3D=3D XEN_HVM_DEBUGCONS_IOPORT);
+@@ -571,16 +572,16 @@ static int cf_check hvm_print_line(
+     if ( !is_console_printable(c) )
+         return X86EMUL_OKAY;
+=20
+-    spin_lock(&cd->pbuf_lock);
++    spin_lock(&cons->lock);
+     if ( c !=3D '\n' )
+-        cd->pbuf[cd->pbuf_idx++] =3D c;
+-    if ( (cd->pbuf_idx =3D=3D (DOMAIN_PBUF_SIZE - 1)) || (c =3D=3D '\n') )
++        cons->buf[cons->idx++] =3D c;
++    if ( (cons->idx =3D=3D (DOMAIN_CONSOLE_BUF_SIZE - 1)) || (c =3D=3D '\n=
+') )
+     {
+-        cd->pbuf[cd->pbuf_idx] =3D '\0';
+-        guest_printk(cd, XENLOG_G_DEBUG "%s\n", cd->pbuf);
+-        cd->pbuf_idx =3D 0;
++        cons->buf[cons->idx] =3D '\0';
++        guest_printk(d, XENLOG_G_DEBUG "%s\n", cons->buf);
++        cons->idx =3D 0;
+     }
+-    spin_unlock(&cd->pbuf_lock);
++    spin_unlock(&cons->lock);
+=20
+     return X86EMUL_OKAY;
+ }
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index bc2a7dd5fae5..bd29c53a2d34 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -239,7 +239,7 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgen=
+try_t *l4start,
+      */
+     d->max_pages =3D domain_tot_pages(d);
+=20
+-    d->console.input_allowed =3D true;
++    d->console->input_allowed =3D true;
+ }
+=20
+ static void write_start_info(struct domain *d)
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 303c338ef293..caef4cc8d649 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -669,7 +669,7 @@ static void _domain_destroy(struct domain *d)
+     BUG_ON(!d->is_dying);
+     BUG_ON(atomic_read(&d->refcnt) !=3D DOMAIN_DESTROYED);
+=20
+-    xfree(d->pbuf);
++    xvfree(d->console);
+=20
+     argo_destroy(d);
+=20
+@@ -835,8 +835,6 @@ struct domain *domain_create(domid_t domid,
+         flags |=3D CDF_hardware;
+         if ( old_hwdom )
+             old_hwdom->cdf &=3D ~CDF_hardware;
+-
+-        d->console.input_allowed =3D true;
+     }
+=20
+     /* Holding CDF_* internal flags. */
+@@ -866,8 +864,6 @@ struct domain *domain_create(domid_t domid,
+     spin_lock_init(&d->shutdown_lock);
+     d->shutdown_code =3D SHUTDOWN_CODE_INVALID;
+=20
+-    spin_lock_init(&d->pbuf_lock);
+-
+     rwlock_init(&d->vnuma_rwlock);
+=20
+ #ifdef CONFIG_HAS_PCI
+@@ -877,6 +873,14 @@ struct domain *domain_create(domid_t domid,
+=20
+     /* All error paths can depend on the above setup. */
+=20
++    err =3D -ENOMEM;
++    d->console =3D xvzalloc(typeof(*d->console));
++    if ( !d->console )
++        goto fail;
++
++    spin_lock_init(&d->console->lock);
++    d->console->input_allowed =3D is_hardware_domain(d);
++
+     /*
+      * Allocate d->vcpu[] and set ->max_vcpus up early.  Various per-domai=
+n
+      * resources want to be sized based on max_vcpus.
+@@ -959,11 +963,6 @@ struct domain *domain_create(domid_t domid,
+     if ( (err =3D argo_init(d)) !=3D 0 )
+         goto fail;
+=20
+-    err =3D -ENOMEM;
+-    d->pbuf =3D xzalloc_array(char, DOMAIN_PBUF_SIZE);
+-    if ( !d->pbuf )
+-        goto fail;
+-
+     if ( (err =3D sched_init_domain(d, config->cpupool_id)) !=3D 0 )
+         goto fail;
+=20
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index f54632bc0811..469f5e8832da 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -526,7 +526,7 @@ struct domain *console_get_domain(void)
+     if ( !d )
+         return NULL;
+=20
+-    if ( d->console.input_allowed )
++    if ( d->console->input_allowed )
+         return d;
+=20
+     rcu_unlock_domain(d);
+@@ -569,7 +569,7 @@ static void console_switch_input(void)
+         {
+             rcu_unlock_domain(d);
+=20
+-            if ( !d->console.input_allowed )
++            if ( !d->console->input_allowed )
+                 continue;
+=20
+             console_rx =3D next_rx;
+@@ -788,6 +788,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(=
+char) buffer,
+         else
+         {
+             char *kin =3D kbuf, *kout =3D kbuf, c;
++            struct domain_console *cons =3D cd->console;
+=20
+             /* Strip non-printable characters */
+             do
+@@ -800,22 +801,22 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARA=
+M(char) buffer,
+             } while ( --kcount > 0 );
+=20
+             *kout =3D '\0';
+-            spin_lock(&cd->pbuf_lock);
++            spin_lock(&cons->lock);
+             kcount =3D kin - kbuf;
+             if ( c !=3D '\n' &&
+-                 (cd->pbuf_idx + (kout - kbuf) < (DOMAIN_PBUF_SIZE - 1)) )
++                 (cons->idx + (kout - kbuf) < (DOMAIN_CONSOLE_BUF_SIZE - 1=
+)) )
+             {
+                 /* buffer the output until a newline */
+-                memcpy(cd->pbuf + cd->pbuf_idx, kbuf, kout - kbuf);
+-                cd->pbuf_idx +=3D (kout - kbuf);
++                memcpy(cons->buf + cons->idx, kbuf, kout - kbuf);
++                cons->idx +=3D kout - kbuf;
+             }
+             else
+             {
+-                cd->pbuf[cd->pbuf_idx] =3D '\0';
+-                guest_printk(cd, XENLOG_G_DEBUG "%s%s\n", cd->pbuf, kbuf);
+-                cd->pbuf_idx =3D 0;
++                cons->buf[cons->idx] =3D '\0';
++                guest_printk(cd, XENLOG_G_DEBUG "%s%s\n", cons->buf, kbuf)=
+;
++                cons->idx =3D 0;
+             }
+-            spin_unlock(&cd->pbuf_lock);
++            spin_unlock(&cons->lock);
+         }
+=20
+         guest_handle_add_offset(buffer, kcount);
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index fe53d4fab7ba..8771b7f22b48 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -371,6 +371,19 @@ struct evtchn_port_ops;
+=20
+ #define MAX_NR_IOREQ_SERVERS 8
+=20
++#define DOMAIN_CONSOLE_BUF_SIZE (256)
++
++/* Domain console settings. */
++struct domain_console {
++    /* Permission to take ownership of the physical console input. */
++    bool input_allowed;
++
++    /* hvm_print_line() and guest_console_write() logging. */
++    unsigned int idx;
++    spinlock_t lock;
++    char buf[DOMAIN_CONSOLE_BUF_SIZE];
++};
++
+ struct domain
+ {
+     domid_t          domain_id;
+@@ -562,12 +575,6 @@ struct domain
+     /* Control-plane tools handle for this domain. */
+     xen_domain_handle_t handle;
+=20
+-    /* hvm_print_line() and guest_console_write() logging. */
+-#define DOMAIN_PBUF_SIZE 200
+-    char       *pbuf;
+-    unsigned int pbuf_idx;
+-    spinlock_t  pbuf_lock;
+-
+     /* OProfile support. */
+     struct xenoprof *xenoprof;
+=20
+@@ -653,10 +660,7 @@ struct domain
+ #endif
+=20
+     /* Console settings. */
+-    struct {
+-        /* Permission to take ownership of the physical console input. */
+-        bool input_allowed;
+-    } console;
++    struct domain_console *console;
+ } __aligned(PAGE_SIZE);
+=20
+ static inline struct page_list_head *page_to_list(
+--=20
+2.34.1
 
-mod_ptr->n_pages = CONFIG_KEXEC_MODULE_PAGES - 1, and pg2rec is n_pages, 
-so using CONFIG_KEXEC_MODULE_PAGES makes this off by 1?
 
-> +
-> +        set_reserved_range(kexec_mod_start, (unsigned long)mod_ptr + PAGE_SIZE);
-> +    }
-> +}
-> +
-
-> @@ -252,6 +316,19 @@ int kexec_get_entry(const char *cmdline)
->       info->memmap_entries = mmap - (struct hvm_memmap_table_entry *)next;
->       next = mmap;
->   
-> +    if ( mod_ptr )
-> +    {
-> +        mod = next;
-> +        memset(mod, 0, sizeof(*mod));
-> +        info->nr_modules = 1;
-> +        info->modlist_paddr = kexec_param_loc +
-
-Looking at this again, I wonder if kexec_param_loc would be better named 
-_pa or _paddr.
-
-> +                              (unsigned long)next - kexec_param_mem;
-> +        mod->paddr = kexec_mod_start;
-> +        mod->size = PFN_PHYS(mod_ptr->n_pages + 1);
-> +        mod->cmdline_paddr = 0;
-> +        next = mod + 1;
-> +    }
-> +
->       info->cmdline_paddr = kexec_param_loc + (unsigned long)next - kexec_param_mem;
->       strcpy(next, cmdline);
->   
-
-
-> diff --git a/include/kexec.h b/include/kexec.h
-> index b89c3000..0200005f 100644
-> --- a/include/kexec.h
-> +++ b/include/kexec.h
-> @@ -2,6 +2,48 @@
->   #define _KEXEC_H
->   #include <mini-os/elf.h>
->   
-> +/*
-> + * Kexec module used to hand over memory across kexec().
-> + *
-> + * This is an ABI which should be modified only in a compatible way.
-> + * struct kexec_module is located at the start of the last page of the module.
-
-Why is kexec_module, which seems like a header, placed in the last page?
-
-> + *
-> + * The module can contain data/pages of multiple users. Each user has an own
-> + * record which layout is depending on the user. Records are linked via a table
-> + * of record offsets.
-> + *
-> + * All admin data (struct kexec_module, record offset table and records) must
-> + * fit into the last page of the module.
-> + */
-> +struct kexec_module {
-> +    uint8_t eye_catcher[8];
-> +#define KEXECMOD_EYECATCHER "KexecMem"
-> +    uint16_t n_pages;       /* Number of allocatable pages in the module.    */
-> +    uint16_t n_records;     /* Size of record table (max. 255).              */
-> +#define KEXECMOD_REC_MAX    255
-> +    uint16_t recs_off;      /* Offset to record table from start of page.    */
-> +                            /* The record table is an array of               */
-> +                            /* struct kexec_module_rec.                      */
-> +    uint8_t pg2rec[];       /* One entry per allocatable module page, value  */
-> +                            /* is record number (starting from 0) associated */
-> +                            /* with it. Free pages have value 255.           */
-
-This reads like it is 1 page per record...
-
-> +#define KEXECMOD_PG_FREE    255
-> +};
-> +
-> +struct kexec_module_rec {
-> +    uint16_t offset;        /* Offset to record from start of page.          */
-
-... but then why would you need an offset?  How do you identify which 
-"page" or do you mean from the start of the module?
-
-> +    uint8_t type;           /* Type of record.                               */
-> +#define KEXECMOD_REC_NONE   0
-> +    uint8_t size;           /* Size of record.                               */
-> +};
-> +
-> +#ifndef CONFIG_KEXEC_MODULE_PAGES
-> +#define CONFIG_KEXEC_MODULE_PAGES 0
-> +#endif
-> +
-> +extern unsigned long kexec_mod_start;
-> +extern struct kexec_module *mod_ptr;
-> +
->   /* One element of kexec actions (last element must have action KEXEC_CALL): */
->   struct kexec_action {
->       enum {
-
-> diff --git a/kexec.c b/kexec.c
-> index 2607c819..ded29882 100644
-> --- a/kexec.c
-> +++ b/kexec.c
-> @@ -250,3 +250,6 @@ int kexec_add_action(int action, void *dest, void *src, unsigned int len)
->   
->       return 0;
->   }
-> +
-> +unsigned long kexec_mod_start;
-> +struct kexec_module *mod_ptr;
-
-Personally, I find it a little unusual to add variables at the end of 
-the file.  But it's fine and you don't have to change it.
-
-Regards,
-Jason
 
