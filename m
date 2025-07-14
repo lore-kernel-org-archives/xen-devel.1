@@ -4,39 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4A9C83F1D
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Jul 2025 17:52:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1042370.1412518 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D80CC83F1B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Jul 2025 06:11:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1042507.1412559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ub0re-00020g-08; Sun, 13 Jul 2025 17:51:50 +0000
+	id 1ubCP5-0006Pw-7M; Mon, 14 Jul 2025 06:11:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1042370.1412518; Sun, 13 Jul 2025 17:51:49 +0000
+Received: by outflank-mailman (output) from mailman id 1042507.1412559; Mon, 14 Jul 2025 06:11:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ub0rd-00020Z-Tv; Sun, 13 Jul 2025 17:51:49 +0000
-Received: by outflank-mailman (input) for mailman id 1042370;
- Sun, 13 Jul 2025 17:51:48 +0000
+	id 1ubCP5-0006Pn-2O; Mon, 14 Jul 2025 06:11:07 +0000
+Received: by outflank-mailman (input) for mailman id 1042507;
+ Mon, 14 Jul 2025 06:11:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OXgA=Z2=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
- id 1ub0rc-00020T-0r
- for xen-devel@lists.xenproject.org; Sun, 13 Jul 2025 17:51:48 +0000
-Received: from 13.mo581.mail-out.ovh.net (13.mo581.mail-out.ovh.net
- [87.98.150.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 08ac2249-6012-11f0-b894-0df219b8e170;
- Sun, 13 Jul 2025 19:51:42 +0200 (CEST)
-Received: from director4.ghost.mail-out.ovh.net (unknown [10.109.254.36])
- by mo581.mail-out.ovh.net (Postfix) with ESMTP id 4bgCgd4Qhhz5xy4
- for <xen-devel@lists.xenproject.org>; Sun, 13 Jul 2025 17:51:41 +0000 (UTC)
-Received: from ghost-submission-5b5ff79f4f-p8m2d (unknown [10.110.164.244])
- by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 3D881C28AD;
- Sun, 13 Jul 2025 17:51:40 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.104])
- by ghost-submission-5b5ff79f4f-p8m2d with ESMTPSA
- id Vlb2Aizyc2htMyoAlauI+Q
- (envelope-from <sergii.dmytruk@3mdeb.com>); Sun, 13 Jul 2025 17:51:40 +0000
+ <SRS0=iPBn=Z3=flex--ardb.bounces.google.com=3d590aAgKCdIyF1z+46H4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-se1.protection.inumbo.net>)
+ id 1ubCP3-0005um-FG
+ for xen-devel@lists.xenproject.org; Mon, 14 Jul 2025 06:11:05 +0000
+Received: from mail-wr1-x44a.google.com (mail-wr1-x44a.google.com
+ [2a00:1450:4864:20::44a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 52398943-6079-11f0-b894-0df219b8e170;
+ Mon, 14 Jul 2025 08:11:03 +0200 (CEST)
+Received: by mail-wr1-x44a.google.com with SMTP id
+ ffacd0b85a97d-3a4f3796779so1673188f8f.1
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Jul 2025 23:11:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,118 +42,382 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08ac2249-6012-11f0-b894-0df219b8e170
-Authentication-Results:garm.ovh; auth=pass (GARM-104R005a3d20f4c-b3bb-42a3-a720-12c6be1af1a9,
-                    2DE9640A253108A2126106CA1255C693440FBD44) smtp.auth=sergii.dmytruk@3mdeb.com
-X-OVh-ClientIp:176.111.184.221
-Date: Sun, 13 Jul 2025 20:51:30 +0300
-From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	trenchboot-devel@googlegroups.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v3 03/22] x86/boot: add MLE header and Secure Launch
- entry point
-Message-ID: <aHPyIqo7vnZo6gnc@MjU3Nj>
-References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
- <916c87847457552583f1defb1aced37ea3ff58df.1748611041.git.sergii.dmytruk@3mdeb.com>
- <d9ab3803-c7e0-4a67-93e2-4f32bf9b3ad5@suse.com>
- <aGxCFFEU9BzLx96O@MjU3Nj>
- <01fe310f-a19a-4392-9215-8942c2bb9b86@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <01fe310f-a19a-4392-9215-8942c2bb9b86@suse.com>
-X-Ovh-Tracer-Id: 17450604132301190233
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdegleejvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvdfgveegtdffhfdugeevieehkeetudevfeefgedtleejledvfeeutdetudeiveelnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrddutdegnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheekudgmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=Ez2nQnWMNj+qRgSHD8dP/HnjZ5oq8kxPlOaOFa7lSWo=;
- c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
- t=1752429101; v=1;
- b=Y8iLF7AskaSbeMc8Z5PVHQqAz5FoOsstLrYfseSAHH0Oyuvh6oKWEtBXawT9wtE33jpAnKsl
- z2UHTiWA/IEgYrBoSPcoGrcyy0S65jhYp+enak0imxm5KoFahWsVJNdzdYqFtrwDAPLuLfzRkRd
- +ARjs/+qV862DSmcr+7frkvXajXtUixu1COx8HsPChoCwjuLY1sSKvYJXnkpq1JIDWeIhAIU2LG
- G+K+QoPc7EL75ogNGQ38nNZvxSpSYQhaYtO4hPz6N6aDUOYL5bPzI0cYEIeTdnr9oIrfwkyNYn7
- s5duOTHtdiBj6KAMqWBoDpXvhPyiX8CUXyMj3pV6CGibQ==
+X-Inumbo-ID: 52398943-6079-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1752473463; x=1753078263; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=U+Y2ODvkU1M3Yop4Vbyu4J7zT/gX9/QfE7MMpELx/ao=;
+        b=SUGawd0+cTj5Kh6F57/21W++wpLu1zmHfQv1wQB+vQ/SKoqALBJhchL+CEGCLNinYg
+         OKLxyJno37BHbqF2Cz/A9QYX1yx2DqShJzWXCgFUef5UsLETPb6uPsVtV3L+KUqub49R
+         V0OFON3xCJkVawaaF3psEVvte7RLV06F7hjn1BdCa0CaV2VGX/QptKPE7O9O27K+gKYZ
+         fcsid9atuwwmGz7gBWwSnzUFh+rF0gLhLnNS8vWL98BhKZi9sVW3ar3Js/4pZ5TyHpz9
+         ZXGi1YQ0tgZI8tbGeVTSC5DiiQKoeJzERvBzhIXmcgCDnvcEZ5/XFVyttZ7WYalL1SYc
+         AjxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752473463; x=1753078263;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=U+Y2ODvkU1M3Yop4Vbyu4J7zT/gX9/QfE7MMpELx/ao=;
+        b=CQp5jAzuLnSucOZ0QB15u6pTIIIyUmutF6aFMI558nDfiJ3S/nkf/b2GL3glVVM8DR
+         /0Y3BaM8sZxR1GBosN7a8oNApDAP5cWLw/bI3bsLYTME03/PvjHs2CahMAbNwXZ43tUQ
+         +kInmB6oDu20Wr3B4LtGzrwUWvdo0854DkGKEt6xz/2zNyuziqSovpk714KAiCDlDnrX
+         SemOvylUtokVzjBSsrqsNKyD6ExJejvXkcTT9yWpbCKn28ca13/V83PEDOj0RqqfPAYX
+         nAe2sMviNXUI6/UTfDoqAlZlRaeYsXCr6HRat7g1tHjwr3OQ8aRBTZda4S3+FdMsVzCD
+         Z4RA==
+X-Forwarded-Encrypted: i=1; AJvYcCUpq7H4li98rXI78sfPb1wlzYHtm05Az74wxAVQdyXxHZ/lzD4i6tM7npdLKDfrG9JvD3BnsN6GKyg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzZ3Bd7aXJsAlIUvLtJGQpXQ3EjjRQm2WCpuI2W/Coy6LuavaLe
+	s6Iwu+EllK8GAHEcYRjQ1lsvfp/YAMpXAnDd9xFWyY2QOxUqeXfHCMPZ8Eu+xjtVyce+36WNOw=
+	=
+X-Google-Smtp-Source: AGHT+IGX28n5QiyMHbS8lBZuZk7ytkYxLROV5L6i8XeWU2qCGkPvK5JXtsuwoSWms4DVodcgWH84OylK
+X-Received: from wrpd13.prod.google.com ([2002:adf:f2cd:0:b0:3a5:7de1:2a54])
+ (user=ardb job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6000:2d03:b0:3b1:9259:3ead
+ with SMTP id ffacd0b85a97d-3b5f188ea57mr7903902f8f.28.1752473463212; Sun, 13
+ Jul 2025 23:11:03 -0700 (PDT)
+Date: Mon, 14 Jul 2025 08:08:47 +0200
+In-Reply-To: <20250714060843.4029171-5-ardb+git@google.com>
+Mime-Version: 1.0
+References: <20250714060843.4029171-5-ardb+git@google.com>
+X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10631; i=ardb@kernel.org;
+ h=from:subject; bh=AM0I+cBVbRNRbkYjQz/D1G435xAIpZLDBEjL19MJg2w=;
+ b=owGbwMvMwCVmkMcZplerG8N4Wi2JIaNk3r/ty443O28umjfLomTz8/SAuPdT3B3Omps26nft3
+ bZh76H7HaUsDGJcDLJiiiwCs/++23l6olSt8yxZmDmsTCBDGLg4BWAiK6oZGboeRfLG+Ldu+j6J
+ WUg46/ZEw41PP6Yf5ZxVHXwxuP9BnyUjw6wCn6md1VrPOid8avq4xaWe957uwZsiURsf/WZuDzM QZwIA
+X-Mailer: git-send-email 2.50.0.727.gbf7dc18ff4-goog
+Message-ID: <20250714060843.4029171-8-ardb+git@google.com>
+Subject: [RFC PATCH 3/3] efi: Remove support for pointless, unused EFI services
+From: Ard Biesheuvel <ardb+git@google.com>
+To: linux-kernel@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org, Ard Biesheuvel <ardb@kernel.org>, 
+	Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Feng Tang <feng.tang@linux.alibaba.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Sunil V L <sunilvl@ventanamicro.com>, 
+	Bibo Mao <maobibo@loongson.cn>, linux-rtc@vger.kernel.org, linux-efi@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, x86@kernel.org, 
+	linux-riscv@lists.infradead.org, loongarch@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jul 08, 2025 at 09:02:55AM +0200, Jan Beulich wrote:
-> >>> +        .long   0x00020002  /* MLE version 2.2 */
-> >>> +        .long   (slaunch_stub_entry - start)  /* Linear entry point of MLE (SINIT virt. address) */
-> >>> +        .long   0x00000000  /* First valid page of MLE */
-> >>> +        .long   0x00000000  /* Offset within binary of first byte of MLE */
-> >>> +        .long   (_end - start)  /* Offset within binary of last byte + 1 of MLE */
-> >>
-> >> Is the data here describing xen.gz or (rather) xen.efi? In the latter case,
-> >> does data past _end (in particular the .reloc section) not matter here?
-> >
-> > Eventually, both.  EFI case deals with loaded image which, I believe,
-> > should have all relocations applied at the time of measurement.
->
-> But you're aware of the need to apply relocations a 2nd time? See
-> efi_arch_relocate_image(), which reads .reloc contents. Hence I assume
-> that section needs to be included in any measurements.
+From: Ard Biesheuvel <ardb@kernel.org>
 
-Checked map files and you're right, `__base_relocs_end` goes after
-`_end`.  Will update, thanks.
+The get/set wakeup time EFI runtime services are often broken, and
+rarely if ever used in practice. But the GetNextHighMonoCount() EFI
+runtime services really takes the cake for most pointless API in the
+history of computing.
 
-> >>> +         * - DS, ES, SS, FS and GS are undefined according to TXT SDG, but this
-> >>> +         *   would make it impossible to initialize GDTR, because GDT base must
-> >>> +         *   be relocated in the descriptor, which requires write access that
-> >>> +         *   CS doesn't provide. Instead we have to assume that DS is set by
-> >>> +         *   SINIT ACM as flat 4GB data segment.
-> >>
-> >> Do you really _have to_? At least as plausibly SS might be properly set up,
-> >> while DS might not be.
-> >
-> > "have to" is referring to the fact that making this assumption is forced
-> > on the implementation.
->
-> But that's not really true. The Xen bits could be changed if needed, e.g. ...
->
-> >  LGDT instruction uses DS in the code below, hence it's DS.
->
-> ... these could be made use SS or even CS.
+So let's stop exposing them in Linux, hopefully removing the urge some
+folks seem to feel to test these APIs, and send emails around when they
+don't work.
 
-SS can be used, but is it really any better than DS?  CS can be used for
-LGDT but it won't work for modifying base address because code segments
-are read-only.  Or do you mean that the comment should be made more
-precise?
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/x86/platform/efi/efi_64.c          | 22 -------
+ drivers/firmware/efi/runtime-wrappers.c | 68 --------------------
+ drivers/xen/efi.c                       | 56 ----------------
+ include/linux/efi.h                     |  6 --
+ 4 files changed, 152 deletions(-)
 
-> >>> +         * Additional restrictions:
-> >>> +         * - some MSRs are partially cleared, among them IA32_MISC_ENABLE, so
-> >>> +         *   some capabilities might be reported as disabled even if they are
-> >>> +         *   supported by CPU
-> >>> +         * - interrupts (including NMIs and SMIs) are disabled and must be
-> >>> +         *   enabled later
-> >>> +         * - trying to enter real mode results in reset
-> >>> +         * - APs must be brought up by MONITOR or GETSEC[WAKEUP], depending on
-> >>> +         *   which is supported by a given SINIT ACM
-> >>
-> >> I'm curious: How would MONITOR allow to bring up an AP? That's not even a
-> >> memory access.
-> >
-> > See patch #15.  BSP sets up TXT.MLE.JOIN and writes to an address
-> > monitored by APs, this causes APs to become part of dynamic launch by
-> > continuing execution at TXT-specific entry point.  It's more of a
-> > redirection rather than waking up, just another case of bad terminology.
->
-> Okay, (just ftaod) then my more general request: Please try to be as accurate
-> as possible in comments (and similarly patch descriptions). "must be brought
-> up by" is wording that I interpret to describe the action the "active" party
-> (i.e. the BSP) needs to take. Whereas MONITOR, as you now clarify, is the
-> action the AP needs to take (and then apparently is further required to
-> check for false wakeups).
->
-> Jan
+diff --git a/arch/x86/platform/efi/efi_64.c b/arch/x86/platform/efi/efi_64.c
+index e7e8f77f77f8..0207937ab39d 100644
+--- a/arch/x86/platform/efi/efi_64.c
++++ b/arch/x86/platform/efi/efi_64.c
+@@ -540,19 +540,6 @@ static efi_status_t efi_thunk_set_time(efi_time_t *tm)
+ 	return EFI_UNSUPPORTED;
+ }
+ 
+-static efi_status_t
+-efi_thunk_get_wakeup_time(efi_bool_t *enabled, efi_bool_t *pending,
+-			  efi_time_t *tm)
+-{
+-	return EFI_UNSUPPORTED;
+-}
+-
+-static efi_status_t
+-efi_thunk_set_wakeup_time(efi_bool_t enabled, efi_time_t *tm)
+-{
+-	return EFI_UNSUPPORTED;
+-}
+-
+ static unsigned long efi_name_size(efi_char16_t *name)
+ {
+ 	return ucs2_strsize(name, EFI_VAR_NAME_LEN) + 1;
+@@ -681,12 +668,6 @@ efi_thunk_get_next_variable(unsigned long *name_size,
+ 	return status;
+ }
+ 
+-static efi_status_t
+-efi_thunk_get_next_high_mono_count(u32 *count)
+-{
+-	return EFI_UNSUPPORTED;
+-}
+-
+ static void
+ efi_thunk_reset_system(int reset_type, efi_status_t status,
+ 		       unsigned long data_size, efi_char16_t *data)
+@@ -788,13 +769,10 @@ void __init efi_thunk_runtime_setup(void)
+ 
+ 	efi.get_time = efi_thunk_get_time;
+ 	efi.set_time = efi_thunk_set_time;
+-	efi.get_wakeup_time = efi_thunk_get_wakeup_time;
+-	efi.set_wakeup_time = efi_thunk_set_wakeup_time;
+ 	efi.get_variable = efi_thunk_get_variable;
+ 	efi.get_next_variable = efi_thunk_get_next_variable;
+ 	efi.set_variable = efi_thunk_set_variable;
+ 	efi.set_variable_nonblocking = efi_thunk_set_variable_nonblocking;
+-	efi.get_next_high_mono_count = efi_thunk_get_next_high_mono_count;
+ 	efi.reset_system = efi_thunk_reset_system;
+ 	efi.query_variable_info = efi_thunk_query_variable_info;
+ 	efi.query_variable_info_nonblocking = efi_thunk_query_variable_info_nonblocking;
+diff --git a/drivers/firmware/efi/runtime-wrappers.c b/drivers/firmware/efi/runtime-wrappers.c
+index 708b777857d3..2b66efb5ffef 100644
+--- a/drivers/firmware/efi/runtime-wrappers.c
++++ b/drivers/firmware/efi/runtime-wrappers.c
+@@ -52,17 +52,6 @@ union efi_rts_args {
+ 		efi_time_t	*time;
+ 	} SET_TIME;
+ 
+-	struct {
+-		efi_bool_t	*enabled;
+-		efi_bool_t	*pending;
+-		efi_time_t	*time;
+-	} GET_WAKEUP_TIME;
+-
+-	struct {
+-		efi_bool_t	enable;
+-		efi_time_t	*time;
+-	} SET_WAKEUP_TIME;
+-
+ 	struct {
+ 		efi_char16_t	*name;
+ 		efi_guid_t	*vendor;
+@@ -92,10 +81,6 @@ union efi_rts_args {
+ 		u64		*max_variable_size;
+ 	} QUERY_VARIABLE_INFO;
+ 
+-	struct {
+-		u32		*high_count;
+-	} GET_NEXT_HIGH_MONO_COUNT;
+-
+ 	struct {
+ 		efi_capsule_header_t **capsules;
+ 		unsigned long	count;
+@@ -232,17 +217,6 @@ static void __nocfi efi_call_rts(struct work_struct *work)
+ 		status = efi_call_virt(set_time,
+ 				       args->SET_TIME.time);
+ 		break;
+-	case EFI_GET_WAKEUP_TIME:
+-		status = efi_call_virt(get_wakeup_time,
+-				       args->GET_WAKEUP_TIME.enabled,
+-				       args->GET_WAKEUP_TIME.pending,
+-				       args->GET_WAKEUP_TIME.time);
+-		break;
+-	case EFI_SET_WAKEUP_TIME:
+-		status = efi_call_virt(set_wakeup_time,
+-				       args->SET_WAKEUP_TIME.enable,
+-				       args->SET_WAKEUP_TIME.time);
+-		break;
+ 	case EFI_GET_VARIABLE:
+ 		status = efi_call_virt(get_variable,
+ 				       args->GET_VARIABLE.name,
+@@ -272,10 +246,6 @@ static void __nocfi efi_call_rts(struct work_struct *work)
+ 				       args->QUERY_VARIABLE_INFO.remaining_space,
+ 				       args->QUERY_VARIABLE_INFO.max_variable_size);
+ 		break;
+-	case EFI_GET_NEXT_HIGH_MONO_COUNT:
+-		status = efi_call_virt(get_next_high_mono_count,
+-				       args->GET_NEXT_HIGH_MONO_COUNT.high_count);
+-		break;
+ 	case EFI_UPDATE_CAPSULE:
+ 		status = efi_call_virt(update_capsule,
+ 				       args->UPDATE_CAPSULE.capsules,
+@@ -366,30 +336,6 @@ static efi_status_t virt_efi_set_time(efi_time_t *tm)
+ 	return status;
+ }
+ 
+-static efi_status_t virt_efi_get_wakeup_time(efi_bool_t *enabled,
+-					     efi_bool_t *pending,
+-					     efi_time_t *tm)
+-{
+-	efi_status_t status;
+-
+-	if (down_interruptible(&efi_runtime_lock))
+-		return EFI_ABORTED;
+-	status = efi_queue_work(GET_WAKEUP_TIME, enabled, pending, tm);
+-	up(&efi_runtime_lock);
+-	return status;
+-}
+-
+-static efi_status_t virt_efi_set_wakeup_time(efi_bool_t enabled, efi_time_t *tm)
+-{
+-	efi_status_t status;
+-
+-	if (down_interruptible(&efi_runtime_lock))
+-		return EFI_ABORTED;
+-	status = efi_queue_work(SET_WAKEUP_TIME, enabled, tm);
+-	up(&efi_runtime_lock);
+-	return status;
+-}
+-
+ static efi_status_t virt_efi_get_variable(efi_char16_t *name,
+ 					  efi_guid_t *vendor,
+ 					  u32 *attr,
+@@ -488,17 +434,6 @@ virt_efi_query_variable_info_nb(u32 attr, u64 *storage_space,
+ 	return status;
+ }
+ 
+-static efi_status_t virt_efi_get_next_high_mono_count(u32 *count)
+-{
+-	efi_status_t status;
+-
+-	if (down_interruptible(&efi_runtime_lock))
+-		return EFI_ABORTED;
+-	status = efi_queue_work(GET_NEXT_HIGH_MONO_COUNT, count);
+-	up(&efi_runtime_lock);
+-	return status;
+-}
+-
+ static void __nocfi
+ virt_efi_reset_system(int reset_type, efi_status_t status,
+ 		      unsigned long data_size, efi_char16_t *data)
+@@ -556,13 +491,10 @@ void __init efi_native_runtime_setup(void)
+ {
+ 	efi.get_time			    = virt_efi_get_time;
+ 	efi.set_time			    = virt_efi_set_time;
+-	efi.get_wakeup_time		    = virt_efi_get_wakeup_time;
+-	efi.set_wakeup_time		    = virt_efi_set_wakeup_time;
+ 	efi.get_variable		    = virt_efi_get_variable;
+ 	efi.get_next_variable		    = virt_efi_get_next_variable;
+ 	efi.set_variable		    = virt_efi_set_variable;
+ 	efi.set_variable_nonblocking	    = virt_efi_set_variable_nb;
+-	efi.get_next_high_mono_count	    = virt_efi_get_next_high_mono_count;
+ 	efi.reset_system 		    = virt_efi_reset_system;
+ 	efi.query_variable_info		    = virt_efi_query_variable_info;
+ 	efi.query_variable_info_nonblocking = virt_efi_query_variable_info_nb;
+diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
+index fb321cd6415a..baccf2d90af0 100644
+--- a/drivers/xen/efi.c
++++ b/drivers/xen/efi.c
+@@ -76,47 +76,6 @@ static efi_status_t xen_efi_set_time(efi_time_t *tm)
+ 	return efi_data(op).status;
+ }
+ 
+-static efi_status_t xen_efi_get_wakeup_time(efi_bool_t *enabled,
+-					    efi_bool_t *pending,
+-					    efi_time_t *tm)
+-{
+-	struct xen_platform_op op = INIT_EFI_OP(get_wakeup_time);
+-
+-	if (HYPERVISOR_platform_op(&op) < 0)
+-		return EFI_UNSUPPORTED;
+-
+-	if (tm) {
+-		BUILD_BUG_ON(sizeof(*tm) != sizeof(efi_data(op).u.get_wakeup_time));
+-		memcpy(tm, &efi_data(op).u.get_wakeup_time, sizeof(*tm));
+-	}
+-
+-	if (enabled)
+-		*enabled = !!(efi_data(op).misc & XEN_EFI_GET_WAKEUP_TIME_ENABLED);
+-
+-	if (pending)
+-		*pending = !!(efi_data(op).misc & XEN_EFI_GET_WAKEUP_TIME_PENDING);
+-
+-	return efi_data(op).status;
+-}
+-
+-static efi_status_t xen_efi_set_wakeup_time(efi_bool_t enabled, efi_time_t *tm)
+-{
+-	struct xen_platform_op op = INIT_EFI_OP(set_wakeup_time);
+-
+-	BUILD_BUG_ON(sizeof(*tm) != sizeof(efi_data(op).u.set_wakeup_time));
+-	if (enabled)
+-		efi_data(op).misc = XEN_EFI_SET_WAKEUP_TIME_ENABLE;
+-	if (tm)
+-		memcpy(&efi_data(op).u.set_wakeup_time, tm, sizeof(*tm));
+-	else
+-		efi_data(op).misc |= XEN_EFI_SET_WAKEUP_TIME_ENABLE_ONLY;
+-
+-	if (HYPERVISOR_platform_op(&op) < 0)
+-		return EFI_UNSUPPORTED;
+-
+-	return efi_data(op).status;
+-}
+-
+ static efi_status_t xen_efi_get_variable(efi_char16_t *name, efi_guid_t *vendor,
+ 					 u32 *attr, unsigned long *data_size,
+ 					 void *data)
+@@ -204,18 +163,6 @@ static efi_status_t xen_efi_query_variable_info(u32 attr, u64 *storage_space,
+ 	return efi_data(op).status;
+ }
+ 
+-static efi_status_t xen_efi_get_next_high_mono_count(u32 *count)
+-{
+-	struct xen_platform_op op = INIT_EFI_OP(get_next_high_monotonic_count);
+-
+-	if (HYPERVISOR_platform_op(&op) < 0)
+-		return EFI_UNSUPPORTED;
+-
+-	*count = efi_data(op).misc;
+-
+-	return efi_data(op).status;
+-}
+-
+ static efi_status_t xen_efi_update_capsule(efi_capsule_header_t **capsules,
+ 				unsigned long count, unsigned long sg_list)
+ {
+@@ -280,8 +227,6 @@ void __init xen_efi_runtime_setup(void)
+ {
+ 	efi.get_time			= xen_efi_get_time;
+ 	efi.set_time			= xen_efi_set_time;
+-	efi.get_wakeup_time		= xen_efi_get_wakeup_time;
+-	efi.set_wakeup_time		= xen_efi_set_wakeup_time;
+ 	efi.get_variable		= xen_efi_get_variable;
+ 	efi.get_next_variable		= xen_efi_get_next_variable;
+ 	efi.set_variable		= xen_efi_set_variable;
+@@ -290,7 +235,6 @@ void __init xen_efi_runtime_setup(void)
+ 	efi.query_variable_info_nonblocking = xen_efi_query_variable_info;
+ 	efi.update_capsule		= xen_efi_update_capsule;
+ 	efi.query_capsule_caps		= xen_efi_query_capsule_caps;
+-	efi.get_next_high_mono_count	= xen_efi_get_next_high_mono_count;
+ 	efi.reset_system		= xen_efi_reset_system;
+ }
+ 
+diff --git a/include/linux/efi.h b/include/linux/efi.h
+index 50db7df0efab..516afdc8a49d 100644
+--- a/include/linux/efi.h
++++ b/include/linux/efi.h
+@@ -650,8 +650,6 @@ extern struct efi {
+ 
+ 	efi_get_time_t			*get_time;
+ 	efi_set_time_t			*set_time;
+-	efi_get_wakeup_time_t		*get_wakeup_time;
+-	efi_set_wakeup_time_t		*set_wakeup_time;
+ 	efi_get_variable_t		*get_variable;
+ 	efi_get_next_variable_t		*get_next_variable;
+ 	efi_set_variable_t		*set_variable;
+@@ -660,7 +658,6 @@ extern struct efi {
+ 	efi_query_variable_info_t	*query_variable_info_nonblocking;
+ 	efi_update_capsule_t		*update_capsule;
+ 	efi_query_capsule_caps_t	*query_capsule_caps;
+-	efi_get_next_high_mono_count_t	*get_next_high_mono_count;
+ 	efi_reset_system_t		*reset_system;
+ 
+ 	struct efi_memory_map		memmap;
+@@ -1235,13 +1232,10 @@ enum efi_rts_ids {
+ 	EFI_NONE,
+ 	EFI_GET_TIME,
+ 	EFI_SET_TIME,
+-	EFI_GET_WAKEUP_TIME,
+-	EFI_SET_WAKEUP_TIME,
+ 	EFI_GET_VARIABLE,
+ 	EFI_GET_NEXT_VARIABLE,
+ 	EFI_SET_VARIABLE,
+ 	EFI_QUERY_VARIABLE_INFO,
+-	EFI_GET_NEXT_HIGH_MONO_COUNT,
+ 	EFI_RESET_SYSTEM,
+ 	EFI_UPDATE_CAPSULE,
+ 	EFI_QUERY_CAPSULE_CAPS,
+-- 
+2.50.0.727.gbf7dc18ff4-goog
 
-I'll try and in particular will correct this comment, but I might still
-miss things due to being used to them.  In general when code is
-developed over the years by several people doing other projects in
-between, things just end up looking weird, so please bear with me.
-
-Regards
 
