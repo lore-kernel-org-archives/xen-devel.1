@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2662AC83F22
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4ECC83F17
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 08:31:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1043768.1413815 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1043772.1413842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubb4O-00061k-AC; Tue, 15 Jul 2025 08:31:24 +0000
+	id 1ubb4Q-0006Yu-R4; Tue, 15 Jul 2025 08:31:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1043768.1413815; Tue, 15 Jul 2025 08:31:24 +0000
+Received: by outflank-mailman (output) from mailman id 1043772.1413842; Tue, 15 Jul 2025 08:31:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubb4O-00061d-7C; Tue, 15 Jul 2025 08:31:24 +0000
-Received: by outflank-mailman (input) for mailman id 1043768;
- Tue, 15 Jul 2025 08:31:22 +0000
+	id 1ubb4Q-0006Wg-FT; Tue, 15 Jul 2025 08:31:26 +0000
+Received: by outflank-mailman (input) for mailman id 1043772;
+ Tue, 15 Jul 2025 08:31:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=V4bE=Z4=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1ubb4M-0005YW-Q0
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 08:31:22 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1ubb4P-0005YW-1d
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 08:31:25 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 156ee5cb-6156-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 10:31:20 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-456065d60a8so1278725e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 01:31:20 -0700 (PDT)
+ id 1748a187-6156-11f0-b894-0df219b8e170;
+ Tue, 15 Jul 2025 10:31:23 +0200 (CEST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3a4eed70f24so756724f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 01:31:23 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4560f22cd14sm84787075e9.30.2025.07.15.01.31.18
+ 5b1f17b1804b1-4560f22cd14sm84787075e9.30.2025.07.15.01.31.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 01:31:19 -0700 (PDT)
+ Tue, 15 Jul 2025 01:31:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,51 +49,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 156ee5cb-6156-11f0-b894-0df219b8e170
+X-Inumbo-ID: 1748a187-6156-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752568279; x=1753173079; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1752568283; x=1753173083; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vr3HAWcy3iR7RnCWpXjXk9ptcqN2sMtjI1FfiwT4ilQ=;
-        b=PayESNHn8Rt0p7oUNeauFW14sQeHqy8CQ+xwjkAdxDKvu5vpaoR/g/swue2csOAVny
-         EoZJJbwlf1VeRgrFaepVaJvhqPPJAXQafUSgV74ZOWrtXwFdpaExrLB2c0yPuDFvt883
-         mytGQei9fZ4A4cz89ajhD2drTc9ANcI5ylJNvQXf58TMdmZfz+oSPf+kFNEfUZx7saJx
-         c+0icVYpEOF/MAZ4+fSqK2rtmyWcQPLToJTIq/Eylo8cJzWbdJ0mf76bW2J769ywW6St
-         ZVuWy2hI0IisNLFxKUvTdzXdpQOX5hU3bv1JHpjLp4UL7o77CS/bayY3oj70sfrrWl91
-         f9/w==
+        bh=PYagUw7+nV4AIrSjbYjtskD6tyaobfXIr4xaV+yxYuw=;
+        b=UQgL+SvrJeR0wpvewHvyxRoYLRLf1UohVol47L4QPt23/JB25kGKrhWped1CqjvnEj
+         NshpbgGENelyonjFtJXZNZNHiZjyvXogotEt3NsXIsOUwSVRWOd4SywFkdpzTSR1lvV2
+         M+o4NVNF6+s/YA8W5hEaBaFX/BVtlBOVJZd6Xjk3CHS3/lBL9PAEl7kOnFMgl/rcPv2x
+         hsIJDHiNL/hVJcKpYwIVETg/47ZVdY87gFlUaOflfnCushpcyVcUM4THlNF7uNq2/tzY
+         2B+vJBG6jb/1qJgFFmpYKwH+Zsb0WY6bcPXe4ePquywJdOWDPsqwzXsoPdWLM8f2Cult
+         rYRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752568279; x=1753173079;
+        d=1e100.net; s=20230601; t=1752568283; x=1753173083;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vr3HAWcy3iR7RnCWpXjXk9ptcqN2sMtjI1FfiwT4ilQ=;
-        b=UWP9/uTylz7f98IpD8kZR2yNVMeO7AdTCGsSwg42z6mXzqvL6q7xUCcHHhZYmqyw5w
-         aX1DNKbTYVYMIsIhzq4AcG/IYG+R6Uc6GL16BGSWqkrw8c4ER/x/kWG6ohyLPHZC7Lc0
-         SGhho1So62LEEzSWTeaNknPqMgH2h0xZqROSzZbv72vRvqn+Gk+qqQ8N88ZGQLqQRDqT
-         jxr57ovYtqOXN014AEBbeDb6dZHEhzzCwOgC00bOpk6z6yhRctEKNKuzJM0E0c8yer7J
-         g5jIXirVq53b5NR0iWyPNQh9dhQq+f6DIpuCcP7X+fKRXxDldybK80GkJwtRwVOo4F+1
-         AQEQ==
-X-Gm-Message-State: AOJu0Yy3pYUWrctWactTOLzUS+RtCjmMX3M9j7c/rL1k9YbbBtihL8Wb
-	ZVmjP6lS1sZYcWDD0AGzzQ1MmNz+iaY0/kyVWqOywpf8X3bi69WYEND7sihSHA==
-X-Gm-Gg: ASbGnctF6qd+xdZeNOm/BMHPbOctyrGy+uQS+RXYpXWlyou8U20NgpP/tYqmGO8e1LZ
-	+MYwMZFDWZxMQMadtwSjFeLfJNJ6ys1hx0CaNrnnrXQEjOS5CcoEkEW/s08k7ViZCoy/oX5jVLy
-	szQnyLnIQfG2cAiEO+hoAAvLfbeg2+wjXvZxWuyIq7kmT4Z/vJckq63JxsYDlPVQhwkqxtN2/Xz
-	q2sQUza5xBgaBY10LSVtYOdyCR1Nww5e2zlsfs9GZxcFDxHkfAEq82iOAYtlcOx+LfpygOMCKDp
-	P0/NR3HBHUHSfXCIeAmo3TeStR2pxPkosumnnZTLuMR2N9V7gkx+qnaTBb4kHSr1UPOJgqMOwQP
-	7ut7ciHEi9VhCYGif2SlSB7Gd2sAOWmb2mLlUdyNm+y9vjgtZkLl0b0M0W7jns28OoAHP0vFwfW
-	fQRchtmE7z5n05o9s1GOd/KA==
-X-Google-Smtp-Source: AGHT+IE0IoqeQjYrVTJ4W+niRnqgN0QrX7h/6rUzm9znrMqEEXFRnJufxXJ7QUFkTa3XXTSMC7T6Aw==
-X-Received: by 2002:a05:600c:3b89:b0:451:df07:f41e with SMTP id 5b1f17b1804b1-45629123a8dmr3514165e9.1.1752568279391;
-        Tue, 15 Jul 2025 01:31:19 -0700 (PDT)
+        bh=PYagUw7+nV4AIrSjbYjtskD6tyaobfXIr4xaV+yxYuw=;
+        b=CAGe1Z/SS4hdREFR6zJvb1oR5ykvCf6WtE4Q1v5I/Q78II5ogxi5m2KcQKJrl6kGhh
+         l0pFxMsvft9fg0M7CGeefoGeAq1aVLLVAiAvYCjxTpYjR8UXBJSn5cOg7PggSWCNbNNu
+         NmOzJF/1IJGKQmaIV4YT12LpRTGuK298wwd06k8uQDy5EdV5ponFQlXQPAFIQJNWR077
+         yd+uxWAmo0IRAKuIMv+MqtyWtr+HBteve+vCjnvwx03fMBjQ0Fz+7i7bhUSC4eoqFm8z
+         tXTHPsJAoisECyWwsFd/6ArR2rQn8YNLgh22RilKlkt3zZ1IlS52XNt2m68NoDyG6X5O
+         945w==
+X-Gm-Message-State: AOJu0YzqXkH4ErVbhgIQLT0tByWYo5TCvlyJjp/S6vTS9MC4mLwtfCze
+	/ztlL+gxNks1Dr/rMO2mJCQI9DxyIIeJdRz5e4dUXhvW8twcCb/+zstAnFbHeA==
+X-Gm-Gg: ASbGncunGMlEy4olgQq426oKlkCGW7Rye7hrue+PpYkuX4cNJDhMjRTlDWBEr5ZpqZm
+	l5OtYe3tLN3Ocex1sYQs2RMtovm9dv1ZYt7wDrZl13o9WEiaY95iJtRgBA9yLgGpsVTYwGDv77M
+	cofbsXA2NtnUcOi5NsDcT5I/hEzE8KjusF6IPgy4hO1iq2hDnKEyiDc0Zl9VnjwO9ufbds3kBJX
+	fokb++hlNGz0p6wq4tFdNFg1IqjFq3FdFfy18Z9Ih9IaXCfEEf7n6i5NrNr9+HwMB/1fsDpOIfu
+	8MzzJ+HZ37bYZyCxlGCdFusc/qkMM/IKB+863ZFgDqVSrINO0LiGWGgwXs4Nid4gElvw5UZX9y9
+	mj+cDhDEmIodm4LejzcygjqvWg3sYyQaANVZd71RXEQws0KQ9I6wJ5pDDjX7Vgyd4GsuOKNEhbB
+	ofdQfjiHKCy9818MqqYPn8GA==
+X-Google-Smtp-Source: AGHT+IFFoID+G2TNmh2plFf9xbnbaz+gXK1QEu42r2amU2GVns+zxWB7UweKbNCfXyzbaUsczLSOGw==
+X-Received: by 2002:a05:600c:198d:b0:456:12a9:e92 with SMTP id 5b1f17b1804b1-4562919403fmr3164815e9.5.1752568282407;
+        Tue, 15 Jul 2025 01:31:22 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v9 2/6] docs/man: Add altp2m_count parameter to the xl.cfg manual
-Date: Tue, 15 Jul 2025 08:31:10 +0000
-Message-Id: <ca85680d6c2d5993808b4bfd041bdfb544d9504e.1752568020.git.w1benny@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v9 5/6] xen/x86: Disallow creating domains with altp2m enabled and altp2m.nr == 0
+Date: Tue, 15 Jul 2025 08:31:13 +0000
+Message-Id: <7bdb1c10d8faee3853e1f2a81fce1c7f20424e88.1752568020.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1752568020.git.w1benny@gmail.com>
 References: <cover.1752568020.git.w1benny@gmail.com>
@@ -103,40 +105,34 @@ Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-Update manual pages to include detailed information about the altp2m_count
-configuration parameter.
+Since libxl finally sends the altp2m.nr value, we can remove the previously
+introduced temporary workaround.
+
+Creating domain with enabled altp2m while setting altp2m.nr == 0 doesn't
+make sense and it's probably not what user wants.
 
 Signed-off-by: Petr Beneš <w1benny@gmail.com>
-Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- docs/man/xl.cfg.5.pod.in | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ xen/arch/x86/domain.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 1d122982c6..5362fb0e9a 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -2023,6 +2023,20 @@ a single guest HVM domain. B<This option is deprecated, use the option
- B<Note>: While the option "altp2mhvm" is deprecated, legacy applications for
- x86 systems will continue to work using it.
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 155ea1f79f..872e97999c 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -739,8 +739,9 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
  
-+=item B<altp2m_count=NUMBER>
-+
-+Specifies the maximum number of alternate-p2m views available to the guest.
-+This setting is crucial in domain introspection scenarios that require
-+multiple physical-to-machine (p2m) memory mappings to be established
-+simultaneously.
-+
-+Enabling multiple p2m views may increase memory usage. It is advisable to
-+review and adjust the B<shadow_memory> setting as necessary to accommodate
-+the additional memory requirements.
-+
-+B<Note>: This option is ignored if B<altp2m> is disabled. The default value
-+is 10.
-+
- =item B<nestedhvm=BOOLEAN>
+         if ( !config->altp2m.nr )
+         {
+-            /* Fix the value to the legacy default */
+-            config->altp2m.nr = 10;
++            dprintk(XENLOG_INFO,
++                    "altp2m must be requested with altp2m.nr > 0\n");
++            return -EINVAL;
+         }
  
- Enable or disables guest access to hardware virtualisation features,
+         if ( config->altp2m.nr > MAX_NR_ALTP2M )
 -- 
 2.34.1
 
