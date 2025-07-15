@@ -4,36 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBB7C83F22
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 16:12:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1044524.1414606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14375C83F34
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 16:12:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1044532.1414672 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubiFn-0005tK-QT; Tue, 15 Jul 2025 16:11:39 +0000
+	id 1ubiFz-0007bG-Eo; Tue, 15 Jul 2025 16:11:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1044524.1414606; Tue, 15 Jul 2025 16:11:39 +0000
+Received: by outflank-mailman (output) from mailman id 1044532.1414672; Tue, 15 Jul 2025 16:11:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubiFn-0005tD-Nt; Tue, 15 Jul 2025 16:11:39 +0000
-Received: by outflank-mailman (input) for mailman id 1044524;
- Tue, 15 Jul 2025 16:11:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ubiFz-0007aG-8o; Tue, 15 Jul 2025 16:11:51 +0000
+Received: by outflank-mailman (input) for mailman id 1044532;
+ Tue, 15 Jul 2025 16:11:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Poj7=Z4=bounce.vates.tech=bounce-md_30504962.68767db1.v1-e2f595a5e20a41cbbd41d260dfc56079@srs-se1.protection.inumbo.net>)
- id 1ubiFl-0005t5-P8
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 16:11:37 +0000
-Received: from mail179-35.suw41.mandrillapp.com
- (mail179-35.suw41.mandrillapp.com [198.2.179.35])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5e15fff4-6196-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 18:11:30 +0200 (CEST)
-Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-35.suw41.mandrillapp.com (Mailchimp) with ESMTP id
- 4bhPM53L78zDRHx9G
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 16:11:29 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- e2f595a5e20a41cbbd41d260dfc56079; Tue, 15 Jul 2025 16:11:29 +0000
+ <SRS0=ZRri=Z4=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1ubiFx-00067r-RY
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 16:11:49 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20608.outbound.protection.outlook.com
+ [2a01:111:f403:2416::608])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 684ca101-6196-11f0-a319-13f23c93f187;
+ Tue, 15 Jul 2025 18:11:49 +0200 (CEST)
+Received: from MW4PR03CA0209.namprd03.prod.outlook.com (2603:10b6:303:b8::34)
+ by IA1PR12MB6579.namprd12.prod.outlook.com (2603:10b6:208:3a1::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.26; Tue, 15 Jul
+ 2025 16:11:43 +0000
+Received: from CO1PEPF000075ED.namprd03.prod.outlook.com
+ (2603:10b6:303:b8:cafe::25) by MW4PR03CA0209.outlook.office365.com
+ (2603:10b6:303:b8::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.17 via Frontend Transport; Tue,
+ 15 Jul 2025 16:11:42 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000075ED.mail.protection.outlook.com (10.167.249.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8922.22 via Frontend Transport; Tue, 15 Jul 2025 16:11:42 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 15 Jul
+ 2025 11:11:39 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,136 +58,742 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e15fff4-6196-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1752595889; x=1752865889;
-	bh=ES5jwX9dQor6Si9bkkhIPkIUgo1wrvr/KsnR/l+M9QM=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=C751+lZk86imdeILVZHpZWGn7iyDDHxefCjlvGBsGIl8TpsmQIFL6XUD1ZH8vfp4a
-	 e0VTaEzldARMOhvcjfkNisUFfgYnYwpp/5RZoEvADjDBhsmOOME6BHOp7w1DFQHWDG
-	 cCGF4jNukFfgkc+DcJG+7EMw/mSweNSkmGVNChnLfcvUDRxbl3S0MQ4wtU8dMwrZ/4
-	 2dA7xTgEgcB04Tvl4QxiJpxgmaOTapgAuFRaJ7/keO61Jmbg4UPa2ZK2PJhX1xvlpb
-	 +izaDzX75Dg+XncTJQ6EMIyDfxjHdIbdLIRp9NcvJO7+fLP6DfSkOn2/V1eSYFEO8Z
-	 fr/GMLBVnJ5CA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1752595889; x=1752856389; i=anthoine.bourgeois@vates.tech;
-	bh=ES5jwX9dQor6Si9bkkhIPkIUgo1wrvr/KsnR/l+M9QM=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=O2xWbEb1hZf11p4VITgku8JweODo0KIQqkDBVvsEvnWdi6pT9673K9QtSbz38uqIW
-	 HdL7gr1X6LfU7IzqIYt5sZxBzt7WNfy+sKmKYH+zFYKp0moYubdnNFhN5x3YMyg5qR
-	 GVNzi5+Ley8cNgj6SGpXeHmIiJ1Sw+UwU6FdKm6/9KeuVPF/3wm/zYkf/LGpkQrGwd
-	 iVnHBVA3kLVAVORfdfQApB/GymVGuR0x5g0rC3fLpY/y3a57NujvsVPqEir63IpcfE
-	 xN+/Ne0O0cFzRk3rCIhfVuCQS8OzMVgQZMMa4LvOU6Le7+Vl1DRvtSfXzv+VbPUUx4
-	 FNMh1/HSrZmPw==
-From: "Anthoine Bourgeois" <anthoine.bourgeois@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v2]=20xen/netfront:=20Fix=20TX=20response=20spurious=20interrupts?=
-X-Mailer: git-send-email 2.49.1
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1752595888301
-To: "Juergen Gross" <jgross@suse.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>, "Wei Liu" <wei.liu@kernel.org>, "Paul Durrant" <paul@xen.org>, xen-devel@lists.xenproject.org, netdev@vger.kernel.org
-Cc: "Anthoine Bourgeois" <anthoine.bourgeois@vates.tech>, "Elliott Mitchell" <ehem+xen@m5p.com>
-Message-Id: <20250715160902.578844-2-anthoine.bourgeois@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.e2f595a5e20a41cbbd41d260dfc56079?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250715:md
-Date: Tue, 15 Jul 2025 16:11:29 +0000
+X-Inumbo-ID: 684ca101-6196-11f0-a319-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X1/4pdp4RLULE3HX+OkUsCrF6sbhbqlAzwyGGtMISvnqWoJ5DbMZdLOtCtdbJNYMFsbYsS10gz+GuIjeM7oV6goP3BqvpMUaFXqz93Ase/TXjXWVc7d9nmR+AB9Y6oIvy933ZUthU2hZ1/W5Z6O5jUNjM6+27akR/u09gcrnh2i58KDRkwyaEwkHTv1Fkc2NqGb1/38bCcNKNvXhgaD2uZfA3MtHMBW7o/8Lq3811AYtehlaOgtPmUQKjb1+v83E9MNnZ9aTtuvKobyCjE0NNTZUQauwHmF5Ux+QT3FJ9why1PKfxwLp+vJbQKWKEeig2zJidrjEgk5ZiFj8eETRtQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qW0HaFmO+sMfG2h14to+XE0GAZnJX3kmGormlEBSmOo=;
+ b=jQI1v/qpDMqTu+8LutuyXunwtre+sp7gU2cnyDLgpNGBPLiaTdf6SVZg6N1No8hmIKdwjngRTBX3eonC3vfUrTlaOuTpIW4hooxX1Pm4nkVKnkqsvxnCGTbP+i6X8/L9ITu3LbaWwsu205rxtQzDzGwfgr7cr7vhZpIlD+qcLIe26fIBbhlDbzjUTL5pxU+9tnvh4oiTruHv5hhVTUFFt76ETdHkryZccbTlJxsq2pY1dRmTJsMKMefoTdsJjpsW9ZNpd1yBFTs73oUxsHgQiunTSarQUWuuepV9WV5IAef1lhbhVngdU8+BUCnNSAvQ+bUWaXIpDmiH9fyyjOPVCg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qW0HaFmO+sMfG2h14to+XE0GAZnJX3kmGormlEBSmOo=;
+ b=PEV5MrlEidp6tnL0Ono4F2NRfmJfsI0fm0Bac2MsR5H2iTQj/nPU0GNT1mY1k97sESGoYWaa6eAQc0b+CsKOm/NGek3+KlGUBRKsWSC2LBtk2Q0IRjb7f0FkxaDPWDisX7x5ZhlWhwO2ObmdKXNRzV8yCddzf/pn6Eulmf13nqY=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Alistair Francis <alistair.francis@wdc.com>, "Bob
+ Eshleman" <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [PATCH v7 05/11] xen/dt: Move bootinfo functions to a new bootinfo.h
+Date: Tue, 15 Jul 2025 18:11:00 +0200
+Message-ID: <20250715161108.141126-6-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250715161108.141126-1-alejandro.garciavallejo@amd.com>
+References: <20250715161108.141126-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075ED:EE_|IA1PR12MB6579:EE_
+X-MS-Office365-Filtering-Correlation-Id: 425902a0-53f5-48c7-3c98-08ddc3ba49bc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?j66X5kXpGBu1B7LG+pyHBshMaDXyhAt3NuLnUzIaiCp3l219/JP3drTUPl1d?=
+ =?us-ascii?Q?kmS48jXp0BKC9c1jvMqVPzl7t8j1ZCQCQtrJwjTf3THf1ugXgSnEYJkYaSgW?=
+ =?us-ascii?Q?Vm48BJv2mtsygJHeCxV3YHkMo7OK7KrfFsKCMevCZB2PMpmuBYdCvkEPyPKg?=
+ =?us-ascii?Q?XXzkyPCN2Ru5gIJs2dXkAR90iNvsq+atZM2NYzh1QSxT7dlEMJkqJYj33vzv?=
+ =?us-ascii?Q?BgPCZJHterOLDJ2wSGNNEg2J2sZPp0zoxHtNNhwiXfHiT7ptGhfl/jV6pam5?=
+ =?us-ascii?Q?lk3W5xhZWjBuUZSALgoWtg44QROTKp7JBP5eqcwm5Azkp2e/CJmMh2BlJXuN?=
+ =?us-ascii?Q?4Iys795uCkCp8IiN6EefBnm/D2q4LBrATQzD4Hsu57EotwETkuQ9inJ7AkWQ?=
+ =?us-ascii?Q?OeeAEhpbu+uMLgXQBDIvf0rOfv/VOhDOiCmZAF+BxnTOMZe3Lws7VcceiJwQ?=
+ =?us-ascii?Q?KOdByfNmLtFgehLAI4cetgHr2hLeiWGfhqjf6Klb5RnMdAxoaZ7gEPEPwDJ4?=
+ =?us-ascii?Q?WMI331cTINits+2yOHf/GfEhG87DUEsYPpfySld1kVfgy0nJ62qUZtuZ3kPE?=
+ =?us-ascii?Q?BkSGqLSWYH8GdJq/rvlzJKp+jTXXRXPsBbwqGbNcxagv0yCRY+gnRpt1nh33?=
+ =?us-ascii?Q?N4VCEKTU7D51Za6CRKdSE9KUDDj5l+CjMOP9MU9K20ZbEEfUEviXzZ0fEH/I?=
+ =?us-ascii?Q?dHyCaxUbuLDkiAfvF0VJnve2XnFBqUBLibI99HW5WXxwYKJjZEjmGPNeJ5KB?=
+ =?us-ascii?Q?xIVR9RKA3U/v9TfC3j4GWRc9qUsFXvdelONO2YwDQLcif76JL7NpkJPCVi/7?=
+ =?us-ascii?Q?0SryOqkmEJxke7Cv/WGWkq3VloZRndNaIjI4G2dJwEsE0rlMAPw2X10U1M+6?=
+ =?us-ascii?Q?2f2dHuKPFHAE1qgcLOKFNjfqK65FpMXLozvCEafPHg61BGCuUu70lOz2/ycZ?=
+ =?us-ascii?Q?t24qxWcLsD7zHZdVWvz5LmqUrOR7Q647bSGRKVj3CT3PKAKl0e2AP/ELfB44?=
+ =?us-ascii?Q?HfzOS5SE/WlKDevd36tlYYeW+yMq2X/R//ntBSve4Iw/55E/UZ3eTFKbkgK5?=
+ =?us-ascii?Q?6OvkrMBqwcw/L80Y6gffsc8VIFnZBwAnCpBuYzQMYBVt/qmzV1hZhWrnlVhU?=
+ =?us-ascii?Q?q4Lyvb1zmbpzfSBKR1UMCy+QCYNLXMu0740UVEJ/Ko20nKw5hK6NTXYWTL9b?=
+ =?us-ascii?Q?PFQ5qKeQUCg00bhWHAAVCVPz+2pveb+DzFpHVA9QBlE//yNNNBIpAtHEeBzq?=
+ =?us-ascii?Q?4Tcp/I0dqRuylYMKiss6Q8xqNyShVqWSfkCAuc/HZXx4lYVuI+k0MmreGibn?=
+ =?us-ascii?Q?BrGYaf4sXuzHvg0RAsTw421re4piLIIMh1JbRktjlBpKmffmg22wCC0sTTAe?=
+ =?us-ascii?Q?vg0lNplKAOyEiA2PcYgj8QA77d7v/JNEsQHrxC8abRJ3sSS0opyRLisp9U59?=
+ =?us-ascii?Q?3ICsTgKqoKHn9hgvJDssESfOqT8yj7PIpGQ8UyCMRoh5Wk66VuIY97JGhUuX?=
+ =?us-ascii?Q?xRq5ZUOMt/s04ojbxgvmMiHafgco6N1VTfX0?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(7416014)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2025 16:11:42.3473
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 425902a0-53f5-48c7-3c98-08ddc3ba49bc
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000075ED.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6579
 
-We found at Vates that there are lot of spurious interrupts when
-benchmarking the PV drivers of Xen. This issue appeared with a patch
-that addresses security issue XSA-391 (see Fixes below). On an iperf
-benchmark, spurious interrupts can represent up to 50% of the
-interrupts.
+Part of an unpicking process to extract bootfdt contents independent of
+bootinfo to a separate file for x86 to take.
 
-Spurious interrupts are interrupts that are rised for nothing, there is
-no work to do. This appends because the function that handles the
-interrupts ("xennet_tx_buf_gc") is also called at the end of the request
-path to garbage collect the responses received during the transmission
-load.
+With this, bootfdt.h can be cleanly included from x86. A later patch
+extracts the definitions so the functions may be called too.
 
-The request path is doing the work that the interrupt handler should
-have done otherwise. This is particurary true when there is more than
-one vcpu and get worse linearly with the number of vcpu/queue.
+Not a functional change.
 
-Moreover, this problem is amplifyed by the penalty imposed by a spurious
-interrupt. When an interrupt is found spurious the interrupt chip will
-delay the EOI to slowdown the backend. This delay will allow more
-responses to be handled by the request path and then there will be more
-chance the next interrupt will not find any work to do, creating a new
-spurious interrupt.
-
-This causes performance issue. The solution here is to remove the calls
-from the request path and let the interrupt handler do the processing of
-the responses. This approch removes spurious interrupts (<0.05%) and
-also has the benefit of freeing up cycles in the request path, allowing
-it to process more work, which improves performance compared to masking
-the spurious interrupt one way or another.
-
-Some vif throughput performance figures from a 8 vCPUs, 4GB of RAM HVM
-guest(s):
-
-Without this patch on the :
-vm -> dom0: 4.5Gb/s
-vm -> vm:   7.0Gb/s
-
-Without XSA-391 patch (revert of b27d47950e48):
-vm -> dom0: 8.3Gb/s
-vm -> vm:   8.7Gb/s
-
-With XSA-391 and this patch:
-vm -> dom0: 11.5Gb/s
-vm -> vm:   12.6Gb/s
-
-v2:
-- add tags
-- resend with the maintainers in the recipients list
-
-Fixes: b27d47950e48 ("xen/netfront: harden netfront against event channel storms")
-Signed-off-by: Anthoine Bourgeois <anthoine.bourgeois@vates.tech>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Tested-by: Elliott Mitchell <ehem+xen@m5p.com>
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- drivers/net/xen-netfront.c | 5 -----
- 1 file changed, 5 deletions(-)
+ xen/arch/arm/domain_build.c             |   1 +
+ xen/arch/arm/include/asm/setup.h        |   2 +-
+ xen/arch/arm/setup.c                    |   1 +
+ xen/arch/riscv/mm.c                     |   2 +-
+ xen/arch/riscv/setup.c                  |   2 +-
+ xen/common/device-tree/bootfdt.c        |   2 +-
+ xen/common/device-tree/bootinfo.c       |   2 +-
+ xen/common/device-tree/dom0less-build.c |   2 +-
+ xen/common/device-tree/domain-build.c   |   2 +-
+ xen/common/device-tree/kernel.c         |   2 +-
+ xen/include/xen/bootfdt.h               | 207 -----------------------
+ xen/include/xen/bootinfo.h              | 213 ++++++++++++++++++++++++
+ xen/include/xen/fdt-domain-build.h      |   2 +-
+ xen/include/xen/fdt-kernel.h            |   2 +-
+ 14 files changed, 225 insertions(+), 217 deletions(-)
+ create mode 100644 xen/include/xen/bootinfo.h
 
-diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 9bac50963477..a11a0e949400 100644
---- a/drivers/net/xen-netfront.c
-+++ b/drivers/net/xen-netfront.c
-@@ -638,8 +638,6 @@ static int xennet_xdp_xmit_one(struct net_device *dev,
- 	tx_stats->packets++;
- 	u64_stats_update_end(&tx_stats->syncp);
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index edc9a82c15..b66a172eb8 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ #include <xen/init.h>
++#include <xen/bootinfo.h>
+ #include <xen/compile.h>
+ #include <xen/fdt-domain-build.h>
+ #include <xen/fdt-kernel.h>
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index b199d92a42..1eaf13bd66 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -3,7 +3,7 @@
  
--	xennet_tx_buf_gc(queue);
+ #include <public/version.h>
+ #include <asm/p2m.h>
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ 
+ #if defined(CONFIG_MMU)
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 12b76a0a98..8abc1d641d 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -8,6 +8,7 @@
+  * Copyright (c) 2011 Citrix Systems.
+  */
+ 
++#include <xen/bootinfo.h>
+ #include <xen/compile.h>
+ #include <xen/device_tree.h>
+ #include <xen/domain_page.h>
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 774ea42f2d..1ef015f179 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/bug.h>
+ #include <xen/compiler.h>
+ #include <xen/domain_page.h>
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index a17096bf02..483cdd7e17 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -2,7 +2,7 @@
+ 
+ #include <xen/acpi.h>
+ #include <xen/bug.h>
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/compile.h>
+ #include <xen/console.h>
+ #include <xen/device_tree.h>
+diff --git a/xen/common/device-tree/bootfdt.c b/xen/common/device-tree/bootfdt.c
+index 67fe5c3cc3..e372096b19 100644
+--- a/xen/common/device-tree/bootfdt.c
++++ b/xen/common/device-tree/bootfdt.c
+@@ -5,7 +5,7 @@
+  * Copyright (C) 2012-2014 Citrix Systems, Inc.
+  */
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ #include <xen/efi.h>
+ #include <xen/init.h>
+diff --git a/xen/common/device-tree/bootinfo.c b/xen/common/device-tree/bootinfo.c
+index 2a27d1318b..00a43fb358 100644
+--- a/xen/common/device-tree/bootinfo.c
++++ b/xen/common/device-tree/bootinfo.c
+@@ -10,7 +10,7 @@
+  */
+ 
+ #include <xen/acpi.h>
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/bug.h>
+ #include <xen/device_tree.h>
+ #include <xen/init.h>
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index e950691d1e..93734e0ea8 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ #include <xen/domain.h>
+ #include <xen/domain_page.h>
+diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
+index 2fdea6624a..95b383e00f 100644
+--- a/xen/common/device-tree/domain-build.c
++++ b/xen/common/device-tree/domain-build.c
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/fdt-domain-build.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+diff --git a/xen/common/device-tree/kernel.c b/xen/common/device-tree/kernel.c
+index 6de2334dbe..ef393182b6 100644
+--- a/xen/common/device-tree/kernel.c
++++ b/xen/common/device-tree/kernel.c
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ #include <xen/fdt-kernel.h>
+ #include <xen/errno.h>
+diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
+index a5dfaa5c1d..b22d7b39c2 100644
+--- a/xen/include/xen/bootfdt.h
++++ b/xen/include/xen/bootfdt.h
+@@ -5,10 +5,7 @@
+ #include <xen/byteorder.h>
+ #include <xen/bug.h>
+ #include <xen/types.h>
+-#include <xen/kernel.h>
+ #include <xen/lib.h>
+-#include <xen/macros.h>
+-#include <xen/xmalloc.h>
+ 
+ #if __has_include(<asm/bootfdt.h>)
+ #include <asm/bootfdt.h>
+@@ -16,15 +13,10 @@
+ 
+ #define MIN_FDT_ALIGN 8
+ 
+-#define NR_MEM_BANKS 256
+-#define NR_SHMEM_BANKS 32
 -
- 	return 0;
- }
+ /* Default #address and #size cells */
+ #define DT_ROOT_NODE_ADDR_CELLS_DEFAULT 2
+ #define DT_ROOT_NODE_SIZE_CELLS_DEFAULT 1
  
-@@ -849,9 +847,6 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- 	tx_stats->packets++;
- 	u64_stats_update_end(&tx_stats->syncp);
- 
--	/* Note: It is not safe to access skb after xennet_tx_buf_gc()! */
--	xennet_tx_buf_gc(queue);
+-#define MAX_MODULES 32 /* Current maximum useful modules */
 -
- 	if (!netfront_tx_slot_available(queue))
- 		netif_tx_stop_queue(netdev_get_tx_queue(dev, queue->id));
+ #define DEVICE_TREE_MAX_DEPTH 16
+ 
+ /* Helper to read a big number; size is in cells (not bytes) */
+@@ -116,77 +108,6 @@ typedef enum {
+     BOOTMOD_UNKNOWN
+ }  boot_module_kind;
+ 
+-enum membank_type {
+-    /*
+-     * The MEMBANK_DEFAULT type refers to either reserved memory for the
+-     * device/firmware (when the bank is in 'reserved_mem') or any RAM (when
+-     * the bank is in 'mem').
+-     */
+-    MEMBANK_DEFAULT,
+-    /*
+-     * The MEMBANK_STATIC_DOMAIN type is used to indicate whether the memory
+-     * bank is bound to a static Xen domain. It is only valid when the bank
+-     * is in reserved_mem.
+-     */
+-    MEMBANK_STATIC_DOMAIN,
+-    /*
+-     * The MEMBANK_STATIC_HEAP type is used to indicate whether the memory
+-     * bank is reserved as static heap. It is only valid when the bank is
+-     * in reserved_mem.
+-     */
+-    MEMBANK_STATIC_HEAP,
+-    /*
+-     * The MEMBANK_FDT_RESVMEM type is used to indicate whether the memory
+-     * bank is from the FDT reserve map.
+-     */
+-    MEMBANK_FDT_RESVMEM,
+-};
+-
+-enum region_type {
+-    MEMORY,
+-    RESERVED_MEMORY,
+-    STATIC_SHARED_MEMORY
+-};
+-
+-/* Indicates the maximum number of characters(\0 included) for shm_id */
+-#define MAX_SHM_ID_LENGTH 16
+-
+-struct shmem_membank_extra {
+-    char shm_id[MAX_SHM_ID_LENGTH];
+-    unsigned int nr_shm_borrowers;
+-};
+-
+-struct membank {
+-    paddr_t start;
+-    paddr_t size;
+-    union {
+-        enum membank_type type;
+-#ifdef CONFIG_STATIC_SHM
+-        struct shmem_membank_extra *shmem_extra;
+-#endif
+-    };
+-};
+-
+-struct membanks {
+-    __struct_group(membanks_hdr, common, ,
+-        unsigned int nr_banks;
+-        unsigned int max_banks;
+-        enum region_type type;
+-    );
+-    struct membank bank[];
+-};
+-
+-struct meminfo {
+-    struct membanks_hdr common;
+-    struct membank bank[NR_MEM_BANKS];
+-};
+-
+-struct shared_meminfo {
+-    struct membanks_hdr common;
+-    struct membank bank[NR_SHMEM_BANKS];
+-    struct shmem_membank_extra extra[NR_SHMEM_BANKS];
+-};
+-
+ struct boot_domain {
+     struct domain *d;
+ 
+@@ -220,134 +141,6 @@ struct boot_module {
+ #endif
+ };
+ 
+-/* DT_MAX_NAME is the node name max length according the DT spec */
+-#define DT_MAX_NAME 41
+-struct bootcmdline {
+-    boot_module_kind kind;
+-    bool domU;
+-    paddr_t start;
+-    char dt_name[DT_MAX_NAME];
+-    char cmdline[BOOTMOD_MAX_CMDLINE];
+-};
+-
+-struct boot_modules {
+-    int nr_mods;
+-    struct boot_module module[MAX_MODULES];
+-};
+-
+-struct bootcmdlines {
+-    unsigned int nr_mods;
+-    struct bootcmdline cmdline[MAX_MODULES];
+-};
+-
+-struct bootinfo {
+-    struct meminfo mem;
+-    /* The reserved regions are only used when booting using Device-Tree */
+-    struct meminfo reserved_mem;
+-    struct boot_modules modules;
+-    struct bootcmdlines cmdlines;
+-#ifdef CONFIG_ACPI
+-    struct meminfo acpi;
+-#endif
+-#ifdef CONFIG_STATIC_SHM
+-    struct shared_meminfo shmem;
+-#endif
+-};
+-
+-#ifdef CONFIG_ACPI
+-#define BOOTINFO_ACPI_INIT                          \
+-    .acpi.common.max_banks = NR_MEM_BANKS,          \
+-    .acpi.common.type = MEMORY,
+-#else
+-#define BOOTINFO_ACPI_INIT
+-#endif
+-
+-#ifdef CONFIG_STATIC_SHM
+-#define BOOTINFO_SHMEM_INIT                         \
+-    .shmem.common.max_banks = NR_SHMEM_BANKS,       \
+-    .shmem.common.type = STATIC_SHARED_MEMORY,
+-#else
+-#define BOOTINFO_SHMEM_INIT
+-#endif
+-
+-#define BOOTINFO_INIT                               \
+-{                                                   \
+-    .mem.common.max_banks = NR_MEM_BANKS,           \
+-    .mem.common.type = MEMORY,                      \
+-    .reserved_mem.common.max_banks = NR_MEM_BANKS,  \
+-    .reserved_mem.common.type = RESERVED_MEMORY,    \
+-    BOOTINFO_ACPI_INIT                              \
+-    BOOTINFO_SHMEM_INIT                             \
+-}
+-
+-extern struct bootinfo bootinfo;
+-
+-bool check_reserved_regions_overlap(paddr_t region_start,
+-                                    paddr_t region_size,
+-                                    bool allow_memreserve_overlap);
+-
+-struct boot_module *add_boot_module(boot_module_kind kind,
+-                                   paddr_t start, paddr_t size, bool domU);
+-struct boot_module *boot_module_find_by_kind(boot_module_kind kind);
+-struct boot_module * boot_module_find_by_addr_and_kind(boot_module_kind kind,
+-                                                             paddr_t start);
+-void add_boot_cmdline(const char *name, const char *cmdline,
+-                      boot_module_kind kind, paddr_t start, bool domU);
+-struct bootcmdline *boot_cmdline_find_by_kind(boot_module_kind kind);
+-struct bootcmdline * boot_cmdline_find_by_name(const char *name);
+-const char *boot_module_kind_as_string(boot_module_kind kind);
+-
+-void populate_boot_allocator(void);
+-
+-size_t boot_fdt_info(const void *fdt, paddr_t paddr);
+-
+-const char *boot_fdt_cmdline(const void *fdt);
+-int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
+-
+-static inline struct membanks *bootinfo_get_reserved_mem(void)
+-{
+-    return container_of(&bootinfo.reserved_mem.common, struct membanks, common);
+-}
+-
+-static inline struct membanks *bootinfo_get_mem(void)
+-{
+-    return container_of(&bootinfo.mem.common, struct membanks, common);
+-}
+-
+-#ifdef CONFIG_ACPI
+-static inline struct membanks *bootinfo_get_acpi(void)
+-{
+-    return container_of(&bootinfo.acpi.common, struct membanks, common);
+-}
+-#endif
+-
+-#ifdef CONFIG_STATIC_SHM
+-static inline struct membanks *bootinfo_get_shmem(void)
+-{
+-    return container_of(&bootinfo.shmem.common, struct membanks, common);
+-}
+-
+-static inline struct shmem_membank_extra *bootinfo_get_shmem_extra(void)
+-{
+-    return bootinfo.shmem.extra;
+-}
+-#endif
+-
+-static inline struct membanks *membanks_xzalloc(unsigned int nr,
+-                                                enum region_type type)
+-{
+-    struct membanks *banks = xzalloc_flex_struct(struct membanks, bank, nr);
+-
+-    if ( !banks )
+-        goto out;
+-
+-    banks->max_banks = nr;
+-    banks->type = type;
+-
+- out:
+-    return banks;
+-}
+-
+ /*
+  * Interpret the property `prop_name` of `node` as a u32.
+  *
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+new file mode 100644
+index 0000000000..f834f19571
+--- /dev/null
++++ b/xen/include/xen/bootinfo.h
+@@ -0,0 +1,213 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef XEN_BOOTINFO_H
++#define XEN_BOOTINFO_H
++
++#include <xen/bootfdt.h>
++#include <xen/kernel.h>
++#include <xen/macros.h>
++#include <xen/xmalloc.h>
++
++#define NR_MEM_BANKS 256
++#define NR_SHMEM_BANKS 32
++
++#define MAX_MODULES 32 /* Current maximum useful modules */
++
++enum membank_type {
++    /*
++     * The MEMBANK_DEFAULT type refers to either reserved memory for the
++     * device/firmware (when the bank is in 'reserved_mem') or any RAM (when
++     * the bank is in 'mem').
++     */
++    MEMBANK_DEFAULT,
++    /*
++     * The MEMBANK_STATIC_DOMAIN type is used to indicate whether the memory
++     * bank is bound to a static Xen domain. It is only valid when the bank
++     * is in reserved_mem.
++     */
++    MEMBANK_STATIC_DOMAIN,
++    /*
++     * The MEMBANK_STATIC_HEAP type is used to indicate whether the memory
++     * bank is reserved as static heap. It is only valid when the bank is
++     * in reserved_mem.
++     */
++    MEMBANK_STATIC_HEAP,
++    /*
++     * The MEMBANK_FDT_RESVMEM type is used to indicate whether the memory
++     * bank is from the FDT reserve map.
++     */
++    MEMBANK_FDT_RESVMEM,
++};
++
++enum region_type {
++    MEMORY,
++    RESERVED_MEMORY,
++    STATIC_SHARED_MEMORY
++};
++
++/* Indicates the maximum number of characters(\0 included) for shm_id */
++#define MAX_SHM_ID_LENGTH 16
++
++struct shmem_membank_extra {
++    char shm_id[MAX_SHM_ID_LENGTH];
++    unsigned int nr_shm_borrowers;
++};
++
++struct membank {
++    paddr_t start;
++    paddr_t size;
++    union {
++        enum membank_type type;
++#ifdef CONFIG_STATIC_SHM
++        struct shmem_membank_extra *shmem_extra;
++#endif
++    };
++};
++
++struct membanks {
++    __struct_group(membanks_hdr, common, ,
++        unsigned int nr_banks;
++        unsigned int max_banks;
++        enum region_type type;
++    );
++    struct membank bank[];
++};
++
++struct meminfo {
++    struct membanks_hdr common;
++    struct membank bank[NR_MEM_BANKS];
++};
++
++struct shared_meminfo {
++    struct membanks_hdr common;
++    struct membank bank[NR_SHMEM_BANKS];
++    struct shmem_membank_extra extra[NR_SHMEM_BANKS];
++};
++
++/* DT_MAX_NAME is the node name max length according the DT spec */
++#define DT_MAX_NAME 41
++struct bootcmdline {
++    boot_module_kind kind;
++    bool domU;
++    paddr_t start;
++    char dt_name[DT_MAX_NAME];
++    char cmdline[BOOTMOD_MAX_CMDLINE];
++};
++
++struct boot_modules {
++    int nr_mods;
++    struct boot_module module[MAX_MODULES];
++};
++
++struct bootcmdlines {
++    unsigned int nr_mods;
++    struct bootcmdline cmdline[MAX_MODULES];
++};
++
++struct bootinfo {
++    struct meminfo mem;
++    /* The reserved regions are only used when booting using Device-Tree */
++    struct meminfo reserved_mem;
++    struct boot_modules modules;
++    struct bootcmdlines cmdlines;
++#ifdef CONFIG_ACPI
++    struct meminfo acpi;
++#endif
++#ifdef CONFIG_STATIC_SHM
++    struct shared_meminfo shmem;
++#endif
++};
++
++#ifdef CONFIG_ACPI
++#define BOOTINFO_ACPI_INIT                          \
++    .acpi.common.max_banks = NR_MEM_BANKS,          \
++    .acpi.common.type = MEMORY,
++#else
++#define BOOTINFO_ACPI_INIT
++#endif
++
++#ifdef CONFIG_STATIC_SHM
++#define BOOTINFO_SHMEM_INIT                         \
++    .shmem.common.max_banks = NR_SHMEM_BANKS,       \
++    .shmem.common.type = STATIC_SHARED_MEMORY,
++#else
++#define BOOTINFO_SHMEM_INIT
++#endif
++
++#define BOOTINFO_INIT                               \
++{                                                   \
++    .mem.common.max_banks = NR_MEM_BANKS,           \
++    .mem.common.type = MEMORY,                      \
++    .reserved_mem.common.max_banks = NR_MEM_BANKS,  \
++    .reserved_mem.common.type = RESERVED_MEMORY,    \
++    BOOTINFO_ACPI_INIT                              \
++    BOOTINFO_SHMEM_INIT                             \
++}
++
++extern struct bootinfo bootinfo;
++
++bool check_reserved_regions_overlap(paddr_t region_start,
++                                    paddr_t region_size,
++                                    bool allow_memreserve_overlap);
++
++struct boot_module *add_boot_module(boot_module_kind kind,
++                                    paddr_t start, paddr_t size, bool domU);
++struct boot_module *boot_module_find_by_kind(boot_module_kind kind);
++struct boot_module * boot_module_find_by_addr_and_kind(boot_module_kind kind,
++                                                             paddr_t start);
++void add_boot_cmdline(const char *name, const char *cmdline,
++                      boot_module_kind kind, paddr_t start, bool domU);
++struct bootcmdline *boot_cmdline_find_by_kind(boot_module_kind kind);
++struct bootcmdline * boot_cmdline_find_by_name(const char *name);
++const char *boot_module_kind_as_string(boot_module_kind kind);
++
++void populate_boot_allocator(void);
++
++size_t boot_fdt_info(const void *fdt, paddr_t paddr);
++const char *boot_fdt_cmdline(const void *fdt);
++int domain_fdt_begin_node(void *fdt, const char *name, uint64_t unit);
++
++static inline struct membanks *bootinfo_get_reserved_mem(void)
++{
++    return container_of(&bootinfo.reserved_mem.common, struct membanks, common);
++}
++
++static inline struct membanks *bootinfo_get_mem(void)
++{
++    return container_of(&bootinfo.mem.common, struct membanks, common);
++}
++
++#ifdef CONFIG_ACPI
++static inline struct membanks *bootinfo_get_acpi(void)
++{
++    return container_of(&bootinfo.acpi.common, struct membanks, common);
++}
++#endif
++
++#ifdef CONFIG_STATIC_SHM
++static inline struct membanks *bootinfo_get_shmem(void)
++{
++    return container_of(&bootinfo.shmem.common, struct membanks, common);
++}
++
++static inline struct shmem_membank_extra *bootinfo_get_shmem_extra(void)
++{
++    return bootinfo.shmem.extra;
++}
++#endif
++
++static inline struct membanks *membanks_xzalloc(unsigned int nr,
++                                                enum region_type type)
++{
++    struct membanks *banks = xzalloc_flex_struct(struct membanks, bank, nr);
++
++    if ( !banks )
++        goto out;
++
++    banks->max_banks = nr;
++    banks->type = type;
++
++ out:
++    return banks;
++}
++
++#endif /* XEN_BOOTINFO_H */
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index 3a20623cf5..886a853816 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -3,7 +3,7 @@
+ #ifndef __XEN_FDT_DOMAIN_BUILD_H__
+ #define __XEN_FDT_DOMAIN_BUILD_H__
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ #include <xen/fdt-kernel.h>
+ #include <xen/mm.h>
+diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
+index 8363865282..33a60597bb 100644
+--- a/xen/include/xen/fdt-kernel.h
++++ b/xen/include/xen/fdt-kernel.h
+@@ -7,7 +7,7 @@
+ #ifndef __XEN_FDT_KERNEL_H__
+ #define __XEN_FDT_KERNEL_H__
+ 
+-#include <xen/bootfdt.h>
++#include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
+ #include <xen/types.h>
  
 -- 
-2.49.1
-
-
-
-Anthoine Bourgeois | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+2.43.0
 
 
