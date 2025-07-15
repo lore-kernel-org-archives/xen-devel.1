@@ -4,40 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3780EC83F17
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 08:31:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1043769.1413825 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A74D4C83F17
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 08:37:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1043819.1413868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubb4P-0006Hr-I6; Tue, 15 Jul 2025 08:31:25 +0000
+	id 1ubbA4-0001fG-Jj; Tue, 15 Jul 2025 08:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1043769.1413825; Tue, 15 Jul 2025 08:31:25 +0000
+Received: by outflank-mailman (output) from mailman id 1043819.1413868; Tue, 15 Jul 2025 08:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubb4P-0006HY-Cp; Tue, 15 Jul 2025 08:31:25 +0000
-Received: by outflank-mailman (input) for mailman id 1043769;
- Tue, 15 Jul 2025 08:31:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=V4bE=Z4=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1ubb4N-0005rV-JQ
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 08:31:23 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 16c412bf-6156-11f0-a319-13f23c93f187;
- Tue, 15 Jul 2025 10:31:22 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a4f64cdc2dso749952f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 01:31:22 -0700 (PDT)
-Received: from lab.home
- (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
- [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4560f22cd14sm84787075e9.30.2025.07.15.01.31.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 01:31:21 -0700 (PDT)
+	id 1ubbA4-0001f9-H2; Tue, 15 Jul 2025 08:37:16 +0000
+Received: by outflank-mailman (input) for mailman id 1043819;
+ Tue, 15 Jul 2025 08:37:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=XoCR=Z4=arm.com=Hari.Limaye@srs-se1.protection.inumbo.net>)
+ id 1ubbA3-0001f3-E2
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 08:37:15 +0000
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20a::7])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e5c8792d-6156-11f0-b894-0df219b8e170;
+ Tue, 15 Jul 2025 10:37:10 +0200 (CEST)
+Received: from DUZPR01CA0309.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4ba::9) by VI1PR08MB10298.eurprd08.prod.outlook.com
+ (2603:10a6:800:1be::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.27; Tue, 15 Jul
+ 2025 08:37:07 +0000
+Received: from DB5PEPF00014B9A.eurprd02.prod.outlook.com
+ (2603:10a6:10:4ba:cafe::d2) by DUZPR01CA0309.outlook.office365.com
+ (2603:10a6:10:4ba::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.17 via Frontend Transport; Tue,
+ 15 Jul 2025 08:37:00 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB5PEPF00014B9A.mail.protection.outlook.com (10.167.8.167) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8922.22
+ via Frontend Transport; Tue, 15 Jul 2025 08:37:04 +0000
+Received: from AS2PR08MB8745.eurprd08.prod.outlook.com (2603:10a6:20b:55d::22)
+ by DB9PR08MB9441.eurprd08.prod.outlook.com (2603:10a6:10:457::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.35; Tue, 15 Jul
+ 2025 08:36:31 +0000
+Received: from AS2PR08MB8745.eurprd08.prod.outlook.com
+ ([fe80::a4bd:fd62:e7f:76d5]) by AS2PR08MB8745.eurprd08.prod.outlook.com
+ ([fe80::a4bd:fd62:e7f:76d5%5]) with mapi id 15.20.8922.028; Tue, 15 Jul 2025
+ 08:36:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,86 +63,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16c412bf-6156-11f0-a319-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752568282; x=1753173082; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Pb/Ky+NjHb2U/AUnw3rA7qjcFJaFaS7qOBSec9pqZjI=;
-        b=bBTNDY132zWh1vy4NPCwkJUKF4JL40G0ImyvxStYSn6f0MwyyXZ+9taJdM2iqBgORH
-         19VCMWpzUugm5wbh2n5eDPzSnnMZL4Th5fq8xmkJY0FjCf/RKcKRjuQk3IKItbr9OAZc
-         vZZ5udW5GM213KGlfFMlI0eVtKPZkNysMzOSQVNS9j/HH033ZAMd78OeqDHM9jyGxkoe
-         qP08/Rx6PLpFhkdiF60lqGvWOW+t1ML8zJ4OB149AHpP9RrxDA1ZnrTQT6Oxeo2YldfV
-         FhIzRCuQLogoZDFvFuzK+K3C614lkFR7hlsHcxMvdFRNqUWA3tZvLSlrV5soEfeQMPNZ
-         Mr/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752568282; x=1753173082;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Pb/Ky+NjHb2U/AUnw3rA7qjcFJaFaS7qOBSec9pqZjI=;
-        b=Yw+4Hv2jol+MymfU4cf1PAocuA1dEJDv3SG45p+N/zO1p5Kgpfq3AEnC3ju7ybZxpc
-         A99cRJUkOntIedduvlEW1C7cQBkLY8M3AvIcKj/LVuW7XWIRq/olT/mssPrUwQB5E93B
-         YQGfIgJmZzgfwRmjL5kvMQyuz4MACW7Gwmmvrrfd4Slp+PDs4zfB1GMMfuKkfUx8z7dD
-         S3udiycGJ6uciSpZN1TqHVZbd/2rWzGqSHnn7TRFhgYtKd6rFZVBfPRUIZmHHghjprYU
-         RFeLVAMtQuqkNXpjq9Hah4YnM40v3caQVktw6f8KEVrKSNTOL4O0YauQ26P0//Wj5KhX
-         /LYQ==
-X-Gm-Message-State: AOJu0YzoQzcbzq8WhPPFtozODAM9xXYrj9gMC137spiKc6kf3uKWlfak
-	2u9/a980np6C5aDd7sydwF+HgpuV6Cxs5Y60CqCA2znJEbjHKtlcDxTxsOaygQ==
-X-Gm-Gg: ASbGncvMyc1+XeEPf2zrRYVxz1MrPf4cY0o9eSHFjikR/jxBpbbcTRDf+lw0YfVAzSz
-	n2ijPrm5hlVd/6oTDg6RYumBXfrLiAgoLFqXep7hFWVoYnrCdjFB7LbFg8Lc5XGc6P/MPHgfzsU
-	CdGoQYHXt92n09pga8FzezYm39NvH2EdzAoSK58cKSjH2Kv364PGoyoDQYfZwwPmUbJ7krBR/AX
-	KXUMZiOlw5UNXHvr+Qoklbbdw2fGPyMiBdw0rnLtgv71wPtSn0FKTSGmt+9LhZo/5Mg8xZ7F1Mo
-	p2LKspYdvVOBfPMJ+iLmGqn4/DLHYJ7/eAOO/KEKs46D/zG7+DOYEhN5jKP2R9ZvxDu1ezz9f9/
-	V/wOHTfMMghoyqhRrhsXcZbWVBG0/QrKOuoyWhU/t0GXlxv4aWU9iRX8a0DpzNgB/npV+zmPuZ3
-	uT9aKcOTQ2YTRtn9d3nOMNMw==
-X-Google-Smtp-Source: AGHT+IFZOsinfU0cIcmHi9pWiaPdGc5n59QUav1VxuvnfLAqQjttpbsSsMjdIz/TQ3GfmoAGRE1+Rg==
-X-Received: by 2002:a05:600c:c111:b0:456:2137:5662 with SMTP id 5b1f17b1804b1-456291b4cd8mr2340595e9.7.1752568281554;
-        Tue, 15 Jul 2025 01:31:21 -0700 (PDT)
-From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v9 4/6] tools/libxl: Activate the altp2m_count feature
-Date: Tue, 15 Jul 2025 08:31:12 +0000
-Message-Id: <fc4fa1d5d2b7064c14e39c020f565f689e4405bd.1752568020.git.w1benny@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1752568020.git.w1benny@gmail.com>
-References: <cover.1752568020.git.w1benny@gmail.com>
+X-Inumbo-ID: e5c8792d-6156-11f0-b894-0df219b8e170
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=pdl8EJSs1E/aiEXlX6Pcb+dTjSCrKQoXRoSvDl8HVvNKLVRnzRzQ4IttwS0d7sk6fNjZOiWMLZqg/k/Md+NjgxspGDZQzOGGXRJCy042R8pZP7VR8009y3cyfR6uoNnw5sVyk4EV77q5MM53kjDpAEDRXMJBpz/2aSbRaQ1/9j5lJM7G2sqnONDVJSaUfdhqS/05tjVwusgTlbziPvct1EIlQHxi/5VoO8Ql7xSWZDr6DTkoUjiUH+vsT/L5U8XBCF41Sr6aQfkTv6NSh2qYB7BIsQ50DuQ4mcC32lDLQMbisUfPEVnF1A/Spl2lGcQd4K7rcNHzsCl+DPoWF9aktw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JendjDDkuEWu4SrqeNccVu+FdyDtlmhYuOpOgaCGv2s=;
+ b=Hc9LeDFK/N7e4HYGbidRbOn9/YhKcTsdYBs4iEQY2Z00gLnmjJwp7aOIUMihdrUhMa3/D2KAeNZ4yj67E+QL3XLIx88QSmpXMuBAL3JZIFxQPj0ZKWHlCd3WGTUBvVXXQ5B4zBnZnKu79pmd/exqDfYEjxSDN2Hz0MHwTEUzlGdIW6TjVcJ3H6v8sCqjQenFECbfdBF9KrRfCEFfYQZF5dqo+vkdWkfx3LcQBf8BbLPnen2njIW91E7CatL+xb9GJW8g5Eo8Ai3WMu5y9WWYoAo5bIslbI4ZTdXxsB7+QEiQ+hBK3VVIpYxSKY0+/+kKCppjFuioJWx2IyYtoK3Efw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=amd.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JendjDDkuEWu4SrqeNccVu+FdyDtlmhYuOpOgaCGv2s=;
+ b=KxwxV6EdzQhfvbbJ/hU7XilppyhrOeSMF0pKWPsWm4hzqEZsPxlQP0b4lgj5DYMwSseB6V7is5hjLTxj0nf7XMHtyb3Nes8pLeduYOJ3JV6or67J1RoyPB8Vxb524lT2prijW291nJ3O5dVmfzfHT8OjQ52hzbe1uQZVtWXRNZc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xCAwofDkI/e3WLLe6bo0A+DLz5GG9OVLalTEqsaSOK/ctocPOC+scdqO7xV/GaRY29M60Y7mpuwOn0pBVKrGUGQycFUsl4XDtNavsXIqCue0uv5l2TW9WxJuy1kG2tErFmSXUd+l+1wkOtIyKfrL4HiJASkfKn7xvPmkDGvLNR24DDXqNzUSYrW5QSKmsOnPO5NzoeEl1SeeL6qf9fN+kuAy4GnwmpYnq0m1Sl2S+ZB9Nkcu92EHwpK8npSgoMpQoGCB9L2YUZAoE6FVcBLmw57w7s/Sl6KWkKFdZayPrb68V9JAjKGxS0jlcEomnbCSWSGVaaHVZYPnM+2aMBKs4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JendjDDkuEWu4SrqeNccVu+FdyDtlmhYuOpOgaCGv2s=;
+ b=SkK6mnvBqrjU3VhPTNMFbYmSb9qIbzmiOf3WgGXtbmdVe72l+djwq6OGlJYN6Gh3uOl8OhUE0PKV7roO/xN/opT9Dn8Nw6DU3108kqIV4dzDL3typkgzektS1UjjHjQPmpt7+1G9MoLjdM01F+tuMJ+bcfEHYe2gh7er4RJDmNR4T+Fpz+MNPPGbUFJ9zE5xuFwX2nlGrjSdYGTbcHhf3I9cm/ly1j3L06z4HCmOFFyZTgKyCwW8EJ/FWFFdm2IpuPXhCY0gUqGI0q/qnwN8EV5yNkTVnPYelo/MsJNX7NZBuLK2v0BD5V6jqQJw9YTxUjxBadgqi3NNFWDylRUtGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JendjDDkuEWu4SrqeNccVu+FdyDtlmhYuOpOgaCGv2s=;
+ b=KxwxV6EdzQhfvbbJ/hU7XilppyhrOeSMF0pKWPsWm4hzqEZsPxlQP0b4lgj5DYMwSseB6V7is5hjLTxj0nf7XMHtyb3Nes8pLeduYOJ3JV6or67J1RoyPB8Vxb524lT2prijW291nJ3O5dVmfzfHT8OjQ52hzbe1uQZVtWXRNZc=
+From: Hari Limaye <Hari.Limaye@arm.com>
+To: "Orzel, Michal" <michal.orzel@amd.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Luca
+ Fancellu <Luca.Fancellu@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<Bertrand.Marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v3 1/6] arm/mpu: Find MPU region by range
+Thread-Topic: [PATCH v3 1/6] arm/mpu: Find MPU region by range
+Thread-Index: AQHb9V+06nIKaACf9UqCxt0klN23X7Qy3E8A
+Date: Tue, 15 Jul 2025 08:36:30 +0000
+Message-ID: <515DCD17-B77C-4931-9C67-2D890D5B5E00@arm.com>
+References: <cover.1752565274.git.hari.limaye@arm.com>
+ <3da52fda916ad2487ede9b193143d06debdcfc88.1752565274.git.hari.limaye@arm.com>
+ <03fc835d-7833-4c1f-b061-da22a4ab9b75@amd.com>
+In-Reply-To: <03fc835d-7833-4c1f-b061-da22a4ab9b75@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AS2PR08MB8745:EE_|DB9PR08MB9441:EE_|DB5PEPF00014B9A:EE_|VI1PR08MB10298:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75e6c856-35a3-4ce3-0455-08ddc37ac6b9
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?us-ascii?Q?ZLuCAEPcfoEYGA6VaTpVu15dbpQmwnJzgHeo/BLES6+LCue+1jTAKEvIf9Ar?=
+ =?us-ascii?Q?pvhG6MVP1lTd7hStA4zitVomV4IXCiTpTl7z6XwcSDvQgOjX5aL5wS+U2mu/?=
+ =?us-ascii?Q?vdsLqBIJ2mw9teNB18ItjPCxR22biWrnR41cZDS4jAOGd0NsgdOJpjOc7ort?=
+ =?us-ascii?Q?FXaDwbRWSZh3TazbDYVOr73vxPxMqqDp3RAn0riwV1JOYzDbc392E8sck9Gs?=
+ =?us-ascii?Q?SeqjfA3Dj/xS0Lfi6WJMk2fKXaUM+dWFLaftSAAYbN4avtLS6n7960P4Gzza?=
+ =?us-ascii?Q?Z4GLvyRkgx7kJ3yqerztSRcalR5wXnFkcdOT8G1VdvVpCVarLa7ES2elIhZn?=
+ =?us-ascii?Q?fynoWcc9L+qP2ApvinjSLsDBzcHN4tgrKOfMTj9SEzc61Hq7hphryej8uS9J?=
+ =?us-ascii?Q?8gmLT/n8rlRgu48GjjhLy9bHQcQ9xRjVmwi1oIpTHD8FeYbSJTZ96Ea/UHbO?=
+ =?us-ascii?Q?s0ffVULNRM/jEr/KNfp95NbLBTZkAlopuOCNdJkaWRkfokt4pM88cRwNZsFN?=
+ =?us-ascii?Q?NgNUPW6Zvx+lTVsdxkSklEmO7iLPgPDRfzgrnXywDob/R0pmC7TdyWfwoMyq?=
+ =?us-ascii?Q?hoQSHC3Ilocja0u/wpnS+gIVAjjIuS9ZFlQEFt7BQpy4QpX56fanzyn635GG?=
+ =?us-ascii?Q?gGVvq0OX3k5GYeeEllg3OxOMS7+SrJyfLazmFWJc55VYqmgDVpzs+IgsnaRD?=
+ =?us-ascii?Q?tj4sEZpCkxAKMpivLKI7YWi4gjG22LXrh4mQFoM1h8VQyo5szIHrljg3H4zn?=
+ =?us-ascii?Q?eBNaKtqYZ27eYFJ1GO8TAa3gaAkcUz8Qss0aanEzRXMJSFDfyZLOmnZWdI6h?=
+ =?us-ascii?Q?kjMJSDne/uGoDTPFu6W9jnRmEo1rMaR/b/TeFLwakZ25shwlpH43P4QuD1Oa?=
+ =?us-ascii?Q?gaX7fKThyQwfCnKBx9yFkOtb31tGxHhWhlZIKl9jRvZl4YcFMgy/i2vM7xeJ?=
+ =?us-ascii?Q?KooJY17zaVY7eAGIenZMlGznajDrCes8wWx4fk1qoG7pH9enNFlC34SHlm6b?=
+ =?us-ascii?Q?qidIDH30U1yD3U8ITcnJd/YrHEKFXg1b16txzQhW1IeKqSISmuQR0rU3HLuY?=
+ =?us-ascii?Q?WAjshRbxZEK9Vqzz3z4yi7I7KezCG4mJRLLELDE/X9NWipD1uFri/ejAFNcu?=
+ =?us-ascii?Q?T/ZIup5XpKxMwQPYuoiYvm/lB6QKioIHcWcZtnRIVVxeS9sBzwEQSjVAn7kj?=
+ =?us-ascii?Q?K2nppJQ9thod8vviimoLEFz8/+YYeH59XSqF6LfHjFeStLOZejgMGTHMkISA?=
+ =?us-ascii?Q?ZxUHMTTJAl1p0ra1YzUMGL1sBB64Mb4HNd3Teb/AEmQKe2X7OtIbCt4anAsp?=
+ =?us-ascii?Q?yuWd4JD8NkjmaGkFSkcdLYkIuYhZyAPRUsDU5w3ORtmnOCnVgBa6M1tiuhmc?=
+ =?us-ascii?Q?lK5QRAUAZngtxraAk8paJwOl/FGhEhXxKcABKcz7Rd2xVXvkPiETtwuKIybs?=
+ =?us-ascii?Q?9QhXEbfiVyf/Zxd7n78u/0YiYNnN1iYm+qS7zO4caoe+lCRI0O0RMA=3D=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR08MB8745.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <3528FBBC499294488AEC9FADE7C04BEA@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB9441
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DB5PEPF00014B9A.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	771a1d4d-17a3-41ec-f72f-08ddc37ab25f
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|14060799003|1800799024|35042699022;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?4tWCJkVZh9HdkhQbAMWAR/zZ0pcB7Qw3gLMR43SP3FA7TquyTKmDOn2fgAXV?=
+ =?us-ascii?Q?ZQae8lNGoToBLtIqy5p3nCE+bd30IB67EYiqKKKoVBNWvKtdP1fu9co1jAf6?=
+ =?us-ascii?Q?QxN/A2m4uKhAvzxXfO2eweJxRcVAnl8fSrfsxq8lmbD1MjbDRtwA7Dp8W3IN?=
+ =?us-ascii?Q?6uxBdMJQv/QAAzc7o04VWdjfiEKgThXu4yw543/uGPAKuNj+zSpX77XR5HLH?=
+ =?us-ascii?Q?qYVB90Zq497Ohn9rE8ETzGhFqqGTdbvdtY1tTlod56Lf8QeEI4vnoN5Kg5Kn?=
+ =?us-ascii?Q?ooLKSPPjUxHIeMmNcZL7cd1If7dusgMes0TaqVVSg1Ta4HDCzl1O/mZp+crL?=
+ =?us-ascii?Q?aOEjaVXtioWvofiaT5mNrz87oxfjdvs/1Hubg3hOAnsnEPkD54zgv3KhC4Ds?=
+ =?us-ascii?Q?EHDKBstr3zauFq7ikGIPfo6emWeSvbvINsgenvRglL9wzdF8IW7AAZrX9jD3?=
+ =?us-ascii?Q?gHCCDANr7FDPdHFXNvsUSkYaocTUW4jGLfSDy7C1KEzS3DD7FmVg0GpFIkVa?=
+ =?us-ascii?Q?aZuLyXKbOoPC/rmukZ1QgvnTmrvC5XcOQjMc2hrlUIZoMycCvE4RtXc+ESFn?=
+ =?us-ascii?Q?6E94sBN4hdqmYy67lbWQeOP2B7KRD408dK9QcfEcOo/XeTlGP8iHazyAm6Iy?=
+ =?us-ascii?Q?0zQeHu4qN/TEBRXZicWWFCJou8kDzUcINWkqCI0xmkKgvbt6v3QQCvY6NjVK?=
+ =?us-ascii?Q?ibFZqDkPtAMUG0wnALJh3ZTWWeyoPzkCfm1NBH+gahZlOK8yyuYlXfnjFb/L?=
+ =?us-ascii?Q?ehzgVuvkDPsfGiNDS5ZI9iy3KdpyB/Dou/6bBBfMHY6sMddcZSiNlQAGdeLc?=
+ =?us-ascii?Q?UmSqKWFSD42iStH56etepha/JPQMWCzavIbNrhj4hH+aGTtsngYTVwyEE3kC?=
+ =?us-ascii?Q?2HKC1XVm68wvjnHE3nnOJ7xVc19O8ElWolBSYYid0fQzpNvV3zDzVQEJjbri?=
+ =?us-ascii?Q?SkmwXmGGsXPs/A7hnf+jb97xdj5bKJSVTneAhKmgmcHzsoYM7Cp1er/sRUMW?=
+ =?us-ascii?Q?ofUWW9nc6fgpOASMZyC5fSsw1Em+Mc1Q+0rQV6OZpk74e6CHAjIKPLZlkioN?=
+ =?us-ascii?Q?rPY4DP19Es+ubY3XRD8G6Dv2iO5xpUi91ttY+Yssxtvor7jL2cQ3ni0jUblz?=
+ =?us-ascii?Q?ntaVpGZfAuUOPhwmtLUstH+Hen5p/oBbiTdGyOYZQX4SLXlHctaWsknFPfUK?=
+ =?us-ascii?Q?XqiTSt+/tUo+Ove/HxKhhTjJE0THhDnRzaIaGHVhAryn1w/GJaR6LDIr3hC/?=
+ =?us-ascii?Q?G9tqTgnqd8kWTPxQ6LEByEHRJBg+48plh/7SMOZZXYVPtrG6Sby+aAIKDRDf?=
+ =?us-ascii?Q?SuNOnI7dPgP3O6ISXs9XBAppoB8vXX88EQBCmuJK2cqFiq3pBRuky0DdOqPl?=
+ =?us-ascii?Q?eQy4kvTHKSzvPgiZs467aYvizKBYpSiZPhxAbEP8jabYdjM9WZu1X9ojmAUe?=
+ =?us-ascii?Q?iJpe+sIVl0TGhLhZf51dBTvmGJNQnXcKpVhVAikyTn1LcPsajv4nejGgZyY1?=
+ =?us-ascii?Q?FQ2MS0+X2/0b/pMCRfQUBktFik4Dhi0lcyJ/?=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(14060799003)(1800799024)(35042699022);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2025 08:37:04.2943
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75e6c856-35a3-4ce3-0455-08ddc37ac6b9
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DB5PEPF00014B9A.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB10298
 
-From: Petr Beneš <w1benny@gmail.com>
+Hi Michal,
 
-This commit activates the previously introduced altp2m_count parameter,
-establishing the connection between libxl and Xen.
+>> +int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t bas=
+e,
+>> +                           paddr_t limit, uint8_t *index)
+>> +{
+>> +    ASSERT(index);
+>> +    *index =3D INVALID_REGION_IDX;
+>> +
+>> +    /*
+>> +     * The caller supplies a half-open interval [base, limit), i.e. lim=
+it is the
+>> +     * first byte *after* the region. Require limit strictly greater th=
+an base,
+>> +     * which is necessarily a non-empty region.
+>> +     */
+>> +    ASSERT(base < limit);
+> Well, that does not guarantee a non-empty region.
+> Consider passing [x, x+1). The assert will pass, even though the region i=
+s empty.
+>=20
+> ~Michal
+>=20
 
-Signed-off-by: Petr Beneš <w1benny@gmail.com>
-Acked-by: Anthony PERARD <anthony.perard@vates.tech>
----
- tools/libs/light/libxl_create.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Apologies, I may well be missing something here! Please could you suggest a=
+ code snippet to understand your expectation here / what you would prefer t=
+he assert to be?
 
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 4301f17f90..a796178050 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -596,6 +596,10 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-             .max_grant_frames = b_info->max_grant_frames,
-             .max_maptrack_frames = b_info->max_maptrack_frames,
-             .grant_opts = XEN_DOMCTL_GRANT_version(b_info->max_grant_version),
-+            .altp2m = {
-+                .opts = 0, /* .opts will be set below */
-+                .nr = b_info->altp2m_count,
-+            },
-             .vmtrace_size = ROUNDUP(b_info->vmtrace_buf_kb << 10, XC_PAGE_SHIFT),
-             .cpupool_id = info->poolid,
-         };
--- 
-2.34.1
+As I understand it, with a half-open interval [base, limit) as is passed to=
+ this function, the size is  `limit - base` and so the region [x, x+1) will=
+ have size 1. The empty region starting at the same address would be [x, x)=
+. But perhaps I am making the off-by-one error here.
+
+Many thanks,
+Hari
+
 
 
