@@ -4,31 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38535C83F27
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:58:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1044432.1414522 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F128FC83F17
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 14:10:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1044445.1414532 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubgB7-0006ix-Lw; Tue, 15 Jul 2025 13:58:41 +0000
+	id 1ubgMl-0003DE-MQ; Tue, 15 Jul 2025 14:10:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1044432.1414522; Tue, 15 Jul 2025 13:58:41 +0000
+Received: by outflank-mailman (output) from mailman id 1044445.1414532; Tue, 15 Jul 2025 14:10:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubgB7-0006iq-J6; Tue, 15 Jul 2025 13:58:41 +0000
-Received: by outflank-mailman (input) for mailman id 1044432;
- Tue, 15 Jul 2025 13:58:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ubgMl-0003D7-JA; Tue, 15 Jul 2025 14:10:43 +0000
+Received: by outflank-mailman (input) for mailman id 1044445;
+ Tue, 15 Jul 2025 14:10:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QMY+=Z4=uniontech.com=wangyuli@srs-se1.protection.inumbo.net>)
- id 1ubfz1-0004rl-TE
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:46:11 +0000
-Received: from smtpbgeu1.qq.com (smtpbgeu1.qq.com [52.59.177.22])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f37210c-6182-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 15:46:09 +0200 (CEST)
-Received: from avenger-e500 ( [localhost]) by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 15 Jul 2025 21:45:17 +0800 (CST)
+ <SRS0=B3Wk=Z4=3mdeb.com=sergii.dmytruk@srs-se1.protection.inumbo.net>)
+ id 1ubgMj-0003Bk-9I
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 14:10:42 +0000
+Received: from 4.mo576.mail-out.ovh.net (4.mo576.mail-out.ovh.net
+ [46.105.42.102]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7c95c4b1-6185-11f0-a319-13f23c93f187;
+ Tue, 15 Jul 2025 16:10:39 +0200 (CEST)
+Received: from director4.ghost.mail-out.ovh.net (unknown [10.110.37.5])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4bhLgg2fSmz62nG
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 14:10:39 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-xvwnd (unknown [10.111.182.85])
+ by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 89424C2B5F;
+ Tue, 15 Jul 2025 14:10:37 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.114])
+ by ghost-submission-5b5ff79f4f-xvwnd with ESMTPSA
+ id L+K6Kl1hdmg7/AAAl6HHwQ
+ (envelope-from <sergii.dmytruk@3mdeb.com>); Tue, 15 Jul 2025 14:10:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,137 +48,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f37210c-6182-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1752587135;
-	bh=ltFUUSzAPz2OoVfH54nkwDpFnO/axW/szGNu9HIiAOI=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=S1ENMm7fYMw+wC3Nc2T3W/1mnOrrRxwGSj+HE9H3+L091aDpIgD6Awpfjaz9oABYV
-	 ctOVZ/zt5hFQcVniHRXwpmmjkuoS0JpQZz87BbfHHONx220+fIhL/4OmFSeOxFyeKM
-	 u7o3HWlJC3p334oMD1WZaIXnaDSJIQGAOU9Q5Zo4=
-X-QQ-mid: zesmtpip2t1752587121taaa03ec6
-X-QQ-Originating-IP: IIvVAyKvuXb4Hz7pVF2rGJuCkoWUtC78LZlVFBjDx2g=
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 8982638937609059235
-EX-QQ-RecipientCnt: 63
-From: WangYuli <wangyuli@uniontech.com>
-To: wangyuli@uniontech.com
-Cc: airlied@gmail.com,
-	akpm@linux-foundation.org,
-	alison.schofield@intel.com,
-	andrew+netdev@lunn.ch,
-	andriy.shevchenko@linux.intel.com,
-	arend.vanspriel@broadcom.com,
-	bp@alien8.de,
-	brcm80211-dev-list.pdl@broadcom.com,
-	brcm80211@lists.linux.dev,
-	colin.i.king@gmail.com,
-	cvam0000@gmail.com,
-	dan.j.williams@intel.com,
-	dave.hansen@linux.intel.com,
-	dave.jiang@intel.com,
-	dave@stgolabs.net,
-	davem@davemloft.net,
-	dri-devel@lists.freedesktop.org,
-	edumazet@google.com,
-	gregkh@linuxfoundation.org,
-	guanwentao@uniontech.com,
-	hpa@zytor.com,
-	ilpo.jarvinen@linux.intel.com,
-	intel-xe@lists.freedesktop.org,
-	ira.weiny@intel.com,
-	j@jannau.net,
-	jeff.johnson@oss.qualcomm.com,
-	jgross@suse.com,
-	jirislaby@kernel.org,
-	johannes.berg@intel.com,
-	jonathan.cameron@huawei.com,
-	kuba@kernel.org,
-	kvalo@kernel.org,
-	kvm@vger.kernel.org,
-	linux-cxl@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-serial@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	linux@treblig.org,
-	lucas.demarchi@intel.com,
-	marcin.s.wojtas@gmail.com,
-	ming.li@zohomail.com,
-	mingo@kernel.org,
-	mingo@redhat.com,
-	netdev@vger.kernel.org,
-	niecheng1@uniontech.com,
-	oleksandr_tyshchenko@epam.com,
-	pabeni@redhat.com,
-	pbonzini@redhat.com,
-	quic_ramess@quicinc.com,
-	ragazenta@gmail.com,
-	rodrigo.vivi@intel.com,
-	seanjc@google.com,
-	shenlichuan@vivo.com,
-	simona@ffwll.ch,
-	sstabellini@kernel.org,
-	tglx@linutronix.de,
-	thomas.hellstrom@linux.intel.com,
-	vishal.l.verma@intel.com,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org,
-	yujiaoliang@vivo.com,
-	zhanjun@uniontech.com
-Subject: [PATCH v2 7/8] xen/xenbus: Fix typo "notifer"
-Date: Tue, 15 Jul 2025 21:44:06 +0800
-Message-ID: <906F22CD3C183048+20250715134407.540483-7-wangyuli@uniontech.com>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <BD5C52D2838AEA48+20250715134050.539234-1-wangyuli@uniontech.com>
-References: <BD5C52D2838AEA48+20250715134050.539234-1-wangyuli@uniontech.com>
+X-Inumbo-ID: 7c95c4b1-6185-11f0-a319-13f23c93f187
+Authentication-Results:garm.ovh; auth=pass (GARM-114S0082b141004-ea41-4cf9-8b1b-4d050372dd4f,
+                    4D64B2F9D48E8FFD7EE7F05048F53BAD5B642D85) smtp.auth=sergii.dmytruk@3mdeb.com
+X-OVh-ClientIp:176.111.184.221
+Date: Tue, 15 Jul 2025 17:10:25 +0300
+From: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Ross Philipson <ross.philipson@oracle.com>,
+	trenchboot-devel@googlegroups.com, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 04/22] x86/boot/slaunch-early: implement early
+ initialization
+Message-ID: <aHZhUZfjrjML1c8D@MjU3Nj>
+References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
+ <16a544876163afece619d50f80869aaacc9c797c.1748611041.git.sergii.dmytruk@3mdeb.com>
+ <180e1641-9968-479a-8ca0-7573d688c854@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: N/2JuoeGxbayhPHFCOmm5knYdufO0wCvl67pOQ3z1q+3LsO+nWTEzKpN
-	iMIC7SutcsbyBSAoeroMDwOSLv8mdyb756+NAq8qMJ6lx7ymPfPW1gWynHyjHQiV7ZWJ/cL
-	a6b0RSvVXzhXMeN+sEYQUU/DB41c2ya6dOJNTQ186nan7KQT1zR7urZfvIY2eULaec6z8lr
-	DELriyT3kIkinX8DWEbM3PcU5z0mfqtBG05zhJDZacFECuhzB40iUTuBk/fP6k/bPPEyIW1
-	JWwCHZjIXUNDnJoCdofpoxJ8SYs3oiTOOeTpKOZGVslZ+8E6RrBgaW4kyBZlPuvJaVbeuD5
-	w9S3rU+2axUVmsnK72fw4pmN/aft4iD7ED+PlLrUBdPqc+YBnxTSv2gB7nUnzPnVFEdWkA5
-	sqoM4JYMJfiniNT0KkHGlj1IguHh0JOt/ZsuPNYDCQMfRI1z5qHnXc/ClFqHh5Hinz0bNeN
-	oksCdyvSx8/wWUGnukLUOXvU+hs+PBiVelLCK7WJvhAu2HZxj9gUM639+ylfZPvHghxZBKp
-	fcm4yLgMBAIO/fTB3uafGMTRVSMjzyqesB244xjoSHQkP1yoLdAkXhNyCP5I4MUFK4DJwvR
-	8c+MIfBFQO7HEjBXFpXCAirXk76Ih0prYesYClI0c9pK4F35kPdvgnKk3Do1pCnJwgfgJVw
-	w0q5b5EDDFbmQwUuh4qf9WJnhN6RR15kd6es5C4iSyLxRV/gZIzmF5PKa33NetVTXNpXHSu
-	JB7Ey5V6hzdXpSdsMcOT93nmNFNoPskCjHp0iWCijR9QtjV2dEcYdBP2fSWfazqmlBzXhJz
-	e1mAnL4qPUmn2DTLvjq8MdUdALMtJs5gbYbq+phQJfisZYh6GsF1NvlGKOaQ3jI9Jpo1Go2
-	EAweA48jqTNJ8ovyfmRjxhffp8xpOgO98kLyV8iGo4AydUzfcN+IN/VBne33XdhuYZsNGSt
-	kCV0Tus/qNOzjiXBzrRfre6wc9dd0+ZMOpl5Bi2I7YYeZoiEZR6Bz4sYt0wRyG6XFqX6xtN
-	IVaE5fJeFW3QqCHaJ7VkWshpIY7lN0Om0jJ8MsunHUvLt7ICcvYSnp76ds08XEiFur5BFEJ
-	d88WPDg77fmSAD9odPlwpSLa3tgMhYjsv0gqUidcomHp29EnqnYL/4=
-X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <180e1641-9968-479a-8ca0-7573d688c854@suse.com>
+X-Ovh-Tracer-Id: 7016045272446776409
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdehhedtfecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefuvghrghhiihcuffhmhihtrhhukhcuoehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvdfgveegtdffhfdugeevieehkeetudevfeefgedtleejledvfeeutdetudeiveelnecukfhppeduvdejrddtrddtrddupddujeeirdduuddurddukeegrddvvddupdefjedrheelrddugedvrdduudegnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvghrghhiihdrughmhihtrhhukhesfehmuggvsgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdpoffvtefjohhsthepmhhoheejiegmpdhmohguvgepshhmthhpohhuth
+DKIM-Signature: a=rsa-sha256; bh=BCMYKiaJ21FUi9jFzqucYD8hlB87TayzMWhu2Vp/LCY=;
+ c=relaxed/relaxed; d=3mdeb.com; h=From; s=ovhmo3617313-selector1;
+ t=1752588639; v=1;
+ b=S4qWxFdhgkYqpbZ88jluAmx7V8MXpV6YgbQ29gUucOv39plCw3/wR1WaCY3m/5mQP4oK7CIY
+ ZpKNvDWxGxatA5w08EhsbLZXeV/8HiBCDJQVLObDySrEWG+Q0gdXfZpRZWLf+msJBidhET1i/2E
+ IwSXMKo24JHWXq3MT226+4ZQy5Y7qqyhqIucEt5TM8Ez6eRIu/cGT5Xs7QxapjZ87mKUhCgZT+T
+ 850lCIwTksmZwm+UBgjx7loQdaJUNVHOdqx0vcE8ZIGTuEKxzwa+c07Igra2ncnDDaZdwTnQ4MU
+ y/IWoXQrzWDzQVnSox7G0Tf3BRlJv7RSMHrSrZLeD+uZA==
 
-There is a spelling mistake of 'notifer' in the comment which
-should be 'notifier'.
+On Thu, Jul 03, 2025 at 12:50:39PM +0200, Jan Beulich wrote:
+> As indicated in reply to patch 3 - imo all code additions here want to be
+> under some CONFIG_xyz. I repeat this here, but I don't think I'll repeat it
+> any further.
 
-Link: https://lore.kernel.org/all/B3C019B63C93846F+20250715071245.398846-1-wangyuli@uniontech.com/
-Signed-off-by: WangYuli <wangyuli@uniontech.com>
----
- include/xen/xenbus.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I'll add one.  In case this is problematic for some reason I want to
+mention that in the new version I don't add #ifdef where there are
+if-statements because I did:
 
-diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
-index 3f90bdd387b6..00b84f2e402b 100644
---- a/include/xen/xenbus.h
-+++ b/include/xen/xenbus.h
-@@ -180,7 +180,7 @@ int xenbus_printf(struct xenbus_transaction t,
-  * sprintf-style type string, and pointer. Returns 0 or errno.*/
- int xenbus_gather(struct xenbus_transaction t, const char *dir, ...);
- 
--/* notifer routines for when the xenstore comes up */
-+/* notifier routines for when the xenstore comes up */
- extern int xenstored_ready;
- int register_xenstore_notifier(struct notifier_block *nb);
- void unregister_xenstore_notifier(struct notifier_block *nb);
--- 
-2.50.0
+    #ifdef CONFIG_SLAUNCH
+    ...
+    #else
+    static const bool slaunch_active = false;
+    #endif
 
+and that's enough for the compiler to discard
+`if (slaunch_active ...) { ... }`.
+
+> > +        /*
+> > +         * Prepare space for output parameter of slaunch_early_init(), which is
+> > +         * a structure of two uint32_t fields.
+> > +         */
+> > +        sub     $8, %esp
+>
+> At the very least a textual reference to the struct type is needed here,
+> to be able to find it. Better would be to have the size calculated into
+> asm-offsets.h, to use a proper symbolic name here.
+
+Will do both of those things so it's easier to understand behaviour of
+POPs.
+
+> > +        push    %esp                             /* pointer to output structure */
+> > +        lea     sym_offs(__2M_rwdata_end), %ecx  /* end of target image */
+> > +        lea     sym_offs(_start), %edx           /* target base address */
+>
+> Why LEA when this can be expressed with (shorter) MOV?
+
+I'll change to MOVs for consistency.  The reason is probably that these
+are addresses and that's what LEA is for.
+
+> > +        /* Move outputs of slaunch_early_init() from stack into registers. */
+> > +        pop     %eax  /* physical MBI address */
+> > +        pop     %edx  /* physical SLRT address */
+> > +
+> > +        /* Save physical address of SLRT for C code. */
+> > +        mov     %edx, sym_esi(slaunch_slrt)
+>
+> Why go through %edx?
+>
+> > +        /* Store MBI address in EBX where MB2 code expects it. */
+> > +        mov     %eax, %ebx
+>
+> Why go through %eax?
+
+I think I just wanted to fully unpack the structure before processing
+its fields, but there is real need for that, so I'll combine it.
+
+> > +struct early_init_results
+> > +{
+> > +    uint32_t mbi_pa;
+> > +    uint32_t slrt_pa;
+> > +} __packed;
+>
+> Why __packed?
+
+Just a bullet-proof form of documenting a requirement.
+
+> > +void asmlinkage slaunch_early_init(uint32_t load_base_addr,
+>
+> __init ?
+
+This is early code to which no such sections apply, as far as I can
+tell.
+
+> > +    slrt = (const struct slr_table *)(uintptr_t)os_mle->slrt;
+>
+> I think the cast to uintptr_t wants omitting here. This is 32-bit code, and
+> hence the conversion to a pointer ought to go fine without. Or else you're
+> silently discarding bits in the earlier assignment to ->slrt_pa.
+
+`os_mle->slrt` is 64-bit and compiler dislikes implicit narrowing for
+pointer casts, so can't just drop the cast.  I'll use `result->slrt_pa`
+(32-bit) to get rid of the cast and will add a check that the address is
+in fact 32-bit.
+
+The values of pointers are generally below 4 GiB, so no harm is done.
+The address fields are 64-bit probably for the extensibility and because
+they are mostly consumed by 64-bit code.
+
+> > +    intel_info = (const struct slr_entry_intel_info *)
+> > +        slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
+> > +    if ( intel_info == NULL || intel_info->hdr.size != sizeof(*intel_info) )
+> > +        return;
+>
+> This size check is best effort only, isn't it? Or else how do you
+> know ->hdr.size is actually within bounds?
+
+It's just a sanity check the structure is not of completely wrong format.
+
+> Further in txt_init() you use less-than checks; why more relaxed there
+> and more strict here?
+
+Those are different kinds of checks: here the code checks that an entry
+in SLRT size matches Xen's structure in size, while txt_init() verifies
+that a section of TXT heap is large enough to fit the data we expect to
+find there.
+
+> > --- a/xen/arch/x86/include/asm/intel-txt.h
+> > +++ b/xen/arch/x86/include/asm/intel-txt.h
+> > @@ -292,6 +292,22 @@ static inline void *txt_sinit_mle_data_start(const void *heap)
+> >             sizeof(uint64_t);
+> >  }
+> >
+> > +static inline void *txt_init(void)
+>
+> __init ?
+
+Then it won't work in an early code.
+
+> > +/*
+> > + * Retrieves pointer to SLRT.  Checks table's validity and maps it as necessary.
+> > + */
+> > +struct slr_table *slaunch_get_slrt(void);
+>
+> There's no definition of this here, nor a use. Why is this living in this
+> patch? Misra objects to declarations without definitions, and you want to
+> be prepared that such a large series may go in piece by piece. Hence there
+> may not be new Misra violations at any patch boundary.
+
+The reason is that a comment mentions this function.  I'll change the
+comment to not do that until the function is introduced.
+
+> > +#include <xen/types.h>
+>
+> Looks like all you need here is xen/stdint.h?
+
+Right, <xen/types.h> will be necessary for NULL in patch #6.
+
+> > +#include <asm/slaunch.h>
+>
+> We try to move to there being blanks lines between groups of #include-s,
+> e.g. all xen/ ones separated from all asm/ ones.
+
+Will add a blank line.
+
+> > +/*
+> > + * These variables are assigned to by the code near Xen's entry point.
+> > + *
+> > + * slaunch_active is not __initdata to allow checking for an active Secure
+> > + * Launch boot.
+> > + */
+> > +bool slaunch_active;
+>
+> Not using __initdata is quite plausible, but why not __ro_after_init?
+
+I haven't tried it and likely didn't even see it (it's in a separate
+header), will try changing.
+
+> > +uint32_t __initdata slaunch_slrt; /* physical address */
+> > +
+> > +/* Using slaunch_active in head.S assumes it's a single byte in size, so enforce
+> > + * this assumption. */
+>
+> Please follow comment style as per ./CODING_STYLE.
+>
+> Jan
+
+Will adjust.
+
+Regards
 
