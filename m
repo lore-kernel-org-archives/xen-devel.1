@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6A2C83F21
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:24:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1044061.1414107 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F3AC83F2D
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:24:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1044064.1414137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfdX-0003ws-IZ; Tue, 15 Jul 2025 13:23:59 +0000
+	id 1ubfde-0004gB-Cn; Tue, 15 Jul 2025 13:24:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1044061.1414107; Tue, 15 Jul 2025 13:23:59 +0000
+Received: by outflank-mailman (output) from mailman id 1044064.1414137; Tue, 15 Jul 2025 13:24:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfdX-0003wl-F1; Tue, 15 Jul 2025 13:23:59 +0000
-Received: by outflank-mailman (input) for mailman id 1044061;
- Tue, 15 Jul 2025 13:23:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ubfde-0004g1-A1; Tue, 15 Jul 2025 13:24:06 +0000
+Received: by outflank-mailman (input) for mailman id 1044064;
+ Tue, 15 Jul 2025 13:24:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hnVo=Z4=redhat.com=dhildenb@srs-se1.protection.inumbo.net>)
- id 1ubfdW-0003wf-VA
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:23:58 +0000
+ id 1ubfdc-0004Ab-QI
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:24:04 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f536e517-617e-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 15:23:56 +0200 (CEST)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f9a34e17-617e-11f0-a319-13f23c93f187;
+ Tue, 15 Jul 2025 15:24:04 +0200 (CEST)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-515-7QYQeN4INk2pQhBGsIS_og-1; Tue, 15 Jul 2025 09:23:54 -0400
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3a50049f8eeso2449814f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 06:23:53 -0700 (PDT)
+ us-mta-496-uAMBuaixNmWpABpBWaNzJQ-1; Tue, 15 Jul 2025 09:24:01 -0400
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4561bc2f477so13651245e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 06:24:01 -0700 (PDT)
 Received: from localhost
  (p200300d82f2849002c244e201f219fbd.dip0.t-ipconnect.de.
  [2003:d8:2f28:4900:2c24:4e20:1f21:9fbd])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3b5e8e14e82sm15213383f8f.71.2025.07.15.06.23.50
+ 5b1f17b1804b1-45617f18d99sm69437455e9.8.2025.07.15.06.23.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jul 2025 06:23:51 -0700 (PDT)
+ Tue, 15 Jul 2025 06:23:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,45 +53,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f536e517-617e-11f0-b894-0df219b8e170
+X-Inumbo-ID: f9a34e17-617e-11f0-a319-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1752585835;
+	s=mimecast20190719; t=1752585842;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=I+njjEeJUfoyHVChoDSaOpmOHc6CwMwYKPYbj7nDuS0=;
-	b=M5cq5ieS9rO+feWcHJHj9JnVBYteNMjQ5AoUJMO0myQCcEgCEo2RkImDrxad3etoNo3Mkw
-	56gNSP/CgfaDijdRluJP6h8AEHilziODhcfWbt4+Dr47vJqt0IrkAI9f8ESbv+JlGtHuEy
-	CkjurXOnxOtlVzgBqF0Op30HqXOF7ow=
-X-MC-Unique: 7QYQeN4INk2pQhBGsIS_og-1
-X-Mimecast-MFC-AGG-ID: 7QYQeN4INk2pQhBGsIS_og_1752585833
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=p0W1gu/DbwB3HO+Ik7b3ciKtc0XnhekWlhthG95RGc8=;
+	b=ES2DbM6k93F7He+Avf+w57uFeYf9327Rd04uycw+lYlG8X1QjXtz2KUliQqIw32kYIMa2J
+	cg/juIaruktU7VTfLoZ2J5XYAE+ojhrdnpmpog5Uq5FazBuUjTRegU1sXZctVrdZ+15r1S
+	Yn9EXoU/GLagiPOFa+acXjowP6lgX+I=
+X-MC-Unique: uAMBuaixNmWpABpBWaNzJQ-1
+X-Mimecast-MFC-AGG-ID: uAMBuaixNmWpABpBWaNzJQ_1752585840
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752585833; x=1753190633;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I+njjEeJUfoyHVChoDSaOpmOHc6CwMwYKPYbj7nDuS0=;
-        b=OfIsR+h12QZQhf1TQEsxixcpqS2UT5QSNXnF5YWZ1dlh8zFAvuAB3EnEhulOGXHFsK
-         eJXHUxQFH9PpCNQvo0+r3NYAM6K0RvJk0WCdXlzVbaiB9bscYkZ8jyyxxe0ZcWMuG1/I
-         rZXsd2RpGjegtvdNUCx6QSi7uB7monh47DD+VtLREd511AGgdFFeyF04oRx4kz85sSMd
-         Y7dQAq+5cgK5ER00iIB2kKUemqA2W9frzImtZ/FoILABMUWlxi/5G7HLT/E8k7TmzVii
-         Kk2nk/bL6pRaKGZInUgMhpbFoOaxwzqvWZw/4OhiQVN6D/0jqk+mtIDHtULn76DwgAQ+
-         pWcA==
-X-Forwarded-Encrypted: i=1; AJvYcCVF8FepLPUQXNrol1QJ0PgxRG+ZwtwWIMOrPa/RY8O6tvV0gQAQbNCiSEx9YNVnZevjof0AjhyebTY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyS0lfHXI9G74ayQoF1piwWfS5nVgT4FW7ETHooQfAZrn+QC5IC
-	lr9qPdvvmXwwr3k6K/Ov/E69OUXsHiUSN9QpXKZRyPGKyQvwWW1d8uVCxaTiRs9giRPGpl4jFr8
-	Vr9L7b0R/DwZ2G4GwBemm28UTf/a3qrp/rPrJBMWScV8nt6mDXB4ztcmB1CTqpoxwwIqo
-X-Gm-Gg: ASbGnctB0uqWa706NGfvhXwHOPrdaJF+Pnu5Ul4+R1bFkjGu/YgXdCKGNIlpZVjEnvz
-	sTGkfgX3aIhdEGYCvfUWsoDq2BiMtBWoWb8vZfORteHxRtQtJQqHfbLZXdOPNgdtS2TMO6I1U6W
-	sSpspnGxQvwm3IbzuUAjTfss/7czRUfzB7lG1wYUlXLdJ6dmdpUJfWLUc2z7oJCMG61wH9logwf
-	bITTrXyJtbarFGhaO6LIo6hdj0Q34SWujH05bVb56YGhSSdXjPp4zRytLVddCKh5cEL2w+Rd0qB
-	Nlw8eIBCEY3Ov1aGHwppUFbIPW5ZDqO97jvHcfaokw+89yxgEm6gPTNgVIm4DCD4jicPWsDDPMz
-	9YnOMVOHgnpZCm8lOgckbGshc
-X-Received: by 2002:adf:9b97:0:b0:3a5:7944:c9b with SMTP id ffacd0b85a97d-3b5f18808c9mr9743520f8f.16.1752585832773;
-        Tue, 15 Jul 2025 06:23:52 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHEkZDRkA14IcXQD+lQPeKL7StailaRmICkp2BJ1WOb6DFxYeWLDyvLUcHDBHF9Bf7MHtKqWA==
-X-Received: by 2002:adf:9b97:0:b0:3a5:7944:c9b with SMTP id ffacd0b85a97d-3b5f18808c9mr9743472f8f.16.1752585832205;
-        Tue, 15 Jul 2025 06:23:52 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752585840; x=1753190640;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=p0W1gu/DbwB3HO+Ik7b3ciKtc0XnhekWlhthG95RGc8=;
+        b=gRoxybHWIumj003Du/GfWBDAUpAFB6XkukVp4j/jay+QWUMK2HthKJ2nbprFOXooDg
+         vdq2a2Yboy0xv5vvJR8fXKzHjh9AcekqbfvPlLIGZaIo0CSTwNRXqfTBn1tslpFOTn9z
+         fijCxVewVvdkxEkLi0CD0dVA9X2JA16+Uh22m7yaA7aqIQm1+wWu0dZD/JFOZN8eiB2C
+         Wm34Ty038Fsg96r84CkOLwqT/dB3feuDsEC20zoN2j4kUQZGg7gKVFOpJGtzyPvpmX4I
+         vOrWX4TvMyB1RBxgyxrWopDlm51v9Fd+57edBoIPDrLg1yHFJH0z1wuLRwlm9eq6uhGM
+         XkQg==
+X-Forwarded-Encrypted: i=1; AJvYcCUcRCT0gCCbrX97pRnqNubCRUTnm4STEFIuv44bhyp2lZkwRLUmKFQVPASt3q7TN/K68BPrrMsd4ak=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyJAAjxUDxENv6tTcc5jNN4tIu8d/R8rMIU34ZGifElzUGeDcjl
+	MasOj6BdOPDU92LWPlyk2iLbPteziYOkNi0fWyAp2sCh26qJxSYR+AvwhS7BUc/Kfcuuk+5H1bY
+	P+jSLBjVNF0PJM2dVOak87g9cQA9ksEzrT1QuTgxhbNNGM+RuupDxfPIgrRVgBQQqwWlu
+X-Gm-Gg: ASbGncueb8Q0VMhFcUTRIJbGCwjy0VN411PJnt+3nSmpEOt1OMY4hjt3lm+OA7wGCmV
+	OP712nCPe+ssD+tGdMfTe+Mdo0adHsHvL7fUI85TCmSVw10wbUAyLMcnBDEGISFWCE1Wb1isIwU
+	wiG2PSEDV8c7vqIVtegAnJVUlt1j/ISNCInmUNKFb5Jv5Nk+VF6f7i3pcgRjle4MtnmGiYtuXzu
+	YFlfJUUMYry7+Xg9WR7rGEPYJg1jF/LkKswPg87+j6Z1TO5tMadzpXh1lQF9e3VkRA+xs9Cu5mc
+	yaSChQJNtPzRwwpyPV5h/jwhPdBulzRcDlLyB2OaBWlFEhb4M1L2Q9UtFdwgEPB/bjJ6/mvVViJ
+	ZD/7mnUfDFYGNK/w/RON2pJ00
+X-Received: by 2002:a05:600c:5387:b0:456:76c:84f2 with SMTP id 5b1f17b1804b1-456076c88c8mr137334455e9.30.1752585839958;
+        Tue, 15 Jul 2025 06:23:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGYbWegCM0S6a5gfkNemwi6OlAVodA9645Tyw+PVXIOkDyOGbitNWxrBtqQg62ekGoPNGMvNw==
+X-Received: by 2002:a05:600c:5387:b0:456:76c:84f2 with SMTP id 5b1f17b1804b1-456076c88c8mr137333805e9.30.1752585839359;
+        Tue, 15 Jul 2025 06:23:59 -0700 (PDT)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-mm@kvack.org,
@@ -125,105 +126,55 @@ Cc: linux-mm@kvack.org,
 	Hugh Dickins <hughd@google.com>,
 	Oscar Salvador <osalvador@suse.de>,
 	Lance Yang <lance.yang@linux.dev>
-Subject: [PATCH v1 0/9] mm: vm_normal_page*() improvements
-Date: Tue, 15 Jul 2025 15:23:41 +0200
-Message-ID: <20250715132350.2448901-1-david@redhat.com>
+Subject: [PATCH v1 3/9] mm/huge_memory: support huge zero folio in vmf_insert_folio_pmd()
+Date: Tue, 15 Jul 2025 15:23:44 +0200
+Message-ID: <20250715132350.2448901-4-david@redhat.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250715132350.2448901-1-david@redhat.com>
+References: <20250715132350.2448901-1-david@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 5CqF7gejolS1Y3VE-2BYaGJRqiQAeifZU3R__BZz7Wk_1752585833
+X-Mimecast-MFC-PROC-ID: ru3DkocGovtALxnSvDvFDZFVw7pbvF9xWb7aX6BIlwc_1752585840
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
 
-This is the follow-up of [1]:
-	[PATCH RFC 00/14] mm: vm_normal_page*() + CoW PFNMAP improvements
+Just like we do for vmf_insert_page_mkwrite() -> ... ->
+insert_page_into_pte_locked() with the shared zeropage, support the
+huge zero folio in vmf_insert_folio_pmd().
 
-Based on mm/mm-new. I dropped the CoW PFNMAP changes for now, still
-working on a better way to sort all that out cleanly.
+When (un)mapping the huge zero folio in page tables, we neither
+adjust the refcount nor the mapcount, just like for the shared zeropage.
 
-Cleanup and unify vm_normal_page_*() handling, also marking the
-huge zerofolio as special in the PMD. Add+use vm_normal_page_pud() and
-cleanup that XEN vm_ops->find_special_page thingy.
+For now, the huge zero folio is not marked as special yet, although
+vm_normal_page_pmd() really wants to treat it as special. We'll change
+that next.
 
-There are plans of using vm_normal_page_*() more widely soon.
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ mm/huge_memory.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-Briefly tested on UML (making sure vm_normal_page() still works as expected
-without pte_special() support) and on x86-64 with a bunch of tests.
-
-[1] https://lkml.kernel.org/r/20250617154345.2494405-1-david@redhat.com
-
-RFC -> v1:
-* Dropped the highest_memmap_pfn removal stuff and instead added
-  "mm/memory: convert print_bad_pte() to print_bad_page_map()"
-* Dropped "mm: compare pfns only if the entry is present when inserting
-  pfns/pages" for now, will probably clean that up separately.
-* Dropped "mm: remove "horrible special case to handle copy-on-write
-  behaviour"", and "mm: drop addr parameter from vm_normal_*_pmd()" will
-  require more thought
-* "mm/huge_memory: support huge zero folio in vmf_insert_folio_pmd()"
- -> Extend patch description.
-* "fs/dax: use vmf_insert_folio_pmd() to insert the huge zero folio"
- -> Extend patch description.
-* "mm/huge_memory: mark PMD mappings of the huge zero folio special"
- -> Remove comment from vm_normal_page_pmd().
-* "mm/memory: factor out common code from vm_normal_page_*()"
- -> Adjust to print_bad_page_map()/highest_memmap_pfn changes.
- -> Add proper kernel doc to all involved functions
-* "mm: introduce and use vm_normal_page_pud()"
- -> Adjust to print_bad_page_map() changes.
-
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: Dan Williams <dan.j.williams@intel.com>
-Cc: Matthew Wilcox <willy@infradead.org>
-Cc: Jan Kara <jack@suse.cz>
-Cc: Alexander Viro <viro@zeniv.linux.org.uk>
-Cc: Christian Brauner <brauner@kernel.org>
-Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>
-Cc: Vlastimil Babka <vbabka@suse.cz>
-Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Suren Baghdasaryan <surenb@google.com>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: Zi Yan <ziy@nvidia.com>
-Cc: Baolin Wang <baolin.wang@linux.alibaba.com>
-Cc: Nico Pache <npache@redhat.com>
-Cc: Ryan Roberts <ryan.roberts@arm.com>
-Cc: Dev Jain <dev.jain@arm.com>
-Cc: Barry Song <baohua@kernel.org>
-Cc: Jann Horn <jannh@google.com>
-Cc: Pedro Falcato <pfalcato@suse.de>
-Cc: Hugh Dickins <hughd@google.com>
-Cc: Oscar Salvador <osalvador@suse.de>
-Cc: Lance Yang <lance.yang@linux.dev>
-
-David Hildenbrand (9):
-  mm/huge_memory: move more common code into insert_pmd()
-  mm/huge_memory: move more common code into insert_pud()
-  mm/huge_memory: support huge zero folio in vmf_insert_folio_pmd()
-  fs/dax: use vmf_insert_folio_pmd() to insert the huge zero folio
-  mm/huge_memory: mark PMD mappings of the huge zero folio special
-  mm/memory: convert print_bad_pte() to print_bad_page_map()
-  mm/memory: factor out common code from vm_normal_page_*()
-  mm: introduce and use vm_normal_page_pud()
-  mm: rename vm_ops->find_special_page() to vm_ops->find_normal_page()
-
- drivers/xen/Kconfig              |   1 +
- drivers/xen/gntdev.c             |   5 +-
- fs/dax.c                         |  47 +----
- include/linux/mm.h               |  20 +-
- mm/Kconfig                       |   2 +
- mm/huge_memory.c                 | 119 ++++-------
- mm/memory.c                      | 346 ++++++++++++++++++++++---------
- mm/pagewalk.c                    |  20 +-
- tools/testing/vma/vma_internal.h |  18 +-
- 9 files changed, 343 insertions(+), 235 deletions(-)
-
-
-base-commit: 64d19a2cdb7b62bcea83d9309d83e06d7aff4722
+diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+index 1c4a42413042a..9ec7f48efde09 100644
+--- a/mm/huge_memory.c
++++ b/mm/huge_memory.c
+@@ -1429,9 +1429,11 @@ static vm_fault_t insert_pmd(struct vm_area_struct *vma, unsigned long addr,
+ 	if (fop.is_folio) {
+ 		entry = folio_mk_pmd(fop.folio, vma->vm_page_prot);
+ 
+-		folio_get(fop.folio);
+-		folio_add_file_rmap_pmd(fop.folio, &fop.folio->page, vma);
+-		add_mm_counter(mm, mm_counter_file(fop.folio), HPAGE_PMD_NR);
++		if (!is_huge_zero_folio(fop.folio)) {
++			folio_get(fop.folio);
++			folio_add_file_rmap_pmd(fop.folio, &fop.folio->page, vma);
++			add_mm_counter(mm, mm_counter_file(fop.folio), HPAGE_PMD_NR);
++		}
+ 	} else {
+ 		entry = pmd_mkhuge(pfn_pmd(fop.pfn, prot));
+ 		entry = pmd_mkspecial(entry);
 -- 
 2.50.1
 
