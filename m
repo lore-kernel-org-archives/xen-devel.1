@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119E1C83F17
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC77C83F21
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:30:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1044163.1414277 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1044166.1414281 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfk5-0004do-51; Tue, 15 Jul 2025 13:30:45 +0000
+	id 1ubfk5-0004g7-Eq; Tue, 15 Jul 2025 13:30:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1044163.1414277; Tue, 15 Jul 2025 13:30:45 +0000
+Received: by outflank-mailman (output) from mailman id 1044166.1414281; Tue, 15 Jul 2025 13:30:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfk5-0004dh-1t; Tue, 15 Jul 2025 13:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 1044163;
+	id 1ubfk5-0004ff-9P; Tue, 15 Jul 2025 13:30:45 +0000
+Received: by outflank-mailman (input) for mailman id 1044166;
  Tue, 15 Jul 2025 13:30:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7giJ=Z4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ubfjX-00013q-GY
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:30:11 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d4c7f3c8-617f-11f0-a319-13f23c93f187;
- Tue, 15 Jul 2025 15:30:10 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 1ubfjv-0000p6-1I
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:30:35 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e247bf86-617f-11f0-b894-0df219b8e170;
+ Tue, 15 Jul 2025 15:30:33 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8F8BE21204;
- Tue, 15 Jul 2025 13:30:10 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1663421232;
+ Tue, 15 Jul 2025 13:30:33 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5510A13A68;
- Tue, 15 Jul 2025 13:30:10 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DAE2C13A68;
+ Tue, 15 Jul 2025 13:30:32 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id q/lCE+JXdmhQNwAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 15 Jul 2025 13:30:10 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 5crsM/hXdmh1NwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 15 Jul 2025 13:30:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,154 +54,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d4c7f3c8-617f-11f0-a319-13f23c93f187
+X-Inumbo-ID: e247bf86-617f-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1752586210; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1752586233; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=B6SWSOlBDneLonJNetlsBzYkrHEyPfegHVWVGLmwK3g=;
-	b=HLelBBGxCaT0BsshA7lxY0tl3kEJvM1WhjX8uru6TwIkWutWG+CoCgnwqjAdOyGoYitGny
-	Wznbo86UumQa9uiqZIaUsvfbfKeVMiJHCrCqnHHLSb5aCYPghnkxZtLhFcjEaCY2Q/A4t0
-	4v9ekTZ5o0uUkhJXkH494RNIXgROmGI=
+	bh=BDdRGnWTd5zwdCL0TVOinfUW7FrCL8NCA12iHuDre8E=;
+	b=nYNcCmldwPuW2gGg9URjLy87kYhJtYKeUWCY8VaL/SJCLJ4ny3UkbrGbI+r9yxTSUIDX3P
+	isr/+bd8i2zZyd8n0mSwr4V5+5tsPY447T52puZEHLEhrYZkBmiQnNBvRkNptxGbcOYtb/
+	uNaKVmMpHnjYivtcpItwBfu2CmYW9VA=
 Authentication-Results: smtp-out1.suse.de;
-	none
+	dkim=pass header.d=suse.com header.s=susede1 header.b=nYNcCmld
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1752586210; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1752586233; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=B6SWSOlBDneLonJNetlsBzYkrHEyPfegHVWVGLmwK3g=;
-	b=HLelBBGxCaT0BsshA7lxY0tl3kEJvM1WhjX8uru6TwIkWutWG+CoCgnwqjAdOyGoYitGny
-	Wznbo86UumQa9uiqZIaUsvfbfKeVMiJHCrCqnHHLSb5aCYPghnkxZtLhFcjEaCY2Q/A4t0
-	4v9ekTZ5o0uUkhJXkH494RNIXgROmGI=
+	bh=BDdRGnWTd5zwdCL0TVOinfUW7FrCL8NCA12iHuDre8E=;
+	b=nYNcCmldwPuW2gGg9URjLy87kYhJtYKeUWCY8VaL/SJCLJ4ny3UkbrGbI+r9yxTSUIDX3P
+	isr/+bd8i2zZyd8n0mSwr4V5+5tsPY447T52puZEHLEhrYZkBmiQnNBvRkNptxGbcOYtb/
+	uNaKVmMpHnjYivtcpItwBfu2CmYW9VA=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	Juergen Gross <jgross@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [MINI-OS PATCH v2 05/14] e820: use special type for software reserved memory
-Date: Tue, 15 Jul 2025 15:29:27 +0200
-Message-ID: <20250715132936.2798-6-jgross@suse.com>
+Subject: [MINI-OS PATCH v2 09/14] 9pfs: store bepath in struct struct dev_9pfs
+Date: Tue, 15 Jul 2025 15:29:31 +0200
+Message-ID: <20250715132936.2798-10-jgross@suse.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250715132936.2798-1-jgross@suse.com>
 References: <20250715132936.2798-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 1663421232
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
+	MX_GOOD(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	TO_DN_SOME(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
 	RCPT_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,amd.com:email,imap1.dmz-prg2.suse.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid,suse.com:email]
 
-For memory areas used to map foreign domain memory Mini-OS is using
-the type E820_RESERVED in the memory map today. This is causing
-problems with kexec, as the new kernel should not see those areas in
-the memory map. Unfortunately the sequence of actions for calculating
-the size of the memory map and the removal of those reserved areas
-can't easily be adjusted to do the removal first, so another way must
-be used to avoid passing those reserved areas to the new kernel.
-
-Instead of using the type E820_RESERVED, which might be used for other
-pages as well, just use a new type. Areas with that new type can
-easily be filtered out when building the memory map for the new
-kernel.
-
-Introduce the type E820_TYPE_SOFT_RESERVED with the same value as the
-Linux kernel is using for the same purpose.
+Use struct dev_9pfs for storing the backend path of the device state
+in order to avoid code duplication in init_9pfront() and
+shutdown_9pfront().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
- arch/x86/kexec.c | 4 +++-
- e820.c           | 8 ++++----
- include/e820.h   | 2 ++
- 3 files changed, 9 insertions(+), 5 deletions(-)
+ 9pfront.c | 23 ++++++++++-------------
+ 1 file changed, 10 insertions(+), 13 deletions(-)
 
-diff --git a/arch/x86/kexec.c b/arch/x86/kexec.c
-index 29f8aa81..b33fbfc1 100644
---- a/arch/x86/kexec.c
-+++ b/arch/x86/kexec.c
-@@ -240,14 +240,16 @@ int kexec_get_entry(const char *cmdline)
+diff --git a/9pfront.c b/9pfront.c
+index 895426d1..2bfc49b1 100644
+--- a/9pfront.c
++++ b/9pfront.c
+@@ -25,6 +25,7 @@ struct dev_9pfs {
+     char nodename[20];
+     unsigned int dom;
+     char *backend;
++    char bepath[64];
  
-     mmap = next;
-     info->memmap_paddr = kexec_param_pa + (unsigned long)next - kexec_param_mem;
--    info->memmap_entries = e820_entries;
-     for ( i = 0; i < e820_entries; i++ )
+     char *tag;
+     const char *mnt;
+@@ -1103,7 +1104,6 @@ void *init_9pfront(unsigned int id, const char *mnt)
+     char *reason = "";
+     xenbus_transaction_t xbt;
+     int retry = 1;
+-    char bepath[64] = { 0 };
+     XenbusState state;
+     unsigned int i;
+     void *addr;
+@@ -1137,11 +1137,12 @@ void *init_9pfront(unsigned int id, const char *mnt)
+     if ( msg )
+         goto err;
+ 
+-    snprintf(bepath, sizeof(bepath), "%s/state", dev->backend);
+-    free(xenbus_watch_path_token(XBT_NIL, bepath, bepath, &dev->events));
+-    state = xenbus_read_integer(bepath);
++    snprintf(dev->bepath, sizeof(dev->bepath), "%s/state", dev->backend);
++    free(xenbus_watch_path_token(XBT_NIL, dev->bepath, dev->bepath,
++                                 &dev->events));
++    state = xenbus_read_integer(dev->bepath);
+     while ( msg == NULL && state < XenbusStateInitWait )
+-        msg = xenbus_wait_for_state_change(bepath, &state, &dev->events);
++        msg = xenbus_wait_for_state_change(dev->bepath, &state, &dev->events);
+     if ( msg || state != XenbusStateInitWait )
      {
-+        if ( e820_map[i].type == E820_TYPE_SOFT_RESERVED )
-+            continue;
-         mmap->addr = e820_map[i].addr;
-         mmap->size = e820_map[i].size;
-         mmap->type = e820_map[i].type;
-         mmap++;
+         reason = "illegal backend state";
+@@ -1228,9 +1229,9 @@ void *init_9pfront(unsigned int id, const char *mnt)
+         free(xenbus_transaction_end(xbt, 0, &retry));
      }
-+    info->memmap_entries = mmap - (struct hvm_memmap_table_entry *)next;
-     next = mmap;
  
-     info->cmdline_paddr = kexec_param_pa + (unsigned long)next - kexec_param_mem;
-diff --git a/e820.c b/e820.c
-index 44cfac05..1ffeaf00 100644
---- a/e820.c
-+++ b/e820.c
-@@ -367,8 +367,8 @@ unsigned long e820_get_reserved_pfns(int pages)
-     for ( i = 0; i < e820_entries && e820_map[i].addr < last + needed; i++ )
-         last = round_pgup(e820_map[i].addr + e820_map[i].size);
+-    state = xenbus_read_integer(bepath);
++    state = xenbus_read_integer(dev->bepath);
+     while ( msg == NULL && state < XenbusStateConnected )
+-        msg = xenbus_wait_for_state_change(bepath, &state, &dev->events);
++        msg = xenbus_wait_for_state_change(dev->bepath, &state, &dev->events);
+     if ( msg || state != XenbusStateConnected )
+     {
+         reason = "illegal backend state";
+@@ -1263,8 +1264,6 @@ void *init_9pfront(unsigned int id, const char *mnt)
+     free(xenbus_transaction_end(xbt, 1, &retry));
  
--    if ( i == 0 || e820_map[i - 1].type != E820_RESERVED )
--        e820_insert_entry_at(i, last, needed, E820_RESERVED);
-+    if ( i == 0 || e820_map[i - 1].type != E820_TYPE_SOFT_RESERVED )
-+        e820_insert_entry_at(i, last, needed, E820_TYPE_SOFT_RESERVED);
-     else
-         e820_map[i - 1].size += needed;
+  err:
+-    if ( bepath[0] )
+-        free(xenbus_unwatch_path_token(XBT_NIL, bepath, bepath));
+     if ( msg )
+         printk("9pfsfront add %u failed, error %s accessing Xenstore\n",
+                id, msg);
+@@ -1279,22 +1278,20 @@ EXPORT_SYMBOL(init_9pfront);
+ void shutdown_9pfront(void *dev)
+ {
+     struct dev_9pfs *dev9p = dev;
+-    char bepath[64];
+     XenbusState state;
+     char *msg;
+     char *reason = "";
  
-@@ -385,7 +385,7 @@ void e820_put_reserved_pfns(unsigned long start_pfn, int pages)
-           i < e820_entries && addr >= e820_map[i].addr + e820_map[i].size;
-           i++ );
+     umount(dev9p->mnt);
+-    snprintf(bepath, sizeof(bepath), "%s/state", dev9p->backend);
  
--    BUG_ON(i == e820_entries || e820_map[i].type != E820_RESERVED ||
-+    BUG_ON(i == e820_entries || e820_map[i].type != E820_TYPE_SOFT_RESERVED ||
-            addr + size > e820_map[i].addr + e820_map[i].size);
+     msg = xenbus_printf(XBT_NIL, dev9p->nodename, "state", "%u",
+                         XenbusStateClosing);
+     if ( msg )
+         goto err;
  
-     if ( addr == e820_map[i].addr )
-@@ -405,7 +405,7 @@ void e820_put_reserved_pfns(unsigned long start_pfn, int pages)
- 
-     e820_insert_entry_at(i + 1, addr + size,
-                          e820_map[i].addr + e820_map[i].size - addr - size,
--                         E820_RESERVED);
-+                         E820_TYPE_SOFT_RESERVED);
-     e820_map[i].size = addr - e820_map[i].addr;
- }
- #endif
-diff --git a/include/e820.h b/include/e820.h
-index ffa15aa9..ad5657ff 100644
---- a/include/e820.h
-+++ b/include/e820.h
-@@ -39,6 +39,8 @@
- #define E820_DISABLED     6
- #define E820_PMEM         7
- #define E820_TYPES        8
-+/* Memory reserved for Mini-OS internal purpose. */
-+#define E820_TYPE_SOFT_RESERVED   0xefffffff
- 
- struct __packed e820entry {
-     uint64_t addr;
+-    state = xenbus_read_integer(bepath);
++    state = xenbus_read_integer(dev9p->bepath);
+     while ( msg == NULL && state < XenbusStateClosing)
+-        msg = xenbus_wait_for_state_change(bepath, &state, &dev9p->events);
++        msg = xenbus_wait_for_state_change(dev9p->bepath, &state, &dev9p->events);
+     if ( msg || state != XenbusStateClosing )
+     {
+         reason = "illegal backend state";
 -- 
 2.43.0
 
