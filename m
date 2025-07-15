@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBFA4C83F1D
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 07:51:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1043653.1413656 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E52C83F1D
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 07:55:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1043672.1413667 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubaRq-00086t-WC; Tue, 15 Jul 2025 07:51:34 +0000
+	id 1ubaVP-0000hA-Et; Tue, 15 Jul 2025 07:55:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1043653.1413656; Tue, 15 Jul 2025 07:51:34 +0000
+Received: by outflank-mailman (output) from mailman id 1043672.1413667; Tue, 15 Jul 2025 07:55:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubaRq-00086m-T2; Tue, 15 Jul 2025 07:51:34 +0000
-Received: by outflank-mailman (input) for mailman id 1043653;
- Tue, 15 Jul 2025 07:51:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ubaVP-0000h3-BV; Tue, 15 Jul 2025 07:55:15 +0000
+Received: by outflank-mailman (input) for mailman id 1043672;
+ Tue, 15 Jul 2025 07:55:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1tvk=Z4=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1ubaNG-0003TX-01
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 07:46:50 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dcbc02c2-614f-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 09:46:48 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-455b00339c8so25626705e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 00:46:48 -0700 (PDT)
-Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-45626cde7aasm8506585e9.1.2025.07.15.00.46.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 00:46:46 -0700 (PDT)
+ <SRS0=QMY+=Z4=uniontech.com=wangyuli@srs-se1.protection.inumbo.net>)
+ id 1ubaVN-0000gw-13
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 07:55:13 +0000
+Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0223e3e3-6151-11f0-a319-13f23c93f187;
+ Tue, 15 Jul 2025 09:55:05 +0200 (CEST)
+Received: from [IPV6:240e:668:120a::212:232] ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 15 Jul 2025 15:53:18 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,255 +41,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dcbc02c2-614f-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752565607; x=1753170407; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iV7BcCJ9wDrvWJMr9zxpPwmj+MXGvNAcQNyzCrRDmCI=;
-        b=wB7W08P0nYQ53Nb5vyEbX7By1GqxQdyenFRS9R0Upxwy1uxNnCI0vMOyyiQ0SleWjF
-         9gERectBYXDDz9hc7ZYZ+hwAIo2Uvi4CwLIIjWsw6WkquUhbi3s79POpaNjDSjzNEv6A
-         cVxsPxYiWgjXMRF3Q9zTBzWj4i1sCVtfpWyGM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752565607; x=1753170407;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iV7BcCJ9wDrvWJMr9zxpPwmj+MXGvNAcQNyzCrRDmCI=;
-        b=bko7j3cHNk3+Lp0NWjrvCPWDkEaRCn7YuCRP3s0oy50xrE4LfoIsWVUvgC/yspxQcp
-         VY7N0kdr7SNZ3rRAOwMaVQrC2IdQF9Uvd+DGMznzrtiNQlor6d6p/5sOB/Ehw8nFBewz
-         NgAy7OCii8QkV1+tbGX1Jwq5dUrK5XSmdkFpGu/c/NuMScMikW+I55frC5A1Y5GozOO0
-         CzRgnpl88YHy+Pt4mTlIRAClIfLc2yPJed26aKQgFk0UK84mumSPXQ2YHsCuIc7hHVOz
-         5Ld59YGI00daqiKusE9o2+qNJk/XKOGiXqcOcrZrRz+6UUpuOMoIDc6mpTmzmZ6IhOEz
-         hLqg==
-X-Gm-Message-State: AOJu0YxvTTZOjclPw335DM1c/OInqHnR5o68xHAemBq0B6htnCb7mQfu
-	3RutDUs/Y/DIiwwwV2cuSZbKbkAbFijB0lfMSg/cbBkQfCdCQCXkPPuafc+nEsedFk0aEIPJ0/b
-	58PyI
-X-Gm-Gg: ASbGncutxVchYLwZEX+s3tciK6HbQ2hDt7BNYOyJOF1AdEHX9C7xToavBizh7/aqaAu
-	2LvqfLHyZ8v7zvU9St9sc7vsk1OvzgIW7EENvz2+MYbWi4dTRX441ybLByjxDqLUNyty3H0wvpn
-	lZiQjgcW+vpxS8Ove7HqY+5JC0XnwVYxHIWRKn+KICdeddjzOkybRdkMp0MnehPRjBTOGkRril5
-	oMjUmEtb6s4oQSBBB4hsYQ6N/Vq23dDw9Mgen3bRXtDBCXlbvX77BKXWa3Vga/Rpdlo2HWghUBD
-	Sxr10qMRYtldPgDq1KP5pRIIh3yq2zyNx343porHAGfwmiwv7hqGY0S281F1k9XsbYNSOmHsMpq
-	wakLC9RUnWIyxrcL22hgHAuxazpXMOwql8wcB3ONKJ1qjGgvmMsdT/7VP6m65jVFclg==
-X-Google-Smtp-Source: AGHT+IH5EcAU8Xp3bvqSfzl5CT3VTj4iOZqoMA/qbYzTVyWqamtS209CjPdSl1H8IVPqtv6+9XxFYw==
-X-Received: by 2002:a05:600c:5246:b0:44a:b9e4:4e6f with SMTP id 5b1f17b1804b1-454f42599b3mr164132595e9.16.1752565607378;
-        Tue, 15 Jul 2025 00:46:47 -0700 (PDT)
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 1/2] x86/ept: move vmx_domain_flush_pml_buffers() to p2m-ept.c
-Date: Tue, 15 Jul 2025 09:45:58 +0200
-Message-ID: <20250715074559.73197-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250715074559.73197-1-roger.pau@citrix.com>
-References: <20250715074559.73197-1-roger.pau@citrix.com>
+X-Inumbo-ID: 0223e3e3-6151-11f0-a319-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1752566050;
+	bh=lCZvuab/16TaVwQ5rI7WJwbKeMlM/ItuANoajbv3L2Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:From;
+	b=FmseD3nslxv2WzOPOC+m/8JJnbtV9dpKkZWoxzBSjrVBVk5mN+SV7+0j5XkqX+2+b
+	 8ybQRaJcQ7hmUAHNRj2r8suwqLBppXBN2EdtKJ3nUE2UAdP14hivwz40UvdLzRsr4c
+	 zfChanjJufiNdwK7r6BpEInwX5etTf4vnHzXrVTU=
+X-QQ-mid: zesmtpip2t1752566003tb4774524
+X-QQ-Originating-IP: jjkK/Vf4L74BdD9kpYPdRm9xTrp/Q9zcy1uOS8r9kg4=
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 8211430334960576053
+EX-QQ-RecipientCnt: 62
+Message-ID: <5D06C25920559D71+06c9ce34-9867-495c-9842-dcfe9f1d51bb@uniontech.com>
+Date: Tue, 15 Jul 2025 15:53:18 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] treewide: Fix typo "notifer"
+To: Greg KH <gregkh@linuxfoundation.org>
+Cc: seanjc@google.com, pbonzini@redhat.com, tglx@linutronix.de,
+ mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+ hpa@zytor.com, dave@stgolabs.net, jonathan.cameron@huawei.com,
+ dave.jiang@intel.com, alison.schofield@intel.com, vishal.l.verma@intel.com,
+ ira.weiny@intel.com, dan.j.williams@intel.com, lucas.demarchi@intel.com,
+ thomas.hellstrom@linux.intel.com, rodrigo.vivi@intel.com, airlied@gmail.com,
+ simona@ffwll.ch, marcin.s.wojtas@gmail.com, andrew+netdev@lunn.ch,
+ davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, arend.vanspriel@broadcom.com,
+ ilpo.jarvinen@linux.intel.com, andriy.shevchenko@linux.intel.com,
+ jirislaby@kernel.org, jgross@suse.com, sstabellini@kernel.org,
+ oleksandr_tyshchenko@epam.com, akpm@linux-foundation.org,
+ kvm@vger.kernel.org, linux-kernel@vger.kernel.org, ming.li@zohomail.com,
+ linux-cxl@vger.kernel.org, intel-xe@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, kvalo@kernel.org,
+ johannes.berg@intel.com, quic_ramess@quicinc.com, ragazenta@gmail.com,
+ jeff.johnson@oss.qualcomm.com, mingo@kernel.org, j@jannau.net,
+ linux@treblig.org, linux-wireless@vger.kernel.org,
+ brcm80211@lists.linux.dev, brcm80211-dev-list.pdl@broadcom.com,
+ linux-serial@vger.kernel.org, xen-devel@lists.xenproject.org,
+ shenlichuan@vivo.com, yujiaoliang@vivo.com, colin.i.king@gmail.com,
+ cvam0000@gmail.com, zhanjun@uniontech.com, niecheng1@uniontech.com,
+ guanwentao@uniontech.com
+References: <B3C019B63C93846F+20250715071245.398846-1-wangyuli@uniontech.com>
+ <2025071545-endnote-imprison-2b98@gregkh>
+Content-Language: en-US
+From: WangYuli <wangyuli@uniontech.com>
+Autocrypt: addr=wangyuli@uniontech.com; keydata=
+ xjMEZoEsiBYJKwYBBAHaRw8BAQdAyDPzcbPnchbIhweThfNK1tg1imM+5kgDBJSKP+nX39DN
+ IVdhbmdZdWxpIDx3YW5neXVsaUB1bmlvbnRlY2guY29tPsKJBBMWCAAxFiEEa1GMzYeuKPkg
+ qDuvxdofMEb0C+4FAmaBLIgCGwMECwkIBwUVCAkKCwUWAgMBAAAKCRDF2h8wRvQL7g0UAQCH
+ 3mrGM0HzOaARhBeA/Q3AIVfhS010a0MZmPTRGVfPbwD/SrncJwwPAL4GiLPEC4XssV6FPUAY
+ 0rA68eNNI9cJLArOOARmgSyJEgorBgEEAZdVAQUBAQdA88W4CTLDD9fKwW9PB5yurCNdWNS7
+ VTL0dvPDofBTjFYDAQgHwngEGBYIACAWIQRrUYzNh64o+SCoO6/F2h8wRvQL7gUCZoEsiQIb
+ DAAKCRDF2h8wRvQL7sKvAP4mBvm7Zn1OUjFViwkma8IGRGosXAvMUFyOHVcl1RTgFQEAuJkU
+ o9ERi7qS/hbUdUgtitI89efbY0TVetgDsyeQiwU=
+In-Reply-To: <2025071545-endnote-imprison-2b98@gregkh>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------FHPp0EXrNW93l6uPQg7ZugeB"
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: N78F51LyEckkcDKzgv7Tnx6Yp49PDg39J1bVDhLfHHd0rhYkT/hwxpFU
+	nAzx1qs0s+CZVEarInXWkJSYDyjG5fEaJ+hZx9jLwMOoUgtqLzuy1iTjyPoWfqhj+IYbbRH
+	815ZtMCZHlg+O/eRDDF3MIhrmsfS+5B93jrd4/Sdibs9lcQiNjtCFDJOfWoIVueDLmYFS8v
+	VB/LY0tSpaUFXN0I8tnRhqDP+4opnYcVeFBdeHH1gsrDV8w3T4ntdRfljPWHvbuHFqq/9lC
+	wQMQHkUMK4ASdK4S5rbdYMEEyQWsCBMuKaLkF+xf/fhf2a8QpGzBOOmfBecmeCEckZX7PUi
+	8qpEEUY1UWPeYMOIshTB8Q3uZ/s7pYTQWMdYdgGfgPDAMPmPumrF1G5gtXTzGx6vYWEEgQw
+	H2ybJCIkaaDCI2iRmOnyv5yQJoeYN1haEIbyNhbJQXge9xtWUDQGGm03IZYDYRlIJc6XUOe
+	enimVvTa7gFJYRf8RmeyC6ksAfWy5cU/vortf0B/NYiN2dKgTxoO8xfp5B3yBoMhobOrgrN
+	Oo8n1sqDNoVpa6nHCEVE8wZBW2mpJnjPSkiFJk7a+tBV52agPS9YPrpR9SoKaXnzDOoTCuL
+	tAi6K1lHMPUrEJqxglrAMTJcwWADjEzuPssJ4uUKvGg2wRbJ7rVl1/JdLUem69NHnGilyon
+	fo+oFgB4E8DXNXrE6B2awCWm2KQynyQZtNxzNuXsqDAv/8vGvmn0JEAlVViD3PjYJ4OlB2o
+	RCVmhyZERfzTxyfuqZULcW+jC6cYshSyPvuviLbkRBs88NtSFuXZ4lPrgUr5hX2woLaKs0i
+	pCJVCRzyY3OK/ucm/lrXrHEW6nF1AQA+gK52kvZLXTu7NHkqO53DRme7iB/Li2Pit+EUMR0
+	6yw3dd56ArCWIs3SYAhnL3nYLcNLTbkqMfQy96MKIK92Y6gqmXlc/1hGPN6Cwxw6MbJ+Pch
+	J9QpICNEXTP0w7Ph0szyo/pzMrgbMFi7IpICOk9lLoy7EOxgLhCd0RykRZLQcs0BFvOElEG
+	mH8kNMDhSm4ZPjMHJPiiopshgr5QoWOS0+HwlhVEPtRDA5I82vtsb2eWJwQNdE6vzy7fQ7G
+	ZRA9r0M7rm6s5mF8QzQm5vp6eAy4yhZnvl4pbg6QkpA
+X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
+X-QQ-RECHKSPAM: 0
 
-No functional change intended.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------FHPp0EXrNW93l6uPQg7ZugeB
+Content-Type: multipart/mixed; boundary="------------Jc6hPek6M3VHoBxxe00gmN7f";
+ protected-headers="v1"
+From: WangYuli <wangyuli@uniontech.com>
+To: Greg KH <gregkh@linuxfoundation.org>
+Cc: seanjc@google.com, pbonzini@redhat.com, tglx@linutronix.de,
+ mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+ hpa@zytor.com, dave@stgolabs.net, jonathan.cameron@huawei.com,
+ dave.jiang@intel.com, alison.schofield@intel.com, vishal.l.verma@intel.com,
+ ira.weiny@intel.com, dan.j.williams@intel.com, lucas.demarchi@intel.com,
+ thomas.hellstrom@linux.intel.com, rodrigo.vivi@intel.com, airlied@gmail.com,
+ simona@ffwll.ch, marcin.s.wojtas@gmail.com, andrew+netdev@lunn.ch,
+ davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, arend.vanspriel@broadcom.com,
+ ilpo.jarvinen@linux.intel.com, andriy.shevchenko@linux.intel.com,
+ jirislaby@kernel.org, jgross@suse.com, sstabellini@kernel.org,
+ oleksandr_tyshchenko@epam.com, akpm@linux-foundation.org,
+ kvm@vger.kernel.org, linux-kernel@vger.kernel.org, ming.li@zohomail.com,
+ linux-cxl@vger.kernel.org, intel-xe@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, kvalo@kernel.org,
+ johannes.berg@intel.com, quic_ramess@quicinc.com, ragazenta@gmail.com,
+ jeff.johnson@oss.qualcomm.com, mingo@kernel.org, j@jannau.net,
+ linux@treblig.org, linux-wireless@vger.kernel.org,
+ brcm80211@lists.linux.dev, brcm80211-dev-list.pdl@broadcom.com,
+ linux-serial@vger.kernel.org, xen-devel@lists.xenproject.org,
+ shenlichuan@vivo.com, yujiaoliang@vivo.com, colin.i.king@gmail.com,
+ cvam0000@gmail.com, zhanjun@uniontech.com, niecheng1@uniontech.com,
+ guanwentao@uniontech.com
+Message-ID: <06c9ce34-9867-495c-9842-dcfe9f1d51bb@uniontech.com>
+Subject: Re: [PATCH] treewide: Fix typo "notifer"
+References: <B3C019B63C93846F+20250715071245.398846-1-wangyuli@uniontech.com>
+ <2025071545-endnote-imprison-2b98@gregkh>
+In-Reply-To: <2025071545-endnote-imprison-2b98@gregkh>
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/vmx/vmcs.c             | 59 +------------------------
- xen/arch/x86/hvm/vmx/vmx.c              |  2 +-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  1 -
- xen/arch/x86/include/asm/hvm/vmx/vmx.h  |  1 +
- xen/arch/x86/mm/p2m-ept.c               | 56 +++++++++++++++++++++++
- 5 files changed, 60 insertions(+), 59 deletions(-)
+--------------Jc6hPek6M3VHoBxxe00gmN7f
+Content-Type: multipart/mixed; boundary="------------sUIOFoVilt68TT8Wt0dx0iNl"
 
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index e7fca4bf33db..ab8b1c87ec0f 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1670,7 +1670,7 @@ void vmx_vcpu_disable_pml(struct vcpu *v)
-         return;
- 
-     /* Make sure we don't lose any logged GPAs. */
--    vmx_vcpu_flush_pml_buffer(v);
-+    ept_vcpu_flush_pml_buffer(v);
- 
-     vmx_vmcs_enter(v);
- 
-@@ -1684,61 +1684,6 @@ void vmx_vcpu_disable_pml(struct vcpu *v)
-     v->arch.hvm.vmx.pml_pg = NULL;
- }
- 
--void vmx_vcpu_flush_pml_buffer(struct vcpu *v)
--{
--    uint64_t *pml_buf;
--    unsigned long pml_idx;
--
--    ASSERT((v == current) || (!vcpu_runnable(v) && !v->is_running));
--    ASSERT(vmx_vcpu_pml_enabled(v));
--
--    vmx_vmcs_enter(v);
--
--    __vmread(GUEST_PML_INDEX, &pml_idx);
--
--    /* Do nothing if PML buffer is empty. */
--    if ( pml_idx == (NR_PML_ENTRIES - 1) )
--        goto out;
--
--    pml_buf = __map_domain_page(v->arch.hvm.vmx.pml_pg);
--
--    /*
--     * PML index can be either 2^16-1 (buffer is full), or 0 ~ NR_PML_ENTRIES-1
--     * (buffer is not full), and in latter case PML index always points to next
--     * available entity.
--     */
--    if ( pml_idx >= NR_PML_ENTRIES )
--        pml_idx = 0;
--    else
--        pml_idx++;
--
--    for ( ; pml_idx < NR_PML_ENTRIES; pml_idx++ )
--    {
--        unsigned long gfn = pml_buf[pml_idx] >> PAGE_SHIFT;
--
--        /*
--         * Need to change type from log-dirty to normal memory for logged GFN.
--         * hap_track_dirty_vram depends on it to work. And we mark all logged
--         * GFNs to be dirty, as we cannot be sure whether it's safe to ignore
--         * GFNs on which p2m_change_type_one returns failure. The failure cases
--         * are very rare, and additional cost is negligible, but a missing mark
--         * is extremely difficult to debug.
--         */
--        p2m_change_type_one(v->domain, gfn, p2m_ram_logdirty, p2m_ram_rw);
--
--        /* HVM guest: pfn == gfn */
--        paging_mark_pfn_dirty(v->domain, _pfn(gfn));
--    }
--
--    unmap_domain_page(pml_buf);
--
--    /* Reset PML index */
--    __vmwrite(GUEST_PML_INDEX, NR_PML_ENTRIES - 1);
--
-- out:
--    vmx_vmcs_exit(v);
--}
--
- bool vmx_domain_pml_enabled(const struct domain *d)
- {
-     return d->arch.hvm.vmx.status & VMX_DOMAIN_PML_ENABLED;
-@@ -1812,7 +1757,7 @@ void vmx_domain_flush_pml_buffers(struct domain *d)
-         return;
- 
-     for_each_vcpu ( d, v )
--        vmx_vcpu_flush_pml_buffer(v);
-+        ept_vcpu_flush_pml_buffer(v);
- }
- 
- static void vmx_vcpu_update_eptp(struct vcpu *v, u64 eptp)
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 218cb2c1af84..ce538668c737 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4787,7 +4787,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
-              !(idtv_info & INTR_INFO_VALID_MASK) )
-             undo_nmis_unblocked_by_iret();
- 
--        vmx_vcpu_flush_pml_buffer(v);
-+        ept_vcpu_flush_pml_buffer(v);
-         break;
- 
-     case EXIT_REASON_XSAVES:
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-index ff5dd66b0ad9..ecd91389302c 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -734,7 +734,6 @@ DECLARE_PER_CPU(bool, vmxon);
- bool vmx_vcpu_pml_enabled(const struct vcpu *v);
- int vmx_vcpu_enable_pml(struct vcpu *v);
- void vmx_vcpu_disable_pml(struct vcpu *v);
--void vmx_vcpu_flush_pml_buffer(struct vcpu *v);
- bool vmx_domain_pml_enabled(const struct domain *d);
- int vmx_domain_enable_pml(struct domain *d);
- void vmx_domain_disable_pml(struct domain *d);
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-index 56bea252cc5a..da04752e1752 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -491,6 +491,7 @@ void ept_walk_table(struct domain *d, unsigned long gfn);
- bool ept_handle_misconfig(uint64_t gpa);
- int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-                        unsigned int order, bool *ipat, p2m_type_t type);
-+void ept_vcpu_flush_pml_buffer(struct vcpu *v);
- void setup_ept_dump(void);
- /* Locate an alternate p2m by its EPTP */
- unsigned int p2m_find_altp2m_by_eptp(struct domain *d, uint64_t eptp);
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index 0cf6818c13f0..015911ba6c80 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -1373,6 +1373,62 @@ static void cf_check ept_flush_pml_buffers(struct p2m_domain *p2m)
-     vmx_domain_flush_pml_buffers(p2m->domain);
- }
- 
-+void ept_vcpu_flush_pml_buffer(struct vcpu *v)
-+{
-+    uint64_t *pml_buf;
-+    unsigned long pml_idx;
-+
-+    ASSERT((v == current) || (!vcpu_runnable(v) && !v->is_running));
-+    ASSERT(vmx_vcpu_pml_enabled(v));
-+
-+    vmx_vmcs_enter(v);
-+
-+    __vmread(GUEST_PML_INDEX, &pml_idx);
-+
-+    /* Do nothing if PML buffer is empty. */
-+    if ( pml_idx == (NR_PML_ENTRIES - 1) )
-+        goto out;
-+
-+    pml_buf = __map_domain_page(v->arch.hvm.vmx.pml_pg);
-+
-+    /*
-+     * PML index can be either 2^16-1 (buffer is full), or 0 ~ NR_PML_ENTRIES-1
-+     * (buffer is not full), and in latter case PML index always points to next
-+     * available entity.
-+     */
-+    if ( pml_idx >= NR_PML_ENTRIES )
-+        pml_idx = 0;
-+    else
-+        pml_idx++;
-+
-+    for ( ; pml_idx < NR_PML_ENTRIES; pml_idx++ )
-+    {
-+        unsigned long gfn = pml_buf[pml_idx] >> PAGE_SHIFT;
-+
-+        /*
-+         * Need to change type from log-dirty to normal memory for logged GFN.
-+         * hap_track_dirty_vram depends on it to work. And we mark all loqgged
-+         * GFNs to be dirty, as we cannot be sure whether it's safe to ignore
-+         * GFNs on which p2m_change_type_one returns failure. The failure cases
-+         * are very rare, and additional cost is negligible, but a missing mark
-+         * is extremely difficult to debug.
-+         */
-+        p2m_change_type_one(v->domain, gfn, p2m_ram_logdirty, p2m_ram_rw);
-+
-+        /* HVM guest: pfn == gfn */
-+        paging_mark_pfn_dirty(v->domain, _pfn(gfn));
-+    }
-+
-+    unmap_domain_page(pml_buf);
-+
-+    /* Reset PML index */
-+    __vmwrite(GUEST_PML_INDEX, NR_PML_ENTRIES - 1);
-+
-+ out:
-+    vmx_vmcs_exit(v);
-+
-+}
-+
- int ept_p2m_init(struct p2m_domain *p2m)
- {
-     struct ept_data *ept = &p2m->ept;
--- 
-2.49.0
+--------------sUIOFoVilt68TT8Wt0dx0iNl
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+SGkgZ3JlZyBrLWgsDQoNCk9uIDIwMjUvNy8xNSAxNToyMiwgR3JlZyBLSCB3cm90ZToNCj4g
+UGxlYXNlIGJyZWFrIHRoaXMgdXAgaW50byBvbmUtcGF0Y2gtcGVyLXN1YnN5c3RlbSwgbGlr
+ZSBpcyByZXF1aXJlZCBmb3INCj4gdGhpbmdzIGxpa2UgdGhpcy4NCj4NCj4gdGhhbmtzLA0K
+Pg0KPiBncmVnIGstaA0KPg0KSG9uZXN0bHksIEkndmUgYWx3YXlzIGJlZW4gcXVpdGUgdW5z
+dXJlIGhvdyB0byBoYW5kbGUgc2l0dWF0aW9ucyBsaWtlIHRoaXMuDQoNCkl0IHNlZW1zIGV2
+ZXJ5IHN1YnN5c3RlbSBtYWludGFpbmVyIGhhcyBkaWZmZXJlbnQgcHJlZmVyZW5jZXMuIEkn
+dmUgDQpwcmV2aW91c2x5IGVuY291bnRlcmVkIHNvbWUgbWFpbnRhaW5lcnMgd2hvIHN1Z2dl
+c3RlZCBJIHNwbGl0IHN1Y2ggDQpwYXRjaGVzIGJ5IHN1YnN5c3RlbSBzbyBlYWNoIG1haW50
+YWluZXIgY291bGQgbWVyZ2UgdGhlbSBpbnRvIHRoZWlyIHRyZWUgDQp3aXRob3V0IGNvbnRl
+bnRpb24uIEhvd2V2ZXIsIG90aGVyIG9uZXMgaGF2ZSBhcmd1ZWQgdGhhdCBmaXhpbmcgc3Bl
+bGxpbmcgDQplcnJvcnMgaXNuJ3Qgd29ydGggbXVsdGlwbGUgY29tbWl0cywgY2xhaW1pbmcg
+aXQgd291bGQgY3JlYXRlIGNoYW9zLg0KDQpTaW5jZSBJIGdlbnVpbmVseSBkaXNjb3ZlciB0
+aGVzZSBzcGVsbGluZyBlcnJvcnMgYnkgY2hhbmNlIGVhY2ggdGltZSwgDQphbmQgdG8gYXZv
+aWQgZ2l2aW5nIHRoZSBpbXByZXNzaW9uIEknbSAic3BhbW1pbmciIHRoZSBrZXJuZWwgdHJl
+ZSBmb3IgDQpzb21lIHVsdGVyaW9yIG1vdGl2ZSwgSSd2ZSBvcHRlZCB0byBzcXVhc2ggdGhl
+bSBpbnRvIGEgc2luZ2xlIGNvbW1pdC4NCg0KVGhhdCBzYWlkLCBJIHBlcnNvbmFsbHkgZG9u
+J3QgaGF2ZSBhbnkgc3Ryb25nIGZlZWxpbmdzIG9yIHByZWZlcmVuY2VzIG9uIA0KdGhpcyBt
+YXR0ZXIuIFNpbmNlIHlvdSd2ZSByZXF1ZXN0ZWQgaXQsIEknbGwgZ28gYWhlYWQgYW5kIHNw
+bGl0IGl0IHVwIA0KYW5kIHNlbmQgYSB2MiBwYXRjaHNldC4NCg0KVGhhbmtzLA0KDQotLSAN
+CldhbmdZdWxpDQo=
+--------------sUIOFoVilt68TT8Wt0dx0iNl
+Content-Type: application/pgp-keys; name="OpenPGP_0xC5DA1F3046F40BEE.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xC5DA1F3046F40BEE.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xjMEZoEsiBYJKwYBBAHaRw8BAQdAyDPzcbPnchbIhweThfNK1tg1imM+5kgDBJSK
+P+nX39DNIVdhbmdZdWxpIDx3YW5neXVsaUB1bmlvbnRlY2guY29tPsKJBBMWCAAx
+FiEEa1GMzYeuKPkgqDuvxdofMEb0C+4FAmaBLIgCGwMECwkIBwUVCAkKCwUWAgMB
+AAAKCRDF2h8wRvQL7g0UAQCH3mrGM0HzOaARhBeA/Q3AIVfhS010a0MZmPTRGVfP
+bwD/SrncJwwPAL4GiLPEC4XssV6FPUAY0rA68eNNI9cJLArOOARmgSyJEgorBgEE
+AZdVAQUBAQdA88W4CTLDD9fKwW9PB5yurCNdWNS7VTL0dvPDofBTjFYDAQgHwngE
+GBYIACAWIQRrUYzNh64o+SCoO6/F2h8wRvQL7gUCZoEsiQIbDAAKCRDF2h8wRvQL
+7sKvAP4mBvm7Zn1OUjFViwkma8IGRGosXAvMUFyOHVcl1RTgFQEAuJkUo9ERi7qS
+/hbUdUgtitI89efbY0TVetgDsyeQiwU=3D
+=3DBlkq
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------sUIOFoVilt68TT8Wt0dx0iNl--
+
+--------------Jc6hPek6M3VHoBxxe00gmN7f--
+
+--------------FHPp0EXrNW93l6uPQg7ZugeB
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQRrUYzNh64o+SCoO6/F2h8wRvQL7gUCaHYI7gUDAAAAAAAKCRDF2h8wRvQL7oEn
+AP9MLViBb0RqjK9xx+PcIi0hiZmUC/37qYH8rnmPBkSAXQEAtm2V/wO2Wv0JvbeWgMrpl99ZvtNN
+kg8rYtwbJwIkrA4=
+=lTpo
+-----END PGP SIGNATURE-----
+
+--------------FHPp0EXrNW93l6uPQg7ZugeB--
 
