@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4832C83F17
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 07:51:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1043639.1413637 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EDBEC83F1D
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 07:51:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1043651.1413647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubaRJ-0007Bq-EM; Tue, 15 Jul 2025 07:51:01 +0000
+	id 1ubaRo-0007qZ-LC; Tue, 15 Jul 2025 07:51:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1043639.1413637; Tue, 15 Jul 2025 07:51:01 +0000
+Received: by outflank-mailman (output) from mailman id 1043651.1413647; Tue, 15 Jul 2025 07:51:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubaRJ-0007Bj-AU; Tue, 15 Jul 2025 07:51:01 +0000
-Received: by outflank-mailman (input) for mailman id 1043639;
- Tue, 15 Jul 2025 07:51:00 +0000
+	id 1ubaRo-0007qS-IK; Tue, 15 Jul 2025 07:51:32 +0000
+Received: by outflank-mailman (input) for mailman id 1043651;
+ Tue, 15 Jul 2025 07:51:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1tvk=Z4=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1ubaNI-0003TX-0A
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 07:46:52 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
+ id 1ubaNH-0003TX-44
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 07:46:51 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dbe07866-614f-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 09:46:47 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-451d3f72391so50511785e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 00:46:46 -0700 (PDT)
+ id dd84e609-614f-11f0-b894-0df219b8e170;
+ Tue, 15 Jul 2025 09:46:49 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4560add6cd2so19291995e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jul 2025 00:46:49 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3b5e8e1e2cfsm14233198f8f.75.2025.07.15.00.46.45
+ ffacd0b85a97d-3b5e8dc3a62sm14241523f8f.40.2025.07.15.00.46.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Jul 2025 00:46:45 -0700 (PDT)
+ Tue, 15 Jul 2025 00:46:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,81 +47,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbe07866-614f-11f0-b894-0df219b8e170
+X-Inumbo-ID: dd84e609-614f-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752565606; x=1753170406; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=B8fFwOFkatgpf2W8ouBTkbV3BvmNFHlLMACaphRwVMI=;
-        b=DtXcma6VX6p2P09Lp7u0tJX3Yyv9fkiktZbRuc8+oo1N8kUgZhLwb1FgWS9AMTtCeq
-         r2EUzKCBH6+d3ULKzLlFn3Jr1M2DdaOA140qERN/y6A5vB9deKsecUH8XxZSJiESpMGy
-         mhL6lU/xqpErJlxICZFBecSro1Hz6+ZR9j6rc=
+        d=citrix.com; s=google; t=1752565608; x=1753170408; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2u/mTpjY75q/4fRak1rYYFNSLDDKWWpemS53s4G/FNQ=;
+        b=ernwfpa7g03Y/rxfjbxxM4p/M3H+AJQFCdqGeOToEEONDm1ZZyia5fshQ5sChCxmC/
+         wuCNC9oyWNoo9wDk9nWc+dLkpRDhinvfqFj8JJONMcXA/QDkb0j1u0IDbDLm6CR4U9+7
+         mn8vnVSxKdROyndiBCMYQa7EaJy3Cm/EArNaU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752565606; x=1753170406;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=B8fFwOFkatgpf2W8ouBTkbV3BvmNFHlLMACaphRwVMI=;
-        b=iCSXbHEbjV57OkGjUD0d1//Y5HNeqpE7D7xnJcWMKY0uN7HM4lZo7xvYPXBlQCE+5D
-         4qgmcfGaElaIADLKfDzTLDDxgRVN9iYLS1Gu3pS/4ZyBNit96x47KBlrj7+KO8OOif7h
-         5CnurWc8gQasbRHThCNYwbB9PgFDHlYqrEbNfdr0XEBQp2YCx6kWjIFtXVweQ0m4o2Xr
-         DORt4oht2OKzCWA+duWFKIOSlw33FXl2N30FlAEAwekUpjoi6oNG981d2MKaE9SAQz1M
-         6ikEbkeRy8JEfV6Yn2P/mT+v0m8adCPvX1rRly2zg/7RN79JMl1PF4JoL1yFOZJI0Czj
-         hn6Q==
-X-Gm-Message-State: AOJu0Yzg90/TrlqW8KB7jwvxuZcrt2Nq9EcU6ga5bBGaJsZZGb0Q7ysR
-	6xB0GFpev41we7a5A1nkvDi48tcSfXZ/6Cj2l5iwrpUcaLfCWZ6WlnKL2GLy5kRM+/3n1Yex9GI
-	8yt1e
-X-Gm-Gg: ASbGncvwjTq/qTE9//tX4TYBHYh3WTdK6jnspF4OkTNm/sxGyGzGFYrCQ+pISDVspf0
-	DB9pu+4R8VJfibagK7uNeRHZRVTA+633vUR1KpSI+yqslg6Vd1kEgFn4c9UUWoCzJhfDTAmJXp+
-	y7wvlRDFlmkIPwlhTSpkA3Cb+uX8vv/6FSyO4ZiYQ90OK/4hf5XUNYwCxwQBqre8dUy+AdKL6jv
-	hBVEfQoxHtr+/q2TzawZIMiTpmTTS/qs2YqpHxJRoB1aDDL+u7ew+vOaHAW22ba9lEsq5WWeGw7
-	RTIReg3ujH03UfFJRg5ZnMGoedv/aiLQd3Hnyf+Yf2sbPsJoA7xQoLWo7YYIHvsmGxo6aDqsKJw
-	oxBW/Wbpd8UILdcfDSHmrQXWBIXZYOHRuvBPRgZboxTtQu2hV+VIIMmlwhRyh6tJVkQ==
-X-Google-Smtp-Source: AGHT+IHfVazl7LDDwGfAyJJrq/hJ0jgW7cm2+JS64JMMnh2m2bA0r4pUw/LytqYAn3BfrBPSEwEt+g==
-X-Received: by 2002:a05:600c:3b17:b0:455:fc16:9eb3 with SMTP id 5b1f17b1804b1-455fc16a2ccmr97527605e9.33.1752565605882;
-        Tue, 15 Jul 2025 00:46:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752565608; x=1753170408;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2u/mTpjY75q/4fRak1rYYFNSLDDKWWpemS53s4G/FNQ=;
+        b=p3TEleTihLje8nVhuBCro3J6OCiKr+VnTgphTIgV6LqpWc6u/GO8Dcm0d2umKuS37C
+         wae1tUPKnBBKAi/7v0OZZOgcttKQF7oIjrwKPUPZkAsxY/WizxkpwKRcrDMKyEcNLVsR
+         cUyM83NsRJvBbqw+y2H4n0NSMXOCQzyoEnqSlxDf81JjR62E3AsB7p44ncyx/mrBRZYf
+         RuySVPHhKZkjqbzmSkzUfwZNHWosRTD+OKa8a9NOYoG5Sq9rfQD1CsZiRTbs+qNPv1mb
+         fJONdiTfLWdqpXaQLSUIu6zwgnDhbBNmgrir0VloI+qmQHbm7H0NUKVa4E9exTJXKNWW
+         D7Zw==
+X-Gm-Message-State: AOJu0Ywx4XuTFdxAufvIhn1zBnO17T/1OdZ9I7O+Unq9W8r42uxdtSKV
+	FFmy0BJnASr51LkPmAgPfZGwZ84hn5ukbJpMXjOJ1HcJyKHHXHliOKFJEvtu6hxfJyZf8SSQtPy
+	xUylj
+X-Gm-Gg: ASbGncsHfPkrm7V0k2DzgSphM3r0ZQ/5SCE9o71wrV/LDPTcmc429b74SlV/Z67exKY
+	xJccMVCCcuxeztjZo+KydMntaGSz5jo4ejFUGhVAPTxs0g5+6P/UKmJjSVYiWl+Bzxv6d4TOJM7
+	tKJZs4iByS212SQxg0WAHuEJ5Z/s+c1AJs85fL4S151UE0OpmZn8dsYoou1LvMg9hni2ruA+9Zj
+	ggVwNbRJ7+jf2QkL68Z/ClIsyso72OIEDZyf00q6ssM9mF3kZ/8OXGgdAyMFelp24kpHPMQU2Qp
+	P8v9UlDZhQNJwseOQSr694OB1Q6dQg5tpyu//H3aCgdlrmGoyuc08B9/sUCtJ0Jn1TmSfHBSfRq
+	umpyL7tSwWxp36gASr+NZYPzvqCSgp8g+xjZYFWvCe3HOq8y7T8s8E7lgRmVZ+T6SeA==
+X-Google-Smtp-Source: AGHT+IGhgg6FKJgWsfptZtrH80eiTMt8XY75N/F3nOIkkpS6JIKXUi1qUtOg2v6phR0MRk3KuxjDYA==
+X-Received: by 2002:a05:600c:1f0d:b0:453:6c45:ce14 with SMTP id 5b1f17b1804b1-45625e33fc9mr22038965e9.4.1752565608516;
+        Tue, 15 Jul 2025 00:46:48 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/2] x86/ept: batch PML type-changes into single locked region
-Date: Tue, 15 Jul 2025 09:45:57 +0200
-Message-ID: <20250715074559.73197-1-roger.pau@citrix.com>
+Subject: [PATCH 2/2] x86/ept: batch PML p2m type-changes into single locked region
+Date: Tue, 15 Jul 2025 09:45:59 +0200
+Message-ID: <20250715074559.73197-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250715074559.73197-1-roger.pau@citrix.com>
+References: <20250715074559.73197-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hello,
+The current p2m type-change loop in ept_vcpu_flush_pml_buffer() relies on
+each call to p2m_change_type_one() taking the p2m lock, doing the change
+and then dropping the lock and flushing the p2m.  Instead take the p2m lock
+outside of the loop, so that calls to gfn_{,un}lock() inside
+p2m_change_type_one() just take the p2m lock recursively, and more
+importantly, the flush is deferred until the p2m is unlocked in
+ept_vcpu_flush_pml_buffer().
 
-Following series attempts to batch PML related type-changes into a
-single locked region, so that the lock is not individually taken for
-each gfn that requires changing, and to also defer the EPT flush until
-all type-changes are done.  Doing an EPT flush for each gfn changed is
-extremely wasteful
+No functional change intended in the end result of
+ept_vcpu_flush_pml_buffer(), however a possibly noticeable performance
+improvement is expected.
 
-First patch moves the implementation of vmx_domain_flush_pml_buffers()
-into the EPT file, so it has access to the mm locking primitives.  Patch
-2 introduces p2m locking around the type change loop.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/mm/p2m-ept.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-PML related code is already split between EPT and VMX, it could
-certainly do with some cleanup.  The patch here doesn't make things
-better, but I don't think it makes them any worse either.
-
-Thanks, Roger.
-
-Roger Pau Monne (2):
-  x86/ept: move vmx_domain_flush_pml_buffers() to p2m-ept.c
-  x86/ept: batch PML p2m type-changes into single locked region
-
- xen/arch/x86/hvm/vmx/vmcs.c             | 59 +---------------------
- xen/arch/x86/hvm/vmx/vmx.c              |  2 +-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  1 -
- xen/arch/x86/include/asm/hvm/vmx/vmx.h  |  1 +
- xen/arch/x86/mm/p2m-ept.c               | 65 +++++++++++++++++++++++++
- 5 files changed, 69 insertions(+), 59 deletions(-)
-
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index 015911ba6c80..62fc8e50689f 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -1375,6 +1375,8 @@ static void cf_check ept_flush_pml_buffers(struct p2m_domain *p2m)
+ 
+ void ept_vcpu_flush_pml_buffer(struct vcpu *v)
+ {
++    struct domain *d = v->domain;
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     uint64_t *pml_buf;
+     unsigned long pml_idx;
+ 
+@@ -1401,6 +1403,12 @@ void ept_vcpu_flush_pml_buffer(struct vcpu *v)
+     else
+         pml_idx++;
+ 
++    /*
++     * Take the lock outside of the loop, so all the type changes are done
++     * inside of the same locked region and the EPT flush is deferred until the
++     * end of the loop.
++     */
++    p2m_lock(p2m);
+     for ( ; pml_idx < NR_PML_ENTRIES; pml_idx++ )
+     {
+         unsigned long gfn = pml_buf[pml_idx] >> PAGE_SHIFT;
+@@ -1413,11 +1421,12 @@ void ept_vcpu_flush_pml_buffer(struct vcpu *v)
+          * are very rare, and additional cost is negligible, but a missing mark
+          * is extremely difficult to debug.
+          */
+-        p2m_change_type_one(v->domain, gfn, p2m_ram_logdirty, p2m_ram_rw);
++        p2m_change_type_one(d, gfn, p2m_ram_logdirty, p2m_ram_rw);
+ 
+         /* HVM guest: pfn == gfn */
+-        paging_mark_pfn_dirty(v->domain, _pfn(gfn));
++        paging_mark_pfn_dirty(d, _pfn(gfn));
+     }
++    p2m_unlock(p2m);
+ 
+     unmap_domain_page(pml_buf);
+ 
 -- 
 2.49.0
 
