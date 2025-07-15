@@ -4,45 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2831AC83F17
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:41:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1044281.1414351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34000C83F21
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jul 2025 13:42:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1044300.1414365 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfuD-00028x-JT; Tue, 15 Jul 2025 13:41:13 +0000
+	id 1ubfv9-00030M-Sp; Tue, 15 Jul 2025 13:42:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1044281.1414351; Tue, 15 Jul 2025 13:41:13 +0000
+Received: by outflank-mailman (output) from mailman id 1044300.1414365; Tue, 15 Jul 2025 13:42:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ubfuD-00028q-GY; Tue, 15 Jul 2025 13:41:13 +0000
-Received: by outflank-mailman (input) for mailman id 1044281;
- Tue, 15 Jul 2025 13:41:11 +0000
+	id 1ubfv9-00030F-Pt; Tue, 15 Jul 2025 13:42:11 +0000
+Received: by outflank-mailman (input) for mailman id 1044300;
+ Tue, 15 Jul 2025 13:42:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7giJ=Z4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ubfk6-0000p6-4B
- for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:30:46 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=QMY+=Z4=uniontech.com=wangyuli@srs-se1.protection.inumbo.net>)
+ id 1ubfv7-0002Qs-Ku
+ for xen-devel@lists.xenproject.org; Tue, 15 Jul 2025 13:42:09 +0000
+Received: from smtpbgeu1.qq.com (smtpbgeu1.qq.com [52.59.177.22])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e8ecb76c-617f-11f0-b894-0df219b8e170;
- Tue, 15 Jul 2025 15:30:44 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4D18721239;
- Tue, 15 Jul 2025 13:30:44 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1D93113A68;
- Tue, 15 Jul 2025 13:30:44 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id KgO3BQRYdmiXNwAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 15 Jul 2025 13:30:44 +0000
+ id 7b744991-6181-11f0-b894-0df219b8e170;
+ Tue, 15 Jul 2025 15:42:01 +0200 (CEST)
+Received: from avenger-e500 ( [localhost]) by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 15 Jul 2025 21:41:00 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,124 +40,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e8ecb76c-617f-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1752586244; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GLfH1LKxnn3oOigKVk3XV6ShMXvMzS6b7PXnQ2kQXXs=;
-	b=p/7QFB4nJJxHcGoO0p90ZsKb8AQ/FSSiNolqN547AV75koHJ6BbNHONl0s8FKPY8SE2pJD
-	2BInMhZvaBE+aSacd8h0k1od6iUxKwCLJ/txB40uX9bJu7NlItJIxT4LUX/UreB545gOq+
-	MQdF0loPTarsPNO7ErzDs6qoyH05vL0=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b="p/7QFB4n"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1752586244; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GLfH1LKxnn3oOigKVk3XV6ShMXvMzS6b7PXnQ2kQXXs=;
-	b=p/7QFB4nJJxHcGoO0p90ZsKb8AQ/FSSiNolqN547AV75koHJ6BbNHONl0s8FKPY8SE2pJD
-	2BInMhZvaBE+aSacd8h0k1od6iUxKwCLJ/txB40uX9bJu7NlItJIxT4LUX/UreB545gOq+
-	MQdF0loPTarsPNO7ErzDs6qoyH05vL0=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	Juergen Gross <jgross@suse.com>,
-	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [MINI-OS PATCH v2 11/14] gnttab: remove gnttab_alloc_and_grant() function
-Date: Tue, 15 Jul 2025 15:29:33 +0200
-Message-ID: <20250715132936.2798-12-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250715132936.2798-1-jgross@suse.com>
-References: <20250715132936.2798-1-jgross@suse.com>
+X-Inumbo-ID: 7b744991-6181-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1752586877;
+	bh=DYh+6PDIK8SljIBmyMHrXvBMyc6UvyjoLxtRvLKcLYw=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=FuSGLnLwCgAHTPyGVASWNIky64prQYBGC23iLTwJaxSXF2msqdPe5oYgoHClHMjNJ
+	 5jf6pn/sdZvM2ROoK0aOG8bcnlxOzGOhJhgJVveAYgoF3H4us4KUN8Hiz2cHR4q8Yp
+	 EkZeBNRjaS9QdvY/QRZfUBTVHqYWXKOCZC3PZvZ8=
+X-QQ-mid: zesmtpip4t1752586865t2a0dea2e
+X-QQ-Originating-IP: vd1RqZ1Qgxy/7VfOTmQ9xNBTBKWDttmC7/G/8c4FLA8=
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 13011556839216271353
+EX-QQ-RecipientCnt: 63
+From: WangYuli <wangyuli@uniontech.com>
+To: seanjc@google.com,
+	pbonzini@redhat.com,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	x86@kernel.org,
+	hpa@zytor.com,
+	dave@stgolabs.net,
+	jonathan.cameron@huawei.com,
+	dave.jiang@intel.com,
+	alison.schofield@intel.com,
+	vishal.l.verma@intel.com,
+	ira.weiny@intel.com,
+	dan.j.williams@intel.com,
+	lucas.demarchi@intel.com,
+	thomas.hellstrom@linux.intel.com,
+	rodrigo.vivi@intel.com,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	marcin.s.wojtas@gmail.com,
+	andrew+netdev@lunn.ch,
+	davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	arend.vanspriel@broadcom.com,
+	ilpo.jarvinen@linux.intel.com,
+	andriy.shevchenko@linux.intel.com,
+	gregkh@linuxfoundation.org,
+	jirislaby@kernel.org,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	akpm@linux-foundation.org
+Cc: kvm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	wangyuli@uniontech.com,
+	ming.li@zohomail.com,
+	linux-cxl@vger.kernel.org,
+	intel-xe@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org,
+	netdev@vger.kernel.org,
+	kvalo@kernel.org,
+	johannes.berg@intel.com,
+	quic_ramess@quicinc.com,
+	ragazenta@gmail.com,
+	jeff.johnson@oss.qualcomm.com,
+	mingo@kernel.org,
+	j@jannau.net,
+	linux@treblig.org,
+	linux-wireless@vger.kernel.org,
+	brcm80211@lists.linux.dev,
+	brcm80211-dev-list.pdl@broadcom.com,
+	linux-serial@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	shenlichuan@vivo.com,
+	yujiaoliang@vivo.com,
+	colin.i.king@gmail.com,
+	cvam0000@gmail.com,
+	zhanjun@uniontech.com,
+	niecheng1@uniontech.com,
+	guanwentao@uniontech.com
+Subject: [PATCH v2 0/8] treewide: Fix typo "notifer"
+Date: Tue, 15 Jul 2025 21:40:50 +0800
+Message-ID: <BD5C52D2838AEA48+20250715134050.539234-1-wangyuli@uniontech.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	RCPT_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:mid,suse.com:dkim,suse.com:email]
-X-Rspamd-Queue-Id: 4D18721239
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: OK0361LY/LXI8nlvspYlQFyqRrCjzyXqkN5hP7+ojw5/gb7lp68kF2Uk
+	p1oClLbudbSJR3P8x8PW/7LNwwJ+hR2Hvavz4eCbd6BVdGRAoI1D5C0QoztMX1laDwCONbX
+	6weFSI/xb4cvdsxW4Bak3I3uQR/3ClRwChlzk41AV3nH4wmRzkYGBEJ1ocIe849pcu0Vo/g
+	jpim2OSAhgWz3M69ChCJcd2Hahig3apZi9l5ekG4VyAokkGN53A0V1qZ5YCI8RG/lQ5l/Hh
+	iiBNsQnfBkRGwRtabZ9Ein8ApiG46wFSuyrHiPOZoIbJMhL2SnH1+c2D7qTCF+qgsDUXMLc
+	xk2sK6DJ9Xfd41DXWqhkwLMLYLpZZ7c8q5ufIEgsnLtx1UWWeO72sZt+7TAIMOz7/JVQ8sC
+	9RBt+HfearMkGGpCJRpeuotFbx9RA7qIv9LAdav7unk/lVf90IRMz/I2L6HdTWY0fucefUh
+	NR5HHu+xRyLyZ04OWCvd52dsinwZ1mdc05uQbrWGSBWDWKsr+a1ujpmCizijtN3++0S8icp
+	Am540IA5vTPLeNZNPIMLGQ5fblSy+hk2rOcxnVsrLSWBsldPKR82erUEzSqqoMQtXCbCSIw
+	O4vGo23XycL7UGq2LmmuguaSuqUizXkLUSU9oJGZ079of2Z/TbzJZnh2+RI8qYzJxTsov4z
+	maK0O0L5xileDIw0ERX8Ifv6/rEOhbd74ObslvwGTg3sTvt/xFQ2HW+rBBiZabiUdEsmWlZ
+	+4sl7IwkAJW+W9D3+ozkmcenGJfUv7q4/Zgx2d2+g/ovDZEqdB1YL4MucZWfwbikbcR0M2n
+	U3lkTDMzvRByPHoqiizNWGNZgoWDNMN6KMJpc/GF2mQk6iLSaz/FAnhwVaC7d+ziJufJSuK
+	wuH1RnHlcKBlzkc7hpXB7M54uo/gbSo1U/Q3QtyKsQB+hJwe3CxBKZtAI84ZOSCrXvxdFsr
+	IaXJludiZevFD0sLatMdcjWxjYVQrl3G0Nmk7XO6UWspEgIQr+p3vwYbaDjRNElFEeud+FT
+	/+TLcfBnvL4Znjcqwqj5VCsm0dMKRuIE5z4IaUS/I4mw4BO8o8Wtpwipw2b08EzlIftEABl
+	1uMAIsZQvx3eAnQ6HSD9lk=
+X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
+X-QQ-RECHKSPAM: 0
 
-The last user of gnttab_alloc_and_grant() is gone.
+There are some spelling mistakes of 'notifer' in comments which
+should be 'notifier'.
 
-Remove gnttab_alloc_and_grant() as it is doing more harm than good.
-It is hard coded to only grant access for dom0, which is not really
-clear from looking at the function name. It would be possible to add
-a domid parameter, but given its now 0 users, there doesn't seem to be
-a real demand for that function.
+Fix them and add it to scripts/spelling.txt.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Link: https://lore.kernel.org/all/B3C019B63C93846F+20250715071245.398846-1-wangyuli@uniontech.com/
+
+WangYuli (8):
+  KVM: x86: Fix typo "notifer"
+  cxl: mce: Fix typo "notifer"
+  drm/xe: Fix typo "notifer"
+  net: mvneta: Fix typo "notifer"
+  wifi: brcmfmac: Fix typo "notifer"
+  serial: 8250_dw: Fix typo "notifer"
+  xen/xenbus: Fix typo "notifer"
+  scripts/spelling.txt: Add notifer||notifier to spelling.txt
+
+ arch/x86/kvm/i8254.c                                        | 4 ++--
+ drivers/cxl/core/mce.h                                      | 2 +-
+ drivers/gpu/drm/xe/xe_vm_types.h                            | 2 +-
+ drivers/net/ethernet/marvell/mvneta.c                       | 2 +-
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c | 2 +-
+ drivers/tty/serial/8250/8250_dw.c                           | 2 +-
+ include/xen/xenbus.h                                        | 2 +-
+ scripts/spelling.txt                                        | 1 +
+ 8 files changed, 9 insertions(+), 8 deletions(-)
 ---
- gnttab.c         | 13 -------------
- include/gnttab.h |  1 -
- 2 files changed, 14 deletions(-)
+Changelog:
+ *v1->v2: Break patch v1 up into one-patch-per-subsystem.
 
-diff --git a/gnttab.c b/gnttab.c
-index 5b04ab01..6bac0905 100644
---- a/gnttab.c
-+++ b/gnttab.c
-@@ -149,19 +149,6 @@ gnttab_end_transfer(grant_ref_t ref)
- }
- EXPORT_SYMBOL(gnttab_end_transfer);
- 
--grant_ref_t
--gnttab_alloc_and_grant(void **map)
--{
--    unsigned long mfn;
--    grant_ref_t gref;
--
--    *map = (void *)alloc_page();
--    mfn = virt_to_mfn(*map);
--    gref = gnttab_grant_access(0, mfn, 0);
--    return gref;
--}
--EXPORT_SYMBOL(gnttab_alloc_and_grant);
--
- static const char * const gnttabop_error_msgs[] = GNTTABOP_error_msgs;
- 
- const char *
-diff --git a/include/gnttab.h b/include/gnttab.h
-index 974cb89d..108c4425 100644
---- a/include/gnttab.h
-+++ b/include/gnttab.h
-@@ -4,7 +4,6 @@
- #include <xen/grant_table.h>
- 
- void init_gnttab(void);
--grant_ref_t gnttab_alloc_and_grant(void **map);
- grant_ref_t gnttab_grant_access(domid_t domid, unsigned long frame,
- 				int readonly);
- grant_ref_t gnttab_grant_transfer(domid_t domid, unsigned long pfn);
 -- 
-2.43.0
+2.50.0
 
 
