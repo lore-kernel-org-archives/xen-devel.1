@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 239A4C83F1B
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 13:29:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045187.1415293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A3CEC83F22
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 13:29:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1045188.1415312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc2Bo-0008Ja-Ss; Wed, 16 Jul 2025 13:28:52 +0000
+	id 1uc2Bq-0000Oe-7o; Wed, 16 Jul 2025 13:28:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045187.1415293; Wed, 16 Jul 2025 13:28:52 +0000
+Received: by outflank-mailman (output) from mailman id 1045188.1415312; Wed, 16 Jul 2025 13:28:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc2Bo-0008Iu-NW; Wed, 16 Jul 2025 13:28:52 +0000
-Received: by outflank-mailman (input) for mailman id 1045187;
- Wed, 16 Jul 2025 13:28:51 +0000
+	id 1uc2Bq-0000OV-4M; Wed, 16 Jul 2025 13:28:54 +0000
+Received: by outflank-mailman (input) for mailman id 1045188;
+ Wed, 16 Jul 2025 13:28:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uFaK=Z5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uc2Bn-00089u-MM
- for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 13:28:51 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1uc2Bo-00089u-Mg
+ for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 13:28:52 +0000
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [2a00:1450:4864:20::442])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cf0109aa-6248-11f0-b894-0df219b8e170;
- Wed, 16 Jul 2025 15:28:50 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-45629703011so12849915e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 06:28:50 -0700 (PDT)
+ id cd8acd52-6248-11f0-b894-0df219b8e170;
+ Wed, 16 Jul 2025 15:28:47 +0200 (CEST)
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-3a4f379662cso4949430f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 06:28:47 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e8075d6sm21076205e9.16.2025.07.16.06.28.48
+ 5b1f17b1804b1-4562e8075d6sm21076205e9.16.2025.07.16.06.28.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jul 2025 06:28:48 -0700 (PDT)
+ Wed, 16 Jul 2025 06:28:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,153 +47,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf0109aa-6248-11f0-b894-0df219b8e170
+X-Inumbo-ID: cd8acd52-6248-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752672529; x=1753277329; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lUKrRD4z8ysA1AG25EoVkKP8oZZDthT1l+2496pCcS8=;
-        b=DDur3oEpd47xauNittgyRSrjrbg5qJnB72jv9spWUvPFVC8iyCtIgvYoT4gnJVLfI7
-         ECtOvl0ZvW3fXcNKwjzS03pJV//S5Df/QKrOjoRQKP5FRu/WQcI7UhrUYER/JsHNT8Rz
-         YMFRtEH2/QRj/m/E8VzHaJa8wvA73gnRNIsTo=
+        d=citrix.com; s=google; t=1752672527; x=1753277327; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lPn6DW8204WPKZS2b+8OxZ4/co6aG1KQR9kOVW1bhSQ=;
+        b=JhmoHsfRvi0Coqwn2IaFCJQVaowYEZItK8hmK+ILzkZPyhmdu1/fh39ucRnHet7p5K
+         3gMXnPSY+3bXysPgSdcm6wCuWzXvkyaTek77xi8E+V8Ar0nEdhO9yTkcYY5eSfYhxBiz
+         94T9TiAgbvK8LncSO28BidkHGXaeXNlc/mEUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752672529; x=1753277329;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lUKrRD4z8ysA1AG25EoVkKP8oZZDthT1l+2496pCcS8=;
-        b=OGaeuYx5mtp/SoC8VJ29LjyFiZfny0/jkHkEXd5Fnlpfmaz/YjcyEU9y3ird8BPgp7
-         KmeVhdNgdm3pBvw8bm1VFuWPwS6C6mYyF3Lii/Dx6AE35Al8X71vjLtIs+v3zRRg8ZSb
-         xvSz/IlfFLpbqNdNksF4wiWq9oABXnAxRzhFvJgWZGDfjjWbLRvwM74KF3/x1y3AY46M
-         Rs/qV7+/LmFfxLMtdFCJBdTP1ulJwsl8gpvEl41tEr6owdcCBOtHezSMisPYXFnQJlki
-         g6r2IZoBUqSd1pkoO/991TOuAgooDNLpz1mWf+R2Z4uZYl7Es8lGPWgykOdXXhVbPR3q
-         ya9Q==
-X-Gm-Message-State: AOJu0YyKvEbnEo9/F0e8OzaRPiuH5omByMYfY7JxOz9vbQ6xPbMCHuBf
-	U5DkwjeJHtjT4WL7KfB72vgm/dJSftedH4Ffw0mQ4rH7u+RkhQXAKpCaKVqvmtRc19xNuww7bbC
-	YQGBOe38RPA==
-X-Gm-Gg: ASbGncs8YncPCjJF3eXez4h+YQppAqBMR0ZMHiPdnRbnH3OfPeFyxq2Fy6e5cFr4d1a
-	RzoQpE4goyGZulSAD28sgHNbTRDHuFPynymwBA3+EgZEfg7Bt6XS35inWa0f+As6EcLTu102enS
-	TQteSkBkqDtIQsKiJWxnQJiMBUabfC7IZoXvUkA7HrBD3tvqUjcn6hONClckQndumMKoxmMrj4E
-	1R4X+igGEyiSH+0BBL5EItLNWQ6Q0ipitr8k5Hly22kmIw4tzAKVvkv0Am822GazFQpw0Vz281R
-	0Jlpp6bQtE2hPsXpe6ZUBeHWi05W6inMc4J/4Ls5M+JXoYh6XXogRz3M6+Ca8LWrjki2DEB1b+g
-	LL/4LJ9d0ieCyhBeWK25Qf12NnrHLSYwNK7QtTXWYbRdSonUzI36AfOJdGMyzPR+cQroxOCFaj9
-	u0
-X-Google-Smtp-Source: AGHT+IGme90Uo3hFxf0bgB2TfEI0SpjpAPeoEB0YSNYkXr9ir3vPDZJy+EsxvPoqB66dy7iOMCA5kw==
-X-Received: by 2002:a05:600c:a00e:b0:442:d9fc:7de with SMTP id 5b1f17b1804b1-4562eb66b57mr21111015e9.22.1752672529143;
-        Wed, 16 Jul 2025 06:28:49 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752672527; x=1753277327;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lPn6DW8204WPKZS2b+8OxZ4/co6aG1KQR9kOVW1bhSQ=;
+        b=tOvjRYJ++hr5l7aoJdL8uachwco5qVGGQH/I+ao1sQwI8pYtE+FtK3/vsMxnz0fs2S
+         3+QL8oG+4WuVIp5aMNh+0iwEnKdyokILxfkEwhTY79QYu+1+W7IMSNnsnjU/uV8TJCED
+         Mzl/p2tg7Raainm3IJ7F2WCLMbM6IYGoFWSdo99DjP7c3Hte/H1PirTcCYpJhXjAA9V+
+         uWPD70MA6tQXnwQ1HOBgyjmdgzZpJ7YJD4U0HFyoZUR3TUW9NWRRz7/R/zG2Tpa5B95U
+         ORpt8A+UWpOkSgrdfqG2eyEYyMGk+5YgKMCTsJo32QGohJUGy9aaTVJTtBfIKMB9pIaS
+         xF8Q==
+X-Gm-Message-State: AOJu0YzuwqsTFz4lVKZ3+BGABePUGKPEMZCyQ0KY4SzXAaujl1Otu+2Z
+	9u3yKpt3+eODtp4iu6Y10KSVePvPD3Fww8k6Tsb4LtkmG/GZHSrrowf4ubjkhG+T0JcMHhml/e1
+	USfb35DWqZaEV
+X-Gm-Gg: ASbGncvpJu/WOvpfmsV8psNQMbcYQUxzsKbthSAsC1XzNck5j+YSdaZgRnVwfmTl1TN
+	j/dsWCKiAUEt6kR4YW7iDRcC8SsxX1KAjV9Nm545o2QLwWNwIfUbfzrXzzDNg7hiG9/eztSWZRK
+	AWFnfGU/ScqX8mmzhZhRqP6zSmZ+9UkLVA1kNLXdWS2H7pZZdu9m/dPrBdabY/6XJa+dJS7tLeh
+	nzFFl4c1tW3nrcLsG/lTURaAY453hRV8JbE23jNu9iPOT3cyJf/TsZRfLlaJiGjDYSIxKQXzc0P
+	T5Vp7ynuJiDzXvnVIPUQ/1KYiDBl9dBKoIbXwMP9BGVd2PZURLRVKYGCFQ8pFENSw6DJgmV3HUZ
+	4VbGHytHGPBI0aoDRQlt7Eo97jHoFlGHhzmpbeakZaBjCJUajGaNyi0ZwXbZ7W3KDxsM6ji3iYl
+	vB
+X-Google-Smtp-Source: AGHT+IFoQQ/CdGbKbQh7kVHuEOq4Eelj6defOlpP29GsNv2I2IO9V/mRYZ0MgooUI8PiAnD9Qw4Yvw==
+X-Received: by 2002:a05:6000:2892:b0:3a4:f7e3:c63c with SMTP id ffacd0b85a97d-3b60e435a46mr2185123f8f.0.1752672526642;
+        Wed, 16 Jul 2025 06:28:46 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/3] x86/vtd: Switch model check to VFM
-Date: Wed, 16 Jul 2025 14:28:43 +0100
-Message-Id: <20250716132843.2086965-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/3] x86: Overhaul of vendor/family/model logic to support DMR
+Date: Wed, 16 Jul 2025 14:28:40 +0100
+Message-Id: <20250716132843.2086965-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250716132843.2086965-1-andrew.cooper3@citrix.com>
-References: <20250716132843.2086965-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This form is shorer and more legible.
+Intel have run out of model space in Family 6 and will start using Family 19
+starting with Diamond Rapids.  Xen, like Linux, has model checking logic which
+will malfunction owing to bad assumptions about the family field.
 
-No functional change.
+Follow Linux's lead and combine Vendor / Family / Model into a single
+constant, so it is harder to mismatch family and model checks.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1930124712
 
-As this is the first transformation, an anlysis of the code generation change:
+Andrew Cooper (3):
+  x86: Rearrange struct cpuinfo_x86 to introduce a vfm field
+  x86/intel-family: Resync with Linux
+  x86/vtd: Switch model check to VFM
 
-before:
-<quirk_iommu_caps>:
-	       8b 05 4a 7e 09 00    	mov    0x97e4a(%rip),%eax        # <boot_cpu_data>
-	       25 00 ff ff 00       	and    $0xffff00,%eax
-	       3d 00 06 01 00       	cmp    $0x10600,%eax
-	   /-- 74 0e                	je     <quirk_iommu_caps+0x20>
-	/--|-> e9 59 8a dc ff       	jmp    <__x86_return_thunk>
-	|  |   66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
-	|  |   00 00
-	|  \-> 0f b6 05 29 7e 09 00 	movzbl 0x97e29(%rip),%eax        # <boot_cpu_data>
-	|      3c 2a                	cmp    $0x2a,%al
-	|  /-- 74 04                	je     <quirk_iommu_caps+0x2f>
-	|  |   3c 2d                	cmp    $0x2d,%al
-	\--|-- 75 e3                	jne    <quirk_iommu_caps+0x12>
-	   \-> 48 b8 ff ff ff ff c3 	movabs $0xffffffc3ffffffff,%rax
-	       ff ff ff
-	       48 21 47 20          	and    %rax,0x20(%rdi)
-	       e9 2e 8a dc ff       	jmp    <__x86_return_thunk>
+ xen/arch/x86/include/asm/cpufeature.h   | 45 ++++++++++--
+ xen/arch/x86/include/asm/intel-family.h | 96 ++++++++++++++++++++++++-
+ xen/arch/x86/setup.c                    |  4 +-
+ xen/drivers/passthrough/vtd/quirks.c    |  7 +-
+ 4 files changed, 141 insertions(+), 11 deletions(-)
 
-after:
-<quirk_iommu_caps>:
-	    8b 05 4a 7e 09 00    	mov    0x97e4a(%rip),%eax        # <boot_cpu_data>
-	    3d 2a 06 01 00       	cmp    $0x1062a,%eax
-	/-- 74 13                	je     <quirk_iommu_caps+0x20>
-	|   3d 2d 06 01 00       	cmp    $0x1062d,%eax
-	+-- 74 0c                	je     <quirk_iommu_caps+0x20>
-	|   e9 57 8a dc ff       	jmp    <__x86_return_thunk>
-	|   0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
-	\-> 48 b8 ff ff ff ff c3 	movabs $0xffffffc3ffffffff,%rax
-	    ff ff ff
-	    48 21 47 20          	and    %rax,0x20(%rdi)
-	    e9 3d 8a dc ff       	jmp    <__x86_return_thunk>
-
-Previously, GCC managed to merge the "x86_vendor == X86_VENDOR_INTEL && x86 ==
-6" condition, but performed a second load for x86_model.
-
-Afterwards, there's a single load, and two compares.
-
-Neither managed to merge the model checks together by playing with bit 2, but
-that's something that compilers could learn to and is not suitable to express
-at the C level for this kind of logic.
-
-Unrelated to this change, it would be rather better to do `andl $0xc3,
-0x24(%rdi)` than to manifest a 64bit constant.
----
- xen/arch/x86/include/asm/cpufeature.h | 2 +-
- xen/drivers/passthrough/vtd/quirks.c  | 7 +++----
- 2 files changed, 4 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index ba2c1c1c7416..f8b85c0f9520 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -28,7 +28,7 @@
- 
- #define VFM_MAKE(v, f, m) (MASK_INSR(v, VFM_VENDOR_MASK) | \
-                            MASK_INSR(f, VFM_FAMILY_MASK) | \
--                           MASK_INSR(f, VFM_MODEL_MASK))
-+                           MASK_INSR(m, VFM_MODEL_MASK))
- 
- #define VFM_MODEL(vfm)  MASK_EXTR(vfm, VFM_MODEL_MASK)
- #define VFM_FAMILY(vfm) MASK_EXTR(vfm, VFM_FAMILY_MASK)
-diff --git a/xen/drivers/passthrough/vtd/quirks.c b/xen/drivers/passthrough/vtd/quirks.c
-index dc3dac749ce6..0a10a46d90f7 100644
---- a/xen/drivers/passthrough/vtd/quirks.c
-+++ b/xen/drivers/passthrough/vtd/quirks.c
-@@ -30,6 +30,7 @@
- #include <xen/pci_regs.h>
- #include <xen/keyhandler.h>
- #include <asm/msi.h>
-+#include <asm/intel-family.h>
- #include <asm/irq.h>
- #include <asm/pci.h>
- 
-@@ -630,9 +631,7 @@ void __init quirk_iommu_caps(struct vtd_iommu *iommu)
-      * model because the client parts don't expose their IOMMUs as PCI devices
-      * we could match with a Device ID.
-      */
--    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
--         boot_cpu_data.x86 == 6 &&
--         (boot_cpu_data.x86_model == 0x2a ||
--          boot_cpu_data.x86_model == 0x2d) )
-+    if ( boot_cpu_data.vfm == INTEL_SANDYBRIDGE ||
-+         boot_cpu_data.vfm == INTEL_SANDYBRIDGE_X )
-         iommu->cap &= ~(0xful << 34);
- }
 -- 
 2.39.5
 
