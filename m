@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A5B7C83F27
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 17:32:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045522.1415687 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95CBBC83F1B
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 17:32:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1045517.1415641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc5yp-0003jj-VF; Wed, 16 Jul 2025 17:31:43 +0000
+	id 1uc5ym-0002mj-EH; Wed, 16 Jul 2025 17:31:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045522.1415687; Wed, 16 Jul 2025 17:31:43 +0000
+Received: by outflank-mailman (output) from mailman id 1045517.1415641; Wed, 16 Jul 2025 17:31:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc5yp-0003ih-Nx; Wed, 16 Jul 2025 17:31:43 +0000
-Received: by outflank-mailman (input) for mailman id 1045522;
- Wed, 16 Jul 2025 17:31:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uc5ym-0002mc-B5; Wed, 16 Jul 2025 17:31:40 +0000
+Received: by outflank-mailman (input) for mailman id 1045517;
+ Wed, 16 Jul 2025 17:31:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uFaK=Z5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uc5yo-00030y-S6
- for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 17:31:42 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bc276d58-626a-11f0-b894-0df219b8e170;
- Wed, 16 Jul 2025 19:31:41 +0200 (CEST)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a536ecbf6fso66805f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 10:31:41 -0700 (PDT)
+ id 1uc5yk-0002mM-UJ
+ for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 17:31:38 +0000
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [2a00:1450:4864:20::443])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b9b29dc8-626a-11f0-a319-13f23c93f187;
+ Wed, 16 Jul 2025 19:31:37 +0200 (CEST)
+Received: by mail-wr1-x443.google.com with SMTP id
+ ffacd0b85a97d-3a5257748e1so65976f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 10:31:37 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e7f2e68sm27048625e9.1.2025.07.16.10.31.39
+ 5b1f17b1804b1-4562e7f2e68sm27048625e9.1.2025.07.16.10.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jul 2025 10:31:39 -0700 (PDT)
+ Wed, 16 Jul 2025 10:31:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,139 +47,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc276d58-626a-11f0-b894-0df219b8e170
+X-Inumbo-ID: b9b29dc8-626a-11f0-a319-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752687100; x=1753291900; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hKAPvis3UQ2b1oSSC4VWDVhBOhANhWsodZ/HjXmcnzE=;
-        b=hQihdnzrgbHMsFDiERSDFRjaWq5jWEi5KF0E1xPn1PGGUUiVgYEOmg6DOEjy9Xyr3C
-         l2rs0NHppw0WgRmHLHvgI45FvdG67Hju8QC+y77TKR+PnbXaLQchRYjk8bcWdvCoEIpA
-         H/R7KQedOqFv3b8Z21hJKMWaJdiodkyVzdHIY=
+        d=citrix.com; s=google; t=1752687096; x=1753291896; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9VvQD0o8nt5u2NglgLYe9IcO/Qe2EFADGor/d6eX1FQ=;
+        b=pUy+0hE9j+GjXNL1DoXnhiXQZsRveK61L0Z1kHL0zGTp7KI93vYN434mlzefjtvz7c
+         aNWg9jtTGiNLaobpWM+ScOVA+y6hazWaT9A2/RpMH0dWkYVWXqe8zVMO5jWEnzqxcWmM
+         IuaATXpyN0fk3JddVraSzHwUUAxbEsy4ERYsI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752687100; x=1753291900;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hKAPvis3UQ2b1oSSC4VWDVhBOhANhWsodZ/HjXmcnzE=;
-        b=o1NR1AEVlcPOvLHv5kkeIi2eemSok277gYMJKlIKJWgtlnPK0cWGwsOJTFm1KKPWLh
-         +Y8VKUM+tii+1dD6LsBqf8S0RDFXfDds+CmG91geHy7hiT50KBunjf5bj3AzCe11ddiJ
-         ohZxq9P6l7qu8n1ivUH1lEquOmHegOvAOl56YsnRardaHa7tg5R5KQ+2TEYiLbYOIMHd
-         M9CZPyje4DOAKHOhmkFUxziVCZ7NB49R729ElEbKFkw6CPjyFYTTivk0N/1pAlmT6NSf
-         hEsq0ITwB+73PkQ7p6n1yhnofuGD23bKIAchi7YI6eWBpOSKC2G2SnxlyugCtwDcwfWk
-         N39w==
-X-Gm-Message-State: AOJu0YwVC/qEjWggaJpieQmbDwnMc5OcZY+vbm213hFLV/sLLU+ZuVT1
-	D1pitmxLAKkGvILUSNlIHfrHdQqjdi0cy7jGAvQfne83s1+4LmrBNlFtHXp5BnwxXSLWp2LmsGw
-	9zXgtSKVwgw==
-X-Gm-Gg: ASbGnctTbtlTnq2KTWWh5kimdkcJqGaWVPPTCwNa9SV0vyFVErdGCWr2fE8NZej778t
-	T7xcbuIASN9bY0+dWVp2yRhNbBmYYshKvuEXL0w98QcG9w7/A6jK6Y81hLmWuzP+9hJREkIMhAH
-	U8pVwazvkGV7RuOAhi9lbuiWkIUBQZWvLnNbH24CIMAhS9XUYxgv18zFsboO1LGBgxggexMLtRU
-	iVjqSsB06dcnEOEwtpYh4MmLh67CVhC2LIgF/hgaNdcOHQEmbGrtz8CQb/kbi4lmwwRCpqrvlHp
-	f0VV9eRolffHpdHhHy7gSp9qEk4qZENyJhlerv5gkIUYYdiXuaQ+clFY0MiltoY/hpTdS0fgim8
-	ssmj9L2geKhUYSezAk4OU7vYVf59J7xGrWMO4FfgMD40UD+oxIu0eUNSV009p91Up7rVtmxu69L
-	m+XLAS/pdQbYM=
-X-Google-Smtp-Source: AGHT+IGuOUFb9On/HRhWgVEKTJCn+qFOiFKnj7/mEmRrFFTdg2Tjsv8eOlpKNj8dkRdwsq90mMvWEA==
-X-Received: by 2002:a05:6000:1883:b0:3a5:2653:7308 with SMTP id ffacd0b85a97d-3b60dd8e7f7mr4101040f8f.57.1752687100452;
-        Wed, 16 Jul 2025 10:31:40 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752687096; x=1753291896;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9VvQD0o8nt5u2NglgLYe9IcO/Qe2EFADGor/d6eX1FQ=;
+        b=VRG69U7TK02g0qyiM6avIYya0p9xQrtSqAs/x2Qu9Z0soTT3ZC1X+hTCzZtCuM6MDz
+         KKtD+fM/tKZnWgHCgGagbrXYvub+EOnSgqX8W+H1qMdt0eqlSsAhWULz0IzEGpjDB1Cb
+         cdv++2/3lpukiCVxVGgm+gikeZnVaDDZ4JdGnCVhjw0I7SUcHkocoHcTwCtjz1RFM21J
+         CyDcQ5oK8QDsU4pydQ2Ry7bB2qaQtkNYTY5W92Wzm/Z52osifwXmot9egnPtSeCjU3GB
+         Pma07LiIzCaaYlNuSyRZbZ2KYoRHcYdRCGzS/D3zLp6k9Sqw5sNIQmUCOHomXGjDK8tr
+         apNw==
+X-Gm-Message-State: AOJu0Ywphcqrc2ZIiev/W+2cggaLhdTYlcSEx1+h68REERt3JI3Hzhzj
+	8W8egtLnQ89dPgzjbDi2qB9M3fgE0awzQ/gKO989qSUHYJlJUz59Lo3Q6Wy42iltWz0tY+uCWWI
+	xYpfCBhbc4IBa
+X-Gm-Gg: ASbGncv0opuUDjowh6C29j7aJqdldqPDoXlgw0ftAONWZMPZlEN+vYJlaXras6IwTcK
+	k3Tn88vvDoeY5ohfPC92ZUnBCCsnRJFP2gTpxUHFAbGHwfISrrPXnGFlfVFiLZy9Marv2XF85rl
+	n14OlnUoMjEPofF1YUyeJHfZzUZUcRq+pJ0cxOoKHgot+GITdjr1XtG2kxTnwBcslzyAC5eVr3W
+	vYlOERBKD/nbduUc9m08E9+OzKE5TBPK2Df0Ls7NyjzSFI+hion0iF7m7X5Qi398EcWWCT1dzuf
+	zOUkk0FHd9q22p/nAd8Al5YMzp1ZcrecGghsD3NWXXWgCIPzAhclKTXhv+PW9zOnGRjTeiyxpmk
+	pjYKlrl3vpeNXm+9AKpaK4if59k00YpnPNSKZrigWlrBMLLmbqRvYHy7iugX2fa6WFJR04P4EVH
+	b8
+X-Google-Smtp-Source: AGHT+IHfMsLDMaL/IwM91fMZOHJWGSXzSJVRQ6s1SWAW6Dr8rbo6g2/YjHOI9BHY6TRaEV+00GoUSg==
+X-Received: by 2002:a05:6000:2dc1:b0:3a4:f786:4fa1 with SMTP id ffacd0b85a97d-3b60e4d1e7fmr2880127f8f.2.1752687096120;
+        Wed, 16 Jul 2025 10:31:36 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 5/6] x86/match-cpu: Support matching on steppings
-Date: Wed, 16 Jul 2025 18:31:31 +0100
-Message-Id: <20250716173132.2213891-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/6] x86: Convert x86_cpu_id to VFM
+Date: Wed, 16 Jul 2025 18:31:26 +0100
+Message-Id: <20250716173132.2213891-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250716173132.2213891-1-andrew.cooper3@citrix.com>
-References: <20250716173132.2213891-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Architecturally, stepping is a 4-bit field, so a uint16_t suffices for a
-bitmap of steppings.
+This is the next part of the VFM converstion, focusing on struct x86_cpu_id.
 
-In order to keep the size of struct x86_cpu_id the same, shrink the vendor and
-family fields, neither of which need to be uint16_t in Xen.
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1930706122
 
-No functional change.
+Andrew Cooper (6):
+  x86: Sort headers
+  x86: Break struct x86_cpu_id out of processor.h
+  x86/match-cpu: Introduce X86_MATCH_VFM() and convert intel_idle_ids[]
+  x86: Convert users of INTEL_FAM6_MODEL() to X86_MATCH_VFM()
+  x86/match-cpu: Support matching on steppings
+  x86/apic: Convert the TSC deadline errata table to X86_MATCH_*()
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+ xen/arch/x86/acpi/cpu_idle.c         |  53 ++++++--------
+ xen/arch/x86/apic.c                  | 105 +++++++++------------------
+ xen/arch/x86/cpu/common.c            |  25 +------
+ xen/arch/x86/cpu/intel.c             |  64 ++++++++--------
+ xen/arch/x86/cpu/mwait-idle.c        |  11 +--
+ xen/arch/x86/include/asm/match-cpu.h |  53 ++++++++++++++
+ xen/arch/x86/include/asm/processor.h |  10 ---
+ 7 files changed, 148 insertions(+), 173 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/match-cpu.h
 
-Linux supports all fields being optional.  This has lead to using
-X86_MATCH_CPU(ANY, ANY, ANY, ANY, FEATURE_FOO, NULL) in place of
-boot_cpu_has(), and is not a construct I think we want to encorage.
----
- xen/arch/x86/cpu/common.c            |  4 +++-
- xen/arch/x86/include/asm/match-cpu.h | 12 ++++++++----
- 2 files changed, 11 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index cc004fc976f5..fc25935d3109 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -1003,13 +1003,15 @@ const struct x86_cpu_id *x86_match_cpu(const struct x86_cpu_id table[])
- 	const struct x86_cpu_id *m;
- 	const struct cpuinfo_x86 *c = &boot_cpu_data;
- 
--	for (m = table; m->vendor | m->family | m->model | m->feature; m++) {
-+	for (m = table; m->vendor | m->family | m->model | m->steppings | m->feature; m++) {
- 		if (c->x86_vendor != m->vendor)
- 			continue;
- 		if (c->x86 != m->family)
- 			continue;
- 		if (c->x86_model != m->model)
- 			continue;
-+		if (m->steppings && !(m->steppings & (1U << c->stepping)))
-+			continue;
- 		if (!cpu_has(c, m->feature))
- 			continue;
- 		return m;
-diff --git a/xen/arch/x86/include/asm/match-cpu.h b/xen/arch/x86/include/asm/match-cpu.h
-index dcdc50a70d14..3862e766ccfc 100644
---- a/xen/arch/x86/include/asm/match-cpu.h
-+++ b/xen/arch/x86/include/asm/match-cpu.h
-@@ -8,28 +8,32 @@
- #include <asm/intel-family.h>
- #include <asm/x86-vendors.h>
- 
-+#define X86_STEPPINGS_ANY 0
- #define X86_FEATURE_ANY X86_FEATURE_LM
- 
- struct x86_cpu_id {
--    uint16_t vendor;
--    uint16_t family;
-+    uint8_t vendor;
-+    uint8_t family;
-     uint16_t model;
-+    uint16_t steppings; /* Stepping bitmap, or X86_STEPPINGS_ANY */
-     uint16_t feature;   /* X86_FEATURE_*, or X86_FEATURE_ANY */
-     const void *driver_data;
- };
- 
--#define X86_MATCH_CPU(v, f, m, feat, data)                      \
-+#define X86_MATCH_CPU(v, f, m, steps, feat, data)               \
-     {                                                           \
-         .vendor       = (v),                                    \
-         .family       = (f),                                    \
-         .model        = (m),                                    \
-+        .steppings    = (steps),                                \
-         .feature      = (feat),                                 \
-         .driver_data  = (const void *)(unsigned long)(data),    \
-     }
- 
- #define X86_MATCH_VFM(vfm, data)                                \
-     X86_MATCH_CPU(VFM_VENDOR(vfm), VFM_FAMILY(vfm),             \
--                  VFM_MODEL(vfm), X86_FEATURE_ANY, data)
-+                  VFM_MODEL(vfm), X86_STEPPINGS_ANY,            \
-+                  X86_FEATURE_ANY, data)
- 
- /*
-  * x86_match_cpu() - match the CPU against an array of x86_cpu_ids[]
 -- 
 2.39.5
 
