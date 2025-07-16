@@ -4,52 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E4EC83F22
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 21:22:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045773.1415985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF25C83F27
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 21:22:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1045775.1415995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc9Zz-0007gw-0T; Wed, 16 Jul 2025 21:22:19 +0000
+	id 1uc9aA-000864-DW; Wed, 16 Jul 2025 21:22:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045773.1415985; Wed, 16 Jul 2025 21:22:18 +0000
+Received: by outflank-mailman (output) from mailman id 1045775.1415995; Wed, 16 Jul 2025 21:22:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc9Zy-0007gn-TC; Wed, 16 Jul 2025 21:22:18 +0000
-Received: by outflank-mailman (input) for mailman id 1045773;
- Wed, 16 Jul 2025 21:22:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uc9aA-00085l-9H; Wed, 16 Jul 2025 21:22:30 +0000
+Received: by outflank-mailman (input) for mailman id 1045775;
+ Wed, 16 Jul 2025 21:22:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XbuO=Z5=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1uc9Zx-0007F7-CC
- for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 21:22:17 +0000
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2062e.outbound.protection.outlook.com
- [2a01:111:f403:2408::62e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f2b12f39-628a-11f0-a319-13f23c93f187;
- Wed, 16 Jul 2025 23:22:16 +0200 (CEST)
-Received: from BLAPR03CA0163.namprd03.prod.outlook.com (2603:10b6:208:32f::7)
- by BN5PR12MB9464.namprd12.prod.outlook.com (2603:10b6:408:2ab::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.32; Wed, 16 Jul
- 2025 21:22:10 +0000
-Received: from MN1PEPF0000F0DF.namprd04.prod.outlook.com
- (2603:10b6:208:32f:cafe::c4) by BLAPR03CA0163.outlook.office365.com
- (2603:10b6:208:32f::7) with Microsoft SMTP Server (version=TLS1_3,
+ id 1uc9a8-0007F2-Ut
+ for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 21:22:28 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20619.outbound.protection.outlook.com
+ [2a01:111:f403:2412::619])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f8e5979c-628a-11f0-b894-0df219b8e170;
+ Wed, 16 Jul 2025 23:22:27 +0200 (CEST)
+Received: from DM6PR03CA0100.namprd03.prod.outlook.com (2603:10b6:5:333::33)
+ by SJ2PR12MB7799.namprd12.prod.outlook.com (2603:10b6:a03:4d3::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.35; Wed, 16 Jul
+ 2025 21:22:23 +0000
+Received: from DS3PEPF000099D6.namprd04.prod.outlook.com
+ (2603:10b6:5:333:cafe::ca) by DM6PR03CA0100.outlook.office365.com
+ (2603:10b6:5:333::33) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.20 via Frontend Transport; Wed,
- 16 Jul 2025 21:22:10 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- MN1PEPF0000F0DF.mail.protection.outlook.com (10.167.242.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8943.21 via Frontend Transport; Wed, 16 Jul 2025 21:22:09 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 16 Jul 2025 21:22:22 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF000099D6.mail.protection.outlook.com (10.167.17.7) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8943.21 via Frontend Transport; Wed, 16 Jul 2025 21:22:22 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 16 Jul
- 2025 16:22:05 -0500
+ 2025 16:22:14 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 16 Jul
+ 2025 16:22:14 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Wed, 16 Jul 2025 16:22:04 -0500
+ Transport; Wed, 16 Jul 2025 16:22:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,360 +65,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2b12f39-628a-11f0-a319-13f23c93f187
+X-Inumbo-ID: f8e5979c-628a-11f0-b894-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vifidIaQvvU8G/aTXp69WqBEKv3Wje5iCCBEJUHnjZiDeWAgMW4nbWwNGYY+pSzWQWnrHJDPHHwcnVp0hwHncIm1hgNk/8DOVt7tg4YFVkG9os5gfzZvUulASX5ahRV46TlRrguEXgfArZz7RakdncYhCv8t9On2F2IOttncZV8WWD7w+iC3MGgW6EkZzUdBjxQbK/1BJATkvS63OYqOo2fHbxmexr2QwFxx5SqtTDBsORfTyJXqFaTgzlVX4TI9f1+mImPXXCO/fLGGyz1jjLUlknjx5KYppgqanQygrT4D8cAEZJp/CcDUSpUg797+OIfFzbaOXpFgM4kG2ppDcg==
+ b=iNs9usH/Uh7qv/Yibszq5TrIclWrkNysxQnxWmZMyxCrNx32c5L1yZRl6lPHajlOWFemXQDSc79Q2LXTxorHDh3ZT4ZWvXMAVSK6uSQsbWAZfpsLLcfg6YL7J9u5GtjfnGpoKpmCKPGxRpmXFFGKW867vgeoqw//Kzolm6cw/xB389/Ca6b66yUrbr+zg5yhqzmHZTbcP0XzJKyBD0xS0sQ4uYNLq1TSiCkDAAXkVBBgrlNU3IbgnG5J4l8iyAgX+rB9dDDci2sYwOtcjRgzIrWpvFygVSC2AMRtSvIoOOPj4LeGf/EVPnm4DMzxOwsq5f2A3a9S2T5svAHqhvwgBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5M874AgAk3AnYllKGR1EeBj7fMWDRaQxoJ2sGMdv1/A=;
- b=eMf1W/c9tNCOIzWuOtmE4uoCPwX/XfGAymaCfk+CgiHZpwmIZ0g/ib1kLjyKO1MRd6YsgkTiHGX+SXWCA5J/eR+4gR2Y4ToLLMeNC6cyB8Pq0o3r2395EsM7y1EYt2qJv/d4vXPU1WdBIOXz2Yx7O1c/B28cRQtC3crnMq/PEADDVH733W2baOeiZkyK4drHaCCFZ8eU/01XfsjJyU4Wo9rPBr+GY0aWahvfnV7GE/4i7O5VnkqcYttNTOvKbgdRJnMc67Q5Ke/8I4KTPBe59huLw9xRnJVFzPS5i67Fv4kku74lPSefSZwStt0KwG3OZ4vpBCLbMQZUXqnO1u9fSA==
+ bh=4SrHYelHHxhnkv89jdaZ0HdwLgpuE+uqyfBIn9726pg=;
+ b=n5km9/UC3YiBoExl4+rPjeInhRW8pxRfjzETXCJWILqhVNQ+FcYqZSdMsDZa3+mJJEZDh19gRGXjnka+iKr6vYxryVk+J0ifx9LhVUQP9sxfnEQbgEzraQ4q+NsiV4nyFm6o3j8TH1n7qya2FQxRKxmlq7dHg+IbsFEmQKjdvRFJOvJyYb01x+K2at8qKScRHlM+MRuvLD1vdCY54bUHvV46I2Bi7oSkyYCWcEd6CbK02NE93ejo8IxIduKLgteGtk0dFQouORS0BT020+Ot8kKnevMGDWeiTkL8qr3NJRR7dGsmmFwDpoorPw8oB/sXkILbNXrHvIu2T42KUJlvFA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5M874AgAk3AnYllKGR1EeBj7fMWDRaQxoJ2sGMdv1/A=;
- b=tttf+AsGDi2vatDnnRxfmB34DzuMp2kAQUhKN1vOj9KEH9mYFey5IhamRosRYvZA3EGXlhVLYG5RsD/i7w+AMivoAIPqWFGmqkCdGw4wRMKwUP+X7utmYL3pLcshrtj99HX91XnnIvnYOpwXJx2r/tslTVESp1a9RcjZI74Dy+s=
+ bh=4SrHYelHHxhnkv89jdaZ0HdwLgpuE+uqyfBIn9726pg=;
+ b=cCBF7BtSVCdkkLhlQMejX3rGksc1/611PWd6PPMeo8u2G7pQ7gny3IGqd9/urRh2gA79GHOj/TlEVX1s0z05xH6IRmRUY3eAjTM1FxevlYXjKVSah2pwjWxSmyDxLDC6xyaORv4jZU2lgwEGOQpqbPqA45eGJiEaQlNMAPYHaXI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v2 01/17] xen/xsm: Add XSM_HW_PRIV
-Date: Wed, 16 Jul 2025 17:14:48 -0400
-Message-ID: <20250716211504.291104-2-jason.andryuk@amd.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 08/17] public/io: xs_wire: Include event channel in interface page
+Date: Wed, 16 Jul 2025 17:14:55 -0400
+Message-ID: <20250716211504.291104-9-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250716211504.291104-1-jason.andryuk@amd.com>
 References: <20250716211504.291104-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DF:EE_|BN5PR12MB9464:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77500afb-8347-473a-430b-08ddc4aed2f7
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D6:EE_|SJ2PR12MB7799:EE_
+X-MS-Office365-Filtering-Correlation-Id: 20695f3c-46a7-4cf6-a7f1-08ddc4aeda5e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|7416014|376014;
+	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Xa/x30/kHcKv2z30uCAsIh8ppqTumh3e7O0turJDrRdNuUWHxbiHtXJx99O7?=
- =?us-ascii?Q?mrWxV12yBgOumT0XxU1iPE9kuOwZmcP+oTUik3fEkY48uQbFWwDW15j4ZWBO?=
- =?us-ascii?Q?/vYk7Bg9pPgHIa59gofOqBU+PYacYn6dSIl2Sh1GXrUCT98Vsi8DHVvgbUFN?=
- =?us-ascii?Q?GQ0MEMJfyKSFUACxuHvn9Itldg55xbfsmZyLcOfB7lk9m/iyUC4A9S/b64db?=
- =?us-ascii?Q?Cyp38bxwV4jP9aOrBB2TFoMP2IUKApwpBm63OWxIdWp+H6gk/blsCaWScgVH?=
- =?us-ascii?Q?oGsGTUFgjrty8pD1WA3HG/445HCnX+X0jN84eRTNXdR/QPEQDDbF0Ukw33RC?=
- =?us-ascii?Q?poMaKIpazpFBFDuTlG22+0EurXVjibOJXWbJnLEILhodAAAPciiPXzoiCtuK?=
- =?us-ascii?Q?THkzPjiFT8dUrrIDz9779bf+M+eaRRDNZfREUe15JlYgJfPf5OmvjJfBouhb?=
- =?us-ascii?Q?AoAu/CAiLprTfzzlK/qXs9b5qMggEFtHQl1k5fHVaisdHN1iTYmRjCJJKtAI?=
- =?us-ascii?Q?9GUXzvhKHt92249pDIawSikGeln0oEm9U5+Zjc99acJXDmmdTIfkcHN9oc/O?=
- =?us-ascii?Q?iNhRNYC3duPUFOW4pV3j6ruNl+tExsx99kGEoT9qtW5vjiER+p+5HLGcDrCl?=
- =?us-ascii?Q?M4g2GrosI9dgW3kCK9WCYlVgTSVXgt4BCXBga5pdzVhRSp8lpt/aSd69lBMP?=
- =?us-ascii?Q?na4+XY06Mb7Pm3YPzif51t9XRtrfnwbC4Fx7C+yhZsudJMrdzmgBRe0t6I/K?=
- =?us-ascii?Q?+ZhiL6Fz0vPzs96bfLg4ShONG3wjEyLc8da/iMQvZQjJ6aZ3chYeIWS5Qjk7?=
- =?us-ascii?Q?ZL1/2X3bOMhgH1yuq2Mz5H7WyIiZioRjtO/pRSdqgCq3CiaQX53ry1BHTV1T?=
- =?us-ascii?Q?wkzKewTbDEG+AkssvAMZ9A+PHxTgLCQ4hlbWR9q87ZJmWJ5rACMY8CQAREIO?=
- =?us-ascii?Q?+Pa4H4n1lgMa75hqbCHDVNQQpw/9AyB4qu6mtqYh+uL/Hm0iikyAl3i9Q70k?=
- =?us-ascii?Q?NPT8G8Wg6MniJV8dz5k0kNr6xhfQCDl7gaPnnuRunFwz6hwFBTTRYzJdZS03?=
- =?us-ascii?Q?tHBhO+doJZ4BN/x2M2Hx7ShUoUYVvEWvDAChJ8AXnfnMYOMhe8onL2JzEdPx?=
- =?us-ascii?Q?+gpr3BCFZPCe87LSc1nlQjsHvZ2mvEca08QpyIbnANj7sYfb+YUGF+IqxCR0?=
- =?us-ascii?Q?q27IKseYfzlVvOHHHxmjgWpbLvogPwYIdZBnfhAaONbZ0oq0Mjl0jj2K0zAb?=
- =?us-ascii?Q?ktTG0ab8iYjcSq8pWNUPE10sIycBNro0c8wKivoS4XRHMtqashemYBFv/GOr?=
- =?us-ascii?Q?dgf9KdbUMTNB8dFEvFycX6kA6ZUqjFfoc6hseIL05FFqhnxedWLbrxHlUYes?=
- =?us-ascii?Q?GmZQXb4CCw3Wn5Tz+Y3Rp04mkJkbxtxk/sHpoPRpVS0IUx+gfg70+21CmbLM?=
- =?us-ascii?Q?GubqQ3N1B9W1taQTQJOhGnA/UDrrEKBZ6ucQr2Lnm2hMrtKydg9503xltEMo?=
- =?us-ascii?Q?h2wIUPeekOaWFH7Le3LODgHuplqicEnQRfF5?=
+	=?us-ascii?Q?08U5bPQjMBvwOPSOyLXsnYptlanH7uFPdymRxUYLHFPXDl4ILh3uQ2TEOV5l?=
+ =?us-ascii?Q?nlcNZpewXoMteUnvCI3QFKqvjWbzDSFyHncHOpokYCMppGmznb6g9PaSHiMy?=
+ =?us-ascii?Q?sUzJMFs4jVV35d0DrQiZEX2hKtwlBqlHHryaFLuAoo4WW05aQ+l76QbYX4Wi?=
+ =?us-ascii?Q?BDokoM6ez12JFnh1ZRjD2boydMgkyiwSdkGmPaKgW1AiBnRiUi0DFjk476FK?=
+ =?us-ascii?Q?bm7nbhK3qXN84P+ByWagpiMQzxoZfDDs5hPzqyEmBxPOnU4iY5boBSlAjQmR?=
+ =?us-ascii?Q?xNL932cpTxr3vYlTnGDzmsUVenDZWoEPan5USkx1shjtMry1Pr6+aUGT6gnk?=
+ =?us-ascii?Q?y6sZ0KoSjn4zWlIq6nj3QQouCWHWp8MQj7w4kGkEUG/SnQA+MpSm8NHjO1pG?=
+ =?us-ascii?Q?UgQFE+IfkavgryG2SYrpgffPWQUCu8+8awyKrrPB8ZB3lEb/4ZnS2srK0NBp?=
+ =?us-ascii?Q?BwNMSfvDvBfgEHeyvYmh+NV4MghTR1j6tYDnMuvcPEcFcwkMHPIourvb7jPx?=
+ =?us-ascii?Q?I1hP0fuKd5wGNnlXvcG+hZ/3GOLA2KlEFksERkAHVqZaSv5YFn0Wf5Z05tri?=
+ =?us-ascii?Q?gBevEgsS6YaPRjGlITsBRpz4mZm89ZBC4VZq6aWZbBlFfl7SM+l+YogByhvb?=
+ =?us-ascii?Q?9z1TWL84edUD4JXN6hQ+07gHC5yoxpkCRxBBK8Ul+pQxOb7zqNid7rjbpq1E?=
+ =?us-ascii?Q?/jZcExDIKgWvKzP2CFxIteOLugYaFRAKm5F1Y+/z7kgeBcH1iqeSwjIG2MUK?=
+ =?us-ascii?Q?DHl/WBNP6+mPfuvq3z4Ek/rwYHerob65YeT0buNkAI+PT7G3H6vog0l/X9oj?=
+ =?us-ascii?Q?SSm9/pmriQcg54oLHrNyvjHU4HSHF8JbMsqOgwJPAHDy8SzqcH8rEz5X/Fjj?=
+ =?us-ascii?Q?qT01nnttvVAGmQIkjZ5s3ViMBY1AfwZYH21pV2Ne1g2VYoYT20MgisL0F7FA?=
+ =?us-ascii?Q?UDyfzT6JRq48DE9wtcNbhe4cM55wBpW1+/tnCymIq6TO0fd4Sy2ojjI9M4hR?=
+ =?us-ascii?Q?cdVrZoLh0Zt0/RbaudiYTIOd+8x5pHF+kfd54brGjwvI01jJZLnBOZ2xxHV3?=
+ =?us-ascii?Q?ibf3s/msglq7CgVtUK8ErhvXEuQxHaB4x9BWwO8xbGMQh8Ot5ZurppO3LuPK?=
+ =?us-ascii?Q?4MzTQIiKASzbWZX5qlW4s7ilYZ7knK+ASxFLZZ3Hfwu98/h/fkaiqI8NlpYB?=
+ =?us-ascii?Q?5ScYUUbAAURu4wJwOSY9CkMma3omZaHBvY9mjFIjLW56eptsfFLh0pvguHYM?=
+ =?us-ascii?Q?uZK5KQO6QRPTOUdFDeNyFaE3Mj554r+X9S3JAOT/uc49UCnBRJaNKW5l9q8V?=
+ =?us-ascii?Q?xSjI1DAY6ryh8W47oTK3RYah/0TECAXJgGw4+xSaEOpFF14hf0DhXe3xMjlb?=
+ =?us-ascii?Q?aPuztJCebYQE01xBIbbB/IUHD34aWlU9Cep1Gi+ACPyD+h6zuLtxvkZsly/U?=
+ =?us-ascii?Q?pC3h3PGnGkwKl3yDMCYwetm0QVFksc4fKaibSWoN0impVRBFzJHKDYWtbnGG?=
+ =?us-ascii?Q?WAglGrDJNkOZrL98n8YEvU1N2+HL24RpY0gK?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(7416014)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 21:22:09.8820
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 21:22:22.2562
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77500afb-8347-473a-430b-08ddc4aed2f7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20695f3c-46a7-4cf6-a7f1-08ddc4aeda5e
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000F0DF.namprd04.prod.outlook.com
+	DS3PEPF000099D6.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9464
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7799
 
-Xen includes disctinct concepts of a control domain (privileged) and a
-hardware domain, but there is only a single XSM_PRIV check.  For dom0
-this is not an issue as they are one and the same.
+Include the event channel in struct xenstore_domain_interface.  This way
+the toolstack or xen can communicate the event channel to xenstored in
+memory xenstored already needs to access.
 
-With hyperlaunch and its build capabilities, a non-privileged hwdom and a
-privileged control domain should be possible.  Today the hwdom fails the
-XSM_PRIV checks for hardware-related hooks which it should be allowed
-access to.
+xenstored maps the grant with the well known GNTTAB_RESERVED_XENSTORE
+index, so no further information is needed.
 
-Introduce XSM_HW_PRIV, and use it to mark many of the physdev_op and
-platform_op.  The hwdom is allowed access for XSM_HW_PRIV.
-
-Make XSM_HW_PRIV a new privilege level that is exclusive to the hardware
-domain
-
-A traditional dom0 will be both privileged and hardware domain, so it
-continues to have all accesses.
-
-Why not XSM:Flask?  XSM:Flask is fine grain, and this aims to allow
-coarse grain.  domUs are still domUs.  If capabilities are meant to be a
-first class citizen, they should be usable by the default XSM policy.
-
+Suggested-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-v2:
-Make XSM_HW_PRIV exclusive to hardware_domain
----
- xen/arch/arm/platform_hypercall.c |  2 +-
- xen/arch/x86/msi.c                |  2 +-
- xen/arch/x86/physdev.c            | 12 ++++++------
- xen/arch/x86/platform_hypercall.c |  2 +-
- xen/drivers/passthrough/pci.c     |  5 +++--
- xen/drivers/pci/physdev.c         |  2 +-
- xen/include/xsm/dummy.h           | 20 ++++++++++++--------
- xen/include/xsm/xsm.h             |  1 +
- 8 files changed, 26 insertions(+), 20 deletions(-)
+ xen/include/public/io/xs_wire.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/xen/arch/arm/platform_hypercall.c b/xen/arch/arm/platform_hypercall.c
-index ac55622426..a84596ae3a 100644
---- a/xen/arch/arm/platform_hypercall.c
-+++ b/xen/arch/arm/platform_hypercall.c
-@@ -35,7 +35,7 @@ long do_platform_op(XEN_GUEST_HANDLE_PARAM(xen_platform_op_t) u_xenpf_op)
-     if ( d == NULL )
-         return -ESRCH;
- 
--    ret = xsm_platform_op(XSM_PRIV, op->cmd);
-+    ret = xsm_platform_op(XSM_HW_PRIV, op->cmd);
-     if ( ret )
-         return ret;
- 
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index 5389bc0867..30801d980c 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -1360,7 +1360,7 @@ int pci_restore_msi_state(struct pci_dev *pdev)
-     if ( !use_msi )
-         return -EOPNOTSUPP;
- 
--    ret = xsm_resource_setup_pci(XSM_PRIV,
-+    ret = xsm_resource_setup_pci(XSM_HW_PRIV,
-                                 (pdev->seg << 16) | (pdev->bus << 8) |
-                                 pdev->devfn);
-     if ( ret )
-diff --git a/xen/arch/x86/physdev.c b/xen/arch/x86/physdev.c
-index 4dfa1c0191..ce1ba41fa3 100644
---- a/xen/arch/x86/physdev.c
-+++ b/xen/arch/x86/physdev.c
-@@ -358,7 +358,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         ret = -EFAULT;
-         if ( copy_from_guest(&apic, arg, 1) != 0 )
-             break;
--        ret = xsm_apic(XSM_PRIV, currd, cmd);
-+        ret = xsm_apic(XSM_HW_PRIV, currd, cmd);
-         if ( ret )
-             break;
-         ret = ioapic_guest_read(apic.apic_physbase, apic.reg, &apic.value);
-@@ -372,7 +372,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         ret = -EFAULT;
-         if ( copy_from_guest(&apic, arg, 1) != 0 )
-             break;
--        ret = xsm_apic(XSM_PRIV, currd, cmd);
-+        ret = xsm_apic(XSM_HW_PRIV, currd, cmd);
-         if ( ret )
-             break;
-         ret = ioapic_guest_write(apic.apic_physbase, apic.reg, apic.value);
-@@ -388,7 +388,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- 
-         /* Use the APIC check since this dummy hypercall should still only
-          * be called by the domain with access to program the ioapic */
--        ret = xsm_apic(XSM_PRIV, currd, cmd);
-+        ret = xsm_apic(XSM_HW_PRIV, currd, cmd);
-         if ( ret )
-             break;
- 
-@@ -490,7 +490,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         if ( copy_from_guest(&dev, arg, 1) )
-             ret = -EFAULT;
-         else
--            ret = xsm_resource_setup_pci(XSM_PRIV,
-+            ret = xsm_resource_setup_pci(XSM_HW_PRIV,
-                                          (dev.seg << 16) | (dev.bus << 8) |
-                                          dev.devfn) ?:
-                   pci_prepare_msix(dev.seg, dev.bus, dev.devfn,
-@@ -501,7 +501,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     case PHYSDEVOP_pci_mmcfg_reserved: {
-         struct physdev_pci_mmcfg_reserved info;
- 
--        ret = xsm_resource_setup_misc(XSM_PRIV);
-+        ret = xsm_resource_setup_misc(XSM_HW_PRIV);
-         if ( ret )
-             break;
- 
-@@ -567,7 +567,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         if ( setup_gsi.gsi < 0 || setup_gsi.gsi >= nr_irqs_gsi )
-             break;
- 
--        ret = xsm_resource_setup_gsi(XSM_PRIV, setup_gsi.gsi);
-+        ret = xsm_resource_setup_gsi(XSM_HW_PRIV, setup_gsi.gsi);
-         if ( ret )
-             break;
- 
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 90abd3197f..8efb4ad05f 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -228,7 +228,7 @@ ret_t do_platform_op(
-     if ( op->interface_version != XENPF_INTERFACE_VERSION )
-         return -EACCES;
- 
--    ret = xsm_platform_op(XSM_PRIV, op->cmd);
-+    ret = xsm_platform_op(XSM_HW_PRIV, op->cmd);
-     if ( ret )
-         return ret;
- 
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 3edcfa8a04..9de7f0d358 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -672,7 +672,7 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-     else
-         type = "device";
- 
--    ret = xsm_resource_plug_pci(XSM_PRIV, (seg << 16) | (bus << 8) | devfn);
-+    ret = xsm_resource_plug_pci(XSM_HW_PRIV, (seg << 16) | (bus << 8) | devfn);
-     if ( ret )
-         return ret;
- 
-@@ -824,7 +824,8 @@ int pci_remove_device(u16 seg, u8 bus, u8 devfn)
-     struct pci_dev *pdev;
-     int ret;
- 
--    ret = xsm_resource_unplug_pci(XSM_PRIV, (seg << 16) | (bus << 8) | devfn);
-+    ret = xsm_resource_unplug_pci(XSM_HW_PRIV,
-+                                  (seg << 16) | (bus << 8) | devfn);
-     if ( ret )
-         return ret;
- 
-diff --git a/xen/drivers/pci/physdev.c b/xen/drivers/pci/physdev.c
-index 0161a85e1e..c223611dfb 100644
---- a/xen/drivers/pci/physdev.c
-+++ b/xen/drivers/pci/physdev.c
-@@ -86,7 +86,7 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-                         dev_reset.dev.bus,
-                         dev_reset.dev.devfn);
- 
--        ret = xsm_resource_setup_pci(XSM_PRIV, sbdf.sbdf);
-+        ret = xsm_resource_setup_pci(XSM_HW_PRIV, sbdf.sbdf);
-         if ( ret )
-             break;
- 
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index 9227205fcd..2b0ed25cc5 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -98,6 +98,10 @@ static always_inline int xsm_default_action(
-         if ( is_control_domain(src) )
-             return 0;
-         return -EPERM;
-+    case XSM_HW_PRIV:
-+        if ( is_hardware_domain(src) )
-+            return 0;
-+        return -EPERM;
-     default:
-         LINKER_BUG_ON(1);
-         return -EPERM;
-@@ -275,7 +279,7 @@ static XSM_INLINE int cf_check xsm_console_io(
-     if ( cmd == CONSOLEIO_write )
-         return xsm_default_action(XSM_HOOK, d, NULL);
- #endif
--    return xsm_default_action(XSM_PRIV, d, NULL);
-+    return xsm_default_action(XSM_HW_PRIV, d, NULL);
- }
- 
- static XSM_INLINE int cf_check xsm_profile(
-@@ -455,33 +459,33 @@ static XSM_INLINE int cf_check xsm_resource_unplug_core(XSM_DEFAULT_VOID)
- static XSM_INLINE int cf_check xsm_resource_plug_pci(
-     XSM_DEFAULT_ARG uint32_t machine_bdf)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
- static XSM_INLINE int cf_check xsm_resource_unplug_pci(
-     XSM_DEFAULT_ARG uint32_t machine_bdf)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
- static XSM_INLINE int cf_check xsm_resource_setup_pci(
-     XSM_DEFAULT_ARG uint32_t machine_bdf)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
- static XSM_INLINE int cf_check xsm_resource_setup_gsi(XSM_DEFAULT_ARG int gsi)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
- static XSM_INLINE int cf_check xsm_resource_setup_misc(XSM_DEFAULT_VOID)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
-@@ -673,7 +677,7 @@ static XSM_INLINE int cf_check xsm_mem_sharing(XSM_DEFAULT_ARG struct domain *d)
- 
- static XSM_INLINE int cf_check xsm_platform_op(XSM_DEFAULT_ARG uint32_t op)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, current->domain, NULL);
- }
- 
-@@ -701,7 +705,7 @@ static XSM_INLINE int cf_check xsm_mem_sharing_op(
- static XSM_INLINE int cf_check xsm_apic(
-     XSM_DEFAULT_ARG struct domain *d, int cmd)
- {
--    XSM_ASSERT_ACTION(XSM_PRIV);
-+    XSM_ASSERT_ACTION(XSM_HW_PRIV);
-     return xsm_default_action(action, d, NULL);
- }
- 
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 24acc16125..264db4d8ee 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -36,6 +36,7 @@ enum xsm_default {
-     XSM_DM_PRIV,  /* Device model can perform on its target domain */
-     XSM_TARGET,   /* Can perform on self or your target domain */
-     XSM_PRIV,     /* Privileged - normally restricted to dom0 */
-+    XSM_HW_PRIV,  /* Hardware Privileged - normally restricted to dom0/hwdom */
-     XSM_XS_PRIV,  /* Xenstore domain - can do some privileged operations */
-     XSM_OTHER     /* Something more complex */
+diff --git a/xen/include/public/io/xs_wire.h b/xen/include/public/io/xs_wire.h
+index e92a87a07b..f2c0afd107 100644
+--- a/xen/include/public/io/xs_wire.h
++++ b/xen/include/public/io/xs_wire.h
+@@ -110,6 +110,7 @@ struct xenstore_domain_interface {
+     uint32_t server_features; /* Bitmap of features supported by the server */
+     uint32_t connection;
+     uint32_t error;
++    uint32_t evtchn_port;
  };
+ 
+ /* Violating this is very bad.  See docs/misc/xenstore.txt. */
+@@ -134,6 +135,12 @@ struct xenstore_domain_interface {
+ #define XENSTORE_ERROR_RINGIDX 2 /* Invalid ring index */
+ #define XENSTORE_ERROR_PROTO   3 /* Protocol violation (payload too long) */
+ 
++/*
++ * The evtchn_port field is the domU's event channel for xenstored to signal.
++ * It is filled in by Xen for dom0less/Hyperlaunch domains.  It is only used
++ * when non-zero.  Otherwise the event channel from XS_INTRODUCE is used.
++ */
++
+ #endif /* _XS_WIRE_H */
+ 
+ /*
 -- 
 2.50.0
 
