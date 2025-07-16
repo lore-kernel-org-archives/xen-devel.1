@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7371C83F22
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 21:22:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045784.1416057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2B2C83F1B
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 21:22:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1045786.1416064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc9aG-00011d-BD; Wed, 16 Jul 2025 21:22:36 +0000
+	id 1uc9aH-00018V-0N; Wed, 16 Jul 2025 21:22:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045784.1416057; Wed, 16 Jul 2025 21:22:36 +0000
+Received: by outflank-mailman (output) from mailman id 1045786.1416064; Wed, 16 Jul 2025 21:22:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc9aF-0000zC-Lj; Wed, 16 Jul 2025 21:22:35 +0000
-Received: by outflank-mailman (input) for mailman id 1045784;
- Wed, 16 Jul 2025 21:22:33 +0000
+	id 1uc9aG-00014q-3r; Wed, 16 Jul 2025 21:22:36 +0000
+Received: by outflank-mailman (input) for mailman id 1045786;
+ Wed, 16 Jul 2025 21:22:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XbuO=Z5=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1uc9aC-0007F2-VA
+ id 1uc9aD-0007F2-VB
  for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 21:22:33 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20620.outbound.protection.outlook.com
- [2a01:111:f403:2009::620])
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2060a.outbound.protection.outlook.com
+ [2a01:111:f403:2417::60a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fa399488-628a-11f0-b894-0df219b8e170;
+ id fa61cd11-628a-11f0-b894-0df219b8e170;
  Wed, 16 Jul 2025 23:22:30 +0200 (CEST)
-Received: from CH2PR10CA0008.namprd10.prod.outlook.com (2603:10b6:610:4c::18)
- by IA1PR12MB6387.namprd12.prod.outlook.com (2603:10b6:208:389::7)
+Received: from BL1PR13CA0306.namprd13.prod.outlook.com (2603:10b6:208:2c1::11)
+ by MN0PR12MB6079.namprd12.prod.outlook.com (2603:10b6:208:3c9::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.33; Wed, 16 Jul
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.36; Wed, 16 Jul
  2025 21:22:25 +0000
-Received: from DS3PEPF000099D9.namprd04.prod.outlook.com
- (2603:10b6:610:4c:cafe::ca) by CH2PR10CA0008.outlook.office365.com
- (2603:10b6:610:4c::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.20 via Frontend Transport; Wed,
- 16 Jul 2025 21:22:24 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D9.mail.protection.outlook.com (10.167.17.10) with Microsoft
+Received: from MN1PEPF0000F0E5.namprd04.prod.outlook.com
+ (2603:10b6:208:2c1:cafe::3e) by BL1PR13CA0306.outlook.office365.com
+ (2603:10b6:208:2c1::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.12 via Frontend Transport; Wed,
+ 16 Jul 2025 21:22:25 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MN1PEPF0000F0E5.mail.protection.outlook.com (10.167.242.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8943.21 via Frontend Transport; Wed, 16 Jul 2025 21:22:24 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8943.21 via Frontend Transport; Wed, 16 Jul 2025 21:22:25 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 16 Jul
- 2025 16:22:20 -0500
+ 2025 16:22:22 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Wed, 16 Jul 2025 16:22:19 -0500
+ Transport; Wed, 16 Jul 2025 16:22:22 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,251 +61,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa399488-628a-11f0-b894-0df219b8e170
+X-Inumbo-ID: fa61cd11-628a-11f0-b894-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D+gIJMegVvA3LdlItvvNHPiaiI7f8ClRXtZr5AFVRfnf7Ibz8/OaYGmD7J6L4a0GH27/sPhOa6Uj9qE90fHMmtB5RIziB9sQ0MWlwwSs4tswNWXa8xvaP79bk65lC+xkppKixXphCHXsErs/OjNr0DejwsDwJiJoTL+wuZsBPP0F/8C2TrJ9sElGOKIuKHhqcchzk9KLx4TcOY6UUrdMnhdlcDQLV/ioeVY9HztstaM9NtAw8GmQteHqX3DlSDekMFulGZOgi+5haVJpagIKjeEv5saebYgh17ZWTVv9X3uCZFi++dieGFLqokQy5Bu5MY0HhzA7Pn+XoP+cW8PpKQ==
+ b=WOBLu/ZUfnszltdA6l9fKOGUXV6Pwh9defYDPyfo58Wjy1ifZJ6JN/4LRCjECOTgq2PLW4pgUYgOtMHWI+bVheR1kcvFP3YrBRV61f9tdSiFt/Le8ge+nDvsMj4aLfHUYaLLOadwx453FZOkD8CIfPHv/L1qX6CgvKsP70VFRAk01guCzNtMf84zY+cqENlQJaDdGtpKIvxiB5P2isRnWaRF5H2ge8BD1U3Myx2UR/7OVJB9cXM0Ia6/em/z0FwzKNtypJYvZfnCmhPy6rZdh6gz0QPIVcRkqi/9fTmPJZYowQelRixBa+o80fl/0sOdu4B2kzHWIfpw3L7o5uC01w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QsiFTii6WnW1lgN0+xgzujQyv5+/+TSNTj97FMWM9SQ=;
- b=DiBMSgDzJ+9Ed35SR2eUx+9qxvApPVAXEv9qiT+da2iTfbLnEggPF7eh9PG47F9QbwS400zgdZ/kXxHICVSPxhAPfx9tUFiLPqgEBxmQVa1dJqmGLE+waSsUpHpy2Kdd/ReYVkpy8S58+R0F/ui7Kp0Lah/kd4+itxh9D0p2UnDNhaoPdMMxYxXL7ZpOuoq1odUYnMghMtykvU8YyapIgacDWhEmVxExFrlGD3rfBvgkg+x7Apcyj+j8WqNBgHvNjDB/L3RyHpWZdhOM3zf23qkZ5muPQqVqb6tdLyCIMNeyjxhwsGcw/BiQ0TQAWT0W/o6kQeZmVgIhc7kOikBIxg==
+ bh=jKTqt/XXb9MSRAqj6LYolQnFov3cpGRvILaAGq8Cm1E=;
+ b=AlL0x/LZurgHbvWXPj1QWfktWyeJhRPA9wVFbuTJAJ/PZIQRh9QXrQJonUeMG419hwUyj9B7u00obvYkjfzIKUEB5natFx4qAm9ePAS9NjQQWrbSesqwoGe6w5txgPAibBHzwymumKegPwHAkYUhkkv0ot7NgQZwxdR6iYceNuMdjy2LEqtUPTRGpo5AKWQZP49JeG+9IV60E6C4vJoMxVTi14JtNXloyn0MS0DCOcvhH0tJOHzqDQ0nh5rAccOJNWpdNUzajqcyJJL4nq8hnLma6bSplVQnjWtFjVP4uX0ftiFUR/pbtrldU+xTgP6pDOAtJgMNVxrlqWiyIkkzng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QsiFTii6WnW1lgN0+xgzujQyv5+/+TSNTj97FMWM9SQ=;
- b=cF9OH+uQz3hLLLT6QqhzTEJkuYs4fXaC/rK9lQyhe8XA6sS/vYRfgXSzwnbWKc8k9kreiKOBDeVrB2CwvTolXgLwBxtFJBzykEXzanzDeOr+JlCz5E6Zl4DrdjCKo7ptmm4aFUvdkFAI7tEZqozYkJPaKsnOw8nA6TOR6w/Zseg=
+ bh=jKTqt/XXb9MSRAqj6LYolQnFov3cpGRvILaAGq8Cm1E=;
+ b=2VH9HUvJ7I/BBNYTtFsCROijXLGNH58BpFzfTVPt0DXUanLqJlMdawC8vscIYqLwJR82lbd+LbwB+GgZ6tHRQlxIIYkvSytM2cglsmoLnzFdcDxv7qYGW25HwT7t4/IrkzEinnZEuo8iH3nT6eUP6+f7xoEB4yzBpBiY0fRJ4sM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, Julien Grall
-	<julien@xen.org>
-Subject: [PATCH v2 12/17] tools/manage: Expose domain capabilities
-Date: Wed, 16 Jul 2025 17:14:59 -0400
-Message-ID: <20250716211504.291104-13-jason.andryuk@amd.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>, Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 14/17] tools/xenstored: Auto-introduce domains
+Date: Wed, 16 Jul 2025 17:15:01 -0400
+Message-ID: <20250716211504.291104-15-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250716211504.291104-1-jason.andryuk@amd.com>
 References: <20250716211504.291104-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
+Received-SPF: None (SATLEXMB03.amd.com: jason.andryuk@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D9:EE_|IA1PR12MB6387:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12e723c3-e236-434e-9065-08ddc4aedbb4
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E5:EE_|MN0PR12MB6079:EE_
+X-MS-Office365-Filtering-Correlation-Id: 33c96407-6c0a-4c4e-92ce-08ddc4aedc7b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?beghXXzOKb6qwRzonIWbcqZwKSeBKKe7taDlK1hVPkS2z7Jd7sevjuLGIzys?=
- =?us-ascii?Q?GeFAQtilHteMn1wp6wrSzzGp21iRTcN0T9xzsOgXKxEO9qfRVq5gQyzoSU+0?=
- =?us-ascii?Q?0LCReHZ80hxLAphOkUD+SnkMWmTpXy/gzbHNHSHFLuS/SMTDl0Gge5eU3o0O?=
- =?us-ascii?Q?gJehwa8XUj4/WtU+SCcrkxN1v9Nq4CV87RWCHrarfKMFRGyN4O6RMQ4tJDlY?=
- =?us-ascii?Q?aJKsoQSajKcSXyZY3RU5PFhOjnNRVbUgE4x+U0oKHNxn1A+ipFYjLTs8PjY6?=
- =?us-ascii?Q?Q2X00wU8yUAyp8388VcfWY6gzle2SpCMnxUoI2aN0TqOeGfwfJdPkMESnLwM?=
- =?us-ascii?Q?iKenugoFlZp0BJIxm4HIKdkUVXIunaC0ch1Bl1DMMN48ede2nblu1poa0Q8J?=
- =?us-ascii?Q?Ef9t7XZmqHnsGU+FulnT/KZ1iKknPWUI/e3esVafyglObXnn8WU62lfkR0a1?=
- =?us-ascii?Q?AFFLZVvyMYUka5WCASds/49OEsAnWLsu1rMtzOUtvqM2Re+ctSCrfy+p+rer?=
- =?us-ascii?Q?37d64LP9SE3Qh/J0OV1zwMAY7qLpsChLwiAQ/fwhXP9sQCcliC1q2pkUWsWU?=
- =?us-ascii?Q?WWUoaxk5KO/dIHj1lQGb6SpkKWJ5aOlEnUnn7vDGeheaJQiYykG8uZU10NJi?=
- =?us-ascii?Q?Y1REOmHQ8N/zhAPPhOeli6HtlSn4AedL+gN3B/d7mXP0CyDjr498ejCs7t6m?=
- =?us-ascii?Q?hya0Mz0CBz38FL0eL7d/r6iS4LEEWrMNPJxwudzc6NebmcCljFQ6ux17k4+p?=
- =?us-ascii?Q?lLriRUFtH7adHBGcvVTwnCffnUUEsglZiInjXuKINDPhxZZPccBjh8EnvdYU?=
- =?us-ascii?Q?W7s6pmQS7wWixhjWsg4UozfJXeJYfdOU3PrQRSzDmFOBeYTKF3s0auEFQcEp?=
- =?us-ascii?Q?cqUO7IAf2SEM4C74KYAO8Hcj3P+bQeSXhwWrPxlcpuAuH2UQAVViujoh/CNC?=
- =?us-ascii?Q?XxbYfd7Z42pBvMo1bEDjEfNZheILGZVqKNJOh0KfCEkPArbPAPcopythVonP?=
- =?us-ascii?Q?M2KyOsWnDrs6nozr0FOwMTDf9fAKIznqseJoJerfP6mZijKjwEWoIxldGeW0?=
- =?us-ascii?Q?Ysc3KX15z5LpJFmGCcTmzQkUQjeFgYsn5N5DhJXYVp+VeRFI+Saclfb0e7pu?=
- =?us-ascii?Q?uuu4dHiFsfCA6w6aWijZT0FTekeUCUogn+yC47gAFI8JN68O1gx518jqHplz?=
- =?us-ascii?Q?6EJvKrkUDTVJq2IbCxPP4wdbtXhXXQpwwUFvGZXMYdXIU2PRbYDKQHJjZCmI?=
- =?us-ascii?Q?g8JqE5CCX1gE0Uk/dqvhDLrkH8t0T/DIcbDHRETyFYi5kQLcEv7ehoDoydX5?=
- =?us-ascii?Q?kZMriGZphrpjLs5DmQEc9CiXVlShQFPsT+GzUeSJFyfAckcU1yB+u7zfsOG/?=
- =?us-ascii?Q?UKLi8/fvK+f/93VfjciNfL6vQ65zvgVvuk+gMv7gb2HM71SlLzW5w4qFhv1Q?=
- =?us-ascii?Q?czv7ll8syMIdSLJawLM4X68V2q6FDAB1e+KxxctHlabtlJhou+NVXm7Je/T6?=
- =?us-ascii?Q?pT4O1R/njqK2fgY3hbKqIwn25OQSWw3EOHlS?=
+	=?us-ascii?Q?JfF6xpsCt83X4+nI66lj6LDBpm619yQIHgJRN3QFJF5Bp5jEG3KHJjFh0Poi?=
+ =?us-ascii?Q?q46DhRJsB3/OE8h9jpun9F3ZD3Onq3QvrSQhVMZ7FIvFlocG6z70Av9+d+jA?=
+ =?us-ascii?Q?tz+60TV2ThpgvQ92tDPON6o+C35TfW0gpGXuMzABT/x1ke7XxYi0NRYshYOj?=
+ =?us-ascii?Q?1C+h0YaJC4cJePtUpTE7nWLXrTcz3xQx1qKydVB7KP2r0gSE2ACvejYTTZtT?=
+ =?us-ascii?Q?nu+l7BmsSNWDMAIPbAZQDWXI7AbiHriI2xdF2VQcTbQefGzYPYY69kjOlPrb?=
+ =?us-ascii?Q?bknZJuhyxxuOcyph6PXEGi8/Vsevar2Ausc/JwwSn120rLXKqhzVbUQ67PrG?=
+ =?us-ascii?Q?vorgJrPJmSIgEalkSPA12v6LOnaLRTgtM82AHq1dZsQYTM4zx7Jq81POtjBo?=
+ =?us-ascii?Q?Y9Fezz41an/NWplWYKGkfbGoVB39oI7qZjusVJC1ljGqFuqn7CnFreW8OZKd?=
+ =?us-ascii?Q?y8gcrI8MBx7FZIlpn43BiVQyFfHk8iAQPFwkXRRZ9F4p1X8ljoYbSLDLLOLv?=
+ =?us-ascii?Q?WWWWETj8WJWHP7qJgJmzPpVRKaq2tIYKXkNPNUe1sghiwpJvhDCkR9p2leFu?=
+ =?us-ascii?Q?yPQbe6arb+7j/NmcEE/W6o2GKxErlGOMvW4t7fpO39wbNVqV7mUyek3HWr5K?=
+ =?us-ascii?Q?9ArtTOCFxF1OrQPt/0RbVri2mponj1isIzNszf5P2druQsoIUNGOjfwu1Ade?=
+ =?us-ascii?Q?9SOugkcsI4T/S9At4jusOXtjd6RsqjbiRRBdgxStBLUBs1kY0NT+f9mQnINr?=
+ =?us-ascii?Q?7sj33bJ2j5ondYPgiycxKOtH5wi/1l7l7aiQEOfLyt0wFx3BoHxKdTXxnJ9c?=
+ =?us-ascii?Q?JFWxJ/AmUM1GyRWjj1UQJdi76+bEWs/oUnZ7g0kasN2p5ejJDNgZk0hHm/+r?=
+ =?us-ascii?Q?hF+HPgicEt6q95rlZqTzVI7WTHdEKWg+pAY/kMSoganTpyxuIfXf6G3NXTKX?=
+ =?us-ascii?Q?vFlDQcCSEDw+FP8ZPRogtfT8SnIWv/KWFIJtxZqd5TxkGiO1PMIdyniLKKEw?=
+ =?us-ascii?Q?NK1Ix8VvqGkN5wBR1eoO+9YRYDMk+vlk+1uV3hUjNK2ey/xgM/MFUxdsBi02?=
+ =?us-ascii?Q?/2S70MZoI+g3neFZXt9ZbYhICLyJW2D47Z/w8sj+ShrjJ0Jq1HMWFI/623/n?=
+ =?us-ascii?Q?vW4bAcVeTjs3vAFZ53vMUqyNDdjvVyR4gY+T34zW1A52xDxHxd6xE1GwPrK0?=
+ =?us-ascii?Q?r0pUUYyNrerXXtR6Y1dMn0824a8aDx7G4xhTgt3f6WlTyrSNnaitxCv0TOgy?=
+ =?us-ascii?Q?VNQlZsMz4O8i253654N3XvELuoMKx2McLl7L3FyzM75mV+dt3ujWHarOJDBK?=
+ =?us-ascii?Q?j3ovhCC/qUUyCbwvsfO1TtoIkhcCJny0jvkhRtxfM3Ng7xjJ8KnWRtQ4IIYa?=
+ =?us-ascii?Q?pwIOQkpXvpkALKUY7oHGe4TABEF7vPzdx8DupxAfGdRNvX+BiCDWkAcbG4eP?=
+ =?us-ascii?Q?1hYNms/E+J4aJGzR21KuVJ3+xYK8l7KMMUdQlOcj84pLqm32bN1YkDzDysss?=
+ =?us-ascii?Q?L6G+8g552RmCdvdfgszonuhXDLnzDzny2Ll9?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 21:22:24.5086
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 21:22:25.8383
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12e723c3-e236-434e-9065-08ddc4aedbb4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33c96407-6c0a-4c4e-92ce-08ddc4aedc7b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF000099D9.namprd04.prod.outlook.com
+	MN1PEPF0000F0E5.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6387
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6079
 
-Add an additional "caps" argument to the libxenmanage functions to
-obtain a domains capabilities - control, hardware, and xenstore.
+Replace dom0_init() with init_domains() which uses libxenmanage to
+iterate through all existing domains and introduce them.
 
-Update the xenstored callers at the same time.
+dom0_domid is updated with the xenstore domain, since it really
+indicates the local domain.
+
+priv_domid is set to the control domain.  This makes it limited to a
+single domain.
+
+These features let xenstore automatically connect any existing domains,
+which means it doesn't need to be done manually from init-dom0less.
+
+For a legacy dom0, the result should be unchanged.
+
+For a late xenstore stubdom it should also be the same, but priv_domid
+would be set automatically to control domain (which default to 0
+normally).
+
+Always signal the event channel for initial domains.  This gets dom0 (a
+local xenstored domain) to connect.
+
+Also always write XENSTORE_CONNECTED since we know we are connected at
+this point.
 
 Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
- tools/include/xenmanage.h | 14 ++++++++++++--
- tools/libs/manage/core.c  | 21 +++++++++++++++++----
- tools/xenstored/domain.c  |  8 ++++----
- 3 files changed, 33 insertions(+), 10 deletions(-)
+ tools/xenstored/core.c   |  2 +-
+ tools/xenstored/domain.c | 45 +++++++++++++++++++++++++++++++---------
+ tools/xenstored/domain.h |  2 +-
+ 3 files changed, 37 insertions(+), 12 deletions(-)
 
-diff --git a/tools/include/xenmanage.h b/tools/include/xenmanage.h
-index 956b7a0a44..6fc0d9fe24 100644
---- a/tools/include/xenmanage.h
-+++ b/tools/include/xenmanage.h
-@@ -45,6 +45,12 @@ int xenmanage_close(xenmanage_handle *hdl);
- #define XENMANAGE_GETDOMSTATE_STATE_DYING     0x0004  /* Domain dying. */
- #define XENMANAGE_GETDOMSTATE_STATE_DEAD      0x0008  /* Domain dead. */
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 550e879a00..835402af81 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -2762,7 +2762,7 @@ int main(int argc, char *argv[])
+ 	/* Listen to hypervisor. */
+ 	if (!live_update) {
+ 		domain_init(-1);
+-		dom0_init();
++		init_domains();
+ 	}
  
-+/* Control Domain capability. */
-+#define XENMANAGE_GETDOMSTATE_CAP_CONTROL     0x0001
-+/* Hardware Domain capability. */
-+#define XENMANAGE_GETDOMSTATE_CAP_HARDWARE    0x0002
-+/* Xenstore Domain capability. */
-+#define XENMANAGE_GETDOMSTATE_CAP_XENSTORE    0x0004
- /*
-  * Return state information of an existing domain.
-  *
-@@ -59,7 +65,8 @@ int xenmanage_close(xenmanage_handle *hdl);
-  * Return value: 0 if information was stored, -1 else (errno is set)
-  */
- int xenmanage_get_domain_info(xenmanage_handle *hdl, unsigned int domid,
--                              unsigned int *state, uint64_t *unique_id);
-+                              unsigned int *state, unsigned int *caps,
-+                              uint64_t *unique_id);
- 
- /*
-  * Return information of a domain having changed state recently.
-@@ -73,12 +80,15 @@ int xenmanage_get_domain_info(xenmanage_handle *hdl, unsigned int domid,
-  *   domid:     where to store the domid of the domain (not NULL)
-  *   state:     where to store the state (XENMANAGE_GETDOMSTATE_STATE_ flags,
-  *              nothing stored if NULL)
-+ *   caps:      where to store the capabilities (XENMANAGE_GETDOMSTATE_CAP_
-+ *              flags, nothing stored if NULL)
-  *   unique_id: where to store the unique id of the domain (nothing stored if
-  *              NULL)
-  * Return value: 0 if information was stored, -1 else (errno is set)
-  */
- int xenmanage_poll_changed_domain(xenmanage_handle *hdl, unsigned int *domid,
--                                  unsigned int *state, uint64_t *unique_id);
-+                                  unsigned int *state, unsigned int *caps,
-+                                  uint64_t *unique_id);
- #endif /* XENMANAGE_H */
- 
- /*
-diff --git a/tools/libs/manage/core.c b/tools/libs/manage/core.c
-index 8fb421df41..2fabdecaab 100644
---- a/tools/libs/manage/core.c
-+++ b/tools/libs/manage/core.c
-@@ -92,6 +92,7 @@ static int xenmanage_do_domctl_get_domain_state(xenmanage_handle *hdl,
-                                                 unsigned int domid_in,
-                                                 unsigned int *domid_out,
-                                                 unsigned int *state,
-+                                                unsigned int *caps,
-                                                 uint64_t *unique_id)
- {
-     struct xen_domctl *buf;
-@@ -130,6 +131,16 @@ static int xenmanage_do_domctl_get_domain_state(xenmanage_handle *hdl,
-             if ( st->state & XEN_DOMCTL_GETDOMSTATE_STATE_DEAD )
-                 *state |= XENMANAGE_GETDOMSTATE_STATE_DEAD;
-         }
-+        if ( caps )
-+        {
-+            *caps = 0;
-+            if ( st->caps & XEN_DOMCTL_GETDOMSTATE_CAP_CONTROL )
-+                *caps |= XENMANAGE_GETDOMSTATE_CAP_CONTROL;
-+            if ( st->caps & XEN_DOMCTL_GETDOMSTATE_CAP_HARDWARE )
-+                *caps |= XENMANAGE_GETDOMSTATE_CAP_HARDWARE;
-+            if ( st->caps & XEN_DOMCTL_GETDOMSTATE_CAP_XENSTORE )
-+                *caps |= XENMANAGE_GETDOMSTATE_CAP_XENSTORE;
-+        }
-         if ( unique_id )
-             *unique_id = st->unique_id;
-     }
-@@ -142,7 +153,8 @@ static int xenmanage_do_domctl_get_domain_state(xenmanage_handle *hdl,
- }
- 
- int xenmanage_get_domain_info(xenmanage_handle *hdl, unsigned int domid,
--                              unsigned int *state, uint64_t *unique_id)
-+                              unsigned int *state, unsigned int *caps,
-+                              uint64_t *unique_id)
- {
-     if ( !hdl || domid >= DOMID_FIRST_RESERVED )
-     {
-@@ -150,12 +162,13 @@ int xenmanage_get_domain_info(xenmanage_handle *hdl, unsigned int domid,
-         return -1;
-     }
- 
--    return xenmanage_do_domctl_get_domain_state(hdl, domid, NULL, state,
-+    return xenmanage_do_domctl_get_domain_state(hdl, domid, NULL, state, caps,
-                                                 unique_id);
- }
- 
- int xenmanage_poll_changed_domain(xenmanage_handle *hdl, unsigned int *domid,
--                                  unsigned int *state, uint64_t *unique_id)
-+                                  unsigned int *state, unsigned int *caps,
-+                                  uint64_t *unique_id)
- {
-     if ( !hdl || !domid )
-     {
-@@ -164,5 +177,5 @@ int xenmanage_poll_changed_domain(xenmanage_handle *hdl, unsigned int *domid,
-     }
- 
-     return xenmanage_do_domctl_get_domain_state(hdl, DOMID_INVALID, domid,
--                                                state, unique_id);
-+                                                state, caps, unique_id);
- }
+ 	/* redirect to /dev/null now we're ready to accept connections */
 diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 94b2a1eaa7..d2b6fffa62 100644
+index 5443b4e608..44e997cee4 100644
 --- a/tools/xenstored/domain.c
 +++ b/tools/xenstored/domain.c
-@@ -667,7 +667,7 @@ static int check_domain(const void *k, void *v, void *arg)
- 	unsigned int state;
- 	uint64_t unique_id;
+@@ -1257,20 +1257,45 @@ const char *get_implicit_path(const struct connection *conn)
+ 	return conn->domain->path;
+ }
  
--	if (xenmanage_get_domain_info(xm_handle, domain->domid, &state,
-+	if (xenmanage_get_domain_info(xm_handle, domain->domid, &state, NULL,
- 				      &unique_id)) {
- 		unique_id = 0;
- 		state = 0;
-@@ -700,7 +700,7 @@ static void do_check_domains(void)
- 	struct domain *domain;
- 	bool notify = false;
+-void dom0_init(void)
++void init_domains(void)
+ {
+-	evtchn_port_t port;
+-	struct domain *dom0;
++	unsigned int domid;
++	unsigned int state;
++	unsigned int caps;
++	uint64_t unique_id;
++
++	while (!xenmanage_poll_changed_domain(xm_handle, &domid, &state, &caps,
++					      &unique_id)) {
++		evtchn_port_t port = 0;
++		struct domain *domain;
++
++		if (caps & XENMANAGE_GETDOMSTATE_CAP_XENSTORE)
++			dom0_domid = domid;
++
++		if (caps & XENMANAGE_GETDOMSTATE_CAP_CONTROL)
++			priv_domid = domid;
  
--	while (!xenmanage_poll_changed_domain(xm_handle, &domid, &state,
-+	while (!xenmanage_poll_changed_domain(xm_handle, &domid, &state, NULL,
- 					      &unique_id)) {
- 		domain = find_domain_struct(domid);
- 		if (domain)
-@@ -829,7 +829,7 @@ static struct domain *find_or_alloc_existing_domain(unsigned int domid)
- 	domain = find_domain_struct(domid);
- 	if (!domain || !domain->unique_id)
- 		dom_valid = !xenmanage_get_domain_info(xm_handle, domid,
--						       NULL, &unique_id);
-+						       NULL, NULL, &unique_id);
+-	port = get_xenbus_evtchn();
+-	if (port == -1)
+-		barf_perror("Failed to initialize dom0 port");
++		if (domid == dom0_domid) {
++			port = get_xenbus_evtchn();
++			if (port == -1)
++				barf_perror("Failed to initialize dom%u port",
++					    domid);
++		}
++
++		domain = introduce_domain(NULL, domid, port, false);
++		if (!domain) {
++			xprintf("Could not initialize dom%u", domid);
++			continue;
++		}
  
- 	if (dom_valid) {
- 		if (!domain)
-@@ -1383,7 +1383,7 @@ int domain_alloc_permrefs(struct node_perms *perms)
- 		domid = perms->p[i].id;
- 		d = find_domain_struct(domid);
- 		if (!d) {
--			if (xenmanage_get_domain_info(xm_handle, domid,
-+			if (xenmanage_get_domain_info(xm_handle, domid, NULL,
- 						      NULL, &unique_id))
- 				perms->p[i].perms |= XS_PERM_IGNORE;
- 			else if (!alloc_domain(NULL, domid, unique_id))
+-	dom0 = introduce_domain(NULL, xenbus_master_domid(), port, false);
+-	if (!dom0)
+-		barf_perror("Failed to initialize dom0");
++		domain_conn_reset(domain);
+ 
+-	xenevtchn_notify(xce_handle, dom0->port);
++		if (domain->interface)
++			domain->interface->connection = XENSTORE_CONNECTED;
++
++		/* Notify the domain that xenstore is available */
++		xenevtchn_notify(xce_handle, domain->port);
++	}
+ }
+ 
+ void stubdom_init(void)
+diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
+index 844ac11510..6a78f06935 100644
+--- a/tools/xenstored/domain.h
++++ b/tools/xenstored/domain.h
+@@ -84,7 +84,7 @@ int do_reset_watches(const void *ctx, struct connection *conn,
+ 
+ void domain_early_init(void);
+ void domain_init(int evtfd);
+-void dom0_init(void);
++void init_domains(void);
+ void stubdom_init(void);
+ void domain_deinit(void);
+ void ignore_connection(struct connection *conn, unsigned int err);
 -- 
 2.50.0
 
