@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63E3C83F39
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25CD3C83F27
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 20:16:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045632.1415844 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1045627.1415791 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc8Xs-0005hb-A8; Wed, 16 Jul 2025 20:16:04 +0000
+	id 1uc8Xl-0004Md-SS; Wed, 16 Jul 2025 20:15:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045632.1415844; Wed, 16 Jul 2025 20:16:04 +0000
+Received: by outflank-mailman (output) from mailman id 1045627.1415791; Wed, 16 Jul 2025 20:15:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc8Xs-0005gW-1i; Wed, 16 Jul 2025 20:16:04 +0000
-Received: by outflank-mailman (input) for mailman id 1045632;
- Wed, 16 Jul 2025 20:16:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uc8Xl-0004Jd-NX; Wed, 16 Jul 2025 20:15:57 +0000
+Received: by outflank-mailman (input) for mailman id 1045627;
+ Wed, 16 Jul 2025 20:15:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2WS3=Z5=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1uc8Xq-0003uY-Nc
- for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 20:16:02 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b0cd02d2-6281-11f0-b894-0df219b8e170;
- Wed, 16 Jul 2025 22:16:00 +0200 (CEST)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3b60565d5f4so21603f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 13:16:00 -0700 (PDT)
+ id 1uc8Xk-0003uZ-IS
+ for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 20:15:56 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ae08f426-6281-11f0-a319-13f23c93f187;
+ Wed, 16 Jul 2025 22:15:56 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a4e57d018cso22315f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 13:15:56 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4562e7f2e8csm30504145e9.5.2025.07.16.13.15.58
+ 5b1f17b1804b1-4562e7f2e8csm30504145e9.5.2025.07.16.13.15.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jul 2025 13:15:59 -0700 (PDT)
+ Wed, 16 Jul 2025 13:15:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,54 +49,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0cd02d2-6281-11f0-b894-0df219b8e170
+X-Inumbo-ID: ae08f426-6281-11f0-a319-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752696960; x=1753301760; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1752696955; x=1753301755; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=m6MHrYUDy32kDYPpsu7hQKmN53Ci3Cb0G+3ghuqtWGg=;
-        b=BunTHacQkHNvbg79bt9ZNGzoViavlNH8o5zdgAgwEVPtVEC3GaM7Cs6YJAzBj/k3xg
-         vQWbyoitSDLzeHH53OhdItj9Cu9tH2Pv7H/adBxLQM0Thw03IeoSyS33RDwdwk+4J+FV
-         0jCpAzswBfkG5SEl4FZDiVduUBZov0fEm8xtFZornPktFoSrVG5z5KfYx38srV9e9Ukv
-         j+LdqfkPeMBTyNEQTesHjZEpN0+HzL7G/iYzkQ2zH5H5RmqGblyForQCcv5csAgqsBpg
-         3VsxM8kNMu4DGM6s4D2i1Giv9FTaaWIbI9Lk4JKBS1fp4nQ4b7PU2kyhjEzDLJAQIX+d
-         JCrA==
+        bh=OOOuvJZYZXWyW3TNAhVhGpb6GbfsoYMK9X46Miiu2ok=;
+        b=Tk4Y9bNmuBiUKX4XRhaPWKKDR0m6u6JON4totcjUEDoTthhM3YckfxXlYFeRCyXowl
+         NUrIbfF4pLiKg2OkN/OX8okDM7oBaLOQuWZJ3u+e9mSjDXOZcBGnJowvugHjOKFK9EaX
+         V53WlMWlCLtpzTdfge/LAVlKSDLa2PQhBJsF6ZflwaKrncw7ABdf5y2Sj682GQeQv19U
+         7GsLWqGruxMXO7kFT2L3iExl1VbNgTbZ1kGhss/v7PN9YCEalrrZ7m3HHP4gTVm4Ksod
+         NGOXtREpUnDB6HgPKR9y/gHveoKCsGcVRb7g58ywslsG4zBoNAPX0YvpV7NSbEAdn5PW
+         RC0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752696960; x=1753301760;
+        d=1e100.net; s=20230601; t=1752696955; x=1753301755;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=m6MHrYUDy32kDYPpsu7hQKmN53Ci3Cb0G+3ghuqtWGg=;
-        b=a2pXdoUvkCL3qBFPdGVpQpkQuNd/KH4PVeg/WiKw3Pmbpu6ymcflLDpMICkvVuij2u
-         vYh6fsQ/Ys6m4tggJsnESCSLM2X98xexDrnvXKCLRUEE4OXvgC+ilDN+XjAxnHnoeiAw
-         Jl9T8FsfYCf6q0gM8pml2MVHOKoifMgdZbquxxibLC3WNV34B1gY3q+chdidGk+3MMFz
-         LG27e59rlGCF0tyJpWohzwrlJFpW3ucgZ15GMx+AVzJFdQXzLwiGNjleYjENh68VsRaM
-         G19LdwP1GCEaxRnqIUfGZWnMXEWO0wjer4Z1KeA1cadA6W6HLaBz0e2vK+tN3QlNrKMy
-         2P0A==
-X-Gm-Message-State: AOJu0Ywq+IiipomjgCE+PW7FI4Gr1d85S5ZRaW0bKdJ7VhGwjJuMTHVn
-	QhSax+eGOrSg67Y2+SNsg2mZKZ4dpHAlGhqOPF+Lyt+nRHhcWYzBMwxwpcbkGA==
-X-Gm-Gg: ASbGnctQhDUvRgSEBK1jHQocyrpSAcQYPKAJ5o6SRyP7N7iJMFeKhm8SP7hlJ+hdGGp
-	RDuGPTQtnDFy5dCQ6/QiSB3PBhK/f1B/VVbhGECs4pVagBxEBKASxv4CjPjy2s8+0Yu07Lk49kK
-	MkWxESXLTJmzDpTZY2FgdBpGMwu9MN/a/cm7yYb7bm1PcX2E1wEUiOjU3YIfBJKQ26qlq3YM6zl
-	Uh1DyNwtKo6q19QbnSk91Ih4GyibE440nUCblLb+St7GmH5/1kcX+44YSV+yOCElnorEqF+W0I2
-	IuJd6tdkWxuRY/d0yMo2DIw/in5Pof3lmPl8JG0phejhMu7Sc6pNrTkOu+ZmAofynrQIaSFvd6v
-	EHaC9pnKWhj6leASvnQ8XDcc9isrxQUr2yNF9x2e9wq+LgaspnEpPuruGexG+cSI7xFOagYkW5n
-	mfDIO2moeiWwdllRk9Vx8ntQ==
-X-Google-Smtp-Source: AGHT+IF5xzxZHGT15VC4mX8p6TolF+9HdTpdorS1QFcvjZqWeXsUxfPZeGpsYfbmoDurhIJKjFtR9g==
-X-Received: by 2002:a05:600c:4f0c:b0:442:e608:12a6 with SMTP id 5b1f17b1804b1-4562dff98b5mr19594225e9.1.1752696959624;
-        Wed, 16 Jul 2025 13:15:59 -0700 (PDT)
+        bh=OOOuvJZYZXWyW3TNAhVhGpb6GbfsoYMK9X46Miiu2ok=;
+        b=d60ge1uKFuIsHD3MhNQF/ZH5iuT3hqhYW7LshRgQho9P503V2qPcXsVouwfmpKJAmz
+         HwZKhJclVlM3Ew+B6D3HbMv1xfOxfEszdlYe+9ZA2dj4wsGWW2XSfj+xQM4r8OH9iBfP
+         pRsaCAIHvJ/S4yP70ii236COU5av1OIKCyk/E1kNv6gNxF4BC8S+F+7wZdC9t/ggUYMi
+         45BrJ5yBkf1NeVZK9XGg4sRnD6fJfqEwlNzdb3j430Ph+3vBthpV0PlHuyIu44vH6B8D
+         u7I23aZb3aW4YZMVQkZqcM33MGZ5Eb+SzAkSLF53zs6kIIKEHc/jJIcXEKtuenC5kjJO
+         nQSg==
+X-Gm-Message-State: AOJu0YyOTHsWoGIgMs7A546RYYOn2AMa3WlSzf1cZsWhl5iVDf/O0Hvo
+	lxOHXTQWcH0fAWYp1hDgNghBvPLBrtAo0+WLf+qZ8vrTodvOHeMwmo1SmV+Vow==
+X-Gm-Gg: ASbGncsrsxGWtSmIX78TLdfZ0L9WMKfA30QaUy/83lp7cSwHU71Ex9ySEwM99LtOZJ3
+	7TDqM0Da+cv8tuli4QRZ+/+zUzlJD3nFQnW7xfgn0zepqFr1jje3COb1CcvZZwTg9LwHJ0Ae8lp
+	fBKuCavR5G2TUMhRoUvTsNeL7oVio/Z8OCT1R/vSM3r1SUUlrDmZ9pMv+BMSZyUt2D0NIP875/T
+	iGP4sszVLhvicLvrSVUp8LbSl5xFua/AcEIOOUj+UUSFSnK5aw75b9cAcWTAT7pNQbqbU26Ugzg
+	8rqA6ofRYX2iYnzPhKSggP/s2Qe/OeF9t5JDV3et6oPv0vo4y+fjfphsbBuH75m3OUQ/+6p0U+8
+	alHI0AgEt1VEwKzdd8kD1ZAQ7whTDcYRRimnLI3ZZcgjyhneMx1hEvYqDmMvZAbXvG3H4psVqa2
+	HSpoX0HZ63qvbVyLDi4xNqhg==
+X-Google-Smtp-Source: AGHT+IHe33aKatrvuakEauHcsqKPfkwsS7bKer6g4mjhfSUEZ/C0u+ncTGyA8RtCy14IPsBduuTpMg==
+X-Received: by 2002:a05:600c:4f0c:b0:442:e608:12a6 with SMTP id 5b1f17b1804b1-4562dff98b5mr19593435e9.1.1752696954808;
+        Wed, 16 Jul 2025 13:15:54 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Christian Lindig <christian.lindig@cloud.com>
-Subject: [PATCH v10 9/9] tools/ocaml: Add altp2m_count parameter
-Date: Wed, 16 Jul 2025 20:15:39 +0000
-Message-Id: <bf46cd21ce574fff03552941c5482d63e7fa197b.1752691429.git.w1benny@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v10 4/9] x86/altp2m: Remove p2m_altp2m_check stubs from unsupported architectures
+Date: Wed, 16 Jul 2025 20:15:34 +0000
+Message-Id: <3c46e6bd09b2481360fbdf812926d199c5416198.1752691429.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1752691429.git.w1benny@gmail.com>
 References: <cover.1752691429.git.w1benny@gmail.com>
@@ -106,88 +118,134 @@ Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-Allow developers using the OCaml bindings to set the altp2m_count parameter.
+The p2m_altp2m_check() stub was previously declared on all architectures,
+even though the altp2m feature is only supported on x86. This patch removes
+the unused stub definitions from ARM, PPC, and RISC-V, and wraps the actual
+usage sites in #ifdef CONFIG_ALTP2M instead.
+
+Additionally, the declaration and definition of p2m_altp2m_check() are now
+correctly nested under CONFIG_HVM, reflecting the fact that CONFIG_ALTP2M
+always implies CONFIG_HVM.
 
 Signed-off-by: Petr Beneš <w1benny@gmail.com>
-Acked-by: Christian Lindig <christian.lindig@cloud.com>
 ---
- tools/ocaml/libs/xc/xenctrl.ml      |  1 +
- tools/ocaml/libs/xc/xenctrl.mli     |  1 +
- tools/ocaml/libs/xc/xenctrl_stubs.c | 19 +++++++++++++++----
- 3 files changed, 17 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/p2m.h   | 6 ------
+ xen/arch/ppc/include/asm/p2m.h   | 5 -----
+ xen/arch/riscv/include/asm/p2m.h | 5 -----
+ xen/arch/x86/hvm/monitor.c       | 2 ++
+ xen/arch/x86/include/asm/p2m.h   | 9 ++++-----
+ xen/common/vm_event.c            | 2 ++
+ 6 files changed, 8 insertions(+), 21 deletions(-)
 
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 7e1aabad6c..97108b9d86 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -87,6 +87,7 @@ type domctl_create_config =
-     max_maptrack_frames: int;
-     max_grant_version: int;
-     altp2m_opts: int32;
-+    altp2m_count: int32;
-     vmtrace_buf_kb: int32;
-     cpupool_id: int32;
-     arch: arch_domainconfig;
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index f44dba61ae..9fccb2c2c2 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -79,6 +79,7 @@ type domctl_create_config = {
-   max_maptrack_frames: int;
-   max_grant_version: int;
-   altp2m_opts: int32;
-+  altp2m_count: int32;
-   vmtrace_buf_kb: int32;
-   cpupool_id: int32;
-   arch: arch_domainconfig;
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index b51fd66788..ac2a7537d6 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -205,13 +205,22 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
- #define VAL_MAX_MAPTRACK_FRAMES Field(config, 7)
- #define VAL_MAX_GRANT_VERSION   Field(config, 8)
- #define VAL_ALTP2M_OPTS         Field(config, 9)
--#define VAL_VMTRACE_BUF_KB      Field(config, 10)
--#define VAL_CPUPOOL_ID          Field(config, 11)
--#define VAL_ARCH                Field(config, 12)
-+#define VAL_ALTP2M_COUNT        Field(config, 10)
-+#define VAL_VMTRACE_BUF_KB      Field(config, 11)
-+#define VAL_CPUPOOL_ID          Field(config, 12)
-+#define VAL_ARCH                Field(config, 13)
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 2d53bf9b61..ef98bc5f4d 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -180,12 +180,6 @@ static inline bool arch_acquire_resource_check(struct domain *d)
+     return true;
+ }
  
- 	uint32_t domid = Int_val(wanted_domid);
-+	uint32_t altp2m_opts = Int32_val(VAL_ALTP2M_OPTS);
-+	uint32_t altp2m_nr = Int32_val(VAL_ALTP2M_COUNT);
- 	uint64_t vmtrace_size = Int32_val(VAL_VMTRACE_BUF_KB);
+-static inline
+-void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+-{
+-    /* Not supported on ARM. */
+-}
+-
+ /*
+  * Helper to restrict "p2m_ipa_bits" according the external entity
+  * (e.g. IOMMU) requirements.
+diff --git a/xen/arch/ppc/include/asm/p2m.h b/xen/arch/ppc/include/asm/p2m.h
+index f144ef8e1a..c96149ef74 100644
+--- a/xen/arch/ppc/include/asm/p2m.h
++++ b/xen/arch/ppc/include/asm/p2m.h
+@@ -88,9 +88,4 @@ static inline bool arch_acquire_resource_check(struct domain *d)
+     return false;
+ }
  
-+	if ( altp2m_opts != (uint16_t)altp2m_opts )
-+		caml_invalid_argument("altp2m_opts");
+-static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+-{
+-    /* Not supported on PPC. */
+-}
+-
+ #endif /* __ASM_PPC_P2M_H__ */
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 28f57a74f2..e43c559e0c 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -88,11 +88,6 @@ static inline bool arch_acquire_resource_check(struct domain *d)
+     return false;
+ }
+ 
+-static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+-{
+-    /* Not supported on RISCV. */
+-}
+-
+ #endif /* ASM__RISCV__P2M_H */
+ 
+ /*
+diff --git a/xen/arch/x86/hvm/monitor.c b/xen/arch/x86/hvm/monitor.c
+index 523586ca98..d22a2e4644 100644
+--- a/xen/arch/x86/hvm/monitor.c
++++ b/xen/arch/x86/hvm/monitor.c
+@@ -178,6 +178,7 @@ int hvm_monitor_debug(unsigned long rip, enum hvm_monitor_debug_type type,
+         break;
+ 
+     case HVM_MONITOR_SINGLESTEP_BREAKPOINT:
++#ifdef CONFIG_ALTP2M
+         if ( curr->arch.hvm.fast_single_step.enabled )
+         {
+             p2m_altp2m_check(curr, curr->arch.hvm.fast_single_step.p2midx);
+@@ -186,6 +187,7 @@ int hvm_monitor_debug(unsigned long rip, enum hvm_monitor_debug_type type,
+             curr->arch.hvm.fast_single_step.p2midx = 0;
+             return 0;
+         }
++#endif
+         if ( !ad->monitor.singlestep_enabled )
+             return 0;
+         req.reason = VM_EVENT_REASON_SINGLESTEP;
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index 58b56e575e..7375895836 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -962,17 +962,16 @@ int p2m_altp2m_propagate_change(struct domain *d, gfn_t gfn,
+ /* Set a specific p2m view visibility */
+ int p2m_set_altp2m_view_visibility(struct domain *d, unsigned int altp2m_idx,
+                                    uint8_t visible);
+-#else /* !CONFIG_HVM */
+-struct p2m_domain *p2m_get_altp2m(struct vcpu *v);
+-#endif /* CONFIG_HVM */
+ 
+ #ifdef CONFIG_ALTP2M
+ /* Check to see if vcpu should be switched to a different p2m. */
+ void p2m_altp2m_check(struct vcpu *v, uint16_t idx);
+-#else
+-static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx) {}
+ #endif
+ 
++#else /* !CONFIG_HVM */
++struct p2m_domain *p2m_get_altp2m(struct vcpu *v);
++#endif /* CONFIG_HVM */
 +
-+	if ( altp2m_nr != (uint16_t)altp2m_nr )
-+		caml_invalid_argument("altp2m_count");
-+
- 	vmtrace_size = ROUNDUP(vmtrace_size << 10, XC_PAGE_SHIFT);
- 	if ( vmtrace_size != (uint32_t)vmtrace_size )
- 		caml_invalid_argument("vmtrace_buf_kb");
-@@ -226,7 +235,8 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
- 		.grant_opts =
- 		    XEN_DOMCTL_GRANT_version(Int_val(VAL_MAX_GRANT_VERSION)),
- 		.altp2m = {
--			.opts = Int32_val(VAL_ALTP2M_OPTS),
-+			.opts = altp2m_opts,
-+			.nr = altp2m_nr,
- 		},
- 		.vmtrace_size = vmtrace_size,
- 		.cpupool_id = Int32_val(VAL_CPUPOOL_ID),
-@@ -286,6 +296,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
- #undef VAL_ARCH
- #undef VAL_CPUPOOL_ID
- #undef VAL_VMTRACE_BUF_KB
-+#undef VAL_ALTP2M_COUNT
- #undef VAL_ALTP2M_OPTS
- #undef VAL_MAX_GRANT_VERSION
- #undef VAL_MAX_MAPTRACK_FRAMES
+ /* p2m access to IOMMU flags */
+ static inline unsigned int p2m_access_to_iommu_flags(p2m_access_t p2ma)
+ {
+diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+index 1666ff615f..98204cbf43 100644
+--- a/xen/common/vm_event.c
++++ b/xen/common/vm_event.c
+@@ -430,9 +430,11 @@ static int vm_event_resume(struct domain *d, struct vm_event_domain *ved)
+              */
+             vm_event_toggle_singlestep(d, v, &rsp);
+ 
++#ifdef CONFIG_ALTP2M
+             /* Check for altp2m switch */
+             if ( rsp.flags & VM_EVENT_FLAG_ALTERNATE_P2M )
+                 p2m_altp2m_check(v, rsp.altp2m_idx);
++#endif
+ 
+             if ( rsp.flags & VM_EVENT_FLAG_SET_REGISTERS )
+                 vm_event_set_registers(v, &rsp);
 -- 
 2.34.1
 
