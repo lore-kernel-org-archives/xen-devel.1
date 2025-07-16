@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A64CC83F22
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 13:18:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1045176.1415272 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 239A4C83F1B
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jul 2025 13:29:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1045187.1415293 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc213-0006Lz-9I; Wed, 16 Jul 2025 13:17:45 +0000
+	id 1uc2Bo-0008Ja-Ss; Wed, 16 Jul 2025 13:28:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1045176.1415272; Wed, 16 Jul 2025 13:17:45 +0000
+Received: by outflank-mailman (output) from mailman id 1045187.1415293; Wed, 16 Jul 2025 13:28:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uc213-0006Ls-6X; Wed, 16 Jul 2025 13:17:45 +0000
-Received: by outflank-mailman (input) for mailman id 1045176;
- Wed, 16 Jul 2025 13:17:43 +0000
+	id 1uc2Bo-0008Iu-NW; Wed, 16 Jul 2025 13:28:52 +0000
+Received: by outflank-mailman (input) for mailman id 1045187;
+ Wed, 16 Jul 2025 13:28:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=L52i=Z5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uc211-0006Lm-Iv
- for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 13:17:43 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=uFaK=Z5=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uc2Bn-00089u-MM
+ for xen-devel@lists.xenproject.org; Wed, 16 Jul 2025 13:28:51 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4074d0bc-6247-11f0-b894-0df219b8e170;
- Wed, 16 Jul 2025 15:17:41 +0200 (CEST)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3a54700a46eso4159681f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 06:17:41 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74eb9e06c72sm14613810b3a.66.2025.07.16.06.17.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Jul 2025 06:17:39 -0700 (PDT)
+ id cf0109aa-6248-11f0-b894-0df219b8e170;
+ Wed, 16 Jul 2025 15:28:50 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-45629703011so12849915e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Jul 2025 06:28:50 -0700 (PDT)
+Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4562e8075d6sm21076205e9.16.2025.07.16.06.28.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 06:28:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,99 +47,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4074d0bc-6247-11f0-b894-0df219b8e170
+X-Inumbo-ID: cf0109aa-6248-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1752671861; x=1753276661; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=NdWWvVtLGLgPGOiAyMLnAP/qkWtx+SiO4TzhyK1D4Ao=;
-        b=P+baKiJe+KrLtyqAvlTNkhQrkZlMsKM8Pz6fH6PSHovtiLOF9N79/oHG3RPxBk56ry
-         nD/uqQpAMOYJAxtQNXOOpy5SxR67QPiYBrd2svW0pTINWf/SuclxdgZW0RJQjRNEqX2s
-         8TorJGBvkNZjkc9GDKwM6YcRyA/p+4jA41RJJ62aRaY9mTc4V0s/9+vFFv+3FrcfaKzK
-         qffHcMDRuOjJWgUVZRgdstgqu/FreVcG2lucD54hy9s26XcKVIEv0MZS1KgsJJKa8RXE
-         VOq7UySbjXNeS+e03U55tsabZ1hg+ophbWFCDfC5JS7GSE9/EzC8DQpJs54IrKyALlTL
-         HoNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752671861; x=1753276661;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1752672529; x=1753277329; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NdWWvVtLGLgPGOiAyMLnAP/qkWtx+SiO4TzhyK1D4Ao=;
-        b=KDv0GPncC3zlCAXAphzyBeHPIkw4dSWzBQ7dn709t0Zkqcsjr3aJl8kQHrZ8+PzKlP
-         UZ7jWWR949i1Fld4hsMoLBeh9pfUHnz5snH+tSaaXIq/z+n0Qm4XKupIi6KH8tjkBZ1Y
-         J9++MsVWtPzqyJqxjhJqRKE3+JuyidF1wU3CVd6mcppHE90YceCx/lF08UEkDGxo7SB0
-         OMW6nARNq16kHpQDb/bG5ZZiT/aOZZJRvLPTEz7KzRcseVdQaZtnimpRaCjravQ7QYbp
-         fAqMYysB63yUwaU9ea3C0kFlYfyMqQTOdjjvP7tJv7zO+TXx/1k+jKA9TPti20d3nj/K
-         nBvg==
-X-Forwarded-Encrypted: i=1; AJvYcCXl21c9bX3AeJ5uLMJgZIa5iUEn72bFnIUgWzKp2yA3qy62vcf9Ae/IdnZchOWDNFxedCCBvENS3s4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YybcTojw5Du2aXsunDma6zAckohHb3Ol13CmUWWCQ4J79obFRS2
-	6x/cft4y0113+p56oAPIkJL+/q47IElaPJ0uA4vrdAECIG/+WXU1OiAW1CMMHMEvDA==
-X-Gm-Gg: ASbGnct8c1mQjNXzGl1hWCsrySqRFwfg8M8NwXUFxxYascKmzJQcxG4ou4C6IJDGO0g
-	CrBE4KV4lA5xJqaSgpvQE0Xj+0B9uzY7/gM46+EgKmDBnEYB33rt09KDvXdWscRbeHQl17Hfjtv
-	3dFSwL26Kc6tRXneJ/4QcpIVX9SOy5KPln3zmq6xkod1mKWuXG2nS3a2aH0sYHED75wrKS8IRB6
-	ZyInvFXNVjvqM3zO0R2S0obVV3t8UosFJwRxBkp1s/ut9Qf7y1Ka7y8IcFqWaqs2clsgZE9/DGq
-	dWfw34qq4lCf5EP4NsQ/o2m2cGLbhIK+YpGzBx8nJYgI8xUp4csViGrkngwlJcLW6bOQWRAt9D4
-	Kxc1takPPLWWUeW3FXVA2dptp30A5RKjeUQSo9wg5XYHPWqU/vm2rWBCI0J/3O22ZUMyOQ1Bzp8
-	8UEel++R8=
-X-Google-Smtp-Source: AGHT+IEgqpS0OsspiiDJRR+eqf2gRCkVACZL+f+xfBLhIr+Cw7ESLqf6QKduG6IKZWDMQHlFrXU60Q==
-X-Received: by 2002:a05:6000:2101:b0:3a5:67d5:a400 with SMTP id ffacd0b85a97d-3b60dd7ad32mr2050990f8f.33.1752671860578;
-        Wed, 16 Jul 2025 06:17:40 -0700 (PDT)
-Message-ID: <259e20a1-0575-494c-9ee0-9908faa2d4fa@suse.com>
-Date: Wed, 16 Jul 2025 15:17:33 +0200
+        bh=lUKrRD4z8ysA1AG25EoVkKP8oZZDthT1l+2496pCcS8=;
+        b=DDur3oEpd47xauNittgyRSrjrbg5qJnB72jv9spWUvPFVC8iyCtIgvYoT4gnJVLfI7
+         ECtOvl0ZvW3fXcNKwjzS03pJV//S5Df/QKrOjoRQKP5FRu/WQcI7UhrUYER/JsHNT8Rz
+         YMFRtEH2/QRj/m/E8VzHaJa8wvA73gnRNIsTo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752672529; x=1753277329;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lUKrRD4z8ysA1AG25EoVkKP8oZZDthT1l+2496pCcS8=;
+        b=OGaeuYx5mtp/SoC8VJ29LjyFiZfny0/jkHkEXd5Fnlpfmaz/YjcyEU9y3ird8BPgp7
+         KmeVhdNgdm3pBvw8bm1VFuWPwS6C6mYyF3Lii/Dx6AE35Al8X71vjLtIs+v3zRRg8ZSb
+         xvSz/IlfFLpbqNdNksF4wiWq9oABXnAxRzhFvJgWZGDfjjWbLRvwM74KF3/x1y3AY46M
+         Rs/qV7+/LmFfxLMtdFCJBdTP1ulJwsl8gpvEl41tEr6owdcCBOtHezSMisPYXFnQJlki
+         g6r2IZoBUqSd1pkoO/991TOuAgooDNLpz1mWf+R2Z4uZYl7Es8lGPWgykOdXXhVbPR3q
+         ya9Q==
+X-Gm-Message-State: AOJu0YyKvEbnEo9/F0e8OzaRPiuH5omByMYfY7JxOz9vbQ6xPbMCHuBf
+	U5DkwjeJHtjT4WL7KfB72vgm/dJSftedH4Ffw0mQ4rH7u+RkhQXAKpCaKVqvmtRc19xNuww7bbC
+	YQGBOe38RPA==
+X-Gm-Gg: ASbGncs8YncPCjJF3eXez4h+YQppAqBMR0ZMHiPdnRbnH3OfPeFyxq2Fy6e5cFr4d1a
+	RzoQpE4goyGZulSAD28sgHNbTRDHuFPynymwBA3+EgZEfg7Bt6XS35inWa0f+As6EcLTu102enS
+	TQteSkBkqDtIQsKiJWxnQJiMBUabfC7IZoXvUkA7HrBD3tvqUjcn6hONClckQndumMKoxmMrj4E
+	1R4X+igGEyiSH+0BBL5EItLNWQ6Q0ipitr8k5Hly22kmIw4tzAKVvkv0Am822GazFQpw0Vz281R
+	0Jlpp6bQtE2hPsXpe6ZUBeHWi05W6inMc4J/4Ls5M+JXoYh6XXogRz3M6+Ca8LWrjki2DEB1b+g
+	LL/4LJ9d0ieCyhBeWK25Qf12NnrHLSYwNK7QtTXWYbRdSonUzI36AfOJdGMyzPR+cQroxOCFaj9
+	u0
+X-Google-Smtp-Source: AGHT+IGme90Uo3hFxf0bgB2TfEI0SpjpAPeoEB0YSNYkXr9ir3vPDZJy+EsxvPoqB66dy7iOMCA5kw==
+X-Received: by 2002:a05:600c:a00e:b0:442:d9fc:7de with SMTP id 5b1f17b1804b1-4562eb66b57mr21111015e9.22.1752672529143;
+        Wed, 16 Jul 2025 06:28:49 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 3/3] x86/vtd: Switch model check to VFM
+Date: Wed, 16 Jul 2025 14:28:43 +0100
+Message-Id: <20250716132843.2086965-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250716132843.2086965-1-andrew.cooper3@citrix.com>
+References: <20250716132843.2086965-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] x86/ept: batch PML p2m type-changes into single
- locked region
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <20250715074559.73197-1-roger.pau@citrix.com>
- <20250715074559.73197-3-roger.pau@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250715074559.73197-3-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 15.07.2025 09:45, Roger Pau Monne wrote:
-> The current p2m type-change loop in ept_vcpu_flush_pml_buffer() relies on
-> each call to p2m_change_type_one() taking the p2m lock, doing the change
-> and then dropping the lock and flushing the p2m.  Instead take the p2m lock
-> outside of the loop, so that calls to gfn_{,un}lock() inside
-> p2m_change_type_one() just take the p2m lock recursively, and more
-> importantly, the flush is deferred until the p2m is unlocked in
-> ept_vcpu_flush_pml_buffer().
-> 
-> No functional change intended in the end result of
-> ept_vcpu_flush_pml_buffer(), however a possibly noticeable performance
-> improvement is expected.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+This form is shorer and more legible.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+
+As this is the first transformation, an anlysis of the code generation change:
+
+before:
+<quirk_iommu_caps>:
+	       8b 05 4a 7e 09 00    	mov    0x97e4a(%rip),%eax        # <boot_cpu_data>
+	       25 00 ff ff 00       	and    $0xffff00,%eax
+	       3d 00 06 01 00       	cmp    $0x10600,%eax
+	   /-- 74 0e                	je     <quirk_iommu_caps+0x20>
+	/--|-> e9 59 8a dc ff       	jmp    <__x86_return_thunk>
+	|  |   66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+	|  |   00 00
+	|  \-> 0f b6 05 29 7e 09 00 	movzbl 0x97e29(%rip),%eax        # <boot_cpu_data>
+	|      3c 2a                	cmp    $0x2a,%al
+	|  /-- 74 04                	je     <quirk_iommu_caps+0x2f>
+	|  |   3c 2d                	cmp    $0x2d,%al
+	\--|-- 75 e3                	jne    <quirk_iommu_caps+0x12>
+	   \-> 48 b8 ff ff ff ff c3 	movabs $0xffffffc3ffffffff,%rax
+	       ff ff ff
+	       48 21 47 20          	and    %rax,0x20(%rdi)
+	       e9 2e 8a dc ff       	jmp    <__x86_return_thunk>
+
+after:
+<quirk_iommu_caps>:
+	    8b 05 4a 7e 09 00    	mov    0x97e4a(%rip),%eax        # <boot_cpu_data>
+	    3d 2a 06 01 00       	cmp    $0x1062a,%eax
+	/-- 74 13                	je     <quirk_iommu_caps+0x20>
+	|   3d 2d 06 01 00       	cmp    $0x1062d,%eax
+	+-- 74 0c                	je     <quirk_iommu_caps+0x20>
+	|   e9 57 8a dc ff       	jmp    <__x86_return_thunk>
+	|   0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+	\-> 48 b8 ff ff ff ff c3 	movabs $0xffffffc3ffffffff,%rax
+	    ff ff ff
+	    48 21 47 20          	and    %rax,0x20(%rdi)
+	    e9 3d 8a dc ff       	jmp    <__x86_return_thunk>
+
+Previously, GCC managed to merge the "x86_vendor == X86_VENDOR_INTEL && x86 ==
+6" condition, but performed a second load for x86_model.
+
+Afterwards, there's a single load, and two compares.
+
+Neither managed to merge the model checks together by playing with bit 2, but
+that's something that compilers could learn to and is not suitable to express
+at the C level for this kind of logic.
+
+Unrelated to this change, it would be rather better to do `andl $0xc3,
+0x24(%rdi)` than to manifest a 64bit constant.
+---
+ xen/arch/x86/include/asm/cpufeature.h | 2 +-
+ xen/drivers/passthrough/vtd/quirks.c  | 7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index ba2c1c1c7416..f8b85c0f9520 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -28,7 +28,7 @@
+ 
+ #define VFM_MAKE(v, f, m) (MASK_INSR(v, VFM_VENDOR_MASK) | \
+                            MASK_INSR(f, VFM_FAMILY_MASK) | \
+-                           MASK_INSR(f, VFM_MODEL_MASK))
++                           MASK_INSR(m, VFM_MODEL_MASK))
+ 
+ #define VFM_MODEL(vfm)  MASK_EXTR(vfm, VFM_MODEL_MASK)
+ #define VFM_FAMILY(vfm) MASK_EXTR(vfm, VFM_FAMILY_MASK)
+diff --git a/xen/drivers/passthrough/vtd/quirks.c b/xen/drivers/passthrough/vtd/quirks.c
+index dc3dac749ce6..0a10a46d90f7 100644
+--- a/xen/drivers/passthrough/vtd/quirks.c
++++ b/xen/drivers/passthrough/vtd/quirks.c
+@@ -30,6 +30,7 @@
+ #include <xen/pci_regs.h>
+ #include <xen/keyhandler.h>
+ #include <asm/msi.h>
++#include <asm/intel-family.h>
+ #include <asm/irq.h>
+ #include <asm/pci.h>
+ 
+@@ -630,9 +631,7 @@ void __init quirk_iommu_caps(struct vtd_iommu *iommu)
+      * model because the client parts don't expose their IOMMUs as PCI devices
+      * we could match with a Device ID.
+      */
+-    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
+-         boot_cpu_data.x86 == 6 &&
+-         (boot_cpu_data.x86_model == 0x2a ||
+-          boot_cpu_data.x86_model == 0x2d) )
++    if ( boot_cpu_data.vfm == INTEL_SANDYBRIDGE ||
++         boot_cpu_data.vfm == INTEL_SANDYBRIDGE_X )
+         iommu->cap &= ~(0xful << 34);
+ }
+-- 
+2.39.5
 
 
