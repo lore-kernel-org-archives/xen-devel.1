@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6742AC83F1A
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 12:11:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046718.1417105 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80A6C83F1B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 12:11:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046719.1417114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucNSQ-0003OJ-Fq; Thu, 17 Jul 2025 12:11:26 +0000
+	id 1ucNSX-0003ek-MB; Thu, 17 Jul 2025 12:11:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046718.1417105; Thu, 17 Jul 2025 12:11:26 +0000
+Received: by outflank-mailman (output) from mailman id 1046719.1417114; Thu, 17 Jul 2025 12:11:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucNSQ-0003NX-Cj; Thu, 17 Jul 2025 12:11:26 +0000
-Received: by outflank-mailman (input) for mailman id 1046718;
- Thu, 17 Jul 2025 12:11:25 +0000
+	id 1ucNSX-0003ea-Ja; Thu, 17 Jul 2025 12:11:33 +0000
+Received: by outflank-mailman (input) for mailman id 1046719;
+ Thu, 17 Jul 2025 12:11:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tNy=Z6=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1ucNSP-0003HJ-Eg
- for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 12:11:25 +0000
+ id 1ucNSW-0003HJ-C7
+ for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 12:11:32 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 280101dc-6307-11f0-a319-13f23c93f187;
- Thu, 17 Jul 2025 14:11:24 +0200 (CEST)
+ id 2cc081c8-6307-11f0-a319-13f23c93f187;
+ Thu, 17 Jul 2025 14:11:31 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 674231596;
- Thu, 17 Jul 2025 05:11:15 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DE701692;
+ Thu, 17 Jul 2025 05:11:23 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.51.215])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 664013F6A8;
- Thu, 17 Jul 2025 05:11:21 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C6C523F6A8;
+ Thu, 17 Jul 2025 05:11:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,94 +44,361 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 280101dc-6307-11f0-a319-13f23c93f187
+X-Inumbo-ID: 2cc081c8-6307-11f0-a319-13f23c93f187
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Subject: [PATCH v6 0/6] FF-A VM to VM support
-Date: Thu, 17 Jul 2025 14:11:01 +0200
-Message-ID: <cover.1752754016.git.bertrand.marquis@arm.com>
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v7 2/6] xen/arm: ffa: Rework partinfo_get implementation
+Date: Thu, 17 Jul 2025 14:11:03 +0200
+Message-ID: <658777d24e95f623168cf29561d106935c99959d.1752754016.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <cover.1752754016.git.bertrand.marquis@arm.com>
+References: <cover.1752754016.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch serie adds support to use FF-A between VM for communications
-using indirect messages.
+This patch is in preparation for VM to VM support in order to do the
+changes on the SP handling part of partinfo_get before adding support
+for the VM part.
 
-It adds a Kconfig parameter to enable this feature and marks it as
-experimental as for now there is no system to restrict communication
-rights between VM using this system.
+This patches is doing the following changes:
+- split partinfo_get into 3 functions to have the locking handling and
+  proper exit on error handled more clearly
+- add some potential overflow checks to validate the offset and sizes
+  passed by the VM on partinfo call.
+- Introduce a maximum number of SPs (for now set to 64) to prevent
+  holding the CPU for too long in case there would be a lot of
+  partitions in the secure world. The limit currently set is thought to
+  be realistic for most use cases as 64 secure partitions is a very high
+  number compared to current seen usage (more 3 or 4).
+- fix include ordering in ffa_private.h to be in alphabetic order
 
-It also adds support to use VM to VM communications using FF-A even if
-there is no firmware support for FF-A. As this feature enables FF-A
-support in all cases, we also introduce a new command line parameter to
-allow the user to force which tee is to be used between FF-A and Optee
-to have a solution to enable optee support if FF-A VM to VM is enabled.
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+Changes in v7:
+- add Julien A-b
+Changes in v6:
+- add missing empty line before ffa_handle_partition_info_get
+- add Jens R-b
+Changes in v5:
+- patch added
+---
+ xen/arch/arm/tee/ffa_partinfo.c | 202 +++++++++++++++++++-------------
+ xen/arch/arm/tee/ffa_private.h  |  18 ++-
+ 2 files changed, 132 insertions(+), 88 deletions(-)
 
-Changes since v6:
-- use a rwlock to protect access to the chain list of context
-- rebase on top of staging
-- add some R-b/A-b from Jens and Julien
-
-Changes since v5:
-- coding style fixes
-- rework version negociation to use the context lock
-- split probe into fw and vm to vm probe to make code clearer
-- add some R-b from Jens
-
-Changes since v4:
-- fix typos and optimize command line parameter
-- split VM to VM support in 2 patches to ease review
-- organize ffa contexts in a chain list to be able to build the partinfo
-  result without taking the global domain lock
-- introduce a maximum number of SPs to prevent holding the CPU for too
-  long during partinfo call
-- use an atomic to store the number of FF-A VMs
-- prevent potential overflows in indirect message handling
-- fix copy bug in indirect message introduced in v4
-
-Changes since v3:
-- reintroduce firmare v1.0 support in partinfo
-- fix a possible TOC/TOU issue in indirect message handling
-- typos and small fixes
-
-Changes since v2:
-- Rework partition_info_get implementation
-- Taint Xen and display a message when VM to VM is enabled
-- Various fixes explained in each patch
-
-Changes since v1 (rfc):
-- add a tee command line parameter
-- use IS_ENABLED instead of ifdef when possible
-- rebase on latest staging
-
-Bertrand Marquis (6):
-  xen/arm: Create tee command line parameter
-  xen/arm: ffa: Rework partinfo_get implementation
-  xen/arm: ffa: Introduce VM to VM support
-  xen/arm: ffa: Add buffer full notification support
-  xen/arm: ffa: Add indirect message between VM
-  xen/arm: ffa: Enable VM to VM without firmware
-
- docs/misc/xen-command-line.pandoc  |  14 ++
- xen/arch/arm/include/asm/tee/tee.h |   4 +
- xen/arch/arm/tee/Kconfig           |  11 ++
- xen/arch/arm/tee/ffa.c             | 112 ++++++++---
- xen/arch/arm/tee/ffa_msg.c         | 117 ++++++++++--
- xen/arch/arm/tee/ffa_notif.c       | 140 ++++++++------
- xen/arch/arm/tee/ffa_partinfo.c    | 292 ++++++++++++++++++++---------
- xen/arch/arm/tee/ffa_private.h     | 158 +++++++++++++---
- xen/arch/arm/tee/tee.c             |  32 ++++
- 9 files changed, 666 insertions(+), 214 deletions(-)
-
+diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
+index c0510ceb8338..dfa0b23eaf38 100644
+--- a/xen/arch/arm/tee/ffa_partinfo.c
++++ b/xen/arch/arm/tee/ffa_partinfo.c
+@@ -63,9 +63,96 @@ static int32_t ffa_partition_info_get(uint32_t *uuid, uint32_t flags,
+     return ret;
+ }
+ 
+-void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
++static int32_t ffa_get_sp_count(uint32_t *uuid, uint32_t *sp_count)
++{
++    uint32_t src_size;
++
++    return ffa_partition_info_get(uuid, FFA_PARTITION_INFO_GET_COUNT_FLAG,
++                                  sp_count, &src_size);
++}
++
++static int32_t ffa_get_sp_partinfo(uint32_t *uuid, uint32_t *sp_count,
++                                   void *dst_buf, void *end_buf,
++                                   uint32_t dst_size)
+ {
+     int32_t ret;
++    uint32_t src_size, real_sp_count;
++    void *src_buf = ffa_rx;
++    uint32_t count = 0;
++
++    /* Do we have a RX buffer with the SPMC */
++    if ( !ffa_rx )
++        return FFA_RET_DENIED;
++
++    /* We need to use the RX buffer to receive the list */
++    spin_lock(&ffa_rx_buffer_lock);
++
++    ret = ffa_partition_info_get(uuid, 0, &real_sp_count, &src_size);
++    if ( ret )
++        goto out;
++
++    /* We now own the RX buffer */
++
++    /* Validate the src_size we got */
++    if ( src_size < sizeof(struct ffa_partition_info_1_0) ||
++         src_size >= FFA_PAGE_SIZE )
++    {
++        ret = FFA_RET_NOT_SUPPORTED;
++        goto out_release;
++    }
++
++    /*
++     * Limit the maximum time we hold the CPU by limiting the number of SPs.
++     * We just ignore the extra ones as this is tested during init in
++     * ffa_partinfo_init so the only possible reason is SP have been added
++     * since boot.
++     */
++    if ( real_sp_count > FFA_MAX_NUM_SP )
++        real_sp_count = FFA_MAX_NUM_SP;
++
++    /* Make sure the data fits in our buffer */
++    if ( real_sp_count > (FFA_RXTX_PAGE_COUNT * FFA_PAGE_SIZE) / src_size )
++    {
++        ret = FFA_RET_NOT_SUPPORTED;
++        goto out_release;
++    }
++
++    for ( uint32_t sp_num = 0; sp_num < real_sp_count; sp_num++ )
++    {
++        struct ffa_partition_info_1_1 *fpi = src_buf;
++
++        /* filter out SP not following bit 15 convention if any */
++        if ( FFA_ID_IS_SECURE(fpi->id) )
++        {
++            if ( dst_buf > (end_buf - dst_size) )
++            {
++                ret = FFA_RET_NO_MEMORY;
++                goto out_release;
++            }
++
++            memcpy(dst_buf, src_buf, MIN(src_size, dst_size));
++            if ( dst_size > src_size )
++                memset(dst_buf + src_size, 0, dst_size - src_size);
++
++            dst_buf += dst_size;
++            count++;
++        }
++
++        src_buf += src_size;
++    }
++
++    *sp_count = count;
++
++out_release:
++    ffa_hyp_rx_release();
++out:
++    spin_unlock(&ffa_rx_buffer_lock);
++    return ret;
++}
++
++void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
++{
++    int32_t ret = FFA_RET_OK;
+     struct domain *d = current->domain;
+     struct ffa_ctx *ctx = d->arch.tee;
+     uint32_t flags = get_user_reg(regs, 5);
+@@ -75,8 +162,8 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+         get_user_reg(regs, 3),
+         get_user_reg(regs, 4),
+     };
+-    uint32_t src_size, dst_size;
+-    void *dst_buf;
++    uint32_t dst_size = 0;
++    void *dst_buf, *end_buf;
+     uint32_t ffa_sp_count = 0;
+ 
+     /*
+@@ -89,31 +176,26 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+     else
+         dst_size = sizeof(struct ffa_partition_info_1_1);
+ 
+-    /*
+-     * FF-A v1.0 has w5 MBZ while v1.1 allows
+-     * FFA_PARTITION_INFO_GET_COUNT_FLAG to be non-zero.
+-     *
+-     * FFA_PARTITION_INFO_GET_COUNT is only using registers and not the
+-     * rxtx buffer so do the partition_info_get directly.
+-     */
+-    if ( flags == FFA_PARTITION_INFO_GET_COUNT_FLAG &&
+-         ctx->guest_vers == FFA_VERSION_1_1 )
++    /* Only count requested */
++    if ( flags )
+     {
++        /*
++         * FF-A v1.0 has w5 MBZ while v1.1 allows
++         * FFA_PARTITION_INFO_GET_COUNT_FLAG to be non-zero.
++         */
++        if ( ctx->guest_vers == FFA_VERSION_1_0 ||
++                flags != FFA_PARTITION_INFO_GET_COUNT_FLAG )
++        {
++            ret = FFA_RET_INVALID_PARAMETERS;
++            goto out;
++        }
++
+         if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+-            ret = ffa_partition_info_get(uuid, flags, &ffa_sp_count,
+-                                        &src_size);
+-        else
+-            ret = FFA_RET_OK;
++            ret = ffa_get_sp_count(uuid, &ffa_sp_count);
+ 
+         goto out;
+     }
+ 
+-    if ( flags )
+-    {
+-        ret = FFA_RET_INVALID_PARAMETERS;
+-        goto out;
+-    }
+-
+     if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
+     {
+         /* Just give an empty partition list to the caller */
+@@ -121,80 +203,33 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
+         goto out;
+     }
+ 
++    /* Get the RX buffer to write the list of partitions */
+     ret = ffa_rx_acquire(d);
+     if ( ret != FFA_RET_OK )
+         goto out;
+ 
+     dst_buf = ctx->rx;
++    end_buf = ctx->rx + ctx->page_count * FFA_PAGE_SIZE;
+ 
+-    if ( !ffa_rx )
+-    {
+-        ret = FFA_RET_DENIED;
+-        goto out_rx_release;
+-    }
+-
+-    spin_lock(&ffa_rx_buffer_lock);
+-
+-    ret = ffa_partition_info_get(uuid, 0, &ffa_sp_count, &src_size);
+-
+-    if ( ret )
+-        goto out_rx_hyp_unlock;
++    /* An entry should be smaller than a page */
++    BUILD_BUG_ON(sizeof(struct ffa_partition_info_1_1) > FFA_PAGE_SIZE);
+ 
+     /*
+-     * ffa_partition_info_get() succeeded so we now own the RX buffer we
+-     * share with the SPMC. We must give it back using ffa_hyp_rx_release()
+-     * once we've copied the content.
++     * Check for overflow and that we can at least store one entry.
++     * page_count cannot be 0 so we have at least one page.
+      */
+-
+-    /* we cannot have a size smaller than 1.0 structure */
+-    if ( src_size < sizeof(struct ffa_partition_info_1_0) )
+-    {
+-        ret = FFA_RET_NOT_SUPPORTED;
+-        goto out_rx_hyp_release;
+-    }
+-
+-    if ( ctx->page_count * FFA_PAGE_SIZE < ffa_sp_count * dst_size )
++    if ( dst_buf >= end_buf || dst_buf > (end_buf - dst_size) )
+     {
+-        ret = FFA_RET_NO_MEMORY;
+-        goto out_rx_hyp_release;
++        ret = FFA_RET_INVALID_PARAMETERS;
++        goto out_rx_release;
+     }
+ 
+-    if ( ffa_sp_count > 0 )
+-    {
+-        uint32_t n, n_limit = ffa_sp_count;
+-        void *src_buf = ffa_rx;
+-
+-        /* copy the secure partitions info */
+-        for ( n = 0; n < n_limit; n++ )
+-        {
+-            struct ffa_partition_info_1_1 *fpi = src_buf;
+-
+-            /* filter out SP not following bit 15 convention if any */
+-            if ( FFA_ID_IS_SECURE(fpi->id) )
+-            {
+-                memcpy(dst_buf, src_buf, dst_size);
+-                dst_buf += dst_size;
+-            }
+-            else
+-                ffa_sp_count--;
++    ret = ffa_get_sp_partinfo(uuid, &ffa_sp_count, dst_buf, end_buf,
++                              dst_size);
+ 
+-            src_buf += src_size;
+-        }
+-    }
+ 
+-out_rx_hyp_release:
+-    ffa_hyp_rx_release();
+-out_rx_hyp_unlock:
+-    spin_unlock(&ffa_rx_buffer_lock);
+ out_rx_release:
+-    /*
+-     * The calling VM RX buffer only contains data to be used by the VM if the
+-     * call was successful, in which case the VM has to release the buffer
+-     * once it has used the data.
+-     * If something went wrong during the call, we have to release the RX
+-     * buffer back to the SPMC as the VM will not do it.
+-     */
+-    if ( ret != FFA_RET_OK )
++    if ( ret )
+         ffa_rx_release(d);
+ out:
+     if ( ret )
+@@ -353,9 +388,10 @@ bool ffa_partinfo_init(void)
+         goto out;
+     }
+ 
+-    if ( count >= UINT16_MAX )
++    if ( count >= FFA_MAX_NUM_SP )
+     {
+-        printk(XENLOG_ERR "ffa: Impossible number of SPs: %u\n", count);
++        printk(XENLOG_ERR "ffa: More SPs than the maximum supported: %u - %u\n",
++               count, FFA_MAX_NUM_SP);
+         goto out;
+     }
+ 
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index c4cd65538908..0a9c1082db28 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -6,15 +6,15 @@
+ #ifndef __FFA_PRIVATE_H__
+ #define __FFA_PRIVATE_H__
+ 
++#include <xen/bitmap.h>
+ #include <xen/const.h>
+-#include <xen/sizes.h>
+-#include <xen/types.h>
+-#include <xen/mm.h>
+ #include <xen/list.h>
+-#include <xen/spinlock.h>
++#include <xen/mm.h>
+ #include <xen/sched.h>
++#include <xen/sizes.h>
++#include <xen/spinlock.h>
+ #include <xen/time.h>
+-#include <xen/bitmap.h>
++#include <xen/types.h>
+ 
+ /* Error codes */
+ #define FFA_RET_OK                      0
+@@ -108,6 +108,14 @@
+  */
+ #define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
+ 
++/*
++ * The maximum number of Secure partitions we support for partinfo_get.
++ * This prevents holding the CPU during potentially to long time during
++ * a partinfo_get call. Value choosen seems realistic for any configuration
++ * but can be incremented here if needed.
++ */
++#define FFA_MAX_NUM_SP                  64
++
+ /*
+  * We rely on the convention suggested but not mandated by the FF-A
+  * specification that secure world endpoint identifiers have the bit 15
 -- 
 2.47.1
 
