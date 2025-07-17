@@ -4,38 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5218BC83F1B
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 10:26:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046513.1416856 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCD9C83F1A
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 10:33:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046548.1416867 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucLoA-0002HZ-I9; Thu, 17 Jul 2025 10:25:46 +0000
+	id 1ucLvc-00049M-9o; Thu, 17 Jul 2025 10:33:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046513.1416856; Thu, 17 Jul 2025 10:25:46 +0000
+Received: by outflank-mailman (output) from mailman id 1046548.1416867; Thu, 17 Jul 2025 10:33:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucLoA-0002HS-FX; Thu, 17 Jul 2025 10:25:46 +0000
-Received: by outflank-mailman (input) for mailman id 1046513;
- Thu, 17 Jul 2025 10:25:45 +0000
+	id 1ucLvc-00049F-6d; Thu, 17 Jul 2025 10:33:28 +0000
+Received: by outflank-mailman (input) for mailman id 1046548;
+ Thu, 17 Jul 2025 10:33:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Kd8q=Z6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ucLo9-0002HL-9G
- for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 10:25:45 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
+ (envelope-from <SRS0=XrhN=Z6=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1ucLvb-000498-VC
+ for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 10:33:27 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 649e8558-62f8-11f0-b894-0df219b8e170;
- Thu, 17 Jul 2025 12:25:43 +0200 (CEST)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3b45edf2303so694552f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 03:25:43 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31c9f2b5221sm3044297a91.44.2025.07.17.03.25.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Jul 2025 03:25:41 -0700 (PDT)
+ id 788557b0-62f9-11f0-b894-0df219b8e170;
+ Thu, 17 Jul 2025 12:33:25 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 9030621746;
+ Thu, 17 Jul 2025 10:33:24 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 657CA1392A;
+ Thu, 17 Jul 2025 10:33:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id xwKUFnTReGjMagAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 17 Jul 2025 10:33:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,184 +54,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 649e8558-62f8-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1752747942; x=1753352742; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ynIVlEc1we2Dot9WmVCeSuG01rhvnYHJMlhhMjjNppE=;
-        b=cUDRd0ktM1REIHY7aWItdTPhqEyK2lTGb2lMr9swdkuRxfyv754k+YAJVXRHpZFLqS
-         HHuy6c67DgTGyVeIfUmqYUTB+hHLnaN9pdzHYQvriJyV3CLgzHvaMZ+J42CRG8Z9pye3
-         4SQ3W1kv2+fSrAvOK7JCuEPpzSBE568Ho1Qa6Seq9LPFUsovlzaSa/2h1PC1o+f4/7Y5
-         huFysVNkfF1GyconoUkGk0ZEmnJv9F5qNuf//qIivrgHdNrVdZR/9s/hODk2mM3EZTlX
-         L1UxofT4rhHNy9ITeJqM6EAdcwNratxmVltdN1YG8qFilXehZG/aXh5sFbeqtbJn1MJK
-         1jzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752747942; x=1753352742;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ynIVlEc1we2Dot9WmVCeSuG01rhvnYHJMlhhMjjNppE=;
-        b=EvQ6iKih0I2CZ+s5hgNKHGbvzP2cG42b9PyybPg9+At3Z2g+cf5HiS9RHa2SKndg8/
-         IyipH7sYiaXfO9mXiK8TnMIpzrocR79jjijxZjlbZs3NY1f/y02RxXe7nroSOWfCqkKc
-         nSjXR6sXOMHE5lGAqIma+4SzKJHikYSdtO/lI/qgs3NUZucikxh+yjrwqr9C65a+1EUI
-         r3A+P7CGyqW+vbIO0Gnh2JegEjQ7Kut0zpwGlmEF9jLOiGXQnZc9g26BI0ICos9eI6kt
-         gtzI+54t2cw/cwmxhXmkfMflZ+XWO6eaqah5s0HnQ8fGRCoE/GGX87qzI1dWP1bY8LTJ
-         l/ng==
-X-Forwarded-Encrypted: i=1; AJvYcCUk1t9fvAdVmTFx8tivAhvAhDV9kzG8OuhNv3InYl7cjdW8Dcmyo72YqO+9DKBctsVfhiLHXcgbDn4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yypw84py2ZYgy9InAzzQFVFuXSpXAwYPkR+AD/bfBi9737YFdZ0
-	8QVpcDEOTbPKUfYb42rcdYmXAjUwPaq+hh6Z2//bqcrnqhSZXHVSXpIrC2YuGjlf/Q==
-X-Gm-Gg: ASbGncsLKF4pie/vAX7NkNHh+1wO3OEDjX0hkwKIo9ccvAVOk9wEoCVoXkK5Af+bD/p
-	HOsAVgrYXkvHcs9+Il+gZ9mBTwQ0ps/d2rGAqBEuGCZdmwM+JSgz6YD6bcpLpytKm+kwloQ8R6i
-	+qPtILWT3dZQN10BhLkLRTN9Q0AYQRGhbAdEBL+LOWtCbY8eOOfYIboDVggC2Nz+sA9sg5H0CAx
-	4vJwaL/gEJmDDbHijaRTBXTn4wcH0PQHS7qWjFjFHhSg6hh9Et9WiWyUCJaCn90DRHlvVreOhAy
-	XbpCtkIBcCsS+K753fK7i7QW7tWeYoEHrRNkqBKL76oaBUZ6GDrgp1P7aj5OzyoQXDEHb8dhWC+
-	IzDIvVBvPgFA2V8ycyHPYlcko9Un+KRIYvc+sgIsFnD9669DRURS79hDScaayoXUeP7u3ys3/An
-	G3y6En5jw=
-X-Google-Smtp-Source: AGHT+IHPWAuiB8iGxNoY20RSQ32nKsOEpOkS2xTYLU6Mjr6CJnU9dclfP7mr9y1/jhNm4gUe122T7g==
-X-Received: by 2002:a05:6000:24c5:b0:3a5:2ef8:34f9 with SMTP id ffacd0b85a97d-3b60dd73204mr5400155f8f.27.1752747942420;
-        Thu, 17 Jul 2025 03:25:42 -0700 (PDT)
-Message-ID: <007654f3-e26b-43b1-bc81-40ba25c9d787@suse.com>
-Date: Thu, 17 Jul 2025 12:25:30 +0200
+X-Inumbo-ID: 788557b0-62f9-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1752748404; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=8lMAxdx5/8vW4dsY3PG3ZylVUZCkUyl34cQXDNq0eDo=;
+	b=I7ouMlBEExLSEcY8V2gK1POH407zGFEhL6sdeqaHT2gpxTjUsNKA5hSyumHjzaKdVtfo7h
+	zYz1gFCw+Fhhiwut2ITIx3YZdZRwKtptzjlcUxA6gS43nsZ1ztMrwhtUDcueO/RUv4015H
+	JaIamgecy1LbeotIQ23oDc9ZZqXoxgI=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=I7ouMlBE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1752748404; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=8lMAxdx5/8vW4dsY3PG3ZylVUZCkUyl34cQXDNq0eDo=;
+	b=I7ouMlBEExLSEcY8V2gK1POH407zGFEhL6sdeqaHT2gpxTjUsNKA5hSyumHjzaKdVtfo7h
+	zYz1gFCw+Fhhiwut2ITIx3YZdZRwKtptzjlcUxA6gS43nsZ1ztMrwhtUDcueO/RUv4015H
+	JaIamgecy1LbeotIQ23oDc9ZZqXoxgI=
+Message-ID: <8869fd3f-9d72-4771-8e08-b394a055f7e2@suse.com>
+Date: Thu, 17 Jul 2025 12:33:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/17] xen/riscv: Implement p2m_entry_from_mfn() and
- support PBMT configuration
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1749555949.git.oleksii.kurochko@gmail.com>
- <994ab3dd6822c4cd02a6a576041da115abeff6ed.1749555949.git.oleksii.kurochko@gmail.com>
- <f6e789cd-0ef3-488d-94da-1b7c94946720@suse.com>
- <640178f8-a189-4f84-abff-0ef87ba566a5@gmail.com>
- <0265e61a-ad08-4b6b-a87d-dba304f6d27d@suse.com>
- <e1c469c3-47d5-4a38-8abd-985a26cb8365@gmail.com>
- <15c9cb8e-8452-4dc3-933a-5713fc86a12a@suse.com>
- <958ae1b0-d139-41e8-b965-43ce640569c5@gmail.com>
+Subject: Re: [PATCH v2 15/17] tools/init-dom0less: Factor out xenstore setup
+To: Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+References: <20250716211504.291104-1-jason.andryuk@amd.com>
+ <20250716211504.291104-16-jason.andryuk@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <958ae1b0-d139-41e8-b965-43ce640569c5@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20250716211504.291104-16-jason.andryuk@amd.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------alxzIXxvdCTLkY90DBJHdOhF"
+X-Rspamd-Queue-Id: 9030621746
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-5.41 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_UNKNOWN(0.10)[application/pgp-keys];
+	MIME_BASE64_TEXT(0.10)[];
+	MX_GOOD(-0.01)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FROM_HAS_DN(0.00)[];
+	HAS_ATTACHMENT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	DKIM_TRACE(0.00)[suse.com:+];
+	RCPT_COUNT_THREE(0.00)[3];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid]
 
-On 17.07.2025 10:56, Oleksii Kurochko wrote:
-> On 7/16/25 6:18 PM, Jan Beulich wrote:
->> On 16.07.2025 18:07, Oleksii Kurochko wrote:
->>> On 7/16/25 1:31 PM, Jan Beulich wrote:
->>>> On 15.07.2025 16:47, Oleksii Kurochko wrote:
->>>>> On 7/1/25 5:08 PM, Jan Beulich wrote:
->>>>>> On 10.06.2025 15:05, Oleksii Kurochko wrote:
->>>>>>> --- a/xen/arch/riscv/p2m.c
->>>>>>> +++ b/xen/arch/riscv/p2m.c
->>>>>>> @@ -345,6 +345,26 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
->>>>>>>         return __map_domain_page(p2m->root + root_table_indx);
->>>>>>>     }
->>>>>>>     
->>>>>>> +static int p2m_type_radix_set(struct p2m_domain *p2m, pte_t pte, p2m_type_t t)
->>>>>> See comments on the earlier patch regarding naming.
->>>>>>
->>>>>>> +{
->>>>>>> +    int rc;
->>>>>>> +    gfn_t gfn = mfn_to_gfn(p2m->domain, mfn_from_pte(pte));
->>>>>> How does this work, when you record GFNs only for Xenheap pages?
->>>
->>>>> I think I don't understand what is an issue. Could you please provide
->>>>> some extra details?
->>>> Counter question: The mfn_to_gfn() you currently have is only a stub. It only
->>>> works for 1:1 mapped domains. Can you show me the eventual final implementation
->>>> of the function, making it possible to use it here?
->>> At the moment, I planned to support only 1:1 mapped domains, so it is final
->>> implementation.
->> Isn't that on overly severe limitation?
-> 
-> I wouldn't say that it's a severe limitation, as it's just a matter of how
-> |mfn_to_gfn()| is implemented. When non-1:1 mapped domains are supported,
-> |mfn_to_gfn()| can be implemented differently, while the code where it’s called
-> will likely remain unchanged.
-> 
-> What I meant in my reply is that, for the current state and current limitations,
-> this is the final implementation of|mfn_to_gfn()|. But that doesn't mean I don't
-> see the value in, or the need for, non-1:1 mapped domains—it's just that this
-> limitation simplifies development at the current stage of the RISC-V port.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------alxzIXxvdCTLkY90DBJHdOhF
+Content-Type: multipart/mixed; boundary="------------jJNl9weqA0N7UT8Qjqo3mPGA";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+Message-ID: <8869fd3f-9d72-4771-8e08-b394a055f7e2@suse.com>
+Subject: Re: [PATCH v2 15/17] tools/init-dom0less: Factor out xenstore setup
+References: <20250716211504.291104-1-jason.andryuk@amd.com>
+ <20250716211504.291104-16-jason.andryuk@amd.com>
+In-Reply-To: <20250716211504.291104-16-jason.andryuk@amd.com>
 
-Simplification is fine in some cases, but not supporting the "normal" way of
-domain construction looks like a pretty odd restriction. I'm also curious
-how you envision to implement mfn_to_gfn() then, suitable for generic use like
-the one here. Imo, current limitation or not, you simply want to avoid use of
-that function outside of the special gnttab case.
+--------------jJNl9weqA0N7UT8Qjqo3mPGA
+Content-Type: multipart/mixed; boundary="------------80YrZDXP0x4ha04CLpuIv66J"
 
->>>>>> In this context (not sure if I asked before): With this use of a radix tree,
->>>>>> how do you intend to bound the amount of memory that a domain can use, by
->>>>>> making Xen insert very many entries?
->>>>> I didn’t think about that. I assumed it would be enough to set the amount of
->>>>> memory a guest domain can use by specifying|xen,domain-p2m-mem-mb| in the DTS,
->>>>> or using some predefined value if|xen,domain-p2m-mem-mb| isn’t explicitly set.
->>>> Which would require these allocations to come from that pool.
->>> Yes, and it is true only for non-hardware domains with the current implementation.
->> ???
-> 
-> I meant that pool is used now only for non-hardware domains at the moment.
+--------------80YrZDXP0x4ha04CLpuIv66J
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-And how does this matter here? The memory required for the radix tree doesn't
-come from that pool anyway.
+T24gMTYuMDcuMjUgMjM6MTUsIEphc29uIEFuZHJ5dWsgd3JvdGU6DQo+IEZhY3RvciBvdXQg
+dGhlIHhlbnN0b3JlIHNldHVwIGNvZGUgaW50byBjb25maWd1cmVfeGVuc3RvcmUoKS4gIFRo
+aXMgaXMNCj4gaW4gcHJlcGFyYXRpb24gZm9yIGhhbmRsaW5nIGFscmVhZHktaW50cm9kdWNl
+ZCBkb21haW5zLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogSmFzb24gQW5kcnl1ayA8amFzb24u
+YW5kcnl1a0BhbWQuY29tPg0KPiAtLS0NCj4gICB0b29scy9oZWxwZXJzL2luaXQtZG9tMGxl
+c3MuYyB8IDUxICsrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tDQo+ICAgMSBm
+aWxlIGNoYW5nZWQsIDM2IGluc2VydGlvbnMoKyksIDE1IGRlbGV0aW9ucygtKQ0KPiANCj4g
+ZGlmZiAtLWdpdCBhL3Rvb2xzL2hlbHBlcnMvaW5pdC1kb20wbGVzcy5jIGIvdG9vbHMvaGVs
+cGVycy9pbml0LWRvbTBsZXNzLmMNCj4gaW5kZXggYTE4MmRjZTU2My4uNmFlN2NmMmU3ZSAx
+MDA2NDQNCj4gLS0tIGEvdG9vbHMvaGVscGVycy9pbml0LWRvbTBsZXNzLmMNCj4gKysrIGIv
+dG9vbHMvaGVscGVycy9pbml0LWRvbTBsZXNzLmMNCj4gQEAgLTIzNSw0MyArMjM1LDQzIEBA
+IGVycjoNCj4gICAgICAgcmV0dXJuIHJjOw0KPiAgIH0NCj4gICANCj4gLXN0YXRpYyBpbnQg
+aW5pdF9kb21haW4oc3RydWN0IHhzX2hhbmRsZSAqeHNoLA0KPiAtICAgICAgICAgICAgICAg
+ICAgICAgICBzdHJ1Y3QgeGNfaW50ZXJmYWNlX2NvcmUgKnhjaCwNCj4gLSAgICAgICAgICAg
+ICAgICAgICAgICAgeGVuZm9yZWlnbm1lbW9yeV9oYW5kbGUgKnhmaCwNCj4gLSAgICAgICAg
+ICAgICAgICAgICAgICAgbGlieGxfZG9taW5mbyAqaW5mbykNCj4gK3N0YXRpYyBpbnQgY29u
+ZmlndXJlX3hlbnN0b3JlKHN0cnVjdCB4c19oYW5kbGUgKnhzaCwNCj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHN0cnVjdCB4Y19pbnRlcmZhY2VfY29yZSAqeGNoLA0KPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeGVuZm9yZWlnbm1lbW9yeV9oYW5kbGUg
+KnhmaCwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnhsX2RvbWluZm8g
+KmluZm8sDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50NjRfdCAqeGVu
+c3RvcmVfZXZ0Y2huLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDY0
+X3QgKnhlbnN0b3JlX3BmbikNCg0KVGhpcyBpcyBiZWNvbWluZyBhIGxpdHRsZSBiaXQgY29u
+dm9sdXRlZC4NCg0KV291bGRuJ3QgaXQgYmUgYmV0dGVyIHRvIGhhdmUgYSBzdHJ1Y3QgY29u
+dGFpbmluZyBtb3N0IG9mIHRoZSBwYXJhbWV0ZXJzDQooYXQgbGVhc3QgdGhlIGhhbmRsZXMg
+YW5kIGluZm8pPw0KDQpBbiBhbHRlcm5hdGl2ZSBtaWdodCBiZSB0byBtYWtlIHRob3NlIGds
+b2JhbCB2YXJpYWJsZXMgaW4gb3JkZXIgdG8gYXZvaWQNCnBhc3NpbmcgdGhlbSBhcm91bmQg
+ZXZlcnl3aGVyZS4NCg0KDQpKdWVyZ2VuDQo=
+--------------80YrZDXP0x4ha04CLpuIv66J
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
->>>>> Also, it seems this would just lead to the issue you mentioned earlier: when
->>>>> the memory runs out,|domain_crash()| will be called or PTE will be zapped.
->>>> Or one domain exhausting memory would cause another domain to fail. A domain
->>>> impacting just itself may be tolerable. But a domain affecting other domains
->>>> isn't.
->>> But it seems like this issue could happen in any implementation. It won't happen only
->>> if we will have only pre-populated pool for any domain type (hardware, control, guest
->>> domain) without ability to extend them or allocate extra pages from domheap in runtime.
->>> Otherwise, if extra pages allocation is allowed then we can't really do something
->>> with this issue.
->> But that's why I brought this up: You simply have to. Or, as indicated, the
->> moment you mark Xen security-supported on RISC-V, there will be an XSA needed.
-> 
-> Why it isn't XSA for other architectures? At least, Arm then should have such
-> XSA.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Does Arm use a radix tree for storing types? It uses one for mem-access, but
-it's not clear to me whether that's actually a supported feature.
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-> I don't understand why x86 won't have the same issue. Memory is the limited
-> and shared resource, so if one of the domain will use to much memory then it could
-> happen that other domains won't have enough memory for its purpose...
+--------------80YrZDXP0x4ha04CLpuIv66J--
 
-The question is whether allocations are bounded. With this use of a radix tree,
-you give domains a way to have Xen allocate pretty much arbitrary amounts of
-memory to populate that tree. That unbounded-ness is the problem, not memory
-allocations in general.
+--------------jJNl9weqA0N7UT8Qjqo3mPGA--
 
-Jan
+--------------alxzIXxvdCTLkY90DBJHdOhF
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmh40XMFAwAAAAAACgkQsN6d1ii/Ey9v
+rQgAiO+eVIeMaGOabLWWnv82BuhoahuHhk1vzD9K2niNiz6uZULQtkol/JBrlkP7RHg8S0sVdXDe
+fVZUy8Rvwn05AdkjcmA/xoIYQFfmCZNfMFAL1dgxraiTzyawSdU49PicQOe0GeENAQe8BAb2gQ52
+jly2P2/dqDzrhOROqVN+/dfW8UlQWzKYpSOgowo638aIHoZUv7E0151CLlOJUA+NA6mP1QMOPtN3
+Y3dYp8MFRg9r8zENJ9QD4AzJtWrSvsyhMtbPiP4ESLUpRZUNimEf3cFT0HM0t1F5mlOZn5Q3DEqh
+d0sbP0PtAs/aLzHBsooWjKJNOlOmQTUxRD0Vgoo4VQ==
+=ACMW
+-----END PGP SIGNATURE-----
+
+--------------alxzIXxvdCTLkY90DBJHdOhF--
 
