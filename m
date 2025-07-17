@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4996BC83F1A
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 07:35:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046308.1416626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0DDC83F1B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 07:42:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046316.1416638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucJ9O-0006em-Cv; Thu, 17 Jul 2025 07:35:30 +0000
+	id 1ucJFz-0008TT-3j; Thu, 17 Jul 2025 07:42:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046308.1416626; Thu, 17 Jul 2025 07:35:30 +0000
+Received: by outflank-mailman (output) from mailman id 1046316.1416638; Thu, 17 Jul 2025 07:42:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucJ9O-0006ef-9C; Thu, 17 Jul 2025 07:35:30 +0000
-Received: by outflank-mailman (input) for mailman id 1046308;
- Thu, 17 Jul 2025 07:35:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Kd8q=Z6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ucJ9M-0006Z7-Ef
- for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 07:35:28 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9bf023b7-62e0-11f0-a319-13f23c93f187;
- Thu, 17 Jul 2025 09:35:27 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4555f89b236so5715005e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 00:35:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74eb9f1f53fsm15433683b3a.91.2025.07.17.00.35.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Jul 2025 00:35:26 -0700 (PDT)
+	id 1ucJFy-0008TM-VA; Thu, 17 Jul 2025 07:42:18 +0000
+Received: by outflank-mailman (input) for mailman id 1046316;
+ Thu, 17 Jul 2025 07:42:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eEt7=Z6=bounce.vates.tech=bounce-md_30504962.6878a724.v1-38df59fb8e824747bc33eed269c1c7a4@srs-se1.protection.inumbo.net>)
+ id 1ucJ6x-0004NF-17
+ for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 07:32:59 +0000
+Received: from mail145-16.atl61.mandrillapp.com
+ (mail145-16.atl61.mandrillapp.com [198.2.145.16])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3fc3670d-62e0-11f0-b894-0df219b8e170;
+ Thu, 17 Jul 2025 09:32:53 +0200 (CEST)
+Received: from pmta06.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail145-16.atl61.mandrillapp.com (Mailchimp) with ESMTP id
+ 4bjPlm1qkHz8XRqRF
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 07:32:52 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 38df59fb8e824747bc33eed269c1c7a4; Thu, 17 Jul 2025 07:32:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,116 +45,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bf023b7-62e0-11f0-a319-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1752737727; x=1753342527; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ifsfYWm7w4d0HjCI1vmxMByrI2E3cxz/2mBh7dEu5bU=;
-        b=EvrmnIgNIqo0yiTHHBkBffQULloh/Q3DRJu2Iq3AyR/ksQwx07dfyNXzryeZJXJt2J
-         ydCNkUL8e/rLc9hwaoFCV5u6z3Ns2MTuPiYHGYu+4H2EaJand1VanICEEYB6LuvA7Zb6
-         ZwMSGJBIxlsMwWSZJ2ikROWxDZtiXfVdfA2OFCTiRT/ZtLF2vvPV9nTyzp4tdGmU6U21
-         bvc/X1/mlowryKqiswyhLyqH1aBradCroO9rkNKna4BE38VLbuANXrVBJTvwHYac0+a4
-         324Xie59wZI4tak4erRtk9QdC2v6kBOaAkzbpI79NeLmDVPuExvK6Hc6FoTSQVuA98nf
-         pXyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752737727; x=1753342527;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ifsfYWm7w4d0HjCI1vmxMByrI2E3cxz/2mBh7dEu5bU=;
-        b=l3/JtAQvb2Bl22LsAKZsNSt7yX8COfotBAFVycJ1wT052O/D6WTzcNtrBnZ1O38v73
-         i2UJw2Ykyu+jDBzYxFKYt7yMqZsudVLst0VuO2oIeR2tEBwkR0r0cDE2tNcsxbpnlQQY
-         J58X3wi0Bj3Y7e7znkVhxF7YUOQJ8sTmclqZYdbgjoF00odCtE8HWXkZKl4flEyRv2RU
-         u8NHM9zn+rK/GBdeca18oy3V5oUPv8a9FjTmfpxw1V3DjEBKKw4SjH4+eHvkX7M1yD55
-         WYo8BspzBaQaNllamsdfdzV03XdWeN3SDKKVRAOmHGCyn366q45KvU7taR1pSFKWTN2Q
-         WP5w==
-X-Forwarded-Encrypted: i=1; AJvYcCVPI1hGsx4owxUN6uX8T8Zhcx6K3Mtd004ccn+Fybx9AMqNvPEeUNWuFUrT4rOlyvK9U121pcP40i0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwtUFzrinHiCgSKNyduknTsocAst4AzVGjFfsCSpgg4NuAzTFOc
-	pB/J0JksbKFgJJCrJIdvcPdRDkBEQEYiHR35g2gw4/W6iynvGi5OsMIaHOtU4i0QnQ==
-X-Gm-Gg: ASbGncs1RULSgBY6WmubCCZIDuzYCfE5n/+FSnQeiHxbIsHego1Syx8nCoW0znnochg
-	uCT8sfdCViJr7YvFNHUg+9xyNrDw7kwSZWeMd9BRJCxYxWfdn456VAIGhoEnF4+raIqOtsBEABc
-	dKw5dmrhC25M8Sd8yYs5ij4hHbIxpN1WV/XAg4cS06Tv1L1zUT3E5Puf0riS53O9ir0sfOnAFHq
-	pnEnWJV0AwDAJknOpqFbZFACFucHjnNY3FnHgjIEHu/QSQ5CZZcqKVzbgDlBIv9bwku2ihCGelV
-	TYNvibnC9NbHiMw+cyuarUEgBL5iadPhWNEr/ClH3j6plwQ9qB84sP27TQSgKhDp/QFBzwCrRtv
-	/PGdaDV19QfAq+aJbuLtC7JV3aQ3EMhukBaJtQgTza8FvwWJnWeSizcRYtXzgsn27dAeeMRQJjE
-	s+ZPaTA24=
-X-Google-Smtp-Source: AGHT+IHqOXp1EoE26PUUY0/wVfjft2Scs6CYkPWkVb7fq/C+xvvcAY2Elj8t0M9feZeHqDL0xdickA==
-X-Received: by 2002:a05:6000:26c9:b0:3b4:9dbd:eee9 with SMTP id ffacd0b85a97d-3b60e510026mr4446162f8f.36.1752737727226;
-        Thu, 17 Jul 2025 00:35:27 -0700 (PDT)
-Message-ID: <f6243e9e-78ae-47c3-8697-e4761f0b394b@suse.com>
-Date: Thu, 17 Jul 2025 09:35:19 +0200
+X-Inumbo-ID: 3fc3670d-62e0-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1752737572; x=1753007572;
+	bh=fBderDz/vIBoibX0gTwvyuzMFsWB/Usn1ouyPP1beaI=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=q0J035OgXs24YXzz/RlO8g8ko+4xCP9zLT7Mung9Zt2voaVjtUr4z0lQlwd8nZqXL
+	 E4QSxy818M4tmn2uCxlizsVhvCTLbECYqSZaaapb8fu0Dp3LbmpK/e97cyGmi5Y0Hc
+	 dMXAw2pOhePT20MLZT9VIRcxdFanCgcGliwYtZAPmXOz0C+WPtNXmVxseMUV5n+c9W
+	 cBiwtt05wx33U+0Hl9ru3erCITjBWdP9q/RFpDJYkfcWCotSIYnuLbHrO5Q/ulrjNl
+	 Vtu/I4ahYYRVFxH2SEzxErU3WBsv3DL9upeEQ98CCzbt6ZUFQmlzICqVUcyayN/TSb
+	 iUOYKph407TYw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1752737572; x=1752998072; i=yann.sionneau@vates.tech;
+	bh=fBderDz/vIBoibX0gTwvyuzMFsWB/Usn1ouyPP1beaI=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=1hEZP7Z7vUo/xUnAj9/QTlKmyvbTtpvWRtOQ7ZjioTGbOCdCr/uVFviDkWyP0CKlL
+	 AIf7fO8/VDwDxePvfjAeeNGximICKXO5Kw7yWqRQg48EFoYsqzp5n7M3lyFnOUOOk+
+	 hxY9/fDBmgKh6422E4feYQmeLOjksCdpHXdPS4aDoos8gkplKWqq9BqJfGlgkiY/03
+	 Z8hTvXostxXHDhy4/mpFJf/JdUzLb9FzB90g3yidn7Ht8yhlCJ+5aVBOcDIOAvfLW1
+	 z+pi037Pi+fBfv2w+aaDbqZUeyxPjFDJLEohEizvBT9xa4vXVgAPvA7bpMQdsbPGhA
+	 4iEmrZyTJOyyA==
+From: "Yann Sionneau" <yann.sionneau@vates.tech>
+Subject: =?utf-8?Q?Re:=20xen.efi=20has=20MEM=5FDISCARDABLE=20flag=20in=20Characteristics=20field=20of=20.reloc=20section?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1752737570927
+Message-Id: <7a7f40b8-5d73-421a-9358-30421d12a243@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>, "Demi Marie Obenour" <demiobenour@gmail.com>
+Cc: yann@sionneau.net, "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, "Xen developer discussion" <xen-devel@lists.xenproject.org>, nickc@redhat.com
+References: <39104717-4b64-483c-b6fd-d30069df4c58@gmail.com> <7e039262-1f54-46e1-8f70-ac3f03607d5a@suse.com>
+In-Reply-To: <7e039262-1f54-46e1-8f70-ac3f03607d5a@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.38df59fb8e824747bc33eed269c1c7a4?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250717:md
+Date: Thu, 17 Jul 2025 07:32:52 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] x86/match-cpu: Introduce X86_MATCH_VFM() and convert
- intel_idle_ids[]
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250716173132.2213891-1-andrew.cooper3@citrix.com>
- <20250716173132.2213891-4-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250716173132.2213891-4-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On 16.07.2025 19:31, Andrew Cooper wrote:
-> mwait-idle's ICPU() is the most convenient place to get started.  Introduce
-> X86_MATCH_CPU() and X86_MATCH_VFM() following their Linux counterparts.
-> 
-> This involves match-cpu.h including more headers, which in turn allows us to
-> drop a few.
+Hello Demi Marie, Jan, Nick, all,
 
-intel-cpu.h doesn't really need to move, does it? Conceivably there can be users
-of match-cpu.h which don't need the Intel constants. Hence no point in forcing
-them to see those.
+Thank you Demi Marie for bringing this topic on the mailing list.
 
-> No functional change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Jan Beulich <JBeulich@suse.com>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> We now have X86_FEATURE_ANY and X86_FEATURE_ALWAYS as aliases of LM.  Given
-> the contexts they're used in, I've left the naming as-is.
+I discussed it a bit with Jan on Matrix but the situation is not pretty, 
+there is no clean solution that stands out easily.
 
-What's wrong with sticking to ALWAYS, which we already have?
+As Jan said, it seems .reloc is meant to be discardable, so we can't 
+blame binutils LD for putting it:
 
-> It's a bit nasty (preprocessing wise) triple-expanding VFM in X86_MATCH_VFM(),
-> but we need an Integer Constant Expression.
+https://github.com/bminor/binutils-gdb/commit/25c80428af3311e761c87d8f706596b9701602ec#diff-078cf751467928c038996b40073a682425712b9b01182424e68cf18fb08a75b5R953-R977
 
-Not sure what alternative you're alluding to, or in fact what nastiness you're
-seeing. But maybe I'm getting "triple-expanding" wrong: To me that means going
-through three layers of expansion, when you may mean the fact that
-X86_MATCH_VFM() evaluates its parameter three times. If so - yes, but as you
-say: What do you do (in this case).
+And we can't obviously blame the loaders for honoring this flag.
 
-Jan
+Most reasonable solution indeed would be to ask binutils to add a link 
+flag to say "please do not put the DISCARDABLE flag on the .reloc section"
+
+I'm adding Nick Clifton from binutils in CC so that he can comment on 
+this possible outcome or any other possible solution.
+
+In the mean time, while waiting for a solution to emerge (and be merged, 
+and released) what do we do?
+
+Do we put some hack in Xen build Makefiles so that xen.efi is 
+post-processed to strip this bit?
+
+This could be the temporary solution.
+
+Regards,
+
+Yann
+
+On 7/17/25 08:04, Jan Beulich wrote:
+> On 17.07.2025 05:11, Demi Marie Obenour wrote:
+>> This was discovered by GitHub user @fallen and leads
+>> to an "Unsupported relocation type" crash during boot
+>> because shim and some patched versions of GRUB do not load
+>> the section.  See
+>> https://github.com/QubesOS/qubes-issues/issues/8206#issuecomment-3078795967
+>> for more details.
+>>
+>> I'm not sure if this is a bug in Xen or a bug in the linker.
+> As said on Matrix, my take is that - if at all - the linker could do something
+> about it only with a to-be-added command line option. For all "normal" purposes
+> .reloc being discardable is what is wanted. Since such a command line option
+> would be extremely niche, I think this will need taking care of on the Xen side
+> (which, however, is unlikely to end up very pretty).
+>
+> Jan
+>
+
+
+Yann Sionneau | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
