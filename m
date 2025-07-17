@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38831C83F34
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 07:32:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046276.1416607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63607C83F1B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 07:35:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046304.1416617 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucJ5y-0004gS-IS; Thu, 17 Jul 2025 07:31:58 +0000
+	id 1ucJ96-0006GN-5h; Thu, 17 Jul 2025 07:35:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046276.1416607; Thu, 17 Jul 2025 07:31:58 +0000
+Received: by outflank-mailman (output) from mailman id 1046304.1416617; Thu, 17 Jul 2025 07:35:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucJ5y-0004gJ-F5; Thu, 17 Jul 2025 07:31:58 +0000
-Received: by outflank-mailman (input) for mailman id 1046276;
- Thu, 17 Jul 2025 07:31:57 +0000
+	id 1ucJ96-0006GG-2Z; Thu, 17 Jul 2025 07:35:12 +0000
+Received: by outflank-mailman (input) for mailman id 1046304;
+ Thu, 17 Jul 2025 07:35:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9Yum=Z6=gmail.com=sultanovandriy@srs-se1.protection.inumbo.net>)
- id 1ucJ5x-0004NF-3A
- for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 07:31:57 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=z0s4=Z6=redhat.com=david@srs-se1.protection.inumbo.net>)
+ id 1ucJ94-0006GA-7I
+ for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 07:35:10 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1d10fa46-62e0-11f0-b894-0df219b8e170;
- Thu, 17 Jul 2025 09:31:55 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-451dbe494d6so6247745e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 00:31:55 -0700 (PDT)
-Received: from pc (cpc92320-cmbg19-2-0-cust1786.5-4.cable.virginm.net.
- [82.13.70.251]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5e8dc201asm19792460f8f.22.2025.07.17.00.31.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jul 2025 00:31:52 -0700 (PDT)
+ id 8f9a6dee-62e0-11f0-b894-0df219b8e170;
+ Thu, 17 Jul 2025 09:35:07 +0200 (CEST)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-439-_apW74dIOfq5Z3oLdkpPqQ-1; Thu, 17 Jul 2025 03:35:05 -0400
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4561611dc2aso5604045e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 00:35:05 -0700 (PDT)
+Received: from ?IPV6:2003:d8:2f1f:3600:dc8:26ee:9aa9:fdc7?
+ (p200300d82f1f36000dc826ee9aa9fdc7.dip0.t-ipconnect.de.
+ [2003:d8:2f1f:3600:dc8:26ee:9aa9:fdc7])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4562e7f2d4fsm43469055e9.4.2025.07.17.00.35.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Jul 2025 00:35:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,385 +53,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d10fa46-62e0-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752737514; x=1753342314; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Qmq/Nsl0M7ErOrqCpTVnTzy11DB2G6jqpravhzisJJo=;
-        b=UjQXXaISBGBtxv5Dzfl1m0GZ3dR/nz8BO4SScOsQYv9MKQaRdjd9DUs3Ecvzjm9Ait
-         OzYUPlnBgodr+mowq8KHySLo9zXbrKHzjzqZ7JSIcu7+hdKkDIDCpnea0tkatZviENXr
-         SxAwFlxkj3IneESnWqdULurM1fLne64N9DKDf80cRYnXfo6mQk3V1gU2gK1Q3P0gdUhm
-         4sVUvpL05Ecrks27iK4qkZL8aw50MFW+EJWbhBiePjfoHqXk2WQjed/cNMlgqTHkuHLL
-         dFrtaJPno3c19v5x0JGxA/lxdPNP9aKc5q1W7DIvVw7N73wAxVg2IV4j/8RFoJG3rqY9
-         4qnA==
+X-Inumbo-ID: 8f9a6dee-62e0-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1752737706;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=dujvEOHGoGkKIbh2VcvWWUHTqJBgDW3Vgo4cGXVPWNY=;
+	b=If+ElQ16GalXdMYvqQgQWxUcnUYTmHP8pkM2iSnPGze89/riUnVDuCf+stownz4XvAm/Ul
+	Cv6ZiXcrZfvVxbKuz9i54/mpyVZbjY71mDlcc9fo/qWcjo0qbMYFmIsIiUQVBD6q1Uf2yj
+	Y8k+0jdfFpe6G0XlYPVY21KzWB10p9M=
+X-MC-Unique: _apW74dIOfq5Z3oLdkpPqQ-1
+X-Mimecast-MFC-AGG-ID: _apW74dIOfq5Z3oLdkpPqQ_1752737704
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752737514; x=1753342314;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Qmq/Nsl0M7ErOrqCpTVnTzy11DB2G6jqpravhzisJJo=;
-        b=G9GHpb/xa3y9ik41ke2TyvmlSAMjwZqC2amM654Lf8F9FMlBIFIzqdbLTLEYB+oBNo
-         MSAAqrBLguIhQ8EPzX1+5HnxXWoSnYaLu88d4DwjVoEpgS9aOc7ddl6ZdxZEbLfb52iy
-         EkjHkSCO+ori5hjVoYqW5uTf+U8wa/y62aV5DqRErzxAx1httqrcwD0Ourp8+l5Fq3ZN
-         MiE3JGV2dtmNHAjVBC+iFmgv/DL/tH4Wqk5C5fhD83wVhFqTkiUbT3AuCOoJ9QXvr/L7
-         K4/8umqkp0wx/DhCowFXw6fniZEkIbNEcXG9IJbs+db9c3W6r1p96f+vJ/JtPOcGVRg+
-         7Swg==
-X-Gm-Message-State: AOJu0YxbmfHTYQ8yJWCSOuPD4jGKSnC2v3QDdh5K/y8tu3NgCiE6edFy
-	BTQlJSRk14720384J1TUCvRRoH6630fmGumBc2Izvig6UmTqZQnDZRTpSdLa/oYr
-X-Gm-Gg: ASbGncsLnl31kDww9xgu+EiBKyu1uUibXCs0c0IKiX2hH72kY8KIfrrMDKqsmzmeoJ5
-	yXVxagtXGpHRHwidA/vRsMOd7cgM9e1DZk/a+/8b5wHjPTjNn7Jj0od4DPPyxb0gwpDZaM2Cd9X
-	1Rev+cM7RLgMOSFpNqsuTS48ZRpjzk7/IJKzeFRxV4VlwNJENqz5r5gb3H1AEvMkhmsPjS0UduE
-	CgggN7R7QCxznK2W+sddS33Cr3FAPqJT9MDT2tyMFbnLCY1XqAZTpcb9F4s3NHlk2nh0UDUhyDc
-	49VmXmtX86ZWmWeSEND9X1n0Com7AQ3pGzHD3FEphqCOfYP6uVarKvC5hF1UD+wBV9+lmlxVGCw
-	Vpqb2ldj2QCux1x4sH+EqhrP41Xw7pSfCEje3vnhkGx7qi2XBRkmWEntP4thtrjYXBWKAZY5X
-X-Google-Smtp-Source: AGHT+IFerTBt+a2FRLEgXUDPZ4Z7PoLIzaMrvURSIR9xXAlQjAMwHEqbeJYQRDO6gcgdpvfg/zPmtQ==
-X-Received: by 2002:a05:600c:19cb:b0:43c:ee3f:2c3 with SMTP id 5b1f17b1804b1-4562e37a0ecmr42772215e9.7.1752737513849;
-        Thu, 17 Jul 2025 00:31:53 -0700 (PDT)
-From: Andrii Sultanov <sultanovandriy@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrii Sultanov <sultanovandriy@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 3/3] drivers: Make ioapic_sbdf and hpet_sbdf contain pci_sbdf_t
-Date: Thu, 17 Jul 2025 08:31:27 +0100
-Message-ID: <94d8b7537021337a6b54d8950294702f5bbd2590.1752736989.git.andriy.sultanov@vates.tech>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1752736989.git.andriy.sultanov@vates.tech>
-References: <cover.1752736989.git.andriy.sultanov@vates.tech>
+        d=1e100.net; s=20230601; t=1752737704; x=1753342504;
+        h=content-transfer-encoding:in-reply-to:organization:autocrypt
+         :content-language:from:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=dujvEOHGoGkKIbh2VcvWWUHTqJBgDW3Vgo4cGXVPWNY=;
+        b=PrPNdj6btyeIc8msGq4SFxUQTBWttGX+OjWbc9IfKr1U609pR7lonZwE56Ca0reJp2
+         oAnKlZPAOVpnk97056k7Kc08A45PJxIvG/L4a//WCNWPistB8+HYlxjy5iirJdYIZTqf
+         dcIdIjGSnpCFQkd8wFxBefnj4jTSxwhnizYWFemH8n5F3FCwA0WXYCl0OD1GRXsf1Obu
+         PxNwUykOY8yRq7tzsqysUG83yHeFjrj5qfYLR8Safm4LmFSa5pPhjOJR5qhCO7nRDbaF
+         plvXXyRnE/wzz96Kufy0ICApWATgIaAjjLk+SCMw0vNb0ETDcNESVqekl0ojsGh+wxCS
+         Vb2Q==
+X-Forwarded-Encrypted: i=1; AJvYcCV7f4BtffTfYaNM4AiINXB3Vx5bFwCogWokh3jueQIhmE/UZh5e8AdxEiQEzR0JC4lfpFTgTr3cqDA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz4jf3zMLwyTtELLS/xl1jTOgiay4d34u3ftG/L8TiRJBPcDf16
+	c5ra5ZVQ+n5ol7FAG5ch9rJMec0jcG1tngD1YHnjf/AWfiG2ksQ0u7mYyDQfHWkWrW7z1UaJk2G
+	tlc9x5KgrCKX9LQhuYTq7eQaLdyDD0fV7QbwExxUkJY3Vt7+YZYidzk8fwurFQn3uSjxd
+X-Gm-Gg: ASbGnctj6nlOnSA1BZ0hCqp1esvNRSuLkhuEC2h0262J8UU3avE0eeUEj/Kr9LqfX4H
+	AcOpVGDCj39i1jEZyQ8yDoJWgeA0sVfIKOhbmDFm3yeyvfQvItFyz/Q/fQ8XBxy1iWhgR3/p0Dz
+	06yqF2IsFToYwqqIHpRP7bzEt6Lrbm5/xHBSVknUtZ2ZEyw8SMmCRokmO00R2hjBjyI/srreC9U
+	sWO9weq53hJcPgGkXeKDT77xCpX1oPKnCgu2WFurkgUcMB4cAgidYmNXhV77oe6X11OgPQ+2l4F
+	J1uJL7I2Zmcx08gP7CnmitDmvwlg/TO0SNx48OOCUrs86PEyaOjp221P0XEMGht0dVCBsuWSkYX
+	fwdtB1mU5mZO1z3CfZiH4Z7ZQIyx3BbXPkhbUYn8mecx6Xcqm76gA5/7vTHaYmzN7
+X-Received: by 2002:a05:600c:820f:b0:43c:ec0a:ddfd with SMTP id 5b1f17b1804b1-4562ed57638mr48600785e9.6.1752737703928;
+        Thu, 17 Jul 2025 00:35:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEtTyLPcaxAHqteD7RhIpkLjY6DinVSnPGFlCTrTsNMCpipiqNTjkckjgG4pKMNN42D/qwMTg==
+X-Received: by 2002:a05:600c:820f:b0:43c:ec0a:ddfd with SMTP id 5b1f17b1804b1-4562ed57638mr48600205e9.6.1752737703460;
+        Thu, 17 Jul 2025 00:35:03 -0700 (PDT)
+Message-ID: <336b1801-869d-47ff-a942-c100e0d07d75@redhat.com>
+Date: Thu, 17 Jul 2025 09:35:01 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/9] mm: vm_normal_page*() improvements
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+ nvdimm@lists.linux.dev, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox
+ <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
+ <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
+ Hugh Dickins <hughd@google.com>, Oscar Salvador <osalvador@suse.de>,
+ Lance Yang <lance.yang@linux.dev>
+References: <20250715132350.2448901-1-david@redhat.com>
+ <20250715163126.7bcaca25364dd68835bd9c8b@linux-foundation.org>
+ <17a539fa-977c-4f3f-bedf-badd1fc1287a@redhat.com>
+ <20250716152710.59e09fe5056010322de2a1a3@linux-foundation.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ g3eXuA==
+Organization: Red Hat
+In-Reply-To: <20250716152710.59e09fe5056010322de2a1a3@linux-foundation.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: HOs6BblzK03_nlogGC6CNwRseDGOJHY2eI0cCKPxV50_1752737704
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Following a similar change to amd_iommu struct, make two more structs
-take pci_sbdf_t directly instead of seg and bdf separately. This lets us
-drop several conversions from the latter to the former and simplifies
-several comparisons and assignments.
+On 17.07.25 00:27, Andrew Morton wrote:
+> On Wed, 16 Jul 2025 10:47:29 +0200 David Hildenbrand <david@redhat.com> wrote:
+> 
+>>>
+>>> However the series rejects due to the is_huge_zero_pmd ->
+>>> is_huge_zero_pfn changes in Luiz's "mm: introduce snapshot_page() v3"
+>>> series, so could we please have a redo against present mm-new?
+>>
+>> I'm confused: mm-new *still* contains the patch from Luiz series that
+>> was originally part of the RFC here.
+>>
+>> commit 791cb64cd7f8c2314c65d1dd5cb9e05e51c4cd70
+>> Author: David Hildenbrand <david@redhat.com>
+>> Date:   Mon Jul 14 09:16:51 2025 -0400
+>>
+>>       mm/memory: introduce is_huge_zero_pfn() and use it in vm_normal_page_pmd()
+>>
+>> If you want to put this series here before Luiz', you'll have to move that
+>> single patch as well.
+>>
+>> But probably this series should be done on top of Luiz work, because Luiz
+>> fixes something.
+> 
+> I'm confused at your confused.  mm-new presently contains Luiz's latest
+> v3 series "mm: introduce snapshot_page()" which includes a copy of your
+> "mm/memory: introduce is_huge_zero_pfn() and use it in
+> vm_normal_page_pmd()".
 
-Bloat-o-meter reports:
-add/remove: 0/0 grow/shrink: 1/10 up/down: 256/-320 (-64)
-Function                                     old     new   delta
-_einittext                                 22092   22348    +256
-parse_ivrs_hpet                              248     245      -3
-amd_iommu_detect_one_acpi                    876     868      -8
-iov_supports_xt                              275     264     -11
-amd_iommu_read_ioapic_from_ire               344     332     -12
-amd_setup_hpet_msi                           237     224     -13
-amd_iommu_ioapic_update_ire                  575     555     -20
-reserve_unity_map_for_device                 453     424     -29
-_hvm_dpci_msi_eoi                            160     128     -32
-amd_iommu_get_supported_ivhd_type             86      30     -56
-parse_ivrs_table                            3966    3830    -136
+Let's recap: you said "the series rejects due to the is_huge_zero_pmd ->
+is_huge_zero_pfn changes in Luiz's "mm: introduce snapshot_page() v3"
+series"
 
-Signed-off-by: Andrii Sultanov <sultanovandriy@gmail.com>
-
+$ git checkout mm/mm-new -b tmp
+branch 'tmp' set up to track 'mm/mm-new'.
+Switched to a new branch 'tmp'
+$ b4 shazam 20250715132350.2448901-1-david@redhat.com
+Grabbing thread from lore.kernel.org/all/20250715132350.2448901-1-david@redhat.com/t.mbox.gz
+Checking for newer revisions
+Grabbing search results from lore.kernel.org
+Analyzing 17 messages in the thread
+Looking for additional code-review trailers on lore.kernel.org
+Analyzing 65 code-review messages
+Checking attestation on all messages, may take a moment...
 ---
-Changes in V5:
-* Dropped PCI_BDF usage inside PCI_SBDF macros
-* Joined separate seg and bdf comparisons into a single sbdf one in
-  parse_ivrs_table
-* Dropped unnecessary bdf in parse_ivhd_device_special, using sbdf.bdf
-  instead
-* Reverted print formatting change in amd_iommu_ioapic_update_ire
-
-Changes in V4:
-* Folded several separate seg+bdf comparisons and assignments into one
-  with sbdf_t
-* With reshuffling in the prior commits, this commit is no longer
-  neutral in terms of code size
-
-Changes in V3:
-* Dropped aliasing of seg and bdf, renamed users.
-
-Changes in V2:
-* Split single commit into several patches
-* Change the format specifier to %pp in amd_iommu_ioapic_update_ire
+   ✓ [PATCH v1 1/9] mm/huge_memory: move more common code into insert_pmd()
+   ✓ [PATCH v1 2/9] mm/huge_memory: move more common code into insert_pud()
+   ✓ [PATCH v1 3/9] mm/huge_memory: support huge zero folio in vmf_insert_folio_pmd()
+   ✓ [PATCH v1 4/9] fs/dax: use vmf_insert_folio_pmd() to insert the huge zero folio
+   ✓ [PATCH v1 5/9] mm/huge_memory: mark PMD mappings of the huge zero folio special
+   ✓ [PATCH v1 6/9] mm/memory: convert print_bad_pte() to print_bad_page_map()
+   ✓ [PATCH v1 7/9] mm/memory: factor out common code from vm_normal_page_*()
+     + Reviewed-by: Oscar Salvador <osalvador@suse.de> (✓ DKIM/suse.de)
+   ✓ [PATCH v1 8/9] mm: introduce and use vm_normal_page_pud()
+     + Reviewed-by: Oscar Salvador <osalvador@suse.de> (✓ DKIM/suse.de)
+   ✓ [PATCH v1 9/9] mm: rename vm_ops->find_special_page() to vm_ops->find_normal_page()
+     + Reviewed-by: Oscar Salvador <osalvador@suse.de> (✓ DKIM/suse.de)
+   ---
+   ✓ Signed: DKIM/redhat.com
 ---
- xen/drivers/passthrough/amd/iommu.h      |  5 +--
- xen/drivers/passthrough/amd/iommu_acpi.c | 40 ++++++++++------------
- xen/drivers/passthrough/amd/iommu_intr.c | 43 ++++++++++++------------
- 3 files changed, 41 insertions(+), 47 deletions(-)
+Total patches: 9
+---
+  Base: using specified base-commit 64d19a2cdb7b62bcea83d9309d83e06d7aff4722
+Applying: mm/huge_memory: move more common code into insert_pmd()
+Applying: mm/huge_memory: move more common code into insert_pud()
+Applying: mm/huge_memory: support huge zero folio in vmf_insert_folio_pmd()
+Applying: fs/dax: use vmf_insert_folio_pmd() to insert the huge zero folio
+Applying: mm/huge_memory: mark PMD mappings of the huge zero folio special
+Applying: mm/memory: convert print_bad_pte() to print_bad_page_map()
+Applying: mm/memory: factor out common code from vm_normal_page_*()
+Applying: mm: introduce and use vm_normal_page_pud()
+Applying: mm: rename vm_ops->find_special_page() to vm_ops->find_normal_page()
+$ make mm/memory.o
+...
+   CC      mm/memory.o
 
-diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
-index 2599800e6a..52f748310b 100644
---- a/xen/drivers/passthrough/amd/iommu.h
-+++ b/xen/drivers/passthrough/amd/iommu.h
-@@ -262,7 +262,7 @@ int cf_check amd_setup_hpet_msi(struct msi_desc *msi_desc);
- void cf_check amd_iommu_dump_intremap_tables(unsigned char key);
- 
- extern struct ioapic_sbdf {
--    u16 bdf, seg;
-+    pci_sbdf_t sbdf;
-     u8 id;
-     bool cmdline;
-     u16 *pin_2_idx;
-@@ -273,7 +273,8 @@ unsigned int ioapic_id_to_index(unsigned int apic_id);
- unsigned int get_next_ioapic_sbdf_index(void);
- 
- extern struct hpet_sbdf {
--    u16 bdf, seg, id;
-+    pci_sbdf_t sbdf;
-+    uint16_t id;
-     enum {
-         HPET_NONE,
-         HPET_CMDL,
-diff --git a/xen/drivers/passthrough/amd/iommu_acpi.c b/xen/drivers/passthrough/amd/iommu_acpi.c
-index a9c5432e86..c007a427f2 100644
---- a/xen/drivers/passthrough/amd/iommu_acpi.c
-+++ b/xen/drivers/passthrough/amd/iommu_acpi.c
-@@ -707,8 +707,7 @@ static int __init cf_check parse_ivrs_ioapic(const char *str)
-         }
-     }
- 
--    ioapic_sbdf[idx].bdf = PCI_BDF(bus, dev, func);
--    ioapic_sbdf[idx].seg = seg;
-+    ioapic_sbdf[idx].sbdf = PCI_SBDF(seg, bus, dev, func);
-     ioapic_sbdf[idx].id = id;
-     ioapic_sbdf[idx].cmdline = true;
- 
-@@ -734,8 +733,7 @@ static int __init cf_check parse_ivrs_hpet(const char *str)
-         return -EINVAL;
- 
-     hpet_sbdf.id = id;
--    hpet_sbdf.bdf = PCI_BDF(bus, dev, func);
--    hpet_sbdf.seg = seg;
-+    hpet_sbdf.sbdf = PCI_SBDF(seg, bus, dev, func);
-     hpet_sbdf.init = HPET_CMDL;
- 
-     return 0;
-@@ -746,8 +744,9 @@ static u16 __init parse_ivhd_device_special(
-     const struct acpi_ivrs_device8c *special, u16 seg,
-     u16 header_length, u16 block_length, struct amd_iommu *iommu)
- {
--    u16 dev_length, bdf;
-+    u16 dev_length;
-     unsigned int apic, idx;
-+    pci_sbdf_t sbdf;
- 
-     dev_length = sizeof(*special);
-     if ( header_length < (block_length + dev_length) )
-@@ -756,16 +755,16 @@ static u16 __init parse_ivhd_device_special(
-         return 0;
-     }
- 
--    bdf = special->used_id;
--    if ( bdf >= ivrs_bdf_entries )
-+    sbdf = PCI_SBDF(seg, special->used_id);
-+    if ( sbdf.bdf >= ivrs_bdf_entries )
-     {
--        AMD_IOMMU_ERROR("IVHD: invalid Device_Entry Dev_Id %#x\n", bdf);
-+        AMD_IOMMU_ERROR("IVHD: invalid Device_Entry Dev_Id %#x\n", sbdf.bdf);
-         return 0;
-     }
- 
-     AMD_IOMMU_DEBUG("IVHD Special: %pp variety %#x handle %#x\n",
--                    &PCI_SBDF(seg, bdf), special->variety, special->handle);
--    add_ivrs_mapping_entry(bdf, bdf, special->header.data_setting, 0, true,
-+                    &sbdf, special->variety, special->handle);
-+    add_ivrs_mapping_entry(sbdf.bdf, sbdf.bdf, special->header.data_setting, 0, true,
-                            iommu);
- 
-     switch ( special->variety )
-@@ -780,8 +779,7 @@ static u16 __init parse_ivhd_device_special(
-          */
-         for ( idx = 0; idx < nr_ioapic_sbdf; idx++ )
-         {
--            if ( ioapic_sbdf[idx].bdf == bdf &&
--                 ioapic_sbdf[idx].seg == seg &&
-+            if ( ioapic_sbdf[idx].sbdf.sbdf == sbdf.sbdf &&
-                  ioapic_sbdf[idx].cmdline )
-                 break;
-         }
-@@ -790,7 +788,7 @@ static u16 __init parse_ivhd_device_special(
-             AMD_IOMMU_DEBUG("IVHD: Command line override present for IO-APIC %#x"
-                             "(IVRS: %#x devID %pp)\n",
-                             ioapic_sbdf[idx].id, special->handle,
--                            &PCI_SBDF(seg, bdf));
-+                            &sbdf);
-             break;
-         }
- 
-@@ -805,8 +803,7 @@ static u16 __init parse_ivhd_device_special(
-                                 special->handle);
-             else if ( idx != MAX_IO_APICS && ioapic_sbdf[idx].pin_2_idx )
-             {
--                if ( ioapic_sbdf[idx].bdf == bdf &&
--                     ioapic_sbdf[idx].seg == seg )
-+                if ( ioapic_sbdf[idx].sbdf.sbdf == sbdf.sbdf )
-                     AMD_IOMMU_WARN("IVHD: duplicate IO-APIC %#x entries\n",
-                                     special->handle);
-                 else
-@@ -827,8 +824,7 @@ static u16 __init parse_ivhd_device_special(
-                 }
- 
-                 /* set device id of ioapic */
--                ioapic_sbdf[idx].bdf = bdf;
--                ioapic_sbdf[idx].seg = seg;
-+                ioapic_sbdf[idx].sbdf = sbdf;
-                 ioapic_sbdf[idx].id = special->handle;
- 
-                 ioapic_sbdf[idx].pin_2_idx = xmalloc_array(
-@@ -862,13 +858,12 @@ static u16 __init parse_ivhd_device_special(
-             AMD_IOMMU_DEBUG("IVHD: Command line override present for HPET %#x "
-                             "(IVRS: %#x devID %pp)\n",
-                             hpet_sbdf.id, special->handle,
--                            &PCI_SBDF(seg, bdf));
-+                            &sbdf);
-             break;
-         case HPET_NONE:
-             /* set device id of hpet */
-             hpet_sbdf.id = special->handle;
--            hpet_sbdf.bdf = bdf;
--            hpet_sbdf.seg = seg;
-+            hpet_sbdf.sbdf = sbdf;
-             hpet_sbdf.init = HPET_IVHD;
-             break;
-         default:
-@@ -1139,9 +1134,8 @@ static int __init cf_check parse_ivrs_table(struct acpi_table_header *table)
-                 return -ENXIO;
-         }
- 
--        if ( !ioapic_sbdf[idx].seg &&
--             /* SB IO-APIC is always on this device in AMD systems. */
--             ioapic_sbdf[idx].bdf == PCI_BDF(0, 0x14, 0) )
-+        /* SB IO-APIC is always on this device in AMD systems. */
-+        if ( ioapic_sbdf[idx].sbdf.sbdf == PCI_SBDF(0, 0, 0x14, 0).sbdf )
-             sb_ioapic = 1;
- 
-         if ( ioapic_sbdf[idx].pin_2_idx )
-diff --git a/xen/drivers/passthrough/amd/iommu_intr.c b/xen/drivers/passthrough/amd/iommu_intr.c
-index 25bf25904e..7dae89bcc0 100644
---- a/xen/drivers/passthrough/amd/iommu_intr.c
-+++ b/xen/drivers/passthrough/amd/iommu_intr.c
-@@ -323,7 +323,8 @@ void cf_check amd_iommu_ioapic_update_ire(
-     unsigned int apic, unsigned int pin, uint64_t rte)
- {
-     struct IO_APIC_route_entry new_rte;
--    int seg, bdf, rc;
-+    pci_sbdf_t sbdf;
-+    int rc;
-     struct amd_iommu *iommu;
-     unsigned int idx;
- 
-@@ -335,20 +336,19 @@ void cf_check amd_iommu_ioapic_update_ire(
-     new_rte.raw = rte;
- 
-     /* get device id of ioapic devices */
--    bdf = ioapic_sbdf[idx].bdf;
--    seg = ioapic_sbdf[idx].seg;
--    iommu = find_iommu_for_device(PCI_SBDF(seg, bdf));
-+    sbdf = ioapic_sbdf[idx].sbdf;
-+    iommu = find_iommu_for_device(sbdf);
-     if ( !iommu )
-     {
-         AMD_IOMMU_WARN("failed to find IOMMU for IO-APIC @ %04x:%04x\n",
--                       seg, bdf);
-+                       sbdf.seg, sbdf.bdf);
-         __ioapic_write_entry(apic, pin, true, new_rte);
-         return;
-     }
- 
-     /* Update interrupt remapping entry */
-     rc = update_intremap_entry_from_ioapic(
--             bdf, iommu, &new_rte,
-+             sbdf.bdf, iommu, &new_rte,
-              &ioapic_sbdf[idx].pin_2_idx[pin]);
- 
-     if ( rc )
-@@ -369,7 +369,8 @@ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
-     unsigned int offset;
-     unsigned int val = __io_apic_read(apic, reg);
-     unsigned int pin = (reg - 0x10) / 2;
--    uint16_t seg, bdf, req_id;
-+    pci_sbdf_t sbdf;
-+    uint16_t req_id;
-     const struct amd_iommu *iommu;
-     union irte_ptr entry;
- 
-@@ -381,12 +382,11 @@ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
-     if ( offset >= INTREMAP_MAX_ENTRIES )
-         return val;
- 
--    seg = ioapic_sbdf[idx].seg;
--    bdf = ioapic_sbdf[idx].bdf;
--    iommu = find_iommu_for_device(PCI_SBDF(seg, bdf));
-+    sbdf = ioapic_sbdf[idx].sbdf;
-+    iommu = find_iommu_for_device(sbdf);
-     if ( !iommu )
-         return val;
--    req_id = get_intremap_requestor_id(seg, bdf);
-+    req_id = get_intremap_requestor_id(sbdf.seg, sbdf.bdf);
-     entry = get_intremap_entry(iommu, req_id, offset);
- 
-     if ( !(reg & 1) )
-@@ -515,15 +515,15 @@ int cf_check amd_iommu_msi_msg_update_ire(
-     struct msi_desc *msi_desc, struct msi_msg *msg)
- {
-     struct pci_dev *pdev = msi_desc->dev;
--    int bdf, seg, rc;
-+    pci_sbdf_t sbdf;
-+    int rc;
-     struct amd_iommu *iommu;
-     unsigned int i, nr = 1;
-     u32 data;
- 
--    bdf = pdev ? pdev->sbdf.bdf : hpet_sbdf.bdf;
--    seg = pdev ? pdev->seg : hpet_sbdf.seg;
-+    sbdf = pdev ? pdev->sbdf : hpet_sbdf.sbdf;
- 
--    iommu = _find_iommu_for_device(PCI_SBDF(seg, bdf));
-+    iommu = _find_iommu_for_device(sbdf);
-     if ( IS_ERR_OR_NULL(iommu) )
-         return PTR_ERR(iommu);
- 
-@@ -532,7 +532,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
- 
-     if ( msi_desc->remap_index >= 0 && !msg )
-     {
--        update_intremap_entry_from_msi_msg(iommu, bdf, nr,
-+        update_intremap_entry_from_msi_msg(iommu, sbdf.bdf, nr,
-                                            &msi_desc->remap_index,
-                                            NULL, NULL);
- 
-@@ -543,7 +543,7 @@ int cf_check amd_iommu_msi_msg_update_ire(
-     if ( !msg )
-         return 0;
- 
--    rc = update_intremap_entry_from_msi_msg(iommu, bdf, nr,
-+    rc = update_intremap_entry_from_msi_msg(iommu, sbdf.bdf, nr,
-                                             &msi_desc->remap_index,
-                                             msg, &data);
-     if ( rc >= 0 )
-@@ -660,8 +660,7 @@ bool __init cf_check iov_supports_xt(void)
-         if ( idx == MAX_IO_APICS )
-             return false;
- 
--        if ( !find_iommu_for_device(PCI_SBDF(ioapic_sbdf[idx].seg,
--                                             ioapic_sbdf[idx].bdf)) )
-+        if ( !find_iommu_for_device(ioapic_sbdf[idx].sbdf) )
-         {
-             AMD_IOMMU_WARN("no IOMMU for IO-APIC %#x (ID %x)\n",
-                            apic, IO_APIC_ID(apic));
-@@ -690,14 +689,14 @@ int __init cf_check amd_setup_hpet_msi(struct msi_desc *msi_desc)
-         return -ENODEV;
-     }
- 
--    iommu = find_iommu_for_device(PCI_SBDF(hpet_sbdf.seg, hpet_sbdf.bdf));
-+    iommu = find_iommu_for_device(hpet_sbdf.sbdf);
-     if ( !iommu )
-         return -ENXIO;
- 
--    lock = get_intremap_lock(hpet_sbdf.seg, hpet_sbdf.bdf);
-+    lock = get_intremap_lock(hpet_sbdf.sbdf.seg, hpet_sbdf.sbdf.bdf);
-     spin_lock_irqsave(lock, flags);
- 
--    msi_desc->remap_index = alloc_intremap_entry(iommu, hpet_sbdf.bdf, 1);
-+    msi_desc->remap_index = alloc_intremap_entry(iommu, hpet_sbdf.sbdf.bdf, 1);
-     if ( msi_desc->remap_index >= INTREMAP_MAX_ENTRIES )
-     {
-         msi_desc->remap_index = -1;
+I know that a tree from yesterday temporarily didn't have Luiz patches, so
+maybe that's what you ran into.
+
+*anyhow*, I will resend to work around that arm pgdp_get() issue.
+
+
 -- 
-2.49.0
+Cheers,
+
+David / dhildenb
 
 
