@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769A8C83F1B
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 08:36:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046392.1416707 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42872C83F1B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 08:40:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046401.1416717 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucK6N-0003VK-FQ; Thu, 17 Jul 2025 08:36:27 +0000
+	id 1ucK9d-00044y-VP; Thu, 17 Jul 2025 08:39:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046392.1416707; Thu, 17 Jul 2025 08:36:27 +0000
+Received: by outflank-mailman (output) from mailman id 1046401.1416717; Thu, 17 Jul 2025 08:39:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucK6N-0003VD-CI; Thu, 17 Jul 2025 08:36:27 +0000
-Received: by outflank-mailman (input) for mailman id 1046392;
- Thu, 17 Jul 2025 08:36:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ucK9d-00044r-Sg; Thu, 17 Jul 2025 08:39:49 +0000
+Received: by outflank-mailman (input) for mailman id 1046401;
+ Thu, 17 Jul 2025 08:39:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Kd8q=Z6=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ucK6L-0003V7-H8
- for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 08:36:25 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ed5d220-62e9-11f0-b894-0df219b8e170;
- Thu, 17 Jul 2025 10:36:23 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-451d3f72391so5876395e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 01:36:23 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b3bbe52cdaesm15352085a12.10.2025.07.17.01.36.17
+ (envelope-from <SRS0=z0s4=Z6=redhat.com=david@srs-se1.protection.inumbo.net>)
+ id 1ucK9c-00044e-0Z
+ for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 08:39:48 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 97237b9b-62e9-11f0-a319-13f23c93f187;
+ Thu, 17 Jul 2025 10:39:46 +0200 (CEST)
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-674-o4O_m6OJNsaE1bHeRLvozQ-1; Thu, 17 Jul 2025 04:39:41 -0400
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-45626532e27so4363535e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Jul 2025 01:39:40 -0700 (PDT)
+Received: from ?IPV6:2003:d8:2f1f:3600:dc8:26ee:9aa9:fdc7?
+ (p200300d82f1f36000dc826ee9aa9fdc7.dip0.t-ipconnect.de.
+ [2003:d8:2f1f:3600:dc8:26ee:9aa9:fdc7])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4562e89c313sm44617495e9.28.2025.07.17.01.39.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Jul 2025 01:36:22 -0700 (PDT)
+ Thu, 17 Jul 2025 01:39:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,136 +53,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ed5d220-62e9-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1752741383; x=1753346183; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ip4Q3/HNx5Jj5pLFerg5GSyF7uOqp0iNk2jET3D7mjA=;
-        b=M80Lmstx5DHGydzOgIGjQTeMiKS83ppljTRfAJwM7niF6fDVD4h9GTl0cAf21mkvwz
-         ZOxqNVu5OZ25X5o527AjCT46sKxyf+aUXnZMSo5rs98ZDv4XX1GNHrNNJNL57aPPOKOq
-         +EGRSyM/bgkrvnhZr7WU+CkczSL423f+r5CqTPNpDZJ2bE+LM/9qBTwnhc8WsXeDWvyq
-         zwp1eGqhmjSbGZZXsRJqOiNFTZE3jeg0//e5q5fQJFSrzjh2nhYiHGHHA0bZZ5e+cocq
-         wpDxF4NjxT/WJ0+tm5VuhkQrVaDUEjiBZgUITNS1Gqh832nCJl6D6ZpyQ2jmAU15sNzk
-         d3ag==
+X-Inumbo-ID: 97237b9b-62e9-11f0-a319-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1752741584;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Lj6lTZwQRiYuMovgfeEEcoQjPhNrRremaT5OpC4sqYE=;
+	b=C3Y7zcr9XFyaKkZlnGENKvW3zyjKR5xNn4HUzGslOKc8e22kDfTIFYpOnnFdu5LIqRq2R4
+	SOxBTqQeYoXBO6xJU9LuCrdQN6HF3eYmPk4ooO958liY1lKEwKjGvkbUedN4CE2qas28iG
+	GYgPHPDIN5zzS8hapr2TzY5f/D05tB0=
+X-MC-Unique: o4O_m6OJNsaE1bHeRLvozQ-1
+X-Mimecast-MFC-AGG-ID: o4O_m6OJNsaE1bHeRLvozQ_1752741580
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752741383; x=1753346183;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ip4Q3/HNx5Jj5pLFerg5GSyF7uOqp0iNk2jET3D7mjA=;
-        b=rcSKhTtXX5kNF7N7SFZFxLxwoSz9I+ZpwoOp+aGyDbAIYShjH+CaWM93omD8bL+/Hl
-         hncU0EY7GsK/cfQocSlSwGRXpbbNjVjzN/trL5PsSNk4UbnAqBZ2KbB7t6WoEff9BGEw
-         On6SA4LNMlCsaSNEbccY/BXZAnuQHxHI1cJvupFN8XAdP1N5R8GMxFBJQ2+lkgXQD51h
-         lo2ZQPeLCDpeNYDtFQlu1hCPFzRAl9R18Yad2v1dndSFub9Nvu11jQBOOHtRd310fG7z
-         qAXptq0p3HofgMNLgzf8K2MjSN0zIvrMiemzoPenk9pfI3DnWh5a3jsEfUvKtQiRUclg
-         RAig==
-X-Forwarded-Encrypted: i=1; AJvYcCWSf4TD6l5CckEP8Nne5X0Hphm7ABWsGYXUtUewfnOl7fvOxweoa55+/An6Q3gGSjscxl1AhojyfT8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzO+XyWmuHnyvMVwJ6BupGxatbU7Yk0yUrsrxpbGTw34VXcsfJs
-	zlBy1Oo4RIdxQRq9PV0dAtmMK9DusIF9iAufLkTyHKIokhXgbtAJicVV0kmptSl2DA==
-X-Gm-Gg: ASbGncttbGBnr+hifSMWJJyMwUHL0OFeGGbzT0TNEc4hjaU4/ROzoXuaKHV9LPdS7/Q
-	K5V1ZR61C0GdHh+Svea7oFeedtSmOsUnq8e4OUZDh12XBHy6nW3U0B1QJqzSsO7pgrOlroUNvkn
-	O7JmnkXpzhG5NtSVwUERYZ8fqDvKbJcQykX/8Mok1yyTkWp5ZJ+aKQ4VYrY3wLKvikzyVe/O1tZ
-	fa03iiBDb/NnVA3kRBgySkLQJteq5L3jCRxHhnm0VO0+hNiE50+JgH66tUh5ZMu2pQY/bMBdR+A
-	DuQPGF+QAXgRHPON2Nf5zl7at3Rgpe9l1qve6C/AEXutwfTgvCouqVHp+VJdS6zkhTpiKpUc9ok
-	1tIzA/yjVVev7AgRwbBBMVc/ul2MeBtavX0J+gBtX6NmHhjBVV+M+XzTfeqPnexlt70FsVUrGYi
-	2OiUxbHMJfdxyvqWwSiA==
-X-Google-Smtp-Source: AGHT+IGtkzQrts7f4XJ7rh1iK2xHY5nB+NkzjS3ijtx6mB9Xyk9VfEmN5XS7FUi6wRxIB2DTasWprA==
-X-Received: by 2002:a5d:5f52:0:b0:3a4:dc42:a0ac with SMTP id ffacd0b85a97d-3b60e539d7fmr4039939f8f.49.1752741382715;
-        Thu, 17 Jul 2025 01:36:22 -0700 (PDT)
-Message-ID: <46feb3ba-d298-4139-a97f-fb3961b0f8d4@suse.com>
-Date: Thu, 17 Jul 2025 10:36:12 +0200
+        d=1e100.net; s=20230601; t=1752741580; x=1753346380;
+        h=content-transfer-encoding:in-reply-to:organization:autocrypt
+         :content-language:from:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Lj6lTZwQRiYuMovgfeEEcoQjPhNrRremaT5OpC4sqYE=;
+        b=X4CRmEKPv7q1lXFJqJz2MuQdMfR8QxwgkgFcXBLHBLKEniBQxzmZwILW1Cd+vlxkgT
+         1quG3AsW9Rrp2Bmadha3Qrvg4A5zmr7WdacEZgm4iCozHPwl8dvIX/di29D9nNTDMhZk
+         wWe3Ra/siBoR6Z/RwHGy4ieTdEQUeouVAEeVLtTugPWdcHQ931PMA2dCXxBsgLp8vwzZ
+         6HHzN4xC+x9RzDJ8mRwW/B8oaFMTJ5schq2LfF0IsJ3ppwoFC7he+tmNDCnrZGlf7DSs
+         8cyKN+mvYo/RYVl8LQHqeTDMEAMuBmQgMTRuNhF5zfKd8EmgV+OBZcsQMUF0mIY4DOHk
+         +ykA==
+X-Forwarded-Encrypted: i=1; AJvYcCVyw8VsFJiEge8eNoUDT0pC8j5rpU3PWRjSd1JOnoj7e/4x8IOwJG2CrC5M+TKmcFcLkw7dD0t/qqY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwyUvSDi7RfM7OjZZ+crrfC81GE5pfxTzj8EfZLblKwgTc2eic0
+	VTC2v/4o8hEzjVjn2zQloVpGd+iOQoSdmOGpPU3/GgdVucmsqSrnJBrlydi9dG/Yd/4+2Fcsdq6
+	tLcLf6dENV+hPREWAZpYxMCQELVORGBAXhhgly8NLQsMtf30qqw0kKM6CVSIOMLyNRyKI
+X-Gm-Gg: ASbGncs/36zYpxAuBGMlkf4AafV690AXS1lMA2Umgv0LBIaKZghqhwm2FMa7sItCmeA
+	HvFFyQ5OqiGO69RKJgKsPrOM6pbh4pJqqWyJBn1cKoFCXvsy2nDTH+Hb22T/E2WyHSJx7t3OkOI
+	WeQgVhFnmmA4UdpeS16v+xBatlILrux+BE3hSKPPXhpsxjeUbzpMwgtkZaiNzTuJ4vcd+HKKDbm
+	YPzwMMsUL77gX3nNtLvqfc0/Bz/Sl/ABNK+EbZzeRUMsenTfeIKRZXpeO71DpA5fwnh6QJ7XeQF
+	paSefkb2lgXdJIdYYgHvRGlYm0rz/3FZDrLZvswiqC4MSSB5qVy2b0jijw6TaPwL/xbI3FbjKVq
+	YAMVnbE4DncP5dShNnin/cvBrWg6+AOtoPlgNRC/k4rXw4B3hTsmB2HKM1muv5sf4
+X-Received: by 2002:a05:600c:a08c:b0:44b:eb56:1d48 with SMTP id 5b1f17b1804b1-4562e0320ddmr54640235e9.4.1752741579824;
+        Thu, 17 Jul 2025 01:39:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF7/rwYshbHQ4mXCqXe0VfAWZwFMFiHguIbQQ20+5zBL9J/LJ0Z7d+RZpnAtH09KGdgkC3Klg==
+X-Received: by 2002:a05:600c:a08c:b0:44b:eb56:1d48 with SMTP id 5b1f17b1804b1-4562e0320ddmr54639715e9.4.1752741579349;
+        Thu, 17 Jul 2025 01:39:39 -0700 (PDT)
+Message-ID: <705fa84f-7a4a-4f74-82bf-5dff51149d94@redhat.com>
+Date: Thu, 17 Jul 2025 10:39:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: xen.efi has MEM_DISCARDABLE flag in Characteristics field of
- .reloc section
-To: Yann Sionneau <yann.sionneau@vates.tech>
-Cc: yann@sionneau.net,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Xen developer discussion <xen-devel@lists.xenproject.org>, nickc@redhat.com,
- Demi Marie Obenour <demiobenour@gmail.com>
-References: <39104717-4b64-483c-b6fd-d30069df4c58@gmail.com>
- <7e039262-1f54-46e1-8f70-ac3f03607d5a@suse.com>
- <7a7f40b8-5d73-421a-9358-30421d12a243@vates.tech>
- <2e1d2e67-ac14-4cb7-a6ea-4351d1418be9@suse.com>
- <06ad1fe7-cc79-4976-8748-318a7f8f2b45@vates.tech>
+Subject: Re: [PATCH v1 4/9] fs/dax: use vmf_insert_folio_pmd() to insert the
+ huge zero folio
+To: Alistair Popple <apopple@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+ nvdimm@lists.linux.dev, Andrew Morton <akpm@linux-foundation.org>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox
+ <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
+ <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
+ Hugh Dickins <hughd@google.com>, Oscar Salvador <osalvador@suse.de>,
+ Lance Yang <lance.yang@linux.dev>
+References: <20250715132350.2448901-1-david@redhat.com>
+ <20250715132350.2448901-5-david@redhat.com>
+ <x32buctb6cdgr7kfwd54blmcqs6d3ixpsujx2qlde2cf6ziayu@mrltytvzg54p>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ g3eXuA==
+Organization: Red Hat
+In-Reply-To: <x32buctb6cdgr7kfwd54blmcqs6d3ixpsujx2qlde2cf6ziayu@mrltytvzg54p>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: PUaKAaB5ckS_Y_lz6MUlkYjHLqxwpgd7zUe4TCsaC7U_1752741580
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <06ad1fe7-cc79-4976-8748-318a7f8f2b45@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 17.07.2025 10:28, Yann Sionneau wrote:
-> On 7/17/25 10:22, Jan Beulich wrote:
->> On 17.07.2025 09:32, Yann Sionneau wrote:
->>> Hello Demi Marie, Jan, Nick, all,
->>>
->>> Thank you Demi Marie for bringing this topic on the mailing list.
->>>
->>> I discussed it a bit with Jan on Matrix but the situation is not pretty,
->>> there is no clean solution that stands out easily.
->>>
->>> As Jan said, it seems .reloc is meant to be discardable, so we can't
->>> blame binutils LD for putting it:
->>>
->>> https://github.com/bminor/binutils-gdb/commit/25c80428af3311e761c87d8f706596b9701602ec#diff-078cf751467928c038996b40073a682425712b9b01182424e68cf18fb08a75b5R953-R977
->>>
->>> And we can't obviously blame the loaders for honoring this flag.
->>>
->>> Most reasonable solution indeed would be to ask binutils to add a link
->>> flag to say "please do not put the DISCARDABLE flag on the .reloc section"
->>>
->>> I'm adding Nick Clifton from binutils in CC so that he can comment on
->>> this possible outcome or any other possible solution.
->>>
->>> In the mean time, while waiting for a solution to emerge (and be merged,
->>> and released) what do we do?
->>>
->>> Do we put some hack in Xen build Makefiles so that xen.efi is
->>> post-processed to strip this bit?
->>>
->>> This could be the temporary solution.
+On 17.07.25 10:38, Alistair Popple wrote:
+> On Tue, Jul 15, 2025 at 03:23:45PM +0200, David Hildenbrand wrote:
+>> Let's convert to vmf_insert_folio_pmd().
 >>
->> As indicated - I don't think this is just a temporary solution. Beyond Xen,
->> I simply don't see value in adding a linker flag (which then, sooner or
->> later, llvm would also need to support just for Xen). The question rather
->> is how to make the Xen side hack as little hacky as possible, without
->> relying on the fragile behavior of objcopy.
+>> There is a theoretical change in behavior: in the unlikely case there is
+>> already something mapped, we'll now still call trace_dax_pmd_load_hole()
+>> and return VM_FAULT_NOPAGE.
+>>
+>> Previously, we would have returned VM_FAULT_FALLBACK, and the caller
+>> would have zapped the PMD to try a PTE fault.
+>>
+>> However, that behavior was different to other PTE+PMD faults, when there
+>> would already be something mapped, and it's not even clear if it could
+>> be triggered.
+>>
+>> Assuming the huge zero folio is already mapped, all good, no need to
+>> fallback to PTEs.
+>>
+>> Assuming there is already a leaf page table ... the behavior would be
+>> just like when trying to insert a PMD mapping a folio through
+>> dax_fault_iter()->vmf_insert_folio_pmd().
+>>
+>> Assuming there is already something else mapped as PMD? It sounds like
+>> a BUG, and the behavior would be just like when trying to insert a PMD
+>> mapping a folio through dax_fault_iter()->vmf_insert_folio_pmd().
+>>
+>> So, it sounds reasonable to not handle huge zero folios differently
+>> to inserting PMDs mapping folios when there already is something mapped.
 > 
-> Ok I didn't understand your previous answer, it's more clear now, thank you.
-> Would you consider using a tool like this less fragile than objcopy: 
-> https://github.com/fallen/keeprelocs ?
+> Yeah, this all sounds reasonable and I was never able to hit this path with the
+> RFC version of this series anyway. So I suspect it really is impossible to hit
+> and therefore any change is theoretical.
 
-Well, something like that. Generalized enough to at least be halfway easy to
-later also use for further purposes, and if at all possible using the header
-we already have for PE (efi/pe.h).
+Thanks for the review and test, Alistair!
 
-Jan
+-- 
+Cheers,
+
+David / dhildenb
+
 
