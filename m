@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 885DDC83F22
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 12:11:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1046722.1417135 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D816C83F34
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jul 2025 12:11:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1046724.1417139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucNSa-00048q-71; Thu, 17 Jul 2025 12:11:36 +0000
+	id 1ucNSa-0004Ca-Gn; Thu, 17 Jul 2025 12:11:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1046722.1417135; Thu, 17 Jul 2025 12:11:36 +0000
+Received: by outflank-mailman (output) from mailman id 1046724.1417139; Thu, 17 Jul 2025 12:11:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucNSa-00048g-4C; Thu, 17 Jul 2025 12:11:36 +0000
-Received: by outflank-mailman (input) for mailman id 1046722;
+	id 1ucNSa-0004BJ-CB; Thu, 17 Jul 2025 12:11:36 +0000
+Received: by outflank-mailman (input) for mailman id 1046724;
  Thu, 17 Jul 2025 12:11:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tNy=Z6=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1ucNSZ-0003K1-37
+ id 1ucNSZ-0003HJ-K0
  for xen-devel@lists.xenproject.org; Thu, 17 Jul 2025 12:11:35 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 2bd44f43-6307-11f0-b894-0df219b8e170;
- Thu, 17 Jul 2025 14:11:30 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 2e8d1d07-6307-11f0-a319-13f23c93f187;
+ Thu, 17 Jul 2025 14:11:34 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AB8921596;
- Thu, 17 Jul 2025 05:11:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8375D1BB2;
+ Thu, 17 Jul 2025 05:11:26 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.51.215])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C1493F6A8;
- Thu, 17 Jul 2025 05:11:27 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F0A9C3F6A8;
+ Thu, 17 Jul 2025 05:11:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,37 +44,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bd44f43-6307-11f0-b894-0df219b8e170
+X-Inumbo-ID: 2e8d1d07-6307-11f0-a319-13f23c93f187
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v7 1/6] xen/arm: Create tee command line parameter
-Date: Thu, 17 Jul 2025 14:11:02 +0200
-Message-ID: <16aefe82c3dcee0039a7492def637c01a13bfcb9.1752754016.git.bertrand.marquis@arm.com>
+Subject: [PATCH v7 4/6] xen/arm: ffa: Add buffer full notification support
+Date: Thu, 17 Jul 2025 14:11:05 +0200
+Message-ID: <e9db14f98015afd4c1014df42f94c545a8dd8c50.1752754016.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1752754016.git.bertrand.marquis@arm.com>
 References: <cover.1752754016.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new command line parameter "tee=" to be used to explicitly select
-what tee mediator is to be used by Xen and fail if it does not exist
-or the probe function for it failed.
+Add support to raise a Rx buffer full notification to a VM.
+This function will be used for indirect message support between VM and
+is only activated if CONFIG_FFA_VM_TO_VM is selected.
 
-Without specifying which tee is to be used, Xen will use the first one
-for which the probe function succeeds which depends on the order of the
-mediator list which depends on the compiler.
-Using the command line argument, it is now possible to explicit request
-a specific TEE mediator and panic on boot if it is not available.
+Even if there are 32 framework notifications possible, right now only
+one is defined so the implementation is simplified to only handle the
+buffer full notification using a boolean. If other framework
+notifications have to be supported one day, the design will have to be
+modified to handle it properly.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
@@ -83,137 +79,161 @@ Acked-by: Julien Grall <jgrall@amazon.com>
 Changes in v7:
 - Add Julien A-b
 Changes in v6:
-- Add Jens R-b
-Changes in v5:
-- Typo fix and rewording in command line doc (Julien)
-- fix include order in tee.c (Julien)
-- use a local bool instead of retesting the string each time in tee_init
-  (Julien)
-Changes in v4:
 - None
+Changes in v5:
+- None
+Changes in v4:
+- Add Jens R-b
 Changes in v3:
-- Properly classify tee as arm specific (Jan)
+- introduce a vm_pending boolean to track if VM notifications are
+  pending and allow to decorelate pending secure notifications from
+  pending vm ones
+- remove ifdef around boolean entries for notifications and make use of
+  IS_ENABLED instead of ifdefs when possible
+- Fix notification number signaled to VMs for buffer full to use the
+  proper GUEST_FFA_NOTIF_PEND_INTR_ID instead of the identifier received
+  from the SPMC.
+- Move back into this patch ffa_private.h part which was wrongly in the
+  patch for indirect messages between VM
 Changes in v2:
-- Patch introduced to add a command line selection of the TEE
+- Switch ifdef to IS_ENABLED when possible
 ---
- docs/misc/xen-command-line.pandoc  | 14 +++++++++++++
- xen/arch/arm/include/asm/tee/tee.h |  4 ++++
- xen/arch/arm/tee/tee.c             | 32 ++++++++++++++++++++++++++++++
- 3 files changed, 50 insertions(+)
+ xen/arch/arm/tee/ffa_notif.c   | 36 ++++++++++++++++++++++++++++------
+ xen/arch/arm/tee/ffa_private.h | 23 +++++++++++++++++++++-
+ 2 files changed, 52 insertions(+), 7 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 6865a61220ca..ad5800ac45a8 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2655,6 +2655,20 @@ Specify the per-cpu trace buffer size in pages.
- 
- Flag to enable TSC deadline as the APIC timer mode.
- 
-+### tee (arm)
-+> `= <string>`
-+
-+Specify the TEE mediator to be probed and use.
-+
-+The default behaviour is to probe all TEEs supported by Xen and use
-+the first one successfully probed. When this parameter is passed, Xen will
-+probe only the TEE mediator passed as argument and boot will fail if this
-+mediator is not properly probed or if the requested TEE is not supported by
-+Xen.
-+
-+This parameter can be set to `optee` or `ffa` if the corresponding mediators
-+are compiled in.
-+
- ### tevt_mask
- > `= <integer>`
- 
-diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/asm/tee/tee.h
-index 0169fd746bcd..15d664e28dce 100644
---- a/xen/arch/arm/include/asm/tee/tee.h
-+++ b/xen/arch/arm/include/asm/tee/tee.h
-@@ -55,6 +55,9 @@ struct tee_mediator_desc {
-     /* Printable name of the TEE. */
-     const char *name;
- 
-+    /* Command line name of the TEE (to be used with tee= cmdline option) */
-+    const char *cmdline_name;
-+
-     /* Mediator callbacks as described above. */
-     const struct tee_mediator_ops *ops;
- 
-@@ -77,6 +80,7 @@ void tee_free_domain_ctx(struct domain *d);
- static const struct tee_mediator_desc __tee_desc_##_name __used     \
- __section(".teemediator.info") = {                                  \
-     .name = _namestr,                                               \
-+    .cmdline_name = #_name,                                         \
-     .ops = _ops,                                                    \
-     .tee_type = _type                                               \
- }
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 3f65e45a7892..8501443c8e57 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -18,6 +18,7 @@
- 
- #include <xen/errno.h>
- #include <xen/init.h>
-+#include <xen/param.h>
- #include <xen/types.h>
- 
- #include <asm/tee/tee.h>
-@@ -25,6 +26,10 @@
- extern const struct tee_mediator_desc _steemediator[], _eteemediator[];
- static const struct tee_mediator_desc __read_mostly *cur_mediator;
- 
-+/* Select the TEE mediator using a name on command line. */
-+static char __initdata opt_mediator[16] = "";
-+string_param("tee", opt_mediator);
-+
- /*
-  * TODO: Add function to alter Dom0 DTB, so we can properly describe
-  * present TEE.
-@@ -80,15 +85,42 @@ uint16_t tee_get_type(void)
- static int __init tee_init(void)
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index 00efaf8f7353..f6df2f15bb00 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -69,6 +69,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
  {
-     const struct tee_mediator_desc *desc;
-+    bool select_mediator = strcmp(opt_mediator, "");
-+
-+    if ( select_mediator )
-+        printk(XENLOG_INFO "TEE Mediator %s selected from command line\n",
-+               opt_mediator);
+     struct domain *d = current->domain;
+     struct ffa_ctx *ctx = d->arch.tee;
++    bool notif_pending;
  
-+    /*
-+     * When a specific TEE is selected using the 'tee=' command line
-+     * argument, we panic if the probe fails or if the requested TEE is not
-+     * supported.
-+     */
-     for ( desc = _steemediator; desc != _eteemediator; desc++ )
+     if ( !notif_enabled )
      {
-+        if ( select_mediator &&
-+             strncmp(opt_mediator, desc->cmdline_name, sizeof(opt_mediator)) )
-+            continue;
-+
-         if ( desc->ops->probe() )
-         {
-             printk(XENLOG_INFO "Using TEE mediator for %s\n", desc->name);
-             cur_mediator = desc;
-             return 0;
-         }
-+        else if ( select_mediator )
-+        {
-+            panic("TEE mediator %s from command line probe failed\n",
-+                  opt_mediator);
-+            return -EFAULT;
-+        }
-+    }
-+
-+    if ( select_mediator )
-+    {
-+        panic("TEE Mediator %s from command line not supported\n",
-+              opt_mediator);
-+        return -EINVAL;
+@@ -76,7 +77,11 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+         return;
      }
  
-     return 0;
+-    if ( test_and_clear_bool(ctx->notif.secure_pending) )
++    notif_pending = test_and_clear_bool(ctx->notif.secure_pending);
++    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++        notif_pending |= test_and_clear_bool(ctx->notif.vm_pending);
++
++    if ( notif_pending )
+     {
+         /* A pending global notification for the guest */
+         ffa_set_regs(regs, FFA_SUCCESS_64, 0,
+@@ -93,6 +98,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
+     uint32_t recv = get_user_reg(regs, 1);
+     uint32_t flags = get_user_reg(regs, 2);
+     uint32_t w2 = 0;
+@@ -132,11 +138,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+          */
+         if ( ( flags  & FFA_NOTIF_FLAG_BITMAP_SP ) &&
+              ( flags & FFA_NOTIF_FLAG_BITMAP_SPM ) )
+-        {
+-                struct ffa_ctx *ctx = d->arch.tee;
+-
+-                ACCESS_ONCE(ctx->notif.secure_pending) = false;
+-        }
++            ACCESS_ONCE(ctx->notif.secure_pending) = false;
+ 
+         arm_smccc_1_2_smc(&arg, &resp);
+         e = ffa_get_ret_code(&resp);
+@@ -156,6 +158,14 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+             w6 = resp.a6;
+     }
+ 
++    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) &&
++          flags & FFA_NOTIF_FLAG_BITMAP_HYP &&
++          test_and_clear_bool(ctx->notif.buff_full_pending) )
++    {
++        ACCESS_ONCE(ctx->notif.vm_pending) = false;
++        w7 = FFA_NOTIF_RX_BUFFER_FULL;
++    }
++
+     ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
+ }
+ 
+@@ -178,6 +188,20 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
+                            bitmap_hi);
+ }
+ 
++#ifdef CONFIG_FFA_VM_TO_VM
++void ffa_raise_rx_buffer_full(struct domain *d)
++{
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !ctx )
++        return;
++
++    ACCESS_ONCE(ctx->notif.buff_full_pending) = true;
++    if ( !test_and_set_bool(ctx->notif.vm_pending) )
++        vgic_inject_irq(d, d->vcpu[0], GUEST_FFA_NOTIF_PEND_INTR_ID, true);
++}
++#endif
++
+ /*
+  * Extract a 16-bit ID (index n) from the successful return value from
+  * FFA_NOTIFICATION_INFO_GET_64 or FFA_NOTIFICATION_INFO_GET_32. IDs are
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index 1a1dcabcdc28..fa875f54533f 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -218,6 +218,8 @@
+ #define FFA_NOTIF_INFO_GET_ID_COUNT_SHIFT   7
+ #define FFA_NOTIF_INFO_GET_ID_COUNT_MASK    0x1F
+ 
++#define FFA_NOTIF_RX_BUFFER_FULL        BIT(0, U)
++
+ /* Feature IDs used with FFA_FEATURES */
+ #define FFA_FEATURE_NOTIF_PEND_INTR     0x1U
+ #define FFA_FEATURE_SCHEDULE_RECV_INTR  0x2U
+@@ -303,9 +305,20 @@ struct ffa_mem_region {
+ struct ffa_ctx_notif {
+     /*
+      * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
+-     * pending global notifications.
++     * pending notifications from the secure world.
+      */
+     bool secure_pending;
++
++    /*
++     * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
++     * pending notifications from VMs (including framework ones).
++     */
++    bool vm_pending;
++
++    /*
++     * True if domain has buffer full notification pending
++     */
++    bool buff_full_pending;
+ };
+ 
+ struct ffa_ctx {
+@@ -419,6 +432,14 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs);
+ void ffa_handle_notification_get(struct cpu_user_regs *regs);
+ int ffa_handle_notification_set(struct cpu_user_regs *regs);
+ 
++#ifdef CONFIG_FFA_VM_TO_VM
++void ffa_raise_rx_buffer_full(struct domain *d);
++#else
++static inline void ffa_raise_rx_buffer_full(struct domain *d)
++{
++}
++#endif
++
+ void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid);
+ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs);
+ 
 -- 
 2.47.1
 
