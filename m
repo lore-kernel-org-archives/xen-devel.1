@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74864C83F3B
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 15:55:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1048951.1419178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3924AC83F1A
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 16:13:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1048994.1419195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucnQV-0001Rx-TY; Fri, 18 Jul 2025 15:55:11 +0000
+	id 1ucnht-0006e6-He; Fri, 18 Jul 2025 16:13:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1048951.1419178; Fri, 18 Jul 2025 15:55:11 +0000
+Received: by outflank-mailman (output) from mailman id 1048994.1419195; Fri, 18 Jul 2025 16:13:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucnQV-0001PH-O2; Fri, 18 Jul 2025 15:55:11 +0000
-Received: by outflank-mailman (input) for mailman id 1048951;
- Fri, 18 Jul 2025 15:55:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ucnht-0006dz-Ee; Fri, 18 Jul 2025 16:13:09 +0000
+Received: by outflank-mailman (input) for mailman id 1048994;
+ Fri, 18 Jul 2025 16:13:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=00bL=Z7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ucnQU-0000xy-F4
- for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 15:55:10 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 944f137e-63ef-11f0-b894-0df219b8e170;
- Fri, 18 Jul 2025 17:55:08 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-45634205adaso11391825e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 18 Jul 2025 08:55:08 -0700 (PDT)
-Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
- [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca48719sm2276468f8f.47.2025.07.18.08.55.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 08:55:07 -0700 (PDT)
+ <SRS0=Us2c=Z7=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1ucnhs-0006dt-Nj
+ for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 16:13:08 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20610.outbound.protection.outlook.com
+ [2a01:111:f403:2407::610])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 15eaa08d-63f2-11f0-a319-13f23c93f187;
+ Fri, 18 Jul 2025 18:13:05 +0200 (CEST)
+Received: from SJ0PR03CA0154.namprd03.prod.outlook.com (2603:10b6:a03:338::9)
+ by SJ1PR12MB6291.namprd12.prod.outlook.com (2603:10b6:a03:456::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.39; Fri, 18 Jul
+ 2025 16:12:59 +0000
+Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
+ (2603:10b6:a03:338:cafe::ba) by SJ0PR03CA0154.outlook.office365.com
+ (2603:10b6:a03:338::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.19 via Frontend Transport; Fri,
+ 18 Jul 2025 16:12:59 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8943.21 via Frontend Transport; Fri, 18 Jul 2025 16:12:59 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Jul
+ 2025 11:12:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,515 +58,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 944f137e-63ef-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752854108; x=1753458908; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=luIxgmOKAlUDcDRuBqi0YJDZTZn+FgoCmStDLwvT0EA=;
-        b=eJWMLxsIKLbYaRkUWVU5ba5ZYu2izsigD/7mbgykuf8Ed4aPDM43vgd+5kCPSEWzs8
-         Ce6wKJb4AflXcr8L9jfvjm1/R97/V7iUYiEqIdpGgGOdqUVYLuzyzz5JulycHIYoiZaF
-         y0PBMUGa6vBGub7DouDevlnF6donefoVWOaKA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752854108; x=1753458908;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=luIxgmOKAlUDcDRuBqi0YJDZTZn+FgoCmStDLwvT0EA=;
-        b=iXFs6cUC4QhIHKKpAkyijbho1oZo+jNcVQBxPSAoMrBZacN6fcytg4Z20bXzz6fZDm
-         yY5XJ2404PaogsKm6IJbkHDqniCRqEqK4UFaiixw6Q091J4d0FPuduHcYCpRg11Zx+94
-         uU/pjHyMUWAHMIqgP2clKkasAtnQTTLtJZ4PAHhwCNltKRGTWchJj7px4BaMXGJOZhGq
-         QY24t82FZB5TpAiL7tsuHwTyIcic72/Bcf83AL1iqUUPFx4tNDRrz2Ry0hpxYPseO7Ub
-         JJWf8xO2hoac6uHHv6/3qhul2oct291F5hFZtxlR69SXxqhh9z0Q558HcRocSEy6OCcZ
-         H1uA==
-X-Gm-Message-State: AOJu0Yw+ex8HhVx9lmxYbi7Tcvcy9hzW4tkkXF3UrZqWrAi8NDVWNIQi
-	iLkZNkr0HmO3u8LJ6mv4Wlvp5v0qPHgQQtMsBaozuvl6oizsYg/5CtoSogwFehfZG5qFmc4imlL
-	w3kAL72KGOA==
-X-Gm-Gg: ASbGncvbu7nR1Ihmga0DrxRQtMujwxp92jL2x8xuaNdkoM3EkQxY/YTyCEGAY+vhDqC
-	aI2/yLgudtBQ6XqaRBIYEjBzl6OR4o2F/lNzUKfros0ow40qdBbJW38s9kvMZ+enykIsF8ILAc4
-	2PABv9hOsyS5rA/3ikl5Yq2ZdcHk37Q9Nx6VZqJ4jt0da65GG/keAtPGwa0tr7UCWylEnXtqLrU
-	rP4dTKwDGOVZhUz+u/i96aNbp8vQfjWswYyRwMeXEC4A3NbbiQXPb2h6HUbo5wgjg4A3ZM4Eswr
-	ug5K4ZnMkYLqfvt4I/nVC4TBFlABkm4om1pVt9eBuXpwUmiytE0AdbynIgy1zUfAPKsJxk4mmDf
-	8Mwftqj3PzXN1ScXosehZOPyRn6Sc7/i1K7eGDtmdortBDhS+60hfRyC4XnUneTesLdOgMRalQ2
-	S+
-X-Google-Smtp-Source: AGHT+IERzlEXS7z26U7cQQV0LKgJiclBCNTQC1mJfbJPpZdgl0UiZEccaMHJn8sQDfrgdxMJrXyx6Q==
-X-Received: by 2002:a05:6000:22c6:b0:3a3:652d:1640 with SMTP id ffacd0b85a97d-3b60e4c9551mr7874473f8f.2.1752854107589;
-        Fri, 18 Jul 2025 08:55:07 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/4] x86/spec-ctrl: Update vendor/family/model logic
-Date: Fri, 18 Jul 2025 16:55:01 +0100
-Message-Id: <20250718155502.2610047-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250718155502.2610047-1-andrew.cooper3@citrix.com>
-References: <20250718155502.2610047-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 15eaa08d-63f2-11f0-a319-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=noEokQ9JVaX2Kb/cYlB9Nh1cHgT8LK6GatPUcBogiCM+Bxh8JquK7NHwF7egVW3f4FA/Gh1AUkTiXnd52kXakOWGWeyRgckqkT9uVTXj9GWF38a+liQe5ijoIfBPVEFD7GWafCi4VDMM4KPyKtuZ3AzI8UapCPMtSA8Js4OHAC1WMCJTPvRzryJ7MWBS2GQxfGkffAV3YDABqPPiseIxQaHQ88KM+DLYO0f5Uwbwa6RtfdV7pevxw6U9mMCqNYwS8hu9Tn5l/xfGqtXEUQ+c21rrGxPnEf/bH34VjUl1+oE2H7RJ+GOAPjDd3l2cYn5C8hPd4gBNkuxvL6nIHDDD8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zrvjKRv4T0g0fU/sGoHvJfgh2za7p88k7obZYahpJt0=;
+ b=XIZ1yySJoAUQtqx4+6VBEs9K9MlZUUg7C3YtjM0vO2ZJztQHUeYhXA5r9gnd1ybI/hc68FVkYGpFS+Swfwx15hmVeq47H87OxIBwWvFXmdwOKg6J7cU2vlWZUHRRwovibZOaop6vKqAAvuXyLywGzgQ+XFPZQezZkbsgpT8o2S4nCgbifS0sqdJTwMzgUA24CVvMlVt51x/wllPcCCjdQGx+zT4BKcD7TUC/MIURT26LIHHxqU32mIYX7d1zAZw282stiRYDqnatU9ngEidC/HHL/nYBei7WKDonanrlQL27zNFX6va6Swe+s/Ai6QQmB0bvCCn9jX0yiZ/x2g3l/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zrvjKRv4T0g0fU/sGoHvJfgh2za7p88k7obZYahpJt0=;
+ b=EmAoYDuLrLfjbzZqvTsXNFVdjqr4YCnEEZV5AGQgbCHz0tG1omslJsVUr7o71vFmpaGaM2EQg8pJHqwa9Q7iN5+vOU/68RlXVvk1r3zS7GOAF5hh57jMJLwUL+tOIFpdvZj2VEQQdGPtAL1sa/ChJcShworxjoYNeS+ykM8ftgc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 18 Jul 2025 18:12:54 +0200
+Message-ID: <DBFBAURYB2J6.LTV7SKMB1PQQ@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>, =?utf-8?q?Roger_Pau_Monn=C3=A9?=
+	<roger.pau@citrix.com>
+Subject: Re: [PATCH] x86: Don't allow HVM alongside PV_SHIM_EXCLUSIVE
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	<xen-devel@lists.xenproject.org>
+X-Mailer: aerc 0.20.1
+References: <20250718151214.24835-1-alejandro.garciavallejo@amd.com>
+ <47704e30-0f8f-483e-b22e-5cdb767699d5@citrix.com>
+In-Reply-To: <47704e30-0f8f-483e-b22e-5cdb767699d5@citrix.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|SJ1PR12MB6291:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9468ef6e-2ba1-433a-718e-08ddc615f70d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?UlBlMzEzUDdsN0lSdy9IZFR5V0FyMVZZSTdWZ3dLS2pObXk2Y1UwcTJjNU9F?=
+ =?utf-8?B?RUxRdE42WnZGVFZ0Q2NSNWExUmJFWHBvTWFhaVE3NEY0Ym9LeHMrOG9vM0pa?=
+ =?utf-8?B?cEFjNUdnbStES1I5OEc0Q2kvckJIZy8zNE5sdzB6bnJjYlZESEFEaE1OQ0NG?=
+ =?utf-8?B?cVkra2cvOHMreTUzVFRRa0d2R3VwZ2l5cHpmaFN1d3JsUCtEOVZ2eHJSV05D?=
+ =?utf-8?B?dDNCZWZlQzBoNGRaejhRcC92dHk2TG9oZXNrTGxid05ZTk5FOU4rU0RibVRO?=
+ =?utf-8?B?UVIxcXZUVW0yV3Z2ak9jOWRTa2JJMkIxdjYwT3pJY0RGdVNvSUUwdUJTQ1VU?=
+ =?utf-8?B?SlJDK2o5azB5SnRDOU9vTzJOTm01QmRWbGpNSkZDbmJWemZjUm4xcjduWUFE?=
+ =?utf-8?B?a1R4cHFOSXhMWHUzNzduaFJ0Vm0wSkZBdnEwZi9zdWhLL2EzdTl2bXQvYmdB?=
+ =?utf-8?B?bVY4dHE4SUhBU01ya05GMEV1Yi9PY2J3OHk0dGtZTDMvelN1WjhpT2JvNU8x?=
+ =?utf-8?B?ZE1tN3pNQlZ4ZDlxYnVjQk40NHBBSmJrMTRJKzhMdlN2NS96d3p6NnB1ZkZM?=
+ =?utf-8?B?eklZRmNkb0JFVXVONldDMXpPZGY2Y1VBeWl4R3hpNEFtVjhhSmxRMHk3UnB4?=
+ =?utf-8?B?R0doOC9UbVJmOEs5TThZV2MzMmR6b3JtcTJHYzZ2dmJVUll5TGkvZnU5UG1z?=
+ =?utf-8?B?RWNDSTlQa2NEOVpQbGRrRnZ6K3ZGT1E5TkhKN3RTT0tjcXVuL3kzTnNnTGRa?=
+ =?utf-8?B?OFFPTzJ5dXZIVEM3d1FsL28rQUdvVzBPSzdOcTU4cUtmVnliZG11RE96MFY3?=
+ =?utf-8?B?UVZKQkJnZ0kyQzlhTTZjVzZiNlFya3BLcHgxSitacGp3MEtmY2hhc3MyZ01Z?=
+ =?utf-8?B?QnlZK281K1BOMXU1b28yVDNGSWZvOW9ZMmJucTB2YnBmUUlpdU9GZURWTnI1?=
+ =?utf-8?B?bDZwM2c5Y04zSzhiTkJZYWdDMHZaQ29uQmdaWU5abjNTT1JnclQ1QmJvN2t3?=
+ =?utf-8?B?Y0VxTjNmTGZ4Z0VwS3RRaDBGT1B4aVdPTVVUbC95cVEvUElNd2ZoRTBEYXJG?=
+ =?utf-8?B?Snl0QkJyd2ltUTdiaXlua2YveUlyVUtqSlVKcmRQMDN6YTlkMVd2YnByZHRM?=
+ =?utf-8?B?RUdVcE51eVh1amJCNXV6VlIwVnVweklMdUs5dS9yWi9GWnc0RXJ4WmdoMVF0?=
+ =?utf-8?B?UmVYUFdTTW9LNUF4Y2xPVHc3SzFUMlZEY3ByUkVVRjh5R29BS0dCbkNydVhJ?=
+ =?utf-8?B?S2U4OEw3NFVkSlFJeThRRjJmM3pEMDVJemhkeVF1N2V6MHBLTTlvUUxmajJ0?=
+ =?utf-8?B?RGovWkxCWlRwOUhEYlZ6aWhoMXlLS2ZhZ2RpMnRPaDgyWndiclJycll3Skgv?=
+ =?utf-8?B?M2xvSUpNQStQSkpHeU5LTFB2Y0ZNQ09kbFB3Q3c3aDhwNHF0Uk42OHRoRUdi?=
+ =?utf-8?B?TzNVMFlBbm5QdU1aOGNSeHZBclVGajM0K1d1SFNmTXlNQ1E5VGNNaUNPTzRW?=
+ =?utf-8?B?aXM5VmpwMms4dXR3Wkh2eWJvaE45ZmFFN3RpYUNKL3ZlZndFaWJLSnlvNTd5?=
+ =?utf-8?B?STBvWGFybmh1eDFWaHBScTVGVEZUcWRVNnhXTDdVclBob0ZZcmFaTng5Z3Uy?=
+ =?utf-8?B?clNwWlM1THJYQ05Jd3ZDTnFDVEF4RWVHL2I2K3hXY1BZZXNhN3NLcldMZHBl?=
+ =?utf-8?B?ZTdIaHhjelVFN0tpRlNaSiswdWE0ZTFrYnNHZTVKai9ZOEFRZkxBb05BYm1B?=
+ =?utf-8?B?bk5oVGI0UnB5NzJGc1ordUxnQUJpdEdpbjJ2dTY3bHNhYWNHQndGaGlxT0xZ?=
+ =?utf-8?B?VkdqbHd2QkUybTdtMlE0bUN0TnVuY0k5Yk5iRi92ZWJCZjAya3E3VUEydHJx?=
+ =?utf-8?B?eUk5T3ovRUFJd2dPdldGcjR1S0dscitBd0RqcHpQU2c2cUtkN1lJUTNScmVW?=
+ =?utf-8?B?dVRFYUs0dGRSaGoxTlpBM2NFcTNRRDF3RnhUQUhJa3dlK0drRU1WUk5RWGVt?=
+ =?utf-8?B?QUc0MGgyeWxQM3VZQWRtTjQ1dFkxbEVRTVN4czhrZWEvTUpPUVVGWTV3L1E0?=
+ =?utf-8?Q?ufheU3?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2025 16:12:59.6590
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9468ef6e-2ba1-433a-718e-08ddc615f70d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000A672F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6291
 
-Switch to the new fields and constants.
+On Fri Jul 18, 2025 at 5:41 PM CEST, Andrew Cooper wrote:
+> On 18/07/2025 4:12 pm, Alejandro Vallejo wrote:
+>> Otherwise compile-time errors ensue. It's a nonsensical configuration,
+>> but it's supriously triggered in randconfig jobs.
+>>
+>> Fixes: 8b5b49ceb3d9("x86: don't include domctl and alike in shim-excl...=
+")
+>> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+>> ---
+>>  xen/arch/x86/hvm/Kconfig | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+>> index b903764bda..f57a87bca3 100644
+>> --- a/xen/arch/x86/hvm/Kconfig
+>> +++ b/xen/arch/x86/hvm/Kconfig
+>> @@ -1,6 +1,7 @@
+>>  menuconfig HVM
+>>  	bool "HVM support"
+>>  	default !PV_SHIM
+>> +	depends on !PV_SHIM_EXCLUSIVE
+>>  	select COMPAT
+>>  	select IOREQ_SERVER
+>>  	select MEM_ACCESS_ALWAYS_ON
+>
+> I deeply regret not nacking this originally and blocking the patch you
+> listed as fixed.
+>
+> This depends was explicitly reverted in 568f806cba4c because it breaks a
+> lot of things, notably `make allyesconfig`.
+>
+> We're going to need to find a different way to fix RANDCONFIG.
+>
+> ~Andrew
 
-No functional change.
+It can be done the other way around. PV_SHIM_EXCLUSIVE depending on !CONFIG=
+_HVM,
+but that won't help with allyesconfig.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+PV_SHIM_EXCLUSIVE could be replaced by a PVSHIM_BOOT Kconfig. Combined with
+DOM0LESS_BOOT and DOM0_BOOT this gives the full freedom of booting in shim =
+mode,
+in dom0 mode, or in dom0less/hlaunch mode; and is compatible with allyescon=
+fig.
 
-I've intentionally not converted the tables with raw numbers yet.  That's not
-a mechanical change, and requires more care.
----
- xen/arch/x86/spec_ctrl.c | 162 +++++++++++++++++++--------------------
- 1 file changed, 80 insertions(+), 82 deletions(-)
+PV_SHIM_EXCLUSIVE would be unsetting DOM0_BOOT and DOM0LESS_BOOT.
 
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index bcdae1ed2377..c5bc2eef9572 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -388,7 +388,7 @@ int8_t __ro_after_init opt_xpti_domu = -1;
- 
- static __init void xpti_init_default(void)
- {
--    if ( (boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
-+    if ( (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
-          cpu_has_rdcl_no )
-     {
-         if ( opt_xpti_hwdom < 0 )
-@@ -712,8 +712,8 @@ static bool __init check_smt_enabled(void)
-      * At the time of writing, it is almost completely undocumented, so isn't
-      * virtualised reliably.
-      */
--    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
--         boot_cpu_data.x86 != 0xf && !cpu_has_hypervisor &&
-+    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL &&
-+         boot_cpu_data.family != 0xf && !cpu_has_hypervisor &&
-          !rdmsr_safe(MSR_INTEL_CORE_THREAD_COUNT, val) )
-         return (MASK_EXTR(val, MSR_CTC_CORE_MASK) !=
-                 MASK_EXTR(val, MSR_CTC_THREAD_MASK));
-@@ -738,11 +738,11 @@ static bool __init retpoline_calculations(void)
-     unsigned int ucode_rev = this_cpu(cpu_sig).rev;
-     bool safe = false;
- 
--    if ( boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-+    if ( boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-         return true;
- 
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return false;
- 
-     /*
-@@ -793,8 +793,8 @@ static bool __init retpoline_calculations(void)
-     {
-         printk(XENLOG_ERR
-                "FIRMWARE BUG: CPU %02x-%02x-%02x, ucode 0x%08x: RSBA %u, EIBRS %u, RRSBA %u\n",
--               boot_cpu_data.x86, boot_cpu_data.x86_model,
--               boot_cpu_data.x86_mask, ucode_rev,
-+               boot_cpu_data.family, boot_cpu_data.model,
-+               boot_cpu_data.stepping, ucode_rev,
-                cpu_has_rsba, cpu_has_eibrs, cpu_has_rrsba);
-         add_taint(TAINT_CPU_OUT_OF_SPEC);
-     }
-@@ -833,7 +833,7 @@ static bool __init retpoline_calculations(void)
-     if ( cpu_has_arch_caps )
-         return true;
- 
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.model )
-     {
-     case 0x17: /* Penryn */
-     case 0x1d: /* Dunnington */
-@@ -866,7 +866,7 @@ static bool __init retpoline_calculations(void)
-     case 0x4f: /* Broadwell EP/EX */
-         safe = ucode_rev >= 0xb000021; break;
-     case 0x56: /* Broadwell D */
--        switch ( boot_cpu_data.x86_mask )
-+        switch ( boot_cpu_data.stepping )
-         {
-         case 2:  safe = ucode_rev >= 0x15;      break;
-         case 3:  safe = ucode_rev >= 0x7000012; break;
-@@ -874,7 +874,7 @@ static bool __init retpoline_calculations(void)
-         case 5:  safe = ucode_rev >= 0xe000009; break;
-         default:
-             printk("Unrecognised CPU stepping %#x - assuming not reptpoline safe\n",
--                   boot_cpu_data.x86_mask);
-+                   boot_cpu_data.stepping);
-             safe = false;
-             break;
-         }
-@@ -913,7 +913,7 @@ static bool __init retpoline_calculations(void)
- 
-     default:
-         printk("Unrecognised CPU model %#x - assuming not reptpoline safe\n",
--               boot_cpu_data.x86_model);
-+               boot_cpu_data.model);
-         safe = false;
-         break;
-     }
-@@ -938,11 +938,11 @@ static bool __init retpoline_calculations(void)
-  */
- static bool __init rsb_is_full_width(void)
- {
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return true;
- 
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.model )
-     {
-     case 0x37: /* Baytrail / Valleyview (Silvermont) */
-     case 0x4a: /* Merrifield */
-@@ -966,11 +966,11 @@ static bool __init should_use_eager_fpu(void)
-      * Assume all unrecognised processors are ok.  This is only known to
-      * affect Intel Family 6 processors.
-      */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return false;
- 
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.model )
-     {
-         /*
-          * Core processors since at least Nehalem are vulnerable.
-@@ -1023,7 +1023,7 @@ static bool __init should_use_eager_fpu(void)
- 
-     default:
-         printk("Unrecognised CPU model %#x - assuming vulnerable to LazyFPU\n",
--               boot_cpu_data.x86_model);
-+               boot_cpu_data.model);
-         return true;
-     }
- }
-@@ -1033,8 +1033,7 @@ static bool __init should_use_eager_fpu(void)
-  */
- static void __init srso_calculations(bool hw_smt_enabled)
- {
--    if ( !(boot_cpu_data.x86_vendor &
--           (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-+    if ( !(boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-         return;
- 
-     /*
-@@ -1044,7 +1043,7 @@ static void __init srso_calculations(bool hw_smt_enabled)
-     if ( cpu_has_hypervisor )
-         return;
- 
--    if ( boot_cpu_data.x86 == 0x19 )
-+    if ( boot_cpu_data.family == 0x19 )
-     {
-         /*
-          * We could have a table of models/microcode revisions.  ...or we
-@@ -1059,7 +1058,7 @@ static void __init srso_calculations(bool hw_smt_enabled)
-             printk(XENLOG_WARNING
-                    "Vulnerable to SRSO, without suitable microcode to mitigate\n");
-     }
--    else if ( boot_cpu_data.x86 < 0x19 )
-+    else if ( boot_cpu_data.family < 0x19 )
-     {
-         /*
-          * Zen1/2 (which have the IBPB microcode) have IBPB_BRTYPE behaviour
-@@ -1084,7 +1083,7 @@ static void __init srso_calculations(bool hw_smt_enabled)
-      * they can be altered at runtime so it's not safe to presume SRSO_NO.
-      */
-     if ( !hw_smt_enabled &&
--         (boot_cpu_data.x86 == 0x17 || boot_cpu_data.x86 == 0x18) )
-+         (boot_cpu_data.family == 0x17 || boot_cpu_data.family == 0x18) )
-         setup_force_cpu_cap(X86_FEATURE_SRSO_NO);
- }
- 
-@@ -1100,11 +1099,10 @@ static void __init srso_calculations(bool hw_smt_enabled)
-  */
- static bool __init has_div_vuln(void)
- {
--    if ( !(boot_cpu_data.x86_vendor &
--           (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-+    if ( !(boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
-         return false;
- 
--    if ( boot_cpu_data.x86 != 0x17 && boot_cpu_data.x86 != 0x18 )
-+    if ( boot_cpu_data.family != 0x17 && boot_cpu_data.family != 0x18 )
-         return false;
- 
-     return is_zen1_uarch();
-@@ -1139,7 +1137,7 @@ static void __init ibpb_calculations(void)
-         return;
-     }
- 
--    if ( boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-+    if ( boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-     {
-         /*
-          * AMD/Hygon CPUs to date (June 2022) don't flush the RAS.  Future
-@@ -1224,10 +1222,10 @@ static __init void l1tf_calculations(void)
-     l1d_maxphysaddr = paddr_bits;
- 
-     /* L1TF is only known to affect Intel Family 6 processors at this time. */
--    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
--         boot_cpu_data.x86 == 6 )
-+    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL &&
-+         boot_cpu_data.family == 6 )
-     {
--        switch ( boot_cpu_data.x86_model )
-+        switch ( boot_cpu_data.model )
-         {
-             /*
-              * Core processors since at least Penryn are vulnerable.
-@@ -1303,7 +1301,7 @@ static __init void l1tf_calculations(void)
- 
-     if ( cpu_has_bug_l1tf && hit_default )
-         printk("Unrecognised CPU model %#x - assuming vulnerable to L1TF\n",
--               boot_cpu_data.x86_model);
-+               boot_cpu_data.model);
- 
-     /*
-      * L1TF safe address heuristics.  These apply to the real hardware we are
-@@ -1360,15 +1358,15 @@ static __init void l1tf_calculations(void)
- static __init void mds_calculations(void)
- {
-     /* MDS is only known to affect Intel Family 6 processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return;
- 
-     /* Any processor advertising MDS_NO should be not vulnerable to MDS. */
-     if ( cpu_has_mds_no )
-         return;
- 
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.model )
-     {
-         /*
-          * Core processors since at least Nehalem are vulnerable.
-@@ -1401,17 +1399,17 @@ static __init void mds_calculations(void)
-          * Some Core processors have per-stepping vulnerability.
-          */
-     case 0x55: /* Skylake-X / Cascade Lake */
--        if ( boot_cpu_data.x86_mask <= 5 )
-+        if ( boot_cpu_data.stepping <= 5 )
-             cpu_has_bug_mds = true;
-         break;
- 
-     case 0x8e: /* Kaby / Coffee / Whiskey Lake M */
--        if ( boot_cpu_data.x86_mask <= 0xb )
-+        if ( boot_cpu_data.stepping <= 0xb )
-             cpu_has_bug_mds = true;
-         break;
- 
-     case 0x9e: /* Kaby / Coffee / Whiskey Lake D */
--        if ( boot_cpu_data.x86_mask <= 0xc )
-+        if ( boot_cpu_data.stepping <= 0xc )
-             cpu_has_bug_mds = true;
-         break;
- 
-@@ -1444,7 +1442,7 @@ static __init void mds_calculations(void)
- 
-     default:
-         printk("Unrecognised CPU model %#x - assuming vulnerable to MDS\n",
--               boot_cpu_data.x86_model);
-+               boot_cpu_data.model);
-         cpu_has_bug_mds = true;
-         break;
-     }
-@@ -1471,8 +1469,8 @@ static __init void mds_calculations(void)
- static void __init rfds_calculations(void)
- {
-     /* RFDS is only known to affect Intel Family 6 processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return;
- 
-     /*
-@@ -1490,10 +1488,10 @@ static void __init rfds_calculations(void)
-      * Not all CPUs are expected to get a microcode update enumerating one of
-      * RFDS_{NO,CLEAR}, or we might have out-of-date microcode.
-      */
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.vfm )
-     {
--    case INTEL_FAM6_ALDERLAKE:
--    case INTEL_FAM6_RAPTORLAKE:
-+    case INTEL_ALDERLAKE:
-+    case INTEL_RAPTORLAKE:
-         /*
-          * Alder Lake and Raptor Lake might be a client SKU (with the
-          * Gracemont cores active, and therefore vulnerable) or might be a
-@@ -1505,17 +1503,17 @@ static void __init rfds_calculations(void)
-         if ( !cpu_has_hybrid )
-             break;
-         fallthrough;
--    case INTEL_FAM6_ALDERLAKE_L:
--    case INTEL_FAM6_RAPTORLAKE_P:
--    case INTEL_FAM6_RAPTORLAKE_S:
--
--    case INTEL_FAM6_ATOM_GOLDMONT:      /* Apollo Lake */
--    case INTEL_FAM6_ATOM_GOLDMONT_D:    /* Denverton */
--    case INTEL_FAM6_ATOM_GOLDMONT_PLUS: /* Gemini Lake */
--    case INTEL_FAM6_ATOM_TREMONT_D:     /* Snow Ridge / Parker Ridge */
--    case INTEL_FAM6_ATOM_TREMONT:       /* Elkhart Lake */
--    case INTEL_FAM6_ATOM_TREMONT_L:     /* Jasper Lake */
--    case INTEL_FAM6_ATOM_GRACEMONT:     /* Alder Lake N */
-+    case INTEL_ALDERLAKE_L:
-+    case INTEL_RAPTORLAKE_P:
-+    case INTEL_RAPTORLAKE_S:
-+
-+    case INTEL_ATOM_GOLDMONT:      /* Apollo Lake */
-+    case INTEL_ATOM_GOLDMONT_D:    /* Denverton */
-+    case INTEL_ATOM_GOLDMONT_PLUS: /* Gemini Lake */
-+    case INTEL_ATOM_TREMONT_D:     /* Snow Ridge / Parker Ridge */
-+    case INTEL_ATOM_TREMONT:       /* Elkhart Lake */
-+    case INTEL_ATOM_TREMONT_L:     /* Jasper Lake */
-+    case INTEL_ATOM_GRACEMONT:     /* Alder Lake N */
-         return;
-     }
- 
-@@ -1537,7 +1535,7 @@ static void __init tsa_calculations(void)
-     unsigned int curr_rev, min_rev;
- 
-     /* TSA is only known to affect AMD processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_AMD )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_AMD )
-         return;
- 
-     /* If we're virtualised, don't attempt to synthesise anything. */
-@@ -1556,7 +1554,7 @@ static void __init tsa_calculations(void)
-      * ... otherwise, synthesise them.  CPUs other than Fam19 (Zen3/4) are
-      * stated to be not vulnerable.
-      */
--    if ( boot_cpu_data.x86 != 0x19 )
-+    if ( boot_cpu_data.family != 0x19 )
-     {
-         setup_force_cpu_cap(X86_FEATURE_TSA_SQ_NO);
-         setup_force_cpu_cap(X86_FEATURE_TSA_L1_NO);
-@@ -1589,8 +1587,8 @@ static void __init tsa_calculations(void)
-     default:
-         printk(XENLOG_WARNING
-                "Unrecognised CPU %02x-%02x-%02x, ucode 0x%08x for TSA mitigation\n",
--               boot_cpu_data.x86, boot_cpu_data.x86_model,
--               boot_cpu_data.x86_mask, curr_rev);
-+               boot_cpu_data.family, boot_cpu_data.model,
-+               boot_cpu_data.stepping, curr_rev);
-         return;
-     }
- 
-@@ -1631,7 +1629,7 @@ static bool __init cpu_has_gds(void)
-      * Cove (Alder Lake, Sapphire Rapids).  Broadwell and older, and the Atom
-      * line, and all hybrid parts are unaffected.
-      */
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.model )
-     {
-     case 0x55: /* Skylake/Cascade Lake/Cooper Lake SP */
-     case 0x6a: /* Ice Lake SP */
-@@ -1661,8 +1659,8 @@ static void __init gds_calculations(void)
-     bool cpu_has_bug_gds, mitigated = false;
- 
-     /* GDS is only known to affect Intel Family 6 processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return;
- 
-     cpu_has_bug_gds = cpu_has_gds();
-@@ -1684,8 +1682,8 @@ static void __init gds_calculations(void)
-              */
-             printk(XENLOG_ERR
-                    "FIRMWARE BUG: CPU %02x-%02x-%02x, ucode 0x%08x: GDS_CTRL && GDS_NO\n",
--                   boot_cpu_data.x86, boot_cpu_data.x86_model,
--                   boot_cpu_data.x86_mask, this_cpu(cpu_sig).rev);
-+                   boot_cpu_data.family, boot_cpu_data.model,
-+                   boot_cpu_data.stepping, this_cpu(cpu_sig).rev);
-             return add_taint(TAINT_CPU_OUT_OF_SPEC);
-         }
- 
-@@ -1756,8 +1754,8 @@ static void __init gds_calculations(void)
- static bool __init cpu_has_bug_bhi(void)
- {
-     /* BHI is only known to affect Intel Family 6 processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
--         boot_cpu_data.x86 != 6 )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.family != 6 )
-         return false;
- 
-     if ( boot_cpu_has(X86_FEATURE_BHI_NO) )
-@@ -1880,7 +1878,7 @@ static void __init its_calculations(void)
-         return;
- 
-     /* ITS is only known to affect Intel processors at this time. */
--    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL )
-+    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL )
-         return;
- 
-     /*
-@@ -1890,27 +1888,27 @@ static void __init its_calculations(void)
-      *  - those with BHI_CTRL
-      * but we still need to synthesise ITS_NO.
-      */
--    if ( boot_cpu_data.x86 != 6 || !cpu_has_eibrs ||
-+    if ( boot_cpu_data.family != 6 || !cpu_has_eibrs ||
-          boot_cpu_has(X86_FEATURE_BHI_CTRL) )
-         goto synthesise;
- 
--    switch ( boot_cpu_data.x86_model )
-+    switch ( boot_cpu_data.vfm )
-     {
-         /* These Skylake-uarch cores suffer cases #2 and #3. */
--    case INTEL_FAM6_SKYLAKE_X:
--    case INTEL_FAM6_KABYLAKE_L:
--    case INTEL_FAM6_KABYLAKE:
--    case INTEL_FAM6_COMETLAKE:
--    case INTEL_FAM6_COMETLAKE_L:
-+    case INTEL_SKYLAKE_X:
-+    case INTEL_KABYLAKE_L:
-+    case INTEL_KABYLAKE:
-+    case INTEL_COMETLAKE:
-+    case INTEL_COMETLAKE_L:
-         return;
- 
-         /* These Sunny/Willow/Cypress Cove cores suffer case #3. */
--    case INTEL_FAM6_ICELAKE_X:
--    case INTEL_FAM6_ICELAKE_D:
--    case INTEL_FAM6_ICELAKE_L:
--    case INTEL_FAM6_TIGERLAKE_L:
--    case INTEL_FAM6_TIGERLAKE:
--    case INTEL_FAM6_ROCKETLAKE:
-+    case INTEL_ICELAKE_X:
-+    case INTEL_ICELAKE_D:
-+    case INTEL_ICELAKE_L:
-+    case INTEL_TIGERLAKE_L:
-+    case INTEL_TIGERLAKE:
-+    case INTEL_ROCKETLAKE:
-         return;
- 
-     default:
-@@ -2183,8 +2181,8 @@ void __init init_speculation_mitigations(void)
-          * before going idle is less overhead than flushing on PV entry.
-          */
-         if ( !opt_rsb_pv && hw_smt_enabled &&
--             (boot_cpu_data.x86_vendor & (X86_VENDOR_AMD|X86_VENDOR_HYGON)) &&
--             (boot_cpu_data.x86 == 0x17 || boot_cpu_data.x86 == 0x18) )
-+             (boot_cpu_data.vendor & (X86_VENDOR_AMD|X86_VENDOR_HYGON)) &&
-+             (boot_cpu_data.family == 0x17 || boot_cpu_data.family == 0x18) )
-             setup_force_cpu_cap(X86_FEATURE_SC_RSB_IDLE);
-     }
- 
--- 
-2.39.5
+Not that I want to do it right now. But it sounds like a nicer solution tha=
+n the
+current mess.
 
+Cheers,
+Alejandro
 
