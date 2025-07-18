@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63593C83F17
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 10:23:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1048398.1418626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B62C83F17
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 10:29:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1048405.1418636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uciFq-0007mo-3A; Fri, 18 Jul 2025 10:23:50 +0000
+	id 1uciL6-0008NN-N0; Fri, 18 Jul 2025 10:29:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1048398.1418626; Fri, 18 Jul 2025 10:23:50 +0000
+Received: by outflank-mailman (output) from mailman id 1048405.1418636; Fri, 18 Jul 2025 10:29:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uciFp-0007mh-Vt; Fri, 18 Jul 2025 10:23:49 +0000
-Received: by outflank-mailman (input) for mailman id 1048398;
- Fri, 18 Jul 2025 10:23:49 +0000
+	id 1uciL6-0008NG-Jx; Fri, 18 Jul 2025 10:29:16 +0000
+Received: by outflank-mailman (input) for mailman id 1048405;
+ Fri, 18 Jul 2025 10:29:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=00bL=Z7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uciFp-0007mZ-As
- for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 10:23:49 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
+ id 1uciL6-0008NA-1h
+ for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 10:29:16 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4aedaa5d-63c1-11f0-a319-13f23c93f187;
- Fri, 18 Jul 2025 12:23:48 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3a4fb9c2436so1114391f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 18 Jul 2025 03:23:48 -0700 (PDT)
+ id 0d5211eb-63c2-11f0-a319-13f23c93f187;
+ Fri, 18 Jul 2025 12:29:14 +0200 (CEST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a548a73ff2so1768152f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Jul 2025 03:29:14 -0700 (PDT)
 Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca4d73esm1396799f8f.66.2025.07.18.03.23.47
+ 5b1f17b1804b1-4562e802ae4sm74248735e9.13.2025.07.18.03.29.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Jul 2025 03:23:47 -0700 (PDT)
+ Fri, 18 Jul 2025 03:29:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4aedaa5d-63c1-11f0-a319-13f23c93f187
+X-Inumbo-ID: 0d5211eb-63c2-11f0-a319-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752834228; x=1753439028; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1752834554; x=1753439354; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=nS/fiBBt5By2HZy6W7TKmo3K/wu43T+DdUtSy2RhxQ0=;
-        b=Z61jo+pkRIzdQf5j6fdrdpcD2950xS+4RS3ISHzM8tPL1aNwa31aguOgQHnz1IeHaM
-         TyesmOGJ/GuN/HkJ0pYs0oZomQ0x+QWWZHzMrj0Hcd2WjZ5ceeZBa0Wa5xll6KhjGP/s
-         0RyxnGGnHNSEImgIz6VqwLEtgd6kajxliEpDY=
+        bh=YI5K03YvlezWVtPZFrMaI3MhlGJ9u27QOuZkWWBoYew=;
+        b=HA4jyXh5ThL32Us1B+sN7s8vVmDH4M5SfjfyATSaf78We5tg2PEtYEtSvRG21Hs0pg
+         JQHzp3N28JAZVeKgMaNoGG06LIh4MrbADjCXZ97bYGaFkYE468qXMhLEF85qM+9BBllf
+         rxoB+vNaE7LZSRrrj7boCKMFqwuB8ttuzrBCY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752834228; x=1753439028;
+        d=1e100.net; s=20230601; t=1752834554; x=1753439354;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nS/fiBBt5By2HZy6W7TKmo3K/wu43T+DdUtSy2RhxQ0=;
-        b=YFNfaRKm/Mvasi+v3EvPy/Ox3CvU+xrG/932+iZzGNHosA91mDZwfFB1M6Y9r2DIpE
-         uclMCGSg3BN0EYLLdcQpb6cDGIH35GfVztP+avNAAHZhtb1p6WmF2kJIxdvlBpSGH5SF
-         B1MjN72/LYSjZiwtX+EeJeH3d9AqLPgb48IJ8gXQExX01GhZwW6qvc1PTONih6EYyjnk
-         adDqJFcHWvSUEgLgftgkvT7Qtbt7o3k8N6xRSnpOiqeeR5csFuWff3tu5dbJ05pW+2aN
-         mV+ikb0ltPNgH6JMoQ9Yr89gjwyqE3K3EeayBCSgoMuKIwPQyzPExiL/zZLBV6OlpNmJ
-         Xi5w==
-X-Forwarded-Encrypted: i=1; AJvYcCXenPOniypCQHcPP0B6xweSRCQ8Ve+S6bWtz4P+D2Cy+bWt+ICvt+jKsz4w7eyq26vHfAXxehUzQs8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxiXZr1nJD9gv+M+Ofdvdz4UvahTj1HQxmwkdUoW3z4WhRibthf
-	OJ8/InJD4Il/nWeqfk6FeJ1QNgq7i7e5ssxNRe995fMH09JWkMFApLe/sSEFiq9m4NPXqgGutIB
-	DldQ3YHzn/g==
-X-Gm-Gg: ASbGnctJJJXkW0hcwhkd72r0rHM97FdNRbyzWu6VvMmIjjk+O+BEReDnU926g3ZKT6D
-	t1XkBYz1LRVplTu7UR1hFNo3MyvhkNw/3I7A4qekBQQsezW0/zlYf/K1RqyM01U6bluBz1782AP
-	jS8RhudGtNjYDVjKDrcFy9AzYdsYYAO9d3b4wtKzuQ8ELuglE7YTBI73C423Mq7bL8FHvXmJQWN
-	3ZMHeCUiV0Lzz1/3bcyrfgjnHLWdcRi/X7Ndj7ZL/bCrobQvIzH08KD6Ccn/DhQd3fQA4UL75UM
-	kTYtRPPlpix2tYL1hH9McueIM3U/DcH1V8mhe7rrno45tGJFXQwT0Up5r83HAeNPR1bWshLJgr4
-	K05YI3LMUBp3o3AF2qfY03zBzgOXSM/xhBcD9qxkFJguvkAYW9TwR0sPrrJlKIoq5eGHn2GmiQr
-	zOdNY=
-X-Google-Smtp-Source: AGHT+IGVpvmb/kPVDE7qOysqSpu8PNKZytKdIa/8gnllR8rAelQd077c+H1l+dOYXw2J7e0F8k1OlA==
-X-Received: by 2002:a5d:64e6:0:b0:3a6:d95c:5e8 with SMTP id ffacd0b85a97d-3b61b217e5dmr1755509f8f.35.1752834227948;
-        Fri, 18 Jul 2025 03:23:47 -0700 (PDT)
-Message-ID: <9c820057-3e36-45dc-b71a-95c9d2dc4398@citrix.com>
-Date: Fri, 18 Jul 2025 11:23:46 +0100
+        bh=YI5K03YvlezWVtPZFrMaI3MhlGJ9u27QOuZkWWBoYew=;
+        b=SayOglavK6JYWquMytkPjtD2vAVx/4ihRYnYI1/HKw1zUV+GnpPnAuWV2qkR3Q7wNW
+         z34dQZgyWB2ZaLqQFTSClvCOebzgpeNzf2evuLZWYfik5a2oFrviK6/DKweS5w9gxjoo
+         5C3DOUTMWwci4oNe0lEi9iFtozX7AidH/Y8HgdL+S4FQR7TIWeJCmknnPmsqShR29bUe
+         JrEWdUb+/fCFCrrcT7zXNPKKeZCK+qJ/72pjrOTOqRGtfplafGuUUwDX6ERNb9yueGSF
+         90YXESytmATzd3R0xe5OwlAcQy8rUKZjZcYmVR4AWGROemEqnWEMbYHnZt1e+QqDkxz6
+         wy9Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUQnVywWIN8orWyxCVpBnY7eP8+zGuvHtVWK4AoVAVdxnHuF/tSoHDx1HjGvR0tYB5XMdYqKKZaxq8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwA0R+8moMlaToyP41SY03spi642jLewxysRZ/1wxA6NFJTDiM2
+	O0osg7KHwafGvlgnVJ7pNwTZoI/Gmt5RG4oJ4c5upRc7X91HtC/ROZbAlpq4tUQ3pCc=
+X-Gm-Gg: ASbGnct/8AWZ2SQ1f154gdN0BZAvKv2P871Rvzi/UP7qcrgPA71xrVQRfECIww9d/YS
+	VHEuIoJCSWgORnAkML80L0xjQ5EMDFSsJimkuje6FbmrVXXLN1mIbxjR8Fe+jomWk4xnTpjEKId
+	ORcZHiiPPyU8RwOw+lBY2WSh9gisRBO11q0Q7qqR1MnuLkrxjeDgg3z9BHoRBnH5irABDEnzwxC
+	dlMwNDItPHISG4tQDi0wSUoj69XLqMC+yV20FFJ8UM4FeRlDYP/gs6seRF6fifWqlqGrGcjfc5Y
+	FzlIKucKLiSJFbXf1nWUivpz4WrAwiSllDh1G+n5OSDwNH1uq9xSqbSO4QferC5HhwUNe2SzUzk
+	Cr7MhoXgSE1q5mkzlvkzbyfrfAjnw1b/61glFxdsujKIFMzaNfi3R7TdvqnmobqlKChE6
+X-Google-Smtp-Source: AGHT+IHolH24e9bsmobfNmm03u3P2RMDppLfRx+YNyVafSC/HMapxzwAosaS1d+DkJ5KuEcaKf77AQ==
+X-Received: by 2002:a05:6000:290d:b0:3a4:d53d:be23 with SMTP id ffacd0b85a97d-3b60dd731cfmr8994207f8f.30.1752834554060;
+        Fri, 18 Jul 2025 03:29:14 -0700 (PDT)
+Message-ID: <3cefd149-505f-4e29-8018-492886050c6f@citrix.com>
+Date: Fri, 18 Jul 2025 11:29:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1.1 6/6] x86/apic: Convert the TSC deadline errata table
- to X86_MATCH_*()
+Subject: Re: [PATCH 5/6] x86/match-cpu: Support matching on steppings
 To: Jan Beulich <jbeulich@suse.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250716173132.2213891-7-andrew.cooper3@citrix.com>
- <20250718100739.2369750-1-andrew.cooper3@citrix.com>
- <4de09b8d-d71d-439e-be1c-78044a3cad31@suse.com>
+References: <20250716173132.2213891-1-andrew.cooper3@citrix.com>
+ <20250716173132.2213891-6-andrew.cooper3@citrix.com>
+ <a6abcc07-535f-433b-948a-702dc33093fa@suse.com>
+ <03ecaa72-2370-47f7-b84b-83831d188f4e@citrix.com>
+ <29cb9771-ee2a-4c7d-b661-74b37728bc2f@suse.com>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -141,43 +140,65 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <4de09b8d-d71d-439e-be1c-78044a3cad31@suse.com>
+In-Reply-To: <29cb9771-ee2a-4c7d-b661-74b37728bc2f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 18/07/2025 11:19 am, Jan Beulich wrote:
-> On 18.07.2025 12:07, Andrew Cooper wrote:
->> With the ability to match on steppings, introduce a new X86_MATCH_VFMS()
->> helper to match a specific stepping, and use it to rework deadline_match[].
+On 18/07/2025 6:53 am, Jan Beulich wrote:
+> On 17.07.2025 21:39, Andrew Cooper wrote:
+>> On 17/07/2025 9:11 am, Jan Beulich wrote:
+>>> On 16.07.2025 19:31, Andrew Cooper wrote:
+>>>> --- a/xen/arch/x86/cpu/common.c
+>>>> +++ b/xen/arch/x86/cpu/common.c
+>>>> @@ -1003,13 +1003,15 @@ const struct x86_cpu_id *x86_match_cpu(const struct x86_cpu_id table[])
+>>>>  	const struct x86_cpu_id *m;
+>>>>  	const struct cpuinfo_x86 *c = &boot_cpu_data;
+>>>>  
+>>>> -	for (m = table; m->vendor | m->family | m->model | m->feature; m++) {
+>>>> +	for (m = table; m->vendor | m->family | m->model | m->steppings | m->feature; m++) {
+>>> Nit: Line length. But - do we need the change at all? It looks entirely
+>>> implausible to me to use ->steppings with all of vendor, family, and
+>>> model being *_ANY (if, as per below, they would be 0 in the first place).
+>> I do keep on saying that | like this is pure obfuscation.  This is an
+>> excellent example.
 >>
->> Notably this removes the overloading of driver_data possibly being a function
->> pointer, and removes the latent bug where the target functions are missing
->> ENDBR instructions owing to the lack of the cf_check attribute.
+>> It's looking for the {} entry, by looking for 0's in all of the metadata
+>> fields.  A better check would be *(uint64_t *)m, or perhaps a unioned
+>> metadata field, but..
 >>
->> No functional change.
+>> This is also a good demonstration of binary | is a bad thing to use, not
+>> only for legibility.  Swapping | for || lets the compiler do:
 >>
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-Thanks.
-
+>> add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-76 (-76)
+>> Function                                     old     new   delta
+>> x86_match_cpu                                243     167     -76
+>>
+>> and the code generation looks much better too:
+> Feel free to switch to ||. (The use of | producing worse code is clearly
+> a weakness of the compiler. Especially when used on non-adjacent fields
+> I expect | to be quite a bit better, first and foremost by ending up
+> with just a single conditional branch. Sadly I haven't seen compilers
+> do such a transformation for us.)
 >
->> -static const struct x86_cpu_id __initconstrel deadline_match[] = {
-> Seeing this transformation ...
->
->>  static void __init check_deadline_errata(void)
->>  {
->> +    static const struct x86_cpu_id __initconst deadline_match[] = {
-> ... of the section placement, we may want to investigate whether with the
-> toolchain baseline bump we can actually do away with __initconstrel, using
-> __initconst uniformly everywhere.
+> All of your reply doesn't address my remark regarding whether to check
+> ->steppings here, though. (And no, whether to check it shouldn't be
+> [solely] justified by the compiler generating better code that way.)
 
-To be honest, I'm not even sure why we needed the split in the first
-place.  We merge both sections together, so it isn't about section
-attributes.
+Well, as stated: "It's looking for the {} entry, by looking for 0's in
+all of the metadata fields."
 
-But, if you think it's safe to remove, it will definitely be a good
-amplification.
+The intended usage of ->steppings, or ->feature for that matter, is not
+relevant to the loop termination condition, which is simply "is all the
+metadata 0".
+
+>>>>      uint16_t model;
+>>> Whereas the model is strictly limited to 8 bits.
+>> There is space in here, if we need it, but you can't shrink it without
+>> breaking the check for the NULL entry (going back to the first obfuscation).
+> Breaking? Or merely affecting code generation in a negative way?
+
+Shrinking model without adding (and checking) a new field would mean the
+loop condition no longer covers all metadata.
 
 ~Andrew
 
