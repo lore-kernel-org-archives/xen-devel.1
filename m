@@ -4,40 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3395C83F17
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 12:22:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1048642.1418865 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 775D7C83F1A
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 12:36:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1048677.1418876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uck66-00082G-0Y; Fri, 18 Jul 2025 12:21:54 +0000
+	id 1uckJx-0002V3-DA; Fri, 18 Jul 2025 12:36:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1048642.1418865; Fri, 18 Jul 2025 12:21:53 +0000
+Received: by outflank-mailman (output) from mailman id 1048677.1418876; Fri, 18 Jul 2025 12:36:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uck65-000827-Td; Fri, 18 Jul 2025 12:21:53 +0000
-Received: by outflank-mailman (input) for mailman id 1048642;
- Fri, 18 Jul 2025 12:21:52 +0000
+	id 1uckJx-0002Uw-99; Fri, 18 Jul 2025 12:36:13 +0000
+Received: by outflank-mailman (input) for mailman id 1048677;
+ Fri, 18 Jul 2025 12:36:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tfz2=Z7=epam.com=Volodymyr_Babchuk@srs-se1.protection.inumbo.net>)
- id 1uck64-0007Zl-8H
- for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 12:21:52 +0000
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c201::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c80e1840-63d1-11f0-b894-0df219b8e170;
- Fri, 18 Jul 2025 14:21:50 +0200 (CEST)
-Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
- (2603:10a6:150:16a::21) by PAWPR03MB10182.eurprd03.prod.outlook.com
- (2603:10a6:102:334::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.35; Fri, 18 Jul
- 2025 12:21:43 +0000
-Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
- ([fe80::a41e:5aa8:e298:757e]) by GV1PR03MB10456.eurprd03.prod.outlook.com
- ([fe80::a41e:5aa8:e298:757e%5]) with mapi id 15.20.8922.037; Fri, 18 Jul 2025
- 12:21:43 +0000
+ <SRS0=HfJj=Z7=oracle.com=lorenzo.stoakes@srs-se1.protection.inumbo.net>)
+ id 1uckJv-0002Uq-QW
+ for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 12:36:11 +0000
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c73f9d0b-63d3-11f0-b894-0df219b8e170;
+ Fri, 18 Jul 2025 14:36:09 +0200 (CEST)
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56I8fhJt016059;
+ Fri, 18 Jul 2025 12:35:41 GMT
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 47uk8g523p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 18 Jul 2025 12:35:41 +0000 (GMT)
+Received: from pps.filterd
+ (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 56IAbmFl023944; Fri, 18 Jul 2025 12:35:40 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2085.outbound.protection.outlook.com [40.107.244.85])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 47ue5dyj7p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 18 Jul 2025 12:35:40 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
+ by SJ5PPF04D2D7FA7.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::785) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.25; Fri, 18 Jul
+ 2025 12:35:37 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2%6]) with mapi id 15.20.8922.037; Fri, 18 Jul 2025
+ 12:35:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,757 +65,407 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c80e1840-63d1-11f0-b894-0df219b8e170
+X-Inumbo-ID: c73f9d0b-63d3-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=PGPRNwN4pu3PXQ5swL
+	S0gVK8l1QEymD2y97Ry48GJDU=; b=fIxbJj3HkxtGVqK8J0uOiT1ZATdNXPH6XN
+	PXxHKMSfP3bdXDodFPONvVq4tAU1KIkgLrGgiDDfElGy8LvAC+JKeWp/prMQK660
+	r+BEuQFgDHLttz/jhiZQEe6KCU+c9UOX3Dd+CEMh9+k8bPNldWzKiIHdsN1Sn89V
+	E/ngnROiIyKvxWO4yCqL1Njhsy1Kx4Kphbc+fiPrC3m91+6w0+41Cco4mzDI/kew
+	Psr7t0LqbfYFSLg1MVBcd3RWkPWNpVKVlrS+Fjwp5VbQldeGDdL1XNxSmcTbu+zP
+	xeg2okjt6+IEpPxiyKlw+EuS1N0jOIMEk/dgsJUJNQxoTFA5lDJg==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PFX91cO/U1MVwdEJ/2pLhjRY7W6yhDe4iZTafWhyEoDiJr/4bGdK/JorxknSDlOZGdZ0BfkqAEu/hm2kVWKoUwLyTe3f6AcBlS2uLQL+7Q3NblbjkIzLEdcKsM1zDv4UEyBBmgAuIrYn2fOCVTFNGWKzzuM2Sah97RPrOPF/BigTA/Rrk8kfXrj6aqP3jO0gCup9CzeDilaOFV+fsG4iQAKheEcjePwlwuyWy13hBY/myJKxNlbHD+gYOJ5X0Zgxjh5wQUayCbB/Ld5n+1saXfbhCA3DJgJ1P5iA3apNJZtxoo6z5GY5ZT132Fyn/KuNCuWRxJivIgdwpp/pEj/JXg==
+ b=y8d1l6St6MzD8+jGkECAVVihM+oEIma/hZRSPwbQPNtlJ40CmtSSSQEKCEyBAiOlQQxmWVfMOvv2+BGILSFXs6GGdv4S37kv4iMfdJQ/eQUPN6GehAXamVet1TohwOJj4IlpKPcki5mrXI5uQ4G9XzURaOJeILGybF5iqtrC9NTMc/bp+MzNUYBGQkSh2SOywYMuUcywDcMzfa67LTvtjDzF0UYZ+YUop6NLsNZfCmu5K9eH+suwO/0z8BXPO5mrVmQjynt3WzOGqAGJR77tc4d19RTf/o5oSR+T38IQ8TwIQA9JsO55FUmxEQyZfM9KTvAKUzytgPFmza5Wg3gGBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GRi9NWYdNSJ+HkfR+eMZhQWYrjEplkgIQwri77N3GOE=;
- b=UsRyFBNMG/UOFOEoFl7WcsjfHE7Q6A0XcFOKxvUYe0uYMJeZdTn8l1U3LjHHQczT2zxzvZyERcJigpP1VVItyMcgIk1qHdtUIikwVYnib7Iwxp9jF+zXYTjm8fHeqQq+m4KzsLDG1CpgDqCvpsODTq4bVeS1TZ9RT+pDHpl6D6TZzRjdOzy6PN3Cl7wV1MTVBxDo4P0Gnhk09i4hhlOz/bgPJKlYZx06xe2CkOTpAGifxIbXuWPbrEBgK3qZE2sHKbnsiNVidbtZHT3eC/WmmM2K910xmneiVPB+p7Fg17CvIxvfFPR3T01OF/ILSjf+nWZmfeQvqa+qTy/6IqzvBg==
+ bh=PGPRNwN4pu3PXQ5swLS0gVK8l1QEymD2y97Ry48GJDU=;
+ b=D4uxWMFFi5qWFuF1SF2+XvSdfvC5t8xDustCg3enyeI1FmPbY+pD9V53sLGP1vUTaD5hajlMU1okW32MXWDK8sMISDN2QtnfOHZCdeOQAa9C/cZdMjYsqWImTTeaMvFL9MJTnKnRoDUUoTh5mAr9QqnjdWWmjmFRqoug+eSz3mgSa8qEVUEAQMrdR/FGI9czkVXXCfTtrL+iZM6/oh6H4k30iOKygivaolM6hGnYmNotJYYM70fRfKkum8LTE2x/kSANjBLApA7ZwCENp6XGBtAW2XeXZtMIZT2O/LsGlQRC1tijblK726H9gxxe3lGVGyDZlDBAtrqD7xViP8I9eg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GRi9NWYdNSJ+HkfR+eMZhQWYrjEplkgIQwri77N3GOE=;
- b=Bqcll69soY6gfuevT4mwkfGtcuU2VKln8RtwXuz213DS52MTfBRuZfVNVTDEsghVccYBxkBg1z9Uepgj1toQkcWY6P00AMuKnW9P1QQVDfNq9WNT0K7BCnm8kXh7/VZwPPAd0dYuHaMULDZdJoWoFmKzeWeKeAsTF3OXnlam2iuBmg7fvfsi4RiFtLcNCp4DBttbUyYfmndDyS8Es9mUuN0j7XN19VjeJSkVFrp0AJYByXFiJDUkydbQeC4XofjRKT4GObniS2RZYVR50yHJkUltVfGL30zEfIo65MMOXAwkypgxg0cbfMlaDg81HKMscn2oyCj3sPTeXThpC08tLg==
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v4 1/2] xen: add libafl-qemu fuzzer support
-Thread-Topic: [RFC PATCH v4 1/2] xen: add libafl-qemu fuzzer support
-Thread-Index: AQHb996FU5MfiX1Hx024cZ+BqAQKpA==
-Date: Fri, 18 Jul 2025 12:21:42 +0000
-Message-ID: <20250718122115.2448874-2-volodymyr_babchuk@epam.com>
-References: <20250718122115.2448874-1-volodymyr_babchuk@epam.com>
-In-Reply-To: <20250718122115.2448874-1-volodymyr_babchuk@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: git-send-email 2.50.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|PAWPR03MB10182:EE_
-x-ms-office365-filtering-correlation-id: daf63363-c3d9-47bd-84df-08ddc5f5a821
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|42112799006|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?qBnR2MFj8x35/rPWRkhjRtB4Ifkn9Rk86pvDQyWM41ThicEiN54vVp2d5p?=
- =?iso-8859-1?Q?Zdso+Bfg5IB0jXvnY1HRp/C4TYnj2CBQ8/XzVBVzAeDOLA+D0qGpoufEWt?=
- =?iso-8859-1?Q?ExaTDnz/XHLXL0ThZPHbsMF8MQ18xILyDwmtZw2XYpdYRMjzEJuhOUVW6y?=
- =?iso-8859-1?Q?h/ZiPijk8mLVitdEXlAqCeCpR62PkBH4ghYkz8DFRwF40BV8CYfLQwIa9v?=
- =?iso-8859-1?Q?5yn1i6SSLuW406eACl89pPWKmgkYStGTB1SZ6jRV58Xn4FP+kBwzcZJSPg?=
- =?iso-8859-1?Q?nZjPXqJi5JsKPpzIBarQqiNRwj+Y6rtIDGY6AzYRTQKLMNS0qwkMe2KQzr?=
- =?iso-8859-1?Q?QHTHaRLgwY/sDa6pW2zO3UGRib8UnEQqJ8898LdMovw8CTUUv7rIPnCEdU?=
- =?iso-8859-1?Q?CRGjg5/SSJ6mVq1o8/FfqWZGGrSPvZFJ9xQvJ8tvW3tWKsXK7WXdKVdDVv?=
- =?iso-8859-1?Q?KFWGA01yKunq1u/4fyW20/m8XZTHxMre7vpD5qNE6RN72pUxCaVe/mq1a0?=
- =?iso-8859-1?Q?RhyYVZ9ZLji8ucyzKcwZFyEQ1wWyKItsYX+q14TykSwUlaChwtEcWdptYJ?=
- =?iso-8859-1?Q?bEHeDkH9xR9z3WzIuIehVFvpfsBtLT3iGgZCJRxnG0VoSYiv74Suf4J+Sk?=
- =?iso-8859-1?Q?iAm/AOXE+veQZ+SLOIhbHMtjnPWGlq43c3YpKrymDWjO4LPaq/XhbYFbwg?=
- =?iso-8859-1?Q?s/UguaMYyZjYQkhJfdxPva5b2g1cmD0Yjl1KZc26v0qprckS/VlmOPx8VJ?=
- =?iso-8859-1?Q?zZXmBzhujGBJTESZf4RQa4mqeXjC4pULA0A3lPE9ltCtDphPdTg/h0EIpe?=
- =?iso-8859-1?Q?0f4IJDUVPLX4Em7Ph6soP5P5aD8S+BSlZSSs7fZhwecwXuAJYe5u83IEJG?=
- =?iso-8859-1?Q?5dp3Te3Ap4jHT6vZhvyIaSv7FRfASLtZnsjBYso29loCfY3qdyD6Hv8TZz?=
- =?iso-8859-1?Q?3FH9wgsuUhVb0NZjpeZa09rZvmc0eUas08LTaWYX+bL4ZNePw/DVRnfhmb?=
- =?iso-8859-1?Q?Jbp3evbz6hzy1+ooKZewmtYLfA7Kl60aOCuLVQBAOFxoasECA9jFnTpO9n?=
- =?iso-8859-1?Q?C4M22Wvn5lF94DlfpayWLx3pQcmEmECnSiQs7WI2ow9FHJgSJcXIRgUCBh?=
- =?iso-8859-1?Q?xz9al3GZP6qXTUALFnt8yblUIOXWuRq1+BDNz401B8eP3HyUS4Say8ZtLJ?=
- =?iso-8859-1?Q?eBDYCSqvEGd2F8kBtDJiK9YkQc+FiSkOcnOYp9e/5u2JMA13ODLjgLm2j3?=
- =?iso-8859-1?Q?dbh/o7de+dPKkwwFrGWLxGF7lmfPyTZJpjBaIYCgpgwrq11YOVMMXfTyzR?=
- =?iso-8859-1?Q?I6pVRuJtVCGYzEmpBH0zYeARHdSaiMwaY1tYAEou9wNd294CoT9w0iKMSi?=
- =?iso-8859-1?Q?6qMQf9V5oYYkYN3Z1iFh/P+BEPOoj1kXVkKNIYnwggbtvymlY/6mTjo40f?=
- =?iso-8859-1?Q?ccw9/Sx4k06esC0Gqc6yOh+vrXAEwAZE/sC+or9MKbCSbud/7oMnomBY7z?=
- =?iso-8859-1?Q?mFQZ/icG59pcOQGmZskb1F+KPA/2ZqrCyI05QZEoh1NAuZ/G7CWQ2Fgg8W?=
- =?iso-8859-1?Q?0MXYPoo=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR03MB10456.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?AnStj+wNUD8i7vsqmpGzDDTse3MR/mc26b0xQW2f/SZFd97yvzfkReBkGE?=
- =?iso-8859-1?Q?N/HRo3FGI/o2o6wiiWlOqKJ/PxilXm5aGJRYOUH9n1QnqNcC2tEBfByB1f?=
- =?iso-8859-1?Q?dxV4vxK+y8YzqEodGEslBrZKs74DJnHwE6QfCGHCoXeBzI0khdpEe36WMN?=
- =?iso-8859-1?Q?9Q4brbzCRxfCD9yaO2s09vqYZo/dGSFcGjJMgu/GamdIVh9VxQQnplokXC?=
- =?iso-8859-1?Q?FzLwvWUCGI2ZK9mGv/eCttoIgaUB9pn0UAh6j09ANLCeCEUMJMgwUI987O?=
- =?iso-8859-1?Q?4S0Jcj+SwfYhNUdjY7LTtRnWu1c4PjfZt2GoQhkCRMfzJFearddlKgFuXD?=
- =?iso-8859-1?Q?0n0PiVAl/n2o34vOZVWdxhN4ix2sfchXvztaqbV9dXT18K4JbPghTAr7XA?=
- =?iso-8859-1?Q?AtGKT7hZbYAFF5w0tTEddMeBHyi4jFtEA9A7/weGj5jty4dMJOKi/LqBUQ?=
- =?iso-8859-1?Q?Y0oQfxy1iOvaU5nBsMxv/O43ZXDU8f1HZsz1axcKIL0ZbjCA0yTDOKN6KW?=
- =?iso-8859-1?Q?OH1prbaB3UtpdqdfDSbIwR/0JLlDLyh3pKt9VuT0WcZ8OOHDdUWkOxGUAl?=
- =?iso-8859-1?Q?s99xcTwEAJr5V6xJAQbKrfDNHo2jG8q1teq3aZewN/8zknXDyKitQXFGYG?=
- =?iso-8859-1?Q?IN5W3QA3BDsRrYdj9rbwI5w3D6anGXwlybUXGTE+yxQPnWKoxtEqnzfkTe?=
- =?iso-8859-1?Q?3izVdAtGWVuIMPluB9/RW5mZ7rcF6SJzqZbpq1Wc/0VNDzzZznaGW6pxXR?=
- =?iso-8859-1?Q?QvKi3svnnHK0P/etots/VBNBQirGg8hZ0tBAqAfXVVuSo2aQhfrAAIY1ez?=
- =?iso-8859-1?Q?krlP/0y4/8u3bxnTJ/1sz5p++lKGu8MokZerayOPMSc95g1ozFIQuiyWzY?=
- =?iso-8859-1?Q?4k1pR02KSptxHzI6Zd0ZdI+GeARR3qn/WVfoMCTdyUXcqvV+OlzSM0Px5t?=
- =?iso-8859-1?Q?2079PGnDYeMyiBpzqHwVPKWn9TYB2hbZWtDLQ3ySOCAMctYpaOVUQuuGJT?=
- =?iso-8859-1?Q?3lWJuULRVcACT1zO4a8QsbtINxViEvRtAsP2V2OuwE6lbVDDGzJ3Z3hbSb?=
- =?iso-8859-1?Q?Ut0R8c8SVHK7nZ5Dgh1TO+XMqEV71+n/6vhkmqYW9Ei9CzdRTDt3yxXhTY?=
- =?iso-8859-1?Q?BhXjdan2mRFYbFe8P7mwn9OOC9fqLIoRjwB4EqzgH7L3RsSDCRkAZRGCXp?=
- =?iso-8859-1?Q?KYBYsnDj8tcoZ/8PtNqy/0h4c/VV/A7CJuCWvXI7RTtImQkBJFIjEMnO0j?=
- =?iso-8859-1?Q?amD7QjgFVMLziVw784KjrQbCfKPl9hl1QRtEkTpJq3MzsVg0JB31U++0iC?=
- =?iso-8859-1?Q?nl1/wQtIx5v99LHZ+2lw0zOic+UrA2QP118YvQgjYgLoWXCjR2gGW3rAzd?=
- =?iso-8859-1?Q?N6WMjXJD4kI4Ti4u6S9W27khHO848ZBIdygxEWjxcEnUptDIZLWS0WFDNO?=
- =?iso-8859-1?Q?fNTwtLUIi/q/zEbhP2T9J6cDft3tSiBd6T9STzDkPqSOP7VgOpcgwdUOZl?=
- =?iso-8859-1?Q?REX/LvnSFPGaFKhURZ2haFJgXxAUkxAs0OeEnFpvP5ErsftGmboXYYTiUG?=
- =?iso-8859-1?Q?InZ37ZA9wiyCW7IxwyoFRD8nZSKi06R1qkSkKDR6N5hO5vVlJYKO9Mvcpv?=
- =?iso-8859-1?Q?kf8PjZlui/XMfhXytz79gHTKg7EoKJQB12bx++aMrI+oraBAmh2AKhSg?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ bh=PGPRNwN4pu3PXQ5swLS0gVK8l1QEymD2y97Ry48GJDU=;
+ b=fEjEpl/rIHcl1P9ebtVRAyb+fP/Gdbn7Xn4wd+wRNcWmQZ0Mi+o991PLTqwjkMPDuziNS2YpJLumkYmJ240Cn/V23Yjb8Cd2zsoILS8ZRGJKn8/r62wL7FlO4SiwQwkDkRt5LTll6N2TRhns9tmbMloKjsjwvoHOdZhpa7ePFbg=
+Date: Fri, 18 Jul 2025 13:35:34 +0100
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+        nvdimm@lists.linux.dev, Andrew Morton <akpm@linux-foundation.org>,
+        Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+        Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
+        Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+        Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
+        Hugh Dickins <hughd@google.com>, Oscar Salvador <osalvador@suse.de>,
+        Lance Yang <lance.yang@linux.dev>
+Subject: Re: [PATCH v2 7/9] mm/memory: factor out common code from
+ vm_normal_page_*()
+Message-ID: <ca28318f-290e-4d03-b2fe-a6ff00b9a9e6@lucifer.local>
+References: <20250717115212.1825089-1-david@redhat.com>
+ <20250717115212.1825089-8-david@redhat.com>
+ <1aef6483-18e6-463b-a197-34dd32dd6fbd@lucifer.local>
+ <d62fd5c9-6ee1-466f-850b-97046b14ebff@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d62fd5c9-6ee1-466f-850b-97046b14ebff@redhat.com>
+X-ClientProxiedBy: LO4P123CA0252.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a7::23) To DM4PR10MB8218.namprd10.prod.outlook.com
+ (2603:10b6:8:1cc::16)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|SJ5PPF04D2D7FA7:EE_
+X-MS-Office365-Filtering-Correlation-Id: a1fc4514-08a1-494b-9d8a-08ddc5f798e7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?Goxxv8ECYTlE+30Y/PcTHQ7TxYkv+dRzdgoAIYwCbY+LabZOoUDYkbITp+5p?=
+ =?us-ascii?Q?sznu0ItdoSBp3gZs45fA7tcVhV45ON+dq7W5c4td4zF9EZBIdjT9FNER7f90?=
+ =?us-ascii?Q?UmLM/wn42MRb8Q/9l7jh6wXxP9dijkAeTm5rZzOwqZPxFSSzOHtCbKPyVOFy?=
+ =?us-ascii?Q?qxv/xZbnKBoGn+kHzfSoKxJj5FkH8yTfKjRliqvgg6RbPkLtv9633XbaHv+4?=
+ =?us-ascii?Q?6qUwVyH/9p2nuA61MNDLpHO8KLB2HSEdb+zwnTP81wKJ+92eLxrFTb5TXcdT?=
+ =?us-ascii?Q?wo3LlHD9lE2xhPb+IZsoFLbahRbEszato1EsUDUhjT7wg/FAOEjMy/H0cQZy?=
+ =?us-ascii?Q?CV3OofmcfYjs3boFPTNdDf6t0G30oVACigwEEIIDZ1Kk5PMnm0aJfrGO7s9a?=
+ =?us-ascii?Q?CZgTgXHjoyaEVQt/3bBPdaec/MgwwOI+sd6rcyUOIqZjIX8mww+EW3OCurwR?=
+ =?us-ascii?Q?U6JuJkkd41Xh5qGsuNGhNBT4pNjcE3iio8bCRqz4re8NCawYiOXB1bF0W49G?=
+ =?us-ascii?Q?Vr+ar7eh/jkd4MwYdViVuG/CcGxyMqMVW+UX/Kd1vqaVZXtMVKfsQtRMA3vJ?=
+ =?us-ascii?Q?S9riEj/4dyOv1u0a5oJm1h5yaG6PJddqByZp6/i99Fuhy1zQyr+D4sxWhzve?=
+ =?us-ascii?Q?380XIT/oqMoyXiy7uMkP41UbW0ibhE14QviioJNNE1U3QKEsRBrnpwRYGoQN?=
+ =?us-ascii?Q?2uMlA/rSwhUNkFlntiJj7fDK4x/U97BPVuMwkOuisVsk3SpdyAi8HiUBLXpa?=
+ =?us-ascii?Q?Yu0hTBNaPplocOPAacVbtGNnZWbh+6kaJv5lovy5yISAtSr2wQyitNkreZSi?=
+ =?us-ascii?Q?IZ6iBXHAViRYSVfMnOnZiylSEBGkcXEIf0VdNeP1KAfWlQqgGCOWQqA/X87b?=
+ =?us-ascii?Q?iXLIBk9vg5djrAgE4rHWT+lETICASU4ofnNeFewLwfZkvAyLA9fezfapvHnN?=
+ =?us-ascii?Q?7bgG8Mwwz2M1TcWtugoIno+jM5Wi+INsRlaXlAIEozYTcSCrWLFyX3oE3sw1?=
+ =?us-ascii?Q?Nr3WnnCaxOtqVuDHKzfJ0NnYTMs8zYy6NkrBKEbXvFgm3Goalvh06iuk3BIZ?=
+ =?us-ascii?Q?vZLMaZdCC4BJiXzJmubuk/8I6v9cFovpTHfC2PLIt8ChwjXxBC8BACSTOIpM?=
+ =?us-ascii?Q?HP3VoG4Xhn5xzkMtX0cjJhh0JbitqcTnnc3kXQYGuamb3FkAdp4XjGUSzM/I?=
+ =?us-ascii?Q?2yEeUy4hsBT471X2g13TYn9IeXhUsK9I8tqQzXhbLkIC/HrYZ9ZSJXekiO6z?=
+ =?us-ascii?Q?fITxUKIfzSWWmkQEM+N+K0x/Ij4FRneGF9lw7a3FrcOnGLdK/tyrJvBPn2Bn?=
+ =?us-ascii?Q?ZGBeW0sQWAgwHLPe+9Nl6/pI4WArRLCxO0yd3edE8ymgzx1lBosIGq8fX/JT?=
+ =?us-ascii?Q?sjUClA7Pwm2/J3cWcah0/wjXJJ7CocJpvbgzEfPK9rEaV6htpg=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?BHe1Xk+LQF9JBU5o+8kiwbqrZw138YgsdW+3ILo86+7VOF1hzvKT+5hZNGT8?=
+ =?us-ascii?Q?3tOTsCPPcxdwLCTVZQSSaEDgOf1tyCg0oWvgT6+Z0husY/u+GEcN70FpOwGZ?=
+ =?us-ascii?Q?UbhloIaBIVuhIbK1KyC4WdNp33jQWQhMB/NvIYyt5YP4WyDCxjxVD1M3xcJK?=
+ =?us-ascii?Q?cQwMhvDkakUw/nsgCR/Sb0MSsxhpZGlOwK5QZUoPwJjOltta/yAZIWoBnqJt?=
+ =?us-ascii?Q?sYbmhACPLEGIhmdBPjVVDc2+7lPzlMFhZ7DsIKryKy/B8DDJ1Gd2jL4qvqva?=
+ =?us-ascii?Q?T8kUamNXddk22U8lzahCwGNlnfdhh/9tDM84RW9/2CzdruJ3SjOX7dhAfvv8?=
+ =?us-ascii?Q?IOHgFIDTk0CJqzLnsKmQUitlB+8RysaiHnRsXxPY4bGklACQsL8IocYs33ZE?=
+ =?us-ascii?Q?hko3f2d5ry8i7cFrtxZaqqvNBRBiX3xe6ymQ8q5J+O09xyQtB8TRutNGYtDV?=
+ =?us-ascii?Q?F0ei+4JtBkrvkjATZdIpwRc1jvuInBIC1kO0VxOLd8SNkdbTJ9nldVgSCvgj?=
+ =?us-ascii?Q?cYL1MbD7dET1jiPScLfVxERWhEd0nwENxhFcl3FNyxcn0CCV0WgWn+STaXu5?=
+ =?us-ascii?Q?LGX9Ab6lzIQQwHPAjqd6iBwfPW/M9r2i8UvNRS3PdH4rNoY6IO2rh7vQJjtf?=
+ =?us-ascii?Q?Vaa6X02dkmDbyataUyrDKJpK62BiAnCHClnOhgnF7bX+MjyXq4NEzUrNjQ+O?=
+ =?us-ascii?Q?xupru/7ePM27UTz+B7XdeKSvh/3nOfzlnv1kWjkHIESVwyWXAhIZb+r+5Y7M?=
+ =?us-ascii?Q?wqr85xtZrDS2+HxXpLqQzUySA+WPwBhg6OB4xqcxJYSH4apQiXLKRgLVgzop?=
+ =?us-ascii?Q?chG9Z58EWSeO4JMJpN1bETmPCO36RyzWTVTV38AyXtwMVstPxq4CffJOyItA?=
+ =?us-ascii?Q?V86R1eRZnwLsGFPla+dHSn0mIJNAOKAenVddszrTzlB3Q4Ysg4bLdKTUHSJq?=
+ =?us-ascii?Q?sKaymdAkFcm2NDw54Jxs695fAolbAqJ8TrvuoRIIpbeIG8iOjy4f4CFY8yNU?=
+ =?us-ascii?Q?w793Y9Q+RySsr77PldeM49rv3VmXs8YIjNqTbPEkw0p59cOt8YJw2EelVCNi?=
+ =?us-ascii?Q?m9sxRXiuHVOi20lVawM3ghb24THib52E1Gp+1TU1lbwKuX3Cugx8dTrgEGW/?=
+ =?us-ascii?Q?vPwXxINy+DowHOW+syQZrpu0cqR/zMLAdf05wsag5LQHRHj6iyARX0Qxtbq1?=
+ =?us-ascii?Q?ryzcv6d6iniTZDDxsrq9Yq9P2HGeF12FbO5gLWqRw8qtSy+G0f2bk0kbVXIL?=
+ =?us-ascii?Q?xlWn9hU7hwQyYUzy52yzNo9o4S8Op54oEfozNRS4iUPN3hp4w65nZrP4ksbt?=
+ =?us-ascii?Q?0k9Q+NYYF67gbIFyNxaU2G/mlo6+ncReiwQKC1ZWtvDrho1fWrp8MWeo4zh3?=
+ =?us-ascii?Q?F2KBQMMaPSTc+Y6dgHsi9oL+MHC3ih0/Ufz1hLfzZ95vbrNcai39UmrZVilY?=
+ =?us-ascii?Q?VU0y/EPIo0nI6tU0jK76Ffku9IBflsJWeV022wZv/Gat6mR31mcrspFWLHE0?=
+ =?us-ascii?Q?f3pD7MqEe9kZVVmK2ZThiIbQDHUwNmwztEr8VqlnDnYhQlZ0fgb3yJbNMmw5?=
+ =?us-ascii?Q?v9ZxCMrcevS9VbeLPgIFgeCkdgFYtIjMTi7vZdJj7CYKWb32yMue6vCD8ZEo?=
+ =?us-ascii?Q?9A=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	QVI+PstvtL+OLlvttIikm5XcgRJ2Bz7lyYJ3CwGmObvhJIQxnIFb8YIrKFDBXWTediIxEhVj4qP+nHdSWufSSUSdCE4MBER4KC6kRDGJtIdsEzkuaA5CmmyCCvqUxCvRfCSWKAprbhw/yIrp6KFRT1B61gx7/Fy0urMcYlGc2RqiGK4KzdX3243k+Qat631RBsw/7e0GD4qxLnSQ1nN8P/xsWccif4lhkGGa9m4nVM2K4ZqI/tycsOACoFqdICXbPPAZpWWV4Q62M8PaFA55BScXNbCt9P3/xLlXwG8jo1BdpCxBi1Y6KJZTN3LgbI6xWKpBKs8C07TyUzhkNokwI7n0rX+NJtialJR4QNFtsRbneY2EpRiRiuNr+L5pWzXBo0Q42Nt1rfrYCPFzuI4buqVbPJWPIgI04ISy24PYmNGIxBh+Rybj0ZEyudQOXomjxNzzvxozCMi93xbDw9POm2HdkMbsGyzhjpAPOgXs2o1mu4wuQm+UN48jWuNgTFuzfpg+qReIdDAMqV7MzAPSwKdQhwgIGx4K5Zj1mW5sLUmHI/v4pA2wHt/JzfmScY5L9dAVzM82cHeVpeDySzjk4LfsnvUkfBzJnZujOAWe+yo=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1fc4514-08a1-494b-9d8a-08ddc5f798e7
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: daf63363-c3d9-47bd-84df-08ddc5f5a821
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jul 2025 12:21:42.4224
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2025 12:35:37.1369
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pDVA4/xTcRtb74EuRRZ17edV/ph2E1kt9Muts1XTv6ZD4Fcqr0xJKTmMdXEQ8jgYDDgADXjvvLepnDWaLdiK9108NNcvdByfIBYPwOiGeF8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB10182
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fTAhcizpKpJQsE/CaGJ/oexvrEphDlymendqMo9Uk1cfGYY+6OBjSEUaB125nLbs2CE1+i+YZ0Vw2lVKH7C6vpU8iLgU14/HGer79mXftEM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF04D2D7FA7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-18_02,2025-07-17_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 phishscore=0 spamscore=0
+ mlxlogscore=999 malwarescore=0 mlxscore=0 suspectscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
+ definitions=main-2507180096
+X-Proofpoint-ORIG-GUID: 1K3701reWHgTFpg5lycL87RUnutklGTX
+X-Authority-Analysis: v=2.4 cv=Of+YDgTY c=1 sm=1 tr=0 ts=687a3f9d b=1 cx=c_pps a=WeWmnZmh0fydH62SvGsd2A==:117 a=WeWmnZmh0fydH62SvGsd2A==:17 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=Wb1JkmetP80A:10 a=GoEa3M9JfhUA:10 a=rNIe8tJn33Rh4yoerTAA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-GUID: 1K3701reWHgTFpg5lycL87RUnutklGTX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE4MDA5NiBTYWx0ZWRfXwYDAPaGwDVFW vMOtC2NZQQSYGHFG/0J2CKnyVcDFurPb3YRfildhDK26+lCL/EaIIChHI3eBlPSg+dTbViBEqKm jgkeYoH5WATqfRYblV0nupGnbn0yp1Ki5XNqNcM4jjDeEt6aW2+meofIeEbV3frws1U9QZwkOos
+ z2Nlz9cxfin8/9o+eYjjE4dJTD7kNYGC9qnpb5fd/AC/l8sE49yK9qX2VVkDzAWxvkpriWYveNf 5SwbP156Bwamyi46zQVuIOsVO3IuBO/3z5+TiHkCUx3SXfFVWQnCj3Y5LN6gLeoeycvw3H6oezF kmUk+CxuMUjqUDswQH5jtWEjfxWcmNzYFK/rog0F0b9Q4CjMtpmiYVZB9n+Pn6iWO2Ax+o1Hvkh
+ 2oa6on6aMLx2+xE4hFpKCr1HpoDRDbQHnq0X3gUShTuFeOcUSzv+nlCZ+W1mNrsanPfLoQ5W
 
-LibAFL, which is a part of AFL++ project is a instrument that allows
-us to perform fuzzing on beremetal code (Xen hypervisor in this case)
-using QEMU as an emulator. It employs QEMU's ability to create
-snapshots to run many tests relatively quickly: system state is saved
-right before executing a new test and restored after the test is
-finished.
+On Thu, Jul 17, 2025 at 10:12:37PM +0200, David Hildenbrand wrote:
+> > >
+> > > -/*
+> > > - * vm_normal_page -- This function gets the "struct page" associated with a pte.
+> > > +/**
+> > > + * vm_normal_page_pfn() - Get the "struct page" associated with a PFN in a
+> > > + *			  non-special page table entry.
+> >
+> > This is a bit nebulous/confusing, I mean you'll get PTE entries with PTE special
+> > bit that'll have a PFN but just no struct page/folio to look at, or should not
+> > be touched.
+> >
+> > So the _pfn() bit doesn't really properly describe what it does.
+> >
+> > I wonder if it'd be better to just separate out the special handler, have
+> > that return a boolean indicating special of either form, and then separate
+> > other shared code separately from that?
+>
+> Let me think about that; I played with various approaches and this was the
+> best I was come up with before running in circles.
 
-This patch adds all necessary plumbing to run aarch64 build of Xen
-inside that LibAFL-QEMU fuzzer. While, most of the code is in common
-section and can be used by any supported architecture, final calls to
-LibAFL-QEMU are arch-specific and were tested only on aarch64 for
-now. But LibAFL-QEMU itself supports many different architectures,
-including x86_64 and riscv.
+Thanks
 
-From the Xen perspective we need to do following things:
+>
+> >
+> > > + * @vma: The VMA mapping the @pfn.
+> > > + * @addr: The address where the @pfn is mapped.
+> > > + * @pfn: The PFN.
+> > > + * @entry: The page table entry value for error reporting purposes.
+> > >    *
+> > >    * "Special" mappings do not wish to be associated with a "struct page" (either
+> > >    * it doesn't exist, or it exists but they don't want to touch it). In this
+> > > @@ -603,10 +608,10 @@ static void print_bad_page_map(struct vm_area_struct *vma,
+> > >    * (such as GUP) can still identify these mappings and work with the
+> > >    * underlying "struct page".
+> > >    *
+> > > - * There are 2 broad cases. Firstly, an architecture may define a pte_special()
+> > > - * pte bit, in which case this function is trivial. Secondly, an architecture
+> > > - * may not have a spare pte bit, which requires a more complicated scheme,
+> > > - * described below.
+> > > + * There are 2 broad cases. Firstly, an architecture may define a "special"
+> > > + * page table entry bit (e.g., pte_special()), in which case this function is
+> > > + * trivial. Secondly, an architecture may not have a spare page table
+> > > + * entry bit, which requires a more complicated scheme, described below.
+> >
+> > Strikes me this bit of the comment should be with vm_normal_page(). As this
+> > implies the 2 broad cases are handled here and this isn't the case.
+>
+> Well, pragmatism. Splitting up the doc doesn't make sense. Having it at
+> vm_normal_page() doesn't make sense.
+>
+> I'm sure the educated reader will be able to make sense of it :P
+>
+> But I'm happy to hear suggestions on how to do it differently :)
 
-1. Able to communicate with LibAFL-QEMU fuzzer. This is done by
-executing special opcodes, that only LibAFL-QEMU can handle.
+Right yeah.
 
-2. Use interface from p.1 to tell the fuzzer about code Xen section,
-so fuzzer know which part of code to track and gather coverage data.
+I feel like having separate 'special' handling for each case as separate
+functions, each with their own specific explanation would work.
 
-3. Report fuzzer about crash. This is done in panic() function.
+But I don't want to hold up the series _too_ much on this, generally I just
+find the _pfn thing confusing.
 
-4. Prevent test harness from shooting itself in knee.
+I mean the implementation is a total pain anyway...
 
-Right now test harness is an external component, because we want to
-test external Xen interfaces, but it is possible to fuzz internal code
-if we want to.
+I feel like we could even have separate special handling functions like
 
-Test harness is implemented XTF-based test-case(s). As test harness
-can issue hypercall that shuts itself down, KConfig option
-CONFIG_FUZZER_PASS_BLOCKING was added. It basically tells
-fuzzer that test was completed successfully if Dom0 tries to shut
-itself (or the whole machine) down.
+#ifdef CONFIG_ARCH_HAS_PTE_SPECIAL
 
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-
----
-
-Changes in v4:
- - Fixed formatting in Kconfig.debug
- - Removed spurious change
- - Moved libfal-qemu.o in Makefile to the upper position to preserve
-   sorting
- - lqprintf() made static
- - minor formatting changes in libfal-qemu.c
- - Removed LibAFL's XSTRINGIFY() macro in favor of STR()
- - Changes typedef for libafl_word to "unsigned long"
-
-Changes in v3:
-
- - Added fuzzer.h
- - Kconfig entries were reworked to be more generic and support
-   other fuzzers in the future
- - Moved all the code into common area, as there is nothing
-   arch-specific in it
- - Created arch-specific header file form ARM
- - Removed not used definitions in libafl-qemu.h
- - Removed not used functions from libafl-qemu.c
- - Folded libafl-qemu-defs.h into libafl-qemu.h as we don't
-   need two separate headers
- - Aligned code with xen coding style
- - Added SPDX identifiers with MIT license to libafl-* files
----
- docs/hypervisor-guide/fuzzing.rst      | 91 ++++++++++++++++++++++++++
- xen/arch/arm/Kconfig.debug             | 36 ++++++++++
- xen/arch/arm/include/asm/libafl-qemu.h | 50 ++++++++++++++
- xen/arch/arm/psci.c                    |  5 ++
- xen/common/Makefile                    |  1 +
- xen/common/domain.c                    |  3 +
- xen/common/libafl-qemu.c               | 79 ++++++++++++++++++++++
- xen/common/sched/core.c                |  5 ++
- xen/common/shutdown.c                  |  3 +
- xen/drivers/char/console.c             |  3 +
- xen/include/xen/fuzzer.h               | 52 +++++++++++++++
- xen/include/xen/libafl-qemu.h          | 58 ++++++++++++++++
- 12 files changed, 386 insertions(+)
- create mode 100644 docs/hypervisor-guide/fuzzing.rst
- create mode 100644 xen/arch/arm/include/asm/libafl-qemu.h
- create mode 100644 xen/common/libafl-qemu.c
- create mode 100644 xen/include/xen/fuzzer.h
- create mode 100644 xen/include/xen/libafl-qemu.h
-
-diff --git a/docs/hypervisor-guide/fuzzing.rst b/docs/hypervisor-guide/fuzz=
-ing.rst
-new file mode 100644
-index 0000000000..895d858edc
---- /dev/null
-+++ b/docs/hypervisor-guide/fuzzing.rst
-@@ -0,0 +1,91 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Fuzzing
-+=3D=3D=3D=3D=3D=3D=3D
-+
-+It is possible to use LibAFL-QEMU for fuzzing hypervisor. Right now
-+only aarch64 is supported and only hypercall fuzzing is enabled in the
-+test harness, but there are plans to add vGIC interface fuzzing, PSCI
-+fuzzing and vPL011 fuzzing as well.
-+
-+
-+Principle of operation
-+----------------------
-+
-+LibAFL-QEMU is a part of American Fuzzy lop plus plus (AKA AFL++)
-+project. It uses special build of QEMU, that allows to fuzz baremetal
-+software like Xen hypervisor or Linux kernel. Basic idea is that we
-+have software under test (Xen hypervisor in our case) and a test
-+harness application. Test harness uses special protocol to communicate
-+with LibAFL outside of QEMU to get input data and report test
-+result. LibAFL monitors which branches are taken by Xen and mutates
-+input data in attempt to discover new code paths that eventually can
-+lead to a crash or other unintended behavior.
-+
-+LibAFL uses QEMU's `snapshot` feature to run multiple test without
-+restarting the whole system every time. This speeds up fuzzing process
-+greatly.
-+
-+So, to try Xen fuzzing we need three components: LibAFL-based fuzzer,
-+test harness and Xen itself.
-+
-+Building Xen for fuzzing with LibAFL-QEMU
-+-----------------------------------------
-+
-+Xen hypervisor should be built with these three options::
-+
-+  CONFIG_FUZZING=3Dy
-+  CONFIG_FUZZER_LIBAFL_QEMU=3Dy
-+  CONFIG_FUZZER_PASS_BLOCKING=3Dy
-+
-+Building LibAFL-QEMU based fuzzer
-+---------------------------------
-+
-+Fuzzer is written in Rust, so you need Rust toolchain and `cargo` tool
-+in your system. Please refer to your distro documentation on how to
-+obtain them.
-+
-+Once Rust is ready, fetch and build the fuzzer::
-+
-+  # git clone https://github.com/xen-troops/xen-fuzzer-rs
-+  # cd xen-fuzzer-rs
-+  # cargo build
-+
-+Building test harness
-+---------------------
-+
-+We need to make low-level actions, like issuing random hypercalls, so
-+for test harness we use special build of XTF (Xen Testing Framework).
-+You can build XTF manually, or let fuzzer to do this::
-+
-+  # cargo make build_xtf
-+
-+This fill download and build XTF for ARM.
-+
-+Running the fuzzer
-+------------------
-+
-+Please refer to README.md that comes with the fuzzer, but the most
-+versatile way is to run it like this::
-+
-+  # target/debug/xen_fuzzer -t 3600 /path/to/xen \
-+      target/xtf/tests/arm-vgic-fuzzer/test-mmu64le-arm-vgic-fuzzer
-+
-+(assuming that you built XTF with `cargo make build_xtf`)
-+
-+Any inputs that led to crashes will be found in `crashes` directory.
-+
-+You can replay a crash with `-r` option::
-+
-+  # target/debug/xen_fuzzer -r crashes/0195e4fc65828c17 run \
-+      /path/to/xen \
-+      /path/to/harness
-+
-+
-+Fuzzer will return non-zero error code if it encountered any crashes.
-+
-+TODOs
-+-----
-+
-+ - Add x86 support.
-+ - Implement fuzzing of other external hypervisor interfaces.
-diff --git a/xen/arch/arm/Kconfig.debug b/xen/arch/arm/Kconfig.debug
-index 5a03b220ac..0a5498afd5 100644
---- a/xen/arch/arm/Kconfig.debug
-+++ b/xen/arch/arm/Kconfig.debug
-@@ -190,3 +190,39 @@ config EARLY_PRINTK_INC
- 	default "debug-mvebu.inc" if EARLY_UART_MVEBU
- 	default "debug-pl011.inc" if EARLY_UART_PL011
- 	default "debug-scif.inc" if EARLY_UART_SCIF
-+
-+config FUZZING
-+       bool "Build Xen for fuzzing"
-+       help
-+          Enable this option only if you are going to run the hypervisor
-+	  inside a fuzzer. Do not try to run run Xen built with this option
-+	  on any real hardware, because it will likely crash during boot.
-+
-+choice FUZZER
-+       depends on FUZZING
-+       prompt "Fuzzer"
-+
-+config FUZZER_LIBAFL_QEMU
-+	depends on ARM_64
-+	bool "LibAFL-QEMU"
-+	help
-+	  This option enables support for LibAFL-QEMU fuzzer. Choose this
-+	  option only when you are going to run hypervisor inside LibAFL-QEMU.
-+	  Xen will report code section to LibAFL and will report about
-+	  crash when it panics.
-+
-+endchoice
-+
-+config FUZZER_PASS_BLOCKING
-+	depends on FUZZING
-+	bool "Fuzzing: Report any attempt to suspend/destroy a domain as a succes=
-s"
-+	help
-+	  When fuzzing hypercalls, a fuzzer might make Xen to do something
-+	  that prevents from returning to the caller: reboot or turn off the
-+	  machine, block calling vCPU, crash a domain, etc. Depending on
-+	  fuzzing goal this may be a valid behavior, but as control is not
-+	  returned to the fuzzing harness, it can't tell the fuzzer about
-+	  success. With this option enabled, Xen will do this by itself.
-+
-+	  Enable this option only if fuzzing attempt can lead to a
-+	  correct stop, like when fuzzing hypercalls or PSCI.
-diff --git a/xen/arch/arm/include/asm/libafl-qemu.h b/xen/arch/arm/include/=
-asm/libafl-qemu.h
-new file mode 100644
-index 0000000000..99ac52085c
---- /dev/null
-+++ b/xen/arch/arm/include/asm/libafl-qemu.h
-@@ -0,0 +1,50 @@
-+/* SPDX-License-Identifier: MIT */
-+/*
-+ * Arch-specific portions of LibAFL-QEMU interface
-+ */
-+#ifndef __ASM_ARM_LIBAFL_QEMU_H
-+#define __ASM_ARM_LIBAFL_QEMU_H
-+
-+#include <xen/macros.h>
-+
-+#define LIBAFL_DEFINE_FUNCTIONS(name, opcode)                           \
-+    libafl_word _libafl_##name##_call0(                                 \
-+        libafl_word action) {                                           \
-+        register unsigned long r0 ASM_REG(0) =3D action;                  =
-\
-+        __asm__ volatile (                                              \
-+            ".word " STR(opcode) "\n"                                   \
-+            : "+r"(r0)                                                  \
-+            :                                                           \
-+            : "memory"                                                  \
-+            );                                                          \
-+        return r0;                                                      \
-+    }                                                                   \
-+                                                                        \
-+    libafl_word _libafl_##name##_call1(                                 \
-+        libafl_word action, libafl_word arg1) {                         \
-+        register unsigned long r0 ASM_REG(0) =3D action;                  =
-\
-+        register unsigned long r1 ASM_REG(1) =3D arg1;                    =
-\
-+        __asm__ volatile (                                              \
-+            ".word " STR(opcode) "\n"                                   \
-+            : "+r"(r0)                                                  \
-+            : "r"(r1)                                                   \
-+            : "memory"                                                  \
-+            );                                                          \
-+        return r0;                                                      \
-+    }                                                                   \
-+                                                                        \
-+    libafl_word _libafl_##name##_call2(                                 \
-+        libafl_word action, libafl_word arg1, libafl_word arg2) {       \
-+        register unsigned long r0 ASM_REG(0) =3D action;                  =
-\
-+        register unsigned long r1 ASM_REG(1) =3D arg1;                    =
-\
-+        register unsigned long r2 ASM_REG(2) =3D arg2;                    =
-\
-+        __asm__ volatile (                                              \
-+            ".word " STR(opcode) "\n"                                   \
-+            : "+r"(r0)                                                  \
-+            : "r"(r1), "r"(r2)                                          \
-+            : "memory"                                                  \
-+            );                                                          \
-+        return r0;                                                      \
-+    }
-+
-+#endif
-diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
-index b6860a7760..43253b3f71 100644
---- a/xen/arch/arm/psci.c
-+++ b/xen/arch/arm/psci.c
-@@ -10,6 +10,7 @@
-=20
-=20
- #include <xen/acpi.h>
-+#include <xen/fuzzer.h>
- #include <xen/types.h>
- #include <xen/init.h>
- #include <xen/mm.h>
-@@ -62,12 +63,16 @@ void call_psci_cpu_off(void)
-=20
- void call_psci_system_off(void)
- {
-+    fuzzer_on_block();
-+
-     if ( psci_ver > PSCI_VERSION(0, 1) )
-         arm_smccc_smc(PSCI_0_2_FN32_SYSTEM_OFF, NULL);
- }
-=20
- void call_psci_system_reset(void)
- {
-+    fuzzer_on_block();
-+
-     if ( psci_ver > PSCI_VERSION(0, 1) )
-         arm_smccc_smc(PSCI_0_2_FN32_SYSTEM_RESET, NULL);
- }
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 98f0873056..fc8b8c4fb4 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -24,6 +24,7 @@ obj-y +=3D kernel.o
- obj-y +=3D keyhandler.o
- obj-$(CONFIG_KEXEC) +=3D kexec.o
- obj-$(CONFIG_KEXEC) +=3D kimage.o
-+obj-$(CONFIG_FUZZER_LIBAFL_QEMU) +=3D libafl-qemu.o
- obj-$(CONFIG_LIVEPATCH) +=3D livepatch.o livepatch_elf.o
- obj-$(CONFIG_LLC_COLORING) +=3D llc-coloring.o
- obj-$(CONFIG_VM_EVENT) +=3D mem_access.o
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 303c338ef2..fd0e993aed 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -5,6 +5,7 @@
-  */
-=20
- #include <xen/compat.h>
-+#include <xen/fuzzer.h>
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/ctype.h>
-@@ -1323,6 +1324,8 @@ int domain_shutdown(struct domain *d, u8 reason)
-=20
-     spin_unlock(&d->shutdown_lock);
-=20
-+    fuzzer_on_block();
-+
-     return 0;
- }
-=20
-diff --git a/xen/common/libafl-qemu.c b/xen/common/libafl-qemu.c
-new file mode 100644
-index 0000000000..f58b830c6e
---- /dev/null
-+++ b/xen/common/libafl-qemu.c
-@@ -0,0 +1,79 @@
-+/* SPDX-License-Identifier: MIT */
-+/*
-+  This file is based on libafl_qemu_impl.h, libafl_qemu_qemu_arch.h
-+  and libafl_qemu_defs.h from LibAFL project.
-+*/
-+#include <xen/lib.h>
-+#include <xen/init.h>
-+#include <xen/kernel.h>
-+#include <xen/spinlock.h>
-+#include <xen/libafl-qemu.h>
-+#include <asm/libafl-qemu.h>
-+
-+/* Generates sync exit functions */
-+LIBAFL_DEFINE_FUNCTIONS(sync_exit, LIBAFL_SYNC_EXIT_OPCODE)
-+
-+    void libafl_qemu_end(enum LibaflQemuEndStatus status)
-+{
-+    _libafl_sync_exit_call1(LIBAFL_QEMU_COMMAND_END, status);
-+}
-+
-+void libafl_qemu_internal_error(void)
-+{
-+    _libafl_sync_exit_call0(LIBAFL_QEMU_COMMAND_INTERNAL_ERROR);
-+}
-+
-+static void lqprintf(const char *fmt, ...)
-+{
-+    static DEFINE_SPINLOCK(lock);
-+    static char buffer[LIBAFL_QEMU_PRINTF_MAX_SIZE] =3D {0};
-+    va_list args;
-+    int res;
-+
-+    spin_lock(&lock);
-+
-+    va_start(args, fmt);
-+    res =3D vsnprintf(buffer, LIBAFL_QEMU_PRINTF_MAX_SIZE, fmt, args);
-+    va_end(args);
-+
-+    if ( res >=3D LIBAFL_QEMU_PRINTF_MAX_SIZE )
-+    {
-+        /* buffer is not big enough, either recompile the target with more=
+/*
+ * < description of pte special special page >
+ *
+ * If returns true, then pagep set to NULL or, if a page can be found, that
+ * page.
+ *
  */
-+        /* space or print less things */
-+        libafl_qemu_internal_error();
-+    }
-+
-+    _libafl_sync_exit_call2(LIBAFL_QEMU_COMMAND_LQPRINTF,
-+                            (libafl_word)buffer, res);
-+    spin_unlock(&lock);
-+}
-+
-+void libafl_qemu_trace_vaddr_range(libafl_word start,
-+                                   libafl_word end)
-+{
-+    _libafl_sync_exit_call2(LIBAFL_QEMU_COMMAND_VADDR_FILTER_ALLOW, start,=
- end);
-+}
-+
-+static int init_afl(void)
-+{
-+    vaddr_t xen_text_start =3D (vaddr_t)_stext;
-+    vaddr_t xen_text_end =3D (vaddr_t)_etext;
-+
-+    lqprintf("Telling AFL about code section: %lx - %lx\n", xen_text_start=
-,
-+             xen_text_end);
-+
-+    libafl_qemu_trace_vaddr_range(xen_text_start, xen_text_end);
-+
-+    return 0;
-+}
-+__initcall(init_afl);
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-+
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 13fdf57e57..f97a2d1908 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -16,6 +16,7 @@
- #ifndef COMPAT
- #include <xen/init.h>
- #include <xen/lib.h>
-+#include <xen/fuzzer.h>
- #include <xen/param.h>
- #include <xen/sched.h>
- #include <xen/sections.h>
-@@ -1429,6 +1430,8 @@ void vcpu_block(void)
-         TRACE_TIME(TRC_SCHED_BLOCK, v->domain->domain_id, v->vcpu_id);
-         raise_softirq(SCHEDULE_SOFTIRQ);
-     }
-+
-+    fuzzer_on_block();
- }
-=20
- static void vcpu_block_enable_events(void)
-@@ -1502,6 +1505,8 @@ static long do_poll(const struct sched_poll *sched_po=
-ll)
-     TRACE_TIME(TRC_SCHED_BLOCK, d->domain_id, v->vcpu_id);
-     raise_softirq(SCHEDULE_SOFTIRQ);
-=20
-+    fuzzer_on_block();
-+
-     return 0;
-=20
-  out:
-diff --git a/xen/common/shutdown.c b/xen/common/shutdown.c
-index c47341b977..8e82678626 100644
---- a/xen/common/shutdown.c
-+++ b/xen/common/shutdown.c
-@@ -1,5 +1,6 @@
- #include <xen/init.h>
- #include <xen/lib.h>
-+#include <xen/fuzzer.h>
- #include <xen/param.h>
- #include <xen/sched.h>
- #include <xen/sections.h>
-@@ -32,6 +33,8 @@ static void noreturn reboot_or_halt(void)
-=20
- void hwdom_shutdown(unsigned char reason)
- {
-+    fuzzer_on_block();
-+
-     switch ( reason )
-     {
-     case SHUTDOWN_poweroff:
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index ba5a809a99..ad737e35cb 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -16,6 +16,7 @@
- #include <xen/event.h>
- #include <xen/console.h>
- #include <xen/param.h>
-+#include <xen/fuzzer.h>
- #include <xen/serial.h>
- #include <xen/softirq.h>
- #include <xen/keyhandler.h>
-@@ -1359,6 +1360,8 @@ void panic(const char *fmt, ...)
-=20
-     kexec_crash(CRASHREASON_PANIC);
-=20
-+    fuzzer_crash();
-+
-     if ( opt_noreboot )
-         machine_halt();
-     else
-diff --git a/xen/include/xen/fuzzer.h b/xen/include/xen/fuzzer.h
-new file mode 100644
-index 0000000000..852917fe50
---- /dev/null
-+++ b/xen/include/xen/fuzzer.h
-@@ -0,0 +1,52 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef XEN__FUZZER_H
-+#define XEN__FUZZER_H
-+
-+#include <xen/compiler.h>
-+
-+#ifdef CONFIG_FUZZER_LIBAFL_QEMU
-+#include <xen/libafl-qemu.h>
-+#endif
-+
-+/* Unconditional failure */
-+static always_inline void fuzzer_crash(void)
-+{
-+#ifdef CONFIG_FUZZER_LIBAFL_QEMU
-+    libafl_qemu_end(LIBAFL_QEMU_END_CRASH);
-+#endif
-+}
-+
-+/* Unconditional success */
-+static always_inline void fuzzer_success(void)
-+{
-+#ifdef CONFIG_FUZZER_LIBAFL_QEMU
-+    libafl_qemu_end(LIBAFL_QEMU_END_OK);
-+#endif
-+}
-+
-+/*
-+ * Conditional success
-+ *
-+ * Sometimes a fuzzer might make Xen to do something that prevents
-+ * from returning to the caller: reboot or turn off the machine, block
-+ * calling vCPU, crash a domain, etc. Depending on fuzzing goal this
-+ * may be a valid behavior, but as control is not returned to the
-+ * fuzzing harness, it can't tell the fuzzer about success, so we need
-+ * to do this ourselves.
-+ */
-+static always_inline void fuzzer_on_block(void)
-+{
-+#ifdef CONFIG_FUZZER_PASS_BLOCKING
-+    fuzzer_success();
-+#endif
-+}
-+
-+#endif
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/xen/libafl-qemu.h b/xen/include/xen/libafl-qemu.h
-new file mode 100644
-index 0000000000..b922072e35
---- /dev/null
-+++ b/xen/include/xen/libafl-qemu.h
-@@ -0,0 +1,58 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __XEN_LIBAFL_QEMU_H
-+#define __XEN_LIBAFL_QEMU_H
-+
-+#include <xen/stdint.h>
-+#define LIBAFL_QEMU_PRINTF_MAX_SIZE 4096
-+
-+#define LIBAFL_SYNC_EXIT_OPCODE 0x66f23a0f
-+
-+typedef enum LibaflQemuCommand
-+{
-+  LIBAFL_QEMU_COMMAND_START_VIRT =3D 0,
-+  LIBAFL_QEMU_COMMAND_START_PHYS =3D 1,
-+  LIBAFL_QEMU_COMMAND_INPUT_VIRT =3D 2,
-+  LIBAFL_QEMU_COMMAND_INPUT_PHYS =3D 3,
-+  LIBAFL_QEMU_COMMAND_END =3D 4,
-+  LIBAFL_QEMU_COMMAND_SAVE =3D 5,
-+  LIBAFL_QEMU_COMMAND_LOAD =3D 6,
-+  LIBAFL_QEMU_COMMAND_VERSION =3D 7,
-+  LIBAFL_QEMU_COMMAND_VADDR_FILTER_ALLOW =3D 8,
-+  LIBAFL_QEMU_COMMAND_INTERNAL_ERROR =3D 9,
-+  LIBAFL_QEMU_COMMAND_LQPRINTF =3D 10,
-+  LIBAFL_QEMU_COMMAND_TEST =3D 11,
-+} LibaflExit;
-+
-+typedef unsigned long libafl_word;
-+
-+/**
-+ * LibAFL QEMU header file.
-+ *
-+ * This file is a portable header file used to build target harnesses more
-+ * conveniently. Its main purpose is to generate ready-to-use calls to
-+ * communicate with the fuzzer. The list of commands is available at the b=
-ottom
-+ * of this file. The rest mostly consists of macros generating the code us=
-ed by
-+ * the commands.
-+ */
-+
-+enum LibaflQemuEndStatus
-+{
-+  LIBAFL_QEMU_END_UNKNOWN =3D 0,
-+  LIBAFL_QEMU_END_OK =3D 1,
-+  LIBAFL_QEMU_END_CRASH =3D 2,
-+};
-+
-+void libafl_qemu_end(enum LibaflQemuEndStatus status);
-+
-+void libafl_qemu_internal_error(void);
-+
-+void libafl_qemu_trace_vaddr_range(libafl_word start, libafl_word end);
-+
-+static always_inline void libafl_qemu_success_on_block(void)
-+{
-+#ifdef CONFIG_LIBAFL_QEMU_FUZZER_PASS_BLOCKING
-+    libafl_qemu_end(LIBAFL_QEMU_END_OK);
-+#endif
-+}
-+
-+#endif
---=20
-2.50.0
+static struct bool is_special_page(struct vm_area_struct *vma, unsigned long addr,
+		pte_t pte, struct page **pagep)
+{
+	unsigned long pfn = pte_pfn(pte);
+
+	if (likely(!pte_special(pte))) {
+		if (pfn <= highest_memmap_pfn)
+			return false;
+
+		goto bad;
+	}
+
+	if (vma->vm_ops && vma->vm_ops->find_special_page) {
+		*pagep = vma->vm_ops->find_special_page(vma, addr);
+		return true;
+	} else if (vma->vm_flags & (VM_PFNMAP | VM_MIXEDMAP)) {
+		goto special;
+	}
+
+	if (is_zero_pfn(pfn))
+		goto special;
+
+	/* If we reach here something's gone wrong. */
+
+bad:
+	print_bad_pte(vma, addr, pte, NULL);
+special:
+	*pagep = NULL;
+	return true;
+}
+#else
+/*
+ * < description for not-pte special special page >
+ */
+static struct bool is_special_page(struct vm_area_struct *vma, unsigned long addr,
+		pte_t pte, struct page **pagep)
+{
+	unsigned long pfn = pte_pfn(pte);
+
+	if (is_zero_pfn(pfn))
+		goto special;
+
+	if (vma->vm_flags & VM_MIXEDMAP) {
+		if (!pfn_valid(pfn) || is_zero_pfn(pfn))
+			goto special;
+	} else if (vma->vm_flags & VM_PFNMAP) {
+		unsigned long off;
+
+		off = (addr - vma->vm_start) >> PAGE_SHIFT;
+		if (pfn == vma->vm_pgoff + off)
+			goto special;
+		/* Hell's bells we allow CoW !arch_has_pte_special of PFN pages! help! */
+		if (!is_cow_mapping(vma->vm_flags))
+			goto special;
+	}
+
+	if (pfn > highest_memmap_pfn) {
+		print_bad_pte(vma, addr, pte, NULL);
+		goto special;
+	}
+
+	return false;
+special:
+	*pagep = NULL;
+	return true;
+}
+
+#endif
+
+And then obviously invoke as makes sense... This is rough and untested,
+just to give a sense :>)
+
+>
+> >
+> > >    *
+> > >    * A raw VM_PFNMAP mapping (ie. one that is not COWed) is always considered a
+> > >    * special mapping (even if there are underlying and valid "struct pages").
+> > > @@ -639,15 +644,72 @@ static void print_bad_page_map(struct vm_area_struct *vma,
+> > >    * don't have to follow the strict linearity rule of PFNMAP mappings in
+> > >    * order to support COWable mappings.
+> > >    *
+> > > + * This function is not expected to be called for obviously special mappings:
+> > > + * when the page table entry has the "special" bit set.
+> >
+> > Hmm this is is a bit weird though, saying "obviously" special, because you're
+> > handling "special" mappings here, but only for architectures that don't specify
+> > the PTE special bit.
+> >
+> > So it makes it quite nebulous what constitutes 'obviously' here, really you mean
+> > pte_special().
+>
+> Yes, I can clarify that.
+
+Thanks!
+
+>
+> >
+> > > + *
+> > > + * Return: Returns the "struct page" if this is a "normal" mapping. Returns
+> > > + *	   NULL if this is a "special" mapping.
+> > > + */
+> > > +static inline struct page *vm_normal_page_pfn(struct vm_area_struct *vma,
+> > > +		unsigned long addr, unsigned long pfn, unsigned long long entry)
+> > > +{
+> > > +	/*
+> > > +	 * With CONFIG_ARCH_HAS_PTE_SPECIAL, any special page table mappings
+> > > +	 * (incl. shared zero folios) are marked accordingly and are handled
+> > > +	 * by the caller.
+> > > +	 */
+> > > +	if (!IS_ENABLED(CONFIG_ARCH_HAS_PTE_SPECIAL)) {
+> > > +		if (unlikely(vma->vm_flags & (VM_PFNMAP | VM_MIXEDMAP))) {
+> > > +			if (vma->vm_flags & VM_MIXEDMAP) {
+> > > +				/* If it has a "struct page", it's "normal". */
+> > > +				if (!pfn_valid(pfn))
+> > > +					return NULL;
+> > > +			} else {
+> > > +				unsigned long off = (addr - vma->vm_start) >> PAGE_SHIFT;
+> > > +
+> > > +				/* Only CoW'ed anon folios are "normal". */
+> > > +				if (pfn == vma->vm_pgoff + off)
+> > > +					return NULL;
+> > > +				if (!is_cow_mapping(vma->vm_flags))
+> > > +					return NULL;
+> > > +			}
+> > > +		}
+> > > +
+> > > +		if (is_zero_pfn(pfn) || is_huge_zero_pfn(pfn))
+> >
+> > This handles zero/zero huge page handling for non-pte_special() case
+> > only. I wonder if we even need to bother having these marked special
+> > generally since you can just check the PFN every time anyway.
+>
+> Well, that makes (a) pte_special() a bit weird -- not set for some special
+> pages and (b) requires additional runtime checks for the case we all really
+> care about -- pte_special().
+>
+> So I don't think we should change that.
+
+OK, best to be consistent in setting for special pages.
+
+>
+> [...]
+>
+> > >
+> > > +/**
+> > > + * vm_normal_folio() - Get the "struct folio" associated with a PTE
+> > > + * @vma: The VMA mapping the @pte.
+> > > + * @addr: The address where the @pte is mapped.
+> > > + * @pte: The PTE.
+> > > + *
+> > > + * Get the "struct folio" associated with a PTE. See vm_normal_page_pfn()
+> > > + * for details.
+> > > + *
+> > > + * Return: Returns the "struct folio" if this is a "normal" mapping. Returns
+> > > + *	   NULL if this is a "special" mapping.
+> > > + */
+> >
+> > Nice to add a comment, but again feels weird to have the whole explanation in
+> > vm_normal_page_pfn() but then to invoke vm_normal_page()..
+>
+> You want people to do pointer chasing to find what they are looking for? :)
+
+Yes.
+
+Only joking :P
+
+Hopefully the ideas mentioned above clarify things... a bit maybe... :>)
+
+>
+> --
+> Cheers,
+>
+> David / dhildenb
+>
 
