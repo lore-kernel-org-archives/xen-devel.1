@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0318AC83F17
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 15:42:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1048940.1419135 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D935C83F1A
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Jul 2025 15:55:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1048948.1419155 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucnDq-0007KD-Hb; Fri, 18 Jul 2025 15:42:06 +0000
+	id 1ucnQT-00011b-Rz; Fri, 18 Jul 2025 15:55:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1048940.1419135; Fri, 18 Jul 2025 15:42:06 +0000
+Received: by outflank-mailman (output) from mailman id 1048948.1419155; Fri, 18 Jul 2025 15:55:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ucnDq-0007K6-Ek; Fri, 18 Jul 2025 15:42:06 +0000
-Received: by outflank-mailman (input) for mailman id 1048940;
- Fri, 18 Jul 2025 15:42:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ucnQT-00011T-PK; Fri, 18 Jul 2025 15:55:09 +0000
+Received: by outflank-mailman (input) for mailman id 1048948;
+ Fri, 18 Jul 2025 15:55:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=00bL=Z7=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ucnDp-0007K0-MR
- for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 15:42:05 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id be4eff27-63ed-11f0-b894-0df219b8e170;
- Fri, 18 Jul 2025 17:42:00 +0200 (CEST)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a54700a463so1289029f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 18 Jul 2025 08:42:00 -0700 (PDT)
-Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ id 1ucnQR-0000nc-Tq
+ for xen-devel@lists.xenproject.org; Fri, 18 Jul 2025 15:55:07 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9319e593-63ef-11f0-a319-13f23c93f187;
+ Fri, 18 Jul 2025 17:55:06 +0200 (CEST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-451d6ade159so16482115e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Jul 2025 08:55:06 -0700 (PDT)
+Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b61ca5c8dfsm2188177f8f.82.2025.07.18.08.41.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Jul 2025 08:41:59 -0700 (PDT)
+ ffacd0b85a97d-3b61ca48719sm2276468f8f.47.2025.07.18.08.55.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Jul 2025 08:55:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,131 +47,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be4eff27-63ed-11f0-b894-0df219b8e170
+X-Inumbo-ID: 9319e593-63ef-11f0-a319-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1752853319; x=1753458119; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=nNGT0Ke96+J7+VsuoZzFtPTUBQajCOseVtWbGSzbsoM=;
-        b=AvOv4H0QqcV0HCuqnXpnThKpc7gSvJ/jKvoBa9XQLBaF6rVIEyjE/1CA+LpCJ46x2s
-         K+Im4IG0O3edvSvJoS/+DhFuPbHmbuy/E20PHW805SjgG3aSrhKXvpo6Zc07KfzgkbSc
-         pUien1tvKDbySU4KudQzD9FddzRu0lGFAeS/I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752853319; x=1753458119;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1752854106; x=1753458906; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nNGT0Ke96+J7+VsuoZzFtPTUBQajCOseVtWbGSzbsoM=;
-        b=f62mK80OqOUb2+i2kqSJqEJ9aFA4E1+jKL5ZCcXqA8uevLzUH4DdyoMPikwhc5G299
-         DWl9btbsXhYhPR8CSlcSD0+k0QRUhE1+speTcCRdXzVPc4qAKxMfZXVZexZ0Lrdz/UQ/
-         Is/35jiMxpuexRqwG1OrBMBQc8v0blyuxgssYhTfhkYSpYnXdWvag8KRUeVnq6wmDDEe
-         VDUOiuaWv1l6SkBWKpE4aUUvyWA9OfVHcZc6Ln5vLlE0LZqAhEt8UPd7HMxTplZHrW4U
-         hMr4Jc2e1m+WhRtReP2fXRGABslfeJHIevxBl5QUAmmQ+BB5meDMeGAoZj9lfRjV1HrH
-         hx8g==
-X-Forwarded-Encrypted: i=1; AJvYcCUuqZmLdlvlnPof3Ujehuj7aKvB3LbSQB1IECKpi0CqEgy76KRaGhZM/7RG3pJaYjnwWPu4MTech3s=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwTN88DQjl/ubAWUsbvYr4TqYhQaloxfVzyMGaF6YWr+7xOiCRV
-	lHZN8uRrGDyPWmUMe5gnAd155n5jFxt1+rmp0mbRODufHNul4eLjzDDoK1xw/v21ecg=
-X-Gm-Gg: ASbGnctZ3JYKsjsPbhWzIYN0XVUolvEhvJvxZN2Hfrrx+8iR/Q26oQmYkQTt/UAAsa9
-	OR7MUppGKEpc90sU5dYuoy8dCv8pHeNgFcd03MpmKsNx6+a8F/FvVThnJl5qeE8mpUTxfU9XZw8
-	FqWxiOTGJQV0C85w2B5l71z2F5BhNItiMKo90/n9qpyYdYXGWKbaO+5y2oBNNjpD8/GqsXCKGTI
-	pAF1teOjY/BdDSgwvYo3wpCR8GJtt3O+hXYaTHN8KO3XiR81C4+vrCY1NZmDV//YLCQ1lMCg0tF
-	UIqAADU/fAW863oIsYGRjkl4ebbB5MKLWlhSUYQjV9f8ZOmFJlgbX3SLFPUJ+1WPndqEoItabkk
-	8t0zo2zh9lVYUXQEitbaSESpnRH3fNaY2ml2ahL2YlnLajdaDe78432/wpFQVKRzSS7rxMoste8
-	taRYM=
-X-Google-Smtp-Source: AGHT+IFLMA+eNjlJbf+xdKxGOOPCanhp+/r20Uz9QuRwM1MovvdYeV0flySGxZJ4I5E4d8d1aYTItQ==
-X-Received: by 2002:adf:ca89:0:b0:3b6:162a:8e08 with SMTP id ffacd0b85a97d-3b619ca6691mr2702234f8f.12.1752853319451;
-        Fri, 18 Jul 2025 08:41:59 -0700 (PDT)
-Message-ID: <47704e30-0f8f-483e-b22e-5cdb767699d5@citrix.com>
-Date: Fri, 18 Jul 2025 16:41:58 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86: Don't allow HVM alongside PV_SHIM_EXCLUSIVE
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <20250718151214.24835-1-alejandro.garciavallejo@amd.com>
-Content-Language: en-GB
+        bh=AAF5gDhCmA/Unwlsalbb9JHf0PnE9yyVlu9PtFe4Do4=;
+        b=lcTMMF3x6R6SGXn+Cg3QN5lZf5JPTU/Wsx09+H4zsYkN0pWa/reWGZ7/+bylav6GtU
+         oxQbUyrHKelvb3bNA8E3JgBPGP/RueZsxYUdBSWFkM0c6hoGP2jjnn1leT7BYOvKCduB
+         6PIlTZOlM8wFVMVWRELDzae9oSX1czxdLXVko=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752854106; x=1753458906;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AAF5gDhCmA/Unwlsalbb9JHf0PnE9yyVlu9PtFe4Do4=;
+        b=A55+UlqnDOaSbX04n2ABP5DKaU2CkG7vDk+r9gn8Q9X5RwGBhE7QzKrR0Yv+o70vsr
+         3dUEBDA6CzhMWIIRZbING2eRyRtYU02UrsuFjjMXxghwn8GOLOc+uPVShhvPakI6rYtf
+         sJBD1kYtMk5o/QvOnBN+LzK9i99Gjrocef7QJry/bmxFydCEDoW/MHGU0+eUSDzpcscQ
+         JS+/NJKhhHZMh7OY6jXtPcE/GggZmceGsk9U3/CZSItbcCLrBaiANJP/InjmY9FeFIsB
+         NkhE8cwHpkw6aldm6IXwU+GUOpjaK4FyxzHFLAYqjZcjgUbzew8aBaAXObRm8vtM//rF
+         JkjA==
+X-Gm-Message-State: AOJu0YwxeJIELd5dtWUBpL2HmKOgtWs+UqY2qk+8Xrp3yTCJir8ngDLb
+	ZTJxw7Gy5DZpdv2BAvw5JSlDY38LoguMnW3/HnyEKw9DGvu6rK7u4VLFpJiy9gETz7Z0DsCXpcc
+	QmQFr+1owEA==
+X-Gm-Gg: ASbGncuCqvEqbURgzWTLCTqR60SNCp45fH1npzJ9L+hzciPax1KutEXMxzJoWjqPTe5
+	tDXd26oDvzMBDuQPCrEkTV9uIwqXstCqRdkSPCH32gFGtiEbb6nkvSbXdshExX8nag/rfsEB75L
+	ygbhp0RXn0JZDGC8ZJHvdjiwwrLgSNlSKf7GRIgMYuAHOyYrUqGJVX4HXxAlGg5EwriemQM6qFJ
+	VwX81xjRdz3JuTq1YoRloWlu3AedFcZyNUKMyGhESZmnma4H1HiuALghnKRbGih+sGzdUNF3t3A
+	EqEU96X4iUdN6u+q0NZiT8YJaOLmZzZXeYCiFukni1bulUM1eUmMh9yPauMWk3PTK0DKfWoQ1lM
+	e3Y6vyQyah2U79tTBJVIAIKL1SgypH6TTPWUQn2BFM8AppzYGjV2SPtFeLTz/chHZeYx0/e/SCF
+	8k
+X-Google-Smtp-Source: AGHT+IGYSRiWhYJW2kmjkmlfpU/KoinDdP9aEUKWuxCyXL85murXDpFI2JmHoAeptOT+IutkJNU7sw==
+X-Received: by 2002:a5d:64ee:0:b0:3b6:d6c:a740 with SMTP id ffacd0b85a97d-3b60e54bdb3mr9386761f8f.54.1752854105815;
+        Fri, 18 Jul 2025 08:55:05 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <20250718151214.24835-1-alejandro.garciavallejo@amd.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 1/4] x86/mwait-idle: Update vendor/family/model logic
+Date: Fri, 18 Jul 2025 16:54:59 +0100
+Message-Id: <20250718155502.2610047-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250718155502.2610047-1-andrew.cooper3@citrix.com>
+References: <20250718155502.2610047-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18/07/2025 4:12 pm, Alejandro Vallejo wrote:
-> Otherwise compile-time errors ensue. It's a nonsensical configuration,
-> but it's supriously triggered in randconfig jobs.
->
-> Fixes: 8b5b49ceb3d9("x86: don't include domctl and alike in shim-excl...")
-> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-> ---
->  xen/arch/x86/hvm/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
-> index b903764bda..f57a87bca3 100644
-> --- a/xen/arch/x86/hvm/Kconfig
-> +++ b/xen/arch/x86/hvm/Kconfig
-> @@ -1,6 +1,7 @@
->  menuconfig HVM
->  	bool "HVM support"
->  	default !PV_SHIM
-> +	depends on !PV_SHIM_EXCLUSIVE
->  	select COMPAT
->  	select IOREQ_SERVER
->  	select MEM_ACCESS_ALWAYS_ON
+Switch to the new fields and constants.
 
-I deeply regret not nacking this originally and blocking the patch you
-listed as fixed.
+In mwait_idle_probe(), exit early for non-Intel CPUs.  intel_idle_ids[] is a
+large (and ever increasing) table and it's not reasonable to scan it for other
+vendors, nor is it ideal to be emitting an ambigous error(ish) message.
 
-This depends was explicitly reverted in 568f806cba4c because it breaks a
-lot of things, notably `make allyesconfig`.
+No practical change.
 
-We're going to need to find a different way to fix RANDCONFIG.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/cpu/mwait-idle.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
-~Andrew
+diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
+index e837cbf50eb3..f47fdfb569d4 100644
+--- a/xen/arch/x86/cpu/mwait-idle.c
++++ b/xen/arch/x86/cpu/mwait-idle.c
+@@ -1566,27 +1566,27 @@ static void __init spr_idle_state_table_update(void)
+  */
+ static void __init mwait_idle_state_table_update(void)
+ {
+-	switch (boot_cpu_data.x86_model) {
+-	case INTEL_FAM6_IVYBRIDGE_X:
++	switch (boot_cpu_data.vfm) {
++	case INTEL_IVYBRIDGE_X:
+ 		ivt_idle_state_table_update();
+ 		break;
+-	case INTEL_FAM6_ATOM_GOLDMONT:
+-	case INTEL_FAM6_ATOM_GOLDMONT_PLUS:
++	case INTEL_ATOM_GOLDMONT:
++	case INTEL_ATOM_GOLDMONT_PLUS:
+ 		bxt_idle_state_table_update();
+ 		break;
+-	case INTEL_FAM6_SKYLAKE:
++	case INTEL_SKYLAKE:
+ 		sklh_idle_state_table_update();
+ 		break;
+-	case INTEL_FAM6_SKYLAKE_X:
++	case INTEL_SKYLAKE_X:
+ 		skx_idle_state_table_update();
+ 		break;
+-	case INTEL_FAM6_SAPPHIRERAPIDS_X:
+-	case INTEL_FAM6_EMERALDRAPIDS_X:
++	case INTEL_SAPPHIRERAPIDS_X:
++	case INTEL_EMERALDRAPIDS_X:
+ 		spr_idle_state_table_update();
+ 		break;
+-	case INTEL_FAM6_ALDERLAKE:
+-	case INTEL_FAM6_ALDERLAKE_L:
+-	case INTEL_FAM6_ATOM_GRACEMONT:
++	case INTEL_ALDERLAKE:
++	case INTEL_ALDERLAKE_L:
++	case INTEL_ATOM_GRACEMONT:
+ 		adl_idle_state_table_update();
+ 		break;
+ 	}
+@@ -1595,12 +1595,16 @@ static void __init mwait_idle_state_table_update(void)
+ static int __init mwait_idle_probe(void)
+ {
+ 	unsigned int eax, ebx, ecx;
+-	const struct x86_cpu_id *id = x86_match_cpu(intel_idle_ids);
++	const struct x86_cpu_id *id;
+ 	const char *str;
+ 
++	if (boot_cpu_data.vendor != X86_VENDOR_INTEL)
++		return -ENODEV;
++
++	id = x86_match_cpu(intel_idle_ids);
+ 	if (!id) {
+ 		pr_debug(PREFIX "does not run on family %d model %d\n",
+-			 boot_cpu_data.x86, boot_cpu_data.x86_model);
++			 boot_cpu_data.family, boot_cpu_data.model);
+ 		return -ENODEV;
+ 	}
+ 
+-- 
+2.39.5
+
 
