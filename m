@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784F1C87FC5
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Jul 2025 08:16:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1051134.1419410 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B43EBC83F1A
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Jul 2025 08:32:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1051146.1419431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1udlgz-0002aA-VE; Mon, 21 Jul 2025 08:16:13 +0000
+	id 1udlwQ-0005cG-Cz; Mon, 21 Jul 2025 08:32:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1051134.1419410; Mon, 21 Jul 2025 08:16:13 +0000
+Received: by outflank-mailman (output) from mailman id 1051146.1419431; Mon, 21 Jul 2025 08:32:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1udlgz-0002a3-Rn; Mon, 21 Jul 2025 08:16:13 +0000
-Received: by outflank-mailman (input) for mailman id 1051134;
- Mon, 21 Jul 2025 08:16:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1udlwQ-0005c9-9e; Mon, 21 Jul 2025 08:32:10 +0000
+Received: by outflank-mailman (input) for mailman id 1051146;
+ Mon, 21 Jul 2025 08:32:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gt3j=2C=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1udlgy-0002Zx-F1
- for xen-devel@lists.xenproject.org; Mon, 21 Jul 2025 08:16:12 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f07be292-660a-11f0-b894-0df219b8e170;
- Mon, 21 Jul 2025 10:16:02 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 4DA464EE3CC1;
- Mon, 21 Jul 2025 10:16:01 +0200 (CEST)
+ <SRS0=1oiY=2C=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
+ id 1udlwP-0005Wu-7M
+ for xen-devel@lists.xenproject.org; Mon, 21 Jul 2025 08:32:09 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 2f52f86f-660d-11f0-a31d-13f23c93f187;
+ Mon, 21 Jul 2025 10:32:06 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 160C41595;
+ Mon, 21 Jul 2025 01:32:00 -0700 (PDT)
+Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.71.32])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 93A2E3F66E;
+ Mon, 21 Jul 2025 01:32:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,152 +44,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f07be292-660a-11f0-b894-0df219b8e170
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1753085761;
-	b=B2XBp0iH0wshcae+Mok7SAloDqTyrHB7PCfkZA6cRix8L6NHTWTpWtDdtEJoksng2ci3
-	 FZyuhepg76k/DbO700YezbUSYz0Q+CqIhmgFagBxbWw7iY3hY/cO+VM2Ik3sMYJXQGW8s
-	 JJEhgLFT3ieBdM+7G4EKONciXdWQb/wbbsYRPFuIiznyXsYA/VnfAanNsFzsDqYW3PRbS
-	 kpuot/sY9lVvaY3FsZ2pj+u3W8WYwwiSNFIXAqPqEUC8NAgVeIG0AKsEtk+qFkPO1HYJo
-	 EownmMu/E/thNfprCDta+U5leJjhvrv6CZJZ2+m8N65eeK8mlXaKGPuxPg65maZokOau4
-	 NiUujM48A6120hTQRGKdu9buUQGqRFIlDOqRNSpyTlSlFwPCzttAnaxE+sWsPkrHq7Z0m
-	 ZzycrOsiSpe5aVTGyN0QyVTnDbSsn+wuIvfgrWostpNu0zqwoAnNnFhESCi/NAZHHEtpv
-	 A09f67OyxkCMhOMIEAWEP2bYhkPqFmnt+JgoZzDE1A8fDqSezTXmoV5ISgzBHrcBKHKZN
-	 zL4+jTz8Z47UX3sRTLGVztaAyXMeW7h8iQedjf0sIktH+WeSAiSoQ9hs2b3B3CPDli/l7
-	 lq244/aIFZgdOh4+t8IK+kk/imU7bkMFnD8mS/YKpKvCusOL8UFRI4YhQDXWUqo=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1753085761;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=jNMP2R96hCKypK1inf8fOGNIpBIeNLye0mCnolOcfGM=;
-	b=qfGyNqhjoVvQXBLnz66bTtXIFiuSYYoyQe8BtAfAY4etx1HuOhctDaklbtl0LLN5YoNC
-	 BRbmYpjR8RTRn4amPTKMuipyM7SoZGLOo38WkyDrrhrcUBG3FLi/VeaGd5Ax8+iyD/k2a
-	 /cWe3Nv7enW8ir56rsUOF0HogB9oHcsmQOay7TxmKcSeKsNHZ2FQ+F/XFg3UWRnV30OB7
-	 Mhjmzv213b1zkhbQsonQzv90xi2tUA8KRkrRRP18I/P/E09DKsN2hJoYpXohz2YAu0NGB
-	 HoAPeeSISpHVjQYt01NQ/UWcNILkhxpqiaS5EmLKXYqXgXQqRxaQ3QDN6vhGT0aMWK970
-	 AAP2Ha048Bp7vSmFo408sfeE/edq/bzkln0LL4rtniWDMsjq6uYjDLeZCCRHl3f1kgRKH
-	 lyTTLt9IgkHjrCRpk2I/UNuHSTEd8ApMb7/W6XZhTd3HOflIcqNMM6+oO6/3CVj3utKQc
-	 d8XrUJ/fZGJPVXnaUqhpLAT0TUXYxbUoREaPw8gl+8L291a821sfQQzM2gMZAlVnxzRG0
-	 d5bKJvmjr+BuqY4mPfK5M85EAqExG9LuUjf5uCGYNBN5X7HL+bvY2WBuxN93b/1vIY4ko
-	 FVfeYI/Xpg/fDv5b4Bu8Xy7QUWamPiytYekqJAsDHY0X84QDIySrM6JyzkxEO5k=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1753085761; bh=+HP7YSMJLL1aYQ3l03wWOtb+M8h35x6AZwLRhxSDP8o=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=MJj4pH7lZqp2XRfnRlMXXLrE8ZKY6Qe9xq4EfkEPEhe8MzmHJSxXmLfuy2q9q7NW7
-	 /efd+7slyXd+CASXdkRzByEbi9bMQbadjKSfM3OOheW20I4gQgtsDGevCUTkUwMCs1
-	 rY7TdDBEY5ZM5EvS/KKTXhTBRSxwSkxPGDEfOf4/oJIyjB2FGZHtA1iEwyA6sT0xHn
-	 MqXpj+qymVrg0u4T/Xit1I0UkX/eI3arJJoqzBNCXzlOxGO6QgKzUFymk/OXhGYc3j
-	 4s/s1iTND2doILJ3Kn/AnYU+AZAr9Vw5eRWwCkTQycmFUU/5puz5QDZKyrEjW5c7+m
-	 IGE3cz0/jCCkQ==
+X-Inumbo-ID: 2f52f86f-660d-11f0-a31d-13f23c93f187
+From: Hari Limaye <hari.limaye@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: luca.fancellu@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v4 1/6] arm/mpu: Find MPU region by range
+Date: Mon, 21 Jul 2025 09:31:42 +0100
+Message-ID: <0ffb340dbfe50f0b3aa0a09c2b6e66cfb55047e3.1753084737.git.hari.limaye@arm.com>
+X-Mailer: git-send-email 2.42.1
+In-Reply-To: <cover.1753084737.git.hari.limaye@arm.com>
+References: <cover.1753084737.git.hari.limaye@arm.com>
 MIME-Version: 1.0
-Date: Mon, 21 Jul 2025 10:16:01 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn?=
- =?UTF-8?Q?=C3=A9?= <roger.pau@citrix.com>, Xen-devel
- <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] x86/pv: Rework TRY_LOAD_SEG() to use asm goto()
-In-Reply-To: <dd20bc85-e5b3-480a-aaeb-4248a427f6ff@suse.com>
-References: <20250718202548.2834921-1-andrew.cooper3@citrix.com>
- <dd20bc85-e5b3-480a-aaeb-4248a427f6ff@suse.com>
-Message-ID: <714047917162481454c4cce050386125@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2025-07-21 08:41, Jan Beulich wrote:
-> On 18.07.2025 22:25, Andrew Cooper wrote:
->> This moves the exception path to being out-of-line within the 
->> function, rather
->> than in the .fixup section, which improves backtraces.
->> 
->> Because the macro is used multiple times, the fault label needs 
->> declaring as
->> local.
->> 
->> No functional change.
->> 
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> ---
->> CC: Jan Beulich <JBeulich@suse.com>
->> CC: Roger Pau Monné <roger.pau@citrix.com>
->> 
->> Slightly RFC.  I haven't checked if Eclair will be happy with 
->> __label__ yet.
-> 
-> Even if it is, I guess you'd need to update the list of extensions we
-> use (docs/misra/C-language-toolchain.rst)?
-> 
+From: Luca Fancellu <luca.fancellu@arm.com>
 
-Only for using the __label__ token in 
-automation/eclair_analysis/ECLAIR/toolchain.ecl. The extension itself is 
-already documented in 5590c7e6590d ("eclair: allow and document use of 
-GCC extension for label addresses")
+Implement a function to find the index of a MPU region in the xen_mpumap
+MPU region array. This function will be used in future commits to
+implement creating and destroying MPU regions.
 
->> It is disappointing that, unless we retain the xor/mov for the 
->> exception path,
->> GCC decides to emit worse code, notably duplicating the mov %ds 
->> success path
->> in mov %es's error path.
-> 
-> Is it the pair of XOR/MOV, or merely the MOV (in which case it might be
-> nice to try omitting at least the XOR)? Yet then the dual purpose of 
-> the
-> zero is likely getting in the way anyway.
-> 
->> The "+r" constraint was actually wrong before; the asm only produces
->> all_segs_okay and does not consume it.
-> 
-> Yet it only conditionally set it in the old construct. That still needs
-> expressing with "+r", or else the variable's earlier setting could all
-> be eliminated. In the new construct using "=r" is okay.
-> 
->> --- a/xen/arch/x86/domain.c
->> +++ b/xen/arch/x86/domain.c
->> @@ -1738,17 +1738,22 @@ static void load_segments(struct vcpu *n)
->>       * @all_segs_okay in function scope, and load NUL into @sel.
->>       */
->>  #define TRY_LOAD_SEG(seg, val)                          \
->> -    asm_inline volatile (                               \
->> -        "1: mov %k[_val], %%" #seg "\n\t"               \
->> -        "2:\n\t"                                        \
->> -        ".section .fixup, \"ax\"\n\t"                   \
->> -        "3: xor %k[ok], %k[ok]\n\t"                     \
->> -        "   mov %k[ok], %%" #seg "\n\t"                 \
->> -        "   jmp 2b\n\t"                                 \
->> -        ".previous\n\t"                                 \
->> -        _ASM_EXTABLE(1b, 3b)                            \
->> -        : [ok] "+r" (all_segs_okay)                     \
->> -        : [_val] "rm" (val) )
->> +    ({                                                  \
->> +        __label__ fault;                                \
->> +        asm_inline volatile goto (                      \
->> +            "1: mov %k[_val], %%" #seg "\n\t"           \
->> +            _ASM_EXTABLE(1b, %l[fault])                 \
->> +            :: [_val] "rm" (val)                        \
-> 
-> Thoughts on replacing "_val" by "sel" on this occasion?
-> 
->> +            :: fault );                                 \
->> +        if ( 0 )                                        \
->> +        {                                               \
->> +        fault: __attribute__((cold));                   \
->> +            asm_inline volatile (                       \
->> +                "xor %k[ok], %k[ok]\n\t"                \
->> +                "mov %k[ok], %%" #seg                   \
->> +                : [ok] "=r" (all_segs_okay) );          \
-> 
-> Purely formally I think you need "=&r" here now.
-> 
-> Jan
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changes from v1:
+- Update commit message
+- Remove internal _index variable
+- Simplify logic by disallowing NULL index parameter
+- Use normal printk
+- Reorder conditional checks
+- Update some comments
 
+Changes from v2:
+- Replace conditional with assert
+- Improve comments regarding base and limit
+- Space between ( and uint8_t.
+
+Changes from v3:
+- Add Michal's R-b
+---
+ xen/arch/arm/include/asm/mpu/mm.h | 29 ++++++++++++++++
+ xen/arch/arm/mpu/mm.c             | 55 +++++++++++++++++++++++++++++++
+ 2 files changed, 84 insertions(+)
+
+diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
+index a7f970b465..5a2b9b498b 100644
+--- a/xen/arch/arm/include/asm/mpu/mm.h
++++ b/xen/arch/arm/include/asm/mpu/mm.h
+@@ -10,6 +10,13 @@
+ #include <asm/mm.h>
+ #include <asm/mpu.h>
+ 
++#define MPUMAP_REGION_OVERLAP      -1
++#define MPUMAP_REGION_NOTFOUND      0
++#define MPUMAP_REGION_FOUND         1
++#define MPUMAP_REGION_INCLUSIVE     2
++
++#define INVALID_REGION_IDX     0xFFU
++
+ extern struct page_info *frame_table;
+ 
+ extern uint8_t max_mpu_regions;
+@@ -75,6 +82,28 @@ void write_protection_region(const pr_t *pr_write, uint8_t sel);
+  */
+ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags);
+ 
++/*
++ * Checks whether a given memory range is present in the provided table of
++ * MPU protection regions.
++ *
++ * @param table         Array of pr_t protection regions.
++ * @param r_regions     Number of elements in `table`.
++ * @param base          Start of the memory region to be checked (inclusive).
++ * @param limit         End of the memory region to be checked (exclusive).
++ * @param index         Set to the index of the region if an exact or inclusive
++ *                      match is found, and INVALID_REGION otherwise.
++ * @return: Return code indicating the result of the search:
++ *          MPUMAP_REGION_NOTFOUND: no part of the range is present in `table`
++ *          MPUMAP_REGION_FOUND: found an exact match in `table`
++ *          MPUMAP_REGION_INCLUSIVE: found an inclusive match in `table`
++ *          MPUMAP_REGION_OVERLAP: found an overlap with a mapping in `table`
++ *
++ * Note: make sure that the range [`base`, `limit`) refers to the memory region
++ * inclusive of `base` and exclusive of `limit`.
++ */
++int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
++                           paddr_t limit, uint8_t *index);
++
+ #endif /* __ARM_MPU_MM_H__ */
+ 
+ /*
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index ccfb37a67b..407264a88c 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -110,6 +110,61 @@ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags)
+     return region;
+ }
+ 
++int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
++                           paddr_t limit, uint8_t *index)
++{
++    ASSERT(index);
++    *index = INVALID_REGION_IDX;
++
++    /*
++     * The caller supplies a half-open interval [base, limit), i.e. limit is the
++     * first byte *after* the region. Require limit strictly greater than base,
++     * which is necessarily a non-empty region.
++     */
++    ASSERT(base < limit);
++
++    /*
++     * Internally we use inclusive bounds, so convert range to [base, limit-1].
++     * The prior assertion guarantees the subtraction will not underflow.
++     */
++    limit = limit - 1;
++
++    for ( uint8_t i = 0; i < nr_regions; i++ )
++    {
++        paddr_t iter_base = pr_get_base(&table[i]);
++        paddr_t iter_limit = pr_get_limit(&table[i]);
++
++        /* Skip invalid (disabled) regions */
++        if ( !region_is_valid(&table[i]) )
++            continue;
++
++        /* No match */
++        if ( (iter_limit < base) || (iter_base > limit) )
++            continue;
++
++        /* Exact match */
++        if ( (iter_base == base) && (iter_limit == limit) )
++        {
++            *index = i;
++            return MPUMAP_REGION_FOUND;
++        }
++
++        /* Inclusive match */
++        if ( (base >= iter_base) && (limit <= iter_limit) )
++        {
++            *index = i;
++            return MPUMAP_REGION_INCLUSIVE;
++        }
++
++        /* Overlap */
++        printk("Range %#"PRIpaddr" - %#"PRIpaddr" overlaps with the existing region %#"PRIpaddr" - %#"PRIpaddr"\n",
++               base, limit + 1, iter_base, iter_limit + 1);
++        return MPUMAP_REGION_OVERLAP;
++    }
++
++    return MPUMAP_REGION_NOTFOUND;
++}
++
+ void __init setup_mm(void)
+ {
+     BUG_ON("unimplemented");
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.34.1
+
 
