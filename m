@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA10DC83F1A
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Jul 2025 09:51:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1051312.1419635 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF588C83F1A
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Jul 2025 09:51:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1051324.1419650 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1udnAe-0001eG-IF; Mon, 21 Jul 2025 09:50:56 +0000
+	id 1udnBM-0002s3-SJ; Mon, 21 Jul 2025 09:51:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1051312.1419635; Mon, 21 Jul 2025 09:50:56 +0000
+Received: by outflank-mailman (output) from mailman id 1051324.1419650; Mon, 21 Jul 2025 09:51:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1udnAe-0001dm-F6; Mon, 21 Jul 2025 09:50:56 +0000
-Received: by outflank-mailman (input) for mailman id 1051312;
- Mon, 21 Jul 2025 09:50:55 +0000
+	id 1udnBM-0002rw-Pk; Mon, 21 Jul 2025 09:51:40 +0000
+Received: by outflank-mailman (input) for mailman id 1051324;
+ Mon, 21 Jul 2025 09:51:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ipwj=2C=cloud.com=bernhard.kaindl@srs-se1.protection.inumbo.net>)
- id 1udnAc-0001aA-Ui
- for xen-devel@lists.xenproject.org; Mon, 21 Jul 2025 09:50:54 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e50598a-6618-11f0-a31d-13f23c93f187;
- Mon, 21 Jul 2025 11:50:49 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ae0bc7aa21bso808906866b.2
- for <xen-devel@lists.xenproject.org>; Mon, 21 Jul 2025 02:50:49 -0700 (PDT)
-Received: from MinisforumBD795m.citrite.net ([185.68.248.203])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aec6c7d68a1sm644918866b.46.2025.07.21.02.50.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Jul 2025 02:50:47 -0700 (PDT)
+ <SRS0=Gi0K=2C=bounce.vates.tech=bounce-md_30504962.687e0da8.v1-893ce259eea44b818686d1bff46f242d@srs-se1.protection.inumbo.net>)
+ id 1udnBL-0001aA-D9
+ for xen-devel@lists.xenproject.org; Mon, 21 Jul 2025 09:51:39 +0000
+Received: from mail13.wdc04.mandrillapp.com (mail13.wdc04.mandrillapp.com
+ [205.201.139.13]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4b214c93-6618-11f0-a31d-13f23c93f187;
+ Mon, 21 Jul 2025 11:51:38 +0200 (CEST)
+Received: from pmta16.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail13.wdc04.mandrillapp.com (Mailchimp) with ESMTP id 4blwf04xWZzNCfNV1
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Jul 2025 09:51:36 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 893ce259eea44b818686d1bff46f242d; Mon, 21 Jul 2025 09:51:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,142 +43,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e50598a-6618-11f0-a31d-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1753091448; x=1753696248; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JupB7wQUeaRIgl+FtGwuSXAc9701c3guvXgiVNpfwsA=;
-        b=hFM82t9WzEbmL5KtgH7KO0CWfhY0cL78cSbwTZtzVijZ5f7U78TRNyt95H2hvrTizB
-         znyeWg5j68hx4r08FWvZyjHPZlJdiuiZJnSTCBZrM4mMA3RHp4RJwklNGVW3QaTgzdm4
-         DQ3MMtaO9npYYld6bIMy4hOJ6rQ6E7KqO9p0Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753091448; x=1753696248;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JupB7wQUeaRIgl+FtGwuSXAc9701c3guvXgiVNpfwsA=;
-        b=aZcQJ1C4k2J+yZf3RUypCQQvlb4RtN3k1IDQH9/1c+ykoWb6Ivpc2ib5jFhk+nH20N
-         pTOFlpBFA9se8HXnVgvqS8eYnSy9XWCXi0Lqq4nwmagvo8lIcxgXAnH25EH7gGG6wlMi
-         nkELKsvZc0sfF4wYqzAUjSTJzuxPrzCSadDfldFp9EpJPbGn50suKQhlAfhZDibkmexn
-         8F8dUOISnyrcEkMlu8RYQbS4dyV7mQL0f8azOt8FmQDP1yHva3n0NXhWfWr8xUrTjwJK
-         XcISu7nYurbFk/rQahAe2itHDOgoLwgTFZJmtbA3q2zDLAOXeEtxTLwJG6jb7HHLrwKN
-         Z8fA==
-X-Gm-Message-State: AOJu0Yxc33N09Em8A2vzr62BrW8RVnPIeEkJ+pBEPaCFL6grQrLZ9qNP
-	R9cww3quJp/qL7I14NBOeTMiCVczApYq62eFTpxbuhwPPaqy1CYYlMSjL+Rvk222bFSGidYUT+v
-	ceRwQxPsbxg==
-X-Gm-Gg: ASbGnct0DnRyUntwLT5NlG0nvhn6VVH/5YtbW7usEWE+14CsuXamxGEum/3v+k43ufU
-	IkgMWWzF6eslVq5Icm/Wksm6AgdpNkyM983GsHacTaSHsvoGQEEuNUlUb0OZ8qA1ncpLllWSjvo
-	NhNF3kwq8vN3SKYVurScoPdZ8QT3PsxFj5uCsh1K3RuFCFHwaFOFEJUtRr/T5GoHjEo8HJRBrJM
-	NPHlo0BX3Jm1JRSrwf6iZ1nFRs8RsQWUq8y6WIxmiwABFT2jmXpI9U29o+5nBHdXsW531dN1or8
-	FdmpHT4HE53/+mRBETT3rhGen1fw4J5XBsiiB6WUFip3jBMx2WjiWdazerrWlhKX1uUvzRXNx4V
-	bII6reod+U2rBKDqip6KKRDiAC0+VAvwIbnlSOkKqsXualRkbRT+l06uWM+/01KE=
-X-Google-Smtp-Source: AGHT+IGyVNODHzPjds2ar0kbWHTHrhj5/yBIjDqVq1VEytlDhy4c4yw87Cgq3ebGPb8cpPooWkno+w==
-X-Received: by 2002:a17:907:a588:b0:ae1:f1e0:8730 with SMTP id a640c23a62f3a-ae9ce1c2d25mr2067386166b.57.1753091448252;
-        Mon, 21 Jul 2025 02:50:48 -0700 (PDT)
-From: Bernhard Kaindl <bernhard.kaindl@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@cloud.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>,
-	George Dunlap <gwd@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 1/2] sched/core: For a new metric, add vcpu->nonaffine_time
-Date: Mon, 21 Jul 2025 11:49:49 +0200
-Message-ID: <20250721094951.2006-1-bernhard.kaindl@cloud.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 4b214c93-6618-11f0-a31d-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1753091496; x=1753361496;
+	bh=plDmh4J7Y95MD5zWE1O2+aAykVIgtRTi79dNDV82XoU=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=BSn9eV713hXQowhA7jrOKyzAesg/F7CS6wksVoRSHYeiZChF1wEsev8KHhHg78Kl+
+	 QdBzhLieu73W7jAZN755FY6nb7CJ2tx2t88nXl8limLBnUKPNysWGo8A8UDwn9Bzpi
+	 u7TvU9vLhuAwlNJOGTkDU50Cl8lflm42+KtzihI8GQfhevHI3nZBMnawb8D8pyL9W/
+	 rLj4Y3OTXpNNsI775Me4xAtwg0JKidaQNXMQB68mkloKoKsmiUZIpRS9gTGtvCUXmQ
+	 j1XPKgx23vyjKiwKEYJJPhdx33WNgdvE4I7VDzQZKOlysv9W1kFSDC3yZtGFgyLPxe
+	 TA/iN1gWPhDrg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1753091496; x=1753351996; i=anthoine.bourgeois@vates.tech;
+	bh=plDmh4J7Y95MD5zWE1O2+aAykVIgtRTi79dNDV82XoU=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=gZoir4uPa0Smhb5VibKy9ZiOEnCzDqtaAHLjve3XVJPC364gqV7MSDiN01Ri1Tpj7
+	 JCG/SmZhp0AJasiKsj+vbjPSaMYvcQpy8wZGPIBzJBE8DSMqjtZICKP8TOz06+USFy
+	 jyhsqwovlDDmrn/4rjka+3XdFsnpbIq+lf/WtW5Y8ZaVdWbss9Zxg/LbWzg6tdoRqZ
+	 eddX9SVkmeK8PjfQ8ieM4PEdCk1z6aS23KYq6RhaH+B39JzX9TfhhToZNTHFXxxwFx
+	 4r0G92n9qQ7Fg3lm0ul3ZlJmy8tN8eupJBzD1bQTaQf7Owsaq8frdh9vsz+lI+TxCO
+	 dU4gealiAAH7w==
+From: "Anthoine Bourgeois" <anthoine.bourgeois@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH]=20xen/netfront:=20Fix=20TX=20response=20spurious=20interrupts?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1753091495722
+To: "Elliott Mitchell" <ehem+xen@m5p.com>
+Cc: "Juergen Gross" <jgross@suse.com>, xen-devel@lists.xenproject.org, "Stefano Stabellini" <sstabellini@kernel.org>, "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>
+Message-Id: <aH4NpRKpUkJkXck1@mail.vates.tech>
+References: <20250710161029.3773630-1-anthoine.bourgeois@vates.tech> <d2c05c2b-ee50-4121-bedd-17ec6bcfa75f@suse.com> <aHSth3FOCpiRRfwv@mail.vates.tech> <aHWi3ncNrVBO6jrh@mattapan.m5p.com> <aHYPktKlOyFJ49bb@mail.vates.tech> <aHapxmJ6miJnWYit@mattapan.m5p.com> <aHdZInm-EC487zKi@mail.vates.tech> <aHfv6jj4GkW7ZR2S@mattapan.m5p.com> <aHqzEUtvIz1KpRW3@mattapan.m5p.com>
+In-Reply-To: <aHqzEUtvIz1KpRW3@mattapan.m5p.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.893ce259eea44b818686d1bff46f242d?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250721:md
+Date: Mon, 21 Jul 2025 09:51:36 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-To monitor the effectiveness of vCPU soft-affinity on NUMA hosts,
-we'd like to create a vCPU metric that accumulates the amount of
-vCPU time running outside of the soft affinity mask of the sched-unit:
+On Fri, Jul 18, 2025 at 01:48:17PM -0700, Elliott Mitchell wrote:
+>On Wed, Jul 16, 2025 at 11:31:06AM -0700, Elliott Mitchell wrote:
+>> On Wed, Jul 16, 2025 at 07:47:48AM +0000, Anthoine Bourgeois wrote:
+>> > On Tue, Jul 15, 2025 at 12:19:34PM -0700, Elliott Mitchell wrote:
+>> > >
+>> > >I tend to follow Debian, so kernel 6.1.140 and 4.17.6.  What may be
+>> > >more notable is AMD processor.
+>> > >
+>> > >When initially reported, it was reported as being more severe on systems
+>> > >with AMD processors.  I've been wondering about the reason(s) behind
+>> > >that.
+>> >
+>> > AMD processors could make a huge difference. On Ryzen, this patch could
+>> > almost double the bandwidth and on Epyc close to nothing with low
+>> > frequency models, there is another bottleneck here I guess.
+>> > On which one do you test?
+>> >
+>> > Do you know there is also a workaround on AMD processors about remapping
+>> > grant tables as WriteBack?
+>> > Upstream patch is 22650d605462 from XenServer.
+>> > The test package for XCP-ng with the patch:
+>> > https://xcp-ng.org/forum/topic/10943/network-traffic-performance-on-amd-processors
+>> >
+>>
+>> Why are you jumping onto mostly unrelated issues when the current bug is
+>> unfinished?
+>>
+>> Spurious events continue to be observed on the network backend.  Spurious
+>> events are also being observed on block and PCI backends.  You identified
+>> one cause, but others remain.
+>>
+>> (I'm hoping the next one effects all the back/front ends; the PCI backend
+>> is a bigger issue for me)
+>>
+>> Should add, one VM being observed with these issue(s) is using 6.12.38.
+>
+>For reference, the following:
+>
+>for d in /sys/devices/{pci,vbd,vif}-*[0-9]-*[0-9]/xenbus
+>do      if [ -f "$d/spurious_events" ]
+>        then    read s < "$d/spurious_events"
+>        else    s=0
+>        fi
+>        if [ "$s" -gt 0 ]
+>        then    printf "problem %s: %d\\n" "$d/spurious_events" "$s"
+>        else    printf "clean: %s\\n" "$d/spurious_events"
+>        fi
+>done
+>
+>Flags all passthrough and virtual devices.  Even though there is a
+>reduction with virtual network devices, that is only a 10% reduction.
+>Most of the problem remains even though there is progress.
+>
+>I was mentioning an AMD processor since the initial report stated the
+>problem was more severe with AMD processor machines.
+>
+>This is likely a driver design issue.  Most pieces of hardware, telling
+>the hardware to process an empty queue is quite cheap.  Perhaps minor
+>energy loss, but most hardware isn't (yet) too worried about being
+>attacked.
+>
+>Passthrough and virtual devices are quite unusual in there being a
+>concern over attacks.  There could be major design flaws due to the
+>front-ends being designed similar to normal drivers.
+>
 
-- Add a new time counter, nonaffine_time to struct vcpu.
+Hmm, you check the spurious on the backend.
+Sorry I should have been more specific, this patch only mitigate the
+spurious on the frontend.
 
-- Accumulate the nonaffine_time on vcpu_runstate_change():
-  Account the time spent in the RUNSTATE_running state outside
-  of unit->cpu_soft_affinity: It is always initialized and defaults
-  to cpumask_all (bits for all NR_CPUS set), so we only accumulate
-  nonaffine time when the vCPU runs on an unset CPU (non-affine).
+I will take a look on the backend.
 
-In the next patch, this field can be used to retrieve the accumulated
-nonaffine running time e.g. using vcpu_runstate_get().
+Regards,
+Anthoine
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@cloud.com>
----
- xen/common/sched/core.c | 20 ++++++++++++++++++++
- xen/include/xen/sched.h | 11 +++++++++++
- 2 files changed, 31 insertions(+)
 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 13fdf57e57..489255b9c6 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -260,6 +260,23 @@ static inline void vcpu_urgent_count_update(struct vcpu *v)
-     }
- }
- 
-+/*
-+ * For accounting non-affine running time of a vCPU, return true if
-+ * the vCPU is running in RUNSTATE_running state while not on a CPU
-+ * in unit->cpu_soft_affinity.
-+ */
-+static inline bool nonaffine(const struct vcpu *v,
-+                             const struct sched_unit *unit)
-+{
-+    /*
-+     * unit->cpu_soft_affinity is always initialized and defaults to
-+     * cpumask_all (bits for all NR_CPUS set), so we only accumulate
-+     * nonaffine time when the vCPU runs on an unset CPU (non-affine).
-+     */
-+    return v->runstate.state == RUNSTATE_running &&
-+           !cpumask_test_cpu(v->processor, unit->cpu_soft_affinity);
-+}
-+
- static inline void vcpu_runstate_change(
-     struct vcpu *v, int new_state, s_time_t new_entry_time)
- {
-@@ -285,6 +302,9 @@ static inline void vcpu_runstate_change(
-     {
-         v->runstate.time[v->runstate.state] += delta;
-         v->runstate.state_entry_time = new_entry_time;
-+
-+        if ( nonaffine(v, unit) ) /* When running nonaffine, add delta */
-+            v->nonaffine_time += delta;
-     }
- 
-     v->runstate.state = new_state;
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index fe53d4fab7..aba60afd4f 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -198,7 +198,18 @@ struct vcpu
- 
-     struct sched_unit *sched_unit;
- 
-+    /*
-+     * The struct vcpu_runstate_info contains the vCPU time spent
-+     * in each runstate and the entry time of the current runstate.
-+     *
-+     * Note: This field is used for the guest runstate shared memory area.
-+     * Therefore, it is part of the frozen guest API and cannot be changed.
-+     */
-     struct vcpu_runstate_info runstate;
-+
-+    /* vCPU time running outside the scheduling unit's soft_affinity mask */
-+    uint64_t         nonaffine_time;
-+
- #ifndef CONFIG_COMPAT
- # define runstate_guest(v) ((v)->runstate_guest)
-     XEN_GUEST_HANDLE(vcpu_runstate_info_t) runstate_guest; /* guest address */
--- 
-2.43.0
+Anthoine Bourgeois | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
