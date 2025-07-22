@@ -4,56 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 496A1C83F27
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 22:52:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1053031.1421770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E37F9C83F27
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 23:18:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1053047.1421792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueLpt-0003Pw-ET; Tue, 22 Jul 2025 22:51:49 +0000
+	id 1ueMEt-0006xn-R2; Tue, 22 Jul 2025 23:17:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1053031.1421770; Tue, 22 Jul 2025 22:51:49 +0000
+Received: by outflank-mailman (output) from mailman id 1053047.1421792; Tue, 22 Jul 2025 23:17:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueLpt-0003Pp-Bp; Tue, 22 Jul 2025 22:51:49 +0000
-Received: by outflank-mailman (input) for mailman id 1053031;
- Tue, 22 Jul 2025 22:51:48 +0000
+	id 1ueMEt-0006xg-Mr; Tue, 22 Jul 2025 23:17:39 +0000
+Received: by outflank-mailman (input) for mailman id 1053047;
+ Tue, 22 Jul 2025 23:17:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=stB6=2D=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1ueLps-0003Pj-GC
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 22:51:48 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20613.outbound.protection.outlook.com
- [2a01:111:f403:2412::613])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6de2834e-674e-11f0-a31d-13f23c93f187;
- Wed, 23 Jul 2025 00:51:41 +0200 (CEST)
-Received: from CY5PR15CA0059.namprd15.prod.outlook.com (2603:10b6:930:1b::28)
- by CY8PR12MB7268.namprd12.prod.outlook.com (2603:10b6:930:54::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Tue, 22 Jul
- 2025 22:51:36 +0000
-Received: from CY4PEPF0000EDD5.namprd03.prod.outlook.com
- (2603:10b6:930:1b:cafe::c4) by CY5PR15CA0059.outlook.office365.com
- (2603:10b6:930:1b::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.29 via Frontend Transport; Tue,
- 22 Jul 2025 22:51:36 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EDD5.mail.protection.outlook.com (10.167.241.201) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8964.20 via Frontend Transport; Tue, 22 Jul 2025 22:51:35 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
- 2025 17:51:35 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
- 2025 17:51:34 -0500
-Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 22 Jul 2025 17:51:33 -0500
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=an6O=2D=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1ueMEq-0006xU-HG
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 23:17:37 +0000
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0b768737-6752-11f0-a31d-13f23c93f187;
+ Wed, 23 Jul 2025 01:17:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,209 +38,500 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6de2834e-674e-11f0-a31d-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kmX8d6rP7UtNOf+N3UaOP5plSbiy3E1t09pBB7JBaUGnaBo70as/EO1s/eqlqNJ7pn6hSZriZAjllaWMBnj+5FCYCMTQOiyAvCrQtH7+ifrqMqb1sa8dvz936ksFcklmlZEGNayNa/c17bam4b2Q+G3Kz4b5sss/3g61DfJm3dDbALCy0DtOQSUxTMSGvS4YPJYn++2X+lwWn1Zb1eVJHX3pYCElhRZlxI1BBqF0OSmPInNYN6FPJaBt2RcjsZ0HiQZ12krPjMPrWXuyqBoM7AtcVzYuCfSqVmFeQbj+l7OR76xPTsLNREmiMbL36wa48/pMfRK767lnGcNRHaC22A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u81A9bKygqw6pTSdgTx1OPSjUHnl8py2nShDllsbhhw=;
- b=tRitJibsy8gNJEoDcJJZHAqaaJLUM337n2385r0RXYu8Ccw7lMmC7h/yM9+tVQZxvhgTIogaepe3fkr+8v8qBQ/c05kkCnrtqd+WQqTUCBp8Sa9IfxXIDZfmH2F3XvhQoTO99nkFXKcUOwZD6ygCk+om/SbPpU0nLCHHlqha59KoU7PibMuYBxwVteergkq4UY0aaJRWwgO9DLhRPySst4Z8JJf/yQ+EEt0vV50EfJB3+mDJn6VXWRiJcBfGvUu0DWCkvIIC1UhAltWyEtRp2uTXdWAMXSRD+a/Zq/WDYD1RyZCrBcJ58ABWeTMY8nK/1GH50rL1UAda26zRXnBIYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u81A9bKygqw6pTSdgTx1OPSjUHnl8py2nShDllsbhhw=;
- b=aghxiqWmnBVhmHovloXbxXyfELZNdouTXCxq6wII8FFi0DuA2Nzti5dDiJmXKaqY0VznQVRXj/pCeVKCf5lqqDLfQOLQztoDk2gqIlRiq1Qf8xoky+7Pp3bdf1eqHYsoYYY01bKFzUaLI8qoSns4QqakzS6p+P3m8Pc15CbqYds=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <stefano.stabellini@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Stewart Hildebrand <stewart.hildebrand@amd.com>
-Subject: [PATCH v3 1/2] xen/arm: fix arm_iommu_map_page after f9f6b22abf1d
-Date: Tue, 22 Jul 2025 18:51:24 -0400
-Message-ID: <20250722225127.81390-1-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.50.1
+X-Inumbo-ID: 0b768737-6752-11f0-a31d-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=eutbuyjmhnggpjxlpfx4khjiye.protonmail; t=1753226251; x=1753485451;
+	bh=2gytftRczKW0tX2u2ImrtvkAsqoFKBZFS/B1DYaQuT8=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=N0optU19V1N3wUtxVJ80QlY3K8qEDPbtyi+ubIOhKjFjBY4PHgl4El8ZouTlE0I4m
+	 +h5vvbo27CQR1F2dqZtmRdyI02vEWYzZdUNeQ5z8oltwJew9vTsLREr+FXWq69X6e9
+	 wuhQaBu8YOtuP6CX5ZCy3QubN0lJXdEfDTXg6kvghBZrQ5QgNu9mR6B3dSARx2YvNW
+	 QhaaVtISB7Ean7CtD2BJrEdNdro+sPn9NvJgtPxhl1ccbya8BmzVr4wVkLTsVe/KzB
+	 7BbqEL1ip6blkf78iuVu1z7rQCch9OUg40gdSf/8z/kvomW3o/C/1EW7ErjqTGyMko
+	 GWUCsMKBrydkQ==
+Date: Tue, 22 Jul 2025 23:17:24 +0000
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+From: dmkhn@proton.me
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, Xen-devel <xen-devel-bounces@lists.xenproject.org>
+Subject: Re: [PATCH v10 1/3] xen/domain: unify domain ID allocation
+Message-ID: <aIAb/svgOWoiopR7@kraken>
+In-Reply-To: <DBE9C2TQR079.3IQXRH5DEQ2JU@amd.com>
+References: <20250623182721.194238-1-dmukhin@ford.com> <20250623182721.194238-2-dmukhin@ford.com> <DBE9C2TQR079.3IQXRH5DEQ2JU@amd.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 5731aef11ccb106f97ebe11634d83cc5043ceae9
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: stewart.hildebrand@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD5:EE_|CY8PR12MB7268:EE_
-X-MS-Office365-Filtering-Correlation-Id: 674cde54-75c7-460d-460f-08ddc9724fc1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?kOZTuQjI4sU8hdhI9VMWs0pPUMooG4uYKSv1Auiih+LZHK1j7sfS7LMqSS4D?=
- =?us-ascii?Q?pZpiYAYToSyp2Um0PwBcTpaBxPyaAysp4PL+9ctSKo8UjyuRecDpsqpZhgd6?=
- =?us-ascii?Q?mRXn7/kBzu9N0b1OBk7V43yis6E7c7EO/WV2QYXMbsAg+JvLfCEEFbBk+xy1?=
- =?us-ascii?Q?VAkoS+x8Zk97tmPJrcyM1wPDcz7GA5B3zWiPhBYT/ni6UWW8litEpctHxCjH?=
- =?us-ascii?Q?iB7uKzKc3lEFZQ8okwOHsf/OvhvmP1swayk7MdMS+h+xNKQTVWexFYHXxgQJ?=
- =?us-ascii?Q?cDEHVFrldBNyB5X4ih83vy4/n0e5YaFewXGnGRfPBTVFR1pLTq2HlEJwnK9C?=
- =?us-ascii?Q?QkC5sOiC4F2JDoLHA8M6OpIfTmQWrS+IO9sB4Qv1Y4e2wS00Ar+VAbM9ywuT?=
- =?us-ascii?Q?AYZapv/rZcE1tpD4q69SKq3dMdX4U26dsf/Z/l477uPmhwn9vOC6fdIPsf/N?=
- =?us-ascii?Q?zDVdjDL0V5fdJFnLgQg3/i2OJJloW/D6akiPKfax1A19GJqLYV1qkd86RxwK?=
- =?us-ascii?Q?04mOP/qDOYJmYkIL3H8bwoglqepzk1PW6du5x+xJJ+e5albF0A69bYmJJlYP?=
- =?us-ascii?Q?QF9SIOeseutTWEiNyiMwmGSpGaOiK91r2EbHhEc1xofHLsLuNzu/pHQw+DAp?=
- =?us-ascii?Q?Tg2WtVTHHton7n/tq5KDEUqPO8a1ASe3HsRyT3dLR78HiO3HPIe2buhH29mR?=
- =?us-ascii?Q?q6GID+W7CpP9/z2gIbnr21nhJAjAgv5t7S7U4BXa/Lb2XphO/q1oze4kl/Tv?=
- =?us-ascii?Q?AZC1koyoAOqo/KYU76YkI7X96aIbRm2tbEvKy2S8X+eMOXdQHa2E+0Wn9DNq?=
- =?us-ascii?Q?Y6gWhN16ZY6TMN+5tA4KMGrETyfLmTQLSIWqvIMk0scKQR0fsBczra4dc+KH?=
- =?us-ascii?Q?wJpBBM4WC+6mLD2UA667g6F/cAxFU4s4kLZcGu0qb7le3gyyD2PkjfyhY2gD?=
- =?us-ascii?Q?G7XZmIVxADXB3BRfU/0Jl9nA4X7GHo7N+bUa/8Ih4h1dQOwFm5qBGWnr12Il?=
- =?us-ascii?Q?bWIgxboas8Z1JcBT7TVL9PskFBqPj8+6IKfRAGMoILKnjCKXTNenSeJth4IK?=
- =?us-ascii?Q?xOaMsFk5+TyrhXG/0XCBfNXmMFBqMeXR+cPJ7LVhlh+AabVpENwtNwfzmQ6V?=
- =?us-ascii?Q?TAhWlUH3K00bek7/w1MX4cJaTirKIgBKV1RJoikank1hdsys5j6Art9JkkMI?=
- =?us-ascii?Q?iXRjn4bWBNt71NFiclKo4AFJxBah8DA1eGv2XWiokJ6pUBdYHEFdtLIfiNU3?=
- =?us-ascii?Q?froxG/QRyAseZCwbyAZo7KYGfaM4UoY94NcrgCT1AJhJ9EOxwytXMay4bru/?=
- =?us-ascii?Q?s6pBuwfB3qZtFkQmXM20xDVQdtZGTkDD3MRmCsMLiVyfiKCRFZE771P+ZlIM?=
- =?us-ascii?Q?6+yvuZ2OJqM56dylBTJdlfL+L4xI8y6Fy6qa4ozhZgNs8ey/9FjYRcdmEkC6?=
- =?us-ascii?Q?0wkQicmWOoOL9eJprheh/styDuKB/xzBbSCApZQKT3Ik+EQJQBLym75TEHcO?=
- =?us-ascii?Q?E9pBlbfJ+oNOW7jdsdCRFwqwvH8meoBWX5Nm?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 22:51:35.7117
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 674cde54-75c7-460d-460f-08ddc9724fc1
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000EDD5.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7268
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+On Thu, Jul 17, 2025 at 12:27:48PM +0200, Alejandro Vallejo wrote:
+> Hi,
+>=20
+> Sorry I'm so late to this. I have a few suggestions to improve the ergono=
+mics
+> of domid handling in dom0less/Hyperlaunch.
 
-Up until f9f6b22abf1d "xen/arm: Map ITS doorbell register to IOMMU page
-tables" the only caller of iommu_map on ARM was grant_table.c which has
-a specific usage model and restrictions as described by the in-code
-comment in arm_iommu_map_page.
+Thanks for the feedback!
 
-f9f6b22abf1d introduced a second caller to iommu_map on ARM:
-vgic_v3_its_init_virtual. This specific statement in the
-f9f6b22abf1d commit message is partially wrong:
+>=20
+> On Mon Jun 23, 2025 at 8:28 PM CEST, dmkhn wrote:
+> > From: Denis Mukhin <dmukhin@ford.com>
+> >
+> > Currently, there are two different domain ID allocation implementations=
+:
+> >
+> >   1) Sequential IDs allocation in dom0less Arm code based on max_init_d=
+omid;
+> >
+> >   2) Sequential IDs allocation in XEN_DOMCTL_createdomain; does not use
+> >      max_init_domid (both Arm and x86).
+> >
+> > The domain ID allocation covers dom0 or late hwdom, predefined domains,
+> > post-boot domains, excluding Xen system domains (domid >=3D
+> > DOMID_FIRST_RESERVED).
+> >
+> > It makes sense to have a common helper code for such task across archit=
+ectures
+> > (Arm and x86) and between dom0less / toolstack domU allocation.
+> >
+> > Note, fixing dependency on max_init_domid is out of scope of this patch=
+.
+> >
+> > Wrap the domain ID allocation as an arch-independent function domid_all=
+oc() in
+> > common/domain.c based on the bitmap.
+> >
+> > Allocation algorithm:
+> > - If an explicit domain ID is provided, verify its availability and use=
+ it if
+> >   ID is not used;
+> > - If DOMID_INVALID is provided, search the range [1..DOMID_FIRST_RESERV=
+ED-1],
+> >   starting from the last used ID. IDs are not wrapped around in dom0les=
+s case.
+> >   Implementation guarantees that two consecutive calls will never retur=
+n the
+> >   same ID. ID#0 is reserved for the first boot domain (currently, dom0)=
+ and
+> >   excluded from allocation range.
+> >
+> > Remove is_free_domid() helper as it is not needed now.
+> >
+> > No functional change intended.
+> >
+> > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> > ---
+> > Changes from v9:
+> > - dropped unrelated message formatting from create_dom0()
+> > - no wraparound of IDs in dom0less case
+> > - fixed ID#0 treatment
+> >
+> > Link to v9: https://lore.kernel.org/r/20250528225030.2652166-2-dmukhin@=
+ford.com
+> > ---
+> >  xen/arch/arm/domain_build.c             |  7 ++-
+> >  xen/arch/x86/setup.c                    |  7 ++-
+> >  xen/common/device-tree/dom0less-build.c | 17 +++---
+> >  xen/common/domain.c                     | 75 +++++++++++++++++++++++++
+> >  xen/common/domctl.c                     | 42 ++------------
+> >  xen/include/xen/domain.h                |  3 +
+> >  6 files changed, 102 insertions(+), 49 deletions(-)
+> >
+> > diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> > index 4ff161887ec3..9fa5143eb98c 100644
+> > --- a/xen/arch/arm/domain_build.c
+> > +++ b/xen/arch/arm/domain_build.c
+> > @@ -2049,6 +2049,7 @@ void __init create_dom0(void)
+> >          .grant_opts =3D XEN_DOMCTL_GRANT_version(opt_gnttab_max_versio=
+n),
+> >      };
+> >      unsigned int flags =3D CDF_privileged | CDF_hardware;
+> > +    domid_t domid;
+> >      int rc;
+> >
+> >      /* The vGIC for DOM0 is exactly emulating the hardware GIC */
+> > @@ -2073,7 +2074,11 @@ void __init create_dom0(void)
+> >      if ( !llc_coloring_enabled )
+> >          flags |=3D CDF_directmap;
+> >
+> > -    dom0 =3D domain_create(0, &dom0_cfg, flags);
+> > +    domid =3D domid_alloc(0);
+>=20
+> The way I=C2=B4d expect domid_alloc() to be used is twofold:
+>=20
+>   1. "Give me this specific domid"
+>=20
+> for which this interface looks fine, perhaps renamed to domid_alloc_exact=
+(domid)
+>=20
+>   2. "Give me any domid"
+>=20
+> for which we'd benefit more from a domid_alloc()
+>=20
+> This removes the heuristics from the interface. Worst-case execution rema=
+ins the
+> same, under 500 iterations. (32K minus a little bit, checked 64bits at a =
+time).
 
-"Note that the 1:1 check in arm_iommu_map_page remains for now, as
-virtual ITSes are currently only created for hwdom where the doorbell
-mapping is always 1:1."
+I think we've settled on the domid_alloc() with partitioned values:
+- exact ID allocation within [0..DOMID_FIRST_RESERVED-1]
+  if input value is within the range
+- exhaustive search within the range of [1..DOMID_FIRST_RESERVED-1] (skippi=
+ng
+  reserved ID#0) if the input value is DOMID_INVALID
 
-Leading to crashes any time the hardware domain is not direct-mapped
-(e.g. cache coloring and non-Dom0 hardware domain):
+I was thinking about having two calls originally, but with splitting the AP=
+Is,
+do_domctl() should have an extra check for the range to re-direct to the
+proper alloc variant. In current implementation it is not needed.
 
-(XEN) Xen BUG at drivers/passthrough/arm/iommu_helpers.c:47
-[...]
-(XEN) Xen call trace:
-(XEN)    [<00000a000024c758>] arm_iommu_map_page+0x80/0x90 (PC)
-(XEN)    [<00000a000024c750>] arm_iommu_map_page+0x78/0x90 (LR)
-(XEN)    [<00000a0000250884>] iommu_map+0xcc/0x29c
-(XEN)    [<00000a0000288024>] vgic_v3_its_init_domain+0x18c/0x1e8
-(XEN)    [<00000a0000285228>] vgic-v3.c#vgic_v3_domain_init+0x168/0x21c
-(XEN)    [<00000a0000281dcc>] domain_vgic_init+0x14c/0x210
-(XEN)    [<00000a00002705a4>] arch_domain_create+0x150/0x1f0
-(XEN)    [<00000a00002055e8>] domain_create+0x47c/0x6c0
-(XEN)    [<00000a00002cf090>] create_domUs+0x7f8/0x8cc
-(XEN)    [<00000a00002eb588>] start_xen+0x8f4/0x998
-(XEN)    [<00000a000020018c>] head.o#primary_switched+0x4/0x10
+>=20
+> > +    if ( domid =3D=3D DOMID_INVALID )
+> > +        panic("Error allocating domain ID 0\n");
+> > +
+> > +    dom0 =3D domain_create(domid, &dom0_cfg, flags);
+> >      if ( IS_ERR(dom0) )
+> >          panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0))=
+;
+> >
+> > diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+> > index f32efa7c6045..7adb92d78a18 100644
+> > --- a/xen/arch/x86/setup.c
+> > +++ b/xen/arch/x86/setup.c
+> > @@ -1044,8 +1044,11 @@ static struct domain *__init create_dom0(struct =
+boot_info *bi)
+> >      if ( iommu_enabled )
+> >          dom0_cfg.flags |=3D XEN_DOMCTL_CDF_iommu;
+> >
+> > -    /* Create initial domain.  Not d0 for pvshim. */
+> > -    bd->domid =3D get_initial_domain_id();
+> > +    /* Allocate initial domain ID.  Not d0 for pvshim. */
+> > +    bd->domid =3D domid_alloc(get_initial_domain_id());
+> > +    if ( bd->domid =3D=3D DOMID_INVALID )
+> > +        panic("Error allocating domain ID %d\n", get_initial_domain_id=
+());
+> > +
+> >      d =3D domain_create(bd->domid, &dom0_cfg,
+> >                        pv_shim ? 0 : CDF_privileged | CDF_hardware);
+> >      if ( IS_ERR(d) )
+> > diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/devic=
+e-tree/dom0less-build.c
+> > index 3d503c697337..576fdfa6a19a 100644
+> > --- a/xen/common/device-tree/dom0less-build.c
+> > +++ b/xen/common/device-tree/dom0less-build.c
+> > @@ -839,15 +839,13 @@ void __init create_domUs(void)
+> >          struct xen_domctl_createdomain d_cfg =3D {0};
+> >          unsigned int flags =3D 0U;
+> >          bool has_dtb =3D false;
+> > +        domid_t domid;
+> >          uint32_t val;
+> >          int rc;
+> >
+> >          if ( !dt_device_is_compatible(node, "xen,domain") )
+> >              continue;
+> >
+> > -        if ( (max_init_domid + 1) >=3D DOMID_FIRST_RESERVED )
+> > -            panic("No more domain IDs available\n");
+> > -
+> >          d_cfg.max_evtchn_port =3D 1023;
+> >          d_cfg.max_grant_frames =3D -1;
+> >          d_cfg.max_maptrack_frames =3D -1;
+> > @@ -965,12 +963,13 @@ void __init create_domUs(void)
+> >
+> >          arch_create_domUs(node, &d_cfg, flags);
+> >
+> > -        /*
+> > -         * The variable max_init_domid is initialized with zero, so he=
+re it's
+> > -         * very important to use the pre-increment operator to call
+> > -         * domain_create() with a domid > 0. (domid =3D=3D 0 is reserv=
+ed for Dom0)
+> > -         */
+> > -        d =3D domain_create(++max_init_domid, &d_cfg, flags);
+> > +        domid =3D domid_alloc(DOMID_INVALID);
+> > +        if ( domid =3D=3D DOMID_INVALID )
+> > +            panic("Error allocating ID for domain %s\n", dt_node_name(=
+node));
+> > +        if ( max_init_domid < domid )
+> > +            max_init_domid =3D domid;
+> > +
+> > +        d =3D domain_create(domid, &d_cfg, flags);
+> >          if ( IS_ERR(d) )
+> >              panic("Error creating domain %s (rc =3D %ld)\n",
+> >                    dt_node_name(node), PTR_ERR(d));
+> > diff --git a/xen/common/domain.c b/xen/common/domain.c
+> > index 434d32901b1b..be022c720b13 100644
+> > --- a/xen/common/domain.c
+> > +++ b/xen/common/domain.c
+> > @@ -66,6 +66,14 @@ DEFINE_RCU_READ_LOCK(domlist_read_lock);
+> >  static struct domain *domain_hash[DOMAIN_HASH_SIZE];
+> >  struct domain *domain_list;
+> >
+> > +/*
+> > + * Domain ID allocator.
+> > + * Covers dom0 or late hwdom, predefined domains, post-boot domains; e=
+xcludes
+> > + * Xen system domains (ID >=3D DOMID_FIRST_RESERVED).
+> > + */
+> > +static DEFINE_SPINLOCK(domid_lock);
+> > +static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
+> > +
+> >  /*
+> >   * Insert a domain into the domlist/hash.  This allows the domain to b=
+e looked
+> >   * up by domid, and therefore to be the subject of hypercalls/etc.
+> > @@ -1452,6 +1460,8 @@ void domain_destroy(struct domain *d)
+> >
+> >      TRACE_TIME(TRC_DOM0_DOM_REM, d->domain_id);
+> >
+> > +    domid_free(d->domain_id);
+> > +
+>=20
+> Shouldn't this go after domlist_remove()? Otherwise fun things might happ=
+en
+> if a domid is allocated while the old domain that still keeps the old dom=
+id
+> is still in its hash.
 
-Specifically, non-1:1 hardware domain exists with cache coloring
-enabled. For that, is_domain_direct_mapped(d) is false but
-domain_use_host_layout(d) is true.
+Yep, it should! Thanks for the catch.
 
-Change the is_domain_direct_mapped(d) checks in arm_iommu_map_page and
-arm_iommu_unmap_page into domain_use_host_layout(d) checks.
+>=20
+> The domctl lock (maybe) protects this case implicitly, but it's probably =
+better
+> to destroy things in a reasonable order.
+>=20
+> >      /* Remove from the domlist/hash. */
+> >      domlist_remove(d);
+> >
+> > @@ -2433,6 +2443,71 @@ void thaw_domains(void)
+> >      rcu_read_unlock(&domlist_read_lock);
+> >  }
+> >
+> > +domid_t domid_alloc(domid_t domid)
+> > +{
+> > +    static domid_t domid_last;
+> > +
+> > +    spin_lock(&domid_lock);
+> > +
+> > +    /* Exact match. */
+> > +    if ( domid < DOMID_FIRST_RESERVED )
+> > +    {
+> > +        if ( __test_and_set_bit(domid, domid_bitmap) )
+> > +            domid =3D DOMID_INVALID;
+> > +    }
+> > +    /*
+> > +     * Exhaustive search.
+> > +     *
+> > +     * Domain ID#0 is reserved for the first boot domain (e.g. control=
+ domain)
+> > +     * and excluded from allocation.
+> > +     *
+> > +     * In dom0less build, domains are not dynamically destroyed, so th=
+ere's no
+> > +     * need to do a wraparound of the IDs.
+> > +     */
+> > +#ifdef CONFIG_DOM0LESS_BOOT
+>=20
+> These ifdef guards are problematic. The fact that a platform supports dom=
+0less
+> doesn't mean that every boot is dom0less (I can boot a non-dom0less syste=
+m on
+> a dom0less-capable Xen).
 
-Move the in-code comment specific to the grant table to grant-table.c.
+These #ifdefs are meant to align the code with the current Arm behavior, bu=
+t
+there will be correction.
 
-Fixes: f9f6b22abf1d ("xen/arm: Map ITS doorbell register to IOMMU page tables")
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
----
-v2->v3:
-* split change into 2 patches
-* 12-character commit IDs
-* change both arm_iommu_map_page and arm_iommu_unmap_page
-* s/IPA/GFN/ in comment
----
- xen/common/grant_table.c                    | 10 ++++++++--
- xen/drivers/passthrough/arm/iommu_helpers.c | 16 ++--------------
- 2 files changed, 10 insertions(+), 16 deletions(-)
+There was v9 feedback around create_domUs() on that:
+  https://lore.kernel.org/all/d0829041-1375-4161-b2c4-f8dffadbb657@xen.org/
 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index cf131c43a1f1..33d051dfe9b8 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -1274,8 +1274,14 @@ map_grant_ref(
-         }
- 
-         /*
--         * We're not translated, so we know that dfns and mfns are
--         * the same things, so the IOMMU entry is always 1-to-1.
-+         * Grant mappings can be used for DMA requests. The dev_bus_addr
-+         * returned by the hypercall is the MFN (not the GFN). For
-+         * device protected by an IOMMU, Xen needs to add a 1:1 mapping
-+         * in the domain p2m to allow DMA request to work. This is only
-+         * valid when the domain is directed mapped.
-+         *
-+         * We're not translated, so we know that dfns and mfns are the
-+         * same things, so the IOMMU entry is always 1-to-1.
-          */
-         if ( !(op->flags & GNTMAP_readonly) && node.cnt.wr == 1 )
-             kind = IOMMUF_readable | IOMMUF_writable;
-diff --git a/xen/drivers/passthrough/arm/iommu_helpers.c b/xen/drivers/passthrough/arm/iommu_helpers.c
-index 5cb198748193..bdb271584b0d 100644
---- a/xen/drivers/passthrough/arm/iommu_helpers.c
-+++ b/xen/drivers/passthrough/arm/iommu_helpers.c
-@@ -36,15 +36,7 @@ int __must_check arm_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
- {
-     p2m_type_t t;
- 
--    /*
--     * Grant mappings can be used for DMA requests. The dev_bus_addr
--     * returned by the hypercall is the MFN (not the IPA). For device
--     * protected by an IOMMU, Xen needs to add a 1:1 mapping in the domain
--     * p2m to allow DMA request to work.
--     * This is only valid when the domain is directed mapped. Hence this
--     * function should only be used by gnttab code with gfn == mfn == dfn.
--     */
--    BUG_ON(!is_domain_direct_mapped(d));
-+    BUG_ON(!domain_use_host_layout(d));
-     BUG_ON(mfn_x(mfn) != dfn_x(dfn));
- 
-     /* We only support readable and writable flags */
-@@ -66,11 +58,7 @@ int __must_check arm_iommu_unmap_page(struct domain *d, dfn_t dfn,
-                                       unsigned int order,
-                                       unsigned int *flush_flags)
- {
--    /*
--     * This function should only be used by gnttab code when the domain
--     * is direct mapped (i.e. gfn == mfn == dfn).
--     */
--    if ( !is_domain_direct_mapped(d) )
-+    if ( !domain_use_host_layout(d) )
-         return -EINVAL;
- 
-     return guest_physmap_remove_page(d, _gfn(dfn_x(dfn)), _mfn(dfn_x(dfn)),
+>=20
+> Furthermore, the rationale for panicking on wraparound is because of exha=
+ustion,
+> but you do have a proper bitmap here to do proper exhaustive search, so I=
+MO,
+> this branch is not necessary.
+>=20
+> > +    else if ( domid_last + 1 >=3D DOMID_FIRST_RESERVED )
+> > +    {
+> > +        domid =3D DOMID_INVALID;
+> > +    }
+> > +#endif
+> > +    else
+> > +    {
+> > +        domid =3D find_next_zero_bit(domid_bitmap,
+> > +                                   DOMID_FIRST_RESERVED,
+> > +                                   domid_last + 1);
+> > +#ifdef CONFIG_DOM0LESS_BOOT
+> > +        if ( domid =3D=3D DOMID_FIRST_RESERVED )
+> > +            domid =3D find_next_zero_bit(domid_bitmap,
+> > +                                       DOMID_FIRST_RESERVED,
+> > +                                       1);
+>=20
+> nit: I'd say 0 is fair game. On Hyperlaunch (and soon dom0less) it'll be =
+possible
+> to have a domU with domid=3D0 and a hwdom/ctldom with domids !=3D 0 via t=
+he domid
+> property on the DTB.
+>=20
+> Starting from 1 might be slightly saner for defence in depth, so it reall=
+y is
+> a nit. I don't think being cautious about dom0 is necessarily a bad thing=
+.
 
-base-commit: 2dee23ad966897cb8596e49f37e625bf483d544c
--- 
-2.50.1
+I kept 1 to ensure ID#0 is reserved for dom0.
+
+There was v9 feedback around domid_alloc() on that:
+  https://lore.kernel.org/all/d0829041-1375-4161-b2c4-f8dffadbb657@xen.org/
+
+>=20
+> > +#endif
+> > +
+> > +        if ( domid < DOMID_FIRST_RESERVED )
+> > +        {
+> > +            __set_bit(domid, domid_bitmap);
+> > +            domid_last =3D domid;
+>=20
+> Rather than setting domid_last here, I'd move it right before the spin_un=
+lock()
+> gated by "if ( domid !=3D DOMID_INVALID )". That'd also bump domid_last i=
+n the
+> exact match case.
+>=20
+> It also allows to drop the (then) redundant braces.
+>=20
+> > +        }
+> > +        else
+> > +        {
+>=20
+> nit: redundant braces
+
+Ack.
+
+>=20
+> > +            domid =3D DOMID_INVALID;
+> > +        }
+> > +    }
+> > +
+> > +    spin_unlock(&domid_lock);
+> > +
+> > +    return domid;
+> > +}
+> > +
+> > +void domid_free(domid_t domid)
+> > +{
+> > +    if ( domid < DOMID_FIRST_RESERVED )
+> > +    {
+> > +        spin_lock(&domid_lock);
+> > +        __clear_bit(domid, domid_bitmap);
+> > +        spin_unlock(&domid_lock);
+> > +    }
+> > +}
+> > +
+> >  /*
+> >   * Local variables:
+> >   * mode: C
+> > diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+> > index bfe2e1f9f057..8ef0c147c9b0 100644
+> > --- a/xen/common/domctl.c
+> > +++ b/xen/common/domctl.c
+> > @@ -49,20 +49,6 @@ static int xenctl_bitmap_to_nodemask(nodemask_t *nod=
+emask,
+> >                                     MAX_NUMNODES);
+> >  }
+> >
+> > -static inline int is_free_domid(domid_t dom)
+> > -{
+> > -    struct domain *d;
+> > -
+> > -    if ( dom >=3D DOMID_FIRST_RESERVED )
+> > -        return 0;
+> > -
+> > -    if ( (d =3D rcu_lock_domain_by_id(dom)) =3D=3D NULL )
+> > -        return 1;
+> > -
+> > -    rcu_unlock_domain(d);
+> > -    return 0;
+> > -}
+>=20
+> Good riddance. This is racy without the domctl lock.
+>=20
+> > -
+> >  void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *=
+info)
+> >  {
+> >      struct vcpu *v;
+> > @@ -421,36 +407,18 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_=
+t) u_domctl)
+> >
+> >      case XEN_DOMCTL_createdomain:
+> >      {
+> > -        domid_t        dom;
+> > -        static domid_t rover =3D 0;
+> > +        domid_t domid =3D domid_alloc(op->domain);
+> >
+> > -        dom =3D op->domain;
+> > -        if ( (dom > 0) && (dom < DOMID_FIRST_RESERVED) )
+> > +        if ( domid =3D=3D DOMID_INVALID )
+> >          {
+> >              ret =3D -EEXIST;
+>=20
+> nit: IMO. If createdomain didn't set domctl.domid, we shouldn't return EE=
+XIST,
+>      but ENOSPC. It's a very impossible case, so I don't care much though=
+.
+
+I agree, but that will be behavior change which I want to avoid.
+I kept -EEXIST because I am not sure how users treat the return value.
+
+>=20
+> > -            if ( !is_free_domid(dom) )
+> > -                break;
+> > -        }
+> > -        else
+> > -        {
+> > -            for ( dom =3D rover + 1; dom !=3D rover; dom++ )
+> > -            {
+> > -                if ( dom =3D=3D DOMID_FIRST_RESERVED )
+> > -                    dom =3D 1;
+> > -                if ( is_free_domid(dom) )
+> > -                    break;
+> > -            }
+> > -
+> > -            ret =3D -ENOMEM;
+> > -            if ( dom =3D=3D rover )
+> > -                break;
+> > -
+> > -            rover =3D dom;
+> > +            break;
+> >          }
+> >
+> > -        d =3D domain_create(dom, &op->u.createdomain, false);
+> > +        d =3D domain_create(domid, &op->u.createdomain, false);
+> >          if ( IS_ERR(d) )
+> >          {
+> > +            domid_free(domid);
+> >              ret =3D PTR_ERR(d);
+> >              d =3D NULL;
+> >              break;
+> > diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+> > index e10baf2615fd..8aab05ae93c8 100644
+> > --- a/xen/include/xen/domain.h
+> > +++ b/xen/include/xen/domain.h
+> > @@ -38,6 +38,9 @@ void arch_get_domain_info(const struct domain *d,
+> >
+> >  domid_t get_initial_domain_id(void);
+> >
+> > +domid_t domid_alloc(domid_t domid);
+> > +void domid_free(domid_t domid);
+> > +
+> >  /* CDF_* constant. Internal flags for domain creation. */
+> >  /* Is this a privileged domain? */
+> >  #define CDF_privileged           (1U << 0)
+>=20
+> Cheers,
+> Alejandro
+>=20
 
 
