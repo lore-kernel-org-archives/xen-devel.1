@@ -4,34 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 975F4C83F1A
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 23:33:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1053092.1421850 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A01C83F27
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 23:33:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1053098.1421860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueMTb-0004Aw-0g; Tue, 22 Jul 2025 23:32:51 +0000
+	id 1ueMUA-0004dt-8M; Tue, 22 Jul 2025 23:33:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1053092.1421850; Tue, 22 Jul 2025 23:32:50 +0000
+Received: by outflank-mailman (output) from mailman id 1053098.1421860; Tue, 22 Jul 2025 23:33:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueMTa-0004Ap-U4; Tue, 22 Jul 2025 23:32:50 +0000
-Received: by outflank-mailman (input) for mailman id 1053092;
- Tue, 22 Jul 2025 23:32:49 +0000
+	id 1ueMUA-0004dk-5j; Tue, 22 Jul 2025 23:33:26 +0000
+Received: by outflank-mailman (input) for mailman id 1053098;
+ Tue, 22 Jul 2025 23:33:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X0Ar=2D=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1ueMTZ-0004Aj-LN
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 23:32:49 +0000
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 1ueMU8-0004dY-Li
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 23:33:24 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [2604:1380:45d1:ec00::3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2d1238f2-6754-11f0-a31d-13f23c93f187;
- Wed, 23 Jul 2025 01:32:48 +0200 (CEST)
+ id 421809a9-6754-11f0-a31d-13f23c93f187;
+ Wed, 23 Jul 2025 01:33:23 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 6C71FA564E3;
- Tue, 22 Jul 2025 23:32:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE7CDC4CEEB;
- Tue, 22 Jul 2025 23:32:45 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 0F611A564E3;
+ Tue, 22 Jul 2025 23:33:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55E7BC4CEEB;
+ Tue, 22 Jul 2025 23:33:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,18 +44,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d1238f2-6754-11f0-a31d-13f23c93f187
+X-Inumbo-ID: 421809a9-6754-11f0-a31d-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753227167;
-	bh=Wu+llJYGzKqeeDeiXrtHZde69DmAmUgcHOmvm6R2OsQ=;
+	s=k20201202; t=1753227202;
+	bh=uVvA6N2p4js40k+v+v/8z95zTGwRBEMK/yNmf0hh6BM=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=JdGW6grAAmSQJykpXZxZo7tzcj2SrFgVH2JEE0N8JA2/8jgnk1D/cJlRxYwoCoyOJ
-	 1CBMgnF2/35jWZuPBkzC3SYfzWozJY4uVLccDL8mtdKDjB5Rc8IZ5tEipvXPSrMA04
-	 UtNg6U4B5gTbbKLglyHn0qLZd00gLw0XZO3iSPvdGiyvxMqYdox9BpAi/6CzrD52C8
-	 UlznC0DM0BBY0y2QKX8M/k8gq7yW/5L+WgNsqwfbpDQNxx4IwJSLGKsnJq5kGvdi0N
-	 agKoWM+ckZEdOrUjqDJMq6MxMd+yszqbPRwzr0WHnCwsl09mlWBc1S526v1otyceGP
-	 /jcULHR+K8eJA==
-Date: Tue, 22 Jul 2025 16:32:44 -0700 (PDT)
+	b=ljt7UA2x6ENNuMQ8DAXDutZkJsyUVY0Tl4V1LJvgmGG3M5P9BYnxAG5Bcz+LnbatP
+	 OY3WmT2Dxk0hhR6Wy2ej52TmAAOFRzs+hUblhANayPPVoDXC9P9vIcAzToBft4/fCQ
+	 ORC3Zt6RQabMKRp6/l8Ls/NalIAMUr/oTzjOfm6F1na96J6ZEB+ssacxHHoaUSi8r8
+	 9KjMIBHIt+2t/Bnq72M/Km83h+dtXVVV4Y+Wl8okoldUZeP2VyY5XrdEWoh/8OWV51
+	 84OoziEXmLJFJ7fOxT3wdtGdBD3GietivAchB3DPRNVDwqvYaG+3W1LEmpcFbpBi4Y
+	 cpznmzDg4vbvg==
+Date: Tue, 22 Jul 2025 16:33:19 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
@@ -68,20 +69,25 @@ cc: xen-devel@lists.xenproject.org,
     Anthony PERARD <anthony.perard@vates.tech>, 
     Jan Beulich <jbeulich@suse.com>, 
     =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 08/10] dom0less: Allow arch_parse_dom0less_node() to be
- fallible
-In-Reply-To: <20250722115955.57167-9-alejandro.garciavallejo@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2507221632370.7043@ubuntu-linux-20-04-desktop>
-References: <20250722115955.57167-1-alejandro.garciavallejo@amd.com> <20250722115955.57167-9-alejandro.garciavallejo@amd.com>
+Subject: Re: [PATCH 07/10] dom0less: Turn arch_create_domUs into
+ arch_parse_dom0less_node()
+In-Reply-To: <20250722115955.57167-8-alejandro.garciavallejo@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2507221633140.7043@ubuntu-linux-20-04-desktop>
+References: <20250722115955.57167-1-alejandro.garciavallejo@amd.com> <20250722115955.57167-8-alejandro.garciavallejo@amd.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Tue, 22 Jul 2025, Alejandro Vallejo wrote:
-> Let the function return an errno, so fallible bindings are not precluded.
+> It deals with a single domain, and will be called on a later patch
+> by a new function parse_dom0less_node(), so the new name is apt.
+> 
+> Also, pass parameters using boot_domain instead as the plan is to use it
+> as dumping gound for all the extracted information from the bindings.
+> 
+> Not a functional change.
 > 
 > Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-
 
