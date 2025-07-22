@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16D18C83F27
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 12:00:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1052398.1421123 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D76C83F34
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 12:00:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1052387.1421059 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueBfj-00060K-Rg; Tue, 22 Jul 2025 12:00:39 +0000
+	id 1ueBfa-0004CP-BP; Tue, 22 Jul 2025 12:00:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1052398.1421123; Tue, 22 Jul 2025 12:00:39 +0000
+Received: by outflank-mailman (output) from mailman id 1052387.1421059; Tue, 22 Jul 2025 12:00:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueBfj-0005zh-KS; Tue, 22 Jul 2025 12:00:39 +0000
-Received: by outflank-mailman (input) for mailman id 1052398;
- Tue, 22 Jul 2025 12:00:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=D6vH=2D=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ueBfi-0003BS-Qo
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 12:00:38 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7a38101a-66f3-11f0-b894-0df219b8e170;
- Tue, 22 Jul 2025 14:00:36 +0200 (CEST)
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a54690d369so4465405f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Jul 2025 05:00:36 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31cc0bd12b5sm8232731a91.12.2025.07.22.05.00.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Jul 2025 05:00:35 -0700 (PDT)
+	id 1ueBfa-0004CG-7v; Tue, 22 Jul 2025 12:00:30 +0000
+Received: by outflank-mailman (input) for mailman id 1052387;
+ Tue, 22 Jul 2025 12:00:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=sKN0=2D=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1ueBfY-0003QN-PQ
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 12:00:28 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2061b.outbound.protection.outlook.com
+ [2a01:111:f403:2009::61b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 74f307be-66f3-11f0-a31d-13f23c93f187;
+ Tue, 22 Jul 2025 14:00:28 +0200 (CEST)
+Received: from SJ0PR03CA0254.namprd03.prod.outlook.com (2603:10b6:a03:3a0::19)
+ by IA0PR12MB7626.namprd12.prod.outlook.com (2603:10b6:208:438::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Tue, 22 Jul
+ 2025 12:00:22 +0000
+Received: from SJ1PEPF0000231A.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::1) by SJ0PR03CA0254.outlook.office365.com
+ (2603:10b6:a03:3a0::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8943.29 via Frontend Transport; Tue,
+ 22 Jul 2025 12:00:21 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF0000231A.mail.protection.outlook.com (10.167.242.231) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8964.20 via Frontend Transport; Tue, 22 Jul 2025 12:00:21 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
+ 2025 07:00:19 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,261 +58,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a38101a-66f3-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753185636; x=1753790436; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=gVkrOzb/HD4h/IxKauVcjFix/YQNTi0To3MXHQX/IYs=;
-        b=J0We65s2nMEi5KZpnUSujO93avx8bnyvq+YAT8Kv5tyLlvSGsYCcJ7mej9PJHUV33M
-         wsrclFYjAFMaZ79fnm4wpdleOCcM//11f9mCmS3WJZ808LfSpTMGM8woBA/HhTn4f1Rd
-         u9DveYuadcsxeplGNr/YFhaEl0Se1+w5XX9vMh+UhN91aPpG0dk4k6h9tHfBqdScR10X
-         jSz1c7vxY06MAvQNXivIXCVsuOxZLeE6KGDtGU2r4P8FRGNJsytdTXFh/BdEt/AV+4uN
-         Y/M8QeCvswDTdrikrWdLFFk9QTBw7FS6xjcEy9GtzR4Q+SYalg0d0i6CAfh8Y9EjiNWQ
-         oP2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753185636; x=1753790436;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gVkrOzb/HD4h/IxKauVcjFix/YQNTi0To3MXHQX/IYs=;
-        b=xR0NKT1HTdkCWBqlt8f6S3Psj+8trLpBnV5pHJGUx3u4bl2RsGdA6bjwBDYCRuC8/2
-         UTxbKEyTidGyu/eRUH37SO39tq/Xp2ZQ9or7HYLBOm/lFsQEDZAu5E1CLXtIhFOUy5h9
-         xAhh8n4PcmYzRzBX+sWRzup9ij4xTjuqtr2W3DB6FeHVzSMOMH7XQknnGqsz+HxKL6l1
-         tYc6q2eoWveWSG+vZ36ItHune3hRTTrkSUBIBZ6mwwwM1RKSZdoUwKOQausVxbN4ctuZ
-         HJKWb0GKt45bCwcKATgHNwAi69/FEfM0b/slnt5IbY7+Z67CCSECv77uXe1RaYjb1hpE
-         jVqw==
-X-Forwarded-Encrypted: i=1; AJvYcCWAKDx0wiBmuWt9k4zR/SzeIRDaPDgqQ8Il2tWtXTY3Z73rpqZk0kFgAEagyy1VQRtDh4iXGMFB150=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyXDqo1BaP5ENspO2z8vwisoo0fipi/HhQwY96Pqw1aZXlBsfeb
-	7Vu5TnjrCr9ICS6XXraJ2paCEE3ebMz+so8KxuUGcVolPCu2RnjwJVB+NYw7xiY1FA==
-X-Gm-Gg: ASbGncvjpWdF8VasisupeVDNdzQ41y2uWldEOia1Fmkz4CixR37WGWD2s3lQAF1hwYS
-	3NCe131cOoKfBLSDmlbpTFE0nB+8QX17Iqh2k6wKGTgwHlul+4d/Jk1mAYLdlHNsK0cqXskiz0B
-	jS0HOlpHtL6851IgMmhVAJSMzkwwQekmKk+msDpbLy+EJf27sFGsgS8nS3fUUIEGN4PBR927rqj
-	+PMjr4Owi+VMSSReqrNIa3Rsr3M1qA5QVwKSdh7ktrBO2XvzHKFOcdoa/dhRJDvOeMsEimfO8IJ
-	ApPc6cdrcLEkOKM1V6M1lDiIkEtetbtNthxNiYELuwDJRf09dnxRwaK6IkQXUnRnVfg4droOLqZ
-	2vj1xlHMvN2jSTH73KTjzHodUmTg87TO8tNL+a9G7Eh7pxs5HU/kv+H6cslD6O3FFl3QBqQDq21
-	ILw4KlFso=
-X-Google-Smtp-Source: AGHT+IGDtq52H1sBAnsgwpxcAZ86P3I0uBEjxy8hUL1XOVcE/TFJAmNCPQROPi+lGawtIcndu4f8MA==
-X-Received: by 2002:a05:6000:2c11:b0:3a8:6262:6ef5 with SMTP id ffacd0b85a97d-3b60e4b80a6mr20735696f8f.10.1753185635522;
-        Tue, 22 Jul 2025 05:00:35 -0700 (PDT)
-Message-ID: <25f17da6-1c82-422c-941a-b0eb57786c8f@suse.com>
-Date: Tue, 22 Jul 2025 14:00:24 +0200
+X-Inumbo-ID: 74f307be-66f3-11f0-a31d-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FBwiuOcibXaB4OVZqtKs/zfFDgC8T6YMTR8GCBaYVOaWrwPx6VAVpJAR0hk/Gy8NYu+fQEYgXuamyI8pkUdgbeymX5FokmqMXlX7ROMFEeDvOXAg7RuJJkitDQI7JaDrVl7FRxj/eUoXAcVC0nxGIHsaiUl/58Mt6dT6Sh5UNInONAH7XYRgQyYXDxN658kBER9VenaROE50zx7apM6jzPAuLgbwfb7OZYH8wUno5mqeh4AKtWWWW7WYlCU2zQpJl9uYNS/0BfTXwJ/ZXjQ7XG/OVKLLAO8chvALAlYyRJe8IhqJgSUdjbxaK0NaAfEkL6yzrrcb790fDepuQqOBlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jrf99HU62dHMAqZMXbO8Ll5PTDmRKKXf7pelbmJ2joo=;
+ b=Oad5xUajcxvvEshJf2rqu0dDx0Tjhtba0FTY+Xtz4RGt8IdO0eT6JlZ/c6ldfqFLCNpZGjUTogx6s7H8VzmzgFhCXJ7BCf/P6zXc4QoocfA+Y3P10qJfwbOYBCKP9pkEnbG3Cb95bjoHGcMSoBNqq22cLn99bT9Tv2VGXFGkqZFDS8eDb5wuCRHxdkMWqsvh3Z11mXFPPiFfx5W/Rji8lnNT7Ngw+RIjnnzh5HGKAV3TGnCQ2kBn2+cti6N6wVzJ7zLYbM5VfoF3ERx5tI+CQgZ7n8oaX8ynee5fWxL2s8zaTSHD/Wcy3OFcUlhXIdof7Eqt7sb99U9iGsA/AjmzBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jrf99HU62dHMAqZMXbO8Ll5PTDmRKKXf7pelbmJ2joo=;
+ b=pF2tzLWvhzKutIOqNTK+r54WN92FsXZqchmKCV9/UtJ8t71H4GpVXrA7sS4fdjo6vDq8bOgedEJM/BkqkVxVyOYvAFkTk1OfS18Male75Z2z2FZbwwvobNv/oa3PO4KYvCLBp2+fyJCXBFEo//LZ2HO5vqznrXebsOwDX3EZfsw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH 06/10] dom0less: Create llc_color_str field in boot_domain
+Date: Tue, 22 Jul 2025 13:59:46 +0200
+Message-ID: <20250722115955.57167-7-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250722115955.57167-1-alejandro.garciavallejo@amd.com>
+References: <20250722115955.57167-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/17] xen/riscv: Implement p2m_entry_from_mfn() and
- support PBMT configuration
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1749555949.git.oleksii.kurochko@gmail.com>
- <994ab3dd6822c4cd02a6a576041da115abeff6ed.1749555949.git.oleksii.kurochko@gmail.com>
- <f6e789cd-0ef3-488d-94da-1b7c94946720@suse.com>
- <640178f8-a189-4f84-abff-0ef87ba566a5@gmail.com>
- <0265e61a-ad08-4b6b-a87d-dba304f6d27d@suse.com>
- <e1c469c3-47d5-4a38-8abd-985a26cb8365@gmail.com>
- <15c9cb8e-8452-4dc3-933a-5713fc86a12a@suse.com>
- <958ae1b0-d139-41e8-b965-43ce640569c5@gmail.com>
- <007654f3-e26b-43b1-bc81-40ba25c9d787@suse.com>
- <ca3467a2-c795-4709-ad92-1744b138a148@gmail.com>
- <9e9c1943-b2af-471f-b8c9-f7179073ef99@suse.com>
- <fb7176a2-740e-4773-b1cb-3cd430d6f838@gmail.com>
- <f110cd42-d34b-44fc-bd76-85cb0bfc2357@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f110cd42-d34b-44fc-bd76-85cb0bfc2357@gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231A:EE_|IA0PR12MB7626:EE_
+X-MS-Office365-Filtering-Correlation-Id: c217366b-3c5a-4425-9d04-08ddc91755d5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?rGEFXR+D1NvqYpjUtChSYXe1/24tgkx3nHNhWznFK3wXttCrJaD4YBkSWhpt?=
+ =?us-ascii?Q?+0/s6oes8jsaKbHLnMaoHlizCWLekrcHbRnAdJI3SWvAswp3fsGZcaKCSyl1?=
+ =?us-ascii?Q?bkEDiCikafCZykXHOclFLrW6hS2bCH0mcvhJdNZwkHXQy1GKEPUstzvpeNgP?=
+ =?us-ascii?Q?OzscBOJry/ua4ukTpHmizpOseiB4AhLM9gigElM4fZtjVO8bU7F42tllgPkR?=
+ =?us-ascii?Q?7lFzriUxl5az8XOVptH5DZaMfXD5r3co1/Y/wD8osmLy4Nr5Zqk3hG48RLS6?=
+ =?us-ascii?Q?rkeTzvvqyGgFM8dSUKgP9IA71pcyqE2ZFx0RZEPZiuBLTMLjF8vEMux7anhi?=
+ =?us-ascii?Q?abdsJjWzmfpaauQORmC9d129jzSV/JLO0/VYLZXOvutjgiJDgqCw28Csaj3X?=
+ =?us-ascii?Q?/P66z831JNJ2P4aof47ZqcWs+JThchSMzMQOj14ptPBandLLlaxIijHSFPc4?=
+ =?us-ascii?Q?MBtQc5DV6jqAo1mKHZ0QX/GM5q31zLcHa3cwfmh/UYishMtiRFC7Z6syfu+d?=
+ =?us-ascii?Q?uke0d1JJsFUeXdpplWOpBP1osRIa+Z4blHaxwQecmXXCHDtd7DXX4whlQse1?=
+ =?us-ascii?Q?Cw+RmfzeX2jbN7z7PwQ+yOVsi2S2O8Z/bfK4tLoDsdclviATxQBWC8WXSC+Y?=
+ =?us-ascii?Q?0kOHW3I+5dCiDr4KlcSc/r0TINPE+JBB/BnFW50VJIUKFNxQEpyTHZDPIH0X?=
+ =?us-ascii?Q?/oCekjQixjW0lUFEaxWw6xcet/eAr8lGjdteCZ8L7Piql2lR6yauZuRHeYHy?=
+ =?us-ascii?Q?UtZTAHpdJTzKJD3uHXLi7CTkuGkKg5lToiYbZuxe13+aVg1LbCAC3UgpYIo5?=
+ =?us-ascii?Q?sgHDcwOmydYDbpcJaiKX0HH2kM2WtSv6oPv59SlnR7lt0A7OxUipkb2joUSh?=
+ =?us-ascii?Q?5/3o7ID5EFkjsUePvfgL7JT7CiTCI32/439F9+xHlyIZCuWwqPuAkT11ln5C?=
+ =?us-ascii?Q?4Dfp2rWJ7J3/pRgAblqw36RcVRPlu1aBzqu070m8TrhuPw08e0uyDXQ3bQeY?=
+ =?us-ascii?Q?Kh79NarrUTzJzhFmr5G7vtJlBJKIx3OjL3ehly3Ee7GTENUnKgVQVl07DUAl?=
+ =?us-ascii?Q?GUjgNdCrp6dgWtLRM58GstptySb/ehm34nShMsGoJwKGZBtsoqWVdAWxbrYX?=
+ =?us-ascii?Q?j4p1ear9W5WjYI0uV38oPp5w63UwV9IU+93605UX34nSjyiMBH96IPkd4stp?=
+ =?us-ascii?Q?qASO5k9RayRKskYJPs/+sYKWus98jMne99mp+SS7QeFEiLSXFndm6R8JOmOP?=
+ =?us-ascii?Q?shPvIaODko4fae4N0/466ABv1QlAYXTxPNN6hBuKpKFoH5ouv/urkOjAu1Jn?=
+ =?us-ascii?Q?BzxHnEfYOcyuonayphT9OZm5pOkfjmQA7nTAwixavxfi9TmD39uWWQz/c2sk?=
+ =?us-ascii?Q?zACHCuwA804GKR9Ud1DCGmncQpfyzVd8FDE/RubAfO+SYDz0B4944LdwtX+g?=
+ =?us-ascii?Q?KpPPQ8Zq5fyFaJWi73LY/CcFBgUi0vTzqwTDpfPLYZStcSCXQJ99fnqg+MTZ?=
+ =?us-ascii?Q?Lj9we9KvImkJ2A6cxxwPFyoEtDd6SzdovTQM?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2025 12:00:21.6633
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c217366b-3c5a-4425-9d04-08ddc91755d5
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF0000231A.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7626
 
-On 22.07.2025 13:34, Oleksii Kurochko wrote:
-> 
-> On 7/22/25 12:41 PM, Oleksii Kurochko wrote:
->>
->>
->> On 7/21/25 2:18 PM, Jan Beulich wrote:
->>> On 18.07.2025 11:52, Oleksii Kurochko wrote:
->>>> On 7/17/25 12:25 PM, Jan Beulich wrote:
->>>>> On 17.07.2025 10:56, Oleksii Kurochko wrote:
->>>>>> On 7/16/25 6:18 PM, Jan Beulich wrote:
->>>>>>> On 16.07.2025 18:07, Oleksii Kurochko wrote:
->>>>>>>> On 7/16/25 1:31 PM, Jan Beulich wrote:
->>>>>>>>> On 15.07.2025 16:47, Oleksii Kurochko wrote:
->>>>>>>>>> On 7/1/25 5:08 PM, Jan Beulich wrote:
->>>>>>>>>>> On 10.06.2025 15:05, Oleksii Kurochko wrote:
->>>>>>>>>>>> --- a/xen/arch/riscv/p2m.c
->>>>>>>>>>>> +++ b/xen/arch/riscv/p2m.c
->>>>>>>>>>>> @@ -345,6 +345,26 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
->>>>>>>>>>>>           return __map_domain_page(p2m->root + root_table_indx);
->>>>>>>>>>>>       }
->>>>>>>>>>>>       
->>>>>>>>>>>> +static int p2m_type_radix_set(struct p2m_domain *p2m, pte_t pte, p2m_type_t t)
->>>>>>>>>>> See comments on the earlier patch regarding naming.
->>>>>>>>>>>
->>>>>>>>>>>> +{
->>>>>>>>>>>> +    int rc;
->>>>>>>>>>>> +    gfn_t gfn = mfn_to_gfn(p2m->domain, mfn_from_pte(pte));
->>>>>>>>>>> How does this work, when you record GFNs only for Xenheap pages?
->>>>>>>>>> I think I don't understand what is an issue. Could you please provide
->>>>>>>>>> some extra details?
->>>>>>>>> Counter question: The mfn_to_gfn() you currently have is only a stub. It only
->>>>>>>>> works for 1:1 mapped domains. Can you show me the eventual final implementation
->>>>>>>>> of the function, making it possible to use it here?
->>>>>>>> At the moment, I planned to support only 1:1 mapped domains, so it is final
->>>>>>>> implementation.
->>>>>>> Isn't that on overly severe limitation?
->>>>>> I wouldn't say that it's a severe limitation, as it's just a matter of how
->>>>>> |mfn_to_gfn()| is implemented. When non-1:1 mapped domains are supported,
->>>>>> |mfn_to_gfn()| can be implemented differently, while the code where it’s called
->>>>>> will likely remain unchanged.
->>>>>>
->>>>>> What I meant in my reply is that, for the current state and current limitations,
->>>>>> this is the final implementation of|mfn_to_gfn()|. But that doesn't mean I don't
->>>>>> see the value in, or the need for, non-1:1 mapped domains—it's just that this
->>>>>> limitation simplifies development at the current stage of the RISC-V port.
->>>>> Simplification is fine in some cases, but not supporting the "normal" way of
->>>>> domain construction looks like a pretty odd restriction. I'm also curious
->>>>> how you envision to implement mfn_to_gfn() then, suitable for generic use like
->>>>> the one here. Imo, current limitation or not, you simply want to avoid use of
->>>>> that function outside of the special gnttab case.
->>>>>
->>>>>>>>>>> In this context (not sure if I asked before): With this use of a radix tree,
->>>>>>>>>>> how do you intend to bound the amount of memory that a domain can use, by
->>>>>>>>>>> making Xen insert very many entries?
->>>>>>>>>> I didn’t think about that. I assumed it would be enough to set the amount of
->>>>>>>>>> memory a guest domain can use by specifying|xen,domain-p2m-mem-mb| in the DTS,
->>>>>>>>>> or using some predefined value if|xen,domain-p2m-mem-mb| isn’t explicitly set.
->>>>>>>>> Which would require these allocations to come from that pool.
->>>>>>>> Yes, and it is true only for non-hardware domains with the current implementation.
->>>>>>> ???
->>>>>> I meant that pool is used now only for non-hardware domains at the moment.
->>>>> And how does this matter here? The memory required for the radix tree doesn't
->>>>> come from that pool anyway.
->>>> I thought that is possible to do that somehow, but looking at a code of
->>>> radix-tree.c it seems like the only one way to allocate memroy for the radix
->>>> tree isradix_tree_node_alloc() -> xzalloc(struct rcu_node).
->>>>
->>>> Then it is needed to introduce radix_tree_node_allocate(domain)
->>> That would be a possibility, but you may have seen that less than half a
->>> year ago we got rid of something along these lines. So it would require
->>> some pretty good justification to re-introduce.
->>>
->>>> or radix tree
->>>> can't be used at all for mentioned in the previous replies security reason, no?
->>> (Very) careful use may still be possible. But the downside of using this
->>> (potentially long lookup times) would always remain.
->> Could you please clarify what do you mean here by "(Very) careful"?
->> I thought about an introduction of an amount of possible keys in radix tree and if this amount
->> is 0 then stop domain. And it is also unclear what should be a value for this amount.
->> Probably, you have better idea.
->>
->> But generally your idea below ...
->>>>>>>>>> Also, it seems this would just lead to the issue you mentioned earlier: when
->>>>>>>>>> the memory runs out,|domain_crash()| will be called or PTE will be zapped.
->>>>>>>>> Or one domain exhausting memory would cause another domain to fail. A domain
->>>>>>>>> impacting just itself may be tolerable. But a domain affecting other domains
->>>>>>>>> isn't.
->>>>>>>> But it seems like this issue could happen in any implementation. It won't happen only
->>>>>>>> if we will have only pre-populated pool for any domain type (hardware, control, guest
->>>>>>>> domain) without ability to extend them or allocate extra pages from domheap in runtime.
->>>>>>>> Otherwise, if extra pages allocation is allowed then we can't really do something
->>>>>>>> with this issue.
->>>>>>> But that's why I brought this up: You simply have to. Or, as indicated, the
->>>>>>> moment you mark Xen security-supported on RISC-V, there will be an XSA needed.
->>>>>> Why it isn't XSA for other architectures? At least, Arm then should have such
->>>>>> XSA.
->>>>> Does Arm use a radix tree for storing types? It uses one for mem-access, but
->>>>> it's not clear to me whether that's actually a supported feature.
->>>>>
->>>>>> I don't understand why x86 won't have the same issue. Memory is the limited
->>>>>> and shared resource, so if one of the domain will use to much memory then it could
->>>>>> happen that other domains won't have enough memory for its purpose...
->>>>> The question is whether allocations are bounded. With this use of a radix tree,
->>>>> you give domains a way to have Xen allocate pretty much arbitrary amounts of
->>>>> memory to populate that tree. That unbounded-ness is the problem, not memory
->>>>> allocations in general.
->>>> Isn't radix tree key bounded to an amount of GFNs given for a domain? We can't have
->>>> more keys then a max GFN number for a domain. So a potential amount of necessary memory
->>>> for radix tree is also bounded to an amount of GFNs.
->>> To some degree yes, hence why I said "pretty much arbitrary amounts".
->>> But recall that "amount of GFNs" is a fuzzy term; I think you mean to
->>> use it to describe the amount of memory pages given to the guest. GFNs
->>> can be used for other purposes, though. Guests could e.g. grant
->>> themselves access to their own memory, then map those grants at
->>> otherwise unused GFNs.
->>>
->>>> Anyway, IIUC I just can't use radix tree for p2m types at all, right?
->>>> If yes, does it make sense to borrow 2 bits from struct page_info->type_info as now it
->>>> is used 9-bits for count of a frame?
->>> struct page_info describes MFNs, when you want to describe GFNs. As you
->>> mentioned earlier, multiple GFNs can in principle map to the same MFN.
->>> You would force them to all have the same properties, which would be in
->>> direct conflict with e.g. the grant P2M types.
->>>
->>> Just to mention one possible alternative to using radix trees: You could
->>> maintain a 2nd set of intermediate "page tables", just that leaf entries
->>> would hold meta data for the respective GFN. The memory for those "page
->>> tables" could come from the normal P2M pool (and allocation would thus
->>> only consume domain-specific resources). Of course in any model like
->>> this the question of lookup times (as mentioned above) would remain.
->> ...looks like an optimal option.
->>
->> The only thing I worry about is that it will require some code duplication
->> (I will think how to re-use the current one code), as for example, when
->> setting/getting metadata, TLB flushing isn’t needed at all as we aren't
->> working with with real P2M page tables.
->> Agree that lookup won't be the best one, but nothing can be done with
->> such models.
-> 
-> Probably, instead of having a second set of intermediate "page tables",
-> we could just allocate two consecutive pages within the real P2M page
-> tables for the intermediate page table. The first page would serve as
-> the actual page table to which the intermediate page table points,
-> and the second page would store metadata for each entry of the page
-> table that the intermediate page table references.
-> 
-> As we are supporting only 1gb, 2mb and 4kb mappings we could do a little
-> optimization and start allocate these consecutive pages only for PT levels
-> which corresponds to 1gb, 2mb, 4kb mappings.
-> 
-> Does it make sense?
+Later patches move the bindings to a separate function and expect the
+outputs to land in fields of a boot_domain. Adjust llc_color_str to
+live inside boot_domain so it can be parsed later on.
 
-I was indeed entertaining this idea, but I couldn't conclude for myself if
-that would indeed be without any rough edges. Hence I didn't want to
-suggest such. For example, the need to have adjacent pairs of pages could
-result in a higher rate of allocation failures (while populating or
-re-sizing the P2M pool). This would be possible to avoid by still using
-entirely separate pages, and then merely linking them together via some
-unused struct page_info fields (the "normal" linking fields can't be used,
-afaict).
+Not a functional change.
 
-Jan
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+ xen/common/device-tree/dom0less-build.c | 12 ++++++++----
+ xen/include/xen/bootfdt.h               |  5 +++++
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index cee666786e..e1d723c796 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -834,7 +834,6 @@ void __init create_domUs(void)
+     BUG_ON(chosen == NULL);
+     dt_for_each_child_node(chosen, node)
+     {
+-        const char *llc_colors_str = NULL;
+         struct kernel_info ki = KERNEL_INFO_INIT;
+         struct xen_domctl_createdomain *d_cfg = &ki.bd.create_cfg;
+         unsigned int *flags = &ki.bd.create_flags;
+@@ -955,9 +954,11 @@ void __init create_domUs(void)
+             d_cfg->max_maptrack_frames = val;
+         }
+ 
+-        dt_property_read_string(node, "llc-colors", &llc_colors_str);
+-        if ( !llc_coloring_enabled && llc_colors_str )
++#ifdef CONFIG_HAS_LLC_COLORING
++        dt_property_read_string(node, "llc-colors", &ki.bd.llc_colors_str);
++        if ( !llc_coloring_enabled && ki.bd.llc_colors_str )
+             panic("'llc-colors' found, but LLC coloring is disabled\n");
++#endif
+ 
+         arch_create_domUs(node, d_cfg, *flags);
+ 
+@@ -972,10 +973,13 @@ void __init create_domUs(void)
+             panic("Error creating domain %s (rc = %ld)\n",
+                   dt_node_name(node), PTR_ERR(ki.bd.d));
+ 
++#ifdef CONFIG_HAS_LLC_COLORING
+         if ( llc_coloring_enabled &&
+-             (rc = domain_set_llc_colors_from_str(ki.bd.d, llc_colors_str)) )
++             (rc = domain_set_llc_colors_from_str(ki.bd.d,
++                                                  ki.bd.llc_colors_str)) )
+             panic("Error initializing LLC coloring for domain %s (rc = %d)\n",
+                   dt_node_name(node), rc);
++#endif /* CONFIG_HAS_LLC_COLORING */
+ 
+         ki.bd.d->is_console = true;
+         dt_device_set_used_by(node, ki.bd.d->domain_id);
+diff --git a/xen/include/xen/bootfdt.h b/xen/include/xen/bootfdt.h
+index f107099263..0e82ccea2f 100644
+--- a/xen/include/xen/bootfdt.h
++++ b/xen/include/xen/bootfdt.h
+@@ -125,6 +125,11 @@ struct boot_domain {
+     /* Input arguments to create_domain() */
+     struct xen_domctl_createdomain create_cfg;
+     unsigned int create_flags;
++
++#ifdef CONFIG_HAS_LLC_COLORING
++    /* LLC color selection string */
++    const char *llc_colors_str;
++#endif
+ };
+ 
+ #define BOOTMOD_MAX_CMDLINE 1024
+-- 
+2.43.0
+
 
