@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 285FBC83F25
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 07:36:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1052019.1420527 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77A4C83F27
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 07:36:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1052023.1420536 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ue7YI-0006CV-PH; Tue, 22 Jul 2025 07:36:42 +0000
+	id 1ue7YQ-0006bR-Uu; Tue, 22 Jul 2025 07:36:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1052019.1420527; Tue, 22 Jul 2025 07:36:42 +0000
+Received: by outflank-mailman (output) from mailman id 1052023.1420536; Tue, 22 Jul 2025 07:36:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ue7YI-0006CN-LE; Tue, 22 Jul 2025 07:36:42 +0000
-Received: by outflank-mailman (input) for mailman id 1052019;
- Tue, 22 Jul 2025 07:36:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ue7YQ-0006bK-Ra; Tue, 22 Jul 2025 07:36:50 +0000
+Received: by outflank-mailman (input) for mailman id 1052023;
+ Tue, 22 Jul 2025 07:36:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YR2v=2D=uniontech.com=wangyuli@srs-se1.protection.inumbo.net>)
- id 1ue7YI-0005s5-1h
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 07:36:42 +0000
-Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9a559fa7-66ce-11f0-a31d-13f23c93f187;
- Tue, 22 Jul 2025 09:36:40 +0200 (CEST)
+ id 1ue7YP-0005a5-WB
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 07:36:49 +0000
+Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9decef01-66ce-11f0-b894-0df219b8e170;
+ Tue, 22 Jul 2025 09:36:47 +0200 (CEST)
 Received: from avenger-e500 ( [localhost]) by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 22 Jul 2025 15:34:44 +0800 (CST)
+ id ; Tue, 22 Jul 2025 15:35:09 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,19 +40,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a559fa7-66ce-11f0-a31d-13f23c93f187
+X-Inumbo-ID: 9decef01-66ce-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1753169751;
-	bh=dOWhiNCJZis4pN9M5V0BjfzioRHW2TPCHsRRvp01fVg=;
+	s=onoh2408; t=1753169773;
+	bh=+qa2f3QEhHEuh4QOwcxSpKUWx1Ey8PdHAyuKdLKK9Qg=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=PIk9V3e/6y2ETdy7wlvTtHI/xNuO75T9WPsBWxW37ipx08yntI76orC8zMpQV4xD6
-	 KeNakI3kyHbH8ZKwNRCH6zDcynKCYtNDDhbOYo+13JIg+Mn8Iw7wh8cr/R8/jLrLA1
-	 Pgy9q/DqiHQp38cfJC8ArMjjwb77Zux6nobrM7Ts=
-X-QQ-mid: zesmtpip2t1753169688te102d84b
-X-QQ-Originating-IP: 2AH89LdOk3yAx2MwkPBNl41lOKSpE4iMrtdRIyTFm7k=
+	b=hh9mf8Mc39i+ypXzkOsf4eXv2b0nYXHjypO6K51HtClWMOgoe8WiUCUOKgNrC7lSO
+	 kswBdHwDqCHODQZxZ6qIfnz8LZ4/eguAmnzJfkAWwhxgggEZRer794/zfwygBOEXsy
+	 Bh700+3qb0A6kf23H6xbSevPD5NtzbaKY2SbGXGs=
+X-QQ-mid: zesmtpip2t1753169713ta05aff85
+X-QQ-Originating-IP: 65xfAki0jxPR9TUF1QvLcfebtVmeg84+TUXILAN6dYc=
 X-QQ-SSF: 0002000000000000000000000000000
 X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 12113963411255090427
+X-BIZMAIL-ID: 13454134674662907572
 EX-QQ-RecipientCnt: 64
 From: WangYuli <wangyuli@uniontech.com>
 To: wangyuli@uniontech.com
@@ -119,9 +119,9 @@ Cc: airlied@gmail.com,
 	xen-devel@lists.xenproject.org,
 	yujiaoliang@vivo.com,
 	zhanjun@uniontech.com
-Subject: [PATCH v3 2/8] cxl: mce: Fix typo "notifer"
-Date: Tue, 22 Jul 2025 15:34:25 +0800
-Message-ID: <E1EB1BA9FDF07D53+20250722073431.21983-2-wangyuli@uniontech.com>
+Subject: [PATCH v3 5/8] wifi: brcmfmac: Fix typo "notifer"
+Date: Tue, 22 Jul 2025 15:34:28 +0800
+Message-ID: <6CA31F0821E6687F+20250722073431.21983-5-wangyuli@uniontech.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <576F0D85F6853074+20250722072734.19367-1-wangyuli@uniontech.com>
 References: <576F0D85F6853074+20250722072734.19367-1-wangyuli@uniontech.com>
@@ -129,49 +129,48 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: OamaEojN7lH+aon26mnXsPHIG3m8onfE+MVo+q6dJ2XwVAu4cnMBRC3Q
-	U642pTHgkPrGIQuNQ5k71tL7ahLhTj6z+qD7wE8wrjY6MHIkusIhtI1B6E8KyMmt4CzQrz4
-	2Lfe7vWv7Yn/IMiBL0DaPEdJNll7mwN47Iw3ED66T3twB/XHz4JapwOMhSB261L9OhhMRTy
-	gTSYEVd5xsd9KK00QkPyF4I9D8fmge3tn8sYhG30m5NxeDiWBYLJU7wqWoUovg3bH03yxH+
-	05OnbbJPXokGzIj9dpuG54lgeUHrsJAjNF42mhqiRqdqwz5kRL8qy/uqAAWcAY17LyisZ+n
-	ZlSRNC4YqdoIx1xKFThn/F/zgANUvPHHpkjfyq9zoXtn6RNSp3cfEf0Th8uBP82Jxvdhn82
-	/3GUx/NIH/NS9IqUtog1yYCZqEhAKyJaUbZYLVmnPf12A1TsacVEwvnAaNab/ZKmITGy+Bb
-	bWILSqBqv3hGfhUXdUMSVi6SJdCJ01QqRZKN7+Knrr1pYJFI2YZNoDdzpK+hiG5eUEqXQsa
-	wfT5m+YWqjJ9HqMHOeQ0JUEUcNSlYqxazMOyqzK5azr3VfNQN1HLeYNP6dgIR2ONdRnCtX1
-	BuvbC7qfZ9vdSV6eCVfZ6PA01gdwTStXqMDgAPqm56esXVqzEPgp2GbREmVG8FvgWhu9RmJ
-	IgDq0PYrWPxRfPSkDzVrqHQmIDoPJEs/w+P9GPHp9lec7fx9W/zPmRK8Dxqh0BBzGsE41oy
-	86YoVLOKFuy5YV42veZnniZe4N4ymejshL7ay+S/KrljqErofDZ8pm9qSIh3l6u/kVrJl3F
-	CvNgg3REFVYfqhgbH6FhduIN1K7EVnzDYBkrCHBZAp8E9Z3noRokxUT4kjJ45DsiAfsrSoM
-	s0iRueVLyw1RXoJQP+gAHA8k53gg83i1CimwHvEA2KNGa6PsLsJO8UBzr3REZR6jzRXb3eu
-	LNdBDLmOmSJfezJGk1L9yaEnqBZGo/EfACXVMw78GAvuwbJAUtPH6DmIUcTInRWqv7BeM3Q
-	ez5DhYN4vA+fMC08SPo/HEAtBSW6ckw2x6AJSej4IiCIACt9TMBF+7YJCHq7YFecJogVUUk
-	z7/k7iNBeUZ2l2CmgpQXC0rT/j1twbCJ/YqF7QYh8j7
+X-QQ-XMAILINFO: MQzHuj/l4p1exEu9NuNMKN1TzxRjapobS0iun3hI2nqVfG1x6+jRK04f
+	tT8vlT/6r11/mry+8E2FknrTTjJ1s03Pfjm4A9ZDX4hjhDppiI+6czHkM1JRSWxADR367/i
+	e30EVLwP7CQl+hzDg+6s5bt4toKRrQHlnjGvMTmb9RilcUS8vM5HWtcVy/rsAkLU7ZjZDT5
+	javyPBlyyO/WroBBr/dBYCabMdT9yHkF3Uwu6BFb3tbo07yTqQZaK/FWucml77KxMYXDN5u
+	yWkrzEHYkSXV0YNLFdmmYv5UhcKf8sskP38SUEl99BkDjPhrQjda6yZfuM9056MXGOv75U5
+	+z8rEoymijoo5EctmrvJCxd05hD+nHOqv3xDoaqPb8IQnSuzrQuy39DtUend1Lls2fM5yze
+	GSAzU6BTCMaXRI+7CRCgu8TlTTEp/5/V2mHJBqyuRgFGEGVXiu0P5uvC/6ckAtkn9+yjv32
+	9nEJHXVr6LSA8KG0Sc/MsiNRHT57fuio6zPlRQUz2nJ7KgQHlth+eSUJqRDP/OFA3H6r8bf
+	ij06kwWYkULCQ4vWHXrdQasnr0VsPVvCF+Pu32RmK4UJjUCc1qlFcZFobELzB2NOrjsjkOD
+	Ah4nLX5dy+WFw2yoHYxDEmexDm34B3akxoMmy7pIQyi8A0Er/NFl1ee5bJmvvlBi5Ha3r7Z
+	o+3uBBtqDPQ8Wngrpm9Nca2+trlfxhqR6KEhdviIMj6XnCCPlPIPmq4cQ7Xqg/HHwgbv6eW
+	k0EajGCLWit0v173HCkl9QMXaoRvqt/j/AmuRvCwtsJmvtWMLTCiOpVXfWlIleckEapp95T
+	IJgvH0RsAC7Qml0fhLFxU5sP8u56a9UW1WmKSwtmBQTYmAMteq44iJisrmwKutIyrTnjCD6
+	oWxW7kfkGIzSSALtq7hHN1KuXPsCyG/kVmJq7ZJeq7fNkaBs9GyGEt31eX6bdKUh1YvXmV9
+	oj99lHJJdrJyRb9te+Z4txdv9mhitcK/PwKJ4hUClenjnk1s34antu7vbkOSNXe/Mod8GQx
+	bHs4aPbo9p7WnY+CIsryjBWBMxqE8iSwOEvidZHBRlL+ggax4K4nDAvZIz6kIChr3d6EnS6
+	UXIVFQOTxx8eyrv3QLTR4//ekHs7sOiykacSX/OuBywR1jod1jrydk=
 X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
 X-QQ-RECHKSPAM: 0
 
-According to the context, "mce_notifer" should be "mce_notifier".
+There is a spelling mistake of 'notifer' in the comment which
+should be 'notifier'.
 
-Fixes: 516e5bd0b6bf ("cxl: Add mce notifier to emit aliased address for extended linear cache")
-Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-Reviewed-by: Dave Jiang <dave.jiang@intel.com>
+Acked-by: Arend van Spriel <arend.vanspriel@broadcom.com>
 Signed-off-by: WangYuli <wangyuli@uniontech.com>
 ---
- drivers/cxl/core/mce.h | 2 +-
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/cxl/core/mce.h b/drivers/cxl/core/mce.h
-index ace73424eeb6..ca272e8db6c7 100644
---- a/drivers/cxl/core/mce.h
-+++ b/drivers/cxl/core/mce.h
-@@ -7,7 +7,7 @@
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+index b94c3619526c..bcd56c7c4e42 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+@@ -8313,7 +8313,7 @@ struct brcmf_cfg80211_info *brcmf_cfg80211_attach(struct brcmf_pub *drvr,
+ 	cfg->d11inf.io_type = (u8)io_type;
+ 	brcmu_d11_attach(&cfg->d11inf);
  
- #ifdef CONFIG_CXL_MCE
- int devm_cxl_register_mce_notifier(struct device *dev,
--				   struct notifier_block *mce_notifer);
-+				   struct notifier_block *mce_notifier);
- #else
- static inline int
- devm_cxl_register_mce_notifier(struct device *dev,
+-	/* regulatory notifer below needs access to cfg so
++	/* regulatory notifier below needs access to cfg so
+ 	 * assign it now.
+ 	 */
+ 	drvr->config = cfg;
 -- 
 2.50.0
 
