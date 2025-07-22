@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41C9C83F25
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 07:37:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1052028.1420546 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 462EEC83F27
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 07:37:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1052038.1420557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ue7YV-00070T-9w; Tue, 22 Jul 2025 07:36:55 +0000
+	id 1ue7Yh-0007h2-J7; Tue, 22 Jul 2025 07:37:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1052028.1420546; Tue, 22 Jul 2025 07:36:55 +0000
+Received: by outflank-mailman (output) from mailman id 1052038.1420557; Tue, 22 Jul 2025 07:37:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ue7YV-00070L-6z; Tue, 22 Jul 2025 07:36:55 +0000
-Received: by outflank-mailman (input) for mailman id 1052028;
- Tue, 22 Jul 2025 07:36:54 +0000
+	id 1ue7Yh-0007gt-G3; Tue, 22 Jul 2025 07:37:07 +0000
+Received: by outflank-mailman (input) for mailman id 1052038;
+ Tue, 22 Jul 2025 07:37:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YR2v=2D=uniontech.com=wangyuli@srs-se1.protection.inumbo.net>)
- id 1ue7YU-0005s5-2g
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 07:36:54 +0000
-Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
+ id 1ue7Yf-0005s5-LE
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 07:37:05 +0000
+Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a03e2f8a-66ce-11f0-a31d-13f23c93f187;
- Tue, 22 Jul 2025 09:36:52 +0200 (CEST)
+ id a843c5d9-66ce-11f0-a31d-13f23c93f187;
+ Tue, 22 Jul 2025 09:37:04 +0200 (CEST)
 Received: from avenger-e500 ( [localhost]) by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 22 Jul 2025 15:34:52 +0800 (CST)
+ id ; Tue, 22 Jul 2025 15:35:17 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,19 +40,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a03e2f8a-66ce-11f0-a31d-13f23c93f187
+X-Inumbo-ID: a843c5d9-66ce-11f0-a31d-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1753169762;
-	bh=WQ3Sf4JHhtwa+UH5bDz8kFE4gvdd2eiJ0Z7vB2dcJ7o=;
+	s=onoh2408; t=1753169780;
+	bh=m+UXxlrjT5dODP8ALqZgjPieqq+D0qMqbX8YRGfdS4A=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=CltOyrqts1zb0aah7ceq5QYW1xNlJh93QxsV/iWySLvnnFMliqKZ2B2gorWyore9w
-	 I3Dm9OtPsA2647VmK3rmhzsw6YEob4SZY9zQG6JiItWPdJe5OtPyP2GzoQE5nNPCeL
-	 cENGWPQm4hxS9jQgVCyLlkx00q0cWEEacEigvSLY=
-X-QQ-mid: zesmtpip2t1753169697tffff2e54
-X-QQ-Originating-IP: ESW3/iFALqzPeVYmODy1/u+VMOIzJZ60evAbDZBeNu0=
+	b=PhtDPLo9y6c3GyaY1DjEYaUY76U9ml1O7VRtDndXyrbmN86To21pHgveN2eryVQJg
+	 2c5sOxBKVLeW2Wpy+Lz7eMoTpl4dD2lKHQvsmUo0HFfMTdLBa06pvmm2psvj23btGW
+	 /Ee+AzhWHJVNqNGDDQ/cB+TWNcM52e0rOCN7vnDE=
+X-QQ-mid: zesmtpip2t1753169721t82d79e29
+X-QQ-Originating-IP: VhBpf0Yvw5Lj6PbKLNVVhr1ZGW55NX9MRAkCLXPkiaM=
 X-QQ-SSF: 0002000000000000000000000000000
 X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 11624695961033415566
+X-BIZMAIL-ID: 15702502862464076907
 EX-QQ-RecipientCnt: 64
 From: WangYuli <wangyuli@uniontech.com>
 To: wangyuli@uniontech.com
@@ -119,9 +119,9 @@ Cc: airlied@gmail.com,
 	xen-devel@lists.xenproject.org,
 	yujiaoliang@vivo.com,
 	zhanjun@uniontech.com
-Subject: [PATCH v3 3/8] drm/xe: Fix typo "notifer"
-Date: Tue, 22 Jul 2025 15:34:26 +0800
-Message-ID: <94190C5F54A19F3E+20250722073431.21983-3-wangyuli@uniontech.com>
+Subject: [PATCH v3 6/8] serial: 8250_dw: Fix typo "notifer"
+Date: Tue, 22 Jul 2025 15:34:29 +0800
+Message-ID: <BD4804BF4FBA1648+20250722073431.21983-6-wangyuli@uniontech.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <576F0D85F6853074+20250722072734.19367-1-wangyuli@uniontech.com>
 References: <576F0D85F6853074+20250722072734.19367-1-wangyuli@uniontech.com>
@@ -129,47 +129,48 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: NN5tIm2Cw++mUPQ8bcGmKLa1xMgQYZnczWcMIRHRxzkJYiByPervzJg/
-	nMUSaSdrb05pdhNel+4XNDhgrMObfI/S3OG+9SUAYwzx8E4RbCynSnXkq5mRzr/pSFacKsZ
-	hlOGLNx9OHjvgLyqGOCtokAZeoZQrhGTC16ZbWKFHCw+i/1HcXCOO2C2FNlpU3E0VJ7XNcV
-	Q0CeEotLHEFSSg/eKqN+2D8LrhuhZ5z5WanHV1sVSIWy9U2IZt7LX4Jc9wI6P4s/CPOIp2o
-	Dx9/6SsORILW6EUvQmVUtiKbfn6zIhkpZ1q2tGcOZMMz1OlVh1DbK63QlbONmZE3jdW13xC
-	KpuETBxI1xY56ik1vgFCjrTLRuGFvIS+WYIlRy+v/9aQoBL7sbfV34C3pl6b2lhpJvXY5NV
-	smHsc42utvLjtpL8dJBLyYFIcRG9B0n8XIBj8SSSHvymzQI46Dlspe3w2Ypa2qDckQC2HGV
-	dPPw80HeRywP4VZtNFOMHfgvWC2jT3yIWyhwUyH4KUrxcWCVreb+tTwXrh8hS7VXfKgyQ16
-	gxjogsVWuc2PmLXdc0EX+Dn2hZRv7xlzzlc+KDU46xTEMfkY/zXsfnjg71Hdi3gojs8F/Mr
-	GtLfqTQAk/OMFodRWjFlYW42g2IJDR2viAI72etXwLfe9tvo2u/LcjinIM4sZz+ZUN95U68
-	MwkApt0Wj+JTyQ07HbvV5UIH7VsbMClqUtS35tqCTrKeKiOXb440h3bynhc9eW8bQ8DA5NK
-	X9NvT0whqNa3O2sfoJYHKZWC5Rr5Cy6VInJhEfKInncCMSdYXqCLcLFQPaxiTjATBqUEMaB
-	CqQHzaWTxWV9GkVugdHTZCtCUxd+HIfADQpQsyuXi2nE7fpH2G3n/ytJUpPmzlb4b3082Eu
-	tcDveP2aZTHOG737v52aVMcU/1uayveXeg9704diDrAGBVzBUVh+sLdLfN1VmD5fkB656cr
-	o+wf3dbepDEpequEH1xpVMZca8l+dIwU2l2drNvVMKTqea4CawGOBSpPzL9RgiaBvyo1jOS
-	SqgOXINUn/Fg2oRGC5ticZXrft+vHcnOOJ7swdLwi/KpnN+v01WU/7liMLplpQNQ1W3trCo
-	PFrILXSMnhVuZ3zbamNGsQbZSHAFGBAqc7EhGsg6j10
-X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+X-QQ-XMAILINFO: NUD6C8ibrP4BlpyOlLDI06chYZekOUCZTlSlcpL8dzVHHwru8SSCc+Yf
+	uclUpL6SNW+PshL7oaMfB38E3p9RutDk/H/p+fLXg6OLwHGseLsqad9viM6TvN1ioul8Lqn
+	EHKSRtFC9/zEmyD4nq7HbiUNr6o20OLXsfPgDde8sPosaCWamUMOsfRsuOQFwiL9iWrgTz9
+	WQnx4W6FMtEhEJa0f7ZHQv9AzWNWWPYBxFf/GxFv0SVCWYfe/LDhs+L1RdjrgNDTwhX4uPW
+	TytUw1RsNAngUBWGQio8cl54YfP1KAb3HfrXoSqc/DOCH9l7xs4tvQ2X51QI8JkypQJ3HE5
+	0zvedK5LvOFBDNm5Bvt8lIRjnCoTcbDa3BCB4paP4LuWpl500TOTEo9zuhprepk8ZVe92Kx
+	bvthcCZ2E/IY8EbbXHev2hzsmG3nV78hEIILHUxmTA2fR5ZIovhaoQV/1sLCTYaF0T9tV1F
+	CNmgWgb0JlTHyGeSHE1yWvRxKqYDIITNpKlY8UFR+k7ebW8ZSkAwdYhYnvy6ib5eq4lPLTK
+	F/ojPixmhoHSSl5G6LzYND27bG13jmukknrO3y9KBgsq1SF4BBC6ROaP1S/FLIoW5oNyyWw
+	OeHslp/jNu9uvp8hIRsCI3+CkcFIfJ4XcZHZuWHmswvLcVOHblZJbZWumhH2t+g2OUZ7IFg
+	34O6dCZ718Qmek0M7D5hCUTYKT+DjbiYQ2QouycFLCAdXZUL5ve36UgaeacvuyntJyy6pDF
+	54RV1rXJ/0/60j7CCwEGtERi1V00Hn+H+artdgVdZlXayfHG8omeUFjeWKjXo2N+TB7+OGO
+	UECNUZ3OkYIfksg34le9OlWzACOk/zuGWg3hnMr9is/MNhlI17hvhi/s9JWGs9jzX7je50C
+	sJYnXkFnWVUe6J7GkMN+GY/89bR159kRRyPj+k9wH9L7HMJyDhB/EbJYpSySUfDEIJGxvi1
+	eM4oF4O0MjcDEUpFJ8xFsAaxzaOeC+RQDgcblV6eVUsjLedMxAHQ4Hw1WOWoX605LTVFauJ
+	T6irZALqHy/Y84jN5k7tWxSSItgaNA2qwqVmc8QG0ff9Mg0UKAt3EQbxluYffUQuPcd4gqT
+	AkT/a0rXK+afAttcWoOrdzUMv/XukhMZy0yxgr56bzdo5x99p9yVJ4=
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
 X-QQ-RECHKSPAM: 0
 
 There is a spelling mistake of 'notifer' in the comment which
 should be 'notifier'.
 
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 Signed-off-by: WangYuli <wangyuli@uniontech.com>
 ---
- drivers/gpu/drm/xe/xe_vm_types.h | 2 +-
+ drivers/tty/serial/8250/8250_dw.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/xe/xe_vm_types.h b/drivers/gpu/drm/xe/xe_vm_types.h
-index 1979e9bdbdf3..0ca27579fd1f 100644
---- a/drivers/gpu/drm/xe/xe_vm_types.h
-+++ b/drivers/gpu/drm/xe/xe_vm_types.h
-@@ -259,7 +259,7 @@ struct xe_vm {
- 		 * up for revalidation. Protected from access with the
- 		 * @invalidated_lock. Removing items from the list
- 		 * additionally requires @lock in write mode, and adding
--		 * items to the list requires either the @userptr.notifer_lock in
-+		 * items to the list requires either the @userptr.notifier_lock in
- 		 * write mode, OR @lock in write mode.
+diff --git a/drivers/tty/serial/8250/8250_dw.c b/drivers/tty/serial/8250/8250_dw.c
+index 1902f29444a1..6d9af6417620 100644
+--- a/drivers/tty/serial/8250/8250_dw.c
++++ b/drivers/tty/serial/8250/8250_dw.c
+@@ -392,7 +392,7 @@ static void dw8250_set_termios(struct uart_port *p, struct ktermios *termios,
+ 	rate = clk_round_rate(d->clk, newrate);
+ 	if (rate > 0) {
+ 		/*
+-		 * Note that any clock-notifer worker will block in
++		 * Note that any clock-notifier worker will block in
+ 		 * serial8250_update_uartclk() until we are done.
  		 */
- 		struct list_head invalidated;
+ 		ret = clk_set_rate(d->clk, newrate);
 -- 
 2.50.0
 
