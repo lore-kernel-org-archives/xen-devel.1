@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D29C2C83F27
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 16:03:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1052917.1421694 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F3BC83F1A
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 16:07:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1052925.1421706 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueFSQ-0002uM-G8; Tue, 22 Jul 2025 16:03:10 +0000
+	id 1ueFWH-0003TO-1q; Tue, 22 Jul 2025 16:07:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1052917.1421694; Tue, 22 Jul 2025 16:03:10 +0000
+Received: by outflank-mailman (output) from mailman id 1052925.1421706; Tue, 22 Jul 2025 16:07:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueFSQ-0002uF-DY; Tue, 22 Jul 2025 16:03:10 +0000
-Received: by outflank-mailman (input) for mailman id 1052917;
- Tue, 22 Jul 2025 16:03:09 +0000
+	id 1ueFWG-0003TH-Tq; Tue, 22 Jul 2025 16:07:08 +0000
+Received: by outflank-mailman (input) for mailman id 1052925;
+ Tue, 22 Jul 2025 16:07:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=D6vH=2D=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ueFSP-0002u9-IO
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 16:03:09 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=BNGt=2D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1ueFWF-0003TB-Bt
+ for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 16:07:07 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5979d638-6715-11f0-b894-0df219b8e170;
- Tue, 22 Jul 2025 18:03:04 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4563a57f947so122475e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Jul 2025 09:03:04 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-759c89cf951sm7834810b3a.36.2025.07.22.09.02.56
+ id e9005102-6715-11f0-b894-0df219b8e170;
+ Tue, 22 Jul 2025 18:07:05 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ae3cd8fdd77so1077508666b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Jul 2025 09:07:05 -0700 (PDT)
+Received: from [192.168.1.5] (user-109-243-64-38.play-internet.pl.
+ [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aec6c79ae67sm889777366b.11.2025.07.22.09.07.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Jul 2025 09:03:02 -0700 (PDT)
+ Tue, 22 Jul 2025 09:07:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,52 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5979d638-6715-11f0-b894-0df219b8e170
+X-Inumbo-ID: e9005102-6715-11f0-b894-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753200184; x=1753804984; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=PGxTgi/1QzpoIxo8dlP6eDg2Eo3GGc8W8GR2aGCiuik=;
-        b=JENHO4ndGPb/pb8R/hz4pc7+7RUgXa0l8uc0Al/Han1zBEDpCmQ2vhWEcLjbB+6XY6
-         7khG32qi+PTgBdRSR1hg+0eg0qVj5Z5NQohblUmt1dpq+U/nCBA0x8/5Ri/+Cxu2CgZp
-         t/+RjHHiaW+xIVv6FGEuhcrwchKrJ07GLQB5y2uBJBiuevtoy5k9YnkVD8YJpLRNfRAs
-         FuxbeJqdoBJeV6LKSPJ2TFCHhOl7SIbg2DAvMSv1s5m7sucQUH45Ws1lzjMbfVhNbXdt
-         y2/RgAwWMhuXtiq0SP6nJzTE2nYtAys4MiJYwSDZmHnh3PD1keYZ/1FkmqdI7zRwL8yA
-         9SZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753200184; x=1753804984;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1753200424; x=1753805224; darn=lists.xenproject.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=PGxTgi/1QzpoIxo8dlP6eDg2Eo3GGc8W8GR2aGCiuik=;
-        b=qQM4AqucP48opye8vO62yqoIZjRUkgpQOieW3SURAw3794RUUrPYJncvMu89O7W7Sh
-         Gm2mh79CHP2cxgdE94PemUl2un5fc5y04G0PZY6oHsJYZuDt+FeByMABEpqPbA/HQdDn
-         abzXsQ03wuf1bSMN79o1YYo/+1S6/uQ5ltxS+mjrEmT6W3N94tKrzxB491ZkrWShc9+C
-         ZZhYDl8vyLYpoh6ykqgEBTRTuYPp36vrB411QIp8Bf0yRJ5MyweLJgsaI4p2VA898c8c
-         6mri74LtT1FK9ejNHFhxerllJtCZdr8ki2vHiNZoI9EG+p7pA/vqR0PL82EUXAmLykTZ
-         w1Lg==
-X-Forwarded-Encrypted: i=1; AJvYcCUgFdIvCEw7JLKm98CHThlvgqa95LHYtn1RRimr60rVfrZmrcdPzBQgKkRiNidc47Gkt2NpotT+3sk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz26pQGYlKz1sQXEj0mpFZ+FrFvbh+NQBKtx4YaUwuHvaCcombh
-	A8RT5+HlXKoTqnVyD110ZOAwjAEYupkk3mss4KfmwOZdSYgTpdAKCJ7B7RamuWGvmA==
-X-Gm-Gg: ASbGncsBwOmwsaNJ1ykaIEd5w+6dJpb6ZWwUeUvwBHx8n8/qVsZJMqudTLYTDQbXPyx
-	+g4I14JP5Nnw6w/fNmyDTE4DCwhreYXa1+CIG3x9z8tPhU+lQIGv7na7trdEzFeUK3BxUKytbn+
-	I3YxNOdD0jy+koT9fHHqfRIxqrvsdkRQVu2llexui4rZ1vt0x8+dQCcOMdUCo4+RzMObHg6c3aX
-	I47bfSQXzmQDKnrlmTyrftE91qejmsADmo4P3/41Mb7Gsvxc/18fLxctb/XqBJ2LrwZeadH4v2H
-	+zJAkiZsrZWI21E9u8nNrOolLfsyizTYBfyRJcbB2ktcytI5DHuzh+lvUVFQQDOdFJx4ONQr01+
-	vyZkGNapOhMCiq9pjhF9HLqoEAU2BhZqGXxhcLM1bcIlXskYURXOFv1L3NL5Mh3equjfBG9CJKy
-	F+ZRe1Cfk=
-X-Google-Smtp-Source: AGHT+IEeCVoUWLiztJ2AVV7A52B8tJl6lvtkRIUejFzapUtKZOLRfI5vTDEs7wASwJzk2S4s41cNmw==
-X-Received: by 2002:a5d:588e:0:b0:3b6:1cba:a769 with SMTP id ffacd0b85a97d-3b7634e58d1mr3791586f8f.16.1753200183230;
-        Tue, 22 Jul 2025 09:03:03 -0700 (PDT)
-Message-ID: <6f88e20e-98dd-4d58-b459-5a67e2629f4c@suse.com>
-Date: Tue, 22 Jul 2025 18:02:52 +0200
+        bh=3Hm/xoBLRAaVt04pVM5xTtjsYX/kTKnKGb1s+6nnSYg=;
+        b=Lx/Jirj8mU9rkQh9uiW9B9Z6szjvvUJQu/TPm9g0SEM4l4nTUgOIz2oV25dp58YffU
+         MUC8lwqBTVtsmWzG3W91vcI9k2eftjDmZQ+TLG0zr9VD3oYG0ilAYvpViyopqj5VTzuu
+         nvD5SVpwfnKNQYIppj2XSK8H/znTB6/J382IHZa6Az9b6VK4GeepEcRe527TIdhjUmgC
+         aLfOINRq5yyU7ey72x53h5UXihTqTgzVBYqCftqHfe3XFDhLozbvrXPKzdk0siZb0OLw
+         gJfBXX1UH9/CAl9S1f82nGtKHptUQHQv/gQY2VnjDACEBDTzD68q54WhgG4tDg2Ei/BK
+         kjlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753200424; x=1753805224;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=3Hm/xoBLRAaVt04pVM5xTtjsYX/kTKnKGb1s+6nnSYg=;
+        b=wWMFTCsyyuCyJlumCqg9ETYQImjdSSWp3uTu/a92J4elf5it1nzt/F6FlyY0JoxTbg
+         m42Ib5v0ZxS/HWiyNU12UWKQN5nUowemUBBA6JKHvkyKKJnV1gTz/ljXD00Sm/6GH6Wy
+         ZlqeaL+lz0tH5ivG5DHKsdJ+HfxAPU3fI9crgHAuSGriGVPtUDCyDk2teNGl1BmC4IIW
+         4LRo8uWkeWvIyM8ToDeRqta4vuLknw+97hd0ln1L3esp4GM4Psq590QYNrshgz8ZH2GB
+         ElT8pc0JN7/I3Nr21MpiKQqP4ajUnX+JX4YcuMq+EAfMY+PJr+pjT7KVDVvTYlfWhpc9
+         1v8g==
+X-Forwarded-Encrypted: i=1; AJvYcCXKTE8LL6ukl06m5CEKtsaDPNR9pQywrrKXbNKIu/otdKFmdv4dEKweP1s8TYXbgl/vtaddUVX+Sgs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyZmJu71kZwk5i1CRYIOnzksQ4xc7kJvWINhtOVQDs0Ew8v557p
+	56phiMddtvRtFFaftHI+0hqIxhIRC+LRS2DudRmv78hRmtC/Xkv1RDTu
+X-Gm-Gg: ASbGncvqwuYpfkVCvTiWs7QTcmjVPMKp698EufF6Kky/bzCD+pPAxOVlHtv1hm2R52S
+	60HUX3zoxG5JhjMegOCBM0DB+R7wJoGsFTuHZUTVqvfSh/VwIjrwHGLa4Im6zvSVfbmHST3kbY5
+	DbKNNjmumJp89u6x0Hfy5aRr+XpjhZl4qx0vWk6M2Q1oGcQIUscvrHO5CZTWvcf+cqkp4RO4FBb
+	P35v9A+/Yyxoj76DiZ+qWiaKUTApEs52yqc3h1m6AH4dnV1+hWEvbwj0zX0cZgu5nj+TFlfFyrV
+	Y1T5D3p7W1PZ6eJf4WyCcrKPD8TBV7lDDrCm9tJN+WhWDMdmqVFCPsn+BoZIc3a6LnNMCjUSlE1
+	LyBfK9ULcrUtoyexWgQPyAJYq0Q3Zq1Jggv19/qY56UWRHjKCSK3AlYd+tI95Ff4XyOOLqyA=
+X-Google-Smtp-Source: AGHT+IECKDEEixHlmKryNYt9VVfxdHc6cxRSB0QaWIaHNVdRDoQctkfwGhhajy/u37eqazzeFjX3/w==
+X-Received: by 2002:a17:906:6a0a:b0:ae0:34d4:28a5 with SMTP id a640c23a62f3a-ae9cdaf527dmr2381326266b.0.1753200424061;
+        Tue, 22 Jul 2025 09:07:04 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------Ti6dDCntqxKXlmFZh0OFarQQ"
+Message-ID: <dabc1c47-f392-4fc1-9f84-36c880c6dd63@gmail.com>
+Date: Tue, 22 Jul 2025 18:07:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 15/17] xen/riscv: Implement superpage splitting for p2m
- mappings
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v2 13/17] xen/riscv: Implement p2m_entry_from_mfn() and
+ support PBMT configuration
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
  <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -101,169 +101,586 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1749555949.git.oleksii.kurochko@gmail.com>
- <7cdd3272f2eba32dfa00be4fd72da6921eac243d.1749555949.git.oleksii.kurochko@gmail.com>
- <9be8eeb4-281e-4b9b-9ea7-04ff738dc4db@suse.com>
- <e2227002-e38c-41e1-8bea-7585138ec5ba@gmail.com>
- <0c1701ff-efe3-434f-97e0-4896707411b7@suse.com>
- <640d6862-4ea9-49ca-adb8-0fad5ceb1ff1@gmail.com>
+ <994ab3dd6822c4cd02a6a576041da115abeff6ed.1749555949.git.oleksii.kurochko@gmail.com>
+ <f6e789cd-0ef3-488d-94da-1b7c94946720@suse.com>
+ <640178f8-a189-4f84-abff-0ef87ba566a5@gmail.com>
+ <0265e61a-ad08-4b6b-a87d-dba304f6d27d@suse.com>
+ <e1c469c3-47d5-4a38-8abd-985a26cb8365@gmail.com>
+ <15c9cb8e-8452-4dc3-933a-5713fc86a12a@suse.com>
+ <958ae1b0-d139-41e8-b965-43ce640569c5@gmail.com>
+ <007654f3-e26b-43b1-bc81-40ba25c9d787@suse.com>
+ <ca3467a2-c795-4709-ad92-1744b138a148@gmail.com>
+ <9e9c1943-b2af-471f-b8c9-f7179073ef99@suse.com>
+ <fb7176a2-740e-4773-b1cb-3cd430d6f838@gmail.com>
+ <f110cd42-d34b-44fc-bd76-85cb0bfc2357@gmail.com>
+ <25f17da6-1c82-422c-941a-b0eb57786c8f@suse.com>
+ <342e8524-268c-46ae-817c-5af71254b624@gmail.com>
+ <7ba83171-a377-4c3d-a33b-7edb57621bb7@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <640d6862-4ea9-49ca-adb8-0fad5ceb1ff1@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <7ba83171-a377-4c3d-a33b-7edb57621bb7@suse.com>
 
-On 22.07.2025 16:57, Oleksii Kurochko wrote:
-> 
-> On 7/21/25 3:34 PM, Jan Beulich wrote:
->> On 17.07.2025 18:37, Oleksii Kurochko wrote:
->>> On 7/2/25 11:25 AM, Jan Beulich wrote:
->>>> On 10.06.2025 15:05, Oleksii Kurochko wrote:
->>>>> Add support for down large memory mappings ("superpages") in the RISC-V
->>>>> p2m mapping so that smaller, more precise mappings ("finer-grained entries")
->>>>> can be inserted into lower levels of the page table hierarchy.
+This is a multi-part message in MIME format.
+--------------Ti6dDCntqxKXlmFZh0OFarQQ
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+On 7/22/25 4:35 PM, Jan Beulich wrote:
+> On 22.07.2025 16:25, Oleksii Kurochko wrote:
+>> On 7/22/25 2:00 PM, Jan Beulich wrote:
+>>> On 22.07.2025 13:34, Oleksii Kurochko wrote:
+>>>> On 7/22/25 12:41 PM, Oleksii Kurochko wrote:
+>>>>> On 7/21/25 2:18 PM, Jan Beulich wrote:
+>>>>>> On 18.07.2025 11:52, Oleksii Kurochko wrote:
+>>>>>>> On 7/17/25 12:25 PM, Jan Beulich wrote:
+>>>>>>>> On 17.07.2025 10:56, Oleksii Kurochko wrote:
+>>>>>>>>> On 7/16/25 6:18 PM, Jan Beulich wrote:
+>>>>>>>>>> On 16.07.2025 18:07, Oleksii Kurochko wrote:
+>>>>>>>>>>> On 7/16/25 1:31 PM, Jan Beulich wrote:
+>>>>>>>>>>>> On 15.07.2025 16:47, Oleksii Kurochko wrote:
+>>>>>>>>>>>>> On 7/1/25 5:08 PM, Jan Beulich wrote:
+>>>>>>>>>>>>>> On 10.06.2025 15:05, Oleksii Kurochko wrote:
+>>>>>>>>>>>>>>> --- a/xen/arch/riscv/p2m.c
+>>>>>>>>>>>>>>> +++ b/xen/arch/riscv/p2m.c
+>>>>>>>>>>>>>>> @@ -345,6 +345,26 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
+>>>>>>>>>>>>>>>             return __map_domain_page(p2m->root + root_table_indx);
+>>>>>>>>>>>>>>>         }
+>>>>>>>>>>>>>>>         
+>>>>>>>>>>>>>>> +static int p2m_type_radix_set(struct p2m_domain *p2m, pte_t pte, p2m_type_t t)
+>>>>>>>>>>>>>> See comments on the earlier patch regarding naming.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> +{
+>>>>>>>>>>>>>>> +    int rc;
+>>>>>>>>>>>>>>> +    gfn_t gfn = mfn_to_gfn(p2m->domain, mfn_from_pte(pte));
+>>>>>>>>>>>>>> How does this work, when you record GFNs only for Xenheap pages?
+>>>>>>>>>>>>> I think I don't understand what is an issue. Could you please provide
+>>>>>>>>>>>>> some extra details?
+>>>>>>>>>>>> Counter question: The mfn_to_gfn() you currently have is only a stub. It only
+>>>>>>>>>>>> works for 1:1 mapped domains. Can you show me the eventual final implementation
+>>>>>>>>>>>> of the function, making it possible to use it here?
+>>>>>>>>>>> At the moment, I planned to support only 1:1 mapped domains, so it is final
+>>>>>>>>>>> implementation.
+>>>>>>>>>> Isn't that on overly severe limitation?
+>>>>>>>>> I wouldn't say that it's a severe limitation, as it's just a matter of how
+>>>>>>>>> |mfn_to_gfn()| is implemented. When non-1:1 mapped domains are supported,
+>>>>>>>>> |mfn_to_gfn()| can be implemented differently, while the code where it’s called
+>>>>>>>>> will likely remain unchanged.
+>>>>>>>>>
+>>>>>>>>> What I meant in my reply is that, for the current state and current limitations,
+>>>>>>>>> this is the final implementation of|mfn_to_gfn()|. But that doesn't mean I don't
+>>>>>>>>> see the value in, or the need for, non-1:1 mapped domains—it's just that this
+>>>>>>>>> limitation simplifies development at the current stage of the RISC-V port.
+>>>>>>>> Simplification is fine in some cases, but not supporting the "normal" way of
+>>>>>>>> domain construction looks like a pretty odd restriction. I'm also curious
+>>>>>>>> how you envision to implement mfn_to_gfn() then, suitable for generic use like
+>>>>>>>> the one here. Imo, current limitation or not, you simply want to avoid use of
+>>>>>>>> that function outside of the special gnttab case.
+>>>>>>>>
+>>>>>>>>>>>>>> In this context (not sure if I asked before): With this use of a radix tree,
+>>>>>>>>>>>>>> how do you intend to bound the amount of memory that a domain can use, by
+>>>>>>>>>>>>>> making Xen insert very many entries?
+>>>>>>>>>>>>> I didn’t think about that. I assumed it would be enough to set the amount of
+>>>>>>>>>>>>> memory a guest domain can use by specifying|xen,domain-p2m-mem-mb| in the DTS,
+>>>>>>>>>>>>> or using some predefined value if|xen,domain-p2m-mem-mb| isn’t explicitly set.
+>>>>>>>>>>>> Which would require these allocations to come from that pool.
+>>>>>>>>>>> Yes, and it is true only for non-hardware domains with the current implementation.
+>>>>>>>>>> ???
+>>>>>>>>> I meant that pool is used now only for non-hardware domains at the moment.
+>>>>>>>> And how does this matter here? The memory required for the radix tree doesn't
+>>>>>>>> come from that pool anyway.
+>>>>>>> I thought that is possible to do that somehow, but looking at a code of
+>>>>>>> radix-tree.c it seems like the only one way to allocate memroy for the radix
+>>>>>>> tree isradix_tree_node_alloc() -> xzalloc(struct rcu_node).
+>>>>>>>
+>>>>>>> Then it is needed to introduce radix_tree_node_allocate(domain)
+>>>>>> That would be a possibility, but you may have seen that less than half a
+>>>>>> year ago we got rid of something along these lines. So it would require
+>>>>>> some pretty good justification to re-introduce.
+>>>>>>
+>>>>>>> or radix tree
+>>>>>>> can't be used at all for mentioned in the previous replies security reason, no?
+>>>>>> (Very) careful use may still be possible. But the downside of using this
+>>>>>> (potentially long lookup times) would always remain.
+>>>>> Could you please clarify what do you mean here by "(Very) careful"?
+>>>>> I thought about an introduction of an amount of possible keys in radix tree and if this amount
+>>>>> is 0 then stop domain. And it is also unclear what should be a value for this amount.
+>>>>> Probably, you have better idea.
 >>>>>
->>>>> To implement that the following is done:
->>>>> - Introduce p2m_split_superpage(): Recursively shatters a superpage into
->>>>>     smaller page table entries down to the target level, preserving original
->>>>>     permissions and attributes.
->>>>> - __p2m_set_entry() updated to invoke superpage splitting when inserting
->>>>>     entries at lower levels within a superpage-mapped region.
+>>>>> But generally your idea below ...
+>>>>>>>>>>>>> Also, it seems this would just lead to the issue you mentioned earlier: when
+>>>>>>>>>>>>> the memory runs out,|domain_crash()| will be called or PTE will be zapped.
+>>>>>>>>>>>> Or one domain exhausting memory would cause another domain to fail. A domain
+>>>>>>>>>>>> impacting just itself may be tolerable. But a domain affecting other domains
+>>>>>>>>>>>> isn't.
+>>>>>>>>>>> But it seems like this issue could happen in any implementation. It won't happen only
+>>>>>>>>>>> if we will have only pre-populated pool for any domain type (hardware, control, guest
+>>>>>>>>>>> domain) without ability to extend them or allocate extra pages from domheap in runtime.
+>>>>>>>>>>> Otherwise, if extra pages allocation is allowed then we can't really do something
+>>>>>>>>>>> with this issue.
+>>>>>>>>>> But that's why I brought this up: You simply have to. Or, as indicated, the
+>>>>>>>>>> moment you mark Xen security-supported on RISC-V, there will be an XSA needed.
+>>>>>>>>> Why it isn't XSA for other architectures? At least, Arm then should have such
+>>>>>>>>> XSA.
+>>>>>>>> Does Arm use a radix tree for storing types? It uses one for mem-access, but
+>>>>>>>> it's not clear to me whether that's actually a supported feature.
+>>>>>>>>
+>>>>>>>>> I don't understand why x86 won't have the same issue. Memory is the limited
+>>>>>>>>> and shared resource, so if one of the domain will use to much memory then it could
+>>>>>>>>> happen that other domains won't have enough memory for its purpose...
+>>>>>>>> The question is whether allocations are bounded. With this use of a radix tree,
+>>>>>>>> you give domains a way to have Xen allocate pretty much arbitrary amounts of
+>>>>>>>> memory to populate that tree. That unbounded-ness is the problem, not memory
+>>>>>>>> allocations in general.
+>>>>>>> Isn't radix tree key bounded to an amount of GFNs given for a domain? We can't have
+>>>>>>> more keys then a max GFN number for a domain. So a potential amount of necessary memory
+>>>>>>> for radix tree is also bounded to an amount of GFNs.
+>>>>>> To some degree yes, hence why I said "pretty much arbitrary amounts".
+>>>>>> But recall that "amount of GFNs" is a fuzzy term; I think you mean to
+>>>>>> use it to describe the amount of memory pages given to the guest. GFNs
+>>>>>> can be used for other purposes, though. Guests could e.g. grant
+>>>>>> themselves access to their own memory, then map those grants at
+>>>>>> otherwise unused GFNs.
+>>>>>>
+>>>>>>> Anyway, IIUC I just can't use radix tree for p2m types at all, right?
+>>>>>>> If yes, does it make sense to borrow 2 bits from struct page_info->type_info as now it
+>>>>>>> is used 9-bits for count of a frame?
+>>>>>> struct page_info describes MFNs, when you want to describe GFNs. As you
+>>>>>> mentioned earlier, multiple GFNs can in principle map to the same MFN.
+>>>>>> You would force them to all have the same properties, which would be in
+>>>>>> direct conflict with e.g. the grant P2M types.
+>>>>>>
+>>>>>> Just to mention one possible alternative to using radix trees: You could
+>>>>>> maintain a 2nd set of intermediate "page tables", just that leaf entries
+>>>>>> would hold meta data for the respective GFN. The memory for those "page
+>>>>>> tables" could come from the normal P2M pool (and allocation would thus
+>>>>>> only consume domain-specific resources). Of course in any model like
+>>>>>> this the question of lookup times (as mentioned above) would remain.
+>>>>> ...looks like an optimal option.
 >>>>>
->>>>> This implementation is based on the ARM code, with modifications to the part
->>>>> that follows the BBM (break-before-make) approach. Unlike ARM, RISC-V does
->>>>> not require BBM, so there is no need to invalidate the PTE and flush the
->>>>> TLB before updating it with the newly created, split page table.
->>>> But some flushing is going to be necessary. As long as you only ever do
->>>> global flushes, the one after the individual PTE modification (within the
->>>> split table) will do (if BBM isn't required, see below), but once you move
->>>> to more fine-grained flushing, that's not going to be enough anymore. Not
->>>> sure it's a good idea to leave such a pitfall.
->>> I think that I don't fully understand what is an issue.
->> Whether a flush is necessary after solely breaking up a superpage is arch-
->> defined. I don't know how much restrictions the spec on possible hardware
->> behavior for RISC-V. However, the eventual change of (at least) one entry
->> of fulfill the original request will surely require a flush. What I was
->> trying to say is that this required flush would better not also cover for
->> the flushes that may or may not be required by the spec. IOW if the spec
->> leaves any room for flushes to possibly be needed, those flushes would
->> better be explicit.
-> 
-> I think that I still don't understand why what I wrote above will work as long
-> as global flushes is working and will stop to work when more fine-grained flushing
-> is used.
-> 
-> Inside p2m_split_superpage() we don't need any kind of TLB flush operation as
-> it is allocation a new page for a table and works with it, so no one could use
-> this page at the moment and cache it in TLB.
-> 
-> The only question is that if it is needed BBM before staring using splitted entry:
->          ....
->          if ( !p2m_split_superpage(p2m, &split_pte, level, target, offsets) )
->          {
->              /* Free the allocated sub-tree */
->              p2m_free_subtree(p2m, split_pte, level);
-> 
->              rc = -ENOMEM;
->              goto out;
->          }
-> 
-> ------> /* Should be BBM used here ? */
->          p2m_write_pte(entry, split_pte, p2m->clean_pte);
-> 
-> And I can't find anything in the spec what tells me to use BBM here like Arm
-> does:
+>>>>> The only thing I worry about is that it will require some code duplication
+>>>>> (I will think how to re-use the current one code), as for example, when
+>>>>> setting/getting metadata, TLB flushing isn’t needed at all as we aren't
+>>>>> working with with real P2M page tables.
+>>>>> Agree that lookup won't be the best one, but nothing can be done with
+>>>>> such models.
+>>>> Probably, instead of having a second set of intermediate "page tables",
+>>>> we could just allocate two consecutive pages within the real P2M page
+>>>> tables for the intermediate page table. The first page would serve as
+>>>> the actual page table to which the intermediate page table points,
+>>>> and the second page would store metadata for each entry of the page
+>>>> table that the intermediate page table references.
+>>>>
+>>>> As we are supporting only 1gb, 2mb and 4kb mappings we could do a little
+>>>> optimization and start allocate these consecutive pages only for PT levels
+>>>> which corresponds to 1gb, 2mb, 4kb mappings.
+>>>>
+>>>> Does it make sense?
+>>> I was indeed entertaining this idea, but I couldn't conclude for myself if
+>>> that would indeed be without any rough edges. Hence I didn't want to
+>>> suggest such. For example, the need to have adjacent pairs of pages could
+>>> result in a higher rate of allocation failures (while populating or
+>>> re-sizing the P2M pool). This would be possible to avoid by still using
+>>> entirely separate pages, and then merely linking them together via some
+>>> unused struct page_info fields (the "normal" linking fields can't be used,
+>>> afaict).
+>> I think that all the fields are used, so it will be needed to introduce new
+>> "struct page_list_entry metadata_list;".
+> All the fields are used _somewhere_, sure. But once you have allocated a
+> page (and that page isn't assigned to a domain), you control what the
+> fields are used for.
 
-But what you need is a statement in the spec that you can get away without. Imo
-at least.
+I thought that the whole idea is to use domain's pages from P2M pool freelist,
+pages for which is allocated by alloc_domheap_page(d, MEMF_no_owner), so an
+allocated page is assigned to a domain.
 
->          /*
->           * Follow the break-before-sequence to update the entry.
->           * For more details see (D4.7.1 in ARM DDI 0487A.j).
->           */
->          p2m_remove_pte(entry, p2m->clean_pte);
->          p2m_force_tlb_flush_sync(p2m);
-> 
->          p2m_write_pte(entry, split_pte, p2m->clean_pte);
-> 
-> I agree that even BBM isn't mandated explicitly sometime it could be useful, but
-> here I am not really sure what is the point to do TLB flush before p2m_write_pte()
-> as nothing serious will happen if and old mapping will be used for a some time
-> as we are keeping the same rights for smaller (splited) mapping.
-> The reason why Arm does p2m_remove_pte() & p2m_force_tlb_flush() before updating
-> an entry here as it is doesn't guarantee that everything will be okay and they
-> explicitly tells:
->   This situation can possibly break coherency and ordering guarantees, leading to
->   inconsistent unwanted behavior in our Processing Element (PE).
-> 
-> 
->>>> As to (no need for) BBM: I couldn't find anything to that effect in the
->>>> privileged spec. Can you provide some pointer? What I found instead is e.g.
->>>> this sentence: "To ensure that implicit reads observe writes to the same
->>>> memory locations, an SFENCE.VMA instruction must be executed after the
->>>> writes to flush the relevant cached translations." And this: "Accessing the
->>>> same location using different cacheability attributes may cause loss of
->>>> coherence." (This may not only occur when the same physical address is
->>>> mapped twice at different VAs, but also after the shattering of a superpage
->>>> when the new entry differs in cacheability.)
->>> I also couldn't find that RISC-V spec mandates BBM explicitly as Arm does it.
->>>
->>> What I meant that on RISC-V can do:
->>> - Write new PTE
->>> - Flush TLB
->>>
->>> While on Arm it is almost always needed to do:
->>> - Write zero to PTE
->>> - Flush TLB
->>> - Write new PTE
->>>
->>> For example, the common CoW code path where you copy from a read only page to
->>> a new page, then map that new page as writable just works on RISC-V without
->>> extra considerations and on Arm it requires BBM.
->> CoW is a specific sub-case with increasing privilege.
-> 
-> Could you please explain why it matters increasing of privilege in terms of TLB
-> flushing and PTE clearing before writing a new PTE?
+I assume that I have in this case to take some pages for an intermediate page
+table from freelist P2M pool, set an owner domain to NULL (pg->inuse.domain = NULL).
 
-Some architectures automatically re-walk page tables when encountering a
-permission violation based on TLB contents. Hence increasing privilege
-can be a special case.
+Then in this case it isn't clear why pg->list can't be re-used to link several pages
+for intermediate page table purposes + metadata? Is it because pg->list can be not
+empty? In this case it isn't clear if I could use a page, which has threaded pages.
 
->>> It seems to me that BBM is mandated for Arm only because that TLB is shared
->>> among cores, so there is no any guarantee that no prior entry for same VA
->>> remains in TLB. In case of RISC-V's TLB isn't shared and after a flush it is
->>> guaranteed that no prior entry for the same VA remains in the TLB.
->> Not sure that's the sole reason. But again the question is: Is this written
->> down explicitly anywhere? Generally there can be multiple levels of TLBs, and
->> while some of them may be per-core, others may be shared.
-> 
-> Spec. mentions that:
->    If a hart employs an address-translation cache, that cache must appear to be
->    private to that hart.
+page_info->count_info can't be re-used as it will break put_page_*() connected stuff.
+And for similar reason page_info->v.{...} can't be re-used as then page_get_owner()
+will be broken.
+And page_info->tlbflush_timestamp still need for a common alloc algo to handle when
+to do TLB flush.
 
-Hmm, okay, that indeed pretty much excludes shared TLBs.
+So if I will add something to page_info->v.{...} or page_info->u.{...} then mentioned
+above functions can't be used anymore for such pages which are used for intermediate
+page tables.
 
-Jan
+>   Or else enlisting pages on private lists wouldn't be
+> legitimate either.
+
+Hmm, but I still should have link several pages somehow.
+Or you meant just to have a field which just store a physical address to metadata?
+(what still looks like a list)
+
+
+>
+>> Can't we introduce new PGT_METADATA type and then add metadata page to
+>> struct page_info->list and when a metadata will be needed just iterate through
+>> page_info->list and find a page with PGT_METADATA type?
+> I'd be careful with the introduction of new page types. All handling of
+> page types everywhere in the (affected part of the) code base would then
+> need auditing.
+
+~ Oleksii
+
+--------------Ti6dDCntqxKXlmFZh0OFarQQ
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 7/22/25 4:35 PM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:7ba83171-a377-4c3d-a33b-7edb57621bb7@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 22.07.2025 16:25, Oleksii Kurochko wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">On 7/22/25 2:00 PM, Jan Beulich wrote:
+</pre>
+        <blockquote type="cite">
+          <pre wrap="" class="moz-quote-pre">On 22.07.2025 13:34, Oleksii Kurochko wrote:
+</pre>
+          <blockquote type="cite">
+            <pre wrap="" class="moz-quote-pre">On 7/22/25 12:41 PM, Oleksii Kurochko wrote:
+</pre>
+            <blockquote type="cite">
+              <pre wrap="" class="moz-quote-pre">On 7/21/25 2:18 PM, Jan Beulich wrote:
+</pre>
+              <blockquote type="cite">
+                <pre wrap="" class="moz-quote-pre">On 18.07.2025 11:52, Oleksii Kurochko wrote:
+</pre>
+                <blockquote type="cite">
+                  <pre wrap="" class="moz-quote-pre">On 7/17/25 12:25 PM, Jan Beulich wrote:
+</pre>
+                  <blockquote type="cite">
+                    <pre wrap="" class="moz-quote-pre">On 17.07.2025 10:56, Oleksii Kurochko wrote:
+</pre>
+                    <blockquote type="cite">
+                      <pre wrap="" class="moz-quote-pre">On 7/16/25 6:18 PM, Jan Beulich wrote:
+</pre>
+                      <blockquote type="cite">
+                        <pre wrap="" class="moz-quote-pre">On 16.07.2025 18:07, Oleksii Kurochko wrote:
+</pre>
+                        <blockquote type="cite">
+                          <pre wrap="" class="moz-quote-pre">On 7/16/25 1:31 PM, Jan Beulich wrote:
+</pre>
+                          <blockquote type="cite">
+                            <pre wrap="" class="moz-quote-pre">On 15.07.2025 16:47, Oleksii Kurochko wrote:
+</pre>
+                            <blockquote type="cite">
+                              <pre wrap="" class="moz-quote-pre">On 7/1/25 5:08 PM, Jan Beulich wrote:
+</pre>
+                              <blockquote type="cite">
+                                <pre wrap="" class="moz-quote-pre">On 10.06.2025 15:05, Oleksii Kurochko wrote:
+</pre>
+                                <blockquote type="cite">
+                                  <pre wrap="" class="moz-quote-pre">--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -345,6 +345,26 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
+           return __map_domain_page(p2m-&gt;root + root_table_indx);
+       }
+       
++static int p2m_type_radix_set(struct p2m_domain *p2m, pte_t pte, p2m_type_t t)
+</pre>
+                                </blockquote>
+                                <pre wrap="" class="moz-quote-pre">See comments on the earlier patch regarding naming.
+
+</pre>
+                                <blockquote type="cite">
+                                  <pre wrap="" class="moz-quote-pre">+{
++    int rc;
++    gfn_t gfn = mfn_to_gfn(p2m-&gt;domain, mfn_from_pte(pte));
+</pre>
+                                </blockquote>
+                                <pre wrap="" class="moz-quote-pre">How does this work, when you record GFNs only for Xenheap pages?
+</pre>
+                              </blockquote>
+                              <pre wrap="" class="moz-quote-pre">I think I don't understand what is an issue. Could you please provide
+some extra details?
+</pre>
+                            </blockquote>
+                            <pre wrap="" class="moz-quote-pre">Counter question: The mfn_to_gfn() you currently have is only a stub. It only
+works for 1:1 mapped domains. Can you show me the eventual final implementation
+of the function, making it possible to use it here?
+</pre>
+                          </blockquote>
+                          <pre wrap="" class="moz-quote-pre">At the moment, I planned to support only 1:1 mapped domains, so it is final
+implementation.
+</pre>
+                        </blockquote>
+                        <pre wrap="" class="moz-quote-pre">Isn't that on overly severe limitation?
+</pre>
+                      </blockquote>
+                      <pre wrap="" class="moz-quote-pre">I wouldn't say that it's a severe limitation, as it's just a matter of how
+|mfn_to_gfn()| is implemented. When non-1:1 mapped domains are supported,
+|mfn_to_gfn()| can be implemented differently, while the code where it’s called
+will likely remain unchanged.
+
+What I meant in my reply is that, for the current state and current limitations,
+this is the final implementation of|mfn_to_gfn()|. But that doesn't mean I don't
+see the value in, or the need for, non-1:1 mapped domains—it's just that this
+limitation simplifies development at the current stage of the RISC-V port.
+</pre>
+                    </blockquote>
+                    <pre wrap="" class="moz-quote-pre">Simplification is fine in some cases, but not supporting the "normal" way of
+domain construction looks like a pretty odd restriction. I'm also curious
+how you envision to implement mfn_to_gfn() then, suitable for generic use like
+the one here. Imo, current limitation or not, you simply want to avoid use of
+that function outside of the special gnttab case.
+
+</pre>
+                    <blockquote type="cite">
+                      <blockquote type="cite">
+                        <blockquote type="cite">
+                          <blockquote type="cite">
+                            <blockquote type="cite">
+                              <blockquote type="cite">
+                                <pre wrap="" class="moz-quote-pre">In this context (not sure if I asked before): With this use of a radix tree,
+how do you intend to bound the amount of memory that a domain can use, by
+making Xen insert very many entries?
+</pre>
+                              </blockquote>
+                              <pre wrap="" class="moz-quote-pre">I didn’t think about that. I assumed it would be enough to set the amount of
+memory a guest domain can use by specifying|xen,domain-p2m-mem-mb| in the DTS,
+or using some predefined value if|xen,domain-p2m-mem-mb| isn’t explicitly set.
+</pre>
+                            </blockquote>
+                            <pre wrap="" class="moz-quote-pre">Which would require these allocations to come from that pool.
+</pre>
+                          </blockquote>
+                          <pre wrap="" class="moz-quote-pre">Yes, and it is true only for non-hardware domains with the current implementation.
+</pre>
+                        </blockquote>
+                        <pre wrap="" class="moz-quote-pre">???
+</pre>
+                      </blockquote>
+                      <pre wrap="" class="moz-quote-pre">I meant that pool is used now only for non-hardware domains at the moment.
+</pre>
+                    </blockquote>
+                    <pre wrap="" class="moz-quote-pre">And how does this matter here? The memory required for the radix tree doesn't
+come from that pool anyway.
+</pre>
+                  </blockquote>
+                  <pre wrap="" class="moz-quote-pre">I thought that is possible to do that somehow, but looking at a code of
+radix-tree.c it seems like the only one way to allocate memroy for the radix
+tree isradix_tree_node_alloc() -&gt; xzalloc(struct rcu_node).
+
+Then it is needed to introduce radix_tree_node_allocate(domain)
+</pre>
+                </blockquote>
+                <pre wrap="" class="moz-quote-pre">That would be a possibility, but you may have seen that less than half a
+year ago we got rid of something along these lines. So it would require
+some pretty good justification to re-introduce.
+
+</pre>
+                <blockquote type="cite">
+                  <pre wrap="" class="moz-quote-pre">or radix tree
+can't be used at all for mentioned in the previous replies security reason, no?
+</pre>
+                </blockquote>
+                <pre wrap="" class="moz-quote-pre">(Very) careful use may still be possible. But the downside of using this
+(potentially long lookup times) would always remain.
+</pre>
+              </blockquote>
+              <pre wrap="" class="moz-quote-pre">Could you please clarify what do you mean here by "(Very) careful"?
+I thought about an introduction of an amount of possible keys in radix tree and if this amount
+is 0 then stop domain. And it is also unclear what should be a value for this amount.
+Probably, you have better idea.
+
+But generally your idea below ...
+</pre>
+              <blockquote type="cite">
+                <blockquote type="cite">
+                  <blockquote type="cite">
+                    <blockquote type="cite">
+                      <blockquote type="cite">
+                        <blockquote type="cite">
+                          <blockquote type="cite">
+                            <blockquote type="cite">
+                              <pre wrap="" class="moz-quote-pre">Also, it seems this would just lead to the issue you mentioned earlier: when
+the memory runs out,|domain_crash()| will be called or PTE will be zapped.
+</pre>
+                            </blockquote>
+                            <pre wrap="" class="moz-quote-pre">Or one domain exhausting memory would cause another domain to fail. A domain
+impacting just itself may be tolerable. But a domain affecting other domains
+isn't.
+</pre>
+                          </blockquote>
+                          <pre wrap="" class="moz-quote-pre">But it seems like this issue could happen in any implementation. It won't happen only
+if we will have only pre-populated pool for any domain type (hardware, control, guest
+domain) without ability to extend them or allocate extra pages from domheap in runtime.
+Otherwise, if extra pages allocation is allowed then we can't really do something
+with this issue.
+</pre>
+                        </blockquote>
+                        <pre wrap="" class="moz-quote-pre">But that's why I brought this up: You simply have to. Or, as indicated, the
+moment you mark Xen security-supported on RISC-V, there will be an XSA needed.
+</pre>
+                      </blockquote>
+                      <pre wrap="" class="moz-quote-pre">Why it isn't XSA for other architectures? At least, Arm then should have such
+XSA.
+</pre>
+                    </blockquote>
+                    <pre wrap="" class="moz-quote-pre">Does Arm use a radix tree for storing types? It uses one for mem-access, but
+it's not clear to me whether that's actually a supported feature.
+
+</pre>
+                    <blockquote type="cite">
+                      <pre wrap="" class="moz-quote-pre">I don't understand why x86 won't have the same issue. Memory is the limited
+and shared resource, so if one of the domain will use to much memory then it could
+happen that other domains won't have enough memory for its purpose...
+</pre>
+                    </blockquote>
+                    <pre wrap="" class="moz-quote-pre">The question is whether allocations are bounded. With this use of a radix tree,
+you give domains a way to have Xen allocate pretty much arbitrary amounts of
+memory to populate that tree. That unbounded-ness is the problem, not memory
+allocations in general.
+</pre>
+                  </blockquote>
+                  <pre wrap="" class="moz-quote-pre">Isn't radix tree key bounded to an amount of GFNs given for a domain? We can't have
+more keys then a max GFN number for a domain. So a potential amount of necessary memory
+for radix tree is also bounded to an amount of GFNs.
+</pre>
+                </blockquote>
+                <pre wrap="" class="moz-quote-pre">To some degree yes, hence why I said "pretty much arbitrary amounts".
+But recall that "amount of GFNs" is a fuzzy term; I think you mean to
+use it to describe the amount of memory pages given to the guest. GFNs
+can be used for other purposes, though. Guests could e.g. grant
+themselves access to their own memory, then map those grants at
+otherwise unused GFNs.
+
+</pre>
+                <blockquote type="cite">
+                  <pre wrap="" class="moz-quote-pre">Anyway, IIUC I just can't use radix tree for p2m types at all, right?
+If yes, does it make sense to borrow 2 bits from struct page_info-&gt;type_info as now it
+is used 9-bits for count of a frame?
+</pre>
+                </blockquote>
+                <pre wrap="" class="moz-quote-pre">struct page_info describes MFNs, when you want to describe GFNs. As you
+mentioned earlier, multiple GFNs can in principle map to the same MFN.
+You would force them to all have the same properties, which would be in
+direct conflict with e.g. the grant P2M types.
+
+Just to mention one possible alternative to using radix trees: You could
+maintain a 2nd set of intermediate "page tables", just that leaf entries
+would hold meta data for the respective GFN. The memory for those "page
+tables" could come from the normal P2M pool (and allocation would thus
+only consume domain-specific resources). Of course in any model like
+this the question of lookup times (as mentioned above) would remain.
+</pre>
+              </blockquote>
+              <pre wrap="" class="moz-quote-pre">...looks like an optimal option.
+
+The only thing I worry about is that it will require some code duplication
+(I will think how to re-use the current one code), as for example, when
+setting/getting metadata, TLB flushing isn’t needed at all as we aren't
+working with with real P2M page tables.
+Agree that lookup won't be the best one, but nothing can be done with
+such models.
+</pre>
+            </blockquote>
+            <pre wrap="" class="moz-quote-pre">Probably, instead of having a second set of intermediate "page tables",
+we could just allocate two consecutive pages within the real P2M page
+tables for the intermediate page table. The first page would serve as
+the actual page table to which the intermediate page table points,
+and the second page would store metadata for each entry of the page
+table that the intermediate page table references.
+
+As we are supporting only 1gb, 2mb and 4kb mappings we could do a little
+optimization and start allocate these consecutive pages only for PT levels
+which corresponds to 1gb, 2mb, 4kb mappings.
+
+Does it make sense?
+</pre>
+          </blockquote>
+          <pre wrap="" class="moz-quote-pre">I was indeed entertaining this idea, but I couldn't conclude for myself if
+that would indeed be without any rough edges. Hence I didn't want to
+suggest such. For example, the need to have adjacent pairs of pages could
+result in a higher rate of allocation failures (while populating or
+re-sizing the P2M pool). This would be possible to avoid by still using
+entirely separate pages, and then merely linking them together via some
+unused struct page_info fields (the "normal" linking fields can't be used,
+afaict).
+</pre>
+        </blockquote>
+        <pre wrap="" class="moz-quote-pre">
+I think that all the fields are used, so it will be needed to introduce new
+"struct page_list_entry metadata_list;".
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+All the fields are used _somewhere_, sure. But once you have allocated a
+page (and that page isn't assigned to a domain), you control what the
+fields are used for.</pre>
+    </blockquote>
+    <pre>I thought that the whole idea is to use domain's pages from P2M pool freelist,
+pages for which is allocated by alloc_domheap_page(d, MEMF_no_owner), so an
+allocated page is assigned to a domain.
+
+I assume that I have in this case to take some pages for an intermediate page
+table from freelist P2M pool, set an owner domain to NULL (pg-&gt;inuse.domain = NULL).
+
+Then in this case it isn't clear why pg-&gt;list can't be re-used to link several pages
+for intermediate page table purposes + metadata? Is it because pg-&gt;list can be not
+empty? In this case it isn't clear if I could use a page, which has threaded pages.
+
+page_info-&gt;count_info can't be re-used as it will break put_page_*() connected stuff.
+And for similar reason page_info-&gt;v.{...} can't be re-used as then page_get_owner()
+will be broken.
+And page_info-&gt;tlbflush_timestamp still need for a common alloc algo to handle when
+to do TLB flush.
+
+So if I will add something to page_info-&gt;v.{...} or page_info-&gt;u.{...} then mentioned
+above functions can't be used anymore for such pages which are used for intermediate
+page tables.
+
+</pre>
+    <p></p>
+    <blockquote type="cite"
+      cite="mid:7ba83171-a377-4c3d-a33b-7edb57621bb7@suse.com">
+      <pre wrap="" class="moz-quote-pre"> Or else enlisting pages on private lists wouldn't be
+legitimate either.</pre>
+    </blockquote>
+    <pre>Hmm, but I still should have link several pages somehow.
+Or you meant just to have a field which just store a physical address to metadata?
+(what still looks like a list)
+
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:7ba83171-a377-4c3d-a33b-7edb57621bb7@suse.com">
+      <pre wrap="" class="moz-quote-pre">
+
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">Can't we introduce new PGT_METADATA type and then add metadata page to
+struct page_info-&gt;list and when a metadata will be needed just iterate through
+page_info-&gt;list and find a page with PGT_METADATA type?
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+I'd be careful with the introduction of new page types. All handling of
+page types everywhere in the (affected part of the) code base would then
+need auditing.
+</pre>
+    </blockquote>
+    <pre>~ Oleksii
+</pre>
+  </body>
+</html>
+
+--------------Ti6dDCntqxKXlmFZh0OFarQQ--
 
