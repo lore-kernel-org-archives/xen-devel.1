@@ -4,34 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FDFC83F27
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jul 2025 23:49:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1053122.1421890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ADCBC83F1A
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Jul 2025 00:12:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1053137.1421901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueMj5-0007pM-0P; Tue, 22 Jul 2025 23:48:51 +0000
+	id 1ueN5Q-0004dV-OL; Wed, 23 Jul 2025 00:11:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1053122.1421890; Tue, 22 Jul 2025 23:48:50 +0000
+Received: by outflank-mailman (output) from mailman id 1053137.1421901; Wed, 23 Jul 2025 00:11:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueMj4-0007pF-TW; Tue, 22 Jul 2025 23:48:50 +0000
-Received: by outflank-mailman (input) for mailman id 1053122;
- Tue, 22 Jul 2025 23:48:49 +0000
+	id 1ueN5Q-0004dO-LP; Wed, 23 Jul 2025 00:11:56 +0000
+Received: by outflank-mailman (input) for mailman id 1053137;
+ Wed, 23 Jul 2025 00:11:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=X0Ar=2D=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1ueMj3-0007p9-Ie
- for xen-devel@lists.xenproject.org; Tue, 22 Jul 2025 23:48:49 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 63c703bc-6756-11f0-b894-0df219b8e170;
- Wed, 23 Jul 2025 01:48:39 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 28E31668B0;
- Tue, 22 Jul 2025 23:48:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 663C0C4CEEB;
- Tue, 22 Jul 2025 23:48:36 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=FKYz=2E=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1ueN5N-0004dF-Lv
+ for xen-devel@lists.xenproject.org; Wed, 23 Jul 2025 00:11:54 +0000
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
+ [79.135.106.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a0d0d97e-6759-11f0-b894-0df219b8e170;
+ Wed, 23 Jul 2025 02:11:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,58 +38,329 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63c703bc-6756-11f0-b894-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753228117;
-	bh=VxWahGEoXvR5nFCiQ0BptwCa+xj8XGLhW3uMWFJl5xI=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=Tpe6d+/AxadwWe27JGKzGCUohq9HPx9nj6SiPTsrslDgITkGcCEkspjhUP0odhlET
-	 Mvl7XS7rv7bFYgtZQl69nsu48chhZHOs5Fii0eHLHv9gYYJws3+8EnSiOYA7kJ5usZ
-	 zPI+rshkj+oY+TMkqziuJK2txxzeHxy/7zhhKc0p8e64h/ZKdnmz+yDrvFi00QZm7o
-	 HV1xFCkKvlru4TYeNM9yZEPjRomEnwgZMfWjhXkS8JWL2J0/suKpIEyxIcrV2XUz/u
-	 jIjt34CfrXxqrFCfJYS7oXgeMGx9UxsM/er1G/pp7XhlzX2/EbMgIRdmQLbau625xm
-	 BtPpghxGp4Dkw==
-Date: Tue, 22 Jul 2025 16:48:35 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-cc: Jan Beulich <jbeulich@suse.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    Anthony PERARD <anthony.perard@vates.tech>, 
-    Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-    "Daniel P . Smith" <dpsmith@apertussolutions.com>
-Subject: Re: [PATCH 2/2] x86: generalise vcpu0 creation for a domain
-In-Reply-To: <DBF3328087KY.3CR27JZGGQXV4@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2507221646110.7043@ubuntu-linux-20-04-desktop>
-References: <20250717175128.462996-1-alejandro.garciavallejo@amd.com> <20250717175128.462996-3-alejandro.garciavallejo@amd.com> <62d11511-b856-41c6-a2f5-5625a5e3edbc@amd.com> <alpine.DEB.2.22.394.2507171657180.15546@ubuntu-linux-20-04-desktop>
- <426330c3-ab77-46ae-89eb-1b67224afd3f@suse.com> <DBF3328087KY.3CR27JZGGQXV4@amd.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: a0d0d97e-6759-11f0-b894-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1753229508; x=1753488708;
+	bh=fNHoDBAmvU79AHAZMwn/e0JiaMLeQRzPYLSf6wZ5+Ns=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=Hen3L7WsrTaTtIj1KBHdhVG2MTTWveBzJ+lbuMt1UpUm1n03EXx3jrdse8c6Lr4pp
+	 P64iQcs2U5d9JDuehZ1V0cjSY96v4KbLc5ScowR3p8TazceT6kvO1UDPUu5StB7gsE
+	 ChUYv2/slA9hfCkLktt+g3ximi4dtk05EXqlKjHqZkbwPtvwlVD/X1onA+uuDw2ceo
+	 cwvk38dkGEpynwcQZu+HfFpcOgRhmohRqHeCoOFr8LRIhjMhclwc5DyUvRnAsezKD0
+	 Vjq5TvIJTM7mIUJZiP3dx8YPJNVfHIjg4dhN0GG84yg5hnF9PpqYm4/xaC1GRlfYFe
+	 QhWB7jlVJPNLg==
+Date: Wed, 23 Jul 2025 00:11:41 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: alejandro.garciavallejo@amd.com, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v9] xen/console: introduce domain_console struct
+Message-ID: <20250723001116.186009-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 394fc6da0ed7a3181d76932eb81c5dc6b3e8b049
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 18 Jul 2025, Alejandro Vallejo wrote:
-> Some arguments do want to be adjusted one way or the other spec_ctrl.c makes
-> heavy assumptions about there not being any hwdom/ctldom separation, and both
-> having domain_id == 0. There are other cases.
-> 
-> Yet another option is to single-out the Hyperlaunch/dom0less case and never
-> apply dom0 commandline overrides there (dom0_*=). It'd be a flag in
-> boot_domain. Might even allow us to compile them out altogether for
-> dom0less-only configurations (e.g: CONFIG_DOM0LESS_BOOT && !CONFIG_DOM0_BOOT, or
-> something like that).
-> 
-> Thoughts?
+From: Denis Mukhin <dmukhin@ford.com>=20
 
-I have been reviewing this in more detail, including the WIP draft that
-Alejandro has not yet submitted to xen-devel, which completes the
-hyperlaunch/dom0less enablement on x86. I think we should apply all
-dom0 command line arguments exactly as they are to both classic Dom0 and
-the hardware domain (and only to the hardware domain).
+Introduce domain_console for grouping data structures used for integrating
+domain's diagnostic console with Xen's console driver.
 
-This is the simplest approach and the only one that would work with the
-current code.
+Group all pbuf-related data structures under domain_console. Rename the mov=
+ed
+fields to plain .buf, .idx and .lock names, since all uses of the fields ar=
+e
+touched.
+
+Bump the domain console buffer allocation size to 256. No extra symbol for =
+the
+value since it is used only once during data structure declaration. All siz=
+e
+checks use ARRAY_SIZE().
+
+Allocate domain_console from the heap so that the parent domain struct size
+stays below PAGE_SIZE boundary to account for more console-related fields
+added in the future. Ensure accesses to domain_console pointer are valid in
+console_switch_input() and hvm_print_line().
+
+Finally, update the domain_console allocation and initialization code.
+
+No functional change.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v8:
+- ensure accesses to domain_console pointer are valid in
+  console_switch_input() and hvm_print_line()
+- updated comment for domain_console field
+
+Link to v8: https://lore.kernel.org/xen-devel/20250716020447.1029992-1-dmuk=
+hin@ford.com/
+---
+ xen/arch/arm/vpl011.c      |  2 +-
+ xen/arch/x86/hvm/hvm.c     | 22 ++++++++++++++--------
+ xen/arch/x86/pv/shim.c     |  2 +-
+ xen/common/domain.c        | 19 +++++++++----------
+ xen/drivers/char/console.c | 28 ++++++++++++++++------------
+ xen/include/xen/sched.h    | 24 +++++++++++++-----------
+ 6 files changed, 54 insertions(+), 43 deletions(-)
+
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 480fc664fc62..d0d17c76b72c 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -713,7 +713,7 @@ int domain_vpl011_init(struct domain *d, struct vpl011_=
+init_info *info)
+     }
+     else
+     {
+-        d->console.input_allowed =3D true;
++        d->console->input_allowed =3D true;
+         vpl011->backend_in_domain =3D false;
+=20
+         vpl011->backend.xen =3D xzalloc(struct vpl011_xen_backend);
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 56c7de39778b..394b07303a60 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -559,7 +559,8 @@ void hvm_do_resume(struct vcpu *v)
+ static int cf_check hvm_print_line(
+     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
+ {
+-    struct domain *cd =3D current->domain;
++    struct domain *d =3D current->domain;
++    struct domain_console *cons =3D d->console;
+     char c =3D *val;
+=20
+     ASSERT(bytes =3D=3D 1 && port =3D=3D XEN_HVM_DEBUGCONS_IOPORT);
+@@ -571,16 +572,21 @@ static int cf_check hvm_print_line(
+     if ( !is_console_printable(c) )
+         return X86EMUL_OKAY;
+=20
+-    spin_lock(&cd->pbuf_lock);
++    rcu_lock_domain(d);
++
++    spin_lock(&cons->lock);
++    ASSERT(cons->idx < ARRAY_SIZE(cons->buf));
+     if ( c !=3D '\n' )
+-        cd->pbuf[cd->pbuf_idx++] =3D c;
+-    if ( (cd->pbuf_idx =3D=3D (DOMAIN_PBUF_SIZE - 1)) || (c =3D=3D '\n') )
++        cons->buf[cons->idx++] =3D c;
++    if ( (cons->idx =3D=3D (ARRAY_SIZE(cons->buf) - 1)) || (c =3D=3D '\n')=
+ )
+     {
+-        cd->pbuf[cd->pbuf_idx] =3D '\0';
+-        guest_printk(cd, XENLOG_G_DEBUG "%s\n", cd->pbuf);
+-        cd->pbuf_idx =3D 0;
++        cons->buf[cons->idx] =3D '\0';
++        guest_printk(d, XENLOG_G_DEBUG "%s\n", cons->buf);
++        cons->idx =3D 0;
+     }
+-    spin_unlock(&cd->pbuf_lock);
++    spin_unlock(&cons->lock);
++
++    rcu_unlock_domain(d);
+=20
+     return X86EMUL_OKAY;
+ }
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index bc2a7dd5fae5..bd29c53a2d34 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -239,7 +239,7 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgen=
+try_t *l4start,
+      */
+     d->max_pages =3D domain_tot_pages(d);
+=20
+-    d->console.input_allowed =3D true;
++    d->console->input_allowed =3D true;
+ }
+=20
+ static void write_start_info(struct domain *d)
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 303c338ef293..caef4cc8d649 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -669,7 +669,7 @@ static void _domain_destroy(struct domain *d)
+     BUG_ON(!d->is_dying);
+     BUG_ON(atomic_read(&d->refcnt) !=3D DOMAIN_DESTROYED);
+=20
+-    xfree(d->pbuf);
++    xvfree(d->console);
+=20
+     argo_destroy(d);
+=20
+@@ -835,8 +835,6 @@ struct domain *domain_create(domid_t domid,
+         flags |=3D CDF_hardware;
+         if ( old_hwdom )
+             old_hwdom->cdf &=3D ~CDF_hardware;
+-
+-        d->console.input_allowed =3D true;
+     }
+=20
+     /* Holding CDF_* internal flags. */
+@@ -866,8 +864,6 @@ struct domain *domain_create(domid_t domid,
+     spin_lock_init(&d->shutdown_lock);
+     d->shutdown_code =3D SHUTDOWN_CODE_INVALID;
+=20
+-    spin_lock_init(&d->pbuf_lock);
+-
+     rwlock_init(&d->vnuma_rwlock);
+=20
+ #ifdef CONFIG_HAS_PCI
+@@ -877,6 +873,14 @@ struct domain *domain_create(domid_t domid,
+=20
+     /* All error paths can depend on the above setup. */
+=20
++    err =3D -ENOMEM;
++    d->console =3D xvzalloc(typeof(*d->console));
++    if ( !d->console )
++        goto fail;
++
++    spin_lock_init(&d->console->lock);
++    d->console->input_allowed =3D is_hardware_domain(d);
++
+     /*
+      * Allocate d->vcpu[] and set ->max_vcpus up early.  Various per-domai=
+n
+      * resources want to be sized based on max_vcpus.
+@@ -959,11 +963,6 @@ struct domain *domain_create(domid_t domid,
+     if ( (err =3D argo_init(d)) !=3D 0 )
+         goto fail;
+=20
+-    err =3D -ENOMEM;
+-    d->pbuf =3D xzalloc_array(char, DOMAIN_PBUF_SIZE);
+-    if ( !d->pbuf )
+-        goto fail;
+-
+     if ( (err =3D sched_init_domain(d, config->cpupool_id)) !=3D 0 )
+         goto fail;
+=20
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index c5afac9f7259..7ed0523b7200 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -523,7 +523,7 @@ struct domain *console_get_domain(void)
+     if ( !d )
+         return NULL;
+=20
+-    if ( d->console.input_allowed )
++    if ( d->console->input_allowed )
+         return d;
+=20
+     rcu_unlock_domain(d);
+@@ -564,10 +564,13 @@ static void console_switch_input(void)
+         d =3D rcu_lock_domain_by_id(domid);
+         if ( d )
+         {
+-            rcu_unlock_domain(d);
+-
+-            if ( !d->console.input_allowed )
++            if ( !d->console->input_allowed )
++            {
++                rcu_unlock_domain(d);
+                 continue;
++            }
++
++            rcu_unlock_domain(d);
+=20
+             console_rx =3D next_rx;
+             printk("*** Serial input to DOM%u", domid);
+@@ -746,6 +749,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(=
+char) buffer,
+         else
+         {
+             char *kin =3D kbuf, *kout =3D kbuf, c;
++            struct domain_console *cons =3D cd->console;
+=20
+             /* Strip non-printable characters */
+             do
+@@ -758,22 +762,22 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARA=
+M(char) buffer,
+             } while ( --kcount > 0 );
+=20
+             *kout =3D '\0';
+-            spin_lock(&cd->pbuf_lock);
++            spin_lock(&cons->lock);
+             kcount =3D kin - kbuf;
+             if ( c !=3D '\n' &&
+-                 (cd->pbuf_idx + (kout - kbuf) < (DOMAIN_PBUF_SIZE - 1)) )
++                 (cons->idx + (kout - kbuf) < (ARRAY_SIZE(cons->buf) - 1))=
+ )
+             {
+                 /* buffer the output until a newline */
+-                memcpy(cd->pbuf + cd->pbuf_idx, kbuf, kout - kbuf);
+-                cd->pbuf_idx +=3D (kout - kbuf);
++                memcpy(cons->buf + cons->idx, kbuf, kout - kbuf);
++                cons->idx +=3D kout - kbuf;
+             }
+             else
+             {
+-                cd->pbuf[cd->pbuf_idx] =3D '\0';
+-                guest_printk(cd, XENLOG_G_DEBUG "%s%s\n", cd->pbuf, kbuf);
+-                cd->pbuf_idx =3D 0;
++                cons->buf[cons->idx] =3D '\0';
++                guest_printk(cd, XENLOG_G_DEBUG "%s%s\n", cons->buf, kbuf)=
+;
++                cons->idx =3D 0;
+             }
+-            spin_unlock(&cd->pbuf_lock);
++            spin_unlock(&cons->lock);
+         }
+=20
+         guest_handle_add_offset(buffer, kcount);
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index fe53d4fab7ba..c828d5626dea 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -371,6 +371,17 @@ struct evtchn_port_ops;
+=20
+ #define MAX_NR_IOREQ_SERVERS 8
+=20
++/* Domain console settings. */
++struct domain_console {
++    /* Permission to take ownership of the physical console input. */
++    bool input_allowed;
++
++    /* hvm_print_line() and guest_console_write() logging. */
++    unsigned int idx;
++    spinlock_t lock;
++    char buf[256];
++};
++
+ struct domain
+ {
+     domid_t          domain_id;
+@@ -562,12 +573,6 @@ struct domain
+     /* Control-plane tools handle for this domain. */
+     xen_domain_handle_t handle;
+=20
+-    /* hvm_print_line() and guest_console_write() logging. */
+-#define DOMAIN_PBUF_SIZE 200
+-    char       *pbuf;
+-    unsigned int pbuf_idx;
+-    spinlock_t  pbuf_lock;
+-
+     /* OProfile support. */
+     struct xenoprof *xenoprof;
+=20
+@@ -652,11 +657,8 @@ struct domain
+     const unsigned int *llc_colors;
+ #endif
+=20
+-    /* Console settings. */
+-    struct {
+-        /* Permission to take ownership of the physical console input. */
+-        bool input_allowed;
+-    } console;
++    /* Pointer to console settings; NULL for system Xen domains. */
++    struct domain_console *console;
+ } __aligned(PAGE_SIZE);
+=20
+ static inline struct page_list_head *page_to_list(
+--=20
+2.34.1
+
 
 
