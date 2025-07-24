@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD16C83F26
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 05:51:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1055181.1423643 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E68AC83F26
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 07:29:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1055315.1423722 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueoqk-0005Jj-9E; Thu, 24 Jul 2025 05:50:38 +0000
+	id 1ueqOG-0005TX-Vf; Thu, 24 Jul 2025 07:29:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1055181.1423643; Thu, 24 Jul 2025 05:50:38 +0000
+Received: by outflank-mailman (output) from mailman id 1055315.1423722; Thu, 24 Jul 2025 07:29:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueoqk-0005Jc-5m; Thu, 24 Jul 2025 05:50:38 +0000
-Received: by outflank-mailman (input) for mailman id 1055181;
- Thu, 24 Jul 2025 05:50:36 +0000
+	id 1ueqOG-0005TQ-TA; Thu, 24 Jul 2025 07:29:20 +0000
+Received: by outflank-mailman (input) for mailman id 1055315;
+ Thu, 24 Jul 2025 07:29:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=42zg=2F=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1ueoqi-00055h-7R
- for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 05:50:36 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20605.outbound.protection.outlook.com
- [2a01:111:f403:2009::605])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=P0IF=2F=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1ueqOF-0005TK-DQ
+ for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 07:29:19 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1cf06d33-6852-11f0-a31e-13f23c93f187;
- Thu, 24 Jul 2025 07:50:33 +0200 (CEST)
-Received: from SJ0PR03CA0125.namprd03.prod.outlook.com (2603:10b6:a03:33c::10)
- by IA1PR12MB7616.namprd12.prod.outlook.com (2603:10b6:208:427::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Thu, 24 Jul
- 2025 05:50:29 +0000
-Received: from SJ5PEPF000001CC.namprd05.prod.outlook.com
- (2603:10b6:a03:33c:cafe::7a) by SJ0PR03CA0125.outlook.office365.com
- (2603:10b6:a03:33c::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8964.22 via Frontend Transport; Thu,
- 24 Jul 2025 05:50:28 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001CC.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8964.20 via Frontend Transport; Thu, 24 Jul 2025 05:50:28 +0000
-Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Jul
- 2025 00:50:26 -0500
+ id e75f10fa-685f-11f0-a31e-13f23c93f187;
+ Thu, 24 Jul 2025 09:29:16 +0200 (CEST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a6cdc27438so565025f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 00:29:16 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b76fc604bcsm1266832f8f.17.2025.07.24.00.29.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Jul 2025 00:29:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,213 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1cf06d33-6852-11f0-a31e-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fDs61jMyi3D44Fq7yk3Pk2HPlHSHSnKb/FLdIQpa/NYgBNbUh7SEZ0rT5USXdRAp6ZPx1iZqZqnSognsbwtEFhwInH8lCG2r9QBs1t1zvxm6TR77S+KPI+WA40y+dS+y1FPljYP+DghF74W3rWpBn53hyFmK3iLF/cp401D96zRzFakSdf8C57qCFfqXnklcxAtlFWuKA4pPA0t8O3T/2rIQRUrgHy8Vh0bnNl0X69jpy2o5Qbo+TJYWGUWJWFUtGh9ZySV01+FfoThUYiN0diGQf1p7OYm2bMNxuKS18yHC0KevfldP1rn1EydMhTg62Grn1CE5jh5ffRNwZkJ6tw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EpMjTV163lpTRT7Bn9+BYXZkWjY+J7JWQ8DqZf2HCaE=;
- b=tPDke2/UuVfCQx2/sPi8bpaMTCho+hHwwtOdeMqrbyCCwr8cJ5abSqGeKSSxAOX+0kRG5nLwGRD4MBebzFzCWbmotFt49GKLI/oQyYc4UcRksyRxbzb1c4KenXa7PMsW0pimbZiSAHMNqnEvsmZMvsdr6VTM7XT3KJOb92dlVcU/YwY6D7ZDouIEsbKYIaPVe4YfM97fohXsYV6Ipyj7IVrmbyKHQNvMmXaoAkgFusYBNoin7l2q0xu1rh9qH0crQG2Jp3+viCbbKOCTfiYEWV4BXb/71G7FNHe2iLpSDaQjOlChf8Dotk/uhgZVtSd5T6DzmI38chkx1z5AlxwX3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EpMjTV163lpTRT7Bn9+BYXZkWjY+J7JWQ8DqZf2HCaE=;
- b=K+eVuGK/HOSJ588wddZiw/C9wIuKO9kOZt3hf1yI3imWPtTGbek37vC2TASefPFqgdMUqdfloduyhtPR+QPuKBiFQRunJScV/wWUlWI46ynHk04E/aAJDcsLqmpao3MKuzCM7t8AdZGJzVCrboPnsZATdS1pL+oOt3bOxONTMKQ=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Jiqian Chen <Jiqian.Chen@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v8 1/8] vpci/header: Emulate extended capability list for dom0
-Date: Thu, 24 Jul 2025 13:49:59 +0800
-Message-ID: <20250724055006.29843-2-Jiqian.Chen@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250724055006.29843-1-Jiqian.Chen@amd.com>
-References: <20250724055006.29843-1-Jiqian.Chen@amd.com>
+X-Inumbo-ID: e75f10fa-685f-11f0-a31e-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1753342155; x=1753946955; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=FTUx+HgdsXEHddqbLJFja4Wg2rJbm/VzE1AZq4t/+1Q=;
+        b=SkJk3ZCdyHFkIogbAUucxI5u2xbFlM/I1unmLHhDcWRHrXjrNlGrb3+3gqxM7aUDNX
+         KxuJO6fNhQrvB5BLi1pVbKjyV5Wc0Bqc8UZSc/BKivpNUYQqNnh8k304fVO+JDL0/8ub
+         nv6JZIY3h0jB5MyvjpAP83MHnib3sqdMfVydhlGMs+bWlcyjzjhfg+I+VRUh6NCgc4iL
+         gf5a7YBxd5oTMIyd4xwBgOt+uBlRmYRyqKVWk7pVD9iy9MQRqwr91NA5aqlQJKfmm34b
+         a40bwbjJoxk3h6s3khcWg6iT/qPr18scayRcyCfhXo1ZMN0xrbzzPYxjEPAllBvLCZPj
+         zIWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753342155; x=1753946955;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FTUx+HgdsXEHddqbLJFja4Wg2rJbm/VzE1AZq4t/+1Q=;
+        b=F8T/FMwtKE/ZENksfneAa2+yBs4CgFbIxLp1ov3XrObaJeLUgG+OhHbgKw8Lb9Kf5J
+         9QXrxG16t7Kmv/+W8sD3ZDhKR2Ut5wJ3Mtk0MFxVTubqAt48oRXbFc4ejIf/lFv8bgGX
+         xuvs2A/f+zB3+LGbNn7Wc50A19pu74sJOZV7Cz9SDa71Dm3Ir3PsC5Mh/QYPJE+ZZzp+
+         iHk5pf75BxGBVa18j9g0d8eDgF8LcJoebzJDrIXXtWZUhCPiHa4eXR36ohSc0BCeo6aG
+         mPJLRCywzdeLy+4XpjxxGuTkZezc2bDA7MZUQ9mhYvkerVErjlKSXkoHltsSlSaTmMjU
+         vHkQ==
+X-Forwarded-Encrypted: i=1; AJvYcCULC/C/ypgsWzDdS+Svrs19le/02+O2HY4lkbj/VfrAOFb6cV4+U8MmGYdA1SDOf94UWhCEsBMggvk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzAPnA+/wKYH/hXALFINrRd21S/CSAc17uia0So2R4G/q9yZdDM
+	bxm4+Rh9cjpcwQn60j4G63yi+Nkr9ypXPOsEHSxVWQriuCMfdGQPUuOXPetZ63bXWQ==
+X-Gm-Gg: ASbGncuNYT5q+wzzZek6NFdp61IIEbN0EIgERMiHpKTPG/k7lxPK0VHTo1r9aJUo9xV
+	43QCBKpstCHLLQlaVAhgkzV5QYzJH3C0OSHqVC4ZYWyiChVXe7DcmRBVzgWGdNrQSWV3vHYftyw
+	6Gl0tWHkOYWmLrSW0CSVf+/jqxoz1PfXXcgstXTdc1cvb1Vg4ihEFRch0dF1f9Wzi5oMzP/VwKb
+	g7xlo7MN57i/fazgNNrcYJS4pzKiY3np3HR05rTgd0nDB9RGs5sXzu31J+hVku4x1tdBE1mw/Gu
+	45mK9k+bt33tCxgG6gHWxdOuKE6vAeBaF39qQLvhyCqT2g2zkaU+MRVlT4ENtPN1Hvew2d4m3Ep
+	6TXtviLMaStY79+/N/my6yif1SAsRfLT45cS6BicadQvjI9u5/HkhZYSc+QRVXF2kUlxi0qQEvO
+	w6yRYNCtU=
+X-Google-Smtp-Source: AGHT+IH1dCg/Vopa+r8ETWLC9NkVHXoxO4CLn1fO9o8AVkCKuf1qH/S/uF6LR0EbPhmFMKiZK8AYeA==
+X-Received: by 2002:a05:6000:2283:b0:3a5:2e84:cc7b with SMTP id ffacd0b85a97d-3b768ee046emr5047321f8f.11.1753342155290;
+        Thu, 24 Jul 2025 00:29:15 -0700 (PDT)
+Message-ID: <6fdd359e-4950-46de-98a7-7ff402a56239@suse.com>
+Date: Thu, 24 Jul 2025 09:29:13 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CC:EE_|IA1PR12MB7616:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7a1be6bd-5a54-46ac-7b37-08ddca75fe97
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?eWhoOVBTSzNEVkprdU92ajFVQVB6VjcyS2JRbFNpWkxSdllhWE1oeUZmZFRp?=
- =?utf-8?B?OWFzbWlGRk11dmFDM0xiRCtxOVVHUVRUTmNKaXgwamttcTNMQ05iOXV0d0JN?=
- =?utf-8?B?YzlrcXZ1KzZBYzYxWEtBOVFiNXhhYVRYeEJMTmM4UzdFK29vVDhiQzBLL3lM?=
- =?utf-8?B?eG4vWkJjaVowTnJaYk9BMEpOWlJsc1laUG1IeHdwQy9hd1M3VnhqK0tMV0Qy?=
- =?utf-8?B?MmRKeHkvbC93RERPT1JjU2ZOWFdOdHlvalB0V1FJcm41YTFwWkY2aEhvVDZC?=
- =?utf-8?B?UnlrUWdmQkN3Tk9KZXE2K3pTcW4ycEhQL1pPOXB1dUMvQjVYdnpIL3RtdGZF?=
- =?utf-8?B?eVl0WVYrVmFBcjIxWHZYakVQQTFHN2prSlNMNkZJckhmdDFoV250dWJvdmNC?=
- =?utf-8?B?MmhOdkxHM1p0THBjTFg3cnQ5TXNqK2NDeW5xclpydXNBQ0hTdUJhYWdxUG0y?=
- =?utf-8?B?WS9VNzEwdzV4Sk5UVGVBZEVsY29MaGgzZHA4V3VUTFZsbXA2OVYrb29WTzFj?=
- =?utf-8?B?aUV5b2pRemlIdEhDNnQvMExac0RZQlpzWGVkUXVONERnYzRkdUJTeVVqT3RG?=
- =?utf-8?B?RzlRMithMjFDbkdBVnNLTFBGS0NBalJJNS9oUG5tU0l1RTZQMWNxZFBScGk1?=
- =?utf-8?B?ZE1qdkphTXpMd1RlRFdKT0c3N2ZhRnlFcjRPQTNRU1ptWm1FM0Z5NlUvTFBG?=
- =?utf-8?B?S1RrUEN6dlVOSyt2S1pOdUxDRWNQY0k1SnlGcEMwTmNWL0Vacy9YSGVyLzMr?=
- =?utf-8?B?UkNQWktSTkk5L1gzRmQ3bzl1L2ZteEQwNSt0Sk9wQkxBUmxqK3BLMjVXbGVj?=
- =?utf-8?B?dVFGNkU0ckdNK0NlMVo4S1ozMkViWGtlb0tPVEFsdnZKN1RBMDk1WmlhaFUv?=
- =?utf-8?B?aDZEM3Y0SExMSlZJc0dVWndRUzE0eGE0RE8rNCtoYTNxOWZDbFNWcHcrTmZq?=
- =?utf-8?B?dnE3NThaMUN0NVdSN1hSY3h2N3FuSFdZcjR3WW9oS292Z1lSYVE4d0hCcFdY?=
- =?utf-8?B?ZTlvMlI2bHBPYXVha0dvQVZrM1h4SndrYnVrQTJpbHNrOGRPOUdyanVxRHJQ?=
- =?utf-8?B?NEN6eFBVOXA1cEVRZ0lVR3k1WFIrMnpXdE5jdzR2aEppekhVUVZRL28xMllu?=
- =?utf-8?B?bE1NUGFvb2wzcXRGWWVQUjl0UWlwWjRvUm9qalhqWmM3dGlVM29SWHJQckNQ?=
- =?utf-8?B?ZFJ1NGc2bDV3czNMdmhBa05VTVcySTUvem5PZDFaOVF6UjB1Ymp6czRPcm91?=
- =?utf-8?B?RHJpRWJkTm9wSVVIUE43UjhHL2thZElXM3JjY24rcDB3ZERIa3Q1a3ZtV2w4?=
- =?utf-8?B?YzFITmJUS0Q2RWp5Mk9JNkxRYnluSmlyZTZ1UkIzNTVqcnVMdnZWTnUxTnAz?=
- =?utf-8?B?dmRZZVpGWHlNLzd6RmViOGQ2MElTb1FQVURjM2tUT1pIQWxkNWtLemQwYXpk?=
- =?utf-8?B?cXFSQmp6R0hBT3lYQ3hYTVNqNElYQ3VCWXMyWkNuSnVJTEN2MWJ3N21pa2Jy?=
- =?utf-8?B?ak5uYUZabE1jTmhPb1k1SVBVL3dZbnI3MFJSM3hHbXhTU3E5b2Z6a1RJK3Bt?=
- =?utf-8?B?cnpHNlU2UCttSXh2RDVjODNWSkNQY2gzVUZucXpzeDM4WGVqMnRvYU9PaG9l?=
- =?utf-8?B?cWF4S3ZRRzgxUW5sVmFra3NRYjRJQXRkbFBPbHQ3a3VCTHluVGkyL3hiL3F6?=
- =?utf-8?B?Q3o0L2tLKzdzV1J1YXdlZ0JUQkNJVEJ0R3BtdjEzVDdaRkk4WHlvTUxKakho?=
- =?utf-8?B?Zkg2ZE5oOGtmNE9meGR6bm9HbGtKNHZkWkF3NTR5cHgzMjZNdUZGOHhubFFD?=
- =?utf-8?B?bEcySnVqd2huUzZkS1FVdmQ5cklYMXFVQkM2ODFRM3ZzS2RnSzFCbWoyMUtU?=
- =?utf-8?B?ZUVNWVdsNEV6T2tXMGNWZldJMzJ0VHVsSUtZOHpOQWFyNEVTRHV1UzNISlB4?=
- =?utf-8?B?YkhXa2tnSW9jU2RyUEFmcVlFUUwwVStPUDlaY3dOZGxpbXY1bk5nY2dlNDVi?=
- =?utf-8?B?aDJtaGxmRmU3cWZWVDhmY3h0d1ZQVkdsbWJtZ0NpUzdTdW5QRkxJSXlQd1JI?=
- =?utf-8?Q?WcyhBv?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2025 05:50:28.6440
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a1be6bd-5a54-46ac-7b37-08ddca75fe97
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001CC.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7616
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9] xen/console: introduce domain_console struct
+To: dmkhn@proton.me
+Cc: alejandro.garciavallejo@amd.com, andrew.cooper3@citrix.com,
+ anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com,
+ oleksii.kurochko@gmail.com, roger.pau@citrix.com, sstabellini@kernel.org,
+ dmukhin@ford.com, xen-devel@lists.xenproject.org
+References: <20250723001116.186009-1-dmukhin@ford.com>
+ <b819d729-8533-46a5-b2a2-480a70cda556@suse.com> <aIEowjUsuWfwqSzX@kraken>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <aIEowjUsuWfwqSzX@kraken>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add a new function to emulate extended capability list for dom0,
-and call it in init_header(). So that it will be easy to hide an
-extended capability whose initialization fails.
+On 23.07.2025 20:24, dmkhn@proton.me wrote:
+> On Wed, Jul 23, 2025 at 05:10:04PM +0200, Jan Beulich wrote:
+>> On 23.07.2025 02:11, dmkhn@proton.me wrote:
+>>> @@ -559,7 +559,8 @@ void hvm_do_resume(struct vcpu *v)
+>>>  static int cf_check hvm_print_line(
+>>>      int dir, unsigned int port, unsigned int bytes, uint32_t *val)
+>>>  {
+>>> -    struct domain *cd = current->domain;
+>>> +    struct domain *d = current->domain;
+>>
+>> Why the renaming? (Iff any renaming was needed here, then please to currd.)
+> 
+> It was requested earlier:
+>   https://lore.kernel.org/all/1ac74dd3-e0c5-43e5-9eed-c1a2cc17d068@suse.com/
 
-As for the extended capability list of domU, just move the logic
-into above function and keep hiding it for domU.
+But there the decl was moved, which isn't the case anymore. And yes, I should
+have asked for it becoming "currd" there, not "d".
 
-Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
----
-cc: "Roger Pau Monné" <roger.pau@citrix.com>
----
-v7->v8 changes:
-* Remove the unnecessary function vpci_hw_write32, since it can cause the value of the
-  extended capability header cached in vPCI of dom0 is inconsistent with the hardware.
-
-v6->v7 changes:
-* Change word "guest" to "DomU" in vpci_init_ext_capability_list().
-* Change parameter of vpci_init_ext_capability_list() to be const.
-* Delete check "if ( !header )" in the while loop of vpci_init_ext_capability_list().
-* Change the loop from while to do while in vpci_init_ext_capability_list().
-
-v5->v6 changes:
-* Delete unnecessary parameter "ttl" in vpci_init_ext_capability_list()
-  since vpci_add_register() can already detect the overlaps.
-
-v4->v5 changes:
-* Add check: if capability list of hardware has a overlap, print warning and return 0.
-
-v3->v4 changes:
-* Add check "if ( !header )   return 0;" to avoid adding handler for
-  device that has no extended capabilities.
-
-v2->v3 changes:
-* In vpci_init_ext_capability_list(), when domain is domU, directly return after
-  adding a handler(hiding all extended capability for domU).
-* In vpci_init_ext_capability_list(), change condition to be "while ( pos >= 0x100U && ttl-- )"
-  instead of "while ( pos && ttl-- )".
-* Add new function vpci_hw_write32, and pass it to extended capability handler for dom0.
-
-v1->v2 changes:
-new patch
-
-Best regards,
-Jiqian Chen.
----
- xen/drivers/vpci/header.c | 44 ++++++++++++++++++++++++++++++++-------
- 1 file changed, 36 insertions(+), 8 deletions(-)
-
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index bb76e707992c..f537f3f25d2a 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -825,6 +825,39 @@ static int vpci_init_capability_list(struct pci_dev *pdev)
-                                   PCI_STATUS_RSVDZ_MASK);
- }
- 
-+static int vpci_init_ext_capability_list(const struct pci_dev *pdev)
-+{
-+    unsigned int pos = PCI_CFG_SPACE_SIZE;
-+
-+    if ( !is_hardware_domain(pdev->domain) )
-+        /* Extended capabilities read as zero, write ignore for DomU */
-+        return vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-+                                 pos, 4, (void *)0);
-+
-+    do
-+    {
-+        uint32_t header = pci_conf_read32(pdev->sbdf, pos);
-+        int rc;
-+
-+        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-+                               pos, 4, (void *)(uintptr_t)header);
-+        if ( rc == -EEXIST )
-+        {
-+            printk(XENLOG_WARNING
-+                   "%pd %pp: overlap in extended cap list, offset %#x\n",
-+                   pdev->domain, &pdev->sbdf, pos);
-+            return 0;
-+        }
-+
-+        if ( rc )
-+            return rc;
-+
-+        pos = PCI_EXT_CAP_NEXT(header);
-+    } while ( pos >= PCI_CFG_SPACE_SIZE );
-+
-+    return 0;
-+}
-+
- static int cf_check init_header(struct pci_dev *pdev)
- {
-     uint16_t cmd;
-@@ -877,14 +910,9 @@ static int cf_check init_header(struct pci_dev *pdev)
-     if ( rc )
-         return rc;
- 
--    if ( !is_hwdom )
--    {
--        /* Extended capabilities read as zero, write ignore */
--        rc = vpci_add_register(pdev->vpci, vpci_read_val, NULL, 0x100, 4,
--                               (void *)0);
--        if ( rc )
--            return rc;
--    }
-+    rc = vpci_init_ext_capability_list(pdev);
-+    if ( rc )
-+        return rc;
- 
-     if ( pdev->ignore_bars )
-         return 0;
--- 
-2.34.1
-
+Jan
 
