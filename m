@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F75C87FC5
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 11:05:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1055728.1424109 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27631C87FC5
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 11:05:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1055719.1424029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uetlC-00032p-Rx; Thu, 24 Jul 2025 11:05:14 +0000
+	id 1uetkz-0000vE-Rw; Thu, 24 Jul 2025 11:05:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1055728.1424109; Thu, 24 Jul 2025 11:05:14 +0000
+Received: by outflank-mailman (output) from mailman id 1055719.1424029; Thu, 24 Jul 2025 11:05:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uetlC-00032a-Me; Thu, 24 Jul 2025 11:05:14 +0000
-Received: by outflank-mailman (input) for mailman id 1055728;
- Thu, 24 Jul 2025 11:05:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uetkz-0000v7-Ou; Thu, 24 Jul 2025 11:05:01 +0000
+Received: by outflank-mailman (input) for mailman id 1055719;
+ Thu, 24 Jul 2025 11:05:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=98ak=2F=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1uetlB-00011w-FI
- for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 11:05:13 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 119074be-687e-11f0-b895-0df219b8e170;
- Thu, 24 Jul 2025 13:05:12 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-451d54214adso5372575e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 04:05:12 -0700 (PDT)
+ id 1uetkx-0000v1-UM
+ for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 11:04:59 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 09f7104d-687e-11f0-a31e-13f23c93f187;
+ Thu, 24 Jul 2025 13:04:59 +0200 (CEST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-45622a1829eso2724335e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 04:04:59 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-45870532baesm16529805e9.1.2025.07.24.04.05.09
+ ffacd0b85a97d-3b76fc6d2e8sm1811011f8f.20.2025.07.24.04.04.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 04:05:09 -0700 (PDT)
+ Thu, 24 Jul 2025 04:04:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,105 +47,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 119074be-687e-11f0-b895-0df219b8e170
+X-Inumbo-ID: 09f7104d-687e-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1753355111; x=1753959911; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tFlfWuMJOmhx5usqEIhEHfIIY5QCQp99txG+M8VywEQ=;
-        b=C50+pDZME59I38jNbQylyYEPlBF/6puzwXmxzwlJk03tV4aNPgYMccx8BPTi72eul9
-         pPd4yfHOLnB3GxfsRhjLLaOU41uPxm8Ioqt2luRclFw49LC2wfnq3/vhkzz88GwJIC+r
-         DM9AF9Qd2hB0Wc0LerIfEVnSJKdSAgI0eS5uI=
+        d=citrix.com; s=google; t=1753355098; x=1753959898; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=b5j4tu0rZfHpp4CiqxyWru5pRU2/BPrCqYPZCtzm1+s=;
+        b=rkmhudc/sqn4tMKx8XcQNmPzh0oSguWp7nsNTHtNLW4BFserPJriCEhsN+IPXiZ7yO
+         LxW9oUJku5WusM31walQ5diy7tXfNs9Sc9NDaIKEzAb99o9iRlUyoOplBUnm12vKgZl/
+         eIQog9+0gEa/6oRlFCEq9lJuFBCPf3B/KaMMM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753355111; x=1753959911;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tFlfWuMJOmhx5usqEIhEHfIIY5QCQp99txG+M8VywEQ=;
-        b=NfPRgaSgPslW+56VU5Ur5c+lm+Y7FSA+DIXE6DzaFdHCSkNl+SL7GDsMMBnhFswUSv
-         FxL/Hnm2is8beLKPdgOqF+V0s9nMJHRtSuCpMySiKeOTxUIqyDzamdEriZa5EuoWG/2+
-         q7NhTs6LcM2xK/tYaahTM/6vKizOXNw2AwIEIftoKgCaPfvlJ74oh0/Kdy3sMDWRbTBM
-         Pw1Z6Nb0FNwjf1/hBfOOOQdlOOX1VNDRaSIuALluijwMz3tNq9Ru0ZjO2KNkOYQNI6Iw
-         qeaqLqPToYHsJl+t7ifK1yAxZC1kYyuVkdfw9v0LEn/MwEEQaYpkneNLCsBNHO/IA5rV
-         noHw==
-X-Gm-Message-State: AOJu0Yz2eNQXKhY6mzmQ/gfnGEAsZUaEs6+1U7gX/oKgrSgDsbuCBYwv
-	heErbqkS8LAfxzWr8q3Hlx1wsGjN/0VIAIciFnTbj4+jiICSdcn/BvZMITytDPbCqYRdWJTt41a
-	alC1d
-X-Gm-Gg: ASbGncuY7fi9mbHQPkXepsXYWVNsfoWZCrNkSyyhIsz58iiS5wWK/GiQurGE+4ROur7
-	hIcXxw6WqGqCO/1JPjGtN/hSLLxmUVAAH3lqXESoZYUJXqvYZmOirlUkPZztk64ak/55jst0s0/
-	cUCiEFDHdXgM1NssHFmDESEsvOLUPdc2e5MjDht2yRtx63fBWOOELiR8wXHiNV5jCs6NtS/iLzd
-	q7DnCYLhQbE6mrqP/F253dS8b6Q1bfbfq5l5HwHBq2NerLoMQ2QF4BvKaPABsEYsNWxrnbdBb/v
-	UbBdi0bTsVVnAINi9yhO5uqoyQdVFp/9yW1ASB1a2GgTV77LG7ZqZtE70lQeMzgT19O80LD7IAL
-	qh/1JD1/SJ8PaqtDxAhjLbfUxm2oFLf8udElNmzF+W+gePZBsp80TGj6wybqfJQtb2A==
-X-Google-Smtp-Source: AGHT+IEzCmI44FtmhD/GUunQws3PmEjOyLqKx9nZqyLxCLTipWpVA4pZ3wgU1qzKaxD36LAruVBfSg==
-X-Received: by 2002:a05:600c:6209:b0:442:c993:6f94 with SMTP id 5b1f17b1804b1-45868c8ec7fmr54963695e9.12.1753355110979;
-        Thu, 24 Jul 2025 04:05:10 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1753355098; x=1753959898;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=b5j4tu0rZfHpp4CiqxyWru5pRU2/BPrCqYPZCtzm1+s=;
+        b=Terx9xLrsUGEIUFEjeF1obkoemC0Ht/Hm+GRUcWABj8DOWyeT5k0t1kBbvHFzmtvm1
+         akyGxVw81Kj8YX33wf7yhV2nQWk786mzEsV+C/oHnEuGVwUYphGjy3+hnMYmaxItBI9M
+         HvASIznTKTJ/2QfIsa6w1FQMfP+7uI5f/zLNKDAV0KPSkdnG1l3wCzIbdOasVMvT5Wgt
+         tbJv8qJczjGiAp4qYVPg+LdYNmmIbumCTAeH/naVNPDFW0eTOS/Mtszrtk1iHBbl92DU
+         FBFL9Er8Qo8PaP/jbu8oS9S3Bztb+XoeZT60BvrJjPQYBP6a/lAsOCcgjtew8pDbfkVG
+         8MzA==
+X-Gm-Message-State: AOJu0YyBDgTjwR8I8dD7p8JKc74A0qjMtq81Yg7b0oq24RJetpekfXKX
+	rAJIScC0nC9kgWHxeFofYcqz2T4xEdpGX2o/smFu9pzF4LdguDO622ItRQ3TBQyMIGyU2RlZ+cL
+	jWTmt
+X-Gm-Gg: ASbGnct1VbGvjs469O8MUAs/SH3376MCig88U4lMFHeHfwj/yLr91a3PTE5tDTwqwZx
+	6m/AuLej3uK2l3IKpK4b88k5Am/1olC4DQEFIjPOAVwq1EzF+YAoeUGDIgJDSqLuI4Xl8oZu7xp
+	HnbA76c4aQYz1vNkFp7Crt0/KBfQuC8Y3H+uYkVPwjG0Lr1dtvoa5PxJlR4e5cxsivKSKm8WI15
+	lGPKcBfQF/k1kZq5sxxMcQnG3mOs+K/jghNoSHzh405njaGPC/HUqIcMi2VsyIFbmkWt/gXPsJV
+	0bm78ijqDWvf/5jLvbBLBgqq8k7RPI7CFl7OdkY46BV+fcFQrmJEqgGgNl4tq9jw73od7XRLLrb
+	QOVK36G5568lSKqCa/0upP7LjPRcO1bjKz0R+QtB7gf+Zfy8JEWRKo1DcdS15rTkOjhn3MIvqtV
+	1z
+X-Google-Smtp-Source: AGHT+IHbdZW6UQ38D9aSTwYc1aftm39FwhbWXccn3dxhxdPFaOZy9A+y5SwuE6szGKPUaWDPl1qFAg==
+X-Received: by 2002:a05:600c:4e4a:b0:456:18cf:66b5 with SMTP id 5b1f17b1804b1-45868d4c3edmr49118655e9.22.1753355098169;
+        Thu, 24 Jul 2025 04:04:58 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 8/8] x86/mm: adjust loop in arch_init_memory() to iterate over the PDX space
-Date: Thu, 24 Jul 2025 13:04:16 +0200
-Message-ID: <20250724110416.2081-9-roger.pau@citrix.com>
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v3 0/8] pdx: introduce a new compression algorithm
+Date: Thu, 24 Jul 2025 13:04:08 +0200
+Message-ID: <20250724110416.2081-1-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250724110416.2081-1-roger.pau@citrix.com>
-References: <20250724110416.2081-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There's a loop in arch_init_memory() that iterates over holes and non-RAM
-regions to possibly mark any page_info structures matching those addresses
-as IO.  The looping there is done over the PFN space.
+Hello,
 
-PFNs not covered by the PDX space will always fail the mfn_valid() check,
-hence re-write the loop to iterate over the PDX space and avoid checking
-any holes that are not covered by the PDX translation.
+This series implements a new PDX compression algorithm to cope with the
+spare memory maps found on the Intel Sapphire/Granite Rapids.
 
-On a system with a ~6TiB hole this change together with using PDX
-compression reduces boot time in approximately 20 seconds.  Xen boot time
-without the change is ~50s, with the change it's ~30s.
+Patches 1 to 6 prepare the existing code to make it easier to introduce
+a new PDX compression, including generalizing the initialization and
+setup functions and adding a unit test for PDX compression.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - New in this version.
----
- xen/arch/x86/mm.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+Patch 7 introduce the new compression.  The new compression is only
+enabled by default on x86, other architectures are left with their
+previous defaults.
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index e7fd56c7ce90..647bf0b41db6 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -275,7 +275,7 @@ static void __init assign_io_page(struct page_info *page)
- 
- void __init arch_init_memory(void)
- {
--    unsigned long i, pfn, rstart_pfn, rend_pfn, iostart_pfn, ioend_pfn;
-+    unsigned long i, pfn, rstart_pfn, rend_pfn, iostart_pfn, ioend_pfn, pdx;
- 
-     /*
-      * Basic guest-accessible flags:
-@@ -328,9 +328,14 @@ void __init arch_init_memory(void)
-             destroy_xen_mappings((unsigned long)mfn_to_virt(iostart_pfn),
-                                  (unsigned long)mfn_to_virt(ioend_pfn));
- 
--        /* Mark as I/O up to next RAM region. */
--        for ( ; pfn < rstart_pfn; pfn++ )
-+        /*
-+         * Mark as I/O up to next RAM region.  Iterate over the PDX space to
-+         * skip holes which would always fail the mfn_valid() check.
-+         */
-+        for ( pdx = pfn_to_pdx(pfn); pdx < pfn_to_pdx(rstart_pfn); pdx++ )
-         {
-+            pfn = pdx_to_pfn(pdx);
-+
-             if ( !mfn_valid(_mfn(pfn)) )
-                 continue;
- 
+Finally patch 8 optimizes one x86 loop that was iterating over pfn
+ranges to instead use pdx values.
+
+Thanks, Roger.
+
+Roger Pau Monne (8):
+  kconfig: turn PDX compression into a choice
+  pdx: provide a unified set of unit functions
+  pdx: introduce command line compression toggle
+  pdx: allow per-arch optimization of PDX conversion helpers
+  test/pdx: add PDX compression unit tests
+  pdx: move some helpers in preparation for new compression
+  pdx: introduce a new compression algorithm based on region offsets
+  x86/mm: adjust loop in arch_init_memory() to iterate over the PDX
+    space
+
+ CHANGELOG.md                           |   3 +
+ docs/misc/xen-command-line.pandoc      |   9 +
+ tools/tests/Makefile                   |   1 +
+ tools/tests/pdx/.gitignore             |   3 +
+ tools/tests/pdx/Makefile               |  50 +++
+ tools/tests/pdx/harness.h              | 103 ++++++
+ tools/tests/pdx/test-pdx.c             | 271 ++++++++++++++++
+ xen/arch/arm/include/asm/Makefile      |   1 +
+ xen/arch/arm/setup.c                   |  36 +--
+ xen/arch/ppc/include/asm/Makefile      |   1 +
+ xen/arch/riscv/include/asm/Makefile    |   1 +
+ xen/arch/x86/include/asm/cpufeatures.h |   1 +
+ xen/arch/x86/include/asm/pdx.h         |  75 +++++
+ xen/arch/x86/mm.c                      |  11 +-
+ xen/arch/x86/srat.c                    |  30 +-
+ xen/common/Kconfig                     |  37 ++-
+ xen/common/pdx.c                       | 429 +++++++++++++++++++++++--
+ xen/include/asm-generic/pdx.h          |  24 ++
+ xen/include/xen/pdx.h                  | 202 ++++++++----
+ 19 files changed, 1157 insertions(+), 131 deletions(-)
+ create mode 100644 tools/tests/pdx/.gitignore
+ create mode 100644 tools/tests/pdx/Makefile
+ create mode 100644 tools/tests/pdx/harness.h
+ create mode 100644 tools/tests/pdx/test-pdx.c
+ create mode 100644 xen/arch/x86/include/asm/pdx.h
+ create mode 100644 xen/include/asm-generic/pdx.h
+
 -- 
 2.49.0
 
