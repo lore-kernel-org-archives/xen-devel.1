@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F4BC87FCC
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 16:23:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1056343.1424575 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A23C83F26
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 16:40:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1056393.1424605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueyiy-00087d-HM; Thu, 24 Jul 2025 16:23:16 +0000
+	id 1ueyzo-0004RF-Hr; Thu, 24 Jul 2025 16:40:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1056343.1424575; Thu, 24 Jul 2025 16:23:16 +0000
+Received: by outflank-mailman (output) from mailman id 1056393.1424605; Thu, 24 Jul 2025 16:40:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ueyiy-00087V-Dy; Thu, 24 Jul 2025 16:23:16 +0000
-Received: by outflank-mailman (input) for mailman id 1056343;
- Thu, 24 Jul 2025 16:23:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ueyzo-0004R8-Eo; Thu, 24 Jul 2025 16:40:40 +0000
+Received: by outflank-mailman (input) for mailman id 1056393;
+ Thu, 24 Jul 2025 16:40:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uSid=2F=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ueyix-0007fi-2E
- for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 16:23:15 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7fc9c920-68aa-11f0-a31e-13f23c93f187;
- Thu, 24 Jul 2025 18:23:14 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-45629703011so8890285e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 09:23:14 -0700 (PDT)
-Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
- [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b76fcc2bc8sm2615965f8f.72.2025.07.24.09.23.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 09:23:13 -0700 (PDT)
+ <SRS0=t79f=2F=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1ueyzn-0004QP-Fg
+ for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 16:40:39 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ed440c5f-68ac-11f0-b895-0df219b8e170;
+ Thu, 24 Jul 2025 18:40:37 +0200 (CEST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-55a25635385so1365667e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 09:40:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,207 +42,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7fc9c920-68aa-11f0-a31e-13f23c93f187
+X-Inumbo-ID: ed440c5f-68ac-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1753374194; x=1753978994; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1753375237; x=1753980037; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WUNEVSr3ncvwUF6ggoaVWELN0XIMn2xF+8CSNt91kWI=;
-        b=UVDDL3qeKba8E5Tc27rUTFrs9550jE74zvFk7quAXIE7HGgsUaCZL0Z2/PGmHpPRgA
-         Ps5UPBv/p/9wgNf2U7j/g1Hf9d9/Ycku0gzWPGRJzIdCCmmwyrQxnMNkCt2grBy15kvv
-         f+2yCip3xM+mztYy4ia+FGIcWGfEewtdrIqTY=
+        bh=GR1fBdy9VQIlAEDB0tBrHuHaLpvBC6SbQWLXrk6leSs=;
+        b=Tj/2qzcnxOTz+0C4bE4hIrN2eEjuSvFpxJymcopERYFtXDb6OgQ5sCbCIRvKRc3lml
+         lqpxxyMlKmFJqlx2G9Ca0xQGWruWvJkcYfgcixWLDl2Bg7rOwOKdidclKQ85Tu9UKo3b
+         9KhLZDn2EJWW2cQsoNAP+ULgsVo9wb35aO5l0Tf45Ih+ai4rF73V34i8XQsEXpNKj3XI
+         DU7WcjmxfVRClntyWXvh6Q9gGDrb5DXQJfc8Q5mui1Utly70UyeSUxQsr8lWVeZR07Ko
+         Hx26Cu65NOU0ewZv6zeWbe7bb5IbhPi4lPv/mlbWxnEt2yWJoDyUdpURlu7FtT9Hh+aD
+         22sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753374194; x=1753978994;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1753375237; x=1753980037;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=WUNEVSr3ncvwUF6ggoaVWELN0XIMn2xF+8CSNt91kWI=;
-        b=Wg1XFxl2JV2+Xl37EzUn0wlQy0NEJefR3uq2Xp/WUb/4vGuyq8D+RJkvR07SqJPEOG
-         t0RR7CpVVyMc5mPYgYxBTQYDlauPx6lLvTf2Bt9/a0/O0GzVdGLKY6lu32PI+M7rQdNd
-         li2zSymS9koq6NSfLpGU7tNJYBSvlDSV70yD4YOH1jYlL2ivycGq55SrxeUAsIeaucel
-         0SGBYFKxo5DkF2SlTBmHeK03zMJKwxWvWkqz89BoM6O8D5rEFx2det1P1r1CVMLc3vSD
-         OAUI47c5QDqyKXqbYRK2n2Rz1/PGE1p/SwaBEyigynyqUnlmhsZF5HfY8Ii1Gm5rPFzO
-         ue5g==
-X-Gm-Message-State: AOJu0YyNMLF4COl+48EjyIZteVhPb9sguXSR8yHGTCjYX4LUC0wJsEPc
-	8rXqEW3JWXmFb0gkW5iPiDDN3QS61/pvjxZWYzf2S/n/p2/Me/JPupVYTGfpQ8uBxlqqY22sQu0
-	fGrBewE/cBw==
-X-Gm-Gg: ASbGncsLB+AjOEdngxJF3EhN0tPrCg9Mo6cH7EE58+RpU2pXH5bbn6yH+5kspL3JpFY
-	VlrJ33WG03iS+IWBOq/A1uzk0Gg6NPKI5LgrZ2joxeatA5XSCnaXc7tYrjWbAWGyJAMTrgiiCOF
-	30uAMEt0C9xvPZ9BCa/FyksQqmppduAH7DJOqSeMErUP1CKAJvON4jDmeuCdIyPBN/qir3Jb7Uq
-	rSIbNzwFy9OuTXOA39wg/7qfx+qUvcJi7r02Gf5BxpydyJoCdgeEm/uvtrGDB2Z0HGq5EQ+VDwx
-	GKCJ3tEIVQbpzXZlvMovsauZ0LnxARU3iZonZxUTxC0ZIiI1z0fyifINUv4zreBHUMdIKg4TVsc
-	WZIuqA9dXfm5Zf9x4favcE6FGXv6GDyAh3hFwSMv0LKF1+ezUzxHypqsoiwFIWxJF+E9n7t9mvj
-	kK
-X-Google-Smtp-Source: AGHT+IETg+5zCDMSNlJU5qdzPhpVUm7Wxk3S3oTLmiE/cjvepU7na87Pjkr8kOByV4nXRahlrEt+Lw==
-X-Received: by 2002:a05:600c:198b:b0:453:5c30:a1fd with SMTP id 5b1f17b1804b1-45868c9d23amr73249835e9.8.1753374193796;
-        Thu, 24 Jul 2025 09:23:13 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Carlo Nonato <carlo.nonato@minervasys.tech>,
-	Marco Solieri <marco.solieri@minervasys.tech>
-Subject: [PATCH 3/4] xen/cache-col: Fix initialisation of domain colouring information
-Date: Thu, 24 Jul 2025 17:23:05 +0100
-Message-Id: <20250724162306.2978741-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250724162306.2978741-1-andrew.cooper3@citrix.com>
-References: <20250724162306.2978741-1-andrew.cooper3@citrix.com>
+        bh=GR1fBdy9VQIlAEDB0tBrHuHaLpvBC6SbQWLXrk6leSs=;
+        b=Ei8KGoCGMKoEadyYPugb/JnpxJDG1PWiy77G8DA+VgIbaTIR43FihoRuXPBsfOFJYK
+         gGRZzG+v9bir5jhSSLJHZIfqFXibFs2s3pgw2zCuoZlQrZzYdSlE9+ezmP1mpVVTr0RL
+         /xp2oRSj3RxBvo0GekOoI5t1tOl3HS9F0BfPSQkJsHuQf/Kd/E9DUA9+N6gPcGyz2Sk2
+         4VxBQe4zurlADYUQgp/X6Jqa8upaQl4Pd/vjTpY0mnnsAgljPE9hId2lWSwjS8/AsPXR
+         COBjx0Lz3xEgN24BdyRmo8XtkhfS87P1kh6movQR+V+KUynybqlyiyTfjXq7Q862UOqC
+         DLsA==
+X-Gm-Message-State: AOJu0Yzbj89KWtNWcrL6HpzQk+jKu8r1PWjWoo+9/+sF268QlDZMWWsQ
+	sKgXfuEa2zPC+W7So6NbdTSITu7VOPj3IWrf3o7onoLd4fe7ipGA8Fl0FotGWFlnfw6cdnyf2lX
+	4naRvVaVk1dlskSn3fp5NmE1RjutaGug=
+X-Gm-Gg: ASbGnctPJynQeBsJdL82smgMntz1y8uVRGd0TIUF3OxEZC52GITtaOlWFX9ziG0bXgF
+	bSFvmDBuLFUCpJTgUWVyYdyZ1jt5zb5DXBVZ5SndgTzm/ehsRQX9b9fX4AOKVjKEFDIaugmtaCQ
+	xtB+7vx/fOtcjw7jen23vWC2TpA0njxWKp9Yv0eag9RPoukt3Hhn/+bsSuFrHkS+XPhkNnnzNsz
+	8L+ug==
+X-Google-Smtp-Source: AGHT+IF5CP+wB1IBzkVd1rXDYfsQxfWwIJnRkrupdpq4Fu8T7kAkU/GHN3/NNv2zGmvESsWDSylOhmQgmMSoFUzMWHo=
+X-Received: by 2002:a05:6512:158d:b0:553:2868:6357 with SMTP id
+ 2adb3069b0e04-55a513e8072mr2516175e87.50.1753375236351; Thu, 24 Jul 2025
+ 09:40:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <cover.1753349108.git.mykola_kvach@epam.com> <48ea1dfb5bbcbc993332acb8508060d7cba342fc.1753349109.git.mykola_kvach@epam.com>
+ <aII8kN1fmrLKb8ek@l14>
+In-Reply-To: <aII8kN1fmrLKb8ek@l14>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Thu, 24 Jul 2025 19:40:25 +0300
+X-Gm-Features: Ac12FXzE3XhXsis4m1TatFidGcg9y1Ix3fIE_SYIibZEsTd4SQzSr6CFyzpRFRk
+Message-ID: <CAGeoDV_dYzMRZtz8iPWy713dNifTL5Lw-+ZTbu+gnFOJ7wiOXg@mail.gmail.com>
+Subject: Re: [PATCH v6 2/4] tools/xl: Allow compilation of 'xl resume' command
+ on Arm
+To: Anthony PERARD <anthony@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Mykola Kvach <mykola_kvach@epam.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Right now, domains start with no colouring information and depend on a
-XEN_DOMCTL_set_llc_colors(nr=0) hypercall in order to get default colours.
+Hi Anthony,
 
-This in turn forces the toolstack to make a hypercall for all VMs even those
-without colouring configured, and to ignore errors if Xen doesn't have
-colouring active.
+On Thu, Jul 24, 2025 at 5:01=E2=80=AFPM Anthony PERARD <anthony@xenproject.=
+org> wrote:
+>
+> On Thu, Jul 24, 2025 at 12:40:57PM +0300, Mykola Kvach wrote:
+> > From: Mykola Kvach <mykola_kvach@epam.com>
+> >
+> > The "xl resume" command was previously excluded from Arm builds because
+> > system suspend/resume (e.g., SYSTEM_SUSPEND via vPSCI) was not
+> > implemented. On x86, this command is used for ACPI S3 suspend/resume.
+> >
+> > This change enables compilation of `xl resume` on Arm regardless of the
+> > underlying implementation status, making the tool available for testing
+> > and future feature support. The relevant libxl infrastructure and handl=
+er
+> > functions are already present and usable.
+> >
+> > The macro `LIBXL_HAVE_NO_SUSPEND_RESUME` has been renamed to
+> > `LIBXL_HAVE_NO_SUSPEND` to better reflect the updated semantics.
+> >
+> > Note: This does not imply full system suspend/resume support on Arm.
+> >       The `xl suspend` command still does not work on Arm platforms.
+> >
+> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> > ---
+> > Changes in v6:
+> > - Renamed macro from LIBXL_HAVE_NO_SUSPEND_RESUME to LIBXL_HAVE_NO_SUSP=
+END
+> >   to better reflect the scope of this change
+> > - Applied cosmetic changes based on review feedback
+> > ---
+> >  tools/include/libxl.h     |  5 ++---
+> >  tools/xl/xl.h             | 10 +++++-----
+> >  tools/xl/xl_cmdtable.c    |  8 ++++----
+> >  tools/xl/xl_migrate.c     |  4 ++--
+> >  tools/xl/xl_saverestore.c |  4 ++--
+> >  tools/xl/xl_vmcontrol.c   | 14 +++++++-------
+> >  6 files changed, 22 insertions(+), 23 deletions(-)
+> >
+> > diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+> > index d6b6e5d2dd..632264912a 100644
+> > --- a/tools/include/libxl.h
+> > +++ b/tools/include/libxl.h
+> > @@ -1128,17 +1128,16 @@ typedef struct libxl__ctx libxl_ctx;
+> >  #define LIBXL_HAVE_SIGCHLD_SHARING 1
+> >
+> >  /*
+> > - * LIBXL_HAVE_NO_SUSPEND_RESUME
+> > + * LIBXL_HAVE_NO_SUSPEND
+> >   *
+> >   * Is this is defined then the platform has no support for saving,
+> >   * restoring or migrating a domain. In this case the related functions
+> >   * should be expected to return failure. That is:
+> >   *  - libxl_domain_suspend
+> > - *  - libxl_domain_resume
+> >   *  - libxl_domain_remus_start
+> >   */
+> >  #if defined(__arm__) || defined(__aarch64__)
+> > -#define LIBXL_HAVE_NO_SUSPEND_RESUME 1
+> > +#define LIBXL_HAVE_NO_SUSPEND 1
+> >  #endif
+>
+> I'm sorry, if you remove LIBXL_HAVE_NO_SUSPEND_RESUME, you have to
+> implement all the function listed. I'm pretty sure `libvirt` isn't going
+> to build (on arm) if you remove that macro... Actually, libvirt is going
+> to build, it's going to expect migration to work, and probably allow to
+> try to migrate Arm VMs instead of bailing out early.
+>
+> I wonder what this LIBXL_HAVE_NO_SUSPEND_RESUME is for, since you don't
+> make any changes to libxl (tools/libs/light), but only to program that
+> make use of it.
+>
+> Looking at 3ac3817762d1 ("xl: suppress suspend/resume functions on platfo=
+rms which do not support it.")
+>     https://xenbits.xenproject.org/gitweb/?p=3Dxen.git;a=3Dcommitdiff;h=
+=3D3ac3817762d1a8b39fa45998ec8c40cabfcfc802
+> it seems the real purpose was just an hint that migrate/suspend/saving
+> aren't going to work on that platform.
+>
+> Looks like `xl resume` is a fairly new command which only makes use if
+> libxl_domain_resume outside of migration, but the macro
+> LIBXL_HAVE_NO_SUSPEND_RESUME was mostly a hint that migration doesn't
+> work.
+>
+> So I think moving the `xl resume` command out of
+> LIBXL_HAVE_NO_SUSPEND_RESUME would be good enough for this patch,
+> without touching libxl.h.
 
-Introduce domain_llc_coloring_init(), replacing domain_set_default_colors(),
-and call it during the trivial initialisation in domain_create().  Leave two
-comments explaining the positioning.
+Got it. I'll revert the patch to the previous version.
+Thanks for the review and clarification -- much appreciated!
 
-The -EEXISTs condition in domain_set_llc_colors() needs adjusting as a
-consequence, but that's easy enough to keep working as before.
+>
+> Cheers,
+>
+> --
+> Anthony PERARD
 
-Fixes: 6cdea3444eaf ("xen/arm: add Dom0 cache coloring support")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Carlo Nonato <carlo.nonato@minervasys.tech>
-CC: Marco Solieri <marco.solieri@minervasys.tech>
----
- xen/common/domain.c            |  6 ++++++
- xen/common/llc-coloring.c      | 33 ++++++++++++++-------------------
- xen/include/xen/llc-coloring.h |  2 ++
- 3 files changed, 22 insertions(+), 19 deletions(-)
-
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 4f79ba39878c..28c2cc78cd88 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -878,6 +878,12 @@ struct domain *domain_create(domid_t domid,
-     rwlock_init(&d->pci_lock);
- #endif
- 
-+    /*
-+     * Doesn't allocate memory itself, but does set up data relevant for
-+     * memory allocations.
-+     */
-+    domain_llc_coloring_init(d);
-+
-     /* All error paths can depend on the above setup. */
- 
-     /*
-diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-index ea3e0ca07017..77a54beed1bf 100644
---- a/xen/common/llc-coloring.c
-+++ b/xen/common/llc-coloring.c
-@@ -230,24 +230,12 @@ void domain_dump_llc_colors(const struct domain *d)
-     print_colors(d->llc_colors, d->num_llc_colors);
- }
- 
--static void domain_set_default_colors(struct domain *d)
--{
--    printk(XENLOG_WARNING
--           "LLC color config not found for %pd, using all colors\n", d);
--
--    d->llc_colors = default_colors;
--    d->num_llc_colors = max_nr_colors;
--}
--
- int __init dom0_set_llc_colors(struct domain *d)
- {
-     typeof(*dom0_colors) *colors;
- 
-     if ( !dom0_num_colors )
--    {
--        domain_set_default_colors(d);
-         return 0;
--    }
- 
-     if ( (dom0_num_colors > max_nr_colors) ||
-          !check_colors(dom0_colors, dom0_num_colors) )
-@@ -272,14 +260,11 @@ int domain_set_llc_colors(struct domain *d,
- {
-     unsigned int *colors;
- 
--    if ( d->num_llc_colors )
-+    if ( d->llc_colors != default_colors )
-         return -EEXIST;
- 
-     if ( !config->num_llc_colors )
--    {
--        domain_set_default_colors(d);
-         return 0;
--    }
- 
-     if ( config->num_llc_colors > max_nr_colors )
-         return -EINVAL;
-@@ -307,6 +292,19 @@ int domain_set_llc_colors(struct domain *d,
-     return 0;
- }
- 
-+void domain_llc_coloring_init(struct domain *d)
-+{
-+    if ( !llc_coloring_enabled )
-+        return;
-+
-+    /*
-+     * Any change to this logic needs to consider the position of our call in
-+     * domain_create().
-+     */
-+    d->llc_colors = default_colors;
-+    d->num_llc_colors = max_nr_colors;
-+}
-+
- void domain_llc_coloring_free(struct domain *d)
- {
-     d->num_llc_colors = 0;
-@@ -321,10 +319,7 @@ int __init domain_set_llc_colors_from_str(struct domain *d, const char *str)
-     unsigned int *colors, num_colors;
- 
-     if ( !str )
--    {
--        domain_set_default_colors(d);
-         return 0;
--    }
- 
-     colors = xmalloc_array(unsigned int, max_nr_colors);
-     if ( !colors )
-diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-index 45f250f9f39d..94dd22e949e7 100644
---- a/xen/include/xen/llc-coloring.h
-+++ b/xen/include/xen/llc-coloring.h
-@@ -21,6 +21,7 @@ extern bool llc_coloring_enabled;
- void llc_coloring_init(void);
- void dump_llc_coloring_info(void);
- void domain_dump_llc_colors(const struct domain *d);
-+void domain_llc_coloring_init(struct domain *d);
- void domain_llc_coloring_free(struct domain *d);
- #else
- #define llc_coloring_enabled false
-@@ -28,6 +29,7 @@ void domain_llc_coloring_free(struct domain *d);
- static inline void llc_coloring_init(void) {}
- static inline void dump_llc_coloring_info(void) {}
- static inline void domain_dump_llc_colors(const struct domain *d) {}
-+static inline void domain_llc_coloring_init(struct domain *d) {}
- static inline void domain_llc_coloring_free(struct domain *d) {}
- #endif
- 
--- 
-2.39.5
-
+Best regards,
+Mykola
 
