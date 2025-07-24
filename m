@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 728D4C83F1A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D96CC83F26
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Jul 2025 09:42:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1055533.1423915 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1055531.1423903 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uesSf-0008NP-1c; Thu, 24 Jul 2025 09:42:01 +0000
+	id 1uesSe-0008FH-Dw; Thu, 24 Jul 2025 09:42:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1055533.1423915; Thu, 24 Jul 2025 09:42:00 +0000
+Received: by outflank-mailman (output) from mailman id 1055531.1423903; Thu, 24 Jul 2025 09:42:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uesSe-0008Lh-Pq; Thu, 24 Jul 2025 09:42:00 +0000
-Received: by outflank-mailman (input) for mailman id 1055533;
- Thu, 24 Jul 2025 09:42:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uesSe-0008FA-9w; Thu, 24 Jul 2025 09:42:00 +0000
+Received: by outflank-mailman (input) for mailman id 1055531;
+ Thu, 24 Jul 2025 09:41:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=t79f=2F=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uesSd-00084c-U7
- for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 09:41:59 +0000
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [2a00:1450:4864:20::22a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 717d0fc4-6872-11f0-a31e-13f23c93f187;
- Thu, 24 Jul 2025 11:41:58 +0200 (CEST)
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-32b7f41d3e6so9738261fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 02:41:58 -0700 (PDT)
+ id 1uesSc-0007nR-Oa
+ for xen-devel@lists.xenproject.org; Thu, 24 Jul 2025 09:41:58 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6ffc2a90-6872-11f0-b895-0df219b8e170;
+ Thu, 24 Jul 2025 11:41:56 +0200 (CEST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-55b50590cb2so791353e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Jul 2025 02:41:56 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-331e08e98aesm2418261fa.54.2025.07.24.02.41.56
+ 38308e7fff4ca-331e08e98aesm2418261fa.54.2025.07.24.02.41.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jul 2025 02:41:57 -0700 (PDT)
+ Thu, 24 Jul 2025 02:41:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 717d0fc4-6872-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 6ffc2a90-6872-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753350118; x=1753954918; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753350116; x=1753954916; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=rSXErmgf4mUOU3w7XCCgpOwuZwNZDieNzbmZWIHlqM8=;
-        b=ee5wOzpbqd4cyv7cB/RcAxOInfen4reWCWp1bimjDL3yRRRc29Dh9KZZvCr6Wj9/yV
-         6k4Yiu49pNR9TQmbkeC4TLWELZVwUsvcpMdiAYsHuQWtRoDfFtJK/7uZDtxE6a6qAzAY
-         De6SOmnc+MbOADs2szSI+wOuQObJ892xy0IKTeSaLahgfreUbVVTwpLH0BxYQaCl8Q3W
-         WB24hK8/U3bQxSk3jm3Aa+aHLq2cpR92wOY7K+7GT1/2QLOsaO0Ch6j/ckwYR19+iZMI
-         S5KcN6xxtk+dfuzpuRRRvnnK+/WwsI8jI4rN7qiRQAoFgk6Dc2ZSm7MdzJe07f3TxdDq
-         dCpA==
+        bh=pex6Ej+2o+mdbgt0MgnBZKJZc6lsBhLQsNhwotC5eNw=;
+        b=m5f+9lxNBwBOlVRtXfexTAdVgrCjvs07NRD9OtCClH3iXDX2+jdHU7TWKlXsFXfDQ8
+         cJLPCSibmNO01GbqrUW0+MQWCVeayVw1Iu1qwE62xYudKdbsbq+mapfs1h/mwux5Mn51
+         8UWhIGXEYPK3lDh9flDS/G+Mq7mzyzAGMi/xvjcUriE8UfzdUKD/uOywqyWu3KT1H5mT
+         NxSiMxnlS0wwPE/92ltoYofTA1KNoOL5WUcG0DA/QPzjgcuOoQC/w3y0qAUO9A4kfLpO
+         ZA054+i122T/bTZEhb/Efca/356yDbM1qT4iJEmoCUPGsj8IeIsjalwGGGirYhFOP7UX
+         NYbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753350118; x=1753954918;
+        d=1e100.net; s=20230601; t=1753350116; x=1753954916;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=rSXErmgf4mUOU3w7XCCgpOwuZwNZDieNzbmZWIHlqM8=;
-        b=P1B4ZDJrxyBKKSvI+H1rL3yGHAtfdQRnuH/Lmz4tcPjASDPY0BoO9yGxAhFZAlXL9d
-         Ape9/ad+b1SxALHngCsn1+qzJ/vG+tzITans9W4ennLpiVWjXOknEK08QiKpIdKzTJ0H
-         DitVTmJsXQVN6hqaUCipfpUg5bAqbJcZ0+us1l0GLaojRPvymMzbVn0RCLp3tdKwzKa2
-         XYnRPrLCGfNQoK3xf9n7l8uWVLVgfnWVZ+x6kRIL9lV8/MVZz6mkaxydjkCkODN/wvZw
-         UeuSc1KSI0WITecRYjZc7U6vcJqRNthj4ROK4fXaW7OPB9MdDfRD4XSLtRHYjxGltHj0
-         SJnA==
-X-Gm-Message-State: AOJu0YyHDOrM+OT4rl2AJX6n3oUw+vCHZxUV53Yav8mlHkhAwkMdPGWS
-	jHT9RUlsFjPdX/1Ol0kuN8sEtFZLUeSNitz05F4YMDjclJ7zsA8YX/C4RTHALg==
-X-Gm-Gg: ASbGnctj+K/9yCL7ncm4U3eJsytLQ9S/cCAkerFH5EZb+BziqsOQYqAHpnjEgAczI82
-	GmCmzOtJiMX6MSH2JfbQrZJdIpch/9I8g7gSxlF1zswjqbSTaK01oGMRWtXMuwqi7QeiUnnwkh7
-	QaV64uuR1FtYRR23urKl20Cq1yWVBkKrctsSXmEBjJ8VNqMpgVuQuBkMaO1KEAZygohX5kaqNtV
-	GzsYscedKrcZ5zmbRCnJY4HZ3InbZ4hEuuZnjYdbeespxAbOe3aDdf3jqz1pgZ+D93HPa1FwZ5E
-	H3dO5eRuZqCYC4/j+nUI1TOiut/FwHoamAQuWhC971Wo7GrBWUG0Ei3KlvUlRSKG4AdUPWUMqyU
-	rAsGcn7lXk3WhHNVfcTGc4KGi4nqTizdGxW/CEjUVuKpPues8En5A3kO8XIfraHhqam3/lPRQ
-X-Google-Smtp-Source: AGHT+IGiiF+rKwojBE1+cwq793sp9I8CMc9a4c4ASsbV2ny1yE0G4d4KGIdhd7UXtIqriz/RZGLAzg==
-X-Received: by 2002:a2e:b4a9:0:b0:32c:a097:414c with SMTP id 38308e7fff4ca-331e253ba50mr2587121fa.11.1753350117903;
-        Thu, 24 Jul 2025 02:41:57 -0700 (PDT)
+        bh=pex6Ej+2o+mdbgt0MgnBZKJZc6lsBhLQsNhwotC5eNw=;
+        b=l8yEYHdbzLBjOWGUbuDjOht7HJfOINcawraC50fP82/se7QKBu/2t3EE/WuqrsRq9g
+         Rrnka/OzJT7JPhLGfjgjGEStEldeT1ATHHXhCECHk4UfEbjX53OALe6b0cKYx+Fgip8C
+         WL2qs68+D5rSoan224OF0XdjnDTh/abVX9qNXUaW3IEMbqk/oaclpVVdMzowtJL9/rSW
+         ShUHMf5lUM4LWuVjlBVfD50AQq1Dl+UkRRNu95HRdmXRtfcqEt48JXuL87yTnTrTbSNq
+         sVNCAQjh+HN2gG0RWOAXG+hKmsNj315LQV8PI7smoENNQ5HbwxDjRBTm7YUxb+olYgaZ
+         ICKg==
+X-Gm-Message-State: AOJu0Yy0of20AIkmlT5BiyZxPyVqm4Nt3fSs+NFU22b+WOZ7CjvabQNA
+	/27U2C3+iO/zilSagiyoVVRzJ3uK/Q48Pmf2ISVjkHHb3EJvdw85gRlmSPraug==
+X-Gm-Gg: ASbGncu1Ptv5A8GcMJePxSLcpFkWJU+KNCVdStM/MqYl8XQoSimAPc9zGWiQOe70u7j
+	OCGsreIS7WQbxCMObk+3Ai/oVpfLgGugaqecO6Xw/AZRnVA2pf7l1NfXYW85ZvYSDonE5kE4YZR
+	8sAc/AHjAKUdNA8ZDFyaAAes/d14AzchdEYy6aCoLFkao+9xRBLKLcLr+ANb4cyilD5kY/JjbYd
+	XlBb1zrgEtBwElD2WGM6wYE8EO4A0y4zpt70K3LP9WKi7KeOFjv4dN076Dcxj4oIaZy7rYyFmPY
+	3C6n29X6rTFTXkwXcz8WQvwB72Boj2P0Htjdev1p3A+8jHC720AwwlX0KNswZW4hVuEXMNitN8E
+	4n/jYBAONJBEMjuMD6PK+03oMfAS6jQ1PceC2aWQ70022KJJCMQWcI0vE94M+Yg==
+X-Google-Smtp-Source: AGHT+IE0MQF8l25JjMYXbPcSZXJf3o8vuh5/gMD01xS+vVTBfObUuXV5mMk2AzaCkfgQZJk678w6Rw==
+X-Received: by 2002:a05:6512:b1b:b0:553:1f90:cca4 with SMTP id 2adb3069b0e04-55a5135666amr1656946e87.13.1753350115359;
+        Thu, 24 Jul 2025 02:41:55 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH v6 4/4] CHANGELOG: Document guest suspend/resume to RAM support on Arm
-Date: Thu, 24 Jul 2025 12:40:59 +0300
-Message-ID: <87a75d83f2b6f6701e28c935856f0f7b1dad05bd.1753349109.git.mykola_kvach@epam.com>
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v6 2/4] tools/xl: Allow compilation of 'xl resume' command on Arm
+Date: Thu, 24 Jul 2025 12:40:57 +0300
+Message-ID: <48ea1dfb5bbcbc993332acb8508060d7cba342fc.1753349109.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1753349108.git.mykola_kvach@epam.com>
 References: <cover.1753349108.git.mykola_kvach@epam.com>
@@ -99,39 +99,241 @@ Content-Transfer-Encoding: 8bit
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-Mention the newly added support for guest suspend and resume to/from
-RAM via vPSCI on Arm platforms.
+The "xl resume" command was previously excluded from Arm builds because
+system suspend/resume (e.g., SYSTEM_SUSPEND via vPSCI) was not
+implemented. On x86, this command is used for ACPI S3 suspend/resume.
 
-This support is limited to non-hardware domain guests.
+This change enables compilation of `xl resume` on Arm regardless of the
+underlying implementation status, making the tool available for testing
+and future feature support. The relevant libxl infrastructure and handler
+functions are already present and usable.
+
+The macro `LIBXL_HAVE_NO_SUSPEND_RESUME` has been renamed to
+`LIBXL_HAVE_NO_SUSPEND` to better reflect the updated semantics.
+
+Note: This does not imply full system suspend/resume support on Arm.
+      The `xl suspend` command still does not work on Arm platforms.
 
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Chnages in v6:
-- removed reduntand explanation that thi support added for
-  both arm32 and arm64.
-
-Changes in v5:
-- adjustments to the commit title and message
-- expanded the changelog entry to include more context about
-  suspend/resume support introduced in this patch series
+Changes in v6:
+- Renamed macro from LIBXL_HAVE_NO_SUSPEND_RESUME to LIBXL_HAVE_NO_SUSPEND
+  to better reflect the scope of this change
+- Applied cosmetic changes based on review feedback
 ---
- CHANGELOG.md | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/include/libxl.h     |  5 ++---
+ tools/xl/xl.h             | 10 +++++-----
+ tools/xl/xl_cmdtable.c    |  8 ++++----
+ tools/xl/xl_migrate.c     |  4 ++--
+ tools/xl/xl_saverestore.c |  4 ++--
+ tools/xl/xl_vmcontrol.c   | 14 +++++++-------
+ 6 files changed, 22 insertions(+), 23 deletions(-)
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 5f31ca08fe..7e42ca9b59 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -29,6 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index d6b6e5d2dd..632264912a 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1128,17 +1128,16 @@ typedef struct libxl__ctx libxl_ctx;
+ #define LIBXL_HAVE_SIGCHLD_SHARING 1
  
-  - On Arm:
-     - Ability to enable stack protector
-+    - Support for guest suspend and resume to/from RAM via vPSCI.
-+      Applies only to non-hardware domain guests.
+ /*
+- * LIBXL_HAVE_NO_SUSPEND_RESUME
++ * LIBXL_HAVE_NO_SUSPEND
+  *
+  * Is this is defined then the platform has no support for saving,
+  * restoring or migrating a domain. In this case the related functions
+  * should be expected to return failure. That is:
+  *  - libxl_domain_suspend
+- *  - libxl_domain_resume
+  *  - libxl_domain_remus_start
+  */
+ #if defined(__arm__) || defined(__aarch64__)
+-#define LIBXL_HAVE_NO_SUSPEND_RESUME 1
++#define LIBXL_HAVE_NO_SUSPEND 1
+ #endif
  
- ### Removed
-  - On x86:
+ /*
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 45745f0dbb..4d4a5bb1c8 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -56,7 +56,7 @@ int create_domain(struct domain_create *dom_info);
+ static const char savefileheader_magic[32]=
+     "Xen saved domain, xl format\n \0 \r";
+ 
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ static const char migrate_receiver_banner[]=
+     "xl migration receiver ready, send binary domain data.\n";
+ static const char migrate_receiver_ready[]=
+@@ -65,7 +65,7 @@ static const char migrate_permission_to_go[]=
+     "domain is yours, you are cleared to unpause";
+ static const char migrate_report[]=
+     "my copy unpause results are as follows";
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+ 
+   /* followed by one byte:
+    *     0: everything went well, domain is running
+@@ -124,14 +124,14 @@ int main_pciattach(int argc, char **argv);
+ int main_pciassignable_add(int argc, char **argv);
+ int main_pciassignable_remove(int argc, char **argv);
+ int main_pciassignable_list(int argc, char **argv);
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ int main_restore(int argc, char **argv);
+ int main_migrate_receive(int argc, char **argv);
+ int main_save(int argc, char **argv);
+ int main_migrate(int argc, char **argv);
+ int main_suspend(int argc, char **argv);
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+ int main_resume(int argc, char **argv);
+-#endif
+ int main_dump_core(int argc, char **argv);
+ int main_pause(int argc, char **argv);
+ int main_unpause(int argc, char **argv);
+@@ -202,7 +202,7 @@ int main_cpupoolnumasplit(int argc, char **argv);
+ int main_getenforce(int argc, char **argv);
+ int main_setenforce(int argc, char **argv);
+ int main_loadpolicy(int argc, char **argv);
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ int main_remus(int argc, char **argv);
+ #endif
+ int main_devd(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 06a0039718..03f0970bb7 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -152,7 +152,7 @@ const struct cmd_spec cmd_table[] = {
+       "                         -autopass\n"
+       "--vncviewer-autopass     (consistency alias for --autopass)"
+     },
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+     { "save",
+       &main_save, 0, 1,
+       "Save a domain state to restore later",
+@@ -198,12 +198,12 @@ const struct cmd_spec cmd_table[] = {
+       "Suspend a domain to RAM",
+       "<Domain>",
+     },
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+     { "resume",
+       &main_resume, 0, 1,
+       "Resume a domain from RAM",
+       "<Domain>",
+     },
+-#endif
+     { "dump-core",
+       &main_dump_core, 0, 1,
+       "Core dump a domain",
+@@ -524,7 +524,7 @@ const struct cmd_spec cmd_table[] = {
+       "Loads a new policy into the Flask Xen security module",
+       "<policy file>",
+     },
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+     { "remus",
+       &main_remus, 0, 1,
+       "Enable Remus HA for domain",
+@@ -548,7 +548,7 @@ const struct cmd_spec cmd_table[] = {
+       "                        checkpoint must be disabled.\n"
+       "-p                      Use COLO userspace proxy."
+     },
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+     { "devd",
+       &main_devd, 0, 1,
+       "Daemon that listens for devices and launches backends",
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..a8e2c39944 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -30,7 +30,7 @@
+ #include "xl_utils.h"
+ #include "xl_parse.h"
+ 
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ 
+ static pid_t create_migration_child(const char *rune, int *send_fd,
+                                         int *recv_fd)
+@@ -767,7 +767,7 @@ int main_remus(int argc, char **argv)
+     close(send_fd);
+     return EXIT_FAILURE;
+ }
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+ 
+ 
+ /*
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..cb10b869b9 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -29,7 +29,7 @@
+ #include "xl_utils.h"
+ #include "xl_parse.h"
+ 
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ 
+ void save_domain_core_begin(uint32_t domid,
+                             int preserve_domid,
+@@ -270,7 +270,7 @@ int main_save(int argc, char **argv)
+     return EXIT_SUCCESS;
+ }
+ 
+-#endif /* LIBXL_HAVE_NO_SUSPEND_RESUME */
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
+ 
+ 
+ 
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index c813732838..49484ca3e2 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -32,17 +32,12 @@
+ 
+ static int fd_lock = -1;
+ 
+-#ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
++#ifndef LIBXL_HAVE_NO_SUSPEND
+ static void suspend_domain(uint32_t domid)
+ {
+     libxl_domain_suspend_only(ctx, domid, NULL);
+ }
+ 
+-static void resume_domain(uint32_t domid)
+-{
+-    libxl_domain_resume(ctx, domid, 1, NULL);
+-}
+-
+ int main_suspend(int argc, char **argv)
+ {
+     int opt;
+@@ -55,6 +50,12 @@ int main_suspend(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
++#endif /* !LIBXL_HAVE_NO_SUSPEND */
++
++static void resume_domain(uint32_t domid)
++{
++    libxl_domain_resume(ctx, domid, 1, NULL);
++}
+ 
+ int main_resume(int argc, char **argv)
+ {
+@@ -68,7 +69,6 @@ int main_resume(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
+-#endif
+ 
+ static void pause_domain(uint32_t domid)
+ {
 -- 
 2.48.1
 
