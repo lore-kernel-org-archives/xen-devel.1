@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F0AAC87FCA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C49C87FD1
 	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1058060.1425758 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1058059.1425751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK10-0003EN-U5; Fri, 25 Jul 2025 15:07:18 +0000
+	id 1ufK10-00035S-8N; Fri, 25 Jul 2025 15:07:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1058060.1425758; Fri, 25 Jul 2025 15:07:18 +0000
+Received: by outflank-mailman (output) from mailman id 1058059.1425751; Fri, 25 Jul 2025 15:07:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK10-0003Cp-Mf; Fri, 25 Jul 2025 15:07:18 +0000
-Received: by outflank-mailman (input) for mailman id 1058060;
- Fri, 25 Jul 2025 15:07:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ufK10-00035J-3a; Fri, 25 Jul 2025 15:07:18 +0000
+Received: by outflank-mailman (input) for mailman id 1058059;
+ Fri, 25 Jul 2025 15:07:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DJoT=2G=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1ufK0z-0002MW-7l
- for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:17 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0d7c54d9-6969-11f0-a31e-13f23c93f187;
- Fri, 25 Jul 2025 17:07:16 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-607cf70b00aso4372514a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:16 -0700 (PDT)
+ id 1ufK0y-0002MQ-Go
+ for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:16 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0c148a98-6969-11f0-b895-0df219b8e170;
+ Fri, 25 Jul 2025 17:07:14 +0200 (CEST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-614fd1a5790so274416a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:14 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.15
+ 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 08:07:15 -0700 (PDT)
+ Fri, 25 Jul 2025 08:07:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d7c54d9-6969-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 0c148a98-6969-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1753456036; x=1754060836; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1753456034; x=1754060834; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gBTBBpfNZ3jKYuwP0HG6qEtafO3YUXLjWIrMoIhtdBk=;
-        b=h8GDILNGtWv+NXF+NWv6Gv4dIos4IpdVHnyWDR8gD0oMpexmQyxRvjGUSTyZS/f2X0
-         VFCAnk/ICN+7Em5eaXT6HF/E5FH1uxnX+2vcPhtcqsWHnHgcg+zalSHDD3vW+wThaqOr
-         gWlsqVrKpKapnlFl6XFBlO+PJfon3sIEFyz4E=
+        bh=pVEUFIrsCWteOZOdQHJQjh3H/B/OmFPnYtoY93IX3Z8=;
+        b=Q5JpWw9O/Lt4Pmgx+OFb5QqXL2xXiPKHAL0aePFQHZpCF6LD58kKfHD1U/9EH0bxmW
+         Asp/YN3mzmSqSjg0PX8s4ddkHGhDBnYHbm5JTmZMz/U93n3a9Abn4ZJyAl1fWpq5GK1K
+         PNto/4s+y9eBwI06UvhfCWfz7FsxJrfHHe+NA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753456036; x=1754060836;
+        d=1e100.net; s=20230601; t=1753456034; x=1754060834;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=gBTBBpfNZ3jKYuwP0HG6qEtafO3YUXLjWIrMoIhtdBk=;
-        b=xHq71RuHzP0NKOrq/FqwZVpXD5B5VSi5QInkmMJzE9NH0vOOOPLVv9l2rNGKUVx6JC
-         ecA053XgZV97SJM0b/IFecrUvR4fiSXY1NTRXIQiN4n82BWG/U/Q+uuMN39+m09ulMww
-         wDInkayRBhf9RDHtLsY1a+j/7ofHAU074bsuoRExWkRV1iGMwcQAc7uKXWZEdkpw25V9
-         TkwMS+9gPvIatpOaC12bE7bguvlzLJxUL6nKYPp77ubQOqOSBrw2bc6pexp2+cuS0vYz
-         FIrDW7tJB1JbnJyD4mU11lwaQ38yx1vh6sL68mVwZVc0k3ficQrwcj0X29gW6vZ+ZY7v
-         +uqw==
-X-Gm-Message-State: AOJu0Yz+HmdLciw9Q6dtDv8RoUjgjCkmf0CR9aiekiSOp6RDTzI1pKap
-	hVJTjZSIx0cUfMqdCC2z1HcDvQ3IFwL8nG5ORGzTj1AN/jCPmQAunEJxL2oBaQHlKKnm/ycfEGc
-	71zaQdao=
-X-Gm-Gg: ASbGncuJTBYxw2/9OwdAkmsB0ymq3Wa9eIJd0/hFCz5RjcbZNqSZlZAhHG1XV97JPRb
-	30VJwzrIOq9pLlg3I5FqAXS7o2g0qVI9bqJx/+gx/yZrdJ4S0m574E9a6gZIVieOe+B00J158Ai
-	ukUjOYQC8Lzz1ZqNdkwmZ+reTGOhb195c6DcNVkAgEA2sEvOV1CTGSJRVRbUxm+WN1lfnXp2bbe
-	8C0WVp0gpZ2NG+EFSc7kpFe7eJL6KGyQF5JEIr9w6DbnAkT2FKMMpYrFOAR+v/2utgPXPxX9Kf7
-	3uAKUoNX1zM2/06ziBw4w8NRY75zNAq4cOpkZZlwH2dfunOS1eoUw8PeTwrdFUzBTPlClod7yWe
-	bnw/zhEPVrgi+GaqztMAf4gagIHJ5PeN/x5IgLvVqvlE5VLU=
-X-Google-Smtp-Source: AGHT+IG/spP0GWSnONilxK1+9gXs6Zxei3E+09IcWOveIX+iJJMWiaRBLqLA3PqKOT8ixlrSyJPXxA==
-X-Received: by 2002:a05:6402:3489:b0:608:3a2d:686b with SMTP id 4fb4d7f45d1cf-614f0b782fbmr2086056a12.0.1753456036121;
-        Fri, 25 Jul 2025 08:07:16 -0700 (PDT)
+        bh=pVEUFIrsCWteOZOdQHJQjh3H/B/OmFPnYtoY93IX3Z8=;
+        b=GT2Bv/WiIhGQJQv+nxFy3z9txpUdDpdYdhyEpWuhN8RMW/fOlP8A3gUniqE5pW/k8H
+         F9WXjy6zZIwZEwpkODxloJ+g4bseBGz7f6QGg9BzOg+KqWFHSGeBnMcWB4vecZxGsYIz
+         TM0Yzx+LGYtQjiN/iukyxwcwFUHuLug3sYkOwqFZ8mOQa7SUS0k866+qBmROVHVjYdX3
+         IKmNBplAAjl67RSsaa0sgmkJnO0aG8U2nAxkjhaKZ789pk55r/LU6ZmXWw43W79vjaUO
+         2KLBKYvopOzQnxMUBg0YmWgP6BUoCmJO5aQ4gQEdq9O+O1CvQ0JxWkIR/SLf18kEfCxa
+         at8w==
+X-Gm-Message-State: AOJu0YxAW1EYKVmeh88xYpO/LjGWIh/WpTCDmnRjpqjPlkIgIWm0CZw5
+	kOik5XtW+To1WROg7LguYvYfnwakMrBuUocDqf5dDC5zjqT6HWTxkLhtcAXb2BVpykpVYZ5idk1
+	6aXQGS2U=
+X-Gm-Gg: ASbGnctFrFLkQLHg0is6HmgrSWBym2DjuJgVUUwtDKCeTybEmLd60QdfTp0q9FVlSTC
+	DdoiZsttP0bnHucrBvKj13Gmf6iYEWceOU0venzkT5VLxqHkXPnyoS6KKG6GSqKRSvQwL5sxhGS
+	X42asarQB+/LqWCLn/6818gnmUcj1bQ+I3XY0/UIIPZNu+t5vD6oSurpwt9I08pLFkjgRKSl++c
+	KTHyyDemP/f7sOBCk2CJQ9bVy4jFY67G27QTKwgMa3XLGB0JCvYSkMmwic0XPyhEWoATrA40hDE
+	a+JMQ6hijVP2ivj70MSDzqyKWdFvplpqA56qgB+Ec5g/dq3axzim71cvUcNinPW9/SnxoankViA
+	C9gBajHKM50Kg0NiQXiK8n7YQsID9jdglgDUYeNm5IcWTiIE=
+X-Google-Smtp-Source: AGHT+IHecPa0fHUDYt9VuBiYwJLKcyO0z7ZDAxUoe90D5hB3q1z7LH7eTcHh6J8JrrWout0puCJZIg==
+X-Received: by 2002:a05:6402:34d5:b0:606:ebd9:c58b with SMTP id 4fb4d7f45d1cf-614f1bdd877mr2055311a12.1.1753456033718;
+        Fri, 25 Jul 2025 08:07:13 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	andriy.sultanov@vates.tech,
 	boris.ostrovsky@oracle.com
-Subject: [RFC PATCH v1 06/10] arch-x86/pmu.h: convert ascii art diagram to Unicode
-Date: Fri, 25 Jul 2025 16:06:42 +0100
-Message-ID: <8d7f3eb14bee79c63af02b228fa02761ae2db6c5.1753372928.git.edwin.torok@cloud.com>
+Subject: [RFC PATCH v1 03/10] arch-x86/pmu.h: convert ascii art drawing to Unicode
+Date: Fri, 25 Jul 2025 16:06:39 +0100
+Message-ID: <99651231c4b535cdba21c852f3ec7c28c00a8088.1753372928.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1753372928.git.edwin.torok@cloud.com>
 References: <cover.1753372928.git.edwin.torok@cloud.com>
@@ -103,102 +99,155 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Using `aa2u` tool.
+Use `aa2u` (ascii-art-to-unicode from Hackage) to convert to
+Unicode box drawing characters.
+
+The full list of supported drawing characters can be seen in the
+examples at:
+https://github.com/fmthoma/ascii-art-to-unicode/blob/master/src/Text/AsciiArt.hs
+
+For future maintenance: conversion can be done incrementally
+(mixing ascii art with already converted Unicode,
+ and running the conversion tool again), or by hand.
+
+No functional change.
 
 Signed-off-by: Edwin Török <edwin.torok@cloud.com>
 ---
- xen/include/public/arch-x86/pmu.h | 47 ++++++++++++++++---------------
- xen/include/public/pmu.h          |  2 +-
- 2 files changed, 25 insertions(+), 24 deletions(-)
+ xen/include/public/arch-x86/pmu.h | 120 +++++++++++++++---------------
+ 1 file changed, 60 insertions(+), 60 deletions(-)
 
 diff --git a/xen/include/public/arch-x86/pmu.h b/xen/include/public/arch-x86/pmu.h
-index bdc8218cbe..92ae4dbb1d 100644
+index 8be71a88ee..5bd0aa6f77 100644
 --- a/xen/include/public/arch-x86/pmu.h
 +++ b/xen/include/public/arch-x86/pmu.h
-@@ -75,8 +75,10 @@ DEFINE_XEN_GUEST_HANDLE(xen_pmu_regs_t);
- #define PMU_SAMPLE_PV      (1<<3) /* Sample from a PV guest */
- 
- /*
-- * Architecture-specific information describing the state of the guest at
-- * the time of a PMU interrupt.
-+ * Architecture-specific information describing state of the guest at
-+ * the time of PMU interrupt.
-+ * Even if the interrupt arrived while inside Xen, this will always contain
-+ * the guest's state.
-  */
- struct xen_pmu_arch_guest {
-     union {
-@@ -146,11 +148,10 @@ struct xen_pmu_arch {
- typedef struct xen_pmu_arch xen_pmu_arch_t;
+@@ -130,66 +130,66 @@ typedef struct xen_pmu_arch xen_pmu_arch_t;
  DEFINE_XEN_GUEST_HANDLE(xen_pmu_arch_t);
  
--
  /* Memory layout:
-  *                ╭─────────────────────╮
-  *                │ struct xen_pmu_data │
-- * ╒══════════════╧═════════════════════╧═══════════════════════╕ ◁╮
-+ * ╒══════════════╧═════════════════════╧═══════════════════════╕ ◁│
-  * │ vcpu_id                                                    │  │
-  * ├────────────────────────────────────────────────────────────┤  │
-  * │ pcpu_id                                                    │  │
-@@ -207,25 +208,25 @@ DEFINE_XEN_GUEST_HANDLE(xen_pmu_arch_t);
-  * ┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆  ┆
-  * ┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆  ┆
-  * │████████████████████████████████████████████████████████████│  │
-- * |############################################################|  |
-- * |##########.------------------------------.##################|  |
-- * |##########| struct xen_pmu_hv_stacktrace |##################|  |
-- * +==========+==============================+==================+  |
-- * |                              ^ [stacktrace_nr-1]           |  |
-- * |                              :                             |  |
-- * | stacktrace[stacktrace_nr]    : [0]                         |  |
-- * +------------------------------------------------------------+  |
-- * | stacktrace_nr                                              |  |
-- * +------------------------------------------------------------+  |
-- * | guest_domain_id                                            |  |
-- * +------------------------------------------------------------+  |
-- * |##pad#######################################################|  |
-- * +=======+=+===+==================+===========================+  |
-- * | guest | | r | regs             |##pad######################|  |
-- * +-------. +---. (xen or guest)   |###########################|  |
-- * |         +======================+===========================+  |
-- * |         |##pad2############################################|  | PAGE_SIZE
-- * +=========+==================================================+ <.
-+ * │████████████████████████████████████████████████████████████│  │
-+ * │██████████╭──────────────────────────────╮██████████████████│  │
-+ * │██████████│ struct xen_pmu_hv_stacktrace │██████████████████│  │
-+ * ╞══════════╧══════════════════════════════╧══════════════════╡  │
-+ * │                              △ [stacktrace_nr-1]           │  │
-+ * │                              ┆                             │  │
-+ * │ stacktrace[stacktrace_nr]    ┆ [0]                         │  │
-+ * ├────────────────────────────────────────────────────────────┤  │
-+ * │ stacktrace_nr                                              │  │
-+ * ├────────────────────────────────────────────────────────────┤  │
-+ * │ guest_domain_id                                            │  │
-+ * ├────────────────────────────────────────────────────────────┤  │
-+ * │██pad███████████████████████████████████████████████████████│  │
-+ * ╞═══════╤═╤═══╤══════════════════╤═══════════════════════════╡  │
-+ * │ guest │ │ r │ regs             │██pad██████████████████████│  │
-+ * ├───────╯ ├───╯ (xen or guest)   │███████████████████████████│  │
-+ * │         ╞══════════════════════╧═══════════════════════════╡  │
-+ * │         │██pad2████████████████████████████████████████████│  │ PAGE_SIZE
-+ * ╘═════════╧══════════════════════════════════════════════════╛ ◁╯
+-*                .---------------------.
+-*                | struct xen_pmu_data |
+-* +==============+=====================+=======================+ <.
+-* | vcpu_id                                                    |  |
+-* +------------------------------------------------------------+  |
+-* | pcpu_id                                                    |  |
+-* +------------------------------------------------------------+  |
+-* | domain_id                                                  |  |
+-* +------------------------------------------------------------+  |
+-* |##pad#######################################################|  |
+-* +====+=+===+==================+==============================+  |
+-* | pmu| | r | regs             |##pad#########################|  |
+-* +----. +---. (xen or guest)   |##############################|  |
+-* |      +======================+==============================+  |
+-* |      | pmu_flags                                           |  |
+-* |      +===+====================+============================+  |
+-* |      | l | lapic_lvtpc        |############################|  |
+-* |      +---. ###################|##pad#######################|  |
+-* |      |     ###################|############################|  |
+-* |      +===+=+=======+=====+====+====+=======+========+======+  |
+-* |      | c | |       | amd |    |    | intel |         |#####|  |
+-* |      +---+ |       .-----.    |    .-------.         |#####|  |
+-* |      |     | counter          | fixed_counters       |#####|  | 
+-* |      |     +------------------+----------------------+#####|  |
+-* |      |     | ctrls            | arch_counters        |#####|  |
+-* |      |     +=====+========+===+----------------------+#####|  |
+-* |      |     |     | regs[] |  :| global_ctrl          |#####|  |
+-* |      |     |     +--------.  :+----------------------+#####|  |
+-* |      |     |struct           :| global_ovf_ctrl      |#####|  |
+-* |      |     |xen_pmu_cntr_pair:+----------------------+#####|  |
+-* |      |     |[counters]       :| global_status        |#####|  |
+-* |      |     |                 :+----------------------+#####|  |
+-* |      |     |                 :| fixed_ctrl           |#####|  |
+-* |      |     |                 :+----------------------+#####|  |
+-* |      |     |                 :| ds_area              |#####|  |
+-* |      |     |                 :+----------------------+#####|  |
+-* |      |     |                 :| pebs_enable          |#pad#|  |
+-* |      |     |                 :+----------------------+#####|  |
+-* |      |     |                 v| debugctl             |#####|  |
+-* |      |     |##################+=======+========+=====+#####|  |
+-* |      |     |##################|       | regs[] | :[0]|#####|  |
+-* |      |     |##################|       +--------. :   |#####|  |
+-* |      |     |##################| uint64_t         :   |#####|  |
+-* |      |     |##################| [fixed_counters] :   |#####|  |
+-* |      |     |##################|                  :   |#####|  |
+-* |      |     |##################|                  :   |#####|  |
+-* |      |     |##################| -----------------:   |#####|  |
+-* |      |     |##################|  struct          :   |#####|  |
+-* |      |     |##################| xen_pmu_cntr_pair:   |#####|  |
+-* |      |     +==================+ [arch_counters]  :   +=====+  | 
+-* |      |                        |                  :   |     |  |
+-* |      |                        |                  v   |     |  |
+-* |      |                        +======================+     |  |
+-* |      +=====================================================+  |
+-* +==========================+=================================+  |
+-* |############################################################|  |
+-* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  :
+-* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  :
+-* |############################################################|  | PAGE_SIZE
+-* +=========+==================================================+ <.
++*                ╭─────────────────────╮
++*                │ struct xen_pmu_data │
++* ╒══════════════╧═════════════════════╧═══════════════════════╕ ◁╮
++* │ vcpu_id                                                    │  │
++* ├────────────────────────────────────────────────────────────┤  │
++* │ pcpu_id                                                    │  │
++* ├────────────────────────────────────────────────────────────┤  │
++* │ domain_id                                                  │  │
++* ├────────────────────────────────────────────────────────────┤  │
++* │██pad███████████████████████████████████████████████████████│  │
++* ╞════╤═╤═══╤══════════════════╤══════════════════════════════╡  │
++* │ pmu│ │ r │ regs             │██pad█████████████████████████│  │
++* ├────╯ ├───╯ (xen or guest)   │██████████████████████████████│  │
++* │      ╞══════════════════════╧══════════════════════════════╡  │
++* │      │ pmu_flags                                           │  │
++* │      ╞═══╤════════════════════╤════════════════════════════╡  │
++* │      │ l │ lapic_lvtpc        │████████████████████████████│  │
++* │      ├───╯ ███████████████████│██pad███████████████████████│  │
++* │      │     ███████████████████│████████████████████████████│  │
++* │      ╞═══╤═╤═══════╤═════╤════╪════╤═══════╤═══════════════╡  │
++* │      │ c │ │       │ amd │    │    │ intel │         │█████│  │
++* │      ├───┘ │       ╰─────╯    │    ╰───────╯         │█████│  │
++* │      │     │ counter          │ fixed_counters       │█████│  │
++* │      │     ├──────────────────┼──────────────────────┤█████│  │
++* │      │     │ ctrls            │ arch_counters        │█████│  │
++* │      │     ╞═════╤════════╤═══├──────────────────────┤█████│  │
++* │      │     │     │ regs[] │  ┆│ global_ctrl          │█████│  │
++* │      │     │     └────────╯  ┆├──────────────────────┤█████│  │
++* │      │     │struct           ┆│ global_ovf_ctrl      │█████│  │
++* │      │     │xen_pmu_cntr_pair┆├──────────────────────┤█████│  │
++* │      │     │[counters]       ┆│ global_status        │█████│  │
++* │      │     │                 ┆├──────────────────────┤█████│  │
++* │      │     │                 ┆│ fixed_ctrl           │█████│  │
++* │      │     │                 ┆├──────────────────────┤█████│  │
++* │      │     │                 ┆│ ds_area              │█████│  │
++* │      │     │                 ┆├──────────────────────┤█████│  │
++* │      │     │                 ┆│ pebs_enable          │█pad█│  │
++* │      │     │                 ┆├──────────────────────┤█████│  │
++* │      │     │                 ▽│ debugctl             │█████│  │
++* │      │     │██████████████████╞═══════╤════════╤═════╡█████│  │
++* │      │     │██████████████████│       │ regs[] │ ┆[0]│█████│  │
++* │      │     │██████████████████│       └────────╯ ┆   │█████│  │
++* │      │     │██████████████████│ uint64_t         ┆   │█████│  │
++* │      │     │██████████████████│ [fixed_counters] ┆   │█████│  │
++* │      │     │██████████████████│                  ┆   │█████│  │
++* │      │     │██████████████████│                  ┆   │█████│  │
++* │      │     │██████████████████│ ─────────────────┆   │█████│  │
++* │      │     │██████████████████│  struct          ┆   │█████│  │
++* │      │     │██████████████████│ xen_pmu_cntr_pair┆   │█████│  │
++* │      │     ╘══════════════════╡ [arch_counters]  ┆   ╞═════╡  │
++* │      │                        │                  ┆   │     │  │
++* │      │                        │                  ▽   │     │  │
++* │      │                        ╘══════════════════════╛     │  │
++* │      ╘═════════════════════════════════════════════════════╡  │
++* ╞════════════════════════════════════════════════════════════╡  │
++* │████████████████████████████████████████████████████████████│  │
++* ┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆  ┆
++* ┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆┆  ┆
++* │████████████████████████████████████████████████████████████│  │ PAGE_SIZE
++* ╘════════════════════════════════════════════════════════════╛ ◁╯
  */
  
  #endif /* __XEN_PUBLIC_ARCH_X86_PMU_H__ */
-diff --git a/xen/include/public/pmu.h b/xen/include/public/pmu.h
-index 1879914ea6..6366a79169 100644
---- a/xen/include/public/pmu.h
-+++ b/xen/include/public/pmu.h
-@@ -148,7 +148,7 @@ struct xen_pmu_hv_stacktrace {
-     * arrives while in Xen.
-     * */
-     struct xen_pmu_arch_guest guest;
--#define XEN_PMU_STACKTRACE_PAD 48
-+#define XEN_PMU_STACKTRACE_PAD 56
-     uint8_t pad2[XEN_PMU_STACKTRACE_PAD];
- };
- 
 -- 
 2.47.1
 
