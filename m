@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D6D7C87FCF
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1058067.1425828 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E1F5C87FD1
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1058064.1425800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK17-0005B0-Mo; Fri, 25 Jul 2025 15:07:25 +0000
+	id 1ufK14-0004KE-Ia; Fri, 25 Jul 2025 15:07:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1058067.1425828; Fri, 25 Jul 2025 15:07:25 +0000
+Received: by outflank-mailman (output) from mailman id 1058064.1425800; Fri, 25 Jul 2025 15:07:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK17-000594-Ep; Fri, 25 Jul 2025 15:07:25 +0000
-Received: by outflank-mailman (input) for mailman id 1058067;
- Fri, 25 Jul 2025 15:07:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ufK14-0004J2-Aw; Fri, 25 Jul 2025 15:07:22 +0000
+Received: by outflank-mailman (input) for mailman id 1058064;
+ Fri, 25 Jul 2025 15:07:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DJoT=2G=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1ufK15-0002MQ-Uk
- for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:23 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 10a4df44-6969-11f0-b895-0df219b8e170;
- Fri, 25 Jul 2025 17:07:22 +0200 (CEST)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-607cf70b00aso4372661a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:22 -0700 (PDT)
+ id 1ufK12-0002MW-IN
+ for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:20 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0f76e888-6969-11f0-a31e-13f23c93f187;
+ Fri, 25 Jul 2025 17:07:20 +0200 (CEST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-60bfcada295so3616927a12.1
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:20 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.21
+ 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 08:07:21 -0700 (PDT)
+ Fri, 25 Jul 2025 08:07:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,46 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10a4df44-6969-11f0-b895-0df219b8e170
+X-Inumbo-ID: 0f76e888-6969-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1753456041; x=1754060841; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1753456040; x=1754060840; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=l2apShFwR46Beomu8PA+jY3aycyZQMB8hT+3xioaatM=;
-        b=CB9cZ043cVDiQR7VWQZSZoEJ/GN8koFEtyDEAJ7DjQ6slR3HVhiyJdqCs3kofo8hR6
-         McoxAUEmx8r7LUUwgcDSPuV0kBM2Y34j9YV3vtZX+CdCHwlGG5VAbA/Xu38mFhutXllS
-         Wb/aMtS7UxnfgUPCZiqlVZuWoOJzU4RYg658U=
+        bh=vInKQUDym/V0LtSN5zjRIc7mW05wzM+9RxF82LfYmjw=;
+        b=BMJsbxxQFYlyCl0IirpPW2WAPBsOeOWK24MLsJZCrRRsVD0ulQyf780JQGykKwUw97
+         a48aaOz+qd8i+THY3+P84GXV/CAPUiyhPo4y/s5VnJXg544CL3NBeq2eU3tmzxAGEzgn
+         OeJmhv43ZqBG7LgOH202S1zwwHoNgD3A+PD1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753456041; x=1754060841;
+        d=1e100.net; s=20230601; t=1753456040; x=1754060840;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=l2apShFwR46Beomu8PA+jY3aycyZQMB8hT+3xioaatM=;
-        b=Dad0yg3x9CqRPZUVEu9g+OkzxQkkWiyJbFjhvmr/VBbH3lok58y3EZvsz+5yT0cho7
-         URkDMtHaiLQrp1H5PutBnfBCqizyZrlgPSayiPGU60HxlFtE/WFBOUaCA+ivNexEU/XQ
-         HN5USuoItdaVInVM+2Vo6YXZhNHmutCSE+AG8kUXIEzvpM2r9oPXnTG8FcE1WZO02stH
-         AvQqD34OGBzgoKonzXOSxKdTxWv/nyc7nMA+VNud2VCDubbk/r2bWyEycGSpwtfdnUgv
-         vjTtvHydBeZ6MrDNqg/SV2sOTWCP0UIZxchDdIudtNhwQzzlGGbmWbGOojilc49qN6jV
-         rnOA==
-X-Gm-Message-State: AOJu0YyQbX5FVGF0Z12PyBtK7z0BOUKcJdA4iwsCxSYzBF5EozqEVGyK
-	pWsSBczGYdWBZ1kl87bi80Xkg1DveHG1EJYlSRGgyGYa0SrZZL9lkwLdMXjIP+aHk8Vnpyy9ygj
-	HL3Gg2MU=
-X-Gm-Gg: ASbGnct+KUagY5SlRZD50fWVUdhSvFo9NEYvRiUhhfo/DLcOTFDaCU0luzIUa1sDspj
-	PSiw9Umw2BY0HdO/1kfWv+ZlGDaMv+cwCpkYHiLpGRyj8CKt+/56FWo2uCRWaPT6VPDePkcEwP8
-	pfNhDTuWVHhIF/H9lAARJ1Igp8b7deNQlLzULUkW3QBUfK1wouNCC7QU5kWxX+xRQE9cRE6sfoW
-	WgNgFlF1vokLnkjgHdRhcgtIaWiDg/X2lP+3phpGL6zl4qljjASe6YkCwlQLO9U3oDLQd4f6B2C
-	+u7l5hQfnIXQARO6FH8p+sC4fOCKcH9ENcc8wGju/2Shrtbp9PnJQckdxOcU4FpOyQe77ODtRh7
-	HpIpfJyZ2Tij3epTI78oYuqQ78+p8k4jByBjHB7iQhMllKq4=
-X-Google-Smtp-Source: AGHT+IFlClga9zdb0mqz4kAT4vlSkIUpH4lY4DIuGqB2I8twj25k6WbdynM8YuKiO0Mc2iuVyYXOnA==
-X-Received: by 2002:a05:6402:3495:b0:612:c2a3:6b5e with SMTP id 4fb4d7f45d1cf-614f1df644cmr2162573a12.20.1753456041507;
-        Fri, 25 Jul 2025 08:07:21 -0700 (PDT)
+        bh=vInKQUDym/V0LtSN5zjRIc7mW05wzM+9RxF82LfYmjw=;
+        b=gZICQEXOUPx8Eb53kyX5OPW8bEGiobw6iMT81LQ0K8MXb/0/+YsykaUqlSn10myb/t
+         jwZeTDdYXAaKEm3v/4IkEmf+QNBqj9B8PG+4JXG0wr1YUipHkX6tzaOWYnK+C3ZetKmw
+         jn48GgU+ctDStB+wlOQ1Pij9wkQjhT7ShonD897HbUuEf10lZq73L7YPi0/YAu9bxMzi
+         nFJpO7X+iE7N+Oc68dwx/h9GbTIb5RmKG2gvx/5q7YflbtAHbi1Q4leqAjSUVCQu6jIp
+         XL9WlD5eDLMUMyj8YSuTcWevbbTcHVVkTpd/kuRvy8hqTo5fS6SD9kpn7KwC1u0B+f4d
+         87Ew==
+X-Gm-Message-State: AOJu0YzSoqScmWd9R/0vZiSh0asjmH1IAuYO+xb/MqwjCgjeri3+ACvd
+	qR0lHrd2huGPxf+noDYaVrXMzcowvHtlIx/x5SHLAanwM8j2/xYut9b6GZiJVcq0MVJH0cVaILE
+	RyyMOfkI=
+X-Gm-Gg: ASbGnctjmApeSIcFEJ0YX8F8o6nzchePtzBAKOZyVeDNfIpnrJLqMoF2H5c+GIUqRb/
+	nd2hBOhc+wI0YRrN9m5v/iJDDS8t49IQ+1ze2uO+ACDzrWcrRS8IqBvpI9HSJ+m90WiId0OXgyk
+	ISOUcsarTSckeZPzIy/jj5R1dn3fQz1T08lK6zmnrBIqir524vWOW1WW16pfpOxCNBBlUTxAi3/
+	mmSvvlhWrt4COiD3YrIGkNNOyYQ9Fys11Zgw74VJzCnLQ1tQTcK2DpAY3Y8EGkGvcokxcV9w8wS
+	MFAo/HeBqItCooZBbh0JujRlnSbtqKULFU9KLmz8IZhXtiQtceWVAxvqNoJko8/4EKlbRKJEByJ
+	hA2NimH8vGW3HxnsQnOvkEo7yYZIle5jAgMoY
+X-Google-Smtp-Source: AGHT+IFVNKsEQIGegS9fag3H4TJHSLllipGdqgNb69TweprTYiCTydPYPubRbaeQMd1VQlHtchNYRg==
+X-Received: by 2002:a50:baaa:0:b0:608:493a:cccf with SMTP id 4fb4d7f45d1cf-614f1dfa8d5mr1774213a12.30.1753456039518;
+        Fri, 25 Jul 2025 08:07:19 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
-Subject: [RFC LINUX PATCH v1 3/3] perf kvm: implement Xen hypervisor stacktraces
-Date: Fri, 25 Jul 2025 16:06:49 +0100
-Message-ID: <20250725150719.472782-3-edwin.torok@cloud.com>
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	andriy.sultanov@vates.tech,
+	boris.ostrovsky@oracle.com
+Subject: [RFC PATCH v1 10/10] xen/tools/pyperf.py: example script to parse perf output
+Date: Fri, 25 Jul 2025 16:06:46 +0100
+Message-ID: <570fac654441fd0700a2a322d71c68f2e7b4e27d.1753372928.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1753372928.git.edwin.torok@cloud.com>
 References: <cover.1753372928.git.edwin.torok@cloud.com>
@@ -94,171 +103,180 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Using the new VPMU 0.2 interface.
-This is backwards compatible with VPMU 0.1:
-the new 'struct xen_pmu_hv_stacktrace` is stored at the end of the page,
-and stacktrace_nr would be 0 on old hypervisors.
+Looks up symbols by parsing the output of 'perf script -i
+perf.data.kvm'.
+
+Note that addr2line is very slow, and invoking it for each symbol would
+results in the script taking several minutes to process a trace that
+only lasts a few seconds.
+Processing only unique addresses, and processing multiple addresses in
+one go reduces this to acceptable running times.
+
+Based on an earlier script by Andriy Sultanov for parsing 'perf kvm report
+--stdio' output.
+
+This doesn't have to be added to the tree, eventually perf itself should
+be capable of performing this lookup, but meanwhile it is useful to have
+some way for automatically converting stacktraces.
 
 Signed-off-by: Edwin Török <edwin.torok@cloud.com>
 ---
- arch/x86/events/core.c |  4 ++-
- arch/x86/xen/pmu.c     | 73 ++++++++++++++++++++++++++++++++++++++----
- 2 files changed, 70 insertions(+), 7 deletions(-)
+ xen/tools/pyperf.py | 146 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 146 insertions(+)
+ create mode 100644 xen/tools/pyperf.py
 
-diff --git a/arch/x86/events/core.c b/arch/x86/events/core.c
-index ad63bd408cd9..1fca4a77f353 100644
---- a/arch/x86/events/core.c
-+++ b/arch/x86/events/core.c
-@@ -2764,12 +2764,14 @@ perf_callchain_kernel(struct perf_callchain_entry_ctx *entry, struct pt_regs *re
- 	struct unwind_state state;
- 	unsigned long addr;
- 
-+	perf_hypervisor_callchain(entry, regs);
+diff --git a/xen/tools/pyperf.py b/xen/tools/pyperf.py
+new file mode 100644
+index 0000000000..881e6e1e0b
+--- /dev/null
++++ b/xen/tools/pyperf.py
+@@ -0,0 +1,146 @@
++#!/usr/bin/env python3
++## run after 'perf kvm --host --guest record -a -F 99 -- xe vm-list'
++# wraps the call to 'perf script' to get xen symbols instead of just addresses, like:
++#
++# perf  236848 [000] 67971.504330:          1 cycles:P:
++#        ffff82d04029fc73 [unknown] ([unknown])
++#        ffff82d04029ebc2 [unknown] ([unknown])
++#        ffff82d04029ef1f [unknown] ([unknown])
++#        ffff82d0403081df [unknown] ([unknown])
++#        ffff82d0402012d3 [unknown] ([unknown])
++#            7f2ea410469d __GI___ioctl+0x3d (/usr/lib64/libc.so.6)
++#            55f9b3a8df5c perf_evsel__run_ioctl+0x6c (/usr/bin/perf)
++#            55f9b397b152 __evlist__enable.constprop.0+0x112 (/usr/bin/perf)
++#            55f9b38c2643 __cmd_record.constprop.0+0x2833 (/usr/bin/perf)
++#            55f9b38c3e1c cmd_record+0xeec (/usr/bin/perf)
++#            55f9b38e3ed0 cmd_kvm+0x7d0 (/usr/bin/perf)
++#            55f9b3961ff1 run_builtin+0x71 (/usr/bin/perf)
++#            55f9b38adbeb main+0x68b (/usr/bin/perf)
++#            7f2ea403314a __libc_start_call_main+0x7a (/usr/lib64/libc.so.6)
++#            7f2ea403320b __libc_start_main@@GLIBC_2.34+0x8b (/usr/lib64/libc.so.6)
++#            55f9b38ade55 _start+0x25 (/usr/bin/perf)
++# 
++# Or with perf script -F+srcline:
++# perf  236848 [000] 67971.504330:          1 cycles:P:
++#        ffff82d04029fc73 [unknown] ([unknown])
++#        ffff82d04029ebc2 [unknown] ([unknown])
++#        ffff82d04029ef1f [unknown] ([unknown])
++#        ffff82d0403081df [unknown] ([unknown])
++#        ffff82d0402012d3 [unknown] ([unknown])
++#            7f2ea410469d __GI___ioctl+0x3d (/usr/lib64/libc.so.6)
++#  libc.so.6[d569d]
++#            55f9b3a8df5c perf_evsel__run_ioctl+0x6c (/usr/bin/perf)
++#  evsel.c:435
++#            55f9b397b152 __evlist__enable.constprop.0+0x112 (/usr/bin/perf)
++# evlist.c:573
++#            55f9b38c2643 __cmd_record.constprop.0+0x2833 (/usr/bin/perf)
++#  builtin-record.c:2524
++#            55f9b38c3e1c cmd_record+0xeec (/usr/bin/perf)
++#  builtin-record.c:4215
++#            55f9b38e3ed0 cmd_kvm+0x7d0 (/usr/bin/perf)
++#  builtin-kvm.c:2081
++#            55f9b3961ff1 run_builtin+0x71 (/usr/bin/perf)
++#  perf.c:322
++#            55f9b38adbeb main+0x68b (/usr/bin/perf)
++#  perf.c:375
++#            7f2ea403314a __libc_start_call_main+0x7a (/usr/lib64/libc.so.6)
++#  libc.so.6[414a]
++#            7f2ea403320b __libc_start_main@@GLIBC_2.34+0x8b (/usr/lib64/libc.so.6)
++#  libc.so.6[420b]
++#            55f9b38ade55 _start+0x25 (/usr/bin/perf)
++#  ??:0
++# 
++# TODO: BUG when we have only 1 unknown and not from hypervisor we print 2 bogus values
++# and claim it was hypervisor
++# This is useful for FlameGraphs
 +
- 	if (perf_guest_state()) {
- 		/* TODO: We don't support guest os callchain now */
- 		return;
- 	}
- 
--	if (perf_callchain_store(entry, regs->ip))
-+	if (!regs->ip || perf_callchain_store(entry, regs->ip))
- 		return;
- 
- 	if (perf_hw_regs(regs))
-diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
-index b92dc739fdfb..4996b6904e0b 100644
---- a/arch/x86/xen/pmu.c
-+++ b/arch/x86/xen/pmu.c
-@@ -19,11 +19,13 @@
- struct xenpmu {
- 	/* Shared page between hypervisor and domain */
- 	struct xen_pmu_data *xenpmu_data;
-+	const struct xen_pmu_hv_stacktrace *xenpmu_hv_stacktrace;
- 
- 	uint8_t flags;
- };
- static DEFINE_PER_CPU(struct xenpmu, xenpmu_shared);
- #define get_xenpmu_data()    (this_cpu_ptr(&xenpmu_shared)->xenpmu_data)
-+#define get_xenpmu_hv_stacktrace()    (this_cpu_ptr(&xenpmu_shared)->xenpmu_hv_stacktrace)
- #define get_xenpmu_flags()   (this_cpu_ptr(&xenpmu_shared)->flags)
- 
- /* Macro for computing address of a PMU MSR bank */
-@@ -436,8 +438,19 @@ static unsigned int xen_guest_state(void)
- 		return state;
- 	}
- 
--	if (!xen_initial_domain() || (xenpmu_data->domain_id >= DOMID_SELF))
--		return state;
-+	if (!xen_initial_domain() || (xenpmu_data->domain_id >= DOMID_SELF)) {
-+		if (xenpmu_data->domain_id == DOMID_XEN) {
-+			/* when inside Xen we output the hypervisor stacktrace if available,
-+			 * but only look at guest stacktrace if this is our domid
-+			 */
-+			const struct xen_pmu_hv_stacktrace *xenpmu_hv_stacktrace =
-+				get_xenpmu_hv_stacktrace();
-+			if (!xenpmu_hv_stacktrace ||
-+			    xenpmu_hv_stacktrace->guest_domain_id == DOMID_SELF)
-+				return state;
-+		} else
-+			return state;
-+	}
- 
- 	state |= PERF_GUEST_ACTIVE;
- 
-@@ -463,10 +476,54 @@ static unsigned long xen_get_guest_ip(void)
- 	return xenpmu_data->pmu.r.regs.ip;
- }
- 
-+static void xen_convert_regs(const struct xen_pmu_regs *xen_regs,
-+			     struct pt_regs *regs, uint64_t pmu_flags);
++from collections import defaultdict
++from typing import Optional
++import subprocess
++import tempfile
 +
-+static void xen_hypervisor_callchain(struct perf_callchain_entry_ctx *entry,
-+				     struct pt_regs *regs)
-+{
-+	if (!entry)
-+		return;
++with open('/sys/hypervisor/version/major', 'r') as f:
++    major = f.read().rstrip()
++with open('/sys/hypervisor/version/minor', 'r') as f:
++    minor = f.read().rstrip()
++with open('/sys/hypervisor/version/extra', 'r') as f:
++    extra = f.read().rstrip()
 +
-+	const struct xen_pmu_data *xenpmu_data = get_xenpmu_data();
++xen_version = f'{major}.{minor}{extra}'
++xen_symbols = f'/boot/xen-syms-{xen_version}'
++# TODO: srcline transform as we do for ours
++report: bytes = subprocess.check_output(['perf', 'script', '-i', 'perf.data.kvm'])
 +
-+	if (!xenpmu_data) {
-+		pr_warn_once("%s: pmudata not initialized\n", __func__);
-+		return;
-+	}
++# invoking addr2line for each symbol is very slow
++# (takes several minutes to process a trace that way)
++# Instead collect all addresses, and invoke addr2line once
++# (this way we can also query it only for unique addresses)
++maybe_in_hypervisor = False
 +
-+	if (xenpmu_data->domain_id != DOMID_XEN)
-+		return;
++addresses = set()
++lines = []
 +
-+	if (!regs->ip || perf_callchain_store(entry, regs->ip))
-+		return;
++for rawline in report.splitlines():
++    line = rawline.decode()
++    columns = line.split()
++    if line and line[0] != ' ':
++        # beginning of new stacktrace, could start in hypervisor
++        maybe_in_hypervisor = True
++    if len(columns) == 3 and maybe_in_hypervisor and columns[1] == '[unknown]' and columns[2] == '([unknown])':
++        addr = columns[0]
++        addresses.add(addr)
++        lines.append((line, columns))
++    else:
++        maybe_in_hypervisor = False
++        lines.append((line, []))
 +
-+	const struct xen_pmu_hv_stacktrace *pmu_stack =
-+		get_xenpmu_hv_stacktrace();
++addr2loc: defaultdict[str, list[str]] = defaultdict(list)
++with tempfile.NamedTemporaryFile() as tmp:
++    # TODO: add back -i, but sharing needs to be fixed
++    tmp.write(f"-asfe {xen_symbols}\n".encode("utf-8"))
++    for addr in addresses:
++        tmp.write((addr + "\n").encode("utf-8"))
++    tmp.flush()
++    cmd = ['addr2line', '@' + tmp.name]
++    symbols = subprocess.check_output(cmd).decode().splitlines()
++    # output format:
++    #  address
++    #  function_name
++    #  source_file:line_number
++    #  inlined by function_name
++    #  inlined by source_file:line_number
++    # we keep each of these separate, but change the order,
++    # so that it works for a flamegraph (from callees to callers)
++    #  source_file:line_number
++    #  function_name
++    #  inlined by source_file:line_number
++    #  inlined by function_name
 +
-+	const unsigned int stacktrace_nr = pmu_stack->stacktrace_nr;
++    # sometimes we get extra info in parenthesis, drop it:
++    # /builddir/build/BUILD/xen-4.21.0/xen/build-xen-debug/../arch/x86/pv/emul-priv-op.c:1349 (discriminator 8)
++    addr = ""
++    prev: Optional[str] = None
++    for symline in symbols:
++        if symline.startswith("0x"):
++            addr = symline[2:]
++            addr2loc[addr] = []
++            prev = None
++        else:
++            if prev:
++                for line in [symline, prev]:
++                    addr2loc[addr].append("%024s %s_[h] ([%s])" %
++                                          (addr, line.split()[0], xen_symbols))
++            prev = symline
 +
-+	if (stacktrace_nr > ARRAY_SIZE(pmu_stack->stacktrace)) {
-+		pr_warn_once("%s: stacktrace_nr out of bounds: %d", __func__,
-+			     stacktrace_nr);
-+		return;
-+	}
-+
-+	for (unsigned int i = 0; i < stacktrace_nr; i++) {
-+		uint64_t addr =
-+			pmu_stack->stacktrace[PMU_MAX_STACKTRACE - 1 - i];
-+		if (!addr || perf_callchain_store(entry, addr))
-+			break;
-+	}
-+
-+	xen_convert_regs(&pmu_stack->guest.r.regs, regs,
-+			 xenpmu_data->pmu.pmu_flags);
-+}
-+
- static struct perf_guest_info_callbacks xen_guest_cbs = {
- 	.state                  = xen_guest_state,
- 	.get_ip			= xen_get_guest_ip,
--	.hypervisor_callchain   = NULL
-+	.hypervisor_callchain   = xen_hypervisor_callchain
- };
- 
- /* Convert registers from Xen's format to Linux' */
-@@ -490,7 +547,6 @@ static void xen_convert_regs(const struct xen_pmu_regs *xen_regs,
- 	}
- }
- 
--
- irqreturn_t xen_pmu_irq_handler(int irq, void *dev_id)
- {
- 	int err, ret = IRQ_NONE;
-@@ -527,7 +583,7 @@ void xen_pmu_init(int cpu)
- {
- 	int err;
- 	struct xen_pmu_params xp;
--	unsigned long pfn;
-+	unsigned long pfn, pmu_page;
- 	struct xen_pmu_data *xenpmu_data;
- 
- 	BUILD_BUG_ON(sizeof(struct xen_pmu_data) > PAGE_SIZE);
-@@ -535,7 +591,8 @@ void xen_pmu_init(int cpu)
- 	if (xen_hvm_domain() || (cpu != 0 && !is_xen_pmu))
- 		return;
- 
--	xenpmu_data = (struct xen_pmu_data *)get_zeroed_page(GFP_KERNEL);
-+	pmu_page = get_zeroed_page(GFP_KERNEL);
-+	xenpmu_data = (struct xen_pmu_data *)pmu_page;
- 	if (!xenpmu_data) {
- 		pr_err("VPMU init: No memory\n");
- 		return;
-@@ -551,6 +608,10 @@ void xen_pmu_init(int cpu)
- 		goto fail;
- 
- 	per_cpu(xenpmu_shared, cpu).xenpmu_data = xenpmu_data;
-+	per_cpu(xenpmu_shared, cpu).xenpmu_hv_stacktrace =
-+		(const struct xen_pmu_hv_stacktrace *)
-+			    (pmu_page + PAGE_SIZE -
-+			    sizeof(struct xen_pmu_hv_stacktrace));
- 	per_cpu(xenpmu_shared, cpu).flags = 0;
- 
- 	if (!is_xen_pmu) {
++    for (line, columns) in lines:
++        if len(columns) == 3:
++            addr = columns[0]
++            loc = addr2loc.get(addr)
++            if loc:
++                # TODO: stacktrace needs to be shared when inlined functions have common parent
++                for out in loc:
++                    print(out)
++            else:
++                print(line)
++        else:
++            print(line)
 -- 
 2.47.1
 
