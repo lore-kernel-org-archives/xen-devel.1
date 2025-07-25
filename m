@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E021CC87FCE
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1058070.1425845 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1376BC87FCF
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1058055.1425714 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK1A-0005l1-50; Fri, 25 Jul 2025 15:07:28 +0000
+	id 1ufK0y-0002Mt-0c; Fri, 25 Jul 2025 15:07:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1058070.1425845; Fri, 25 Jul 2025 15:07:28 +0000
+Received: by outflank-mailman (output) from mailman id 1058055.1425714; Fri, 25 Jul 2025 15:07:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK19-0005jV-UI; Fri, 25 Jul 2025 15:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 1058070;
- Fri, 25 Jul 2025 15:07:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ufK0x-0002Mm-Tz; Fri, 25 Jul 2025 15:07:15 +0000
+Received: by outflank-mailman (input) for mailman id 1058055;
+ Fri, 25 Jul 2025 15:07:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DJoT=2G=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1ufK17-0002MQ-VN
- for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:25 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 113f549f-6969-11f0-b895-0df219b8e170;
- Fri, 25 Jul 2025 17:07:23 +0200 (CEST)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-608acb0a27fso3685337a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:23 -0700 (PDT)
+ id 1ufK0w-0002MW-1z
+ for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:14 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0af029c3-6969-11f0-a31e-13f23c93f187;
+ Fri, 25 Jul 2025 17:07:12 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-612a8e6f675so3728656a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:12 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.19
+ 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 08:07:19 -0700 (PDT)
+ Fri, 25 Jul 2025 08:07:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,192 +47,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 113f549f-6969-11f0-b895-0df219b8e170
+X-Inumbo-ID: 0af029c3-6969-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1753456042; x=1754060842; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Eees8l7HYHFwD1RvaaoHSAMU8I8IDqz7LF2ScnBEH/o=;
-        b=LOsMqoHEo2gUxzqYyrvXw8T2oCMa/M/qoSV4kKoqOrBVP+FQmOukKTopbLKxzW5qK/
-         Sgim8nbQRX5OiC2OKk6XeSITaPSshMuTR04qtPH+uEemlwKylTmELPCUePiIQfwohcy6
-         7YLre7DPspp2JiXwfTIxi/FX0mGttwkQuR2zY=
+        d=cloud.com; s=cloud; t=1753456032; x=1754060832; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kluUUTP0hTT9OcAwmZPg/obLwWQwHpDNiU2oKOR6/kU=;
+        b=K2q9SeqV/FbpLI30/af7B9GSu6EtJKUWv8T1RdmZw07z6yLWILpPIs1sOgK9pWNyOo
+         VSrp82VagZVdFUx5F2dJ9f9C31OTMm0qRWwm0tHb2yswh9r/+pWbSbf13+o6ra1jNFQ+
+         umNmLn+1BWRouFmMdQYf1cucwPWxx+P5IO01I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753456042; x=1754060842;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Eees8l7HYHFwD1RvaaoHSAMU8I8IDqz7LF2ScnBEH/o=;
-        b=gNjozB/SZ5jBycCkcYcbXEt8Y2MSFKWT8R8cXZA8AkB8u3NRV9/P+y17H37l3wh7WA
-         UB2SsEQBPJdgr0V/OD6ZAulC6fGSRQ1603uc7q36QQITWrJDws5BAaPGHvWk//Pq5qBF
-         YrQYN044/c+rmzzmdS0nnltneOV0/1Fd3bNP6YAsjS/1th9k0S9nMH6UBlWs9WXjmtzO
-         5Jd0aVVnTjtvUf8Huxn3mge2rZtdQM86LHbwiwCFMXVBwaIYuTMfu1OvAxs8FM0LtNbJ
-         fNUVDjVnSolXorSzYhzLKK7A4Cq1pB+J4BF6Wv/BgbBl/fHXNd8zVA6xudwu3XjkvtuP
-         oX1Q==
-X-Gm-Message-State: AOJu0YyKdBuaaajabfh92i7T/E7bXcYhxMUB32yrXjT0Y9InBTxfv2E/
-	iNUiUtDTMyMNPXIRl7ZHq9nSUdZCDg/t9LxwSfUwW9Mc1bi3R1/jIMdqDKcBg1y5CX6/6MznMP9
-	YFvxvq4E=
-X-Gm-Gg: ASbGncsDcDkRNi9IEQ17lCobAMPGM45bg7Z5Nr0PHkUtEW4OZaAvwnBXz/m0feHxeNV
-	/ruCmEAljKHXjsHOEx48ISi9fEtWHWMShlCR8Xd8CrQQ4o/UnItyOV+C7Qq6J40Hk83yjt//wIA
-	iquqMgHEVde4ziEFrGM4xj59dgopp3WIEk9cTgtxe7fsSrnlpwTOofnrT8ZZ/gM6a73yfiPVMgP
-	qtESVoeFrc3Je83G2qJAhystc9NTHf2HSumj/h5iH6hSUxX8WXFSrTjXReT4elSaOYHbeAYuVHk
-	b5cBlJ276pg/uy2+6SBm+rg+9hitWGv+s9ZO9Hf+ZMplwUqMysdQeMOh/jNw010dkQxTP77CcDf
-	GcahWA9r6doTm8IckFRLhB6t0HeQJXz5zsEel
-X-Google-Smtp-Source: AGHT+IGS405VXxW1EPdupffOjwjXEufOUvMG1R4Zwk95ZKFsAjWD0uSJlXHO9E6I0o/Tw2TQqyFbMA==
-X-Received: by 2002:a05:6402:354e:b0:606:fef3:7c3e with SMTP id 4fb4d7f45d1cf-614f1b98612mr2222567a12.3.1753456040127;
-        Fri, 25 Jul 2025 08:07:20 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1753456032; x=1754060832;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kluUUTP0hTT9OcAwmZPg/obLwWQwHpDNiU2oKOR6/kU=;
+        b=LnnTZCA+5xzNSPsRzlBfpUhjwDMICA9sj0id870DMKOZCEa37CBKSmuJ9s5DE9n98B
+         1/DeXfUEPIMyRzeeAn83v4ChgLyr6o+4ZvXgFDiQgGJN0aUmLhCdxzHEagMNLdE08RyX
+         E6KxDWIPifzwLpm7m8NvbpvQWVPHQ/oWwaLaMko5VsxMdG1FQZkL2XJlm+nC0yIcHWb5
+         vdgqP+7K0PHFlYtz8/cybYW46eCHR7dxyYj0mM//UzdhiMQpC1H8AcD6MGHWEp+TMFrJ
+         H1Qjwc6PEGlzc0xBTrDe2z4vGH5fV7B9vHwi2NTLgHv2qeK0Mt291YaEI6ZTxd4Qdkmo
+         NamA==
+X-Gm-Message-State: AOJu0YyYQ62y1o7MCOUqPADw+IoIjsfbQnOH4XD/Uv0d8YeFt3KVQsdT
+	MxUQ3LU9pUVyXF+PhKuU8FP2pJfJMu8WF/wyihPB1DLjnRwpXlCdNvVF3x6SscJW6tqO8XenTav
+	lWfO7uWA=
+X-Gm-Gg: ASbGncsdKTe2vkVSMNmgyweY8p49K23CjFusoA5tWp40kILCqpOL+EkR/T1pgt1WMxe
+	fMUYiFzJ3I9VwWlDROq/fyNxZZPPGO7T5NzOpDCt4VWOUzaf4teMuU2tFnW/t2SpC10fkKytTc6
+	OVnpjcy98kEycMHU0N69pGbIL9PAYB60gHCBfoE1pNROAAD0alGhT4xH+JdDiv9jS0X6GZkFd/l
+	oErabroMNYKZXH2fFdCiAKqk6GjndZsIvp1/RXuyUIp9W1wR4brIYUqmTDxDc/AZF6J/IesTE2D
+	74nFpvflGmNy5yMnifCdoW6E6oIwygwK39ZdXx7tlNYllxBafyvsegBmzZxxIbi9vBsbuOvxAIp
+	EaMzjXQvYnQIPjGU4X/Bu/uVWC3SBtlVIMXR7
+X-Google-Smtp-Source: AGHT+IH0FaWQmAq/1N6vQLYIALaxfASv58EkSbZ4gRM/NHFNbYgOnfAJi+/k0EodV1Fd7M40AuUAvQ==
+X-Received: by 2002:a05:6402:1eca:b0:614:d585:3594 with SMTP id 4fb4d7f45d1cf-614f1bd824emr2164991a12.5.1753456031753;
+        Fri, 25 Jul 2025 08:07:11 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
-Subject: [RFC LINUX PATCH v1 1/3] perf kvm: introduce a hypervisor_callchain callback
-Date: Fri, 25 Jul 2025 16:06:47 +0100
-Message-ID: <20250725150719.472782-1-edwin.torok@cloud.com>
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	andriy.sultanov@vates.tech,
+	boris.ostrovsky@oracle.com
+Subject: [RFC PATCH v1 00/10] Xen flamegraph (hypervisor stacktrace profile) support
+Date: Fri, 25 Jul 2025 16:06:36 +0100
+Message-ID: <cover.1753372928.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <cover.1753372928.git.edwin.torok@cloud.com>
-References: <cover.1753372928.git.edwin.torok@cloud.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-`perf kvm` currently assumes that it can construct a stacktrace by
-looking up stack pointer addresses in the current kernel's address
-space.
-That only works if the hypervisor is the same as the kernel (i.e. KVM),
-but doesn't work if the hypervisor is separate from the kernel (Xen,
-with Linux as Dom0).
+I've long wanted to get stacktraces when profiling Xen, otherwise all
+you'd see is e.g. the address of memcpy, but without knowing which
+function called it you can't optimize it.
 
-Introduce a callback to enable Xen to retrieve the stacktrace from Xen
-instead when a sample is inside the hypervisor (domid == DOMID_XEN
-instead of DOMID_SELF).
+Once you have stacktraces, even a simple low (prime) frequency timer
+based profile can show hotspots that would be optimization candidates,
+aka Flamegraphs. (even if the sample doesn't
+always hit within the same function and individually they'd be too small
+to be noticable, it should hit in one of the parents if it is a
+bottleneck).
 
-The callback can replace the registers with the guest kernel's registers
-upon return when domid == DOMID_SELF, so that we can continue with the
-kernel stacktrace.
+Example flamegraph produced using these patches:
+ * workload: an otherwise idle VM migrated on localhost by XAPI in a loop:
+ https://cdn.jsdelivr.net/gh/edwintorok/xen@pmustack-coverletter/docs/tmp/migrate-localhost.svg?x=473.2&y=2197&s=null
+ * workload: VM migrated between 2 hosts by XAPI (NFS storage):
+ https://cdn.jsdelivr.net/gh/edwintorok/xen@pmustack-coverletter/docs/tmp/migrate-send.svg?x=950.6&y=2197
+ https://cdn.jsdelivr.net/gh/edwintorok/xen@pmustack-coverletter/docs/tmp/migrate-receive.svg?x=906.6&y=869
 
-Both KVM and Xen define this as NULL, a followup commit will implement
-the callback for Xen (KVM doesn't need a callback implementation).
+There might be other approaches that could be tried in the future, e.g. Last Branch Record, but:
+ * although both Intel and AMD support it, AFAIK Xen doesn't support it on AMD
+ yet
+ * there is a hardware limit to how deep it can be (~32?)
+ * LBR may need some additional configuration to enable it to trace the
+  hypervisor
+ * Intel PMU is completely broken on the system I tried it on, so I
+  would've had to first fix that
 
-No functional change.
+This is some very early experimental work, thought I'd share it to get
+feedback on:
+ * the desired ABI additions in pmu.h and arch-x86/pmu.h
+ * any bugs you may spot
+ * if anyone wants to port the python symbol lookup to perf itself
+ (actually latest perf ships a flamegraph.py too)
 
-Signed-off-by: Edwin Török <edwin.torok@cloud.com>
----
- arch/x86/xen/pmu.c         |  2 ++
- include/linux/perf_event.h | 12 ++++++++++++
- kernel/events/core.c       |  5 +++++
- virt/kvm/kvm_main.c        |  1 +
- 4 files changed, 20 insertions(+)
+It also starts to become useful enough to spot performance hotspots in
+Xen, e.g. the rwlock.c scaling issue with large CONFIG_NR_CPUS, or
+unexpected page faults in 'unmap_page_range' (spotted by Andrew).
 
-diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
-index 246d67dab510..b92dc739fdfb 100644
---- a/arch/x86/xen/pmu.c
-+++ b/arch/x86/xen/pmu.c
-@@ -466,6 +466,7 @@ static unsigned long xen_get_guest_ip(void)
- static struct perf_guest_info_callbacks xen_guest_cbs = {
- 	.state                  = xen_guest_state,
- 	.get_ip			= xen_get_guest_ip,
-+	.hypervisor_callchain   = NULL
- };
- 
- /* Convert registers from Xen's format to Linux' */
-@@ -489,6 +490,7 @@ static void xen_convert_regs(const struct xen_pmu_regs *xen_regs,
- 	}
- }
- 
-+
- irqreturn_t xen_pmu_irq_handler(int irq, void *dev_id)
- {
- 	int err, ret = IRQ_NONE;
-diff --git a/include/linux/perf_event.h b/include/linux/perf_event.h
-index 90c782749b05..d82aeaddadb8 100644
---- a/include/linux/perf_event.h
-+++ b/include/linux/perf_event.h
-@@ -29,10 +29,14 @@
- #define PERF_GUEST_ACTIVE	0x01
- #define PERF_GUEST_USER	0x02
- 
-+struct perf_callchain_entry_ctx;
-+
- struct perf_guest_info_callbacks {
- 	unsigned int			(*state)(void);
- 	unsigned long			(*get_ip)(void);
- 	unsigned int			(*handle_intel_pt_intr)(void);
-+	void				(*hypervisor_callchain)(struct perf_callchain_entry_ctx *pc,
-+								struct pt_regs *regs);
- };
- 
- #ifdef CONFIG_HAVE_HW_BREAKPOINT
-@@ -1514,6 +1518,7 @@ extern struct perf_guest_info_callbacks __rcu *perf_guest_cbs;
- DECLARE_STATIC_CALL(__perf_guest_state, *perf_guest_cbs->state);
- DECLARE_STATIC_CALL(__perf_guest_get_ip, *perf_guest_cbs->get_ip);
- DECLARE_STATIC_CALL(__perf_guest_handle_intel_pt_intr, *perf_guest_cbs->handle_intel_pt_intr);
-+DECLARE_STATIC_CALL(__perf_hypervisor_callchain, *perf_guest_cbs->hypervisor_callchain);
- 
- static inline unsigned int perf_guest_state(void)
- {
-@@ -1527,12 +1532,19 @@ static inline unsigned int perf_guest_handle_intel_pt_intr(void)
- {
- 	return static_call(__perf_guest_handle_intel_pt_intr)();
- }
-+static inline void
-+perf_hypervisor_callchain(struct perf_callchain_entry_ctx *entry,
-+			  struct pt_regs *regs)
-+{
-+	static_call(__perf_hypervisor_callchain)(entry, regs);
-+}
- extern void perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *cbs);
- extern void perf_unregister_guest_info_callbacks(struct perf_guest_info_callbacks *cbs);
- #else
- static inline unsigned int perf_guest_state(void)		 { return 0; }
- static inline unsigned long perf_guest_get_ip(void)		 { return 0; }
- static inline unsigned int perf_guest_handle_intel_pt_intr(void) { return 0; }
-+static inline void perf_hypervisor_callchain(struct perf_callchain_entry_ctx *) { return; }
- #endif /* CONFIG_GUEST_PERF_EVENTS */
- 
- extern void perf_event_exec(void);
-diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 3a33d9c1b1b2..a8535294018b 100644
---- a/kernel/events/core.c
-+++ b/kernel/events/core.c
-@@ -6917,6 +6917,7 @@ struct perf_guest_info_callbacks __rcu *perf_guest_cbs;
- DEFINE_STATIC_CALL_RET0(__perf_guest_state, *perf_guest_cbs->state);
- DEFINE_STATIC_CALL_RET0(__perf_guest_get_ip, *perf_guest_cbs->get_ip);
- DEFINE_STATIC_CALL_RET0(__perf_guest_handle_intel_pt_intr, *perf_guest_cbs->handle_intel_pt_intr);
-+DEFINE_STATIC_CALL_NULL(__perf_hypervisor_callchain, *perf_guest_cbs->hypervisor_callchain);
- 
- void perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *cbs)
- {
-@@ -6931,6 +6932,9 @@ void perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *cbs)
- 	if (cbs->handle_intel_pt_intr)
- 		static_call_update(__perf_guest_handle_intel_pt_intr,
- 				   cbs->handle_intel_pt_intr);
-+	if (cbs->hypervisor_callchain)
-+		static_call_update(__perf_hypervisor_callchain,
-+				   cbs->hypervisor_callchain);
- }
- EXPORT_SYMBOL_GPL(perf_register_guest_info_callbacks);
- 
-@@ -6944,6 +6948,7 @@ void perf_unregister_guest_info_callbacks(struct perf_guest_info_callbacks *cbs)
- 	static_call_update(__perf_guest_get_ip, (void *)&__static_call_return0);
- 	static_call_update(__perf_guest_handle_intel_pt_intr,
- 			   (void *)&__static_call_return0);
-+	static_call_update(__perf_hypervisor_callchain, (void *)&__static_call_return0);
- 	synchronize_rcu();
- }
- EXPORT_SYMBOL_GPL(perf_unregister_guest_info_callbacks);
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 44c228bcd699..20a03dd9cc42 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -6038,6 +6038,7 @@ static struct perf_guest_info_callbacks kvm_guest_cbs = {
- 	.state			= kvm_guest_state,
- 	.get_ip			= kvm_guest_get_ip,
- 	.handle_intel_pt_intr	= NULL,
-+	.hypervisor_callchain   = NULL
- };
- 
- void kvm_register_perf_callbacks(unsigned int (*pt_intr_handler)(void))
+It builds on top of:
+ * the existing VPMU support, documented by Boris Ostrovsky in this thread: https://lists.xenproject.org/archives/html/xen-devel/2016-08/msg03244.html
+ * a python script by Andriy to post-process the perf output
 
-base-commit: dbcb8d8e4163e46066f43e2bd9a6779e594ec900
+Steps to enable:
+ 1. ensure that you've got a build of Xen with CONFIG_FRAME_POINTER=y.
+ Debug builds would have it, but for performance testing creating a
+ release build with frame pointers enabled is recommended.
+
+ 2. Apply both the Linux and Xen patches.
+    I tested on top of ~6.6.22, and Xen 4.21+ (5c798ac8854af3528a78ca5a622c9ea68399809b)
+
+ 3. ensure that VPMU is enabled in Xen, e.g. a GRUB line like:
+ ```
+ multiboot2 /boot/xen.efi dom0_mem=4288M,max:4288M crashkernel=256M,below=4G console=vga vga=mode-0x0311 watchdog=0 vpmu=on dom0_vcpus_pin
+ ```
+ On a XenServer system that can be achieved by:
+
+ ```
+ /opt/xensource/libexec/xen-cmdline --set-xen watchdog=0
+ /opt/xensource/libexec/xen-cmdline --set-xen vpmu=on
+ /opt/xensource/libexec/xen-cmdline --delete-xen dom0_max_vcpus=1-16
+ /opt/xensource/libexec/xen-cmdline --set-xen dom0_vcpus_pin
+ reboot
+ ```
+
+ 4. On everyboot: enable desired vPMU features:
+ ```
+ echo 9 >/sys/hypervisor/pmu/pmu_features
+ echo all >/sys/hypervisor/pmu/pmu_mode
+ ```
+
+ 5. Record a trace, e.g. a simple timer based stacktrace, useful for
+ initial investigation with a flamegraph:
+ ```
+ perf kvm --host --guest record -a -F 97 -g
+ ```
+
+ Or if you also want to trace userspace:
+ ```
+ perf kvm --host --guest record -a -F 97 --call-graph=dwarf
+ ```
+
+ 6. Look at the report: perf kvm --host --guest report.
+  This will contain hex addresses for now, but a script can be used to
+  resolve them.
+
+ 7. Use the provided python script, and look at symbolized output
+
+Caveats:
+ * x86-only for now
+ * only tested on AMD EPYC 8124P
+ * Xen PMU support was broken to begin with on Xeon Silver 4514Y, so I
+ wasn't able to test there ('perf top' fails to parse samples). I'll
+ try to figure out what is wrong there separately
+ * for now I edit the release config in xen.spec to enable frame
+ pointers. Eventually it might be useful to have a 3rd build variant:
+ release-fp. Or teach Xen to produce/parse ORC or SFrame formats without
+ requiring frame pointers.
+ * perf produces raw hex addresses, and a python script is used to
+ post-process it and obtain symbols. Eventually perf should be updated
+ to do this processing itself (there was an old patch for Linux 3.12 by Borislav Petkov)
+ * I've only tested capturing Dom0 stack traces. Linux doesn't support
+  guest stacktraces yet (it can only lookup the guest RIP)
+ * the Linux patch will need to be forwarded ported to master before submission
+ * All the caveats for using regular VPMU apply, except for the lack of
+  stacktraces, that is fixed here!
+    * Dom0 must run hard pinned on all host CPUs
+    * Watchdog must be disabled
+    * not security supported
+    * x86 only
+    * secureboot needs to be disabled
+
+
+Edwin Török (10):
+  pmu.h: add a BUILD_BUG_ON to ensure it fits within one page
+  arch-x86/pmu.h: document current memory layout for VPMU
+  arch-x86/pmu.h: convert ascii art drawing to Unicode
+  vpmu.c: factor out register conversion
+  pmu.h: introduce a stacktrace area
+  arch-x86/pmu.h: convert ascii art diagram to Unicode
+  arch-x86/vpmu.c: store guest registers when domain_id == DOMID_XEN
+  pmu.h: expose a hypervisor stacktrace feature
+  vpmu.c hypervisor stacktrace support in vPMU
+  xen/tools/pyperf.py: example script to parse perf output
+
+ xen/arch/x86/cpu/vpmu.c           | 130 ++++++++++++++++++++------
+ xen/arch/x86/cpu/vpmu_amd.c       |   2 +-
+ xen/arch/x86/cpu/vpmu_intel.c     |   2 +-
+ xen/arch/x86/include/asm/vpmu.h   |   1 +
+ xen/include/public/arch-arm.h     |   1 +
+ xen/include/public/arch-ppc.h     |   1 +
+ xen/include/public/arch-riscv.h   |   1 +
+ xen/include/public/arch-x86/pmu.h | 101 ++++++++++++++++++++-
+ xen/include/public/pmu.h          |  41 ++++++++-
+ xen/tools/pyperf.py               | 146 ++++++++++++++++++++++++++++++
+ 10 files changed, 395 insertions(+), 31 deletions(-)
+ create mode 100644 xen/tools/pyperf.py
+
 -- 
 2.47.1
 
