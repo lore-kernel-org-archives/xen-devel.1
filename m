@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 137B0C87FD1
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1058063.1425790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F03FC87FCA
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jul 2025 15:07:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1058057.1425727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK13-0003vr-MA; Fri, 25 Jul 2025 15:07:21 +0000
+	id 1ufK0y-0002Z7-JM; Fri, 25 Jul 2025 15:07:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1058063.1425790; Fri, 25 Jul 2025 15:07:21 +0000
+Received: by outflank-mailman (output) from mailman id 1058057.1425727; Fri, 25 Jul 2025 15:07:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ufK13-0003tk-1G; Fri, 25 Jul 2025 15:07:21 +0000
-Received: by outflank-mailman (input) for mailman id 1058063;
- Fri, 25 Jul 2025 15:07:20 +0000
+	id 1ufK0y-0002VC-E0; Fri, 25 Jul 2025 15:07:16 +0000
+Received: by outflank-mailman (input) for mailman id 1058057;
+ Fri, 25 Jul 2025 15:07:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DJoT=2G=cloud.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1ufK11-0002MQ-VR
- for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:19 +0000
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [2a00:1450:4864:20::536])
+ id 1ufK0x-0002MQ-GZ
+ for xen-devel@lists.xenproject.org; Fri, 25 Jul 2025 15:07:15 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e778261-6969-11f0-b895-0df219b8e170;
- Fri, 25 Jul 2025 17:07:18 +0200 (CEST)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-60c5b8ee2d9so4566074a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:18 -0700 (PDT)
+ id 0ba6d494-6969-11f0-b895-0df219b8e170;
+ Fri, 25 Jul 2025 17:07:13 +0200 (CEST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-60c5b8ee2d9so4565899a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jul 2025 08:07:13 -0700 (PDT)
 Received: from localhost.localdomain ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.17
+ 4fb4d7f45d1cf-614cd0f730fsm2194208a12.22.2025.07.25.08.07.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Jul 2025 08:07:17 -0700 (PDT)
+ Fri, 25 Jul 2025 08:07:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e778261-6969-11f0-b895-0df219b8e170
+X-Inumbo-ID: 0ba6d494-6969-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1753456038; x=1754060838; darn=lists.xenproject.org;
+        d=cloud.com; s=cloud; t=1753456033; x=1754060833; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pgdrUaRK51EGFDQFL2vaOaEhFZOTQJ0jVrsmZeYmDCg=;
-        b=SO6IRMWh/gS8wuFAIEbGqOVFcHgvJkfdkqWy8zzRA5BIVj72v6/d9a2Dh0cUkvcTMk
-         DHpmCTngqCx0DWW8ynTcbLXgZknWevpnS6jtF4TvnHlfOoUf1/hhqLrrQb5gt+j/0qIO
-         7Ka9or+FzHgRdit1h9tSdQ1ZrQ4vqq5TDLTR0=
+        bh=WjJUuOkVkjeeAsMY8i9Mv8bOHKA0v2O1WG6n4OAsjLs=;
+        b=V7R/CHIEcs+Qh4oC+N3xAobvNmlCX8H3WOOMPQcUkYJAAS2Ep68MKbefaRZJru0rk2
+         YLBsfNZONcRP9sn5mckq129mcyUpzzQpcLZ52mWUrt8o6x1+mDenJiq8e0xNMZsrVn9B
+         1C/kv6V+rwu09tjEOSpdaM/0XTMNeOzWANCCU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753456038; x=1754060838;
+        d=1e100.net; s=20230601; t=1753456033; x=1754060833;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pgdrUaRK51EGFDQFL2vaOaEhFZOTQJ0jVrsmZeYmDCg=;
-        b=BEp5Gy/5uS2CjwKjhd920y2LqZ0r6pIdO/50ft4+b5z0G2rjpbs4w9c09YD7vyYAeT
-         PWMWvYsKh4+2QO4EsmxeaHg5v9xQ73YbtfphbudeZrJTsBTIgsUhCQaql7KwTFZvpM0X
-         10yRrwJOeXFEmquhoT8YjHz7mTOpSqZasbmXQ5UFnjvAyDkQzVONMVr9+ilksRlaaUzW
-         ruru6tdgHzZfHOdwYyuh6qOW08R08hpIl4JbnUQF/DgHPhRvCrOD8oRi64pUZzZA8mHs
-         aX42YEPcoBm2kJ1VO4J8lLF/c36NAL+nJpDdigP+Ni1rXHQ6jvnIT4Ggqm9ZdRBsu+FF
-         FYBg==
-X-Gm-Message-State: AOJu0YwhsrMzbyShYbjyUuHOxYMt40qd2/h1nFdiSu4lYU6g+JkmTxnR
-	Rkdb/UuSHEx7HBoIoD4D3ni4K7keRmD4IjBHGCF7He6faHNFCaPTOHDZOiItrpijQoWueaD9QkT
-	hEYSPuJQ=
-X-Gm-Gg: ASbGnctHKNuqbfU3JyyD4EBSWsmHpJQDsLeg/8INDglFDXPZXBu6XR0CQhUbVQKv1Os
-	BhwPEzDDMq7Ra6qEtKAhEQMnNlueovgdh3O0hFqQMsnpmTXKfHE56VcMANnyf2KpLPo2CB01QQt
-	eyFdldThyD5hjCf89FEAsAgUGBf7vQx41V3jxFT1Lfwo02YeeQxc069TzovZVbLLQ8OEU0kdMNy
-	BQn4D3w4w0AAlLxmeWeIReCi4XRfLrASGa3xR3UjtOoQxcGdNY33/XTCvh1qd8YoLUMAvvAzXbN
-	bLm29UHEF+9rwAG2G76iYnsXgAYLZCMnkRNLxvEEfCAO6FIMCitZez+bh6OzsJhE/liSz7CTnWS
-	fMCkV3vB+Eeic7Fkj47R1uS07R+prBpwDMhZu
-X-Google-Smtp-Source: AGHT+IFkZB1eCc3nFd05rIzbxLA6V7k3SXjt0e1xZdY+847AaGsGEpk/zqlZBztde+fqnZoNbtS/7A==
-X-Received: by 2002:a05:6402:354f:b0:612:a77e:1816 with SMTP id 4fb4d7f45d1cf-614f0b348ebmr2142898a12.0.1753456037883;
-        Fri, 25 Jul 2025 08:07:17 -0700 (PDT)
+        bh=WjJUuOkVkjeeAsMY8i9Mv8bOHKA0v2O1WG6n4OAsjLs=;
+        b=sOFIBt4u6gZd4YQj4JbD+BqjBtf56ruA7b5FnlcOVkHaqcTo0KSxdA92E6CJTXeGwU
+         NHcPNb+Q1Cxdbmth/PrVfVqQJNhQeiN/B+2YqAQ6FGBPmUolivAZDZIQpnz/Vs4NjKU8
+         Cjk/r4teU24bJa3BBW746yzO2oCPHuSExyYhi7TOVXsXx4kbKyR9j/PgpK4aEzc32e3G
+         tyCZBpEWDmWv5hKJ/JkmsUQj7DkuimJ6rsJx0WKSE2Erp3W6nETZvupbgnDD1IS3coUg
+         dEEvpK0zf+vWr/d8sZHRXh4DdlfQAnYWnAtVDrLZ1jgzicayTOFBD7cIFfbqgR2ZYbb9
+         rafQ==
+X-Gm-Message-State: AOJu0YxSUGCnuKQJdB8ujRSyRg8RPO+6KUbzTqCimhG8dkPGFFBvmMlh
+	NsxqV3iS3hBh6mHbp6S9/wJ1H62aXuRpJ61mIxdM4X+BVwikPkcmUyViEYoNB51GJjgu1h1VnrI
+	GuKR/oIU=
+X-Gm-Gg: ASbGnct1GBID54CDFwspivGH3/n+ocAC0XsGoeBb9d1mVou1nl8c7vdix9VVh5wRgV8
+	SbgYcsmjnZMelJVWoX8hD8V4pikjgnmbihqGeWpRyykJUl7DLf4YUXMHRy0bjzkaGVi2Q10SyRd
+	5Bqj+N2V8Z1MYUnXGfJFvj09IgPHZhLfwToBYlbint3yMx1ONrOcAPUroMt9dK3C8NdMcIdDeei
+	PfuXsD6iM3gDHvxfXw4MBrTlFssRiL3vLXzSJrlaxgolhP1vQTelX1dnTPFlv/wukW/hxZbFObv
+	62Sy4wiSaJlaC5A0rnPxTBtG+qLHu5juJ1Y87UDn3dUEhadamPaHBbfCsW2zBl/KveFAzOT6vY5
+	NeOIONYGa22I7OV6wGgJf9K3/pqYVz+IotYpr
+X-Google-Smtp-Source: AGHT+IE1RlHK5S4tEzuYbFc3r98R2pHtlcQZi02L4eIuKkTVKrqlsurFhfmiXkDse6o9kTwjD6XcgQ==
+X-Received: by 2002:a05:6402:1ed6:b0:60c:461e:7199 with SMTP id 4fb4d7f45d1cf-614f1bb98f0mr2068972a12.9.1753456033074;
+        Fri, 25 Jul 2025 08:07:13 -0700 (PDT)
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	andriy.sultanov@vates.tech,
 	boris.ostrovsky@oracle.com
-Subject: [RFC PATCH v1 08/10] pmu.h: expose a hypervisor stacktrace feature
-Date: Fri, 25 Jul 2025 16:06:44 +0100
-Message-ID: <16c0a94b10578eaf1e033307dc2b8a9c4321a79b.1753372928.git.edwin.torok@cloud.com>
+Subject: [RFC PATCH v1 02/10] arch-x86/pmu.h: document current memory layout for VPMU
+Date: Fri, 25 Jul 2025 16:06:38 +0100
+Message-ID: <5602e488bfa9b06e46e2a374d40ff4a617feb512.1753372928.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1753372928.git.edwin.torok@cloud.com>
 References: <cover.1753372928.git.edwin.torok@cloud.com>
@@ -103,41 +99,94 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-For now this'll only be expected to work when the hypervisor is compiled
-with frame pointers, and only when the domain is privileged enough to
-profile Xen (i.e. it is the hardware domain running in HV or ALL modes).
+There are nested structs, unions, padding and flexible array members.
+The interpretation of the flexible array members is all done with
+pointer arithmetic, it is useful to visualize the actual memory layout.
 
-The stacktrace feature is a flag, rather than a new mode, and would
-simply report a stacktrace of depth 0 in other cases.
-Old hypervisors with VPMU 0.1 would also report a stracktrace of depth
-0, due to implicit zero-filling of the page that contains 'struct xen_pmu_data'.
-
-This is just the interface, followup commit implements it.
+The ascii-art drawing is compatible with ascii-art-to-unicode (aa2u) fro
+m hackage.
 
 No functional change.
 
 Signed-off-by: Edwin Török <edwin.torok@cloud.com>
 ---
- xen/include/public/pmu.h | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/include/public/arch-x86/pmu.h | 63 +++++++++++++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
 
-diff --git a/xen/include/public/pmu.h b/xen/include/public/pmu.h
-index 6366a79169..85b2bbed74 100644
---- a/xen/include/public/pmu.h
-+++ b/xen/include/public/pmu.h
-@@ -80,10 +80,12 @@ DEFINE_XEN_GUEST_HANDLE(xen_pmu_params_t);
-  *                              Architectural Performance Events exposed by
-  *                              cpuid and listed in the Intel developer's manual
-  *                              (ignored on AMD).
-+ * - XENPMU_FEATURE_HV_STACKTRACE: Hypervisor stacktraces (when compiled with frame pointers)
-  */
- #define XENPMU_FEATURE_INTEL_BTS  (1<<0)
- #define XENPMU_FEATURE_IPC_ONLY   (1<<1)
- #define XENPMU_FEATURE_ARCH_ONLY  (1<<2)
-+#define XENPMU_FEATURE_HV_STACKTRACE (1<<3)
+diff --git a/xen/include/public/arch-x86/pmu.h b/xen/include/public/arch-x86/pmu.h
+index d0a99268af..8be71a88ee 100644
+--- a/xen/include/public/arch-x86/pmu.h
++++ b/xen/include/public/arch-x86/pmu.h
+@@ -129,6 +129,69 @@ struct xen_pmu_arch {
+ typedef struct xen_pmu_arch xen_pmu_arch_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_pmu_arch_t);
  
++/* Memory layout:
++*                .---------------------.
++*                | struct xen_pmu_data |
++* +==============+=====================+=======================+ <.
++* | vcpu_id                                                    |  |
++* +------------------------------------------------------------+  |
++* | pcpu_id                                                    |  |
++* +------------------------------------------------------------+  |
++* | domain_id                                                  |  |
++* +------------------------------------------------------------+  |
++* |##pad#######################################################|  |
++* +====+=+===+==================+==============================+  |
++* | pmu| | r | regs             |##pad#########################|  |
++* +----. +---. (xen or guest)   |##############################|  |
++* |      +======================+==============================+  |
++* |      | pmu_flags                                           |  |
++* |      +===+====================+============================+  |
++* |      | l | lapic_lvtpc        |############################|  |
++* |      +---. ###################|##pad#######################|  |
++* |      |     ###################|############################|  |
++* |      +===+=+=======+=====+====+====+=======+========+======+  |
++* |      | c | |       | amd |    |    | intel |         |#####|  |
++* |      +---+ |       .-----.    |    .-------.         |#####|  |
++* |      |     | counter          | fixed_counters       |#####|  | 
++* |      |     +------------------+----------------------+#####|  |
++* |      |     | ctrls            | arch_counters        |#####|  |
++* |      |     +=====+========+===+----------------------+#####|  |
++* |      |     |     | regs[] |  :| global_ctrl          |#####|  |
++* |      |     |     +--------.  :+----------------------+#####|  |
++* |      |     |struct           :| global_ovf_ctrl      |#####|  |
++* |      |     |xen_pmu_cntr_pair:+----------------------+#####|  |
++* |      |     |[counters]       :| global_status        |#####|  |
++* |      |     |                 :+----------------------+#####|  |
++* |      |     |                 :| fixed_ctrl           |#####|  |
++* |      |     |                 :+----------------------+#####|  |
++* |      |     |                 :| ds_area              |#####|  |
++* |      |     |                 :+----------------------+#####|  |
++* |      |     |                 :| pebs_enable          |#pad#|  |
++* |      |     |                 :+----------------------+#####|  |
++* |      |     |                 v| debugctl             |#####|  |
++* |      |     |##################+=======+========+=====+#####|  |
++* |      |     |##################|       | regs[] | :[0]|#####|  |
++* |      |     |##################|       +--------. :   |#####|  |
++* |      |     |##################| uint64_t         :   |#####|  |
++* |      |     |##################| [fixed_counters] :   |#####|  |
++* |      |     |##################|                  :   |#####|  |
++* |      |     |##################|                  :   |#####|  |
++* |      |     |##################| -----------------:   |#####|  |
++* |      |     |##################|  struct          :   |#####|  |
++* |      |     |##################| xen_pmu_cntr_pair:   |#####|  |
++* |      |     +==================+ [arch_counters]  :   +=====+  | 
++* |      |                        |                  :   |     |  |
++* |      |                        |                  v   |     |  |
++* |      |                        +======================+     |  |
++* |      +=====================================================+  |
++* +==========================+=================================+  |
++* |############################################################|  |
++* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  :
++* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  :
++* |############################################################|  | PAGE_SIZE
++* +=========+==================================================+ <.
++*/
++
+ #endif /* __XEN_PUBLIC_ARCH_X86_PMU_H__ */
  /*
-  * Shared PMU data between hypervisor and PV(H) domains.
+  * Local variables:
 -- 
 2.47.1
 
