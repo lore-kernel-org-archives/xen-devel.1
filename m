@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88BFC87FC9
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Jul 2025 15:01:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1061654.1427241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC9DC87FC9
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Jul 2025 15:11:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1061672.1427251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugPLl-0008Mx-GK; Mon, 28 Jul 2025 15:01:13 +0000
+	id 1ugPV7-0001hV-Be; Mon, 28 Jul 2025 15:10:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1061654.1427241; Mon, 28 Jul 2025 15:01:13 +0000
+Received: by outflank-mailman (output) from mailman id 1061672.1427251; Mon, 28 Jul 2025 15:10:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugPLl-0008Mo-DK; Mon, 28 Jul 2025 15:01:13 +0000
-Received: by outflank-mailman (input) for mailman id 1061654;
- Mon, 28 Jul 2025 15:01:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ERLN=2J=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ugPLj-0008Kx-OQ
- for xen-devel@lists.xenproject.org; Mon, 28 Jul 2025 15:01:11 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1dbebd0-6bc3-11f0-b895-0df219b8e170;
- Mon, 28 Jul 2025 17:01:09 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ae3703c2a8bso947072166b.0
- for <xen-devel@lists.xenproject.org>; Mon, 28 Jul 2025 08:01:09 -0700 (PDT)
-Received: from ?IPV6:2003:e5:872d:3c00:27e3:fc0:fb5:67a3?
- (p200300e5872d3c0027e30fc00fb567a3.dip0.t-ipconnect.de.
- [2003:e5:872d:3c00:27e3:fc0:fb5:67a3])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af63589cc5asm426608066b.32.2025.07.28.08.01.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jul 2025 08:01:04 -0700 (PDT)
+	id 1ugPV7-0001hO-8X; Mon, 28 Jul 2025 15:10:53 +0000
+Received: by outflank-mailman (input) for mailman id 1061672;
+ Mon, 28 Jul 2025 15:10:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=44Jj=2J=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1ugPV5-0001g3-J4
+ for xen-devel@lists.xenproject.org; Mon, 28 Jul 2025 15:10:51 +0000
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [2607:f8b0:4864:20::630])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0b67d549-6bc5-11f0-a31e-13f23c93f187;
+ Mon, 28 Jul 2025 17:10:50 +0200 (CEST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-234f17910d8so39307395ad.3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Jul 2025 08:10:50 -0700 (PDT)
+Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
+ by smtp.gmail.com with UTF8SMTPSA id
+ d9443c01a7336-23ffdd8b8b9sm36158485ad.29.2025.07.28.08.10.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Jul 2025 08:10:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,269 +47,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1dbebd0-6bc3-11f0-b895-0df219b8e170
+X-Inumbo-ID: 0b67d549-6bc5-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753714869; x=1754319669; darn=lists.xenproject.org;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vyyp/sClDeUkh06B5Ee7+QNhsEpUD6qDFNzqOz2HDvg=;
-        b=LkLbcFNMHloSNhjXWXA5Ci4CPAdea4EgEgxJFPiBPM92KrjtH794iSfL7Fd+yQxyKl
-         zWX5NX2iOdb1XEQVsvVA/BRWcaFUXjAIzLUwa3Vg9or3YVNmrsVhx1178W0laTsyaNBR
-         aGg521WeCK17Y6baGZsPc01wfyIH8gOn46urCej97bDBMJo1LIzkFUeiR0l+MKiOUGZ1
-         lzUa1yJso9h/pK+ByJ4ugXmhvnhtwtc3c4nG1ShGPOJEhyhDbMI9eASUZy8p3XCJXtLh
-         vuoMQtWI5S+Q0va2mJ17iFde8DJkEu9p8TYfxR9Ghba18pT/0JI5LMs1xC4kmqiIJxq8
-         352A==
+        d=citrix.com; s=google; t=1753715448; x=1754320248; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=44ifbJQ+wok33P/Hi+UxfcTj5GHZHK5snHDnxCW5DTo=;
+        b=Jf7TnSnBGCg0t6vLHoEqAFLx/pJM41xegwHM4e1fPApO5Qxy3SLS8sLDrlni7ehXVZ
+         pH5+ffroKmycCCXHTt+eywF7dN4LWIHgA/mW2l/JywT60XrADv5R74oveMUVLZugYhIH
+         TWpIY0tsWFOBppQwbOrnU89vLxOiUpf5mZz9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753714869; x=1754319669;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=vyyp/sClDeUkh06B5Ee7+QNhsEpUD6qDFNzqOz2HDvg=;
-        b=sK8oO/UitYpKKN8wvtkIjl4evbVB+eOzui7f+sA477ZKGE+PSMar4LLDtmuqZpvj7e
-         DkicEilb097BGFjJY1nYxgwcE6C7X6zYOl6PsuZmoluPYLjs1t25zTDxPXvebElzpqN9
-         99t09kVOuuwwhJh/CJUpTqVf4qtOCDBG1sY47LdlrBC1hrMFwqKCLRqROh1rY+l03b33
-         h4mYU2dBIr0pyXkvX7JU12kRg/2c+1OobO4EQfvZ78Oo0CEKpAYQXikTl/8JWDXmMrWH
-         ZGrcHpdAX0TWKIIh3pZ5ITXuxfrLhNbiBz9oOEzP4ws3RIEs5/gbMy1Y4+ghtMk+i32n
-         G0iw==
-X-Forwarded-Encrypted: i=1; AJvYcCV8TrPGPerx0X6vz20cwOLzjYBASj5x8+8qNSjrphuSoay6wqUWuC/yYGbVZOO0SfjP4zXctgAYff8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwJSvIxzOywIchhysO4w+12RrcPtSXbjxxaS+JfyBzwHpJJEG95
-	J3wStRedQRnlArPeJ73FPJTtHE2p/64fplxoFO28A5IAX/d+GAPAxXNOmr8PXHIJxXo=
-X-Gm-Gg: ASbGncsOHas1IQv84T5ybGSbUduOkOUKpExcoyPu3tKCp/mklTh4tIxMgwaIRsWUosy
-	cKq37r/42hT695vQB3W8mcHyQ/Y8Zj+pvX1HV6Ilqic3Fq4kDVLG2Qud5IexD8mRDt2bo8zJrxg
-	7hvuHlHcLz8ceKSmBbMy//hSFDTP3bNjo8wa0FIbJthYiDjkOiSz6vpRAK5FcZjh7NLuA5GWgsj
-	xoMFHI4Ybvti3sAOwQVgj4gPTkkFNEIeFripbaUjmG8JUmIvnoV3l5IYNHqEonKdWVHz6eQPtbp
-	mKd9k4XDtrAZ/Mvmiy5t4JcxfEoWldq4Ziz5/s/BwrL6nG+dEZcpoQANpetrU0gmLYyAg7twVlr
-	TJJsk+O1H7fv48Xls/onqIH5EyZIYgjITXKUiq5nq9I+xQJmvR1lkArHRezMoaKbP+rctU/Cowd
-	6xoMyjWiamNZhCuTzh0UGuV8YwX2u3pZ6sFrJB5AJCRA==
-X-Google-Smtp-Source: AGHT+IENkm0fs2t9WiUkqeC/WQaw29wCTX2zdxU7mW59IeVbPGq4S8dvGimkkJBbeDiGLSbj0FpaoA==
-X-Received: by 2002:a17:907:9448:b0:ae4:933:5c50 with SMTP id a640c23a62f3a-af61941213dmr1393916666b.41.1753714864345;
-        Mon, 28 Jul 2025 08:01:04 -0700 (PDT)
-Message-ID: <4bd0eb52-c00d-494a-854e-579401c183a6@suse.com>
-Date: Mon, 28 Jul 2025 17:01:03 +0200
+        d=1e100.net; s=20230601; t=1753715448; x=1754320248;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=44ifbJQ+wok33P/Hi+UxfcTj5GHZHK5snHDnxCW5DTo=;
+        b=YLGXeylMZr/ZWPtUOSanmMPkXaK1GqquoWdbGW6XS0y1nKYYiTqxwt3RUAc1XePWRl
+         ZnOlANNLsFHEd8/QeAgA72wN6C+uZcvkvTqT+tErqqn2NLmDM2vilU5B6cHpiPSvp8oI
+         nAIkVIL6wIH4igsMxyK/jNJFwywSNjwZu4mIndLVef5s32zXm+UpQBO6lKoe1I72Bsu1
+         zYteg6CnXteIS4+A6xGLxiQTapSFlsKUdohHvM9zphvVobxGvdwbJjYDIXjNBigHnAS+
+         /aq0PXl7zXNRBPeIFPCRQ3tIuLk1fUhluAvRiA0ItFsKayZmR9vMcNd33J5nBc7gmv4P
+         jOsA==
+X-Gm-Message-State: AOJu0YzbarETJ4a9jZwF3ZIZdULhndr8GCyVxErSUC3ag2Z2anjve3bc
+	7cEAqBJpaF3LDGka4HvcffqXJhVI3lLjuLNUT1Z+buiHDqQg5wFcfPRqBOEoU7wB9YY=
+X-Gm-Gg: ASbGncsDQ3ozWvxQyK1gX1Ntt7/cT6y6/LBFMz1HqY9jMQIwd2vI4xeplcAee91M5uk
+	PWTbSGbF/BLB4turkU32xntyDAL0hznUsstaYwGSHPpcNb9ShjOYbAKmIsF6pnDFqqkinR0auk5
+	igT23qOntfvBkom3DsasJDLbp/lM2E9F8pE4JAETfv/AbIn4RQ0dxAKoWw6usg4OwQpUxH0ik5V
+	ZAAnD3JrSbtNd/hJfmrvH8au+EZhsng+WWDk9bBzzvuqQPFXOwsmXDXcfO7IURYhBC2W4Z2Yjvj
+	GV/aCy3NdW+1pl2RupWR7NxZNB1xSwb5cQz2AQ0XbqhMqxbHjxspNsWCtPAZbhsuY4wOZWoQ/Jy
+	IBhry5V3ju5QApGGVDY6h0di95SauUlg9ctrsy/lBXAhvR3tlOcbbn0vYPkkMucbnhw==
+X-Google-Smtp-Source: AGHT+IH09+PLBO96kSt0Prlmz0f9oecMh8nfOxNuDxaKDOZDghk4qYWC5lg0P06rdHunBaYEcInACQ==
+X-Received: by 2002:a17:903:4055:b0:240:2eae:aecb with SMTP id d9443c01a7336-2402eaeb26dmr36553865ad.43.1753715448343;
+        Mon, 28 Jul 2025 08:10:48 -0700 (PDT)
+Date: Mon, 28 Jul 2025 17:10:43 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Stewart Hildebrand <stewart.hildebrand@amd.com>
+Subject: Re: [PATCH v1 6/6] vpci: add SR-IOV support for DomUs
+Message-ID: <aIeS86j8ZOGVK3fy@macbook.local>
+References: <cover.1753450965.git.mykyta_poturai@epam.com>
+ <24ecd4b4877f82304e5fe5a4a6c524cc263c7756.1753450965.git.mykyta_poturai@epam.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [MINI-OS PATCH 1/2] mm: provide a way to do very early page table
- allocations
-To: Jan Beulich <jbeulich@suse.com>
-Cc: samuel.thibault@ens-lyon.org, minios-devel@lists.xenproject.org,
- xen-devel@lists.xenproject.org
-References: <20250708063738.18994-1-jgross@suse.com>
- <20250708063738.18994-2-jgross@suse.com>
- <7705ed0a-7fbe-4e0e-8752-2acd0a76583e@suse.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <7705ed0a-7fbe-4e0e-8752-2acd0a76583e@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------XsBmjuiMEKiPTEu2kdawDqeI"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <24ecd4b4877f82304e5fe5a4a6c524cc263c7756.1753450965.git.mykyta_poturai@epam.com>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------XsBmjuiMEKiPTEu2kdawDqeI
-Content-Type: multipart/mixed; boundary="------------vZac5oDxUIyiXlJVoDHvZWvE";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: samuel.thibault@ens-lyon.org, minios-devel@lists.xenproject.org,
- xen-devel@lists.xenproject.org
-Message-ID: <4bd0eb52-c00d-494a-854e-579401c183a6@suse.com>
-Subject: Re: [MINI-OS PATCH 1/2] mm: provide a way to do very early page table
- allocations
-References: <20250708063738.18994-1-jgross@suse.com>
- <20250708063738.18994-2-jgross@suse.com>
- <7705ed0a-7fbe-4e0e-8752-2acd0a76583e@suse.com>
-In-Reply-To: <7705ed0a-7fbe-4e0e-8752-2acd0a76583e@suse.com>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+On Fri, Jul 25, 2025 at 02:24:33PM +0000, Mykyta Poturai wrote:
+> From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> 
+> SR-IOV virtual functions have simplified configuration space such as
+> Vendor ID is derived from the physical function and Device ID comes
+> from SR-IOV extended capability.
+> Emulate those, so we can provide VID/DID pair for guests which use PCI
+> passthrough for SR-IOV virtual functions.
+> 
+> Emulate guest BAR register values based on PF BAR values for VFs.
+> This allows creating a guest view of the normal BAR registers and emulates
+> the size and properties as it is done during PCI device enumeration by
+> the guest.
+> 
+> Note, that VFs ROM BAR is read-only and is all zeros, but VF may provide
+> access to the PFs ROM via emulation and is not implemented.
+> 
+> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> ---
+>  xen/drivers/vpci/sriov.c | 119 ++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 118 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/drivers/vpci/sriov.c b/xen/drivers/vpci/sriov.c
+> index 640430e3e9..bf8d9763c6 100644
+> --- a/xen/drivers/vpci/sriov.c
+> +++ b/xen/drivers/vpci/sriov.c
+> @@ -39,7 +39,8 @@ static int vf_init_bars(const struct pci_dev *vf_pdev)
+>      for ( i = 0; i < PCI_SRIOV_NUM_BARS; i++ )
+>      {
+>          bars[i].addr = physfn_vf_bars[i].addr + vf_idx * physfn_vf_bars[i].size;
+> -        bars[i].guest_addr = bars[i].addr;
+> +        if ( pf_pdev->domain == vf_pdev->domain || bars[i].guest_addr == 0 )
+> +            bars[i].guest_addr = bars[i].addr;
 
---------------vZac5oDxUIyiXlJVoDHvZWvE
-Content-Type: multipart/mixed; boundary="------------eEnY3gS7WZ0oZHHscpE9p7oh"
+Wouldn't this better be done based on the owner of the device being
+the hardware domain?  This seems a bit ad-hoc and not quite obvious.
 
---------------eEnY3gS7WZ0oZHHscpE9p7oh
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+>          bars[i].size = physfn_vf_bars[i].size;
+>          bars[i].type = physfn_vf_bars[i].type;
+>          bars[i].prefetchable = physfn_vf_bars[i].prefetchable;
+> @@ -166,6 +167,44 @@ static void cf_check control_write(const struct pci_dev *pdev, unsigned int reg,
+>      pci_conf_write16(pdev->sbdf, reg, val);
+>  }
+>  
+> +#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
+> +static void cf_check vf_cmd_write(const struct pci_dev *pdev, unsigned int reg,
+> +                                  uint32_t cmd, void *data)
+> +{
+> +    struct vpci_header *header = data;
+> +
+> +    cmd |= PCI_COMMAND_INTX_DISABLE;
+> +
+> +    header->guest_cmd = cmd;
+> +
+> +    /*
+> +     * Let Dom0 play with all the bits directly except for the memory
+> +     * decoding one. Bits that are not allowed for DomU are already
+> +     * handled above and by the rsvdp_mask.
+> +     */
+> +    if ( header->bars_mapped != !!(cmd & PCI_COMMAND_MEMORY) )
+> +    {
+> +        /*
+> +         * Ignore the error. No memory has been added or removed from the p2m
+> +         * (because the actual p2m changes are deferred in defer_map) and the
+> +         * memory decoding bit has not been changed, so leave everything as-is,
+> +         * hoping the guest will realize and try again.
+> +         */
+> +        map_vf(pdev, cmd);
+> +    }
+> +    else
+> +        pci_conf_write16(pdev->sbdf, reg, cmd);
+> +}
 
-T24gMjguMDcuMjUgMTY6MDksIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAwOC4wNy4yMDI1
-IDA4OjM3LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gQWRkIGEgc21hbGwgcG9vbCBvZiBz
-dGF0aWNhbGx5IGFsbG9jYXRlZCBtZW1vcnkgcGFnZXMgdG8gYmUgaGFuZGVkIG91dA0KPj4g
-Zm9yIHZlcnkgZWFybHkgcGFnZSB0YWJsZSBhbGxvY2F0aW9ucy4NCj4+DQo+PiBUaGlzIHdp
-bGwgbWFrZSBpdCBwb3NzaWJsZSB0byBkbyB2aXJ0dWFsIGFsbG9jYXRpb25zIGUuZy4gZm9y
-IG1hcHBpbmcNCj4+IHRoZSBzaGFyZWQgaW5mbyBwYWdlLg0KPj4NCj4+IFNpZ25lZC1vZmYt
-Ynk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCj4+IC0tLQ0KPj4gICBhcmNo
-L3g4Ni9tbS5jIHwgMTYgKysrKysrKysrKysrKysrLQ0KPj4gICAxIGZpbGUgY2hhbmdlZCwg
-MTUgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS9h
-cmNoL3g4Ni9tbS5jIGIvYXJjaC94ODYvbW0uYw0KPj4gaW5kZXggYmRmZjM4ZmQuLjNmNWM3
-ZWE3IDEwMDY0NA0KPj4gLS0tIGEvYXJjaC94ODYvbW0uYw0KPj4gKysrIGIvYXJjaC94ODYv
-bW0uYw0KPj4gQEAgLTY0MCwxMiArNjQwLDE3IEBAIHZvaWQgY2hhbmdlX3JlYWRvbmx5KGJv
-b2wgcmVhZG9ubHkpDQo+PiAgICAqIHJldHVybiBhIHZhbGlkIFBURSBmb3IgYSBnaXZlbiB2
-aXJ0dWFsIGFkZHJlc3MuIElmIFBURSBkb2VzIG5vdCBleGlzdCwNCj4+ICAgICogYWxsb2Nh
-dGUgcGFnZS10YWJsZSBwYWdlcy4NCj4+ICAgICovDQo+PiArI2RlZmluZSBOX1BUUyA0DQo+
-IA0KPiBXb3VsZG4ndCBpdCBiZSBwcnVkZW50IHRvIGhhdmUgYSBjb21tZW50IGhlcmUgbWVu
-dGlvbmluZyBob3cgdGhpcyBudW1iZXINCj4gd2FzIGRlcml2ZWQsIGkuZS4gd2hhdCdzIGtu
-b3duIHRvIGJlIGNvdmVyZWQ/IChUbyBtYXAgdGhlIHNoYXJlZCBpbmZvDQo+IHBhZ2UgSSBl
-eHBlY3QgeW91IHJlYWxseSBvbmx5IG5lZWQgMz8gSGVuY2Ugd2l0aG91dCBhIGNvbW1lbnQg
-dGhpbmdzIG1heQ0KPiByZW1haW4gdW5jbGVhci4pDQoNClllcywgMyB3b3VsZCBoYXZlIGJl
-ZW4gZW5vdWdoLiBPVE9IIGhhdmluZyBhbm90aGVyIHNwYXJlIGRvZXNuJ3QgaHVydCwgYXMN
-CnRoZSBtZW1vcnkgd2lsbCBiZSBhbGxvY2F0ZWQgYW55d2F5Lg0KDQpJJ2xsIGFkZCBhIGNv
-bW1lbnQgaW4gdGhpcyByZWdhcmQuDQoNCj4gDQo+PiArc3RhdGljIGNoYXIgZWFybHlfcHRb
-UEFHRV9TSVpFICogTl9QVFNdIF9fYXR0cmlidXRlX18oKGFsaWduZWQoUEFHRV9TSVpFKSkp
-Ow0KPiANCj4gTWF5YmUgYmV0dGVyIGVhcmx5X3B0W05fUFRTXVtQQUdFX1NJWkVdLCBzaW1w
-bGlmeWluZyB0aGUgYWxsb2NhdGlvbg0KPiBjb2RlIGJlbG93IGEgbGl0dGxlPw0KDQpZZXMs
-IGdvb2QgaWRlYS4NCg0KPiANCj4+ICtzdGF0aWMgdW5zaWduZWQgbG9uZyBuX2Vhcmx5X3B0
-ID0gTl9QVFM7DQo+IA0KPiB1bnNpZ25lZCBpbnQgd291bGQgZG8sIEkgZXhwZWN0PyBXaXRo
-IHRoZSBzdWdnZXN0aW9uIGFib3ZlIHRoaXMgY291bGQNCj4gdGhlbiBhbHNvIHVzZSBBUlJB
-WV9TSVpFKCksIGF0IHdoaWNoIHBvaW50IHRoZXJlIHdvdWxkIGJlIG5vIHJlYWwgbmVlZA0K
-PiBmb3IgTl9QVFMgYW55bW9yZS4NCg0KVHJ1ZS4NCg0KPiANCj4+ICAgc3RhdGljIGludCBu
-ZWVkX3BndF9mdW5jKHVuc2lnbmVkIGxvbmcgdmEsIHVuc2lnbmVkIGludCBsdmwsIGJvb2wg
-aXNfbGVhZiwNCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBnZW50cnlfdCAqcHRl
-LCB2b2lkICpwYXIpDQo+PiAgIHsNCj4+ICAgICAgIHBnZW50cnlfdCAqKnJlc3VsdCA9IHBh
-cjsNCj4+ICAgICAgIHVuc2lnbmVkIGxvbmcgcHRfbWZuOw0KPj4gICAgICAgdW5zaWduZWQg
-bG9uZyBwdF9wZm47DQo+PiArICAgIHVuc2lnbmVkIGxvbmcgcHRfYWRkcjsNCj4+ICAgICAg
-IHVuc2lnbmVkIGludCBpZHg7DQo+PiAgIA0KPj4gICAgICAgaWYgKCAhaXNfbGVhZiApDQo+
-PiBAQCAtNjY0LDcgKzY2OSwxNiBAQCBzdGF0aWMgaW50IG5lZWRfcGd0X2Z1bmModW5zaWdu
-ZWQgbG9uZyB2YSwgdW5zaWduZWQgaW50IGx2bCwgYm9vbCBpc19sZWFmLA0KPj4gICAgICAg
-fQ0KPj4gICANCj4+ICAgICAgIHB0X21mbiA9IHZpcnRfdG9fbWZuKHB0ZSk7DQo+PiAtICAg
-IHB0X3BmbiA9IHZpcnRfdG9fcGZuKGFsbG9jX3BhZ2UoKSk7DQo+PiArICAgIGlmICggbl9l
-YXJseV9wdCApDQo+PiArICAgIHsNCj4+ICsgICAgICAgIG5fZWFybHlfcHQtLTsNCj4+ICsg
-ICAgICAgIHB0X2FkZHIgPSAodW5zaWduZWQgbG9uZykmZWFybHlfcHRbbl9lYXJseV9wdCAq
-IFBBR0VfU0laRV07DQo+PiArICAgIH0NCj4+ICsgICAgZWxzZQ0KPj4gKyAgICB7DQo+PiAr
-ICAgICAgICBwdF9hZGRyID0gYWxsb2NfcGFnZSgpOw0KPj4gKyAgICB9DQo+IA0KPiBUaGUg
-ZmFpbHVyZSBwYXR0ZXJuIHdoZW4gb25lIGZhaWxzIHRvIGluY3JlYXNlIGVhcmx5X3B0W10g
-aXMgbGlrZWx5IGdvaW5nDQo+IHRvIGJlIHByb2JsZW1hdGljLiBXb3VsZG4ndCBpdCBiZSBi
-ZXR0ZXIgdG8gY2hlY2sgZm9yIGZhaWx1cmUgaGVyZT8NCg0KSG1tLCBub3Qgc3VyZSB0aGlz
-IGlzIHRydWUuIEkgdHJpZWQgdGhlIHNoYXJlZCBpbmZvIG1hcHBpbmcgd2l0aG91dCBhZGRp
-bmcNCnRoZSBzcGVjaWFsIGVhcmx5IGFsbG9jIGNvZGUgZmlyc3QgYW5kIGZpbmRpbmcgdGhl
-IGJ1ZyB3YXMgcXVpdGUgZWFzeS4NCg0KDQpKdWVyZ2VuDQo=
---------------eEnY3gS7WZ0oZHHscpE9p7oh
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+This seems to be (mostly) a duplication of the existing cmd_write() in
+header.c.  Is there anyway that we could use the same handler and
+check for whether the device is a VF for any specific VF handling?
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+> +
+> +static uint32_t cf_check vf_cmd_read(const struct pci_dev *pdev,
+> +                                     unsigned int reg, void *data)
+> +{
+> +    const struct vpci_header *header = data;
+> +
+> +    return header->guest_cmd;
+> +}
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+This is a verbatim duplicate of guest_cmd_read() in header.c.
 
---------------eEnY3gS7WZ0oZHHscpE9p7oh--
+> +#endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
+> +
+>  static int vf_init_header(struct pci_dev *vf_pdev)
+>  {
+>      const struct pci_dev *pf_pdev;
+> @@ -184,6 +223,84 @@ static int vf_init_header(struct pci_dev *vf_pdev)
+>      sriov_pos = pci_find_ext_capability(pf_pdev->sbdf, PCI_EXT_CAP_ID_SRIOV);
+>      ctrl = pci_conf_read16(pf_pdev->sbdf, sriov_pos + PCI_SRIOV_CTRL);
+>  
+> +#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
+> +    if ( pf_pdev->domain != vf_pdev->domain )
+> +    {
+> +        uint16_t vid = pci_conf_read16(pf_pdev->sbdf, PCI_VENDOR_ID);
+> +        uint16_t did = pci_conf_read16(pf_pdev->sbdf,
+> +                                       sriov_pos + PCI_SRIOV_VF_DID);
+> +        struct vpci_bar *bars = vf_pdev->vpci->header.bars;
+> +        unsigned int i;
+> +
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_VENDOR_ID, 2, (void *)(uintptr_t)vid);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_DEVICE_ID, 2, (void *)(uintptr_t)did);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        /* Hardcode multi-function device bit to 0 */
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_HEADER_TYPE, 1,
+> +                               (void *)PCI_HEADER_TYPE_NORMAL);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_hw_read32, NULL,
+> +                               PCI_CLASS_REVISION, 4, NULL);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        /* VF ROZ is covered by ro_mask */
+> +        rc = vpci_add_register_mask(vf_pdev->vpci, vf_cmd_read, vf_cmd_write,
+> +                                    PCI_COMMAND, 2, &vf_pdev->vpci->header,
+> +                                    PCI_COMMAND_IO | PCI_COMMAND_SPECIAL |
+> +                                    PCI_COMMAND_INVALIDATE |
+> +                                    PCI_COMMAND_VGA_PALETTE | PCI_COMMAND_WAIT |
+> +                                    PCI_COMMAND_FAST_BACK,
+> +                                    0,
+> +                                    PCI_COMMAND_RSVDP_MASK |
+> +                                    PCI_COMMAND_PARITY | PCI_COMMAND_SERR,
+> +                                    0);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        rc = vpci_init_capability_list(vf_pdev);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        for ( i = 0; i < PCI_SRIOV_NUM_BARS; i++ )
+> +        {
+> +            switch ( pf_pdev->vpci->sriov->vf_bars[i].type )
+> +            {
+> +            case VPCI_BAR_MEM32:
+> +            case VPCI_BAR_MEM64_LO:
+> +            case VPCI_BAR_MEM64_HI:
+> +                rc = vpci_add_register(vf_pdev->vpci, vpci_guest_mem_bar_read,
+> +                                       vpci_guest_mem_bar_write,
+> +                                       PCI_BASE_ADDRESS_0 + i * 4, 4, &bars[i]);
+> +                if ( rc )
+> +                    return rc;
+> +                break;
+> +            default:
+> +                rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                                       PCI_BASE_ADDRESS_0 + i * 4, 4,
+> +                                       (void *)0);
+> +                if ( rc )
+> +                    return rc;
+> +                break;
+> +            }
+> +        }
+> +
+> +        rc = vf_init_bars(vf_pdev);
+> +        if ( rc )
+> +            return rc;
+> +    }
+> +#endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
 
---------------vZac5oDxUIyiXlJVoDHvZWvE--
+I think it would be better if the code in sr-iov.c would only deal
+with accesses to the SR-IOV capability (so the hardware domain), while
+the code to handle SR-IOV VFs was directly added to header.c.
 
---------------XsBmjuiMEKiPTEu2kdawDqeI
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Otherwise the work here will collide from the series by Jiqian that
+attempts to clean up the mediation of capabilities done in vPCI:
 
------BEGIN PGP SIGNATURE-----
+https://lore.kernel.org/xen-devel/20250728050401.329510-1-Jiqian.Chen@amd.com/
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmiHkK8FAwAAAAAACgkQsN6d1ii/Ey/4
-uwgAh6uJF6y8lBhrg6eQN5Kpv0bvpHY0nEPDIupUxKsllAalUxjTInmUHcbyMyTcVX2OuqwZlLHj
-0aBWs22mRTioLOdP8iXEq2hZDxkfcrOsyDZt/nbnJzA9uTv/Avc7fV1FMEEqLKXjo/3vTWIuPGhm
-UO9xfrJRbdKOv+PiMTuEIVHRKeoPR780eVduflvMKGCawtekuW4QOqatmSeN+yFsUeWZVFx3Clx4
-g9v6FkmeKLbCWB06Q8AC9OKCS4MwG6Fd1t2YZe9n1z7DafWHtDOLU2fc0ASvjXUtteKZXyZnmFN9
-hJRLe85BG/WiXDw8pHu4O5IC7HeJjul9NfPXn4t08g==
-=/EA6
------END PGP SIGNATURE-----
+Specifically see patch #2:
 
---------------XsBmjuiMEKiPTEu2kdawDqeI--
+https://lore.kernel.org/xen-devel/20250728050401.329510-3-Jiqian.Chen@amd.com/
+
+Which introduces vpci_init_capabilities(), and makes vPCI capability
+initialization tied to the PCI device having the capability present.
+
+Thanks, Roger.
 
