@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD8AEC87FC9
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Jul 2025 10:25:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1061230.1426737 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AAF4C87FC9
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Jul 2025 10:25:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1061235.1426746 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugL2Y-0007bM-TT; Mon, 28 Jul 2025 10:25:06 +0000
+	id 1ugL34-000846-4f; Mon, 28 Jul 2025 10:25:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1061230.1426737; Mon, 28 Jul 2025 10:25:06 +0000
+Received: by outflank-mailman (output) from mailman id 1061235.1426746; Mon, 28 Jul 2025 10:25:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugL2Y-0007bD-Qa; Mon, 28 Jul 2025 10:25:06 +0000
-Received: by outflank-mailman (input) for mailman id 1061230;
- Mon, 28 Jul 2025 10:25:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ugL34-00083x-1Z; Mon, 28 Jul 2025 10:25:38 +0000
+Received: by outflank-mailman (input) for mailman id 1061235;
+ Mon, 28 Jul 2025 10:25:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qt5P=2J=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1ugL2W-0007b5-RM
- for xen-devel@lists.xenproject.org; Mon, 28 Jul 2025 10:25:04 +0000
-Received: from fhigh-b2-smtp.messagingengine.com
- (fhigh-b2-smtp.messagingengine.com [202.12.124.153])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1ed1d24d-6b9d-11f0-a31e-13f23c93f187;
- Mon, 28 Jul 2025 12:25:03 +0200 (CEST)
-Received: from phl-compute-04.internal (phl-compute-04.phl.internal
- [10.202.2.44])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 685637A01BD;
- Mon, 28 Jul 2025 06:25:01 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-04.internal (MEProxy); Mon, 28 Jul 2025 06:25:01 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 28 Jul 2025 06:25:00 -0400 (EDT)
+ <SRS0=YAI4=2J=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ugL32-00080f-TH
+ for xen-devel@lists.xenproject.org; Mon, 28 Jul 2025 10:25:36 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 32866f52-6b9d-11f0-b895-0df219b8e170;
+ Mon, 28 Jul 2025 12:25:35 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4563cfac19cso45485565e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Jul 2025 03:25:35 -0700 (PDT)
+Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4586ec529e9sm120676625e9.1.2025.07.28.03.25.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Jul 2025 03:25:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,104 +47,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ed1d24d-6b9d-11f0-a31e-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
-	 t=1753698301; x=1753784701; bh=5kzL1yl//NUu1iEByEAbQXDTas8i4+24
-	kcCE0plUOKs=; b=dWFUEPusVLho2HaNa7R9dbkF9mC16JohgvUxl8O4CTmb2wc+
-	7RGbKBzaTLvTY9qswAlqeTNqbki0wTQqxGQlrzCSl/1BQDn7g6RFsSUEcF3gkNL9
-	bNbbDUOPGd1XVoymGQQz7e0Q6narpcYBQJ6/Diny6Bd1PX/2TWL4Ve3n+EhkfCt3
-	2awUNIWEBPAEW5hdcypmg5iWO2lXs7IZ1pAlfau7eti2gkcDgHNqjHPutzkopfD1
-	vs9cBe0VxJ5h1c10PHMnnlE2JaLTh28JNX9Sb3LMBTvkNvNKd3GcskiDdbhtgnBV
-	o/t7FuYiZW7h3F5ziU15FiIQYA8wh5BQLNvFQA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm3; t=1753698301; x=1753784701; bh=5kzL1yl//NUu1iEByEAbQXDTas8i
-	4+24kcCE0plUOKs=; b=dijylUYB1/mHohsj4z1ioOCy4fi25d9XzB0oXFoMFNCP
-	YXmkxv5kfNLGODYK2GWrudac/9QQPdS+64deRZEQwP/i9cMxj/eSkP1hzEc3y37Q
-	ZVSw3CvkgxEWX3oVNMq385p5scJOpuqiZE2daWqy/Rh9vmaUXSJCPw+ZmuA3zGfl
-	UKl4reWl/iGWBLM80IxpDa+GQWnOqxt2HWxri6buLPcnhxXlXUHdUo2Iu9rN0Tz5
-	X//ZC6BmWp4E8ZxAUB9mTEp07bXX/ZM0fLJnhzIt733qGCU2aNfIQ6ILFEX9D3I/
-	BOZoc2ftlGN7qEQA8c1PuZBNZLPXXK7tEaSh2t7ahQ==
-X-ME-Sender: <xms:_U-HaCMlhLQcJvQc49IAukI7I_mDiS3zOxdHvbv4riB2XywDkp2Qog>
-    <xme:_U-HaLhPz5mVCeS0YgdHXNtiwt1coCyKqBvTkZyz4S5iIchGwne9nomzwPFGIC4ou
-    LKRcs1EdIVfCw>
-X-ME-Received: <xmr:_U-HaF1PpKV3zhXDR2pIbkawUXmUmbsUEfJeYoPd_40_BAfdWVUN33UHflpeuImc3_s4ChP7rTTpwVof_RdC5-1UtlyA3yg7tuNWxcPqoXcdckAxqTaK>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdeludelfecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgr
-    rhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsih
-    gslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepleekhfduleet
-    leelleetteevfeefteffkeetteejheelgfegkeelgeehhfdthedvnecuvehluhhsthgvrh
-    fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhv
-    ihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepgedpmhhoug
-    gvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigv
-    nhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefse
-    gtihhtrhhigidrtghomhdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghl
-    vghthhhinhhgshhlrggsrdgtohhmpdhrtghpthhtoheprghnthhhohhnhidrphgvrhgrrh
-    gusehvrghtvghsrdhtvggthh
-X-ME-Proxy: <xmx:_U-HaFiOQKOOzmAWepIhxyr0t3QGTR8Y98ARNfRtoJZ5tsW0jVIcCQ>
-    <xmx:_U-HaFf5FVqwOlQfj27EZlAU0VoOLaLNQQR64eQ0EeAc6ozShshAAQ>
-    <xmx:_U-HaIlnfu8RXfaLtmxbsXsnuV9AfaS1tuCk6gd5r51GLR9KxvBWGA>
-    <xmx:_U-HaOsRUOUeTDl9BfCvIqY97SLC2hT_M4wl6zZbl0dSAOIBcmnrEA>
-    <xmx:_U-HaJKiUexM6OLawT5isYHddOpEyMDseU_oaH2oD6k55rGbaKlo-ehA>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH] tools/xl: don't crash on NULL command line
-Date: Mon, 28 Jul 2025 12:24:03 +0200
-Message-ID: <20250728102422.2245808-1-marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.49.0
+X-Inumbo-ID: 32866f52-6b9d-11f0-b895-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1753698334; x=1754303134; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=2vLUaULpNtvcxk+BfV0PVqqQpqQlNugNjWvx2by9rAE=;
+        b=bUndlItrMFI5FLn7lDlbutOu4iORKEw/lxLq8OglP0a2an5+N2UlhXb0Ol1xKdiGWZ
+         PwYu7TsHG8Mn7+Bo05p+2dILgUgu2GNx9g+1K1+R3mfeX/CHEAl0qwPjS5p7lGQDQSEk
+         dgeKTS5UYcBetxZOjcOTmIJN0q+YLLbvlY0Sc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753698334; x=1754303134;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2vLUaULpNtvcxk+BfV0PVqqQpqQlNugNjWvx2by9rAE=;
+        b=KWAHq+bDNXrl4OOpWecTtIJJszinQm+Cd6cL8z7SAWpl78Lm0ytr8NMp1v4RdkXYmY
+         Rj0e2noLOSqwXwPZdRUUZhjX5tgFM4kJrO/1ANEOg4Wb4e+bjzpj30gW5ZP+mRZKL+vA
+         WCwjVnfsBT1YUFs/exUwh0Rqisl36uaUVzxj05iLYP4LzNY809g7ormC2k1dubOdFgU0
+         ELjFRaHL1iYYYMRcFd0Pq73fZIjZVft/NdXdpTgCx4v02zZo6tTP+r/ZvBYTdcS1a9qo
+         GxPUpHP1LvopydLVvh9CPXecqsyOLNyEnoxmFEF54DT05J7EfmqESvRzSlIEFsVo1wfe
+         HPGg==
+X-Forwarded-Encrypted: i=1; AJvYcCV1CT6qumpDD9uF4unlBwXWtiaN5Jq6eSttzPhfcL0zJR5CokAiRf8whvhLxazu8VCmqMKPbN8Lgvw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyhlawn9YR9Y/YzCGXoZ7ta7OMvsZ6Mi9+wYvB33TiJ0yMiwUH+
+	sArvoAjnHPAb5rr+qgSp444L1Ya9Wh9B6xtzktGpwPi4Uxb+peiD6nHXJE588hXqZqI=
+X-Gm-Gg: ASbGncu+vYGblRrmATMj8NGnPdWT755jzw+KSeCxVIqK8haYSXgusLmbM/NnL48SrA0
+	ImL/s5fMVxbKzsTxh101h5bd935+9V6S1SXTuTF0rdgI+yl3dNiL4LHQHfYmqUUyJUC+TMxaJby
+	0Jj/7M95kkNkIxA3X+eMX1612snoI4SoMiPOZo43aXPQevZBiabBP7YbyY8+C3K+coo1/pOGauO
+	B/lahEO5i71Y/uuJvkAzkBnxqHrT5+hzQDc+I4vYfESmH/NF2Mp/jmnpUaALeq5K5BRUWO0lKZ7
+	Sipk1dom4q+aKNh1dQfHpTZL5Gpix/FYTvxhWZ/lt7e0IRvKggYj8qgxXO+y4Gz9NvA52vWNRJN
+	GcZURMNyXKykIGWWS+5dBwuk/119hRLcj0sTs0C7LcxY2UzNAmM17ylWTPiVUc/IQG/RB
+X-Google-Smtp-Source: AGHT+IGH7YSxJbopV4iJYdOU0PBY4JcORzJQ7HQrlQ0yF7B9a6jIgXkwvwnvuNCm+ThuHBANSzO04g==
+X-Received: by 2002:a05:600c:45d1:b0:43d:745a:5a50 with SMTP id 5b1f17b1804b1-458765475b1mr89972995e9.19.1753698334464;
+        Mon, 28 Jul 2025 03:25:34 -0700 (PDT)
+Message-ID: <2874ee13-a978-4331-9c7e-70d4fcd11727@citrix.com>
+Date: Mon, 28 Jul 2025 11:25:33 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v1 04/10] vpmu.c: factor out register conversion
+To: =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>,
+ xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, andriy.sultanov@vates.tech,
+ boris.ostrovsky@oracle.com
+References: <cover.1753372928.git.edwin.torok@cloud.com>
+ <ce2375387dcc5e00c3d55e903d9a2180eadb8685.1753372928.git.edwin.torok@cloud.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <ce2375387dcc5e00c3d55e903d9a2180eadb8685.1753372928.git.edwin.torok@cloud.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When running xl in a domU, it doesn't have access to the Xen command
-line. Before the non-truncating xc_xenver_cmdline(), it was always set
-with strdup, possibly of an empty string. Now it's NULL. Treat it the
-same as empty cmdline, as it was before. Autoballoon isn't relevant for
-xl devd in a domU anyway.
+On 25/07/2025 4:06 pm, Edwin Török wrote:
+> diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
+> index 7be79c2d00..713311a1ac 100644
+> --- a/xen/arch/x86/cpu/vpmu.c
+> +++ b/xen/arch/x86/cpu/vpmu.c
+> @@ -160,6 +160,31 @@ static inline struct vcpu *choose_hwdom_vcpu(void)
+>      return hardware_domain->vcpu[idx];
+>  }
+>  
+> +static inline void vpmu_convert_regs(struct xen_pmu_regs *r, uint64_t *flags,
+> +                                     struct vcpu *sampled,
+> +                                     const struct cpu_user_regs *cur_regs) {
+> +  r->ip = cur_regs->rip;
+> +  r->sp = cur_regs->rsp;
+> +  r->flags = cur_regs->rflags;
+> +
+> +  if (!is_hvm_vcpu(sampled)) {
+> +    r->ss = cur_regs->ss;
+> +    r->cs = cur_regs->cs;
+> +    if (!(sampled->arch.flags & TF_kernel_mode))
+> +      *flags |= PMU_SAMPLE_USER;
+> +  } else {
+> +    struct segment_register seg;
+> +
+> +    hvm_get_segment_register(sampled, x86_seg_cs, &seg);
+> +    r->cs = seg.sel;
+> +    hvm_get_segment_register(sampled, x86_seg_ss, &seg);
+> +    r->ss = seg.sel;
+> +    r->cpl = seg.dpl;
+> +    if (!(sampled->arch.hvm.guest_cr[0] & X86_CR0_PE))
+> +      *flags |= PMU_SAMPLE_REAL;
+> +  }
+> +}
+> +
 
-Fixes: 75f91607621c ("tools: Introduce a non-truncating xc_xenver_cmdline()")
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-So, apparently the "No API/ABI change" was a lie... it changed "empty
-string" to NULL in libxl_version_info->commandline. Quick search didn't
-spot any other (in-tree) place that could trip on NULL there. IMO NULL
-value in this case makes more sense. Buf maybe for the API stability
-reasons the old behavior should be restored?
+This is fine in principle, except that you're changing the style away
+from Xen style.
 
-PS I'm working on a CI test for this case (and driver domains in
-general). I have it working with Alpine already, but it wouldn't detect
-this issue, as musl's regexec() doesn't crash on NULL... So, I'll add a
-test on Debian too.
----
- tools/xl/xl.c | 2 ++
- 1 file changed, 2 insertions(+)
+I can fix it on commit, but it's going to collide massively later in the
+series.
 
-diff --git a/tools/xl/xl.c b/tools/xl/xl.c
-index ec72ca60c32a..e183d42b1d65 100644
---- a/tools/xl/xl.c
-+++ b/tools/xl/xl.c
-@@ -81,6 +81,8 @@ static int auto_autoballoon(void)
-     info = libxl_get_version_info(ctx);
-     if (!info)
-         return 1; /* default to on */
-+    if (!info->commandline)
-+        return 1;
- 
- #define SIZE_PATTERN "-?[0-9]+[bBkKmMgGtT]?"
- 
--- 
-2.49.0
-
+~Andrew
 
