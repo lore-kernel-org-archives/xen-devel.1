@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7056EC83F26
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 09:01:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062304.1427958 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23048C83F26
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 09:11:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062326.1427974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uggCu-0002mK-D9; Tue, 29 Jul 2025 09:01:12 +0000
+	id 1uggMu-0005BF-Cs; Tue, 29 Jul 2025 09:11:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062304.1427958; Tue, 29 Jul 2025 09:01:12 +0000
+Received: by outflank-mailman (output) from mailman id 1062326.1427974; Tue, 29 Jul 2025 09:11:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uggCu-0002mD-A4; Tue, 29 Jul 2025 09:01:12 +0000
-Received: by outflank-mailman (input) for mailman id 1062304;
- Tue, 29 Jul 2025 09:01:11 +0000
+	id 1uggMu-0005B8-8g; Tue, 29 Jul 2025 09:11:32 +0000
+Received: by outflank-mailman (input) for mailman id 1062326;
+ Tue, 29 Jul 2025 09:11:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=fFWP=2K=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ugg51-0006C0-6F
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 08:53:03 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1uggMs-0005B2-Fr
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 09:11:30 +0000
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [2a00:1450:4864:20::42b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6f1d0bb5-6c59-11f0-a31e-13f23c93f187;
- Tue, 29 Jul 2025 10:53:02 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b780bdda21so2940864f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 01:53:02 -0700 (PDT)
+ id 02a64020-6c5c-11f0-a31e-13f23c93f187;
+ Tue, 29 Jul 2025 11:11:28 +0200 (CEST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3b791736d12so266611f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 02:11:28 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b420351c3d2sm3198707a12.5.2025.07.29.01.52.58
+ 41be03b00d2f7-b3f7f6ae8bcsm6575062a12.46.2025.07.29.02.11.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jul 2025 01:53:01 -0700 (PDT)
+ Tue, 29 Jul 2025 02:11:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f1d0bb5-6c59-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 02a64020-6c5c-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753779182; x=1754383982; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1753780288; x=1754385088; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=rEHfcRqV3MBpA/v53GsPEK6uX0VSS/rQERp7qHUtZmA=;
-        b=HDAnewB3lQY2Uqe0782jiJT6r5FAJ1mHU9Gn9u2qW6CGFI3zt/7OG0WxqOTyirBCJP
-         NZeKLPR5rUqy+zDHJyD9kgZKuyqSr3ll7OwJgIQZlepy0nElJQt3aJYnGZ0tfUmGKqw9
-         VWEf8b37vuuN/Y/3HLqGu4nN8d6sQGjRCAxktsWPGHU0xmMTU38cYcgrG9wUo1af0Icq
-         mYDMoIZgwxjdz0+W7qfkog+Sj+rTj7jmikFquzaTsryRTBnLjQaLXSpCbjwxtL8efWuX
-         ccpsRdNIObrk+IWxy/1kosJE2GQHO650cR36MJGaxhfoAkJa3VDirKBzz1HtEaHdfyis
-         LCMg==
+        bh=tHBkdccADiS9LpGZe+sCGN0n9GDyCNbJM1F+VRsueDk=;
+        b=V+9+VYbnwS7Jy/zyWLKzCFTja11bKw6hcykvKcGFBKGGE9TIm7ITrV2LiR5+UagC+D
+         xc5ZEcq1NFR7inj5oM0SSSMBAqPG7CmGbGHGHKbVSsg8Hb+ePi5UPrmC/TYM69Y6yfNL
+         YmcUyGi58WxQDhCSq35yPHjCkY0dC9mCDuD+oJcsi2Kkc0Rhk3mdZ8Vg/xd1zqmSGGAp
+         xzvoDjQMCeRSTwlc5pyE/AwurmdeTylqb92hHuo2DQNj1hxaBtaropjJjfJuz6FRm2wg
+         qLdwvujAjPLdWw/gZn+aVlUETSGcucQVJQ/Xp41iAMOmoi/eccJSyY9p7HFaQvHfVxdm
+         8l1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753779182; x=1754383982;
+        d=1e100.net; s=20230601; t=1753780288; x=1754385088;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=rEHfcRqV3MBpA/v53GsPEK6uX0VSS/rQERp7qHUtZmA=;
-        b=tDKx84tXr2zEaz9wbC1RYbQPFWBQZooGjoEFPMEKzAGBM94wL8Ntx4PU+8hZcMm3gu
-         MdQWe7Zf6M+S8xu0xS/eYy4v2/wtsj8yu9aeu+qn18MoFULITC3brRpwuI6N0j0xTou2
-         AnuN3+cF0ztEGLZyDuHhC6wn7d/g0Yu87PyVqHW8r6q098d05G7Bj7EEEgXa2f31DdNy
-         JNR5atM2Hss+UFrtwzV1mWRv8xx6ffl26eodkL1KlxI4IkioMakk2d11O2950k/1NoWf
-         9d8rC387TGqw3U3m3J9mvGCQ6/VOAYyqVEeJkjcJ77WqemyTRYCkbiRklGKLZiJdXfds
-         NoAA==
-X-Forwarded-Encrypted: i=1; AJvYcCUfsTop6zRKIxbv5Jh9iZxBaW5nsToWGIile2zADA8V+4OGDZWWHKeASRchsB2zDxCaZsmRUTbotc8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxnOGy3CMM+OTzR/wweEmmg4sdvgiPv+X8Aooc0CX0kmwVcZu5z
-	MID6nrizh/jMmGGFyKCKEIMEfAbQhduQQFF4WHcmcovaT4wzZz5ffxIQZDT5HZQuyQ==
-X-Gm-Gg: ASbGncvDIYHzNM7m0bhtNRRx2uHzCTudi4pc8lFDR8000HzyBNGf2KiLr+w3pb/eRf6
-	w67E8Iag4g7TtREnX0Kz87zMr6i9HuwKNWfKsUY9Xp6J9sbUeCIvLKZQvap6wHsh93l+MaKiDED
-	NmIxUlSpcSLC2vM7Rbsw6SgduinhCgt1/WP+MLTrqQijeIByIW5DBgh+1EMOkLgLVSWmbtPElno
-	XAaNKKPz+HFdPZZvAO6EKmboKdr9zEdZzyKrO/GSYttDvvmx7Ry72KA19h3uNbF5iPwmeZWlaM0
-	3y/9oq1S6YbbNDGbhvTC0PwwUiarA1R/EMM/ER5RK6vpzC/wTYl9TG3SV7e/cn39XwZv8I0mFih
-	if5D1qHbIUlSUuJD9+jeE0OM+XIDqMczAvxWIvQvLcFhiSvG580DFFWSCwsF4D8PHBZIcO7u/Mq
-	noKp89aQA=
-X-Google-Smtp-Source: AGHT+IFcCYoHjXwjmi7PMeUlJquckSj7oo/H+CmB0+mZ/Ol9FCQtfaNIxyOYyP9/8xd6JWkH5fSiRw==
-X-Received: by 2002:a05:6000:2c04:b0:3ab:27f9:e51 with SMTP id ffacd0b85a97d-3b77675dad3mr8953251f8f.31.1753779181746;
-        Tue, 29 Jul 2025 01:53:01 -0700 (PDT)
-Message-ID: <2fb97c32-f0e7-4d9f-bf3c-5fd621498b29@suse.com>
-Date: Tue, 29 Jul 2025 10:52:54 +0200
+        bh=tHBkdccADiS9LpGZe+sCGN0n9GDyCNbJM1F+VRsueDk=;
+        b=WvQFMPa8IsybFp5o9qhHGRGsrTo236gLH3hEuLKYUpiNCSW4VCuTUaVXO4ouY0X4ak
+         DpyMrl+6qa3eIQtqFnEbkV8tXeu7iFy6/BwClxwzNwDOR/vEgSMrxBxONNd5T6hsInCV
+         +cF3J/NhfJ7DB3puMv8E/XIrxhtho13iOhmylGwhby4YA0teW6ap+s7LXO0uaX4//l4l
+         nmURiGNx8tdhGwaEBrOQ6lg9zrz14NGoz8EK+GHHiIyzA5gFsv2CDs7z4WGfrcdYRYDy
+         VFHOViPguuajl1ypnGWHaVC7P1pgA3Tl2Y3zMM16XT5USgWdBCMk+qleGJtvB6BKzV4W
+         yWNQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWG79uJKLvCnI29rlnIPBbxKFp0K4SdEQ4TNfjXn6qh2Gl8MeKWMsJCcfOKcKoKF5mQgos1wiKYeT8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx/mEGi4P7vtiPLEJmf3cJZ0VQT4fJzKJU2iaiWT/fRo1Pe/9YX
+	P/JYoX2OWWcX9O+7uXVEwxvxv6l9hJ9PCnWI2F3t94RYRmvA0b/OpNKZJYrf14uSyw==
+X-Gm-Gg: ASbGncs3dNIzlh84LmMrjT2iChq/NHv8dwtpAECcLtgAN+ST9leTZzEKV0ve0nqFE6G
+	jZ4+obEiKly1SnHgpPkqOWxLy+owikl+wO46w0K8DMA9ZMxV8Cgb2zaGBkSm0lk8ncKqVnHcMdQ
+	b7BQEzqdQ3xibDXdEy1yZ5RhTuaM/5nzmxIEWfBpznY15ehUxjTk0sdG3zET8PXFxbxpbMZdRPH
+	Ccj7utqbW0tQMmPwe/jqEc8LSa6POjjofoesCD6eE1Dl4hHY0UPhkQD33FiSQsmd/hY0xO/9L10
+	RIQDbqbijl74cOujZzoYBeJLYRSGIYAo+OpjYcWPG5xVlt/HuSxeJT7OMQP6Un2ohLb3mdPdEzg
+	aTLxrT+zeZ9vy9JFkP388WAc3gm0Om2r8+8WnBG3ylnN/s18UQDXcYV4NHYphkArkRzz7ur50yj
+	gDjeffsus=
+X-Google-Smtp-Source: AGHT+IF49MqTqEW7y0HVpRL/oS7vyt8t8ciJxsIvbXei90uobD0PTErjhGatMhItmv3nkhdtXHpPWQ==
+X-Received: by 2002:a05:6000:2083:b0:3b7:924a:998f with SMTP id ffacd0b85a97d-3b7924a9d34mr969877f8f.5.1753780288238;
+        Tue, 29 Jul 2025 02:11:28 -0700 (PDT)
+Message-ID: <2e43ded3-d14d-49f8-bf98-f3d58d0b39af@suse.com>
+Date: Tue, 29 Jul 2025 11:11:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [MINI-OS PATCH v2 1/2] mm: provide a way to do very early page
- table allocations
-To: Juergen Gross <jgross@suse.com>
-Cc: samuel.thibault@ens-lyon.org, minios-devel@lists.xenproject.org,
+Subject: Re: [PATCH v7 1/4] xen/arm: Implement PSCI SYSTEM_SUSPEND call for
+ guests
+To: Mykola Kvach <xakep.amatop@gmail.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  xen-devel@lists.xenproject.org
-References: <20250729083829.11038-1-jgross@suse.com>
- <20250729083829.11038-2-jgross@suse.com>
+References: <cover.1753778926.git.mykola_kvach@epam.com>
+ <45e670391c37ab54f721b6576a41ded2e543d6db.1753778926.git.mykola_kvach@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -122,30 +129,81 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250729083829.11038-2-jgross@suse.com>
+In-Reply-To: <45e670391c37ab54f721b6576a41ded2e543d6db.1753778926.git.mykola_kvach@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 29.07.2025 10:38, Juergen Gross wrote:
-> --- a/arch/x86/mm.c
-> +++ b/arch/x86/mm.c
-> @@ -640,13 +640,20 @@ void change_readonly(bool readonly)
->  /*
->   * return a valid PTE for a given virtual address. If PTE does not exist,
->   * allocate page-table pages.
-> + * Provide a small pool for allocating some page tables very early. Those are
-> + * needed currently for mapping the shared info page, so 2 pages ought to be
-> + * enough. Add one spare page anyway.
->   */
+On 29.07.2025 10:52, Mykola Kvach wrote:
+> --- a/xen/common/domain.c
+> +++ b/xen/common/domain.c
+> @@ -1334,16 +1334,15 @@ int domain_shutdown(struct domain *d, u8 reason)
+>      return 0;
+>  }
+>  
+> -void domain_resume(struct domain *d)
+> +#ifdef CONFIG_ARM
+> +void domain_resume_nopause(struct domain *d)
+> +#else
+> +static void domain_resume_nopause(struct domain *d)
+> +#endif
 
-Hmm, 2 pages plus one spare doesn't yield ...
+#ifndef CONFIG_ARM
+static
+#endif
+void domain_resume_nopause(struct domain *d)
 
-> +static char early_pt[4][PAGE_SIZE] __attribute__((aligned(PAGE_SIZE)));
+to have as little redundancy as possible.
 
-... 4. Was 2 a typo, and 3 was meant? (Which, just to mention it, then isn't
-correct for 32-bit aiui.) Whatever adjustment wants making - happy to do so
-while committing. Just need to know which way. Then
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>  {
+>      struct vcpu *v;
+>  
+> -    /*
+> -     * Some code paths assume that shutdown status does not get reset under
+> -     * their feet (e.g., some assertions make this assumption).
+> -     */
+> -    domain_pause(d);
+> -
+> +    domain_lock(d);
+
+This addition of locking affects domain_resume() as well. Neither need nor
+correctness are discussed in the description. If the locking was really
+needed for domain_resume() as well, I suppose adding that would better be
+a separate change anyway.
+
+The addition of this locking is particularly interesting considering that
+...
+
+>      spin_lock(&d->shutdown_lock);
+
+... is what follows right after.
+
+> --- a/xen/include/xen/sched.h
+> +++ b/xen/include/xen/sched.h
+> @@ -814,6 +814,9 @@ void domain_destroy(struct domain *d);
+>  int domain_kill(struct domain *d);
+>  int domain_shutdown(struct domain *d, u8 reason);
+>  void domain_resume(struct domain *d);
+> +#ifdef CONFIG_ARM
+> +void domain_resume_nopause(struct domain *d);
+> +#endif
+>  
+>  int domain_soft_reset(struct domain *d, bool resuming);
+>  
+> @@ -1010,6 +1013,10 @@ static inline struct domain *next_domain_in_cpupool(
+>  /* VCPU is parked. */
+>  #define _VPF_parked          8
+>  #define VPF_parked           (1UL<<_VPF_parked)
+> +/* VCPU is suspended. */
+> +#define _VPF_suspended       9
+> +#define VPF_suspended        (1UL<<_VPF_suspended)
+
+Irrespective of the style violations in pre-existing code, can you please
+not add further violations, by inserting the missing blanks?
+
+> +
+>  
+
+Please also don't introduce double blank lines.
 
 Jan
 
