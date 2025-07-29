@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB3CC83F26
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 08:45:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062235.1427870 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97AFC87FC9
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 08:52:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062243.1427894 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugfxt-00047w-8m; Tue, 29 Jul 2025 08:45:41 +0000
+	id 1ugg4X-0006Su-Bc; Tue, 29 Jul 2025 08:52:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062235.1427870; Tue, 29 Jul 2025 08:45:41 +0000
+Received: by outflank-mailman (output) from mailman id 1062243.1427894; Tue, 29 Jul 2025 08:52:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugfxt-00047p-5y; Tue, 29 Jul 2025 08:45:41 +0000
-Received: by outflank-mailman (input) for mailman id 1062235;
- Tue, 29 Jul 2025 08:45:39 +0000
+	id 1ugg4X-0006Rh-8Z; Tue, 29 Jul 2025 08:52:33 +0000
+Received: by outflank-mailman (input) for mailman id 1062243;
+ Tue, 29 Jul 2025 08:52:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fFWP=2K=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ugfxr-00047j-R8
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 08:45:39 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=R+Pi=2K=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1ugg4W-0006C0-6y
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 08:52:32 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 66a2ebd9-6c58-11f0-a31e-13f23c93f187;
- Tue, 29 Jul 2025 10:45:38 +0200 (CEST)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3b77b8750acso491649f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 01:45:38 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b3f7f6d6312sm6575665a12.62.2025.07.29.01.45.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jul 2025 01:45:37 -0700 (PDT)
+ id 5cd43c03-6c59-11f0-a31e-13f23c93f187;
+ Tue, 29 Jul 2025 10:52:31 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-553ba7f11cbso5731660e87.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 01:52:31 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55b63375ca4sm1584998e87.124.2025.07.29.01.52.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Jul 2025 01:52:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 66a2ebd9-6c58-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 5cd43c03-6c59-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753778738; x=1754383538; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=27gHmFIOtg76bBCFM16Ll+rvPzNpkPQtDBDJzNQEynE=;
-        b=HU+iepIhNM5HVcCTIsZJ9Ad0O8x3ba79eagsBrhCKwGuJyfF83vqZZc3hFWe7NMESQ
-         M8cO9dv/rprdmUYrdj6yo6oZR7lrPS6CFxjR7P6QeQFAwCAoPSJC0GotnzQA6OumZJNu
-         LcS1ia9FkO+e7cS0iV7wtbjYiuQ/N34fGml9uLDKRqRbP4+f6nXSMVSuEwE//amARB3e
-         PjkidoysuTBtWrYgD7yw4iysKT/bNsdloQmzWyvAngsuIdfyFzQCSMQAlt1+C6YU+AkO
-         uZ5Io7U+OkeW3Q6UaC1x8QtHJX0nPxVoNuBUVSLq5qvP/AoQQSi19MctsH/uXrw6akm5
-         hedw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753778738; x=1754383538;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1753779151; x=1754383951; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=27gHmFIOtg76bBCFM16Ll+rvPzNpkPQtDBDJzNQEynE=;
-        b=QKGxRqGlKYFllYTsKbZAXzEcZwW6vJJz4GpJOtJ6qeu0mBN13wYHKFGZQFQ49F4FS2
-         rKzH5On+CrQcxLl185i9qXBHpu+J6wHBvjW+QP/P31K6lFKmwZrNLfYsFWB3Cm4/RDVT
-         Mdng0kNgTq8kIUje5Pk681BGq4V3KjkW1UMYD4CgyIEuvxhsROmfT3/PIKnOodFXCZKN
-         FZqd+2RqFX0geUZhxy+DH+jMEd1Y9azZkYbvaAa4/bHfA7suea8BnuCxAT2iiHwvVH8K
-         Dl4Pbs/yL9a/PEA/2ihB+FJcxYZ9AtrLgsjB6x8eFmKyLYe1UYfZ541ONwV/NKAjuViV
-         OnNg==
-X-Forwarded-Encrypted: i=1; AJvYcCXhhw7k4IMJycbvsQXchuyFl19AiNHkgsLeyLcwScNpleEeLEDVumix1B+Bp2Q7nGcguwUDVCzZDoo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YweBg3leIePqPu/GigzlwdXx/o7TcKKJ6zCzWqcxcJFyjelSuAy
-	XM0Lh7r4rUmudbvruoHzyvyKf47BeFptVd4Fwn0qYi+Oso6T0i2ifpe/pSQDM/Z/wQ==
-X-Gm-Gg: ASbGncvzTfppiKmvKQTysgXPLvyGBXEHcq+Tt3kAw0yTDxPORJvFtonFKkwa39MQwEj
-	z9tJOZjLyqWRVFrytl3bOs0Nu2A3fNx2xnbSvYYRo23xKbOkxW1XzW55LcCY2gtQDp8U8AW36Mq
-	4OtdUBvlxySJebSdKZhNNOo6XZ2dW2gLqBQ7lDKfkuhZXcXk4bFIkcKGSSSoo0aH5GuQ91FbwpD
-	Y0AInTvDBQ8Y/GmVxbhOSTr9LzB/FuGPDNWbATryyQ0G7JH7r+hCiBiTVYPlV6nmgfRrKs7M720
-	dc5bX5RxpmBjJj32mPW+yoNDm1ZunSKwVFCrVTfXUqB8rhEZlN3QJzyAfu3wunCzAkr9kdjIqpB
-	dMZIFrTNPrffmmwR/QndlzZuMI48Idk/Qvt8qjNAsHAc/Y3f/wvdTsqh70cOSbFbUKX+2QgzLIo
-	/bte0Ay3s=
-X-Google-Smtp-Source: AGHT+IE4ZC6Uc+uafJ1WnTLhff68HJ46xH39mVUzagwiLmHKkgbNPb1deKQgudERfDaztEmJWLiqAQ==
-X-Received: by 2002:a05:6000:25ca:b0:3a5:8991:64b7 with SMTP id ffacd0b85a97d-3b78e726421mr1974162f8f.26.1753778737817;
-        Tue, 29 Jul 2025 01:45:37 -0700 (PDT)
-Message-ID: <cae2290f-1888-418d-97e9-1a54265238bf@suse.com>
-Date: Tue, 29 Jul 2025 10:45:28 +0200
+        bh=h+sWQJKeBDFdiPLTp8aPAqIiX1r4WoXR6KMm4vOtk3U=;
+        b=Pq6kqr6sVBRdRK8V6d7GaMVREcMFoitMcgbGv+yMDi1jPomNBtBIK3Sqmspzq6SJDw
+         foVyEOZp5A9D2bl1T8CSGGEiLuGcVLJoW505ZeHUatQlAO5VemrQy3JzAe0S1A2LNaEY
+         8xagiUDwz/82ZN10fQuHVDdZ6sx4QtjAWOnwARajpzCwv4j0f8jFA9oQxFxCGXt/8d/U
+         at1rtoR14GP0bzgo1VMn6/g4ao/KDXIhq2W+UgoUdHXX8Tu6xiQnc/PH7P2+at7l3emd
+         2XgQdDk8U6G0eG0yqLLP/9mWGPaAufzpT9P+qy1L3grHWu5o83mJRyhHXK1dcVi9eQrN
+         sXPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753779151; x=1754383951;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=h+sWQJKeBDFdiPLTp8aPAqIiX1r4WoXR6KMm4vOtk3U=;
+        b=Z11bn0CHnCI4UN6Zjd84Hm/8HxmiAoL0Yax/ZMWk0T5kzADcNoLmygi0koa197Gf1a
+         X4qdfJsH2GG5Hd/Mhz3nfGwuJmE2ug0GL1/HIiQICg+hYBIVA6wfrwwFgY5+OSEmrD/t
+         1djINsZcr/7CvWxRtUrE5POanFLMo+J2ruDPNKTcAgj8PazMW0TuMEd9/6v1i3E+NoIt
+         EVQfzmcLGHp8+yl2lYUYEIljbgmMES7k60wXyd6EFoqrLQ8Z25cHDflMp+uGpiGJMj5q
+         da0omQB5M74KL2/VzUfWEHJTVJMa2UG5YJceCR54mp0lsw6q825cTUW3+rYjRCMk4inB
+         1r7Q==
+X-Gm-Message-State: AOJu0Yz3XlvBdT5lJxp0rASwqGesGmcn5/MltzJhzcLF4rz3fOROC9qq
+	Hce0GLzwUGUhH1Y8IG9vYgYWRtgXdxE4JYUsy7cN7g6IBOJ4en+4Xo3UOX6Lig==
+X-Gm-Gg: ASbGncsU1N1drwTiOYDvMUxqV9l1gJNfZMmQ1SCmXY6So5uSzBty1GCv0mmZ2vFCyIw
+	ZHiejv8553vO6KktH8Hs8/B4Wu9rjYu5wmUNvKSu2jA2c8+1bhmLsq9qp0q3hc5Kbqkgge34UFd
+	SUHCAovAhVMPA7b2WyeBWuiADJrvqboF2U86j0VdmY3ZxsKHwhgpJsZviOySlyRf/rkjUDcP7Si
+	EpHGUMoCHEa3Ho0dOCvHC0nqIJn6Rkke1zxg8YrYIDyPmVH/6OjyLgDx3YMftIFCuWhK6TOZIpX
+	rJIu9cdykPh3AIp4JVCUHBYo2A8JQYcJSJktDbzwNJKX6spDug8to4mRjadU/hukq0bf+Jn+OkV
+	RG5ITfeuSMs3/Qkr1iqK3xAmg/H9HnvEAB2G5Y+TsBw1xpOBPrAY5VUbZsHExukTbjYRo/KsD
+X-Google-Smtp-Source: AGHT+IHOmZXLHkYG+xZYnthWDLlRakbFM8nUItbevJL3N6gcww1XX+UgFct4ylmqMR6B7g4R4YZ0nw==
+X-Received: by 2002:a05:6512:a8e:b0:553:2dce:3aad with SMTP id 2adb3069b0e04-55b5f3cf7c3mr3959045e87.7.1753779150596;
+        Tue, 29 Jul 2025 01:52:30 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v7 2/4] tools/xl: Allow compilation of 'xl resume' command on Arm
+Date: Tue, 29 Jul 2025 11:52:12 +0300
+Message-ID: <1394ced0f1268244bfe4875152874f3f8ee0378a.1753778926.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1753778926.git.mykola_kvach@epam.com>
+References: <cover.1753778926.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] drivers/ehci-dbgp: remove use of
- run_in_exception_handle()
-To: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
- dmukhin@ford.com, xen-devel@lists.xenproject.org
-References: <20250728202300.1017904-1-dmukhin@ford.com>
- <20250728202300.1017904-2-dmukhin@ford.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250728202300.1017904-2-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 28.07.2025 22:23, dmkhn@proton.me wrote:
-> From: Denis Mukhin <dmukhin@ford.com> 
-> 
-> Polling is relevant for early boot only where facilities requiring
-> run_in_exception_handler() are not used (e.g. 'd' keyhandler).
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-I fear I don't understand this statement: How is polling relevant for
-early boot only? If the IRQ isn't found to work, we continue using
-polling perhaps for the entire lifetime of a system. For ns16550 I
-know I've seen such systems (especially before MSI support was added).
-Note that there even is a way to suppress use of an IRQ via command
-line option (setting the IRQ field of the option to 0). That implies
-that polling is going to be used forever. For EHCI there isn't even
-an IRQ to use.
+The "xl resume" command was previously excluded from Arm builds because
+system suspend/resume (e.g., SYSTEM_SUSPEND via vPSCI) was not
+implemented. On x86, this command is used for resume.
 
-Jan
+This change enables compilation of `xl resume` on Arm regardless of the
+underlying implementation status, making the tool available for testing
+and future feature support. The relevant libxl infrastructure and handler
+functions are already present and usable.
+
+Note: This does not imply full system suspend/resume support on Arm.
+      The `xl suspend` command still does not work on Arm platforms.
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+Changes in v7:
+- dropped renaming of LIBXL_HAVE_NO_SUSPEND_RESUME macro
+
+Changes in v6:
+- Renamed macro from LIBXL_HAVE_NO_SUSPEND_RESUME to LIBXL_HAVE_NO_SUSPEND
+  to better reflect the scope of this change
+- Applied cosmetic changes based on review feedback
+---
+ tools/include/libxl.h     |  1 -
+ tools/xl/xl.h             |  4 ++--
+ tools/xl/xl_cmdtable.c    |  4 ++--
+ tools/xl/xl_migrate.c     |  2 +-
+ tools/xl/xl_saverestore.c |  2 +-
+ tools/xl/xl_vmcontrol.c   | 12 ++++++------
+ 6 files changed, 12 insertions(+), 13 deletions(-)
+
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index d6b6e5d2dd..94fc0354be 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1134,7 +1134,6 @@ typedef struct libxl__ctx libxl_ctx;
+  * restoring or migrating a domain. In this case the related functions
+  * should be expected to return failure. That is:
+  *  - libxl_domain_suspend
+- *  - libxl_domain_resume
+  *  - libxl_domain_remus_start
+  */
+ #if defined(__arm__) || defined(__aarch64__)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 45745f0dbb..9233b73f85 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -65,7 +65,7 @@ static const char migrate_permission_to_go[]=
+     "domain is yours, you are cleared to unpause";
+ static const char migrate_report[]=
+     "my copy unpause results are as follows";
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+   /* followed by one byte:
+    *     0: everything went well, domain is running
+@@ -130,8 +130,8 @@ int main_migrate_receive(int argc, char **argv);
+ int main_save(int argc, char **argv);
+ int main_migrate(int argc, char **argv);
+ int main_suspend(int argc, char **argv);
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ int main_resume(int argc, char **argv);
+-#endif
+ int main_dump_core(int argc, char **argv);
+ int main_pause(int argc, char **argv);
+ int main_unpause(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 06a0039718..bcb2d233cc 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -198,12 +198,12 @@ const struct cmd_spec cmd_table[] = {
+       "Suspend a domain to RAM",
+       "<Domain>",
+     },
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "resume",
+       &main_resume, 0, 1,
+       "Resume a domain from RAM",
+       "<Domain>",
+     },
+-#endif
+     { "dump-core",
+       &main_dump_core, 0, 1,
+       "Core dump a domain",
+@@ -548,7 +548,7 @@ const struct cmd_spec cmd_table[] = {
+       "                        checkpoint must be disabled.\n"
+       "-p                      Use COLO userspace proxy."
+     },
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "devd",
+       &main_devd, 0, 1,
+       "Daemon that listens for devices and launches backends",
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..4b4a379aa1 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -767,7 +767,7 @@ int main_remus(int argc, char **argv)
+     close(send_fd);
+     return EXIT_FAILURE;
+ }
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ /*
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..747094ec7b 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -270,7 +270,7 @@ int main_save(int argc, char **argv)
+     return EXIT_SUCCESS;
+ }
+ 
+-#endif /* LIBXL_HAVE_NO_SUSPEND_RESUME */
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ 
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index c813732838..93766f631b 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -38,11 +38,6 @@ static void suspend_domain(uint32_t domid)
+     libxl_domain_suspend_only(ctx, domid, NULL);
+ }
+ 
+-static void resume_domain(uint32_t domid)
+-{
+-    libxl_domain_resume(ctx, domid, 1, NULL);
+-}
+-
+ int main_suspend(int argc, char **argv)
+ {
+     int opt;
+@@ -55,6 +50,12 @@ int main_suspend(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
++
++static void resume_domain(uint32_t domid)
++{
++    libxl_domain_resume(ctx, domid, 1, NULL);
++}
+ 
+ int main_resume(int argc, char **argv)
+ {
+@@ -68,7 +69,6 @@ int main_resume(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
+-#endif
+ 
+ static void pause_domain(uint32_t domid)
+ {
+-- 
+2.48.1
+
 
