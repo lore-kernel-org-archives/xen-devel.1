@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97ED4C87FCA
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 21:32:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1063129.1428922 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9109AC87FCA
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 21:36:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1063141.1428933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugrvu-0001Ma-Qi; Tue, 29 Jul 2025 21:32:26 +0000
+	id 1ugrzO-00026D-9G; Tue, 29 Jul 2025 21:36:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1063129.1428922; Tue, 29 Jul 2025 21:32:26 +0000
+Received: by outflank-mailman (output) from mailman id 1063141.1428933; Tue, 29 Jul 2025 21:36:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugrvu-0001MR-Nj; Tue, 29 Jul 2025 21:32:26 +0000
-Received: by outflank-mailman (input) for mailman id 1063129;
- Tue, 29 Jul 2025 21:32:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Gf+C=2K=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1ugrov-0004NS-Sf
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 21:25:14 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 831a3180-6cc2-11f0-a320-13f23c93f187;
- Tue, 29 Jul 2025 23:25:13 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-615547ee514so427373a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 14:25:12 -0700 (PDT)
-Received: from lab.home
- (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
- [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6156591fe7bsm1587728a12.51.2025.07.29.14.25.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Jul 2025 14:25:11 -0700 (PDT)
+	id 1ugrzO-000266-5t; Tue, 29 Jul 2025 21:36:02 +0000
+Received: by outflank-mailman (input) for mailman id 1063141;
+ Tue, 29 Jul 2025 21:36:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/H3U=2K=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ugrzN-000260-43
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 21:36:01 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0440fdbd-6cc4-11f0-b895-0df219b8e170;
+ Tue, 29 Jul 2025 23:35:59 +0200 (CEST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-455b00283a5so35278665e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 14:35:59 -0700 (PDT)
+Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45895386627sm1840165e9.19.2025.07.29.14.35.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Jul 2025 14:35:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,453 +47,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 831a3180-6cc2-11f0-a320-13f23c93f187
+X-Inumbo-ID: 0440fdbd-6cc4-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753824312; x=1754429112; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zqxtdLSvzaahRRjqVa083XvlybPW7VZWDBhsW5p9Dbg=;
-        b=e4hM0EnDSRtq1J+aMz6GJBPtvgNkRS1JUAnxFc4Visxi1hhwkuIMwDSIGlm3RBpbjt
-         GXO3mU+dQeStA/DNnBdULoRc4ACk0lCqVcjK9Ue1raZbMGAeynBBhJHRXSzt3dJnx0wg
-         PCBdafOi9x5JfY1mDCMdQnRg7zO8/deOrYFV6a9QmcCBWxWxFdB7nSyeuzZP0qXE0M4s
-         WJqGPTBVxrQCT0sU/nSI2bJ6l+Ao6Gxib7HMxUSjsdpXcbGv2Z5+2Rlv7aN0y+T2UGTS
-         Tk4hJylqhO6xze/Qa2AhLkZx4UGaCDsSoYYGjypbv1GJhWD8s2EN73tDEOJD2lnddZ6x
-         yrMg==
+        d=citrix.com; s=google; t=1753824958; x=1754429758; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=FqMas0Gvnh8p10bi7MVm3QJ4+XwMIQIpTsd/cCOqDw8=;
+        b=m85MN4XfSds/2WBNKknbzrk9X9TvPK0KATQRY7jsHg1BWHWtNHXMBsAeGnKl/QT4gU
+         zmGZkaCI3hRJ50aCczAEYxQiBIJAVluQXJfwgkfGXYsuLPyRINhX7HplAJk9Jpe7S16j
+         +Tq957s6yrSwkqhuMY0uLh6yKUCvmGx7hn4Qk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753824312; x=1754429112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zqxtdLSvzaahRRjqVa083XvlybPW7VZWDBhsW5p9Dbg=;
-        b=b5g7aSPjGsCsRRGVAhR61uchjmC3ndW5P6ddgEVqFNETZzzxaoYvL2VPKllZ25UqyB
-         QvrtJwvNRbhVTtcjXInlaR+EQA0u2Pl/XjuejFSIasVQwRHe6e3D6X63ZKNPB3uC4iyH
-         xMpSHkuGv/WnxIR0vBvnAgN3B3BAQrEQF6bfNCKmpwY0VvRPScgD47AU4jnrC8YjEEqp
-         7br6om60W63H1J3DqU1dbL3f71JAp9Ud3KxzHE6iqEHOPO21qpSn1a+U1pgSWmjBw4oT
-         qcsqPtH3Dv9qXpF19C4j3yBRDUhLqAQbjViYdQOGyKlqYQ2uF+4rrWia89FzFZM3GVqO
-         y/Lg==
-X-Gm-Message-State: AOJu0YzTBfOL3srEbQVbWS6Zn/S+YUcz3D5zx4GuQbQxCRmyRVlUELSp
-	XxXnPS3Ag6syXMq2KFJm6pO5rMG16TK3QYDfzwfSA4EFwSXR/hsM7lX/misms9PmuDo=
-X-Gm-Gg: ASbGncvLf7hq5xkr94cRCbm9Fam6bgil1RPjnbryDaYyl0YXhl0Kimw+9TM42X9StBF
-	V7WEQtBSoKLMROwvgoQwUYTk+WzKMy0nj03+kXxvX9mzM6WNOMIIS3mzFcv4V8bv4+qpDdtL/gD
-	Vbgbjsz6ih0kI9A9ngUKxFybcvBrUnQJc9b39h5opK0Y92t1pK0Av348GEc+NHOb7r27XtLm274
-	U+IV07/hJJzbvHtpQO7dRDM5fIOp6Yc0z9J6OWOQc4ioT51HBC1jVkgFzVJS6NOMQqaAiquOVLX
-	tTqPtXjHo4ENnBdZXfM98/9MFWyuCpS3L/1QNY4B+5XrMrYnjaRSk0HfT3lb/kIEtg2KBxEG1WL
-	enEffkjl8XfSeSgRXkXOQ1mDjpkWhKHMW42EycxHR/Thz/SZOXnQ69UXqoQw0aI4m/XHFb2csBl
-	xKONF+jDGkE+7ks0k7Dch/xw==
-X-Google-Smtp-Source: AGHT+IGCnJmcAO55hkrB4CxMj1eabASeMpc45FZOZdSG2TQhNL9Noi8kwe2lXKYDkl7c1zobVVYqLw==
-X-Received: by 2002:a05:6402:278d:b0:607:eea1:1038 with SMTP id 4fb4d7f45d1cf-615871f0420mr437482a12.6.1753824311688;
-        Tue, 29 Jul 2025 14:25:11 -0700 (PDT)
-From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v3 2/3] hvmloader: fix SMBIOS table length checks
-Date: Tue, 29 Jul 2025 21:25:05 +0000
-Message-Id: <e180f55da67e4ddc83684d7f3d9a03ad871c986b.1753823663.git.w1benny@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1753823663.git.w1benny@gmail.com>
-References: <cover.1753823663.git.w1benny@gmail.com>
+        d=1e100.net; s=20230601; t=1753824958; x=1754429758;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FqMas0Gvnh8p10bi7MVm3QJ4+XwMIQIpTsd/cCOqDw8=;
+        b=YqIHvYLahCmhlLmkJ+5yXpGhpPnCZ1JiedV8ATrGaiVzXSeQfM5AnPN1SzEXT2PcDz
+         UMTLwgpvSpNFAc7UxHziN+rxFpdqndNIJ8QTdcqn4Txdzu+XBHDwggW7htYgcPkaBTyQ
+         ZcGT1RCuxfH/BsXV9/aQtZUsD95O86PXH2OhCdNYeLLjQQhrnBgY96EO+OVpikxJShBO
+         zxktDfNFYLld/5as1xTagdAiA0SpYI8/MP2lP2iC0me02L+C55aCOx9B1+E+IQD+Q/10
+         nFVDcpO4XK+6wAQc/5aM684DBa4L9igdfb2lUbC7HItSpp/SEJ5mD7Y+uz8ggyRHLTCH
+         fnEw==
+X-Forwarded-Encrypted: i=1; AJvYcCXaMAKITQa5c7dRGWXSZxh3pIVX1tYdw3w+MnaaQnecak3AlGBIcRdWxFvAmsQHq65xFivKKlP0A2g=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyrLidcVisIev9GtizoSKG0MrX9ZbNfmWPBnIBbbaa19ejyORVn
+	5ou1C1VJh+o7w9UHahKjrT5lIGaG5j/pSk1+Wk8ds8qg5LeRsNWK6Su2S2s8xn7wxN0=
+X-Gm-Gg: ASbGncsiXFP5Xi4yV7gq8rI6v2nz6pArPZdVRlkP5N9oyBugDm1/+HFtEQo8hlp5bKy
+	eAD3EKeIVDVkcLVBY/En5PJzQSDkyponh6ix1inD3Vsu0xoC9DWOOyUEm6yei30FJrd37iEY8aH
+	eC0PKvwB5O4+g3yq/MO0U4gpFu6v24jM6jGVKVCYCEKRx4+8OgODxnWUtWPyYJqs076rnp37kyM
+	SngB1t4d9dwWjqLau709JkFGDbrBoBcAGI3rU+diFkjvfbCf7WrjvmfLi9zjdSjcKsG7KrsKl5L
+	FkwYHT3X0rffvQAtwq3g6Ygtsz+gQcqUyRGWWvfuso7ef6Be+VxqpgSwNhnwwuwXIE800323faA
+	QhhSj9KIP/ALzCA8S90332J6D0jxXpUE8OhlfwWqZ+kAHEUf7p+X5u/FdHn5aR0g9pFQ5
+X-Google-Smtp-Source: AGHT+IHYtUMvy5LiSzUBaSoeCtXh1GeNJHnICTGCrC6xD/bMr3pviaYBAqaNQ9TMres1fRPVcg24Vw==
+X-Received: by 2002:a05:600c:83cc:b0:450:d37d:7c with SMTP id 5b1f17b1804b1-45894ca4e1cmr2122375e9.21.1753824958432;
+        Tue, 29 Jul 2025 14:35:58 -0700 (PDT)
+Message-ID: <d96a1ee4-d1da-40b4-8d21-8ce38957f082@citrix.com>
+Date: Tue, 29 Jul 2025 22:35:57 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/3] misra: address 5.5 pirq_cleanup_check
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1753822074.git.dmytro_prokopchuk1@epam.com>
+ <94a49589ab85c8988979f8cfd29c9124d1dedf42.1753822074.git.dmytro_prokopchuk1@epam.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <94a49589ab85c8988979f8cfd29c9124d1dedf42.1753822074.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Petr Beneš <w1benny@gmail.com>
+On 29/07/2025 10:24 pm, Dmytro Prokopchuk1 wrote:
+> diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+> index c8c1bfa615..2efb5f5c78 100644
+> --- a/xen/common/event_channel.c
+> +++ b/xen/common/event_channel.c
+> @@ -672,7 +672,7 @@ static int evtchn_bind_pirq(evtchn_bind_pirq_t *bind)
+>      if ( rc != 0 )
+>      {
+>          info->evtchn = 0;
+> -        pirq_cleanup_check(info, d);
+> +        PIRQ_CLEANUP_CHECK(info, d);
 
-SMBIOS specification dictates that tables should have a minimal length.
-This commit introduces further validation for user-input SMBIOS tables.
+Well, this is awkward.  This is dead code, but only when you realise ...
 
-As per SMBIOS Reference Specification:
-* Type 0: For version 2.3 and later implementations, the length is at least 14h
-* Type 1: 1Bh for 2.4 and later
-* Type 2: at least 08h
-* Type 3: 0Dh for version 2.1 and later
-* Type 11: 5h (+ strings)
-* Type 22: 1Ah (+ strings)
-* Type 39: a minimum of 10h
+> diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
+> index 95034c0d6b..958d0b1aca 100644
+> --- a/xen/include/xen/irq.h
+> +++ b/xen/include/xen/irq.h
+> @@ -185,7 +185,7 @@ extern struct pirq *pirq_get_info(struct domain *d, int pirq);
+>  
+>  void pirq_cleanup_check(struct pirq *pirq, struct domain *d);
+>  
+> -#define pirq_cleanup_check(pirq, d) \
+> +#define PIRQ_CLEANUP_CHECK(pirq, d) \
+>      (!(pirq)->evtchn ? pirq_cleanup_check(pirq, d) : (void)0)
+>  
 
-Notably, this also fixes previously incorrect check for chassis handle in
-smbios_type_2_init. Chassis handle is a WORD, therefore, the condition now
-correctly checks for >= 13 instead of > 13.
+... what this is really doing.
 
-hvmloader currently implements version 2.4
+Looking at this overall diff, it really is outrageous that we're hiding
+a conditional call like this.
 
-Furthermore, this commit introduces smbios_pt_copy helper function to substitute
-previously repeating pattern of locating the struct in physical memory (via
-get_smbios_pt_struct), checking the length and copying it into SMBIOS region.
+We should just remove the macro, and expand
 
-Signed-off-by: Petr Beneš <w1benny@gmail.com>
----
- tools/firmware/hvmloader/smbios.c       | 179 ++++++++++++++----------
- tools/firmware/hvmloader/smbios_types.h |  32 ++---
- 2 files changed, 124 insertions(+), 87 deletions(-)
+    if ( !pirq->evtchn )
+        pirq_cleanup_check(pirq, d);
 
-diff --git a/tools/firmware/hvmloader/smbios.c b/tools/firmware/hvmloader/smbios.c
-index 6bcdcc233a..585f7f8165 100644
---- a/tools/firmware/hvmloader/smbios.c
-+++ b/tools/firmware/hvmloader/smbios.c
-@@ -47,6 +47,8 @@ static void
- smbios_pt_init(void);
- static void*
- get_smbios_pt_struct(uint8_t type, uint32_t *length_out);
-+static void *
-+smbios_pt_copy(void *start, uint8_t type, uint16_t handle, size_t table_size);
- static void
- get_cpu_manufacturer(char *buf, int len);
- static int
-@@ -154,6 +156,24 @@ get_smbios_pt_struct(uint8_t type, uint32_t *length_out)
-     return NULL;
- }
- 
-+static void *
-+smbios_pt_copy(void *start, uint8_t type, uint16_t handle, size_t table_size)
-+{
-+    struct smbios_structure_header *header = start;
-+    void *pts;
-+    uint32_t length;
-+
-+    pts = get_smbios_pt_struct(type, &length);
-+    if ( pts != NULL && length >= table_size )
-+    {
-+        memcpy(start, pts, length);
-+        header->handle = handle;
-+        return start + length;
-+    }
-+
-+    return start;
-+}
-+
- static void
- get_cpu_manufacturer(char *buf, int len)
- {
-@@ -381,16 +401,17 @@ smbios_type_0_init(void *start, const char *xen_version,
-     struct smbios_type_0 *p = start;
-     static const char *smbios_release_date = __SMBIOS_DATE__;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(0, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE0;
--        return start + length;
--    }
-+    /*
-+     * Specification says Type 0 table has length of at least 18h for v2.4-3.0.
-+     */
-+
-+    BUILD_BUG_ON(sizeof(*p) != 24);
-+
-+    next = smbios_pt_copy(start, 0, SMBIOS_HANDLE_TYPE0, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -440,16 +461,14 @@ smbios_type_1_init(void *start, const char *xen_version,
-     char uuid_str[37];
-     struct smbios_type_1 *p = start;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(1, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE1;
--        return start + length;
--    }
-+    /* Specification says Type 1 table has length of 1Bh for v2.4 and later. */
-+    BUILD_BUG_ON(sizeof(*p) != 27);
-+
-+    next = smbios_pt_copy(start, 1, SMBIOS_HANDLE_TYPE1, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -498,26 +517,30 @@ smbios_type_2_init(void *start)
- {
-     struct smbios_type_2 *p = start;
-     const char *s;
--    uint8_t *ptr;
--    void *pts;
--    uint32_t length;
-+    void *next;
-     unsigned int counter = 0;
- 
--    pts = get_smbios_pt_struct(2, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE2;
-+    /*
-+     * Specification says Type 2 table has length of at least 08h,
-+     * which corresponds with the end of the "Serial Number" field.
-+     */
-+
-+    BUILD_BUG_ON(offsetofend(struct smbios_type_2, serial_number_str) != 8);
- 
-+    next = smbios_pt_copy(start, 2, SMBIOS_HANDLE_TYPE2,
-+                          offsetofend(struct smbios_type_3,
-+                                      serial_number_str));
-+    if ( next != start )
-+    {
-         /* Set current chassis handle if present */
--        if ( p->header.length > 13 )
-+        if ( p->header.length >= offsetofend(struct smbios_type_2,
-+                                             chassis_handle) )
-         {
--            ptr = ((uint8_t*)start) + 11;            
--            if ( *((uint16_t*)ptr) != 0 )
--                *((uint16_t*)ptr) = SMBIOS_HANDLE_TYPE3;
-+            if ( p->chassis_handle != 0 )
-+                p->chassis_handle = SMBIOS_HANDLE_TYPE3;
-         }
- 
--        return start + length;
-+        return next;
-     }
- 
-     memset(p, 0, sizeof(*p));
-@@ -593,18 +616,21 @@ smbios_type_3_init(void *start)
- {
-     struct smbios_type_3 *p = start;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
-     uint32_t counter = 0;
- 
--    pts = get_smbios_pt_struct(3, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE3;
--        return start + length;
--    }
--    
-+    /*
-+     * Specification says Type 3 table has length of at least 0Dh (for v2.1+),
-+     * which corresponds with the end of the "Security Status" field.
-+     */
-+
-+    BUILD_BUG_ON(offsetofend(struct smbios_type_3, security_status) != 13);
-+
-+    next = smbios_pt_copy(start, 3, SMBIOS_HANDLE_TYPE3,
-+                          offsetof(struct smbios_type_3, security_status));
-+    if ( next != start )
-+        return next;
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 3;
-@@ -656,6 +682,9 @@ smbios_type_4_init(
-     struct smbios_type_4 *p = start;
-     uint32_t eax, ebx, ecx, edx;
- 
-+    /* Specification says Type 4 table has length of 23h for v2.3+. */
-+    BUILD_BUG_ON(sizeof(*p) != 35);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 4;
-@@ -707,17 +736,15 @@ smbios_type_11_init(void *start)
-     struct smbios_type_11 *p = start;
-     char path[20];
-     const char *s;
-+    void *next;
-     int i;
--    void *pts;
--    uint32_t length;
- 
--    pts = get_smbios_pt_struct(11, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE11;
--        return start + length;
--    }
-+    /* Specification says Type 11 table has length of 05h. */
-+    BUILD_BUG_ON(sizeof(*p) != 5);
-+    
-+    next = smbios_pt_copy(start, 11, SMBIOS_HANDLE_TYPE11, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     p->header.type = 11;
-     p->header.length = sizeof(*p);
-@@ -756,6 +783,9 @@ smbios_type_16_init(void *start, uint32_t memsize, int nr_mem_devs)
- {
-     struct smbios_type_16 *p = start;
- 
-+    /* Specification says Type 16 table has length of 0Fh for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 15);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 16;
-@@ -781,6 +811,9 @@ smbios_type_17_init(void *start, uint32_t memory_size_mb, int instance)
-     char buf[16];
-     struct smbios_type_17 *p = start;
- 
-+    /* Specification says Type 17 table has length of 1Bh for v2.3-2.6. */
-+    BUILD_BUG_ON(sizeof(*p) != 27);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 17;
-@@ -816,6 +849,9 @@ smbios_type_19_init(void *start, uint32_t memory_size_mb, int instance)
- {
-     struct smbios_type_19 *p = start;
- 
-+    /* Specification says Type 19 table has length of 0Fh for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 15);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 19;
-@@ -838,6 +874,9 @@ smbios_type_20_init(void *start, uint32_t memory_size_mb, int instance)
- {
-     struct smbios_type_20 *p = start;
- 
-+    /* Specification says Type 20 table has length of 13h for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 19);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 20;
-@@ -865,16 +904,14 @@ smbios_type_22_init(void *start)
-     struct smbios_type_22 *p = start;
-     static const char *smbios_release_date = __SMBIOS_DATE__;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(22, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE22;
--        return start + length;
--    }
-+    /* Specification says Type 22 table has length of 1Ah. */
-+    BUILD_BUG_ON(sizeof(*p) != 26);
-+
-+    next = smbios_pt_copy(start, 22, SMBIOS_HANDLE_TYPE22, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     s = xenstore_read(HVM_XS_SMBIOS_DEFAULT_BATTERY, "0");
-     if ( strncmp(s, "1", 1) != 0 )
-@@ -929,6 +966,9 @@ smbios_type_32_init(void *start)
- {
-     struct smbios_type_32 *p = start;
- 
-+    /* Specification says Type 32 table has length of at least 0Bh. */
-+    BUILD_BUG_ON(sizeof(*p) != 11);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 32;
-@@ -946,20 +986,17 @@ smbios_type_32_init(void *start)
- static void *
- smbios_type_39_init(void *start)
- {
--    struct smbios_type_39 *p = start;
--    void *pts;
--    uint32_t length;
-+    /*
-+     * Specification says Type 39 table has length of at least 10h,
-+     * which corresponds with the end of the "Characteristics" field.
-+     *
-+     * Only present when passed in.
-+     */
- 
--    pts = get_smbios_pt_struct(39, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE39;
--        return start + length;
--    }
-+    BUILD_BUG_ON(offsetofend(struct smbios_type_39, characteristics) != 16);
- 
--    /* Only present when passed in */
--    return start;
-+    return smbios_pt_copy(start, 39, SMBIOS_HANDLE_TYPE39,
-+                          offsetofend(struct smbios_type_39, characteristics));
- }
- 
- static void *
-diff --git a/tools/firmware/hvmloader/smbios_types.h b/tools/firmware/hvmloader/smbios_types.h
-index 7c648ece71..a04d194975 100644
---- a/tools/firmware/hvmloader/smbios_types.h
-+++ b/tools/firmware/hvmloader/smbios_types.h
-@@ -90,13 +90,13 @@ struct smbios_type_2 {
-     uint8_t product_name_str;
-     uint8_t version_str;
-     uint8_t serial_number_str;
--    uint8_t asset_tag_str;
--    uint8_t feature_flags;
--    uint8_t location_in_chassis_str;
--    uint16_t chassis_handle;
--    uint8_t board_type;
--    uint8_t contained_handle_count;
--    uint16_t contained_handles[];
-+    uint8_t asset_tag_str;                  /* Optional */
-+    uint8_t feature_flags;                  /* Optional */
-+    uint8_t location_in_chassis_str;        /* Optional */
-+    uint16_t chassis_handle;                /* Optional */
-+    uint8_t board_type;                     /* Optional */
-+    uint8_t contained_handle_count;         /* Optional */
-+    uint16_t contained_handles[];           /* Optional */
- } __attribute__ ((packed));
- 
- /* System Enclosure - Contained Elements */
-@@ -118,12 +118,12 @@ struct smbios_type_3 {
-     uint8_t power_supply_state;
-     uint8_t thermal_state;
-     uint8_t security_status;
--    uint32_t oem_specific;
--    uint8_t height;
--    uint8_t number_of_power_cords;
--    uint8_t contained_element_count;
--    uint8_t contained_element_length;
--    struct smbios_contained_element contained_elements[];
-+    uint32_t oem_specific;                  /* Optional */
-+    uint8_t height;                         /* Optional */
-+    uint8_t number_of_power_cords;          /* Optional */
-+    uint8_t contained_element_count;        /* Optional */
-+    uint8_t contained_element_length;       /* Optional */
-+    struct smbios_contained_element contained_elements[]; /* Optional */
- } __attribute__ ((packed));
- 
- /* SMBIOS type 4 - Processor Information */
-@@ -252,9 +252,9 @@ struct smbios_type_39 {
-     uint8_t revision_level_str;
-     uint16_t max_capacity;
-     uint16_t characteristics;
--    uint16_t input_voltage_probe_handle;
--    uint16_t cooling_device_handle;
--    uint16_t input_current_probe_handle;
-+    uint16_t input_voltage_probe_handle;    /* Optional */
-+    uint16_t cooling_device_handle;         /* Optional */
-+    uint16_t input_current_probe_handle;    /* Optional */
- } __attribute__ ((packed));
- 
- /* SMBIOS type 127 -- End-of-table */
--- 
-2.34.1
+in most of the callsites.  The overall diff will be smaller (no need to
+change the comments), and the end result is proper regular normal C.
 
+I can draft a patch to that effect.
+
+~Andrew
 
