@@ -4,33 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B691CC87FC9
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 10:55:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062425.1428095 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D83C83F26
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 11:02:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062436.1428115 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ughzd-0008QD-2Q; Tue, 29 Jul 2025 10:55:37 +0000
+	id 1ugi5k-000280-Vj; Tue, 29 Jul 2025 11:01:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062425.1428095; Tue, 29 Jul 2025 10:55:37 +0000
+Received: by outflank-mailman (output) from mailman id 1062436.1428115; Tue, 29 Jul 2025 11:01:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ughzc-0008Q6-Us; Tue, 29 Jul 2025 10:55:36 +0000
-Received: by outflank-mailman (input) for mailman id 1062425;
- Tue, 29 Jul 2025 10:55:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AlSl=2K=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1ughzb-0008Q0-Jl
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 10:55:36 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8c7094d4-6c6a-11f0-b895-0df219b8e170;
- Tue, 29 Jul 2025 12:55:33 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id AF36E4EE3C07;
- Tue, 29 Jul 2025 12:55:31 +0200 (CEST)
+	id 1ugi5k-00027t-SQ; Tue, 29 Jul 2025 11:01:56 +0000
+Received: by outflank-mailman (input) for mailman id 1062436;
+ Tue, 29 Jul 2025 11:01:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=TZvG=2K=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1ugi5k-0001sN-5Z
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 11:01:56 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 708cb585-6c6b-11f0-a31e-13f23c93f187;
+ Tue, 29 Jul 2025 13:01:55 +0200 (CEST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 1439F1F750;
+ Tue, 29 Jul 2025 11:01:55 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D718A13876;
+ Tue, 29 Jul 2025 11:01:54 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id xvoZMyKqiGi/bQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 29 Jul 2025 11:01:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,143 +54,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c7094d4-6c6a-11f0-b895-0df219b8e170
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1753786531;
-	b=AJ6Z3Q9CafoVzyl/10PFG6O22/io+5OdWLpT+KGxCSxBBrjwnjA2fGT+q9dYyfQKArW9
-	 p3iU1i3ZFiiNni++rZaIyNnQA5ipVlg/78hKE5B7oOfSmhsvR4vW0dKdU7V5bNXCfSVkm
-	 c3hFOyhkDmAYmlnAe5isORsaGfbhyb+23g4j4+VMpnNqYI6zfetPdI9Q0xXCOj0WvzK/9
-	 fUC/IoJPGqWv/D5B6PASAddEbL4dovHtFqYBWoxs9cFKc9aIocGp4On3NePvaW7x+QhUV
-	 0+gubQ0Cnr25n2ocUq3dFjCsUxG/OHXyIY9jpZ13aue0lYk1fV1RHTyCbzBykNUDV3DtS
-	 LNWi3sVnl/Gl+Axhsyz3kF3dIV/O5h/Oi3T8N89pYtOntdQ9aYict1aK0NqHdRITnhxg0
-	 4mjiDZ3yBn0lQxffkaxIFaUgA8rcWqf+ZKOkY+Cg4zZB/ZevktY64oh0vrepNrac+E1ls
-	 X4RlQS5ZBngmf/Rg1ttuDomGNHDaDWh6Tult4SRkjLHHRsaQdWWrnoXUOxLRsDlg6iKjn
-	 JhAMKV0Nfcs92o25MiyoUpPfob5pTpER4dv6LC295hxRYX5rc6fBBkeDCkcBhQib24K91
-	 tPpbGTxougGLli8WCF2kjCwtAhKdT97JIqTcF3MFQHnxryki/X/EPsg9rDu6tjk=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1753786531;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=yyW1z1KFJYFLXz+z9yoIFdcdE7QGejx/abg19b/D2WQ=;
-	b=vTP8FRpMF9p7EYOSli6rDmak8yoiqRTTlX3T3VaVHOg/Wp2lgQ6VzWXcgBjwF5wKXhQw
-	 hv3muYPJKhGbrWh21TSGMLdGuErQEgXqYYRdEde/tKMq9otpJuSgOISD6Dq/vEX3sEXPK
-	 FP3Fsf+mek+PQDy1MABFjzbQkw5Yd+wJzQonxfCAwiVi5I+En1kSBfykQmv33LnHtbQzp
-	 SrtzpIzPNwvIk9vqF0jxuP7ZC9GnyynT3jiEFlgL+m+vPWagDvEuC0DBteKHA4wuJO9yX
-	 3PFYYbLXvEXKO/2tIDb2Q1eGeDNG+SNQUBfIWhiGtpNsgm5mE3nkNhcHdlGIL3iziqauP
-	 YmWqkNXV3TmfJglabOpYn1U2/AHyBV+JwqYt3wSlqN9O5Kxp9sCk4ALWg5pRjKc3qlR3g
-	 QMIJXqDkLgMEhdsDXUgjWx2AIlyO6Qkk9yhKLEk0A5qfGt4qRCsPdcszoJVEpeSUW5uKo
-	 qVmcRwu1bJe3PUAx9zbh0xhBB01xij3I5m/oa5KC335XafV+xRHZhaAoQNTdDjto17a/7
-	 Mjgwl/+7ECjfBIMMkhVUrA+Hu7MgYziOKg8XpXjng18wN/5joddsXqdwh0v03z5tFqII1
-	 RftBhXV2C4agDPX88sU4QFpP8bSbu/IHY/SF094JXfs/D47cv16bDLRgkgb0bRI=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1753786531; bh=/FcAdeOa1slT+HUgYNylqwsM5Fn9wfNvdJLOyvBJhr8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=DaQVQ8TwA7QzTnObL4F8o1sZcy/ezjVGvAP0pTk0yJWmTZ2OnX6hYhDDmJxh0OKe6
-	 PssL+CZEua6SO41wBnLHE/5D1zuUislqoDiigymfQYlylZeIzMk/BuUkMOiEzCvS0O
-	 HxTTExWWjk87U1ojwm5kOG7olQD8EZbs10R3ogVfptjb0rGfaNUWy/NsuuT2jXAxHW
-	 m8Sj3XYEIv70Fw1cKJlJ1Il+nBQPyo/gDHlD5Ll/70EWcMEkLfk7kP/LAx+Dre7dpr
-	 qv6X/pJJPxTGuQNel/CD5Iyv6P3KJU4YKC9X+UrAxJpjRaEkXf2knrGzdjj3oU3z+b
-	 FdaZWmeTtUpFQ==
+X-Inumbo-ID: 708cb585-6c6b-11f0-a31e-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1753786915; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=vNHDZ/hMeBIZaL0gCeA1zWXL3NyMvP7GkyxquC6Es+I=;
+	b=Upf0DpB6Yx8EyxvGsFXYXgSzQcvLIDsrvfVGHGjHUqKoyqMrbEMMvWL6Wf6FFQoTcwDD7e
+	/m/PNl+z16DelBqsTzHtXhwih1TxGez2FcXVxK78I5iVii8T/RWBK6KYaYEd3xL7MWEEvw
+	d5wqo2zMslKedeiXgxekBXnL1pK2ejM=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=Upf0DpB6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1753786915; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=vNHDZ/hMeBIZaL0gCeA1zWXL3NyMvP7GkyxquC6Es+I=;
+	b=Upf0DpB6Yx8EyxvGsFXYXgSzQcvLIDsrvfVGHGjHUqKoyqMrbEMMvWL6Wf6FFQoTcwDD7e
+	/m/PNl+z16DelBqsTzHtXhwih1TxGez2FcXVxK78I5iVii8T/RWBK6KYaYEd3xL7MWEEvw
+	d5wqo2zMslKedeiXgxekBXnL1pK2ejM=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH v2 1/9] xenstored: use fread() instead of mmap() for reading live update state
+Date: Tue, 29 Jul 2025 13:01:37 +0200
+Message-ID: <20250729110146.10580-2-jgross@suse.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250729110146.10580-1-jgross@suse.com>
+References: <20250729110146.10580-1-jgross@suse.com>
 MIME-Version: 1.0
-Date: Tue, 29 Jul 2025 12:55:31 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Doug Goldstein
- <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
- <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Julien
- Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] misra/eclair: set 'noreturn' attribute as safe during
- cast
-In-Reply-To: <2c016cc6-bd1e-44c1-baaa-5faa6b88cf6b@suse.com>
-References: <8989bf6d8d245537628912a00f5ba4731b292fb1.1753738107.git.dmytro_prokopchuk1@epam.com>
- <2f2a1992-0d88-4429-bed1-af5e60e05664@suse.com>
- <ef43422f-902c-43d6-8b67-10385427e2fe@epam.com>
- <2c016cc6-bd1e-44c1-baaa-5faa6b88cf6b@suse.com>
-Message-ID: <7c1de6ab79993a96f8c2cf6ce4c6ddff@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 1439F1F750
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid,suse.com:email];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[suse.com:+]
 
-On 2025-07-29 12:52, Jan Beulich wrote:
-> On 29.07.2025 12:04, Dmytro Prokopchuk1 wrote:
->> 
->> 
->> On 7/29/25 11:04, Jan Beulich wrote:
->>> On 29.07.2025 00:15, Dmytro Prokopchuk1 wrote:
->>>> ECLAIR reports a non-compliant cast due to the presence
->>>> of the 'noreturn' attribute in the callee function.
->>> 
->>> Which callee function? Which cast? Please be concrete. You don't need
->>> to enumerate all case, but one specific example wants pointing at.
->>> 
->>>> The issue occurs when casting a function pointer with
->>>> the 'noreturn' attribute (void noreturn (*)(void *))
->>>> to a general function pointer type (void (*)(void *)).
->>> 
->>> And again - why "casting"? As per ...
->>> 
->>>> Configure ECLAIR to treat 'noreturn' attributes as safe
->>>> in this conversion.
->>>> 
->>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
->>>> ---
->>>> Previous discussion thread:
->>>> https://patchew.org/Xen/181a03d5c7625d42c06cf9fa0cf48a9bc6825361.1753647875.git.dmytro._5Fprokopchuk1@epam.com/
->>> 
->>> ... there was no cast involved, iirc. We specifically rejected your
->>> attempt to add a cast there. It's a conversion the compiler does, 
->>> aiui.
->>> 
->> Yes, you are right.
->> Word "cast" is not appropriate there.
->> 
->> Below is updated text:
->> 
->>      misra: allow 'noreturn' as safe for function pointer conversions
->> 
->>      The conversion from a function pointer with the
->>      'noreturn' attribute ('void noreturn (*)(void *)')
->>      to a function pointer type ('void (*)(void *)'
->>      causes type incompatibility according to
->>      MISRA C Rule 11.1, which forbids conversions
->>      between incompatible function pointer types.
->> 
->>      The violation occurs at the call site
->>          smp_call_function(halt_this_cpu, NULL, 0);
->>      where 'halt_this_cpu' with type 'void noreturn (*)(void *)'
->>      is passed to 'smp_call_function' expecting a function
->>      pointer of type 'void (*)(void *)'.
->> 
->>      The 'noreturn' attribute does not change the function
->>      calling convention or parameter handling at runtime,
->>      making the conversion safe.
-> 
-> Up to here things read much better now, thanks. Just one more request:
-> Please make better use of the 72 (or maybe even 75) characters that are
-> permitted per line.
-> 
->>      Configure ECLAIR to treat 'noreturn' attributes as safe.
-> 
+Mini-OS doesn't support using mmap() for accessing a file. In order
+to support reading the live update state from a 9pfs based file, use
+fread() instead of mmap().
 
-Configure ECLAIR to treat implicit casts that lose the "noreturn" 
-attribute on a function void (*fp)(void*) as safe. This is because the 
-deviation actually just deviates void noreturn (*fp)(void*) -> void 
-(*fp)(void*)
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+V2:
+- move to start of series
+---
+ tools/xenstored/lu.c | 95 +++++++++++++++++++++++++++-----------------
+ 1 file changed, 59 insertions(+), 36 deletions(-)
 
-> This one is still way to imprecise, though. And I hope it's only this
-> description, not also the Eclair configuration item that's overly lax.
-> 
-> Jan
-
+diff --git a/tools/xenstored/lu.c b/tools/xenstored/lu.c
+index 77e0d377c5..f2c8b92d07 100644
+--- a/tools/xenstored/lu.c
++++ b/tools/xenstored/lu.c
+@@ -27,9 +27,11 @@ struct live_update *lu_status;
+ 
+ struct lu_dump_state {
+ 	void *buf;
++	unsigned int buf_size;
+ 	unsigned int size;
+-	int fd;
++	unsigned int offset;
+ 	char *filename;
++	FILE *fp;
+ };
+ 
+ static int lu_destroy(void *data)
+@@ -80,9 +82,10 @@ bool lu_is_pending(void)
+ 	return lu_status != NULL;
+ }
+ 
+-static void lu_get_dump_state(struct lu_dump_state *state)
++static void lu_get_dump_state(void *ctx, struct lu_dump_state *state)
+ {
+ 	struct stat statbuf;
++	int fd;
+ 
+ 	state->size = 0;
+ 
+@@ -91,82 +94,107 @@ static void lu_get_dump_state(struct lu_dump_state *state)
+ 	if (!state->filename)
+ 		barf("Allocation failure");
+ 
+-	state->fd = open(state->filename, O_RDONLY);
+-	if (state->fd < 0)
+-		return;
+-	if (fstat(state->fd, &statbuf) != 0)
+-		goto out_close;
++	fd = open(state->filename, O_RDONLY);
++	if (fd < 0)
++		barf("No state file found");
++	if (fstat(fd, &statbuf) != 0)
++		barf("Could not fstat state file");
+ 	state->size = statbuf.st_size;
+ 
+-	state->buf = mmap(NULL, state->size, PROT_READ, MAP_PRIVATE,
+-			  state->fd, 0);
+-	if (state->buf == MAP_FAILED) {
+-		state->size = 0;
+-		goto out_close;
+-	}
++	/* Start with a 4k buffer. If needed we'll reallocate a larger one. */
++	state->buf_size = 4096;
++	state->buf = talloc_size(ctx, state->buf_size);
++	if (!state->buf)
++		barf("Allocation failure");
+ 
+-	return;
++	state->fp = fdopen(fd, "r");
++}
+ 
+- out_close:
+-	close(state->fd);
++static void lu_dump_close(FILE *fp)
++{
++	fclose(fp);
+ }
+ 
+ static void lu_close_dump_state(struct lu_dump_state *state)
+ {
+ 	assert(state->filename != NULL);
+ 
+-	munmap(state->buf, state->size);
+-	close(state->fd);
++	lu_dump_close(state->fp);
+ 
+ 	unlink(state->filename);
+ 	talloc_free(state->filename);
++	talloc_free(state->buf);
++}
++
++static void lu_read_data(void *ctx, struct lu_dump_state *state,
++			 unsigned int size)
++{
++	if (state->offset + size > state->size)
++		barf("Inconsistent state data");
++
++	if (size > state->buf_size) {
++		state->buf = talloc_realloc_size(ctx, state->buf, size);
++		if (!state->buf)
++			barf("Allocation failure");
++		state->buf_size = size;
++	}
++
++	if (fread(state->buf, size, 1, state->fp) != 1)
++		barf("State read error");
++
++	state->offset += size;
+ }
+ 
+ void lu_read_state(void)
+ {
+ 	struct lu_dump_state state = {};
+-	struct xs_state_record_header *head;
++	struct xs_state_record_header head;
+ 	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
+ 	struct xs_state_preamble *pre;
+ 	unsigned int version;
+ 
+ 	syslog(LOG_INFO, "live-update: read state\n");
+-	lu_get_dump_state(&state);
++	lu_get_dump_state(ctx, &state);
+ 	if (state.size == 0)
+ 		barf_perror("No state found after live-update");
+ 
++	lu_read_data(ctx, &state, sizeof(*pre));
+ 	pre = state.buf;
+ 	version = be32toh(pre->version);
+ 	if (memcmp(pre->ident, XS_STATE_IDENT, sizeof(pre->ident)) ||
+ 	    !version || version > XS_STATE_VERSION ||
+ 	    pre->flags != XS_STATE_FLAGS)
+ 		barf("Unknown record identifier");
+-	for (head = state.buf + sizeof(*pre);
+-	     head->type != XS_STATE_TYPE_END &&
+-		(void *)head - state.buf < state.size;
+-	     head = (void *)head + sizeof(*head) + head->length) {
+-		switch (head->type) {
++
++	for (;;) {
++		lu_read_data(ctx, &state, sizeof(head));
++		head = *(struct xs_state_record_header *)(state.buf);
++		if (head.type == XS_STATE_TYPE_END)
++			break;
++		lu_read_data(ctx, &state, head.length);
++
++		switch (head.type) {
+ 		case XS_STATE_TYPE_GLOBAL:
+-			read_state_global(ctx, head + 1);
++			read_state_global(ctx, state.buf);
+ 			break;
+ 		case XS_STATE_TYPE_CONN:
+-			read_state_connection(ctx, head + 1);
++			read_state_connection(ctx, state.buf);
+ 			break;
+ 		case XS_STATE_TYPE_WATCH:
+-			read_state_watch(ctx, head + 1);
++			read_state_watch(ctx, state.buf);
+ 			break;
+ 		case XS_STATE_TYPE_TA:
+ 			xprintf("live-update: ignore transaction record\n");
+ 			break;
+ 		case XS_STATE_TYPE_NODE:
+-			read_state_node(ctx, head + 1);
++			read_state_node(ctx, state.buf);
+ 			break;
+ 		case XS_STATE_TYPE_DOMAIN:
+-			read_state_domain(ctx, head + 1, version);
++			read_state_domain(ctx, state.buf, version);
+ 			break;
+ 		default:
+ 			xprintf("live-update: unknown state record %08x\n",
+-				head->type);
++				head.type);
+ 			break;
+ 		}
+ 	}
+@@ -271,11 +299,6 @@ static FILE *lu_dump_open(const void *ctx)
+ 	return fdopen(fd, "w");
+ }
+ 
+-static void lu_dump_close(FILE *fp)
+-{
+-	fclose(fp);
+-}
+-
+ static const char *lu_dump_state(const void *ctx, struct connection *conn)
+ {
+ 	FILE *fp;
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.43.0
+
 
