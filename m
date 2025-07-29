@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F4DDC83F26
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 09:00:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062289.1427944 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7056EC83F26
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 09:01:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062304.1427958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uggC5-00025x-1v; Tue, 29 Jul 2025 09:00:21 +0000
+	id 1uggCu-0002mK-D9; Tue, 29 Jul 2025 09:01:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062289.1427944; Tue, 29 Jul 2025 09:00:21 +0000
+Received: by outflank-mailman (output) from mailman id 1062304.1427958; Tue, 29 Jul 2025 09:01:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uggC4-00025q-VZ; Tue, 29 Jul 2025 09:00:20 +0000
-Received: by outflank-mailman (input) for mailman id 1062289;
- Tue, 29 Jul 2025 09:00:20 +0000
+	id 1uggCu-0002mD-A4; Tue, 29 Jul 2025 09:01:12 +0000
+Received: by outflank-mailman (input) for mailman id 1062304;
+ Tue, 29 Jul 2025 09:01:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=fFWP=2K=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uggC4-00025j-3Y
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 09:00:20 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ id 1ugg51-0006C0-6F
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 08:53:03 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7356c519-6c5a-11f0-a31e-13f23c93f187;
- Tue, 29 Jul 2025 11:00:18 +0200 (CEST)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3b782cca9a0so1831665f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 02:00:18 -0700 (PDT)
+ id 6f1d0bb5-6c59-11f0-a31e-13f23c93f187;
+ Tue, 29 Jul 2025 10:53:02 +0200 (CEST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3b780bdda21so2940864f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Jul 2025 01:53:02 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23fe9b67485sm59279235ad.47.2025.07.29.02.00.14
+ 41be03b00d2f7-b420351c3d2sm3198707a12.5.2025.07.29.01.52.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jul 2025 02:00:17 -0700 (PDT)
+ Tue, 29 Jul 2025 01:53:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7356c519-6c5a-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 6f1d0bb5-6c59-11f0-a31e-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753779618; x=1754384418; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1753779182; x=1754383982; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=OL15pQhNMrtMlVmuQ4Ufj0iOHkoPPIE+QCSwH2PgeVs=;
-        b=UtiFfgUiC2lKmOpXC0XISqCaC7Hr4c2sistjoCO3w+n2/HO6kyvtPbLUuLrbQUt+dJ
-         PN1Fc3KzlRPlygpWstSx/k2aCSjilOUir3wgvGZsB4tE0wJDnAV+8LAB9fUFse0Wykkf
-         Dy3X8RMxDCmpqDXjdYXPd6uH6z2Q1D4bp1gynJKRmmRJEdcxJHHjcQt6PSae5CmiILQ2
-         pqdtzLl7UP0SxTb3qAxth04yJh2Oh9klR7nH4fibqbq5su5rp+fx8VlFMfGYiKQ9oBWs
-         pNTK4Qpy88K8RJXUSk3hhulsO6JJWDpqb0JfvntkiKxd8eEt7gFfzaK8R+k0UOK6f3bf
-         XcLQ==
+        bh=rEHfcRqV3MBpA/v53GsPEK6uX0VSS/rQERp7qHUtZmA=;
+        b=HDAnewB3lQY2Uqe0782jiJT6r5FAJ1mHU9Gn9u2qW6CGFI3zt/7OG0WxqOTyirBCJP
+         NZeKLPR5rUqy+zDHJyD9kgZKuyqSr3ll7OwJgIQZlepy0nElJQt3aJYnGZ0tfUmGKqw9
+         VWEf8b37vuuN/Y/3HLqGu4nN8d6sQGjRCAxktsWPGHU0xmMTU38cYcgrG9wUo1af0Icq
+         mYDMoIZgwxjdz0+W7qfkog+Sj+rTj7jmikFquzaTsryRTBnLjQaLXSpCbjwxtL8efWuX
+         ccpsRdNIObrk+IWxy/1kosJE2GQHO650cR36MJGaxhfoAkJa3VDirKBzz1HtEaHdfyis
+         LCMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753779618; x=1754384418;
+        d=1e100.net; s=20230601; t=1753779182; x=1754383982;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OL15pQhNMrtMlVmuQ4Ufj0iOHkoPPIE+QCSwH2PgeVs=;
-        b=ocUjX7qVA7hF5Hxg6jdcpB4P4czdygXtX3nrFcWwpWm+ExoMKjJLj3L//StWTGEDT+
-         0wNp8bmtsyhtF/EpIFvlzoOSHdxOmIBajDq5R8z9QzmwDopo5lr3w7haErLwrIS3T+8u
-         IgUDGjarZ/iOqr+PlPka7FPMPs24FC2hMViKcCYIUwjualXSkvecYWxuK3U47gFASpYv
-         LTK86N3zb8MKkE2YWw5wCayuFnfJZjeBy4Uc8kijEXgJhfUgJpeuxjsCYfdUDBURai5X
-         o9Fd1pqDgjnEa51L6ebMARDmhIvRkXdcCzf94pFUsio8Nhcn2VQvsgMpun5IrT54PVFz
-         99IA==
-X-Forwarded-Encrypted: i=1; AJvYcCUhLH/Uy8U4DLniC3fbvL2SfhjvTOGOf9Ctd/rlLcSFrBox3uSqnYCw9GA2aQPxCIWaQclKdowtqEA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwqygSjQc11XeSUbJkIpcixgRRIOqEkSUkG35avW6sL/jmtPeJV
-	8SH1xR9hoP8dlh7weXGchWvQbcGR039UlnME5823sGt/MQiy8EkPK1kze8DYcBlVbw==
-X-Gm-Gg: ASbGncsY9cRcKVs3vN8ivPV97KFd3dMgEj4fDiNpTi6JinO/6iUZaeftSurBAKzHVKD
-	ReIfrC15P/1zXGRGhZt11KeVKsglDLdACyGlkqQAtB/agC3izZnGM/jUqsOaZF0TgzQZvKAuX00
-	mYhZAJjmLUaF+AYWezyYwiGZIB12u0WKVEV3561oFNEao4dFUu79CVHentza18hUury2tH4jErY
-	11hWMBQi+sV3vhwRnWu7RT86LUg/4hJErKsC+oNQ7efIFQUreMZFAfKDd9Jka0zd5eq8x+DAiW5
-	b7Buec3hp47JnadZ+bMJ8+XjrYrvODIjxY1DdAp07M0HZOVSLmxvPtP6AMJF+S4owgpNHdWU3JH
-	/b9MPbeQVI48fweiRQVGSe8MsbEPpjEgiPUXYAMAdZtFnJqcdh7+H7X+YfKzWU/t3xhmID13NRH
-	11aCXqNRA=
-X-Google-Smtp-Source: AGHT+IFoq3od2tK7d9E3HRhaJWm/KnW+VXxS1Fz+D2PAzZ15IYjdap8eENWUYN/QpX9zulixoylN1Q==
-X-Received: by 2002:a05:6000:2908:b0:3b7:8c83:db19 with SMTP id ffacd0b85a97d-3b78c83e062mr2860435f8f.57.1753779618206;
-        Tue, 29 Jul 2025 02:00:18 -0700 (PDT)
-Message-ID: <0b6b3a4a-03df-4bc9-996d-ba2efb3f5b73@suse.com>
-Date: Tue, 29 Jul 2025 11:00:10 +0200
+        bh=rEHfcRqV3MBpA/v53GsPEK6uX0VSS/rQERp7qHUtZmA=;
+        b=tDKx84tXr2zEaz9wbC1RYbQPFWBQZooGjoEFPMEKzAGBM94wL8Ntx4PU+8hZcMm3gu
+         MdQWe7Zf6M+S8xu0xS/eYy4v2/wtsj8yu9aeu+qn18MoFULITC3brRpwuI6N0j0xTou2
+         AnuN3+cF0ztEGLZyDuHhC6wn7d/g0Yu87PyVqHW8r6q098d05G7Bj7EEEgXa2f31DdNy
+         JNR5atM2Hss+UFrtwzV1mWRv8xx6ffl26eodkL1KlxI4IkioMakk2d11O2950k/1NoWf
+         9d8rC387TGqw3U3m3J9mvGCQ6/VOAYyqVEeJkjcJ77WqemyTRYCkbiRklGKLZiJdXfds
+         NoAA==
+X-Forwarded-Encrypted: i=1; AJvYcCUfsTop6zRKIxbv5Jh9iZxBaW5nsToWGIile2zADA8V+4OGDZWWHKeASRchsB2zDxCaZsmRUTbotc8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxnOGy3CMM+OTzR/wweEmmg4sdvgiPv+X8Aooc0CX0kmwVcZu5z
+	MID6nrizh/jMmGGFyKCKEIMEfAbQhduQQFF4WHcmcovaT4wzZz5ffxIQZDT5HZQuyQ==
+X-Gm-Gg: ASbGncvDIYHzNM7m0bhtNRRx2uHzCTudi4pc8lFDR8000HzyBNGf2KiLr+w3pb/eRf6
+	w67E8Iag4g7TtREnX0Kz87zMr6i9HuwKNWfKsUY9Xp6J9sbUeCIvLKZQvap6wHsh93l+MaKiDED
+	NmIxUlSpcSLC2vM7Rbsw6SgduinhCgt1/WP+MLTrqQijeIByIW5DBgh+1EMOkLgLVSWmbtPElno
+	XAaNKKPz+HFdPZZvAO6EKmboKdr9zEdZzyKrO/GSYttDvvmx7Ry72KA19h3uNbF5iPwmeZWlaM0
+	3y/9oq1S6YbbNDGbhvTC0PwwUiarA1R/EMM/ER5RK6vpzC/wTYl9TG3SV7e/cn39XwZv8I0mFih
+	if5D1qHbIUlSUuJD9+jeE0OM+XIDqMczAvxWIvQvLcFhiSvG580DFFWSCwsF4D8PHBZIcO7u/Mq
+	noKp89aQA=
+X-Google-Smtp-Source: AGHT+IFcCYoHjXwjmi7PMeUlJquckSj7oo/H+CmB0+mZ/Ol9FCQtfaNIxyOYyP9/8xd6JWkH5fSiRw==
+X-Received: by 2002:a05:6000:2c04:b0:3ab:27f9:e51 with SMTP id ffacd0b85a97d-3b77675dad3mr8953251f8f.31.1753779181746;
+        Tue, 29 Jul 2025 01:53:01 -0700 (PDT)
+Message-ID: <2fb97c32-f0e7-4d9f-bf3c-5fd621498b29@suse.com>
+Date: Tue, 29 Jul 2025 10:52:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [MINI-OS PATCH v2 2/2] x86: don't use a memory page for mapping
- the shared info page
+Subject: Re: [MINI-OS PATCH v2 1/2] mm: provide a way to do very early page
+ table allocations
 To: Juergen Gross <jgross@suse.com>
 Cc: samuel.thibault@ens-lyon.org, minios-devel@lists.xenproject.org,
  xen-devel@lists.xenproject.org
 References: <20250729083829.11038-1-jgross@suse.com>
- <20250729083829.11038-3-jgross@suse.com>
+ <20250729083829.11038-2-jgross@suse.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -122,79 +122,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250729083829.11038-3-jgross@suse.com>
+In-Reply-To: <20250729083829.11038-2-jgross@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 29.07.2025 10:38, Juergen Gross wrote:
-> --- a/arch/x86/x86_64.S
-> +++ b/arch/x86/x86_64.S
-> @@ -33,13 +33,8 @@ _start:
->  stack_start:
->          .quad stack+(2*__STACK_SIZE)
->  
-> -.globl shared_info, hypercall_page
-> -        /* Unpleasant -- the PTE that maps this page is actually overwritten */
-> -        /* to map the real shared-info page! :-)                             */
->          .align __PAGE_SIZE
-> -shared_info:
-> -        .fill __PAGE_SIZE,1,0
-> -
-> +.globl hypercall_page
+> --- a/arch/x86/mm.c
+> +++ b/arch/x86/mm.c
+> @@ -640,13 +640,20 @@ void change_readonly(bool readonly)
+>  /*
+>   * return a valid PTE for a given virtual address. If PTE does not exist,
+>   * allocate page-table pages.
+> + * Provide a small pool for allocating some page tables very early. Those are
+> + * needed currently for mapping the shared info page, so 2 pages ought to be
+> + * enough. Add one spare page anyway.
+>   */
 
-While touching this line, may I suggest to indent this directive to match all
-other directives in context? Even if assemblers accept them for most targets,
-directives starting in the first column strictly speaking are misplaced.
+Hmm, 2 pages plus one spare doesn't yield ...
 
-> --- a/hypervisor.c
-> +++ b/hypervisor.c
-> @@ -27,8 +27,10 @@
->  
->  #include <mini-os/os.h>
->  #include <mini-os/lib.h>
-> +#include <mini-os/e820.h>
->  #include <mini-os/hypervisor.h>
->  #include <mini-os/events.h>
-> +#include <mini-os/mm.h>
->  #include <xen/memory.h>
->  
->  EXPORT_SYMBOL(hypercall_page);
-> @@ -37,7 +39,8 @@ EXPORT_SYMBOL(hypercall_page);
->      ((sh)->evtchn_pending[idx] & ~(sh)->evtchn_mask[idx])
->  
->  #ifndef CONFIG_PARAVIRT
-> -extern shared_info_t shared_info;
-> +static unsigned long shinfo_pfn;
-> +static unsigned long shinfo_va;
->  
->  int hvm_get_parameter(int idx, uint64_t *value)
->  {
-> @@ -69,24 +72,31 @@ shared_info_t *map_shared_info(void)
->  {
->      struct xen_add_to_physmap xatp;
->  
-> +    shinfo_pfn = e820_get_reserved_pfns(1);
->      xatp.domid = DOMID_SELF;
->      xatp.idx = 0;
->      xatp.space = XENMAPSPACE_shared_info;
-> -    xatp.gpfn = virt_to_pfn(&shared_info);
-> +    xatp.gpfn = shinfo_pfn;
->      if ( HYPERVISOR_memory_op(XENMEM_add_to_physmap, &xatp) != 0 )
->          BUG();
-> +    if ( !shinfo_va )
-> +        shinfo_va = alloc_virt_kernel(1);
-> +    if ( !shinfo_va || map_frame_rw(shinfo_va, shinfo_pfn) )
-> +        BUG();
+> +static char early_pt[4][PAGE_SIZE] __attribute__((aligned(PAGE_SIZE)));
 
-Now there's a new asymmetry: Here you check whether alloc_virt_kernel()
-(appears to have) failed, whereas in the PV variant you don't. And it's
-really only "appears to", as the function won't return 0 in the failure
-case, afaics. I therefore think that extra condition simply wants
-dropping here. Then
+... 4. Was 2 a typo, and 3 was meant? (Which, just to mention it, then isn't
+correct for 32-bit aiui.) Whatever adjustment wants making - happy to do so
+while committing. Just need to know which way. Then
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-As for the other patch, happy to make both adjustments while committing.
-As long as you agree, of course.
 
 Jan
 
