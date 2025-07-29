@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A791C83F26
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 01:57:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062011.1427639 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67FD8C87FD3
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 01:57:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062008.1427610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugZaR-0002My-3T; Tue, 29 Jul 2025 01:57:03 +0000
+	id 1ugZaM-0001gK-Dh; Tue, 29 Jul 2025 01:56:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062011.1427639; Tue, 29 Jul 2025 01:57:03 +0000
+Received: by outflank-mailman (output) from mailman id 1062008.1427610; Tue, 29 Jul 2025 01:56:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugZaQ-0002Mr-Vp; Tue, 29 Jul 2025 01:57:02 +0000
-Received: by outflank-mailman (input) for mailman id 1062011;
- Tue, 29 Jul 2025 01:57:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ugZaM-0001gD-91; Tue, 29 Jul 2025 01:56:58 +0000
+Received: by outflank-mailman (input) for mailman id 1062008;
+ Tue, 29 Jul 2025 01:56:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s63h=2K=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1ugZaO-0001gQ-AO
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 01:57:00 +0000
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4dd7a8ae-6c1f-11f0-a31e-13f23c93f187;
- Tue, 29 Jul 2025 03:56:57 +0200 (CEST)
-Received: from mail.maildlp.com (unknown [172.19.162.112])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4brddk01Z0z2Cg1y;
- Tue, 29 Jul 2025 09:52:41 +0800 (CST)
+ id 1ugZaK-0001g7-Ud
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 01:56:56 +0000
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ab68b3d-6c1f-11f0-b895-0df219b8e170;
+ Tue, 29 Jul 2025 03:56:52 +0200 (CEST)
+Received: from mail.maildlp.com (unknown [172.19.88.194])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4brdcq1ppRz14M80;
+ Tue, 29 Jul 2025 09:51:55 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
- by mail.maildlp.com (Postfix) with ESMTPS id B309C140203;
- Tue, 29 Jul 2025 09:56:54 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id BB760140276;
+ Tue, 29 Jul 2025 09:56:47 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Tue, 29 Jul
- 2025 09:56:53 +0800
+ 2025 09:56:46 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4dd7a8ae-6c1f-11f0-a31e-13f23c93f187
+X-Inumbo-ID: 4ab68b3d-6c1f-11f0-b895-0df219b8e170
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<sstabellini@kernel.org>, <mark.rutland@arm.com>, <puranjay@kernel.org>,
@@ -59,12 +59,10 @@ To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<leitao@debian.org>, <linux-arm-kernel@lists.infradead.org>,
 	<linux-kernel@vger.kernel.org>, <xen-devel@lists.xenproject.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH -next v7 6/7] arm64: entry: Move arm64_preempt_schedule_irq() into __exit_to_kernel_mode()
-Date: Tue, 29 Jul 2025 09:54:55 +0800
-Message-ID: <20250729015456.3411143-7-ruanjinjie@huawei.com>
+Subject: [PATCH -next v7 0/7] arm64: entry: Convert to generic irq entry
+Date: Tue, 29 Jul 2025 09:54:49 +0800
+Message-ID: <20250729015456.3411143-1-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250729015456.3411143-1-ruanjinjie@huawei.com>
-References: <20250729015456.3411143-1-ruanjinjie@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -72,174 +70,146 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
  dggpemf500011.china.huawei.com (7.185.36.131)
 
-The arm64 entry code only preempts a kernel context upon a return from
-a regular IRQ exception. The generic entry code may preempt a kernel
-context for any exception return where irqentry_exit() is used, and so
-may preempt other exceptions such as faults.
+Currently, x86, Riscv, Loongarch use the generic entry. Also convert
+arm64 to use the generic entry infrastructure from kernel/entry/*.
+The generic entry makes maintainers' work easier and codes more elegant,
+which will make PREEMPT_DYNAMIC and PREEMPT_LAZY use the generic entry
+common code and remove a lot of duplicate code.
 
-In preparation for moving arm64 over to the generic entry code, align
-arm64 with the generic behaviour by calling
-arm64_preempt_schedule_irq() from exit_to_kernel_mode(). To make this
-possible, arm64_preempt_schedule_irq()
-and dynamic/raw_irqentry_exit_cond_resched() are moved earlier in
-the file, with no changes.
+Since commit a70e9f647f50 ("entry: Split generic entry into generic
+exception and syscall entry") split the generic entry into generic irq
+entry and generic syscall entry, it is time to convert arm64 to use
+the generic irq entry. And ARM64 will be completely converted to generic
+entry in the upcoming patch series.
 
-As Mark pointed out, this change will have the following 2 key impact:
+The main convert steps are as follows:
+- Split generic entry into generic irq entry and generic syscall to
+  make the single patch more concentrated in switching to one thing.
+- Make arm64 easier to use irqentry_enter/exit().
+- Make arm64 closer to the PREEMPT_DYNAMIC code of generic entry.
+- Switch to generic irq entry.
 
-- " We'll preempt even without taking a "real" interrupt. That
-    shouldn't result in preemption that wasn't possible before,
-    but it does change the probability of preempting at certain points,
-    and might have a performance impact, so probably warrants a
-    benchmark."
+It was tested ok with following test cases on QEMU virt platform:
+ - Perf tests.
+ - Different `dynamic preempt` mode switch.
+ - Pseudo NMI tests.
+ - Stress-ng CPU stress test.
+ - MTE test case in Documentation/arch/arm64/memory-tagging-extension.rst
+   and all test cases in tools/testing/selftests/arm64/mte/*.
 
-- " We will not preempt when taking interrupts from a region of kernel
-    code where IRQs are enabled but RCU is not watching, matching the
-    behaviour of the generic entry code.
+The test QEMU configuration is as follows:
 
-    This has the potential to introduce livelock if we can ever have a
-    screaming interrupt in such a region, so we'll need to go figure out
-    whether that's actually a problem.
+	qemu-system-aarch64 \
+		-M virt,gic-version=3,virtualization=on,mte=on \
+		-cpu max,pauth-impdef=on \
+		-kernel Image \
+		-smp 8,sockets=1,cores=4,threads=2 \
+		-m 512m \
+		-nographic \
+		-no-reboot \
+		-device virtio-rng-pci \
+		-append "root=/dev/vda rw console=ttyAMA0 kgdboc=ttyAMA0,115200 \
+			earlycon preempt=voluntary irqchip.gicv3_pseudo_nmi=1" \
+		-drive if=none,file=images/rootfs.ext4,format=raw,id=hd0 \
+		-device virtio-blk-device,drive=hd0 \
 
-    Having this as a separate patch will make it easier to test/bisect
-    for that specifically."
+Changes in v7:
+- Rebased on v6.16-rc7 and remove the merged first patch.
+- Update the commit message.
 
-Suggested-by: Mark Rutland <mark.rutland@arm.com>
-Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
----
- arch/arm64/kernel/entry-common.c | 92 ++++++++++++++++----------------
- 1 file changed, 46 insertions(+), 46 deletions(-)
+Changes in v6:
+- Rebased on 6.14 rc2 next.
+- Put the syscall bits aside and split it out.
+- Have the split patch before the arm64 changes.
+- Merge some tightly coupled patches.
+- Adjust the order of some patches to make them more reasonable.
+- Define regs_irqs_disabled() by inline function.
+- Define interrupts_enabled() in terms of regs_irqs_disabled().
+- Delete the fast_interrupts_enabled() macro.
+- irqentry_state_t -> arm64_irqentry_state_t.
+- Remove arch_exit_to_user_mode_prepare() and pull local_daif_mask() later
+  in the arm64 exit sequence
+- Update the commit message.
 
-diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
-index 4f92664fd46c..7c7aa5711a39 100644
---- a/arch/arm64/kernel/entry-common.c
-+++ b/arch/arm64/kernel/entry-common.c
-@@ -76,6 +76,49 @@ static noinstr arm64_irqentry_state_t enter_from_kernel_mode(struct pt_regs *reg
- 	return state;
- }
- 
-+static inline bool arm64_preempt_schedule_irq(void)
-+{
-+	/*
-+	 * DAIF.DA are cleared at the start of IRQ/FIQ handling, and when GIC
-+	 * priority masking is used the GIC irqchip driver will clear DAIF.IF
-+	 * using gic_arch_enable_irqs() for normal IRQs. If anything is set in
-+	 * DAIF we must have handled an NMI, so skip preemption.
-+	 */
-+	if (system_uses_irq_prio_masking() && read_sysreg(daif))
-+		return false;
-+
-+	/*
-+	 * Preempting a task from an IRQ means we leave copies of PSTATE
-+	 * on the stack. cpufeature's enable calls may modify PSTATE, but
-+	 * resuming one of these preempted tasks would undo those changes.
-+	 *
-+	 * Only allow a task to be preempted once cpufeatures have been
-+	 * enabled.
-+	 */
-+	if (!system_capabilities_finalized())
-+		return false;
-+
-+	return true;
-+}
-+
-+void raw_irqentry_exit_cond_resched(void)
-+{
-+	if (!preempt_count()) {
-+		if (need_resched() && arm64_preempt_schedule_irq())
-+			preempt_schedule_irq();
-+	}
-+}
-+
-+#ifdef CONFIG_PREEMPT_DYNAMIC
-+DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
-+void dynamic_irqentry_exit_cond_resched(void)
-+{
-+	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
-+		return;
-+	raw_irqentry_exit_cond_resched();
-+}
-+#endif
-+
- /*
-  * Handle IRQ/context state management when exiting to kernel mode.
-  * After this function returns it is not safe to call regular kernel code,
-@@ -98,6 +141,9 @@ static __always_inline void __exit_to_kernel_mode(struct pt_regs *regs,
- 			return;
- 		}
- 
-+		if (IS_ENABLED(CONFIG_PREEMPTION))
-+			irqentry_exit_cond_resched();
-+
- 		trace_hardirqs_on();
- 	} else {
- 		if (state.exit_rcu)
-@@ -285,31 +331,6 @@ static void noinstr arm64_exit_el1_dbg(struct pt_regs *regs,
- 		lockdep_hardirqs_on(CALLER_ADDR0);
- }
- 
--static inline bool arm64_preempt_schedule_irq(void)
--{
--	/*
--	 * DAIF.DA are cleared at the start of IRQ/FIQ handling, and when GIC
--	 * priority masking is used the GIC irqchip driver will clear DAIF.IF
--	 * using gic_arch_enable_irqs() for normal IRQs. If anything is set in
--	 * DAIF we must have handled an NMI, so skip preemption.
--	 */
--	if (system_uses_irq_prio_masking() && read_sysreg(daif))
--		return false;
--
--	/*
--	 * Preempting a task from an IRQ means we leave copies of PSTATE
--	 * on the stack. cpufeature's enable calls may modify PSTATE, but
--	 * resuming one of these preempted tasks would undo those changes.
--	 *
--	 * Only allow a task to be preempted once cpufeatures have been
--	 * enabled.
--	 */
--	if (!system_capabilities_finalized())
--		return false;
--
--	return true;
--}
--
- static void do_interrupt_handler(struct pt_regs *regs,
- 				 void (*handler)(struct pt_regs *))
- {
-@@ -661,24 +682,6 @@ static __always_inline void __el1_pnmi(struct pt_regs *regs,
- 	arm64_exit_nmi(regs, state);
- }
- 
--void raw_irqentry_exit_cond_resched(void)
--{
--	if (!preempt_count()) {
--		if (need_resched() && arm64_preempt_schedule_irq())
--			preempt_schedule_irq();
--	}
--}
--
--#ifdef CONFIG_PREEMPT_DYNAMIC
--DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
--void dynamic_irqentry_exit_cond_resched(void)
--{
--	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
--		return;
--	raw_irqentry_exit_cond_resched();
--}
--#endif
--
- static __always_inline void __el1_irq(struct pt_regs *regs,
- 				      void (*handler)(struct pt_regs *))
- {
-@@ -688,9 +691,6 @@ static __always_inline void __el1_irq(struct pt_regs *regs,
- 	do_interrupt_handler(regs, handler);
- 	irq_exit_rcu();
- 
--	if (IS_ENABLED(CONFIG_PREEMPTION))
--		irqentry_exit_cond_resched();
--
- 	exit_to_kernel_mode(regs, state);
- }
- static void noinstr el1_interrupt(struct pt_regs *regs,
+Changes in v5:
+- Not change arm32 and keep inerrupts_enabled() macro for gicv3 driver.
+- Move irqentry_state definition into arch/arm64/kernel/entry-common.c.
+- Avoid removing the __enter_from_*() and __exit_to_*() wrappers.
+- Update "irqentry_state_t ret/irq_state" to "state"
+  to keep it consistently.
+- Use generic irq entry header for PREEMPT_DYNAMIC after split
+  the generic entry.
+- Also refactor the ARM64 syscall code.
+- Introduce arch_ptrace_report_syscall_entry/exit(), instead of
+  arch_pre/post_report_syscall_entry/exit() to simplify code.
+- Make the syscall patches clear separation.
+- Update the commit message.
+
+Changes in v4:
+- Rework/cleanup split into a few patches as Mark suggested.
+- Replace interrupts_enabled() macro with regs_irqs_disabled(), instead
+  of left it here.
+- Remove rcu and lockdep state in pt_regs by using temporary
+  irqentry_state_t as Mark suggested.
+- Remove some unnecessary intermediate functions to make it clear.
+- Rework preempt irq and PREEMPT_DYNAMIC code
+  to make the switch more clear.
+- arch_prepare_*_entry/exit() -> arch_pre_*_entry/exit().
+- Expand the arch functions comment.
+- Make arch functions closer to its caller.
+- Declare saved_reg in for block.
+- Remove arch_exit_to_kernel_mode_prepare(), arch_enter_from_kernel_mode().
+- Adjust "Add few arch functions to use generic entry" patch to be
+  the penultimate.
+- Update the commit message.
+- Add suggested-by.
+
+Changes in v3:
+- Test the MTE test cases.
+- Handle forget_syscall() in arch_post_report_syscall_entry()
+- Make the arch funcs not use __weak as Thomas suggested, so move
+  the arch funcs to entry-common.h, and make arch_forget_syscall() folded
+  in arch_post_report_syscall_entry() as suggested.
+- Move report_single_step() to thread_info.h for arm64
+- Change __always_inline() to inline, add inline for the other arch funcs.
+- Remove unused signal.h for entry-common.h.
+- Add Suggested-by.
+- Update the commit message.
+
+Changes in v2:
+- Add tested-by.
+- Fix a bug that not call arch_post_report_syscall_entry() in
+  syscall_trace_enter() if ptrace_report_syscall_entry() return not zero.
+- Refactor report_syscall().
+- Add comment for arch_prepare_report_syscall_exit().
+- Adjust entry-common.h header file inclusion to alphabetical order.
+- Update the commit message.
+
+Jinjie Ruan (7):
+  arm64: ptrace: Replace interrupts_enabled() with regs_irqs_disabled()
+  arm64: entry: Refactor the entry and exit for exceptions from EL1
+  arm64: entry: Rework arm64_preempt_schedule_irq()
+  arm64: entry: Use preempt_count() and need_resched() helper
+  arm64: entry: Refactor preempt_schedule_irq() check code
+  arm64: entry: Move arm64_preempt_schedule_irq() into
+    __exit_to_kernel_mode()
+  arm64: entry: Switch to generic IRQ entry
+
+ arch/arm64/Kconfig                    |   1 +
+ arch/arm64/include/asm/daifflags.h    |   2 +-
+ arch/arm64/include/asm/entry-common.h |  56 ++++
+ arch/arm64/include/asm/preempt.h      |   2 -
+ arch/arm64/include/asm/ptrace.h       |  13 +-
+ arch/arm64/include/asm/xen/events.h   |   2 +-
+ arch/arm64/kernel/acpi.c              |   2 +-
+ arch/arm64/kernel/debug-monitors.c    |   2 +-
+ arch/arm64/kernel/entry-common.c      | 411 +++++++++-----------------
+ arch/arm64/kernel/sdei.c              |   2 +-
+ arch/arm64/kernel/signal.c            |   3 +-
+ kernel/entry/common.c                 |  16 +-
+ 12 files changed, 217 insertions(+), 295 deletions(-)
+ create mode 100644 arch/arm64/include/asm/entry-common.h
+
 -- 
 2.34.1
 
