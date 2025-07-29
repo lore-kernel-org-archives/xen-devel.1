@@ -4,45 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFE0C87FC9
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 11:12:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1062516.1428215 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277BBC83F26
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jul 2025 11:12:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1062519.1428225 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugiG7-00013A-7M; Tue, 29 Jul 2025 11:12:39 +0000
+	id 1ugiG8-0001H6-Em; Tue, 29 Jul 2025 11:12:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1062516.1428215; Tue, 29 Jul 2025 11:12:39 +0000
+Received: by outflank-mailman (output) from mailman id 1062519.1428225; Tue, 29 Jul 2025 11:12:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ugiG7-00012y-3e; Tue, 29 Jul 2025 11:12:39 +0000
-Received: by outflank-mailman (input) for mailman id 1062516;
- Tue, 29 Jul 2025 11:12:37 +0000
+	id 1ugiG8-0001Gz-BH; Tue, 29 Jul 2025 11:12:40 +0000
+Received: by outflank-mailman (input) for mailman id 1062519;
+ Tue, 29 Jul 2025 11:12:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=TZvG=2K=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ugi6V-0002qP-RX
- for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 11:02:43 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [2a07:de40:b251:101:10:150:64:1])
+ (envelope-from <SRS0=NrXi=2K=redhat.com=armbru@srs-se1.protection.inumbo.net>)
+ id 1ugiG7-0000M4-38
+ for xen-devel@lists.xenproject.org; Tue, 29 Jul 2025 11:12:39 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8c2720ba-6c6b-11f0-b895-0df219b8e170;
- Tue, 29 Jul 2025 13:02:41 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id eecd6811-6c6c-11f0-b895-0df219b8e170;
+ Tue, 29 Jul 2025 13:12:37 +0200 (CEST)
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-674-GzHVl2qGNsKllHguYOxZow-1; Tue,
+ 29 Jul 2025 07:12:32 -0400
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0B17821A36;
- Tue, 29 Jul 2025 11:02:40 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CB28613876;
- Tue, 29 Jul 2025 11:02:39 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id UxgUME+qiGj/bQAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 29 Jul 2025 11:02:39 +0000
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 99F66180036F; Tue, 29 Jul 2025 11:12:30 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.14])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 992E119560A2; Tue, 29 Jul 2025 11:12:29 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id DE77B21E6A27; Tue, 29 Jul 2025 13:12:26 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,86 +56,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c2720ba-6c6b-11f0-b895-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1753786960; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nbSw2XSXTnRBMBHQqo318I/HhCGPQCpy7irgifrRtPY=;
-	b=sPRN3UTef1d/oI7TIyiyM/13ms1+prmV3gyzgkeOARUSiMi3kOX/YobhNq257p9biNiGZ3
-	2/3+1H/qcyQajcSlyIJUYtBQVcmgH2Ts9hrtpsDY3unFNMp0w5zlT53GqUIe2Dxs5mxSA3
-	qShgbexRina3iD7G522Vb8r0TJi1Cwo=
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1753786960; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nbSw2XSXTnRBMBHQqo318I/HhCGPQCpy7irgifrRtPY=;
-	b=sPRN3UTef1d/oI7TIyiyM/13ms1+prmV3gyzgkeOARUSiMi3kOX/YobhNq257p9biNiGZ3
-	2/3+1H/qcyQajcSlyIJUYtBQVcmgH2Ts9hrtpsDY3unFNMp0w5zlT53GqUIe2Dxs5mxSA3
-	qShgbexRina3iD7G522Vb8r0TJi1Cwo=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH v2 9/9] CHANGELOG.md: add xenstorepvh-stubdom live update
-Date: Tue, 29 Jul 2025 13:01:45 +0200
-Message-ID: <20250729110146.10580-10-jgross@suse.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250729110146.10580-1-jgross@suse.com>
-References: <20250729110146.10580-1-jgross@suse.com>
+X-Inumbo-ID: eecd6811-6c6c-11f0-b895-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1753787556;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=dt6qkMkh+MC47d4SdeRqjp6FPKdZAsysmAqVxMrrdaE=;
+	b=BGPO25lSKl6R1sUkBqBQP8g5174QqsPPkaqvqEFg+P2LiOJe2AJsTGFPOhMIwOoew4Gp71
+	J1uSHju3EctW/J458Vo79qf3yqjPNwtJBW3Gyoqbc8F8lio97z5vDI/B857os1TD8y8ihI
+	QkeQnAF+MsKU1cJH4S6i4KIilg/I95A=
+X-MC-Unique: GzHVl2qGNsKllHguYOxZow-1
+X-Mimecast-MFC-AGG-ID: GzHVl2qGNsKllHguYOxZow_1753787551
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: sstabellini@kernel.org,
+	anthony@xenproject.org,
+	paul@xen.org,
+	edgar.iglesias@gmail.com,
+	xen-devel@lists.xenproject.org,
+	qemu-trivial@nongnu.org
+Subject: [PATCH] hw/display/xenfb: Replace unreachable code by abort()
+Date: Tue, 29 Jul 2025 13:12:26 +0200
+Message-ID: <20250729111226.3627499-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.29 / 50.00];
-	BAYES_HAM(-2.99)[99.95%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,gmail.com,xenproject.org];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- new patch
----
- CHANGELOG.md | 1 +
- 1 file changed, 1 insertion(+)
+xenfb_mouse_event() has a switch statement whose controlling
+expression move->axis is an enum InputAxis.  The enum values are
+INPUT_AXIS_X and INPUT_AXIS_Y, encoded as 0 and 1.  The switch has a
+case for both axes.  In addition, it has an unreachable default label.
+This convinces Coverity that move->axis can be greater than 1.  It
+duly reports a buffer overrun when it is used to subscript an array
+with two elements.
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 5f31ca08fe..d118bb1c8c 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-    - Support PCI passthrough for HVM domUs when dom0 is PVH (note SR-IOV
-      capability usage is not yet supported on PVH dom0).
-    - Smoke tests for the FreeBSD Xen builds in Cirrus CI.
-+   - PVH xenstore-stubdom now supports Live Update.
- 
-  - On Arm:
-     - Ability to enable stack protector
+Replace the unreachable code by abort().
+
+Resolves: Coverity CID 1613906
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ hw/display/xenfb.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/hw/display/xenfb.c b/hw/display/xenfb.c
+index 22822fecea..5e6c691779 100644
+--- a/hw/display/xenfb.c
++++ b/hw/display/xenfb.c
+@@ -283,8 +283,7 @@ static void xenfb_mouse_event(DeviceState *dev, QemuConsole *src,
+                 scale = surface_height(surface) - 1;
+                 break;
+             default:
+-                scale = 0x8000;
+-                break;
++                abort();
+             }
+             xenfb->axis[move->axis] = move->value * scale / 0x7fff;
+         }
 -- 
-2.43.0
+2.49.0
 
 
