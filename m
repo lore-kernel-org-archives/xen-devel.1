@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85417C83F26
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 16:48:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1064248.1429971 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D844AC83F26
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 17:41:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1064316.1430008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uh9yV-0006eU-4Y; Wed, 30 Jul 2025 16:48:19 +0000
+	id 1uhAnY-0007Ar-CP; Wed, 30 Jul 2025 17:41:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1064248.1429971; Wed, 30 Jul 2025 16:48:19 +0000
+Received: by outflank-mailman (output) from mailman id 1064316.1430008; Wed, 30 Jul 2025 17:41:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uh9yV-0006eN-1m; Wed, 30 Jul 2025 16:48:19 +0000
-Received: by outflank-mailman (input) for mailman id 1064248;
- Wed, 30 Jul 2025 16:48:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BoeR=2L=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uh9yT-0006e5-Ob
- for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 16:48:17 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fb138eb7-6d64-11f0-b895-0df219b8e170;
- Wed, 30 Jul 2025 18:48:12 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b78127c5d1so5318f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Jul 2025 09:48:12 -0700 (PDT)
-Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
- [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b78b26a43asm9088514f8f.34.2025.07.30.09.48.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Jul 2025 09:48:11 -0700 (PDT)
+	id 1uhAnY-0007Ai-9T; Wed, 30 Jul 2025 17:41:04 +0000
+Received: by outflank-mailman (input) for mailman id 1064316;
+ Wed, 30 Jul 2025 17:41:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=/Z10=2L=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1uhAnW-00076c-Ez
+ for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 17:41:02 +0000
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5aba231b-6d6c-11f0-a320-13f23c93f187;
+ Wed, 30 Jul 2025 19:41:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,139 +38,389 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb138eb7-6d64-11f0-b895-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1753894092; x=1754498892; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Jp6NJonQ1lihr+a/wZepx4WPor9VA55YBBc8TStKgXU=;
-        b=X+hBxZ31KaBtnx2AJ73feFxpi56D1ltCLS5lGfKGAi1Pvbbk71TbNPVmt9WtawadgS
-         KCGMHRWk0DjmthbN/G8YJP7+JZ/mtrAam5J8p9KD4UKdmQwuxwFKOdC9DqGLoA5WzmZL
-         5ucltJvpOHSaFs3L97iOgYqcB2zhOGrwgHnD4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753894092; x=1754498892;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Jp6NJonQ1lihr+a/wZepx4WPor9VA55YBBc8TStKgXU=;
-        b=JJDNFQ8TjmvivSFZLqgbWN0ClBhEJEzc6Rt2bhmOOWG0ADzRKJRmzYWtS44Ol0XaVj
-         mz6CAd0okhUJDfFZMtP38v2YkVR27PA1f9I5Diu7n8v68gXoY88z//+y6zs5uMFF0CqU
-         ThHL1S1MPwuFQ5UA7qNuNPcDT4zmZ4XpIDu9qgqolqiMb0tVtHWGswjI75/WdCpsFuXO
-         m34SwvcIxQhBIW9WlnZx8lHSKhuawjNVHinc8K/Lvphy/D/b4SSs7ClKL/rEwZSOk66F
-         kKBYaoGCIbi8thrbtRhV9xy2AvO7Ed8srk40JaYkegl+71EsGyoxNy8Evf6Pwajv4P3W
-         5rbA==
-X-Forwarded-Encrypted: i=1; AJvYcCXPmZBRQGYUyoqEsR+Y+aoY21lRpDXSUId4K1VzueclJoAiE+CccIr6sEa/xW2W0ST8TVIeuAmvaoM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywn8wlhAqLrB4HKu4WACQz5GjzzmFdHeHhezyfiIVMUvo/hcl8u
-	UkeejukNlI70eoKPy/B305A0uVxl3+q0Hx8/vCERo98BL2E3xhL7wzI0CZrUqdPJ13A=
-X-Gm-Gg: ASbGnctjy+LYY9mAi8r6CLET3kqjEnMD5j+RWhz50aQSzeZP3scUAPA/qgDgaCnSM+7
-	vjPDp9htnnoQfvipJFLTt5QTV8mrgbzbk0HnCD3jm+oZCdGvuS/7xJwq8VwAF1F8nmPeUXqyDFu
-	jo8SoA6S0U+mgQiYKtfuxMtlu5IqR+p+vmLVCl4o0swjPiXIBXDPKJvMaWoPmUMST0C/tt3Gz0G
-	MXImooae8gmmfW5H/9e9FdQe5nMTf+4Hq8GdSq5YYCkcIO1ntabwNt40gJX28YbnmBcDi2fjXhI
-	iFne8O5xSe3I2H2HxNPhLDf3QIMdcytzmrkz0pOGgzpU/IVj+3/oksYCbnUL8oJjNQYhswaWlZi
-	I2dmQOG9KrTuWodWqNf8Zdm24vA2mHCP3MSEnc9aMyELjc4ERhLnrBfYTj3/r2XoGzA+M7LpfNV
-	X+l5w=
-X-Google-Smtp-Source: AGHT+IEcyallYDYDL7HPB/wrEw3zF0LUMoZkl1yrado9LZY66uZAQ5y/EXmao7thMaTXTKgkudfK5w==
-X-Received: by 2002:adf:a384:0:b0:3b7:9551:2b16 with SMTP id ffacd0b85a97d-3b795512dddmr2007764f8f.40.1753894092016;
-        Wed, 30 Jul 2025 09:48:12 -0700 (PDT)
-Message-ID: <4db51672-4abd-45bc-b6fa-20495e4c0314@citrix.com>
-Date: Wed, 30 Jul 2025 17:48:10 +0100
+X-Inumbo-ID: 5aba231b-6d6c-11f0-a320-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=l3unisoyd5cyfexynlziec4see.protonmail; t=1753897258; x=1754156458;
+	bh=6IoFL5uAkQfnWnRYhUejLyPar5+5hevp9Aaid6prlB8=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=YNKUUeBqQx+S+pHKYDQJe/UyGUO0PkaE9TtWBAbZkd21FwVvWVraqi+873XKVsGyy
+	 Xg51+42U4DuVsxhwuBZ/s1FwB0whJCmtNQbVgj6HexAA8LCreYwoTAlkcTgphO3L8Y
+	 IAOmsrcgjic9XE5qJl2rInRt5Yw0TaThriD2YXN54WM3Io+dSbp1lTFR7N0Bi8y3YT
+	 PIOon9JX0YCglI8/nn2jYRX2bn3sFkSs0v80+xBqYsV18zbyhQo5SvYIt808ZbOW0Z
+	 AOk/mkHsCPpPIpOBA20RHn3I2uoIU8KJKhASjISUpB5W/fSjEa1175SPQCNp5F4D8i
+	 tQVLpvIt1e7bQ==
+Date: Wed, 30 Jul 2025 17:40:54 +0000
+To: xen-devel@lists.xenproject.org
+From: dmkhn@proton.me
+Cc: alejandro.garciavallejo@amd.com, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: [PATCH v13 1/3] xen/domain: unify domain ID allocation
+Message-ID: <20250730174042.1632011-2-dmukhin@ford.com>
+In-Reply-To: <20250730174042.1632011-1-dmukhin@ford.com>
+References: <20250730174042.1632011-1-dmukhin@ford.com>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 48b423b939c28f77ac7a5cde6ee6cae6fa4fb8dc
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/vmx: Avoid pausing on HVM_PARAM_IDENT_PT in
- additional cases
-To: Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <698e46b8f986e649c661f4382c929abcc2827ec3.1753893493.git.teddy.astie@vates.tech>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <698e46b8f986e649c661f4382c929abcc2827ec3.1753893493.git.teddy.astie@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 30/07/2025 5:40 pm, Teddy Astie wrote:
-> When settings HVM_PARAM_IDENT_PT, skip domain pausing when :
-> - there is no vcpu
-> - unrestricted guest capability is used
->
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-> ---
->  xen/arch/x86/hvm/hvm.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-> index e2720daf1e..39ff1bdbe1 100644
-> --- a/xen/arch/x86/hvm/hvm.c
-> +++ b/xen/arch/x86/hvm/hvm.c
-> @@ -4286,11 +4286,13 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
->              rc = -EINVAL;
->          break;
->      case HVM_PARAM_IDENT_PT:
-> +        v = domain_vcpu(d, 0);
-> +
->          /*
->           * Only actually required for VT-x lacking unrestricted_guest
->           * capabilities.  Short circuit the pause if possible.
->           */
-> -        if ( !paging_mode_hap(d) || !cpu_has_vmx )
-> +        if ( !paging_mode_hap(d) || !cpu_has_vmx || !v || vmx_unrestricted_guest(v) )
->          {
->              d->arch.hvm.params[index] = value;
->              break;
+From: Denis Mukhin <dmukhin@ford.com>=20
 
-You cannot safely skip these.  Otherwise you break a sequence of
-migrates which passes through a machine that needs the IDENT_PT.
+Currently, there are two different domain ID allocation implementations:
 
-Although that said, it looks like it will break when passing through a
-machine running Shadow too, even though that in principle ought to work.
+  1) Sequential IDs allocation in dom0less Arm code based on max_init_domid=
+;
 
-HVM guests don't reasonably work cross vendor, and we probably should
-finally stop pretending it's an option.
+  2) Sequential IDs allocation in XEN_DOMCTL_createdomain; does not use
+     max_init_domid (both Arm and x86).
 
-~Andrew
+The domain ID allocation covers dom0 or late hwdom, predefined domains,
+post-boot domains, excluding Xen system domains (domid >=3D
+DOMID_FIRST_RESERVED).
+
+It makes sense to have a common helper code for such task across architectu=
+res
+(Arm and x86) and between dom0less / toolstack domU allocation.
+
+Note, fixing dependency on max_init_domid is out of scope of this patch.
+
+Wrap the domain ID allocation as an arch-independent function domid_alloc()=
+ in
+new common/domid.c based on the bitmap.
+
+Allocation algorithm:
+- If an explicit domain ID is provided, verify its availability and use it =
+if
+  ID is not used;
+- If DOMID_INVALID is provided, search the range [1..DOMID_FIRST_RESERVED-1=
+],
+  starting from the last used ID.
+  Implementation guarantees that two consecutive calls will never return th=
+e
+  same ID. ID#0 is reserved for the first boot domain (currently, dom0) and
+  excluded from the allocation range.
+
+Remove is_free_domid() helper as it is not needed now.
+
+No functional change intended.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+Changes since v12:
+- updated comment for domid_alloc() and commit message
+- added Alejandro's R-b
+---
+ xen/arch/arm/domain_build.c             |  7 +-
+ xen/arch/x86/setup.c                    |  7 +-
+ xen/common/Makefile                     |  1 +
+ xen/common/device-tree/dom0less-build.c | 15 ++--
+ xen/common/domain.c                     |  2 +
+ xen/common/domctl.c                     | 42 ++---------
+ xen/common/domid.c                      | 94 +++++++++++++++++++++++++
+ xen/include/xen/domain.h                |  3 +
+ 8 files changed, 124 insertions(+), 47 deletions(-)
+ create mode 100644 xen/common/domid.c
+
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 463ae4474d30..789f2b9d3ce7 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2050,6 +2050,7 @@ void __init create_dom0(void)
+         .grant_opts =3D XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
+     };
+     unsigned int flags =3D CDF_privileged | CDF_hardware;
++    domid_t domid;
+     int rc;
+=20
+     /* The vGIC for DOM0 is exactly emulating the hardware GIC */
+@@ -2074,7 +2075,11 @@ void __init create_dom0(void)
+     if ( !llc_coloring_enabled )
+         flags |=3D CDF_directmap;
+=20
+-    dom0 =3D domain_create(0, &dom0_cfg, flags);
++    domid =3D domid_alloc(0);
++    if ( domid =3D=3D DOMID_INVALID )
++        panic("Error allocating domain ID 0\n");
++
++    dom0 =3D domain_create(domid, &dom0_cfg, flags);
+     if ( IS_ERR(dom0) )
+         panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0));
+=20
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 1543dd251cc6..2ff7c28c277b 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1047,8 +1047,11 @@ static struct domain *__init create_dom0(struct boot=
+_info *bi)
+     if ( iommu_enabled )
+         dom0_cfg.flags |=3D XEN_DOMCTL_CDF_iommu;
+=20
+-    /* Create initial domain.  Not d0 for pvshim. */
+-    bd->domid =3D get_initial_domain_id();
++    /* Allocate initial domain ID.  Not d0 for pvshim. */
++    bd->domid =3D domid_alloc(get_initial_domain_id());
++    if ( bd->domid =3D=3D DOMID_INVALID )
++        panic("Error allocating domain ID %d\n", get_initial_domain_id());
++
+     d =3D domain_create(bd->domid, &dom0_cfg,
+                       pv_shim ? 0 : CDF_privileged | CDF_hardware);
+     if ( IS_ERR(d) )
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index c316957fcb36..0c7d0f5d46e1 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -11,6 +11,7 @@ obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) +=3D devic=
+e.o
+ obj-$(CONFIG_DEVICE_TREE_PARSE) +=3D device-tree/
+ obj-$(CONFIG_IOREQ_SERVER) +=3D dm.o
+ obj-y +=3D domain.o
++obj-y +=3D domid.o
+ obj-y +=3D event_2l.o
+ obj-y +=3D event_channel.o
+ obj-$(CONFIG_EVTCHN_FIFO) +=3D event_fifo.o
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
+ee/dom0less-build.c
+index 6bb038111de9..f4b6b515d2d2 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -833,6 +833,7 @@ void __init create_domUs(void)
+     {
+         struct kernel_info ki =3D KERNEL_INFO_INIT;
+         int rc =3D parse_dom0less_node(node, &ki.bd);
++        domid_t domid;
+=20
+         if ( rc =3D=3D -ENOENT )
+             continue;
+@@ -842,13 +843,13 @@ void __init create_domUs(void)
+         if ( (max_init_domid + 1) >=3D DOMID_FIRST_RESERVED )
+             panic("No more domain IDs available\n");
+=20
+-        /*
+-         * The variable max_init_domid is initialized with zero, so here i=
+t's
+-         * very important to use the pre-increment operator to call
+-         * domain_create() with a domid > 0. (domid =3D=3D 0 is reserved f=
+or Dom0)
+-         */
+-        ki.bd.d =3D domain_create(++max_init_domid,
+-                                &ki.bd.create_cfg, ki.bd.create_flags);
++        domid =3D domid_alloc(DOMID_INVALID);
++        if ( domid =3D=3D DOMID_INVALID )
++            panic("Error allocating ID for domain %s\n", dt_node_name(node=
+));
++
++        max_init_domid =3D max(max_init_domid, domid);
++
++        ki.bd.d =3D domain_create(domid, &ki.bd.create_cfg, ki.bd.create_f=
+lags);
+         if ( IS_ERR(ki.bd.d) )
+             panic("Error creating domain %s (rc =3D %ld)\n",
+                   dt_node_name(node), PTR_ERR(ki.bd.d));
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 5241a1629eeb..12fbab01cd8e 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1473,6 +1473,8 @@ void domain_destroy(struct domain *d)
+     /* Remove from the domlist/hash. */
+     domlist_remove(d);
+=20
++    domid_free(d->domain_id);
++
+     /* Schedule RCU asynchronous completion of domain destroy. */
+     call_rcu(&d->rcu, complete_domain_destroy);
+ }
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index f2a7caaf853c..5509998aa139 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -51,20 +51,6 @@ static int xenctl_bitmap_to_nodemask(nodemask_t *nodemas=
+k,
+                                    MAX_NUMNODES);
+ }
+=20
+-static inline int is_free_domid(domid_t dom)
+-{
+-    struct domain *d;
+-
+-    if ( dom >=3D DOMID_FIRST_RESERVED )
+-        return 0;
+-
+-    if ( (d =3D rcu_lock_domain_by_id(dom)) =3D=3D NULL )
+-        return 1;
+-
+-    rcu_unlock_domain(d);
+-    return 0;
+-}
+-
+ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info=
+)
+ {
+     struct vcpu *v;
+@@ -423,36 +409,18 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u=
+_domctl)
+=20
+     case XEN_DOMCTL_createdomain:
+     {
+-        domid_t        dom;
+-        static domid_t rover =3D 0;
++        domid_t domid =3D domid_alloc(op->domain);
+=20
+-        dom =3D op->domain;
+-        if ( (dom > 0) && (dom < DOMID_FIRST_RESERVED) )
++        if ( domid =3D=3D DOMID_INVALID )
+         {
+             ret =3D -EEXIST;
+-            if ( !is_free_domid(dom) )
+-                break;
+-        }
+-        else
+-        {
+-            for ( dom =3D rover + 1; dom !=3D rover; dom++ )
+-            {
+-                if ( dom =3D=3D DOMID_FIRST_RESERVED )
+-                    dom =3D 1;
+-                if ( is_free_domid(dom) )
+-                    break;
+-            }
+-
+-            ret =3D -ENOMEM;
+-            if ( dom =3D=3D rover )
+-                break;
+-
+-            rover =3D dom;
++            break;
+         }
+=20
+-        d =3D domain_create(dom, &op->u.createdomain, false);
++        d =3D domain_create(domid, &op->u.createdomain, false);
+         if ( IS_ERR(d) )
+         {
++            domid_free(domid);
+             ret =3D PTR_ERR(d);
+             d =3D NULL;
+             break;
+diff --git a/xen/common/domid.c b/xen/common/domid.c
+new file mode 100644
+index 000000000000..e727dcaf0793
+--- /dev/null
++++ b/xen/common/domid.c
+@@ -0,0 +1,94 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Domain ID allocator.
++ *
++ * Covers dom0 or late hwdom, predefined domains, post-boot domains.
++ * Excludes Xen system domains (ID >=3D DOMID_FIRST_RESERVED).
++ *
++ * Copyright 2025 Ford Motor Company
++ */
++
++#include <xen/domain.h>
++
++static DEFINE_SPINLOCK(domid_lock);
++static DECLARE_BITMAP(domid_bitmap, DOMID_FIRST_RESERVED);
++
++/*
++ * Allocate domain ID.
++ *
++ * @param domid Domain ID hint:
++ * - If an explicit domain ID is provided, verify its availability and use=
+ it
++ *   if ID is not used;
++ * - If DOMID_INVALID is provided, search [1..DOMID_FIRST_RESERVED-1] rang=
+e,
++ *   starting from the last used ID. Implementation guarantees that two
++ *   consecutive calls will never return the same ID. ID#0 is reserved for
++ *   the first boot domain (currently, dom0) and excluded from the allocat=
+ion
++ *   range.
++ * @return Valid domain ID in case of successful allocation,
++ *         DOMID_INVALID - otherwise.
++ */
++domid_t domid_alloc(domid_t domid)
++{
++    static domid_t domid_last;
++
++    spin_lock(&domid_lock);
++
++    /* Exact match. */
++    if ( domid < DOMID_FIRST_RESERVED )
++    {
++        if ( __test_and_set_bit(domid, domid_bitmap) )
++            domid =3D DOMID_INVALID;
++    }
++    /*
++     * Exhaustive search.
++     *
++     * Domain ID#0 is reserved for the first boot domain (e.g. control dom=
+ain)
++     * and excluded from allocation.
++     */
++    else
++    {
++        domid =3D find_next_zero_bit(domid_bitmap,
++                                   DOMID_FIRST_RESERVED,
++                                   domid_last + 1);
++        if ( domid =3D=3D DOMID_FIRST_RESERVED )
++            domid =3D find_next_zero_bit(domid_bitmap,
++                                       DOMID_FIRST_RESERVED,
++                                       1);
++
++        ASSERT(domid <=3D DOMID_FIRST_RESERVED);
++        if ( domid < DOMID_FIRST_RESERVED )
++        {
++            __set_bit(domid, domid_bitmap);
++            domid_last =3D domid;
++        }
++        else
++            domid =3D DOMID_INVALID;
++    }
++
++    spin_unlock(&domid_lock);
++
++    return domid;
++}
++
++void domid_free(domid_t domid)
++{
++    int rc;
++
++    ASSERT(domid <=3D DOMID_FIRST_RESERVED);
++
++    spin_lock(&domid_lock);
++    rc =3D __test_and_clear_bit(domid, domid_bitmap);
++    spin_unlock(&domid_lock);
++
++    ASSERT(rc);
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index e10baf2615fd..8aab05ae93c8 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -38,6 +38,9 @@ void arch_get_domain_info(const struct domain *d,
+=20
+ domid_t get_initial_domain_id(void);
+=20
++domid_t domid_alloc(domid_t domid);
++void domid_free(domid_t domid);
++
+ /* CDF_* constant. Internal flags for domain creation. */
+ /* Is this a privileged domain? */
+ #define CDF_privileged           (1U << 0)
+--=20
+2.34.1
+
+
 
