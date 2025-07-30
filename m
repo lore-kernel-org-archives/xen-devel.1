@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC072C87FCB
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 09:57:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1063647.1429393 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3C7C87FC9
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 09:59:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1063670.1429403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uh3YW-0006oD-OH; Wed, 30 Jul 2025 09:57:04 +0000
+	id 1uh3aL-0008Fb-9i; Wed, 30 Jul 2025 09:58:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1063647.1429393; Wed, 30 Jul 2025 09:57:04 +0000
+Received: by outflank-mailman (output) from mailman id 1063670.1429403; Wed, 30 Jul 2025 09:58:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uh3YW-0006o6-LJ; Wed, 30 Jul 2025 09:57:04 +0000
-Received: by outflank-mailman (input) for mailman id 1063647;
- Wed, 30 Jul 2025 09:57:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uh3aL-0008FU-5f; Wed, 30 Jul 2025 09:58:57 +0000
+Received: by outflank-mailman (input) for mailman id 1063670;
+ Wed, 30 Jul 2025 09:58:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=06yH=2L=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1uh3YU-0006HC-KA
- for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 09:57:02 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88f3524c-6d2b-11f0-b895-0df219b8e170;
- Wed, 30 Jul 2025 11:56:59 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-af240271376so72875266b.2
- for <xen-devel@lists.xenproject.org>; Wed, 30 Jul 2025 02:56:59 -0700 (PDT)
-Received: from lab.home
- (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
- [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af635a60e68sm722900966b.94.2025.07.30.02.56.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 02:56:58 -0700 (PDT)
+ (envelope-from <SRS0=zSpT=2L=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uh3aK-0008FJ-Gl
+ for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 09:58:56 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cdcd86c0-6d2b-11f0-a320-13f23c93f187;
+ Wed, 30 Jul 2025 11:58:55 +0200 (CEST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3b7834f2e72so2280048f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Jul 2025 02:58:55 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23fd872460fsm90568595ad.61.2025.07.30.02.58.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Jul 2025 02:58:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,453 +47,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88f3524c-6d2b-11f0-b895-0df219b8e170
+X-Inumbo-ID: cdcd86c0-6d2b-11f0-a320-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753869419; x=1754474219; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4+z3CYE1dbeyjgTEBryLMqPtKkk9053KfJf846t/qLw=;
-        b=Z0nLqQrzaJhO5OPk1E07Pz2CLQ2jyhgbrTgmp0HDOMHijFnTiBfz41D/1+FUlwrlyk
-         JkytS4crbYFlOjDLcTYNzqyMB+z9ppoUd9tO7KyN+34UrsT+ipvxirZjNOIBydyw34IP
-         By2ud1dTfjFtPZsuy4/0jI/zNhb6ap7N5PhJqGFhA7iTSGecSTegWf+aqKaRxzpZXWCJ
-         6QbpgMQtrGW1FlDorxRgQrLa+Hny5j/yTo4n8128yZYyl+P19mJFdsJbWx2Xx2sjI42Q
-         KBmd9n0ALlYpTM8TDnEKRUOae2NEn9iRWYfh93D9sZFYoSiXIbhEAT/T8nYqUylDqEhb
-         j8jA==
+        d=suse.com; s=google; t=1753869535; x=1754474335; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=OxhycTRlibZKFZJVoPz7m5fj3oXCKVmTLZ3tqEPM6Kk=;
+        b=asatKr6nxxOagAD/+Y9alf001Q5dH0nw+46IR3Kl4VHtUAcFdsJFvWxI4kzP1AM4oX
+         MU0GQCJNZUSB9LRtcPosaJNrlrMzm2NM4mOs3iFFmVChrqsQNajI1yTVrVP2Iq655z82
+         itYEYRTYlxVXDLkDBqGjlF25LuUF5YDHECEwyX7f/ixEjOrtHDOhSyraQODDh73fogQs
+         XxAv3IkhpK+30bvJ86XrKVKoJTMylVypSZI9e5ylvgYIoqwMhGHd/PjN0YCoQUA2f/wS
+         RWCtfDe9ZLaCiiIxFCz8r5rzrKGzdaZeRgO1JNLVpuWpSkxoRlv7sC4W+qdq9PS1YS7m
+         toUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753869419; x=1754474219;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4+z3CYE1dbeyjgTEBryLMqPtKkk9053KfJf846t/qLw=;
-        b=eh44JxxTSEQn7CVyIl7RyDhYHd+IQ8bsqI3NFAr8N5DjE2e2CrjsHVqr4tfBDJ1uxQ
-         k8/Y92gZhibTcxy67UzaCJKoaeYVTtRNUh+/SOhlNjWs5Apxk495SW0RsnbaoIPSgsUb
-         lcPe9/Y5cyEepgBl9B6W1WSsF1kK/sej1NAUbtlNjlatvC3y5VeLFFi+hzZc5S+2CGD0
-         ICr3a56KmV5tbZeoRZt+mIWlyXD3fTaXicBjJhtY2KN6aIUEBAXHHCuNM7HrTNYb864f
-         URnTU/Fm38qbuvWe3Su6qPZZVNJryx5Lr8fEFjx40ZLV2/8djx3sHcShSZoeWgpAiEJP
-         yIjg==
-X-Gm-Message-State: AOJu0YzQpKD2lD+etMJKlj6mu20+GjTKuWxIzLi2+OW5I4ltGdw3KfvT
-	tlzSZjcpe3RjyzyOSPhkw5CfubEqGG6ZJz8wxac7h6ofnUutlmYtDDZEfJGw3af5Wuo=
-X-Gm-Gg: ASbGncvaZM+TdEnEeYCkBsO39QyjBHbh04pdBJLPRWjsZyPVq+uXb0cU7Qnm2Jya7ZI
-	0rXiV/Sh4Mu6xqRsUrEGubOn7g+jg3iuRyC9lTqIfxxVe2ptR0ilJcJv0Z2XW0a7GSTBRORpkvf
-	+ynu7zP9qjBp6j07Mb8umfM06G9cIfkN0Ltjq5tniWTaEtuKqIG1rh2Gjhgi6UgMgBn8mIy9XT5
-	2FB/E/vkCevBlbY5TBDu1WZE7wNHsozZV24sa1jzaoGUTIZ1MNvMxk1LVmNGym1OYs56diMr/A1
-	1LjoIYNZ+UcaCfcUdmGKatgBmPpHZS1jp6aBKm0hTzKthERqfjkm3vBC/ZCZydeAruaSRdEEK97
-	Tm2pwrkLbZL56118rBkv4gKe227I81mZbL3OUhnICwKfxvX6Qz+dk9niD6lQRNIF3WBlJXw2eSl
-	Mf5LjMBjyuhT2AXdJPlDcTOxGk1WYnt6yg
-X-Google-Smtp-Source: AGHT+IEVKAmB/poFBN03oCthRMQZ54jlAT2IJIKcGbwZDfONSQJzb4bkL823yAWk8bQxcPdZfTq64g==
-X-Received: by 2002:a17:907:d7c9:b0:ae0:ba0e:ae59 with SMTP id a640c23a62f3a-af8fd7642c0mr152005566b.7.1753869418740;
-        Wed, 30 Jul 2025 02:56:58 -0700 (PDT)
-From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v4 2/3] hvmloader: fix SMBIOS table length checks
-Date: Wed, 30 Jul 2025 09:56:52 +0000
-Message-Id: <1f452cde49cd9cfa949affe6061fc628de434e18.1753869323.git.w1benny@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1753869323.git.w1benny@gmail.com>
-References: <cover.1753869323.git.w1benny@gmail.com>
+        d=1e100.net; s=20230601; t=1753869535; x=1754474335;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OxhycTRlibZKFZJVoPz7m5fj3oXCKVmTLZ3tqEPM6Kk=;
+        b=jqkwMDpG9Ecv4fbrfLC6zcoFLPGzQrTZCJ95cGFHHp4iNIm2C5ABIdXKJnbW4VpoYh
+         GlbKMiF2wB+jXNUtB0O7M3+eKIK38vzB0O9gzKktfTcBeI2wbZ37DRpjBuDsu0ahPkBs
+         MS6cKommZBOR+6nwCnhD6AuQfJBUKWyqCGgxzGbVjhu0U2rofSz//FqOBJpUzz3nxxum
+         sNB0iWWAgJ6V1/u2UY9XgZgsEpDTlhJtKjSAvzFzGUcTbhFloEaQ2fkDC4exRzvvT4BL
+         FauOWtSfBBC9O99nkHH+ivUwbo+mIINH3nAFN5ppv00vcAJ+yUaPb89QQ0MoPfjSwVKA
+         /PKw==
+X-Gm-Message-State: AOJu0Yzi7NhL9kuPHzSe4FibrXI3ET6emZrwIVW2BrX8Dnn/7/iYF6hH
+	DRjZ5ZH3+8RYsyNUAP1Zj0+XqfnFAOfRLaKQr3hMPV7wImfWZNod+4ii9vCYPwDOvw==
+X-Gm-Gg: ASbGncvnrMTuLsBy28ynYE+WErzEu3XhGld9fYEdhF0pgc1ruE2ZCf5G/DJKeNJcRlC
+	gigr3nHQMwzp1bsTqVKxGIM0i9LAEosqTITQfmsl0hUq1XUr1cnAM+ns2Rxn/yuWAzbC6YJaeZ6
+	WgGUaC/u71Hv/GnUWpDm+D8lwMxbKJ1r2s3tPOTR/JXaba+qolyukRu10cwF4CjVVhTspYNKLmi
+	g7b4ww3t/wd7UikHXIe+mn5mHQBfB+o1By8+8w7BUWHi8oj7vRFuIUUmLyBIK3wk63uiS2gcCl1
+	5RLB0f5mJWiTvx0Mh2p5Kw0xURmI+Favdqcsag1LPd3G8HG3UHj5GdNZ0MTLOzh0uJt0aUvL5+v
+	o9j6K1AnOimxAizJ6LDp/VpC7qkNrkioMKGqO9w6efUs/vNtD41uL2ZhNdiS1imTlPkiqkOGtb3
+	HVSWos0nY=
+X-Google-Smtp-Source: AGHT+IE7X8+cHISVrCGxPdSriA9cUioTEp9S4YD9iYopEcmMc/vqPZgd+4HyyHKY1GKuConH6NBUhg==
+X-Received: by 2002:a05:6000:144a:b0:3b7:871b:8cba with SMTP id ffacd0b85a97d-3b795005b77mr2192643f8f.55.1753869534809;
+        Wed, 30 Jul 2025 02:58:54 -0700 (PDT)
+Message-ID: <1eacbe00-b285-4071-8b16-d970c91af8e1@suse.com>
+Date: Wed, 30 Jul 2025 11:58:46 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86: Conditionalise init_dom0_cpu_policy()
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
+References: <20250717175825.463446-1-alejandro.garciavallejo@amd.com>
+ <aICM2hqQoloEahgD@macbook.local> <DBL1SWOYP5OP.35VTULK0U7RBL@amd.com>
+ <aINi024baOV5LQgn@macbook.local>
+ <ba1de9a2-09b1-4332-b27d-0e485d0c8ce5@apertussolutions.com>
+ <0006e9f6-49af-4aef-b680-2042fb0d5213@suse.com>
+ <DBPAN1UFFCVS.3BUNHPA38O4NU@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <DBPAN1UFFCVS.3BUNHPA38O4NU@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Petr Beneš <w1benny@gmail.com>
+On 30.07.2025 11:48, Alejandro Vallejo wrote:
+> On Wed Jul 30, 2025 at 9:48 AM CEST, Jan Beulich wrote:
+>> On 29.07.2025 23:29, Daniel P. Smith wrote:
+>>> On 7/25/25 06:56, Roger Pau Monné wrote:
+>>>> On Fri, Jul 25, 2025 at 12:02:18PM +0200, Alejandro Vallejo wrote:
+>>>>> On Wed Jul 23, 2025 at 9:18 AM CEST, Roger Pau Monné wrote:
+>>>>>> On Thu, Jul 17, 2025 at 07:58:24PM +0200, Alejandro Vallejo wrote:
+>>>>>>> Later patches will keep refactoring create_dom0()
+>>>>>>> until it can create arbitrary domains. This is one
+>>>>>>> small step in that direction.
+>>>>>>>
+>>>>>>> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+>>>>>>> ---
+>>>>>>>   xen/arch/x86/setup.c | 3 ++-
+>>>>>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>>>>>
+>>>>>>> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+>>>>>>> index c6890669b9..6943ffba79 100644
+>>>>>>> --- a/xen/arch/x86/setup.c
+>>>>>>> +++ b/xen/arch/x86/setup.c
+>>>>>>> @@ -1054,7 +1054,8 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+>>>>>>>       if ( IS_ERR(d) )
+>>>>>>>           panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(d));
+>>>>>>>   
+>>>>>>> -    init_dom0_cpuid_policy(d);
+>>>>>>> +    if ( pv_shim || d->cdf & (CDF_privileged | CDF_hardware) )
+>>>>>>
+>>>>>> You possibly want this to be:
+>>>>>>
+>>>>>> (d->cdf & (CDF_privileged | CDF_hardware)) == (CDF_privileged | CDF_hardware)
+>>>>>>
+>>>>>> To ensure the contents of dom0_cpuid_cmdline is only applied to dom0,
+>>>>>> and not to the hardware or control domains.  I assume it should be
+>>>>>> possible to pass a different set of cpuid options for the hardware vs
+>>>>>> the control domains.
+>>>>>>
+>>>>>> Thanks, Roger.
+>>>>>
+>>>>> Why only a hwdom+ctldom, surely a single hwdom should get it too.
+>>>>
+>>>> hm, not really I think: a late hardware domain would get any custom
+>>>> cpuid options from the toolstack that created it, or in the
+>>>> hyperlaunch case from the provided configuration, but not from the
+>>>> dom0-cpuid command line option I would expect.  Otherwise you have two
+>>>> different sources of cpuid options, the inheritance from dom0-cpuid,
+>>>> plus whatever is provided from the hardware domain configuration.
+>>>
+>>> Yes, this has been a sticking point for me and never got any good 
+>>> answers thus far. Should the dom0 related xen command line options only 
+>>> apply when not booting via hyperlaunch. If the answer is no, then you're 
+>>> in this area with some dom0 options that really are applicable to hwdom 
+>>> vs ctldom and vice-a-versa. Some could even be suggested to apply to 
+>>> both. And then, I don't believe there really is a consensus one which 
+>>> options apply to which domains. Over the years working on this, I have 
+>>> been an advocate that commandline adjustments allow for quicker 
+>>> troubleshooting by the user/administrator.
+> 
+>>> In the last version of the multidomain construction RFC, I am growing more
+>>> and more to advocate for my initial proposition, that dom0 options only
+>>> apply when not using  hyperlaunch.
+> 
+> I agree. It simplifies everything a ton, and it's far less confusing to know
+> ultimate settings, which in a predefined initial system definition is important.
+> 
+>>
+>> With the hyperlaunch plans, is there something that's still properly
+>> "Dom0", perhaps under certain conditions? That (and only that) is
+>> where I would see respective command line options to apply. IOW no
+>> more than one specific domain (i.e. in particular not to both hwdom
+>> and ctldom, when they're separate). In cases when respective options
+>> are entirely ignored, I think some kind of warning would want issuing.
+> 
+> The problem is that lines are blurred. A ctldtdom + hwdom + xsdom with domid0
+> is clearly a dom0. Is it still a dom0 when there's no xenstore? What about when
+> it's not privileged? What about a ctldom + hwdom + xsdom with domid3? What about
+> dom0_mem options when some domains have already been constructed and available
+> memory is less than total host memory?
 
-SMBIOS specification dictates that tables should have a minimal length.
-This commit introduces further validation for user-input SMBIOS tables.
+Well, this is what needs determining before we actually move in any (unclear)
+direction. And we need to keep in mind that people used to infer certain
+things from domain ID being 0. 
 
-As per SMBIOS Reference Specification:
-* Type 0: For version 2.3 and later implementations, the length is at least 14h
-* Type 1: 1Bh for 2.4 and later
-* Type 2: at least 08h
-* Type 3: 0Dh for version 2.1 and later
-* Type 11: 5h (+ strings)
-* Type 22: 1Ah (+ strings)
-* Type 39: a minimum of 10h
+> Also if a domain is or isn't dom0 depending on whether a certain other domain
+> exists makes things confusing. You have a DTB+commandline and get a behaviour,
+> then add a domain and you get another behaviour on the first one, even when you
+> didn't touch its configuration.
+> 
+> My general view after a while experimenting with the full series is to _not_ use
+> the dom0 command line, as Daniel mentions. The simplifying effect of not looking
+> at (e.g) dom0_mem is staggering.
 
-Notably, this also fixes previously incorrect check for chassis handle in
-smbios_type_2_init. Chassis handle is a WORD, therefore, the condition now
-correctly checks for >= 13 instead of > 13.
+Which likely would imply not to create any domain with ID 0.
 
-hvmloader currently implements version 2.4
+Jan
 
-Furthermore, this commit introduces smbios_pt_copy helper function to substitute
-previously repeating pattern of locating the struct in physical memory (via
-get_smbios_pt_struct), checking the length and copying it into SMBIOS region.
-
-Signed-off-by: Petr Beneš <w1benny@gmail.com>
----
- tools/firmware/hvmloader/smbios.c       | 179 ++++++++++++++----------
- tools/firmware/hvmloader/smbios_types.h |  32 ++---
- 2 files changed, 124 insertions(+), 87 deletions(-)
-
-diff --git a/tools/firmware/hvmloader/smbios.c b/tools/firmware/hvmloader/smbios.c
-index 6bcdcc233a..3af1b8a7ba 100644
---- a/tools/firmware/hvmloader/smbios.c
-+++ b/tools/firmware/hvmloader/smbios.c
-@@ -47,6 +47,8 @@ static void
- smbios_pt_init(void);
- static void*
- get_smbios_pt_struct(uint8_t type, uint32_t *length_out);
-+static void *
-+smbios_pt_copy(void *start, uint8_t type, uint16_t handle, size_t table_size);
- static void
- get_cpu_manufacturer(char *buf, int len);
- static int
-@@ -154,6 +156,24 @@ get_smbios_pt_struct(uint8_t type, uint32_t *length_out)
-     return NULL;
- }
- 
-+static void *
-+smbios_pt_copy(void *start, uint8_t type, uint16_t handle, size_t table_size)
-+{
-+    struct smbios_structure_header *header = start;
-+    void *pts;
-+    uint32_t length;
-+
-+    pts = get_smbios_pt_struct(type, &length);
-+    if ( pts != NULL && length >= table_size )
-+    {
-+        memcpy(start, pts, length);
-+        header->handle = handle;
-+        return start + length;
-+    }
-+
-+    return start;
-+}
-+
- static void
- get_cpu_manufacturer(char *buf, int len)
- {
-@@ -381,16 +401,17 @@ smbios_type_0_init(void *start, const char *xen_version,
-     struct smbios_type_0 *p = start;
-     static const char *smbios_release_date = __SMBIOS_DATE__;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(0, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE0;
--        return start + length;
--    }
-+    /*
-+     * Specification says Type 0 table has length of at least 18h for v2.4-3.0.
-+     */
-+
-+    BUILD_BUG_ON(sizeof(*p) != 24);
-+
-+    next = smbios_pt_copy(start, 0, SMBIOS_HANDLE_TYPE0, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -440,16 +461,14 @@ smbios_type_1_init(void *start, const char *xen_version,
-     char uuid_str[37];
-     struct smbios_type_1 *p = start;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(1, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE1;
--        return start + length;
--    }
-+    /* Specification says Type 1 table has length of 1Bh for v2.4 and later. */
-+    BUILD_BUG_ON(sizeof(*p) != 27);
-+
-+    next = smbios_pt_copy(start, 1, SMBIOS_HANDLE_TYPE1, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -498,26 +517,30 @@ smbios_type_2_init(void *start)
- {
-     struct smbios_type_2 *p = start;
-     const char *s;
--    uint8_t *ptr;
--    void *pts;
--    uint32_t length;
-+    void *next;
-     unsigned int counter = 0;
- 
--    pts = get_smbios_pt_struct(2, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE2;
-+    /*
-+     * Specification says Type 2 table has length of at least 08h,
-+     * which corresponds with the end of the "Serial Number" field.
-+     */
-+
-+    BUILD_BUG_ON(offsetof_end(struct smbios_type_2, serial_number_str) != 8);
- 
-+    next = smbios_pt_copy(start, 2, SMBIOS_HANDLE_TYPE2,
-+                          offsetof_end(struct smbios_type_3,
-+                                       serial_number_str));
-+    if ( next != start )
-+    {
-         /* Set current chassis handle if present */
--        if ( p->header.length > 13 )
-+        if ( p->header.length >= offsetof_end(struct smbios_type_2,
-+                                              chassis_handle) )
-         {
--            ptr = ((uint8_t*)start) + 11;            
--            if ( *((uint16_t*)ptr) != 0 )
--                *((uint16_t*)ptr) = SMBIOS_HANDLE_TYPE3;
-+            if ( p->chassis_handle != 0 )
-+                p->chassis_handle = SMBIOS_HANDLE_TYPE3;
-         }
- 
--        return start + length;
-+        return next;
-     }
- 
-     memset(p, 0, sizeof(*p));
-@@ -593,18 +616,21 @@ smbios_type_3_init(void *start)
- {
-     struct smbios_type_3 *p = start;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
-     uint32_t counter = 0;
- 
--    pts = get_smbios_pt_struct(3, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE3;
--        return start + length;
--    }
--    
-+    /*
-+     * Specification says Type 3 table has length of at least 0Dh (for v2.1+),
-+     * which corresponds with the end of the "Security Status" field.
-+     */
-+
-+    BUILD_BUG_ON(offsetof_end(struct smbios_type_3, security_status) != 13);
-+
-+    next = smbios_pt_copy(start, 3, SMBIOS_HANDLE_TYPE3,
-+                          offsetof(struct smbios_type_3, security_status));
-+    if ( next != start )
-+        return next;
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 3;
-@@ -656,6 +682,9 @@ smbios_type_4_init(
-     struct smbios_type_4 *p = start;
-     uint32_t eax, ebx, ecx, edx;
- 
-+    /* Specification says Type 4 table has length of 23h for v2.3+. */
-+    BUILD_BUG_ON(sizeof(*p) != 35);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 4;
-@@ -707,17 +736,15 @@ smbios_type_11_init(void *start)
-     struct smbios_type_11 *p = start;
-     char path[20];
-     const char *s;
-+    void *next;
-     int i;
--    void *pts;
--    uint32_t length;
- 
--    pts = get_smbios_pt_struct(11, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE11;
--        return start + length;
--    }
-+    /* Specification says Type 11 table has length of 05h. */
-+    BUILD_BUG_ON(sizeof(*p) != 5);
-+    
-+    next = smbios_pt_copy(start, 11, SMBIOS_HANDLE_TYPE11, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     p->header.type = 11;
-     p->header.length = sizeof(*p);
-@@ -756,6 +783,9 @@ smbios_type_16_init(void *start, uint32_t memsize, int nr_mem_devs)
- {
-     struct smbios_type_16 *p = start;
- 
-+    /* Specification says Type 16 table has length of 0Fh for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 15);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 16;
-@@ -781,6 +811,9 @@ smbios_type_17_init(void *start, uint32_t memory_size_mb, int instance)
-     char buf[16];
-     struct smbios_type_17 *p = start;
- 
-+    /* Specification says Type 17 table has length of 1Bh for v2.3-2.6. */
-+    BUILD_BUG_ON(sizeof(*p) != 27);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 17;
-@@ -816,6 +849,9 @@ smbios_type_19_init(void *start, uint32_t memory_size_mb, int instance)
- {
-     struct smbios_type_19 *p = start;
- 
-+    /* Specification says Type 19 table has length of 0Fh for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 15);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 19;
-@@ -838,6 +874,9 @@ smbios_type_20_init(void *start, uint32_t memory_size_mb, int instance)
- {
-     struct smbios_type_20 *p = start;
- 
-+    /* Specification says Type 20 table has length of 13h for v2.1-2.7. */
-+    BUILD_BUG_ON(sizeof(*p) != 19);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 20;
-@@ -865,16 +904,14 @@ smbios_type_22_init(void *start)
-     struct smbios_type_22 *p = start;
-     static const char *smbios_release_date = __SMBIOS_DATE__;
-     const char *s;
--    void *pts;
--    uint32_t length;
-+    void *next;
- 
--    pts = get_smbios_pt_struct(22, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE22;
--        return start + length;
--    }
-+    /* Specification says Type 22 table has length of 1Ah. */
-+    BUILD_BUG_ON(sizeof(*p) != 26);
-+
-+    next = smbios_pt_copy(start, 22, SMBIOS_HANDLE_TYPE22, sizeof(*p));
-+    if ( next != start )
-+        return next;
- 
-     s = xenstore_read(HVM_XS_SMBIOS_DEFAULT_BATTERY, "0");
-     if ( strncmp(s, "1", 1) != 0 )
-@@ -929,6 +966,9 @@ smbios_type_32_init(void *start)
- {
-     struct smbios_type_32 *p = start;
- 
-+    /* Specification says Type 32 table has length of at least 0Bh. */
-+    BUILD_BUG_ON(sizeof(*p) != 11);
-+
-     memset(p, 0, sizeof(*p));
- 
-     p->header.type = 32;
-@@ -946,20 +986,17 @@ smbios_type_32_init(void *start)
- static void *
- smbios_type_39_init(void *start)
- {
--    struct smbios_type_39 *p = start;
--    void *pts;
--    uint32_t length;
-+    /*
-+     * Specification says Type 39 table has length of at least 10h,
-+     * which corresponds with the end of the "Characteristics" field.
-+     *
-+     * Only present when passed in.
-+     */
- 
--    pts = get_smbios_pt_struct(39, &length);
--    if ( pts != NULL && length > 0 )
--    {
--        memcpy(start, pts, length);
--        p->header.handle = SMBIOS_HANDLE_TYPE39;
--        return start + length;
--    }
-+    BUILD_BUG_ON(offsetof_end(struct smbios_type_39, characteristics) != 16);
- 
--    /* Only present when passed in */
--    return start;
-+    return smbios_pt_copy(start, 39, SMBIOS_HANDLE_TYPE39,
-+                          offsetof_end(struct smbios_type_39, characteristics));
- }
- 
- static void *
-diff --git a/tools/firmware/hvmloader/smbios_types.h b/tools/firmware/hvmloader/smbios_types.h
-index 7c648ece71..a04d194975 100644
---- a/tools/firmware/hvmloader/smbios_types.h
-+++ b/tools/firmware/hvmloader/smbios_types.h
-@@ -90,13 +90,13 @@ struct smbios_type_2 {
-     uint8_t product_name_str;
-     uint8_t version_str;
-     uint8_t serial_number_str;
--    uint8_t asset_tag_str;
--    uint8_t feature_flags;
--    uint8_t location_in_chassis_str;
--    uint16_t chassis_handle;
--    uint8_t board_type;
--    uint8_t contained_handle_count;
--    uint16_t contained_handles[];
-+    uint8_t asset_tag_str;                  /* Optional */
-+    uint8_t feature_flags;                  /* Optional */
-+    uint8_t location_in_chassis_str;        /* Optional */
-+    uint16_t chassis_handle;                /* Optional */
-+    uint8_t board_type;                     /* Optional */
-+    uint8_t contained_handle_count;         /* Optional */
-+    uint16_t contained_handles[];           /* Optional */
- } __attribute__ ((packed));
- 
- /* System Enclosure - Contained Elements */
-@@ -118,12 +118,12 @@ struct smbios_type_3 {
-     uint8_t power_supply_state;
-     uint8_t thermal_state;
-     uint8_t security_status;
--    uint32_t oem_specific;
--    uint8_t height;
--    uint8_t number_of_power_cords;
--    uint8_t contained_element_count;
--    uint8_t contained_element_length;
--    struct smbios_contained_element contained_elements[];
-+    uint32_t oem_specific;                  /* Optional */
-+    uint8_t height;                         /* Optional */
-+    uint8_t number_of_power_cords;          /* Optional */
-+    uint8_t contained_element_count;        /* Optional */
-+    uint8_t contained_element_length;       /* Optional */
-+    struct smbios_contained_element contained_elements[]; /* Optional */
- } __attribute__ ((packed));
- 
- /* SMBIOS type 4 - Processor Information */
-@@ -252,9 +252,9 @@ struct smbios_type_39 {
-     uint8_t revision_level_str;
-     uint16_t max_capacity;
-     uint16_t characteristics;
--    uint16_t input_voltage_probe_handle;
--    uint16_t cooling_device_handle;
--    uint16_t input_current_probe_handle;
-+    uint16_t input_voltage_probe_handle;    /* Optional */
-+    uint16_t cooling_device_handle;         /* Optional */
-+    uint16_t input_current_probe_handle;    /* Optional */
- } __attribute__ ((packed));
- 
- /* SMBIOS type 127 -- End-of-table */
--- 
-2.34.1
+> There's exceptions. nmi=dom0 should be renamed to nmi=hwdom (if anything,
+> because that's exactly what it does even with late hwdom), but anything with
+> dom0_X ought to be ignored. Which implies first and foremost moving its uses
+> outside domain construction and general use.
+> 
+> All dom0_ options ought to be parsed and used from __init functions before
+> construct_dom0(), and construct_dom0 ought to depend strictly on information
+> in boot_domain + domain.
+> 
+> Only then we'll have sanity.
+> 
+> Cheers
+> Alejandro
 
 
