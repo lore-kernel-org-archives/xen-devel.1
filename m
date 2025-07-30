@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A27C87FCC
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 17:41:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1064315.1429997 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52662C83F26
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Jul 2025 17:41:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1064318.1430028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhAnV-0006x5-64; Wed, 30 Jul 2025 17:41:01 +0000
+	id 1uhAni-0007mN-QF; Wed, 30 Jul 2025 17:41:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1064315.1429997; Wed, 30 Jul 2025 17:41:01 +0000
+Received: by outflank-mailman (output) from mailman id 1064318.1430028; Wed, 30 Jul 2025 17:41:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhAnV-0006wy-3B; Wed, 30 Jul 2025 17:41:01 +0000
-Received: by outflank-mailman (input) for mailman id 1064315;
- Wed, 30 Jul 2025 17:40:59 +0000
+	id 1uhAni-0007mC-Ma; Wed, 30 Jul 2025 17:41:14 +0000
+Received: by outflank-mailman (input) for mailman id 1064318;
+ Wed, 30 Jul 2025 17:41:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/Z10=2L=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uhAnS-0006wr-Nm
- for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 17:40:59 +0000
-Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
- [79.135.106.30]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 570ba5d4-6d6c-11f0-b895-0df219b8e170;
- Wed, 30 Jul 2025 19:40:53 +0200 (CEST)
+ id 1uhAni-0006wr-2t
+ for xen-devel@lists.xenproject.org; Wed, 30 Jul 2025 17:41:14 +0000
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
+ [79.135.106.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 626abef9-6d6c-11f0-b895-0df219b8e170;
+ Wed, 30 Jul 2025 19:41:12 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 570ba5d4-6d6c-11f0-b895-0df219b8e170
+X-Inumbo-ID: 626abef9-6d6c-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=zjckxz4iybb4xcvf3zot7nep44.protonmail; t=1753897252; x=1754156452;
-	bh=sY1HbGUaF5iHT9PbgCxYWoU1NtYORKH/HLHWz6mvNio=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=lp88X7LH9+sql4KbrJzo4Nin56kZWEraIR4EhxuoGMQi+l81DeTROSlFlzj4LD3BT
-	 Fh7k/ijKzJDYD4hDYDaRFhCwyJAtUKxsZt1P8O0LQ4ML0nC1w5r848fiSLascm4Pq/
-	 fvVEPwpvPQsUXuDa+eJe2KawKEvBzxqn7yqVyUrLKAErfzpP9Jov6pXYCjmkgRk1p2
-	 rRrvxTmGK1RYCi6OsTsWDDdmetVnvB9ZtPVlVgr4XLfPza+a6OMCJYUuk/J97qhau9
-	 QXQmkaYnhOXC7zXJdQh0BHjJK6rH5rqqZEvSdzE8CxetkWyBSQFn0lAwdJNhbC5tIo
-	 sMgDvbmUa5fLA==
-Date: Wed, 30 Jul 2025 17:40:47 +0000
+	s=protonmail; t=1753897271; x=1754156471;
+	bh=cOJp9/TT9teYJtKcMJEIwPElIEvwJ0QU1V6DnZCzFaY=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=d51yxQ0Ll3qkFVm/TQABF+9jry1j4NWN6pKbOFf6gKMH1ABQyWvHW82Y5boQ3IV4N
+	 OGPR4+Lrgm8At3k6ENC+1nmbXEpHq0uZrVgefdyWRQUk/Ga3MI/K4zDSMxVBHDDbmv
+	 Styc6yJ2JVzm7iKTk8eh7ObzmTjS2YJKfgwsMiUTvvNIHg/ZK2+ARTld0Yp8Nlz//a
+	 gK9AbSaJYj+5Vn5lHHOp5XehOLxk0XSN/a6xcWQbSu03La7l1HtSRjrBHovTrx+lVn
+	 gae8t1mvRWVNsFBhSF35Tx7Q5F14XrHXgqRBKLLdR1qLIpR7VBVjbC7n0Aprrk0Go3
+	 iLjo/5WdrAS4w==
+Date: Wed, 30 Jul 2025 17:41:05 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: alejandro.garciavallejo@amd.com, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v13 0/3] xen/domain: domain ID allocation
-Message-ID: <20250730174042.1632011-1-dmukhin@ford.com>
+Subject: [PATCH v13 3/3] xen/domain: update create_dom0() messages
+Message-ID: <20250730174042.1632011-4-dmukhin@ford.com>
+In-Reply-To: <20250730174042.1632011-1-dmukhin@ford.com>
+References: <20250730174042.1632011-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 896346fd403dd97abef596d9a52e2d99010fdea5
+X-Pm-Message-ID: 8694e1a1eccb0df379012085a56cc309dee21075
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Patch 1 introduces new domid_{alloc,free} calls.
-Patch 2 introduces some basic testing for domain ID allocator.
-Patch 3 adjusts create_dom0() messages (use %pd).
+From: Denis Mukhin <dmukhin@ford.com>=20
 
-Link to v12: https://lore.kernel.org/xen-devel/20250730033414.1614441-1-dmu=
-khin@ford.com/
-Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1=
-957695581
+Use %pd for domain identification in error/panic messages in create_dom0().
 
-Denis Mukhin (3):
-  xen/domain: unify domain ID allocation
-  tools/tests: introduce unit tests for domain ID allocator
-  xen/domain: update create_dom0() messages
+No functional change.
 
- tools/tests/Makefile                    |   2 +-
- tools/tests/domid/.gitignore            |   2 +
- tools/tests/domid/Makefile              |  48 +++++++++
- tools/tests/domid/include/xen/domain.h  | 126 ++++++++++++++++++++++++
- tools/tests/domid/test-domid.c          |  78 +++++++++++++++
- xen/arch/arm/domain_build.c             |  13 ++-
- xen/arch/x86/setup.c                    |  11 ++-
- xen/common/Makefile                     |   1 +
- xen/common/device-tree/dom0less-build.c |  15 +--
- xen/common/domain.c                     |   2 +
- xen/common/domctl.c                     |  42 +-------
- xen/common/domid.c                      |  94 ++++++++++++++++++
- xen/include/xen/domain.h                |   3 +
- 13 files changed, 384 insertions(+), 53 deletions(-)
- create mode 100644 tools/tests/domid/.gitignore
- create mode 100644 tools/tests/domid/Makefile
- create mode 100644 tools/tests/domid/include/xen/domain.h
- create mode 100644 tools/tests/domid/test-domid.c
- create mode 100644 xen/common/domid.c
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes since v12:
+- n/a
+---
+ xen/arch/arm/domain_build.c | 6 +++---
+ xen/arch/x86/setup.c        | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 789f2b9d3ce7..02a15d160962 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2084,14 +2084,14 @@ void __init create_dom0(void)
+         panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0));
+=20
+     if ( llc_coloring_enabled && (rc =3D dom0_set_llc_colors(dom0)) )
+-        panic("Error initializing LLC coloring for domain 0 (rc =3D %d)\n"=
+, rc);
++        panic("Error initializing LLC coloring for %pd (rc =3D %d)\n", dom=
+0, rc);
+=20
+     if ( vcpu_create(dom0, 0) =3D=3D NULL )
+-        panic("Error creating domain 0 vcpu0\n");
++        panic("Error creating %pdv0\n", dom0);
+=20
+     rc =3D construct_dom0(dom0);
+     if ( rc )
+-        panic("Could not set up DOM0 guest OS (rc =3D %d)\n", rc);
++        panic("Could not set up %pd guest OS (rc =3D %d)\n", dom0, rc);
+=20
+     set_xs_domain(dom0);
+ }
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 2ff7c28c277b..a740c6f60c63 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1084,7 +1084,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
+=20
+         if ( (strlen(acpi_param) =3D=3D 0) && acpi_disabled )
+         {
+-            printk("ACPI is disabled, notifying Domain 0 (acpi=3Doff)\n");
++            printk("ACPI is disabled, notifying %pd (acpi=3Doff)\n", d);
+             safe_strcpy(acpi_param, "off");
+         }
+=20
+@@ -1099,7 +1099,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
+=20
+     bd->d =3D d;
+     if ( construct_dom0(bd) !=3D 0 )
+-        panic("Could not construct domain 0\n");
++        panic("Could not construct %pd\n", d);
+=20
+     bd->cmdline =3D NULL;
+     xfree(cmdline);
 --=20
 2.34.1
 
