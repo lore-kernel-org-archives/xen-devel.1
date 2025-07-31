@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FAE0C87FCA
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065867.1431202 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC28C87FCA
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065866.1431196 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfv-0001O4-5Q; Thu, 31 Jul 2025 15:58:35 +0000
+	id 1uhVfu-0001JJ-PI; Thu, 31 Jul 2025 15:58:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065867.1431202; Thu, 31 Jul 2025 15:58:35 +0000
+Received: by outflank-mailman (output) from mailman id 1065866.1431196; Thu, 31 Jul 2025 15:58:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfu-0001NV-VJ; Thu, 31 Jul 2025 15:58:34 +0000
-Received: by outflank-mailman (input) for mailman id 1065867;
- Thu, 31 Jul 2025 15:58:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uhVfu-0001I2-LK; Thu, 31 Jul 2025 15:58:34 +0000
+Received: by outflank-mailman (input) for mailman id 1065866;
+ Thu, 31 Jul 2025 15:58:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVfu-0000zK-BG
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:34 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3606818c-6e27-11f0-a320-13f23c93f187;
- Thu, 31 Jul 2025 17:58:33 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-55b8bf653dfso513927e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:33 -0700 (PDT)
+ id 1uhVft-0001FB-00
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:33 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 34589bde-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:31 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-55516abe02cso1241424e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:31 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.31
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:32 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3606818c-6e27-11f0-a320-13f23c93f187
+X-Inumbo-ID: 34589bde-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977513; x=1754582313; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gl1Hk+jNRlMZzMMWZPcd3JgviGxNJ9ge4Ig02sPFSnM=;
-        b=SO7zGQ1YQEMBls2hAnykrzrCU4LP/mQSEPr44g/haVJ8x5QuF4VDGR6tjif0APtl9v
-         dq5CB8fTYuYz2ffLqAQZOCNZMJ8dUAz9zSMe30yxAc9GtQe37JXqgPnzRJcRFxCcVo2K
-         TrnEehmVwj0vNlhs+R+h0a9f7AMAc7m9rnhOfVtNpYFbinTo8lOYh1i53kCfkjAJF9oO
-         iNnqHLBwt1nNc281xw+XqAzLYlzccHcs60IpfTIBqhr6jpvWeVoZUmvU9pbadlZzeeFR
-         iRj8+7ibOTxF9ci3cWAC1R+CK+y8BELnmGeSaHpKDSsq8pKhTbJlpfSrrocHycVa/7H4
-         jPlA==
+        d=gmail.com; s=20230601; t=1753977510; x=1754582310; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7TAiMjtL3G6nfcsV7yyHthW3eByGMXA96M40EAt7DjU=;
+        b=nkxffNKeui2iGTmfNyllosdf8VeRmgQ8uqUwmqkE106QMsLFMYC0bkQfICvXJwYKwE
+         CK7mSDiC68IOhDQ5U+vlKv3GXGXxa7WrXMJ1jexioTdgbQmD/xUECXqg0Uaqv1L87wDq
+         FfgpFS+A2PZK9JYY+zptTPLnoMFRrQIlVyPN83xohz6OPW3kLAOURXRJWSgAp4yl6QTL
+         p+EUifJgcOJ/QIaQsHfhgywqPEBuVf0DvtHqz7JgGHh/o+LAAlRKrq1VYb5/Xgi//e8M
+         8zHHI6SFC6E14InOoGXSOGrMrUWEoL8IAR7inOTi23ZEBWmJg3t4vFE8Hx63SzZi6ssl
+         BpWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977513; x=1754582313;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gl1Hk+jNRlMZzMMWZPcd3JgviGxNJ9ge4Ig02sPFSnM=;
-        b=wy+F3hMpoNxA8CQ0MZtFugs2DZWWedeAk8tyjkCha6BmdACVZrd97sSXVAov3AbMyJ
-         Ze1OgMZuohZwQLINbwKzXTXXHByVWQ3zLKSZOH6KwzTaybayP56CSmosdvolEFhjF/l6
-         hD1FoCm/O2roF1edslNy1JXsJBYsYiMv2CUSjGIY/4pe4rRssh0LfHpzlTznMo0MYjyX
-         tEkWJ5RV4CGDV1W/EDOOS+CwDK9PFA41heNbAUWb+NWwMFeaFtDKTjOXquifAiWfJJvu
-         o+OOtZxjcDx5W0f4DeJXrobfouok3sM2CFibcIvuuswCX/NnAVIZTMqW8ZA+hsfOI8sM
-         w2GA==
-X-Gm-Message-State: AOJu0Yzu19bIdF5XXXMSQFa45T33rvVEwR8XnwJ0jbkC6anboVt5h4md
-	9TOI8qmli7gkzOn7dvhucmnV2KqLpbkegqo/Fw85nFJEclrsrtbHth09xDmlOg==
-X-Gm-Gg: ASbGnct+3WXCfVUOx64GNDFYByVSbPVe2TqWjMB6V3oljCJhMR/ViTBs5pDOMJv/j9D
-	Zc0uqIKkmF8tdDVnnyjme0hW9bSLf87wdE7n2lVKB9kSjhV6YVv9b3g5iPRU7Qr0+VepV/pwbwm
-	eBFCOysiXaRW8rAOk+f1BmF5AQ3pX9yFehLa+hUdyNKRR7hJci/bS2dZrluUnSVvjEBLUa76B3+
-	I42Oqs9GftsTLB+WqsL0X1l9KDQY9WTaA1lZ5iOoirYe2h/hOj5TOUnakkOVJMa60anRjdyqeXG
-	WzbDO9FhCs33JULLXUbtMDz3kMeA7vvbHVQgIFV+lV7fn/h+zMzK8Ckx+KW7wOTJiPd+DErz8Gw
-	KZkQZEaFZZO0WQH7qyafCniV2m9aU7kKo27lk3cVwM1/cvlylubLTlTD0NeC9+3IygiErmicy
-X-Google-Smtp-Source: AGHT+IE0Fc3QUbhAdd8idvdotZ5yCFEp8zJuYhTWhOvWRzqB3iUQNwMHtAj0W+LSopnzVDwN9CCORA==
-X-Received: by 2002:a05:6512:63c9:10b0:55a:271e:9659 with SMTP id 2adb3069b0e04-55b7c085e8dmr1935607e87.27.1753977512819;
-        Thu, 31 Jul 2025 08:58:32 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1753977510; x=1754582310;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7TAiMjtL3G6nfcsV7yyHthW3eByGMXA96M40EAt7DjU=;
+        b=bSdpVUMABwUT69iTFkN06LS5I95FpK8ClgnAwiW5RTgNxh1Vp8MQ+nqPRdFGbH4ZWc
+         PkvJbqkhV5CrAz5aERvPGYxaDCNj+rsIACQZ00DldC4GT74y5lo2Z2GagEdS3ugjgycU
+         xHa2mOBvugnaEAHAi7eSrnDVh+MEL3cy2jhXBMEoyLzosF/r8EqCzjuxEd9H/Vo2enwh
+         JpsQ97HywSqIJXJCXMrn3mJc26Y3WBNg4d2K334pooKuzmkaW7YvILyuYiXp9WPfgZh/
+         7BFbn29c7LtFy4wNAXLNoPCE8UEoXHG0i3WcLqfrTrSoP08mv8elw9oiZY5P29ZrSbKR
+         ZovQ==
+X-Gm-Message-State: AOJu0YylMfGoXitQK6dKPhfTZHvQteCcbLpSPGYIG/suJXPU64o8WyDI
+	8bTuXgoMQRhbWaDYplLZS3+4LRHt2KzOKAhL4bviBssBUrzfi7OvGuAc27hn0g==
+X-Gm-Gg: ASbGnctKEhTeYqur6++ukEhNj20L5ZKseX/P0wztRdhv1TpZvEEdsmKXWOi15w2Bt3E
+	f6FQe4ET683+gTu5JTkHGhy8i3BMaHDv8dA3ILFdGwERzIJtGORaJNcAHWTCU3l+GqI5YiRtCUb
+	BlZ7/63NcRG6uS+4djUpzuAKAYZFZqSnF2KXEGJNUwan9tKkUNBp+ZjTiuuo3CdKaGSlmyzwX56
+	czAweaFIGvhd+pSiq0lwP1Rw8PX4lc3+P5h4kObJf16mKRpNs7jkJnp7iy6yqnjGYgRBlw108Sa
+	CX9PbPb1jKWrQOxhYXisG4H/KMVBuMP0RsS7C2RtoNXJsFwz26h6BmHBMxDLU2pmczwVCeCAo19
+	hZTCl9pGE/rwVWkPg3XuweQjLgg8u3TQq3nGJ1jMHgEs46pK3XJ3NalXHpxJ2cg==
+X-Google-Smtp-Source: AGHT+IHBHM0LLm/yvw7+ReYt6vvrzjx+bDed083If97oiTI5HZNmZYT3lNdun4Vtkp/NFwyndD0phQ==
+X-Received: by 2002:a05:6512:6d5:b0:55b:8308:f949 with SMTP id 2adb3069b0e04-55b88c80c3bmr811512e87.15.1753977509898;
+        Thu, 31 Jul 2025 08:58:29 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -95,83 +94,109 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 02/20] xen/riscv: introduce sbi_remote_hfence_gvma_vmid()
-Date: Thu, 31 Jul 2025 17:58:01 +0200
-Message-ID: <de83ed75b0d7109d007389ec4809320c59c10bf7.1753973161.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 00/20] xen/riscv: introduce p2m functionality
+Date: Thu, 31 Jul 2025 17:57:59 +0200
+Message-ID: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
-References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It instructs the remote harts to execute one or more HFENCE.GVMA instructions
-by making an SBI call, covering the range of guest physical addresses between
-start_addr and start_addr + size only for the given VMID.
+In this patch series are introduced necessary functions to build and manage
+RISC-V guest page tables and MMIO/RAM mappings.
 
-The remote fence operation applies to the entire address space if either:
-  - start_addr and size are both 0, or
-  - size is equal to 2^XLEN-1.
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
- - Drop ASSERT() in sbi_remote_hfence_gvma_vmid() as failure will happen anyway if
-   rfence isn't initialized.
- - Drop "This function call is only valid for harts implementing hypervisor
-   extension." from the commit message and the comment above the declaration
-   of sbi_remote_hfence_gvma_vmid().
- - Use proper FID for sbi_remote_hfence_gvma_vmid().
+ - Introduce metadata table to store P2M types.
+ - Use x86's way to allocate VMID.
+ - Abstract Arm-specific p2m type name for device MMIO mappings.
+ - All other updates please look at specific patch.
 ---
 Changes in V2:
- - New patch.
+ - Merged to staging:
+   - [PATCH v1 1/6] xen/riscv: add inclusion of xen/bitops.h to asm/cmpxchg.h
+ - New patches:
+   - xen/riscv: implement sbi_remote_hfence_gvma{_vmid}().
+ - Split patch "xen/riscv: implement p2m mapping functionality" into smaller
+   one patches:
+   - xen/riscv: introduce page_set_xenheap_gfn()
+   - xen/riscv: implement guest_physmap_add_entry() for mapping GFNs to MFNs
+   - xen/riscv: implement p2m_set_entry() and __p2m_set_entry()
+   - xen/riscv: Implement p2m_free_entry() and related helpers
+   - xen/riscv: Implement superpage splitting for p2m mappings
+   - xen/riscv: implement p2m_next_level()
+   - xen/riscv: Implement p2m_entry_from_mfn() and support PBMT configuration
+ - Move root p2m table allocation to separate patch:
+   xen/riscv: add root page table allocation
+ - Drop dependency of this patch series from the patch witn an introduction of
+   SvPBMT as it was merged.
+ - Patch "[PATCH v1 4/6] xen/riscv: define pt_t and pt_walk_t structures" was
+   renamed to xen/riscv: introduce pte_{set,get}_mfn() as after dropping of
+   bitfields for PTE structure, this patch introduce only pte_{set,get}_mfn().
+ - Rename "xen/riscv: define pt_t and pt_walk_t structures" to
+   "xen/riscv: introduce pte_{set,get}_mfn()" as pt_t and pt_walk_t were
+   dropped.
+ - Introduce guest domain's VMID allocation and manegement.
+ - Add patches necessary to implement p2m lookup:
+   - xen/riscv: implement mfn_valid() and page reference, ownership handling helpers
+   - xen/riscv: add support of page lookup by GFN
+ - Re-sort patch series.
+ - All other changes are patch-specific. Please check them.
 ---
- xen/arch/riscv/include/asm/sbi.h | 13 +++++++++++++
- xen/arch/riscv/sbi.c             |  7 +++++++
- 2 files changed, 20 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index 0277aab747..10930dea93 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -108,6 +108,19 @@ int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
- int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
-                            size_t size);
- 
-+/*
-+ * Instruct the remote harts to execute one or more HFENCE.GVMA instructions,
-+ * covering the range of guest physical addresses between start_addr and
-+ * start_addr + size only for the given VMID.
-+ *
-+ * @cpu_mask a cpu mask containing all the target CPUs (in Xen space).
-+ * @param start virtual address start
-+ * @param size virtual address range size
-+ * @param vmid virtual machine id
-+ */
-+int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
-+                                size_t size, unsigned long vmid);
-+
- /*
-  * Initialize SBI library
-  *
-diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
-index 1809f614c5..425dce44c6 100644
---- a/xen/arch/riscv/sbi.c
-+++ b/xen/arch/riscv/sbi.c
-@@ -265,6 +265,13 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
-                       cpu_mask, start, size, 0, 0);
- }
- 
-+int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
-+                                size_t size, unsigned long vmid)
-+{
-+    return sbi_rfence(SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA_VMID,
-+                      cpu_mask, start, size, vmid, 0);
-+}
-+
- /* This function must always succeed. */
- #define sbi_get_spec_version()  \
-     sbi_ext_base_func(SBI_EXT_BASE_GET_SPEC_VERSION)
+Oleksii Kurochko (20):
+  xen/riscv: implement sbi_remote_hfence_gvma()
+  xen/riscv: introduce sbi_remote_hfence_gvma_vmid()
+  xen/riscv: introduce VMID allocation and manegement
+  xen/riscv: introduce things necessary for p2m initialization
+  xen/riscv: construct the P2M pages pool for guests
+  xen/riscv: add root page table allocation
+  xen/riscv: introduce pte_{set,get}_mfn()
+  xen/riscv: add new p2m types and helper macros for type classification
+  xen/dom0less: abstract Arm-specific p2m type name for device MMIO
+    mappings
+  xen/riscv: introduce page_{get,set}_xenheap_gfn()
+  xen/riscv: implement function to map memory in guest p2m
+  xen/riscv: implement p2m_set_range()
+  xen/riscv: Implement p2m_free_subtree() and related helpers
+  xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration
+  xen/riscv: implement p2m_next_level()
+  xen/riscv: Implement superpage splitting for p2m mappings
+  xen/riscv: implement put_page()
+  xen/riscv: implement mfn_valid() and page reference, ownership
+    handling helpers
+  xen/riscv: add support of page lookup by GFN
+  xen/riscv: introduce metadata table to store P2M type
+
+ xen/arch/arm/include/asm/p2m.h              |    2 +
+ xen/arch/riscv/Makefile                     |    3 +
+ xen/arch/riscv/include/asm/Makefile         |    1 -
+ xen/arch/riscv/include/asm/domain.h         |   23 +
+ xen/arch/riscv/include/asm/flushtlb.h       |    5 +
+ xen/arch/riscv/include/asm/mm.h             |   72 +-
+ xen/arch/riscv/include/asm/p2m.h            |  145 ++-
+ xen/arch/riscv/include/asm/page.h           |   38 +
+ xen/arch/riscv/include/asm/paging.h         |   19 +
+ xen/arch/riscv/include/asm/riscv_encoding.h |    6 +
+ xen/arch/riscv/include/asm/sbi.h            |   32 +
+ xen/arch/riscv/include/asm/vmid.h           |    8 +
+ xen/arch/riscv/mm.c                         |   73 +-
+ xen/arch/riscv/p2m.c                        | 1107 +++++++++++++++++++
+ xen/arch/riscv/paging.c                     |  112 ++
+ xen/arch/riscv/sbi.c                        |   14 +
+ xen/arch/riscv/setup.c                      |    3 +
+ xen/arch/riscv/vmid.c                       |  165 +++
+ xen/common/device-tree/dom0less-build.c     |    2 +-
+ 19 files changed, 1809 insertions(+), 21 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/paging.h
+ create mode 100644 xen/arch/riscv/include/asm/vmid.h
+ create mode 100644 xen/arch/riscv/p2m.c
+ create mode 100644 xen/arch/riscv/paging.c
+ create mode 100644 xen/arch/riscv/vmid.c
+
 -- 
 2.50.1
 
