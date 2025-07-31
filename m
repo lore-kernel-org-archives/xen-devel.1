@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C3AC87FCA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3CCBC87FD3
 	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 19:22:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1066274.1431516 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1066270.1431491 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhYqv-0008FB-H4; Thu, 31 Jul 2025 19:22:09 +0000
+	id 1uhYqj-0007MJ-13; Thu, 31 Jul 2025 19:21:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1066274.1431516; Thu, 31 Jul 2025 19:22:09 +0000
+Received: by outflank-mailman (output) from mailman id 1066270.1431491; Thu, 31 Jul 2025 19:21:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhYqv-0008Ey-Do; Thu, 31 Jul 2025 19:22:09 +0000
-Received: by outflank-mailman (input) for mailman id 1066274;
- Thu, 31 Jul 2025 19:22:08 +0000
+	id 1uhYqi-0007Lu-SX; Thu, 31 Jul 2025 19:21:56 +0000
+Received: by outflank-mailman (input) for mailman id 1066270;
+ Thu, 31 Jul 2025 19:21:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hI6J=2M=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uhYqu-00075q-5l
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 19:22:08 +0000
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
- [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4bf5530-6e43-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 21:22:05 +0200 (CEST)
+ id 1uhYqi-00075q-BE
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 19:21:56 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9de4c976-6e43-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 21:21:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,167 +38,477 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4bf5530-6e43-11f0-b895-0df219b8e170
+X-Inumbo-ID: 9de4c976-6e43-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1753989724; x=1754248924;
-	bh=8lIklxnXt50wHs0x1dEjXiRXbOxyK6NJO48hlbUQUkk=;
+	s=protonmail; t=1753989712; x=1754248912;
+	bh=RofTAqx6DA05it2Is/MWz7hdNjwVfG94qAy8NAXtwG4=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=WgG0BaCpD8rgLHZGAH3pCnKsFqn+N+AVSk84RxU0YLDpbnqq5zTx78ChB211d+ob1
-	 +j9FYbqZfLaWfeqmwVdZm1/k19KLSK6c+MXdroUph7PhVCUJDd9G2LguNQX4QHahAy
-	 1z544+9g92UnIVMMX9Jie8UuirkTMfJsuzFKnF4Ha8xZoJbNcj4xMjfVeRXGpV75FQ
-	 /xs/to2lVZk95MekF8bFZSooOmP6YbvHV8tduKjbgK85TxZjI+oQimC2utLrbK3gNg
-	 XfN2csfX5+cIbM5E0pRw5KeduZUdpJB4whysWKbrhnqgbwsHf8jefxQkXYuG8Ja0sK
-	 YXMmhFBtHGDgg==
-Date: Thu, 31 Jul 2025 19:22:01 +0000
+	b=LiO9sHdwUdD6EI56L07AWDX346nxohT5de3aFC6AnwsnQUVbTsxBfoBjshrWxlLks
+	 MgQLt9uhyung0COeyq05sU9ncBQRNdbk917r8v5nexqguaUPtybfYA/pubF2D6WAxH
+	 TW+uAi+nl2zZuYw8HoZVaGb0um927/d6yjgb/G9XX9pbPvkLQOqXNdsf88Ho6MKHyy
+	 GzTC1RSZUQU5PRId4YMbGSTLb3SbIpyVU/3oBQHbetHyd16x7xWihuLF2NBqbmDNhf
+	 tWuZpnrfT0LLezpZdYJrrqLalB7e6IBcKZ/uBOxiQKxdJSa4xT+xuQqIonuvqWax+0
+	 Q9a8zw9FtiuEg==
+Date: Thu, 31 Jul 2025 19:21:49 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v4 4/8] xen/8250-uart: update definitions
-Message-ID: <20250731192130.3948419-5-dmukhin@ford.com>
+Subject: [PATCH v4 2/8] emul/vuart: introduce framework for UART emulators
+Message-ID: <20250731192130.3948419-3-dmukhin@ford.com>
 In-Reply-To: <20250731192130.3948419-1-dmukhin@ford.com>
 References: <20250731192130.3948419-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 0838d986e3229c7a6454a8177cb5be715c3e6fae
+X-Pm-Message-ID: a14a82b751a911ec68a2610c80fb618fae50aded
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>=20
 
-Added missing definitions needed for NS16550 UART emulator.
+Introduce a driver framework to abstract UART emulators in the hypervisor.
 
-Newly introduced MSR definitions re-used in the existing ns16550 driver.
+That allows for architecture-independent handling of virtual UARTs in the
+console driver and simplifies enabling new UART emulators.
 
-Also, corrected FCR DMA definition bit#3 (0x08) as per:
-  https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
-See "7.7.2 FIFO Control Register (FCR)".
+The framework is built under CONFIG_HAS_VUART, which will be automatically
+enabled once the user enables any UART emulator.
+
+Current implementation supports maximum of one vUART of each kind per domai=
+n.
+
+Use new domain_has_vuart() in the console driver code to check whether to
+forward console input to the domain using vUART.
+
+Note: existing vUARTs are deliberately *not* hooked to the new framework to
+minimize the scope of the patch: vpl011 (i.e. SBSA) emulator and "vuart" (i=
+.e.
+minimalistic MMIO-mapped dtuart for hwdoms on Arm) are kept unmodified.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v3:
-- feedback addressed
-- made use of new UART_MCR_XXX bits in ns16550 driver
-- Link to v3: https://lore.kernel.org/xen-devel/20250103-vuart-ns8250-v3-v1=
--19-c5d36b31d66c@ford.com/
+- new patch
+- original patch from ML: https://lore.kernel.org/xen-devel/20250624035443.=
+344099-16-dmukhin@ford.com/
 ---
- xen/drivers/char/ns16550.c  |  6 ++---
- xen/include/xen/8250-uart.h | 50 ++++++++++++++++++++++++++++++-------
- 2 files changed, 44 insertions(+), 12 deletions(-)
+ xen/arch/arm/xen.lds.S         |   1 +
+ xen/arch/ppc/xen.lds.S         |   1 +
+ xen/arch/riscv/xen.lds.S       |   1 +
+ xen/arch/x86/xen.lds.S         |   1 +
+ xen/common/Kconfig             |   2 +
+ xen/common/Makefile            |   1 +
+ xen/common/emul/Kconfig        |   6 ++
+ xen/common/emul/Makefile       |   1 +
+ xen/common/emul/vuart/Kconfig  |   6 ++
+ xen/common/emul/vuart/Makefile |   1 +
+ xen/common/emul/vuart/vuart.c  | 112 +++++++++++++++++++++++++++++++++
+ xen/common/keyhandler.c        |   3 +
+ xen/drivers/char/console.c     |   4 ++
+ xen/include/xen/vuart.h        |  84 +++++++++++++++++++++++++
+ xen/include/xen/xen.lds.h      |  10 +++
+ 15 files changed, 234 insertions(+)
+ create mode 100644 xen/common/emul/Kconfig
+ create mode 100644 xen/common/emul/Makefile
+ create mode 100644 xen/common/emul/vuart/Kconfig
+ create mode 100644 xen/common/emul/vuart/Makefile
+ create mode 100644 xen/common/emul/vuart/vuart.c
+ create mode 100644 xen/include/xen/vuart.h
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index df7fff7f81df..a899711e2a8b 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -739,9 +739,9 @@ static int __init check_existence(struct ns16550 *uart)
-      * Check to see if a UART is really there.
-      * Use loopback test mode.
-      */
--    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | 0x0A);
--    status =3D ns_read_reg(uart, UART_MSR) & 0xF0;
--    return (status =3D=3D 0x90);
-+    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | UART_MCR_RTS | UART_MCR_O=
-UT2);
-+    status =3D ns_read_reg(uart, UART_MSR) & UART_MSR_STATUS;
-+    return (status =3D=3D (UART_MSR_CTS | UART_MSR_DCD));
- }
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index 9f30c3a13ed1..bdba7eaa4f65 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -58,6 +58,7 @@ SECTIONS
+        *(.rodata)
+        *(.rodata.*)
+        VPCI_ARRAY
++       VUART_ARRAY
+        *(.data.rel.ro)
+        *(.data.rel.ro.*)
 =20
- #ifdef CONFIG_HAS_PCI
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c13..bc11cdc376c9 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -32,6 +32,7 @@
- #define UART_MCR          0x04    /* Modem control        */
- #define UART_LSR          0x05    /* line status          */
- #define UART_MSR          0x06    /* Modem status         */
-+#define UART_SCR          0x07    /* Scratch pad          */
- #define UART_USR          0x1f    /* Status register (DW) */
- #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=3D1) */
- #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=3D1) */
-@@ -42,6 +43,8 @@
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_MASK \
-+    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+index 1de0b77fc6b9..f9d4e5b0dcd8 100644
+--- a/xen/arch/ppc/xen.lds.S
++++ b/xen/arch/ppc/xen.lds.S
+@@ -52,6 +52,7 @@ SECTIONS
+         *(.rodata)
+         *(.rodata.*)
+         VPCI_ARRAY
++        VUART_ARRAY
+         *(.data.rel.ro)
+         *(.data.rel.ro.*)
 =20
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
-@@ -51,12 +54,19 @@
- #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
- #define UART_IIR_MSI      0x00    /*  - MODEM status      */
- #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
-+#define UART_IIR_FE       0xc0    /* FIFO enabled (2 bits) */
+diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
+index edcadff90bfe..59dcaa5fef9a 100644
+--- a/xen/arch/riscv/xen.lds.S
++++ b/xen/arch/riscv/xen.lds.S
+@@ -47,6 +47,7 @@ SECTIONS
+         *(.rodata)
+         *(.rodata.*)
+         VPCI_ARRAY
++        VUART_ARRAY
+         *(.data.rel.ro)
+         *(.data.rel.ro.*)
 =20
- /* FIFO Control Register */
--#define UART_FCR_ENABLE   0x01    /* enable FIFO          */
--#define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
--#define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
--#define UART_FCR_DMA      0x10    /* enter DMA mode       */
-+#define UART_FCR_ENABLE     BIT(0, U)   /* enable FIFO          */
-+#define UART_FCR_CLRX       BIT(1, U)   /* clear Rx FIFO        */
-+#define UART_FCR_CLTX       BIT(2, U)   /* clear Tx FIFO        */
-+#define UART_FCR_DMA        BIT(3, U)   /* enter DMA mode       */
-+#define UART_FCR_RESERVED0  BIT(4, U)   /* reserved; always 0   */
-+#define UART_FCR_RESERVED1  BIT(5, U)   /* reserved; always 0   */
-+#define UART_FCR_RTB0       BIT(6, U)   /* receiver trigger bit #0 */
-+#define UART_FCR_RTB1       BIT(7, U)   /* receiver trigger bit #1 */
-+#define UART_FCR_TRG_MASK   (UART_FCR_RTB0 | UART_FCR_RTB1)
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 8e9cac75b09e..43426df33092 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -136,6 +136,7 @@ SECTIONS
+        *(.rodata)
+        *(.rodata.*)
+        VPCI_ARRAY
++       VUART_ARRAY
+        *(.data.rel.ro)
+        *(.data.rel.ro.*)
+=20
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 16936418a6e6..4e0bd524dc43 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -1,6 +1,8 @@
+=20
+ menu "Common Features"
+=20
++source "common/emul/Kconfig"
 +
- #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
- #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
- #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
-@@ -96,11 +106,32 @@
- #define UART_LCR_CONF_MODE_B=090xBF=09=09/* Configuration mode B */
-=20
- /* Modem Control Register */
--#define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
--#define UART_MCR_RTS      0x02    /* Request to Send      */
--#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
--#define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
--#define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=3D1)=
- */
-+#define UART_MCR_DTR            BIT(0, U)   /* Data Terminal Ready  */
-+#define UART_MCR_RTS            BIT(1, U)   /* Request to Send      */
-+#define UART_MCR_OUT1           BIT(2, U)   /* OUT1: interrupt mask */
-+#define UART_MCR_OUT2           BIT(3, U)   /* OUT2: interrupt mask */
-+#define UART_MCR_LOOP           BIT(4, U)   /* Enable loopback test mode *=
-/
-+#define UART_MCR_RESERVED0      BIT(5, U)   /* Reserved #0 */
-+#define UART_MCR_TCRTLR         BIT(6, U)   /* Access TCR/TLR (TI16C752, E=
-FR[4]=3D1) */
-+#define UART_MCR_RESERVED1      BIT(7, U)   /* Reserved #1 */
-+#define UART_MCR_MASK \
-+    (UART_MCR_DTR | UART_MCR_RTS | \
-+     UART_MCR_OUT1 | UART_MCR_OUT2 | \
-+     UART_MCR_LOOP | UART_MCR_TCRTLR)
+ config COMPAT
+ =09bool
+ =09help
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index c316957fcb36..c0734480ee4b 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -11,6 +11,7 @@ obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) +=3D devic=
+e.o
+ obj-$(CONFIG_DEVICE_TREE_PARSE) +=3D device-tree/
+ obj-$(CONFIG_IOREQ_SERVER) +=3D dm.o
+ obj-y +=3D domain.o
++obj-y +=3D emul/
+ obj-y +=3D event_2l.o
+ obj-y +=3D event_channel.o
+ obj-$(CONFIG_EVTCHN_FIFO) +=3D event_fifo.o
+diff --git a/xen/common/emul/Kconfig b/xen/common/emul/Kconfig
+new file mode 100644
+index 000000000000..7c6764d1756b
+--- /dev/null
++++ b/xen/common/emul/Kconfig
+@@ -0,0 +1,6 @@
++menu "Domain Emulation Features"
++=09visible if EXPERT
 +
-+/* Modem Status Register */
-+#define UART_MSR_DCTS           BIT(0, U)   /* Change in CTS */
-+#define UART_MSR_DDSR           BIT(1, U)   /* Change in DSR */
-+#define UART_MSR_TERI           BIT(2, U)   /* Change in RI */
-+#define UART_MSR_DDCD           BIT(3, U)   /* Change in CTS */
-+#define UART_MSR_CTS            BIT(4, U)
-+#define UART_MSR_DSR            BIT(5, U)
-+#define UART_MSR_RI             BIT(6, U)
-+#define UART_MSR_DCD            BIT(7, U)
-+#define UART_MSR_CHANGE \
-+    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
-+#define UART_MSR_STATUS \
-+    (UART_MSR_CTS | UART_MSR_DSR | UART_MSR_RI | UART_MSR_DCD)
++source "common/emul/vuart/Kconfig"
++
++endmenu
+diff --git a/xen/common/emul/Makefile b/xen/common/emul/Makefile
+new file mode 100644
+index 000000000000..670682102c13
+--- /dev/null
++++ b/xen/common/emul/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_HAS_VUART) +=3D vuart/
+diff --git a/xen/common/emul/vuart/Kconfig b/xen/common/emul/vuart/Kconfig
+new file mode 100644
+index 000000000000..02f7dd6dc1a1
+--- /dev/null
++++ b/xen/common/emul/vuart/Kconfig
+@@ -0,0 +1,6 @@
++config HAS_VUART
++=09bool
++
++menu "UART Emulation"
++
++endmenu
+diff --git a/xen/common/emul/vuart/Makefile b/xen/common/emul/vuart/Makefil=
+e
+new file mode 100644
+index 000000000000..c6400b001e85
+--- /dev/null
++++ b/xen/common/emul/vuart/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_HAS_VUART) +=3D vuart.o
+diff --git a/xen/common/emul/vuart/vuart.c b/xen/common/emul/vuart/vuart.c
+new file mode 100644
+index 000000000000..14a7f8bd8b79
+--- /dev/null
++++ b/xen/common/emul/vuart/vuart.c
+@@ -0,0 +1,112 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * UART emulator framework.
++ *
++ * Copyright 2025 Ford Motor Company
++ */
++
++#include <xen/errno.h>
++#include <xen/sched.h>
++#include <xen/vuart.h>
++
++#define VUART_ARRAY_SIZE    (__start_vuart_end - __start_vuart_array)
++
++#define for_each_vuart(vdev) \
++    for (unsigned __i =3D 0; \
++         __i < VUART_ARRAY_SIZE && (vdev =3D __start_vuart_array[__i], 1);=
+ \
++         __i++)
++
++extern const struct vuart_ops *const __start_vuart_array[];
++extern const struct vuart_ops *const __start_vuart_end[];
++
++int vuart_add_node(struct domain *d, const void *node)
++{
++    const struct vuart_ops *vdev;
++    int rc;
++
++    for_each_vuart(vdev)
++    {
++        if ( !vdev->add_node )
++            continue;
++
++        rc =3D vdev->add_node(d, node);
++        if ( rc )
++            return rc;
++    }
++
++    return 0;
++}
++
++int vuart_init(struct domain *d, struct vuart_params *params)
++{
++    const struct vuart_ops *vdev;
++    int rc;
++
++    if ( !domain_has_vuart(d) )
++        return 0;
++
++    for_each_vuart(vdev)
++    {
++        rc =3D vdev->init(d, params);
++        if ( rc )
++            return rc;
++    }
++
++    d->console.input_allowed =3D true;
++
++    return 0;
++}
++
++/*
++ * Release any resources taken by UART emulators.
++ *
++ * NB: no flags are cleared, since currently exit() is called only during
++ * domain destroy.
++ */
++void vuart_deinit(struct domain *d)
++{
++    const struct vuart_ops *vdev;
++
++    for_each_vuart(vdev)
++        vdev->deinit(d);
++}
++
++void vuart_dump_state(const struct domain *d)
++{
++    const struct vuart_ops *vdev;
++
++    for_each_vuart(vdev)
++        vdev->dump_state(d);
++}
++
++/*
++ * Put character to the first suitable emulated UART's FIFO.
++ */
++int vuart_put_rx(struct domain *d, char c)
++{
++    const struct vuart_ops *vdev =3D NULL;
++
++    ASSERT(domain_has_vuart(d));
++
++    for_each_vuart(vdev)
++        if ( vdev->put_rx )
++            break;
++
++    return vdev ? vdev->put_rx(d, c) : -ENODEV;
++}
++
++bool domain_has_vuart(const struct domain *d)
++{
++    uint32_t mask =3D 0;
++
++    return !!(d->emulation_flags & mask);
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+index eccd97c565c6..af427d25dc0d 100644
+--- a/xen/common/keyhandler.c
++++ b/xen/common/keyhandler.c
+@@ -22,6 +22,7 @@
+ #include <xen/mm.h>
+ #include <xen/watchdog.h>
+ #include <xen/init.h>
++#include <xen/vuart.h>
+ #include <asm/div64.h>
 =20
- /* Line Status Register */
- #define UART_LSR_DR       0x01    /* Data ready           */
-@@ -111,6 +142,7 @@
- #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
- #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
- #define UART_LSR_ERR      0x80    /* Error                */
-+#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
+ static unsigned char keypress_key;
+@@ -354,6 +355,8 @@ static void cf_check dump_domains(unsigned char key)
+                            v->periodic_period / 1000000);
+             }
+         }
++
++        vuart_dump_state(d);
+     }
 =20
- /* These parity settings can be ORed directly into the LCR. */
- #define UART_PARITY_NONE  (0<<3)
+     for_each_domain ( d )
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 963c7b043cd8..93254979817b 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -33,6 +33,7 @@
+ #include <asm/setup.h>
+ #include <xen/sections.h>
+ #include <xen/consoled.h>
++#include <xen/vuart.h>
+=20
+ #ifdef CONFIG_X86
+ #include <asm/guest.h>
+@@ -601,6 +602,7 @@ static void __serial_rx(char c)
+         /*
+          * Deliver input to the hardware domain buffer, unless it is
+          * already full.
++         * NB: must be the first check: hardware domain may have emulated =
+UART.
+          */
+         if ( (serial_rx_prod - serial_rx_cons) !=3D SERIAL_RX_SIZE )
+             serial_rx_ring[SERIAL_RX_MASK(serial_rx_prod++)] =3D c;
+@@ -611,6 +613,8 @@ static void __serial_rx(char c)
+          */
+         send_global_virq(VIRQ_CONSOLE);
+     }
++    else if ( domain_has_vuart(d) )
++        rc =3D vuart_put_rx(d, c);
+ #ifdef CONFIG_SBSA_VUART_CONSOLE
+     else
+         /* Deliver input to the emulated UART. */
+diff --git a/xen/include/xen/vuart.h b/xen/include/xen/vuart.h
+new file mode 100644
+index 000000000000..e843026df4b1
+--- /dev/null
++++ b/xen/include/xen/vuart.h
+@@ -0,0 +1,84 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * UART emulator framework.
++ *
++ * Copyright 2025 Ford Motor Company
++ */
++
++#ifndef XEN_VUART_H
++#define XEN_VUART_H
++
++#include <public/xen.h>
++#include <public/event_channel.h>
++#include <xen/types.h>
++
++struct vuart_params {
++    domid_t console_domid;
++    gfn_t gfn;
++    evtchn_port_t evtchn;
++};
++
++struct vuart_ops {
++    int (*add_node)(struct domain *d, const void *node);
++    int (*init)(struct domain *d, struct vuart_params *params);
++    void (*deinit)(struct domain *d);
++    void (*dump_state)(const struct domain *d);
++    int (*put_rx)(struct domain *d, char c);
++};
++
++#define VUART_REGISTER(name, x) \
++    static const struct vuart_ops *const __name##_entry \
++        __used_section(".data.vuart." #name) =3D (x);
++
++#ifdef CONFIG_HAS_VUART
++
++int vuart_add_node(struct domain *d, const void *node);
++int vuart_init(struct domain *d, struct vuart_params *params);
++void vuart_deinit(struct domain *d);
++void vuart_dump_state(const struct domain *d);
++int vuart_put_rx(struct domain *d, char c);
++bool domain_has_vuart(const struct domain *d);
++
++#else
++
++static inline int vuart_add_node(struct domain *d, const void *node)
++{
++    return 0;
++}
++
++static inline int vuart_init(struct domain *d, struct vuart_params *params=
+)
++{
++    return 0;
++}
++
++static inline void vuart_deinit(struct domain *d)
++{
++}
++
++static inline void vuart_dump_state(const struct domain *d)
++{
++}
++
++static inline int vuart_put_rx(struct domain *d, char c)
++{
++    ASSERT_UNREACHABLE();
++    return -ENODEV;
++}
++
++static inline bool domain_has_vuart(const struct domain *d)
++{
++    return false;
++}
++
++#endif /* CONFIG_HAS_VUART */
++
++#endif /* XEN_VUART_H */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+index b126dfe88792..c2da180948ca 100644
+--- a/xen/include/xen/xen.lds.h
++++ b/xen/include/xen/xen.lds.h
+@@ -194,4 +194,14 @@
+ #define VPCI_ARRAY
+ #endif
+=20
++#ifdef CONFIG_HAS_VUART
++#define VUART_ARRAY     \
++       . =3D ALIGN(POINTER_ALIGN); \
++       __start_vuart_array =3D .;  \
++       *(SORT(.data.vuart.*))    \
++       __start_vuart_end =3D .;
++#else
++#define VUART_ARRAY
++#endif
++
+ #endif /* __XEN_LDS_H__ */
 --=20
 2.34.1
 
