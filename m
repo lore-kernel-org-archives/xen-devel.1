@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4C6C87FD2
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:02:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065984.1431362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02708C87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:02:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065989.1431372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjh-0003xL-PD; Thu, 31 Jul 2025 16:02:29 +0000
+	id 1uhVjm-0004Gq-0N; Thu, 31 Jul 2025 16:02:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065984.1431362; Thu, 31 Jul 2025 16:02:29 +0000
+Received: by outflank-mailman (output) from mailman id 1065989.1431372; Thu, 31 Jul 2025 16:02:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjh-0003xE-Lk; Thu, 31 Jul 2025 16:02:29 +0000
-Received: by outflank-mailman (input) for mailman id 1065984;
- Thu, 31 Jul 2025 16:02:27 +0000
+	id 1uhVjl-0004Gj-Tg; Thu, 31 Jul 2025 16:02:33 +0000
+Received: by outflank-mailman (input) for mailman id 1065989;
+ Thu, 31 Jul 2025 16:02:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVgG-0001FB-SC
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:56 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ id 1uhVgJ-0001FB-6w
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:59 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 42c038b9-6e27-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:58:55 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-55b797ad392so1255418e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:55 -0700 (PDT)
+ id 444282a6-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:57 +0200 (CEST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-3322f5413easo8495901fa.2
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:57 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.52
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:52 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42c038b9-6e27-11f0-b895-0df219b8e170
+X-Inumbo-ID: 444282a6-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977534; x=1754582334; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753977537; x=1754582337; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jC83dOB30X6PShO+Qx3bRZ1eAKfCHiOihl7DCHI89Rg=;
-        b=DuxV2xYlMgqCAdu1QlrUMqrMaEJyw222kGBSWFdnu2kK/bBgmfJhJjKuP+9ZCtcbL4
-         mjdKDFMpinZWeeAIJ3lVsdaVNvLuRqtjGMTvP2AFFd6B5BXU0dotAv4CFwap4xeP4aXH
-         GCoyGUXgh90/3ICyXwd6g+EmO22ywThpdenqu5updfRHShuH4El/qlxra4a6sH+8Zirp
-         /4rLA7q47Ww9hIiWROqa8sakIdaV1gDJ+hnLcpVX9EGC9rVlRCPVk10QN/TJIH5eBg17
-         Wk/w9GqYld7gy755HJ9ShxCfKj2XqMNROMfV9qh5yRDJrO0KmYLfr1RhEubQv8Fz0fel
-         ekFg==
+        bh=mxvRILGbsHos6OERRrUZU2kvL3C38QZb4m5E0yQHCno=;
+        b=VEqZVkLbUl727cMdi4A+GZ9Pr+cB3NUnjnOBZVdArOOtKrFdcfCI6TjMKbNZMWIn90
+         GY7Tyaowat34eeRsdX0qPlld0iQo1T6B9hOi2g88lJS5UID9q01soAeVoYmJ8cJNNGH2
+         OaeRnt7R1hzTsQ6c5sNL/NuLX0oOxLt8y9/ZgRFa5+IV8Vc6TXvnQzcACdsUYMT9dPEe
+         +bm5G5HU7vaWBWSm8goFztHabb35j0xU+8xHHV5CNIDyRCUqBKp0+Z74WW2PdPESnhqC
+         U1dihwB0cUEp3LGT0UERIPkQrBivIfvmpVtuDGTb0opZdK7o2exdQ4VRRJBKtTVNGeuy
+         dz/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977534; x=1754582334;
+        d=1e100.net; s=20230601; t=1753977537; x=1754582337;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jC83dOB30X6PShO+Qx3bRZ1eAKfCHiOihl7DCHI89Rg=;
-        b=g0+4Q6wDDWN5nV5gWKGv+MHSpdZRDjK3frVBB9e68LfvPjNmtNKfU7bIV0OYjT5BtC
-         N0Q2rgdZtphBITG2d7gl0QbbaX0PZ3AOoEquDW/iD96AKwBX/46PPuOVWqsWschZ+aeT
-         zrQ0Q2sb9R4uyW8/CBlE57fzsZcUwQf7rREF4blV8uMRNqQz82n5LUhUSrbkEdDRNFkn
-         7jeD/EIR80EAMkb68N67tnfrg1QUSsqesRCYDQ8FC1vadh+ws1pOKafFtSTgzADo50P/
-         jdBiB6nS7d3hSD1ki4wCpFk0i/Eq323kx6D3l8EvrQHiHLYMBGlcrt4WIltaGizBA5nd
-         rAgA==
-X-Gm-Message-State: AOJu0YwsTIUteHSGJ/dHEeaH9h7uNLf0vEbiDGzpRcKpvL4cRtJXxjX/
-	YOcuIqJHWjYELkVYszy4915s7ytMLAkpHSjGdH0wEDHECTeXKKD+bvDGifBU6w==
-X-Gm-Gg: ASbGncuLNw/GH/uSoQab2sEmTEzLpL9TUye4+jx68iw1DpJkU6OdJIpCYWWvk0xynN6
-	Z9E3aAIada3nyk3x5YPevyF7kjhKwRKhrTpgA5J86WSjobqjo7bTCHdoBZiiTTeKjUTh85bO09/
-	PBGIeJxh6BNSeO87hL3DArvTij8zSIW8yNWIiJ1cwIwh6Mn9x5UZf80HKo+JzjQw+9BfKiY+Q67
-	tMv6HQg6EfcfzseVn9tawXr4BtEi7Q5OaqftNWBtigklG1Sb7qJ41NfNyrWTpMBBe0aeVG8YZGo
-	Si+lxKbeHSA26bRnrpOn2+LlZ9PEZy75HwroNqHnQO5xI5p7/Vra6emrkPQ3WM/l+m2vT44n3ND
-	w9CqL/a5h3yfq06zYsCQ0VOFPDkH63eFeCeOz+DIvq/Q5u2PHxq9t3AIN+ZqkXw==
-X-Google-Smtp-Source: AGHT+IHl86cJn6eEwaEmMR51hDkdErwFOdWHxda1zYGRfB7ptkNhfSwqjKkOryMIGf9vdN+g40172w==
-X-Received: by 2002:a05:6512:693:b0:553:da39:37d with SMTP id 2adb3069b0e04-55b7c012815mr2352425e87.1.1753977533183;
-        Thu, 31 Jul 2025 08:58:53 -0700 (PDT)
+        bh=mxvRILGbsHos6OERRrUZU2kvL3C38QZb4m5E0yQHCno=;
+        b=L21hXa0R9kP+eEKsV+VOMqd7M8KfaJF5MlJIU0FtOg7lTnQqiUoc6naLOcpf/vklAk
+         J1Md/9azvTLAoElhaUtr9JfNQYH2XuIwUS9oy0QgtUf/X+vbyYMhLS6/oPeTx4XMkd1V
+         yfRVPgdVB0Y4c29r/dbysL4a4PZBQLtJU3KokCtdtaN6VXIhkxskvSk3XNCZ4SWVpnuM
+         kZ37yMrQ81rQKHSmtI6/u9kDI3lxrjx2BXiRoID7IgkOqD69f/Z0m8Wz7givZXv3nOYU
+         EQDZV3M0Nzv9WMpFE4vpzsx/RS8WH+JahDmzq6Y0gsK/O9hVnbypXitqxstzMspX2Yi9
+         izzg==
+X-Gm-Message-State: AOJu0YyCfIOh3cbdEn40ObWCFcThLp092T5P7TK3COEZ7fl0EOJ7lAn7
+	Yxb1ZylmnTyQOP1qWBnXdu5UOc5v+V3bQLer3VmUGI3YZvI7UyB1GjnzLLBr4A==
+X-Gm-Gg: ASbGnctXTRxaN+iNm2liaWMYOQBTox5eDAsdq2K0v818W7terpP9TjiWesRxa3Xsxwg
+	fQKudj9iV0j9wZeqeeJNSH4KJc/GbRmHxOdMkmzdb1fwqKEcJGjjGFWSWpTw6OkTNdg2zZwE6pC
+	LwSjf3ZaZfIS8SOv2g8aiwEUsUnly7K8dcuYSeo+LATVZH0PzdG+xK7dKDQITaWlhQJ3fmp7QJD
+	lLtHengDftyd/p8vnioT2VSPqWCugJSNqsL75bdQZOzz9Sv9ZaS1CPcm74ymnwJttHZp4/a3NF+
+	HZWjJqtbFrfq21eWj0C6IGoMpTKejgwIFkNUQ2M5/gUzQ9HQpeKIWooJjkTWOKCm2IQ3w3dMjv7
+	JJDKJ3fKemicm3Ksdxp3X8BlpU433hXE5Shvz+NNya0Z7egmPd+Yprow93wsht6SSniLENyEd
+X-Google-Smtp-Source: AGHT+IHTzoICYIk7JdW6+FqXoo6u269QOmtq3RTyi7yaQF2Oo3cJRSEqt7PGiiVjcKxqkcCoqHxRBQ==
+X-Received: by 2002:a05:6512:32ca:b0:55a:3358:a7d3 with SMTP id 2adb3069b0e04-55b7c0b71aamr2249462e87.54.1753977536809;
+        Thu, 31 Jul 2025 08:58:56 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,205 +96,153 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 16/20] xen/riscv: Implement superpage splitting for p2m mappings
-Date: Thu, 31 Jul 2025 17:58:15 +0200
-Message-ID: <6890f77e577493194ea94834989dc0841d18eed0.1753973161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 18/20] xen/riscv: implement mfn_valid() and page reference, ownership handling helpers
+Date: Thu, 31 Jul 2025 17:58:17 +0200
+Message-ID: <fe455eac54b6c874b8ddb69e94703c9a28330a4c.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add support for down large memory mappings ("superpages") in the RISC-V
-p2m mapping so that smaller, more precise mappings ("finer-grained entries")
-can be inserted into lower levels of the page table hierarchy.
+Implement the mfn_valid() macro to verify whether a given MFN is valid by
+checking that it falls within the range [start_page, max_page).
+These bounds are initialized based on the start and end addresses of RAM.
 
-To implement that the following is done:
-- Introduce p2m_split_superpage(): Recursively shatters a superpage into
-  smaller page table entries down to the target level, preserving original
-  permissions and attributes.
-- p2m_set_entry() updated to invoke superpage splitting when inserting
-  entries at lower levels within a superpage-mapped region.
+As part of this patch, start_page is introduced and initialized with the
+PFN of the first RAM page.
+Also, initialize pdx_group_valid() by calling set_pdx_range() when
+memory banks are being mapped.
 
-This implementation is based on the ARM code, with modifications to the part
-that follows the BBM (break-before-make) approach, some parts are simplified
-as according to RISC-V spec:
-  It is permitted for multiple address-translation cache entries to co-exist
-  for the same address. This represents the fact that in a conventional
-  TLB hierarchy, it is possible for multiple entries to match a single
-  address if, for example, a page is upgraded to a superpage without first
-  clearing the original non-leaf PTE’s valid bit and executing an SFENCE.VMA
-  with rs1=x0, or if multiple TLBs exist in parallel at a given level of the
-  hierarchy. In this case, just as if an SFENCE.VMA is not executed between
-  a write to the memory-management tables and subsequent implicit read of the
-  same address: it is unpredictable whether the old non-leaf PTE or the new
-  leaf PTE is used, but the behavior is otherwise well defined.
-In contrast to the Arm architecture, where BBM is mandatory and failing to
-use it in some cases can lead to CPU instability, RISC-V guarantees
-stability, and the behavior remains safe — though unpredictable in terms of
-which translation will be used.
-
-Additionally, the page table walk logic has been adjusted, as ARM uses the
-opposite number of levels compared to RISC-V.
+Also, after providing a non-stub implementation of the mfn_valid() macro,
+the following compilation errors started to occur:
+  riscv64-linux-gnu-ld: prelink.o: in function `__next_node':
+  /build/xen/./include/xen/nodemask.h:202: undefined reference to `page_is_ram_type'
+  riscv64-linux-gnu-ld: prelink.o: in function `get_free_buddy':
+  /build/xen/common/page_alloc.c:881: undefined reference to `page_is_ram_type'
+  riscv64-linux-gnu-ld: prelink.o: in function `alloc_heap_pages':
+  /build/xen/common/page_alloc.c:1043: undefined reference to `page_get_owner_and_reference'
+  riscv64-linux-gnu-ld: /build/xen/common/page_alloc.c:1098: undefined reference to `page_is_ram_type'
+  riscv64-linux-gnu-ld: prelink.o: in function `ns16550_interrupt':
+  /build/xen/drivers/char/ns16550.c:205: undefined reference to `get_page'
+  riscv64-linux-gnu-ld: ./.xen-syms.0: hidden symbol `page_get_owner_and_reference' isn't defined
+  riscv64-linux-gnu-ld: final link failed: bad value
+  make[2]: *** [arch/riscv/Makefile:35: xen-syms] Error 1
+To resolve these errors, the following functions have also been introduced,
+based on their Arm counterparts:
+- page_get_owner_and_reference() and its variant to safely acquire a
+  reference to a page and retrieve its owner.
+- A stub for page_is_ram_type() that currently always returns 0 and asserts
+  unreachable, as RAM type checking is not yet implemented.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
- - Move     page_list_add(page, &p2m->pages) inside p2m_alloc_page().
- - Use 'unsigned long' for local vairiable 'i' in p2m_split_superpage().
- - Update the comment above if ( next_level != target ) in p2m_split_superpage().
- - Reverse cycle to iterate through page table levels in p2m_set_entry().
- - Update p2m_split_superpage() with the same changes which are done in the
-   patch "P2M: Don't try to free the existing PTE if we can't allocate a new table".
+ - Update defintion of mfn_valid().
+ - Use __ro_after_init for variable start_page.
+ - Drop ASSERT_UNREACHABLE() in page_get_owner_and_nr_reference().
+ - Update the comment inside do/while in page_get_owner_and_nr_reference().
+ - Define _PGC_static and drop "#ifdef CONFIG_STATIC_MEMORY" in put_page_nr().
+ - Initialize pdx_group_valid() by calling set_pdx_range() when memory banks are mapped.
+ - Drop page_get_owner_and_nr_reference() and implement page_get_owner_and_reference()
+   without reusing of a page_get_owner_and_nr_reference() to avoid potential dead code.
+ - Move defintion of get_page() to "xen/riscv: add support of page lookup by GFN", where
+   it is really used.
 ---
 Changes in V2:
- - New patch. It was a part of a big patch "xen/riscv: implement p2m mapping
-   functionality" which was splitted to smaller.
- - Update the commit above the cycle which creates new page table as
-   RISC-V travserse page tables in an opposite to ARM order.
- - RISC-V doesn't require BBM so there is no needed for invalidating
-   and TLB flushing before updating PTE.
+ - New patch.
 ---
- xen/arch/riscv/p2m.c | 118 ++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 117 insertions(+), 1 deletion(-)
+ xen/arch/riscv/include/asm/mm.h |  9 +++++++--
+ xen/arch/riscv/mm.c             | 35 +++++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index e04cfde8c7..e9e6818da2 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -539,6 +539,91 @@ static void p2m_free_subtree(struct p2m_domain *p2m,
-     p2m_free_page(p2m, pg);
- }
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index b914813e52..d5be328906 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -5,6 +5,7 @@
  
-+static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-+                                unsigned int level, unsigned int target,
-+                                const unsigned int *offsets)
-+{
-+    struct page_info *page;
-+    unsigned long i;
-+    pte_t pte, *table;
-+    bool rv = true;
+ #include <public/xen.h>
+ #include <xen/bug.h>
++#include <xen/compiler.h>
+ #include <xen/const.h>
+ #include <xen/mm-frame.h>
+ #include <xen/pdx.h>
+@@ -309,8 +310,12 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ #define page_get_owner(p)    (p)->v.inuse.domain
+ #define page_set_owner(p, d) ((p)->v.inuse.domain = (d))
+ 
+-/* TODO: implement */
+-#define mfn_valid(mfn) ({ (void)(mfn); 0; })
++extern unsigned long start_page;
 +
-+    /* Convenience aliases */
-+    mfn_t mfn = pte_get_mfn(*entry);
-+    unsigned int next_level = level - 1;
-+    unsigned int level_order = XEN_PT_LEVEL_ORDER(next_level);
-+
-+    /*
-+     * This should only be called with target != level and the entry is
-+     * a superpage.
-+     */
-+    ASSERT(level > target);
-+    ASSERT(pte_is_superpage(*entry, level));
-+
-+    page = p2m_alloc_page(p2m->domain);
-+    if ( !page )
-+    {
-+        /*
-+         * The caller is in charge to free the sub-tree.
-+         * As we didn't manage to allocate anything, just tell the
-+         * caller there is nothing to free by invalidating the PTE.
-+         */
-+        memset(entry, 0, sizeof(*entry));
-+        return false;
-+    }
-+
-+    table = __map_domain_page(page);
-+
-+    /*
-+     * We are either splitting a second level 1G page into 512 first level
-+     * 2M pages, or a first level 2M page into 512 zero level 4K pages.
-+     */
-+    for ( i = 0; i < XEN_PT_ENTRIES; i++ )
-+    {
-+        pte_t *new_entry = table + i;
-+
-+        /*
-+         * Use the content of the superpage entry and override
-+         * the necessary fields. So the correct permission are kept.
-+         */
-+        pte = *entry;
-+        pte_set_mfn(&pte, mfn_add(mfn, i << level_order));
-+
-+        write_pte(new_entry, pte);
-+    }
-+
-+    /*
-+     * Shatter superpage in the page to the level we want to make the
-+     * changes.
-+     * This is done outside the loop to avoid checking the offset
-+     * for every entry to know whether the entry should be shattered.
-+     */
-+    if ( next_level != target )
-+        rv = p2m_split_superpage(p2m, table + offsets[next_level],
-+                                 level - 1, target, offsets);
-+
-+    if ( p2m->clean_pte )
-+        clean_dcache_va_range(table, PAGE_SIZE);
-+
-+    /*
-+     * TODO: an inefficiency here: the caller almost certainly wants to map
-+     *       the same page again, to update the one entry that caused the
-+     *       request to shatter the page.
-+     */
-+    unmap_domain_page(table);
-+
-+    /*
-+     * Even if we failed, we should (according to the current implemetation
-+     * of a way how sub-tree is freed if p2m_split_superpage hasn't been
-+     * finished fully) install the newly allocated PTE
-+     * entry.
-+     * The caller will be in charge to free the sub-tree.
-+     */
-+    p2m_write_pte(entry, page_to_p2m_table(page), p2m->clean_pte);
-+
-+    return rv;
-+}
++#define mfn_valid(mfn) ({                                           \
++    unsigned long mfn__ = mfn_x(mfn);                               \
++    likely((mfn__ >= start_page)) && likely(__mfn_valid(mfn__));    \
++})
+ 
+ #define domain_set_alloc_bitsize(d) ((void)(d))
+ #define domain_clamp_alloc_bitsize(d, b) ((void)(d), (b))
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 3cac16f1b7..3ad2b9cf93 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -521,6 +521,8 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
+ #error setup_{directmap,frametable}_mapping() should be implemented for RV_32
+ #endif
+ 
++unsigned long __ro_after_init start_page;
 +
  /*
-  * Insert an entry in the p2m. This should be called with a mapping
-  * equal to a page/superpage.
-@@ -603,7 +688,38 @@ static int p2m_set_entry(struct p2m_domain *p2m,
-      */
-     if ( level > target )
-     {
--        panic("Shattering isn't implemented\n");
-+        /* We need to split the original page. */
-+        pte_t split_pte = *entry;
+  * Setup memory management
+  *
+@@ -570,9 +572,13 @@ void __init setup_mm(void)
+         ram_end = max(ram_end, bank_end);
+ 
+         setup_directmap_mappings(PFN_DOWN(bank_start), PFN_DOWN(bank_size));
 +
-+        ASSERT(pte_is_superpage(*entry, level));
-+
-+        if ( !p2m_split_superpage(p2m, &split_pte, level, target, offsets) )
-+        {
-+            /* Free the allocated sub-tree */
-+            p2m_free_subtree(p2m, split_pte, level);
-+
-+            rc = -ENOMEM;
-+            goto out;
-+        }
-+
-+        p2m_write_pte(entry, split_pte, p2m->clean_pte);
-+
-+        p2m->need_flush = true;
-+
-+        /* Then move to the level we want to make real changes */
-+        for ( ; level > target; level-- )
-+        {
-+            rc = p2m_next_level(p2m, true, level, &table, offsets[level]);
-+
-+            /*
-+             * The entry should be found and either be a table
-+             * or a superpage if level 0 is not targeted
-+             */
-+            ASSERT(rc == P2M_TABLE_NORMAL ||
-+                   (rc == P2M_TABLE_SUPER_PAGE && target > 0));
-+        }
-+
-+        entry = table + offsets[level];
++        set_pdx_range(paddr_to_pfn(bank_start), paddr_to_pfn(bank_end));
      }
  
-     /*
+     setup_frametable_mappings(ram_start, ram_end);
++
++    start_page = PFN_DOWN(ram_start);
+     max_page = PFN_DOWN(ram_end);
+ }
+ 
+@@ -642,3 +648,32 @@ void put_page(struct page_info *page)
+             free_domheap_page(page);
+     }
+ }
++
++int page_is_ram_type(unsigned long mfn, unsigned long mem_type)
++{
++    ASSERT_UNREACHABLE();
++
++    return 0;
++}
++
++struct domain *page_get_owner_and_reference(struct page_info *page)
++{
++    unsigned long x, y = page->count_info;
++    struct domain *owner;
++
++    do {
++        x = y;
++        /*
++         * Count ==  0: Page is not allocated, so we cannot take a reference.
++         * Count == -1: Reference count would wrap, which is invalid.
++         */
++        if ( unlikely(((x + 1) & PGC_count_mask) <= 1) )
++            return NULL;
++    }
++    while ( (y = cmpxchg(&page->count_info, x, x + 1)) != x );
++
++    owner = page_get_owner(page);
++    ASSERT(owner);
++
++    return owner;
++}
 -- 
 2.50.1
 
