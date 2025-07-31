@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D17DC87FCA
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:02:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065991.1431382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95890C87FD2
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:03:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065993.1431392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjo-0004YA-80; Thu, 31 Jul 2025 16:02:36 +0000
+	id 1uhVk6-0005Cv-Kc; Thu, 31 Jul 2025 16:02:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065991.1431382; Thu, 31 Jul 2025 16:02:36 +0000
+Received: by outflank-mailman (output) from mailman id 1065993.1431392; Thu, 31 Jul 2025 16:02:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjo-0004Y0-49; Thu, 31 Jul 2025 16:02:36 +0000
-Received: by outflank-mailman (input) for mailman id 1065991;
- Thu, 31 Jul 2025 16:02:34 +0000
+	id 1uhVk6-0005Cm-GN; Thu, 31 Jul 2025 16:02:54 +0000
+Received: by outflank-mailman (input) for mailman id 1065993;
+ Thu, 31 Jul 2025 16:02:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVgK-0001FB-Q3
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:59:00 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
+ id 1uhVg6-0001FB-CR
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:46 +0000
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [2a00:1450:4864:20::12d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 45197ecb-6e27-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:58:59 +0200 (CEST)
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-32f3ef6178bso7952881fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:59 -0700 (PDT)
+ id 3bee2649-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:43 +0200 (CEST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-55b85413019so600238e87.0
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:43 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.56
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:57 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,308 +47,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45197ecb-6e27-11f0-b895-0df219b8e170
+X-Inumbo-ID: 3bee2649-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977538; x=1754582338; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753977523; x=1754582323; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mHdZIbsvWTRsRgXgstuZ4GoswoaWyGKYiWGLJB9LKTI=;
-        b=X300Aey748fyobD/lydRA1rPHmWpCLNk/cJdO9KA/v/4kUvk4CwgcBEJ3rPpB5MPiT
-         oUVeChU6wiKa7bpvd3+S5BoeTJpn9ZFGgMCHEJPTus07N1mYckjXIzCz09FiCovnO4A8
-         jbe05iSRvq/YWhHCmAR1rdvUzaU/mKk+wFdsbjvpD1uNTmqOVkq+wn8AFJzJiub9zUfe
-         rZrgfA2rbUSW0qnbxuS4jV+jfpQwIHUI4k4Qxof3J2vsBrchuDaibkZl4aoQm8r7mQpU
-         yK5erXsN0PLXArKKvgmeUSxs1Hg8ySjWLjXEis60HmRcFIg2i773oFgYDETD4dEjkKJq
-         +yRg==
+        bh=pEOkzQdBxpbC9Okf9MXfHH5aCeAaO0EgwJT3GQlkxY4=;
+        b=YMKEAMhjuWtxzRUxAneynLhqIVice5DnDqxQLQ9PET6hiML/XzAmi46VWrMsVCvru8
+         UiNes28DBwPfJUU5HdW1EEC+JUvsuG1PzqCesS/dGJcGNSqYXp/XOcLks3pEYDR/mJRb
+         uoEK3AznXY3hQ1kiwPtzDP+lcWDQxlSdw4EJV1qnPZeAQz93nNPdmiHfuMhBCGMIIl8B
+         EEGiMvSEtU5GjB/BEdKpYsWUR7Q0OP86HZOXzwWRCGwSoXl5zYqHUEaxa5SwGsvlEdKC
+         1yFRj7wyUxWvdYZN8malKe4pFL9aIxCnorZpYGM2C57KEwsutSiVgkpLecW9vvKnTZug
+         R7XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977538; x=1754582338;
+        d=1e100.net; s=20230601; t=1753977523; x=1754582323;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mHdZIbsvWTRsRgXgstuZ4GoswoaWyGKYiWGLJB9LKTI=;
-        b=nl528yehfktMcs4ZJjQiX5hgYqAFAsmadwAygGbPTXI2SlWpNlLsA1du7xt2tT8dqa
-         OQ598nmdrW2RC65S7ATkGNLUqMM72vZ+gM4MQTSxdMP4Mu5pQ3m6lPC7V+dSG2tC3ar8
-         zpq8Ge8zWeIChSfRLkzzUNlX5I1T7FGiHru1slHK3g5SF1a8d+66NRiVYGzgSaPJDD86
-         jvZc0RjBArIqzUKov46SWQ/J4Yxz84/Lf7ErFnr8szP62xmaJM6ZFcVKXp5QmeVrQJlI
-         seYmxme9AYihLQY2HKqub5qL7/MgQTCUr97NedBPQFs7RdGbjQcULhg35kUEhyue+DsH
-         t2HQ==
-X-Gm-Message-State: AOJu0YzFCjlgJAkfIYY5pnN0Y0su53hdcMfglqAOcL0JcC10dxTEgZGN
-	teiYb8G4AgClgXIREGCRqFR65iqDOUAhRt4EjA+jLTXH6dkoNtTGe4e7RnKY+Q==
-X-Gm-Gg: ASbGnctODV1X+MiWBKG3anrycpw1NBDfpNOsI6z6Je8MljqOBynywJE7Bx3ZvQWAmLe
-	HxY4VZCZ9QodwzH94O2ArrQVWKo4gi6ZVg478V8EDeHImFSHH+ZqBT+i0AuaS5c54FA6gm9RicJ
-	x+AUPupqfVHlL/29xG5YUeKNXx7l4LVUNFg++pRxEcp5CMkMbOYfxo8qQaI/OdKXVztiTSGCE+E
-	bT0ClECPCEhDBNDHLpDQEpYv97huRYRetp79AIxb6IKPiWLmIxTKN6VnILA1rf7Vo8dwcVIBAtE
-	sG8GFQMmvEv9Xrt/AIGIJdVvJ0ihnaiNOORvZ0ANaG0eG+sOfxM72Noy5ev/AVqCfjwBsGJCQCF
-	AARWxbjoK9/NFnYLDIcJ0ijnzuiJqhKs+VIfLpafayW3JcHhQ1sAhfsKi9nFsBA==
-X-Google-Smtp-Source: AGHT+IGlySXEHdEtSz8EaRKHSDBj85/VOFUIC/a5zK7apwJQgwQockzR3cbVXadBWIaLBzaJ6tlNkQ==
-X-Received: by 2002:a05:6512:4025:b0:553:2357:288c with SMTP id 2adb3069b0e04-55b7c025681mr3128805e87.17.1753977538163;
-        Thu, 31 Jul 2025 08:58:58 -0700 (PDT)
+        bh=pEOkzQdBxpbC9Okf9MXfHH5aCeAaO0EgwJT3GQlkxY4=;
+        b=kHT5W+crpdEDTf1O4S3YmiDOpsJd3eZbJ2QWXkKl3liyNannwqQ0dwOF5m2A+NVp9A
+         inzS9uUKcsInAJSUxAN4KTXwuuxckwrvu7WWwxMNmx6KpkTGFMSDnbjBSA1JliAJevTA
+         JoRngTx/q3teaOQxuw5nV6DlZw4onRqjoPLw1TQDO/76i9cecqU4Umfngk6od9OmkPWI
+         cElrmMlzTs73kCuli6VuLK1WyweLCMpGOP664IZbqsDI92u3e/PjagV7Gw3kowiLSFiw
+         l5KKXo4P3jAPNfa/1Q1LhrikAO/EBkR11jWm8iccnwl0M3gKtAIvim6CJBc5tdwKrfz3
+         5lBQ==
+X-Gm-Message-State: AOJu0YyzEHnU7RKaO97nR2fx/9Olt12mnPETE6gXOhljUPjirZUYRFN6
+	zwObndqd2yKW4KeYompu/HNptSm3+wzPy9kNXy8WQ1l1f45zy8jkoUIfF2v8dg==
+X-Gm-Gg: ASbGnctyniT0zI4z1ObHCFuhwviRRowzsN/iqQ7cb2X0O7XZffAct8N38KB0ET62T40
+	0aXfkGb0EAWdSw/0PiAt3nSmOejAO0PqHKtGVt+oSeuHy5hb3FjbH2KOQvjnY/jUlS/YJ/6wtY7
+	2Fknv59k1MlHQZtNAx3p5N2BV0KBfBP4wP/99oDJw521IFGcgWWaFttHWMCm0mnMAnnOsbk+Tbu
+	49QYXSem1z/wMwWpviyq8+PJFJri9C0L4bGzS8l2Z8gZXZiYLcZGrLjT53IcJr/+enUp5tqdIkZ
+	+JpCDNdYICtjqz3U15ZuRC2/g1v3g5coUjwfPjLLdkdkZJ3+MIf7F2+JLEcPdjpo9P07YlDGM8t
+	SQYs1RTReZ3Wwxsua0qqWx4JHrIgQy57k2KStwCfAHzuzbbidjtU0h7xmTWWCpw==
+X-Google-Smtp-Source: AGHT+IFLTOuKuRf2T7tNGueoS/xGQR2k3DSUUMxZkxu+W21mtiv+Yw78Y6yFbwkuLfLx9uu1tuhAbA==
+X-Received: by 2002:a05:6512:3ba7:b0:554:f72c:819d with SMTP id 2adb3069b0e04-55b7c08ec37mr2819368e87.43.1753977522774;
+        Thu, 31 Jul 2025 08:58:42 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 19/20] xen/riscv: add support of page lookup by GFN
-Date: Thu, 31 Jul 2025 17:58:18 +0200
-Message-ID: <24bb8ca6ad9d325f48d0c64b0fa461db5f0d0cc5.1753973161.git.oleksii.kurochko@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v3 09/20] xen/dom0less: abstract Arm-specific p2m type name for device MMIO mappings
+Date: Thu, 31 Jul 2025 17:58:08 +0200
+Message-ID: <b9f7a13262cb3b482fb3d5cbbee6c72781fbfdc2.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce helper functions for safely querying the P2M (physical-to-machine)
-mapping:
- - add p2m_read_lock(), p2m_read_unlock(), and p2m_is_locked() for managing
-   P2M lock state.
- - Implement p2m_get_entry() to retrieve mapping details for a given GFN,
-   including MFN, page order, and validity.
- - Add p2m_lookup() to encapsulate read-locked MFN retrieval.
- - Introduce p2m_get_page_from_gfn() to convert a GFN into a page_info
-   pointer, acquiring a reference to the page if valid.
- - Introduce get_page().
+Rename `p2m_mmio_direct_dev` to a more architecture-neutral alias
+`p2m_mmio_direct` to avoid leaking Arm-specific naming into common Xen code,
+such as dom0less passthrough property handling.
 
-Implementations are based on Arm's functions with some minor modifications:
-- p2m_get_entry():
-  - Reverse traversal of page tables, as RISC-V uses the opposite level
-    numbering compared to Arm.
-  - Removed the return of p2m_access_t from p2m_get_entry() since
-    mem_access_settings is not introduced for RISC-V.
-  - Updated BUILD_BUG_ON() to check using the level 0 mask, which corresponds
-    to Arm's THIRD_MASK.
-  - Replaced open-coded bit shifts with the BIT() macro.
-  - Other minor changes, such as using RISC-V-specific functions to validate
-    P2M PTEs, and replacing Arm-specific GUEST_* macros with their RISC-V
-    equivalents.
+This helps reduce platform-specific terminology in shared logic and
+improves clarity for future non-Arm ports (e.g. RISC-V or PowerPC).
 
+No functional changes — the definition is preserved via a macro alias
+for Arm.
+
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V3:
- - Add is_p2m_foreign() macro and connected stuff.
- - Change struct domain *d argument of p2m_get_page_from_gfn() to
-   struct p2m_domain.
- - Update the comment above p2m_get_entry().
- - s/_t/p2mt for local variable in p2m_get_entry().
- - Drop local variable addr in p2m_get_entry() and use gfn_to_gaddr(gfn)
-   to define offsets array.
- - Code style fixes.
- - Update a check of rc code from p2m_next_level() in p2m_get_entry()
-   and drop "else" case.
- - Do not call p2m_get_type() if p2m_get_entry()'s t argument is NULL.
- - Use struct p2m_domain instead of struct domain for p2m_lookup() and
-   p2m_get_page_from_gfn().
- - Move defintion of get_page() from "xen/riscv: implement mfn_valid() and page reference, ownership handling helpers"
+Changes in v3:
+ - New patch
 ---
-Changes in V2:
- - New patch.
----
- xen/arch/riscv/include/asm/p2m.h |  18 ++++
- xen/arch/riscv/mm.c              |  13 +++
- xen/arch/riscv/p2m.c             | 136 +++++++++++++++++++++++++++++++
- 3 files changed, 167 insertions(+)
+ xen/arch/arm/include/asm/p2m.h          | 2 ++
+ xen/common/device-tree/dom0less-build.c | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index fbc73448a7..dc3a77cc15 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -202,6 +202,24 @@ static inline int p2m_is_write_locked(struct p2m_domain *p2m)
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 2d53bf9b61..bade1eb71b 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -137,6 +137,8 @@ typedef enum {
+     p2m_max_real_type,  /* Types after this won't be store in the p2m */
+ } p2m_type_t;
  
- unsigned long construct_hgatp(struct p2m_domain *p2m, uint16_t vmid);
++#define p2m_mmio_direct p2m_mmio_direct_dev
++
+ /* We use bitmaps and mask to handle groups of types */
+ #define p2m_to_mask(_t) (1UL << (_t))
  
-+static inline void p2m_read_lock(struct p2m_domain *p2m)
-+{
-+    read_lock(&p2m->lock);
-+}
-+
-+static inline void p2m_read_unlock(struct p2m_domain *p2m)
-+{
-+    read_unlock(&p2m->lock);
-+}
-+
-+static inline int p2m_is_locked(struct p2m_domain *p2m)
-+{
-+    return rw_is_locked(&p2m->lock);
-+}
-+
-+struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
-+                                        p2m_type_t *t);
-+
- #endif /* ASM__RISCV__P2M_H */
- 
- /*
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 3ad2b9cf93..5e09d46a75 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -677,3 +677,16 @@ struct domain *page_get_owner_and_reference(struct page_info *page)
- 
-     return owner;
- }
-+
-+bool get_page(struct page_info *page, const struct domain *domain)
-+{
-+    const struct domain *owner = page_get_owner_and_reference(page);
-+
-+    if ( likely(owner == domain) )
-+        return true;
-+
-+    if ( owner != NULL )
-+        put_page(page);
-+
-+    return false;
-+}
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index e9e6818da2..24a09d4537 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -852,3 +852,139 @@ int map_regions_p2mt(struct domain *d,
- {
-     return p2m_insert_mapping(p2m_get_hostp2m(d), gfn, nr, mfn, p2mt);
- }
-+
-+/*
-+ * Get the details of a given gfn.
-+ *
-+ * If the entry is present, the associated MFN will be returned type filled up.
-+ * The page_order will correspond to the order of the mapping in the page
-+ * table (i.e it could be a superpage).
-+ *
-+ * If the entry is not present, INVALID_MFN will be returned and the
-+ * page_order will be set according to the order of the invalid range.
-+ *
-+ * valid will contain the value of bit[0] (e.g valid bit) of the
-+ * entry.
-+ */
-+static mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
-+                           p2m_type_t *t,
-+                           unsigned int *page_order,
-+                           bool *valid)
-+{
-+    unsigned int level = 0;
-+    pte_t entry, *table;
-+    int rc;
-+    mfn_t mfn = INVALID_MFN;
-+    DECLARE_OFFSETS(offsets, gfn_to_gaddr(gfn));
-+
-+    ASSERT(p2m_is_locked(p2m));
-+    BUILD_BUG_ON(XEN_PT_LEVEL_MAP_MASK(0) != PAGE_MASK);
-+
-+    if ( valid )
-+        *valid = false;
-+
-+    /* XXX: Check if the mapping is lower than the mapped gfn */
-+
-+    /* This gfn is higher than the highest the p2m map currently holds */
-+    if ( gfn_x(gfn) > gfn_x(p2m->max_mapped_gfn) )
-+    {
-+        for ( level = P2M_ROOT_LEVEL; level; level-- )
-+            if ( (gfn_x(gfn) & (XEN_PT_LEVEL_MASK(level) >> PAGE_SHIFT)) >
-+                 gfn_x(p2m->max_mapped_gfn) )
-+                break;
-+
-+        goto out;
-+    }
-+
-+    table = p2m_get_root_pointer(p2m, gfn);
-+
-+    /*
-+     * the table should always be non-NULL because the gfn is below
-+     * p2m->max_mapped_gfn and the root table pages are always present.
-+     */
-+    if ( !table )
-+    {
-+        ASSERT_UNREACHABLE();
-+        level = P2M_ROOT_LEVEL;
-+        goto out;
-+    }
-+
-+    for ( level = P2M_ROOT_LEVEL; level; level-- )
-+    {
-+        rc = p2m_next_level(p2m, true, level, &table, offsets[level]);
-+        if ( (rc == P2M_TABLE_MAP_NONE) || (rc == P2M_TABLE_MAP_NOMEM) )
-+            goto out_unmap;
-+
-+        if ( rc != P2M_TABLE_NORMAL )
-+            break;
-+    }
-+
-+    entry = table[offsets[level]];
-+
-+    if ( pte_is_valid(entry) )
-+    {
-+        if ( t )
-+            *t = p2m_get_type(entry);
-+
-+        mfn = pte_get_mfn(entry);
-+        /*
-+         * The entry may point to a superpage. Find the MFN associated
-+         * to the GFN.
-+         */
-+        mfn = mfn_add(mfn,
-+                      gfn_x(gfn) & (BIT(XEN_PT_LEVEL_ORDER(level), UL) - 1));
-+
-+        if ( valid )
-+            *valid = pte_is_valid(entry);
-+    }
-+
-+ out_unmap:
-+    unmap_domain_page(table);
-+
-+ out:
-+    if ( page_order )
-+        *page_order = XEN_PT_LEVEL_ORDER(level);
-+
-+    return mfn;
-+}
-+
-+static mfn_t p2m_lookup(struct p2m_domain *p2m, gfn_t gfn, p2m_type_t *t)
-+{
-+    mfn_t mfn;
-+
-+    p2m_read_lock(p2m);
-+    mfn = p2m_get_entry(p2m, gfn, t, NULL, NULL);
-+    p2m_read_unlock(p2m);
-+
-+    return mfn;
-+}
-+
-+struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
-+                                        p2m_type_t *t)
-+{
-+    struct page_info *page;
-+    p2m_type_t p2mt = p2m_invalid;
-+    mfn_t mfn = p2m_lookup(p2m, gfn, t);
-+
-+    if ( !mfn_valid(mfn) )
-+        return NULL;
-+
-+    if ( t )
-+        p2mt = *t;
-+
-+    page = mfn_to_page(mfn);
-+
-+    /*
-+     * get_page won't work on foreign mapping because the page doesn't
-+     * belong to the current domain.
-+     */
-+    if ( p2m_is_foreign(p2mt) )
-+    {
-+        struct domain *fdom = page_get_owner_and_reference(page);
-+        ASSERT(fdom != NULL);
-+        ASSERT(fdom != p2m->domain);
-+        return page;
-+    }
-+
-+    return get_page(page, p2m->domain) ? page : NULL;
-+}
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index 6bb038111d..5b97bf0343 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -185,7 +185,7 @@ static int __init handle_passthrough_prop(struct kernel_info *kinfo,
+                                gaddr_to_gfn(gstart),
+                                PFN_DOWN(size),
+                                maddr_to_mfn(mstart),
+-                               p2m_mmio_direct_dev);
++                               p2m_mmio_direct);
+         if ( res < 0 )
+         {
+             printk(XENLOG_ERR
 -- 
 2.50.1
 
