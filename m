@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DFFC87FCA
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:02:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065970.1431352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4C6C87FD2
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:02:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065984.1431362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjI-0003AE-Cf; Thu, 31 Jul 2025 16:02:04 +0000
+	id 1uhVjh-0003xL-PD; Thu, 31 Jul 2025 16:02:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065970.1431352; Thu, 31 Jul 2025 16:02:04 +0000
+Received: by outflank-mailman (output) from mailman id 1065984.1431362; Thu, 31 Jul 2025 16:02:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVjI-0003A7-9t; Thu, 31 Jul 2025 16:02:04 +0000
-Received: by outflank-mailman (input) for mailman id 1065970;
- Thu, 31 Jul 2025 16:02:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uhVjh-0003xE-Lk; Thu, 31 Jul 2025 16:02:29 +0000
+Received: by outflank-mailman (input) for mailman id 1065984;
+ Thu, 31 Jul 2025 16:02:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVgQ-0000zK-SU
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:59:06 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46575398-6e27-11f0-a320-13f23c93f187;
- Thu, 31 Jul 2025 17:59:01 +0200 (CEST)
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-55b797ad392so1255519e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:59:01 -0700 (PDT)
+ id 1uhVgG-0001FB-SC
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:56 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 42c038b9-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:55 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-55b797ad392so1255418e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:55 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.58
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:59 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46575398-6e27-11f0-a320-13f23c93f187
+X-Inumbo-ID: 42c038b9-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977540; x=1754582340; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753977534; x=1754582334; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EX/IvnaSg+TBaVH3h6HU80ocSKilMokIToU2WpARmXk=;
-        b=Qd+EFpX5xdyLZTZV45LcQXZQXq7urY1sfh932BYxpMFywyvP/RFckz9Kda/DAjh8p0
-         Z78hI+vuUQcrK9wQsHfrgXqZ4lWa0G1tz40BA9KTsl/ROOqyGXLVoyEdZcfujwmH1I41
-         649CXm+Rr2EhpMKiQh3cj2BsKR2N2G0H4jyEkmvrrJzUHEQPWKg6oXi6j/iSTCGjk/RD
-         zr47CpIoZrmQJR7dlaJX+gwk/I2YKNo8g71K6itlHwawK1capjksFFGhfU4ZzDwzrHSs
-         pIPA0VsFw5dNur+Qi4fKvd55fztoPZMp0yX7uj5IMVQxo6P4FqswvoDURAa1lKLUkE0r
-         f/UA==
+        bh=jC83dOB30X6PShO+Qx3bRZ1eAKfCHiOihl7DCHI89Rg=;
+        b=DuxV2xYlMgqCAdu1QlrUMqrMaEJyw222kGBSWFdnu2kK/bBgmfJhJjKuP+9ZCtcbL4
+         mjdKDFMpinZWeeAIJ3lVsdaVNvLuRqtjGMTvP2AFFd6B5BXU0dotAv4CFwap4xeP4aXH
+         GCoyGUXgh90/3ICyXwd6g+EmO22ywThpdenqu5updfRHShuH4El/qlxra4a6sH+8Zirp
+         /4rLA7q47Ww9hIiWROqa8sakIdaV1gDJ+hnLcpVX9EGC9rVlRCPVk10QN/TJIH5eBg17
+         Wk/w9GqYld7gy755HJ9ShxCfKj2XqMNROMfV9qh5yRDJrO0KmYLfr1RhEubQv8Fz0fel
+         ekFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977540; x=1754582340;
+        d=1e100.net; s=20230601; t=1753977534; x=1754582334;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EX/IvnaSg+TBaVH3h6HU80ocSKilMokIToU2WpARmXk=;
-        b=opO+0BaKaLPpB1MArIcjbwAiEom911R6MmX1Z/rz+q2OR8bG5U1I1tndqFu5Denuyl
-         ODXjxhFUzoVoWZ2a0mVwEcy0LZr5hSBrBGmeSH8UbvpbM/mOnw/CHvqrSorv/gAqvqtD
-         +wvscv7iGPy6gb8tMjmZpgWrA59QYUqHFXLSIxDb+t0jk22ZrsvgLuAa8kLFvnssdt3c
-         CM7i9HRm3E9TtARb4vBp8nEkNA0dluDTek8l1nblCs+bElCo6PMccRsmWxp3zb0t/pjx
-         WTm3lOOMsrdPUmnBbF3qYn7TNtMsN6nqw20jQu1Qo9Lu2EEeoXmGi8x50p38YuVMNR7l
-         Ww8g==
-X-Gm-Message-State: AOJu0Ywv0Ln0TaRyqmsXWULxNK3knx1G1SV2jZv+jmTL3DZMVvwMi2B8
-	3+ngloWN2llCbTliEiB1duDfoofLJzmY8clx7/WkYnIOph1tOFEspQab7u98wg==
-X-Gm-Gg: ASbGncvSFKb2ux7ZyLl0iNmVtD/Wdklh1eODkBBjZKsgxmPxwInS/Vjn5i7b+zCOqaf
-	Miv81Qqv/9neB3/lyhKDxYiWXvvFX7QFI4w1P6U1Gbe4BREy1gdpgc9/bbLh5HMhO2rCgStM6lE
-	ZAQ2TewELM0Q9Q264/9mOqED3W9xxdcHHl/fN7vzCORvgTHryfIyETN1qGlVHsmiUmK45MqENuJ
-	ZGsgaeQEVsgM545506fr5G3fIIbNisdXYlpC5gfbiw94nbayr4Qr9Ah4/Jr7qwd3cOQdhWeDWyP
-	a6DGDenMlvwGdCJ6M9bm/SLIxebKNaF34ESHy8cs9V2nrmGKZIKoy5D5QAjRwrlAJg8voouW/x+
-	Kn5a9EXgxjy96164bj2bZ/eqVgfVt5aC6/tk6Oq3pXKlE9B6q4X04zfEbgWLD5lwXZlBXP/RK
-X-Google-Smtp-Source: AGHT+IF5zHEapqut2Mu0868zzfYS/rrg1qZ8aVIR8wjeA9Qh5d4+ZIRYdg18vbUfn9OCZVvedaco3w==
-X-Received: by 2002:a05:6512:3050:b0:55b:8a28:3cbc with SMTP id 2adb3069b0e04-55b8a283d8cmr810801e87.51.1753977540151;
-        Thu, 31 Jul 2025 08:59:00 -0700 (PDT)
+        bh=jC83dOB30X6PShO+Qx3bRZ1eAKfCHiOihl7DCHI89Rg=;
+        b=g0+4Q6wDDWN5nV5gWKGv+MHSpdZRDjK3frVBB9e68LfvPjNmtNKfU7bIV0OYjT5BtC
+         N0Q2rgdZtphBITG2d7gl0QbbaX0PZ3AOoEquDW/iD96AKwBX/46PPuOVWqsWschZ+aeT
+         zrQ0Q2sb9R4uyW8/CBlE57fzsZcUwQf7rREF4blV8uMRNqQz82n5LUhUSrbkEdDRNFkn
+         7jeD/EIR80EAMkb68N67tnfrg1QUSsqesRCYDQ8FC1vadh+ws1pOKafFtSTgzADo50P/
+         jdBiB6nS7d3hSD1ki4wCpFk0i/Eq323kx6D3l8EvrQHiHLYMBGlcrt4WIltaGizBA5nd
+         rAgA==
+X-Gm-Message-State: AOJu0YwsTIUteHSGJ/dHEeaH9h7uNLf0vEbiDGzpRcKpvL4cRtJXxjX/
+	YOcuIqJHWjYELkVYszy4915s7ytMLAkpHSjGdH0wEDHECTeXKKD+bvDGifBU6w==
+X-Gm-Gg: ASbGncuLNw/GH/uSoQab2sEmTEzLpL9TUye4+jx68iw1DpJkU6OdJIpCYWWvk0xynN6
+	Z9E3aAIada3nyk3x5YPevyF7kjhKwRKhrTpgA5J86WSjobqjo7bTCHdoBZiiTTeKjUTh85bO09/
+	PBGIeJxh6BNSeO87hL3DArvTij8zSIW8yNWIiJ1cwIwh6Mn9x5UZf80HKo+JzjQw+9BfKiY+Q67
+	tMv6HQg6EfcfzseVn9tawXr4BtEi7Q5OaqftNWBtigklG1Sb7qJ41NfNyrWTpMBBe0aeVG8YZGo
+	Si+lxKbeHSA26bRnrpOn2+LlZ9PEZy75HwroNqHnQO5xI5p7/Vra6emrkPQ3WM/l+m2vT44n3ND
+	w9CqL/a5h3yfq06zYsCQ0VOFPDkH63eFeCeOz+DIvq/Q5u2PHxq9t3AIN+ZqkXw==
+X-Google-Smtp-Source: AGHT+IHl86cJn6eEwaEmMR51hDkdErwFOdWHxda1zYGRfB7ptkNhfSwqjKkOryMIGf9vdN+g40172w==
+X-Received: by 2002:a05:6512:693:b0:553:da39:37d with SMTP id 2adb3069b0e04-55b7c012815mr2352425e87.1.1753977533183;
+        Thu, 31 Jul 2025 08:58:53 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,9 +96,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 20/20] xen/riscv: introduce metadata table to store P2M type
-Date: Thu, 31 Jul 2025 17:58:19 +0200
-Message-ID: <802d757c167121c0a5ae2e529f5a365f779c5e59.1753973161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 16/20] xen/riscv: Implement superpage splitting for p2m mappings
+Date: Thu, 31 Jul 2025 17:58:15 +0200
+Message-ID: <6890f77e577493194ea94834989dc0841d18eed0.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
@@ -106,493 +106,195 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-RISC-V's PTE has only two available bits that can be used to store the P2M
-type. This is insufficient to represent all the current RISC-V P2M types.
-Therefore, some P2M types must be stored outside the PTE bits.
+Add support for down large memory mappings ("superpages") in the RISC-V
+p2m mapping so that smaller, more precise mappings ("finer-grained entries")
+can be inserted into lower levels of the page table hierarchy.
 
-To address this, a metadata table is introduced to store P2M types that
-cannot fit in the PTE itself. Not all P2M types are stored in the
-metadata table—only those that require it.
+To implement that the following is done:
+- Introduce p2m_split_superpage(): Recursively shatters a superpage into
+  smaller page table entries down to the target level, preserving original
+  permissions and attributes.
+- p2m_set_entry() updated to invoke superpage splitting when inserting
+  entries at lower levels within a superpage-mapped region.
 
-The metadata table is linked to the intermediate page table via the
-`struct page_info`'s list field of the corresponding intermediate page.
+This implementation is based on the ARM code, with modifications to the part
+that follows the BBM (break-before-make) approach, some parts are simplified
+as according to RISC-V spec:
+  It is permitted for multiple address-translation cache entries to co-exist
+  for the same address. This represents the fact that in a conventional
+  TLB hierarchy, it is possible for multiple entries to match a single
+  address if, for example, a page is upgraded to a superpage without first
+  clearing the original non-leaf PTE’s valid bit and executing an SFENCE.VMA
+  with rs1=x0, or if multiple TLBs exist in parallel at a given level of the
+  hierarchy. In this case, just as if an SFENCE.VMA is not executed between
+  a write to the memory-management tables and subsequent implicit read of the
+  same address: it is unpredictable whether the old non-leaf PTE or the new
+  leaf PTE is used, but the behavior is otherwise well defined.
+In contrast to the Arm architecture, where BBM is mandatory and failing to
+use it in some cases can lead to CPU instability, RISC-V guarantees
+stability, and the behavior remains safe — though unpredictable in terms of
+which translation will be used.
 
-To simplify the allocation and linking of intermediate and metadata page
-tables, `p2m_{alloc,free}_table()` functions are implemented.
-
-These changes impact `p2m_split_superpage()`, since when a superpage is
-split, it is necessary to update the metadata table of the new
-intermediate page table — if the entry being split has its P2M type set
-to `p2m_ext_storage` in its `P2M_TYPES` bits. In addition to updating
-the metadata of the new intermediate page table, the corresponding entry
-in the metadata for the original superpage is invalidated.
-
-Also, update p2m_{get,set}_type to work with P2M types which don't fit
-into PTE bits.
+Additionally, the page table walk logic has been adjusted, as ARM uses the
+opposite number of levels compared to RISC-V.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
- - Add is_p2m_foreign() macro and connected stuff.
- - Change struct domain *d argument of p2m_get_page_from_gfn() to
-   struct p2m_domain.
- - Update the comment above p2m_get_entry().
- - s/_t/p2mt for local variable in p2m_get_entry().
- - Drop local variable addr in p2m_get_entry() and use gfn_to_gaddr(gfn)
-   to define offsets array.
- - Code style fixes.
- - Update a check of rc code from p2m_next_level() in p2m_get_entry()
-   and drop "else" case.
- - Do not call p2m_get_type() if p2m_get_entry()'s t argument is NULL.
- - Use struct p2m_domain instead of struct domain for p2m_lookup() and
-   p2m_get_page_from_gfn().
- - Move defintion of get_page() from "xen/riscv: implement mfn_valid() and page reference, ownership handling helpers"
+ - Move     page_list_add(page, &p2m->pages) inside p2m_alloc_page().
+ - Use 'unsigned long' for local vairiable 'i' in p2m_split_superpage().
+ - Update the comment above if ( next_level != target ) in p2m_split_superpage().
+ - Reverse cycle to iterate through page table levels in p2m_set_entry().
+ - Update p2m_split_superpage() with the same changes which are done in the
+   patch "P2M: Don't try to free the existing PTE if we can't allocate a new table".
 ---
 Changes in V2:
- - New patch.
+ - New patch. It was a part of a big patch "xen/riscv: implement p2m mapping
+   functionality" which was splitted to smaller.
+ - Update the commit above the cycle which creates new page table as
+   RISC-V travserse page tables in an opposite to ARM order.
+ - RISC-V doesn't require BBM so there is no needed for invalidating
+   and TLB flushing before updating PTE.
 ---
- xen/arch/riscv/include/asm/mm.h |   9 ++
- xen/arch/riscv/p2m.c            | 205 +++++++++++++++++++++++++-------
- 2 files changed, 170 insertions(+), 44 deletions(-)
+ xen/arch/riscv/p2m.c | 118 ++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 117 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index d5be328906..7cf0988f44 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -150,6 +150,15 @@ struct page_info
-             /* Order-size of the free chunk this page is the head of. */
-             unsigned int order;
-         } free;
-+
-+        /* Page is used to store metadata: p2m type. */
-+        struct {
-+            /*
-+             * Pointer to a page which store metadata for an intermediate page
-+             * table.
-+             */
-+            struct page_info *metadata;
-+        } md;
-     } v;
- 
-     union {
 diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 24a09d4537..a909db654a 100644
+index e04cfde8c7..e9e6818da2 100644
 --- a/xen/arch/riscv/p2m.c
 +++ b/xen/arch/riscv/p2m.c
-@@ -101,7 +101,16 @@ static int p2m_alloc_root_table(struct p2m_domain *p2m)
- {
-     struct domain *d = p2m->domain;
-     struct page_info *page;
--    const unsigned int nr_root_pages = P2M_ROOT_PAGES;
+@@ -539,6 +539,91 @@ static void p2m_free_subtree(struct p2m_domain *p2m,
+     p2m_free_page(p2m, pg);
+ }
+ 
++static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
++                                unsigned int level, unsigned int target,
++                                const unsigned int *offsets)
++{
++    struct page_info *page;
++    unsigned long i;
++    pte_t pte, *table;
++    bool rv = true;
++
++    /* Convenience aliases */
++    mfn_t mfn = pte_get_mfn(*entry);
++    unsigned int next_level = level - 1;
++    unsigned int level_order = XEN_PT_LEVEL_ORDER(next_level);
++
 +    /*
-+     * If the root page table starts at Level <= 2, and since only 1GB, 2MB,
-+     * and 4KB mappings are supported (as enforced by the ASSERT() in
-+     * p2m_set_entry()), it is necessary to allocate P2M_ROOT_PAGES for
-+     * the root page table itself, plus an additional P2M_ROOT_PAGES for
-+     * metadata storage. This is because only two free bits are available in
-+     * the PTE, which are not sufficient to represent all possible P2M types.
++     * This should only be called with target != level and the entry is
++     * a superpage.
 +     */
-+    const unsigned int nr_root_pages = P2M_ROOT_PAGES *
-+                                       ((P2M_ROOT_LEVEL <= 2) ? 2 : 1);
- 
-     /*
-      * Return back nr_root_pages to assure the root table memory is also
-@@ -114,6 +123,23 @@ static int p2m_alloc_root_table(struct p2m_domain *p2m)
-     if ( !page )
-         return -ENOMEM;
- 
-+    if ( P2M_ROOT_LEVEL <= 2 )
++    ASSERT(level > target);
++    ASSERT(pte_is_superpage(*entry, level));
++
++    page = p2m_alloc_page(p2m->domain);
++    if ( !page )
 +    {
 +        /*
-+         * In the case where P2M_ROOT_LEVEL <= 2, it is necessary to allocate
-+         * a page of the same size as that used for the root page table.
-+         * Therefore, p2m_allocate_root() can be safely reused.
++         * The caller is in charge to free the sub-tree.
++         * As we didn't manage to allocate anything, just tell the
++         * caller there is nothing to free by invalidating the PTE.
 +         */
-+        struct page_info *metadata = p2m_allocate_root(d);
-+        if ( !metadata )
-+        {
-+            free_domheap_pages(page, P2M_ROOT_ORDER);
-+            return -ENOMEM;
-+        }
-+
-+        page->v.md.metadata = metadata;
++        memset(entry, 0, sizeof(*entry));
++        return false;
 +    }
 +
-     p2m->root = page;
- 
-     return 0;
-@@ -198,24 +224,25 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
-     return __map_domain_page(p2m->root + root_table_indx);
- }
- 
--static int p2m_set_type(pte_t *pte, p2m_type_t t)
-+static void p2m_set_type(pte_t *pte, const p2m_type_t t, const unsigned int i)
- {
--    int rc = 0;
--
-     if ( t > p2m_ext_storage )
--        panic("unimplemeted\n");
++    table = __map_domain_page(page);
++
++    /*
++     * We are either splitting a second level 1G page into 512 first level
++     * 2M pages, or a first level 2M page into 512 zero level 4K pages.
++     */
++    for ( i = 0; i < XEN_PT_ENTRIES; i++ )
 +    {
-+        ASSERT(pte);
++        pte_t *new_entry = table + i;
 +
-+        pte[i].pte = t;
-+    }
-     else
-         pte->pte |= MASK_INSR(t, P2M_TYPE_PTE_BITS_MASK);
--
--    return rc;
- }
- 
--static p2m_type_t p2m_get_type(const pte_t pte)
-+static p2m_type_t p2m_get_type(const pte_t pte, const pte_t *metadata,
-+                               const unsigned int i)
- {
-     p2m_type_t type = MASK_EXTR(pte.pte, P2M_TYPE_PTE_BITS_MASK);
- 
-     if ( type == p2m_ext_storage )
--        panic("unimplemented\n");
-+        type = metadata[i].pte;
- 
-     return type;
- }
-@@ -265,7 +292,10 @@ static void p2m_set_permission(pte_t *e, p2m_type_t t)
-     }
- }
- 
--static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t, bool is_table)
-+static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t,
-+                              struct page_info *metadata_pg,
-+                              const unsigned int indx,
-+                              bool is_table)
- {
-     pte_t e = (pte_t) { PTE_VALID };
- 
-@@ -285,12 +315,21 @@ static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t, bool is_table)
- 
-     if ( !is_table )
-     {
-+        pte_t *metadata = __map_domain_page(metadata_pg);
-+
-         p2m_set_permission(&e, t);
- 
-+        metadata[indx].pte = p2m_invalid;
-+
-         if ( t < p2m_ext_storage )
--            p2m_set_type(&e, t);
-+            p2m_set_type(&e, t, indx);
-         else
--            panic("unimplemeted\n");
-+        {
-+            e.pte |= MASK_INSR(p2m_ext_storage, P2M_TYPE_PTE_BITS_MASK);
-+            p2m_set_type(metadata, t, indx);
-+        }
-+
-+        unmap_domain_page(metadata);
-     }
-     else
-         /*
-@@ -309,8 +348,10 @@ static pte_t page_to_p2m_table(struct page_info *page)
-      * p2m_invalid will be ignored inside p2m_pte_from_mfn() as is_table is
-      * set to true and p2m_type_t shouldn't be applied for PTEs which
-      * describe an intermidiate table.
-+     * That it also a reason why `metadata` and `indx` argument of
-+     * p2m_pte_from_mfn() are NULL.
-      */
--    return p2m_pte_from_mfn(page_to_mfn(page), p2m_invalid, true);
-+    return p2m_pte_from_mfn(page_to_mfn(page), p2m_invalid, NULL, 0, true);
- }
- 
- static struct page_info *p2m_alloc_page(struct p2m_domain *p2m)
-@@ -323,22 +364,71 @@ static struct page_info *p2m_alloc_page(struct p2m_domain *p2m)
-     return pg;
- }
- 
-+static void p2m_free_page(struct p2m_domain *p2m, struct page_info *pg);
-+
-+/*
-+ * Allocate a page table with an additional extra page to store
-+ * metadata for each entry of the page table.
-+ * Link this metadata page to page table page's list field.
-+ */
-+static struct page_info * p2m_alloc_table(struct p2m_domain *p2m)
-+{
-+    enum table_type
-+    {
-+        INTERMEDIATE_TABLE=0,
 +        /*
-+         * At the moment, metadata is going to store P2M type
-+         * for each PTE of page table.
++         * Use the content of the superpage entry and override
++         * the necessary fields. So the correct permission are kept.
 +         */
-+        METADATA_TABLE,
-+        TABLE_MAX
-+    };
++        pte = *entry;
++        pte_set_mfn(&pte, mfn_add(mfn, i << level_order));
 +
-+    struct page_info *tables[TABLE_MAX];
-+
-+    for ( unsigned int i = 0; i < TABLE_MAX; i++ )
-+    {
-+        tables[i] = p2m_alloc_page(p2m);
-+
-+        if ( !tables[i] )
-+            goto out;
-+
-+        clear_and_clean_page(tables[i]);
++        write_pte(new_entry, pte);
 +    }
 +
-+    tables[INTERMEDIATE_TABLE]->v.md.metadata = tables[METADATA_TABLE];
++    /*
++     * Shatter superpage in the page to the level we want to make the
++     * changes.
++     * This is done outside the loop to avoid checking the offset
++     * for every entry to know whether the entry should be shattered.
++     */
++    if ( next_level != target )
++        rv = p2m_split_superpage(p2m, table + offsets[next_level],
++                                 level - 1, target, offsets);
 +
-+    return tables[INTERMEDIATE_TABLE];
++    if ( p2m->clean_pte )
++        clean_dcache_va_range(table, PAGE_SIZE);
 +
-+ out:
-+    for ( unsigned int i = 0; i < TABLE_MAX; i++ )
-+        if ( tables[i] )
-+            p2m_free_page(p2m, tables[i]);
++    /*
++     * TODO: an inefficiency here: the caller almost certainly wants to map
++     *       the same page again, to update the one entry that caused the
++     *       request to shatter the page.
++     */
++    unmap_domain_page(table);
 +
-+    return NULL;
-+}
++    /*
++     * Even if we failed, we should (according to the current implemetation
++     * of a way how sub-tree is freed if p2m_split_superpage hasn't been
++     * finished fully) install the newly allocated PTE
++     * entry.
++     * The caller will be in charge to free the sub-tree.
++     */
++    p2m_write_pte(entry, page_to_p2m_table(page), p2m->clean_pte);
 +
-+/*
-+ * Free page table's page and metadata page linked to page table's page.
-+ */
-+static void p2m_free_table(struct p2m_domain *p2m, struct page_info *tbl_pg)
-+{
-+    ASSERT(tbl_pg->v.md.metadata);
-+
-+    p2m_free_page(p2m, tbl_pg->v.md.metadata);
-+    p2m_free_page(p2m, tbl_pg);
++    return rv;
 +}
 +
  /*
-  * Allocate a new page table page with an extra metadata page and hook it
-  * in via the given entry.
-  */
- static int p2m_create_table(struct p2m_domain *p2m, pte_t *entry)
- {
--    struct page_info *page;
-+    struct page_info *page = p2m_alloc_table(p2m);
- 
-     ASSERT(!pte_is_valid(*entry));
- 
--    page = p2m_alloc_page(p2m);
--    if ( page == NULL )
--        return -ENOMEM;
--
--    clear_and_clean_page(page);
--
-     p2m_write_pte(entry, page_to_p2m_table(page), p2m->clean_pte);
- 
-     return 0;
-@@ -453,10 +543,9 @@ static void p2m_put_2m_superpage(mfn_t mfn, p2m_type_t type)
- }
- 
- /* Put any references on the page referenced by pte. */
--static void p2m_put_page(const pte_t pte, unsigned int level)
-+static void p2m_put_page(const pte_t pte, unsigned int level, p2m_type_t p2mt)
- {
-     mfn_t mfn = pte_get_mfn(pte);
--    p2m_type_t p2m_type = p2m_get_type(pte);
- 
-     ASSERT(pte_is_valid(pte));
- 
-@@ -470,10 +559,10 @@ static void p2m_put_page(const pte_t pte, unsigned int level)
-     switch ( level )
-     {
-     case 1:
--        return p2m_put_2m_superpage(mfn, p2m_type);
-+        return p2m_put_2m_superpage(mfn, p2mt);
- 
-     case 0:
--        return p2m_put_4k_page(mfn, p2m_type);
-+        return p2m_put_4k_page(mfn, p2mt);
-     }
- }
- 
-@@ -486,10 +575,11 @@ static void p2m_free_page(struct p2m_domain *p2m, struct page_info *pg)
- 
- /* Free pte sub-tree behind an entry */
- static void p2m_free_subtree(struct p2m_domain *p2m,
--                             pte_t entry, unsigned int level)
-+                             pte_t entry, unsigned int level,
-+                             const pte_t *metadata, const unsigned int index)
- {
-     unsigned int i;
--    pte_t *table;
-+    pte_t *table, *tmp_metadata;
-     mfn_t mfn;
-     struct page_info *pg;
- 
-@@ -499,6 +589,8 @@ static void p2m_free_subtree(struct p2m_domain *p2m,
- 
-     if ( pte_is_superpage(entry, level) || (level == 0) )
-     {
-+        p2m_type_t p2mt = p2m_get_type(entry, metadata, index);
-+
- #ifdef CONFIG_IOREQ_SERVER
-         /*
-          * If this gets called then either the entry was replaced by an entry
-@@ -511,15 +603,21 @@ static void p2m_free_subtree(struct p2m_domain *p2m,
-             ioreq_request_mapcache_invalidate(p2m->domain);
- #endif
- 
--        p2m_put_page(entry, level);
-+        p2m_put_page(entry, level, p2mt);
- 
-         return;
-     }
- 
--    table = map_domain_page(pte_get_mfn(entry));
-+    mfn = pte_get_mfn(entry);
-+    ASSERT(mfn_valid(mfn));
-+    table = map_domain_page(mfn);
-+    pg = mfn_to_page(mfn);
-+    tmp_metadata = __map_domain_page(pg->v.md.metadata);
-+
-     for ( i = 0; i < XEN_PT_ENTRIES; i++ )
--        p2m_free_subtree(p2m, table[i], level - 1);
-+        p2m_free_subtree(p2m, table[i], level - 1, tmp_metadata, i);
- 
-+    unmap_domain_page(tmp_metadata);
-     unmap_domain_page(table);
- 
-     /*
-@@ -530,23 +628,19 @@ static void p2m_free_subtree(struct p2m_domain *p2m,
+  * Insert an entry in the p2m. This should be called with a mapping
+  * equal to a page/superpage.
+@@ -603,7 +688,38 @@ static int p2m_set_entry(struct p2m_domain *p2m,
       */
-     p2m_tlb_flush_sync(p2m);
- 
--    mfn = pte_get_mfn(entry);
--    ASSERT(mfn_valid(mfn));
--
--    pg = mfn_to_page(mfn);
--
--    page_list_del(pg, &p2m->pages);
--    p2m_free_page(p2m, pg);
-+    p2m_free_table(p2m, pg);
- }
- 
- static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-                                 unsigned int level, unsigned int target,
--                                const unsigned int *offsets)
-+                                const unsigned int *offsets,
-+                                pte_t *metadata_tbl)
- {
-     struct page_info *page;
-     unsigned long i;
-     pte_t pte, *table;
-     bool rv = true;
-+    pte_t *tmp_metadata_tbl;
- 
-     /* Convenience aliases */
-     mfn_t mfn = pte_get_mfn(*entry);
-@@ -560,7 +654,7 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-     ASSERT(level > target);
-     ASSERT(pte_is_superpage(*entry, level));
- 
--    page = p2m_alloc_page(p2m->domain);
-+    page = p2m_alloc_table(p2m);
-     if ( !page )
+     if ( level > target )
      {
-         /*
-@@ -572,6 +666,8 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-         return false;
-     }
- 
-+    tmp_metadata_tbl = __map_domain_page(page->v.md.metadata);
+-        panic("Shattering isn't implemented\n");
++        /* We need to split the original page. */
++        pte_t split_pte = *entry;
 +
-     table = __map_domain_page(page);
- 
-     /*
-@@ -589,6 +685,9 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-         pte = *entry;
-         pte_set_mfn(&pte, mfn_add(mfn, i << level_order));
- 
-+        if ( MASK_EXTR(pte.pte, P2M_TYPE_PTE_BITS_MASK) == p2m_ext_storage )
-+            tmp_metadata_tbl[i] = metadata_tbl[offsets[level]];
++        ASSERT(pte_is_superpage(*entry, level));
 +
-         write_pte(new_entry, pte);
-     }
- 
-@@ -600,7 +699,7 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-      */
-     if ( next_level != target )
-         rv = p2m_split_superpage(p2m, table + offsets[next_level],
--                                 level - 1, target, offsets);
-+                                 level - 1, target, offsets, tmp_metadata_tbl);
- 
-     if ( p2m->clean_pte )
-         clean_dcache_va_range(table, PAGE_SIZE);
-@@ -612,6 +711,8 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, pte_t *entry,
-      */
-     unmap_domain_page(table);
- 
-+    unmap_domain_page(tmp_metadata_tbl);
-+
-     /*
-      * Even if we failed, we should (according to the current implemetation
-      * of a way how sub-tree is freed if p2m_split_superpage hasn't been
-@@ -690,18 +791,23 @@ static int p2m_set_entry(struct p2m_domain *p2m,
-     {
-         /* We need to split the original page. */
-         pte_t split_pte = *entry;
-+        struct page_info *metadata = virt_to_page(table)->v.md.metadata;
-+        pte_t *metadata_tbl = __map_domain_page(metadata);
- 
-         ASSERT(pte_is_superpage(*entry, level));
- 
--        if ( !p2m_split_superpage(p2m, &split_pte, level, target, offsets) )
-+        if ( !p2m_split_superpage(p2m, &split_pte, level, target, offsets,
-+                                  metadata_tbl) )
-         {
-             /* Free the allocated sub-tree */
--            p2m_free_subtree(p2m, split_pte, level);
-+            p2m_free_subtree(p2m, split_pte, level, metadata_tbl, offsets[level]);
- 
-             rc = -ENOMEM;
-             goto out;
-         }
- 
-+        unmap_domain_page(metadata_tbl);
-+
-         p2m_write_pte(entry, split_pte, p2m->clean_pte);
- 
-         p2m->need_flush = true;
-@@ -734,7 +840,8 @@ static int p2m_set_entry(struct p2m_domain *p2m,
-         p2m_clean_pte(entry, p2m->clean_pte);
-     else
-     {
--        pte_t pte = p2m_pte_from_mfn(mfn, t, false);
-+        pte_t pte = p2m_pte_from_mfn(mfn, t, virt_to_page(table)->v.md.metadata,
-+                                     offsets[level], false);
- 
-         p2m_write_pte(entry, pte, p2m->clean_pte);
- 
-@@ -764,7 +871,12 @@ static int p2m_set_entry(struct p2m_domain *p2m,
-      */
-     if ( pte_is_valid(orig_pte) &&
-          !mfn_eq(pte_get_mfn(*entry), pte_get_mfn(orig_pte)) )
--        p2m_free_subtree(p2m, orig_pte, level);
-+    {
-+        struct page_info *metadata = virt_to_page(table)->v.md.metadata;
-+        pte_t *metadata_tbl = __map_domain_page(metadata);
-+        p2m_free_subtree(p2m, orig_pte, level, metadata_tbl, offsets[level]);
-+        unmap_domain_page(metadata_tbl);
-+    }
- 
-  out:
-     unmap_domain_page(table);
-@@ -924,7 +1036,12 @@ static mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
-     if ( pte_is_valid(entry) )
-     {
-         if ( t )
--            *t = p2m_get_type(entry);
++        if ( !p2m_split_superpage(p2m, &split_pte, level, target, offsets) )
 +        {
-+            struct page_info *metadata_pg = virt_to_page(table)->v.md.metadata;
-+            pte_t *metadata = __map_domain_page(metadata_pg);
-+            *t = p2m_get_type(entry, metadata, offsets[level]);
-+            unmap_domain_page(metadata);
++            /* Free the allocated sub-tree */
++            p2m_free_subtree(p2m, split_pte, level);
++
++            rc = -ENOMEM;
++            goto out;
 +        }
++
++        p2m_write_pte(entry, split_pte, p2m->clean_pte);
++
++        p2m->need_flush = true;
++
++        /* Then move to the level we want to make real changes */
++        for ( ; level > target; level-- )
++        {
++            rc = p2m_next_level(p2m, true, level, &table, offsets[level]);
++
++            /*
++             * The entry should be found and either be a table
++             * or a superpage if level 0 is not targeted
++             */
++            ASSERT(rc == P2M_TABLE_NORMAL ||
++                   (rc == P2M_TABLE_SUPER_PAGE && target > 0));
++        }
++
++        entry = table + offsets[level];
+     }
  
-         mfn = pte_get_mfn(entry);
-         /*
+     /*
 -- 
 2.50.1
 
