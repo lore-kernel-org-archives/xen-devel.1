@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F95C87FCC
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:56:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065852.1431172 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 415A3C87FCA
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065864.1431182 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVdj-0000JK-RW; Thu, 31 Jul 2025 15:56:19 +0000
+	id 1uhVfn-0000zX-6N; Thu, 31 Jul 2025 15:58:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065852.1431172; Thu, 31 Jul 2025 15:56:19 +0000
+Received: by outflank-mailman (output) from mailman id 1065864.1431182; Thu, 31 Jul 2025 15:58:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVdj-0000JD-Ov; Thu, 31 Jul 2025 15:56:19 +0000
-Received: by outflank-mailman (input) for mailman id 1065852;
- Thu, 31 Jul 2025 15:56:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=g10J=2M=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1uhVdj-0008NN-9u
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:56:19 +0000
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [2001:4860:4864:20::2d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e47f2079-6e26-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:56:17 +0200 (CEST)
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2ebb468cbb4so863523fac.2
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:56:17 -0700 (PDT)
+	id 1uhVfn-0000zQ-2q; Thu, 31 Jul 2025 15:58:27 +0000
+Received: by outflank-mailman (input) for mailman id 1065864;
+ Thu, 31 Jul 2025 15:58:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lm68=2M=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uhVfl-0000zK-W4
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:25 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3095bcfe-6e27-11f0-a320-13f23c93f187;
+ Thu, 31 Jul 2025 17:58:24 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-455ecacfc32so4420575e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:24 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-241e89771e2sm21696185ad.88.2025.07.31.08.58.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Jul 2025 08:58:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,150 +47,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e47f2079-6e26-11f0-b895-0df219b8e170
+X-Inumbo-ID: 3095bcfe-6e27-11f0-a320-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1753977376; x=1754582176; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jbAkfH/Kh66/pWxcM/rrnxgFmDIShR9m+ETVOh2JEFQ=;
-        b=WROZ3axMZFVuJC7pgSHHmjJ1mCUgi+vrA9KmVXJFvR+hCidBXvOf+XfwqIclGVZEvB
-         ti0FPhpDIu2JKvN3nFEl7gYEcCIItAb1Yb7qGtXbFCzHNDc0mWRCpaQmnjUcFKlAlaBh
-         geP1K/Qi7P8YHoX6ehOBq3ik6b3O+UNnI6tj4=
+        d=suse.com; s=google; t=1753977504; x=1754582304; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ifs8/uczK+VegxbFE6xIJnCm6EiSSgUzb5R6OOcsqQ0=;
+        b=bdaKA041LQkgUIXCtGLD8hnTUVZdBobMsln5lHAhiZS+zZi12jSS6pkfDVVBefXW/Z
+         wGYA3KguyS08nz4okOJunlR/4DJmGz84agcjCZRmXf8a21RS4zudi/SdKzAsXZ7RHbYg
+         O178UOxvs8K+zxV7CsQ9fnP6KE8DOGzFUIAw8icNKh+2YHEchZ1sC6wmTmqRFqJDZcOv
+         f7Tshi0u0v3iJD6YmkOJSQd3MkfHxl74Cd0x67vTA+SWhneuRY4LyFngpfaSkHyTIVXq
+         HC0frKrOn+hrkODcxylNQUoV5sezJ3G4FaNiPk9NrfPkKE6yZUMf+MHGUr5/CnTzXE0c
+         SbNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977376; x=1754582176;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jbAkfH/Kh66/pWxcM/rrnxgFmDIShR9m+ETVOh2JEFQ=;
-        b=giT/3nuR4xiT3EhSgvhTwOEAbFcXyeIHaVV53Uxah+bqTbqDQouRhna6RYc4H895Ie
-         nKQEDjOUaRENZR6I+340RDiT4kRblYnEZf77Q7JJZpnSnkZFbq/r5o/nFnmH5HglsHNC
-         lhxYxKf69uk0f+QdBkZ3cSzGlVrSvTupiD7AG4/ewocC13UQRjekDutXTroxgWhccMbF
-         0IgmF71hBXQbHzCvPC2rRL5hdqB7afhLSZyoxW6bM1Gk7KTjEZjxPTqxvT9tkYVMSbGm
-         zQlpsC3gPhPDw047T3Fiv58RzxNfAakJzl1xMMQt19ZkHEGPiZ7iBaM4MC/MC0EAw4w5
-         Vtsw==
-X-Gm-Message-State: AOJu0YxO42d+xCYYCqutLm96kccv59ytU/KZmAHOSnZq6k4YXrnYTfEc
-	q6qkz3CGcm6HpqVSWwW5z6EcZtH0PxoaDD5L+D3aa2CFFHSJ3SApEVxZzUHg7rPi/07kk0nCpsk
-	Q66I56gcbL6hAL03qsAS6cvOwQTAAttsDrP3Wi17e
-X-Gm-Gg: ASbGnct13z8T5ibTMughxM6Myjne89i6wNmEHOue4nEgT5gzd/Gb4QMw6sRR+3p6c8U
-	r6A5JQWqav2ORa4/eo8yaIMmXozOyuKZXteY9iv5sQIpa7CT3Y0PAsdtyRyjuvoBpz1Xz7i07bc
-	oUkJDVF/bj+J3AxxVNhIix5DsIXXvlC0YG475DNJTrrkiwjeMdoJuWcsvhk/h3gv/KejsTXzVrj
-	9t/ig==
-X-Google-Smtp-Source: AGHT+IGOW08oKnv7Unvzuf0eK9lJgHhODeKiFGBKTnamzAEtDhvoJ9nt0xUGn4DSj+d4zoXbzXt5l7YKk86l25quhQk=
-X-Received: by 2002:a05:6870:a908:b0:306:e3a8:a97b with SMTP id
- 586e51a60fabf-30785c8f016mr4592505fac.21.1753977376331; Thu, 31 Jul 2025
- 08:56:16 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1753977504; x=1754582304;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Ifs8/uczK+VegxbFE6xIJnCm6EiSSgUzb5R6OOcsqQ0=;
+        b=BjVVs8PW+9SWjKhLPQTBf0uEHX5nHqpzkE1GGqY+MgLmUSq1YrwwwlgWRlbzayvddu
+         xO21reIbWRakg4LzQ+7xyEuSpdttAi3OuoQmzdj6MkjC7OT4foC8A5N6eSQ1WzNKm5hl
+         trTXvRPo0EfHGMMh8Hd4COxJ4py70BkO71yO69ry3ygkCZsY02zil/59101RvgdcVuXD
+         eMJW5hOgmYJEbG7mxDM/fLCzGgWPsoP9w7gSZOMFN1wECWQCCkAg4zI4AvQxKVMaqrZw
+         /R+ZMtqz9srTzPzFqfU0/P4xtUn8iAxsFcpu4arwzQCzjyhiCVSKb7FdWxBlx+3sYeR4
+         pyEQ==
+X-Forwarded-Encrypted: i=1; AJvYcCW6B8BuzkT0ivgr4KCzp6qYMAnaPO142EvRFLJFFsrlDj5xfhmYaye7fVEvhyD80ZlruJUhA52sHQQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz/6cEHCpMxYltvfLaOMEPM7FsfY5XOdnqIGKjrEIt4G1DHtIax
+	RVlOkuEKApAJ56ltunLDLs85Z8DB3nIX8GagmFlmg/t2uMgyF7xzhZrUxKY9g3iK6Q==
+X-Gm-Gg: ASbGnctghXC/+AH2fbqA/mnQfXIRiCxK3YTXF+iSnzTPJT30w1YaRS/m/qxTE6CjVA5
+	ybxE33zdxyr/Nq7t1SM08iaOGxTkOjGVfQa8R9rIFCaWKRwndWliChqluASKQCD8hOag8MC8HUw
+	r4L2F2daUluHvDlkhdmiJYq+y2FT5e0uroG4yZg/nNg0npNSjaue8YCYmMdBZB4BGp7n8Um9MwW
+	tVbZ+KtukPlssftmDVR/Zc/MFmj3ZeMNsuRSle6JQ7fqGHGdl7NkQPt3To0w5joc5EMLMM4E+F0
+	yTzsWiNNUcBtwIxsnqxougFWe9bC3F2U8xhtjqKDy3GUFGm2MrdqnPA3Fj0Cfyf9MY0/F57GCLY
+	kgMVF7FkcKXQE+xLZZ9gejrmf3vc4n9+CMAbKGOl6mMSW5KWjVciFJ20xiBBbE1oJHWZD5uWHk6
+	eR8RrTG0Q=
+X-Google-Smtp-Source: AGHT+IGWHL/t/zgFHuwTLbuXtmGy4plZdq6Ni3Ce2UKKLrbtx7L4KMD/3gtPsWhPRCyanPmkvECygg==
+X-Received: by 2002:a05:6000:178d:b0:3a5:8cdd:c174 with SMTP id ffacd0b85a97d-3b794ff797fmr5705864f8f.26.1753977503988;
+        Thu, 31 Jul 2025 08:58:23 -0700 (PDT)
+Message-ID: <898e1c2a-7684-489b-84cd-254b2ee53e5d@suse.com>
+Date: Thu, 31 Jul 2025 17:58:12 +0200
 MIME-Version: 1.0
-References: <20250731110231.3551636-1-andrew.cooper3@citrix.com> <20250731110231.3551636-3-andrew.cooper3@citrix.com>
-In-Reply-To: <20250731110231.3551636-3-andrew.cooper3@citrix.com>
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-Date: Thu, 31 Jul 2025 16:56:04 +0100
-X-Gm-Features: Ac12FXx9bQ3p0q2dkJUATy_Dm9N25VnepvLjjWa79CBl5eij8eiKo-1SySfmpGg
-Message-ID: <CAG7k0Eob8eaGt=qA2hCEWHi5FbavJOe70odo5n+xDdeO6TyeQQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] xen/version: Remove xen_build_id() and export the
- variable instead
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] misra: fix violations in macros GVA_INFO, TRACE_TIME
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ George Dunlap <gwd@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <73cfc8a2d4d66042b49f44c69e672ce8ad0556ce.1753971749.git.dmytro_prokopchuk1@epam.com>
+ <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 31, 2025 at 12:02=E2=80=AFPM Andrew Cooper
-<andrew.cooper3@citrix.com> wrote:
->
-> The API is unergonomic to use, and leads to poor code generation because =
-of
-> unnecessary forcing of data to the stack.
->
-> Rename build_id_p to xen_build_id, and build_id_len to xen_build_id_len, =
-make
-> them __ro_after_init, and export the variables directly.
->
-> No functional change.
->
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Anthony PERARD <anthony.perard@vates.tech>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Julien Grall <julien@xen.org>
-> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Ross Lagerwall <ross.lagerwall@citrix.com>
->
-> Both the code diffstat, and the binary on x86 speaks for themselves:
->
->   add/remove: 1/2 grow/shrink: 0/6 up/down: 4/-348 (-344)
->   Function                                     old     new   delta
->   xen_build_id_len                               -       4      +4
->   build_id_len                                   4       -      -4
->   build_id_p                                     8       -      -8
->   xen_build_id                                  42       8     -34
->   livepatch_printall                           470     432     -38
->   build_id_dep                                 152     113     -39
->   livepatch_op                                7930    7866     -64
->   do_xen_version                              2436    2363     -73
->   livepatch_op.cold                           1420    1332     -88
-> ---
->  xen/common/kernel.c       | 14 ++++----------
->  xen/common/livepatch.c    | 23 ++++++++++-------------
->  xen/common/version.c      | 25 +++++++------------------
->  xen/include/xen/version.h |  4 +++-
->  4 files changed, 24 insertions(+), 42 deletions(-)
->
-> diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-> index 5be668ba855a..e6979352e100 100644
-> --- a/xen/common/kernel.c
-> +++ b/xen/common/kernel.c
-> @@ -510,21 +510,15 @@ static long xenver_varbuf_op(int cmd, XEN_GUEST_HAN=
-DLE_PARAM(void) arg)
->      struct xen_varbuf user_str;
->      const char *str =3D NULL;
->      size_t sz;
-> -    int rc;
->
->      switch ( cmd )
->      {
->      case XENVER_build_id:
-> -    {
-> -        unsigned int local_sz;
-> -
-> -        rc =3D xen_build_id((const void **)&str, &local_sz);
-> -        if ( rc )
-> -            return rc;
-> -
-> -        sz =3D local_sz;
-> +        str =3D xen_build_id;
-> +        sz  =3D xen_build_id_len;
-> +        if ( !sz )
-> +            return -ENODATA;
->          goto have_len;
-> -    }
->
->      case XENVER_extraversion2:
->          str =3D xen_extra_version();
-> diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-> index 9a0df5363b59..9285f88644f4 100644
-> --- a/xen/common/livepatch.c
-> +++ b/xen/common/livepatch.c
-> @@ -475,8 +475,8 @@ static int parse_buildid(const struct livepatch_elf_s=
-ec *sec,
->
->  static int check_xen_buildid(const struct livepatch_elf *elf)
->  {
-> -    const void *id;
-> -    unsigned int len;
-> +    const void *id =3D xen_build_id;
-> +    unsigned int len =3D xen_build_id_len;
+On 31.07.2025 17:37, Andrew Cooper wrote:
+> On 31/07/2025 4:16 pm, Dmytro Prokopchuk1 wrote:
+>> MISRA Rule 13.1: Initializer lists shall not contain persistent side
+>> effects.
+>>
+>> The violations occur because both the `GVA_INFO` and `TRACE_TIME` macro
+>> expansions include expressions with persistent side effects introduced
+>> via inline assembly.
+>>
+>> In the case of `GVA_INFO`, the issue stems from the initializer list
+>> containing a direct call to `current`, which evaluates to
+>> `this_cpu(curr_vcpu)` and involves persistent side effects via the
+>> `asm` statement. To resolve this, the side-effect-producing expression
+>> is computed in a separate statement prior to the macro initialization:
+>>
+>>     struct vcpu *current_vcpu = current;
+>>
+>> The computed value is passed into the `GVA_INFO(current_vcpu)` macro,
+>> ensuring that the initializer is clean and free of such side effects.
+>>
+>> Similarly, the `TRACE_TIME` macro violates this rule when accessing
+>> expressions like `current->vcpu_id` and `current->domain->domain_id`,
+>> which also depend on `current` and inline assembly. To fix this, the
+>> value of `current` is assigned to a temporary variable:
+>>
+>>     struct vcpu *v = current;
+>>
+>> This temporary variable is then used to access `domain_id` and `vcpu_id`.
+>> This ensures that the arguments passed to the `TRACE_TIME` macro are
+>> simple expressions free of persistent side effects.
+>>
+>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+> 
+> The macro `current` specifically does not (and must not) have side
+> effects.  It is expected to behave like a plain `struct vcpu *current;`
+> variable, and what Eclair is noticing is the thread-local machinery
+> under this_cpu() (or in x86's case, get_current()).
+> 
+> In ARM's case, it's literally reading the hardware thread pointer
+> register.  Can anything be done to tell Eclair that `this_cpu()`
+> specifically does not have side effects?
+> 
+> The only reason that GVA_INFO() and TRACE_TIME() are picked out is
+> because they both contain embedded structure initialisation, and this is
+> is actually an example where trying to comply with MISRA interferes with
+> what is otherwise a standard pattern in Xen.
 
-Is it worth making this const? Or you could just remove these variables
-entirely and use xen_build_id / xen_build_id_len directly in the rest of
-the function.
+Irrespective of what you say, some of the changes here were eliminating
+multiple adjacent uses of current, which - iirc - often the compiler
+can't fold via CSE.
 
-In any case,
-
-Reviewed-by: Ross Lagerwall <Ross.lagerwall@citrix.com>
+Jan
 
