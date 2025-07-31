@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 415A3C87FCA
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065864.1431182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA64FC87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065865.1431193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfn-0000zX-6N; Thu, 31 Jul 2025 15:58:27 +0000
+	id 1uhVfu-0001GR-Is; Thu, 31 Jul 2025 15:58:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065864.1431182; Thu, 31 Jul 2025 15:58:27 +0000
+Received: by outflank-mailman (output) from mailman id 1065865.1431193; Thu, 31 Jul 2025 15:58:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfn-0000zQ-2q; Thu, 31 Jul 2025 15:58:27 +0000
-Received: by outflank-mailman (input) for mailman id 1065864;
- Thu, 31 Jul 2025 15:58:26 +0000
+	id 1uhVfu-0001GK-Dq; Thu, 31 Jul 2025 15:58:34 +0000
+Received: by outflank-mailman (input) for mailman id 1065865;
+ Thu, 31 Jul 2025 15:58:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lm68=2M=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uhVfl-0000zK-W4
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:25 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1uhVfs-0000zK-Pk
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:32 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3095bcfe-6e27-11f0-a320-13f23c93f187;
- Thu, 31 Jul 2025 17:58:24 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-455ecacfc32so4420575e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:24 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e89771e2sm21696185ad.88.2025.07.31.08.58.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Jul 2025 08:58:23 -0700 (PDT)
+ id 3520d0fe-6e27-11f0-a320-13f23c93f187;
+ Thu, 31 Jul 2025 17:58:32 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-553d771435fso1122155e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:32 -0700 (PDT)
+Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Jul 2025 08:58:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,140 +47,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3095bcfe-6e27-11f0-a320-13f23c93f187
+X-Inumbo-ID: 3520d0fe-6e27-11f0-a320-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1753977504; x=1754582304; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ifs8/uczK+VegxbFE6xIJnCm6EiSSgUzb5R6OOcsqQ0=;
-        b=bdaKA041LQkgUIXCtGLD8hnTUVZdBobMsln5lHAhiZS+zZi12jSS6pkfDVVBefXW/Z
-         wGYA3KguyS08nz4okOJunlR/4DJmGz84agcjCZRmXf8a21RS4zudi/SdKzAsXZ7RHbYg
-         O178UOxvs8K+zxV7CsQ9fnP6KE8DOGzFUIAw8icNKh+2YHEchZ1sC6wmTmqRFqJDZcOv
-         f7Tshi0u0v3iJD6YmkOJSQd3MkfHxl74Cd0x67vTA+SWhneuRY4LyFngpfaSkHyTIVXq
-         HC0frKrOn+hrkODcxylNQUoV5sezJ3G4FaNiPk9NrfPkKE6yZUMf+MHGUr5/CnTzXE0c
-         SbNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977504; x=1754582304;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1753977512; x=1754582312; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ifs8/uczK+VegxbFE6xIJnCm6EiSSgUzb5R6OOcsqQ0=;
-        b=BjVVs8PW+9SWjKhLPQTBf0uEHX5nHqpzkE1GGqY+MgLmUSq1YrwwwlgWRlbzayvddu
-         xO21reIbWRakg4LzQ+7xyEuSpdttAi3OuoQmzdj6MkjC7OT4foC8A5N6eSQ1WzNKm5hl
-         trTXvRPo0EfHGMMh8Hd4COxJ4py70BkO71yO69ry3ygkCZsY02zil/59101RvgdcVuXD
-         eMJW5hOgmYJEbG7mxDM/fLCzGgWPsoP9w7gSZOMFN1wECWQCCkAg4zI4AvQxKVMaqrZw
-         /R+ZMtqz9srTzPzFqfU0/P4xtUn8iAxsFcpu4arwzQCzjyhiCVSKb7FdWxBlx+3sYeR4
-         pyEQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW6B8BuzkT0ivgr4KCzp6qYMAnaPO142EvRFLJFFsrlDj5xfhmYaye7fVEvhyD80ZlruJUhA52sHQQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz/6cEHCpMxYltvfLaOMEPM7FsfY5XOdnqIGKjrEIt4G1DHtIax
-	RVlOkuEKApAJ56ltunLDLs85Z8DB3nIX8GagmFlmg/t2uMgyF7xzhZrUxKY9g3iK6Q==
-X-Gm-Gg: ASbGnctghXC/+AH2fbqA/mnQfXIRiCxK3YTXF+iSnzTPJT30w1YaRS/m/qxTE6CjVA5
-	ybxE33zdxyr/Nq7t1SM08iaOGxTkOjGVfQa8R9rIFCaWKRwndWliChqluASKQCD8hOag8MC8HUw
-	r4L2F2daUluHvDlkhdmiJYq+y2FT5e0uroG4yZg/nNg0npNSjaue8YCYmMdBZB4BGp7n8Um9MwW
-	tVbZ+KtukPlssftmDVR/Zc/MFmj3ZeMNsuRSle6JQ7fqGHGdl7NkQPt3To0w5joc5EMLMM4E+F0
-	yTzsWiNNUcBtwIxsnqxougFWe9bC3F2U8xhtjqKDy3GUFGm2MrdqnPA3Fj0Cfyf9MY0/F57GCLY
-	kgMVF7FkcKXQE+xLZZ9gejrmf3vc4n9+CMAbKGOl6mMSW5KWjVciFJ20xiBBbE1oJHWZD5uWHk6
-	eR8RrTG0Q=
-X-Google-Smtp-Source: AGHT+IGWHL/t/zgFHuwTLbuXtmGy4plZdq6Ni3Ce2UKKLrbtx7L4KMD/3gtPsWhPRCyanPmkvECygg==
-X-Received: by 2002:a05:6000:178d:b0:3a5:8cdd:c174 with SMTP id ffacd0b85a97d-3b794ff797fmr5705864f8f.26.1753977503988;
-        Thu, 31 Jul 2025 08:58:23 -0700 (PDT)
-Message-ID: <898e1c2a-7684-489b-84cd-254b2ee53e5d@suse.com>
-Date: Thu, 31 Jul 2025 17:58:12 +0200
+        bh=WQKgU+Lnj9fqS+ICL+XL3aDj77hg68+WgDppr1D0Eyg=;
+        b=HLjwoSxP0+eU6lRbcRVItyN1LYqfqruqlOhjxVBk/X2d2K2rWzjqxZwZFDmnRTJGu+
+         LuRp8kIsUHDzXthQoYsr1Zjb48p+ezVifjQHcBOHNN26CnJNW4TgcGnzyHtCLTXLkWI7
+         U1/zNfIm+soN6ELP3DCnmOWXl3WSLtDLtScy4698bxCaVbiJ/v/kso44rV9XjMm01nD6
+         esXdrdmKpjEoaFTpvc9/+yXnM5QT0GxwMwdfE7ijx9V758WVVxhlLM5mKdBoXZ2g2Z3Y
+         13gqT25o7+Ip82Ah5byiIFzfaopTkgY3cKbp7zRvLTRgqbWTXKp8/uj9bj/b83GDU/EL
+         U2FQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753977512; x=1754582312;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=WQKgU+Lnj9fqS+ICL+XL3aDj77hg68+WgDppr1D0Eyg=;
+        b=uqPlUHIgRRzgWM3iq5xEiu2h6Ko5n/AOATZZ8mMrVHMmrblj3he7lujO7i2OSQzS8h
+         OyK2MlI7gK7fm3ntOK2ud0HW+p5BE/6pNBgQSAAOHYDspo5ErscCynv8Qag9ouzuo2tc
+         YESE1C80nSWHmpWB9YtNmkF5ewSXLddyVAxJXW4x75ph9c+hcjrWTkmQ7FmNSgnCM1Cw
+         61HhEd/gt9+e3Qr1tZ2tQhuPHA+zwFnWon/YBVQfrpGt/ZBGFwgt9yCOIEamNec904q7
+         pb17sGFX8HyJCA/FXvcOWvRR0AI6MpxS49sHrlMba8k3TXszmYmx2TXeLcqNbPmaaEUk
+         4fkQ==
+X-Gm-Message-State: AOJu0YwMVxPCwgCT4+ueFmHU1KnNfGoiqBrSKjckHIjNKboZ5wl++3Ob
+	+e48susSMjtxK4XhAKiLXxvnT/XVicqPsgnS51Vv8iDzOPMa50BgRiOjNH4dbw==
+X-Gm-Gg: ASbGncvkFit8cwfPmZMZnbr7gzrk6hkMbm4WkSrzuy6jck/ZMIc40jYoH6B00oHR35k
+	VeNS4Divuna5gYJLMbPJiXo52WyaPPJTmQH5Cy//DGn5QO3wleUVGVXSJCey8/+ML34TbffXG8/
+	2S42RQqXNOAOTwQS+Mur4dqG+w4PGUgbrzbCnmvEamFbNpDoGg9OSuEz3BHafU4m0yep9sKv8La
+	RF9svmRuXfAE22GdFIRd0uye+IWXVQL2EdzDORE7N2Wk86p3Py5jE/bnGDkGiLsVTlMNe16FNaV
+	tx9TA7F6hByDTjGUBzmvNtAg5//ARzyuPfFMiHPLDMTKiiBr2ksK4XrAUqWT0AT9SX0Z6w1byqV
+	vzhVj2Umjc1DnN72JUpWVQfqonw2at9HyuME+QVXfECQqcqhtnyglpteSAONlaw==
+X-Google-Smtp-Source: AGHT+IG3Y8cbrf+MhbaTj7HO65vD5t1UDH9sQeDXs8qbfyuCWEZXPeqRxAnmW6f7W2tcCeyZbHuJlA==
+X-Received: by 2002:a05:6512:ba1:b0:55b:8397:cffd with SMTP id 2adb3069b0e04-55b8397d195mr2182640e87.9.1753977511378;
+        Thu, 31 Jul 2025 08:58:31 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 01/20] xen/riscv: implement sbi_remote_hfence_gvma()
+Date: Thu, 31 Jul 2025 17:58:00 +0200
+Message-ID: <b0649cf7b071d0a1cdd7fc9b8d73abea5d0646b4.1753973161.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
+References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] misra: fix violations in macros GVA_INFO, TRACE_TIME
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
- George Dunlap <gwd@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <73cfc8a2d4d66042b49f44c69e672ce8ad0556ce.1753971749.git.dmytro_prokopchuk1@epam.com>
- <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 31.07.2025 17:37, Andrew Cooper wrote:
-> On 31/07/2025 4:16 pm, Dmytro Prokopchuk1 wrote:
->> MISRA Rule 13.1: Initializer lists shall not contain persistent side
->> effects.
->>
->> The violations occur because both the `GVA_INFO` and `TRACE_TIME` macro
->> expansions include expressions with persistent side effects introduced
->> via inline assembly.
->>
->> In the case of `GVA_INFO`, the issue stems from the initializer list
->> containing a direct call to `current`, which evaluates to
->> `this_cpu(curr_vcpu)` and involves persistent side effects via the
->> `asm` statement. To resolve this, the side-effect-producing expression
->> is computed in a separate statement prior to the macro initialization:
->>
->>     struct vcpu *current_vcpu = current;
->>
->> The computed value is passed into the `GVA_INFO(current_vcpu)` macro,
->> ensuring that the initializer is clean and free of such side effects.
->>
->> Similarly, the `TRACE_TIME` macro violates this rule when accessing
->> expressions like `current->vcpu_id` and `current->domain->domain_id`,
->> which also depend on `current` and inline assembly. To fix this, the
->> value of `current` is assigned to a temporary variable:
->>
->>     struct vcpu *v = current;
->>
->> This temporary variable is then used to access `domain_id` and `vcpu_id`.
->> This ensures that the arguments passed to the `TRACE_TIME` macro are
->> simple expressions free of persistent side effects.
->>
->> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-> 
-> The macro `current` specifically does not (and must not) have side
-> effects.  It is expected to behave like a plain `struct vcpu *current;`
-> variable, and what Eclair is noticing is the thread-local machinery
-> under this_cpu() (or in x86's case, get_current()).
-> 
-> In ARM's case, it's literally reading the hardware thread pointer
-> register.  Can anything be done to tell Eclair that `this_cpu()`
-> specifically does not have side effects?
-> 
-> The only reason that GVA_INFO() and TRACE_TIME() are picked out is
-> because they both contain embedded structure initialisation, and this is
-> is actually an example where trying to comply with MISRA interferes with
-> what is otherwise a standard pattern in Xen.
+Instruct the remote harts to execute one or more HFENCE.GVMA instructions,
+covering the range of guest physical addresses between start_addr and
+start_addr + size for all VMIDs.
 
-Irrespective of what you say, some of the changes here were eliminating
-multiple adjacent uses of current, which - iirc - often the compiler
-can't fold via CSE.
+The remote fence operation applies to the entire address space if either:
+ - start_addr and size are both 0, or
+ - size is equal to 2^XLEN-1.
 
-Jan
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V3:
+ - Update the comment message above declaration of sbi_remote_hfence_gvma()
+   and update the commit message in sync.
+ - Drop ASSERT() in sbi_remote_hfence_gvma().
+---
+ xen/arch/riscv/include/asm/sbi.h | 19 +++++++++++++++++++
+ xen/arch/riscv/sbi.c             |  7 +++++++
+ 2 files changed, 26 insertions(+)
+
+diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
+index 527d773277..0277aab747 100644
+--- a/xen/arch/riscv/include/asm/sbi.h
++++ b/xen/arch/riscv/include/asm/sbi.h
+@@ -89,6 +89,25 @@ bool sbi_has_rfence(void);
+ int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
+                           size_t size);
+ 
++/*
++ * Instructs the remote harts to execute one or more HFENCE.GVMA
++ * instructions, covering the range of guest physical addresses
++ * between start_addr and start_addr + size for all VMIDs.
++ *
++ * Returns 0 if IPI was sent to all the targeted harts successfully
++ * or negative value if start_addr or size is not valid.
++ *
++ * The remote fence operation applies to the entire address space if either:
++ *  - start_addr and size are both 0, or
++ *  - size is equal to 2^XLEN-1.
++ *
++ * @cpu_mask a cpu mask containing all the target CPUs (in Xen space).
++ * @param start virtual address start
++ * @param size virtual address range size
++ */
++int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
++                           size_t size);
++
+ /*
+  * Initialize SBI library
+  *
+diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
+index 4209520389..1809f614c5 100644
+--- a/xen/arch/riscv/sbi.c
++++ b/xen/arch/riscv/sbi.c
+@@ -258,6 +258,13 @@ int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
+                       cpu_mask, start, size, 0, 0);
+ }
+ 
++int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
++                           size_t size)
++{
++    return sbi_rfence(SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA,
++                      cpu_mask, start, size, 0, 0);
++}
++
+ /* This function must always succeed. */
+ #define sbi_get_spec_version()  \
+     sbi_ext_base_func(SBI_EXT_BASE_GET_SPEC_VERSION)
+-- 
+2.50.1
+
 
