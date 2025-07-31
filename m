@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95890C87FD2
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:03:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065993.1431392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950C7C87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:03:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065995.1431397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVk6-0005Cv-Kc; Thu, 31 Jul 2025 16:02:54 +0000
+	id 1uhVk6-0005GG-UH; Thu, 31 Jul 2025 16:02:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065993.1431392; Thu, 31 Jul 2025 16:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 1065995.1431397; Thu, 31 Jul 2025 16:02:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVk6-0005Cm-GN; Thu, 31 Jul 2025 16:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 1065993;
+	id 1uhVk6-0005G5-PM; Thu, 31 Jul 2025 16:02:54 +0000
+Received: by outflank-mailman (input) for mailman id 1065995;
  Thu, 31 Jul 2025 16:02:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVg6-0001FB-CR
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:46 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
+ id 1uhVg8-0001FB-MK
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:48 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3bee2649-6e27-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:58:43 +0200 (CEST)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-55b85413019so600238e87.0
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:43 -0700 (PDT)
+ id 3df0b852-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:47 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-55b8b8e00caso569926e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:47 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.41
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:42 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,107 +47,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3bee2649-6e27-11f0-b895-0df219b8e170
+X-Inumbo-ID: 3df0b852-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977523; x=1754582323; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753977526; x=1754582326; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pEOkzQdBxpbC9Okf9MXfHH5aCeAaO0EgwJT3GQlkxY4=;
-        b=YMKEAMhjuWtxzRUxAneynLhqIVice5DnDqxQLQ9PET6hiML/XzAmi46VWrMsVCvru8
-         UiNes28DBwPfJUU5HdW1EEC+JUvsuG1PzqCesS/dGJcGNSqYXp/XOcLks3pEYDR/mJRb
-         uoEK3AznXY3hQ1kiwPtzDP+lcWDQxlSdw4EJV1qnPZeAQz93nNPdmiHfuMhBCGMIIl8B
-         EEGiMvSEtU5GjB/BEdKpYsWUR7Q0OP86HZOXzwWRCGwSoXl5zYqHUEaxa5SwGsvlEdKC
-         1yFRj7wyUxWvdYZN8malKe4pFL9aIxCnorZpYGM2C57KEwsutSiVgkpLecW9vvKnTZug
-         R7XQ==
+        bh=H9A8ULyozJc/nKuEPNSmZGMU66I2uIkMKGf8g4aTjZc=;
+        b=niSnpS1EAKNw49D51QjWah0OHUjGKtctuZ56p2P6RP2lYOGO05muqvQl/yPwasd0Ox
+         CiHcZvbvQE3phmnBK0XykmIkyXBNixPYC91OpTL+47AxTDl6LNGXd3rQ9k7ym1DlvoJt
+         JX8/LQARLv3orAdL+O0PEaYBIKpRJ6JhsTByggUvk67jhwpkJp3jxy24KSzM3GTG3ikP
+         CSwXUpMODf6W2oivMpuaig5JdKUKU5qgudEferfInH5+sdyz852duCGbwdXalqQf2v7R
+         AQuE2P5IUj//70qvxqonWZsiU3xLYP3Ac/GmA5vWHIQ4FxvGIr6mT87cznZZBt1oH4F/
+         S4fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977523; x=1754582323;
+        d=1e100.net; s=20230601; t=1753977526; x=1754582326;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pEOkzQdBxpbC9Okf9MXfHH5aCeAaO0EgwJT3GQlkxY4=;
-        b=kHT5W+crpdEDTf1O4S3YmiDOpsJd3eZbJ2QWXkKl3liyNannwqQ0dwOF5m2A+NVp9A
-         inzS9uUKcsInAJSUxAN4KTXwuuxckwrvu7WWwxMNmx6KpkTGFMSDnbjBSA1JliAJevTA
-         JoRngTx/q3teaOQxuw5nV6DlZw4onRqjoPLw1TQDO/76i9cecqU4Umfngk6od9OmkPWI
-         cElrmMlzTs73kCuli6VuLK1WyweLCMpGOP664IZbqsDI92u3e/PjagV7Gw3kowiLSFiw
-         l5KKXo4P3jAPNfa/1Q1LhrikAO/EBkR11jWm8iccnwl0M3gKtAIvim6CJBc5tdwKrfz3
-         5lBQ==
-X-Gm-Message-State: AOJu0YyzEHnU7RKaO97nR2fx/9Olt12mnPETE6gXOhljUPjirZUYRFN6
-	zwObndqd2yKW4KeYompu/HNptSm3+wzPy9kNXy8WQ1l1f45zy8jkoUIfF2v8dg==
-X-Gm-Gg: ASbGnctyniT0zI4z1ObHCFuhwviRRowzsN/iqQ7cb2X0O7XZffAct8N38KB0ET62T40
-	0aXfkGb0EAWdSw/0PiAt3nSmOejAO0PqHKtGVt+oSeuHy5hb3FjbH2KOQvjnY/jUlS/YJ/6wtY7
-	2Fknv59k1MlHQZtNAx3p5N2BV0KBfBP4wP/99oDJw521IFGcgWWaFttHWMCm0mnMAnnOsbk+Tbu
-	49QYXSem1z/wMwWpviyq8+PJFJri9C0L4bGzS8l2Z8gZXZiYLcZGrLjT53IcJr/+enUp5tqdIkZ
-	+JpCDNdYICtjqz3U15ZuRC2/g1v3g5coUjwfPjLLdkdkZJ3+MIf7F2+JLEcPdjpo9P07YlDGM8t
-	SQYs1RTReZ3Wwxsua0qqWx4JHrIgQy57k2KStwCfAHzuzbbidjtU0h7xmTWWCpw==
-X-Google-Smtp-Source: AGHT+IFLTOuKuRf2T7tNGueoS/xGQR2k3DSUUMxZkxu+W21mtiv+Yw78Y6yFbwkuLfLx9uu1tuhAbA==
-X-Received: by 2002:a05:6512:3ba7:b0:554:f72c:819d with SMTP id 2adb3069b0e04-55b7c08ec37mr2819368e87.43.1753977522774;
-        Thu, 31 Jul 2025 08:58:42 -0700 (PDT)
+        bh=H9A8ULyozJc/nKuEPNSmZGMU66I2uIkMKGf8g4aTjZc=;
+        b=taWu8yoTER+rjRrvPyZT+TxQR+nSVgMeh8BdPSs1/rkbxUa1k0j8ZAF8p7banHE8a6
+         XbQFAdIFMyRoPfHongybugKQhATk2b0Av8/gPNK7AsDqKsYCeZB08TQqT8cdGFDTJdrC
+         ymF54hkmnbS1YaLgjUx3eyuA442ZNur39Ily3emh+Ubn1q2CmJZeosQi/mr5mwphKR8a
+         EnngOv80NxnC/kDXUnHaPnapSfnyeAaeQzylm2ELWD36khm/F+lQpU/CJ2HJZZVEC/h6
+         5XP7sE3JFQAt7WzF+LHQrSWsI3EzVvYlCaBiEhYJbs9b+4vsidLGJEdqLbqHf+egabbZ
+         CQfQ==
+X-Gm-Message-State: AOJu0Yzbt5wo8OO0q3j0E2J7FZaNQfh2PgDpWQZTKkLB/qwJq6uBAofj
+	gUPbXLhj1aXF3VeXNtJ3P+i6r/S2+JoKITRwRRNjFVbmf8QKD4W/5h2vs2XohA==
+X-Gm-Gg: ASbGnctNYMyABM2K/b0qGK+yIfV4jEhdWxzVLlfOBV7RK5hTA06xbr/zuOLL+re42fv
+	xbDbqJ6X1itNyvSH0eEa2l2LSzR+9hVeet1LuSCHkb88Aaotgu/ocHJV0/SN9Mj43ncenN9Q8dC
+	i5xi3cCTtGOLa8smiDcghTGoQjTwjlX8X+C8XR0LR5oR3BLIP2f4GtaD7MHnGdk2QaIhaT+2eN0
+	EZwMCBMY3yWgOPSgOl2K3mbj//Hnn0D4w9ic/5lCNb3ASUw0VKsqbpSJWftg0nS9D3P8zCz5arh
+	QuejByimFaw6LN9ueKj2IkLzj4ObIPAgjpQWzZfzs8/24qgn6pVsuoMsNl1zSH2jKl8ivELnpCZ
+	vQ5W4bbQm6bAexi/y138sB1HJ7PjMOlewv3XCo1yaWJa+V/3M3kl5NKnElOo5dQ==
+X-Google-Smtp-Source: AGHT+IG3rQ2MDLV+jzyMChDNS/ZKIl//GIGUS3fiRb4942UTVk8U82i3aEykhbwBVDrOU94hPB+pGA==
+X-Received: by 2002:a05:6512:108b:b0:55a:4bfe:bf78 with SMTP id 2adb3069b0e04-55b7c00d417mr2483333e87.2.1753977526148;
+        Thu, 31 Jul 2025 08:58:46 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3 09/20] xen/dom0less: abstract Arm-specific p2m type name for device MMIO mappings
-Date: Thu, 31 Jul 2025 17:58:08 +0200
-Message-ID: <b9f7a13262cb3b482fb3d5cbbee6c72781fbfdc2.1753973161.git.oleksii.kurochko@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 11/20] xen/riscv: implement function to map memory in guest p2m
+Date: Thu, 31 Jul 2025 17:58:10 +0200
+Message-ID: <e00dcbecf8f0dbe863628dcc45526100f9ee86a3.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Rename `p2m_mmio_direct_dev` to a more architecture-neutral alias
-`p2m_mmio_direct` to avoid leaking Arm-specific naming into common Xen code,
-such as dom0less passthrough property handling.
+Implement map_regions_p2mt() to map a region in the guest p2m with
+a specific p2m type. The memory attributes will be derived from the
+p2m type. This function is going to be called from dom0less common
+code.
 
-This helps reduce platform-specific terminology in shared logic and
-improves clarity for future non-Arm ports (e.g. RISC-V or PowerPC).
+To implement it, introduce:
+- p2m_write_(un)lock() to ensure safe concurrent updates to the P2M.
+  As part of this change, introduce p2m_tlb_flush_sync() and
+  p2m_force_tlb_flush_sync().
+- A stub for p2m_set_range() to map a range of GFNs to MFNs.
+- p2m_insert_mapping().
+- p2m_is_write_locked().
 
-No functional changes — the definition is preserved via a macro alias
-for Arm.
+Drop guest_physmap_add_entry() and call map_regions_p2mt() directly
+from guest_physmap_add_page(), making guest_physmap_add_entry()
+unnecessary.
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - New patch
+ - Introudce p2m_write_lock() and p2m_is_write_locked().
+ - Introduce p2m_force_tlb_flush_sync() and p2m_flush_tlb() to flush TLBs
+   after p2m table update.
+ - Change an argument of p2m_insert_mapping() from struct domain *d to
+   p2m_domain *p2m.
+ - Drop guest_physmap_add_entry() and use map_regions_p2mt() to define
+   guest_physmap_add_page().
+ - Add declaration of map_regions_p2mt() to asm/p2m.h.
+ - Rewrite commit message and subject.
+ - Drop p2m_access_t related stuff.
+ - Add defintion of  p2m_is_write_locked().
 ---
- xen/arch/arm/include/asm/p2m.h          | 2 ++
- xen/common/device-tree/dom0less-build.c | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+Changes in v2:
+ - This changes were part of "xen/riscv: implement p2m mapping functionality".
+   No additional signigicant changes were done.
+---
+ xen/arch/riscv/include/asm/p2m.h | 31 ++++++++++-----
+ xen/arch/riscv/p2m.c             | 65 ++++++++++++++++++++++++++++++++
+ 2 files changed, 87 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
-index 2d53bf9b61..bade1eb71b 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -137,6 +137,8 @@ typedef enum {
-     p2m_max_real_type,  /* Types after this won't be store in the p2m */
- } p2m_type_t;
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 5f253da1dd..ada3c398b4 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -121,21 +121,22 @@ static inline int guest_physmap_mark_populate_on_demand(struct domain *d,
+     return -EOPNOTSUPP;
+ }
  
-+#define p2m_mmio_direct p2m_mmio_direct_dev
+-static inline int guest_physmap_add_entry(struct domain *d,
+-                                          gfn_t gfn, mfn_t mfn,
+-                                          unsigned long page_order,
+-                                          p2m_type_t t)
+-{
+-    BUG_ON("unimplemented");
+-    return -EINVAL;
+-}
++/*
++ * Map a region in the guest p2m with a specific p2m type.
++ * The memory attributes will be derived from the p2m type.
++ */
++int map_regions_p2mt(struct domain *d,
++                     gfn_t gfn,
++                     unsigned long nr,
++                     mfn_t mfn,
++                     p2m_type_t p2mt);
+ 
+ /* Untyped version for RAM only, for compatibility */
+ static inline int __must_check
+ guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
+                        unsigned int page_order)
+ {
+-    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
++    return map_regions_p2mt(d, gfn, BIT(page_order, UL), mfn, p2m_ram_rw);
+ }
+ 
+ static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
+@@ -159,6 +160,18 @@ static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+     /* Not supported on RISCV. */
+ }
+ 
++static inline void p2m_write_lock(struct p2m_domain *p2m)
++{
++    write_lock(&p2m->lock);
++}
 +
- /* We use bitmaps and mask to handle groups of types */
- #define p2m_to_mask(_t) (1UL << (_t))
++void p2m_write_unlock(struct p2m_domain *p2m);
++
++static inline int p2m_is_write_locked(struct p2m_domain *p2m)
++{
++    return rw_is_write_locked(&p2m->lock);
++}
++
+ unsigned long construct_hgatp(struct p2m_domain *p2m, uint16_t vmid);
  
-diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
-index 6bb038111d..5b97bf0343 100644
---- a/xen/common/device-tree/dom0less-build.c
-+++ b/xen/common/device-tree/dom0less-build.c
-@@ -185,7 +185,7 @@ static int __init handle_passthrough_prop(struct kernel_info *kinfo,
-                                gaddr_to_gfn(gstart),
-                                PFN_DOWN(size),
-                                maddr_to_mfn(mstart),
--                               p2m_mmio_direct_dev);
-+                               p2m_mmio_direct);
-         if ( res < 0 )
-         {
-             printk(XENLOG_ERR
+ #endif /* ASM__RISCV__P2M_H */
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index cac07c51c9..7cfcf76f24 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -9,6 +9,41 @@
+ 
+ unsigned int __read_mostly p2m_root_order;
+ 
++/*
++ * Force a synchronous P2M TLB flush.
++ *
++ * Must be called with the p2m lock held.
++ */
++static void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
++{
++    struct domain *d = p2m->domain;
++
++    ASSERT(p2m_is_write_locked(p2m));
++
++    sbi_remote_hfence_gvma(d->dirty_cpumask, 0, 0);
++
++    p2m->need_flush = false;
++}
++
++void p2m_tlb_flush_sync(struct p2m_domain *p2m)
++{
++    if ( p2m->need_flush )
++        p2m_force_tlb_flush_sync(p2m);
++}
++
++/* Unlock the flush and do a P2M TLB flush if necessary */
++void p2m_write_unlock(struct p2m_domain *p2m)
++{
++    /*
++     * The final flush is done with the P2M write lock taken to avoid
++     * someone else modifying the P2M wbefore the TLB invalidation has
++     * completed.
++     */
++    p2m_tlb_flush_sync(p2m);
++
++    write_unlock(&p2m->lock);
++}
++
+ static void clear_and_clean_page(struct page_info *page)
+ {
+     clear_domain_page(page_to_mfn(page));
+@@ -139,3 +174,33 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ 
+     return 0;
+ }
++
++static int p2m_set_range(struct p2m_domain *p2m,
++                         gfn_t sgfn,
++                         unsigned long nr,
++                         mfn_t smfn,
++                         p2m_type_t t)
++{
++    return -EOPNOTSUPP;
++}
++
++static int p2m_insert_mapping(struct p2m_domain *p2m, gfn_t start_gfn,
++                              unsigned long nr, mfn_t mfn, p2m_type_t t)
++{
++    int rc;
++
++    p2m_write_lock(p2m);
++    rc = p2m_set_range(p2m, start_gfn, nr, mfn, t);
++    p2m_write_unlock(p2m);
++
++    return rc;
++}
++
++int map_regions_p2mt(struct domain *d,
++                     gfn_t gfn,
++                     unsigned long nr,
++                     mfn_t mfn,
++                     p2m_type_t p2mt)
++{
++    return p2m_insert_mapping(p2m_get_hostp2m(d), gfn, nr, mfn, p2mt);
++}
 -- 
 2.50.1
 
