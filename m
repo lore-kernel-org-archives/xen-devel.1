@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31579C87FD3
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 09:28:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065151.1430510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E15C83F17
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 09:31:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065199.1430559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhPaA-0000mM-Vf; Thu, 31 Jul 2025 09:28:14 +0000
+	id 1uhPd4-0005An-Ea; Thu, 31 Jul 2025 09:31:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065151.1430510; Thu, 31 Jul 2025 09:28:14 +0000
+Received: by outflank-mailman (output) from mailman id 1065199.1430559; Thu, 31 Jul 2025 09:31:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhPaA-0000mF-S9; Thu, 31 Jul 2025 09:28:14 +0000
-Received: by outflank-mailman (input) for mailman id 1065151;
- Thu, 31 Jul 2025 09:28:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uhPd4-0005Ag-Bt; Thu, 31 Jul 2025 09:31:14 +0000
+Received: by outflank-mailman (input) for mailman id 1065199;
+ Thu, 31 Jul 2025 09:31:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=X87O=2M=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1uhPa8-0000Jb-Hz
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 09:28:12 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id acc1625c-6df0-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 11:28:10 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-455f7cc9362so894745e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 02:28:10 -0700 (PDT)
-Received: from lab.home
- (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
- [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-458953cfcc1sm60905485e9.17.2025.07.31.02.28.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 02:28:09 -0700 (PDT)
+ (envelope-from <SRS0=lm68=2M=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uhPd3-0005Aa-Uz
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 09:31:13 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 19169eee-6df1-11f0-a320-13f23c93f187;
+ Thu, 31 Jul 2025 11:31:12 +0200 (CEST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4555f89b236so1640365e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 02:31:12 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b422b7e4fc1sm963544a12.28.2025.07.31.02.31.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Jul 2025 02:31:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,595 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acc1625c-6df0-11f0-b895-0df219b8e170
+X-Inumbo-ID: 19169eee-6df1-11f0-a320-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753954090; x=1754558890; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vSeD66VYY/7lq9b03uVb3nrDcwpq4lY3KXbmJLU83qc=;
-        b=a+G1jc9GkMa6bLFx2hkQQMLHck0kTKTFj5+TN2kX4hPxdGj+uJ7SjSy5Gsp7tojQpx
-         QwU8dtl3za/GnBUTwuSVxSAV6Y7S5pRMZ7RbeVfXsWbvkoZ9roU0jrxQsIy7IS0HlhyS
-         fHoDc21iNChzU/6L+Tl/bz7m7aXKQduHM3C5YcmNKScUPT0RDMvsPGV7+gXTIsVghwIL
-         tXCAzSQrq/XIYiJ1YTTQ2qdoo/8UdJzSgV8a6hg3aYw/v+jFgtxhj5ipKPCRCm+/AMuo
-         1L5zbWUfSHTMkPnbBOANVSydpJX6Fh+SQMhupWpqKl56ytgzuOI0FJVIYEPOPAspLXNp
-         v1hg==
+        d=suse.com; s=google; t=1753954272; x=1754559072; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=GZ7z844DnX0shFJoAtbgL2qxPQ8Qc41rLYUtyMT/grk=;
+        b=Od6FLUz0Z1gBinE2aQMs2hPd+8/oTenC/ONsffyEEveLmiYJVaykUJ3mv6Ll558z0q
+         erG9DZ5auI1pDwZ1xYxAZ3UEVhFywZ5Bg3aGE5l72c3Si1dJ1IDEosyNjzi2k6aA5DoY
+         xcdJtpxaXbU6rnrI9T3/ke+Qbornn+ZUU2I/ATcJp9GUvIDm7rnba1k8xzJJbQtUmi9d
+         zZyQ+hY4yM00TjpbdHQc4sqOXz9Nb4+Xc3unQSUDzvj78tLIbJ822bCXZCMZvVeZ5nb/
+         TSXhtPypgyQrY0EN9kphimxh5eq0vgoefyd/kxJMbBM+1mBlQceTN7KEI7kYFLy61pZY
+         VPsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753954090; x=1754558890;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vSeD66VYY/7lq9b03uVb3nrDcwpq4lY3KXbmJLU83qc=;
-        b=O9m8B1g1b3I37meALw0YOQTv6HwGU29g6dE3OwmPs2jzY+TlmU4azyrMcFfe0kwP6h
-         HVzq2fGucWLwPc9AAiUG/FVYe7+Rtr5VDORAJiXZqLLyX5hszdLBJ5Z628Omke7Vqv+V
-         1THVPbZaYCHWDlaNkwMeURKIf8gPBDBBTCQgUCHM0gHavFOqTnR7eq91799zzftoh278
-         1y9394vDVMCEQi0JBBhO9sDrKuBq6LzcZWzsTcwNg71nQt+k3T5bVo+GsSq9OmMfMA1J
-         HXtUONyDEIG4gB+MVFHKfGwkSgXlQUuDrl/G4MJ+s1nd3v0SucaxJ6cfwZ53zyhTUOpZ
-         6tUQ==
-X-Gm-Message-State: AOJu0YwbE2uvxE+rfc9pd7htETEz0f84h/jYP83shDEU+qsjNj93W6Ro
-	tQh1nOUKTxcZ96BkOn9NFHMKIXw4i0BYq66YEk5VVdptTBDeMnhSMymUDQm54EWb
-X-Gm-Gg: ASbGncs2gMRciNRlNIE6Gk9iiSsFfjWPAkfOifY/6StJr6yTncqC6CCYSryHZU7e06+
-	wYDoSHmsS44Ef4ixyGAb0fU0JF6EtJXrQT/qXnjKxH0feXo4Z8Ooz2HiQnNQRoYzy6U0nd4C57I
-	4UiDVQnMVjE/HAFokWhwRR9xtlyxuqQPkzNxAJik26IbE0gJ3Z3ugd9jUzwiGj6f+RVRleMgvTj
-	GWnEd3V/embyS6Vy2OoHMFF77QSae83EE4IVgfDxx1o46x7YB7XwBGW/Ty9wV/tdAoGnMCdKKSi
-	D4ovr5mIPyFOnr/dp9CoEt0fHyZDDQNnYQZ6b7MAQYb18nwKx3Yhv2iKc18DkcIQ76g4hsjja1o
-	I5jt8+nsKIjMDT8fup/P7UKzobhszkY2mQHicFfBSc9k1klWuguKRJscaMmre418mt2J9SNGoZ6
-	uduO7xoi1g+GpYS0AO+yN4GQ==
-X-Google-Smtp-Source: AGHT+IHEDAoM9LSTKD8g+d923r70X+1obien4WkirgBSal8//wNez3rXpRXzPMAk+Zm8LQ/gKmkWVA==
-X-Received: by 2002:a05:600c:3e15:b0:442:fff5:5185 with SMTP id 5b1f17b1804b1-4589e8745e9mr8944495e9.6.1753954089628;
-        Thu, 31 Jul 2025 02:28:09 -0700 (PDT)
-From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: [PATCH v12 2/6] x86/altp2m: Wrap altp2m-specific code in #ifdef CONFIG_ALTP2M
-Date: Thu, 31 Jul 2025 09:27:57 +0000
-Message-Id: <2fc138bf8f1100b6347b965e16691b9d6e3272fe.1753953832.git.w1benny@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1753953832.git.w1benny@gmail.com>
-References: <cover.1753953832.git.w1benny@gmail.com>
+        d=1e100.net; s=20230601; t=1753954272; x=1754559072;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GZ7z844DnX0shFJoAtbgL2qxPQ8Qc41rLYUtyMT/grk=;
+        b=KWwLoRjPr6an5EobF39ywFhl9wmFbF7vPKoqfot68bGe5Y6B4YpBtUSGJJ10IWVHrq
+         xa+/AaQxHXT6iixWY9UUM1H/YJzSDkojmexo0MtKYdyMBevdMt0Gha4JQU+M0Tc0yLn0
+         iDEvQojHLvhazaYa9h+uu4jjU6gDn5BypjEjZgrLBv8vE868Aun0rCFr+NkT0uBh6c/6
+         V9FdjpxxG6K7ybMWkJE0kGrdyWzcLIDDETscipNlf5bIoILnqoY/JQO/trK2bFtTj7BO
+         XfKLI9UyrMWVQeMdlkE0zYnL1Q/Q3pTwdcYozEU56Y/Ht25bxdF5CMA6LENnuwQMv5xM
+         g1Xg==
+X-Forwarded-Encrypted: i=1; AJvYcCV4pgcBD/kZDd5nG4siYIJbnOgUwSjoZQCBhrb7M98QtCiVG8jBlwseKz9W3Eh1PbXFX5ESgVIhe2s=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx0YWDC1AuD4sKKaMH69huddSnvJbqDnrfNEQZHwWw6pKZygtCg
+	FwTOIgvdDOTHH/5JKxuHiZ9utH7zH7Nn0aQ8Ve5UPKRD7kTrzVDCT9xxgW3Aqw14eA==
+X-Gm-Gg: ASbGncvJPIgf0Do37jUvaUPUDOblUNUPArsuleF67LI17dfuC9PWn/VbgJBGaWB7ss9
+	W8lAmmYeAOWcr8Wa8Yv99vU/6uZIm5+moara18JNTY1BIKtroWnSdmTORmk6NhfvfYQACUnk5Lg
+	PtJliEdtAWemDWE5G73EFQ8Ok73cBkPwMv6dwZuiDAtNL1/vQ8mxoiuXB8e2TADkqssSUo216Qq
+	1IeK4P9IDxeDS3BFndx2IX4wLtLrdPoiS4U8+1b6mjr1d9Pk2JEzdMxC1XCwXkGrQMtsR2L0a37
+	zVfIUNU9XBwjdFnsMDJW2ZPTsO4oDVr1cvxe6tXP2ksLrZlr36d/C66Zwv/W2bw/0607vRZhZzW
+	IdFwCLUmVaBDt4aWZA22UE4VQfoHsmWOOP98qqtYZAQC/y3lHvasRyu48Vky3bTdLaqQB6zMEU4
+	MJAeeGY+0jL2Sh0AfhbYl5I8+MZIZ0
+X-Google-Smtp-Source: AGHT+IGxn6tP8h7ISBHel2cLw7SWp5mFU/oBcAjmZBe+PFpdPMssBKliaKbeUlYEoOpwxublTCLDCA==
+X-Received: by 2002:a05:6000:310f:b0:3a5:8d08:6239 with SMTP id ffacd0b85a97d-3b794ff3b7fmr5533317f8f.21.1753954272076;
+        Thu, 31 Jul 2025 02:31:12 -0700 (PDT)
+Message-ID: <379b70bc-2e1c-44fb-84ec-d7fd42fda147@suse.com>
+Date: Thu, 31 Jul 2025 11:30:55 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v12 0/6] x86: Make MAX_ALTP2M configurable
+To: =?UTF-8?Q?Petr_Bene=C5=A1?= <w1benny@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Shawn Anastasio <sanastasio@raptorengineering.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>, Juergen Gross
+ <jgross@suse.com>, Christian Lindig <christian.lindig@citrix.com>,
+ David Scott <dave@recoil.org>, xen-devel@lists.xenproject.org
+References: <cover.1753953832.git.w1benny@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <cover.1753953832.git.w1benny@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Petr Beneš <w1benny@gmail.com>
+On 31.07.2025 11:27, Petr Beneš wrote:
+> From: Petr Beneš <w1benny@gmail.com>
+> 
+> This series introduces the ability to configure the maximum number of altp2m
+> tables during domain creation. Previously, the limits were hardcoded to a
+> maximum of 10. This change allows for greater flexibility in environments that
+> require more or fewer altp2m views.
+> 
+> This enhancement is particularly relevant for users leveraging Xen's features
+> for virtual machine introspection.
+> 
+> Changes since v11:
+> - altp2m: Drop p2m_altp2m_check() stubs on non-x86, move prototype, and guard
+>   uses
+>     - s/following/subsequent/ in the commit message + Reviewed-by: Jan Beulich
+>     - Despite agreeing to let Jan make this change, this commit wasn't still in
+>       the staging branch at the time of sending this patch.
 
-This change consistently guards all altp2m-related functionality
-behind #ifdef CONFIG_ALTP2M, so that code and data structures related
-to alternate p2m views are only included when the feature is enabled.
+As it is still lacking ack-s, as I think I had indicated.
 
-Apart from that:
-- hvmemul_vmfunc() returns X86EMUL_UNHANDLEABLE when altp2m is disabled.
-- do_altp2m_op() returns EOPNOTSUPP when altp2m is disabled.
-- struct hvm_vcpu, arch_domain, and hvm_function_table only define altp2m
-  fields when the feature is enabled.
-- Moved several declarations under #ifdef CONFIG_ALTP2M in p2m.h to avoid
-  polluting builds that don't require the feature.
-
-Signed-off-by: Petr Beneš <w1benny@gmail.com>
----
- xen/arch/x86/hvm/emulate.c          |  4 ++++
- xen/arch/x86/hvm/hvm.c              | 10 ++++++++++
- xen/arch/x86/hvm/vmx/vmx.c          |  8 ++++++++
- xen/arch/x86/include/asm/domain.h   |  2 ++
- xen/arch/x86/include/asm/hvm/hvm.h  |  6 ++++++
- xen/arch/x86/include/asm/hvm/vcpu.h |  4 ++++
- xen/arch/x86/include/asm/p2m.h      | 31 +++++++++++++++++++----------
- xen/arch/x86/mm/hap/hap.c           |  6 ++++++
- xen/arch/x86/mm/mem_access.c        |  8 ++++++++
- xen/arch/x86/mm/p2m-ept.c           |  4 ++++
- xen/arch/x86/mm/p2m.c               |  9 +++++++++
- xen/arch/x86/vm_event.c             |  2 +-
- 12 files changed, 82 insertions(+), 12 deletions(-)
-
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index f1412d8c49..2af4f30359 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2704,6 +2704,7 @@ static int cf_check hvmemul_tlb_op(
- static int cf_check hvmemul_vmfunc(
-     struct x86_emulate_ctxt *ctxt)
- {
-+#ifdef CONFIG_ALTP2M
-     int rc;
- 
-     if ( !hvm_funcs.altp2m_vcpu_emulate_vmfunc )
-@@ -2713,6 +2714,9 @@ static int cf_check hvmemul_vmfunc(
-         x86_emul_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC, ctxt);
- 
-     return rc;
-+#else
-+    return X86EMUL_UNHANDLEABLE;
-+#endif
- }
- 
- static const struct x86_emulate_ops hvm_emulate_ops = {
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 56c7de3977..1881c8ac52 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4608,6 +4608,7 @@ static int hvmop_get_param(
- static int do_altp2m_op(
-     XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-+#ifdef CONFIG_ALTP2M
-     struct xen_hvm_altp2m_op a;
-     struct domain *d = NULL;
-     int rc = 0;
-@@ -4944,6 +4945,9 @@ static int do_altp2m_op(
-     rcu_unlock_domain(d);
- 
-     return rc;
-+#else /* !CONFIG_ALTP2M */
-+    return -EOPNOTSUPP;
-+#endif /* CONFIG_ALTP2M */
- }
- 
- DEFINE_XEN_GUEST_HANDLE(compat_hvm_altp2m_op_t);
-@@ -5235,8 +5239,12 @@ int hvm_debug_op(struct vcpu *v, int32_t op)
- 
-     case XEN_DOMCTL_DEBUG_OP_SINGLE_STEP_OFF:
-         v->arch.hvm.single_step = false;
-+
-+#ifdef CONFIG_ALTP2M
-         v->arch.hvm.fast_single_step.enabled = false;
-         v->arch.hvm.fast_single_step.p2midx = 0;
-+#endif
-+
-         break;
- 
-     default: /* Excluded above */
-@@ -5259,6 +5267,7 @@ void hvm_toggle_singlestep(struct vcpu *v)
-     v->arch.hvm.single_step = !v->arch.hvm.single_step;
- }
- 
-+#ifdef CONFIG_ALTP2M
- void hvm_fast_singlestep(struct vcpu *v, uint16_t p2midx)
- {
-     ASSERT(atomic_read(&v->pause_count));
-@@ -5273,6 +5282,7 @@ void hvm_fast_singlestep(struct vcpu *v, uint16_t p2midx)
-     v->arch.hvm.fast_single_step.enabled = true;
-     v->arch.hvm.fast_single_step.p2midx = p2midx;
- }
-+#endif
- 
- /*
-  * Segment caches in VMCB/VMCS are inconsistent about which bits are checked,
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index ce538668c7..64f0dbbd4a 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2416,6 +2416,8 @@ static void cf_check vmx_enable_msr_interception(struct domain *d, uint32_t msr)
-         vmx_set_msr_intercept(v, msr, VMX_MSR_W);
- }
- 
-+#ifdef CONFIG_ALTP2M
-+
- static void cf_check vmx_vcpu_update_eptp(struct vcpu *v)
- {
-     struct domain *d = v->domain;
-@@ -2535,6 +2537,8 @@ static bool cf_check vmx_vcpu_emulate_ve(struct vcpu *v)
-     return rc;
- }
- 
-+#endif /* CONFIG_ALTP2M */
-+
- static bool cf_check vmx_get_pending_event(
-     struct vcpu *v, struct x86_event *info)
- {
-@@ -2863,10 +2867,12 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
-     .update_vlapic_mode = vmx_vlapic_msr_changed,
-     .nhvm_hap_walk_L1_p2m = nvmx_hap_walk_L1_p2m,
-     .enable_msr_interception = vmx_enable_msr_interception,
-+#ifdef CONFIG_ALTP2M
-     .altp2m_vcpu_update_p2m = vmx_vcpu_update_eptp,
-     .altp2m_vcpu_update_vmfunc_ve = vmx_vcpu_update_vmfunc_ve,
-     .altp2m_vcpu_emulate_ve = vmx_vcpu_emulate_ve,
-     .altp2m_vcpu_emulate_vmfunc = vmx_vcpu_emulate_vmfunc,
-+#endif
-     .vmtrace_control = vmtrace_control,
-     .vmtrace_output_position = vmtrace_output_position,
-     .vmtrace_set_option = vmtrace_set_option,
-@@ -4963,6 +4969,7 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
-             single = ept;
-         }
- 
-+#ifdef CONFIG_ALTP2M
-         if ( altp2m_active(currd) )
-         {
-             unsigned int i;
-@@ -4981,6 +4988,7 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
-                 }
-             }
-         }
-+#endif
- 
-         if ( inv )
-             __invept(inv == 1 ? INVEPT_SINGLE_CONTEXT : INVEPT_ALL_CONTEXT,
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 8c0dea12a5..8749c5eba0 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -351,12 +351,14 @@ struct arch_domain
-     struct p2m_domain *nested_p2m[MAX_NESTEDP2M];
-     mm_lock_t nested_p2m_lock;
- 
-+#ifdef CONFIG_ALTP2M
-     /* altp2m: allow multiple copies of host p2m */
-     bool altp2m_active;
-     struct p2m_domain *altp2m_p2m[MAX_ALTP2M];
-     mm_lock_t altp2m_list_lock;
-     uint64_t *altp2m_eptp;
-     uint64_t *altp2m_visible_eptp;
-+#endif
- #endif
- 
-     /* NB. protected by d->event_lock and by irq_desc[irq].lock */
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index bf8bc2e100..e94cfbfb58 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -225,11 +225,13 @@ struct hvm_function_table {
- 
-     void (*enable_msr_interception)(struct domain *d, uint32_t msr);
- 
-+#ifdef CONFIG_ALTP2M
-     /* Alternate p2m */
-     void (*altp2m_vcpu_update_p2m)(struct vcpu *v);
-     void (*altp2m_vcpu_update_vmfunc_ve)(struct vcpu *v);
-     bool (*altp2m_vcpu_emulate_ve)(struct vcpu *v);
-     int (*altp2m_vcpu_emulate_vmfunc)(const struct cpu_user_regs *regs);
-+#endif
- 
-     /* vmtrace */
-     int (*vmtrace_control)(struct vcpu *v, bool enable, bool reset);
-@@ -707,6 +709,7 @@ static inline bool hvm_nested_virt_supported(void)
-     return hvm_funcs.caps.nested_virt;
- }
- 
-+#ifdef CONFIG_ALTP2M
- /* updates the current hardware p2m */
- static inline void altp2m_vcpu_update_p2m(struct vcpu *v)
- {
-@@ -731,6 +734,9 @@ static inline bool altp2m_vcpu_emulate_ve(struct vcpu *v)
-     }
-     return false;
- }
-+#else /* !CONFIG_ALTP2M */
-+bool altp2m_vcpu_emulate_ve(struct vcpu *v);
-+#endif /* CONFIG_ALTP2M */
- 
- static inline int hvm_vmtrace_control(struct vcpu *v, bool enable, bool reset)
- {
-diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
-index 196fed6d5d..924af890c5 100644
---- a/xen/arch/x86/include/asm/hvm/vcpu.h
-+++ b/xen/arch/x86/include/asm/hvm/vcpu.h
-@@ -133,10 +133,12 @@ struct hvm_vcpu {
-     bool                flag_dr_dirty;
-     bool                debug_state_latch;
-     bool                single_step;
-+#ifdef CONFIG_ALTP2M
-     struct {
-         bool     enabled;
-         uint16_t p2midx;
-     } fast_single_step;
-+#endif
- 
-     /* (MFN) hypervisor page table */
-     pagetable_t         monitor_table;
-@@ -154,7 +156,9 @@ struct hvm_vcpu {
- 
-     struct nestedvcpu   nvcpu;
- 
-+#ifdef CONFIG_ALTP2M
-     struct altp2mvcpu   avcpu;
-+#endif
- 
-     struct mtrr_state   mtrr;
-     u64                 pat_cr;
-diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
-index c53f4e487d..5ce0dc936f 100644
---- a/xen/arch/x86/include/asm/p2m.h
-+++ b/xen/arch/x86/include/asm/p2m.h
-@@ -889,6 +889,8 @@ void shadow_p2m_init(struct p2m_domain *p2m);
- void cf_check nestedp2m_write_p2m_entry_post(
-     struct p2m_domain *p2m, unsigned int oflags);
- 
-+#ifdef CONFIG_ALTP2M
-+
- /*
-  * Alternate p2m: shadow p2m tables used for alternate memory views
-  */
-@@ -932,11 +934,6 @@ bool p2m_switch_vcpu_altp2m_by_id(struct vcpu *v, unsigned int idx);
- /* Flush all the alternate p2m's for a domain */
- void p2m_flush_altp2m(struct domain *d);
- 
--/* Alternate p2m paging */
--bool p2m_altp2m_get_or_propagate(struct p2m_domain *ap2m, unsigned long gfn_l,
--                                 mfn_t *mfn, p2m_type_t *p2mt,
--                                 p2m_access_t *p2ma, unsigned int *page_order);
--
- /* Make a specific alternate p2m valid */
- int p2m_init_altp2m_by_id(struct domain *d, unsigned int idx);
- 
-@@ -954,17 +951,29 @@ int p2m_switch_domain_altp2m_by_id(struct domain *d, unsigned int idx);
- int p2m_change_altp2m_gfn(struct domain *d, unsigned int idx,
-                           gfn_t old_gfn, gfn_t new_gfn);
- 
--/* Propagate a host p2m change to all alternate p2m's */
--int p2m_altp2m_propagate_change(struct domain *d, gfn_t gfn,
--                                mfn_t mfn, unsigned int page_order,
--                                p2m_type_t p2mt, p2m_access_t p2ma);
--
- /* Set a specific p2m view visibility */
- int p2m_set_altp2m_view_visibility(struct domain *d, unsigned int altp2m_idx,
-                                    uint8_t visible);
- 
--#else /* !CONFIG_HVM */
-+#else /* !CONFIG_ALTP2M */
- struct p2m_domain *p2m_get_altp2m(struct vcpu *v);
-+bool p2m_set_altp2m(struct vcpu *v, unsigned int idx);
-+#endif /* CONFIG_ALTP2M */
-+
-+/*
-+ * Common alternate p2m declarations that need to be visible
-+ * regardless of CONFIG_ALTP2M
-+ */
-+
-+/* Alternate p2m paging */
-+bool p2m_altp2m_get_or_propagate(struct p2m_domain *ap2m, unsigned long gfn_l,
-+                                 mfn_t *mfn, p2m_type_t *p2mt,
-+                                 p2m_access_t *p2ma, unsigned int *page_order);
-+                                 
-+/* Propagate a host p2m change to all alternate p2m's */
-+int p2m_altp2m_propagate_change(struct domain *d, gfn_t gfn,
-+                                mfn_t mfn, unsigned int page_order,
-+                                p2m_type_t p2mt, p2m_access_t p2ma);
- #endif /* CONFIG_HVM */
- 
- /* p2m access to IOMMU flags */
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index ec5043a8aa..384c24028f 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -494,6 +494,7 @@ int hap_enable(struct domain *d, u32 mode)
-            goto out;
-     }
- 
-+#ifdef CONFIG_ALTP2M
-     if ( hvm_altp2m_supported() )
-     {
-         /* Init alternate p2m data */
-@@ -524,6 +525,7 @@ int hap_enable(struct domain *d, u32 mode)
- 
-         d->arch.altp2m_active = false;
-     }
-+#endif /* CONFIG_ALTP2M */
- 
-     /* Now let other users see the new mode */
-     d->arch.paging.mode = mode | PG_HAP_enable;
-@@ -537,9 +539,11 @@ void hap_final_teardown(struct domain *d)
- {
-     unsigned int i;
- 
-+#ifdef CONFIG_ALTP2M
-     if ( hvm_altp2m_supported() )
-         for ( i = 0; i < MAX_ALTP2M; i++ )
-             p2m_teardown(d->arch.altp2m_p2m[i], true, NULL);
-+#endif
- 
-     /* Destroy nestedp2m's first */
-     for (i = 0; i < MAX_NESTEDP2M; i++) {
-@@ -578,6 +582,7 @@ void hap_teardown(struct domain *d, bool *preempted)
-     for_each_vcpu ( d, v )
-         hap_vcpu_teardown(v);
- 
-+#ifdef CONFIG_ALTP2M
-     /* Leave the root pt in case we get further attempts to modify the p2m. */
-     if ( hvm_altp2m_supported() )
-     {
-@@ -597,6 +602,7 @@ void hap_teardown(struct domain *d, bool *preempted)
-                 return;
-         }
-     }
-+#endif
- 
-     /* Destroy nestedp2m's after altp2m. */
-     for ( i = 0; i < MAX_NESTEDP2M; i++ )
-diff --git a/xen/arch/x86/mm/mem_access.c b/xen/arch/x86/mm/mem_access.c
-index 21b5b7ecda..0779c41161 100644
---- a/xen/arch/x86/mm/mem_access.c
-+++ b/xen/arch/x86/mm/mem_access.c
-@@ -347,6 +347,7 @@ long p2m_set_mem_access(struct domain *d, gfn_t gfn, uint32_t nr,
-     unsigned long gfn_l;
-     long rc = 0;
- 
-+#ifdef CONFIG_ALTP2M
-     /* altp2m view 0 is treated as the hostp2m */
-     if ( altp2m_idx )
-     {
-@@ -357,6 +358,7 @@ long p2m_set_mem_access(struct domain *d, gfn_t gfn, uint32_t nr,
- 
-         ap2m = array_access_nospec(d->arch.altp2m_p2m, altp2m_idx);
-     }
-+#endif
- 
-     if ( !xenmem_access_to_p2m_access(p2m, access, &a) )
-         return -EINVAL;
-@@ -403,6 +405,7 @@ long p2m_set_mem_access_multi(struct domain *d,
-     struct p2m_domain *p2m = p2m_get_hostp2m(d), *ap2m = NULL;
-     long rc = 0;
- 
-+#ifdef CONFIG_ALTP2M
-     /* altp2m view 0 is treated as the hostp2m */
-     if ( altp2m_idx )
-     {
-@@ -413,6 +416,7 @@ long p2m_set_mem_access_multi(struct domain *d,
- 
-         ap2m = array_access_nospec(d->arch.altp2m_p2m, altp2m_idx);
-     }
-+#endif
- 
-     p2m_lock(p2m);
-     if ( ap2m )
-@@ -462,6 +466,7 @@ int p2m_get_mem_access(struct domain *d, gfn_t gfn, xenmem_access_t *access,
- {
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
- 
-+#ifdef CONFIG_ALTP2M
-     if ( !altp2m_active(d) )
-     {
-         if ( altp2m_idx )
-@@ -476,6 +481,7 @@ int p2m_get_mem_access(struct domain *d, gfn_t gfn, xenmem_access_t *access,
- 
-         p2m = array_access_nospec(d->arch.altp2m_p2m, altp2m_idx);
-     }
-+#endif
- 
-     return _p2m_get_mem_access(p2m, gfn, access);
- }
-@@ -486,6 +492,7 @@ void arch_p2m_set_access_required(struct domain *d, bool access_required)
- 
-     p2m_get_hostp2m(d)->access_required = access_required;
- 
-+#ifdef CONFIG_ALTP2M
-     if ( altp2m_active(d) )
-     {
-         unsigned int i;
-@@ -497,6 +504,7 @@ void arch_p2m_set_access_required(struct domain *d, bool access_required)
-                 p2m->access_required = access_required;
-         }
-     }
-+#endif
- }
- 
- bool p2m_mem_access_sanity_check(const struct domain *d)
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index 62fc8e5068..ae262bfcc2 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -1297,6 +1297,7 @@ static void ept_set_ad_sync(struct domain *d, bool value)
- 
-     hostp2m->ept.ad = value;
- 
-+#ifdef CONFIG_ALTP2M
-     if ( unlikely(altp2m_active(d)) )
-     {
-         unsigned int i;
-@@ -1315,6 +1316,7 @@ static void ept_set_ad_sync(struct domain *d, bool value)
-             p2m_unlock(p2m);
-         }
-     }
-+#endif
- }
- 
- static void ept_enable_pml(struct p2m_domain *p2m)
-@@ -1571,6 +1573,7 @@ void __init setup_ept_dump(void)
-     register_keyhandler('D', ept_dump_p2m_table, "dump VT-x EPT tables", 0);
- }
- 
-+#ifdef CONFIG_ALTP2M
- void p2m_init_altp2m_ept(struct domain *d, unsigned int i)
- {
-     struct p2m_domain *p2m = array_access_nospec(d->arch.altp2m_p2m, i);
-@@ -1610,6 +1613,7 @@ unsigned int p2m_find_altp2m_by_eptp(struct domain *d, uint64_t eptp)
-     altp2m_list_unlock(d);
-     return i;
- }
-+#endif /* CONFIG_ALTP2M */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index b9a7c2dc53..5a3fda903e 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -101,6 +101,7 @@ void p2m_change_entry_type_global(struct domain *d,
- 
-     change_entry_type_global(hostp2m, ot, nt);
- 
-+#ifdef CONFIG_ALTP2M
-     if ( unlikely(altp2m_active(d)) )
-     {
-         unsigned int i;
-@@ -117,6 +118,7 @@ void p2m_change_entry_type_global(struct domain *d,
-             }
-         }
-     }
-+#endif
- 
-     p2m_unlock(hostp2m);
- }
-@@ -145,6 +147,7 @@ bool p2m_memory_type_changed(struct domain *d)
- 
-     _memory_type_changed(hostp2m);
- 
-+#ifdef CONFIG_ALTP2M
-     if ( unlikely(altp2m_active(d)) )
-     {
-         unsigned int i;
-@@ -161,6 +164,7 @@ bool p2m_memory_type_changed(struct domain *d)
-             }
-         }
-     }
-+#endif
- 
-     p2m_unlock(hostp2m);
- 
-@@ -930,6 +934,7 @@ void p2m_change_type_range(struct domain *d,
- 
-     change_type_range(hostp2m, start, end, ot, nt);
- 
-+#ifdef CONFIG_ALTP2M
-     if ( unlikely(altp2m_active(d)) )
-     {
-         unsigned int i;
-@@ -946,6 +951,8 @@ void p2m_change_type_range(struct domain *d,
-             }
-         }
-     }
-+#endif
-+
-     hostp2m->defer_nested_flush = false;
-     if ( nestedhvm_enabled(d) )
-         p2m_flush_nestedp2m(d);
-@@ -1003,6 +1010,7 @@ int p2m_finish_type_change(struct domain *d,
-     if ( rc < 0 )
-         goto out;
- 
-+#ifdef CONFIG_ALTP2M
-     if ( unlikely(altp2m_active(d)) )
-     {
-         unsigned int i;
-@@ -1022,6 +1030,7 @@ int p2m_finish_type_change(struct domain *d,
-             }
-         }
-     }
-+#endif
- 
-  out:
-     p2m_unlock(hostp2m);
-diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
-index 0d15d363c3..fc349270b9 100644
---- a/xen/arch/x86/vm_event.c
-+++ b/xen/arch/x86/vm_event.c
-@@ -72,7 +72,7 @@ void vm_event_toggle_singlestep(struct domain *d, struct vcpu *v,
- 
-     if ( rsp->flags & VM_EVENT_FLAG_TOGGLE_SINGLESTEP )
-         hvm_toggle_singlestep(v);
--    else
-+    else if ( IS_ENABLED(CONFIG_ALTP2M) )
-         hvm_fast_singlestep(v, rsp->u.fast_singlestep.p2midx);
- }
- 
--- 
-2.34.1
-
+Jan
 
