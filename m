@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5715EC87FCC
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065869.1431223 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF480C87FCA
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 15:58:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065872.1431247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfy-00021T-Do; Thu, 31 Jul 2025 15:58:38 +0000
+	id 1uhVg2-0002hB-Kl; Thu, 31 Jul 2025 15:58:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065869.1431223; Thu, 31 Jul 2025 15:58:38 +0000
+Received: by outflank-mailman (output) from mailman id 1065872.1431247; Thu, 31 Jul 2025 15:58:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVfy-00021G-89; Thu, 31 Jul 2025 15:58:38 +0000
-Received: by outflank-mailman (input) for mailman id 1065869;
- Thu, 31 Jul 2025 15:58:37 +0000
+	id 1uhVg2-0002gX-C2; Thu, 31 Jul 2025 15:58:42 +0000
+Received: by outflank-mailman (input) for mailman id 1065872;
+ Thu, 31 Jul 2025 15:58:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVfx-0001FB-04
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:37 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
+ id 1uhVg1-0001FB-Bi
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:41 +0000
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [2a00:1450:4864:20::12e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36e93794-6e27-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:58:35 +0200 (CEST)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-32b7113ed6bso11700921fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:35 -0700 (PDT)
+ id 397bfc85-6e27-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 17:58:39 +0200 (CEST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-55b7454c6b0so579841e87.3
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:39 -0700 (PDT)
 Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.32
+ 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:33 -0700 (PDT)
+ Thu, 31 Jul 2025 08:58:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36e93794-6e27-11f0-b895-0df219b8e170
+X-Inumbo-ID: 397bfc85-6e27-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977514; x=1754582314; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1753977519; x=1754582319; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YAaFHO3rUPEAzf/9yrT1X5pYejy4+Vy0hPa0YIS5wII=;
-        b=Mu+5HaaUJGK74I0Ccav6fJAt0BT6wK3g9gdDax9PR9noX8AJmO/1MAjKqbK93wVQEb
-         +oOqf1+g+ws5IlrjoQDkGYtA23HxPHUijp7D5zOPK7wb4XU6l2jNORGfRl5pudiimhpE
-         5COwh4ugOpdBgfwNo55RST0VRlUgGjO9E8OfVsSMw0Zj4YYr2tEg68edewQGDNGX5lMA
-         NTB+bgT2zqPtwUZun0qBD0VSaXhb/Og7+u/BG0z3HYPVhxdUgEBx+AGuN1deRAtvIDDd
-         w4wxHRPTdQnDWGVGlvxf9404oQkG1RlusZysl3KIK6d2CKHPOwn0K0vaOO0Xr+0YihSU
-         NpRg==
+        bh=49cBhv+bsfX2NNvsCTVAGnNs0eP38Nq2mxipt6UO56Y=;
+        b=P+JdK2h6eqM2x/9/+OeQ7Us1gxwstPcVbRQIugKjQcRLeF0uHTXSCKKoDw1sP610Jd
+         Sp+Q84JCsSbVL4IqQslqFoM0+zT5xm1ct0YhP4zcjZg0Sw7N8y5eWofiv9jxtchg94vi
+         uFaRxxpCn9kfCc3+b1f7hRfGMmwOVx9Hmqb4rd0Q7lcoO9wmz0YLAlqGOHrV1maJRpiV
+         EQ9MyKemWYHX/hRVs8YRSoW0Kyglq425v5GQi8mvSL8fdi22xS0AeJuyIkpuxejBh5qf
+         upBrIMw685Rc29yk5I7t7lJssTnZCm4keKNTU86a2ljTNB4+o59/cv4CRoI4I9m5gtI5
+         r5xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977514; x=1754582314;
+        d=1e100.net; s=20230601; t=1753977519; x=1754582319;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YAaFHO3rUPEAzf/9yrT1X5pYejy4+Vy0hPa0YIS5wII=;
-        b=Dh8e+dO/34e+WMuxKmL4NOQE4TTe5lYPv804WfdfpSoEC0s0ny2fDnjEgJPYLluMvb
-         HJT2kQGyp4sg3bPIZlhaiXf5obxe1XGfuAUFdL18iihHxfCr+kuFTxW2Sch+Ap/mnQK1
-         j2uT1G6aANbp7Oz/knmOK+SECsYbP6OmKLEcDxFBQGvPDwr24Guuxw1pX7WQcln4e5ze
-         eYZ9RrUTEwtT8mUzrVGgJa8NXdCxOVSfCEWSP+q7ALrqcogjtqHBBOa9P1hrPYz+Rajb
-         Qf1myMolQrzLflNfh17LDl1bGIRVhlYBUkqPlPC15tTgEszl2ARegPUc2+mFidPbv+wO
-         1pTg==
-X-Gm-Message-State: AOJu0YyWitFJeg/SE+Vid8OYGl20iAXbRq+/Zwu9hns2hcVRLmE7mMoy
-	eaN3CJKMdFuKpeu3yi53RXR54H3wR9zlI52RuxOKEO0Ghommm0BPNl4dHqDHAQ==
-X-Gm-Gg: ASbGnctHvUm3vgbHC3HiElJKjncHsdPLydlq/KypErggXjAHEB9c+JrZlCr1MH5Mf1T
-	SG8ptuRaT5WvKzPcmsQeqzZDYkZLYliD71WTPZwHiYUDC0xLzmRmkiBIXtoFcgDiayzzscY7Hjt
-	eYfitdVZlZhKNo8f1TnAiiNDSapfL0XmD3y+MSQFcZdODfK4f1PmEPxCqAEWS0wbE3MGryaTJG2
-	BjVmkKHeOcYQDg1AKllc9/Ef1LPoG3ybHL7q6QUHDan2iiO4Uyt0NKI46h7vAFqtefywMEEAhrE
-	WG9BdhsFg8IebTO3vN8dQYDwI9myAz6txgBRuaIgswP6mlATIsPr6kxJuLMjjA0H1gcj6UaiX/G
-	eFY0Zd/sF3ldgz9U8ADRLfyQIz6ENCMVz7Ss2fSv4YNNeaRYONYVqvQRv6fBcVw==
-X-Google-Smtp-Source: AGHT+IE9CGjE6mb4ckGHh0x7f7Wnu2OSI7Gu6OQJWfpE3SEzcDkHVtbLTZ6EDRFXe6aj/MqflRzFmg==
-X-Received: by 2002:a05:651c:214f:b0:32b:4773:7aaf with SMTP id 38308e7fff4ca-33224be5d43mr14803431fa.35.1753977514052;
-        Thu, 31 Jul 2025 08:58:34 -0700 (PDT)
+        bh=49cBhv+bsfX2NNvsCTVAGnNs0eP38Nq2mxipt6UO56Y=;
+        b=wHTC0ZQs5H3dldIwyS9pEVZCGjky0znCQM65wf8yBnGkTQYcu27it/1koaFOiMJFQm
+         CGK2/nwGETPazVXvc7g8Xqub6rpad1RRgJIiSyBdxjNIJ7tb5CSGVm6LwjIm/OEI8RtT
+         MAgg1CW7ovjch3SOrT9Bbc0x8rEf9qBpZNOXEqNFQnykzPYztArXMVf1rb0U8WpRmUcT
+         DUF8rrMorUQ/vweF0BG74COHK4E3Cdr0fxQnoz1jlspmAYTJN1Gl6PL+1AVmo4f+Riqc
+         UUZmZjqjA5FpILSib5euPwBK/e/1TmM1JZYXFBwl2PgbshP3pS3Zi5W2i/B195lZ49b7
+         gS+w==
+X-Gm-Message-State: AOJu0YxV8m8C+JgfhkcuJa2LhRrJagXbJQhVr7ayxVdpzx5SWUGA3YPO
+	Xl8Mdkim8xL2qfDf7nkD3MRSpbRH8uM5WQiMFAHQoILx1ILQ5hgtKFaVl23VDA==
+X-Gm-Gg: ASbGnct37lALH+rGLc4HIddUgY+c/H1UoUfCtLrUoeQxjhIVPUaTr/euJ3qVclNjGrO
+	AqBB/EvQq0sqhZ2XEpQrReA/OjB5OfGbOhfv8BBMuFWJfjacwm66him7o+E6nZbceexMoGeHCcQ
+	PNWKDxkYYMHg6YcxJcxKaWsyjGOO8D8zG5f5SqaJPF/BSYTArUMfJvNwBYpuWjql3IwJHdbNswj
+	pbFBpfvMI0tKJQIXjh796W7UV7P16bYipPBlZaP58bnrPV1WZ0tGQtlfUgceoKD0oINNc4Ot/3a
+	XlC8AiUaPCtR8I7izZHIYZaiIAdT4I6AUwzM8HVncCJ5e6PkhWLgUA6YcFvIMohfb8irx/CRxYy
+	/jn3bie9U6boLDbCsRW/zjAgXRrwsukJGxIDHHpNBlnmPUqZ/SBOnNMhJm/qff10GcEiBgnvJ
+X-Google-Smtp-Source: AGHT+IEttbQXq7FEKRn1TaR0w+pfXFD3Zr+SAmyYNGaXXvKBmMp9ZcMs5JrzXtfLt7QjNaAmKN9Mrg==
+X-Received: by 2002:a05:6512:23a1:b0:553:297b:3d4e with SMTP id 2adb3069b0e04-55b7c0a1a35mr2788480e87.52.1753977518588;
+        Thu, 31 Jul 2025 08:58:38 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,314 +96,361 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 03/20] xen/riscv: introduce VMID allocation and manegement
-Date: Thu, 31 Jul 2025 17:58:02 +0200
-Message-ID: <d61f5f831ac8045055a1775ee710d4f2fe8dcc26.1753973161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 06/20] xen/riscv: add root page table allocation
+Date: Thu, 31 Jul 2025 17:58:05 +0200
+Message-ID: <23c79f07221dee7eb782ebb160442f3a796a41b2.1753973161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Current implementation is based on x86's way to allocate VMIDs:
-  VMIDs partition the physical TLB. In the current implementation VMIDs are
-  introduced to reduce the number of TLB flushes.  Each time the guest's
-  virtual address space changes, instead of flushing the TLB, a new VMID is
-  assigned.  This reduces the number of TLB flushes to at most 1/#VMIDs.
-  The biggest advantage is that hot parts of the hypervisor's code and data
-  retain in the TLB.
+Introduce support for allocating and initializing the root page table
+required for RISC-V stage-2 address translation.
 
-  VMIDs are a hart-local resource.  As preemption of VMIDs is not possible,
-  VMIDs are assigned in a round-robin scheme.  To minimize the overhead of
-  VMID invalidation, at the time of a TLB flush, VMIDs are tagged with a
-  64-bit generation. Only on a generation overflow the code needs to
-  invalidate all VMID information stored at the VCPUs with are run on the
-  specific physical processor.  This overflow appears after about 2^80
-  host processor cycles, so we do not optimize this case, but simply disable
-  VMID useage to retain correctness.
-
-Only minor changes are made compared to the x86 implementation.
-These include using RISC-V-specific terminology, adding a check to ensure
-the type used for storing the VMID has enough bits to hold VMIDLEN,
-and introducing a new function vmidlen_detect() to clarify the VMIDLEN
-value.
+To implement root page table allocation the following is introduced:
+- p2m_get_clean_page() and p2m_alloc_root_table(), p2m_allocate_root()
+  helpers to allocate and zero a 16 KiB root page table, as mandated
+  by the RISC-V privileged specification for Sv32x4/Sv39x4/Sv48x4/Sv57x4
+  modes.
+- Update p2m_init() to inititialize p2m_root_order.
+- Add maddr_to_page() and page_to_maddr() macros for easier address
+  manipulation.
+- Introduce paging_ret_pages_to_domheap() to return some pages before
+  allocate 16 KiB pages for root page table.
+- Allocate root p2m table after p2m pool is initialized.
+- Add construct_hgatp() to construct the hgatp register value based on
+  p2m->root, p2m->hgatp_mode and VMID.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V3:
- - Reimplemnt VMID allocation similar to what x86 has implemented.
+Changes in v3:
+ - Drop insterting of p2m->vmid in hgatp_from_page() as now vmid is allocated
+   per-CPU, not per-domain, so it will be inserted later somewhere in
+   context_switch or before returning control to a guest.
+ - use BIT() to init nr_pages in p2m_allocate_root() instead of open-code
+   BIT() macros.
+ - Fix order in clear_and_clean_page().
+ - s/panic("Specify more xen,domain-p2m-mem-mb\n")/return NULL.
+ - Use lock around a procedure of returning back pages necessary for p2m
+   root table.
+ - Update the comment about allocation of page for root page table.
+ - Update an argument of hgatp_from_page() to "struct page_info *p2m_root_page"
+   to be consistent with the  function name.
+ - Use p2m_get_hostp2m(d) instead of open-coding it.
+ - Update the comment above the call of p2m_alloc_root_table().
+ - Update the comments in p2m_allocate_root().
+ - Move part which returns some page to domheap before root page table allocation
+   to paging.c.
+ - Pass p2m_domain * instead of struct domain * for p2m_alloc_root_table().
+ - Introduce construct_hgatp() instead of hgatp_from_page().
+ - Add vmid and hgatp_mode member of struct p2m_domain.
+ - Add explanatory comment above clean_dcache_va_range() in
+   clear_and_clean_page().
+ - Introduce P2M_ROOT_ORDER and P2M_ROOT_PAGES.
+ - Drop vmid member from p2m_domain as now we are using per-pCPU
+   VMID allocation.
+ - Update a declaration of construct_hgatp() to recieve VMID as it
+   isn't per-VM anymore.
+ - Drop hgatp member of p2m_domain struct as with the new VMID scheme
+   allocation construction of hgatp will be needed more often.
+ - Drop is_hardware_domain() case in p2m_allocate_root(), just always
+   allocate root using p2m pool pages.
+ - Refactor p2m_alloc_root_table() and p2m_alloc_table().
 ---
-Changes in V2:
- - New patch.
+Changes in v2:
+ - This patch was created from "xen/riscv: introduce things necessary for p2m
+   initialization" with the following changes:
+   - [clear_and_clean_page()] Add missed call of clean_dcache_va_range().
+   - Drop p2m_get_clean_page() as it is going to be used only once to allocate
+     root page table. Open-code it explicittly in p2m_allocate_root(). Also,
+     it will help avoid duplication of the code connected to order and nr_pages
+     of p2m root page table.
+   - Instead of using order 2 for alloc_domheap_pages(), use
+     get_order_from_bytes(KB(16)).
+   - Clear and clean a proper amount of allocated pages in p2m_allocate_root().
+   - Drop _info from the function name hgatp_from_page_info() and its argument
+     page_info.
+   - Introduce HGATP_MODE_MASK and use MASK_INSR() instead of shift to calculate
+     value of hgatp.
+   - Drop unnecessary parentheses in definition of page_to_maddr().
+   - Add support of VMID.
+   - Drop TLB flushing in p2m_alloc_root_table() and do that once when VMID
+     is re-used. [Look at p2m_alloc_vmid()]
+   - Allocate p2m root table after p2m pool is fully initialized: first
+     return pages to p2m pool them allocate p2m root table.
 ---
- xen/arch/riscv/Makefile               |   1 +
- xen/arch/riscv/include/asm/domain.h   |   6 +
- xen/arch/riscv/include/asm/flushtlb.h |   5 +
- xen/arch/riscv/include/asm/vmid.h     |   8 ++
- xen/arch/riscv/setup.c                |   3 +
- xen/arch/riscv/vmid.c                 | 165 ++++++++++++++++++++++++++
- 6 files changed, 188 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/vmid.h
- create mode 100644 xen/arch/riscv/vmid.c
+ xen/arch/riscv/include/asm/mm.h             |  4 +
+ xen/arch/riscv/include/asm/p2m.h            | 12 +++
+ xen/arch/riscv/include/asm/paging.h         |  2 +
+ xen/arch/riscv/include/asm/riscv_encoding.h |  6 ++
+ xen/arch/riscv/p2m.c                        | 90 +++++++++++++++++++++
+ xen/arch/riscv/paging.c                     | 30 +++++++
+ 6 files changed, 144 insertions(+)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index e2b8aa42c8..745a85e116 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -16,6 +16,7 @@ obj-y += smpboot.o
- obj-y += stubs.o
- obj-y += time.o
- obj-y += traps.o
-+obj-y += vmid.o
- obj-y += vm_event.o
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 9283616c02..dd8cdc9782 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -167,6 +167,10 @@ extern struct page_info *frametable_virt_start;
+ #define mfn_to_page(mfn)    (frametable_virt_start + mfn_x(mfn))
+ #define page_to_mfn(pg)     _mfn((pg) - frametable_virt_start)
  
- $(TARGET): $(TARGET)-syms
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index c3d965a559..aac1040658 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -5,6 +5,11 @@
- #include <xen/xmalloc.h>
- #include <public/hvm/params.h>
- 
-+struct vcpu_vmid {
-+    uint64_t generation;
-+    uint16_t vmid;
-+};
++/* Convert between machine addresses and page-info structures. */
++#define maddr_to_page(ma) mfn_to_page(maddr_to_mfn(ma))
++#define page_to_maddr(pg) mfn_to_maddr(page_to_mfn(pg))
 +
- struct hvm_domain
+ static inline void *page_to_virt(const struct page_info *pg)
  {
-     uint64_t              params[HVM_NR_PARAMS];
-@@ -14,6 +19,7 @@ struct arch_vcpu_io {
- };
+     return mfn_to_virt(mfn_x(page_to_mfn(pg)));
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index f8051ed893..3c37a708db 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -9,6 +9,10 @@
  
- struct arch_vcpu {
-+    struct vcpu_vmid vmid;
- };
+ #include <asm/page-bits.h>
  
- struct arch_domain {
-diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
-index 51c8f753c5..f391ae6eb7 100644
---- a/xen/arch/riscv/include/asm/flushtlb.h
-+++ b/xen/arch/riscv/include/asm/flushtlb.h
-@@ -7,6 +7,11 @@
++extern unsigned int p2m_root_order;
++#define P2M_ROOT_ORDER  p2m_root_order
++#define P2M_ROOT_PAGES  BIT(P2M_ROOT_ORDER, U)
++
+ #define paddr_bits PADDR_BITS
  
- #include <asm/sbi.h>
+ /* Get host p2m table */
+@@ -24,6 +28,12 @@ struct p2m_domain {
+     /* Pages used to construct the p2m */
+     struct page_list_head pages;
  
-+static inline void local_hfence_gvma_all(void)
++    /* The root of the p2m tree. May be concatenated */
++    struct page_info *root;
++
++    /* G-stage (stage-2) address translation mode */
++    unsigned long hgatp_mode;
++
+     /* Indicate if it is required to clean the cache when writing an entry */
+     bool clean_pte;
+ 
+@@ -127,6 +137,8 @@ static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+     /* Not supported on RISCV. */
+ }
+ 
++unsigned long construct_hgatp(struct p2m_domain *p2m, uint16_t vmid);
++
+ #endif /* ASM__RISCV__P2M_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index 8fdaeeb2e4..557fbd1abc 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -10,4 +10,6 @@ int paging_domain_init(struct domain *d);
+ int paging_freelist_init(struct domain *d, unsigned long pages,
+                          bool *preempted);
+ 
++bool paging_ret_pages_to_domheap(struct domain *d, unsigned int nr_pages);
++
+ #endif /* ASM_RISCV_PAGING_H */
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+index 6cc8f4eb45..8362df8784 100644
+--- a/xen/arch/riscv/include/asm/riscv_encoding.h
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -133,11 +133,13 @@
+ #define HGATP_MODE_SV48X4		_UL(9)
+ 
+ #define HGATP32_MODE_SHIFT		31
++#define HGATP32_MODE_MASK		_UL(0x80000000)
+ #define HGATP32_VMID_SHIFT		22
+ #define HGATP32_VMID_MASK		_UL(0x1FC00000)
+ #define HGATP32_PPN			_UL(0x003FFFFF)
+ 
+ #define HGATP64_MODE_SHIFT		60
++#define HGATP64_MODE_MASK		_ULL(0xF000000000000000)
+ #define HGATP64_VMID_SHIFT		44
+ #define HGATP64_VMID_MASK		_ULL(0x03FFF00000000000)
+ #define HGATP64_PPN			_ULL(0x00000FFFFFFFFFFF)
+@@ -170,6 +172,7 @@
+ #define HGATP_VMID_SHIFT		HGATP64_VMID_SHIFT
+ #define HGATP_VMID_MASK			HGATP64_VMID_MASK
+ #define HGATP_MODE_SHIFT		HGATP64_MODE_SHIFT
++#define HGATP_MODE_MASK			HGATP64_MODE_MASK
+ #else
+ #define MSTATUS_SD			MSTATUS32_SD
+ #define SSTATUS_SD			SSTATUS32_SD
+@@ -181,8 +184,11 @@
+ #define HGATP_VMID_SHIFT		HGATP32_VMID_SHIFT
+ #define HGATP_VMID_MASK			HGATP32_VMID_MASK
+ #define HGATP_MODE_SHIFT		HGATP32_MODE_SHIFT
++#define HGATP_MODE_MASK			HGATP32_MODE_MASK
+ #endif
+ 
++#define GUEST_ROOT_PAGE_TABLE_SIZE	KB(16)
++
+ #define TOPI_IID_SHIFT			16
+ #define TOPI_IID_MASK			0xfff
+ #define TOPI_IPRIO_MASK		0xff
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 214b4861d2..cac07c51c9 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -1,8 +1,86 @@
++#include <xen/domain_page.h>
+ #include <xen/mm.h>
+ #include <xen/rwlock.h>
+ #include <xen/sched.h>
+ 
+ #include <asm/paging.h>
++#include <asm/p2m.h>
++#include <asm/riscv_encoding.h>
++
++unsigned int __read_mostly p2m_root_order;
++
++static void clear_and_clean_page(struct page_info *page)
 +{
-+    asm volatile ( "hfence.gvma zero, zero" ::: "memory" );
-+}
-+
- /* Flush TLB of local processor for address va. */
- static inline void flush_tlb_one_local(vaddr_t va)
- {
-diff --git a/xen/arch/riscv/include/asm/vmid.h b/xen/arch/riscv/include/asm/vmid.h
-new file mode 100644
-index 0000000000..2f1f7ec9a2
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/vmid.h
-@@ -0,0 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef ASM_RISCV_VMID_H
-+#define ASM_RISCV_VMID_H
-+
-+void vmid_init(void);
-+
-+#endif /* ASM_RISCV_VMID_H */
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 483cdd7e17..549228d73f 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -25,6 +25,7 @@
- #include <asm/sbi.h>
- #include <asm/setup.h>
- #include <asm/traps.h>
-+#include <asm/vmid.h>
- 
- /* Xen stack for bringing up the first CPU. */
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-@@ -148,6 +149,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
- 
-     console_init_postirq();
- 
-+    vmid_init();
-+
-     printk("All set up\n");
- 
-     machine_halt();
-diff --git a/xen/arch/riscv/vmid.c b/xen/arch/riscv/vmid.c
-new file mode 100644
-index 0000000000..7ad1b91ee2
---- /dev/null
-+++ b/xen/arch/riscv/vmid.c
-@@ -0,0 +1,165 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/domain.h>
-+#include <xen/init.h>
-+#include <xen/sections.h>
-+#include <xen/lib.h>
-+#include <xen/param.h>
-+#include <xen/percpu.h>
-+
-+#include <asm/atomic.h>
-+#include <asm/csr.h>
-+#include <asm/flushtlb.h>
-+
-+/* Xen command-line option to enable VMIDs */
-+static bool __read_mostly opt_vmid_enabled = true;
-+boolean_param("vmid", opt_vmid_enabled);
-+
-+/*
-+ * VMIDs partition the physical TLB. In the current implementation VMIDs are
-+ * introduced to reduce the number of TLB flushes.  Each time the guest's
-+ * virtual address space changes, instead of flushing the TLB, a new VMID is
-+ * assigned. This reduces the number of TLB flushes to at most 1/#VMIDs.
-+ * The biggest advantage is that hot parts of the hypervisor's code and data
-+ * retain in the TLB.
-+ *
-+ * Sketch of the Implementation:
-+ *
-+ * VMIDs are a hart-local resource.  As preemption of VMIDs is not possible,
-+ * VMIDs are assigned in a round-robin scheme.  To minimize the overhead of
-+ * VMID invalidation, at the time of a TLB flush, VMIDs are tagged with a
-+ * 64-bit generation. Only on a generation overflow the code needs to
-+ * invalidate all VMID information stored at the VCPUs with are run on the
-+ * specific physical processor.  This overflow appears after about 2^80
-+ * host processor cycles, so we do not optimize this case, but simply disable
-+ * VMID useage to retain correctness.
-+ */
-+
-+/* Per-Hart VMID management. */
-+struct vmid_data {
-+   uint64_t hart_vmid_generation;
-+   uint16_t next_vmid;
-+   uint16_t max_vmid;
-+   bool disabled;
-+};
-+
-+static DEFINE_PER_CPU(struct vmid_data, vmid_data);
-+
-+static unsigned long vmidlen_detect(void)
-+{
-+    unsigned long vmid_bits;
-+    unsigned long old;
-+
-+    /* Figure-out number of VMID bits in HW */
-+    old = csr_read(CSR_HGATP);
-+
-+    csr_write(CSR_HGATP, old | HGATP_VMID_MASK);
-+    vmid_bits = csr_read(CSR_HGATP);
-+    vmid_bits =  MASK_EXTR(vmid_bits, HGATP_VMID_MASK);
-+    vmid_bits = flsl(vmid_bits);
-+    csr_write(CSR_HGATP, old);
++    clear_domain_page(page_to_mfn(page));
 +
 +    /*
-+     * We polluted local TLB so flush all guest TLB as
-+     * a speculative access can happen at any time.
++     * If the IOMMU doesn't support coherent walks and the p2m tables are
++     * shared between the CPU and IOMMU, it is necessary to clean the
++     * d-cache.
 +     */
-+    local_hfence_gvma_all();
-+
-+    return vmid_bits;
++    clean_dcache_va_range(page, PAGE_SIZE);
 +}
 +
-+void vmid_init(void)
++static struct page_info *p2m_allocate_root(struct domain *d)
 +{
-+    static bool g_disabled = false;
-+
-+    unsigned long vmid_len = vmidlen_detect();
-+    struct vmid_data *data = &this_cpu(vmid_data);
-+    unsigned long max_availalbe_bits = sizeof(data->max_vmid) << 3;
-+
-+    if ( vmid_len > max_availalbe_bits )
-+        panic("%s: VMIDLEN is bigger then a type which represent VMID: %lu(%lu)\n",
-+              __func__, vmid_len, max_availalbe_bits);
-+
-+    data->max_vmid = BIT(vmid_len, U) - 1;
-+    data->disabled = !opt_vmid_enabled || (vmid_len <= 1);
-+
-+    if ( g_disabled != data->disabled )
-+    {
-+        printk("%s: VMIDs %sabled.\n", __func__,
-+               data->disabled ? "dis" : "en");
-+        if ( !g_disabled )
-+            g_disabled = data->disabled;
-+    }
-+
-+    /* Zero indicates 'invalid generation', so we start the count at one. */
-+    data->hart_vmid_generation = 1;
-+
-+    /* Zero indicates 'VMIDs disabled', so we start the count at one. */
-+    data->next_vmid = 1;
-+}
-+
-+void vcpu_vmid_flush_vcpu(struct vcpu *v)
-+{
-+    write_atomic(&v->arch.vmid.generation, 0);
-+}
-+
-+void vmid_flush_hart(void)
-+{
-+    struct vmid_data *data = &this_cpu(vmid_data);
-+
-+    if ( data->disabled )
-+        return;
-+
-+    if ( likely(++data->hart_vmid_generation != 0) )
-+        return;
++    struct page_info *page;
 +
 +    /*
-+     * VMID generations are 64 bit.  Overflow of generations never happens.
-+     * For safety, we simply disable ASIDs, so correctness is established; it
-+     * only runs a bit slower.
++     * As mentioned in the Priviliged Architecture Spec (version 20240411)
++     * in Section 18.5.1, for the paged virtual-memory schemes  (Sv32x4,
++     * Sv39x4, Sv48x4, and Sv57x4), the root page table is 16 KiB and must
++     * be aligned to a 16-KiB boundary.
 +     */
-+    printk("%s: VMID generation overrun. Disabling VMIDs.\n", __func__);
-+    data->disabled = 1;
++    page = alloc_domheap_pages(d, P2M_ROOT_ORDER, MEMF_no_owner);
++    if ( !page )
++        return NULL;
++
++    for ( unsigned int i = 0; i < P2M_ROOT_PAGES; i++ )
++        clear_and_clean_page(page + i);
++
++    return page;
 +}
 +
-+bool vmid_handle_vmenter(struct vcpu_vmid *vmid)
++unsigned long construct_hgatp(struct p2m_domain *p2m, uint16_t vmid)
 +{
-+    struct vmid_data *data = &this_cpu(vmid_data);
++    unsigned long ppn;
 +
-+    /* Test if VCPU has valid VMID. */
-+    if ( read_atomic(&vmid->generation) == data->hart_vmid_generation )
-+        return 0;
++    ppn = PFN_DOWN(page_to_maddr(p2m->root)) & HGATP_PPN;
 +
-+    /* If there are no free VMIDs, need to go to a new generation. */
-+    if ( unlikely(data->next_vmid > data->max_vmid) )
-+    {
-+        vmid_flush_hart();
-+        data->next_vmid = 1;
-+        if ( data->disabled )
-+            goto disabled;
-+    }
++    /* TODO: add detection of hgatp_mode instead of hard-coding it. */
++#if RV_STAGE1_MODE == SATP_MODE_SV39
++    p2m->hgatp_mode = HGATP_MODE_SV39X4;
++#elif RV_STAGE1_MODE == SATP_MODE_SV48
++    p2m->hgatp_mode = HGATP_MODE_SV48X4;
++#else
++#   error "add HGATP_MODE"
++#endif
 +
-+    /* Now guaranteed to be a free VMID. */
-+    vmid->vmid = data->next_vmid++;
-+    write_atomic(&vmid->generation, data->hart_vmid_generation);
++    return ppn | MASK_INSR(p2m->hgatp_mode, HGATP_MODE_MASK) |
++                 MASK_INSR(vmid, HGATP_VMID_MASK);
++}
++
++static int p2m_alloc_root_table(struct p2m_domain *p2m)
++{
++    struct domain *d = p2m->domain;
++    struct page_info *page;
++    const unsigned int nr_root_pages = P2M_ROOT_PAGES;
 +
 +    /*
-+     * When we assign VMID 1, flush all TLB entries as we are starting a new
-+     * generation, and all old VMID allocations are now stale.
++     * Return back nr_root_pages to assure the root table memory is also
++     * accounted against the P2M pool of the domain.
 +     */
-+    return (vmid->vmid == 1);
++    if ( !paging_ret_pages_to_domheap(d, nr_root_pages) )
++        return -ENOMEM;
 +
-+ disabled:
-+    vmid->vmid = 0;
++    page = p2m_allocate_root(d);
++    if ( !page )
++        return -ENOMEM;
++
++    p2m->root = page;
++
 +    return 0;
 +}
+ 
+ int p2m_init(struct domain *d)
+ {
+@@ -32,6 +110,8 @@ int p2m_init(struct domain *d)
+ #   error "Add init of p2m->clean_pte"
+ #endif
+ 
++    p2m_root_order = get_order_from_bytes(GUEST_ROOT_PAGE_TABLE_SIZE);
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+     return 0;
+ }
+ 
+@@ -42,10 +122,20 @@ int p2m_init(struct domain *d)
+  */
+ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ {
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc;
+ 
+     if ( (rc = paging_freelist_init(d, pages, preempted)) )
+         return rc;
+ 
++    /*
++     * First, initialize p2m pool. Then allocate the root
++     * table so that the necessary pages can be returned from the p2m pool,
++     * since the root table must be allocated using alloc_domheap_pages(...)
++     * to meet its specific requirements.
++     */
++    if ( !p2m->root )
++        p2m_alloc_root_table(p2m);
++
+     return 0;
+ }
+diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+index 8882be5ac9..bbe1186900 100644
+--- a/xen/arch/riscv/paging.c
++++ b/xen/arch/riscv/paging.c
+@@ -54,6 +54,36 @@ int paging_freelist_init(struct domain *d, unsigned long pages,
+ 
+     return 0;
+ }
++
++bool paging_ret_pages_to_domheap(struct domain *d, unsigned int nr_pages)
++{
++    struct page_info *page;
++
++    ASSERT(spin_is_locked(&d->arch.paging.lock));
++
++    if ( ACCESS_ONCE(d->arch.paging.total_pages) < nr_pages )
++        return false;
++
++    for ( unsigned int i = 0; i < nr_pages; i++ )
++    {
++        /* Return memory to domheap. */
++        page = page_list_remove_head(&d->arch.paging.freelist);
++        if( page )
++        {
++            ACCESS_ONCE(d->arch.paging.total_pages)--;
++            free_domheap_page(page);
++        }
++        else
++        {
++            printk(XENLOG_ERR
++                   "Failed to free P2M pages, P2M freelist is empty.\n");
++            return false;
++        }
++    }
++
++    return true;
++}
++
+ /* Domain paging struct initialization. */
+ int paging_domain_init(struct domain *d)
+ {
 -- 
 2.50.1
 
