@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 842A5C87FCC
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:05:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1066010.1431412 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE99BC87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:10:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1066032.1431432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVmi-0006tF-8F; Thu, 31 Jul 2025 16:05:36 +0000
+	id 1uhVr0-0008An-0n; Thu, 31 Jul 2025 16:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1066010.1431412; Thu, 31 Jul 2025 16:05:36 +0000
+Received: by outflank-mailman (output) from mailman id 1066032.1431432; Thu, 31 Jul 2025 16:10:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVmi-0006t8-5a; Thu, 31 Jul 2025 16:05:36 +0000
-Received: by outflank-mailman (input) for mailman id 1066010;
- Thu, 31 Jul 2025 16:05:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uhVqz-0008AI-Ta; Thu, 31 Jul 2025 16:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 1066032;
+ Thu, 31 Jul 2025 16:10:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVmg-0006t2-RN
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 16:05:34 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3077728a-6e28-11f0-a320-13f23c93f187;
- Thu, 31 Jul 2025 18:05:34 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-af925cbd73aso78544166b.1
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 09:05:34 -0700 (PDT)
-Received: from [192.168.1.5] (user-109-243-64-38.play-internet.pl.
- [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a21c081sm127050566b.97.2025.07.31.09.05.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Jul 2025 09:05:32 -0700 (PDT)
+ <SRS0=xYFp=2M=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1uhVqz-00082p-4a
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 16:10:01 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ce92c0ca-6e28-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 18:09:59 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id BD10F4EE3C02;
+ Thu, 31 Jul 2025 18:09:57 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,99 +42,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3077728a-6e28-11f0-a320-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977933; x=1754582733; darn=lists.xenproject.org;
-        h=subject:from:cc:to:content-language:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ALaMm3KAbV/JSsq5mEovcxhM0ntMEs56Rk5xRZq9YEw=;
-        b=BZIKSj2SpLx+Ba5lACGpmkKmw7L3QvfN89D4iZn46Keqpw0fmJ7qjD9g3Zq8vCX7vC
-         2YVtm5b81rhpG3HV0UQIsrW1pHwsITlO5savovpmyhVNKGQ3ivZ0+7acPXwHhImeZEUw
-         sYfSXrvxRQL7AqCpJID16zmtJmdMONpKXC6A6q+KG6IzLXSiTwGba7XDsUzL2ixy/tOf
-         xW/SXu+/RBoQwu2Qx+aYTJfUM43Y3YTpWWpp+UTYOUi0588tYdo/fFluXlRmQRqar7tc
-         CseXb4+IkS9/RpqLoKLodTcWJVF3joNOTDBdCLG7LrYTE52Les85nf+ebcEflBANnkt5
-         Qa+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977933; x=1754582733;
-        h=subject:from:cc:to:content-language:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ALaMm3KAbV/JSsq5mEovcxhM0ntMEs56Rk5xRZq9YEw=;
-        b=NxR43sdBJNAh42yr9sK2xz5jky4S7j9bQUuusNgiTVBvkHo1qXda1/VH7vPLksZlQZ
-         dHSEiJJnZZNzqJMqM2NfFuFpBGaVjvT4F6UQ5nwq+62ZZ/qSg1hwKf4jNoQ640vv3MuB
-         gn9fXtmmo3exoB1j+glst8alJJC5WhbHz7eCiM0zgTzUK9LIGlKlO/ZWwUQKVwEVAl3Z
-         qB+ajI2gLRV4cQjMbQsQum7oqrv7m3z7BtmkSYFtdpZlpSCHthcu8NjD0VHhfTBEG/Uh
-         u9IBRwDZ5FxB646Lb8nrfZzC19Beop/Ht/+34MjdUDtlhUKFc+AmNEHVqxOPNisReVcs
-         3ugQ==
-X-Gm-Message-State: AOJu0Yxp9AsQEZJ2BHs3ZVGtzng+fxm+zmNpMFTD2HXZxdwrI9jbqYeD
-	hjCIRUA8kjPPtQXiuVhHWZk4WvcaYxt0qpdJ7+5uTsBBxbL9LUGJXQEdg6l1wQ==
-X-Gm-Gg: ASbGncvsQnio9h1TT8dDO6GV2FAghjHk3ncr8WjbDwOPVI6uVw3ComvfStcw9LzDKai
-	wLkG3kSkAzM3MKFBegTh+lj5xTQmab2loS+jlmQ5CK8DkNmBN2KAgPg7dn591MWVlvoGlG3xB5S
-	x7Sluzdo4FUVqJeECsy5y9YeEvkaPMnWKXhV5UvZYBPdRqu+6aGPewDCCyuKWMkHLyn8M5b4lHP
-	0HKoWyN7tJFlDNofRdMVo2GfiCcIYWMlvJGfR32FK4Y/HHCpuN6V7LURPrP96FDXhsKG73v34+0
-	0CTwGTirtGq9IO08uk0dE/MKNnuaCAXsKj/kyLOz/Tsxib2eCijsEUzfzjQJJWNCsLz1wkYAiUv
-	6DEQ44ThGeaEcxWkWsl81bPJ6JFGsBoYC7gg0tpGJvaKKtN+sBKF8qNj7ai1dQ9gYGLaTOrI=
-X-Google-Smtp-Source: AGHT+IERMtNyjzeRzTRQG4jKmS+pmg/lK53cIjJdDxu8r03ehyx1B/idvXe2JUSS3TrSRet7TvOjeA==
-X-Received: by 2002:a17:906:9fd2:b0:ae0:c6fa:ef45 with SMTP id a640c23a62f3a-af8fd9ef545mr930395866b.41.1753977932972;
-        Thu, 31 Jul 2025 09:05:32 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------wPDqQ8iJ5sRCcVH1fBbystgB"
-Message-ID: <7372cb8d-82d8-43f4-9a34-4b60526cae76@gmail.com>
-Date: Thu, 31 Jul 2025 18:05:32 +0200
+X-Inumbo-ID: ce92c0ca-6e28-11f0-b895-0df219b8e170
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1753978198;
+	b=orN3FtAMCfrY5evuDNG6dlIiNVCZt6qyg26gQIzKuWlf+XKr58PkNCytkS2oEBVASb4Y
+	 upj/qOvc1kGNEzeh40RzyYFR951Xpg0uDDarVgOCIlcoLu3UdztR8Zm908PYMwB4V3b/M
+	 nqnwoUU4+m4OhfEUNiQVxhjLJF00/q6hR6PnBOJ09THvEBCZL6J7lqLc4bzsU+SE+9JyU
+	 9/dxCiHp00ZYCK1h/5zZ10Ve0xYdhtjgtmOrMY1O7m+vBgSygxJgTVuka0lKFfaHjngnB
+	 6YjnwKRdJF6YcgFK2p36mCFP5AixBEFSl5rXwGC23cdlu6AED8SG0KLq9cTZA5aK5lOI5
+	 u28yfpZGatNUiWoTxn4Xsmnh1DYQdMxrB1wD/0tdLcBrVSR/clsfqw4I2d6UxEd7LOL0u
+	 0i+hNptVguKWOMDkGt8H1GMm0GLnpxI9E5tSUZVmky/7ylzTFICfSiasJyXyl56uIahgL
+	 xk4/XU0mWf7Iv4ESyL3Iomx7Jt7thbvUH4dX+aQbiicWMDOKe7q+V6IbtjdZya6Yb/oci
+	 AVxayxHEIQsuCHpwqKLf9V4hfCGoKSZYep6Qbt528mOrA587namEKkZnbvLWfDGo3VJ06
+	 qaIeWjun5Qt3c8/FIohxKk+hrgr5Njhik0fZATFvXpD5aBaW4YvGYQDY84zY0Yw=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1753978198;
+	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
+	 References:Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=NFAmfO++jaBaaSF8ptPpb12ixK59ZYs1HyzRGK4j40w=;
+	b=zlSvO4nvP20ZvFnXSEj9NE1R61maoGzRx9S/JAJ4XuAvvJHj/DnazaTi0BSGcvEe9oSI
+	 Y6syT8ialysce+91KOmXHp19Jx82X/YqIrSOkhGNiufokf/zp1WDnBeBwy1fvbLQEQZbu
+	 vNeBdCtFYBex6lJJfuAQY/FB8SCYSgO+dNBIkkZqUDR7y1e4zr1OKfvThJBVM7IofAimE
+	 BTaBASfaz2WRKCu907i+sBcZ+maqocoHgoPDiLPGyMQrGpsDzO982P9Tp7UPTclLxVr7V
+	 QRbX3hYs2prH7di1ChRQ3B5zWSq1HObQST/CSPKOj2YxzkVlpkQu4xLlptjWTdhBye0O4
+	 KF1tpitCl4ujcMRfJgrhzU82EZDK1pokA0yb8ztzUgoME0gpnpatGogPUCEf5lKb/zoBi
+	 qzgGF2RTOsLsbuZSg/exrX4W80i/apEWTVIitJOQZnIptcPTsFgUtJJc+lNxVgt2FOMQV
+	 ig6ODh8Pp+qv5E09t29HvYJuZuu1wdgTCi8/fNpm71K74f8Du1isTflx1tZPACJao59OA
+	 dk1f79P/q1g9sztUi81GJAR9RjHYLGKPgfWoag6Fcw/mNLJ9Slb8b5poJOHNAuPb3W7sb
+	 3ybPFeskg+L1nClzGvmwwzph2ix0LxlIeAQEFs1behfu83On5Kx4hPymdqqC3dY=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1753978198; bh=PQgqOGgD7fqxbyNruFTKq+UY5QPyhvZ1gHc/xkjkhLE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=t2yzI1dp4V1VelU01ryEUfPsegJbFIddw3VzFwbA+ysZJIdH43sycQ6+eRy0llIVV
+	 sajCoG1dJXty8/uN0Wo5SjT2AMGBKsZ6Q9ziUbgM/KvqhjUlWzzDvI8EIbajggy3x8
+	 bVDkX2n++SVUGpWTXFP6Ozy2d38+sQGKfoDLgRtkNFKBteEhrkpz2BiXY2PrP679gu
+	 MlhqYlqbKA7cjslClbpiKgg0K79amjtLIdGusUmLw2T2wk3aQAWIqnBc7P/cvRHQ1o
+	 OZAPVAb22QfdOQgM2EhhaVi6rwcitsqTmp4TU5knaADy1lH0dyIw2jLAFtJ2gNhCpH
+	 Q9Jk7LiSE3O/Q==
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: "committers@xenproject.org" <committers@xenproject.org>,
- Community Manager <community.manager@xenproject.org>
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Last posting date for Xen 4.21 is Fri Aug 08, 2025
+Date: Thu, 31 Jul 2025 18:09:57 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>, Dmytro Prokopchuk1
+ <dmytro_prokopchuk1@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Dario Faggioli <dfaggioli@suse.com>, Juergen
+ Gross <jgross@suse.com>, George Dunlap <gwd@xenproject.org>,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] misra: fix violations in macros GVA_INFO, TRACE_TIME
+In-Reply-To: <9952fc5c-b95a-4879-a442-12e491438e08@citrix.com>
+References: <73cfc8a2d4d66042b49f44c69e672ce8ad0556ce.1753971749.git.dmytro_prokopchuk1@epam.com>
+ <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
+ <898e1c2a-7684-489b-84cd-254b2ee53e5d@suse.com>
+ <9952fc5c-b95a-4879-a442-12e491438e08@citrix.com>
+Message-ID: <689178480a418f04158d623e3cedd4bd@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 
-This is a multi-part message in MIME format.
---------------wPDqQ8iJ5sRCcVH1fBbystgB
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On 2025-07-31 18:05, Andrew Cooper wrote:
+> On 31/07/2025 4:58 pm, Jan Beulich wrote:
+>> On 31.07.2025 17:37, Andrew Cooper wrote:
+>>> On 31/07/2025 4:16 pm, Dmytro Prokopchuk1 wrote:
+>>>> MISRA Rule 13.1: Initializer lists shall not contain persistent side
+>>>> effects.
+>>>> 
+>>>> The violations occur because both the `GVA_INFO` and `TRACE_TIME` 
+>>>> macro
+>>>> expansions include expressions with persistent side effects 
+>>>> introduced
+>>>> via inline assembly.
+>>>> 
+>>>> In the case of `GVA_INFO`, the issue stems from the initializer list
+>>>> containing a direct call to `current`, which evaluates to
+>>>> `this_cpu(curr_vcpu)` and involves persistent side effects via the
+>>>> `asm` statement. To resolve this, the side-effect-producing 
+>>>> expression
+>>>> is computed in a separate statement prior to the macro 
+>>>> initialization:
+>>>> 
+>>>>     struct vcpu *current_vcpu = current;
+>>>> 
+>>>> The computed value is passed into the `GVA_INFO(current_vcpu)` 
+>>>> macro,
+>>>> ensuring that the initializer is clean and free of such side 
+>>>> effects.
+>>>> 
+>>>> Similarly, the `TRACE_TIME` macro violates this rule when accessing
+>>>> expressions like `current->vcpu_id` and 
+>>>> `current->domain->domain_id`,
+>>>> which also depend on `current` and inline assembly. To fix this, the
+>>>> value of `current` is assigned to a temporary variable:
+>>>> 
+>>>>     struct vcpu *v = current;
+>>>> 
+>>>> This temporary variable is then used to access `domain_id` and 
+>>>> `vcpu_id`.
+>>>> This ensures that the arguments passed to the `TRACE_TIME` macro are
+>>>> simple expressions free of persistent side effects.
+>>>> 
+>>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+>>> The macro `current` specifically does not (and must not) have side
+>>> effects.  It is expected to behave like a plain `struct vcpu 
+>>> *current;`
+>>> variable, and what Eclair is noticing is the thread-local machinery
+>>> under this_cpu() (or in x86's case, get_current()).
+>>> 
+>>> In ARM's case, it's literally reading the hardware thread pointer
+>>> register.  Can anything be done to tell Eclair that `this_cpu()`
+>>> specifically does not have side effects?
+>>> 
+>>> The only reason that GVA_INFO() and TRACE_TIME() are picked out is
+>>> because they both contain embedded structure initialisation, and this 
+>>> is
+>>> is actually an example where trying to comply with MISRA interferes 
+>>> with
+>>> what is otherwise a standard pattern in Xen.
+>> Irrespective of what you say, some of the changes here were 
+>> eliminating
+>> multiple adjacent uses of current, which - iirc - often the compiler
+>> can't fold via CSE.
+> 
+> Where we have mixed usage, sure.  (I'm sure I've got a branch somewhere
+> trying to add some more pure/const around to try and help out here, but
+> I can't find it, and don't recall it being a major improvement either.)
+> 
+> The real problem here is that there are a *very few* number of contexts
+> where Eclair refuses to tolerate the use of `current` citing side
+> effects, despite there being no side effects.
+> 
+> That is the thing that breaks the principle of least surprise, and we
+> ought to fix it by making Eclair happy with `current` everywhere, 
+> rather
+> than force people to learn that 2 macros can't have a `current` in 
+> their
+> parameter list.
+> 
 
-Hi all,
+I'll take a look. Likely yes, by adding a handful of properties. There 
+are subtleties, though.
 
-The last posting date for Xen 4.21 is Fri Aug 08, 2025. If you want your
-features to be included for the release, please make sure they are posted
-for the first time before Fri Aug 08, 2025.
-
-Full schedule can be found here:
-   https://wiki.xenproject.org/wiki/Xen_Project_X.YY_Release_Notes
-
-Best regards,
-  Oleksii
-
-
---------------wPDqQ8iJ5sRCcVH1fBbystgB
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <pre>Hi all,
-
-The last posting date for Xen 4.21 is Fri Aug 08, 2025. If you want your
-features to be included for the release, please make sure they are posted
-for the first time before Fri Aug 08, 2025.
-
-Full schedule can be found here:
-  <a class="moz-txt-link-freetext" href="https://wiki.xenproject.org/wiki/Xen_Project_X.YY_Release_Notes">https://wiki.xenproject.org/wiki/Xen_Project_X.YY_Release_Notes</a>
-
-Best regards,
- Oleksii
-
-
-</pre>
-  </body>
-</html>
-
---------------wPDqQ8iJ5sRCcVH1fBbystgB--
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
