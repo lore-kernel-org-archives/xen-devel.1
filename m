@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950C7C87FCC
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:03:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065995.1431397 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45881C87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 16:05:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1066011.1431422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVk6-0005GG-UH; Thu, 31 Jul 2025 16:02:54 +0000
+	id 1uhVmm-00077c-Ff; Thu, 31 Jul 2025 16:05:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065995.1431397; Thu, 31 Jul 2025 16:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 1066011.1431422; Thu, 31 Jul 2025 16:05:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhVk6-0005G5-PM; Thu, 31 Jul 2025 16:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 1065995;
- Thu, 31 Jul 2025 16:02:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uhVmm-00077V-By; Thu, 31 Jul 2025 16:05:40 +0000
+Received: by outflank-mailman (input) for mailman id 1066011;
+ Thu, 31 Jul 2025 16:05:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Jdx=2M=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uhVg8-0001FB-MK
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 15:58:48 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3df0b852-6e27-11f0-b895-0df219b8e170;
- Thu, 31 Jul 2025 17:58:47 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-55b8b8e00caso569926e87.3
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 08:58:47 -0700 (PDT)
-Received: from fedora (user-109-243-64-38.play-internet.pl. [109.243.64.38])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55b88c9931bsm278746e87.101.2025.07.31.08.58.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 08:58:45 -0700 (PDT)
+ <SRS0=8WGx=2M=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uhVmk-0006t2-JK
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 16:05:38 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 32f614ff-6e28-11f0-a320-13f23c93f187;
+ Thu, 31 Jul 2025 18:05:38 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-45629702e52so4499625e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 09:05:38 -0700 (PDT)
+Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c3abeb2sm2855730f8f.11.2025.07.31.09.05.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Jul 2025 09:05:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,240 +47,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3df0b852-6e27-11f0-b895-0df219b8e170
+X-Inumbo-ID: 32f614ff-6e28-11f0-a320-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753977526; x=1754582326; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=H9A8ULyozJc/nKuEPNSmZGMU66I2uIkMKGf8g4aTjZc=;
-        b=niSnpS1EAKNw49D51QjWah0OHUjGKtctuZ56p2P6RP2lYOGO05muqvQl/yPwasd0Ox
-         CiHcZvbvQE3phmnBK0XykmIkyXBNixPYC91OpTL+47AxTDl6LNGXd3rQ9k7ym1DlvoJt
-         JX8/LQARLv3orAdL+O0PEaYBIKpRJ6JhsTByggUvk67jhwpkJp3jxy24KSzM3GTG3ikP
-         CSwXUpMODf6W2oivMpuaig5JdKUKU5qgudEferfInH5+sdyz852duCGbwdXalqQf2v7R
-         AQuE2P5IUj//70qvxqonWZsiU3xLYP3Ac/GmA5vWHIQ4FxvGIr6mT87cznZZBt1oH4F/
-         S4fg==
+        d=citrix.com; s=google; t=1753977938; x=1754582738; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=iAic0Pc8nhr4wTIyvJuvuKH97ZCqZXWYYnDi/TzQFjE=;
+        b=LcYz4qlqhG/S8O6PZXkh0PKyfnxdiKz9IYPjGY/5zPN1hnsOVDIJCkXyLrN7nzXAcF
+         FPx2wX2zirqq4ypo4jmqzlgdf+BtmjdXH7p1OpJfzQEBp75Dx+MwEHeiSX6+17QoroFZ
+         wvONSSbXpsMI4R+fnawNZ9/84kGaaBGYL3MUY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753977526; x=1754582326;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=H9A8ULyozJc/nKuEPNSmZGMU66I2uIkMKGf8g4aTjZc=;
-        b=taWu8yoTER+rjRrvPyZT+TxQR+nSVgMeh8BdPSs1/rkbxUa1k0j8ZAF8p7banHE8a6
-         XbQFAdIFMyRoPfHongybugKQhATk2b0Av8/gPNK7AsDqKsYCeZB08TQqT8cdGFDTJdrC
-         ymF54hkmnbS1YaLgjUx3eyuA442ZNur39Ily3emh+Ubn1q2CmJZeosQi/mr5mwphKR8a
-         EnngOv80NxnC/kDXUnHaPnapSfnyeAaeQzylm2ELWD36khm/F+lQpU/CJ2HJZZVEC/h6
-         5XP7sE3JFQAt7WzF+LHQrSWsI3EzVvYlCaBiEhYJbs9b+4vsidLGJEdqLbqHf+egabbZ
-         CQfQ==
-X-Gm-Message-State: AOJu0Yzbt5wo8OO0q3j0E2J7FZaNQfh2PgDpWQZTKkLB/qwJq6uBAofj
-	gUPbXLhj1aXF3VeXNtJ3P+i6r/S2+JoKITRwRRNjFVbmf8QKD4W/5h2vs2XohA==
-X-Gm-Gg: ASbGnctNYMyABM2K/b0qGK+yIfV4jEhdWxzVLlfOBV7RK5hTA06xbr/zuOLL+re42fv
-	xbDbqJ6X1itNyvSH0eEa2l2LSzR+9hVeet1LuSCHkb88Aaotgu/ocHJV0/SN9Mj43ncenN9Q8dC
-	i5xi3cCTtGOLa8smiDcghTGoQjTwjlX8X+C8XR0LR5oR3BLIP2f4GtaD7MHnGdk2QaIhaT+2eN0
-	EZwMCBMY3yWgOPSgOl2K3mbj//Hnn0D4w9ic/5lCNb3ASUw0VKsqbpSJWftg0nS9D3P8zCz5arh
-	QuejByimFaw6LN9ueKj2IkLzj4ObIPAgjpQWzZfzs8/24qgn6pVsuoMsNl1zSH2jKl8ivELnpCZ
-	vQ5W4bbQm6bAexi/y138sB1HJ7PjMOlewv3XCo1yaWJa+V/3M3kl5NKnElOo5dQ==
-X-Google-Smtp-Source: AGHT+IG3rQ2MDLV+jzyMChDNS/ZKIl//GIGUS3fiRb4942UTVk8U82i3aEykhbwBVDrOU94hPB+pGA==
-X-Received: by 2002:a05:6512:108b:b0:55a:4bfe:bf78 with SMTP id 2adb3069b0e04-55b7c00d417mr2483333e87.2.1753977526148;
-        Thu, 31 Jul 2025 08:58:46 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 11/20] xen/riscv: implement function to map memory in guest p2m
-Date: Thu, 31 Jul 2025 17:58:10 +0200
-Message-ID: <e00dcbecf8f0dbe863628dcc45526100f9ee86a3.1753973161.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1753973161.git.oleksii.kurochko@gmail.com>
-References: <cover.1753973161.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20230601; t=1753977938; x=1754582738;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iAic0Pc8nhr4wTIyvJuvuKH97ZCqZXWYYnDi/TzQFjE=;
+        b=gKt1DAHrS/3pnMULtai3AQLvSbgu4ouqipO3Zi9xi2ITA67e4zvZi2GGH//iamRNwH
+         yrdQhSdWXRlis83DOmNeuBJy/FyYiK9ih8RpRFY9hKwm46wFfvACe+P4sKUu3wurpkDU
+         7oaYODolFno74zzZ/BJq6r5061xDJzQliRA45zPXoVMmGu6K3jMkOhQhjuhdo0fW11DV
+         4oQIn+SxWvVDzLNTtc1YijWH2m1ecdmvxB2tL3XJDOn94Nzp24MYpW+/VM0pp9VAMcEa
+         jQFWUJPG81eoHdqXArNrIJZWQCtMHoHkYbAbxVKONNdDYUzokY+lNkMD6n3SMCT2+er6
+         pQTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXhB71sFCVxFm8As/FGdjsz1HyAk9Eb6ncHoKL1saHkc3ylmIn39TcrGjI3NCVXrz5JEH+6+IPQb0k=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx9Zoy3dMYGfcfgOFukbVOhCBu4NaDGGkK/os8kwwxnII7UY8TT
+	40TIjSLVPy2BZgoR8UnoZs26jghKemTQDSU99cnjqSAUhhXrlVF+kuv2zwaKJ3gcs54=
+X-Gm-Gg: ASbGncvB4jtSF/IYel3vrVy22SUepVomBUJvqeOSpsI062H8mCMccFqKcC3A3Qn+klr
+	lt2UaXOJippW4yEw6AiG55AQpfEuM/+UHXm0VGNEW0iqMmBZe9W/BbP2yK8CKKLQc/qkX/kZgVa
+	ZysFmvXP0ABxA/YmpKwVED+xAPkYMDi6gHLotEUxI1oKIwZVAA/eiD0qP5VSGmuZ+QxaZMK7zgn
+	MLAjbJayfHaT3d61iJaFH1/qPIJMqJt+wajTcXf2+w04kWIfbzdkRr7HvBDGgyNlZ54jJVbUHkj
+	1UoBQT3P1I0qU0kc29d5AGgku8VuZZF6Q68cOBW50ZemnpSD6iZyg5+PLaG8ytr9E13Dj9trTdM
+	6sq0UFg9yneuqHNhLNHUYI3teO5KUa9FjO5mHLg7ahYk4shpkQr4UwYMEQvQW7p96wyanpyoRrb
+	1VwIc079Z99njKcg==
+X-Google-Smtp-Source: AGHT+IFhTD44IhqFgKh+s315gESAMnwFZddlKefIHDHG0MPzjsmwgcrhyAd+78VeJjtjlMxLbriOWw==
+X-Received: by 2002:a05:600c:6297:b0:456:2771:e654 with SMTP id 5b1f17b1804b1-45892bd1a7fmr67226295e9.24.1753977937532;
+        Thu, 31 Jul 2025 09:05:37 -0700 (PDT)
+Message-ID: <9952fc5c-b95a-4879-a442-12e491438e08@citrix.com>
+Date: Thu, 31 Jul 2025 17:05:35 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] misra: fix violations in macros GVA_INFO, TRACE_TIME
+To: Jan Beulich <jbeulich@suse.com>,
+ Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ George Dunlap <gwd@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <73cfc8a2d4d66042b49f44c69e672ce8ad0556ce.1753971749.git.dmytro_prokopchuk1@epam.com>
+ <470a04e6-f8c1-4937-8478-0f80107d562d@citrix.com>
+ <898e1c2a-7684-489b-84cd-254b2ee53e5d@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <898e1c2a-7684-489b-84cd-254b2ee53e5d@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Implement map_regions_p2mt() to map a region in the guest p2m with
-a specific p2m type. The memory attributes will be derived from the
-p2m type. This function is going to be called from dom0less common
-code.
+On 31/07/2025 4:58 pm, Jan Beulich wrote:
+> On 31.07.2025 17:37, Andrew Cooper wrote:
+>> On 31/07/2025 4:16 pm, Dmytro Prokopchuk1 wrote:
+>>> MISRA Rule 13.1: Initializer lists shall not contain persistent side
+>>> effects.
+>>>
+>>> The violations occur because both the `GVA_INFO` and `TRACE_TIME` macro
+>>> expansions include expressions with persistent side effects introduced
+>>> via inline assembly.
+>>>
+>>> In the case of `GVA_INFO`, the issue stems from the initializer list
+>>> containing a direct call to `current`, which evaluates to
+>>> `this_cpu(curr_vcpu)` and involves persistent side effects via the
+>>> `asm` statement. To resolve this, the side-effect-producing expression
+>>> is computed in a separate statement prior to the macro initialization:
+>>>
+>>>     struct vcpu *current_vcpu = current;
+>>>
+>>> The computed value is passed into the `GVA_INFO(current_vcpu)` macro,
+>>> ensuring that the initializer is clean and free of such side effects.
+>>>
+>>> Similarly, the `TRACE_TIME` macro violates this rule when accessing
+>>> expressions like `current->vcpu_id` and `current->domain->domain_id`,
+>>> which also depend on `current` and inline assembly. To fix this, the
+>>> value of `current` is assigned to a temporary variable:
+>>>
+>>>     struct vcpu *v = current;
+>>>
+>>> This temporary variable is then used to access `domain_id` and `vcpu_id`.
+>>> This ensures that the arguments passed to the `TRACE_TIME` macro are
+>>> simple expressions free of persistent side effects.
+>>>
+>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+>> The macro `current` specifically does not (and must not) have side
+>> effects.  It is expected to behave like a plain `struct vcpu *current;`
+>> variable, and what Eclair is noticing is the thread-local machinery
+>> under this_cpu() (or in x86's case, get_current()).
+>>
+>> In ARM's case, it's literally reading the hardware thread pointer
+>> register.  Can anything be done to tell Eclair that `this_cpu()`
+>> specifically does not have side effects?
+>>
+>> The only reason that GVA_INFO() and TRACE_TIME() are picked out is
+>> because they both contain embedded structure initialisation, and this is
+>> is actually an example where trying to comply with MISRA interferes with
+>> what is otherwise a standard pattern in Xen.
+> Irrespective of what you say, some of the changes here were eliminating
+> multiple adjacent uses of current, which - iirc - often the compiler
+> can't fold via CSE.
 
-To implement it, introduce:
-- p2m_write_(un)lock() to ensure safe concurrent updates to the P2M.
-  As part of this change, introduce p2m_tlb_flush_sync() and
-  p2m_force_tlb_flush_sync().
-- A stub for p2m_set_range() to map a range of GFNs to MFNs.
-- p2m_insert_mapping().
-- p2m_is_write_locked().
+Where we have mixed usage, sure.  (I'm sure I've got a branch somewhere
+trying to add some more pure/const around to try and help out here, but
+I can't find it, and don't recall it being a major improvement either.)
 
-Drop guest_physmap_add_entry() and call map_regions_p2mt() directly
-from guest_physmap_add_page(), making guest_physmap_add_entry()
-unnecessary.
+The real problem here is that there are a *very few* number of contexts
+where Eclair refuses to tolerate the use of `current` citing side
+effects, despite there being no side effects.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v3:
- - Introudce p2m_write_lock() and p2m_is_write_locked().
- - Introduce p2m_force_tlb_flush_sync() and p2m_flush_tlb() to flush TLBs
-   after p2m table update.
- - Change an argument of p2m_insert_mapping() from struct domain *d to
-   p2m_domain *p2m.
- - Drop guest_physmap_add_entry() and use map_regions_p2mt() to define
-   guest_physmap_add_page().
- - Add declaration of map_regions_p2mt() to asm/p2m.h.
- - Rewrite commit message and subject.
- - Drop p2m_access_t related stuff.
- - Add defintion of  p2m_is_write_locked().
----
-Changes in v2:
- - This changes were part of "xen/riscv: implement p2m mapping functionality".
-   No additional signigicant changes were done.
----
- xen/arch/riscv/include/asm/p2m.h | 31 ++++++++++-----
- xen/arch/riscv/p2m.c             | 65 ++++++++++++++++++++++++++++++++
- 2 files changed, 87 insertions(+), 9 deletions(-)
+That is the thing that breaks the principle of least surprise, and we
+ought to fix it by making Eclair happy with `current` everywhere, rather
+than force people to learn that 2 macros can't have a `current` in their
+parameter list.
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index 5f253da1dd..ada3c398b4 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -121,21 +121,22 @@ static inline int guest_physmap_mark_populate_on_demand(struct domain *d,
-     return -EOPNOTSUPP;
- }
- 
--static inline int guest_physmap_add_entry(struct domain *d,
--                                          gfn_t gfn, mfn_t mfn,
--                                          unsigned long page_order,
--                                          p2m_type_t t)
--{
--    BUG_ON("unimplemented");
--    return -EINVAL;
--}
-+/*
-+ * Map a region in the guest p2m with a specific p2m type.
-+ * The memory attributes will be derived from the p2m type.
-+ */
-+int map_regions_p2mt(struct domain *d,
-+                     gfn_t gfn,
-+                     unsigned long nr,
-+                     mfn_t mfn,
-+                     p2m_type_t p2mt);
- 
- /* Untyped version for RAM only, for compatibility */
- static inline int __must_check
- guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
-                        unsigned int page_order)
- {
--    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
-+    return map_regions_p2mt(d, gfn, BIT(page_order, UL), mfn, p2m_ram_rw);
- }
- 
- static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
-@@ -159,6 +160,18 @@ static inline void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
-     /* Not supported on RISCV. */
- }
- 
-+static inline void p2m_write_lock(struct p2m_domain *p2m)
-+{
-+    write_lock(&p2m->lock);
-+}
-+
-+void p2m_write_unlock(struct p2m_domain *p2m);
-+
-+static inline int p2m_is_write_locked(struct p2m_domain *p2m)
-+{
-+    return rw_is_write_locked(&p2m->lock);
-+}
-+
- unsigned long construct_hgatp(struct p2m_domain *p2m, uint16_t vmid);
- 
- #endif /* ASM__RISCV__P2M_H */
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index cac07c51c9..7cfcf76f24 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -9,6 +9,41 @@
- 
- unsigned int __read_mostly p2m_root_order;
- 
-+/*
-+ * Force a synchronous P2M TLB flush.
-+ *
-+ * Must be called with the p2m lock held.
-+ */
-+static void p2m_force_tlb_flush_sync(struct p2m_domain *p2m)
-+{
-+    struct domain *d = p2m->domain;
-+
-+    ASSERT(p2m_is_write_locked(p2m));
-+
-+    sbi_remote_hfence_gvma(d->dirty_cpumask, 0, 0);
-+
-+    p2m->need_flush = false;
-+}
-+
-+void p2m_tlb_flush_sync(struct p2m_domain *p2m)
-+{
-+    if ( p2m->need_flush )
-+        p2m_force_tlb_flush_sync(p2m);
-+}
-+
-+/* Unlock the flush and do a P2M TLB flush if necessary */
-+void p2m_write_unlock(struct p2m_domain *p2m)
-+{
-+    /*
-+     * The final flush is done with the P2M write lock taken to avoid
-+     * someone else modifying the P2M wbefore the TLB invalidation has
-+     * completed.
-+     */
-+    p2m_tlb_flush_sync(p2m);
-+
-+    write_unlock(&p2m->lock);
-+}
-+
- static void clear_and_clean_page(struct page_info *page)
- {
-     clear_domain_page(page_to_mfn(page));
-@@ -139,3 +174,33 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
- 
-     return 0;
- }
-+
-+static int p2m_set_range(struct p2m_domain *p2m,
-+                         gfn_t sgfn,
-+                         unsigned long nr,
-+                         mfn_t smfn,
-+                         p2m_type_t t)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static int p2m_insert_mapping(struct p2m_domain *p2m, gfn_t start_gfn,
-+                              unsigned long nr, mfn_t mfn, p2m_type_t t)
-+{
-+    int rc;
-+
-+    p2m_write_lock(p2m);
-+    rc = p2m_set_range(p2m, start_gfn, nr, mfn, t);
-+    p2m_write_unlock(p2m);
-+
-+    return rc;
-+}
-+
-+int map_regions_p2mt(struct domain *d,
-+                     gfn_t gfn,
-+                     unsigned long nr,
-+                     mfn_t mfn,
-+                     p2m_type_t p2mt)
-+{
-+    return p2m_insert_mapping(p2m_get_hostp2m(d), gfn, nr, mfn, p2mt);
-+}
--- 
-2.50.1
-
+~Andrew
 
