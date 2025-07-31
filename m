@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A03C87FD2
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 11:03:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1065421.1430780 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA24FC87FCC
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Jul 2025 11:09:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1065444.1430803 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhR3V-0000G2-Pu; Thu, 31 Jul 2025 11:02:37 +0000
+	id 1uhR9c-0001rU-M8; Thu, 31 Jul 2025 11:08:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1065421.1430780; Thu, 31 Jul 2025 11:02:37 +0000
+Received: by outflank-mailman (output) from mailman id 1065444.1430803; Thu, 31 Jul 2025 11:08:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhR3V-0000FW-IK; Thu, 31 Jul 2025 11:02:37 +0000
-Received: by outflank-mailman (input) for mailman id 1065421;
- Thu, 31 Jul 2025 11:02:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8WGx=2M=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uhR3U-0000Cq-0x
- for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 11:02:36 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dd1dac19-6dfd-11f0-a320-13f23c93f187;
- Thu, 31 Jul 2025 13:02:35 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-45619d70c72so14239975e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 04:02:35 -0700 (PDT)
-Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
- [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4589edfd950sm22600885e9.14.2025.07.31.04.02.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Jul 2025 04:02:34 -0700 (PDT)
+	id 1uhR9c-0001rN-J1; Thu, 31 Jul 2025 11:08:56 +0000
+Received: by outflank-mailman (input) for mailman id 1065444;
+ Thu, 31 Jul 2025 11:08:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lm68=2M=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uhR9b-0001rH-3I
+ for xen-devel@lists.xenproject.org; Thu, 31 Jul 2025 11:08:55 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bc68e361-6dfe-11f0-b895-0df219b8e170;
+ Thu, 31 Jul 2025 13:08:50 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3b7825e2775so252941f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 31 Jul 2025 04:08:50 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b422bb0570bsm1275001a12.54.2025.07.31.04.08.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Jul 2025 04:08:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,174 +47,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd1dac19-6dfd-11f0-a320-13f23c93f187
+X-Inumbo-ID: bc68e361-6dfe-11f0-b895-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1753959755; x=1754564555; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YWt5Dpqvqzj0zL1Zk4f9u61iGVBpij4iFWFjYrHm2eo=;
-        b=XigPXAvIjLX97H75I0xTStyPULMP0sOt2832ZQV1SkiOfU0llMVNigKUAjG1SoO3l/
-         p100KM3mIokPqQolG2CC2cjZsWs8AFxUghlrOeZ1GMp14ThEYGsewb8KimpvQakf0lR6
-         k1pkJw6Qv6RwB35PZS2UJrAGbgD2vOD9dD9YU=
+        d=suse.com; s=google; t=1753960129; x=1754564929; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=byG7eJknxoczUHZI6YI8xBvGwlhSL1Q9I1NRwti3t/4=;
+        b=eF1+HgOJJH7bFxEL3fxq1QFYBrRNpHaoQPXXfuiYoOj+YZwKqWdOHA8g+EjpqhzI4E
+         9uZDECo9+5NVs9XZeT1tty/H6zIN3zc0RTr/EFwzQYJOUveni6qORCyeiZ176oukjIcB
+         p/VK6H0uBX9RcOMAd8cqxfq/rDllsNgX93xw+dY9JRVj1MfpC+QxrZrzqBXvTKS/NhXj
+         AZ2FKx8MsSBHeS9rBUD4xuutM6UOWjmYV3DFS8F/lGGdji/v8L6Vi9B/82r8HmdHuGbJ
+         b7eo7bGTVsr0jg9BGcHyzY8hYplcn9q0V2iwD2G/G//CtlyuluN7BeIrmgiWJjv23eDp
+         nXuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753959755; x=1754564555;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YWt5Dpqvqzj0zL1Zk4f9u61iGVBpij4iFWFjYrHm2eo=;
-        b=dElBrRXVJ10vlq17txmFq3QbbJ+UU6FwRFHPY77XYZYVpgkf8Ipt3vGO5DtN80eDl9
-         V4hx24wSdXvL21J6Ddvz85/eZPV8KujcQu3D1AYYnh/KAyWIX4MiJ0koNqs4ncQkMagK
-         NWsW+B/S7T/2XlT/vBvar5TyIMbkqD9/ZrPmKmCQtEk0DWdYRsfhzFCl552GpM/8SQL7
-         QhVH9LF7fcU2lr/5MnIqpK1VGJ9mKoWCbnlVqDZI+LIDxyvAsnlYhlmpie6ORygxYvTg
-         mO/1APpTk20C6Nm8w5PANoSMa66iV4i36aVW5P0ed5YWYqJ+GV3rMiVIka5Qg1TnsYyp
-         QRLA==
-X-Gm-Message-State: AOJu0Yzy5WKsp1Q4PEr2kKlP1Og7KMdp5rk2Hoh0VCkOmoZOkM/jlrJ7
-	gOnOUFHb0azYr/x+fjOXvNjUkXZKB5bfb+luHgMcwj57zrZWejP7njE8QiZuYWycCieC68Qtf4p
-	zIw9N7Ik=
-X-Gm-Gg: ASbGncvH/Jvc7J50QNbkGs6DWaVWyWwfRPr2/UE8weJbifcw0el0RrZofS2Fg9e7I99
-	f54wEW2VvHENri4yabqRc0twBiSYxeQSEVJ/izLEkJdRasbLRCMh2HcVdQcci9TSFo1Mj5Jw7WP
-	k6wAoNtL9HARxE3QT5lD2fhUQWZTTShUOk8lVoUU60upsGzuVBHyjSSEraHXOvXpjqRDKVoM2nk
-	46P8DY9eW8z9pbX/VMW74ZhFSaiP/SGogg6qQ/jYdIZsqpMV4/7L90ULwdpgJfPlCj0qucK0Dce
-	EVPHdk5LFW2prC94gu3Je71UpvYfmXpakFUy5QUJ/EvZ9wwedfmqC9cVec0qgyGm89u5fchUYsm
-	ir6+Xu/pwkFm2YBU9npGoDZUxDnne0sE3RJpiszqVL9Q1YaxRVlhpXFMb0in4xRkBBfRKJQX2iW
-	tH
-X-Google-Smtp-Source: AGHT+IFEYzVeFcJA819w73cJgtejXrdoYKy4DuPwCL0KZzVVVsJlbTKt4gLlxK3chz0DJPtaPWKPhA==
-X-Received: by 2002:a05:600c:1d01:b0:453:7713:476c with SMTP id 5b1f17b1804b1-458a2016e4amr16925995e9.2.1753959754611;
-        Thu, 31 Jul 2025 04:02:34 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 1/2] xen/version: Fold print_build_id() into print_version()
-Date: Thu, 31 Jul 2025 12:02:30 +0100
-Message-Id: <20250731110231.3551636-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250731110231.3551636-1-andrew.cooper3@citrix.com>
-References: <20250731110231.3551636-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20230601; t=1753960129; x=1754564929;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=byG7eJknxoczUHZI6YI8xBvGwlhSL1Q9I1NRwti3t/4=;
+        b=jHdt4qHWNvUu2VYA/TR1xP8lpPLaKFZh+VuvA5UlI+ltAcUyrYnJCux643Pe5iY7ap
+         5/z3YDU3sq9l3aLY9dXFysInb2gTM81nUm9rgZmhW5Lx+YXowWJFKo4lN+Uabs9DWJdL
+         XXgsdWD/DJNKXuX93tN5P+nOEmv95D+/Ah0jVuq5gdUfOCY2YlfKw1zeofgKC3C2v3Oy
+         oLHB/zM0WijxCHUUEaVnAEFVY9Jz8+xqa7Fl/59A2PV5WgaX6nqDNg/AReiWNSV4NZbO
+         hMpcUXEBDeQv/Eatx5Zhkl4iwVO6WAtPcEFuaYT+Q8iCOL073B5rIBZvGEXQB5qqB3zd
+         Xw8w==
+X-Forwarded-Encrypted: i=1; AJvYcCU8bc7nTITrZWS6Xmrnfl7Ays8B1aWd/95pBwQMJseMFJKmmuHl190h3Z40F1+I8Q55UYGMHmkeH2g=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwWg1h0eAQxdSpvufMT/VvNAXfiD7J+WS6Ro3qNzXiELPM6ThmM
+	8QJnuEfjLvTVA57FlOEPFp0DSXTnTWKAKTaDMFYvBEtM2xNAc+mPSSczKSkBFZKspA==
+X-Gm-Gg: ASbGnctOzf3gOQUD5CZaVzT6R7iEvYEfCmTSihtF10RKwzw8+UdKA41KuLr2tv7AGqd
+	qzhIbHppwKWYTtGAKivWmvZmxgCMdbgvPfJuvqY2ljlRkkrmZZjz3LqYGrSXyTyqgGhn9EmuZVk
+	gCJGgeEDAk/PcvLjW0FX82iunA0aRm35vJo2X8nM0/2+oV+stI7OP38Cw4u9qKzhKRTzBZF+cD9
+	gCDSRlX2m+TH/2j4x9FaVBKlzXbM7c2/iahlEw4DJW7RJD3zmFx2kqYJvRDbJm0rxlnu0aimHs3
+	IDUUvv3cX2BayLMX0LZFagvHLtYr2AKxHBx3bE6u8d3Zb2LML12UmSINKBOxCXaT+sAQN98FqFQ
+	RMpCdA7sK1o9I6l+i8DaWfzz3XooN3AjptABLMGQOBos7NGF7dYw9rlAUWj5RWSU9PTccwnW3Hr
+	VDeS4EOCU=
+X-Google-Smtp-Source: AGHT+IEXOnz37O5mjootPsZf+PlT68fDCK4Iyl/dHE4rC2KIDzwXZcICtIPlP7Dd6Iw+XwDxNvHIsg==
+X-Received: by 2002:a05:6000:26ca:b0:3b7:7377:84c5 with SMTP id ffacd0b85a97d-3b794f65696mr5667430f8f.0.1753960129301;
+        Thu, 31 Jul 2025 04:08:49 -0700 (PDT)
+Message-ID: <ab677d61-c320-49e0-a977-c32a31b1ba23@suse.com>
+Date: Thu, 31 Jul 2025 13:08:37 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN][PATCH 2/7] xen/domctl: introduce XEN_DOMCTL_CDF_is_32bits
+To: Grygorii Strashko <grygorii_strashko@epam.com>
+Cc: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20250731094234.996684-1-grygorii_strashko@epam.com>
+ <20250731094234.996684-3-grygorii_strashko@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250731094234.996684-3-grygorii_strashko@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Both callsites call them as a pair, and the buildid really is as much a part
-of the version as the changeset.
+On 31.07.2025 11:42, Grygorii Strashko wrote:
+> --- a/xen/arch/arm/domain.c
+> +++ b/xen/arch/arm/domain.c
+> @@ -613,7 +613,8 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+>      unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
+>      unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu |
+>                                     XEN_DOMCTL_CDF_xs_domain |
+> -                                   XEN_DOMCTL_CDF_trap_unmapped_accesses );
+> +                                   XEN_DOMCTL_CDF_trap_unmapped_accesses |
+> +                                   XEN_DOMCTL_CDF_is_32bits );
+>      unsigned int sve_vl_bits = sve_decode_vl(config->arch.sve_vl);
+>  
+>      if ( (config->flags & ~flags_optional) != flags_required )
+> @@ -711,6 +712,13 @@ int arch_domain_create(struct domain *d,
+>  
+>      BUILD_BUG_ON(GUEST_MAX_VCPUS < MAX_VIRT_CPUS);
+>  
+> +#ifdef CONFIG_ARM_64
+> +    if ( d->options & XEN_DOMCTL_CDF_is_32bits )
+> +        d->arch.type = DOMAIN_32BIT;
+> +    else
+> +        d->arch.type = DOMAIN_64BIT;
+> +#endif
+> +
+>  #ifdef CONFIG_IOREQ_SERVER
+>      ioreq_domain_init(d);
+>  #endif
 
-This involves rearranging console_init_preirq() to ensure xen_build_init() is
-ahead of print_version().
+No adjustment to x86'es arch_sanitise_domain_config()? Until the new bit
+is actually properly handled, I think its use will need rejecting.
 
-No functional change.
+> --- a/xen/include/public/domctl.h
+> +++ b/xen/include/public/domctl.h
+> @@ -68,9 +68,14 @@ struct xen_domctl_createdomain {
+>  #define XEN_DOMCTL_CDF_vpmu           (1U << 7)
+>  /* Should we trap guest accesses to unmapped addresses? */
+>  #define XEN_DOMCTL_CDF_trap_unmapped_accesses  (1U << 8)
+> +/*
+> + * Is this domain running 32bit guest?
+> + * Used for 64bits arches.
+> + */
+> +#define XEN_DOMCTL_CDF_is_32bits (1U << 9)
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Ross Lagerwall <ross.lagerwall@citrix.com>
----
- xen/common/keyhandler.c    |  1 -
- xen/common/version.c       | 19 ++++++-------------
- xen/drivers/char/console.c |  7 +++----
- xen/include/xen/lib.h      |  1 -
- 4 files changed, 9 insertions(+), 19 deletions(-)
+Please pad suitably, as is the case for XEN_DOMCTL_CDF_vpmu visible in
+context. XEN_DOMCTL_CDF_trap_unmapped_accesses simply is too long to fit
+that padding scheme.
 
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index b0a2051408d5..cb6df2823b00 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -131,7 +131,6 @@ static void cf_check show_handlers(unsigned char key)
-     printk("'%c' pressed -> showing installed handlers\n", key);
- 
-     print_version();
--    print_build_id();
- 
-     for ( i = 0; i < ARRAY_SIZE(key_table); i++ )
-         if ( key_table[i].fn )
-diff --git a/xen/common/version.c b/xen/common/version.c
-index 56b51c81d2fc..84bd77e74653 100644
---- a/xen/common/version.c
-+++ b/xen/common/version.c
-@@ -94,6 +94,9 @@ const char *xen_build_info(void)
-     return build_info;
- }
- 
-+static const void *build_id_p __read_mostly;
-+static unsigned int build_id_len __read_mostly;
-+
- void print_version(void)
- {
-     printk("Xen version %d.%d%s (%s@%s) (%s) %s %s\n",
-@@ -102,10 +105,10 @@ void print_version(void)
-            xen_build_info(), xen_compile_date());
- 
-     printk("Latest ChangeSet: %s\n", xen_changeset());
--}
- 
--static const void *build_id_p __read_mostly;
--static unsigned int build_id_len __read_mostly;
-+    if ( build_id_len )
-+        printk("build-id: %*phN\n", build_id_len, build_id_p);
-+}
- 
- int xen_build_id(const void **p, unsigned int *len)
- {
-@@ -118,16 +121,6 @@ int xen_build_id(const void **p, unsigned int *len)
-     return 0;
- }
- 
--void print_build_id(void)
--{
--    /*
--     * NB: build_id_len may be 0 if XEN_HAS_BUILD_ID=n.
--     * Do not print empty build-id.
--     */
--    if ( build_id_len )
--        printk("build-id: %*phN\n", build_id_len, build_id_p);
--}
--
- #ifdef BUILD_ID
- /* Defined in linker script. */
- extern const Elf_Note __note_gnu_build_id_start[], __note_gnu_build_id_end[];
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 963c7b043cd8..a5af66023975 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -1105,11 +1105,10 @@ void __init console_init_preirq(void)
-     __putstr(xen_banner());
-     nrspin_unlock(&console_lock);
- 
--    print_version();
--
--    /* Locate and print the buildid, if applicable. */
-+    /* Locate the buildid, if possible. */
-     xen_build_init();
--    print_build_id();
-+
-+    print_version();
- 
-     if ( opt_sync_console )
-     {
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index e63ec5039f92..36d904ba1a3c 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -48,7 +48,6 @@ int parse_signed_integer(const char *name, const char *s, const char *e,
- int cmdline_strcmp(const char *frag, const char *name);
- 
- void print_version(void);
--void print_build_id(void);
- 
- #ifdef CONFIG_DEBUG_TRACE
- extern void debugtrace_dump(void);
--- 
-2.39.5
-
+Jan
 
