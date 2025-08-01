@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57969C87FD2
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Aug 2025 07:35:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1066929.1431955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9BBAC87FD2
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Aug 2025 09:23:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1067004.1431990 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhkI3-000150-RV; Fri, 01 Aug 2025 07:34:55 +0000
+	id 1uhlyW-0006mX-SA; Fri, 01 Aug 2025 09:22:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1066929.1431955; Fri, 01 Aug 2025 07:34:55 +0000
+Received: by outflank-mailman (output) from mailman id 1067004.1431990; Fri, 01 Aug 2025 09:22:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uhkI3-00014r-OR; Fri, 01 Aug 2025 07:34:55 +0000
-Received: by outflank-mailman (input) for mailman id 1066929;
- Fri, 01 Aug 2025 07:34:54 +0000
+	id 1uhlyW-0006mQ-Ou; Fri, 01 Aug 2025 09:22:52 +0000
+Received: by outflank-mailman (input) for mailman id 1067004;
+ Fri, 01 Aug 2025 09:22:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=zIvO=2N=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uhkI2-00014g-Mr
- for xen-devel@lists.xenproject.org; Fri, 01 Aug 2025 07:34:54 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=j0QZ=2N=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
+ id 1uhlyV-0006Wd-KC
+ for xen-devel@lists.xenproject.org; Fri, 01 Aug 2025 09:22:51 +0000
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20a::7])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 035cb61d-6eaa-11f0-b895-0df219b8e170;
- Fri, 01 Aug 2025 09:34:53 +0200 (CEST)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3b78127c5d1so903880f8f.3
- for <xen-devel@lists.xenproject.org>; Fri, 01 Aug 2025 00:34:52 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e897716bsm36096025ad.112.2025.08.01.00.34.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Aug 2025 00:34:51 -0700 (PDT)
+ id 1825ef52-6eb9-11f0-b895-0df219b8e170;
+ Fri, 01 Aug 2025 11:22:50 +0200 (CEST)
+Received: from AS2PR03MB10110.eurprd03.prod.outlook.com
+ (2603:10a6:20b:57a::22) by VI1PR03MB10032.eurprd03.prod.outlook.com
+ (2603:10a6:800:1c7::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.13; Fri, 1 Aug
+ 2025 09:22:43 +0000
+Received: from AS2PR03MB10110.eurprd03.prod.outlook.com
+ ([fe80::52f0:1815:60c9:8873]) by AS2PR03MB10110.eurprd03.prod.outlook.com
+ ([fe80::52f0:1815:60c9:8873%5]) with mapi id 15.20.8964.023; Fri, 1 Aug 2025
+ 09:22:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,125 +49,309 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 035cb61d-6eaa-11f0-b895-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1754033692; x=1754638492; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Kxm3lXM7pDmrwdxmM1hDCMHJDqVvUQCcV3H3roPEu7g=;
-        b=A0P72WJRk0VY0ptxhBR3WiWv7NQdOrImjDkY/PJ8dF3pZhQTtvPBv7qFQtr2OfxdF/
-         f4j9Xtz5PSj18U47//0sNd1R/5VIkYX8mVHfuKV8wX/7RpJIVN9ymwpVVNvUusbsX4L2
-         RwbskZeyQoH+VUWNB2mVQKGyswDQQBzLWiaUKpM1kDYvT97vHpauid+m3XsmU6LODAhl
-         CJp8Y/bthw4tXjx1xLmvjoy5je/WjKd+R+i9CAFMSFXRLSSH2qexafJfWAAq465AeTkj
-         4K8GNHLHtM8YRyxVVykGqxecWE+Yklb+B9qhTKTccRbwA4Iz7/BEBJb27oLGdkizXHWx
-         GCdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754033692; x=1754638492;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Kxm3lXM7pDmrwdxmM1hDCMHJDqVvUQCcV3H3roPEu7g=;
-        b=cEpIVguJFpVcgRGdbMdqqZ+S1uNfHbUZfMkwrqMXeGfOmxOQfycd/nJwJlRTCGvxkd
-         ALtGt6U23d9raO77ugo4oICVfYuW10CdcAkMm+8uFUAVaOgoiSNyWWgi6G72XjJii4hV
-         MJT9GyLiGjGEKN2ZG8TcVsgyoug0i4PrE850sjOCAQO+RPX1byhOXZdu1So3jRvwY2iS
-         F8n0/HizXN1QJ9KcunaardvlvrpiLWWaIEkhjGoc1m2tMVFW2udC8CI4/artc/WRSntm
-         P+0sYeN2xx7H7cb5PUJVqLfSNZWVq4qbdOqQttBNV2RE9I3In3RlosTo7sB4Jgmpyfxw
-         b5mg==
-X-Forwarded-Encrypted: i=1; AJvYcCX/LvQ8nsq15CSULE0jMFPj9yWRhHEs7lruwW+ItKgHeMXizwUTczxi5YzcCdq0b19MuF9RUJlH0JY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxkyT3nzQ5+4ly1nArQ4kKiA656OmFcr5/rSgX19xlPXNTDDRvO
-	6tUzi3Zd3x7QyWDDLQvjwypCNOqyAYligoD0U6BKatnuPrF71XkLSJmBpr74MFgR/A==
-X-Gm-Gg: ASbGncv2eqWWj0i3xBvyozWuwqKTuLG7Pg8yeLk2u2uL7yiDrw3Sv0OnU8yxjJ/c4vA
-	mQwptQzWvUeM9yrEzgp238f/Kw/pyoIfKm/Bc8kcITBauXGz3n7viwbmrc4g31ALIJuJi/aX/wb
-	YQTmPNyy1gxvnM5QZXCVoXWhcRM2wTgDAnJQOM8dZ0gvQe0whjC0fDaY7q9WSnPcGYaByJoOzDC
-	vCSwpl/vsquOYjl2aUBkDYSjnQp1pEzW54IEPMMN+vrEUkiX9qXjlEMc7FyDAtBJ/xEtKQe072U
-	Zr1z+GrnEMb8ZtC9Zresf/SP/nVR+Plxqqz89XSlrNGHG5GWJ3v8+mb0zsyPrXAW1ijuYZHEZ6Z
-	m+SPZ1nfOs3RuWEuCwYXJPfOu0gr8w2FaggjsbrPj+rZWeer7egph1NVnJEuGiD/dHJDZnpmged
-	9vVZXJ4mc=
-X-Google-Smtp-Source: AGHT+IGc8/XSOoI/e9fV9iLt7iwwpkt9DaKzZEsWk9grXlu0S4wbl0t1jLSKKm5xXMVfJb0daVoxwA==
-X-Received: by 2002:a05:6000:2302:b0:3b5:dc05:79b with SMTP id ffacd0b85a97d-3b8d3445909mr1404883f8f.14.1754033692017;
-        Fri, 01 Aug 2025 00:34:52 -0700 (PDT)
-Message-ID: <cc3812ca-b929-416c-af75-78c3c3b0d664@suse.com>
-Date: Fri, 1 Aug 2025 09:34:42 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ns16550: ensure polling timer is disarmed
-To: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
- dmukhin@ford.com, xen-devel@lists.xenproject.org
-References: <20250730031249.1613142-1-dmukhin@ford.com>
- <5a4dc92b-139d-4fa5-9baf-2ebc41bba758@suse.com> <aIplBkq7BL52Fn/Q@kraken>
- <78128ec6-b79f-4d4c-a298-72315b190036@suse.com> <aIvjJP6bpJpsQRtQ@kraken>
+X-Inumbo-ID: 1825ef52-6eb9-11f0-b895-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=htXMl8gFRBj3SLuhJjO77sE76IParomrBpfrZ7mHESjhFCZA9V7gUFdD8oCam0Od2z3TDt/iin4LS5AcCsRu2AT6cDUmZGFTRfMLZr9rU++h3DofUNAyWpzZwbpOGuHegveWkE5vpszA0oyCdvXnbsEj5lwf1XKimpGmhlUtTLZLlLB92MIXg3RDYGJxt2fAVu91OQGMiHbephZTWMrFHIdARjMJrx4O1Ea10ONgeJKoN/FBu0YtmvmIrENn+Fo5AeN3BjsHy3cH5TsLm5XB6t/IS/i2VVbG+udbxDV9rJByokQH+ikg9HFL+ZaA9rkfRZj6uzEA/99kOQhSMf1dPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9zlQ9RsmD85LL2B66MlIxD5xfPP4ETtjgZvJ6aWslpI=;
+ b=Yla8oTQ6gxG5F1eGI1WSNlSoeROvIYyZKHGvB5ZruT1pZTVM0AA8uOpMUHMlST/p/lrx/JFEBrRBIQYU9IQ8X981g2aPGuzdzXP+qGPYvqor+PSKkvK1dIx2w915X2zkA14rZn7wtvF1nwY3Dybz8bUh9Jw/tGzJUm2se1/rk6ojcoPI2oOkUejyMHpdrxtcfm9DR+gzaDMBcdOhif7EJPboHPl4OvXnxgYDz+IcfG1bgUyHZl+NuUV78ic9AWW4SvusDo2L66d3fHFp1476bFGiAmCwyOlZXbdqVIF2qLySZoWHSxhyPvgeecplXMVTCnHiLcHQZpIxMftDzHJh9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9zlQ9RsmD85LL2B66MlIxD5xfPP4ETtjgZvJ6aWslpI=;
+ b=GR9XyI4wY0mVAnrgLh6STd2ogC9v4+wvQRFl8u3RLCcHo1L9bRiGWWOnoulRVaLAP7ipoKRhacjJvm6vDfL3f6cLbuPm1DdqEULY/T7TJUK09sbvCIR/8VIyAdKgEbgmGh+KEXUROQFt1qYaeCKGax/Bt545kZmtoJYcOSWlk8cfofC950nr9SMIe3oGUqbh5jxs5eA5W6tuagbPkRC0EYAbnn8caDN93WlJq+2hYL2kkqSAQlbARAdilifsOURVsBQi/ERXqMr4JmVJoq8lQDVwXvOoaeIzxGNCOorX7xlKlSFo9aqnNMavPIbyBD8x74KK3j0qMl8waUI+mjF8/w==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Luca Fancellu <luca.fancellu@arm.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Michal
+ Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, Mykyta Poturai <Mykyta_Poturai@epam.com>
+Subject: [PATCH v1 2/3] xen/pci: modify pci_add_device to handle device add by
+ Xen
+Thread-Topic: [PATCH v1 2/3] xen/pci: modify pci_add_device to handle device
+ add by Xen
+Thread-Index: AQHcAsXVSnyGYKO2WEup/omKSt+BHQ==
+Date: Fri, 1 Aug 2025 09:22:43 +0000
+Message-ID:
+ <32cf834e95664805604b13d10bcaa857897f0890.1753968306.git.mykyta_poturai@epam.com>
+References: <cover.1753968306.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1753968306.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aIvjJP6bpJpsQRtQ@kraken>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS2PR03MB10110:EE_|VI1PR03MB10032:EE_
+x-ms-office365-filtering-correlation-id: e0adab0a-389b-49e2-2b06-08ddd0dcf887
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|7416014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?lzt0XJvpf5GNBAVYxzS8XNBUyLFEOTwfoHpQUVhxclER5ZqLkb8pu02XRl?=
+ =?iso-8859-1?Q?L0ORC9V4g8aNPnsT8GSOYB9Wrbm4ntrzdNnzkNVjxl04l0Zgvm5xA4CK31?=
+ =?iso-8859-1?Q?vMRWECCAtrVU7ygn+l3ZunOnzPqMhPCdYXjxozoVrJRUAE/KHjGI9YebL6?=
+ =?iso-8859-1?Q?ciwVBvJC7Hm5q1r563gWa6XxtrYHyTVnrrvD+NN2Se0locup8YJyL2+X5n?=
+ =?iso-8859-1?Q?Ixs+NbMTNj8HojjCrgsCLIjWjPpCJcnzp2qmxEZrSR5Jmo4HJ1L2tPX1kI?=
+ =?iso-8859-1?Q?CdW2FQqkWCHdCH5Q2257fUx738BExELy581rJEr6tGN3zUXR+YQVCbwboL?=
+ =?iso-8859-1?Q?S+YM7pgh/rBN7Ul2wbCn5nxZI28kv0aLXZVtkfNxn0QGK2nS7Vffevd2Ii?=
+ =?iso-8859-1?Q?sl6PNcCagCEXUXgVpYk2OCTJgMsu8dJRbzFfH77+CcOIUnBSuIUeRlQTmp?=
+ =?iso-8859-1?Q?wW5RCCSKbznmvPWoZSTd4FSvPPPSLkeBvlJ030MO4TRzKLKcUzOn/ieJ/S?=
+ =?iso-8859-1?Q?HBqMzEQkEaF+MDE8fgrAQNXPVgMucyzDb3EdVeGjLmaVZwIiM5Z6Spa+FV?=
+ =?iso-8859-1?Q?ud8MKoc1tVY9ARN4a/dMKfL8uZp3Ch39aCW2Z777hq9DrbcTmt70b65OjE?=
+ =?iso-8859-1?Q?3v9UweWAXVuVTNnObE41cRDida4gclOmr30xKrgWWwTsV15cSH9F4PFEM2?=
+ =?iso-8859-1?Q?wTxz+yBgIkgBBGZ94PjWIZoSB3vfKmTu8cX4JDqhCobT6SwnFvYw/hSn5T?=
+ =?iso-8859-1?Q?0XGBnyZ1k7qQP/AM2pMCT7nKulh5PSVgOpGg6XmAecxqXO+ri6DhQEDCp2?=
+ =?iso-8859-1?Q?f+btlxWa9XZflx25osfqWS5DR6ZAQ9zMFH1kWV1yN9h2PULHrZt7lMfyTt?=
+ =?iso-8859-1?Q?S0+vv8c+ahSAMw03lZflQDs70w2m2bO7XPuDeDWIVj9ciKzOz52Bp2AkWQ?=
+ =?iso-8859-1?Q?4tB38OiDE+g9uoksCG8fktljryjLtMhGZK/O4d2kIPHVUSvBLt5cCWDOxi?=
+ =?iso-8859-1?Q?DnMhxxeandxNM+E0jXYj++VIydbL9kFzRZlzEAWxzV92G/eVhiUUyu1X7I?=
+ =?iso-8859-1?Q?Z9wkjx9LpLA4KdZsP3ECtv9CgHzhtbv/QIjFJhLcvf0FwfNZIF0I7rqzG/?=
+ =?iso-8859-1?Q?xdV84BJpyV8tVtc4eKmmnvYmOEcOjzXPwK7cIlT+plmjhNwy20iUsgLPPT?=
+ =?iso-8859-1?Q?Qc0VlzDN0zLD/pgthIz9VxvGcoiY8mINiKyhsmzbGROIJBT8VuKWgh32nv?=
+ =?iso-8859-1?Q?1z8Dr3AMw502cYiVfyx0MtyeG4fXqIVYwd73b+3cNgSNVf4Id5lf95lTrI?=
+ =?iso-8859-1?Q?RB3/gEI5vXRiNiVKvZz1b0yu7KBYA1RGzU/aSwfejfZ73znPSMla1aIhjo?=
+ =?iso-8859-1?Q?mV9HASUxXVPwQaJ2GIKGX1M+PnQQvcDRK4+BZmp0ICEZNRD7k2fDZ6t1pi?=
+ =?iso-8859-1?Q?HiQ/yFr/Wp78eI9h4HY6uw39wboWYSAE1Av9EES4kBEcTtXR4VBaY58lLe?=
+ =?iso-8859-1?Q?EFM67FuQnZXixIxWniz1Jf0n/0J0XmddAgY52sNpU/EjTD+AcXFqo7Tgtp?=
+ =?iso-8859-1?Q?bIoqtlw=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB10110.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?LKKh5X2TOAZqS97An7R1JDl3zU8JyvH91rsjWC5P8fFzuZB9wyY0/Q2pjI?=
+ =?iso-8859-1?Q?9SpYH4j6dsmIAVO4VVqwsxonEUnzY2QsaATYc4G60thkbEhGK+V6GFRBmT?=
+ =?iso-8859-1?Q?tiaPgl3UbiD8hjn0Hf8S3cLeQ6JtSp/si9d+Imwk6em1547K65Zh6witPR?=
+ =?iso-8859-1?Q?0E+QCdvL8w0lTyo8JgevgcZA2roAMbymgx6okglN9nkx4/nuy+ZNbZf0PV?=
+ =?iso-8859-1?Q?Dpko7g6pduOBKtoh/JrlVS94V3jWkBeu2wcLOuQ+g8ztvm2uhSaeb41T3p?=
+ =?iso-8859-1?Q?Hfbj8ApwhIU+ZRW/BpHCbkjkumvV2OmT3JGsGVglBIZsuj+/IHNMgD4Bf+?=
+ =?iso-8859-1?Q?2iPuSgMtdWau7Obcq8aDsjgkZ+1Z+wfSgE9GPWlTj31hsVyt+E0VDdnauV?=
+ =?iso-8859-1?Q?awv5L3aErwsSS6e2kEWwDpNYixXbfVsLgm5ey6z20qOUN1h41kkcqpKl+s?=
+ =?iso-8859-1?Q?Zv9QgffdPNVg+n40jcxWkvqdfp4E18a5CE12SJ/V3NKFWjctW+6OELC3Pg?=
+ =?iso-8859-1?Q?2DDlsrS0NC9rYuc6rvgCCb0x2JeZj32jwbs8YEH/OVUhS3PumRE0zT0Hhe?=
+ =?iso-8859-1?Q?NERPzi6R5L2BUBFjB8PU8UcCRlzHolwYvybq2f2FS/o/3cOy7Qh4yCYOLl?=
+ =?iso-8859-1?Q?DrlGVHlexNCw61sU9v5u/T6HrAc3xyxip+30a3GwDzyuDVlgyNF1aQWG8A?=
+ =?iso-8859-1?Q?sir5+BRQpVnjgZtpT6yMfsG3jK7Jbsw66qVbsOlfAjpBGC5sFjnmPi0HFc?=
+ =?iso-8859-1?Q?6md9vNKiGo2lmYfx8gCPzpDmD/b9F66f4IaAl1JMU4hQWwKXUhWoYCfDyQ?=
+ =?iso-8859-1?Q?9wSY0PzoKmA379EhI7r99zBn8PwpkIymbDjoGjxef87YbPwhkUAUSvavvq?=
+ =?iso-8859-1?Q?i61cMffoveGNTahqntzsDJqmfK2HyBfV6VgDFK/2W/fiMo8Y/vnV2jSiPK?=
+ =?iso-8859-1?Q?cU2UNfri7DkL3z/hBH6zxb83ZT4nv3J4+YBMFIb+Fy2+md/DgAE6FoQY/F?=
+ =?iso-8859-1?Q?ZUPI/qhR0fAHmZbjw8RVoUI4Ndi9XDl9T5awznwD3MyUAjVcgQBvhwcddh?=
+ =?iso-8859-1?Q?t9o+XjwRGQAnrEjdBheCpGbI8AYgPJKUUXVMIpn3gQb7rjWBaF+L2SmH66?=
+ =?iso-8859-1?Q?ArSvym/aRoRCGqhhGvsZS6nWtPIyUPW3WKNE/kul4Al21IH5HPnuvVF7ws?=
+ =?iso-8859-1?Q?Fk5ANpJoyCbk/Yc6bhjvqp2XjlsVFdHSsKdbofvnlxNakdGtuYGT/qqqzz?=
+ =?iso-8859-1?Q?oF/CtCm6/IgvfB+MmdZYcKzWRVo/hMzwhTm8NcG4ZiszNo8QIMaBTmqerZ?=
+ =?iso-8859-1?Q?qP8Dv8QUhfXCW6T0XqT0MRsDldUWY9YyA4Jwt+++xOebp4nEVhrbM3E00d?=
+ =?iso-8859-1?Q?KwZxjF1MtvHyTrKa2vM+thVTC9m7F/TkgZRes3TEI9VwmWytUmimJ/Fqhj?=
+ =?iso-8859-1?Q?fjH97maCAWZcLV7jIyKaoU7eRIOzSlstChduoTq9IM32db1y2LEeScvUSd?=
+ =?iso-8859-1?Q?jXVO8Ly/C0+7mbJMt/pokT3E13wXDf8VisKEQNc6Gxf30wGAqoDJkvXLv1?=
+ =?iso-8859-1?Q?Apum4gz4XYMkZAN0ugyF/TyT3N9y4oBDjeLjswGigmehqrbaRuMewdrzM1?=
+ =?iso-8859-1?Q?oq0SIGS7jOWSUZrXwj+J0jicLUAnD6F+sFpdpIxM0tUOjefv83D/KL+Q?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB10110.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0adab0a-389b-49e2-2b06-08ddd0dcf887
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Aug 2025 09:22:43.2717
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: dbZZQK/UQt/EQAnTtI2KXvP5z4n7WFq53WAoQ49sX86/4cf0pSOOiVSrbAQ1wLrU/uuw5rMCougVGu/kt6nZiA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB10032
 
-On 31.07.2025 23:42, dmkhn@proton.me wrote:
-> On Thu, Jul 31, 2025 at 08:54:10AM +0200, Jan Beulich wrote:
->> On 30.07.2025 20:31, dmkhn@proton.me wrote:
->>> On Wed, Jul 30, 2025 at 10:12:54AM +0200, Jan Beulich wrote:
->>>> On 30.07.2025 05:13, dmkhn@proton.me wrote:
->>>>> From: Denis Mukhin <dmukhin@ford.com>
->>>>>
->>>>> As it stands, polling timer is kept in the list of timers even after the
->>>>> interrupts have been enabled / polling disabled on ns16550-compatible UART.
->>>>>
->>>>> Ensure polling timer is removed from the timer list once UART interrupts are
->>>>> enabled.
->>>>>
->>>>> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->>>>
->>>> Wasn't it Andrew(?) who suggested something along these lines? That would
->>>> want reflecting by a tag then.
->>>
->>> Yes, indeed.
->>>
->>>>
->>>> Also, what's the real problem you want to solve here? The timer function
->>>> would be run one more time after ->intr_works is set, and then the timer
->>>> will be permanently inactive (up to a possible S3 resume). Is it being on
->>>> an inactive list an actual problem? (IOW I'd like to understand if the
->>>> change is merely cosmetic, or if there is some actual benefit.)
->>>
->>> My understanding is running polling timer one more time after the interrupts
->>> are enabled is the issue: if there's a pending timer when it is known the
->>> timer not needed, then the timer should be canceled.
->>
->> And the effort of canceling outweighs the one extra running of the timer?
-> 
-> I think so, because intr_works will not flip at run-time once set.
-> If so, no need to keep the timer ready to be rearmed.
+From: Luca Fancellu <luca.fancellu@arm.com>
 
-Well, to me it looks like a code size increase with extremely limited benefit.
-Hence while likely I wouldn't outright NAK such a change, I also wouldn't ACK
-it.
+Currently pci_add_device is called from hypercalls requested by Dom0
+to add pci devices and when the device has no domain associated with
+it, it is assumed that hardware_domain is the owner.
 
-Jan
+On the dom0less scenario, the enumeration is performed by the
+firmware and Xen at boot time might want to assign some pci devices
+to guests, so it has to firstly add the device and then assign it to
+the final guest.
+
+Modify pci_add_device to have the owner domain passed as a parameter
+to the function, so that when it is called from the hypercall the
+owner would be the hardware domain, otherwise when Xen is calling it,
+it would be another domain since hw domain could not be there
+(dom0less guests without Dom0 use case).
+
+In pci_add_device there is a call to xsm that doesn't consider the
+requester of the function to be Xen itself, so add a check to skip
+the call if the owner domain is dom_io, since it means the call is
+coming directly from Xen.
+
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+---
+(cherry picked from commit f0c85d9043f7c9402e85b73361c8a13c683428ca from
+ the downstream branch poc/pci-passthrough from
+ https://gitlab.com/xen-project/people/bmarquis/xen-arm-poc.git)
+
+changes since cherry-pick:
+* s/hardware_domain/d/ in some write_unlock calls in xen/drivers/passthroug=
+h/pci.c
+---
+ xen/arch/x86/physdev.c        |  9 ++++-----
+ xen/drivers/passthrough/pci.c | 32 ++++++++++++++++++++------------
+ xen/drivers/pci/physdev.c     |  3 ++-
+ xen/include/xen/pci.h         |  2 +-
+ 4 files changed, 27 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/x86/physdev.c b/xen/arch/x86/physdev.c
+index 4dfa1c0191..9e894ce665 100644
+--- a/xen/arch/x86/physdev.c
++++ b/xen/arch/x86/physdev.c
+@@ -446,8 +446,8 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
+d) arg)
+         if ( copy_from_guest(&manage_pci, arg, 1) !=3D 0 )
+             break;
+=20
+-        ret =3D pci_add_device(0, manage_pci.bus, manage_pci.devfn,
+-                             NULL, NUMA_NO_NODE);
++        ret =3D pci_add_device(hardware_domain, 0, manage_pci.bus,
++                             manage_pci.devfn, NULL, NUMA_NO_NODE);
+         break;
+     }
+=20
+@@ -477,9 +477,8 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
+d) arg)
+         pdev_info.is_virtfn =3D manage_pci_ext.is_virtfn;
+         pdev_info.physfn.bus =3D manage_pci_ext.physfn.bus;
+         pdev_info.physfn.devfn =3D manage_pci_ext.physfn.devfn;
+-        ret =3D pci_add_device(0, manage_pci_ext.bus,
+-                             manage_pci_ext.devfn,
+-                             &pdev_info, NUMA_NO_NODE);
++        ret =3D pci_add_device(hardware_domain, 0, manage_pci_ext.bus,
++                             manage_pci_ext.devfn, &pdev_info, NUMA_NO_NOD=
+E);
+         break;
+     }
+=20
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index fa03dafac7..49a39d69db 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -654,7 +654,7 @@ unsigned int pci_size_mem_bar(pci_sbdf_t sbdf, unsigned=
+ int pos,
+     return is64bits ? 2 : 1;
+ }
+=20
+-int pci_add_device(u16 seg, u8 bus, u8 devfn,
++int pci_add_device(struct domain *d, u16 seg, u8 bus, u8 devfn,
+                    const struct pci_dev_info *info, nodeid_t node)
+ {
+     struct pci_seg *pseg;
+@@ -672,9 +672,12 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+     else
+         type =3D "device";
+=20
+-    ret =3D xsm_resource_plug_pci(XSM_PRIV, (seg << 16) | (bus << 8) | dev=
+fn);
+-    if ( ret )
+-        return ret;
++    if ( d !=3D dom_io )
++    {
++        ret =3D xsm_resource_plug_pci(XSM_PRIV, (seg << 16) | (bus << 8) |=
+ devfn);
++        if ( ret )
++            return ret;
++    }
+=20
+     ret =3D -ENOMEM;
+=20
+@@ -767,9 +770,9 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+     ret =3D 0;
+     if ( !pdev->domain )
+     {
+-        pdev->domain =3D hardware_domain;
+-        write_lock(&hardware_domain->pci_lock);
+-        list_add(&pdev->domain_list, &hardware_domain->pdev_list);
++        pdev->domain =3D d;
++        write_lock(&d->pci_lock);
++        list_add(&pdev->domain_list, &pdev->domain->pdev_list);
+=20
+         /*
+          * For devices not discovered by Xen during boot, add vPCI handler=
+s
+@@ -779,25 +782,30 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+         if ( ret )
+         {
+             list_del(&pdev->domain_list);
+-            write_unlock(&hardware_domain->pci_lock);
++            write_unlock(&d->pci_lock);
+             pdev->domain =3D NULL;
+             printk(XENLOG_ERR "Setup of vPCI failed: %d\n", ret);
+             goto out;
+         }
+-        write_unlock(&hardware_domain->pci_lock);
++        write_unlock(&d->pci_lock);
+         ret =3D iommu_add_device(pdev);
+         if ( ret )
+         {
+-            write_lock(&hardware_domain->pci_lock);
++            write_lock(&d->pci_lock);
+             vpci_deassign_device(pdev);
+             list_del(&pdev->domain_list);
+-            write_unlock(&hardware_domain->pci_lock);
++            write_unlock(&d->pci_lock);
+             pdev->domain =3D NULL;
+             goto out;
+         }
+     }
+-    else
++    else if ( pdev->domain =3D=3D d )
+         iommu_enable_device(pdev);
++    else
++    {
++        ret =3D -EINVAL;
++        goto out;
++    }
+=20
+     pci_enable_acs(pdev);
+=20
+diff --git a/xen/drivers/pci/physdev.c b/xen/drivers/pci/physdev.c
+index d46501b884..1b59bf1246 100644
+--- a/xen/drivers/pci/physdev.c
++++ b/xen/drivers/pci/physdev.c
+@@ -50,7 +50,8 @@ ret_t pci_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void=
+) arg)
+         }
+ #endif
+=20
+-        ret =3D pci_add_device(add.seg, add.bus, add.devfn, &pdev_info, no=
+de);
++        ret =3D pci_add_device(hardware_domain, add.seg, add.bus, add.devf=
+n,
++                             &pdev_info, node);
+         break;
+     }
+=20
+diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
+index 5c242278b9..77a44aea70 100644
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -227,7 +227,7 @@ void setup_hwdom_pci_devices(struct domain *d,
+ int pci_release_devices(struct domain *d);
+ int pci_add_segment(u16 seg);
+ const unsigned long *pci_get_ro_map(u16 seg);
+-int pci_add_device(u16 seg, u8 bus, u8 devfn,
++int pci_add_device(struct domain *d, u16 seg, u8 bus, u8 devfn,
+                    const struct pci_dev_info *info, nodeid_t node);
+ int pci_remove_device(u16 seg, u8 bus, u8 devfn);
+ int pci_ro_device(int seg, int bus, int devfn);
+--=20
+2.34.1
 
