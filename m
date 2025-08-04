@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B417C87FCF
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Aug 2025 12:43:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1069163.1432995 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64EDC87FCB
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Aug 2025 12:43:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1069162.1432986 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uiuXD-0006iu-CN; Mon, 04 Aug 2025 12:43:23 +0000
+	id 1uiuXC-0006VQ-6h; Mon, 04 Aug 2025 12:43:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1069163.1432995; Mon, 04 Aug 2025 12:43:23 +0000
+Received: by outflank-mailman (output) from mailman id 1069162.1432986; Mon, 04 Aug 2025 12:43:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uiuXD-0006in-9h; Mon, 04 Aug 2025 12:43:23 +0000
-Received: by outflank-mailman (input) for mailman id 1069163;
- Mon, 04 Aug 2025 12:43:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uiuXC-0006VJ-3A; Mon, 04 Aug 2025 12:43:22 +0000
+Received: by outflank-mailman (input) for mailman id 1069162;
+ Mon, 04 Aug 2025 12:43:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lO+m=2Q=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uiuXB-0006VD-NW
- for xen-devel@lists.xenproject.org; Mon, 04 Aug 2025 12:43:21 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [2600:3c0a:e001:78e:0:1991:8:25])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 99425443-7130-11f0-a321-13f23c93f187;
- Mon, 04 Aug 2025 14:43:20 +0200 (CEST)
+ id 1uiuXA-0006V7-Qe
+ for xen-devel@lists.xenproject.org; Mon, 04 Aug 2025 12:43:20 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 969ae083-7130-11f0-b898-0df219b8e170;
+ Mon, 04 Aug 2025 14:43:15 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 56FE04423C;
- Mon,  4 Aug 2025 12:43:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B783C4CEF0;
- Mon,  4 Aug 2025 12:43:17 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 030FAA55811;
+ Mon,  4 Aug 2025 12:43:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73ED3C4CEE7;
+ Mon,  4 Aug 2025 12:43:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,21 +43,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99425443-7130-11f0-a321-13f23c93f187
+X-Inumbo-ID: 969ae083-7130-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754311398;
-	bh=rlkoLHmieI8GnOBig0uhL3NMd0vvRWDvv2oEih0mzFM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QrFIfUaOpq0zgYoSf2B1eOFHhzxa8uJ9rI7ao3LQ15JdOAmXwx/vS3c+eYH6QTWOC
-	 CZmPIb28BNkyQUhEkXmvY3ou31ivX2Y6W+QyRQ5lEcadqA118EYMjd4CMO32TmndIt
-	 q9x/mE/Grc0mkPr/feAp0D8366SSjD6FCJuMLM/iEpxRFuKKQJHqb6OZAv8QT4n2gA
-	 l8UYQWJxtJiMLDORYH+k0vFOc3W5LIKBdC/UjGKILIXxW7YyF57t2tVDzjmI4Hs2SY
-	 Y6Y7brOxqet5SSMB18NQiaM/FfQfmONk81U59gW5ymq8VCTWf5/3zTUjdvPe68z/B6
-	 YFqU3TERLKLDQ==
+	s=k20201202; t=1754311393;
+	bh=5JNlmVmGVDRpHLFMyx/IqEG6PVqYnGg8cLXnDHx1P9k=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Ea6NngjAGEvyrXvmgnjdDyM3mXPSC8QQfT+nOKbotr6HcSnhW9BlM6zfns9p9k3kL
+	 aHN1p5RrLF18qj2RnxxdzX8nS9REiqaWtNTzVJNCM1ShLOSb5FfV99ZaNORp06pQRf
+	 K3R1pWS9saoxzj1xXJAIiMxruqRredF2Zi+OmY/oC+bQ4mzzuhWorXTUyup4qpTeuv
+	 RrIC3bsvwJsKhiLKd060hGDOvjUq+dNjvySky2bOV6npAhY9wBNf0nitks6Cij982L
+	 fFaJuAYxFYDUX0NP4XT5/rJMF9kRy2ZpZIT9BlCY9GVEvgTb44GAyAGaBkqZ5aGmE4
+	 Sus5Is+qyLnxQ==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Jason Gunthorpe <jgg@nvidia.com>,
+Cc: Jason Gunthorpe <jgg@nvidia.com>,
 	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
 	Alexander Potapenko <glider@google.com>,
 	Alex Gaynor <alex.gaynor@gmail.com>,
@@ -93,68 +91,78 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	Will Deacon <will@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v1 02/16] iommu/dma: handle MMIO path in dma_iova_link
-Date: Mon,  4 Aug 2025 15:42:36 +0300
-Message-ID: <52e39cd31d8f30e54a27afac84ea35f45ae4e422.1754292567.git.leon@kernel.org>
+Subject: [PATCH v1 00/16] dma-mapping: migrate to physical address-based API
+Date: Mon,  4 Aug 2025 15:42:34 +0300
+Message-ID: <cover.1754292567.git.leon@kernel.org>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1754292567.git.leon@kernel.org>
-References: <cover.1754292567.git.leon@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Leon Romanovsky <leonro@nvidia.com>
+Changelog:
+v1:
+ * Added new DMA_ATTR_MMIO attribute to indicate
+   PCI_P2PDMA_MAP_THRU_HOST_BRIDGE path.
+ * Rewrote dma_map_* functions to use thus new attribute
+v0: https://lore.kernel.org/all/cover.1750854543.git.leon@kernel.org/
+------------------------------------------------------------------------
 
-Make sure that CPU is not synced if MMIO path is taken.
+This series refactors the DMA mapping to use physical addresses
+as the primary interface instead of page+offset parameters. This
+change aligns the DMA API with the underlying hardware reality where
+DMA operations work with physical addresses, not page structures.
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/iommu/dma-iommu.c | 21 ++++++++++++++++-----
- 1 file changed, 16 insertions(+), 5 deletions(-)
+The series maintains export symbol backward compatibility by keeping
+the old page-based API as wrapper functions around the new physical
+address-based implementations.
 
-diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
-index ea2ef53bd4fef..399838c17b705 100644
---- a/drivers/iommu/dma-iommu.c
-+++ b/drivers/iommu/dma-iommu.c
-@@ -1837,13 +1837,20 @@ static int __dma_iova_link(struct device *dev, dma_addr_t addr,
- 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
- 		unsigned long attrs)
- {
--	bool coherent = dev_is_dma_coherent(dev);
-+	int prot;
- 
--	if (!coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
--		arch_sync_dma_for_device(phys, size, dir);
-+	if (attrs & DMA_ATTR_MMIO)
-+		prot = dma_info_to_prot(dir, false, attrs) | IOMMU_MMIO;
-+	else {
-+		bool coherent = dev_is_dma_coherent(dev);
-+
-+		if (!coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
-+			arch_sync_dma_for_device(phys, size, dir);
-+		prot = dma_info_to_prot(dir, coherent, attrs);
-+	}
- 
- 	return iommu_map_nosync(iommu_get_dma_domain(dev), addr, phys, size,
--			dma_info_to_prot(dir, coherent, attrs), GFP_ATOMIC);
-+			prot, GFP_ATOMIC);
- }
- 
- static int iommu_dma_iova_bounce_and_link(struct device *dev, dma_addr_t addr,
-@@ -1949,9 +1956,13 @@ int dma_iova_link(struct device *dev, struct dma_iova_state *state,
- 		return -EIO;
- 
- 	if (dev_use_swiotlb(dev, size, dir) &&
--	    iova_unaligned(iovad, phys, size))
-+	    iova_unaligned(iovad, phys, size)) {
-+		if (attrs & DMA_ATTR_MMIO)
-+			return -EPERM;
-+
- 		return iommu_dma_iova_link_swiotlb(dev, state, phys, offset,
- 				size, dir, attrs);
-+	}
- 
- 	return __dma_iova_link(dev, state->addr + offset - iova_start_pad,
- 			phys - iova_start_pad,
+Thanks
+
+Leon Romanovsky (16):
+  dma-mapping: introduce new DMA attribute to indicate MMIO memory
+  iommu/dma: handle MMIO path in dma_iova_link
+  dma-debug: refactor to use physical addresses for page mapping
+  dma-mapping: rename trace_dma_*map_page to trace_dma_*map_phys
+  iommu/dma: rename iommu_dma_*map_page to iommu_dma_*map_phys
+  iommu/dma: extend iommu_dma_*map_phys API to handle MMIO memory
+  dma-mapping: convert dma_direct_*map_page to be phys_addr_t based
+  kmsan: convert kmsan_handle_dma to use physical addresses
+  dma-mapping: handle MMIO flow in dma_map|unmap_page
+  xen: swiotlb: Open code map_resource callback
+  dma-mapping: export new dma_*map_phys() interface
+  mm/hmm: migrate to physical address-based DMA mapping API
+  mm/hmm: properly take MMIO path
+  block-dma: migrate to dma_map_phys instead of map_page
+  block-dma: properly take MMIO path
+  nvme-pci: unmap MMIO pages with appropriate interface
+
+ Documentation/core-api/dma-api.rst        |   4 +-
+ Documentation/core-api/dma-attributes.rst |   7 ++
+ arch/powerpc/kernel/dma-iommu.c           |   4 +-
+ block/blk-mq-dma.c                        |  15 ++-
+ drivers/iommu/dma-iommu.c                 |  69 +++++++------
+ drivers/nvme/host/pci.c                   |  18 +++-
+ drivers/virtio/virtio_ring.c              |   4 +-
+ drivers/xen/swiotlb-xen.c                 |  21 +++-
+ include/linux/blk-mq-dma.h                |   6 +-
+ include/linux/blk_types.h                 |   2 +
+ include/linux/dma-direct.h                |   2 -
+ include/linux/dma-map-ops.h               |   8 +-
+ include/linux/dma-mapping.h               |  27 +++++
+ include/linux/iommu-dma.h                 |  11 +--
+ include/linux/kmsan.h                     |  12 ++-
+ include/trace/events/dma.h                |   9 +-
+ kernel/dma/debug.c                        |  71 ++++---------
+ kernel/dma/debug.h                        |  37 ++-----
+ kernel/dma/direct.c                       |  22 +----
+ kernel/dma/direct.h                       |  50 ++++++----
+ kernel/dma/mapping.c                      | 115 +++++++++++++---------
+ kernel/dma/ops_helpers.c                  |   6 +-
+ mm/hmm.c                                  |  19 ++--
+ mm/kmsan/hooks.c                          |  36 +++++--
+ rust/kernel/dma.rs                        |   3 +
+ tools/virtio/linux/kmsan.h                |   2 +-
+ 26 files changed, 320 insertions(+), 260 deletions(-)
+
 -- 
 2.50.1
 
