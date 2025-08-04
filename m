@@ -4,56 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16253C87FCB
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Aug 2025 12:45:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1069196.1433056 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC1BC87FCF
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Aug 2025 12:51:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1069208.1433066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uiuZW-0001k6-9P; Mon, 04 Aug 2025 12:45:46 +0000
+	id 1uiuee-0003Nv-SG; Mon, 04 Aug 2025 12:51:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1069196.1433056; Mon, 04 Aug 2025 12:45:46 +0000
+Received: by outflank-mailman (output) from mailman id 1069208.1433066; Mon, 04 Aug 2025 12:51:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uiuZW-0001jz-6T; Mon, 04 Aug 2025 12:45:46 +0000
-Received: by outflank-mailman (input) for mailman id 1069196;
- Mon, 04 Aug 2025 12:45:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dY6Z=2Q=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1uiuZV-0001jt-9J
- for xen-devel@lists.xenproject.org; Mon, 04 Aug 2025 12:45:45 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2062b.outbound.protection.outlook.com
- [2a01:111:f403:2405::62b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ee2b35ee-7130-11f0-a321-13f23c93f187;
- Mon, 04 Aug 2025 14:45:42 +0200 (CEST)
-Received: from BY1P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::11)
- by LV2PR12MB5776.namprd12.prod.outlook.com (2603:10b6:408:178::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 4 Aug
- 2025 12:45:39 +0000
-Received: from SJ1PEPF00001CDF.namprd05.prod.outlook.com
- (2603:10b6:a03:59d:cafe::d4) by BY1P220CA0011.outlook.office365.com
- (2603:10b6:a03:59d::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8989.21 via Frontend Transport; Mon,
- 4 Aug 2025 12:45:39 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00001CDF.mail.protection.outlook.com (10.167.242.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9009.8 via Frontend Transport; Mon, 4 Aug 2025 12:45:39 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 4 Aug
- 2025 07:45:38 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 4 Aug
- 2025 07:45:38 -0500
-Received: from [10.71.195.192] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 4 Aug 2025 07:45:36 -0500
+	id 1uiuee-0003No-P6; Mon, 04 Aug 2025 12:51:04 +0000
+Received: by outflank-mailman (input) for mailman id 1069208;
+ Mon, 04 Aug 2025 12:51:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lO+m=2Q=kernel.org=leon@srs-se1.protection.inumbo.net>)
+ id 1uiuY5-0006V7-E5
+ for xen-devel@lists.xenproject.org; Mon, 04 Aug 2025 12:44:17 +0000
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id baab2ecc-7130-11f0-b898-0df219b8e170;
+ Mon, 04 Aug 2025 14:44:15 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 0920DA55826;
+ Mon,  4 Aug 2025 12:44:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58081C4CEF0;
+ Mon,  4 Aug 2025 12:44:13 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,124 +43,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee2b35ee-7130-11f0-a321-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S+Ihw8hd3PpnrBB4bGMHNG55dcCEneCdzGkvuFP3t96bzzOewbyOPUU9IXQ/xR5Di2ig7CLddhWWy9tCKKkF/nwTWFIeO+9R88Hal8wwe26NLZKNXEWfMkH+zNGhLNR6NxNydvEuA9s7VZqyUYHPnni6NoMbtCjdZsPaigyj9DRaPY+Qoi4x3UXxvw/vFG+YhgwiIjaiWEU9QgcnfOkeCCu7aOSTDgmFkoeUHAlbzgyxiNoGuRhOIHrKDnw2WYSrLtz7cJz7B5Ao6fTPeNN8r+Eo3z5O5v6I5nZIwPvlbqdHycn8KmZQeP+OnJ50i3FNmpb2mR1oQXDp3o6x0LHbAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fwLSnjMkFOlKzzQ0qwoD9JTIwspxDpytCR2ap+l25Xw=;
- b=qQ6tgcEci7kazOvDmkz3/ZJhx9/PUNZfyq+xpF8OKmMbe761xsdik/gIV6Jj15BmSeRhEswjINUSDmOo6fjgxva2rXRld7SEhTYyt8ixS/Y7IWG7Gxv9txy3VgMpB0L2rg9qJrHMg3cHlEjeUXclGYQPhgPsWieShlgUb8Z/eXWdj26sfLxwIqzSI8RDcnud4oravGZoIS+vPyhG5kv3MaWTp6JtTrsdHzXjidOpAcjT1iFGdptd0JzzNFBrjzz4Mtpls4pnbCbcaxCBVz7v0IVsN50+yk4oH7FJlG8xyemhJEzF+GbY83n3BvcmbjcTsIXQHKzLoQDQTIgKh4b7mw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fwLSnjMkFOlKzzQ0qwoD9JTIwspxDpytCR2ap+l25Xw=;
- b=Hfqax7NGMc68QHqojdXzEJ+EC4FT2wUUhIoXufB8XSKPuxtA8C/oXZLH/yLeCr5YFCqg7QbVgjokJiXoj67Lg1WnovIxeYepHhsF+ywF7ABOfWVZfVYnEltw9heDeRTAnR26a8mz9V497e0Bk8XiwfXIPJVLgNlMVoW7zWJVOiM=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <c21ba07a-2363-498e-a590-7a5b32659f84@amd.com>
-Date: Mon, 4 Aug 2025 13:45:36 +0100
+X-Inumbo-ID: baab2ecc-7130-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1754311454;
+	bh=qnVGWPERMw1BTa2/gk85Rr9nCLsamOSAPU4HKvyJS1c=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=OtgAnXB9G/hO4kHiG6lUbx1lGdhplK8QSnQvERbDkZeJ2rBPi5BohP2fOcU1EY1H0
+	 LWK7JmM6eYjvDV85Iv2oqAeUvxpoecgv6pnhGevxoOAJjwoIKIBVlnyhDtWl6iMFdx
+	 RkkwEUkNj1PK4RIEa7lvhblH+3HASR9LDXUdd9ooPuLmkTQNLafsqp7vExm+lHX79L
+	 xgsW9Dlqtb1H+ROfUItFyQuMNgUa0HHgvJ+5cBoMm5E0OKANto/+eCMPooaSWD2S6k
+	 W4Hqu5Itep2BtJPMCEt1CECg7NNUHsl45+R6007i0eogZT7o+A+uJhsGr5xPHo73g0
+	 Vn+VRBXex4Xsg==
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Leon Romanovsky <leonro@nvidia.com>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Hellwig <hch@lst.de>,
+	Danilo Krummrich <dakr@kernel.org>,
+	iommu@lists.linux.dev,
+	Jason Wang <jasowang@redhat.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Joerg Roedel <joro@8bytes.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Juergen Gross <jgross@suse.com>,
+	kasan-dev@googlegroups.com,
+	Keith Busch <kbusch@kernel.org>,
+	linux-block@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-nvme@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-trace-kernel@vger.kernel.org,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	rust-for-linux@vger.kernel.org,
+	Sagi Grimberg <sagi@grimberg.me>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	virtualization@lists.linux.dev,
+	Will Deacon <will@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v1 10/16] xen: swiotlb: Open code map_resource callback
+Date: Mon,  4 Aug 2025 15:42:44 +0300
+Message-ID: <e69e9510d9024d664133dc788f5186aac414318e.1754292567.git.leon@kernel.org>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1754292567.git.leon@kernel.org>
+References: <cover.1754292567.git.leon@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] arm/mpu: Implement setup_frametable_mappings for MPU
- systems
-Content-Language: en-GB
-To: Hari Limaye <hari.limaye@arm.com>, <xen-devel@lists.xenproject.org>
-CC: <luca.fancellu@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-References: <cover.1753864612.git.hari.limaye@arm.com>
- <f08c240934fc126b651096a315da84d2d8e15197.1753864612.git.hari.limaye@arm.com>
-From: Ayan Kumar Halder <ayankuma@amd.com>
-In-Reply-To: <f08c240934fc126b651096a315da84d2d8e15197.1753864612.git.hari.limaye@arm.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDF:EE_|LV2PR12MB5776:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9618c8da-d0e0-465e-b9ed-08ddd354d0f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?NXVNVjZlSDhjVEhOYUVYOGtjOHFFZ2UzQklWb1l5bzE1MnJYYW9sUGRjK0Ju?=
- =?utf-8?B?ZldWYnpRdnVrZEZkZXFWV1doMDlOY1Z1Q3Z2aG4xOTVSa3hYRmpWNXFZejdE?=
- =?utf-8?B?dnJpVlQ5Y1g5NUpjWnJIczJJelFydWRhQWdNVTRPeGw2bjd0S2QySVRHVjBR?=
- =?utf-8?B?YlFTQjQreC9vQnNNVWpsQ1J0YkhLbGVaMEc1R3U3enVnRXE5Y283NWhuR2k4?=
- =?utf-8?B?L1hMOVV2ZExoTFNnYnpOVnNDR3BnejNPVDJsZ3N5T1lWS1dodWRaRC9TdUVz?=
- =?utf-8?B?MURzYnowa1d2UlRySlN2Si94U3pSMnpycXI5VXIxTjhEeUt3T25vSldqd2c4?=
- =?utf-8?B?eEhFMmV5M2Z5MS9zVEwwTVM4em5wbkorUHRrTmJHU1ZkRkNUekkzL3R3NU9U?=
- =?utf-8?B?cytGSmhJc1lkSVl3VHMwbXcrdEZhS2JGbTFZa0NHMDdpcm84SFZmaEx6MkJR?=
- =?utf-8?B?UnFnM05iUmZpc1o4ajI5MHNoLzBndTNub0ZWWHBKNTd1ZlVwai9MRlBJN3FX?=
- =?utf-8?B?NnNzeFBMeGJjdTFPUFBScU1NNVFpcHNjTTEvQ2ZYOVVBbmFuQ282TERDdFNs?=
- =?utf-8?B?MTdDQXBwVkFLV21CQmJrZFRndzNzZm54Z3J3SFpNcXl0cWVyOFJpM2cwZmFu?=
- =?utf-8?B?L2FXdW5oQ1M5cGllR3VLVzZPT0JUeTJ6VTRQTE1tMEdON2RKSUhkb3BETWVs?=
- =?utf-8?B?K29iZVlSdVNvT2IvOTh6b0xDV2l4NUNQbVNzU1ViTG8zUkkzMFRFUjU2bmpU?=
- =?utf-8?B?bHNCeGRZMHcyazlRTWFmY0gra0ZZdmdCNWhlWlBEbGlhQ0dnOXhSbmtmRDNH?=
- =?utf-8?B?RzM3VnV6Nk9KVGdnNG95cklMSmQxYXk2bXZmbHhCUlRpZGFxUXpnd2tSbzM3?=
- =?utf-8?B?OE1pSTFERjFKN3I2cVlJT242MGpRSnUwbkZDMXNBSzlublZTdHM2cm5MR054?=
- =?utf-8?B?QWN5dDFKTVpZR1BpcmtscXY5dGdzTmxKSCtQRFBhVDM4NHJHYlJ4cnRyNk5S?=
- =?utf-8?B?NXA3aHpkT1FDTUZ2TXdJTTZ4L1Q1dlRaMG0zNU0zME9ZWnVsZk5OVE1xWmFQ?=
- =?utf-8?B?RW9ncDE2bGJaY0tXU0IyaElwSWcwMUU3L0NtYkhKbjdlRGxRZzNQem1lU09R?=
- =?utf-8?B?UDRHdXRpQmJYZ3JIQWd6T2p3YXdFcWZac1g3M0ptNU1NdW9yY2ErMmNESTlJ?=
- =?utf-8?B?aXpkT0V5SXdiZGRpYVlObjBKc2J3NTNubG1lNHdxMmFVc0NNdm5GMXd4bncz?=
- =?utf-8?B?dGlXWUR1ZC90ZWx0WTA1Zk1ZSjJndnQ2cVRmcTZEclNBYmhYQ084M0NIdnFD?=
- =?utf-8?B?YzQyK1FWZ1lDOHpXTFNLeGtROXBZUnNVcEVIYU9ObjUvQ01UYlhvQVlzR2Ux?=
- =?utf-8?B?MHZmRlZqbWNGYll5YmxxOFZBQnpLUkhpOXozbXpOd1V4NnczYUhRb0U3Q1cy?=
- =?utf-8?B?NnhLT3JNZVFpUWE3ZGo1SjFEMkVJZ010N2hoMGRDMVVkMWRocE9HdGxncjk2?=
- =?utf-8?B?bmJFaFA5MHg3NXl5S0d0UlNSUmMxbjMxVDFSRm9aMjZsSWhoa0c5MHhHOGRz?=
- =?utf-8?B?SnJWTkk1d3hYY2xtUHk4Mld3a09jeU4zaTBFNkpUMXV2WUw3ZkVhbDVBTkhW?=
- =?utf-8?B?Nzdqam43MGxBN0FSVHdodjlVcEUwVi9sR0FRNDZCbEpBV1pnZUxIcWYzdjdR?=
- =?utf-8?B?VzkrcVBkSGVlbm1qUkFReUdoaWc5WXZlTGp6VUYyZTRYSTVLT1ArNXdNQmNN?=
- =?utf-8?B?QktBTUZSNDF6SWxzT0oxVWRuYU5DRTltRDhBZzNHZDBhTmJPZXArZit4dSsx?=
- =?utf-8?B?YjNvRENnM1NQSDRTK24rWUNCVDBoOXB3RitnejludU5iVEdRclhUbzNFWExM?=
- =?utf-8?B?a092WUN4VnlKU1hTaTRldWt3azRQTFlkazZHeUx0YnpaR2ZNRTZJdTRhWWNa?=
- =?utf-8?B?VmRSeitmNTArRFE1RDgrREloTnBOVWsvVjhUdWtKNFdWbzQvNTdwZGpmVnha?=
- =?utf-8?B?VDJ3MkcxdUxoSVkyOStoOTNmWW1mYWdoWHhjZTZHVGdWWDBab2hMelFFa0Yw?=
- =?utf-8?Q?BR5325?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 12:45:39.1542
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9618c8da-d0e0-465e-b9ed-08ddd354d0f4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF00001CDF.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5776
+Content-Transfer-Encoding: 8bit
 
-Hi Hari,
+From: Leon Romanovsky <leonro@nvidia.com>
 
-On 30/07/2025 09:45, Hari Limaye wrote:
-> CAUTION: This message has originated from an External Source. Please use proper judgment and caution when opening attachments, clicking links, or responding to this email.
->
->
-> From: Luca Fancellu <luca.fancellu@arm.com>
->
-> Implement the MPU variant of `setup_frametable_mappings`. This function
-> will be called by `setup_mm` when an implementation for MPU systems is
-> added in a follow up commit.
->
-> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-> Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+General dma_direct_map_resource() is going to be removed
+in next patch, so simply open-code it in xen driver.
 
-Reviewed-by: Ayan Kumarb Halder <ayan.kumar.halder@amd.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ drivers/xen/swiotlb-xen.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-Tested-by: Ayan Kumarb Halder <ayan.kumar.halder@amd.com>
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index da1a7d3d377cf..dd7747a2de879 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -392,6 +392,25 @@ xen_swiotlb_sync_sg_for_device(struct device *dev, struct scatterlist *sgl,
+ 	}
+ }
+ 
++static dma_addr_t xen_swiotlb_direct_map_resource(struct device *dev,
++						  phys_addr_t paddr,
++						  size_t size,
++						  enum dma_data_direction dir,
++						  unsigned long attrs)
++{
++	dma_addr_t dma_addr = paddr;
++
++	if (unlikely(!dma_capable(dev, dma_addr, size, false))) {
++		dev_err_once(dev,
++			     "DMA addr %pad+%zu overflow (mask %llx, bus limit %llx).\n",
++			     &dma_addr, size, *dev->dma_mask, dev->bus_dma_limit);
++		WARN_ON_ONCE(1);
++		return DMA_MAPPING_ERROR;
++	}
++
++	return dma_addr;
++}
++
+ /*
+  * Return whether the given device DMA address mask can be supported
+  * properly.  For example, if your device can only drive the low 24-bits
+@@ -426,5 +445,5 @@ const struct dma_map_ops xen_swiotlb_dma_ops = {
+ 	.alloc_pages_op = dma_common_alloc_pages,
+ 	.free_pages = dma_common_free_pages,
+ 	.max_mapping_size = swiotlb_max_mapping_size,
+-	.map_resource = dma_direct_map_resource,
++	.map_resource = xen_swiotlb_direct_map_resource,
+ };
+-- 
+2.50.1
 
-(On R82 and R52 with some additional patches)
-
-- Ayan
 
