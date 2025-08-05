@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A5DC87FCB
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 09:53:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1070225.1433880 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E902C87FD1
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 09:53:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1070224.1433876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujEM7-0002GL-Kh; Tue, 05 Aug 2025 09:53:15 +0000
+	id 1ujEM7-0002Dq-BW; Tue, 05 Aug 2025 09:53:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1070225.1433880; Tue, 05 Aug 2025 09:53:15 +0000
+Received: by outflank-mailman (output) from mailman id 1070224.1433876; Tue, 05 Aug 2025 09:53:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujEM7-0002Fc-Gq; Tue, 05 Aug 2025 09:53:15 +0000
-Received: by outflank-mailman (input) for mailman id 1070225;
- Tue, 05 Aug 2025 09:53:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ujEM7-0002Dj-8U; Tue, 05 Aug 2025 09:53:15 +0000
+Received: by outflank-mailman (input) for mailman id 1070224;
+ Tue, 05 Aug 2025 09:53:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Xkmx=2R=cloud.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1ujEM6-0001yh-UM
- for xen-devel@lists.xenproject.org; Tue, 05 Aug 2025 09:53:14 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 012038fb-71e2-11f0-a321-13f23c93f187;
- Tue, 05 Aug 2025 11:53:14 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b78127c5d1so3045203f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 05 Aug 2025 02:53:14 -0700 (PDT)
+ id 1ujEM5-00026G-NW
+ for xen-devel@lists.xenproject.org; Tue, 05 Aug 2025 09:53:13 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ff884533-71e1-11f0-b898-0df219b8e170;
+ Tue, 05 Aug 2025 11:53:11 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3b78a034f17so3680053f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Aug 2025 02:53:11 -0700 (PDT)
 Received: from localhost (112.pool92-178-7.dynamic.orange.es. [92.178.7.112])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-459d7d722dcsm81726915e9.24.2025.08.05.02.53.12
+ ffacd0b85a97d-3b79c4a2848sm18386766f8f.71.2025.08.05.02.53.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 02:53:12 -0700 (PDT)
+ Tue, 05 Aug 2025 02:53:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,53 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 012038fb-71e2-11f0-a321-13f23c93f187
+X-Inumbo-ID: ff884533-71e1-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754387593; x=1754992393; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754387591; x=1754992391; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FsP/JixQiAB6kfYYFbr7LCCHkXcXLGwU+Dyro6/r2kA=;
-        b=Fz2ZanIxm2Y9ptFvTfaScOuxYCz2uUB2o45RmGWaC87T14ES7aYQTpob2AU7NLcvVh
-         D2yImYzyyyIwq7jUkGxXwKaWTcfgKxymlave90bBthssmAhyGD+/gA+irSj4YcI1lVsN
-         /L1LxvzkAO1xLqsauQ7gdSV/aDw3aPoKlwp0g=
+        bh=YlJ4EVtQhQPCSTEsURZWjPcV24GHkW+OWqt8tBVq6Ws=;
+        b=Bqb0zdIl5Ehg6S4t4fbcZePweha19gznJngnQBceOvschwUHsqRaHKur5R+hsJYkFc
+         SVfUK/NILHjcZfDbGu/mS35UforuNBcGGiphku7UZPdA0vNxx+vyDfALeqwdyFkcuzOP
+         WX5YONmJuPBuA4K7ZKJpSt7XM5D0UJDfcNWB8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754387593; x=1754992393;
+        d=1e100.net; s=20230601; t=1754387591; x=1754992391;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FsP/JixQiAB6kfYYFbr7LCCHkXcXLGwU+Dyro6/r2kA=;
-        b=xH04WBomTLqzJ1xfDrA214dtBnd5ypv8eOi2M9SWeW1hqPTyurL/9ymZ3QrsQquyKR
-         o19WiU2+3e1i6Jacxot4q6m2kgfrmlPKQZ9lNmzkoqL23GB8qcVmFciX8m/1QE9zjca6
-         JsMxQRNu/4BINHyOrp++rMS1Nb/JWn2vO0hivJEjN6VvoIropDh8hr4A0qnDBCRx0zun
-         dWPLnFoePEcWBTPL9gkIZHhAF36bZ8Rtj2TDso7P9G/fyTBhLVALEUMyyyZZUSYDjrMr
-         39G1+6cCPWSrCsuZcZHuC0cmbQgXOBpW/LMb+5s7ucn7flPCsZUoOzOOqRSre5QZRqOD
-         GFhA==
-X-Gm-Message-State: AOJu0YzckIbQa3OW1AFpqgDLVbtKipqWjPDqLwO1GGag9DxKxKISrf8p
-	IROsTB+7glh7NenISfoU/TX0xg+mNWpMhMNxqP9IvzfhCABHyGXyEvw4GGYvWZav1TDMtlyBWzK
-	6AQJO
-X-Gm-Gg: ASbGncvaWy6xRBACltW2ucE7WpNbaSKwrmtnCF+R0eeCDtgMwHHGs7V1bwoGT1qNi0A
-	b+h+13K+bSQhf71ohVi2v5h+BHHdjBd4q4EBOMPvlYUCM9onBtR+iaWTsJE9Ve0UfdHHdwm5J4S
-	5W4nvNx0UssxkkoXBnnDBhuPe055NYQNlIKebtqcQbFjw0NOLKYsHdq/kRVQiDO+Uy2dLgEnWA5
-	Px9lW58yG8me8be6q52BRUoBCqLY4edtuNjA2/a4r9BdNXkRg6/t5RYihEa+iLC4/K6u66YQGff
-	6DjD2H5XXbc4NNrsJVEsy0PK8CnspSX8ACMeEck/dySTMFiYzTKLljF3WWUJjRGnaLS5AU3Ws/P
-	KYZVo/KeOyGRDfPplGBX0m5YBYncM2z1ySgaPNym4/GcPLv7MvsIrSsdSFPAg0y4AIQ==
-X-Google-Smtp-Source: AGHT+IH49zUlNPTt/qK45COiRhwo0/cwFIVsqcrvnCBiw9Pq26t9NZrr2MBWRQ3DVFuB+RVdrt8m8w==
-X-Received: by 2002:a05:6000:2584:b0:3a5:3b93:be4b with SMTP id ffacd0b85a97d-3b8d94817camr9322675f8f.25.1754387593511;
-        Tue, 05 Aug 2025 02:53:13 -0700 (PDT)
+        bh=YlJ4EVtQhQPCSTEsURZWjPcV24GHkW+OWqt8tBVq6Ws=;
+        b=MjDfJ0Mnykz83zQhrrob+juCkCf07zEf4sJibNtEHco41uMLvePFvo2boQ9jBiTk43
+         cTOt96d40Eca0sNXawul4Op6yUgGorOgA2fEl2gX1pBtSVK2gW/7jDY6s3EQpxcZCbcA
+         r6tvnj9s01ywkftVFgmOJNY5ngWzqw/MqCgMQDSqfSVm1P6FPnWDKFq1aGqIDuzRCqDO
+         dfRq+jDVtOGM0S9/mL9vyOhR2tTpMzxaLXeLO3o1N0uiK74lUpCWQpKbOMGWOe52BMug
+         20MTPQeHBK1Xa/rTHZdVF5wXgeByhd89LsdgHuvyMIYbc1Ql19NkkCZgSEkMElmVXu17
+         IKng==
+X-Gm-Message-State: AOJu0Yzo+mxDvc1YaFbXwPKSgjz/nbtG6Zc5YqNqr5DZKJ9zE/mM3QKP
+	pvQhXs7B13Rq35dp4MmDWj4iuIoDOQIQFrKBi3NomokOatZjxLrOm+4/2RjoI5p7ia5bXESYBuc
+	vYBkj
+X-Gm-Gg: ASbGnct+uaUa2jTRRQLmco4RKtM1sX80+ZUlfKjv5g53Ob3zKOkDbeHHSpSOvYSFchY
+	Wwyrj5dEaFqfra0ArO8+vrtfmoRalBP72pmGTcEc77Yt+mjpYTGG/ZHdqBjibjNkF+vkBOha8GP
+	2j8G0Ic+zaoTkQzkHsux5dptJq1aXQmNBYBQwVn1KlLUwmkXSm+DBeZhONu1iaKUlniAocaepol
+	tsQWiTdoP4JHnjqXfpC2+w5K4CHn3k3zn3RhYHkGlv+pM0GQAcYUAIlpZX3ZpWU0+YuHq/gOR1F
+	Q5M3wwGvsG6nAkKE8rjzKNCL7n2JUwFC+jVijDkW/LgzVlQaDsaD62naunooALvGlxneudOvkgs
+	eV6VxjpWhZL8HKtp6PK2b/EplT2Q2riJd3DK1Wn8f0p6/HAqPyEn4aK68wZjt1NtfrLwXyBcJcM
+	/E
+X-Google-Smtp-Source: AGHT+IFwRXAghNgrt0pR2SwJ3D/h7HW/dZTVNoThRWg/S/KXqaZhSjs7CWT+IBx1cibnmwzVpiCsHg==
+X-Received: by 2002:a05:6000:220b:b0:3b7:792c:e8be with SMTP id ffacd0b85a97d-3b8d946c468mr8387219f8f.8.1754387590874;
+        Tue, 05 Aug 2025 02:53:10 -0700 (PDT)
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@cloud.com>
-Subject: [PATCH v4 3/8] pdx: introduce command line compression toggle
-Date: Tue,  5 Aug 2025 11:52:52 +0200
-Message-ID: <20250805095257.74975-4-roger.pau@citrix.com>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v4 1/8] kconfig: turn PDX compression into a choice
+Date: Tue,  5 Aug 2025 11:52:50 +0200
+Message-ID: <20250805095257.74975-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250805095257.74975-1-roger.pau@citrix.com>
 References: <20250805095257.74975-1-roger.pau@citrix.com>
@@ -101,82 +103,174 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce a command line option to allow disabling PDX compression.  The
-disabling is done by turning pfn_pdx_add_region() into a no-op, so when
-attempting to initialize the selected compression algorithm the array of
-ranges to compress is empty.
+Rename the current CONFIG_PDX_COMPRESSION to CONFIG_PDX_MASK_COMPRESSION,
+and make it part of the PDX compression choice block, in preparation for
+adding further PDX compression algorithms.
 
-Signed-off-by: Roger Pau Monné <roger.pau@cloud.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-Changes since v1:
- - New in this version.
----
- docs/misc/xen-command-line.pandoc |  9 +++++++++
- xen/common/pdx.c                  | 14 +++++++++++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
+The PDX compression defaults should still be the same for all
+architectures, however the choice block cannot be protected under EXPERT
+and still have a default choice being unconditionally selected.  As a
+result, the new "PDX (Page inDeX) compression" item will be unconditionally
+visible in Kconfig, even on architectures like x86 that previously had no
+way to enable PDX compression.
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 6865a61220ca..5dd2ab82b7aa 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2072,6 +2072,15 @@ for all of them (`true`), only for those subject to XPTI (`xpti`) or for
- those not subject to XPTI (`no-xpti`). The feature is used only in case
- INVPCID is supported and not disabled via `invpcid=false`.
+As part of this preparation work to introduce new PDX compressions, adjust
+some of the comments on pdx.h to note they apply to a specific PDX
+compression.  Also shuffle function prototypes and dummy implementations
+around to make it easier to introduce a new PDX compression.  Note all
+PDX compression implementations are expected to provide a
+pdx_is_region_compressible() that takes the same set of arguments.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/arm/setup.c  |  2 +-
+ xen/common/Kconfig    | 18 +++++++++++++++---
+ xen/common/pdx.c      |  4 ++--
+ xen/include/xen/pdx.h | 32 +++++++++++++++++++-------------
+ 4 files changed, 37 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index bb35afe56cec..a77b31071ed8 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -258,7 +258,7 @@ void __init init_pdx(void)
+     paddr_t bank_start, bank_size, bank_end, ram_end = 0;
+     int bank;
  
-+### pdx-compress
-+> `= <boolean>`
+-#ifdef CONFIG_PDX_COMPRESSION
++#ifndef CONFIG_PDX_NONE
+     /*
+      * Arm does not have any restrictions on the bits to compress. Pass 0 to
+      * let the common code further restrict the mask.
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 16936418a6e6..8dad0c923a9d 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -57,9 +57,10 @@ config EVTCHN_FIFO
+ 
+ 	  If unsure, say Y.
+ 
+-config PDX_COMPRESSION
+-	bool "PDX (Page inDeX) compression" if EXPERT && !X86 && !RISCV
+-	default ARM || PPC
++choice
++	prompt "PDX (Page inDeX) compression"
++	default PDX_MASK_COMPRESSION if !X86 && !RISCV
++	default PDX_NONE
+ 	help
+ 	  PDX compression is a technique designed to reduce the memory
+ 	  overhead of physical memory management on platforms with sparse RAM
+@@ -72,6 +73,17 @@ config PDX_COMPRESSION
+ 	  If your platform does not have sparse RAM banks, do not enable PDX
+ 	  compression.
+ 
++config PDX_MASK_COMPRESSION
++	bool "Mask compression"
++	help
++	  Compression relying on all RAM addresses sharing a zeroed bit region.
 +
-+> Default: `true` if CONFIG_PDX_NONE is unset
++config PDX_NONE
++	bool "None"
++	help
++	  No compression
++endchoice
 +
-+Only relevant when the hypervisor is build with PFN PDX compression. Controls
-+whether Xen will engage in PFN compression.  The algorithm used for PFN
-+compression is selected at build time from Kconfig.
-+
- ### ple_gap
- > `= <integer>`
+ config ALTERNATIVE_CALL
+ 	bool
  
 diff --git a/xen/common/pdx.c b/xen/common/pdx.c
-index c5ea58873c0e..f4a3dcf6cb60 100644
+index b8384e6189df..00aa7e43006d 100644
 --- a/xen/common/pdx.c
 +++ b/xen/common/pdx.c
-@@ -19,6 +19,7 @@
- #include <xen/mm.h>
- #include <xen/bitops.h>
- #include <xen/nospec.h>
-+#include <xen/param.h>
- #include <xen/pfn.h>
- #include <xen/sections.h>
- 
-@@ -76,9 +77,13 @@ static struct pfn_range {
- } ranges[MAX_PFN_RANGES] __initdata;
- static unsigned int __initdata nr_ranges;
- 
-+static bool __initdata pdx_compress = true;
-+boolean_param("pdx-compress", pdx_compress);
-+
- void __init pfn_pdx_add_region(paddr_t base, paddr_t size)
+@@ -34,7 +34,7 @@ bool __mfn_valid(unsigned long mfn)
  {
--    if ( !size )
-+    /* Without ranges there's no PFN compression. */
-+    if ( !size || !pdx_compress )
-         return;
+     bool invalid = mfn >= max_page;
  
-     if ( nr_ranges >= ARRAY_SIZE(ranges) )
-@@ -215,6 +220,13 @@ void __init pfn_pdx_compression_setup(paddr_t base)
-     unsigned int i, j, bottom_shift = 0, hole_shift = 0;
-     unsigned long mask = pdx_init_mask(base) >> PAGE_SHIFT;
+-#ifdef CONFIG_PDX_COMPRESSION
++#ifdef CONFIG_PDX_MASK_COMPRESSION
+     invalid |= mfn & pfn_hole_mask;
+ #endif
  
-+    if ( !nr_ranges )
-+    {
-+        printk(XENLOG_DEBUG "PFN compression disabled%s\n",
-+               pdx_compress ? ": no ranges provided" : "");
-+        return;
-+    }
+@@ -55,7 +55,7 @@ void set_pdx_range(unsigned long smfn, unsigned long emfn)
+         __set_bit(idx, pdx_group_valid);
+ }
+ 
+-#ifdef CONFIG_PDX_COMPRESSION
++#ifdef CONFIG_PDX_MASK_COMPRESSION
+ 
+ /*
+  * Diagram to make sense of the following variables. The masks and shifts
+diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
+index c1423d64a95b..8e373cac8b87 100644
+--- a/xen/include/xen/pdx.h
++++ b/xen/include/xen/pdx.h
+@@ -25,7 +25,7 @@
+  * this by keeping a bitmap of the ranges in the frame table containing
+  * invalid entries and not allocating backing memory for them.
+  *
+- * ## PDX compression
++ * ## PDX mask compression
+  *
+  * This is a technique to avoid wasting memory on machines known to have
+  * split their machine address space in several big discontinuous and highly
+@@ -101,22 +101,13 @@ bool __mfn_valid(unsigned long mfn);
+ #define paddr_to_pdx(pa) pfn_to_pdx(paddr_to_pfn(pa))
+ #define pdx_to_paddr(px) pfn_to_paddr(pdx_to_pfn(px))
+ 
+-#ifdef CONFIG_PDX_COMPRESSION
++#ifdef CONFIG_PDX_MASK_COMPRESSION
+ 
+ extern unsigned long pfn_pdx_bottom_mask, ma_va_bottom_mask;
+ extern unsigned int pfn_pdx_hole_shift;
+ extern unsigned long pfn_hole_mask;
+ extern unsigned long pfn_top_mask, ma_top_mask;
+ 
+-/**
+- * Validate a region's compatibility with the current compression runtime
+- *
+- * @param base Base address of the region
+- * @param npages Number of PAGE_SIZE-sized pages in the region
+- * @return True iff the region can be used with the current compression
+- */
+-bool pdx_is_region_compressible(paddr_t base, unsigned long npages);
+-
+ /**
+  * Calculates a mask covering "moving" bits of all addresses of a region
+  *
+@@ -209,7 +200,9 @@ static inline paddr_t directmapoff_to_maddr(unsigned long offset)
+  */
+ void pfn_pdx_hole_setup(unsigned long mask);
+ 
+-#else /* !CONFIG_PDX_COMPRESSION */
++#endif /* CONFIG_PDX_MASK_COMPRESSION */
 +
-     if ( nr_ranges > ARRAY_SIZE(ranges) )
-     {
-         printk(XENLOG_WARNING
++#ifdef CONFIG_PDX_NONE
+ 
+ /* Without PDX compression we can skip some computations */
+ 
+@@ -241,7 +234,20 @@ static inline void pfn_pdx_hole_setup(unsigned long mask)
+ {
+ }
+ 
+-#endif /* CONFIG_PDX_COMPRESSION */
++#else /* !CONFIG_PDX_NONE */
++
++/* Shared functions implemented by all PDX compressions. */
++
++/**
++ * Validate a region's compatibility with the current compression runtime
++ *
++ * @param base Base address of the region
++ * @param npages Number of PAGE_SIZE-sized pages in the region
++ * @return True iff the region can be used with the current compression
++ */
++bool pdx_is_region_compressible(paddr_t base, unsigned long npages);
++
++#endif /* !CONFIG_PDX_NONE */
+ #endif /* __XEN_PDX_H__ */
+ 
+ /*
 -- 
 2.49.0
 
