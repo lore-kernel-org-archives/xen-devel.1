@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A96FC87FD1
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 16:32:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1070747.1434393 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80F2C87FD2
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 16:32:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1070749.1434408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujKaF-0003Q7-29; Tue, 05 Aug 2025 16:32:15 +0000
+	id 1ujKaG-0003kf-In; Tue, 05 Aug 2025 16:32:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1070747.1434393; Tue, 05 Aug 2025 16:32:15 +0000
+Received: by outflank-mailman (output) from mailman id 1070749.1434408; Tue, 05 Aug 2025 16:32:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujKaE-0003Q0-Rt; Tue, 05 Aug 2025 16:32:14 +0000
-Received: by outflank-mailman (input) for mailman id 1070747;
- Tue, 05 Aug 2025 16:32:13 +0000
+	id 1ujKaG-0003kP-Cz; Tue, 05 Aug 2025 16:32:16 +0000
+Received: by outflank-mailman (input) for mailman id 1070749;
+ Tue, 05 Aug 2025 16:32:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FQWd=2R=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1ujKaD-0002gS-GK
- for xen-devel@lists.xen.org; Tue, 05 Aug 2025 16:32:13 +0000
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [2a00:1450:4864:20::629])
+ id 1ujKaE-0002gS-Tq
+ for xen-devel@lists.xenproject.org; Tue, 05 Aug 2025 16:32:14 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bcf8c4fa-7219-11f0-b898-0df219b8e170;
- Tue, 05 Aug 2025 18:32:12 +0200 (CEST)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-af967835d0aso402887866b.0
- for <xen-devel@lists.xen.org>; Tue, 05 Aug 2025 09:32:12 -0700 (PDT)
+ id bdcf687c-7219-11f0-b898-0df219b8e170;
+ Tue, 05 Aug 2025 18:32:13 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-af922ab4849so851606366b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Aug 2025 09:32:13 -0700 (PDT)
 Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af928c84154sm842980766b.84.2025.08.05.09.32.10
+ a640c23a62f3a-af928c84154sm842980766b.84.2025.08.05.09.32.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 09:32:10 -0700 (PDT)
+ Tue, 05 Aug 2025 09:32:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bcf8c4fa-7219-11f0-b898-0df219b8e170
+X-Inumbo-ID: bdcf687c-7219-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754411531; x=1755016331; darn=lists.xen.org;
+        d=citrix.com; s=google; t=1754411533; x=1755016333; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HyChThRw6GVKg1romDTn5fzN51ukPoZgESaAn7xK/ic=;
-        b=RjULSuQGaRH2h2sfIspmByy/vWktiO82zs8pqNmjM14Iy/56Vun4ihCiMzzcwGhEZP
-         shDlH6SH1uoUFQ8TuHES6hZLIHQGiM1cGnYxYFB2aQUSz9HVJE2hW36xoXyxJkmyle6E
-         +g/7os73Lmsfs8aK0vzDs+F3pjUr+VuEsj+Qw=
+        bh=L1QqT35WPMNEdKVxqmbRQUpDF5jhPdPInhgcu4VmEpk=;
+        b=ej2KbWAbSK+2vCttlK4/f1a8XT7CJo1SCtpu73V9hHKTYBBY4IUvDsHhmYU3MWKsI4
+         3Rnxa6IKc700nX3fC1X1L+YARQ60Zs4JMUAiGAylEBbvjUKK11PQjBCXSUGnu844YIU7
+         oh9jqfUj1Phi+EFZZ7+zzYapUv9b/Q2H8IvFU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754411531; x=1755016331;
+        d=1e100.net; s=20230601; t=1754411533; x=1755016333;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=HyChThRw6GVKg1romDTn5fzN51ukPoZgESaAn7xK/ic=;
-        b=j+i+kJo+7AwLwK92Wcy0AYQARJmBmEeoAq/bNDNDYpUxfIOhgmAQvBbea44AFxiZM0
-         JJNt0Gga6lt7sQFyV0ry9nLQNei2W3Vvll2p1oBLBydWP8rB9vJvsP2wA9lM/E1IvyOm
-         F1KmGgocyoRbN+32FBrsCiLc6wBNH1oxEc83urKl4FjYRZaWMfDhtdeSuJ5syWlDKgo1
-         85jEGHiLFhf22OKJuA63InAp7kaLKMC4ReK88I8VIueJvi6oIGcIy09MdqTSaDoZ3UP4
-         Edmr9cBnXEBtujlK4PCogOOqMij39/wM7P1ULFRnV9NXso+prQRDtD1xs5usrV6BX1dD
-         6j5g==
-X-Gm-Message-State: AOJu0YwLirlRqq4SF734kR4hkU1yGcreq2PUunE00a3u+zIHMv6Zn497
-	bfDpEUHAybnI3iD7VMsa1nKEIgtQ6vXv3M2dFIdY4yK05YRMVt7M2cCVTpjpjK6zBnIcyUAt3R2
-	efS8=
-X-Gm-Gg: ASbGncvIV0J8S1QdT8rf7BsAOj8PPKv/8lp19zQuqlLEg1nUZgaWfZnuLaqjECj7TBT
-	1vwIGiYk0jgj5R79ycv0aYBJdZyaZnCkQwP5xsQQj8TvQeCMIdRRIHBh94/3rTN+SlEGykCkZtf
-	uzi1QmkFIfeXVRbpBKM2AQXH98BHLHg0+FvTXbFa2QnNZqOK4vGzlAVhscDdV7dNcjvHj8gpT3z
-	tlPy8d/JRhJeneFD1ew6kSbE5aOiuJQEMuaZxu7IzPoWw+kjqBLgR5EhHeBmg0wvcaNP7Joer2g
-	T6uKp4PD0t3X9SzctLHvpfEo3w0R5xuy41Ljg1Ty84rd74o7EkA+iLMCJQkXF7UcI1+r4N5Gesh
-	c0v9RoHEoTTaA28M3cO/Jwda2inq6MTyTXVoKQXEiqsfr3g==
-X-Google-Smtp-Source: AGHT+IHfJbaJv57Bho8r5sfyd+qAP9P2dr44hKcu2gIKy6YgKG5c4omoNyMg3Ahg2Rn7mVRnYL6UEg==
-X-Received: by 2002:a17:907:2d2c:b0:add:ede0:b9d4 with SMTP id a640c23a62f3a-af93fd76ffamr1568967066b.0.1754411530898;
-        Tue, 05 Aug 2025 09:32:10 -0700 (PDT)
+        bh=L1QqT35WPMNEdKVxqmbRQUpDF5jhPdPInhgcu4VmEpk=;
+        b=HF910jmppM3HPm7acwyKKfP1i2KqM48lO4j7H7cQ3ryJ977tefllZgnLoz+UGZHHJC
+         YZEqG3GTkQh/xugneZDI7z4CaUjJs277xydgGS5xFgaUNo68X9W/OZ772K19vDLqnGia
+         5V+XV4AaMgI3MsoKsx5n0zhTsTf181leI9HnJuON6hUnGv38pIf3rkpYf+DxBd6DgTJV
+         biowpqjsa1AuYBf1YRzL/CmAytlGXaceIODK4nSK6TzADwpjRKfzqh6E6ZyY6MiWwrP6
+         tmSh5Qp+hoS/TLclice0rjyvtOCNbm6RHldc0l3PlIIIM2Ut/Ei3LhN3o4IcyV7mzt0l
+         jBIA==
+X-Forwarded-Encrypted: i=1; AJvYcCVdrZo2Ugsk4mHUkV9DjmqpefyWRC9HfHUReureO5kQEIjpHqbnSaevvABxFXF2MrxRiBqWYLr0z1Y=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxc7BYIlfIzCbMoo6D5wyFJj8nzzOxpNQdECeFDSbxgQYIm+Zmj
+	Z9f3W1js4ioEdK7jqJfDxqQEGvUyuF/3+Q6uifsGqyC/5YEVVt9nbOqTtCcAGYcaBA==
+X-Gm-Gg: ASbGncvQEfANBWIjmjp/h6Zci2ZYADwnKxoTs54fkap4dFEx6PFc3zptBYBthx0qaIX
+	qTHzIlVePoczLPceoFBWyYPG09Ib7ccdmg+4fHE16hMa/WgrndaFuQJvW9WSq92HlglhjvS4n1A
+	bj1qA/GefnpDXtWf/ENxMHSpY7ppBNTMXsN61akJUGh6h9QJR0XnEpzM7wsDC+pJinXPpO7BSJ+
+	QmobGvBWx9/jN+xPWNuc2b+TG/vCci/mUeoDZFIpCML38KIgZARnrLgC5TTts1xHM2NDZH7p2ae
+	OjNuqHMhV8ElrU7J8axwslin3FtQf1P/+6BjK7+c3XumcU6IjMuqe0pJ9+1WsVrwgxBZ0OliMnf
+	TTqWjIRRp+0v31ar7KxokwD3pA+4DGa/np/R8/w7pgP6Sng==
+X-Google-Smtp-Source: AGHT+IHMLaIm8aahuPreV60FOOmrmpQocxqFSXDfnpp2XbU/+KZwakIBweYK+7LfGmsvOPVCS/FpIw==
+X-Received: by 2002:a17:907:1b1d:b0:af9:3116:e110 with SMTP id a640c23a62f3a-af940277761mr1288991366b.58.1754411532702;
+        Tue, 05 Aug 2025 09:32:12 -0700 (PDT)
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
 To: Xen-devel <xen-devel@lists.xen.org>,
 	xen-devel@lists.xenproject.org
@@ -88,48 +88,71 @@ Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 1/2] efi: Call FreePages only if needed
-Date: Tue,  5 Aug 2025 17:32:03 +0100
-Message-ID: <20250805163204.3631483-2-ross.lagerwall@citrix.com>
+Subject: [PATCH 2/2] efi: Stop using StdErr
+Date: Tue,  5 Aug 2025 17:32:04 +0100
+Message-ID: <20250805163204.3631483-3-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250805163204.3631483-1-ross.lagerwall@citrix.com>
 References: <20250805163204.3631483-1-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If the config file is builtin, cfg.addr will be zero but Xen
-unconditionally calls FreePages() on the address.
+Xen's use of StdErr is inconsistent. Some boot errors are reported using
+PrintErr() which uses StdErr and some are reported using blexit() which
+uses StdOut.
 
-Xen may also call FreePages() with a zero address if blexit() is called
-after this point since cfg.need_to_free is not set to false.
+On my test system using OVMF, StdErr is not displayed on the emulated
+screen. Looking at other EFI applications, StdErr is just used for debug
+messages if at all.
 
-The UEFI specification does not say whether calling FreePages() with a
-zero address is allowed so let's be cautious and use cfg.need_to_free
-properly.
+Therefore, switch all boot output to use StdOut.
 
 Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
- xen/common/efi/boot.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ xen/common/efi/boot.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 778a39cc48e6..50ff1d1bd225 100644
+index 50ff1d1bd225..6ba486943466 100644
 --- a/xen/common/efi/boot.c
 +++ b/xen/common/efi/boot.c
-@@ -1534,8 +1534,11 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
+@@ -153,7 +153,6 @@ static UINT32 __initdata efi_bs_revision;
+ static EFI_HANDLE __initdata efi_ih;
  
-         efi_arch_cfg_file_late(loaded_image, dir_handle, section.s);
+ static SIMPLE_TEXT_OUTPUT_INTERFACE *__initdata StdOut;
+-static SIMPLE_TEXT_OUTPUT_INTERFACE *__initdata StdErr;
  
--        efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
--        cfg.addr = 0;
-+        if ( cfg.need_to_free )
-+        {
-+            efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
-+            cfg.need_to_free = false;
-+        }
+ static UINT32 __initdata mdesc_ver;
+ static bool __initdata map_bs;
+@@ -168,11 +167,7 @@ static void __init PrintStr(const CHAR16 *s)
+ {
+     StdOut->OutputString(StdOut, (CHAR16 *)s );
+ }
+-
+-static void __init PrintErr(const CHAR16 *s)
+-{
+-    StdErr->OutputString(StdErr, (CHAR16 *)s );
+-}
++#define PrintErr PrintStr
  
-         if ( dir_handle )
-             dir_handle->Close(dir_handle);
+ static CHAR16 *__init FormatDec(UINT64 Val, CHAR16 *Buffer)
+ {
+@@ -287,7 +282,6 @@ static bool __init match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2)
+ /* generic routine for printing error messages */
+ static void __init noreturn PrintErrMesg(const CHAR16 *mesg, EFI_STATUS ErrCode)
+ {
+-    StdOut = StdErr;
+     PrintErr(mesg);
+     PrintErr(L": ");
+ 
+@@ -914,7 +908,6 @@ static void __init efi_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTabl
+     efi_fw_revision = SystemTable->FirmwareRevision;
+ 
+     StdOut = SystemTable->ConOut;
+-    StdErr = SystemTable->StdErr ?: StdOut;
+ }
+ 
+ static void __init efi_console_set_mode(void)
 -- 
 2.50.1
 
