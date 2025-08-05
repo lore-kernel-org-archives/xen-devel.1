@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC87EC87FD1
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 16:32:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1070745.1434373 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A96FC87FD1
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Aug 2025 16:32:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1070747.1434393 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujKaB-0002vr-HR; Tue, 05 Aug 2025 16:32:11 +0000
+	id 1ujKaF-0003Q7-29; Tue, 05 Aug 2025 16:32:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1070745.1434373; Tue, 05 Aug 2025 16:32:11 +0000
+Received: by outflank-mailman (output) from mailman id 1070747.1434393; Tue, 05 Aug 2025 16:32:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujKaB-0002vi-D5; Tue, 05 Aug 2025 16:32:11 +0000
-Received: by outflank-mailman (input) for mailman id 1070745;
- Tue, 05 Aug 2025 16:32:10 +0000
+	id 1ujKaE-0003Q0-Rt; Tue, 05 Aug 2025 16:32:14 +0000
+Received: by outflank-mailman (input) for mailman id 1070747;
+ Tue, 05 Aug 2025 16:32:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FQWd=2R=cloud.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1ujKaA-0002gS-KN
- for xen-devel@lists.xen.org; Tue, 05 Aug 2025 16:32:10 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1ujKaD-0002gS-GK
+ for xen-devel@lists.xen.org; Tue, 05 Aug 2025 16:32:13 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bb473bf1-7219-11f0-b898-0df219b8e170;
- Tue, 05 Aug 2025 18:32:09 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-af93c3bac8fso638381066b.2
- for <xen-devel@lists.xen.org>; Tue, 05 Aug 2025 09:32:09 -0700 (PDT)
+ id bcf8c4fa-7219-11f0-b898-0df219b8e170;
+ Tue, 05 Aug 2025 18:32:12 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-af967835d0aso402887866b.0
+ for <xen-devel@lists.xen.org>; Tue, 05 Aug 2025 09:32:12 -0700 (PDT)
 Received: from rossla-pc.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af928c84154sm842980766b.84.2025.08.05.09.32.07
+ a640c23a62f3a-af928c84154sm842980766b.84.2025.08.05.09.32.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 09:32:07 -0700 (PDT)
+ Tue, 05 Aug 2025 09:32:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,39 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb473bf1-7219-11f0-b898-0df219b8e170
+X-Inumbo-ID: bcf8c4fa-7219-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754411528; x=1755016328; darn=lists.xen.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cw+fp9ijqB07ybQ00T6Z+NAfGs8NSWdqqpiXyp8ErM4=;
-        b=jWc64krrPGfNBbHLeiIe0zQ1vzurQmzf3HzVTUzjc6/7j39jL6U/2sgsVhyEyInCrT
-         Gz67skHR5FWLLKKKAK68ttbdPKzd9v5OcrzkxBjKzDqopWxzMyfXb0VAP5etY51XFCO6
-         lNOfsAJdSiOC1bOBqSGW+EHwhqEIgUl3n6kik=
+        d=citrix.com; s=google; t=1754411531; x=1755016331; darn=lists.xen.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HyChThRw6GVKg1romDTn5fzN51ukPoZgESaAn7xK/ic=;
+        b=RjULSuQGaRH2h2sfIspmByy/vWktiO82zs8pqNmjM14Iy/56Vun4ihCiMzzcwGhEZP
+         shDlH6SH1uoUFQ8TuHES6hZLIHQGiM1cGnYxYFB2aQUSz9HVJE2hW36xoXyxJkmyle6E
+         +g/7os73Lmsfs8aK0vzDs+F3pjUr+VuEsj+Qw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754411528; x=1755016328;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Cw+fp9ijqB07ybQ00T6Z+NAfGs8NSWdqqpiXyp8ErM4=;
-        b=KlYpVqs/Gf+RQ+XhL3kGG7Ahz0y2FQLfDuRdqXLWHbiif1DDB5usAZSn4nb8prcWzc
-         6ST652g8HvY/PIqOYvHk6DPJ4uWhkExg4ryusjnyP/j/xfljE7ckIpOa+sOH736hUCeD
-         kdewYLhW/C88kCUWsnXaYpQ0LmbUYV8Pt/JkpbBg9TohikuIsGiRj7P06w07A4VteXQ7
-         y8bWPcjtG6wZnGfffqn+NIg664txGIe5lW+XEKEipKGsG3kj44roKmiVNCqC4RQrN0s7
-         dYOjafgaKwNatbb5Pd6loINED9wuaS/z0kzIiVb/n3fN0dQgIpsfaL54ALDAe12K6kOp
-         MXkg==
-X-Gm-Message-State: AOJu0YyPmxWNj90JnK8Cd5vyQLMdO/7RrKHcIi8RproC/k7fjVzVpAKR
-	fkW6thlTe6IJAU+hUQFSrG2rk5kzeS3QljoC/nby1J8b4NGJa0QafQzYRpuXCkgZNFRjTrexzBb
-	Uf0U=
-X-Gm-Gg: ASbGncty9d0n+3bkEvpxubZGcfdxeMg+y3H4bHdmFz1UeRgAX9T5Gny12BYdI69/R9E
-	eac536jLF2DKtqs18Htj/OxuzWaHwZDJy4+Qoz8gOU3KHd2kLlTTsqFlvfbNQWsBb+KLvi6OMYe
-	n2avkD1xnTu+f20bJPn8i923t6zdk9sU21DIp6KmY+5dCUpVh6viWgG7zH0G1piJDxW0YsUATxE
-	zRJhBiqWgTmj8pNWShIrhbCeArAAyKG/aC+cpM7D6TtAeeWT6sED3YeVPA1aB4H3j8Hs+dKbmmE
-	YGcVmb0PvyObPl+7sXhIQHZpOLjyMPwxhDdG+nu+9T0PEVmZfnlWw8K3h50QMIQMerPNdDYBoeE
-	KnGpoabyRBRbjBb+yTirD/uWKE1NskeX/hV+QPOdDu3OXFQ==
-X-Google-Smtp-Source: AGHT+IGa4GFLCDHDfvOak3r6zeET09jfJFrVEa7qKNQ3LiINiAKvfcR4Wn8Z3ypOhRbpZd4sqlkjAA==
-X-Received: by 2002:a17:907:7fa8:b0:ae0:d798:2ebd with SMTP id a640c23a62f3a-af94017fa9amr1402524766b.35.1754411528077;
-        Tue, 05 Aug 2025 09:32:08 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1754411531; x=1755016331;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HyChThRw6GVKg1romDTn5fzN51ukPoZgESaAn7xK/ic=;
+        b=j+i+kJo+7AwLwK92Wcy0AYQARJmBmEeoAq/bNDNDYpUxfIOhgmAQvBbea44AFxiZM0
+         JJNt0Gga6lt7sQFyV0ry9nLQNei2W3Vvll2p1oBLBydWP8rB9vJvsP2wA9lM/E1IvyOm
+         F1KmGgocyoRbN+32FBrsCiLc6wBNH1oxEc83urKl4FjYRZaWMfDhtdeSuJ5syWlDKgo1
+         85jEGHiLFhf22OKJuA63InAp7kaLKMC4ReK88I8VIueJvi6oIGcIy09MdqTSaDoZ3UP4
+         Edmr9cBnXEBtujlK4PCogOOqMij39/wM7P1ULFRnV9NXso+prQRDtD1xs5usrV6BX1dD
+         6j5g==
+X-Gm-Message-State: AOJu0YwLirlRqq4SF734kR4hkU1yGcreq2PUunE00a3u+zIHMv6Zn497
+	bfDpEUHAybnI3iD7VMsa1nKEIgtQ6vXv3M2dFIdY4yK05YRMVt7M2cCVTpjpjK6zBnIcyUAt3R2
+	efS8=
+X-Gm-Gg: ASbGncvIV0J8S1QdT8rf7BsAOj8PPKv/8lp19zQuqlLEg1nUZgaWfZnuLaqjECj7TBT
+	1vwIGiYk0jgj5R79ycv0aYBJdZyaZnCkQwP5xsQQj8TvQeCMIdRRIHBh94/3rTN+SlEGykCkZtf
+	uzi1QmkFIfeXVRbpBKM2AQXH98BHLHg0+FvTXbFa2QnNZqOK4vGzlAVhscDdV7dNcjvHj8gpT3z
+	tlPy8d/JRhJeneFD1ew6kSbE5aOiuJQEMuaZxu7IzPoWw+kjqBLgR5EhHeBmg0wvcaNP7Joer2g
+	T6uKp4PD0t3X9SzctLHvpfEo3w0R5xuy41Ljg1Ty84rd74o7EkA+iLMCJQkXF7UcI1+r4N5Gesh
+	c0v9RoHEoTTaA28M3cO/Jwda2inq6MTyTXVoKQXEiqsfr3g==
+X-Google-Smtp-Source: AGHT+IHfJbaJv57Bho8r5sfyd+qAP9P2dr44hKcu2gIKy6YgKG5c4omoNyMg3Ahg2Rn7mVRnYL6UEg==
+X-Received: by 2002:a17:907:2d2c:b0:add:ede0:b9d4 with SMTP id a640c23a62f3a-af93fd76ffamr1568967066b.0.1754411530898;
+        Tue, 05 Aug 2025 09:32:10 -0700 (PDT)
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
 To: Xen-devel <xen-devel@lists.xen.org>,
 	xen-devel@lists.xenproject.org
@@ -87,23 +88,48 @@ Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
 	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 0/2] Misc EFI boot fixes
-Date: Tue,  5 Aug 2025 17:32:02 +0100
-Message-ID: <20250805163204.3631483-1-ross.lagerwall@citrix.com>
+Subject: [PATCH 1/2] efi: Call FreePages only if needed
+Date: Tue,  5 Aug 2025 17:32:03 +0100
+Message-ID: <20250805163204.3631483-2-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250805163204.3631483-1-ross.lagerwall@citrix.com>
+References: <20250805163204.3631483-1-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fixes for a couple of annoyances when booting Xen using the native EFI
-entry point.
+If the config file is builtin, cfg.addr will be zero but Xen
+unconditionally calls FreePages() on the address.
 
-Ross Lagerwall (2):
-  efi: Call FreePages only if needed
-  efi: Stop using StdErr
+Xen may also call FreePages() with a zero address if blexit() is called
+after this point since cfg.need_to_free is not set to false.
 
- xen/common/efi/boot.c | 16 ++++++----------
- 1 file changed, 6 insertions(+), 10 deletions(-)
+The UEFI specification does not say whether calling FreePages() with a
+zero address is allowed so let's be cautious and use cfg.need_to_free
+properly.
 
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+---
+ xen/common/efi/boot.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 778a39cc48e6..50ff1d1bd225 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -1534,8 +1534,11 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
+ 
+         efi_arch_cfg_file_late(loaded_image, dir_handle, section.s);
+ 
+-        efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
+-        cfg.addr = 0;
++        if ( cfg.need_to_free )
++        {
++            efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
++            cfg.need_to_free = false;
++        }
+ 
+         if ( dir_handle )
+             dir_handle->Close(dir_handle);
 -- 
 2.50.1
 
