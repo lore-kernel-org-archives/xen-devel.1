@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC1FEC87FCF
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 16:21:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1073301.1436203 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B6EC87FCA
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 17:11:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1073375.1436212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk3MX-0000RX-Sw; Thu, 07 Aug 2025 16:21:05 +0000
+	id 1uk49F-0001j1-Rw; Thu, 07 Aug 2025 17:11:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1073301.1436203; Thu, 07 Aug 2025 16:21:05 +0000
+Received: by outflank-mailman (output) from mailman id 1073375.1436212; Thu, 07 Aug 2025 17:11:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk3MX-0000RN-Pb; Thu, 07 Aug 2025 16:21:05 +0000
-Received: by outflank-mailman (input) for mailman id 1073301;
- Thu, 07 Aug 2025 16:21:04 +0000
+	id 1uk49F-0001iu-Oj; Thu, 07 Aug 2025 17:11:25 +0000
+Received: by outflank-mailman (input) for mailman id 1073375;
+ Thu, 07 Aug 2025 17:11:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oMMd=2T=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uk3MW-0000P0-JQ
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 16:21:04 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ <SRS0=LYnK=2T=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uk49E-0001io-DV
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 17:11:24 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 83315e01-73aa-11f0-a324-13f23c93f187;
- Thu, 07 Aug 2025 18:21:03 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ae6f8d3bcd4so232740866b.1
- for <xen-devel@lists.xenproject.org>; Thu, 07 Aug 2025 09:21:03 -0700 (PDT)
-Received: from [192.168.1.17] (user-109-243-64-38.play-internet.pl.
- [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a076409sm1336478166b.12.2025.08.07.09.20.59
+ id 885f481e-73b1-11f0-a324-13f23c93f187;
+ Thu, 07 Aug 2025 19:11:18 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-458bdde7dedso9422025e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Aug 2025 10:11:18 -0700 (PDT)
+Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459de91ea4csm155204845e9.10.2025.08.07.10.11.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Aug 2025 09:21:01 -0700 (PDT)
+ Thu, 07 Aug 2025 10:11:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,195 +47,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83315e01-73aa-11f0-a324-13f23c93f187
+X-Inumbo-ID: 885f481e-73b1-11f0-a324-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754583663; x=1755188463; darn=lists.xenproject.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yXpXALJthCDztrIM1HZ6qPaFkCMLZCF9ZUT9163fWQc=;
-        b=X0UK0UsAMBZS5IdPH9xUajhV32qyu/EuIIDqbbY390WVFUmB62YbqL6PL3LHIPdl+n
-         Ljta3hiNz3AXRq0ID+HtYhpF0CzxG2BwM1oORvH/AZ7RC7BHcx8qCr1ZyJMsR2OmE2+O
-         MUFowxQWq77qVtJ8czudrSNd2ID6GBvaSvfEUSlU/WxJkr4YG2tORzSLtCI4e/cZsrAt
-         h7/K5e90LhmzTHAtJodsxsmcCHLFHqnb7K/XPW56Z5Q3mth//l+t+dmMqWAsbiOpxsuS
-         3OPNjKvKgHD3gOEaW7nRkvTn/iXZRnT2LfxU8W0pBrE67z3QN4YqqIbPCYse8rUDNL8v
-         JMeg==
+        d=citrix.com; s=google; t=1754586678; x=1755191478; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=4OP4xaE8pWnEnRqJ3aAsJLupQAdLmaGfhr4isia3Qz0=;
+        b=kfBZiJkzvK+JYzvnZPpeInJp0jZ6Xitnvig+SHpoV+FGp0X6yV79yV+rfrljyCC4tR
+         nLPiyHtXZKQHk24ueFkMCoBkGacZ20ZMUkyznNUsfcCYXwLUVJB9J7+jR9VSl1tT/xSM
+         glyFUk2ux/ZFyhS8r6ikz7T+9yjhglkiJBKpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754583663; x=1755188463;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=yXpXALJthCDztrIM1HZ6qPaFkCMLZCF9ZUT9163fWQc=;
-        b=pr7diUP12xaqCtujvSrXnNfE6HosdqFsWTj3fuyrNad4lLSM8ag9ODkazplz4pS5c7
-         pUKrAwy561TPOAEfrOUbDy5moiBFd/ZzMLC9y1m+tR76gACitP4oaKW9LgirH5+6pO1/
-         eX5PxLcgdvWOZfTdjayfq5BsK5oeSmsnBcp/wzdAL4i5MdkUnz45FbzYDEfjDZ3VX7TZ
-         1HPRZ4Ca93p++g8zJXCReg+WvOs4HMtqZIEs8iF2ewE9m18S60AYpkVEnYU9lKj9mz1l
-         652gRZ/Ef39dKHyWv1jz3n0RUtjDNjCjxGMuA731Rp/WZRaSAwOUFuTGTT2HM6wpdQmQ
-         t2Eg==
-X-Forwarded-Encrypted: i=1; AJvYcCUxxMfaKHU5AZaR3bE/zSwqJGHQOp4ezRqYnHit7FRhl05oLdbRxgBIMfJyJPD08pUgZn4AYRZ0F1g=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy5xolgFRJ+rwcC1+L95wwErfnFM8aW3B365uPEfFFJIRwOJuco
-	/duRP1eaxqnki5AYzb44XGdbkICdnbDgfHtqW3GhyexgyOuFkJivQ4QC
-X-Gm-Gg: ASbGncv4rM4bpYkCiX4FJWYBrgbqbsk/BJ14Z/P9PByCYPlfHWiTYRerguufZiu44PP
-	qMElcV74NIJfEm7NGSGUbdNLB58vvqRE4ycTq8HW4y8KsIaOhts6AsKFBgrcL7/fxJIbAZPUsxU
-	kmCNdjdsQhVZOs4t4gaaXFgTboPi3rDUT/ctK7GOqjL8UJcbQncO3NhhYYvu+2xAH/csKAF6Q4w
-	hB6o6ZB592zGxzJuaBFp4uTQXDBzLghK5YCrS3TSefMeBWq43wGeX0lxeCpfBeQGSkWu8Vg2sF+
-	EP+U73v5mlNUlrhppq4ER4T+D5SCAx/72CaOdUOY9+rP2p0VVzSM1fqf+oQvMu7wVnmfrzmvdP4
-	ZEOc+eLV/BJDVplRRJFRrf90L8mjiwYGncZX/qeslQiDY1I8jW3OklAcbE1vF2pLXe+wjI6M9fT
-	vvBZLLM3c=
-X-Google-Smtp-Source: AGHT+IErTAAJRpKGM3EAgdyPLEqWgtWj1uR/OhrGbW4M8r5Q7TITK6VbtIjGRAUja8HVJrzFFz1LOA==
-X-Received: by 2002:a17:907:2d9e:b0:ae0:df46:abd1 with SMTP id a640c23a62f3a-af9c1e07ce6mr57683466b.45.1754583662317;
-        Thu, 07 Aug 2025 09:21:02 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------GKNNIPSOQSz7Xh0KKKHrbF0A"
-Message-ID: <a664643e-bf54-4518-83f9-497d2b9351f9@gmail.com>
-Date: Thu, 7 Aug 2025 18:20:58 +0200
+        d=1e100.net; s=20230601; t=1754586678; x=1755191478;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4OP4xaE8pWnEnRqJ3aAsJLupQAdLmaGfhr4isia3Qz0=;
+        b=ZO+j5iIWMvFU9/ffE74PP5fwXxjaUJ4OYR3eAoBa0xQgNzhQHrSE9FGX6v2/u4nZuo
+         AtV231KqMhXa5Tca8w6sT96NrrTpJaiNZXAnxqmLq48sxeNac9NXZdE94t058ruG/1ku
+         YAe7kCg8xAx1QjQw7wmJsauoPatE63HajGUgH6pG2ctZeCVfqMMln4xRSP9AaUbJpJhd
+         jcJvX9Ga8iv5NxvRjtsCdiziKaMg+fuyQ3pKgcXJBhMtkvNuUT6AEpdIdqT0NfMER2ui
+         EYklnK6O9csBcv9kGzdCVGGVltmWtP88bEoQQZl68a6B8O+6Z8vpEEksmF74ijOxkmYu
+         t2Dg==
+X-Forwarded-Encrypted: i=1; AJvYcCX1aAmte3WUkyEXh69DYoH6+d0/M1LjC4aeAU1Y3SocmJ52JsW9qjZr3SPf2TtBLcAW4dcsuT4bypY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywz67nWNzoRK8o4vu4Snla+4DdKMEd2NGqGAY5amC8ZjGKTsQXA
+	le44E8PjkBOxht+WvEAX0vb6A/3JrP19fzZrM31WGq6zRhwty97fGpXgqo+4LypP8mo=
+X-Gm-Gg: ASbGncvKBLWai73p6vOa7EfMNxr5M/LJO48m0oYKyFOJk1LypjEU/ghnMfXvmtiPUoP
+	aWnj7Jg7IW6L0ZG9dQU/CaT2StBgGryuGt0E5Ai63CKgSCxfPWl1hBWKl+k/xK9OBZuHXuo7VJW
+	aw/0tbs5Q59FxBvSP5tvkfx7h+mm3NMjDvKPocLaB3TyvRXyTFy12RtcyPFf3RQWaLLR4Zx23wW
+	p+9/svvaJ9cB34BEVYEBCxtWJoCCIJZSPZkgiN0i8LSUjux1nFyCROf/rjh2JOSbNP3gtRJmJ0R
+	Pkreaw8wo03zkE906c4rnZyNj+S/oMGB8Jf7ClRcs1ZxfrzdnFdFNr5rEJscss01skMdFO72uKQ
+	vvKtQ8wIbzZYjBxX8AZofSH54RKVzeVa5ofjLCzw6tda7j5Lcye/DR6ZmQXn6d+ptBbAyvjqhqt
+	Uf63w=
+X-Google-Smtp-Source: AGHT+IEZPh43FidO1yNL2Q2uUuwwl2jQnV0BpEKn/o44jLPU92K1IxRmbLPWw1fhS84c4fFQq5ymBg==
+X-Received: by 2002:a05:600c:19cf:b0:458:bfe1:4a82 with SMTP id 5b1f17b1804b1-459f43a3fcdmr3767005e9.16.1754586677648;
+        Thu, 07 Aug 2025 10:11:17 -0700 (PDT)
+Message-ID: <a0b6abb8-02d6-4748-9382-bea1b590dc6f@citrix.com>
+Date: Thu, 7 Aug 2025 18:11:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Xen 4.21 Development Update [June-July]
-To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>,
- "committers@xenproject.org" <committers@xenproject.org>
-Cc: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
- Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
- Mykyta Poturai <Mykyta_Poturai@epam.com>, Juergen Gross <jgross@suse.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Luca Fancellu <luca.fancellu@arm.com>, "Jason Andryuk,"
- <jason.andryuk@amd.com>, Sergii Dmytruk <sergii.dmytruk@3mdeb.com>,
- "Penny Zheng," <Penny.Zheng@amd.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki=2C?=
- <marmarek@invisiblethingslab.com>, Roger Pau Monne <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, dmkhn@proton.me,
- Mykola Kvach <xakep.amatop@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Grygorii Strashko <gragst.linux@gmail.com>,
- Alejandro Vallejo <agarciav@amd.com>,
- Community Manager <community.manager@xenproject.org>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <ae2c2e35-72df-40ed-bffe-391f3c11b826@gmail.com>
- <242a93cf-20f7-4fcd-8eef-6945af5d864c@suse.com>
- <03a1d0b8-facd-4c02-97c6-45fa694da0b6@gmail.com>
- <f07b7bf9-8e9a-49b6-824e-0c3b346bebd2@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f07b7bf9-8e9a-49b6-824e-0c3b346bebd2@suse.com>
-
-This is a multi-part message in MIME format.
---------------GKNNIPSOQSz7Xh0KKKHrbF0A
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH 2/2] x86/mm: correct PG_log_dirty definition
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Penny Zheng <Penny.Zheng@amd.com>
+References: <c506f225-0993-4ef3-9e7e-60b8f17c872e@suse.com>
+ <65e27b35-9256-4ab0-966a-c50a18900ba5@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <65e27b35-9256-4ab0-966a-c50a18900ba5@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+On 05/08/2025 8:59 am, Jan Beulich wrote:
+> While it is correct that in shim-exclusive mode log-dirty handling is
+> all unreachable code, the present conditional still isn't correct: In a
+> HVM=n and SHADOW_PAGING=n configuration log-dirty code also is all
+> unreachable (and hence violating Misra rule 2.1).
+>
+> As we're aiming at moving away from special casing PV_SHIM_EXCLUSIVE=y,
+> don't retain that part of the conditional.
+>
+> Because of hypercall-defs.c we need to carry out the dependency by
+> introducing a new auxiliary PAGING control.
+>
+> Since compiling out mm/paging.c altogether would entail further changes,
+> merely conditionalize the one function in there (paging_enable()) which
+> would otherwise remain unreachable (Misra rule 2.1 again) when PAGING=n.
+>
+> Fixes: 23d4e0d17b76 ("x86/shim: fix build with PV_SHIM_EXCLUSIVE and SHADOW_PAGING")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-On 8/6/25 10:12 AM, Jan Beulich wrote:
-> On 06.08.2025 09:45, Oleksii Kurochko wrote:
->> On 8/6/25 8:05 AM, Jan Beulich wrote:
->>> Overall: There are very many items on this list, and it seems entirely clear to
->>> me that not all of them will make it. I think it would be quite helpful to strip
->>> down the set for 4.21 to some realistic subset. Maybe something to discuss on
->>> the community call later today?
->> Good point, lets discuss that tomorrow during the community call.
-> Oh, right, it's only Wednesday today.
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-I had the Xen Community Call marked at 6 PM in my calendar, so I missed it as
-it actually took place at 15:00... I'm not sure if a recording is available
-somewhere, but based on the notes:
-     Call for major work items for 4.21 or 4.22
-         Please make yourself known if you are intending to work on major items
-         PDX compression.
-         FRED, AVX10, APX, and AMX support (x86)
-         Host UEFI Secure Boot
-         FF-A 1.2 Support (Arm)
+> ---
+> Of course PAGING is at risk of being confused with MEM_PAGING. It not
+> having a prompt, I hope that's tolerable, as I can't really think of a
+> better name.
 
-I completely agree with the first point — it would be great to receive feedback
-from the authors of major patch series, similar to how the team at EPAM does.
+Honestly, PAGING is a bad name start with.  While it is to do with the
+handling of pages, it is specifically not what people think of when
+using the term paging.
 
-As for the other items, I assume this is a list of major work items that are
-likely to slip to 4.22, correct? From the looks of it, PDX compression and
-FRED-related work might still make it into 4.21.
+Hence why we've got MEM_PAGING too, which is referring to what most
+people think of when told the name paging.
 
-I also wanted to ask this during the call, but since I missed it,
-I’ll ask here instead:
-What should be the criteria for continuing to track a patch series?
-It seems that the best approach would be to rely on feedback from the series'
-author. However, obtaining that feedback can be challenging. So perhaps the
-only practical solution is to keep tracking major items throughout the current
-release cycle and drop them at the start of the next cycle if no activity has
-taken place.
+I don't have a better suggestion, given the current codebase, but I'm
+open to suggestions.
 
-P.S.: Andrew, could you please provide a list for FRED connected patch series,
-I am tracking some of them, but wanted to be sure that I'm tracking all of them.
-Thanks in advance.
-
-~ Oleksii
-
---------------GKNNIPSOQSz7Xh0KKKHrbF0A
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 8/6/25 10:12 AM, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:f07b7bf9-8e9a-49b6-824e-0c3b346bebd2@suse.com">
-      <pre wrap="" class="moz-quote-pre">On 06.08.2025 09:45, Oleksii Kurochko wrote:
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">On 8/6/25 8:05 AM, Jan Beulich wrote:
-</pre>
-        <blockquote type="cite">
-          <pre wrap="" class="moz-quote-pre">Overall: There are very many items on this list, and it seems entirely clear to
-me that not all of them will make it. I think it would be quite helpful to strip
-down the set for 4.21 to some realistic subset. Maybe something to discuss on
-the community call later today?
-</pre>
-        </blockquote>
-        <pre wrap="" class="moz-quote-pre">
-Good point, lets discuss that tomorrow during the community call.
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-Oh, right, it's only Wednesday today.</pre>
-    </blockquote>
-    <pre>I had the Xen Community Call marked at 6 PM in my calendar, so I missed it as
-it actually took place at 15:00... I'm not sure if a recording is available
-somewhere, but based on the notes:
-    Call for major work items for 4.21 or 4.22
-        Please make yourself known if you are intending to work on major items
-        PDX compression.
-        FRED, AVX10, APX, and AMX support (x86)
-        Host UEFI Secure Boot
-        FF-A 1.2 Support (Arm)
-
-I completely agree with the first point — it would be great to receive feedback
-from the authors of major patch series, similar to how the team at EPAM does.
-
-As for the other items, I assume this is a list of major work items that are
-likely to slip to 4.22, correct? From the looks of it, PDX compression and
-FRED-related work might still make it into 4.21.
-
-I also wanted to ask this during the call, but since I missed it,
-I’ll ask here instead:
-What should be the criteria for continuing to track a patch series?
-It seems that the best approach would be to rely on feedback from the series'
-author. However, obtaining that feedback can be challenging. So perhaps the
-only practical solution is to keep tracking major items throughout the current
-release cycle and drop them at the start of the next cycle if no activity has
-taken place.
-
-P.S.: Andrew, could you please provide a list for FRED connected patch series,
-I am tracking some of them, but wanted to be sure that I'm tracking all of them.
-Thanks in advance.
-
-~ Oleksii</pre>
-  </body>
-</html>
-
---------------GKNNIPSOQSz7Xh0KKKHrbF0A--
+~Andrew
 
