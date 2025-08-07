@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904EDC87FCF
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 12:21:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1072918.1435848 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 445CAC87FCA
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 12:33:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1072927.1435869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujzcZ-000818-Ry; Thu, 07 Aug 2025 12:21:23 +0000
+	id 1ujzoR-00020D-6r; Thu, 07 Aug 2025 12:33:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1072918.1435848; Thu, 07 Aug 2025 12:21:23 +0000
+Received: by outflank-mailman (output) from mailman id 1072927.1435869; Thu, 07 Aug 2025 12:33:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujzcZ-000811-PL; Thu, 07 Aug 2025 12:21:23 +0000
-Received: by outflank-mailman (input) for mailman id 1072918;
- Thu, 07 Aug 2025 12:21:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=igFk=2T=nvidia.com=jgg@srs-se1.protection.inumbo.net>)
- id 1ujzcY-00080v-El
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 12:21:22 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20613.outbound.protection.outlook.com
- [2a01:111:f403:2413::613])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0641461d-7389-11f0-a324-13f23c93f187;
- Thu, 07 Aug 2025 14:21:21 +0200 (CEST)
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by PH7PR12MB7017.namprd12.prod.outlook.com (2603:10b6:510:1b7::15)
- with Microsoft SMTP Server (version=TLS1_2,
+	id 1ujzoR-000203-3w; Thu, 07 Aug 2025 12:33:39 +0000
+Received: by outflank-mailman (input) for mailman id 1072927;
+ Thu, 07 Aug 2025 12:33:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SGIa=2T=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
+ id 1ujzoP-0001m4-Hz
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 12:33:37 +0000
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [2a01:111:f403:c201::6])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bcda59af-738a-11f0-b898-0df219b8e170;
+ Thu, 07 Aug 2025 14:33:36 +0200 (CEST)
+Received: from GV2PR03MB8678.eurprd03.prod.outlook.com (2603:10a6:150:7d::13)
+ by PR3PR03MB6425.eurprd03.prod.outlook.com (2603:10a6:102:75::5) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.21; Thu, 7 Aug
- 2025 12:21:16 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.9009.017; Thu, 7 Aug 2025
- 12:21:16 +0000
+ 2025 12:33:31 +0000
+Received: from GV2PR03MB8678.eurprd03.prod.outlook.com
+ ([fe80::4eb:3e7b:1ffa:25f9]) by GV2PR03MB8678.eurprd03.prod.outlook.com
+ ([fe80::4eb:3e7b:1ffa:25f9%6]) with mapi id 15.20.9009.013; Thu, 7 Aug 2025
+ 12:33:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,201 +49,330 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0641461d-7389-11f0-a324-13f23c93f187
+X-Inumbo-ID: bcda59af-738a-11f0-b898-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IEnBLU6Fn+bvJuFhXrDOfeHZfZZJoQUlnjFqSU03DmEaY9Yg1dFXTziUDvd/KWouXotCCxOmhxm0KA4hRUofvg7E0TGwICjC2YD/taZ0W5TziXaOIHDbqvjbm1a5AypxMBpknPjxcTrgi9oQS1+Xq4UO5BXlILBEwR/dumMdLmVtAvleshemuIAw8HiOMw1TB3PpbXYyA1ASxPQNUsx6utSMluw8LtvxV2hbzLXjDahxr8QqIDzKBKDOYifIDni01kVBzAgH7uuZ8iDzAoOkc290QmgVBrGpn0yE1Z/bJtlag4IDf2e0d7//imy72cj+VSnuCmoBQRkVlngN9wsWyg==
+ b=GsAt98nWPiu7Kl83rRVH74UqFRGYcqeT7ph12IL61gVIrPg/q8OGWBmEuzVP+u49Kt/6gNWKy4ly9eeP8n94tc4yO42EMxgJqpcvU4XlazWph1JiOZN1y4iJbfqzS+Kc57Oi9SwGs00Dt4wnIz06dHfWZ3TpLBLpwFUvURZ9yVwRoAqf1kt5+3uuVEiHiGfX4UM67Z+zdhVx1BTNyISv8W5cIJ8UrRxg5Hsbgq7HLLmwlJ1wtkl1jOLZIcl0H/uOjm29eQT3QutuIrS1fmbwkNVkEhNT6HQJuB/gx3UXB97AzJ0R5ukTWuKFk2ES7KpoiqEfb2qp0mEa4w7Dxr/aqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iIwrg5hZVD9n+qTLo0PvHeRDi9M5OxJeYXC5xQMGF9Q=;
- b=iwE/xLTfCyrC8ee1vw4uEG+h34Wn34VeltBaXYu0i2R1gGo9E+A164UBEkCPjYt50rregiXdeh0ja+goDDZ6BiAaUqe/mDjdNl0UQR/M81wN9t899qhRS6KFPNRDVxHnxOYLWMp+InYZ0b8bAopRHOKt7PywTQ63lCxXQBCKkofpy8ooKCYQ9MH8FH8B6G3srzOKf4JVyw9xMQslbXDy+YL/9F1L5UTjI0R0cVkhiHYQzggro9YNqOyXwuFdN9vjsfF+9F3t3uF6tDwgXC51K2O5hcaGOQzDKrAF/8BkQaEV7Y1s6+u9s5ku2+vpT6hS1xAlxSWne/hWbBxGI7xDYQ==
+ bh=lC6NDosY+1Aunr9L72guv4I+Ysx9FQyAJ4/28AnhYr8=;
+ b=qzbUXEQHatSLfIkr+H9s6uLSRrmtN5VcaybRu3J/Lwc3UGATwXCLX/Onobf6cz2bvp7M49uZc8F7Y+zI0Eg6UPyjuM+mwmNcqkA7T37vjf7+BRfFL8SaMyYJi3BDKdJCKjI92JL9RKP6KlrKHSS7qK2C6zAEfNdvWbQK1q/1fP40NmcbSCVGi7IqqH4CzZLHCnJ24j93/r8Tofs6tYjI/j5StEjjbRc5JUINOgd8k/h/6SrtBFVQk3hE5zi0suHPZF/GBhrmTXp5cMthHJQSwuQJ1KKMIr9GHZxXHJyCAJUwKVmADoZ4VXSItT6CKoAEqgAWS2p9hOBgXd3pbgFsfA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iIwrg5hZVD9n+qTLo0PvHeRDi9M5OxJeYXC5xQMGF9Q=;
- b=DQup7Rl0SVcoF8re1dFsAIxpcqxYBz+VV52Wxy9CvxRu+neaYypZvKmLsdkFX+t6NJsZ6gSkfMpflsPcNTeB/VurId3edfAI/TRLW+ByvbbBEXjsau9BTNu2OFQWk9hopBCuvRQAyvG6Q259wTim1I/hoXxjEz3RhUOlK8Nvx3/cFUTvTPKG06ayE5i4MiBtL7AFOWCLkITJ3jx/fcM476LRWg1CuJxFQbwp9vNrIGoSRnNnJVI28EHxtqoJ20rofhOKxnpteT3ctRred52UfNO+hOH59kCsvavXhWy6iSZzr2g7TrgWvsivXHV+GVqHgMX30mI6YSP9rEqB5UwR+w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Date: Thu, 7 Aug 2025 09:21:15 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Leon Romanovsky <leon@kernel.org>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
-	Leon Romanovsky <leonro@nvidia.com>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Alexander Potapenko <glider@google.com>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>, Danilo Krummrich <dakr@kernel.org>,
-	iommu@lists.linux.dev, Jason Wang <jasowang@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>,
-	Jonathan Corbet <corbet@lwn.net>, Juergen Gross <jgross@suse.com>,
-	kasan-dev@googlegroups.com, Keith Busch <kbusch@kernel.org>,
-	linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	linux-nvme@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-	linux-trace-kernel@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>, rust-for-linux@vger.kernel.org,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev, Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v1 08/16] kmsan: convert kmsan_handle_dma to use physical
- addresses
-Message-ID: <20250807122115.GH184255@nvidia.com>
-References: <cover.1754292567.git.leon@kernel.org>
- <5b40377b621e49ff4107fa10646c828ccc94e53e.1754292567.git.leon@kernel.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5b40377b621e49ff4107fa10646c828ccc94e53e.1754292567.git.leon@kernel.org>
-X-ClientProxiedBy: YT4PR01CA0406.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:108::22) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+ bh=lC6NDosY+1Aunr9L72guv4I+Ysx9FQyAJ4/28AnhYr8=;
+ b=JAqVKG7jUDT98vRPMyldbDOzZOWAZFwiaXs+C8n8K5dmLyuLhlIjCCxj17+y2x5/mOsECKNFg5ELqG5OzwNbmRqVBR8rMNJNm8x8E6gzm+jNIzZcfTMosyO+rGKFz99lDGPZ45+QQeNgSymDLIDJLKtmekA93Y6wm5lvfemx6EfNI7bdzp8UUEtFM33GYWs6ZWnoe6+MMtGvzb63sc7zjuIcufdKwAy6ngVTygGplc2ZMsFxJCd2jhzFQjE7Q5pgRgUF45wOdhbHvDOMfW8bfMJwxmGDSYObWoLAZXpFEG/dp0gHPmgNmt1QJvU7cgRn7vbl9YTdHG35jFNwt9IUFw==
+From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 01/10] xen/arm: gicv3: refactor obtaining GIC addresses for
+ common operations
+Thread-Topic: [PATCH v2 01/10] xen/arm: gicv3: refactor obtaining GIC
+ addresses for common operations
+Thread-Index: AQHcB5d7cCAQRdJCgUKSzBGsZt4ytQ==
+Date: Thu, 7 Aug 2025 12:33:30 +0000
+Message-ID:
+ <7e6477a83ab65220ef1c5dd22f4ef3536fbbdd5c.1754568795.git.leonid_komarianskyi@epam.com>
+References: <cover.1754514206.git.leonid_komarianskyi@epam.com>
+In-Reply-To: <cover.1754514206.git.leonid_komarianskyi@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV2PR03MB8678:EE_|PR3PR03MB6425:EE_
+x-ms-office365-filtering-correlation-id: a40d14e3-b1c0-4bbb-9dc8-08ddd5ae9e2e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?OAPemSOAQKLw/kC1zBnwQA8odemZ4JJZ0k+vxKIDHAw/FIUDWE7U69Yopu?=
+ =?iso-8859-1?Q?Ac0FDFszXpBdK9gxxA9e7+zye63sBolQ/WnuUSnsbSaVbnOrP51YuydKGS?=
+ =?iso-8859-1?Q?pB1GSA1/cZU4IrJ6CqrRwL8EBwJa69pS+wMamf9DYBFbhUe0RdWm+Nvsv6?=
+ =?iso-8859-1?Q?16P/H1zgVmW1F6iGqcXwfkGieHyo/VWRNKHQJr84iuHxT8sKvvTqYbJvXK?=
+ =?iso-8859-1?Q?Ot445fXnDRGkj15u0+Cg4ezK1EmHKelzmCksS07qi5sHH0iLvF1VLOcm4p?=
+ =?iso-8859-1?Q?ul8R1jM6RLf2jS/upkwSZ7bACGzmmdTE0Ckyq8iIynWJgSCZFr7VC/2poA?=
+ =?iso-8859-1?Q?ZSLo4Ko2guBkLNARcD78Ocm6Ub3dNLGLrmE+c+7sCpGxJiMaV98KmdRRR7?=
+ =?iso-8859-1?Q?IZlkG/1oNFWE+yxFjZx58nLPMP/rhm1/SskzR/Dt+GNJWvz8Ma91W/eKVZ?=
+ =?iso-8859-1?Q?uWIXE60j7fZXwIRqCX8Mf98Eq0FlATp5kbowLisWrd5qrit9SZ0ail+pr7?=
+ =?iso-8859-1?Q?O0lxFBUcKxdbzuYK6WvMh1ShlHDAafdoawaw+wgrcoMpGzrQ1i6tiznk9m?=
+ =?iso-8859-1?Q?smtbwbDwZuMcXL38Ylol9Q6lpRO7N+iPzshL8lCRw77HUsRWb7DKIo+iCl?=
+ =?iso-8859-1?Q?S+OJZNLUr4AJJP9f7KUSm3MYrpQnzchl4JWcie8npT8UGi4Ek5aAKx6Tuu?=
+ =?iso-8859-1?Q?xpqKMjUv3zh/arrWnqSv+BvTjAe5I1EwWctm0jHGs1itfex8pJOMGyJJzm?=
+ =?iso-8859-1?Q?ts4/amVvoQR3Q9qqAdGzJEVyddKe8cdwbDpxE+4pypyyLq5ctI1jcYzUk3?=
+ =?iso-8859-1?Q?gCHWTEAEsliIODFtjsYBoSfKHHsCoY2rPTIft2HrgIsR4CDzJV6FL+IkHx?=
+ =?iso-8859-1?Q?KsvTFfvO5hflibtla53qMUUpmgdgOG44kGPyu548IKT8M8aJPYClxLKkFN?=
+ =?iso-8859-1?Q?YFIfquhx+NbLkTqulKvTjgaJFNEh2GsqeHgT2hVTtaAhqWXRiHmbSzayr0?=
+ =?iso-8859-1?Q?vsF5VBNv82TLRXQlYA/gvdO7Wg7/dhDS5oEOZQ14PW9l9ThUErqoSoflja?=
+ =?iso-8859-1?Q?LBQQasnKhlfBllScRXCmN4qETpqEzEFGR/qCYUDFFmKHpMn+nuWWIpI7gk?=
+ =?iso-8859-1?Q?q9xIyzcHLUFs5Rgu2GknLBQqMbwPpzRALDL6rO8/nXONp4/ezGTjH/whIw?=
+ =?iso-8859-1?Q?JPPBwQD3j7N/ghjmEiZ9AkINmyYW93MhjWa0chS4Tw/7HVqSobHeH4dZcj?=
+ =?iso-8859-1?Q?yvNV4PUiutM8hpkrN7ShGlcvnxjR2VYwL3TdhkkjzAbMKxoikPp5ruhdDD?=
+ =?iso-8859-1?Q?9Y8rtSXoOr+qyH0gmDsdyAEHwhK7zgkXE1Cs11UN/uWw2nJieM6rXUnJba?=
+ =?iso-8859-1?Q?wz5zHFjvn8S0MauQ8v/Q+wyPB93q3RLtfzatDKkgF6M9/m7GrVi9q2vKsf?=
+ =?iso-8859-1?Q?uLzVZA6v7h6TyIeROzGt8eBZx/LOQyRn8V+GWEwCyfj5cJXPiXH3K3H/k9?=
+ =?iso-8859-1?Q?CO8ciqy36wvW00ppx3+BgZN/nv1l9Fmq3miw40XBh+JQ=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR03MB8678.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?yNPYo59HXGWNf+ApFkNAGZBJ+flHmCVjgdPkmb2UTkG6mzYOb58LZRM0ia?=
+ =?iso-8859-1?Q?gJqCztJsRCK4I43mHnitglT6DHCpJkdj4Pq/hMzzaDDm5vsy8EnSH4fGVV?=
+ =?iso-8859-1?Q?p8wkZBM9XEkoWRHOZPQtIfoCizqyTf/gz66KZ4uGgwWAtf5eK/lKdbM6/s?=
+ =?iso-8859-1?Q?e+w6Jm0F7F3FZ+dPDoK8Rm/bFozyVrgizm0L5vmaCsCP9wHtAIuPoTOeGr?=
+ =?iso-8859-1?Q?xqvkQEtL5UQkjD6ecLPGBAJNmlwt1It+ncR4NTdSjo2lqRqtg13+wUkaFe?=
+ =?iso-8859-1?Q?qNW6ZffckJsz40vU/uuVzDJprY4li9xNaYSFOatlZEC8+lDpS+mvxR+bse?=
+ =?iso-8859-1?Q?bd2Dgv4LNOShH5OCzpbN6YTn2YrEMlTxDuzV5T1eoKdsMKKhjn1bT4XUqg?=
+ =?iso-8859-1?Q?1eZBN1jSWqeAUSHeQhCS1E9yBXKIZs7JnyGRoCmGFLQnGglSyU6u0zpzHw?=
+ =?iso-8859-1?Q?jpCT6grWdcvHJgviVffbQVUh8pBOmoUfAxVvQJP/iDx81ctZcvJk5hrAZK?=
+ =?iso-8859-1?Q?TvAaP4pCK/ZzwyQzR3u8UUsVHTWkJOyJcnOXc3YMFyq2t/gqD/b8Cra2Iq?=
+ =?iso-8859-1?Q?qbHKEQxe/WSUZVHUwluTEypK1Tx1qE7F3jnVPIb/4ioeSi9wNCTnC39h76?=
+ =?iso-8859-1?Q?qmmyz6mP0yOKPT+DgpvRMkDQ0A4hipDQA7S+W4WNzuHjWO/t7Utgsl03tY?=
+ =?iso-8859-1?Q?Jc5zXZdJ5ngQza8BPFFWPtYRkjpub3dJRSWdNZPQFtjNvabMXNpG8z1hOl?=
+ =?iso-8859-1?Q?QUvFuJdXggmxBEbeNYfJGC9DvVIXryzg+tJ0269xZk1Yjxiv/f6o3vDYXu?=
+ =?iso-8859-1?Q?m4Gt6NfPbnxRUHp5NSFmfVvL8Cj4PwjiiJZmNdQjRxDp2DePbWC9SyWs50?=
+ =?iso-8859-1?Q?UrghO1GjdQkBwg2OAPgYasJ6ObifRUc0QHTot97WrRAANAg57IdFnW/Bns?=
+ =?iso-8859-1?Q?QcbxW2vjOK0vbpmQxhqotx/9NPb6XSEqOz9KhyIbjQ/BW7h8uHrSFxj5my?=
+ =?iso-8859-1?Q?WVzaXhPMJNk7+kLlCNOCVOQPaTwWtQezFacx7H73f9lcRqmj8oOSZcE6mY?=
+ =?iso-8859-1?Q?8EHVn2iIVCW5BCy/smnBCEHBd8d4bjhCfB0vzZhJLv4dgdb5mfNvRkd7Db?=
+ =?iso-8859-1?Q?kALpr/VrmjCGTV67u/RTJKzDKfPaPN/pV7susk+/7NEixMjgyvUP2wuA1o?=
+ =?iso-8859-1?Q?IEQHMHSdCG3sCV8rkaBvn1S0Li2HX1mzWyuq3+e/hoSNBE/IHUUh3EFZyo?=
+ =?iso-8859-1?Q?+kFoA1LCZdtscEPvxTJNdDrB4AayS9RSPyFg7xatqFa1oHYVsN18MkznIF?=
+ =?iso-8859-1?Q?OmC8raahfk3SNsjeGJpceMqUQEmBMelcADdQjFIhPeIEAqSRKkVXAO78Tc?=
+ =?iso-8859-1?Q?oc+I5GKfYGl9jWpk0j9u8Dgs23MhAtTA+v6+bwI6y6sddlKVjFNhYKL979?=
+ =?iso-8859-1?Q?vH8T7BskOXhNLhT/ZshHLghpK9irXcwBy5hJIseTAufWo8RSgbmyQ2HogT?=
+ =?iso-8859-1?Q?0F8EmO5SDKsP+6HhaxQ3QzAkADpRvU2p4OjmQNt/TSJ1biWKbDPiAAz7Po?=
+ =?iso-8859-1?Q?Z3E+ILD/X/V9AfdeocTVP/lv9mizmVPT0P3JnZjXIS8fcqU19rxNppPunr?=
+ =?iso-8859-1?Q?quLPymKqA6UAizVICMG/00N9v0lY7RWPj0iGH7kWy3svxuNi3tLdi+AbP4?=
+ =?iso-8859-1?Q?H2atsCJuJtjAvIElJog=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|PH7PR12MB7017:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59e07372-234c-40d3-7ecb-08ddd5ace814
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?QcmCtkqecLuYtDCnDoRlhvSKgTT5O7jY9fB7njAfEKgRuCXn50LnrysE5XVh?=
- =?us-ascii?Q?HHHAN7z4/J5xvUWNAd3tJhECZcp7Ql+pgNOvcReDfVhuleC4cKTABMpRRtoh?=
- =?us-ascii?Q?aY3QpyTNWixXI0gB/Y4bf1i1lT8HgfkH22q3+mhuQjKup1cVCn6hVl1BZwTM?=
- =?us-ascii?Q?mQpTYRAobaFMQ+OieoSqdQ+Lxj/3WOZ5z1/Gf2LnPEJ2GRKDAbWCU3iM0ud8?=
- =?us-ascii?Q?YC8EqhMwZSSB/3PBhrlTUGKhsNGF8BD/w4jfVA9l6wu/Uk86IG6ge7vWCFyo?=
- =?us-ascii?Q?kys6scYUZbPmGVPGrvywN0OU0G9R7C8fFpcYWMS0mwqVs7RJUMf2j43gIgjb?=
- =?us-ascii?Q?1fkWj8FpnK4bqhJ6pM20nVi0Dt7MNeF0YXVC6YN3C7G4+tfDc+/0gbvqF0Hf?=
- =?us-ascii?Q?usdP28UmpouMZ+UBUtbvL5o+J9Jj6e7EqtPy7C3deVPbXbtBcEveSdekYWWp?=
- =?us-ascii?Q?eaBvTB72MXmZ0735k5aAjIQ8fovIiJhhQejPXveYmqemQduWz25ThPoM1eqZ?=
- =?us-ascii?Q?hvUfKNSh3d21kWNdIOJMdt4WJ0MVo8r+zlHv62h2e2nTLgea8irXlEXv99+t?=
- =?us-ascii?Q?9abB1hQHhLLE9Tfh2wR7W3Hv4Y5lDpziV0LihEpXZevtAXNlboY+/0zE57IU?=
- =?us-ascii?Q?eXAFXMryprJkz0Obz9A0FVlXqO7sNxgYzuodXDJwyagnQSPjhduZXH6990zv?=
- =?us-ascii?Q?A+EYPTlyDjqoZ7HLgtD5T5J9C8MG72WhF0RuUZ7lA0rRbCDq0JZIeEWucW5V?=
- =?us-ascii?Q?Nui9RZGHtiFjRBW4RPuPXgXYypDKxdIwo5LThSu18WEPH6ps/qKfmDYuhW4L?=
- =?us-ascii?Q?6ZMnKQFL3GSt7CUeR26oVB9QFDDPOl/8kKyQivG6jF1zRVwRx995/P4nDTpF?=
- =?us-ascii?Q?bc6sVQoQedRLp3XQ+lU4t3UMcQUXd/b+fvekmRIAzNfKiyGTRfyAp62p89e2?=
- =?us-ascii?Q?7GK5Fu/VExPANjI47G36RPW0wJib+9pK+2+trRdzfYAVg30PXQEVXXXJtfhR?=
- =?us-ascii?Q?TngMZsI9z808iwIf65gqVo6z+OnVmGE+VyNH29KQrQxEylaWxnnfsPvCa+dY?=
- =?us-ascii?Q?xr65GLLJ6QJPeptcsV2b1pN3feRXI/KS4MRmpbV7S+7SeriXKufdylnQ0np5?=
- =?us-ascii?Q?wT4DGlcCFyqgN67yx2P0pHr31Rr6xVoHlhz512Q7+gLbRoRtEQXwCa8vWE0G?=
- =?us-ascii?Q?RJjmlFkvOlyEIUtxEsuQ5PpEzFd+k421rblnu+aj8YpKBCxVDbDzZxTrqvZ/?=
- =?us-ascii?Q?UK2nUKn6Wr2rC3kP2pJZ0D4D2wM0vgGYWhXl16x6dEh/DWhyd/7bOhqKnbKa?=
- =?us-ascii?Q?VNx7NF7SvFys0FhkSckJWJ4fbB6HvKOfE9kd8h4YHoZ2g1ofRjy+wSp3vrL6?=
- =?us-ascii?Q?RxlnheXz0ZYQJjEeRGoG3MIG8njgEYIwj4HY9Pap/obbXlLpfoBKGKw5lLH0?=
- =?us-ascii?Q?pWbcsn5FYYQ=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Pc3vrtdK7uQ3bBQh4HJXdZhAoMLJBbNO+o6b6SQK7JlS0PAL+ZySFf4fmVdb?=
- =?us-ascii?Q?mIfceakcMfVDPHrfP45m4OdncIOaahvpJDFi6KaQUZtVPWJHpIS/+AdiZ2wh?=
- =?us-ascii?Q?9Q2/0qvT3Hmnvhwy2IhfV6Kpk5iVzD6zVFL/9u9FOb2bzU77MAoKSsLFWTH9?=
- =?us-ascii?Q?ZqKyce9MRdpe+RIaTD5blMdKNW/wIIlrtUNrkctASWqipNngYLPc0h8xIct6?=
- =?us-ascii?Q?fV1b8QUAI7TEqblWMxtKN52Vw4lshjLvTsnYS1/fupCu9PQzHyzdmc7BMag/?=
- =?us-ascii?Q?9USsKZAU+mpsX9xyjtf1piM1pDFFYZBGzPppZl9HrgnKeQNcSf/tQpG5OVK3?=
- =?us-ascii?Q?p4kAkYoFaMt/n+ktLk7aKmt47wM9YYjxIhNp5pEd4xHC3EfLwljN3wRqvJ50?=
- =?us-ascii?Q?EXJjKlCI/PJ6iL6IM8I3PoxGPy1I4I/aWl+oz7JH5Pc/o73gOlCL/NelVW4J?=
- =?us-ascii?Q?vR5M9oaGlp1c4HGfhB4uPSMXRASguqiRAhlCMFxGHSpaF8eFzv/K93QZ+W2h?=
- =?us-ascii?Q?mPLhw8Nae/i12HukegIW/6hQDtyd3Xa76UsmmJWTF1hL+NMt0s3ehRtfnulL?=
- =?us-ascii?Q?/mWRDfidY3adfRrJ907pVXv7U9bY7Stcz6kr4LwpeiYUZ2In36hPj22VsY+V?=
- =?us-ascii?Q?+GfoOWGYYmaE5XwMZYD1qLBrK6CIe2bNHmA727jh+sjvPWLG7f+ZZ3GN559Z?=
- =?us-ascii?Q?jYdEBUb1etxVXR46PCFUJ4fHOSV1glLwUmqpkJ0Py15dbLxyYAZh93o2Iz1K?=
- =?us-ascii?Q?xpPllA29goRc3asGj8wfcdb0rQ7YLFCFo3rBMIoBJCsSaQYphu2eqFETyMjA?=
- =?us-ascii?Q?+QkoLVY8A33MyqAB1Iw0tsxu8b+xtrwmr1hxZHMzJyWooM7TdUaSDRkY7lZD?=
- =?us-ascii?Q?FAgXFW9f8wKN51QniBbbgDXkKECwNCXwMu3zH/FFqpQq0C9MiGhECUySmL0o?=
- =?us-ascii?Q?UhMPaQSlMgKqJm+aqgTyGXBDX8mTGT115vrv49BVv5pm6F0atvp4UpzP+nIu?=
- =?us-ascii?Q?q9YHaZYPAXY5q3fln1otyE6eZ9w+u+pdrCDj1yqm1fvNC9jMRfs/vD3IvjdD?=
- =?us-ascii?Q?AkxPl0GL2pZjdEQihDiiY25or1gYy1d+an+dG+QLiHqa4UQ/XBaIvocRDJ3g?=
- =?us-ascii?Q?YdUQgpoSERS7ydpHFp2ccuOJ6JEBUU0/jK7BN1HNQFapRgSsQn38Cuh8nZqQ?=
- =?us-ascii?Q?6p+AreHWoxfwdlexNCoF3YxozoqVWr0am8wJbLzVAZ49RdRgrZygj1JY5v0V?=
- =?us-ascii?Q?B4xCyWa9sLxVoivN8PL2coCjhGr/mi49MWlHpa2W5fejSdZFUhWsWXgfOqJC?=
- =?us-ascii?Q?S4iIvnAXHxWF3bWS2PCpJz7OXmmnsg9IgaSwXrgG0M+eZDZc16V8JpcCO2mq?=
- =?us-ascii?Q?UFnD6SqIs6zN9IqGVGwtUp9tdG//QjZQGA/RH+6hKwFCsumcaMWK6lT3Wo5D?=
- =?us-ascii?Q?9hjlxhWz6r0yvZ8JevHtLQ/0kVB0fUqbPpmV2aIQq9VgY1o1Fc8/x6h4KltS?=
- =?us-ascii?Q?2r8lBtj8ktp7EwM5dokDtJNHLfRfLiefxas8cMFz3Q2Uxigb/bfiMpCa3Zui?=
- =?us-ascii?Q?mY6Q9aoX7ek+jFqDOXk=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59e07372-234c-40d3-7ecb-08ddd5ace814
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Aug 2025 12:21:16.3528
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR03MB8678.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a40d14e3-b1c0-4bbb-9dc8-08ddd5ae9e2e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 12:33:30.0211
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1JO8XjpfI+n/ktzlAxi3pKObP/UQ+HQjrheHHMFaNuRrOBpujcfgJK85cLbLXwHW
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7017
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tllMqS7TUtZKOu0ut61NobU5cx9wiFUPHHHQNaE+MMG8EVBjX84XD4HZ4Gz5Ll9XBik8oJKUp6hDW4ZNb5ngciw4ErZ9WH8RTzZxO6a5hUY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR03MB6425
 
-On Mon, Aug 04, 2025 at 03:42:42PM +0300, Leon Romanovsky wrote:
-> From: Leon Romanovsky <leonro@nvidia.com>
-> 
-> Convert the KMSAN DMA handling function from page-based to physical
-> address-based interface.
-> 
-> The refactoring renames kmsan_handle_dma() parameters from accepting
-> (struct page *page, size_t offset, size_t size) to (phys_addr_t phys,
-> size_t size). A PFN_VALID check is added to prevent KMSAN operations
-> on non-page memory, preventing from non struct page backed address,
-> 
-> As part of this change, support for highmem addresses is implemented
-> using kmap_local_page() to handle both lowmem and highmem regions
-> properly. All callers throughout the codebase are updated to use the
-> new phys_addr_t based interface.
+Currently, many common functions perform the same operations to calculate
+GIC register addresses. This patch consolidates the similar code into
+a separate helper function to improve maintainability and reduce duplicatio=
+n.
+This refactoring also simplifies the implementation of eSPI support in futu=
+re
+changes.
 
-Use the function Matthew pointed at kmap_local_pfn()
+Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
 
-Maybe introduce the kmap_local_phys() he suggested too.
+---
+Changes in V2:
+- no changes
+---
+ xen/arch/arm/gic-v3.c          | 99 ++++++++++++++++++++++------------
+ xen/arch/arm/include/asm/irq.h |  1 +
+ 2 files changed, 67 insertions(+), 33 deletions(-)
 
->  /* Helper function to handle DMA data transfers. */
-> -void kmsan_handle_dma(struct page *page, size_t offset, size_t size,
-> +void kmsan_handle_dma(phys_addr_t phys, size_t size,
->  		      enum dma_data_direction dir)
->  {
->  	u64 page_offset, to_go, addr;
-> +	struct page *page;
-> +	void *kaddr;
->  
-> -	if (PageHighMem(page))
-> +	if (!pfn_valid(PHYS_PFN(phys)))
->  		return;
-
-Not needed, the caller must pass in a phys that is kmap
-compatible. Maybe just leave a comment. FWIW today this is also not
-checking for P2P or DEVICE non-kmap struct pages either, so it should
-be fine without checks.
-
-> -	addr = (u64)page_address(page) + offset;
-> +
-> +	page = phys_to_page(phys);
-> +	page_offset = offset_in_page(phys);
-> +
->  	/*
->  	 * The kernel may occasionally give us adjacent DMA pages not belonging
->  	 * to the same allocation. Process them separately to avoid triggering
->  	 * internal KMSAN checks.
->  	 */
->  	while (size > 0) {
-> -		page_offset = offset_in_page(addr);
->  		to_go = min(PAGE_SIZE - page_offset, (u64)size);
-> +
-> +		if (PageHighMem(page))
-> +			/* Handle highmem pages using kmap */
-> +			kaddr = kmap_local_page(page);
-
-No need for the PageHighMem() - just always call kmap_local_pfn().
-
-I'd also propose that any debug/sanitizer checks that the passed phys
-is valid for kmap (eg pfn valid, not zone_device, etc) should be
-inside the kmap code.
-
-Jason
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index cd3e1acf79..8fd78aba44 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -445,17 +445,62 @@ static void gicv3_dump_state(const struct vcpu *v)
+     }
+ }
+=20
++static void __iomem *get_addr_by_offset(struct irq_desc *irqd, u32 offset)
++{
++    switch ( irqd->irq )
++    {
++    case 0 ... (NR_GIC_LOCAL_IRQS - 1):
++        switch ( offset )
++        {
++        case GICD_ISENABLER:
++        case GICD_ICENABLER:
++        case GICD_ISPENDR:
++        case GICD_ICPENDR:
++        case GICD_ISACTIVER:
++        case GICD_ICACTIVER:
++            return (GICD_RDIST_SGI_BASE + offset);
++        case GICD_ICFGR:
++            return (GICD_RDIST_SGI_BASE + GICR_ICFGR1);
++        case GICD_IPRIORITYR:
++            return (GICD_RDIST_SGI_BASE + GICR_IPRIORITYR0 + irqd->irq);
++        default:
++            break;
++        }
++    case NR_GIC_LOCAL_IRQS ... SPI_MAX_INTID:
++        switch ( offset )
++        {
++        case GICD_ISENABLER:
++        case GICD_ICENABLER:
++        case GICD_ISPENDR:
++        case GICD_ICPENDR:
++        case GICD_ISACTIVER:
++        case GICD_ICACTIVER:
++            return (GICD + offset + (irqd->irq / 32) * 4);
++        case GICD_ICFGR:
++            return (GICD + GICD_ICFGR + (irqd->irq / 16) * 4);
++        case GICD_IROUTER:
++            return (GICD + GICD_IROUTER + irqd->irq * 8);
++        case GICD_IPRIORITYR:
++            return (GICD + GICD_IPRIORITYR + irqd->irq);
++        default:
++            break;
++        }
++    default:
++        break;
++    }
++
++    /* Something went wrong, we shouldn't be able to reach here */
++    panic("Invalid offset 0x%x for IRQ#%d", offset, irqd->irq);
++
++    return NULL;
++}
++
+ static void gicv3_poke_irq(struct irq_desc *irqd, u32 offset, bool wait_fo=
+r_rwp)
+ {
+     u32 mask =3D 1U << (irqd->irq % 32);
+-    void __iomem *base;
+-
+-    if ( irqd->irq < NR_GIC_LOCAL_IRQS )
+-        base =3D GICD_RDIST_SGI_BASE;
+-    else
+-        base =3D GICD;
++    void __iomem *addr =3D get_addr_by_offset(irqd, offset);
+=20
+-    writel_relaxed(mask, base + offset + (irqd->irq / 32) * 4);
++    writel_relaxed(mask, addr);
+=20
+     if ( wait_for_rwp )
+         gicv3_wait_for_rwp(irqd->irq);
+@@ -463,15 +508,9 @@ static void gicv3_poke_irq(struct irq_desc *irqd, u32 =
+offset, bool wait_for_rwp)
+=20
+ static bool gicv3_peek_irq(struct irq_desc *irqd, u32 offset)
+ {
+-    void __iomem *base;
+-    unsigned int irq =3D irqd->irq;
+-
+-    if ( irq >=3D NR_GIC_LOCAL_IRQS)
+-        base =3D GICD + (irq / 32) * 4;
+-    else
+-        base =3D GICD_RDIST_SGI_BASE;
++    void __iomem *addr =3D get_addr_by_offset(irqd, offset);
+=20
+-    return !!(readl(base + offset) & (1U << (irq % 32)));
++    return !!(readl(addr) & (1U << (irqd->irq % 32)));
+ }
+=20
+ static void gicv3_unmask_irq(struct irq_desc *irqd)
+@@ -558,30 +597,26 @@ static inline uint64_t gicv3_mpidr_to_affinity(int cp=
+u)
+ static void gicv3_set_irq_type(struct irq_desc *desc, unsigned int type)
+ {
+     uint32_t cfg, actual, edgebit;
+-    void __iomem *base;
+-    unsigned int irq =3D desc->irq;
++    void __iomem *addr;
+=20
+     /* SGI's are always edge-triggered not need to call GICD_ICFGR0 */
+-    ASSERT(irq >=3D NR_GIC_SGI);
++    ASSERT(desc->irq >=3D NR_GIC_SGI);
+=20
+     spin_lock(&gicv3.lock);
+=20
+-    if ( irq >=3D NR_GIC_LOCAL_IRQS)
+-        base =3D GICD + GICD_ICFGR + (irq / 16) * 4;
+-    else
+-        base =3D GICD_RDIST_SGI_BASE + GICR_ICFGR1;
++    addr =3D get_addr_by_offset(desc, GICD_ICFGR);
+=20
+-    cfg =3D readl_relaxed(base);
++    cfg =3D readl_relaxed(addr);
+=20
+-    edgebit =3D 2u << (2 * (irq % 16));
++    edgebit =3D 2u << (2 * (desc->irq % 16));
+     if ( type & IRQ_TYPE_LEVEL_MASK )
+         cfg &=3D ~edgebit;
+     else if ( type & IRQ_TYPE_EDGE_BOTH )
+         cfg |=3D edgebit;
+=20
+-    writel_relaxed(cfg, base);
++    writel_relaxed(cfg, addr);
+=20
+-    actual =3D readl_relaxed(base);
++    actual =3D readl_relaxed(addr);
+     if ( ( cfg & edgebit ) ^ ( actual & edgebit ) )
+     {
+         printk(XENLOG_WARNING "GICv3: WARNING: "
+@@ -600,15 +635,12 @@ static void gicv3_set_irq_type(struct irq_desc *desc,=
+ unsigned int type)
+ static void gicv3_set_irq_priority(struct irq_desc *desc,
+                                    unsigned int priority)
+ {
+-    unsigned int irq =3D desc->irq;
++    void __iomem *addr;
+=20
+     spin_lock(&gicv3.lock);
+=20
+-    /* Set priority */
+-    if ( irq < NR_GIC_LOCAL_IRQS )
+-        writeb_relaxed(priority, GICD_RDIST_SGI_BASE + GICR_IPRIORITYR0 + =
+irq);
+-    else
+-        writeb_relaxed(priority, GICD + GICD_IPRIORITYR + irq);
++    addr =3D get_addr_by_offset(desc, GICD_IPRIORITYR);
++    writeb_relaxed(priority, addr);
+=20
+     spin_unlock(&gicv3.lock);
+ }
+@@ -1273,6 +1305,7 @@ static void gicv3_irq_set_affinity(struct irq_desc *d=
+esc, const cpumask_t *mask)
+ {
+     unsigned int cpu;
+     uint64_t affinity;
++    void __iomem *addr =3D get_addr_by_offset(desc, GICD_IROUTER);
+=20
+     ASSERT(!cpumask_empty(mask));
+=20
+@@ -1284,7 +1317,7 @@ static void gicv3_irq_set_affinity(struct irq_desc *d=
+esc, const cpumask_t *mask)
+     affinity &=3D ~GICD_IROUTER_SPI_MODE_ANY;
+=20
+     if ( desc->irq >=3D NR_GIC_LOCAL_IRQS )
+-        writeq_relaxed_non_atomic(affinity, (GICD + GICD_IROUTER + desc->i=
+rq * 8));
++        writeq_relaxed_non_atomic(affinity, addr);
+=20
+     spin_unlock(&gicv3.lock);
+ }
+diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.=
+h
+index fce7e42a33..5bc6475eb4 100644
+--- a/xen/arch/arm/include/asm/irq.h
++++ b/xen/arch/arm/include/asm/irq.h
+@@ -29,6 +29,7 @@ struct arch_irq_desc {
+  */
+ #define NR_IRQS		1024
+=20
++#define SPI_MAX_INTID   1019
+ #define LPI_OFFSET      8192
+=20
+ /* LPIs are always numbered starting at 8192, so 0 is a good invalid case.=
+ */
+--=20
+2.34.1
 
