@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1270FCA0ECA
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:32:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1073361.1436451 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAD3CA0EC7
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:32:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1073331.1436309 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5PB-0004NB-Qx; Thu, 07 Aug 2025 18:31:57 +0000
+	id 1uk5Oy-0000pT-8v; Thu, 07 Aug 2025 18:31:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1073361.1436451; Thu, 07 Aug 2025 18:31:57 +0000
+Received: by outflank-mailman (output) from mailman id 1073331.1436309; Thu, 07 Aug 2025 18:31:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5PA-0004Eg-NC; Thu, 07 Aug 2025 18:31:56 +0000
-Received: by outflank-mailman (input) for mailman id 1073361;
- Thu, 07 Aug 2025 16:59:40 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uk5Ox-0000mk-W9; Thu, 07 Aug 2025 18:31:43 +0000
+Received: by outflank-mailman (input) for mailman id 1073331;
+ Thu, 07 Aug 2025 16:59:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5oaB=2T=epam.com=milan_djokic@srs-se1.protection.inumbo.net>)
- id 1uk3xs-00076W-4E
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 16:59:40 +0000
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c200::3])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e62dc112-73af-11f0-a324-13f23c93f187;
- Thu, 07 Aug 2025 18:59:36 +0200 (CEST)
+ id 1uk3xY-000773-I7
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 16:59:20 +0000
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c207::3])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id db45dece-73af-11f0-b898-0df219b8e170;
+ Thu, 07 Aug 2025 18:59:18 +0200 (CEST)
 Received: from PA4PR03MB7136.eurprd03.prod.outlook.com (2603:10a6:102:ea::23)
- by VI0PR03MB10757.eurprd03.prod.outlook.com (2603:10a6:800:267::10)
+ by AS8PR03MB7336.eurprd03.prod.outlook.com (2603:10a6:20b:2ec::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.21; Thu, 7 Aug
- 2025 16:59:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.16; Thu, 7 Aug
+ 2025 16:59:17 +0000
 Received: from PA4PR03MB7136.eurprd03.prod.outlook.com
  ([fe80::36fa:728b:e216:6f6f]) by PA4PR03MB7136.eurprd03.prod.outlook.com
  ([fe80::36fa:728b:e216:6f6f%6]) with mapi id 15.20.9009.013; Thu, 7 Aug 2025
- 16:59:31 +0000
+ 16:59:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,34 +49,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e62dc112-73af-11f0-a324-13f23c93f187
+X-Inumbo-ID: db45dece-73af-11f0-b898-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wg2eFhkhwYLhxWUBmc4QsNui7q9c/OA/fDw8StCRD9diilh7POY6NTIJQOhZbNaB30BoYCQeYspJDzKxtAxZ6jn8THb9AoJSM+BuU66XePT1bPqUNPJR9Gv+e7dAN6vRv7X/2WBA3lfN7aFxMfxVRXf0K6TFPjdKXVPhWkuF8YDDiU/RDljJvtmg76P8KQq7sATM0T11B3Cpaq1u4n4dV50NYDwGtsreaVHtjzqXNqnJLndWcfq6a0lApFGhLvrmcQb8kU6Ra1Zp4r/3puLSFbaa2ucvEwJn/YjmZ309ic+DL/wCenRpmsLT80VplGwfy3EiIPrX0lAuHkMEd3RSzg==
+ b=mjccd5ex3iHvEOrOc83veBjvKOmxBGUITWDSvCTHbQqMOyt5fgaNNaBo6nhTf8bRYrVXL5Qi6tgQeoPzt4dv/MZf8J1R2Y9lfiv0IpsSTvmIc+RCE38IPo0rDdkw+s4QtPNFJEdcCMu7fssFFLynNXUUX7gclXTY08+fDvFpeazdUMezk7ucvKhqlFWoxEg2wXgHQzz04GOjqra+5YJusLkZiaMooAlp6T0+8BYx/Uztc3cqt6rorgmV08rAu7UOZUQp0H+sJljk6sR/OsVFWT69a/2b6hMaq9Ag+yHF9b9XgqdWPl8XUhOJHSS4617bjwHK4lJCqm1CVhBgUG98zQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kD+Qf49VbgsplfZFP2D9e4GX39Tp6TJSZUfS2DxkCFc=;
- b=SPXQMz92stH3QPtQGqTvWC/vKsJ1HT6QOlhIrOKfY/4SpoqDrzQEyqWTBKPhNFaIfkOqK2CvXJAlzrzxl+MMF1HdSkTEHTy0SnEQGqidoWDhkMD/hO88wfRUyG3OqzPopmBuAP/0tGuxo+BX1SJGqm3cb1YMFJmSV2+MS4DZcCuNPDbhH46ViICVI+ANOGvMDcc4C7UxLCEoZA3chBphyXkg7EXMoHS8g2g62WA0ZCwWDJeoGAWmfK0e4J6z9/tEc3AaCarkR9/UfH9FbF2vLEVQhUb6txpHvuQYVo3Wqm2/iBEXC5Y1dMY8hhdZlAqEVwtnwWXVVYTpJg+49P7Y7w==
+ bh=xL00tNSF5yd9RoAGLx4Uq/x2+XNJeFpfg252zO6C4CE=;
+ b=kXPM8uYcF8eKZNmUIOP2ub02mP5Sk1RDCRg/EmRjcdmhgrw76OfDIjl/VsI2QVBVvCwPAqre8LWLFqZOXAAYnQJp340cfjUa2mngJ3PIHD7SByTHB/GCEA7xaerE+BmiJlHDzpuDC+dcJ2ESwtFkE3cBZJhTJalSBN0vfnBwPU9aCgE6YDOk2Otbh7IvLsQF/FISksfCO83Vq11k7BEyKYAcqOjRXXZnszt4jGA0w7Fr1sMXSbJ3SqxL3vNk7f52XsPVVuJyg3esxfvClS3egdETmRDOKxUPcLvtzFq3WLZo2372SakMPLZ3CMalxvDu8RSJ0jrzsWxdQyPVzMSrBQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kD+Qf49VbgsplfZFP2D9e4GX39Tp6TJSZUfS2DxkCFc=;
- b=pGA7RvPGZ6emma4SJd8AqFtXNm4KmN2GqETa13grdway6uWEjJB2hTBtHOCvnkChdKROrLYJjIwymE6LAtMaSv84f4csYUC7rkY/DEF5+i094LB+xPAIU08hazwD1nxMrPMLrttfrbiA1IsTPa3cKJpR6h44l4/ARYXtKK8WVT/7bD4kZEfHGEPEKWWAoI+V/SxyfVBBzeCmt0dVsmRTI+FbNvQQ+exoF6bmtWFbfBKnNzjiNdYvxhrueHcVbQ1ykVNv+REaicJZ1QYkDOX45UW3BBqCe/SoB4Dil0UtQ9HiO07Nyl1HLPnvrsVToMRL8UdXZ7GHWu1d2H0RPlvVLw==
+ bh=xL00tNSF5yd9RoAGLx4Uq/x2+XNJeFpfg252zO6C4CE=;
+ b=V6PmL7wNiwNIGljrVkqKqykoydvlrozb6qqyXVulM90womosuht5b7AoiPx850V2mnO2voE7avovuD9iFzEZEY2EDkf2cSGq9E37x8X79I2lhCcRQRufAAaBFWc+dKbtdgo2sNvMrThjFi2EHSQZmvtuKGvfDxzrRvcetqTnbPntPIdAb4BvA2MU4DBXI+BRegLoTMAKW6yg830z0Ncgpvn+niOCIVaa1cIICCUCvB0b+BP1wh4LkFIgV0lvjoVvc7JaEchnKE9HxNqcoINPG80iyypLul+dWmySg8yaaPvXFntnPr0lNSTxBif/yCURoSWEmAx4rmjiLWDzloE6Wg==
 From: Milan Djokic <milan_djokic@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Rahul Singh <rahul.singh@arm.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, Milan Djokic
-	<milan_djokic@epam.com>
-Subject: [PATCH 16/20] arm/libxl: vsmmuv3: Emulated SMMUv3 device tree node in
- libxl
-Thread-Topic: [PATCH 16/20] arm/libxl: vsmmuv3: Emulated SMMUv3 device tree
- node in libxl
-Thread-Index: AQHcB7yktmBVQsC5I0iGGX/Mv/uKhg==
-Date: Thu, 7 Aug 2025 16:59:31 +0000
+CC: Rahul Singh <rahul.singh@arm.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Milan Djokic <milan_djokic@epam.com>
+Subject: [PATCH 03/20] xen/arm: smmuv3: Alloc io_domain for each device
+Thread-Topic: [PATCH 03/20] xen/arm: smmuv3: Alloc io_domain for each device
+Thread-Index: AQHcB7ycdMk0c92iU0qjOO1oC+LJsw==
+Date: Thu, 7 Aug 2025 16:59:16 +0000
 Message-ID:
- <b07e6c46650a41dc9459c5919ac2ecc4307fae0a.1754580688.git.milan_djokic@epam.com>
+ <27a106209124c8d052d7cca6285d9b7b1b110ef2.1754580688.git.milan_djokic@epam.com>
 References: <cover.1754580687.git.milan_djokic@epam.com>
 In-Reply-To: <cover.1754580687.git.milan_djokic@epam.com>
 Accept-Language: en-US
@@ -86,164 +85,143 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA4PR03MB7136:EE_|VI0PR03MB10757:EE_
-x-ms-office365-filtering-correlation-id: eef87d52-da43-4036-4403-08ddd5d3c73a
+x-ms-traffictypediagnostic: PA4PR03MB7136:EE_|AS8PR03MB7336:EE_
+x-ms-office365-filtering-correlation-id: e03d7344-5d52-4c09-a8d7-08ddd5d3bea1
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?8bUOP3IciHzj68GMJmyjTTwCQMKBXssZZXs0JB8gW3u6H8sQ6I+9jLZGKz?=
- =?iso-8859-1?Q?BPKtPINwhrx/8teIIPV7PKZrokNk/R+YIN8blWKhsGYHH9jEGLFWtpuTSk?=
- =?iso-8859-1?Q?zebqFEuBdJL//DLj3/pdwFWpIvIVvnV1BIMZSkyymUIMgD487eAUJcm5pP?=
- =?iso-8859-1?Q?J/qVKLaV0jxk3zyXFpHz7hjFrhj3iLabXuOnItQNkuFTCHdevAeTtb8zVu?=
- =?iso-8859-1?Q?2e1mEhNmwKy6HcadoFc6t/6B4auA1lPKvp2kfLLA4RTBM59O77WxKxIvbA?=
- =?iso-8859-1?Q?j5q9GvNRF0DnRI2sgW5r+9s42fo2fdq6pE31jjd+B4RutFivLoXnasiZSr?=
- =?iso-8859-1?Q?noPw38+MUfeLCV37EwGR0LMntAyblYpjBrYFKLAvpQU3agwbdZEPGtF6Wq?=
- =?iso-8859-1?Q?hfwQz1eoucfcY+xraRCYtjhp63rsoRnGOFZKEkyXpviRRJjG/cM0DKaUde?=
- =?iso-8859-1?Q?IntREAMNMUxDg38PPFzaMnhkHvamBa+RDd4yI7Zj5iU3LHxXPba1yIhZ1A?=
- =?iso-8859-1?Q?MkFe5vC2h5EaaCe63gIjc2sF6KTSnAoEHDTPFRXBKM2wTwOYLshZrR3Qix?=
- =?iso-8859-1?Q?iTf10ro1PofCL7L1HxQD9a/aiAey5E2Jdd5U1qO5y/pF2wDRdXwesZhS6y?=
- =?iso-8859-1?Q?C1h3z72JXdfn2DzcTWNX0sVskCwSEu9MOhsyHjjBoUhMTtaN6QcZu+wVhf?=
- =?iso-8859-1?Q?ASpiCGzjpkk1oanWTh5fCVLIWN60CeLKFnhjyksH0FqVKCnX/qghrOMkyh?=
- =?iso-8859-1?Q?qTTioxruWC6ls9ECjoJLqtKj0MTS61bgF1J81m6TI4xTpFPHcuEC80Z+WL?=
- =?iso-8859-1?Q?WdE3ZKOw2/gJcGrOCAxq1j9BxZZWmpEf0kLGdADSLGlvRii9bz6VXtqK2d?=
- =?iso-8859-1?Q?OubyQpe5gX3OScblvyVAok2/WqLSbUswfrzLSX3bin9RO7GzJAAvbYtFY4?=
- =?iso-8859-1?Q?CjxX9DyqovQ6UYPpZbueR+xykJuQMkEaeyM79LjKzTqP+lrmizCMCQHptk?=
- =?iso-8859-1?Q?kc6W/4YmE7erYmxbTD2kRc2dsyovRSQc/WnhhyGfK2An8jsmj5v3VkO2M5?=
- =?iso-8859-1?Q?vxCVDQRlfDvj6TVNI7FoO8wW+ZogUJYl1l35PQqMavwPLL4hvgDE+a1aSh?=
- =?iso-8859-1?Q?2QluiknxsmNm4RO9BTbaSiV4jhRShRvrTYs7OYsclRVIGOa2eDZqtsB8U7?=
- =?iso-8859-1?Q?KSExcuDOdQIeol0rl+h7RhmzMu4l2xm9SAvdOCtx+8dDnh7PXnr/dkl+nl?=
- =?iso-8859-1?Q?oo7mcwkmIq/Q7KMGq0abRJsCGSh7oakr3HJeAPeRjf81Dv0n5T+pIxUvmH?=
- =?iso-8859-1?Q?CGeK/TZ94HWIlaeBMAwjyiZtmORtYvBIQUQCyB6+amUgZ5eZU2ZPijNYfC?=
- =?iso-8859-1?Q?6TzuAsj22nW55a+i/Yn1YGsUXnJH0ZCEdBuTnr9YgiIr3IJarebxWoH4nx?=
- =?iso-8859-1?Q?PpS2StnjYAW5QsZfPu9DSak8DSKqsgWgqvEqjA7RZ8P0vpnvOaOc2MqMXF?=
- =?iso-8859-1?Q?mNFW/gDsmtCAkv53k8ZvCH9sRSCgdOvCAwebp0C4/fqw=3D=3D?=
+ =?iso-8859-1?Q?FhLo/iG7C4abnVmAu7cgWGAKWMFwRqx31GF/VUzEgDpv5lJZZPzZNlscgv?=
+ =?iso-8859-1?Q?UVG39Dz9Cilgv7QOsKocHC8Uxv7bmSweR9boaSH9I5n8QJhmrzxlWATsf9?=
+ =?iso-8859-1?Q?B7+fWwnFpW+RlaG6ZmLnhxGZDxkJ6FDGidfAu+pAdsF/7lPDbsF+LMul/x?=
+ =?iso-8859-1?Q?DBcgHLvpVygnT6fhMC5VF3nv6DPb+a/4fJK/3UPFURaI2RRUwNsPdlFZkR?=
+ =?iso-8859-1?Q?ql4HgchpleMZzibTT0snGH248Z4Z6YU+9iz9eAqyQqpwa9IFA9oSvsCq3j?=
+ =?iso-8859-1?Q?ECyGKDq9KCI6flHSQYbDD5oa/ORYIohvqXmkPn3h4SbYG/RfKk+rPqJvxc?=
+ =?iso-8859-1?Q?HTTEBXumEKmOuAN9zcyUPDSzWfTn99A2OTX2nfRYrflNOCB2pCXeHacL/I?=
+ =?iso-8859-1?Q?lpEdc3fKz4bs3gn757ydK9hZhPBLsG/jJR7HQKMVv2loenf41KkmOmfh38?=
+ =?iso-8859-1?Q?ywkQJEToI2I/nLM4hmBVtRezlywoO7yfWMB3QjHFx6C6cMktwm+xAc72W5?=
+ =?iso-8859-1?Q?ln4nCY1qXKehXnzuKIy0VT+dwA9gQF39eqiDP/Loxs1gR7GXCipVxheTR1?=
+ =?iso-8859-1?Q?rAhX5MDG5Ruh2T5zmT2yLKKAczr87PI+JfS7jjbl9/JoNAFd56Hfn9eW6e?=
+ =?iso-8859-1?Q?zYCXqoirGqrKsp7dS1/ZeVSUmvBTybIQ/FM7Qj+gA/boa9EEQ2QmlU990b?=
+ =?iso-8859-1?Q?+8DA7LTRJo1MtYmxTvlVOA2sMcHokE4JdRXfI74+WLQUnXLYDm33NgkS0c?=
+ =?iso-8859-1?Q?6eczLcGgEZqNHbbaCbFrZSydf8nVVYd3UZgqShse1KVIExGEo71s+k62nQ?=
+ =?iso-8859-1?Q?FL2d0e+vpU+qGRHESqSuUfwGjO2mJhlf7+gZCS7rBQYeWM9AnGAv31ik3l?=
+ =?iso-8859-1?Q?249jIXLnv87EUPbEoPhq0C2/3TBH4+EhZc3Rh/vbpr49OzYqQZyEwqlC2n?=
+ =?iso-8859-1?Q?yCr4PwdLWMMETczlFYb/Q8VBFSfGkm6I2qF2jA/J2zrPI2W9axew3CYasw?=
+ =?iso-8859-1?Q?VQKtoxeD9nqzrxRob6yJ5qhDOv2ARgpUpvVQD0RVgT60AnKH+I7PfZAUBQ?=
+ =?iso-8859-1?Q?MK4H/iRF3bwrxjSXZw7LW+kjwSfxEUV1cWOzJFvrAcHeY221mO5XI9aZnC?=
+ =?iso-8859-1?Q?SUCVHa+jjQUyvYJjFEZmuXGeod8m/WORVCqCJ0QEfZUOXWSnp+i+i1lJtH?=
+ =?iso-8859-1?Q?AW7gxv0G+fnM0FxR1OunY4cJLjWPTtdtX3UVXXVaxP2YwGrShvjjliiuzh?=
+ =?iso-8859-1?Q?IPqhL6TfoN1g383nshegXJTSlpmpYRrwIZn/4aaWFO4BdekT5479CH8PWI?=
+ =?iso-8859-1?Q?hnJXgMRCvY6sO5f24QUCoXtB5rR1LsjpTBP0/agoUnEVb81u+EUhQyA6am?=
+ =?iso-8859-1?Q?E9vEQrZhYM9CCzz8SdHa0CC1F1Cyn+9Oj4ktjM66bhSnYQT+X91koOdCCF?=
+ =?iso-8859-1?Q?LJJwMpsnu+/SaeMJYTz4W2U0UILQqVz0NSGtiro+BcfCPIo6y+me41JNZL?=
+ =?iso-8859-1?Q?bWaD9tXefzN7N9hinZbS4coS7t+ElwMCysZI8cG20o9g=3D=3D?=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR03MB7136.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR03MB7136.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?CuJtiYpM0BTIsCiBHDEeGzTXTemkdzxBDjQPI5ARTHvMhAetF1/nahT4qq?=
- =?iso-8859-1?Q?hpi0sC1PoXAJJQDhAGaRWDYv7nh+bJdEmBhrV6BqrC8ZiIV35OBrSjiPDp?=
- =?iso-8859-1?Q?R+0MEdyK2ooSz6syAuOoug0VJtU+I2mtpXD3jUoYdNlqLe/zLr3nPcj5ke?=
- =?iso-8859-1?Q?FY/+nUQdP2tPNAM42wATIxAAVxo+NGlj/OJTGfL8zcrxDMA5dec463HAX5?=
- =?iso-8859-1?Q?DmZj49fviUgzd+bZD9xJJhqArgEj1dh5xSuhrGTe1rbUsVTlT1xSa9TrJ8?=
- =?iso-8859-1?Q?+UTG76XEke6S3vWoazNZQN151xuyuUS/LAILFEfvPK1SrWxqwuYgr0CVRo?=
- =?iso-8859-1?Q?n9JeglvKQkoukFviYo3VatiAY1JccCs3S7ZMII+WxeiK4NBeDF56T52uAv?=
- =?iso-8859-1?Q?PBIUD7l4SKieizOyvGX68Ol/7TZjJ865JxJ/1yAiVsK9/GkbTa6hzMcnbD?=
- =?iso-8859-1?Q?puD4qDY5PYoO9NW8zKQLLSVJCNuGbDw0LoxPDBaSr9XPkE8s1lBmPPFT9T?=
- =?iso-8859-1?Q?TzlZQlTLvjDgVEnUCe3XEe1M6qeVIorWKHJY2LFgMFjdwvoEVwV61FOFKP?=
- =?iso-8859-1?Q?aX24XFpZ25izC4iLhIoirvoqmBKJ/oukyriHZaBu2moKbH9wCQl7JgOlxc?=
- =?iso-8859-1?Q?ssoLuNiVRtGcAv/H2Auq9N9i0KnHzE7I/u40V0cxXZdtlU66eJU2EQx9CQ?=
- =?iso-8859-1?Q?wWWe8tXLXieW3eV9S+xu/t+z5y7Y2w069FJzGbh8UFSAU+EWX/3WWRUejS?=
- =?iso-8859-1?Q?d2RqxYsxkagDOdWMEz1HV9oaP5PnhX7m6MxJdp2zyhLage8d4yeVLX26LQ?=
- =?iso-8859-1?Q?r5mpaJW2SOj4Y+f+tSqb20JhDYtoHQ9uNbBpN8loXZrGzstFTQPMHTMGua?=
- =?iso-8859-1?Q?adydg+D1+vaJqFNS3pGQf1+7uQz70tb8Lr32pMB8cXmqZZYoSDEptJKaRh?=
- =?iso-8859-1?Q?OFPgISpX/uJ1PjYTav/SSWzihfHapX4WnmNFdoh2TdFwe3F375rpapUYLr?=
- =?iso-8859-1?Q?e16/R+8uLJ0qfUM4g3/xsVNhmM72muKd1r/euAWMAtjSOKsubI74D+5UTU?=
- =?iso-8859-1?Q?BhjgmuoUaC2BqxtMsclrXrWBMo6VFSOnxdhTdcbuirBXx35QD0zFCVWBF8?=
- =?iso-8859-1?Q?9/c0xLSY7PgAJIMAO3td77DczZAm13r61zsRqCX9wz4diBXaNS0FASOWer?=
- =?iso-8859-1?Q?ozqvHMLLKr07EAikqr/r7zRX86aebHTje4viO9trtfCd5sIA2V6bfn0duG?=
- =?iso-8859-1?Q?w9vUdD8uaQBwdq9G9yDedZKDhZyt5YrrwmdlQFbZ6LUfLvQxz4ecVOIdfl?=
- =?iso-8859-1?Q?oxHSOvzfs1SiyERODd1dKignLePEZ+a6+RB/gCSeJhgPHzDKVQ2mVIn0na?=
- =?iso-8859-1?Q?AOanw+++ERZKf+LJEjIPdliUUP+XpovAmaiBHBE+NBiDnAA08WJ0pMmLiv?=
- =?iso-8859-1?Q?28AlcBaVCnptMVbJrDIlV6beuT5q9FfjXNGIAIbwhDb8cAvjT2Ppyo3L+8?=
- =?iso-8859-1?Q?m4L0QpRNJ/cMD9cCMQtRygt7X1WdyRvS9yh+WvnwrtNNZrpClip2GkxQig?=
- =?iso-8859-1?Q?BcSBeLQw2uc8FPTi5bKg0rbpAKk9JQ4buj2mY91heuBGuylJGJwgUJp8Pn?=
- =?iso-8859-1?Q?8UY2CtX3VpEO3qheL4m/uFqrzsj/2ld0I5bHhnC67VDkQiNGD9iT+9mw?=
- =?iso-8859-1?Q?=3D=3D?=
+ =?iso-8859-1?Q?fhSQe74irvxFRaUNm7ursNLknfncIFfsMBw/3iVW2mqjWuviaiErnHRK6B?=
+ =?iso-8859-1?Q?r9RyEX99H7LT32RtalG6uxsrd6zujrgZNxHQKTacpEWgoZuKXCpMOor1Xu?=
+ =?iso-8859-1?Q?iUwNT556Q2llSqP5ixlXWrl397WnuEiv9OuVADlnjJLqYZLVJ6O4bpyXUP?=
+ =?iso-8859-1?Q?Y9zPhyZSI9D3qX5Z0VTQSGFpXa1a46e9WmObI3JSrVfINg0mpPEwOpSi0s?=
+ =?iso-8859-1?Q?3pwmr90OV3vFcrrSCB5xmqGxs+6U4CJy/OS8Tey7Qc/MuhfZl+ffA3xY7s?=
+ =?iso-8859-1?Q?heRcdV66yC0hUCbGqpVdardSwcGJG8WKhx/axOqQcxyQzL5lyirfetjj3R?=
+ =?iso-8859-1?Q?ZFLy7D/xyCoGa7nxMDEz0idVUK4dBKBYiqwqdLhw+diEXmuhcVnCj38yKQ?=
+ =?iso-8859-1?Q?m+u7Zkt7SGYFiT5f+T/mXEubMiappZo9SCN5OIb6rpqJELg/UH8Vly+ZdT?=
+ =?iso-8859-1?Q?F6zzJja8NV86iG57I4jK9IUqEecxOqGjWtL4uGSGNMDliRNlEaUj+gQEnJ?=
+ =?iso-8859-1?Q?xl6rjuVNZSRb6noLKbxkbXTB6JvI9IeeQZTf5hYSIGK1+2AlhaeCeMcGHN?=
+ =?iso-8859-1?Q?IKXKNS509ITSMpcQ35QDbHVFAvKtbTW/4CM+N39pjBQdBHicu1YfJ0lBa+?=
+ =?iso-8859-1?Q?clxi4j0t8kbkerxyN0uUQ2AzxgkqwTzsc5SmnRiEcF8DvoWq9bLoIWuils?=
+ =?iso-8859-1?Q?PvWi64ktO0DqUnWCVJxOFRwa4olsLuE5Lz9ozl1XddQ/f0V+ySlaCG9P3a?=
+ =?iso-8859-1?Q?1dPr9Y41kQb4lqZ6zbm8o4wb3JGa2UnDx78w7bG/YbLO6EGqLEd0F11BQK?=
+ =?iso-8859-1?Q?jTciEaIL0iVRtqm3gfcvwbGA+BvmMNFUBP6V79K0yP81uVi8oRVAkqN2PD?=
+ =?iso-8859-1?Q?YYfUGB6A7Pg7D1dZa0XppetAiBEPb2IG3Jf+k47SuWQR9OWakhnYRhn/rM?=
+ =?iso-8859-1?Q?mgc5jqgMyZNk4c9luSV/i7mgdOsruE2l+9GAFHiR9MTB+tHsdM11LxZZct?=
+ =?iso-8859-1?Q?mdTzvoIofsOpw2LN2PpDEBhdgmxWN4i3GU1PPkSIQzeMeLzvch45Tve8Pz?=
+ =?iso-8859-1?Q?AmW+QO+ZSyW2HK9XZd45zlamprlyzRRmPfq5bv57CjQYWw7u1zBCNGkc4u?=
+ =?iso-8859-1?Q?Bd7p45L67ISAlr/6M7WnYFEjmUn8gpdO5ZzMoOU/6wxv8cSb8eP5ZSRi3G?=
+ =?iso-8859-1?Q?M1RWRMCuqCKZ4bd4bzW7cwdEBA8d2AGEa48irQCAomv99Tr3blh4MmIl0Y?=
+ =?iso-8859-1?Q?G334JFVhehkNTRAf17jUzhZc5fN4SMzp9PuLS9eVm4qG4yneDtDf/enIPf?=
+ =?iso-8859-1?Q?OA5g9Vanx/cSflY2fN7vl7JW4oK0hdVt/DxI5LxjyC1YSkWIdITq1xueJi?=
+ =?iso-8859-1?Q?n3Ilt4SdwgF96pGDjH73oMCOFnhTete/lCpo3o9hlOtt1grIyHNfYoZefa?=
+ =?iso-8859-1?Q?M9r8J1UpLH5gsxlqzEmbFTOpGrBq4PTvXSGbokiEuOpjjTrEB8RpNInMEs?=
+ =?iso-8859-1?Q?ZwkBAXUVNfkfkL4zfPrgdE0MZEk2rISJiQcYpPHJJHJyoOXg8Egim4QI2w?=
+ =?iso-8859-1?Q?IsVFVMFFGxIT7LwAfzWjKWgG9wXIwIsG/0nrbAL5wlMu7i96r0qqQCagP6?=
+ =?iso-8859-1?Q?iQONytzByDE4HegoIZ9S4fKRODk9YLqDfl?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PA4PR03MB7136.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eef87d52-da43-4036-4403-08ddd5d3c73a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 16:59:31.3519
+X-MS-Exchange-CrossTenant-Network-Message-Id: e03d7344-5d52-4c09-a8d7-08ddd5d3bea1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 16:59:16.9323
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1N2r8UALrIN+PA3mEjzNheIuUEwv0ohNfLjZGiWn2jOA5s9ozogPYHiR31jEf7E1W6BjMQCn0E2prER11gk3fg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR03MB10757
+X-MS-Exchange-CrossTenant-userprincipalname: 6p/cR7AWA4AQleVmnJhKoggZVxXvKwXktFffnYsAgj2JTAc8tv4T2WQsV0TR0D4TTNYZzPXdhEMo8s/TI4o/gA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7336
 
 From: Rahul Singh <rahul.singh@arm.com>
 
-libxl will create an Emulated SMMUv3 device tree node in the device
-tree to enable the guest OS to discover the virtual SMMUv3 during guest
-boot.
+In current implementation io_domain is allocated once for each xen
+domain as Stage2 translation is common for all devices in same xen
+domain.
 
-Emulated SMMUv3 device tree node will only be created when
-"viommu=3Dsmmuv3" is set in xl domain configuration.
+Nested stage supports S1 and S2 configuration at the same time. Stage1
+translation will be different for each device as linux kernel will
+allocate page-table for each device.
+
+Alloc io_domain for each device so that each device can have different
+Stage-1 and Stage-2 configuration structure.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 ---
- tools/libs/light/libxl_arm.c | 37 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ xen/drivers/passthrough/arm/smmu-v3.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 44b7bcd672..c8255d8d4f 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -887,6 +887,36 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *=
-fdt,
-     return 0;
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
+h/arm/smmu-v3.c
+index 5c96e8ec7c..15ff703458 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -2790,11 +2790,13 @@ static struct arm_smmu_device *arm_smmu_get_by_dev(=
+const struct device *dev)
+ static struct iommu_domain *arm_smmu_get_domain(struct domain *d,
+ 				struct device *dev)
+ {
++	unsigned long flags;
+ 	struct iommu_domain *io_domain;
+ 	struct arm_smmu_domain *smmu_domain;
+ 	struct iommu_fwspec *fwspec =3D dev_iommu_fwspec_get(dev);
+ 	struct arm_smmu_xen_domain *xen_domain =3D dom_iommu(d)->arch.priv;
+ 	struct arm_smmu_device *smmu =3D arm_smmu_get_by_dev(fwspec->iommu_dev);
++	struct arm_smmu_master *master;
+=20
+ 	if (!smmu)
+ 		return NULL;
+@@ -2805,8 +2807,15 @@ static struct iommu_domain *arm_smmu_get_domain(stru=
+ct domain *d,
+ 	 */
+ 	list_for_each_entry(io_domain, &xen_domain->contexts, list) {
+ 		smmu_domain =3D to_smmu_domain(io_domain);
+-		if (smmu_domain->smmu =3D=3D smmu)
+-			return io_domain;
++
++		spin_lock_irqsave(&smmu_domain->devices_lock, flags);
++		list_for_each_entry(master, &smmu_domain->devices, domain_head) {
++			if (master->dev =3D=3D dev) {
++				spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
++				return io_domain;
++			}
++		}
++		spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
+ 	}
+ 	return NULL;
  }
-=20
-+static int make_vsmmuv3_node(libxl__gc *gc, void *fdt,
-+                             const struct arch_info *ainfo,
-+                             struct xc_dom_image *dom)
-+{
-+    int res;
-+    const char *name =3D GCSPRINTF("iommu@%llx", GUEST_VSMMUV3_BASE);
-+
-+    res =3D fdt_begin_node(fdt, name);
-+    if (res) return res;
-+
-+    res =3D fdt_property_compat(gc, fdt, 1, "arm,smmu-v3");
-+    if (res) return res;
-+
-+    res =3D fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+                            GUEST_ROOT_SIZE_CELLS, 1, GUEST_VSMMUV3_BASE,
-+                            GUEST_VSMMUV3_SIZE);
-+    if (res) return res;
-+
-+    res =3D fdt_property_cell(fdt, "phandle", GUEST_PHANDLE_VSMMUV3);
-+    if (res) return res;
-+
-+    res =3D fdt_property_cell(fdt, "#iommu-cells", 1);
-+    if (res) return res;
-+
-+    res =3D fdt_end_node(fdt);
-+    if (res) return res;
-+
-+    return 0;
-+}
-+
- static int make_vpci_node(libxl__gc *gc, void *fdt,
-                           const struct arch_info *ainfo,
-                           struct xc_dom_image *dom)
-@@ -928,6 +958,10 @@ static int make_vpci_node(libxl__gc *gc, void *fdt,
-         GUEST_VPCI_PREFETCH_MEM_SIZE);
-     if (res) return res;
-=20
-+    res =3D fdt_property_values(gc, fdt, "iommu-map", 4, 0,
-+                              GUEST_PHANDLE_VSMMUV3, 0, 0x10000);
-+    if (res) return res;
-+
-     res =3D fdt_end_node(fdt);
-     if (res) return res;
-=20
-@@ -1394,6 +1428,9 @@ next_resize:
-         if (d_config->num_pcidevs)
-             FDT( make_vpci_node(gc, fdt, ainfo, dom) );
-=20
-+        if (info->arch_arm.viommu_type =3D=3D LIBXL_VIOMMU_TYPE_SMMUV3)
-+            FDT( make_vsmmuv3_node(gc, fdt, ainfo, dom) );
-+
-         for (i =3D 0; i < d_config->num_disks; i++) {
-             libxl_device_disk *disk =3D &d_config->disks[i];
-=20
 --=20
 2.43.0
 
