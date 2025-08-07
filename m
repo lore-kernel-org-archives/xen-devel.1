@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23E1C87FCF
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:57:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1073641.1436513 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A15C87FCF
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:59:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1073648.1436523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5o2-0000TV-CO; Thu, 07 Aug 2025 18:57:38 +0000
+	id 1uk5pk-00011A-Lv; Thu, 07 Aug 2025 18:59:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1073641.1436513; Thu, 07 Aug 2025 18:57:38 +0000
+Received: by outflank-mailman (output) from mailman id 1073648.1436523; Thu, 07 Aug 2025 18:59:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5o2-0000TO-8e; Thu, 07 Aug 2025 18:57:38 +0000
-Received: by outflank-mailman (input) for mailman id 1073641;
- Thu, 07 Aug 2025 18:57:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uk5pk-000113-Ie; Thu, 07 Aug 2025 18:59:24 +0000
+Received: by outflank-mailman (input) for mailman id 1073648;
+ Thu, 07 Aug 2025 18:59:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ybbA=2T=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1uk5o0-0000TI-VC
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 18:57:37 +0000
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e765486-73c0-11f0-a324-13f23c93f187;
- Thu, 07 Aug 2025 20:57:30 +0200 (CEST)
+ id 1uk5pj-00010B-H1
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 18:59:23 +0000
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a0946138-73c0-11f0-b898-0df219b8e170;
+ Thu, 07 Aug 2025 20:59:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,35 +38,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e765486-73c0-11f0-a324-13f23c93f187
+X-Inumbo-ID: a0946138-73c0-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=iiwm5axhvjcqnm3f4iormuplti.protonmail; t=1754593048; x=1754852248;
-	bh=YgxH0Wy0rhS+i07K30j1sLDyMeC8MYHgXyDq64rg0Mg=;
+	s=protonmail; t=1754593160; x=1754852360;
+	bh=DCrlIMUi9fecDJincYq57PU4LJ4nmeQwJeAkX/k33qw=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=N9YZKpwwgpAJnfbJoaGiUQZKLxCeF71Kir842XL4S5tCdKvZKHjR7QbEgrVGDB+g2
-	 TkiMo5cyX0XZspzW2qhLxWr5TakMXKjz5hkqjPcInAe89YCwGvED1S5e3Uad14PMLm
-	 6nVIECYD+TMk2BCQvGo2AjRnc3/5fvilQF1o+ZYT5Upo97IO82pj17v9pfAh2bRlK3
-	 OTKFh48zh5jkwY7unuKOHl+9tuMOnOMvh+CR5ibsV+5fgwK9gvTiWzoQV+4DBAyFSS
-	 rog4UgPGQe4j/aioNT64hQnzc5HK/DxncnrzyzVVJKaIDt3S4QUpLmfp3lMVIMUx3f
-	 Bsug0+gKiLE0g==
-Date: Thu, 07 Aug 2025 18:57:23 +0000
-To: =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+	b=ArL7EWbozKO09O4aCyJ1i24LklEjTk68/M4jJsJV2hXBGRmZ5Gm2V9Kif0UG+RPxV
+	 bHw1G8Lhlc60pKDws1JHuoOlgmstdGPsZoVH2nEyytfQrv+jCq6lG/HsiAV2GkqNcI
+	 7A64c13w/EU7VSPesKjEKhCjfC5/ZXkrx/o7AiyY1vTMwWbfTk6zmuIgN+JM8qDZvd
+	 OViPEuHb53i6ZONN59zKd0XN3B8Q+7iKKhJNY+0+yO3XOY6clyc7M8Kj9kHN5Xi9Kn
+	 eC5TIssuRm/mxaMzNgiSi0rFqfrl7kyTt7kmLNd+cmcLSziiHvQfywYazexrdF3Nlo
+	 a281Ap108W9TQ==
+Date: Thu, 07 Aug 2025 18:59:17 +0000
+To: Jan Beulich <jbeulich@suse.com>
 From: dmkhn@proton.me
-Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, sstabellini@kernel.org, dmukhin@ford.com
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, xen-devel@lists.xenproject.org
 Subject: Re: [PATCH v4 3/8] x86/domain: allocate d->{iomem,irq}_caps before arch-specific initialization
-Message-ID: <aJT3D9mPLe7oHkTD@kraken>
-In-Reply-To: <aJNoo6s_7CV6tIjy@macbook.local>
-References: <20250731192130.3948419-1-dmukhin@ford.com> <20250731192130.3948419-4-dmukhin@ford.com> <aJNoo6s_7CV6tIjy@macbook.local>
+Message-ID: <aJT3gDRsynTqUlx6@kraken>
+In-Reply-To: <032daad1-29a0-48ca-9f50-5234d42a3ea1@suse.com>
+References: <20250731192130.3948419-1-dmukhin@ford.com> <20250731192130.3948419-4-dmukhin@ford.com> <032daad1-29a0-48ca-9f50-5234d42a3ea1@suse.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 0d0161579be9a226da1c1f15a6575303ef1ad271
+X-Pm-Message-ID: ecd36905f95ede267fee9578c34aa46fa07ebfe9
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 06, 2025 at 04:37:23PM +0200, Roger Pau Monn=C3=A9 wrote:
-> On Thu, Jul 31, 2025 at 07:21:54PM +0000, dmkhn@proton.me wrote:
+On Mon, Aug 04, 2025 at 12:20:11PM +0200, Jan Beulich wrote:
+> On 31.07.2025 21:21, dmkhn@proton.me wrote:
 > > From: Denis Mukhin <dmukhin@ford.com>
 > >
 > > Move IRQ/IOMEM rangesets allocation before arch_domain_create().
@@ -85,31 +85,40 @@ ted.
 ce
 > > where MMCFG ranges are initialized.
 >=20
-> I'm a bit puzzled by this, you don't need I/O permission to setup
-> traps.  You can setup traps everywhere, the I/O rangesets control
-> whether a domain can access the physical resource, not whether
-> accesses can be emulated.
+> And this is just because you like doing so? I ask because first and forem=
+ost
+> I can't make the connection between this and the purpose of this patch.
 
-I do not want to setup traps if there's physical I/O range owned by the sam=
-e
-domain already. Emulator will report a misconfiguration in this case.
+No, that is a bad leftover from the MMIO-based emulator.
 
 >=20
-> The dependency between MMCFG registration (pvh_setup_mmcfg()) and
-> calling dom0_setup_permissions() is because the later consumes the
-> MMCFG ranges added by the former to mark them as not accessible by
-> a PVH dom0.
+> > --- a/xen/arch/x86/dom0_build.c
+> > +++ b/xen/arch/x86/dom0_build.c
+> > @@ -471,6 +471,24 @@ static void __init process_dom0_ioports_disable(st=
+ruct domain *dom0)
+> >      }
+> >  }
+> >
+> > +static void __hwdom_init setup_mmcfg(struct domain *d)
 >=20
-> I think you don't need this for vUARTS, as the ports are know at build
-> time, and hence you can block access to them without requiring the
-> actual vUART to be initialized.
-
-Oh, I see now why I have it: that spilled from MMIO-based UART.
-
-What I need is I/O ports and IRQs rangesets allocation before emulator
-initialization.
-
+> Why __hwdom_init when ...
 >=20
-> Thanks, Roger.
+> > @@ -480,6 +498,14 @@ int __init dom0_setup_permissions(struct domain *d=
+)
+> >      if ( pv_shim )
+> >          return 0;
+> >
+> > +    /*
+> > +     * MMCFG initialization must be performed before setting domain
+> > +     * permissions, as the MCFG areas must not be part of the domain I=
+OMEM
+> > +     * accessible regions.
+> > +     */
+> > +    if ( is_hvm_domain(d) )
+> > +        setup_mmcfg(d);
+>=20
+> ... the sole caller is __init?
+>=20
+> Jan
 
 
