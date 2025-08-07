@@ -4,40 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AD1C87FCA
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:32:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1073364.1436470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D2AC87FCA
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 18:49:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1073621.1436503 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5PF-00056z-SX; Thu, 07 Aug 2025 18:32:01 +0000
+	id 1uk5gJ-0005wV-KJ; Thu, 07 Aug 2025 18:49:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1073364.1436470; Thu, 07 Aug 2025 18:32:01 +0000
+Received: by outflank-mailman (output) from mailman id 1073621.1436503; Thu, 07 Aug 2025 18:49:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uk5PE-00050a-Ct; Thu, 07 Aug 2025 18:32:00 +0000
-Received: by outflank-mailman (input) for mailman id 1073364;
- Thu, 07 Aug 2025 16:59:42 +0000
+	id 1uk5gJ-0005wO-HB; Thu, 07 Aug 2025 18:49:39 +0000
+Received: by outflank-mailman (input) for mailman id 1073621;
+ Thu, 07 Aug 2025 18:49:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5oaB=2T=epam.com=milan_djokic@srs-se1.protection.inumbo.net>)
- id 1uk3xu-00076W-4g
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 16:59:42 +0000
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c200::3])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e71243a9-73af-11f0-a324-13f23c93f187;
- Thu, 07 Aug 2025 18:59:38 +0200 (CEST)
-Received: from PA4PR03MB7136.eurprd03.prod.outlook.com (2603:10a6:102:ea::23)
- by VI0PR03MB10757.eurprd03.prod.outlook.com (2603:10a6:800:267::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.21; Thu, 7 Aug
- 2025 16:59:35 +0000
-Received: from PA4PR03MB7136.eurprd03.prod.outlook.com
- ([fe80::36fa:728b:e216:6f6f]) by PA4PR03MB7136.eurprd03.prod.outlook.com
- ([fe80::36fa:728b:e216:6f6f%6]) with mapi id 15.20.9009.013; Thu, 7 Aug 2025
- 16:59:35 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ybbA=2T=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
+ id 1uk5gI-0005wI-09
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 18:49:38 +0000
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
+ [79.135.106.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 431e3f7f-73bf-11f0-a324-13f23c93f187;
+ Thu, 07 Aug 2025 20:49:35 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,194 +38,289 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e71243a9-73af-11f0-a324-13f23c93f187
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=W0VhczSh8b1n66G6+pDtD4QUIJyDY4+65PQi18x6yY41CWARNwBCzyLbXbosyftaxIl44vV0D1mSXvBLB6aioVCguYDfB6UOdzC9Z6N65TFBOkpLQCEip3tXBW3mBNtiRmKLTdDbdC4IY5T4edxat+4JQpJA6JEoXir0LV9oadDuB7mWTbioPmJniBrApKHGojQx7cgdIvoLkbb24sA1N4BYSenlHWgta37sNbZWrVSYValkMqaGbjyhL9sRQCwXmSsAjeM4qTVILaR03l64QC19VEg1Jhi888KKMFSMlyJP5fTtrBwRwpko4cNAJx0RRJzMstIuumyyyCtRqr7qhw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N139GbhE8zRhemLrZtoyLCg0r1ZmYt9NvxgUFa12HIU=;
- b=PwA70XNqIFG3T0Fji25/fV99Ffst+QIFy5HS4pQkBUSwaiuI9AwN3DVnUigzH/PXWHH56+K9dB5r0YN0u61e5RNsep3/bqrsKHY+OTJToxv72rODOg2T1conFSEgEmxJgUcc83+R9+OlL5jgbwkGoeCdjI0XQoLAC89gFKEB0CROtXEeLXSPhQYHqxgs3NVTgq9c9N4GecKDQVw7RROLbAwNSN5R6rujWPShect659AU7V5qiCvagmUscj3ksdYsSercP71/Utaeo5BFQv6tSkcv/oHkCdETIeJiWO47N8JQeHSGu2NAl13D+ZCf3aOulGNfHe8LLyq8Jsto1cODOA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N139GbhE8zRhemLrZtoyLCg0r1ZmYt9NvxgUFa12HIU=;
- b=XCvUyNWX67kK/d+CdBkILPz0ZDhLG+UQhydC7ATSt7TyMufjpOoYJKcR13/hCmovK0VKDyDTpEt9VBlJOptIq2t8LqLdcRyY3YOZixrqTpqqZ55VrMTuk/BBw6y/LI6HHI9OxhhHZc1TbKaR2H9pX+JyJgMELa9DJxdfKP59r01ifjl2sSUvg3kjO1xZFJ+0iAFyhrL4wTfhQei2ODliimERFOdTzGBAJbW7UpnefJ/Bjh/iFj9arGG0lju7EX8ZJzIrqgZCx5ZP+po3afH33o4PjnuHfp+CtQsTuntYh08OsUupaYQEp3lhPXfOu1f2z4HxijSlEXL8wGik1DXe6g==
-From: Milan Djokic <milan_djokic@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Rahul Singh <rahul.singh@arm.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Milan Djokic
-	<milan_djokic@epam.com>
-Subject: [PATCH 20/20] xen/arm: vIOMMU: Modify the partial device tree for
- dom0less
-Thread-Topic: [PATCH 20/20] xen/arm: vIOMMU: Modify the partial device tree
- for dom0less
-Thread-Index: AQHcB7ynr3/KXhUzEkK9AiVwODSe+g==
-Date: Thu, 7 Aug 2025 16:59:35 +0000
-Message-ID:
- <dfc3876d97763a06178cee2dcd70cce9dedc7919.1754580688.git.milan_djokic@epam.com>
-References: <cover.1754580687.git.milan_djokic@epam.com>
-In-Reply-To: <cover.1754580687.git.milan_djokic@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA4PR03MB7136:EE_|VI0PR03MB10757:EE_
-x-ms-office365-filtering-correlation-id: 5af17c9d-a294-44e6-6ce5-08ddd5d3c9b4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?MHyszSv8bSPZCq5g3+sS1JN650X+9m5WjIcbusTKHG4E87DlXF23xbGymf?=
- =?iso-8859-1?Q?FlLJ0cKxy/nFL1AnSph6cmNlJde2+aZ+3I+OFi1CE66NIYRHXmoXJ5kcoz?=
- =?iso-8859-1?Q?tD+a1kSZzhGQHff0iKzZ9P5ieM0DgMrqEPLkzkJMyReOio/Tmgl8ymtMba?=
- =?iso-8859-1?Q?VsKjD78Fw/9F4hXnGae9Abo+lrHnMHdD7/I9nPDIv2FTy3fIDFV0ETxnNS?=
- =?iso-8859-1?Q?3HnDjQh8+vckQol1lIFjfdsv4e6MKkHCniHSGSC9NK9djaSaVGDm5P7jje?=
- =?iso-8859-1?Q?o4tGjYZXg3XhQ+fCNVyyW1THp0WBK06tfheU09l7xR5/XoCJM6He9J7ORM?=
- =?iso-8859-1?Q?LUshEWEpnHE1F3cOOMGLvl0Lk3FsnvqoLQ5WdXrZnO3d9TJikEvNRKTjw4?=
- =?iso-8859-1?Q?doyvnrE+3KW5rmPicSkI6c3l7h+hJb4KghbI7mwYTq9RlOtTembLizbvG+?=
- =?iso-8859-1?Q?c4TR6xuPY0FyRYkF21lpbXy0WkZTDfuBz78sMjyZoOtu780iHua8xXiloq?=
- =?iso-8859-1?Q?/3YxRw8cQOdRFWdO+fdmDDvbFnj1Ol6Mls0FTHzKQ++VDBGBgh1Y0drFeI?=
- =?iso-8859-1?Q?/AP7SfoLL12b0PABdTck0BUzrgkpxtL7bzH450iyQBUXDcvHpSNWs+u6Ff?=
- =?iso-8859-1?Q?1wdHxR3A9HI0QwWBgT3aTAqJ37IOGdEGjVdOF7ILPLFrvv3Eidswnyzbrb?=
- =?iso-8859-1?Q?RNkEPdtzI9lf2SnCVsZQqqYmZilyYxhEL/rnhrZ723eVWhXjktCMDw52Qu?=
- =?iso-8859-1?Q?+DznvBHGIKb17qhaxVqMgBv6elHfz1RF91errP6bPu5WnhO76gu27NGyiu?=
- =?iso-8859-1?Q?pcKJNETES8Mi9iq9e05FxPdqJ5QoppK4+FAkZbzS91SKI4xsrWA5YviQny?=
- =?iso-8859-1?Q?FUpu04gQNyY+malthQpizyIUjoNbObkPsi2W6pJSuNu1rzf91ozJgjAirG?=
- =?iso-8859-1?Q?y/p8uxy6EQtOAbYKNOKta3KV0zS63GQQLOk4PH1sOLgG4dZtBAqAhqa1Gw?=
- =?iso-8859-1?Q?43pLY3u8SCNhte5ocCJE25RmbhIrfK2IJYs35SXroKUiPV/UDgg7aItFPL?=
- =?iso-8859-1?Q?AwF8Ryn/Cp55ZyESuzS0nVhxgsmzK0kjo6tXr9itScmMmMDFJ5KZv08A7z?=
- =?iso-8859-1?Q?zxEV9F0I/+/eaZReYUB0FynkW8TcmB7UuFCOhooLfsddESExO0V06pLG9g?=
- =?iso-8859-1?Q?EZv8QAHPYLKUBvsxdVyMiBa2SS3oQ2fwjjbkjexirqdtMzDYfLyNBwPNZ0?=
- =?iso-8859-1?Q?RpWPYAjm5NRTZN16fpOr1VXcSplcRrCYF1NWS/Xd1AkCNKOXLy7zCyHHrg?=
- =?iso-8859-1?Q?V1QTwly9ZmhCngLOZoeDuAsIXpvyjdqbXxg8Q3yL75hYGVuuFlnG/+lVIR?=
- =?iso-8859-1?Q?CKKUEQJrIY9st72r4EXZl4vDlRaNJhWh7clCGZVOq/K7bcmM8JwaQMmrAR?=
- =?iso-8859-1?Q?EBUejOppCU9V6ahNMahMv8C9cxuHjb338pkx7cOf/wvKhXGrWPcKMZrKml?=
- =?iso-8859-1?Q?X+u9s/UGTPksFVNpPwbmMR9OjJYWEsXXiEN7bwh0E93A=3D=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR03MB7136.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?b+n7hy1ljQn09teDJ8LT8lj7RMIQqeykzP3THCV6gc7rhuX+42drqWgjxk?=
- =?iso-8859-1?Q?JMICThJNAeVCPd88Dv4XAmmRLqUNeBbweectBEMi0/vSaDKB8qXeqsAtkX?=
- =?iso-8859-1?Q?HFKMXIS8ZdxgABkuJ4Vcx1MaPWPI1dXV6MCIHtrpU88jj2vZzXYQp/uQKb?=
- =?iso-8859-1?Q?kfczS4UpNTcuNUKFa8/IwYIQFHe1gDC0JMJ4wEu39yt5l4dzKsuKk6IZaN?=
- =?iso-8859-1?Q?7rpsRsC+fWysSPTQnEskr10x8y4D3ogaIYRIEMCkwv/TK+xOJKAAhYoLDk?=
- =?iso-8859-1?Q?XT0LmFAYl/VED2WlL4C+SPmguNYb/OzkasjBOofjKUK/Mjwx0aSSFh4Jsg?=
- =?iso-8859-1?Q?LHGBD+gxObSJ3llZXqbygv0wUlaKqMm8e6tuttH5Fne++2Gw39OgEAZTxa?=
- =?iso-8859-1?Q?sVD+pgrPUACoyHp9K9o9NqG/WhJrkpzsnp88pVHOGDSDtduDzP3oRbBq84?=
- =?iso-8859-1?Q?2OcbtqtNczRfEDQBcJQj3ZsfyrAQsbwIvb42gdqCskVK8D5YASu2nQ0Oju?=
- =?iso-8859-1?Q?gXGCihhXED4zWGhI0y7sOmQKFLQlUdKYTcTqFktMEUwZia8jgovZW5kiHW?=
- =?iso-8859-1?Q?h/KtFMS8H4P7s+dJLGQTaoz3ugwnNZILAdNkkx1JHfTwoecmEJyJXO2Ixu?=
- =?iso-8859-1?Q?fmN9+Qa1h6qRswUTNoUKfq7mnf5rp2Gqv2sqcQArpPaFilQHJc8Hekdx+e?=
- =?iso-8859-1?Q?oAGqLocLvnPM56rP803A2lGURHFTg2/iRatbF8CRt7Lv8W8VCqdL48IwJp?=
- =?iso-8859-1?Q?C8pLK9ScHlAVJZhhq443NB4yvoMdu1URJlrElFdP1+R8hAPejerEbqLL7o?=
- =?iso-8859-1?Q?WLQUoKki/UPnW2/O6v7fPIydN1Yq68gBJ025gyjsdPwBdVvCnPjVgjmNvs?=
- =?iso-8859-1?Q?ZccsyGw4uubfM4nmMr79ZeBvV7wssUX4SgKCskI17tkomx7EkPAxiOej/9?=
- =?iso-8859-1?Q?/YFEcHiW5Z3EjQdwZGfBTEzRmBF/nm41eEJlbDCA0nT6B9jFhpF+pyvCXu?=
- =?iso-8859-1?Q?UlthRpHA+crBqKqMqx7RhpsKhTRz2nJo4ifveNFKjdFDM8E1fvd9J3fDpY?=
- =?iso-8859-1?Q?ExvPijN2Ub0ql151eaT86HnbQCsmz5Q31k+SF7gH1iHWbiZZVY+r86T62A?=
- =?iso-8859-1?Q?Pq5ahZArFt0j3XX3wFW6xps7FAjDTlJPPuUcoNz1XN5vqMOsCb6JZlrN3p?=
- =?iso-8859-1?Q?l9P/y1ovOqauc/4BGlvAhnMImkju5I9K7Ymc5RYUEpnfoZGgLJRFHmie3a?=
- =?iso-8859-1?Q?2/xNgFx+P9KLjhK1Z+A6yxbK9TMeNbvDBflKLJqV/W4mMRbhOrIJdRwdGM?=
- =?iso-8859-1?Q?iivmQXnwl5N5te7990m4cksPYp2P06aI2RjpStU5EtXAsbIiB9DJPsZdlN?=
- =?iso-8859-1?Q?GnPOT4bn6ICbkJxH0HruRlWpkn6lwysYkDdPbs3rjklw4nxSIuHIVG3BUN?=
- =?iso-8859-1?Q?8JmaT8AzmpWvoFtgLWFmOtsYJj4A6ssqBQcjP/TgCG15HhSaSxt0UwTXUk?=
- =?iso-8859-1?Q?zKieDUQQTtumKGdH5QWcLTFyY9wJ4nfmi0pNeS3CJl2KyjaTzURahJLpHg?=
- =?iso-8859-1?Q?n+r/A17UKbLSBGarX4Yl5uy018KhWTxBoP5J0wZeyI0QcWuzvqXKdaAObr?=
- =?iso-8859-1?Q?zQ2QzulECYrvKCu3mY7ShrXqlVEtAI0o9RvF1/fXpuGFjxHPgwBRZ53g?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 431e3f7f-73bf-11f0-a324-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=fbqvfxsjfbbdfh3vmn7i2fdw5a.protonmail; t=1754592572; x=1754851772;
+	bh=uP79nJUPMZvjz+y6rF/Ogp5wiZ2MFlwz5FUaKnU40Ys=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=Wrxqq5Gi1lhbccHjXfkmJtjPBXn9ayqKkPeS+jZV7phcwIDUwhjBlmvKZ48J3PIad
+	 8GJadstYXArUHi5J8jE3rxsovmOzt39UM6XyqkDqm/1G7XRqxgplUKg2XOhq9Bb2Ot
+	 4Pnh+7S1kt6wEBS4+RE0DcBmIN2wZZqRnSYgmaQlsOVCtYg5HPGV3ZsglcTs+p5p1a
+	 35EISxQC/lO+c7dDZI/XlzSLx15I10/6DIOP5fT92J1RSXDDgAOVMeiBXsOYA+X92u
+	 zG3eEKwqDenQbmqenznCSeGcdIkqi9gYCsw4VU/+DNUbjXJe7usZ/5Axq50yCdWPL4
+	 v53qSGdRTByeQ==
+Date: Thu, 07 Aug 2025 18:49:28 +0000
+To: =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+From: dmkhn@proton.me
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, sstabellini@kernel.org, dmukhin@ford.com
+Subject: Re: [PATCH v4 5/8] emul/vuart-ns16550: introduce NS16550-compatible UART emulator (x86)
+Message-ID: <aJT1M6wHFEXp25w1@kraken>
+In-Reply-To: <aJNvcLgsUOahsQZl@macbook.local>
+References: <20250731192130.3948419-1-dmukhin@ford.com> <20250731192130.3948419-6-dmukhin@ford.com> <aJNvcLgsUOahsQZl@macbook.local>
+Feedback-ID: 123220910:user:proton
+X-Pm-Message-ID: 9d1546b44189c93768678115b91a4512e9deefee
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR03MB7136.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5af17c9d-a294-44e6-6ce5-08ddd5d3c9b4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 16:59:35.5097
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ehSu/DYwzUTdg51mcRV3NurZ7OjTMwLylPpsuStBCWSH6XnNhEH7Pcat0uUBjqimihbbrNUImA5wMq3oE3KqpQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR03MB10757
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Rahul Singh <rahul.singh@arm.com>
+On Wed, Aug 06, 2025 at 05:06:24PM +0200, Roger Pau Monn=C3=A9 wrote:
+[..]
+> > @@ -0,0 +1,1009 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > +/*
+> > + * NS16550-compatible UART Emulator.
+> > + *
+> > + * See:
+> > + * - Serial and UART Tutorial:
+> > + *     https://download.freebsd.org/doc/en/articles/serial-uart/serial=
+-uart_en.pdf
+> > + * - UART w/ 16 byte FIFO:
+> > + *     https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
+> > + * - UART w/ 64 byte FIFO:
+> > + *     https://www.ti.com/lit/ds/symlink/tl16c750.pdf
+> > + *
+> > + * Limitations:
+> > + * - Only x86;
+> > + * - Only HVM domains support (build-time), PVH domains are not suppor=
+ted yet;
+> > + * - Only legacy COM{1,2,3,4} resources via Kconfig, custom I/O ports/=
+IRQs
+> > + *   are not supported;
+> > + * - Only Xen console as a backend, no inter-domain communication (sim=
+ilar to
+> > + *   vpl011 on Arm);
+> > + * - Only 8n1 emulation (8-bit data, no parity, 1 stop bit);
+> > + * - No toolstack integration;
+> > + * - No baud rate emulation (reports 115200 baud to the guest OS);
+> > + * - No FIFO-less mode emulation;
+> > + * - No RX FIFO interrupt moderation (FCR) emulation;
+> > + * - No integration w/ VM snapshotting (HVM_REGISTER_SAVE_RESTORE() an=
+d
+> > + *   friends);
+> > + * - No ISA IRQ sharing allowed;
+> > + * - No MMIO-based UART emulation.
+>=20
+> Listing the limitations here might not be the beast approach, this is
+> likely to get out of sync as it's too far away from the code
+> implementation.
+>=20
+> If anything those comments want to be closer together to where the
+> feature would otherwise be implemented.
 
-To configure IOMMU in guest for passthrough devices, user will need to
-copy the unmodified "iommus" property from host device tree to partial
-device tree. To enable the dom0 linux kernel to confiure the IOMMU
-correctly replace the phandle in partial device tree with virtual
-IOMMU phandle when "iommus" property is set.
+I wanted to have some rough overview of the emulation capabilities in one
+place so it is easy to get a grasp of how emulator can be used.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-Signed-off-by: Milan Djokic <milan_djokic@epam.com>
----
- xen/common/device-tree/dom0less-build.c | 31 ++++++++++++++++++++++++-
- 1 file changed, 30 insertions(+), 1 deletion(-)
+But I agree that can get out of hand if not maintained; I plan to maintain
+that code.
 
-diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
-ee/dom0less-build.c
-index 6bb038111d..3cfffa6581 100644
---- a/xen/common/device-tree/dom0less-build.c
-+++ b/xen/common/device-tree/dom0less-build.c
-@@ -314,7 +314,35 @@ static int __init handle_prop_pfdt(struct kernel_info =
-*kinfo,
-     return ( propoff !=3D -FDT_ERR_NOTFOUND ) ? propoff : 0;
- }
-=20
--static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pf=
-dt,
-+static void modify_pfdt_node(void *pfdt, int nodeoff)
-+{
-+    int proplen, i, rc;
-+    const fdt32_t *prop;
-+    fdt32_t *prop_c;
-+
-+    prop =3D fdt_getprop(pfdt, nodeoff, "iommus", &proplen);
-+    if ( !prop )
-+        return;
-+
-+    prop_c =3D xzalloc_bytes(proplen);
-+
-+    for ( i =3D 0; i < proplen / 8; ++i )
-+    {
-+        prop_c[i * 2] =3D cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
-+        prop_c[i * 2 + 1] =3D prop[i * 2 + 1];
-+    }
-+
-+    rc =3D fdt_setprop(pfdt, nodeoff, "iommus", prop_c, proplen);
-+    if ( rc )
-+    {
-+        dprintk(XENLOG_ERR, "Can't set the iommus property in partial FDT"=
-);
-+        return;
-+    }
-+
-+    return;
-+}
-+
-+static int __init scan_pfdt_node(struct kernel_info *kinfo, void *pfdt,
-                                  int nodeoff,
-                                  uint32_t address_cells, uint32_t size_cel=
-ls,
-                                  bool scan_passthrough_prop)
-@@ -340,6 +368,7 @@ static int __init scan_pfdt_node(struct kernel_info *ki=
-nfo, const void *pfdt,
-     node_next =3D fdt_first_subnode(pfdt, nodeoff);
-     while ( node_next > 0 )
-     {
-+        modify_pfdt_node(pfdt, node_next);
-         rc =3D scan_pfdt_node(kinfo, pfdt, node_next, address_cells, size_=
-cells,
-                             scan_passthrough_prop);
-         if ( rc )
---=20
-2.43.0
+>=20
+> > + */
+> > +
+> > +#define pr_prefix               "ns16550"
+> > +#define pr_fmt(fmt)             pr_prefix ": " fmt
+> > +#define pr_log_level            CONFIG_VUART_NS16550_LOG_LEVEL
+> > +
+> > +#include <xen/8250-uart.h>
+> > +#include <xen/console.h>
+> > +#include <xen/iocap.h>
+> > +#include <xen/ioreq.h>
+> > +#include <xen/resource.h>
+> > +#include <xen/vuart.h>
+> > +#include <xen/xvmalloc.h>
+> > +
+> > +#include <public/io/console.h>
+> > +
+> > +#define pr_err(fmt, args...) do { \
+> > +    gprintk(KERN_ERR, pr_fmt(fmt), ## args); \
+> > +} while (0)
+> > +
+> > +#define pr_warn(fmt, args...) do { \
+> > +    if ( pr_log_level >=3D 1) \
+> > +        gprintk(KERN_WARNING, pr_fmt(fmt), ## args); \
+> > +} while (0)
+> > +
+> > +#define pr_info(fmt, args...) do { \
+> > +    if ( pr_log_level >=3D 2 ) \
+> > +        gprintk(KERN_INFO, pr_fmt(fmt), ## args); \
+> > +} while (0)
+> > +
+> > +#define pr_debug(fmt, args...) do { \
+> > +    if ( pr_log_level >=3D 3 ) \
+> > +        gprintk(KERN_DEBUG, pr_fmt(fmt), ## args); \
+> > +} while (0)
+>=20
+> We would use the pr_* set of logging functions for code imported from
+> Linux, but for Xen code we would directly use the gprintk() functions
+> rather than wrap them as you do.
+
+Oh, I see, pr_ is a "reserved namespace".
+
+I will rename these to ns16550_ since those are extremely helpful for
+debugging.
+
+>=20
+> > +
+> > +#if defined(CONFIG_VUART_NS16550_PC_COM1)
+> > +#define X86_PC_UART_IDX         0
+> > +#elif defined(CONFIG_VUART_NS16550_PC_COM2)
+> > +#define X86_PC_UART_IDX         1
+> > +#elif defined(CONFIG_VUART_NS16550_PC_COM3)
+> > +#define X86_PC_UART_IDX         2
+> > +#elif defined(CONFIG_VUART_NS16550_PC_COM4)
+> > +#define X86_PC_UART_IDX         3
+> > +#else
+> > +#error "Unsupported I/O port"
+> > +#endif
+> > +
+> > +#ifdef CONFIG_VUART_NS16550_DEBUG
+> > +#define guest_prefix            "FROM GUEST "
+> > +#else
+> > +#define guest_prefix            ""
+> > +#endif
+> > +
+> > +/*
+> > + * Number of supported registers in the UART.
+> > + */
+> > +#define NS16550_REGS_NUM        ( UART_SCR + 1 )
+>=20
+> Extra spaces around parentheses? (here and below)
+
+Ack.
+
+>=20
+> > +
+> > +/*
+> > + * Number of emulated registers.
+> > + *
+> > + * - Emulated registers [0..NS16550_REGS_NUM] are R/W registers for DL=
+AB=3D0.
+> > + * - DLAB=3D1, R/W, DLL            =3D NS16550_REGS_NUM + 0
+> > + * - DLAB=3D1, R/W, DLM            =3D NS16550_REGS_NUM + 1
+> > + * -         R/O, IIR (IIR_THR)  =3D NS16550_REGS_NUM + 2
+> > + */
+> > +#define NS16550_EMU_REGS_NUM    ( NS16550_REGS_NUM + 3 )
+> > +
+> > +/*
+> > + * Virtual NS16550 device state.
+> > + */
+> > +struct vuart_ns16550 {
+> > +    struct xencons_interface cons;      /* Emulated RX/TX FIFOs */
+> > +    uint8_t regs[NS16550_EMU_REGS_NUM]; /* Emulated registers */
+> > +    unsigned int irq;                   /* Emulated IRQ# */
+> > +    uint64_t io_addr;                   /* Emulated I/O region base ad=
+dress */
+> > +    uint64_t io_size;                   /* Emulated I/O region size */
+> > +    const char *name;                   /* Device name */
+> > +    struct domain *owner;               /* Owner domain */
+> > +    spinlock_t lock;                    /* Protection */
+> > +};
+> > +
+> > +/*
+> > + * Virtual device description.
+> > + */
+> > +struct virtdev_desc {
+> > +    const char *name;
+> > +    const struct resource *res;
+> > +};
+> > +
+> > +/*
+> > + * Legacy IBM PC NS16550 resources.
+> > + * There are only 4 I/O port ranges, hardcoding all of them here.
+> > + */
+> > +static const struct virtdev_desc x86_pc_uarts[4] =3D {
+> > +    [0] =3D {
+>=20
+> You don't need the explicit array indexes?
+
+Muscle memory; I will nuke that huge static array in v5.
+
+>=20
+> > +        .name =3D "COM1",
+> > +        .res =3D (const struct resource[]){
+> > +            { .type =3D IORESOURCE_IO,  .addr =3D 0x3f8, .size =3D NS1=
+6550_REGS_NUM },
+> > +            { .type =3D IORESOURCE_IRQ, .addr =3D 4,     .size =3D 1 }=
+,
+> > +            { .type =3D IORESOURCE_UNKNOWN },
+> > +        },
+> > +    },
+> > +    [1] =3D {
+> > +        .name =3D "COM2",
+> > +        .res =3D (const struct resource[]){
+> > +            { .type =3D IORESOURCE_IO,  .addr =3D 0x2f8, .size =3D NS1=
+6550_REGS_NUM },
+> > +            { .type =3D IORESOURCE_IRQ, .addr =3D 3,     .size =3D 1 }=
+,
+> > +            { .type =3D IORESOURCE_UNKNOWN },
+> > +        },
+> > +    },
+> > +    [2] =3D {
+> > +        .name =3D "COM3",
+> > +        .res =3D (const struct resource[]){
+> > +            { .type =3D IORESOURCE_IO,  .addr =3D 0x3e8, .size =3D NS1=
+6550_REGS_NUM },
+> > +            { .type =3D IORESOURCE_IRQ, .addr =3D 4,     .size =3D 1 }=
+,
+> > +            { .type =3D IORESOURCE_UNKNOWN },
+> > +        },
+> > +    },
+> > +    [3] =3D {
+> > +        .name =3D "COM4",
+> > +        .res =3D (const struct resource[]){
+> > +            { .type =3D IORESOURCE_IO,  .addr =3D 0x2e8, .size =3D NS1=
+6550_REGS_NUM },
+> > +            { .type =3D IORESOURCE_IRQ, .addr =3D 3,     .size =3D 1 }=
+,
+> > +            { .type =3D IORESOURCE_UNKNOWN },
+> > +        },
+> > +    },
+> > +};
+[..]
+> > diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arc=
+h-x86/xen.h
+> > index fc2487986642..f905e1252c70 100644
+> > --- a/xen/include/public/arch-x86/xen.h
+> > +++ b/xen/include/public/arch-x86/xen.h
+> > @@ -283,13 +283,15 @@ struct xen_arch_domainconfig {
+> >  #define XEN_X86_EMU_USE_PIRQ        (1U<<_XEN_X86_EMU_USE_PIRQ)
+> >  #define _XEN_X86_EMU_VPCI           10
+> >  #define XEN_X86_EMU_VPCI            (1U<<_XEN_X86_EMU_VPCI)
+> > +#define _XEN_X86_EMU_NS16550        11
+> > +#define XEN_X86_EMU_NS16550         (1U<<_XEN_X86_EMU_NS16550)
+> >
+> >  #define XEN_X86_EMU_ALL             (XEN_X86_EMU_LAPIC | XEN_X86_EMU_H=
+PET |  \
+> >                                       XEN_X86_EMU_PM | XEN_X86_EMU_RTC =
+|      \
+> >                                       XEN_X86_EMU_IOAPIC | XEN_X86_EMU_=
+PIC |  \
+> >                                       XEN_X86_EMU_VGA | XEN_X86_EMU_IOM=
+MU |   \
+> >                                       XEN_X86_EMU_PIT | XEN_X86_EMU_USE=
+_PIRQ |\
+> > -                                     XEN_X86_EMU_VPCI)
+> > +                                     XEN_X86_EMU_VPCI | XEN_X86_EMU_NS=
+16550)
+>=20
+> libxl also consumes XEN_X86_EMU_ALL, and with the proposed change here
+> it will create all HVM domains with XEN_X86_EMU_NS16550, which I don't
+> think it's indented?
+>=20
+> Overall I agree for Jan it would be better if this patch could be
+> split into somehow smaller units.  Is this something feasible?  We
+> don't want a patch for each register handle, but maybe you cna somehow
+> grup those into functional sections, so that patches can be < 250
+> lines?
+>=20
+> Maybe you have already considered this approach and it wasn't
+> feasible?
+
+There __were__ pretty comprehensive reviews of this very emulator code
+in the past without raising such concern (and this is v4).
+
+Just in case, the most comprehensive review was this one (thanks Roger!):
+  https://lore.kernel.org/xen-devel/Z1wd4iAmVzv1ISPZ@macbook.local/
+
 
