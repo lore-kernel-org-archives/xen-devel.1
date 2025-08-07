@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B03CA0EC2
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 12:33:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1072928.1435878 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9071BC87FDA
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Aug 2025 12:33:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1072934.1435930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujzoS-0002ED-EA; Thu, 07 Aug 2025 12:33:40 +0000
+	id 1ujzoY-0003Pc-Qi; Thu, 07 Aug 2025 12:33:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1072928.1435878; Thu, 07 Aug 2025 12:33:40 +0000
+Received: by outflank-mailman (output) from mailman id 1072934.1435930; Thu, 07 Aug 2025 12:33:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ujzoS-0002E5-A2; Thu, 07 Aug 2025 12:33:40 +0000
-Received: by outflank-mailman (input) for mailman id 1072928;
- Thu, 07 Aug 2025 12:33:39 +0000
+	id 1ujzoY-0003Np-Cp; Thu, 07 Aug 2025 12:33:46 +0000
+Received: by outflank-mailman (input) for mailman id 1072934;
+ Thu, 07 Aug 2025 12:33:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SGIa=2T=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
- id 1ujzoQ-0001m4-Ro
- for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 12:33:38 +0000
+ id 1ujzoW-0001m4-QN
+ for xen-devel@lists.xenproject.org; Thu, 07 Aug 2025 12:33:44 +0000
 Received: from AM0PR02CU008.outbound.protection.outlook.com
  (mail-westeuropeazlp170130006.outbound.protection.outlook.com
  [2a01:111:f403:c201::6])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bba6b00d-738a-11f0-b898-0df219b8e170;
- Thu, 07 Aug 2025 14:33:34 +0200 (CEST)
+ id c130dc9f-738a-11f0-b898-0df219b8e170;
+ Thu, 07 Aug 2025 14:33:43 +0200 (CEST)
 Received: from GV2PR03MB8678.eurprd03.prod.outlook.com (2603:10a6:150:7d::13)
  by DU5PR03MB10563.eurprd03.prod.outlook.com (2603:10a6:10:51b::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.13; Thu, 7 Aug
- 2025 12:33:31 +0000
+ 2025 12:33:35 +0000
 Received: from GV2PR03MB8678.eurprd03.prod.outlook.com
  ([fe80::4eb:3e7b:1ffa:25f9]) by GV2PR03MB8678.eurprd03.prod.outlook.com
  ([fe80::4eb:3e7b:1ffa:25f9%6]) with mapi id 15.20.9009.013; Thu, 7 Aug 2025
- 12:33:31 +0000
+ 12:33:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,35 +49,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bba6b00d-738a-11f0-b898-0df219b8e170
+X-Inumbo-ID: c130dc9f-738a-11f0-b898-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iv2pCC4B/TYwyBGiYpyuhexWxM2w6BchvkZ0LH0Hmgc+jUEQHTA9ifAi64xeJLv7cdX7IcpnPJwwAOYO1Eci6Y2CD/47K2dhdmu9jH5hCOeU7+q2OIJqTm8++AvRwk1rpKIV4kfA5bPLSJ0cDBX5jrg/TiZGHlp9TL+uB2XRMuZm70xxzisZdTUsHwHKwmOsN/mL1HvS/HoJjJWbJmVcSSx2eDCFPj7lwsbwynjhFBF1fQR8LVzrUch1bkffYktd1Cr2oIk+YbTwni+Tlj/S86WHS3DdSk7VVSq9yzj6V3gx4EIY8B7v8arz9DCbD7bMz8zaHbnoiXq58/z7oK9Lpg==
+ b=LRt9tSbte8YITFuBzhM0oQ7G90D6rJPwm+X+RTFKprc1W/CA2QJv3ozGONLCJiULhsnsRBkCOPD7DHeD7o+uHpnfPZvPyljiX7K0QbcuwEwl+BOdfnV9aCW9Mb9hbb8r60m1t+H3E3XHS9jr4WVfdBXladju/6dn0NyUqUFEf8pCX58hOJY7ITLuaDV7/jvNU11Ne3cAAmPpmxHAVlLwy+Q5EF4YDXVoSluzCRf2Uaw3St070tCZiI1MEWJNq82mq23hG3lEZCQrOWti73BSNOEzt6tIvL01P2es2YlVdcBdLd14t0swQW+cbGJHn2abEozFgr32Eiv9UbbPAEoGwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jseDZopep9xOUIh71ALDsTyOZSrJZhgLmbqz0ph0+Y8=;
- b=ESEgHvNKIPzw/4Fr+G+DHVt5OLvG5eoVTD7686wWOPixLHdZG2oK5fz52N0DAWKTJQcLrGbfLInu6mxAsAZe2lcbWg4SCEc3JlVCXTx7h/UsCDrtJhWh/wWxYY99vxWev54LGS8USB6+8Jj/kS3TcAY9Vfytalua+0i6rgN6wCVccahUrSNMKreWx245KZlC50QoE5E8KCqXwCXjW38mVjm0T5UoaP8r2xUKneiFjIzpL1BwN2RqQSKLYmN0xKvHZYxjhGW2sJxUOyitA9OAcmNNqZ4UFoN+CV7Cq/+SLPmBEIlKOHLAB0ebaFQmtCgBkZFwcqLvHlFQEyKgZK/SnA==
+ bh=/JtjGnEPiZbkJDikA07kAxuFpezaBGG4TRRB9FslJFU=;
+ b=PfBWGMbawYH4sYm1MxdPI8uvfbl+3kh3484RGWaqzaEB7p5NnZY3acx3zQySUN6wn1/aP01igmZ9/DY8fQyYW+Bg1s0ei/k66jzZgNH4S7qKgsVOS94MH1gu4QRr+ffmgGCA0MW+C1dNLkLhWZbDF2EZgQDDtjy1D6rFtguXKH40pLvMSDuALHCGRWC0akpmcqgZvbUAmdwcm3a3BEqe2YXlp+RIEArikTeXQvh6pEFqxJAgIrWGTzUlwmMHGqt8VVQB9I6p2oRFqQJxMkbIQGohXyrL7BE80sMK0QXhTcI/64f0NfX+AmG8pjC914O/EJMEih1uu9L29B9RX6u1MA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jseDZopep9xOUIh71ALDsTyOZSrJZhgLmbqz0ph0+Y8=;
- b=MJw8n8EGJgzf475ygeSkykbnux71T9bevsdvYULVfxXWLq3y11WEWfg64uUZxisOq0q90LKMhdm/s47UM0LBU5z/UbYDNjS8C7nNb+WKGxm2jRZoPQ0LBaZT5hB81UU6f2NugSTyk4oVvdBwBRe0w2XgwNoI+y/Tpdbu4jWvFMMd/ujlHTUcNwLmRX3P9H4KtbEUSNtDANj4XI4olrkRRMfAHS4u7VK1x7gfAnIYTJJQNdxBKBDY3h8CpbCBAoUffB+wCiv3nk2j0eQOrnMHJXMXkAp1AhWTu6NqfppTDmcnPlileOUocdRBsmTxvMAMdVqEeie+hAdDoOaahzoTOA==
+ bh=/JtjGnEPiZbkJDikA07kAxuFpezaBGG4TRRB9FslJFU=;
+ b=IT5V186ncUXIzYm9cst+y4x/YfwDZ8ftA3pSmRC7wmj1mKcx5WyzzxR1esGYXVOoCkN1LSVsEpSJ2H9DTjpa4BNbo5S/yu+kBhDg+h3pK3gc5lHTj70lLDlC6o/sor2FnKCwXvHcyXTxuoR1/Q0k6Zyl4IU/Git99ze+TMOas70XO8bqImAXy60iwnYT5XPFX0nwQ6rCQZarAggw6enzsWWOIr7ABNP8IJLyScKYVSO4lg0Y+dy6NIR+OiU5A2DqUXJV+p/zO71eRGgRwNJ3Hk9KRH3QfVkSiAnHjFO0GpN5e0A6XYnUVs0k54c6sWlt8qV8gEtgA0/WYD/o6In1bg==
 From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
  Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 03/10] xen/arm: vgic: implement helper functions for virq
- checks
-Thread-Topic: [PATCH v2 03/10] xen/arm: vgic: implement helper functions for
- virq checks
-Thread-Index: AQHcB5d76MRh/Swq2EGu624C+G/Fbw==
-Date: Thu, 7 Aug 2025 12:33:30 +0000
+Subject: [PATCH v2 09/10] xen/arm: domain_build: adjust Dom0 IRQ handling to
+ support eSPIs
+Thread-Topic: [PATCH v2 09/10] xen/arm: domain_build: adjust Dom0 IRQ handling
+ to support eSPIs
+Thread-Index: AQHcB5d9D2bB2ytT+0KvuTkMlpIiHw==
+Date: Thu, 7 Aug 2025 12:33:34 +0000
 Message-ID:
- <f029f88411e816846d13aaf33d4ef703f95d1bb8.1754568795.git.leonid_komarianskyi@epam.com>
+ <abba685916e6637eedbd831352bed2e968eeb7dc.1754568795.git.leonid_komarianskyi@epam.com>
 References:
  <7e6477a83ab65220ef1c5dd22f4ef3536fbbdd5c.1754568795.git.leonid_komarianskyi@epam.com>
 In-Reply-To:
@@ -90,221 +90,162 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: GV2PR03MB8678:EE_|DU5PR03MB10563:EE_
-x-ms-office365-filtering-correlation-id: 654bfcf4-b87e-4337-1ba1-08ddd5ae9e98
+x-ms-office365-filtering-correlation-id: efd5c5b2-565e-4628-7a5f-08ddd5aea0e6
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?lLPif/Dna/ZJI11gvFyEHCmzFPiofoLrISG5xE/MelyLE6KNiMbN1aSgf9?=
- =?iso-8859-1?Q?CiidAQnAu9T+iTPO24Q1qE6x8B0M8movlEHqJEO0zYO3RxsTPd+0+KQIjD?=
- =?iso-8859-1?Q?nXTrRPl98S69fEebsuUKQt1jhYrkLxobhtxfGSGcb5fJ2l2ykXwcWoLfWN?=
- =?iso-8859-1?Q?22TMDNazEt3Q9lE+ri1FzgS+RJz3GuJzhBhlUtaAb4vTVuOMPm8iu6povH?=
- =?iso-8859-1?Q?aWkbVjTYLJAAo+q9pnH3MN2tr0FLnWO2O6wf/7Ry5Fn/FK5nqdoWLxac2B?=
- =?iso-8859-1?Q?bUFc2FEA64HAEIqJRInCCSbw8rijGj5N0CXueyBP8AR0mjrlSG/MMg19Wu?=
- =?iso-8859-1?Q?QfKDKzkxsc2bQZQNJyZgLXY0S8avFngSmiTOQ76I9DsLRApwzTiXmDrvvV?=
- =?iso-8859-1?Q?YI2M25TXzpYlj6TaJlmPcqKRgYCAchLit/H5C4vC1VtZG2x3ypPBvMjOhP?=
- =?iso-8859-1?Q?awqJ9cXP1Tc0NE0J7SSEmy2nVrZO3XSXYjaJte3E5CAKmC3BzxHSDfjLHS?=
- =?iso-8859-1?Q?v1ci7kMecj6CwMOhS98aOA2tCmlf40Fx0M3gluQQ3bCNwyUggaHFHNviWy?=
- =?iso-8859-1?Q?ngRBQgGVwYYLRqqs9uwZVWCc9oHch7D2zoCaf1mLv4HAqqcsKj99qzVWAE?=
- =?iso-8859-1?Q?vjZEw2T/RwItbXZiAB867PhQNpsr+1FafOVCgfAWUfsXrO54HU6cx9kSAY?=
- =?iso-8859-1?Q?HhPFeDp4eNDiQ3Tnv8aFpgLnNuudXU5jaYrsY8c0dMrKRJhTw0vAQOztd8?=
- =?iso-8859-1?Q?FhqQj14j/Aa5wMXSdGhGD1/T2RPot2HDprd5l+ZRexgeZue3SgEwoEj+XQ?=
- =?iso-8859-1?Q?pIpg21f0KR9GYLcYiPeO7VXymYoUrOF/xE4L3k0VZcFWQydjgMIc6tl3RT?=
- =?iso-8859-1?Q?alZuHsDojUSswQoSmuNIUS0RBB17VnzXfle+PfP+QlyU1JwGCmd4DUBQv5?=
- =?iso-8859-1?Q?K24yFtALIwbpn9BqlgtmVwbNYziAscdeHTmVjevdN6yJlGHRHYBSrY7IT2?=
- =?iso-8859-1?Q?7orAlihZRWMobDYdxv5QlUx3wogMrgkfeEWVMnlUmmu9CIQgMOt+hCFl4l?=
- =?iso-8859-1?Q?NW7d2+XP3Jtj+axiyUhxRbK8oOJmT6gfZS0lLn2nTPtikWrYNmqKuLtwya?=
- =?iso-8859-1?Q?GWghVzqdx2YWc2+076cd+TOjGHpyfWEz5xJvcgswPn6K9fAjnGX0VVLekS?=
- =?iso-8859-1?Q?U4j+IPyGXuaNRZ1NP/hwWG1YMahwc7qqdyW30te5CuBqacr0AYFvSo9Ev/?=
- =?iso-8859-1?Q?MnVJLULCq7l3Aqy9Dq71aUq98VXMnl6/mT0/o+M10YzcfeXZQxibW7Du0p?=
- =?iso-8859-1?Q?GeCmh0qMztyOPD9ZmWv1y75uI59w8+n8QC3/SsKRhU/oQNDmWhOsAcP39G?=
- =?iso-8859-1?Q?ATZLWuOGi1gwSmb4LHXKk7Yiwzapc8QaYgmysXpg93dYD4SzsLJTAT9fP3?=
- =?iso-8859-1?Q?GB+RM4nBbca+BB/0++vlRZx7UDuJZ+kyXeM89vnMjF3vw4CN9iegKNfwyS?=
- =?iso-8859-1?Q?FYiYXF6xjufIFu+UB0gpD9gWaMJh8A5MhmoSec1xEe+w=3D=3D?=
+ =?iso-8859-1?Q?G7DaQxRNAe+W6CYtYICjhQ2xsXoTCHdRkxsQIWdx1iDvYzyFD0iOfVy+jH?=
+ =?iso-8859-1?Q?ncNnZ75hacRKr8RlvY5LB+YbqR4c0cWSp2kgoMqzqsCl0y62eaZPgLX7mj?=
+ =?iso-8859-1?Q?rAYtujQxKvhL/xpX3zmyI5Y2Siu3ObFBaHEBZ7FkGDv4WBwmCEX2liy/D6?=
+ =?iso-8859-1?Q?pQzFYr4O2MhRqedb8ZqOEmmCWrPu+FBVYAyN5EPne7SC3zfhoq2aKCStr5?=
+ =?iso-8859-1?Q?Cj58B3cTAwc5omB8+LZC6Ji5s3yPQVqpblqVihNE1ZXuDjZ49GojUOGmJ1?=
+ =?iso-8859-1?Q?SeetZC4ctflGJ0MxumC00g8uhlk+mIgRk2oaMbon71i3NyMhpExbvLNxrP?=
+ =?iso-8859-1?Q?z1xHM0b+PTThbUwttLElvUW5EGCwB1A1Jf6QE3hXlBbNSdq/DobCjhc3mj?=
+ =?iso-8859-1?Q?4cXuz8k528Jeq9Tms2ABJRSL4kXf0RJKtIIBUElR4jg9LQnAnhp9Az6b9j?=
+ =?iso-8859-1?Q?dVuZ1ZBocFjwG8OqoHYEuLXcUadmJA5wwOT0ikSIc9y6vqLO4sA2QoO9yD?=
+ =?iso-8859-1?Q?vQHK3f6zM/A1NlPCL0BLaIbIwv/dJLTcUCXT7Jbtmp7+8qeyKEVzcnnv+0?=
+ =?iso-8859-1?Q?pibc/lSYMwuec4yfSgQg3DM/0HeuL7i5vIxVoIGBhkws5AiZC2uwxHS/p0?=
+ =?iso-8859-1?Q?p4kSFRHz4T2Ksp59z6Y9f7ByNR7+7ml4YQj0TgPJGnqD2K9k0NPtz0yy1O?=
+ =?iso-8859-1?Q?bla96sm1PEzxQQSHfp80dB7YEvVXwXT8X4PqXSoRRqJpjXUPv8caGP9v0M?=
+ =?iso-8859-1?Q?2xsrMFtfzXqWNsv/VOYgWq7nTUMoW67eY8qRWtukGm0qtMs+59j4066Bbf?=
+ =?iso-8859-1?Q?HqE8icKlwVEGFuxl9FTc0WXvkRhu9m5JTbzjS1Cl+KmwuKmjgox28Hpdz1?=
+ =?iso-8859-1?Q?W7Ci6j+RUy+je1bQvVZ0GavEnqviYn5E7hY9FUfTOLXMHqoTfYnloYe8EW?=
+ =?iso-8859-1?Q?4JR4ZKuEmwz8a1Lm3N7SShGmMPVKHuOFs+w62y2T8I4dHMSzHrqxEnPFK7?=
+ =?iso-8859-1?Q?AKLJXJRC8xItsaaD0RDV+y600GAcD3Yrg03qEPaMTRnCNgYDLdBNJxdI95?=
+ =?iso-8859-1?Q?86hFbjsoLsZ+ISo+Brd9cn0o/xIKvO9BF2ddbBstj2YOzW5g5DL194kUGm?=
+ =?iso-8859-1?Q?Xygdt2CJj7vyuUehvq0wvCKz0yER4kEAkmFEH/s2cwqFpM7L4TTBC8WPfV?=
+ =?iso-8859-1?Q?x3losqzvgw5kgrOmcAcLqsybfRoFSFpP9QHJQqoPPFhSAEYZTb/9if8wRm?=
+ =?iso-8859-1?Q?5zWaZJxZ4ez1zIwga+JfzvuTZ+TTBDjhpAXatNIRU/sFv9irxYbrvQ4Edw?=
+ =?iso-8859-1?Q?iDhADx/6NuROesH+2GvTW7+wPVB0Xl6doeztEj26fM5zrJLqnR8anxICZU?=
+ =?iso-8859-1?Q?fGktl1jbX4VrXnB3IXeBuwwgNuMvn/Wpy+nlaR/9hIGWzmHcR8Ts8ExqqZ?=
+ =?iso-8859-1?Q?lgcNSnxtGvr/NdI79W/LUY+2SuZOss4wAMqIDExGTYwWujKOCQNFV+fEIj?=
+ =?iso-8859-1?Q?viGFIxxKCUPOL8ItV3nw3nHkvK6MEAZ7qaX1xC3edUCw=3D=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR03MB8678.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?3osLU9ahRrbtl/x1f2m3ZgMcdjr/eXd8GadswouzSnuBUpS0bsL6RDhMEq?=
- =?iso-8859-1?Q?YPDeDPRsXW6LKChpGT+V6mcTzkR9uMuv67YA58BW39kPShH2PlL+JbAetL?=
- =?iso-8859-1?Q?ylua7vSNfM8aERffuQ8FI7xpHe5OIxqt2IKFbrLcAiJkDjjlnjSvrqAgAH?=
- =?iso-8859-1?Q?xnD4VZmMrwjWgQpcNsckWyFimU4SgCIGFjMAGHekPsuPm1REfYI7QQwQcG?=
- =?iso-8859-1?Q?Yi7G1kkMMzzq8KqRzo39jzKwya3jJnTChTK8i9LeGZ0xgCLdQP0Cn6TeF6?=
- =?iso-8859-1?Q?DjXkcmfBVnpWcjA9RA9trovD0SWEMrBVB3ujguhFEXmG9yqvCGjO3K5pNG?=
- =?iso-8859-1?Q?oXp9GrdKZsXwMGYcoawoxEvB43Q1/5MAyB3NEQwRPDAAWSENeIlCQi/fyh?=
- =?iso-8859-1?Q?/Q9J9jI3J6ZgGFocCbwlqe7ZomElFQ/+nSweqlLMqNgWjY7pERJ894zuK3?=
- =?iso-8859-1?Q?iJmF6zNFzWpLBktq1Tu/tAmTM3xqPA2QsAsUjWlCIaBkxxRoUdp7V3tl4H?=
- =?iso-8859-1?Q?2e1X9+IVxgdzwO+e59NIQ3fQBkFZqdSU6mCw3l5mxtBAn6FuES3tpUujtZ?=
- =?iso-8859-1?Q?wG0VIyY7aJ4S67II1NWJVrDkMrXWmPOscYlqT6dP1leJ5eGJflCG//m0mU?=
- =?iso-8859-1?Q?qknE8T0Kj6wZVd0zK2nMCqOG3uUCGT0iLsCTMBT4qyNjUzDxEUErQI2H6q?=
- =?iso-8859-1?Q?J0TdcGR1tp4SdkxQyTWAkECvYT6k7weJH+pYY/y4EOcv+PhUA7kYE/lwGU?=
- =?iso-8859-1?Q?seH1MV7KPqCg4HonDGG8fN62KRMF4NfdBOVksqwL955nfUWyTtM/jYctHd?=
- =?iso-8859-1?Q?dUwgDvfRrup+P9Smnw6AoDIgfoWWPBCNQ5Qh/iMOwM3UOnKXJl/qaLabCV?=
- =?iso-8859-1?Q?hIc79yazzNdqB9q2yO/lSqImIFgg9UkOFb69KFQxAfqbXKuvNJGBMQZOv3?=
- =?iso-8859-1?Q?cRfUpm/og/4OYr+6T68QBzvGml3kBMgXhSUYZ9kcpoODhXkJ9T3jn+SGSR?=
- =?iso-8859-1?Q?u8FYZsMvnIOvH/28cxEPcqRC0ezT1JeOvVG7ha+3gjnNVqt9OJeiDj46M0?=
- =?iso-8859-1?Q?Gejt2wzYuSwB/cSX4tHM+ct2hRgp78/Z3JXHZadRhyXaPOOz2NyjZZAMXy?=
- =?iso-8859-1?Q?Oe7En1YicSeYCGkAIHZL83qYhn9OLM/H0kpLGm9CWHtZSn1WtY3Uczh6Tn?=
- =?iso-8859-1?Q?kbz+2SJ+h2RGfLeDbAKPVfF0ffcc7TXkE8xoqGoCiJVNuL/ub5uiiaDL4L?=
- =?iso-8859-1?Q?zAkkwQjBPsU8u2EywI7aT7o4aaE3trDR/45pF5II9tujB4noKiNLIz9BpP?=
- =?iso-8859-1?Q?WtjCSSSonwN/F2Px5GupkZAMcDefKjBB/wmDAN2SHWcGlO7hGx1IhGUmf9?=
- =?iso-8859-1?Q?8CU8BptfVci00ZIx/gwg+lPTx1oT7PuJUyYRPYw/bkwUVKr1vs+c0bho2Q?=
- =?iso-8859-1?Q?NGf136jEJc3jzjVBJ4S9COJ12+j0OS7Ec27/kPZrACV270Xdm8H0ks+zB6?=
- =?iso-8859-1?Q?RyZKGp09aoNQa58/ZhLGGRd8kU5rA5T0CVMw7YJisCXWzo3f41K5/v4EA+?=
- =?iso-8859-1?Q?3BX0oKShksZ5eHxUwQifcrQnHGUvmGW6UFSKk1gZ00bI4WLTg/zb4FNd+w?=
- =?iso-8859-1?Q?wF7kAqiTSG8ei4XSxD3k4LNRpz1WxBZXnEcHeXGDKi91bMO/J4HR80Z8Zo?=
- =?iso-8859-1?Q?L1r4pNHTkHJCUhwDB60=3D?=
+ =?iso-8859-1?Q?Hj4QnoJNhK+Rf9aiuDMOBLlGZR88I7aH2Y6kFuVlRHZWGXzVW6kNkNecRN?=
+ =?iso-8859-1?Q?HPoBwl0uCTniDxHhvappjCrn7CzOX//Wz3JQiWnIj7fzR/znp4Nsq2Q+vM?=
+ =?iso-8859-1?Q?mmn2zFycE4VhONyNz7CXG9Zs5u7IxZnqNPcvQOgPl3gwHwpvE3GWrJVNx8?=
+ =?iso-8859-1?Q?QaNCelaSScTrR6wOJCkflMur5PGzEqLSZsOh9p+Yjxxy6UAbqaBqwNVb2K?=
+ =?iso-8859-1?Q?M54+hVgg+aBOQXXRMUbV6hW4q/McRny/ltrqiE0K5o2DTca7hmYFyAcVhX?=
+ =?iso-8859-1?Q?3ddHbMc0Uzd2nsnPYqBU1syE8u2OkklPm3cbEEQ5Hwe7q27yZMRc4/BoIB?=
+ =?iso-8859-1?Q?L5UALBKfg9LIC2FqHal3Q02P/W/DOED39Ggt5pGmjhg0WUeNapkCMyXZEd?=
+ =?iso-8859-1?Q?9z4S5YTe+MXd9N+l7vPioMG+KHdZ8hDmsRN8VldeomqtYukSfrB5m36B2h?=
+ =?iso-8859-1?Q?nY/2AsXpKH8pSZnrNtukCEEN4EMnUVpo+MP7s3PRxhlKGR6ddKeyBVyfK3?=
+ =?iso-8859-1?Q?ovuoDOlZqRPb3LaG2cZ5E03SrLuHVDU2Tm5mnP2HJjy10bI6ULUGBIjVsB?=
+ =?iso-8859-1?Q?OpCwxlEJ5FAHdKT4DFJWCNoBKui5m92ireaiZWCV46/NAhIkhV8SwKZ3Zw?=
+ =?iso-8859-1?Q?8xr5RgDj5fxemHy/3FI5ItHGDunpG2+0y4VAg+5g4o97v4zVbtJUSSQ9YR?=
+ =?iso-8859-1?Q?NYZKE0U/wDUSDMpSF8YAoObkHKE+W3j5alxrJZewpyHpEWCXke9VeKkTZc?=
+ =?iso-8859-1?Q?843yvQZ3S7qn+RNbwbDl0dFWNqtUVwh7HPQA8eFwmj0AHRZAWX4/1TSpZa?=
+ =?iso-8859-1?Q?SME58YVBoolx9I9CNkE27ZbyTc9U/mgcJLxi23I2buHrq74dk9REqwbG9U?=
+ =?iso-8859-1?Q?g9a0zEP9jVo+WEdweTAv7xNQmPXpgO7RFqJgZJkcwJQ+xJ4AHyLzWhcQCF?=
+ =?iso-8859-1?Q?jwWzE/28ORNnv7VrJwOeOO9DYXjMXF8gnfl9pM+ypC5BKVQ8VGnugz9uYd?=
+ =?iso-8859-1?Q?GnALbEapotGIqHCfwoNZygfXgArMVT7rsthGXadsZ/ITcU3Lfz7R/g/uOI?=
+ =?iso-8859-1?Q?umVRaH6rfVDW2WCY1wrv5/8rx73BlJv3NqasoHe+i4kq8NcXq4PuiFI448?=
+ =?iso-8859-1?Q?7HdZoZ9iIfYAfbylw6f+nS1Zy03erHiKD2v6lekIe4F/KzhIlO5/GP1muX?=
+ =?iso-8859-1?Q?GrzLbs8r5w4dTrsYV5y8ZhV2sEIpnZqpqTqZmuGM6LFVTw6WFpgVX7o0yI?=
+ =?iso-8859-1?Q?4REBD7cQtN2ru6kMoICFFN34frGC0ACT4LFdsKsx09wgJHzVyrMZ4BMkFU?=
+ =?iso-8859-1?Q?9hKh/nRngQQnB5bjwdoV9BxTrOhBkCBKfFaBh0IeftiX+4tId3IREiAHW5?=
+ =?iso-8859-1?Q?szU6NHtsBHlEEXhAhVsI+saBdA81Tra2osyNteyBLFo1shcxgQuOdwQjCD?=
+ =?iso-8859-1?Q?iBcBTLkVGOTk82O8UT9wnVOSQd/DJ9wJXAc7LbFrcA8n7/9tY2HW3XlWsn?=
+ =?iso-8859-1?Q?mIQTbw2xpS0ZlgbVy2pNBmgJ16FfCZ75k2zL7uMck2uH2bpSsPT71owqDW?=
+ =?iso-8859-1?Q?STE7mdUw72ZD2H5BrWCVAYOxQD/gxyCJ+LVHK3VJ1gSvNQCiDF46Wm3MD0?=
+ =?iso-8859-1?Q?ZaCZQ6OPtCtPujlunb5I1vmwBoFCxVPDN2PLUfmnogzv32xAPdKL9bUXE6?=
+ =?iso-8859-1?Q?ScY9y8iyENZJjS3JNUM=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR03MB8678.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 654bfcf4-b87e-4337-1ba1-08ddd5ae9e98
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 12:33:30.8555
+X-MS-Exchange-CrossTenant-Network-Message-Id: efd5c5b2-565e-4628-7a5f-08ddd5aea0e6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2025 12:33:34.1414
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ko3B8+8bZZbwymMMYEImqw22qscRC8Wxkc1v46/pfxv6emsgxs1E5Xjfk+yduDgVXFKFSO+b37UlIFxlPA1wZXyBwFbMCm3lqJubSclk7bU=
+X-MS-Exchange-CrossTenant-userprincipalname: g7pje8ZJQnjSkxk+8e6FUi6h6GOSNdO8q4j4EEVXs1gIcs0sWX71GaHRG2wFch4ySfqmznBvSgkRO1eLMaMefPJzvC3usXiXqgoauIpe/us=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU5PR03MB10563
 
-Introduced two new helper functions for vGIC: vgic_is_valid_irq and
-vgic_is_shared_irq. The functions are similar to the newly introduced
-gic_is_valid_irq and gic_is_shared_irq, but they verify whether a vIRQ
-is available for a specific domain, while GIC-specific functions
-validate INTIDs for the real GIC hardware. For example, the GIC may
-support all 992 SPI lines, but the domain may use only some part of them
-(e.g., 640), depending on the highest IRQ number defined in the domain
-configuration. Therefore, for vGIC-related code and checks, the
-appropriate functions should be used. Also, updated the appropriate
-checks to use these new helper functions.
+The Dom0 configuration logic in create_dom0() has been updated
+to account for extended SPIs when supported by the hardware and
+enabled with CONFIG_GICV3_ESPI. These changes ensure the proper
+calculation of the maximum number of SPIs and eSPIs available for Dom0.
 
-The purpose of introducing new helper functions for vGIC is essentially
-the same as for GIC: to avoid potential confusion with GIC-related
-checks and to consolidate similar code into separate functions, which
-can be more easily extended by additional conditions, e.g., when
-implementing extended SPI interrupts.
-
-Only the validation change in vgic_inject_irq may affect existing
-functionality, as it currently checks whether the vIRQ is less than or
-equal to vgic_num_irqs. Since IRQ indexes start from 0 (where 32 is the
-first SPI), the check should behave consistently with similar logic in
-other places and should check if the vIRQ number is less than
-vgic_num_irqs. The remaining changes, which replace open-coded checks
-with the use of these new helper functions, do not introduce any
-functional changes, as the helper functions follow the current vIRQ
-index verification logic.
+When eSPIs are supported by the hardware and CONFIG_GICV3_ESPI is
+enabled, the maximum number of eSPI interrupts is calculated using
+the ESPI_BASE_INTID offset (4096) and limited at 1024, with 32 IRQs
+subtracted. To ensure compatibility with non-Dom0 domains, this
+adjustment is applied by the toolstack during domain creation, while
+for Dom0 it is handled directly during VGIC initialization. If eSPIs
+are not supported, the calculation defaults to using the standard SPI
+range, with a maximum value of 992 interrupt lines as it works now.
 
 Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
 
 ---
 Changes in V2:
-- introduced this patch
+- no changes
 ---
- xen/arch/arm/gic.c              |  3 +--
- xen/arch/arm/include/asm/vgic.h |  7 +++++++
- xen/arch/arm/irq.c              |  4 ++--
- xen/arch/arm/vgic.c             | 10 ++++++++--
- 4 files changed, 18 insertions(+), 6 deletions(-)
+ xen/arch/arm/domain_build.c     | 10 ++++++++++
+ xen/arch/arm/include/asm/vgic.h | 11 +++++++++++
+ 2 files changed, 21 insertions(+)
 
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index eb0346a898..47fccf21d8 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -133,8 +133,7 @@ int gic_route_irq_to_guest(struct domain *d, unsigned i=
-nt virq,
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index d91a71acfd..fa5abf2dfb 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2055,6 +2055,16 @@ void __init create_dom0(void)
+     /* The vGIC for DOM0 is exactly emulating the hardware GIC */
+     dom0_cfg.arch.gic_version =3D XEN_DOMCTL_CONFIG_GIC_NATIVE;
+     dom0_cfg.arch.nr_spis =3D VGIC_DEF_NR_SPIS;
++#ifdef CONFIG_GICV3_ESPI
++    /*
++     * Check if the hardware supports extended SPIs (even if the appropria=
+te config is set).
++     * If not, the common SPI range will be used. Otherwise overwrite the =
+nr_spis with the
++     * maximum available INTID from eSPI range. In that case, the number o=
+f regular SPIs will
++     * be adjusted to the maximum value during vGIC initialization.
++     */
++    if ( gic_number_espis() > 0 )
++        dom0_cfg.arch.nr_spis =3D VGIC_DEF_NR_ESPIS;
++#endif
+     dom0_cfg.arch.tee_type =3D tee_get_type();
+     dom0_cfg.max_vcpus =3D dom0_max_vcpus();
 =20
-     ASSERT(spin_is_locked(&desc->lock));
-     /* Caller has already checked that the IRQ is an SPI */
--    ASSERT(virq >=3D 32);
--    ASSERT(virq < vgic_num_irqs(d));
-+    ASSERT(vgic_is_shared_irq(d, virq));
-     ASSERT(!is_lpi(virq));
-=20
-     ret =3D vgic_connect_hw_irq(d, NULL, virq, desc, true);
 diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgi=
 c.h
-index 35c0c6a8b0..45201f4ca5 100644
+index 9fa4523018..117b3aa92c 100644
 --- a/xen/arch/arm/include/asm/vgic.h
 +++ b/xen/arch/arm/include/asm/vgic.h
-@@ -335,6 +335,13 @@ extern void vgic_check_inflight_irqs_pending(struct vc=
+@@ -353,6 +353,17 @@ extern void vgic_check_inflight_irqs_pending(struct vc=
 pu *v,
  /* Default number of vGIC SPIs. 32 are substracted to cover local IRQs. */
  #define VGIC_DEF_NR_SPIS (min(gic_number_lines(), VGIC_MAX_IRQS) - 32)
 =20
-+extern bool vgic_is_valid_irq(struct domain *d, unsigned int virq);
++#ifdef CONFIG_GICV3_ESPI
++/*
++ * Returns the maximum eSPI INTID subtracted by 32. For non-Dom0 domains, =
+the
++ * toolstack applies the same adjustment to cover local IRQs. We will add =
+back
++ * this value during VGIC initialization. This ensures consistent handling=
+ for Dom0
++ * and other domains. For the regular SPI range interrupts in this case, t=
+he maximum
++ * value of VGIC_DEF_NR_SPIS will be used.
++ */
++#define VGIC_DEF_NR_ESPIS (ESPI_BASE_INTID + min(gic_number_espis(), 1024U=
+) - 32)
++#endif
 +
-+static inline bool vgic_is_shared_irq(struct domain *d, unsigned int virq)
-+{
-+    return (virq >=3D NR_LOCAL_IRQS && vgic_is_valid_irq(d, virq));
-+}
-+
- /*
-  * Allocate a guest VIRQ
-  *  - spi =3D=3D 0 =3D> allocate a PPI. It will be the same on every vCPU
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 12c70d02cc..50e57aaea7 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -442,7 +442,7 @@ int route_irq_to_guest(struct domain *d, unsigned int v=
-irq,
-     unsigned long flags;
-     int retval =3D 0;
+ extern bool vgic_is_valid_irq(struct domain *d, unsigned int virq);
 =20
--    if ( virq >=3D vgic_num_irqs(d) )
-+    if ( !vgic_is_valid_irq(d, virq) )
-     {
-         printk(XENLOG_G_ERR
-                "the vIRQ number %u is too high for domain %u (max =3D %u)\=
-n",
-@@ -560,7 +560,7 @@ int release_guest_irq(struct domain *d, unsigned int vi=
-rq)
-     int ret;
-=20
-     /* Only SPIs are supported */
--    if ( virq < NR_LOCAL_IRQS || virq >=3D vgic_num_irqs(d) )
-+    if ( !vgic_is_shared_irq(d, virq) )
-         return -EINVAL;
-=20
-     desc =3D vgic_get_hw_irq_desc(d, NULL, virq);
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index c563ba93af..48fbaf56fb 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -24,6 +24,12 @@
- #include <asm/gic.h>
- #include <asm/vgic.h>
-=20
-+
-+bool vgic_is_valid_irq(struct domain *d, unsigned int virq)
-+{
-+    return virq < vgic_num_irqs(d);
-+}
-+
- static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
-                                                   unsigned int rank)
- {
-@@ -582,7 +588,7 @@ void vgic_inject_irq(struct domain *d, struct vcpu *v, =
-unsigned int virq,
-     if ( !v )
-     {
-         /* The IRQ needs to be an SPI if no vCPU is specified. */
--        ASSERT(virq >=3D 32 && virq <=3D vgic_num_irqs(d));
-+        ASSERT(vgic_is_shared_irq(d, virq));
-=20
-         v =3D vgic_get_target_vcpu(d->vcpu[0], virq);
-     };
-@@ -659,7 +665,7 @@ bool vgic_emulate(struct cpu_user_regs *regs, union hsr=
- hsr)
-=20
- bool vgic_reserve_virq(struct domain *d, unsigned int virq)
- {
--    if ( virq >=3D vgic_num_irqs(d) )
-+    if ( !vgic_is_valid_irq(d, virq) )
-         return false;
-=20
-     return !test_and_set_bit(virq, d->arch.vgic.allocated_irqs);
+ static inline bool vgic_is_shared_irq(struct domain *d, unsigned int virq)
 --=20
 2.34.1
 
