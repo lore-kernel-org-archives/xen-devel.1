@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34010C87FD3
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 10:47:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1074281.1436942 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88F5C87FD3
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 10:51:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1074290.1436953 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukKcf-0006gq-Dk; Fri, 08 Aug 2025 10:46:53 +0000
+	id 1ukKgY-00007I-Sv; Fri, 08 Aug 2025 10:50:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1074281.1436942; Fri, 08 Aug 2025 10:46:53 +0000
+Received: by outflank-mailman (output) from mailman id 1074290.1436953; Fri, 08 Aug 2025 10:50:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukKcf-0006gj-B0; Fri, 08 Aug 2025 10:46:53 +0000
-Received: by outflank-mailman (input) for mailman id 1074281;
- Fri, 08 Aug 2025 10:46:52 +0000
+	id 1ukKgY-00007A-Pc; Fri, 08 Aug 2025 10:50:54 +0000
+Received: by outflank-mailman (input) for mailman id 1074290;
+ Fri, 08 Aug 2025 10:50:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HESy=2U=ideasonboard.com=tomi.valkeinen@srs-se1.protection.inumbo.net>)
- id 1ukKce-0006gd-HJ
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 10:46:52 +0000
+ id 1ukKaY-0005NR-Cs
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 10:44:42 +0000
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
  [213.167.242.64]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fde9467c-7444-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 12:46:51 +0200 (CEST)
+ id b08abb12-7444-11f0-a324-13f23c93f187;
+ Fri, 08 Aug 2025 12:44:41 +0200 (CEST)
 Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
  [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id A9F54185B;
- Fri,  8 Aug 2025 12:46:00 +0200 (CEST)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id E822C185B;
+ Fri,  8 Aug 2025 12:43:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,19 +42,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fde9467c-7444-11f0-a324-13f23c93f187
+X-Inumbo-ID: b08abb12-7444-11f0-a324-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1754649961;
-	bh=aQZJ/ACAteL1Xe/fs+a56dnUeh7YIhfVoFkhEVZ11OI=;
+	s=mail; t=1754649831;
+	bh=1uVulE40X4A2dJjstqLNnHit5pUAxqYUenS5oB3Qshc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=wZUMfrjyCRUxfFQYD2A6qF3ZH6eFLp8DLnCkLjR1H5yIUW8fWHy0BO+JVzjmrQfkA
-	 TPRktYsf0e/oWVJtiBcF/INX79qdjT+sK4Yi+HtJoigCiC95TT5u7jtd0ziBzxu29v
-	 Q4LLAsWDuHGyhnkeyE3UicJEnQv6TJJcXZjtGT2k=
-Message-ID: <1aaa3b42-a80e-48cf-b5ba-a4cece86b620@ideasonboard.com>
-Date: Fri, 8 Aug 2025 13:46:47 +0300
+	b=Na62xKvLb7i4tgr4FK8HULEj00O/gbqHgF1NdnNweCcID9WZux7UGeurwH82Y58uP
+	 oKRwkTfn+fpMOivDVGso/cHD2WFNzuxmtQe+4whQsY2YchPCsOzwvF14BNaQtCh8h1
+	 /zAR7f7UvaWEK9x8X34b/o8W/EXw3mB5NoNN78P8=
+Message-ID: <88b35dcb-70cb-4be1-9d6d-3cfb0920ecb5@ideasonboard.com>
+Date: Fri, 8 Aug 2025 13:44:37 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 25/25] drm/xlnx: Compute dumb-buffer sizes with
+Subject: Re: [PATCH v5 04/25] drm/gem-shmem: Compute dumb-buffer sizes with
  drm_mode_size_dumb()
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
@@ -64,11 +64,10 @@ Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, simona@ffwll.ch,
- airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
- geert@linux-m68k.org
+ simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, geert@linux-m68k.org
 References: <20250613090431.127087-1-tzimmermann@suse.de>
- <20250613090431.127087-26-tzimmermann@suse.de>
+ <20250613090431.127087-5-tzimmermann@suse.de>
 Content-Language: en-US
 From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
@@ -114,47 +113,53 @@ Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
  ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
  yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
  3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
-In-Reply-To: <20250613090431.127087-26-tzimmermann@suse.de>
+In-Reply-To: <20250613090431.127087-5-tzimmermann@suse.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 13/06/2025 12:00, Thomas Zimmermann wrote:
 > Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. Align the pitch according to hardware requirements.
+> buffer size. Align the pitch to a multiple of 8.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 > ---
->  drivers/gpu/drm/xlnx/zynqmp_kms.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/drm_gem_shmem_helper.c | 16 +++++-----------
+>  1 file changed, 5 insertions(+), 11 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/xlnx/zynqmp_kms.c
-> index b47463473472..7ea0cd4f71d3 100644
-> --- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
-> +++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
-> @@ -19,6 +19,7 @@
->  #include <drm/drm_crtc.h>
+> diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+> index 8ac0b1fa5287..0fc09484dfa6 100644
+> --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
+> +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+> @@ -18,6 +18,7 @@
+>  #include <drm/drm.h>
 >  #include <drm/drm_device.h>
 >  #include <drm/drm_drv.h>
 > +#include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_encoder.h>
->  #include <drm/drm_fbdev_dma.h>
->  #include <drm/drm_fourcc.h>
-> @@ -363,10 +364,12 @@ static int zynqmp_dpsub_dumb_create(struct drm_file *file_priv,
->  				    struct drm_mode_create_dumb *args)
+>  #include <drm/drm_gem_shmem_helper.h>
+>  #include <drm/drm_prime.h>
+>  #include <drm/drm_print.h>
+> @@ -518,18 +519,11 @@ EXPORT_SYMBOL_GPL(drm_gem_shmem_purge_locked);
+>  int drm_gem_shmem_dumb_create(struct drm_file *file, struct drm_device *dev,
+>  			      struct drm_mode_create_dumb *args)
 >  {
->  	struct zynqmp_dpsub *dpsub = to_zynqmp_dpsub(drm);
-> -	unsigned int pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
+> -	u32 min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
 > +	int ret;
 >  
->  	/* Enforce the alignment constraints of the DMA engine. */
-> -	args->pitch = ALIGN(pitch, dpsub->dma_align);
-> +	ret = drm_mode_size_dumb(drm, args, dpsub->dma_align, 0);
+> -	if (!args->pitch || !args->size) {
+> -		args->pitch = min_pitch;
+> -		args->size = PAGE_ALIGN(args->pitch * args->height);
+> -	} else {
+> -		/* ensure sane minimum values */
+> -		if (args->pitch < min_pitch)
+> -			args->pitch = min_pitch;
+> -		if (args->size < args->pitch * args->height)
+> -			args->size = PAGE_ALIGN(args->pitch * args->height);
+> -	}
+> +	ret = drm_mode_size_dumb(dev, args, SZ_8, 0);
 > +	if (ret)
 > +		return ret;
 >  
->  	return drm_gem_dma_dumb_create_internal(file_priv, drm, args);
+>  	return drm_gem_shmem_create_with_handle(file, dev, args->size, &args->handle);
 >  }
 
 Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
