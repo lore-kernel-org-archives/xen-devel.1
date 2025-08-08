@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8566CA0EC2
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075034.1437585 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60EB4CA0EC1
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075033.1437577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTcn-0000id-PZ; Fri, 08 Aug 2025 20:23:37 +0000
+	id 1ukTcm-0000Z0-VJ; Fri, 08 Aug 2025 20:23:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075034.1437585; Fri, 08 Aug 2025 20:23:37 +0000
+Received: by outflank-mailman (output) from mailman id 1075033.1437577; Fri, 08 Aug 2025 20:23:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTcm-0000eT-VT; Fri, 08 Aug 2025 20:23:36 +0000
-Received: by outflank-mailman (input) for mailman id 1075034;
+	id 1ukTcm-0000V3-79; Fri, 08 Aug 2025 20:23:36 +0000
+Received: by outflank-mailman (input) for mailman id 1075033;
  Fri, 08 Aug 2025 20:23:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukTcj-0005tJ-Bi
+ id 1ukTcj-0005tW-A6
  for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:33 +0000
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [2a00:1450:4864:20::342])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8ca908cc-7495-11f0-b898-0df219b8e170;
- Fri, 08 Aug 2025 22:23:30 +0200 (CEST)
-Received: by mail-wm1-x342.google.com with SMTP id
- 5b1f17b1804b1-4589b3e3820so26574225e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:30 -0700 (PDT)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8de1f6e8-7495-11f0-a324-13f23c93f187;
+ Fri, 08 Aug 2025 22:23:32 +0200 (CEST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so20485505e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:32 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.29
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 13:23:29 -0700 (PDT)
+ Fri, 08 Aug 2025 13:23:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ca908cc-7495-11f0-b898-0df219b8e170
+X-Inumbo-ID: 8de1f6e8-7495-11f0-a324-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754684610; x=1755289410; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754684612; x=1755289412; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YFVhdfvOQDjUoAaTEi0zstvy9aZcNZFPXKOhNL4LWc4=;
-        b=ecW0HfCefNtC44XOQAVsPkiuTPIpzzA6LpioQ0O8kyQfKiwMzT3RIO0owGBi4fec0A
-         PzufxLDZNaeSeudj/cRHe4MDvHjCol6qaE7z+oYUJYEk5ybEIoOCQfpb2bErTYH4xpI9
-         TkDOKetrekXI41cy3wtGz+HuPYke3o1FY2Pe4=
+        bh=KnuSzFJrJdbU/x73TUxu0/lQq8zKDVIUYGotpIOmF90=;
+        b=GSYQ0UK3j08cp6HhNdpxeLF0fIGzqVp+rei5YzBtzbuGG420GJF/8zbPN12LMCN8x2
+         JDMkSGcjbcrcy4ubVjD31kBj/Qcu86wquEiofzgYu7+5L8Hr3SXuOoD0QYkHh4FXWfdx
+         NIGTn1wo7t0brWGsjRfAaXw033jnnspuYWNhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754684610; x=1755289410;
+        d=1e100.net; s=20230601; t=1754684612; x=1755289412;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YFVhdfvOQDjUoAaTEi0zstvy9aZcNZFPXKOhNL4LWc4=;
-        b=RK4QLcK321EULbgy2Bdd74l5o+fUXqS5Xd+0Tu5lxG8Z1tG23J8Hrfy36jkbKZ5/dL
-         qn4caYEIsTTToj0Zh7gr6chaD2F1LNscZCpwq1rTpmx5pge8tBl6tkuIw78zg6Eo8pZ1
-         f/6dF4hRlx9fMeqCqXT9KxhN/tyBFfzY8Cw/5p70+vRe04X7X5XUe9GmMhVF8d5M6Kye
-         0ETy3pxe2lZI19s4d1BCAjWlNZdtZcVazAywojPg5Ri2oRVdeqOEJ6ICd+RP2J6JUpvt
-         Yneb9A9/vXlE5ax6tZQzF6PNyex+RAmRvpnFNei1uj+16NQBCSQKLe41L7pqjG0BTuaB
-         v6Yg==
-X-Gm-Message-State: AOJu0Yx8zT41ChgCODrJqyubVpmD7uGOO5t70uQfiubeYvV3RlFexfUF
-	pCdX32aP7WwQLHWcbc6SALLBs20sOQTf4252K9xUJhf9aSSvZx93tmoSdYzFLVaw5NbbbeA51jO
-	Fz6QJ/s02xw==
-X-Gm-Gg: ASbGnctGehCwC2XM4GcF+T3nIbeGI7dY/VmgIarRb4jgl3q63pvcCfNIoytFmH3SOUP
-	bp0ENm/52yRVTQpV/mwViNgg7kmYo/PP4ftqDChGJ4vXkKi/pKte6Ueyan72haO/YfMjR1px/o4
-	Hl4LuilMS+PFMNIojDGsSZJFa16fSIk0Dx0ktefFEoEL9ydxZQUBN189yhkb2T/n4ra33GEgxj0
-	yP+CjejTP94WF9ppsAwUUwKrVWlzVsP5towp0vpTqEtURAzHMMqXQJ8lF/bQBs1ScTtYfU38ImH
-	9Og9AxygDCgdjejixdTM2a/sabS9pvZJrvxYSd/YxSnrXIVcDfRwlPV55dSKSF2tf9tThJcR8Y6
-	IMF3wJaJrK7ZDebnhKRFm6Lg2s56DEDKewSMn+GwoMEIM7nFaYXJAZwhkJD3SG4AhFWiZdCLUMu
-	x6
-X-Google-Smtp-Source: AGHT+IErUFYgJYCqo/f1FYTdB8yWmXUcMHWGJQXVcASgvlDey1jG1psADqBZ0NXjta7z31LyFSqxXA==
-X-Received: by 2002:a05:600c:34d2:b0:458:caec:a741 with SMTP id 5b1f17b1804b1-459f525bfa8mr34064775e9.24.1754684609878;
-        Fri, 08 Aug 2025 13:23:29 -0700 (PDT)
+        bh=KnuSzFJrJdbU/x73TUxu0/lQq8zKDVIUYGotpIOmF90=;
+        b=rsgRkpKXrL6M+bdbR8YwCP37Nu8QNeflNrcgCJRppeXVmy2pRkmzEhe96H7Jdi0VCq
+         EMEdbV77SNiDWiy3VNPVxtPegxEs+gY3lankzQlMOgy6wyW/5xih2jJxT+xaBF6LzhUG
+         x5GxJxti+LG9AVpWhQD37naDXFotuB220pyvOTk5qpvRcbz7pnGVIEO97J5UHwtONqht
+         BHgOW0TuTHOgto7buXmCNdAxNwDlvViciKKtyKT9FjJS5MH3XSUVv0ytZ3YqzIEJUxze
+         GZgPCrxyWJamjd5iQqEdx3AEq5G7pJ7Gh6t2LsmLaTGw0a1zIbWJTXJOfujX8OZzJ7m0
+         pQ6g==
+X-Gm-Message-State: AOJu0YzZEvQAvWeo4w1+Hn4R6FACMXKo8ZjsgC5QvuXttzvp6GM9H+UB
+	Wo9Z4RmgcsCHRl4u5d+XMfWtaesgYShk8xsFRbXJNCiv2Jq8qBEFFTVHQ5BQ+tU3hUWSG9/qHU/
+	pjBsWhE8=
+X-Gm-Gg: ASbGnctxcC5FnT5W+miLQVn5hVaprTF3KYN7d7vT23rj/pPLJ1sboyTIdUIAvZRcl+3
+	j8lfP+EiWKbXsuVQaAOUyLksSGLMImMOO34W28qG/nU3SlUasyednpB4RF4SHRp876c82JG856A
+	Wx3ryuk97ns3m+hDr6fBT6PIsieM2It/qKgu9tKQauKkaGPhwXpbZZUv/TYfLNozkFO1aBH30fH
+	VziQ4cF8kuD08oxsVYsn7+yTP5j8UrIBPX0eNArmzK/PRxQZznO8ZoqrkcSGNZ0v9gdD2cVkqaH
+	+w+QeqJFboD9WH4/DJkT4FO9snomQfmpnRSqMH64LwoIyQQ+/2q7uLZkil+XLXNap4tTWDNav+P
+	ACyww3MeW3flwRQbsAz/v/yphcZRi6jW8kqX+8smxbr5I2PxJ6AI47hAKPF4bkyx3L+JnBUp4vf
+	VuX57V/VqJscY=
+X-Google-Smtp-Source: AGHT+IG7hgWCsa4bQd2lSIYwBLbz9l3LdUBr7IJMT7qdKkc5WBbzt9hhSlaY9vrTRKlSGdJCpgQ8Ag==
+X-Received: by 2002:a05:600c:354a:b0:43c:f8fe:dd82 with SMTP id 5b1f17b1804b1-459f4f0f57fmr43002675e9.18.1754684611999;
+        Fri, 08 Aug 2025 13:23:31 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 13/22] x86: FRED enumerations
-Date: Fri,  8 Aug 2025 21:23:05 +0100
-Message-Id: <20250808202314.1045968-14-andrew.cooper3@citrix.com>
+Subject: [PATCH 16/22] x86/boot: Adjust CR4 handling around ap_early_traps_init()
+Date: Fri,  8 Aug 2025 21:23:08 +0100
+Message-Id: <20250808202314.1045968-17-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
@@ -97,127 +97,110 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Of note, CR4.FRED is bit 32 and cannot enabled outside of 64bit mode.
+ap_early_traps_init() will shortly be setting CR4.FRED.  This requires that
+cpu_info->cr4 is already set up, and that the enablement of CET doesn't
+truncate FRED back out because of it's 32bit logic.
 
-Most supported toolchains don't understand the FRED instructions yet.  ERETU
-and ERETS are easy to wrap (they encoded as REPZ/REPNE CLAC), while LKGS is
-more complicated and deferred for now.
+For __high_start(), defer re-loading XEN_MINIMAL_CR4 until after %rsp is set
+up and we can store the result in the cr4 field too.
 
-I have intentionally named the FRED MSRs differently to the spec.  In the
-spec, the stack pointer names alias the TSS fields of the same name, despite
-very different semantics.
+For s3_resume(), explicitly re-load XEN_MINIMAL_CR4.  Later when loading all
+features, use the mmu_cr4_features variable which is how the rest of Xen
+performs this operation.
+
+No functional change, yet.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/Kconfig                        |  4 ++++
- xen/arch/x86/include/asm/asm-defns.h        |  9 +++++++++
- xen/arch/x86/include/asm/cpufeature.h       |  3 +++
- xen/arch/x86/include/asm/msr-index.h        | 11 +++++++++++
- xen/arch/x86/include/asm/x86-defns.h        |  1 +
- xen/include/public/arch-x86/cpufeatureset.h |  3 +++
- 6 files changed, 31 insertions(+)
+ xen/arch/x86/acpi/wakeup_prot.S | 18 ++++++++++++++----
+ xen/arch/x86/boot/x86_64.S      | 15 ++++++++++-----
+ 2 files changed, 24 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index a45ce106e210..90cbad13a7c7 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -57,6 +57,10 @@ config HAS_CC_CET_IBT
- 	# Retpoline check to work around https://gcc.gnu.org/bugzilla/show_bug.cgi?id=93654
- 	def_bool $(cc-option,-fcf-protection=branch -mmanual-endbr -mindirect-branch=thunk-extern) && $(as-instr,endbr64)
- 
-+config HAS_AS_FRED
-+	# binutils >= 2.41 or LLVM >= 19
-+	def_bool $(as-instr,eretu;lkgs %ax)
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index 60eca4010042..dfc8c6ac6e8c 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -63,6 +63,14 @@ LABEL(s3_resume)
+         pushq   %rax
+         lretq
+ 1:
 +
- menu "Architecture Features"
- 
- source "arch/x86/Kconfig.cpu"
-diff --git a/xen/arch/x86/include/asm/asm-defns.h b/xen/arch/x86/include/asm/asm-defns.h
-index 61a5faf90446..2e5200b94b82 100644
---- a/xen/arch/x86/include/asm/asm-defns.h
-+++ b/xen/arch/x86/include/asm/asm-defns.h
-@@ -4,6 +4,15 @@
-     .byte 0x0f, 0x01, 0xfc
- .endm
- 
-+#ifndef CONFIG_HAS_AS_FRED
-+.macro eretu
-+    .byte 0xf3, 0x0f, 0x01, 0xca
-+.endm
-+.macro erets
-+    .byte 0xf2, 0x0f, 0x01, 0xca
-+.endm
-+#endif
++        GET_STACK_END(15)
 +
- /*
-  * Call a noreturn function.  This could be JMP, but CALL results in a more
-  * helpful backtrace.  BUG is to catch functions which do decide to return...
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index 441a7ecc494b..b6cf0c8dfc7c 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -246,6 +246,9 @@ static inline bool boot_cpu_has(unsigned int feat)
- #define cpu_has_avx_vnni        boot_cpu_has(X86_FEATURE_AVX_VNNI)
- #define cpu_has_avx512_bf16     boot_cpu_has(X86_FEATURE_AVX512_BF16)
- #define cpu_has_cmpccxadd       boot_cpu_has(X86_FEATURE_CMPCCXADD)
-+#define cpu_has_fred            boot_cpu_has(X86_FEATURE_FRED)
-+#define cpu_has_lkgs            boot_cpu_has(X86_FEATURE_LKGS)
-+#define cpu_has_nmi_src         boot_cpu_has(X86_FEATURE_NMI_SRC)
- #define cpu_has_avx_ifma        boot_cpu_has(X86_FEATURE_AVX_IFMA)
- 
- /* CPUID level 0x80000021.eax */
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 428d993ee89b..bb48d16f0c6d 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -115,6 +115,17 @@
- #define  MCU_OPT_CTRL_GDS_MIT_DIS           (_AC(1, ULL) <<  4)
- #define  MCU_OPT_CTRL_GDS_MIT_LOCK          (_AC(1, ULL) <<  5)
- 
-+#define MSR_FRED_RSP_SL0                    0x000001cc
-+#define MSR_FRED_RSP_SL1                    0x000001cd
-+#define MSR_FRED_RSP_SL2                    0x000001ce
-+#define MSR_FRED_RSP_SL3                    0x000001cf
-+#define MSR_FRED_STK_LVLS                   0x000001d0
-+#define MSR_FRED_SSP_SL0                    MSR_PL0_SSP
-+#define MSR_FRED_SSP_SL1                    0x000001d1
-+#define MSR_FRED_SSP_SL2                    0x000001d2
-+#define MSR_FRED_SSP_SL3                    0x000001d3
-+#define MSR_FRED_CONFIG                     0x000001d4
++        /* Enable minimal CR4 features. */
++        mov     $XEN_MINIMAL_CR4, %eax
++        mov     %rax, STACK_CPUINFO_FIELD(cr4)(%r15)
++        mov     %rax, %cr4
 +
- #define MSR_RTIT_OUTPUT_BASE                0x00000560
- #define MSR_RTIT_OUTPUT_MASK                0x00000561
- #define MSR_RTIT_CTL                        0x00000570
-diff --git a/xen/arch/x86/include/asm/x86-defns.h b/xen/arch/x86/include/asm/x86-defns.h
-index 23579c471f4a..513f18b3be4e 100644
---- a/xen/arch/x86/include/asm/x86-defns.h
-+++ b/xen/arch/x86/include/asm/x86-defns.h
-@@ -75,6 +75,7 @@
- #define X86_CR4_PKE        0x00400000 /* enable PKE */
- #define X86_CR4_CET        0x00800000 /* Control-flow Enforcement Technology */
- #define X86_CR4_PKS        0x01000000 /* Protection Key Supervisor */
-+#define X86_CR4_FRED      0x100000000 /* Fast Return and Event Delivery */
+         /* Set up early exceptions and CET before entering C properly. */
+         call    ap_early_traps_init
  
- #define X86_CR8_VALID_MASK 0xf
+@@ -77,7 +85,9 @@ LABEL(s3_resume)
+         wrmsr
  
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index f7312e0b04e7..9cd778586f10 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -310,7 +310,10 @@ XEN_CPUFEATURE(ARCH_PERF_MON, 10*32+8) /*   Architectural Perfmon */
- XEN_CPUFEATURE(FZRM,         10*32+10) /*A  Fast Zero-length REP MOVSB */
- XEN_CPUFEATURE(FSRS,         10*32+11) /*A  Fast Short REP STOSB */
- XEN_CPUFEATURE(FSRCS,        10*32+12) /*A  Fast Short REP CMPSB/SCASB */
-+XEN_CPUFEATURE(FRED,         10*32+17) /*   Fast Return and Event Delivery */
-+XEN_CPUFEATURE(LKGS,         10*32+18) /*   Load Kernel GS instruction */
- XEN_CPUFEATURE(WRMSRNS,      10*32+19) /*S  WRMSR Non-Serialising */
-+XEN_CPUFEATURE(NMI_SRC,      10*32+20) /*   NMI-Source Reporting */
- XEN_CPUFEATURE(AMX_FP16,     10*32+21) /*   AMX FP16 instruction */
- XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
- XEN_CPUFEATURE(LAM,          10*32+26) /*   Linear Address Masking */
+         /* Enable CR4.CET. */
+-        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
++        mov     $X86_CR4_CET, %ecx
++        or      STACK_CPUINFO_FIELD(cr4)(%r15), %rcx
++        mov     %rcx, STACK_CPUINFO_FIELD(cr4)(%r15)
+         mov     %rcx, %cr4
+ 
+         /* WARNING! call/ret now fatal (iff SHSTK) until SETSSBSY loads SSP */
+@@ -120,9 +130,9 @@ LABEL(s3_resume)
+ .L_cet_done:
+ #endif /* CONFIG_XEN_SHSTK || CONFIG_XEN_IBT */
+ 
+-        /* Restore CR4 from the cpuinfo block. */
+-        GET_STACK_END(bx)
+-        mov     STACK_CPUINFO_FIELD(cr4)(%rbx), %rax
++        /* Load all CR4 settings. */
++        mov     mmu_cr4_features(%rip), %rax
++        mov     %rax, STACK_CPUINFO_FIELD(cr4)(%r15)
+         mov     %rax, %cr4
+ 
+         call    mtrr_bp_restore
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 0dfcc8a88a40..631ea2f8236e 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -11,16 +11,19 @@ ENTRY(__high_start)
+         mov     %ecx,%gs
+         mov     %ecx,%ss
+ 
+-        /* Enable minimal CR4 features. */
+-        mov     $XEN_MINIMAL_CR4,%rcx
+-        mov     %rcx,%cr4
+-
+         mov     stack_start(%rip),%rsp
+ 
+         /* Reset EFLAGS (subsumes CLI and CLD). */
+         pushq   $0
+         popf
+ 
++        GET_STACK_END(15)
++
++        /* Enable minimal CR4 features. */
++        mov     $XEN_MINIMAL_CR4, %eax
++        mov     %rax, STACK_CPUINFO_FIELD(cr4)(%r15)
++        mov     %rax, %cr4
++
+         /* Reload code selector. */
+         pushq   $__HYPERVISOR_CS
+         leaq    1f(%rip),%rax
+@@ -45,7 +48,9 @@ ENTRY(__high_start)
+         wrmsr
+ 
+         /* Enable CR4.CET. */
+-        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
++        mov     $X86_CR4_CET, %ecx
++        or      STACK_CPUINFO_FIELD(cr4)(%r15), %rcx
++        mov     %rcx, STACK_CPUINFO_FIELD(cr4)(%r15)
+         mov     %rcx, %cr4
+ 
+         /* WARNING! call/ret now fatal (iff SHSTK) until SETSSBSY loads SSP */
 -- 
 2.39.5
 
