@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF29BC87FDA
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:32:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075125.1437651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CAB1C87FCB
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:32:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075141.1437661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTku-0000x5-S2; Fri, 08 Aug 2025 20:32:00 +0000
+	id 1ukTky-0001FB-30; Fri, 08 Aug 2025 20:32:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075125.1437651; Fri, 08 Aug 2025 20:32:00 +0000
+Received: by outflank-mailman (output) from mailman id 1075141.1437661; Fri, 08 Aug 2025 20:32:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTku-0000wy-PH; Fri, 08 Aug 2025 20:32:00 +0000
-Received: by outflank-mailman (input) for mailman id 1075125;
- Fri, 08 Aug 2025 20:31:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ukTky-0001F2-04; Fri, 08 Aug 2025 20:32:04 +0000
+Received: by outflank-mailman (input) for mailman id 1075141;
+ Fri, 08 Aug 2025 20:32:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukTcn-0005tW-W4
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:37 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8f993f6a-7495-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 22:23:35 +0200 (CEST)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3b78bca0890so1221880f8f.3
- for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:35 -0700 (PDT)
+ id 1ukTcl-0005tJ-CD
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:35 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8e46660f-7495-11f0-b898-0df219b8e170;
+ Fri, 08 Aug 2025 22:23:33 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4563cfac2d2so21412555e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:33 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.34
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 13:23:34 -0700 (PDT)
+ Fri, 08 Aug 2025 13:23:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f993f6a-7495-11f0-a324-13f23c93f187
+X-Inumbo-ID: 8e46660f-7495-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754684615; x=1755289415; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754684613; x=1755289413; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nAd9iHYMcX06IGN3X/Q4h7oZi4HPIwI/IwRbI7UnnSY=;
-        b=E4fOoEtbfjIwG2N3rcHlDy2FoaBsRR02mG8Aydy7lJJZqGa8zu4JgEglSL0cpCuVW1
-         SV0TKey8gAS7o46oyfxVfyxJvuv8aWgliawJNsHEke7d1FIV3mNTAnvudUeSyT9vnMFL
-         1EsKC3h2pbHaLBgwd9aP7CWuNv5owpsYRGV04=
+        bh=g0+lABFbcbDRQyVLuDKpWi9Q/vTwEudyUax4FU2we4k=;
+        b=rARpPgTeGPErQq0e3+wb9FjncWB6gITb21s7MkiAOUXgS2yFaoSnLvGPH5qAND5M6q
+         8tEmszXAborRuFc5k9Sr4KYIhx1hBbDy2tL2UdaUCCQf0y30Ler+MtKbsoX+bzvSIRya
+         RLLtndDzjOvBQ12wU8XNvmhmUbkZ5CAjXyQgo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754684615; x=1755289415;
+        d=1e100.net; s=20230601; t=1754684613; x=1755289413;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nAd9iHYMcX06IGN3X/Q4h7oZi4HPIwI/IwRbI7UnnSY=;
-        b=p9rzL0gaKsSvbpGD0Qx+YBTV+3ycLC5UeV6F3cyfEqiFIO2Chwmh70B4VqH1yqZEMs
-         HINxun17WI+r/DfX/hmrohKwUyg5wxx5FDvnylfVyazo57sax1ik6CbpxlYcgr/3tAhZ
-         PfIXTdVnKjW3JI0jC3zcwK7ecjxe9EOIVNQ+AM05MYmC7S+jh592vE0Q0mbv5bWK99z6
-         /zyqmC/GYgflXsXKRpXz+W1krgCQcp48nMrq6CpNroToGVoB1NtukokAP4l4V1Q8MvoR
-         zxgRIzTmchwDTiOQgHnDl+u67K3WIyULbCWSoJukZ9EzT2fvxeHRXpsHGUy67/EPwKz+
-         hmNA==
-X-Gm-Message-State: AOJu0Yw6AZ7Zw+TZuAhQ+W5NySF5ewxfvnu6mAPy+D53lGR4r3OARxXT
-	2OuG39ziXLVB1SS0/mLzawGhqB4sjNRo5mSKSDx74eMrwLpUHw+VHRNHt5HGp8lMRSeNRBDosbV
-	A4dqVP4Y=
-X-Gm-Gg: ASbGncsh0TV0FuMJFnPZNFNkW6JLDXMqqppxmcQvHu8c1n5gAfmtXUmJuMvkUDT1wio
-	KIUuJpBtbwYt6qgY9TqnhK0BT+rWFRuX4e3wLKfxAdjt2dwI3Dgi4+0gvuMGdWkhzdezRbbutaj
-	4BrGr/SzjnTLZNau5XakTYLsWqdDM9Zs3AKOnDgD+PN/5KuaN3LPfw07Y1AsCcQgQygeMZvZhey
-	gkYzUJjE8SXhPzMApHswLql/LoSHQQpDMg/LmXA75692YXq+UJdJTF/YOI+F5gwZ5UAWZAGccVy
-	VhfvpKoc+zAN9lqFnhVQ0aEZunuTJ2VZk66ctrv4usIXuxNhbMLBLFUcS0MhB2nubgwynMXSc+E
-	yrhaxCaUd/jWAh7OucLLymVqazMRpJahxlxrcB+BIR9vpAB+p93I3DMPL21pcWYa6z7ULr9EGu8
-	+A
-X-Google-Smtp-Source: AGHT+IH1tZDOHe6Lnce61CjDEETd3H3QQKXhBfuREDUtylAMTzZV87JNoqp2AcJxtHkYk938vxIINQ==
-X-Received: by 2002:a05:6000:230f:b0:3b8:d1a4:bacb with SMTP id ffacd0b85a97d-3b900b5118emr3505157f8f.42.1754684615006;
-        Fri, 08 Aug 2025 13:23:35 -0700 (PDT)
+        bh=g0+lABFbcbDRQyVLuDKpWi9Q/vTwEudyUax4FU2we4k=;
+        b=Na/jRdDTdVzCsEm3KmhfiHUq+loP+FQne9lLGrQExjItzTaqR1IU9P7Xh2elXOii3n
+         hMkoMKm3WxSKaFMHAT2QyQgI5WNUKqvcpXK85yCXw1yNJjIgrLC9sn3zD4HabP/EbPQr
+         C8whaw89WWkmzt98dBiudeiG2fGHvNu18auuG2vAwEdZT8n5GahEyLsVH+KiYkJVcu8e
+         Ksd+ofDC+0JbTOVIDcmMCMPEW8UKrXKmxf8ciFIOhrQe+IsVs5xgiNsX4gtcYRWGW9+l
+         rLgI40QuHyurrbXyq9sQoARdEEBzzkmVcZAQ0FsskpfBnk2yzAu6rlMcSnveMzLRwcY8
+         oTyg==
+X-Gm-Message-State: AOJu0YxMjJr1EGVnMat/yuTYqLQCJmhY8gEbl5Ib8dPZnpYUeCnK1B2f
+	5qDir6tRzszFbydn1SUkqgKZRs6SDM05DK+31kuEY896TC3jH5z8eahlInQG2fEtzmC98ud9nxT
+	eMU0kqcE=
+X-Gm-Gg: ASbGncvC9gSY2pznrR3I/0g/yrnccamPBriL5fyJ7LrWu82rlzhD1fFy6p5Znzt/AF7
+	ywIVCt1RGzS6+RWsDt4ql/ocVt1iatT9s3xCpnDz2ia19Y7VKNW83oCC26t23E4Pf9dQyZPzbRI
+	fgIQ+e2W9t4HMpIaEkfom/t7QPE7vFbEHzFswMu5XZei+n04KuhZ/jnryZQ1eEeZqoZzSzcRXj8
+	IAHLHi+fQOhLYiG8qANw5ojWRLGT6We0rZfqt0bAyMlk3OlpLVmCayNKx27+J7yj5kZZ9FHMmkR
+	qd2aIp/ZyA7gGolnfVYC54WA/PqDsY/K/NriU0UEPVAtogRdyUTu3sheIRZENOCenNQnDcSB3bV
+	XjYg0RxiyR78fBL8pOuWXU+X6TsnY+ykwMBSP37OZdN6WMQ1I7Tbw3iYWoWBBXYG9jfAfLufvMT
+	xs
+X-Google-Smtp-Source: AGHT+IFv8BFy8CiiAYDhU6YYdfX21Rsk3CpUh43kzdxpdKNgBsdJlp2pWcFU87juIIAPy6rcU5U25w==
+X-Received: by 2002:a05:600c:4fca:b0:43c:e70d:44f0 with SMTP id 5b1f17b1804b1-459f4f03764mr38192155e9.19.1754684612636;
+        Fri, 08 Aug 2025 13:23:32 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 20/22] x86/traps: Alter switch_stack_and_jump() for FRED mode
-Date: Fri,  8 Aug 2025 21:23:12 +0100
-Message-Id: <20250808202314.1045968-21-andrew.cooper3@citrix.com>
+Subject: [PATCH 17/22] x86/S3: Switch to using RSTORSSP to recover SSP on resume
+Date: Fri,  8 Aug 2025 21:23:09 +0100
+Message-Id: <20250808202314.1045968-18-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
@@ -97,68 +97,85 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-FRED and IDT differ by a Supervisor Token on the base of the shstk.  This
-means that switch_stack_and_jump() needs to discard one extra word when FRED
-is active.
+Under FRED, SETSSBSY is unavailable, and we want to be setting up FRED prior
+to setting up shadow stacks.  Luckily, RSTORSSP will also work in this case.
+
+This involves a new type of shadow stack token, the Restore Token, which is
+distinguished from the Supervisor Token by pointing to the adjacent slot on
+the shadow stack rather than pointing at itself.
+
+In the short term, this logic still needs to load MSR_PL0_SSP.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-RFC.  I don't like this, but it does work.
-
-This emits opt_fred logic outside of CONFIG_XEN_SHSTK.  But frankly, the
-construct is already too unweildly, and all options I can think of make it
-moreso.
 ---
- xen/arch/x86/include/asm/current.h | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ xen/arch/x86/acpi/wakeup_prot.S | 31 +++++++++++++++----------------
+ 1 file changed, 15 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/current.h b/xen/arch/x86/include/asm/current.h
-index 962eb76a82b3..24d7d906a8c6 100644
---- a/xen/arch/x86/include/asm/current.h
-+++ b/xen/arch/x86/include/asm/current.h
-@@ -11,6 +11,7 @@
- #include <xen/page-size.h>
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index dfc8c6ac6e8c..6ddc4011d8b6 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -90,7 +90,7 @@ LABEL(s3_resume)
+         mov     %rcx, STACK_CPUINFO_FIELD(cr4)(%r15)
+         mov     %rcx, %cr4
  
- #include <asm/cpu-user-regs.h>
-+#include <asm/traps.h>
+-        /* WARNING! call/ret now fatal (iff SHSTK) until SETSSBSY loads SSP */
++        /* WARNING! CALL/RET now fatal (iff SHSTK) until RSTORSSP loads SSP */
  
- /*
-  * Xen's cpu stacks are 8 pages (8-page aligned), arranged as:
-@@ -154,7 +155,6 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
-     "rdsspd %[ssp];"                                            \
-     "cmp $1, %[ssp];"                                           \
-     "je .L_shstk_done.%=;" /* CET not active?  Skip. */         \
--    "mov $%c[skstk_base], %[val];"                              \
-     "and $%c[stack_mask], %[ssp];"                              \
-     "sub %[ssp], %[val];"                                       \
-     "shr $3, %[val];"                                           \
-@@ -177,6 +177,8 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+ #if defined(CONFIG_XEN_SHSTK)
+         test    $CET_SHSTK_EN, %al
+@@ -98,32 +98,31 @@ LABEL(s3_resume)
  
- #define switch_stack_and_jump(fn, instr, constr)                        \
-     ({                                                                  \
-+        unsigned int token_offset =                                     \
-+            (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - (opt_fred ? 0 : 8);  \
-         unsigned int tmp;                                               \
-         BUILD_BUG_ON(!ssaj_has_attr_noreturn(fn));                      \
-         __asm__ __volatile__ (                                          \
-@@ -184,12 +186,11 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
-             "mov %[stk], %%rsp;"                                        \
-             CHECK_FOR_LIVEPATCH_WORK                                    \
-             instr "[fun]"                                               \
--            : [val] "=&r" (tmp),                                        \
-+            : [val] "=r" (tmp),                                         \
-               [ssp] "=&r" (tmp)                                         \
-             : [stk] "r" (guest_cpu_user_regs()),                        \
-               [fun] constr (fn),                                        \
--              [skstk_base] "i"                                          \
--              ((PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8),               \
-+              "[val]" (token_offset),                                   \
-               [stack_mask] "i" (STACK_SIZE - 1),                        \
-               _ASM_BUGFRAME_INFO(BUGFRAME_bug, __LINE__,                \
-                                  __FILE__, NULL)                        \
+         /*
+          * Restoring SSP is a little complicated, because we are intercepting
+-         * an in-use shadow stack.  Write a temporary token under the stack,
+-         * so SETSSBSY will successfully load a value useful for us, then
+-         * reset MSR_PL0_SSP to its usual value and pop the temporary token.
++         * an in-use shadow stack.  Write a Restore Token under the stack, and
++         * use RSTORSSP to load it.  RSTORSSP converts the token to a
++         * Previous-SSP Token, which we discard.
+          */
+         mov     saved_ssp(%rip), %rdi
+ 
+-        /* Construct the temporary supervisor token under SSP. */
+-        sub     $8, %rdi
+-
+-        /* Load it into MSR_PL0_SSP. */
++        /* Calculate MSR_PL0_SSP from SSP. */
+         mov     $MSR_PL0_SSP, %ecx
+         mov     %rdi, %rdx
+         shr     $32, %rdx
+         mov     %edi, %eax
+-        wrmsr
+-
+-        /* Write the temporary token onto the shadow stack, and activate it. */
+-        wrssq   %rdi, (%rdi)
+-        setssbsy
+-
+-        /* Reset MSR_PL0_SSP back to its normal value. */
+         and     $~(STACK_SIZE - 1), %eax
+         or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
+         wrmsr
+ 
+-        /* Pop the temporary token off the stack. */
++        /*
++         * A Restore Token's value is &token + 8 + 64BIT (bit 0).
++         * We want to put this on the shstk at SSP - 8.
++         */
++        lea     1(%rdi), %rax
++        sub     $8, %rdi
++        wrssq   %rax, (%rdi)
++        rstorssp (%rdi)
++
++        /* Discard the Previous-SSP Token from the shstk. */
+         mov     $2, %eax
+         incsspd %eax
+ #endif /* CONFIG_XEN_SHSTK */
 -- 
 2.39.5
 
