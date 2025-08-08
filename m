@@ -4,41 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E361C87FCB
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 18:51:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1074987.1437440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31440C87FCB
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075027.1437536 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukSBU-0007qP-CP; Fri, 08 Aug 2025 18:51:20 +0000
+	id 1ukTch-0007bg-3x; Fri, 08 Aug 2025 20:23:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1074987.1437440; Fri, 08 Aug 2025 18:51:20 +0000
+Received: by outflank-mailman (output) from mailman id 1075027.1437536; Fri, 08 Aug 2025 20:23:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukSBU-0007qI-9v; Fri, 08 Aug 2025 18:51:20 +0000
-Received: by outflank-mailman (input) for mailman id 1074987;
- Fri, 08 Aug 2025 18:51:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ukTcg-0007a4-Gy; Fri, 08 Aug 2025 20:23:30 +0000
+Received: by outflank-mailman (input) for mailman id 1075027;
+ Fri, 08 Aug 2025 20:23:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cFBd=2U=samsung.com=m.szyprowski@srs-se1.protection.inumbo.net>)
- id 1ukSBS-0007qA-Az
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 18:51:19 +0000
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com
- [210.118.77.11]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a8b21195-7488-11f0-b898-0df219b8e170;
- Fri, 08 Aug 2025 20:51:15 +0200 (CEST)
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
- by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id
- 20250808185114euoutp0162c911292defe8bfee54f2309b1e8171~Z31I7WGpl0720707207euoutp01Y;
- Fri,  8 Aug 2025 18:51:14 +0000 (GMT)
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20250808185112eucas1p285bfbeb3352a16df0b5c8f262fadbf2f~Z31Hzuzfc1555715557eucas1p2H;
- Fri,  8 Aug 2025 18:51:12 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
- eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20250808185109eusmtip1cf791168d581e5b5b824a27d8cdd9069~Z31ElK-rK1126511265eusmtip1F;
- Fri,  8 Aug 2025 18:51:09 +0000 (GMT)
+ <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ukTce-0005tW-L5
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:28 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8b1d62d2-7495-11f0-a324-13f23c93f187;
+ Fri, 08 Aug 2025 22:23:28 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-454f428038eso22148205e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:28 -0700 (PDT)
+Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Aug 2025 13:23:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,158 +47,323 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a8b21195-7488-11f0-b898-0df219b8e170
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20250808185114euoutp0162c911292defe8bfee54f2309b1e8171~Z31I7WGpl0720707207euoutp01Y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1754679074;
-	bh=eZMpLLPpWLfEcYOqjTqa6+eB/bqRZJ+BbYqsgnnPbkY=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=WGyqUFMDFBBsAtsI8xiD1Ayr7WYuZYdyBJMCoPCRGfrVxwAdMcl3GCV7Qwkcc4nI/
-	 gnDfUeRP8iiJIUgEStFM4TfVVnoq/LDogKUpBA2D+NmwrtJRryBOG1ru2ITf74oehS
-	 IO287BU42jFk8ZARXzvIDO/cRSfPjtUJVNlWylGo=
-Message-ID: <a154e058-c0e6-4208-9f52-57cec22eaf7d@samsung.com>
-Date: Fri, 8 Aug 2025 20:51:08 +0200
+X-Inumbo-ID: 8b1d62d2-7495-11f0-a324-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1754684607; x=1755289407; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ycWquJLCuLcfKthxLYACscQrBOx1g62XAtvbDRfueiI=;
+        b=FKijCjbRt280AOa/FvYi3b762G+b1MIqw4vG+5HVNoTvUM+zAz1/N0np5RIIPVddCV
+         WaFp860TTrk+lhcs9cw9bfyi5GL255BddELv6qZj0dzXHzgFMb1bktMMDioafslTF1Yu
+         T+Ax+T0vba/NYDWoES7X7R99LbB+n/94Z7eWU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1754684607; x=1755289407;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ycWquJLCuLcfKthxLYACscQrBOx1g62XAtvbDRfueiI=;
+        b=XsbXEd0HXhvLkqz81CLohObsTMyc0Rl7VGif7CklZQFYqUkD7niSbqGd6xQActxrrr
+         08W34fVFr70TlbYLM078bXvJB0vQ+A85YqmxmFwEAZIif4YYsXnhy1VV8zLzIdbm4pkc
+         EEn6idTSy6DFfG9b+YwRFWp3EoEBC5ludy8xslDAhtgdZZmGdc+TOztwdHzSU8oxUVmH
+         7ArOi4GLAH0MjrckUvEZlOorml9gRGI1ZqTXXzL8EVqA54SqdIdOO9ANQYWlCxPtrLaO
+         KNIhFivwiOmYu31aBNG5U85o97HUT7MwZO4RzorFOiuxspxERxPZjbWf8Q2ODKTKGkZw
+         zRTg==
+X-Gm-Message-State: AOJu0Yy6mlxSY1Dzu7D6WhYfs1B7J7myFksVGW7XkP+iIu3M9OlsS0Zo
+	woHlt6xXqZbFqZfiCv7jMp55hdBEXFQM4H6shmsLKIN+imk+Opms/ac0z0IxlkAhcAiLzaAkZNU
+	G+kn8ajs=
+X-Gm-Gg: ASbGncuDu0SrQkx44kdL52pErPdlaFsR8j4UvX4LmLtERCXbGaoP5pdYrcMLjQjj+D1
+	4o/OZcsaQK5DPlXhrXkenPYSBTjhbLOO/UVMoPxMUlf4vxD6rrVY5UQ7USjVsFbn2kn2Usi6hII
+	Kh5Maqsl5uPY0NVZe2boTQmk3oNj5cuFQ/2tVKyFWHS6WiWhhbkN2rrASLa6d5dAqMoG/6j+voE
+	i8K3na4XOOHAJK92FDfQAMAYbdvk4cyCODYXxEXGE1JgJquuvzX1j5wTUl9dc66JkKP0CqIGzv1
+	cCi9JXCr78IArXO0hGKBChQ5wFQBGad/irGyjWwy6voiro1s7AGRz4uXkX+T001hx7ZJC+VDQrZ
+	lT6YCcVpb3XjNjDqhN6GH5dfpYKTLGKWrRiYbC2J5s3YX9PnKCbVem8rOZMHQ0t+syfEwzyobxF
+	/E
+X-Google-Smtp-Source: AGHT+IHC1e3aIoYtIc1z104Icp0iXqK9OPOFRvHJgtTMLHe0A8+iMJldljWaYTsqa9SCuWx0CufkMg==
+X-Received: by 2002:a05:600c:3b8d:b0:458:a992:6f1e with SMTP id 5b1f17b1804b1-459fc09db82mr3514055e9.5.1754684607458;
+        Fri, 08 Aug 2025 13:23:27 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 10/22] x86/traps: Move subarch_percpu_traps_init() into traps-setup.c
+Date: Fri,  8 Aug 2025 21:23:02 +0100
+Message-Id: <20250808202314.1045968-11-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
+References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH v1 00/16] dma-mapping: migrate to physical address-based
- API
-To: Jason Gunthorpe <jgg@nvidia.com>, Leon Romanovsky <leon@kernel.org>
-Cc: Abdiel Janulgue <abdiel.janulgue@gmail.com>, Alexander Potapenko
-	<glider@google.com>, Alex Gaynor <alex.gaynor@gmail.com>, Andrew Morton
-	<akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>, Danilo
-	Krummrich <dakr@kernel.org>, iommu@lists.linux.dev, Jason Wang
-	<jasowang@redhat.com>, Jens Axboe <axboe@kernel.dk>, Joerg Roedel
-	<joro@8bytes.org>, Jonathan Corbet <corbet@lwn.net>, Juergen Gross
-	<jgross@suse.com>, kasan-dev@googlegroups.com, Keith Busch
-	<kbusch@kernel.org>, linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	linux-nvme@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-	linux-trace-kernel@vger.kernel.org, Madhavan Srinivasan
-	<maddy@linux.ibm.com>, Masami Hiramatsu <mhiramat@kernel.org>, Michael
-	Ellerman <mpe@ellerman.id.au>, "Michael S. Tsirkin" <mst@redhat.com>, Miguel
-	Ojeda <ojeda@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	rust-for-linux@vger.kernel.org, Sagi Grimberg <sagi@grimberg.me>, Stefano
-	Stabellini <sstabellini@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev, Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20250807141929.GN184255@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20250808185112eucas1p285bfbeb3352a16df0b5c8f262fadbf2f
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20250807141938eucas1p2319a0526b25db120b3c9aeb49f69cce1
-X-EPHeader: CA
-X-CMS-RootMailID: 20250807141938eucas1p2319a0526b25db120b3c9aeb49f69cce1
-References: <cover.1754292567.git.leon@kernel.org>
-	<CGME20250807141938eucas1p2319a0526b25db120b3c9aeb49f69cce1@eucas1p2.samsung.com>
-	<20250807141929.GN184255@nvidia.com>
 
-On 07.08.2025 16:19, Jason Gunthorpe wrote:
-> On Mon, Aug 04, 2025 at 03:42:34PM +0300, Leon Romanovsky wrote:
->> Changelog:
->> v1:
->>   * Added new DMA_ATTR_MMIO attribute to indicate
->>     PCI_P2PDMA_MAP_THRU_HOST_BRIDGE path.
->>   * Rewrote dma_map_* functions to use thus new attribute
->> v0: https://lore.kernel.org/all/cover.1750854543.git.leon@kernel.org/
->> ------------------------------------------------------------------------
->>
->> This series refactors the DMA mapping to use physical addresses
->> as the primary interface instead of page+offset parameters. This
->> change aligns the DMA API with the underlying hardware reality where
->> DMA operations work with physical addresses, not page structures.
-> Lets elaborate this as Robin asked:
->
-> This series refactors the DMA mapping API to provide a phys_addr_t
-> based, and struct-page free, external API that can handle all the
-> mapping cases we want in modern systems:
->
->   - struct page based cachable DRAM
->   - struct page MEMORY_DEVICE_PCI_P2PDMA PCI peer to peer non-cachable MMIO
->   - struct page-less PCI peer to peer non-cachable MMIO
->   - struct page-less "resource" MMIO
->
-> Overall this gets much closer to Matthew's long term wish for
-> struct-pageless IO to cachable DRAM. The remaining primary work would
-> be in the mm side to allow kmap_local_pfn()/phys_to_virt() to work on
-> phys_addr_t without a struct page.
->
-> The general design is to remove struct page usage entirely from the
-> DMA API inner layers. For flows that need to have a KVA for the
-> physical address they can use kmap_local_pfn() or phys_to_virt(). This
-> isolates the struct page requirements to MM code only. Long term all
-> removals of struct page usage are supporting Matthew's memdesc
-> project which seeks to substantially transform how struct page works.
->
-> Instead make the DMA API internals work on phys_addr_t. Internally
-> there are still dedicated 'page' and 'resource' flows, except they are
-> now distinguished by a new DMA_ATTR_MMIO instead of by callchain. Both
-> flows use the same phys_addr_t.
->
-> When DMA_ATTR_MMIO is specified things work similar to the existing
-> 'resource' flow. kmap_local_pfn(), phys_to_virt(), phys_to_page(),
-> pfn_valid(), etc are never called on the phys_addr_t. This requires
-> rejecting any configuration that would need swiotlb. CPU cache
-> flushing is not required, and avoided, as ATTR_MMIO also indicates the
-> address have no cachable mappings. This effectively removes any
-> DMA API side requirement to have struct page when DMA_ATTR_MMIO is
-> used.
->
-> In the !DMA_ATTR_MMIO mode things work similarly to the 'page' flow,
-> except on the common path of no cache flush, no swiotlb it never
-> touches a struct page. When cache flushing or swiotlb copying
-> kmap_local_pfn()/phys_to_virt() are used to get a KVA for CPU
-> usage. This was already the case on the unmap side, now the map side
-> is symmetric.
->
-> Callers are adjusted to set DMA_ATTR_MMIO. Existing 'resource' users
-> must set it. The existing struct page based MEMORY_DEVICE_PCI_P2PDMA
-> path must also set it. This corrects some existing bugs where iommu
-> mappings for P2P MMIO were improperly marked IOMMU_CACHE.
->
-> Since ATTR_MMIO is made to work with all the existing DMA map entry
-> points, particularly dma_iova_link(), this finally allows a way to use
-> the new DMA API to map PCI P2P MMIO without creating struct page. The
-> VFIO DMABUF series demonstrates how this works. This is intended to
-> replace the incorrect driver use of dma_map_resource() on PCI BAR
-> addresses.
->
-> This series does the core code and modern flows. A followup series
-> will give the same treatement to the legacy dma_ops implementation.
+... along with the supporting functions.  Switch to Xen coding style, and make
+static as there are no external callers.
 
-Thanks for the elaborate description, that's something that was missing 
-in the previous attempt. I read again all the previous discussion and 
-this explanation and there are still two things that imho needs more 
-clarification.
+Rename to legacy_syscall_init() as a more accurate name.
 
+No functional change.
 
-First - basing the API on the phys_addr_t.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/include/asm/system.h |  2 -
+ xen/arch/x86/traps-setup.c        | 97 ++++++++++++++++++++++++++++++-
+ xen/arch/x86/x86_64/traps.c       | 92 -----------------------------
+ 3 files changed, 95 insertions(+), 96 deletions(-)
 
-Page based API had the advantage that it was really hard to abuse it and 
-call for something that is not 'a normal RAM'. I initially though that 
-phys_addr_t based API will somehow simplify arch specific 
-implementation, as some of them indeed rely on phys_addr_t internally, 
-but I missed other things pointed by Robin. Do we have here any 
-alternative?
-
-
-Second - making dma_map_phys() a single API to handle all cases.
-
-Do we really need such single function to handle all cases? To handle 
-P2P case, the caller already must pass DMA_ATTR_MMIO, so it must somehow 
-keep such information internally. Cannot it just call existing 
-dma_map_resource(), so there will be clear distinction between these 2 
-cases (DMA to RAM and P2P DMA)? Do we need additional check for 
-DMA_ATTR_MMIO for every typical DMA user? I know that branching is 
-cheap, but this will probably increase code size for most of the typical 
-users for no reason.
-
-
-Best regards
+diff --git a/xen/arch/x86/include/asm/system.h b/xen/arch/x86/include/asm/system.h
+index 3cdc56e4ba6d..6c2800d8158d 100644
+--- a/xen/arch/x86/include/asm/system.h
++++ b/xen/arch/x86/include/asm/system.h
+@@ -256,6 +256,4 @@ static inline int local_irq_is_enabled(void)
+ #define BROKEN_ACPI_Sx          0x0001
+ #define BROKEN_INIT_AFTER_S1    0x0002
+ 
+-void subarch_percpu_traps_init(void);
+-
+ #endif
+diff --git a/xen/arch/x86/traps-setup.c b/xen/arch/x86/traps-setup.c
+index 13b8fcf0ba51..fbae7072c292 100644
+--- a/xen/arch/x86/traps-setup.c
++++ b/xen/arch/x86/traps-setup.c
+@@ -2,13 +2,15 @@
+ /*
+  * Configuration of event handling for all CPUs.
+  */
++#include <xen/domain_page.h>
+ #include <xen/init.h>
+ #include <xen/param.h>
+ 
++#include <asm/endbr.h>
+ #include <asm/idt.h>
+ #include <asm/msr.h>
+ #include <asm/shstk.h>
+-#include <asm/system.h>
++#include <asm/stubs.h>
+ #include <asm/traps.h>
+ 
+ DEFINE_PER_CPU_READ_MOSTLY(idt_entry_t *, idt);
+@@ -19,6 +21,8 @@ static bool __initdata opt_ler;
+ boolean_param("ler", opt_ler);
+ 
+ void nocall entry_PF(void);
++void nocall lstar_enter(void);
++void nocall cstar_enter(void);
+ 
+ /*
+  * Sets up system tables and descriptors for IDT devliery.
+@@ -138,6 +142,95 @@ static void load_system_tables(void)
+     BUG_ON(stack_bottom & 15);
+ }
+ 
++static unsigned int write_stub_trampoline(
++    unsigned char *stub, unsigned long stub_va,
++    unsigned long stack_bottom, unsigned long target_va)
++{
++    unsigned char *p = stub;
++
++    if ( cpu_has_xen_ibt )
++    {
++        place_endbr64(p);
++        p += 4;
++    }
++
++    /* Store guest %rax into %ss slot */
++    /* movabsq %rax, stack_bottom - 8 */
++    *p++ = 0x48;
++    *p++ = 0xa3;
++    *(uint64_t *)p = stack_bottom - 8;
++    p += 8;
++
++    /* Store guest %rsp in %rax */
++    /* movq %rsp, %rax */
++    *p++ = 0x48;
++    *p++ = 0x89;
++    *p++ = 0xe0;
++
++    /* Switch to Xen stack */
++    /* movabsq $stack_bottom - 8, %rsp */
++    *p++ = 0x48;
++    *p++ = 0xbc;
++    *(uint64_t *)p = stack_bottom - 8;
++    p += 8;
++
++    /* jmp target_va */
++    *p++ = 0xe9;
++    *(int32_t *)p = target_va - (stub_va + (p - stub) + 4);
++    p += 4;
++
++    /* Round up to a multiple of 16 bytes. */
++    return ROUNDUP(p - stub, 16);
++}
++
++static void legacy_syscall_init(void)
++{
++    unsigned long stack_bottom = get_stack_bottom();
++    unsigned long stub_va = this_cpu(stubs.addr);
++    unsigned char *stub_page;
++    unsigned int offset;
++
++    /* No PV guests?  No need to set up SYSCALL/SYSENTER infrastructure. */
++    if ( !IS_ENABLED(CONFIG_PV) )
++        return;
++
++    stub_page = map_domain_page(_mfn(this_cpu(stubs.mfn)));
++
++    /*
++     * Trampoline for SYSCALL entry from 64-bit mode.  The VT-x HVM vcpu
++     * context switch logic relies on the SYSCALL trampoline being at the
++     * start of the stubs.
++     */
++    wrmsrl(MSR_LSTAR, stub_va);
++    offset = write_stub_trampoline(stub_page + (stub_va & ~PAGE_MASK),
++                                   stub_va, stack_bottom,
++                                   (unsigned long)lstar_enter);
++    stub_va += offset;
++
++    if ( cpu_has_sep )
++    {
++        /* SYSENTER entry. */
++        wrmsrl(MSR_IA32_SYSENTER_ESP, stack_bottom);
++        wrmsrl(MSR_IA32_SYSENTER_EIP, (unsigned long)sysenter_entry);
++        wrmsr(MSR_IA32_SYSENTER_CS, __HYPERVISOR_CS, 0);
++    }
++
++    /* Trampoline for SYSCALL entry from compatibility mode. */
++    wrmsrl(MSR_CSTAR, stub_va);
++    offset += write_stub_trampoline(stub_page + (stub_va & ~PAGE_MASK),
++                                    stub_va, stack_bottom,
++                                    (unsigned long)cstar_enter);
++
++    /* Don't consume more than half of the stub space here. */
++    ASSERT(offset <= STUB_BUF_SIZE / 2);
++
++    unmap_domain_page(stub_page);
++
++    /* Common SYSCALL parameters. */
++    wrmsrl(MSR_STAR, XEN_MSR_STAR);
++    wrmsrl(MSR_SYSCALL_MASK, XEN_SYSCALL_MASK);
++}
++
+ static void __init init_ler(void)
+ {
+     unsigned int msr = 0;
+@@ -241,7 +334,7 @@ void bsp_traps_reinit(void)
+  */
+ void percpu_traps_init(void)
+ {
+-    subarch_percpu_traps_init();
++    legacy_syscall_init();
+ 
+     if ( cpu_has_xen_lbr )
+         wrmsrl(MSR_IA32_DEBUGCTLMSR, IA32_DEBUGCTLMSR_LBR);
+diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
+index 34adf55e48df..81e64466e47e 100644
+--- a/xen/arch/x86/x86_64/traps.c
++++ b/xen/arch/x86/x86_64/traps.c
+@@ -311,98 +311,6 @@ void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
+     panic("DOUBLE FAULT -- system shutdown\n");
+ }
+ 
+-static unsigned int write_stub_trampoline(
+-    unsigned char *stub, unsigned long stub_va,
+-    unsigned long stack_bottom, unsigned long target_va)
+-{
+-    unsigned char *p = stub;
+-
+-    if ( cpu_has_xen_ibt )
+-    {
+-        place_endbr64(p);
+-        p += 4;
+-    }
+-
+-    /* Store guest %rax into %ss slot */
+-    /* movabsq %rax, stack_bottom - 8 */
+-    *p++ = 0x48;
+-    *p++ = 0xa3;
+-    *(uint64_t *)p = stack_bottom - 8;
+-    p += 8;
+-
+-    /* Store guest %rsp in %rax */
+-    /* movq %rsp, %rax */
+-    *p++ = 0x48;
+-    *p++ = 0x89;
+-    *p++ = 0xe0;
+-
+-    /* Switch to Xen stack */
+-    /* movabsq $stack_bottom - 8, %rsp */
+-    *p++ = 0x48;
+-    *p++ = 0xbc;
+-    *(uint64_t *)p = stack_bottom - 8;
+-    p += 8;
+-
+-    /* jmp target_va */
+-    *p++ = 0xe9;
+-    *(int32_t *)p = target_va - (stub_va + (p - stub) + 4);
+-    p += 4;
+-
+-    /* Round up to a multiple of 16 bytes. */
+-    return ROUNDUP(p - stub, 16);
+-}
+-
+-void nocall lstar_enter(void);
+-void nocall cstar_enter(void);
+-
+-void subarch_percpu_traps_init(void)
+-{
+-    unsigned long stack_bottom = get_stack_bottom();
+-    unsigned long stub_va = this_cpu(stubs.addr);
+-    unsigned char *stub_page;
+-    unsigned int offset;
+-
+-    /* No PV guests?  No need to set up SYSCALL/SYSENTER infrastructure. */
+-    if ( !IS_ENABLED(CONFIG_PV) )
+-        return;
+-
+-    stub_page = map_domain_page(_mfn(this_cpu(stubs.mfn)));
+-
+-    /*
+-     * Trampoline for SYSCALL entry from 64-bit mode.  The VT-x HVM vcpu
+-     * context switch logic relies on the SYSCALL trampoline being at the
+-     * start of the stubs.
+-     */
+-    wrmsrl(MSR_LSTAR, stub_va);
+-    offset = write_stub_trampoline(stub_page + (stub_va & ~PAGE_MASK),
+-                                   stub_va, stack_bottom,
+-                                   (unsigned long)lstar_enter);
+-    stub_va += offset;
+-
+-    if ( cpu_has_sep )
+-    {
+-        /* SYSENTER entry. */
+-        wrmsrl(MSR_IA32_SYSENTER_ESP, stack_bottom);
+-        wrmsrl(MSR_IA32_SYSENTER_EIP, (unsigned long)sysenter_entry);
+-        wrmsr(MSR_IA32_SYSENTER_CS, __HYPERVISOR_CS, 0);
+-    }
+-
+-    /* Trampoline for SYSCALL entry from compatibility mode. */
+-    wrmsrl(MSR_CSTAR, stub_va);
+-    offset += write_stub_trampoline(stub_page + (stub_va & ~PAGE_MASK),
+-                                    stub_va, stack_bottom,
+-                                    (unsigned long)cstar_enter);
+-
+-    /* Don't consume more than half of the stub space here. */
+-    ASSERT(offset <= STUB_BUF_SIZE / 2);
+-
+-    unmap_domain_page(stub_page);
+-
+-    /* Common SYSCALL parameters. */
+-    wrmsrl(MSR_STAR, XEN_MSR_STAR);
+-    wrmsrl(MSR_SYSCALL_MASK, XEN_SYSCALL_MASK);
+-}
+-
+ /*
+  * Local variables:
+  * mode: C
 -- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
+2.39.5
 
 
