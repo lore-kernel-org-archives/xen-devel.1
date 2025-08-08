@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFEECA0EC1
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075019.1437470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60014CA0EC4
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075017.1437451 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTcc-0006Kr-8y; Fri, 08 Aug 2025 20:23:26 +0000
+	id 1ukTca-0005tj-R6; Fri, 08 Aug 2025 20:23:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075019.1437470; Fri, 08 Aug 2025 20:23:26 +0000
+Received: by outflank-mailman (output) from mailman id 1075017.1437451; Fri, 08 Aug 2025 20:23:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTcc-0006Kk-6H; Fri, 08 Aug 2025 20:23:26 +0000
-Received: by outflank-mailman (input) for mailman id 1075019;
- Fri, 08 Aug 2025 20:23:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ukTca-0005tc-NV; Fri, 08 Aug 2025 20:23:24 +0000
+Received: by outflank-mailman (input) for mailman id 1075017;
+ Fri, 08 Aug 2025 20:23:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukTca-0005tW-EG
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:24 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 884a98fc-7495-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 22:23:23 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-459e3926cbbso12472755e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:23 -0700 (PDT)
+ id 1ukTcZ-0005tJ-8i
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:23 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 86dfa4cb-7495-11f0-b898-0df219b8e170;
+ Fri, 08 Aug 2025 22:23:21 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-451d41e1ad1so17066065e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:21 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.21
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 13:23:22 -0700 (PDT)
+ Fri, 08 Aug 2025 13:23:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 884a98fc-7495-11f0-a324-13f23c93f187
+X-Inumbo-ID: 86dfa4cb-7495-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754684603; x=1755289403; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754684600; x=1755289400; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=13MkauBuH09ermsY/i1fhguUQBZhfWnVGzvmuz1PuqQ=;
-        b=ScOn8kF4jiQ8iKD/gbwMSxVCNgNincQLxNBtLg6hOoIx/eYp20LCDuOcAygCTnaLq/
-         K5Nz+JhzjGsjonOvEvpHRzhy9dyk65e5qOqjQw7uGYSFA0RN622+gQjCidGdcOKwAdlr
-         gXqLlp6w1INOOFI2gdmBJx3U9YqSTX1iWCG8w=
+        bh=0H7WNQDzd5coV9BflfHCTzf9vlWwg8AwlAqm3G08bnQ=;
+        b=madKix2vVa20HxRrrLSBG3Q9AYjwXFOyUL5BooaPEJcXx9K7GparuWqTEFLpgbG3Px
+         Ct2gS+W4TDJjsxROH6CsSnYEtBozQbM+ICztduMapP/ZV1F455bip/4Kg7H5+TpbYRx6
+         dEFcqofiF0lRw8+xDLjTuqsc70opWEhwn3TMI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754684603; x=1755289403;
+        d=1e100.net; s=20230601; t=1754684600; x=1755289400;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=13MkauBuH09ermsY/i1fhguUQBZhfWnVGzvmuz1PuqQ=;
-        b=LeBNYUcSrdyZ35LlkmBMHHkPPE2zOIaCyeLMQDFC4wRRrun9vdw+FZbXss2tdMRv8W
-         znVvmvLvfLnlzNuSNjK4D8bFfICWYqfND422H6Bh/DIRIM7ffSXAdmFr7LhPMo0+GkrH
-         d21UxXQmtcJwEr+dMmWWC23zFM0SRCLfd/GPCtjznZQPAv8eT78NAAMgysnGh0HGVscO
-         ynN0bYcaRwUNYd91fxMOj28JvMsBmBehlFRhna/qn2lF9jzJp+ha0Ay1Q7pKb1wr37yf
-         Me7pQTFmx+V7j4dFA/TRbKblHsGoghvHN5+ZEQDsGkoR97aNL336ScI7jPOs50IS2GrY
-         UuKg==
-X-Gm-Message-State: AOJu0Yz18Jb8ZqO43JuEGtjth2mPdhy+WW+iTkiYGpcj86RQIwSy6KIJ
-	ouZ8Poppff5B2wBHpmh5IZWAb1FrqIlmAW2c3+FWh+NV6zhrmJ1ASbhHFhPP560qKsB7oceak4g
-	XVlMM1Yo=
-X-Gm-Gg: ASbGncvDP9VVkSEf8Kwc6w+Qfp4Cl3v0anl/iB46zSXDeXy0RCZkpoM58q9givyIKA1
-	Dl8FROs58foZbLE+We07lzjnVaPDvLUIMK+LewgPhG8ypI6gpEeFzw48DzvEP1O/qt7OlKA2P6K
-	tFPSAbo5grw4eiBDK/vkzR19T4e1lP2vvcGwoZ9X3ZtgguOuFVq8mb0OQG4L453aOFtKbx9PX3C
-	18fpMqahC55qy74ylJEfXKlvk9pJTyt1AFX2crKbZO6ND6mKnYOOC6msWMrXJAqfkrRRvtGi3AW
-	AoT9+H8CsgMn3h4CHNH0xORj652luBMur0xUkDIyRqZ+IGOPU4BjZ0Dv3EB1XofPaA+1aheRgeY
-	DQTWbe5iphzLtyYT7llvkXvN8ddMIGTHMbEeqkQ6ATWAgfZj1W5fKcQA13+MJFPQAjipJOM6/qo
-	zk
-X-Google-Smtp-Source: AGHT+IGbesx9l8nGMf7CTQnVncyxpSWuGQ63dhjBS4w7wPbc3OOUllijciJt7hVxgf563vnk/RVjJg==
-X-Received: by 2002:a05:600c:1d22:b0:43d:fa59:af97 with SMTP id 5b1f17b1804b1-459f4fc40b1mr34036485e9.32.1754684602672;
-        Fri, 08 Aug 2025 13:23:22 -0700 (PDT)
+        bh=0H7WNQDzd5coV9BflfHCTzf9vlWwg8AwlAqm3G08bnQ=;
+        b=xL5gwTQbbnBptFWgSbtV6HSTO0RfEZPNGJtFBGXT1GvhBCqomqn+S1Jy4iIg3BErhE
+         xGnyox4IHhEInzXMIDtUS/76Q8NtjT+w5uwQPMqihrWXlP7d4iALAQqFoeSWCQAht2aI
+         jHVJfgYFHmf3TbhDKrQTPZbtgK/K9dPZsEcgYy/4gGpKjzsfd0caeW/YsDA2Ut5T4AfA
+         mAu3QHD9MLI26nn54Zi4J1I/Dtrygn2y6HBvJHP7Efi6kzMS+BmKjeyCd105fe5vG5Ae
+         bs6xAxp4Zvyg3BiWNVC5/VDF86OhxZOqyUbXugc5BM7MtWeTC9yRer6p40Ahgz+XMBu2
+         TAnw==
+X-Gm-Message-State: AOJu0YxZqmSj2XGNB6Bq5GVvAsvIppUaPZ5MxxgNjAIs9Ffd006coMfM
+	J7DSxbONdTN6OG/1E2EszDFkY+0P4olBN4gqNuZT88Dh9j/xieBQ2OWjwBVweyOxhZtZqkOAaEN
+	szhYV9pQ=
+X-Gm-Gg: ASbGnctgYT2NhoJyxt5rPoD+xBb47X580+AII+AS7+sx0qzNYDZX+yjZdulTINPZrrf
+	Skqyb0zw5mj/kPaMMKAd1OzNd71dumoTZew8jc2JDx4AodEfkZQ/buNUGTg2pFiIsKvtTbWjd+d
+	7kAkbuAMVgURtWmEuT57Q8Ed0mtZ9veGQQI5SZQcgKsjcgHD+o8IqtNF0t4nf7QAEKid4LLnxPr
+	XCkS/V3FZztuPq7AqOiFT4NZdaJraX8ViaxOS9K+xajgWPQss6j3FBw6UMCPKzbhj5ohV1h8dNE
+	JWUkDLyEy56hxpIMrHs5yd0tPWVJ8zKq+4Q8h8TwdNW76Qkh7HdxG7aYr+PAfMilPfweuOj0uom
+	+cTmts6MkYv9/4cJegtkasPZuz7nSnb5XCYuW9L11rKYtLFHIqry+Wt+yegmQPZkXqcidESqkJ2
+	Hi
+X-Google-Smtp-Source: AGHT+IH6yG/YuCvIOBCxqVl+zkEoGEh5lVQi4A1hkpcjzwyoBm/xu52KU+29D/n5OkKNzCyeruYPKQ==
+X-Received: by 2002:a05:600c:1d01:b0:458:be62:dcd3 with SMTP id 5b1f17b1804b1-459f4f9bd34mr45225575e9.17.1754684600251;
+        Fri, 08 Aug 2025 13:23:20 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 04/22] x86/idt: Minor improvements to _update_gate_addr_lower()
-Date: Fri,  8 Aug 2025 21:22:56 +0100
-Message-Id: <20250808202314.1045968-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 01/22] x86/msr: Rename MSR_INTERRUPT_SSP_TABLE to MSR_ISST
+Date: Fri,  8 Aug 2025 21:22:53 +0100
+Message-Id: <20250808202314.1045968-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
@@ -97,16 +97,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-After some experimentation, using .a/.b makes far better logic than using the
-named fields, as both Clang and GCC spill idte to the stack when named fields
-are used.
-
-GCC seems to do something very daft for the addr1 field.  It takes addr,
-shifts it by 32, then ANDs with 0xffff0000000000000UL, which requires
-manifesting a MOVABS.
-
-Clang follows the C, whereby it ANDs with $imm32, then shifts, avoiding the
-MOVABS entirely.
+The name AMD chose is rather more concise.
 
 No functional change.
 
@@ -114,45 +105,60 @@ Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-I'm disappointed about how poor the code generation is when assigning to named
-fields, but I suppose it is a harder problem for the compiler to figure out.
-
-add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-24 (-24)
-Function                                     old     new   delta
-machine_kexec                                356     348      -8
-traps_init                                   434     418     -16
 ---
- xen/arch/x86/include/asm/idt.h | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ xen/arch/x86/cpu/common.c            | 2 +-
+ xen/arch/x86/include/asm/msr-index.h | 2 +-
+ xen/arch/x86/msr.c                   | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/idt.h b/xen/arch/x86/include/asm/idt.h
-index f613d5693e0e..b5e570a77fae 100644
---- a/xen/arch/x86/include/asm/idt.h
-+++ b/xen/arch/x86/include/asm/idt.h
-@@ -92,15 +92,16 @@ static inline void _set_gate_lower(idt_entry_t *gate, unsigned long type,
-  * Update the lower half handler of an IDT entry, without changing any other
-  * configuration.
-  */
--static inline void _update_gate_addr_lower(idt_entry_t *gate, void *addr)
-+static inline void _update_gate_addr_lower(idt_entry_t *gate, void *_addr)
- {
-+    unsigned long addr = (unsigned long)_addr;
-+    unsigned int addr1 = addr & 0xffff0000U; /* GCC force better codegen. */
-     idt_entry_t idte;
--    idte.a = gate->a;
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 97bdda1d4a25..f6ec5c9df522 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -933,7 +933,7 @@ void load_system_tables(void)
+ 			wrss(df_ssp,  _p(df_ssp));
+ 		}
  
--    idte.b = ((unsigned long)(addr) >> 32);
--    idte.a &= 0x0000FFFFFFFF0000ULL;
--    idte.a |= (((unsigned long)(addr) & 0xFFFF0000UL) << 32) |
--        ((unsigned long)(addr) & 0xFFFFUL);
-+    idte.b = addr >> 32;
-+    idte.a = gate->a & 0x0000ffffffff0000UL;
-+    idte.a |= (unsigned long)addr1 << 32;
-+    idte.a |= addr & 0xffff;
+-		wrmsrl(MSR_INTERRUPT_SSP_TABLE, (unsigned long)ist_ssp);
++		wrmsrl(MSR_ISST, (unsigned long)ist_ssp);
+ 	}
  
-     _write_gate_lower(gate, &idte);
- }
+ 	BUILD_BUG_ON(sizeof(*tss) <= 0x67); /* Mandated by the architecture. */
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index 2e7e2aff9a33..428d993ee89b 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -157,7 +157,7 @@
+ #define MSR_PL1_SSP                         0x000006a5
+ #define MSR_PL2_SSP                         0x000006a6
+ #define MSR_PL3_SSP                         0x000006a7
+-#define MSR_INTERRUPT_SSP_TABLE             0x000006a8
++#define MSR_ISST                            0x000006a8
+ 
+ #define MSR_PKRS                            0x000006e1
+ 
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index 2cd46b6c8afa..1bf117cbd80f 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -138,7 +138,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+     case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
+     case MSR_U_CET:
+     case MSR_S_CET:
+-    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
++    case MSR_PL0_SSP ... MSR_ISST:
+     case MSR_AMD64_LWP_CFG:
+     case MSR_AMD64_LWP_CBADDR:
+     case MSR_PPIN_CTL:
+@@ -442,7 +442,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+     case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
+     case MSR_U_CET:
+     case MSR_S_CET:
+-    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
++    case MSR_PL0_SSP ... MSR_ISST:
+     case MSR_AMD64_LWP_CFG:
+     case MSR_AMD64_LWP_CBADDR:
+     case MSR_PPIN_CTL:
 -- 
 2.39.5
 
