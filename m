@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819D5C87FD2
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 14:34:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1074620.1437110 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E81D9C87FD3
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 14:56:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1074667.1437193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukOAQ-0003D2-6k; Fri, 08 Aug 2025 14:33:58 +0000
+	id 1ukOVw-0000zb-1G; Fri, 08 Aug 2025 14:56:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1074620.1437110; Fri, 08 Aug 2025 14:33:58 +0000
+Received: by outflank-mailman (output) from mailman id 1074667.1437193; Fri, 08 Aug 2025 14:56:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukOAQ-0003Ci-0R; Fri, 08 Aug 2025 14:33:58 +0000
-Received: by outflank-mailman (input) for mailman id 1074620;
- Fri, 08 Aug 2025 14:33:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9AHj=2U=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1ukOAO-00039T-M4
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 14:33:56 +0000
-Received: from fhigh-a8-smtp.messagingengine.com
- (fhigh-a8-smtp.messagingengine.com [103.168.172.159])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b53db71c-7464-11f0-b898-0df219b8e170;
- Fri, 08 Aug 2025 16:33:54 +0200 (CEST)
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 6F54E140006F;
- Fri,  8 Aug 2025 10:33:53 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Fri, 08 Aug 2025 10:33:53 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 8 Aug 2025 10:33:52 -0400 (EDT)
+	id 1ukOVv-0000zO-RX; Fri, 08 Aug 2025 14:56:11 +0000
+Received: by outflank-mailman (input) for mailman id 1074667;
+ Fri, 08 Aug 2025 14:56:10 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <anthony@xenproject.org>) id 1ukOVu-0000Vw-2P
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 14:56:10 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1ukOVt-007zrZ-2w;
+ Fri, 08 Aug 2025 14:56:09 +0000
+Received: from [2a01:e0a:1da:8420:b77:bd5:6e45:7633] (helo=l14..)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1ukOVt-009BYT-27;
+ Fri, 08 Aug 2025 14:56:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,251 +41,283 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b53db71c-7464-11f0-b898-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1754663633; x=1754750033; bh=rzH4S8PiQY
-	diFvv5Qp3o/668oqL/9FARyEfSxtejKVY=; b=QLTuakdyjuPwQnOn2z9gSn0OZZ
-	dOm9h5I9hfZh4yS3OEp9q/3WXh5XlQBHClLt+FmTib2KFehCyxd7meOkkleKcosY
-	N0jVEbZJAFVkvSx/cLksDah/raMruafz+wpNctY9yvZ52IeTN3Xp1smLJXN5Ihzg
-	00TNSXTJDa5KzZOGJO653eWP5mUk7JUesCYYL3Aob4C/4TUk3zGSQAaOd3nAUjcc
-	hf5aMkGzsJAQ70PfOq56oPhgDP9fycM+sm69htNDFwDnexfPYvf1pckWcr9WSNnL
-	idJKeDKFWnsbkBwsDhMonM/6ABJgiXVAGTwToxaqCvwa7aME3rRZM3tJGiXQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1754663633; x=
-	1754750033; bh=rzH4S8PiQYdiFvv5Qp3o/668oqL/9FARyEfSxtejKVY=; b=M
-	RNeb3teBGXiL4wWU3/hE74OQ+yn/jGAdVbgwP6HZM+rgaKl8P2C48ayka/SabaOD
-	uVLzas8+v0ufnBbyIcwMGXAJozH1hxckjfy4vyMZbos5mWiayJqKj3cOQfY0+/Zr
-	I2GDIglvvPM79kymdUE+M+l7HLgO9IKl/pIcVJ0f6n3ndLhtg/dXwuw5O+Z9cNiE
-	wB98X0rzA9bLqtoYzDFCpA0VL4Kc0bpFB+kzeycrd9hHJJ0/8HjyqkCsT4GxQaUw
-	jPiPA5TGRUdh5SjyWNnU4a1g93YZxXdWtL/wbqcVpUwlM7+jn241Iehepa/ozwfY
-	Y3EbLlFIvft5AidKc7V0Q==
-X-ME-Sender: <xms:0QqWaD9GnxiqNsK8RfEnkV7kO9R6Y579zrzZ4yY4mEJ3S5czcXvvUw>
-    <xme:0QqWaKSQ62Zf1HMUrjM9Xxa5Rkngedu5h7M3jwRDUthm6-OB8_DhwUp5_AmP3keZ0
-    UZD8nageGJrUg>
-X-ME-Received: <xmr:0QqWaNn7j95jrV5YMX9Db4sXXCf0jdwva0bJxrBcg1FOh90CulpNnPJYc1y4UCnxJLqmeXePeRvRklwXwuwq6TR8dqRE1LUL6zyPJNwgCdsCMGCT7taG>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdduvdegtdeiucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghk
-    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefguedu
-    hefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlhhush
-    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhes
-    ihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeegpd
-    hmohguvgepshhmthhpohhuthdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhs
-    rdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhrtghpthhtoheptggrrhguohgvsegt
-    rghrughovgdrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghrnhgvlh
-    drohhrgh
-X-ME-Proxy: <xmx:0QqWaCRn4CZD737lfR57PmrN237my-iMkvPXIMFqszQeh4bF1hwcEg>
-    <xmx:0QqWaDOQ_MVvyx7lfFl5O41fEsIlMraKfkS8IEG63IoFDs7-i9K-nQ>
-    <xmx:0QqWaDVLBuf7ySC1KNrD77S-29KjYiyU9ClgtkeDAES4QKT73iAC9w>
-    <xmx:0QqWaCeKSGsWYF52LbcGF-yQRsx43RHPCyRucQ0PxCRBXumVAvOPGA>
-    <xmx:0QqWaJ7qCNh_X-q3jUo16_9Bz7t7ZBCHv3Y2U6LX1xF8BgBstuE1x69z>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=vRMIu2sOc8ho9gldf/0/Ow6xK9iiXJMrSVqeHIXyoNY=; b=t4yE+O72N18PnGBjxjBJtEwsPG
+	AJwQ4blV8QeBEnXfj/CRBe6ulEqOU7avsptKBYrpUqqwDxWoeUG2aRL52pVYjQbqZus/ABQHfha1B
+	le4fknbkC8BPUG/OLy3CpFM2LykUbYxJM2CRzn1jVSOHCIrOhsSDXYZ2EhvRypjnSSqI=;
+From: Anthony PERARD <anthony@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 1/3] CI: Add driver domains tests
-Date: Fri,  8 Aug 2025 16:32:41 +0200
-Message-ID: <0243d946ec451ddf18a620dbcaaa45eba861810a.1754663560.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.961bf2f7929562a899b182283446598d4c055149.1754663560.git-series.marmarek@invisiblethingslab.com>
-References: <cover.961bf2f7929562a899b182283446598d4c055149.1754663560.git-series.marmarek@invisiblethingslab.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [XEN PATCH 05/11] libxl: Convert libxl__json_parse() to use json-c
+Date: Fri,  8 Aug 2025 16:55:56 +0200
+Message-Id: <20250808145602.41716-6-anthony@xenproject.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250808145602.41716-1-anthony@xenproject.org>
+References: <20250808145602.41716-1-anthony@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Setup a simple two domU system. One with network backend, running
-xendriverdomain service, and one with frontend, trying to ping the
-backend.
+From: Anthony PERARD <anthony.perard@vates.tech>
 
-Contrary to other similar tests, use disk image instead of initrd, to
-allow bigger rootfs without adding more RAM (for both dom0 and domU).
-But keep using pxelinux as a bootloader as it's easier to setup than
-installing grub on the disk. Theoretically, it could be started via direct
-kernel boot in QEMU, but pxelinux is slightly closer to real-world
-deployment.
+This reuse the "json_callback_*" implemented for the yajl parser as
+they don't really need to be changed. It's just awkward to have to
+cast between `unsigned char` and `char.`
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Replace few strncpy() by memcpy() to let the compiler know we want to
+copy the string without the terminating nul, as we are adding it just
+after.
+
+Also, it should be possible to keep using YAJL parser when json-c
+library isn't available.
+
+Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
-Changes in v2:
-- use heredoc
-- limit ping loop iterations
-- use full "backend" / "frontend" in disk image names
-- print domU consoles directly to /dev/console, to avoid systemd-added
-  messages prefix
-- terminate test on failure, don't wait for timeout
----
- automation/gitlab-ci/test.yaml                  |   8 +-
- automation/scripts/qemu-driverdomains-x86_64.sh | 130 +++++++++++++++++-
- 2 files changed, 138 insertions(+)
- create mode 100755 automation/scripts/qemu-driverdomains-x86_64.sh
+ tools/include/libxl_json.h    |   4 ++
+ tools/libs/light/libxl_json.c | 120 ++++++++++++++++++++++++++++++++--
+ 2 files changed, 120 insertions(+), 4 deletions(-)
 
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 1f0b27b2378a..5c4b2dc304b4 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -656,6 +656,14 @@ qemu-alpine-x86_64-gcc:
-     - *x86-64-test-needs
-     - alpine-3.18-gcc
+diff --git a/tools/include/libxl_json.h b/tools/include/libxl_json.h
+index 3f97267eae..f0b4871e0e 100644
+--- a/tools/include/libxl_json.h
++++ b/tools/include/libxl_json.h
+@@ -42,6 +42,7 @@ yajl_gen_status libxl_ms_vm_genid_gen_json(yajl_gen hand, libxl_ms_vm_genid *p);
+ #  define HAVE_YAJL_V2 1
+ #endif
  
-+qemu-alpine-driverdomains-x86_64-gcc:
-+  extends: .qemu-x86-64
-+  script:
-+    - ./automation/scripts/qemu-driverdomains-x86_64.sh 2>&1 | tee ${LOGFILE}
-+  needs:
-+    - *x86-64-test-needs
-+    - alpine-3.18-gcc
++#ifdef HAVE_LIBYAJL
+ #ifdef HAVE_YAJL_V2
+ 
+ typedef size_t libxl_yajl_length;
+@@ -89,5 +90,8 @@ static inline yajl_gen libxl_yajl_gen_alloc(const yajl_alloc_funcs *allocFuncs)
+ }
+ 
+ #endif /* !HAVE_YAJL_V2 */
++#else
++typedef size_t libxl_yajl_length;
++#endif /* !HAVE_LIBYAJL */
+ 
+ #endif /* LIBXL_JSON_H */
+diff --git a/tools/libs/light/libxl_json.c b/tools/libs/light/libxl_json.c
+index 9b8ef2cab9..44ee6e213f 100644
+--- a/tools/libs/light/libxl_json.c
++++ b/tools/libs/light/libxl_json.c
+@@ -16,7 +16,25 @@
+ 
+ #include <math.h>
+ 
++#ifdef HAVE_LIBJSONC
++#include <json-c/json.h>
++#define USE_LIBJSONC_PARSER
++#endif
 +
- qemu-smoke-x86-64-gcc:
-   extends: .qemu-smoke-x86-64
-   script:
-diff --git a/automation/scripts/qemu-driverdomains-x86_64.sh b/automation/scripts/qemu-driverdomains-x86_64.sh
-new file mode 100755
-index 000000000000..a8e2ceb33527
---- /dev/null
-+++ b/automation/scripts/qemu-driverdomains-x86_64.sh
-@@ -0,0 +1,130 @@
-+#!/bin/bash
++#ifdef HAVE_LIBYAJL
++#  ifndef USE_LIBJSONC_PARSER
++#    define USE_LIBYAJL_PARSER
++#  endif
++#endif
 +
-+set -ex -o pipefail
 +
-+dom0_rootfs_extra_comp=()
-+dom0_rootfs_extra_uncomp=()
++#ifdef USE_LIBJSONC_PARSER
++#include <json-c/json_visit.h>
++#endif
 +
-+cd binaries
++#ifdef USE_LIBYAJL_PARSER
+ #include <yajl/yajl_parse.h>
++#endif
+ #include <yajl/yajl_gen.h>
+ 
+ #include "libxl_internal.h"
+@@ -25,7 +43,9 @@
+ 
+ typedef struct libxl__yajl_ctx {
+     libxl__gc *gc;
++#ifdef USE_LIBYAJL_PARSER
+     yajl_handle hand;
++#endif
+     libxl__json_object *head;
+     libxl__json_object *current;
+ #ifdef DEBUG_ANSWER
+@@ -33,7 +53,7 @@ typedef struct libxl__yajl_ctx {
+ #endif
+ } libxl__yajl_ctx;
+ 
+-#ifdef DEBUG_ANSWER
++#if defined(DEBUG_ANSWER) && defined(USE_LIBYAJL_PARSER)
+ #if YAJL_VERSION < 20000
+ #  define DEBUG_GEN_ALLOC(ctx)                  \
+     if ((ctx)->g == NULL) {                     \
+@@ -759,7 +779,7 @@ static int json_callback_number(void *opaque, const char *s, libxl_yajl_length l
+     obj = libxl__json_object_alloc(ctx->gc, JSON_NUMBER);
+ 
+     t = libxl__zalloc(ctx->gc, len + 1);
+-    strncpy(t, s, len);
++    memcpy(t, s, len);
+     t[len] = 0;
+ 
+     obj->u.string = t;
+@@ -806,7 +826,7 @@ static int json_callback_map_key(void *opaque, const unsigned char *str,
+ 
+     DEBUG_GEN_STRING(ctx, str, len);
+ 
+-    strncpy(t, (const char *) str, len);
++    memcpy(t, (const char *) str, len);
+     t[len] = 0;
+ 
+     if (libxl__json_object_is_map(obj)) {
+@@ -890,6 +910,7 @@ static int json_callback_end_array(void *opaque)
+     return 1;
+ }
+ 
++#ifdef USE_LIBYAJL_PARSER
+ static yajl_callbacks callbacks = {
+     json_callback_null,
+     json_callback_boolean,
+@@ -903,28 +924,111 @@ static yajl_callbacks callbacks = {
+     json_callback_start_array,
+     json_callback_end_array
+ };
++#endif
+ 
+ static void yajl_ctx_free(libxl__yajl_ctx *yajl_ctx)
+ {
++#ifdef USE_LIBYAJL_PARSER
+     if (yajl_ctx->hand) {
+         yajl_free(yajl_ctx->hand);
+         yajl_ctx->hand = NULL;
+     }
++#endif
+     DEBUG_GEN_FREE(yajl_ctx);
+ }
+ 
++#ifdef USE_LIBJSONC_PARSER
++static int jso_visiter(json_object *jso,
++                       int flags,
++                       json_object *parent_jso,
++                       const char *jso_key,
++                       size_t *jso_index,
++                       void *userarg)
++{
++    enum json_type type;
++    int r;
 +
-+# DomU rootfs
++    if (jso_key && flags != JSON_C_VISIT_SECOND) {
++        json_callback_map_key(userarg, (const unsigned char*)jso_key, strlen(jso_key));
++    }
++    type = json_object_get_type(jso);
++    switch (type) {
++    case json_type_null:
++        r = json_callback_null(userarg);
++        break;
++    case json_type_boolean:
++        r = json_callback_boolean(userarg, json_object_get_boolean(jso));
++        break;
++    case json_type_int:
++    case json_type_double: {
++        // it might be better to use on of
++        // json_object_get_{int,int64,uint64,double} instead.
++        // but would need to replace json_callback_number().
++        const char *s = json_object_get_string(jso);
++        r = json_callback_number(userarg, s, strlen(s));
++        break;
++    }
++    case json_type_object:
++        if (flags != JSON_C_VISIT_SECOND) {
++            r = json_callback_start_map(userarg);
++        } else {
++            r = json_callback_end_map(userarg);
++        }
++        break;
++    case json_type_array:
++        if (flags != JSON_C_VISIT_SECOND) {
++            r = json_callback_start_array(userarg);
++        } else {
++            r = json_callback_end_array(userarg);
++        }
++        break;
++    case json_type_string: {
++        const char *s = json_object_get_string(jso);
++        const int len = json_object_get_string_len(jso);
++        r = json_callback_string(userarg, (const unsigned char*)s, len);
++        break;
++    }
++    default:
++        /* error */
++        r = 0;
++    }
++    if (r == 0)
++        return JSON_C_VISIT_RETURN_ERROR;
++    return JSON_C_VISIT_RETURN_CONTINUE;
++}
++#endif
 +
-+mkdir -p rootfs
-+cd rootfs
-+mkdir -p etc/local.d
-+passed="ping test passed"
-+failed="TEST FAILED"
-+cat > etc/local.d/xen.start << EOF
-+#!/bin/bash
+ libxl__json_object *libxl__json_parse(libxl__gc *gc, const char *s)
+ {
++#ifdef USE_LIBYAJL_PARSER
+     yajl_status status;
++    unsigned char *str = NULL;
++#endif
+     libxl__yajl_ctx yajl_ctx;
+     libxl__json_object *o = NULL;
+-    unsigned char *str = NULL;
++#ifdef USE_LIBJSONC_PARSER
++    json_object *jso;
++    enum json_tokener_error error;
 +
-+set -x
-+
-+if grep -q test=backend /proc/cmdline; then
-+    brctl addbr xenbr0
-+    ip link set xenbr0 up
-+    ip addr add 192.168.0.1/24 dev xenbr0
-+    bash /etc/init.d/xendriverdomain start
-+    # log backend-related logs to the console
-+    tail -F /var/log/xen/xldevd.log /var/log/xen/xen-hotplug.log >>/dev/console 2>/dev/null &
-+else
-+    ip link set eth0 up
-+    ip addr add 192.168.0.2/24 dev eth0
-+    timeout=6 # 6*10s
-+    until ping -c 10 192.168.0.1; do
-+        sleep 1
-+        if [ \$timeout -le 0 ]; then
-+            echo "${failed}"
-+            exit 1
-+        fi
-+        ((timeout--))
-+    done
-+    echo "${passed}"
-+fi
-+EOF
-+chmod +x etc/local.d/xen.start
-+zcat ../rootfs.cpio.gz | cpio -imd
-+zcat ../xen-tools.cpio.gz | cpio -imd
-+mkfs.ext4 -d . ../domU-rootfs.img 1024M
-+cd ..
-+rm -rf rootfs
-+
-+# Dom0 rootfs
-+mkdir -p rootfs
-+cd rootfs
-+zcat ../rootfs.cpio.gz | cpio -imd
-+zcat ../xen-tools.cpio.gz | cpio -imd
-+mkdir -p root etc/local.d
-+cat > root/backend.cfg << EOF
-+name="backend"
-+memory=512
-+vcpus=1
-+kernel="/root/bzImage"
-+extra="console=hvc0 root=/dev/xvda net.ifnames=0 test=backend"
-+disk=[ '/root/domU-rootfs-backend.img,raw,xvda,rw' ]
-+EOF
-+cat > root/frontend.cfg << EOF
-+name="frontend"
-+memory=512
-+vcpus=1
-+kernel="/root/bzImage"
-+extra="console=hvc0 root=/dev/xvda net.ifnames=0 test=frontend"
-+disk=[ '/root/domU-rootfs-frontend.img,raw,xvda,rw' ]
-+vif=[ 'bridge=xenbr0,backend=backend' ]
-+EOF
-+
-+cat > etc/local.d/xen.start << EOF
-+#!/bin/bash
-+
-+set -x
-+
-+bash /etc/init.d/xencommons start
-+
-+xl list
-+
-+tail -F /var/log/xen/console/guest-backend.log 2>/dev/null | sed -e "s/^/(backend) /" >>/dev/console &
-+tail -F /var/log/xen/console/guest-frontend.log 2>/dev/null | sed -e "s/^/(frontend) /" >>/dev/console &
-+xl -vvv create /root/backend.cfg
-+xl -vvv create /root/frontend.cfg
-+EOF
-+chmod +x etc/local.d/xen.start
-+
-+cp ../domU-rootfs.img ./root/domU-rootfs-backend.img
-+cp ../domU-rootfs.img ./root/domU-rootfs-frontend.img
-+cp ../bzImage ./root/
-+mkdir -p etc/default
-+echo 'XENCONSOLED_TRACE=all' >> etc/default/xencommons
-+mkdir -p var/log/xen/console
-+mkfs.ext4 -d . ../dom0-rootfs.img 2048M
-+cd ..
-+rm -rf rootfs
-+
-+cd ..
-+
-+cat >> binaries/pxelinux.0 << EOF
-+#!ipxe
-+
-+kernel xen console=com1 console_timestamps=boot
-+module bzImage console=hvc0 root=/dev/sda net.ifnames=0
-+boot
-+EOF
-+
-+# Run the test
-+rm -f smoke.serial
-+export TEST_CMD="qemu-system-x86_64 \
-+    -cpu qemu64,+svm \
-+    -m 2G -smp 2 \
-+    -monitor none -serial stdio \
-+    -nographic \
-+    -device virtio-net-pci,netdev=n0 \
-+    -netdev user,id=n0,tftp=binaries,bootfile=/pxelinux.0 \
-+    -drive file=binaries/dom0-rootfs.img,format=raw"
-+
-+export TEST_LOG="smoke.serial"
-+export BOOT_MSG="Latest ChangeSet: "
-+export LOG_MSG="Domain-0"
-+# exit early on test failure too, check if it was success below
-+export PASSED="$passed|$failed"
-+
-+./automation/scripts/console.exp | sed 's/\r\+$//'
-+
-+grep "$passed" smoke.serial
++    jso = json_tokener_parse_verbose(s, &error);
++    if (!jso) {
++        LOG(ERROR, "json-c parse error: %s", json_tokener_error_desc(error));
++        goto out;
++    }
++#endif
+ 
+     memset(&yajl_ctx, 0, sizeof (yajl_ctx));
+     yajl_ctx.gc = gc;
+ 
+     DEBUG_GEN_ALLOC(&yajl_ctx);
+ 
++#ifdef USE_LIBJSONC_PARSER
++    int r = json_c_visit(jso, 0, jso_visiter, &yajl_ctx);
++    if (r < 0) {
++        LOG(ERROR, "json_c_visit failed");
++        goto out;
++    }
++#elif defined(USE_LIBYAJL_PARSER)
+     if (yajl_ctx.hand == NULL) {
+         yajl_ctx.hand = libxl__yajl_alloc(&callbacks, NULL, &yajl_ctx);
+     }
+@@ -935,6 +1039,7 @@ libxl__json_object *libxl__json_parse(libxl__gc *gc, const char *s)
+     status = yajl_complete_parse(yajl_ctx.hand);
+     if (status != yajl_status_ok)
+         goto out;
++#endif
+ 
+     o = yajl_ctx.head;
+ 
+@@ -943,13 +1048,20 @@ libxl__json_object *libxl__json_parse(libxl__gc *gc, const char *s)
+     yajl_ctx.head = NULL;
+ 
+     yajl_ctx_free(&yajl_ctx);
++#ifdef USE_LIBJSONC_PARSER
++    json_object_put(jso);
++#endif
+     return o;
+ 
+ out:
++#ifdef USE_LIBJSONC_PARSER
++    json_object_put(jso);
++#elif defined(USE_LIBYAJL_PARSER)
+     str = yajl_get_error(yajl_ctx.hand, 1, (const unsigned char*)s, strlen(s));
+ 
+     LIBXL__LOG(libxl__gc_owner(gc), LIBXL__LOG_ERROR, "yajl error: %s", str);
+     yajl_free_error(yajl_ctx.hand, str);
++#endif
+     yajl_ctx_free(&yajl_ctx);
+     return NULL;
+ }
 -- 
-git-series 0.9.1
+Anthony PERARD
+
 
