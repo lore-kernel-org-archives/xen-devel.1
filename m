@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B46CA0EC3
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 14:56:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1074670.1437220 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF4DDCA0EC0
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 14:56:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1074663.1437148 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukOVy-0001eG-LS; Fri, 08 Aug 2025 14:56:14 +0000
+	id 1ukOVs-0008LA-Qb; Fri, 08 Aug 2025 14:56:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1074670.1437220; Fri, 08 Aug 2025 14:56:14 +0000
+Received: by outflank-mailman (output) from mailman id 1074663.1437148; Fri, 08 Aug 2025 14:56:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukOVy-0001c8-FX; Fri, 08 Aug 2025 14:56:14 +0000
-Received: by outflank-mailman (input) for mailman id 1074670;
- Fri, 08 Aug 2025 14:56:12 +0000
+	id 1ukOVs-0008Ka-K2; Fri, 08 Aug 2025 14:56:08 +0000
+Received: by outflank-mailman (input) for mailman id 1074663;
+ Fri, 08 Aug 2025 14:56:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anthony@xenproject.org>) id 1ukOVw-0001BL-Oz
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 14:56:12 +0000
+ (envelope-from <anthony@xenproject.org>) id 1ukOVr-0008Ie-06
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 14:56:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1ukOVw-007zrt-1n;
- Fri, 08 Aug 2025 14:56:12 +0000
+ (envelope-from <anthony@xenproject.org>) id 1ukOVp-007zr1-2z;
+ Fri, 08 Aug 2025 14:56:05 +0000
 Received: from [2a01:e0a:1da:8420:b77:bd5:6e45:7633] (helo=l14..)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1ukOVw-009BYT-0y;
- Fri, 08 Aug 2025 14:56:12 +0000
+ (envelope-from <anthony@xenproject.org>) id 1ukOVp-009BYT-1q;
+ Fri, 08 Aug 2025 14:56:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,87 +43,90 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ifWlGzTUU1FY9skxB0Gurmq9TF1yYQXRL2ntyqKDdmw=; b=u2zzoRO9ZvKkaKuhjxRpPiqHHX
-	sU0CZMwSW8rP2QH7c/CKzAXK1kBOJMeIxKR/qKgpk5JpXkTffqdbWwG8BMoHFFN05NjhDEebiFauy
-	nNZTRzGMToOHOgHPMVImCHOo46WEujyVqbjI5pDAT3NJs+dfmRSKqk/pziB53sSh1H+4=;
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=ga3rdHXbHTe5bxe1ccYqmMj+8JODCgO+SO4MQwmxz10=; b=JEikGWsB49R4sHXaTIijAQo2CP
+	6ybyObkKzRJftWe+lrEluNyG9/tPcu+t/PYRD4k2zc6Vs29xNcvtdaz2jb6ciEnTdJ/DviExpBfb/
+	DGuc0ealNCW6veQes9VpkSinoGOfRpeHHZpNPXfd87qEQUaBKjp+zVYNizGSC9joHDDo=;
 From: Anthony PERARD <anthony@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH 08/11] libxl: convert libxl__json_object_to_json() to json_object
-Date: Fri,  8 Aug 2025 16:55:59 +0200
-Message-Id: <20250808145602.41716-9-anthony@xenproject.org>
+	Juergen Gross <jgross@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Community Manager <community.manager@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [XEN PATCH 00/11] Allow to build libxl and other tools with json-c instead of yajl
+Date: Fri,  8 Aug 2025 16:55:51 +0200
+Message-Id: <20250808145602.41716-1-anthony@xenproject.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250808145602.41716-1-anthony@xenproject.org>
-References: <20250808145602.41716-1-anthony@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Anthony PERARD <anthony.perard@vates.tech>
 
-But keep the implementation done for YAJL.
+Patch series available in this git branch:
+https://xenbits.xenproject.org/git-http/people/aperard/xen-unstable.git br.libxl-libjsonc-v1
 
-Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
----
- tools/libs/light/libxl_json.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+Hi,
 
-diff --git a/tools/libs/light/libxl_json.c b/tools/libs/light/libxl_json.c
-index 01944ef94d..cffda158d2 100644
---- a/tools/libs/light/libxl_json.c
-+++ b/tools/libs/light/libxl_json.c
-@@ -104,10 +104,12 @@ typedef struct libxl__yajl_ctx {
-  * YAJL Helper
-  */
- 
-+#ifdef HAVE_LIBYAJL
- yajl_gen_status libxl__yajl_gen_asciiz(yajl_gen hand, const char *str)
- {
-     return yajl_gen_string(hand, (const unsigned char *)str, strlen(str));
- }
-+#endif
- 
- #ifdef HAVE_LIBJSONC
- int libxl__enum_gen_jso(json_object **jso_r, const char *str)
-@@ -1522,6 +1524,29 @@ char *libxl__object_to_json(libxl_ctx *ctx, const char *type,
- char *libxl__json_object_to_json(libxl__gc *gc,
-                                  const libxl__json_object *args)
- {
-+#ifdef HAVE_LIBJSONC
-+    const char *buf;
-+    json_object *root;
-+    char *ret = NULL;
-+    int rc;
-+
-+    if (!args)
-+        return NULL;
-+
-+    rc = libxl__json_object_to_json_object(gc, &root, args);
-+    if (rc)
-+        goto out;
-+
-+    buf = json_object_to_json_string_ext(root, JSON_C_TO_STRING_PRETTY);
-+    if (!buf)
-+        goto out;
-+
-+    ret = libxl__strdup(gc, buf);
-+
-+out:
-+    json_object_put(root);
-+    return ret;
-+#elif defined(HAVE_LIBYAJL)
-     const unsigned char *buf;
-     libxl_yajl_length len;
-     yajl_gen_status s;
-@@ -1549,6 +1574,7 @@ char *libxl__json_object_to_json(libxl__gc *gc,
- out:
-     yajl_gen_free(hand);
-     return ret;
-+#endif
- }
- 
- #ifdef HAVE_LIBJSONC
+The library YAJL has been unmaintained for several years, without an obvious
+fork to pick.
+
+On the other and the library json-c is been maintained and use by several other
+project, it's probably already installed on your machine. So this patch series
+intend to allow to build the Xen toolstack again json-c, and forgo yajl.
+
+Just in case, YAJL is can still be used.
+
+There's bit of libxl API that exposes YAJL, mainly so it can be used by `xl` to
+call libxl_domain_config_gen_json(). It was exposed via the "libxl_json.h"
+headers. This functions and others won't be available when libxl is build
+against json-c.
+
+Cheers,
+
+Anthony PERARD (11):
+  xl: move printf_info prototype to an header
+  libxl: Remove duplicate libxl_domain_config_gen_json prototype
+  libxl: remove duplicated libxl__yajl_gen_asciiz() prototype
+  tools/configure: Introduce deps on json-c lib for libxl
+  libxl: Convert libxl__json_parse() to use json-c
+  libxl: convert libxl__json_object_to_yajl_gen to
+    libxl__json_object_to_libjsonc_object
+  libxl: libxl__object_to_json() to json-c
+  libxl: convert libxl__json_object_to_json() to json_object
+  tools/libxenstat: Use json-c when available
+  configure: Use json-c by default, fallback to yajl
+  Update CHANGELOG and README with dependency on json-c
+
+ CHANGELOG.md                              |   2 +
+ README                                    |   2 +-
+ config/Tools.mk.in                        |   2 +
+ tools/config.h.in                         |   3 +
+ tools/configure                           | 136 +++++-
+ tools/configure.ac                        |  10 +-
+ tools/include/libxl_json.h                |  30 +-
+ tools/libs/light/Makefile                 |   7 +-
+ tools/libs/light/gentypes.py              | 160 ++++++-
+ tools/libs/light/idl.py                   |   7 +-
+ tools/libs/light/libxl_cpuid.c            | 119 +++++
+ tools/libs/light/libxl_internal.h         |  25 +-
+ tools/libs/light/libxl_json.c             | 557 +++++++++++++++++++++-
+ tools/libs/light/libxl_qmp.c              |  53 ++
+ tools/libs/light/libxl_types.idl          |   7 +-
+ tools/libs/light/libxl_types_internal.idl |   3 +-
+ tools/libs/stat/Makefile                  |   3 +-
+ tools/libs/stat/xenstat_qmp.c             | 126 ++++-
+ tools/xl/Makefile                         |   2 +-
+ tools/xl/xl.h                             |   3 +
+ tools/xl/xl_info.c                        | 105 +++-
+ tools/xl/xl_misc.c                        |   3 -
+ 22 files changed, 1313 insertions(+), 52 deletions(-)
+
 -- 
 Anthony PERARD
 
