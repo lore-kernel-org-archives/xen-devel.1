@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D949CA0EC0
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 08:04:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1074087.1436773 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E384FC87FD2
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 08:04:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1074092.1436823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukI54-0000NW-5I; Fri, 08 Aug 2025 08:04:02 +0000
+	id 1ukI5E-0001cr-R5; Fri, 08 Aug 2025 08:04:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1074087.1436773; Fri, 08 Aug 2025 08:04:02 +0000
+Received: by outflank-mailman (output) from mailman id 1074092.1436823; Fri, 08 Aug 2025 08:04:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukI54-0000NP-26; Fri, 08 Aug 2025 08:04:02 +0000
-Received: by outflank-mailman (input) for mailman id 1074087;
- Fri, 08 Aug 2025 08:04:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ukI5E-0001ck-NV; Fri, 08 Aug 2025 08:04:12 +0000
+Received: by outflank-mailman (input) for mailman id 1074092;
+ Fri, 08 Aug 2025 08:04:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mRAb=2U=amd.com=Jiqian.Chen@srs-se1.protection.inumbo.net>)
- id 1ukI52-0000NJ-JT
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 08:04:00 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060b.outbound.protection.outlook.com
- [2a01:111:f403:2415::60b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3ceabe82-742e-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 10:03:59 +0200 (CEST)
-Received: from SJ0PR13CA0207.namprd13.prod.outlook.com (2603:10b6:a03:2c3::32)
- by MN2PR12MB4061.namprd12.prod.outlook.com (2603:10b6:208:19a::18)
+ id 1ukI5D-0000bG-Qy
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 08:04:11 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20620.outbound.protection.outlook.com
+ [2a01:111:f403:2416::620])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4367dbab-742e-11f0-b898-0df219b8e170;
+ Fri, 08 Aug 2025 10:04:09 +0200 (CEST)
+Received: from SJ0PR13CA0158.namprd13.prod.outlook.com (2603:10b6:a03:2c7::13)
+ by CH3PR12MB9396.namprd12.prod.outlook.com (2603:10b6:610:1d0::8)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.18; Fri, 8 Aug
- 2025 08:03:54 +0000
-Received: from CO1PEPF000066E7.namprd05.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::86) by SJ0PR13CA0207.outlook.office365.com
- (2603:10b6:a03:2c3::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9031.8 via Frontend Transport; Fri, 8
- Aug 2025 08:03:54 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.15; Fri, 8 Aug
+ 2025 08:04:02 +0000
+Received: from CO1PEPF000066E6.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c7:cafe::c5) by SJ0PR13CA0158.outlook.office365.com
+ (2603:10b6:a03:2c7::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9031.9 via Frontend Transport; Fri, 8
+ Aug 2025 08:04:02 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CO1PEPF000066E7.mail.protection.outlook.com (10.167.249.9) with Microsoft
+ CO1PEPF000066E6.mail.protection.outlook.com (10.167.249.4) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9009.8 via Frontend Transport; Fri, 8 Aug 2025 08:03:52 +0000
+ 15.20.9009.8 via Frontend Transport; Fri, 8 Aug 2025 08:04:02 +0000
 Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 8 Aug
- 2025 03:03:52 -0500
+ 2025 03:04:00 -0500
 Received: from cjq-desktop.amd.com (10.180.168.240) by SATLEXMB05.amd.com
  (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 8 Aug
- 2025 03:03:50 -0500
+ 2025 03:03:59 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,22 +62,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ceabe82-742e-11f0-a324-13f23c93f187
+X-Inumbo-ID: 4367dbab-742e-11f0-b898-0df219b8e170
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aXSrTRhPELm82XuCircHYQQZeyRAr5oWH/QT8NcSterq1oPBo5LX1IKmAKyPLEcGR1dYnGIv2AoFWcqtWJQzld/YuSKmMMekHmDRJJC3Fc4m+zE3/hty3FPNXoRZqB376V8EL2fI1j1ggzyTEAQUKHCKWLR4v9RkcXd8c1Jj9wi8x3tMOK4C+wLtZMZcELcrQuT++up2c0BrpkFJuKgjXTQi4guBPLgesJ9vazxbTZ2uYez83oFRG0oKIr8uFzJFHiMGDqastk79HoltnSYnH62frU5gWmNJAiHgKle/kPoewNaZBaF8bztgvnsJHxJcI+klKJ41r8a/bi39u0bJvw==
+ b=A5xzeeb+oBemMmfiM60fXAe7XbHLDaEMCBFH4ghVTQYeJ6U9ijcgO7Coc/UJV4CxG3tZO+m+yreH9v9iKhydr3MrSk82aMX/lGRdHHKeIHeTExmJYc0muA9NSmHfqmNjkem0C9uYCwnCB6GYmyyurqB34Sbw+i/dBulKjYBXS8xICn5IZKik0c7QbtdWN1+E1TINPneO8xlvCglCO/GDfrdA28/sTfLAo7azzQ/FphHOfAXohwRoND0BOx5JcrhbaW5OEn0aRHScIxFGc41P3AtzKufDLe/rBcQwcTktqHgIXMTPyKuyFbkJsCEERI9cBayUrn2GQ1mtHPuNldMD9A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PbkZOn+6Yp13WyrcBqTHgOEVpIDCAULsuben0T5moQM=;
- b=tU/mDtnJ7BP6R3HHkHfQh/vqDv79j45cVIXiTY1NGFk2Hb4SccLQO8bTUzqPzWxjy6oUl1SIEfEx9GTnnNAHIiPXKgZ5Oyb+U4gAyuVrUyV9gaQxdWKTU0lwLiz9TNveQnTfusw/rpXH4vUHlgL1/p6keTim7vy8wtxtiCRVTla9Wr60iEBZJrzDkme4EMXJsmIziJhSs6XcPtyBPMqXMC9IfgLQ9jRWt7mq5EkWPNGb0SxdPt2yxxEoQFZDyK/ukMU65DY72jo/qTdrxBoTKqsxDmxenpTuyyojcR1aetB4DVKZNpKmfZS8C+bCQ61K/Z7Qw2bVuw2eVWsIxMMgZQ==
+ bh=lfDBFfGIT5kbUPhIlv/Q2Hfqw+zHQFe3k8qVer8Mvqo=;
+ b=RsMDkMWnODg+kJ1Z+yhiY6vAhugfqpUscLlnIHWV27p/4YrnzQN/rwM1d37am9xCFl7zl6uxbXkXWEZBCUs6ChQ0WKd79geLkuVtMWASZ3jS+lWASv9KSQxkjl1pOpNBvcdAkWsXoT6TQJQ7ruhUN+xhNH28P7HtDM3ECB9/XH+DVeixjnlefwuQjnStqg9qDNVgz3MUNaMlAAxvYgS0PtFIjIAvdnmiNj9vl5knOpFwERR974g6awT7p2qfhEia18OSLBDN7pht8O4RQUYQ24cAJWCdDn7hqb5nimc3ns+6g93bYT9y9EMENAuVqGouY+/ctvrmVIMuy91ZKIc0zw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PbkZOn+6Yp13WyrcBqTHgOEVpIDCAULsuben0T5moQM=;
- b=OkFPMZ/R9MIaa93NglELlL4hV1GWSAKLIh9ry+pdho4sCattCHqxSOWV0UDjLijecvYQSSAKYSqkFfNavcxASsml51fxEuR/7SOylA14VAjmmW+rC++036yBfLN+6i7Pyq36C234cMXoEcjYT4mneedCXDrDtkK9ZhbfjvUh6qo=
+ bh=lfDBFfGIT5kbUPhIlv/Q2Hfqw+zHQFe3k8qVer8Mvqo=;
+ b=w1rj+svw2ivqG40jPWeP+Tx7Ad4MBtNyi0o48bVDZKe0lBvOaP3RY7/gibas38qmCc4JivMdHSRs03JhNZnoAM7HGfLZ6x7wa386DFaT/WzSiW/abz3pFDKp011WxZsmno0W8ADVvXirw8cYDg2PwqMUDruBfn3FOfrwfxQ6jZ8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -87,12 +87,13 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Jiqian Chen <Jiqian.Chen@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Huang Rui <ray.huang@amd.com>, Jiqian Chen <Jiqian.Chen@amd.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>
-Subject: [PATCH v11 0/5] Support hiding capability when its initialization fails
-Date: Fri, 8 Aug 2025 16:03:32 +0800
-Message-ID: <20250808080337.28609-1-Jiqian.Chen@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v11 5/5] vpci/msix: Implement cleanup function for MSI-X
+Date: Fri, 8 Aug 2025 16:03:37 +0800
+Message-ID: <20250808080337.28609-6-Jiqian.Chen@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250808080337.28609-1-Jiqian.Chen@amd.com>
+References: <20250808080337.28609-1-Jiqian.Chen@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -101,91 +102,216 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB05.amd.com
  (10.181.40.146)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000066E7:EE_|MN2PR12MB4061:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1807d93-9d99-4fe0-4822-08ddd6521da7
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066E6:EE_|CH3PR12MB9396:EE_
+X-MS-Office365-Filtering-Correlation-Id: 50e51d3b-2d25-4dd7-688e-08ddd6522324
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?d3dEbkNzcGdVVnl1bXNwb0ZVbEhHeHFyZjlvZ0JocHdGODZhSmdua014cXNp?=
- =?utf-8?B?RnB6QlgvcTBsTTcvUzE4MVI2eUNnV3VlL201OVJPU2lxZGhXZ3RNSnUzb1Zq?=
- =?utf-8?B?dTNHN1VMZkozNng3R1dra0FwL082Z0EwcGMyai9UdVR3aDNIaFRMR2diOEgz?=
- =?utf-8?B?MkJ3WUJJaVhGc2d1amZCVldtRW4xb3hmbTBhZFFTQ1RBNXFSK2lKYTNPMjBp?=
- =?utf-8?B?UE1IUUVqMnJidVJOS0k2cDVQRXF3RVdOUDR4VmVEYzFBMW9PNmthQWtEUE1w?=
- =?utf-8?B?UnVkT01jKzlMMEpVVlhpMWpmQ0hiVzBGN2F4S215MVBUWnU3aDltSFRCalEw?=
- =?utf-8?B?TFkyd280NUhONk9xRHhNM25wbC8yTDd6UzVTR3lqcm1kYWVZZytGb0d1NVV5?=
- =?utf-8?B?TytSM1hkLzZPKy9PNXV1T2RwY3NuUlF4SlVTenhZS0Y1bllEdDJxa3hadWQw?=
- =?utf-8?B?Q1NzL0IzTmZ1MmN1SmczaG05L0QvUG1iZVQvbk9mS3NTbWFoUE5hWkJZNlVl?=
- =?utf-8?B?WjBTYjFQRkNrWU9iaGtNckZyYkxkYm56cWR1R3R0QlJuenltV01saERrYzZS?=
- =?utf-8?B?Q2J3YnF6c1JJTkU2K2dMZ21EWmE2b1hlbUVidExJQU1uMkVpcHh5N3ZEWjJo?=
- =?utf-8?B?R2xUcHk4OWlsR3NzeUh4WkozRWdGUHZBcUQrVE12L2VIVmhMd2t5RUlvcEN1?=
- =?utf-8?B?bGZ0TkJ2c3gveDRNOWpLako5ekJ6M0pVTmJFcmIwSEFOcXBYelhZS0JiV2Y4?=
- =?utf-8?B?ckhCU1IvUG5WWUdsdnhLQlpKOCttMlJuaGNQQUNOOFpNOEs4YUlUcWdTR2Fr?=
- =?utf-8?B?UjdsWEpiRXBNeUh1dm84dm1OMmM1SFRsWFVIcmhUMkUrb05RcjJ3WUNBZWg1?=
- =?utf-8?B?SXZZL3dkUTh6WFhsVmxaSFdTaEJCUTBEL0F0anZWQXJPVk92MjFjdGlQdG5X?=
- =?utf-8?B?MUpOVmZtNGU1QmVHZG81cDlqSHZFUFgvRHNhSHFuclUvTEtQcHhiUW1XN0RI?=
- =?utf-8?B?cGV2dzJ5aDhXU1dVS0x1NGkyT09xZ2RWaTh2YU10M083cjVmL1lJaFplaFY1?=
- =?utf-8?B?WmR2NEpuRkY0STl3T0QrOWgyRllLTnZVSFpyN0hTM25hZ0RjWHBxY0hsYWlr?=
- =?utf-8?B?NHdvUkRJa0thdWVxdlllK25TMlVSRkU2MXZBZWRGcVdZN09hRkxHT0ZTRHNh?=
- =?utf-8?B?d1JNcExESDQ5OExsWDRvV2ZhWmZCR0cxUzZRNldZUFR4d3ZUTFdoblpQRTNG?=
- =?utf-8?B?K3FwdG5wZk1aK0UvU2pjakNHOTRWMTE5K2E1ZURKMS9oMHA0TldxbWxrR1Ev?=
- =?utf-8?B?bVZoRUpNTjExOUdpK3VQQnEyVDZma1QySEQ2bkR0UEFYTlhXVmcyTTZkdWRn?=
- =?utf-8?B?Rk9oZy9PbnpzM3VoU0dBejN2cTVndW9VRGpvMVd5OVM0bFlHQUpTdGxDWUcv?=
- =?utf-8?B?MUFoMS9NQmJMK3ZjVWcxWXlSVGZLN3FlbXAwMzNEUWNYVkNqemEwRXZhL1Bi?=
- =?utf-8?B?TGRzQi9ieFJzejQrVS95Ky94Y1dTQWl0eTJteFd6M080c1VIQTZ5bnFwY1Rz?=
- =?utf-8?B?a21ZL0R1Yk1ScUp1bXBWV1F0dWhlU2prNjFWaUNIYTVXMitTSkdnOFhPUWRJ?=
- =?utf-8?B?MXQ1SjBGNjRzdWYrMHhXa3JLS283OXJVamNkWU1Ra1p3b3FvcjAzeWtzN3JN?=
- =?utf-8?B?ZGNkYTZYd0pTZFlaQ2p5Z1psSE9SMVZwaHZnVzE1ZnFHd0NvaUVKUnYzZzh3?=
- =?utf-8?B?ZXpFNUlkTVFQc3pjQjBjYXEyeWpvaVBGcTZiVFNGVFlrMUtJYlo1bWFEV3Y4?=
- =?utf-8?B?ZTFwaTYrNzdVclFWalRER05OOVpwV0xIbGVCU0FmWkxZQU1TTXdGbktBUTBJ?=
- =?utf-8?B?N1lnbC90dzIvYXdqdjlEUWRCYW02dys5MTcyMnRPS3JDRmcyQy9FMkZuU3I1?=
- =?utf-8?B?SjlYbEUvaGhEaUs5U0lxYno3QkJuVnU2cktTMUNYZXBUa0lyQzV4M2x1SXg4?=
- =?utf-8?B?bFF5c0lyY1NWV3lZWkluczFMM3FWTGxoYmh4L1Y1cXNpcmpsbHJYaXlJL0NS?=
- =?utf-8?Q?XSWKeo?=
+	=?utf-8?B?UC9WNEUzVUt0ZGRGQlhkd2c0MXEyU2wrcUoxQ28zNGNOemhvWUNIcGVOYVcr?=
+ =?utf-8?B?VU9uWHRYUmtPWTJpNC9SQUlUemJ1eTBJWkRvUVdNSCtTcUROQjZBbXVNdUNv?=
+ =?utf-8?B?YkZXbE52dGp0em1jVjRTSmtPOFZHRGZyeGttR21iQTVkRFQwTXJCSHcxSmdp?=
+ =?utf-8?B?RXlJemtXTjhMdlJ5WjdmTktSVkdTWmlNL2xnR2VMK0t5N1pQYmNyK3N6QXR0?=
+ =?utf-8?B?R1ZXQTcweDk2Y28wTEM3VWJLVnN0dHk4NU5QYVRqZGV6ZWoxVzhMU2hERW5n?=
+ =?utf-8?B?VXVibzFnSU9maHlxbDVNL2VQbGdQQzVLdklaS20zN3pSbVZxVGY1NTI3cU9G?=
+ =?utf-8?B?VDlWcHhDL0JKd0VPWTBaZzVkZGRycDYwVkgrYzhMZSswTzRWUUR1K3lsaThz?=
+ =?utf-8?B?L3pFOTJoS1pNL2JTZEJQUFlvZmpYMDVDVTM5YVE4L0FkMmhobW1YV1RiclFQ?=
+ =?utf-8?B?bEllSzZOK0JqMUl3WmJUc2pBQWh6eUhvOVVscm9tQkl0TTNzaFV6d2F1RGdT?=
+ =?utf-8?B?b0h5eHZvNXdTUS9sWmRtNWhPNEJDT1dwWk5qT1V3K3FmMk55WVVUSSt6UytE?=
+ =?utf-8?B?VktPR1BkdVBYUmMvMi9sQlNOTExoR2RoOGEvZTFEOFBpcVpOWWk0a2ZiU3NP?=
+ =?utf-8?B?NnBhNVdsR2xLWGhqVzU0VXRUS1h3SXFRSE9aa1RFd1ZzSzJzS29NZjVUc21j?=
+ =?utf-8?B?UWRONE8xaGQzbXAvVnErNk9wb2xBNVJrYmxVaTI2Y25POUF1VmhSZjByVVNL?=
+ =?utf-8?B?Z1JzMFhhejZoK2RxdytodFNpSURLTVQ0Um1qdUZhUlpOM25ERTk1eUZKWExO?=
+ =?utf-8?B?VUZNcWtzZlFBaHhqcHJra1hnRktRWTA1QkxKVGM4cHRmN0RIREtYNU1vcEl4?=
+ =?utf-8?B?Vi9peEhvbCs0NE54emp2cXJRNDZ5a1hPS0JwalRyMjRzRG9Mak42UXY3QUlX?=
+ =?utf-8?B?bS9YSS92bkNHcXVuY0pRYW9mSWRLRnFIdWZhTGRISjRCYWxJZ2VScE1GaER1?=
+ =?utf-8?B?MDErRmErTHpQRFY3TjlJTmNDRXpYMlB1WDRYejl1VlNpYXBBdE0vVUZodGVE?=
+ =?utf-8?B?L2c5VlZ5VlB1ZWVLUjF5SmpsMjgxdlUrem9aQlpCZGRjb1FnYjkrcEtTQllt?=
+ =?utf-8?B?cTdkTy9RRllwaWZaMTZIU1BNUFluVDdzeEpHNDllR3UwYWMvNlFDWktKRGNq?=
+ =?utf-8?B?amNDLzdUcGEvK3JKRlRNVktMNkJXUGxsVE1Ib0s1Sis0czNFR1cyNVNxSjVs?=
+ =?utf-8?B?bEQzUGZFZy9IZ1cyZnBFanhYc2dBcVBxRmF6cWNnTVB5MWVkVmpCU2pib2pC?=
+ =?utf-8?B?dTM3aGVhanZDdXVYS3BqRU14OC95NG5WeGh4WDZNS2ltdlhxMyt2aGgvcUo2?=
+ =?utf-8?B?MFZ1V0pQZFphclppbEZFQ011Y1o4ZE1FNHhFZGdhdkxTS090RTE0UXU2dmFI?=
+ =?utf-8?B?Tk03YjBGdUFCMzcyT2lDcHJEZU5RbzB0NzhCTWRpaWZSZzFNMlp0UStEdU5F?=
+ =?utf-8?B?M21yQjdiVjhpNnBkbHRlZ3Q1VmpDemg4MU43S0JoaGdjcUVHRi94UHlEMTlS?=
+ =?utf-8?B?Q1BEL1dDMXBUaHBpT0llMkdScmNIckk4a3dJc3lsUForVjdGNXRtV3FUN2d3?=
+ =?utf-8?B?VzlYUXRLRDRhWERUMHFyVEhDOWhZSW8wMUdtTXoyLzVJZWVEakdDVEVCcExn?=
+ =?utf-8?B?bnJxVzFtWThNOTFiMkt5MzdINzVNbGhvb0RqT2l3UlBpNkFLREQ0WEhlRERM?=
+ =?utf-8?B?eEZyUk5MQmwrRGtUMkd4QjdWY0pRTG05ZEkxL0RzdzBqUmFMZXc1RUJtRlBl?=
+ =?utf-8?B?MENyK2NFTUMrM1FXQjNCalQ5d1VSWjQvYmFxR01ZcU9YVEJSS2Q4cGxUcy9H?=
+ =?utf-8?B?b1dKLzlxOVVBc3k4TUtYbGNlRExBQjBaUnFROEkvUkxobFp3K0dvZy9CYVFM?=
+ =?utf-8?B?OUIrOHBnalo2Tkw1bHFENDRvSnlKLzRwTTlJeS9Rb05xaWpMSnBQYnBzSjVj?=
+ =?utf-8?B?MW05QnhXdDRURFQxcGpYWGViakIrdTRHZGVLV2tkZlZSd1RKc0U2VkdLWTJr?=
+ =?utf-8?Q?M0BzDr?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2025 08:03:52.8297
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2025 08:04:02.0373
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1807d93-9d99-4fe0-4822-08ddd6521da7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50e51d3b-2d25-4dd7-688e-08ddd6522324
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000066E7.namprd05.prod.outlook.com
+	CO1PEPF000066E6.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4061
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9396
 
-Hi,
+When MSI-X initialization fails, vPCI hides the capability, but
+removing handlers and datas won't be performed until the device is
+deassigned. So, implement MSI-X cleanup hook that will be called
+to cleanup MSI-X related handlers and free it's associated data when
+initialization fails.
 
-This series is to
-emulate extended capability list for dom0;
-hide legacy and extended capability when its initialization fails;
-above two parts had been merged.
-remove all related registers and other resources when initializing capability fails, including patch #1, #2, #3, #4, #5.
+Since cleanup function of MSI-X is implemented, delete the open-code
+in vpci_deassign_device().
+
+Signed-off-by: Jiqian Chen <Jiqian.Chen@amd.com>
+---
+cc: "Roger Pau Monné" <roger.pau@citrix.com>
+---
+v10->v11 changes:
+* Move calling all cleanup hook in vpci_deassign_device() out of this patch.
+* Add hide parameter to cleanup_msix().
+* Check hide, if it is false, return directly instead of letting ctrl RO.
+
+v9->v10 changes:
+* Call all cleanup hook in vpci_deassign_device() instead of cleanup_msix().
+
+v8->v9 changes:
+* Modify commit message.
+* Call cleanup_msix() in vpci_deassign_device() to remove the open-code to cleanup msix datas.
+* In cleanup_msix(), move "list_del(&vpci->msix->next);" above for loop of iounmap msix tables.
+
+v7->v8 changes:
+* Given the code in vpci_remove_registers() an error in the removal of
+  registers would likely imply memory corruption, at which point it's
+  best to fully disable the device. So, Rollback the last two modifications of v7.
+
+v6->v7 changes:
+* Change the pointer parameter of cleanup_msix() to be const.
+* When vpci_remove_registers() in cleanup_msix() fails, not to return
+  directly, instead try to free msix and re-add ctrl handler.
+* Pass pdev->vpci into vpci_add_register() instead of pdev->vpci->msix in
+  init_msix() since we need that every handler realize that msix is NULL
+  when msix is freed but handlers are still in there.
+
+v5->v6 changes:
+* Change the logic to add dummy handler when !vpci->msix in cleanup_msix().
+
+v4->v5 changes:
+* Change definition "static void cleanup_msix" to "static int cf_check cleanup_msix"
+  since cleanup hook is changed to be int.
+* Add a read-only register for MSIX Control Register in the end of cleanup_msix().
+
+v3->v4 changes:
+* Change function name from fini_msix() to cleanup_msix().
+* Change to use XFREE to free vpci->msix.
+* In cleanup function, change the sequence of check and remove action according to
+  init_msix().
+
+v2->v3 changes:
+* Remove unnecessary clean operations in fini_msix().
+
+v1->v2 changes:
+new patch.
 
 Best regards,
 Jiqian Chen.
 ---
-cc: "Roger Pau Monné" <roger.pau@citrix.com>
-cc: Anthony PERARD <anthony.perard@vates.tech>
----
-Jiqian Chen (5):
-  vpci: Use cleanup to free capability resource during deassign
-  vpci: Refactor vpci_remove_register to remove matched registers
-  vpci/rebar: Implement cleanup function for Rebar
-  vpci/msi: Implement cleanup function for MSI
-  vpci/msix: Implement cleanup function for MSI-X
+ xen/drivers/vpci/msix.c | 47 ++++++++++++++++++++++++++++++++++++++++-
+ xen/drivers/vpci/vpci.c |  8 -------
+ 2 files changed, 46 insertions(+), 9 deletions(-)
 
- tools/tests/vpci/main.c  |  8 ++---
- xen/drivers/vpci/msi.c   | 49 ++++++++++++++++++++++++++-
- xen/drivers/vpci/msix.c  | 47 +++++++++++++++++++++++++-
- xen/drivers/vpci/rebar.c | 66 ++++++++++++++++++++++++++++++------
- xen/drivers/vpci/vpci.c  | 72 ++++++++++++++++++++++++----------------
- xen/include/xen/vpci.h   |  6 ++--
- 6 files changed, 200 insertions(+), 48 deletions(-)
-
+diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
+index 54a5070733aa..287aafda9157 100644
+--- a/xen/drivers/vpci/msix.c
++++ b/xen/drivers/vpci/msix.c
+@@ -655,6 +655,51 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
+     return 0;
+ }
+ 
++static int cf_check cleanup_msix(const struct pci_dev *pdev, bool hide)
++{
++    int rc;
++    struct vpci *vpci = pdev->vpci;
++    const unsigned int msix_pos = pdev->msix_pos;
++
++    if ( !msix_pos )
++        return 0;
++
++    rc = vpci_remove_registers(vpci, msix_control_reg(msix_pos), 2);
++    if ( rc )
++    {
++        printk(XENLOG_ERR "%pd %pp: fail to remove MSIX handlers rc=%d\n",
++               pdev->domain, &pdev->sbdf, rc);
++        ASSERT_UNREACHABLE();
++        return rc;
++    }
++
++    if ( vpci->msix )
++    {
++        list_del(&vpci->msix->next);
++        for ( unsigned int i = 0; i < ARRAY_SIZE(vpci->msix->table); i++ )
++            if ( vpci->msix->table[i] )
++                iounmap(vpci->msix->table[i]);
++
++        XFREE(vpci->msix);
++    }
++
++    if ( !hide )
++        return 0;
++
++    /*
++     * The driver may not traverse the capability list and think device
++     * supports MSIX by default. So here let the control register of MSIX
++     * be Read-Only is to ensure MSIX disabled.
++     */
++    rc = vpci_add_register(vpci, vpci_hw_read16, NULL,
++                           msix_control_reg(msix_pos), 2, NULL);
++    if ( rc )
++        printk(XENLOG_ERR "%pd %pp: fail to add MSIX ctrl handler rc=%d\n",
++               pdev->domain, &pdev->sbdf, rc);
++
++    return rc;
++}
++
+ static int cf_check init_msix(struct pci_dev *pdev)
+ {
+     struct domain *d = pdev->domain;
+@@ -710,7 +755,7 @@ static int cf_check init_msix(struct pci_dev *pdev)
+      */
+     return vpci_make_msix_hole(pdev);
+ }
+-REGISTER_VPCI_CAP(MSIX, init_msix, NULL);
++REGISTER_VPCI_CAP(MSIX, init_msix, cleanup_msix);
+ 
+ /*
+  * Local variables:
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 3122847524d2..394d75490db9 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -355,18 +355,10 @@ void vpci_deassign_device(struct pci_dev *pdev)
+         xfree(r);
+     }
+     spin_unlock(&pdev->vpci->lock);
+-    if ( pdev->vpci->msix )
+-    {
+-        list_del(&pdev->vpci->msix->next);
+-        for ( i = 0; i < ARRAY_SIZE(pdev->vpci->msix->table); i++ )
+-            if ( pdev->vpci->msix->table[i] )
+-                iounmap(pdev->vpci->msix->table[i]);
+-    }
+ 
+     for ( i = 0; i < ARRAY_SIZE(pdev->vpci->header.bars); i++ )
+         rangeset_destroy(pdev->vpci->header.bars[i].mem);
+ 
+-    xfree(pdev->vpci->msix);
+     xfree(pdev->vpci);
+     pdev->vpci = NULL;
+ }
 -- 
 2.34.1
 
