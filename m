@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87895CA0EC0
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 02:20:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1073904.1436672 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 984A7C87FCF
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 02:20:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1073908.1436703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukCiE-0006Oq-SQ; Fri, 08 Aug 2025 02:20:06 +0000
+	id 1ukCiO-0007Db-LU; Fri, 08 Aug 2025 02:20:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1073904.1436672; Fri, 08 Aug 2025 02:20:06 +0000
+Received: by outflank-mailman (output) from mailman id 1073908.1436703; Fri, 08 Aug 2025 02:20:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukCiE-0006Oj-Pa; Fri, 08 Aug 2025 02:20:06 +0000
-Received: by outflank-mailman (input) for mailman id 1073904;
- Fri, 08 Aug 2025 02:20:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ukCiO-0007DK-IP; Fri, 08 Aug 2025 02:20:16 +0000
+Received: by outflank-mailman (input) for mailman id 1073908;
+ Fri, 08 Aug 2025 02:20:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hyIc=2U=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1ukCiE-0005lR-3K
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 02:20:06 +0000
-Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch
- [79.135.106.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 31e040a1-73fe-11f0-b898-0df219b8e170;
- Fri, 08 Aug 2025 04:20:04 +0200 (CEST)
+ id 1ukCiN-0006ub-NO
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 02:20:15 +0000
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
+ [109.224.244.16]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 38032ac4-73fe-11f0-a324-13f23c93f187;
+ Fri, 08 Aug 2025 04:20:15 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,179 +38,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31e040a1-73fe-11f0-b898-0df219b8e170
+X-Inumbo-ID: 38032ac4-73fe-11f0-a324-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1754619603; x=1754878803;
-	bh=1lN7KrswBcgK3b8OieY9/AL8KilzLZgi3os/mOWZTtg=;
+	s=protonmail; t=1754619613; x=1754878813;
+	bh=w1vXTdbNOk206daF/36KWblBn/nIoRXEyoJHQ+f1hZU=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=h1UkwJBKFwvWaG9fRq456OB/WC4UJxAEZ+Wp8jqnGg2Dgu2rc1x+9oxPexGhKk+1+
-	 shuptePMchUdJVxI8AjpI5+AdtEoXmBzctP9IKZQTzKzMGKsO0MAOELmZznkkdGQTN
-	 8tiKSN76yby+oIXLiPxRRN/HKW07TthBsU0TiPYM67mpUTnsTonQJZ4NuNeQBU7P1T
-	 vJytRd+OE5BTr9HQ1L4ruDx9s6zRv9wdlherDTucvtuYOFTMgLkhd+LjCwBMg5J06L
-	 3whaetW+QfcaU7zZRKFbooeEQxAxh/I1APmjHrHjkgleCDhY7QDVEorP+H6355gGpt
-	 A4jAi58go/cvw==
-Date: Fri, 08 Aug 2025 02:20:01 +0000
+	b=ecJFNIo0Umy96CPupWMSmSZLjc6su7G7FQBytKNOIbylBG+NdHG/EgVyV/kwiUGZQ
+	 hbICjn3Z3giREjoKtUBRzF5xu1+zylsfrE+drw0uWliU1UrNjNG4aoO+wpbcYuq/DM
+	 dW+okdx0bUbf7W4mpFl7juZI/KZkMgVXN2MKuvDPc5DVvTeTtC4TnKtcvWyL85PhkC
+	 5KhhLIndC7PTfLSJlqCvy/i8SzXFA3BoqpsCFKjhUAKMdRZ78T0f3bwTq9QM49rXOp
+	 G/U9jtKoj9kJMC5AAcr/NPRytSxBnjFLgMgl6qhC1sMIL2TR0jwEhDv52qDKLGyeOm
+	 gWphzsMj1imVw==
+Date: Fri, 08 Aug 2025 02:20:10 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v14 2/4] tools/include: move xc_bitops.h to xen-tools/bitops.h
-Message-ID: <20250808021938.669855-3-dmukhin@ford.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Subject: [PATCH v14 4/4] xen/domain: update create_dom0() messages
+Message-ID: <20250808021938.669855-5-dmukhin@ford.com>
 In-Reply-To: <20250808021938.669855-1-dmukhin@ford.com>
 References: <20250808021938.669855-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 4efdcc0a6a1de61435c9134bd34210d95ff3a232
+X-Pm-Message-ID: 979d403c01bbec8174ef645088b4912da0736fab
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 From: Denis Mukhin <dmukhin@ford.com>=20
 
-Move xc_bitops.h to common tools location to be shared between
-the toolstack and unit test code.
+Use %pd for domain identification in error/panic messages in create_dom0().
 
-Adjust the guard in xen-tools/bitops.h
-
-Correct the #include directives and comments referring to the old
-xc_bitops.h in the toolstack code.
+No functional change.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes since v13:
-- new patch
+- n/a
 ---
- .../ctrl/xc_bitops.h =3D> include/xen-tools/bitops.h} |  6 +++---
- tools/libs/ctrl/xc_misc.c                           | 13 +++++++------
- tools/libs/guest/xg_dom_elfloader.c                 |  3 ++-
- tools/libs/guest/xg_dom_hvmloader.c                 |  3 ++-
- tools/libs/guest/xg_private.h                       |  2 +-
- tools/libs/guest/xg_sr_common.h                     |  3 +--
- 6 files changed, 16 insertions(+), 14 deletions(-)
- rename tools/{libs/ctrl/xc_bitops.h =3D> include/xen-tools/bitops.h} (95%)
+ xen/arch/arm/domain_build.c | 6 +++---
+ xen/arch/x86/setup.c        | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/ctrl/xc_bitops.h b/tools/include/xen-tools/bitops.h
-similarity index 95%
-rename from tools/libs/ctrl/xc_bitops.h
-rename to tools/include/xen-tools/bitops.h
-index 4a776dc3a57f..681482f6759f 100644
---- a/tools/libs/ctrl/xc_bitops.h
-+++ b/tools/include/xen-tools/bitops.h
-@@ -1,5 +1,5 @@
--#ifndef XC_BITOPS_H
--#define XC_BITOPS_H 1
-+#ifndef __XEN_TOOLS_BITOPS_H__
-+#define __XEN_TOOLS_BITOPS_H__
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 789f2b9d3ce7..02a15d160962 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2084,14 +2084,14 @@ void __init create_dom0(void)
+         panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0));
 =20
- /* bitmap operations for single threaded access */
+     if ( llc_coloring_enabled && (rc =3D dom0_set_llc_colors(dom0)) )
+-        panic("Error initializing LLC coloring for domain 0 (rc =3D %d)\n"=
+, rc);
++        panic("Error initializing LLC coloring for %pd (rc =3D %d)\n", dom=
+0, rc);
 =20
-@@ -81,4 +81,4 @@ static inline void bitmap_or(void *_dst, const void *_oth=
-er,
-         dst[i] |=3D other[i];
+     if ( vcpu_create(dom0, 0) =3D=3D NULL )
+-        panic("Error creating domain 0 vcpu0\n");
++        panic("Error creating %pdv0\n", dom0);
+=20
+     rc =3D construct_dom0(dom0);
+     if ( rc )
+-        panic("Could not set up DOM0 guest OS (rc =3D %d)\n", rc);
++        panic("Could not set up %pd guest OS (rc =3D %d)\n", dom0, rc);
+=20
+     set_xs_domain(dom0);
  }
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 398da734c0c5..bf21c55f7193 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1084,7 +1084,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
 =20
--#endif  /* XC_BITOPS_H */
-+#endif  /* __XEN_TOOLS_BITOPS_H__ */
-diff --git a/tools/libs/ctrl/xc_misc.c b/tools/libs/ctrl/xc_misc.c
-index 33e87bac2868..10ddf85667a9 100644
---- a/tools/libs/ctrl/xc_misc.c
-+++ b/tools/libs/ctrl/xc_misc.c
-@@ -17,8 +17,8 @@
-  * License along with this library; If not, see <http://www.gnu.org/licens=
-es/>.
-  */
+         if ( (strlen(acpi_param) =3D=3D 0) && acpi_disabled )
+         {
+-            printk("ACPI is disabled, notifying Domain 0 (acpi=3Doff)\n");
++            printk("ACPI is disabled, notifying %pd (acpi=3Doff)\n", d);
+             safe_strcpy(acpi_param, "off");
+         }
 =20
--#include "xc_bitops.h"
- #include "xc_private.h"
-+#include <xen-tools/bitops.h>
- #include <xen/hvm/hvm_op.h>
+@@ -1099,7 +1099,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
 =20
- int xc_get_max_cpus(xc_interface *xch)
-@@ -94,11 +94,12 @@ xc_cpumap_t xc_cpumap_alloc(xc_interface *xch)
- }
+     bd->d =3D d;
+     if ( construct_dom0(bd) !=3D 0 )
+-        panic("Could not construct domain 0\n");
++        panic("Could not construct %pd\n", d);
 =20
- /*
-- * xc_bitops.h has macros that do this as well - however they assume that
-- * the bitmask is word aligned but xc_cpumap_t is only guaranteed to be
-- * byte aligned and so we need byte versions for architectures which do
-- * not support misaligned accesses (which is basically everyone
-- * but x86, although even on x86 it can be inefficient).
-+ * <xen-tools/bitops.h> has macros that do this as well - however they
-+ * assume that the bitmask is word aligned but xc_cpumap_t is only
-+ * guaranteed to be byte aligned and so we need byte versions for
-+ * architectures which do not support misaligned accesses (which is
-+ * basically everyone but x86, although even on x86 it can be
-+ * inefficient).
-  *
-  * NOTE: The xc_bitops macros now use byte alignment.
-  * TODO: Clean up the users of this interface.
-diff --git a/tools/libs/guest/xg_dom_elfloader.c b/tools/libs/guest/xg_dom_=
-elfloader.c
-index f17930d98bf7..8531e90f8e21 100644
---- a/tools/libs/guest/xg_dom_elfloader.c
-+++ b/tools/libs/guest/xg_dom_elfloader.c
-@@ -25,8 +25,9 @@
- #include <stdarg.h>
- #include <inttypes.h>
-=20
-+#include <xen-tools/bitops.h>
-+
- #include "xg_private.h"
--#include "xc_bitops.h"
-=20
- #define XEN_VER "xen-3.0"
-=20
-diff --git a/tools/libs/guest/xg_dom_hvmloader.c b/tools/libs/guest/xg_dom_=
-hvmloader.c
-index 39e1e5f579a7..0f569c20c522 100644
---- a/tools/libs/guest/xg_dom_hvmloader.c
-+++ b/tools/libs/guest/xg_dom_hvmloader.c
-@@ -24,8 +24,9 @@
- #include <inttypes.h>
- #include <assert.h>
-=20
-+#include <xen-tools/bitops.h>
-+
- #include "xg_private.h"
--#include "xc_bitops.h"
-=20
- /* -----------------------------------------------------------------------=
-- */
- /* parse elf binary                                                       =
-  */
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index d73947094f2e..285229cf82a3 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -28,9 +28,9 @@
- #include <sys/stat.h>
-=20
- #include "xc_private.h"
--#include "xc_bitops.h"
- #include "xenguest.h"
-=20
-+#include <xen-tools/bitops.h>
- #include <xen/memory.h>
- #include <xen/elfnote.h>
- #include <xen/libelf/libelf.h>
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_commo=
-n.h
-index 2f058ee3a6ff..2e583f2eac72 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -2,11 +2,10 @@
- #define __COMMON__H
-=20
- #include <stdbool.h>
-+#include <xen-tools/bitops.h>
-=20
- #include "xg_private.h"
- #include "xg_save_restore.h"
--#include "xc_bitops.h"
--
- #include "xg_sr_stream_format.h"
-=20
- /* String representation of Domain Header types. */
+     bd->cmdline =3D NULL;
+     xfree(cmdline);
 --=20
 2.34.1
 
