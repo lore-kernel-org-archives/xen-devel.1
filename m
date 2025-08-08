@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A9CBC87FDA
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 21:41:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075242.1437682 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5F8C87FDA
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 21:44:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075260.1437700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukUpg-0001Vt-7p; Fri, 08 Aug 2025 21:41:00 +0000
+	id 1ukUsQ-00039f-Ub; Fri, 08 Aug 2025 21:43:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075242.1437682; Fri, 08 Aug 2025 21:41:00 +0000
+Received: by outflank-mailman (output) from mailman id 1075260.1437700; Fri, 08 Aug 2025 21:43:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukUpg-0001Vm-2x; Fri, 08 Aug 2025 21:41:00 +0000
-Received: by outflank-mailman (input) for mailman id 1075242;
- Fri, 08 Aug 2025 21:40:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ukUsQ-00039Y-Rh; Fri, 08 Aug 2025 21:43:50 +0000
+Received: by outflank-mailman (input) for mailman id 1075260;
+ Fri, 08 Aug 2025 21:43:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wHVc=2U=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1ukUpe-0001RO-CJ
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 21:40:58 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d5af0e4-74a0-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 23:40:56 +0200 (CEST)
-Received: from nico.tail79467d.ts.net (93-57-251-141.ip167.fastwebnet.it
- [93.57.251.141]) (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPSA id 2DBBE4EE3C0F;
- Fri,  8 Aug 2025 23:40:52 +0200 (CEST)
+ <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1ukUsQ-00039R-3V
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 21:43:50 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c3f33e95-74a0-11f0-b898-0df219b8e170;
+ Fri, 08 Aug 2025 23:43:48 +0200 (CEST)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-459e72abdd2so15064865e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 14:43:48 -0700 (PDT)
+Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b79c4530b3sm32343148f8f.34.2025.08.08.14.43.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 08 Aug 2025 14:43:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,105 +47,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d5af0e4-74a0-11f0-a324-13f23c93f187
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=93.57.251.141
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1754689255;
-	b=AcpM+x1ANmqfogQxztAXLaV/H0O0g7zpQiC0m7fUlkZLGJSmCUsDBJbmZtPkyRO3/us8
-	 850U/OAzvdj4IEssXRpXMvg0YlXOq5w5SJiETBfvKGz6mnGGT8fJsEgbXmdUaQw9Z4k5j
-	 HZZxfyJMvnF1kni5/wogW89q7riDhcPjWX+LhwS0vx5AEInmniEMt9LdzAUrc32ykppr2
-	 s2VOvi3VAFF/Dp4AxKxiq1KGwUV/gK+r3Vbve0EAsajyPfYdPVaTvA5hGrVyo9zdUS4c0
-	 VKgQyyydUUQ7xQPQRCSHJExYsJa3Nad6maMjIA7W1U3uEe1WCG+FxBFAxTZuytcz0yXkk
-	 TcN6vKag1Y1XOzPGc4V4olW679/zaZPBHDZ2hBfo5dFdNdfWvlePuOKGbgdyp4qzhR0yc
-	 iFGyfCjtqBab8xBZbuKJ25QJbDEc4pOt8pPfNtOEki/ReNOnjqFETQ4RALZkzwsFrh6GB
-	 kZ28/lGriAyolE6RVhM1ltpq0rornWktfhu53Zaol1eLk97HlF/n3o5C0TKjXVSYuY/K8
-	 nNK8AaDjojGhEtRFXh6wuvN7USKszs4pOaGmKza+utQeauGQu3hcv/lbE7hZlKw66JkFE
-	 Wz2axYkWxPmd6cv9rrMwZ03GJLvSc2beZcIRadIRWNxANg8+FmgRsz5xHxyJlE4=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1754689255;
-	h=DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=ceLU869e29JG31IlOZ9OqwoMLz6q4g1Sh4I2G9VfcPA=;
-	b=ludvSVCmVazeOOAoua/i1kRG+95zylb5l3bGzLaEX8rJItKAeKDmQJe8a+n5ZLfSsuyl
-	 yX2a7QLkDVXAaXM7qLU5K+VTWlJWurCcWIFMlv1j/Qz+B590OYoX2nxhsnWzCuH9XHje4
-	 zxcJzadt0rE/D3J0JMfb6qa/RiH/9NAyvXHMmmgL0RoCFn3gwWvu5jxNOtqCBAL4nQsww
-	 zwiv5AJiIZq+nzQ0FMDJFprstFYnbi0AoScWEtFwj/VaVRGyNDZrMCVPDDc5Xj/jHJiMb
-	 1tqN8h6fBwO+PC9kEseVWynsyl8deEmR0wZD1qAAEYzOgA74qJ0QQcr1z1bhyYrkey7Th
-	 RhQszi1pI7kod5fBI+NVbM660Sih8QTeSmfimaH/dy5ruNBApn0zg1HNvN6jaAK45Upxl
-	 JrobnAXST+obPfuN38iiJ1xldhAzepnD6IKe0GGZi8p2EIU31A5+PYLqFtV2sB6GqNCaF
-	 a+KAW0YfaU+s+KSlvbg7+cA6Eg/J8Iz8hmVq9ff6eOsExbTL/QKmOzRdQeIFGgQ6AL/bZ
-	 1prNLQjSXvjZhnEPjw9DgCFkqsrmFagUHs0JSFNrqPsEj2Qk8zjnEoMjz97IW1O6F/WhC
-	 T2pM6oO8wOiLX9CwNzR3znt3mfc2OAeWV3oJidedQaNS84nKzXZoKGcLVGNzICw=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=93.57.251.141
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1754689255; bh=zO9FAG2I+pMJXMZeo32isS7tt845hhaI+5ng7/nc4g0=;
-	h=From:To:Cc:Subject:Date:From;
-	b=QpEP4XRQlocmAmu9MOnWgHUKej4gOmx9KcRKiG+k4MuZR3isLPzrH4RfHTYrGKifp
-	 /ku5T6Aiw6OLpBjuYgfBEOnreZo6sf3zO2BhySxd07cEe5+AATMGKwSIlwBdOoU1Cu
-	 xHgPsFxhPTMAhfswvg8vXe9yO6WYkGzncmsud0HiA9PaXx4TP1Z2vK92AiF5iVSLNu
-	 a5v6iiebicgNXAN+J9qP75v5NgKtJhJpe+MQFgU04lhKWox+nSDPvyAzmSU+qcYtXG
-	 iV6zCukiM2kxQTT8nf1jfKPJdQbKROlxul/UHSurhbwvUG78Zp4XCrZcd4bNwJ4FzL
-	 58eVbtVtBTPnA==
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	consulting@bugseng.com,
-	dmytro_prokopchuk1@epam.com,
-	andrew.cooper3@citrix.com,
-	jbeulich@suse.com,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH 1/2] automation/eclair: ECLAIR configuration changes due to GitLab runner update
-Date: Fri,  8 Aug 2025 23:40:46 +0200
-Message-ID: <1283be3b76d76814af244bbca544f6a3b74a04de.1754689062.git.nicola.vetrini@bugseng.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: c3f33e95-74a0-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1754689427; x=1755294227; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=z7etg8bUSQj0ZxnUbnxf2Ljs7wMJYzMLw77Dh+fZK0Q=;
+        b=Q69SeEgvhGvTG51obOJLn+qsA35lSBPxrrWDBLdfZdygyvFbFsEZVs86DV6GTgKbG9
+         fm4BZZ9xjn5EuESfqCluOxvncMJVHsbWsr3Gqr1M7i6oOGMllGPXbsCXyyUYfUJiCHgy
+         1ub6qEdv/Bex8+kyjiAqPivS74xVI3OJJ7nho=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1754689427; x=1755294227;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z7etg8bUSQj0ZxnUbnxf2Ljs7wMJYzMLw77Dh+fZK0Q=;
+        b=MDlWmYvd06ghe7O5zp2I4knFRjWmYTP7nKHtsl/K5rFOwNX+aHvPQZ6Ih1bC5qg0wY
+         JGlw54YY3AqqDOBqEg7Qm5eS2JZbPgokHrB+tSRK8Kwgethcc3SWEy/dUE8+Tofhkmth
+         fXumvUpezsJkJkN2yt76ILm+AK67FE1g44eRgf53Bz5b2/OIpUD9jsNy3SSFBsRA+ZtW
+         I7pGunIZGpBDQXYWPLMkJ4oaBDOvccABp/yDxBFyW6K3r+cs2Km+ZnhLygjvqHioJ+2p
+         ZWyex1YTAQsDQLWBwldcYf7uoMFzL9qsbH3GZmM8kN7scOhazqKNHIuS5cyZ+Gi92YVO
+         1oyA==
+X-Forwarded-Encrypted: i=1; AJvYcCUz8fGPM/Hzm69jC9sY1zcJjN/5M0efSzXMWmGDdyvzbxbcN2oWpYQRyxd/LrPp4E63IXg8rN9Y9KQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz5dZ6RNwiz2yhsCjzem49WtarU/AVaSAWIAg5UxDwrkEWQCVHg
+	xLn+U9LoV+LLjUBuANmPU24KKApy4RklqAVTGZTc6GeL30pAhhCByD6DgliAGBPg5sA=
+X-Gm-Gg: ASbGnctdifq3wVUpkQAhpjFyxnb7NrVE6Fca6eFySuTpjXwmwzguG4LHNOOLl4At+ux
+	cT7CXWD6GHatyV0rQkZWHUFWhgDD+yYvHWyy3xLOKj6UmZDPy9caxdTbDPlFtn4rO2kxQiaj6yb
+	fIssuk80E5oHACxQibt3J6X1mQhTKa7SXPN6QzDr4wSbknMffb9FlDduiRC0fDqlo5ot4KPgnSf
+	o/Esmq2S+RDCm6xZfL4CCqw6+6W5V1oBFc/hxRc75fZF/FVbfJLB/LjPhcUl3MRcJ68Lcbqw3r6
+	qrzIbN/nfvMCK/CdQWX4NfQXZn+guXptvd2MZYEevU1mTs373RJt5xiAv1YYSJvxbR2plTZxG76
+	Ufk9ohvRjUHN1UIsS2Zp5KHfVAAzlRXYCIEqKxeoaZ6VjWwQu0tlf2tcVO/EXxHQJbpym
+X-Google-Smtp-Source: AGHT+IEZAbV+KgYol0es5wU1H/XaJMYEQD5piXhCrk5CG5eYJbQ/P7Tabe2Sowp27pHmGU4M0iKMUA==
+X-Received: by 2002:a05:600c:474f:b0:456:1d61:b0f2 with SMTP id 5b1f17b1804b1-459f4fc32fbmr46905455e9.30.1754689427348;
+        Fri, 08 Aug 2025 14:43:47 -0700 (PDT)
+Message-ID: <0a57848b-c9c6-4f57-befb-195a9766daba@citrix.com>
+Date: Fri, 8 Aug 2025 22:43:46 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH 1/2] automation/eclair: ECLAIR configuration changes
+ due to GitLab runner update
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, consulting@bugseng.com,
+ dmytro_prokopchuk1@epam.com, jbeulich@suse.com,
+ Doug Goldstein <cardoe@cardoe.com>
+References: <1283be3b76d76814af244bbca544f6a3b74a04de.1754689062.git.nicola.vetrini@bugseng.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
+ VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
+ srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
+ Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
+ ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
+ YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
+ LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
+ e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
+ gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
+ ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
+ cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
+ CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
+ 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
+ IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
+ SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
+ JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
+ mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
+ ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
+ RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
+ dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
+ /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
+ TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
+ Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
+ 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
+ vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
+ g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
+ wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
+ 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
+ kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
+ bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
+ uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
+ XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
+ HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
+ pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
+ vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
+ b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
+ 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
+ 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
+ nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
+ B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
+ d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
+ 6+ahAA==
+In-Reply-To: <1283be3b76d76814af244bbca544f6a3b74a04de.1754689062.git.nicola.vetrini@bugseng.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Update configurations to adapt to the new syntax used by the newer
-version of the tool in the GitLab runner.
+On 08/08/2025 10:40 pm, Nicola Vetrini wrote:
+> Update configurations to adapt to the new syntax used by the newer
+> version of the tool in the GitLab runner.
+>
+> No functional changes.
+>
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> ---
+> This will of course need coordination with me to update the runners
+> just before committing the patches, as any analysis done in between will
+> fail due to syntax errors in the tool configuration files.
 
-No functional changes.
-
-Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
-This will of course need coordination with me to update the runners
-just before committing the patches, as any analysis done in between will
-fail due to syntax errors in the tool configuration files.
----
- automation/eclair_analysis/ECLAIR/deviations.ecl | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index ebce1ceab912..ec0cac797e5f 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -536,8 +536,8 @@ safe."
- -config=MC3A2.R16.3,reports+={safe, "any_area(end_loc(any_exp(text(^(?s).*/\\* [fF]all ?through\\.? \\*/.*$,0..2))))"}
- -doc_end
- 
---doc_begin="Switch statements having a controlling expression of enum type deliberately do not have a default case: gcc -Wall enables -Wswitch which warns (and breaks the build as we use -Werror) if one of the enum labels is missing from the switch."
---config=MC3A2.R16.4,reports+={deliberate,'any_area(kind(context)&&^.* has no `default.*$&&stmt(node(switch_stmt)&&child(cond,skip(__non_syntactic_paren_stmts,type(canonical(enum_underlying_type(any())))))))'}
-+-doc_begin="Switch statements having a controlling expression of enum type deliberately do not have a default case: gcc -Wall enables -Wswitch which warns (and breaks the build as -Werror is used) if one of the enumeration values is missing from the switch."
-+-config=MC3A2.R16.4,reports+={deliberate,"any_area(kind(context)&&^.* has no `default.*$&&stmt(node(switch_stmt)&&child(cond,skip(__non_syntactic_paren_stmts,ref(enum_underlying_type(any()))))))"}
- -doc_end
- 
- -doc_begin="A switch statement with a single switch clause and no default label may be used in place of an equivalent if statement if it is considered to improve readability."
-@@ -596,10 +596,10 @@ in assignments; (5) as initializers, possibly designated, in initalizer lists;
- -config=MC3A2.R20.7,expansion_context=
- {safe, "context(__call_expr_arg_contexts)"},
- {safe, "left_right(^[(,\\[]$,^[),\\]]$)"},
--{safe, "context(skip_to(__expr_non_syntactic_contexts, stmt_child(node(array_subscript_expr), subscript)))"},
--{safe, "context(skip_to(__expr_non_syntactic_contexts, stmt_child(operator(assign), lhs)))"},
--{safe, "context(skip_to(__expr_non_syntactic_contexts, stmt_child(node(init_list_expr||designated_init_expr), init)))"},
--{safe, "context(skip_to(__expr_non_syntactic_contexts, stmt_child(node(case_stmt), lower||upper)))"}
-+{safe, "context(skip(__expr_non_syntactic_contexts, is(subscript)&&node(array_subscript_expr)))"},
-+{safe, "context(skip(__expr_non_syntactic_contexts, is(lhs)&&stmt(operator(assign))))"},
-+{safe, "context(skip(__expr_non_syntactic_contexts, is(init)&&node(init_list_expr||designated_init_expr)))"},
-+{safe, "context(skip(__expr_non_syntactic_contexts, is(lower||upper)&&node(case_stmt)))"}
- -doc_end
- 
- -doc_begin="Violations involving the __config_enabled macros cannot be fixed without
--- 
-2.43.0
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
