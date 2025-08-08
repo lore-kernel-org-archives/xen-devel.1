@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A03CA0EC6
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075023.1437505 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71EDEC87FCB
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075021.1437484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTce-000739-MD; Fri, 08 Aug 2025 20:23:28 +0000
+	id 1ukTcd-0006XW-4a; Fri, 08 Aug 2025 20:23:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075023.1437505; Fri, 08 Aug 2025 20:23:28 +0000
+Received: by outflank-mailman (output) from mailman id 1075021.1437484; Fri, 08 Aug 2025 20:23:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTce-00072d-Go; Fri, 08 Aug 2025 20:23:28 +0000
-Received: by outflank-mailman (input) for mailman id 1075023;
- Fri, 08 Aug 2025 20:23:27 +0000
+	id 1ukTcc-0006W1-TQ; Fri, 08 Aug 2025 20:23:26 +0000
+Received: by outflank-mailman (input) for mailman id 1075021;
+ Fri, 08 Aug 2025 20:23:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukTcc-0005tJ-TV
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:26 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1ukTcb-0005tJ-TT
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:25 +0000
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [2a00:1450:4864:20::344])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88d09291-7495-11f0-b898-0df219b8e170;
- Fri, 08 Aug 2025 22:23:24 +0200 (CEST)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4538bc52a8dso16784535e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:24 -0700 (PDT)
+ id 865873cd-7495-11f0-b898-0df219b8e170;
+ Fri, 08 Aug 2025 22:23:20 +0200 (CEST)
+Received: by mail-wm1-x344.google.com with SMTP id
+ 5b1f17b1804b1-458b885d6eeso16335155e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:20 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.22
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 13:23:23 -0700 (PDT)
+ Fri, 08 Aug 2025 13:23:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,109 +47,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88d09291-7495-11f0-b898-0df219b8e170
+X-Inumbo-ID: 865873cd-7495-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754684603; x=1755289403; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=92/m+z5VSr5yDc/35xwQUmi5Oo4699FS2wmqHV80iA8=;
-        b=SVuBACqQCDWC0blNGkX/1UDb/tRFmjhUcw+PJfVeVktU+woFBdwQklJZy33zur1oGT
-         Z8xHt8tXT8xrnTNnCLuZQCUDJoOcrA/5SXUiuRFmW5+LSa3CHxx5cesvA55Dh6bZXuTP
-         b8/BwXFpsWzMB5hKE24JM2MCJJ72g7B8VnU5c=
+        d=citrix.com; s=google; t=1754684599; x=1755289399; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NXB3evWZT2QzGQ/J5BzSyaQ1jIiR7GXFqd50zzqLOmQ=;
+        b=bMrI3an2I3UqEGkn2ZNgxp+lFXuwJyYHez+8hjPuUSuROd/VkSmWiyyHFwuGDWMbGo
+         gS3kcQxx5jt3Fe5XqAIoITakSQClYDVZDpaPl8albzmrzsOj3mt2MNEw4jEtZh+7fG2G
+         Laf1u0Y31p6S2ce8BM1ij0WYYJuUEqR6icss8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754684603; x=1755289403;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=92/m+z5VSr5yDc/35xwQUmi5Oo4699FS2wmqHV80iA8=;
-        b=IEz6pW1jh3Orb6nUX/GLWs8rzpRk4CbsGnqb2PeoHZ6Tjg3FcrXex7t6Nldy2R2IlL
-         IMlVEB6W1lgGNDlutqU8PmOVsj4ZuuAVkb4lpioRRi4ofrL3cgeg++tBCXqzVTFGHLst
-         XUolOsA+9izPDBTR077IvJ+ME1GCw50vjXfA5j19ANWJZn4511jBIkAD4YB6p7nIaDE2
-         1oyJPBW/Mrc8QQBGjqLDDt3fl/howR7xiAYeHsyYK/2ZMmEoEq7AkfZfwbgu1CHxZoQ7
-         wi9gnjobwXry/lrQgoKCIhA2XdbZqmbOcvSPG/EXdPtF68TMyM2vdXi99AHUE3tQ5vCy
-         pIyg==
-X-Gm-Message-State: AOJu0YyNucQfTKjEwz+7YXC8nga63WonYqNw/5F9PkzwhFihBt55wcTA
-	zSLZI8c04v/MOjr+zqfGqIijZkUWN+5n/L0a9dBskNw+PuJ9kdqIILxP802AsrnzZ5BKExZTEb5
-	G78gjb6k=
-X-Gm-Gg: ASbGnctqfa0hzNFu0zwQ1n+SEXpMlYMFBUfjoRfFBgyrsmb4Cm73VzMEnZhEdELRKhS
-	IuC/xXsnHYaKHGW4uRilP86gH82udsUhz9GZYO3lIos1E3JZoSVMHTMTljKCZry4ugy8GSbNgLD
-	Di9bFfBPx2F171lURRMIbnroZgBQ4AyZ56F0MSOTo5nwzl1A38to7MqhvPl7MZhq0bRi/Ti+VaG
-	GORmsfBzrdSYtBMnH+a/xYs4NLYdBtQ0b20uyC3JyCp4AgWRkorkJq7MyOh14m3RnmKNaL+ifGn
-	YvhaVA4kmqy6SbRg2g5W+OqwCPELyvN48DLjB2tVrUs0l8pZ/NoFrKCPfwO+nxaN+CCd4soKH1Z
-	ZwSnliLeZ+Q0FAQZOtmy0gyL9mk2drBVouKmKYEFhtyVBRZRMwEuWG00s7lsJpkyBJAEZ/1N9cT
-	q6
-X-Google-Smtp-Source: AGHT+IH7pSYE5Lclhd4aEb3Drtv+hwANdcPJQryN8Y2tv4K7EYzZDiNo7xU2Laf05Zk4TKgP5N5Z7w==
-X-Received: by 2002:a05:6000:2dc2:b0:3b8:fa8c:f1ac with SMTP id ffacd0b85a97d-3b900b327f1mr4132646f8f.24.1754684603531;
-        Fri, 08 Aug 2025 13:23:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1754684599; x=1755289399;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NXB3evWZT2QzGQ/J5BzSyaQ1jIiR7GXFqd50zzqLOmQ=;
+        b=JIn1qpDs7In/CVvd45n8H0yxm9LDGazbFq3nIhbWyKg1ApOgxFTizk1s4yRotMDoI9
+         v3ZMxytsRnOs6LTFu6KVK6fiobRNDHjE+/yVJFzTFoMu8XVULUwUC3pB49YKkiAwizjq
+         plAnB5TQ1aPe4P3VqAxksiLnqO0FJXUvO6TuPDc7ecrx1sEay03wIc1rbXkc19Bp6zM6
+         Sn/SxdC6UYXW4kP0gHyqbajz1oexybRqRHveD5uTSe3pH5TLxkepmtqbC/rKqYHldU+e
+         S3BFXjsyxF1mIko/aMNmXoRJB3S3Taaw1EUcxqhErgmpfv/OHtUeoliInaOKVh2Lff7o
+         +X2w==
+X-Gm-Message-State: AOJu0YwjFMrS9Jz2FA+XsTtxnTWOJxhpLE5bV9jGyU+m+bNoqYAZQcJa
+	Ku0LNs87dcPxzKZRVffw8ENjCbGmR2J1iymibGjTuuVIbWe5yyM+M3EHpaq7mJnVVxF4TQWM3UD
+	Lwaf6JRxinQ==
+X-Gm-Gg: ASbGnct0WKbTWrylgMeDR67QJzAvrO67uJ9eo5CcAWQY8LnZWuNtQTbNam+YT3UvpLf
+	wDQnihqtYUkwN8PYydKflCePuG6aQjcsQyx/gdL/JCQRBTMuDbWvpFZtJIRU6OPQ1L/BWo2GO7w
+	qWvUiFSXQVpdMRSz8fv2+Zi7vbavs4/goJcIk0KrFNvdj1koD7mEEidjo3xjZzwckdrE6YXlnfb
+	Vryth91t9g6QvmH7goDmDE8CqlZkq7vpKKszAt8GSUAvcdnI1fE20z538gzRSm23vzrHgcFERNl
+	CHgms1PkHmURci3Wn16Dg8LsxaTchSCFmuPRJoxOPXan7Xubh1/pR+kkLxPEn0nBvqddChsSBTp
+	KemAE74oXLHn4zSPohaU+bdjy70nCiSDfwEz5bipHMkX0XlQbu621JA+U2/vZPnfj4XHymGoIVQ
+	Oi
+X-Google-Smtp-Source: AGHT+IEWfXGmnWSAfrcKcA8kPPSp8RIjb9u20ShqxnvVUVZlpICEvaGami8eRfr1Y30jsJWCYUzvIg==
+X-Received: by 2002:a05:600c:46c7:b0:456:1a41:f932 with SMTP id 5b1f17b1804b1-459f4f048d7mr37200675e9.22.1754684599342;
+        Fri, 08 Aug 2025 13:23:19 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 05/22] x86/traps: Rename early_traps_init() to bsp_early_traps_init()
-Date: Fri,  8 Aug 2025 21:22:57 +0100
-Message-Id: <20250808202314.1045968-6-andrew.cooper3@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 00/22] x86: FRED support, part 1 (stacks and exceptions)
+Date: Fri,  8 Aug 2025 21:22:52 +0100
+Message-Id: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
-References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-We're going to want to introduce an AP version shortly.
+Patches 1-12 are cleanup and rearrangement in order to fit FRED in more
+nicely.
 
-No functional change.
+Patches 13-22 are the start of FRED support, setting up the stacks and
+exception handling.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/include/asm/traps.h | 2 +-
- xen/arch/x86/setup.c             | 2 +-
- xen/arch/x86/traps-setup.c       | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+By the end of this series, Xen can run a PVH dom0 (if NMIs aren't in use -
+VT-x has a really nasty corner case here), or can get to the point of
+launching a PV dom0.  Running a PV dom0 is going to take a similar quantity of
+work.
 
-diff --git a/xen/arch/x86/include/asm/traps.h b/xen/arch/x86/include/asm/traps.h
-index 72c33a33e283..7414420e57d8 100644
---- a/xen/arch/x86/include/asm/traps.h
-+++ b/xen/arch/x86/include/asm/traps.h
-@@ -7,7 +7,7 @@
- #ifndef ASM_TRAP_H
- #define ASM_TRAP_H
- 
--void early_traps_init(void);
-+void bsp_early_traps_init(void);
- void traps_init(void);
- void percpu_traps_init(void);
- 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 1543dd251cc6..64f02699e1aa 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1134,7 +1134,7 @@ void asmlinkage __init noreturn __start_xen(void)
- 
-     percpu_init_areas();
- 
--    early_traps_init();
-+    bsp_early_traps_init();
- 
-     smp_prepare_boot_cpu();
-     sort_exception_tables();
-diff --git a/xen/arch/x86/traps-setup.c b/xen/arch/x86/traps-setup.c
-index a8385b26ae9b..7713f427d344 100644
---- a/xen/arch/x86/traps-setup.c
-+++ b/xen/arch/x86/traps-setup.c
-@@ -62,7 +62,7 @@ static void __init init_ler(void)
-  * boot_gdt is already loaded, and bsp_idt[] is constructed without IST
-  * settings, so we don't need a TSS configured yet.
-  */
--void __init early_traps_init(void)
-+void __init bsp_early_traps_init(void)
- {
-     const struct desc_ptr idtr = {
-         .base = (unsigned long)bsp_idt,
+All deveopment work has been done with Intel SIMICS.  I don't yet have real
+hardware to test on.
+
+The Gitlab CI AlderLake box, sporting both Shadow Stacks and S3 has been
+working overtime checking that S3 works on every relevant patch boundary.
+
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1974989391
+
+
+Andrew Cooper (22):
+  x86/msr: Rename MSR_INTERRUPT_SSP_TABLE to MSR_ISST
+  x86/msr: Rename wrmsr_ns() to wrmsrns(), and take 64bit value
+  x86/traps: Drop incorrect BUILD_BUG_ON() and comment in load_system_tables()
+  x86/idt: Minor improvements to _update_gate_addr_lower()
+  x86/traps: Rename early_traps_init() to bsp_early_traps_init()
+  x86/traps: Introduce bsp_traps_reinit()
+  x86/spec-ctrl: Rework init_shadow_spec_ctrl_state() to take an info pointer
+  x86/traps: Introduce ap_early_traps_init() and set up exception handling earlier
+  x86/traps: Move load_system_tables() into traps-setup.c
+  x86/traps: Move subarch_percpu_traps_init() into traps-setup.c
+  x86/traps: Fold x86_64/traps.c into traps.c
+  x86/traps: Unexport show_code() and show_stack_overflow()
+  x86: FRED enumerations
+  x86/traps: Extend struct cpu_user_regs/cpu_info with FRED fields
+  x86/traps: Introduce opt_fred
+  x86/boot: Adjust CR4 handling around ap_early_traps_init()
+  x86/S3: Switch to using RSTORSSP to recover SSP on resume
+  x86/traps: Set MSR_PL0_SSP in load_system_tables()
+  x86/boot: Use RSTORSSP to establish SSP
+  x86/traps: Alter switch_stack_and_jump() for FRED mode
+  x86/traps: Introduce FRED entrypoints
+  x86/traps: Enable FRED when requested
+
+ docs/misc/xen-command-line.pandoc           |  10 +
+ xen/arch/x86/Kconfig                        |   4 +
+ xen/arch/x86/acpi/wakeup_prot.S             |  57 +--
+ xen/arch/x86/boot/x86_64.S                  |  53 ++-
+ xen/arch/x86/cpu/common.c                   | 120 ------
+ xen/arch/x86/include/asm/asm-defns.h        |   9 +
+ xen/arch/x86/include/asm/asm_defns.h        |  65 +++
+ xen/arch/x86/include/asm/cpu-user-regs.h    |  71 +++-
+ xen/arch/x86/include/asm/cpufeature.h       |   3 +
+ xen/arch/x86/include/asm/current.h          |  14 +-
+ xen/arch/x86/include/asm/idt.h              |  13 +-
+ xen/arch/x86/include/asm/msr-index.h        |  13 +-
+ xen/arch/x86/include/asm/msr.h              |  12 +-
+ xen/arch/x86/include/asm/processor.h        |   2 -
+ xen/arch/x86/include/asm/prot-key.h         |   4 +-
+ xen/arch/x86/include/asm/spec_ctrl.h        |   4 +-
+ xen/arch/x86/include/asm/system.h           |   3 -
+ xen/arch/x86/include/asm/traps.h            |   7 +-
+ xen/arch/x86/include/asm/x86-defns.h        |   1 +
+ xen/arch/x86/msr.c                          |   4 +-
+ xen/arch/x86/setup.c                        |  37 +-
+ xen/arch/x86/smpboot.c                      |  17 +-
+ xen/arch/x86/spec_ctrl.c                    |   2 +-
+ xen/arch/x86/traps-setup.c                  | 358 +++++++++++++++-
+ xen/arch/x86/traps.c                        | 448 +++++++++++++++++++-
+ xen/arch/x86/x86_64/Makefile                |   2 +-
+ xen/arch/x86/x86_64/entry-fred.S            |  35 ++
+ xen/arch/x86/x86_64/traps.c                 | 414 ------------------
+ xen/include/public/arch-x86/cpufeatureset.h |   3 +
+ xen/include/xen/macros.h                    |   2 +
+ 30 files changed, 1142 insertions(+), 645 deletions(-)
+ create mode 100644 xen/arch/x86/x86_64/entry-fred.S
+ delete mode 100644 xen/arch/x86/x86_64/traps.c
+
 -- 
 2.39.5
 
