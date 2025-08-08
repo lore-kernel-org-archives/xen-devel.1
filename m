@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25B8C87FDA
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1075031.1437568 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B76CA0EC3
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Aug 2025 20:23:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1075024.1437509 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTcl-0000E0-FZ; Fri, 08 Aug 2025 20:23:35 +0000
+	id 1ukTcf-00079H-1f; Fri, 08 Aug 2025 20:23:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1075031.1437568; Fri, 08 Aug 2025 20:23:35 +0000
+Received: by outflank-mailman (output) from mailman id 1075024.1437509; Fri, 08 Aug 2025 20:23:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukTck-0000As-Qq; Fri, 08 Aug 2025 20:23:34 +0000
-Received: by outflank-mailman (input) for mailman id 1075031;
- Fri, 08 Aug 2025 20:23:32 +0000
+	id 1ukTce-00077k-Rz; Fri, 08 Aug 2025 20:23:28 +0000
+Received: by outflank-mailman (input) for mailman id 1075024;
+ Fri, 08 Aug 2025 20:23:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Dtzj=2U=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukTch-0005tW-V1
- for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:31 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1ukTcd-0005tW-EJ
+ for xen-devel@lists.xenproject.org; Fri, 08 Aug 2025 20:23:27 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8cff654d-7495-11f0-a324-13f23c93f187;
- Fri, 08 Aug 2025 22:23:31 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-459ebb6bbdfso16617975e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:31 -0700 (PDT)
+ id 8a5e068f-7495-11f0-a324-13f23c93f187;
+ Fri, 08 Aug 2025 22:23:27 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3a6cd1a6fecso1813886f8f.3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 Aug 2025 13:23:27 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.29
+ 5b1f17b1804b1-459e075047fsm103989805e9.1.2025.08.08.13.23.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 13:23:30 -0700 (PDT)
+ Fri, 08 Aug 2025 13:23:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8cff654d-7495-11f0-a324-13f23c93f187
+X-Inumbo-ID: 8a5e068f-7495-11f0-a324-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754684611; x=1755289411; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754684606; x=1755289406; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cTq1zY2I26ChNKndjNiVvn62M1r/PKSnKEK0vFDd4Xw=;
-        b=kVvnBQfBbtrtxRxxaGQ17AIwAqM7oGoJ4A/1Yz44F7oP2m3LuZ5V7+QUHuyCQaYU7A
-         ckY50RlcOPesuuP5VGRZiMZQoz0kAtppRTgvmaHgFfs1FuPTbK9ufTLr9Usc6ua+K+PD
-         yf45tykm4zbiMcuroRjipZRERiOaQwWn4cNoA=
+        bh=xVi01EX33hOUrp3MMSd3/Vp73DFlKzoPe7RHBP32PRE=;
+        b=l2P59wmR4jF4FKc2/fKvU95WSbrQAzwaU+aEzmgAztNdISJOfT+dgxwdWQcnXieHYR
+         1B0q+GYlYYhCsINrmv6L8x2ZZ52+GcmJaOrcd5drkU2qVEqWI10wUkY10W9Qi98azZBo
+         J2uPX5IPudEtG0THuGlnRJKZeAAjF6orlrNNg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754684611; x=1755289411;
+        d=1e100.net; s=20230601; t=1754684606; x=1755289406;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cTq1zY2I26ChNKndjNiVvn62M1r/PKSnKEK0vFDd4Xw=;
-        b=AdC1G685ZJg8B1jAh5E8iv+DS0YtMoLiT/Hw+XX4l90xWAGPUuRb93X7f3Snqmzw+U
-         6Zbauve894wacCoJezqbkSc6KB3+HRsHtCJud/2h8jdwJibkrWNoQ5oKap3kVK3vsqIT
-         56nW0SG/MZTje5FZlCaF5oKzoyzHrcxkHUGbWv5Z4avUvHMP6wNuLn1KP612AclVmDRs
-         zQMDpZtUBorhj8VZoAtUFJSWE52vFd0sCjmo6zJlJYeTBxQXCZlJKoDx20//xxkKT/er
-         p+tLl0YmKnonowuJJcBi+2TUGL4xOLFJoQs4/c1/nCu+T/74f1gEw/40dUQSaRSxT0Zc
-         5HMw==
-X-Gm-Message-State: AOJu0YzCAglu+kopE86ZPab3/e8FrEi35RtAAsOKWT29/nmTSOqFC+ai
-	6g/Q1QcdrM9cfGcqxOo+aJz9jMeaiR295rj8Z5BUHBmYXVb/14iZHOCHs/NQj6oYbG4iifdbn7o
-	wtHFHzNY=
-X-Gm-Gg: ASbGncvl4MPyIbB1dI+6S1iiPTFOLl6U8zOdhZkrncOaj8PQVENM6DYWpMz3ZbrN6ac
-	L1xkMoEV+jOWJY5EXzZT4tVXevZ82PxKvoPrxRtYHau0axQbsA83SgjCbB10dh5nugeAzQUJOWi
-	uu5HXP3BousCTKTeyQrDm+y3DS0zFn7aS//Svyhsv0s6F/NxRIXLwSsyqvSXMDQcjLrfH5A097j
-	KejuUqVbhkPj7Te2GyfTSLTlZXzHHPAzD3CPZcwhab7XoEMM7GrPU5M0Oc8ILm6yTYpj6h7hKTu
-	G1uOpTQftAhvTOeiBUBsrgO+A4hnoxkbZwwaBMF7Nydy3xo2PHPTH49qE2FLQzHHuJbMS23aU7y
-	DW7AEYtD+g3d0hgLoHkJ8N02fcxh/rMnmK1yTJd+ViHLRi5n+kZBupG7FXzDh7CL8wU3mUpCd9a
-	xA
-X-Google-Smtp-Source: AGHT+IGsLXCOpXJvGiSWbmlCj4KaXirNJ77sHY86pggs96EcE/yz32J/KyrLLWRQ6t+iEhKWqpgulA==
-X-Received: by 2002:a05:600c:b86:b0:459:dde3:1a3d with SMTP id 5b1f17b1804b1-459f4fb0174mr32998035e9.26.1754684610501;
-        Fri, 08 Aug 2025 13:23:30 -0700 (PDT)
+        bh=xVi01EX33hOUrp3MMSd3/Vp73DFlKzoPe7RHBP32PRE=;
+        b=fScvTiAf+Ymj3prVS+Maz3gaTlSrBO1Kclj8J4WLUqJgKFO3wZ5UCUSwmX5uo6IgrA
+         CbNpK0DkHHvstLDiaDrQBqAx9KnbOMaztA4xSoFfJs9FKZO/bZ8qkc9+VzTbQvCCGk66
+         qWTrmg8tYpp3tTiXbMBh3PIPDWoAUEvNiO0LQZH9OsUm00VXNYUK6AxV/8VAp5JJAgJ3
+         gWcSkpUfeOM9jLzPjoTYwQbtz5SFu7BMWL8eYg3jFUwqzAvw7+aOZ5TnBSK1lQVYnD0C
+         QTL73cOt4ZBefWm2H+TQKmicUlokSdHZiEjB77robdjUs6mrU8BkqB78A+n+U+/gjcLM
+         eqQA==
+X-Gm-Message-State: AOJu0YyuvMcmuTKVNwJiTU6WrrcFKk1P+JLn20j+4Yr/pWtZ0dkD/tif
+	OWUac8UHPjZHLJbjJz980xGSv78EceoeevPbJ8VIptDmEKroC/OdgaePiwhBiNVQSa8gj5RPlUN
+	nocbe8Dw=
+X-Gm-Gg: ASbGncuC4m+JkGGlBoLqzRgb9VbyGv5YGbDD7OutVHFiKw59KibhO5jKzi9UxqvgSrf
+	OEoCd1cYBcR5dNIKIuWto05BLz7ICSq66PKLZSteplidNnPWGGemW865vWjwjplwLVlpVMSdKFE
+	NinBGYns0YFN6V4QEJ63LQ5aGc9CIDvlOdDODCjW28MUm/Rx1BDZDFEwYeZh3HbS1BKIYJgeHtX
+	GGEBFI2SyAcs9QDjHqnI3b0+kLgDFqblnLIUOl01ibq0eVPJWJ1e6l6V6J13JqHZPyhmuz5RITw
+	c5u/qxWjG1TEiEa9zI+8+Ac7DTGKHxDbY+Mba/GElmEXWHWrhBBLYzAgSYj2BbrWr1SDnSW6rAU
+	pyd+jEw1kNVBRjxwYANssyFDEqZ6832T5wg3KP3xGHgHejOm+02FJZ9S8P0NUSV11XHE9uOfynF
+	Ho
+X-Google-Smtp-Source: AGHT+IFcWAFnsh+w6TGUK7qxOIWp6b3CF1PqJ7dhPI4YKqhFhpNG4OBh3gsO+Yg3uQaEBt5spBU4Fg==
+X-Received: by 2002:a05:6000:400b:b0:3b7:61e5:a8a5 with SMTP id ffacd0b85a97d-3b900b83578mr3949467f8f.47.1754684606025;
+        Fri, 08 Aug 2025 13:23:26 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 14/22] x86/traps: Extend struct cpu_user_regs/cpu_info with FRED fields
-Date: Fri,  8 Aug 2025 21:23:06 +0100
-Message-Id: <20250808202314.1045968-15-andrew.cooper3@citrix.com>
+Subject: [PATCH 08/22] x86/traps: Introduce ap_early_traps_init() and set up exception handling earlier
+Date: Fri,  8 Aug 2025 21:23:00 +0100
+Message-Id: <20250808202314.1045968-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
 References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
@@ -97,164 +97,136 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The FRED on-stack format is larger than the IDT format, but is by and large
-compatible.  FRED reuses space above cs and ss for extra metadata, some of
-which is purely informational, and some of which causes additional effects in
-ERET{U,S}.
+As things stand, we set up AP/S3 exception handling marginally after the
+fragile activity of setting up shadow stacks.  Shadow stack setup is going to
+get more complicated under FRED.
 
-Follow Linux's choice of naming for fred_{c,s}s structures, to make it very
-clear at the point of use that it's dependent on FRED.
+Introduce ap_early_traps_init() and call it ahead of setting up shadow stacks.
+To start with, call load_system_tables() which is sufficient to set up full
+exception handling.
 
-There is also the event data field and reserved fields, but we cannot include
-these in struct cpu_user_regs without reintroducing OoB structure accesses in
-the non-FRED case.  See commit 6065a05adf15 ("x86/traps: 'Fix' safety of
-read_registers() in #DF path"). for more details.
+In order to handle exceptions, current and the speculation controls needs to
+work.  cpu_smpboot_alloc() already constructs some of the AP's top-of-stack
+block, so have it set up a little more.
 
-Instead, use a new struct fred_info and position it suitably in struct
-cpu_info.  This boundary will be loaded into MSR_FRED_RSP_SL0, and must be
-64-byte aligned.
-
-This does add 16 bytes back into struct cpu_info, undoing the saving we made
-by dropping the vm86 data segment selectors.
-
-No functional change.
+This gets us complete exception coverage of setting up shadow stacks, rather
+than dying with a triple fault.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/include/asm/cpu-user-regs.h | 71 ++++++++++++++++++++++--
- xen/arch/x86/include/asm/current.h       |  2 +
- xen/arch/x86/traps-setup.c               |  5 ++
- 3 files changed, 74 insertions(+), 4 deletions(-)
+ xen/arch/x86/acpi/wakeup_prot.S |  5 +++--
+ xen/arch/x86/boot/x86_64.S      |  5 ++++-
+ xen/arch/x86/smpboot.c          | 17 ++++-------------
+ xen/arch/x86/traps-setup.c      | 12 ++++++++++++
+ 4 files changed, 23 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/cpu-user-regs.h b/xen/arch/x86/include/asm/cpu-user-regs.h
-index d700a3ef3447..06d9cbfbe6ba 100644
---- a/xen/arch/x86/include/asm/cpu-user-regs.h
-+++ b/xen/arch/x86/include/asm/cpu-user-regs.h
-@@ -30,6 +30,10 @@ struct cpu_user_regs
-     /*
-      * During IDT delivery for exceptions with an error code, hardware pushes
-      * to this point.  Entry_vector is filled in by software.
-+     *
-+     * During FRED delivery, hardware always pushes to this point.  Software
-+     * copies fred_ss.vector into entry_vector so most interrupt/exception
-+     * handling can be FRED-agnostic.
-      */
- 
-     uint32_t error_code;
-@@ -42,17 +46,76 @@ struct cpu_user_regs
-      */
- 
-     union { uint64_t rip;    uint32_t eip;    uint16_t ip; };
--    uint16_t cs, _pad0[1];
--    uint8_t  saved_upcall_mask; /* PV (v)rflags.IF == !saved_upcall_mask */
--    uint8_t  _pad1[3];
-+    union {
-+        struct {
-+            uint16_t      cs;
-+            unsigned long :16;
-+            uint8_t       saved_upcall_mask; /* PV (v)rflags.IF == !saved_upcall_mask */
-+        };
-+        unsigned long     csx;
-+        struct {
-+            /*
-+             * Bits 0 thru 31 control ERET{U,S} behaviour, and is state of the
-+             * interrupted context.
-+             */
-+            uint16_t      cs;
-+            unsigned int  sl:2;      /* Stack Level */
-+            bool          wfe:1;     /* Wait-for-ENDBRANCH state */
-+        } fred_cs;
-+    };
-     union { uint64_t rflags; uint32_t eflags; uint16_t flags; };
-     union { uint64_t rsp;    uint32_t esp;    uint16_t sp;    uint8_t spl; };
--    uint16_t ss, _pad2[3];
-+    union {
-+        uint16_t          ss;
-+        unsigned long     ssx;
-+        struct {
-+            /*
-+             * Bits 0 thru 31 control ERET{U,S} behaviour, and is state about
-+             * the event which occured.
-+             */
-+            uint16_t      ss;
-+            bool          sti:1;     /* Was blocked-by-STI, and not cancelled */
-+            bool          swint:1;   /* Was a SYSCALL/SYSENTER/INT $N */
-+            bool          nmi:1;     /* Was an NMI. */
-+            unsigned long :13;
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index 92af6230b31f..60eca4010042 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -63,6 +63,9 @@ LABEL(s3_resume)
+         pushq   %rax
+         lretq
+ 1:
++        /* Set up early exceptions and CET before entering C properly. */
++        call    ap_early_traps_init
 +
-+            /*
-+             * Bits 32 thru 63 are ignored by ERET{U,S} and are informative
-+             * only.
-+             */
-+            uint8_t       vector;
-+            unsigned long :8;
-+            unsigned int  type:4;    /* X86_ET_* */
-+            unsigned long :4;
-+            bool          enclave:1; /* Event taken in SGX mode */
-+            bool          lm:1;      /* Was in Long Mode */
-+            bool          nested:1;  /* Exception during event delivery, clear for #DF */
-+            unsigned long :1;
-+            unsigned int  insnlen:4; /* .type >= SW_INT */
-+        } fred_ss;
-+    };
+ #if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
+         call    xen_msr_s_cet_value
+         test    %eax, %eax
+@@ -117,8 +120,6 @@ LABEL(s3_resume)
+ .L_cet_done:
+ #endif /* CONFIG_XEN_SHSTK || CONFIG_XEN_IBT */
+ 
+-        call    load_system_tables
+-
+         /* Restore CR4 from the cpuinfo block. */
+         GET_STACK_END(bx)
+         mov     STACK_CPUINFO_FIELD(cr4)(%rbx), %rax
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 95a6b6cf63bd..0dfcc8a88a40 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -30,7 +30,10 @@ ENTRY(__high_start)
+         test    %ebx,%ebx
+         jz      .L_bsp
+ 
+-        /* APs.  Set up CET before entering C properly. */
++        /* APs.  Set up early exceptions and CET before entering C properly. */
++
++        call    ap_early_traps_init
++
+ #if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
+         call    xen_msr_s_cet_value
+         test    %eax, %eax
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index ce4862dde5a7..8af6556999d7 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -327,12 +327,7 @@ void asmlinkage start_secondary(void)
+     struct cpu_info *info = get_cpu_info();
+     unsigned int cpu = smp_processor_id();
+ 
+-    /* Critical region without IDT or TSS.  Any fault is deadly! */
+-
+-    set_current(idle_vcpu[cpu]);
+-    this_cpu(curr_vcpu) = idle_vcpu[cpu];
+     rdmsrl(MSR_EFER, this_cpu(efer));
+-    init_shadow_spec_ctrl_state(info);
  
      /*
-      * For IDT delivery, tss->rsp0 points to this boundary as embedded within
-      * struct cpu_info.  It must be 16-byte aligned.
+      * Just as during early bootstrap, it is convenient here to disable
+@@ -352,14 +347,6 @@ void asmlinkage start_secondary(void)
       */
- };
-+struct fred_info
-+{
-+    /*
-+     * Event Data.  For:
-+     *   #DB: PENDING_DBG (%dr6 with positive polarity)
-+     *   NMI: NMI-Source Bitmap (on capable hardware)
-+     *   #PF: %cr2
-+     *   #NM: MSR_XFD_ERR (only XFD-induced #NMs)
-+     */
-+    uint64_t edata;
-+    uint64_t _rsvd;
-+
-+    /*
-+     * For FRED delivery, MSR_FRED_RSP_SL0 points to this boundary as embedded
-+     * within struct cpu_info.  It must be 64-byte aligned.
-+     */
-+};
+     spin_debug_disable();
  
- #endif /* X86_CPU_USER_REGS_H */
-diff --git a/xen/arch/x86/include/asm/current.h b/xen/arch/x86/include/asm/current.h
-index a7c9473428b2..962eb76a82b3 100644
---- a/xen/arch/x86/include/asm/current.h
-+++ b/xen/arch/x86/include/asm/current.h
-@@ -38,6 +38,8 @@ struct vcpu;
+-    get_cpu_info()->use_pv_cr3 = false;
+-    get_cpu_info()->xen_cr3 = 0;
+-    get_cpu_info()->pv_cr3 = 0;
+-
+-    load_system_tables();
+-
+-    /* Full exception support from here on in. */
+-
+     if ( cpu_has_pks )
+         wrpkrs_and_cache(0); /* Must be before setting CR4.PKS */
  
- struct cpu_info {
-     struct cpu_user_regs guest_cpu_user_regs;
-+    struct fred_info _fred; /* Only used when FRED is active. */
-+
-     unsigned int processor_id;
-     unsigned int verw_sel;
-     struct vcpu *current_vcpu;
+@@ -1064,8 +1051,12 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+             goto out;
+ 
+     info = get_cpu_info_from_stack((unsigned long)stack_base[cpu]);
++    memset(info, 0, sizeof(*info));
++    init_shadow_spec_ctrl_state(info);
+     info->processor_id = cpu;
+     info->per_cpu_offset = __per_cpu_offset[cpu];
++    info->current_vcpu = idle_vcpu[cpu];
++    per_cpu(curr_vcpu, cpu) = idle_vcpu[cpu];
+ 
+     gdt = per_cpu(gdt, cpu) ?: alloc_xenheap_pages(0, memflags);
+     if ( gdt == NULL )
 diff --git a/xen/arch/x86/traps-setup.c b/xen/arch/x86/traps-setup.c
-index fbae7072c292..37202c17fcea 100644
+index 370f4d5f7b60..8ca379c9e4cb 100644
 --- a/xen/arch/x86/traps-setup.c
 +++ b/xen/arch/x86/traps-setup.c
-@@ -360,7 +360,12 @@ static void __init __maybe_unused build_assertions(void)
-      *
-      * tss->rsp0, pointing at the end of cpu_info.guest_cpu_user_regs, must be
-      * 16-byte aligned.
-+     *
-+     * MSR_FRED_RSP_SL0, pointing to the end of cpu_info._fred must be 64-byte
-+     * aligned.
-      */
-     BUILD_BUG_ON((sizeof(struct cpu_info) -
-                   endof_field(struct cpu_info, guest_cpu_user_regs)) & 15);
-+    BUILD_BUG_ON((sizeof(struct cpu_info) -
-+                  endof_field(struct cpu_info, _fred)) & 63);
+@@ -127,3 +127,15 @@ void percpu_traps_init(void)
+     if ( cpu_has_xen_lbr )
+         wrmsrl(MSR_IA32_DEBUGCTLMSR, IA32_DEBUGCTLMSR_LBR);
  }
++
++/*
++ * Configure exception handling on APs and S3.  Called before entering C
++ * properly, and before shadow stacks are activated.
++ *
++ * boot_gdt is currently loaded, and we must switch to our local GDT.  The
++ * local IDT has unknown IST-ness.
++ */
++void asmlinkage ap_early_traps_init(void)
++{
++    load_system_tables();
++}
 -- 
 2.39.5
 
