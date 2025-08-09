@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA78C87FD2
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Aug 2025 22:12:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1076297.1437911 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10120CA0EC0
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Aug 2025 22:12:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1076302.1437949 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukrnU-0005qk-GN; Sat, 09 Aug 2025 22:12:16 +0000
+	id 1ukrnX-0006Re-3P; Sat, 09 Aug 2025 22:12:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1076297.1437911; Sat, 09 Aug 2025 22:12:16 +0000
+Received: by outflank-mailman (output) from mailman id 1076302.1437949; Sat, 09 Aug 2025 22:12:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ukrnU-0005qd-Cz; Sat, 09 Aug 2025 22:12:16 +0000
-Received: by outflank-mailman (input) for mailman id 1076297;
- Sat, 09 Aug 2025 22:12:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ukrnW-0006QK-Oz; Sat, 09 Aug 2025 22:12:18 +0000
+Received: by outflank-mailman (input) for mailman id 1076302;
+ Sat, 09 Aug 2025 22:12:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gSuF=2V=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ukrnT-0005qN-1o
- for xen-devel@lists.xenproject.org; Sat, 09 Aug 2025 22:12:15 +0000
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [2a00:1450:4864:20::341])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e6b94cbe-756d-11f0-a325-13f23c93f187;
- Sun, 10 Aug 2025 00:12:13 +0200 (CEST)
-Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-451d3f72391so25592555e9.3
- for <xen-devel@lists.xenproject.org>; Sat, 09 Aug 2025 15:12:13 -0700 (PDT)
+ id 1ukrnV-0005qO-HS
+ for xen-devel@lists.xenproject.org; Sat, 09 Aug 2025 22:12:17 +0000
+Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
+ [2a00:1450:4864:20::343])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e5c3e878-756d-11f0-b898-0df219b8e170;
+ Sun, 10 Aug 2025 00:12:11 +0200 (CEST)
+Received: by mail-wm1-x343.google.com with SMTP id
+ 5b1f17b1804b1-458bf6d69e4so29172715e9.2
+ for <xen-devel@lists.xenproject.org>; Sat, 09 Aug 2025 15:12:11 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c453ab0sm35424323f8f.44.2025.08.09.15.12.11
+ ffacd0b85a97d-3b79c453ab0sm35424323f8f.44.2025.08.09.15.12.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Aug 2025 15:12:12 -0700 (PDT)
+ Sat, 09 Aug 2025 15:12:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6b94cbe-756d-11f0-a325-13f23c93f187
+X-Inumbo-ID: e5c3e878-756d-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1754777532; x=1755382332; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1754777531; x=1755382331; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=W1InbWNIn9kEj9hdKR1puWI33YAQ4yKAVpamMRnwML8=;
-        b=QrTmMDOa6lu4F89PpnRD+MQvYq2TxS43PhwtMoq3akOSTzSeeKrHd1Tvw1aELCgkKD
-         HBRZKzVf8pnRsJfMbrNmpXpyu+W5dWemcdcmgk5xWAZqOxNsYeGnVL1EVJSZOA/f5Y1S
-         O/Nvp9fu7Oc3XI8cmqcD5J1FYYAT2llBSXbjs=
+        bh=sgBHSZwGd1Mv4E+MHMlHeHL6OU/uMibF4bRSau40TK0=;
+        b=QPkoaF9+BMESe6lwPVF3e4LOt07wznvtDDetG36P5IA667aiJEs3tgu20YztSa8PAQ
+         sHmZnmijwSDfYFbePtg1lOA/yLLnJVcKgYHNVROXP4VWCIxYsWguUpZA7mkJu7LxV000
+         DJzxuACgIwobJdlQgo+4ff5VWNGOHggvxqP7Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754777532; x=1755382332;
+        d=1e100.net; s=20230601; t=1754777531; x=1755382331;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=W1InbWNIn9kEj9hdKR1puWI33YAQ4yKAVpamMRnwML8=;
-        b=JPI8jSmHf0VTVwQrQaBu9+hVkEz453ag+aCkNXcs3FITZ3zhY/v0/plqAP5uqe4lkl
-         ObjSmJmp2T7nfYycyEWGT4DXgTYwaVlBbPMUOE4zSkF9UTpa3LRUxWVDmGQujHZaCTG1
-         dx9iaW8ep//CAQfWHQWUi7jv1YG5/1m6ROhjTH7U4jrXLqMp924w0s04rfTYpyGUc8c6
-         d2+a1CZul3Avp3tgQUHPAkYYkF7il/DNclcPz4FFbgf/J0BuNikjYj7ETXtu40lSEtw8
-         LafvhpeC7GKnD3wNWf2m9AnX8pLz4Xex4rC8TwFTdFcO4BQE0qwp5sWYrUhNMM4AuEZa
-         wBjw==
-X-Gm-Message-State: AOJu0YzwMLjZnNkzrWvyO+Ypw/CFe0t9htKNxL44UaJqpjcVBry4q1k3
-	dqcC95FB9ZB2dsLCWWXWlju1mQJ7eOd79w59aRJdSLQ6IpXQkU4kSSn4hxhjbGYFeRGRuNy+N3J
-	bDY8lMk4t8A==
-X-Gm-Gg: ASbGnctDm3O5Sxl3aY6OyTxnPwL89oiaozc8DwxL1O6EPbWF45BDboQ6m73Aa+i+UFN
-	uZewh5bzWdwmNbfm7AkgHEeTuN3yy+IbBmzp5SMOY5NXm4YAv1TKrZKLWh0Wavs05bhkNz5kLb4
-	fc9rENoV80B+9eCdkLa765jfthhS2NCzn/Uz+A+prJvlLH13LuhhvxWmqE1DM4xj3HgaisewJAT
-	+U+Gjj0GGniEpxALSK08l224wNJY2HmXpIIAo1UQ0MjiAzHTXTnd2JyFADwjtizDN6F1fTAB54u
-	w1ZofU3+1F2Iud6k3HJ/067ZtSs7DDqCNwJGO7lAqn5RLUvsuQHyx4UMjGMko3JgVx2xZLT2gwU
-	jLJSbCvlXlbjQ9FCBFpOjOdOBMitXeyYkwJFaPXJZBO7LU6nj2FKu85+NiLhvgKe13MI0YmRkqX
-	MG
-X-Google-Smtp-Source: AGHT+IEWLBt6JAVymy0iPTqZYOzsL0c0vEPxi/XIXIpC2HGIwkuFh1Wii6izAKTSzTIP0QpJ3amErA==
-X-Received: by 2002:a05:600c:5254:b0:456:13d8:d141 with SMTP id 5b1f17b1804b1-459f4f282damr60550315e9.27.1754777532480;
-        Sat, 09 Aug 2025 15:12:12 -0700 (PDT)
+        bh=sgBHSZwGd1Mv4E+MHMlHeHL6OU/uMibF4bRSau40TK0=;
+        b=f10cLDnZqtGPTN8cAb4XS8QjLmQHa6wEcCDi0ggcY5+vIg0Ti2oTB41tsDe1zARai8
+         Ut2TgzdcKZ7vbutESIQpJVx46Cn8cfhWnmmMb5o54AIxirRXy0WcrqaxDro3uiohGzj7
+         cznTVRETHpmlT7w5moxGHtBcQO7ncy4tOWgryp69ys4IcOJpH9fVCYMH7krhId4QI5Ao
+         /yiMd25odxX1c2ydPeyobjs82LpYSVNwdP+2Q6+ZNrPbNX6OPlnW0iT2pPqhW+Fns6CS
+         PPOAUI+H845GaXl5+7SQ7cei0HVF6C32Usd1sweR9cPIHdFN9ECtC84zSAe6jWTnpHcT
+         FCVw==
+X-Gm-Message-State: AOJu0YxwNQKfDmBDcsPRMG6TkMtja8UdvFhwTvL8W7IblZwLQVEoTWX2
+	9raC7p/fyEzaEGTlKabf//8YQC6w3PNrJQ2mfOrFt4ggDgRo8xsZxYD1IYjgHn8nTGywUSu+pcQ
+	4AXnSsqTweg==
+X-Gm-Gg: ASbGnctjGeMJQ0NjjelEqgwIjRg5X54tPX1BZ5hnLhXtwgl2PuT6gJio7SCws72TG97
+	M7c3HexVe5vYT4rRr86l877DpdNCdSPoX0v08GLTkKDWayoxNgxM6DJH5nfzZrQh45PoeUl5Z8w
+	bWndDLgY1LBfG9CnlaGR7lFQmQiZGbsnA3BNjABvaqy+GAw6+3revxa6QQ3aOjX2tc/L/Qk5FeV
+	M/PZsyfrJFRKCo3tq4Hou99TQSWmRDANU6rEHy2MRbNo74RTJEd9PYUK9U07mjeFg4m0QXKf3Pa
+	9ooLVfruBvwm4ocS1Dwp2KKyaPapXBV3oFQ7t3ftRcqVD/Q/riV1I2CVPM7Ugp9YXESvfzu8YQu
+	Vhs8dDPym2C5D8KqleK2bllVnh9zNwNedJ6IV0UK94g35v9KMJyRDrJCjkQVDemAbDOGMONhiy/
+	iC
+X-Google-Smtp-Source: AGHT+IF2eO3jSQdww33CznVGiZVxiiyT47RBIRYXhug1GROIV/1Q9aOH6AUZzM+oMef1E2Xh4m69EQ==
+X-Received: by 2002:a5d:5f4d:0:b0:3b7:9546:a0e8 with SMTP id ffacd0b85a97d-3b900b7aecbmr6415128f8f.41.1754777530767;
+        Sat, 09 Aug 2025 15:12:10 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -96,9 +96,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Victor Lira <victorm.lira@amd.com>
-Subject: [PATCH 3/5] CI: Update riscv64 to use Debian Trixie
-Date: Sat,  9 Aug 2025 23:12:04 +0100
-Message-Id: <20250809221206.1260861-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/5] CI: Trixie containers
+Date: Sat,  9 Aug 2025 23:12:02 +0100
+Message-Id: <20250809221206.1260861-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250809221206.1260861-1-andrew.cooper3@citrix.com>
 References: <20250809221206.1260861-1-andrew.cooper3@citrix.com>
@@ -106,8 +106,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Everything works fine with Debian 13.  Provide two new build jobs, and update
-both the randconfig the test jobs.
+Debian Trixie has been released.  Provide new containers.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -123,76 +122,245 @@ CC: Doug Goldstein <cardoe@cardoe.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Victor Lira <victorm.lira@amd.com>
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/1975929387
----
- automation/gitlab-ci/build.yaml | 22 ++++++++++++++++++----
- automation/gitlab-ci/test.yaml  |  2 +-
- 2 files changed, 19 insertions(+), 5 deletions(-)
+I've deployed these containers already so people can play.
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 3fe539dc5683..f8e45f3467c8 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -329,10 +329,10 @@ debian-13-ppc64le-gcc-debug:
-       CONFIG_UBSAN=y
-       CONFIG_UBSAN_FATAL=y
- 
--debian-12-riscv64-gcc-debug:
-+debian-13-riscv64-gcc-debug:
-   extends: .gcc-riscv64-cross-build-debug
-   variables:
--    CONTAINER: debian:12-riscv64
-+    CONTAINER: debian:13-riscv64
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     HYPERVISOR_ONLY: y
-     EXTRA_XEN_CONFIG: |
-@@ -727,6 +727,20 @@ debian-12-riscv64-gcc:
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     HYPERVISOR_ONLY: y
- 
-+debian-12-riscv64-gcc-debug:
-+  extends: .gcc-riscv64-cross-build-debug
-+  variables:
-+    CONTAINER: debian:12-riscv64
-+    KBUILD_DEFCONFIG: tiny64_defconfig
-+    HYPERVISOR_ONLY: y
+No ARM yet.  There's an (old) outstanding series cleaning up the arm
+infrastructure, blocked on unclear root requirements for the Xilinx runners.
+That series really needs fixing.
+---
+ automation/build/debian/13-ppc64le.dockerfile | 37 ++++++++++
+ automation/build/debian/13-riscv64.dockerfile | 37 ++++++++++
+ automation/build/debian/13-x86_32.dockerfile  | 51 +++++++++++++
+ automation/build/debian/13-x86_64.dockerfile  | 74 +++++++++++++++++++
+ 4 files changed, 199 insertions(+)
+ create mode 100644 automation/build/debian/13-ppc64le.dockerfile
+ create mode 100644 automation/build/debian/13-riscv64.dockerfile
+ create mode 100644 automation/build/debian/13-x86_32.dockerfile
+ create mode 100644 automation/build/debian/13-x86_64.dockerfile
+
+diff --git a/automation/build/debian/13-ppc64le.dockerfile b/automation/build/debian/13-ppc64le.dockerfile
+new file mode 100644
+index 000000000000..5b22a4545842
+--- /dev/null
++++ b/automation/build/debian/13-ppc64le.dockerfile
+@@ -0,0 +1,37 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 debian:trixie-slim
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
 +
-+debian-13-riscv64-gcc:
-+  extends: .gcc-riscv64-cross-build
-+  variables:
-+    CONTAINER: debian:13-riscv64
-+    KBUILD_DEFCONFIG: tiny64_defconfig
-+    HYPERVISOR_ONLY: y
++ENV DEBIAN_FRONTEND=noninteractive
++ENV CROSS_COMPILE=powerpc64le-linux-gnu-
++ENV XEN_TARGET_ARCH=ppc64
 +
- .riscv-fixed-randconfig:
-   variables: &riscv-fixed-randconfig
-     EXTRA_FIXED_RANDCONFIG: |
-@@ -739,10 +753,10 @@ debian-12-riscv64-gcc:
-       CONFIG_VM_EVENT=n
-       CONFIG_XSM=n
- 
--debian-12-riscv64-gcc-randconfig:
-+debian-13-riscv64-gcc-randconfig:
-   extends: .gcc-riscv64-cross-build
-   variables:
--    CONTAINER: debian:12-riscv64
-+    CONTAINER: debian:13-riscv64
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     RANDCONFIG: y
-     <<: *riscv-fixed-randconfig
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 2f6f3affa637..9acd984d294c 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -705,7 +705,7 @@ qemu-smoke-riscv64-gcc:
-   script:
-     - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
-   needs:
--    - debian-12-riscv64-gcc-debug
-+    - debian-13-riscv64-gcc-debug
- 
- qemu-smoke-ppc64le-powernv9-gcc:
-   extends: .qemu-ppc64le
++RUN <<EOF
++#!/bin/bash
++    set -e
++
++    useradd --create-home user
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        flex
++        gcc-powerpc64le-linux-gnu
++        python3-minimal
++
++        # Qemu for test phase
++        qemu-system-ppc
++        expect
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++    rm -rf /var/lib/apt/lists/*
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/automation/build/debian/13-riscv64.dockerfile b/automation/build/debian/13-riscv64.dockerfile
+new file mode 100644
+index 000000000000..d2736c657d10
+--- /dev/null
++++ b/automation/build/debian/13-riscv64.dockerfile
+@@ -0,0 +1,37 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 debian:trixie-slim
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++ENV CROSS_COMPILE=riscv64-linux-gnu-
++ENV XEN_TARGET_ARCH=riscv64
++
++RUN <<EOF
++#!/bin/bash
++    set -e
++
++    useradd --create-home user
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        flex
++        gcc-riscv64-linux-gnu
++        python3-minimal
++
++        # Qemu for test phase
++        qemu-system-riscv64
++        expect
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++    rm -rf /var/lib/apt/lists/*
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/automation/build/debian/13-x86_32.dockerfile b/automation/build/debian/13-x86_32.dockerfile
+new file mode 100644
+index 000000000000..3c35c207d25a
+--- /dev/null
++++ b/automation/build/debian/13-x86_32.dockerfile
+@@ -0,0 +1,51 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/i386 debian:trixie
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++
++RUN <<EOF
++#!/bin/bash
++    set -eu
++
++    useradd --create-home user
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        clang
++        flex
++
++        # Tools (general)
++        ca-certificates
++        git-core
++        pkg-config
++        wget
++        # libacpi
++        acpica-tools
++        # libxl
++        uuid-dev
++        libyajl-dev
++        # xentop
++        libncurses5-dev
++        # Python bindings
++        python3-dev
++        python3-setuptools
++        # Ocaml bindings/oxenstored
++        ocaml-nox
++        ocaml-findlib
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++
++    rm -rf /var/lib/apt/lists*
++EOF
++
++USER user
++WORKDIR /build
++ENTRYPOINT ["linux32"]
+diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
+new file mode 100644
+index 000000000000..947e68a440de
+--- /dev/null
++++ b/automation/build/debian/13-x86_64.dockerfile
+@@ -0,0 +1,74 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 debian:trixie
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++
++RUN <<EOF
++#!/bin/bash
++    set -eu
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        clang
++        flex
++
++        # Tools (general)
++        ca-certificates
++        git-core
++        pkg-config
++        wget
++        # libxenguest dombuilder
++        libbz2-dev
++        liblzma-dev
++        liblzo2-dev
++        libzstd-dev
++        zlib1g-dev
++        # libacpi
++        acpica-tools
++        # libxl
++        uuid-dev
++        libnl-3-dev
++        libyajl-dev
++        # RomBIOS
++        bcc
++        bin86
++        # xentop
++        libncurses5-dev
++        # Python bindings
++        python3-dev
++        python3-setuptools
++        # Golang bindings
++        golang-go
++        # Ocaml bindings/oxenstored
++        ocaml-nox
++        ocaml-findlib
++
++        # for test phase, qemu-smoke-* jobs
++        expect
++        qemu-system-x86
++
++        # for build-each-commit-gcc
++        ccache
++
++        # for qemu-alpine-x86_64-gcc
++        busybox-static
++        cpio
++
++        # For *-efi jobs
++        ovmf
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++
++    rm -rf /var/lib/apt/lists*
++EOF
++
++USER root
++WORKDIR /build
 -- 
 2.39.5
 
