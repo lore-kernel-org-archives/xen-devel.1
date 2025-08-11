@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80253C87FDB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 13:35:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1077629.1438689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45885C88CB9
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 13:36:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1077633.1438713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulSgZ-0003ry-Tu; Mon, 11 Aug 2025 13:35:35 +0000
+	id 1ulSge-0004dG-KN; Mon, 11 Aug 2025 13:35:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1077629.1438689; Mon, 11 Aug 2025 13:35:35 +0000
+Received: by outflank-mailman (output) from mailman id 1077633.1438713; Mon, 11 Aug 2025 13:35:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulSgZ-0003rE-Ma; Mon, 11 Aug 2025 13:35:35 +0000
-Received: by outflank-mailman (input) for mailman id 1077629;
- Mon, 11 Aug 2025 13:35:34 +0000
+	id 1ulSge-0004d9-Gu; Mon, 11 Aug 2025 13:35:40 +0000
+Received: by outflank-mailman (input) for mailman id 1077633;
+ Mon, 11 Aug 2025 13:35:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6owi=2X=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1ulSgY-0002rn-D3
- for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 13:35:34 +0000
+ id 1ulSgd-0002rn-6X
+ for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 13:35:39 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 0d6d1958-76b8-11f0-b898-0df219b8e170;
- Mon, 11 Aug 2025 15:35:32 +0200 (CEST)
+ id 102dff35-76b8-11f0-b898-0df219b8e170;
+ Mon, 11 Aug 2025 15:35:36 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6B223150C;
- Mon, 11 Aug 2025 06:35:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 10F562641;
+ Mon, 11 Aug 2025 06:35:28 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.55.159])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 57E0A3F63F;
- Mon, 11 Aug 2025 06:35:30 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE3123F63F;
+ Mon, 11 Aug 2025 06:35:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d6d1958-76b8-11f0-b898-0df219b8e170
+X-Inumbo-ID: 102dff35-76b8-11f0-b898-0df219b8e170
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
@@ -53,519 +53,390 @@ Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v8 3/6] xen/arm: ffa: Introduce VM to VM support
-Date: Mon, 11 Aug 2025 15:34:59 +0200
-Message-ID: <12f24629ed75b638d9307cc549ecde46d225c5c1.1754899329.git.bertrand.marquis@arm.com>
+Subject: [PATCH v8 6/6] xen/arm: ffa: Enable VM to VM without firmware
+Date: Mon, 11 Aug 2025 15:35:02 +0200
+Message-ID: <51eebef30505dafbd9f3ccbf9e0dd99bb316c852.1754899329.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1754899329.git.bertrand.marquis@arm.com>
 References: <cover.1754899329.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Create a CONFIG_FFA_VM_TO_VM parameter to activate FFA communication
-between VMs.
-When activated list VMs in the system with FF-A support in part_info_get.
+When VM to VM support is activated and there is no suitable FF-A support
+in the firmware, enable FF-A support for VMs to allow using it for VM to
+VM communications.
+If there is OP-TEE running in the secure world and using the non FF-A
+communication system, having CONFIG_FFA_VM_TO_VM could be non functional
+(if optee is probed first) or OP-TEE could be non functional (if FF-A is
+probed first) so it is not recommended to activate the configuration
+option for such systems.
 
-When VM to VM is activated, Xen will be tainted as Insecure and a
-message is displayed to the user during the boot as there is no
-filtering of VMs in FF-A so any VM can communicate or see any other VM
-in the system.
+To make buffer full notification work between VMs when there is no
+firmware, rework the notification handling and modify the global flag to
+only be used as check for firmware notification support instead.
 
-WARNING: There is no filtering for now and all VMs are listed !!
-
-This patch is reorganizing the ffa_ctx structure to make clear which
-lock is protecting what parts.
-
-This patch is introducing a chain list of the ffa_ctx with a FFA Version
-negotiated allowing to create the partinfo results for VMs in parallel
-by using rwlock which only ensure addition/removal of entries are
-protected.
+Also split probe function into one for firmware and one for vm to vm to
+make the implementation clearer.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-Changes in v8;
-- fix typo: negociat.. to negotiat..
-- use LIST_HEAD and DEFINE_RWLOCK for declarations (Julien)
-- add Jens R-b
+Changes in v8:
 - add Julien A-b
 Changes in v7:
-- protect ffa_ctx list with a rw lock to allow several partinfo_get in
-  parallel but protect adding/removing entries.
+- add Jens R-b
 Changes in v6:
-- remove ACCESS_ONCE for guest_vers access and take the context lock
-  before modifying it
-- move guest_vers in context declaration to fields protected by the
-  context lock and add a comment to state that lock in only needed when
-  modifying it
+- split probe into fw and vm_to_vm probe
 Changes in v5:
-- remove invalid comment about 1.1 firmware support
-- rename variables from d and dom to curr_d and dest_d (Julien)
-- add a TODO in the code for potential holding for long of the CPU
-  (Julien)
-- use an atomic global variable to store the number of VMs instead of
-  recomputing the value each time (Julien)
-- add partinfo information in ffa_ctx (id, cpus and 64bit) and create a
-  chain list of ctx. Use this chain list to create the partinfo result
-  without holding a global lock to prevent concurrency issues.
-- Move some changes in a preparation patch modifying partinfo for sps to
-  reduce this patch size and make the review easier
+- init ctx list when there is no firmware
+- rework init a bit to prevent duplicates
+- Remove Jens R-b due to changes done
 Changes in v4:
-- properly handle SPMC version 1.0 header size case in partinfo_get
-- switch to local counting variables instead of *pointer += 1 form
-- coding style issue with missing spaces in if ()
+- Fix Optee to OP-TEE in commit message
+- Add Jens R-b
 Changes in v3:
-- break partinfo_get in several sub functions to make the implementation
-  easier to understand and lock handling easier
-- rework implementation to check size along the way and prevent previous
-  implementation limits which had to check that the number of VMs or SPs
-  did not change
-- taint Xen as INSECURE when VM to VM is enabled
+- fix typos in commit message
+- add spaces around <<
+- move notification id fix back into buffer full patch
+- fix | position in if
 Changes in v2:
-- Switch ifdef to IS_ENABLED
-- dom was not switched to d as requested by Jan because there is already
-  a variable d pointing to the current domain and it must not be
-  shadowed.
+- replace ifdef with IS_ENABLED when possible
 ---
- xen/arch/arm/tee/Kconfig        |  11 +++
- xen/arch/arm/tee/ffa.c          |  49 ++++++++++++-
- xen/arch/arm/tee/ffa_partinfo.c | 100 ++++++++++++++++++++++++---
- xen/arch/arm/tee/ffa_private.h  | 117 ++++++++++++++++++++++++++------
- 4 files changed, 245 insertions(+), 32 deletions(-)
+ xen/arch/arm/tee/ffa.c       |  87 +++++++++++++++++------------
+ xen/arch/arm/tee/ffa_notif.c | 104 ++++++++++++++++-------------------
+ 2 files changed, 101 insertions(+), 90 deletions(-)
 
-diff --git a/xen/arch/arm/tee/Kconfig b/xen/arch/arm/tee/Kconfig
-index c5b0f88d7522..88a4c4c99154 100644
---- a/xen/arch/arm/tee/Kconfig
-+++ b/xen/arch/arm/tee/Kconfig
-@@ -28,5 +28,16 @@ config FFA
- 
- 	  [1] https://developer.arm.com/documentation/den0077/latest
- 
-+config FFA_VM_TO_VM
-+    bool "Enable FF-A between VMs (UNSUPPORTED)" if UNSUPPORTED
-+    default n
-+    depends on FFA
-+    help
-+      This option enables to use FF-A between VMs.
-+      This is experimental and there is no access control so any
-+      guest can communicate with any other guest.
-+
-+      If unsure, say N.
-+
- endmenu
- 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 3bbdd7168a6b..0eb6a0bda5fb 100644
+index 0eb6a0bda5fb..1d0239cf6950 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -118,10 +118,18 @@ void *ffa_tx __read_mostly;
- DEFINE_SPINLOCK(ffa_rx_buffer_lock);
- DEFINE_SPINLOCK(ffa_tx_buffer_lock);
+@@ -346,8 +346,9 @@ static int ffa_domain_init(struct domain *d)
+     struct ffa_ctx *ctx;
+     int ret;
  
-+LIST_HEAD(ffa_ctx_head);
-+/* RW Lock to protect addition/removal and reading in ffa_ctx_head */
-+DEFINE_RWLOCK(ffa_ctx_list_rwlock);
+-    if ( !ffa_fw_version )
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) && !ffa_fw_version )
+         return -ENODEV;
 +
-+#ifdef CONFIG_FFA_VM_TO_VM
-+atomic_t ffa_vm_count;
-+#endif
- 
- /* Used to track domains that could not be torn down immediately. */
- static struct timer ffa_teardown_timer;
--static struct list_head ffa_teardown_head;
-+
-+static LIST_HEAD(ffa_teardown_head);
- static DEFINE_SPINLOCK(ffa_teardown_lock);
- 
- static bool ffa_get_version(uint32_t *vers)
-@@ -151,6 +159,7 @@ static void handle_version(struct cpu_user_regs *regs)
-     struct domain *d = current->domain;
-     struct ffa_ctx *ctx = d->arch.tee;
-     uint32_t vers = get_user_reg(regs, 1);
-+    uint32_t old_vers;
- 
      /*
-      * Guest will use the version it requested if it is our major and minor
-@@ -160,10 +169,23 @@ static void handle_version(struct cpu_user_regs *regs)
-      */
-     if ( FFA_VERSION_MAJOR(vers) == FFA_MY_VERSION_MAJOR )
-     {
-+        spin_lock(&ctx->lock);
-+        old_vers = ctx->guest_vers;
-+
-         if ( FFA_VERSION_MINOR(vers) > FFA_MY_VERSION_MINOR )
-             ctx->guest_vers = FFA_MY_VERSION;
-         else
-             ctx->guest_vers = vers;
-+        spin_unlock(&ctx->lock);
-+
-+        if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) && !old_vers )
-+        {
-+            /* One more VM with FF-A support available */
-+            inc_ffa_vm_count();
-+            write_lock(&ffa_ctx_list_rwlock);
-+            list_add_tail(&ctx->ctx_list, &ffa_ctx_head);
-+            write_unlock(&ffa_ctx_list_rwlock);
-+        }
-     }
-     ffa_set_regs(regs, FFA_MY_VERSION, 0, 0, 0, 0, 0, 0, 0);
+      * We are using the domain_id + 1 as the FF-A ID for VMs as FF-A ID 0 is
+      * reserved for the hypervisor and we only support secure endpoints using
+@@ -478,38 +479,12 @@ static void ffa_init_secondary(void)
+     ffa_notif_init_interrupt();
  }
-@@ -345,6 +367,10 @@ static int ffa_domain_init(struct domain *d)
-     ctx->teardown_d = d;
-     INIT_LIST_HEAD(&ctx->shm_list);
  
-+    ctx->ffa_id = ffa_get_vm_id(d);
-+    ctx->num_vcpus = d->max_vcpus;
-+    ctx->is_64bit = is_64bit_domain(d);
-+
-     /*
-      * ffa_domain_teardown() will be called if ffa_domain_init() returns an
-      * error, so no need for cleanup in this function.
-@@ -421,6 +447,14 @@ static int ffa_domain_teardown(struct domain *d)
-     if ( !ctx )
-         return 0;
+-static bool ffa_probe(void)
++static bool ffa_probe_fw(void)
+ {
+     uint32_t vers;
+     unsigned int major_vers;
+     unsigned int minor_vers;
  
-+    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) && ctx->guest_vers )
-+    {
-+        dec_ffa_vm_count();
-+        write_lock(&ffa_ctx_list_rwlock);
-+        list_del(&ctx->ctx_list);
-+        write_unlock(&ffa_ctx_list_rwlock);
-+    }
-+
-     ffa_rxtx_domain_destroy(d);
-     ffa_notif_domain_destroy(d);
- 
-@@ -464,6 +498,18 @@ static bool ffa_probe(void)
-     printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
-            FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
- 
-+    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+    {
-+        /*
-+         * When FFA VM to VM is enabled, the current implementation does not
-+         * offer any way to limit which VM can communicate with which VM using
-+         * FF-A.
-+         * Signal this in the xen console and taint the system as insecure.
-+         * TODO: Introduce a solution to limit what a VM can do through FFA.
-+         */
-+        printk(XENLOG_ERR "ffa: VM to VM is enabled, system is insecure !!\n");
-+        add_taint(TAINT_MACHINE_INSECURE);
-+    }
+-    /*
+-     * FF-A often works in units of 4K pages and currently it's assumed
+-     * that we can map memory using that granularity. See also the comment
+-     * above the FFA_PAGE_SIZE define.
+-     *
+-     * It is possible to support a PAGE_SIZE larger than 4K in Xen, but
+-     * until that is fully handled in this code make sure that we only use
+-     * 4K page sizes.
+-     */
+-    BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE);
+-
+-    printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
+-           FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
+-
+-    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
+-    {
+-        /*
+-         * When FFA VM to VM is enabled, the current implementation does not
+-         * offer any way to limit which VM can communicate with which VM using
+-         * FF-A.
+-         * Signal this in the xen console and taint the system as insecure.
+-         * TODO: Introduce a solution to limit what a VM can do through FFA.
+-         */
+-        printk(XENLOG_ERR "ffa: VM to VM is enabled, system is insecure !!\n");
+-        add_taint(TAINT_MACHINE_INSECURE);
+-    }
      /*
       * psci_init_smccc() updates this value with what's reported by EL-3
       * or secure world.
-@@ -537,7 +583,6 @@ static bool ffa_probe(void)
+@@ -528,11 +503,6 @@ static bool ffa_probe(void)
+         goto err_no_fw;
+     }
+ 
+-    /* Some sanity check in case we update the version we support */
+-    BUILD_BUG_ON(FFA_MIN_SPMC_VERSION > FFA_MY_VERSION);
+-    BUILD_BUG_ON(FFA_VERSION_MAJOR(FFA_MIN_SPMC_VERSION) !=
+-                                   FFA_MY_VERSION_MAJOR);
+-
+     major_vers = FFA_VERSION_MAJOR(vers);
+     minor_vers = FFA_VERSION_MINOR(vers);
+ 
+@@ -583,7 +553,6 @@ static bool ffa_probe(void)
          goto err_rxtx_destroy;
  
      ffa_notif_init();
--    INIT_LIST_HEAD(&ffa_teardown_head);
-     init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
+-    init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
  
      return true;
-diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
-index dfa0b23eaf38..fa56b1587e3b 100644
---- a/xen/arch/arm/tee/ffa_partinfo.c
-+++ b/xen/arch/arm/tee/ffa_partinfo.c
-@@ -150,6 +150,73 @@ out:
-     return ret;
+ 
+@@ -597,6 +566,56 @@ err_no_fw:
+     return false;
  }
  
-+static int32_t ffa_get_vm_partinfo(uint32_t *vm_count, void *dst_buf,
-+                                   void *end_buf, uint32_t dst_size)
++static bool ffa_probe_vm_to_vm(void)
 +{
-+    struct ffa_ctx *curr_ctx = current->domain->arch.tee;
-+    struct ffa_ctx *dest_ctx;
-+    uint32_t count = 0;
-+    int32_t ret = FFA_RET_OK;
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++        return false;
 +
 +    /*
-+     * There could potentially be a lot of VMs in the system and we could
-+     * hold the CPU for long here.
-+     * Right now there is no solution in FF-A specification to split
-+     * the work in this case.
-+     * TODO: Check how we could delay the work or have preemption checks.
++     * When FFA VM to VM is enabled, the current implementation does not
++     * offer any way to limit which VM can communicate with which VM using
++     * FF-A.
++     * Signal this in the xen console and taint the system as insecure.
++     * TODO: Introduce a solution to limit what a VM can do through FFA.
 +     */
-+    read_lock(&ffa_ctx_list_rwlock);
-+    list_for_each_entry(dest_ctx, &ffa_ctx_head, ctx_list)
-+    {
-+        /*
-+         * Do not include an entry for the caller VM as the spec is not
-+         * clearly mandating it and it is not supported by Linux.
-+         */
-+        if ( dest_ctx != curr_ctx )
-+        {
-+            /*
-+             * We do not have UUID info for VMs so use
-+             * the 1.0 structure so that we set UUIDs to
-+             * zero using memset
-+             */
-+            struct ffa_partition_info_1_0 info;
++    printk(XENLOG_ERR "ffa: VM to VM is enabled, system is insecure !!\n");
++    add_taint(TAINT_MACHINE_INSECURE);
 +
-+            if  ( dst_buf > (end_buf - dst_size) )
-+            {
-+                ret = FFA_RET_NO_MEMORY;
-+                goto out;
-+            }
-+
-+            /*
-+             * Context might has been removed since we go it or being removed
-+             * right now so we might return information for a VM not existing
-+             * anymore. This is acceptable as we return a view of the system
-+             * which could change at any time.
-+             */
-+            info.id = dest_ctx->ffa_id;
-+            info.execution_context = dest_ctx->num_vcpus;
-+            info.partition_properties = FFA_PART_VM_PROP;
-+            if ( dest_ctx->is_64bit )
-+                info.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
-+
-+            memcpy(dst_buf, &info, MIN(sizeof(info), dst_size));
-+
-+            if ( dst_size > sizeof(info) )
-+                memset(dst_buf + sizeof(info), 0,
-+                       dst_size - sizeof(info));
-+
-+            dst_buf += dst_size;
-+            count++;
-+        }
-+    }
-+    *vm_count = count;
-+
-+out:
-+    read_unlock(&ffa_ctx_list_rwlock);
-+
-+    return ret;
++    return true;
 +}
 +
- void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
++static bool ffa_probe(void)
++{
++    /*
++     * FF-A often works in units of 4K pages and currently it's assumed
++     * that we can map memory using that granularity. See also the comment
++     * above the FFA_PAGE_SIZE define.
++     *
++     * It is possible to support a PAGE_SIZE larger than 4K in Xen, but
++     * until that is fully handled in this code make sure that we only use
++     * 4K page sizes.
++     */
++    BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE);
++
++    /* Some sanity check in case we update the version we support */
++    BUILD_BUG_ON(FFA_MIN_SPMC_VERSION > FFA_MY_VERSION);
++    BUILD_BUG_ON(FFA_VERSION_MAJOR(FFA_MIN_SPMC_VERSION) !=
++                                   FFA_MY_VERSION_MAJOR);
++
++    printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
++           FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
++
++    if ( !ffa_probe_fw() && !ffa_probe_vm_to_vm() )
++        return false;
++
++    if ( !ffa_fw_version )
++        printk(XENLOG_INFO "ARM FF-A only available between VMs\n");
++
++    init_timer(&ffa_teardown_timer, ffa_teardown_timer_callback, NULL, 0);
++
++    return true;
++}
++
+ static const struct tee_mediator_ops ffa_ops =
  {
-     int32_t ret = FFA_RET_OK;
-@@ -164,7 +231,7 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-     };
-     uint32_t dst_size = 0;
-     void *dst_buf, *end_buf;
--    uint32_t ffa_sp_count = 0;
-+    uint32_t ffa_vm_count = 0, ffa_sp_count = 0;
+     .probe = ffa_probe,
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index f6df2f15bb00..86bef6b3b2ab 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -16,7 +16,7 @@
  
-     /*
-      * If the guest is v1.0, he does not get back the entry size so we must
-@@ -191,15 +258,18 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-         }
+ #include "ffa_private.h"
  
-         if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
-+        {
-             ret = ffa_get_sp_count(uuid, &ffa_sp_count);
-+            if ( ret )
-+                goto out;
-+        }
+-static bool __ro_after_init notif_enabled;
++static bool __ro_after_init fw_notif_enabled;
+ static unsigned int __ro_after_init notif_sri_irq;
  
--        goto out;
--    }
-+        /*
-+         * Do not count the caller VM as the spec is not clearly mandating it
-+         * and it is not supported by Linux.
-+         */
-+        ffa_vm_count = get_ffa_vm_count() - 1;
+ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+@@ -27,21 +27,17 @@ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
  
--    if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
--    {
--        /* Just give an empty partition list to the caller */
--        ret = FFA_RET_OK;
-         goto out;
-     }
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
  
-@@ -224,9 +294,19 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-         goto out_rx_release;
-     }
+     if ( flags )    /* Only global notifications are supported */
+         return FFA_RET_DENIED;
  
--    ret = ffa_get_sp_partinfo(uuid, &ffa_sp_count, dst_buf, end_buf,
--                              dst_size);
-+    if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
-+    {
-+        ret = ffa_get_sp_partinfo(uuid, &ffa_sp_count, dst_buf, end_buf,
-+                                  dst_size);
-+
-+        if ( ret )
-+            goto out_rx_release;
-+
-+        dst_buf += ffa_sp_count * dst_size;
-+    }
- 
-+    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+        ret = ffa_get_vm_partinfo(&ffa_vm_count, dst_buf, end_buf, dst_size);
- 
- out_rx_release:
-     if ( ret )
-@@ -235,7 +315,7 @@ out:
-     if ( ret )
-         ffa_set_regs_error(regs, ret);
-     else
--        ffa_set_regs_success(regs, ffa_sp_count, dst_size);
-+        ffa_set_regs_success(regs, ffa_sp_count + ffa_vm_count, dst_size);
- }
- 
- static int32_t ffa_direct_req_send_vm(uint16_t sp_id, uint16_t vm_id,
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 0a9c1082db28..5cb2b5171419 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -195,6 +195,18 @@
-  */
- #define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
- 
-+/*
-+ * Partition properties we give for a normal world VM:
-+ * - can send direct message but not receive them
-+ * - can handle indirect messages
-+ * - can receive notifications
-+ * 32/64 bit flag is set depending on the VM
-+ */
-+#define FFA_PART_VM_PROP    (FFA_PART_PROP_DIRECT_REQ_SEND | \
-+                             FFA_PART_PROP_INDIRECT_MSGS | \
-+                             FFA_PART_PROP_RECV_NOTIF | \
-+                             FFA_PART_PROP_IS_PE_ID)
-+
- /* Flags used in calls to FFA_NOTIFICATION_GET interface  */
- #define FFA_NOTIF_FLAG_BITMAP_SP        BIT(0, U)
- #define FFA_NOTIF_FLAG_BITMAP_VM        BIT(1, U)
-@@ -297,36 +309,72 @@ struct ffa_ctx_notif {
- };
- 
- struct ffa_ctx {
--    void *rx;
--    const void *tx;
--    struct page_info *rx_pg;
--    struct page_info *tx_pg;
-+    /*
-+     * Chain list of all FF-A contexts.
-+     * As we might have several read from the list of context through parallel
-+     * partinfo_get but fewer additions/removal as those happen only during a
-+     * version negotiation or guest shutdown, access to this list is protected
-+     * through a rwlock (addition/removal with write lock, reading through a
-+     * read lock).
-+     */
-+    struct list_head ctx_list; /* chain list of all FF-A contexts */
-+
-+    /*
-+     * Data access unlocked (mainly for part_info_get in VM to VM).
-+     * Those should be set before the ctx is added in the list.
-+     */
-+    /* FF-A Endpoint ID */
-+    uint16_t ffa_id;
-+    uint16_t num_vcpus;
-+    bool is_64bit;
-+
-+    /*
-+     * Global data accessed atomically or using ACCES_ONCE.
-+     */
-+    struct ffa_ctx_notif notif;
-+
-+    /*
-+     * Global data accessed with lock locked.
-+     */
-+    spinlock_t lock;
-+    /*
-+     * FF-A version negotiated by the guest, only modifications to
-+     * this field are done with the lock held as this is expected to
-+     * be done once at init by a guest.
-+     */
-+    uint32_t guest_vers;
-     /* Number of 4kB pages in each of rx/rx_pg and tx/tx_pg */
-     unsigned int page_count;
--    /* FF-A version used by the guest */
--    uint32_t guest_vers;
--    bool rx_is_free;
--    /* Used shared memory objects, struct ffa_shm_mem */
--    struct list_head shm_list;
-     /* Number of allocated shared memory object */
-     unsigned int shm_count;
--    struct ffa_ctx_notif notif;
-+    /* Used shared memory objects, struct ffa_shm_mem */
-+    struct list_head shm_list;
-+
-     /*
--     * tx_lock is used to serialize access to tx
--     * rx_lock is used to serialize access to rx_is_free
--     * lock is used for the rest in this struct
-+     * Rx buffer, accessed with rx_lock locked.
-+     * rx_is_free is used to serialize access.
-      */
--    spinlock_t tx_lock;
-     spinlock_t rx_lock;
--    spinlock_t lock;
--    /* Used if domain can't be torn down immediately */
-+    bool rx_is_free;
-+    void *rx;
-+    struct page_info *rx_pg;
-+
-+    /*
-+     * Tx buffer, access with tx_lock locked.
-+     */
-+    spinlock_t tx_lock;
-+    const void *tx;
-+    struct page_info *tx_pg;
-+
-+
-+    /*
-+     * Domain teardown handling if data shared or used by other domains
-+     * do not allow to teardown the domain immediately.
-+     */
-     struct domain *teardown_d;
-     struct list_head teardown_list;
-     s_time_t teardown_expire;
 -    /*
--     * Used for ffa_domain_teardown() to keep track of which SPs should be
--     * notified that this guest is being destroyed.
+-     * We only support notifications from SP so no need to check the sender
+-     * endpoint ID, the SPMC will take care of that for us.
 -     */
-+    /* Keep track of SPs that should be notified of VM destruction */
-     unsigned long *vm_destroy_bitmap;
- };
+-    return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags, bitmap_lo,
+-                           bitmap_hi);
++    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
++        return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
++                               bitmap_lo, bitmap_hi);
++
++    return FFA_RET_NOT_SUPPORTED;
+ }
  
-@@ -336,6 +384,12 @@ extern spinlock_t ffa_rx_buffer_lock;
- extern spinlock_t ffa_tx_buffer_lock;
- extern DECLARE_BITMAP(ffa_fw_abi_supported, FFA_ABI_BITMAP_SIZE);
+ int ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+@@ -51,18 +47,14 @@ int ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
  
-+extern struct list_head ffa_ctx_head;
-+extern rwlock_t ffa_ctx_list_rwlock;
-+#ifdef CONFIG_FFA_VM_TO_VM
-+extern atomic_t ffa_vm_count;
-+#endif
-+
- bool ffa_shm_domain_destroy(struct domain *d);
- void ffa_handle_mem_share(struct cpu_user_regs *regs);
- int ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags);
-@@ -368,6 +422,29 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs);
- void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid);
- int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs);
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
  
-+#ifdef CONFIG_FFA_VM_TO_VM
-+static inline uint16_t get_ffa_vm_count(void)
-+{
-+    return atomic_read(&ffa_vm_count);
-+}
+-    /*
+-     * We only support notifications from SP so no need to check the
+-     * destination endpoint ID, the SPMC will take care of that for us.
+-     */
+-    return  ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
+-                            bitmap_hi);
++    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
++        return  ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
++                                bitmap_hi);
 +
-+static inline void inc_ffa_vm_count(void)
-+{
-+    atomic_inc(&ffa_vm_count);
-+}
++    return FFA_RET_NOT_SUPPORTED;
+ }
+ 
+ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+@@ -71,7 +63,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+     struct ffa_ctx *ctx = d->arch.tee;
+     bool notif_pending;
+ 
+-    if ( !notif_enabled )
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) && !fw_notif_enabled )
+     {
+         ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
+         return;
+@@ -108,7 +100,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+     uint32_t w6 = 0;
+     uint32_t w7 = 0;
+ 
+-    if ( !notif_enabled )
++    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) && !fw_notif_enabled )
+     {
+         ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
+         return;
+@@ -120,7 +112,8 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    if ( flags & ( FFA_NOTIF_FLAG_BITMAP_SP | FFA_NOTIF_FLAG_BITMAP_SPM ) )
++    if ( fw_notif_enabled && (flags & ( FFA_NOTIF_FLAG_BITMAP_SP |
++                                        FFA_NOTIF_FLAG_BITMAP_SPM )) )
+     {
+         struct arm_smccc_1_2_regs arg = {
+             .a0 = FFA_NOTIFICATION_GET,
+@@ -177,15 +170,14 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( !notif_enabled )
+-        return FFA_RET_NOT_SUPPORTED;
+-
+     if ( (src_dst >> 16) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+-    /* Let the SPMC check the destination of the notification */
+-    return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
+-                           bitmap_hi);
++    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
++        return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
++                               bitmap_hi);
 +
-+static inline void dec_ffa_vm_count(void)
-+{
-+    ASSERT(atomic_read(&ffa_vm_count) > 0);
-+    atomic_dec(&ffa_vm_count);
-+}
-+#else
-+/* Only count the caller VM */
-+#define get_ffa_vm_count()  ((uint16_t)1UL)
-+#define inc_ffa_vm_count()  do {} while(0)
-+#define dec_ffa_vm_count()  do {} while(0)
-+#endif
-+
- static inline uint16_t ffa_get_vm_id(const struct domain *d)
++    return FFA_RET_NOT_SUPPORTED;
+ }
+ 
+ #ifdef CONFIG_FFA_VM_TO_VM
+@@ -371,7 +363,7 @@ void ffa_notif_init_interrupt(void)
  {
-     /* +1 since 0 is reserved for the hypervisor in FF-A */
+     int ret;
+ 
+-    if ( notif_enabled && notif_sri_irq < NR_GIC_SGI )
++    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+     {
+         /*
+          * An error here is unlikely since the primary CPU has already
+@@ -402,41 +394,41 @@ void ffa_notif_init(void)
+     int ret;
+ 
+     /* Only enable fw notification if all ABIs we need are supported */
+-    if ( !(ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_DESTROY) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_GET) &&
+-           ffa_fw_supports_fid(FFA_NOTIFICATION_INFO_GET_64)) )
+-        return;
+-
+-    arm_smccc_1_2_smc(&arg, &resp);
+-    if ( resp.a0 != FFA_SUCCESS_32 )
+-        return;
+-
+-    irq = resp.a2;
+-    notif_sri_irq = irq;
+-    if ( irq >= NR_GIC_SGI )
+-        irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
+-    ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
+-    if ( ret )
++    if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_DESTROY) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_GET) &&
++         ffa_fw_supports_fid(FFA_NOTIFICATION_INFO_GET_64) )
+     {
+-        printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-               irq, ret);
+-        return;
+-    }
++        arm_smccc_1_2_smc(&arg, &resp);
++        if ( resp.a0 != FFA_SUCCESS_32 )
++            return;
+ 
+-    notif_enabled = true;
++        irq = resp.a2;
++        notif_sri_irq = irq;
++        if ( irq >= NR_GIC_SGI )
++            irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
++        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
++        if ( ret )
++        {
++            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
++                   irq, ret);
++            return;
++        }
++        fw_notif_enabled = true;
++    }
+ }
+ 
+ int ffa_notif_domain_init(struct domain *d)
+ {
+     int32_t res;
+ 
+-    if ( !notif_enabled )
+-        return 0;
++    if ( fw_notif_enabled )
++    {
+ 
+-    res = ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_vcpus);
+-    if ( res )
+-        return -ENOMEM;
++        res = ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_vcpus);
++        if ( res )
++            return -ENOMEM;
++    }
+ 
+     return 0;
+ }
+@@ -447,6 +439,6 @@ void ffa_notif_domain_destroy(struct domain *d)
+      * Call bitmap_destroy even if bitmap create failed as the SPMC will
+      * return a DENIED error that we will ignore.
+      */
+-    if ( notif_enabled )
++    if ( fw_notif_enabled )
+         ffa_notification_bitmap_destroy(ffa_get_vm_id(d));
+ }
 -- 
 2.47.1
 
