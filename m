@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F43DC87FDB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 13:35:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1077627.1438674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 233A9C87FDB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 13:35:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1077628.1438683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulSgY-0003Zg-BA; Mon, 11 Aug 2025 13:35:34 +0000
+	id 1ulSgZ-0003oJ-Hn; Mon, 11 Aug 2025 13:35:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1077627.1438674; Mon, 11 Aug 2025 13:35:34 +0000
+Received: by outflank-mailman (output) from mailman id 1077628.1438683; Mon, 11 Aug 2025 13:35:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulSgY-0003ZZ-6V; Mon, 11 Aug 2025 13:35:34 +0000
-Received: by outflank-mailman (input) for mailman id 1077627;
- Mon, 11 Aug 2025 13:35:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ulSgZ-0003o9-EB; Mon, 11 Aug 2025 13:35:35 +0000
+Received: by outflank-mailman (input) for mailman id 1077628;
+ Mon, 11 Aug 2025 13:35:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6owi=2X=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1ulSgW-0002rn-Sj
- for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 13:35:32 +0000
+ id 1ulSgY-0003IJ-DZ
+ for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 13:35:34 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 0c852d79-76b8-11f0-b898-0df219b8e170;
- Mon, 11 Aug 2025 15:35:30 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 0e54fd77-76b8-11f0-a325-13f23c93f187;
+ Mon, 11 Aug 2025 15:35:33 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E08022641;
- Mon, 11 Aug 2025 06:35:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EF0EA2641;
+ Mon, 11 Aug 2025 06:35:24 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.55.159])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C992E3F63F;
- Mon, 11 Aug 2025 06:35:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D49253F63F;
+ Mon, 11 Aug 2025 06:35:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c852d79-76b8-11f0-b898-0df219b8e170
+X-Inumbo-ID: 0e54fd77-76b8-11f0-a325-13f23c93f187
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
@@ -53,30 +53,24 @@ Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v8 2/6] xen/arm: ffa: Rework partinfo_get implementation
-Date: Mon, 11 Aug 2025 15:34:58 +0200
-Message-ID: <f172763fa35c5b0d964d2a16d2740b24f2805741.1754899329.git.bertrand.marquis@arm.com>
+Subject: [PATCH v8 4/6] xen/arm: ffa: Add buffer full notification support
+Date: Mon, 11 Aug 2025 15:35:00 +0200
+Message-ID: <67db91dfbde26dd777b1575dda9bc83b0a676193.1754899329.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1754899329.git.bertrand.marquis@arm.com>
 References: <cover.1754899329.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch is in preparation for VM to VM support in order to do the
-changes on the SP handling part of partinfo_get before adding support
-for the VM part.
+Add support to raise a Rx buffer full notification to a VM.
+This function will be used for indirect message support between VM and
+is only activated if CONFIG_FFA_VM_TO_VM is selected.
 
-This patches is doing the following changes:
-- split partinfo_get into 3 functions to have the locking handling and
-  proper exit on error handled more clearly
-- add some potential overflow checks to validate the offset and sizes
-  passed by the VM on partinfo call.
-- Introduce a maximum number of SPs (for now set to 64) to prevent
-  holding the CPU for too long in case there would be a lot of
-  partitions in the secure world. The limit currently set is thought to
-  be realistic for most use cases as 64 secure partitions is a very high
-  number compared to current seen usage (more 3 or 4).
-- fix include ordering in ffa_private.h to be in alphabetic order
+Even if there are 32 framework notifications possible, right now only
+one is defined so the implementation is simplified to only handle the
+buffer full notification using a boolean. If other framework
+notifications have to be supported one day, the design will have to be
+modified to handle it properly.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
@@ -85,322 +79,163 @@ Acked-by: Julien Grall <jgrall@amazon.com>
 Changes in v8:
 - None
 Changes in v7:
-- add Julien A-b
+- Add Julien A-b
 Changes in v6:
-- add missing empty line before ffa_handle_partition_info_get
-- add Jens R-b
+- None
 Changes in v5:
-- patch added
+- None
+Changes in v4:
+- Add Jens R-b
+Changes in v3:
+- introduce a vm_pending boolean to track if VM notifications are
+  pending and allow to decorelate pending secure notifications from
+  pending vm ones
+- remove ifdef around boolean entries for notifications and make use of
+  IS_ENABLED instead of ifdefs when possible
+- Fix notification number signaled to VMs for buffer full to use the
+  proper GUEST_FFA_NOTIF_PEND_INTR_ID instead of the identifier received
+  from the SPMC.
+- Move back into this patch ffa_private.h part which was wrongly in the
+  patch for indirect messages between VM
+Changes in v2:
+- Switch ifdef to IS_ENABLED when possible
 ---
- xen/arch/arm/tee/ffa_partinfo.c | 202 +++++++++++++++++++-------------
- xen/arch/arm/tee/ffa_private.h  |  18 ++-
- 2 files changed, 132 insertions(+), 88 deletions(-)
+ xen/arch/arm/tee/ffa_notif.c   | 36 ++++++++++++++++++++++++++++------
+ xen/arch/arm/tee/ffa_private.h | 23 +++++++++++++++++++++-
+ 2 files changed, 52 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
-index c0510ceb8338..dfa0b23eaf38 100644
---- a/xen/arch/arm/tee/ffa_partinfo.c
-+++ b/xen/arch/arm/tee/ffa_partinfo.c
-@@ -63,9 +63,96 @@ static int32_t ffa_partition_info_get(uint32_t *uuid, uint32_t flags,
-     return ret;
- }
- 
--void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-+static int32_t ffa_get_sp_count(uint32_t *uuid, uint32_t *sp_count)
-+{
-+    uint32_t src_size;
-+
-+    return ffa_partition_info_get(uuid, FFA_PARTITION_INFO_GET_COUNT_FLAG,
-+                                  sp_count, &src_size);
-+}
-+
-+static int32_t ffa_get_sp_partinfo(uint32_t *uuid, uint32_t *sp_count,
-+                                   void *dst_buf, void *end_buf,
-+                                   uint32_t dst_size)
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index 00efaf8f7353..f6df2f15bb00 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -69,6 +69,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
  {
-     int32_t ret;
-+    uint32_t src_size, real_sp_count;
-+    void *src_buf = ffa_rx;
-+    uint32_t count = 0;
-+
-+    /* Do we have a RX buffer with the SPMC */
-+    if ( !ffa_rx )
-+        return FFA_RET_DENIED;
-+
-+    /* We need to use the RX buffer to receive the list */
-+    spin_lock(&ffa_rx_buffer_lock);
-+
-+    ret = ffa_partition_info_get(uuid, 0, &real_sp_count, &src_size);
-+    if ( ret )
-+        goto out;
-+
-+    /* We now own the RX buffer */
-+
-+    /* Validate the src_size we got */
-+    if ( src_size < sizeof(struct ffa_partition_info_1_0) ||
-+         src_size >= FFA_PAGE_SIZE )
-+    {
-+        ret = FFA_RET_NOT_SUPPORTED;
-+        goto out_release;
-+    }
-+
-+    /*
-+     * Limit the maximum time we hold the CPU by limiting the number of SPs.
-+     * We just ignore the extra ones as this is tested during init in
-+     * ffa_partinfo_init so the only possible reason is SP have been added
-+     * since boot.
-+     */
-+    if ( real_sp_count > FFA_MAX_NUM_SP )
-+        real_sp_count = FFA_MAX_NUM_SP;
-+
-+    /* Make sure the data fits in our buffer */
-+    if ( real_sp_count > (FFA_RXTX_PAGE_COUNT * FFA_PAGE_SIZE) / src_size )
-+    {
-+        ret = FFA_RET_NOT_SUPPORTED;
-+        goto out_release;
-+    }
-+
-+    for ( uint32_t sp_num = 0; sp_num < real_sp_count; sp_num++ )
-+    {
-+        struct ffa_partition_info_1_1 *fpi = src_buf;
-+
-+        /* filter out SP not following bit 15 convention if any */
-+        if ( FFA_ID_IS_SECURE(fpi->id) )
-+        {
-+            if ( dst_buf > (end_buf - dst_size) )
-+            {
-+                ret = FFA_RET_NO_MEMORY;
-+                goto out_release;
-+            }
-+
-+            memcpy(dst_buf, src_buf, MIN(src_size, dst_size));
-+            if ( dst_size > src_size )
-+                memset(dst_buf + src_size, 0, dst_size - src_size);
-+
-+            dst_buf += dst_size;
-+            count++;
-+        }
-+
-+        src_buf += src_size;
-+    }
-+
-+    *sp_count = count;
-+
-+out_release:
-+    ffa_hyp_rx_release();
-+out:
-+    spin_unlock(&ffa_rx_buffer_lock);
-+    return ret;
-+}
-+
-+void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-+{
-+    int32_t ret = FFA_RET_OK;
      struct domain *d = current->domain;
      struct ffa_ctx *ctx = d->arch.tee;
-     uint32_t flags = get_user_reg(regs, 5);
-@@ -75,8 +162,8 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-         get_user_reg(regs, 3),
-         get_user_reg(regs, 4),
-     };
--    uint32_t src_size, dst_size;
--    void *dst_buf;
-+    uint32_t dst_size = 0;
-+    void *dst_buf, *end_buf;
-     uint32_t ffa_sp_count = 0;
++    bool notif_pending;
  
-     /*
-@@ -89,31 +176,26 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-     else
-         dst_size = sizeof(struct ffa_partition_info_1_1);
- 
--    /*
--     * FF-A v1.0 has w5 MBZ while v1.1 allows
--     * FFA_PARTITION_INFO_GET_COUNT_FLAG to be non-zero.
--     *
--     * FFA_PARTITION_INFO_GET_COUNT is only using registers and not the
--     * rxtx buffer so do the partition_info_get directly.
--     */
--    if ( flags == FFA_PARTITION_INFO_GET_COUNT_FLAG &&
--         ctx->guest_vers == FFA_VERSION_1_1 )
-+    /* Only count requested */
-+    if ( flags )
+     if ( !notif_enabled )
      {
-+        /*
-+         * FF-A v1.0 has w5 MBZ while v1.1 allows
-+         * FFA_PARTITION_INFO_GET_COUNT_FLAG to be non-zero.
-+         */
-+        if ( ctx->guest_vers == FFA_VERSION_1_0 ||
-+                flags != FFA_PARTITION_INFO_GET_COUNT_FLAG )
-+        {
-+            ret = FFA_RET_INVALID_PARAMETERS;
-+            goto out;
-+        }
+@@ -76,7 +77,11 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    if ( test_and_clear_bool(ctx->notif.secure_pending) )
++    notif_pending = test_and_clear_bool(ctx->notif.secure_pending);
++    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
++        notif_pending |= test_and_clear_bool(ctx->notif.vm_pending);
 +
-         if ( ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
--            ret = ffa_partition_info_get(uuid, flags, &ffa_sp_count,
--                                        &src_size);
--        else
--            ret = FFA_RET_OK;
-+            ret = ffa_get_sp_count(uuid, &ffa_sp_count);
- 
-         goto out;
-     }
- 
--    if ( flags )
--    {
--        ret = FFA_RET_INVALID_PARAMETERS;
--        goto out;
--    }
--
-     if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) )
++    if ( notif_pending )
      {
-         /* Just give an empty partition list to the caller */
-@@ -121,80 +203,33 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-         goto out;
-     }
- 
-+    /* Get the RX buffer to write the list of partitions */
-     ret = ffa_rx_acquire(d);
-     if ( ret != FFA_RET_OK )
-         goto out;
- 
-     dst_buf = ctx->rx;
-+    end_buf = ctx->rx + ctx->page_count * FFA_PAGE_SIZE;
- 
--    if ( !ffa_rx )
--    {
--        ret = FFA_RET_DENIED;
--        goto out_rx_release;
--    }
--
--    spin_lock(&ffa_rx_buffer_lock);
--
--    ret = ffa_partition_info_get(uuid, 0, &ffa_sp_count, &src_size);
--
--    if ( ret )
--        goto out_rx_hyp_unlock;
-+    /* An entry should be smaller than a page */
-+    BUILD_BUG_ON(sizeof(struct ffa_partition_info_1_1) > FFA_PAGE_SIZE);
- 
-     /*
--     * ffa_partition_info_get() succeeded so we now own the RX buffer we
--     * share with the SPMC. We must give it back using ffa_hyp_rx_release()
--     * once we've copied the content.
-+     * Check for overflow and that we can at least store one entry.
-+     * page_count cannot be 0 so we have at least one page.
-      */
--
--    /* we cannot have a size smaller than 1.0 structure */
--    if ( src_size < sizeof(struct ffa_partition_info_1_0) )
--    {
--        ret = FFA_RET_NOT_SUPPORTED;
--        goto out_rx_hyp_release;
--    }
--
--    if ( ctx->page_count * FFA_PAGE_SIZE < ffa_sp_count * dst_size )
-+    if ( dst_buf >= end_buf || dst_buf > (end_buf - dst_size) )
-     {
--        ret = FFA_RET_NO_MEMORY;
--        goto out_rx_hyp_release;
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto out_rx_release;
-     }
- 
--    if ( ffa_sp_count > 0 )
--    {
--        uint32_t n, n_limit = ffa_sp_count;
--        void *src_buf = ffa_rx;
--
--        /* copy the secure partitions info */
--        for ( n = 0; n < n_limit; n++ )
+         /* A pending global notification for the guest */
+         ffa_set_regs(regs, FFA_SUCCESS_64, 0,
+@@ -93,6 +98,7 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
+     uint32_t recv = get_user_reg(regs, 1);
+     uint32_t flags = get_user_reg(regs, 2);
+     uint32_t w2 = 0;
+@@ -132,11 +138,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+          */
+         if ( ( flags  & FFA_NOTIF_FLAG_BITMAP_SP ) &&
+              ( flags & FFA_NOTIF_FLAG_BITMAP_SPM ) )
 -        {
--            struct ffa_partition_info_1_1 *fpi = src_buf;
+-                struct ffa_ctx *ctx = d->arch.tee;
 -
--            /* filter out SP not following bit 15 convention if any */
--            if ( FFA_ID_IS_SECURE(fpi->id) )
--            {
--                memcpy(dst_buf, src_buf, dst_size);
--                dst_buf += dst_size;
--            }
--            else
--                ffa_sp_count--;
-+    ret = ffa_get_sp_partinfo(uuid, &ffa_sp_count, dst_buf, end_buf,
-+                              dst_size);
- 
--            src_buf += src_size;
+-                ACCESS_ONCE(ctx->notif.secure_pending) = false;
 -        }
--    }
++            ACCESS_ONCE(ctx->notif.secure_pending) = false;
  
--out_rx_hyp_release:
--    ffa_hyp_rx_release();
--out_rx_hyp_unlock:
--    spin_unlock(&ffa_rx_buffer_lock);
- out_rx_release:
--    /*
--     * The calling VM RX buffer only contains data to be used by the VM if the
--     * call was successful, in which case the VM has to release the buffer
--     * once it has used the data.
--     * If something went wrong during the call, we have to release the RX
--     * buffer back to the SPMC as the VM will not do it.
--     */
--    if ( ret != FFA_RET_OK )
-+    if ( ret )
-         ffa_rx_release(d);
- out:
-     if ( ret )
-@@ -353,9 +388,10 @@ bool ffa_partinfo_init(void)
-         goto out;
+         arm_smccc_1_2_smc(&arg, &resp);
+         e = ffa_get_ret_code(&resp);
+@@ -156,6 +158,14 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+             w6 = resp.a6;
      }
  
--    if ( count >= UINT16_MAX )
-+    if ( count >= FFA_MAX_NUM_SP )
-     {
--        printk(XENLOG_ERR "ffa: Impossible number of SPs: %u\n", count);
-+        printk(XENLOG_ERR "ffa: More SPs than the maximum supported: %u - %u\n",
-+               count, FFA_MAX_NUM_SP);
-         goto out;
-     }
++    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) &&
++          flags & FFA_NOTIF_FLAG_BITMAP_HYP &&
++          test_and_clear_bool(ctx->notif.buff_full_pending) )
++    {
++        ACCESS_ONCE(ctx->notif.vm_pending) = false;
++        w7 = FFA_NOTIF_RX_BUFFER_FULL;
++    }
++
+     ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
+ }
  
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index c4cd65538908..0a9c1082db28 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -6,15 +6,15 @@
- #ifndef __FFA_PRIVATE_H__
- #define __FFA_PRIVATE_H__
+@@ -178,6 +188,20 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
+                            bitmap_hi);
+ }
  
-+#include <xen/bitmap.h>
- #include <xen/const.h>
--#include <xen/sizes.h>
--#include <xen/types.h>
--#include <xen/mm.h>
- #include <xen/list.h>
--#include <xen/spinlock.h>
-+#include <xen/mm.h>
- #include <xen/sched.h>
-+#include <xen/sizes.h>
-+#include <xen/spinlock.h>
- #include <xen/time.h>
--#include <xen/bitmap.h>
-+#include <xen/types.h>
- 
- /* Error codes */
- #define FFA_RET_OK                      0
-@@ -108,6 +108,14 @@
-  */
- #define FFA_CTX_TEARDOWN_DELAY          SECONDS(1)
- 
-+/*
-+ * The maximum number of Secure partitions we support for partinfo_get.
-+ * This prevents holding the CPU during potentially to long time during
-+ * a partinfo_get call. Value choosen seems realistic for any configuration
-+ * but can be incremented here if needed.
-+ */
-+#define FFA_MAX_NUM_SP                  64
++#ifdef CONFIG_FFA_VM_TO_VM
++void ffa_raise_rx_buffer_full(struct domain *d)
++{
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !ctx )
++        return;
++
++    ACCESS_ONCE(ctx->notif.buff_full_pending) = true;
++    if ( !test_and_set_bool(ctx->notif.vm_pending) )
++        vgic_inject_irq(d, d->vcpu[0], GUEST_FFA_NOTIF_PEND_INTR_ID, true);
++}
++#endif
 +
  /*
-  * We rely on the convention suggested but not mandated by the FF-A
-  * specification that secure world endpoint identifiers have the bit 15
+  * Extract a 16-bit ID (index n) from the successful return value from
+  * FFA_NOTIFICATION_INFO_GET_64 or FFA_NOTIFICATION_INFO_GET_32. IDs are
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index 5cb2b5171419..6dbdb200d840 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -218,6 +218,8 @@
+ #define FFA_NOTIF_INFO_GET_ID_COUNT_SHIFT   7
+ #define FFA_NOTIF_INFO_GET_ID_COUNT_MASK    0x1F
+ 
++#define FFA_NOTIF_RX_BUFFER_FULL        BIT(0, U)
++
+ /* Feature IDs used with FFA_FEATURES */
+ #define FFA_FEATURE_NOTIF_PEND_INTR     0x1U
+ #define FFA_FEATURE_SCHEDULE_RECV_INTR  0x2U
+@@ -303,9 +305,20 @@ struct ffa_mem_region {
+ struct ffa_ctx_notif {
+     /*
+      * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
+-     * pending global notifications.
++     * pending notifications from the secure world.
+      */
+     bool secure_pending;
++
++    /*
++     * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
++     * pending notifications from VMs (including framework ones).
++     */
++    bool vm_pending;
++
++    /*
++     * True if domain has buffer full notification pending
++     */
++    bool buff_full_pending;
+ };
+ 
+ struct ffa_ctx {
+@@ -419,6 +432,14 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs);
+ void ffa_handle_notification_get(struct cpu_user_regs *regs);
+ int ffa_handle_notification_set(struct cpu_user_regs *regs);
+ 
++#ifdef CONFIG_FFA_VM_TO_VM
++void ffa_raise_rx_buffer_full(struct domain *d);
++#else
++static inline void ffa_raise_rx_buffer_full(struct domain *d)
++{
++}
++#endif
++
+ void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid);
+ int32_t ffa_handle_msg_send2(struct cpu_user_regs *regs);
+ 
 -- 
 2.47.1
 
