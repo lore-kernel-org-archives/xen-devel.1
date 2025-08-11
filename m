@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D3ECA0EC4
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 20:49:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1077947.1438986 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1233CA0ED3
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Aug 2025 20:49:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1077943.1438946 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulZRw-0006Zt-Qr; Mon, 11 Aug 2025 20:48:56 +0000
+	id 1ulZRq-0005d6-Pi; Mon, 11 Aug 2025 20:48:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1077947.1438986; Mon, 11 Aug 2025 20:48:56 +0000
+Received: by outflank-mailman (output) from mailman id 1077943.1438946; Mon, 11 Aug 2025 20:48:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulZRw-0006Zg-ND; Mon, 11 Aug 2025 20:48:56 +0000
-Received: by outflank-mailman (input) for mailman id 1077947;
- Mon, 11 Aug 2025 20:48:55 +0000
+	id 1ulZRq-0005cz-Mt; Mon, 11 Aug 2025 20:48:50 +0000
+Received: by outflank-mailman (input) for mailman id 1077943;
+ Mon, 11 Aug 2025 20:48:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=21ui=2X=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1ulZRv-0005co-NW
- for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 20:48:55 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ id 1ulZRp-0005co-DK
+ for xen-devel@lists.xenproject.org; Mon, 11 Aug 2025 20:48:49 +0000
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [2a00:1450:4864:20::630])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9863a886-76f4-11f0-a327-13f23c93f187;
- Mon, 11 Aug 2025 22:48:55 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-61592ff5ebbso7470419a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 11 Aug 2025 13:48:55 -0700 (PDT)
+ id 94474483-76f4-11f0-a327-13f23c93f187;
+ Mon, 11 Aug 2025 22:48:48 +0200 (CEST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-af93c3bac8fso681521966b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Aug 2025 13:48:48 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.Dlink ([77.52.179.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-af91a0a3bd2sm2065710466b.54.2025.08.11.13.48.52
+ a640c23a62f3a-af91a0a3bd2sm2065710466b.54.2025.08.11.13.48.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Aug 2025 13:48:53 -0700 (PDT)
+ Mon, 11 Aug 2025 13:48:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9863a886-76f4-11f0-a327-13f23c93f187
+X-Inumbo-ID: 94474483-76f4-11f0-a327-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754945334; x=1755550134; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=t3qd7wn/+BTaUGKnbQ/zLRIfyUfmlIN1J0Bwt1qcE10=;
-        b=kB1jbKl/DEHDketgCQPVFERAjE0SPcL4FMHCQy5fbVRw5LmrtsnyRO09jBUxa8Lw2j
-         6cedYJTwrVdfJ3EGFyu9+bfNbOO77qvaizD9BkkZZpzyR6Iz8Xv3a1rJOG0DXlWNo6Py
-         ZR6V+iGxoXFv36zzKVIZxAKjEc1XurqSn2CBou86iDCbDsbLsdW9mFRiSQ3w0T6WWrK/
-         pHgqox5ueR8i1JAjTnaYuKY/hNNDRivpurbhGTlha4A2DksykKx3YYOKg1mWz82ThmrF
-         4ZXcGFXPXbESUal9r8RDMqba7SUywDq02PVOwz513H6tFQr3Mu4xvS5wbdQSrbOZyjm7
-         1KrQ==
+        d=gmail.com; s=20230601; t=1754945327; x=1755550127; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/zKmv3HZfbb0UnE05p/JthhUdKNDnTKWEZfs7hIFgJo=;
+        b=UWJU5gVekW7qkS0CqziR9lNZbSwEGMv7mZsGzdkBOtiZJes+SJGVWlrfmQtnqBXKCc
+         t+1R7gEmHJhJC7X3aFvGwJQFGSw1CMq3Inrk5AKX4ou9r7al6UVFh9cvt+Vd12UHVovU
+         l3BC2H9tVmM2k3WX+qdc7sqMNL9CA0EF0NeSyF3LCKtzjFWTFKp0vIFzuB9Izldy9tA0
+         rHm3ew02FZb6jqPAV5H1VCDA7OY+X9JDBzOsiMdRPkXQq2QRsE7uXaF4tweXFoVSx7je
+         LvxTEIWjONd8TiY1j4uW9NeGfp+PWkfInaTcBZDEHC0SVMBSQH53l7HVAC97Uy/GS4ko
+         Ferg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754945334; x=1755550134;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=t3qd7wn/+BTaUGKnbQ/zLRIfyUfmlIN1J0Bwt1qcE10=;
-        b=EPL/o3iYrKqiEthiryZKv0t/cBsGwjPMgaMx6O8uC9mFSdgjMFNjMF18L2hyiMnTOz
-         hTl+pBNuazZyEm2MxVLKhL2v6nwtgOTaweunBFfrzSQWrIzeJoDa4DsnmsR829ABj2fR
-         4ybWVi/GwPuEGtDblwUveu/Xhv03Nd/Q8t/o8ui7MWmJxtqAclhCIHNHlHgOw9xs8nCN
-         ai//jb0/lmweQ96LexpMjDk3FNXf1HJzn9AuAJoBfJEeL4MXzEnfWAsZocPSU6SawJ6g
-         8kjWMfzoLZmWkBwUw9s3Ego3KYL3ljBAB4J4yX9xHFVFVaIA5sEetAscWqUauK21VC51
-         bLVQ==
-X-Gm-Message-State: AOJu0Yw3dkpAqXNIjKBBgTZ6VhqzI5YAVd0S24i1NjA9YP9MAyekrw4i
-	Kx6UyenSfyvNyNR+lqYUgF+e/f0xlsMX8AmRuxIVLVyJpJlXpnjnIh9yJJQQXA==
-X-Gm-Gg: ASbGncvJbAAQ2sh/Tqv70UkTLjCU3M/KVB1L/gX6MyuMvBo5nPXCBueSXE79U/Xyuak
-	CHUeiNELwvjXojT6Y5AOG7i41iHW1kNliPNhOw1pE8pzB9VzdMFx3wOlDb0wOydFyLlnkR+y5Br
-	0HKH9pZuF7Bd9DOB0BskOFru8suJNzfsILKIotGeMGiLuI1X9pUaOi1j2/M1a8TrDn4tXCWR1Xi
-	nWudb40ViLxL4CKmSlbj3HCEJT6qt5g44osOL32XbNkvGPPuLBz78z0C/c+mn6SWBmTvkKWiLVb
-	5VZgpsY1Xgbux4hGYrlHgqRaYzhfBuZujodQrx1W3wx41GvkaMV7HeGdRxRcdJtbr0zQtA+gBNW
-	dj6oPJdJ2hkrJydp3b6dOjxXRp/aYCyGhzGM9JeVEpyl2bDVUT94qhxUKIbARiGBkdLg=
-X-Google-Smtp-Source: AGHT+IHyc4RdgDDPGpJFPoO/+5S4rhYm2JlYjM24gD7Vc95QPmXWGO9du6N0t/9Ny5v0LhPnvvAfWA==
-X-Received: by 2002:a17:907:60cc:b0:ae3:a812:a780 with SMTP id a640c23a62f3a-afa1e1ed74fmr73582466b.61.1754945333973;
-        Mon, 11 Aug 2025 13:48:53 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1754945327; x=1755550127;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/zKmv3HZfbb0UnE05p/JthhUdKNDnTKWEZfs7hIFgJo=;
+        b=Dl/6Z6xBJQZmugfKXEXLUMnAO0fK3WWrbMckeMsVOlcxMKDi9HlQdbybDuPOzsE4jt
+         JK0St6oh57ZHT+sq1aPIA4wWT76SQdSoivUIOTOetGeH9do7OQbxXjIXOLOUhuqQsLdX
+         1jyKZDspvAUFT8QpI3oQ3Yk/cR0fTtVCwb7L0i6C8s7rNt6jkY5pjBhvLeQLjFeIVsE4
+         HScJiUqChfxsgLgcZ3jIvzK/DewrcMCI07rjs1CEM5URTLMoIBnlQgDK9wUpzNNeCODr
+         eyxOvdzT/vZ0/49vGsi9of1NQobum0FYhlem+U5DLHncHFROhY1G7MApJ9OPrI8kQ4yR
+         e4DA==
+X-Gm-Message-State: AOJu0YxDZ6lGWVuUKT1yPmovWBJx0xXLeWW5Gc28nzxkVjPtQSxli2b+
+	fHGQJaREbxgXwMnwSQqbasus5SpAzsCaBGJbt93pvkWyOaO7ycDlVx6wOInzpA==
+X-Gm-Gg: ASbGncsbWwCm6ropOmJTuxzg4e++mXwdPvXV1yLqPLFil1HMh7q5ZTlvjuAzRMEihPM
+	VlCS2OxAdhbqUrdaUwj9CXAd/3zRNVn/JG2eMHapffXsQHu4ohE9MW5ITZhs7BMgr9tp4zH+YVp
+	p9GAoObxhAlb+Ulm2C97O8LGR594Ieq2bTb3DQCnbH0U2rPS7ZXBxdPHDSS5CBV/d5Og62Yhr6o
+	1L60T4VVmdMCZ0EymXUs9m6VU1Q9d5xW/nDCWnCngyYgC/+Dn8WRfW4SAiLODRQJvM4Q4T0SxB3
+	SdeOkyOGhpxUCtdqs2Jdm3Bget0HkXQHJflMiijjGOnTL29BX2KDcXMFUtetLaLxoB6u5euby1i
+	8I9IiFBfxqKL+iWgazmVc09mniU1VBCDf2JOF0qD946mNiSt07AuKz75iUtQFRS4HnNXty793H8
+	C+rA==
+X-Google-Smtp-Source: AGHT+IEJW8MGwUFBhpxdJITfiUDESQH6D/AB2pOrpUohXurxydBSsrKc775CXm4diSKn+ljG8uoRNg==
+X-Received: by 2002:a17:907:3e13:b0:af9:3341:8dd with SMTP id a640c23a62f3a-af9c64f23d6mr1464638866b.31.1754945326494;
+        Mon, 11 Aug 2025 13:48:46 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -90,145 +90,132 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 04/12] xen/arm: Prevent crash during disable_nonboot_cpus on suspend
-Date: Mon, 11 Aug 2025 23:48:00 +0300
-Message-ID: <98957da5c5068ae8340a21a9aa15a962905a8a22.1754943874.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 00/12] Add initial Xen Suspend-to-RAM support on ARM64
+Date: Mon, 11 Aug 2025 23:47:56 +0300
+Message-ID: <cover.1754943874.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1754943874.git.mykola_kvach@epam.com>
-References: <cover.1754943874.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-If we call disable_nonboot_cpus on ARM64 with system_state set
-to SYS_STATE_suspend, the following assertion will be triggered:
+This is part 2 of version 5 of the ARM Xen system suspend/resume patch
+series, based on earlier work by Mirela Simonovic and Mykyta Poturai.
+This version is ported to Xen master (4.21-unstable) and includes
+extensive improvements based on reviewer feedback. The patch series
+restructures code to improve robustness, maintainability, and implements
+system Suspend-to-RAM support on ARM64 hardware domains.
 
-```
-(XEN) [   25.582712] Disabling non-boot CPUs ...
-(XEN) [   25.587032] Assertion '!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1)' failed at common/xmalloc_tlsf.c:714
-[...]
-(XEN) [   25.975069] Xen call trace:
-(XEN) [   25.978353]    [<00000a000022e098>] xfree+0x130/0x1a4 (PC)
-(XEN) [   25.984314]    [<00000a000022e08c>] xfree+0x124/0x1a4 (LR)
-(XEN) [   25.990276]    [<00000a00002747d4>] release_irq+0xe4/0xe8
-(XEN) [   25.996152]    [<00000a0000278588>] time.c#cpu_time_callback+0x44/0x60
-(XEN) [   26.003150]    [<00000a000021d678>] notifier_call_chain+0x7c/0xa0
-(XEN) [   26.009717]    [<00000a00002018e0>] cpu.c#cpu_notifier_call_chain+0x24/0x48
-(XEN) [   26.017148]    [<00000a000020192c>] cpu.c#_take_cpu_down+0x28/0x34
-(XEN) [   26.023801]    [<00000a0000201944>] cpu.c#take_cpu_down+0xc/0x18
-(XEN) [   26.030281]    [<00000a0000225c5c>] stop_machine.c#stopmachine_action+0xbc/0xe4
-(XEN) [   26.038057]    [<00000a00002264bc>] tasklet.c#do_tasklet_work+0xb8/0x100
-(XEN) [   26.045229]    [<00000a00002268a4>] do_tasklet+0x68/0xb0
-(XEN) [   26.051018]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x194
-(XEN) [   26.057585]    [<00000a0000277e30>] start_secondary+0x21c/0x220
-(XEN) [   26.063978]    [<00000a0000361258>] 00000a0000361258
-```
+At a high-level, this patch series provides:
+ - Support for Host system suspend/resume via PSCI SYSTEM_SUSPEND (ARM64)
+ - Suspend/resume infrastructure for CPU context, timers, GICv2/GICv3 and IPMMU-VMSA
+ - Proper error propagation and recovery throughout the suspend/resume flow
 
-This happens because before invoking take_cpu_down via the stop_machine_run
-function on the target CPU, stop_machine_run requests
-the STOPMACHINE_DISABLE_IRQ state on that CPU. Releasing memory in
-the release_irq function then triggers the assertion:
+Key updates in this series:
+ - Introduced architecture-specific suspend/resume infrastructure (new `suspend.c`, `suspend.h`, low-level context save/restore in `head.S`)
+ - Integrated GICv2/GICv3 suspend and resume, including memory-backed context save/restore with error handling
+ - Added time and IRQ suspend/resume hooks, ensuring correct timer/interrupt state across suspend cycles
+ - Implemented proper PSCI SYSTEM_SUSPEND invocation and version checks
+ - Improved state management and recovery in error cases during suspend/resume
+ - Added support for IPMMU-VMSA context save/restore
 
-/*
- * Heap allocations may need TLB flushes which may require IRQs to be
- * enabled (except when only 1 PCPU is online).
- */
-
-This patch adds system state checks to guard calls to request_irq
-and release_irq. These calls are now skipped when system_state is
-SYS_STATE_{resume,suspend}, preventing unsafe operations during
-suspend/resume handling.
-
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in V4:
-  - removed the prior tasklet-based workaround in favor of a more
-    straightforward and safer solution
-  - reworked the approach by adding explicit system state checks around
-    request_irq and release_irq calls, skips these calls during suspend
+TODOs:
+ - Test system suspend with llc_coloring_enabled set and verify functionality
+ - Implement SMMUv3 suspend/resume handlers
+ - Enable "xl suspend" support on ARM
+ - Properly disable Xen timer watchdog from relevant services (only init.d left)
+ - Add suspend/resume CI test for ARM (QEMU if feasible)
+ - Investigate feasibility and need for implementing system suspend on ARM32
+---
+Changes introduced in V5:
+ - Add support for IPMMU-VMSA context save/restore
+ - Add support for GICv3 context save/restore
+ - Select HAS_SYSTEM_SUSPEND in ARM_64 instead of ARM
+ - Check llc_coloring_enabled instead of LLC_COLORING during the selection
+   of HAS_SYSTEM_SUSPEND config
+ - Call host_system_suspend from guest PSCI system suspend instead of
+   arch_domain_shutdown, reducing the complexity of the new code
+
+Changes introduced in V4:
+  - Remove the prior tasklet-based workaround in favor of a more
+    straightforward and safer solution.
+  - Rework the approach by adding explicit system state checks around
+    request_irq and release_irq calls; skip these calls during suspend
     and resume states to avoid unsafe memory operations when IRQs are
-    disabled
----
- xen/arch/arm/gic.c           |  6 ++++++
- xen/arch/arm/tee/ffa_notif.c |  2 +-
- xen/arch/arm/time.c          | 18 ++++++++++++------
- 3 files changed, 19 insertions(+), 7 deletions(-)
+    disabled.
+  - Prevent reinitialization of local IRQ descriptors on system resume.
+  - Restore the state of local IRQs during system resume for secondary CPUs.
+  - Drop code for saving and restoring VCPU context (see part 1 of the patch
+    series for details).
+  - Remove IOMMU suspend and resume calls until these features are implemented.
+  - Move system suspend logic to arch_domain_shutdown, invoked from
+    domain_shutdown.
+  - Add console_end_sync to the resume path after system suspend.
+  - Drop unnecessary DAIF masking; interrupts are already masked on resume.
+  - Remove leftover TLB flush instructions; flushing is handled in enable_mmu.
+  - Avoid setting x19 in hyp_resume as it is not required.
+  - Replace prepare_secondary_mm with set_init_ttbr, and call it from system_suspend.
+  - Produce a build-time error for ARM32 when CONFIG_SYSTEM_SUSPEND is enabled.
+  - Use register_t instead of uint64_t in the cpu_context structure.
+  - Apply minor fixes such as renaming functions, updating comments, and
+    modifying commit messages to accurately reflect the changes introduced
+    by this patch series.
 
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index a018bd7715..9856cb1592 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -388,6 +388,9 @@ void gic_dump_info(struct vcpu *v)
- 
- void init_maintenance_interrupt(void)
- {
-+    if ( system_state == SYS_STATE_resume )
-+        return;
-+
-     request_irq(gic_hw_ops->info->maintenance_irq, 0, maintenance_interrupt,
-                 "irq-maintenance", NULL);
- }
-@@ -461,6 +464,9 @@ static int cpu_gic_callback(struct notifier_block *nfb,
-     switch ( action )
-     {
-     case CPU_DYING:
-+        if ( system_state == SYS_STATE_suspend )
-+            break;
-+
-         /* This is reverting the work done in init_maintenance_interrupt */
-         release_irq(gic_hw_ops->info->maintenance_irq, NULL);
-         break;
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 00efaf8f73..06f715a82b 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -347,7 +347,7 @@ void ffa_notif_init_interrupt(void)
- {
-     int ret;
- 
--    if ( notif_enabled && notif_sri_irq < NR_GIC_SGI )
-+    if ( notif_enabled && notif_sri_irq < NR_GIC_SGI && system_state != SYS_STATE_resume )
-     {
-         /*
-          * An error here is unlikely since the primary CPU has already
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index ad984fdfdd..b2e07ade43 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -320,10 +320,13 @@ void init_timer_interrupt(void)
-     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
-     disable_physical_timers();
- 
--    request_irq(timer_irq[TIMER_HYP_PPI], 0, htimer_interrupt,
--                "hyptimer", NULL);
--    request_irq(timer_irq[TIMER_VIRT_PPI], 0, vtimer_interrupt,
--                   "virtimer", NULL);
-+    if ( system_state != SYS_STATE_resume )
-+    {
-+        request_irq(timer_irq[TIMER_HYP_PPI], 0, htimer_interrupt,
-+                    "hyptimer", NULL);
-+        request_irq(timer_irq[TIMER_VIRT_PPI], 0, vtimer_interrupt,
-+                    "virtimer", NULL);
-+    }
- 
-     check_timer_irq_cfg(timer_irq[TIMER_HYP_PPI], "hypervisor");
-     check_timer_irq_cfg(timer_irq[TIMER_VIRT_PPI], "virtual");
-@@ -338,8 +341,11 @@ static void deinit_timer_interrupt(void)
- {
-     disable_physical_timers();
- 
--    release_irq(timer_irq[TIMER_HYP_PPI], NULL);
--    release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
-+    if ( system_state != SYS_STATE_suspend )
-+    {
-+        release_irq(timer_irq[TIMER_HYP_PPI], NULL);
-+        release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
-+    }
- }
- 
- /* Wait a set number of microseconds */
+For earlier changelogs, please refer to the previous cover letters.
+
+Previous versions:
+  V1: https://marc.info/?l=xen-devel&m=154202231501850&w=2
+  V2: https://marc.info/?l=xen-devel&m=166514782207736&w=2
+  V3: https://lists.xen.org/archives/html/xen-devel/2025-03/msg00168.html
+
+Mirela Simonovic (6):
+  xen/arm: Add suspend and resume timer helpers
+  xen/arm: gic-v2: Implement GIC suspend/resume functions
+  xen/arm: Add support for system suspend triggered by hardware domain
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
+  xen/arm: Resume memory management on Xen resume
+  xen/arm: Save/restore context on suspend/resume
+
+Mykola Kvach (4):
+  xen/arm: gic-v3: Implement GICv3 suspend/resume functions
+  xen/arm: Prevent crash during disable_nonboot_cpus on suspend
+  xen/arm: irq: avoid local IRQ descriptors reinit on system resume
+  xen/arm: irq: Restore state of local IRQs during system resume
+
+Oleksandr Tyshchenko (2):
+  iommu/ipmmu-vmsa: Implement suspend/resume callbacks
+  xen/arm: Suspend/resume IOMMU on Xen suspend/resume
+
+ xen/arch/arm/Kconfig                     |   1 +
+ xen/arch/arm/Makefile                    |   1 +
+ xen/arch/arm/arm64/head.S                | 113 ++++++++++
+ xen/arch/arm/gic-v2.c                    | 154 +++++++++++++
+ xen/arch/arm/gic-v3.c                    | 233 ++++++++++++++++++++
+ xen/arch/arm/gic.c                       |  35 +++
+ xen/arch/arm/include/asm/gic.h           |  12 +
+ xen/arch/arm/include/asm/mm.h            |   2 +
+ xen/arch/arm/include/asm/psci.h          |   1 +
+ xen/arch/arm/include/asm/suspend.h       |  44 ++++
+ xen/arch/arm/include/asm/time.h          |   5 +
+ xen/arch/arm/irq.c                       |  48 ++++
+ xen/arch/arm/mmu/smpboot.c               |   2 +-
+ xen/arch/arm/psci.c                      |  23 +-
+ xen/arch/arm/suspend.c                   | 196 +++++++++++++++++
+ xen/arch/arm/tee/ffa_notif.c             |   2 +-
+ xen/arch/arm/time.c                      |  56 ++++-
+ xen/arch/arm/vpsci.c                     |  12 +-
+ xen/common/domain.c                      |   4 +
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 269 +++++++++++++++++++++++
+ 20 files changed, 1197 insertions(+), 16 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/suspend.h
+ create mode 100644 xen/arch/arm/suspend.c
+
 -- 
 2.48.1
 
