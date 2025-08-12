@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9046CA0EC4
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Aug 2025 09:55:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1078517.1439549 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B31C87FCB
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Aug 2025 09:56:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1078528.1439560 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulljE-0005Za-Q8; Tue, 12 Aug 2025 09:55:36 +0000
+	id 1ullkE-0006C3-A5; Tue, 12 Aug 2025 09:56:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1078517.1439549; Tue, 12 Aug 2025 09:55:36 +0000
+Received: by outflank-mailman (output) from mailman id 1078528.1439560; Tue, 12 Aug 2025 09:56:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulljE-0005ZT-NL; Tue, 12 Aug 2025 09:55:36 +0000
-Received: by outflank-mailman (input) for mailman id 1078517;
- Tue, 12 Aug 2025 09:55:35 +0000
+	id 1ullkE-0006Bw-6N; Tue, 12 Aug 2025 09:56:38 +0000
+Received: by outflank-mailman (input) for mailman id 1078528;
+ Tue, 12 Aug 2025 09:56:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WPHn=2Y=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1ulljD-0005LM-Gx
- for xen-devel@lists.xenproject.org; Tue, 12 Aug 2025 09:55:35 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=54Z7=2Y=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
+ id 1ullkC-0005LM-TE
+ for xen-devel@lists.xenproject.org; Tue, 12 Aug 2025 09:56:36 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2061f.outbound.protection.outlook.com
+ [2a01:111:f403:2413::61f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b472d4c-7762-11f0-b898-0df219b8e170;
- Tue, 12 Aug 2025 11:55:30 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id AD1C04EE0744;
- Tue, 12 Aug 2025 11:55:29 +0200 (CEST)
+ id 9ef28e7e-7762-11f0-b898-0df219b8e170;
+ Tue, 12 Aug 2025 11:56:31 +0200 (CEST)
+Received: from DM4PR12MB8451.namprd12.prod.outlook.com (2603:10b6:8:182::7) by
+ MN0PR12MB6030.namprd12.prod.outlook.com (2603:10b6:208:3ce::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9009.21; Tue, 12 Aug 2025 09:56:27 +0000
+Received: from DM4PR12MB8451.namprd12.prod.outlook.com
+ ([fe80::b04e:2da5:7189:4c4d]) by DM4PR12MB8451.namprd12.prod.outlook.com
+ ([fe80::b04e:2da5:7189:4c4d%7]) with mapi id 15.20.9009.018; Tue, 12 Aug 2025
+ 09:56:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,116 +49,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b472d4c-7762-11f0-b898-0df219b8e170
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1754992529;
-	b=QpGX9XTTywofc4gI0da7rNhdizWJH4bqW2CjHmFHECTw014W2wDtg5xYnoEsils3FkM/
-	 wX+Kz0MVJeGJUnZzZf4Yv8DBSX2A3+UyRNGFMpN6138btBKJV7xKzAfMSfMHmJ02XE0Ny
-	 rGML3AdHtq7mKLpQ1ZR0ob4nIC95GHO/EbVGGAFSH5jr09rMv1Yb46tpxpuDS8/vTuo/S
-	 4Fnu78cJkRtRGXpIG74YeOVoiZDnBaUgHrk+ahGNzfZAxhY5syDCbcmJ78PX7N26mNV6T
-	 5zscf9ZsHptPsJBP4/IIV96qW69MxQrykCA3JKRqNe08HLioiLal/PXj+DeMgnPaNjwyp
-	 xJb+2KYyfRee0rUIkQ9+dS1CJmG5m2/1oQlEXrO34GGnouzQ/RPzpv6A9GbR7a5u1GIPP
-	 nSXUydEORKT30HCCUorKuh3PqB5BqksleqX2eAAS9L9B+zCVa87UOMKBWkCW8B4qb50Lj
-	 9WgwWn8QtCHO9LPxN4X9UIH0hoInOgGMvJmvyHChSv/9cg4Mqp/WNMbbBUdae0UxmknYm
-	 R+QJ6b3M9viUqZm6lGPF8BqcoSe8OzkgJ6jLW1BkC9/DME4r2IRmxohvg90FxvuTo+1GR
-	 q3sEnBvjPH5H17EHXoHGv3YMqtOkzK9JnCaqzToh9EkGbyUZj9FyCl1+nlXI0lo=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1754992529;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=zgCLErdLpKs/wpfDwOMcpwvPL3ZgyljHBF8UneGlrrk=;
-	b=apfakXfvuo2VLpd9x2uPMSj0wBevjoB2MGfM/oUX9CEY2UDFqGqTFP3PsgOJgZgKYCk2
-	 Q/aiuz7u32rIVNR6tjMlh2qlttO4KEpIzD+uehfn9lJM351EzkmD3oFzQpCE72YVy3AbP
-	 cbnpALtTcXrotPn5FJrUUBzczhrRk4keFkER1i0xUY9ZEX5R7DuSBouo+nkKbS77az+3O
-	 J5/c4D34E069R8Vm7PqGtOYNe1HrTgcwNF57xeliH1QKWRFmNg1HIhq3tPuRDP8htShxy
-	 exvEDv6jy9IBs5vqYn2/yGc56Po/QA7wN6AaqnoSJvuBVXPYVBO6xtaM11UIeBZmua/Bm
-	 zpLmtT6oVYE+XHBMcRpprqsEZm0jYz0PN6S9DTIza3NnkQb2RILQs7j/AXjMHUw8RF5gE
-	 CDF3Z+lboSMolIi3oU4Vx4kCanZ+8rDg2Z8Ed25lCrmsuIIOugpquPWAq7JXVfBoQyWKF
-	 1IfpwWt3XM5ke1ZZkkCSZM2kiJlnpamFrlGjOHj4gBDwY3gkjTW2gn6w66mbWtK72xBfB
-	 rRCz9z0jraESNjsjDyhbhviEaQcmliPtT8YfHI75Q6khFgQ1G+us/NuOhpEY5I5Ty7Xct
-	 RMqIwiGc0q0TaO/7CgXe1yJeLHvDdIxeLA0Qd7RLablK/rZ0PbydPvjmmMhLvyQ=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1754992529; bh=bdPaF8/29s842X2nnDpdkkDi87DKbMEQlRA9W0U8szA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=PIKYRDEzwt75Bbg23O9+FdeNez3fTjNDCKTcT9gCgWZmTHewizYt2SrSlenLb6BFu
-	 RSNTULptYNMlNPAHcE8zxtfwMW5VlZXAxl5Xz/9SQi0bYl8rzSSuyEe60pPm7FRiHy
-	 j52kFIB4VsKVKot8dSC0rCcDoolw6aOFekZdT13U8ouRvgLNkMnK7SjGGSfuBz2bz8
-	 7E6cLxLBYF4RSRIRRJ/7PSo7lM99FMHYibLz1qruN1UQy0lI0AXOAWAbyEooApH+0g
-	 zqdBGLPpKBa3611rdSrhf3y/CKQDoQg1sfR0oDCendlID7ea+dO6NNN6soNYe0mzXB
-	 4m4Zzw8ibQJTQ==
-MIME-Version: 1.0
-Date: Tue, 12 Aug 2025 11:55:29 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+X-Inumbo-ID: 9ef28e7e-7762-11f0-b898-0df219b8e170
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FaVxNmJV1YVzQBB7fglqiqNP4zTSSEpIS6f0D4Lw9V4bQbYvwNRXcYBL7SReU+tFsFYo6OJ9J2taY+C8v4rQWFRrY1QX+56vFy+Q8axMO/3ZtwBpbGZOJ2b6bWyzK1pWYDdDEoxbzX9l6yCaRUb4Zr4Qg+3Tw1rc+tl7O9ADQTa5e2RnHQjx1S0edniRSa+r2t8WvY8aoo71csy6VidQb2iO4uUq8LPRToKNWvUR1R9q0XQS5AVpr8PlJ1Tok8Hi2J48SMtrv9O5AO0yDBrfD8EXwQ/xOWBZ1Kqk4syizzNYCItwq/wcuQ2K1NKanqms6mRnoP3ayFdI2e1y3iBlEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1WbWwBizKLr6sfHMYIQ0EX8TxERuC1qyHK2ECAKPHag=;
+ b=pNyLfo/OGspUAl6QXV3hvUEbjrELg0CP2emXNh2wqVSlYty5Edhv75aOZMuHZWQAxusrb1xrC8ionLq+CpO0iUSTLPyH03uyyLXShYtQ2aZteSCVQSC234aKTozKrnoN7Xe41U3E14HVl4T2L1uooCKYYlUk5zd/fX1b8pBXtfGHBRZfinY6chqVSCFHNa91bhxCTTDrB7rmzA311QzaSGOADFvfQAmC2oaL0DAKIWEbD0YdbaVAwTRL4HqXqL+KRGclyhxxg6RXQaxmAbf/opvDvxoXSdJnl8cddQgXnDHCLAN6lat6CGFLaSA80G09cUhu9D6oKBp9AI7TmAp7MQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1WbWwBizKLr6sfHMYIQ0EX8TxERuC1qyHK2ECAKPHag=;
+ b=rfOBtywXdn3vQwblMBnKmJe7dwU/kwgKzSYjN3P56IVzIgBuAnFjuJ/0pPhyIj195dk7eeCbXHmbrZKkIMFeIPFAv2C2JtjhhCbu6h3sUUQSl9TzsPvYTNZDLMBA5zMvHO5tPvbEEIoS1soLmE4Kos7I8I8WRMm8hR5pckLSMhA=
+From: "Penny, Zheng" <penny.zheng@amd.com>
 To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini
- <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
- <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Dmytro Prokopchuk1
- <dmytro_prokopchuk1@epam.com>
-Subject: Re: [PATCH] misra: add ASSERT_UNREACHABLE() in default clauses
-In-Reply-To: <c7f118a9-aea8-4f3a-8072-1bfa128d56b8@suse.com>
-References: <7cd71ed21383c189fedb3250ddde54a593f7f98b.1754944131.git.dmytro_prokopchuk1@epam.com>
- <a318ef2d5cad37d2fda0bb4a52c90964@bugseng.com>
- <c7f118a9-aea8-4f3a-8072-1bfa128d56b8@suse.com>
-Message-ID: <8ce96224f88513e4041d33248456fab3@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+CC: "Huang, Ray" <Ray.Huang@amd.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+Subject: RE: [PATCH v6 15/19] tools/cpufreq: introduce helper to deal with
+ CPPC-related parameters
+Thread-Topic: [PATCH v6 15/19] tools/cpufreq: introduce helper to deal with
+ CPPC-related parameters
+Thread-Index: AQHb8hcn+tWFoATVBE6qNhfRcQLSnbQ/8H0AgB8IiuA=
+Date: Tue, 12 Aug 2025 09:56:27 +0000
+Message-ID:
+ <DM4PR12MB845130C5A928F8B36DA5C4F9E12BA@DM4PR12MB8451.namprd12.prod.outlook.com>
+References: <20250711035106.2540522-1-Penny.Zheng@amd.com>
+ <20250711035106.2540522-16-Penny.Zheng@amd.com>
+ <9df16790-268b-4221-87ec-829ab4446872@suse.com>
+In-Reply-To: <9df16790-268b-4221-87ec-829ab4446872@suse.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Enabled=True;MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SetDate=2025-08-12T09:56:16.0000000Z;MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Name=Open
+ Source;MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_ContentBits=3;MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Method=Privileged
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR12MB8451:EE_|MN0PR12MB6030:EE_
+x-ms-office365-filtering-correlation-id: c245680e-2f30-4764-ea4a-08ddd9868170
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info:
+ =?utf-8?B?d0xlcnB5OUl1VmxrYWN5OEZTNE0zUE1PN3hUZFFJY0d1TUhwdUhCWUNGMDZo?=
+ =?utf-8?B?em9LbUVsUTdEVzVNVUZycG8wRFo0NkRmRnMxYkRUV096MXJsaElPcVAveVk2?=
+ =?utf-8?B?OHhlZGl0Ym9hMmw1STlTQWduQzg2NzZ6STJVQUtrRk9xRzV5ck5mQzU1bE1C?=
+ =?utf-8?B?a1JFR1kxcjc0UzdDZkc1eWZScFUyUEVKWWFUdVYvSmRuaEJpYllaVE5ma2JB?=
+ =?utf-8?B?bkp5MnVUU3lJOGY5WW9oc0V6MlVIZnJ4bVVnM2MwdVV4cm45VDk5Y3BKVGYx?=
+ =?utf-8?B?TWoycGVTVHhyN2syaHpXeDVmL0RjL3ZzQjFGT2plV2JMd0ZSVnozRGJoWER3?=
+ =?utf-8?B?SjF4bkl3YjRUaVdrMkw1VlFpRkFSbTRSa0ZqTkZGdWxpVVprT2txYnBQdlZq?=
+ =?utf-8?B?TEwyeUpFSGdrbHFLek9za05NNGNkdzZnbGhVdTV5RWFET29zK0Z2WGk2TEZY?=
+ =?utf-8?B?K0liLzVMZkU1RG9zNGNkZWpYMk5rYS9kN2ZVZzZxQTJjdG91NVpIaFhvRTlm?=
+ =?utf-8?B?TlpwbjhySU9iWHJjWVZadnBTeGhiVm5KbUZQVWRpYVRDNUtjc0hVdHo1cGhT?=
+ =?utf-8?B?TkNSOStraE5mMmFwNUhxSVh0TFU1aG1NdFVsM1NxU2UvTFFQOTFyM0RIbjlR?=
+ =?utf-8?B?bzlqWTd1NlJkbHBYb1NvcmRSaTl4VWQvUTFSZEI5d2dDb0Y3WlFYYjJHdmtw?=
+ =?utf-8?B?Q3hHTzAzSzlpaENmK2dCWGl2WnRhL01uOVNFdWoreHdmczl5NFN0QnRLTFFG?=
+ =?utf-8?B?L1BLOFVTTWhldEZVTTNMRVZxQWQrTDNmS0I5OEV5dGh1UlkwcWh4WHVBdzVU?=
+ =?utf-8?B?TmI0Yi9xdWNKc01QSWdlVnQ4bnBJbnlTL3prYStpRldsc3JPSkN2d0RxUjY2?=
+ =?utf-8?B?bUdRaC96cWoxK0Y3dllHQlNybnZ1RGQrMmp6U29qWkk5dmNpdmoyZTdHVWlw?=
+ =?utf-8?B?T3BvbGhDWW5KbVZ3OTR4S1hCRFNadWhpTFg5TmxpcjNBUnFJN0NzTzU1K1k4?=
+ =?utf-8?B?M05iZUxYK3JId1kvQmh4TS95dzJ0eFlFUk9TMUFwdTZjaTBaZTdaR1dpVElJ?=
+ =?utf-8?B?dTgrZTVPZHl6R3ZKTEpGRnJTWGhDdzY0UVNLZXVzTUFlbGpXd2hKb2dsVnRX?=
+ =?utf-8?B?eTJEZmYwNW93UUFxM0Z3czJQU0tzQ1k2bkNNME1BOVlhS3VpV0wyKzBGTUhn?=
+ =?utf-8?B?UFUzbzU0UStJQU91RDNlMytRM3JsQkhpelJkTDJKT3U3THNDSUZET242ZlNp?=
+ =?utf-8?B?a1JmR0VRRGV6djRpbGF0dDY5WVVCL3NTUUdjcmJNdHp3Q2J5KzNLMk1yNE9m?=
+ =?utf-8?B?M0FoWjRXLzBZVmxWRi9BOVZjMGZ5dURSV0RES0MyS2poaDlGcVFhZitsei82?=
+ =?utf-8?B?aEJWOHdNc1J5QWc0OHgxZERER0tIdVRLY0tFMGxSc0l1NlVoNFVBZVFyYXpr?=
+ =?utf-8?B?djYvZGwwaVQ0bnZCOUVXcEpvUzQwdmloZ2RZc3hKNk00Ky9HbXJkZWdPMWlN?=
+ =?utf-8?B?NlQ1TVoyUmZQR3BwMmYxTFUxeFFTUjhCbHJrUHlNRHZlOEI0MzNrMFJxUU9x?=
+ =?utf-8?B?VnJnNnhWdjFkUVpwUDZCYjBMNHJZSWh2M2JPU3RxWlQ0ZVcwMlJpbStlMTJK?=
+ =?utf-8?B?eVBsaWVQR2dubXdSUEtjZC9uSVByUG01Zm83RFhkNUp2amJTYy81dkk0bFhr?=
+ =?utf-8?B?YTFiMlEvc3JpMjVvV0NDdUhSVnRvSHMvVWk0dlpiUWpyZkh1Zk5NaEtEVldn?=
+ =?utf-8?B?WEFnaXhsdHFyczdRT0VIUnp3KytvYUx6NlphTFRGSXcvUUlkUkRVYVBsRnlV?=
+ =?utf-8?B?Qy92Tm82Nzc3end0enlUNHFkZ25QL0lNWjVncHBsZ0NVOWpsL0x6U0Q0anAz?=
+ =?utf-8?B?MU0xRjRpNmFOVVhLNjR4MDI3ZFA4cmpZWG9DY2ZDb1ZYSkZNMlZkckZTdHIy?=
+ =?utf-8?B?L3lJY3BaaEhIWmNCMHdPdUFDdDJrMXBOcGI4TWluRjJpOWNXTDBLdVR5byts?=
+ =?utf-8?B?bDFxelB6MzJRPT0=?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB8451.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?VVNNcitkQ2EzRGVXT1owOEQvWDJEd2loeWVaeXVOeXFFTnpPdFVOKys3WFhs?=
+ =?utf-8?B?eEpIb1hTdEVuZTZsbnE3d0lGenE2SG1xMU8rOWF5eVRVaExiSmdtd1pRUVk3?=
+ =?utf-8?B?eUZucHNtT3JtRC9obTJobVpHK3pMZEJHdUJ1MEIwbSs3L0c2SFc3Wm9RdW94?=
+ =?utf-8?B?QzRYNnNkZlJqZ2N3azlSWDJGaFBqVVUwTncydU15OTl4akluOStmc09iVWc3?=
+ =?utf-8?B?ZWF5SlFGNzdKTlJYVm5hTUgwUHlJaHZ2ZFpTR3lqWDV0NHgvcjhPb1R4dFdj?=
+ =?utf-8?B?ZWJsSW8xQVpURkh1cjlaZ1hxN0N2M2llSEkvS2pBNXpxZWN5VkozK2JCRUdM?=
+ =?utf-8?B?eEszbWNuUHd1RWVtWmdPUWc1dTMxUmlLYnlRcnd2akJ6Um5ZblJGREFVUGl0?=
+ =?utf-8?B?aUx6Q05uQzZ5czJ1VDhxSWFrYWxZOEpBYUo5ZVpPb3AvNzBvNzRBSjJkODJm?=
+ =?utf-8?B?ZDBkRDdsRXE5bXd2ay9jZkJYdTltd1VFSi9lVXNTc2h0U1RUTk93eE9BM0ow?=
+ =?utf-8?B?T1JqYzVZVUNTSGk1cTdyM1ZUWDdIVGJ2aW51SUVWNjFhS2lZc3lUblBiMnMw?=
+ =?utf-8?B?MWQ3aEdYdEs0NWU2TC9iM0d5eTl2UUR5UzhkaHFUbHNHZFc2ekVCUi9zWVRE?=
+ =?utf-8?B?Y0U2ejd0cHl3TWh1eDJ1NVhSenhTSnF4S1M0WXZHR0pDbXBUMVhCMEQwTWth?=
+ =?utf-8?B?WDhSbnlEUjNzRzBDTWdGTTFHL1BJYzNLOE5IR3BiOHE5RmNTYjF2VDkvTVNW?=
+ =?utf-8?B?RmxDWnduT2JBOXJsSzVIVzRJcmFXOWVCSnpJcDMrQUlpelRJL0lGakhqTzgr?=
+ =?utf-8?B?ekRGVldqMVM1RFlVaHhqb1M2WmR4M1pKZWJXWE9wOWRWRUxNOUR1S0RRRXll?=
+ =?utf-8?B?U0UyazErODlscDl6S1ZsNUk4WlNZVXl2NXgyUkY4K3ZGU1JLMTUvV1hPZG9Y?=
+ =?utf-8?B?TkFLQnhmWklMZlpEOGw3T1NHRXVzVlN0ai83Q2UxMXJUeWxrVkRTRUdJWkMw?=
+ =?utf-8?B?bjdPV29Rb2hFSktGTjBhMnk0dHc5U2l1OGY3T1BaZW53SHhhZ2UrMU00ck1T?=
+ =?utf-8?B?eHFaOVZZTW9KT1k2K2pWOC9BbUdOL1lGTFlHYVpyZ0NWcFZwamFLbzl0ZjlJ?=
+ =?utf-8?B?c2ZVSnNsYS9CbzczdVlKVyt3bk15bnhOazJVcVNhMVNxdjJTamhOeE9KUXo3?=
+ =?utf-8?B?NHkrclQrQVlXdmY2YklCRFB4aWlhU21YeHJGNDVGVDZFbDJseS9KY1lKOVkr?=
+ =?utf-8?B?NktvWTZnQjRza0FINXd1WEVUbXoyZWVhNUJkMjZIWW1KRXFwdnJoU3hNc1lJ?=
+ =?utf-8?B?aFBCYmRVbjdFK2FKVDFjK3lpeW1idXphTHNyOVBHZXJDR2dpdFR5VDRSbktX?=
+ =?utf-8?B?Rk8vN0JZRVV0MlJVUHhoU2Z1VVJKcjFhS1FiTkxnc0xsYUt2QTlKdEMwYzVL?=
+ =?utf-8?B?NTBrTHJIbDlremRJRm9pTE5WVzhnL0ZzZ091eWh5RmNGY0NiaUptdHk1MERL?=
+ =?utf-8?B?U202SzZnbWZEbWdTMVZvNWtFbXFJK3VMZmZJMFRSMG1jY0lVbU10U0RuUWV4?=
+ =?utf-8?B?dXJ5cDhmbG1JRUxmazlRRDEvSndRclJSMDNzRGYrMHJVaUxnK0QrYlMzVVlV?=
+ =?utf-8?B?bFErbTNkREpiYTR2S2h0Qk5ZN3NMSUFaNy9mK0w3ekZXeE9seVNNYmVjR2cw?=
+ =?utf-8?B?WGhSeU1HdXdYdXFaNU1Ick5GWlJ5d0RPZWpkMVJyakY3UmIwL3Q5SzhRWHRH?=
+ =?utf-8?B?UWw3c3RWUnNVaDk3R0dkNURMa1Ava3BHQTIyVEdUUVpmNERST2F5OXB4SUtU?=
+ =?utf-8?B?ZGIwdEUvbXU1SzM1K0tTUVBIc2hPOGlPeW9IYm5HZ2I1c3FvL0VsVWNmaDBp?=
+ =?utf-8?B?V0F1dklEYll2YTFTcnJmNTFmZnBLNXdOT3MwVVVNUmVMM29tMEprNzlJYnVM?=
+ =?utf-8?B?cHE5dFN5ME9ONDJ4UjhvT1ZXcnRyWmJXRWVGVE0wbHE0ZjN0L2ZPbXBlbEdo?=
+ =?utf-8?B?MDZVTXh0YTFudlYwWklaZ3RjMnJJT2JMRVpBRTNLK3VxYWo1N01UVUtyV1lo?=
+ =?utf-8?B?MUJFS0JlTC9CZFI2aEdod2ZFalNPM0RHL1FJNm9XMElDcVdrL1NzZ0J6SXRC?=
+ =?utf-8?Q?Yg/o=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB8451.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c245680e-2f30-4764-ea4a-08ddd9868170
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Aug 2025 09:56:27.6717
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: f/xbUWU6uyHui+babAe0N3EiLiUsVMcWAykn2d6MUyrezgoA9d74xv8+KnK0sUFYToIajK4vgwQAupca3bqOJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6030
 
-On 2025-08-12 09:25, Jan Beulich wrote:
-> On 11.08.2025 23:25, Nicola Vetrini wrote:
->> On 2025-08-11 22:30, Dmytro Prokopchuk1 wrote:
->>> --- a/xen/arch/arm/decode.c
->>> +++ b/xen/arch/arm/decode.c
->>> @@ -178,6 +178,9 @@ static int decode_thumb(register_t pc, struct
->>> hsr_dabt *dabt)
->>>          case 3: /* Signed byte */
->>>              update_dabt(dabt, reg, 0, true);
->>>              break;
->>> +        default:
->>> +            ASSERT_UNREACHABLE();
->>> +            break;
->>>          }
->>> 
->> 
->> I think this is fine, and there should be no problems with the break
->> being unreachable in some configs due to the call property for
->> ASSERT_UNREACHABLE
->> 
->> -doc_begin="Calls to function `__builtin_unreachable()' in the 
->> expansion
->> of macro
->> `ASSERT_UNREACHABLE()' are not considered to have the `noreturn'
->> property."
->> -call_properties+={"name(__builtin_unreachable)&&stmt(begin(any_exp(macro(name(ASSERT_UNREACHABLE)))))",
->> {"noreturn(false)"}}
->> -doc_end
-> 
-> Did you also see Julien's reply? Imo, to address a complaint from one
-> rule, another rule is then being violated: The "default" label itself
-> is unreachable here.
-> 
-> Jan
-
-Unfortunately only after sending my reply, however the point here is 
-that ASSERT_UNREACHABLE() is now considered as if it was not actually a 
-source of unreachability for any statement below (which is the case only 
-in configurations where NDEBUG is undefined iirc). This was done mainly 
-to allow stubs for Rule 2.1 so that their return statement just after an 
-ASSERT_UNREACHABLE() is not seen as a problem, but given that the 
-configuration to obtain that is global it influences treatment for other 
-rules as well, and its addition is relatively recent compared to the 
-text written in rules.rst.
-
--- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+W1B1YmxpY10NCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBKYW4gQmV1
+bGljaCA8amJldWxpY2hAc3VzZS5jb20+DQo+IFNlbnQ6IFdlZG5lc2RheSwgSnVseSAyMywgMjAy
+NSAxMTo1NiBQTQ0KPiBUbzogUGVubnksIFpoZW5nIDxwZW5ueS56aGVuZ0BhbWQuY29tPg0KPiBD
+YzogSHVhbmcsIFJheSA8UmF5Lkh1YW5nQGFtZC5jb20+OyBBbnRob255IFBFUkFSRA0KPiA8YW50
+aG9ueS5wZXJhcmRAdmF0ZXMudGVjaD47IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZw0K
+PiBTdWJqZWN0OiBSZTogW1BBVENIIHY2IDE1LzE5XSB0b29scy9jcHVmcmVxOiBpbnRyb2R1Y2Ug
+aGVscGVyIHRvIGRlYWwgd2l0aCBDUFBDLQ0KPiByZWxhdGVkIHBhcmFtZXRlcnMNCj4NCj4gT24g
+MTEuMDcuMjAyNSAwNTo1MSwgUGVubnkgWmhlbmcgd3JvdGU6DQo+ID4gTmV3IGhlbHBlcnMgcHJp
+bnRfY3BwY19wYXJhKCkgYW5kIGdldF9jcHVmcmVxX2NwcGMoKSBhcmUgaW50cm9kdWNlZCB0bw0K
+PiA+IGRlYWwgd2l0aCBDUFBDLXJlbGF0ZWQgcGFyYW1ldGVycywgaW4gb3JkZXIgdG8gYmUgcmUt
+dXNlZCB3aGVuIGxhdGVyDQo+ID4gZXhwb3J0aW5nIG5ldyBzdWItb3AgImdldC1jcHVmcmVxLWNw
+cGMiLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogUGVubnkgWmhlbmcgPFBlbm55LlpoZW5nQGFt
+ZC5jb20+DQo+DQo+IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+DQo+
+DQo+IEkgb25jZSBhZ2FpbiB3b25kZXIgd2hldGhlciB0aGlzIGNhbiBnbyBpbiByaWdodCBhd2F5
+LCBhaGVhZCBvZiBldmVyeXRoaW5nIHRoYXQNCj4gd2FudHMgcmUtc3VibWl0dGluZy4NCg0KVGh4
+LCBpdCBjb3VsZC4NCg0KPg0KPiBKYW4NCg==
 
