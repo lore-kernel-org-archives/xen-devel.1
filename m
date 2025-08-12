@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C88CCA0EE4
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Aug 2025 22:31:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1079223.1440198 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 752E3CA0EC4
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Aug 2025 22:31:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1079228.1440238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulxW4-00040W-4a; Tue, 12 Aug 2025 22:30:48 +0000
+	id 1ulxWJ-00054i-9y; Tue, 12 Aug 2025 22:31:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1079223.1440198; Tue, 12 Aug 2025 22:30:48 +0000
+Received: by outflank-mailman (output) from mailman id 1079228.1440238; Tue, 12 Aug 2025 22:31:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ulxW4-00040O-1t; Tue, 12 Aug 2025 22:30:48 +0000
-Received: by outflank-mailman (input) for mailman id 1079223;
- Tue, 12 Aug 2025 22:30:46 +0000
+	id 1ulxWJ-00054T-5p; Tue, 12 Aug 2025 22:31:03 +0000
+Received: by outflank-mailman (input) for mailman id 1079228;
+ Tue, 12 Aug 2025 22:31:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Th/E=2Y=proton.me=dmkhn@srs-se1.protection.inumbo.net>)
- id 1ulxW1-00040E-MB
- for xen-devel@lists.xenproject.org; Tue, 12 Aug 2025 22:30:46 +0000
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
+ id 1ulxWI-00040E-CQ
+ for xen-devel@lists.xenproject.org; Tue, 12 Aug 2025 22:31:02 +0000
+Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f9191939-77cb-11f0-b898-0df219b8e170;
- Wed, 13 Aug 2025 00:30:39 +0200 (CEST)
+ id 0603fb4d-77cc-11f0-b898-0df219b8e170;
+ Wed, 13 Aug 2025 00:31:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,74 +38,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9191939-77cb-11f0-b898-0df219b8e170
+X-Inumbo-ID: 0603fb4d-77cc-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=rdkogkimqfdone763z5pvxsccy.protonmail; t=1755037838; x=1755297038;
-	bh=RnabvmzkVwpyZCsyR8+acQx7GW5NK7lhyIZSIv7OOZA=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=UX5ol8ylFKa2JQHBlyDgCjqeHjlcLz47cvQ15O6FBX3z0yOpMjCx8qnZ0KPbmkwuE
-	 rIpO6w45l/TDLT1Esyp+GuDc6LoER2/psZQgHoaV02D0UvAnHfxlTcy+q69sSBWLbF
-	 VXXqswhgT/Ed/9QJCCecY6axyxGP4qYZ4sQY7H9b6Y1ntwxqWqRopLmMY7hUZB9+T3
-	 z2W176t3sDg9g4iC0Sj+zMVU1qUzac4eyTJ5f2bfv9Wlt3veQ9HdbNmm9krFZv03AC
-	 WTjyTjo7Kn+2VxxVsMiS9ErE2/+iRCQbUCT6GL7Nx0rw6xMBSUKCEBmTGI8ZZGWKln
-	 ME65U82Dc9Pxw==
-Date: Tue, 12 Aug 2025 22:30:32 +0000
+	s=k7oph3bys5gy3njxrbdir6chzq.protonmail; t=1755037860; x=1755297060;
+	bh=rdQXCVFze6KOyWq6nsTsOEIIqpuCBpCeg3Vc7jqqwuk=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=n4UmsL8nvb2m1Qlx7l9qbLyiqN3PiWpF+WLGYF8mRpW0wDpcEG67yUhcAO/SJ9KjQ
+	 vBVBE9fsxhEvPbed8s+6qYjCGVM49q93bXoncN0Ki7q6vwO0eAjWwvv5aSliASuGNf
+	 uaD9na1XDReGJ3go/NE61LgmMeNWHWgcfhFcFDa3/AgltYXpPWRgKcOpCn7PsNZysR
+	 qqQihcOtCf1D98OhlV7aNOQL0FwpAUsqx+kA76eP6XTjjua6ytSvSE14yAdOO2DzKp
+	 03yN43VdG/15KusPNCNK5DsSJFpQIYiHspAsi/UDJ0POqkAVps/nnJawdyWGtfdsUt
+	 FL+ii1AgiSuoA==
+Date: Tue, 12 Aug 2025 22:30:55 +0000
 To: xen-devel@lists.xenproject.org
 From: dmkhn@proton.me
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v16 0/4] xen/domain: domain ID allocation
-Message-ID: <20250812223024.2364749-1-dmukhin@ford.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org, dmukhin@ford.com, Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v16 4/4] xen/domain: update create_dom0() messages
+Message-ID: <20250812223024.2364749-5-dmukhin@ford.com>
+In-Reply-To: <20250812223024.2364749-1-dmukhin@ford.com>
+References: <20250812223024.2364749-1-dmukhin@ford.com>
 Feedback-ID: 123220910:user:proton
-X-Pm-Message-ID: 2ee4c6fe43d00d1f6651570f5c9895eb8ded4b63
+X-Pm-Message-ID: 988fb461b15465d53a24828d95a121f315ef5de8
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Patch 1 introduces new domid_{alloc,free} calls.
-Patch 2 is a prep change for domain ID allocator test.
-Patch 3 introduces some basic testing for domain ID allocator.
-Patch 4 adjusts create_dom0() messages (use %pd).
+From: Denis Mukhin <dmukhin@ford.com>=20
 
-Link to v15: https://lore.kernel.org/xen-devel/20250809170747.1836880-1-dmu=
-khin@ford.com/
-Link to CI: https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/1=
-980989231
+Use %pd for domain identification in error/panic messages in create_dom0().
 
-Denis Mukhin (4):
-  xen/domain: unify domain ID allocation
-  tools/include: move xc_bitops.h to xen-tools/bitops.h
-  tools/tests: introduce unit tests for domain ID allocator
-  xen/domain: update create_dom0() messages
+No functional change.
 
- .../xen-tools/bitops.h}                       | 16 +++-
- tools/libs/ctrl/xc_misc.c                     | 13 +--
- tools/libs/guest/xg_dom_elfloader.c           |  3 +-
- tools/libs/guest/xg_dom_hvmloader.c           |  3 +-
- tools/libs/guest/xg_private.h                 |  2 +-
- tools/libs/guest/xg_sr_common.h               |  3 +-
- tools/tests/Makefile                          |  1 +
- tools/tests/domid/.gitignore                  |  3 +
- tools/tests/domid/Makefile                    | 84 ++++++++++++++++
- tools/tests/domid/harness.h                   | 54 +++++++++++
- tools/tests/domid/test-domid.c                | 93 ++++++++++++++++++
- xen/arch/arm/domain_build.c                   | 13 ++-
- xen/arch/x86/setup.c                          | 11 ++-
- xen/common/Makefile                           |  1 +
- xen/common/device-tree/dom0less-build.c       | 15 +--
- xen/common/domain.c                           |  2 +
- xen/common/domctl.c                           | 43 ++-------
- xen/common/domid.c                            | 95 +++++++++++++++++++
- xen/include/xen/domain.h                      |  3 +
- xen/lib/find-next-bit.c                       |  5 +
- 20 files changed, 397 insertions(+), 66 deletions(-)
- rename tools/{libs/ctrl/xc_bitops.h =3D> include/xen-tools/bitops.h} (84%)
- create mode 100644 tools/tests/domid/.gitignore
- create mode 100644 tools/tests/domid/Makefile
- create mode 100644 tools/tests/domid/harness.h
- create mode 100644 tools/tests/domid/test-domid.c
- create mode 100644 xen/common/domid.c
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+Changes since v15:
+- n/a
+---
+ xen/arch/arm/domain_build.c | 6 +++---
+ xen/arch/x86/setup.c        | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index aca35b8961d6..670f634b8b0d 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2084,14 +2084,14 @@ void __init create_dom0(void)
+         panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0));
+=20
+     if ( llc_coloring_enabled && (rc =3D dom0_set_llc_colors(dom0)) )
+-        panic("Error initializing LLC coloring for domain 0 (rc =3D %d)\n"=
+, rc);
++        panic("Error initializing LLC coloring for %pd (rc =3D %d)\n", dom=
+0, rc);
+=20
+     if ( vcpu_create(dom0, 0) =3D=3D NULL )
+-        panic("Error creating domain 0 vcpu0\n");
++        panic("Error creating %pdv0\n", dom0);
+=20
+     rc =3D construct_dom0(dom0);
+     if ( rc )
+-        panic("Could not set up DOM0 guest OS (rc =3D %d)\n", rc);
++        panic("Could not set up %pd guest OS (rc =3D %d)\n", dom0, rc);
+=20
+     set_xs_domain(dom0);
+ }
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 398da734c0c5..bf21c55f7193 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1084,7 +1084,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
+=20
+         if ( (strlen(acpi_param) =3D=3D 0) && acpi_disabled )
+         {
+-            printk("ACPI is disabled, notifying Domain 0 (acpi=3Doff)\n");
++            printk("ACPI is disabled, notifying %pd (acpi=3Doff)\n", d);
+             safe_strcpy(acpi_param, "off");
+         }
+=20
+@@ -1099,7 +1099,7 @@ static struct domain *__init create_dom0(struct boot_=
+info *bi)
+=20
+     bd->d =3D d;
+     if ( construct_dom0(bd) !=3D 0 )
+-        panic("Could not construct domain 0\n");
++        panic("Could not construct %pd\n", d);
+=20
+     bd->cmdline =3D NULL;
+     xfree(cmdline);
 --=20
 2.34.1
 
