@@ -4,39 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FDACA0ED1
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 09:39:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1081180.1441309 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 260CBCA0EE4
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 10:14:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1081223.1441329 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umUQs-00067s-0Y; Thu, 14 Aug 2025 09:39:38 +0000
+	id 1umUy7-0003TY-LE; Thu, 14 Aug 2025 10:13:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1081180.1441309; Thu, 14 Aug 2025 09:39:37 +0000
+Received: by outflank-mailman (output) from mailman id 1081223.1441329; Thu, 14 Aug 2025 10:13:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umUQr-00067l-TW; Thu, 14 Aug 2025 09:39:37 +0000
-Received: by outflank-mailman (input) for mailman id 1081180;
- Thu, 14 Aug 2025 09:39:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BVY3=22=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1umUQq-00067d-O6
- for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 09:39:36 +0000
-Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 93fd16d9-78f2-11f0-a328-13f23c93f187;
- Thu, 14 Aug 2025 11:39:35 +0200 (CEST)
-Received: from mail.maildlp.com (unknown [172.19.88.214])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4c2gG93jG7z2dMHD;
- Thu, 14 Aug 2025 17:40:33 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
- by mail.maildlp.com (Postfix) with ESMTPS id 460C11A016C;
- Thu, 14 Aug 2025 17:39:29 +0800 (CST)
-Received: from [10.67.109.254] (10.67.109.254) by
- dggpemf500011.china.huawei.com (7.185.36.131) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 14 Aug 2025 17:39:27 +0800
+	id 1umUy7-0003TR-IS; Thu, 14 Aug 2025 10:13:59 +0000
+Received: by outflank-mailman (input) for mailman id 1081223;
+ Thu, 14 Aug 2025 10:13:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Hncw=22=kernel.org=leon@srs-se1.protection.inumbo.net>)
+ id 1umUy5-0003Sq-VD
+ for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 10:13:57 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 620f6670-78f7-11f0-b898-0df219b8e170;
+ Thu, 14 Aug 2025 12:13:55 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id DEC1444F83;
+ Thu, 14 Aug 2025 10:13:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08B60C4CEED;
+ Thu, 14 Aug 2025 10:13:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,193 +43,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93fd16d9-78f2-11f0-a328-13f23c93f187
-Message-ID: <04df941a-f62d-e640-6619-e79dc88114b3@huawei.com>
-Date: Thu, 14 Aug 2025 17:39:27 +0800
+X-Inumbo-ID: 620f6670-78f7-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755166433;
+	bh=mXPBKGOTAXMaA8YnIACrT4VeK6ColaZH6f/lOi0T5+M=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=WhF8V3MQY1kDGquxRYbh0NmsCB2Br/5DNiI2oZxdSf0D7/1nzwXONLwHh3TQyJgYo
+	 Zi4hNVXYHJbSNRl18JzHH5ePFjcnBukBnVvwIpOjEfuvBdbkdLDOz++Dx7brj0zL08
+	 Z5yYKodFOLJKulPacHVmSFMdKJ+QXiC45zTRXFB7rXffkQrKIZgH0rJ7pT46IfLBpS
+	 Omdc/djNuuIR/4wGVQ5lnMIWcYp+7ClehysztY3r0y0VbEWf8WYVok6B/wxvNx+zTH
+	 hNMj5f2hrXhEDdzZJyn9hiO1cyolHcCJYmcJAvBOtiNMyKf85U/AhAwv9g4tigIlCj
+	 wyOBJ0QRoptAQ==
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Leon Romanovsky <leonro@nvidia.com>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Hellwig <hch@lst.de>,
+	Danilo Krummrich <dakr@kernel.org>,
+	iommu@lists.linux.dev,
+	Jason Wang <jasowang@redhat.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Joerg Roedel <joro@8bytes.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Juergen Gross <jgross@suse.com>,
+	kasan-dev@googlegroups.com,
+	Keith Busch <kbusch@kernel.org>,
+	linux-block@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-nvme@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-trace-kernel@vger.kernel.org,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	rust-for-linux@vger.kernel.org,
+	Sagi Grimberg <sagi@grimberg.me>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	virtualization@lists.linux.dev,
+	Will Deacon <will@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v2 02/16] iommu/dma: implement DMA_ATTR_MMIO for dma_iova_link().
+Date: Thu, 14 Aug 2025 13:13:20 +0300
+Message-ID: <4f39936e5a7319a848b1eebffe928c251e2ec0d6.1755153054.git.leon@kernel.org>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1755153054.git.leon@kernel.org>
+References: <cover.1755153054.git.leon@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.0
-Subject: Re: [PATCH -next v7 0/7] arm64: entry: Convert to generic irq entry
-Content-Language: en-US
-To: Mark Rutland <mark.rutland@arm.com>
-CC: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
-	<sstabellini@kernel.org>, <puranjay@kernel.org>, <broonie@kernel.org>,
-	<mbenes@suse.cz>, <ryan.roberts@arm.com>, <akpm@linux-foundation.org>,
-	<chenl311@chinatelecom.cn>, <ada.coupriediaz@arm.com>,
-	<anshuman.khandual@arm.com>, <kristina.martsenko@arm.com>,
-	<liaochang1@huawei.com>, <ardb@kernel.org>, <leitao@debian.org>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-	<xen-devel@lists.xenproject.org>
-References: <20250729015456.3411143-1-ruanjinjie@huawei.com>
- <aJsjQsDZjhG8oiK-@J2N7QTR9R3>
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-In-Reply-To: <aJsjQsDZjhG8oiK-@J2N7QTR9R3>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.67.109.254]
-X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
- dggpemf500011.china.huawei.com (7.185.36.131)
 
+From: Leon Romanovsky <leonro@nvidia.com>
 
+This will replace the hacky use of DMA_ATTR_SKIP_CPU_SYNC to avoid
+touching the possibly non-KVA MMIO memory.
 
-On 2025/8/12 19:19, Mark Rutland wrote:
-> Hi,
-> 
-> This is looking pretty good now, thanks for continuing to work on this!
-> 
-> I've left a couple of minor comments, and Ada has left a few more. If
-> you're able to address those and respin atop v6.17-rc1, I think we can
-> start figuring out how to queue this.
+Also correct the incorrect caching attribute for the IOMMU, MMIO
+memory should not be cachable inside the IOMMU mapping or it can
+possibly create system problems. Set IOMMU_MMIO for DMA_ATTR_MMIO.
 
-Sure，I will revise these review comments based on v6.17-rc1 and release
-a new version after local testing.
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ drivers/iommu/dma-iommu.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-> 
-> Mark.
-> 
-> On Tue, Jul 29, 2025 at 09:54:49AM +0800, Jinjie Ruan wrote:
->> Currently, x86, Riscv, Loongarch use the generic entry. Also convert
->> arm64 to use the generic entry infrastructure from kernel/entry/*.
->> The generic entry makes maintainers' work easier and codes more elegant,
->> which will make PREEMPT_DYNAMIC and PREEMPT_LAZY use the generic entry
->> common code and remove a lot of duplicate code.
->>
->> Since commit a70e9f647f50 ("entry: Split generic entry into generic
->> exception and syscall entry") split the generic entry into generic irq
->> entry and generic syscall entry, it is time to convert arm64 to use
->> the generic irq entry. And ARM64 will be completely converted to generic
->> entry in the upcoming patch series.
->>
->> The main convert steps are as follows:
->> - Split generic entry into generic irq entry and generic syscall to
->>   make the single patch more concentrated in switching to one thing.
->> - Make arm64 easier to use irqentry_enter/exit().
->> - Make arm64 closer to the PREEMPT_DYNAMIC code of generic entry.
->> - Switch to generic irq entry.
->>
->> It was tested ok with following test cases on QEMU virt platform:
->>  - Perf tests.
->>  - Different `dynamic preempt` mode switch.
->>  - Pseudo NMI tests.
->>  - Stress-ng CPU stress test.
->>  - MTE test case in Documentation/arch/arm64/memory-tagging-extension.rst
->>    and all test cases in tools/testing/selftests/arm64/mte/*.
->>
->> The test QEMU configuration is as follows:
->>
->> 	qemu-system-aarch64 \
->> 		-M virt,gic-version=3,virtualization=on,mte=on \
->> 		-cpu max,pauth-impdef=on \
->> 		-kernel Image \
->> 		-smp 8,sockets=1,cores=4,threads=2 \
->> 		-m 512m \
->> 		-nographic \
->> 		-no-reboot \
->> 		-device virtio-rng-pci \
->> 		-append "root=/dev/vda rw console=ttyAMA0 kgdboc=ttyAMA0,115200 \
->> 			earlycon preempt=voluntary irqchip.gicv3_pseudo_nmi=1" \
->> 		-drive if=none,file=images/rootfs.ext4,format=raw,id=hd0 \
->> 		-device virtio-blk-device,drive=hd0 \
->>
->> Changes in v7:
->> - Rebased on v6.16-rc7 and remove the merged first patch.
->> - Update the commit message.
->>
->> Changes in v6:
->> - Rebased on 6.14 rc2 next.
->> - Put the syscall bits aside and split it out.
->> - Have the split patch before the arm64 changes.
->> - Merge some tightly coupled patches.
->> - Adjust the order of some patches to make them more reasonable.
->> - Define regs_irqs_disabled() by inline function.
->> - Define interrupts_enabled() in terms of regs_irqs_disabled().
->> - Delete the fast_interrupts_enabled() macro.
->> - irqentry_state_t -> arm64_irqentry_state_t.
->> - Remove arch_exit_to_user_mode_prepare() and pull local_daif_mask() later
->>   in the arm64 exit sequence
->> - Update the commit message.
->>
->> Changes in v5:
->> - Not change arm32 and keep inerrupts_enabled() macro for gicv3 driver.
->> - Move irqentry_state definition into arch/arm64/kernel/entry-common.c.
->> - Avoid removing the __enter_from_*() and __exit_to_*() wrappers.
->> - Update "irqentry_state_t ret/irq_state" to "state"
->>   to keep it consistently.
->> - Use generic irq entry header for PREEMPT_DYNAMIC after split
->>   the generic entry.
->> - Also refactor the ARM64 syscall code.
->> - Introduce arch_ptrace_report_syscall_entry/exit(), instead of
->>   arch_pre/post_report_syscall_entry/exit() to simplify code.
->> - Make the syscall patches clear separation.
->> - Update the commit message.
->>
->> Changes in v4:
->> - Rework/cleanup split into a few patches as Mark suggested.
->> - Replace interrupts_enabled() macro with regs_irqs_disabled(), instead
->>   of left it here.
->> - Remove rcu and lockdep state in pt_regs by using temporary
->>   irqentry_state_t as Mark suggested.
->> - Remove some unnecessary intermediate functions to make it clear.
->> - Rework preempt irq and PREEMPT_DYNAMIC code
->>   to make the switch more clear.
->> - arch_prepare_*_entry/exit() -> arch_pre_*_entry/exit().
->> - Expand the arch functions comment.
->> - Make arch functions closer to its caller.
->> - Declare saved_reg in for block.
->> - Remove arch_exit_to_kernel_mode_prepare(), arch_enter_from_kernel_mode().
->> - Adjust "Add few arch functions to use generic entry" patch to be
->>   the penultimate.
->> - Update the commit message.
->> - Add suggested-by.
->>
->> Changes in v3:
->> - Test the MTE test cases.
->> - Handle forget_syscall() in arch_post_report_syscall_entry()
->> - Make the arch funcs not use __weak as Thomas suggested, so move
->>   the arch funcs to entry-common.h, and make arch_forget_syscall() folded
->>   in arch_post_report_syscall_entry() as suggested.
->> - Move report_single_step() to thread_info.h for arm64
->> - Change __always_inline() to inline, add inline for the other arch funcs.
->> - Remove unused signal.h for entry-common.h.
->> - Add Suggested-by.
->> - Update the commit message.
->>
->> Changes in v2:
->> - Add tested-by.
->> - Fix a bug that not call arch_post_report_syscall_entry() in
->>   syscall_trace_enter() if ptrace_report_syscall_entry() return not zero.
->> - Refactor report_syscall().
->> - Add comment for arch_prepare_report_syscall_exit().
->> - Adjust entry-common.h header file inclusion to alphabetical order.
->> - Update the commit message.
->>
->> Jinjie Ruan (7):
->>   arm64: ptrace: Replace interrupts_enabled() with regs_irqs_disabled()
->>   arm64: entry: Refactor the entry and exit for exceptions from EL1
->>   arm64: entry: Rework arm64_preempt_schedule_irq()
->>   arm64: entry: Use preempt_count() and need_resched() helper
->>   arm64: entry: Refactor preempt_schedule_irq() check code
->>   arm64: entry: Move arm64_preempt_schedule_irq() into
->>     __exit_to_kernel_mode()
->>   arm64: entry: Switch to generic IRQ entry
->>
->>  arch/arm64/Kconfig                    |   1 +
->>  arch/arm64/include/asm/daifflags.h    |   2 +-
->>  arch/arm64/include/asm/entry-common.h |  56 ++++
->>  arch/arm64/include/asm/preempt.h      |   2 -
->>  arch/arm64/include/asm/ptrace.h       |  13 +-
->>  arch/arm64/include/asm/xen/events.h   |   2 +-
->>  arch/arm64/kernel/acpi.c              |   2 +-
->>  arch/arm64/kernel/debug-monitors.c    |   2 +-
->>  arch/arm64/kernel/entry-common.c      | 411 +++++++++-----------------
->>  arch/arm64/kernel/sdei.c              |   2 +-
->>  arch/arm64/kernel/signal.c            |   3 +-
->>  kernel/entry/common.c                 |  16 +-
->>  12 files changed, 217 insertions(+), 295 deletions(-)
->>  create mode 100644 arch/arm64/include/asm/entry-common.h
->>
->> -- 
->> 2.34.1
->>
-> 
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index ea2ef53bd4fe..e1185ba73e23 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -724,7 +724,12 @@ static int iommu_dma_init_domain(struct iommu_domain *domain, struct device *dev
+ static int dma_info_to_prot(enum dma_data_direction dir, bool coherent,
+ 		     unsigned long attrs)
+ {
+-	int prot = coherent ? IOMMU_CACHE : 0;
++	int prot;
++
++	if (attrs & DMA_ATTR_MMIO)
++		prot = IOMMU_MMIO;
++	else
++		prot = coherent ? IOMMU_CACHE : 0;
+ 
+ 	if (attrs & DMA_ATTR_PRIVILEGED)
+ 		prot |= IOMMU_PRIV;
+@@ -1838,12 +1843,13 @@ static int __dma_iova_link(struct device *dev, dma_addr_t addr,
+ 		unsigned long attrs)
+ {
+ 	bool coherent = dev_is_dma_coherent(dev);
++	int prot = dma_info_to_prot(dir, coherent, attrs);
+ 
+-	if (!coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
++	if (!coherent && !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO)))
+ 		arch_sync_dma_for_device(phys, size, dir);
+ 
+ 	return iommu_map_nosync(iommu_get_dma_domain(dev), addr, phys, size,
+-			dma_info_to_prot(dir, coherent, attrs), GFP_ATOMIC);
++			prot, GFP_ATOMIC);
+ }
+ 
+ static int iommu_dma_iova_bounce_and_link(struct device *dev, dma_addr_t addr,
+@@ -1949,9 +1955,13 @@ int dma_iova_link(struct device *dev, struct dma_iova_state *state,
+ 		return -EIO;
+ 
+ 	if (dev_use_swiotlb(dev, size, dir) &&
+-	    iova_unaligned(iovad, phys, size))
++	    iova_unaligned(iovad, phys, size)) {
++		if (attrs & DMA_ATTR_MMIO)
++			return -EPERM;
++
+ 		return iommu_dma_iova_link_swiotlb(dev, state, phys, offset,
+ 				size, dir, attrs);
++	}
+ 
+ 	return __dma_iova_link(dev, state->addr + offset - iova_start_pad,
+ 			phys - iova_start_pad,
+-- 
+2.50.1
+
 
