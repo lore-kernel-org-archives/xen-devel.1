@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C5CCA0EE4
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 17:49:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1082121.1442030 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E21ACA0EDC
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 17:54:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1082132.1442051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umc4f-0000id-5M; Thu, 14 Aug 2025 17:49:13 +0000
+	id 1umc9h-0002d7-Uv; Thu, 14 Aug 2025 17:54:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1082121.1442030; Thu, 14 Aug 2025 17:49:13 +0000
+Received: by outflank-mailman (output) from mailman id 1082132.1442051; Thu, 14 Aug 2025 17:54:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umc4f-0000iW-2G; Thu, 14 Aug 2025 17:49:13 +0000
-Received: by outflank-mailman (input) for mailman id 1082121;
- Thu, 14 Aug 2025 17:49:12 +0000
+	id 1umc9h-0002d0-Rm; Thu, 14 Aug 2025 17:54:25 +0000
+Received: by outflank-mailman (input) for mailman id 1082132;
+ Thu, 14 Aug 2025 17:54:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QQqN=22=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1umc4d-0000iQ-IY
- for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 17:49:12 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Hncw=22=kernel.org=leon@srs-se1.protection.inumbo.net>)
+ id 1umc9g-0002OV-6X
+ for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 17:54:24 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fa867b72-7936-11f0-b898-0df219b8e170;
- Thu, 14 Aug 2025 19:49:08 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 98C784EE3C04;
- Thu, 14 Aug 2025 19:49:07 +0200 (CEST)
+ id b4cef084-7937-11f0-b898-0df219b8e170;
+ Thu, 14 Aug 2025 19:54:22 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 880095C71A2;
+ Thu, 14 Aug 2025 17:54:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84294C4CEED;
+ Thu, 14 Aug 2025 17:54:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,101 +44,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa867b72-7936-11f0-b898-0df219b8e170
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1755193747;
-	b=evJP8l7QeIUq/oYk43X5JBzf+yAmxLnEn2D/hfH2oJdDs71zSN4IpZl7Nc+YDO0uLp2/
-	 bg6xqx2KOZMTMDHQnIu9m/1lJJB0P86iJX5NnononoDaLQrVk0RN40knbIG3qPP0n1C+A
-	 KkaczgVwVye5aV1ef8RKoxWpjyjjXkcNSgZIuJPpbZWEhjOgRNaGpUuhJHUP11jjSNrpD
-	 4vKM4TSgsJIGu6qmg5hRtmJydCS4PKk5PHLKPiBK04o+lzb5hBiPYOxyF33I8XndgsLDf
-	 4qnmsWXfuKP1YVoI5tltl2n6hTG0+BLFz6t1smYfK56zeG0ybcqprZXGhOe993P62sGgd
-	 o81Sf/4UNFnC8F4rI0HEsPxP08YLwgqGzOLakzcW7iOJRhjhHFgYxcIzqQ4koDiCpJPVf
-	 GwGl6CyGYNieaJo9tAspyTo0zv/M3REJNEAELjcPNRj4mgZgIiLGcCo4bwxVOsFrKGN9E
-	 9wVLocHpKnyB1IIf3+rlmClAR2p9dH4TPMiT4EZDjvGZXHbCxln1O5pO+QDSfVyPaGvT0
-	 9LGH5JyIZjKNIxNXOGxwCFV4QqEfJ9yF/EKMChwoXEqyL6jiEYomV2la9p2pCq1PChQsh
-	 6866NXhgQkiiF8LUg5HbiSSTL2Y2U+QssL5IWpptYap7SbF5i+oEA6E2mYDURW8=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1755193747;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=YO7Ya9iBWiFrBHR+XdC+uFThSUh8MFN6TXgkgn+bID8=;
-	b=ZZLzAmdsPn/Mq4DPMasEmesxhFQLsL2s+CluNPIHkBuWm5YQxQ9TmxbUu5yHefZXUqo+
-	 LFbs07hcz5PzTVSikyEEDUFfvxfE/65fl0wTE+AabBieMS3C8Kop2YbpJ9g8g0hepSKgg
-	 LuyrpG/jpxwvCLPKrTGkZQk98qAuwph5jnomquQ6kmCbxH+GL0991Ko5zsvO1zrXWoOWp
-	 P/+ddpUMMtI4xlQJMipTnEAstwf0upkp+h5YE+BMQsIctDFtCwvmBPSE3S+Nd2noTKuzG
-	 YcsfxNsGU1YUSyZIWfRzCYS8p2e68oNVy0Hi/NnuHJa6o4mMoSWvcssnGJgicqDS5Bk8q
-	 WSTCOA6jjOWjq2XaB3Bm/NJikQnXHAAGm/GxXux8B1WX9gKsFa0duwg7Rf4j8PbP4FUGG
-	 eZR/NEi6HQISClVTWpVcYIlu3z6BPCTnL9j+Hl9nR8iAoTHMgXkqJ8QZ/3CfJQvVd1OT+
-	 KQVPeZL369MpgzT4upTo0OJlTNetM5nwzC4PdmzNDE320yRjGWAUakxpbmX8VAsrb35cn
-	 pCUob/9hKaMakj5v+YH776IErdFGdrzxyqcohngiJ7Udb/0a+AjfSVInvW4o08JScEG9y
-	 LoxjWvVeNUjtGSYmJe0UH5MJIsd89taKn8dxJYsEpjhjlWgDvYvNnsDS+AoETIg=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1755193747; bh=UOLYbN34On77eNfK6ujLWY3o1aFbm4jVSPgMTCAbHws=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=lDMYaTeVN5andKJKDFXgjtj6okcZ3kZ6VsVY15/wYS8gwMW1iJpUz3X5P3pz7hgH6
-	 E38uEGyPxRNZu/YARO7SosqRGTe9w+DWABlo13whXXXlZ38HFBS0ZIXgR3AFkhT5E/
-	 73F4h81Fp4mvRGiYSA9WLnHSqcsdUl/DF+7Gk8DaqQSz0vYf9/UghyZ3AUPk+wM8Yi
-	 IaU41mNK7Um7vqLVkRTaBi4fzSpB48+UEmyNq+OVz326xE7j4q3nUwBTDtQgoXHTrN
-	 ENemWQc2nKIOObuz2BAvNQE6z/4qIc4detcrY60roPSq87b6cRdjUcoEsvZ5CAoxLw
-	 1ua1oVvLQihMw==
+X-Inumbo-ID: b4cef084-7937-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755194060;
+	bh=EWgy5B4A+Akm79sn7jh5YTuSXsOOCp8mk7trqVaPDEQ=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=S9amqurfNETOVtezAkVa6MnsxIu6FYiLmixRtkhT7UqHmokRjufKZ1zA6i9tqvLQ2
+	 VpJ4757fo5s+Q2B9uKr7wl6GFTqBZChNrcR91YPaDGQm3vc25I4sL8CzGbTzuJPVlN
+	 hPNWCQXPSv+pe++9AF//cQKOMXHlxjzvfpawShOZexyhB811vMblb4Iob91DHn4JMc
+	 0Ps4ndMm0C4ZpnAnz+lLs8UrfAyun9stmeMVvNUeWnOeLJkhGWt7hBLyD/hpHedHFz
+	 VRCIt+hbiKhk4E6OvRy5w370VlsotUtqhkL6SY1GJHWGdRmKrFcs1UCUfCS6wKxQd/
+	 DwNNNAdWNBcLA==
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Leon Romanovsky <leonro@nvidia.com>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Hellwig <hch@lst.de>,
+	Danilo Krummrich <dakr@kernel.org>,
+	iommu@lists.linux.dev,
+	Jason Wang <jasowang@redhat.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Joerg Roedel <joro@8bytes.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Juergen Gross <jgross@suse.com>,
+	kasan-dev@googlegroups.com,
+	Keith Busch <kbusch@kernel.org>,
+	linux-block@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-nvme@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-trace-kernel@vger.kernel.org,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	rust-for-linux@vger.kernel.org,
+	Sagi Grimberg <sagi@grimberg.me>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	virtualization@lists.linux.dev,
+	Will Deacon <will@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v3 01/16] dma-mapping: introduce new DMA attribute to indicate MMIO memory
+Date: Thu, 14 Aug 2025 20:53:52 +0300
+Message-ID: <08e044a00a872932e106f7e27449a8eab2690dbc.1755193625.git.leon@kernel.org>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1755193625.git.leon@kernel.org>
+References: <cover.1755193625.git.leon@kernel.org>
 MIME-Version: 1.0
-Date: Thu, 14 Aug 2025 19:49:07 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: sstabellini@kernel.org, consulting@bugseng.com,
- dmytro_prokopchuk1@epam.com, andrew.cooper3@citrix.com, Doug Goldstein
- <cardoe@cardoe.com>, xen-devel@lists.xenproject.org
-Subject: Re: [XEN PATCH 2/2] Address violation of MISRA C Rule 13.1 involving
- asm side effects.
-In-Reply-To: <0b55d5f9-35ad-4598-94ab-1aa4991c0e3a@suse.com>
-References: <1283be3b76d76814af244bbca544f6a3b74a04de.1754689062.git.nicola.vetrini@bugseng.com>
- <c4da2554d94c3f7bd4b1e460dcaa27db382ece2f.1754689062.git.nicola.vetrini@bugseng.com>
- <0b55d5f9-35ad-4598-94ab-1aa4991c0e3a@suse.com>
-Message-ID: <2994bb7cfe2b0a5f86876a3ead64bdff@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 2025-08-14 09:36, Jan Beulich wrote:
-> On 08.08.2025 23:40, Nicola Vetrini wrote:
->> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
->> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
->> @@ -437,6 +437,10 @@ write or not"
->>  # Series 13
->>  #
->> 
->> +-doc_begin="Consider the asm instruction to read an Arm system 
->> register to have no side effects."
->> +-asm_properties+={"asm(any())&&child(text, 
->> ast_field(value,^mrs\\s+%0.*$))", {no_side_effect}}
->> +-doc_end
-> 
-> Is this actually strict enough to not allow multiple instructions in 
-> the asm(),
-> where some of the others would yield side effects we actually need to 
-> respect?
-> 
-> Jan
+From: Leon Romanovsky <leonro@nvidia.com>
 
-Good point, I didn't think of that. As it is, there is only one MRS asm, 
-so no worries here, but in general the remark is valid. The regex could 
-be a bit stricter, though the real solution here would be to match the 
-context in which this asm is present to limit the scope of the 
-deviation. This does not make much sense for an asm property because the 
-properties of an asm statement (at the level of granularity targeted by 
-ECLAIR) can be derived mostly in isolation from the surrounding code.
+This patch introduces the DMA_ATTR_MMIO attribute to mark DMA buffers
+that reside in memory-mapped I/O (MMIO) regions, such as device BARs
+exposed through the host bridge, which are accessible for peer-to-peer
+(P2P) DMA.
 
-Another improvement we are pursuing is allowing single effects in 
-init-list-exprs, but it will take a bit of time to surface (i.e., next 
-major release probably).
+This attribute is especially useful for exporting device memory to other
+devices for DMA without CPU involvement, and avoids unnecessary or
+potentially detrimental CPU cache maintenance calls.
 
+DMA_ATTR_MMIO is supposed to provide dma_map_resource() functionality
+without need to call to special function and perform branching by
+the callers.
+
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ Documentation/core-api/dma-attributes.rst | 18 ++++++++++++++++++
+ include/linux/dma-mapping.h               | 20 ++++++++++++++++++++
+ include/trace/events/dma.h                |  3 ++-
+ rust/kernel/dma.rs                        |  3 +++
+ 4 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/core-api/dma-attributes.rst b/Documentation/core-api/dma-attributes.rst
+index 1887d92e8e92..0bdc2be65e57 100644
+--- a/Documentation/core-api/dma-attributes.rst
++++ b/Documentation/core-api/dma-attributes.rst
+@@ -130,3 +130,21 @@ accesses to DMA buffers in both privileged "supervisor" and unprivileged
+ subsystem that the buffer is fully accessible at the elevated privilege
+ level (and ideally inaccessible or at least read-only at the
+ lesser-privileged levels).
++
++DMA_ATTR_MMIO
++-------------
++
++This attribute indicates the physical address is not normal system
++memory. It may not be used with kmap*()/phys_to_virt()/phys_to_page()
++functions, it may not be cacheable, and access using CPU load/store
++instructions may not be allowed.
++
++Usually this will be used to describe MMIO addresses, or other non-cacheable
++register addresses. When DMA mapping this sort of address we call
++the operation Peer to Peer as a one device is DMA'ing to another device.
++For PCI devices the p2pdma APIs must be used to determine if
++DMA_ATTR_MMIO is appropriate.
++
++For architectures that require cache flushing for DMA coherence
++DMA_ATTR_MMIO will not perform any cache flushing. The address
++provided must never be mapped cacheable into the CPU.
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index 55c03e5fe8cb..4254fd9bdf5d 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -58,6 +58,26 @@
+  */
+ #define DMA_ATTR_PRIVILEGED		(1UL << 9)
+ 
++/*
++ * DMA_ATTR_MMIO - Indicates memory-mapped I/O (MMIO) region for DMA mapping
++ *
++ * This attribute indicates the physical address is not normal system
++ * memory. It may not be used with kmap*()/phys_to_virt()/phys_to_page()
++ * functions, it may not be cacheable, and access using CPU load/store
++ * instructions may not be allowed.
++ *
++ * Usually this will be used to describe MMIO addresses, or other non-cacheable
++ * register addresses. When DMA mapping this sort of address we call
++ * the operation Peer to Peer as a one device is DMA'ing to another device.
++ * For PCI devices the p2pdma APIs must be used to determine if DMA_ATTR_MMIO
++ * is appropriate.
++ *
++ * For architectures that require cache flushing for DMA coherence
++ * DMA_ATTR_MMIO will not perform any cache flushing. The address
++ * provided must never be mapped cacheable into the CPU.
++ */
++#define DMA_ATTR_MMIO		(1UL << 10)
++
+ /*
+  * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
+  * be given to a device to use as a DMA source or target.  It is specific to a
+diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
+index d8ddc27b6a7c..ee90d6f1dcf3 100644
+--- a/include/trace/events/dma.h
++++ b/include/trace/events/dma.h
+@@ -31,7 +31,8 @@ TRACE_DEFINE_ENUM(DMA_NONE);
+ 		{ DMA_ATTR_FORCE_CONTIGUOUS, "FORCE_CONTIGUOUS" }, \
+ 		{ DMA_ATTR_ALLOC_SINGLE_PAGES, "ALLOC_SINGLE_PAGES" }, \
+ 		{ DMA_ATTR_NO_WARN, "NO_WARN" }, \
+-		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" })
++		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" }, \
++		{ DMA_ATTR_MMIO, "MMIO" })
+ 
+ DECLARE_EVENT_CLASS(dma_map,
+ 	TP_PROTO(struct device *dev, phys_addr_t phys_addr, dma_addr_t dma_addr,
+diff --git a/rust/kernel/dma.rs b/rust/kernel/dma.rs
+index 2bc8ab51ec28..61d9eed7a786 100644
+--- a/rust/kernel/dma.rs
++++ b/rust/kernel/dma.rs
+@@ -242,6 +242,9 @@ pub mod attrs {
+     /// Indicates that the buffer is fully accessible at an elevated privilege level (and
+     /// ideally inaccessible or at least read-only at lesser-privileged levels).
+     pub const DMA_ATTR_PRIVILEGED: Attrs = Attrs(bindings::DMA_ATTR_PRIVILEGED);
++
++    /// Indicates that the buffer is MMIO memory.
++    pub const DMA_ATTR_MMIO: Attrs = Attrs(bindings::DMA_ATTR_MMIO);
+ }
+ 
+ /// An abstraction of the `dma_alloc_coherent` API.
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.50.1
+
 
