@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21FAEC87FCF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 00:34:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1080486.1440868 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CABEBCA0EE0
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 01:37:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1080523.1440899 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umLud-0000Dm-I5; Thu, 14 Aug 2025 00:33:47 +0000
+	id 1umMtx-0007Nf-DC; Thu, 14 Aug 2025 01:37:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1080486.1440868; Thu, 14 Aug 2025 00:33:47 +0000
+Received: by outflank-mailman (output) from mailman id 1080523.1440899; Thu, 14 Aug 2025 01:37:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umLud-0000Df-FS; Thu, 14 Aug 2025 00:33:47 +0000
-Received: by outflank-mailman (input) for mailman id 1080486;
- Thu, 14 Aug 2025 00:33:46 +0000
+	id 1umMtx-0007NY-AV; Thu, 14 Aug 2025 01:37:09 +0000
+Received: by outflank-mailman (input) for mailman id 1080523;
+ Thu, 14 Aug 2025 01:37:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AjlG=22=bounce.vates.tech=bounce-md_30504962.689d2eaa.v1-f82e5ff317ef4803833550b6120c223a@srs-se1.protection.inumbo.net>)
- id 1umLuc-0000DZ-Ju
- for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 00:33:46 +0000
-Received: from mail145-23.atl61.mandrillapp.com
- (mail145-23.atl61.mandrillapp.com [198.2.145.23])
+ <SRS0=r7ku=22=gmail.com=arraybolt3@srs-se1.protection.inumbo.net>)
+ id 1umMtw-0006vN-52
+ for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 01:37:08 +0000
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [2607:f8b0:4864:20::129])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 311c03a9-78a6-11f0-a328-13f23c93f187;
- Thu, 14 Aug 2025 02:32:44 +0200 (CEST)
-Received: from pmta06.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail145-23.atl61.mandrillapp.com (Mailchimp) with ESMTP id
- 4c2R624WgKz1XLSCy
- for <xen-devel@lists.xenproject.org>; Thu, 14 Aug 2025 00:32:42 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- f82e5ff317ef4803833550b6120c223a; Thu, 14 Aug 2025 00:32:42 +0000
+ id 3002a262-78af-11f0-a328-13f23c93f187;
+ Thu, 14 Aug 2025 03:37:07 +0200 (CEST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3e56ff95838so346165ab.1
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Aug 2025 18:37:07 -0700 (PDT)
+Received: from kf-m2g5.. ([2607:fb91:1183:972:ee53:76c5:e875:9619])
+ by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-883f198db02sm467297239f.16.2025.08.13.18.37.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Aug 2025 18:37:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,186 +47,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 311c03a9-78a6-11f0-a328-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1755131562; x=1755401562;
-	bh=fyvq1kl+iP4CmHov+3M9OucDvmebNmPcZJRWq/jdFvM=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=sYXGVbwNizQeU4hRyQeQqC+J2y7sHGvankKxarM4ArkAy3ii6G6g119rQEA7e7s2P
-	 7s0fJuY6owY537Z3ZJpP9y+NiA9gWLM+vVw92NujaEJ3t0EG16cCBh8XG+DezUWUeO
-	 yig8NCX/7wGKkeAye9Vou9oe6X+d/7G2loMcYv7AfylFBsj2osyQP9u35QdY3ORoDc
-	 EXN11CN1QsoxB1yzrTVbrC4ddPYze1rvDhxfruHak4rFt3qv5m1h7s211z9jSWMEG1
-	 E5nnK26ZLkiwBQI92dCA4gdurW4gt2d4YnVn+BE91OErYXBZvVYF43bqDlSKI9MBn0
-	 UoT1Y9tPf+iJw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1755131562; x=1755392062; i=teddy.astie@vates.tech;
-	bh=fyvq1kl+iP4CmHov+3M9OucDvmebNmPcZJRWq/jdFvM=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=X3AIhF+rO735fyTEV3CRB+wFutnQ60vMm6bs4QTrqRQu0P/Agb3W1/NiOz8POQ3Qs
-	 PUgQxRDLTxEiQYJ7Rh2LcL0qstaRxEMJaoaqF8gVfABQTBU8ebtAL4WGeVQnLWQasK
-	 WoTCnSP+O34bleBfDRP0FhOXtljNODjqiksVA+v4zTlIXpB0zrMEuSzX9l99V5+Clc
-	 AX1WobEDJPCkv27jNIO7VS3KS5G7DiOQibTR2qDvao02Xd9rNPpSGdOaDx8e+xXaY/
-	 k7Eqk6jov9SX/GASbwjKP/Jp2fZn1y33XOL6h2WlsQaaogY7/3QeEzQuCI4NgmWd0v
-	 ouK8x9wEG8TpQ==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[RFC=20PATCH]=20misra:=20allow=20conversion=20from=20unsigned=20long=20to=20function=20pointer?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1755131560161
-Message-Id: <7129feb6-31a3-40c8-9d99-f7d7d2ae89f7@vates.tech>
-To: "Dmytro Prokopchuk1" <dmytro_prokopchuk1@epam.com>, xen-devel@lists.xenproject.org
-Cc: "Nicola Vetrini" <nicola.vetrini@bugseng.com>, "Doug Goldstein" <cardoe@cardoe.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Bertrand Marquis" <bertrand.marquis@arm.com>, "Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <8cbc9e6d881661d0d7a1055cbcef5a65e20522be.1755109168.git.dmytro_prokopchuk1@epam.com>
-In-Reply-To: <8cbc9e6d881661d0d7a1055cbcef5a65e20522be.1755109168.git.dmytro_prokopchuk1@epam.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.f82e5ff317ef4803833550b6120c223a?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250814:md
-Date: Thu, 14 Aug 2025 00:32:42 +0000
+X-Inumbo-ID: 3002a262-78af-11f0-a328-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755135426; x=1755740226; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QSq1DluxhGuJdHCz8UHBJovQfitqDO0ftgOR0z6jXHw=;
+        b=ZacKDZ314n1sjjPayVIst8TYgZmSjwpf0P+4ur05pin4+DN3zUgvxQ2KwfRNe232T3
+         yUs2xcv7xcQmQojkQBkCsqEuyGAwLWpqd3eQaHwNI+Np12skSt4jbtP9uXggSkzR2/CT
+         RCnbrNPWRVZihfI/CWJaxT9w+PhWLgTaO9b062Xn2VAyLTXY1zaEv4IX4xqmGkjT9FnN
+         5mG3AXdv3+cITqV3UasWJDAJnQDs1U02dU2TcDI6Uni03YA+kh0tTFheK8auZcqIbwnb
+         hb9dGZgbYsZ01CEkDIHu9DAgj2Jniye9FtAWIhw6z58wA+n1OQVFVUGMC8ZG4j2YpJye
+         XHhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755135426; x=1755740226;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QSq1DluxhGuJdHCz8UHBJovQfitqDO0ftgOR0z6jXHw=;
+        b=sW5ytnuC+t7uFwKk+AM2UDnCNe2grEl5rqqswZE3qUuJi4G39yb+DV5Pahev8Wg0Jq
+         xvQbsp5WHceQKNFMQIRil09Ojq+izrWf+t6NMWccemJOsMlSpx42exgASCZINuidUfD4
+         msPQnrI3MDfcyOgIpMRP83zOb3AOhkQoNdEQ+cmsinOTd6g3dwXaBXeBpa8ETNB3V1Hc
+         NCZuSeNVqOwNf5GL8Pxui3EIrlDVeFnCV3AmXGDTYJAkQSj1dWpew71AM3SKwOQqy3ay
+         Dr2YJlc3BU8skGmhbz83ex6JtghKjGASYUEdF1cY9YwrlsY+syg4pVjfPaBdVONFGM5g
+         uG2A==
+X-Forwarded-Encrypted: i=1; AJvYcCV/o0OpL9t/PecLiuT2l8gpJtwTTFDS57RF+frksVlCc8xt5EnjNv37dhEFeGfrJf8PwatMBxAsZZA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwOkpHZhpMFlE9XLHqOE5JfAXOu1It2KUG9H9cDrVPUkCFHbspN
+	3GQCcw2BC+Ce4hAq87s5YXznKPa85iM7xl7Np/9L74c7BzQK9GA8mEJ9
+X-Gm-Gg: ASbGncujX46dNYes+AsSfFstaiPkG1mYNyVUI60Rl43mUgeO9syNsBjhV1I1GhTVUZL
+	4/JMuti+1bmuHvWwTLS/Lyrwvw6zFgxsFGzy8nC5p79i7mPrWLcujAMZ63wIBD1e+ntw3Qxm1Bi
+	r2CsVPDowSKopwWsGHttiE6cjHRSNbPrN2hhCrxrHbXqWyHM6NbCxyMBacCeLOjFQwsyE3N7bjz
+	VTQeus9jfjFz9XdgKbf/YdFLOdSnRaqoc86dCqlTyyHI2umI6Pu/Vvo6tKgiv6CiQR/FKzg7Cri
+	fO/hXs6GhhpSeVXQPZJjy4jK9gT2kW8+50eD1bTouG4Tan8HVHGkFQi9TRk/ZQLeaoBzI0w+7/S
+	ncwWzmW3kD2g7oabbO2BTSw==
+X-Google-Smtp-Source: AGHT+IFXjpZLwIfry/EvzV7zQJCVKPxqe3UBzCy2m+yVfvZMxryZK8LOfJBC9UMmreq4Du/PO0zpew==
+X-Received: by 2002:a05:6602:2dc9:b0:85d:9793:e0d8 with SMTP id ca18e2360f4ac-884334e045emr80901939f.0.1755135426238;
+        Wed, 13 Aug 2025 18:37:06 -0700 (PDT)
+From: arraybolt3@gmail.com
+To: grub-devel@gnu.org,
+	xen-devel@lists.xenproject.org
+Cc: Aaron Rainbolt <arraybolt3@gmail.com>
+Subject: [PATCH v5 2/3] include/xen: Add warning comment for cmd_line
+Date: Wed, 13 Aug 2025 20:36:44 -0500
+Message-ID: <20250814013645.2488043-3-arraybolt3@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250814013645.2488043-1-arraybolt3@gmail.com>
+References: <20250814013645.2488043-1-arraybolt3@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hello,
+From: Aaron Rainbolt <arraybolt3@gmail.com>
 
-Le 13/08/2025 =C3=A0 20:30, Dmytro Prokopchuk1 a =C3=A9crit=C2=A0:
-> ...
-> 
-> from `vaddr_t' (that is `unsigned long') to `switch_ttbr_fn*' (that is `v=
-oid(*)(unsigned long)')
-> 
-> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-> ---
-> This is just a RFC patch.
-> The commit message is not important at this stage.
-> 
-> I am seeking comments regarding this case.
-> 
-> Thanks.
-> ---
->   automation/eclair_analysis/ECLAIR/deviations.ecl |  8 ++++++++
->   docs/misra/deviations.rst                        | 10 ++++++++++
->   docs/misra/rules.rst                             |  8 +++++++-
->   xen/arch/arm/arm64/mmu/mm.c                      |  2 ++
->   4 files changed, 27 insertions(+), 1 deletion(-)
-> 
-> diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automatio=
-n/eclair_analysis/ECLAIR/deviations.ecl
-> index ebce1ceab9..f9fd6076b7 100644
-> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> @@ -365,6 +365,14 @@ constant expressions are required.\""
->   }
->   -doc_end
->   
-> +-doc_begin=3D"The conversion from unsigned long to a function pointer do=
-es not lose any information, provided that the source type has enough bits =
-to restore it."
-> +-config=3DMC3A2.R11.1,casts+=3D{safe,
-> +  "from(type(canonical(builtin(unsigned long))))
-> +   &&to(type(canonical(__function_pointer_types)))
-> +   &&relation(definitely_preserves_value)"
-> +}
-> +-doc_end
-> +
->   -doc_begin=3D"The conversion from a function pointer to a boolean has a=
- well-known semantics that do not lead to unexpected behaviour."
->   -config=3DMC3A2.R11.1,casts+=3D{safe,
->     "from(type(canonical(__function_pointer_types)))
-> diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-> index 3c46a1e47a..27848602f6 100644
-> --- a/docs/misra/deviations.rst
-> +++ b/docs/misra/deviations.rst
-> @@ -348,6 +348,16 @@ Deviations related to MISRA C:2012 Rules:
->          to store it.
->        - Tagged as `safe` for ECLAIR.
->   
-> +   * - R11.1
-> +     - The conversion from unsigned long to a function pointer does not =
-lose any
-> +       information or violate type safety assumptions if the unsigned lo=
-ng type
-> +       is guaranteed to be at least as large as a function pointer. This=
- ensures
-> +       that the function pointer address can be fully represented withou=
-t
-> +       truncation or corruption. Macro BUILD_BUG_ON can be integrated in=
-to the
-> +       build system to confirm that 'sizeof(unsigned long) >=3D sizeof(v=
-oid (*)())'
+The cmd_line field of the start_info struct is not guaranteed to be
+NUL-terminated, even though it is intended to contain a NUL-terminated
+string. Add a warning about this in a comment so future consumers of
+this field know to check it for a NUL terminator before using it.
 
-Wouldn't `sizeof(unsigned long) =3D=3D sizeof(void (*)())` be preferable ?
+Signed-off-by: Aaron Rainbolt <arraybolt3@gmail.com>
+---
+ include/xen/xen.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-I assume sizeof(unsigned long) is the size of a CPU word.
-Having `sizeof(unsigned long) < sizeof(void (*)())` makes use of 
-operations like cmpxchg unsuitable on function pointers (because of 
-object size mismatch).
-
-> +       on all target platforms.
-> +     - Tagged as `safe` for ECLAIR.
-> +
->      * - R11.1
->        - The conversion from a function pointer to a boolean has a well-k=
-nown
->          semantics that do not lead to unexpected behaviour.
-> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-> index 6812eb7e8a..8b97ecf3f4 100644
-> --- a/docs/misra/rules.rst
-> +++ b/docs/misra/rules.rst
-> @@ -414,7 +414,13 @@ maintainers if you want to suggest a change.
->        - All conversions to integer types are permitted if the destinatio=
-n
->          type has enough bits to hold the entire value. Conversions to bo=
-ol
->          and void* are permitted. Conversions from 'void noreturn (*)(...=
-)'
-> -       to 'void (*)(...)' are permitted.
-> +       to 'void (*)(...)' are permitted. Conversions from unsigned long =
-to
-> +       function pointer are permitted if the unsigned long type has a si=
-ze
-> +       and representation sufficient to store the entire function pointe=
-r
-> +       value without truncation or corruption. Example::
-> +
-> +           unsigned long func_addr =3D (unsigned long)&some_function;
-> +           void (*restored_func)(void) =3D (void (*)(void))func_addr;
->   
->      * - `Rule 11.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Exampl=
-e-Suite/-/blob/master/R_11_02.c>`_
->        - Required
-> diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-> index 3e64be6ae6..998d52c162 100644
-> --- a/xen/arch/arm/arm64/mmu/mm.c
-> +++ b/xen/arch/arm/arm64/mmu/mm.c
-> @@ -150,6 +150,7 @@ void __init relocate_and_switch_ttbr(uint64_t ttbr)
->       vaddr_t id_addr =3D virt_to_maddr(relocate_xen);
->       relocate_xen_fn *fn =3D (relocate_xen_fn *)id_addr;
->       lpae_t pte;
-> +    BUILD_BUG_ON(sizeof(unsigned long) < sizeof(fn));
->   
->       /* Enable the identity mapping in the boot page tables */
->       update_identity_mapping(true);
-> @@ -178,6 +179,7 @@ void __init switch_ttbr(uint64_t ttbr)
->       vaddr_t id_addr =3D virt_to_maddr(switch_ttbr_id);
->       switch_ttbr_fn *fn =3D (switch_ttbr_fn *)id_addr;
->       lpae_t pte;
-> +    BUILD_BUG_ON(sizeof(unsigned long) < sizeof(fn));
->   
->       /* Enable the identity mapping in the boot page tables */
->       update_identity_mapping(true);
-
-
-
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+diff --git a/include/xen/xen.h b/include/xen/xen.h
+index fdf0fc4..16f3fd7 100644
+--- a/include/xen/xen.h
++++ b/include/xen/xen.h
+@@ -823,6 +823,11 @@ struct start_info {
+                                 /* (PFN of pre-loaded module if           */
+                                 /*  SIF_MOD_START_PFN set in flags).      */
+     unsigned long mod_len;      /* Size (bytes) of pre-loaded module.     */
++    /* 
++     * cmd_line will contain a NUL-termianted string if it contains valid
++     * data, but it MAY be invalid and not contain a NUL byte at all. Code
++     * that accesses cmd_line MUST NOT assume it is NUL-terminated.
++     */
+ #define GRUB_XEN_MAX_GUEST_CMDLINE 1024
+     int8_t cmd_line[GRUB_XEN_MAX_GUEST_CMDLINE];
+     /* The pfn range here covers both page table and p->m table frames.   */
+-- 
+2.50.1
 
 
