@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52DDDCA0EDC
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 08:20:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1081020.1441155 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CAA2CA0EDC
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 08:23:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1081045.1441175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umTCB-0004Wt-Un; Thu, 14 Aug 2025 08:20:23 +0000
+	id 1umTEq-00061m-Mr; Thu, 14 Aug 2025 08:23:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1081020.1441155; Thu, 14 Aug 2025 08:20:23 +0000
+Received: by outflank-mailman (output) from mailman id 1081045.1441175; Thu, 14 Aug 2025 08:23:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umTCB-0004Wm-Rv; Thu, 14 Aug 2025 08:20:23 +0000
-Received: by outflank-mailman (input) for mailman id 1081020;
- Thu, 14 Aug 2025 08:20:22 +0000
+	id 1umTEq-00061f-Jy; Thu, 14 Aug 2025 08:23:08 +0000
+Received: by outflank-mailman (input) for mailman id 1081045;
+ Thu, 14 Aug 2025 08:23:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t1VE=22=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1umTCA-0004J0-6n
- for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 08:20:22 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20625.outbound.protection.outlook.com
- [2a01:111:f403:2415::625])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=xqZt=22=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1umTEo-00061R-Hi
+ for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 08:23:06 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 82bc8842-78e7-11f0-b898-0df219b8e170;
- Thu, 14 Aug 2025 10:20:19 +0200 (CEST)
-Received: from SA0PR13CA0009.namprd13.prod.outlook.com (2603:10b6:806:130::14)
- by IA1PR12MB8237.namprd12.prod.outlook.com (2603:10b6:208:3f3::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.17; Thu, 14 Aug
- 2025 08:20:13 +0000
-Received: from SA2PEPF00003AE8.namprd02.prod.outlook.com
- (2603:10b6:806:130:cafe::e7) by SA0PR13CA0009.outlook.office365.com
- (2603:10b6:806:130::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.4 via Frontend Transport; Thu,
- 14 Aug 2025 08:20:12 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF00003AE8.mail.protection.outlook.com (10.167.248.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9031.11 via Frontend Transport; Thu, 14 Aug 2025 08:20:12 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
- 2025 03:20:07 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
- 2025 03:20:06 -0500
-Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via
- Frontend Transport; Thu, 14 Aug 2025 03:20:06 -0500
+ id e628d5d3-78e7-11f0-b898-0df219b8e170;
+ Thu, 14 Aug 2025 10:23:04 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b690517so959569a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Aug 2025 01:23:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-af91a076724sm2539884266b.23.2025.08.14.01.23.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 14 Aug 2025 01:23:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,117 +47,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82bc8842-78e7-11f0-b898-0df219b8e170
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C+PKR9niMwjCf60uqQkAxNURm6a9QL49sRt1ooye5AI+wikhWXZ0F8W3U2oykbUnXH83Zq0dRpOKTC/md3u9dEA8mX0FJ2cAwutaGZ2ZDUPjE8+meYrhHuJv8CQ6bul+dfEvrIevOg3chXczSgThFdI0T0CRdW+44rnErEUWYUlHS7u30VsVUCPrdfKM0uzVOsOadZly52diUSoX/4s564Sos+EcFpYMJpbGyhsd5HrGZov2nrZ09mAiCd5VCeaM7P5088SP8/RP7ONYQWkrtkVgidbrOzY4D/cAP9qmOxGpBonktwgWu7MJ87iyp/mdGWa0xdDTnQNiNfqtq0a5pA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WmJ6+vdHYgowTVTBApXvjSDH5MRfDYQrN1q9jEV0aQw=;
- b=vEu02IwMbLCTlS/a6rhQa7OSLGUN99fz1C6O+Oz87XwjWVUceOQtdUe11dOKXX1u/TrnRWsZH78cRfXmysorrcpJWW10zS+ZjLeq+Qy6GXTuM7VlNkbYBrtnFyLOuv37Xg2OjrmqSXf7pqF9gLZD4pY9GQE+bq0wUnJzLt+pCIpp5NK2LSTOg7IbBgf+XW3DEe/XG5N2Ul6S4l4w8kIe2C/3oP+m+cl3VQ1LJVdh9U7P5Tqf7XGSOGfbZRURHI9cRCxTd5AxdkR16/HvgLWHtuGABwSkxGLcsizFw8KM9i+r1DqL5UXAYWtB8E9O9m2al9hHCr2C05VLUj5Y9J1JTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WmJ6+vdHYgowTVTBApXvjSDH5MRfDYQrN1q9jEV0aQw=;
- b=NkYZlWHcR4sJcNY+0/8xl4AE5e6SpX0udTz/KoisHV0mzUSuA/ywysmyfZbqr/Ti6RczdKzkFhtY2VoK8To0toyCRE5HYf3KG9mCOvkdu6zNifPy20shwlCYbfCXTuXOuq0mWwK5+egMI1pmaULAXWAXdBIC6Q9Cbx3WUxImXQg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 0/2] R52 MPU support (for "Third series for R82 MPU")
-Date: Thu, 14 Aug 2025 09:19:57 +0100
-Message-ID: <20250814081959.3504145-1-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: e628d5d3-78e7-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1755159784; x=1755764584; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=It75J2AnABio+dzN0d/u421JC9wsX5uNOX0PwBSQ/Vw=;
+        b=S8hsFrZN/O2wVhPR4oMfrNedUOQPAB+TXZSXmZJkiX1nlQ7qSuwcTowBieJnVKq4C5
+         Ig838hKMiKZnQhKTXITqJrFADklCpJQ4rowQavV0UyNp25iMagVr5lvmlnIblQzMpans
+         CQ2cK6Tdq3FUiMKdul8RMaoqCbSVishvMS2Q/zJQM+ub4sK8/3yMlo9uhSFyJFFEyiGw
+         8fzMVDrcaORisXBlYhBRnP14c6ZHrGcdtp+i4yUn5Y5O7/MpbiqWZM4biVKQpmOwjwKx
+         vMd44Sm1AHuckp4/1A90JNahZpZedCSFACDWftcOVnnsIz4hqVXLSOgWRPNQwuSeOoPx
+         mZ5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755159784; x=1755764584;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=It75J2AnABio+dzN0d/u421JC9wsX5uNOX0PwBSQ/Vw=;
+        b=PDOSFV6AoKruAIAKMtKeaRVEKn2blHfa+R8LfYb3wQll8H8xYUQXsUeoUqP1cQuRRY
+         c0VYOZd46lLtsYn2CFLMGqPqIulSpLJhd/Xw7RjjNSLCrOHknUexOTm+57ZTmwmu9F1H
+         H+sNUeD+Ga+UL3URS4InD1mWGQQOmAHb5rQVNoaqFARHJPFN2DsFi1FJAZTf+W8kKUe0
+         Ae0MMRbck1eOppezYhOECf0/TReoKaod2ZcF3xvH+h0gKwhVJmtdMCV9XbzsUic993VV
+         rxi4ISSTbvRWeNwVhn8hotuh76UEVNjKyKNtiCYL3WBfXFpSsnAh/DYJP/z2J9XtrgtP
+         LMTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWGytXgbDsvDXxNxCAjvGOIf6anVzwetoFl42uaCtWlGZYjYrKcZ0kE7Ewr3R4/cLwjlPwo+YefMg4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwOEEsIxB2J/V2WpUmPs28+y0PY8DwKnI5FlgXF2IV9UAAaQAXV
+	evH16Z1FvHZqYWb49Brt5lMGs9EiVeDAxOSa6TN+Gqf/PZyCP/NvsTjgdFrSx5Sg9Q==
+X-Gm-Gg: ASbGncsRC61GOMP6+yWp2xW3pt70D1/Rl08LE0Ttix24AXEyk3634N6rQlsQnzdRNiX
+	psQSiXlOqXv0LhWTcC4GpXHXJVbwMOcoBdOtzqgsaBW2aepYfDengabxeXSghGi8ztw+9/AUCMl
+	dvvg+yPo2eh100jzgMrKy4ruwJQNbDyZ2777fgGPH0zknZUq/aY6NFoHhd3xYPfo+FWm93oFgi/
+	/1uZvvh8vfDHKVTBh+ozB7JtG02iNd9xQk9945yfs6fn5HOeDHBZtFNGkfcAZrgWJLEykUjMra0
+	Ua6Vwvq70j0ktMYcA6BiY/44UleSxPdnPzKEb/HYl6khFteBHoG7xnedyCySOX+j6DcqtKoBYEh
+	UDAkgzFE0BaruLqj2JSeCZSPY33zANvARuzW4Ixhe87Ed9rhBt05xClczCzIu7cObpev4dSqyDp
+	xyIsU3Rck=
+X-Google-Smtp-Source: AGHT+IFBVDIcvJYoiYblduBtPKP+jhJpJdcoLJYfr0YPbA4LTD0kJ2zUWsbjgZ1dF1z4VXkYzq2Ehg==
+X-Received: by 2002:a17:907:1c85:b0:afc:a18d:f14d with SMTP id a640c23a62f3a-afcb93a22b3mr165000766b.7.1755159783604;
+        Thu, 14 Aug 2025 01:23:03 -0700 (PDT)
+Message-ID: <bda0c44d-d862-4045-8653-0d36d3ad479e@suse.com>
+Date: Thu, 14 Aug 2025 10:23:01 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: ayan.kumar.halder@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE8:EE_|IA1PR12MB8237:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0198acca-1fa8-42c7-4b50-08dddb0b63fa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?ekGZv6taioPcVvnGav0k3bbu0NwPktQjyBty5H6dW67OLed2qCU5z8FwxK1c?=
- =?us-ascii?Q?Y8QTDjX3Ws/JEIsLRSTN6YdIjtYfyHcxNDEf9o5XzfNPGvTo3wEeBjc0kis7?=
- =?us-ascii?Q?iLQcWEzQi+LJmGIbbIS6jynB1of6dA/5yagnAnSw3BHvzePaJ9py+80OJdlK?=
- =?us-ascii?Q?QinL9N/D9EgHAUHvRJzuLry4v6Fv8s22HhWhhU8160QrgIDDJz6Bb8SPIJ5y?=
- =?us-ascii?Q?o7oaYBK0+vHnwVd/F6QVTcWAY9I9Cl5IFcouvAYlXqXdsicQPD96BXXOn15Y?=
- =?us-ascii?Q?87SpcRc5je27++BE0rvaiHxBro3lgQ3VKANWzxWR8jLEVl2P/FX7+ZZOpAM0?=
- =?us-ascii?Q?ql9cR1/68ep836xpflA4LkV2449s/Nv6sTEAzxOi3JR8ltLAdVJJcLRunsb2?=
- =?us-ascii?Q?+p0t575hQT1dkxlCypmm1XBvCoK8sevaOayBhdmRtAqrv/WpfBjCKV4bcckt?=
- =?us-ascii?Q?FI0oWeIzzeNid6qMKb4xnhH2QtWriUHZCV08+t3GjY2fjQqzQQnILuzNCieZ?=
- =?us-ascii?Q?9df6PGEink13gU5jtI19vrcbkRbXexuvRziPO1Pd0jBk1E4XuRqIeeOTmJkk?=
- =?us-ascii?Q?GvwSKCwZbHKhBK5RMT8qvolOvTr6pwx0Xce2KYlpolp7czRU15hUARpluxyU?=
- =?us-ascii?Q?b1yVPaN9bFZv2O/Tq3sIMUfJ8PN6BMRE9jCYRyUW3ZUEgqKdLFhJexIriRR3?=
- =?us-ascii?Q?PtJ9GrcRSf1qG/2LtNwxKL2Ri1gY30hrFugPFCueRNhs2VW5DvycEjEmuP4H?=
- =?us-ascii?Q?iYXG5w69GlfmLglAKQbNAfaf+va+DlCyHM14jVRQ9PdwM6pFj87mFBl8HBIe?=
- =?us-ascii?Q?jg80WFjcm1LDEhXt//z6gKomFs8rV+NWduemln40LZsApfW8406quWZi1s28?=
- =?us-ascii?Q?be6ivBe/Ti+IFSeKWghR4ca4KDhUm6ZiQ6/82K/OSQx8JOo/InzzUcwAjnuP?=
- =?us-ascii?Q?cFVOOdojDKqEq8C3uryvkUEDVe76wt3Mz2vStAghJOJ+gpol0kXFR7dKELLP?=
- =?us-ascii?Q?1n0pE2o9OiQnw8TWY3IkbSjhSP4rQ9a6glPZT2vNQD0DsMEEFz8RgavHTnt1?=
- =?us-ascii?Q?atpPTuzxmuTZhV8nHA/5414HmaOGkqZmPNud43pm0etRzi5g5QQYLMcBO/kr?=
- =?us-ascii?Q?zf6mHYPd5Oj7jjEvThPR0vufbZX6dUbgjcwboVGRHtCcusmR4vPwN2ruTDw6?=
- =?us-ascii?Q?Q0ORP+M0Vx7SLm6Jz4UdN4K7ZovvKvDvi2SLbU+OqLceXIKct5b43iD7Hb3B?=
- =?us-ascii?Q?oy5WY7odbkZH8szBWLu46pWptwZMOOMD2OPn2yXBgr9syEQthp7t6wy1PyDo?=
- =?us-ascii?Q?ZlmEb+Gi/D44FsxqpZZCmaelagCp0zUkZexFLT9nZVPhIJCxkXtRRFtA2W6V?=
- =?us-ascii?Q?ugvdLRwxvlexpKlQTO1Hw2q7snGkjsxnln7Vmskc6zeKtSnUyiWyE8HVy+2p?=
- =?us-ascii?Q?4Bg6tC2HxPH6DnyzKqn08TQzv76+GpZSGksF6xh+2Xpa4HqZ7hRWoiW3wZBN?=
- =?us-ascii?Q?WUZf144RXyMnzAKO0Rl/Z2vaaqlV71QB/wuk?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 08:20:12.4250
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0198acca-1fa8-42c7-4b50-08dddb0b63fa
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00003AE8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8237
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi: remove unreachable code in read_file()
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <52dbb5c5c1385b3b9d8522ef308ef15248973368.1755023074.git.dmytro_prokopchuk1@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <52dbb5c5c1385b3b9d8522ef308ef15248973368.1755023074.git.dmytro_prokopchuk1@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 12.08.2025 21:17, Dmytro Prokopchuk1 wrote:
+> MISRA C Rule 2.1 states: "A project shall not contain unreachable code."
+> 
+> Function `PrintErrMesg(const CHAR16*, EFI_STATUS)` isn't intended to return
+> control to its caller. At the end, it calls `blexit()`, which, in turn,
+> invokes the `__builtin_unreachable()` function, making subsequent return
+> statements in `read_file()` unreachable:
+> 
+>     PrintErrMesg(name, ret);
+>     /* not reached */
+>     return false;
+> 
+> This also causes unreachability of the code meant to handle `read_file()`
+> errors, as seen in these examples:
+> 
+> In this block:
+>     if ( read_file(dir_handle, file_name, &cfg, NULL) )
+>         break;
+>     *tail = 0;
+>     }
+>     if ( !tail )
+>         blexit(L"No configuration file found.");
+> 
+> And here:
+>     else if ( !read_file(dir_handle, cfg_file_name, &cfg, NULL) )
+>         blexit(L"Configuration file not found.");
+> 
+> And here:
+>     if ( !read_file(dir_handle, s2w(&name), &cfg, NULL) )
+>     {
+>         PrintStr(L"Chained configuration file '");
+>         PrintStr(name.w);
+>         efi_bs->FreePool(name.w);
+>         blexit(L"'not found.");
+>     }
+> 
+> The issue arises because when an error occurs inside `read_file()`, it calls
+> `PrintErrMesg()` and does not return to the caller.
+> 
+> To address this the following changes are applied:
+> 1. Remove `PrintErrMesg(name, ret);` from the `read_file()` function.
+> 2. Replaced it with `PrintErr(name);`, which prints the file name and returns
+>    control to the caller.
+> 3. Change the `read_file()` return type from `bool` to `EFI_STATUS`, allowing
+>    file operation result codes to be returned to the caller.
+> 4. Properly handle error codes returned from the `read_file()` function in the
+>    relevant areas of the code.
+> 5. Replace `blexit()` calls with informative error codes using `PrintErrMesg()`
+>    where appropriate.
+> 
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+> ---
+> Test CI pipeline:
+> https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/1980590118
+> ---
+>  xen/common/efi/boot.c | 57 ++++++++++++++++++++++++++++++-------------
+>  1 file changed, 40 insertions(+), 17 deletions(-)
+> 
+> diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+> index 50ff1d1bd2..ddbafb2f9c 100644
+> --- a/xen/common/efi/boot.c
+> +++ b/xen/common/efi/boot.c
+> @@ -132,7 +132,7 @@ struct file {
+>      };
+>  };
+>  
+> -static bool read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+> +static EFI_STATUS read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+>                        struct file *file, const char *options);
+>  static bool read_section(const EFI_LOADED_IMAGE *image, const CHAR16 *name,
+>                           struct file *file, const char *options);
+> @@ -782,7 +782,7 @@ static void __init handle_file_info(const CHAR16 *name,
+>      efi_arch_handle_module(file, name, options);
+>  }
+>  
+> -static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+> +static EFI_STATUS __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+>                               struct file *file, const char *options)
+>  {
+>      EFI_FILE_HANDLE FileHandle = NULL;
+> @@ -791,7 +791,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+>      const CHAR16 *what = NULL;
+>  
+>      if ( !name )
+> -        PrintErrMesg(L"No filename", EFI_OUT_OF_RESOURCES);
+> +        return EFI_INVALID_PARAMETER;
 
-This series is related to
-"[PATCH 0/5] Third series for R82 MPU support". There is no build dependency
-between the two series.
+Why the change in error code? EFI_OUT_OF_RESOURCES() was used deliberately for
+cases where the result of s2w() is passed directly into here.
 
-At the end of these 2 series, R82 and R52 boot till the same point
-(approximately).
+Between this hunk and ...
 
-Kind regards,
-Ayan
+> @@ -842,7 +842,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+>  
+>      efi_arch_flush_dcache_area(file->ptr, file->size);
+>  
+> -    return true;
+> +    return ret;
+>  
+>   fail:
+>      if ( FileHandle )
 
-Ayan Kumar Halder (2):
-  arm/mpu: Enable is_xen_heap_page and is_xen_heap_mfn for ARM_32
-  arm/mpu: Disable map_domain_page for MPU
+... this one there's at least one "return false" which you leave untouched, thus
+wrongly reporting EFI_SUCCESS now to the caller.
 
- xen/arch/arm/Kconfig              |  2 +-
- xen/arch/arm/include/asm/mm.h     |  2 +-
- xen/arch/arm/include/asm/mpu/mm.h |  5 ----
- xen/arch/arm/mpu/Makefile         |  1 -
- xen/arch/arm/mpu/domain-page.c    | 45 -------------------------------
- 5 files changed, 2 insertions(+), 53 deletions(-)
- delete mode 100644 xen/arch/arm/mpu/domain-page.c
+> @@ -850,10 +850,9 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+>  
+>      PrintErr(what);
+>      PrintErr(L" failed for ");
+> -    PrintErrMesg(name, ret);
+> +    PrintErr(name);
+>  
+> -    /* not reached */
+> -    return false;
+> +    return ret;
+>  }
 
--- 
-2.25.1
+With the comment here - possibly adjusted to become a SAF one - all should be
+fine with no other changes? Because of the other "return false" callers simply
+can't assume the function would never indicate failure back to them. (New
+"return false" could in principle also appear, which is why I think the base
+structure wants keeping as is, including in the callers.)
 
+Jan
 
