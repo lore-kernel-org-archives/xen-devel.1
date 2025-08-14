@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F18CA0EDC
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 18:46:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1082389.1442240 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 760E1CA0EE4
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Aug 2025 19:16:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1082403.1442251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umcxR-00017R-Iz; Thu, 14 Aug 2025 18:45:49 +0000
+	id 1umdQy-0001Ay-R0; Thu, 14 Aug 2025 19:16:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1082389.1442240; Thu, 14 Aug 2025 18:45:49 +0000
+Received: by outflank-mailman (output) from mailman id 1082403.1442251; Thu, 14 Aug 2025 19:16:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umcxR-00017K-GE; Thu, 14 Aug 2025 18:45:49 +0000
-Received: by outflank-mailman (input) for mailman id 1082389;
- Thu, 14 Aug 2025 18:45:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1umdQy-0001Ar-OJ; Thu, 14 Aug 2025 19:16:20 +0000
+Received: by outflank-mailman (input) for mailman id 1082403;
+ Thu, 14 Aug 2025 19:16:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mOIo=22=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1umcxQ-00017E-Kt
- for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 18:45:48 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e45c96a3-793e-11f0-a328-13f23c93f187;
- Thu, 14 Aug 2025 20:45:47 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3b9e414ef53so1121491f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 14 Aug 2025 11:45:47 -0700 (PDT)
+ id 1umdQx-0001Al-Tz
+ for xen-devel@lists.xenproject.org; Thu, 14 Aug 2025 19:16:19 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 254eb874-7943-11f0-b898-0df219b8e170;
+ Thu, 14 Aug 2025 21:16:14 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-45a20c51c40so440485e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Aug 2025 12:16:14 -0700 (PDT)
 Received: from [192.168.1.183] (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3ba54b6c93fsm2059399f8f.12.2025.08.14.11.45.46
+ 5b1f17b1804b1-45a1c71068csm30438435e9.29.2025.08.14.12.16.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Aug 2025 11:45:46 -0700 (PDT)
+ Thu, 14 Aug 2025 12:16:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,53 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e45c96a3-793e-11f0-a328-13f23c93f187
+X-Inumbo-ID: 254eb874-7943-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1755197147; x=1755801947; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1755198974; x=1755803774; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=9/Zko+2yKa3WJ85zsniF0G9v8Wzy5uyGbRRZ97TxGmw=;
-        b=fxZjxouKloWZe3y98oZ4yBf/j9MFNwHb1s8vpEbVs/udz+usx8PUs6IJuvUJAd2atL
-         ujTDW4h5pvDPoVhYwgQl425bZrNiCO7n/957Wwrzqyh6PdNKGRFulDlHwWXzFskg59bZ
-         8yyrXjdNIO4Jq6Up5nNC/uIM9C6BZA+NuEeuI=
+        bh=fvSxKhl9hrp5VRKuGPAXqBCjiWHN7luQcrTvacgPQqY=;
+        b=qHhXRRR/X7TSkMsT4Gv8nFEBjS+jsgccK8ROb19nfuX+VtxE5GaJcvyZ7R8FjVunoL
+         pzlUjPnJyqpW6dU4LO6UmXkelGqWYHny7xTXLdbQYf2Nn7ShDKZpD8TFApb82KExsL5B
+         FzhP8rTUqa7+9SoFaVhKSUOAG0a99b4LIhaso=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755197147; x=1755801947;
+        d=1e100.net; s=20230601; t=1755198974; x=1755803774;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9/Zko+2yKa3WJ85zsniF0G9v8Wzy5uyGbRRZ97TxGmw=;
-        b=wtzOd2ClO0QL1KYonH5hcTL8g47vOnLHV/men7UHC38g8gNxnxS9XeSg7/vduYApV2
-         adH8gtH3SLjwNoD86RulKKb217+kR3+n1mmYEh0KCgPln1aTmjlMh/HqOgWlUEFrqvka
-         Slb840Apr3e9sYSbqtfMWbYjPHu6h/KmFrbB1NKV83Rt89DuZF6M50xjwjysNIVXbkVS
-         lLOhFZeqomhxyXa2wYM+KhurABnboa/G6TW1IFbEsO0A6KyiO5HaK2kw4JHbdtJbjj9D
-         coWp6kfBQ28wQJaySOYAYJMS4qe1+xjNs0lmYJVlb7oKI3h4OPqo2hc0edJym4MAnkbl
-         Khpg==
-X-Forwarded-Encrypted: i=1; AJvYcCUzeJPb1nhjBowrNwwFszzEIvs2I/Z7WwXcBd91JcxnHBFu2LTdu47JHY0ul4UE/n6UZpEJCTv8rsA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxc2ddgNI/YZOmvODtpXWoX+1pDcmQg+KqCj8Sv5G1kwVIYBcUR
-	GuOo/brN1v2Q9EITXjgRFTwuWGuhPdHmL3nc5pC2tY1U6cyJd8FZjFue8EfydopzBtY=
-X-Gm-Gg: ASbGnctTIszrU/GjPvMSi6RSPkap54fhdAf5PYW87rgLGuS5WNjc9r7LLHG3i6UUrC+
-	kyw0RMAvU4LsnZ2s4jyiFCtir7MXp3ANeL0ao0nJ1EGtQmacsU0tIuq5IGwWwGuwyix5//0WCIE
-	1QgoGvQ3BhPn7mnh40VZUWnJRQ+HclWLkgjr+FzIHrmFKFQdy+p0N3cRDkh3d/17NenF3Ywkp7a
-	T2xVhYluWvjHUZ7AaoiNOsvZFgcEg5lfy8sAATC2rWqkG3fBsaQwxJ7YKIl/66dAcgZ3ucnJ2M5
-	EbmCm3ZzjP11YxtEb00/ulYcLEWATy/1tOwfrFy/n3+t9j78sqPVCNQwBnSN9I8i28c4661SCK2
-	F5VkuCrXu9NZcq87iSl12N4j/gUUmCxR8nE9uY3GW0dT9HGilcmq1Bp7cBI8zhc45UFgq
-X-Google-Smtp-Source: AGHT+IGiQAVO4siwkHMT3ShwKyY6J8zzZ1zOrRwUS8GBBSX52VjgW7eXlwJ8QKhZ008/OPcbcUNrDA==
-X-Received: by 2002:a05:6000:40ce:b0:3b8:f8d0:f75c with SMTP id ffacd0b85a97d-3b9edf2d867mr4085817f8f.35.1755197146970;
-        Thu, 14 Aug 2025 11:45:46 -0700 (PDT)
-Message-ID: <79521edc-34d9-4364-922d-158e93fcbc04@citrix.com>
-Date: Thu, 14 Aug 2025 19:45:45 +0100
+        bh=fvSxKhl9hrp5VRKuGPAXqBCjiWHN7luQcrTvacgPQqY=;
+        b=Z2y9dJIsy0bnk5dgGXXQP39HUpoZAuI/khUikeUvevyXPbD/xTgWKk9uTgoyrcVltD
+         LMnXyt/zsWHPdbUuZk5QJhrY6ehUbx222QsBnY/sznkOq2SRYszVx6f8TVrfudr4QC3N
+         LZ4Mw5AqNtHUAHdVfC9MrHQjvKdmZND/4h51msFWQvess8OMfhEudGbtAm9wVQuSIdbu
+         uRopHZD2nLAGSmT/biE0xK5gPDGF/c+b6MhM1IubDuVAiFPacShXhoO5BaFUCXwsq0mb
+         JdTpipJIkHMt8v57yV68NpYtXnQLvfhT5cMRMxq2F+P10bbbE3VUv/Qiz4bUXy5Utrqu
+         3v9g==
+X-Gm-Message-State: AOJu0YwTA4yIQ0yqqeyeUDO++WIeUPQh+p7W2ucns8uUA3BjXHh3fkML
+	WSJBtSx7KYWulGcrvGUyxHZHPLmdL/j8lBwk8LBAtSzkdLMlHHZzsZWOtGWoFb2Zc5g=
+X-Gm-Gg: ASbGncu0gADb+yuGLv/qOBxeZLy2+qLX6tnB0E72qUm03viiqMtoGBbBDMMXonyT5e9
+	D1B2RmljcWkkKbP9eehjeW08kBpKpVt5ro60VcBb8V40GEMJjnT7SB6rcDvP/fqYPSmUlgfjCpK
+	nzovF9/MvWiH37DSdknT5BazFKoSdsR1HHjAVEydKe6H0ILmPEE8+6d2US23ubB63S3Sh31blhb
+	eWuSOxcXHX9S0ijs0iTxI3XZFPUTMdPYRjabi/gXx18M9pvRlRcqQjoiCZh0CzD64y7YI1yQT6i
+	qOWhAKb8DPH4ZEPuj8ZdPL3yZcC4G321zMX9zGuA/Vrt31aBMdsuv20RsgRyAULzmKk+nIWsXXq
+	2Nm36Uw2WXDE1bN3aIENvXYsQVj/774C2MEExkaFVvgHunX9yfL0dldm90JLNZWFplMw6
+X-Google-Smtp-Source: AGHT+IFjg6gAE/jKm3eUDld0/P6lacsCR5feUoRad8CD8Rd0VzZlYm3En+Itr4OhbZgOrMT/QRseKQ==
+X-Received: by 2002:a05:600c:4fc7:b0:455:f59e:fdaa with SMTP id 5b1f17b1804b1-45a20c11693mr1182905e9.21.1755198973894;
+        Thu, 14 Aug 2025 12:16:13 -0700 (PDT)
+Message-ID: <8adbd032-9da2-481d-8d98-30c9a605ec46@citrix.com>
+Date: Thu, 14 Aug 2025 20:16:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 13/22] x86: FRED enumerations
+Subject: Re: [PATCH 15/22] x86/traps: Introduce opt_fred
 To: Jan Beulich <jbeulich@suse.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 References: <20250808202314.1045968-1-andrew.cooper3@citrix.com>
- <20250808202314.1045968-14-andrew.cooper3@citrix.com>
- <9b4da5b3-dd68-4052-92cc-fe322164eaa5@suse.com>
- <737eab59-f016-426a-ba6e-e6c7a58a9e61@suse.com>
+ <20250808202314.1045968-16-andrew.cooper3@citrix.com>
+ <0a6b6fce-2cc8-4933-8703-399e4a4fdad6@suse.com>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -139,60 +137,84 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <737eab59-f016-426a-ba6e-e6c7a58a9e61@suse.com>
+In-Reply-To: <0a6b6fce-2cc8-4933-8703-399e4a4fdad6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 14/08/2025 2:19 pm, Jan Beulich wrote:
-> On 14.08.2025 13:20, Jan Beulich wrote:
->> On 08.08.2025 22:23, Andrew Cooper wrote:
->>> --- a/xen/include/public/arch-x86/cpufeatureset.h
->>> +++ b/xen/include/public/arch-x86/cpufeatureset.h
->>> @@ -310,7 +310,10 @@ XEN_CPUFEATURE(ARCH_PERF_MON, 10*32+8) /*   Architectural Perfmon */
->>>  XEN_CPUFEATURE(FZRM,         10*32+10) /*A  Fast Zero-length REP MOVSB */
->>>  XEN_CPUFEATURE(FSRS,         10*32+11) /*A  Fast Short REP STOSB */
->>>  XEN_CPUFEATURE(FSRCS,        10*32+12) /*A  Fast Short REP CMPSB/SCASB */
->>> +XEN_CPUFEATURE(FRED,         10*32+17) /*   Fast Return and Event Delivery */
->>> +XEN_CPUFEATURE(LKGS,         10*32+18) /*   Load Kernel GS instruction */
->>>  XEN_CPUFEATURE(WRMSRNS,      10*32+19) /*S  WRMSR Non-Serialising */
->>> +XEN_CPUFEATURE(NMI_SRC,      10*32+20) /*   NMI-Source Reporting */
->>>  XEN_CPUFEATURE(AMX_FP16,     10*32+21) /*   AMX FP16 instruction */
->>>  XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
->>>  XEN_CPUFEATURE(LAM,          10*32+26) /*   Linear Address Masking */
->> I'd like to note that we could long have had this if my long-pending emulator
->> patch had gone in at some point.
-> Actually what I further have there, and what in the context of patch 15 I
-> notice you should have here is
+On 14/08/2025 2:30 pm, Jan Beulich wrote:
+> On 08.08.2025 22:23, Andrew Cooper wrote:
+>> ... disabled by default.  There is a lot of work before FRED can be enabled by
+>> default.
+>>
+>> One part of FRED, the LKGS (Load Kernel GS) instruction, is enumerated
+>> separately but is mandatory as FRED disallows the SWAPGS instruction.
+>> Therefore, both CPUID bits must be checked.
+> See my (further) reply to patch 13 - I think FRED simply ought to depend on
+> LKGS.
 >
-> --- a/xen/tools/gen-cpuid.py
-> +++ b/xen/tools/gen-cpuid.py
-> @@ -278,7 +278,8 @@ def crunch_numbers(state):
->          # superpages, PCID and PKU are only available in 4 level paging.
->          # NO_LMSL indicates the absense of Long Mode Segment Limits, which
->          # have been dropped in hardware.
-> -        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD],
-> +        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
-> +             LKGS],
->  
->          # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
->          # standard 3DNow in the earlier K6 processors.
-> @@ -347,6 +348,9 @@ def crunch_numbers(state):
->          # computational instructions.  All further AMX features are built on top
->          # of AMX-TILE.
->          AMX_TILE: [AMX_BF16, AMX_INT8, AMX_FP16, AMX_COMPLEX],
-> +
-> +        # FRED builds on the LKGS instruction.
-> +        LKGS: [FRED],
->      }
->  
->      deep_features = tuple(sorted(deps.keys()))
+>> @@ -20,6 +22,9 @@ unsigned int __ro_after_init ler_msr;
+>>  static bool __initdata opt_ler;
+>>  boolean_param("ler", opt_ler);
+>>  
+>> +int8_t __ro_after_init opt_fred = 0; /* -1 when supported. */
+> I'm a little puzzled by the comment? DYM "once default-enabled"?
 
-Hmm.  Yes, but normally this is part of guest enablement.
+Well, I have this temporary patch
+https://gitlab.com/xen-project/hardware/xen-staging/-/commit/70ef6a1178a411a29b7b1745a1112e267ffb6245
+that will turn into a real patch when we enable FRED by default.
 
-Having now done the Xen work and concluded that we don't actually need
-LKGS, I'm rethinking the linkage here.  It's probably the right thing to
-do in practice, but probably needs a bit more in the way of
-justification.  "built on" doesn't quite cut it IMO.
+As much as anything else, it was just a TODO.
+
+
+>  Then ...
+>
+>> @@ -305,6 +310,32 @@ void __init traps_init(void)
+>>      /* Replace early pagefault with real pagefault handler. */
+>>      _update_gate_addr_lower(&bsp_idt[X86_EXC_PF], entry_PF);
+>>  
+>> +    if ( !cpu_has_fred || !cpu_has_lkgs )
+>> +    {
+>> +        if ( opt_fred )
+> ... this won't work anymore once the initializer is changed.
+
+Hmm yes.  That wants to be an == 1 check.  Fixed.
+
+>
+>> +            printk(XENLOG_WARNING "FRED not available, ignoring\n");
+>> +        opt_fred = false;
+> Better use 0 here?
+>
+>> +    }
+>> +
+>> +    if ( opt_fred == -1 )
+>> +        opt_fred = !pv_shim;
+> Imo it would be better to have the initializer be -1 right away, and comment
+> out the "!pv_shim" here, until we mean it to be default-enabled.
+
+It cannot be -1, or Xen will fail spectacularly on any FRED capable
+hardware.  Setting to -1 is the point at which FRED becomes security
+supported.
+
+>
+>> +    if ( opt_fred )
+>> +    {
+>> +#ifdef CONFIG_PV32
+>> +        if ( opt_pv32 )
+>> +        {
+>> +            opt_pv32 = 0;
+>> +            printk(XENLOG_INFO "Disabling PV32 due to FRED\n");
+>> +        }
+>> +#endif
+>> +        printk("Using FRED event delivery\n");
+>> +    }
+>> +    else
+>> +    {
+>> +        printk("Using IDT event delivery\n");
+>> +    }
+> Could I talk you into omitting the figure braces here? Hmm, or perhaps you
+> mean to later move code here.
+
+Indeed, patch 22.
 
 ~Andrew
 
