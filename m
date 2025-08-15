@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEC09CA0EE4
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 20:41:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1083892.1443398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0D5CA0EE9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 20:41:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1083894.1443415 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Ey-0007CU-4y; Fri, 15 Aug 2025 20:41:32 +0000
+	id 1un1F0-0007Z3-72; Fri, 15 Aug 2025 20:41:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1083892.1443398; Fri, 15 Aug 2025 20:41:32 +0000
+Received: by outflank-mailman (output) from mailman id 1083894.1443415; Fri, 15 Aug 2025 20:41:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Ex-0007Bc-Ro; Fri, 15 Aug 2025 20:41:31 +0000
-Received: by outflank-mailman (input) for mailman id 1083892;
- Fri, 15 Aug 2025 20:41:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1un1Ez-0007XA-Fy; Fri, 15 Aug 2025 20:41:33 +0000
+Received: by outflank-mailman (input) for mailman id 1083894;
+ Fri, 15 Aug 2025 20:41:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oFbR=23=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1un1Ev-0005Rl-IV
- for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:29 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 376d5f8f-7a18-11f0-b898-0df219b8e170;
- Fri, 15 Aug 2025 22:41:27 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-45a1b0cd668so11569915e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:27 -0700 (PDT)
+ id 1un1Ex-0005E7-9v
+ for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:31 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 39581d1d-7a18-11f0-a328-13f23c93f187;
+ Fri, 15 Aug 2025 22:41:31 +0200 (CEST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3b9e4148134so1245347f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:30 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.26
+ ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 13:41:26 -0700 (PDT)
+ Fri, 15 Aug 2025 13:41:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 376d5f8f-7a18-11f0-b898-0df219b8e170
+X-Inumbo-ID: 39581d1d-7a18-11f0-a328-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1755290487; x=1755895287; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1755290490; x=1755895290; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DXNyVngOEhOHNH/b7q938K73j9wIxC+b5U4uBb+L+Oc=;
-        b=LVmwXDOuKOIGG1nmVGi3isqu3JBt8oPlHVoQNh8qP6VWUyg/nIPGE1mXsODDvfq7jJ
-         V8ji6hhgFyZ4BOCBk7VNLt9Llr1Ql9HAJob5j43boW08inR60LP+/goUofTlenoxblgE
-         hzJELlf2HYaMY4/9XJyJ8W83UGTJzLTQCQ7Oc=
+        bh=FvO0yLtg8eUzoMi6i7eFIKNAZaltNGJ3gKQP47UCP/c=;
+        b=SDs43sESv2h4o8hjJLbluotkQwu296vvU+HE1HTMWlfSiZKNzfxYex1cT+qHlZ9Tl7
+         glx0Raa7RdpfJshz6/fU60PHXQQJtsOn6VSkpk84r3k9aQL7Lq+R//Oi0+VuZpnri7+3
+         OoHCajUa/T7HeJ1sjw2oqml8D0pTcc6Dt+Cn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755290487; x=1755895287;
+        d=1e100.net; s=20230601; t=1755290490; x=1755895290;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=DXNyVngOEhOHNH/b7q938K73j9wIxC+b5U4uBb+L+Oc=;
-        b=DXTO+LLzAC8ZwB8rRrU6WSbarY2MmZTTjUDhTKGra2aUngZXmFNG2UYUVXC5hFdDU0
-         ySWAyGH7bCIJ2OlcZxwAnq5OcQPx5PVW5EzIe8jHrcPqCN2XAffBFdnvQ8FuIHFAwl8H
-         X4aC0fahsIyoLfD/nU2W4buiXkNzyR0+sSmEj2CxctTmDQtYiJBseAyyZ84fO2v8Ucrm
-         d3PkM8F0rgnlGZ2YPUt0lP98a5hpThR+3GloSj1hSR1KWEMurbNFhIAcZzLgrz4T93JH
-         1dKVQ6DK4eBemzWjGC3bGJp9gpomgKnRSS0GuD1pWWHNe0bhJ9IbO59UxVQi0yZyVwI7
-         yy3g==
-X-Gm-Message-State: AOJu0YwHCwzL5ZIkMu1gdebd6xJVR17zHTN3gLgf/OrZDs09/0Wnn2Cg
-	+MlAiXcOOOiPsGI/NbyGwrrsjYjWCcOe9g5T7ZTnG1kc84XRBxrWin5pelIkTg/PaZkWECwBZCg
-	qFjFe
-X-Gm-Gg: ASbGncs6jE0eSiU8WD58KZm5JvEx4JcWhacBuSopuq5ekrImHXIcj3wMFbbZuXTLzwT
-	SyywleQW9d/Ob+FRORTPL8Kh9EU4u+oor7C13ngyoI6uejy2PUc8NpotTtPMaatpXiH9IevKbER
-	PqCnWynOV4GyqwB79aUR1dnZS13MgVS3T/YdvBwKcBdl9gGYZ/fExM53pdA/HLQMUt4t4VPnM5C
-	wRu5Lm+BSK03Kard7zPpvWJm8ipEd53HBSYBjCMrfS7zFo8pEPeEZ7QmhcdEDnt/HAxFQk9A/gO
-	wWMhCzHWXHCIU6Wc24e/4USJWF9kJmKU6tlh8qva5Mr20xhEk/uD5ucvgZqXYjsIM45ivtO66dq
-	IlCP4gw7gBl9/UOuMdhU20IW9BIFo1DN97nKh8UHBlxpFEWLpZHszhftCJR3xuZZs7nzGH7mgv/
-	Wy
-X-Google-Smtp-Source: AGHT+IERbAFAL3Ci1q7SYpibLQpNPLvDtFGVRZkn2GMM5I+jZ7s5bpsYM73D0whD2jnzaR8gVXSR4w==
-X-Received: by 2002:a05:600c:1e03:b0:450:d3b9:4ba4 with SMTP id 5b1f17b1804b1-45a21d49bcemr31971645e9.2.1755290486820;
-        Fri, 15 Aug 2025 13:41:26 -0700 (PDT)
+        bh=FvO0yLtg8eUzoMi6i7eFIKNAZaltNGJ3gKQP47UCP/c=;
+        b=koBU1eL4YtUvPpz/UjOVLDzFBeE8Q8zm27h5y+7amk8IWiURWr/4wio4i9jVivgo4E
+         UED7MjC/TeBCt8yYF7GcGwVcS75eqXCtsIrvmxFtk6e3ruU687Z0UBfHknLeQaylxcQd
+         WYpUXkxkAx6etOKRezxz0RRkHqRwdM4RBMSeOT54mC3Pp4nzwxcUnf79QUGsplWYTPWc
+         U3h9XMexVpbkLY+1fKZLHEO9dfoaMl7Bm/Mm2ENKXCvF0eDOCCNC6N73qSrvyyWuHylJ
+         ClpLNqJAhQKOIN9xTX+fViRSCmptL8VhoYgY2f7ntyPomD9ABbqw6GHI8EzIqwdlCRVc
+         1HAw==
+X-Gm-Message-State: AOJu0YzncWpzAR7yn93efCoxyRhrKNWC2to/6aftJM46Iw64PquMeeNi
+	Rnc1vtD4mEMJ/Yzj22DMgtNSy9cX21p1lRmsS+dhCe2SCe8IuulXFWTbldqKR9ZFJq2sRhCU8WG
+	9HfGx
+X-Gm-Gg: ASbGncvJ2ejbMoyK2ZK1cIbQ6P0OvWp3u8gpKpk4r6Y+tnyQ6NmpaieXrDwOBBBuLGa
+	shrztAZQBJBaT9MogTecpeZ4FFTA1xYV8cxJiEABXIFPa5XiminBj+Gno5t1HToWKOYaYchvv5h
+	fv95vq3oyWPl3CMSVExRgGiqmyUjpJ1l/WgUN2TUxGfCetNkDbMaDUYwgTxX5DrKnvzq2xDPnu1
+	2cABp4Z1pAoE295Bb9KfZKigqlyvwppjLJClwIRCugkxUemeRj5U6Cwqo5dxfjS3UgLD1NSyoP3
+	AysLhueKQa62WuJxYOYil1kqPDzqsDPfCnmEJEZF5IGzO4vRFKG8Ky8EmWcV6eS6Zk6YT4rxgg7
+	hMQFNA9c5Qt68d45KVHv0Kj80Dlnn/911SjBH/HzOnO3dpSOXsCu/3k14Ug6jBqoYfjNzyjMOhv
+	16
+X-Google-Smtp-Source: AGHT+IE5gUnTS0BYvPT4trTFUJODzmMQk18pgqY+TyoH28fLr+55LY4YaVDros88nEa37ogXoOhYdQ==
+X-Received: by 2002:a05:6000:3113:b0:3b7:75dd:f37d with SMTP id ffacd0b85a97d-3bb636edd8emr2680132f8f.0.1755290489859;
+        Fri, 15 Aug 2025 13:41:29 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 08/16] x86: Clean up asm/time.h
-Date: Fri, 15 Aug 2025 21:41:09 +0100
-Message-Id: <20250815204117.3312742-9-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 12/16] x86/msr: Change wrmsr() to take a single parameter
+Date: Fri, 15 Aug 2025 21:41:13 +0100
+Message-Id: <20250815204117.3312742-13-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
 References: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
@@ -97,315 +97,183 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-With asm/tsc.h split out, asm/time.h shouldn't be including asm/msr.h, but it
-turns out that an outrageous number of files (even some headers) are pulling
-their dependentices transitively through asm/time.h -> asm/msr.h
+Mirroring the cleanup to rdmsr(), do the same to wrmsr().  It now has the same
+API as wrmsrl(), but we'll want to drop that wrapper in due course.
 
-Most are asm/msr{,-index}.h, but in some cases it's printk(), va_args, and
-even PRIxxx macros.
+It's telling that almost all remaining users pass in 0.  Most are converted
+directly to WRMSRNS, but a few are not.
 
-Give asm/time.h an SPDX tag, and strip trailing whitespace.
-
-No functional change.
+MSR_VIRT_SPEC_CTRL is unconditionally intercepted is orders of magnitude more
+expensive than just serialising.  In disable_lapic_nmi_watchdog(), the P4 case
+won't run on hardware which has anything more than plain WRMSR.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-Randconfig in CI has stopped finding new issues, but there's a reasonable risk
-that more is still lurking.
-
-ubsan.c needing asm/processor.h isn't good but it does work with all 4
-architectures right now.  We really ought to have dump_execution_state()
-somewhere more common.
 ---
- xen/arch/x86/acpi/cpufreq/acpi.c    |  3 ++-
- xen/arch/x86/acpi/cpufreq/cpufreq.c |  3 +++
- xen/arch/x86/cpu/mcheck/mce.h       |  1 +
- xen/arch/x86/debug.c                |  1 +
- xen/arch/x86/guest/hyperv/hyperv.c  |  1 +
- xen/arch/x86/hvm/ioreq.c            |  1 +
- xen/arch/x86/hvm/vmx/vvmx.c         |  1 +
- xen/arch/x86/include/asm/hvm/hvm.h  |  1 +
- xen/arch/x86/include/asm/time.h     | 12 ++++++------
- xen/arch/x86/machine_kexec.c        |  1 +
- xen/arch/x86/psr.c                  |  2 ++
- xen/arch/x86/tboot.c                |  1 +
- xen/arch/x86/xstate.c               |  1 +
- xen/common/efi/runtime.c            |  1 +
- xen/common/ubsan/ubsan.c            |  2 ++
- xen/drivers/acpi/apei/apei-base.c   |  1 +
- xen/drivers/acpi/tables/tbfadt.c    |  2 ++
- xen/drivers/acpi/utilities/utmisc.c |  3 +++
- xen/lib/x86/private.h               |  2 +-
- 19 files changed, 32 insertions(+), 8 deletions(-)
+ xen/arch/x86/cpu/amd.c                  |  2 +-
+ xen/arch/x86/hvm/vmx/vmcs.c             |  2 +-
+ xen/arch/x86/include/asm/msr.h          | 20 ++++++++++----------
+ xen/arch/x86/nmi.c                      | 18 +++++++++---------
+ xen/arch/x86/oprofile/op_model_athlon.c |  2 +-
+ 5 files changed, 22 insertions(+), 22 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpufreq/acpi.c b/xen/arch/x86/acpi/cpufreq/acpi.c
-index b81f2afc9b9b..567c10dd0643 100644
---- a/xen/arch/x86/acpi/cpufreq/acpi.c
-+++ b/xen/arch/x86/acpi/cpufreq/acpi.c
-@@ -14,7 +14,8 @@
- #include <xen/delay.h>
- #include <xen/errno.h>
- #include <xen/param.h>
--#include <xen/types.h>
-+
-+#include <asm/msr.h>
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 769413e96a3f..e03fba935510 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -934,7 +934,7 @@ void amd_set_legacy_ssbd(bool enable)
+ 		return;
  
- #include <acpi/acpi.h>
- #include <acpi/cpufreq/cpufreq.h>
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 45f301f354ac..d18735c7ae1b 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -30,6 +30,9 @@
- #include <xen/errno.h>
- #include <xen/param.h>
- #include <xen/sched.h>
-+
-+#include <asm/msr.h>
-+
- #include <acpi/cpufreq/cpufreq.h>
+ 	if (cpu_has_virt_ssbd)
+-		wrmsr(MSR_VIRT_SPEC_CTRL, enable ? SPEC_CTRL_SSBD : 0, 0);
++		wrmsr(MSR_VIRT_SPEC_CTRL, enable ? SPEC_CTRL_SSBD : 0);
+ 	else if (amd_legacy_ssbd)
+ 		core_set_legacy_ssbd(enable);
+ 	else
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 1fa61a944b23..328cba64387d 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -754,7 +754,7 @@ static int _vmx_cpu_up(bool bsp)
+         eax |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
+         if ( test_bit(X86_FEATURE_SMX, &boot_cpu_data.x86_capability) )
+             eax |= IA32_FEATURE_CONTROL_ENABLE_VMXON_INSIDE_SMX;
+-        wrmsr(MSR_IA32_FEATURE_CONTROL, eax, 0);
++        wrmsrns(MSR_IA32_FEATURE_CONTROL, eax);
+     }
  
- struct acpi_cpufreq_data *cpufreq_drv_data[NR_CPUS];
-diff --git a/xen/arch/x86/cpu/mcheck/mce.h b/xen/arch/x86/cpu/mcheck/mce.h
-index 6157a41aaeea..aa00e94cb5b1 100644
---- a/xen/arch/x86/cpu/mcheck/mce.h
-+++ b/xen/arch/x86/cpu/mcheck/mce.h
-@@ -8,6 +8,7 @@
- #include <xen/smp.h>
+     if ( (rc = vmx_init_vmcs_config(bsp)) != 0 )
+diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
+index f1b2bd5adc9f..1bd27b989a4d 100644
+--- a/xen/arch/x86/include/asm/msr.h
++++ b/xen/arch/x86/include/asm/msr.h
+@@ -15,13 +15,17 @@
+  *   uint64_t foo = rdmsr(MSR_BAR);
+  *   wrmsrns(MSR_BAR, foo);
+  *
++ * and, if architectural serialisaition is necessary, or there are other
++ * reasons that WRMSRNS is inapplicable, then:
++ *
++ *   wrmsr(MSR_BAR, foo);
++ *
+  * In addition, *_safe() wrappers exist to cope gracefully with a #GP.
+  *
+  *
+  * All legacy forms are to be phased out:
+  *
+  *  rdmsrl(MSR_FOO, val);
+- *  wrmsr(MSR_FOO, lo, hi);
+  *  wrmsrl(MSR_FOO, val);
+  */
  
- #include <asm/atomic.h>
-+#include <asm/msr.h>
- #include <asm/traps.h>
+@@ -43,17 +47,13 @@ static inline uint64_t rdmsr(unsigned int msr)
+        val = a__ | ((u64)b__<<32); \
+ } while(0)
  
- #include "x86_mca.h"
-diff --git a/xen/arch/x86/debug.c b/xen/arch/x86/debug.c
-index 11b0a7e5475a..037f97d6f17b 100644
---- a/xen/arch/x86/debug.c
-+++ b/xen/arch/x86/debug.c
-@@ -10,6 +10,7 @@
- #include <asm/current.h>
- #include <asm/debugreg.h>
- #include <asm/guest-msr.h>
-+#include <asm/msr.h>
- 
- /*
-  * Merge new bits into dr6.  'new' is always given in positive polarity,
-diff --git a/xen/arch/x86/guest/hyperv/hyperv.c b/xen/arch/x86/guest/hyperv/hyperv.c
-index 6989af38f180..90757e079362 100644
---- a/xen/arch/x86/guest/hyperv/hyperv.c
-+++ b/xen/arch/x86/guest/hyperv/hyperv.c
-@@ -12,6 +12,7 @@
- #include <asm/fixmap.h>
- #include <asm/guest.h>
- #include <asm/guest/hyperv-tlfs.h>
-+#include <asm/msr.h>
- #include <asm/processor.h>
- 
- #include "private.h"
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 98b0dd7972c2..d79a1a23655e 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -20,6 +20,7 @@
- #include <asm/hvm/emulate.h>
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/vmx/vmx.h>
-+#include <asm/msr.h>
- 
- #include <public/hvm/ioreq.h>
- #include <public/hvm/params.h>
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 6201665d9f4c..e4f3a5fe4c71 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -15,6 +15,7 @@
- #include <asm/hvm/support.h>
- #include <asm/hvm/vmx/vmx.h>
- #include <asm/hvm/vmx/vvmx.h>
-+#include <asm/msr.h>
- #include <asm/mtrr.h>
- #include <asm/p2m.h>
- 
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 228f47dbde8b..5c5a790f9e41 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -15,6 +15,7 @@
- #include <asm/asm_defns.h>
- #include <asm/current.h>
- #include <asm/hvm/asid.h>
-+#include <asm/msr-index.h>
- #include <asm/x86_emulate.h>
- 
- struct pirq; /* needed by pi_update_irte */
-diff --git a/xen/arch/x86/include/asm/time.h b/xen/arch/x86/include/asm/time.h
-index c55b69831448..e474a76e64df 100644
---- a/xen/arch/x86/include/asm/time.h
-+++ b/xen/arch/x86/include/asm/time.h
-@@ -1,8 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef X86_TIME_H
-+#define X86_TIME_H
- 
--#ifndef __X86_TIME_H__
--#define __X86_TIME_H__
+-#define wrmsr(msr,val1,val2) \
+-     __asm__ __volatile__("wrmsr" \
+-			  : /* no outputs */ \
+-			  : "c" (msr), "a" (val1), "d" (val2))
 -
--#include <asm/msr.h>
- #include <asm/tsc.h>
+-static inline void wrmsrl(unsigned int msr, uint64_t val)
++static inline void wrmsr(unsigned int msr, uint64_t val)
+ {
+-        uint32_t lo = val, hi = val >> 32;
++    uint32_t lo = val, hi = val >> 32;
  
- typedef u64 cycles_t;
-@@ -38,6 +37,7 @@ uint64_t cf_check acpi_pm_tick_to_ns(uint64_t ticks);
+-        wrmsr(msr, lo, hi);
++    asm volatile ( "wrmsr" :: "a" (lo), "d" (hi), "c" (msr) );
+ }
++#define wrmsrl(msr, val) wrmsr(msr, val)
  
- uint64_t tsc_ticks2ns(uint64_t ticks);
+ /* Non-serialising WRMSR, when available.  Falls back to a serialising WRMSR. */
+ static inline void wrmsrns(uint32_t msr, uint64_t val)
+@@ -151,7 +151,7 @@ static inline void wrmsr_tsc_aux(uint32_t val)
  
-+struct cpu_user_regs;
- uint64_t pv_soft_rdtsc(const struct vcpu *v, const struct cpu_user_regs *regs);
- uint64_t gtime_to_gtsc(const struct domain *d, uint64_t time);
- uint64_t gtsc_to_gtime(const struct domain *d, uint64_t tsc);
-@@ -47,7 +47,7 @@ int tsc_set_info(struct domain *d, uint32_t tsc_mode, uint64_t elapsed_nsec,
+     if ( *this_tsc_aux != val )
+     {
+-        wrmsr(MSR_TSC_AUX, val, 0);
++        wrmsrns(MSR_TSC_AUX, val);
+         *this_tsc_aux = val;
+     }
+ }
+diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
+index 9793fa23168d..0d4aaa5a0b57 100644
+--- a/xen/arch/x86/nmi.c
++++ b/xen/arch/x86/nmi.c
+@@ -218,16 +218,16 @@ void disable_lapic_nmi_watchdog(void)
+         return;
+     switch (boot_cpu_data.x86_vendor) {
+     case X86_VENDOR_AMD:
+-        wrmsr(MSR_K7_EVNTSEL0, 0, 0);
++        wrmsrns(MSR_K7_EVNTSEL0, 0);
+         break;
+     case X86_VENDOR_INTEL:
+         switch (boot_cpu_data.x86) {
+         case 6:
+-            wrmsr(MSR_P6_EVNTSEL(0), 0, 0);
++            wrmsrns(MSR_P6_EVNTSEL(0), 0);
+             break;
+         case 15:
+-            wrmsr(MSR_P4_IQ_CCCR0, 0, 0);
+-            wrmsr(MSR_P4_CRU_ESCR0, 0, 0);
++            wrmsr(MSR_P4_IQ_CCCR0, 0);
++            wrmsr(MSR_P4_CRU_ESCR0, 0);
+             break;
+         }
+         break;
+@@ -282,7 +282,7 @@ static void clear_msr_range(unsigned int base, unsigned int n)
+     unsigned int i;
  
- void tsc_get_info(struct domain *d, uint32_t *tsc_mode, uint64_t *elapsed_nsec,
-                   uint32_t *gtsc_khz, uint32_t *incarnation);
--   
-+
+     for (i = 0; i < n; i++)
+-        wrmsr(base+i, 0, 0);
++        wrmsrns(base + i, 0);
+ }
  
- void force_update_vcpu_system_time(struct vcpu *v);
+ static inline void write_watchdog_counter(const char *descr)
+@@ -308,11 +308,11 @@ static void setup_k7_watchdog(void)
+         | K7_EVNTSEL_USR
+         | K7_NMI_EVENT;
  
-@@ -93,4 +93,4 @@ u64 scale_delta(u64 delta, const struct time_scale *scale);
- #define PIT_STATUS_NULL_COUNT (1 << 6)
- /* Lower bits match Timer Control Word. */
+-    wrmsr(MSR_K7_EVNTSEL0, evntsel, 0);
++    wrmsr(MSR_K7_EVNTSEL0, evntsel);
+     write_watchdog_counter("K7_PERFCTR0");
+     apic_write(APIC_LVTPC, APIC_DM_NMI);
+     evntsel |= K7_EVNTSEL_ENABLE;
+-    wrmsr(MSR_K7_EVNTSEL0, evntsel, 0);
++    wrmsr(MSR_K7_EVNTSEL0, evntsel);
+ }
  
--#endif /* __X86_TIME_H__ */
-+#endif /* X86_TIME_H */
-diff --git a/xen/arch/x86/machine_kexec.c b/xen/arch/x86/machine_kexec.c
-index 35fa5c82e9c2..f921eec5aae6 100644
---- a/xen/arch/x86/machine_kexec.c
-+++ b/xen/arch/x86/machine_kexec.c
-@@ -24,6 +24,7 @@
- #include <asm/hpet.h>
- #include <asm/idt.h>
- #include <asm/machine_kexec.h>
-+#include <asm/msr.h>
- #include <asm/page.h>
+ static void setup_p6_watchdog(unsigned counter)
+@@ -338,11 +338,11 @@ static void setup_p6_watchdog(unsigned counter)
+         | P6_EVNTSEL_USR
+         | counter;
  
- /*
-diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
-index 499d320e6163..9c7aab9f4021 100644
---- a/xen/arch/x86/psr.c
-+++ b/xen/arch/x86/psr.c
-@@ -18,6 +18,8 @@
- #include <xen/init.h>
- #include <xen/param.h>
- #include <xen/sched.h>
-+
-+#include <asm/msr.h>
- #include <asm/psr.h>
+-    wrmsr(MSR_P6_EVNTSEL(0), evntsel, 0);
++    wrmsrns(MSR_P6_EVNTSEL(0), evntsel);
+     write_watchdog_counter("P6_PERFCTR0");
+     apic_write(APIC_LVTPC, APIC_DM_NMI);
+     evntsel |= P6_EVNTSEL0_ENABLE;
+-    wrmsr(MSR_P6_EVNTSEL(0), evntsel, 0);
++    wrmsrns(MSR_P6_EVNTSEL(0), evntsel);
+ }
  
- /*
-diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
-index 319116857d4a..9d9bb6e7cf6d 100644
---- a/xen/arch/x86/tboot.c
-+++ b/xen/arch/x86/tboot.c
-@@ -11,6 +11,7 @@
+ static void setup_p4_watchdog(void)
+diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/oprofile/op_model_athlon.c
+index bf897a4b6328..fd454b04c353 100644
+--- a/xen/arch/x86/oprofile/op_model_athlon.c
++++ b/xen/arch/x86/oprofile/op_model_athlon.c
+@@ -34,7 +34,7 @@
+ #define MAX_COUNTERS FAM15H_NUM_COUNTERS
  
- #include <asm/e820.h>
- #include <asm/fixmap.h>
-+#include <asm/msr.h>
- #include <asm/page.h>
- #include <asm/processor.h>
- #include <asm/setup.h>
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index f6d677eb121d..e990abc9d18c 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -14,6 +14,7 @@
- #include <asm/cpu-policy.h>
- #include <asm/current.h>
- #include <asm/i387.h>
-+#include <asm/msr.h>
- #include <asm/processor.h>
- #include <asm/xstate.h>
+ #define CTR_READ(msr_content,msrs,c) do {rdmsrl(msrs->counters[(c)].addr, (msr_content));} while (0)
+-#define CTR_WRITE(l,msrs,c) do {wrmsr(msrs->counters[(c)].addr, -(unsigned int)(l), -1);} while (0)
++#define CTR_WRITE(l,msrs,c) do { wrmsr(msrs->counters[(c)].addr, -l); } while (0)
+ #define CTR_OVERFLOWED(n) (!((n) & (1ULL<<31)))
  
-diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
-index 7e1fce291d92..42386c6bde42 100644
---- a/xen/common/efi/runtime.c
-+++ b/xen/common/efi/runtime.c
-@@ -33,6 +33,7 @@ void efi_rs_leave(struct efi_rs_state *state);
- 
- #ifndef CONFIG_ARM
- # include <asm/i387.h>
-+# include <asm/msr.h>
- # include <asm/xstate.h>
- # include <public/platform.h>
- #endif
-diff --git a/xen/common/ubsan/ubsan.c b/xen/common/ubsan/ubsan.c
-index 20aa0cb598e1..15ae34816412 100644
---- a/xen/common/ubsan/ubsan.c
-+++ b/xen/common/ubsan/ubsan.c
-@@ -16,6 +16,8 @@
- #include <xen/percpu.h>
- #include <xen/spinlock.h>
- 
-+#include <asm/processor.h>
-+
- #define __noreturn    noreturn
- #define pr_err(...) printk(XENLOG_ERR __VA_ARGS__)
- struct xen_ubsan { int in_ubsan; };
-diff --git a/xen/drivers/acpi/apei/apei-base.c b/xen/drivers/acpi/apei/apei-base.c
-index 4fe99573a220..1722698ba675 100644
---- a/xen/drivers/acpi/apei/apei-base.c
-+++ b/xen/drivers/acpi/apei/apei-base.c
-@@ -36,6 +36,7 @@
- #include <xen/errno.h>
- #include <xen/init.h>
- #include <xen/kernel.h>
-+#include <xen/lib.h>
- #include <xen/spinlock.h>
- #include <xen/string.h>
- 
-diff --git a/xen/drivers/acpi/tables/tbfadt.c b/xen/drivers/acpi/tables/tbfadt.c
-index a03836e0dc8a..32678700bdc8 100644
---- a/xen/drivers/acpi/tables/tbfadt.c
-+++ b/xen/drivers/acpi/tables/tbfadt.c
-@@ -42,6 +42,8 @@
-  */
- 
- #include <xen/init.h>
-+#include <xen/inttypes.h>
-+
- #include <acpi/acpi.h>
- #include <acpi/actables.h>
- 
-diff --git a/xen/drivers/acpi/utilities/utmisc.c b/xen/drivers/acpi/utilities/utmisc.c
-index ee22c83e3842..b7756e4ebf29 100644
---- a/xen/drivers/acpi/utilities/utmisc.c
-+++ b/xen/drivers/acpi/utilities/utmisc.c
-@@ -42,6 +42,9 @@
-  */
- 
- #include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/stdarg.h>
-+
- #include <acpi/acpi.h>
- 
- #define _COMPONENT          ACPI_UTILITIES
-diff --git a/xen/lib/x86/private.h b/xen/lib/x86/private.h
-index 60bb82a400b7..aedd8e482121 100644
---- a/xen/lib/x86/private.h
-+++ b/xen/lib/x86/private.h
-@@ -10,7 +10,7 @@
- #include <xen/nospec.h>
- #include <xen/types.h>
- 
--#include <asm/msr-index.h>
-+#include <asm/msr.h>
- 
- #define copy_to_buffer_offset copy_to_guest_offset
- #define copy_from_buffer_offset copy_from_guest_offset
+ #define CTRL_READ(msr_content,msrs,c) do {rdmsrl(msrs->controls[(c)].addr, (msr_content));} while (0)
 -- 
 2.39.5
 
