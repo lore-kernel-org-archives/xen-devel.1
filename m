@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1909BCA0EE4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929F1CA0EE6
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 20:41:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1083886.1443334 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1083889.1443369 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Es-0005aR-DB; Fri, 15 Aug 2025 20:41:26 +0000
+	id 1un1Ev-0006QA-2R; Fri, 15 Aug 2025 20:41:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1083886.1443334; Fri, 15 Aug 2025 20:41:26 +0000
+Received: by outflank-mailman (output) from mailman id 1083889.1443369; Fri, 15 Aug 2025 20:41:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Es-0005ZF-7v; Fri, 15 Aug 2025 20:41:26 +0000
-Received: by outflank-mailman (input) for mailman id 1083886;
- Fri, 15 Aug 2025 20:41:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1un1Eu-0006PA-Qe; Fri, 15 Aug 2025 20:41:28 +0000
+Received: by outflank-mailman (input) for mailman id 1083889;
+ Fri, 15 Aug 2025 20:41:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oFbR=23=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1un1Er-0005E7-5P
- for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:25 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 35c20d56-7a18-11f0-a328-13f23c93f187;
- Fri, 15 Aug 2025 22:41:25 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3b9e7437908so2303324f8f.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:24 -0700 (PDT)
+ id 1un1Et-0005Rl-SM
+ for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:27 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 36814a16-7a18-11f0-b898-0df219b8e170;
+ Fri, 15 Aug 2025 22:41:26 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3b9a342e8ffso1689975f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:26 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.22
+ ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 13:41:23 -0700 (PDT)
+ Fri, 15 Aug 2025 13:41:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35c20d56-7a18-11f0-a328-13f23c93f187
+X-Inumbo-ID: 36814a16-7a18-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1755290484; x=1755895284; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1755290485; x=1755895285; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mwxm9dtR34acjMnkNswLFgfroPyNnvaszlLLiRIs7JA=;
-        b=Fg3xKeNl+tdHAlFxJ+jHdJl0ooyutdeRvhCRLEPoxNPp3TGOK7xvF4VX1zJ0hINaQu
-         6Xf1lZrUvpYZ6J5gRNPwx+efYMI80xGR+8pWhsmYJ+iRtYewW/O2TXlLhMFGY+LrpOc8
-         EiTGVc2+o5O/hqxUnWb31tzydvyY8c+3el7OY=
+        bh=D9vb1ykp1WCFZixE3MBqEFa5gu4OAlJWE3J2pPtkp/g=;
+        b=TPeB+JEzab2G4CDBFksRWlWlfX7EX0d6qI/mQqX1jhO8YxZgKkoo5ggt+S2yiLz2Su
+         1eMxx/BZBv1AT/HmNhw079TdW6qe+LcceF33YD8gaCCrsFbdWN+6RP7isBsi3bwMSAQr
+         0eNJ1OWyyqZ378LjUKXKgFyKcvtsL7wUMnJcQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755290484; x=1755895284;
+        d=1e100.net; s=20230601; t=1755290485; x=1755895285;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mwxm9dtR34acjMnkNswLFgfroPyNnvaszlLLiRIs7JA=;
-        b=NDUmRwJkzRyt+H8p+emvsOj3rN7Z2XRT7EaZpuK6zTxfTZ9DE3A8zLT3kiczlbQqeM
-         V57r+5q7Zt5hkTHkfLQYvWVzvzLEidbbF/6UZS9RWOMrzHhjaiTGKexLY0uPa5c8UC7F
-         2wJCNCt+XOplgqvBxJqZ83Ngaz3wrmEd0JLRSaowOzlvsCoxOsazfkGPMdZIKsQK4x7R
-         kf7VRvgSwqHMzn8NiKPqLDpnj2MEeGpd79ovWBv4QzwCwYMmYRzOLDb69KhNhO6Dhwct
-         kUnRoyG6OtMyw4wkxjZa9ePyidXcTxNmUJZYE7ZqhYXqvf6Gy9DqlHiI7ReW9KrDxar4
-         ID8g==
-X-Gm-Message-State: AOJu0Yz94UNZq3BZg/1iUs0NvtWRhq4KsPX0wvUbtYS6YdcdX/VDPCXP
-	NGEEp6wcMj+q+7Bb+GfL0P63dw3LWUkf10u4OdGYaAtzvAfVFzWuEQ0ypZs673VEV380htsX07Z
-	A3fcZ
-X-Gm-Gg: ASbGnct6YmldGqQ+EfA1e8MvKy2hsmnY5TY5ndQ4CNn56WMLBF7zkzGmZgY7KO9V96M
-	kihZohmpdHZr17wv9+On+KtQflPf20caje53PBHWFKwpy0BhD+JhhEoyE5ryupzr08udAv2v8FJ
-	gsQl6PtRdQIvmE5skbL7TAi2kLtBcgHpVlje5yxrvdsjQbRFH6LQdIhITzL76AwMh05lQcAqcPZ
-	GE4LbB7wwq+p9IQ0t4TrGFm0jFECYhiRH/SrHWDcGlEDCU9TSlkxzc1JB52m1X+RpYA6gAGws6l
-	j7xGQZr/wSxRw3elASdYH91wyLkSiVSYiEUw4aQt68iGPF1aFst8pppIGeFKCjIgR9iP0UIycat
-	uVStKg4zyAsVke1Qt5rsQWOQqoJ/y5tfHYnFNRttLOMtacqiHsYuIH4O8gcrtNxM05Bl8C94q9G
-	O7
-X-Google-Smtp-Source: AGHT+IHIU9YezxkPwbQPSJ2CWP0/AaAL4ACtTJxCWrUwlc9hoG1CWVqPiJe5VELgZbY9axUZezHXXg==
-X-Received: by 2002:a05:6000:400b:b0:3b7:9b58:5b53 with SMTP id ffacd0b85a97d-3bc6a280040mr330177f8f.45.1755290483766;
-        Fri, 15 Aug 2025 13:41:23 -0700 (PDT)
+        bh=D9vb1ykp1WCFZixE3MBqEFa5gu4OAlJWE3J2pPtkp/g=;
+        b=iiijvnYay7i0HJ9w7PknstUOHL0n3+oInK/asbQ+JBZkRr4GDI+m/+ErlgU1LHc6YI
+         2FZIW/+jRy8RhToytZR4cQIKWqcqufs0PX15hzhAgN0E9H9OhMPqUXyxT28IxzKzAicn
+         rR9vyjs7PbyuWX+Vdb0KB3+v3Cgsdm2WfqRsDyiYjCt8+DRkXuG4UHH14d84skdWHkt7
+         kTfFbiTBRfhm93M4y3pOJVc0yECm/+fm+0P8l9hHWGQktYwfRHi0BxtdvWPnRRvQiy1T
+         GDY7juaod6YWfi9kkRrRgS3z7JxGLT9b8owxaTkOOK39JQxtXTBr7xHI0RbJku0P+nMH
+         hERQ==
+X-Gm-Message-State: AOJu0Yw8FFYaKxBR2f8GJqJbcBqL6A6Z6K84LEbFMn2dOrXdS24sLX9e
+	pYZdeFP1RZvmAvNNLNsxKqNJd2tnK3sW2DiDZPoR5C6KV2XIjpVpcHoRD2/hFflxalmD2PA6kbx
+	zu6CL
+X-Gm-Gg: ASbGncuT4LHEx4zirWgM5kllfPcrjMpzFtTIhhmDYVVA3coVO9fr+Q4a6EWCZamMmWV
+	yFEIltEsdjoNg3K1HnW2SsDeP7uxXT1pYU65HxSDNPEJYnukpuDaLaGIudRi5i4gXyvltFEKmiX
+	kQKN6zxB2WlkmZehILOGWQw7yncRVFkm4W6aT3+YhHu8vswbYCOC7U+LTfaCO+9ViZ6t4ts6huH
+	FNvVBMcKU33TGfnkqBYPhlpvhW9HUGop0guaR00MpxRaGZDfTSvMA0atnhM4DYie6VgT3JNpGwo
+	mvcN85xmMuaGVIoji7BIjuypHbfJjaD2kjhC4Cefg2OCys9F3DB/EzDZxB2hCVyD9a0hn+SkcBk
+	r87DFscyJvdaWRzNXV4lbxsg1lHHzTY+WdOdnGmFt4tXQS8MTrGGBCzTfDijwl/2sqGaoq5L8a5
+	F3
+X-Google-Smtp-Source: AGHT+IEfLzdav0QEeJA3iq738WkJCVQpfAhf2z0YY0EDkCnOb2synwzTcDgFsBifp87gCjD10c9Ohw==
+X-Received: by 2002:a05:6000:2405:b0:3b7:590d:ac7d with SMTP id ffacd0b85a97d-3bb4a1fa053mr3127627f8f.1.1755290485246;
+        Fri, 15 Aug 2025 13:41:25 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 04/16] x86/msr: Split out guest-msr.h
-Date: Fri, 15 Aug 2025 21:41:05 +0100
-Message-Id: <20250815204117.3312742-5-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 06/16] x86/msr: Split out tsc.h
+Date: Fri, 15 Aug 2025 21:41:07 +0100
+Message-Id: <20250815204117.3312742-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
 References: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
@@ -97,7 +97,11 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-struct vcpu_msrs has a very different purpose to everything else in msr.h
+The TSC functionality is only related to MSRs by write_tsc(), and this really
+does not want to be available as widely as is currently is.
+
+asm/time.h shouldn't be including asm/msr.h, but this turns out to be
+sufficiently tangled that I've chosen to break it out into it's own patch.
 
 No functional change.
 
@@ -106,495 +110,126 @@ Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/cpu/common.c            |   1 +
- xen/arch/x86/cpuid.c                 |   1 +
- xen/arch/x86/debug.c                 |   1 +
- xen/arch/x86/domain.c                |   1 +
- xen/arch/x86/domctl.c                |   1 +
- xen/arch/x86/hvm/hvm.c               |   1 +
- xen/arch/x86/hvm/svm/svm.c           |   1 +
- xen/arch/x86/hvm/svm/vmcb.c          |   1 +
- xen/arch/x86/hvm/vmx/vmx.c           |   1 +
- xen/arch/x86/hvm/vmx/vvmx.c          |   1 +
- xen/arch/x86/include/asm/guest-msr.h | 155 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/msr.h       | 145 -------------------------
- xen/arch/x86/msr.c                   |   1 +
- xen/arch/x86/pv/emulate.h            |   1 +
- xen/arch/x86/x86_64/asm-offsets.c    |   1 +
- 15 files changed, 168 insertions(+), 145 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/guest-msr.h
+ xen/arch/x86/include/asm/msr.h  | 39 ----------------------------
+ xen/arch/x86/include/asm/time.h |  1 +
+ xen/arch/x86/include/asm/tsc.h  | 46 +++++++++++++++++++++++++++++++++
+ 3 files changed, 47 insertions(+), 39 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/tsc.h
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 60f3c9a29e67..530b9eb39abc 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -9,6 +9,7 @@
- #include <asm/cpu-policy.h>
- #include <asm/current.h>
- #include <asm/debugreg.h>
-+#include <asm/guest-msr.h>
- #include <asm/idt.h>
- #include <asm/io.h>
- #include <asm/match-cpu.h>
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 8dc68945f7ae..b63a82dd3815 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -7,6 +7,7 @@
- 
- #include <asm/cpu-policy.h>
- #include <asm/cpuid.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/viridian.h>
- #include <asm/xstate.h>
- 
-diff --git a/xen/arch/x86/debug.c b/xen/arch/x86/debug.c
-index 71755dea6ff2..11b0a7e5475a 100644
---- a/xen/arch/x86/debug.c
-+++ b/xen/arch/x86/debug.c
-@@ -9,6 +9,7 @@
- 
- #include <asm/current.h>
- #include <asm/debugreg.h>
-+#include <asm/guest-msr.h>
- 
- /*
-  * Merge new bits into dr6.  'new' is always given in positive polarity,
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 6e3fd35c934e..1bbe53e36b59 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -44,6 +44,7 @@
- #include <asm/cpuidle.h>
- #include <asm/debugreg.h>
- #include <asm/desc.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/svm/svm.h>
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index d7781b7dc5fd..6153e3c07e2d 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -25,6 +25,7 @@
- #include <asm/acpi.h>
- #include <asm/cpu-policy.h>
- #include <asm/gdbsx.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/emulate.h>
- #include <asm/hvm/hvm.h>
- #include <asm/io_apic.h>
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 6d2b937b62ba..bd64faf2071c 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -38,6 +38,7 @@
- #include <asm/current.h>
- #include <asm/debugreg.h>
- #include <asm/e820.h>
-+#include <asm/guest-msr.h>
- #include <asm/hap.h>
- #include <asm/hvm/cacheattr.h>
- #include <asm/hvm/emulate.h>
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index a807cab305aa..4fc6206edac0 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -19,6 +19,7 @@
- #include <asm/current.h>
- #include <asm/debugreg.h>
- #include <asm/gdbsx.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/emulate.h>
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/io.h>
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index e4c797608f25..334950709f69 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -14,6 +14,7 @@
- #include <xen/sched.h>
- #include <xen/softirq.h>
- 
-+#include <asm/guest-msr.h>
- #include <asm/hvm/svm/svm.h>
- #include <asm/hvm/svm/svmdebug.h>
- #include <asm/hvm/svm/vmcb.h>
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index c6bf435b744a..4664a014bc8a 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -23,6 +23,7 @@
- #include <asm/debugreg.h>
- #include <asm/event.h>
- #include <asm/gdbsx.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/emulate.h>
- #include <asm/hvm/hvm.h>
- #include <asm/hvm/monitor.h>
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 95d3c2ee7b79..6201665d9f4c 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -10,6 +10,7 @@
- 
- #include <xen/ioreq.h>
- 
-+#include <asm/guest-msr.h>
- #include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/support.h>
- #include <asm/hvm/vmx/vmx.h>
-diff --git a/xen/arch/x86/include/asm/guest-msr.h b/xen/arch/x86/include/asm/guest-msr.h
-new file mode 100644
-index 000000000000..5f0cb0a93995
---- /dev/null
-+++ b/xen/arch/x86/include/asm/guest-msr.h
-@@ -0,0 +1,155 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef X86_GUEST_MSR_H
-+#define X86_GUEST_MSR_H
-+
-+#include <xen/types.h>
-+
-+/* Container object for per-vCPU MSRs */
-+struct vcpu_msrs
-+{
-+    /*
-+     * 0x00000048 - MSR_SPEC_CTRL
-+     * 0xc001011f - MSR_VIRT_SPEC_CTRL (if X86_FEATURE_AMD_SSBD)
-+     *
-+     * For PV guests, this holds the guest kernel value.  It is accessed on
-+     * every entry/exit path.
-+     *
-+     * For VT-x guests, one of two situations exist:
-+     *
-+     * - If hardware supports virtualized MSR_SPEC_CTRL, it is active by
-+     *   default and the guest value lives in the VMCS.
-+     * - Otherwise, the guest value is held in the MSR load/save list.
-+     *
-+     * For SVM, the guest value lives in the VMCB, and hardware saves/restores
-+     * the host value automatically.  However, guests run with the OR of the
-+     * host and guest value, which allows Xen to set protections behind the
-+     * guest's back.
-+     *
-+     * We must clear/restore Xen's value before/after VMRUN to avoid unduly
-+     * influencing the guest.  In order to support "behind the guest's back"
-+     * protections, we load this value (commonly 0) before VMRUN.
-+     *
-+     * Once of such "behind the guest's back" usages is setting SPEC_CTRL.SSBD
-+     * if the guest sets VIRT_SPEC_CTRL.SSBD.
-+     */
-+    struct {
-+        uint32_t raw;
-+    } spec_ctrl;
-+
-+    /*
-+     * 0x00000140 - MSR_INTEL_MISC_FEATURES_ENABLES
-+     *
-+     * This MSR is non-architectural, but for simplicy we allow it to be read
-+     * unconditionally.  The CPUID Faulting bit is the only writeable bit, and
-+     * only if enumerated by MSR_PLATFORM_INFO.
-+     */
-+    union {
-+        uint32_t raw;
-+        struct {
-+            bool cpuid_faulting:1;
-+        };
-+    } misc_features_enables;
-+
-+    /*
-+     * 0x00000560 ... 57x - MSR_RTIT_*
-+     *
-+     * "Real Time Instruction Trace", now called Processor Trace.
-+     *
-+     * These MSRs are not exposed to guests.  They are controlled by Xen
-+     * behind the scenes, when vmtrace is enabled for the domain.
-+     *
-+     * MSR_RTIT_OUTPUT_BASE not stored here.  It is fixed per vcpu, and
-+     * derived from v->vmtrace.buf.
-+     */
-+    struct {
-+        /*
-+         * Placed in the MSR load/save lists.  Only modified by hypercall in
-+         * the common case.
-+         */
-+        uint64_t ctl;
-+
-+        /*
-+         * Updated by hardware in non-root mode.  Synchronised here on vcpu
-+         * context switch.
-+         */
-+        uint64_t status;
-+        union {
-+            uint64_t output_mask;
-+            struct {
-+                uint32_t output_limit;
-+                uint32_t output_offset;
-+            };
-+        };
-+    } rtit;
-+
-+    /*
-+     * 0x000006e1 - MSR_PKRS - Protection Key Supervisor.
-+     *
-+     * Exposed R/W to guests.  Xen doesn't use PKS yet, so only context
-+     * switched per vcpu.  When in current context, live value is in hardware,
-+     * and this value is stale.
-+     */
-+    uint32_t pkrs;
-+
-+    /* 0x00000da0 - MSR_IA32_XSS */
-+    struct {
-+        uint64_t raw;
-+    } xss;
-+
-+    /*
-+     * 0xc0000103 - MSR_TSC_AUX
-+     *
-+     * Value is guest chosen, and always loaded in vcpu context.  Guests have
-+     * no direct MSR access, and the value is accessible to userspace with the
-+     * RDTSCP and RDPID instructions.
-+     */
-+    uint32_t tsc_aux;
-+
-+    /*
-+     * 0xc001011f - MSR_VIRT_SPEC_CTRL (if !X86_FEATURE_AMD_SSBD)
-+     *
-+     * AMD only, used on Zen1 and older hardware (pre-AMD_SSBD).  Holds the
-+     * the guests value.
-+     *
-+     * In the default case, Xen doesn't protect itself from SSB, and guests
-+     * are expected to use VIRT_SPEC_CTRL.SSBD=1 sparingly.  Xen therefore
-+     * runs in the guest kernel's choice of SSBD.
-+     *
-+     * However, if the global enable `spec-ctrl=ssbd` is selected, hardware is
-+     * always configured with SSBD=1 and the guest's setting is never loaded
-+     * into hardware.
-+     */
-+    struct {
-+        uint32_t raw;
-+    } virt_spec_ctrl;
-+
-+    /*
-+     * 0xc00110{27,19-1b} MSR_AMD64_DR{0-3}_ADDRESS_MASK
-+     *
-+     * Loaded into hardware for guests which have active %dr7 settings.
-+     * Furthermore, HVM guests are offered direct access, meaning that the
-+     * values here may be stale in current context.
-+     */
-+    uint32_t dr_mask[4];
-+};
-+
-+struct vcpu;
-+struct cpu_policy;
-+
-+int init_vcpu_msr_policy(struct vcpu *v);
-+
-+/*
-+ * Below functions can return X86EMUL_UNHANDLEABLE which means that MSR is
-+ * not (yet) handled by it and must be processed by legacy handlers. Such
-+ * behaviour is needed for transition period until all rd/wrmsr are handled
-+ * by the new MSR infrastructure.
-+ *
-+ * These functions are also used by the migration logic, so need to cope with
-+ * being used outside of v's context.
-+ */
-+int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val);
-+int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val);
-+
-+uint64_t msr_spec_ctrl_valid_bits(const struct cpu_policy *cp);
-+
-+#endif /* X86_GUEST_MSR_H */
 diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 6a97b41bae07..787517802d9d 100644
+index 4a35cd0fdff6..1c0e768d9123 100644
 --- a/xen/arch/x86/include/asm/msr.h
 +++ b/xen/arch/x86/include/asm/msr.h
-@@ -299,149 +299,4 @@ static inline void wrmsr_tsc_aux(uint32_t val)
-     }
+@@ -124,45 +124,6 @@ static inline void msr_split(struct cpu_user_regs *regs, uint64_t val)
+     regs->rax = (uint32_t)val;
  }
  
--uint64_t msr_spec_ctrl_valid_bits(const struct cpu_policy *cp);
--
--/* Container object for per-vCPU MSRs */
--struct vcpu_msrs
+-static inline uint64_t rdtsc(void)
 -{
--    /*
--     * 0x00000048 - MSR_SPEC_CTRL
--     * 0xc001011f - MSR_VIRT_SPEC_CTRL (if X86_FEATURE_AMD_SSBD)
--     *
--     * For PV guests, this holds the guest kernel value.  It is accessed on
--     * every entry/exit path.
--     *
--     * For VT-x guests, one of two situations exist:
--     *
--     * - If hardware supports virtualized MSR_SPEC_CTRL, it is active by
--     *   default and the guest value lives in the VMCS.
--     * - Otherwise, the guest value is held in the MSR load/save list.
--     *
--     * For SVM, the guest value lives in the VMCB, and hardware saves/restores
--     * the host value automatically.  However, guests run with the OR of the
--     * host and guest value, which allows Xen to set protections behind the
--     * guest's back.
--     *
--     * We must clear/restore Xen's value before/after VMRUN to avoid unduly
--     * influencing the guest.  In order to support "behind the guest's back"
--     * protections, we load this value (commonly 0) before VMRUN.
--     *
--     * Once of such "behind the guest's back" usages is setting SPEC_CTRL.SSBD
--     * if the guest sets VIRT_SPEC_CTRL.SSBD.
--     */
--    struct {
--        uint32_t raw;
--    } spec_ctrl;
+-    uint64_t low, high;
+-
+-    __asm__ __volatile__("rdtsc" : "=a" (low), "=d" (high));
+-
+-    return (high << 32) | low;
+-}
+-
+-static inline uint64_t rdtsc_ordered(void)
+-{
+-    uint64_t low, high, aux;
 -
 -    /*
--     * 0x00000140 - MSR_INTEL_MISC_FEATURES_ENABLES
+-     * The RDTSC instruction is not serializing.  Make it dispatch serializing
+-     * for the purposes here by issuing LFENCE (or MFENCE if necessary) ahead
+-     * of it.
 -     *
--     * This MSR is non-architectural, but for simplicy we allow it to be read
--     * unconditionally.  The CPUID Faulting bit is the only writeable bit, and
--     * only if enumerated by MSR_PLATFORM_INFO.
+-     * RDTSCP, otoh, "does wait until all previous instructions have executed
+-     * and all previous loads are globally visible" (SDM) / "forces all older
+-     * instructions to retire before reading the timestamp counter" (APM).
 -     */
--    union {
--        uint32_t raw;
--        struct {
--            bool cpuid_faulting:1;
--        };
--    } misc_features_enables;
+-    alternative_io_2("lfence; rdtsc",
+-                     "mfence; rdtsc", X86_FEATURE_MFENCE_RDTSC,
+-                     "rdtscp",        X86_FEATURE_RDTSCP,
+-                     ASM_OUTPUT2("=a" (low), "=d" (high), "=c" (aux)),
+-                     /* no inputs */);
 -
--    /*
--     * 0x00000560 ... 57x - MSR_RTIT_*
--     *
--     * "Real Time Instruction Trace", now called Processor Trace.
--     *
--     * These MSRs are not exposed to guests.  They are controlled by Xen
--     * behind the scenes, when vmtrace is enabled for the domain.
--     *
--     * MSR_RTIT_OUTPUT_BASE not stored here.  It is fixed per vcpu, and
--     * derived from v->vmtrace.buf.
--     */
--    struct {
--        /*
--         * Placed in the MSR load/save lists.  Only modified by hypercall in
--         * the common case.
--         */
--        uint64_t ctl;
+-    return (high << 32) | low;
+-}
 -
--        /*
--         * Updated by hardware in non-root mode.  Synchronised here on vcpu
--         * context switch.
--         */
--        uint64_t status;
--        union {
--            uint64_t output_mask;
--            struct {
--                uint32_t output_limit;
--                uint32_t output_offset;
--            };
--        };
--    } rtit;
+-#define __write_tsc(val) wrmsrl(MSR_IA32_TSC, val)
+-#define write_tsc(val) ({                                       \
+-    /* Reliable TSCs are in lockstep across all CPUs. We should \
+-     * never write to them. */                                  \
+-    ASSERT(!boot_cpu_has(X86_FEATURE_TSC_RELIABLE));            \
+-    __write_tsc(val);                                           \
+-})
 -
--    /*
--     * 0x000006e1 - MSR_PKRS - Protection Key Supervisor.
--     *
--     * Exposed R/W to guests.  Xen doesn't use PKS yet, so only context
--     * switched per vcpu.  When in current context, live value is in hardware,
--     * and this value is stale.
--     */
--    uint32_t pkrs;
--
--    /* 0x00000da0 - MSR_IA32_XSS */
--    struct {
--        uint64_t raw;
--    } xss;
--
--    /*
--     * 0xc0000103 - MSR_TSC_AUX
--     *
--     * Value is guest chosen, and always loaded in vcpu context.  Guests have
--     * no direct MSR access, and the value is accessible to userspace with the
--     * RDTSCP and RDPID instructions.
--     */
--    uint32_t tsc_aux;
--
--    /*
--     * 0xc001011f - MSR_VIRT_SPEC_CTRL (if !X86_FEATURE_AMD_SSBD)
--     *
--     * AMD only, used on Zen1 and older hardware (pre-AMD_SSBD).  Holds the
--     * the guests value.
--     *
--     * In the default case, Xen doesn't protect itself from SSB, and guests
--     * are expected to use VIRT_SPEC_CTRL.SSBD=1 sparingly.  Xen therefore
--     * runs in the guest kernel's choice of SSBD.
--     *
--     * However, if the global enable `spec-ctrl=ssbd` is selected, hardware is
--     * always configured with SSBD=1 and the guest's setting is never loaded
--     * into hardware.
--     */
--    struct {
--        uint32_t raw;
--    } virt_spec_ctrl;
--
--    /*
--     * 0xc00110{27,19-1b} MSR_AMD64_DR{0-3}_ADDRESS_MASK
--     *
--     * Loaded into hardware for guests which have active %dr7 settings.
--     * Furthermore, HVM guests are offered direct access, meaning that the
--     * values here may be stale in current context.
--     */
--    uint32_t dr_mask[4];
--};
--
--int init_vcpu_msr_policy(struct vcpu *v);
--
--/*
-- * Below functions can return X86EMUL_UNHANDLEABLE which means that MSR is
-- * not (yet) handled by it and must be processed by legacy handlers. Such
-- * behaviour is needed for transition period until all rd/wrmsr are handled
-- * by the new MSR infrastructure.
-- *
-- * These functions are also used by the migration logic, so need to cope with
-- * being used outside of v's context.
-- */
--int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val);
--int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val);
--
- #endif /* __ASM_MSR_H */
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index b301143ed2d4..ad75a2e10855 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -15,6 +15,7 @@
- #include <asm/amd.h>
- #include <asm/cpu-policy.h>
- #include <asm/debugreg.h>
-+#include <asm/guest-msr.h>
- #include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/viridian.h>
- #include <asm/msr.h>
-diff --git a/xen/arch/x86/pv/emulate.h b/xen/arch/x86/pv/emulate.h
-index 49a4d34832df..c74e45e50c08 100644
---- a/xen/arch/x86/pv/emulate.h
-+++ b/xen/arch/x86/pv/emulate.h
+ #define rdpmc(counter,low,high) \
+      __asm__ __volatile__("rdpmc" \
+ 			  : "=a" (low), "=d" (high) \
+diff --git a/xen/arch/x86/include/asm/time.h b/xen/arch/x86/include/asm/time.h
+index 3dfbb5297a25..c55b69831448 100644
+--- a/xen/arch/x86/include/asm/time.h
++++ b/xen/arch/x86/include/asm/time.h
 @@ -3,6 +3,7 @@
+ #define __X86_TIME_H__
  
- #include <xen/sched.h>
+ #include <asm/msr.h>
++#include <asm/tsc.h>
  
-+#include <asm/guest-msr.h>
- #include <asm/processor.h>
- #include <asm/x86_emulate.h>
+ typedef u64 cycles_t;
  
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index 2258b4ce1b95..9d4536402661 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -15,6 +15,7 @@
- #include <asm/hardirq.h>
- #include <xen/multiboot.h>
- #include <xen/multiboot2.h>
-+#include <asm/guest-msr.h>
- 
- #ifdef CONFIG_VIDEO
- # include "../boot/video.h"
+diff --git a/xen/arch/x86/include/asm/tsc.h b/xen/arch/x86/include/asm/tsc.h
+new file mode 100644
+index 000000000000..5f48fed26c23
+--- /dev/null
++++ b/xen/arch/x86/include/asm/tsc.h
+@@ -0,0 +1,46 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef X86_TSC_H
++#define X86_TSC_H
++
++#include <asm/alternative.h>
++
++static inline uint64_t rdtsc(void)
++{
++    uint64_t low, high;
++
++    asm volatile ( "rdtsc" : "=a" (low), "=d" (high) );
++
++    return (high << 32) | low;
++}
++
++static inline uint64_t rdtsc_ordered(void)
++{
++    uint64_t low, high, aux;
++
++    /*
++     * The RDTSC instruction is not serializing.  Make it dispatch serializing
++     * for the purposes here by issuing LFENCE (or MFENCE if necessary) ahead
++     * of it.
++     *
++     * RDTSCP, otoh, "does wait until all previous instructions have executed
++     * and all previous loads are globally visible" (SDM) / "forces all older
++     * instructions to retire before reading the timestamp counter" (APM).
++     */
++    alternative_io_2("lfence; rdtsc",
++                     "mfence; rdtsc", X86_FEATURE_MFENCE_RDTSC,
++                     "rdtscp",        X86_FEATURE_RDTSCP,
++                     ASM_OUTPUT2("=a" (low), "=d" (high), "=c" (aux)),
++                     /* no inputs */);
++
++    return (high << 32) | low;
++}
++
++#define __write_tsc(val) wrmsrl(MSR_IA32_TSC, val)
++#define write_tsc(val) ({                                       \
++    /* Reliable TSCs are in lockstep across all CPUs. We should \
++     * never write to them. */                                  \
++    ASSERT(!boot_cpu_has(X86_FEATURE_TSC_RELIABLE));            \
++    __write_tsc(val);                                           \
++})
++
++#endif /* X86_TSC_H */
 -- 
 2.39.5
 
