@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B6B7CA0ED1
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 03:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1082691.1442465 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCBFCA0ED1
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 03:07:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1082688.1442444 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umkmV-0005hi-M6; Fri, 15 Aug 2025 03:07:03 +0000
+	id 1umkmU-0005CB-F1; Fri, 15 Aug 2025 03:07:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1082691.1442465; Fri, 15 Aug 2025 03:07:03 +0000
+Received: by outflank-mailman (output) from mailman id 1082688.1442444; Fri, 15 Aug 2025 03:07:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1umkmV-0005f0-Bs; Fri, 15 Aug 2025 03:07:03 +0000
-Received: by outflank-mailman (input) for mailman id 1082691;
- Fri, 15 Aug 2025 03:07:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1umkmU-00059Q-5A; Fri, 15 Aug 2025 03:07:02 +0000
+Received: by outflank-mailman (input) for mailman id 1082688;
+ Fri, 15 Aug 2025 03:07:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vxBA=23=huawei.com=ruanjinjie@srs-se1.protection.inumbo.net>)
- id 1umkmU-00052B-2M
- for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 03:07:02 +0000
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3ef2371-7984-11f0-a328-13f23c93f187;
- Fri, 15 Aug 2025 05:06:55 +0200 (CEST)
-Received: from mail.maildlp.com (unknown [172.19.88.105])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4c36PS28Zgz13Lg7;
- Fri, 15 Aug 2025 11:03:24 +0800 (CST)
+ id 1umkmS-00052A-B9
+ for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 03:07:00 +0000
+Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e14b0b92-7984-11f0-b898-0df219b8e170;
+ Fri, 15 Aug 2025 05:06:52 +0200 (CEST)
+Received: from mail.maildlp.com (unknown [172.19.88.163])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4c36VY1xNyz2dMNB;
+ Fri, 15 Aug 2025 11:07:49 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
- by mail.maildlp.com (Postfix) with ESMTPS id BE7D8140258;
- Fri, 15 Aug 2025 11:06:50 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id DD9C81800B2;
+ Fri, 15 Aug 2025 11:06:44 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 15 Aug
- 2025 11:06:49 +0800
+ 2025 11:06:43 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,7 +48,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3ef2371-7984-11f0-a328-13f23c93f187
+X-Inumbo-ID: e14b0b92-7984-11f0-b898-0df219b8e170
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<sstabellini@kernel.org>, <mark.rutland@arm.com>, <ada.coupriediaz@arm.com>,
@@ -58,9 +58,9 @@ To: <catalin.marinas@arm.com>, <will@kernel.org>, <oleg@redhat.com>,
 	<linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
 	<xen-devel@lists.xenproject.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v8 6/8] arm64: entry: Refactor preempt_schedule_irq() check code
-Date: Fri, 15 Aug 2025 11:06:31 +0800
-Message-ID: <20250815030633.448613-7-ruanjinjie@huawei.com>
+Subject: [PATCH v8 1/8] arm64: ptrace: Replace interrupts_enabled() with regs_irqs_disabled()
+Date: Fri, 15 Aug 2025 11:06:26 +0800
+Message-ID: <20250815030633.448613-2-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250815030633.448613-1-ruanjinjie@huawei.com>
 References: <20250815030633.448613-1-ruanjinjie@huawei.com>
@@ -71,112 +71,145 @@ X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
  dggpemf500011.china.huawei.com (7.185.36.131)
 
-To align the structure of the code with irqentry_exit_cond_resched()
-from the generic entry code, hoist the need_irq_preemption()
-and IS_ENABLED() check earlier. And different preemption check functions
-are defined based on whether dynamic preemption is enabled.
+The generic entry code expects architecture code to provide
+regs_irqs_disabled(regs) function, but arm64 does not have this and
+provides interrupts_enabled(regs), which has the opposite polarity.
 
+In preparation for moving arm64 over to the generic entry code,
+relace arm64's interrupts_enabled() with regs_irqs_disabled() and
+update its callers under arch/arm64.
+
+For the moment, a definition of interrupts_enabled() is provided for
+the GICv3 driver. Once arch/arm implement regs_irqs_disabled(), this
+can be removed.
+
+Delete the fast_interrupts_enabled() macro as it is unused and we
+don't want any new users to show up.
+
+No functional changes.
+
+Reviewed-by: Ada Couprie Diaz <ada.coupriediaz@arm.com>
+Acked-by: Mark Rutland <mark.rutland@arm.com>
+Suggested-by: Mark Rutland <mark.rutland@arm.com>
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/arm64/include/asm/preempt.h |  6 ++++++
- arch/arm64/kernel/entry-common.c | 37 +++++++++++++++++++-------------
- 2 files changed, 28 insertions(+), 15 deletions(-)
+ arch/arm64/include/asm/daifflags.h  | 2 +-
+ arch/arm64/include/asm/ptrace.h     | 9 +++++----
+ arch/arm64/include/asm/xen/events.h | 2 +-
+ arch/arm64/kernel/acpi.c            | 2 +-
+ arch/arm64/kernel/debug-monitors.c  | 2 +-
+ arch/arm64/kernel/entry-common.c    | 4 ++--
+ arch/arm64/kernel/sdei.c            | 2 +-
+ 7 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm64/include/asm/preempt.h b/arch/arm64/include/asm/preempt.h
-index 0159b625cc7f..c2437ea0790f 100644
---- a/arch/arm64/include/asm/preempt.h
-+++ b/arch/arm64/include/asm/preempt.h
-@@ -85,6 +85,7 @@ static inline bool should_resched(int preempt_offset)
- void preempt_schedule(void);
- void preempt_schedule_notrace(void);
+diff --git a/arch/arm64/include/asm/daifflags.h b/arch/arm64/include/asm/daifflags.h
+index fbb5c99eb2f9..5fca48009043 100644
+--- a/arch/arm64/include/asm/daifflags.h
++++ b/arch/arm64/include/asm/daifflags.h
+@@ -128,7 +128,7 @@ static inline void local_daif_inherit(struct pt_regs *regs)
+ {
+ 	unsigned long flags = regs->pstate & DAIF_MASK;
  
-+void raw_irqentry_exit_cond_resched(void);
- #ifdef CONFIG_PREEMPT_DYNAMIC
+-	if (interrupts_enabled(regs))
++	if (!regs_irqs_disabled(regs))
+ 		trace_hardirqs_on();
  
- DECLARE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
-@@ -92,13 +93,18 @@ void dynamic_preempt_schedule(void);
- #define __preempt_schedule()		dynamic_preempt_schedule()
- void dynamic_preempt_schedule_notrace(void);
- #define __preempt_schedule_notrace()	dynamic_preempt_schedule_notrace()
-+void dynamic_irqentry_exit_cond_resched(void);
-+#define irqentry_exit_cond_resched()	dynamic_irqentry_exit_cond_resched()
+ 	if (system_uses_irq_prio_masking())
+diff --git a/arch/arm64/include/asm/ptrace.h b/arch/arm64/include/asm/ptrace.h
+index 47ff8654c5ec..8b915d4a9d4b 100644
+--- a/arch/arm64/include/asm/ptrace.h
++++ b/arch/arm64/include/asm/ptrace.h
+@@ -214,11 +214,12 @@ static inline void forget_syscall(struct pt_regs *regs)
+ 		(regs)->pmr == GIC_PRIO_IRQON :				\
+ 		true)
  
- #else /* CONFIG_PREEMPT_DYNAMIC */
+-#define interrupts_enabled(regs)			\
+-	(!((regs)->pstate & PSR_I_BIT) && irqs_priority_unmasked(regs))
++static __always_inline bool regs_irqs_disabled(const struct pt_regs *regs)
++{
++	return (regs->pstate & PSR_I_BIT) || !irqs_priority_unmasked(regs);
++}
  
- #define __preempt_schedule()		preempt_schedule()
- #define __preempt_schedule_notrace()	preempt_schedule_notrace()
-+#define irqentry_exit_cond_resched()	raw_irqentry_exit_cond_resched()
+-#define fast_interrupts_enabled(regs) \
+-	(!((regs)->pstate & PSR_F_BIT))
++#define interrupts_enabled(regs)	(!regs_irqs_disabled(regs))
  
- #endif /* CONFIG_PREEMPT_DYNAMIC */
-+#else /* CONFIG_PREEMPTION */
-+#define irqentry_exit_cond_resched()	{}
- #endif /* CONFIG_PREEMPTION */
+ static inline unsigned long user_stack_pointer(struct pt_regs *regs)
+ {
+diff --git a/arch/arm64/include/asm/xen/events.h b/arch/arm64/include/asm/xen/events.h
+index 2788e95d0ff0..2977b5fe068d 100644
+--- a/arch/arm64/include/asm/xen/events.h
++++ b/arch/arm64/include/asm/xen/events.h
+@@ -14,7 +14,7 @@ enum ipi_vector {
  
- #endif /* __ASM_PREEMPT_H */
+ static inline int xen_irqs_disabled(struct pt_regs *regs)
+ {
+-	return !interrupts_enabled(regs);
++	return regs_irqs_disabled(regs);
+ }
+ 
+ #define xchg_xen_ulong(ptr, val) xchg((ptr), (val))
+diff --git a/arch/arm64/kernel/acpi.c b/arch/arm64/kernel/acpi.c
+index 4d529ff7ba51..3fbce0a9a0fe 100644
+--- a/arch/arm64/kernel/acpi.c
++++ b/arch/arm64/kernel/acpi.c
+@@ -407,7 +407,7 @@ int apei_claim_sea(struct pt_regs *regs)
+ 	return_to_irqs_enabled = !irqs_disabled_flags(arch_local_save_flags());
+ 
+ 	if (regs)
+-		return_to_irqs_enabled = interrupts_enabled(regs);
++		return_to_irqs_enabled = !regs_irqs_disabled(regs);
+ 
+ 	/*
+ 	 * SEA can interrupt SError, mask it and describe this as an NMI so
+diff --git a/arch/arm64/kernel/debug-monitors.c b/arch/arm64/kernel/debug-monitors.c
+index 110d9ff54174..85fc162a6f9b 100644
+--- a/arch/arm64/kernel/debug-monitors.c
++++ b/arch/arm64/kernel/debug-monitors.c
+@@ -167,7 +167,7 @@ static void send_user_sigtrap(int si_code)
+ 	if (WARN_ON(!user_mode(regs)))
+ 		return;
+ 
+-	if (interrupts_enabled(regs))
++	if (!regs_irqs_disabled(regs))
+ 		local_irq_enable();
+ 
+ 	arm64_force_sig_fault(SIGTRAP, si_code, instruction_pointer(regs),
 diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
-index 1ba1d40fa6a7..64066c643f97 100644
+index 2b0c5925502e..8e798f46ad28 100644
 --- a/arch/arm64/kernel/entry-common.c
 +++ b/arch/arm64/kernel/entry-common.c
-@@ -286,19 +286,8 @@ static void noinstr arm64_exit_el1_dbg(struct pt_regs *regs,
- 		lockdep_hardirqs_on(CALLER_ADDR0);
- }
- 
--#ifdef CONFIG_PREEMPT_DYNAMIC
--DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
--#define need_irq_preemption() \
--	(static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
--#else
--#define need_irq_preemption()	(IS_ENABLED(CONFIG_PREEMPTION))
--#endif
--
- static inline bool arm64_preempt_schedule_irq(void)
+@@ -74,7 +74,7 @@ static __always_inline void __exit_to_kernel_mode(struct pt_regs *regs)
  {
--	if (!need_irq_preemption())
--		return false;
--
+ 	lockdep_assert_irqs_disabled();
+ 
+-	if (interrupts_enabled(regs)) {
++	if (!regs_irqs_disabled(regs)) {
+ 		if (regs->exit_rcu) {
+ 			trace_hardirqs_on_prepare();
+ 			lockdep_hardirqs_on_prepare();
+@@ -662,7 +662,7 @@ static void noinstr el1_interrupt(struct pt_regs *regs,
+ {
+ 	write_sysreg(DAIF_PROCCTX_NOIRQ, daif);
+ 
+-	if (IS_ENABLED(CONFIG_ARM64_PSEUDO_NMI) && !interrupts_enabled(regs))
++	if (IS_ENABLED(CONFIG_ARM64_PSEUDO_NMI) && regs_irqs_disabled(regs))
+ 		__el1_pnmi(regs, handler);
+ 	else
+ 		__el1_irq(regs, handler);
+diff --git a/arch/arm64/kernel/sdei.c b/arch/arm64/kernel/sdei.c
+index 6f24a0251e18..95169f7b6531 100644
+--- a/arch/arm64/kernel/sdei.c
++++ b/arch/arm64/kernel/sdei.c
+@@ -243,7 +243,7 @@ unsigned long __kprobes do_sdei_event(struct pt_regs *regs,
+ 	 * If we interrupted the kernel with interrupts masked, we always go
+ 	 * back to wherever we came from.
+ 	 */
+-	if (mode == kernel_mode && !interrupts_enabled(regs))
++	if (mode == kernel_mode && regs_irqs_disabled(regs))
+ 		return SDEI_EV_HANDLED;
+ 
  	/*
- 	 * DAIF.DA are cleared at the start of IRQ/FIQ handling, and when GIC
- 	 * priority masking is used the GIC irqchip driver will clear DAIF.IF
-@@ -682,6 +671,26 @@ static __always_inline void __el1_pnmi(struct pt_regs *regs,
- 	arm64_exit_nmi(regs, state);
- }
- 
-+#ifdef CONFIG_PREEMPTION
-+void raw_irqentry_exit_cond_resched(void)
-+{
-+	if (!preempt_count()) {
-+		if (need_resched() && arm64_preempt_schedule_irq())
-+			preempt_schedule_irq();
-+	}
-+}
-+#endif
-+
-+#ifdef CONFIG_PREEMPT_DYNAMIC
-+DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
-+void dynamic_irqentry_exit_cond_resched(void)
-+{
-+	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
-+		return;
-+	raw_irqentry_exit_cond_resched();
-+}
-+#endif
-+
- static __always_inline void __el1_irq(struct pt_regs *regs,
- 				      void (*handler)(struct pt_regs *))
- {
-@@ -693,10 +702,8 @@ static __always_inline void __el1_irq(struct pt_regs *regs,
- 	do_interrupt_handler(regs, handler);
- 	irq_exit_rcu();
- 
--	if (!preempt_count() && need_resched()) {
--		if (arm64_preempt_schedule_irq())
--			preempt_schedule_irq();
--	}
-+	if (IS_ENABLED(CONFIG_PREEMPTION))
-+		irqentry_exit_cond_resched();
- 
- 	exit_to_kernel_mode(regs, state);
- }
 -- 
 2.34.1
 
