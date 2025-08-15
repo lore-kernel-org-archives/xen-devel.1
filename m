@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929F1CA0EE6
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 20:41:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1083889.1443369 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD7BCA0EE9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Aug 2025 20:41:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1083884.1443325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Ev-0006QA-2R; Fri, 15 Aug 2025 20:41:29 +0000
+	id 1un1Er-0005SS-Oa; Fri, 15 Aug 2025 20:41:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1083889.1443369; Fri, 15 Aug 2025 20:41:29 +0000
+Received: by outflank-mailman (output) from mailman id 1083884.1443325; Fri, 15 Aug 2025 20:41:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1un1Eu-0006PA-Qe; Fri, 15 Aug 2025 20:41:28 +0000
-Received: by outflank-mailman (input) for mailman id 1083889;
- Fri, 15 Aug 2025 20:41:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1un1Er-0005SL-La; Fri, 15 Aug 2025 20:41:25 +0000
+Received: by outflank-mailman (input) for mailman id 1083884;
+ Fri, 15 Aug 2025 20:41:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oFbR=23=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1un1Et-0005Rl-SM
- for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:27 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36814a16-7a18-11f0-b898-0df219b8e170;
- Fri, 15 Aug 2025 22:41:26 +0200 (CEST)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3b9a342e8ffso1689975f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:26 -0700 (PDT)
+ id 1un1Eq-0005E7-25
+ for xen-devel@lists.xenproject.org; Fri, 15 Aug 2025 20:41:24 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 35163475-7a18-11f0-a328-13f23c93f187;
+ Fri, 15 Aug 2025 22:41:23 +0200 (CEST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3b9d41cd38dso1675740f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Aug 2025 13:41:23 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.24
+ ffacd0b85a97d-3bb5d089e07sm3153924f8f.0.2025.08.15.13.41.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Aug 2025 13:41:24 -0700 (PDT)
+ Fri, 15 Aug 2025 13:41:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36814a16-7a18-11f0-b898-0df219b8e170
+X-Inumbo-ID: 35163475-7a18-11f0-a328-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1755290485; x=1755895285; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1755290483; x=1755895283; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=D9vb1ykp1WCFZixE3MBqEFa5gu4OAlJWE3J2pPtkp/g=;
-        b=TPeB+JEzab2G4CDBFksRWlWlfX7EX0d6qI/mQqX1jhO8YxZgKkoo5ggt+S2yiLz2Su
-         1eMxx/BZBv1AT/HmNhw079TdW6qe+LcceF33YD8gaCCrsFbdWN+6RP7isBsi3bwMSAQr
-         0eNJ1OWyyqZ378LjUKXKgFyKcvtsL7wUMnJcQ=
+        bh=paeLb+OeWm7Kh4afS3Tq+uDEFsCiAJMk5Nnn8+ey0D4=;
+        b=OHN4L3LLc64luS8hYrI1Sq9Lc+4kTqBvQL67lJ9mCgASSXaOe4tkOvrZYH4bfytR1X
+         Hz3adDXY70lHFF4cIe25DICmgJ534y4ROJ+DUaCvguG992m1l07oPfU8QAzW3xoYcjRs
+         Ji+dMqMjK7kRWDuLVsz3rrNWp+bhxBvdyLOnM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755290485; x=1755895285;
+        d=1e100.net; s=20230601; t=1755290483; x=1755895283;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=D9vb1ykp1WCFZixE3MBqEFa5gu4OAlJWE3J2pPtkp/g=;
-        b=iiijvnYay7i0HJ9w7PknstUOHL0n3+oInK/asbQ+JBZkRr4GDI+m/+ErlgU1LHc6YI
-         2FZIW/+jRy8RhToytZR4cQIKWqcqufs0PX15hzhAgN0E9H9OhMPqUXyxT28IxzKzAicn
-         rR9vyjs7PbyuWX+Vdb0KB3+v3Cgsdm2WfqRsDyiYjCt8+DRkXuG4UHH14d84skdWHkt7
-         kTfFbiTBRfhm93M4y3pOJVc0yECm/+fm+0P8l9hHWGQktYwfRHi0BxtdvWPnRRvQiy1T
-         GDY7juaod6YWfi9kkRrRgS3z7JxGLT9b8owxaTkOOK39JQxtXTBr7xHI0RbJku0P+nMH
-         hERQ==
-X-Gm-Message-State: AOJu0Yw8FFYaKxBR2f8GJqJbcBqL6A6Z6K84LEbFMn2dOrXdS24sLX9e
-	pYZdeFP1RZvmAvNNLNsxKqNJd2tnK3sW2DiDZPoR5C6KV2XIjpVpcHoRD2/hFflxalmD2PA6kbx
-	zu6CL
-X-Gm-Gg: ASbGncuT4LHEx4zirWgM5kllfPcrjMpzFtTIhhmDYVVA3coVO9fr+Q4a6EWCZamMmWV
-	yFEIltEsdjoNg3K1HnW2SsDeP7uxXT1pYU65HxSDNPEJYnukpuDaLaGIudRi5i4gXyvltFEKmiX
-	kQKN6zxB2WlkmZehILOGWQw7yncRVFkm4W6aT3+YhHu8vswbYCOC7U+LTfaCO+9ViZ6t4ts6huH
-	FNvVBMcKU33TGfnkqBYPhlpvhW9HUGop0guaR00MpxRaGZDfTSvMA0atnhM4DYie6VgT3JNpGwo
-	mvcN85xmMuaGVIoji7BIjuypHbfJjaD2kjhC4Cefg2OCys9F3DB/EzDZxB2hCVyD9a0hn+SkcBk
-	r87DFscyJvdaWRzNXV4lbxsg1lHHzTY+WdOdnGmFt4tXQS8MTrGGBCzTfDijwl/2sqGaoq5L8a5
-	F3
-X-Google-Smtp-Source: AGHT+IEfLzdav0QEeJA3iq738WkJCVQpfAhf2z0YY0EDkCnOb2synwzTcDgFsBifp87gCjD10c9Ohw==
-X-Received: by 2002:a05:6000:2405:b0:3b7:590d:ac7d with SMTP id ffacd0b85a97d-3bb4a1fa053mr3127627f8f.1.1755290485246;
-        Fri, 15 Aug 2025 13:41:25 -0700 (PDT)
+        bh=paeLb+OeWm7Kh4afS3Tq+uDEFsCiAJMk5Nnn8+ey0D4=;
+        b=J9ByAzHL2Q9R3L2ui9Tyi7ZKMCTIntQ40mqIrkr+njKgpOsDP63ikmQKDBKdZfehvk
+         LSnOIbLDGCLPQbihEfnhTgEPSwZXFKCqYJnSNHDUcbKeZJyOpDN619c6MXxoVBqhkRFI
+         niyDYZSFppKbfo6PARIJkkhdhE2hi4M/QBKLAaa3HAR3WwWty0q/aC0vPCELev9KWcUV
+         uKS/o6LVdVAM0JBbcLIGJAM/IDqJPOkx0Lj76vud0d0m76q8kOUYfCatgRvFNtmCLTmR
+         hDS7lbrQh0bJ5Bk68FZwXVvEk95CCuYOz88BA2ULbEOkMcwhhEePst8Hz4nSDG5nU1j2
+         H1KA==
+X-Gm-Message-State: AOJu0Yyajeyn+0KuiJAsw3eeDClAa6Vb6ONObAwrJcmECsIvUyoQxeaT
+	VxFC9V1aVtYLgOgPfFsyCy+j0+9ymTMPHsB2Xp0S57db99xmT8tCKBsnG9hYGQJvHYW0cyOl3U4
+	fOseR
+X-Gm-Gg: ASbGncsf34wQHiG53et00rg/q+coh3WIfXHqgX5BKSYrTR759oJaOnEdxVOGwxHJTLC
+	+E0b2JN4wy90n6KslVMbthm+WVYa+zfW2JnyGCnd3ls7F3v1JqXlr7pCI5v3q2Lu91hs3bAV6lk
+	ONT9m6EfcZIIeSMqs0UZU67XPwAMJxxaQ78tpv2um129GmNGBp2kU+0/BSCkrl0mGpxRezMjCMv
+	/asHxiNKdmmf2IMWNkybEXeasYE6K7bOSf11iVuP3CEiRufTITQdbNGaPlvtehKUuW1dHnX0Pm0
+	jgcoz/c1F3+l86IyXUJW3gugwWcUFBrOwpBfJU87mH99Pk1srWrfltCWA91UzXB7/RtkRUe3ddC
+	TDNE5DRJXQQIiJXfJu2t4yYCTOKlvIVKUXoQcNqT+EAjBaAxeeZptJZL0+46wDpLasGhQPPyEJH
+	dd
+X-Google-Smtp-Source: AGHT+IGifGN3xZ06BUeGeyRrpuDRd2B66yl+ECqdoH4ziQ81hz+1O0IIjPXxjds+8gHb/yjolvgiVA==
+X-Received: by 2002:a05:6000:2f88:b0:3b7:84fc:ef4c with SMTP id ffacd0b85a97d-3bb66180488mr2439327f8f.6.1755290482728;
+        Fri, 15 Aug 2025 13:41:22 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 06/16] x86/msr: Split out tsc.h
-Date: Fri, 15 Aug 2025 21:41:07 +0100
-Message-Id: <20250815204117.3312742-7-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 03/16] x86: Sort headers
+Date: Fri, 15 Aug 2025 21:41:04 +0100
+Message-Id: <20250815204117.3312742-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
 References: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
@@ -97,139 +97,508 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The TSC functionality is only related to MSRs by write_tsc(), and this really
-does not want to be available as widely as is currently is.
-
-asm/time.h shouldn't be including asm/msr.h, but this turns out to be
-sufficiently tangled that I've chosen to break it out into it's own patch.
-
 No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/include/asm/msr.h  | 39 ----------------------------
- xen/arch/x86/include/asm/time.h |  1 +
- xen/arch/x86/include/asm/tsc.h  | 46 +++++++++++++++++++++++++++++++++
- 3 files changed, 47 insertions(+), 39 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/tsc.h
 
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 4a35cd0fdff6..1c0e768d9123 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -124,45 +124,6 @@ static inline void msr_split(struct cpu_user_regs *regs, uint64_t val)
-     regs->rax = (uint32_t)val;
- }
+I'm disappointed to notice that this is the second time I've done this to
+arch/x86/domain.c recently, and screwed it up the first time.
+
+I think we need some tooling to help keep this in order, not that I remotely
+have time to look into this.
+---
+ xen/arch/x86/acpi/cpufreq/acpi.c   |  2 +-
+ xen/arch/x86/cpu/mcheck/mce.h      |  2 +-
+ xen/arch/x86/domain.c              |  4 +-
+ xen/arch/x86/domctl.c              | 44 ++++++++---------
+ xen/arch/x86/hvm/hvm.c             | 76 +++++++++++++++---------------
+ xen/arch/x86/hvm/svm/svm.c         |  6 +--
+ xen/arch/x86/hvm/svm/vmcb.c        |  4 +-
+ xen/arch/x86/hvm/vmx/vmx.c         | 54 +++++++++++----------
+ xen/arch/x86/hvm/vmx/vvmx.c        |  6 +--
+ xen/arch/x86/include/asm/hvm/hvm.h |  2 +-
+ xen/arch/x86/tboot.c               | 15 +++---
+ xen/arch/x86/xstate.c              |  4 +-
+ xen/drivers/acpi/apei/apei-base.c  | 14 +++---
+ 13 files changed, 121 insertions(+), 112 deletions(-)
+
+diff --git a/xen/arch/x86/acpi/cpufreq/acpi.c b/xen/arch/x86/acpi/cpufreq/acpi.c
+index 0c2537640608..b81f2afc9b9b 100644
+--- a/xen/arch/x86/acpi/cpufreq/acpi.c
++++ b/xen/arch/x86/acpi/cpufreq/acpi.c
+@@ -11,8 +11,8 @@
+  *      porting acpi-cpufreq.c from Linux 2.6.23 to Xen hypervisor
+  */
  
--static inline uint64_t rdtsc(void)
--{
--    uint64_t low, high;
--
--    __asm__ __volatile__("rdtsc" : "=a" (low), "=d" (high));
--
--    return (high << 32) | low;
--}
--
--static inline uint64_t rdtsc_ordered(void)
--{
--    uint64_t low, high, aux;
--
--    /*
--     * The RDTSC instruction is not serializing.  Make it dispatch serializing
--     * for the purposes here by issuing LFENCE (or MFENCE if necessary) ahead
--     * of it.
--     *
--     * RDTSCP, otoh, "does wait until all previous instructions have executed
--     * and all previous loads are globally visible" (SDM) / "forces all older
--     * instructions to retire before reading the timestamp counter" (APM).
--     */
--    alternative_io_2("lfence; rdtsc",
--                     "mfence; rdtsc", X86_FEATURE_MFENCE_RDTSC,
--                     "rdtscp",        X86_FEATURE_RDTSCP,
--                     ASM_OUTPUT2("=a" (low), "=d" (high), "=c" (aux)),
--                     /* no inputs */);
--
--    return (high << 32) | low;
--}
--
--#define __write_tsc(val) wrmsrl(MSR_IA32_TSC, val)
--#define write_tsc(val) ({                                       \
--    /* Reliable TSCs are in lockstep across all CPUs. We should \
--     * never write to them. */                                  \
--    ASSERT(!boot_cpu_has(X86_FEATURE_TSC_RELIABLE));            \
--    __write_tsc(val);                                           \
--})
--
- #define rdpmc(counter,low,high) \
-      __asm__ __volatile__("rdpmc" \
- 			  : "=a" (low), "=d" (high) \
-diff --git a/xen/arch/x86/include/asm/time.h b/xen/arch/x86/include/asm/time.h
-index 3dfbb5297a25..c55b69831448 100644
---- a/xen/arch/x86/include/asm/time.h
-+++ b/xen/arch/x86/include/asm/time.h
-@@ -3,6 +3,7 @@
- #define __X86_TIME_H__
+-#include <xen/errno.h>
+ #include <xen/delay.h>
++#include <xen/errno.h>
+ #include <xen/param.h>
+ #include <xen/types.h>
  
+diff --git a/xen/arch/x86/cpu/mcheck/mce.h b/xen/arch/x86/cpu/mcheck/mce.h
+index eba4b536c797..6157a41aaeea 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.h
++++ b/xen/arch/x86/cpu/mcheck/mce.h
+@@ -7,8 +7,8 @@
+ #include <xen/sched.h>
+ #include <xen/smp.h>
+ 
+-#include <asm/traps.h>
+ #include <asm/atomic.h>
++#include <asm/traps.h>
+ 
+ #include "x86_mca.h"
+ #include "mctelem.h"
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 28c91cf023f1..6e3fd35c934e 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -24,11 +24,13 @@
+ #include <xen/hypercall.h>
+ #include <xen/init.h>
+ #include <xen/iocap.h>
++#include <xen/iommu.h>
+ #include <xen/irq.h>
+ #include <xen/kernel.h>
+ #include <xen/lib.h>
+ #include <xen/livepatch.h>
+ #include <xen/multicall.h>
++#include <xen/numa.h>
+ #include <xen/paging.h>
+ #include <xen/pci.h>
+ #include <xen/percpu.h>
+@@ -64,8 +66,6 @@
+ #include <asm/system.h>
+ #include <asm/traps.h>
+ #include <asm/xstate.h>
+-#include <xen/iommu.h>
+-#include <xen/numa.h>
+ 
+ #include <public/arch-x86/cpuid.h>
+ #include <public/sysctl.h>
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index f07cae6a70b8..d7781b7dc5fd 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -4,39 +4,41 @@
+  * Copyright (c) 2002-2006, K A Fraser
+  */
+ 
+-#include <xen/types.h>
+-#include <xen/lib.h>
+-#include <xen/mm.h>
+-#include <xen/guest_access.h>
+ #include <xen/compat.h>
+-#include <xen/pci.h>
+-#include <public/domctl.h>
+-#include <xen/sched.h>
++#include <xen/console.h>
+ #include <xen/domain.h>
+-#include <xen/event.h>
+ #include <xen/domain_page.h>
+-#include <asm/msr.h>
+-#include <xen/trace.h>
+-#include <xen/console.h>
++#include <xen/event.h>
++#include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/iocap.h>
++#include <xen/iommu.h>
++#include <xen/lib.h>
++#include <xen/mm.h>
+ #include <xen/paging.h>
++#include <xen/pci.h>
++#include <xen/sched.h>
++#include <xen/trace.h>
++#include <xen/types.h>
++#include <xen/vm_event.h>
+ 
++#include <asm/acpi.h>
++#include <asm/cpu-policy.h>
+ #include <asm/gdbsx.h>
+-#include <asm/irq.h>
+ #include <asm/hvm/emulate.h>
+ #include <asm/hvm/hvm.h>
++#include <asm/io_apic.h>
++#include <asm/irq.h>
++#include <asm/mem_sharing.h>
++#include <asm/msr.h>
+ #include <asm/processor.h>
+-#include <asm/acpi.h> /* for hvm_acpi_power_button */
+-#include <xen/hypercall.h> /* for arch_do_domctl */
++#include <asm/psr.h>
++#include <asm/xstate.h>
++
+ #include <xsm/xsm.h>
+-#include <xen/iommu.h>
+-#include <xen/vm_event.h>
++
++#include <public/domctl.h>
+ #include <public/vm_event.h>
+-#include <asm/mem_sharing.h>
+-#include <asm/xstate.h>
+-#include <asm/psr.h>
+-#include <asm/cpu-policy.h>
+-#include <asm/io_apic.h>
+ 
+ static int update_domain_cpu_policy(struct domain *d,
+                                     xen_domctl_cpu_policy_t *xdpc)
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index cb8ecd050d41..6d2b937b62ba 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -7,64 +7,66 @@
+  * Copyright (c) 2008, Citrix Systems, Inc.
+  */
+ 
++#include <xen/console.h>
++#include <xen/cpu.h>
++#include <xen/domain.h>
++#include <xen/domain_page.h>
++#include <xen/event.h>
++#include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/init.h>
+ #include <xen/io.h>
+ #include <xen/ioreq.h>
+-#include <xen/lib.h>
+-#include <xen/trace.h>
+-#include <xen/sched.h>
+ #include <xen/irq.h>
+-#include <xen/softirq.h>
+-#include <xen/domain.h>
+-#include <xen/domain_page.h>
+-#include <xen/hypercall.h>
+-#include <xen/guest_access.h>
+-#include <xen/event.h>
+-#include <xen/cpu.h>
+-#include <xen/wait.h>
++#include <xen/lib.h>
+ #include <xen/mem_access.h>
+-#include <xen/rangeset.h>
+ #include <xen/monitor.h>
+-#include <xen/param.h>
+-#include <xen/warning.h>
+-#include <xen/vpci.h>
+ #include <xen/nospec.h>
++#include <xen/param.h>
++#include <xen/rangeset.h>
++#include <xen/sched.h>
++#include <xen/softirq.h>
++#include <xen/trace.h>
+ #include <xen/vm_event.h>
+-#include <xen/console.h>
+-#include <asm/shadow.h>
+-#include <asm/hap.h>
++#include <xen/vpci.h>
++#include <xen/wait.h>
++#include <xen/warning.h>
++
++#include <asm/altp2m.h>
++#include <asm/apic.h>
++#include <asm/cpufeature.h>
+ #include <asm/current.h>
+ #include <asm/debugreg.h>
+ #include <asm/e820.h>
+-#include <asm/regs.h>
+-#include <asm/cpufeature.h>
+-#include <asm/processor.h>
+-#include <asm/msr.h>
+-#include <asm/i387.h>
+-#include <asm/xstate.h>
+-#include <asm/traps.h>
+-#include <asm/mc146818rtc.h>
+-#include <asm/mce.h>
+-#include <asm/monitor.h>
++#include <asm/hap.h>
++#include <asm/hvm/cacheattr.h>
+ #include <asm/hvm/emulate.h>
+ #include <asm/hvm/hvm.h>
+-#include <asm/hvm/vpt.h>
+-#include <asm/hvm/support.h>
+-#include <asm/hvm/cacheattr.h>
+-#include <asm/hvm/nestedhvm.h>
+ #include <asm/hvm/monitor.h>
++#include <asm/hvm/nestedhvm.h>
++#include <asm/hvm/support.h>
+ #include <asm/hvm/viridian.h>
+ #include <asm/hvm/vm_event.h>
+-#include <asm/altp2m.h>
++#include <asm/hvm/vpt.h>
++#include <asm/i387.h>
++#include <asm/mc146818rtc.h>
++#include <asm/mce.h>
++#include <asm/monitor.h>
++#include <asm/msr.h>
+ #include <asm/mtrr.h>
+-#include <asm/apic.h>
++#include <asm/processor.h>
++#include <asm/regs.h>
++#include <asm/shadow.h>
++#include <asm/traps.h>
+ #include <asm/vm_event.h>
+-#include <public/sched.h>
++#include <asm/xstate.h>
++
++#include <public/arch-x86/cpuid.h>
+ #include <public/hvm/ioreq.h>
+-#include <public/version.h>
+ #include <public/memory.h>
++#include <public/sched.h>
++#include <public/version.h>
+ #include <public/vm_event.h>
+-#include <public/arch-x86/cpuid.h>
+ 
+ #include <compat/hvm/hvm_op.h>
+ 
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 57520ac3ec2d..a807cab305aa 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -18,7 +18,6 @@
+ #include <asm/cpufeature.h>
+ #include <asm/current.h>
+ #include <asm/debugreg.h>
+-#include <asm/idt.h>
+ #include <asm/gdbsx.h>
+ #include <asm/hvm/emulate.h>
+ #include <asm/hvm/hvm.h>
+@@ -29,13 +28,14 @@
+ #include <asm/hvm/svm/svm.h>
+ #include <asm/hvm/svm/svmdebug.h>
+ #include <asm/hvm/svm/vmcb.h>
+-#include <asm/iocap.h>
+ #include <asm/i387.h>
++#include <asm/idt.h>
++#include <asm/iocap.h>
+ #include <asm/monitor.h>
  #include <asm/msr.h>
-+#include <asm/tsc.h>
++#include <asm/p2m.h>
+ #include <asm/paging.h>
+ #include <asm/processor.h>
+-#include <asm/p2m.h>
+ #include <asm/x86_emulate.h>
+ #include <asm/xenoprof.h>
  
- typedef u64 cycles_t;
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index 839d3ff91b5a..e4c797608f25 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -14,11 +14,11 @@
+ #include <xen/sched.h>
+ #include <xen/softirq.h>
  
-diff --git a/xen/arch/x86/include/asm/tsc.h b/xen/arch/x86/include/asm/tsc.h
-new file mode 100644
-index 000000000000..5f48fed26c23
---- /dev/null
-+++ b/xen/arch/x86/include/asm/tsc.h
-@@ -0,0 +1,46 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef X86_TSC_H
-+#define X86_TSC_H
++#include <asm/hvm/svm/svm.h>
++#include <asm/hvm/svm/svmdebug.h>
+ #include <asm/hvm/svm/vmcb.h>
+ #include <asm/msr-index.h>
+ #include <asm/p2m.h>
+-#include <asm/hvm/svm/svm.h>
+-#include <asm/hvm/svm/svmdebug.h>
+ #include <asm/spec_ctrl.h>
+ 
+ struct vmcb_struct *alloc_vmcb(void)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 6341fa20457c..c6bf435b744a 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -4,51 +4,53 @@
+  * Copyright (c) 2004, Intel Corporation.
+  */
+ 
++#include <xen/domain_page.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/init.h>
++#include <xen/irq.h>
+ #include <xen/lib.h>
+ #include <xen/param.h>
+-#include <xen/trace.h>
++#include <xen/perfc.h>
+ #include <xen/sched.h>
+-#include <xen/irq.h>
+ #include <xen/softirq.h>
+-#include <xen/domain_page.h>
+-#include <xen/hypercall.h>
+-#include <xen/perfc.h>
+-#include <asm/current.h>
+-#include <asm/io.h>
+-#include <asm/iocap.h>
+-#include <asm/regs.h>
++#include <xen/trace.h>
 +
-+#include <asm/alternative.h>
++#include <asm/altp2m.h>
++#include <asm/apic.h>
+ #include <asm/cpufeature.h>
+-#include <asm/processor.h>
++#include <asm/current.h>
+ #include <asm/debugreg.h>
+-#include <asm/msr.h>
+-#include <asm/p2m.h>
+-#include <asm/mem_sharing.h>
++#include <asm/event.h>
++#include <asm/gdbsx.h>
+ #include <asm/hvm/emulate.h>
+ #include <asm/hvm/hvm.h>
++#include <asm/hvm/monitor.h>
++#include <asm/hvm/nestedhvm.h>
+ #include <asm/hvm/support.h>
+-#include <asm/hvm/vmx/vmx.h>
+-#include <asm/hvm/vmx/vmcs.h>
+-#include <public/sched.h>
+-#include <public/hvm/ioreq.h>
+ #include <asm/hvm/vlapic.h>
+-#include <asm/x86_emulate.h>
++#include <asm/hvm/vmx/vmcs.h>
++#include <asm/hvm/vmx/vmx.h>
+ #include <asm/hvm/vpt.h>
+-#include <public/hvm/save.h>
+-#include <asm/hvm/monitor.h>
+-#include <asm/xenoprof.h>
+-#include <asm/gdbsx.h>
+-#include <asm/apic.h>
+-#include <asm/hvm/nestedhvm.h>
+-#include <asm/altp2m.h>
+-#include <asm/event.h>
++#include <asm/io.h>
++#include <asm/iocap.h>
+ #include <asm/mce.h>
++#include <asm/mem_sharing.h>
+ #include <asm/monitor.h>
++#include <asm/msr.h>
++#include <asm/p2m.h>
++#include <asm/processor.h>
+ #include <asm/prot-key.h>
++#include <asm/regs.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
++#include <asm/x86_emulate.h>
++#include <asm/xenoprof.h>
 +
-+static inline uint64_t rdtsc(void)
-+{
-+    uint64_t low, high;
+ #include <public/arch-x86/cpuid.h>
++#include <public/hvm/ioreq.h>
++#include <public/hvm/save.h>
++#include <public/sched.h>
+ 
+ static bool __initdata opt_force_ept;
+ boolean_param("force-ept", opt_force_ept);
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 2432af58e0e0..95d3c2ee7b79 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -10,12 +10,12 @@
+ 
+ #include <xen/ioreq.h>
+ 
+-#include <asm/mtrr.h>
+-#include <asm/p2m.h>
++#include <asm/hvm/nestedhvm.h>
+ #include <asm/hvm/support.h>
+ #include <asm/hvm/vmx/vmx.h>
+ #include <asm/hvm/vmx/vvmx.h>
+-#include <asm/hvm/nestedhvm.h>
++#include <asm/mtrr.h>
++#include <asm/p2m.h>
+ 
+ static DEFINE_PER_CPU(u64 *, vvmcs_buf);
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index 18e40910ff71..228f47dbde8b 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -14,8 +14,8 @@
+ 
+ #include <asm/asm_defns.h>
+ #include <asm/current.h>
+-#include <asm/x86_emulate.h>
+ #include <asm/hvm/asid.h>
++#include <asm/x86_emulate.h>
+ 
+ struct pirq; /* needed by pi_update_irte */
+ 
+diff --git a/xen/arch/x86/tboot.c b/xen/arch/x86/tboot.c
+index d5db60d335e3..319116857d4a 100644
+--- a/xen/arch/x86/tboot.c
++++ b/xen/arch/x86/tboot.c
+@@ -1,19 +1,20 @@
++#include <xen/acpi.h>
++#include <xen/domain_page.h>
+ #include <xen/efi.h>
+ #include <xen/init.h>
+-#include <xen/types.h>
++#include <xen/iommu.h>
+ #include <xen/lib.h>
+ #include <xen/param.h>
+-#include <xen/sched.h>
+-#include <xen/domain_page.h>
+-#include <xen/iommu.h>
+-#include <xen/acpi.h>
+ #include <xen/pfn.h>
++#include <xen/sched.h>
++#include <xen/types.h>
 +
-+    asm volatile ( "rdtsc" : "=a" (low), "=d" (high) );
++#include <asm/e820.h>
+ #include <asm/fixmap.h>
+ #include <asm/page.h>
+ #include <asm/processor.h>
+-#include <asm/e820.h>
+-#include <asm/tboot.h>
+ #include <asm/setup.h>
++#include <asm/tboot.h>
+ #include <asm/trampoline.h>
+ 
+ #include <crypto/vmac.h>
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index e8e218caed36..f6d677eb121d 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -10,12 +10,12 @@
+ #include <xen/sched.h>
+ #include <xen/xvmalloc.h>
+ 
++#include <asm/asm_defns.h>
+ #include <asm/cpu-policy.h>
+ #include <asm/current.h>
+-#include <asm/processor.h>
+ #include <asm/i387.h>
++#include <asm/processor.h>
+ #include <asm/xstate.h>
+-#include <asm/asm_defns.h>
+ 
+ /*
+  * Maximum size (in byte) of the XSAVE/XRSTOR save area required by all
+diff --git a/xen/drivers/acpi/apei/apei-base.c b/xen/drivers/acpi/apei/apei-base.c
+index 053a92c307bb..4fe99573a220 100644
+--- a/xen/drivers/acpi/apei/apei-base.c
++++ b/xen/drivers/acpi/apei/apei-base.c
+@@ -30,15 +30,17 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+-#include <xen/kernel.h>
+-#include <xen/errno.h>
 +
-+    return (high << 32) | low;
-+}
++#include <xen/cper.h>
+ #include <xen/delay.h>
+-#include <xen/string.h>
+-#include <xen/types.h>
+-#include <xen/spinlock.h>
++#include <xen/errno.h>
+ #include <xen/init.h>
+-#include <xen/cper.h>
++#include <xen/kernel.h>
++#include <xen/spinlock.h>
++#include <xen/string.h>
 +
-+static inline uint64_t rdtsc_ordered(void)
-+{
-+    uint64_t low, high, aux;
+ #include <asm/io.h>
 +
-+    /*
-+     * The RDTSC instruction is not serializing.  Make it dispatch serializing
-+     * for the purposes here by issuing LFENCE (or MFENCE if necessary) ahead
-+     * of it.
-+     *
-+     * RDTSCP, otoh, "does wait until all previous instructions have executed
-+     * and all previous loads are globally visible" (SDM) / "forces all older
-+     * instructions to retire before reading the timestamp counter" (APM).
-+     */
-+    alternative_io_2("lfence; rdtsc",
-+                     "mfence; rdtsc", X86_FEATURE_MFENCE_RDTSC,
-+                     "rdtscp",        X86_FEATURE_RDTSCP,
-+                     ASM_OUTPUT2("=a" (low), "=d" (high), "=c" (aux)),
-+                     /* no inputs */);
-+
-+    return (high << 32) | low;
-+}
-+
-+#define __write_tsc(val) wrmsrl(MSR_IA32_TSC, val)
-+#define write_tsc(val) ({                                       \
-+    /* Reliable TSCs are in lockstep across all CPUs. We should \
-+     * never write to them. */                                  \
-+    ASSERT(!boot_cpu_has(X86_FEATURE_TSC_RELIABLE));            \
-+    __write_tsc(val);                                           \
-+})
-+
-+#endif /* X86_TSC_H */
+ #include <acpi/acpi.h>
+ #include <acpi/apei.h>
+ 
 -- 
 2.39.5
 
