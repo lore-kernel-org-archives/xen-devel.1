@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22932CA0ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Aug 2025 08:34:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1085649.1443951 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3FB7CA0ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Aug 2025 08:50:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1085664.1443977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1unvKA-00035c-7a; Mon, 18 Aug 2025 08:34:38 +0000
+	id 1unvZ8-0006Mp-2N; Mon, 18 Aug 2025 08:50:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1085649.1443951; Mon, 18 Aug 2025 08:34:38 +0000
+Received: by outflank-mailman (output) from mailman id 1085664.1443977; Mon, 18 Aug 2025 08:50:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1unvKA-00035V-4Y; Mon, 18 Aug 2025 08:34:38 +0000
-Received: by outflank-mailman (input) for mailman id 1085649;
- Mon, 18 Aug 2025 08:34:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1unvZ7-0006L1-Qq; Mon, 18 Aug 2025 08:50:05 +0000
+Received: by outflank-mailman (input) for mailman id 1085664;
+ Mon, 18 Aug 2025 08:50:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HKqL=26=oss.qualcomm.com=pratyush.brahma@srs-se1.protection.inumbo.net>)
- id 1unvK9-00035J-2A
- for xen-devel@lists.xenproject.org; Mon, 18 Aug 2025 08:34:37 +0000
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b76ee86-7c0e-11f0-a329-13f23c93f187;
- Mon, 18 Aug 2025 10:34:35 +0200 (CEST)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57I7V4w9026361
- for <xen-devel@lists.xenproject.org>; Mon, 18 Aug 2025 08:34:34 GMT
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 48kyunr5m9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Mon, 18 Aug 2025 08:34:34 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2445805d386so41155905ad.1
- for <xen-devel@lists.xenproject.org>; Mon, 18 Aug 2025 01:34:34 -0700 (PDT)
+ <SRS0=HFvU=26=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1unvZ6-0005gf-Ly
+ for xen-devel@lists.xenproject.org; Mon, 18 Aug 2025 08:50:04 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5410581f-7c10-11f0-b898-0df219b8e170;
+ Mon, 18 Aug 2025 10:50:02 +0200 (CEST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-55ce528022eso4210518e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Aug 2025 01:50:02 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55cef351579sm1571950e87.4.2025.08.18.01.49.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Aug 2025 01:49:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,146 +47,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b76ee86-7c0e-11f0-a329-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	YKnYr324eUUhj+QvrdVq/1e4Gz0w8e7EzwXqGsvWiSk=; b=Aze4Y5K8XQlzwnRF
-	KS2Vkdxd7n2qp5VewK8A0a6hxTVqbzMOozD5we+cTVDCFI/JgzI4KiILotlO/UDT
-	5nep91KwnnHHqgiAzY1H8M3CWe1zTEmZYyWHunj4Ox0D6WSd5grZgkLGRwPg1VDC
-	AV7KF5nJZeWoctIPiE0ufDcHdCnyV7xMUGfrwbXbmIslahVPylvI9zmR1/9esOJY
-	AFEx5vpmQjcRyyhWxPm+CoJZ5aqsnT0c5D/yh/yGTOu1npeEZWylk1LpzGMfAn+L
-	zrROeF6fcgqEzADtHMgH4NoIVLArFoA6z69DOF0yue7AxwnGRTjpFvxh/tfVJGe1
-	wi1rZg==
+X-Inumbo-ID: 5410581f-7c10-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755507001; x=1756111801; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iKQtb2yDXXgVIM20M/9ZKDqMqVSaENj70H3OApwPWOA=;
+        b=UJilwVKl8v1Hiym+CCGJObk6o8weilog7NRSjetJglxjcdzH2H4nmPHEIf0XRtOZFf
+         3Z8t1EPSkqIeiSPfwgb08dE4FcdkLv4xY3VtJmLgJ+MVUXhL8YIUsC54yG2ucyT0RM0J
+         n6l168AVwcPIbQQSqnzBdZ5iiSWEK09QGmYhsvxbvbOkZS+XUm49g/Ju6AAMwbBjrplh
+         XrNfsnzQdnUSMeFp77hibPTNHMavAKs+8gw9xHGQb3C1Cf1rrPEYUwYu007Z+GIo9r/Z
+         XCD2siahN1O58uu2LgBqCP9E3XH3xGTP7JH6VvH54wV9o2Bss+ZmLplJeNawJrCAwaDt
+         Mjpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755506073; x=1756110873;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1755507001; x=1756111801;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YKnYr324eUUhj+QvrdVq/1e4Gz0w8e7EzwXqGsvWiSk=;
-        b=rAefTKdjgLQpoAiwDbLvyHZBhwJkfiHkaYAjEvIlVmqDZ1H2kh66aQQ00JiGH+bIzx
-         ZUXYG25nV20/rT+IQHLOiUVAg/v83HLa0rg050JN/+Kb6Ba7z9bkA8RvBgKEfElDLk0h
-         KUFoFm5JQgTW4/9nANAlttGV8eso226ms3XFna9bNZNf4InwkJ9QuqOrXRGLtWiAl5h1
-         zxUZKDUM/fSjXENSeEK7kqkBPI3uuuUy4BRqqP6LjCV6PIDe83M3u83slpyA0w5Vs4cD
-         3U32HLev1sjxBDcO4unOR5dSSCo7Iv31ziRpReZZmQHLBoMYYvI8inaUPwArwBXIMfct
-         4mJg==
-X-Forwarded-Encrypted: i=1; AJvYcCX21Wv0cX/RdgxtuYpU5w8O21SvmWTExBuSL0rbyE+HqNwCoYW4BfG041mDhNvDg9nFdmJM2Lxomk0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxwsOMJxpqRnsaKUcVd96LDvaCmka7XQCyYbESqCpfU7y9wBZ0u
-	SLn4JRTyhzX1B3Ekmf2ITI/ySL/saElShII9A4VgZddvQIjJhT1ITvSdS/AzC2NOaSZ8ObJoqQl
-	jX0rgDFy+fZianZJ/cBEx0MelQz+gT9r25Ne9KwwUuX08AhxM+cEI+oMR5IDXNKDno3ZlBv5hST
-	L4HmQhXayJq1sOrFWQh08W5KpUvVv3gUAJ6SNh1SSzlKI1
-X-Gm-Gg: ASbGnctNuvE6Xh0NMBxVaLmv+kxTK1LN7cM318BgTIbPU2/mi4YeJFYNl4Qz8H4V0KK
-	43FcuYS8T8Dwp4ruuRgfPb6wkfqJK5adSai2ssoJP3/zGuLEWFeD1kgdyEDraLduspk8z5ctZPD
-	dw0yLmC2yuYjpk0EjXZXxoeA==
-X-Received: by 2002:a17:903:b07:b0:23d:fa76:5c3b with SMTP id d9443c01a7336-2446d745130mr162002055ad.22.1755506072928;
-        Mon, 18 Aug 2025 01:34:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF0iaKkOx5HF+G/2fDa+4Vn+rw7qYZXEvgZcGmIZ96t7UkZ4Y6iVl499qKwZ/lWHVbWQiw75ZkO9MQbjWLb6hM=
-X-Received: by 2002:a17:903:b07:b0:23d:fa76:5c3b with SMTP id
- d9443c01a7336-2446d745130mr162001485ad.22.1755506072460; Mon, 18 Aug 2025
- 01:34:32 -0700 (PDT)
+        bh=iKQtb2yDXXgVIM20M/9ZKDqMqVSaENj70H3OApwPWOA=;
+        b=oGHfiONwmkvta9XY5097PvPFg3+6bggzEehlZF4uS3UzSq6/i1D0OZ6UQkKvWj/KO3
+         /0RIqKN+Uu5FLo7pm8IZMNFNud6rexTzvDR82LHFECqt2NG30MF1C2HTaPsf7abOJLqr
+         S0RBzVMBFXaiaLQnOn6zMHIqfwP+0lc8jYJyquCu9swAznl5Zq8CI92qc1GrInkFpO7C
+         cwHcQjf1tvuBXDY8aYheny2iDWugBIX44/7gE3iJuLWz4gJ1pt0Khz7kiqAxxiH++Ek1
+         AFilMvLcHe53AT8hFQozKIZsXJx2V3FutIKb23U9j44Pje0qKxDSHa+eQyZ+6ssIaIDg
+         3rXg==
+X-Gm-Message-State: AOJu0Yx9mbt6RS8LF6WLyPaiiJx3qU/6Wmwz9vNTHJIU+dyN54NYpF2H
+	dPJs8JUExIKF8zLl3inN7PZaobBDWRHBG1U3hpflx8r0vKBQXqZNTGHFknyNIQ==
+X-Gm-Gg: ASbGncvd0sdi0htfmufs966pCSZmtrYTe+vr39aaJvM/R+9lN4Djiwiq9lcyc38H0vI
+	09UrCyWhd3mY6nJeCKLowe1dAzYqQbyaLd2X05+m2iVBFdph4d3sV3VXfehiWHqNk0vGPAS64fB
+	4obRDIq0bRah2ZpLu98tZuHVsFNv7cgE26Q1+pKIWjgobGYabeC9EJazQtJDrcChh7ZnKx9EGxS
+	+rtGWA9dqMahANkdF0K19BSE40ItNwAnPwnirxKOYzXnRn7kN5d9HD9NKZ/J11X5qLBjVLqT9+8
+	4Ie3EIuV3Ulf9T+phrXzlKmukBVGkaENtCQZxqXyE5FQiwWV6dfhnf5OGryHOt5TCSDfaMxb/+i
+	oykFTd4FMZ9alu0AbhaqLPx38KHoR0hJOszeGtZTOv6W+Vg43ifVuZQ/Ih8HE+3thCCFeajXk
+X-Google-Smtp-Source: AGHT+IERO8Ep+xUY8smoumIQzfhUwoe1nQke3+EHmR9SoaAFhFdmVrI9o4YNspXRsI1oGW0jo61fgg==
+X-Received: by 2002:a05:6512:145c:20b0:55d:fb2d:3c39 with SMTP id 2adb3069b0e04-55dfb2d3df9mr106422e87.40.1755507000857;
+        Mon, 18 Aug 2025 01:50:00 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v9 2/4] tools/xl: Allow compilation of 'xl resume' command on Arm
+Date: Mon, 18 Aug 2025 11:49:25 +0300
+Message-ID: <60c29f80837b0642fcf225aaff3cd2b07310c0ce.1755506449.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1755506449.git.mykola_kvach@epam.com>
+References: <cover.1755506449.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-References: <20250818-numa_memblks-v1-1-9eb29ade560a@oss.qualcomm.com>
- <d7cdb65d-c241-478c-aa01-bc1a5f188e4f@redhat.com> <CALzOmR0C8BFY+-u-_aprVeAhq4uPOQa+f2L5m+yZH+=XZ2cv_w@mail.gmail.com>
- <63082884-1fe2-4740-8e6a-e1d06aa5e239@redhat.com>
-In-Reply-To: <63082884-1fe2-4740-8e6a-e1d06aa5e239@redhat.com>
-From: Pratyush Brahma <pratyush.brahma@oss.qualcomm.com>
-Date: Mon, 18 Aug 2025 14:04:20 +0530
-X-Gm-Features: Ac12FXzX5PzSlv6roYThUOo89xclaREe5qOUHnsYKt7fIrY-t8kJ9YEJL5m2flQ
-Message-ID: <CALzOmR0MJv8EgPiFTvvbdkk8H_0BEDA4QQXKyqRPOCwwzGwjsw@mail.gmail.com>
-Subject: Re: [PATCH] mm/numa: Rename memory_add_physaddr_to_nid to memory_get_phys_to_nid
-To: David Hildenbrand <david@redhat.com>
-Cc: Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Christophe Leroy <christophe.leroy@csgroup.eu>,
-        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>, Len Brown <lenb@kernel.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Dave Jiang <dave.jiang@intel.com>, Ira Weiny <ira.weiny@intel.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Davidlohr Bueso <dave@stgolabs.net>,
-        Jonathan Cameron <jonathan.cameron@huawei.com>,
-        Alison Schofield <alison.schofield@intel.com>,
-        "K. Y. Srinivasan" <kys@microsoft.com>,
-        Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
-        Dexuan Cui <decui@microsoft.com>,
-        Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-        =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
-        Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Mike Rapoport <rppt@kernel.org>, linuxppc-dev@lists.ozlabs.org,
-        linux-kernel@vger.kernel.org, linux-s390@vger.kernel.org,
-        linux-acpi@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org,
-        linux-cxl@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        virtualization@lists.linux.dev, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: 0PggYd9rQg3QLmqxpyannjEkKd6qeAQE
-X-Authority-Analysis: v=2.4 cv=N6UpF39B c=1 sm=1 tr=0 ts=68a2e59a cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=IkcTkHD0fZMA:10 a=2OwXVqhp2XgA:10
- a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=AFlVVsuRyXfiT6IdkpsA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODE4MDA3MSBTYWx0ZWRfX78rLrxAKSq8Y
- RkafkVqFGrLquNuumVXP5X3mi4jphYuYdWa/m3DAOCOZsqyBkXXGn13EuhePGf31CzOd+8qWP5p
- DqwDNFBJtXlo0yP+9qZKhartkfpuA20e0RjsXg9oF7ptj7r3mWAmbfJ33316gPUlWfyhR2i167C
- p31DhRQtDgcChHrdHnedHUj2qZBSEkiHWJCka/adlfJuXFQFycUs07z4P8sKWaC0Epg9vS5M8Dq
- vd4r1wIU93E9Da8tXsfkkwWc1+y7j2Ehw7kdQvZXW2ElxNNszvumzAy7nima3j0k647ZryicsJG
- t0MZA547Wkdvf/AndItGt7Ap7he4zwHu5uJc7gxTMKGm6QpK6NVBc15alVeN/OlUVIAuEWbTXSQ
- U1A5Vo77
-X-Proofpoint-ORIG-GUID: 0PggYd9rQg3QLmqxpyannjEkKd6qeAQE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-18_03,2025-08-14_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 clxscore=1015 malwarescore=0 impostorscore=0
- suspectscore=0 phishscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2508180071
+Content-Transfer-Encoding: 8bit
 
-On Mon, Aug 18, 2025 at 2:01=E2=80=AFPM David Hildenbrand <david@redhat.com=
-> wrote:
->
-> On 18.08.25 10:27, Pratyush Brahma wrote:
-> > On Mon, Aug 18, 2025 at 12:29=E2=80=AFPM David Hildenbrand <david@redha=
-t.com> wrote:
-> >>
-> >> On 18.08.25 08:41, pratyush.brahma@oss.qualcomm.com wrote:
-> >>> From: Pratyush Brahma <pratyush.brahma@oss.qualcomm.com>
-> >>>
-> >>> The function `memory_add_physaddr_to_nid` seems a misnomer.
-> >>> It does not to "add" a physical address to a NID mapping,
-> >>> but rather it gets the NID associated with a given physical address.
-> >>
-> >> You probably misunderstood what the function is used for: memory hotpl=
-ug
-> >> aka "memory_add".
-> > Thanks for your feedback. I get the part about memory hotplug here but
-> > using memory_add still seems a little odd as it doesn't truly reflect
-> > what this api is doing.
-> > However, I agree that my current suggestion
-> > may not be the perfect choice for the name, so I'm open to suggestions.
-> >
-> > Perhaps, something like "memory_add_get_nid_by_phys" may work here?
->
-> I don't think this name is really any better and worth the churn :(
->
-Sure. Thanks for taking a look. Will drop this.
-> --
-> Cheers
->
-> David / dhildenb
->
-Thanks & Regards
-Pratyush
+From: Mykola Kvach <mykola_kvach@epam.com>
+
+The "xl resume" command was previously excluded from Arm builds because
+system suspend/resume (e.g., SYSTEM_SUSPEND via vPSCI) was not
+implemented. On x86, this command is used for resume.
+
+This change enables compilation of `xl resume` on Arm regardless of the
+underlying implementation status, making the tool available for testing
+and future feature support. The relevant libxl infrastructure and handler
+functions are already present and usable.
+
+Note: This does not imply full system suspend/resume support on Arm.
+      The `xl suspend` command still does not work on Arm platforms.
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+---
+Changes in v7:
+- dropped renaming of LIBXL_HAVE_NO_SUSPEND_RESUME macro
+
+Changes in v6:
+- Renamed macro from LIBXL_HAVE_NO_SUSPEND_RESUME to LIBXL_HAVE_NO_SUSPEND
+  to better reflect the scope of this change
+- Applied cosmetic changes based on review feedback
+---
+ tools/include/libxl.h     |  1 -
+ tools/xl/xl.h             |  4 ++--
+ tools/xl/xl_cmdtable.c    |  4 ++--
+ tools/xl/xl_migrate.c     |  2 +-
+ tools/xl/xl_saverestore.c |  2 +-
+ tools/xl/xl_vmcontrol.c   | 12 ++++++------
+ 6 files changed, 12 insertions(+), 13 deletions(-)
+
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 185f74d8a8..b204fc5e2e 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1140,7 +1140,6 @@ typedef struct libxl__ctx libxl_ctx;
+  * restoring or migrating a domain. In this case the related functions
+  * should be expected to return failure. That is:
+  *  - libxl_domain_suspend
+- *  - libxl_domain_resume
+  *  - libxl_domain_remus_start
+  */
+ #if defined(__arm__) || defined(__aarch64__)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 45745f0dbb..9233b73f85 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -65,7 +65,7 @@ static const char migrate_permission_to_go[]=
+     "domain is yours, you are cleared to unpause";
+ static const char migrate_report[]=
+     "my copy unpause results are as follows";
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+   /* followed by one byte:
+    *     0: everything went well, domain is running
+@@ -130,8 +130,8 @@ int main_migrate_receive(int argc, char **argv);
+ int main_save(int argc, char **argv);
+ int main_migrate(int argc, char **argv);
+ int main_suspend(int argc, char **argv);
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ int main_resume(int argc, char **argv);
+-#endif
+ int main_dump_core(int argc, char **argv);
+ int main_pause(int argc, char **argv);
+ int main_unpause(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 06a0039718..bcb2d233cc 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -198,12 +198,12 @@ const struct cmd_spec cmd_table[] = {
+       "Suspend a domain to RAM",
+       "<Domain>",
+     },
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "resume",
+       &main_resume, 0, 1,
+       "Resume a domain from RAM",
+       "<Domain>",
+     },
+-#endif
+     { "dump-core",
+       &main_dump_core, 0, 1,
+       "Core dump a domain",
+@@ -548,7 +548,7 @@ const struct cmd_spec cmd_table[] = {
+       "                        checkpoint must be disabled.\n"
+       "-p                      Use COLO userspace proxy."
+     },
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "devd",
+       &main_devd, 0, 1,
+       "Daemon that listens for devices and launches backends",
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..4b4a379aa1 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -767,7 +767,7 @@ int main_remus(int argc, char **argv)
+     close(send_fd);
+     return EXIT_FAILURE;
+ }
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ /*
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..747094ec7b 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -270,7 +270,7 @@ int main_save(int argc, char **argv)
+     return EXIT_SUCCESS;
+ }
+ 
+-#endif /* LIBXL_HAVE_NO_SUSPEND_RESUME */
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ 
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index c813732838..93766f631b 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -38,11 +38,6 @@ static void suspend_domain(uint32_t domid)
+     libxl_domain_suspend_only(ctx, domid, NULL);
+ }
+ 
+-static void resume_domain(uint32_t domid)
+-{
+-    libxl_domain_resume(ctx, domid, 1, NULL);
+-}
+-
+ int main_suspend(int argc, char **argv)
+ {
+     int opt;
+@@ -55,6 +50,12 @@ int main_suspend(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
++
++static void resume_domain(uint32_t domid)
++{
++    libxl_domain_resume(ctx, domid, 1, NULL);
++}
+ 
+ int main_resume(int argc, char **argv)
+ {
+@@ -68,7 +69,6 @@ int main_resume(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
+-#endif
+ 
+ static void pause_domain(uint32_t domid)
+ {
+-- 
+2.48.1
+
 
