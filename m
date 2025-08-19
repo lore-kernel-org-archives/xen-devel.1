@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EB5CA0EE6
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 17:38:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1086748.1444947 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5140FCA0EE6
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 17:38:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1086754.1444957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoQHR-0007tu-7Q; Tue, 19 Aug 2025 17:37:53 +0000
+	id 1uoQHW-0008Lv-Jx; Tue, 19 Aug 2025 17:37:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1086748.1444947; Tue, 19 Aug 2025 17:37:53 +0000
+Received: by outflank-mailman (output) from mailman id 1086754.1444957; Tue, 19 Aug 2025 17:37:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoQHR-0007tk-2b; Tue, 19 Aug 2025 17:37:53 +0000
-Received: by outflank-mailman (input) for mailman id 1086748;
- Tue, 19 Aug 2025 17:37:51 +0000
+	id 1uoQHW-0008Lj-FE; Tue, 19 Aug 2025 17:37:58 +0000
+Received: by outflank-mailman (input) for mailman id 1086754;
+ Tue, 19 Aug 2025 17:37:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ve3E=27=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uoQHP-0006dc-FQ
- for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 17:37:51 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [2600:3c04:e001:324:0:1991:8:25])
+ id 1uoQHU-0006dc-EW
+ for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 17:37:56 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3932ac95-7d23-11f0-b898-0df219b8e170;
- Tue, 19 Aug 2025 19:37:49 +0200 (CEST)
+ id 3c535cb3-7d23-11f0-b898-0df219b8e170;
+ Tue, 19 Aug 2025 19:37:54 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 68ED361428;
- Tue, 19 Aug 2025 17:37:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20E31C4CEF4;
- Tue, 19 Aug 2025 17:37:46 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 8D1F260209;
+ Tue, 19 Aug 2025 17:37:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16E9AC4CEF4;
+ Tue, 19 Aug 2025 17:37:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3932ac95-7d23-11f0-b898-0df219b8e170
+X-Inumbo-ID: 3c535cb3-7d23-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755625067;
-	bh=/KA5/iirzA+7NBo2WhreWFarQonN7Bxg4iw8kozROnk=;
+	s=k20201202; t=1755625073;
+	bh=dJuAJRFwFKXIJkybNGJNx5df3xqMYXp7O5ndEMDZg04=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=OoY3cFH2dl227qnLV9qdRahXTo4iRGaE1ejAUo1nffsJP0oy41x+3H7L4v7i2x+3n
-	 xubqfjQVTIQTYC5r+ENf4+KGcCnAUVsLcgjhKtSG7OSOwipn6OBplJzxmTdzuG0M9E
-	 nOqACnOTvFp/m3vySJgCvla7yn84iC8kCcZYBJMh4R+MZ/b74GrWwrWb+iQMHKPL+t
-	 NgcwvdawK6zK2SX4ql7GcDqU9F51bDD3j3M2HcQm4mmg1VmtQYwjFoitOFxvUHKbl3
-	 rqW/Lkb1w2tnkNmZBZDtXk0WCZ8okhRrV49XpXjkU1fgNjQ27YX9a0l0afVRahDzUy
-	 VvDsrkwd9UrzA==
+	b=KCfTK4M16fZcS3idu4B2UtcPGBxqBCQW/ThUlPcSPjuZpk9imzaVn20BMZHpPLbyc
+	 3sv0wYVSp65eod2nGPwJoVRbqWUP8iwVx1qGbM406J7EQpm2oXaICC90d6Ro5TVuLo
+	 TYKUR+gfoaSSqlCAv5Zfuuwbhw+6pj13nHVJkk9nSAsT5zgqNZmrwO925lW0owpuEU
+	 q+J3Pg0hHwFJc1ESksWCrS/+yq6AvaPGtnZ/mQ6gvtWd96ELDPoDM/2hRZRbzxrJGH
+	 3nVNacD9SmUqnDN3yL+Ud7ESjKc3S/vPtHWyLZM7vnsGB7Xxfh7jUyQGNO7ifQQ+BT
+	 knehqEHs781Uw==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>,
@@ -93,9 +92,9 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	Will Deacon <will@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v4 04/16] dma-mapping: rename trace_dma_*map_page to trace_dma_*map_phys
-Date: Tue, 19 Aug 2025 20:36:48 +0300
-Message-ID: <d7c9b5bedd4bacd78490799917948192dd537ca7.1755624249.git.leon@kernel.org>
+Subject: [PATCH v4 06/16] iommu/dma: extend iommu_dma_*map_phys API to handle MMIO memory
+Date: Tue, 19 Aug 2025 20:36:50 +0300
+Message-ID: <4f84639baf6d5d0e107fd2001dff91b6538ff9ae.1755624249.git.leon@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1755624249.git.leon@kernel.org>
 References: <cover.1755624249.git.leon@kernel.org>
@@ -104,59 +103,60 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-As a preparation for following map_page -> map_phys API conversion,
-let's rename trace_dma_*map_page() to be trace_dma_*map_phys().
+Combine iommu_dma_*map_phys with iommu_dma_*map_resource interfaces in
+order to allow single phys_addr_t flow.
+
+In the following patches, the iommu_dma_map_resource() will be removed
+in favour of iommu_dma_map_phys(..., attrs | DMA_ATTR_MMIO) flow.
 
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- include/trace/events/dma.h | 4 ++--
- kernel/dma/mapping.c       | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/iommu/dma-iommu.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
-index ee90d6f1dcf3..84416c7d6bfa 100644
---- a/include/trace/events/dma.h
-+++ b/include/trace/events/dma.h
-@@ -72,7 +72,7 @@ DEFINE_EVENT(dma_map, name, \
- 		 size_t size, enum dma_data_direction dir, unsigned long attrs), \
- 	TP_ARGS(dev, phys_addr, dma_addr, size, dir, attrs))
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index aea119f32f96..6804aaf034a1 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -1211,16 +1211,19 @@ dma_addr_t iommu_dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ 	 */
+ 	if (dev_use_swiotlb(dev, size, dir) &&
+ 	    iova_unaligned(iovad, phys, size)) {
++		if (attrs & DMA_ATTR_MMIO)
++			return DMA_MAPPING_ERROR;
++
+ 		phys = iommu_dma_map_swiotlb(dev, phys, size, dir, attrs);
+ 		if (phys == (phys_addr_t)DMA_MAPPING_ERROR)
+ 			return DMA_MAPPING_ERROR;
+ 	}
  
--DEFINE_MAP_EVENT(dma_map_page);
-+DEFINE_MAP_EVENT(dma_map_phys);
- DEFINE_MAP_EVENT(dma_map_resource);
+-	if (!coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
++	if (!coherent && !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO)))
+ 		arch_sync_dma_for_device(phys, size, dir);
  
- DECLARE_EVENT_CLASS(dma_unmap,
-@@ -110,7 +110,7 @@ DEFINE_EVENT(dma_unmap, name, \
- 		 enum dma_data_direction dir, unsigned long attrs), \
- 	TP_ARGS(dev, addr, size, dir, attrs))
- 
--DEFINE_UNMAP_EVENT(dma_unmap_page);
-+DEFINE_UNMAP_EVENT(dma_unmap_phys);
- DEFINE_UNMAP_EVENT(dma_unmap_resource);
- 
- DECLARE_EVENT_CLASS(dma_alloc_class,
-diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
-index 4c1dfbabb8ae..fe1f0da6dc50 100644
---- a/kernel/dma/mapping.c
-+++ b/kernel/dma/mapping.c
-@@ -173,7 +173,7 @@ dma_addr_t dma_map_page_attrs(struct device *dev, struct page *page,
- 	else
- 		addr = ops->map_page(dev, page, offset, size, dir, attrs);
- 	kmsan_handle_dma(page, offset, size, dir);
--	trace_dma_map_page(dev, phys, addr, size, dir, attrs);
-+	trace_dma_map_phys(dev, phys, addr, size, dir, attrs);
- 	debug_dma_map_phys(dev, phys, size, dir, addr, attrs);
- 
- 	return addr;
-@@ -193,7 +193,7 @@ void dma_unmap_page_attrs(struct device *dev, dma_addr_t addr, size_t size,
- 		iommu_dma_unmap_page(dev, addr, size, dir, attrs);
- 	else
- 		ops->unmap_page(dev, addr, size, dir, attrs);
--	trace_dma_unmap_page(dev, addr, size, dir, attrs);
-+	trace_dma_unmap_phys(dev, addr, size, dir, attrs);
- 	debug_dma_unmap_phys(dev, addr, size, dir);
+ 	iova = __iommu_dma_map(dev, phys, size, prot, dma_mask);
+-	if (iova == DMA_MAPPING_ERROR)
++	if (iova == DMA_MAPPING_ERROR && !(attrs & DMA_ATTR_MMIO))
+ 		swiotlb_tbl_unmap_single(dev, phys, size, dir, attrs);
+ 	return iova;
  }
- EXPORT_SYMBOL(dma_unmap_page_attrs);
+@@ -1228,10 +1231,14 @@ dma_addr_t iommu_dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ void iommu_dma_unmap_phys(struct device *dev, dma_addr_t dma_handle,
+ 		size_t size, enum dma_data_direction dir, unsigned long attrs)
+ {
+-	struct iommu_domain *domain = iommu_get_dma_domain(dev);
+ 	phys_addr_t phys;
+ 
+-	phys = iommu_iova_to_phys(domain, dma_handle);
++	if (attrs & DMA_ATTR_MMIO) {
++		__iommu_dma_unmap(dev, dma_handle, size);
++		return;
++	}
++
++	phys = iommu_iova_to_phys(iommu_get_dma_domain(dev), dma_handle);
+ 	if (WARN_ON(!phys))
+ 		return;
+ 
 -- 
 2.50.1
 
