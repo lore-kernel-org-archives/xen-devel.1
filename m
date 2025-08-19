@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76374CA0EF7
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 11:27:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1086464.1444646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04CACA0EEB
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 11:48:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1086485.1444667 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoKUw-0000n3-Vt; Tue, 19 Aug 2025 11:27:26 +0000
+	id 1uoKox-0004Hw-Pk; Tue, 19 Aug 2025 11:48:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1086464.1444646; Tue, 19 Aug 2025 11:27:26 +0000
+Received: by outflank-mailman (output) from mailman id 1086485.1444667; Tue, 19 Aug 2025 11:48:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoKUw-0000mw-TJ; Tue, 19 Aug 2025 11:27:26 +0000
-Received: by outflank-mailman (input) for mailman id 1086464;
- Tue, 19 Aug 2025 11:27:25 +0000
+	id 1uoKox-0004Ho-M0; Tue, 19 Aug 2025 11:48:07 +0000
+Received: by outflank-mailman (input) for mailman id 1086485;
+ Tue, 19 Aug 2025 11:48:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TlMz=27=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1uoKUv-0000mp-41
- for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 11:27:25 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061b.outbound.protection.outlook.com
- [2a01:111:f403:2418::61b])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=xm9j=27=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uoKow-0004Hg-9E
+ for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 11:48:06 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 78e0b59f-7cef-11f0-b898-0df219b8e170;
- Tue, 19 Aug 2025 13:27:22 +0200 (CEST)
-Received: from SJ0PR05CA0056.namprd05.prod.outlook.com (2603:10b6:a03:33f::31)
- by IA0PPF44635DB8D.namprd12.prod.outlook.com
- (2603:10b6:20f:fc04::bcc) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Tue, 19 Aug
- 2025 11:27:18 +0000
-Received: from MWH0EPF000971E3.namprd02.prod.outlook.com
- (2603:10b6:a03:33f:cafe::91) by SJ0PR05CA0056.outlook.office365.com
- (2603:10b6:a03:33f::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.12 via Frontend Transport; Tue,
- 19 Aug 2025 11:27:17 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- MWH0EPF000971E3.mail.protection.outlook.com (10.167.243.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9052.8 via Frontend Transport; Tue, 19 Aug 2025 11:27:16 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 19 Aug
- 2025 06:27:14 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Tue, 19 Aug
- 2025 04:27:14 -0700
-Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via
- Frontend Transport; Tue, 19 Aug 2025 06:27:13 -0500
+ id 5d5e1916-7cf2-11f0-b898-0df219b8e170;
+ Tue, 19 Aug 2025 13:48:04 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-afcb731ca8eso831848166b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Aug 2025 04:48:04 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-afcdcfccd2csm995431066b.64.2025.08.19.04.48.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Aug 2025 04:48:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,264 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78e0b59f-7cef-11f0-b898-0df219b8e170
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yTUS4i/DWTJzO9QapNZpH3V4SU3yXfdu57455jONsxSfkU6YxALOI8FupnbBOmRgkVroLF7UXngkKhBdiOfUv1Lf3HrTOUpVz4iHuEQvOZKmDurIWZQ3t60GXkYyafZKjzkWzABPXqnnKPwxi+mlEjgVtwyD3hxk0PZK0mpuLEZV9PssBeAiu1gV68mxWkX8JIXlCB/RR+XdCXXAYv1fgYO72CBj5PBWH4YG3QZ76ds9790JEQQE9e4Jv795vGBjqDi2s0gNea/kz83anhuEDX0eb1pMJ5WzZVpfDUOoa081uda4LTMWWbXt3jr+XsjOriTK+oYufnC8zBZ3SMNBaw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mod91OXSJKMWsqI/Xv5g/tFPiOhHB1wMGsFVxE9S3kQ=;
- b=pwhzkgoqRgxi5crFH61BaM3rJ1oacenvwBnZzfkFx1x5knD449MzqUWXbq1toJq30sSiT79SGP0eD5XEjWVDb0WbI4GaLqonS2nCMAe4w94ZVs8sFAVVr1b6dG1t0KumsBZrz/+XlnMWkSLThER2CjmAVFHC9IqsxylyMxs2tiZ561c2n8MIiMJlW9z73jlPJoRw9jPRQhqCcM3HHeJaV6MnYtKyM1od0kXV9LbocYzxNhsm7fzGDZg8b4qksdREi6xjRvOtsYRsyQslReAoKslXA+uVXXBgbW0ZG4dxBvsfE/ksoSvWThTh5KmmRQC7kLYL48yv4HfFLo8Z54cS7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mod91OXSJKMWsqI/Xv5g/tFPiOhHB1wMGsFVxE9S3kQ=;
- b=SbWTw3NpC3MslQPGCyC9TnkDrQfRcyPU4CJmS1J8BLEeKEohdWxJps+jRglos0DKiRRifY30G9R5VKLZdZ88wXEV5qR6mgE50Bywh4J47IMWp+aj9G1dWEMZKzHZEAoSu5w+Q6VAu5WlGYVB0a2Pb037TwVBw41PESJQy8QA86Y=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal
- Orzel <michal.orzel@amd.com>, Artem Mygaiev <artem_mygaiev@epam.com>
-Subject: [PATCH v4 1/2] docs: fusa: Define the requirements for XEN_VERSION hypercall.
-Date: Tue, 19 Aug 2025 12:27:08 +0100
-Message-ID: <20250819112709.3789987-1-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 5d5e1916-7cf2-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1755604083; x=1756208883; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=My2ElW1CsGaUg2rzbVlSnaqbwMsFuvhdNanh+sAhnxA=;
+        b=dhy+5rb7jEGozIZdU08zYlmNriykoDNDb8ALsWbWVpOYbpW7PG60cQ7CkXeQtfNaul
+         039/ASmbaYqZrdvzoFrnSBackkDZ8NValfVx25tf9t2cMtp4sDeA7hvrZ00TM5emXcQW
+         NiaLSFUXG1tOmTYsCJaXVfU2NO+HJkjpvpEau88Eq4EWG+aABiG9x7n+KPaAtvN52hPX
+         2pDm6N3NHPgvpLQCJOEULWAB3ATMl0AC1MpHouph8FtpeOG1wTLcN3jFld/03PUQEj6P
+         jrvdjWVDm5rs5n0KYrVt2oSniAlZLZsdMzQaLXQxDb+JbiycKfoz24hX3MPWIF/5Nyl8
+         ditA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755604083; x=1756208883;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=My2ElW1CsGaUg2rzbVlSnaqbwMsFuvhdNanh+sAhnxA=;
+        b=AiJmXibDdUeCGQqK5/h+UgPUCZoLvwiWTzgiK72v5qBQRkjSCgiTb0vT2uww7ngkPZ
+         ZsyT4FixWJsK5KzHTn5I53YnTNuTTGnVDWsKj9jcKsIplJzwOLQUNCSVU0nkotTGz3Vy
+         WOGXfI4sOTmRCJU43FBHlzQ8XAuWAvo1AMdaDWTzJPlyMZlZPK2UQ60kekqRKJdzZcCh
+         g9umQ9Nexx4m11SGCQfi4azvzL/LvzV9svh+6baSFm4Sq8i1A3aCGGN/1obUT1TFBvIl
+         Irni/FXp8yxT683186+ahKJKVwrN2xZCBcfd49p9PNwhkbiabadxk+JKY9mBA+yuuAxL
+         F3GA==
+X-Forwarded-Encrypted: i=1; AJvYcCXnoJQn1WhJjYcB9gzfwM0ZdOP3qmtit41mc67sXb/Smafbg8eBEFQsJY2Nk3IemFa7ul9ffjel0jE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzpOjNJhgLSSuZBAFBGkvtjVLhGef1TcQjosfTFsnglw4UhmKae
+	ZvAJZNDkAKqAzhdML3AGCfuU2jjfPv8mcl0CnQ77FHa6E9BetQ8+YvMBEVzhi8LTzQ==
+X-Gm-Gg: ASbGncs2csZ8ugSCIUCuTSlw/ZUfkz+y805MJPLNjqMSVTBPRg3HbicgV5nwbHabdpm
+	85xCT3HcbxJF9KCYsq5cywqkD+qFEEWRi25NyhKsBwvzvGCtt4uSa7kPza2KDM4G2NpdrU6BtVq
+	bHimCgNiMmjS/RVAFq/lNSREVKSFdxsJJkKIsMkmuYu1orl2quOC/iu6YSrqvrCJ3AwPB4mPIoo
+	gIjcyuO43Np809bPBXoHB8codK2pqnCCU4VoVJtyQHMZK1CSJPZ138MkI+7PcOCbwlgxwqmu/mG
+	4Z+dRz+ZlRzoPwXqhy9k26UTlQH5Rd7Nsh1Fx1YHnyC/B7e/xxPBD0qNWFR+FUY43h19tcwrL54
+	QszURdQkMe7hNwX+S8HF5opVAdTg38vmhmQY7CIZUcQ3J9Gp2S7chzm86yoj8x+vndwtqHYPu3B
+	ElpAW1PwI=
+X-Google-Smtp-Source: AGHT+IFJ7Qt+cEYGPN1crwlMkRDH8kRKy/cPG5jbUN8CgyxuspUjzGm24MXleu0wtEdhdSUGeF8KbA==
+X-Received: by 2002:a17:907:969e:b0:afa:1b05:69c3 with SMTP id a640c23a62f3a-afddd1e905amr179355366b.47.1755604082776;
+        Tue, 19 Aug 2025 04:48:02 -0700 (PDT)
+Message-ID: <718dda6c-120f-443c-ac9e-de948bcd6ce4@suse.com>
+Date: Tue, 19 Aug 2025 13:48:01 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E3:EE_|IA0PPF44635DB8D:EE_
-X-MS-Office365-Filtering-Correlation-Id: db9a1dde-e6e5-42dd-c988-08dddf135a04
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|82310400026|376014|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?D5UBKLcU9fTzyKXuHqyZ+xHU1IyhyOMbqeVXFEGXS5G4gv0WTpXXGPeboHUX?=
- =?us-ascii?Q?hMIYq9pjpJrMHFo70zOC6ZgqWR3z/c71Y4Y9n1YCSdMuSA5M7eMwf0Ys6I4v?=
- =?us-ascii?Q?kWkHrsP8UclpRC/tWqaOBIFbNtx95oPMw1sCCOhh3rJrEwDvu+qiSsnBfPyo?=
- =?us-ascii?Q?W/vVn5NPGfcY/EK/st9/DHVoUATsxpznFEborsQDSQkm/jWdCN6sJ/ylpfRm?=
- =?us-ascii?Q?0DBn8QWfmUmobZ/M1pQlycvTrR+zWaazcgl5T0wHKd0R+h9Kq5/g+Z+XkBu0?=
- =?us-ascii?Q?lSQt5g7HKyLleHFB75QfMT7vDK6kbFzVjOLMHk6iKglSHinjrXAbFEvfz4jd?=
- =?us-ascii?Q?LspIs2KizK4O8hqPa1HmTFA7acZNLxXtTGNur5P1BDP14MqsPboaXjx5/Nvi?=
- =?us-ascii?Q?/3S7ifZyMvL+cnPlLLV8yGEh6L3mOexGktR7GSqRY7QHhs/DTgFUJ/tuTBqN?=
- =?us-ascii?Q?5b1GfC3OLSz+LGbiinDEJ7D0vBdmtANhLDRaEaqr2riN39tqF7q2LtHUwnjG?=
- =?us-ascii?Q?ZC9maz+oUd5Gojvq92LdCwhABeTBWzVz3bzTTKsOTOLzvBIo753e6/g30krs?=
- =?us-ascii?Q?oY9zCvCPlZP0ElP7BxjqvqETWozBcGH6ncYZnTyPsvKu9AmvZm7yVvZ95Q0X?=
- =?us-ascii?Q?DmguSVdDCju+/5Jh4ezhPN5mRaWiMYpGnxEBrKRarD9i+6w12gshN+mvMEXd?=
- =?us-ascii?Q?twsKD3u+7WhnoK1E92fuvlAIjGaeYMQ1z1SWrO1HWKtND/quv3FpmYgpbyKY?=
- =?us-ascii?Q?ikYhSl0PbLFdDYhRZl1YxiLr8V32/G9WRZ/r0SLEzyIDWiYQnixdBUVfDApv?=
- =?us-ascii?Q?9ZWZRZv/HOHF9AarVkRmQLdP8wD91ptLikjnmRWmM6sidz2U2SPFjYuqy+nZ?=
- =?us-ascii?Q?Zei4TojfrLZhNAOkPlBwPIewuO9uC8nCoYiOYRSiVI7T9rSjahSjwkRBOdFM?=
- =?us-ascii?Q?z26qjl0dH/o4doI22j13ROrOi29SNYmv6uN65xc+xP+aGyQ86EecPIdddt8t?=
- =?us-ascii?Q?Yh4RCDuSM90RVQvyJMZv0nEGAS37pfdVoW0RgrTa/jCVB3rtmdRYjn+Wt8gy?=
- =?us-ascii?Q?uZeM3X93lag0YIUfbZfOEPT2HVbhSOYSHfOZDLrV4zZk2SXQ1Kw5vrXwKCmF?=
- =?us-ascii?Q?bWwobMP71fcLm3r4UsYVZ6LJtkoFGcBWK2ijylJWqOOhT5Z5Thetn51Ihw65?=
- =?us-ascii?Q?yRsGHkbY7eEifmm39Uy9Qyfhg7O9LEhJuhmiEYbDVBxV0FYgKgJay73Vgp/0?=
- =?us-ascii?Q?g3T5MuQw279G3YYG1LszwoD5AAvtp55S8wgi8T6vtshWiBnHKyxiwgAUrrRT?=
- =?us-ascii?Q?6u9oY+lSfq7KSAsA/sWT9HWW5bUKVGvMAkNTLxwUinz94qKF+BOqTx2PI5Ns?=
- =?us-ascii?Q?j08VUJaxXRoaTTbZLbGjOPy8Bfs5BNsQXhg/AQvKiR6gZCu9uwkUf2ysrj2d?=
- =?us-ascii?Q?myLA6XoF2vJVs5b05hvhfYRaZbRrmmxIoJs7uZ9mLaQJfevaHLwy+z+TRG+Q?=
- =?us-ascii?Q?jUcnCS1sZhUHqg9tYQntwhHT8bXjZufz41L+?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 11:27:16.2768
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: db9a1dde-e6e5-42dd-c988-08dddf135a04
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000971E3.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF44635DB8D
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/16] x86/svm: Rename variable in
+ svm_msr_write_intercept()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
+ <20250815204117.3312742-11-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250815204117.3312742-11-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Define the requirements which are common for all the commands.
+On 15.08.2025 22:41, Andrew Cooper wrote:
+> We're about to turn the rdmsr() macro into a real function, at which point
+> Eclair complains that we're now shadowing an identifer.
+> 
+> Rename rdmsr to is_rdmsr.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
----
-Changes from -
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-v1 - 1. Fixed `XenProd~version_hyp_ret_val~1` requirement as Xen does not return
-0 for success in all the cases.
-2. Reworded the requirements so as to write them from Xen's perspective (not
-domain's perspective).
 
-v2 - 1. Specified the register details.
-2. Specified the type of buffer.
+> --- a/xen/arch/x86/hvm/svm/svm.c
+> +++ b/xen/arch/x86/hvm/svm/svm.c
+> @@ -2087,14 +2087,14 @@ static int cf_check svm_msr_write_intercept(
+>  static void svm_do_msr_access(struct cpu_user_regs *regs)
+>  {
+>      struct vcpu *curr = current;
+> -    bool rdmsr = curr->arch.hvm.svm.vmcb->exitinfo1 == 0;
+> -    int rc, inst_len = svm_get_insn_len(curr, rdmsr ? INSTR_RDMSR
+> -                                                    : INSTR_WRMSR);
+> +    bool is_rdmsr = curr->arch.hvm.svm.vmcb->exitinfo1 == 0;
 
-v3 - Fixed some wordings to make it precise (eg register details, bit fields).
+Could also have used the shorter "read" or "rd" instead.
 
- .../fusa/reqs/design-reqs/arm64/hypercall.rst | 60 +++++++++++++++++++
- docs/fusa/reqs/index.rst                      |  2 +
- docs/fusa/reqs/market-reqs/reqs.rst           | 16 +++++
- .../reqs/product-reqs/version_hypercall.rst   | 42 +++++++++++++
- 4 files changed, 120 insertions(+)
- create mode 100644 docs/fusa/reqs/design-reqs/arm64/hypercall.rst
- create mode 100644 docs/fusa/reqs/product-reqs/version_hypercall.rst
+Jan
 
-diff --git a/docs/fusa/reqs/design-reqs/arm64/hypercall.rst b/docs/fusa/reqs/design-reqs/arm64/hypercall.rst
-new file mode 100644
-index 0000000000..82ecf690a3
---- /dev/null
-+++ b/docs/fusa/reqs/design-reqs/arm64/hypercall.rst
-@@ -0,0 +1,60 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hypercall
-+=========
-+
-+Instruction
-+-----------
-+
-+`XenSwdgn~arm64_hyp_instr~1`
-+
-+Description:
-+Xen shall treat domain hvc instruction execution (with 0xEA1) as hypercall
-+requests.
-+
-+Rationale:
-+
-+Comments:
-+Hypercall is one of the communication mechanism between Xen and domains.
-+Domains use hypercalls for various requests to Xen.
-+The exception syndrome register should have the following values :-
-+ESR_EL2.ISS should be 0xEA1.
-+ESR_EL2.EC should be 0x16.
-+
-+Covers:
-+ - `XenProd~version_hyp_first_param~1`
-+ - `XenProd~version_hyp_second_param~1`
-+
-+Parameters
-+----------
-+
-+`XenSwdgn~arm64_hyp_param~1`
-+
-+Description:
-+Xen shall use x0 - x4 core registers to obtain the arguments for domain hypercall
-+requests.
-+
-+Rationale:
-+
-+Comments:
-+Xen shall read x0 for the first argument, x1 for the second argument and so on.
-+
-+Covers:
-+ - `XenProd~version_hyp_first_param~1`
-+ - `XenProd~version_hyp_second_param~1`
-+
-+Hypercall number
-+----------------
-+
-+`XenSwdgn~arm64_hyp_num~1`
-+
-+Description:
-+Xen shall read x16 to obtain the hypercall number.
-+
-+Rationale:
-+
-+Comments:
-+
-+Covers:
-+ - `XenProd~version_hyp_first_param~1`
-+ - `XenProd~version_hyp_second_param~1`
-diff --git a/docs/fusa/reqs/index.rst b/docs/fusa/reqs/index.rst
-index 1088a51d52..d8683edce7 100644
---- a/docs/fusa/reqs/index.rst
-+++ b/docs/fusa/reqs/index.rst
-@@ -10,5 +10,7 @@ Requirements documentation
-    market-reqs/reqs
-    product-reqs/reqs
-    product-reqs/arm64/reqs
-+   product-reqs/version_hypercall
-    design-reqs/arm64/generic-timer
-    design-reqs/arm64/sbsa-uart
-+   design-reqs/arm64/hypercall
-diff --git a/docs/fusa/reqs/market-reqs/reqs.rst b/docs/fusa/reqs/market-reqs/reqs.rst
-index 2d297ecc13..7e3912c8f8 100644
---- a/docs/fusa/reqs/market-reqs/reqs.rst
-+++ b/docs/fusa/reqs/market-reqs/reqs.rst
-@@ -79,3 +79,19 @@ Comments:
- 
- Needs:
-  - XenProd
-+
-+Version hypercall
-+-----------------
-+
-+`XenMkt~version_hypercall~1`
-+
-+Description:
-+Xen shall provide a hypercall for the domains to retrieve Xen's version, type
-+and compilation information.
-+
-+Rationale:
-+
-+Comments:
-+
-+Needs:
-+ - XenProd
-diff --git a/docs/fusa/reqs/product-reqs/version_hypercall.rst b/docs/fusa/reqs/product-reqs/version_hypercall.rst
-new file mode 100644
-index 0000000000..b824c539b0
---- /dev/null
-+++ b/docs/fusa/reqs/product-reqs/version_hypercall.rst
-@@ -0,0 +1,42 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Version hypercall
-+=================
-+
-+First Parameter
-+---------------
-+
-+`XenProd~version_hyp_first_param~1`
-+
-+Description:
-+Xen shall treat the value stored in x0 as the command number for the hypercall.
-+
-+Rationale:
-+
-+Comments:
-+
-+Covers:
-+ - `XenMkt~version_hypercall~1`
-+
-+Needs:
-+ - XenSwdgn
-+
-+Second Parameter
-+----------------
-+
-+`XenProd~version_hyp_second_param~1`
-+
-+Description:
-+Xen shall treat the value stored in x1 as a domain virtual address (mapped as
-+Normal Inner Write-Back Outer Write-Back Inner-Shareable) to buffer in domain's
-+memory.
-+
-+Rationale:
-+
-+Comments:
-+
-+Covers:
-+ - `XenMkt~version_hypercall~1`
-+
-+Needs:
-+ - XenSwdgn
--- 
-2.25.1
+> +    int rc, inst_len = svm_get_insn_len(curr, is_rdmsr ? INSTR_RDMSR
+> +                                                       : INSTR_WRMSR);
+>  
+>      if ( inst_len == 0 )
+>          return;
+>  
+> -    if ( rdmsr )
+> +    if ( is_rdmsr )
+>      {
+>          uint64_t msr_content = 0;
+>  
 
 
