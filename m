@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26454CA0EED
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 10:42:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1086442.1444632 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7CBCA0EEB
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 11:27:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1086465.1444657 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoJnl-0003Tf-JE; Tue, 19 Aug 2025 10:42:49 +0000
+	id 1uoKUy-00010c-7F; Tue, 19 Aug 2025 11:27:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1086442.1444632; Tue, 19 Aug 2025 10:42:49 +0000
+Received: by outflank-mailman (output) from mailman id 1086465.1444657; Tue, 19 Aug 2025 11:27:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoJnl-0003TY-Gg; Tue, 19 Aug 2025 10:42:49 +0000
-Received: by outflank-mailman (input) for mailman id 1086442;
- Tue, 19 Aug 2025 10:42:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=xm9j=27=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uoJnj-0003TQ-M2
- for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 10:42:47 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3ded0c83-7ce9-11f0-b898-0df219b8e170;
- Tue, 19 Aug 2025 12:42:45 +0200 (CEST)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6188b5f620dso5696662a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 Aug 2025 03:42:45 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61a7560a0f8sm1496434a12.24.2025.08.19.03.42.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Aug 2025 03:42:44 -0700 (PDT)
+	id 1uoKUy-00010V-3t; Tue, 19 Aug 2025 11:27:28 +0000
+Received: by outflank-mailman (input) for mailman id 1086465;
+ Tue, 19 Aug 2025 11:27:27 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=TlMz=27=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1uoKUx-0000mv-63
+ for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 11:27:27 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20618.outbound.protection.outlook.com
+ [2a01:111:f403:2009::618])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7a064945-7cef-11f0-a32a-13f23c93f187;
+ Tue, 19 Aug 2025 13:27:24 +0200 (CEST)
+Received: from SA1P222CA0137.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c2::6)
+ by CY8PR12MB8410.namprd12.prod.outlook.com (2603:10b6:930:6d::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.13; Tue, 19 Aug
+ 2025 11:27:18 +0000
+Received: from SN1PEPF000252A2.namprd05.prod.outlook.com
+ (2603:10b6:806:3c2:cafe::4b) by SA1P222CA0137.outlook.office365.com
+ (2603:10b6:806:3c2::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9031.22 via Frontend Transport; Tue,
+ 19 Aug 2025 11:27:18 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF000252A2.mail.protection.outlook.com (10.167.242.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9052.8 via Frontend Transport; Tue, 19 Aug 2025 11:27:17 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 19 Aug
+ 2025 06:27:17 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Tue, 19 Aug
+ 2025 04:27:16 -0700
+Received: from xcbayankuma40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via
+ Frontend Transport; Tue, 19 Aug 2025 06:27:16 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,137 +65,381 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ded0c83-7ce9-11f0-b898-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1755600165; x=1756204965; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=WIsV9Vd3k3FZNRz6LQtn1B+cKcmfD9qtcjJc7rx23qg=;
-        b=YtTKRuQ4y8pPNECsRjfkm3njXhVcFltNen2Pr6dqThytlHVIrew9otTIi3BoAdQoNM
-         dDUy2beGLX+DLBf1pmrYalvHKen9b9QvdArLuu4bE83NdtWcoCXAZQGZI0NaRAMKM0qz
-         EvwnlXZpmJzCbvYPVBZyWxGxFR6YUrHabGxnwP9IWVCg7F+waBXxzjmulZ1wXT/tyajE
-         SmyqU9ZyDLExQRrbjO1+Z867pqjRGNSKnzduypAgshjYJ3JeyFvTKj3wfJOBwx0UK4CT
-         ANBRQiu4fdMu8EfdfTRSJpukht7DB8TzSLcdSmZga53QTqd0J7tXgcVobMYWL5lDBJa1
-         nr6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755600165; x=1756204965;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WIsV9Vd3k3FZNRz6LQtn1B+cKcmfD9qtcjJc7rx23qg=;
-        b=BRIxQpE7PRC41nXBrtYvWXaLx9BV8InhmP9eWxlvtS50uLk1AzZp/CSfb0hY4nrJOE
-         Vf3XOZur+cP3guwaZ7sAuZQatnyLCXW6OE8ae0RR8K/fBQYyIj2KT5alhmUrdB5IdqRk
-         hixkRj47RB/lNUPP6BGilJ/wG0aw9VDBKETonRUSOpGy29HQibLs+yZRHvoTAp7ZTKHQ
-         SR6jtYVdZoNztLvuw8/nfcTuy61bSJdJVhSTQ8wUSnBZVgwmmwWI6oUlYd05ZEDPnJvy
-         3Lw4XcDmUjIkz0Rrnf/ZPSTFbNE5iaSTcVcWYWPxU/rM5GG8HgwZ8PC1DcePtf93XCvW
-         i6bw==
-X-Forwarded-Encrypted: i=1; AJvYcCXeilO8X7zwu/OGEezlvbQH1RWmBPIdw/a1jzqfQZAU1c+VnbIrZRPVggMCpqotRrSefs+U7F7nSBY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzqeUuTSlZwlO/5YFzTplCO44O+yB6XuhciSNYUkSyQFgERG4YB
-	0Rg1jd/joSe4AN3iN0PIqunds/QnFGIo0/2oJyjc8cjeoaH+B0Gy9o5IGJSUFnePmA==
-X-Gm-Gg: ASbGncuBnGXp3TQu3OGnsc053BaZxwO9QhpS6zvSi8nZbQ2wIUPhHA5NYYO3io29ojW
-	sHTFLKkVEPYCdJGeJt2aXtg/xn13I0/0npIWKpSwa8o76YJIz6b4a/C69F+qL19Y6g17Lxdq1ZC
-	xzduwgYbQqNHRhDwiAyQm0yEOfSG5sTfbH6LV/5xhEY1EC9gRIxT86QbWXAo5ikgVDY0xyYcTw+
-	b13G96CxPUd9B1wnnZILctMaAxwHgVa54hV7AUnjk18qwVUD/T1Sl5WoElM34fZiFUL6JheAe1T
-	SyGoy2u/L0Eyi4+ztHeuiI/scMZyUbxbEMhXrm1SbnysBu5JH+SlijJk0lIirBZ53SnN1vS0pW+
-	lKtTjebdEEoaWhrHZ5Pd12uildQEZa+H4ml57nE8+xPdtGTT81fXD+rE8hcjFWMccm0TMY+zeYN
-	bXE3wgO/tLv8I/u+L+EFkPlQipcAfF
-X-Google-Smtp-Source: AGHT+IFYDHtQunNVz01Hu0Tc98USIMYgaa7L0hngKjqy1sx9mSmwDNLqpF7kDcMZaHzM4KkgV6Q5Xg==
-X-Received: by 2002:a05:6402:274d:b0:618:4ab5:e85c with SMTP id 4fb4d7f45d1cf-61a7e76c67cmr1559481a12.34.1755600165244;
-        Tue, 19 Aug 2025 03:42:45 -0700 (PDT)
-Message-ID: <9c1808fa-1865-40b6-91c2-d6e2cabd8ddc@suse.com>
-Date: Tue, 19 Aug 2025 12:42:44 +0200
+X-Inumbo-ID: 7a064945-7cef-11f0-a32a-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pBfHafKBHaytvxcBOE1tBnB6eCypyZaZ6y1Hj4FTpe2FK6u+uwDrHmQnonIz9Q8pmtcxssgYrMu9H6773gKHN2dHApiI8p4btRkwlbLBhD7ngPSIvqmnP1yDi5l4Z1GjF4L5vXazyWfVDKaGEnwUseH1Yn87+xpRoaxjrwRMeQ/oiFrs8jfErt2MOVg9RlaVTXmzcEcp0iimmGzW6SQOoPjVLFBg6lJEAn3vqUHXKP9uNoGwgSeKud2uk7KK8wJ9jkGXRuNKBw3ocmlQtN8KdxUJLSyE4a1Acm/LK+iAGsJf1+xz/ABUl4Zf/v04X/+yY7+WNYzMSGfSr1hrpU3WJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GJgJarZIeRsjWlu15tp5dyGEaJNG+66jaT7NoB+Le90=;
+ b=TaxZzaK2ITNEMJOmNCJttinm6kHmYAIiyjDqG0qVRZGsPLky6EYV5VfHEKW6kCevY3Tv+AmmvVNyBVN4YhhNr8jHAFyhTEHImfQlFYZmZhZE0SGBjYzaLKUttCz8T5w7CykRhGOdzUT2Y0aivVyO01qLgbKQkQAFiCcIi0Ekhn9IrRoC6rtoAh/LjAiuR/vx5T8Xjp+epFshK3wynWtR58HFaC5hBRoWNxhKT9i69qSZQ5+8cgOx3ngWcqdnmbRdTNdwPRIaCxe2gOrB5Pr6bcYp751jddyym8jhoyXnNphG1FxbZjVFPqlVN9VFBEXVDpvepIu1anLmX3LaSyKF+A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GJgJarZIeRsjWlu15tp5dyGEaJNG+66jaT7NoB+Le90=;
+ b=VyBo6bTXiqWK7NyR/rEY+EY7EmS6s9d7kdsUDxXEpWmVKV2rSc1PIvl5p6OghUCDbLkm40crlb8VrKcjjPuZcDPSdsCniNNYCDvGgzHT75chDzoQPnU6leeYEuANxoloivhhO68FIOgf1wYD+S9FmSDBXmMIPH8WwFOxmsF1QEc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal
+ Orzel <michal.orzel@amd.com>, Artem Mygaiev <artem_mygaiev@epam.com>
+Subject: [PATCH v4 2/2] docs: fusa: Add the requirements for some of the commands of XEN_VERSION
+Date: Tue, 19 Aug 2025 12:27:09 +0100
+Message-ID: <20250819112709.3789987-2-ayan.kumar.halder@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250819112709.3789987-1-ayan.kumar.halder@amd.com>
+References: <20250819112709.3789987-1-ayan.kumar.halder@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/16] x86: Clean up asm/msr.h
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20250815204117.3312742-1-andrew.cooper3@citrix.com>
- <20250815204117.3312742-10-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250815204117.3312742-10-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A2:EE_|CY8PR12MB8410:EE_
+X-MS-Office365-Filtering-Correlation-Id: 54977446-ac67-40b8-7677-08dddf135ab3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700013|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?6VU3eZGwlbeSoGA1rs57qwfi10ghfpCeL7hNhFMWPpIdd7i4zWCRdTA/IGx7?=
+ =?us-ascii?Q?aJHRzEYYfNWeQxF4oFLZKCHggZKj0k0Y5zwhf9VmuLVHH2GkA4NP+U58vTmM?=
+ =?us-ascii?Q?UImT1158WhRo8gjyXp6GvEBoiAQkerxcbWYwzGmHvgAfWvbp0cQrY2XuqWtQ?=
+ =?us-ascii?Q?RFU6SzUh5aIqIEBv3z2NP7f3ibA8mflLCXw2XVdVtMsUBRRAe8SbkQrT0rie?=
+ =?us-ascii?Q?1Z+PNpSKdDlJ16mxfFvF0pFApbZEOymmZkte+6bPGm1GQ0bkhr4tp1mFPe0g?=
+ =?us-ascii?Q?/NJzqVTs1CJ1hkg1Vy0BUlPNs8y605SNiUyqa/BSkvwFoesvl3b+11L68lNO?=
+ =?us-ascii?Q?/MEZf5wXMXl8V9qLHS/LMqbYllAgQLudRzeymyIwa+7YkNN9RLIIgreXpFW9?=
+ =?us-ascii?Q?MgdjoVRiJUeNSqBRvPUbRtBNSy45AGXgLlVgAP5PQxxB1+qny/Z1iEW/4v3Z?=
+ =?us-ascii?Q?17PcG9BkWZOObKz/5zQMD/5uw920acWhk2W4GYRb+CSs/TmETQSefiIS0kBA?=
+ =?us-ascii?Q?o5u1M34T3p8a/hJd2eOvhU/3kraynPBwrq7/by3xhpaUnTe9d7t7qFwUnT+E?=
+ =?us-ascii?Q?YLwxej5G8wtM/6ey4/+XUByi5HYY/dAFdkDEEQVbSVw4d0VjrPTco5+uxndr?=
+ =?us-ascii?Q?nukpt1xAPqR4zWlOl7ttlJgt1C7oa8Xf8AgeZ8biNT+0of+c9DNrIva2M6Sq?=
+ =?us-ascii?Q?hxId3zTf4JOKhRFPw/qWi2eRpVYMhCelTXWcy7+t6bXXjTTyvjG89oNB1t4c?=
+ =?us-ascii?Q?6d8Oo/pD3y4j/aVOK2/mCgiz5EGhDyf6i6UYcz1b1rt5qY306kWNgnITbKhI?=
+ =?us-ascii?Q?Mr4ZqroYCtpzBeBge1vfy/qEpvXpKxayyVBVtS74e0dkbpUOcJcFnG/4s/LN?=
+ =?us-ascii?Q?KyvQIi/3unBjCzMPZ37pVAxgBbUmwPSEh2vVzL4KP/iC9rUFe5AYuYV1kWHZ?=
+ =?us-ascii?Q?DewSgbQ1GaomYPpD+1LWUiufIvqTwLlLI6rFmwk5oaq0b1mFF/rybXR3GnAX?=
+ =?us-ascii?Q?JacEa4jkA6NT8T3Fkbs1f8ZfXJ1YaoNZPKVw3byDwikCLRT1RfXK+6d5DVFi?=
+ =?us-ascii?Q?b/zzjYeKTCtPaYz8C3J32meLeOMHavIloRRlXG9DRclfUT1ejoCSp3zfa9AU?=
+ =?us-ascii?Q?UJ6Vw3tXaPijuY81ZwcyQc6ztzoTfTyGDB46qKq016qnJ/9xFQnmC6DRo5lI?=
+ =?us-ascii?Q?oD+b7QUhgiR2JhzGaox8Jvm3BlGu0gGDULp40dvHWmp6sPDTPsF2ZpSVWLzo?=
+ =?us-ascii?Q?MiWnDDHihbksYdUggg/BJ+YLDDP63vy4amIIzby424gF7C6LHhNHnnx5rjDc?=
+ =?us-ascii?Q?Sc1wmIwC2+XShX+mxsUgM09m1GQzheRfZStY/1+pokqrR/9PC78iT18s3lFY?=
+ =?us-ascii?Q?kaoZtETlqZBtdGZ1uzE3SrB9XET3Z99kmENoVsZ/vogTsB+M/9ySCTcE6HPy?=
+ =?us-ascii?Q?60TLxOmt9oGGlfZzOl9huOqGYeyijj4HEBDkp3iU5dPFB02TIolYsQ=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013)(13003099007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2025 11:27:17.4920
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54977446-ac67-40b8-7677-08dddf135ab3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF000252A2.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8410
 
-On 15.08.2025 22:41, Andrew Cooper wrote:
-> Now that content has been split out, minimise the header files as msr.h is
-> included by many translation units.  A few more TUs were pulling dependencies
-> in transitively, so fix them up.
-> 
-> Give asm/time.h an SPDX tag, and strip trailing whitespace.
-> 
-> No functional change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+We have written the requirements for some of the commands of the XEN_VERSION
+hypercall.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+---
+Changes from -
 
-I think though that ...
+v1 - 1. Reworded the requirement so as to avoid mentioining variable names
+or hardcoded strings. Otherwise, one would need to change the requirement
+each time the code changes.
 
-> --- a/xen/arch/x86/include/asm/msr.h
-> +++ b/xen/arch/x86/include/asm/msr.h
-> @@ -1,18 +1,13 @@
-> -#ifndef __ASM_MSR_H
-> -#define __ASM_MSR_H
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +#ifndef X86_MSR_H
-> +#define X86_MSR_H
->  
-> -#include "msr-index.h"
-> -
-> -#include <xen/types.h>
->  #include <xen/percpu.h>
->  #include <xen/errno.h>
-> -#include <xen/kernel.h>
-> -
-> -#include <xen/lib/x86/cpu-policy.h>
->  
-> +#include <asm/alternative.h>
->  #include <asm/asm_defns.h>
-> -#include <asm/cpufeature.h>
-> -#include <asm/processor.h>
-> +#include <asm/msr-index.h>
->  
->  #define rdmsr(msr,val1,val2) \
->       __asm__ __volatile__("rdmsr" \
-> @@ -113,11 +108,6 @@ static inline int wrmsr_safe(unsigned int msr, uint64_t val)
->      return -EFAULT;
->  }
->  
-> -#define rdpmc(counter,low,high) \
-> -     __asm__ __volatile__("rdpmc" \
-> -			  : "=a" (low), "=d" (high) \
-> -			  : "c" (counter))
-> -
+v2 - 1. Moved few changes to previous patch.
 
-... this removal wants mentioning in the description. I'm actually surprised this
-is unused - how does vPMU get away?
+v3 - 1. Removed the internal implementation details from the design requirements
+so that they can be verified by black box tests.
 
-Jan
+ .../fusa/reqs/design-reqs/arm64/hypercall.rst | 15 ++++
+ .../design-reqs/arm64/version_hypercall.rst   | 32 +++++++
+ .../reqs/design-reqs/version_hypercall.rst    | 63 ++++++++++++++
+ docs/fusa/reqs/index.rst                      |  3 +
+ docs/fusa/reqs/product-reqs/hypercall.rst     | 20 +++++
+ .../reqs/product-reqs/version_hypercall.rst   | 85 +++++++++++++++++++
+ 6 files changed, 218 insertions(+)
+ create mode 100644 docs/fusa/reqs/design-reqs/arm64/version_hypercall.rst
+ create mode 100644 docs/fusa/reqs/design-reqs/version_hypercall.rst
+ create mode 100644 docs/fusa/reqs/product-reqs/hypercall.rst
+
+diff --git a/docs/fusa/reqs/design-reqs/arm64/hypercall.rst b/docs/fusa/reqs/design-reqs/arm64/hypercall.rst
+index 82ecf690a3..3b4af18323 100644
+--- a/docs/fusa/reqs/design-reqs/arm64/hypercall.rst
++++ b/docs/fusa/reqs/design-reqs/arm64/hypercall.rst
+@@ -58,3 +58,18 @@ Comments:
+ Covers:
+  - `XenProd~version_hyp_first_param~1`
+  - `XenProd~version_hyp_second_param~1`
++
++Return value
++------------
++
++`XenSwdgn~arm64_ret_val~1`
++
++Description:
++Xen shall store the return value in x0.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~hyp_err_ret_val~1`
+diff --git a/docs/fusa/reqs/design-reqs/arm64/version_hypercall.rst b/docs/fusa/reqs/design-reqs/arm64/version_hypercall.rst
+new file mode 100644
+index 0000000000..ccfcb35a7a
+--- /dev/null
++++ b/docs/fusa/reqs/design-reqs/arm64/version_hypercall.rst
+@@ -0,0 +1,32 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Capabilities
++------------
++
++`XenSwdgn~arm64_capabilities~1`
++
++Description:
++Xen shall return xen-3.0-aarch64 to denote that the cpu is running in arm64 mode.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~version_hyp_capabilities_cmd~1`
++
++Capabilities AArch32
++--------------------
++
++`XenSwdgn~arm64_capabilities_aarch32~1`
++
++Description:
++Xen shall return xen-3.0-armv7l to denote that the cpu is running in arm32 mode.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~version_hyp_capabilities_cmd~1`
++
+diff --git a/docs/fusa/reqs/design-reqs/version_hypercall.rst b/docs/fusa/reqs/design-reqs/version_hypercall.rst
+new file mode 100644
+index 0000000000..b05481b9dc
+--- /dev/null
++++ b/docs/fusa/reqs/design-reqs/version_hypercall.rst
+@@ -0,0 +1,63 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Version
++-------
++
++`XenSwdgn~version~1`
++
++Description:
++Xen shall return its version when XENVER_version command is invoked.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~version_hyp_version_cmd~1`
++
++Error copying buffer
++--------------------
++
++`XenSwdgn~error_copy_buffer~1`
++
++Description:
++Xen shall return -EFAULT if it is not able to copy data to domain's buffer.
++
++Rationale:
++-EFAULT is one of the error code defined in
++http://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/errno.h.
++
++Comments:
++
++Covers:
++ - `XenProd~hyp_err_ret_val~1`
++
++Extraversion
++------------
++
++`XenSwdgn~extraversion~1`
++
++Description:
++Xen shall return its extraversion when XENVER_extraversion command is invoked.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~version_hyp_extraversion_cmd~1`
++
++Changeset
++---------
++
++`XenSwdgn~changeset~1`
++
++Description:
++Xen shall return its changeset when XENVER_changeset command is invoked.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenProd~version_hyp_changeset_cmd~1`
+diff --git a/docs/fusa/reqs/index.rst b/docs/fusa/reqs/index.rst
+index d8683edce7..de19b0cda2 100644
+--- a/docs/fusa/reqs/index.rst
++++ b/docs/fusa/reqs/index.rst
+@@ -11,6 +11,9 @@ Requirements documentation
+    product-reqs/reqs
+    product-reqs/arm64/reqs
+    product-reqs/version_hypercall
++   product-reqs/hypercall
+    design-reqs/arm64/generic-timer
+    design-reqs/arm64/sbsa-uart
+    design-reqs/arm64/hypercall
++   design-reqs/arm64/version_hypercall
++   design-reqs/version_hypercall
+diff --git a/docs/fusa/reqs/product-reqs/hypercall.rst b/docs/fusa/reqs/product-reqs/hypercall.rst
+new file mode 100644
+index 0000000000..9fb46cf451
+--- /dev/null
++++ b/docs/fusa/reqs/product-reqs/hypercall.rst
+@@ -0,0 +1,20 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Error Return Value
++------------------
++
++`XenProd~hyp_err_ret_val~1`
++
++Description:
++In case any hypercall fails, Xen shall return one of the error codes defined
++in http://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/errno.h.
++
++Rationale:
++
++Comments:
++
++Covers:
++ - `XenMkt~version_hypercall~1`
++
++Needs:
++ - XenSwdgn
+diff --git a/docs/fusa/reqs/product-reqs/version_hypercall.rst b/docs/fusa/reqs/product-reqs/version_hypercall.rst
+index b824c539b0..466eb4108b 100644
+--- a/docs/fusa/reqs/product-reqs/version_hypercall.rst
++++ b/docs/fusa/reqs/product-reqs/version_hypercall.rst
+@@ -40,3 +40,88 @@ Covers:
+ 
+ Needs:
+  - XenSwdgn
++
++Version command
++---------------
++
++`XenProd~version_hyp_version_cmd~1`
++
++Description:
++Xen shall provide a command (num 0) for  hypercall (num 17) to retrieve Xen's
++version in the domain's register 0.
++
++Rationale:
++
++Comments:
++Xen version is composed of major (ie version) and minor (ie subversion) number.
++The minor number is encoded in the 16 least significant bits and the major number
++is encoded in the top remaining bits.
++
++Covers:
++ - `XenMkt~version_hypercall~1`
++
++Needs:
++ - XenSwdgn
++
++Extraversion command
++--------------------
++
++`XenProd~version_hyp_extraversion_cmd~1`
++
++Description:
++Xen shall provide a command (num 1) for hypercall (num 17) to copy its
++extraversion in the domain's buffer.
++
++Rationale:
++
++Comments:
++Xen's extra version consists of a string passed with 'XEN_VENDORVERSION' command
++line parameter while building Xen.
++
++Covers:
++ - `XenMkt~version_hypercall~1`
++
++Needs:
++ - XenSwdgn
++
++Capabilities command
++--------------------
++
++`XenProd~version_hyp_capabilities_cmd~1`
++
++Description:
++Xen shall provide a command (num 3) for hypercall (num 17) to copy its
++capabilities to the domain's buffer.
++
++Rationale:
++
++Comments:
++Capabilities related information is represented by char[1024].
++For Arm64, the capabilities should contain "xen-3.0-aarch64" string.
++
++Covers:
++ - `XenMkt~version_hypercall~1`
++
++Needs:
++ - XenSwdgn
++
++Changeset command
++-----------------
++
++`XenProd~version_hyp_changeset_cmd~1`
++
++Description:
++Xen shall provide a command (num 4) for hypercall (num 17) to copy changeset
++to the domain's buffer.
++
++Rationale:
++
++Comments:
++Changeset is string denoting the date, time and git hash of the last change
++made to Xen's codebase.
++
++Covers:
++ - `XenMkt~version_hypercall~1`
++
++Needs:
++ - XenSwdgn
+-- 
+2.25.1
+
 
