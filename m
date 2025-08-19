@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B09FCA0EEB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9154ECA0EF5
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Aug 2025 17:41:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1086811.1445044 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1086816.1445060 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoQKL-0004hn-87; Tue, 19 Aug 2025 17:40:53 +0000
+	id 1uoQKN-0005LE-Gb; Tue, 19 Aug 2025 17:40:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1086811.1445044; Tue, 19 Aug 2025 17:40:53 +0000
+Received: by outflank-mailman (output) from mailman id 1086816.1445060; Tue, 19 Aug 2025 17:40:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uoQKK-0004eh-K0; Tue, 19 Aug 2025 17:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 1086811;
- Tue, 19 Aug 2025 17:40:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uoQKN-0005Ji-1Z; Tue, 19 Aug 2025 17:40:55 +0000
+Received: by outflank-mailman (input) for mailman id 1086816;
+ Tue, 19 Aug 2025 17:40:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ve3E=27=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uoQIH-0006dc-0l
- for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 17:38:45 +0000
+ id 1uoQIj-0007Pa-UL
+ for xen-devel@lists.xenproject.org; Tue, 19 Aug 2025 17:39:13 +0000
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5986f49a-7d23-11f0-b898-0df219b8e170;
- Tue, 19 Aug 2025 19:38:43 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6b5c3f00-7d23-11f0-a32a-13f23c93f187;
+ Tue, 19 Aug 2025 19:39:13 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 7DFD3613EF;
- Tue, 19 Aug 2025 17:38:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7E8DC113D0;
- Tue, 19 Aug 2025 17:38:40 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 5A73A61437;
+ Tue, 19 Aug 2025 17:39:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A44ECC113D0;
+ Tue, 19 Aug 2025 17:38:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5986f49a-7d23-11f0-b898-0df219b8e170
+X-Inumbo-ID: 6b5c3f00-7d23-11f0-a32a-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755625122;
-	bh=stLVV7BdINySQbyeqCDmRbXyWeQEecbuIkQ/rhX45FU=;
+	s=k20201202; t=1755625141;
+	bh=shzOb9LxCd4j9ffIAYJARd3Ll/bIHN63Rdsm8jF6HN0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QF95AAuhc8feQn+SEx82Pkl7/uTlNhnB5cHYHMn4haBNk3mIGB32W95xHVkQetyzQ
-	 l5pjdHoqmA32dwMVHHl2ireizeQrHrNOOpU6veVyXb4NV0jh1tYHCTnC8dcn2zvtTY
-	 J4nrUx7NhDiTec8s4jDArKOAkTIjbwvKXPPen+Vd16+uFXzd7usqZLmgr9JbeXZ1Jn
-	 WjodL0NO0sJNloB+WXRZ6xIN7Ll+mPyFWx7P66aJjQZw9otjgjVcZKNrK0y+CcuICc
-	 ddwwW0q2gx9LzWpv+xxfN0uj6Ze8uJX3Jlyv58Oh1O5dwZ9g8LdLLurbrm7l0u9gfU
-	 vhh2Z4HWzRNIw==
+	b=hP0G8Q00yNTh5FfM8EvmXjWXPCW1VAkoQrIqWO2opf8nY5Pp8kyRoAQ5sJbskFxHe
+	 Dpw2oE6bb6R9DP3zDSAoqrpgkr4LknFTjksf2ZVtrQBA00wb60mjNgoeDWPO1iTMvR
+	 mOZkqJAPBVE7i3vpf3SqAKzTQw9K5Rc7DptngH5viddKvezFNMaYxTj51UPsnXjIa2
+	 zH66GE5Ky5jjWEuNnqpxi+DfDo3WTnC7VWe1CnDp489D3vz6rDN4s4/RlMVvekkmmH
+	 q8YXIBSj9tnBwBYbvKw41cRhfgSA56D3XB40ha8nKdeMey7WqJRapAA4sbPWPZyDe2
+	 vdbwCoOpeQYmA==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>,
@@ -92,9 +92,9 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	Will Deacon <will@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v4 14/16] block-dma: migrate to dma_map_phys instead of map_page
-Date: Tue, 19 Aug 2025 20:36:58 +0300
-Message-ID: <22b824931bc8ba090979ab902e4c1c2ec8327b65.1755624249.git.leon@kernel.org>
+Subject: [PATCH v4 16/16] nvme-pci: unmap MMIO pages with appropriate interface
+Date: Tue, 19 Aug 2025 20:37:00 +0300
+Message-ID: <545fffb8c364f36102919a5a1d57137731409f3c.1755624249.git.leon@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1755624249.git.leon@kernel.org>
 References: <cover.1755624249.git.leon@kernel.org>
@@ -103,30 +103,62 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-After introduction of dma_map_phys(), there is no need to convert
-from physical address to struct page in order to map page. So let's
-use it directly.
+Block layer maps MMIO memory through dma_map_phys() interface
+with help of DMA_ATTR_MMIO attribute. There is a need to unmap
+that memory with the appropriate unmap function, something which
+wasn't possible before adding new REQ attribute to block layer in
+previous patch.
 
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- block/blk-mq-dma.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/nvme/host/pci.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
 
-diff --git a/block/blk-mq-dma.c b/block/blk-mq-dma.c
-index ad283017caef..37e2142be4f7 100644
---- a/block/blk-mq-dma.c
-+++ b/block/blk-mq-dma.c
-@@ -87,8 +87,8 @@ static bool blk_dma_map_bus(struct blk_dma_iter *iter, struct phys_vec *vec)
- static bool blk_dma_map_direct(struct request *req, struct device *dma_dev,
- 		struct blk_dma_iter *iter, struct phys_vec *vec)
+diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
+index 2c6d9506b172..f8ecc0e0f576 100644
+--- a/drivers/nvme/host/pci.c
++++ b/drivers/nvme/host/pci.c
+@@ -682,11 +682,15 @@ static void nvme_free_prps(struct request *req)
  {
--	iter->addr = dma_map_page(dma_dev, phys_to_page(vec->paddr),
--			offset_in_page(vec->paddr), vec->len, rq_dma_dir(req));
-+	iter->addr = dma_map_phys(dma_dev, vec->paddr, vec->len,
-+			rq_dma_dir(req), 0);
- 	if (dma_mapping_error(dma_dev, iter->addr)) {
- 		iter->status = BLK_STS_RESOURCE;
- 		return false;
+ 	struct nvme_iod *iod = blk_mq_rq_to_pdu(req);
+ 	struct nvme_queue *nvmeq = req->mq_hctx->driver_data;
++	unsigned int attrs = 0;
+ 	unsigned int i;
+ 
++	if (req->cmd_flags & REQ_MMIO)
++		attrs = DMA_ATTR_MMIO;
++
+ 	for (i = 0; i < iod->nr_dma_vecs; i++)
+-		dma_unmap_page(nvmeq->dev->dev, iod->dma_vecs[i].addr,
+-				iod->dma_vecs[i].len, rq_dma_dir(req));
++		dma_unmap_phys(nvmeq->dev->dev, iod->dma_vecs[i].addr,
++				iod->dma_vecs[i].len, rq_dma_dir(req), attrs);
+ 	mempool_free(iod->dma_vecs, nvmeq->dev->dmavec_mempool);
+ }
+ 
+@@ -699,15 +703,19 @@ static void nvme_free_sgls(struct request *req)
+ 	unsigned int sqe_dma_len = le32_to_cpu(iod->cmd.common.dptr.sgl.length);
+ 	struct nvme_sgl_desc *sg_list = iod->descriptors[0];
+ 	enum dma_data_direction dir = rq_dma_dir(req);
++	unsigned int attrs = 0;
++
++	if (req->cmd_flags & REQ_MMIO)
++		attrs = DMA_ATTR_MMIO;
+ 
+ 	if (iod->nr_descriptors) {
+ 		unsigned int nr_entries = sqe_dma_len / sizeof(*sg_list), i;
+ 
+ 		for (i = 0; i < nr_entries; i++)
+-			dma_unmap_page(dma_dev, le64_to_cpu(sg_list[i].addr),
+-				le32_to_cpu(sg_list[i].length), dir);
++			dma_unmap_phys(dma_dev, le64_to_cpu(sg_list[i].addr),
++				le32_to_cpu(sg_list[i].length), dir, attrs);
+ 	} else {
+-		dma_unmap_page(dma_dev, sqe_dma_addr, sqe_dma_len, dir);
++		dma_unmap_phys(dma_dev, sqe_dma_addr, sqe_dma_len, dir, attrs);
+ 	}
+ }
+ 
 -- 
 2.50.1
 
