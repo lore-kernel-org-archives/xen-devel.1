@@ -4,44 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 810C6CA0FEA
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 08:22:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1087937.1445831 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6D8CA0EF8
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 08:25:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1087976.1445841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up0ZD-0005Cl-K5; Thu, 21 Aug 2025 08:22:39 +0000
+	id 1up0c9-0008JQ-0x; Thu, 21 Aug 2025 08:25:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1087937.1445831; Thu, 21 Aug 2025 08:22:39 +0000
+Received: by outflank-mailman (output) from mailman id 1087976.1445841; Thu, 21 Aug 2025 08:25:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up0ZD-0005CS-Ev; Thu, 21 Aug 2025 08:22:39 +0000
-Received: by outflank-mailman (input) for mailman id 1087937;
- Thu, 21 Aug 2025 08:22:38 +0000
+	id 1up0c8-0008JJ-Uc; Thu, 21 Aug 2025 08:25:40 +0000
+Received: by outflank-mailman (input) for mailman id 1087976;
+ Thu, 21 Aug 2025 08:25:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+F7x=3B=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1up0ZC-0001aA-1J
- for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 08:22:38 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ <SRS0=uBnp=3B=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1up0c7-0008J8-4s
+ for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 08:25:40 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ff09a93e-7e67-11f0-a32b-13f23c93f187;
- Thu, 21 Aug 2025 10:22:37 +0200 (CEST)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CF2961F38C;
- Thu, 21 Aug 2025 08:22:19 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 34CD2139A8;
- Thu, 21 Aug 2025 08:22:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id oLywCzvXpmhzEwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Thu, 21 Aug 2025 08:22:19 +0000
+ id 69626cf0-7e68-11f0-a32b-13f23c93f187;
+ Thu, 21 Aug 2025 10:25:36 +0200 (CEST)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id C7D114EE3C0D;
+ Thu, 21 Aug 2025 10:25:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,175 +42,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff09a93e-7e67-11f0-a32b-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1755764540; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M7Oh2CKC52D/bkjv3gbkyuefD0L3ZTcMttfAp9cMa/k=;
-	b=X2rQAOf5qeejLZXJwJLqY3j5qJe59lvBTQEL1k4U6qH8EWzTrdHSDuDUoSjwyMd5/DipUv
-	XOptlCzcXkjGBhSyYTMlesgUnPhQ5/RXGeh5zgn9vfNO6GFHovVEGlucn7f1lio5nAl1ah
-	c+sCdxZmQ65bS4Ozjht1nAZhGtnWVzA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1755764540;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M7Oh2CKC52D/bkjv3gbkyuefD0L3ZTcMttfAp9cMa/k=;
-	b=ldHqUVx3NNRxyAA/eYH2wc9ctGqhcYIxDn2IhSZwN/jLbaQaKhhcdtz3gH9CHzsFnkzAhK
-	KDzst1jCz7zn25Bw==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1755764539; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M7Oh2CKC52D/bkjv3gbkyuefD0L3ZTcMttfAp9cMa/k=;
-	b=19zloJJjZeUPBJoI+3zQp908ajWNJTisu4MqSVaNxsNQjkOdUzYhjeth3WLas6LVPyrKmZ
-	cdkRKhfsSq4t6gJtGnPOC2+r7gZUjEnz5uDbpD1yabZ0bYKXCO/YddeRcnhAsN2K0Ivmtp
-	ejnJd21WJT9PKm5q5uBg32R1XOBTqmk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1755764539;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=M7Oh2CKC52D/bkjv3gbkyuefD0L3ZTcMttfAp9cMa/k=;
-	b=K/pCPeZSFaQoqSoMOhCn3OYms/Da8wF3KYepX0KqSYYquhK4YTBHQcNhcVUo/rMxCU5+vU
-	C80kpjVStIHiEqDA==
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: simona@ffwll.ch,
-	airlied@gmail.com,
-	mripard@kernel.org,
-	maarten.lankhorst@linux.intel.com,
-	geert@linux-m68k.org,
-	tomi.valkeinen@ideasonboard.com
-Cc: dri-devel@lists.freedesktop.org,
-	linux-mediatek@lists.infradead.org,
-	freedreno@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-samsung-soc@vger.kernel.org,
-	nouveau@lists.freedesktop.org,
-	virtualization@lists.linux.dev,
-	spice-devel@lists.freedesktop.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	intel-xe@lists.freedesktop.org,
-	xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-	Rob Clark <robdclark@gmail.com>,
-	Abhinav Kumar <quic_abhinavk@quicinc.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>
-Subject: [PATCH v6 13/25] drm/msm: Compute dumb-buffer sizes with drm_mode_size_dumb()
-Date: Thu, 21 Aug 2025 10:17:20 +0200
-Message-ID: <20250821081918.79786-14-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250821081918.79786-1-tzimmermann@suse.de>
-References: <20250821081918.79786-1-tzimmermann@suse.de>
+X-Inumbo-ID: 69626cf0-7e68-11f0-a32b-13f23c93f187
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1755764734;
+	b=z0ScJLQ2rorO/RMlHDUb5gkNN3yY0byb2HbylteeoO6j5vF5eMXUI9RpyRCiQT8XBOgz
+	 He2j/2fqu7qvo4tmDYd765apobjmKSXeYViXmX8OYgnjx2AYZlx69oGlNFDzWdehIQy1o
+	 iUZ2vLhGvy5BStYLiCpd7WFy1AYMIwmT4LLqQezie/n2xx1vwhwg5heAVJBALRapWXCpu
+	 OZ+nhWz6gU40+KcQb3Mqsf2Nv9aymK2l4gt8tVVo4VEooX4iIWZzVD6C011PnX5ToA4J5
+	 34sFLWOertOy4DLAgLjBX/1HIVwPjQJfCmR0ZIXxFkMEaPgcUDJ1y2Z1UCBm30PlzpxTg
+	 vs4lm0uPqiPjrGNK6IlcKG9+2uHJdXIJO0lQaJ58JgTwZ7PlvAZRAP2+q3NRntcNdn2Vh
+	 JM8PIZMsyE4Z23GgcX8YLyzoNwuauRRCtlbzY2om92a27uEJjDXWqEKbvMgg2OJrf6san
+	 6PFWc6xqlo8vCwRX0OXU787tjPqTbG3faL0kXfBfduhWizwpPFXbcZeApg4Qo/PKpz7Rv
+	 C1XHSGTu2LtfvDOvVQTJyQS040LKik1WPDd5zK3aF6YZnKKOaonQZsRY8pMh1WaGQ6hrl
+	 a87fcEzebFN7g4D1FOuzlhwiPnPpoVzxtpsPih297pDLfYQNeLHO5/qQuHAQE5Q=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1755764734;
+	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
+	 References:Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=iHzFbEZvEeJsSvh3JJ41FaQH9+W0dmD64PMJY0k9kDY=;
+	b=qQlmvJvYCmXb9XDvfQro/xlDYzBXoYrEV9ADEqQT+HbE00EyTcIQuRR/PHZl3y3bHsY5
+	 LTfwfdM3eTQfo8lMMoTvVivoAxhrO7QL9KWGtnWgTfc5V3j3zzg3D3a12vwVd2bgaUlVG
+	 TqdfsKuQWH05JtpbIEVvexVXoSx0XKt+JxlNKAneBIgHnF1QoBG5YtrJ517XkPUrLb7Hq
+	 ZLeiqtzLyTfg5zfBDXF3ktnYt7PINFE9kODl4M7vTjb4gwDT5sZ5YGDvVHyPqTFjicjWy
+	 SGmUQIEo8O/pH4KIleiFidRadnyZVeJT6B4z2+I5FWRMgW4V7v3JhzLp56G2OGQlkB05L
+	 F51VyZPku5sGtL0RFK8nHy+mlOzh5/J4IMLt10hpI/v63C4/FkzbHi5Sg9saYwOdKoSna
+	 mzl8gfWJl+FUwuj9F78bIpIWOQQw+HjbZ6Oa+Vi5Uj5icqzSv9jqvNYYVLHs7YHpoZpDO
+	 gndbPw7NPpTqBVVsf4VabbTSPmVHnrE5kUeJM7JisnqBamywenLp5336HmYgESfUof6t6
+	 SIhF61K+kVfhFAYqM2iH/RscDzqHeTdb17YsPVKBPSedMe3nt5+xxUNKHY1hFc+goxNDR
+	 OimKi7U5S+LK7g9eyskWwWkzZBTpLF+fL6ZEcsL9p9934HbEdhzK03QNDYGUZDs=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1755764734; bh=T+Hk05tWBBg2F9Gq0ArWKo5vC+FV4QP+5pzigD/+Sqo=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=vKrKJDtyW0S2Ke4q5leIY7BvQHzpGb5Bd+3tBbGJL5al5QOymHlAvLcZ9WZRVjcko
+	 Ezh2r3/JUp4a82r6VUzYfL4/YoegR88N4HlDP/6mDC2YwkxECYJ5wIetV4NHRHyfCZ
+	 oBPTjparqPxJRNrXmwZF1bFjLLkFEUnidgw8fDbwII78m3AOFLY1brxOOygY/vGwG1
+	 ZYqWiL+bvF1KjwSbwlIqmcGlWi+9jwJcpciMZutZHRlJmRXxg7nH2EQzj/sZk2F9LO
+	 mIwKauFDyIUMdM7JoP0iMyUnKbdpoAeFUZheHH8x3WjnUsWuh3mL3w5zRi6QFUdtsV
+	 WgXQZwmO/Q1Bw==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.30 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[quicinc.com:email,suse.de:mid,suse.de:email,linaro.org:email];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	RCVD_TLS_ALL(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org,suse.de,linaro.org,gmail.com,quicinc.com,poorly.run,somainline.org];
-	FROM_HAS_DN(0.00)[];
-	R_RATELIMIT(0.00)[to_ip_from(RLqirfcw6gnbcr9a9yhi49fhi6)];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+Date: Thu, 21 Aug 2025 10:25:34 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Doug Goldstein
+ <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+ <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Julien
+ Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] misra: consider conversion from UL or (void*) to function
+ pointer as safe
+In-Reply-To: <90fb95a3-4b32-4785-a77c-373e5b9da6ed@suse.com>
+References: <9e5e4ff2c7ba0a90a6ac403e2de9318e18949274.1755628705.git.dmytro_prokopchuk1@epam.com>
+ <90fb95a3-4b32-4785-a77c-373e5b9da6ed@suse.com>
+Message-ID: <e1e2abdf0ef8708097aa78440eeb7147@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
-and buffer size. Alignment is specified in bytes, but the hardware
-requires the scanline pitch to be a multiple of 32 pixels. Therefore
-compute the byte size of 32 pixels in the given color mode and align
-the pitch accordingly. This replaces the existing code in the driver's
-align_pitch() helper.
+On 2025-08-21 10:01, Jan Beulich wrote:
+> On 19.08.2025 20:55, Dmytro Prokopchuk1 wrote:
+>> Rule 11.1 states as following: "Conversions shall not be performed
+>> between a pointer to a function and any other type."
+>> 
+>> The conversion from unsigned long or (void *) to a function pointer
+>> is safe in Xen because the architectures it supports (e.g., x86 and
+>> ARM) guarantee compatible representations between these types.
+> 
+> I think we need to be as precise as possible here. The architectures
+> guarantee nothing, they only offer necessary fundamentals. In the
+> Windows x86 ABI, for example, you can't convert pointers to/from longs
+> without losing data. What we build upon is what respective ABIs say,
+> possibly in combination of implementation specifics left to compilers.
+> 
 
-v3:
-- clarify pitch alignment in commit message (Dmitry)
++1, a mention of the compilers and targets this deviation relies upon is 
+needed.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Rob Clark <robdclark@gmail.com>
-Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Sean Paul <sean@poorly.run>
-Cc: Marijn Suijten <marijn.suijten@somainline.org>
----
- drivers/gpu/drm/msm/msm_gem.c | 27 +++++++++++++++++++++++++--
- 1 file changed, 25 insertions(+), 2 deletions(-)
+>> --- a/docs/misra/deviations.rst
+>> +++ b/docs/misra/deviations.rst
+>> @@ -370,6 +370,16 @@ Deviations related to MISRA C:2012 Rules:
+>>         to store it.
+>>       - Tagged as `safe` for ECLAIR.
+>> 
+>> +   * - R11.1
+>> +     - The conversion from unsigned long or (void \*) to a function 
+>> pointer does
+>> +       not lose any information or violate type safety assumptions if 
+>> unsigned
+>> +       long or (void \*) type is guaranteed to be the same bit size 
+>> as a
+>> +       function pointer. This ensures that the function pointer can 
+>> be fully
+>> +       represented without truncation or corruption. The macro 
+>> BUILD_BUG_ON is
+>> +       integrated into xen/common/version.c to confirm conversion 
+>> compatibility
+>> +       across all target platforms.
+>> +     - Tagged as `safe` for ECLAIR.
+> 
+> Why the escaping of * here, when ...
+> 
+>> --- a/docs/misra/rules.rst
+>> +++ b/docs/misra/rules.rst
+>> @@ -431,7 +431,13 @@ maintainers if you want to suggest a change.
+>>       - All conversions to integer types are permitted if the 
+>> destination
+>>         type has enough bits to hold the entire value. Conversions to 
+>> bool
+>>         and void* are permitted. Conversions from 'void noreturn 
+>> (*)(...)'
+>> -       to 'void (*)(...)' are permitted.
+>> +       to 'void (*)(...)' are permitted. Conversions from unsigned 
+>> long or
+>> +       (void \*) to a function pointer are permitted if the source 
+>> type has
+>> +       enough bits to restore function pointer without truncation or 
+>> corruption.
+>> +       Example::
+>> +
+>> +           unsigned long func_addr = (unsigned long)&some_function;
+>> +           void (*restored_func)(void) = (void (*)(void))func_addr;
+> 
+> ... context here suggests they work fine un-escaped, and you even add 
+> some un-
+> escaped instances as well. Perhaps I'm simply unaware of some 
+> peculiarity?
+> 
 
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index 7ff994d4f91a..d854444ba1b5 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -10,8 +10,10 @@
- #include <linux/shmem_fs.h>
- #include <linux/dma-buf.h>
- 
-+#include <drm/drm_dumb_buffers.h>
- #include <drm/drm_prime.h>
- #include <drm/drm_file.h>
-+#include <drm/drm_fourcc.h>
- 
- #include <trace/events/gpu_mem.h>
- 
-@@ -691,8 +693,29 @@ void msm_gem_unpin_iova(struct drm_gem_object *obj, struct drm_gpuvm *vm)
- int msm_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
- 		struct drm_mode_create_dumb *args)
- {
--	args->pitch = align_pitch(args->width, args->bpp);
--	args->size  = PAGE_ALIGN(args->pitch * args->height);
-+	u32 fourcc;
-+	const struct drm_format_info *info;
-+	u64 pitch_align;
-+	int ret;
-+
-+	/*
-+	 * Adreno needs pitch aligned to 32 pixels. Compute the number
-+	 * of bytes for a block of 32 pixels at the given color format.
-+	 * Use the result as pitch alignment.
-+	 */
-+	fourcc = drm_driver_color_mode_format(dev, args->bpp);
-+	if (fourcc == DRM_FORMAT_INVALID)
-+		return -EINVAL;
-+	info = drm_format_info(fourcc);
-+	if (!info)
-+		return -EINVAL;
-+	pitch_align = drm_format_info_min_pitch(info, 0, SZ_32);
-+	if (!pitch_align || pitch_align > U32_MAX)
-+		return -EINVAL;
-+	ret = drm_mode_size_dumb(dev, args, pitch_align, 0);
-+	if (ret)
-+		return ret;
-+
- 	return msm_gem_new_handle(dev, file, args->size,
- 			MSM_BO_SCANOUT | MSM_BO_WC, &args->handle, "dumb");
- }
+This is a literal rst block, while the other is not (* acts as a bullet 
+point in rst iirc)
+
+> Jan
+
 -- 
-2.50.1
-
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
