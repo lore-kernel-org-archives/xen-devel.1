@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A8B2CA0EEB
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 15:26:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1088815.1446532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946A7CA0FE5
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 15:26:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1088819.1446566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up7As-00061R-40; Thu, 21 Aug 2025 15:25:58 +0000
+	id 1up7Au-0006jV-Cj; Thu, 21 Aug 2025 15:26:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1088815.1446532; Thu, 21 Aug 2025 15:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 1088819.1446566; Thu, 21 Aug 2025 15:26:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up7Ar-00061K-VP; Thu, 21 Aug 2025 15:25:57 +0000
-Received: by outflank-mailman (input) for mailman id 1088815;
- Thu, 21 Aug 2025 15:25:55 +0000
+	id 1up7Au-0006iw-6A; Thu, 21 Aug 2025 15:26:00 +0000
+Received: by outflank-mailman (input) for mailman id 1088819;
+ Thu, 21 Aug 2025 15:25:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oAtF=3B=bounce.vates.tech=bounce-md_30504962.68a73a7d.v1-8a92cbcbf28e4ec8835df8665a8d7231@srs-se1.protection.inumbo.net>)
- id 1up7Ap-0005na-SG
- for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 15:25:55 +0000
+ <SRS0=palF=3B=bounce.vates.tech=bounce-md_30504962.68a73a82.v1-5565b7a84c614179b7558ba46b71cf8f@srs-se1.protection.inumbo.net>)
+ id 1up7As-0005na-HO
+ for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 15:25:58 +0000
 Received: from mail137-3.atl71.mandrillapp.com
  (mail137-3.atl71.mandrillapp.com [198.2.137.3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1dee1c3e-7ea3-11f0-b898-0df219b8e170;
- Thu, 21 Aug 2025 17:25:50 +0200 (CEST)
+ id 21836de1-7ea3-11f0-b898-0df219b8e170;
+ Thu, 21 Aug 2025 17:25:56 +0200 (CEST)
 Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail137-3.atl71.mandrillapp.com (Mailchimp) with ESMTP id 4c76bK0sgzzBsVBZ7
- for <xen-devel@lists.xenproject.org>; Thu, 21 Aug 2025 15:25:49 +0000 (GMT)
+ by mail137-3.atl71.mandrillapp.com (Mailchimp) with ESMTP id 4c76bQ0wjWzBsVD76
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Aug 2025 15:25:54 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 8a92cbcbf28e4ec8835df8665a8d7231; Thu, 21 Aug 2025 15:25:49 +0000
+ 5565b7a84c614179b7558ba46b71cf8f; Thu, 21 Aug 2025 15:25:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,168 +44,413 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1dee1c3e-7ea3-11f0-b898-0df219b8e170
+X-Inumbo-ID: 21836de1-7ea3-11f0-b898-0df219b8e170
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1755789949; x=1756059949;
-	bh=f+MVIfI7tSP+OiiCs9By3b93AN5lW1SGwr6uGwBsgGw=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=KL8ME3Ul070FOn29lID2q7aqwedYjff6Z2oAclj8NHWzxPMpvh64tv9jMbdph4+Ge
-	 k5/NJwX7qMXhokz/LxDHv9/AIeG5WWZjVA9fernW9p+IZSI8vXx0n/RRxOc/ggJXPE
-	 TyaQIvVLyW+xdhpS3Nts+ZNEsDbOFMiCD0jvMV6udTrTceDo0WgeBgNeJP2a5IOcQ9
-	 FsuP0mhqsx2H25Bglo4RlMxZNUhrmO232jO6UfI5EnH77eR0+GEqXLe1OWJ1SnI6d8
-	 hx6lprxwS8ZV68aJpeYmiJLp3IXRVf4iF4yaHZWhYcw8EbW8VKBJK3q8AK4c5X+KMT
-	 vdXbA6vFGKHew==
+	s=mte1; t=1755789954; x=1756059954;
+	bh=v9693aJ0tIn6PL/KSvi73SLKMBRME6s7Oodg2Swvg4k=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=iMHqtkLQWTccEKocnJ30gS94aO+FZnLgcKSPFIynoxhB5ye68HSCIWqqBgTI6648J
+	 5PpdV7fXBTZ5+WY8MI7P6ZswZb8QT90Ou/S6fw7U349KlZIq+GnZRQbv24etXFW+8s
+	 2TM3TEEsVgrPl3eBuyIBNBsrmqDZssHEKOOtpscJXc2oEbvXz4T9jY47Ntvos17siZ
+	 J2lhV/AshFpx0f67qYVuCZbLWckervw1ZXrpZd5SXsfaxKcczchYJLUqwZJxCafYp5
+	 yigRqUb+DExo0OMyo++ljNrnLznCo4sUKpcT6R9IetgxAS+cAxOLAM+xpjAogWxWjt
+	 OS1RC6hNp1uDg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1755789949; x=1756050449; i=teddy.astie@vates.tech;
-	bh=f+MVIfI7tSP+OiiCs9By3b93AN5lW1SGwr6uGwBsgGw=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=ouVkk7UnfZgeqSDR7NSs0DaZKpQxyo8BfPoTlL/kFK0biayylxu9KjlQdYBEuD1Nw
-	 h2/oZ3NbeOqgJEk4BukqpA5nLl73mmtx48zivEzf0HLCwE6d0HYZwx/aBLNMQuK581
-	 jXk1BSuRhAnZSLXiogRidS0gPFZT/GltAcQhMpIeWp1spynPIrkrfRvVUQKjNKH+ez
-	 55R3MDToc7rfaM1zA6Sqej/1nwtOa70G/Yb9z8nKEaAhHW2s3kuWKgGxK9OjEN0yki
-	 X4MX3Y75gyfO2DCNIPNXZ5Fjj8NBe7Y7Xp9Bw6ZcLgA83HSQzx6/2xYO8o4bqFQRi+
-	 p/ekELGyY/WeA==
+	t=1755789954; x=1756050454; i=teddy.astie@vates.tech;
+	bh=v9693aJ0tIn6PL/KSvi73SLKMBRME6s7Oodg2Swvg4k=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=iH0BcE+QR1Uaoadh/SSpJyDJOpz7rEZOK9PHZRIcQcd7FQSuoHHsEP9YxnK6YLBJF
+	 V9CZB7oqLjRzXWdUlCzhIzsOKBiYhkRHsQeXqSYpzn66U8dQneGlzgvNiEWWaZQYe5
+	 N9/BPKoE+PMlOavuOwQdJ3idbHJ6kFXgKdokA1kZNnaN659ikq3g0JQq8nK5NqIOd3
+	 DpAwBE/G0BStKl4dcWA5I0oD2QN5jBF4XihFwXY3/4mTxKix0hgOdw4JGkhbzUAvsr
+	 SaV2sx1/QWthMhj0M6D4qYJ2WSDhOInkIvEWLpdQSJbY1n4E5Y4jioWoJkEXqB8z7+
+	 /IzqH+tX3xp0w==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=200/9]=20x86/hvm:=20New=20Xen=20HVM=20ABI=20proposal=20("HVMv2"=20part=201)?=
+Subject: =?utf-8?Q?[RFC=20PATCH=204/9]=20hvm:=20Introduce=20"fixed=20memory=20layout"=20feature?=
 X-Mailer: git-send-email 2.50.1
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1755789947659
+X-Bm-Transport-Timestamp: 1755789952853
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>, "Dario Faggioli" <dfaggioli@suse.com>, "George Dunlap" <gwd@xenproject.org>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Message-Id: <cover.1755785258.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>
+Message-Id: <640223e5e7ee18a73f62152dd27883bf5978fbfe.1755785258.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1755785258.git.teddy.astie@vates.tech>
+References: <cover.1755785258.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.8a92cbcbf28e4ec8835df8665a8d7231?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.5565b7a84c614179b7558ba46b71cf8f?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250821:md
-Date: Thu, 21 Aug 2025 15:25:49 +0000
+Date: Thu, 21 Aug 2025 15:25:54 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Hello, this series introduce a new hypercall ABI proposal (x86 only for now).
+Currently, guests needs to explicitely map their shared info and
+grant table through hypercalls. It has proved to be complicated
+and had been traditionally placed in the Xen PCI Platform device
+BAR, but has caused confusions regarding MTRR [1].
 
-The current Xen ABI has some shortcommings :
+Introduce a optional feature to let the toolstack map these pages in
+advance, and exposing their location through the memory map (i.e E820).
 
-First, the hypercall parameters are usually pointers that point to a structure
-in guest memory, this pointer is usually a virtual address. 
-It causes various issues as :
- - you need to define a format for these structures which is currently C
-   structures, but it complicates support with non LP64 platforms (e.g Windows)
-   or other programming languages (e.g Rust, where solutions are hard to come with)
- - the translation from virtual address to machine physical address is very expensive
-   as you need to translate the GVA to GPA, and then GPA to HPA each time you want to
-   access a virtual address
- - such virtual addresses are not readable under confidential computing guests which
-   makes such new ABI required.
+When this feature is active, guests are expected to not invalidate such
+mappings (e.g by calling xen_remove_from_physmap); as they may be used
+by the operating system or firmware (i.e OVMF).
 
-Another issue is that all possible Xen hypercalls are exposed through this
-single interface, it makes hardening the hypervisor more complicated as you
-need to permission check on a per-hypercall basis (e.g through XSM) instead
-of having a minimal strict safe-for-guest-use set of operations.
+Moreover, this feature is useful to allow having a working guest without
+having to expose to it physmap manipulation.
 
-The current ABI allows the guest to modify its physmap; this is notably used for
-mapping the shared info, grant table and ballooning. While we could make that work
-for confidential guests. It comes with its own set of problems, and in order to
-simplify the memory management, this series come with a proposal for mapping these
-specific pages in advance and telling the guest the location. That helps reducing
-the scope of this new ABI. Ballooning implementation hasn't been fully considered yet.
+[1] https://lore.kernel.org/xen-devel/20250610162930.89055-1-roger.pau@citrix.com/
 
-This series propose a new hypercall interface designed for use by guests kernels
-with high performance (low hypercall overhead) and confidential computing environments
-(notably AMD SEV) compatibility in mind. It currently only supports x86 long mode
-(64-bits) due to specific register requirements.
-
-It doesn't aim to entirely replace the current ABI, but to propose a alternative
-one that could be used by guests as a fast-path ABI or for confidential computing
-guests.
-
-This new ABI maps into current many operations (with some limitations), a tool is
-provided to generate C stubs using the yaml specification.
-These C stubs reuse the existing hypercall structures to ease adding support
-for this ABI in guests.
-
-You can find some example generated headers in Linux SEV WIP branch [1].
-
-[1] https://github.com/xcp-ng/linux/tree/xen-sev-6.14/include/xen/interface/fastabi
-
-Teddy Astie (9):
-  x86/hvm: Use direct structures instead of guest handles
-  common: Isolate XENVER_get_features into a separate function
-  common/grant_table: Use direct structures instead of guest handles
-  hvm: Introduce "fixed memory layout" feature
-  docs/x86: Introduce FastABI
-  sched: Extract do_poll main logic into vcpu_poll
-  x86/hvm: Introduce FastABI implementation
-  hvm: Introduce XEN_HVM_MEMMAP_TYPE_HOTPLUG_ZONE
-  tools: Introduce abi-tool
-
- docs/guest-guide/x86/fastabi.pandoc           |  50 +++++
- .../x86/fixed-memory-layout.pandoc            |  24 ++
- docs/guest-guide/x86/index.rst                |   2 +
- tools/include/xen-tools/common-macros.h       |   4 +
- tools/libs/guest/xg_dom_x86.c                 |  84 +++++++
- tools/libs/light/libxl_create.c               |   1 +
- tools/libs/light/libxl_types.idl              |   1 +
- tools/libs/light/libxl_x86.c                  |  71 ++++++
- tools/xl/xl_parse.c                           |   1 +
- xen/abi/event_channel.yml                     | 130 +++++++++++
- xen/abi/grant_table.yml                       |  46 ++++
- xen/abi/hvm.yml                               |  50 +++++
- xen/abi/memory.yml                            |  11 +
- xen/abi/sched.yml                             |  48 ++++
- xen/abi/vcpu.yml                              | 139 ++++++++++++
- xen/abi/version.yml                           |  15 ++
- xen/arch/x86/cpuid.c                          |   3 +
- xen/arch/x86/domain.c                         |  71 ++++++
- xen/arch/x86/hvm/hvm.c                        | 205 +++++++++++++-----
- xen/arch/x86/hvm/hypercall.c                  |  22 ++
- xen/arch/x86/include/asm/fastabi.h            |  17 ++
- xen/common/Kconfig                            |   6 +
- xen/common/Makefile                           |   1 +
- xen/common/domain.c                           | 179 +++++++++++++++
- xen/common/event_channel.c                    | 199 +++++++++++++++++
- xen/common/fastabi.c                          |  49 +++++
- xen/common/grant_table.c                      | 112 +++++++---
- xen/common/kernel.c                           | 117 ++++++----
- xen/common/memory.c                           | 110 ++++++++++
- xen/common/sched/core.c                       | 149 +++++++++++--
- xen/include/public/arch-x86/cpuid.h           |   4 +
- xen/include/public/arch-x86/hvm/start_info.h  |   8 +
- xen/include/public/event_channel.h            |   7 +
- xen/include/public/fastabi.h                  |  20 ++
- xen/include/xen/fastabi.h                     |  21 ++
- xen/tools/abi-tool/.gitignore                 |   1 +
- xen/tools/abi-tool/Cargo.lock                 | 145 +++++++++++++
- xen/tools/abi-tool/Cargo.toml                 |  11 +
- xen/tools/abi-tool/src/abi.rs                 |  23 ++
- xen/tools/abi-tool/src/c_lang.rs              | 173 +++++++++++++++
- xen/tools/abi-tool/src/main.rs                |  17 ++
- xen/tools/abi-tool/src/spec.rs                |  61 ++++++
- 42 files changed, 2265 insertions(+), 143 deletions(-)
- create mode 100644 docs/guest-guide/x86/fastabi.pandoc
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+ .../x86/fixed-memory-layout.pandoc            | 24 ++++++
+ docs/guest-guide/x86/index.rst                |  1 +
+ tools/include/xen-tools/common-macros.h       |  4 +
+ tools/libs/guest/xg_dom_x86.c                 | 84 +++++++++++++++++++
+ tools/libs/light/libxl_create.c               |  1 +
+ tools/libs/light/libxl_types.idl              |  1 +
+ tools/libs/light/libxl_x86.c                  | 71 ++++++++++++++++
+ tools/xl/xl_parse.c                           |  1 +
+ xen/include/public/arch-x86/hvm/start_info.h  |  7 ++
+ 9 files changed, 194 insertions(+)
  create mode 100644 docs/guest-guide/x86/fixed-memory-layout.pandoc
- create mode 100644 xen/abi/event_channel.yml
- create mode 100644 xen/abi/grant_table.yml
- create mode 100644 xen/abi/hvm.yml
- create mode 100644 xen/abi/memory.yml
- create mode 100644 xen/abi/sched.yml
- create mode 100644 xen/abi/vcpu.yml
- create mode 100644 xen/abi/version.yml
- create mode 100644 xen/arch/x86/include/asm/fastabi.h
- create mode 100644 xen/common/fastabi.c
- create mode 100644 xen/include/public/fastabi.h
- create mode 100644 xen/include/xen/fastabi.h
- create mode 100644 xen/tools/abi-tool/.gitignore
- create mode 100644 xen/tools/abi-tool/Cargo.lock
- create mode 100644 xen/tools/abi-tool/Cargo.toml
- create mode 100644 xen/tools/abi-tool/src/abi.rs
- create mode 100644 xen/tools/abi-tool/src/c_lang.rs
- create mode 100644 xen/tools/abi-tool/src/main.rs
- create mode 100644 xen/tools/abi-tool/src/spec.rs
 
+diff --git a/docs/guest-guide/x86/fixed-memory-layout.pandoc b/docs/guest-guide/x86/fixed-memory-layout.pandoc
+new file mode 100644
+index 0000000000..b394dc1cff
+--- /dev/null
++++ b/docs/guest-guide/x86/fixed-memory-layout.pandoc
+@@ -0,0 +1,24 @@
++# Fixed memory layout
++
++When creating a guest with "fixed_mem_layout", the guest has additional special
++pages mapped in advance. These mappings may be required in some cases due to FastABI
++not providing the ability for the guest to modify its physical memory layout (which is
++usually used to map the shared info page or the grant table).
++
++The guest is informed of such mappings and their location through the memory map using
++Xen specific memory map types (in the OEM range of ACPI specification).
++
++It's expected that these mappings stay stable, therefore, the guest shouldn't try to
++modify such mappings as it may be actively used by guest firmware or operating system.
++
++    /* Xen-specific types (OEM-specific range of the ACPI spec) */
++    #define XEN_HVM_MEMMAP_TYPE_SHARED_INFO   0xF0000001 /* Shared info page */
++    #define XEN_HVM_MEMMAP_TYPE_GRANT_TABLE   0xF0000002 /* Grant table pages */
++    #define XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS 0xF0000003 /* Grant table status page (v2) */
++    #define XEN_HVM_MEMMAP_TYPE_FOREIGN_REG   0xF0000004 /* Suitable region for grant mappings */
++                                                         /* and foreign mappings */
++
++These mappings are likely to be placed outside the 4G range.
++
++XEN_HVM_MEMMAP_TYPE_FOREIGN_REG is a special region which doesn't contain any mapping,
++but is safe to use for placing grant and foreign mappings.
+diff --git a/docs/guest-guide/x86/index.rst b/docs/guest-guide/x86/index.rst
+index 502968490d..6927271e53 100644
+--- a/docs/guest-guide/x86/index.rst
++++ b/docs/guest-guide/x86/index.rst
+@@ -7,3 +7,4 @@ x86
+    :maxdepth: 2
+ 
+    hypercall-abi
++   fixed-memory-layout
+diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
+index 0088208c2e..8b286b3da5 100644
+--- a/tools/include/xen-tools/common-macros.h
++++ b/tools/include/xen-tools/common-macros.h
+@@ -72,6 +72,10 @@
+ #define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
+ #endif
+ 
++#ifndef DIV_ROUNDUP
++#define DIV_ROUNDUP(n, d) (((n) + (d) - 1) / (d))
++#endif
++
+ #define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
+ #define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
+ 
+diff --git a/tools/libs/guest/xg_dom_x86.c b/tools/libs/guest/xg_dom_x86.c
+index cba01384ae..ab1c5063a4 100644
+--- a/tools/libs/guest/xg_dom_x86.c
++++ b/tools/libs/guest/xg_dom_x86.c
+@@ -624,6 +624,82 @@ static void build_hvm_info(void *hvm_info_page, struct xc_dom_image *dom)
+     hvm_info->checksum = -sum;
+ }
+ 
++/* Prepare special (shared_info, grant table, ...) regions marked in E820. */
++static int prepare_fixed_special_regions(xc_interface *xch, struct xc_dom_image *dom)
++{
++    int rc = 0; unsigned int i;
++    uint32_t domid = dom->guest_domid;
++    gnttab_query_size_t gnttab_query;
++    size_t gnttab_frame_count, gnttab_status_frame_count;
++    
++    gnttab_query.dom = domid;
++    rc = xc_gnttab_query_size(xch, &gnttab_query);
++
++    if ( rc != 0 || gnttab_query.status != GNTST_okay )
++    {
++        DOMPRINTF("Unable to query grant table size.");
++        return rc;
++    }
++
++    gnttab_frame_count = gnttab_query.max_nr_frames;
++    gnttab_status_frame_count = DIV_ROUNDUP(
++        gnttab_frame_count * (XC_DOM_PAGE_SIZE(dom) / sizeof(grant_entry_v2_t)),
++        XC_DOM_PAGE_SIZE(dom) / sizeof(grant_status_t));
++
++    for ( i = 0; i < dom->e820_entries; i++ )
++    {
++        struct e820entry entry = dom->e820[i];
++        rc = 0;
++
++        switch ( entry.type ) {
++        case XEN_HVM_MEMMAP_TYPE_SHARED_INFO:
++            rc = xc_domain_add_to_physmap(xch, domid, XENMAPSPACE_shared_info,
++                                          0, entry.addr >> PAGE_SHIFT);
++            break;
++        case XEN_HVM_MEMMAP_TYPE_GRANT_TABLE:
++            if ( gnttab_frame_count != entry.size >> PAGE_SHIFT )
++            {
++                DOMPRINTF("Invalid grant table memmap region size");
++                return -EINVAL;
++            }
++
++            for ( i = 0; i < gnttab_frame_count; i++ )
++            {
++                rc = xc_domain_add_to_physmap(xch, domid, XENMAPSPACE_grant_table, i,
++                                              (entry.addr >> PAGE_SHIFT) + i);
++                
++                if ( rc !=  0 )
++                    break;
++            }
++            break;
++        case XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS:
++        {
++            if ( gnttab_status_frame_count != entry.size >> PAGE_SHIFT )
++            {
++                DOMPRINTF("Invalid grant table status memmap region size");
++                return -EINVAL;
++            }
++
++            for ( i = 0; i < gnttab_status_frame_count; i++ )
++            {
++                rc = xc_domain_add_to_physmap(xch, domid, XENMAPSPACE_grant_table,
++                                              i | XENMAPIDX_grant_table_status,
++                                              (entry.addr >> PAGE_SHIFT) + i);
++                
++                if ( rc !=  0 )
++                    break;
++            }
++            break;
++        }
++        }
++
++        if ( rc != 0 )
++            break;
++    }
++
++    return rc;
++}
++
+ static int alloc_magic_pages_hvm(struct xc_dom_image *dom)
+ {
+     unsigned long i;
+@@ -718,6 +794,14 @@ static int alloc_magic_pages_hvm(struct xc_dom_image *dom)
+         goto out;
+     }
+ 
++    rc = prepare_fixed_special_regions(xch, dom);
++
++    if ( rc != 0 )
++    {
++        DOMPRINTF("Unable to prepare fixed special regions");
++        goto out;
++    }
++
+     /*
+      * Identity-map page table is required for running with CR0.PG=0 when
+      * using Intel EPT. Create a 32-bit non-PAE page directory of superpages.
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 8a85fba1cf..5e23e122fc 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -2363,6 +2363,7 @@ int libxl_domain_create_restore(libxl_ctx *ctx, libxl_domain_config *d_config,
+      * configuration.
+      */
+     libxl_defbool_setdefault(&d_config->b_info.arch_x86.msr_relaxed, true);
++    libxl_defbool_setdefault(&d_config->b_info.arch_x86.fixed_mem_layout, false);
+     libxl_defbool_setdefault(&d_config->b_info.u.hvm.pirq, true);
+ 
+     return do_domain_create(ctx, d_config, domid, restore_fd, send_back_fd,
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index a3a79d12b2..74edfdebc1 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -727,6 +727,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+                                ("nr_spis", uint32, {'init_val': 'LIBXL_NR_SPIS_DEFAULT'}),
+                               ])),
+     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
++                               ("fixed_mem_layout", libxl_defbool),
+                               ])),
+     # Alternate p2m is not bound to any architecture or guest type, as it is
+     # supported by x86 HVM and ARM support is planned.
+diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
+index 60d4e8661c..de19f722ab 100644
+--- a/tools/libs/light/libxl_x86.c
++++ b/tools/libs/light/libxl_x86.c
+@@ -1,6 +1,7 @@
+ #include "libxl_internal.h"
+ #include "libxl_arch.h"
+ #include <xen/arch-x86/cpuid.h>
++#include <xen/arch-x86/hvm/start_info.h>
+ 
+ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+                                       libxl_domain_config *d_config,
+@@ -50,6 +51,10 @@ static const char *e820_names(int type)
+         case E820_ACPI: return "ACPI";
+         case E820_NVS: return "ACPI NVS";
+         case E820_UNUSABLE: return "Unusable";
++        case XEN_HVM_MEMMAP_TYPE_SHARED_INFO: return "HVM Shared Info";
++        case XEN_HVM_MEMMAP_TYPE_GRANT_TABLE: return "HVM Grant Table";
++        case XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS: return "HVM Grant Status";
++        case XEN_HVM_MEMMAP_TYPE_FOREIGN_REG: return "HVM Foreign mapping region";
+         default: break;
+     }
+     return "Unknown";
+@@ -686,10 +691,31 @@ static int domain_construct_memmap(libxl__gc *gc,
+     /* We always own at least one lowmem entry. */
+     unsigned int e820_entries = 1;
+     struct e820entry *e820 = NULL;
++    uint64_t highmem_start = ((uint64_t)1 << 32);
+     uint64_t highmem_size =
+                     dom->highmem_end ? dom->highmem_end - (1ull << 32) : 0;
+     uint32_t lowmem_start = dom->device_model ? GUEST_LOW_MEM_START_DEFAULT : 0;
+     unsigned page_size = XC_DOM_PAGE_SIZE(dom);
++    /* Special region starts at the first 1G boundary after the highmem */
++    uint64_t special_region_start =
++        (highmem_start + highmem_size + GB(1) - 1) & ~(GB(1) - 1);
++    uint64_t special_region_offset = special_region_start;
++    size_t gnttab_frame_count, gnttab_status_frame_count;
++    gnttab_query_size_t gnttab_query;
++
++    gnttab_query.dom = domid;
++    rc = xc_gnttab_query_size(dom->xch, &gnttab_query);
++
++    if (rc != 0 || gnttab_query.status != GNTST_okay)
++    {
++        gnttab_frame_count = 0;
++        gnttab_status_frame_count = 0;
++    }
++
++    gnttab_frame_count = gnttab_query.max_nr_frames;
++    gnttab_status_frame_count = DIV_ROUNDUP(
++        gnttab_frame_count * (page_size / sizeof(grant_entry_v2_t)),
++        page_size / sizeof(grant_status_t));
+ 
+     /* Add all rdm entries. */
+     for (i = 0; i < d_config->num_rdms; i++)
+@@ -703,6 +729,16 @@ static int domain_construct_memmap(libxl__gc *gc,
+     /* If we should have a highmem range. */
+     if (highmem_size)
+         e820_entries++;
++    
++    if (libxl_defbool_val(d_config->b_info.arch_x86.fixed_mem_layout))
++    {
++        e820_entries++; /* XEN_HVM_MEMMAP_TYPE_SHARED_INFO */
++        if ( gnttab_frame_count )
++            e820_entries++; /* XEN_HVM_MEMMAP_TYPE_GRANT_TABLE */
++        if (d_config->b_info.max_grant_version >= 2 && gnttab_status_frame_count)
++            e820_entries++; /* XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS status */
++        e820_entries++; /* XEN_HVM_MEMMAP_TYPE_FOREIGN_REG */
++    }
+ 
+     for (i = 0; i < MAX_ACPI_MODULES; i++)
+         if (dom->acpi_modules[i].length)
+@@ -769,6 +805,40 @@ static int domain_construct_memmap(libxl__gc *gc,
+         e820[nr].type = E820_RAM;
+     }
+ 
++    /* Special regions */
++    if (libxl_defbool_val(d_config->b_info.arch_x86.fixed_mem_layout))
++    {
++        e820[nr].type = XEN_HVM_MEMMAP_TYPE_SHARED_INFO;
++        e820[nr].addr = special_region_offset;
++        e820[nr].size = page_size;
++        special_region_offset += e820[nr].size;
++        nr++;
++
++        if ( gnttab_frame_count )
++        {
++            e820[nr].type = XEN_HVM_MEMMAP_TYPE_GRANT_TABLE;
++            e820[nr].addr = special_region_offset;
++            e820[nr].size = gnttab_frame_count * page_size;
++            special_region_offset += e820[nr].size;
++            nr++;
++        }
++
++        if (d_config->b_info.max_grant_version >= 2 && gnttab_status_frame_count)
++        {
++            e820[nr].type = XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS;
++            e820[nr].addr = special_region_offset;
++            e820[nr].size = gnttab_status_frame_count * page_size;
++            special_region_offset += e820[nr].size;
++            nr++;
++        }
++
++        e820[nr].type = XEN_HVM_MEMMAP_TYPE_FOREIGN_REG;
++        e820[nr].addr = special_region_offset;
++        e820[nr].size = MB(512);
++        special_region_offset += e820[nr].size;
++        nr++;
++    }
++
+     if (xc_domain_set_memory_map(CTX->xch, domid, e820, e820_entries) != 0) {
+         rc = ERROR_FAIL;
+         goto out;
+@@ -819,6 +889,7 @@ int libxl__arch_domain_build_info_setdefault(libxl__gc *gc,
+     libxl_defbool_setdefault(&b_info->acpi, true);
+     libxl_defbool_setdefault(&b_info->arch_x86.msr_relaxed, false);
+     libxl_defbool_setdefault(&b_info->trap_unmapped_accesses, false);
++    libxl_defbool_setdefault(&b_info->arch_x86.fixed_mem_layout, false);
+ 
+     if (b_info->type == LIBXL_DOMAIN_TYPE_HVM) {
+         /*
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 7e11c62ba0..a74cc577e9 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -2992,6 +2992,7 @@ skip_usbdev:
+                     "WARNING: msr_relaxed will be removed in future versions.\n"
+                     "If it fixes an issue you are having please report to "
+                     "xen-devel@lists.xenproject.org.\n");
++    xlu_cfg_get_defbool(config, "fixed_mem_layout", &b_info->arch_x86.fixed_mem_layout, 0);
+ 
+     xlu_cfg_get_defbool(config, "vpmu", &b_info->vpmu, 0);
+ 
+diff --git a/xen/include/public/arch-x86/hvm/start_info.h b/xen/include/public/arch-x86/hvm/start_info.h
+index e33557c0b4..0b3dfe91af 100644
+--- a/xen/include/public/arch-x86/hvm/start_info.h
++++ b/xen/include/public/arch-x86/hvm/start_info.h
+@@ -99,6 +99,13 @@
+ #define XEN_HVM_MEMMAP_TYPE_DISABLED  6
+ #define XEN_HVM_MEMMAP_TYPE_PMEM      7
+ 
++/* Xen-specific types (OEM-specific range of the ACPI spec) */
++#define XEN_HVM_MEMMAP_TYPE_SHARED_INFO   0xF0000001 /* Shared info page */
++#define XEN_HVM_MEMMAP_TYPE_GRANT_TABLE   0xF0000002 /* Grant table pages */
++#define XEN_HVM_MEMMAP_TYPE_GNTTAB_STATUS 0xF0000003 /* Grant table status page (v2) */
++#define XEN_HVM_MEMMAP_TYPE_FOREIGN_REG   0xF0000004 /* Suitable region for grant mappings */
++                                                     /* and foreign mappings */
++
+ /*
+  * C representation of the x86/HVM start info layout.
+  *
 -- 
 2.50.1
 
