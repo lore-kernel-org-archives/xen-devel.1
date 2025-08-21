@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A460FCA0EF8
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 15:26:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1088821.1446578 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E95CACA0EF8
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Aug 2025 15:39:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1088929.1446631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up7Av-00070x-FI; Thu, 21 Aug 2025 15:26:01 +0000
+	id 1up7Nn-000524-Po; Thu, 21 Aug 2025 15:39:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1088821.1446578; Thu, 21 Aug 2025 15:26:01 +0000
+Received: by outflank-mailman (output) from mailman id 1088929.1446631; Thu, 21 Aug 2025 15:39:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1up7Av-0006yV-9x; Thu, 21 Aug 2025 15:26:01 +0000
-Received: by outflank-mailman (input) for mailman id 1088821;
- Thu, 21 Aug 2025 15:26:00 +0000
+	id 1up7Nn-00051x-N1; Thu, 21 Aug 2025 15:39:19 +0000
+Received: by outflank-mailman (input) for mailman id 1088929;
+ Thu, 21 Aug 2025 15:39:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jKuh=3B=bounce.vates.tech=bounce-md_30504962.68a73a84.v1-a995d3371d0e467594b68952f829b548@srs-se1.protection.inumbo.net>)
- id 1up7At-0005nU-Q7
- for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 15:26:00 +0000
-Received: from mail137-3.atl71.mandrillapp.com
- (mail137-3.atl71.mandrillapp.com [198.2.137.3])
+ <SRS0=6kfR=3B=epam.com=Volodymyr_Babchuk@srs-se1.protection.inumbo.net>)
+ id 1up7Nl-00051o-Qy
+ for xen-devel@lists.xenproject.org; Thu, 21 Aug 2025 15:39:17 +0000
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20a::7])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 23730422-7ea3-11f0-a32b-13f23c93f187;
- Thu, 21 Aug 2025 17:25:58 +0200 (CEST)
-Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail137-3.atl71.mandrillapp.com (Mailchimp) with ESMTP id 4c76bS5vfQzBsVD7L
- for <xen-devel@lists.xenproject.org>; Thu, 21 Aug 2025 15:25:56 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- a995d3371d0e467594b68952f829b548; Thu, 21 Aug 2025 15:25:56 +0000
+ id fec18277-7ea4-11f0-a32b-13f23c93f187;
+ Thu, 21 Aug 2025 17:39:16 +0200 (CEST)
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ (2603:10a6:150:16a::21) by AM7PR03MB6388.eurprd03.prod.outlook.com
+ (2603:10a6:20b:1bb::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.13; Thu, 21 Aug
+ 2025 15:39:14 +0000
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::a41e:5aa8:e298:757e]) by GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::a41e:5aa8:e298:757e%5]) with mapi id 15.20.9052.013; Thu, 21 Aug 2025
+ 15:39:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,1308 +49,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23730422-7ea3-11f0-a32b-13f23c93f187
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1755789956; x=1756059956;
-	bh=NmIuO1pdpbmW3k7cBEiWCdpAQ2G3SKKK5JzTVol4PfM=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=hefq1bT3PwkO2n1bV6dWVWcWp0BSnpsmV09jCqOOKrDIbrz96OGjcKPQtpZ5xehZp
-	 KD6Dal0mWLu2ZYl4jOdgMEzkLKvodaCjcsMUmEaviXrqOqJnPBprwD4f7eWIsW1IGU
-	 irz+0+U3iKwyEkyhBGBrdB7wBp9Kia3fAQ6DUWyJyQ3uj7jifkU9xNkkW657Pfi9ou
-	 9zH9/rj4NgPHF0SYdeEjba/v1mr1mxUx+1MU8QQvBvf1qmMYq1S9TQAq+ikYtWajGR
-	 hdY01G846+Cgtc3hOrmxIaqtyTjt+lBCMzHXxth9UAdGRXci0v+c8efoiMcGFK4iwW
-	 VsUGrrTuBuBbQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1755789956; x=1756050456; i=teddy.astie@vates.tech;
-	bh=NmIuO1pdpbmW3k7cBEiWCdpAQ2G3SKKK5JzTVol4PfM=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=eTE+uSD1oaYojVAl2HYVExe5iaYtwTw0MKMvtrrQ986jgBxuAylwEOaQwVzxwWHV/
-	 q1MyAR2OLxTbne6nbB0dlyQ+oBucKDt1qbyH0+kbrFHwHJFWHFkZERtnjDsYNlfjks
-	 vEdz8jD0ZcxD5446S2bzqgIWIzwY2zmvwN7POpACFCMqZ9cz9+b6CLCrjDTYyZEAU5
-	 eNQi+ab0vkX5zilGG+Z0KxGMvIeSzuLgZp8jpTdmUP6T9fIsEUGLcPgctLznADJbno
-	 dPXaZqW/ihoCHxsgHRTS4aVlbjNh+JiALCUGoG0Yuz8vgZX5rE7OHZ4+yw79bYMGRN
-	 Vw+9aMaxjs/eQ==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=207/9]=20x86/hvm:=20Introduce=20FastABI=20implementation?=
-X-Mailer: git-send-email 2.50.1
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1755789955039
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Dario Faggioli" <dfaggioli@suse.com>, "Juergen Gross" <jgross@suse.com>, "George Dunlap" <gwd@xenproject.org>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Message-Id: <9da7d600c7cb6c4334f3e01b7724ad106930bc6e.1755785258.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1755785258.git.teddy.astie@vates.tech>
-References: <cover.1755785258.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.a995d3371d0e467594b68952f829b548?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250821:md
-Date: Thu, 21 Aug 2025 15:25:56 +0000
+X-Inumbo-ID: fec18277-7ea4-11f0-a32b-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TghoyxL80ruRUhXRAMXyAwsJ3CecPf08NT5xxobhvGu4oBII3NfqaL2LXlGBfkKZd6l1OdA/B8tLFfFQWhwqs+YEukhX93UFWcDDqCXVZGWTpQogd37T8M8GWPygnnBVZ3B4M44z0am/BoIJ3DJIoOyYNyxRPnBin9lfR97V7ui4sz5lfr4blUxNLN42EhgXa0SWNbj/8mxVSxbPRplOA8aJoIcF3skZJGlWt1+Iisww4YEYnCjV2kILZJRgSGNwldVUOw7ZcE5x8eOOY86Wx0Ul4vKv46n4N71aa+jhbkieWPI2mUrh3ABnDUyDbRN+haGz+9WfcKby7bMfPpEbUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OatQn6DMrJkZl2qUDT5uXi2BRusKkpkoxdhyNtqTNtk=;
+ b=KaEuxiFsP0vUt6cZfp/7E+lBV3zyFB6gQwsm80FoHd60BRU5Xod4rjgOX5GYum8OdFIbeoUh9eQuVYLxEAY1vKMmgcMwmM6DOyF6J0FI5yxOmxPl8nsoWK0MrFtOoZbmP5zAhdvsO0/cZiz0ehbBjuyNHqRpr/CwrQO9mf1H7rKOSvlD8F7B2VhWUSfd4EkzIf+lS7bPJjKJJhu9OJQ3gXgdDhM4ODqbyGY4IlMzDaSZt9scyKELe6Y1O37IIoQC3UXE6/SXMPM3Xbx2LUt9s+IgoIHwCwcPLQko/2LNjZqXxSIt6cYuP6hpJGTOFNmm+XYHua0vTCvhtmrnoYlA7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OatQn6DMrJkZl2qUDT5uXi2BRusKkpkoxdhyNtqTNtk=;
+ b=ZamSic4J/VOOJ1bZcKc1qHsYMFAfrgl20biiKNGQdByyxtNBHntOkGUZQAWv/l1NBgmr843E9r+OP69FPZArWCB2sCTAe/3K2LPRhrDXHOP+Vi/al1bb+o7irTuH9OizSrvUNOuhTck7UZogBSFLMipgagnlnDAAe9j9NfoFJkaOEMWGAQAYg/HVTX3YyDUKpMwmEYcaW6WqQSmBRxaEmJ7cM5BBhkpMIDR99fiR4zOIRKyikAHqUcr3qsLoG0f1GnzPwcL6Xb9pZ3vDJFC9KHB28cTL9WR7/ofWLJroWkZP1bzZR9ryL3eKrEf8asHNco0Q+2LfPjQIHTA/gzgbcQ==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 02/10] xen/arm: gic: implement helper functions for
+ INTID checks
+Thread-Topic: [PATCH v2 02/10] xen/arm: gic: implement helper functions for
+ INTID checks
+Thread-Index: AQHcB5d7oc7jtkgiGki3l7l8xwTnbg==
+Date: Thu, 21 Aug 2025 15:39:13 +0000
+Message-ID: <877bywfzvj.fsf@epam.com>
+References:
+ <7e6477a83ab65220ef1c5dd22f4ef3536fbbdd5c.1754568795.git.leonid_komarianskyi@epam.com>
+	<51a017aeab39af14ba40ab76b56f317270c7afaa.1754568795.git.leonid_komarianskyi@epam.com>
+In-Reply-To:
+ <51a017aeab39af14ba40ab76b56f317270c7afaa.1754568795.git.leonid_komarianskyi@epam.com>
+	(Leonid Komarianskyi's message of "Thu, 7 Aug 2025 12:33:30 +0000")
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|AM7PR03MB6388:EE_
+x-ms-office365-filtering-correlation-id: 9e6aa30e-09d0-4249-fa13-08dde0c8e197
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|42112799006|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?OydozJiQgJccNa3wSg/5M3Xl6VOSs624FNBpyLwdxVYl2fhiq9B81bYwL7?=
+ =?iso-8859-1?Q?AOtVhn7dHnOwWHsePmFomcXPn6QbP3CKdCc1LZffg72ILUYZalBXK+s0M8?=
+ =?iso-8859-1?Q?GyntaEk5XzG3t60PBeLJoFZv5k3vE7vj/VbmtfAdA72NpJ2CNY9ii7j/q6?=
+ =?iso-8859-1?Q?Od+U6e5kBwVxWZhB6ELWYEjePm/FbRMQL1FKCIdS2a6Ssfjzw6YpRk+cu9?=
+ =?iso-8859-1?Q?6DEnZOTm3HVKke2AorOYP0ECCduCc55uG+38OItWIconj5L9zPGUEnePQW?=
+ =?iso-8859-1?Q?TJrOQm78VWSArEq0gT63Ap2Nj3AyiXo/Hl2X99VXV9NFwdDVK2xUDRtcXp?=
+ =?iso-8859-1?Q?HTyrKEytf9Cd97BbgLSbgVwsirXWdzs8Er/QA+bQYRLA+M+OFH/emoTcWV?=
+ =?iso-8859-1?Q?aIltsMEGAabHTPGnjnIMwH7+9lZO5R1zz3RKfsa8+KJ2b8WetVAhU/TasT?=
+ =?iso-8859-1?Q?wtypOPqD/mjLbDmBXIuJGGx5tRp424l4UddKpyblUGYlIilDgsr5rOPjrN?=
+ =?iso-8859-1?Q?mZg8oRX5wr1G7ZWFmZO4GEzcA43cTagXjnYICiCfKAOsY19rt/ewUthIHG?=
+ =?iso-8859-1?Q?EzTAwrZ4bmsdD62Q+ia4e6/i6Z66kZ8DnFpLLxpU5JNXVeKdn3zhPwZ6JC?=
+ =?iso-8859-1?Q?0r1no9AUWYgrvvrqiiMb85PYl5ObZQuFpYy37hyO8JLE7sf9crdRXKsPhy?=
+ =?iso-8859-1?Q?TEH1kLSLgWEiweB175j+foLCG71IKh0aI+xYUJZ9rB3uWlUOFCr5Blxk9v?=
+ =?iso-8859-1?Q?1KZwlYTwkOhx9p7Saz1HzQF5l2hIJmv07PwxRwwSzdGCI79DixgMpfHkfv?=
+ =?iso-8859-1?Q?aafClZ1iad6BzOl1FqQmSbaKlmiD27wVN36drqKUpQwOPXwUCXaz+OBCEY?=
+ =?iso-8859-1?Q?uADJKgovwjMzObJlvijIRcvHhtxSMAf5zH9i5G5LKR7TK1GyAo32Fs5f7d?=
+ =?iso-8859-1?Q?D7NlxD30svMnFnjzoLtikRyRcnZ9NLxCvIjs5ie0guakZO8a4/6kw5AGqc?=
+ =?iso-8859-1?Q?umWZbnWZFx22xesMPqOY5ENQtKa3F7pSKHrNetziiS19D7BQ++ByaB0CfN?=
+ =?iso-8859-1?Q?NSCFpmqedHn1fkNILAK+n4GyUSO9AJmq5GdGtpNR3CovsQE1VEeJnBROrH?=
+ =?iso-8859-1?Q?Zim8mAgxG1ODgrHxeU9edIsYZs9pvPgcS6u7BOVQnckb27iGa+BSPh2Ckc?=
+ =?iso-8859-1?Q?SravhgLRLYEIMX0TRUlDia8NFaJq/uVa1qBj/Xfqj2ZJvaCzLdcXDVd18B?=
+ =?iso-8859-1?Q?Q046N1xppZ8OFXO8kEHZvDbL2plZ/PB9Mz8SjvB0lU1X9KjwWiMeIP4oG2?=
+ =?iso-8859-1?Q?RJeNrtalnb6rEehsdRJsUeioat4CQuCbBAwX82ZmgIBxQkThWt/YvKYkWW?=
+ =?iso-8859-1?Q?Y7+IgRsOoXudFjecWCwntDtjPDlTOTuvx37w0WncSk7W1dN6zGD8CHPS4K?=
+ =?iso-8859-1?Q?rNIlPTKB/VAwqRueVQcOhSDpY6YpEm5pK9zbiJFxYQSCps3lVXYnBumDVD?=
+ =?iso-8859-1?Q?uxJjIxW8Iy8J0Wo0qeBtTm76BED13hmYH0+Ey7+XYRog=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR03MB10456.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(42112799006)(366016)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?UWc5KojatYNw/d8lLvmi4O7PElCEyuLx/RZoXJOBgFM0257lgU7+jDMZjK?=
+ =?iso-8859-1?Q?D3MM8caUx1OG0BsCyWg9Z6d+AuNEK/RPwS7OWqPK3AjjTtOQH2pL8ofF3Q?=
+ =?iso-8859-1?Q?jYwAVQMLGzC7CRSZR2nTSCAbIhQO8Y7ZFbwH0EkDz7MajsNblvlPt0DWuN?=
+ =?iso-8859-1?Q?meUwUqAQ7JxoWU6H5t/B4wMQlaNLqPNTm6QSsyj6WnwenlIXp955zsG+xo?=
+ =?iso-8859-1?Q?q0m4GwRA98vZW1dMhFMxV05GD4epxotWDGBFDMAak+ANI1DPV4DaI6Wp9x?=
+ =?iso-8859-1?Q?fPXnc5bfOt7Xb8b2BZepC08wl1vrTveXU7x353I2gk4qwDNa1byYcR5pHJ?=
+ =?iso-8859-1?Q?BbHQN2hsOunEnaEBvsaACcwLyh69T6rCjjuTfb7KkDgM5TTO/8OIbT6/nc?=
+ =?iso-8859-1?Q?ac9OjF+vcUokrlNunQl0pgF2o87rhNKbE82hVH7qXyrMQCPMJNiHpPqI/3?=
+ =?iso-8859-1?Q?ughCtQQqk36R/WY2prkoZs9/MhU7NqdsCezKCrpHFRq/iqdZDxPcZ3d2/B?=
+ =?iso-8859-1?Q?7HwPMcRCApp3Wi0Ztiz9Dt8OUVIJCKdKqyssXJP352VHwz5Ea9L4XQ57ZH?=
+ =?iso-8859-1?Q?/zucDSo+mlTC7rz93EnUsx5jyho+mmgpQ2j7Ud67cHCIUlYTBJDyf6xJju?=
+ =?iso-8859-1?Q?AX08Vy1blYjXBUh+CsGpgqgERhEkVLPCLg7zZFuaWavAi+HQ2cP+Pj0dSG?=
+ =?iso-8859-1?Q?NQD15h7VJB1InmxH0WCbiOD/NVoGLG+QujTOV86Ro9vDc3jYvyWmgfgFJH?=
+ =?iso-8859-1?Q?oGQz/Ek0g10ypFyeQeo1Z4AiY+X9Kzc41WL1kuBhwPZI5dXMFhtJwidQrn?=
+ =?iso-8859-1?Q?qSOOthbm8wzIE5TNpvNcXepF4vnKwrNY6fHQXcpgVU7g8iDdngSfqdXFkM?=
+ =?iso-8859-1?Q?XZmXGZFWZRvQWJ6sjc80+YamQiTUZOXmS8eyNAgcKawwLIwfdtiEHJTjLX?=
+ =?iso-8859-1?Q?ijWXIBJY9369FzIxtdH2u8fW2fW3v1VPg2WnbBeylZNIEZR3qpMCaSb+IQ?=
+ =?iso-8859-1?Q?iT3Pdv7wCtPpSs2L3Yvsl1ocwiTA0kWmZvu88r5UHEheLQ3OCW2Ckdi3ZZ?=
+ =?iso-8859-1?Q?uJKYe/iKAbOedQ/dnBv/CzU/M+ZHLSBmf1z6Y3kX2IpkXmD7gukpJAc3fM?=
+ =?iso-8859-1?Q?bwwWOKg0TEimkIrXwbx7bGRWAFhGIwLbFCW5LXhetBXTwPOlp/aJiT73ef?=
+ =?iso-8859-1?Q?bLJOlZqyRzF8CL4ebhrvckBi9uevSqKXNrQIPuz0fvkun40Bvse9Y0oAW7?=
+ =?iso-8859-1?Q?ej1siBtsvPjCj65/ISLnOffKfOJYMDCHDVw549JNA4ZsAwEoAu5FZQbpNN?=
+ =?iso-8859-1?Q?8ZTr916i8mFMDLiM+sVrraRrN8C8bKIqu/ENtDue10esiW1UQ9MjG9Qthm?=
+ =?iso-8859-1?Q?vnV9RVrODOACSbALxzKvEIztdC2LJkyGHDSViIIZ5oo/IyDK7hrzFa+qlE?=
+ =?iso-8859-1?Q?CGUMa1QgCu3G5SpP6rCVBToH8pfkJZSjcOyjPSHJDhLWTcbcDPIYJ5mjc/?=
+ =?iso-8859-1?Q?mTx+PGBNtKrZ6+lDVMjEZ10ht3JcB6li+ZCTqICp0yV7kuaeGgoTwhevsU?=
+ =?iso-8859-1?Q?4wmuXdCa/x3LIVF6J4qV3KGct2S7o3CsKeNUb7iz5EDmQ+ZpCw8OzLVz4I?=
+ =?iso-8859-1?Q?r5Bh+O7O6422wh6LRuJghI/kTQ8RZh9MDjFVpm+LnijsYXMeuTTRwuXg?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-Implement FastABI basing on docs/guest-guide/x86/fastabi.pandoc and defined ABI.
-
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
- xen/arch/x86/cpuid.c               |   3 +
- xen/arch/x86/domain.c              |  71 ++++++++++
- xen/arch/x86/hvm/hvm.c             |  81 +++++++++++-
- xen/arch/x86/hvm/hypercall.c       |  22 ++++
- xen/arch/x86/include/asm/fastabi.h |  17 +++
- xen/common/Kconfig                 |   6 +
- xen/common/Makefile                |   1 +
- xen/common/domain.c                | 179 ++++++++++++++++++++++++++
- xen/common/event_channel.c         | 199 +++++++++++++++++++++++++++++
- xen/common/fastabi.c               |  49 +++++++
- xen/common/grant_table.c           |  44 +++++++
- xen/common/kernel.c                |  33 +++++
- xen/common/memory.c                | 110 ++++++++++++++++
- xen/common/sched/core.c            | 109 +++++++++++++++-
- xen/include/public/event_channel.h |   7 +
- xen/include/public/fastabi.h       |  20 +++
- xen/include/xen/fastabi.h          |  21 +++
- 17 files changed, 970 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/fastabi.h
- create mode 100644 xen/common/fastabi.c
- create mode 100644 xen/include/public/fastabi.h
- create mode 100644 xen/include/xen/fastabi.h
-
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 8dc68945f7..b1f90c1d91 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -153,6 +153,9 @@ static void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
-          */
-         res->a |= XEN_HVM_CPUID_UPCALL_VECTOR;
- 
-+        if ( IS_ENABLED(CONFIG_FASTABI) && is_hvm_vcpu(v) )
-+            res->a |= XEN_HVM_CPUID_FASTABI;
-+
-         break;
- 
-     case 5: /* PV-specific parameters */
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 56c3816187..44416869a3 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -71,6 +71,10 @@
- #include <public/sysctl.h>
- #include <public/hvm/hvm_vcpu.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_COMPAT
- #include <compat/vcpu.h>
- #endif
-@@ -1695,6 +1699,73 @@ long do_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_vcpu_fast_op(struct cpu_user_regs *regs)
-+{
-+    long rc = 0;
-+    struct domain *d = current->domain;
-+    struct vcpu *v;
-+
-+    unsigned long cmd = fastabi_value_n(regs, 1);
-+    unsigned long vcpuid = fastabi_value_n(regs, 2);
-+
-+    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
-+    {
-+        fastabi_value_n(regs, 0) = -ENOENT;
-+        return;
-+    }
-+
-+    switch ( cmd )
-+    {
-+    case VCPUOP_send_nmi:
-+        if ( !test_and_set_bool(v->arch.nmi_pending) )
-+            vcpu_kick(v);
-+        break;
-+
-+
-+    case VCPUOP_register_vcpu_time_phys_area:
-+    {
-+        struct vcpu_register_time_memory_area area = {
-+            .addr.p = fastabi_value_n(regs, 3)
-+        };
-+
-+        rc = -ENOSYS;
-+        if ( 0 /* TODO: Dom's XENFEAT_vcpu_time_phys_area setting */ )
-+            break;
-+
-+        rc = map_guest_area(v, area.addr.p,
-+                            sizeof(vcpu_time_info_t),
-+                            &v->arch.time_guest_area,
-+                            time_area_populate);
-+        break;
-+    }
-+
-+    case VCPUOP_get_physid:
-+    {
-+        rc = -EINVAL;
-+        if ( !is_hwdom_pinned_vcpu(v) )
-+            break;
-+
-+        fastabi_value_n(regs, 3) =
-+            (uint64_t)x86_cpu_to_apicid[v->vcpu_id] |
-+            ((uint64_t)acpi_get_processor_id(v->vcpu_id) << 32);
-+
-+        rc = 0;
-+        break;
-+    }
-+
-+    default:
-+        rc = common_vcpu_fast_op(regs, cmd, v);
-+        break;
-+    }
-+
-+    if ( rc == -ERESTART )
-+        fastabi_make_continuation();
-+    else
-+        fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
-+
- /*
-  * Notes on PV segment handling:
-  *  - 32bit: All data from the GDT/LDT.
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 8bf59c63fe..eca052e109 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -68,6 +68,10 @@
- 
- #include <compat/hvm/hvm_op.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- bool __read_mostly hvm_enabled;
- 
- #ifdef DBG_LEVEL_0
-@@ -4548,7 +4552,7 @@ static int hvmop_get_param(struct xen_hvm_param *op)
- 
-     rc = -EINVAL;
-     if ( is_hvm_domain(d) && !(rc = hvm_get_param(d, op->index, &op->value)) )
--        HVM_DBG_LOG(DBG_LEVEL_HCALL, "get param %u = %"PRIx64, a.index, a.value);
-+        HVM_DBG_LOG(DBG_LEVEL_HCALL, "get param %u = %"PRIx64, op->index, op->value);
- 
-     rcu_unlock_domain(d);
-     return rc;
-@@ -5224,6 +5228,81 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_hvm_fast_op(struct cpu_user_regs *regs)
-+{
-+    long rc = 0;
-+    unsigned long op = fastabi_value_n(regs, 1);
-+
-+    switch ( op )
-+    {
-+    case HVMOP_set_evtchn_upcall_vector:
-+    {
-+        struct xen_hvm_evtchn_upcall_vector op = {
-+            .vcpu = fastabi_value_n(regs, 2),
-+            .vector = fastabi_value_n(regs, 3),
-+        };
-+
-+        rc = hvmop_set_evtchn_upcall_vector(op);
-+        break;
-+    }
-+
-+    case HVMOP_set_param:
-+    {
-+        struct xen_hvm_param op = {
-+            .domid = fastabi_value_n(regs, 2),
-+            .index = fastabi_value_n(regs, 3),
-+            .value = fastabi_value_n(regs, 4),
-+        };
-+
-+        rc = hvmop_set_param(op);
-+        break;
-+    }
-+
-+    case HVMOP_get_param:
-+    {
-+        struct xen_hvm_param op = {
-+            .domid = fastabi_value_n(regs, 2),
-+            .index = fastabi_value_n(regs, 3),
-+        };
-+
-+        rc = hvmop_get_param(&op);
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = op.value;
-+        break;
-+    }
-+
-+    case HVMOP_flush_tlbs:
-+        rc = hvmop_flush_tlb_all();
-+        break;
-+
-+    case HVMOP_get_time:
-+        fastabi_value_n(regs, 2) = NOW();
-+        break;
-+    
-+    case HVMOP_get_mem_type:
-+    {
-+        struct xen_hvm_get_mem_type op = {
-+            .domid = fastabi_value_n(regs, 2),
-+            .pfn = fastabi_value_n(regs, 3),
-+        };
-+
-+        rc = hvmop_get_mem_type(&op);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = op.mem_type;
-+        break;
-+    }
-+
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
-+
- int hvm_debug_op(struct vcpu *v, int32_t op)
- {
-     int rc = 0;
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 6f8dfdff4a..3759a1aa58 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -19,6 +19,10 @@
- #include <public/hvm/hvm_op.h>
- #include <public/hvm/params.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- long hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     long rc;
-@@ -155,6 +159,24 @@ int hvm_hypercall(struct cpu_user_regs *regs)
- 
-     curr->hcall_preempted = false;
- 
-+    #ifdef CONFIG_FASTABI
-+    if ( eax & 0x40000000U && is_hvm_domain(currd) && mode == X86_MODE_64BIT )
-+    {
-+        unsigned long index = eax & ~0x40000000U;
-+        HVM_DBG_LOG(DBG_LEVEL_HCALL,
-+                    "fasthcall%lu(%lx, %lx, %lx, %lx, %lx, %lx, %lx)",
-+                    index, fastabi_value_n(regs, 1), fastabi_value_n(regs, 2),
-+                    fastabi_value_n(regs, 3), fastabi_value_n(regs, 4),
-+                    fastabi_value_n(regs, 5), fastabi_value_n(regs, 6),
-+                    fastabi_value_n(regs, 7));
-+
-+        fastabi_dispatch(index, regs);
-+
-+        hvmemul_cache_restore(curr, token);
-+        return HVM_HCALL_completed;
-+    }
-+    #endif
-+
-     if ( mode == 8 )
-     {
-         HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%lx, %lx, %lx, %lx, %lx)",
-diff --git a/xen/arch/x86/include/asm/fastabi.h b/xen/arch/x86/include/asm/fastabi.h
-new file mode 100644
-index 0000000000..914504c63d
---- /dev/null
-+++ b/xen/arch/x86/include/asm/fastabi.h
-@@ -0,0 +1,17 @@
-+#ifndef XEN_ASM_FASTABI_H
-+#define XEN_ASM_FASTABI_H
-+
-+#include <asm/current.h>
-+
-+#define fastabi_param_reg0 rax
-+#define fastabi_param_reg1 rdi
-+#define fastabi_param_reg2 rsi
-+#define fastabi_param_reg3 r8
-+#define fastabi_param_reg4 r9
-+#define fastabi_param_reg5 r10
-+#define fastabi_param_reg6 r11
-+#define fastabi_param_reg7 r12
-+
-+#define fastabi_value_n(regs, n) (regs)->fastabi_param_reg##n
-+
-+#endif /* XEN_ASM_FASTABI_H */
-\ No newline at end of file
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 65f07289dd..71bb4e4f2d 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -636,4 +636,10 @@ config PM_STATS
- 	  Enable collection of performance management statistics to aid in
- 	  analyzing and tuning power/performance characteristics of the system
- 
-+config FASTABI
-+	depends on X86 && HVM
-+	bool "Fast HVM ABI (unsupported)"
-+	help
-+		Add support for a alternative fast HVM ABI.
-+
- endmenu
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 98f0873056..362e8f61d7 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -62,6 +62,7 @@ obj-y += wait.o
- obj-bin-y += warning.init.o
- obj-$(CONFIG_XENOPROF) += xenoprof.o
- obj-y += xmalloc_tlsf.o
-+obj-$(CONFIG_FASTABI) += fastabi.o
- 
- obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd earlycpio,$(n).init.o)
- 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 303c338ef2..5a641403b9 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -45,6 +45,10 @@
- #include <xen/trace.h>
- #include <asm/setup.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_X86
- #include <asm/guest.h>
- #endif
-@@ -2266,6 +2270,181 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+long common_vcpu_fast_op(struct cpu_user_regs *regs, int cmd, struct vcpu *v)
-+{
-+    long rc = 0;
-+    struct domain *d = v->domain;
-+    unsigned int vcpuid = v->vcpu_id;
-+
-+    switch ( cmd )
-+    {
-+    case VCPUOP_initialise:
-+        rc = arch_initialise_vcpu(v, (XEN_GUEST_HANDLE(void)) { 
-+            (void *)fastabi_value_n(regs, 2) });
-+        break;
-+
-+    case VCPUOP_up:
-+    {
-+        bool wake = false;
-+
-+        domain_lock(d);
-+        if ( !v->is_initialised )
-+            rc = -EINVAL;
-+        else
-+            wake = test_and_clear_bit(_VPF_down, &v->pause_flags);
-+        domain_unlock(d);
-+        if ( wake )
-+            vcpu_wake(v);
-+    }
-+
-+        break;
-+
-+    case VCPUOP_down:
-+        for_each_vcpu ( d, v )
-+            if ( !test_bit(_VPF_down, &v->pause_flags) )
-+            {
-+               rc = 1;
-+               break;
-+            }
-+
-+        if ( !rc ) /* Last vcpu going down? */
-+        {
-+            domain_shutdown(d, SHUTDOWN_poweroff);
-+            break;
-+        }
-+
-+        rc = 0;
-+        v = d->vcpu[vcpuid];
-+
-+        if ( !test_and_set_bit(_VPF_down, &v->pause_flags) )
-+            vcpu_sleep_nosync(v);
-+
-+        break;
-+
-+    case VCPUOP_is_up:
-+        rc = !(v->pause_flags & VPF_down);
-+        break;
-+
-+    case VCPUOP_get_runstate_info:
-+    {
-+        struct vcpu_runstate_info runstate;
-+        vcpu_runstate_get(v, &runstate);
-+
-+        fastabi_value_n(regs, 2) = runstate.state;
-+        fastabi_value_n(regs, 3) = runstate.state_entry_time;
-+        fastabi_value_n(regs, 4) = runstate.time[0];
-+        fastabi_value_n(regs, 5) = runstate.time[1];
-+        fastabi_value_n(regs, 6) = runstate.time[2];
-+        fastabi_value_n(regs, 7) = runstate.time[3];
-+        break;
-+    }
-+
-+    case VCPUOP_set_periodic_timer:
-+    {
-+        uint64_t period_ns = fastabi_value_n(regs, 3);
-+
-+        if ( period_ns < MILLISECS(1) )
-+            return -EINVAL;
-+
-+        if ( period_ns > STIME_DELTA_MAX )
-+            return -EINVAL;
-+
-+        vcpu_set_periodic_timer(v, period_ns);
-+
-+        break;
-+    }
-+
-+    case VCPUOP_stop_periodic_timer:
-+        vcpu_set_periodic_timer(v, 0);
-+        break;
-+
-+    case VCPUOP_set_singleshot_timer:
-+    {
-+        struct vcpu_set_singleshot_timer set = {
-+            .timeout_abs_ns = fastabi_value_n(regs, 3),
-+            .flags = fastabi_value_n(regs, 4),
-+        };
-+
-+        if ( v != current )
-+            return -EINVAL;
-+
-+        if ( set.timeout_abs_ns < NOW() )
-+        {
-+            /*
-+             * Simplify the logic if the timeout has already expired and just
-+             * inject the event.
-+             */
-+            stop_timer(&v->singleshot_timer);
-+            send_timer_event(v);
-+            break;
-+        }
-+
-+        migrate_timer(&v->singleshot_timer, smp_processor_id());
-+        set_timer(&v->singleshot_timer, set.timeout_abs_ns);
-+
-+        break;
-+    }
-+
-+    case VCPUOP_stop_singleshot_timer:
-+        if ( v != current )
-+            return -EINVAL;
-+
-+        stop_timer(&v->singleshot_timer);
-+
-+        break;
-+
-+    case VCPUOP_register_vcpu_info:
-+    {
-+        struct vcpu_register_vcpu_info info = {
-+            .mfn = fastabi_value_n(regs, 3),
-+            .offset = fastabi_value_n(regs, 4)
-+        };
-+        paddr_t gaddr;
-+
-+        rc = -EINVAL;
-+        gaddr = gfn_to_gaddr(_gfn(info.mfn)) + info.offset;
-+        if ( !~gaddr ||
-+             gfn_x(gaddr_to_gfn(gaddr)) != info.mfn )
-+            break;
-+
-+        /* Preliminary check only; see map_guest_area(). */
-+        rc = -EBUSY;
-+        if ( v->vcpu_info_area.pg )
-+            break;
-+
-+        /* See the BUILD_BUG_ON() in vcpu_info_populate(). */
-+        rc = map_guest_area(v, gaddr, sizeof(vcpu_info_t),
-+                            &v->vcpu_info_area, vcpu_info_populate);
-+        break;
-+    }
-+
-+    case VCPUOP_register_runstate_phys_area:
-+    {
-+        struct vcpu_register_runstate_memory_area area = {
-+            .addr.p = fastabi_value_n(regs, 3)
-+        };
-+
-+        rc = -ENOSYS;
-+        if ( 0 /* TODO: Dom's XENFEAT_runstate_phys_area setting */ )
-+            break;
-+
-+        rc = map_guest_area(v, area.addr.p,
-+                            sizeof(struct vcpu_runstate_info),
-+                            &v->runstate_guest_area,
-+                            runstate_area_populate);
-+        break;
-+    }
-+
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    return rc;
-+}
-+#endif
-+
- #ifdef arch_vm_assist_valid_mask
- long do_vm_assist(unsigned int cmd, unsigned int type)
- {
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index c8c1bfa615..9c8bc0f354 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -34,6 +34,10 @@
- #include <public/event_channel.h>
- #include <xsm/xsm.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_PV_SHIM
- #include <asm/guest.h>
- #endif
-@@ -1507,6 +1511,201 @@ long do_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_event_channel_fast_op(struct cpu_user_regs *regs)
-+{
-+    long rc;
-+    uint64_t cmd = fastabi_value_n(regs, 1);
-+
-+    switch ( cmd )
-+    {
-+    case EVTCHNOP_alloc_unbound: {
-+        struct evtchn_alloc_unbound alloc_unbound = {
-+            .dom = fastabi_value_n(regs, 2),
-+            .remote_dom = fastabi_value_n(regs, 3),
-+            .port = 0,
-+        };
-+        rc = evtchn_alloc_unbound(&alloc_unbound, 0);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = alloc_unbound.port;
-+        break;
-+    }
-+
-+    case EVTCHNOP_bind_interdomain: {
-+        struct evtchn_bind_interdomain bind_interdomain = {
-+            .remote_dom = fastabi_value_n(regs, 2),
-+            .remote_port = fastabi_value_n(regs, 3),
-+            .local_port = 0,
-+        };
-+        rc = evtchn_bind_interdomain(&bind_interdomain, current->domain, 0);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = bind_interdomain.local_port;
-+        break;
-+    }
-+
-+    case EVTCHNOP_bind_virq: {
-+        struct evtchn_bind_virq bind_virq = {
-+            .virq = fastabi_value_n(regs, 2),
-+            .vcpu = fastabi_value_n(regs, 3),
-+            .port = 0,
-+        };
-+        rc = evtchn_bind_virq(&bind_virq, 0);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = bind_virq.port;
-+        break;
-+    }
-+
-+    case EVTCHNOP_bind_ipi: {
-+        struct evtchn_bind_ipi bind_ipi = {
-+            .vcpu = fastabi_value_n(regs, 2),
-+            .port = 0,
-+        };
-+        rc = evtchn_bind_ipi(&bind_ipi);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = bind_ipi.port;
-+        break;
-+    }
-+
-+    case EVTCHNOP_bind_pirq: {
-+        struct evtchn_bind_pirq bind_pirq = {
-+            .pirq = fastabi_value_n(regs, 2),
-+            .flags = fastabi_value_n(regs, 3),
-+        };
-+        rc = evtchn_bind_pirq(&bind_pirq);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 4) = bind_pirq.port;
-+        break;
-+    }
-+
-+    case EVTCHNOP_close: {
-+        struct evtchn_close close = { .port = fastabi_value_n(regs, 2) };
-+        rc = evtchn_close(current->domain, close.port, 1);
-+        break;
-+    }
-+
-+    case EVTCHNOP_send: {
-+        struct evtchn_send send = { .port = fastabi_value_n(regs, 2) };
-+        rc = evtchn_send(current->domain, send.port);
-+        break;
-+    }
-+
-+    case EVTCHNOP_status: {
-+        struct evtchn_status status = {
-+            .dom = fastabi_value_n(regs, 2),
-+            .port = fastabi_value_n(regs, 3),
-+        };
-+        rc = evtchn_status(&status);
-+
-+        if ( !rc )
-+        {
-+            fastabi_value_n(regs, 4) = status.status;
-+            fastabi_value_n(regs, 5) = status.vcpu;
-+
-+            switch (status.status)
-+            {
-+            case EVTCHNSTAT_unbound:
-+                fastabi_value_n(regs, 6) = status.u.unbound.dom;
-+                break;
-+            case EVTCHNSTAT_interdomain:
-+                fastabi_value_n(regs, 6) = status.u.interdomain.dom;
-+                fastabi_value_n(regs, 7) = status.u.interdomain.port;
-+                break;
-+            case EVTCHNSTAT_pirq:
-+                fastabi_value_n(regs, 6) = status.u.pirq;
-+                break;
-+            case EVTCHNSTAT_virq:
-+                fastabi_value_n(regs, 6) = status.u.virq;
-+                break;
-+            default:
-+                break;
-+            }
-+        }
-+        break;
-+    }
-+
-+    case EVTCHNOP_bind_vcpu: {
-+        struct evtchn_bind_vcpu bind_vcpu = {
-+            .vcpu = fastabi_value_n(regs, 2),
-+            .port = fastabi_value_n(regs, 3)
-+        };
-+        rc = evtchn_bind_vcpu(bind_vcpu.port, bind_vcpu.vcpu);
-+        break;
-+    }
-+
-+    case EVTCHNOP_unmask: {
-+        struct evtchn_unmask unmask = { .port = fastabi_value_n(regs, 2) };
-+        rc = evtchn_unmask(unmask.port);
-+        break;
-+    }
-+
-+    case EVTCHNOP_reset:
-+    case EVTCHNOP_reset_cont: {
-+        struct evtchn_reset reset = { .dom = fastabi_value_n(regs, 2) };
-+        struct domain *d;
-+
-+        d = rcu_lock_domain_by_any_id(reset.dom);
-+        if ( d == NULL )
-+        {
-+            rc = -ESRCH;
-+            break;
-+        }
-+
-+        rc = xsm_evtchn_reset(XSM_TARGET, current->domain, d);
-+        if ( !rc )
-+            rc = evtchn_reset(d, cmd == EVTCHNOP_reset_cont);
-+
-+        rcu_unlock_domain(d);
-+
-+        if ( rc == -ERESTART )
-+        {
-+            fastabi_value_n(regs, 1) = EVTCHNOP_reset_cont;
-+            fastabi_make_continuation();
-+            return;
-+        }
-+        break;
-+    }
-+
-+    case EVTCHNOP_init_control: {
-+        struct evtchn_init_control init_control = {
-+            .control_gfn = fastabi_value_n(regs, 2),
-+            .offset = fastabi_value_n(regs, 3),
-+            .vcpu = fastabi_value_n(regs, 4)
-+        };
-+        rc = evtchn_fifo_init_control(&init_control);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 5) = init_control.link_bits;
-+        break;
-+    }
-+
-+    case EVTCHNOP_expand_array: {
-+        struct evtchn_expand_array expand_array = { .array_gfn = fastabi_value_n(regs, 2) };
-+        rc = evtchn_fifo_expand_array(&expand_array);
-+        break;
-+    }
-+
-+    case EVTCHNOP_set_priority: {
-+        struct evtchn_set_priority set_priority = {
-+            .port = fastabi_value_n(regs, 2),
-+            .priority = fastabi_value_n(regs, 3),
-+        };
-+        rc = evtchn_set_priority(&set_priority);
-+        break;
-+    }
-+
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
- 
- int alloc_unbound_xen_event_channel(
-     struct domain *ld, unsigned int lvcpu, domid_t remote_domid,
-diff --git a/xen/common/fastabi.c b/xen/common/fastabi.c
-new file mode 100644
-index 0000000000..96a3b05ee7
---- /dev/null
-+++ b/xen/common/fastabi.c
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/errno.h>
-+#include <xen/fastabi.h>
-+#include <xen/sched.h>
-+
-+#include <public/xen.h>
-+
-+void fastabi_make_continuation(void)
-+{
-+    current->hcall_preempted = true;
-+}
-+
-+void fastabi_dispatch(unsigned long index, struct cpu_user_regs *regs)
-+{
-+    switch (index) {
-+    case __HYPERVISOR_memory_op:
-+        do_memory_fast_op(regs);
-+        break;
-+
-+    case __HYPERVISOR_xen_version:
-+        do_xen_version_fast_op(regs);
-+        break;
-+    
-+    case __HYPERVISOR_grant_table_op:
-+        do_grant_table_fast_op(regs);
-+        break;
-+
-+    case __HYPERVISOR_vcpu_op:
-+        do_vcpu_fast_op(regs);
-+        break;
-+
-+    case __HYPERVISOR_sched_op:
-+        do_sched_fast_op(regs);
-+        break;
-+
-+    case __HYPERVISOR_event_channel_op:
-+        do_event_channel_fast_op(regs);
-+        break;
-+
-+    case __HYPERVISOR_hvm_op:
-+        do_hvm_fast_op(regs);
-+        break;
-+
-+    default:
-+        fastabi_value_n(regs, 0) = -ENOSYS;
-+        break;
-+    }
-+}
-\ No newline at end of file
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 3c3bbca2fc..1476e5e5ca 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -45,6 +45,10 @@
- #include <asm/flushtlb.h>
- #include <asm/guest_atomics.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_PV_SHIM
- #include <asm/guest.h>
- #endif
-@@ -3826,6 +3830,46 @@ long do_grant_table_op(
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_grant_table_fast_op(struct cpu_user_regs *regs)
-+{
-+    long rc = 0;
-+    unsigned int cmd = fastabi_value_n(regs, 1);
-+
-+    switch (cmd)
-+    {
-+    case GNTTABOP_query_size:
-+    {
-+        struct grant_table *gt = current->domain->grant_table;
-+
-+        grant_read_lock(gt);
-+        fastabi_value_n(regs, 2) = nr_grant_frames(gt);
-+        fastabi_value_n(regs, 3) = gt->max_grant_frames;
-+        grant_read_unlock(gt);
-+        break;
-+    }
-+    case GNTTABOP_get_version:
-+    {
-+        struct grant_table *gt = current->domain->grant_table;
-+
-+        fastabi_value_n(regs, 2) = gt->gt_version;
-+        break;
-+    }
-+    case GNTTABOP_set_version:
-+    {
-+        gnttab_set_version_t op = { .version = fastabi_value_n(regs, 2) };
-+        rc = gnttab_set_version(&op);
-+        break;
-+    }
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
-+
- #ifdef CONFIG_COMPAT
- #include "compat/grant_table.c"
- #endif
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index eff6db6c8f..2230ccdcaf 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -18,6 +18,10 @@
- #include <asm/current.h>
- #include <public/version.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_COMPAT
- #include <compat/version.h>
- 
-@@ -772,6 +776,35 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return -ENOSYS;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_xen_version_fast_op(struct cpu_user_regs *regs)
-+{
-+    long cmd = fastabi_value_n(regs, 1);
-+    long rc = 0;
-+
-+    switch ( cmd ) {
-+    case XENVER_version:
-+        rc = (xen_major_version() << 16) | xen_minor_version();
-+        break;
-+    case XENVER_get_features:
-+    {
-+        uint32_t submap = 0, submap_idx = fastabi_value_n(regs, 2);
-+
-+        rc = xenver_get_features(current->domain, submap_idx, &submap);
-+
-+        if ( !rc )
-+            fastabi_value_n(regs, 3) = submap;
-+        break;
-+    }
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 3688e6dd50..689218390e 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -35,6 +35,10 @@
- #include <public/memory.h>
- #include <xsm/xsm.h>
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_X86
- #include <asm/guest.h>
- #endif
-@@ -1864,6 +1868,112 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
-+#ifdef CONFIG_FASTABI
-+void do_memory_fast_op(struct cpu_user_regs *regs)
-+{
-+    unsigned long cmd = fastabi_value_n(regs, 1);
-+    unsigned long start_extent = cmd >> MEMOP_EXTENT_SHIFT;
-+    long rc;
-+    int op = cmd & MEMOP_CMD_MASK;
-+
-+    switch ( op ) {
-+    case XENMEM_add_to_physmap:
-+    {
-+        struct xen_add_to_physmap xatp = {
-+            .size = fastabi_value_n(regs, 2),
-+            .space = fastabi_value_n(regs, 3),
-+            .idx = fastabi_value_n(regs, 4),
-+            .gpfn = fastabi_value_n(regs, 5)
-+        };
-+
-+        BUILD_BUG_ON((typeof(xatp.size))-1 > (UINT_MAX >> MEMOP_EXTENT_SHIFT));
-+
-+        /* Check for malicious or buggy input. */
-+        if ( start_extent != (typeof(xatp.size))start_extent )
-+        {
-+            rc = -EDOM;
-+            break;
-+        }
-+
-+        /* Foreign mapping is only possible via add_to_physmap_batch. */
-+        if ( xatp.space == XENMAPSPACE_gmfn_foreign )
-+        {
-+            rc = -ENOSYS;
-+            break;
-+        }
-+
-+        rc = xatp_permission_check(current->domain, xatp.space);
-+        if ( rc )
-+            break;
-+
-+        rc = xenmem_add_to_physmap(current->domain, &xatp, start_extent);
-+
-+        if ( xatp.space == XENMAPSPACE_gmfn_range && rc > 0 )
-+            panic("TODO");
-+            //rc = hypercall_create_continuation(
-+            //         __HYPERVISOR_memory_op, "lh",
-+            //         op | (rc << MEMOP_EXTENT_SHIFT), arg);
-+        break;
-+    }
-+    
-+    case XENMEM_remove_from_physmap:
-+    {
-+        unsigned long gpfn = fastabi_value_n(regs, 5);
-+        struct page_info *page;
-+
-+        if ( unlikely(start_extent) )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        if ( !paging_mode_translate(current->domain) )
-+        {
-+            rc = -EACCES;
-+            break;
-+        }
-+
-+        page = get_page_from_gfn(current->domain, gpfn, NULL, P2M_ALLOC);
-+        if ( page )
-+        {
-+            rc = guest_physmap_remove_page(current->domain, _gfn(gpfn),
-+                                           page_to_mfn(page), 0);
-+            put_page(page);
-+        }
-+        else
-+            rc = -ENOENT;
-+
-+        break;
-+    }
-+    
-+    case XENMEM_memory_map:
-+    {
-+        struct domain *d = current->domain;
-+        unsigned long nr_entries = fastabi_value_n(regs, 2);
-+        paddr_t buffer_addr = fastabi_value_n(regs, 3);
-+
-+        spin_lock(&d->arch.e820_lock);
-+
-+        if ( nr_entries > d->arch.nr_e820 )
-+            nr_entries = d->arch.nr_e820;
-+
-+        if ( hvm_copy_to_guest_phys(buffer_addr, d->arch.e820,
-+                                    nr_entries * sizeof(struct e820entry), current) )
-+            rc = -EFAULT;
-+
-+        spin_unlock(&d->arch.e820_lock);
-+        break;
-+    }
-+
-+    default:
-+        rc = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = rc;
-+}
-+#endif
-+
- void clear_domain_page(mfn_t mfn)
- {
-     void *ptr = map_domain_page(mfn);
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index b2c784c60e..51b2fbc00a 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -41,6 +41,10 @@
- 
- #include "private.h"
- 
-+#ifdef CONFIG_FASTABI
-+#include <xen/fastabi.h>
-+#endif
-+
- #ifdef CONFIG_XEN_GUEST
- #include <asm/guest.h>
- #else
-@@ -1896,6 +1900,110 @@ void domain_update_node_aff(struct domain *d, struct affinity_masks *affinity)
- 
- typedef long ret_t;
- 
-+#ifdef CONFIG_FASTABI
-+void do_sched_fast_op(struct cpu_user_regs *regs)
-+{
-+    long ret = 0;
-+    unsigned long cmd = fastabi_value_n(regs, 1);
-+
-+    switch ( cmd )
-+    {
-+    case SCHEDOP_yield:
-+    {
-+        ret = vcpu_yield();
-+        break;
-+    }
-+
-+    case SCHEDOP_block:
-+    {
-+        vcpu_block_enable_events();
-+        break;
-+    }
-+
-+    case SCHEDOP_shutdown:
-+    {
-+        struct sched_shutdown sched_shutdown = {
-+            .reason = fastabi_value_n(regs, 2)
-+        };
-+
-+        TRACE_TIME(TRC_SCHED_SHUTDOWN, current->domain->domain_id,
-+                   current->vcpu_id, sched_shutdown.reason);
-+        ret = domain_shutdown(current->domain, (u8)sched_shutdown.reason);
-+
-+        break;
-+    }
-+
-+    case SCHEDOP_shutdown_code:
-+    {
-+        struct sched_shutdown sched_shutdown = {
-+            .reason = fastabi_value_n(regs, 2)
-+        };
-+        struct domain *d = current->domain;
-+
-+        TRACE_TIME(TRC_SCHED_SHUTDOWN_CODE, d->domain_id, current->vcpu_id,
-+                   sched_shutdown.reason);
-+
-+        spin_lock(&d->shutdown_lock);
-+        if ( d->shutdown_code == SHUTDOWN_CODE_INVALID )
-+            d->shutdown_code = (u8)sched_shutdown.reason;
-+        spin_unlock(&d->shutdown_lock);
-+
-+        ret = 0;
-+        break;
-+    }
-+
-+    case SCHEDOP_poll:
-+    {
-+        uint64_t timeout = fastabi_value_n(regs, 2);
-+        evtchn_port_t port = fastabi_value_n(regs, 3);
-+
-+        ret = vcpu_poll(1, timeout, &port);
-+
-+        break;
-+    }
-+
-+    case SCHEDOP_watchdog:
-+    {
-+        struct sched_watchdog sched_watchdog = {
-+            .id = fastabi_value_n(regs, 2),
-+            .timeout = fastabi_value_n(regs, 3)
-+        };
-+
-+        ret = domain_watchdog(
-+            current->domain, sched_watchdog.id, sched_watchdog.timeout);
-+        break;
-+    }
-+
-+    case SCHEDOP_pin_override:
-+    {
-+        struct sched_pin_override sched_pin_override = {
-+            .pcpu = fastabi_value_n(regs, 2),
-+        };
-+        unsigned int cpu;
-+
-+        ret = -EPERM;
-+        if ( !is_hardware_domain(current->domain) )
-+            break;
-+
-+        ret = -EINVAL;
-+        if ( sched_pin_override.pcpu >= NR_CPUS )
-+           break;
-+
-+        cpu = sched_pin_override.pcpu < 0 ? NR_CPUS : sched_pin_override.pcpu;
-+        ret = vcpu_temporary_affinity(current, cpu, VCPU_AFFINITY_OVERRIDE);
-+
-+        break;
-+    }
-+
-+    default:
-+        ret = -ENOSYS;
-+        break;
-+    }
-+
-+    fastabi_value_n(regs, 0) = ret;
-+}
-+#endif
-+
- #endif /* !COMPAT */
- 
- ret_t do_sched_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-@@ -1961,7 +2069,6 @@ ret_t do_sched_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-             break;
- 
-         ret = do_poll(&sched_poll);
--
-         break;
-     }
- 
-diff --git a/xen/include/public/event_channel.h b/xen/include/public/event_channel.h
-index c5548d206c..969c9ec264 100644
---- a/xen/include/public/event_channel.h
-+++ b/xen/include/public/event_channel.h
-@@ -208,10 +208,17 @@ struct evtchn_status {
-         } unbound;                 /* EVTCHNSTAT_unbound */
-         struct {
-             domid_t dom;
-+            uint16_t _pad;
-             evtchn_port_t port;
-         } interdomain;             /* EVTCHNSTAT_interdomain */
-         uint32_t pirq;             /* EVTCHNSTAT_pirq        */
-         uint32_t virq;             /* EVTCHNSTAT_virq        */
-+#ifndef __XEN__
-+        struct {
-+            uint32_t _output1;
-+            uint32_t _output2;
-+        };
-+#endif
-     } u;
- };
- typedef struct evtchn_status evtchn_status_t;
-diff --git a/xen/include/public/fastabi.h b/xen/include/public/fastabi.h
-new file mode 100644
-index 0000000000..51f5085ce6
---- /dev/null
-+++ b/xen/include/public/fastabi.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __XEN_PUBLIC_FASTABI_H__
-+#define __XEN_PUBLIC_FASTABI_H__
-+
-+#if defined(__x86_64__)
-+#define __HYPERVISOR_FASTABI_MASK 0x40000000U
-+
-+enum xen_hypercall_vendor {
-+    Intel,
-+    Amd
-+};
-+#else
-+#define __HYPERVISOR_FASTABI_MASK 0
-+
-+enum xen_hypercall_vendor {
-+    Native
-+};
-+#endif
-+
-+#endif
-diff --git a/xen/include/xen/fastabi.h b/xen/include/xen/fastabi.h
-new file mode 100644
-index 0000000000..83ede943e0
---- /dev/null
-+++ b/xen/include/xen/fastabi.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef XEN_FASTABI_H
-+#define XEN_FASTABI_H
-+
-+#include <asm/fastabi.h>
-+
-+void fastabi_dispatch(unsigned long index, struct cpu_user_regs *regs);
-+void fastabi_make_continuation(void);
-+
-+void do_event_channel_fast_op(struct cpu_user_regs *regs);
-+
-+long common_vcpu_fast_op(struct cpu_user_regs *regs, int cmd, struct vcpu *v);
-+void do_vcpu_fast_op(struct cpu_user_regs *regs);
-+void do_hvm_fast_op(struct cpu_user_regs *regs);
-+void do_memory_fast_op(struct cpu_user_regs *regs);
-+void do_grant_table_fast_op(struct cpu_user_regs *regs);
-+void do_sched_fast_op(struct cpu_user_regs *regs);
-+void do_xen_version_fast_op(struct cpu_user_regs *regs);
-+
-+#endif /* XEN_FASTABI_H */
-\ No newline at end of file
--- 
-2.50.1
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e6aa30e-09d0-4249-fa13-08dde0c8e197
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Aug 2025 15:39:13.9263
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QNvBoVAaelmX8ZDMmBB0KAmurQPXb8yCcozfF+OuZMBdhM5LQqWR5mBG2jukdFex5pfo7jyacjxV7kNG0eoNaAg6A+otr09b2ilYPJrPREA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6388
 
 
+Hi Leonid,
 
-Teddy Astie | Vates XCP-ng Developer
+Leonid Komarianskyi <Leonid_Komarianskyi@epam.com> writes:
 
-XCP-ng & Xen Orchestra - Vates solutions
+> Introduced two new helper functions: gic_is_valid_irq and
+> gic_is_shared_irq. The first function helps determine whether an IRQ
+> number is less than the number of lines supported by hardware. The
+> second function additionally checks if the IRQ number falls within the
+> SPI range. Also, updated the appropriate checks to use these new helper
+> functions.
+>
+> The current checks for the real GIC are very similar to those for the
+> vGIC but serve a different purpose. For GIC-related code, the interrupt
+> numbers should be validated based on whether the hardware can operate
+> with such interrupts. On the other hand, for the vGIC, the indexes must
+> also be verified to ensure they are available for a specific domain. The
+> first reason for introducing these helper functions is to avoid
+> potential confusion with vGIC-related checks. The second reason is to
+> consolidate similar code into separate functions, which can be more
+> easily extended by additional conditions, e.g., when implementing
+> extended SPI interrupts.
+>
+> The changes, which replace open-coded checks with the use of the new
+> helper functions, do not introduce any functional changes, as the helper
+> functions follow the current IRQ index verification logic.
+>
+> Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
+>
+> ---
+> Changes in V2:
+> - introduced this patch
+> ---
+>  xen/arch/arm/gic.c             | 2 +-
+>  xen/arch/arm/include/asm/gic.h | 9 +++++++++
+>  xen/arch/arm/irq.c             | 2 +-
+>  3 files changed, 11 insertions(+), 2 deletions(-)
+>
+> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+> index e80fe0ca24..eb0346a898 100644
+> --- a/xen/arch/arm/gic.c
+> +++ b/xen/arch/arm/gic.c
+> @@ -111,7 +111,7 @@ static void gic_set_irq_priority(struct irq_desc *des=
+c, unsigned int priority)
+>  void gic_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+>  {
+>      ASSERT(priority <=3D 0xff);     /* Only 8 bits of priority */
+> -    ASSERT(desc->irq < gic_number_lines());/* Can't route interrupts tha=
+t don't exist */
+> +    ASSERT(gic_is_valid_irq(desc->irq));/* Can't route interrupts that d=
+on't exist */
+>      ASSERT(test_bit(_IRQ_DISABLED, &desc->status));
+>      ASSERT(spin_is_locked(&desc->lock));
+> =20
+> diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gi=
+c.h
+> index 541f0eeb80..ac0b7b783e 100644
+> --- a/xen/arch/arm/include/asm/gic.h
+> +++ b/xen/arch/arm/include/asm/gic.h
+> @@ -306,6 +306,15 @@ extern void gic_dump_vgic_info(struct vcpu *v);
+> =20
+>  /* Number of interrupt lines */
+>  extern unsigned int gic_number_lines(void);
+> +static inline bool gic_is_valid_irq(unsigned int irq)
 
-web: https://vates.tech
+We need to do something about naming, because this function completely
+ignores presence of LPIs. What I mean, that it will return "false" for
+any LPI, while you can't argue that LPI is a valid interrupt :)
+I understand that this is expected behavior by current callers, but the
+function name is misleading.
 
+Name like "gic_is_valid_non_lpi()" seems to mouthful, but it is the best
+I can come up with.
+
+> +{
+> +    return irq < gic_number_lines();
+> +}
+> +
+> +static inline bool gic_is_shared_irq(unsigned int irq)
+> +{
+> +    return (irq >=3D NR_LOCAL_IRQS && gic_is_valid_irq(irq));
+
+Again, because of misleading name of gic_is_valid_irq() it may seem that
+this function will return "true" for LPIs as well...
+
+> +}
+> =20
+>  /* IRQ translation function for the device tree */
+>  int gic_irq_xlate(const u32 *intspec, unsigned int intsize,
+> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+> index 03fbb90c6c..12c70d02cc 100644
+> --- a/xen/arch/arm/irq.c
+> +++ b/xen/arch/arm/irq.c
+> @@ -415,7 +415,7 @@ err:
+>  bool is_assignable_irq(unsigned int irq)
+>  {
+>      /* For now, we can only route SPIs to the guest */
+> -    return (irq >=3D NR_LOCAL_IRQS) && (irq < gic_number_lines());
+> +    return gic_is_shared_irq(irq);
+>  }
+> =20
+>  /*
+
+--=20
+WBR, Volodymyr=
 
