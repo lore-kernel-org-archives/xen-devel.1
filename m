@@ -4,36 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16D49CA0EEB
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Aug 2025 20:10:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1090468.1447666 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2129CA0EED
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Aug 2025 21:43:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1090520.1447706 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upY5A-0000bX-N8; Fri, 22 Aug 2025 20:09:52 +0000
+	id 1upZXL-0004ML-UA; Fri, 22 Aug 2025 21:43:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1090468.1447666; Fri, 22 Aug 2025 20:09:52 +0000
+Received: by outflank-mailman (output) from mailman id 1090520.1447706; Fri, 22 Aug 2025 21:43:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upY5A-0000bQ-KK; Fri, 22 Aug 2025 20:09:52 +0000
-Received: by outflank-mailman (input) for mailman id 1090468;
- Fri, 22 Aug 2025 20:09:51 +0000
+	id 1upZXL-0004MB-QT; Fri, 22 Aug 2025 21:43:03 +0000
+Received: by outflank-mailman (input) for mailman id 1090520;
+ Fri, 22 Aug 2025 21:43:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4vUW=3C=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1upY59-0000at-2Y
- for xen-devel@lists.xenproject.org; Fri, 22 Aug 2025 20:09:51 +0000
-Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=21kD=3C=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1upZXJ-0003pV-W2
+ for xen-devel@lists.xenproject.org; Fri, 22 Aug 2025 21:43:01 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20612.outbound.protection.outlook.com
+ [2a01:111:f403:2415::612])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f1f8be6f-7f93-11f0-a32b-13f23c93f187;
- Fri, 22 Aug 2025 22:09:48 +0200 (CEST)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:8ac4:0:0:0:0:f7])
- by mailhost.m5p.com (8.18.1/8.17.1) with ESMTPS id 57MK9EEh068393
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Fri, 22 Aug 2025 16:09:19 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.18.1/8.15.2/Submit) id 57MK9DMg068392;
- Fri, 22 Aug 2025 13:09:13 -0700 (PDT) (envelope-from ehem)
+ id f93d803d-7fa0-11f0-a32b-13f23c93f187;
+ Fri, 22 Aug 2025 23:43:01 +0200 (CEST)
+Received: from BN8PR16CA0033.namprd16.prod.outlook.com (2603:10b6:408:4c::46)
+ by MN2PR12MB4423.namprd12.prod.outlook.com (2603:10b6:208:24f::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.16; Fri, 22 Aug
+ 2025 21:42:56 +0000
+Received: from MN1PEPF0000ECD9.namprd02.prod.outlook.com
+ (2603:10b6:408:4c:cafe::d) by BN8PR16CA0033.outlook.office365.com
+ (2603:10b6:408:4c::46) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.16 via Frontend Transport; Fri,
+ 22 Aug 2025 21:42:56 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MN1PEPF0000ECD9.mail.protection.outlook.com (10.167.242.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9052.8 via Frontend Transport; Fri, 22 Aug 2025 21:42:55 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Aug
+ 2025 16:42:55 -0500
+Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Fri, 22 Aug 2025 16:42:54 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,157 +61,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1f8be6f-7f93-11f0-a32b-13f23c93f187
-Date: Fri, 22 Aug 2025 13:09:13 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Demi Marie Obenour <demiobenour@gmail.com>, xen-users@lists.xenproject.org,
-        xen-devel@lists.xenproject.org,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Julien Grall <julien@xen.org>,
-        Bertrand Marquis <bertrand.marquis@arm.com>,
-        Michal Orzel <michal.orzel@amd.com>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Paul Leiber <paul@onlineschubla.de>
-Subject: Re: Consider changing CONFIG_ACPI default on ARM?
-Message-ID: <aKjOaT-P74Yh4-bi@mattapan.m5p.com>
-References: <CAO_48GG1Tg0d3ATnNAYNr0cg7Ty_zsnzT29=dpkk99DxyTWcmg@mail.gmail.com>
- <fceb5df8-d628-479d-acb3-d1d26409fbac@onlineschubla.de>
- <aJLae1Nl0pyOZgyh@mattapan.m5p.com>
- <1b96f2f3-55a2-4b33-84b1-a7c18d38d10c@suse.com>
- <6e9b5265-7a3b-4fd5-b14e-0e60a8b49833@gmail.com>
- <a3092ae1-d836-4403-8fb5-30593fcd2fb8@suse.com>
+X-Inumbo-ID: f93d803d-7fa0-11f0-a32b-13f23c93f187
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HDyctpuzeIiqxU5e4vZT4iJRtYNAAgi6RtgxYibmke2uCxMP3qVXlBIamKE4Or4N8Ip/sX9QloUQt1bNFeffOPLmg0lFlWHHms+qi0bMIMHT+rcwBkk000pxlD+c00Rc3QBNdWwz5CnR2DV1pvGs2qbpwt+FIEzw2GMSjpkOygowE3I4Jt271cIN+7caguek4RQcuWw+A8ly+qE+V6243cSk7BMClNX/aX+Ks4XE6SEi4vfbHgJzTRzQiK5dwkGcHZjNVQKf4S46UbiJl7u06jpHBjKj6PzFRwvVIppSM12v3V095frR67eBlDkUaVc0cyd45b/uPVowiv0ZnDmfHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=19cplcKMnFgiawUGNbnlhakIWSLzp3vbDklKXu2XH0Y=;
+ b=Nxi9H3XZ4MTZyVLy3bI2C57ewHkxFmmtik7hGhNf5jNq2En/6aXbJEXulomP1DHEl2gsbM2StAd3uBx0ARbqlnh1kLdAvw6NRMukYRP3qRRCg3FrlCTC6IxzW8guNLJe84aZlRLCj4A1aT/oK71aABlJIgBiKcuJm/aLM5q7PaLLHqawupkYE70dT+BiQbtUnCHEkfkjX/6lmltcJQ8VVL43FwGDcjJAUj5xtwcOawFq0V9mo81eBuGt4MWZTUW6SydLyV2EdgINjXhEuWcGOPD6pad0hbcpilcVmpcxaYpLQN/empTx+euw7TxyY0igks60hiJbjQCnVoLP4bfk2A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=19cplcKMnFgiawUGNbnlhakIWSLzp3vbDklKXu2XH0Y=;
+ b=zCSZVj/aTGHR7T001loCiG4E3WTF4FhaXlm4q1V3dXq90tHKE+axQhuVTL5ZLkmHjvg3UlEvcgrviQG00eh9sIdjqrcD5+LiM6pBdmEe/mbgDjty8SZXdeimEqB4SQhT5ge3g03psFr79oR+CSy0PAA8nkvlxMoeKFn0th64xfY=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jason Andryuk
+	<jason.andryuk@amd.com>, Anthony PERARD <anthony.perard@vates.tech>, "Juergen
+ Gross" <jgross@suse.com>
+Subject: [PATCH v2 3/3] libs/guest: Set console as disconnected on resume
+Date: Fri, 22 Aug 2025 17:39:45 -0400
+Message-ID: <20250822213946.245307-4-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250822213946.245307-1-jason.andryuk@amd.com>
+References: <20250822213946.245307-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a3092ae1-d836-4403-8fb5-30593fcd2fb8@suse.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD9:EE_|MN2PR12MB4423:EE_
+X-MS-Office365-Filtering-Correlation-Id: 33f82a79-9729-4bd1-6c77-08dde1c4daed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?WpnTmZq8+bC9CVnfcmk8u1EdI6pZGvFOMWv1ZAhTKsZMKnG+C2c32rGnjuYb?=
+ =?us-ascii?Q?nVffjGs+A2BkR2HCfc16BTAEiSKbTmuLtdofIgn8BgY7xNH78hIgZnbad9jt?=
+ =?us-ascii?Q?JsQbAlFsKtoD+oLo0YAJ0ROZdc9eCYaJWH2SPep+81wwF6RMC1H/SxPv1o3V?=
+ =?us-ascii?Q?TsmwEdmsJ0j4pz7wd0FVf25vK+Rn9V/JRN8A/63FP6kPWtanZ4/1FoQkH4Ja?=
+ =?us-ascii?Q?5lqgoyUq24BMjR9PTDf+ZVFZGCEYZAMSfe4UUmPA844LSYoUK1raSNUDl6i9?=
+ =?us-ascii?Q?/IRlD9WkOf7jKDC6wUVpjgLBb5Azf6BZVUXD/S+ETPJg4qQvcEnwV/XPj5Km?=
+ =?us-ascii?Q?PBjNa8wMheTkrx0ZvsVYgCAWxQWr8DYDz1JRVeipXBu9n1jxKeDv4j+FjjxC?=
+ =?us-ascii?Q?P6xnj36aZOc/zMN8s4RoFl6WvW4AXtFiaaxolkbhwbcjdzLF5dmRA1UxhY+4?=
+ =?us-ascii?Q?zyZlWNMpqOaDj/Q91Yj+/RDK9X+P+oAzWYimlKoZDTB6Ps+2R3Pcr30+OED4?=
+ =?us-ascii?Q?XisbuFEIFfszaroJH1t5jT0zGAcdOBVyTbBtKFUTWh2Q38F6ulFDW7b3xahG?=
+ =?us-ascii?Q?UTHzMTFHBqNbY+CouR5DTbi81HUoWUH+DQBuNbNaqqgmae9V7Xcl6D+yBtiW?=
+ =?us-ascii?Q?9KvOPRjy3vbmm2tApXAByO6duJBdtqRzGi0BMUi89IQN166sesYeb1BYRWps?=
+ =?us-ascii?Q?9jTXFGQ9ojdTlyWywrP7J1PSNZ7X3MvVMMHdvsCB85zjRF2/yAGeVIOT9Jz2?=
+ =?us-ascii?Q?YXhlSsBBs9MdOKy/w8JChwb5TiCcGFk5iBKHH/FR/znaJYeF9WFhrduikMia?=
+ =?us-ascii?Q?KVz3bPNVFU5URWkm7H5aYsHlhz6c5cwBnlTdpTxfcU/bAzLz1CXsglAadPCU?=
+ =?us-ascii?Q?3S4MHYTZK0Q79ut1gWLjr9xIceYVJo4yBjzWJQH2JQbJUmehhN73hIgounsV?=
+ =?us-ascii?Q?FR9Yjg9FwnqGrnnmuNiVYYgYqLDi7Z9ShOXBdl+Bm/izJgy9yHstSWDYragW?=
+ =?us-ascii?Q?j6H+xcn9FkH7lATUbwmd/jJYoXos/3srqe/A+hIN+2onasj0TVipxVkr3Q1I?=
+ =?us-ascii?Q?c9kUQ5A9s4HHg6qOugtI2A/M8zVhAI2aykhpL8W0V5K/XC9zTenNyZmu/uBc?=
+ =?us-ascii?Q?XkROmrYbKUfLSChOkTcDvMiXgqE+2GxQUTl5uODjMnWyCKbnVv/xuppYomNI?=
+ =?us-ascii?Q?U0QRFR40KSnzXAxjdutZiKuWvkeVAEUhDRSL12Y8HsNgvkE4XNKqLihvW66f?=
+ =?us-ascii?Q?+f6gKExespGy7IWaTBQWYZaEQ6EFEz46dFSPs5eNbL6df7gO5Tx54h2WKaaE?=
+ =?us-ascii?Q?e1tW5gEhKZZ3owbExu5AcCfdUy8lETNdMEv37PY1dVP4rcVOLN9RQJhPYt9H?=
+ =?us-ascii?Q?+Ds7OM0AjyzTUhSx/GZpyqHmtBLnkaoCLnRT9uimgofWx9qm26AwBHSGu5FP?=
+ =?us-ascii?Q?A5x1h2EbNYJu4MCY5R1W4pREWWZyzAtAFieJflE9jxs2nQWyFYLaoe8zoa2w?=
+ =?us-ascii?Q?2XkPIomE+DJbjSnebcA1/Q3Zo5U8B8POVAbq?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 21:42:55.8874
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33f82a79-9729-4bd1-6c77-08dde1c4daed
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MN1PEPF0000ECD9.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4423
 
-On Fri, Aug 15, 2025 at 10:14:42AM +0200, Jan Beulich wrote:
-> On 14.08.2025 23:27, Demi Marie Obenour wrote:
-> > On 8/14/25 02:55, Jan Beulich wrote:
-> >> On 06.08.2025 06:30, Elliott Mitchell wrote:
-> >>> On Tue, Jul 01, 2025 at 10:01:13PM +0200, Paul Leiber wrote:
-> >>>>
-> >>>> Unfortunately, I don't have a direct answer to the question (as is so often
-> >>>> the case, due to my limited knowledge and experience). However, I am
-> >>>> successfully running Xen on a RPi 4 (mostly, except for some VLAN related
-> >>>> networking issues).
-> >>>>
-> >>>> I used instructions in [1] to install vanilla Debian on the RPi, including
-> >>>> UEFI boot and grub. I then compiled Xen with expert options and ACPI
-> >>>> enabled.
-> >>>>
-> >>>> I don't know if there are better solutions. For example, I suffer from the
-> >>>> fact that I2C doesn't work when using UEFI boot on a RPi. Nowadays, Debian
-> >>>> provides their own vanilla Debian images for RPi and with working I2C, but
-> >>>> these images are using a different boot method that I didn't know how to use
-> >>>> with Xen.  So far, the procedure described above seems to be the easiest
-> >>>> solution for me.
-> >>>
-> >>>
-> >>>> [1] https://forums.raspberrypi.com/viewtopic.php?t=282839
-> >>>>
-> >>>> Am 30.06.2025 um 12:35 schrieb Sumit Semwal:
-> >>>>>
-> >>>>> I've just begun to experiment with the Raspberry Pi 5, trying to run a
-> >>>>> simple xen + Dom0 setup, using uBoot, and the bookworm based Rpi
-> >>>>> distro.
-> >>>>>
-> >>>>> I've tried combinations of the following setup:
-> >>>>>
-> >>>>> 1. prebuilt Rpi5 kernel + dtbs, and have also tried to build them from
-> >>>>> source [1]
-> >>>>> 2. Xen from upstream [2] and xen-troops [3]
-> >>>>> 3. upstream uBoot from [4]
-> >>>>>
-> >>>>> but with the same result: [short log below; I can provide a fuller log
-> >>>>> if needed]
-> >>>>>
-> >>>>> (XEN) DT: ** translation for device /axi/msi-controller@1000130000 **
-> >>>>> (XEN) DT: bus is default (na=2, ns=2) on /axi
-> >>>>> (XEN) DT: translating address:<3> 000000ff<3> fffff000<3>
-> >>>>> (XEN) DT: parent bus is default (na=2, ns=1) on /
-> >>>>> (XEN) DT: walking ranges...
-> >>>>> (XEN) DT: default map, cp=0, s=1000000000, da=fffffff000
-> >>>>> (XEN) DT: default map, cp=1000000000, s=100000000, da=fffffff000
-> >>>>> (XEN) DT: default map, cp=1400000000, s=400000000, da=fffffff000
-> >>>>> (XEN) DT: default map, cp=1800000000, s=400000000, da=fffffff000
-> >>>>> (XEN) DT: default map, cp=1c00000000, s=400000000, da=fffffff000
-> >>>>> (XEN) DT: not found !
-> >>>>> (XEN) Unable to retrieve address 1 for /axi/msi-controller@1000130000
-> >>>>> (XEN) Device tree generation failed (-22).
-> >>>>> (XEN) debugtrace_dump() global buffer starting
-> >>>>> 1 cpupool_create(pool=0,sched=6)
-> >>>>> 2 Created cpupool 0 with scheduler SMP Credit Scheduler rev2 (credit2)
-> >>>>> 3 cpupool_add_domain(dom=0,pool=0) n_dom 1 rc 0
-> >>>>> (XEN) wrap: 0
-> >>>>> (XEN) debugtrace_dump() global buffer finished
-> >>>>> (XEN)
-> >>>>> (XEN) ****************************************
-> >>>>> (XEN) Panic on CPU 0:
-> >>>>> (XEN) Could not set up DOM0 guest OS (rc = -22)
-> >>>>> (XEN) ****************************************
-> >>>>>
-> >>>>>
-> >>>>> I'm certain I'm missing something, but before I delve deeper, I just
-> >>>>> wanted to ask if this is a known issue, and if so, are there any
-> >>>>> workarounds or solutions available for this?
-> >>>>>
-> >>>>> Any help about this is highly appreciated!
-> >>>>>
-> >>>>> Thanks and Best regards,
-> >>>>> Sumit.
-> >>>>>
-> >>>>> [1]:  https://github.com/raspberrypi/linux rpi-6.12.y branch
-> >>>>> [2]: git://xenbits.xen.org/xen.git - main branch
-> >>>>> [3] xen-troops https://github.com/xen-troops/xen - rpi5_dev branch
-> >>>>> [4]: https://github.com/u-boot/u-boot.git master branch
-> >>>
-> >>> Ultimately Debian is choosing to leave most defaults alone.  So far the
-> >>> Xen developers have left CONFIG_ACPI defaulting to off on ARM*.  The
-> >>> Debian project doesn't have paid people to support Raspberry PI hardware,
-> >>> despite being rather common.  As a result there aren't any official
-> >>> Raspberry PI images, but people associated with Tianocore have gotten
-> >>> generic images to boot on Raspberry PI hardware.
-> >>>
-> >>> I'm unsure of the likelihood of getting the Debian maintainers to
-> >>> override the default.  Yet due being by far the simplest way to install
-> >>> Debian and Xen on a very common ARM64 platform, perhaps the Xen
-> >>> developers should consider changing?
-> >>
-> >> In an open source project everyone is a developer. There is a
-> >> significant amount of work someone needs to pick up to change this
-> >> SUPPORT.md entry:
-> >>
-> >> ### Host ACPI (via Domain 0)
-> >>
-> >>     Status, x86 PV: Supported
-> >>     Status, ARM: Experimental
-> >>
-> >> Parties interested in changing the support status of any component are the
-> >> primary candidates to actually carry out the necessary work.
-> > 
-> > What is that work?
-> 
-> To determine what exactly needs doing is part of the exercise. I, for one, am
-> unaware of a concrete written down set of things which need doing.
+There is currently an asymmetry between HVM where the page is cleared
+and PV where the contents are restored.
 
-Since you're not pointing to anything definite, could it be everything
-has been resolved?  We've got at least two people for whom ACPI on ARM
-works pretty well.  There may be many more using it.  Perhaps this
-should even be done on the 4.20 branch given how long this has been
-working?
+Add xc_dom_console_set_disconnected() to only set the connection flag
+for PV guests.
 
-The one remaining major issue was the state of EFI-FB support.  There
-was a patch which had that working for Linux kernel 5.10, but that might
-need more work for a proper solution.
+xenconsoled is responsible for setting the console connected when it
+attaches.
 
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+v2:
+New
+---
+ tools/include/xenguest.h                 |  2 ++
+ tools/libs/guest/xg_dom_boot.c           | 24 ++++++++++++++++++++----
+ tools/libs/guest/xg_sr_restore_x86_hvm.c |  2 +-
+ tools/libs/guest/xg_sr_restore_x86_pv.c  |  1 +
+ 4 files changed, 24 insertions(+), 5 deletions(-)
 
+diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
+index 1d5a6d3509..c88958faa9 100644
+--- a/tools/include/xenguest.h
++++ b/tools/include/xenguest.h
+@@ -337,6 +337,8 @@ int xc_dom_boot_image(struct xc_dom_image *dom);
+ int xc_dom_compat_check(struct xc_dom_image *dom);
+ int xc_dom_console_init(xc_interface *xch, uint32_t guest_domid,
+                         xen_pfn_t console_gfn);
++int xc_dom_console_set_disconnected(xc_interface *xch, uint32_t guest_domid,
++                                    xen_pfn_t console_gfn);
+ int xc_dom_gnttab_init(struct xc_dom_image *dom);
+ int xc_dom_gnttab_seed(xc_interface *xch, uint32_t guest_domid,
+                        bool is_hvm,
+diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
+index b5f248e642..f51b6a78c8 100644
+--- a/tools/libs/guest/xg_dom_boot.c
++++ b/tools/libs/guest/xg_dom_boot.c
+@@ -428,9 +428,10 @@ int xc_dom_gnttab_init(struct xc_dom_image *dom)
+                               dom->console_domid, dom->xenstore_domid);
+ }
+ 
+-int xc_dom_console_init(xc_interface *xch,
+-                        uint32_t domid,
+-                        unsigned long dst_pfn)
++static int dom_console_init(xc_interface *xch,
++                            uint32_t domid,
++                            unsigned long dst_pfn,
++                            bool clear)
+ {
+     const size_t size = PAGE_SIZE;
+     struct xencons_interface *xencons = xc_map_foreign_range(
+@@ -439,7 +440,8 @@ int xc_dom_console_init(xc_interface *xch,
+     if ( xencons == NULL )
+         return -1;
+ 
+-    memset(xencons, 0, size);
++    if (clear)
++        memset(xencons, 0, size);
+     xencons->connection = XENCONSOLE_DISCONNECTED;
+ 
+     munmap(xencons, size);
+@@ -447,6 +449,20 @@ int xc_dom_console_init(xc_interface *xch,
+     return 0;
+ }
+ 
++int xc_dom_console_init(xc_interface *xch,
++                        uint32_t domid,
++                        unsigned long dst_pfn)
++{
++    return dom_console_init(xch, domid, dst_pfn, true);
++}
++
++int xc_dom_console_set_disconnected(xc_interface *xch,
++                                    uint32_t domid,
++                                    unsigned long dst_pfn)
++{
++    return dom_console_init(xch, domid, dst_pfn, false);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libs/guest/xg_sr_restore_x86_hvm.c b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+index d6ea6f3012..a5d1511fde 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_hvm.c
++++ b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+@@ -62,7 +62,7 @@ static int handle_hvm_params(struct xc_sr_context *ctx,
+         {
+         case HVM_PARAM_CONSOLE_PFN:
+             ctx->restore.console_gfn = entry->value;
+-            xc_clear_domain_page(xch, ctx->domid, entry->value);
++            xc_dom_console_init(xch, ctx->domid, entry->value);
+             break;
+         case HVM_PARAM_STORE_PFN:
+             ctx->restore.xenstore_gfn = entry->value;
+diff --git a/tools/libs/guest/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
+index 9cd6a88022..876748c11e 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_pv.c
++++ b/tools/libs/guest/xg_sr_restore_x86_pv.c
+@@ -208,6 +208,7 @@ static int process_start_info(struct xc_sr_context *ctx,
+         goto err;
+     }
+ 
++    xc_dom_console_set_disconnected(xch, ctx->domid, mfn);
+     ctx->restore.console_gfn = mfn;
+     SET_FIELD(guest_start_info, console.domU.mfn, mfn, ctx->x86.pv.width);
+     SET_FIELD(guest_start_info, console.domU.evtchn,
 -- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
+2.50.1
 
 
