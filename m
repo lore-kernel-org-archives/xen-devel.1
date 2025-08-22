@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44EA8CA0EEB
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Aug 2025 21:43:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1090517.1447677 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FC6CA0EED
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Aug 2025 21:43:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1090519.1447697 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upZXG-0003fS-2b; Fri, 22 Aug 2025 21:42:58 +0000
+	id 1upZXJ-00046o-Gu; Fri, 22 Aug 2025 21:43:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1090517.1447677; Fri, 22 Aug 2025 21:42:58 +0000
+Received: by outflank-mailman (output) from mailman id 1090519.1447697; Fri, 22 Aug 2025 21:43:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upZXF-0003fL-Va; Fri, 22 Aug 2025 21:42:57 +0000
-Received: by outflank-mailman (input) for mailman id 1090517;
- Fri, 22 Aug 2025 21:42:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1upZXJ-00046f-Db; Fri, 22 Aug 2025 21:43:01 +0000
+Received: by outflank-mailman (input) for mailman id 1090519;
+ Fri, 22 Aug 2025 21:42:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=21kD=3C=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1upZXE-0003fE-K0
- for xen-devel@lists.xenproject.org; Fri, 22 Aug 2025 21:42:56 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2060f.outbound.protection.outlook.com
- [2a01:111:f403:2406::60f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f4be28f6-7fa0-11f0-b898-0df219b8e170;
- Fri, 22 Aug 2025 23:42:53 +0200 (CEST)
-Received: from BN9PR03CA0238.namprd03.prod.outlook.com (2603:10b6:408:f8::33)
- by PH7PR12MB6539.namprd12.prod.outlook.com (2603:10b6:510:1f0::14)
+ id 1upZXH-0003pV-OH
+ for xen-devel@lists.xenproject.org; Fri, 22 Aug 2025 21:42:59 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20614.outbound.protection.outlook.com
+ [2a01:111:f403:2414::614])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f81de50b-7fa0-11f0-a32b-13f23c93f187;
+ Fri, 22 Aug 2025 23:42:59 +0200 (CEST)
+Received: from SJ0PR13CA0070.namprd13.prod.outlook.com (2603:10b6:a03:2c4::15)
+ by SN7PR12MB6691.namprd12.prod.outlook.com (2603:10b6:806:271::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.15; Fri, 22 Aug
- 2025 21:42:49 +0000
-Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
- (2603:10b6:408:f8:cafe::a4) by BN9PR03CA0238.outlook.office365.com
- (2603:10b6:408:f8::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.19 via Frontend Transport; Fri,
- 22 Aug 2025 21:42:48 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Fri, 22 Aug
+ 2025 21:42:54 +0000
+Received: from SJ5PEPF0000020A.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c4:cafe::37) by SJ0PR13CA0070.outlook.office365.com
+ (2603:10b6:a03:2c4::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.9 via Frontend Transport; Fri,
+ 22 Aug 2025 21:42:54 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ5PEPF0000020A.mail.protection.outlook.com (10.167.244.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9052.8 via Frontend Transport; Fri, 22 Aug 2025 21:42:47 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9052.8 via Frontend Transport; Fri, 22 Aug 2025 21:42:53 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Aug
- 2025 16:42:47 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Fri, 22 Aug
- 2025 14:42:47 -0700
+ 2025 16:42:52 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Aug
+ 2025 16:42:52 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Fri, 22 Aug 2025 16:42:46 -0500
+ Transport; Fri, 22 Aug 2025 16:42:51 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,108 +65,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4be28f6-7fa0-11f0-b898-0df219b8e170
+X-Inumbo-ID: f81de50b-7fa0-11f0-a32b-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y/niGyqR16MjsluXufgZdJ0m48OUap3sWQzqZ4d+QK/rWPrRv+/VaJDQZFTWAjyZxYVnLBgWPBYwx7KECChh609n9Ds+4hYb8vJyHA5orPn89OTv6IcmVhBr0kdiSjgfx66a9h1rIzTS89WNMXnu4rZ/tCnaU3UzovgPaIFOsGf/m/VE2leIERuosram0eW7Rcx7xBhxXtwpDWpeTB+otW1qagPJcAf0JpytFKwgAL8G219dDiNPwxN38c/eXT1//HBsy+VVP6xvPpDg+IXrgWJRdf5qPLY4uhatjBrty6wNti/mgR8NG6bQlSWgL/rHgL9FKfpQH74Z5TaPH7PNfg==
+ b=fhgahcquxdTqeD5tJY+KeJ8qP9ZqpUGkz0j8uOArbGKhGYrgkNUtJW6g8rVfRTCbj/4Sx+uzsn8jS6W996VdM6wsOCPoX3J4pB2uEVqSUQEFT9RfolW7W75kBwQxnhO2BIAqfNrSYSlABoFTVmIDeCfydfflj3MOIG2CwWZ1s2DhLMNHja+BvyCSx9TdpQt+fuLsJaDCE19DtcFuXudIy6S9va9+nF+FHVyMKbiPyLAaWCbIGe6kdWEKmuEc/PoXYrLpOEBSADai5w7Er4hYH57XKYcNYwRI3hUbXUQj07pUO/rmHn/AdMlexaJ/KxykKrn0S3YE7YbseMTj+X73PQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rbu73Ej5KNKqR0pfX9Z8GFKRQCNCPPS1IS5IJ85PqyI=;
- b=elEQ+ZgCSHe4GwCbXmfqCxuWE3OaBJUexAlRVtCt5ToebhsmySjTUbw1KseGXR4hfLsrvWUYoYAqa8gUK10bQJWEbnILmG+aONDlXMQ4+Ym4ckLDvtrt2awwQzCV0Q264Cd+GqKU0MCdsHQUXR82ss1C9+cFmQu4RV1uK5sTnQfPItHco3oGo+yX8rjwlD6SxjldP2jthgKamV/N56HF2724qIs0QX+Cy2IDvqqd+4UWeJXvrNkpEeWYGXBsASFa+5PcI4x1qc7jiGQ3Moe0GuFO32UTqxkuIIQDcEOG0/Rs1tPyl23zprTeSs/33JCY9rDmUniYKx9vif3LwWT1qg==
+ bh=8Ldt6U+CdRnhS1CaOFYVo0mX9S23oHqk3KpaQzP5sPo=;
+ b=WGj6dfGEgg3B8vFKati9KocTMeb/X8o6tilVBoapSkid8zqwnS2hXD5/xDQ9ptA0SWad+WWIw6kNekhDEC9PXD+YlWdF3XC1ipCueNoYmNsPF3x3l2nFctRkzaVZWIIrMy5YIUlIgpW8pcVaO/TxCTgBXTtJSxCJvpsJBTp2ckcXdkAO9yT/BENujhjwJtm0gwV4MteOU1itugno05h7QeFwFdQBGfbVx5s81cMkzKhHljaazLA/dOG3fuRtw/q8fC72vjfZWyl03uViYzRnnPBW/ggMlecf5QUPtygWbQoLrO0ZMTgvQjWra/2EQV/pSBHk10/50jv+tUwbTxmWaw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rbu73Ej5KNKqR0pfX9Z8GFKRQCNCPPS1IS5IJ85PqyI=;
- b=zL3uc3d46h6iYO93fk0b7m9Xmf8g7fXaflrz3shnFIH05N0hCS54imlR7SZFOI8+iKJq/4Nses61ytHnaKsnEB9i9EsIQyj/B6hK7TnOkll7+rxIvfpM02Y9fLQJ/h1BAxdoljjFLxsu1Bqa66SEmfnuOGkT/RhRSkHaTzRzJKw=
+ bh=8Ldt6U+CdRnhS1CaOFYVo0mX9S23oHqk3KpaQzP5sPo=;
+ b=ZLdg7ACXZFTAHx45Wqb7xuZYjhjBP/P7XwNhrHtxS4zdv+hhyscJLZCUY4mPuC7acnWYxoC9Z3qsjwA03/OPvx1R00UtdZKh1QOsVDTwvOb2jhBOmxi9GOvs2+LSv8NA+cfeVNOtv49zYuw7dGpB/7L1gwJQUiHVtRJQy1uqQic=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jason Andryuk
 	<jason.andryuk@amd.com>, Anthony PERARD <anthony.perard@vates.tech>, "Juergen
  Gross" <jgross@suse.com>
-Subject: [PATCH v2 0/3] xenconsole: Add connection flag
-Date: Fri, 22 Aug 2025 17:39:42 -0400
-Message-ID: <20250822213946.245307-1-jason.andryuk@amd.com>
+Subject: [PATCH v2 2/3] libs/guest: Set console page to disconnected
+Date: Fri, 22 Aug 2025 17:39:44 -0400
+Message-ID: <20250822213946.245307-3-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250822213946.245307-1-jason.andryuk@amd.com>
+References: <20250822213946.245307-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|PH7PR12MB6539:EE_
-X-MS-Office365-Filtering-Correlation-Id: a237f625-be7d-402a-9bf8-08dde1c4d635
+X-MS-TrafficTypeDiagnostic: SJ5PEPF0000020A:EE_|SN7PR12MB6691:EE_
+X-MS-Office365-Filtering-Correlation-Id: 480c2053-16a9-4525-1925-08dde1c4d96b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?CZxzREXod1wiql8ocNt7+c54aC4qmZqLFTpV+ZpLrgAZK2Cxdq4XNh832O44?=
- =?us-ascii?Q?9zmF2VjQ83b0YeUFE4DWXJ20kGwhSjj2FAMY4FaQGWkMYdL63DIu+sPKaOgg?=
- =?us-ascii?Q?Qe4wteKKIt3t4n2z+nxSXf+wIXvDSR1a9MneU2za0LD6HRGTooLJeX2zvthf?=
- =?us-ascii?Q?YsguoTye9Ygtq21J3cPwAnbcwIF4koBHwqTDZy1a7aux5IT+LWkdi+pCZN4U?=
- =?us-ascii?Q?PhLBTCFtLy/fhrnawRhK7Gar+D4xlvD8T8fCQZ4shp3OqShZ0lqmSUd7t3J5?=
- =?us-ascii?Q?6V55olTdmQkgBi/l+M+4swbkrqeoiWh2MPYZbv9cOkYZie8pnu/+vu9eupo6?=
- =?us-ascii?Q?Rv0peBMKZRxoLid6akqRgcxUTIb1FncujYNEjqlzmW2FajZGml2HfJHo2rkl?=
- =?us-ascii?Q?I0BKfHp3fELQyrUoKmuPSk2ifKqjXiYQXszd0lY6PlHmE4O/rRswJvV1oamL?=
- =?us-ascii?Q?JtwVf/a2GUaywgK+Krqb81JOE5T1swG9m4ipm+5nq4ipmBEFXB7uT/SXugPx?=
- =?us-ascii?Q?HKZxl2dqrn2iU4hAri0U1NS3m7M3nOSVc9A8RCMdhMA9rgP68KH/JRv3fPOh?=
- =?us-ascii?Q?CL+20WM0W4TVKwD5Cq6C6wn5M47IbMJ7QYWYP778FhDmroCElInls3i217N5?=
- =?us-ascii?Q?JFvS9DYGUyGuqspdmo1ROyksIVN8aOm2eIGwDCymVFiT3ew2yA7gNYwa4Non?=
- =?us-ascii?Q?k3csa5hTBTjvvD9AIWFenf0FNVI/rOsa+hiecSiQpa3IHPB57cEwhMM86fFV?=
- =?us-ascii?Q?W7oRXcJ4lD92kwKhkAyBu4PLdiJB48AjMPzKXzg3+ElVQVpbd61fLTe3uxrz?=
- =?us-ascii?Q?yvJMT10TBCIWh/gzgENySz9XHXxcYBK/m+ikhDOfftTckDqc0JOiQxR1PxKC?=
- =?us-ascii?Q?JPpSFxscSistrM8/3VFsRRleBuOTXKfK04APZB9Qi+eOb6TMLf6Tn7OEMOTq?=
- =?us-ascii?Q?CMG+FZu5yMoEJZAhVG6zcK1frd03o2bttOLvHNTQ/NfA2IJP7MsnSSLcwb2T?=
- =?us-ascii?Q?uMw0yO5g1o4kM4WK2DukrCqKCmD7bdGdx9Cr4MjVrUXg52lHuliQhSftO2qL?=
- =?us-ascii?Q?zmipKGyTFzNChFc6A0n6iEBgyMfxhrjOzwjKFNz5tzbozqs6OTXLTkVS6U84?=
- =?us-ascii?Q?2GLRz2vZn2NjTPg1TIsiWKFHRCg7ijPNsWZCz1PEH+m7WMl5Bdn8I5ZJr7hu?=
- =?us-ascii?Q?SmUwLXElBRyuZeAnC7mkiy9hKJrS2QoFav+XBa7E9c+OaU6Cl0yNZIqF9rZ5?=
- =?us-ascii?Q?wYV8BKfQSnTyqGtVbQNOpccaiXxCZxwA2+3MevJPP1jaw2OT7/f9xSq5t8UU?=
- =?us-ascii?Q?79KeaRy9tEHfbLH9STUH0fP6WDkF0453negKlIK/UVBQzAb08nGCqJ2T5ElD?=
- =?us-ascii?Q?mYCd1Fn7Aqy1UfIv4+7jD/92oG97bRUH8abAlUB6Ki/MZDQwoJTh/Y3MCxqb?=
- =?us-ascii?Q?XH0ctCJkmhkSmcjKjGYXeLSM9rfZ1DzzgdG9g7IFiX6VFLdWcYz2+ie7JePW?=
- =?us-ascii?Q?TW95UR7WsBRRhoM/yCBEWjnNXbtlkJJMdXlU?=
+	=?us-ascii?Q?5SHUpzRCU4kjklgua8Sv9M72OhQzSgQ3UYzhB41K2syzmfTGFr0hGrsRrVV/?=
+ =?us-ascii?Q?fXd79xyNOadTtdSHnb0h8PbeCl5mP2YHCRgnBJsMdVoWsJeQTAt+lG/Gn4u2?=
+ =?us-ascii?Q?KOl5vOBNTZe6Nh/ncCsAqdW6iF/8xUJ3WpWFGRfZRjlZ5LQQ/pFBgEkOeh01?=
+ =?us-ascii?Q?JqimrH3TcEp1oaCO+Y85pTLcIk4F20Pmun9iXC22re2Lo3AgQlzXmGLJGNnJ?=
+ =?us-ascii?Q?UfG/VjokegisyPwWRVgzSMV918cWlFixfhBlDBygq3XzFgrYk4K2i2E50xSR?=
+ =?us-ascii?Q?kCzedPVyZ7+eJmhkmGyUzNXNHT1fUi56Q1atYNZ21l3HXhccA87BU4KhmCXO?=
+ =?us-ascii?Q?yR9JDsLwidD/XshFmABOS3/RwxfwBKFr/4PjmIq/irhm3j1KM9WQ7L3QSE6/?=
+ =?us-ascii?Q?4tUsfKfRoI6tKUCI4099x3Tm8qjIfmDYRoBxT+eRDT81SQJu9hMH0+sEItDh?=
+ =?us-ascii?Q?WpmjgK/MnN5OkzBZKgIH26I+giYvOEkV6oLKEtPWSWR/EkNLdgtqjjywDvto?=
+ =?us-ascii?Q?bdfwFo7FNQzYXuK7D3j2dXJzLDDMeONSAs4opeNsIjRICl3pybMTlaUCFuqH?=
+ =?us-ascii?Q?FfX7vYvinKGdrel9J4Po5FaLhJrMkEt4w0cvdfbbhpqEWRnn9qO0gnJQvQbU?=
+ =?us-ascii?Q?oY1zil1rcxClvvy5jDHQhAoZIGqt5XoScydUjqYnWZuZYl1Gj098N48r+6U6?=
+ =?us-ascii?Q?J6YYoviY0byLPGGFns2FMNyf3UpFRklbFklIOWiWnXHCKYc5b39MVITBHkPA?=
+ =?us-ascii?Q?CCE/hfAkIFlhUbCaaKZbfS0q2Ql9hGbzdl1igX689C6fv1hlUyKtmnZU2nF/?=
+ =?us-ascii?Q?Mp0Eyc1BT42guS1mz1IFe8QY5IgQiCIqGRQBKTnCVo+8xqzJ/n/HKzhub6D5?=
+ =?us-ascii?Q?cCOpTe795nGxHOy0SdkPGR3y+zGtJU/JeI/xgHAR3d+4OA/lffWTOXA/urfk?=
+ =?us-ascii?Q?KqThxMsUFEjioFmLRidqBLNSMYGuaxrQhMqDZ3mnO24LKpDF6C7OqzJGy59G?=
+ =?us-ascii?Q?qX61UebiBpCXuIzpqvNSz39VX/ct/XhIWA46UDQZ+/V1aZvD9f/ptCaSDNFb?=
+ =?us-ascii?Q?/PYtr/Wz1dNiKBPONkjQ6imxaKmukYN4gbxLCX7uX5lipxNrNGnNnKsgdOS2?=
+ =?us-ascii?Q?aSIhjrgN7/k40n/1UBmdDHN1hjFG0pA9yLbq4R9/r0k+uYEWPbqRr5da/9Il?=
+ =?us-ascii?Q?28I2DH4pCnX+g4HWuOn2KQZ6OIFd3eVeaFaQTdMeJED7GlYbBpMHaLJn7WQY?=
+ =?us-ascii?Q?QSKOPNK3e2e6VtFMDFDn4rOwZ8cE0yiitNf+W6zpeZuOe+BHnzd94O9oT88J?=
+ =?us-ascii?Q?h6hX+77UvGUR+HX2If9wmhtuB3GeRDZdWvnHcK3IFKIhXjCNEUdpXf+0CMeu?=
+ =?us-ascii?Q?fDjX54TL3XbQwXmEoJNvyMKv4qJc4zsc6bnxxBQJvImVagWoITe6ZliuVBTP?=
+ =?us-ascii?Q?C4eHDWyKge6clmEsCTBgzlOWYcQF62dY8rM29mVSF/Zw1wXxSh2Z9ZDyJUZj?=
+ =?us-ascii?Q?r/gXBHNveTUM9s/EnGvRV/r7FHnBkXQxFHSp?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 21:42:47.9712
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 21:42:53.2655
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a237f625-be7d-402a-9bf8-08dde1c4d635
+X-MS-Exchange-CrossTenant-Network-Message-Id: 480c2053-16a9-4525-1925-08dde1c4d96b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000ECD8.namprd02.prod.outlook.com
+	SJ5PEPF0000020A.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6539
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6691
 
-Add a connection flag to the console interface page so a domain can tell
-if it is connected or not.  This became a series in v2 to add flag
-setting to libxenguest.
+Initialize xencons_interface's connection field to
+XENCONSOLE_DISCONNECTED.  xenconsoled will mark the page as connected
+when it establishes the connection.
 
-Jason Andryuk (3):
-  xenconsole: Add connection flag
-  libs/guest: Set console page to disconnected
-  libs/guest: Set console as disconnected on resume
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+xc_dom_console_init() seems closer to the functionality of the gnttab
+functions, so I put it in xg_dom_boot.c.  It can't take a struct
+xc_dom_image pointer when used with save/restore.
 
- tools/console/daemon/io.c                |  4 +++
- tools/include/xenguest.h                 |  4 +++
- tools/libs/guest/xg_dom_arm.c            |  2 +-
- tools/libs/guest/xg_dom_boot.c           | 36 ++++++++++++++++++++++++
- tools/libs/guest/xg_dom_x86.c            |  6 ++--
- tools/libs/guest/xg_sr_restore_x86_hvm.c |  2 +-
- tools/libs/guest/xg_sr_restore_x86_pv.c  |  1 +
- xen/include/public/io/console.h          | 13 +++++++++
- 8 files changed, 63 insertions(+), 5 deletions(-)
+v2:
+New
+---
+ tools/include/xenguest.h       |  2 ++
+ tools/libs/guest/xg_dom_arm.c  |  2 +-
+ tools/libs/guest/xg_dom_boot.c | 20 ++++++++++++++++++++
+ tools/libs/guest/xg_dom_x86.c  |  6 +++---
+ 4 files changed, 26 insertions(+), 4 deletions(-)
 
+diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
+index e01f494b77..1d5a6d3509 100644
+--- a/tools/include/xenguest.h
++++ b/tools/include/xenguest.h
+@@ -335,6 +335,8 @@ void *xc_dom_boot_domU_map(struct xc_dom_image *dom, xen_pfn_t pfn,
+                            xen_pfn_t count);
+ int xc_dom_boot_image(struct xc_dom_image *dom);
+ int xc_dom_compat_check(struct xc_dom_image *dom);
++int xc_dom_console_init(xc_interface *xch, uint32_t guest_domid,
++                        xen_pfn_t console_gfn);
+ int xc_dom_gnttab_init(struct xc_dom_image *dom);
+ int xc_dom_gnttab_seed(xc_interface *xch, uint32_t guest_domid,
+                        bool is_hvm,
+diff --git a/tools/libs/guest/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
+index 2fd8ee7ad4..c8d0918506 100644
+--- a/tools/libs/guest/xg_dom_arm.c
++++ b/tools/libs/guest/xg_dom_arm.c
+@@ -70,7 +70,7 @@ static int alloc_magic_pages(struct xc_dom_image *dom)
+     dom->xenstore_pfn = base + XENSTORE_PFN_OFFSET;
+     dom->vuart_gfn = base + VUART_PFN_OFFSET;
+ 
+-    xc_clear_domain_page(dom->xch, dom->guest_domid, dom->console_pfn);
++    xc_dom_console_init(dom->xch, dom->guest_domid, dom->console_pfn);
+     xc_clear_domain_page(dom->xch, dom->guest_domid, dom->xenstore_pfn);
+     xc_clear_domain_page(dom->xch, dom->guest_domid, base + MEMACCESS_PFN_OFFSET);
+     xc_clear_domain_page(dom->xch, dom->guest_domid, dom->vuart_gfn);
+diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
+index 5c7e12221d..b5f248e642 100644
+--- a/tools/libs/guest/xg_dom_boot.c
++++ b/tools/libs/guest/xg_dom_boot.c
+@@ -34,6 +34,7 @@
+ #include "xg_core.h"
+ #include <xen/hvm/params.h>
+ #include <xen/grant_table.h>
++#include <xen/io/console.h>
+ 
+ /* ------------------------------------------------------------------------ */
+ 
+@@ -427,6 +428,25 @@ int xc_dom_gnttab_init(struct xc_dom_image *dom)
+                               dom->console_domid, dom->xenstore_domid);
+ }
+ 
++int xc_dom_console_init(xc_interface *xch,
++                        uint32_t domid,
++                        unsigned long dst_pfn)
++{
++    const size_t size = PAGE_SIZE;
++    struct xencons_interface *xencons = xc_map_foreign_range(
++        xch, domid, size, PROT_WRITE, dst_pfn);
++
++    if ( xencons == NULL )
++        return -1;
++
++    memset(xencons, 0, size);
++    xencons->connection = XENCONSOLE_DISCONNECTED;
++
++    munmap(xencons, size);
++    xc_domain_cacheflush(xch, domid, dst_pfn, 1);
++    return 0;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libs/guest/xg_dom_x86.c b/tools/libs/guest/xg_dom_x86.c
+index cba01384ae..a82b481a12 100644
+--- a/tools/libs/guest/xg_dom_x86.c
++++ b/tools/libs/guest/xg_dom_x86.c
+@@ -587,8 +587,8 @@ static int alloc_magic_pages_pv(struct xc_dom_image *dom)
+     dom->console_pfn = xc_dom_alloc_page(dom, "console");
+     if ( dom->console_pfn == INVALID_PFN )
+         return -1;
+-    xc_clear_domain_page(dom->xch, dom->guest_domid,
+-                         xc_dom_p2m(dom, dom->console_pfn));
++    xc_dom_console_init(dom->xch, dom->guest_domid,
++                        xc_dom_p2m(dom, dom->console_pfn));
+ 
+     dom->alloc_bootstack = 1;
+ 
+@@ -734,7 +734,7 @@ static int alloc_magic_pages_hvm(struct xc_dom_image *dom)
+                      special_pfn(SPECIALPAGE_IDENT_PT) << PAGE_SHIFT);
+ 
+     dom->console_pfn = special_pfn(SPECIALPAGE_CONSOLE);
+-    xc_clear_domain_page(dom->xch, dom->guest_domid, dom->console_pfn);
++    xc_dom_console_init(dom->xch, dom->guest_domid, dom->console_pfn);
+ 
+     dom->xenstore_pfn = special_pfn(SPECIALPAGE_XENSTORE);
+     xc_clear_domain_page(dom->xch, dom->guest_domid, dom->xenstore_pfn);
 -- 
 2.50.1
 
