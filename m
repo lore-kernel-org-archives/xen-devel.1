@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0756CCA0EFF
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Aug 2025 22:27:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1091563.1448113 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2037BCA0FE8
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Aug 2025 22:27:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1091559.1448072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upwhX-0002N0-Rb; Sat, 23 Aug 2025 22:27:07 +0000
+	id 1upwhP-0001N4-Ne; Sat, 23 Aug 2025 22:26:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1091563.1448113; Sat, 23 Aug 2025 22:27:07 +0000
+Received: by outflank-mailman (output) from mailman id 1091559.1448072; Sat, 23 Aug 2025 22:26:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1upwhX-0002Mo-OL; Sat, 23 Aug 2025 22:27:07 +0000
-Received: by outflank-mailman (input) for mailman id 1091563;
- Sat, 23 Aug 2025 22:27:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1upwhP-0001Mx-Kr; Sat, 23 Aug 2025 22:26:59 +0000
+Received: by outflank-mailman (input) for mailman id 1091559;
+ Sat, 23 Aug 2025 22:26:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rFF/=3D=gmail.com=w1benny@srs-se1.protection.inumbo.net>)
- id 1upwhW-0001yi-PO
- for xen-devel@lists.xenproject.org; Sat, 23 Aug 2025 22:27:06 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4919ed61-8070-11f0-b898-0df219b8e170;
- Sun, 24 Aug 2025 00:27:00 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-afcb7a5cff3so52655666b.3
- for <xen-devel@lists.xenproject.org>; Sat, 23 Aug 2025 15:27:00 -0700 (PDT)
+ id 1upwhO-0001Mm-8e
+ for xen-devel@lists.xenproject.org; Sat, 23 Aug 2025 22:26:58 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 474c3ff9-8070-11f0-a32b-13f23c93f187;
+ Sun, 24 Aug 2025 00:26:57 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-afe72d68b88so27166b.3
+ for <xen-devel@lists.xenproject.org>; Sat, 23 Aug 2025 15:26:57 -0700 (PDT)
 Received: from lab.home
  (dynamic-2a00-1028-83a4-4bca-c0bb-96ff-feed-9d50.ipv6.o2.cz.
  [2a00:1028:83a4:4bca:c0bb:96ff:feed:9d50])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-afe48fd37fbsm252045166b.47.2025.08.23.15.26.58
+ a640c23a62f3a-afe48fd37fbsm252045166b.47.2025.08.23.15.26.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Aug 2025 15:26:58 -0700 (PDT)
+ Sat, 23 Aug 2025 15:26:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,355 +49,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4919ed61-8070-11f0-b898-0df219b8e170
+X-Inumbo-ID: 474c3ff9-8070-11f0-a32b-13f23c93f187
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755988019; x=1756592819; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qG4paJjVmzt2WmtR78TFt5pLQN6+xUIKpx/Ojl25OE0=;
-        b=YlwuJQFsLDZslDVPiUPLsKE9dY0GWAg1Fjj3sDkfXQxdaV4GTxWqYsXvzJFFXZBQ/j
-         /oUL6uCKEx1y2GnOIcWTexhszMTKWCsW0GuOcVSvXTU1GMrhBZoBFFVVLuBifO2psnf2
-         1G9JuD8mDe2t+0d3xM62gRpTNcpi6z9nhp/UcVzyL7P2dQayA4ehpIZhPYTSuzSeXC9O
-         6H3uitaGuDgkt1H0UXaOB3PR2ZnLgaKjNn0OPeRApTS2y3GdRVaZ/IJCbNNN02TC/FVM
-         Ys4olNTgGrt75rf+9ICf7gpAw9IWmIZ5s8kPrQeLEhgPzpE5WSioNe8L2hFb2a1dIeAK
-         Bb1Q==
+        d=gmail.com; s=20230601; t=1755988016; x=1756592816; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KWAQYC29GuHHgHDgQr6y7j5EKyvy8UjM5c+HdF6B8X8=;
+        b=JTs7KXRtpm2PghiOSg0EgbIp0ZdUxBCn5qbeu4UjoDBxVbCR26fXQBA4QXCJQlD5DU
+         xx8nphbbpLlA7iINJR9VEAQ1Fksi06KGdhZ5jZA/rtBqvV3cbpUNZklR0LSt58PMggDJ
+         m73GWY4UbRzAp38uMui1BUqmwfyQZhBRL57smoddUq9jHPXZjE2VrFZvY68cPLfPnVdB
+         APNI4mMTqJMxmnfYNmAGYBqZfXyPMzAAERNbSPguB4NtIL37ywTlU/n5570vAuLvibjN
+         fwsNFJxjApAbWSsLHQ89C/Dnme/HrmlybKCOihGapZiexA8hKXoGHxUhoIGmV0JDTeQN
+         RmAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755988019; x=1756592819;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qG4paJjVmzt2WmtR78TFt5pLQN6+xUIKpx/Ojl25OE0=;
-        b=Qx7JyV6IXK6IUGY2WBeIxuJ2kwz1m6aTWyeqeoS2hjUNFZm3Wh4Y2TiJLD8iUJvt8e
-         pqPrSr884LJGLlL2WyR7O4D+RhpHPy7p9ooaLaf492U0dvAZVWJz9gEYisW8XCOt2rNz
-         7t08sjdEJkQ+rrBYd0M2UiWmNZwF6N+DnIwrAur05NoN6+ovIqc2VxwIdLY6mhYSWM3D
-         DzwYnNzm07IHCcf+7sSPvUuPjd6CYGuB0NAgh7nhliA28/K6FcZ8uI/g+Jps2U7iUfYL
-         dB6Yj9i5wsWZ06nRnCgrR97dMJ1aSrB3XTiUWaXPpgqXNfg18XR64LnznBCOICwPhxLE
-         Kpjg==
-X-Gm-Message-State: AOJu0YwrsRiisjZrQys3pc64qdWJEBnBi+RxyllMjIfUKZv9zHUA6ir1
-	uVSmYxBjZzlirDBO9luHGPpvsjKC3DXqbkRfTEFCOVW4PhSDbjVjcLUgUwVsUQ==
-X-Gm-Gg: ASbGncsLPosoInPUFotwiC2KTiQAwLbIZmA0EwaB6g/wQT9cdQbcu7+PRYVBzdDqW1q
-	ncYGMSlszZUOPJZUMX/Glmem8KH6oGXW3atsHUvyhsCh0I0Jt4T+qaQOTz7AmF7+zxMZrqT1Omb
-	hQSkt+ohSzIK5lWVOfqpMfMppt3hr/FVzBci9qYlWWpD8Wr0d0Ki33Qi0eoc9eLjGvMtgwyw0PC
-	TzK1vLSwMTuYeCwYXvoNaPFq5945jBRfkn5i9Pw9Tmdlt8NFRCCtVjPbL4HfTz804A5tunyuMed
-	JuSXfL+VAlSyGH3qsaQMJmTobn65WTTXo8Gk8RUtx+sOUeTgIe6gDjmHE4nQvLwCLtX86EFaeKm
-	mTcHHqKKnm4mDl+hbTBTC6Nzzgfwi7LTU/8b53NJLzpu9mLEUpr4u4oBOtrVoX/cmXkV4ZWRlSp
-	fGyxVflWDWg+NTo9X2bwVbd0Eew9cz8CGe
-X-Google-Smtp-Source: AGHT+IFRpio/VEsHjfPDgitsBpViUeoq+NQACVyobSIWuzWw6zfVLpQQeYRT8ev7MjvL/Xz00K6wNw==
-X-Received: by 2002:a17:907:94c9:b0:ad8:8e05:e5e9 with SMTP id a640c23a62f3a-afe28f0797amr344817666b.2.1755988019128;
-        Sat, 23 Aug 2025 15:26:59 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1755988016; x=1756592816;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KWAQYC29GuHHgHDgQr6y7j5EKyvy8UjM5c+HdF6B8X8=;
+        b=LrsHvj/DJgRZWRrxkxolFupEqxpazQ9HM9Y5nSTWKvSq8Z3an5oGBoaoQTfVZqHS4+
+         tIi5/A+prCn6EuD1nPaFYt5zHTaYlCd+OEOQ68E69EF3s6WQXWhQbDqpOGh4HmB3bQ2s
+         aGshIlkfAdgEZowixq1zEXrinnqLebJdEb7jI3DlcDTRDFw1o/sBNB8KGEUYlDpvVvjS
+         v3V6aBu4Coyvgzlg0WQNzETDrrQBPJ7Ig87J4hyN3Lk/IR4WRI2D20ei77zuxlQqyWgN
+         +BeeFzHFi6mj+DK9x8JlHL/zsocIRaiy6O9CXANtLMzDcjHDhQyAksRnMQClG9hvrOUw
+         oezg==
+X-Gm-Message-State: AOJu0YwrkkmW8VuAxmiyTdkj5aVNy2j8l7oATu0aD/ylkKlZ5f+Zykep
+	p4SRTcuESegrjo1oQsxqOEXAx83PoNu7JOrQZKUIrDuEgIEUSMavRIYE+vDJFQ==
+X-Gm-Gg: ASbGncsQqV/8hhvf5qjHbhAv6EFFnA7OujWjdBulRb3cu5JiC+NIhPeSEzsTwpJibfc
+	eamdSRE16Mwl/tFSzyeDnO/0SnJcrHjVfsB+NkeNtkAiNky1G8RZHudi9wNGpPUWi7tPmPb6k0R
+	QuXpuUWvmF4qer6YI2Nqp41Pu7RNnP1QZQRcV7+4pgMlI+bhB5fghIkVLJ+r+VfgVoVA9VB7PQ7
+	TqqYeyvP8uk8RrWYXonVksVzqeXsrHY8Ia2cMtWTW6tro6FpiCNPSKSdgwoOwvCs8Ev8c6hp+D8
+	GhFPTyuTrlgaATBWlJUeLhwXbgKRe2gozwBjRZiwg0K2Op8Mq/vE3RuIi1Eu7OydXgal94RYF70
+	IzL/1N9WqKIH5u89b1pWg/3+RsxhyIhIlmgHx8v5q+LB37liNdfqMczbt74NmKO+0wfHmCyPH9Z
+	cDMHAa5xjOCckJUDjjw/X18g==
+X-Google-Smtp-Source: AGHT+IFNw91vjPbc0/vvlrWP6Bpqv6jy9sGlC/GDq/2jFHqc8E+81XvcNEqXVAL4mPKsSEXB95IqYQ==
+X-Received: by 2002:a17:907:7f29:b0:af9:8a71:e090 with SMTP id a640c23a62f3a-afe294d9993mr335235266b.9.1755988016041;
+        Sat, 23 Aug 2025 15:26:56 -0700 (PDT)
 From: "=?UTF-8?q?Petr=20Bene=C5=A1?=" <w1benny@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@gendigital.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Petr=20Bene=C5=A1?= <w1benny@gmail.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v5 3/4] hvmloader: add new SMBIOS tables (7, 8, 9, 26, 27, 28)
-Date: Sat, 23 Aug 2025 22:26:51 +0000
-Message-Id: <4ecd33acd8bdf629e9103e97ff271150541e7415.1755987697.git.w1benny@gmail.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v5 0/4] hvmloader: add new SMBIOS tables (7,8,9,26,27,28)
+Date: Sat, 23 Aug 2025 22:26:48 +0000
+Message-Id: <cover.1755987697.git.w1benny@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1755987697.git.w1benny@gmail.com>
-References: <cover.1755987697.git.w1benny@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Petr Beneš <w1benny@gmail.com>
 
-Some SMBIOS tables are used by certain malware families to detect virtualized
-environments via WMI queries.
+Changes since v4:
+- Renamed offsetof_end macro to endof_field.
+- Added mention in CHANGELOG.md.
 
-To improve stealth for sandboxing purposes, this patch adds support
-for populating these SMBIOS tables from an external binary specified
-via the "smbios_firmware" domain config option:
+- hvmloader: fix SMBIOS table length checks
+  - Changed `table_size` parameter name to `min_size` in the `smbios_pt_copy`
+    function.
+  - Fixed typo in `smbios_type_2_init` function where `smbios_type_3` was
+    mistyped.
 
-* 7 - Cache Info
-* 8 - Port Connector
-* 9 - System Slots
-* 26 - Voltage Probe
-* 27 - Cooling Device
-* 28 - Temperature Probe
+Changes since v3:
+- Renamed offsetofend macro to offsetof_end.
 
-If particular table is absent in binary file, then it will not be mapped to
-memory. This method works for Windows domains as tables 7,8,9,26,27,28 are not
-critical for OS boot and runtime. Also if "smbios_firmware" parameter is not
-provided, these tables will be skipped in write_smbios_tables function.
+Changes since v2:
+- Added sizeof_field and offsetofend macros to common-macros.h.
+- Used offsetofend macro everywhere to make semantically sense.
+- Added BUILD_BUG_ON to ensure offsets are correct based on the SMBIOS
+  specification (with explanation in the comments).
+- Fixed commit message of the second patch to mention the new smbios_pt_copy
+  function.
+- Fixed nits (empty lines, misplaced *).
+- Retained the original comment "Only present when passed in" + added it to
+  the new tables where applicable.
+- Replaced hardcoded offset for chassis_handle in smbios_type_2_init.
 
-From: Anton Belousov <blsvntn@outlook.com>
-Signed-off-by: Petr Beneš <w1benny@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
- tools/firmware/hvmloader/smbios.c       | 111 ++++++++++++++++++++++++
- tools/firmware/hvmloader/smbios_types.h |  77 ++++++++++++++++
- 2 files changed, 188 insertions(+)
+Changes since v1:
+- Swapped the order of S-o-b in the last commit message.
 
-diff --git a/tools/firmware/hvmloader/smbios.c b/tools/firmware/hvmloader/smbios.c
-index de3ba78e87..76c7090d16 100644
---- a/tools/firmware/hvmloader/smbios.c
-+++ b/tools/firmware/hvmloader/smbios.c
-@@ -33,12 +33,18 @@
- #define SMBIOS_HANDLE_TYPE2   0x0200
- #define SMBIOS_HANDLE_TYPE3   0x0300
- #define SMBIOS_HANDLE_TYPE4   0x0400
-+#define SMBIOS_HANDLE_TYPE7   0x0700
-+#define SMBIOS_HANDLE_TYPE8   0x0800
-+#define SMBIOS_HANDLE_TYPE9   0x0900
- #define SMBIOS_HANDLE_TYPE11  0x0B00
- #define SMBIOS_HANDLE_TYPE16  0x1000
- #define SMBIOS_HANDLE_TYPE17  0x1100
- #define SMBIOS_HANDLE_TYPE19  0x1300
- #define SMBIOS_HANDLE_TYPE20  0x1400
- #define SMBIOS_HANDLE_TYPE22  0x1600
-+#define SMBIOS_HANDLE_TYPE26  0x1A00
-+#define SMBIOS_HANDLE_TYPE27  0x1B00
-+#define SMBIOS_HANDLE_TYPE28  0x1C00
- #define SMBIOS_HANDLE_TYPE32  0x2000
- #define SMBIOS_HANDLE_TYPE39  0x2700
- #define SMBIOS_HANDLE_TYPE127 0x7f00
-@@ -79,6 +85,12 @@ static void *
- smbios_type_4_init(void *start, unsigned int cpu_number,
-                    char *cpu_manufacturer);
- static void *
-+smbios_type_7_init(void *start);
-+static void *
-+smbios_type_8_init(void *start);
-+static void *
-+smbios_type_9_init(void *start);
-+static void *
- smbios_type_11_init(void *start);
- static void *
- smbios_type_16_init(void *start, uint32_t memory_size_mb, int nr_mem_devs);
-@@ -91,6 +103,12 @@ smbios_type_20_init(void *start, uint32_t memory_size_mb, int instance);
- static void *
- smbios_type_22_init(void *start);
- static void *
-+smbios_type_26_init(void *start);
-+static void *
-+smbios_type_27_init(void *start);
-+static void *
-+smbios_type_28_init(void *start);
-+static void *
- smbios_type_32_init(void *start);
- static void *
- smbios_type_39_init(void *start);
-@@ -225,6 +243,9 @@ write_smbios_tables(void *ep, void *start,
-     do_struct(smbios_type_3_init(p));
-     for ( cpu_num = 1; cpu_num <= vcpus; cpu_num++ )
-         do_struct(smbios_type_4_init(p, cpu_num, cpu_manufacturer));
-+    do_struct(smbios_type_7_init(p));
-+    do_struct(smbios_type_8_init(p));
-+    do_struct(smbios_type_9_init(p));
-     do_struct(smbios_type_11_init(p));
- 
-     /* Each 'memory device' covers up to 16GB of address space. */
-@@ -241,6 +262,9 @@ write_smbios_tables(void *ep, void *start,
-     }
- 
-     do_struct(smbios_type_22_init(p));
-+    do_struct(smbios_type_26_init(p));
-+    do_struct(smbios_type_27_init(p));
-+    do_struct(smbios_type_28_init(p));
-     do_struct(smbios_type_32_init(p));
-     do_struct(smbios_type_39_init(p));
-     do_struct(smbios_type_vendor_oem_init(p));
-@@ -728,6 +752,42 @@ smbios_type_4_init(
-     return start+1;
- }
- 
-+/* Type 7 -- Cache Information */
-+static void *
-+smbios_type_7_init(void *start)
-+{
-+    /* Specification says Type 7 table has length of 13h for v2.1+. */
-+    BUILD_BUG_ON(sizeof(struct smbios_type_7) != 19);
-+
-+    /* Only present when passed in. */
-+    return smbios_pt_copy(start, 7, SMBIOS_HANDLE_TYPE7,
-+                          sizeof(struct smbios_type_7));
-+}
-+
-+/* Type 8 -- Port Connector Information */
-+static void *
-+smbios_type_8_init(void *start)
-+{
-+    /* Specification says Type 8 table has length of 09h. */
-+    BUILD_BUG_ON(sizeof(struct smbios_type_8) != 9);
-+
-+    /* Only present when passed in. */
-+    return smbios_pt_copy(start, 8, SMBIOS_HANDLE_TYPE8,
-+                          sizeof(struct smbios_type_8));
-+}
-+
-+/* Type 9 -- System Slots */
-+static void *
-+smbios_type_9_init(void *start)
-+{
-+    /* Specification says Type 9 table has length of 0Dh for v2.1-2.5. */
-+    BUILD_BUG_ON(sizeof(struct smbios_type_9) != 13);
-+
-+    /* Only present when passed in. */
-+    return smbios_pt_copy(start, 9, SMBIOS_HANDLE_TYPE9,
-+                          sizeof(struct smbios_type_9));
-+}
-+
- /* Type 11 -- OEM Strings */
- static void *
- smbios_type_11_init(void *start)
-@@ -959,6 +1019,57 @@ smbios_type_22_init(void *start)
-     return start + 1;
- }
- 
-+/* Type 26 -- Voltage Probe */
-+static void *
-+smbios_type_26_init(void *start)
-+{
-+    /*
-+     * Specification says Type 26 table has length of at least 14h,
-+     * which corresponds with the end of the "OEM-defined" field.
-+     *
-+     * Only present when passed in.
-+     */
-+
-+    BUILD_BUG_ON(endof_field(struct smbios_type_26, oem_defined) != 20);
-+
-+    return smbios_pt_copy(start, 26, SMBIOS_HANDLE_TYPE26,
-+                          endof_field(struct smbios_type_26, oem_defined));
-+}
-+
-+/* Type 27 -- Cooling Device */
-+static void *
-+smbios_type_27_init(void *start)
-+{
-+    /*
-+     * Specification says Type 27 table has length of at least 0Ch,
-+     * which corresponds with the end of the "OEM-defined" field.
-+     *
-+     * Only present when passed in.
-+     */
-+
-+    BUILD_BUG_ON(endof_field(struct smbios_type_27, oem_defined) != 12);
-+ 
-+    return smbios_pt_copy(start, 27, SMBIOS_HANDLE_TYPE27,
-+                          endof_field(struct smbios_type_27, oem_defined));
-+}
-+
-+/* Type 28 -- Temperature Probe */
-+static void *
-+smbios_type_28_init(void *start)
-+{
-+    /*
-+     * Specification says Type 28 table has length of at least 14h,
-+     * which corresponds with the end of the "OEM-defined" field.
-+     *
-+     * Only present when passed in.
-+     */
-+
-+    BUILD_BUG_ON(endof_field(struct smbios_type_28, oem_defined) != 20);
-+
-+    return smbios_pt_copy(start, 28, SMBIOS_HANDLE_TYPE28,
-+                          endof_field(struct smbios_type_28, oem_defined));
-+}
-+
- /* Type 32 -- System Boot Information */
- static void *
- smbios_type_32_init(void *start)
-diff --git a/tools/firmware/hvmloader/smbios_types.h b/tools/firmware/hvmloader/smbios_types.h
-index a04d194975..c04b435d31 100644
---- a/tools/firmware/hvmloader/smbios_types.h
-+++ b/tools/firmware/hvmloader/smbios_types.h
-@@ -149,6 +149,44 @@ struct smbios_type_4 {
-     uint8_t part_number_str;
- } __attribute__ ((packed));
- 
-+/* SMBIOS type 7 - Cache Information */
-+struct smbios_type_7 {
-+    struct smbios_structure_header header;
-+    uint8_t socket_designation_str;
-+    uint16_t cache_configuration;
-+    uint16_t maximum_cache_size;
-+    uint16_t installed_size;
-+    uint16_t supported_SRAM_type;
-+    uint16_t current_SRAM_type;
-+    uint8_t cache_speed;
-+    uint8_t error_connection_type;
-+    uint8_t system_cache_type;
-+    uint8_t associativity;
-+} __attribute__ ((packed));
-+
-+/* SMBIOS type 8 - Port Connector Information */
-+struct smbios_type_8 {
-+    struct smbios_structure_header header;
-+    uint8_t internal_reference_designator_str;
-+    uint8_t internal_connector_type;
-+    uint8_t external_reference_designator_str;
-+    uint8_t external_connector_type;
-+    uint8_t port_type;
-+} __attribute__ ((packed));
-+
-+/* SMBIOS type 9 - System Slots */
-+struct smbios_type_9 {
-+    struct smbios_structure_header header;
-+    uint8_t slot_designation_str;
-+    uint8_t slot_type;
-+    uint8_t slot_data_bus_width;
-+    uint8_t current_usage;
-+    uint8_t slot_length;
-+    uint16_t slot_id;
-+    uint8_t slot_characteristics_1;
-+    uint8_t slot_characteristics_2;
-+} __attribute__ ((packed));
-+
- /* SMBIOS type 11 - OEM Strings */
- struct smbios_type_11 {
-     struct smbios_structure_header header;
-@@ -232,6 +270,45 @@ struct smbios_type_22 {
-     uint32_t oem_specific;
- } __attribute__ ((packed));
- 
-+/* SMBIOS type 26 - Voltage Probe */
-+struct smbios_type_26 {
-+    struct smbios_structure_header header;
-+    uint8_t description_str;
-+    uint8_t location_and_status;
-+    uint16_t maximum_value;
-+    uint16_t minimum_value;
-+    uint16_t resolution;
-+    uint16_t tolerance;
-+    uint16_t accuracy;
-+    uint32_t oem_defined;
-+    uint16_t nominal_value;                 /* Optional */
-+} __attribute__ ((packed));
-+
-+/* SMBIOS type 27 - Cooling Device */
-+struct smbios_type_27 {
-+    struct smbios_structure_header header;
-+    uint16_t temperature_probe_handle;
-+    uint8_t device_type_and_status;
-+    uint8_t cooling_unit_group;
-+    uint32_t oem_defined;
-+    uint16_t nominal_speed;                 /* Optional */
-+    uint8_t description_str;                /* Optional */
-+} __attribute__ ((packed));
-+
-+/* SMBIOS type 28 - Temperature Probe */
-+struct smbios_type_28 {
-+    struct smbios_structure_header header;
-+    uint8_t description_str;
-+    uint8_t location_and_status;
-+    uint16_t maximum_value;
-+    uint16_t minimum_value;
-+    uint16_t resolution;
-+    uint16_t tolerance;
-+    uint16_t accuracy;
-+    uint32_t oem_defined;
-+    uint16_t nominal_value;                 /* Optional */
-+} __attribute__ ((packed));
-+
- /* SMBIOS type 32 - System Boot Information */
- struct smbios_type_32 {
-     struct smbios_structure_header header;
+Resubmitting patch from Anton Belousov and addressing review comments
+from Jan: https://old-list-archives.xen.org/archives/html/xen-devel/2022-01/msg00725.html
+
+Original message:
+> SMBIOS tables like 7,8,9,26,27,28 are neccessary to prevent sandbox detection
+> by malware using WMI-queries. New tables can be mapped to memory from binary
+> file specified in "smbios_firmware" parameter of domain configuration.
+> If particular table is absent in binary file, then it will not be mapped to
+> memory. This method works for Windows domains as tables 7,8,9,26,27,28 are not
+> critical for OS boot and runtime. Also if "smbios_firmware" parameter is not
+> provided, these tables will be skipped in write_smbios_tables function.
+
+Further explanation:
+Some malware samples are known to check presence of various hardware components
+(like CPU fan, CPU temperature sensor, etc.) by WMI queries. If these components
+are not present, then malware can assume that it is running in a sandbox and
+will not execute its payload.
+
+This patch will allow security researchers to create a custom SMBIOS
+firmware binary file that contains these tables.
+
+Petr Beneš (4):
+  tools: add sizeof_field and endof_field macros
+  hvmloader: fix SMBIOS table length checks
+  hvmloader: add new SMBIOS tables (7, 8, 9, 26, 27, 28)
+  CHANGELOG.md: add new SMBIOS tables (7, 8, 9, 26, 27, 28)
+
+ CHANGELOG.md                            |   1 +
+ tools/firmware/hvmloader/smbios.c       | 289 ++++++++++++++++++------
+ tools/firmware/hvmloader/smbios_types.h | 109 +++++++--
+ tools/include/xen-tools/common-macros.h |   5 +
+ 4 files changed, 317 insertions(+), 87 deletions(-)
+
 -- 
 2.34.1
 
