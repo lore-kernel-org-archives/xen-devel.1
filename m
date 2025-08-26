@@ -4,56 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9927CA0FE7
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 16:25:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1094864.1450075 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F26F5CA0FF2
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 17:42:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1094898.1450086 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqwTt-0006ek-U3; Tue, 26 Aug 2025 16:25:09 +0000
+	id 1uqxg3-0008JU-Du; Tue, 26 Aug 2025 17:41:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1094864.1450075; Tue, 26 Aug 2025 16:25:09 +0000
+Received: by outflank-mailman (output) from mailman id 1094898.1450086; Tue, 26 Aug 2025 17:41:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqwTt-0006ed-RH; Tue, 26 Aug 2025 16:25:09 +0000
-Received: by outflank-mailman (input) for mailman id 1094864;
- Tue, 26 Aug 2025 16:25:08 +0000
+	id 1uqxg3-0008JN-94; Tue, 26 Aug 2025 17:41:47 +0000
+Received: by outflank-mailman (input) for mailman id 1094898;
+ Tue, 26 Aug 2025 17:41:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=etY1=3G=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1uqwTs-0006eX-26
- for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 16:25:08 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20607.outbound.protection.outlook.com
- [2a01:111:f403:2405::607])
+ <SRS0=Xnf3=3G=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1uqxg1-0008JG-2c
+ for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 17:41:45 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 37178964-8299-11f0-b898-0df219b8e170;
- Tue, 26 Aug 2025 18:25:02 +0200 (CEST)
-Received: from SJ0PR03CA0114.namprd03.prod.outlook.com (2603:10b6:a03:333::29)
- by CH2PR12MB4327.namprd12.prod.outlook.com (2603:10b6:610:7d::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Tue, 26 Aug
- 2025 16:24:58 +0000
-Received: from BY1PEPF0001AE16.namprd04.prod.outlook.com
- (2603:10b6:a03:333:cafe::6b) by SJ0PR03CA0114.outlook.office365.com
- (2603:10b6:a03:333::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.21 via Frontend Transport; Tue,
- 26 Aug 2025 16:24:58 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BY1PEPF0001AE16.mail.protection.outlook.com (10.167.242.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9073.11 via Frontend Transport; Tue, 26 Aug 2025 16:24:58 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 26 Aug
- 2025 11:24:57 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Tue, 26 Aug
- 2025 09:24:57 -0700
-Received: from [172.31.63.243] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 26 Aug 2025 11:24:54 -0500
+ id eb875f65-82a3-11f0-b898-0df219b8e170;
+ Tue, 26 Aug 2025 19:41:39 +0200 (CEST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-45b6278893eso7294765e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Aug 2025 10:41:39 -0700 (PDT)
+Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
+ [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b6c5ab181sm1701275e9.20.2025.08.26.10.41.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Aug 2025 10:41:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,139 +47,241 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37178964-8299-11f0-b898-0df219b8e170
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nI1hH+3lm+73J++2c2H3WOW13dTeqf3WVaZHib0IBwr674/1ciuumti16pLprAwXL96PIxNLSskSk7nmOLCdhFqt89qC4SAiU+eDyGNinYu+ktk1JKD4+djYjcH7bc5FNA5ab8z08imhyqg76lRCKmOj7M9RAF0DBJcpgJcYSvxAwOQcgupSrojSqQiN0aMspxp3DWVq/+Sm+FszPbpvV3ohP4EQS24COEmv3xMktrAa+BOxZwZUFh9MwWH1Ft7iFLkIVKTL+ZxxJfnKjWscHSswI+lu5yNNvXTYXffvWp2aQlVyA4vKve5bL2f/oYKs8v77cr6gQKdsbn4WpbyBqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HLXeinFT1xaw5pFlXUQRWDhjTbuSk6PW/GX7bc1L+2M=;
- b=KbkWcFHGuBrEaZ6ycS1MjAbA6iVS5glj7edE1uKGGntxJ8/X9YfhM5w2rxwXMm5zLebdSFLaQ66b4QT69lrwZySGi12HST3zqgZs252U8Vglj1Ex3OCetqFZ1GzRAdbL/bQlaiCmcoQox8lhLeWvUzl5V4ZoYcfxXOBeWM8zZLAMY7vxdJWridiHDarvNZztasSsGfgFK8sR7iYTArOcSifBCdImojNKDota3sJ2oxsKMIFP+nAxDYrTrF0vxD3WQbZRnj0ZTnYiTthlvGr9TzncSS/LTfnxbHeE9D6b8qWqkxdlVABP3yh1qjZ3arnIRfkC21P84NjjjZWF9TKSKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HLXeinFT1xaw5pFlXUQRWDhjTbuSk6PW/GX7bc1L+2M=;
- b=CgZ0L3gRcKxLYmgEwpt9lJ7S8BZ+x4dMZXJecOdRadVWo7jOm3b9D9Gx/iDoQx1vQsOhaKwau3L9kwm69lUtzGHOxO1/4x5J5gI8FQvrTzYsKStFYmrhmSklqReGmZn1aGAB4Io4dz/9+SXSEdUgYQ5lFSJzqATU+J3pie/XA6E=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <74dced99-e48c-4b74-8383-afc353d58dae@amd.com>
-Date: Tue, 26 Aug 2025 12:24:49 -0400
+X-Inumbo-ID: eb875f65-82a3-11f0-b898-0df219b8e170
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1756230098; x=1756834898; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hzPowjWPzHz/JW3GlPL+G8vbG/xpjBZLpn8wPMsgIwk=;
+        b=KRnrDATBJiEATBTeYtXL3W+lAHjDSwDr6YRjX/7Li/vCEIKdRLuN2RrZ1A8ItfajVr
+         z3mMMxWjyl1SCjuiX8rtuCSWAUjTSEdAJNxcQdEwjeUStbygu0ZgFuxp1SjNuoksG3t0
+         EjgbmgG5ZeTsUlvNlDFhy7WdeFejEGSb0Rqbw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756230098; x=1756834898;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hzPowjWPzHz/JW3GlPL+G8vbG/xpjBZLpn8wPMsgIwk=;
+        b=lvO/zOJjEfL1gVxo7BeojZ1Q6ESyTJ3/Qj/U4p0BZURF8RGbaiRy9SNGDgcAyQPF18
+         HmT9vhWtcBVJWKt/cWH2uKdDlxQBi3ZGudokm+AH+ud9iUCZbF0EV3u7boSYfzOVs8JY
+         JbB3+LlLVk6enB19qwQBpjxe4wHqQmr1tXuBK3ueNNfZ0c4Tvp6OsmsdbrlKW4RPLAeI
+         aq4U5ODdlHmVqiTxZxzSvpwo5/MlP2q5lw/NxUD9vD8R/YGem/clIdRPMtuFvbqPxdWS
+         0yh7oBYiNvuOntiAsy2UtQLwGWnq9QvA7EcsGE95GqNA2LWhIerN/TKTlVniQyvbJodV
+         +EKA==
+X-Gm-Message-State: AOJu0YzpgVQyna69EllAo/DaGVxIcFSQ1QKnry2vwD5GFCorQNBUt1qL
+	lmJL4OQ3u01iQgJsksYyZyGbgqt8aQ+ZxY5P9d42WZWH1ywHE0+6P8OcBbUglzJT3DkUAtWpPJ4
+	NfNty
+X-Gm-Gg: ASbGncvtt5MvXb3RD7+tV/dov/7iR0oOA5E3/agLtggxfdk0eozjaL3Sj2FB1qcA3gl
+	WJkTapCReBNKbgmaZrs3vXsAvRc6WAYBi0pCIxuNxFAmnr9WqA0w2R/ivEzwzgfUMWVcsut/yYy
+	E+y+rydF9x8nhUAsCfd4wJI4Da/rW4t+0/Pe337FaUQz3CbP0+QXPgxceG9cE2B8DOzLRfEjAgE
+	ASE+174eQKPk0OuJOcHsud+ezrSJCE91JFgvxknwXt2JdTTnl06NRbQzW4eh8mlHYMYak0JYs6F
+	3vQ0WV2h80kAwWx3m5bpGGOdqu6GlOc9mwjX4mWogzu8wtcOjD0mivAGv4C5EPGy+1yycsBNM/P
+	iTvNyIWfK4migR7a7nFP0MgeIrLwxRXwDH0HWgG7qE2hOBkD7ljWTn+Zp3FB0mKzMhSXpv0sfEf
+	kl0bF0ZCp8+Hk=
+X-Google-Smtp-Source: AGHT+IEfTIn2hUlhIz0VxIEUhUNibh7JsTH1+JJJmsl+8YO0uWhy6aJfGHQS+T+d9nu1rL0z6V6nMQ==
+X-Received: by 2002:a05:600c:1e8b:b0:45b:47e1:ef6f with SMTP id 5b1f17b1804b1-45b517fabfbmr125965045e9.34.1756230098232;
+        Tue, 26 Aug 2025 10:41:38 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2] x86/bitops: Optimise arch_ffs{,l}() some more on AMD
+Date: Tue, 26 Aug 2025 18:41:35 +0100
+Message-Id: <20250826174135.605220-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250527222930.1452674-1-andrew.cooper3@citrix.com>
+References: <20250527222930.1452674-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/11] xenstored patches from split hardware control
-To: Jan Beulich <jbeulich@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "Juergen
- Gross" <jgross@suse.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	<xen-devel@lists.xenproject.org>
-References: <20250725235858.666813-1-jason.andryuk@amd.com>
- <698b0944-0be3-4c04-ba97-a8ef55ebd826@suse.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <698b0944-0be3-4c04-ba97-a8ef55ebd826@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE16:EE_|CH2PR12MB4327:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66d236b5-2f89-487c-25c7-08dde4bd19ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?ek9CZXl4U2swY3VLVGgxYW9mZnEzYjlQWnpJNFM0eXY3WkNRMUYyd3lWTHF2?=
- =?utf-8?B?eU1JTUVmNWdqdWU2Vkh3WEZNbzBma04wT3hIbUg3NFNKMkk4d0FuSklJKytX?=
- =?utf-8?B?b2FzWnEyYzd4a1ZaeEFSNmFiRDRBRUxZS1gvYjllSHNCMWp5c2xPZEZFMzVv?=
- =?utf-8?B?S05ZdUhXUDFtNXpwM1pLODV1OHErMzVMNnppMTc4NmJUTDkvUXVzMEJlQVdo?=
- =?utf-8?B?VWZDTm9GT0ZKQ1hnVEplN0FmbEFlSU5SeHZFdTNEaWxodXh2VHpwa2NETkdR?=
- =?utf-8?B?TU9aK3E5OGx4cXZtR2hRMi9MQXVycUhwOFJaV0tRb0cyV1dsZ2wwYnVhNEM0?=
- =?utf-8?B?TkFvODZqMkNIbjBCTzNlaFNzUDJ1OTFJaE93ZkI5TkFseFRYZFNScXJKWXhQ?=
- =?utf-8?B?ZDJRR29tREZ3dHlmMW1zT1B4RTd3Rm45UHF5VGF6OXR4RUtGak1pMVB1Y2RH?=
- =?utf-8?B?U0Job3cwc0o3eUpKSjJuUm8vV1VUMDNQUWhkZktOaE1kZzR0NGR4bVVZejIy?=
- =?utf-8?B?QlhrM3RjSzQzTmZNMEorK1RPM3pjODZFb0pNV0Y0Wmp3S2Q1UWZwTDUyRFc5?=
- =?utf-8?B?L1I2bElXa2l5eHVLcGllM0lKNGxuTkJoOURlQld0UnM4NFhROUM5WHplVVA4?=
- =?utf-8?B?YVZuUTJuS29zZW5Uem8wblcyVTdCY0pVS2lWNmo4RUJqbG9hcGlERi90bE9r?=
- =?utf-8?B?VjBkTDZoNzFkZW52Ym5lQmlHOFFUN2Eza3hqNEFKT05GN2hoeFBtMEdYSlpT?=
- =?utf-8?B?RjhYd21GT0V0Y1d0RHg4TW5MalB1ZFVxN3lsenlLdGIwQTVMY292OTJlQVcr?=
- =?utf-8?B?ekJnQm5sTUJpOEkrMlFaRGhMYUI1OXFZMWVwRjN4ci92ZVdXM2dLQ3ZUNFFV?=
- =?utf-8?B?RFgzYUtkTGUydmFwUVJqZWlvUU1ub2tyQUJXaHgvRHNGR0RKRktLNjREaENI?=
- =?utf-8?B?NzhmVnpkYVhYc3FQcDhCZm5KYy9iYlhCTjFDanZVQW5jcnJ0Und6Z3JmYVh3?=
- =?utf-8?B?L25RZSttTUxTSlVSVE9SN1E3RnZlSUV2eEFqemtUU0dlK0NMaXJ2M2hnNnFC?=
- =?utf-8?B?NmpReXFRSnc2QUpnaTJEYm5TVnJmK3E3a2FYckFFSEhaODRDaTQzS0JndHNt?=
- =?utf-8?B?QUU2ZktJRlM0NUcwcFpHQ3Y0eWlCdVVBQ0c5ako3M2xGc0hzS1lJTWhDUWRB?=
- =?utf-8?B?YUQzOWN1TysybFI3VmQ2aWFuSDE3S2paUzRnQU8zMFMzY3Y3d2Jrakt4VG9s?=
- =?utf-8?B?a0hycEZja0NLeDBiWWNBNjJaUVQ5NlJ0dW5kOE5TUEFpa3UxOHE1Yk14Q3c4?=
- =?utf-8?B?WmN0Yzg4dmpTdDNhbWNNc01iN1dEN1FrVjRpc1JPVnVvTU5VQ3BRTGdoaWFQ?=
- =?utf-8?B?UVlGY3VwbzR4RHNpYm9USFdPblVtZDdrazZDbnk3QzBLT1JBK2ZnWGdJSkUx?=
- =?utf-8?B?eTUvY05HWmptQk85Y01kcGtFNEFrTCt2TjNZR2IrWWcyZEcxVlJHSFZGTmJ1?=
- =?utf-8?B?TnhJK28wa3VCNWpDVHpjY0t0cUQ4d3crT2tQTGZjNzdOVTk2VHdHaUIzSkdW?=
- =?utf-8?B?VXhVR0pOYjE4bC82OS9JdDZiaEIvRWxVRE1ZL3NJa1pSOUtaOWVHWERHUUUy?=
- =?utf-8?B?M0laSDMyM0hSZTRkbTBiSGNEUU9vamEwNUMwK2w5eGtFN2Y3c2xOTzZmSUJq?=
- =?utf-8?B?Wm1XLzVWaVhpUU1BeHdVSXJUcWlEVks4VExtdjhZTjdFK2xLb3BPMmdXa2RZ?=
- =?utf-8?B?cG1zMDJMVFRNMUxyTUNQdVF4dGpiWlRROC83ai9mUVVnc1hteGxBczVWNDJJ?=
- =?utf-8?B?LzcwY0xZNnlSdzVicUhXbG9YU1NGdDF6dGJmT01XNTdxSjJDT052WTJTQkYr?=
- =?utf-8?B?UnNiV2JCYlpNd05XanQ2Wnd3TU5QQUdpaHVwUGtNeTlhc0ZsaUJoVGQ5Nncy?=
- =?utf-8?B?SkZNWVY3M0tzUHJIVlY3aTV5SG5icnNBNG81VFlnb0g4ZXp0My9WWmE3YVdl?=
- =?utf-8?B?KzhnR1R2VmxiRG5zc2dXZE1tVm5FeUpFektlOE5RaWJTOWd5a21wVlBIeXBi?=
- =?utf-8?Q?Fyj5vM?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 16:24:58.5832
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66d236b5-2f89-487c-25c7-08dde4bd19ad
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BY1PEPF0001AE16.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4327
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2025-08-26 11:53, Jan Beulich wrote:
-> On 26.07.2025 01:58, Jason Andryuk wrote:
->> This is a subset of patches focusing on xenstored changes from my split
->> hardware control domain series.
->>
->> It should address the stubdom breakage from the previous series.
->> stubdom was tested in gitlab-ci - xl list shows Domain-0 and Xenstore.
->>
->> "tools/xenstored: Use priv_domid for manual nodes and permission" is an
->> interesting result of looking to rename some internal variables to
->> better align their purpose.
->>
->> Any review or guidance on the approach is appreciated.
->>
->> Jason Andryuk (11):
->>    xen: Add capabilities to get_domain_state
->>    tools/manage: Expose domain capabilities
->>    public/io: xs_wire: Include event channel in interface page
->>    xen/dom0less: store xenstore event channel in page
->>    tools/xenstored: Read event channel from xenstored page
->>    tools/xenstored: Add get_domain_evtchn() to find evtchn
->>    tools/xenstored: Auto-introduce domains
->>    tools/xenstored: Use priv_domid for manual nodes and permission
->>    tools/xenstored: Rename dom0_domid to store_domid
->>    tools/xenstored: Remove stubdom special casing
->>    tools/xenstored: Remove hardcoded implicit path
-> 
-> To allow more of this to go in, you'll need to chase an ack for patch 4.
-> Of course you could also indicate if committing any later changes ahead
-> of patch 4 would be possible / sensible.
+One aspect of the old ffs() infrastructure was the use of TZCNT without a
+CPUID check.  Given no obvious justification, I dropped it during the cleanup.
 
-I re-posted the xenstored changes separately and they have gone in, 
-thanks.  Yes, I need to follow up on patch 4.
+It turns out there is a good reason, on all but the most recent AMD CPUs.
 
-Thanks,
-Jason
+Reinstate the use of "blind" TZCNT when safe to do so.  This happens to be
+preferentially in loops where a repeated saving of 5-6 uops becomes far more
+relevant than a one-off scenario.  Leave an explanation of why.
+
+It is not safe to perform this transformation for BSR and LZCNT, because they
+count from opposite ends of the input operand.  Furthermore, this incorrect
+transform was not caught by the selftests.
+
+Extend the selftests with test_for_each_set_bit_reverse() as that exercises
+the "x known non-zero" optimsiation path in x86's helpers.  Adjust the
+existing test_for_each_set_bit() to intentionally use an asymmetric input bit
+pattern, otherwise "counting from the wrong end" bugs continue to slip by.
+
+No functional change.
+
+Fixes: 989e5f08d33e ("x86/bitops: Improve arch_ffs() in the general case")
+Fixes: 5ed26fc0768d ("xen/bitops: Implement ffsl() in common logic")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+
+v2:
+ * Use TZCNT mnemonic given the updated toolchain baseline
+ * Do not convert LZCNT.
+ * Extend selftests.
+
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2004918013
+
+I've kept Jan's R-by as this is a subset of what was previously reviewed, but
+I'm posting it for clarity as there are a lot of selftest changes.
+---
+ xen/arch/x86/include/asm/bitops.h | 13 ++++--
+ xen/common/bitops.c               | 78 ++++++++++++++++++++++++++++++-
+ 2 files changed, 86 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/bitops.h b/xen/arch/x86/include/asm/bitops.h
+index 87eac7782f10..b17d67e8ca61 100644
+--- a/xen/arch/x86/include/asm/bitops.h
++++ b/xen/arch/x86/include/asm/bitops.h
+@@ -399,9 +399,16 @@ static always_inline unsigned int arch_ffs(unsigned int x)
+          *
+          * and the optimiser really can work with the knowledge of x being
+          * non-zero without knowing it's exact value, in which case we don't
+-         * need to compensate for BSF's corner cases.  Otherwise...
++         * need to compensate for BSF's corner cases.
++         *
++         * That said, we intentionally use TZCNT on capable hardware when the
++         * behaviour for the 0 case doesn't matter.  On AMD CPUs prior to
++         * Zen4, TZCNT is 1-2 uops while BSF is 6-8 with a latency to match.
++         * Intel CPUs don't suffer this discrepancy.
++         *
++         * Otherwise...
+          */
+-        asm ( "bsf %[val], %[res]"
++        asm ( "tzcnt %[val], %[res]"
+               : [res] "=r" (r)
+               : [val] "rm" (x) );
+     }
+@@ -428,7 +435,7 @@ static always_inline unsigned int arch_ffsl(unsigned long x)
+ 
+     /* See arch_ffs() for safety discussions. */
+     if ( __builtin_constant_p(x > 0) && x > 0 )
+-        asm ( "bsf %[val], %q[res]"
++        asm ( "tzcnt %[val], %q[res]"
+               : [res] "=r" (r)
+               : [val] "rm" (x) );
+     else
+diff --git a/xen/common/bitops.c b/xen/common/bitops.c
+index bd17ddef5700..14e6265037f1 100644
+--- a/xen/common/bitops.c
++++ b/xen/common/bitops.c
+@@ -97,14 +97,14 @@ static void __init test_for_each_set_bit(void)
+     if ( ui != ui_res )
+         panic("for_each_set_bit(uint) expected %#x, got %#x\n", ui, ui_res);
+ 
+-    ul = HIDE(1UL << (BITS_PER_LONG - 1) | 1);
++    ul = HIDE(1UL << (BITS_PER_LONG - 1) | 0x11);
+     for_each_set_bit ( i, ul )
+         ul_res |= 1UL << i;
+ 
+     if ( ul != ul_res )
+         panic("for_each_set_bit(ulong) expected %#lx, got %#lx\n", ul, ul_res);
+ 
+-    ull = HIDE(0x8000000180000001ULL);
++    ull = HIDE(0x8000000180000011ULL);
+     for_each_set_bit ( i, ull )
+         ull_res |= 1ULL << i;
+ 
+@@ -127,6 +127,79 @@ static void __init test_for_each_set_bit(void)
+         panic("for_each_set_bit(break) expected 0x1008, got %#x\n", ui_res);
+ }
+ 
++/*
++ * A type-generic fls() which picks the appropriate fls{,l,64}() based on it's
++ * argument.
++ */
++#define fls_g(x)                                        \
++    (sizeof(x) <= sizeof(int)      ? fls(x) :           \
++     sizeof(x) <= sizeof(long)     ? flsl(x) :          \
++     sizeof(x) <= sizeof(uint64_t) ? fls64(x) :         \
++     ({ BUILD_ERROR("fls_g() Bad input type"); 0; }))
++
++/*
++ * for_each_set_bit_reverse() - Iterate over all set bits in a scalar value,
++ * from MSB to LSB.
++ *
++ * @iter An iterator name.  Scoped is within the loop only.
++ * @val  A scalar value to iterate over.
++ *
++ * A copy of @val is taken internally.
++ */
++#define for_each_set_bit_reverse(iter, val)             \
++    for ( typeof(val) __v = (val); __v; __v = 0 )       \
++        for ( unsigned int (iter);                      \
++              __v && ((iter) = fls_g(__v) - 1, true);   \
++              __clear_bit(iter, &__v) )
++
++/*
++ * Xen doesn't have need of for_each_set_bit_reverse() at present, but the
++ * construct does exercise a case of arch_fls*() not covered anywhere else by
++ * these tests.
++ */
++static void __init test_for_each_set_bit_reverse(void)
++{
++    unsigned int  ui,  ui_res = 0, tmp;
++    unsigned long ul,  ul_res = 0;
++    uint64_t      ull, ull_res = 0;
++
++    ui = HIDE(0x80008001U);
++    for_each_set_bit_reverse ( i, ui )
++        ui_res |= 1U << i;
++
++    if ( ui != ui_res )
++        panic("for_each_set_bit_reverse(uint) expected %#x, got %#x\n", ui, ui_res);
++
++    ul = HIDE(1UL << (BITS_PER_LONG - 1) | 0x11);
++    for_each_set_bit_reverse ( i, ul )
++        ul_res |= 1UL << i;
++
++    if ( ul != ul_res )
++        panic("for_each_set_bit_reverse(ulong) expected %#lx, got %#lx\n", ul, ul_res);
++
++    ull = HIDE(0x8000000180000011ULL);
++    for_each_set_bit_reverse ( i, ull )
++        ull_res |= 1ULL << i;
++
++    if ( ull != ull_res )
++        panic("for_each_set_bit_reverse(uint64) expected %#"PRIx64", got %#"PRIx64"\n", ull, ull_res);
++
++    /* Check that we can break from the middle of the loop. */
++    ui = HIDE(0x80001008U);
++    tmp = 0;
++    ui_res = 0;
++    for_each_set_bit_reverse ( i, ui )
++    {
++        if ( tmp++ > 1 )
++            break;
++
++        ui_res |= 1U << i;
++    }
++
++    if ( ui_res != 0x80001000U )
++        panic("for_each_set_bit_reverse(break) expected 0x80001000, got %#x\n", ui_res);
++}
++
+ static void __init test_multiple_bits_set(void)
+ {
+     /*
+@@ -169,6 +242,7 @@ static void __init __constructor test_bitops(void)
+     test_ffs();
+     test_fls();
+     test_for_each_set_bit();
++    test_for_each_set_bit_reverse();
+ 
+     test_multiple_bits_set();
+     test_hweight();
+-- 
+2.39.5
+
 
