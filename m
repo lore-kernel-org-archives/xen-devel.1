@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9489DC8303F
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 00:55:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1093758.1449160 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44BE8CA0FE7
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 00:55:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1093761.1449189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqhyH-0000hR-07; Tue, 26 Aug 2025 00:55:33 +0000
+	id 1uqhyN-0001SN-R8; Tue, 26 Aug 2025 00:55:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1093758.1449160; Tue, 26 Aug 2025 00:55:32 +0000
+Received: by outflank-mailman (output) from mailman id 1093761.1449189; Tue, 26 Aug 2025 00:55:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqhyG-0000hK-Rf; Tue, 26 Aug 2025 00:55:32 +0000
-Received: by outflank-mailman (input) for mailman id 1093758;
- Tue, 26 Aug 2025 00:55:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uqhyN-0001SC-Mo; Tue, 26 Aug 2025 00:55:39 +0000
+Received: by outflank-mailman (input) for mailman id 1093761;
+ Tue, 26 Aug 2025 00:55:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=etY1=3G=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1uqhyF-0000gy-0I
- for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 00:55:31 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20613.outbound.protection.outlook.com
- [2a01:111:f403:2412::613])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 58f85198-8217-11f0-b898-0df219b8e170;
- Tue, 26 Aug 2025 02:55:25 +0200 (CEST)
-Received: from CH2PR05CA0043.namprd05.prod.outlook.com (2603:10b6:610:38::20)
- by IA0PR12MB7626.namprd12.prod.outlook.com (2603:10b6:208:438::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Tue, 26 Aug
- 2025 00:55:21 +0000
-Received: from CH1PEPF0000A34C.namprd04.prod.outlook.com
- (2603:10b6:610:38:cafe::91) by CH2PR05CA0043.outlook.office365.com
- (2603:10b6:610:38::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.13 via Frontend Transport; Tue,
- 26 Aug 2025 00:55:20 +0000
+ id 1uqhyM-0000hD-TK
+ for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 00:55:38 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:2009::61d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 60f9434b-8217-11f0-a32c-13f23c93f187;
+ Tue, 26 Aug 2025 02:55:38 +0200 (CEST)
+Received: from DM6PR14CA0055.namprd14.prod.outlook.com (2603:10b6:5:18f::32)
+ by MN2PR12MB4272.namprd12.prod.outlook.com (2603:10b6:208:1de::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.14; Tue, 26 Aug
+ 2025 00:55:34 +0000
+Received: from CY4PEPF0000EDD6.namprd03.prod.outlook.com
+ (2603:10b6:5:18f:cafe::47) by DM6PR14CA0055.outlook.office365.com
+ (2603:10b6:5:18f::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.21 via Frontend Transport; Tue,
+ 26 Aug 2025 00:55:34 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH1PEPF0000A34C.mail.protection.outlook.com (10.167.244.6) with Microsoft
+ CY4PEPF0000EDD6.mail.protection.outlook.com (10.167.241.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9073.11 via Frontend Transport; Tue, 26 Aug 2025 00:55:20 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ 15.20.9073.11 via Frontend Transport; Tue, 26 Aug 2025 00:55:33 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 25 Aug
- 2025 19:55:19 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 19:55:27 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 25 Aug
- 2025 19:55:19 -0500
+ 2025 19:55:27 -0500
 Received: from fedora.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 25 Aug 2025 19:55:19 -0500
+ Transport; Mon, 25 Aug 2025 19:55:26 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 58f85198-8217-11f0-b898-0df219b8e170
+X-Inumbo-ID: 60f9434b-8217-11f0-a32c-13f23c93f187
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=I5Uo5202k/fGARldPK1j/edqp2lO1XQLiJppMfsh0Xx1iXQcD/5AyEhYP917n4xKDRXtgjKRujq5rrTNqV3wsp4f1PlkK3BW10M0mPq5yEwxR3ISwu0U2ZHOid/sbn6lDai0voTYiXQRBhhcuWYi8LD7eMZvSqvPn6EzIcJOKUMXTSpwO0nAs38k9iwQzx84obHtO7SvEPRuTvJRlM4ATFnrxNgL2akKRWOoMejdHWBQrY6xn/l6eKPBd/sNChf+baOal7fSk+3E1XSwzsJWamaHr1qifnYFymCpoGzOBrIjMs5dcyQ8iEbCfJ3LXEKugdMhmEGvU8wzqogWjuoq5Q==
+ b=iyU3wxYGpiISoh/ORueFSlytgk+9QjxHWrrI+iS77I8904KH0bmveF6N9VU+okulfnrkePT4SD1RTIlTsRJRFdqSsnj0EpyUYr1ICpkXCd46C+tG+0ptUNybsT08+kFyDL4l2qOi4/q9i3kuueuodtlNyDtQDABrJLUGuUK8Art/hVD6eiraEXYcx08GmVvMoUIn3EXRXPEOgeRFbcXEBGMPCmiY+I0vTHMxsP+/gre5C+FBhzLoC1bVWRN7eFayeHZpD5+t7wSF2hNHl9XVbAWaKA1do+edtNX6IDiOAyAr+U6aRO0roXycbudLXzcB1PIytZz+gksNnNgbBABi5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NMrZfLwjbfhI3aWmscLOLpXst3rpqtydGi3dGVmj0C0=;
- b=n9y61cLqP6rmvK/FMaq/xphMPkR41H7EQoedS3lVjxZtKr0GBa8/4Ygp6i9Y3ENTvbxIZL8VV0mWVtvhN+gwPuOgj3Ig7VueDktpqk0xzzhhL7QPobraAWTIIMheNqglIEyNCOtieCEF8lGRQJYZTIyLGj+6EYNBdwN7NivqDj6aIyq5ZvALdAwLehskb+FwXlBTrDqBkk7jPKi9v4Dk2VB5blyatrjfF/OItR7p+XKOwzOJP5+p+tp/TMu6wTgnl1TrUZvAxDIf5YJBaddYtBRMu98XvtGQczY9cACeTd/P3bjcsSPj+P/Take+FSvTarO1onK+CNB4HruyK1RG8w==
+ bh=vhSEPF8a35m/xTcBty/l8kD6Fit9wlVpONLWs4x9hHc=;
+ b=G26YkfVD81nINmHApXz4ZmP6moCflXuXTcTRFWEFE85quKSoF8RIPPr+N3vhXtGt//Ns1qSKuiHp01TwhZHEdZ+5Pfid2lSutwQl0gg7vOZvO7GbG5mKkf56huNfiAP1BDqp4+SaRb67OkZEw5DPKPBhlBVHSiVvzkc7DhUOOWC7wtzm1poByNeNFKruVvK4rKDR9MpF9X3qBr26+mxvd59qe5Rqdynfs8ZRurR3Nr4pKezYW9H1WPvKaRyg0gf7fMjIMKIfLrvV9Py9HOU3Qr1spfyCoJ4FWmrjdd/fcapJ4Ppv7rkqW8ugr/v79qoJwI/U8usU+r+ZzHm67Flm7Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NMrZfLwjbfhI3aWmscLOLpXst3rpqtydGi3dGVmj0C0=;
- b=NCVvLWutsKI97VE5EzTHZPytl6d7I/zieCyi2onT7fduaB0Y3ltau1clV6NmfOb3R8nBum22t50Gh09ZpRCs3PubfrHgZQEnz1GByFak+CdN8V5lSU7w1wBo3iNvDbaunSzDJSDCLTuoZMbUXLjcs1yIy1AT+tLr4PHDqn8aAyk=
+ bh=vhSEPF8a35m/xTcBty/l8kD6Fit9wlVpONLWs4x9hHc=;
+ b=RVCBfS8XKocgZAYHQbndIsv6uFJPNsX+hv+3pDf92Soh59aeNbp4tm5g4EP3ZW04EQqxlkT10ebS+DBZHOZBtPm2sQFv+U9odzWu/wTiQVD6eECd3C3IlTN38iVnGUOMYOIXRH/pgSHGK1NuHxZvu7dJKG4CBag/l1hEt/PD4G8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -90,77 +90,126 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>
-CC: Jason Andryuk <jason.andryuk@amd.com>, <xen-devel@lists.xenproject.org>,
-	<linux-kernel@vger.kernel.org>
-Subject: [PATCH v2 0/3] xen/events: Fix Global and Domain VIRQ tracking
-Date: Mon, 25 Aug 2025 20:55:12 -0400
-Message-ID: <20250826005517.41547-1-jason.andryuk@amd.com>
+	<oleksandr_tyshchenko@epam.com>, Chris Wright <chrisw@sous-sol.org>, "Jeremy
+ Fitzhardinge" <jeremy@xensource.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, <stable@vger.kernel.org>,
+	<xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v2 3/3] xen/events: Update virq_to_irq on migration
+Date: Mon, 25 Aug 2025 20:55:15 -0400
+Message-ID: <20250826005517.41547-4-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250826005517.41547-1-jason.andryuk@amd.com>
+References: <20250826005517.41547-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34C:EE_|IA0PR12MB7626:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5aad6dd8-9834-4a60-a024-08dde43b3b6c
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD6:EE_|MN2PR12MB4272:EE_
+X-MS-Office365-Filtering-Correlation-Id: 257c7527-1b1a-433b-18bb-08dde43b4337
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?ZcdB3z6dhWDlBhdWJgcFO5CSCaEIzfLMlO1c8yRlep4eJEaM27YF+N/QuP4k?=
- =?us-ascii?Q?8ilV2v7Gq6PKzoVpvL9ZKIeMS5CZDvwWPVNfZAG7V4ndIezZIsc4c/4eXbLe?=
- =?us-ascii?Q?ElotbD7SfK8tQ6PHeoeD82mhfut01tXEUB6T2axWvVjOqiDa21kGhhJTR7uD?=
- =?us-ascii?Q?iFrXkQDbH0TdZcxRvYXOoYLWZ323cVHusK0owSCH+Nt1DlIAnbq00fede92c?=
- =?us-ascii?Q?HcqZ0JqEi2HW4tfmnlg73aff9Rjr0ugPAKM9SNpVFx83vvmbrG2eQ/7RSlbo?=
- =?us-ascii?Q?SH6AMfG5l5kz5uLKAPcFGGRcB0LrpixdzRfo373oFwMKODxOXqlimoawY0km?=
- =?us-ascii?Q?m9puWwD/FZ4aUS1VrXrdgljCrO+q5FtVcM56hXOY8ekkOhzsjZxoxWhNzHyG?=
- =?us-ascii?Q?LMhDt7431oG16NubCXGRFAV+sP1Y16iKPCP/o5BS7QgLIQ8T2ybBQINuRQT3?=
- =?us-ascii?Q?4XXP9nizCse3fpdxEYECsPKZZ/HMSBg+VXnwzep/RUCuC48jUI/abJDskk/B?=
- =?us-ascii?Q?kzewuQECgmsSLXp6bWd7XEnXbquodE19nKzYYe7H3gv9In1cAX1c2HWGo5o2?=
- =?us-ascii?Q?BA0tHxb+TfKUniu5/e11FQ2BXxlAKFVhc3n1K2OLpSLcZq4rvXGWFYm9xPgr?=
- =?us-ascii?Q?eIVzvdi49CTl0jDAFKjCFH9FRP9HiMLMYEqzpn4SAYQndGlRsNS1iPZEbN+8?=
- =?us-ascii?Q?/338EFmSmDAQoOLqVR8J8Snp+hT/bKCU8/VMUw91jUiC1h1Cfc1DBlDPd1+P?=
- =?us-ascii?Q?A9NRxmGZkl9EdwHknXBjxUJcBlYNzhYgHSyNCY9cvop31keyzK9IwXhJzyYL?=
- =?us-ascii?Q?EJrcSoBvgGrmFh2gjSgBq6JKUB9JuHYkB18KBe0947PSRf3Bz3c+qsW7truj?=
- =?us-ascii?Q?6f36AFgAcmQC+ao2DrN7LJy78O4kKqgLxkqMwCWAJkNI2F+CS/XHV6mnd15D?=
- =?us-ascii?Q?bjrFtb/PP7HYTTkfsiqIsb+Sb/AhxhwJe8bwGNF5t/e4JKZHZOpVcxb+7Vb8?=
- =?us-ascii?Q?cTwzDEULb2QITFkW2tt8Y2q/Hngx0wJ1R3kqsS7RTrD+mhKQoIN6pJD/Z6zN?=
- =?us-ascii?Q?CjdZerwMD9A6CuopPfYfSMxRQZjtx0f7LBEP+uOLF/dxnW8Hv/Ty5YPYjRDA?=
- =?us-ascii?Q?nfR/SCYQNhBC2kV8rAbyE3c/hx5qEVO0HdG0MaPmNO4XKDKuWRYJdjzlt/Gf?=
- =?us-ascii?Q?HnAW1Za4b9LllfrJR5aISNKrCnZrjxy4teRx90eBwLphT7t0rjHzB//DBz53?=
- =?us-ascii?Q?YqCmKCuIP6Ye3LDkjtQbq5MqO1IWhavzefDvuvmHIzApFCgyaZR53cKc7It9?=
- =?us-ascii?Q?JBV/faKoG1n/RMc+WJ8pz92zfF1sDAzhyVx1VqhcPmR3XZ8kYyIhE15xcV/F?=
- =?us-ascii?Q?fEIGJPQDfnPr/vzBCLJ3w/BEl83XOqAMkPRFjPUstA34TGwwXe1r+TSUmv2q?=
- =?us-ascii?Q?AbLQU/P2CiQBHlvrWYjEo/6g8nxu5RYXlc1Hmw26j3/9omKx9R2/+XLdMWSm?=
- =?us-ascii?Q?JmADNkRfSP5rzocDTTWqAzo5nYT7/UMsTpOw?=
+	=?us-ascii?Q?nMu5kN6+I6t6UvBysYvjl1/MEYUrCnNC8IwTMUiApM6Y7vjcU5L7+M2ajHCD?=
+ =?us-ascii?Q?fm1E04TgLfivlaY/KFpx/OBXiRVFWeSJt4HfkEglYRNUqCUJVW7xdlX/ESS4?=
+ =?us-ascii?Q?vo8bpZqUeUCIMQxSaY2wZiDof6geiz/JyGw6W9jHMLqrWO33opFWTKOE3mG7?=
+ =?us-ascii?Q?AivaUi5VktkKg/vNRYmshmMkvDxlasVH47xXY2Nx56YIyin61gDNGwWcQtjO?=
+ =?us-ascii?Q?P1+KWpnSWMR0bVPQTGf5h/gOr80x8N4np0ZJwafstEU4qCPM1KsFVQ8QEd+M?=
+ =?us-ascii?Q?SVEDfgGUW4wLHNDFoU51KIc5ZULnsfv35s7lR/org0HSwDACOGU/20RQco9f?=
+ =?us-ascii?Q?99FEOryKLszZ6v9KGyeHpuTRhYku1n53KcTZhHMmaU/juJlwdycxTxRZJS1n?=
+ =?us-ascii?Q?LrTxbJ4E8tAotqBtD6kUj3GaW2XMACJjWygKwl11mBJx9Tf0gBr2prrL1mHR?=
+ =?us-ascii?Q?T4gTczicMx8C/xgckO+miyL2mns3q5tBNUoP1agh5Cyoo41TnHtVWnlvER8r?=
+ =?us-ascii?Q?xTAvFr6rWe8ThzSOwSthdHcxJRlYpvNTUXiLziVp1MgTtSUCQpPAYMLDXMv1?=
+ =?us-ascii?Q?tXoPs/dtEkYfO5Y2SYIzFAB49JbZN/M2oXjE2+onWoadlFVjtXQuYlCP3GiQ?=
+ =?us-ascii?Q?4W3+CF5a28GBiyoRGIs92SwcM24971eCdefuOL7ufVZAZ/7e4dmH0ZHmGIde?=
+ =?us-ascii?Q?FjMOWGPBlz6RXnG+GbBpCIvG4TS48hhRae/39OtZqKAFBPEUKi6IBA7M0Utg?=
+ =?us-ascii?Q?oKvMilWMMZteVwD5/f9EUaTLcaugmrG3GjF/4sPDpSP5DLBTENFPhy0WHHKo?=
+ =?us-ascii?Q?sxpr4u+NPW6EK2WD8zL3J9vAlQBG3O8fA4qQybwshy4b/RvYeJv529byUyfz?=
+ =?us-ascii?Q?AAGWmAmFKNwFE26HzvOVBG3DIIeO0+MIlcztVkhWdQYGYQzz+/H8G01+OqJH?=
+ =?us-ascii?Q?d2w4QDk1DwCbOK2mOFfkC02qZAKUenToIQfyOaNwurdUEfus7yJs/gRg0iec?=
+ =?us-ascii?Q?kYXJJ6wWJaY5Nt9sJYkr+jSwRffnBucwH1ruJJfHwtG5okUylSUcRy94D2Lg?=
+ =?us-ascii?Q?+reSQ4ypSSvEQlivuZKGa1VmV2HTu12f35b3fGW5Cy1wFTHaRtM9uutAEcNM?=
+ =?us-ascii?Q?WbNbqpNXLwuLW168eTNjWY4E/G3sGteGmPdZrWEoCrW+bMcNYR/eS+OOSC7L?=
+ =?us-ascii?Q?GVxbEmPzlIlizGHekFE56hQRrluaRhe/a00yhvdsr8bVqgCo7krGflPF9oLR?=
+ =?us-ascii?Q?vZ6/ARt5r98MWPx4qKGnH39aGx/IfucC0TpPx7/4dIQmtW3RyDKN0+PrIwhY?=
+ =?us-ascii?Q?vVIgJIuyy81QV3bea/owOwxHVRrw5CYi3m5bEZ8nFGlw4ZuU0ybFs7947HVx?=
+ =?us-ascii?Q?MJsS+vQYboQ5q+Gc+1jp1tzI5cjtQXQPjGbx5JyfQvmsqim0HNfvuUORUANU?=
+ =?us-ascii?Q?O4hwTi1b3Y1tW72mPpjeUPea+ylza4Un1fbzXHHXJ8nbpbk3mG5dFqTLPvVk?=
+ =?us-ascii?Q?XmZFJ5f3NvQcIeXnA72fgPKyULIXqfFzSher?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 00:55:20.7097
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 00:55:33.7475
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5aad6dd8-9834-4a60-a024-08dde43b3b6c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 257c7527-1b1a-433b-18bb-08dde43b4337
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000A34C.namprd04.prod.outlook.com
+	CY4PEPF0000EDD6.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7626
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4272
 
-v2 is now a series first changing find_virq() to return -EEXIST in some
-cases, and then tracking cpu movement of VIRQs.  This keeps ensures the
-cpu is correct when calling unbind_from_irq().
+VIRQs come in 3 flavors, per-VPU, per-domain, and global, and the VIRQs
+are tracked in per-cpu virq_to_irq arrays.
 
-Jason Andryuk (3):
-  xen/events: Cleanup find_virq() return codes
-  xen/events: Return -EEXIST for bound VIRQs
-  xen/events: Update virq_to_irq on migration
+Per-domain and global VIRQs must be bound on CPU 0, and
+bind_virq_to_irq() sets the per_cpu virq_to_irq at registration time
+Later, the interrupt can migrate, and info->cpu is updated.  When
+calling __unbind_from_irq(), the per-cpu virq_to_irq is cleared for a
+different cpu.  If bind_virq_to_irq() is called again with CPU 0, the
+stale irq is returned.  There won't be any irq_info for the irq, so
+things break.
 
- drivers/xen/events/events_base.c | 32 +++++++++++++++++++++++++-------
- 1 file changed, 25 insertions(+), 7 deletions(-)
+Make xen_rebind_evtchn_to_cpu() update the per_cpu virq_to_irq mappings
+to keep them update to date with the current cpu.  This ensures the
+correct virq_to_irq is cleared in __unbind_from_irq().
 
+Fixes: e46cdb66c8fc ("xen: event channels")
+Cc: stable@vger.kernel.org
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+V2:
+Different approach changing virq_to_irq
+---
+ drivers/xen/events/events_base.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index a85bc43f4344..4e9db7b92dde 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -1772,6 +1772,7 @@ static int xen_rebind_evtchn_to_cpu(struct irq_info *info, unsigned int tcpu)
+ {
+ 	struct evtchn_bind_vcpu bind_vcpu;
+ 	evtchn_port_t evtchn = info ? info->evtchn : 0;
++	int old_cpu = info ? info->cpu : tcpu;
+ 
+ 	if (!VALID_EVTCHN(evtchn))
+ 		return -1;
+@@ -1795,8 +1796,18 @@ static int xen_rebind_evtchn_to_cpu(struct irq_info *info, unsigned int tcpu)
+ 	 * it, but don't do the xenlinux-level rebind in that case.
+ 	 */
+ 	if (HYPERVISOR_event_channel_op(EVTCHNOP_bind_vcpu, &bind_vcpu) >= 0)
++	{
+ 		bind_evtchn_to_cpu(info, tcpu, false);
+ 
++		if (info->type == IRQT_VIRQ) {
++			int virq = info->u.virq;
++			int irq = per_cpu(virq_to_irq, old_cpu)[virq];
++
++			per_cpu(virq_to_irq, old_cpu)[virq] = -1;
++			per_cpu(virq_to_irq, tcpu)[virq] = irq;
++		}
++	}
++
+ 	do_unmask(info, EVT_MASK_REASON_TEMPORARY);
+ 
+ 	return 0;
 -- 
 2.50.1
 
