@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F94CA0FE7
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 18:13:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1094880.1450105 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C40ACA0FE7
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Aug 2025 18:15:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1094932.1450114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqyA5-0004Nl-S2; Tue, 26 Aug 2025 18:12:49 +0000
+	id 1uqyC7-0004yG-9N; Tue, 26 Aug 2025 18:14:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1094880.1450105; Tue, 26 Aug 2025 18:12:49 +0000
+Received: by outflank-mailman (output) from mailman id 1094932.1450114; Tue, 26 Aug 2025 18:14:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uqyA5-0004Ne-Nd; Tue, 26 Aug 2025 18:12:49 +0000
-Received: by outflank-mailman (input) for mailman id 1094880;
- Tue, 26 Aug 2025 16:37:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uqyC7-0004y9-6h; Tue, 26 Aug 2025 18:14:55 +0000
+Received: by outflank-mailman (input) for mailman id 1094932;
+ Tue, 26 Aug 2025 18:14:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=beyi=3G=gmail.com=ritesh.list@srs-se1.protection.inumbo.net>)
- id 1uqwg4-000075-EH
- for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 16:37:44 +0000
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [2607:f8b0:4864:20::531])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc00d15d-829a-11f0-b898-0df219b8e170;
- Tue, 26 Aug 2025 18:37:42 +0200 (CEST)
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-b47174c8e45so5627449a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 26 Aug 2025 09:37:42 -0700 (PDT)
-Received: from dw-tp ([171.76.82.15]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-248681adacdsm21450705ad.10.2025.08.26.09.37.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Aug 2025 09:37:39 -0700 (PDT)
+ <SRS0=EpqW=3G=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1uqyC5-0004y3-Uy
+ for xen-devel@lists.xenproject.org; Tue, 26 Aug 2025 18:14:54 +0000
+Received: from fout-b4-smtp.messagingengine.com
+ (fout-b4-smtp.messagingengine.com [202.12.124.147])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8e7736bd-82a8-11f0-a32c-13f23c93f187;
+ Tue, 26 Aug 2025 20:14:52 +0200 (CEST)
+Received: from phl-compute-09.internal (phl-compute-09.internal [10.202.2.49])
+ by mailfout.stl.internal (Postfix) with ESMTP id B4E331D00182;
+ Tue, 26 Aug 2025 14:14:49 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-09.internal (MEProxy); Tue, 26 Aug 2025 14:14:49 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 26 Aug 2025 14:14:48 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,157 +46,235 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc00d15d-829a-11f0-b898-0df219b8e170
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756226260; x=1756831060; darn=lists.xenproject.org;
-        h=mime-version:references:message-id:date:in-reply-to:subject:cc:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jyPF/dL+2YqZRv98PVCshXGneATY8Fvhth5O4vhMkWc=;
-        b=RWf3kQcX6YzKYTR9970XgbgkZ6zwh4cAo3riZ2fvDnR6N6YYb165G0fO75pYdUDzpL
-         dCOXdL+o42DEOkx6x2xrHcdAzZKOSc25RliuXiHQcCmfem8IOpPD+JYfGpJSfAfwhhBd
-         24bqMQCbui4YwkMijCJ4m/4Sla7N8AzhhzL67D0b0b5kEsOjISBfeWPwRuP/ITERpRuk
-         nA8AMopdJV5LVn/aq9TGJCEED0uHDZ3RSPhTpIG/fPCz8QZRei6g7ilbGyzAPDY2kdl6
-         hMdJ4Fl6nSOZhDHgQ4XxHmUI659jqYOacB3f6wlEYDlbsAWrdg7J8im+JggyFzfpQ45S
-         8tEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756226260; x=1756831060;
-        h=mime-version:references:message-id:date:in-reply-to:subject:cc:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=jyPF/dL+2YqZRv98PVCshXGneATY8Fvhth5O4vhMkWc=;
-        b=RG7S51gzQxa/y0pGWiZfdoe1SQG8QBSCvyQQdvnsgnIKRibAUahuWjnk843W3Gwk9d
-         cTKFje6qDOOJO97E+QvM5sE1K9LdrVzFhclyaVb7h9enc9fmrKAEnL6mKdHt1ctOmOcH
-         x6w+Cqot7x/n5wm7pud4zFE9SxifV7Q2puatUWt1WlZdF47T7rcQ28rbwg/0vOgtE/oJ
-         zboibRtuZUSM5KwqfrM8tcEhwnj7SPmvLjVN5xm4j/WAcyd8ePy+a0czbPxuxY11eMiN
-         D1mLD861ijBdXtc/eAHIAWPiGjjLnt9GMZTG4ZctUs4PuUpk8o+AVAaRnbKmwfy4Hwht
-         pfIQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVBdjmZtICOMM3c6kByFhniPwXUul5VCHZdAi4QWRqvB+Xj3SaqGI6tYhEQxnGw35rrNVqXtVRkbAI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzqOJQFF/WATj0MiNvfeGCiXVjNRZ87gNn3JHl3LHhZp/dNogxp
-	gPUiu5PhlbvSHFtS/Q2/wZTOum7Bsx00taonYf2v9uHhr/RVx+cpDVIqeJTgz17N
-X-Gm-Gg: ASbGncslhDDMD3L+FyAYpLfCriRoTfQwU0TiraE1QcehF2c7umgBKVNjg/qquAvAaMG
-	qcwrqkeVQuyC/8EglVjo69vGQBrUYMRjZHkT6+TRwGrUSLCWdhu4Pn6x+fZeajquv8ffe2aRYig
-	TNZSThKcPvh8ZMLLgBgn349pKke97RcHXiGNoWN1aWdespetBjjkonQUEGLFBqZH5F8fNGHlJbZ
-	Nq8KAEyq0/YvenVHykjin2BbBNqgOSRX6O477TSt73b5j9Nv//QFF3Sb2DV1/V2x3db0AmDJySX
-	r274ZVGaNfcsS8OofyAiH9FYXCdqc4K+NeRiem1pwac1a2rH+5Hvq6v8fU4+O7szDwUTHSzPaX7
-	Pmib4GtW+9hONzQ==
-X-Google-Smtp-Source: AGHT+IHkpBzdMdA7eE7qfwfc1lxqW0m87+LkJnM6/YhAHtUnIYSPMtiSiZLKGMu2nLQJcFkeNv4YGw==
-X-Received: by 2002:a17:903:32c8:b0:248:79d4:939b with SMTP id d9443c01a7336-24879d4978cmr26372675ad.54.1756226260428;
-        Tue, 26 Aug 2025 09:37:40 -0700 (PDT)
-From: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
-To: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org
-Cc: linux-mm@kvack.org, xen-devel@lists.xenproject.org, 
-	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, 
-	linuxppc-dev@lists.ozlabs.org, David Hildenbrand <david@redhat.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	Christophe Leroy <christophe.leroy@csgroup.eu>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Dan Williams <dan.j.williams@intel.com>, 
-	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
-	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
-	Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	Michal Hocko <mhocko@suse.com>, Zi Yan <ziy@nvidia.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
-	Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>, Hugh Dickins <hughd@google.com>, 
-	Oscar Salvador <osalvador@suse.de>, Lance Yang <lance.yang@linux.dev>
-Subject: Re: [PATCH v3 06/11] powerpc/ptdump: rename "struct pgtable_level" to "struct ptdump_pglevel"
-In-Reply-To: <20250811112631.759341-7-david@redhat.com>
-Date: Tue, 26 Aug 2025 21:58:09 +0530
-Message-ID: <87a53mqc86.fsf@gmail.com>
-References: <20250811112631.759341-1-david@redhat.com> <20250811112631.759341-7-david@redhat.com>
+X-Inumbo-ID: 8e7736bd-82a8-11f0-a32c-13f23c93f187
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1756232089;
+	 x=1756318489; bh=Iu198IFIGxtw87wjEV4oZe9sR+8A4Eia3jCOA9QVlTQ=; b=
+	CUrzM8IelUJKdU3ITUgP9yLMMxMTUgkLzil96428VSmdRkT2tjhBKZU8U0eD3deY
+	Ni0PTIVsoxMroIWyh9E32EJnWKmTQadS1ZoM7DG6bVd/hRtevrnvyI9B/cT8Z0HJ
+	rEkmNocgiDS8cnPy0V7fuct8tmhR9OZYNBVTJWAER4et3H0Nn2+nVrMBdIDH2HFk
+	0JVBwg4d955VJsopdhQjhx+UgKtRd5LkbPcLHRQLRHa7S3d3tWSJUHG3oyBaK2Yu
+	yKhKquit8NydF409V5kwc9U+CVdpfH2NDqWlABErjn/+dNEIu5AUk77T7Fswlk7d
+	GvVm1Hd1rdwzvE0LFwReWQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1756232089; x=1756318489; bh=Iu198IFIGxtw87wjEV4oZe9sR+8A4Eia3jC
+	OA9QVlTQ=; b=JgJmbQO8XJTdjQnh3oPSsTz+t7MCNyS2nHLLJnsoIuCtdfmbmHp
+	9+PIoUf4StoLYKTNRTIjC0CvJm0hwWRIoyliivd8qa4FS2jfCQQYteHuhH3nES0+
+	1+Xx+VGZ8D/JvbfHkfNxjU/Sm1UWg9kJuT5Ab7WtTgVbgtJ8sT0yk8zXU5F3v7sr
+	qOkAGJMtaIYiz51r9hUHx6h2c9fosIJgyfPY4y1msUbyfsfOsfyRJv51MlI2GUd6
+	/+sexCcSitYa07EwdQMhSx8UaJ5M/nKXBRPgA+76pWxi4EG4BZUfWo1U+7QW2Eqo
+	I8iDDLEQn/rMuex3jkv3JQGDWGyuoDcQWIQ==
+X-ME-Sender: <xms:mfmtaI4pBUq6u504DE46TuTiWSlBgZF5l8T-jbFiVUh52MhSoZCqDQ>
+    <xme:mfmtaNJN7s58Repz4pEoPHBlGzauaNv0UM8lel4_OI8vZ-7pZtSOOUFyV7Fa8EF4-
+    IUhKzEsEWKwEg>
+X-ME-Received: <xmr:mfmtaA5SxPc7qHzl5VSMOL6gGCxsjiM_NUU-rYaZyLAfQUszCROkM4ivcx86_WLAsFHlYhqnv8e2G1RfEZWG9AC2_OyZqlZ21fg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgddujeehleeiucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
+    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepueekteet
+    gefggfekudehteegieeljeejieeihfejgeevhfetgffgteeuteetueetnecuffhomhgrih
+    hnpehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
+    mhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrg
+    gsrdgtohhmpdhnsggprhgtphhtthhopeefpdhmohguvgepshhmthhpohhuthdprhgtphht
+    thhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthhopehjsggvuh
+    hlihgthhesshhushgvrdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishht
+    shdrgigvnhhprhhojhgvtghtrdhorhhg
+X-ME-Proxy: <xmx:mfmtaIz_mBMBLhoq3CXH7W7nkkuHEABHutmqjPHXFfh5gfiIrwXYAg>
+    <xmx:mfmtaMYXXtVJYJuQWJ1akr3paGmKQ-3D1Om5TTnhUNNiFI3wwxzSFA>
+    <xmx:mfmtaCQNx27O6pzWceKfBF8e5IXW0zR6iUQzMoCmCJw51dQTOajRbw>
+    <xmx:mfmtaOyw7bjQYM1VPu2b20QddLXFCmvdEaHBiYFUQI7_0kWfBg5axA>
+    <xmx:mfmtaGTQjDQIUMsJbmMCMzgDHalMbFMUZQdKCEV1SsVJHryHoW1fVwo6>
+Feedback-ID: i1568416f:Fastmail
+Date: Tue, 26 Aug 2025 20:14:47 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>,
+	xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: MSI-X cleanup(?) issue with passthrough after domU restart
+Message-ID: <aK35l46_vMfaJ61w@mail-itl>
+References: <aK0St0oUkJzR9lO0@mail-itl>
+ <2aafbace-3aa2-4f58-8f6c-2815cd2315ad@suse.com>
+ <aK1wSKTg5LcuzBDc@macbook.local>
+ <aK2TLuB_yKlWjFgM@mail-itl>
+ <aK28ubf5F3x-of3X@mail-itl>
+ <aK3JFqFHMZgWHzy7@Mac.lan>
+ <aK3KIWOl1EbpaWBM@mail-itl>
 MIME-Version: 1.0
-Content-Type: text/plain
-
-David Hildenbrand <david@redhat.com> writes:
-
-> We want to make use of "pgtable_level" for an enum in core-mm. Other
-> architectures seem to call "struct pgtable_level" either:
-> * "struct pg_level" when not exposed in a header (riscv, arm)
-> * "struct ptdump_pg_level" when expose in a header (arm64)
->
-> So let's follow what arm64 does.
->
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-> ---
->  arch/powerpc/mm/ptdump/8xx.c      | 2 +-
->  arch/powerpc/mm/ptdump/book3s64.c | 2 +-
->  arch/powerpc/mm/ptdump/ptdump.h   | 4 ++--
->  arch/powerpc/mm/ptdump/shared.c   | 2 +-
->  4 files changed, 5 insertions(+), 5 deletions(-)
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="XYjHLFKe6qQk+9uo"
+Content-Disposition: inline
+In-Reply-To: <aK3KIWOl1EbpaWBM@mail-itl>
 
 
-As mentioned in commit msg mostly a mechanical change to convert 
-"struct pgtable_level" to "struct ptdump_pg_level" for aforementioned purpose.. 
+--XYjHLFKe6qQk+9uo
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 26 Aug 2025 20:14:47 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>,
+	xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: MSI-X cleanup(?) issue with passthrough after domU restart
 
-The patch looks ok and compiles fine on my book3s64 and ppc32 platform. 
+On Tue, Aug 26, 2025 at 04:52:17PM +0200, Marek Marczykowski-G=C3=B3recki w=
+rote:
+> On Tue, Aug 26, 2025 at 04:47:50PM +0200, Roger Pau Monn=C3=A9 wrote:
+> > On Tue, Aug 26, 2025 at 03:55:05PM +0200, Marek Marczykowski-G=C3=B3rec=
+ki wrote:
+> > > On Tue, Aug 26, 2025 at 12:57:50PM +0200, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > On Tue, Aug 26, 2025 at 10:28:56AM +0200, Roger Pau Monn=C3=A9 wrot=
+e:
+> > > > > On Tue, Aug 26, 2025 at 08:16:56AM +0200, Jan Beulich wrote:
+> > > > > > On 26.08.2025 03:49, Marek Marczykowski-G=C3=B3recki wrote:
+> > > > > > > Hi,
+> > > > > > >=20
+> > > > > > > I'm hitting an MSI-X issue after rebooting the domU. The symp=
+toms are
+> > > > > > > rather boring: on initial domU start the device (realtek eth =
+card) works
+> > > > > > > fine, but after domU restart, the link doesn't come up (there=
+ is no
+> > > > > > > "Link is Up" message anymore). No errors from domU driver or =
+Xen. I
+> > > > > > > tracked it down to MSI-X - if I force INTx (via pci=3Dnomsi o=
+n domU
+> > > > > > > cmdline) it works fine. Convincing the driver to poll instead=
+ of waiting
+> > > > > > > for an interrupt also workarounds the issue.
+> > > > > > >=20
+> > > > > > > I noticed also some interrupts are not cleaned up on restart.=
+ The list
+> > > > > > > of MSIs in 'Q' debug key output grows:
+> > > > > > >=20
+> > > > > > >     (XEN) 0000:03:00.0 - d22 - node -1  - MSIs < 41 42 43 44 =
+45 46 47 >
+> > > > > > >     restart sys-net domU
+> > > > > > >     (XEN) 0000:03:00.0 - d24 - node -1  - MSIs < 41 42 43 44 =
+45 46 47 48 >
+> > > > > > >     restart sys-net domU
+> > > > > > >     (XEN) 0000:03:00.0 - d26 - node -1  - MSIs < 41 42 43 44 =
+45 46 47 48 49 >
+> > > > > > >=20
+> > > > > > > and 'M' output is:
+> > > > > > >=20
+> > > > > > >     (XEN)  MSI-X   41 vec=3Db1 lowest  edge   assert  log low=
+est dest=3D00000001 mask=3D1/H /1
+> > > > > > >     (XEN)  MSI-X   42 vec=3Db9 lowest  edge   assert  log low=
+est dest=3D00000004 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   43 vec=3Dc1 lowest  edge   assert  log low=
+est dest=3D00000010 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   44 vec=3Dd9 lowest  edge   assert  log low=
+est dest=3D00000001 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   45 vec=3De1 lowest  edge   assert  log low=
+est dest=3D00000001 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   46 vec=3De9 lowest  edge   assert  log low=
+est dest=3D00000040 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   47 vec=3D32 lowest  edge   assert  log low=
+est dest=3D00000004 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   48 vec=3D3a lowest  edge   assert  log low=
+est dest=3D00000040 mask=3D1/HG/1
+> > > > > > >     (XEN)  MSI-X   49 vec=3D42 lowest  edge   assert  log low=
+est dest=3D00000010 mask=3D1/ G/1
+> > > > > > >=20
+> > > > > > > And also, after starting and stopping the domU, `xl pci-assig=
+nable-remove 03:00.0`
+> > > > > > > makes pciback to complain:
+> > > > > > >=20
+> > > > > > >     [ 1180.919874] pciback 0000:03:00.0: xen_pciback: MSI-X r=
+elease failed (-16)
+> > > > > > >=20
+> > > > > > > This is all running on Xen 4.19.3, but I don't see much chang=
+es in this
+> > > > > > > area since then.
+> > > > > > >=20
+> > > > > > > Some more info collected at https://github.com/QubesOS/qubes-=
+issues/issues/9335
+> > > > > > >=20
+> > > > > > > My question is: what should be responsible for this cleanup o=
+n domain
+> > > > > > > destroy? Xen, or maybe device model (which is QEMU in stubdom=
+ain here)?
+> > > > > >=20
+> > > > > > The expectation is that qemu invokes the necessary cleanup, but=
+ of course ...
+> > > > > >=20
+> > > > > > > I see some cleanup (apparently not enough) happening via QEMU=
+ when the
+> > > > > > > domU driver is unloaded, but logically correct cleanup should=
+n't depend
+> > > > > > > on correct domU operation...
+> > > > > >=20
+> > > > > > ... Xen may not make itself dependent upon either DomU or QEMU.
+> > > > >=20
+> > > > > AFAICT free_domain_pirqs() called by arch_domain_destroy() should=
+ take
+> > > > > care of unbinding and freeing pirqs (but obviously not in this ca=
+se).
+> > > > > Can you repeat the test with a debug=3Dy hypervisor and post the
+> > > > > resulting serial or dmesg here?  Some of the errors on those path=
+s are
+> > > > > printed with dprintk() and won't be visible unless using a Xen de=
+bug
+> > > > > build.
+> > > >=20
+> > > > Sure, will do.
+> > >=20
+> > > Output collected during domU shutdown and subsequent startup (dom0 lo=
+gs
+> > > to Xen console here too):
+> > > https://gist.github.com/marmarek/6dc3ac14d3ba840482e6361fcbd37c30
+> > >=20
+> > > I don't see any errors there...
+> >=20
+> > Hm, yes, I don't see any errors either.  Do you think you could
+> > instrument unmap_domain_pirq() and figure out whether it gets called,
+> > and if such call to unmap the PIRQ succeeds?
+>=20
+> Sure, now that I know where to look at, I'll try to find out what goes
+> wrong.
 
-I think we should fix the subject line.. s/ptdump_pglevel/ptdump_pg_level
+Ok, after adding several debug prints there and looking why it's not
+called, I found it's a completely different issue. arch_domain_destroy()
+is not called, because there was a dom0 userspace process still having a
+page mapped of that domain, and indeed there was a zombie on xl list.
+Killing that process fixes it.
 
-Otherwise the changes looks good to me. So please feel free to add - 
-Reviewed-by: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+Sorry for the noise...
 
+> Yeah, it's a single boot and that's it. I can improve that (and double
+> check if MSI-X is covered too).
 
+But this might be a good idea anyway.
 
->
-> diff --git a/arch/powerpc/mm/ptdump/8xx.c b/arch/powerpc/mm/ptdump/8xx.c
-> index b5c79b11ea3c2..4ca9cf7a90c9e 100644
-> --- a/arch/powerpc/mm/ptdump/8xx.c
-> +++ b/arch/powerpc/mm/ptdump/8xx.c
-> @@ -69,7 +69,7 @@ static const struct flag_info flag_array[] = {
->  	}
->  };
->  
-> -struct pgtable_level pg_level[5] = {
-> +struct ptdump_pg_level pg_level[5] = {
->  	{ /* pgd */
->  		.flag	= flag_array,
->  		.num	= ARRAY_SIZE(flag_array),
-> diff --git a/arch/powerpc/mm/ptdump/book3s64.c b/arch/powerpc/mm/ptdump/book3s64.c
-> index 5ad92d9dc5d10..6b2da9241d4c4 100644
-> --- a/arch/powerpc/mm/ptdump/book3s64.c
-> +++ b/arch/powerpc/mm/ptdump/book3s64.c
-> @@ -102,7 +102,7 @@ static const struct flag_info flag_array[] = {
->  	}
->  };
->  
-> -struct pgtable_level pg_level[5] = {
-> +struct ptdump_pg_level pg_level[5] = {
->  	{ /* pgd */
->  		.flag	= flag_array,
->  		.num	= ARRAY_SIZE(flag_array),
-> diff --git a/arch/powerpc/mm/ptdump/ptdump.h b/arch/powerpc/mm/ptdump/ptdump.h
-> index 154efae96ae09..4232aa4b57eae 100644
-> --- a/arch/powerpc/mm/ptdump/ptdump.h
-> +++ b/arch/powerpc/mm/ptdump/ptdump.h
-> @@ -11,12 +11,12 @@ struct flag_info {
->  	int		shift;
->  };
->  
-> -struct pgtable_level {
-> +struct ptdump_pg_level {
->  	const struct flag_info *flag;
->  	size_t num;
->  	u64 mask;
->  };
->  
-> -extern struct pgtable_level pg_level[5];
-> +extern struct ptdump_pg_level pg_level[5];
->  
->  void pt_dump_size(struct seq_file *m, unsigned long delta);
-> diff --git a/arch/powerpc/mm/ptdump/shared.c b/arch/powerpc/mm/ptdump/shared.c
-> index 39c30c62b7ea7..58998960eb9a4 100644
-> --- a/arch/powerpc/mm/ptdump/shared.c
-> +++ b/arch/powerpc/mm/ptdump/shared.c
-> @@ -67,7 +67,7 @@ static const struct flag_info flag_array[] = {
->  	}
->  };
->  
-> -struct pgtable_level pg_level[5] = {
-> +struct ptdump_pg_level pg_level[5] = {
->  	{ /* pgd */
->  		.flag	= flag_array,
->  		.num	= ARRAY_SIZE(flag_array),
-> -- 
-> 2.50.1
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--XYjHLFKe6qQk+9uo
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmit+ZcACgkQ24/THMrX
+1yyjaAf/WOQrlUWQ19Sx7MlswV8pzCAw+i7Yhn9RDgaC2JUHCSsGoFVgPyASw2cG
+iBatLI9ceLf9Rcdk7QE08HZFfd6rinGI7caGyXDYyF6R3mUjK2YLdoMwiAeqqBgR
+DmOP64A9vwYJwP00Q2XVYoiqpRxIy2cfskcnHHAFr1oWHzlqZn1Y1sDET+STx9k/
+UeE4Jt7ypJKbAoD2Ar0HsPo6xqQ+CKReud/OiCa21NyhKNBvKzdI122aVpbzF2Va
+/bFgObHIlMpYpAPXMGM/N8I1jdeBd93Je6bOPAYvvCNQi25F+uehNolt0+EN31Hs
+PrRaVsfv0bbv8fC4Ei7PdB+tQclVqg==
+=K+8R
+-----END PGP SIGNATURE-----
+
+--XYjHLFKe6qQk+9uo--
 
