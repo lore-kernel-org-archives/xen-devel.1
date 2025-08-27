@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B957CA0FED
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 16:41:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1096543.1451213 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4388CA0FF9
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 16:41:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1096549.1451237 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urJD8-0005sN-5H; Wed, 27 Aug 2025 16:41:22 +0000
+	id 1urJDB-0006ZF-Kb; Wed, 27 Aug 2025 16:41:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1096543.1451213; Wed, 27 Aug 2025 16:41:22 +0000
+Received: by outflank-mailman (output) from mailman id 1096549.1451237; Wed, 27 Aug 2025 16:41:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urJD8-0005pN-0R; Wed, 27 Aug 2025 16:41:22 +0000
-Received: by outflank-mailman (input) for mailman id 1096543;
- Wed, 27 Aug 2025 16:41:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1urJDB-0006Z5-Gf; Wed, 27 Aug 2025 16:41:25 +0000
+Received: by outflank-mailman (input) for mailman id 1096549;
+ Wed, 27 Aug 2025 16:41:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Mrvt=3H=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
- id 1urJD6-0004w3-VG
- for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 16:41:20 +0000
+ id 1urJDA-0004w9-2a
+ for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 16:41:24 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a53ffaa9-8364-11f0-ae26-e363de0e7a9e;
- Wed, 27 Aug 2025 18:41:14 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id aa9a75c2-8364-11f0-aeb2-fb57b961d000;
+ Wed, 27 Aug 2025 18:41:23 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 59D832C3A;
- Wed, 27 Aug 2025 09:41:05 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5D2F8152B;
+ Wed, 27 Aug 2025 09:41:14 -0700 (PDT)
 Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.64.177])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6D9703F738;
- Wed, 27 Aug 2025 09:41:12 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 857B53F738;
+ Wed, 27 Aug 2025 09:41:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,231 +44,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a53ffaa9-8364-11f0-ae26-e363de0e7a9e
+X-Inumbo-ID: aa9a75c2-8364-11f0-aeb2-fb57b961d000
 From: Hari Limaye <hari.limaye@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: luca.fancellu@arm.com,
+	Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 3/5] arm/mpu: Implement transient mapping
-Date: Wed, 27 Aug 2025 17:35:11 +0100
-Message-ID: <80b0b3f84ae73f7d92d1b1cfe057ffc438882725.1756312498.git.hari.limaye@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>
+Subject: [PATCH v2 5/5] xen/arm: map static memory on demand
+Date: Wed, 27 Aug 2025 17:35:13 +0100
+Message-ID: <6408f218f3075acd43f5563bff26165091d9f184.1756312498.git.hari.limaye@arm.com>
 X-Mailer: git-send-email 2.42.1
 In-Reply-To: <cover.1756312498.git.hari.limaye@arm.com>
 References: <cover.1756312498.git.hari.limaye@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Fancellu <luca.fancellu@arm.com>
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-Add a scheme to distinguish transient MPU regions, to identify MPU
-regions which will be mapped for a short period of time. This is needed
-for the functions which transiently map and unmap memory ranges on
-demand which will be introduced in a future commit.
+In the function `init_staticmem_pages` we need to have mapped static
+memory banks for initialization. Unlike on an MMU system, we cannot map
+the entire RAM on an MPU system as we have a limited number of MPU
+memory regions. To solve this, transiently map the static memory banks
+for initialization.
 
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Signed-off-by: Hari Limaye <hari.limaye@arm.com>
 ---
-Changes from v1:
-- Improve commit message
-- Mark parameter in read helper as const
----
- xen/arch/arm/include/asm/arm32/mpu.h     |  2 ++
- xen/arch/arm/include/asm/arm64/mpu.h     |  2 ++
- xen/arch/arm/include/asm/mpu/mm.h        | 14 +++++++++++++-
- xen/arch/arm/include/asm/mpu/regions.inc | 19 +++++++++++++++++--
- xen/arch/arm/mpu/mm.c                    | 23 ++++++++++++++---------
- 5 files changed, 48 insertions(+), 12 deletions(-)
+ xen/arch/arm/include/asm/mmu/mm.h |  3 +++
+ xen/arch/arm/include/asm/mpu/mm.h |  4 ++++
+ xen/arch/arm/mpu/setup.c          | 11 +++++++++++
+ xen/include/xen/static-memory.h   |  8 ++++++++
+ 4 files changed, 26 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/arm32/mpu.h b/xen/arch/arm/include/asm/arm32/mpu.h
-index 0a6930b3a0..9906d98809 100644
---- a/xen/arch/arm/include/asm/arm32/mpu.h
-+++ b/xen/arch/arm/include/asm/arm32/mpu.h
-@@ -39,6 +39,8 @@ typedef union {
- typedef struct {
-     prbar_t prbar;
-     prlar_t prlar;
-+    bool transient;
-+    uint8_t pad[7]; /* Pad structure to 16 Bytes */
- } pr_t;
+diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/asm/mmu/mm.h
+index 7f4d59137d..645a0ea3cb 100644
+--- a/xen/arch/arm/include/asm/mmu/mm.h
++++ b/xen/arch/arm/include/asm/mmu/mm.h
+@@ -110,6 +110,9 @@ void dump_pt_walk(paddr_t ttbr, paddr_t addr,
+ extern void switch_ttbr(uint64_t ttbr);
+ extern void relocate_and_switch_ttbr(uint64_t ttbr);
  
- #endif /* __ASSEMBLY__ */
-diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
-index f0ce344e78..1d1843eda0 100644
---- a/xen/arch/arm/include/asm/arm64/mpu.h
-+++ b/xen/arch/arm/include/asm/arm64/mpu.h
-@@ -38,6 +38,8 @@ typedef union {
- typedef struct {
-     prbar_t prbar;
-     prlar_t prlar;
-+    bool transient;
-+    uint8_t pad[15]; /* Pad structure to 32 Bytes */
- } pr_t;
++static inline void map_staticmem_pages_to_xen(paddr_t start, paddr_t end) {}
++static inline void unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end) {}
++
+ #endif /* __ARM_MMU_MM_H__ */
  
- #endif /* __ASSEMBLY__ */
+ /*
 diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index e1ded6521d..566d338986 100644
+index efb0680e39..4cc769418e 100644
 --- a/xen/arch/arm/include/asm/mpu/mm.h
 +++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -55,6 +55,16 @@ static inline void context_sync_mpu(void)
-     isb();
+@@ -123,6 +123,10 @@ void *map_mm_range(paddr_t base, paddr_t limit, unsigned int flags);
+  */
+ void unmap_mm_range(paddr_t base);
+ 
++/* {un}map_staticmem_pages_to_xen used while initializing static memory banks */
++void map_staticmem_pages_to_xen(paddr_t start, paddr_t end);
++void unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end);
++
+ /*
+  * Checks whether a given memory range is present in the provided table of
+  * MPU protection regions.
+diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
+index 163573b932..dbc3107333 100644
+--- a/xen/arch/arm/mpu/setup.c
++++ b/xen/arch/arm/mpu/setup.c
+@@ -83,6 +83,17 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+     return fdt_virt;
  }
  
-+static inline bool region_is_transient(const pr_t *pr)
++void __init map_staticmem_pages_to_xen(paddr_t start, paddr_t end)
 +{
-+    return pr->transient;
++    if ( !map_mm_range(start, end, PAGE_HYPERVISOR) )
++        panic("Unable to map staticmem pages to Xen!");
 +}
 +
-+static inline void region_set_transient(pr_t *pr, bool transient)
++void __init unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end)
 +{
-+    pr->transient = transient;
++    unmap_mm_range(start);
 +}
 +
  /*
-  * The following API requires context_sync_mpu() after being used to modify MPU
-  * regions:
-@@ -75,9 +85,11 @@ void write_protection_region(const pr_t *pr_write, uint8_t sel);
-  * @param base      Base address of the range to map (inclusive).
-  * @param limit     Limit address of the range to map (exclusive).
-  * @param flags     Flags for the memory range to map.
-+ * @param transient True for a transient mapping, otherwise False.
-  * @return          0 on success, negative on error.
-  */
--int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags);
-+int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags,
-+                      bool transient);
+  * copy_from_paddr - copy data from a physical address
+  * @dst: destination virtual address
+diff --git a/xen/include/xen/static-memory.h b/xen/include/xen/static-memory.h
+index e445aa8057..d99abac113 100644
+--- a/xen/include/xen/static-memory.h
++++ b/xen/include/xen/static-memory.h
+@@ -18,7 +18,15 @@ static inline void init_staticmem_bank(const struct membank *bank)
+     if ( mfn_x(bank_end) <= mfn_x(bank_start) )
+         return;
  
- /*
-  * Creates a pr_t structure describing a protection region.
-diff --git a/xen/arch/arm/include/asm/mpu/regions.inc b/xen/arch/arm/include/asm/mpu/regions.inc
-index 23fead3b21..f9892fe3d8 100644
---- a/xen/arch/arm/include/asm/mpu/regions.inc
-+++ b/xen/arch/arm/include/asm/mpu/regions.inc
-@@ -14,19 +14,31 @@
- #define PRLAR_ELx_EN            0x1
- 
- #ifdef CONFIG_ARM_64
--#define XEN_MPUMAP_ENTRY_SHIFT  0x4     /* 16 byte structure */
-+#define XEN_MPUMAP_ENTRY_SHIFT        0x5   /* 32 byte structure */
-+#define XEN_MPUMAP_ENTRY_ZERO_OFFSET  0x10  /* {PRBAR, PRLAR} is 16 bytes  */
- 
- .macro store_pair reg1, reg2, dst
-     stp \reg1, \reg2, [\dst]
- .endm
- 
-+.macro zero_pair dst, offset, tmp1, tmp2
-+    stp xzr, xzr, [\dst, \offset]
-+.endm
++    /* Map temporarily before initialization */
++    map_staticmem_pages_to_xen(mfn_to_maddr(bank_start),
++                               mfn_to_maddr(bank_end));
 +
- #else
--#define XEN_MPUMAP_ENTRY_SHIFT  0x3     /* 8 byte structure */
-+#define XEN_MPUMAP_ENTRY_SHIFT        0x4   /* 16 byte structure */
-+#define XEN_MPUMAP_ENTRY_ZERO_OFFSET  0x8   /* {PRBAR, PRLAR} is 8 bytes  */
- 
- .macro store_pair reg1, reg2, dst
-     strd  \reg1, \reg2, [\dst]
- .endm
- 
-+.macro zero_pair dst, offset, tmp1, tmp2
-+    mov \tmp1, #0
-+    mov \tmp2, #0
-+    strd \tmp1, \tmp2, [\dst, \offset]
-+.endm
+     unprepare_staticmem_pages(mfn_to_page(bank_start), bank_pages, false);
 +
- #endif
- 
- /*
-@@ -97,6 +109,9 @@
- 
- 3:
- 
-+    /* Clear the rest of the xen_mpumap entry. Clobbers prbar and prlar. */
-+    zero_pair \base, #XEN_MPUMAP_ENTRY_ZERO_OFFSET, \prbar, \prlar
-+
-     add   \sel, \sel, #1
- 
- 1:
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 4c517d6e43..33333181d5 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -265,13 +265,14 @@ static void disable_mpu_region_from_index(uint8_t index)
-  * Update the entry in the MPU memory region mapping table (xen_mpumap) for the
-  * given memory range and flags, creating one if none exists.
-  *
-- * @param base  Base address (inclusive).
-- * @param limit Limit address (exclusive).
-- * @param flags Region attributes (a combination of PAGE_HYPERVISOR_XXX)
-+ * @param base      Base address (inclusive).
-+ * @param limit     Limit address (exclusive).
-+ * @param flags     Region attributes (a combination of PAGE_HYPERVISOR_XXX)
-+ * @param transient True for a transient mapping, otherwise False.
-  * @return      0 on success, otherwise negative on error.
-  */
- static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
--                                   unsigned int flags)
-+                                   unsigned int flags, bool transient)
- {
-     bool flags_has_page_present;
-     uint8_t idx;
-@@ -311,6 +312,7 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
-             return -ENOENT;
- 
-         xen_mpumap[idx] = pr_of_addr(base, limit, flags);
-+        region_set_transient(&xen_mpumap[idx], transient);
- 
-         write_protection_region(&xen_mpumap[idx], idx);
-     }
-@@ -330,7 +332,8 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
-     return 0;
++    /* Unmap immediately after initialization */
++    unmap_staticmem_pages_to_xen(mfn_to_maddr(bank_start),
++                                 mfn_to_maddr(bank_end));
  }
  
--int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags)
-+int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags,
-+                      bool transient)
- {
-     int rc;
- 
-@@ -356,7 +359,7 @@ int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags)
- 
-     spin_lock(&xen_mpumap_lock);
- 
--    rc = xen_mpumap_update_entry(base, limit, flags);
-+    rc = xen_mpumap_update_entry(base, limit, flags, transient);
-     if ( !rc )
-         context_sync_mpu();
- 
-@@ -371,14 +374,15 @@ int destroy_xen_mappings(unsigned long s, unsigned long e)
-     ASSERT(IS_ALIGNED(e, PAGE_SIZE));
-     ASSERT(s < e);
- 
--    return xen_mpumap_update(s, e, 0);
-+    return xen_mpumap_update(s, e, 0, false);
- }
- 
- int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
-                      unsigned int flags)
- {
-     /* MPU systems have no translation, ma == va, so pass virt directly */
--    return xen_mpumap_update(virt, mfn_to_maddr(mfn_add(mfn, nr_mfns)), flags);
-+    return xen_mpumap_update(virt, mfn_to_maddr(mfn_add(mfn, nr_mfns)), flags,
-+                             false);
- }
- 
- /*
-@@ -399,7 +403,8 @@ static void __init setup_staticheap_mappings(void)
-             paddr_t bank_end = bank_start + bank_size;
- 
-             /* Map static heap with one MPU protection region */
--            if ( xen_mpumap_update(bank_start, bank_end, PAGE_HYPERVISOR) )
-+            if ( xen_mpumap_update(bank_start, bank_end, PAGE_HYPERVISOR,
-+                                   false) )
-                 panic("Failed to map static heap\n");
- 
-             break;
+ void allocate_static_memory(struct domain *d, struct kernel_info *kinfo,
 -- 
 2.34.1
 
