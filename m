@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964A6CA0EFF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 21:23:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1096964.1451478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE130CA0FED
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 21:42:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1097025.1451527 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urNc4-0003j6-Ge; Wed, 27 Aug 2025 21:23:24 +0000
+	id 1urNuI-0000R9-58; Wed, 27 Aug 2025 21:42:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1096964.1451478; Wed, 27 Aug 2025 21:23:24 +0000
+Received: by outflank-mailman (output) from mailman id 1097025.1451527; Wed, 27 Aug 2025 21:42:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urNc4-0003iz-CH; Wed, 27 Aug 2025 21:23:24 +0000
-Received: by outflank-mailman (input) for mailman id 1096964;
- Wed, 27 Aug 2025 21:23:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4G5n=3H=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1urNc2-0003ij-Ge
- for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 21:23:22 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0e7645b0-838c-11f0-aeb2-fb57b961d000;
- Wed, 27 Aug 2025 23:23:21 +0200 (CEST)
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-333f901b2d2so2416591fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 27 Aug 2025 14:23:21 -0700 (PDT)
-Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3365e2687acsm29844061fa.32.2025.08.27.14.23.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Aug 2025 14:23:19 -0700 (PDT)
+	id 1urNuI-0000R2-2A; Wed, 27 Aug 2025 21:42:14 +0000
+Received: by outflank-mailman (input) for mailman id 1097025;
+ Wed, 27 Aug 2025 21:42:13 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1urNuH-0000Qw-H8
+ for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 21:42:13 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1urNuG-009QBV-0F;
+ Wed, 27 Aug 2025 21:42:12 +0000
+Received: from [2a02:8012:3a1:0:28ae:5dea:af6b:b961]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1urNuF-004lC7-3D;
+ Wed, 27 Aug 2025 21:42:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,166 +41,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e7645b0-838c-11f0-aeb2-fb57b961d000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756329800; x=1756934600; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dIHkATse3Q+6+zG1pS+GXwcrJ8GyErfGpMUy7fqjQQc=;
-        b=lXQ2RSyj53aJsXDQ84sv4sTSWUsZwDul53Oj+cjaT5spXt5L6pdCs3tCcF9cNWVfwP
-         hS/F3Oz+EeHZLb2k/h/2wl8ew567u27lZ4u/EI/O6Uq0tQgkMdpClRW/ePttJjeKWJh3
-         dZDA8NXg1Mz0ocP7pQ29xsBXrC4cMQQCDsCNa5smP2tcn6XFGSTioJwa3cv6i5V0b267
-         hCUeGC0ny1JiXJxyNRoqL281NsyBtbHtisFVdTVPusyrMYdRgCWM3Uq/A0FC1mf6fIbT
-         al5NByCKZbb7zFV9+AZ38GrJCNDLUkS6alNUcbLd8bFoa9c6F9PfNjzSgh74yY5y7ShV
-         1/oA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756329800; x=1756934600;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dIHkATse3Q+6+zG1pS+GXwcrJ8GyErfGpMUy7fqjQQc=;
-        b=gf/YyXyOCcvlIC8rPDSJZqolWyHm03da2q+wT2b1z2RxYgj7i30U0xL51+xnUIiSom
-         SPGdQW/yaIWFa0AWTI/0BjsGUYfd9VPU9iiVpxQXmh8QX3hrLg7QbiO67rX8L3EoGSKq
-         E76mfGOPFnH6avqKa5jE2VV+Dj4T5aQi9gZrzDR5N2+NznZX/fTZTBB8byQ788Zmts4r
-         6F8LkjahPvlntEZjeP8X70XWTO/qC6EcyxIrgsbW3OhHP2HsFdEGAJcfvH5KzBA5pVd7
-         ZLgBcheZ/RJ1B0VH8H+Ivq/egfWu8o9K+yxGlf9QgPqZZHOO6VdT1x/KJp0Qec2n/AHU
-         ypJw==
-X-Gm-Message-State: AOJu0YxXVVsGqd9bh06LAkkGg3YA9AgJl7uJx/4eoIW9GvDX09Lg2gB9
-	wPAnBtVz30GfNIIazW0XdR8Yog95EyzWj1SVOIxaehqysWlxSLS441LzNhbY+A==
-X-Gm-Gg: ASbGnctBPn98xpbtAjunkyYKmD8+GctVaJkhVq4tnx5TGTd7yGrTMWIHYw0ZCp6t3OH
-	No4okF/DxR7V0MGVBS+2pA5kv8l/tkDS4fHLZt9auPmJKtEhJEudLjiTEJAb2ae8qb7NKdNyjTw
-	aWCgYYG5sk6IScJ4/Ht1zCC03yBpD348wCjEoUJiexhoed1mu2ofRYncc78H0qYt6g5QaJ8bTrb
-	v1YexdDr8pny8E5/CfEftHPPTs4P+8xBKJw765xsrLbGyfXSmyL/AdY6cYCj1XXJU60/FrHUZrd
-	ZdURjqWu38qAtRj5XzbM9dsmoaNgRCzosGRQHjSC/hFl2CfZJT7aaDcjp12u6paHUpOoqb61rM6
-	EFmsHmwYG1HyMu9KqmMHn2wlE0V/cAglYThiZZasp2+suMToxd6xZAZovqHdR48dZrHGsR6tn
-X-Google-Smtp-Source: AGHT+IHVfIk+udn2PYwm7UszF7DIDCHr7OtwJP2/CFKW5HVBGcOQq1qbA5Dy9eR3v3gb628CO9Cr9A==
-X-Received: by 2002:a2e:a58d:0:b0:335:34e2:cb8c with SMTP id 38308e7fff4ca-33650fa81e0mr67228331fa.29.1756329799775;
-        Wed, 27 Aug 2025 14:23:19 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH v10 0/4] Enable guest suspend/resume support on ARM via vPSCI
-Date: Thu, 28 Aug 2025 00:21:32 +0300
-Message-ID: <cover.1756329091.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.48.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=jZzG+YOW/6BIeuEgk0i6ENcFU5OgX9uP7NZtfGi9nL4=; b=YPfgWyeW2uZih1N4Jm5RCTw1yN
+	4XZlQ9e6FXYedp4IYiIO3yBbt/UtC40ZlffrU+vT5AdStgqxn/RY3K+bTj9gFqhwLr4We4cZr4t0V
+	2yWimm60LVquMk1CLkGoPeZ3uZWjClGZc3vr7m3ypq3wjX27UbAs2+ZGxjEUsJ6ka44c=;
+Message-ID: <717da388-9382-4eaf-9275-27dd203dd492@xen.org>
+Date: Wed, 27 Aug 2025 22:42:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/arm: smmuv3: Add cache maintenance for non-coherent
+ SMMU queues
+Content-Language: en-GB
+To: "Orzel, Michal" <michal.orzel@amd.com>,
+ Dmytro Firsov <Dmytro_Firsov@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>,
+ Rahul Singh <rahul.singh@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <24567cc1630b1577c33939ff71d67fb2ebe5572f.1754491424.git.dmytro_firsov@epam.com>
+ <cff3e94c-4476-4103-ae7e-19656703e755@amd.com>
+ <5d48d927-7e1e-4b11-b429-0b94259154ab@epam.com>
+ <e0c2b06e-947a-4d1d-864f-5785cfe00b1c@xen.org>
+ <474bffdc-f42e-4727-ab69-b11a67430adf@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <474bffdc-f42e-4727-ab69-b11a67430adf@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+Hi Michal,
 
-This patch series introduces the initial support for guest suspend
-and resume on ARM platforms using the PSCI SYSTEM_SUSPEND interface. The main
-goal is to allow ARM guests to request suspension using PSCI and be resumed
-by the control domain (e.g., via "xl resume").
+On 26/08/2025 12:44, Orzel, Michal wrote:
+> 
+> 
+> On 26/08/2025 12:48, Julien Grall wrote:
+>> Hi,
+>>
+>> On 26/08/2025 10:47, Dmytro Firsov wrote:
+>>> On 22.08.25 11:12, Orzel, Michal wrote:
+>>> On 06/08/2025 16:58, Dmytro Firsov wrote:
+>>>
+>>>
+>>> According to the Arm SMMUv3 spec (ARM IHI 0070), a system may have
+>>> SMMU(s) that is/are non-coherent to the PE (processing element). In such
+>>> cases, memory accesses from the PE should be either non-cached or be
+>>> augmented with manual cache maintenance. SMMU cache coherency is reported
+>>> by bit 4 (COHACC) of the SMMU_IDR0 register and is already present in the
+>>> Xen driver. However, the current implementation is not aware of cache
+>>> maintenance for memory that is shared between the PE and non-coherent
+>>> SMMUs. It contains dmam_alloc_coherent() function, that is added during
+>>> Linux driver porting. But it is actually a wrapper for _xzalloc(), that
+>>> returns normal writeback memory (which is OK for coherent SMMUs).
+>>>
+>>> During Xen bring-up on a system with non-coherent SMMUs, the driver did
+>>> not work properly - the SMMU was not functional and halted initialization
+>>> at the very beginning due to a timeout while waiting for CMD_SYNC
+>>> completion:
+>>>
+>>>     (XEN) SMMUv3: /soc/iommu@fa000000: CMD_SYNC timeout
+>>>     (XEN) SMMUv3: /soc/iommu@fa000000: CMD_SYNC timeout
+>>>
+>>> To properly handle such scenarios, add the non_coherent flag to the
+>>> arm_smmu_queue struct. It is initialized using features reported by the
+>>> SMMU HW and will be used for triggering cache clean/invalidate operations.
+>>> This flag is not queue-specific (it is applicable to the whole SMMU), but
+>>> adding it to arm_smmu_queue allows us to not change function signatures
+>>> and simplify the patch (smmu->features, which contains the required flag,
+>>> are not available in code parts that require cache maintenance).
+>>>
+>>>
+>>> There are already a few places advertising the SMMU coherency:
+>>> 1) smmu->features
+>>> 2) d->iommu->features
+>>> 3) platform_features
+>>>
+>>> All of them are better places than queue struct (that as you pointed out is not
+>>> specific to coherency). I'd suggest maybe to use 3) and removing ro_after_init
+>>> if you don't have access to 1) and 2). All in all, providing yet another place
+>>> for coherency flag seems a bit too much.
+>>   > >
+>>> First of all, thank you very much for review! I will consider using
+>>> "platform_features" in next patch version, it looks more appropriate and
+>>> should be available within the whole driver. Also, I believe "ro_after_init"
+>>> is also OK, since I have no need to change it (only check if cache
+>>> maintenance should be performed).
+>>
+>> I have to disagree with using "platform_features". Flushing the queue is
+>> a per-SMMU decision. But looking at the code, I think passing the SMMU
+>> to the caller would look wrong (what if you mistakenly pass the wrong
+>> SMMU?). So I think a boolean per queue is the right appraoch.
+> For my own understanding: don't we consider SMMU coherency globally, not per
+> SMMU (hence why I suggested re-using the global flag)?
+ > We set the coherency> feature in the flags if all SMMUs support it. 
+Do we want to diverge now and do
+> the flushing per SMMU?
 
-### Background
+The two contexts are quite different.
 
-The PSCI SYSTEM_SUSPEND call is part of the PSCI v1.0+ specification and is
-used by guests to enter the deepest possible power state. On Xen/ARM, we
-emulate this interface in the virtual PSCI (vPSCI) layer for guests.
+We need the global flag when cleaning the stage-2 page-tables because we 
+don't always know at boot which SMMUs will be used for the devices 
+attached (think PCI hotplug).
 
-This series includes:
+In the context of this patch, we know the queue is only used by a given 
+SMMU. So i tis better to take this decision per-SMMU/queue to reduce the 
+number of cache flush. This will be particularly important for the 
+2-stage SMMU work because there will be a lot of commands sent on behalf 
+of the guest (every TLB flushes will be command).
 
-1. A new vPSCI implementation of the PSCI SYSTEM_SUSPEND function for guests
-2. Documentation updates to SUPPORT.md to reflect PSCI and vPSCI support status
-3. Enabling "xl resume" command compilation for ARM, which was previously disabled
-
-### Usage
-
-For Linux-based guests:
-  - Suspend can be triggered using: "echo mem > /sys/power/state" or "systemctl suspend"
-  - Resume can be performed from control domain using: "xl resume <domain>"
-
-For more information, refer to the official Linux kernel documentation on power management.
-
-Note that currently, SYSTEM_SUSPEND is supported only for guest domains (not for
-the hardware domain).
----
-
-This is the first part of previous patch series and originally consist only
-with necessary changes needed for guest domain suspend.
-
-The second part can be found here:
-    https://patchew.org/Xen/cover.1754943874.git.mykola._5Fkvach@epam.com/
-
-Changes in V10:
-- An ARM-specific helper (domain_resume_nopause_helper)
-- An isb() is added before p2m_save_state
-- The is_64bit_domain check is dropped when masking the upper part of entry
-  point and cid for SMC32 SYSTEM_SUSPEND PSCI calls
-- Status of vPSCI SYSTEM_SUSPEND changed from "Experimental" to "Tech Preview"
-
-Changes in V9:
-- no functional changes
-- enhance commit message and add extra comment to the code after review
-
-Changes in V8:
-- GIC and virtual timer context saved when the domain suspends
-- rework locking
-- minor changes after code review
-
-Changes in V7:
-- add proper locking
-- minor changes after code review
-
-Main changes in V6:
-- Skip execution of ctxt_switch_from for VCPUs in paused domains.
-- Implement domain_resume_nopause
-- Add a helper to determine if a VCPU is in suspended domain.
-- Ignore upper 32 bits of arguments for 64-bit domains calling SMC32 SYSTEM_SUSPEND.
-- Macro renamed from LIBXL_HAVE_NO_SUSPEND_RESUME to LIBXL_HAVE_NO_SUSPEND for clarity.
-- Documentation now focuses only on the SYSTEM_SUSPEND function, with improved wording and structure.
-- Changelog and commit messages refined for clarity and to remove redundant explanations.
-
-Main change in V5:
-  - Reverted the logic related to suspending domains. Instead of the standby
-    mode introduced in v4, domains now resume execution at the point provided
-    during suspend
-
-The rest of the minor changes are described in the changelog of each commit.
-
-Previous versions of this patch series:
-  V1: https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg01093.html
-  V2: https://marc.info/?l=xen-devel&m=166514782207736&w=2
-  V3: https://lists.xenproject.org/archives/html/xen-devel/2025-03/msg00168.html
-
-Mykola Kvach (4):
-  xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
-  tools/xl: Allow compilation of 'xl resume' command on Arm
-  SUPPORT.md: Document PSCI SYSTEM_SUSPEND support for guests
-  CHANGELOG: Document guest suspend/resume to RAM support on Arm
-
- CHANGELOG.md                          |   2 +
- SUPPORT.md                            |   5 +-
- tools/include/libxl.h                 |   1 -
- tools/xl/xl.h                         |   4 +-
- tools/xl/xl_cmdtable.c                |   4 +-
- tools/xl/xl_migrate.c                 |   2 +-
- tools/xl/xl_saverestore.c             |   2 +-
- tools/xl/xl_vmcontrol.c               |  12 ++--
- xen/arch/arm/domain.c                 |  21 +++++-
- xen/arch/arm/include/asm/domain.h     |   2 +
- xen/arch/arm/include/asm/perfc_defn.h |   1 +
- xen/arch/arm/include/asm/psci.h       |   2 +
- xen/arch/arm/include/asm/vpsci.h      |   2 +-
- xen/arch/arm/vpsci.c                  | 100 ++++++++++++++++++++++----
- xen/common/domain.c                   |  35 +++++++--
- xen/include/xen/sched.h               |   3 +
- 16 files changed, 158 insertions(+), 40 deletions(-)
+Cheers,
 
 -- 
-2.48.1
+Julien Grall
 
 
