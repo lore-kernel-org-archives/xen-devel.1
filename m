@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E73C0CA0FF9
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 16:41:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1096534.1451188 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E12C1CA0EFF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Aug 2025 16:41:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1096542.1451208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urJCm-0004wH-9H; Wed, 27 Aug 2025 16:41:00 +0000
+	id 1urJD7-0005kw-NE; Wed, 27 Aug 2025 16:41:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1096534.1451188; Wed, 27 Aug 2025 16:41:00 +0000
+Received: by outflank-mailman (output) from mailman id 1096542.1451208; Wed, 27 Aug 2025 16:41:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urJCm-0004wA-53; Wed, 27 Aug 2025 16:41:00 +0000
-Received: by outflank-mailman (input) for mailman id 1096534;
- Wed, 27 Aug 2025 16:40:58 +0000
+	id 1urJD7-0005kl-J0; Wed, 27 Aug 2025 16:41:21 +0000
+Received: by outflank-mailman (input) for mailman id 1096542;
+ Wed, 27 Aug 2025 16:41:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Mrvt=3H=arm.com=hari.limaye@srs-se1.protection.inumbo.net>)
- id 1urJCk-0004w3-RC
- for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 16:40:58 +0000
+ id 1urJD5-0004w3-VG
+ for xen-devel@lists.xenproject.org; Wed, 27 Aug 2025 16:41:19 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 9a851187-8364-11f0-ae26-e363de0e7a9e;
- Wed, 27 Aug 2025 18:40:56 +0200 (CEST)
+ id a2fada7d-8364-11f0-ae26-e363de0e7a9e;
+ Wed, 27 Aug 2025 18:41:10 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 58C2D152B;
- Wed, 27 Aug 2025 09:40:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 904CC152B;
+ Wed, 27 Aug 2025 09:41:01 -0700 (PDT)
 Received: from PWQ0QT7DJ1.arm.com (unknown [10.57.64.177])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D98C73F738;
- Wed, 27 Aug 2025 09:40:53 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DD323F77D;
+ Wed, 27 Aug 2025 09:41:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a851187-8364-11f0-ae26-e363de0e7a9e
+X-Inumbo-ID: a2fada7d-8364-11f0-ae26-e363de0e7a9e
 From: Hari Limaye <hari.limaye@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: luca.fancellu@arm.com,
@@ -52,51 +52,117 @@ Cc: luca.fancellu@arm.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 0/5] Third series for R82 MPU support
-Date: Wed, 27 Aug 2025 17:35:08 +0100
-Message-ID: <cover.1756312498.git.hari.limaye@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 2/5] arm/mpu: Implement setup_mm for MPU systems
+Date: Wed, 27 Aug 2025 17:35:10 +0100
+Message-ID: <a000dbac8fb8e90eb61882760a2dd84cacfe2eef.1756312498.git.hari.limaye@arm.com>
 X-Mailer: git-send-email 2.42.1
+In-Reply-To: <cover.1756312498.git.hari.limaye@arm.com>
+References: <cover.1756312498.git.hari.limaye@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+From: Luca Fancellu <luca.fancellu@arm.com>
 
-This series is the third set of patches in the ongoing work to
-introduce support for MPU systems and Cortex R82 in Xen.
+Implement `setup_mm` for MPU systems. This variant doesn't need to set
+up the direct map.
 
-The patches in this series implement the necessary logic to transiently
-map and unmap the static memory banks for initialization.
-
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+---
 Changes from v1:
-- Changes mentioned in individual patches
+- Fix total_pages dead assignment
+- Remove extraneous space
+- Remove redundant max_page assignment
+---
+ xen/arch/arm/mpu/mm.c | 62 ++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 61 insertions(+), 1 deletion(-)
 
-Cheers,
-Hari
-
-Luca Fancellu (4):
-  arm/mpu: Implement setup_frametable_mappings for MPU systems
-  arm/mpu: Implement setup_mm for MPU systems
-  arm/mpu: Implement transient mapping
-  arm/mpu: Implement ioremap_attr for MPU
-
-Penny Zheng (1):
-  xen/arm: map static memory on demand
-
- xen/arch/arm/include/asm/arm32/mpu.h     |   2 +
- xen/arch/arm/include/asm/arm64/mpu.h     |   2 +
- xen/arch/arm/include/asm/mmu/mm.h        |   3 +
- xen/arch/arm/include/asm/mpu/mm.h        |  40 +++-
- xen/arch/arm/include/asm/mpu/regions.inc |  19 +-
- xen/arch/arm/mpu/mm.c                    | 262 +++++++++++++++++++++--
- xen/arch/arm/mpu/setup.c                 |  11 +
- xen/include/xen/static-memory.h          |   8 +
- 8 files changed, 328 insertions(+), 19 deletions(-)
-
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 3f155b7db2..4c517d6e43 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -8,9 +8,12 @@
+ #include <xen/sizes.h>
+ #include <xen/spinlock.h>
+ #include <xen/types.h>
++#include <xen/static-memory.h>
++#include <xen/static-shmem.h>
+ #include <asm/mpu.h>
+ #include <asm/mpu/mm.h>
+ #include <asm/page.h>
++#include <asm/setup.h>
+ #include <asm/sysregs.h>
+ 
+ struct page_info *frame_table;
+@@ -378,9 +381,66 @@ int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
+     return xen_mpumap_update(virt, mfn_to_maddr(mfn_add(mfn, nr_mfns)), flags);
+ }
+ 
++/*
++ * Heap must be statically configured in Device Tree through "xen,static-heap"
++ * on MPU systems.
++ */
++static void __init setup_staticheap_mappings(void)
++{
++    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
++    unsigned int bank = 0;
++
++    for ( ; bank < reserved_mem->nr_banks; bank++ )
++    {
++        if ( reserved_mem->bank[bank].type == MEMBANK_STATIC_HEAP )
++        {
++            paddr_t bank_start = round_pgup(reserved_mem->bank[bank].start);
++            paddr_t bank_size = round_pgdown(reserved_mem->bank[bank].size);
++            paddr_t bank_end = bank_start + bank_size;
++
++            /* Map static heap with one MPU protection region */
++            if ( xen_mpumap_update(bank_start, bank_end, PAGE_HYPERVISOR) )
++                panic("Failed to map static heap\n");
++
++            break;
++        }
++    }
++
++    if ( bank == reserved_mem->nr_banks )
++        panic("No static heap memory bank found\n");
++}
++
+ void __init setup_mm(void)
+ {
+-    BUG_ON("unimplemented");
++    const struct membanks *mem = bootinfo_get_mem();
++    paddr_t ram_start = INVALID_PADDR, ram_end = 0, ram_size = 0;
++
++    if ( !mem->nr_banks )
++        panic("No memory bank\n");
++
++    init_pdx();
++
++    populate_boot_allocator();
++
++    for ( unsigned int bank = 0; bank < mem->nr_banks; bank++ )
++    {
++        paddr_t bank_start = round_pgup(mem->bank[bank].start);
++        paddr_t bank_size = round_pgdown(mem->bank[bank].size);
++        paddr_t bank_end = bank_start + bank_size;
++
++        ram_size = ram_size + bank_size;
++        ram_start = min(ram_start, bank_start);
++        ram_end = max(ram_end, bank_end);
++    }
++
++    setup_staticheap_mappings();
++
++    total_pages = ram_size >> PAGE_SHIFT;
++
++    setup_frametable_mappings(ram_start, ram_end);
++
++    init_staticmem_pages();
++    init_sharedmem_pages();
+ }
+ 
+ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
 -- 
 2.34.1
 
