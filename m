@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDA6ECA0FFE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 23:54:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1100177.1453771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0DACA1002
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 23:54:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1100180.1453806 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urmRf-0004sf-Ta; Thu, 28 Aug 2025 23:54:19 +0000
+	id 1urmRj-0005sv-UH; Thu, 28 Aug 2025 23:54:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1100177.1453771; Thu, 28 Aug 2025 23:54:19 +0000
+Received: by outflank-mailman (output) from mailman id 1100180.1453806; Thu, 28 Aug 2025 23:54:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urmRf-0004sE-NW; Thu, 28 Aug 2025 23:54:19 +0000
-Received: by outflank-mailman (input) for mailman id 1100177;
- Thu, 28 Aug 2025 23:54:19 +0000
+	id 1urmRj-0005sI-NB; Thu, 28 Aug 2025 23:54:23 +0000
+Received: by outflank-mailman (input) for mailman id 1100180;
+ Thu, 28 Aug 2025 23:54:22 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1urmRe-0004nq-W5
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 23:54:18 +0000
+ (envelope-from <dmukhin@xen.org>) id 1urmRi-0005Wl-41
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 23:54:22 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1urmRe-00B9tM-18;
- Thu, 28 Aug 2025 23:54:18 +0000
+ (envelope-from <dmukhin@xen.org>) id 1urmRh-00B9u0-1i;
+ Thu, 28 Aug 2025 23:54:21 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1urmRe-006h8X-18;
- Thu, 28 Aug 2025 23:54:18 +0000
+ (envelope-from <dmukhin@xen.org>) id 1urmRh-006h8p-1i;
+ Thu, 28 Aug 2025 23:54:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=TPCph96zzO9YXe+35iYdnOVZAm9KUR1vPBQ9K0k9jWY=; b=zGq2gEMzSVtfjtKavKfr07/a3+
-	+IhmnYFZ7T2YRYMvfgupwALTdxfkrkecfMMcvufE8mide2pitFAUc6jM/hqZ0efK6Adu0QAndCU2m
-	Mj4MXF32xc9I6bwL25MW8LX+DOqgEiGgt3R8vv4fY9J5kTxi/NA2npdBX0FFL7XbofXw=;
+	bh=URrCdASjRQ9Vdlu6Z9QVQa30dc5DA0baY3L6/nvVCms=; b=KcRT2ecfpvFix6byPMbgJM5kc0
+	WVDwtP0I/3gVUsFeCY2nqxwC+X9amXlJCmQqHAjtbwJDKqGBjT2Z7SwHIUUtCLhRig4Ye37m19YnC
+	55xx21uHLNSnMqJLOgbWNsSUjys/kdbuTtsKfO1YZZOpp285xVPodCAcA4dwNzqdNUc4=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v5 05/15] emul/ns16x50: implement EIR/IIR registers
-Date: Thu, 28 Aug 2025 16:53:59 -0700
-Message-ID: <20250828235409.2835815-6-dmukhin@ford.com>
+Subject: [PATCH v5 08/15] emul/ns16x50: implement LCR/LSR registers
+Date: Thu, 28 Aug 2025 16:54:02 -0700
+Message-ID: <20250828235409.2835815-9-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250828235409.2835815-1-dmukhin@ford.com>
 References: <20250828235409.2835815-1-dmukhin@ford.com>
@@ -68,236 +68,74 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add interrupt enable register emulation (EIR) and interrupt identity reason
-(IIR) register emulation to the I/O port handler.
-
-Also add routines for asserting/deasserting the virtual ns16x50 interrupt
-line as a dependent on IIR code.
-
-Poke ns16x50_irq_check() on every I/O register access because the emulator
-does not have clock emulation anyway (e.g. for baud rate emulation).
+Add LCR/LSR registers implementation to the I/O port handler.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v4:
 - new patch
 ---
- xen/common/emul/vuart/ns16x50.c | 177 +++++++++++++++++++++++++++++++-
- 1 file changed, 176 insertions(+), 1 deletion(-)
+ xen/common/emul/vuart/ns16x50.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
 diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-index f9f307a4ad24..20597cc36b35 100644
+index 65ca96dd8bd3..687a7ea2fabe 100644
 --- a/xen/common/emul/vuart/ns16x50.c
 +++ b/xen/common/emul/vuart/ns16x50.c
-@@ -85,9 +85,131 @@ struct vuart_ns16x50 {
-     spinlock_t lock;                    /* Protection */
- };
+@@ -347,6 +347,9 @@ static int ns16x50_io_write8(
+             else
+                 ns16x50_fifo_tx_putchar(vdev, val);
  
-+static bool ns16x50_fifo_rx_empty(const struct vuart_ns16x50 *vdev)
-+{
-+    const struct xencons_interface *cons = &vdev->cons;
++            if ( rc == -ENOSPC )
++                regs[UART_LSR] |= UART_LSR_OE;
 +
-+    return cons->in_prod == cons->in_cons;
-+}
-+
- static inline uint8_t cf_check ns16x50_dlab_get(const struct vuart_ns16x50 *vdev)
- {
--    return 0;
-+    return vdev->regs[UART_LCR] & UART_LCR_DLAB ? 1 : 0;
-+}
-+
-+static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
-+{
-+    return vdev->regs[UART_LSR] & UART_LSR_MASK;
-+}
-+
-+static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
-+{
-+    return !ns16x50_fifo_rx_empty(vdev);
-+}
-+
-+static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
-+{
-+    return vdev->regs[NS16X50_REGS_NUM + UART_IIR] & UART_IIR_THR;
-+}
-+
-+static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *vdev)
-+{
-+    return vdev->regs[UART_MSR] & UART_MSR_CHANGE;
-+}
-+
-+/*
-+ * Get the interrupt identity reason.
-+ *
-+ * IIR is re-calculated once called, because ns16x50 always reports high
-+ * priority events first.
-+ * regs[NS16X50_REGS_NUM + UART_IIR] is used to store THR reason only.
-+ */
-+static uint8_t ns16x50_iir_get(const struct vuart_ns16x50 *vdev)
-+{
-+    /*
-+     * Interrupt identity reasons by priority.
-+     * NB: high priority are at lower indexes below.
-+     */
-+    static const struct {
-+        bool (*check)(const struct vuart_ns16x50 *vdev);
-+        uint8_t ier;
-+        uint8_t iir;
-+    } iir_by_prio[] = {
-+        [0] = { ns16x50_iir_check_lsi, UART_IER_ELSI,   UART_IIR_LSI },
-+        [1] = { ns16x50_iir_check_rda, UART_IER_ERDAI,  UART_IIR_RDA },
-+        [2] = { ns16x50_iir_check_thr, UART_IER_ETHREI, UART_IIR_THR },
-+        [3] = { ns16x50_iir_check_msi, UART_IER_EMSI,   UART_IIR_MSI },
-+    };
-+    const uint8_t *regs = vdev->regs;
-+    uint8_t iir = 0;
-+    unsigned int i;
-+
-+    /*
-+     * NB: every interaction w/ ns16x50 registers (except DLAB=1) goes
-+     * through that call.
-+     */
-+    ASSERT(spin_is_locked(&vdev->lock));
-+
-+    for ( i = 0; i < ARRAY_SIZE(iir_by_prio); i++ )
-+    {
-+        if ( (regs[UART_IER] & iir_by_prio[i].ier) &&
-+             iir_by_prio[i].check(vdev) )
+             rc = 0;
+ 
+             break;
+@@ -387,6 +390,11 @@ static int ns16x50_io_write8(
+ 
+             break;
+ 
++        case UART_LCR:
++            regs[UART_LCR] = val;
 +            break;
 +
-+    }
-+    if ( i == ARRAY_SIZE(iir_by_prio) )
-+        iir |= UART_IIR_NOINT;
-+    else
-+        iir |= iir_by_prio[i].iir;
++        case UART_LSR: /* RO */
+         default:
+             rc = -EINVAL;
+             break;
+@@ -460,6 +468,9 @@ static int ns16x50_io_read8(
+         switch ( reg )
+         {
+         case UART_RBR:
++            /* NB: do not forget to clear overrun condition */
++            regs[UART_LSR] &= ~UART_LSR_OE;
 +
-+    if ( regs[UART_FCR] & UART_FCR_ENABLE )
-+        iir |= UART_IIR_FE;
-+
-+    return iir;
-+}
-+
-+static void ns16x50_irq_assert(const struct vuart_ns16x50 *vdev)
-+{
-+    struct domain *d = vdev->owner;
-+    const struct vuart_info *info = vdev->info;
-+    int vector;
-+
-+    if ( has_vpic(d) ) /* HVM */
-+        vector = hvm_isa_irq_assert(d, info->irq, vioapic_get_vector);
-+    else
-+        ASSERT_UNREACHABLE();
-+
-+    ns16x50_debug(vdev, "IRQ#%d vector %d assert\n", info->irq, vector);
-+}
-+
-+static void ns16x50_irq_deassert(const struct vuart_ns16x50 *vdev)
-+{
-+    struct domain *d = vdev->owner;
-+    const struct vuart_info *info = vdev->info;
-+
-+    if ( has_vpic(d) ) /* HVM */
-+        hvm_isa_irq_deassert(d, info->irq);
-+    else
-+        ASSERT_UNREACHABLE();
-+
-+    ns16x50_debug(vdev, "IRQ#%d deassert\n", info->irq);
-+}
-+
-+/*
-+ * Assert/deassert virtual ns16x50 interrupt line.
-+ */
-+static void ns16x50_irq_check(const struct vuart_ns16x50 *vdev)
-+{
-+    uint8_t iir = ns16x50_iir_get(vdev);
-+    const struct vuart_info *info = vdev->info;
-+
-+    if ( iir & UART_IIR_NOINT )
-+        ns16x50_irq_assert(vdev);
-+    else
-+        ns16x50_irq_deassert(vdev);
-+
-+    ns16x50_debug(vdev, "IRQ#%d IIR 0x%02x %s\n", info->irq, iir,
-+                  (iir & UART_IIR_NOINT) ? "deassert" : "assert");
- }
+             rc = ns16x50_fifo_rx_getchar(vdev);
+             if ( rc >= 0 )
+                 val = (uint8_t)rc;
+@@ -480,6 +491,21 @@ static int ns16x50_io_read8(
  
- /*
-@@ -102,6 +224,29 @@ static int ns16x50_io_write8(
+             break;
  
-     if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
-         regs[NS16X50_REGS_NUM + reg] = val;
-+    else
-+    {
-+        switch ( reg )
-+        {
-+        case UART_IER:
-+            /*
-+             * NB: Make sure THR interrupt is re-triggered once guest OS
-+             * re-enabled ETHREI in EIR.
-+             */
-+            if ( val & regs[UART_IER] & UART_IER_ETHREI )
-+                regs[NS16X50_REGS_NUM + UART_IIR] |= UART_IIR_THR;
++        case UART_LCR:
++            val = regs[UART_LCR];
++            break;
 +
-+            regs[UART_IER] = val & UART_IER_MASK;
++        case UART_LSR:
++            val = regs[UART_LSR] | UART_LSR_THRE | UART_LSR_TEMT;
++            if ( ns16x50_fifo_rx_empty(vdev) )
++                val &= ~UART_LSR_DR;
++            else
++                val |= UART_LSR_DR;
++
++            regs[UART_LSR] = val & ~UART_LSR_MASK;
 +
 +            break;
 +
-+        default:
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        ns16x50_irq_check(vdev);
-+    }
- 
-     return rc;
- }
-@@ -164,6 +309,29 @@ static int ns16x50_io_read8(
- 
-     if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
-         val = regs[NS16X50_REGS_NUM + reg];
-+    else {
-+        switch ( reg )
-+        {
-+        case UART_IER:
-+            val = regs[UART_IER];
-+            break;
-+
-+        case UART_IIR: /* RO */
-+            val = ns16x50_iir_get(vdev);
-+
-+            /* NB: clear IIR scratch location */
-+            if ( val & UART_IIR_THR )
-+                regs[NS16X50_REGS_NUM + UART_IIR] &= ~UART_IIR_THR;
-+
-+            break;
-+
-+        default:
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        ns16x50_irq_check(vdev);
-+    }
- 
-     *data = val;
- 
-@@ -314,8 +482,15 @@ static int ns16x50_init(void *arg)
-     vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & 0xff;
-     vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (divisor >> 8) & 0xff;
- 
-+    /* ns16x50 shall assert UART_IIR_THR whenever transmitter is empty. */
-+    vdev->regs[NS16X50_REGS_NUM + UART_IIR] = UART_IIR_THR;
-+
-     register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
- 
-+    spin_lock(&vdev->lock);
-+    ns16x50_irq_check(vdev);
-+    spin_unlock(&vdev->lock);
-+
-     return 0;
- }
- 
+         default:
+             rc = -EINVAL;
+             break;
 -- 
 2.51.0
 
