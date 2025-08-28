@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D422C8303F
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1099203.1453194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3D6CA0FF7
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1099204.1453200 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureHo-0003wW-RS; Thu, 28 Aug 2025 15:11:36 +0000
+	id 1ureHp-00040o-DD; Thu, 28 Aug 2025 15:11:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1099203.1453194; Thu, 28 Aug 2025 15:11:36 +0000
+Received: by outflank-mailman (output) from mailman id 1099204.1453200; Thu, 28 Aug 2025 15:11:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureHo-0003wK-O1; Thu, 28 Aug 2025 15:11:36 +0000
-Received: by outflank-mailman (input) for mailman id 1099203;
- Thu, 28 Aug 2025 15:11:35 +0000
+	id 1ureHp-000406-4C; Thu, 28 Aug 2025 15:11:37 +0000
+Received: by outflank-mailman (input) for mailman id 1099204;
+ Thu, 28 Aug 2025 15:11:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FrxM=3I=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ureCk-00035A-2Z
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:22 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
+ id 1ureCJ-00035A-4T
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:05:55 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8deb692b-8420-11f0-8dd7-1b34d833f44b;
- Thu, 28 Aug 2025 17:06:20 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-45b7c56a987so2491995e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:20 -0700 (PDT)
+ id 7ddc10b7-8420-11f0-8dd7-1b34d833f44b;
+ Thu, 28 Aug 2025 17:05:53 +0200 (CEST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3ceb9c3d98cso215222f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:05:53 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.15
+ 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.05.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 08:06:15 -0700 (PDT)
+ Thu, 28 Aug 2025 08:05:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8deb692b-8420-11f0-8dd7-1b34d833f44b
+X-Inumbo-ID: 7ddc10b7-8420-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1756393576; x=1756998376; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1756393553; x=1756998353; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FrDLZojjpeEcCCCwufcD7E82gZIQTbD6hJlojBPfd1Y=;
-        b=fx4jO1u5Pe6DfGf8/niOGST7PfBD1ZP6gknEMjQKVeyiHVWD7um7A2GwFdlk0s6rlU
-         R1uUCcwAlWAu2k/OomExuPy7TRcZsH2bQ4GGR4fFoHPlZf4D0UKAWxYukJ0H02dS3U+i
-         DznaUcYX4rUVuk+SpO7ZNuJD5+sStmw+aYY58=
+        bh=1vizQ3VHS0of9WutZZfkzSTT2z1DRqiDuoluptA3qSA=;
+        b=nkIBD8WGDj7dnhIH2NU5aTkt5cnbxTARO4bB1Dc32UPMDohSm5oG/e4mqvzzshOSOY
+         93qIIt5JU8JUSHe6CLm2v2Q4yZDHyJFNnm8muy0t91ETNfImgdp+xy75Wa4BXo5FJ7FS
+         y6Ai1iVHQb4yDKETHoiUaT5o8s+4IL20mq0mk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756393576; x=1756998376;
+        d=1e100.net; s=20230601; t=1756393553; x=1756998353;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FrDLZojjpeEcCCCwufcD7E82gZIQTbD6hJlojBPfd1Y=;
-        b=sFNJlJT8c0gluWLsskFdvnPsEBcfRkwAge7ql1XhMjZoCwn8rBeBf4nU7ursiSLb7W
-         iQ9Kj4LPPl0b1IALoNRFHlNcIGM/jGM9gHB8iQA3st/2uNxXw1P9bvnJ6zsljKc3wtac
-         Ul+LcqDvDh8eVULW6e77ClTPZN/lr1WIHfBVBke3r6am9HHQdfyAX+xggRK/B96R1WWz
-         CMgP9kTmRcYG6SCOFo5WCvVtMgQrAxnAkbIHv/DYhpOtAc8V0ObghYVjISr7BEjUS7KK
-         an0gU2ZpXF1isKIs7ZLoMPFjCy1bJ/LJhDZha60GIKeQNjavADGgJK8HPEcsxKGG4fee
-         IFEQ==
-X-Gm-Message-State: AOJu0YxFSAjzVuM4keZK2+K0fTz6eXNSAzPtKKtMd5dbt2D6qlW8BSVf
-	lRRD/dIDxuHY17BYZronQ7yk0/hz+5233AeHYlWKjGbkQ9RCWMKQG9zSqqFQbYcikKt6EUYgDnb
-	weN72
-X-Gm-Gg: ASbGncvJkH+M+XWsLQzFCNR1W7VcKnUo1YFGbmBw96SKBCKMPIIQnllBV404Kok6/ce
-	83f+srsUGvCI0kiA7kDbJTbO4TJUkyTvNzH1xnoBQLEik4Y/whFR7bSnM8SgAP7/P+Rl9Y4720P
-	i2ZfC5agqCPMZEOyMx3EF+TqX5nHCKI7nKBHfpxetK89Hs6kEizbLznj/vf0FINyEf2A1nJr1+B
-	Qd12dmA9pCpCDl+32d8vca7iFD/gWoW0ch/RMDsINFj1+P2H1E9L+iEvJle+1bm/LgOXfJH6XkW
-	ZBKsOY8vv/cReqpaLvcOWepqK0ToTi8vHG5a2+4WtB03s14IKb3RZt+zAaKNt/1Lxgm35xN/55d
-	ImrSF/aZjm3F8eepgI/yvn/ULOf0HZUIyvXzmwq7ujEMQGkbN0AGZVuKmYAkcxuXH27S46LOnhh
-	WoumBaen5Kzmo=
-X-Google-Smtp-Source: AGHT+IFXn2lu5/qDMrHuLeebtuu84azm8XvndGfqNIgKY0Ef4fMOu6/+AjthmwWQxQOQbXtUwhhZTQ==
-X-Received: by 2002:a05:600c:3b15:b0:458:c059:7db1 with SMTP id 5b1f17b1804b1-45b517d4580mr230098655e9.30.1756393576217;
-        Thu, 28 Aug 2025 08:06:16 -0700 (PDT)
+        bh=1vizQ3VHS0of9WutZZfkzSTT2z1DRqiDuoluptA3qSA=;
+        b=Ct41BrvE8Ix+Ana7WdNvah+4rHvr4tdcpy6WITHIrJ5K6dgXc2ihHHBEhivCzRus+5
+         5IExWjo76E3nEwrdOjohfWW8gPvCx7x7luFoM7GHUn7Z70DqARBkplWnE7gN62j6jF2B
+         kXyz4SYvod6NZFMDPmilFS7JwSvsCt+7deYMWo8Lnpe8Ex+dEEtemj3QD7C8AjHR87A8
+         aYzy67WoBtmzqviVzjzSWOo3mysI8BA4wcJGQi1pt5f38LEElulCvnTtKRhKKXWrjW3j
+         FcAcCffOk6v7qLzwzsHP7kuqfsHDMUx2ARkw0QP02BwJx66XbeqNMubMFQWQijXsStPz
+         IaJA==
+X-Gm-Message-State: AOJu0YxBvgx86LLYsBwl6uzrFnkj9SWSftase+1C8INSyybew/C80ga2
+	uJqNpPFMYfvaxQCqHYG61hJdLGm0SnxEIo2rsdHU2x2dG8yRqS9U5w7Cq/dw3nYNidjL4QrQ8rC
+	87fbr
+X-Gm-Gg: ASbGncv6F7NVEAiZh2a7rhQ3QBDFpASarTkz3h5ukLUayfnRZfD7xCEwVXVO2m9xyMd
+	Oo0/V7kVxTBEaP/lt6+0MlMmk0z2cBoBw4/5BinpvL/zES0mVoHMNdEIrP1SecOi9ofIeXOOflG
+	S+5/iZfHEYocS9MUkhcbCTt+fdAcCiBQFXa4rq5Dv3iHZBrLDPq663WXfuBM/FKqchJ9+wS6eF/
+	5yHXNHPG+6qpMsy02aLti+UOzVvzo6JNaJB0bsI7cKYSi168hQQgMix5qPEAXoXh3WJ232zKyLP
+	JUjiAR8CE+BgAHONM3gj7d4g2dBgky6gMZOvzQqoh4Pv+xy51bRW2dt4nK6DENtpYvwrGAKTIvN
+	GgP5/z9w4n3TjdCYaNunzyHlA2oVPDkjryisy/zpEd5qHevlw0hCQEYBIU3t0B79Zb5EVnuynff
+	ukqrqRu6lTcdk=
+X-Google-Smtp-Source: AGHT+IH4TSYOu4ulE2SxpWCdHmHAm0UgFrckax4DFki9Vf47jObf43Xdd6Kpzocq1jeZJDmlPW+QhA==
+X-Received: by 2002:a05:6000:2709:b0:3cd:5815:68d4 with SMTP id ffacd0b85a97d-3cd58156b71mr2638060f8f.57.1756393552645;
+        Thu, 28 Aug 2025 08:05:52 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 17/23] x86/entry: Drop the pre exception table infrastructure
-Date: Thu, 28 Aug 2025 16:04:03 +0100
-Message-Id: <20250828150409.901315-18-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 06/23] x86/traps: Set MSR_PL0_SSP in load_system_tables()
+Date: Thu, 28 Aug 2025 16:03:52 +0100
+Message-Id: <20250828150409.901315-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250828150409.901315-1-andrew.cooper3@citrix.com>
 References: <20250828150409.901315-1-andrew.cooper3@citrix.com>
@@ -97,7 +97,16 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It is no longer used.
+FRED and IDT differ by a Supervisor Token on the base of the shstk.  This
+means that the value they load into MSR_PL0_SSP differs by 8.
+
+s3_resume() in particular has logic which is otherwise invariant of FRED mode,
+and must not clobber a FRED MSR_PL0_SSP with an IDT one.
+
+This also simplifies the AP path too.  Updating reinit_bsp_stack() is deferred
+until later.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -105,103 +114,93 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
 v2:
- * New
+ * Extend comment about clearing the busy bit.
+ * Move reinit_bsp_stack() hunk into this patch.
 ---
- xen/arch/x86/extable.c               | 14 --------------
- xen/arch/x86/include/asm/asm_defns.h | 11 ++++-------
- xen/arch/x86/include/asm/uaccess.h   |  2 --
- xen/arch/x86/xen.lds.S               |  5 -----
- 4 files changed, 4 insertions(+), 28 deletions(-)
+ xen/arch/x86/acpi/wakeup_prot.S |  9 ---------
+ xen/arch/x86/boot/x86_64.S      | 12 +++---------
+ xen/arch/x86/setup.c            |  2 --
+ xen/arch/x86/traps-setup.c      |  2 ++
+ 4 files changed, 5 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
-index cf637d0921e4..a9b6c6b904f5 100644
---- a/xen/arch/x86/extable.c
-+++ b/xen/arch/x86/extable.c
-@@ -61,7 +61,6 @@ void init_or_livepatch sort_exception_table(struct exception_table_entry *start,
- void __init sort_exception_tables(void)
- {
-     sort_exception_table(__start___ex_table, __stop___ex_table);
--    sort_exception_table(__start___pre_ex_table, __stop___pre_ex_table);
- }
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index fceb4ca353f7..ba0bd77806b8 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -104,15 +104,6 @@ LABEL(s3_resume)
+          */
+         mov     saved_ssp(%rip), %rdi
  
- static unsigned long
-@@ -219,16 +218,3 @@ int __init cf_check stub_selftest(void)
- }
- __initcall(stub_selftest);
- #endif /* CONFIG_SELF_TESTS */
+-        /* Calculate MSR_PL0_SSP from SSP. */
+-        mov     $MSR_PL0_SSP, %ecx
+-        mov     %rdi, %rdx
+-        shr     $32, %rdx
+-        mov     %edi, %eax
+-        and     $~(STACK_SIZE - 1), %eax
+-        or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
+-        wrmsr
 -
--unsigned long asmlinkage search_pre_exception_table(struct cpu_user_regs *regs)
--{
--    unsigned long addr = regs->rip;
--    unsigned long fixup = search_one_extable(
--        __start___pre_ex_table, __stop___pre_ex_table, addr);
--    if ( fixup )
--    {
--        dprintk(XENLOG_INFO, "Pre-exception: %p -> %p\n", _p(addr), _p(fixup));
--        perfc_incr(exception_fixed);
--    }
--    return fixup;
--}
-diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
-index a81a4043d0f1..d7eafedf0e4c 100644
---- a/xen/arch/x86/include/asm/asm_defns.h
-+++ b/xen/arch/x86/include/asm/asm_defns.h
-@@ -65,22 +65,19 @@ register unsigned long current_stack_pointer asm("rsp");
+         /*
+          * A Restore Token's value is &token + 8 + 64BIT (bit 0).
+          * We want to put this on the shstk at SSP - 8.
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 3a5ad2764448..11a7e9d3bd23 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -65,17 +65,11 @@ ENTRY(__high_start)
+         or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %rdx
  
- /* Exception table entry */
- #ifdef __ASSEMBLY__
--# define _ASM__EXTABLE(sfx, from, to)             \
--    .section .ex_table##sfx, "a" ;                \
-+# define _ASM_EXTABLE(from, to)                   \
-+    .section .ex_table, "a" ;                     \
-     .balign 4 ;                                   \
-     .long _ASM_EX(from), _ASM_EX(to) ;            \
-     .previous
- #else
--# define _ASM__EXTABLE(sfx, from, to)             \
--    " .section .ex_table" #sfx ",\"a\"\n"         \
-+# define _ASM_EXTABLE(from, to)                   \
-+    " .section .ex_table,\"a\"\n"                 \
-     " .balign 4\n"                                \
-     " .long " _ASM_EX(from) ", " _ASM_EX(to) "\n" \
-     " .previous\n"
- #endif
- 
--#define _ASM_EXTABLE(from, to)     _ASM__EXTABLE(, from, to)
--#define _ASM_PRE_EXTABLE(from, to) _ASM__EXTABLE(.pre, from, to)
+         /*
+-         * Write a new supervisor token.  Doesn't matter on boot, but for S3
+-         * resume this clears the busy bit.
++         * Write a new Supervisor Token.  It doesn't matter the first time a
++         * CPU boots, but for S3 resume or hotplug this clears the busy bit so
++         * SETSSBSY can set it again.
+          */
+         wrssq   %rdx, (%rdx)
 -
- #ifdef __ASSEMBLY__
- 
- .macro BUILD_BUG_ON condstr, cond:vararg
-diff --git a/xen/arch/x86/include/asm/uaccess.h b/xen/arch/x86/include/asm/uaccess.h
-index 719d053936b9..4c41a0fe0426 100644
---- a/xen/arch/x86/include/asm/uaccess.h
-+++ b/xen/arch/x86/include/asm/uaccess.h
-@@ -410,8 +410,6 @@ struct exception_table_entry
- };
- extern struct exception_table_entry __start___ex_table[];
- extern struct exception_table_entry __stop___ex_table[];
--extern struct exception_table_entry __start___pre_ex_table[];
--extern struct exception_table_entry __stop___pre_ex_table[];
- 
- union stub_exception_token {
-     struct {
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 966e514f2034..66075bc0ae6d 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -119,11 +119,6 @@ SECTIONS
-        *(.ex_table)
-        __stop___ex_table = .;
- 
--       /* Pre-exception table */
--       __start___pre_ex_table = .;
--       *(.ex_table.pre)
--       __stop___pre_ex_table = .;
+-        /* Point MSR_PL0_SSP at the token. */
+-        mov     $MSR_PL0_SSP, %ecx
+-        mov     %edx, %eax
+-        shr     $32, %rdx
+-        wrmsr
 -
-        . = ALIGN(PAGE_SIZE);
-        __ro_after_init_end = .;
+         setssbsy
  
+ #endif /* CONFIG_XEN_SHSTK */
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 6c81841426a4..a810bdf6d352 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -907,8 +907,6 @@ static void __init noreturn reinit_bsp_stack(void)
+ 
+     if ( cpu_has_xen_shstk )
+     {
+-        wrmsrl(MSR_PL0_SSP,
+-               (unsigned long)stack + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8);
+         wrmsrl(MSR_S_CET, xen_msr_s_cet_value());
+         asm volatile ("setssbsy" ::: "memory");
+     }
+diff --git a/xen/arch/x86/traps-setup.c b/xen/arch/x86/traps-setup.c
+index 6e2af58ba0a5..d77be8f83921 100644
+--- a/xen/arch/x86/traps-setup.c
++++ b/xen/arch/x86/traps-setup.c
+@@ -92,6 +92,7 @@ static void load_system_tables(void)
+     {
+         volatile uint64_t *ist_ssp = tss_page->ist_ssp;
+         unsigned long
++            ssp = stack_top + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8,
+             mce_ssp = stack_top + (IST_MCE * IST_SHSTK_SIZE) - 8,
+             nmi_ssp = stack_top + (IST_NMI * IST_SHSTK_SIZE) - 8,
+             db_ssp  = stack_top + (IST_DB  * IST_SHSTK_SIZE) - 8,
+@@ -118,6 +119,7 @@ static void load_system_tables(void)
+         }
+ 
+         wrmsrns(MSR_ISST, (unsigned long)ist_ssp);
++        wrmsrns(MSR_PL0_SSP, (unsigned long)ssp);
+     }
+ 
+     _set_tssldt_desc(gdt + TSS_ENTRY, (unsigned long)tss,
 -- 
 2.39.5
 
