@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D4F8C8303F
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 14:20:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1099018.1452927 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB7ACA0EED
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 14:54:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1099032.1452952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urdU3-0002EO-QN; Thu, 28 Aug 2025 14:20:11 +0000
+	id 1ure1A-00077v-Rd; Thu, 28 Aug 2025 14:54:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1099018.1452927; Thu, 28 Aug 2025 14:20:11 +0000
+Received: by outflank-mailman (output) from mailman id 1099032.1452952; Thu, 28 Aug 2025 14:54:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urdU3-0002EH-NH; Thu, 28 Aug 2025 14:20:11 +0000
-Received: by outflank-mailman (input) for mailman id 1099018;
- Thu, 28 Aug 2025 14:20:11 +0000
+	id 1ure1A-00077C-MI; Thu, 28 Aug 2025 14:54:24 +0000
+Received: by outflank-mailman (input) for mailman id 1099032;
+ Thu, 28 Aug 2025 14:54:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AInb=3I=nvidia.com=jgg@srs-se1.protection.inumbo.net>)
- id 1urdU3-0002EB-24
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 14:20:11 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20620.outbound.protection.outlook.com
- [2a01:111:f403:2417::620])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Mimg=3I=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1ure18-00074Y-V8
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 14:54:23 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 194ddeed-841a-11f0-8dd7-1b34d833f44b;
- Thu, 28 Aug 2025 16:20:08 +0200 (CEST)
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by CH1PPF4C9628624.namprd12.prod.outlook.com
- (2603:10b6:61f:fc00::60d) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.13; Thu, 28 Aug
- 2025 14:20:00 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.9073.010; Thu, 28 Aug 2025
- 14:20:00 +0000
+ id e0ef5779-841e-11f0-8dd7-1b34d833f44b;
+ Thu, 28 Aug 2025 16:54:20 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55f53efe803so1299038e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 07:54:20 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55f42101509sm2635661e87.106.2025.08.28.07.54.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Aug 2025 07:54:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,209 +47,550 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 194ddeed-841a-11f0-8dd7-1b34d833f44b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jXFlyb8zuu/paS1ZawJ1ZJ1MoYZI9MLnsy1iQRbHVJqVh0OMUxaG8sKXQ9gUCvAmgpV1v8+TxTBEvGBqt41EVUhZjJsJ8xQQf4+cQiifYq6e688dR1E4l+DbzpHWHGlXiFI6tQR39Fc3jFsrQZ0KQU0LXMUS8snCsy5VYFMbglCunUMqSDxqGG7B9qwHJtVHKzu/6qah8xlWSq1+dkTDwCpXovBkSPvriF9V+FcfL6oZyLZfJtx7AyfIu4mvXo+IZgyWbdaOd0nI/bbQiiM6e7X0p5Jx9sBWiUoQFwQt7jhbHb8Cuc4I6WhJxJ+Q++yK05JNtdpvxZ3HFsTR+d+T6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kQVNpin3YPzO6syYTrDj2tSQysPubw+YKna9LrX2ZNY=;
- b=vqBL+8iwISAvFAQi32rutRIDaee8G4QXtxMQDjSV/DujYuKdVZjsiXFWkC/PUu74TXfCI8Rb7+6HXdyzo2KHR1HAwpznQ3qfgclNfOeZhrGkDnohJDxP2thouVnCLHhNd+K2rR/jix9XQE0sTVT4IcZXMNFUJJpAMXZ2PZsmAu4q6am5QzEG9sB8EOtKTxg/KzXO81htlhie6Uez48NGNf6/+dnvyrZknwh5ZuQPwn9Sk4xqdnvmWmKuq79H0f//30GCIg46/bNgouKf92uSSxCtvCTu/4gPKSpTKFTuodCXYQryGE42epJCswqNeumNoF74pBLYZLqdQWDrv55afQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kQVNpin3YPzO6syYTrDj2tSQysPubw+YKna9LrX2ZNY=;
- b=SHVyRQqxbnE8x5sXZFHYgdSh9gMgMYhrg8yQEA1uYaWj/7/MaG0hgHqYAfEXft1qTfGjKhNsG7Vc51nfNJ1qsCz5HcprFeDpR8TPEvjWZzATxCR3HnoYyBeQKie+HIk73SdCxArm+8p4ib4+F1YWAKZyyc4FrwrGogPFWXSSjz+wWYG/dvpiyJNhKI8WQEITG2Tx1ZUxzKxKh0expT9vQt/t4XihBOW+YCXthtRY6Hp93yitlnQPfrAQUtx8pUqIarwd8oXWTZyshskuugEsv4RRZFzqy/Dvb8YAfAUsgVVlFIkf0lEmJkMLRsFI9zwy34B4f8Imx1asqF4v+lWOuQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Date: Thu, 28 Aug 2025 11:19:58 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Leon Romanovsky <leon@kernel.org>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Alexey Kardashevskiy <aik@amd.com>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
-	Leon Romanovsky <leonro@nvidia.com>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Alexander Potapenko <glider@google.com>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>, Danilo Krummrich <dakr@kernel.org>,
-	iommu@lists.linux.dev, Jason Wang <jasowang@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>,
-	Jonathan Corbet <corbet@lwn.net>, Juergen Gross <jgross@suse.com>,
-	kasan-dev@googlegroups.com, Keith Busch <kbusch@kernel.org>,
-	linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	linux-nvme@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-	linux-trace-kernel@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>, rust-for-linux@vger.kernel.org,
-	Sagi Grimberg <sagi@grimberg.me>,
+X-Inumbo-ID: e0ef5779-841e-11f0-8dd7-1b34d833f44b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756392860; x=1756997660; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=S4lER6DNHsySwTielX62U8g1kuJabDKfu70gF2FH154=;
+        b=QxshJCM6sEhi2A17ECx8ZlkdQeqoV/P2rR5vhvimhvfvozs5lSIsUh2v9ea/MsBUb4
+         pCZw3PVJch27ZdZ0y6EEImz0CFbgrNLxBQr+ByXCUDbte+T5TA1qyl0pps1YWe+8SQOZ
+         2BPL2lvYD63sP2poooEkozLdfhG2KCGxiugRBaZryqWdH9Cm7j2Ue2o8sN0Fld7qA7qp
+         WHGKCg3H0AGxUdrccjmtSXB9qtjbGRVNs79gIe1VKPyGR3LZf7gf5/NbWz11lzSP4ygm
+         GVM5PPYReoaxlFtFtiRrNYh/KsZCB/EixHvwxqZj2hnqgI5xZ8TX5knBzQ6c8oZOj53V
+         GvBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756392860; x=1756997660;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=S4lER6DNHsySwTielX62U8g1kuJabDKfu70gF2FH154=;
+        b=LQcq+hiICcIC6xkHJEV3D/cuRdEAL28TmOZb1MwIxswEJ6wdhk66wXXvfiyp5n3aBX
+         K8vP6bIelRgL/rS3PO895mtt8nDLIKmyg5q2FA7DW9hEomOa9fdUviVkXOY70zRQvHEH
+         bbfKkqORa80Me7MYmTKiuRdwRwIHkyGQEXZCgJI8JnulLAt3jTWGbxkTbL1nmZHO2hM6
+         SibLGSfuOcN2iYz1hHnmi3Tqcp/D8WALvJR4FarIis1XL5kYbOB7CHLMTfa8+ZPfAPBg
+         inOJhWiM7EZbwWHxmMOzyAbvMxonFJdXBOIbiGfWAgxikJQiuJ2Vbw1qQbxsr98xvwEN
+         A7Vg==
+X-Gm-Message-State: AOJu0YwBjWFgtk6oV+PSDhUZ1gcCM0cEwtQRgulLH2pVjHl8fRvRK31N
+	XI7Ypmo8oH/iOxAsjaQBAcCAXrDILuwgq7EhdifO07pzGshZfXEoxtk3nrvIoA==
+X-Gm-Gg: ASbGncuCG0Pl/zcPzy+ZfPIcz1uvP2XjrrHBkBdTL94pz4US9gp9ofHS4+cjhUaFvIM
+	rI2UV22wfQ3XpxS2JmwB232CSr4fS02+VGRDBvfJ41h0uSXSU+pTdk1XPBX1Ytkrw6cGdUjH2rh
+	Juv7Xp9EkKJz5NZLFj/BjkU1ilViyXs8mm4n63LlNxTxstWwRrTThH4ujjPshY78pyso2S0/GlV
+	nzgf3NLYLDJmQgn6tO0fiTMcBndQDe/yunqMszYCPCzEcPfuRhfw3jqfHHZfCM4EEcKXjXKzHfQ
+	vrDnRK77NyvQGUGe6RZ0LhzHqqu3kLNJBjBT0obzaDWSVSzaySZ8RelvsAVovjH0offt2HQZwOs
+	zrG1LDHOw2Gu+8oojQ1SmbS+kMyXv40NKQzIqe+wJF1vp6IV8IPx9vpRQLLCbjOEcFGdJcxox
+X-Google-Smtp-Source: AGHT+IHtUeIVd/8Nbo5GH96HIPV40RpO2yd2qVsB7lrX/xGBFur/Av92L5jW1fRdTQ/fydSa8/ibPA==
+X-Received: by 2002:a05:6512:3d87:b0:55f:3d7c:387b with SMTP id 2adb3069b0e04-55f3d7c3badmr5706905e87.12.1756392859434;
+        Thu, 28 Aug 2025 07:54:19 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev, Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v4 07/16] dma-mapping: convert dma_direct_*map_page to be
- phys_addr_t based
-Message-ID: <20250828141958.GF9469@nvidia.com>
-References: <cover.1755624249.git.leon@kernel.org>
- <3faa9c978e243a904ffe01496148c4563dc9274e.1755624249.git.leon@kernel.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3faa9c978e243a904ffe01496148c4563dc9274e.1755624249.git.leon@kernel.org>
-X-ClientProxiedBy: YT1PR01CA0055.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::24) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v11 1/4] xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
+Date: Thu, 28 Aug 2025 17:54:04 +0300
+Message-ID: <bb53d9911b00879c7b25f5258d0e3e48005671f9.1756392094.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1756392094.git.mykola_kvach@epam.com>
+References: <cover.1756392094.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|CH1PPF4C9628624:EE_
-X-MS-Office365-Filtering-Correlation-Id: ee25c9d4-a894-4ec6-2322-08dde63df8ba
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?9ABT6QTC3/4LJlsORe9ECLURm5FPgYglzP4U8WaOSREO8cESJY67mpBgPEgf?=
- =?us-ascii?Q?MkjBrlOeWvd+Wx5sAHlUUxAypsE3sfz8tRKkX9INneWs2ZUhCuiL+xViVKT/?=
- =?us-ascii?Q?rfMpRQymx+irdvSIp4qZHv0it0sFIEnAypUowzkTqVzqCSgFEN9wpsDQUbug?=
- =?us-ascii?Q?qCBBjuZxvzOKP1cE3SXz7NfTZkR7c2f/KeWbfYAVmhwF+JdwiEsfdIKiKGfu?=
- =?us-ascii?Q?KFOGSgoJegWT/eiZ0MFRxjbwCG+FwEkg81Ukc1BsCPF+8jXdZtJVeXhv7+VW?=
- =?us-ascii?Q?h698g2uohrUxw5kkLDmqSBPVhg8ilvnXIutPYKjCAt1bMWYT3SVpW+eR99yn?=
- =?us-ascii?Q?V2hYNiLmkVaSAtGxDbv2FjU7DY4TWALSxOsgPymNrMjpcwvEPmg9iRhe/Kak?=
- =?us-ascii?Q?emtDF8WNI0h8UDSBKFdP2kmXFiGT9OpfHXOUDXYc0EyyoNYemlSR/WNEP8fw?=
- =?us-ascii?Q?iIxBcNn90ffR5b7+rVNjGlKo0XU81sqQRBi8X8mYq2jkXCEO/peYXNNRemHT?=
- =?us-ascii?Q?42p6fIV0eogpg/mvjNqfDzp3ArXrvuenVv/BvlLC0kDzmZAIOPwN3QdIOuyi?=
- =?us-ascii?Q?W5TJnKzgtNhmJnfCWp3jVysjCXd9dWeG7RuRghEbc2RH3Uy7bXU9SMn8dmf9?=
- =?us-ascii?Q?gpARsIUsJQqV2u91jnjSMUrFMRwiOwFxNW/y14lTJM8Zm18iTTRBjdBArogn?=
- =?us-ascii?Q?l32UDaIh3XzO+DR3xPn3Mja3Jzx3n01d+9vrDjvg/iV+yhn+FTJR9fY3oHV6?=
- =?us-ascii?Q?DMkOurjB5PukWMJDHBEc7Wi/WC2myrLMwYL9/39GprTbNLrTUexGld9LH1qM?=
- =?us-ascii?Q?rwGb7NwkfSSKgaz8lA0b45FLXa2uJCydXEhmG+J9Khp9uo0cnJ6Q+DBykbAO?=
- =?us-ascii?Q?W+/IAB/HpcrmMyzu3DIe1rXsJEZWw68SSNF1TDZgDOTQJovBXejmtt4GBExT?=
- =?us-ascii?Q?arBrV3XY04TZtmkEMb/4I8MSuMhMRiOd8CpHcvT/+tYP1p2QFOBQ1gIgGsPW?=
- =?us-ascii?Q?P3ICz7+xrw2/1SWkrb+ev8szOepdpDazVU32e+meayOMKWf575XW3D3a0gxq?=
- =?us-ascii?Q?Qfm5CLQQ0CT0QRq/f8LXBnRon+W9NZws9+kPQjiW4Y4ZZFuQVA1NXi9RXK2i?=
- =?us-ascii?Q?7d109Wx8+biBFpwcU3HOHUEZ0TsZ/y610sjQ45jorO+034WU0/zvgFG06Jxf?=
- =?us-ascii?Q?V2d72ZQL2rkiFbwKS0iOquz664r6LYn8VYdwO3xjMZ19nsn4SoO/cQQ7u1g6?=
- =?us-ascii?Q?kdNWoNUZZHdwDj1fesG0YxnkIrkDOakzRSpKryPitAhtawRRPfI+hNpj9aWh?=
- =?us-ascii?Q?ZS5rVojaCrIdUpbyZMPEv6trU4xPtIfIjmPI+hbXqgQadAMblXKCk6rKTX5S?=
- =?us-ascii?Q?a1ybeGPwK4NZcscvfiQySo2DML0nC9zFVon4MrwW6ODFN3spzuJrWfsrMo/u?=
- =?us-ascii?Q?4dmb68jk8Mk=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?0GKUUMy2Zjj7bShx559KxLONxcEVScGItWUxoqpIFyh6XEjUtYEUSckAJ+VS?=
- =?us-ascii?Q?kRzeLOB37iyFXOukUG7mg8GSDXvLhCpRyfX2Oh2Fb45BNBhk2yEjnScpepNz?=
- =?us-ascii?Q?860jrVAdoO7ibpqBpfTD7zWlzqL9z/qjFMO22UMNfFrKPDrgiAnj//751W0f?=
- =?us-ascii?Q?WgWHubeAyDqwC5yntQuyj6PL5b2TYt2qobichzmcR75vrk+NM/omSaTnnokd?=
- =?us-ascii?Q?Hpd1UapkTBcfXsLjl7nMedjcjweiDkFLayWNjFiWrakgqmPVW7dziEmj43Wk?=
- =?us-ascii?Q?7ArwEpDKMyEo29afjiHg1veE1ewj9ao/+zS/WtDRHR1jDAwjoReLgRQDv+F0?=
- =?us-ascii?Q?03Z6s0dGmQsGMrJf/HltN2mTRCQ6IwYE0bHRLWqs9WMzd3WYTc5uuEBjZP53?=
- =?us-ascii?Q?0Enqlh+gVu673+0LDZ68ct+H3O6Unvf5NGCys5nRPF5LdDs/ahP6EB99/Sv3?=
- =?us-ascii?Q?UFTwKOm1WhdIHaBjc1VXOw2aJRSVENv8PLKhMa//9GsecikRKp1NDpBOxs5R?=
- =?us-ascii?Q?VPYBNKjffDK4iBHlfTrKx8n+pHYtwF/RsOlJTwF7Mpnktir+QiyPsxOBdldw?=
- =?us-ascii?Q?vUqPHod1VFyNkRyEFzZ9eTFEE7l5VqNTzRnWvivcB3TE9LxmDNQEjYDF7nFM?=
- =?us-ascii?Q?GP9LZ5v0U2yHhLn1RIXToR0xKkZ0BFh5+Y9ybZHAnURd4i104GJKlScvbreR?=
- =?us-ascii?Q?Q9BMdB37xbvftod+QfrHsm0p9YOsqOyVEDjNYTvAWUyFia2Ey7evm4ywkYTx?=
- =?us-ascii?Q?h+sIu07+uvh7racJKS/Z/xCUkTsr4GbLeZUv1lS4aPyxO96g0VfYbHgVQzcD?=
- =?us-ascii?Q?k5c0Vl3y01qhuqDwv+Nsth7/Rzh+5Hqakc84qx1CzTkWbf7bqkXsOWx/2Hsh?=
- =?us-ascii?Q?NN6DB6HizNh+TeKEGIgD42nteot86FM/EEGHVHo7x/qcGaj/but4TVQk/K1v?=
- =?us-ascii?Q?vRMaWoZ5Tmk15q3Tp3aP1129Cnt+dMu5WSWbuAEwJnbnczgt4XViE/ZqKX5V?=
- =?us-ascii?Q?nAApv4rOScsaCsker2ICS1EVqZ3/ze2jwu35ywe5GC/sKyuryKQx7p/CPCZW?=
- =?us-ascii?Q?1FkX4ls0qo86wW9mXmendEiz8R5CBLzpFzYmyhMM0O4v5MSi+lhX1rjl576J?=
- =?us-ascii?Q?UDlXc1RprnpiHUBQpT/3CTXFW0R4q/D1rdUPqFnFegBGw8wLZl1G9kZrzPjV?=
- =?us-ascii?Q?kyIwSDxl+GlmU8WG9ODPPzMraHCdju/SEdV5nGXP+idSzYNyGyCRO16YHz+c?=
- =?us-ascii?Q?sgsQzLW+SQbh3kOfIDKy7AnP8apjMad3QeUKs5Vbxiws6DJVnk+kC1U9aI6W?=
- =?us-ascii?Q?bv+N+M2QWywysxu5/R5s9QqPWKcCLYpk9UwU6vOhXOGTx/8ehEeRZMTzpc95?=
- =?us-ascii?Q?gXE9x0w7K4qqhLJQQoZNDRAdSzebrIqL+phygzWYqpV7kOpxvx9KOWMs5uNs?=
- =?us-ascii?Q?XS1HhwwV9Kh2B/aqy05LWXl9uY8kXMVVN6K12dkxOz15Hc7B5X6BfCCDydhP?=
- =?us-ascii?Q?fQxez10fHoATxU0Sj/6J8X7LHHevla7d3+DBz+Oze7OmFlVBqnJJsa2/UxPp?=
- =?us-ascii?Q?uT3klxfrEJzyDMyljFs=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee25c9d4-a894-4ec6-2322-08dde63df8ba
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2025 14:19:59.9859
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MleWSaT+fPMApu6hDDjuoGGeeHk6jrZi5TxdTZ3vJyLRcRpsAXuDhi0ZC+bhq47a
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF4C9628624
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 19, 2025 at 08:36:51PM +0300, Leon Romanovsky wrote:
-> +static inline dma_addr_t dma_direct_map_phys(struct device *dev,
-> +		phys_addr_t phys, size_t size, enum dma_data_direction dir,
-> +		unsigned long attrs)
->  {
-> -	phys_addr_t phys = page_to_phys(page) + offset;
-> -	dma_addr_t dma_addr = phys_to_dma(dev, phys);
-> +	dma_addr_t dma_addr;
-> +	bool capable;
->  
->  	if (is_swiotlb_force_bounce(dev)) {
-> -		if (is_pci_p2pdma_page(page))
-> -			return DMA_MAPPING_ERROR;
-> +		if (attrs & DMA_ATTR_MMIO)
-> +			goto err_overflow;
-> +
->  		return swiotlb_map(dev, phys, size, dir, attrs);
->  	}
->  
-> -	if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
-> -	    dma_kmalloc_needs_bounce(dev, size, dir)) {
-> -		if (is_pci_p2pdma_page(page))
-> -			return DMA_MAPPING_ERROR;
-> -		if (is_swiotlb_active(dev))
-> +	if (attrs & DMA_ATTR_MMIO)
-> +		dma_addr = phys;
-> +	else
-> +		dma_addr = phys_to_dma(dev, phys);
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-I've been trying to unpuzzle this CC related mess for a while and
-still am unsure what is right here... But judging from the comments I
-think this should always call phys_to_dma(). Though I understand the
-existing map_resource path didn't call it so it would also be fine to
-leave it like this..
+Add support for the PSCI SYSTEM_SUSPEND function in the vPSCI interface,
+allowing guests to request suspend via the PSCI v1.0 SYSTEM_SUSPEND call
+(both 32-bit and 64-bit variants).
 
-Alexey do you know?
+Implementation details:
+- Add SYSTEM_SUSPEND function IDs to PSCI definitions
+- Trap and handle SYSTEM_SUSPEND in vPSCI
+- Allow only non-hardware domains to invoke SYSTEM_SUSPEND; return
+  PSCI_NOT_SUPPORTED for the hardware domain to avoid halting the system
+  in hwdom_shutdown() via domain_shutdown
+- Require all secondary VCPUs of the calling domain to be offline before
+  suspend, as mandated by the PSCI specification
 
-The only time this seems to do anything is on AMD and I have no idea
-what AMD has done to their CC memory map with the iommu..
+The arch_domain_resume() function is an architecture-specific hook that is
+invoked during domain resume to perform any necessary setup or restoration
+steps required by the platform.
 
-On ARM at least I would expect the DMA API to be dealing only with
-canonical IPA, ie if the memory is encrpyted it is in the protect IPA
-region, if it is decrypted then it is in the unprotected IPA region.
+The new vpsci_vcpu_up_prepare() helper is called on the resume path to set up
+the vCPU context (such as entry point, some system regs and context ID) before
+resuming a suspended guest. This keeps ARM/vPSCI-specific logic out of common
+code and avoids intrusive changes to the generic resume flow.
 
-I think some of this 'dma encrypted' 'dma unencrypted' stuff is a bit
-confused, at least on ARM, as I would expect the caller to have a
-correct phys_addr_t with the correct IPA aliases already. Passing in
-an ambiguous struct page for DMA mapping and then magically fixing it
-seems really weird to me. I would expect that a correct phys_addr_t
-should just translate 1:1 to a dma_addr_t or an iopte. Suzuki is that
-the right idea for ARM?
+Usage:
 
-To that end this series seems like a big improvment for CCA as the
-caller can now specify either the protected or unprotected IPA
-directly instead of an ambiguous struct page.
+For Linux-based guests, suspend can be initiated with:
+    echo mem > /sys/power/state
+or via:
+    systemctl suspend
 
-One of the things we are going to need for bounce buffering devices
-like RDMA is to be able to allocate unencrypted folios, mmap them to
-userspace, come back and then dma map them as unencrypted into a
-MR.
+Resuming the guest is performed from control domain using:
+      xl resume <domain>
 
-So it looks to me like this series will be important for this use case
-as well.
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+Changes in V11:
+- introduce arch_domain_resume() and vpsci_vcpu_up_prepare(), which are now
+called on the resume path to avoid extra modifications to common code.
+The vCPU context is now updated during domain resume.
 
-It looks OK though:
+Changes in V10:
+- small changes to the commit message reflect updates introduced in this
+  version of the patch.
+- Comments are improved, clarified, and expanded, especially regarding PSCI
+  requirements and context handling.
+- An ARM-specific helper (domain_resume_nopause_helper)
+- gprintk() and PRIregister are used for logging in vPSCI code.
+- An isb() is added before p2m_save_state
+- The is_64bit_domain check is dropped when masking the upper part of entry
+  point and cid for SMC32 SYSTEM_SUSPEND PSCI calls
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Changes in V9:
+- no functional changes
+- cosmetic chnages after review
+- enhance commit message and add extra comment to the code after review
 
-Jason
+Changes in V8:
+- GIC and virtual timer context must be saved when the domain suspends
+- rework locking
+- minor changes after code review
+
+Changes in V7:
+- add proper locking
+- minor changes after code review
+
+Changes in V6:
+- skip execution of ctxt_switch_from for vcpu that is in paused domain
+- add implementation of domain_resume without domain_pause
+- add helper function to determine if vcpu is suspended or not
+- ignore upper 32 bits of argument values when the domain is 64-bit
+  and calls the SMC32 SYSTEM_SUSPEND function
+- cosmetic changes after review
+
+Changes in V5:
+- don't use standby mode, restore execution in a provided by guest point
+- move checking that all CPUs, except current one, are offline to after
+  pausing the vCPUs
+- provide ret status from arch_domain_shutdown and handle it in
+  domain_shutdown
+- adjust VPSCI_NR_FUNCS to reflect the number of newly added PSCI functions
+
+Changes in V4:
+Dropped all changes related to watchdog, domain is marked as shutting
+down in domain_shutdown and watchdog timeout handler won't trigger
+because of it.
+
+Previous versions included code to manage Xen watchdog timers during suspend,
+but this was removed. When a guest OS starts the Xen watchdog (either via the
+kernel driver or xenwatchdogd), it is responsible for managing that state
+across suspend/resume. On Linux, the Xen kernel driver properly stops the
+watchdog during suspend. However, when xenwatchdogd is used instead, suspend
+handling is incomplete, potentially leading to watchdog-triggered resets on
+resume. Xen leaves watchdog handling to the guest OS and its services.
+
+Dropped all changes related to VCPU context, because instead domain_shutdown
+is used, so we don't need any extra changes for suspending domain.
+
+Changes in V3:
+Dropped all domain flags and related code (which touched common functions like
+vcpu_unblock), keeping only the necessary changes for Xen suspend/resume, i.e.
+suspend/resume is now fully supported only for the hardware domain.
+Proper support for domU suspend/resume will be added in a future patch.
+This patch does not yet include VCPU context reset or domain context
+restoration in VCPU.
+---
+ xen/arch/arm/domain.c                 |  22 +++++
+ xen/arch/arm/include/asm/domain.h     |   6 ++
+ xen/arch/arm/include/asm/perfc_defn.h |   1 +
+ xen/arch/arm/include/asm/psci.h       |   2 +
+ xen/arch/arm/include/asm/vpsci.h      |   5 +-
+ xen/arch/arm/vpsci.c                  | 114 +++++++++++++++++++++-----
+ xen/arch/ppc/stubs.c                  |   5 ++
+ xen/arch/riscv/stubs.c                |   5 ++
+ xen/arch/x86/domain.c                 |   5 ++
+ xen/common/domain.c                   |   9 ++
+ xen/include/xen/domain.h              |   2 +
+ 11 files changed, 156 insertions(+), 20 deletions(-)
+
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 863ae18157..6fd73eedde 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -12,6 +12,8 @@
+ #include <xen/softirq.h>
+ #include <xen/wait.h>
+ 
++#include <public/sched.h>
++
+ #include <asm/arm64/sve.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
+@@ -27,6 +29,7 @@
+ #include <asm/tee/tee.h>
+ #include <asm/vfp.h>
+ #include <asm/vgic.h>
++#include <asm/vpsci.h>
+ #include <asm/vtimer.h>
+ 
+ #include "vpci.h"
+@@ -880,6 +883,25 @@ void arch_domain_creation_finished(struct domain *d)
+     p2m_domain_creation_finished(d);
+ }
+ 
++int arch_domain_resume(struct domain *d)
++{
++    int rc;
++    typeof(d->arch.resume_ctx) *ctx = &d->arch.resume_ctx;
++
++    if ( !d->is_shutting_down || d->shutdown_code != SHUTDOWN_suspend )
++    {
++        dprintk(XENLOG_WARNING,
++                "%pd: Invalid domain state for resume: is_shutting_down=%d, shutdown_code=%d\n",
++                d, d->is_shutting_down, d->shutdown_code);
++        return -EINVAL;
++    }
++
++    rc = vpsci_vcpu_up_prepare(ctx->wake_cpu , ctx->ep, ctx->cid);
++    memset(ctx, 0, sizeof(*ctx));
++
++    return rc;
++}
++
+ static int is_guest_pv32_psr(uint32_t psr)
+ {
+     switch (psr & PSR_MODE_MASK)
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index a3487ca713..68185fc4d6 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -121,6 +121,12 @@ struct arch_domain
+     void *tee;
+ #endif
+ 
++    struct resume_info {
++        register_t ep;
++        register_t cid;
++        struct vcpu *wake_cpu;
++    } resume_ctx;
++
+ }  __cacheline_aligned;
+ 
+ struct arch_vcpu
+diff --git a/xen/arch/arm/include/asm/perfc_defn.h b/xen/arch/arm/include/asm/perfc_defn.h
+index effd25b69e..8dfcac7e3b 100644
+--- a/xen/arch/arm/include/asm/perfc_defn.h
++++ b/xen/arch/arm/include/asm/perfc_defn.h
+@@ -33,6 +33,7 @@ PERFCOUNTER(vpsci_system_reset,        "vpsci: system_reset")
+ PERFCOUNTER(vpsci_cpu_suspend,         "vpsci: cpu_suspend")
+ PERFCOUNTER(vpsci_cpu_affinity_info,   "vpsci: cpu_affinity_info")
+ PERFCOUNTER(vpsci_features,            "vpsci: features")
++PERFCOUNTER(vpsci_system_suspend,      "vpsci: system_suspend")
+ 
+ PERFCOUNTER(vcpu_kick,                 "vcpu: notify other vcpu")
+ 
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 4780972621..48a93e6b79 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -47,10 +47,12 @@ void call_psci_system_reset(void);
+ #define PSCI_0_2_FN32_SYSTEM_OFF          PSCI_0_2_FN32(8)
+ #define PSCI_0_2_FN32_SYSTEM_RESET        PSCI_0_2_FN32(9)
+ #define PSCI_1_0_FN32_PSCI_FEATURES       PSCI_0_2_FN32(10)
++#define PSCI_1_0_FN32_SYSTEM_SUSPEND      PSCI_0_2_FN32(14)
+ 
+ #define PSCI_0_2_FN64_CPU_SUSPEND         PSCI_0_2_FN64(1)
+ #define PSCI_0_2_FN64_CPU_ON              PSCI_0_2_FN64(3)
+ #define PSCI_0_2_FN64_AFFINITY_INFO       PSCI_0_2_FN64(4)
++#define PSCI_1_0_FN64_SYSTEM_SUSPEND      PSCI_0_2_FN64(14)
+ 
+ /* PSCI v0.2 affinity level state returned by AFFINITY_INFO */
+ #define PSCI_0_2_AFFINITY_LEVEL_ON      0
+diff --git a/xen/arch/arm/include/asm/vpsci.h b/xen/arch/arm/include/asm/vpsci.h
+index 0cca5e6830..d790ab3715 100644
+--- a/xen/arch/arm/include/asm/vpsci.h
++++ b/xen/arch/arm/include/asm/vpsci.h
+@@ -23,12 +23,15 @@
+ #include <asm/psci.h>
+ 
+ /* Number of function implemented by virtual PSCI (only 0.2 or later) */
+-#define VPSCI_NR_FUNCS  12
++#define VPSCI_NR_FUNCS  14
+ 
+ /* Functions handle PSCI calls from the guests */
+ bool do_vpsci_0_1_call(struct cpu_user_regs *regs, uint32_t fid);
+ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid);
+ 
++int vpsci_vcpu_up_prepare(struct vcpu *v, register_t entry_point,
++                          register_t context_id);
++
+ #endif /* __ASM_VPSCI_H__ */
+ 
+ /*
+diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+index 7ba9ccd94b..50cf5fd96c 100644
+--- a/xen/arch/arm/vpsci.c
++++ b/xen/arch/arm/vpsci.c
+@@ -10,30 +10,16 @@
+ 
+ #include <public/sched.h>
+ 
+-static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
+-                            register_t context_id)
++int vpsci_vcpu_up_prepare(struct vcpu *v, register_t entry_point,
++                   register_t context_id)
+ {
+-    struct vcpu *v;
+-    struct domain *d = current->domain;
+-    struct vcpu_guest_context *ctxt;
+     int rc;
++    struct domain *d = current->domain;
+     bool is_thumb = entry_point & 1;
+-    register_t vcpuid;
+-
+-    vcpuid = vaffinity_to_vcpuid(target_cpu);
+-
+-    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
+-        return PSCI_INVALID_PARAMETERS;
+-
+-    /* THUMB set is not allowed with 64-bit domain */
+-    if ( is_64bit_domain(d) && is_thumb )
+-        return PSCI_INVALID_ADDRESS;
+-
+-    if ( !test_bit(_VPF_down, &v->pause_flags) )
+-        return PSCI_ALREADY_ON;
++    struct vcpu_guest_context *ctxt;
+ 
+     if ( (ctxt = alloc_vcpu_guest_context()) == NULL )
+-        return PSCI_DENIED;
++        return -ENOMEM;
+ 
+     vgic_clear_pending_irqs(v);
+ 
+@@ -76,8 +62,37 @@ static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
+     free_vcpu_guest_context(ctxt);
+ 
+     if ( rc < 0 )
++        return rc;
++
++    return 0;
++}
++
++static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
++                            register_t context_id)
++{
++    struct vcpu *v;
++    struct domain *d = current->domain;
++    int rc;
++    bool is_thumb = entry_point & 1;
++    register_t vcpuid;
++
++    vcpuid = vaffinity_to_vcpuid(target_cpu);
++
++    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
++        return PSCI_INVALID_PARAMETERS;
++
++    /* THUMB set is not allowed with 64-bit domain */
++    if ( is_64bit_domain(d) && is_thumb )
++        return PSCI_INVALID_ADDRESS;
++
++    if ( !test_bit(_VPF_down, &v->pause_flags) )
++        return PSCI_ALREADY_ON;
++
++    rc = vpsci_vcpu_up_prepare(v, entry_point, context_id);
++    if ( rc )
+         return PSCI_DENIED;
+ 
++    vgic_clear_pending_irqs(v);
+     vcpu_wake(v);
+ 
+     return PSCI_SUCCESS;
+@@ -197,6 +212,48 @@ static void do_psci_0_2_system_reset(void)
+     domain_shutdown(d,SHUTDOWN_reboot);
+ }
+ 
++static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
++{
++    int32_t rc;
++    struct vcpu *v;
++    struct domain *d = current->domain;
++    bool is_thumb = epoint & 1;
++
++    /* THUMB set is not allowed with 64-bit domain */
++    if ( is_64bit_domain(d) && is_thumb )
++        return PSCI_INVALID_ADDRESS;
++
++    /* SYSTEM_SUSPEND is not supported for the hardware domain yet */
++    if ( is_hardware_domain(d) )
++        return PSCI_NOT_SUPPORTED;
++
++    /* Ensure that all CPUs other than the calling one are offline */
++    domain_lock(d);
++    for_each_vcpu ( d, v )
++    {
++        if ( v != current && is_vcpu_online(v) )
++        {
++            domain_unlock(d);
++            return PSCI_DENIED;
++        }
++    }
++    domain_unlock(d);
++
++    rc = domain_shutdown(d, SHUTDOWN_suspend);
++    if ( rc )
++        return PSCI_DENIED;
++
++    d->arch.resume_ctx.ep = epoint;
++    d->arch.resume_ctx.cid = cid;
++    d->arch.resume_ctx.wake_cpu = current;
++
++    gprintk(XENLOG_DEBUG,
++            "SYSTEM_SUSPEND requested, epoint=0x%"PRIregister", cid=0x%"PRIregister,
++            epoint, cid);
++
++    return rc;
++}
++
+ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+ {
+     /* /!\ Ordered by function ID and not name */
+@@ -214,6 +271,8 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+     case PSCI_0_2_FN32_SYSTEM_OFF:
+     case PSCI_0_2_FN32_SYSTEM_RESET:
+     case PSCI_1_0_FN32_PSCI_FEATURES:
++    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
++    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
+     case ARM_SMCCC_VERSION_FID:
+         return 0;
+     default:
+@@ -344,6 +403,23 @@ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid)
+         return true;
+     }
+ 
++    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
++    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
++    {
++        register_t epoint = PSCI_ARG(regs, 1);
++        register_t cid = PSCI_ARG(regs, 2);
++
++        if ( fid == PSCI_1_0_FN32_SYSTEM_SUSPEND )
++        {
++            epoint &= GENMASK(31, 0);
++            cid &= GENMASK(31, 0);
++        }
++
++        perfc_incr(vpsci_system_suspend);
++        PSCI_SET_RESULT(regs, do_psci_1_0_system_suspend(epoint, cid));
++        return true;
++    }
++
+     default:
+         return false;
+     }
+diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
+index bdaf474c5c..0db0627b5c 100644
+--- a/xen/arch/ppc/stubs.c
++++ b/xen/arch/ppc/stubs.c
+@@ -224,6 +224,11 @@ void arch_domain_creation_finished(struct domain *d)
+     BUG_ON("unimplemented");
+ }
+ 
++int arch_domain_resume(struct domain *d)
++{
++    return 0;
++}
++
+ int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+ {
+     BUG_ON("unimplemented");
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 1a8c86cd8d..52532ae14d 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -198,6 +198,11 @@ void arch_domain_creation_finished(struct domain *d)
+     BUG_ON("unimplemented");
+ }
+ 
++int arch_domain_resume(struct domain *d)
++{
++    return 0;
++}
++
+ int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c)
+ {
+     BUG_ON("unimplemented");
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 19fd86ce88..94a06bc697 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -1138,6 +1138,11 @@ void arch_domain_creation_finished(struct domain *d)
+         hvm_domain_creation_finished(d);
+ }
+ 
++int arch_domain_resume(struct domain *d)
++{
++    return 0;
++}
++
+ #ifdef CONFIG_COMPAT
+ #define xen_vcpu_guest_context vcpu_guest_context
+ #define fpu_ctxt fpu_ctxt.x
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 104e917f07..d73a88ced5 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1352,6 +1352,7 @@ int domain_shutdown(struct domain *d, u8 reason)
+ void domain_resume(struct domain *d)
+ {
+     struct vcpu *v;
++    int rc;
+ 
+     /*
+      * Some code paths assume that shutdown status does not get reset under
+@@ -1359,6 +1360,14 @@ void domain_resume(struct domain *d)
+      */
+     domain_pause(d);
+ 
++    rc = arch_domain_resume(d);
++    if ( rc )
++    {
++        domain_unpause(d);
++        printk("%pd: Failed to resume domain (ret %d)\n", d, rc);
++        return;
++    }
++
+     spin_lock(&d->shutdown_lock);
+ 
+     d->is_shutting_down = d->is_shut_down = 0;
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index e10baf2615..5f77ffadf1 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -109,6 +109,8 @@ int arch_domain_soft_reset(struct domain *d);
+ 
+ void arch_domain_creation_finished(struct domain *d);
+ 
++int arch_domain_resume(struct domain *d);
++
+ void arch_p2m_set_access_required(struct domain *d, bool access_required);
+ 
+ int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c);
+-- 
+2.48.1
+
 
