@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3D6CA0FF7
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1099204.1453200 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6889FC8303F
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1099207.1453214 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureHp-00040o-DD; Thu, 28 Aug 2025 15:11:37 +0000
+	id 1ureHs-0004mH-UL; Thu, 28 Aug 2025 15:11:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1099204.1453200; Thu, 28 Aug 2025 15:11:37 +0000
+Received: by outflank-mailman (output) from mailman id 1099207.1453214; Thu, 28 Aug 2025 15:11:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureHp-000406-4C; Thu, 28 Aug 2025 15:11:37 +0000
-Received: by outflank-mailman (input) for mailman id 1099204;
- Thu, 28 Aug 2025 15:11:36 +0000
+	id 1ureHs-0004lt-QF; Thu, 28 Aug 2025 15:11:40 +0000
+Received: by outflank-mailman (input) for mailman id 1099207;
+ Thu, 28 Aug 2025 15:11:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FrxM=3I=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ureCJ-00035A-4T
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:05:55 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1ureCc-00035A-5l
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:14 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7ddc10b7-8420-11f0-8dd7-1b34d833f44b;
- Thu, 28 Aug 2025 17:05:53 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3ceb9c3d98cso215222f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:05:53 -0700 (PDT)
+ id 894594af-8420-11f0-8dd7-1b34d833f44b;
+ Thu, 28 Aug 2025 17:06:12 +0200 (CEST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-45a1b05fe23so6562535e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:12 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.05.45
+ 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 08:05:46 -0700 (PDT)
+ Thu, 28 Aug 2025 08:06:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ddc10b7-8420-11f0-8dd7-1b34d833f44b
+X-Inumbo-ID: 894594af-8420-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1756393553; x=1756998353; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1756393571; x=1756998371; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1vizQ3VHS0of9WutZZfkzSTT2z1DRqiDuoluptA3qSA=;
-        b=nkIBD8WGDj7dnhIH2NU5aTkt5cnbxTARO4bB1Dc32UPMDohSm5oG/e4mqvzzshOSOY
-         93qIIt5JU8JUSHe6CLm2v2Q4yZDHyJFNnm8muy0t91ETNfImgdp+xy75Wa4BXo5FJ7FS
-         y6Ai1iVHQb4yDKETHoiUaT5o8s+4IL20mq0mk=
+        bh=tlSs33LyasAlNvUysj+jB74IjU0ubI6AuvZz0rNj+kg=;
+        b=cm4HMhPFdlqTCjzXMqvEOl8+j7BieUIA96bpN5uxoD7N4Ky8scLcHiJac0KxDqUhOT
+         YZZ2aYlbfcAHIQso5jzkYAZ+pN9fPwVLFNG+HxMfiBUVXo8gzWcns1UcYqIvx5kGja18
+         twgkbUjC4fcFBgchMasqV67C3Dv/FX2+1zqZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756393553; x=1756998353;
+        d=1e100.net; s=20230601; t=1756393571; x=1756998371;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1vizQ3VHS0of9WutZZfkzSTT2z1DRqiDuoluptA3qSA=;
-        b=Ct41BrvE8Ix+Ana7WdNvah+4rHvr4tdcpy6WITHIrJ5K6dgXc2ihHHBEhivCzRus+5
-         5IExWjo76E3nEwrdOjohfWW8gPvCx7x7luFoM7GHUn7Z70DqARBkplWnE7gN62j6jF2B
-         kXyz4SYvod6NZFMDPmilFS7JwSvsCt+7deYMWo8Lnpe8Ex+dEEtemj3QD7C8AjHR87A8
-         aYzy67WoBtmzqviVzjzSWOo3mysI8BA4wcJGQi1pt5f38LEElulCvnTtKRhKKXWrjW3j
-         FcAcCffOk6v7qLzwzsHP7kuqfsHDMUx2ARkw0QP02BwJx66XbeqNMubMFQWQijXsStPz
-         IaJA==
-X-Gm-Message-State: AOJu0YxBvgx86LLYsBwl6uzrFnkj9SWSftase+1C8INSyybew/C80ga2
-	uJqNpPFMYfvaxQCqHYG61hJdLGm0SnxEIo2rsdHU2x2dG8yRqS9U5w7Cq/dw3nYNidjL4QrQ8rC
-	87fbr
-X-Gm-Gg: ASbGncv6F7NVEAiZh2a7rhQ3QBDFpASarTkz3h5ukLUayfnRZfD7xCEwVXVO2m9xyMd
-	Oo0/V7kVxTBEaP/lt6+0MlMmk0z2cBoBw4/5BinpvL/zES0mVoHMNdEIrP1SecOi9ofIeXOOflG
-	S+5/iZfHEYocS9MUkhcbCTt+fdAcCiBQFXa4rq5Dv3iHZBrLDPq663WXfuBM/FKqchJ9+wS6eF/
-	5yHXNHPG+6qpMsy02aLti+UOzVvzo6JNaJB0bsI7cKYSi168hQQgMix5qPEAXoXh3WJ232zKyLP
-	JUjiAR8CE+BgAHONM3gj7d4g2dBgky6gMZOvzQqoh4Pv+xy51bRW2dt4nK6DENtpYvwrGAKTIvN
-	GgP5/z9w4n3TjdCYaNunzyHlA2oVPDkjryisy/zpEd5qHevlw0hCQEYBIU3t0B79Zb5EVnuynff
-	ukqrqRu6lTcdk=
-X-Google-Smtp-Source: AGHT+IH4TSYOu4ulE2SxpWCdHmHAm0UgFrckax4DFki9Vf47jObf43Xdd6Kpzocq1jeZJDmlPW+QhA==
-X-Received: by 2002:a05:6000:2709:b0:3cd:5815:68d4 with SMTP id ffacd0b85a97d-3cd58156b71mr2638060f8f.57.1756393552645;
-        Thu, 28 Aug 2025 08:05:52 -0700 (PDT)
+        bh=tlSs33LyasAlNvUysj+jB74IjU0ubI6AuvZz0rNj+kg=;
+        b=I+Pwdf07tU3zHCv1UAjiDFiI20BHmeyduaU46znW5q4bA6JCgz8Cv4xkuWKDjZQcDu
+         ZFhW6o6v8Omr+FGS2+tkvDTL3uWtY4rMCwztOMc3jd5WMiPrVl9Obn/reTwpMcZx0fdS
+         trExLS9FN1Yyyt4clJ6A0BwqDxSyfAzrHemjWcOgpthuY4ihG976zpIvsfCNi7Yblo3E
+         hlf17bqhmsKX6rYJjRDAswfLiXFtVfoHG6IKQjwSOYJWc1b/+aUoWmKhwQPYSkXevTRZ
+         N41pDkz1Gebfb9xL4oRQTIJtZN6pJSmbBXhD60rDXGWEWQcfr5nSYzXxEpujkb5h3scd
+         bZzg==
+X-Gm-Message-State: AOJu0YwZD/9wSVPnuPFY0lrfMvcZP2eL0qlYCHSL+AzPUwwQDhLi9B05
+	qGoycxo1liOMibGQgN/tK0ngxikzubdBnpKOahsao9s5vEWq6XKWRJRJEVyaWk0f+ZFoqniCXAc
+	kB/7a
+X-Gm-Gg: ASbGncvWmTEs5U+vKGn9v6FSu3EDCGiIwqENPUbUss+o5dYrkfvLp7W9M2CaHhZQkGQ
+	0/nw2TDLzZ6TjZhc5F7EYswysyHhkGj7VMdD+lSOSDEDZRou3hzinl8iZuiEwjwh1sQNudKTGhY
+	dnG+m2Mh5P06PEB3LaTsHdvX7jkurQwMEEARDavUW6yxL6a4HEymsrtrgS/Rp2Uh6cqJxmXaeLn
+	voyRnrPbEZOOXp/alcdN/wQ6Is9jZMkch4A3jF8czIudTOgBzRXpHmnW0JjWGVpf8rDLHy0pQvp
+	GSuYLlHEDFXAHSVQQw+0SBxXnoUfzUdcIjTw7DeE5XK4PZWnH2qqME0OKcoaQ2uxKAJBpXNQXmK
+	aw5S5VAuYICh/OAVXOtvK+hjPaijbuNEOqZl9IFFpALMl50bVUD2fVoNYfjgwkr9IklC4CZZdhl
+	3c3Vfw1UERSz0=
+X-Google-Smtp-Source: AGHT+IFAX/vmHjMJ8gCNh990nkuEzkfpCXYnyMoxCc0laDfZpJMLkpKrX3A0hZU27T5NEi99fqCP+A==
+X-Received: by 2002:a05:600c:1f83:b0:43c:f8fc:f697 with SMTP id 5b1f17b1804b1-45b517adfacmr197222375e9.9.1756393571177;
+        Thu, 28 Aug 2025 08:06:11 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 06/23] x86/traps: Set MSR_PL0_SSP in load_system_tables()
-Date: Thu, 28 Aug 2025 16:03:52 +0100
-Message-Id: <20250828150409.901315-7-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 12/23] x86/fsgsbase: Make gskern accesses safe under FRED
+Date: Thu, 28 Aug 2025 16:03:58 +0100
+Message-Id: <20250828150409.901315-13-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250828150409.901315-1-andrew.cooper3@citrix.com>
 References: <20250828150409.901315-1-andrew.cooper3@citrix.com>
@@ -97,16 +97,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-FRED and IDT differ by a Supervisor Token on the base of the shstk.  This
-means that the value they load into MSR_PL0_SSP differs by 8.
+Under FRED, the SWAPGS instructions is disallowed.  Therefore we must use the
+MSR path instead.
 
-s3_resume() in particular has logic which is otherwise invariant of FRED mode,
-and must not clobber a FRED MSR_PL0_SSP with an IDT one.
+read_registers() is in the show_registers() path, so this allows Xen to render
+it's current state without suffering #UD (and recursing until the stack guard
+page is hit).
 
-This also simplifies the AP path too.  Updating reinit_bsp_stack() is deferred
-until later.
-
-No functional change.
+All hardware with FRED is expected to have some kind of non-serialising access
+to these registers.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -114,93 +113,83 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
 v2:
- * Extend comment about clearing the busy bit.
- * Move reinit_bsp_stack() hunk into this patch.
----
- xen/arch/x86/acpi/wakeup_prot.S |  9 ---------
- xen/arch/x86/boot/x86_64.S      | 12 +++---------
- xen/arch/x86/setup.c            |  2 --
- xen/arch/x86/traps-setup.c      |  2 ++
- 4 files changed, 5 insertions(+), 20 deletions(-)
+ * Broken out of subsequent patch.  Rebased over MSR cleanup.
 
-diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
-index fceb4ca353f7..ba0bd77806b8 100644
---- a/xen/arch/x86/acpi/wakeup_prot.S
-+++ b/xen/arch/x86/acpi/wakeup_prot.S
-@@ -104,15 +104,6 @@ LABEL(s3_resume)
-          */
-         mov     saved_ssp(%rip), %rdi
- 
--        /* Calculate MSR_PL0_SSP from SSP. */
--        mov     $MSR_PL0_SSP, %ecx
--        mov     %rdi, %rdx
--        shr     $32, %rdx
--        mov     %edi, %eax
--        and     $~(STACK_SIZE - 1), %eax
--        or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
--        wrmsr
--
-         /*
-          * A Restore Token's value is &token + 8 + 64BIT (bit 0).
-          * We want to put this on the shstk at SSP - 8.
-diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
-index 3a5ad2764448..11a7e9d3bd23 100644
---- a/xen/arch/x86/boot/x86_64.S
-+++ b/xen/arch/x86/boot/x86_64.S
-@@ -65,17 +65,11 @@ ENTRY(__high_start)
-         or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %rdx
- 
-         /*
--         * Write a new supervisor token.  Doesn't matter on boot, but for S3
--         * resume this clears the busy bit.
-+         * Write a new Supervisor Token.  It doesn't matter the first time a
-+         * CPU boots, but for S3 resume or hotplug this clears the busy bit so
-+         * SETSSBSY can set it again.
-          */
-         wrssq   %rdx, (%rdx)
--
--        /* Point MSR_PL0_SSP at the token. */
--        mov     $MSR_PL0_SSP, %ecx
--        mov     %edx, %eax
--        shr     $32, %rdx
--        wrmsr
--
-         setssbsy
- 
- #endif /* CONFIG_XEN_SHSTK */
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 6c81841426a4..a810bdf6d352 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -907,8 +907,6 @@ static void __init noreturn reinit_bsp_stack(void)
- 
-     if ( cpu_has_xen_shstk )
-     {
--        wrmsrl(MSR_PL0_SSP,
--               (unsigned long)stack + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8);
-         wrmsrl(MSR_S_CET, xen_msr_s_cet_value());
-         asm volatile ("setssbsy" ::: "memory");
-     }
-diff --git a/xen/arch/x86/traps-setup.c b/xen/arch/x86/traps-setup.c
-index 6e2af58ba0a5..d77be8f83921 100644
---- a/xen/arch/x86/traps-setup.c
-+++ b/xen/arch/x86/traps-setup.c
-@@ -92,6 +92,7 @@ static void load_system_tables(void)
-     {
-         volatile uint64_t *ist_ssp = tss_page->ist_ssp;
-         unsigned long
-+            ssp = stack_top + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8,
-             mce_ssp = stack_top + (IST_MCE * IST_SHSTK_SIZE) - 8,
-             nmi_ssp = stack_top + (IST_NMI * IST_SHSTK_SIZE) - 8,
-             db_ssp  = stack_top + (IST_DB  * IST_SHSTK_SIZE) - 8,
-@@ -118,6 +119,7 @@ static void load_system_tables(void)
+In principle, the following can also be used for read_registers()
+
+    diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+    index 5799770a2f71..0b0fdf2c5ac4 100644
+    --- a/xen/arch/x86/traps.c
+    +++ b/xen/arch/x86/traps.c
+    @@ -125,16 +125,21 @@ static void read_registers(struct extra_state *state)
+         state->cr3 = read_cr3();
+         state->cr4 = read_cr4();
+
+    -    if ( !(state->cr4 & X86_CR4_FRED) && (state->cr4 & X86_CR4_FSGSBASE) )
+    +    if ( state->cr4 & X86_CR4_FSGSBASE )
+         {
+             state->fsb = __rdfsbase();
+             state->gsb = __rdgsbase();
+    +
+    +        if ( state->cr4 & X86_CR4_FRED )
+    +            goto gskern_fred;
+    +
+             state->gss = __rdgskern();
          }
+         else
+         {
+             state->fsb = rdmsr(MSR_FS_BASE);
+             state->gsb = rdmsr(MSR_GS_BASE);
+    +    gskern_fred:
+             state->gss = rdmsr(MSR_SHADOW_GS_BASE);
+         }
+
+but I'm not sure that it's a good enough improvement to warrant the
+complexity.
+---
+ xen/arch/x86/include/asm/fsgsbase.h | 8 ++++++--
+ xen/arch/x86/traps.c                | 2 +-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/fsgsbase.h b/xen/arch/x86/include/asm/fsgsbase.h
+index 24862a6bfea7..5faa3a324332 100644
+--- a/xen/arch/x86/include/asm/fsgsbase.h
++++ b/xen/arch/x86/include/asm/fsgsbase.h
+@@ -79,7 +79,9 @@ static inline unsigned long read_gs_base(void)
  
-         wrmsrns(MSR_ISST, (unsigned long)ist_ssp);
-+        wrmsrns(MSR_PL0_SSP, (unsigned long)ssp);
-     }
+ static inline unsigned long read_gs_shadow(void)
+ {
+-    if ( read_cr4() & X86_CR4_FSGSBASE )
++    unsigned long cr4 = read_cr4();
++
++    if ( !(cr4 & X86_CR4_FRED) && (cr4 & X86_CR4_FSGSBASE) )
+         return __rdgs_shadow();
+     else
+         return rdmsr(MSR_SHADOW_GS_BASE);
+@@ -103,7 +105,9 @@ static inline void write_gs_base(unsigned long base)
  
-     _set_tssldt_desc(gdt + TSS_ENTRY, (unsigned long)tss,
+ static inline void write_gs_shadow(unsigned long base)
+ {
+-    if ( read_cr4() & X86_CR4_FSGSBASE )
++    unsigned long cr4 = read_cr4();
++
++    if ( !(cr4 & X86_CR4_FRED) && (cr4 & X86_CR4_FSGSBASE) )
+         __wrgs_shadow(base);
+     else
+         wrmsrns(MSR_SHADOW_GS_BASE, base);
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index c11d72d47027..66308e7c9edf 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -118,7 +118,7 @@ static void read_registers(struct extra_state *state)
+     state->cr3 = read_cr3();
+     state->cr4 = read_cr4();
+ 
+-    if ( state->cr4 & X86_CR4_FSGSBASE )
++    if ( !(state->cr4 & X86_CR4_FRED) && (state->cr4 & X86_CR4_FSGSBASE) )
+     {
+         state->fsb = __rdfsbase();
+         state->gsb = __rdgsbase();
 -- 
 2.39.5
 
