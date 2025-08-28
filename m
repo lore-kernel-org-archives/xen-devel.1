@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2AB0CA0EED
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1099145.1453043 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F6BC8303F
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:11:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1099156.1453081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureH1-0005sV-6r; Thu, 28 Aug 2025 15:10:47 +0000
+	id 1ureHH-00070f-GT; Thu, 28 Aug 2025 15:11:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1099145.1453043; Thu, 28 Aug 2025 15:10:47 +0000
+Received: by outflank-mailman (output) from mailman id 1099156.1453081; Thu, 28 Aug 2025 15:11:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureH1-0005sO-46; Thu, 28 Aug 2025 15:10:47 +0000
-Received: by outflank-mailman (input) for mailman id 1099145;
- Thu, 28 Aug 2025 15:10:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ureHH-0006zr-5i; Thu, 28 Aug 2025 15:11:03 +0000
+Received: by outflank-mailman (input) for mailman id 1099156;
+ Thu, 28 Aug 2025 15:11:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FrxM=3I=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ureCq-00035A-M8
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:28 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 91cee1a5-8420-11f0-8dd7-1b34d833f44b;
- Thu, 28 Aug 2025 17:06:27 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-45b7d485173so3264665e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:27 -0700 (PDT)
+ id 1ureCm-0003MD-Qb
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:24 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 904c730d-8420-11f0-8adc-4578a1afcccb;
+ Thu, 28 Aug 2025 17:06:24 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-45a1b065d59so7219705e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:24 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.24
+ 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 08:06:24 -0700 (PDT)
+ Thu, 28 Aug 2025 08:06:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91cee1a5-8420-11f0-8dd7-1b34d833f44b
+X-Inumbo-ID: 904c730d-8420-11f0-8adc-4578a1afcccb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1756393586; x=1756998386; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1756393583; x=1756998383; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c80DOGuq8CPTWDIJ0qD4mtXdtGhG3XkzJOyU46644UY=;
-        b=BPEd304GUE1uVIQ23kc8xBUVMVc3v8OFxN7DQLBNojYtqw6PcNyZp32D/yHTgMzY2/
-         5n5uBpW0SbH3fG4h78ylW7qNYoVCbhCQwAE8inV70MPMqobGdq6RwfSKboAEuQHybbY4
-         DHxeZPdNVqYrXdEG/Wtf+I1bN6vGNzAjgBcmk=
+        bh=LcUNjSmRE8zrBdNfJ83+ye8WTIwfGJ+o51CvT8zs2YM=;
+        b=A0TiPBD7EUGGlJ2Mgeg5s3yiAOeVJEF+0T6AT44NO++MWOYOQIYWLX7mqvF7qg9SMB
+         G0x9AmbKlkP4jU5Vnac45fmxP7k3MuVuI27k1rPvh+LgAx/2kXdvR6N6blHueXnITDeU
+         kU/+Lx88es9TBBX61x0j9919kNM64FyUF9rUM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756393586; x=1756998386;
+        d=1e100.net; s=20230601; t=1756393583; x=1756998383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=c80DOGuq8CPTWDIJ0qD4mtXdtGhG3XkzJOyU46644UY=;
-        b=mmc8L1aCvZC1t9R/jQH+3C9i8krByO8kIbO6DuBtEWsS77j4SilcgBDqF3KK3GMHFR
-         FPHw6MsYPknqB/QRaQ5EK8b0ch0Pb/n33qJsy+onWtV+OqzvxHJ/is0DcOnsIObLejZR
-         bS62HY2Sgy8eGyr9wdZZZ737qXA3taZju4W4WnzzP53/FfwSuYbmXoGSUJYp3pTsp/qW
-         wus3dhKtT+P0YQ6fgvMO26oVyvA4c5+OOx97gzv1EO/t9GzsKPNI0ZDzNXnJWB0Ik/nF
-         eNtmdgHUsJseY3pc0lQidkgAKDryJbKeaQD8qKMbC3TvJ/KJWU5RWSqoRYkxe1IX3Ilm
-         NzyQ==
-X-Gm-Message-State: AOJu0Ywo/yfs/X2OvyWLK1+DhI7pVthA00dWSvoMYbC45NiDyHzSjtb9
-	y6LndrhLp4aMCNPQEIBDpE8zdrCww2ATtrqRalcWiyeZjgB9O+4sXsFlXyWUupaop/Eqr5XbYLo
-	E0rfy
-X-Gm-Gg: ASbGncsCC9DTEjHVnSTpUMfUIaFhXKo7psd73efpN6zohQp5TutqaW2yeXFBNlw+hDc
-	gQoN0fDb8ZXpg/nIqSQvJOFLvAZdPUuOOEHOWQO6Nhbf5DNl/AGwTkgyBskRhHG8oaYWzUgJoDc
-	q8vuyU3uATxjfPKD3Hlz8no9/CjdrVzdONSAHdHRFg8uY+lk3XvTJeK+MRSUoJjvIyKeUdXv0sw
-	IsoIAkx2P7S8a5NY7+72+b1qD+z1qtnA2qucOAlpoE2KnrNYQXChoS4KlJoKGjkkDUfZcV8L0E8
-	6dfMBPaOxXfyGht7wa7EITCxlz2PbVVdfsxRgkJD9r8WDAXspOpmbins8GWUFOpOkAOvyV49Hak
-	ULxOs63d6La/0OtA+yWwMDmwVFt4frOMM3cw1OQcIOaSHDAtLo3RP34/JEMi0vVlomBSifI+9da
-	4gWITu/MHXLVw=
-X-Google-Smtp-Source: AGHT+IHUFasaK56jScMDuhEnUt52GbGlkRE4OxBQO+dhONEeL5IJ4iJgXFm4HUfslJuRdZOFX47vhg==
-X-Received: by 2002:a05:600c:1d1f:b0:45b:7ce0:fb8a with SMTP id 5b1f17b1804b1-45b7ce0fc25mr15400215e9.35.1756393585694;
-        Thu, 28 Aug 2025 08:06:25 -0700 (PDT)
+        bh=LcUNjSmRE8zrBdNfJ83+ye8WTIwfGJ+o51CvT8zs2YM=;
+        b=ffBU7BMDyQ1pIW40h7t9mOWMBJueyNWL9fKZBrAhPvlxY+ZYbU2byUAgrHmC1y8Fgy
+         WZ23yzV8aIST0UQ0+Ix4HX+5IK/vnnGUAOFIYtt7NFJwl+8Bv0kYpxQUCOR9RarKsXGf
+         +K2reFp4M4V8xlHjo0kd1WdPI9dvsmL6Ss1kxRe+BerGY96E6r9sNHf3FSbX7M3AhxI6
+         nNOmp/8Ph+h/r+7Tr7cnNyhWjKLqMuX13qdcDxySiqFiqDBreq0/faCG6wI843VJVmSP
+         5hmuagDsCm2Dhn6O8RuhC+cbZU/aG7aHM2XBsPH4kwN30DrMBq1LCxEwC+/A6uCJe2ae
+         JXRA==
+X-Gm-Message-State: AOJu0YxSM++k+Il5EkItIVfFFZCVi2yR95LwBEWkghrUiMKpWjNw051d
+	tTAMgBuislPMx0RwHDIp/VRQENBnlCOTejfkbPOCXj9K/e9SBbrscMDFPlUxW9qEjH32khDf1Df
+	XbBiX
+X-Gm-Gg: ASbGnctmj+yCPRqllr0Aj3eTsRom2G0J+ey2EmbucXX60qHldcJcQxwgEssmAc+BQ3R
+	AdOaqmQRNCCZafUMvpO0MlKM1In68leufN8qV2zYLJI3lS8gNI/LCv98x9NelJznWjXL+5NT6QX
+	/0v2Q/T6Stq7tLhtPziNLYXFV9sq9LRr3qghGpiFiPS5ET7ULHzJsy5tSu73AtyJoCiB7suD/re
+	1NLjBrWyrcoH+Nn9LHGwsfUAwzAWGmvx5i/0bAKgfHuo4C8078cqnzX7lpCCZ3R0s3Uu8GgS6P8
+	SJVTBIKLRqBkSsKv+MVFvgf8+5D/Ac6m7wltYqDFHeJYIdJp8X/aeDHLULkciDsSAf0RWHqaxzd
+	WGn6ZTccdPG2Qytp9WiEKAa7XBhBymkvp+WZGIZ4QSO7ZzuOvZFsoIqK67Nj/SVuT1/RVAL49dM
+	HO
+X-Google-Smtp-Source: AGHT+IGQffCxU2zMYu+MQa1R3h5Bc5ZyjQroxmWWfsryOtQ1GbfkVA7yfgV6Ah9VyQdpRWl6Ga3HZA==
+X-Received: by 2002:a05:600c:1caa:b0:458:bbed:a806 with SMTP id 5b1f17b1804b1-45b6503919emr85513525e9.22.1756393583190;
+        Thu, 28 Aug 2025 08:06:23 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 22/23] x86/pv: System call handling in FRED mode
-Date: Thu, 28 Aug 2025 16:04:08 +0100
-Message-Id: <20250828150409.901315-23-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 20/23] x86/pv: Exception handling in FRED mode
+Date: Thu, 28 Aug 2025 16:04:06 +0100
+Message-Id: <20250828150409.901315-21-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250828150409.901315-1-andrew.cooper3@citrix.com>
 References: <20250828150409.901315-1-andrew.cooper3@citrix.com>
@@ -97,17 +97,19 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Under FRED, entry_from_pv() handles everything, even system calls.  This means
-more of our logic is written in C now, rather than assembly.
+Under FRED, entry_from_pv() handles everything.  To start with, implement
+exception handling in the same manner as entry_from_xen(), although we can
+unconditionally enable interrupts after the async/fatal events.
 
-In order to facilitate this, introduce pv_inject_callback(), which reuses
-struct trap_bounce infrastructure to inject the syscall/sysenter callbacks.
-This in turns requires some !PV compatibility for pv_inject_callback() and
-pv_hypercall() which can both be ASSERT_UNREACHABLE().
+After entry_from_pv() returns, test_all_events() needs to run to perform
+exception and interrupt injection.  Split entry_FRED_R3() into two and
+introduce eretu_exit_to_guest() as the latter half, coming unilaterally from
+restore_all_guest().
 
-For each of INT $N, SYSCALL and SYSENTER, FRED gives us interrupted context
-which was previously lost.  As the guest can't see FRED, Xen has to lose state
-in the same way to maintain the prior behaviour.
+For all of this, there is a slightly complicated relationship with CONFIG_PV.
+entry_FRED_R3() must exist irrespective of CONFIG_PV, because it's the
+entrypoint registered with hardware.  For simplicity, entry_from_pv() is
+always called, but it collapses into fatal_trap() in the !PV case.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -117,246 +119,148 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 v2:
  * New
 ---
- xen/arch/x86/include/asm/domain.h    |   5 ++
- xen/arch/x86/include/asm/hypercall.h |   5 ++
- xen/arch/x86/pv/traps.c              |  33 +++++++++
- xen/arch/x86/traps.c                 | 107 +++++++++++++++++++++++++++
- 4 files changed, 150 insertions(+)
+ xen/arch/x86/traps.c             | 76 +++++++++++++++++++++++++++++++-
+ xen/arch/x86/x86_64/entry-fred.S | 13 +++++-
+ xen/arch/x86/x86_64/entry.S      |  4 +-
+ 3 files changed, 90 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 5df8c7825333..b374decccc9c 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -712,11 +712,16 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx);
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 67763bec0dc5..72df446a6a78 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -2265,9 +2265,83 @@ void asmlinkage check_ist_exit(const struct cpu_user_regs *regs, bool ist_exit)
  
- #ifdef CONFIG_PV
- void pv_inject_event(const struct x86_event *event);
-+void pv_inject_callback(unsigned int type);
- #else
- static inline void pv_inject_event(const struct x86_event *event)
+ void asmlinkage entry_from_pv(struct cpu_user_regs *regs)
  {
-     ASSERT_UNREACHABLE();
- }
-+static inline void pv_inject_callback(unsigned int type)
-+{
-+    ASSERT_UNREACHABLE();
-+}
- #endif
- 
- static inline void pv_inject_hw_exception(unsigned int vector, int errcode)
-diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
-index f6e9e2313b3c..1010332a47e9 100644
---- a/xen/arch/x86/include/asm/hypercall.h
-+++ b/xen/arch/x86/include/asm/hypercall.h
-@@ -20,6 +20,11 @@
- 
- #ifdef CONFIG_PV
- void pv_hypercall(struct cpu_user_regs *regs);
-+#else
-+static inline void pv_hypercall(struct cpu_user_regs *regs)
-+{
-+    ASSERT_UNREACHABLE();
-+}
- #endif
- 
- void pv_ring1_init_hypercall_page(void *ptr);
-diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
-index c3c0976c440f..e7314d8703d9 100644
---- a/xen/arch/x86/pv/traps.c
-+++ b/xen/arch/x86/pv/traps.c
-@@ -19,6 +19,8 @@
- #include <asm/shared.h>
- #include <asm/traps.h>
- 
-+#include <public/callback.h>
++    struct fred_info *fi = cpu_regs_fred_info(regs);
++    uint8_t type = regs->fred_ss.type;
++    uint8_t vec = regs->fred_ss.vector;
 +
- void pv_inject_event(const struct x86_event *event)
- {
-     struct vcpu *curr = current;
-@@ -95,6 +97,37 @@ void pv_inject_event(const struct x86_event *event)
-     }
- }
- 
-+void pv_inject_callback(unsigned int type)
-+{
-+    struct vcpu *curr = current;
-+    struct trap_bounce *tb = &curr->arch.pv.trap_bounce;
-+    unsigned long rip = 0;
-+    bool irq = false;
+     /* Copy fred_ss.vector into entry_vector as IDT delivery would have done. */
+-    regs->entry_vector = regs->fred_ss.vector;
++    regs->entry_vector = vec;
 +
-+    ASSERT(is_pv_64bit_vcpu(curr));
++    if ( !IS_ENABLED(CONFIG_PV) )
++        goto fatal;
 +
++    /*
++     * First, handle the asynchronous or fatal events.  These are either
++     * unrelated to the interrupted context, or may not have valid context
++     * recorded, and all have special rules on how/whether to re-enable IRQs.
++     */
 +    switch ( type )
 +    {
-+    case CALLBACKTYPE_syscall:
-+        rip = curr->arch.pv.syscall_callback_eip;
-+        irq = curr->arch.pv.vgc_flags & VGCF_syscall_disables_events;
-+        break;
++    case X86_ET_EXT_INTR:
++        return do_IRQ(regs);
+ 
++    case X86_ET_NMI:
++        return do_nmi(regs);
 +
-+    case CALLBACKTYPE_syscall32:
-+        rip = curr->arch.pv.syscall32_callback_eip;
-+        irq = curr->arch.pv.syscall32_disables_events;
-+        break;
-+
-+    case CALLBACKTYPE_sysenter:
-+        rip = curr->arch.pv.sysenter_callback_eip;
-+        irq = curr->arch.pv.sysenter_disables_events;
++    case X86_ET_HW_EXC:
++        switch ( vec )
++        {
++        case X86_EXC_DF: return do_double_fault(regs);
++        case X86_EXC_MC: return do_machine_check(regs);
++        }
 +        break;
 +    }
 +
-+    tb->flags = TBF_EXCEPTION | (irq ? TBF_INTERRUPT : 0);
-+    tb->eip = rip;
-+}
++    /*
++     * With the asynchronous events handled, what remains are the synchronous
++     * ones.  Guest context always had interrupts enabled.
++     */
++    local_irq_enable();
 +
- /*
-  * Called from asm to set up the MCE trapbounce info.
-  * Returns false no callback is set up, else true.
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index e10b4e771824..9211067cd688 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -18,6 +18,7 @@
- #include <xen/delay.h>
- #include <xen/domain_page.h>
- #include <xen/guest_access.h>
-+#include <xen/hypercall.h>
- #include <xen/init.h>
- #include <xen/mm.h>
- #include <xen/paging.h>
-@@ -52,6 +53,8 @@
- #include <asm/uaccess.h>
- #include <asm/xenoprof.h>
- 
-+#include <public/callback.h>
-+
- /*
-  * opt_nmi: one of 'ignore', 'dom0', or 'fatal'.
-  *  fatal:  Xen prints diagnostic message and then hangs.
-@@ -2266,6 +2269,7 @@ void asmlinkage check_ist_exit(const struct cpu_user_regs *regs, bool ist_exit)
- void asmlinkage entry_from_pv(struct cpu_user_regs *regs)
- {
-     struct fred_info *fi = cpu_regs_fred_info(regs);
-+    struct vcpu *curr = current;
-     uint8_t type = regs->fred_ss.type;
-     uint8_t vec = regs->fred_ss.vector;
- 
-@@ -2305,6 +2309,27 @@ void asmlinkage entry_from_pv(struct cpu_user_regs *regs)
- 
-     switch ( type )
-     {
-+    case X86_ET_SW_INT:
-+        /*
-+         * INT $3/4 are indistinguishable from INT3/INTO under IDT, and are
-+         * permitted by Xen without the guest kernel having a choice.  Let
-+         * them fall through into X86_ET_HW_EXC, as #BP in particular needs
-+         * handling by do_int3() in case an external debugger is attached.
-+         */
-+        if ( vec != X86_EXC_BP && vec != X86_EXC_OF )
++    switch ( type )
++    {
++    case X86_ET_HW_EXC:
++    case X86_ET_PRIV_SW_EXC:
++    case X86_ET_SW_EXC:
++        switch ( vec )
 +        {
-+            const struct trap_info *ti = &curr->arch.pv.trap_ctxt[vec];
++        case X86_EXC_PF:  handle_PF(regs, fi->edata); break;
++        case X86_EXC_GP:  do_general_protection(regs); break;
++        case X86_EXC_UD:  do_invalid_op(regs); break;
++        case X86_EXC_NM:  do_device_not_available(regs); break;
++        case X86_EXC_BP:  do_int3(regs); break;
++        case X86_EXC_DB:  handle_DB(regs, fi->edata); break;
 +
-+            if ( permit_softint(TI_GET_DPL(ti), curr, regs) )
-+                pv_inject_sw_interrupt(vec);
-+            else
-+            {
-+                regs->rip -= 2;
-+                pv_inject_hw_exception(X86_EXC_GP, (vec << 3) | X86_XEC_IDT);
-+            }
++        case X86_EXC_DE:
++        case X86_EXC_OF:
++        case X86_EXC_BR:
++        case X86_EXC_NP:
++        case X86_EXC_SS:
++        case X86_EXC_MF:
++        case X86_EXC_AC:
++        case X86_EXC_XM:
++            do_trap(regs);
 +            break;
-+        }
-+        fallthrough;
-     case X86_ET_HW_EXC:
-     case X86_ET_PRIV_SW_EXC:
-     case X86_ET_SW_EXC:
-@@ -2335,6 +2360,88 @@ void asmlinkage entry_from_pv(struct cpu_user_regs *regs)
-         }
-         break;
- 
-+    case X86_ET_OTHER:
-+        switch ( regs->fred_ss.vector )
-+        {
-+        case 1: /* SYSCALL */
-+        {
-+            /*
-+             * FRED delivery preserves the interrupted %cs/%ss, but previously
-+             * SYSCALL lost the interrupted selectors, and SYSRET forced the
-+             * use of the ones in MSR_STAR.
-+             *
-+             * The guest isn't aware of FRED, so recreate the legacy
-+             * behaviour, including the guess of instruction length for
-+             * faults.
-+             *
-+             * The non-FRED SYSCALL path sets TRAP_syscall in entry_vector to
-+             * signal that SYSRET can be used, but this isn't relevant in FRED
-+             * mode.
-+             *
-+             * When setting the selectors, clear all upper metadata again for
-+             * backwards compatibility.  In particular fred_ss.swint becomes
-+             * pend_DB on ERETx, and nothing else in the pv_hypercall() would
-+             * clean up.
-+             */
-+            bool l = regs->fred_ss.l;
 +
-+            regs->ssx = l ? FLAT_KERNEL_SS   : FLAT_USER_SS32;
-+            regs->csx = l ? FLAT_KERNEL_CS64 : FLAT_USER_CS32;
-+
-+            if ( guest_kernel_mode(curr, regs) )
-+                pv_hypercall(regs);
-+            else if ( (l ? curr->arch.pv.syscall_callback_eip
-+                         : curr->arch.pv.syscall32_callback_eip) == 0 )
-+            {
-+                regs->rip -= 2;
-+                pv_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
-+            }
-+            else
-+            {
-+                /*
-+                 * The PV ABI, given no virtual SYSCALL_MASK, hardcodes that
-+                 * DF is cleared.  Other flags are handled in the same way as
-+                 * interrupts and exceptions in create_bounce_frame().
-+                 */
-+                regs->eflags &= ~X86_EFLAGS_DF;
-+                pv_inject_callback(l ? CALLBACKTYPE_syscall
-+                                     : CALLBACKTYPE_syscall32);
-+            }
-+            break;
-+        }
-+
-+        case 2: /* SYSENTER */
-+            /*
-+             * FRED delivery preserves the interrupted state, but previously
-+             * SYSENTER discarded almost everything.
-+             *
-+             * The guest isn't aware of FRED, so recreate the legacy
-+             * behaviour, including the guess of instruction length for
-+             * faults.
-+             *
-+             * When setting the selectors, clear all upper metadata.  In
-+             * particular fred_ss.swint becomes pend_DB on ERETx.
-+             */
-+            regs->ssx = FLAT_USER_SS;
-+            regs->rsp = 0;
-+            regs->eflags &= ~(X86_EFLAGS_VM | X86_EFLAGS_IF);
-+            regs->csx = 3;
-+            regs->rip = 0;
-+
-+            if ( !curr->arch.pv.sysenter_callback_eip )
-+            {
-+                regs->rip -= 2;
-+                pv_inject_hw_exception(X86_EXC_GP, 0);
-+            }
-+            else
-+                pv_inject_callback(CALLBACKTYPE_sysenter);
-+            break;
++        case X86_EXC_CP:  do_entry_CP(regs); break;
 +
 +        default:
 +            goto fatal;
 +        }
 +        break;
 +
-     default:
-         goto fatal;
-     }
++    default:
++        goto fatal;
++    }
++
++    return;
++
++ fatal:
+     fatal_trap(regs, false);
+ }
+ 
+diff --git a/xen/arch/x86/x86_64/entry-fred.S b/xen/arch/x86/x86_64/entry-fred.S
+index 3c3320df22cb..07684f38a078 100644
+--- a/xen/arch/x86/x86_64/entry-fred.S
++++ b/xen/arch/x86/x86_64/entry-fred.S
+@@ -15,9 +15,20 @@ FUNC(entry_FRED_R3, 4096)
+         mov     %rsp, %rdi
+         call    entry_from_pv
+ 
++#ifndef CONFIG_PV
++        BUG     /* Not Reached */
++#else
++        GET_STACK_END(14)
++        movq    STACK_CPUINFO_FIELD(current_vcpu)(%r14), %rbx
++
++        jmp     test_all_events
++#endif
++END(entry_FRED_R3)
++
++FUNC(eretu_exit_to_guest)
+         POP_GPRS
+         eretu
+-END(entry_FRED_R3)
++END(eretu_exit_to_guest)
+ 
+         /* The Ring0 entrypoint is at Ring3 + 0x100. */
+         .org entry_FRED_R3 + 0x100, 0xcc
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index ca446c6ff0ce..0692163faa44 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -63,7 +63,7 @@ UNLIKELY_END(syscall_no_callback)
+         /* Conditionally clear DF */
+         and   %esi, UREGS_eflags(%rsp)
+ /* %rbx: struct vcpu */
+-test_all_events:
++LABEL(test_all_events, 0)
+         ASSERT_NOT_IN_ATOMIC
+         cli                             # tests must not race interrupts
+ /*test_softirqs:*/
+@@ -152,6 +152,8 @@ END(switch_to_kernel)
+ FUNC_LOCAL(restore_all_guest)
+         ASSERT_INTERRUPTS_DISABLED
+ 
++        ALTERNATIVE "", "jmp eretu_exit_to_guest", X86_FEATURE_XEN_FRED
++
+         /* Stash guest SPEC_CTRL value while we can read struct vcpu. */
+         mov VCPU_arch_msrs(%rbx), %rdx
+         mov VCPUMSR_spec_ctrl_raw(%rdx), %r15d
 -- 
 2.39.5
 
