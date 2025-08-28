@@ -4,40 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8265BCA0FF6
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 23:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1100152.1453716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F03CA0FF6
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 23:54:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1100175.1453757 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urmJX-0002EJ-CC; Thu, 28 Aug 2025 23:45:55 +0000
+	id 1urmRe-0004Zo-2V; Thu, 28 Aug 2025 23:54:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1100152.1453716; Thu, 28 Aug 2025 23:45:55 +0000
+Received: by outflank-mailman (output) from mailman id 1100175.1453757; Thu, 28 Aug 2025 23:54:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urmJX-0002EC-9D; Thu, 28 Aug 2025 23:45:55 +0000
-Received: by outflank-mailman (input) for mailman id 1100152;
- Thu, 28 Aug 2025 23:45:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1urmRd-0004Yb-Tq; Thu, 28 Aug 2025 23:54:17 +0000
+Received: by outflank-mailman (input) for mailman id 1100175;
+ Thu, 28 Aug 2025 23:54:17 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AInb=3I=nvidia.com=jgg@srs-se1.protection.inumbo.net>)
- id 1urmJV-0002E5-Dm
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 23:45:53 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2060b.outbound.protection.outlook.com
- [2a01:111:f403:200a::60b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 202a935e-8469-11f0-8dd7-1b34d833f44b;
- Fri, 29 Aug 2025 01:45:51 +0200 (CEST)
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by SA1PR12MB6776.namprd12.prod.outlook.com (2603:10b6:806:25b::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.13; Thu, 28 Aug
- 2025 23:45:44 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.9073.010; Thu, 28 Aug 2025
- 23:45:44 +0000
+ (envelope-from <dmukhin@xen.org>) id 1urmRd-0004H2-3G
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 23:54:17 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <dmukhin@xen.org>) id 1urmRc-00B9sx-0m;
+ Thu, 28 Aug 2025 23:54:16 +0000
+Received: from [19.12.91.86] (helo=localhost)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <dmukhin@xen.org>) id 1urmRc-006h8P-0j;
+ Thu, 28 Aug 2025 23:54:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,160 +41,536 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 202a935e-8469-11f0-8dd7-1b34d833f44b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BC0j4lwL4dAZkVK7ch7LF2nEtfdyfLuAA9ArPob3ntYclDYP9WUWF4lzLgBjVEWhKD5fzKCHCvGY5+ndBoRrUZwm7waYZhpSqAahKYwgQ4pjljsudSoVim6I1hb9ly7jMQqHnr44z2LJClAFi82An2v/KrYyR5ZeA70EU+uCXT/rleKxZWx+PAzM297baujTy8UZVntNmF6p7b2TJOYuME78pNxz1HsfZpzErVOVNYl6GiqZ5yRWCRCzttx+jBI51JngDmXcWelvtfVyFMvxw+62K7k2qBxCZ8Fc4e37K8Q+jGpjWdeifbVUhI00fggE7wEQP4jyhOoXizMoJ8tVEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1JzfVyfbWEkwcvRy5E87In4bJJ84qEkwC/j9O+RskB0=;
- b=OuXuVM34IS1TM0+6lpGfRyQyiWbMArhtJHiPyAgIiz4AlR2A9iMHh2iJjDR5UK+PYaynzoJXM12KvSYb+IA2KB2fmTlbiAUz1r2mUfUeZHRKqxSwV0LmV2GkOPmgSzQ5MYzn1hZJFRWDqoYgBFtMNGuMPDBJVb8P/9jqwjbguKt+hkYnD+ht+QDLJRox2+wePM3TpqbrBPHyqOTkdOJZycEjFRPmJuUNApFbfzhw1d53g2o7cqRI0vZ+VJTqLbGS1YEEO/x5afwsJ/CT40bHaWRqBIKvugAMF2pDdPIOcs4D6WdXb0OSJy8SlnmEMFsA7TmpWwIyN/tzZN7HLbt84g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1JzfVyfbWEkwcvRy5E87In4bJJ84qEkwC/j9O+RskB0=;
- b=VxRX8y7v26YTcy0pm0Eq8/JX3RyQj1mvosIjLgJoJ5Hf/erONZbAQ7UuB2aWAyT2Y9SvfMSp6863o2b0yAt8wB7s96NROj09PzDBubXJK6wCzBNuANpfqrfKDpKiEKHzCkFH0xFvnRPG2404BQrGZnqFLwXObqOS4VE5W5GBq72z+BFFaXecgJpi+GM4ZHGo7Z8QckOiiC3F4ZiRqFFGTyxlqPxg+w740BlwXy/nfyhOAsCIH96eFyZ52v7TOe86DZC3T7GEjM2WE5G5cjtR5BftO2oXcDldH+HDfD/hthN/IqlvNd32XXJQPecBtJF+qCipDVffTR+6xDrsOKEwUQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Date: Thu, 28 Aug 2025 20:45:42 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Keith Busch <kbusch@kernel.org>
-Cc: Leon Romanovsky <leon@kernel.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Alexander Potapenko <glider@google.com>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>, Danilo Krummrich <dakr@kernel.org>,
-	iommu@lists.linux.dev, Jason Wang <jasowang@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>,
-	Jonathan Corbet <corbet@lwn.net>, Juergen Gross <jgross@suse.com>,
-	kasan-dev@googlegroups.com, linux-block@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, linux-nvme@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org, linux-trace-kernel@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>, rust-for-linux@vger.kernel.org,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev, Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v4 15/16] block-dma: properly take MMIO path
-Message-ID: <20250828234542.GK7333@nvidia.com>
-References: <cover.1755624249.git.leon@kernel.org>
- <642dbeb7aa94257eaea71ec63c06e3f939270023.1755624249.git.leon@kernel.org>
- <aLBzeMNT3WOrjprC@kbusch-mbp>
- <20250828165427.GB10073@unreal>
- <aLCOqIaoaKUEOdeh@kbusch-mbp>
- <20250828184115.GE7333@nvidia.com>
- <aLCpqI-VQ7KeB6DL@kbusch-mbp>
- <20250828191820.GH7333@nvidia.com>
- <aLDCC4rXcIKF8sRg@kbusch-mbp>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aLDCC4rXcIKF8sRg@kbusch-mbp>
-X-ClientProxiedBy: PH7PR13CA0003.namprd13.prod.outlook.com
- (2603:10b6:510:174::14) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=kV2+nmwE+JHTTYsZOf5tG0vjn+zAyV6DLLw3E85gpnk=; b=qEtFkzRj0xEqsJKafxfYmU8out
+	eIt5cQVo010pHmfUyC8XSgWQAywRt5O/0DcWkzPL6Sf8vn0xmNXcYGn2SWc8eY2+FR+ZboZXbcXVH
+	fu2K44bLHptgicWK5LZagP+pPQS68A+eUGe8MaExbJp7Npx9jfDPdMPADgjfyG7eNAmA=;
+From: dmukhin@xen.org
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	jbeulich@suse.com,
+	julien@xen.org,
+	michal.orzel@amd.com,
+	roger.pau@citrix.com,
+	sstabellini@kernel.org,
+	dmukhin@ford.com
+Subject: [PATCH v5 03/15] emul/ns16x50: implement emulator stub
+Date: Thu, 28 Aug 2025 16:53:57 -0700
+Message-ID: <20250828235409.2835815-4-dmukhin@ford.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250828235409.2835815-1-dmukhin@ford.com>
+References: <20250828235409.2835815-1-dmukhin@ford.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|SA1PR12MB6776:EE_
-X-MS-Office365-Filtering-Correlation-Id: 753e419c-5ee5-49ef-69cc-08dde68d017e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?BRmB+3sKM17VmapuvDAanENDABDoL5Vpjr28rLgku94+uoeQ47+jUimtSCp1?=
- =?us-ascii?Q?u0ol1dYjEgBvhO+ruK3iz1KEP/hZe25IXKS3DBr3YL9i7oeUIybZm61bc1EK?=
- =?us-ascii?Q?ySVKFefar6hxK0//rT6Je0GyXftJ2+WIKk+gQVSVNjs+Bkungz+C7gvV7FE9?=
- =?us-ascii?Q?JWTCKInSOrbbaQQHrNsl6Z5VBvqOljwWpgr3qXQvyL+Pg+MscLmm6SArQcxY?=
- =?us-ascii?Q?DhRw9/ZD8E7yHpahJ58uR5uiRAi4+XlAVS2evL/9AMATYhX1mkLmURS/z3jc?=
- =?us-ascii?Q?1V8fE7B86lb2Ht8o66gydqV81PLbS1K7px3v2ku7KKgIc9spCDxux52V1e9X?=
- =?us-ascii?Q?2498Hip1BaWsm1qRiLue87NQN9Z8AJishXg/2l29DTeQIEgx8BvWPqqlHtMI?=
- =?us-ascii?Q?LZrzHSOQwD82enU0XZ4QvLY+EpJrrsG0aR8cPF6lU48eUz2Bwk19vFp5xmob?=
- =?us-ascii?Q?FBLQcOaGyTp3p1DF5P/fDKAKIx3KFyk25UzYulT6OPKOJ8/nAaUAfoELdNwt?=
- =?us-ascii?Q?gJJsBFxQ7TZfd+e5TwigthbjSdVMfwZu4ntQ3hbIPzZ3X8i+//nTBmsBv2P/?=
- =?us-ascii?Q?9JHw7gf5BC5M7B79SHTbr3VxCjAxyblS+ecONyQ7+pV0UZdx4ZkJaEYtITXK?=
- =?us-ascii?Q?/Ud/XTouTFMXZ5sLYqFF7qM81eEraAf2qP9fHpukUza4yBXVwCBf3mZem0Vf?=
- =?us-ascii?Q?OJRavtRWTGaJ+pLqvA6Ou8HUKqW+yoROq9n9FY6r9a2ShUiGDeBHELGNMS9I?=
- =?us-ascii?Q?dL7jH7kqZnUOoBBf3mGbE+UqUXxdaXpDchRzCfuEK4FnZ7zr4gN9ep/+4aJM?=
- =?us-ascii?Q?sw6wi+XaEogKqqzViWPfuAemHi05HSfMS4MdRfkPchzCEfzJFlwSv+GLxzlD?=
- =?us-ascii?Q?HCWlPg4s9cg/K3ly9v7KncbEKuyZo2TZaLSvdiK6wXEvmt5LLMxwqXZIWgFn?=
- =?us-ascii?Q?xWdsfLj+2G7UfQCHxukuX2UQYJuI1WLdvSDOw0AGKcw+99YC77IRY+OL92/D?=
- =?us-ascii?Q?21dNzr7nLqsmiYEFtY1EJio4JyFTMe3ec10oPKTUrkcsGkjr1/ks+6KSCtvn?=
- =?us-ascii?Q?HA0+NJPHPPjzq4wQhCZDNTDtkDziamYMNAFgr0N+PteMCcAxrxhNkG5ZyPDo?=
- =?us-ascii?Q?Ua1raoxaJ5NswslbugvyjHR0iXjibH3cEoK59tkDZ1f/uLlg+VQy3QNMGn7n?=
- =?us-ascii?Q?HCK6PdEXVn7LemiRnfbB5fcOxtdaUEPFW5lJjVHBVf8vHD2B4Bo1bM3mIXwL?=
- =?us-ascii?Q?I9Jn/tVJuGDOr+/G4UBoCVpEef7zxZjVhIs5r53tho0Sm441MIodgr3hTnDX?=
- =?us-ascii?Q?65dDh/vJRvQ25+EgjhJh4yNobd1W8xoCF1IhGxQbiNrO49hN+w8dOg6USblN?=
- =?us-ascii?Q?ZdfJit9b8mGe+lxErrCIkoNOdCD3aQ01k1hLoZQAmRwv/zUPd+uDvm7rBHth?=
- =?us-ascii?Q?Cvvs6vcbnBU=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Guohg76/pkR5ZgCdXgoXw1W3mQ00oIzJR+SdpQh5sfjJMXbMJ6diFn7nFxpV?=
- =?us-ascii?Q?idifmlCDn6s8kevNE8Sf4gg9m8QK3+NtR2NSUeO9qNsfGDtGDFWFwjrJ5I5k?=
- =?us-ascii?Q?Ox4PeX8sLOraVXU+a9YyVUbixgamtzWXtFVqTFjAYxe7tJjQRhfS2cBo+fi5?=
- =?us-ascii?Q?kVVvQnY8kZ3FnBMRjUQZFrfMSc7Mi3mxfiW8w7B7GKRGTOIBn3rkqXeyvfl9?=
- =?us-ascii?Q?D1Q7+0cmtHVDvXMJiug98HJ17TCVxynsb1SEjZxEdfB/d5l5f17QzUwpPnVN?=
- =?us-ascii?Q?Gplf3AcoLO1AIGH+gwg6UqRp0s6sMkSKs0xwRZigys9wH5XBl9W2216ei6tY?=
- =?us-ascii?Q?vvR5O4PxY3fkdAsxQQKZfY3GGooMAF5guVzbOllo+zUmGHGYzSN6di40Xba+?=
- =?us-ascii?Q?ngFmkM1zsb8jSY87arByWlr7nB8uWwkhGYuLFNV0c8xY/D6x46jEvCrDrLzN?=
- =?us-ascii?Q?QdaBljNNtZJQpa7uhXrdwcbQHLktyV87FIGiljAjlhL2tDE8GgdWmjQ9I07Q?=
- =?us-ascii?Q?cpe0ZtsvokBQR0zYqw6t8PkI1eqMRH+E8s7b2oIPX61W4gxJPmeMgjkokkN4?=
- =?us-ascii?Q?BePhnvjrhX+JARM1FdSryWeoCtJ3m77i7OSY+ZS+AyHeOn2IUYgxh0ArUlvq?=
- =?us-ascii?Q?BvNDMGcSBFWJu4hdNZztzTi+5uLEGmsdU2p+6i9UE/XqPfDiTD88psrco+fb?=
- =?us-ascii?Q?fY/xzqHaiCEj1rxu6vxJXwfiTL+iTcSA52Gl7mFQGOMgADdAjDbHTUSLIaQw?=
- =?us-ascii?Q?cAixtwK5ed5SN/lVyfz4rS2BpfHcflIlkrhPN1NLFiXEJogyMcgIUlslIWfc?=
- =?us-ascii?Q?N4SxOFYJprB/AeCcdUG9CkiCGanv1lbz4sFatvqfIBj/Cz07Fs7w5EHoVrsl?=
- =?us-ascii?Q?BkitYeS6X6zNKItXzPlD0uehnMerAtpbspMmXMkfgDTxVQqDMRprgWSEZTs4?=
- =?us-ascii?Q?3ceZRuolwKKM2lcKQL+tawp818fSy1l2N5KTgPhJGK3DAjHmnUPP+DExWgQ8?=
- =?us-ascii?Q?62AcQmC0vE3imo5f6Axz3FQHoBp3zbuYc7CfhCuDOe+6hSguUTMHfZfnZyII?=
- =?us-ascii?Q?7fnKE8QhQ6zMbXSZMUPCXIEWZRaSfB/x954fCwGQFhgCqxiCxkE4w5HzBMOh?=
- =?us-ascii?Q?dLeCGlEaAsHoOcFROZCGOdisGP9Zlit0/k6rVQ+J9tO3D6iXu8tp/2c3Wk/L?=
- =?us-ascii?Q?euhoY/rX47hr8ctR5Cp1zPCIL7Hk1EtfflIpOZwE4I88A1Tpiw/JVGWBpoK/?=
- =?us-ascii?Q?wQGvzOztsizk77wdlm2KI4QYnPVWD3gZHYmFEVNhuf/cdumvV6iho52kDZbC?=
- =?us-ascii?Q?urbjXb+V0k3ksRa5Yl6SkXgRGvaBvJVo8pShoQITY792C177/Qu1Kzp8TIGs?=
- =?us-ascii?Q?jaby0wxn228VgUWgqaGu01nkxL96Q5xrnXO7hbCRmfyOPPyasuMfwZLX4EHU?=
- =?us-ascii?Q?e9ljeB3zqOhiHYAVmIosgGuhi1Wif+QzpP/frMqCpXzb0vpi6c19NhWE3vG0?=
- =?us-ascii?Q?wdimmMQp2Hr+zsdLF43kjsQZlHnbRGTNKGJW5xxYHTTjqo4bwYiXSm+YG9UX?=
- =?us-ascii?Q?+1fyZ2DaYg9/ErkWntpBMRbOiJM/hdBX7nHaA03A?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 753e419c-5ee5-49ef-69cc-08dde68d017e
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2025 23:45:44.7681
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: stKDrPdUYg+cKM6Zaii6EJX1iDXReQlwcCRvIIs2DW0PSsQcsndv+JR8Lnf1GfOk
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6776
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 28, 2025 at 02:54:35PM -0600, Keith Busch wrote:
+From: Denis Mukhin <dmukhin@ford.com> 
 
-> In truth though, I hadn't tried p2p metadata before today, and it looks
-> like bio_integrity_map_user() is missing the P2P extraction flags to
-> make that work. Just added this patch below, now I can set p2p or host
-> memory independently for data and integrity payloads:
+The change is the first on the way on introducing minimally functional
+NS16550-compatible UART emulator.
 
-I think it is a bit more than that, you have to make sure all the meta
-data is the same, either all p2p or all cpu and then record this
-somehow so the DMA mapping knows what kind it is.
+Define UART state and a set of emulated registers.
 
-Once that is all done then the above should still be OK, the dma unmap
-of the data can follow Leon's new flag and the dma unmap of the
-integrity can follow however integrity kept track (in the
-bio_integrity_payload perhaps?) ??
+Implement alloc/free vUART hooks.
 
-Jason
+Stub out I/O port handler.
+
+Add initialization of the NS16x50-compatible UART emulator state machine.
+
+Plumb debug logging.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+Changes since v4:
+- new patch 
+---
+ xen/arch/x86/hvm/hvm.c          |  20 ++
+ xen/common/emul/vuart/Kconfig   |  18 ++
+ xen/common/emul/vuart/Makefile  |   1 +
+ xen/common/emul/vuart/ns16x50.c | 362 ++++++++++++++++++++++++++++++++
+ xen/include/xen/sched.h         |   4 +
+ 5 files changed, 405 insertions(+)
+ create mode 100644 xen/common/emul/vuart/ns16x50.c
+
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 23bd7f078a1d..26760cf995df 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -28,6 +28,7 @@
+ #include <xen/softirq.h>
+ #include <xen/trace.h>
+ #include <xen/vm_event.h>
++#include <xen/vuart.h>
+ #include <xen/vpci.h>
+ #include <xen/wait.h>
+ #include <xen/warning.h>
+@@ -689,6 +690,21 @@ int hvm_domain_initialise(struct domain *d,
+     if ( rc != 0 )
+         goto fail1;
+ 
++    if ( IS_ENABLED(CONFIG_VUART_NS16X50) )
++    {
++        struct vuart_info info = {
++            .name       = "COM2",
++            .compatible = "ns16550",
++            .base_addr  = 0x2f8,
++            .size       = 8,
++            .irq        = 3,
++        };
++
++        rc = vuart_init(d, &info);
++        if ( rc )
++            goto out_vioapic_deinit;
++    }
++
+     stdvga_init(d);
+ 
+     rtc_init(d);
+@@ -712,6 +728,8 @@ int hvm_domain_initialise(struct domain *d,
+     return 0;
+ 
+  fail2:
++    vuart_deinit(d);
++ out_vioapic_deinit:
+     vioapic_deinit(d);
+  fail1:
+     if ( is_hardware_domain(d) )
+@@ -774,6 +792,8 @@ void hvm_domain_destroy(struct domain *d)
+     if ( hvm_funcs.domain_destroy )
+         alternative_vcall(hvm_funcs.domain_destroy, d);
+ 
++    vuart_deinit(d);
++
+     vioapic_deinit(d);
+ 
+     XFREE(d->arch.hvm.pl_time);
+diff --git a/xen/common/emul/vuart/Kconfig b/xen/common/emul/vuart/Kconfig
+index ce1b976b7da7..539e6d5e4fc7 100644
+--- a/xen/common/emul/vuart/Kconfig
++++ b/xen/common/emul/vuart/Kconfig
+@@ -3,4 +3,22 @@ config VUART_FRAMEWORK
+ 
+ menu "UART Emulation"
+ 
++config VUART_NS16X50
++	bool "NS16550-compatible UART Emulator" if EXPERT
++	depends on X86 && HVM
++	select VUART_FRAMEWORK
++	help
++	  In-hypervisor NS16x50 UART emulation.
++
++	  Only legacy PC COM2 port is emulated.
++
++	  This is strictly for testing purposes (such as early HVM guest console),
++	  and not appropriate for use in production.
++
++config VUART_NS16X50_DEBUG
++	bool "NS16550-compatible UART Emulator Debugging"
++	depends on VUART_NS16X50 && DEBUG
++	help
++	  Enable development debugging.
++
+ endmenu
+diff --git a/xen/common/emul/vuart/Makefile b/xen/common/emul/vuart/Makefile
+index 97f792dc6641..fe904f6cb65d 100644
+--- a/xen/common/emul/vuart/Makefile
++++ b/xen/common/emul/vuart/Makefile
+@@ -1 +1,2 @@
+ obj-y += vuart.o
++obj-$(CONFIG_VUART_NS16X50) += ns16x50.o
+diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+new file mode 100644
+index 000000000000..f0479e1022fb
+--- /dev/null
++++ b/xen/common/emul/vuart/ns16x50.c
+@@ -0,0 +1,362 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * NS16550-compatible UART Emulator.
++ *
++ * See:
++ * - Serial and UART Tutorial:
++ *     https://download.freebsd.org/doc/en/articles/serial-uart/serial-uart_en.pdf
++ * - UART w/ 16 byte FIFO:
++ *     https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
++ * - UART w/ 64 byte FIFO:
++ *     https://www.ti.com/lit/ds/symlink/tl16c750.pdf
++ *
++ * Limitations:
++ * - Only x86;
++ * - Only Xen console as a backend, no inter-domain communication (similar to
++ *   vpl011 on Arm);
++ * - Only 8n1 emulation (8-bit data, no parity, 1 stop bit);
++ * - No baud rate emulation (reports 115200 baud to the guest OS);
++ * - No FIFO-less mode emulation;
++ * - No RX FIFO interrupt moderation (FCR) emulation;
++ * - No integration w/ VM snapshotting (HVM_REGISTER_SAVE_RESTORE() and
++ *   friends);
++ * - No ISA IRQ sharing allowed;
++ * - No MMIO-based UART emulation.
++ */
++
++#define pr_prefix               "ns16x50"
++#define pr_fmt(fmt)             pr_prefix ": " fmt
++
++#ifdef CONFIG_VUART_NS16X50_DEBUG
++#define guest_prefix            "FROM GUEST "
++#define ns16x50_log_level       2
++#else
++#define guest_prefix            ""
++#define ns16x50_log_level       0
++#endif
++
++#include <xen/8250-uart.h>
++#include <xen/console.h>
++#include <xen/err.h>
++#include <xen/iocap.h>
++#include <xen/vuart.h>
++#include <xen/xvmalloc.h>
++
++#include <public/io/console.h>
++
++#define ns16x50_log(n, lvl, vdev, fmt, args...) do { \
++    if ( ns16x50_log_level >= n) \
++        gprintk(lvl, pr_fmt("%s: " fmt), (vdev)->name, ## args); \
++} while (0)
++
++#define ns16x50_err(vdev, fmt, args...) \
++    ns16x50_log(0, KERN_ERR, vdev, fmt, ## args)
++#define ns16x50_warn(vdev, fmt, args...) \
++    ns16x50_log(1, KERN_WARNING, vdev, fmt, ## args)
++#define ns16x50_info(vdev, fmt, args...) \
++    ns16x50_log(2, KERN_INFO, vdev, fmt, ## args)
++#define ns16x50_debug(vdev, fmt, args...) \
++    ns16x50_log(3, KERN_DEBUG, vdev, fmt, ## args)
++
++/*
++ * Number of supported registers in the UART.
++ */
++#define NS16X50_REGS_NUM        (UART_SCR + 1)
++
++/*
++ * Number of emulated registers.
++ *
++ * - Emulated registers [0..NS16X50_REGS_NUM] are R/W registers for DLAB=0.
++ * - DLAB=1, R/W, DLL            = NS16X50_REGS_NUM + 0
++ * - DLAB=1, R/W, DLM            = NS16X50_REGS_NUM + 1
++ * -         R/O, IIR (IIR_THR)  = NS16X50_REGS_NUM + 2
++ */
++#define NS16X50_EMU_REGS_NUM    (NS16X50_REGS_NUM + 3)
++
++/*
++ * Virtual ns16x50 device state.
++ */
++struct vuart_ns16x50 {
++    struct xencons_interface cons;      /* Emulated RX/TX FIFOs */
++    uint8_t regs[NS16X50_EMU_REGS_NUM]; /* Emulated registers */
++    const char *name;                   /* Device name */
++    struct domain *owner;               /* Owner domain */
++    const struct vuart_info *info;      /* UART description */
++    spinlock_t lock;                    /* Protection */
++};
++
++/*
++ * Emulate 8-bit write access to ns16x50 register.
++ */
++static int ns16x50_io_write8(
++    struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
++{
++    int rc = 0;
++
++    return rc;
++}
++
++/*
++ * Emulate 16-bit write access to ns16x50 register.
++ * NB: some guest OSes use outw() to access UART_DLL.
++ */
++static int ns16x50_io_write16(
++    struct vuart_ns16x50 *vdev, uint32_t reg, uint16_t *data)
++{
++    int rc = -EINVAL;
++
++    return rc;
++}
++
++/*
++ * Emulate write access to ns16x50 register.
++ */
++static int ns16x50_io_write(
++    struct vuart_ns16x50 *vdev, uint8_t reg, uint32_t size, uint32_t *data)
++{
++    int rc;
++
++    switch ( size )
++    {
++    case 1:
++        rc = ns16x50_io_write8(vdev, reg, (uint8_t *)data);
++        break;
++
++    case 2:
++        rc = ns16x50_io_write16(vdev, reg, (uint16_t *)data);
++        break;
++
++    default:
++        rc = -EINVAL;
++        break;
++    }
++
++    return rc;
++}
++
++/*
++ * Emulate 8-bit read access to ns16x50 register.
++ */
++static int ns16x50_io_read8(
++    struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
++{
++    uint8_t val = 0xff;
++    int rc = 0;
++
++    *data = val;
++
++    return rc;
++}
++
++/*
++ * Emulate 16-bit read access to ns16x50 register.
++ */
++static int ns16x50_io_read16(
++    struct vuart_ns16x50 *vdev, uint32_t reg, uint16_t *data)
++{
++    uint16_t val = 0xffff;
++    int rc = -EINVAL;
++
++    *data = val;
++
++    return rc;
++}
++
++/*
++ * Emulate read access to ns16x50 register.
++ */
++static int ns16x50_io_read(
++    struct vuart_ns16x50 *vdev, uint8_t reg, uint32_t size, uint32_t *data)
++{
++    int rc;
++
++    switch ( size )
++    {
++    case 1:
++        rc = ns16x50_io_read8(vdev, reg, (uint8_t *)data);
++        break;
++
++    case 2:
++        rc = ns16x50_io_read16(vdev, reg, (uint16_t *)data);
++        break;
++
++    default:
++        *data = 0xffffffff;
++        rc = -EINVAL;
++        break;
++    }
++
++    return rc;
++}
++
++/*
++ * Emulate I/O access to ns16x50 register.
++ * Note, emulation always returns X86EMUL_OKAY, once I/O port trap is enabled.
++ */
++static int cf_check ns16x50_io_handle(
++    int dir, unsigned int addr, unsigned int size, uint32_t *data)
++{
++#define op(dir)     (((dir) == IOREQ_WRITE) ? 'W' : 'R')
++    struct domain *d = rcu_lock_current_domain();
++    struct vuart *vuart = vuart_find_by_io_range(d, addr, size);
++    struct vuart_ns16x50 *vdev;
++    const struct domain *owner;
++    const struct vuart_info *info;
++    uint32_t reg;
++    unsigned dlab;
++    int rc;
++
++    if ( !vuart || !vuart->vdev )
++    {
++        printk(KERN_ERR "%c io 0x%04x %d: not initialized\n",
++               op(dir), addr, size);
++
++        ASSERT_UNREACHABLE();
++        goto out;
++    }
++    vdev = vuart->vdev;
++
++    owner = vuart->owner;
++    ASSERT(owner);
++    if ( d != owner )
++    {
++        ns16x50_err(vdev, "%c io 0x%04x %d: does not match current domain %pv\n",
++                    op(dir), addr, size, d);
++
++        ASSERT_UNREACHABLE();
++        goto out;
++    }
++
++    info = vuart->info;
++    ASSERT(info);
++    reg = addr - info->base_addr;
++    if ( !IS_ALIGNED(reg, size) )
++    {
++        ns16x50_err(vdev, "%c 0x%04x %d: unaligned access\n",
++                    op(dir), addr, size);
++        goto out;
++    }
++
++    dlab = 0;
++    if ( reg >= NS16X50_REGS_NUM )
++    {
++        ns16x50_err(vdev, "%c io 0x%04x %d: DLAB=%d %02"PRIx32" 0x%08"PRIx32": not implemented\n",
++                    op(dir), addr, size, dlab, reg, *data);
++        goto out;
++    }
++
++    spin_lock(&vdev->lock);
++
++    if ( dir == IOREQ_WRITE )
++    {
++        ns16x50_debug(vdev, "%c 0x%04x %d: DLAB=%d %02"PRIx32" 0x%08"PRIx32"\n",
++                      op(dir), addr, size, dlab, reg, *data);
++        rc = ns16x50_io_write(vdev, reg, size, data);
++    }
++    else
++    {
++        rc = ns16x50_io_read(vdev, reg, size, data);
++        ns16x50_debug(vdev, "%c 0x%04x %d: DLAB=%d %02"PRIx32" 0x%08"PRIx32"\n",
++                      op(dir), addr, size, dlab, reg, *data);
++    }
++    if ( rc < 0 )
++        ns16x50_err(vdev, "%c 0x%04x %d: DLAB=%d %02"PRIx32" 0x%08"PRIx32": unsupported access\n",
++                    op(dir), addr, size, dlab, reg, *data);
++
++    spin_unlock(&vdev->lock);
++
++out:
++    rcu_unlock_domain(d);
++
++    return X86EMUL_OKAY;
++#undef op
++}
++
++static int ns16x50_init(void *arg)
++{
++    struct vuart_ns16x50 *vdev = arg;
++    const struct vuart_info *info = vdev->info;
++    struct domain *d = vdev->owner;
++
++    ASSERT(vdev);
++
++    register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
++
++    return 0;
++}
++
++static void cf_check ns16x50_deinit(void *arg)
++{
++    struct vuart_ns16x50 *vdev = arg;
++
++    ASSERT(vdev);
++}
++
++static void * cf_check ns16x50_alloc(struct domain *d, const struct vuart_info *info)
++{
++    struct vuart_ns16x50 *vdev;
++    int rc;
++
++    if ( !info )
++        return ERR_PTR(-EINVAL);
++
++    if ( vuart_find_by_io_range(d, info->base_addr, info->size) )
++    {
++        ns16x50_err(info, "already registered\n");
++        return ERR_PTR(-EBUSY);
++    }
++
++    if ( !is_hvm_domain(d) )
++    {
++        ns16x50_err(info, "not an HVM domain\n");
++        return ERR_PTR(-ENOSYS);
++    }
++
++    vdev = xvzalloc(typeof(*vdev));
++    if ( !vdev )
++    {
++        ns16x50_err(info, "failed to allocate memory\n");
++        return ERR_PTR(-ENOMEM);
++    }
++
++    /* Save convenience pointer. */
++    vdev->name = info->name;
++    vdev->owner = d;
++    vdev->info = info;
++
++    rc = ns16x50_init(vdev);
++    if ( rc )
++        return ERR_PTR(rc);
++
++    return vdev;
++}
++
++static void cf_check ns16x50_free(void *arg)
++{
++    struct vuart_ns16x50 *vdev = arg;
++
++    if ( vdev )
++        ns16x50_deinit(vdev);
++
++    XVFREE(vdev);
++}
++
++#define ns16x50_emulator                \
++{                                       \
++    .compatible = "ns16550",            \
++    .alloc      = ns16x50_alloc,        \
++    .free       = ns16x50_free,         \
++    .dump_state = NULL,                 \
++    .put_rx     = NULL,                 \
++}
++
++VUART_REGISTER(ns16x50, ns16x50_emulator);
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 02bdc256ce37..613f4596e33d 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -23,6 +23,7 @@
+ #include <asm/atomic.h>
+ #include <asm/current.h>
+ #include <xen/vpci.h>
++#include <xen/vuart.h>
+ #include <xen/wait.h>
+ #include <public/xen.h>
+ #include <public/domctl.h>
+@@ -660,6 +661,9 @@ struct domain
+     struct {
+         /* Permission to take ownership of the physical console input. */
+         bool input_allowed;
++#ifdef CONFIG_VUART_FRAMEWORK
++        struct vuart *vuart;
++#endif
+     } console;
+ } __aligned(PAGE_SIZE);
+ 
+-- 
+2.51.0
+
 
