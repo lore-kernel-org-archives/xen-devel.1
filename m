@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A879CA0FF7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F73C8303F
 	for <xen-devel@archiver.kernel.org>; Thu, 28 Aug 2025 15:12:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1099224.1453224 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1099225.1453229 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureI8-00067r-5j; Thu, 28 Aug 2025 15:11:56 +0000
+	id 1ureI8-0006Ao-G8; Thu, 28 Aug 2025 15:11:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1099224.1453224; Thu, 28 Aug 2025 15:11:56 +0000
+Received: by outflank-mailman (output) from mailman id 1099225.1453229; Thu, 28 Aug 2025 15:11:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ureI8-000674-2Y; Thu, 28 Aug 2025 15:11:56 +0000
-Received: by outflank-mailman (input) for mailman id 1099224;
+	id 1ureI8-0006AH-AR; Thu, 28 Aug 2025 15:11:56 +0000
+Received: by outflank-mailman (input) for mailman id 1099225;
  Thu, 28 Aug 2025 15:11:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FrxM=3I=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ureCk-0003MD-5B
- for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:22 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8eb3cfff-8420-11f0-8adc-4578a1afcccb;
- Thu, 28 Aug 2025 17:06:21 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-45b7d497abaso3186235e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:21 -0700 (PDT)
+ id 1ureCT-00035A-9A
+ for xen-devel@lists.xenproject.org; Thu, 28 Aug 2025 15:06:05 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 83e94ca9-8420-11f0-8dd7-1b34d833f44b;
+ Thu, 28 Aug 2025 17:06:03 +0200 (CEST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-45b618e067eso15234705e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Aug 2025 08:06:03 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.16
+ 5b1f17b1804b1-45b6f0c6fe5sm78394535e9.5.2025.08.28.08.06.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Aug 2025 08:06:16 -0700 (PDT)
+ Thu, 28 Aug 2025 08:06:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8eb3cfff-8420-11f0-8adc-4578a1afcccb
+X-Inumbo-ID: 83e94ca9-8420-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1756393581; x=1756998381; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1756393563; x=1756998363; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GmwgODjPN6nPKRNPSq/p+SO1nUaITBGwAJt/YgiqGwc=;
-        b=jwy1oQwNYRcL62irk0oR2Em6Gx2HkHqaK27NB6pxQB2Wm68MKZdXofT6zzjcVEPboS
-         SRZU89Fhtx1IHMIpEheMplS18BgRFuWz4ZSYiLnXaQK44qGOPWF3SvSNg8qBWXcumnIw
-         cm2AZuStNKm/x6SrDJK/4QUrrOC6lra9GgHxQ=
+        bh=4DynKY6t4eG496mBBC39U8RWm4bWhTy2jBJs5lw0EOc=;
+        b=u9boWzKpFPPHpEufPl+6c1Q5ujpHLMH+krTvAkfi6VOItQv6O9z2KEn/oFpTlwD5QT
+         nAQF7cyA2gDQytJpHrleeuu5DUA/hTWdbUjmPmUQ1Suj54dkEmBoQl/RC4Ks+qvjRKWT
+         TSwVPx2WJCMOSKFeViFzRS3+QMiST0RMHo4sE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756393581; x=1756998381;
+        d=1e100.net; s=20230601; t=1756393563; x=1756998363;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GmwgODjPN6nPKRNPSq/p+SO1nUaITBGwAJt/YgiqGwc=;
-        b=CqvQL7L/qG6ugpGBRy7CtanRwRLLYpmRSA+lrg2qUH7BmwV+r7VDlrWRMXwn45tZSE
-         KpT6JrEcqDXYGw9SwM3WSmOittxCeEeQi9jJ9OlIrx3Qi4VD9hiWMKY0+woEHCcsulRX
-         SQ7qb+pIR7HbOL5AFR8rrv3Wn/KrKoUGfMAqW4mHO15WYB+GqHfcq9s3h8LF3CoYCfky
-         9Uat/5oXBSaFANz3uxBuOvxj23pasx689djOGfBqGIEku+HbM7kZ5EBm3t73SEqydAmf
-         CC2JcKytS8jzZpQ0vFiYWVc7+Vym6DVqvUc/waVF2R0TfgB4Ed3WBFdDMN9XuQRYNoXb
-         02oQ==
-X-Gm-Message-State: AOJu0YwIu7MpxttmshVmejfxO8UM7Ex3CarW/sQVK0HH9UNPoDO+m2Rs
-	0FPWiYPiMU9do/wsMZtHeeCbGJs21Mo6WT9br8GSoMHXVOY7RkKkyfr/H6HXfekXmXFZosP+1U9
-	e2mbb
-X-Gm-Gg: ASbGncuQXoUhgTkljWyIjUWJy+YycaU94OR3IvUlDTOBNpe1FQCPTHtiyVz7+KNuL7Y
-	IM+Qaj3XMcrDcxPGlrIrJN80FRrkF00dPUfNvqjb4wXHseqNgfWT/OCnVIxlQuLslIIqGMMdsUp
-	0BqVmNtCEt8NIQhO7CdYHclRoeibY1bAOG4S6iOU87F5APWR5vq+gvBoJOSNVYutRKw1Wg/UxLQ
-	tlcw4xFW0l+qi+0hjGK+jV0uLygj6WqTMnYEl06CQ/aS2tTZMbqWTSNFVUV9Q4kmFLAuYfEG6iW
-	qHk0Bx+DEQlYbGaMADh9dnfXgL5JC96WmtWmqHWmqzAtCD0Jh5DB74xZRVIzXXFLF9vjwQn7yUT
-	6Wd4JB8FuGLruLHRP9AxZCx7NHitWTWbWF74teFsnD7HNxkKdX6nac6pjB1dUJDYIBGWf1kE9fM
-	XM+GA3XSgZ+8ZdSE82XCixQw==
-X-Google-Smtp-Source: AGHT+IGYh6/Uc8RXOHSJi5GjnOH/Z0GuayX2Ml2I360nZld1z/zCtY4UfPV1EvgM6x+1eGb0VNNZvg==
-X-Received: by 2002:a05:600c:3544:b0:45b:7c4c:cfbf with SMTP id 5b1f17b1804b1-45b7c4cd1e7mr19748025e9.23.1756393580707;
-        Thu, 28 Aug 2025 08:06:20 -0700 (PDT)
+        bh=4DynKY6t4eG496mBBC39U8RWm4bWhTy2jBJs5lw0EOc=;
+        b=t57AoKquGkXxx7NoErbr8Ad+QH1bh6kXhhGKcAep8stclNn0YHcpYJYMldDtx8nzXu
+         VNiLN3S+P//VkOuidh10A3t7Rb80DpzottNxcC7VoqInmW3/xOG8v1QDpZxtcOC+v9xH
+         7d/frcpzmWrpa7dN+Xs5gtE6EBR2tvPgUzXRSCFPtTcPBQLRyEX1exQmZ6Zb8iHOI++V
+         JB3bKekbU35W7QSTzBR5yWCU1iMn0msnYpvcBZJ+O4XKtq0k9VjQfV5135pBkHZesHii
+         doIkITLlSubjYPQ6+hBwR2kiz2/mNzpb7svEpD8MF+3m2umzoFaMkIrbxs2ucuX/Ov8F
+         9ErQ==
+X-Gm-Message-State: AOJu0YwkhKvMe8jO2NzVxhL2RY8IuxyvUH81akVzsxJKbgCsJh3KHPVR
+	tbIoTavqwB4s0mg3m5B90/JruCJ13tTze6By4k4XAljQNIy6IXmV8KxlmCbAMTyoaseVMA0j+J5
+	mk9E9
+X-Gm-Gg: ASbGncuy7NscJ8/Zoh8tZ1DLb/dPyDfM5kmGcHchrghVNZyvetuySR2yA00RvRVpwux
+	V+aFyc2gaiFnL+CmkD9C5AyaE/7zm7czw5nN9VPoGxL0YW8bk6f4ts+1eR/2Zjrp/GMPkBHjkgF
+	qc64TDeM6amr3XWfo+uFj22ZdYQDSlUmoQoXiHOdTPLsbj4RVVO/VqrE62JwTB7V8zTqrPpGb8R
+	CDGjhKLZsxAEfJUJBoa3fNv8YAsPsoJIKJeJ64e8DptKEELSq+QGavWeZ6tl7SqC9MGZ0+Maefa
+	zx/3bNBIem0Un7N1WUKZkTIXyZGBtjkNyEP/eN7Uio7vzQltqVM2lTxgeEVMVjNNU4Gm9h1RF2O
+	4QJmzqnxbj95E93KNgDcB0LnMYjqPyaTIzJPm0wqBsfd3Z8eqZ9jvA7o7ihlMAMOkJGXje6BUGk
+	z6KK/ghrmhYng=
+X-Google-Smtp-Source: AGHT+IGIg69RaxPXalNtvgdkDfZzuEgN/maUA0NU09ZfV4DXuJGacLH+Dnaxa6jb0/6qldNxuvJkVA==
+X-Received: by 2002:a05:600c:a402:b0:45b:7510:4042 with SMTP id 5b1f17b1804b1-45b75104244mr37200115e9.17.1756393562644;
+        Thu, 28 Aug 2025 08:06:02 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 18/23] x86/entry: Rework the comment about SYSCALL and DF
-Date: Thu, 28 Aug 2025 16:04:04 +0100
-Message-Id: <20250828150409.901315-19-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 10/23] x86/traps: Make an IDT-specific #DB helper
+Date: Thu, 28 Aug 2025 16:03:56 +0100
+Message-Id: <20250828150409.901315-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250828150409.901315-1-andrew.cooper3@citrix.com>
 References: <20250828150409.901315-1-andrew.cooper3@citrix.com>
@@ -97,11 +97,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It's soon going to be needed in a second location.
+FRED provides PENDING_DBG in the the stack frame, avoiding the need to read
+%dr6 manually.
 
-Right now it's misleading saying that nothing else would be cleared.  It's
-missing the more important point that SYSCALLs are treated like all other
-interrupts and exceptions, and undergo normal flags handling there.
+Rename do_debug() to handle_DB(), and update it to take a dbg field using
+positive polarity.
+
+Introduce a new handle_DB_IDT() which reads %dr6.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -111,26 +115,98 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 v2:
  * New
 ---
- xen/arch/x86/x86_64/entry.S | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ xen/arch/x86/traps.c        | 28 +++++++++++++++++-----------
+ xen/arch/x86/x86_64/entry.S |  2 +-
+ 2 files changed, 18 insertions(+), 12 deletions(-)
 
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 7ae46ae20f98..0372f1c386a8 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -1992,14 +1992,11 @@ void asmlinkage do_device_not_available(struct cpu_user_regs *regs)
+ 
+ void nocall sysenter_eflags_saved(void);
+ 
+-void asmlinkage do_debug(struct cpu_user_regs *regs)
++/* Handle #DB.  @dbg is PENDING_DBG, a.k.a. %dr6 with positive polarity. */
++static void handle_DB(struct cpu_user_regs *regs, unsigned long dbg)
+ {
+-    unsigned long dr6;
+     struct vcpu *v = current;
+ 
+-    /* Stash dr6 as early as possible. */
+-    dr6 = read_debugreg(6);
+-
+     /*
+      * At the time of writing (March 2018), on the subject of %dr6:
+      *
+@@ -2066,13 +2063,13 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
+          * If however we do, safety measures need to be enacted.  Use a big
+          * hammer and clear all debug settings.
+          */
+-        if ( dr6 & (DR_TRAP3 | DR_TRAP2 | DR_TRAP1 | DR_TRAP0) )
++        if ( dbg & (DR_TRAP3 | DR_TRAP2 | DR_TRAP1 | DR_TRAP0) )
+         {
+             unsigned int bp, dr7 = read_debugreg(7);
+ 
+             for ( bp = 0; bp < 4; ++bp )
+             {
+-                if ( (dr6 & (1u << bp)) && /* Breakpoint triggered? */
++                if ( (dbg & (1u << bp)) && /* Breakpoint triggered? */
+                      (dr7 & (3u << (bp * DR_ENABLE_SIZE))) && /* Enabled? */
+                      ((dr7 & (3u << ((bp * DR_CONTROL_SIZE) + /* Insn? */
+                                      DR_CONTROL_SHIFT))) == DR_RW_EXECUTE) )
+@@ -2093,9 +2090,9 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
+          * so ensure the message is ratelimited.
+          */
+         gprintk(XENLOG_WARNING,
+-                "Hit #DB in Xen context: %04x:%p [%ps], stk %04x:%p, dr6 %lx\n",
++                "Hit #DB in Xen context: %04x:%p [%ps], stk %04x:%p, dbg %lx\n",
+                 regs->cs, _p(regs->rip), _p(regs->rip),
+-                regs->ss, _p(regs->rsp), dr6);
++                regs->ss, _p(regs->rsp), dbg);
+ 
+         return;
+     }
+@@ -2107,7 +2104,7 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
+      * by debugging actions completed behind it's back.
+      */
+     v->arch.dr6 = x86_merge_dr6(v->domain->arch.cpu_policy,
+-                                v->arch.dr6, dr6 ^ X86_DR6_DEFAULT);
++                                v->arch.dr6, dbg);
+ 
+     if ( guest_kernel_mode(v, regs) && v->domain->debugger_attached )
+     {
+@@ -2115,7 +2112,16 @@ void asmlinkage do_debug(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    pv_inject_DB(dr6 ^ X86_DR6_DEFAULT);
++    pv_inject_DB(dbg);
++}
++
++/*
++ * When using IDT delivery, it is our responsibility to read %dr6.  Convert it
++ * to positive polarity.
++ */
++void asmlinkage handle_DB_IDT(struct cpu_user_regs *regs)
++{
++    handle_DB(regs, read_debugreg(6) ^ X86_DR6_DEFAULT);
+ }
+ 
+ void asmlinkage do_entry_CP(struct cpu_user_regs *regs)
 diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 01b431793b7b..ca446c6ff0ce 100644
+index 39c7b9d17f9e..789687488c5f 100644
 --- a/xen/arch/x86/x86_64/entry.S
 +++ b/xen/arch/x86/x86_64/entry.S
-@@ -39,10 +39,9 @@ FUNC_LOCAL(switch_to_kernel)
-         leal  (,%rcx,TBF_INTERRUPT),%ecx
+@@ -1171,7 +1171,7 @@ FUNC(handle_ist_exception)
+ .L_ ## vec ## _done:
  
-         /*
--         * The PV ABI hardcodes the (guest-inaccessible and virtual)
--         * SYSCALL_MASK MSR such that DF (and nothing else) would be cleared.
--         * Note that the equivalent of IF (VGCF_syscall_disables_events) is
--         * dealt with separately above.
-+         * The PV ABI, given no virtual SYSCALL_MASK, hardcodes that DF is
-+         * cleared.  Other flags are handled in the same way as interrupts and
-+         * exceptions in create_bounce_frame().
-          */
-         mov   $~X86_EFLAGS_DF, %esi
+         DISPATCH(X86_EXC_NMI, do_nmi)
+-        DISPATCH(X86_EXC_DB,  do_debug)
++        DISPATCH(X86_EXC_DB,  handle_DB_IDT)
+         DISPATCH(X86_EXC_MC,  do_machine_check)
+ #undef DISPATCH
  
 -- 
 2.39.5
