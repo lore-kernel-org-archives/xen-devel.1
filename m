@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5624CA1000
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Aug 2025 09:58:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1101002.1454240 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF39ECA1002
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Aug 2025 09:58:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1101001.1454230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urvsD-0006Kz-8z; Fri, 29 Aug 2025 09:58:21 +0000
+	id 1urvsC-00066Y-2M; Fri, 29 Aug 2025 09:58:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1101002.1454240; Fri, 29 Aug 2025 09:58:21 +0000
+Received: by outflank-mailman (output) from mailman id 1101001.1454230; Fri, 29 Aug 2025 09:58:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1urvsD-0006Kp-4G; Fri, 29 Aug 2025 09:58:21 +0000
-Received: by outflank-mailman (input) for mailman id 1101002;
- Fri, 29 Aug 2025 09:58:19 +0000
+	id 1urvsB-00066R-UX; Fri, 29 Aug 2025 09:58:19 +0000
+Received: by outflank-mailman (input) for mailman id 1101001;
+ Fri, 29 Aug 2025 09:58:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=486T=3J=bounce.vates.tech=bounce-md_30504962.68b179b8.v1-249d46bbdbde471692801013ce8f6b73@srs-se1.protection.inumbo.net>)
- id 1urvsB-00065v-I6
- for xen-devel@lists.xenproject.org; Fri, 29 Aug 2025 09:58:19 +0000
-Received: from mail180-6.suw31.mandrillapp.com
- (mail180-6.suw31.mandrillapp.com [198.2.180.6])
+ <SRS0=Zg/H=3J=bounce.vates.tech=bounce-md_30504962.68b179b7.v1-a8df3ebcb36c409d82b104256e9157ed@srs-se1.protection.inumbo.net>)
+ id 1urvsA-00065v-S1
+ for xen-devel@lists.xenproject.org; Fri, 29 Aug 2025 09:58:18 +0000
+Received: from mail187-26.suw11.mandrillapp.com
+ (mail187-26.suw11.mandrillapp.com [198.2.187.26])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af1cbaf1-84be-11f0-8dd7-1b34d833f44b;
- Fri, 29 Aug 2025 11:58:17 +0200 (CEST)
-Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail180-6.suw31.mandrillapp.com (Mailchimp) with ESMTP id 4cCtxh25C0z2K248v
- for <xen-devel@lists.xenproject.org>; Fri, 29 Aug 2025 09:58:16 +0000 (GMT)
+ id aee09c2f-84be-11f0-8dd7-1b34d833f44b;
+ Fri, 29 Aug 2025 11:58:16 +0200 (CEST)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-26.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4cCtxg6PV4zKsbTcD
+ for <xen-devel@lists.xenproject.org>; Fri, 29 Aug 2025 09:58:15 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 249d46bbdbde471692801013ce8f6b73; Fri, 29 Aug 2025 09:58:16 +0000
+ a8df3ebcb36c409d82b104256e9157ed; Fri, 29 Aug 2025 09:58:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,228 +45,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af1cbaf1-84be-11f0-8dd7-1b34d833f44b
+X-Inumbo-ID: aee09c2f-84be-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1756461496; x=1756731496;
-	bh=crrLklvxlyK9aS23G3O0Vz3adTw/OUCgP8/ore5Di50=;
+	s=mte1; t=1756461495; x=1756731495;
+	bh=749WZuQSD3RJ4fQfzKGkAT09RJssRy+QRzxpooPcevY=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=xCFPme4SzzIynRR1S97mUO7VxK+FJu2WIlq6QYVEVoesBGpyjtDUDbTNJJvyFUkXF
-	 sISnbqM0+oU9T85Fl0KEOJCUNnjSHMF/kSuWA1qS5Y584YtU04EQZ9wZfPase1F8FF
-	 ndT6Bm1rCMWbzyuc0ZO19GjsbfZjrzK7CgwUTiQWoP4FmST5bWj09sO6mEbP20FJWO
-	 l7xsPfz2kNk8NRZpQ3KQhkXK+UI4Rd1sbWfuAtgD9I9aF5jZThB+GF9kYCOWrV+iO6
-	 OC4pgQRuSIdPQMtT4gptrBKnI7inXSYmScRd4E6k9WocwVClSCOmYRprZFzOlnLc+c
-	 nMS8q0yJ+tyDA==
+	b=lDWuHmjFF3269NO8JZUgwmgE+YgGKnOVWjiwo2lm32XHr/TkoXkHrwY15+I64DbhV
+	 coY4dhUpJT+S6TFHd2y/c4BkTQu1um0inMSBJVv7no3l0Rm851pG6NpfTMacoB3iLk
+	 7NPkiZlF3pe7LFD6AjVv2B7ONmNuzUcyiLJETnHXnH08BTvM3htNbLL6Vc6vrmf+AI
+	 lgRAdxK5kOyIbTCUAfm9IbIlylK2Q8+t2xw2++uQa3ES5mg9xO1LUvxewsMn3sTXbG
+	 RCEHSjK9952hldNqXMQIuKRkisOefOcpFzknpBMyIe/N+Ja7daB+n+/lMh19MJhy+9
+	 ia9EVyZzAkbcw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1756461496; x=1756721996; i=teddy.astie@vates.tech;
-	bh=crrLklvxlyK9aS23G3O0Vz3adTw/OUCgP8/ore5Di50=;
+	t=1756461495; x=1756721995; i=teddy.astie@vates.tech;
+	bh=749WZuQSD3RJ4fQfzKGkAT09RJssRy+QRzxpooPcevY=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=rrODXGJIzTtk6CWGiKzByorfdgGLn9iQ6qiwipWQh/X3n7DmJyVT+IubdHgSX8FSy
-	 WGtuiKesA1XT0t/wloQY12U8fTijW8O83sgsEV+d8hhjToxBTtfYx6M4ckE/5rjUI0
-	 zI9nQnMKUYbvAZJ/lji/o/9Fi3zqPnOElPZ0RdxcpjXuCNLDi4w2Y8j0BgCCqUU435
-	 1f4WXhIISXlaGTbysUQIpVfZ0pf3FGyY9eoU5wABrEDLlhvrRrc9Kjwl+shsRZ3yKB
-	 acK4PDIPxqaNoiXduWQSDpk97j3sAXhYeElNlLgmqplQ52uO5w0EzyRLHXBZqPSb65
-	 XkDjo1D7Mt5JA==
+	b=B/vDckBmv8ktndslt08iaMbgXt1bmJOTd2R7y2ilanxljQs8HnXe8HUM0rr0364zt
+	 dklG98knDxLvHuRLCcT1PRBEZ3aEwf+1DtjleAT/329o+8BFSKaMA9t3FBmh4RQcgs
+	 xElsHaw0eTOzTrdpiHpjdGGu1boUwWfRA5c42+KzMGXIYvxZphQukQXtuU7V4EAbAs
+	 6M0OR65XnGwzhlGqdEV9oo/gtFRJtqT2WnakARXcXtBQ5h73oNBSUmn5aFhGTIVXjr
+	 kPGqxig5uMVZecR+gjQCVz3uZwW12aZVNBwRZ5oSywJdErWUgVHqDarsQoZlxQhGpK
+	 nGRJ3rzyiBLQQ==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RESEND=20PATCH=20v2=202/3]=20hvmloader:=20Update=20to=20SMBIOS=202.6?=
+Subject: =?utf-8?Q?[RESEND=20PATCH=20v2=201/3]=20xen:=20Define=20xen=5Fdomain=5Fhandle=5Ft=20encoding=20and=20formatting?=
 X-Mailer: git-send-email 2.50.1
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1756461495469
+X-Bm-Transport-Timestamp: 1756461494427
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
-Message-Id: <57c674cc364d3b8f4c6d03533b9e2b45728d2c19.1756460430.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>
+Message-Id: <a12f705dae18ae2b87c9e21027d14c4e60bff146.1756460430.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1756460430.git.teddy.astie@vates.tech>
 References: <cover.1756460430.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.249d46bbdbde471692801013ce8f6b73?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.a8df3ebcb36c409d82b104256e9157ed?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20250829:md
-Date: Fri, 29 Aug 2025 09:58:16 +0000
+Date: Fri, 29 Aug 2025 09:58:15 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Currently, hvmloader uses SMBIOS 2.4, however, when using OVMF, the
-SMBIOS is patched to 2.8, which has clarified the UUID format (as GUID).
+xen_domain_handle_t is defined as a opaque 16-bytes blob, but is
+commonly used by toolstack and guest as a big-endian encoded and
+formatted UUID (alike RFC 9562).
 
-In Linux, if the SMBIOS version is >= 2.6, the GUID format is used, else
-(undefined as per SMBIOS spec), big endian is used (used by Xen). Therefore,
-you have a endian mismatch causing the UUIDs to mismatch in the guest.
+Clarify the definition of the type to ensure the guest and toolstack
+interprets this value correctly in a way consistent with existing users
+(at least with XAPI, xl, libvirt, hvmloader and Linux).
 
-$ cat /sys/hypervisor/uuid
-e865e63f-3d30-4f0b-83e0-8fdfc1e30eb7
-$ cat /sys/devices/virtual/dmi/id/product_uuid
-3fe665e8-303d-0b4f-83e0-8fdfc1e30eb7
-$ cat /sys/devices/virtual/dmi/id/product_serial
-e865e63f-3d30-4f0b-83e0-8fdfc1e30eb7
-
-This patch updates the SMBIOS version from 2.4 to 2.6 and does the appropriate
-modifications of the table. This effectively fix this endianness mismatch with
-OVMF; while the UUID displayed by Linux is still the same for SeaBIOS.
-
-Fixes: c683914ef913 ("Add code to generate SMBIOS tables to hvmloader.")
-(SMBIOS versions before 2.6 has a ill-defined UUID definition)
+Fixes: 30ce2a9295a5 ("Store an opaque handle (tools uuid) in the domain structure")
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
 v2:
- - rebase onto staging
- - introduce missing SMBIOS 2.5-2.6 fields
- - check for new SMBIOS 2.6 table lengths
- - update UUID conversion comment
- - add Fixes: note
- ---
- tools/firmware/hvmloader/smbios.c       | 50 ++++++++++++++++++++-----
- tools/firmware/hvmloader/smbios_types.h |  9 +++++
- 2 files changed, 50 insertions(+), 9 deletions(-)
+ - introduced
+---
+ CHANGELOG.md             | 1 +
+ xen/include/public/xen.h | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/tools/firmware/hvmloader/smbios.c b/tools/firmware/hvmloader/smbios.c
-index 76c7090d16..e445475d78 100644
---- a/tools/firmware/hvmloader/smbios.c
-+++ b/tools/firmware/hvmloader/smbios.c
-@@ -396,7 +396,7 @@ smbios_entry_point_init(void *start,
-     memcpy(ep->anchor_string, "_SM_", 4);
-     ep->length = 0x1f;
-     ep->smbios_major_version = 2;
--    ep->smbios_minor_version = 4;
-+    ep->smbios_minor_version = 6;
-     ep->max_structure_size = max_structure_size;
-     ep->entry_point_revision = 0;
-     memcpy(ep->intermediate_anchor_string, "_DMI_", 5);
-@@ -505,7 +505,22 @@ smbios_type_1_init(void *start, const char *xen_version,
-     p->version_str = 3;
-     p->serial_number_str = 4;
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index cd34ea87b8..8c4435c181 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+    - For x86, GCC 5.1 and Binutils 2.25, or Clang/LLVM 11
+    - For ARM32 and ARM64, GCC 5.1 and Binutils 2.25
+  - Linux based device model stubdomains are now fully supported.
++ - Clarify guest UUIDs as being big-endian encoded.
  
--    memcpy(p->uuid, uuid, 16);
-+    /*
-+     * Xen toolstack uses big endian UUIDs, however GUIDs (which requirement
-+     * is clarified by SMBIOS >= 2.6) has the first 3 components appearing as
-+     * being little endian and the rest as still being big endian.
-+     */
-+    /* First component */
-+    for ( unsigned int i = 0; i < 4; i++ )
-+        p->uuid[i] = uuid[4 - i - 1];
-+    /* Second component */
-+    p->uuid[4] = uuid[5];
-+    p->uuid[5] = uuid[4];
-+    /* Third component */
-+    p->uuid[6] = uuid[7];
-+    p->uuid[7] = uuid[6];
-+    /* Rest */
-+    memcpy(p->uuid + 8, uuid + 8, 8);
+  - On x86:
+    - Restrict the cache flushing done as a result of guest physical memory map
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index 82b9c05a76..a219ef870f 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -973,6 +973,13 @@ typedef struct dom0_vga_console_info {
+ #define xen_vga_console_info dom0_vga_console_info
+ #define xen_vga_console_info_t dom0_vga_console_info_t
  
-     p->wake_up_type = 0x06; /* power switch */
-     p->sku_str = 0;
-@@ -705,8 +720,8 @@ smbios_type_4_init(
-     struct smbios_type_4 *p = start;
-     uint32_t eax, ebx, ecx, edx;
++/*
++ * The domain handle is chosen by the toolstack, and intended to hold a UUID
++ * conforming to RFC 9562 (i.e. big endian).
++ *
++ * Certain cases (e.g. SMBios) transform it to a Microsoft GUID (little
++ * endian) for presentation to the guest.
++ */
+ typedef uint8_t xen_domain_handle_t[16];
  
--    /* Specification says Type 4 table has length of 23h for v2.3+. */
--    BUILD_BUG_ON(sizeof(*p) != 35);
-+    /* Specification says Type 4 table has length of 2Ah for v2.6. */
-+    BUILD_BUG_ON(sizeof(*p) != 42);
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -716,7 +731,7 @@ smbios_type_4_init(
- 
-     p->socket_designation_str = 1;
-     p->processor_type = 0x03; /* CPU */
--    p->processor_family = 0x01; /* other */
-+    p->processor_family = p->processor_family_2 = 0x01; /* other */
-     p->manufacturer_str = 2;
- 
-     cpuid(1, &eax, &ebx, &ecx, &edx);
-@@ -736,6 +751,22 @@ smbios_type_4_init(
-     p->l2_cache_handle = 0xffff; /* No cache information structure provided. */
-     p->l3_cache_handle = 0xffff; /* No cache information structure provided. */
- 
-+    /*
-+     * We have a smbios type 4 table per vCPU (which is per socket),
-+     * which means here that we have 1 socket per vCPU.
-+     */
-+    p->core_count = p->core_enabled = p->thread_count = 1;
-+
-+    /*
-+     * We set 64-bits, execute protection and enhanced virtualization.
-+     * We don't set Multi-Core (bit 3) because this individual processor
-+     * (as being a single vCPU) is only having one core.
-+     *
-+     * SMBIOS specification says that these bits don't state anything
-+     * regarding the actual availability of such features.
-+     */
-+    p->processor_characteristics = 0x64;
-+
-     start += sizeof(*p);
- 
-     strncpy(buf, "CPU ", sizeof(buf));
-@@ -780,8 +811,8 @@ smbios_type_8_init(void *start)
- static void *
- smbios_type_9_init(void *start)
- {
--    /* Specification says Type 9 table has length of 0Dh for v2.1-2.5. */
--    BUILD_BUG_ON(sizeof(struct smbios_type_9) != 13);
-+    /* Specification says Type 9 table has length of 11h for v2.6+. */
-+    BUILD_BUG_ON(sizeof(struct smbios_type_9) != 17);
- 
-     /* Only present when passed in. */
-     return smbios_pt_copy(start, 9, SMBIOS_HANDLE_TYPE9,
-@@ -870,8 +901,8 @@ smbios_type_17_init(void *start, uint32_t memory_size_mb, int instance)
-     char buf[16];
-     struct smbios_type_17 *p = start;
- 
--    /* Specification says Type 17 table has length of 1Bh for v2.3-2.6. */
--    BUILD_BUG_ON(sizeof(*p) != 27);
-+    /* Specification says Type 17 table has length of 1Ch for v2.6. */
-+    BUILD_BUG_ON(sizeof(*p) != 28);
- 
-     memset(p, 0, sizeof(*p));
- 
-@@ -890,6 +921,7 @@ smbios_type_17_init(void *start, uint32_t memory_size_mb, int instance)
-     p->bank_locator_str = 0;
-     p->memory_type = 0x07; /* RAM */
-     p->type_detail = 0;
-+    p->attributes = 0;
- 
-     start += sizeof(*p);
-     strcpy(start, "DIMM ");
-diff --git a/tools/firmware/hvmloader/smbios_types.h b/tools/firmware/hvmloader/smbios_types.h
-index c04b435d31..860617d86a 100644
---- a/tools/firmware/hvmloader/smbios_types.h
-+++ b/tools/firmware/hvmloader/smbios_types.h
-@@ -147,6 +147,11 @@ struct smbios_type_4 {
-     uint8_t serial_number_str;
-     uint8_t asset_tag_str;
-     uint8_t part_number_str;
-+    uint8_t core_count;
-+    uint8_t core_enabled;
-+    uint8_t thread_count;
-+    uint16_t processor_characteristics;
-+    uint16_t processor_family_2;
- } __attribute__ ((packed));
- 
- /* SMBIOS type 7 - Cache Information */
-@@ -185,6 +190,9 @@ struct smbios_type_9 {
-     uint16_t slot_id;
-     uint8_t slot_characteristics_1;
-     uint8_t slot_characteristics_2;
-+    uint16_t sgn_base;
-+    uint8_t bus_number_base;
-+    uint8_t devfn_base;
- } __attribute__ ((packed));
- 
- /* SMBIOS type 11 - OEM Strings */
-@@ -227,6 +235,7 @@ struct smbios_type_17 {
-     uint8_t serial_number_str;
-     uint8_t asset_tag_str;
-     uint8_t part_number_str;
-+    uint8_t attributes;
- } __attribute__ ((packed));
- 
- /* SMBIOS type 19 - Memory Array Mapped Address */
+ __DEFINE_XEN_GUEST_HANDLE(uint8,  uint8_t);
 -- 
 2.50.1
 
