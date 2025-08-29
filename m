@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D348CA0FF9
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Aug 2025 16:11:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1101750.1454723 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277DCCA0FF0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Aug 2025 16:17:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1101810.1454732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1us1gl-0005Ez-QS; Fri, 29 Aug 2025 16:10:55 +0000
+	id 1us1mS-0006Fi-FP; Fri, 29 Aug 2025 16:16:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1101750.1454723; Fri, 29 Aug 2025 16:10:55 +0000
+Received: by outflank-mailman (output) from mailman id 1101810.1454732; Fri, 29 Aug 2025 16:16:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1us1gl-0005Es-NW; Fri, 29 Aug 2025 16:10:55 +0000
-Received: by outflank-mailman (input) for mailman id 1101750;
- Fri, 29 Aug 2025 16:10:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1us1mS-0006Fb-Ci; Fri, 29 Aug 2025 16:16:48 +0000
+Received: by outflank-mailman (input) for mailman id 1101810;
+ Fri, 29 Aug 2025 16:16:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qyNB=3J=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
- id 1us1cg-0006O9-5w
- for xen-devel@lists.xenproject.org; Fri, 29 Aug 2025 16:06:42 +0000
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [2a01:111:f403:c200::5])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25fbc72e-84f2-11f0-8dd7-1b34d833f44b;
- Fri, 29 Aug 2025 18:06:40 +0200 (CEST)
-Received: from AS4PR03MB8676.eurprd03.prod.outlook.com (2603:10a6:20b:58c::8)
- by VI1PR03MB6317.eurprd03.prod.outlook.com (2603:10a6:800:136::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.26; Fri, 29 Aug
- 2025 16:06:38 +0000
-Received: from AS4PR03MB8676.eurprd03.prod.outlook.com
- ([fe80::c5ca:906a:1ded:634b]) by AS4PR03MB8676.eurprd03.prod.outlook.com
- ([fe80::c5ca:906a:1ded:634b%7]) with mapi id 15.20.9052.019; Fri, 29 Aug 2025
- 16:06:38 +0000
+ <SRS0=OeP6=3J=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1us1mQ-0006FV-E8
+ for xen-devel@lists.xenproject.org; Fri, 29 Aug 2025 16:16:46 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8e96bbe3-84f3-11f0-8adc-4578a1afcccb;
+ Fri, 29 Aug 2025 18:16:45 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-55f6507bd53so1870846e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 29 Aug 2025 09:16:45 -0700 (PDT)
+Received: from [192.168.0.110] ([91.123.151.69])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-336b95430b8sm4058341fa.13.2025.08.29.09.16.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 29 Aug 2025 09:16:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,175 +47,444 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25fbc72e-84f2-11f0-8dd7-1b34d833f44b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DC4T/Np5DHBSTQPp4yWpi4wuBsP9Eh/0QyaZROatPlgZhEeT55qhlPG7ketlYlfudcNT59tG5mB3br1PKQsTOJG0ekCRJucmJ1+R407HHSpn8KsxmGgRbyd4b1E6VlBwutvwyMO5eBoDnlAR5bIxrhQvUchioR1OBzDQ8f1Y2KHrY7n+2cUbegeXuUlpQBgO2OrM7Osqlm4wzAjYC1TDAXymbWumdYjzyp4q/2VEi9YMcl1ywz+HqE1Odgkd7f1BB5FaOaULaDi4Y1o3SaqHhq7yeiAYEw7Ft6+s/lqXn222aieZ7BRNzN45IiHMcDQjd1/nF3yxaUUkK+uEu6qxyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GONSEj8/1mepKECBs7Vda7Viy+ul1d1/au4fjFSO9gg=;
- b=eVIlIk0AM0DcQ9gFDSo4N1KCGeXLX+Ng/tspQQlFeM0vgk0MPZ+xZ+NrDX57787M5gJrI7Ug2fIXUB2Z29eIn4RpZhYVZTOLh1EQQjkuzGt+1oTcH41+ToIvuoQluJ6JAY1n6ZsAq1itPI4oxkx+GTFlCMJMnboAbMdeNAyVVL5JceuHqjhM50Cw04o2V/qfXvibI3F3g36X/320Ke+Ioir98WEO3T4wx3H2WiqlLx7WFlrAfo8J3zU4ZvWJG/Rd572accbFjL4qzEfOQp9njRa8LxQrhe3uPmGfmsscaDuYmiVaXu55DagUjD4Ot8gtMIvnV6b8Rx1ox4cmr/zvFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GONSEj8/1mepKECBs7Vda7Viy+ul1d1/au4fjFSO9gg=;
- b=Z+xpaq6xdOEBSdJoiyeovXB5jpssnTpusHyaAYWYIgzYuZJyL5Tz43Yt6bWIFotKwJDszcg5YYxhiKbqmGdyRfUEcvxqkg2EFcsH+Fo0U25SXJeGlzrBCxfLz0LjTxvoWE9DOhby3/r3c371kD14inGe/bQUzCOXV8Cc0VqmFpiS1naudSXyN0ZwEFwupsH5C0O2iuz2CRYs3VXYrCLK8phtIlUuVnQPiP9e8YaLuHZ4+sfrdH4X7sDB1DbpuYtBolCNGw2q4dGJJj/jX/Dl1VLcyDux+xxRmI3GEwGrJl29aeg+I2vHKe8vEzjObzkWCnKg/sHBo0+0oJsViKDsOg==
-From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: "olekstysh@gmail.com" <olekstysh@gmail.com>, Leonid Komarianskyi
-	<Leonid_Komarianskyi@epam.com>, Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v5 11/12] doc/man: update description for nr_spis with eSPI
-Thread-Topic: [PATCH v5 11/12] doc/man: update description for nr_spis with
- eSPI
-Thread-Index: AQHcGP7m6ftj+OqxyUm3COIAuPKuog==
-Date: Fri, 29 Aug 2025 16:06:38 +0000
-Message-ID:
- <e388d273ea64c8665a96cc5be3f507da35ea23f8.1756481577.git.leonid_komarianskyi@epam.com>
-References: <cover.1756481577.git.leonid_komarianskyi@epam.com>
-In-Reply-To: <cover.1756481577.git.leonid_komarianskyi@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR03MB8676:EE_|VI1PR03MB6317:EE_
-x-ms-office365-filtering-correlation-id: 837c6ec8-223a-4eee-513a-08dde716090e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?nD9RSJ64wIPpdcxF2+eCkg3yKLoAeZ+CXsGGfKyDrukqzGJOnGCGcBdxPW?=
- =?iso-8859-1?Q?EsEN5nQ3ecS8A9svRkMEFKZsPJzvWROJ009Y18FV+2SnjwFNfzHna8E1TD?=
- =?iso-8859-1?Q?Pdy8kyZ8nFK4EqW9mj0DWQ2fK/zS/X4jU1YvYjn7ZsJPHXy9fZMzLcGSic?=
- =?iso-8859-1?Q?MxbNRdFrEcxcwNyaJoBIkv2O+lZ67s3w72zExFxXSYuOImHTXpmW9qf2o/?=
- =?iso-8859-1?Q?txqU5or7glVwfKMxYojKLRHyGD9VfDLnB6Z3J4L82vVYnozRJQIiMlIjNd?=
- =?iso-8859-1?Q?hSqTV04raWJLuN0Gw4+zVXphgf5uVeNbTL4um9b7l96R1pTjZ1ePpo+APJ?=
- =?iso-8859-1?Q?yyHe//MSiy8PTd6ThJcur7S9XmPl4vsmXb8A/n+mbjNYgouch3mzNLaq4g?=
- =?iso-8859-1?Q?TPP2G2l4z0EulQ2CKQPuqt+4b2LWfUvGbg/rgLhS1WIXosCXOyl/pZRmyL?=
- =?iso-8859-1?Q?bimHY6dkVsUMpynxSQk+TdpqQFPvn9Bxbd3qaNNRoNJ3m5PdQG37N3wdli?=
- =?iso-8859-1?Q?IXEEK8OsnEbaz/x+EIwENLdNFcHwTifiPwQmthtRbhxjWmpAMGBzH5HViZ?=
- =?iso-8859-1?Q?rzajvR3C/qKmqAFbR9UzwTtYBCSidX3tNszZ5NauLrRTFWVozax8vPrUnb?=
- =?iso-8859-1?Q?bYtA0OFxanaKyjKSvKLH3vBt9dFAS/J6X0SZSX8yApNX/vIgb2PBbZfTyp?=
- =?iso-8859-1?Q?JuAyidjozxzVw93nj2OgDH2QM0zrfIq7ElXNN/4Voilvu8a9F7tKWIVlsa?=
- =?iso-8859-1?Q?5GkfDWHEXX5mam+vMJPoz2qyJWwERV1GbeOcnIy8swdC6cxsIi2CgfG60i?=
- =?iso-8859-1?Q?eb5kFTLXZaaxRnHHPCPOwyBMfdI7sjc1u86vtolR3Mn6kfIfsWU4OSEzkr?=
- =?iso-8859-1?Q?Jk96RhaVEPFYqYiuMZJIEBUpbGbjY3bhmE3HBRk9YH1+2a1LGBvRSIOa+4?=
- =?iso-8859-1?Q?CfZnJVTd6fw3jvAv96WtapPPLfOjBXWSqhN6BUNY5aCDm+wFXBxGMMaiNR?=
- =?iso-8859-1?Q?MMOoc6GPgwAlhcJeUbtGHFJ34I4l+vysmeV97BbtS+mOu3e1137q+9EJ/g?=
- =?iso-8859-1?Q?qUaqhvPxmoivd1Fv4XN0BWOGhUP+7FX2wwedRatN6RgN7jtKAYGQRgNLKf?=
- =?iso-8859-1?Q?i4ZCt4YSTw1ujoZ+MHrRSixabunfAKhawUMth25Pat2ePoFTAfv1qMMPCA?=
- =?iso-8859-1?Q?jbZdHbHbSAVL/+Q6KZ/1MwG20iuGLPySd6xfVkayyPsYT6+1WlHqdYqh2V?=
- =?iso-8859-1?Q?8T0mIc1+5GduwetAJvXFlN538pxOoQbERxlfSDk2Ey2Vcv7ilv8pEKjM65?=
- =?iso-8859-1?Q?Cg5DKiT4VZP/vSrOtTUll8Z8R9pAby4MvtnV/6QWMmW/4jEZdBciSj1JB0?=
- =?iso-8859-1?Q?tH6Lu63MtqQLQYcli/ps1rYvKPmNzD1trgWSZGYGfPBL2KgCklAOBTkaBQ?=
- =?iso-8859-1?Q?xl+7+nnk7Nm7T20oIr0Sk+3aGjs0uf99VTXJsBjYx4o33ID4MagOGkAh2G?=
- =?iso-8859-1?Q?HWMrR67ZYldsO6j61JMHd1dF3RDZGdauqK7aHEmggZfalss0fbtx8S7/c2?=
- =?iso-8859-1?Q?magr7Is=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR03MB8676.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?r2LY0Ne3Ke0bnj5ZBhu06+wA27wmAJvX9+WQKyzyOfxO1uNQNdxjoeCm8l?=
- =?iso-8859-1?Q?YrzMYUs6+vR9u1sAHYKo/6y+Rp/8ke68dHC2gkRrBsw5la4xXQxdMn1zJG?=
- =?iso-8859-1?Q?D88ep9iSBT6muXrV2QSduDnlJeTlERgjqquslE9rQ5DLPcprWCRr8xb0oa?=
- =?iso-8859-1?Q?sru1AXmVYq8uDit51e3KNd25u975rSt1xVSvVWcLK4Ks4CR6LjNGqmbwZf?=
- =?iso-8859-1?Q?CKEJjovt0LeyMi/c40WiI48sk648n2Aei74u3FGv9/7W7ZYQDthERFuu4n?=
- =?iso-8859-1?Q?ozD06i/Y8fmlk//OKwXvQRDl9vUBad8+ectDPZTif22KADW6FxKRB3bXrE?=
- =?iso-8859-1?Q?19ksjQBBbhZiRk0iFMfxI9T9Fbgm0EY5lankf008v92lsHrREdMgJHmvZC?=
- =?iso-8859-1?Q?sKRUwp2+VhVIZ4vvEzxcUx5vZ/ZVhuwJ8HiwJYSVwfRq3RFTEOf5AjLxRO?=
- =?iso-8859-1?Q?3v4AtSZeju9vTwVB30djmzdvTcjCW/F4a3wFdX6fr/Jifwyp7TtiaMEfHh?=
- =?iso-8859-1?Q?zKL3wm9i76DHOFVx1juWoqvZxtijD3qXJekTUdp3NAPpdKPSK/xeRpjd8+?=
- =?iso-8859-1?Q?LOxSdIq3qTEj7fzE8uxeoxOyLliPkZS6RqGEO/Qh9Asm+Wu4ykZdAEK17z?=
- =?iso-8859-1?Q?buv1Ap7QHdK2whPnm2I+0ztaUY1mZ1iweHL0GqeWgWRu050UpUXIrVwBo/?=
- =?iso-8859-1?Q?SLVUIByvDMARt/WC4F6JZMBwRR3yH5mELW0OvhF6N0tE3hISAGWtDQTRhE?=
- =?iso-8859-1?Q?ng7BdU7h2jI8mjcy+g02lsOdROMcqphF8hjkx947kgZEAekVjqmNT2W7nQ?=
- =?iso-8859-1?Q?QUikGOwFoRtNfSGdZEQWcmoAlj5+X3bPqwe1oJjZHAYlYwQmKFJvuI4lUH?=
- =?iso-8859-1?Q?GPEk4sz0h6R3s1o+9IvvErX6WwjoiHCbIpQADZazwW4ToSqelnfylwAPIh?=
- =?iso-8859-1?Q?lVETxi3mdM0V88Sk78YDb1QXPmVIxvSIcJxQ/NGYby8xTlFLG26dM/7N4Y?=
- =?iso-8859-1?Q?3CMXbg60YiILDlKw63No7nORZaeisSDRpuU3YeTYL3XQawiOg2Bk7M4qmt?=
- =?iso-8859-1?Q?9Sc55vsCiNhH4d0Ck8aIiRrHadxtgnozR5+taE9E2e/Zu3bp/1XVoskdGS?=
- =?iso-8859-1?Q?bh1TxmqSTdTlBcFgG108akmUi6ItEWnBWwnvyRmYlWwBd9or9tPDZFGkg+?=
- =?iso-8859-1?Q?arJfovWyS6+JBCbUEoHyW4talNQLAxuTT8TRRmPEDMEd/us5cXjJhLnRbe?=
- =?iso-8859-1?Q?RYHv5WWTeXJdRkU4Bd5/iGzEe1jmQHwD8ZdT7dXllsb9G/o0TCNCJ1gqjM?=
- =?iso-8859-1?Q?ttxk/Qa0bGQpjgRFUbZFml/k8nKI9AIk8tCL5GAMx6R6YZMsGx4d863bev?=
- =?iso-8859-1?Q?6JBSKegOt0aZPCVYMHpjb8KjrAo6C2tBhM6tpPXEvMYJ0S9QQgrjR/eiAk?=
- =?iso-8859-1?Q?CqiimeNWunYzxkGHKjOiirW96olL2iz9m25wPD1YgHjI4WQOU8GfBeEU1I?=
- =?iso-8859-1?Q?qc4MWJB2VtUOadk2a3IjCQ5caueHWo5ovzMoVy9eXCZ6qqqUCPSwGeICAK?=
- =?iso-8859-1?Q?IUFhtifNBA7ryAFaC2RabsM8YZrSe556ClYtaBHaNWSDFiLQuvXPrNqD6/?=
- =?iso-8859-1?Q?gTsCiCGVF6gutWshDlz3JQHv2LA65J7rfWOGHERGcMh6AVwx+aAfgxoWpU?=
- =?iso-8859-1?Q?2pQzJuSGOEyINMSc6BE=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 8e96bbe3-84f3-11f0-8adc-4578a1afcccb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756484205; x=1757089005; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Z54ks6koaBdMBZxbfT+23ZKmh12XRsqqTIqNVJkSEPA=;
+        b=BcHc6NSZy+sshR5i9jntF9YroDbcQMt+354GsM6WEZp4egL+QFOxhTn2PYZyopRzRW
+         EgJgjYXqfQHTVVdypcPLxBZd3oqzjQHu7E2iltmWElZEdDm1lDj3uLhVWrhldKIv7ZhQ
+         /CmF/RczOdL/wW+OpmVgzmAQ4GB3Ew3se7+rtCrcAGqJ7PIIFn9a9Aqn3e+nG3BC+Nbi
+         QjF6ajbI0urE5UEGn+kIEc2Sp8LwaQsAXeF4FuOPoNouL4+vwUSzdfPcRXMts6nEekgl
+         qErroqXh3qoAZ/0nxM1erJUwyaCV5cM1qd7C568GGvy8S2ouIriJ5T0YV4q2YN0bAy/1
+         sTgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756484205; x=1757089005;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z54ks6koaBdMBZxbfT+23ZKmh12XRsqqTIqNVJkSEPA=;
+        b=KkU/zvajrt67IVDiLnWAgSNiBmui2awCpc0HVvYmOJPiTSIfvA7/k4t3wEbmhgooIV
+         0W9OZVWyS3+5ihknQ7TpOnY5GrPnygr6ikmvWOlVVcBacaG+ZnvV1vkIiLjxccD8ssiL
+         gXL06LoXJYf1dtKsgAso5wwiHi2f8dmd1TuR6TMEDxwTR4m1QdWRIZOns1MPA72KwpTs
+         Gay+Ra37dNOHpK3Z0aeio4hsnvRPlky+6QS2knGEAfoxKLdqYWOcTiCfZtm2fayfLBmO
+         GSLt9Dv/mTfHAQoBaHhumV0KWdyeOjOH5UNrrBeICQiI5OZnpQYv7lxTYuAcVW//19ZR
+         Afgw==
+X-Forwarded-Encrypted: i=1; AJvYcCX/0iwrt49L+2ppweNmAPTXiZ30nfvTtvXtt7riRfcwSaV4qZP4Hb+mhIi1wLCkaRA59PpUa9sShiw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywcg1Xgy8zeqUwhV5/BBzVqkUhl9qHtzXgFxy/ZU086MD7vLSfo
+	aMTtU4XDhKxYs6mL45Q235ntTIl4+Bmx8qSM/x5sxKR7hU2CVQluiD4t
+X-Gm-Gg: ASbGncskoTVdXer054P9A3usO0xEw4+Fl5hBE4jOOW7NCPjTqJ7XDArW780Mq8maDpw
+	xfc3fTgIRGZoXrk9s+aLA9zxacNLUmPLLteKFFTeekuwek1OyONVc1KN4CZtEsc1HhDiMfRm1rb
+	M2G/h35ljAutkQEAAK6d8FX2/cPpB/uHCAMN9ftWL+N7fC4LR+3IRuC5nSwO4rR6xJd5R3naZY+
+	jxzKg3toI8/S2p1hznRz4NcoEXoHjfYTNAIoqLeVILpIbTHXhVovTQFVGZ1dSsvRmuuRgi3D1Lt
+	3A1CU6A7i38qRH+8XTxPzdfX75jbYwIcKBlrs08QhpV9yc42s11dlLgHkyPxOSWDZC/rN1TFuTD
+	1XRWpgUOxZQMAls66tjyZ/w5TYQ==
+X-Google-Smtp-Source: AGHT+IHFMthIQu56FmJTPAjG1v7yHuBILZd/+bp5p7VeDQuEBiXuR91CjcWjr1NtMihiz2nbPfn9Ww==
+X-Received: by 2002:a05:651c:1541:b0:336:96cc:ac0 with SMTP id 38308e7fff4ca-33696cc10c0mr21902341fa.43.1756484204278;
+        Fri, 29 Aug 2025 09:16:44 -0700 (PDT)
+Message-ID: <632637dc-99c0-42f2-a16c-dc9502a1ee2c@gmail.com>
+Date: Fri, 29 Aug 2025 19:16:40 +0300
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR03MB8676.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 837c6ec8-223a-4eee-513a-08dde716090e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2025 16:06:38.3525
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: P8ap13roLu7tvyhIcF73hHipO+WOpO0aNC8YjB2Ho4jZZAp3Lq0niChFFzYxUlY4gbkXuA9OXlQY6wAj/feU9NTg7IF2El3JPWfb7BE8G0E=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB6317
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 3/4] xen/arm: scmi-smc: passthrough SCMI SMC to domain,
+ single agent
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Jan Beulich
+ <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>,
+ Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Grygorii Strashko <grygorii_strashko@epam.com>
+References: <cover.1756399156.git.oleksii_moisieiev@epam.com>
+ <02b79eaa0a611fb43a2146a5f41aec435d3db6c7.1756399156.git.oleksii_moisieiev@epam.com>
+Content-Language: en-US
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+In-Reply-To: <02b79eaa0a611fb43a2146a5f41aec435d3db6c7.1756399156.git.oleksii_moisieiev@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Since eSPI support has been introduced, update the documentation with
-the appropriate description.
 
-Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
 
----
-The discussion is ongoing and can be addressed in V5.
-Clarification is needed from the maintainers.
-Link:
-- https://lore.kernel.org/xen-devel/87y0r4z717.fsf@epam.com/
+On 28.08.25 19:40, Oleksii Moisieiev wrote:
 
-Changes in V5:
-- no changes
+Hello Oleksii
 
-Changes in V4:
-- introduced this patch
----
- docs/man/xl.cfg.5.pod.in | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+the patch lgtm, just some comments
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 5362fb0e9a..292ab10331 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -3072,11 +3072,14 @@ interval of colors (such as "0-4").
- =3Ditem B<nr_spis=3D"NR_SPIS">
-=20
- An optional integer parameter specifying the number of SPIs (Shared
--Peripheral Interrupts) to allocate for the domain. Max is 960 SPIs. If
--the `nr_spis` parameter is not specified, the value calculated by the tool=
-stack
--will be used for the domain. Otherwise, the value specified by the `nr_spi=
-s`
--parameter will be used. The number of SPIs should match the highest interr=
-upt
--ID that will be assigned to the domain.
-+Peripheral Interrupts) to allocate for the domain. Max is 960 for regular =
-SPIs
-+or 5088 for eSPIs (Extended SPIs). The eSPIs includes an additional 1024 S=
-PIs
-+from the eSPI range (4096 to 5119) if the hardware supports extended SPIs
-+(GICv3.1+) and CONFIG_GICV3_ESPI is enabled. If the `nr_spis` parameter is=
- not
-+specified, the value calculated by the toolstack will be used for the doma=
-in.
-+Otherwise, the value specified by the `nr_spis` parameter will be used. Th=
-e
-+number of SPIs should match the highest interrupt ID that will be assigned=
- to
-+the domain.
-=20
- =3Ditem B<trap_unmapped_accesses=3DBOOLEAN>
-=20
---=20
-2.34.1
+> From: Grygorii Strashko <grygorii_strashko@epam.com>
+> 
+> The commit 3e322bef8bc0 ("xen/arm: firmware: Add SCMI over SMC calls
+> handling layer") introduces simple driver which forwards SCMI over SMC
+> calls from hwdom/dom0 to EL3 firmware (TF-A) with a single SCMI OSPM agent
+> support. While it is working gracefully for hwdom/dom0 use case it doesn't
+> cover "thin Dom0 with guest domain, which serves as Driver domain"
+> use-case. In this case HW need to be enable in Driver domain and dom0 is
+> performing only control functions.
+> 
+> The EL3 SCMI firmware (TF-A) with a single SCMI OSPM agent support is
+> pretty generic case for the default vendors SDK and new platforms.
+> 
+> This patch enables passthrough of SCMI SMC single agent interface to the
+> one guest domain serving as Driver domain.
+> 
+> Configure Dom0 to enable SCMI passthrough:
+> 
+>   - dom0: add scmi-smc-passthrough to the Xen Command Line
+> 
+> Enabled SCMI passthrough for guest using toolstack in the following way:
+> 
+>   - domD: xl.cfg add "arm_sci" option as below
+> 
+>     arm_sci = "type=scmi_smc"
+> 
+>   - domD: xl.cfg enable access to the "arm,scmi-shmem"
+> 
+> iomem = [
+>      "47ff0,1@22001",
+> ]
+> 
+>   - domD: add SCMI nodes to the Driver domain partial device tree as in the
+>   below example:
+> 
+> passthrough {
+>     scmi_shm_0: sram@22001000 {
+>         compatible = "arm,scmi-shmem";
+>         reg = <0x0 0x22001000 0x0 0x1000>;
+>     };
+> 
+>     firmware {
+>          compatible = "simple-bus";
+>              scmi: scmi {
+>                  compatible = "arm,scmi-smc";
+>                  shmem = <&scmi_shm_0>;
+>                  ...
+>              }
+>      }
+> }
+> 
+> dom0less case configuration:
+> 
+> - add "xen,sci_type" property for required DomU ("xen,domain") node
+> 
+>     xen,sci_type="scmi_smc"
+> 
+> - add scmi nodes to the Driver domain partial device tree the same way
+> as above and enable access to the "arm,scmi-shmem" according to
+> dom0less documentation. For example:
+> 
+>    scmi_shm_0: sram@22001000 {
+>          compatible = "arm,scmi-shmem";
+>          reg = <0x00 0x22001000 0x00 0x1000>;
+> ->        xen,reg = <0x0 0x47ff0000 0x0 0x1000 0x0 0x22001000>;
+> ->        xen,force-assign-without-iommu;
+>    };
+> 
+> The SCMI SMC single agent interface can be enabled for one and only one
+> domain. In general, the configuration is similar to any other HW
+> passthrough, except explicitly enabling SCMI with "arm_sci" xl.cfg option.
+> 
+> Note that "arm,scmi-smc" and "arm,scmi-shmem" nodes will be removed from
+> dom0/hwdom DT in case of
+
+?
+
+> 
+> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Acked-by: Anthony PERARD <anthony.perard@vates.tech> # tools
+> ---
+> 
+> Changes in v6:
+> - added generated helpers and types go files
+> - rename cmdline parameter to scmi-smc-passthrough
+> - fix goto tag in parse_arm_sci_config
+> 
+> Changes in v5:
+> - rename dom0_scmi_smc_passthrough to scmi_smc_passthrough
+> 
+> Changes in v4:
+> - xl.cfg doc
+> - fix comments from Stefano Stabellini
+> - fix toolstack code as sugested by Anthony PERARD
+>    - use MATCH_OPTION()
+>    - move arm_sci struct and cfg params in "arch_arm"
+> - add SCMI passthrough for dom0less case
+> 
+>   docs/man/xl.cfg.5.pod.in              |  34 ++++++++
+>   docs/misc/arm/device-tree/booting.txt |  15 ++++
+>   docs/misc/xen-command-line.pandoc     |   9 +++
+>   tools/golang/xenlight/helpers.gen.go  |  41 ++++++++++
+>   tools/golang/xenlight/types.gen.go    |  12 +++
+>   tools/include/libxl.h                 |   5 ++
+>   tools/libs/light/libxl_arm.c          |  14 ++++
+>   tools/libs/light/libxl_types.idl      |  10 +++
+>   tools/xl/xl_parse.c                   |  36 +++++++++
+>   xen/arch/arm/dom0less-build.c         |  34 +++++++-
+>   xen/arch/arm/firmware/Kconfig         |   4 +-
+>   xen/arch/arm/firmware/scmi-smc.c      | 112 +++++++++++++++++++++++++-
+>   12 files changed, 321 insertions(+), 5 deletions(-)
+> 
+
+[snip]
+
+> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+> index 0094cf9e40..7422f4be30 100644
+> --- a/xen/arch/arm/dom0less-build.c
+> +++ b/xen/arch/arm/dom0less-build.c
+> @@ -279,6 +279,36 @@ int __init arch_handle_passthrough_prop(struct kernel_info *kinfo,
+>       return sci_assign_dt_device(kinfo->bd.d, node);
+>   }
+>   
+> +int __init domu_dt_sci_parse(struct dt_device_node *node,
+> +                             struct xen_domctl_createdomain *d_cfg)
+> +{
+> +    const char *sci_type = NULL;
+
+NIT: I think "= NULL" can be omitted.
+
+> +    int ret;
+> +
+> +    d_cfg->arch.arm_sci_type = XEN_DOMCTL_CONFIG_ARM_SCI_NONE;
+> +
+> +    if ( !IS_ENABLED(CONFIG_ARM_SCI) ||
+> +         !dt_property_read_bool(node, "xen,sci_type") )
+> +        return 0;
+> +
+> +    ret = dt_property_read_string(node, "xen,sci_type", &sci_type);
+> +    if ( ret )
+> +        return ret;
+> +
+> +    if ( !strcmp(sci_type, "none") )
+> +        d_cfg->arch.arm_sci_type = XEN_DOMCTL_CONFIG_ARM_SCI_NONE;
+> +    else if ( !strcmp(sci_type, "scmi_smc") )
+> +        d_cfg->arch.arm_sci_type = XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC;
+> +    else
+> +    {
+> +        printk(XENLOG_ERR "xen,sci_type in not valid (%s) for domain %s\n",
+> +               sci_type, dt_node_name(node));
+> +        return -EINVAL;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+>   int __init arch_parse_dom0less_node(struct dt_device_node *node,
+>                                       struct boot_domain *bd)
+>   {
+> @@ -288,7 +318,9 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
+>   
+>       d_cfg->arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
+>       d_cfg->flags |= XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
+> -    d_cfg->arch.arm_sci_type = XEN_DOMCTL_CONFIG_ARM_SCI_NONE;
+> +
+> +    if ( domu_dt_sci_parse(node, d_cfg) )
+> +        panic("Error getting SCI configuration\n");
+>   
+>       if ( !dt_property_read_u32(node, "nr_spis", &d_cfg->arch.nr_spis) )
+>       {
+> diff --git a/xen/arch/arm/firmware/Kconfig b/xen/arch/arm/firmware/Kconfig
+> index bbf88fbb9a..5c5f0880c4 100644
+> --- a/xen/arch/arm/firmware/Kconfig
+> +++ b/xen/arch/arm/firmware/Kconfig
+> @@ -25,7 +25,9 @@ config SCMI_SMC
+>   	  doorbell mechanism and Shared Memory for transport ("arm,scmi-smc"
+>   	  compatible only). The value of "arm,smc-id" DT property from SCMI
+>   	  firmware node is used to trap and forward corresponding SCMI SMCs
+> -	  to firmware running at EL3, for calls coming from the hardware domain.
+> +	  to firmware running at EL3, for calls coming from the hardware domain or
+> +	  driver domain.
+> +	  Use with EL3 firmware which supports only single SCMI OSPM agent.
+>   
+>   endchoice
+>   
+> diff --git a/xen/arch/arm/firmware/scmi-smc.c b/xen/arch/arm/firmware/scmi-smc.c
+> index 13d1137592..edc54b11b6 100644
+> --- a/xen/arch/arm/firmware/scmi-smc.c
+> +++ b/xen/arch/arm/firmware/scmi-smc.c
+> @@ -14,6 +14,8 @@
+>   #include <xen/device_tree.h>
+>   #include <xen/errno.h>
+>   #include <xen/init.h>
+> +#include <xen/iocap.h>
+> +#include <xen/param.h>
+>   #include <xen/sched.h>
+>   #include <xen/types.h>
+>   
+> @@ -22,7 +24,11 @@
+>   
+>   #define SCMI_SMC_ID_PROP   "arm,smc-id"
+>   
+> +static bool __ro_after_init opt_scmi_smc_passthrough = false;
+
+NIT: I think "= false" can be omitted.
+
+
+> +boolean_param("scmi-smc-passthrough", opt_scmi_smc_passthrough);
+> +
+>   static uint32_t __ro_after_init scmi_smc_id;
+> +static struct domain __read_mostly *scmi_dom;
+>   
+>   /*
+>    * Check if provided SMC Function Identifier matches the one known by the SCMI
+> @@ -50,7 +56,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
+>           return false;
+>   
+>       /* Only the hardware domain should use SCMI calls */
+> -    if ( !is_hardware_domain(current->domain) )
+> +    if ( scmi_dom != current->domain )
+>       {
+>           gdprintk(XENLOG_WARNING, "SCMI: Unprivileged access attempt\n");
+>           return false;
+> @@ -75,12 +81,45 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
+>       return true;
+>   }
+>   
+> +static int
+> +scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
+> +{
+> +    if ( config->arch.arm_sci_type != XEN_DOMCTL_CONFIG_ARM_SCI_NONE &&
+> +         config->arch.arm_sci_type != XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC )
+> +        return -EINVAL;
+> +
+> +    return 0;
+> +}
+> +
+>   static int scmi_smc_domain_init(struct domain *d,
+>                                   struct xen_domctl_createdomain *config)
+>   {
+> -    if ( !is_hardware_domain(d) )
+> +    /*
+> +     * scmi_passthrough is not enabled:
+> +     * - proceed only for hw_domain
+> +     * - fail if guest domain has SCMI enabled.
+> +     */
+> +    if ( !opt_scmi_smc_passthrough && !is_hardware_domain(d) )
+> +    {
+> +        if ( config->arch.arm_sci_type == XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC )
+> +            return -EINVAL;
+> +        else
+> +            return 0;
+> +    }
+> +    /*
+> +     * scmi_passthrough is enabled:
+> +     * - ignore hw_domain
+> +     * - proceed only for domain with SCMI enabled.
+> +     */
+> +    if ( opt_scmi_smc_passthrough &&
+> +         (config->arch.arm_sci_type == XEN_DOMCTL_CONFIG_ARM_SCI_NONE ||
+> +          is_hardware_domain(d)) )
+>           return 0;
+>   
+> +    if ( scmi_dom )
+> +        return -EEXIST;
+> +
+> +    scmi_dom = d;
+>       d->arch.sci_enabled = true;
+>       printk(XENLOG_DEBUG "SCMI: %pd init\n", d);
+>       return 0;
+> @@ -88,12 +127,77 @@ static int scmi_smc_domain_init(struct domain *d,
+>   
+>   static void scmi_smc_domain_destroy(struct domain *d)
+>   {
+> -    if ( !is_hardware_domain(d) )
+> +    if ( scmi_dom && scmi_dom != d )
+>           return;
+>   
+> +    scmi_dom = NULL;
+> +    d->arch.sci_enabled = false;
+>       printk(XENLOG_DEBUG "SCMI: %pd destroy\n", d);
+>   }
+>   
+> +/*
+> + * Handle Dom0 SCMI SMC specific DT nodes
+> + *
+> + * if scmi_smc_passthrough=false:
+> + * - Copy SCMI nodes into Dom0 device tree.
+> + * if scmi_smc_passthrough=true:
+> + * - skip SCMI nodes from Dom0 DT
+> + * - give dom0 control access to SCMI shmem MMIO, so SCMI can be passed
+> + *   through to guest.
+> + */
+> +static bool scmi_smc_dt_handle_node(struct domain *d,
+> +                                    struct dt_device_node *node)
+> +{
+> +    static const struct dt_device_match shmem_matches[] __initconst = {
+> +        DT_MATCH_COMPATIBLE("arm,scmi-shmem"),
+> +        { /* sentinel */ },
+> +    };
+> +    static const struct dt_device_match scmi_matches[] __initconst = {
+> +        DT_MATCH_PATH("/firmware/scmi"),
+> +        { /* sentinel */ },
+> +    };
+> +
+> +    /* skip scmi shmem node for dom0 if scmi not enabled */
+> +    if ( dt_match_node(shmem_matches, node) && !sci_domain_is_enabled(d) )
+> +    {
+> +        dt_dprintk("Skip scmi shmem node\n");
+> +        return true;
+> +    }
+> +
+> +    /*
+> +     * skip scmi node for dom0 if scmi not enabled, but give dom0 control
+> +     * access to SCMI shmem
+> +     */
+> +    if ( dt_match_node(scmi_matches, node) && !sci_domain_is_enabled(d) )
+> +    {
+> +        struct dt_device_node *shmem_node;
+> +        const __be32 *prop;
+> +        u64 paddr, size;
+
+NIT: uint64_t please for the new code
+
+> +        int ret;
+> +
+> +        /* give dom0 control access to SCMI shmem */
+> +        prop = dt_get_property(node, "shmem", NULL);
+> +        if ( !prop )
+> +            return true;
+> +
+> +        shmem_node = dt_find_node_by_phandle(be32_to_cpu(*prop));
+> +        if ( !shmem_node )
+> +            return true;
+> +
+> +        ret = dt_device_get_address(shmem_node, 0, &paddr, &size);
+> +        if ( ret )
+> +            return true;
+> +
+> +        ret = iomem_permit_access(d, paddr_to_pfn(paddr),
+> +                                  paddr_to_pfn(paddr + size - 1));
+
+Shouldn't we at least warn if the access to SCMI shmem is not permitted 
+for Dom0? Or this is not going to be an issue at all?
+
+
+> +
+> +        dt_dprintk("Skip scmi node\n");
+> +        return true;
+> +    }
+> +
+> +    return false;
+> +}
+> +
+>   static int __init scmi_check_smccc_ver(void)
+>   {
+>       if ( smccc_ver < ARM_SMCCC_VERSION_1_1 )
+> @@ -108,8 +212,10 @@ static int __init scmi_check_smccc_ver(void)
+>   
+>   static const struct sci_mediator_ops scmi_smc_ops = {
+>       .handle_call = scmi_handle_smc,
+> +    .domain_sanitise_config = scmi_smc_domain_sanitise_config,
+>       .domain_init = scmi_smc_domain_init,
+>       .domain_destroy = scmi_smc_domain_destroy,
+> +    .dom0_dt_handle_node = scmi_smc_dt_handle_node,
+>   };
+>   
+>   /* Initialize the SCMI layer based on SMCs and Device-tree */
+
 
