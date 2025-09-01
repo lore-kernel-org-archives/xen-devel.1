@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666B0CA100F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 626DECA100E
 	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 22:10:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1105404.1456387 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1105402.1456369 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjS-0006lP-Ax; Mon, 01 Sep 2025 22:10:34 +0000
+	id 1utCjQ-0006Ju-GV; Mon, 01 Sep 2025 22:10:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1105404.1456387; Mon, 01 Sep 2025 22:10:34 +0000
+Received: by outflank-mailman (output) from mailman id 1105402.1456369; Mon, 01 Sep 2025 22:10:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjS-0006kP-5G; Mon, 01 Sep 2025 22:10:34 +0000
-Received: by outflank-mailman (input) for mailman id 1105404;
- Mon, 01 Sep 2025 22:10:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1utCjQ-0006Jl-CJ; Mon, 01 Sep 2025 22:10:32 +0000
+Received: by outflank-mailman (input) for mailman id 1105402;
+ Mon, 01 Sep 2025 22:10:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pPXY=3M=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1utCjQ-0005XP-Gp
- for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:32 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 79e20492-8780-11f0-8adc-4578a1afcccb;
- Tue, 02 Sep 2025 00:10:31 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-55f7ad815ceso1676658e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:31 -0700 (PDT)
+ id 1utCjP-00055o-5I
+ for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:31 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 787b9eec-8780-11f0-8dd7-1b34d833f44b;
+ Tue, 02 Sep 2025 00:10:29 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-55f720ffe34so2422009e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:29 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.29
+ 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 15:10:30 -0700 (PDT)
+ Mon, 01 Sep 2025 15:10:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,206 +47,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79e20492-8780-11f0-8adc-4578a1afcccb
+X-Inumbo-ID: 787b9eec-8780-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756764631; x=1757369431; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1756764629; x=1757369429; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pux8zQR0d0n5/4MKkffDUfDraLZ/szsPvbUCV13VP9s=;
-        b=PGGhcZ/hfRBGET+34FZXXy8e9qfhTeoJKvb0IdwX+Ak+g0G97wyBa26UM7q0xp43jI
-         gq/fsySj86GTvTPOPUVlgZTyZicgN9pMkqlr85sGakaQeYQdmh9RQBjnJ4nvUUbEB3h0
-         xaicmoCEs7a8vEPdS/2PG9twkX76E1FY6mSau1bgjeLXHZVjNgqQBeY9GO2gFQB0iLwN
-         pxwUdc2pAQc0qMhab4xCzgs8wmdWf2+OQyKNrc55WRj1JMzriure58cY1J9eEKFZfu8N
-         +YnrwHNmG0lA63ccmbrXAbCoUEhESIXDN4S2HeMYTQ6x4sFKLLzepyfuVIWvcZvEXjU9
-         5tXg==
+        bh=h+LNbMBKwYezbM5EFVtZ7DgCmMZXO6MyvOXCUpxJxe0=;
+        b=bCJownRWF8EZOLTdvoJVuxGdEXwx3yuoi+/VNSQxmVMKJfJrmeNXqFU7OYEolzIZRX
+         EQwvlwdu0UBku8xSb63HPpD5hrl77TKs63OHnZDjBI0WvbALfM4IYOBNALZOc1YVCdxu
+         fXG+zl/fMhEDyYel4+d8E09S0V0nvFekHkgKvfWguEI1v2GXXHaNGrkKkt3fUyEZzHmb
+         fL48eTzwjAIK384Bu0v6ej5uE4nZlk5nsCSICqtbAu4hc7QUd2ZR839EUiLtnKjv7SKM
+         5v5uLtqpRUCL8y1+WS5P3REYHoEeq8isE5wfKhalXk8tteGwKmU3mMrccfc+Ire3UP+v
+         BEag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756764631; x=1757369431;
+        d=1e100.net; s=20230601; t=1756764629; x=1757369429;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pux8zQR0d0n5/4MKkffDUfDraLZ/szsPvbUCV13VP9s=;
-        b=uQsueeDGTNzsWjuH/K+YRLhIGDR+jjCoIml4wkolRxMpHMNvGLX3k+C5aXone2kFUu
-         +UqIWI4dfgeEmuau/BnjWUKxTyFYcPigvRe0+dQDBQ2oAPeXKQ/nlCkkl9fWGGMCbUk9
-         C549kJeWLovTEyee0a6Bpsqs4HkzUaHVo4qzSqusE/4F6qOoVpoSl+9wXSSKeowjTYzb
-         tbhFDxJwNZaWojYrd6vwgVoHEmAd2hJ2BxMrYknyHGZ+ntofIGImnkMNoXIp3i/p7Gfj
-         9QJQQBLp0tKu2jBiyKJyXzKvrCYaJ06kLx9KEYeAr8KOBeHEOOZfsdyQKlXds7iGN1ts
-         mZWg==
-X-Gm-Message-State: AOJu0YwIaqPx7/xzKFkBzl5kO6Gd937/V3oa6KsUlwZKnDpqTnZE/fB3
-	8AfeoVGjfRCLJlBQs0832tvLz39NfrMjQ3h4Fr0vw9a+pvCv5dSKnCJ/iDSzHbDm
-X-Gm-Gg: ASbGncteqzkOOGFq9iF6sSGTRZ6kyYuDVoLndEqiQ7gyXNsoO5h5vdy1ys7t8GgYqDC
-	TtNZi7CIduHgzSNDVRgbOei47yjXW3JtzqpMvg+mwuTio/BxNkribCwhzMTGMKObpYTFquNmeZJ
-	3GbpW98AURgh4zRD82lsgc4PHzl0dfCLYZjM8KuNT7O0ijJ4QaYtqnePyNtw80G0Otv33KoJYD3
-	qxSkH2z6ctMRHunXMRhvLNEx0ohtTizevPLLrd1hRYypGeyahkYK32opul8GUUJUcqbS53Usi6F
-	Ul/G2mqORPHdRUkYuzh/J0TNroyPMkvONugHsaN7GR+pE8QzoGz7c6pX/RfpXy4kbfPMJeXZkl5
-	uAD8Lh3/YR0zyyTk5yBcr6o1EN/2+0/6LbsclHZEheaa+ZNwlJT0FH7iicqklaV0H0S485yC4
-X-Google-Smtp-Source: AGHT+IHac5NYtAevecrJdPsnvQsSQwBeZX1PPUz7eIaje6LakHkn37It/dfRC3WdGHf3MYfBkW7PZQ==
-X-Received: by 2002:a05:6512:2c94:b0:55f:5b65:a3e3 with SMTP id 2adb3069b0e04-55f7093e96amr2529872e87.35.1756764631025;
-        Mon, 01 Sep 2025 15:10:31 -0700 (PDT)
+        bh=h+LNbMBKwYezbM5EFVtZ7DgCmMZXO6MyvOXCUpxJxe0=;
+        b=YYDUWaKos6KSJJMqtP7ktLNif3UiDsHeMQMCC15zBJ9znowBZSXQYtKovCwHJgPpfe
+         d2jVLDTU3p2oNSwg6kx1ugc9tIcpSpODKhO9L8TwBym5K3yuV2MMRYbREdM0gmeCIyRN
+         BOYg0AlTt3969JgzmbSgrHc4U7TcyBRRpo1l12utrdoJxvwy6Jmi7xC8fuCwnhPrO0KB
+         yEBTvIVs+wxJW6SdgonjfMu6i1pU7jCRS/t3j2cTRGQBwXODKXN9UeHH1kmpVHiG91Vp
+         JWNpsWFOj70g02qCHHQc6Ulc7EqwwVAAvGqC4AjyrCpcbEy04ihhN7RgleauDWESeemv
+         HjDA==
+X-Gm-Message-State: AOJu0YzyNsbX4ZFM0X1y7xdZpYBxsZi0wfJLe0pW/ELoM45zG/0yW3RN
+	DSHvpFv0OtOhyQnk0V4KY3X8PlgwtS/MAs9lx0qI86dym0c/yXSp4d0nZ6PGFGPF
+X-Gm-Gg: ASbGnctnHwkRWqsMmslDb1PCSHDiUBY+yn31zweN4qCkBeAfsmN27RbplFwfmbPnZaQ
+	1IPlJukAKC9nB8DLY2HiA+G5tiVEC4BfK0mT6JPPRGdY0tZG4C8r9bxnEEbsHcTxutZb/cnybNx
+	3ghrR5SLK9C/LTnpGdafWf99Q1ojccX/LSaef3GItazVHpL5OHCKqzwd21xghCdfrM2Ca7z83/R
+	GwWFqp/RHC8uCCsf5BL1BP6aQ3Xljh9lWiNBH6yYry8Y8K6OAeaqzInPI1JtRXC3LCHLI8Fl/6E
+	VXmZ0gKUggoKSQ70BJId0TETYYyaVOWUkh0tiDHL2Kg3nqsZ/TI2NNYw0VL7JyuvtTJEqX7oHeW
+	JnYhHh/IQ9Vdbf0QSGMDDd87LH3mS6KeTjIMSMLI2vp4PJCEkyEHy00jJrPDH/cxH7+6L1SbXd1
+	fs7zvq3Bc=
+X-Google-Smtp-Source: AGHT+IEa5RjJ2GSGquDO+Z4AQEB5nVu4GpDaAJNmK102svb69HNEnk3KnmcyEzQrF2S0OM2mun/7QA==
+X-Received: by 2002:ac2:58e9:0:b0:55f:67c6:be48 with SMTP id 2adb3069b0e04-55f6f6ab662mr1948372e87.1.1756764628474;
+        Mon, 01 Sep 2025 15:10:28 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>,
-	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH v6 08/13] xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
-Date: Tue,  2 Sep 2025 01:10:12 +0300
-Message-ID: <20b6774cafc2d4d6c92c220d3aa94a666d55c930.1756763487.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 06/13] xen/arm: irq: Restore state of local IRQs during system resume
+Date: Tue,  2 Sep 2025 01:10:10 +0300
+Message-ID: <18c51957660441c945d51b02be965fbcc19c7c2b.1756763487.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1756763487.git.mykola_kvach@epam.com>
 References: <cover.1756763487.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Invoke PSCI SYSTEM_SUSPEND to finalize Xen's suspend sequence on ARM64 platforms.
-Pass the resume entry point (hyp_resume) as the first argument to EL3. The resume
-handler is currently a stub and will be implemented later in assembly. Ignore the
-context ID argument, as is done in Linux.
+On ARM, the first 32 interrupts (SGIs and PPIs) are banked per-CPU
+and not restored by gic_resume (for secondary cpus).
 
-Only enable this path when CONFIG_SYSTEM_SUSPEND is set and
-PSCI version is >= 1.0.
+This patch introduces restore_local_irqs_on_resume, a function that
+restores the state of local interrupts on the target CPU during
+system resume.
 
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+It iterates over all local IRQs and re-enables those that were not
+disabled, reprogramming their routing and affinity accordingly.
+
+The function is invoked from start_secondary, ensuring that local IRQ
+state is restored early during CPU bring-up after suspend.
+
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in v6:
-- move calling of call_psci_system_suspend to commit that
-  implements system_suspend call
-
-Changes in v4:
-  - select the appropriate PSCI SYSTEM_SUSPEND function ID based on platform
-  - update comments and commit message to reflect recent changes
-
-Changes in v3:
-  - return PSCI_NOT_SUPPORTED instead of a hardcoded 1 on ARM32
-  - check PSCI version before invoking SYSTEM_SUSPEND in call_psci_system_suspend
+Changes in V6:
+- Call handler->disable() instead of just setting the _IRQ_DISABLED flag
+- Move the system state check outside of restore_local_irqs_on_resume()
 ---
- xen/arch/arm/arm64/head.S          |  8 ++++++++
- xen/arch/arm/include/asm/psci.h    |  1 +
- xen/arch/arm/include/asm/suspend.h | 22 ++++++++++++++++++++++
- xen/arch/arm/psci.c                | 23 ++++++++++++++++++++++-
- 4 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/arm/include/asm/suspend.h
+ xen/arch/arm/irq.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 72c7b24498..3522c497c5 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -561,6 +561,14 @@ END(efi_xen_start)
- 
- #endif /* CONFIG_ARM_EFI */
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+FUNC(hyp_resume)
-+        b .
-+END(hyp_resume)
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- /*
-  * Local variables:
-  * mode: ASM
-diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
-index 48a93e6b79..bb3c73496e 100644
---- a/xen/arch/arm/include/asm/psci.h
-+++ b/xen/arch/arm/include/asm/psci.h
-@@ -23,6 +23,7 @@ int call_psci_cpu_on(int cpu);
- void call_psci_cpu_off(void);
- void call_psci_system_off(void);
- void call_psci_system_reset(void);
-+int call_psci_system_suspend(void);
- 
- /* Range of allocated PSCI function numbers */
- #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
-diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-new file mode 100644
-index 0000000000..7e04c6e915
---- /dev/null
-+++ b/xen/arch/arm/include/asm/suspend.h
-@@ -0,0 +1,22 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef __ASM_ARM_SUSPEND_H__
-+#define __ASM_ARM_SUSPEND_H__
-+
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+void hyp_resume(void);
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
-+#endif /* __ASM_ARM_SUSPEND_H__ */
-+
-+ /*
-+  * Local variables:
-+  * mode: C
-+  * c-file-style: "BSD"
-+  * c-basic-offset: 4
-+  * tab-width: 4
-+  * indent-tabs-mode: nil
-+  * End:
-+  */
-diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
-index b6860a7760..c9d126b195 100644
---- a/xen/arch/arm/psci.c
-+++ b/xen/arch/arm/psci.c
-@@ -17,17 +17,20 @@
- #include <asm/cpufeature.h>
- #include <asm/psci.h>
- #include <asm/acpi.h>
-+#include <asm/suspend.h>
- 
- /*
-  * While a 64-bit OS can make calls with SMC32 calling conventions, for
-  * some calls it is necessary to use SMC64 to pass or return 64-bit values.
-- * For such calls PSCI_0_2_FN_NATIVE(x) will choose the appropriate
-+ * For such calls PSCI_*_FN_NATIVE(x) will choose the appropriate
-  * (native-width) function ID.
-  */
- #ifdef CONFIG_ARM_64
- #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN64_##name
-+#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN64_##name
- #else
- #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN32_##name
-+#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN32_##name
- #endif
- 
- uint32_t psci_ver;
-@@ -60,6 +63,24 @@ void call_psci_cpu_off(void)
-     }
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index 6c899347ca..ddd2940554 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -116,6 +116,41 @@ static int init_local_irq_data(unsigned int cpu)
+     return 0;
  }
  
-+int call_psci_system_suspend(void)
++/*
++ * The first 32 interrupts (PPIs and SGIs) are per-CPU,
++ * so call this function on the target CPU to restore them.
++ *
++ * SPIs are restored via gic_resume.
++ */
++static void restore_local_irqs_on_resume(void)
 +{
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct arm_smccc_res res;
++    int irq;
 +
-+    if ( psci_ver < PSCI_VERSION(1, 0) )
-+        return PSCI_NOT_SUPPORTED;
++    spin_lock(&local_irqs_type_lock);
 +
-+    /* 2nd argument (context ID) is not used */
-+    arm_smccc_smc(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND), __pa(hyp_resume), &res);
-+    return PSCI_RET(res);
-+#else
-+    dprintk(XENLOG_WARNING,
-+            "SYSTEM_SUSPEND not supported (CONFIG_SYSTEM_SUSPEND disabled)\n");
-+    return PSCI_NOT_SUPPORTED;
-+#endif
++    for ( irq = 0; irq < NR_LOCAL_IRQS; irq++ )
++    {
++        struct irq_desc *desc = irq_to_desc(irq);
++
++        spin_lock(&desc->lock);
++
++        if ( test_bit(_IRQ_DISABLED, &desc->status) )
++        {
++            spin_unlock(&desc->lock);
++            continue;
++        }
++
++        /* Disable the IRQ to avoid assertions in the following calls */
++        desc->handler->disable(desc);
++        gic_route_irq_to_xen(desc, GIC_PRI_IRQ);
++        desc->handler->startup(desc);
++
++        spin_unlock(&desc->lock);
++    }
++
++    spin_unlock(&local_irqs_type_lock);
 +}
 +
- void call_psci_system_off(void)
+ static int cpu_callback(struct notifier_block *nfb, unsigned long action,
+                         void *hcpu)
  {
-     if ( psci_ver > PSCI_VERSION(0, 1) )
+@@ -134,6 +169,10 @@ static int cpu_callback(struct notifier_block *nfb, unsigned long action,
+             printk(XENLOG_ERR "Unable to allocate local IRQ for CPU%u\n",
+                    cpu);
+         break;
++    case CPU_STARTING:
++        if ( system_state == SYS_STATE_resume )
++            restore_local_irqs_on_resume();
++        break;
+     }
+ 
+     return notifier_from_errno(rc);
 -- 
 2.48.1
 
