@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B039CA0FF0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 14:03:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1104912.1455928 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08AADCA0FF0
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 14:03:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1104927.1455939 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ut57J-0003EA-QV; Mon, 01 Sep 2025 14:02:41 +0000
+	id 1ut580-0003mX-6t; Mon, 01 Sep 2025 14:03:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1104912.1455928; Mon, 01 Sep 2025 14:02:41 +0000
+Received: by outflank-mailman (output) from mailman id 1104927.1455939; Mon, 01 Sep 2025 14:03:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ut57J-0003E3-Nm; Mon, 01 Sep 2025 14:02:41 +0000
-Received: by outflank-mailman (input) for mailman id 1104912;
- Mon, 01 Sep 2025 14:02:40 +0000
+	id 1ut580-0003mQ-3t; Mon, 01 Sep 2025 14:03:24 +0000
+Received: by outflank-mailman (input) for mailman id 1104927;
+ Mon, 01 Sep 2025 14:03:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=noMw=3M=epam.com=Oleksandr_Tyshchenko@srs-se1.protection.inumbo.net>)
- id 1ut57I-0003Dx-GE
- for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 14:02:40 +0000
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c201::1])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=UGQU=3M=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1ut4xp-0006av-1p
+ for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 13:52:53 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 513cd045-873c-11f0-8dd7-1b34d833f44b;
- Mon, 01 Sep 2025 16:02:38 +0200 (CEST)
-Received: from PA4PR03MB7038.eurprd03.prod.outlook.com (2603:10a6:102:e1::6)
- by PA4PR03MB6782.eurprd03.prod.outlook.com (2603:10a6:102:e3::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.21; Mon, 1 Sep
- 2025 14:02:32 +0000
-Received: from PA4PR03MB7038.eurprd03.prod.outlook.com
- ([fe80::62a8:3ed7:1b8e:677b]) by PA4PR03MB7038.eurprd03.prod.outlook.com
- ([fe80::62a8:3ed7:1b8e:677b%4]) with mapi id 15.20.9073.026; Mon, 1 Sep 2025
- 14:02:32 +0000
+ id f37f1b5c-873a-11f0-8dd7-1b34d833f44b;
+ Mon, 01 Sep 2025 15:52:51 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b04271cfc3eso148101866b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 06:52:51 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b0413782b94sm441257966b.35.2025.09.01.06.52.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 01 Sep 2025 06:52:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,175 +47,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 513cd045-873c-11f0-8dd7-1b34d833f44b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q/jtqrcNx7Uos3GBXRtj0DETlRmRItZfGhqCD1Ksol8t8BZY2GrVGMpVAqCQt6bH3tNn2n7FV3aYmr4ekelSayMT3hQjR+/npzK2N6mS1OsWofPewTBH0AID8O7UncphJGGTaKe6hL7jtUGlQ11U3qUJpPGl6e3dfPrlTPszFWJj5sAntmmPpyPMpW6LfGb3t4UOGMjmZ08ss5OpkGQhg2dKLvWv4JwaMrDYHgMrrZCClwGt+s1poIsKXeV0udECqAY5Jhj822V6IWgUuMeiRjfAEgd0xG/nhuMV/A4Z54ByzZHxjZUVloEoDh7noS+BITtzWz5C9ivxqqTgVF8Dcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B0kqapVvPaKhbnW+HIkL0/A0sxyvBcPC+2xYi+c0WuU=;
- b=wTxhdi9/pAQXZk1XS3O7bJdCcRtqNalwTuNKqP8PBeS1opPm8GFcjpsoxRMnLpyHsaoWdM+0Wm9fhKY4/ZWDcykXb9IkMMVr+P3dSOOxpMHWQ6dcg/uSU5fLRxA+OxBNo/bGiPo9URRdz/pVSOTOU87ix1eR0stLu+ANaZ179jT/YcRzCoFXXZk2TAWC/oenW/QsCoNqbk5Rd9t4n7jwol3trj2gQIdjWqtNkWymdWO1OBRGLjY+rGNV7kpYIn+haOnC968AQWCXAMghRdeYbv9ksMoTLw4wbQYQzL/sa/PJf3ZShrwagi5BoDweJOqv5d1lmsvQ/onbufDzEusMoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B0kqapVvPaKhbnW+HIkL0/A0sxyvBcPC+2xYi+c0WuU=;
- b=kcCz6AsVnA6KBhRfdeotLn3jwmOHvfKbcbRmyyaWyZyAKCN9nR+kNP/JeQxDWkOZ+OV7Q+TmjX6lFDKogA90+ry1mBeunnJdrY1QTr5hy3LVYZBPlJ7/mklo0M30AHVmbuzzJkJfneAk++MIQRgM5DvO7I6v18LVWntVckBHYMs8VJ9dcexytJWbByfR6n8Pmf7HhKtOdSScTHelxWwt5gD10p6oVDa6V2909NIzFoMUhtAvGC9uUlq4N1oICd2pLNwhFGLIh710CTJDgbWr64LS54rYbQlKkZYy+bdK+JqhXeEznHRmh/mCqjL56nEX7/2lw2lVdTsz/uIcadyKMA==
-From: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
-	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH] xen/arm: platform: Select GICV3 dependency for RCAR4
-Thread-Topic: [PATCH] xen/arm: platform: Select GICV3 dependency for RCAR4
-Thread-Index: AQHcG0kPDoyzfEe8LUCSfOma0fVaUg==
-Date: Mon, 1 Sep 2025 14:02:32 +0000
-Message-ID: <20250901140231.1322170-1-oleksandr_tyshchenko@epam.com>
-Accept-Language: en-US, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA4PR03MB7038:EE_|PA4PR03MB6782:EE_
-x-ms-office365-filtering-correlation-id: e7a45d58-4967-4692-1754-08dde9603255
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|42112799006|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?Ep1uFyrqeiMUL6r7fxQQiBCOL2JjpFmdZ+O481Ui/7kMGYnOf2zMEtVNXk?=
- =?iso-8859-1?Q?WPcqdbOf3Gm547r7hmGuLLxYFL2nu+5X0Rqq00bZcYgQvCk9b/QYED128/?=
- =?iso-8859-1?Q?ZAVzKc2JBwIbuTgHMBSwlPluxH9ytIhRwWfHlVX0+pfM1vpfCDQYzjzIfU?=
- =?iso-8859-1?Q?eyFu9WmB0i10To16MnBWrLTQ8g1uwcHF7a5h1JlwdbPtZn/UilT8QAGXy7?=
- =?iso-8859-1?Q?K2EJ11jzHmW8HfakpEACdikcCihBavL6ycNEx4kkL3YZErzxN6/1zyj26u?=
- =?iso-8859-1?Q?CWE5xyjhDdafPFnR3BJYvrstSygQmxmETlkHQWsfZodsuSQBvdAv8wzM0r?=
- =?iso-8859-1?Q?FOWoSryjEIu06FwBx8j1xalzEuaWMUtp+g1z0JQ0Evxkjj6T6TJ2cs1JQv?=
- =?iso-8859-1?Q?i6DKOTBJ0KD+5k/xP8xGO6OLQ1KhCnfqTsBvJefG6qtfbvwD5tnJ3y9PY5?=
- =?iso-8859-1?Q?I4ErdmiBdmeDQnzIT7tQOm+WMj2XLYrIbs1OOXoApoUVJz4lQT8g1PPO9v?=
- =?iso-8859-1?Q?koiaK+5uyOEbfOqz8ceJZeV+ei3CcQGtwGwuaZY8rDZFfOJd20DtcunrpH?=
- =?iso-8859-1?Q?hMZsCQp/glkFOxaYJAQk21BVAXaNzQcSdYAWlye/B2CgXTBM6C5/1VFJQr?=
- =?iso-8859-1?Q?Z5lWNg76I5F5x/SMu81CTcuKb5PtMHEtuXWNwWO9i4mhhm3H7oTqjaYBcq?=
- =?iso-8859-1?Q?NuaSdLF3dwCkgBDqKuRuofjLo+0Kiqk/l1qvbQacog1/sOLdAZNaxUA+uy?=
- =?iso-8859-1?Q?uojGQw3kQ/AhmfM98ecAV4vy5mKwedY5UPLgGBns0NAbWaHKynkRnjrxnR?=
- =?iso-8859-1?Q?5tn3nadQrPOr9LO9WdgMkJ6d+DXyWZfhUcqjoYnP4GxVBsEt1SGRky+jSo?=
- =?iso-8859-1?Q?SVGWw/ycFwGCyrUXb80ewiQXqclVhettMGkIgSL89/TDAIXPVkSKkA3cwg?=
- =?iso-8859-1?Q?nhxINDD9O1Ep5J8wZXYRz+vMFumF6y5d/ksiy+NdU+Ylp23oUi1wSICU2w?=
- =?iso-8859-1?Q?Rq8DvbFkq+MRxClEW0UkHqm8tWQtMz3moovUAFX+JB/aGX5RWHP7MUCugu?=
- =?iso-8859-1?Q?qtZPJxRpW7ExXh76A3ioun+gGEmI1njtP5b5ANuT1jnEyMy5TBes4AmKXk?=
- =?iso-8859-1?Q?+v7vvgWeoU/13ZbnbVSljBvBgH+H9AVKk4LoQldjXZ8pfKkh0hiqWyw6GU?=
- =?iso-8859-1?Q?QYlWvuvPtO2hLH/iUzi8G6WkrUqE8EiuEc7JqQpmTvpG+7Hz7dPU5ZHSIg?=
- =?iso-8859-1?Q?CGuEQCwIQuYoi5STIhsevdqpUR2uX0REKd0WqKF4BaWayqMFrZWS4LCk48?=
- =?iso-8859-1?Q?y5lsUR0TuQt6JFQDw5c1i4h0LLNMOiD0M+y1cSpWMIMIToe3gCTXWlSxB5?=
- =?iso-8859-1?Q?zjtDrd4cnqX7AKh6ln7j75cj9w/ocJCrXMjN5aVOtVSJz52ziUTPw7qvQL?=
- =?iso-8859-1?Q?NzlvM268zX5+1PvRABjgf4N4NhnmAejAmNebtuJ7TvcNY69BqZTIiPuD0/?=
- =?iso-8859-1?Q?LAOTeFRUeELKiiCPfvo17EZ1E/E03MZLfpjgwjZzxG0w=3D=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR03MB7038.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(42112799006)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?QI+APgQg0nfP3i+HVP3WBtvtVuZk/Dm4BGnhxG63jQARY2IUbX8l8Yw/0T?=
- =?iso-8859-1?Q?gnuy6awMTXFGrSj0wyWJH/0Q4RPIC/anqyLkNZmT4CRlWAgOB2pLs+Lrcf?=
- =?iso-8859-1?Q?jRA5H5PTx5ZxfLHxQYr34gOWYq4wVlu/RHmfD0/N2jwT0+abdalxNgGQy4?=
- =?iso-8859-1?Q?xfrhtgxvG6rQVObOpeIT978RiNq9ykzapYyAJodxh03otKTfdzLiX49zhD?=
- =?iso-8859-1?Q?dVETjcC9lAt7+BY08jhoJofFokSZSuaEI5B2N1V+ly6y2WngXp0kSdWD9j?=
- =?iso-8859-1?Q?V2f+TmY1Siq2EbQ/gRIquZS+S3U7vzJsU45i55O0HEZ8ILIik3o+MxFgxH?=
- =?iso-8859-1?Q?WQwUTSA5cxokRGuK8BQwuqoYe9xbMn68APZuMgIx49zQFWKb+951u72Huc?=
- =?iso-8859-1?Q?Zex+USK8XJ02kP3FIIoBcc65ZQqcKNq6tTITT78nMx5LpI3AUoi9isrjVX?=
- =?iso-8859-1?Q?0B+LUPDC9OlXQiOyxABHh1UrRcRHHSh0JXI3KPxwxdzmJoDKcuCD2wm+I3?=
- =?iso-8859-1?Q?oqrLMQRJ6AlY9tQINA1MnVEziiPwm+GUug16Itm/EsYPlfVf1AfrpcHWCV?=
- =?iso-8859-1?Q?WuJl5TyFqq+kxeF3Zr1ATYmGjeBJx60QbvnXMsyz57VpNVbN3u10n1x+LW?=
- =?iso-8859-1?Q?8nblS7Is7NpiVyDvjvdN7FgHB4Ht2xOy0GyJo6CPEhzv2S5ukQedN2FlNL?=
- =?iso-8859-1?Q?tpcl2LDZK7yV/ZSRbV1ZfSHoPC2yIQ9+NfqYRGU4SBH4wqr1jFd8wJ+5j2?=
- =?iso-8859-1?Q?NMzejnFmf41XM1/BeOmFqsiNXsKzEFpqtnbGeAMcLzmhzP+9TJggcqVSad?=
- =?iso-8859-1?Q?24PMHmEYfFEbdE5P0xB7Ok7XF9MKpa7mbeogHU1RbbnDYXgq4qowWymK7m?=
- =?iso-8859-1?Q?SaKu8/rhsWPBORaXUIM/6Kjxd/O5yX97ZwYIruFJZtvUomiBTUcK20cYLN?=
- =?iso-8859-1?Q?Za+IhbSS8s7iGQkNoQtTcRlg9MH0ocHfSJDWLDbkLErs7+XE3boOD5qEdS?=
- =?iso-8859-1?Q?Wfn86wcvQ2DKNMaWBvFh86MdRSW7Nk1CUFkazSKhWR0/icZ2DNxFcKP2no?=
- =?iso-8859-1?Q?Gzu04NvZp1obqyRiPt+D6zpfNTSZv+PJ6VP02c7JuAkeNse2Kkfde8U+5W?=
- =?iso-8859-1?Q?vEE68wgay9A+45duo9nR58g+odnIecVEvm1oQJZykT2bo2JtImFC7539Oc?=
- =?iso-8859-1?Q?Y/9kB2ntmdLyK9OF9uJrJVcAjFk9qnBoGbReVNt6qjoA7KRmjCw6gsDpZE?=
- =?iso-8859-1?Q?dX3ZTxYoWsXmzzHNZjsW1+Ba06eK7PxyW+Ubhv+d8qwd3JvJOnFHYL1pmy?=
- =?iso-8859-1?Q?TpO2FOuEJi8PI9vC3qY4QEWFzA7BOBiHWJ6GAJPK/xBHCe2GQI5joSSH7C?=
- =?iso-8859-1?Q?pgOehHPZAcE/dqVGqShmzHuDJNFxYHvVfaC2v/hx2n6PSH4rbA7f7AyBsG?=
- =?iso-8859-1?Q?Mvk9kdCYTxvPadXAYuFpxz+7I7EPGkE5i9lavDWBFUszvzyqPSw0abFxqI?=
- =?iso-8859-1?Q?7hZntqNaeD6H/tGM5VxSkQuVyYT+f/IU//74/NsmgChZO7CgqsbCfuwwW8?=
- =?iso-8859-1?Q?MK4tgE1Nw92tgHQgFtFoPZ1syXhkl4yXI0Z9KoYw5PuGbXH7TaBYmVBARj?=
- =?iso-8859-1?Q?C+skCSIo0rekpM14kB3IJR0NtKMJ3lZml2n1NQy1cPckta9iWDpDxbYIDE?=
- =?iso-8859-1?Q?0Q4ezR17VX8Z9VvFFFI=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: f37f1b5c-873a-11f0-8dd7-1b34d833f44b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1756734771; x=1757339571; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=3y9mL5hrwYwKk2Rj4802Pv1GSH/ciYwuHCdvajLR05M=;
+        b=cbRxZfCJbcH/bl6Mv3kGf+CUJ3T0sb9FsuPLElZECtNMnkAXEZ7qnCIUmryl1n7U6B
+         MFC3AuSGbhbLpScc/YdFtzDJBLCErPO7zXTyElTSGkNLhfAGQOQph1cEwKQt4KX6W2+p
+         5rjqaT1tRw738JU0pUN6WRaYcZqBxwRKFbSlRaakQ22279i2PW38I/EaPCRQ3sIOPyqd
+         dUFzRJ5rq1nRAi24k3qFcHzKoaRgwItxZR9wrzFgcAlqIcE4Evv+tLl+6+5l47fBKvLe
+         TZ23AvFpuy3VuDLai1I39MI54KyOTl4lLtC93hIbz71RUPC7KhrixBoYmBKH3Zn+tUKB
+         GKrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756734771; x=1757339571;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3y9mL5hrwYwKk2Rj4802Pv1GSH/ciYwuHCdvajLR05M=;
+        b=sy/+SyLI4p7QV4PqSSwtXV+vDs1LZjm1su26J4ReZb1+ApuzGpLeGRGPwnRfWfDSte
+         n+/hnoXi9O4ADudaBT8KSEsga3i+KruUXoyU0+cKSnUX1CqmiDmjYbya7wwuemLD8h+C
+         2xMXzyxqE3zj8ULKKaPe3NFB9cbZXbRgA+sAujNbhfhd7DCsb9qACgLb5FpFiE2talz0
+         idSqRDc6M9ksmcFxRWIXgj6qeClAX8Y06UBY04alb1xkXzvYI8wGFZb2u/q+bcUQcKxZ
+         BMBn1YX7TDg1GNaDzrvy5nO25A7Hfasy9cu4BvOp7plvQOphQDUV7pwlW59gzzL5Fsx9
+         6VTw==
+X-Forwarded-Encrypted: i=1; AJvYcCW35eQPm31W2Fy71KEvxGbRnpHnZHfqqDzdy4ExBiDiZPT3jSJA5KfjZzmn1XADTbasr1lirj7ALnM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzqjKgwUW4NLyQnXRqxbxq3Cm8tVOfALW4WivHiUTL3F1JYjuGB
+	iX5V9kJopMVX+A02IR65gmMAxdLyWtzenyws1XWkgOgbwfW2m3RVCOO+BgPVuKxILg==
+X-Gm-Gg: ASbGnctFQjMqBlrQzF10ANR+STgHdX77XG/gFtdfDgwzq2Px7+o53UCl67w08xTYRGo
+	PPNDl/TRS27eYzCvWOjTVoEIMja1Xfi7cTgAbzIi3w64X88eDbClzgH30oNHOMWsShW9AkdNd5Q
+	ZUd2/5lqjATZAPax0+FGZr5bs5cAya2FBvvbvTIpvk1/fCb7kQF9oBnOveldtDlF+hYwx77NOQg
+	S8et6ko7AlGFosCvttcK8lUBITP38j/a1+/BTucDKafuc7oti1LCoLQmRrjFOYaoa83DW0rDREM
+	WRe1NGU6lUm2/UhAPdxTRm0iUrINI7wBuzogsc9B7QLcbLseKpFo2dvKbtXFAwRvarsdMUqUeJS
+	1VmkwaBvehlt5Bi7wW/jBbLja+dRpB7ET1G1kpEm9e3kTk2op7txWnRtVb20/NnhPIYV0GqUQpO
+	QWv9V+F2U=
+X-Google-Smtp-Source: AGHT+IFzlLV8pp5YtAnjigJIfJCwJETHKdO/Aoi8tP6NniwigTBQYVuM/BvYQgRYEedYNRnf3IKKRQ==
+X-Received: by 2002:a17:907:7289:b0:ade:c108:c5bf with SMTP id a640c23a62f3a-b01d976d963mr873351266b.43.1756734770656;
+        Mon, 01 Sep 2025 06:52:50 -0700 (PDT)
+Message-ID: <027f25f0-4871-4e2a-abca-ea83bcda267b@suse.com>
+Date: Mon, 1 Sep 2025 15:52:49 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR03MB7038.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7a45d58-4967-4692-1754-08dde9603255
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Sep 2025 14:02:32.6702
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xgqVOskkBkkQPpW7D1DtqPKfPLs1N8NYQJF8m8YQR15Dfg4sBfRGy4Z0mdSi7b3ADwbcGl/joEnby8bv1JqoWg2GDBdFvxvLwnlmznHCs98=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6782
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH v2 3/3] CHANGELOG.md: Add SMBIOS 2.6 update
+ statement
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Community Manager <community.manager@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1756460430.git.teddy.astie@vates.tech>
+ <301a84287488629932950c1cefef3a97c3d9ba0d.1756460430.git.teddy.astie@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <301a84287488629932950c1cefef3a97c3d9ba0d.1756460430.git.teddy.astie@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The Renesas R-Car Gen4 platform requires the GICv3 driver,
-including support for the Interrupt Translation Service (ITS).
+On 29.08.2025 11:58, Teddy Astie wrote:
+> --- a/CHANGELOG.md
+> +++ b/CHANGELOG.md
+> @@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+>     - Support in hvmloader for new SMBIOS tables: 7 (Cache Info), 8 (Port
+>       Connector), 9 (System Slots), 26 (Voltage Probe), 27 (Cooling Device),
+>       and 28 (Temperature Probe).
+> +   - Updated SMBIOS version to 2.6.
 
-Without explicitly selecting GICV3, it was possible to create a
-configuration with RCAR4=3Dy and GICV3=3Dn, leading to a build failure
-due to unmet dependencies.
+Like the earlier SMBIOS related entry, this should be more specific. At the very
+least it needs to similarly mention this is about hvmloader.
 
-GICv3 driver (GICV3) [Y/n/?] (NEW) n
-WARNING: unmet direct dependencies detected for HAS_ITS
-  Depends on [n]: GICV3 [=3Dn] && !NEW_VGIC [=3Dn] && !ARM_32 [=3Dn]
-  Selected by [y]:
-  - RCAR4 [=3Dy] && <choice> && ARM_64 [=3Dy]
-
-...
-
-arch/arm/gic-v3-its.c: In function 'gicv3_its_map_guest_device':
-arch/arm/gic-v3-its.c:729:41: error: 'struct vgic_dist' has no member named=
- 'its_devices'
-  729 |     struct rb_node **new =3D &d->arch.vgic.its_devices.rb_node, *pa=
-rent =3D NULL;
-      |                                         ^
-arch/arm/gic-v3-its.c:755:28: error: 'struct vgic_dist' has no member named=
- 'its_devices_lock'
-  755 |     spin_lock(&d->arch.vgic.its_devices_lock);
-      |                            ^
-arch/arm/gic-v3-its.c:768:54: error: 'struct vgic_dist' has no member named=
- 'its_devices'
-  768 |                 rb_erase(&temp->rbnode, &d->arch.vgic.its_devices);
-      |                                                      ^
-In file included from ./include/xen/sched.h:6,
-                 from ./include/xen/iocap.h:10,
-                 from arch/arm/gic-v3-its.c:13:
-
-...
-
-Fix this by adding "select GICV3" to the RCAR4 Kconfig entry.
-
-Fixes: 336fc7a19b49 ("xen/arm: platform: Add support for R-Car Gen4")
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
----
- xen/arch/arm/platforms/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/xen/arch/arm/platforms/Kconfig b/xen/arch/arm/platforms/Kconfi=
-g
-index c8bc0bfae3..888d0b85d5 100644
---- a/xen/arch/arm/platforms/Kconfig
-+++ b/xen/arch/arm/platforms/Kconfig
-@@ -33,6 +33,7 @@ config RCAR3
- config RCAR4
- 	bool "Renesas R-Car Gen4 support"
- 	depends on ARM_64
-+	select GICV3
- 	select HAS_SCIF
- 	select HAS_ITS
- 	select IPMMU_VMSA
---=20
-2.34.1
+Jan
 
