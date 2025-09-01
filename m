@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDD1CA100C
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 22:10:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1105400.1456344 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666B0CA100F
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 22:10:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1105404.1456387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjN-0005bs-O3; Mon, 01 Sep 2025 22:10:29 +0000
+	id 1utCjS-0006lP-Ax; Mon, 01 Sep 2025 22:10:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1105400.1456344; Mon, 01 Sep 2025 22:10:29 +0000
+Received: by outflank-mailman (output) from mailman id 1105404.1456387; Mon, 01 Sep 2025 22:10:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjN-0005bH-IT; Mon, 01 Sep 2025 22:10:29 +0000
-Received: by outflank-mailman (input) for mailman id 1105400;
- Mon, 01 Sep 2025 22:10:28 +0000
+	id 1utCjS-0006kP-5G; Mon, 01 Sep 2025 22:10:34 +0000
+Received: by outflank-mailman (input) for mailman id 1105404;
+ Mon, 01 Sep 2025 22:10:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pPXY=3M=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1utCjM-0005XP-2Y
- for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:28 +0000
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [2a00:1450:4864:20::136])
+ id 1utCjQ-0005XP-Gp
+ for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:32 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 76fca5fb-8780-11f0-8adc-4578a1afcccb;
- Tue, 02 Sep 2025 00:10:27 +0200 (CEST)
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-55f7039aa1eso2190788e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:27 -0700 (PDT)
+ id 79e20492-8780-11f0-8adc-4578a1afcccb;
+ Tue, 02 Sep 2025 00:10:31 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-55f7ad815ceso1676658e87.3
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:31 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.25
+ 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 15:10:25 -0700 (PDT)
+ Mon, 01 Sep 2025 15:10:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,183 +47,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76fca5fb-8780-11f0-8adc-4578a1afcccb
+X-Inumbo-ID: 79e20492-8780-11f0-8adc-4578a1afcccb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756764626; x=1757369426; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1756764631; x=1757369431; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=claAnoGUSFMYFARQ+oTnePrqKOC6QAQ+IRoEf91ZFiM=;
-        b=bl/q8yyy9+exPnPGrmq279pz/L584xBgnnBm8a78VPJ1aEh2Ht5A2y2BgaMus3+YJy
-         f5TAcQmYaJ6Xae7tU2lsfgMsh7uoTlNCrV4mRKB0Ub41nmV34sJnghKiYyd6DutS+Q1p
-         Ldh6Zswb/RV+dqo/pu+e7Stqp5NcIItGa/2pej4fMkRfV8oixb+GwHfTCerT0TC8SRTD
-         b+a3R/mnkootOl5E6WPrlE0fsRltHS67Ig+GpjAeQAsmOZwARH+5keKzIcJAKJR/6DRg
-         kJvGvN6GSO3b803ED2mpSyuyqdnTdFHi6NZSYauTrwiFt4AkmgwELx4oUHY5FHLrOgX4
-         UVGA==
+        bh=pux8zQR0d0n5/4MKkffDUfDraLZ/szsPvbUCV13VP9s=;
+        b=PGGhcZ/hfRBGET+34FZXXy8e9qfhTeoJKvb0IdwX+Ak+g0G97wyBa26UM7q0xp43jI
+         gq/fsySj86GTvTPOPUVlgZTyZicgN9pMkqlr85sGakaQeYQdmh9RQBjnJ4nvUUbEB3h0
+         xaicmoCEs7a8vEPdS/2PG9twkX76E1FY6mSau1bgjeLXHZVjNgqQBeY9GO2gFQB0iLwN
+         pxwUdc2pAQc0qMhab4xCzgs8wmdWf2+OQyKNrc55WRj1JMzriure58cY1J9eEKFZfu8N
+         +YnrwHNmG0lA63ccmbrXAbCoUEhESIXDN4S2HeMYTQ6x4sFKLLzepyfuVIWvcZvEXjU9
+         5tXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756764626; x=1757369426;
+        d=1e100.net; s=20230601; t=1756764631; x=1757369431;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=claAnoGUSFMYFARQ+oTnePrqKOC6QAQ+IRoEf91ZFiM=;
-        b=MURouoznv9hN/Bi09PJTb8xQ3znN325wa8WrL6iSac7XCdi1ZR7fGnj0N6XKd8YRRf
-         zK8qJzRZSqZEpJ8IfIfo/U6KtasIzhznGgJWz3bPLINHHcwnix82tnlYCrsIMohe1eGw
-         Lz9ujVk0UuFE3Lmle7SbxElIxHNolSsH6KQ5cbf35emRBHatwOlbquICnpQ9FVbeLd5u
-         ucD9WA1Km614993lwY5vwwYLHVYGO1ODY2q2j/SB2MAgI/UkupcO90e4Z5A7oPAWMGER
-         qhVPftmMG917DUCI3wTYBBBMNenXXmJ1iz4jD2F8jGF4qTYSxjOxMhXCipkGlAba+nPl
-         bS0g==
-X-Gm-Message-State: AOJu0YwGpID7Hd0p0G6ma7BrNGj9Uu3VfXxPT37HmROZgrdL8JYabKnv
-	p+h/gNx8iP7Iok9pRZ9/EFyBQSi50vbjObqaR18l4JM/9MRnstd76Ra0fFrFQYj6
-X-Gm-Gg: ASbGnctmsCvSdQakgvH4Jc6Q8D8LN3NaOC4muNg968DKCK96mKJFwbyooymT5ABHOfo
-	SbksPtsD+M+f0z1TZcsSj/V7u2iAvP5W/yvAGC3JD9cQzTgTu6Kw3oNRQGS2Ivm6adw3Giehj4y
-	3MoCPMYvqaBoyaRq8EwQhICaHcqkk6ceNGdbnvVvRTrnQjxAkHJ1byPosRNLS3Fh5sGUEU/7FL7
-	3xq23yZP0uRFNtTVmBxd3fpyueglHvbgNVsQAwgZV4uRAWskjJC4HwaeSLpRZkTFHQNHIcX6O25
-	N84+jk+zu/5TxFTcLt2+ff3CldmUGdn2OKinbR+vz1CSMl76IRg7Mu5LNvFAKdzfEcr1Y2sNCxJ
-	4/S1rgd4Qmz8/aVu6RyddlUb6xU6udGdKHUbk6WPKxcuI3bNw565x2+88np9PQRUZ5GRuAbkA
-X-Google-Smtp-Source: AGHT+IHlRsA6VSEbFS7n1dHyaPDUYiGqNPk98LgH9nIWFqTNJk8rBvrkVuVXOyy9dbnfiE6iP+ROeQ==
-X-Received: by 2002:a19:6b18:0:b0:560:827f:9ff6 with SMTP id 2adb3069b0e04-560827fa7cfmr125919e87.57.1756764626205;
-        Mon, 01 Sep 2025 15:10:26 -0700 (PDT)
+        bh=pux8zQR0d0n5/4MKkffDUfDraLZ/szsPvbUCV13VP9s=;
+        b=uQsueeDGTNzsWjuH/K+YRLhIGDR+jjCoIml4wkolRxMpHMNvGLX3k+C5aXone2kFUu
+         +UqIWI4dfgeEmuau/BnjWUKxTyFYcPigvRe0+dQDBQ2oAPeXKQ/nlCkkl9fWGGMCbUk9
+         C549kJeWLovTEyee0a6Bpsqs4HkzUaHVo4qzSqusE/4F6qOoVpoSl+9wXSSKeowjTYzb
+         tbhFDxJwNZaWojYrd6vwgVoHEmAd2hJ2BxMrYknyHGZ+ntofIGImnkMNoXIp3i/p7Gfj
+         9QJQQBLp0tKu2jBiyKJyXzKvrCYaJ06kLx9KEYeAr8KOBeHEOOZfsdyQKlXds7iGN1ts
+         mZWg==
+X-Gm-Message-State: AOJu0YwIaqPx7/xzKFkBzl5kO6Gd937/V3oa6KsUlwZKnDpqTnZE/fB3
+	8AfeoVGjfRCLJlBQs0832tvLz39NfrMjQ3h4Fr0vw9a+pvCv5dSKnCJ/iDSzHbDm
+X-Gm-Gg: ASbGncteqzkOOGFq9iF6sSGTRZ6kyYuDVoLndEqiQ7gyXNsoO5h5vdy1ys7t8GgYqDC
+	TtNZi7CIduHgzSNDVRgbOei47yjXW3JtzqpMvg+mwuTio/BxNkribCwhzMTGMKObpYTFquNmeZJ
+	3GbpW98AURgh4zRD82lsgc4PHzl0dfCLYZjM8KuNT7O0ijJ4QaYtqnePyNtw80G0Otv33KoJYD3
+	qxSkH2z6ctMRHunXMRhvLNEx0ohtTizevPLLrd1hRYypGeyahkYK32opul8GUUJUcqbS53Usi6F
+	Ul/G2mqORPHdRUkYuzh/J0TNroyPMkvONugHsaN7GR+pE8QzoGz7c6pX/RfpXy4kbfPMJeXZkl5
+	uAD8Lh3/YR0zyyTk5yBcr6o1EN/2+0/6LbsclHZEheaa+ZNwlJT0FH7iicqklaV0H0S485yC4
+X-Google-Smtp-Source: AGHT+IHac5NYtAevecrJdPsnvQsSQwBeZX1PPUz7eIaje6LakHkn37It/dfRC3WdGHf3MYfBkW7PZQ==
+X-Received: by 2002:a05:6512:2c94:b0:55f:5b65:a3e3 with SMTP id 2adb3069b0e04-55f7093e96amr2529872e87.35.1756764631025;
+        Mon, 01 Sep 2025 15:10:31 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
+Cc: Mirela Simonovic <mirela.simonovic@aggios.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v6 04/13] xen/arm: Don't release IRQs on suspend
-Date: Tue,  2 Sep 2025 01:10:08 +0300
-Message-ID: <293acbb653b5f4d5bf71dc459f9de3e729bff3e1.1756763487.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
+	Mykyta Poturai <mykyta_poturai@epam.com>,
+	Mykola Kvach <mykola_kvach@epam.com>
+Subject: [PATCH v6 08/13] xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
+Date: Tue,  2 Sep 2025 01:10:12 +0300
+Message-ID: <20b6774cafc2d4d6c92c220d3aa94a666d55c930.1756763487.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1756763487.git.mykola_kvach@epam.com>
 References: <cover.1756763487.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-If we call disable_nonboot_cpus on ARM64 with system_state set
-to SYS_STATE_suspend, the following assertion will be triggered:
+Invoke PSCI SYSTEM_SUSPEND to finalize Xen's suspend sequence on ARM64 platforms.
+Pass the resume entry point (hyp_resume) as the first argument to EL3. The resume
+handler is currently a stub and will be implemented later in assembly. Ignore the
+context ID argument, as is done in Linux.
 
-```
-(XEN) [   25.582712] Disabling non-boot CPUs ...
-(XEN) [   25.587032] Assertion '!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1)' failed at common/xmalloc_tlsf.c:714
-[...]
-(XEN) [   25.975069] Xen call trace:
-(XEN) [   25.978353]    [<00000a000022e098>] xfree+0x130/0x1a4 (PC)
-(XEN) [   25.984314]    [<00000a000022e08c>] xfree+0x124/0x1a4 (LR)
-(XEN) [   25.990276]    [<00000a00002747d4>] release_irq+0xe4/0xe8
-(XEN) [   25.996152]    [<00000a0000278588>] time.c#cpu_time_callback+0x44/0x60
-(XEN) [   26.003150]    [<00000a000021d678>] notifier_call_chain+0x7c/0xa0
-(XEN) [   26.009717]    [<00000a00002018e0>] cpu.c#cpu_notifier_call_chain+0x24/0x48
-(XEN) [   26.017148]    [<00000a000020192c>] cpu.c#_take_cpu_down+0x28/0x34
-(XEN) [   26.023801]    [<00000a0000201944>] cpu.c#take_cpu_down+0xc/0x18
-(XEN) [   26.030281]    [<00000a0000225c5c>] stop_machine.c#stopmachine_action+0xbc/0xe4
-(XEN) [   26.038057]    [<00000a00002264bc>] tasklet.c#do_tasklet_work+0xb8/0x100
-(XEN) [   26.045229]    [<00000a00002268a4>] do_tasklet+0x68/0xb0
-(XEN) [   26.051018]    [<00000a000026e120>] domain.c#idle_loop+0x7c/0x194
-(XEN) [   26.057585]    [<00000a0000277e30>] start_secondary+0x21c/0x220
-(XEN) [   26.063978]    [<00000a0000361258>] 00000a0000361258
-```
+Only enable this path when CONFIG_SYSTEM_SUSPEND is set and
+PSCI version is >= 1.0.
 
-This happens because before invoking take_cpu_down via the stop_machine_run
-function on the target CPU, stop_machine_run requests
-the STOPMACHINE_DISABLE_IRQ state on that CPU. Releasing memory in
-the release_irq function then triggers the assertion:
-
-/*
- * Heap allocations may need TLB flushes which may require IRQs to be
- * enabled (except when only 1 PCPU is online).
- */
-
-This patch adds system state checks to guard calls to request_irq
-and release_irq. These calls are now skipped when system_state is
-SYS_STATE_{resume,suspend}, preventing unsafe operations during
-suspend/resume handling.
-
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in V6:
-- skipping of IRQ release during system suspend is now handled
-  inside release_irq().
+Changes in v6:
+- move calling of call_psci_system_suspend to commit that
+  implements system_suspend call
 
-Changes in V4:
-  - removed the prior tasklet-based workaround in favor of a more
-    straightforward and safer solution
-  - reworked the approach by adding explicit system state checks around
-    request_irq and release_irq calls, skips these calls during suspend
-    and resume states to avoid unsafe memory operations when IRQs are
-    disabled
+Changes in v4:
+  - select the appropriate PSCI SYSTEM_SUSPEND function ID based on platform
+  - update comments and commit message to reflect recent changes
+
+Changes in v3:
+  - return PSCI_NOT_SUPPORTED instead of a hardcoded 1 on ARM32
+  - check PSCI version before invoking SYSTEM_SUSPEND in call_psci_system_suspend
 ---
- xen/arch/arm/gic.c           |  3 +++
- xen/arch/arm/irq.c           |  3 +++
- xen/arch/arm/tee/ffa_notif.c |  2 +-
- xen/arch/arm/time.c          | 11 +++++++----
- 4 files changed, 14 insertions(+), 5 deletions(-)
+ xen/arch/arm/arm64/head.S          |  8 ++++++++
+ xen/arch/arm/include/asm/psci.h    |  1 +
+ xen/arch/arm/include/asm/suspend.h | 22 ++++++++++++++++++++++
+ xen/arch/arm/psci.c                | 23 ++++++++++++++++++++++-
+ 4 files changed, 53 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/arm/include/asm/suspend.h
 
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index a018bd7715..c64481faa7 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -388,6 +388,9 @@ void gic_dump_info(struct vcpu *v)
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 72c7b24498..3522c497c5 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -561,6 +561,14 @@ END(efi_xen_start)
  
- void init_maintenance_interrupt(void)
- {
-+    if ( system_state == SYS_STATE_resume )
-+        return;
+ #endif /* CONFIG_ARM_EFI */
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
 +
-     request_irq(gic_hw_ops->info->maintenance_irq, 0, maintenance_interrupt,
-                 "irq-maintenance", NULL);
++FUNC(hyp_resume)
++        b .
++END(hyp_resume)
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ /*
+  * Local variables:
+  * mode: ASM
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 48a93e6b79..bb3c73496e 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -23,6 +23,7 @@ int call_psci_cpu_on(int cpu);
+ void call_psci_cpu_off(void);
+ void call_psci_system_off(void);
+ void call_psci_system_reset(void);
++int call_psci_system_suspend(void);
+ 
+ /* Range of allocated PSCI function numbers */
+ #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+new file mode 100644
+index 0000000000..7e04c6e915
+--- /dev/null
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -0,0 +1,22 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#ifndef __ASM_ARM_SUSPEND_H__
++#define __ASM_ARM_SUSPEND_H__
++
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++void hyp_resume(void);
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
++#endif /* __ASM_ARM_SUSPEND_H__ */
++
++ /*
++  * Local variables:
++  * mode: C
++  * c-file-style: "BSD"
++  * c-basic-offset: 4
++  * tab-width: 4
++  * indent-tabs-mode: nil
++  * End:
++  */
+diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+index b6860a7760..c9d126b195 100644
+--- a/xen/arch/arm/psci.c
++++ b/xen/arch/arm/psci.c
+@@ -17,17 +17,20 @@
+ #include <asm/cpufeature.h>
+ #include <asm/psci.h>
+ #include <asm/acpi.h>
++#include <asm/suspend.h>
+ 
+ /*
+  * While a 64-bit OS can make calls with SMC32 calling conventions, for
+  * some calls it is necessary to use SMC64 to pass or return 64-bit values.
+- * For such calls PSCI_0_2_FN_NATIVE(x) will choose the appropriate
++ * For such calls PSCI_*_FN_NATIVE(x) will choose the appropriate
+  * (native-width) function ID.
+  */
+ #ifdef CONFIG_ARM_64
+ #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN64_##name
++#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN64_##name
+ #else
+ #define PSCI_0_2_FN_NATIVE(name)    PSCI_0_2_FN32_##name
++#define PSCI_1_0_FN_NATIVE(name)    PSCI_1_0_FN32_##name
+ #endif
+ 
+ uint32_t psci_ver;
+@@ -60,6 +63,24 @@ void call_psci_cpu_off(void)
+     }
  }
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 02ca82c089..361496a6d0 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -300,6 +300,9 @@ void release_irq(unsigned int irq, const void *dev_id)
-     unsigned long flags;
-     struct irqaction *action, **action_ptr;
  
-+    if ( system_state == SYS_STATE_suspend )
-+        return;
++int call_psci_system_suspend(void)
++{
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct arm_smccc_res res;
 +
-     desc = irq_to_desc(irq);
- 
-     spin_lock_irqsave(&desc->lock,flags);
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 86bef6b3b2..4835e25619 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -363,7 +363,7 @@ void ffa_notif_init_interrupt(void)
++    if ( psci_ver < PSCI_VERSION(1, 0) )
++        return PSCI_NOT_SUPPORTED;
++
++    /* 2nd argument (context ID) is not used */
++    arm_smccc_smc(PSCI_1_0_FN_NATIVE(SYSTEM_SUSPEND), __pa(hyp_resume), &res);
++    return PSCI_RET(res);
++#else
++    dprintk(XENLOG_WARNING,
++            "SYSTEM_SUSPEND not supported (CONFIG_SYSTEM_SUSPEND disabled)\n");
++    return PSCI_NOT_SUPPORTED;
++#endif
++}
++
+ void call_psci_system_off(void)
  {
-     int ret;
- 
--    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-+    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI && system_state != SYS_STATE_resume )
-     {
-         /*
-          * An error here is unlikely since the primary CPU has already
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index ad984fdfdd..8267fa5191 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -320,10 +320,13 @@ void init_timer_interrupt(void)
-     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
-     disable_physical_timers();
- 
--    request_irq(timer_irq[TIMER_HYP_PPI], 0, htimer_interrupt,
--                "hyptimer", NULL);
--    request_irq(timer_irq[TIMER_VIRT_PPI], 0, vtimer_interrupt,
--                   "virtimer", NULL);
-+    if ( system_state != SYS_STATE_resume )
-+    {
-+        request_irq(timer_irq[TIMER_HYP_PPI], 0, htimer_interrupt,
-+                    "hyptimer", NULL);
-+        request_irq(timer_irq[TIMER_VIRT_PPI], 0, vtimer_interrupt,
-+                    "virtimer", NULL);
-+    }
- 
-     check_timer_irq_cfg(timer_irq[TIMER_HYP_PPI], "hypervisor");
-     check_timer_irq_cfg(timer_irq[TIMER_VIRT_PPI], "virtual");
+     if ( psci_ver > PSCI_VERSION(0, 1) )
 -- 
 2.48.1
 
