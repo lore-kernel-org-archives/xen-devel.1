@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6941FCA1007
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 22:10:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1105403.1456373 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8946CA100C
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Sep 2025 22:10:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1105399.1456339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjQ-0006Nn-Tv; Mon, 01 Sep 2025 22:10:32 +0000
+	id 1utCjN-0005Ys-DK; Mon, 01 Sep 2025 22:10:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1105403.1456373; Mon, 01 Sep 2025 22:10:32 +0000
+Received: by outflank-mailman (output) from mailman id 1105399.1456339; Mon, 01 Sep 2025 22:10:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utCjQ-0006MQ-OF; Mon, 01 Sep 2025 22:10:32 +0000
-Received: by outflank-mailman (input) for mailman id 1105403;
- Mon, 01 Sep 2025 22:10:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1utCjN-0005Yj-AX; Mon, 01 Sep 2025 22:10:29 +0000
+Received: by outflank-mailman (input) for mailman id 1105399;
+ Mon, 01 Sep 2025 22:10:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pPXY=3M=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1utCjP-0005XP-Gv
- for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:31 +0000
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [2a00:1450:4864:20::129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7927e6f3-8780-11f0-8adc-4578a1afcccb;
- Tue, 02 Sep 2025 00:10:30 +0200 (CEST)
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-55f7b6e4145so1330704e87.1
- for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:30 -0700 (PDT)
+ id 1utCjL-00055o-KS
+ for xen-devel@lists.xenproject.org; Mon, 01 Sep 2025 22:10:27 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7647d278-8780-11f0-8dd7-1b34d833f44b;
+ Tue, 02 Sep 2025 00:10:25 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-55f6186cc17so3747152e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Sep 2025 15:10:25 -0700 (PDT)
 Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.28
+ 2adb3069b0e04-5608279307asm123038e87.75.2025.09.01.15.10.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 15:10:28 -0700 (PDT)
+ Mon, 01 Sep 2025 15:10:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,393 +47,379 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7927e6f3-8780-11f0-8adc-4578a1afcccb
+X-Inumbo-ID: 7647d278-8780-11f0-8dd7-1b34d833f44b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756764630; x=1757369430; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1756764625; x=1757369425; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RY9tX/c5T2T5//S4piNjlgD25sf5vU9/GmLRb02Wl1w=;
-        b=XVAO+pdutTd1AVWu2A18pCKhyfR6/QhArEcEJ7X3+UTFtlM/oJ9Cy/qe6lmWvBLSnU
-         W8rfxGND1yHwimQgs/cMVsJMad1BPYGQN9y0Cl3dsFh5OvIkYTmwEJIlNhcbrIDm4UM+
-         aKw3bTlXu3zlKLUwLYXXgiQaZFhtqrHQ7pDjfKLt7bdnKGCdSncNslurzFXY9dAMXF1i
-         C6jvYlxu8fF1yR32WsIu6GzUgywRGya6P3IkLAfjFll0qjaI+n9/Xrnz1oPKkifMvrwU
-         bn/gXOcj2zsp+NPlUU1Fv8Wif8nU9DcLVpLxXB7atTrJ5qSkKCDH1XymDV5X6pezRbBK
-         gEtg==
+        bh=GL9EWkohjo8a/Dn92rOcdmsDJxHtlTsb7OJVk0QSUJM=;
+        b=DuO4koIctpb21IVOdjzP5KU4+SUc96C9z7oZb+Yd6UASzoYMx38LPEb6LGRmO9Rc+r
+         qtRxihrKEthqPb1Z+gHeFN4TGv0xKsqVcBHTPOjKge9LAn49BEl7HQBmfXHf+8L7fIWb
+         LT7vtUIJl4R0c/POeFxMIFamgohmyuL4UJLjH2c+pndAJbfM3OAtTAlUaTgI+18pnSZQ
+         VYxhhCcRVuhM3rSvqYNsATa7WKg1es8Jwqa82jvGlw5YsLXvakZw153TRRDdZosD9nEl
+         VTQ8/0rQHBrj54rOU+gqM0uUZkIlUtyUAceVrH/KAhImhXfa22FAGyTD640pRHhqJ7xL
+         P8/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756764630; x=1757369430;
+        d=1e100.net; s=20230601; t=1756764625; x=1757369425;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RY9tX/c5T2T5//S4piNjlgD25sf5vU9/GmLRb02Wl1w=;
-        b=dwpBemIhreX5Y7mic3+KIwzrMMNjTYbu63IQNz+EW8dYauFOEXBpLuwCKxSXqeWpPy
-         Jj8m0hEm5ubw4YVMU8DkYQpd8rzxg31AnuKSq2FgCQjyhA+tGeA84N6cH+Vd+BIbBbZd
-         dNlQyhGwg7jIXv6vKfYhrjNl4riMym6DP1IfU4tX0NPnB+JxVu/nfkydB/kM1KAer1pD
-         h82njPNp2bvsIBa3YZdqrm8jSWLjk5SzJ/d27MisnlUbDnRAQ94mvlwFgOJLMHDXjdfz
-         BNbCOcyzMiet/nBtzDMj5zhSHzMM0g1Ns9OLRgeQ5Ndy6Q5wTutgg3YsHBixkaKFEkZ3
-         jmEg==
-X-Gm-Message-State: AOJu0YxcAJX7JeNY3sM6JxdWw/Gd15b4CUWFrNfg3wt0Wo6aATpxJSJb
-	va5DLK7WRlAhcpKRKtc6JjAgs63yif4EC83eJO7+8Rs6bQMMAkpe3DE2hJfUV9fu
-X-Gm-Gg: ASbGnctGeLmsAG2+gOEXpO+u7BkNVmQyya/6toY8/EqzdwtGEWokrzmUYleOTQUVRsZ
-	JA0TzUy6NIyGQNn9eGA70TiB/85d+XWEDVct6eidFI5NPHhRADVugqEY3fDL8axr2PcrfMw7xwQ
-	SYzm+5plEIX0NnHmOCcO9mhtm90FneLtJ3bfN1GTbs41+E1uAIwKyxpIZb3SuKWnhcjm+7TTy0i
-	n4XaUlulaWlTRO0r/sRYk7+RvxXMZIp8N2PkvA4Z8wHbzegQU18nGExiWgxlus9ocFFilUqjDIb
-	SbPbBv2mUn4uNRngECfZKk3HEsVhAJLESm2QBIipbfSO8ZOB2GUAiFv6XelQ3pzChIJ3RkJF+JX
-	caK9ollVKydjbOMX2XJZ0s/j6Eo9ccJN62fp/ReNaM8xUgM/ZGB6qvFAY5SmAnlFJ0i1GMq2K
-X-Google-Smtp-Source: AGHT+IEkwBm4cpJTQnKBoX8tD+SaJ/XRbp9ktMXnYGjhR+0nJcJbopep6TTT4iDCLZRyqgZKntvLtQ==
-X-Received: by 2002:a05:6512:2610:b0:55f:3f03:946d with SMTP id 2adb3069b0e04-55f708b60dcmr2388583e87.23.1756764629748;
-        Mon, 01 Sep 2025 15:10:29 -0700 (PDT)
+        bh=GL9EWkohjo8a/Dn92rOcdmsDJxHtlTsb7OJVk0QSUJM=;
+        b=aD4YICYeLw2AzxsdloPLu0USEFit6vhd2XkVV/J5mRThHJqKfRFpD61Rziwz5CA8GW
+         3dycvD/gd485I/hvKciO+qQWHDYb8HTC1AJPFjOdb2UBiw01OlK6gwYXxwZ/xTb2GaYC
+         Gzr++xialMPFXy1FC+zcCp4wyy2AIGxtXkGmeO1SaACPMG6gMlYh6rXw/xiPCHHt4hLb
+         UTouSqDfErWVGnyhvifdCU7sEEJK+oWxvP9+SuJgrZ8sa4WiNMz6hwT/E2MqbAGPcTYe
+         WiyIRBNqE0NZctQzOFFihh6Ovp0ml/XsLDDwMTdIda13odjvc9m0wMdd1noZFkqJSKyo
+         IHIg==
+X-Gm-Message-State: AOJu0YwfU8H1Z5YxHVrxNvAXv5gJxs06zyypp7M9wtKC/yZPXUn+/g/o
+	C0JWH/JmZTvnr2F+4ThFuIhNHtvwSmhRgNRUWdUMn+FRJniKBVybAGHlkuYjqsP8
+X-Gm-Gg: ASbGncsPEIXA6oKR75+8PM0bPqL1jHtjuHDexZbFdTsIeHezKPeuydGZoBovoGVURfb
+	fAhN77Ru7ZBB0bBhlTpiSzrgdXRoueiWqB8gpToczsc40pO0JNTf3PbjGVtW++ayiTj84x8gHbI
+	U8UJma2ZroFnm5a2ftWs20jXsyKrABgM0cgb3a8QGBWzzEyC63Gt926oIJz4UdiLWpd2VUUylJ3
+	ollMI+EDFbxwpBbGzWTnpaTuGXoJfbZRUwp5tkrqv1GJx0/+MWCblb4O/PdeT2/32aT1XCY2MEw
+	8aIuhW2Cefw8d6UyeFpJIgHdoneXnTZL0xuxfOJCuNgW1pHmn3OadXTzbp+U8ObAPuVmaoKp2DZ
+	zMJS5F++kYm9S3u7G3Q/Yy+RWH4tpd85IIiTJq4AvvVBNAwIxU70aFTKlG6mEKMFTTgqkcbKu
+X-Google-Smtp-Source: AGHT+IGHO6vPuMNSviLACKBC72hu/IH8PKVE6FIUQK3U79KxMfeWob9GsNWWKppkqNO3yp5F/sT2uA==
+X-Received: by 2002:a05:6512:4608:b0:55f:3996:4f82 with SMTP id 2adb3069b0e04-55f708a2cb5mr2329558e87.1.1756764624937;
+        Mon, 01 Sep 2025 15:10:24 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Mykola Kvach <mykola_kvach@epam.com>
-Subject: [PATCH v6 07/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-Date: Tue,  2 Sep 2025 01:10:11 +0300
-Message-ID: <3a05d0f188943173703690981a7590fd12fabd4c.1756763487.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 03/13] xen/arm: gic-v3: Implement GICv3 suspend/resume functions
+Date: Tue,  2 Sep 2025 01:10:07 +0300
+Message-ID: <dc98a547ac7f746b21b47e826edf58fe9003c576.1756763487.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1756763487.git.mykola_kvach@epam.com>
 References: <cover.1756763487.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Store and restore active context and micro-TLB registers.
+System suspend may lead to a state where GIC would be powered down.
+Therefore, Xen should save/restore the context of GIC on suspend/resume.
 
-Tested on R-Car H3 Starter Kit.
+Note that the context consists of states of registers which are
+controlled by the hypervisor. Other GIC registers which are accessible
+by guests are saved/restored on context switch.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
 Changes in V6:
-- refactor code related to hw_register struct, from now it's called
-  ipmmu_reg_ctx
+- Drop gicv3_save/restore_state since it is already handled during vCPU
+  context switch.
+- The comment about systems without SPIs is clarified for readability.
+- Error and warning messages related to suspend context allocation are unified
+  and now use printk() with XENLOG_ERR for consistency.
+- The check for suspend context allocation in gicv3_resume() is removed,
+  as it is handled earlier in the suspend path.
+- The loop for saving and restoring PPI/SGI priorities is corrected to use
+  the proper increment.
+- The gicv3_suspend() function now prints an explicit error if ITS suspend
+  support is not implemented, and returns ENOSYS in this case.
+- The GICD_CTLR_DS bit definition is added to gic_v3_defs.h.
+- The comment for GICR_WAKER access is expanded to reference the relevant
+  ARM specification section and clarify the RAZ/WI behavior for Non-secure
+  accesses.
+- Cleanup active and enable registers before restoring.
 ---
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 257 +++++++++++++++++++++++
- 1 file changed, 257 insertions(+)
+ xen/arch/arm/gic-v3-lpi.c              |   3 +
+ xen/arch/arm/gic-v3.c                  | 235 +++++++++++++++++++++++++
+ xen/arch/arm/include/asm/gic_v3_defs.h |   1 +
+ 3 files changed, 239 insertions(+)
 
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index ea9fa9ddf3..0973559861 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -71,6 +71,8 @@
- })
- #endif
- 
-+#define dev_dbg(dev, fmt, ...)    \
-+    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
- #define dev_info(dev, fmt, ...)    \
-     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
- #define dev_warn(dev, fmt, ...)    \
-@@ -130,6 +132,24 @@ struct ipmmu_features {
-     unsigned int imuctr_ttsel_mask;
- };
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
+diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+index de5052e5cf..61a6e18303 100644
+--- a/xen/arch/arm/gic-v3-lpi.c
++++ b/xen/arch/arm/gic-v3-lpi.c
+@@ -391,6 +391,9 @@ static int cpu_callback(struct notifier_block *nfb, unsigned long action,
+     switch ( action )
+     {
+     case CPU_UP_PREPARE:
++        if ( system_state == SYS_STATE_resume )
++            break;
 +
-+struct ipmmu_reg_ctx {
-+    unsigned int imttlbr0;
-+    unsigned int imttubr0;
-+    unsigned int imttbcr;
-+    unsigned int imctr;
-+};
-+
-+struct ipmmu_vmsa_backup {
-+    struct device *dev;
-+    unsigned int *utlbs_val;
-+    unsigned int *asids_val;
-+    struct list_head list;
-+};
-+
-+#endif
-+
- /* Root/Cache IPMMU device's information */
- struct ipmmu_vmsa_device {
-     struct device *dev;
-@@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
-     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
-     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
-     const struct ipmmu_features *features;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
-+#endif
- };
- 
- /*
-@@ -547,6 +570,222 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
-     spin_unlock_irqrestore(&mmu->lock, flags);
+         rc = gicv3_lpi_allocate_pendtable(cpu);
+         if ( rc )
+             printk(XENLOG_ERR "Unable to allocate the pendtable for CPU%lu\n",
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index cd3e1acf79..9f1be7e905 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -1776,6 +1776,233 @@ static bool gic_dist_supports_lpis(void)
+     return (readl_relaxed(GICD + GICD_TYPER) & GICD_TYPE_LPIS);
  }
  
 +#ifdef CONFIG_SYSTEM_SUSPEND
 +
-+static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
-+static LIST_HEAD(ipmmu_devices_backup);
++/* GICv3 registers to be saved/restored on system suspend/resume */
++struct gicv3_ctx {
++    struct dist_ctx {
++        uint32_t ctlr;
++        /*
++         * This struct represent block of 32 IRQs
++         * TODO: store extended SPI configuration (GICv3.1+)
++         */
++        struct irq_regs {
++            uint32_t icfgr[2];
++            uint32_t ipriorityr[8];
++            uint64_t irouter[32];
++            uint32_t isactiver;
++            uint32_t isenabler;
++        } *irqs;
++    } dist;
 +
-+static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
++    /* have only one rdist structure for last running CPU during suspend */
++    struct redist_ctx {
++        uint32_t ctlr;
++        /* TODO: handle case when we have more than 16 PPIs (GICv3.1+) */
++        uint32_t icfgr[2];
++        uint32_t igroupr;
++        uint32_t ipriorityr[8];
++        uint32_t isactiver;
++        uint32_t isenabler;
++    } rdist;
 +
-+static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
-+                                   unsigned int utlb)
++    struct cpu_ctx {
++        uint32_t ctlr;
++        uint32_t pmr;
++        uint32_t bpr;
++        uint32_t sre_el2;
++        uint32_t grpen;
++    } cpu;
++};
++
++static struct gicv3_ctx gicv3_ctx;
++
++static void __init gicv3_alloc_context(void)
 +{
-+    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
-+}
++    uint32_t blocks = DIV_ROUND_UP(gicv3_info.nr_lines, 32);
 +
-+static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
-+            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
-+            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
-+
-+    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
-+    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
-+    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
-+    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
-+}
-+
-+static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs  = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
-+
-+    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
-+    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
-+    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
-+    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
-+}
-+
-+/*
-+ * Xen: Unlike Linux implementation, Xen uses a single driver instance
-+ * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
-+ * callbacks to be invoked for each IPMMU device. So, we need to iterate
-+ * through all registered IPMMUs performing required actions.
-+ *
-+ * Also take care of restoring special settings, such as translation
-+ * table format, etc.
-+ */
-+static int __must_check ipmmu_suspend(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return 0;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Suspending ...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
-+    {
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_backup_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_backup(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+
-+    return 0;
-+}
-+
-+static void ipmmu_resume(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
++    /* We don't have ITS support for suspend */
++    if ( gicv3_its_host_has_its() )
 +        return;
 +
-+    printk(XENLOG_DEBUG "ipmmu: Resuming ...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
++    /* The spec allows for systems without any SPIs */
++    if ( blocks > 1 )
 +    {
-+        uint32_t reg;
-+
-+        /* Do not use security group function */
-+        reg = IMSCTLR + mmu->features->control_offset_base;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) & ~IMSCTLR_USE_SECGRP);
-+
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            /* Use stage 2 translation table format */
-+            reg = IMSAUXCTLR + mmu->features->control_offset_base;
-+            ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_restore_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_restore(mmu);
++        gicv3_ctx.dist.irqs = xzalloc_array(typeof(*gicv3_ctx.dist.irqs),
++                                            blocks - 1);
++        if ( !gicv3_ctx.dist.irqs )
++            printk(XENLOG_ERR "Failed to allocate memory for GICv3 suspend context\n");
 +    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
 +}
 +
-+static int ipmmu_alloc_ctx_suspend(struct device *dev)
++static void gicv3_disable_redist(void)
 +{
-+    struct ipmmu_vmsa_backup *backup_data;
-+    unsigned int *utlbs_val, *asids_val;
-+    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
++    void __iomem* waker = GICD_RDIST_BASE + GICR_WAKER;
 +
-+    utlbs_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !utlbs_val )
-+        return -ENOMEM;
++    /*
++     * Avoid infinite loop if Non-secure does not have access to GICR_WAKER.
++     * See Arm IHI 0069H.b, 12.11.42 GICR_WAKER:
++     *     When GICD_CTLR.DS == 0 and an access is Non-secure accesses to this
++     *     register are RAZ/WI.
++     */
++    if ( !(readl_relaxed(GICD + GICD_CTLR) & GICD_CTLR_DS) )
++        return;
 +
-+    asids_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !asids_val )
++    writel_relaxed(readl_relaxed(waker) | GICR_WAKER_ProcessorSleep, waker);
++    while ( (readl_relaxed(waker) & GICR_WAKER_ChildrenAsleep) == 0 );
++}
++
++static int gicv3_suspend(void)
++{
++    unsigned int i;
++    void __iomem *base;
++    typeof(gicv3_ctx.rdist)* rdist = &gicv3_ctx.rdist;
++
++    /* TODO: implement support for ITS */
++    if ( gicv3_its_host_has_its() )
 +    {
-+        xfree(utlbs_val);
++        printk(XENLOG_ERR "GICv3: ITS suspend support is not implemented\n");
++        return -ENOSYS;
++    }
++
++    if ( !gicv3_ctx.dist.irqs && gicv3_info.nr_lines > NR_GIC_LOCAL_IRQS )
++    {
++        printk(XENLOG_ERR "GICv3: suspend context is not allocated!\n");
 +        return -ENOMEM;
 +    }
 +
-+    backup_data = xzalloc(struct ipmmu_vmsa_backup);
-+    if ( !backup_data )
++    /* Save GICC configuration */
++    gicv3_ctx.cpu.ctlr     = READ_SYSREG(ICC_CTLR_EL1);
++    gicv3_ctx.cpu.pmr      = READ_SYSREG(ICC_PMR_EL1);
++    gicv3_ctx.cpu.bpr      = READ_SYSREG(ICC_BPR1_EL1);
++    gicv3_ctx.cpu.sre_el2  = READ_SYSREG(ICC_SRE_EL2);
++    gicv3_ctx.cpu.grpen    = READ_SYSREG(ICC_IGRPEN1_EL1);
++
++    gicv3_disable_interface();
++    gicv3_disable_redist();
++
++    /* Save GICR configuration */
++    gicv3_redist_wait_for_rwp();
++
++    base = GICD_RDIST_SGI_BASE;
++
++    rdist->ctlr = readl_relaxed(base + GICR_CTLR);
++
++    /* Save priority on PPI and SGI interrupts */
++    for ( i = 0; i < NR_GIC_LOCAL_IRQS / 4; i++ )
++        rdist->ipriorityr[i] = readl_relaxed(base + GICR_IPRIORITYR0 + 4 * i);
++
++    rdist->isactiver = readl_relaxed(base + GICR_ISACTIVER0);
++    rdist->isenabler = readl_relaxed(base + GICR_ISENABLER0);
++    rdist->igroupr   = readl_relaxed(base + GICR_IGROUPR0);
++    rdist->icfgr[0]  = readl_relaxed(base + GICR_ICFGR0);
++    rdist->icfgr[1]  = readl_relaxed(base + GICR_ICFGR1);
++
++    /* Save GICD configuration */
++    gicv3_dist_wait_for_rwp();
++    gicv3_ctx.dist.ctlr = readl_relaxed(GICD + GICD_CTLR);
++
++    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
 +    {
-+        xfree(utlbs_val);
-+        xfree(asids_val);
-+        return -ENOMEM;
++        typeof(gicv3_ctx.dist.irqs) irqs = gicv3_ctx.dist.irqs + i - 1;
++        unsigned int irq;
++
++        base = GICD + GICD_ICFGR + 8 * i;
++        irqs->icfgr[0] = readl_relaxed(base);
++        irqs->icfgr[1] = readl_relaxed(base + 4);
++
++        base = GICD + GICD_IPRIORITYR + 32 * i;
++        for ( irq = 0; irq < 8; irq++ )
++            irqs->ipriorityr[irq] = readl_relaxed(base + 4 * irq);
++
++        base = GICD + GICD_IROUTER + 32 * i;
++        for ( irq = 0; irq < 32; irq++ )
++            irqs->irouter[irq] = readq_relaxed_non_atomic(base + 8 * irq);
++
++        irqs->isactiver = readl_relaxed(GICD + GICD_ISACTIVER + 4 * i);
++        irqs->isenabler = readl_relaxed(GICD + GICD_ISENABLER + 4 * i);
 +    }
-+
-+    backup_data->dev = dev;
-+    backup_data->utlbs_val = utlbs_val;
-+    backup_data->asids_val = asids_val;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+    list_add(&backup_data->list, &ipmmu_devices_backup);
-+    spin_unlock(&ipmmu_devices_backup_lock);
 +
 +    return 0;
++}
++
++static void gicv3_resume(void)
++{
++    unsigned int i;
++    void __iomem *base;
++    typeof(gicv3_ctx.rdist)* rdist = &gicv3_ctx.rdist;
++
++    writel_relaxed(0, GICD + GICD_CTLR);
++
++    for ( i = NR_GIC_LOCAL_IRQS; i < gicv3_info.nr_lines; i += 32 )
++        writel_relaxed(GENMASK(31, 0), GICD + GICD_IGROUPR + (i / 32) * 4);
++
++    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
++    {
++        typeof(gicv3_ctx.dist.irqs) irqs = gicv3_ctx.dist.irqs + i - 1;
++        unsigned int irq;
++
++        base = GICD + GICD_ICFGR + 8 * i;
++        writel_relaxed(irqs->icfgr[0], base);
++        writel_relaxed(irqs->icfgr[1], base + 4);
++
++        base = GICD + GICD_IPRIORITYR + 32 * i;
++        for ( irq = 0; irq < 8; irq++ )
++            writel_relaxed(irqs->ipriorityr[irq], base + 4 * irq);
++
++        base = GICD + GICD_IROUTER + 32 * i;
++        for ( irq = 0; irq < 32; irq++ )
++            writeq_relaxed_non_atomic(irqs->irouter[irq], base + 8 * irq);
++
++        writel_relaxed(GENMASK(31, 0), GICD + GICD_ICENABLER + i * 4);
++        writel_relaxed(irqs->isenabler, GICD + GICD_ISENABLER + i * 4);
++
++        writel_relaxed(GENMASK(31, 0), GICD + GICD_ICACTIVER + i * 4);
++        writel_relaxed(irqs->isactiver, GICD + GICD_ISACTIVER + i * 4);
++    }
++
++    writel_relaxed(gicv3_ctx.dist.ctlr, GICD + GICD_CTLR);
++    gicv3_dist_wait_for_rwp();
++
++    /* Restore GICR (Redistributor) configuration */
++    gicv3_enable_redist();
++
++    base = GICD_RDIST_SGI_BASE;
++
++    writel_relaxed(0xffffffff, base + GICR_ICENABLER0);
++    gicv3_redist_wait_for_rwp();
++
++    for ( i = 0; i < NR_GIC_LOCAL_IRQS / 4; i++ )
++        writel_relaxed(rdist->ipriorityr[i], base + GICR_IPRIORITYR0 + i * 4);
++
++    writel_relaxed(rdist->isactiver, base + GICR_ISACTIVER0);
++
++    writel_relaxed(rdist->igroupr,  base + GICR_IGROUPR0);
++    writel_relaxed(rdist->icfgr[0], base + GICR_ICFGR0);
++    writel_relaxed(rdist->icfgr[1], base + GICR_ICFGR1);
++
++    gicv3_redist_wait_for_rwp();
++
++    writel_relaxed(rdist->isenabler, base + GICR_ISENABLER0);
++    writel_relaxed(rdist->ctlr, GICD_RDIST_BASE + GICR_CTLR);
++
++    gicv3_redist_wait_for_rwp();
++
++    WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
++    isb();
++
++    /* Restore CPU interface (System registers) */
++    WRITE_SYSREG(gicv3_ctx.cpu.pmr,   ICC_PMR_EL1);
++    WRITE_SYSREG(gicv3_ctx.cpu.bpr,   ICC_BPR1_EL1);
++    WRITE_SYSREG(gicv3_ctx.cpu.ctlr,  ICC_CTLR_EL1);
++    WRITE_SYSREG(gicv3_ctx.cpu.grpen, ICC_IGRPEN1_EL1);
++    isb();
++
++    gicv3_hyp_init();
 +}
 +
 +#endif /* CONFIG_SYSTEM_SUSPEND */
 +
- static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
+ /* Set up the GIC */
+ static int __init gicv3_init(void)
  {
-     uint64_t ttbr;
-@@ -559,6 +798,9 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
-         return ret;
+@@ -1850,6 +2077,10 @@ static int __init gicv3_init(void)
  
-     domain->context_id = ret;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[ret] = &root_pgtable[ret];
-+#endif
- 
-     /*
-      * TTBR0
-@@ -615,6 +857,9 @@ static void ipmmu_domain_destroy_context(struct ipmmu_vmsa_domain *domain)
-     ipmmu_ctx_write_root(domain, IMCTR, IMCTR_FLUSH);
-     ipmmu_tlb_sync(domain);
+     gicv3_hyp_init();
  
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[domain->context_id] = NULL;
-+#endif
-     ipmmu_domain_free_context(domain->mmu->root, domain->context_id);
- }
- 
-@@ -1427,6 +1672,14 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     }
- #endif
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    if ( ipmmu_alloc_ctx_suspend(dev) )
-+    {
-+        dev_err(dev, "Failed to allocate context for suspend\n");
-+        return -ENOMEM;
-+    }
++    gicv3_alloc_context();
 +#endif
 +
-     dev_info(dev, "Added master device (IPMMU %s micro-TLBs %u)\n",
-              dev_name(fwspec->iommu_dev), fwspec->num_ids);
+ out:
+     spin_unlock(&gicv3.lock);
  
-@@ -1492,6 +1745,10 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-     .add_device      = ipmmu_add_device,
+@@ -1889,6 +2120,10 @@ static const struct gic_hw_operations gicv3_ops = {
+ #endif
+     .iomem_deny_access   = gicv3_iomem_deny_access,
+     .do_LPI              = gicv3_do_LPI,
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend         = ipmmu_suspend,
-+    .resume          = ipmmu_resume,
++    .suspend             = gicv3_suspend,
++    .resume              = gicv3_resume,
 +#endif
  };
  
- static __init int ipmmu_init(struct dt_device_node *node, const void *data)
+ static int __init gicv3_dt_preinit(struct dt_device_node *node, const void *data)
+diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/include/asm/gic_v3_defs.h
+index 2af093e774..7e86309acb 100644
+--- a/xen/arch/arm/include/asm/gic_v3_defs.h
++++ b/xen/arch/arm/include/asm/gic_v3_defs.h
+@@ -56,6 +56,7 @@
+ #define GICD_TYPE_LPIS               (1U << 17)
+ 
+ #define GICD_CTLR_RWP                (1UL << 31)
++#define GICD_CTLR_DS                 (1U << 6)
+ #define GICD_CTLR_ARE_NS             (1U << 4)
+ #define GICD_CTLR_ENABLE_G1A         (1U << 1)
+ #define GICD_CTLR_ENABLE_G1          (1U << 0)
 -- 
 2.48.1
 
