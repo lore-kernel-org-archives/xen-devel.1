@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76A79CA0FFE
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 14:45:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1106690.1457317 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA566CA100B
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 14:49:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1106702.1457337 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utSFn-0001Zh-9s; Tue, 02 Sep 2025 14:44:59 +0000
+	id 1utSJv-0002NS-4k; Tue, 02 Sep 2025 14:49:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1106690.1457317; Tue, 02 Sep 2025 14:44:59 +0000
+Received: by outflank-mailman (output) from mailman id 1106702.1457337; Tue, 02 Sep 2025 14:49:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utSFn-0001Za-77; Tue, 02 Sep 2025 14:44:59 +0000
-Received: by outflank-mailman (input) for mailman id 1106690;
- Tue, 02 Sep 2025 14:44:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=q6uY=3N=cloud.com=gerald.elder-vass@srs-se1.protection.inumbo.net>)
- id 1utSFl-0001ZU-Ed
- for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 14:44:57 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 63dbd3a6-880b-11f0-8dd7-1b34d833f44b;
- Tue, 02 Sep 2025 16:44:55 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-afcb7ae31caso1054524266b.3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Sep 2025 07:44:55 -0700 (PDT)
-Received: from eddie5.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aff15fccad1sm942353066b.108.2025.09.02.07.44.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Sep 2025 07:44:53 -0700 (PDT)
+	id 1utSJv-0002NL-1i; Tue, 02 Sep 2025 14:49:15 +0000
+Received: by outflank-mailman (input) for mailman id 1106702;
+ Tue, 02 Sep 2025 14:49:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=uTXE=3N=kernel.org=leon@srs-se1.protection.inumbo.net>)
+ id 1utSJt-0002MQ-7F
+ for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 14:49:13 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fc7e0ac2-880b-11f0-8adc-4578a1afcccb;
+ Tue, 02 Sep 2025 16:49:11 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 272106021C;
+ Tue,  2 Sep 2025 14:49:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C5C6C4CEED;
+ Tue,  2 Sep 2025 14:49:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,157 +43,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63dbd3a6-880b-11f0-8dd7-1b34d833f44b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1756824294; x=1757429094; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=f48bQFr2pwLrvr7pu6JK/rPhwtQpUL/wKoNYgBPv14Q=;
-        b=c4kVIBZAJgFZpi2uHth1IJGrkbAR1aXZc0Sn05Eb5kYTqUMT3hoK8nm2rSxmAQPtl8
-         dH6XR8VwGY1yoo30UsdxacfMO8S3Aai+iT0OGc+Qsa8/cEPgG30cAkuMNzukZixuegCP
-         5p/fsZ2X4h9+U9sjte2Ln15OQ+MfqRxq9R6nQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756824294; x=1757429094;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=f48bQFr2pwLrvr7pu6JK/rPhwtQpUL/wKoNYgBPv14Q=;
-        b=U04JwGEMcyMpRbTkMz7Etc3m+Ta1QwxtmXyC6oLvzF7T+eSU2YkZrhrvkCd56JM0/j
-         nJ2PxQukw0eAP6yuuIvnpA+WxDaJjWnhu2YjqFVwBN2YcflFnrmvaiSP/puvA7YHvb8L
-         pjjDBJ+WqdugIrnC3IqjQls368E9ntIVEy3pzGIjWHWH2yn94DGg7sfrrPrYenH6BeBT
-         hTgTayjQ4wxgtoIkRx9obvMrRFWf0keVMOOMOF90RnlFqIqNvn8TDtE+46OaGlCD8vY3
-         tdLZd+7hX7H8Txjza8UPpeXXca4k8cwERSyroqtTlAQCeqn6OXypxPOOxWoixnpKaoe+
-         oZ+A==
-X-Gm-Message-State: AOJu0Yy0G2W1CPVCCAu23zUbnjmgZynTzdDjzN8RFbRxRx+M7G+2eCTB
-	6EP+RFB27g3EF9LY9l+NLXNcdI0tjLI2JNtOD8B5ru5Yc1wMJoo2LTyEQRr0v+QeETLb6cnv4iQ
-	AFgJW6U4=
-X-Gm-Gg: ASbGncseKSHihhY3jf9uzNGSafv3ifmPiCNkGjq9k/nKJcQDHSpn4AfinYu6NuVzlRo
-	GJxWYVcaMX89Eqn4rvkf37R54Z2jNM/N+xo36g3bARHKvaL2kCJvDzcEKIM8aLGn7WkwWmm8rCD
-	pq7pIG6WzvzGmgS0r2OZ5YJClcnrpUtDzPsOpwhRWsW2wfBhlRSzvyX2r2CQ/n1b3WMETeHrjzt
-	EYX8Wbjx+J0WZ0Ikb56+aQtqgIi+p2CjA0Q8OBRCTHwUYUa51vm5KuL6LHCZXs7q9euPjgE9lWp
-	JkJIhpihTwjqUdbxlnhuNj6E83IsKBQXA9uP+rZmfMpnIPKFgX0d1qB/Py5DD4N3ZQmaYH/c25/
-	xChM6oJG86lFvdCuZqn393AB+8yIIr32KBSfhY4fW6IYnuXwjeIVFrXsF
-X-Google-Smtp-Source: AGHT+IHjbWXHk9e+wapZHxoKH2FCnMDaeWlQIBl/ucIqvv5oPZW/Wr8d4x3VmEbuZcPcZuSyJq4uRQ==
-X-Received: by 2002:a17:906:6a02:b0:af9:2e26:4636 with SMTP id a640c23a62f3a-b01d971924bmr1109674166b.32.1756824294174;
-        Tue, 02 Sep 2025 07:44:54 -0700 (PDT)
-From: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+X-Inumbo-ID: fc7e0ac2-880b-11f0-8adc-4578a1afcccb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1756824549;
+	bh=mXPBKGOTAXMaA8YnIACrT4VeK6ColaZH6f/lOi0T5+M=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=U0Qv8COD9vJg/sj1gHJxX08tsa8mkqMwlswZW+JY7U0WZ8zpN+E0gqojH+zijJe4+
+	 GuuBOfJJ7E92NxE/euEVPxir80asPMfJZGfrlBFEkkFiMxs1fGRxbBrARGWJDsvYEz
+	 0KVNHATZmZLhqAH2lHu7WLDB7F7EQbI17lR4MqOQH/5s2HbhqrH3xM/s+mDuyDQQmx
+	 m02cD9zShxiSGxZ84PSZ2YclbBHgJpT4c2BpGr1yygJDBWMAsAnP+j3X0VDKrUyWPN
+	 1KTnwLeTF/x2Orxw9fuAs97O/ssJyp2QOTAnt7oAnZkpfXEk2bpm2MqXqfbqd52vql
+	 XZaWqMxq2z8vg==
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Leon Romanovsky <leonro@nvidia.com>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Hellwig <hch@lst.de>,
+	Danilo Krummrich <dakr@kernel.org>,
+	David Hildenbrand <david@redhat.com>,
+	iommu@lists.linux.dev,
+	Jason Wang <jasowang@redhat.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Joerg Roedel <joro@8bytes.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Juergen Gross <jgross@suse.com>,
+	kasan-dev@googlegroups.com,
+	Keith Busch <kbusch@kernel.org>,
+	linux-block@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-nvme@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-trace-kernel@vger.kernel.org,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	rust-for-linux@vger.kernel.org,
+	Sagi Grimberg <sagi@grimberg.me>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Gerald Elder-Vass <gerald.elder-vass@cloud.com>,
-	Kevin Lampis <kevin.lampis@cloud.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [XEN PATCH v2] efi: Use Shim's LoadImage to verify the Dom0 kernel
-Date: Tue,  2 Sep 2025 14:44:45 +0000
-Message-ID: <7f2f88f0d857ed3f8d7e3fabe349a3b5d5815981.1756822290.git.gerald.elder-vass@cloud.com>
-X-Mailer: git-send-email 2.47.3
+	Steven Rostedt <rostedt@goodmis.org>,
+	virtualization@lists.linux.dev,
+	Will Deacon <will@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v5 02/16] iommu/dma: implement DMA_ATTR_MMIO for dma_iova_link().
+Date: Tue,  2 Sep 2025 17:48:39 +0300
+Message-ID: <5a279b1ce492ba8635eb3fa6bb9a22fd77366672.1756822782.git.leon@kernel.org>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1756822782.git.leon@kernel.org>
+References: <cover.1756822782.git.leon@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The existing Verify functionality of the Shim lock protocol is
-deprecated and will be removed, instead we must use the LoadImage
-interface to perform the verification.
+From: Leon Romanovsky <leonro@nvidia.com>
 
-When the loading is successful we won't be using the newly loaded image
-(as of yet) so we must then immediately unload the image to clean up.
+This will replace the hacky use of DMA_ATTR_SKIP_CPU_SYNC to avoid
+touching the possibly non-KVA MMIO memory.
 
-Signed-off-by: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
-Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
+Also correct the incorrect caching attribute for the IOMMU, MMIO
+memory should not be cachable inside the IOMMU mapping or it can
+possibly create system problems. Set IOMMU_MMIO for DMA_ATTR_MMIO.
+
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
-Changes since v1:
-- Re-instated SHIM_LOCK_PROTOCOL as a fallback option if IMAGE_LOADER is
-  not found
-- Fixed indentation and error messages
----
- xen/common/efi/boot.c | 43 +++++++++++++++++++++++++++++++++++++------
- 1 file changed, 37 insertions(+), 6 deletions(-)
+ drivers/iommu/dma-iommu.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 453b1ba099cd..273da3d9e3e3 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -38,6 +38,8 @@
-   { 0xf2fd1544U, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94} }
- #define SHIM_LOCK_PROTOCOL_GUID \
-   { 0x605dab50U, 0xe046, 0x4300, {0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23} }
-+#define SHIM_IMAGE_LOADER_GUID \
-+  { 0x1f492041U, 0xfadb, 0x4e59, {0x9e, 0x57, 0x7c, 0xaf, 0xe7, 0x3a, 0x55, 0xab} }
- #define APPLE_PROPERTIES_PROTOCOL_GUID \
-   { 0x91bd12feU, 0xf6c3, 0x44fb, {0xa5, 0xb7, 0x51, 0x22, 0xab, 0x30, 0x3a, 0xe0} }
- #define EFI_SYSTEM_RESOURCE_TABLE_GUID    \
-@@ -70,6 +72,13 @@ typedef struct {
-     EFI_SHIM_LOCK_VERIFY Verify;
- } EFI_SHIM_LOCK_PROTOCOL;
- 
-+typedef struct _SHIM_IMAGE_LOADER {
-+    EFI_IMAGE_LOAD LoadImage;
-+    EFI_IMAGE_START StartImage;
-+    EFI_EXIT Exit;
-+    EFI_IMAGE_UNLOAD UnloadImage;
-+} SHIM_IMAGE_LOADER;
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index ea2ef53bd4fe..e1185ba73e23 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -724,7 +724,12 @@ static int iommu_dma_init_domain(struct iommu_domain *domain, struct device *dev
+ static int dma_info_to_prot(enum dma_data_direction dir, bool coherent,
+ 		     unsigned long attrs)
+ {
+-	int prot = coherent ? IOMMU_CACHE : 0;
++	int prot;
 +
- struct _EFI_APPLE_PROPERTIES;
++	if (attrs & DMA_ATTR_MMIO)
++		prot = IOMMU_MMIO;
++	else
++		prot = coherent ? IOMMU_CACHE : 0;
  
- typedef EFI_STATUS
-@@ -1336,10 +1345,12 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-     static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
-     EFI_LOADED_IMAGE *loaded_image;
-     EFI_STATUS status;
-+    EFI_HANDLE loaded_kernel;
-     unsigned int i;
-     CHAR16 *file_name, *cfg_file_name = NULL, *options = NULL;
-     UINTN gop_mode = ~0;
-     EFI_SHIM_LOCK_PROTOCOL *shim_lock;
-+    SHIM_IMAGE_LOADER *shim_loader;
-     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop = NULL;
-     union string section = { NULL }, name;
-     bool base_video = false;
-@@ -1590,12 +1601,32 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-      * device tree through the efi_check_dt_boot function, in this stage
-      * verify it.
-      */
--    if ( kernel.ptr &&
--         !kernel_verified &&
--         !EFI_ERROR(efi_bs->LocateProtocol(&shim_lock_guid, NULL,
--                                           (void **)&shim_lock)) &&
--         (status = shim_lock->Verify(kernel.ptr, kernel.size)) != EFI_SUCCESS )
--        PrintErrMesg(L"Dom0 kernel image could not be verified", status);
-+    if ( kernel.ptr && !kernel_verified )
-+    {
-+
-+        if ( !EFI_ERROR(efi_bs->LocateProtocol(&((EFI_GUID) SHIM_IMAGE_LOADER_GUID),
-+                                               NULL, (void **)&shim_loader)) )
-+        {
-+            status = shim_loader->LoadImage(false, ImageHandle, NULL, (void *)kernel.ptr, kernel.size, &loaded_kernel);
-+            if ( EFI_ERROR(status) )
-+                PrintErrMesg(L"LoadImage failed", status);
-+
-+            // LoadImage performs verification, now unload it to clean up
-+            status = shim_loader->UnloadImage(loaded_kernel);
-+            if ( EFI_ERROR(status) )
-+                PrintErrMesg(L"UnloadImage failed", status);
-+        }
-+        else
-+        {
-+            status = efi_bs->LocateProtocol(&shim_lock_guid, NULL, (void **)&shim_lock);
-+            if ( EFI_ERROR(status) )
-+                PrintErrMesg(L"Failed to locate SHIM_LOCK protocol", status);
-+
-+            status = shim_lock->Verify(kernel.ptr, kernel.size);
-+            if ( EFI_ERROR(status) )
-+                PrintErrMesg(L"Dom0 kernel image could not be verified", status);
-+        }
-+    }
+ 	if (attrs & DMA_ATTR_PRIVILEGED)
+ 		prot |= IOMMU_PRIV;
+@@ -1838,12 +1843,13 @@ static int __dma_iova_link(struct device *dev, dma_addr_t addr,
+ 		unsigned long attrs)
+ {
+ 	bool coherent = dev_is_dma_coherent(dev);
++	int prot = dma_info_to_prot(dir, coherent, attrs);
  
-     efi_arch_edd();
+-	if (!coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
++	if (!coherent && !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO)))
+ 		arch_sync_dma_for_device(phys, size, dir);
  
+ 	return iommu_map_nosync(iommu_get_dma_domain(dev), addr, phys, size,
+-			dma_info_to_prot(dir, coherent, attrs), GFP_ATOMIC);
++			prot, GFP_ATOMIC);
+ }
+ 
+ static int iommu_dma_iova_bounce_and_link(struct device *dev, dma_addr_t addr,
+@@ -1949,9 +1955,13 @@ int dma_iova_link(struct device *dev, struct dma_iova_state *state,
+ 		return -EIO;
+ 
+ 	if (dev_use_swiotlb(dev, size, dir) &&
+-	    iova_unaligned(iovad, phys, size))
++	    iova_unaligned(iovad, phys, size)) {
++		if (attrs & DMA_ATTR_MMIO)
++			return -EPERM;
++
+ 		return iommu_dma_iova_link_swiotlb(dev, state, phys, offset,
+ 				size, dir, attrs);
++	}
+ 
+ 	return __dma_iova_link(dev, state->addr + offset - iova_start_pad,
+ 			phys - iova_start_pad,
 -- 
-2.47.3
+2.50.1
 
 
