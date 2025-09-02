@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2025BCA1005
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 14:50:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1106767.1457406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F56FCA1005
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 14:51:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1106775.1457418 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utSLP-0007Gj-9F; Tue, 02 Sep 2025 14:50:47 +0000
+	id 1utSLb-0007hl-IJ; Tue, 02 Sep 2025 14:50:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1106767.1457406; Tue, 02 Sep 2025 14:50:47 +0000
+Received: by outflank-mailman (output) from mailman id 1106775.1457418; Tue, 02 Sep 2025 14:50:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utSLP-0007Gc-6X; Tue, 02 Sep 2025 14:50:47 +0000
-Received: by outflank-mailman (input) for mailman id 1106767;
- Tue, 02 Sep 2025 14:50:45 +0000
+	id 1utSLb-0007h1-Cd; Tue, 02 Sep 2025 14:50:59 +0000
+Received: by outflank-mailman (input) for mailman id 1106775;
+ Tue, 02 Sep 2025 14:50:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uTXE=3N=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1utSKr-0002MQ-4O
- for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 14:50:13 +0000
+ id 1utSKa-0002MQ-3M
+ for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 14:49:56 +0000
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 204bf79e-880c-11f0-8adc-4578a1afcccb;
- Tue, 02 Sep 2025 16:50:12 +0200 (CEST)
+ id 15e46215-880c-11f0-8adc-4578a1afcccb;
+ Tue, 02 Sep 2025 16:49:54 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D3F4C41994;
- Tue,  2 Sep 2025 14:50:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF152C4CEED;
- Tue,  2 Sep 2025 14:50:09 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6DD06409E2;
+ Tue,  2 Sep 2025 14:49:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E5E9C4CEED;
+ Tue,  2 Sep 2025 14:49:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 204bf79e-880c-11f0-8adc-4578a1afcccb
+X-Inumbo-ID: 15e46215-880c-11f0-8adc-4578a1afcccb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756824610;
-	bh=loKqVytyVDIeLrj3FO1P5XlYadT3usoA9sJi/ZhWYE4=;
+	s=k20201202; t=1756824593;
+	bh=O9XZOHlHvjORXmOt4kTIQrFLHTrONFqw1ae8lUbcYw8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XDqouYHc8vRB0ajJZqK4lwxspBtMW6b4AWggjQsPi5/K2g2R10AjUbWT8azo/7M7O
-	 N6Jh6bQk4hBxULYIt59wnr7HzVq+T18QfRotRvkr6SqeRycgt3KrMgeI2f9YoYF65R
-	 AMah6TQRO20arumHElmz/9xJv71VS+55KKRTzUhrWxBMRXKYC/ULWECIEily7rCTXe
-	 eS9NQqKv9qVWkNYpMk5mwrAgRsMMcEg2+JJNlzJdw/9SSH0fatvocB6pT/Dy/lfKbD
-	 W+rnlIzxGxfqLNVSwZwF1T0salbWquRx/dFWfgfMqcj//UlZSSQb08JaE3KYrMoHxH
-	 hxEoSoVhdeDtQ==
+	b=i4LP/8sFn4GJsZ/wYwZJG+51+koOumcx5kwuswjw9uzDtXu5nJFVYiFdkD5Pd0XDV
+	 CJojBBl/IcJFZ1DnDDaW5/OvJIPqgpfNaVsr+q2jlXPVvC5bdwVF7QKxf4Ph4v8jOj
+	 2HjHKIF3azuV23NGrP/L0kmkIoLbU77FsGzLAIB4etR8CjLv/mm1W+Rm9wG7Wi20Qf
+	 9bCfB5IoI0J0AUn4bKcg7P3o/CnocQo4hvP2QVxf1pC/4M65ApXfrRdTznGR7HL9EL
+	 UCDZyXx1Bbm4fIIthh7q4BpOhb2peNDAk4t3Me9zhw16A5tgAwshGbvt8aoBahblXj
+	 yINBs05SJGpZQ==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>,
@@ -93,9 +93,9 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	Will Deacon <will@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 16/16] nvme-pci: unmap MMIO pages with appropriate interface
-Date: Tue,  2 Sep 2025 17:48:53 +0300
-Message-ID: <fedc4cb3d79c81dae7d8b4ef45b5b3373f6a8bad.1756822782.git.leon@kernel.org>
+Subject: [PATCH v5 12/16] mm/hmm: migrate to physical address-based DMA mapping API
+Date: Tue,  2 Sep 2025 17:48:49 +0300
+Message-ID: <90d2f14352494d615d3a5d1251126c88f96a4171.1756822782.git.leon@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1756822782.git.leon@kernel.org>
 References: <cover.1756822782.git.leon@kernel.org>
@@ -104,63 +104,53 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-Block layer maps MMIO memory through dma_map_phys() interface
-with help of DMA_ATTR_MMIO attribute. There is a need to unmap
-that memory with the appropriate unmap function, something which
-wasn't possible before adding new REQ attribute to block layer in
-previous patch.
+Convert HMM DMA operations from the legacy page-based API to the new
+physical address-based dma_map_phys() and dma_unmap_phys() functions.
+This demonstrates the preferred approach for new code that should use
+physical addresses directly rather than page+offset parameters.
 
-Reviewed-by: Keith Busch <kbusch@kernel.org>
+The change replaces dma_map_page() and dma_unmap_page() calls with
+dma_map_phys() and dma_unmap_phys() respectively, using the physical
+address that was already available in the code. This eliminates the
+redundant page-to-physical address conversion and aligns with the
+DMA subsystem's move toward physical address-centric interfaces.
+
+This serves as an example of how new code should be written to leverage
+the more efficient physical address API, which provides cleaner interfaces
+for drivers that already have access to physical addresses.
+
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- drivers/nvme/host/pci.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ mm/hmm.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index 2c6d9506b172..f8ecc0e0f576 100644
---- a/drivers/nvme/host/pci.c
-+++ b/drivers/nvme/host/pci.c
-@@ -682,11 +682,15 @@ static void nvme_free_prps(struct request *req)
- {
- 	struct nvme_iod *iod = blk_mq_rq_to_pdu(req);
- 	struct nvme_queue *nvmeq = req->mq_hctx->driver_data;
-+	unsigned int attrs = 0;
- 	unsigned int i;
+diff --git a/mm/hmm.c b/mm/hmm.c
+index d545e2494994..015ab243f081 100644
+--- a/mm/hmm.c
++++ b/mm/hmm.c
+@@ -775,8 +775,8 @@ dma_addr_t hmm_dma_map_pfn(struct device *dev, struct hmm_dma_map *map,
+ 		if (WARN_ON_ONCE(dma_need_unmap(dev) && !dma_addrs))
+ 			goto error;
  
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
-+
- 	for (i = 0; i < iod->nr_dma_vecs; i++)
--		dma_unmap_page(nvmeq->dev->dev, iod->dma_vecs[i].addr,
--				iod->dma_vecs[i].len, rq_dma_dir(req));
-+		dma_unmap_phys(nvmeq->dev->dev, iod->dma_vecs[i].addr,
-+				iod->dma_vecs[i].len, rq_dma_dir(req), attrs);
- 	mempool_free(iod->dma_vecs, nvmeq->dev->dmavec_mempool);
- }
+-		dma_addr = dma_map_page(dev, page, 0, map->dma_entry_size,
+-					DMA_BIDIRECTIONAL);
++		dma_addr = dma_map_phys(dev, paddr, map->dma_entry_size,
++					DMA_BIDIRECTIONAL, 0);
+ 		if (dma_mapping_error(dev, dma_addr))
+ 			goto error;
  
-@@ -699,15 +703,19 @@ static void nvme_free_sgls(struct request *req)
- 	unsigned int sqe_dma_len = le32_to_cpu(iod->cmd.common.dptr.sgl.length);
- 	struct nvme_sgl_desc *sg_list = iod->descriptors[0];
- 	enum dma_data_direction dir = rq_dma_dir(req);
-+	unsigned int attrs = 0;
-+
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
+@@ -819,8 +819,8 @@ bool hmm_dma_unmap_pfn(struct device *dev, struct hmm_dma_map *map, size_t idx)
+ 		dma_iova_unlink(dev, state, idx * map->dma_entry_size,
+ 				map->dma_entry_size, DMA_BIDIRECTIONAL, attrs);
+ 	} else if (dma_need_unmap(dev))
+-		dma_unmap_page(dev, dma_addrs[idx], map->dma_entry_size,
+-			       DMA_BIDIRECTIONAL);
++		dma_unmap_phys(dev, dma_addrs[idx], map->dma_entry_size,
++			       DMA_BIDIRECTIONAL, 0);
  
- 	if (iod->nr_descriptors) {
- 		unsigned int nr_entries = sqe_dma_len / sizeof(*sg_list), i;
- 
- 		for (i = 0; i < nr_entries; i++)
--			dma_unmap_page(dma_dev, le64_to_cpu(sg_list[i].addr),
--				le32_to_cpu(sg_list[i].length), dir);
-+			dma_unmap_phys(dma_dev, le64_to_cpu(sg_list[i].addr),
-+				le32_to_cpu(sg_list[i].length), dir, attrs);
- 	} else {
--		dma_unmap_page(dma_dev, sqe_dma_addr, sqe_dma_len, dir);
-+		dma_unmap_phys(dma_dev, sqe_dma_addr, sqe_dma_len, dir, attrs);
- 	}
- }
- 
+ 	pfns[idx] &=
+ 		~(HMM_PFN_DMA_MAPPED | HMM_PFN_P2PDMA | HMM_PFN_P2PDMA_BUS);
 -- 
 2.50.1
 
