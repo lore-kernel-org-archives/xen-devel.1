@@ -4,38 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D3C4CA1007
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 18:16:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1107267.1457756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A19FCA1005
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 18:53:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1107293.1457777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utVYI-0001MO-NU; Tue, 02 Sep 2025 18:16:18 +0000
+	id 1utW81-00076l-Nf; Tue, 02 Sep 2025 18:53:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1107267.1457756; Tue, 02 Sep 2025 18:16:18 +0000
+Received: by outflank-mailman (output) from mailman id 1107293.1457777; Tue, 02 Sep 2025 18:53:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utVYI-0001MH-K2; Tue, 02 Sep 2025 18:16:18 +0000
-Received: by outflank-mailman (input) for mailman id 1107267;
- Tue, 02 Sep 2025 18:16:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1utW81-00076e-Kx; Tue, 02 Sep 2025 18:53:13 +0000
+Received: by outflank-mailman (input) for mailman id 1107293;
+ Tue, 02 Sep 2025 18:53:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Cv9L=3N=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1utVYH-0001MB-NB
- for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 18:16:17 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea00ec09-8828-11f0-8dd7-1b34d833f44b;
- Tue, 02 Sep 2025 20:16:15 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-45b8b25296fso18564045e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 02 Sep 2025 11:16:15 -0700 (PDT)
-Received: from [10.17.76.214] (ll-22.209.223.85.sovam.net.ua. [85.223.209.22])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3dcc19a386dsm118818f8f.4.2025.09.02.11.16.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Sep 2025 11:16:14 -0700 (PDT)
+ <SRS0=NrvT=3N=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
+ id 1utW80-0006sm-7F
+ for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 18:53:12 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2060a.outbound.protection.outlook.com
+ [2a01:111:f403:2412::60a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 122ebfdd-882e-11f0-8adc-4578a1afcccb;
+ Tue, 02 Sep 2025 20:53:11 +0200 (CEST)
+Received: from CYXPR03CA0016.namprd03.prod.outlook.com (2603:10b6:930:d0::24)
+ by MW6PR12MB8836.namprd12.prod.outlook.com (2603:10b6:303:241::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Tue, 2 Sep
+ 2025 18:53:07 +0000
+Received: from CY4PEPF0000E9D2.namprd03.prod.outlook.com
+ (2603:10b6:930:d0:cafe::56) by CYXPR03CA0016.outlook.office365.com
+ (2603:10b6:930:d0::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.16 via Frontend Transport; Tue,
+ 2 Sep 2025 18:53:06 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D2.mail.protection.outlook.com (10.167.241.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9094.14 via Frontend Transport; Tue, 2 Sep 2025 18:53:06 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 2 Sep
+ 2025 13:53:02 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Tue, 2 Sep
+ 2025 11:53:02 -0700
+Received: from xsjvictlira50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 2 Sep 2025 13:53:01 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,206 +66,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea00ec09-8828-11f0-8dd7-1b34d833f44b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756836975; x=1757441775; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=SqMHAPMH4OTCuEp6LUw0NE0Zc7xhyAwnJYqEI+MXBxc=;
-        b=EJ2JCwfcWItLUt/UmG3StAzcicecDRT8ET1FVeoZG8dRbxzCaDJ+frx//QM2oyIbO0
-         CmUJQ8wRqAD9+i3NzKIE2QXMAD3MYIuzVmo75NWWaJzyN8t1OOIHg2WB2Rigf6tsWx7r
-         F7GS+ZupLi9jiIBUgiafCwUOyAXjll5XMRTInECwJinHCIVE5sxuNRqwwViUkCvOwhrJ
-         Xp1QV7z2a+dQ4ip/dSKUtvI1fWei4GFj09hMVfJT6BdJgeRzhg2DeRC1z3iWfkkkCk+/
-         D/GuC+fMO9pd/e9hXB51DcYbEbUsoutHisdRK40N86eDqHv3A0XAj0rBUZ77maGU9EHd
-         3+7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756836975; x=1757441775;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SqMHAPMH4OTCuEp6LUw0NE0Zc7xhyAwnJYqEI+MXBxc=;
-        b=iUyPW65Kva6cP7TyrlnfAEa3VBkoVz8xyxnEH+dT1wV+mXc03MuSo8XMZbMQJ6Axy9
-         1As3NzYh+YXYRG1/A2WXpEvyTYW1wt7h1vZHEc6bhGwR7ANN7fzHzDSjsypi+OQbs8ty
-         8Jz5K7Un+v95QioSMDQpuYrBiGgorDN8frHVEkEXkOvFCa9TX7YqK9KfpV6n7W2eD3b5
-         JYeF/d1YHQkeWAVuyRBdhQETq7jjV+5X8LvYNTNyaRCTUwPcI25GKPwgA/dNUERXV8ne
-         MWxmHh7OFoU6Vl7YjyyRQEN7WSDczRablUw0nwW5fKm0jQOPrk1D5bCBNhWpqlej/Hov
-         U2bw==
-X-Gm-Message-State: AOJu0Yy1p6Iyi2TSPUfKMv2NI4lda/7lHwY2eYWOmUJAoQp86N1X/2/x
-	mQ3HRDh6toobR4bAegRPKf1ZHeuRQuJFgx0DXP8IF6KZ1Dwtp6i2STNE
-X-Gm-Gg: ASbGncuw/dgpU0Kd18IwsIbYKq+1Lwnka+dsHH6xA2UdVZdimjpGbgsJ6twGw3J810K
-	sYiCFQkwPsV8yQGMDh06TUWVV61naG2TR+t+uDQdNBwHEwAoAzKRl5b01OQDJZf0YoRMHfqGf8E
-	iwk5POmVcSdzdkbVUjeZ18TNycdxfgFwVxDvGvJfF3B7znviBn2C/XxORMI7VhozQCW05KysH42
-	lgBiOOKJXq98DmmLmlCitsFUpiuQhKuMSCAggvoB+Y+UsSvLPkElqNjhbkkDPi3n15FQlJtOcA9
-	IByiXK3g/0hRTGt2ClHO8N+3hXGvTpkR++bICatJIJebQTe8kr5MrOfYlfSh9/zr6IVRsYfEPDi
-	/3oueJjI15yhogzKShdK92H/my5P7UWeDWUkxUxNT1Y3kjMAtR6lPPPY=
-X-Google-Smtp-Source: AGHT+IHN/azAid88EWGaKIY1h1/du7XllgDOPyRwqW5NXSxwfALXCk4Zpr321+MfGwM1Mu2Wl53bDA==
-X-Received: by 2002:a05:6000:2207:b0:3cd:e63a:cfd5 with SMTP id ffacd0b85a97d-3d1e07a4cc1mr9205899f8f.56.1756836974674;
-        Tue, 02 Sep 2025 11:16:14 -0700 (PDT)
-Message-ID: <f7554cc0-893b-44a6-8987-7508dfeaba97@gmail.com>
-Date: Tue, 2 Sep 2025 21:16:13 +0300
+X-Inumbo-ID: 122ebfdd-882e-11f0-8adc-4578a1afcccb
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=br0eaAFscp7noKkmjN0mjv3Bc/BGcmgsKo9+eEi8GqP29uf0Qe6hzLaSU2sePR6u7zGFHP1P23ilXbaGppu70+LCMpkLsDBRWIH4u9R5eM1x3bkkLkynLWAOSX5Lm4SxxV1M2H1sMOJ7PQQsuYTj47b6vZLp0ky/686mNWJinGGPhIHAiAf0gVk80WI1Fr0B1RY3EMa3l/p7AgFnxsCcpKXh2x1ZXFwft6205TMeY3KNE9hRrINoEeig6ePGqp0RbGf2fJgUGYQ9Uh05eh/I1YLaGGcHbcPEghuk2r8QvohJFEEF2997GRmz/0pokbma+OzjD3K/SrzQws4Y95Exxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=m6yCb7W2Cm2FwrxRUKS4GH+23hZoJ5wJ30wTXxrEdLA=;
+ b=ict2SfU6Le/Ow0d2Mc9Z/gI3vCKcapBXSDZtHa1iOpZaZd6tmZIjl2kQBbiJI013ax2f/OtMmvIRndAvLbryVBt7OpXtK6TDwy475q8KsN4x+Sa5hR8IZlWcjtUMbA5MGSfJHTq9sbMp/KNK6FZn8F4c/JA6u84bIYdikN1/MIxaVx3B/p+QKOAzy1CuBtX46Gdbrxzeal0k4iBQxWISwPJimIHcfY3o39AnzRKCDvADec6MhQfzp3YgJZV5x/hK88GnbemBApoRA17mggnO9t5IV6NqArh8XzzlQuBxJ3Zvg6yrzffJnRQXF+S97n/+pshjU6qrseScDQXv9nLI3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=m6yCb7W2Cm2FwrxRUKS4GH+23hZoJ5wJ30wTXxrEdLA=;
+ b=Q1hZ8T/JzZtUObUD6ycGlzOvZOeV7h7OQSifkNN673ZIFVfPCjJJqHDg/j2llw28hMt29ePe+x+lDJql2iNRGjI6ViuNf3e8JEx6hwkJs2oFRlMTF8BzNa9M772MCNW/S8OYsXk7IKaZnCj+LToIOXGbmPTH3HanBBoKihMIIQk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: <victorm.lira@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Victor Lira <victorm.lira@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 2/2] automation: edit expect script to separate error message lines
+Date: Tue, 2 Sep 2025 11:52:35 -0700
+Message-ID: <be9b59f220f4ad1735e660fa89b96726dc504416.1756834803.git.victorm.lira@amd.com>
+X-Mailer: git-send-email 2.50.GIT
+In-Reply-To: <729708b7e6c1815e7ba9b712f6c847e0a0374fd9.1756834803.git.victorm.lira@amd.com>
+References: <729708b7e6c1815e7ba9b712f6c847e0a0374fd9.1756834803.git.victorm.lira@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 06/13] xen/arm: irq: Restore state of local IRQs during
- system resume
-To: Mykola Kvach <xakep.amatop@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Mykola Kvach <mykola_kvach@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1756763487.git.mykola_kvach@epam.com>
- <18c51957660441c945d51b02be965fbcc19c7c2b.1756763487.git.mykola_kvach@epam.com>
- <0fb4d962-a92a-4b8b-805d-60a03fe1b734@gmail.com>
- <CAGeoDV_XPjkpniPkaPXd82B80Q0qutfmXyRKedvRkWCkbL8bmQ@mail.gmail.com>
-Content-Language: en-US
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <CAGeoDV_XPjkpniPkaPXd82B80Q0qutfmXyRKedvRkWCkbL8bmQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D2:EE_|MW6PR12MB8836:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ad6e037-cd66-4601-bf92-08ddea51f3f6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?xoQHesoGw7cSA6WBj6NC/WsQFVSN3nWJsjb8cXitsVQlSVQrbAMv2201+sMP?=
+ =?us-ascii?Q?3DTDcr4RUV46O6ezRrOM3dIHtcSgEin5OGNJgp7ofEVaDa6+A7PjxHDxoOgW?=
+ =?us-ascii?Q?HVrJaCW9QCYmuKUmPw1sti+k1RrlJuMi30Gz3jt9s3vuS+n8kYYU+U/vNqxK?=
+ =?us-ascii?Q?VdBYL9IeEzzIgOqmvRu7KT3D8BUQafpP+vdSS3pleKenhNrCf+nELUP2v/an?=
+ =?us-ascii?Q?tvWxtdzYg8h0o8pVhEeOY7vJmdl1Ir1p0Ydc+Tw9VeJHGFW1SHf8pErJLNT3?=
+ =?us-ascii?Q?e6Wc2T7UMO1GTBMMVN2HOu4YsgAs1q06n0ohn6UUHc/jgYsttxh+SQcv3d2r?=
+ =?us-ascii?Q?mqTxj1rDMAEemGdxrVCWXCNwb07Pef43QL6CMJUIL9RdrRntsrNgK/6xJOG2?=
+ =?us-ascii?Q?z725CY7J8pKinoloVv6N1tUC54BppuXvvp30vwbAOUsQMeVVFUV/LpLQvtIW?=
+ =?us-ascii?Q?f+MVlMeYwxluqqqGq4avxnkOnjv93Oxqq+khyL9PTIX8vIvXX7jhK3SukDIb?=
+ =?us-ascii?Q?wbrD8wITqCaI3h8OcTIroEIMXqKp5szPEi9D0A4hPUrI1ZObenK1UITik2A5?=
+ =?us-ascii?Q?xBcBkZC14jo2FqFF7WmxldYGPvowu9zAux/ci1BkUkCvb5P1vdOi2UG2N4/L?=
+ =?us-ascii?Q?HyJgoALR/I05mRgLOTG9cnAoEKSdphnZW2NiSz2DeUgMFJv1OqXfRPPku8zE?=
+ =?us-ascii?Q?fSoUchcIC65F3FKJ5IDOFZ/K6gugzNXhChvEFiLuD3FaQF9/pXjtaYuZt2Lh?=
+ =?us-ascii?Q?HI8wMv4TL+FZHwlk+Sv4mDlhq/TlmOQLTqt3uaWy0zHG9oWUrHn2oLAlB6Mi?=
+ =?us-ascii?Q?BcdTri0YBVkJbgNJlN+Pa/qkMIMrzmKO4qkab/tcoS/hyHTcCtk3OZVMnu1J?=
+ =?us-ascii?Q?w6GnLB+NzrujlMi3+Q05RsGPmJo9DR2hvRT9ZaJcE8ZWZTzSP7GSVNmS4gXa?=
+ =?us-ascii?Q?vP7YQ25TNOEcqQT6Z2v/J0eZmDYZddV3iT8UtdvVUxUxdalKxTFL2QdNfydu?=
+ =?us-ascii?Q?pCghVwmXT6WRG4896u9O2Zw9wX7ULFzbmI8cZaHslSwzecbB5Pi/ChrevDK6?=
+ =?us-ascii?Q?uSg4p5ebODfdCsmQH8zW5i+gm/vkedYBwK6+PaIOY9L2SKGrkliSL25QBn4i?=
+ =?us-ascii?Q?rTX+1KdsuCbramEouuOMNJDy1tyY4sghy+LNMxHNjPJ6cwYbcWxWTz0fRnQv?=
+ =?us-ascii?Q?KozTu9slFqN3+VuHzYNe6QKBZdwdB93ngWQRzFBIbPc8adWxNn5fybReHWJy?=
+ =?us-ascii?Q?Oqfzd9ch2JOzl70uFfjGMvg39RGj1OmsA6Uyws94WtMmLcvGwKTo3gCWQwTW?=
+ =?us-ascii?Q?Jb/pjfxUIGfpXwgP75ixJx6OUO0N2cUHfnCrsCshFinDhL3URjXHz5RIlmU3?=
+ =?us-ascii?Q?tRy5xKWGY66Q0LuJn8DN/5zRlsaPy5s0qGwlsWRA4k/azs7eyGNelIcXq7kV?=
+ =?us-ascii?Q?p2CqVj8nTP066YgE24wXyGCotIHHcIJYqj7MaSzpYqZMEbVYFJ1UzA=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2025 18:53:06.1864
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ad6e037-cd66-4601-bf92-08ddea51f3f6
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9D2.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8836
 
+From: Victor Lira <victorm.lira@amd.com>
 
+The errors can happen in the middle of a console line which causes the message
+to appear at the end of the current line.
 
-On 02.09.25 20:43, Mykola Kvach wrote:
-> Hi Oleksandr,
+Prepend a newline to clearly separate the error line.
 
-Hello Mykola
+Signed-off-by: Victor Lira <victorm.lira@amd.com>
+---
+example of the problem:
+ - https://gitlab.com/xen-project/people/sstabellini/xen/-/jobs/11220478458
+ - line 652
+---
+pipeline:
+ - https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/2017775449
+---
+Cc: Doug Goldstein <cardoe@cardoe.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+---
+ automation/scripts/console.exp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> 
-> On Tue, Sep 2, 2025 at 7:49 PM Oleksandr Tyshchenko <olekstysh@gmail.com> wrote:
->>
->>
->>
->> On 02.09.25 01:10, Mykola Kvach wrote:
->>
->> Hello Mykola
->>
->>> From: Mykola Kvach <mykola_kvach@epam.com>
->>>
->>> On ARM, the first 32 interrupts (SGIs and PPIs) are banked per-CPU
->>> and not restored by gic_resume (for secondary cpus).
->>>
->>> This patch introduces restore_local_irqs_on_resume, a function that
->>> restores the state of local interrupts on the target CPU during
->>> system resume.
->>>
->>> It iterates over all local IRQs and re-enables those that were not
->>> disabled, reprogramming their routing and affinity accordingly.
->>>
->>> The function is invoked from start_secondary, ensuring that local IRQ
->>> state is restored early during CPU bring-up after suspend.
->>>
->>> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
->>> ---
->>> Changes in V6:
->>> - Call handler->disable() instead of just setting the _IRQ_DISABLED flag
->>> - Move the system state check outside of restore_local_irqs_on_resume()
->>> ---
->>>    xen/arch/arm/irq.c | 39 +++++++++++++++++++++++++++++++++++++++
->>>    1 file changed, 39 insertions(+)
->>>
->>> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
->>> index 6c899347ca..ddd2940554 100644
->>> --- a/xen/arch/arm/irq.c
->>> +++ b/xen/arch/arm/irq.c
->>> @@ -116,6 +116,41 @@ static int init_local_irq_data(unsigned int cpu)
->>>        return 0;
->>>    }
->>>
->>> +/*
->>> + * The first 32 interrupts (PPIs and SGIs) are per-CPU,
->>> + * so call this function on the target CPU to restore them.
->>> + *
->>> + * SPIs are restored via gic_resume.
->>> + */
->>> +static void restore_local_irqs_on_resume(void)
->>> +{
->>> +    int irq;
->>
->> NIT: Please, use "unsigned int" if irq cannot be negative
-> 
-> ok
-> 
->>
->>> +
->>> +    spin_lock(&local_irqs_type_lock);
->>> +
->>> +    for ( irq = 0; irq < NR_LOCAL_IRQS; irq++ )
->>> +    {
->>> +        struct irq_desc *desc = irq_to_desc(irq);
->>> +
->>> +        spin_lock(&desc->lock);
->>> +
->>> +        if ( test_bit(_IRQ_DISABLED, &desc->status) )
->>> +        {
->>> +            spin_unlock(&desc->lock);
->>> +            continue;
->>> +        }
->>> +
->>> +        /* Disable the IRQ to avoid assertions in the following calls */
->>> +        desc->handler->disable(desc);
->>> +        gic_route_irq_to_xen(desc, GIC_PRI_IRQ);
->>
->> Shouldn't we use GIC_PRI_IPI for SGIs?
-> 
-> Yes, we should. But currently I am restoring the same value
-> as it was before suspend...
-> 
-> I definitely agree that this needs to be fixed at the original
-> place where the issue was introduced, but I was planning to
-> address it in a future patch.
-> 
->>
->>
->>> +        desc->handler->startup(desc);
->>> +
->>> +        spin_unlock(&desc->lock);
->>> +    }
->>> +
->>> +    spin_unlock(&local_irqs_type_lock);
->>> +}
->>> +
->>>    static int cpu_callback(struct notifier_block *nfb, unsigned long action,
->>>                            void *hcpu)
->>>    {
->>> @@ -134,6 +169,10 @@ static int cpu_callback(struct notifier_block *nfb, unsigned long action,
->>>                printk(XENLOG_ERR "Unable to allocate local IRQ for CPU%u\n",
->>>                       cpu);
->>>            break;
->>> +    case CPU_STARTING:
->>> +        if ( system_state == SYS_STATE_resume )
->>> +            restore_local_irqs_on_resume();
->>> +        break;
->>
->> May I please ask, why all this new code (i.e.
->> restore_local_irqs_on_resume()) is not covered by #ifdef
->> CONFIG_SYSTEM_SUSPEND?
-> 
-> I don’t see a reason to introduce such "macaron-style" code. On ARM, the
-> system suspend state is only set when CONFIG_SYSTEM_SUSPEND is defined
-> anyway.
+diff --git a/automation/scripts/console.exp b/automation/scripts/console.exp
+index fc80513dfb..e27886bbef 100755
+--- a/automation/scripts/console.exp
++++ b/automation/scripts/console.exp
+@@ -35,8 +35,8 @@ expect_after {
+     -re "(.*)\r" {
+         exp_continue -continue_timer
+     }
+-    timeout {send_error "ERROR-Timeout!\n"; exit 1}
+-    eof {send_error "ERROR-EOF!\n"; exit 1}
++    timeout {send_error "\nERROR-Timeout!\n"; exit 1}
++    eof {send_error "\nERROR-EOF!\n"; exit 1}
+ }
 
-right
-
-> 
-> If you would prefer me to wrap all relevant code with this define, please
-> let me know and I’ll make the change. In this case, I think the current
-> approach is cleaner, but I’m open to your opinion.
-
-In other patches, you seem to wrap functions/code that only get called 
-during suspend/resume with #ifdef CONFIG_SYSTEM_SUSPEND, so I wondered 
-why restore_local_irqs_on_resume() could not be compiled out
-if the feature is not enabled. But if you still think it would be 
-cleaner this way (w/o #ifdef), I would be ok.
-
-> 
->>
->>>        }
->>>
->>>        return notifier_from_errno(rc);
->>
-> 
-> Best regards,
-> Mykola
-
+ if {[info exists env(UBOOT_CMD)]} {
+--
+2.50.GIT
 
