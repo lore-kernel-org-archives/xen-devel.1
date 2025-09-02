@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A053CA1005
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 08:57:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1105832.1456660 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A12BCA1005
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Sep 2025 09:04:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1105849.1456676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utMow-0006sK-In; Tue, 02 Sep 2025 08:56:54 +0000
+	id 1utMvl-0000J0-JY; Tue, 02 Sep 2025 09:03:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1105832.1456660; Tue, 02 Sep 2025 08:56:54 +0000
+Received: by outflank-mailman (output) from mailman id 1105849.1456676; Tue, 02 Sep 2025 09:03:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1utMow-0006sD-EI; Tue, 02 Sep 2025 08:56:54 +0000
-Received: by outflank-mailman (input) for mailman id 1105832;
- Tue, 02 Sep 2025 08:56:53 +0000
+	id 1utMvl-0000Hc-D0; Tue, 02 Sep 2025 09:03:57 +0000
+Received: by outflank-mailman (input) for mailman id 1105849;
+ Tue, 02 Sep 2025 09:03:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=V/Ey=3N=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
- id 1utMov-0006s7-KX
- for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 08:56:53 +0000
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c200::1])
+ <SRS0=X/no=3N=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1utMvk-0000FE-8m
+ for xen-devel@lists.xenproject.org; Tue, 02 Sep 2025 09:03:56 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c31bcdf0-87da-11f0-8dd7-1b34d833f44b;
- Tue, 02 Sep 2025 10:56:51 +0200 (CEST)
-Received: from GV2PR03MB8678.eurprd03.prod.outlook.com (2603:10a6:150:7d::13)
- by DU0PR03MB9199.eurprd03.prod.outlook.com (2603:10a6:10:470::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Tue, 2 Sep
- 2025 08:56:44 +0000
-Received: from GV2PR03MB8678.eurprd03.prod.outlook.com
- ([fe80::4eb:3e7b:1ffa:25f9]) by GV2PR03MB8678.eurprd03.prod.outlook.com
- ([fe80::4eb:3e7b:1ffa:25f9%6]) with mapi id 15.20.9073.026; Tue, 2 Sep 2025
- 08:56:44 +0000
+ id bfede0b8-87db-11f0-8dd7-1b34d833f44b;
+ Tue, 02 Sep 2025 11:03:53 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-55f78e3cdf9so2564869e87.1
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Sep 2025 02:03:53 -0700 (PDT)
+Received: from yp-VivoBook-ASUSLaptop-M1503QA-M1503QA.. ([95.67.15.120])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-560827aabf5sm524019e87.137.2025.09.02.02.03.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Sep 2025 02:03:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,312 +47,573 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c31bcdf0-87da-11f0-8dd7-1b34d833f44b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=n7ywhbfQeRTdVIk6zngOJiv1g1OVLlRWimVn4e52PNKv16n4rY9jhveYjQY2Uli6HzEm2XuB6mb5geVkHEtpUgZye5S8nsVilX4N/vTxGxH5pn+mcNy+qryaAa40KR9hwXe7DuTSuWVxWfMaEs/zeL6P82vSi3ScDp0agbe+DuY7cdpoSoMs7PrF2SsvBkz1kK4fNQRyIpTvCWhsv7u3Qbl/Ku3PVuxWUe5ae9xiNU5cwl6MqDc/WBr9nhneNkhbTRlHXAYPW7osVGpG3j8jRrvHJJueByne2HUcROLyDYEQMIf97tx1yifBmGpxxlMWzBKDTXzghTE8bGwZLp9fww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AEnWqtqjibiOM/a/teXEUvBkZTu/vae8y4s1hOhA0tg=;
- b=Udy68R7qqqhwAFUa8Srn3zywW/WMC1lDWxWILKTz59kDTgjDkb7T3OeZTXvunFWr7WVQpnQrJmbHbYJAywAshRH+dVUwfIhDf6yCEbVqDjWvuE6ZVRJZ6sL4c9JItKShbCptj/Ak/KoGIwpZHNt6/qqOyjtrsy7utLIo5twTmjEWIBj0M7UReSY+DNKRgNCUCQqwPZhbJNf2lLoJU6cF1AdMeWxXzvH9NNtMw20n9kx/zA+H5CLa9HLV/dBu0eGzJU2LP5uIOR0laNKzsqcsADQrJY+7LpdvAf+rKvrnPK2NZJmbRTI1yuTsS7+3mNr+pYKni6aOJx/xQ4hhUqBl+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AEnWqtqjibiOM/a/teXEUvBkZTu/vae8y4s1hOhA0tg=;
- b=cSt8vNY8p5D44PhsBfJiRt/gkzJOpCkq0A3h0WN1avAL7R3UlJe8JZ8sTSpaUhg66LR365+GRaVWBE1HDMjKmZHhsQqRTlmRY9UAnQCu9c20rcjmEsI2MHuL923gTKzPtf2BgezMfOgOtzfFXtx/PdaCst4xma0mqjCk54iDneAjvy+EHHQlzNYDNDKDOBrx8WwgwZCOwtSZEQb1CnQLPJgmTA8RY85NrnR5LQHfykmS0pbx4K5mNn1ZfDJEV88KQv+7I7gwrN/gJ4a0kYXrbFSNDmODRJoTc76cP0PH35Jp9OypxdZ7YQHuEZVvSJXc1sW2jTISXnBKuoGWW8mTKQ==
-From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
-To: Julien Grall <julien@xen.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: "olekstysh@gmail.com" <olekstysh@gmail.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal
- Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v5 04/12] xen/arm/irq: add handling for IRQs in the eSPI
- range
-Thread-Topic: [PATCH v5 04/12] xen/arm/irq: add handling for IRQs in the eSPI
- range
-Thread-Index: AQHcGP7bBiDA5fxWR0+DupelLQbe97R+hBgAgAEY7IA=
-Date: Tue, 2 Sep 2025 08:56:44 +0000
-Message-ID: <4c3a2a94-7c19-4d1a-8477-c38716170c49@epam.com>
-References: <cover.1756481577.git.leonid_komarianskyi@epam.com>
- <e0f76a1533332cef68bfaacbdf57fd05f27764a6.1756481577.git.leonid_komarianskyi@epam.com>
- <2e91a95a-3109-46ae-b796-1a1c50a9ac2d@xen.org>
-In-Reply-To: <2e91a95a-3109-46ae-b796-1a1c50a9ac2d@xen.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV2PR03MB8678:EE_|DU0PR03MB9199:EE_
-x-ms-office365-filtering-correlation-id: 7d8788dd-e3f1-44a4-0190-08dde9fea45c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info:
- =?utf-8?B?eHlrTFl0UFFuRXRlL1hZd0JvaTdYeXdvSk5KZmlBcGJHNWQrZUpva0lLRFk1?=
- =?utf-8?B?R3crUFJFZkJWVjVVdzFvKzNMRlNuTmhpTUNBRmRUcEZpc3Z3YWU5MmhIa0dP?=
- =?utf-8?B?WTdGemdrYlJRWDBLTGs4Z092N3VNcmdnZVFrRVBDdkZBcVFNMXZkaENKaENS?=
- =?utf-8?B?eWhyd0ZjM1NJTDJDYmRSRVFjK2YwYWxhUkJ5RXE2d1VENldmR09Hc3hLVkI5?=
- =?utf-8?B?TUluUDhDKzZmdlNRNjA2dG5mc05pMExYak9TVWYyeUpYYmgyRUliN0ZQZHdK?=
- =?utf-8?B?cktqeVVuRVdIeUhBaTlFSmk5UytwOVRFYjl0ZWRRQkx5TjR4T0IvdUJWYndm?=
- =?utf-8?B?NWhKMVBOQWNsaUhZbGxlaUtHUlhvWmhnSmZ1QkprZlZsR0tMMldnbEJXQlBu?=
- =?utf-8?B?c3VhR0h6TjZuOGVlMkJLVHpKVHZCK0xPSGhxYWpoME9JbitibW80Y25ETllr?=
- =?utf-8?B?dDNBaXFqSHpqMnl1QktjcFJTcVVsekpzMm5QV3RqVG5vNDUxTVRtSmZrZ1lk?=
- =?utf-8?B?K0g2U3MwS21icTV6TjVpaWg3cFliaXgwOXlmc2VnQy9tdVRBQkZhVFhnbHBE?=
- =?utf-8?B?VDA1L3BqS1VnZC9oTkdFaU9aTisxY0ZxbUIwVmRiTWx2N0RhaW1zUXJlcXJ0?=
- =?utf-8?B?VDV1T3pMU1gyQzRKZmVxemdGV2t2UCtrNXczTWx3WDNVaCtlbUJINHd5V2FF?=
- =?utf-8?B?a0MvU2FPVVZrYm5ZSnpNWFVNZDJiZm9mTGx1eEFQbGlxZWtKRGRkTTJkeFBB?=
- =?utf-8?B?UGQ5ekZRSzNERkg3TFhET25GTGs2S1lVaHgxSVFjcFlzWXQ2S2ZpcUYzRlhu?=
- =?utf-8?B?R1QyNHpkTDB6SEVzSTRGNDVpcGZzYldabGMzenpoL21CdXBYbjVZYkJ0RDVZ?=
- =?utf-8?B?aEZneEdpN0dzdWowdmczR25scVczcXE3bGx4eE5sRzlxditSSGlZdTVHekp4?=
- =?utf-8?B?OUIyanVLbGNUNCtpZ3ordWJ0aWNVQXRBT0FZK3V4clFsaldjR2N2RGVVYmFr?=
- =?utf-8?B?by9aNHhYMWJ2QWo3dVRtK1FlZTE0UGxpRkpGTFdRUGtDdnROL3NVbXZtRGpZ?=
- =?utf-8?B?Z0VwQ1F5N01kZ1pJZjY1eXN4NmJCRU1QMFdBSzhpMWpuTGV5YlQ0NEprRmc0?=
- =?utf-8?B?a0J0dnd0YkZsZTdvRFROcWhSL1BKV2UvUitzZHc1UCtTdWZKb21vRXFJQkRy?=
- =?utf-8?B?VWpSTG95V1dWNFltU01Kc2JmT3RKbmhsMHQ2eXYzVlN6TmtlU05kYXQ2VDhV?=
- =?utf-8?B?YTY3YVVTeXlSYTlFdUMzSk8rRklTL3g1aE95aXNIUzNoeUVKclFRZ2kzNTMz?=
- =?utf-8?B?UnRHWHAvZ0RjMmZyZVVIQmhKUm16NkN1TEFOOE16NlJsWXc1NW1yRXFuUjJv?=
- =?utf-8?B?OW1MRnpNZ1FWdjIvcEdBbW5QMkJXOFRicHNQK1NKeTFlMVZEYUpKL3YyVjV0?=
- =?utf-8?B?dGdwNzBuT1lmR1p3ZVVxdXV4SXk3aGZyVmE5Z3BqRWdZR2JqZGE0b25PSndE?=
- =?utf-8?B?Rmo0dmpRVC9jNVEyZFY3ZlgyMFJ2bmJ2Qm4wVEhtZGRSa1dqZ3lsZDFJYXRD?=
- =?utf-8?B?d00vSU9jUmZtcWVRSnowVWo0WVU4ak1kbTJhcFUxMkdCU3Z0ZS9CUkpCUXFH?=
- =?utf-8?B?eDZqNk56dHBQSVhzdUxvNDU2ODZQY011d2FITVV3SmFMVHJva3gzWGdqSjhS?=
- =?utf-8?B?SXFIbkdUdUZTK0YzbE55cEpwbmd3bldVbnBtWmFwRkxrMGpqeEd5Q1RRS1lt?=
- =?utf-8?B?MHJnWDcrZmh0cmptVXp1N1JiREVKNVhBcFBta1JQVXI0OG5VVys2Snp2OEpy?=
- =?utf-8?B?dEFyVjk5eVB5YXZkVmNmWE9YU0JBckdSREUvU3Y5akI1d2lJY05ML1Vzb1Vr?=
- =?utf-8?B?ek40QWxwb0p2ZE5UWUFYYWgzd25LM2M4N0JQU3IyR2Z4SGEvcTh6ZE5QZWVz?=
- =?utf-8?B?aURENmRvRm5XUWhQd0JnUnVBdm8vTmsyVktYak1yU1F2NzI1eG5qeXNicVZJ?=
- =?utf-8?B?M0lQNUN5amVnPT0=?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR03MB8678.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?K0NhVDZxeHhDNkw1a29KanVaa3YybldpVnFWdlhrNnNQZk91TkFlSEJwZGU4?=
- =?utf-8?B?WXNXQnBwSW1XcWdKd1Vaa3d5U1kvQThVOCtFa1Z1aExPdThuZGgyVDJPZXpn?=
- =?utf-8?B?WjRRK3F4ZWtRQ0ord0Y0bmdvQ0N3VFU5cExxRE03dGxMdlFUNWF1UWJuS3FS?=
- =?utf-8?B?NG51Qkxna3haVGxmYUN5OTFBekJCVWtGb0YrM3NhcVljbjhvMFY0dVRuY3hM?=
- =?utf-8?B?N1VSdGN3RkdLQ2g3SC9KbFlHZE1aeHNIbE45Z3pmWnpyVWxRNjBORHNHc1dE?=
- =?utf-8?B?VlJsMkZpMHdvQzNNMVpIVXh3RnhWQm5WSnhaZWhFZjcwVHYxQ09WVG5SaEIz?=
- =?utf-8?B?R1oyQXJCcFlWS0JXQUxuUk95Mm9JV1EraERSLzVwT2VmbDVYNDViS0F3VXN6?=
- =?utf-8?B?bmdGRkZTUnpFcVhIa2xIbW5oRjhSU3ZHa3hzT2pJTC9kNnN0SjkzSTlPQ3BU?=
- =?utf-8?B?QXlmYTd0cXhNV011OU44cTdkMWxqNm1DNkhnaE9qSzAwWnNVbE1kMWM5MXFJ?=
- =?utf-8?B?Rzh5MWQ5bG1RWEtBbm1hUnlyNjhhUE9XS1gwTzh2YlpEelNFbVYra3hsb2Uv?=
- =?utf-8?B?OHE5R25PeTNCWXdZL04xVGpyUnRqbElkRGJDSStYVjM1aEFMSGwrdkhQd3V3?=
- =?utf-8?B?SDh4SGJOM290NHhSVlR3MU5vV0RLOS9JWkp3aDlQdHZnVnBUVU9RZWtXUnUx?=
- =?utf-8?B?N2lxQTF0SndLRFRJL3c3dk51Zzl4T1BlM0I0RGc3TlVQdVAyOWJHKzRsaGZY?=
- =?utf-8?B?c29sRXBzWTZzRXQ5Q2oyajBJd2IzTFVuOVFoWXpnOFJQQUd5enRNLzE1M3JF?=
- =?utf-8?B?eW9GUTFJbTVBaTltTUQxck1maXQ1ZWRnK1VDR0l5cVlKVHpVazZUN0wvcnhh?=
- =?utf-8?B?TVMzY1FwMXlqTmxORGNvSDdVcEVPWjNtQjdnZDNtNzRLYVA5RitkQ3hhQktU?=
- =?utf-8?B?d0pJRzVXTWhtSTd1cS9SSXhEUTE0OFR6K2dzZWg4Y3FQMTZQNGNuRjc5czBx?=
- =?utf-8?B?ZDhLMWRXODQzd1ZwL2RQejRyTVJ1SmtSTnlGQmo4UUhFS1F6M3dzbk5rWFB2?=
- =?utf-8?B?WUdSd0tRUDFkQ053ekQzRnJwcHB5TzlJNmxoY25yUkwyS0p3QXo3NmkveUE0?=
- =?utf-8?B?Z0ZWN3ZtazhkcXoxaVZ5S0lLc1NxK0lOenptMkZOdURSaFlOaTFrZ21XN1JU?=
- =?utf-8?B?NTRvenFLcHlNU3M1RHh5VS9hTDVMUncxaUdkTjBZTXFYYnlwaW56MmhiSlFs?=
- =?utf-8?B?SlJxOXBabnRIclUrZ2J1NHk1dkNRRXVKVzRJZzlKZ0JSYUYzU3p3L0c2T2tp?=
- =?utf-8?B?LzJKLzdnOXFmZ0tmOHhoeVdSOXhYMFdXM2FJaTRmTU4xcUo3WHNlbnZkWWQ4?=
- =?utf-8?B?RjN6c2JKeDNrTEptTTVsVmtEZzlDcHFDcCtHSmdUZmo3RnN1TFQ3RzZiVUJa?=
- =?utf-8?B?THlsZFFxVXF6Y3lKTU4zWEFodHovWXNyZEE4Z2RXLzFIblBBYUxXUFBacjln?=
- =?utf-8?B?Uy9Edk1YTzZvWXdjemk0ZGtpN25JWEhURk12S2dNa1VCRjUyS0xiVkwvR2dV?=
- =?utf-8?B?RWxjWU1WSXI3dEcxQ2dYblhJeTFscy91NVVvOXh0N0NYOHpmU0ZuMDVwdE1p?=
- =?utf-8?B?K093eFg3YTFTWGJnb2dYMjNoeDFwUEJuNnZ3OHhRN1ZLWDBpLzhEb21wZG52?=
- =?utf-8?B?SFpwVlo0amlSKzJheXVUME81dGtoY2lOcjM4OWQxa3ZvcHd2NXJVNlY1YUIy?=
- =?utf-8?B?aHIwSXFUTUQzaUhLTGl6cVRLTndRTmdFSk1qR3YxL2xreTVmcU1rVjd5ZzRp?=
- =?utf-8?B?S3k1MTFpMXRmTTJKUjM1a1lvTldvUmVSUkVCckl5LzRuWjBGVEJ1VndYNW90?=
- =?utf-8?B?MkVaWDRQaU9JblNpSmJ2YVArVVhMK0lkUk16UURwOGpFNHphUm95OEN4K2J6?=
- =?utf-8?B?a3FScDZmcWxEbUh1TzROU0NteUdHb01OTHZ6eElqaDFuTElPTWFxUlhpWFhw?=
- =?utf-8?B?WjY0cERsbXZJcVlnQmtLWlE1aG9jMS9ZZW9jQm5CM1RzY3Vkell0ckpCbnBu?=
- =?utf-8?B?ZE5iQTBHaG5ZUEE5R1RpUUkvOWs4VGF0WmJOWU5OTjZFaEFMamt1OVZWalM3?=
- =?utf-8?B?dFlQWTFvb2poQnIyaUxTYkRzeHdoYkpUSEhVdCtUYklvL25UMzBQQTNJb3la?=
- =?utf-8?Q?EQAPEqaWZ17tu3XHaHpG/Bg=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <F8F05209A457484A911137BE86FEC862@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: bfede0b8-87db-11f0-8dd7-1b34d833f44b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756803833; x=1757408633; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iMTZeV1RLqj8sJpYIV/jbQJb4350elWFSvSX2DVPWHc=;
+        b=MvpUj7D11uo7SjuS56QFFBy1KNjJjT45KMCNiuLhMo4vZbF8ipcAb4F4m2qteAjmqV
+         WrG1Z//akAs5iVQ89Hfv202ejN80LEdsxNghCv0ao9fGlB2TX9+Iqkf9AVQuYWtS+G2V
+         yHNj0BXpFJcERSJGOzC7w+pV+1oaZAUOoIt6j81IpXg8JM+WuvJjECrP8CdM0OCll7BC
+         BaijBkSfr3rACkyavLMm4p6lvZxEYHXybv8IIV62FOk23Iy9UsJTdyJ32LMA7jpgVN78
+         OqvY7SMhMBuCVmK9RH4KsQ3sD2CcA4nry5TTKdcnbx/TxXOvDZM8+Gnb5VQvrOT6ym5P
+         EAYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756803833; x=1757408633;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iMTZeV1RLqj8sJpYIV/jbQJb4350elWFSvSX2DVPWHc=;
+        b=DzOvwi2cfyLw/YFayNy1bpkGZn2u+xTvedplp0SwyuaIjGwhOXsTH6gBL98kAvhKyf
+         crCuv5CJ2q229Nj/T4mNTpad7VotCJKrceRcYBFoGyDCzl+B5fIoi1RRrWTQfJeMc+EB
+         wZpa4oYeyN+ij3XWRhBX32bPq+RjhwnYfoc48MqWfODec4dz63OvcM5jr3Nyvd+qmHaH
+         z5Nfv/1NE7uE9iadJNetR1L7hWj96rBf0KnvwUYiB18giPIM5r8Nngs5TNdAWrNOK+ZQ
+         k9SHgeRBYVV7kDzncl7LfYFi/qbLetbm8yAeQDNa0JJZpSenWnKL1vXgc5owz+LqlFn1
+         fyOw==
+X-Gm-Message-State: AOJu0YyNbPEZYn2snKbjDt86fWB8WK+NrNwYdpV/Lr+xGPJ4VBZMwyal
+	Dw+uiAFEgSzDqs7U0qtEdDHtT+3grYW2oXkGY0WxXYhu2DnpF6w7rEIe3c6j9ruI
+X-Gm-Gg: ASbGnctfdKy+MTJAxDcnFwd+xkLWnXnl1WY0xSPtuSqvQlbDIpdAJpl56t9kIK6sSVP
+	LYC38YGo/xxt/Qw+sxerXcF+MvZf9Kq7rF/oa7QpVv2d1mxl4G3z5RWkC+2xfT72hBOhIP4mHmK
+	LMU42fz3ibYvGlAY0BVjtG0Tze8ze1To+4deQehCvMY5RGubgesq+Lt7ND5lDkN2mRKPQ/ZuOuq
+	hAUj99l/dPfiXkjKvi4dDE6t9OiZalPgotNzCnpIZuyb3IzfuzvM6UMKsRxYFG/gUdPgKUks32g
+	8nhAn4r2Pm+2PLrBP6i2fQx45rO/vTNvEKt3UiUkky9HO9/jh3jIugpk1ZnTcKWAq1/XfzD509n
+	Ild53mbV5qdApYgUXuPTX3eTfzZSUGbYNrT2t09tumQt7YLI77fGHdYm0YRrqXA==
+X-Google-Smtp-Source: AGHT+IEW/uO8bExTCAWVsP75Hs6qPB7WKcfr8U/dDlSXDxKlAstSE0vL7MmDMw/oC+fIWQgrVF1QlQ==
+X-Received: by 2002:a05:6512:239e:b0:55f:34e8:b1b8 with SMTP id 2adb3069b0e04-55f709b9c2dmr2943696e87.55.1756803832393;
+        Tue, 02 Sep 2025 02:03:52 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Subject: [PATCH v13 1/4] xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
+Date: Tue,  2 Sep 2025 12:03:45 +0300
+Message-ID: <53cc6a9cf7a73d12c632bf8b8eee2f7069e6b0f1.1756803419.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1756803419.git.mykola_kvach@epam.com>
+References: <cover.1756803419.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR03MB8678.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d8788dd-e3f1-44a4-0190-08dde9fea45c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2025 08:56:44.4206
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hyYX2cenQej+byh8XsFbH9lITvaiLz5zffLxRBk/I9xEIbTJwLBD2sLD9rktaAGdveWsPh6J4eK4Ldi4aZr1jTEGohk94eidYKgHVDe3OMc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB9199
+Content-Transfer-Encoding: 8bit
 
-SGkgSnVsaWVuLA0KDQpUaGFuayB5b3UgZm9yIHlvdXIgcmV2aWV3Lg0KDQpPbiAwMS4wOS4yNSAx
-OToxMSwgSnVsaWVuIEdyYWxsIHdyb3RlOg0KPiBIaSBMZW9uaWQsDQo+IA0KPiBPbiAyOS8wOC8y
-MDI1IDE3OjA2LCBMZW9uaWQgS29tYXJpYW5za3lpIHdyb3RlOg0KPj4gQ3VycmVudGx5LCBYZW4g
-ZG9lcyBub3Qgc3VwcG9ydCBlU1BJIGludGVycnVwdHMsIGxlYWRpbmcNCj4+IHRvIGEgZGF0YSBh
-Ym9ydCB3aGVuIHN1Y2ggaW50ZXJydXB0cyBhcmUgZGVmaW5lZCBpbiB0aGUgRFRTLg0KPj4NCj4+
-IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyBhIHNlcGFyYXRlIGFycmF5IHRvIGluaXRpYWxpemUgdXAg
-dG8NCj4+IDEwMjQgaW50ZXJydXB0IGRlc2NyaXB0b3JzIGluIHRoZSBlU1BJIHJhbmdlIGFuZCBh
-ZGRzIHRoZQ0KPj4gbmVjZXNzYXJ5IGRlZmluZXMgYW5kIGhlbHBlciBmdW5jdGlvbi4gVGhlc2Ug
-Y2hhbmdlcyBsYXkgdGhlDQo+PiBncm91bmR3b3JrIGZvciBmdXR1cmUgaW1wbGVtZW50YXRpb24g
-b2YgZnVsbCBlU1BJIGludGVycnVwdA0KPj4gc3VwcG9ydC4gQXMgdGhpcyBHSUN2My4xIGZlYXR1
-cmUgaXMgbm90IHJlcXVpcmVkIGJ5IGFsbCB2ZW5kb3JzLA0KPj4gYWxsIGNoYW5nZXMgYXJlIGd1
-YXJkZWQgYnkgaWZkZWZzLCBkZXBlbmRpbmcgb24gdGhlIGNvcnJlc3BvbmRpbmcNCj4+IEtjb25m
-aWcgb3B0aW9uLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IExlb25pZCBLb21hcmlhbnNreWkgPGxl
-b25pZF9rb21hcmlhbnNreWlAZXBhbS5jb20+DQo+Pg0KPj4gLS0tDQo+PiBDaGFuZ2VzIGluIFY1
-Og0KPj4gLSBubyBmdW5jdGlvbmFsIGNoYW5nZXMgaW50cm9kdWNlZCBieSB0aGlzIHZlcnNpb24g
-Y29tcGFyZWQgd2l0aCBWNCwgb25seQ0KPj4gwqDCoCBtaW5vciBmaXhlcyBhbmQgcmVtb3ZhbCBv
-ZiBpZmRlZnMgZm9yIG1hY3Jvc2VzDQo+PiAtIGFkZGVkIFRPRE8gY29tbWVudCwgc3VnZ2VzdGVk
-IGJ5IE9sZWtzYW5kciBUeXNoY2hlbmtvDQo+PiAtIGNoYW5nZWQgaW50IHRvIHVuc2lnbmVkIGlu
-dCBmb3IgaXJxcw0KPj4gLSByZW1vdmVkIGlmZGVmcyBmb3IgZVNQSS1zcGVjaWZpYyBkZWZpbmVz
-IGFuZCBtYWNyb3MgdG8gcmVkdWNlIHRoZQ0KPj4gwqDCoCBudW1iZXIgb2YgaWZkZWZzIGFuZCBj
-b2RlIGR1cGxpY2F0aW9uIGluIGZ1cnRoZXIgY2hhbmdlcw0KPj4gLSByZW1vdmVkIHJldmlld2Vk
-LWJ5IGFzIG1vdmluZyBkZWZpbmVzIGZyb20gaWZkZWZzIHJlcXVpcmVzIGFkZGl0aW9uYWwNCj4+
-IMKgwqAgY29uZmlybWF0aW9uIGZyb20gcmV2aWV3ZXJzDQo+Pg0KPj4gQ2hhbmdlcyBpbiBWNDoN
-Cj4+IC0gcmVtb3ZlZCByZWR1bmRhbnQgbGluZSB3aXRoICdkZWZhdWx0IG4nIGluIEtjb25maWcs
-IGFzIGl0IGlzIGRpc2FibGVkDQo+PiDCoMKgIGJ5IGRlZmF1bHQsIHdpdGhvdXQgZXhwbGljaXQg
-c3BlY2lmaWNhdGlvbg0KPj4gLSBhZGRlZCByZXZpZXdlZC1ieSBmcm9tIFZvbG9keW15ciBCYWJj
-aHVrDQo+Pg0KPj4gQ2hhbmdlcyBpbiBWMzoNCj4+IC0gaW50cm9kdWNlZCBhIG5ldyBkZWZpbmUg
-TlJfRVNQSV9JUlFTIHRvIGF2b2lkIGNvbmZ1c2lvbiwgbGlrZSBpbiB0aGUNCj4+IMKgwqAgY2Fz
-ZSBvZiB1c2luZyBOUl9JUlFTIGZvciBlc3BpX2Rlc2MgYXJyYXkNCj4+IC0gaW1wbGVtZW50ZWQg
-aGVscGVyIGZ1bmN0aW9ucyBlc3BpX3RvX2Rlc2MgYW5kIGluaXRfZXNwaV9kYXRhIHRvIG1ha2UN
-Cj4+IMKgwqAgaXQgcG9zc2libGUgdG8gYWRkIHN0dWJzIHdpdGggdGhlIHNhbWUgbmFtZSwgYW5k
-IGFzIGEgcmVzdWx0LCByZWR1Y2UNCj4+IMKgwqAgdGhlIG51bWJlciBvZiAjaWZkZWZzDQo+PiAt
-IGRpc2FibGUgQ09ORklHX0dJQ1YzX0VTUEkgZGVmYXVsdCB2YWx1ZSB0byBuDQo+Pg0KPj4gQ2hh
-bmdlcyBpbiBWMjoNCj4+IC0gdXNlIChFU1BJX01BWF9JTlRJRCArIDEpIGluc3RlYWQgb2YgKEVT
-UElfQkFTRV9JTlRJRCArIE5SX0lSUVMpDQo+PiAtIHJlbW92ZSB1bm5lY2Vzc2FyeSBjb21tZW50
-IGZvciBucl9pcnFzIGluaXRpYWxpemF0aW9uDQo+PiAtLS0NCj4+IMKgIHhlbi9hcmNoL2FybS9L
-Y29uZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDggKysrKysNCj4+IMKgIHhlbi9hcmNoL2Fy
-bS9pbmNsdWRlL2FzbS9pcnEuaCB8IDI0ICsrKysrKysrKysrKysrKw0KPj4gwqAgeGVuL2FyY2gv
-YXJtL2lycS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgNTYgKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrLQ0KPj4gwqAgMyBmaWxlcyBjaGFuZ2VkLCA4NyBpbnNlcnRpb25zKCsp
-LCAxIGRlbGV0aW9uKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9LY29uZmln
-IGIveGVuL2FyY2gvYXJtL0tjb25maWcNCj4+IGluZGV4IDE3ZGYxNDdiMjUuLjQzYjA1NTMzYjEg
-MTAwNjQ0DQo+PiAtLS0gYS94ZW4vYXJjaC9hcm0vS2NvbmZpZw0KPj4gKysrIGIveGVuL2FyY2gv
-YXJtL0tjb25maWcNCj4+IEBAIC0xMzUsNiArMTM1LDE0IEBAIGNvbmZpZyBHSUNWMw0KPj4gwqDC
-oMKgwqDCoMKgwqAgRHJpdmVyIGZvciB0aGUgQVJNIEdlbmVyaWMgSW50ZXJydXB0IENvbnRyb2xs
-ZXIgdjMuDQo+PiDCoMKgwqDCoMKgwqDCoCBJZiB1bnN1cmUsIHVzZSB0aGUgZGVmYXVsdCBzZXR0
-aW5nLg0KPj4gK2NvbmZpZyBHSUNWM19FU1BJDQo+PiArwqDCoMKgIGJvb2wgIkV4dGVuZGVkIFNQ
-SSByYW5nZSBzdXBwb3J0Ig0KPj4gK8KgwqDCoCBkZXBlbmRzIG9uIEdJQ1YzICYmICFORVdfVkdJ
-Qw0KPj4gK8KgwqDCoCBoZWxwDQo+PiArwqDCoMKgwqDCoCBBbGxvdyBYZW4gYW5kIGRvbWFpbnMg
-dG8gdXNlIGludGVycnVwdCBudW1iZXJzIGZyb20gdGhlIA0KPj4gZXh0ZW5kZWQgU1BJDQo+PiAr
-wqDCoMKgwqDCoCByYW5nZSwgZnJvbSA0MDk2IHRvIDUxMTkuIFRoaXMgZmVhdHVyZSBpcyBpbnRy
-b2R1Y2VkIGluIEdJQ3YzLjENCj4+ICvCoMKgwqDCoMKgIGFyY2hpdGVjdHVyZS4NCj4+ICsNCj4+
-IMKgIGNvbmZpZyBIQVNfSVRTDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgYm9vbCAiR0lDdjMgSVRT
-IE1TSSBjb250cm9sbGVyIHN1cHBvcnQgKFVOU1VQUE9SVEVEKSIgaWYgDQo+PiBVTlNVUFBPUlRF
-RA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGRlcGVuZHMgb24gR0lDVjMgJiYgIU5FV19WR0lDICYm
-ICFBUk1fMzINCj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vaXJxLmgg
-Yi94ZW4vYXJjaC9hcm0vaW5jbHVkZS8gDQo+PiBhc20vaXJxLmgNCj4+IGluZGV4IDViYzY0NzVl
-YjQuLjQ0NDM3OTk2NDggMTAwNjQ0DQo+PiAtLS0gYS94ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20v
-aXJxLmgNCj4+ICsrKyBiL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9pcnEuaA0KPj4gQEAgLTMy
-LDYgKzMyLDEzIEBAIHN0cnVjdCBhcmNoX2lycV9kZXNjIHsNCj4+IMKgICNkZWZpbmUgU1BJX01B
-WF9JTlRJRMKgwqAgMTAxOQ0KPj4gwqAgI2RlZmluZSBMUElfT0ZGU0VUwqDCoMKgwqDCoCA4MTky
-DQo+PiArI2RlZmluZSBFU1BJX0JBU0VfSU5USUQgNDA5Ng0KPj4gKyNkZWZpbmUgRVNQSV9NQVhf
-SU5USUTCoCA1MTE5DQo+PiArI2RlZmluZSBOUl9FU1BJX0lSUVPCoMKgwqAgMTAyNA0KPj4gKw0K
-Pj4gKyNkZWZpbmUgRVNQSV9JTlRJRDJJRFgoaW50aWQpICgoaW50aWQpIC0gRVNQSV9CQVNFX0lO
-VElEKQ0KPj4gKyNkZWZpbmUgRVNQSV9JRFgySU5USUQoaWR4KcKgwqAgKChpZHgpICsgRVNQSV9C
-QVNFX0lOVElEKQ0KPiANCj4gTklUOiBJIHdvdWxkIGNvbnNpZGVyIGFkZGluZyBzYW5pdHkgY2hl
-Y2sgKGkuZS4gQVNTRVJUKCkpIHRvIGNvbmZpcm0gDQo+IHRoYXQgYm90aCBgYGludGlkYGAgYW5k
-IGBgaWR4YGAgYXJlIHdpdGhpbiB0aGUgYm91bmRzLg0KPiANCg0KT2theSwgSSB3aWxsIGFkZCBz
-YW5pdHkgY2hlY2sgd2l0aCBBU1NFUlRzIGluIFY2IChzaW1pbGFyIHRvIA0KR05UUElOX2luY3Iy
-b2Zsb3dfbWFzayk6DQoNCiNkZWZpbmUgRVNQSV9JTlRJRDJJRFgoaW50aWQpICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgXA0KICAgICAoeyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgXA0KICAgICAgICAgQVNTRVJUKCgoaW50aWQpID49IEVTUElfQkFT
-RV9JTlRJRCkgJiYgICAgICAgICAgXA0KICAgICAgICAgICAgICAgICgoaW50aWQpIDw9IEVTUElf
-TUFYX0lOVElEKSk7ICAgICAgICAgICAgXA0KICAgICAgICAgKChpbnRpZCkgLSBFU1BJX0JBU0Vf
-SU5USUQpOyAgICAgICAgICAgICAgICAgICAgXA0KICAgICB9KQ0KDQojZGVmaW5lIEVTUElfSURY
-MklOVElEKGlkeCkgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwNCiAgICAgKHsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwNCiAgICAgICAgIEFT
-U0VSVCgoKGlkeCkgPj0gMCkgJiYgICAgICAgICAgICAgICAgICAgICAgICAgIFwNCiAgICAgICAg
-ICAgICAgICAoKGlkeCkgPD0gTlJfRVNQSV9JUlFTKSk7ICAgICAgICAgICAgICAgIFwNCiAgICAg
-ICAgICgoaWR4KSArIEVTUElfQkFTRV9JTlRJRCk7ICAgICAgICAgICAgICAgICAgICAgIFwNCiAg
-ICAgfSkNCg0KDQo+PiArDQo+PiDCoCAvKiBMUElzIGFyZSBhbHdheXMgbnVtYmVyZWQgc3RhcnRp
-bmcgYXQgODE5Miwgc28gMCBpcyBhIGdvb2QgaW52YWxpZCANCj4+IGNhc2UuICovDQo+PiDCoCAj
-ZGVmaW5lIElOVkFMSURfTFBJwqDCoMKgwqAgMA0KPj4gQEAgLTM5LDcgKzQ2LDE1IEBAIHN0cnVj
-dCBhcmNoX2lycV9kZXNjIHsNCj4+IMKgICNkZWZpbmUgSU5WQUxJRF9JUlHCoMKgwqDCoCAxMDIz
-DQo+PiDCoCBleHRlcm4gY29uc3QgdW5zaWduZWQgaW50IG5yX2lycXM7DQo+PiArI2lmZGVmIENP
-TkZJR19HSUNWM19FU1BJDQo+PiArLyoNCj4+ICsgKiBUaGlzIHdpbGwgYWxzbyBjb3ZlciB0aGUg
-ZVNQSSByYW5nZSwgYXMgc29tZSBjcml0aWNhbCBkZXZpY2VzDQo+PiArICogZm9yIGJvb3Rpbmcg
-WGVuIChlLmcuLCBzZXJpYWwpIG1heSB1c2UgdGhpcyB0eXBlIG9mIGludGVycnVwdHMuDQo+PiAr
-ICovDQo+IA0KPiBSZWFkaW5nIHRoaXMgYWdhaW4sIEkgc3RpbGwgZG9uJ3QgcXVpdGUgdW5kZXJz
-dGFuZCB3aHkgd2UgYXJlIG1lbnRpb25pbmcgDQo+IFhlbiBkZXZpY2VzLiBMb29raW5nIGF0IHRo
-ZSBjb2RlLCBmb3IgQXJtLCB3ZSBvbmx5IHNlZW0gdG8gdXNlIA0KPiBucl9zdGF0aWNfaXJxcyB0
-byBjb25maWd1cmUgbnJfcGlycXMgYW5kIFhTTS4gQm90aCBhcmUgb255IHVzZWQgYnkgZG9tYWlu
-cy4NCj4gDQo+IFNvIEkgdGhpbmsgdGhpcyBuZWVkcyB0byBiZSBjbGFyaWZpZWQuDQo+IA0KDQpT
-dXJlLCBJIHdpbGwgdXBkYXRlIHRoZSBjb21tZW50Lg0KDQo+PiArI2RlZmluZSBucl9zdGF0aWNf
-aXJxcyAoRVNQSV9NQVhfSU5USUQgKyAxKQ0KPj4gKyNlbHNlDQo+PiDCoCAjZGVmaW5lIG5yX3N0
-YXRpY19pcnFzIE5SX0lSUVMNCj4+ICsjZW5kaWYNCj4+IMKgIHN0cnVjdCBpcnFfZGVzYzsNCj4+
-IMKgIHN0cnVjdCBpcnFhY3Rpb247DQo+PiBAQCAtNTUsNiArNzAsMTUgQEAgc3RhdGljIGlubGlu
-ZSBib29sIGlzX2xwaSh1bnNpZ25lZCBpbnQgaXJxKQ0KPj4gwqDCoMKgwqDCoCByZXR1cm4gaXJx
-ID49IExQSV9PRkZTRVQ7DQo+PiDCoCB9DQo+PiArc3RhdGljIGlubGluZSBib29sIGlzX2VzcGko
-dW5zaWduZWQgaW50IGlycSkNCj4+ICt7DQo+PiArI2lmZGVmIENPTkZJR19HSUNWM19FU1BJDQo+
-PiArwqDCoMKgIHJldHVybiAoaXJxID49IEVTUElfQkFTRV9JTlRJRCAmJiBpcnEgPD0gRVNQSV9N
-QVhfSU5USUQpOw0KPj4gKyNlbHNlDQo+PiArwqDCoMKgIHJldHVybiBmYWxzZTsNCj4+ICsjZW5k
-aWYNCj4+ICt9DQo+PiArDQo+PiDCoCAjZGVmaW5lIGRvbWFpbl9waXJxX3RvX2lycShkLCBwaXJx
-KSAocGlycSkNCj4+IMKgIGJvb2wgaXNfYXNzaWduYWJsZV9pcnEodW5zaWduZWQgaW50IGlycSk7
-DQo+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2lycS5jIGIveGVuL2FyY2gvYXJtL2lycS5j
-DQo+PiBpbmRleCBiOGVjY2ZjOTI0Li42MWM5MTVjM2Y5IDEwMDY0NA0KPj4gLS0tIGEveGVuL2Fy
-Y2gvYXJtL2lycS5jDQo+PiArKysgYi94ZW4vYXJjaC9hcm0vaXJxLmMNCj4+IEBAIC0xOSw3ICsx
-OSwxMSBAQA0KPj4gwqAgI2luY2x1ZGUgPGFzbS9naWMuaD4NCj4+IMKgICNpbmNsI3VkZSA8YXNt
-L3ZnaWMuaD4NCj4+ICsjaWZkZWYgQ09ORklHX0dJQ1YzX0VTUEkNCj4+ICtjb25zdCB1bnNpZ25l
-ZCBpbnQgbnJfaXJxcyA9IEVTUElfTUFYX0lOVElEICsgMTsNCj4+ICsjZWxzZQ0KPj4gwqAgY29u
-c3QgdW5zaWduZWQgaW50IG5yX2lycXMgPSBOUl9JUlFTOw0KPj4gKyNlbmRpZg0KPiANCj4gTklU
-OiBJIHRoaW5rIHlvdSBjYW4gdXNlOg0KPiANCj4gY29uc3QgdW5zaWduZWQgaW50IG5yX2lycXMg
-PSBJU19FTkFCTEVEKENPTkZJR19HSUNWM19FU1BJKT8gDQo+IChFU1BJX01BWF9JTlRJRCArIDEp
-IDogTlJfSVJRUzsNCj4gDQoNCkkgd2lsbCB1cGRhdGUgaXQgdG8gcHJvcG9zZWQgYWJvdmUgaW4g
-VjYsIHRoYW5rcy4NCg0KPiBUaGF0IHNhaWQsIEkgdGhpbmsgd2UgbmVlZCB0byByZXRoaW5rIGFi
-b3V0IHRoZSB1c2Ugb2YgbnJfaXJxcyBhbmQgDQo+IG5yX3N0YXRpY19pcnFzIGJlY2F1c2UgdGhl
-eSBkb24ndCBlbnRpcmVseSBtYWtlIHNlbnNlIGZvciBBcm0gYXMgd2UgDQo+IGRvbid0IHN1cHBv
-cnQgUElSUXMuDQo+IA0KPiBJIHdvdWxkIGF0IGxlYXN0IHRyeSB0byBnZXQgcmlkIG9mIG9uZSBv
-ZiB0aGUgdmFyaWFibGUgKG1heWJlIG5yX2lycXMpIA0KPiBpZiBub3QgYm90aC4NCj4gDQo+IFRo
-aXMgY291bGQgYmUgZG9uZSBhcyBhIGZvbGxvdy11cC4NCj4gDQo+PiDCoCBzdGF0aWMgdW5zaWdu
-ZWQgaW50IGxvY2FsX2lycXNfdHlwZVtOUl9MT0NBTF9JUlFTXTsNCj4+IMKgIHN0YXRpYyBERUZJ
-TkVfU1BJTkxPQ0sobG9jYWxfaXJxc190eXBlX2xvY2spOw0KPj4gQEAgLTQ2LDYgKzUwLDUzIEBA
-IHZvaWQgaXJxX2VuZF9ub25lKHN0cnVjdCBpcnFfZGVzYyAqaXJxKQ0KPj4gwqAgfQ0KPj4gwqAg
-c3RhdGljIGlycV9kZXNjX3QgaXJxX2Rlc2NbTlJfSVJRUyAtIE5SX0xPQ0FMX0lSUVNdOw0KPj4g
-KyNpZmRlZiBDT05GSUdfR0lDVjNfRVNQSQ0KPj4gKy8qDQo+PiArICogVE9ETzogQ29uc2lkZXIg
-YWxsb2NhdGluZyBhbiBhcnJheSBkeW5hbWljYWxseSBpZg0KPj4gKyAqIHRoZXJlIGlzIGEgbmVl
-ZCB0byBlbmFibGUgR0lDVjNfRVNQSSBieSBkZWZhdWx0Lg0KPj4gKyAqLw0KPiANCj4gSSBrbm93
-IHRoaXMgd2FzIHN1Z2dlc3RlZCBieSBPbGVrc2FuZHIsIGhvd2V2ZXIgbW9zdCBsaWtlbHkgZGlz
-dHJvIHdpbGwgDQo+IHdhbnQgdG8gZW5hYmxlIHRoaXMgZmVhdHVyZSBzbyB0aGV5IGNhbiBiZSBi
-b290ZWQgb24gYSB3aWRlIHJhbmdlIG9mIA0KPiBwbGF0Zm9ybS4gU28gSSB0aGluayAiaWYgdGhl
-cmUgaXMgYSBuZWVkIHRvIGVuYWJsZSBHSUNWM19FU1BJIGJ5IA0KPiBkZWZhdWx0IiBzaG91bGQg
-YmUgcmVtb3ZlZC4NCj4gDQoNCkkgd2lsbCByZW1vdmUgdGhlIHNlY29uZCBwYXJ0IG9mIGNvbW1l
-bnQgaW4gVjYuDQoNCj4gID4gK3N0YXRpYyBpcnFfZGVzY190IGVzcGlfZGVzY1tOUl9FU1BJX0lS
-UVNdOz4gKw0KPj4gK3N0YXRpYyBzdHJ1Y3QgaXJxX2Rlc2MgKmVzcGlfdG9fZGVzYyh1bnNpZ25l
-ZCBpbnQgaXJxKQ0KPj4gK3sNCj4+ICvCoMKgwqAgcmV0dXJuICZlc3BpX2Rlc2NbRVNQSV9JTlRJ
-RDJJRFgoaXJxKV07DQo+PiArfQ0KPj4gKw0KPj4gK3N0YXRpYyBpbnQgX19pbml0IGluaXRfZXNw
-aV9kYXRhKHZvaWQpDQo+PiArew0KPj4gK8KgwqDCoCB1bnNpZ25lZCBpbnQgaXJxOw0KPj4gKw0K
-Pj4gK8KgwqDCoCBmb3IgKCBpcnEgPSBFU1BJX0JBU0VfSU5USUQ7IGlycSA8PSBFU1BJX01BWF9J
-TlRJRDsgaXJxKysgKQ0KPj4gK8KgwqDCoCB7DQo+PiArwqDCoMKgwqDCoMKgwqAgc3RydWN0IGly
-cV9kZXNjICpkZXNjID0gaXJxX3RvX2Rlc2MoaXJxKTsNCj4+ICvCoMKgwqDCoMKgwqDCoCBpbnQg
-cmMgPSBpbml0X29uZV9pcnFfZGVzYyhkZXNjKTsNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCBp
-ZiAoIHJjICkNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiByYzsNCj4+ICsNCj4+
-ICvCoMKgwqDCoMKgwqDCoCBkZXNjLT5pcnEgPSBpcnE7DQo+PiArwqDCoMKgwqDCoMKgwqAgZGVz
-Yy0+YWN0aW9uwqAgPSBOVUxMOw0KPj4gK8KgwqDCoCB9DQo+PiArDQo+PiArwqDCoMKgIHJldHVy
-biAwOw0KPj4gK30NCj4+ICsjZWxzZQ0KPj4gKy8qDQo+PiArICogVGhpcyBmdW5jdGlvbiBpcyBz
-dHViIGFuZCB3aWxsIG5vdCBiZSBjYWxsZWQgaWYgQ09ORklHX0dJQ1YzX0VTUEk9biwNCj4+ICsg
-KiBiZWNhdXNlIGluIHRoaXMgY2FzZSwgaXNfZXNwaSB3aWxsIGFsd2F5cyByZXR1cm4gZmFsc2Uu
-DQo+PiArICovDQo+IA0KPiBJcyB0aGlzIGlzIG5vdCBtZWFuIHRvIGJlIGNhbGxlZCwgdGhlbiBj
-YW4gd2Ugb25seSBkZWZpbmUgdGhlIHByb3RvdHlwZSANCj4gbGlrZSB3ZSBkbyBmb3IgX19iYWRf
-YXRvbWljX3JlYWQoKT8NCj4gDQoNClRoaXMgd291bGQgb25seSBiZSBwb3NzaWJsZSBpZiBpc19l
-c3BpKCkgY29udGFpbnMgI2lmZGVmcyAod2hlbiANCkNPTkZJR19HSUNWM19FU1BJPW4sIGl0IHJl
-dHVybnMgZmFsc2UgdW5jb25kaXRpb25hbGx5KSwgYnV0IHdlIG5lZWQgdG8gDQphZ3JlZSBvbiB0
-aGlzIGluIHRoZSBwYXJhbGxlbCB0aHJlYWQgZGlzY3Vzc2lvbiByZWxhdGVkIHRvIHRoaXMgcGF0
-Y2guIA0KSWYgaXQgaXMgZmVhc2libGUsIEkgd2lsbCBkZWZpbmUgaXQgYXMgYSBwcm90b3R5cGUg
-aW4gdjYuDQoNCj4+ICtzdGF0aWMgc3RydWN0IGlycV9kZXNjICplc3BpX3RvX2Rlc2ModW5zaWdu
-ZWQgaW50IGlycSkNCj4+ICt7DQo+PiArwqDCoMKgIEFTU0VSVF9VTlJFQUNIQUJMRSgpOw0KPj4g
-K8KgwqDCoCByZXR1cm4gTlVMTDsNCj4+ICt9DQo+PiArDQo+PiArc3RhdGljIGludCBfX2luaXQg
-aW5pdF9lc3BpX2RhdGEodm9pZCkNCj4+ICt7DQo+PiArwqDCoMKgIHJldHVybiAwOw0KPj4gK30N
-Cj4+ICsjZW5kaWYNCj4+ICsNCj4+IMKgIHN0YXRpYyBERUZJTkVfUEVSX0NQVShpcnFfZGVzY190
-W05SX0xPQ0FMX0lSUVNdLCBsb2NhbF9pcnFfZGVzYyk7DQo+PiDCoCBzdHJ1Y3QgaXJxX2Rlc2Mg
-Kl9faXJxX3RvX2Rlc2ModW5zaWduZWQgaW50IGlycSkNCj4+IEBAIC01Myw2ICsxMDQsOSBAQCBz
-dHJ1Y3QgaXJxX2Rlc2MgKl9faXJxX3RvX2Rlc2ModW5zaWduZWQgaW50IGlycSkNCj4+IMKgwqDC
-oMKgwqAgaWYgKCBpcnEgPCBOUl9MT0NBTF9JUlFTICkNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBy
-ZXR1cm4gJnRoaXNfY3B1KGxvY2FsX2lycV9kZXNjKVtpcnFdOw0KPj4gK8KgwqDCoCBpZiAoIGlz
-X2VzcGkoaXJxKSApDQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIGVzcGlfdG9fZGVzYyhpcnEp
-Ow0KPj4gKw0KPj4gwqDCoMKgwqDCoCByZXR1cm4gJmlycV9kZXNjW2lycS1OUl9MT0NBTF9JUlFT
-XTsNCj4+IMKgIH0NCj4+IEBAIC03OSw3ICsxMzMsNyBAQCBzdGF0aWMgaW50IF9faW5pdCBpbml0
-X2lycV9kYXRhKHZvaWQpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgZGVzYy0+YWN0aW9uwqAgPSBO
-VUxMOw0KPj4gwqDCoMKgwqDCoCB9DQo+PiAtwqDCoMKgIHJldHVybiAwOw0KPj4gK8KgwqDCoCBy
-ZXR1cm4gaW5pdF9lc3BpX2RhdGEoKTsNCj4+IMKgIH0NCj4+IMKgIHN0YXRpYyBpbnQgaW5pdF9s
-b2NhbF9pcnFfZGF0YSh1bnNpZ25lZCBpbnQgY3B1KQ0KPiANCj4gQ2hlZXJzLA0KPiANCg0KQmVz
-dCByZWdhcmRzLA0KTGVvbmlkDQo=
+From: Mykola Kvach <mykola_kvach@epam.com>
+
+Add support for the PSCI SYSTEM_SUSPEND function in the vPSCI interface,
+allowing guests to request suspend via the PSCI v1.0 SYSTEM_SUSPEND call
+(both 32-bit and 64-bit variants).
+
+Implementation details:
+- Add SYSTEM_SUSPEND function IDs to PSCI definitions
+- Trap and handle SYSTEM_SUSPEND in vPSCI
+- Allow only non-hardware domains to invoke SYSTEM_SUSPEND; return
+  PSCI_NOT_SUPPORTED for the hardware domain to avoid halting the system
+  in hwdom_shutdown() via domain_shutdown
+- Require all secondary VCPUs of the calling domain to be offline before
+  suspend, as mandated by the PSCI specification
+
+The arch_domain_resume() function is an architecture-specific hook that is
+invoked during domain resume to perform any necessary setup or restoration
+steps required by the platform.
+
+The new vpsci_vcpu_up_prepare() helper is called on the resume path to set up
+the vCPU context (such as entry point, some system regs and context ID) before
+resuming a suspended guest. This keeps ARM/vPSCI-specific logic out of common
+code and avoids intrusive changes to the generic resume flow.
+
+Usage:
+
+For Linux-based guests, suspend can be initiated with:
+    echo mem > /sys/power/state
+or via:
+    systemctl suspend
+
+Resuming the guest is performed from control domain using:
+      xl resume <domain>
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+---
+Changes in V13:
+- use __has_include plus static inline function instead
+  of arch_domain_resume stubs
+
+Changes in v12:
+- Use the input vCPU from vpsci_vcpu_up_prepare function argument instead of current.
+- Add a check for the wake_cpu pointer on resume.
+- Call arch_domain_resume() under shutdown_lock.
+- Drop redundant vgic_clear_pending_irqs() call from vpsci_vcpu_up_prepare().
+- Cosmetic fixes.
+
+Changes in V11:
+- introduce arch_domain_resume() and vpsci_vcpu_up_prepare(), which are now
+called on the resume path to avoid extra modifications to common code.
+The vCPU context is now updated during domain resume.
+
+Changes in V10:
+- small changes to the commit message reflect updates introduced in this
+  version of the patch.
+- Comments are improved, clarified, and expanded, especially regarding PSCI
+  requirements and context handling.
+- An ARM-specific helper (domain_resume_nopause_helper)
+- gprintk() and PRIregister are used for logging in vPSCI code.
+- An isb() is added before p2m_save_state
+- The is_64bit_domain check is dropped when masking the upper part of entry
+  point and cid for SMC32 SYSTEM_SUSPEND PSCI calls
+
+Changes in V9:
+- no functional changes
+- cosmetic chnages after review
+- enhance commit message and add extra comment to the code after review
+
+Changes in V8:
+- GIC and virtual timer context must be saved when the domain suspends
+- rework locking
+- minor changes after code review
+
+Changes in V7:
+- add proper locking
+- minor changes after code review
+
+Changes in V6:
+- skip execution of ctxt_switch_from for vcpu that is in paused domain
+- add implementation of domain_resume without domain_pause
+- add helper function to determine if vcpu is suspended or not
+- ignore upper 32 bits of argument values when the domain is 64-bit
+  and calls the SMC32 SYSTEM_SUSPEND function
+- cosmetic changes after review
+
+Changes in V5:
+- don't use standby mode, restore execution in a provided by guest point
+- move checking that all CPUs, except current one, are offline to after
+  pausing the vCPUs
+- provide ret status from arch_domain_shutdown and handle it in
+  domain_shutdown
+- adjust VPSCI_NR_FUNCS to reflect the number of newly added PSCI functions
+
+Changes in V4:
+Dropped all changes related to watchdog, domain is marked as shutting
+down in domain_shutdown and watchdog timeout handler won't trigger
+because of it.
+
+Previous versions included code to manage Xen watchdog timers during suspend,
+but this was removed. When a guest OS starts the Xen watchdog (either via the
+kernel driver or xenwatchdogd), it is responsible for managing that state
+across suspend/resume. On Linux, the Xen kernel driver properly stops the
+watchdog during suspend. However, when xenwatchdogd is used instead, suspend
+handling is incomplete, potentially leading to watchdog-triggered resets on
+resume. Xen leaves watchdog handling to the guest OS and its services.
+
+Dropped all changes related to VCPU context, because instead domain_shutdown
+is used, so we don't need any extra changes for suspending domain.
+
+Changes in V3:
+Dropped all domain flags and related code (which touched common functions like
+vcpu_unblock), keeping only the necessary changes for Xen suspend/resume, i.e.
+suspend/resume is now fully supported only for the hardware domain.
+Proper support for domU suspend/resume will be added in a future patch.
+This patch does not yet include VCPU context reset or domain context
+restoration in VCPU.
+---
+ xen/arch/arm/domain.c                 |  37 ++++++++
+ xen/arch/arm/include/asm/domain.h     |   6 ++
+ xen/arch/arm/include/asm/perfc_defn.h |   1 +
+ xen/arch/arm/include/asm/psci.h       |   2 +
+ xen/arch/arm/include/asm/suspend.h    |  18 ++++
+ xen/arch/arm/include/asm/vpsci.h      |   5 +-
+ xen/arch/arm/vpsci.c                  | 116 +++++++++++++++++++++-----
+ xen/common/domain.c                   |   9 ++
+ xen/include/xen/domain.h              |  11 +++
+ 9 files changed, 183 insertions(+), 22 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/suspend.h
+
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 863ae18157..7d7358abe5 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -12,6 +12,8 @@
+ #include <xen/softirq.h>
+ #include <xen/wait.h>
+ 
++#include <public/sched.h>
++
+ #include <asm/arm64/sve.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
+@@ -27,6 +29,7 @@
+ #include <asm/tee/tee.h>
+ #include <asm/vfp.h>
+ #include <asm/vgic.h>
++#include <asm/vpsci.h>
+ #include <asm/vtimer.h>
+ 
+ #include "vpci.h"
+@@ -880,6 +883,40 @@ void arch_domain_creation_finished(struct domain *d)
+     p2m_domain_creation_finished(d);
+ }
+ 
++int arch_domain_resume(struct domain *d)
++{
++    int rc;
++    typeof(d->arch.resume_ctx) *ctx = &d->arch.resume_ctx;
++
++    if ( !d->is_shutting_down || d->shutdown_code != SHUTDOWN_suspend )
++    {
++        dprintk(XENLOG_WARNING,
++                "%pd: Invalid domain state for resume: is_shutting_down=%d, shutdown_code=%d\n",
++                d, d->is_shutting_down, d->shutdown_code);
++        return -EINVAL;
++    }
++
++    /*
++     * It is still possible to call domain_shutdown() with a suspend reason
++     * via some hypercalls, such as SCHEDOP_shutdown or SCHEDOP_remote_shutdown.
++     * In these cases, the resume context will be empty.
++     * This is not expected to cause any issues, so we just warn about the
++     * situation and return without error, allowing the existing logic to
++     * proceed as expected.
++     */
++    if ( !ctx->wake_cpu )
++    {
++        dprintk(XENLOG_WARNING, "%pd: Invalid wake CPU pointer for resume\n",
++                d);
++        return 0;
++    }
++
++    rc = vpsci_vcpu_up_prepare(ctx->wake_cpu , ctx->ep, ctx->cid);
++    memset(ctx, 0, sizeof(*ctx));
++
++    return rc;
++}
++
+ static int is_guest_pv32_psr(uint32_t psr)
+ {
+     switch (psr & PSR_MODE_MASK)
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index a3487ca713..68185fc4d6 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -121,6 +121,12 @@ struct arch_domain
+     void *tee;
+ #endif
+ 
++    struct resume_info {
++        register_t ep;
++        register_t cid;
++        struct vcpu *wake_cpu;
++    } resume_ctx;
++
+ }  __cacheline_aligned;
+ 
+ struct arch_vcpu
+diff --git a/xen/arch/arm/include/asm/perfc_defn.h b/xen/arch/arm/include/asm/perfc_defn.h
+index effd25b69e..8dfcac7e3b 100644
+--- a/xen/arch/arm/include/asm/perfc_defn.h
++++ b/xen/arch/arm/include/asm/perfc_defn.h
+@@ -33,6 +33,7 @@ PERFCOUNTER(vpsci_system_reset,        "vpsci: system_reset")
+ PERFCOUNTER(vpsci_cpu_suspend,         "vpsci: cpu_suspend")
+ PERFCOUNTER(vpsci_cpu_affinity_info,   "vpsci: cpu_affinity_info")
+ PERFCOUNTER(vpsci_features,            "vpsci: features")
++PERFCOUNTER(vpsci_system_suspend,      "vpsci: system_suspend")
+ 
+ PERFCOUNTER(vcpu_kick,                 "vcpu: notify other vcpu")
+ 
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 4780972621..48a93e6b79 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -47,10 +47,12 @@ void call_psci_system_reset(void);
+ #define PSCI_0_2_FN32_SYSTEM_OFF          PSCI_0_2_FN32(8)
+ #define PSCI_0_2_FN32_SYSTEM_RESET        PSCI_0_2_FN32(9)
+ #define PSCI_1_0_FN32_PSCI_FEATURES       PSCI_0_2_FN32(10)
++#define PSCI_1_0_FN32_SYSTEM_SUSPEND      PSCI_0_2_FN32(14)
+ 
+ #define PSCI_0_2_FN64_CPU_SUSPEND         PSCI_0_2_FN64(1)
+ #define PSCI_0_2_FN64_CPU_ON              PSCI_0_2_FN64(3)
+ #define PSCI_0_2_FN64_AFFINITY_INFO       PSCI_0_2_FN64(4)
++#define PSCI_1_0_FN64_SYSTEM_SUSPEND      PSCI_0_2_FN64(14)
+ 
+ /* PSCI v0.2 affinity level state returned by AFFINITY_INFO */
+ #define PSCI_0_2_AFFINITY_LEVEL_ON      0
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+new file mode 100644
+index 0000000000..c8ea84bd40
+--- /dev/null
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#ifndef __ASM_ARM_SUSPEND_H__
++#define __ASM_ARM_SUSPEND_H__
++
++int arch_domain_resume(struct domain *d);
++
++#endif /* __ASM_ARM_SUSPEND_H__ */
++
++ /*
++  * Local variables:
++  * mode: C
++  * c-file-style: "BSD"
++  * c-basic-offset: 4
++  * tab-width: 4
++  * indent-tabs-mode: nil
++  * End:
++  */
+diff --git a/xen/arch/arm/include/asm/vpsci.h b/xen/arch/arm/include/asm/vpsci.h
+index 0cca5e6830..d790ab3715 100644
+--- a/xen/arch/arm/include/asm/vpsci.h
++++ b/xen/arch/arm/include/asm/vpsci.h
+@@ -23,12 +23,15 @@
+ #include <asm/psci.h>
+ 
+ /* Number of function implemented by virtual PSCI (only 0.2 or later) */
+-#define VPSCI_NR_FUNCS  12
++#define VPSCI_NR_FUNCS  14
+ 
+ /* Functions handle PSCI calls from the guests */
+ bool do_vpsci_0_1_call(struct cpu_user_regs *regs, uint32_t fid);
+ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid);
+ 
++int vpsci_vcpu_up_prepare(struct vcpu *v, register_t entry_point,
++                          register_t context_id);
++
+ #endif /* __ASM_VPSCI_H__ */
+ 
+ /*
+diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+index 7ba9ccd94b..22c3a5f544 100644
+--- a/xen/arch/arm/vpsci.c
++++ b/xen/arch/arm/vpsci.c
+@@ -10,32 +10,16 @@
+ 
+ #include <public/sched.h>
+ 
+-static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
+-                            register_t context_id)
++int vpsci_vcpu_up_prepare(struct vcpu *v, register_t entry_point,
++                   register_t context_id)
+ {
+-    struct vcpu *v;
+-    struct domain *d = current->domain;
+-    struct vcpu_guest_context *ctxt;
+     int rc;
++    struct domain *d = v->domain;
+     bool is_thumb = entry_point & 1;
+-    register_t vcpuid;
+-
+-    vcpuid = vaffinity_to_vcpuid(target_cpu);
+-
+-    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
+-        return PSCI_INVALID_PARAMETERS;
+-
+-    /* THUMB set is not allowed with 64-bit domain */
+-    if ( is_64bit_domain(d) && is_thumb )
+-        return PSCI_INVALID_ADDRESS;
+-
+-    if ( !test_bit(_VPF_down, &v->pause_flags) )
+-        return PSCI_ALREADY_ON;
++    struct vcpu_guest_context *ctxt;
+ 
+     if ( (ctxt = alloc_vcpu_guest_context()) == NULL )
+-        return PSCI_DENIED;
+-
+-    vgic_clear_pending_irqs(v);
++        return -ENOMEM;
+ 
+     memset(ctxt, 0, sizeof(*ctxt));
+     ctxt->user_regs.pc64 = (u64) entry_point;
+@@ -76,8 +60,37 @@ static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
+     free_vcpu_guest_context(ctxt);
+ 
+     if ( rc < 0 )
++        return rc;
++
++    return 0;
++}
++
++static int do_common_cpu_on(register_t target_cpu, register_t entry_point,
++                            register_t context_id)
++{
++    struct vcpu *v;
++    struct domain *d = current->domain;
++    int rc;
++    bool is_thumb = entry_point & 1;
++    register_t vcpuid;
++
++    vcpuid = vaffinity_to_vcpuid(target_cpu);
++
++    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
++        return PSCI_INVALID_PARAMETERS;
++
++    /* THUMB set is not allowed with 64-bit domain */
++    if ( is_64bit_domain(d) && is_thumb )
++        return PSCI_INVALID_ADDRESS;
++
++    if ( !test_bit(_VPF_down, &v->pause_flags) )
++        return PSCI_ALREADY_ON;
++
++    rc = vpsci_vcpu_up_prepare(v, entry_point, context_id);
++    if ( rc )
+         return PSCI_DENIED;
+ 
++    vgic_clear_pending_irqs(v);
+     vcpu_wake(v);
+ 
+     return PSCI_SUCCESS;
+@@ -197,6 +210,48 @@ static void do_psci_0_2_system_reset(void)
+     domain_shutdown(d,SHUTDOWN_reboot);
+ }
+ 
++static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
++{
++    int32_t rc;
++    struct vcpu *v;
++    struct domain *d = current->domain;
++    bool is_thumb = epoint & 1;
++
++    /* THUMB set is not allowed with 64-bit domain */
++    if ( is_64bit_domain(d) && is_thumb )
++        return PSCI_INVALID_ADDRESS;
++
++    /* SYSTEM_SUSPEND is not supported for the hardware domain yet */
++    if ( is_hardware_domain(d) )
++        return PSCI_NOT_SUPPORTED;
++
++    /* Ensure that all CPUs other than the calling one are offline */
++    domain_lock(d);
++    for_each_vcpu ( d, v )
++    {
++        if ( v != current && is_vcpu_online(v) )
++        {
++            domain_unlock(d);
++            return PSCI_DENIED;
++        }
++    }
++    domain_unlock(d);
++
++    rc = domain_shutdown(d, SHUTDOWN_suspend);
++    if ( rc )
++        return PSCI_DENIED;
++
++    d->arch.resume_ctx.ep = epoint;
++    d->arch.resume_ctx.cid = cid;
++    d->arch.resume_ctx.wake_cpu = current;
++
++    gprintk(XENLOG_DEBUG,
++            "SYSTEM_SUSPEND requested, epoint=0x%"PRIregister", cid=0x%"PRIregister"\n",
++            epoint, cid);
++
++    return rc;
++}
++
+ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+ {
+     /* /!\ Ordered by function ID and not name */
+@@ -214,6 +269,8 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+     case PSCI_0_2_FN32_SYSTEM_OFF:
+     case PSCI_0_2_FN32_SYSTEM_RESET:
+     case PSCI_1_0_FN32_PSCI_FEATURES:
++    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
++    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
+     case ARM_SMCCC_VERSION_FID:
+         return 0;
+     default:
+@@ -344,6 +401,23 @@ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid)
+         return true;
+     }
+ 
++    case PSCI_1_0_FN32_SYSTEM_SUSPEND:
++    case PSCI_1_0_FN64_SYSTEM_SUSPEND:
++    {
++        register_t epoint = PSCI_ARG(regs, 1);
++        register_t cid = PSCI_ARG(regs, 2);
++
++        if ( fid == PSCI_1_0_FN32_SYSTEM_SUSPEND )
++        {
++            epoint &= GENMASK(31, 0);
++            cid &= GENMASK(31, 0);
++        }
++
++        perfc_incr(vpsci_system_suspend);
++        PSCI_SET_RESULT(regs, do_psci_1_0_system_suspend(epoint, cid));
++        return true;
++    }
++
+     default:
+         return false;
+     }
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 104e917f07..667017c5e1 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1352,6 +1352,7 @@ int domain_shutdown(struct domain *d, u8 reason)
+ void domain_resume(struct domain *d)
+ {
+     struct vcpu *v;
++    int rc;
+ 
+     /*
+      * Some code paths assume that shutdown status does not get reset under
+@@ -1361,6 +1362,13 @@ void domain_resume(struct domain *d)
+ 
+     spin_lock(&d->shutdown_lock);
+ 
++    rc = arch_domain_resume(d);
++    if ( rc )
++    {
++        printk("%pd: Failed to resume domain (ret %d)\n", d, rc);
++        goto fail;
++    }
++
+     d->is_shutting_down = d->is_shut_down = 0;
+     d->shutdown_code = SHUTDOWN_CODE_INVALID;
+ 
+@@ -1371,6 +1379,7 @@ void domain_resume(struct domain *d)
+         v->paused_for_shutdown = 0;
+     }
+ 
++ fail:
+     spin_unlock(&d->shutdown_lock);
+ 
+     domain_unpause(d);
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index e10baf2615..63b81f8fba 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -8,6 +8,10 @@
+ 
+ #include <public/xen.h>
+ 
++#if __has_include(<asm/suspend.h>)
++#include <asm/suspend.h>
++#endif
++
+ struct guest_area {
+     struct page_info *pg;
+     void *map;
+@@ -109,6 +113,13 @@ int arch_domain_soft_reset(struct domain *d);
+ 
+ void arch_domain_creation_finished(struct domain *d);
+ 
++#if !__has_include(<asm/suspend.h>)
++static inline int arch_domain_resume(struct domain *d)
++{
++    return 0;
++}
++#endif /* !__has_include(<asm/suspend.h>) */
++
+ void arch_p2m_set_access_required(struct domain *d, bool access_required);
+ 
+ int arch_set_info_guest(struct vcpu *v, vcpu_guest_context_u c);
+-- 
+2.48.1
+
 
