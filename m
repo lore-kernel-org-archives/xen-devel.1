@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED1CCA1015
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B9FCA101F
 	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 13:04:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1110046.1459392 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1110052.1459427 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu9dX-0005Wg-6s; Thu, 04 Sep 2025 13:04:23 +0000
+	id 1uu9dZ-0006Jr-7r; Thu, 04 Sep 2025 13:04:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1110046.1459392; Thu, 04 Sep 2025 13:04:23 +0000
+Received: by outflank-mailman (output) from mailman id 1110052.1459427; Thu, 04 Sep 2025 13:04:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu9dX-0005Vj-2t; Thu, 04 Sep 2025 13:04:23 +0000
-Received: by outflank-mailman (input) for mailman id 1110046;
- Thu, 04 Sep 2025 12:58:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uu9dZ-0006Ir-0x; Thu, 04 Sep 2025 13:04:25 +0000
+Received: by outflank-mailman (input) for mailman id 1110052;
+ Thu, 04 Sep 2025 12:58:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DBMC=3P=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1uu9Xo-0003eE-Fm
- for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 12:58:28 +0000
+ id 1uu9Y2-0003uI-4h
+ for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 12:58:42 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id d8c727f5-898e-11f0-9809-7dc792cee155;
- Thu, 04 Sep 2025 14:58:26 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id e17c05a8-898e-11f0-9d12-b5c5bf9af7f9;
+ Thu, 04 Sep 2025 14:58:41 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 741D025E0;
- Thu,  4 Sep 2025 05:58:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2267F2ECB;
+ Thu,  4 Sep 2025 05:58:32 -0700 (PDT)
 Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
  [10.1.194.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 44AD33F6A8;
- Thu,  4 Sep 2025 05:58:21 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E64E73F6A8;
+ Thu,  4 Sep 2025 05:58:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d8c727f5-898e-11f0-9809-7dc792cee155
+X-Inumbo-ID: e17c05a8-898e-11f0-9d12-b5c5bf9af7f9
 From: Kevin Brodsky <kevin.brodsky@arm.com>
 To: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org,
@@ -81,109 +81,110 @@ Cc: linux-kernel@vger.kernel.org,
 	linuxppc-dev@lists.ozlabs.org,
 	sparclinux@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 1/7] mm: remove arch_flush_lazy_mmu_mode()
-Date: Thu,  4 Sep 2025 13:57:30 +0100
-Message-ID: <20250904125736.3918646-2-kevin.brodsky@arm.com>
+Subject: [PATCH 4/7] x86/xen: support nested lazy_mmu sections (again)
+Date: Thu,  4 Sep 2025 13:57:33 +0100
+Message-ID: <20250904125736.3918646-5-kevin.brodsky@arm.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20250904125736.3918646-1-kevin.brodsky@arm.com>
 References: <20250904125736.3918646-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This function has only ever been used in arch/x86, so there is no
-need for other architectures to implement it. Remove it from
-linux/pgtable.h and all architectures besides x86.
+Commit 49147beb0ccb ("x86/xen: allow nesting of same lazy mode")
+originally introduced support for nested lazy sections (LAZY_MMU and
+LAZY_CPU). It later got reverted by commit c36549ff8d84 as its
+implementation turned out to be intolerant to preemption.
 
-The arm64 implementation is not empty but it is only called from
-arch_leave_lazy_mmu_mode(), so we can simply fold it there.
+Now that the lazy_mmu API allows enter() to pass through a state to
+the matching leave() call, we can support nesting again for the
+LAZY_MMU mode in a preemption-safe manner. If xen_enter_lazy_mmu() is
+called inside an active lazy_mmu section, xen_lazy_mode will already
+be set to XEN_LAZY_MMU and we can then return LAZY_MMU_NESTED to
+instruct the matching xen_leave_lazy_mmu() call to leave
+xen_lazy_mode unchanged.
+
+The only effect of this patch is to ensure that xen_lazy_mode
+remains set to XEN_LAZY_MMU until the outermost lazy_mmu section
+ends. xen_leave_lazy_mmu() still calls xen_mc_flush()
+unconditionally.
 
 Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
 ---
- arch/arm64/include/asm/pgtable.h                   | 9 +--------
- arch/powerpc/include/asm/book3s/64/tlbflush-hash.h | 2 --
- arch/sparc/include/asm/tlbflush_64.h               | 1 -
- arch/x86/include/asm/pgtable.h                     | 3 ++-
- include/linux/pgtable.h                            | 1 -
- 5 files changed, 3 insertions(+), 13 deletions(-)
+ arch/x86/include/asm/paravirt.h       |  6 ++----
+ arch/x86/include/asm/paravirt_types.h |  4 ++--
+ arch/x86/xen/mmu_pv.c                 | 11 ++++++++---
+ 3 files changed, 12 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm64/include/asm/pgtable.h b/arch/arm64/include/asm/pgtable.h
-index abd2dee416b3..728d7b6ed20a 100644
---- a/arch/arm64/include/asm/pgtable.h
-+++ b/arch/arm64/include/asm/pgtable.h
-@@ -101,21 +101,14 @@ static inline void arch_enter_lazy_mmu_mode(void)
- 	set_thread_flag(TIF_LAZY_MMU);
- }
- 
--static inline void arch_flush_lazy_mmu_mode(void)
-+static inline void arch_leave_lazy_mmu_mode(void)
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 65a0d394fba1..4ecd3a6b1dea 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -529,14 +529,12 @@ static inline void arch_end_context_switch(struct task_struct *next)
+ #define  __HAVE_ARCH_ENTER_LAZY_MMU_MODE
+ static inline lazy_mmu_state_t arch_enter_lazy_mmu_mode(void)
  {
- 	if (in_interrupt())
- 		return;
- 
- 	if (test_and_clear_thread_flag(TIF_LAZY_MMU_PENDING))
- 		emit_pte_barriers();
--}
+-	PVOP_VCALL0(mmu.lazy_mode.enter);
 -
--static inline void arch_leave_lazy_mmu_mode(void)
--{
--	if (in_interrupt())
--		return;
- 
--	arch_flush_lazy_mmu_mode();
- 	clear_thread_flag(TIF_LAZY_MMU);
+-	return LAZY_MMU_DEFAULT;
++	return PVOP_CALL0(lazy_mmu_state_t, mmu.lazy_mode.enter);
  }
  
-diff --git a/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h b/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-index 146287d9580f..176d7fd79eeb 100644
---- a/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-+++ b/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-@@ -55,8 +55,6 @@ static inline void arch_leave_lazy_mmu_mode(void)
+ static inline void arch_leave_lazy_mmu_mode(lazy_mmu_state_t state)
+ {
+-	PVOP_VCALL0(mmu.lazy_mode.leave);
++	PVOP_VCALL1(mmu.lazy_mode.leave, state);
+ }
+ 
+ static inline void arch_flush_lazy_mmu_mode(void)
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index bc1af86868a3..b7c567ccbf32 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -45,8 +45,8 @@ typedef int lazy_mmu_state_t;
+ 
+ struct pv_lazy_ops {
+ 	/* Set deferred update mode, used for batching operations. */
+-	void (*enter)(void);
+-	void (*leave)(void);
++	lazy_mmu_state_t (*enter)(void);
++	void (*leave)(lazy_mmu_state_t);
+ 	void (*flush)(void);
+ } __no_randomize_layout;
+ #endif
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index 2039d5132ca3..6e5390ff06a5 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -2130,9 +2130,13 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
+ #endif
+ }
+ 
+-static void xen_enter_lazy_mmu(void)
++static lazy_mmu_state_t xen_enter_lazy_mmu(void)
+ {
++	if (this_cpu_read(xen_lazy_mode) == XEN_LAZY_MMU)
++		return LAZY_MMU_NESTED;
++
+ 	enter_lazy(XEN_LAZY_MMU);
++	return LAZY_MMU_DEFAULT;
+ }
+ 
+ static void xen_flush_lazy_mmu(void)
+@@ -2167,11 +2171,12 @@ static void __init xen_post_allocator_init(void)
+ 	pv_ops.mmu.write_cr3 = &xen_write_cr3;
+ }
+ 
+-static void xen_leave_lazy_mmu(void)
++static void xen_leave_lazy_mmu(lazy_mmu_state_t state)
+ {
+ 	preempt_disable();
+ 	xen_mc_flush();
+-	leave_lazy(XEN_LAZY_MMU);
++	if (state != LAZY_MMU_NESTED)
++		leave_lazy(XEN_LAZY_MMU);
  	preempt_enable();
  }
  
--#define arch_flush_lazy_mmu_mode()      do {} while (0)
--
- extern void hash__tlbiel_all(unsigned int action);
- 
- extern void flush_hash_page(unsigned long vpn, real_pte_t pte, int psize,
-diff --git a/arch/sparc/include/asm/tlbflush_64.h b/arch/sparc/include/asm/tlbflush_64.h
-index 8b8cdaa69272..cd144eb31bdd 100644
---- a/arch/sparc/include/asm/tlbflush_64.h
-+++ b/arch/sparc/include/asm/tlbflush_64.h
-@@ -44,7 +44,6 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end);
- void flush_tlb_pending(void);
- void arch_enter_lazy_mmu_mode(void);
- void arch_leave_lazy_mmu_mode(void);
--#define arch_flush_lazy_mmu_mode()      do {} while (0)
- 
- /* Local cpu only.  */
- void __flush_tlb_all(void);
-diff --git a/arch/x86/include/asm/pgtable.h b/arch/x86/include/asm/pgtable.h
-index e33df3da6980..14fd672bc9b2 100644
---- a/arch/x86/include/asm/pgtable.h
-+++ b/arch/x86/include/asm/pgtable.h
-@@ -117,7 +117,8 @@ extern pmdval_t early_pmd_flags;
- #define pte_val(x)	native_pte_val(x)
- #define __pte(x)	native_make_pte(x)
- 
--#define arch_end_context_switch(prev)	do {} while(0)
-+#define arch_end_context_switch(prev)	do {} while (0)
-+#define arch_flush_lazy_mmu_mode()	do {} while (0)
- #endif	/* CONFIG_PARAVIRT_XXL */
- 
- static inline pmd_t pmd_set_flags(pmd_t pmd, pmdval_t set)
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 4c035637eeb7..8848e132a6be 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -234,7 +234,6 @@ static inline int pmd_dirty(pmd_t pmd)
- #ifndef __HAVE_ARCH_ENTER_LAZY_MMU_MODE
- #define arch_enter_lazy_mmu_mode()	do {} while (0)
- #define arch_leave_lazy_mmu_mode()	do {} while (0)
--#define arch_flush_lazy_mmu_mode()	do {} while (0)
- #endif
- 
- #ifndef pte_batch_hint
 -- 
 2.47.0
 
