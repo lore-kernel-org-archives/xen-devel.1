@@ -4,52 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 567F2CA1013
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 18:53:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1110655.1459731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DEACA1012
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 20:01:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1110716.1459771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uuF5S-0005Hg-Ij; Thu, 04 Sep 2025 18:53:34 +0000
+	id 1uuG96-000644-Tp; Thu, 04 Sep 2025 20:01:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1110655.1459731; Thu, 04 Sep 2025 18:53:34 +0000
+Received: by outflank-mailman (output) from mailman id 1110716.1459771; Thu, 04 Sep 2025 20:01:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uuF5S-0005HZ-Fl; Thu, 04 Sep 2025 18:53:34 +0000
-Received: by outflank-mailman (input) for mailman id 1110655;
- Thu, 04 Sep 2025 18:53:33 +0000
+	id 1uuG96-00063v-RF; Thu, 04 Sep 2025 20:01:24 +0000
+Received: by outflank-mailman (input) for mailman id 1110716;
+ Thu, 04 Sep 2025 20:01:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ehPD=3P=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1uuF5R-0005HT-L2
- for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 18:53:33 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20618.outbound.protection.outlook.com
- [2a01:111:f403:2413::618])
+ <SRS0=ukh3=3P=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
+ id 1uuG95-00062f-Tn
+ for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 20:01:24 +0000
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c200::3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 722e545b-89c0-11f0-9809-7dc792cee155;
- Thu, 04 Sep 2025 20:53:30 +0200 (CEST)
-Received: from MW4PR03CA0020.namprd03.prod.outlook.com (2603:10b6:303:8f::25)
- by DM4PR12MB6589.namprd12.prod.outlook.com (2603:10b6:8:b4::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Thu, 4 Sep
- 2025 18:53:24 +0000
-Received: from SN1PEPF000397B3.namprd05.prod.outlook.com
- (2603:10b6:303:8f:cafe::2c) by MW4PR03CA0020.outlook.office365.com
- (2603:10b6:303:8f::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.17 via Frontend Transport; Thu,
- 4 Sep 2025 18:53:20 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF000397B3.mail.protection.outlook.com (10.167.248.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9094.14 via Frontend Transport; Thu, 4 Sep 2025 18:53:23 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 4 Sep
- 2025 13:53:20 -0500
-Received: from [172.31.134.167] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Thu, 4 Sep 2025 13:53:20 -0500
+ id ed908d7e-89c9-11f0-9809-7dc792cee155;
+ Thu, 04 Sep 2025 22:01:21 +0200 (CEST)
+Received: from GV2PR03MB8678.eurprd03.prod.outlook.com (2603:10a6:150:7d::13)
+ by GV2PR03MB10974.eurprd03.prod.outlook.com (2603:10a6:150:27a::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Thu, 4 Sep
+ 2025 20:01:19 +0000
+Received: from GV2PR03MB8678.eurprd03.prod.outlook.com
+ ([fe80::4eb:3e7b:1ffa:25f9]) by GV2PR03MB8678.eurprd03.prod.outlook.com
+ ([fe80::4eb:3e7b:1ffa:25f9%6]) with mapi id 15.20.9094.017; Thu, 4 Sep 2025
+ 20:01:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,192 +49,305 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 722e545b-89c0-11f0-9809-7dc792cee155
+X-Inumbo-ID: ed908d7e-89c9-11f0-9809-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UvmEpstWeWWTEMU4kmeEnAHwPX/z52tM3aAMz08CLKU0sMmKNuaPSbMB/R4N7RMVVmh6pJLkUy1QeMjQ4vXUDSsIAKe7c2t0UwLdgug89Z1bMTTyRAoKwXrEQGPVwW+j5FKUWX/B4y2UHAuaFZJSN8jbDQZzkYbM852OajkmpWSjXks/FVzuMXlrIjSPu0eCMZgQqnt+0oWKap9H9uolQiYuG1BUWT9Eo4KD44G11avyqsn6WOl3lSC2aoKgoSQ+sqdz8YJ8K7o3dXHkGVnQJbpa8jYACWfWsnR7VTx8Zp/nMrVPDL8EN4LvtWlr6CNP296pKHAvCOHQQR3JmjVvOg==
+ b=gVECdtmfvm/ifmprLF123ovutT5zrvHgw2ykQrQHGBUBTCaW/C2bHM5w+1mlM/a8OpTgMFmQFRcBv1LOpCyWKT3Q62reCh3gtoKzxxr6tf3J7N0fegg3VFeeb7ArRWJvgy1jm44i/z7lVG7WCrYjWBowtTP9k7pRgqUx2gXI56DBOBz2oaBZm8VZXpnXb27Ns66e02M79pCJNNHgt0pZ2sqUXPjDMn34jG766nUmgphZGWcqMKAJEHlmuPhkPEaRCVSrqWaqRpimjDgwjQAwwG19b27F1ANo+kchf7XkIISld+4GNisvPLa61WxF+VvgHJhgi5Xg57DxsM1TWEIgZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Aa33LKobugZJ2n1Alem9MeMOFTIqWpw0pDgYkKTy/KM=;
- b=VCrobMp+SXEkrvcYVHsN4HQ+f7OCavK0I2BEgkRqiKQupoZOxAIb6lZjhabJcwLN7qA5+wdap+H1NhOlTYvdL3JBTbqPJcjLVos87WEDLaj4RWVhHNpA4mrhdEXcMmVjCccl45URPEUONZ8sLwU53nRPu6OsxPZDCoxV85F7DhmdkziV4lybznszldyMUlPWmZUJ7h355hFW4Av05M3bb4P73GRI76eB9AUVi1wQmzwCVCXiXYrilEjEfQo2KElF1gaKyIWc2x2F/YJIGcDnDXUskf3hzymZKVHN/d6Vs9Nv4kNUsRbwr3f1u84/3Wg2HdVug3gLLqSpseXJv19QHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=xUxC/EzITt3a0WgMgWfYUK8XS0r83FbjMjiYxSZk+jg=;
+ b=nY1/rY+c7bQwb5MpETGsYV1vpMcfm1II+RnaTFN9JDGHPdVy+CWYzoYUMh7jkZmSJ0/WHTAmdcDAFQcOWPHtWwAtzeYuas0BNZIJAdGAterCBBI4hPDhb8koKBYOX1c5iljD37kfCJET9ajJkZ2T5Vrw26o4DXL4kKwu3I7Q7mK/gRxbNDvv7Tb9mTYwUkam3cu2OivfSVKsLs2XCn53rf1CYwpA74UsRuB/twmEvLQrIkuy9/uTZgqLNITXJ52uTyvJqk5yzB8u17naj3P1iBsedrw+ukIzlJRw827pJ/qUWOWvc4PjO/koiRtLQC73QCcCrDX8SmlXJUfUdeGkHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Aa33LKobugZJ2n1Alem9MeMOFTIqWpw0pDgYkKTy/KM=;
- b=dULTV4z9H16Qq1Fsn3UjCwnv0HtnsJ3p+kLQpkU4gdf8fq/aM7fTaCyWZ0BFKNqj4LAO5b6ymZ0YpGdUthQ1QmUjP2+UDaXC5QrLkYemE7JXv8bCId82va7uNas6rGpg7y+taubcpwbuS9as6ni94jNxqKOkDP2p1OoMDCbkPkE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <ea021d1d-1e53-48cb-8957-f83313c2f8f3@amd.com>
-Date: Thu, 4 Sep 2025 14:53:22 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 1/8] xen/cpufreq: embed hwp into struct
- cpufreq_policy{}
-To: Jan Beulich <jbeulich@suse.com>, Penny Zheng <Penny.Zheng@amd.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
-	<xen-devel@lists.xenproject.org>
-References: <20250904063518.2097629-1-Penny.Zheng@amd.com>
- <20250904063518.2097629-2-Penny.Zheng@amd.com>
- <849f73f1-4004-4d17-a7a9-d755fb0f889b@suse.com>
+ bh=xUxC/EzITt3a0WgMgWfYUK8XS0r83FbjMjiYxSZk+jg=;
+ b=K2g415sg3Lqr9vnOuvH6oqMLLC/5mWKfFb6IhTbyhSrpfLEeDOwk2IAGg9+jGBq1ZwocivAEptlQThpwY0Zx/tf0JQw4s6hdj1r88orAU2ys+p85Bzn58AOUo6x/DbaYHF4bpKRN9T+9YA27HXxldk0pv1nzKERzrRyGu/nlWUm2eBw66IFk7emqTdu9JZdly5QXqnJjaV5IDwL2kdcmeQyNFNi1M/zH9H990Qc6dSOUFKbi1gteXunGvpy146u6kNQAf3kUnOXBF/TuiOhgzZ1TeAjCMsY8U21gL1m6VgyxKztZJapd+F02UHKEOay1eBhGpeO3FkdSy0cYNsKU7w==
+From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: "olekstysh@gmail.com" <olekstysh@gmail.com>, Leonid Komarianskyi
+	<Leonid_Komarianskyi@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Oleksandr Tyshchenko
+	<Oleksandr_Tyshchenko@epam.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v7 03/12] xen/arm: vgic: implement helper functions for virq
+ checks
+Thread-Topic: [PATCH v7 03/12] xen/arm: vgic: implement helper functions for
+ virq checks
+Thread-Index: AQHcHdat8GUnc6NjkU6Jp8NxZ7QMlw==
+Date: Thu, 4 Sep 2025 20:01:19 +0000
+Message-ID:
+ <db4ff870550f55a1f856e172021b05366b1309fa.1757015865.git.leonid_komarianskyi@epam.com>
+References: <cover.1757015865.git.leonid_komarianskyi@epam.com>
+In-Reply-To: <cover.1757015865.git.leonid_komarianskyi@epam.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <849f73f1-4004-4d17-a7a9-d755fb0f889b@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B3:EE_|DM4PR12MB6589:EE_
-X-MS-Office365-Filtering-Correlation-Id: b313d7f2-d0e0-4d2f-be96-08ddebe452de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?ejRrSzM2Ulg4cDZRVFVqTmNjRzh0SDNtSGM1L2JrSFJqaS9NVmlzL1RHQm00?=
- =?utf-8?B?aC9LV2ZzdnEzRnBMNllFQytzS25BZmpSQWVYd0NFVDlRVUdPZFpPSzBCTG5x?=
- =?utf-8?B?VHN1d2lVWk9GRjkwZ3FOc1NmM2tyeHlnOFpsMWt3eHl4cjdKbUxaeXlOQ09a?=
- =?utf-8?B?aU5NaGpiS09WRmZsVFNybFV3S1ZqNEgyeVRoVzRBQjVZTjc5VkNSeXM0MVo4?=
- =?utf-8?B?NHUvM2N4ZHhnaEJPNDJBZUtkRXgxWk9LUlRBVDRmMjdrei83S1lKUVdkays2?=
- =?utf-8?B?NUJnRWdPYlBKbWVxdzJQeEJDeFFtZ1lRZlhZN1ZtamVINkZBQzZGWnhPNVB1?=
- =?utf-8?B?eU5JQjU3UVN5WFFXbEJDSkpVTGZGdE11SW9scEt0QzlEMGx3NXhIS3V0R3R5?=
- =?utf-8?B?SndVRTgvVVBCZG9sRExyOFBQSEZXRUVYTW1rcXlDZ3FMbzNEUlFicTVSeDc2?=
- =?utf-8?B?K3Fqd0hnNFZkRHhlclZtRzFRR1pUSVdIelJBaDNsSkJIa3N1cGhOMHNIQ05X?=
- =?utf-8?B?TDdwSVlDd1lMaUs0NzBsTGRYS2xYRXVqWHRrMjRid0NBWkg5SFR2a2p1T3BJ?=
- =?utf-8?B?NTBvM0U2dGVkaVU4b25YVnFhVlFHQjFmd1pJL25VajBueGNDQ25FcFB2L1Bh?=
- =?utf-8?B?WTZpNk9BMFpOc2hTMXdsTDV4Ujljdzg1YjdrWGpzTWVodjBQWmhIRFFCbWdt?=
- =?utf-8?B?eEhBdmRQMUs5b1FLNWtaU1EzcUNiNk5SM2Vrc0JJVGhkMGluSkkxTnYxTTRX?=
- =?utf-8?B?M3A0TytXcHdLRXN5RmtDeG1zN3pOYmtyQ2FrbjdvS28zVlBFRXFvQWNVb3U2?=
- =?utf-8?B?VUg2S3M3Y0NpWVN5UkltMEhBY1o1bEhHV3dLN21HdFZLRzRLWUxOWHJyWXVF?=
- =?utf-8?B?UnFBMHV1bFBCRWJZdThtZWIvbWMwN0tJTnJjN3VRWE5sVTI1cnByZjBKQjBh?=
- =?utf-8?B?R2R5YzdiWFZCZmJZRVQwS1NKSjd5YzV1Y2oxaEpMQXpuWlRxcWs1dU9aVldK?=
- =?utf-8?B?WmphM2c2ZkFMZWx0UXBaTFVwWThpSlZEOUs1cjd6OWtzdjBXS2JFVXU2U1Za?=
- =?utf-8?B?TlFFQldNWHllU1hFWUgrSzlXQmNyamFYUkRPc3RWMFpVbDRVajZkdEFEVldv?=
- =?utf-8?B?KzNQM2dCdklSOXVHbTVLMVVna1RTYnIwbSt2a2lKdWkraXNZbDFDajhIN0RT?=
- =?utf-8?B?Z0JBTXFhVXpBWnhIZTliTE0vREYxeVVwc295TXkraWpuQlhrbHVHc3JXbU92?=
- =?utf-8?B?ZWs4NERUcmQvU2xoTGI0RVBBalJYUzhBMnUwQm9VVk9VZWZwek1LWmNVdjBB?=
- =?utf-8?B?ZWJkaitpMmt2ZUN0cTRIU2VqaTBCcDJYaUg5MVRJRkgwTmY2ZVJVbXQvemxX?=
- =?utf-8?B?K2w4ZEF4VktjVmx6UmQwUTFVL2pBTkJTeGlzcmJFSENodS9tZGlCWEF5TnpQ?=
- =?utf-8?B?ZzNMY1p1aHp3TzU4dkxvVkF6TzNqTzIyTDN1THpGTGpuOXd6YUNkdnBHbTNo?=
- =?utf-8?B?bkxGK1ZOTXhNOWZNVDh4amU2MUFLVFkwK2YxRGIyNzRBRGp4ZzdQdXhkQzNx?=
- =?utf-8?B?YUlnT1R4bTR2aDV4blQzdjgxd2FURGYzRzdiRGxUMVpqR2xpVitxaTFlYUxp?=
- =?utf-8?B?eFI1OGhMMGl4bTlCNk9sUmtrSkhFdnBzUUJna292MG5EWXMvRHVCSlBHUDhY?=
- =?utf-8?B?aHU0VmVpUXlkeFdYcU9pR3BnbEt2eUNTTFFHejY3bHZBVytyVFRaUHhKTU9j?=
- =?utf-8?B?OVcwZzVTMVdBTC9PSWpCS1R0Mjg0d01zSGdFajJmaVpxK2VQV2RkYzFxWDV3?=
- =?utf-8?B?TVVvcHQ4bUxnQnVycmQ2RUcxZjhLUHdSdTNQVDFMcDNKU203K0tySmk4MkxU?=
- =?utf-8?B?QnljN1VOVC9DcUtVblRSVEdISnVKU2JMUkEreHFqQmlQY1NyV1BvclZSbEYw?=
- =?utf-8?B?MVN3cHpzWk5ra1RtUjZvbDREKzJVOVg2Z0RiNGFtUDBsOGZZdHE4OU5WdEs5?=
- =?utf-8?B?M21pRnNGc21odHE2TDMrV2pUV1d2NDdmc3A1aDMyTE80TjlySitkSEx3MGZR?=
- =?utf-8?Q?NQPKc1?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 18:53:23.1191
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV2PR03MB8678:EE_|GV2PR03MB10974:EE_
+x-ms-office365-filtering-correlation-id: 81ab3b00-d4c2-438a-438e-08ddebedd069
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?F9xKCfWVFZqC1Spqr4Vp5p6iIT6mczWjO/u2IVEuwPSSOcdDTPyXCB8kGc?=
+ =?iso-8859-1?Q?Ic8P8oT1jYFTPsrIx3dMLQc7QduZGWBFr2ilvvWobfsHUksnzs3XN1FM3K?=
+ =?iso-8859-1?Q?/n/Ji4hemNMr/x9xBbYAl/l6xe2t2Rp2PWeOh7t42aUb/9HuXSOTx3+/qE?=
+ =?iso-8859-1?Q?AbGZIzFVh+MnquIIHWlauFKr6ly9hYlTeSPXUbcUWhsb+UqxBbIclIGiZN?=
+ =?iso-8859-1?Q?tD/gS0HipIYcQC4hi6foj0/e6EAEITOU9IQ0hhafiw+u/8U2D8xfRGBemi?=
+ =?iso-8859-1?Q?rKNdF5/6cwZp1KTjMltvYM64JAM9b62PoNRbeWFcxklfOdJXrq5cIaIsOc?=
+ =?iso-8859-1?Q?HK+6M9cOywKVRD4KXlogiM3Kb3buptUbe2ZnfeU1E7W8//ofjvRleRHd88?=
+ =?iso-8859-1?Q?AdelEcued7M+YcbMYZZ1x4VpDW0hnhnzme9e3avpczP1beRgObyPBhbgji?=
+ =?iso-8859-1?Q?e2H+9WGxBFaR+BOz8VaJk0wHmA51QbQ0SkSNZugjeOMnCdoWkKUUveqtt1?=
+ =?iso-8859-1?Q?VbO7VUNnEpua42KahqE/P+8omX96avm9MubrKWa6Tme2c7iSSlSmtSOqlx?=
+ =?iso-8859-1?Q?A2Z4Q/aoWCKpDCP55mvCh6RCeumMtv1MR1w7NHJwy8LLco+YRK8QvCeJpX?=
+ =?iso-8859-1?Q?vb905/0c3KuNKBaYgauodBkNVEmaKLXPXryABCqehQhHmYs7IG0babEXcA?=
+ =?iso-8859-1?Q?YZI9voWFHwl5nCNBlEpZ0qyMvDx1r8MGpYGxjgkYJ32zvTPEwSJWPcavap?=
+ =?iso-8859-1?Q?5TyXNh6ZdnNyRb0zydDYqcg2PDb/o3X9z378ZG9s9lW65pfhWXDLYxM0CG?=
+ =?iso-8859-1?Q?z62zTncQ3LdUwDKmwVEY1wt8OES6OpMaPfTOI9XQtGR8gRThUVfh5tUtaE?=
+ =?iso-8859-1?Q?gPz5jS/Lg1MqN5MuTLuaU+7WGlRgN2XKlA5/hUXQoX+4i4fmRGvLbDbL0n?=
+ =?iso-8859-1?Q?s8zofi/jqqoiRZy+BcN9V0/hsqI7rVUte5NCDZlblqIedx/ep3f9kCj/jn?=
+ =?iso-8859-1?Q?754mEzWtmNwnsSeHIvOLJjSqCtyBPHaxJTZ+yoAd3qQLJCkxEvyG1doxeC?=
+ =?iso-8859-1?Q?wcQVKSbVhBbp9SjHTWIB9yhbsitaCEN5ud0Od2d29R7ArZas/dZYAghkSL?=
+ =?iso-8859-1?Q?6INJl9FJcd7ypVI24udZ32hupsGu+f7Ssh8cj1Iu7Cv+VekQS46UX+9+Fs?=
+ =?iso-8859-1?Q?Cj/Ezt+pTsCifv9pjTHgzqUwIhnhbHZx/eS5vEpeLVQRqDpjLPdqkKMhUa?=
+ =?iso-8859-1?Q?wsvjHe52CvUAOeMxcArepmH/N4OpuNs0869lj0TeE2cpoFQ5ZnGdH3nexj?=
+ =?iso-8859-1?Q?tS7VWd0091ZEEee9i0hTiVfPci6i0iPeo+rzOH/iopPiDRNe9JuEmGtNs5?=
+ =?iso-8859-1?Q?us2OC61x+fqLUE38v9Ld67H9fkvnrneDVBXeDHN9LuKtQWX8mmw4BCGjdi?=
+ =?iso-8859-1?Q?aw4CJ/9rnLx/k8/GTLPhupHjlWsVcKKmtq93Ixu6W6Ag+p9s60rQOwUiSP?=
+ =?iso-8859-1?Q?FVh03Ybf0Lu+E30Iz9P7UIXHo5U0wLeFrNWShmK+8IZg=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR03MB8678.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?/ntgAEkM9syAH9awizfzttxBny+eayHV9XihKzLmdlV8IeSAzpmmYcPyWo?=
+ =?iso-8859-1?Q?AvLoS4oOux7yb8jSDF4KWierQwL6uSUPx2EUTwHZ9oo4Nel366OvlI/RGE?=
+ =?iso-8859-1?Q?5df15CL1P3pLojoSedhnmb3WTIy58Q0n2KmlbKAJHeBeMPsk9OJVOJpkpi?=
+ =?iso-8859-1?Q?ztosHvQUfV3pUow8NAOBI8idh17Y7s/w3bynPOND4cBzx7KIb2JuuNxLXr?=
+ =?iso-8859-1?Q?D6v6scD4ZJ8aSqDhHZUnISA2grQ94yhwg99G/znWwBr/p3Fu6PZLLfGQ0o?=
+ =?iso-8859-1?Q?ez4zTNATsF6AT2ttCjYBobikWERC26PiixMACbL3DwXbwEZfDj4qcdJa22?=
+ =?iso-8859-1?Q?cnerSGhlNvdWdg2Bb0WGdcFw9iSND1twmiHzQlw3ibdQ1KPmZlN1/3hDKs?=
+ =?iso-8859-1?Q?XJpVaa/uASR32n3wIgVz5aYk3CBUDRlVr+TAhhn21ibNjPAFQC4nmc4CtL?=
+ =?iso-8859-1?Q?JDXEAUDzhWK4zJMSg4WCAJJ8ip9lZ7u/X39uR4jkWk0G6WeYBJLGtOpb9v?=
+ =?iso-8859-1?Q?t/4udnj66gEwMrBB96DT+RDZyAAmA1wLUBliHGLC9y4QDGztjOZOkum2JO?=
+ =?iso-8859-1?Q?iBOGonofs4JBP2zlCNYb9rxWn2n4JhYb7nHmGAOotTSTB5pLFvDSwwYKHM?=
+ =?iso-8859-1?Q?ShCR+xDWejEyFJkcpds8OhR0ThvaNOM7Tll5wqwohmxj37ChfC3GyOJXMH?=
+ =?iso-8859-1?Q?rUEZ/wOcgTN1B3gHce2vGG5nULqh7avo3a+fc8CQ2rBPonNkUw5RRC91Om?=
+ =?iso-8859-1?Q?TxoRIEXlAM3l7CPckSExV6YKYRjMvF2IUEt+P/CzJvnRDFolN8v87ojsR5?=
+ =?iso-8859-1?Q?b1GlWo9WNvHI0PT9NfIzCp7u1Q4qnGES5u/fhFw6zKx42oLnWG+dWlZZhe?=
+ =?iso-8859-1?Q?wiF2dkfM6QlMC9OwURGZs16Itpbt69WS4EnvFMrqhvCkp6gwYAHp9NhBYW?=
+ =?iso-8859-1?Q?UsrrNtc+fz0vwxi9XfnSdnhs6mKbaCWrFgPVdGvB+E4UVnjgH/EzFpnHfR?=
+ =?iso-8859-1?Q?py6X+oOKpjVMYjRHMC7Gnlq8XISpviSh1sWY0D9yylyGRHdaZu2YLay1vy?=
+ =?iso-8859-1?Q?8CQhROLQtZNZrkSytfVklZy5dC72IeEN+ZHfAMStunLETIz6ew1cPxUfJR?=
+ =?iso-8859-1?Q?h/T8tyzy83ey31b/fDO+aqs6cCTPzjElOTfdfsIpZL0LFLKx7gWwW4SoJV?=
+ =?iso-8859-1?Q?yl4JvkyfopM4MpjqO2YUy7HDVNh3CmtMpLADWjYVZwIXdJFFBXwhy1IidG?=
+ =?iso-8859-1?Q?xM4aohoY0Kajya6u2rtTMjDfeom8Mb5OQ18HzT5Iy2f8LHE5H6xaI3OPhs?=
+ =?iso-8859-1?Q?DDdnctbOn3Jg0iHTtSiALZPTylTjg+j8lX0h4XsgETtmObfNsrGDPwFA1J?=
+ =?iso-8859-1?Q?ZrWKboQggDKenlc+lU3x6ej6VufbZr77z6qyQ+xnxNJMA4wOgHHbuhkzqA?=
+ =?iso-8859-1?Q?7SBUho8nZdbJW+cJ/OlJ0NZJsEhRF75VUCj8uG3Q8nd8WE8RO8M/5z34t1?=
+ =?iso-8859-1?Q?Id6R1onqQbMZsOT2dDgUWDJ0LMTXQLuWPDYSXeEwY9QvBIjWRYuySMdmsV?=
+ =?iso-8859-1?Q?2GfD1WJnsJJYEkfn6D5H53MItiKTAk7iO0A4Bg66x1UZx/JtCeZV7dkgHp?=
+ =?iso-8859-1?Q?FZGktGi9Ne/pPJu4187OAxGjAQA5kI43i+mQ2e++wXj3WH4POqx7kg+25+?=
+ =?iso-8859-1?Q?8Fga2HuU9yBR/IBwklg=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR03MB8678.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81ab3b00-d4c2-438a-438e-08ddebedd069
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Sep 2025 20:01:19.2787
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b313d7f2-d0e0-4d2f-be96-08ddebe452de
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF000397B3.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6589
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: JdIXcWRWL1P8sG8bu/fzo1L2pQ3qvmmxzr67hnSkyzkwh4u/uiGkspDlN60+np0aw5u1VGh3vYz4UNGzErsTBo4bL0bL5/0fH7E5bBQnOPs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB10974
 
-On 2025-09-04 07:50, Jan Beulich wrote:
-> On 04.09.2025 08:35, Penny Zheng wrote:
->> For cpus sharing one cpufreq domain, cpufreq_driver.init() is
->> only invoked on the firstcpu, so current per-CPU hwp driver data
->> struct hwp_drv_data{} actually fails to be allocated for cpus other than the
->> first one.
- >> There is no need to make it per-CPU.>> We embed struct 
-hwp_drv_data{} into struct cpufreq_policy{}, then cpus could
->> share the hwp driver data allocated for the firstcpu, like the way they share
->> struct cpufreq_policy{}. We also make it a union, with "hwp", and later
->> "amd-cppc" as a sub-struct.
-> 
-> And ACPI, as per my patch (which then will need re-basing).
-> 
->> Suggested-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Not quite, this really is Reported-by: as it's a bug you fix, and in turn it
-> also wants to gain a Fixes: tag. This also will need backporting.
-> 
-> It would also have been nice if you had Cc-ed Jason right away, seeing that
-> this code was all written by him.
-> 
->> @@ -259,7 +258,7 @@ static int cf_check hwp_cpufreq_target(struct cpufreq_policy *policy,
->>                                          unsigned int relation)
->>   {
->>       unsigned int cpu = policy->cpu;
->> -    struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
->> +    struct hwp_drv_data *data = policy->u.hwp;
->>       /* Zero everything to ensure reserved bits are zero... */
->>       union hwp_request hwp_req = { .raw = 0 };
-> 
-> Further down in this same function we have
-> 
->      on_selected_cpus(cpumask_of(cpu), hwp_write_request, policy, 1);
-> 
-> That's similarly problematic when the CPU denoted by policy->cpu isn't
-> online anymore. (It's not quite clear whether all related issues would
-> want fixing together, or in multiple patches.)
-> 
->> @@ -350,7 +349,7 @@ static void hwp_get_cpu_speeds(struct cpufreq_policy *policy)
->>   static void cf_check hwp_init_msrs(void *info)
->>   {
->>       struct cpufreq_policy *policy = info;
->> -    struct hwp_drv_data *data = this_cpu(hwp_drv_data);
->> +    struct hwp_drv_data *data = policy->u.hwp;
->>       uint64_t val;
->>   
->>       /*
->> @@ -426,15 +425,14 @@ static int cf_check hwp_cpufreq_cpu_init(struct cpufreq_policy *policy)
->>   
->>       policy->governor = &cpufreq_gov_hwp;
->>   
->> -    per_cpu(hwp_drv_data, cpu) = data;
->> +    policy->u.hwp = data;
->>   
->>       on_selected_cpus(cpumask_of(cpu), hwp_init_msrs, policy, 1);
-> 
-> If multiple CPUs are in a domain, not all of them will make it here. By
-> implication the MSRs accessed by hwp_init_msrs() would need to have wider
-> than thread scope. The SDM, afaics, says nothing either way in this regard
-> in the Architectural MSRs section. Later model-specific tables have some
-> data.
+Introduced two new helper functions for vGIC: vgic_is_valid_line and
+vgic_is_spi. The functions are similar to the newly introduced
+gic_is_valid_line and gic_is_spi, but they verify whether a vIRQ
+is available for a specific domain, while GIC-specific functions
+validate INTIDs for the real GIC hardware. For example, the GIC may
+support all 992 SPI lines, but the domain may use only some part of them
+(e.g., 640), depending on the highest IRQ number defined in the domain
+configuration. Therefore, for vGIC-related code and checks, the
+appropriate functions should be used. Also, updated the appropriate
+checks to use these new helper functions.
 
-When I wrote the HWP driver, I expected there to be per-cpu 
-hwp_drv_data.  policy->cpu looked like the correct way to identify each 
-CPU.  I was unaware of the idea of cpufreq_domains, and didn't intend 
-there to be any sharing.
+The purpose of introducing new helper functions for vGIC is essentially
+the same as for GIC: to avoid potential confusion with GIC-related
+checks and to consolidate similar code into separate functions, which
+can be more easily extended by additional conditions, e.g., when
+implementing extended SPI interrupts.
 
-> Which gets me back to my original question: Is "sharing" actually possible
-> for HWP? Note further how there are both HWP_REQUEST and HWP_REQUEST_PKG
-> MSRs, for example. Which one is (to be) used looks to be controlled by
-> HWP_CTL.PKG_CTL_POLARITY.
+Only the validation change in vgic_inject_irq may affect existing
+functionality, as it currently checks whether the vIRQ is less than or
+equal to vgic_num_irqs. Since IRQ indexes start from 0 (where 32 is the
+first SPI), the check should behave consistently with similar logic in
+other places and should check if the vIRQ number is less than
+vgic_num_irqs. The remaining changes, which replace open-coded checks
+with the use of these new helper functions, do not introduce any
+functional changes, as the helper functions follow the current vIRQ
+index verification logic.
 
-I was aware of the Package Level MSRs, but chose not to support them. 
-Topology information didn't seem readily available to the driver, and 
-using non-Package Level MSRs is needed for backwards compatibility anyway.
+Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
+Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 
-I don't have access to an HWP system, so I cannot check if processors 
-share a domain.  I'd feel a little silly if I only ever wrote to CPU 0 :/
+---
+Changes in V7:
+- no changes
 
-I have no proof, but I want to say that at some point I had debug 
-statements and saw hwp_cpufreq_target() called for each CPU.
+Changes in V6:
+- no changes
 
-Maybe forcing hw_all=1 in cpufreq_add_cpu()/cpufreq_del_cpu() would 
-ensure per-cpu policies?
+Changes in V5:
+- added reviewed-by from Oleksandr Tyshchenko and from Volodymyr Babchuk
+- added acked-by from Julien Grall
 
-Regards,
-Jason
+Changes in V4:
+- removed redundant parentheses
+
+Changes in V3:
+- renamed vgic_is_valid_irq to vgic_is_valid_line and vgic_is_shared_irq
+  to vgic_is_spi
+- added vgic_is_valid_line implementation for new-vgic, because
+  vgic_is_valid_line is called from generic code. It is necessary to fix
+  the build for new-vgic.
+- updated commit message
+
+Changes in V2:
+- introduced this patch
+---
+ xen/arch/arm/gic.c              |  3 +--
+ xen/arch/arm/include/asm/vgic.h |  7 +++++++
+ xen/arch/arm/irq.c              |  4 ++--
+ xen/arch/arm/vgic.c             | 10 ++++++++--
+ xen/arch/arm/vgic/vgic.c        |  5 +++++
+ 5 files changed, 23 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 4bb11960ee..9469c9d08c 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -134,8 +134,7 @@ int gic_route_irq_to_guest(struct domain *d, unsigned i=
+nt virq,
+=20
+     ASSERT(spin_is_locked(&desc->lock));
+     /* Caller has already checked that the IRQ is an SPI */
+-    ASSERT(virq >=3D 32);
+-    ASSERT(virq < vgic_num_irqs(d));
++    ASSERT(vgic_is_spi(d, virq));
+     ASSERT(!is_lpi(virq));
+=20
+     ret =3D vgic_connect_hw_irq(d, NULL, virq, desc, true);
+diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgi=
+c.h
+index 35c0c6a8b0..3e7cbbb196 100644
+--- a/xen/arch/arm/include/asm/vgic.h
++++ b/xen/arch/arm/include/asm/vgic.h
+@@ -335,6 +335,13 @@ extern void vgic_check_inflight_irqs_pending(struct vc=
+pu *v,
+ /* Default number of vGIC SPIs. 32 are substracted to cover local IRQs. */
+ #define VGIC_DEF_NR_SPIS (min(gic_number_lines(), VGIC_MAX_IRQS) - 32)
+=20
++extern bool vgic_is_valid_line(struct domain *d, unsigned int virq);
++
++static inline bool vgic_is_spi(struct domain *d, unsigned int virq)
++{
++    return virq >=3D NR_LOCAL_IRQS && vgic_is_valid_line(d, virq);
++}
++
+ /*
+  * Allocate a guest VIRQ
+  *  - spi =3D=3D 0 =3D> allocate a PPI. It will be the same on every vCPU
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index 7dd5a2a453..b8eccfc924 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -442,7 +442,7 @@ int route_irq_to_guest(struct domain *d, unsigned int v=
+irq,
+     unsigned long flags;
+     int retval =3D 0;
+=20
+-    if ( virq >=3D vgic_num_irqs(d) )
++    if ( !vgic_is_valid_line(d, virq) )
+     {
+         printk(XENLOG_G_ERR
+                "the vIRQ number %u is too high for domain %u (max =3D %u)\=
+n",
+@@ -560,7 +560,7 @@ int release_guest_irq(struct domain *d, unsigned int vi=
+rq)
+     int ret;
+=20
+     /* Only SPIs are supported */
+-    if ( virq < NR_LOCAL_IRQS || virq >=3D vgic_num_irqs(d) )
++    if ( !vgic_is_spi(d, virq) )
+         return -EINVAL;
+=20
+     desc =3D vgic_get_hw_irq_desc(d, NULL, virq);
+diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+index c563ba93af..2bbf4d99aa 100644
+--- a/xen/arch/arm/vgic.c
++++ b/xen/arch/arm/vgic.c
+@@ -24,6 +24,12 @@
+ #include <asm/gic.h>
+ #include <asm/vgic.h>
+=20
++
++bool vgic_is_valid_line(struct domain *d, unsigned int virq)
++{
++    return virq < vgic_num_irqs(d);
++}
++
+ static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
+                                                   unsigned int rank)
+ {
+@@ -582,7 +588,7 @@ void vgic_inject_irq(struct domain *d, struct vcpu *v, =
+unsigned int virq,
+     if ( !v )
+     {
+         /* The IRQ needs to be an SPI if no vCPU is specified. */
+-        ASSERT(virq >=3D 32 && virq <=3D vgic_num_irqs(d));
++        ASSERT(vgic_is_spi(d, virq));
+=20
+         v =3D vgic_get_target_vcpu(d->vcpu[0], virq);
+     };
+@@ -659,7 +665,7 @@ bool vgic_emulate(struct cpu_user_regs *regs, union hsr=
+ hsr)
+=20
+ bool vgic_reserve_virq(struct domain *d, unsigned int virq)
+ {
+-    if ( virq >=3D vgic_num_irqs(d) )
++    if ( !vgic_is_valid_line(d, virq) )
+         return false;
+=20
+     return !test_and_set_bit(virq, d->arch.vgic.allocated_irqs);
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index 6cabd0496d..b2c0e1873a 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -718,6 +718,11 @@ bool vgic_reserve_virq(struct domain *d, unsigned int =
+virq)
+     return !test_and_set_bit(virq, d->arch.vgic.allocated_irqs);
+ }
+=20
++bool vgic_is_valid_line(struct domain *d, unsigned int virq)
++{
++    return virq < vgic_num_irqs(d);
++}
++
+ int vgic_allocate_virq(struct domain *d, bool spi)
+ {
+     int first, end;
+--=20
+2.34.1
 
