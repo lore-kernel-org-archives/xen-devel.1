@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EDDCA1012
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25614CA1015
 	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 06:36:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1109501.1459080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1109499.1459059 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu3Ze-0003UQ-Vi; Thu, 04 Sep 2025 06:35:58 +0000
+	id 1uu3ZY-0002wx-5f; Thu, 04 Sep 2025 06:35:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1109501.1459080; Thu, 04 Sep 2025 06:35:58 +0000
+Received: by outflank-mailman (output) from mailman id 1109499.1459059; Thu, 04 Sep 2025 06:35:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu3Ze-0003UF-Qa; Thu, 04 Sep 2025 06:35:58 +0000
-Received: by outflank-mailman (input) for mailman id 1109501;
- Thu, 04 Sep 2025 06:35:57 +0000
+	id 1uu3ZY-0002wq-22; Thu, 04 Sep 2025 06:35:52 +0000
+Received: by outflank-mailman (input) for mailman id 1109499;
+ Thu, 04 Sep 2025 06:35:50 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UG7t=3P=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1uu3Zd-0002id-5B
- for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 06:35:57 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20614.outbound.protection.outlook.com
- [2a01:111:f403:2416::614])
+ id 1uu3ZW-0002id-Qo
+ for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 06:35:50 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2060f.outbound.protection.outlook.com
+ [2a01:111:f403:240a::60f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 68bb4358-8959-11f0-9809-7dc792cee155;
- Thu, 04 Sep 2025 08:35:55 +0200 (CEST)
-Received: from BN0PR07CA0004.namprd07.prod.outlook.com (2603:10b6:408:141::22)
- by SJ2PR12MB8717.namprd12.prod.outlook.com (2603:10b6:a03:53d::12)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 63c3be77-8959-11f0-9809-7dc792cee155;
+ Thu, 04 Sep 2025 08:35:48 +0200 (CEST)
+Received: from MN2PR13CA0027.namprd13.prod.outlook.com (2603:10b6:208:160::40)
+ by CY8PR12MB8313.namprd12.prod.outlook.com (2603:10b6:930:7d::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Thu, 4 Sep
- 2025 06:35:49 +0000
-Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
- (2603:10b6:408:141:cafe::2b) by BN0PR07CA0004.outlook.office365.com
- (2603:10b6:408:141::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.17 via Frontend Transport; Thu,
- 4 Sep 2025 06:35:49 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ 2025 06:35:43 +0000
+Received: from MN1PEPF0000F0E4.namprd04.prod.outlook.com
+ (2603:10b6:208:160:cafe::13) by MN2PR13CA0027.outlook.office365.com
+ (2603:10b6:208:160::40) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.7 via Frontend Transport; Thu, 4
+ Sep 2025 06:35:43 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MN1PEPF0000F0E4.mail.protection.outlook.com (10.167.242.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9115.0 via Frontend Transport; Thu, 4 Sep 2025 06:35:49 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9094.14 via Frontend Transport; Thu, 4 Sep 2025 06:35:42 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 4 Sep
- 2025 01:35:49 -0500
+ 2025 01:35:42 -0500
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb09.amd.com (10.181.42.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.1748.10; Wed, 3 Sep 2025 23:35:47 -0700
+ 15.2.1748.10; Wed, 3 Sep 2025 23:35:40 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,34 +62,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68bb4358-8959-11f0-9809-7dc792cee155
+X-Inumbo-ID: 63c3be77-8959-11f0-9809-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FAzzTj/5Kc7saUwPSVjXmsIonZwDGS0ZGbtFCpzGVi06grq3D0JHXvSsTon72k3ughDRnEMjri4qcd8V+fwAZ8c7bAT/QRnovfgbmMBqgD8SP4WlU8NH72gMTjXSXu/RnGJxUm+ZduFWHt9HQc5SHjirIU7okey/v/DkD6wIUaxFB4FncFTR4ObApN/eZhkI2SceZveaLWIY7NvM2jPfrP2Svejy/0OYvHyuibVfh/kBEsJk1LAVzjnCiApCqAXrK6ucVpE0v5vw0qB1mCUBcI6+72/IECKnkS+xEOSMc4DbFLAAHSU5+2cqK10LoeLmNKp/iP47YKH/+Iv2Q17TZg==
+ b=HFClEdc6GDfz21vLXIu3qgjpcPlIl6rAcTqmg6W2EhJlHJDNqSBIW9byb3scBqK0lNHwNdCnsFO+6UGA/78HAst8wwbIQpxc0bF4KiPRpdxM6AzNPo32jbDAwOiBe//UYay8zLrp+IeZnQOPxwH42HqWCnK5MSyuHKaTgv/w20Z+fhgUSQ3hMe9BsZoJ2PhsMbSCkq5d9fik6Q7qDDK8l6dY/oBFkn0LnRcOhujykmW7AyXuGj//PYvIfKg4njbWqcIWZ+XjhJLwIG0msoamYsTu4KicAWAXookllO6fCcm9q7u/dsMIybClApJKC7nYgT9k2zgmD7G/TLmH3GED3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wwwi0tW4Ht3ef4KEnk99tP23MKB3LmcikYL/tmBwt+Y=;
- b=ClN4CMBSsQSWJDnWlIINnRJaAJet8wqbnkuaf+R92j3sZPgZePTCd+pDIYnMMlZjySsSjnynLLre03iiiHJZGD8QY7KJt6LdGDp0hushKmgR39OzG4ByQiqMuK0q6I0fRayzeaU4uQQjHVByNEc7kCYmxLN+0YsmqlnnxAp3RRg+1uvFI/PKW4ikF9F71BCOZ3hxIxp5fKBkX0+7486njzKS4/b+3p0OotmzsTST98aBf0DkW6+i1p+rA2Qgr5r1+IptXlL7jnHAHkjud5gqilIOyJV6oUAn3a4OjEVPNf/Oye9ofyVK0AyExqiAF8rzrzzDn+vT60qIzBqTICPpzg==
+ bh=bDJFqa/0jwB62IgSYFWp412EHWmA50CeyfzZTWwYV/M=;
+ b=Ik418D83nLVG40zTXnOqwmJWDEqmljFhbJc2CxNeDDDvwXvQyVE+zQSsKUrXKtfNef3zNOc9XAR2jFbU74PF+/czq6msJ9CCThHSbpgRtaTahgYPKbDVy8e5gXtE+k99rP4/Is4/d+DtKltS2HVEo2NnQaW2P031PkU9dsCd7itJvCrrEpq8MfMH+nEC0+jb3gJEkQ5VjQMEyayhuRiKbCPtgCK0cdcXJR0jQCiiLua4CK5dcBlEOggysCHP2LOmKFHSSOMSFfwc8aQFCh/xEUjxSn5tlEbiGdNrnxsaRseoZ0Jy/bRYv7RAy6ok3NW5rIEXVuDEoqmYoI+8KqTdBQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wwwi0tW4Ht3ef4KEnk99tP23MKB3LmcikYL/tmBwt+Y=;
- b=aVk9wFHFswzkz44mbuH5m27I/azqOqqvVGSzEgGeBxmGyrgDC8O5ySVqNIVQV6F+IOgJS0N2aYkZqW0Aei8xeO9MAvZ3HORiuRz1DwCGmnF/gLFSHcQgX52ILdxXxyTkXM8kQ6i1qRtqYikwZLOPfNL8dxiNrW2SK920fVJxpvk=
+ bh=bDJFqa/0jwB62IgSYFWp412EHWmA50CeyfzZTWwYV/M=;
+ b=V1srcP3wiA9bQTCWJFyBx7N2aqZYZPeKjPB1Fp8TAKcb+hYM5G4jap6VDoI+Mz2cizWthG9m9nOEiFx/7I3/fUTMuD+8lAR3s0xBUZc0RObKq4wJGK5ttHdeFUYxnIRme91Lge0VQ2ohdUd8YJkMwoJ5UXf0V+h9ZBvzr5QDMus=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v9 4/8] xen/cpufreq: get performance policy from governor set via xenpm
-Date: Thu, 4 Sep 2025 14:35:14 +0800
-Message-ID: <20250904063518.2097629-5-Penny.Zheng@amd.com>
+CC: Penny Zheng <Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>
+Subject: [PATCH v9 1/8] xen/cpufreq: embed hwp into struct cpufreq_policy{}
+Date: Thu, 4 Sep 2025 14:35:11 +0800
+Message-ID: <20250904063518.2097629-2-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250904063518.2097629-1-Penny.Zheng@amd.com>
 References: <20250904063518.2097629-1-Penny.Zheng@amd.com>
@@ -101,107 +103,215 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To satlexmb09.amd.com
  (10.181.42.218)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|SJ2PR12MB8717:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0314d65e-5834-498c-5d89-08ddeb7d49b1
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E4:EE_|CY8PR12MB8313:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0299f5e2-94bf-4c82-ae11-08ddeb7d45c3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?u+Mi3DimZ+UyW6CYKdnemqhM8xCOq/S0jChMsdtX+rZFENYSZPtG4TgbCut1?=
- =?us-ascii?Q?4rEyzyW0nUYKtJq7kTVsCjAy2fubbMiYM90HACIn+sa3VIOTyZIVlJhsALfv?=
- =?us-ascii?Q?TR/JNQXZZ6A10gjOsswCB22gT6Y5ybXz+3DMmeIeTTYZuOZQOygoIZz//TbV?=
- =?us-ascii?Q?9GQV5M0B79Nu8pTLwTt9zZbGqk+pI2+5KwnP7FvPEBPdIN3VUTEK3+THGSX+?=
- =?us-ascii?Q?dA6j9Oyf5pzDXl4YZey1fivfwJYCtvkgUlBR52MiMzFbfRZEZRLtk/DcIMdK?=
- =?us-ascii?Q?JrJNgYRDfgNr4LsS7z/eOev+VUyuiMKZw7xGwR7B1VefWDc/vzB1ZCsS+Mid?=
- =?us-ascii?Q?tdvugmuJDemu6u+KvOKbNlHi3VRsPWsrXqEtshu05Ps3ZJEza4Vp7rPJVIJU?=
- =?us-ascii?Q?QQWTXLK2jQT5NPHkUJCtmrcvk4BErAsuwWKKuyFLqhiSAnQcXngnsuFuMBDX?=
- =?us-ascii?Q?mTG9zUj2C1pcYZopBL1xIf3HqCR3dDpBB5y12cc0K2IsN/IzgvkoD3p3ppIa?=
- =?us-ascii?Q?mKDlSoIWZpYZfHa9fiXWduwaxfcd8tRY05iAOYl6LLQt1kuXbYM5FeQavqG/?=
- =?us-ascii?Q?Mb/Y+Rk9aV5QUDs5LFofSkeCA+ea+hQ3Ow7VaFPf+p6py8CIvPGPxhrwOiGE?=
- =?us-ascii?Q?5vzqZESx1CRJZl/mLM8wnZZr725ReR2Tr8RpSGADkOCx+95t0k0jwZwISZgC?=
- =?us-ascii?Q?dRItpl7QFrXfmZO1ohcwtIl1n2WVYUS/W93wEY8/zoLjDvvdG24x1fRTCpcp?=
- =?us-ascii?Q?ei+bZBDjkTEml5mrrzLbIN3qsJF/amdkyi12XpP86dR1B7qSvgO2nll2H4f2?=
- =?us-ascii?Q?Kat+pK3XxpxqxE0IBoRO80EAxfONyMuoK5L9aEEhR3z2wi4pwcUSoHrhlo6y?=
- =?us-ascii?Q?r0QhKaYsncTbXBES9GZeBlb9TGbkAftieC8thj/SPqIPUcDvgsXM6RZnelqB?=
- =?us-ascii?Q?6mwUoHtGUnDurdvYQo5dfIi6iutXQDLc4KfKg/zi9zL+zQHPDVSfV1iArNqs?=
- =?us-ascii?Q?GxUu9kam87xw++Yw/tFQzm2gVxvNXWeyxLYow2oI6p7XFPciZnWZGXY1WwYI?=
- =?us-ascii?Q?KGN8mJCad9RS9opUn7mhEMqDE/4uP3Hu7CK+Qd4g1PEAIMKZpyKYxEte9Wq0?=
- =?us-ascii?Q?bEHKxncW+1ho1h0E9m+GImf052xvOTEz0NM0IO+C4IPeu5suu4JknOTozJHv?=
- =?us-ascii?Q?97SpnnFjqVCs0LKPOaLgv2dIt7kcEY1SSBwLQHzdA05enGQqKrjO06bOL/P8?=
- =?us-ascii?Q?Rb+lO/GMnfrB8PaJ3zbRTX1/DzhawIfneqeoiTUw6Q8GT/FNaxuFSYK3jiJL?=
- =?us-ascii?Q?zxqTGOTCtKY6qtRrhZvXOQwMsbYQaoCK7+GRSORIbCWOjIORP9sTjZcV7ns2?=
- =?us-ascii?Q?tJ0LanZH0bTEhtrpap0pXgmgyCBxXD6PL+xGtSq9prttvG7srIAnXCsfmseQ?=
- =?us-ascii?Q?J5VX/OSB7drIgwl3OA5NP/dWSyM99w/9m4rQIpk5asrlQuWGmOcvO5HqyL0g?=
- =?us-ascii?Q?UK2Yjogg9JK37TOZOkrZlMpakDnxyIYVwiiE?=
+	=?us-ascii?Q?npbfyEXTbCwjWYRBDwtBllnfzgLWntcvnYt26NJQRozP1ZxG4pQjryk1+Ghf?=
+ =?us-ascii?Q?4DjTm1X1hL4yDkHxwRsdGsgyrUo1xZXe1dJFSz64P9kpzROHgXIM1daauAhg?=
+ =?us-ascii?Q?sMFY+1KYU5l1BubtTcJcRi00l3zl70UNPOeGDKJfoDtgXYVe8UvpdKTN/xG6?=
+ =?us-ascii?Q?qPOXEXNcq0JMUs3sn7JZNefjsJpFyPJfVSZZFO7Buf2dWlR1ech+ox7lOXHn?=
+ =?us-ascii?Q?bVZ+PZQzAepi1aD8fI/KP3dV2wVKiTCb5pCGbM7MAIKp7EYDI7cQBpqs4U7I?=
+ =?us-ascii?Q?3DGHPNNElMPQevJCkJHV6DvFGGejduLaMtX8ltcwXrFzNPY87HLqbTmo5v/m?=
+ =?us-ascii?Q?KOg+y+ZRDJZA6FvdN+b+3gE9OQUYRs48Qowms4w2LJxXFc3dV9b0Ot6j05hf?=
+ =?us-ascii?Q?NgxVsDvI7fztw1rPQixn+cCF6dupknAPXPovOVra6MXF9pgERS5kyWCwgkm+?=
+ =?us-ascii?Q?aSaLsSKK/ghiqEOuglz1Hy7sJeBHlQsQvT9ehtkhj7zpLkH4SSLubnDHAxRL?=
+ =?us-ascii?Q?nU+ZA1cjUhW4oO53WCIXLO4Q7+fAQIsgr6rQ27eELef2NCI+Iu0vf4aJ800r?=
+ =?us-ascii?Q?hFJAgAjyABHRN912Ycc+PH3Aj74U7kxxqbvdc4/Dot8cIFYVlubbMLPlibgn?=
+ =?us-ascii?Q?YRL2gXh3MQH6ITOiCvnxg77XE0B9w7jO9rNgs0lWDZCrxK0nlZtakmjzxgWk?=
+ =?us-ascii?Q?P5kfVVqs3X4jhYBtS1GPCuKy6e9skShiGAnBdv0+AP0urfTj0y9gJI8AImRt?=
+ =?us-ascii?Q?7qzvuGrJVyGbl4XYbmBsfNvi5NjU/3K8KwzJGzeQz2HfKUtg9tXbVhsCr1N6?=
+ =?us-ascii?Q?EiF5oCGFmG1tqvk3BS2pmtPT8sJxys21W83oxFNVD9Jq22m6rTAn+icegdyz?=
+ =?us-ascii?Q?h9pD2UL1RRg+W08i5DIGbVAA3zFAKMQw7qd0+8Rtg1jOyn9221VT+V+x2W2O?=
+ =?us-ascii?Q?h5ewTjUSmLkKFSTRGlYd1G8vDQKtGEhIN8wvXKS6KtffSLgtm0CNjRMyPvLf?=
+ =?us-ascii?Q?YR7LkNPmVzLW4dykPg3770CvHYDhzrVuP959isIdIKsDMD/jCWtcNTLurkGN?=
+ =?us-ascii?Q?RUrzgqFF2hjEQ1JpPYP/Neqt2Oj+1e392E2E46/xSU64gQbFe+x4kh4Urje6?=
+ =?us-ascii?Q?xTsI6RxxBn26IC9yJ2DJPv4+nOnnveHrmMz2FPkafimh6hZ4BjQA0PbAgYQT?=
+ =?us-ascii?Q?ESv19vzQYgEvLi4V4W/JZwycWEjIs4MPp+YUNW5gM2CZKUQUKJLad3B7pzvD?=
+ =?us-ascii?Q?3nuE71yIDmrnRX09Zst7+8W+i7Gcnppc1wZhUKiLHgVDM3AVZ+PF+SbdMn0R?=
+ =?us-ascii?Q?8MAbKeSBuFAEVhcVuKgWC/hMtjfCIxcarBqVUqoJmYBsuQ+vL6pbsPw5awF3?=
+ =?us-ascii?Q?5TPwm54PMBx3JxFT07fFs+fkrqFpv9RDD3jczfcrwtmhb3dJTqcCMFzm3eXj?=
+ =?us-ascii?Q?O/HuA5LWtGWk81RWMfCsfVwKC6i9BPCc938TLb6XRF05qna+jFbE1cfQZtYY?=
+ =?us-ascii?Q?uCd4OoU0q3Alm5/hAQJNL+D6/UB64+Ygt14e?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 06:35:49.5834
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 06:35:42.9919
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0314d65e-5834-498c-5d89-08ddeb7d49b1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0299f5e2-94bf-4c82-ae11-08ddeb7d45c3
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B06C.namprd21.prod.outlook.com
+	MN1PEPF0000F0E4.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8717
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8313
 
-Even if Xen governor is not used in amd-cppc active mode, we could
-somehow deduce which performance policy (CPUFREQ_POLICY_xxx) user wants to
-apply through which governor they choose, such as:
-If user chooses performance governor, they want maximum performance, then
-the policy shall be CPUFREQ_POLICY_PERFORMANCE
-If user chooses powersave governor, they want the least power consumption,
-then the policy shall be CPUFREQ_POLICY_POWERSAVE
-Function cpufreq_policy_from_governor() is responsible for above transition,
-and it shall be also effective when users setting new governor through xenpm.
+For cpus sharing one cpufreq domain, cpufreq_driver.init() is
+only invoked on the firstcpu, so current per-CPU hwp driver data
+struct hwp_drv_data{} actually fails to be allocated for cpus other than the
+first one. There is no need to make it per-CPU.
+We embed struct hwp_drv_data{} into struct cpufreq_policy{}, then cpus could
+share the hwp driver data allocated for the firstcpu, like the way they share
+struct cpufreq_policy{}. We also make it a union, with "hwp", and later
+"amd-cppc" as a sub-struct.
 
-Userspace is a forbidden choice, and if users specify such option, we shall
-not only give warning message to suggest using "xenpm set-cpufreq-cppc", but
-also error out.
-
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v4 -> v5:
+v8 -> v9:
 - new commit
 ---
-v5 -> v6:
-- refactor warning message
----
-v6 -> v7:
-- move policy->policy set where it firstly gets introduced
-- refactor commit message
----
-v7 -> v8:
-- policy transition is only limited in CPPC mode
----
- xen/drivers/acpi/pm-op.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ xen/arch/x86/acpi/cpufreq/hwp.c    | 32 +++++++++++++-----------------
+ xen/include/acpi/cpufreq/cpufreq.h |  6 ++++++
+ 2 files changed, 20 insertions(+), 18 deletions(-)
 
-diff --git a/xen/drivers/acpi/pm-op.c b/xen/drivers/acpi/pm-op.c
-index 2f516e62b1..a7eaf29c31 100644
---- a/xen/drivers/acpi/pm-op.c
-+++ b/xen/drivers/acpi/pm-op.c
-@@ -207,6 +207,17 @@ static int set_cpufreq_gov(struct xen_sysctl_pm_op *op)
-     if ( new_policy.governor == NULL )
-         return -EINVAL;
+diff --git a/xen/arch/x86/acpi/cpufreq/hwp.c b/xen/arch/x86/acpi/cpufreq/hwp.c
+index 240491c96a..5c98f3eb3e 100644
+--- a/xen/arch/x86/acpi/cpufreq/hwp.c
++++ b/xen/arch/x86/acpi/cpufreq/hwp.c
+@@ -67,7 +67,6 @@ struct hwp_drv_data
+     uint8_t desired;
+     uint8_t energy_perf;
+ };
+-static DEFINE_PER_CPU_READ_MOSTLY(struct hwp_drv_data *, hwp_drv_data);
  
-+    if ( processor_pminfo[op->cpuid]->init & XEN_CPPC_INIT )
-+    {
-+        new_policy.policy = cpufreq_policy_from_governor(new_policy.governor);
-+        if ( new_policy.policy == CPUFREQ_POLICY_UNKNOWN )
-+        {
-+            printk("Failed to get performance policy from %s, Try \"xenpm set-cpufreq-cppc\"\n",
-+                   new_policy.governor->name);
-+            return -EINVAL;
-+        }
-+    }
-+
-     return __cpufreq_set_policy(old_policy, &new_policy);
+ #define hwp_err(cpu, fmt, args...) \
+     printk(XENLOG_ERR "HWP: CPU%u error: " fmt, cpu, ## args)
+@@ -224,7 +223,7 @@ static bool __init hwp_available(void)
+ 
+ static int cf_check hwp_cpufreq_verify(struct cpufreq_policy *policy)
+ {
+-    struct hwp_drv_data *data = per_cpu(hwp_drv_data, policy->cpu);
++    struct hwp_drv_data *data = policy->u.hwp;
+ 
+     if ( !feature_hwp_activity_window && data->activity_window )
+     {
+@@ -239,7 +238,7 @@ static int cf_check hwp_cpufreq_verify(struct cpufreq_policy *policy)
+ static void cf_check hwp_write_request(void *info)
+ {
+     const struct cpufreq_policy *policy = info;
+-    struct hwp_drv_data *data = this_cpu(hwp_drv_data);
++    struct hwp_drv_data *data = policy->u.hwp;
+     union hwp_request hwp_req = data->curr_req;
+ 
+     data->ret = 0;
+@@ -259,7 +258,7 @@ static int cf_check hwp_cpufreq_target(struct cpufreq_policy *policy,
+                                        unsigned int relation)
+ {
+     unsigned int cpu = policy->cpu;
+-    struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
++    struct hwp_drv_data *data = policy->u.hwp;
+     /* Zero everything to ensure reserved bits are zero... */
+     union hwp_request hwp_req = { .raw = 0 };
+ 
+@@ -350,7 +349,7 @@ static void hwp_get_cpu_speeds(struct cpufreq_policy *policy)
+ static void cf_check hwp_init_msrs(void *info)
+ {
+     struct cpufreq_policy *policy = info;
+-    struct hwp_drv_data *data = this_cpu(hwp_drv_data);
++    struct hwp_drv_data *data = policy->u.hwp;
+     uint64_t val;
+ 
+     /*
+@@ -426,15 +425,14 @@ static int cf_check hwp_cpufreq_cpu_init(struct cpufreq_policy *policy)
+ 
+     policy->governor = &cpufreq_gov_hwp;
+ 
+-    per_cpu(hwp_drv_data, cpu) = data;
++    policy->u.hwp = data;
+ 
+     on_selected_cpus(cpumask_of(cpu), hwp_init_msrs, policy, 1);
+ 
+     if ( data->curr_req.raw == -1 )
+     {
+         hwp_err(cpu, "Could not initialize HWP properly\n");
+-        per_cpu(hwp_drv_data, cpu) = NULL;
+-        xfree(data);
++        XFREE(policy->u.hwp);
+         return -ENODEV;
+     }
+ 
+@@ -462,10 +460,8 @@ static int cf_check hwp_cpufreq_cpu_init(struct cpufreq_policy *policy)
+ 
+ static int cf_check hwp_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+ {
+-    struct hwp_drv_data *data = per_cpu(hwp_drv_data, policy->cpu);
+-
+-    per_cpu(hwp_drv_data, policy->cpu) = NULL;
+-    xfree(data);
++    if ( policy->u.hwp )
++        XFREE(policy->u.hwp);
+ 
+     return 0;
  }
+@@ -480,7 +476,7 @@ static int cf_check hwp_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+ static void cf_check hwp_set_misc_turbo(void *info)
+ {
+     const struct cpufreq_policy *policy = info;
+-    struct hwp_drv_data *data = per_cpu(hwp_drv_data, policy->cpu);
++    struct hwp_drv_data *data = policy->u.hwp;
+     uint64_t msr;
+ 
+     data->ret = 0;
+@@ -511,7 +507,7 @@ static int cf_check hwp_cpufreq_update(unsigned int cpu, struct cpufreq_policy *
+ {
+     on_selected_cpus(cpumask_of(cpu), hwp_set_misc_turbo, policy, 1);
+ 
+-    return per_cpu(hwp_drv_data, cpu)->ret;
++    return policy->u.hwp->ret;
+ }
+ #endif /* CONFIG_PM_OP */
+ 
+@@ -531,9 +527,10 @@ hwp_cpufreq_driver = {
+ int get_hwp_para(unsigned int cpu,
+                  struct xen_get_cppc_para *cppc_para)
+ {
+-    const struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
++    const struct cpufreq_policy *policy = per_cpu(cpufreq_cpu_policy, cpu);
++    const struct hwp_drv_data *data;
+ 
+-    if ( data == NULL )
++    if ( !policy || !(data = policy->u.hwp) )
+         return -ENODATA;
+ 
+     cppc_para->features         =
+@@ -554,8 +551,7 @@ int get_hwp_para(unsigned int cpu,
+ int set_hwp_para(struct cpufreq_policy *policy,
+                  struct xen_set_cppc_para *set_cppc)
+ {
+-    unsigned int cpu = policy->cpu;
+-    struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
++    struct hwp_drv_data *data = policy->u.hwp;
+     bool cleared_act_window = false;
+ 
+     if ( data == NULL )
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 5d4881eea8..c0ecd690c5 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -62,6 +62,7 @@ struct perf_limits {
+     uint32_t min_policy_pct;
+ };
+ 
++struct hwp_drv_data;
+ struct cpufreq_policy {
+     cpumask_var_t       cpus;          /* affected CPUs */
+     unsigned int        shared_type;   /* ANY or ALL affected CPUs
+@@ -81,6 +82,11 @@ struct cpufreq_policy {
+     int8_t              turbo;  /* tristate flag: 0 for unsupported
+                                  * -1 for disable, 1 for enabled
+                                  * See CPUFREQ_TURBO_* below for defines */
++    union {
++#ifdef CONFIG_INTEL
++        struct hwp_drv_data *hwp; /* Driver data for Intel HWP */
++#endif
++    } u;
+ };
+ DECLARE_PER_CPU(struct cpufreq_policy *, cpufreq_cpu_policy);
  
 -- 
 2.34.1
