@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6EDCA1013
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 20:02:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1110737.1459811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1F3CA1013
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 20:09:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1110779.1459831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uuG9W-000802-Ct; Thu, 04 Sep 2025 20:01:50 +0000
+	id 1uuGHG-0001Zb-DX; Thu, 04 Sep 2025 20:09:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1110737.1459811; Thu, 04 Sep 2025 20:01:50 +0000
+Received: by outflank-mailman (output) from mailman id 1110779.1459831; Thu, 04 Sep 2025 20:09:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uuG9W-0007zt-7O; Thu, 04 Sep 2025 20:01:50 +0000
-Received: by outflank-mailman (input) for mailman id 1110737;
- Thu, 04 Sep 2025 20:01:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uuGHG-0001ZU-AL; Thu, 04 Sep 2025 20:09:50 +0000
+Received: by outflank-mailman (input) for mailman id 1110779;
+ Thu, 04 Sep 2025 20:09:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ukh3=3P=epam.com=Leonid_Komarianskyi@srs-se1.protection.inumbo.net>)
- id 1uuG9U-00062f-Ka
- for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 20:01:48 +0000
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c201::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fb53b42a-89c9-11f0-9809-7dc792cee155;
- Thu, 04 Sep 2025 22:01:44 +0200 (CEST)
-Received: from GV2PR03MB8678.eurprd03.prod.outlook.com (2603:10a6:150:7d::13)
- by GV2PR03MB10974.eurprd03.prod.outlook.com (2603:10a6:150:27a::18)
+ <SRS0=bqEE=3P=epam.com=grygorii_strashko@srs-se1.protection.inumbo.net>)
+ id 1uuGHE-0001Yl-S3
+ for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 20:09:48 +0000
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c202::7])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1b000b5b-89cb-11f0-9d12-b5c5bf9af7f9;
+ Thu, 04 Sep 2025 22:09:47 +0200 (CEST)
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com (2603:10a6:20b:5e4::22)
+ by PA1PR03MB11060.eurprd03.prod.outlook.com (2603:10a6:102:4fc::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Thu, 4 Sep
- 2025 20:01:42 +0000
-Received: from GV2PR03MB8678.eurprd03.prod.outlook.com
- ([fe80::4eb:3e7b:1ffa:25f9]) by GV2PR03MB8678.eurprd03.prod.outlook.com
- ([fe80::4eb:3e7b:1ffa:25f9%6]) with mapi id 15.20.9094.017; Thu, 4 Sep 2025
- 20:01:42 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.18; Thu, 4 Sep
+ 2025 20:09:45 +0000
+Received: from AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593]) by AS2PR03MB8907.eurprd03.prod.outlook.com
+ ([fe80::804:c187:252a:9593%5]) with mapi id 15.20.9073.026; Thu, 4 Sep 2025
+ 20:09:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,598 +49,571 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb53b42a-89c9-11f0-9809-7dc792cee155
+X-Inumbo-ID: 1b000b5b-89cb-11f0-9d12-b5c5bf9af7f9
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ClLDr0qni1HBWAl7djD3UP+zzlHfMooTvx6iJV3g9yoltysC9BQXR2ZuV4DNzTST3ed8Z4U18+CX++nEw34E4JGMyQOR3mgXgxew/FvzDc/W3wL0Ua9qzqfPeHpdDGXI81zz3yQ4rCPtvi4KBOrpJiirvDX1SsefuH9mbKfou0PKV7VMij2H1LFlLy5F2YXFC4o5TDYzcX2NxXM+Zyes169eq/DFm49BMu25O0NSrjAWwDDcYIP7669DR8rw2Aiz1JtatXpOBoRzIJlfwqnEMbcYLYQiszNqtWHUJiNX7D298otmDI1vXV1E6gLTA3ljYZGen33aX+sO25gtXkE4zQ==
+ b=bK90QBglhrI2pWx5q7wBDanZirtvzVDpIPEHtjeuqQfFXFschXONnCNcsXei/flmja4f8Ff8ys1kZdaR8Yn6GisSk2D1AxqaTU8eFv0vMovkIErO7TsbggIZeym/9ajEmSYol9d5yzvQJrDziJUoiEcy8hXoBUmkXLoQ87xveo3P+tn2ruWzwBdlSCw4jK5nWvwJlyPKeUwloyhWPbe0Ynz0qBKO5Nu5qq9zzmBv9RrYX+vU0qCDVIpccl0AApChM+cJAG83t965Et4YDMcZY3WCXexMvlPYKYh+N9hzQaVO9wZbA37rFveyq2v8CDPUZN3rYEq46J+SrNT7Oh/Kmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NwEideHyBWH5HBdcPZEG3XzSkmnV4wroH/dA6t1HAZQ=;
- b=jOU4FTSpSOFZ83KYZXVbIvDpdUNxa8hfFAraJHLXXkQGRGglAxqzaQm5qRiJQ4ohY/AQaBQP1DjrwJRh5sOD85Jd4oZSFQDVlR4cwV2xD7JRFPNc5HA4+w3TecYDvHHCSTD0XzrPSeNHPjJrd3T4GvprLeiWBlvdG7aJbnDS5kNpR7WEa6zj/kNzThjhr5jQNF73jBlMRbjuZSveG+s/X8sW99PgB0hEJRu3fOooEo3Wd0wQ5JE0N7/OKCIKzmbmVCg3n9modoihBTlOVKnX4lg+4t/SKrdzSX3Q414xO6Llv7Y6cPFFIbxfIquyeUyUBwRpJqA+fyQha+1zAG6pcw==
+ bh=CCN9x4JRfuUCaCtfz5jfZntfsG24fKF4Hhqu4l4kko0=;
+ b=ttNL7zipo4bcXnRdqFVi4S8p2L3/c/3JqfuIvIMgdCnTG5hAttSNHlxKNesV5zI513coQZK3MipkovY7D+EZAOIjIPIsh3j9VE3nsVGZhipRthU+yWwLTXt0PITcH33a5QOXVxrAohptrvYq5ntxzZ7E7U1S6+kanr9oAIbVqTAdNEn1RyMXbJtblBarl9p8Ks33/uDgXuwQc4kXpXSAe0sDbawhbO/qXuscBkiiyGKw/ai9SN0iSjRQ2aT6xJ8PQICg5OoTNkC+eMxHiTFuncL52+V88r+9EuN3mfGyP5oZFR10oC0igtaRDQSbiqH50kLoJKZ280E/2XZiPiY1oQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NwEideHyBWH5HBdcPZEG3XzSkmnV4wroH/dA6t1HAZQ=;
- b=WfpdAVdW1apVmKrHume4+l5ITi1HTxjjpv6hJcy2wyFKTALCA0Q77KPvmVUGPLZdF9Syv8VMmXz9ZbEMBQY7yCsBomBCw1+EXwO1/yCD67YjuPDbvoRfu9QVJmU1+D8kQE6i1X3m4g6SMXuhsyBVhOMTLWHmWZzktGnlsrtr9TKHMvMawEsYWVud8nQImWGmO/B8XDy4IP52Z/fwcJyR6X+oYzAYElaf/Wjhu8GGIbZCOPx3er+J09oxm8ayI8g5PO1hc62we/KXvLDpPx9DdjAGG/MNa+hFnhOL35OZFv5GMbuJEShOFngEL78AKG50n6F0XD+OvEsH9j4za6plxg==
-From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: "olekstysh@gmail.com" <olekstysh@gmail.com>, Leonid Komarianskyi
-	<Leonid_Komarianskyi@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Oleksandr Tyshchenko
-	<Oleksandr_Tyshchenko@epam.com>
-Subject: [PATCH v7 08/12] xen/arm: vgic: add resource management for extended
- SPIs
-Thread-Topic: [PATCH v7 08/12] xen/arm: vgic: add resource management for
- extended SPIs
-Thread-Index: AQHcHda7K0pyLOwxO0S0jgjHf9IKGA==
-Date: Thu, 4 Sep 2025 20:01:42 +0000
-Message-ID:
- <5b34940bbc90c4144f4d91880524f452d974d14a.1757015865.git.leonid_komarianskyi@epam.com>
-References: <cover.1757015865.git.leonid_komarianskyi@epam.com>
-In-Reply-To: <cover.1757015865.git.leonid_komarianskyi@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
+ bh=CCN9x4JRfuUCaCtfz5jfZntfsG24fKF4Hhqu4l4kko0=;
+ b=iMlME2k0mTdUpDomSvx6NwXWkeYN+/5DR2G5lME5RHE7hDRHjT2AP25Pessc6vJZT62+a1RoYzloJqBcR8VkOV7UeJyzKBsA2eyNu2sD3rnux/5wCPjplxYoCbCKGXi/KaEr53+sYvhkoSZXs/B0GJJ1U+fhHHJQTzbqp5wp482WriUVNffvgtr5+MFzxzDPe99PHSXTeyMIrdyqUZgbjHld+m/2UemSwYUoPwQ1cAZSltmEZTu/7jnCPAJeJCXVm6QiI2Z1x0qqriDE4H2B69VqzaUR+3KuNJGW2LgVRTA1iuLPVFPWqcjeR3CGnj3TOhmhXnYH4wfogp7eEuAsfw==
+Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV2PR03MB8678:EE_|GV2PR03MB10974:EE_
-x-ms-office365-filtering-correlation-id: 3c9c3d6c-b2cb-42f3-97f1-08ddebedde09
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?IcFXbsq48jlms575+Gsq7/gId1IwOidgJuYlowu8rNksV6whPJfuD8aOfV?=
- =?iso-8859-1?Q?Kva4UVyX4asiHhrii9c5Mlf20OMKFfXQD7f5JUVtwHdoHcmVvL0sbiRdq6?=
- =?iso-8859-1?Q?IkWPyvHAaJC876wLIhdAT3pd+qMW7bWQDQNfugyqvw2XFafE70sAdkhlJ9?=
- =?iso-8859-1?Q?+tVsgN/CkBAic9ywokRaC4oaTJ05RIMbwD+6qInGBp4vhU1VP0yHmlk/N7?=
- =?iso-8859-1?Q?PDfUtb2pwiZYcaPBmGo8OZ/whMvAwMDBckB5qt08YZYbs0Fy8ODpovHhQy?=
- =?iso-8859-1?Q?6RoaJ1JIorhtGqPm00I8TIzKenCUJQnVCQTPqBRRIOuYj8SAqOtwV2xXHB?=
- =?iso-8859-1?Q?vF9C2QeILu0dWsBt0uoVgbxU3Jf9MY6klvn/aOioKV4ghTmU3GIh0tF16D?=
- =?iso-8859-1?Q?4PLUclL1O0ROa/vQSOD99WPMKgsOMqZ3MRULd69BYL/huhc8wzvdRJrBLp?=
- =?iso-8859-1?Q?MPHyJnLU5tzA9+ODiGolSav9m9ylU3Wue31ZwxYqpWOsibDjFNRdchN4LB?=
- =?iso-8859-1?Q?WGNWT25I/Ssol/mwW2QJaTDCT2NQPm0yhapFpYWHHfBfDiTXbu+pTotQs/?=
- =?iso-8859-1?Q?tgt/rKPecOcmLtDvESIs3i25XvgUlkKcGjfeDvc0VlSGYZikrAuQUMxLlY?=
- =?iso-8859-1?Q?sm6DioAoMIx3tZ3zVUttorl4eTSswiyg1cpBF5tmXSQOGAK1FD/JXDnXnM?=
- =?iso-8859-1?Q?6Mmg6dOHRAbXbTPMG+dIr2acRI/LVGoNWBsPtWGHserHLdeHmTb4Zw4tE0?=
- =?iso-8859-1?Q?1ZChptIUbeLAVRH5IUTxFL0tefw+akccub9ivBkcnx6nHOA1z+ZmbyTLE9?=
- =?iso-8859-1?Q?f8VhIY263DK78LZytzvI3mcNlPavr+ZxqNaLyLwwL1XnyyKb1W8MNfCOSV?=
- =?iso-8859-1?Q?CgZIIeakHmT87wRMwyjHmrkxOqq2+p3iZdW90pwx+EIpiXaQuPDgLDp8cB?=
- =?iso-8859-1?Q?Sa1TEaIp324pZHbgqhgEuUSb9fN+oO5ck1DJbfpRhscyss4aDpNNct48re?=
- =?iso-8859-1?Q?9CtEWoh4Q0AZlY+iz49iZweOtbu9N3AOhVKV8CFESwprGJCxoRkQyiKTzF?=
- =?iso-8859-1?Q?EnTgaYLc8U7wghqcUY00/NnVBjsgWZoV+ipFTxdBe/2FF8WD3OUHsMbH73?=
- =?iso-8859-1?Q?q70ffTOd2Tl1uSYrc6+JjZQfKPaLbvjWiWi4HRYyxtus5zbxVDJFO9LYeg?=
- =?iso-8859-1?Q?zqqNyYh7EWKwK9uAVXEId3uHcFPc7eofLXRyiCuJaHg5zGBjTkxAdD/wf5?=
- =?iso-8859-1?Q?ivnszpWwVuKGJERQUXyqAttVOI6VGy62wLO62X/8dOfSdrmrO1CSsHuLlF?=
- =?iso-8859-1?Q?DYISRz6PHkR4jW7WuufwhDMGNJr3n+H7Y2tiA7FPUdCoILmZgdWLtfnhmt?=
- =?iso-8859-1?Q?buJ/qfOXNjiLhPkgOmNQ0qL35yPf5Wgu+7+cUA/IZcl+WFYysQCrvY7wcT?=
- =?iso-8859-1?Q?YWltKEdlmrPrAMIKHpoMkNhu78gdfT7wk9qcIhhtA4RTRtd3kkxEzdZBsf?=
- =?iso-8859-1?Q?wWqNKJFU0yQwFMnaDe6R3zoGbDWuM4bRPTdKrzKe1McA=3D=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR03MB8678.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?1t/HZczFzwNEfu8EaBQIxhfzS1t9XfAZvTie4aa1DZLExP4wcKFPNJ5uoj?=
- =?iso-8859-1?Q?KZJ46RMpEXPjacXXgKoorAIOb9GP42+3BVvW57mQ9ryIf/EbSeDjBb207O?=
- =?iso-8859-1?Q?574VmTN7xYr7XXyY4tWHFwqvLZr4hk8bZqnQXoIC0Pp37OjUao5aKbixdr?=
- =?iso-8859-1?Q?HJ9NpAyHlSqVDdgfPwaSd5cg4SGDtNfCiHrqLFxCr47VS3HKK/Up6R6OmT?=
- =?iso-8859-1?Q?w+eJSgKjY032kRk5xsHVEiP0uTyK8KoKBptlailJCAoGDeZlfWx1amkGax?=
- =?iso-8859-1?Q?1l75RjuKqFSCyNloyaCINCC8L5ukOMQgzQctnYsd4PcEIZpBQrUOd4qAme?=
- =?iso-8859-1?Q?zpD3Q4LieCFjVvlTQfK0QheNRMA04J9rI7m9Y+9UfCa6P1ZWXwOJY/8bxQ?=
- =?iso-8859-1?Q?zR+94kyDSFU1O33Tz5Y8m2wrKj0RZlWxn7pfdOnYePTOFcKtyrup2iN0v8?=
- =?iso-8859-1?Q?6ZpyrvUXoea0dvuci4b27R6wSByqVaZXVGD9qIrKXv702YU61dOB8o0JvZ?=
- =?iso-8859-1?Q?3afLLcNf62mcLiIFerAuakRXWb0B2DT8AFDW3c2AoISDp/LV+E6TkxCjuQ?=
- =?iso-8859-1?Q?D0qnx90F1zMURLuOyIZX6UlvZ/0w7cEN3DpbbRLN1eGrphWLPXM+NOT8fZ?=
- =?iso-8859-1?Q?qw3NjX895e6uqRlxF5CvhL58IkJx3tql/mObQlAc2C4Lw0292kUsxHRpb0?=
- =?iso-8859-1?Q?hJrjmr4xahpScxVYYoBgMcxamkzpSFDYNlxcXwU9LjRYC/klqpG7zab+rj?=
- =?iso-8859-1?Q?gcwqNxA+L16JpUoEPKgSHJP7kR8BxyV8kg76C5nDaG+njeHHfhDSXXMJZc?=
- =?iso-8859-1?Q?s1co984poQ8AGKg4UUmxhiq6MFmWOKFIj9zQOueUZjX/2fqeSTlfbgRviZ?=
- =?iso-8859-1?Q?6bxIBaG9mRJOCvraXIXZiqJbAKhI/u6UPt09uJd52e/N1+YoTOOx5HGVzV?=
- =?iso-8859-1?Q?xGEJzpF9LEGi/27bv+UISJUHggQdvvb4Y+fBdLWhIXoUgVSF+z3aqGxh+g?=
- =?iso-8859-1?Q?pDP1S4z0ASqoHa1ckpTYQdfFrKBPaPwwKfmb7m0bfTkPKMox7iy/8lg1RM?=
- =?iso-8859-1?Q?3bh3v4qgTffUAoygQDbe7hr2xveVbN4QkUqsw6GIvUB++RuFiZdmA+U/++?=
- =?iso-8859-1?Q?qO34Efs9XPy4jHIPPH7yQlyFWLsh4DSxJrY0dmZE9CEyjWOZQn2FrBGJIj?=
- =?iso-8859-1?Q?reNaFRR/aYiNNi1c2LhVHoaNRgQqzj0Qw53bz8EbACfW0UaJSKt02vgJaV?=
- =?iso-8859-1?Q?uWiX+chQcnBeD7BhunOe3mxxjVihii0SuJNXz3407Rj07tbP7/Wy79i6cP?=
- =?iso-8859-1?Q?xhHLYNk/8xBUuM0YjEiMt9G7HV7HSlyiPn6ajqTo6DUi7qRhcmNc4k/kZv?=
- =?iso-8859-1?Q?AJLMPBaZ0FaPExI91FqszJX9GnqXTfw4rpeqkewUV5Zs5YoMr2NuVny6FI?=
- =?iso-8859-1?Q?bq6K2v0ZgjvEGY9UEgzVhDBy8H4rghCTBFLXIM+46jH0YiHVkIyQgSKz2Y?=
- =?iso-8859-1?Q?oFMO1qSIZWHW28vY8B+0ilgMxB3jW66PtlE567es+DvJfA8FSTownZTvqM?=
- =?iso-8859-1?Q?agSBTZuPcRI78F/Pp7RmjprjZAP2ysizudG13PFg3uqyrQ7GjvLm/5nCHS?=
- =?iso-8859-1?Q?A94hiYorhGxs++P3kNdMU3l8DgVCMsU5ZN1RPAAtDFPyKspP/abMqjm3+n?=
- =?iso-8859-1?Q?5zyAIRWk2bYogQByg/I=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Message-ID: <540abaa2-9946-40b8-bf49-b54e4f7a1393@epam.com>
+Date: Thu, 4 Sep 2025 23:09:45 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] xen/arm64: allow to make aarch32 support optional
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>
+References: <20250806094929.293658-1-grygorii_strashko@epam.com>
+ <20250806094929.293658-4-grygorii_strashko@epam.com>
+ <87ms7l39gl.fsf@epam.com>
+Content-Language: en-US
+From: Grygorii Strashko <grygorii_strashko@epam.com>
+In-Reply-To: <87ms7l39gl.fsf@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA2P291CA0034.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::7) To AS2PR03MB8907.eurprd03.prod.outlook.com
+ (2603:10a6:20b:5e4::22)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR03MB8907:EE_|PA1PR03MB11060:EE_
+X-MS-Office365-Filtering-Correlation-Id: db645ccd-ac78-446b-3a00-08ddebeefe22
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?akNWZkRXazZySFhxRWNzVXVWMVl1bFAwd3JpaFBrMmJ1QzJabllhclN1Z2Nu?=
+ =?utf-8?B?U1lGVUZEQ2tTMFZxbUw1L0dlT0QrWG9GR1FKMlA2eGw2U0NmdFR3eXA2VFRv?=
+ =?utf-8?B?anl0cHRtUW1EalU5U0JsR3l5UDVGU1BJakpjNHJJVlNiK01CbjZ0NW5FSDdG?=
+ =?utf-8?B?dkxCNXZ6cTBySWFPcW84dTlxSnR0ZmxrQ0RydkkwTm5wY3B2WGNmWGt1RWti?=
+ =?utf-8?B?Wkg2WkIwQUFmemlONGVnaWpzdDdFN3poZkNkZ3BBbVB3M3N2Wk5RcVVrZVF2?=
+ =?utf-8?B?ZXdrRzRjQ1VoV3NlTXl2NWFUQ2l6S0Y2YmI0d3pUSkphcGNMVnNQc2RCeERj?=
+ =?utf-8?B?M2R6UVR5TnZHUjNaNXUwSG1UcHNFYXFka21yOEtnUVFzVEZ4ZG5teTN3QWdX?=
+ =?utf-8?B?YytZaSs0RVJaelBKWG0rdk55ZWdiU3gya1dXM1BzcmZ5aEQ4RXd0OS9mUDlX?=
+ =?utf-8?B?bExCYU1iQ21UaWlMSU4vYS90SmFFSC8yZ0pTa0lNNU9XcnlDYUxjNmJRRE5a?=
+ =?utf-8?B?anBialM3cmQzRlBhUm1sM1UvbjlJdG0vTGxQaU5qTloyRk5LR09rYndOSlZX?=
+ =?utf-8?B?SDg0YTNDYWE3dE9UUkZKYXoxRlhZTW54ZW5TaW8yQk0zZnNJN2toN1piUE1G?=
+ =?utf-8?B?QjUwY2x2SE5HQ05iYnFHSnh1cWIrRGo5SWtDVUFiUWZOSUJFVnNaWXVBSjR3?=
+ =?utf-8?B?Mit3eTVWL2loUysxYTJ5NE8reHAzN2Fvd01jY2U2ZUZKbWQ0L3VVNEJaaHg4?=
+ =?utf-8?B?TFJoUTlCU01mdUs2VExPeWhFOFhsSlQzWDRTYzVQVW16UFdsNFhoRUFXNHBY?=
+ =?utf-8?B?Z3JGaWdPUnJNSTVJcEVhTThNMHRiRlFOdldnOTcwcjJqblFsNmMwMGJLQ29j?=
+ =?utf-8?B?ODIxcUUzVFlYdTJvSzJUMFY0SWQ2dUJ6ZWYxNmhVQzRiTVA1TE1UL1Rqb1U1?=
+ =?utf-8?B?d1k5enl2cGZVYUtvOUNDcWFGNUVSdHVmZndGajgxSVlmUUdkWnhBVlV4c1ZD?=
+ =?utf-8?B?RThtVSt3T3dqblJzTXpBWHFHODU5U2YxSGdTM05ONWs1cGphNEF2dWcyby9U?=
+ =?utf-8?B?QXl2RitZZGVIQ051M1ZseVBWZDFWTlFuQXg5aVo2RDNVVmR3dXBJUDA0NCtL?=
+ =?utf-8?B?STRpcFA4eTR6MW9vblFuSVRpUkYxVGRCWXA0ZlhsSjN5UDNIaXVCN2ZNSzlD?=
+ =?utf-8?B?anBpQXRqLzcrWUNTZ3FCbXdXMlNhc0gyVEJxYk56dDZidzgyRkR4NGJzOVN1?=
+ =?utf-8?B?OTkwY2VkaitaSVp3UWJUZ0NzTVNHeTllNHB6TnZGZFBnMFdGOXVyS3JzVEFn?=
+ =?utf-8?B?NTFJZVM2a01iMlZkcVNTQmZkTCs2anUxVFJqazhqdEd1UDlBQ3F2cStiMWlN?=
+ =?utf-8?B?US9UZ0hLb0RaejUwa1ZoLzRYbjYzc2RYZHlZU3Zqb1ZXODVGQVpZMTlhU2d4?=
+ =?utf-8?B?S1owVkR1Z01oNTVUMHN2Uk5Ya2RDQWpTeC9sOXJUTEZ4bjJhckRwTFJEWVdt?=
+ =?utf-8?B?TFNaeE5jME9Wc1V1akhZajJWQmVncWRYd3dLdW9Ea1J3YTNqbjc5QWV3aWt3?=
+ =?utf-8?B?VmhWMTVrbXlOWjJHU2NOckRhdDRvTEFHdmhyRGRmbTJ2YXArWVRqME1lb1Vz?=
+ =?utf-8?B?WkhtS3RqczVvMm1talNPNkY5My9NL2dlVzFxbUF6WjFnVHVLaVJpRWdLUXRa?=
+ =?utf-8?B?ZFp6QWhpYjBzQzZCZ3NUbU8rYXcxU2hNRFNJUlJQdGdZSFRVd1R2ZHFmcmt4?=
+ =?utf-8?B?S1kvbGlxZ3BTa2hPWEpiUC9ZYXB1NCtKamYrTVg5NHhMOHEwdUxrN1Uxblg5?=
+ =?utf-8?B?VlBORVdvelhOSXVOaFZpUWovL1Q1dFJyK2JDeHVzcHR6YTVBdzA0RWtHS2Mz?=
+ =?utf-8?B?cUNGanhaVjJkNVJuYlNXMzh0eE1MSkFRVVBhQ2t2c0RTS2c9PQ==?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB8907.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bWY5Z2xSNWNwZWdPcDVzVGdHZm9mb0dRTHQyV3h6a25RY2ZHcjk3N0YvOEpr?=
+ =?utf-8?B?NkN3V243V25zOE9RNk9nNE05azBrUjJSUWw4bVZLMFFiWTk0b1Z0NjFzd2kx?=
+ =?utf-8?B?RjFxbUFSQjhsWFEvdUliWURMQk9aeE16eEcrTGswalVWZXJuQlhKSmVqMlhr?=
+ =?utf-8?B?NVYrKysyYzRWZk9nU0U1cUUzcmp0UzBPRU5qQlNsSFhxRW9rS1lPQW15QXFZ?=
+ =?utf-8?B?UWk0UkNuV1d3KzU2bVNhMENkUlBqam1lQnQ5SGtJVVFPenNKK3RvSE9sNFhp?=
+ =?utf-8?B?cjBUWG1Tbi8vaGt5Q0d5Q2Voc3VNRVJyVVQvcFJyZjlBWStSUXZCeVdmbHBC?=
+ =?utf-8?B?LzJDR1hQVlR1alpuVUVmRWZTVlFkQkZKSmlxOGZqTm90Y1dKRDQySHdPa3d4?=
+ =?utf-8?B?bit6cmhvZXRKSUlUQkZ3UnBBSDlVZTFQUCs4TkVIcVV3bE0wTHR0d1RBclV5?=
+ =?utf-8?B?TDNLdmpSU1dLUGdDSjJONU9zK1IxSVVnaFpBcUh5eUgyRldYSkFaaUpoUFp1?=
+ =?utf-8?B?dEE3TlFxVTVBcG9Md1NoWE9BQkFJd29UNzdqMGRKYjVwc2FvTU5OOFJjWGw2?=
+ =?utf-8?B?WFlRbXgyUS85T2pQbFhyNktSWHorMklQYVc5QzNkWUIzcjVDTHJtTk5WN29H?=
+ =?utf-8?B?TTdtUVdqYlF1SkhnSHBrQTN5SlpWRmg3R2xKUkRYdWw0OGIyNTFmNXRNU1U0?=
+ =?utf-8?B?d0IrREJPeUtza0JBK1hCSS9sTkM4TVFiNVBnblRQNE1ZbDllQWJ0UDRsQWtM?=
+ =?utf-8?B?TkdPMnE0ME8xQ3lrL1dUWS92WjNSUU1rbVdFSHJrZVE1dE5hQ2d1anNJUmVt?=
+ =?utf-8?B?OTZhU0NLZ2F4SCtsamd4c2FHOFZrbEl5Y1FodE5QT0dyOTFVYVI5OHNweWNX?=
+ =?utf-8?B?VG02dzZRK09LNGhhY0tjUENIRGxCd0o1N0FkaUxTRnFzcDFFS1k1dGNwNzk1?=
+ =?utf-8?B?MDhhdFRJWVNVSWpzRFp5eXhENzVmSlh6WTdLZ1BxYXpPcVlISkxsdFhRYWRH?=
+ =?utf-8?B?ZW5GN2drNGRoRko4UEg0UVRrWDJsRkp4cEVGcW9Qd01JVVNMZ1VkdWhQUEJp?=
+ =?utf-8?B?eE1maW4rejh0Q2lvVXhFZWdnL2N3T0FDRCtuT3U4RGdrZXVKSmFid3IxY2Q2?=
+ =?utf-8?B?Q28wME5DRnhGSmprZUxyRWRpOXNuTmRWcHNqU3hrTWR2Q2hZU3pnOExTVVRx?=
+ =?utf-8?B?NzNYU3hSQ0lHWUdMVW5HNktvVmtGT3lWS20wWWFlZHV2T25SMHl0ZXFsUHRW?=
+ =?utf-8?B?aGRoTWtSUmVjOXl2bmxwS3d6ZDFlZ1hIRHJNT0tSL2doOEM3WmwvQ2FjYlZk?=
+ =?utf-8?B?c1phelpNWExHdmttMXg5cFJGNDh6eEtZVlRNYjRhbHNzTE1Uanp5S2U2dWZG?=
+ =?utf-8?B?V1VUSlJsUTZUMnNmSmwzYklUc0xpU0ZtbDkyMmdhWTY3eU1jKyt1UWU1aVVp?=
+ =?utf-8?B?T2hpSWhWczRCdi9lYnhlNzlIVHhTeUNmVG1MT3FPNHlJVFljNFpyTWpiNzNF?=
+ =?utf-8?B?RE5pY3JkSHRKRTMzenhDd0R1Vm4xNTJCa1ZRMHJwNnBhaFZTcS91L1R3WkRJ?=
+ =?utf-8?B?WUlPL2QyK09YQTc4dDBDYzR3bFdKZm93Q0V3d0JqcXdoQ0UwektLTEc4L0tT?=
+ =?utf-8?B?UVgzVG5wOUphK2lucmZ5bTZhZnhwdU0zbWFleVNlejJLaWM0dXFQc3A4cDN3?=
+ =?utf-8?B?RUcyZlNxSEl6UjR5THozSHBBT2RUNXBMTzVYelo5MGZublY0R2VQQXZQU3pu?=
+ =?utf-8?B?M3QzNFpmaWtmUkt5MlFaVVdBT3JtdVprK0o1dEkzZlAwT1pwemkwTkR1ZHJ2?=
+ =?utf-8?B?aUxodG5zbUVkQTROSU85aXRmUVNiOGx1R0xyMkg4dytUN2MvTHB5RXV5czlm?=
+ =?utf-8?B?MHIwWUREVCtiSmpBMU9xMW9Sa1pteENNbzl1enoyWlZJZUVrWGZSOW9zOTJM?=
+ =?utf-8?B?VlA0NGVKQVJCZG9pSlI1bytRbE5YN21TeTJMaVpoVjk3MmFZeGwxQ1dCTm1l?=
+ =?utf-8?B?U1hFc3N5OWFJZUpkWXlyOG9oN21uRWp6d2IvTXhHS1BRUGdNYUV4OTZZR2ho?=
+ =?utf-8?B?a2MyRVpjVHFHbWZtcFVvUlhuZlZEbG1jcm9hV1JYUE53ZWkyMWxra1RYSDNM?=
+ =?utf-8?B?eDVvdnZobnByVFNsY2VSNEZKeGpMc1BqUmlBV0lzaTRBeUlFb3lSd3BKR2Q5?=
+ =?utf-8?B?T0E9PQ==?=
 X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db645ccd-ac78-446b-3a00-08ddebeefe22
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB8907.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR03MB8678.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c9c3d6c-b2cb-42f3-97f1-08ddebedde09
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Sep 2025 20:01:42.0865
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 20:09:45.6266
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6/MP+NKlmzzt4qMmW4wGLJw+ei+/CUulYuOIqLVb76v5CcBjpkwbWfgm06icjelgwkTXgmC0DssYCz/6McNDHptAlzelSUL6BfUSL9MMsDI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB10974
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: r9vOp3PdeJmkAfrdytJ3YYMRCW0FUQMKiq+MhCBI/idFOeNYLtaBbG3EIC3gGNuB4/pq+84V9r1M7FCSKDEWKd2+xdfsVU/GldMaBAHiosE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR03MB11060
 
-This change introduces resource management in the VGIC to handle
-extended SPIs introduced in GICv3.1. The pending_irqs and
-allocated_irqs arrays are resized to support the required
-number of eSPIs, based on what is supported by the hardware and
-requested by the guest. A new field, ext_shared_irqs, is added
-to the VGIC structure to store information about eSPIs, similar
-to how shared_irqs is used for regular SPIs.
 
-Since the eSPI range starts at INTID 4096 and INTIDs between 1025
-and 4095 are reserved, helper macros are introduced to simplify the
-transformation of indices and to enable easier access to eSPI-specific
-resources. These changes prepare the VGIC for processing eSPIs as
-required by future functionality.
 
-The initialization and deinitialization paths for vgic have been updated
-to allocate and free these resources appropriately. Additionally,
-updated handling of INTIDs greater than 1024, passed from the toolstack
-during domain creation, and verification logic ensures only valid SPI or
-eSPI INTIDs are used.
+On 27.08.25 03:16, Volodymyr Babchuk wrote:
+> Hi Grygorii,
+> 
+> Grygorii Strashko <grygorii_strashko@epam.com> writes:
+> 
+>> From: Grygorii Strashko <grygorii_strashko@epam.com>
+>>
+>> Now Arm64 AArch32 guest support is always enabled and built-in while not
+>> all Arm64 platforms supports AArch32 (for exmaple on Armv9A) or this
+>> support might not be needed (Arm64 AArch32 is used quite rarely in embedded
+>> systems). More over, when focusing on safety certification, AArch32 related
+>> code in Xen leaves a gap in terms of coverage that cannot really be
+>> justified in words. This leaves two options: either support it (lots of
+>> additional testing, requirements and documents would be needed) or compile
+>> it out.
+>>
+>> Hence, this patch introduces basic support to allow make Arm64
+>> AArch32 guest support optional. The following changes are introduced:
+>>
+>> - Introduce Kconfig option CONFIG_ARM64_AARCH32 to allow enable/disable
+>>    Arm64 AArch32 guest support (default y)
+>>
+>> - Introduce is_aarch32_enabled() helper which accounts Arm64 HW capability
+>>    and CONFIG_ARM64_AARCH32 setting
+>>
+>> - Introduce arm64_set_domain_type() to configure Arm64 domain type in
+>>    unified way instead of open coding (d)->arch.type, and account
+>>    CONFIG_ARM64_AARCH32 configuration.
+>>
+>> - toolstack: do not advertise "xen-3.0-armv7l " capability if AArch32 is
+>>    disabled.
+>>
+>> - do not expose EL1 AArch32 support to guest in ID_AA64PFR0_EL1 reg if
+>>    AArch32 is disabled.
+>>
+>> - Set Arm64 domain type to DOMAIN_64BIT by default.
+>>    - the Arm Xen boot code is handling this case properly already;
+>>    - for toolstack case the XEN_DOMCTL_set_address_size hypercall handling
+>>      updated to forcibly configure domain type regardless of current domain
+>>      type configuration, so toolstack behavior is unchanged.
+>>
+>> With CONFIG_ARM64_AARCH32=n the Xen will reject AArch32 guests (kernels) if
+>> configured by user in the following way:
+>> - Xen boot will fail with panic during dom0 or dom0less domains creation
+>> - toolstack domain creation will be rejected due to xc_dom_compat_check()
+>>    failure.
+>>
+>> Making Arm64 AArch32 guest support open further possibilities for build
+>> optimizations of Arm64 AArch32 guest support code.
+>>
+>> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+>> ---
+>> changes in v2:
+>> - use Arm64 "cpu_has_el1_32" in all places to check if HW has AArch32 support
+>> - rework Arm64 XEN_DOMCTL_set_address_size hypercall handling to work with any
+>>    initial domain type set (32bit or 64 bit)
+>> - fix comments related to macro parameters evaluation issues
+>> - do not expose EL1 AArch32 support to guest in ID_AA64PFR0_EL1 reg if
+>>    AArch32 is disabled
+>>
+>>   xen/arch/arm/Kconfig                    |  7 ++++
+>>   xen/arch/arm/arm64/domain-build.c       | 46 +++++++++++++++++++++++--
+>>   xen/arch/arm/arm64/domctl.c             | 16 +++++----
+>>   xen/arch/arm/arm64/vsysreg.c            |  9 +++++
+>>   xen/arch/arm/domain.c                   |  9 +++++
+>>   xen/arch/arm/domain_build.c             | 21 +++--------
+>>   xen/arch/arm/include/asm/arm32/domain.h | 12 +++++++
+>>   xen/arch/arm/include/asm/arm64/domain.h | 23 +++++++++++++
+>>   xen/arch/arm/setup.c                    |  2 +-
+>>   9 files changed, 119 insertions(+), 26 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+>> index a0c816047427..bf6dd73caf73 100644
+>> --- a/xen/arch/arm/Kconfig
+>> +++ b/xen/arch/arm/Kconfig
+>> @@ -266,6 +266,13 @@ config PCI_PASSTHROUGH
+>>   	help
+>>   	  This option enables PCI device passthrough
+>>   
+>> +config ARM64_AARCH32
+>> +	bool "AArch32 Guests support on on ARM64 (UNSUPPORTED)" if UNSUPPORTED
+> 
+> But aarch32 guests are supported... I understand that you wanted to say
+> "Disabling aarch32 support is unsupported". But currently this entry
+> reads backwards. I think it should be reworded better. But I have no
+> idea - how to do this.
 
-The existing SPI behavior remains unaffected when guests do not request
-eSPIs, GIC hardware does not support them, or the CONFIG_GICV3_ESPI
-option is disabled.
+I think "(UNSUPPORTED)" can be just dropped. Is it ok?
 
-Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> 
+>> +	depends on ARM_64
+>> +	default y
+>> +	help
+>> +	  This option enables AArch32 Guests on ARM64.
+>> +
+>>   endmenu
+>>   
+>>   menu "ARM errata workaround via the alternative framework"
+>> diff --git a/xen/arch/arm/arm64/domain-build.c b/xen/arch/arm/arm64/domain-build.c
+>> index 3a89ee46b8c6..5951f002e3af 100644
+>> --- a/xen/arch/arm/arm64/domain-build.c
+>> +++ b/xen/arch/arm/arm64/domain-build.c
+>> @@ -4,13 +4,55 @@
+>>   #include <xen/sched.h>
+>>   
+>>   #include <asm/domain.h>
+>> +#include <asm/arm64/sve.h>
+>> +
+>> +int __init arm64_set_domain_type(struct kernel_info *kinfo)
+>> +{
+>> +    struct domain *d = kinfo->bd.d;
+>> +    enum domain_type type;
+>> +
+>> +    ASSERT(d);
+>> +    ASSERT(kinfo);
+> 
+> I don't think there is a sense in asserting that kinfo != NULL after you
+> dereferenced it retrieve "d"
 
----
-Changes in V7:
-- minor: changed hardcoded value of 32 to NR_LOCAL_IRQS
-- minor: used local variable idx in spi_to_pending() and vgic_reserve_virq(=
-)
-- minor: added a comment for allocated_irqs and pending_irqs with index
-  mappings
-- added reviewed-by from Oleksandr Tyshchenko
+right
 
-Changes for V6:
-- introduced a new function for index to virq conversion, idx_to_virq.
-  This allows the removal of eSPI-specific functions and enables the
-  reuse of existing code for regular SPIs
-- fixed the return value of vgic_allocate_virq in the case of eSPI
-- updated the error message in route_irq_to_guest(). To simplify it and
-  avoid overcomplicating with INTID ranges, propose removing the
-  information about the max number of IRQs
-- fixed eSPI rank initialization to avoid using EXT_RANK_IDX2NUM for
-  converting the eSPI rank to the extended range
-- updated the recalculation logic to avoid the nr_spis > 1020 -
-  NR_LOCAL_IRQS check when nr_spis is reassigned in the case of eSPI
-- fixed formatting issues for macros
-- minor change: changed the macros ESPI_INTID2IDX and ESPI_IDX2INTID
-  into appropriate inline functions introduced in the previous patch
-- minor change: changed int to unsigned int for nr_espis
+> 
+>> +
+>> +    type = kinfo->arch.type;
+>> +
+>> +    if ( !is_aarch32_enabled() )
+>> +    {
+>> +        ASSERT(d->arch.type == DOMAIN_64BIT);
+>> +
+>> +        if ( type == DOMAIN_32BIT )
+>> +        {
+>> +            const char *str = "not available";
+>> +
+>> +            if ( !IS_ENABLED(CONFIG_ARM64_AARCH32) )
+>> +                str = "disabled";
+>> +            printk("aarch32 guests support is %s\n", str);
+> 
+> XENLOG_ERROR?
 
-Changes in V5:
-- removed the has_espi field because it can be determined by checking
-  whether domain->arch.vgic.nr_espis is zero or not
-- since vgic_ext_rank_offset is not used in this patch, it has been
-  moved to the appropriate patch in the patch series, which implements
-  vgic eSPI registers emulation and requires this function
-- removed ifdefs for eSPI-specific macros to reduce the number of ifdefs
-  and code duplication in further changes
-- fixed minor nit: used %pd for printing domain with its ID
+ok
 
-Changes in V4:
-- added has_espi field to simplify determining whether a domain is able
-  to operate with eSPI
-- fixed formatting issues and misspellings
+> 
+>> +            return -EINVAL;
+>> +        }
+>> +
+>> +        return 0;
+>> +    }
+>> +
+>> +    if ( is_sve_domain(d) && type == DOMAIN_32BIT )
+>> +    {
+>> +        printk("SVE is not available for 32-bit domain\n");
+> 
+> XENLOG_ERROR?
+> 
+>> +        return -EINVAL;
+>> +    }
+>> +
+>> +    d->arch.type = type;
+>> +
+>> +    return 0;
+>> +}
+>>   
+>>   #ifdef CONFIG_DOM0LESS_BOOT
+>>   /* TODO: make arch.type generic ? */
+>>   void __init set_domain_type(struct domain *d, struct kernel_info *kinfo)
+>>   {
+>> -    /* type must be set before allocate memory */
+>> -    d->arch.type = kinfo->arch.type;
+>> +    int rc;
+>> +
+>> +    rc = arm64_set_domain_type(kinfo);
+>> +    if ( rc < 0 )
+>> +        panic("Unsupported guest type\n");
+>>   }
+>>   #endif
+>>   
+>> diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
+>> index 8720d126c97d..4f0f143daef8 100644
+>> --- a/xen/arch/arm/arm64/domctl.c
+>> +++ b/xen/arch/arm/arm64/domctl.c
+>> @@ -13,6 +13,11 @@
+>>   #include <asm/arm64/sve.h>
+>>   #include <asm/cpufeature.h>
+>>   
+>> +static void vcpu_switch_to_aarch32_mode(struct vcpu *v)
+>> +{
+>> +    v->arch.hcr_el2 &= ~HCR_RW;
+>> +}
+>> +
+>>   static long switch_mode(struct domain *d, enum domain_type type)
+>>   {
+>>       struct vcpu *v;
+>> @@ -21,14 +26,14 @@ static long switch_mode(struct domain *d, enum domain_type type)
+>>           return -EINVAL;
+>>       if ( domain_tot_pages(d) != 0 )
+>>           return -EBUSY;
+>> -    if ( d->arch.type == type )
+>> -        return 0;
+>>   
+>>       d->arch.type = type;
+>>   
+>> -    if ( is_64bit_domain(d) )
+>> -        for_each_vcpu(d, v)
+>> +    for_each_vcpu(d, v)
+>> +        if ( is_64bit_domain(d) )
+> 
+> Do you really need to check domain type for every vCPU? I think that
+> original variant was better.
+> 
+>>               vcpu_switch_to_aarch64_mode(v);
+>> +        else
+>> +            vcpu_switch_to_aarch32_mode(v);
 
-Changes in V3:
-- fixed formatting for lines with more than 80 symbols
-- introduced helper functions to be able to use stubs in case of
-  CONFIG_GICV3_ESPI disabled, and as a result, reduce the number of
-  #ifdefs
-- fixed checks for nr_spis in domain_vgic_init
-- updated comment about nr_spis adjustments with dom0less mention
-- moved comment with additional explanations before checks
-- used unsigned int for indexes since they cannot be negative
-- removed unnecessary parentheses
-- move vgic_ext_rank_offset to the below ifdef guard, to reduce the
-  number of ifdefs
+Do you mean like below?
 
-Changes in V2:
-- change is_espi_rank to is_valid_espi_rank to verify whether the array
-  element ext_shared_irqs exists. The previous version, is_espi_rank,
-  only checked if the rank index was less than the maximum possible eSPI
-  rank index, but this could potentially result in accessing a
-  non-existing array element. To address this, is_valid_espi_rank was
-  introduced, which ensures that the required eSPI rank exists
-- move gic_number_espis to
-  xen/arm: gicv3: implement handling of GICv3.1 eSPI
-- update vgic_is_valid_irq checks to allow operating with eSPIs
-- remove redundant newline in vgic_allocate_virq
----
- xen/arch/arm/include/asm/vgic.h |  26 ++++-
- xen/arch/arm/irq.c              |   3 +-
- xen/arch/arm/vgic.c             | 180 +++++++++++++++++++++++++++++---
- 3 files changed, 193 insertions(+), 16 deletions(-)
-
-diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgi=
-c.h
-index 3e7cbbb196..caffea092b 100644
---- a/xen/arch/arm/include/asm/vgic.h
-+++ b/xen/arch/arm/include/asm/vgic.h
-@@ -144,11 +144,25 @@ struct vgic_dist {
-     spinlock_t lock;
-     uint32_t ctlr;
-     int nr_spis; /* Number of SPIs */
--    unsigned long *allocated_irqs; /* bitmap of IRQs allocated */
-+    /*
-+     * Bitmap of allocated IRQs with the following index mapping:
-+     * Local IRQs [0..31]
-+     * Regular SPIs [32..nr_spis + 31]
-+     * Optional, if supported:
-+     * Extended SPIs [nr_spis + 32..nr_spis + nr_espis + 31]
-+     */
-+    unsigned long *allocated_irqs;
-     struct vgic_irq_rank *shared_irqs;
-+#ifdef CONFIG_GICV3_ESPI
-+    struct vgic_irq_rank *ext_shared_irqs;
-+    unsigned int nr_espis; /* Number of extended SPIs */
-+#endif
-     /*
-      * SPIs are domain global, SGIs and PPIs are per-VCPU and stored in
--     * struct arch_vcpu.
-+     * struct arch_vcpu. The index mapping is as follows:
-+     * Regular SPIs [0..nr_spis - 1]
-+     * Optional, if supported:
-+     * eSPIs [nr_spis..nr_spis + nr_espis - 1]
-      */
-     struct pending_irq *pending_irqs;
-     /* Base address for guest GIC */
-@@ -243,6 +257,14 @@ struct vgic_ops {
- /* Number of ranks of interrupt registers for a domain */
- #define DOMAIN_NR_RANKS(d) (((d)->arch.vgic.nr_spis+31)/32)
-=20
-+#ifdef CONFIG_GICV3_ESPI
-+#define DOMAIN_NR_EXT_RANKS(d) (((d)->arch.vgic.nr_espis + 31) / 32)
-+#endif
-+#define EXT_RANK_MIN (ESPI_BASE_INTID / 32)
-+#define EXT_RANK_MAX ((ESPI_MAX_INTID + 31) / 32)
-+#define EXT_RANK_NUM2IDX(num) ((num) - EXT_RANK_MIN)
-+#define EXT_RANK_IDX2NUM(idx) ((idx) + EXT_RANK_MIN)
-+
- #define vgic_lock(v)   spin_lock_irq(&(v)->domain->arch.vgic.lock)
- #define vgic_unlock(v) spin_unlock_irq(&(v)->domain->arch.vgic.lock)
-=20
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index c934d39bf6..c2f1ceb91f 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -494,8 +494,7 @@ int route_irq_to_guest(struct domain *d, unsigned int v=
-irq,
-     if ( !vgic_is_valid_line(d, virq) )
-     {
-         printk(XENLOG_G_ERR
--               "the vIRQ number %u is too high for domain %u (max =3D %u)\=
-n",
--               irq, d->domain_id, vgic_num_irqs(d));
-+               "invalid vIRQ number %u for domain %pd\n", irq, d);
-         return -EINVAL;
-     }
-=20
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index 2bbf4d99aa..878daa71d4 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -25,11 +25,61 @@
- #include <asm/vgic.h>
-=20
-=20
-+static inline unsigned int idx_to_virq(struct domain *d, unsigned int idx)
-+{
-+    if ( idx >=3D vgic_num_irqs(d) )
-+        return espi_idx_to_intid(idx - vgic_num_irqs(d));
-+
-+    return idx;
-+}
-+
- bool vgic_is_valid_line(struct domain *d, unsigned int virq)
- {
-+#ifdef CONFIG_GICV3_ESPI
-+    if ( virq >=3D ESPI_BASE_INTID &&
-+         virq < espi_idx_to_intid(d->arch.vgic.nr_espis) )
-+        return true;
-+#endif
-+
-     return virq < vgic_num_irqs(d);
- }
-=20
-+#ifdef CONFIG_GICV3_ESPI
-+/*
-+ * Since eSPI indexes start from 4096 and numbers from 1024 to
-+ * 4095 are forbidden, we need to check both lower and upper
-+ * limits for ranks.
-+ */
-+static inline bool is_valid_espi_rank(struct domain *d, unsigned int rank)
-+{
-+    return rank >=3D EXT_RANK_MIN &&
-+           EXT_RANK_NUM2IDX(rank) < DOMAIN_NR_EXT_RANKS(d);
-+}
-+
-+static inline struct vgic_irq_rank *vgic_get_espi_rank(struct vcpu *v,
-+                                                       unsigned int rank)
-+{
-+    return &v->domain->arch.vgic.ext_shared_irqs[EXT_RANK_NUM2IDX(rank)];
-+}
-+
-+#else
-+static inline bool is_valid_espi_rank(struct domain *d, unsigned int rank)
-+{
-+    return false;
-+}
-+
-+/*
-+ * This function is stub and will not be called if CONFIG_GICV3_ESPI=3Dn,
-+ * because in this case, is_valid_espi_rank will always return false.
-+ */
-+static inline struct vgic_irq_rank *vgic_get_espi_rank(struct vcpu *v,
-+                                                       unsigned int rank)
-+{
-+    ASSERT_UNREACHABLE();
-+    return NULL;
-+}
-+#endif
-+
- static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
-                                                   unsigned int rank)
- {
-@@ -37,6 +87,8 @@ static inline struct vgic_irq_rank *vgic_get_rank(struct =
-vcpu *v,
-         return v->arch.vgic.private_irqs;
-     else if ( rank <=3D DOMAIN_NR_RANKS(v->domain) )
-         return &v->domain->arch.vgic.shared_irqs[rank - 1];
-+    else if ( is_valid_espi_rank(v->domain, rank) )
-+        return vgic_get_espi_rank(v, rank);
+     if ( is_64bit_domain(d) )
+         for_each_vcpu(d, v)
+             vcpu_switch_to_aarch64_mode(v);
      else
-         return NULL;
- }
-@@ -117,6 +169,54 @@ int domain_vgic_register(struct domain *d, unsigned in=
-t *mmio_count)
-     return 0;
- }
-=20
-+#ifdef CONFIG_GICV3_ESPI
-+static unsigned int vgic_num_spi_lines(struct domain *d)
-+{
-+    return d->arch.vgic.nr_spis + d->arch.vgic.nr_espis;
-+}
-+
-+static int init_vgic_espi(struct domain *d)
-+{
-+    unsigned int i, idx;
-+
-+    if ( d->arch.vgic.nr_espis =3D=3D 0 )
-+        return 0;
-+
-+    d->arch.vgic.ext_shared_irqs =3D
-+        xzalloc_array(struct vgic_irq_rank, DOMAIN_NR_EXT_RANKS(d));
-+    if ( d->arch.vgic.ext_shared_irqs =3D=3D NULL )
-+        return -ENOMEM;
-+
-+    for ( i =3D d->arch.vgic.nr_spis, idx =3D 0;
-+          i < vgic_num_spi_lines(d); i++, idx++ )
-+        vgic_init_pending_irq(&d->arch.vgic.pending_irqs[i],
-+                              espi_idx_to_intid(idx));
-+
-+    for ( i =3D 0; i < DOMAIN_NR_EXT_RANKS(d); i++ )
-+        vgic_rank_init(&d->arch.vgic.ext_shared_irqs[i],
-+                       EXT_RANK_IDX2NUM(i), 0);
-+
-+    return 0;
-+}
-+
-+#else
-+static int init_vgic_espi(struct domain *d)
-+{
-+    return 0;
-+}
-+
-+static unsigned int vgic_num_spi_lines(struct domain *d)
-+{
-+    return d->arch.vgic.nr_spis;
-+}
-+
-+#endif
-+
-+static unsigned int vgic_num_alloc_irqs(struct domain *d)
-+{
-+    return vgic_num_spi_lines(d) + NR_LOCAL_IRQS;
-+}
-+
- int domain_vgic_init(struct domain *d, unsigned int nr_spis)
- {
-     int i;
-@@ -133,7 +233,39 @@ int domain_vgic_init(struct domain *d, unsigned int nr=
-_spis)
-=20
-     /* Limit the number of virtual SPIs supported to (1020 - 32) =3D 988  =
-*/
-     if ( nr_spis > (1020 - NR_LOCAL_IRQS) )
-+#ifndef CONFIG_GICV3_ESPI
-         return -EINVAL;
-+#else
-+    {
-+        /*
-+         * During domain creation, the dom0less DomUs code or toolstack
-+         * specifies the maximum INTID, which is defined in the domain
-+         * config subtracted by 32 to cover the local IRQs (please see
-+         * the comment to VGIC_DEF_NR_SPIS). To compute the actual number
-+         * of eSPI that will be usable for, add back 32 (NR_LOCAL_IRQS).
-+         */
-+        nr_spis +=3D NR_LOCAL_IRQS;
-+        if ( nr_spis > espi_idx_to_intid(NR_ESPI_IRQS) )
-+            return -EINVAL;
-+
-+        if ( nr_spis >=3D ESPI_BASE_INTID )
-+        {
-+            unsigned int nr_espis =3D min(nr_spis - ESPI_BASE_INTID, 1024U=
-);
-+
-+            /* Verify if GIC HW can handle provided INTID */
-+            if ( nr_espis > gic_number_espis() )
-+                return -EINVAL;
-+
-+            d->arch.vgic.nr_espis =3D nr_espis;
-+            /* Set the maximum available number for regular SPIs */
-+            nr_spis =3D VGIC_DEF_NR_SPIS;
-+        }
-+        else
-+        {
-+            return -EINVAL;
-+        }
-+    }
-+#endif
-=20
-     d->arch.vgic.nr_spis =3D nr_spis;
-=20
-@@ -145,7 +277,7 @@ int domain_vgic_init(struct domain *d, unsigned int nr_=
-spis)
-         return -ENOMEM;
-=20
-     d->arch.vgic.pending_irqs =3D
--        xzalloc_array(struct pending_irq, d->arch.vgic.nr_spis);
-+        xzalloc_array(struct pending_irq, vgic_num_spi_lines(d));
-     if ( d->arch.vgic.pending_irqs =3D=3D NULL )
-         return -ENOMEM;
-=20
-@@ -156,12 +288,16 @@ int domain_vgic_init(struct domain *d, unsigned int n=
-r_spis)
-     for ( i =3D 0; i < DOMAIN_NR_RANKS(d); i++ )
-         vgic_rank_init(&d->arch.vgic.shared_irqs[i], i + 1, 0);
-=20
-+    ret =3D init_vgic_espi(d);
-+    if ( ret )
-+        return ret;
-+
-     ret =3D d->arch.vgic.handler->domain_init(d);
-     if ( ret )
-         return ret;
-=20
-     d->arch.vgic.allocated_irqs =3D
--        xzalloc_array(unsigned long, BITS_TO_LONGS(vgic_num_irqs(d)));
-+        xzalloc_array(unsigned long, BITS_TO_LONGS(vgic_num_alloc_irqs(d))=
-);
-     if ( !d->arch.vgic.allocated_irqs )
-         return -ENOMEM;
-=20
-@@ -182,9 +318,12 @@ void domain_vgic_free(struct domain *d)
-     int i;
-     int ret;
-=20
--    for ( i =3D 0; i < (d->arch.vgic.nr_spis); i++ )
-+    for ( i =3D NR_LOCAL_IRQS; i < vgic_num_alloc_irqs(d); i++ )
-     {
--        struct pending_irq *p =3D spi_to_pending(d, i + 32);
-+        struct pending_irq *p;
-+        unsigned int virq =3D idx_to_virq(d, i);
-+
-+        p =3D spi_to_pending(d, virq);
-=20
-         if ( p->desc )
-         {
-@@ -198,6 +337,9 @@ void domain_vgic_free(struct domain *d)
-     if ( d->arch.vgic.handler )
-         d->arch.vgic.handler->domain_free(d);
-     xfree(d->arch.vgic.shared_irqs);
-+#ifdef CONFIG_GICV3_ESPI
-+    xfree(d->arch.vgic.ext_shared_irqs);
-+#endif
-     xfree(d->arch.vgic.pending_irqs);
-     xfree(d->arch.vgic.allocated_irqs);
- }
-@@ -323,10 +465,12 @@ void arch_move_irqs(struct vcpu *v)
-      */
-     ASSERT(!is_lpi(vgic_num_irqs(d) - 1));
-=20
--    for ( i =3D 32; i < vgic_num_irqs(d); i++ )
-+    for ( i =3D NR_LOCAL_IRQS; i < vgic_num_alloc_irqs(d); i++ )
-     {
--        v_target =3D vgic_get_target_vcpu(v, i);
--        p =3D irq_to_pending(v_target, i);
-+        unsigned int virq =3D idx_to_virq(d, i);
-+
-+        v_target =3D vgic_get_target_vcpu(v, virq);
-+        p =3D irq_to_pending(v_target, virq);
-=20
-         if ( v_target =3D=3D v && !test_bit(GIC_IRQ_GUEST_MIGRATING, &p->s=
-tatus) )
-             irq_set_affinity(p->desc, cpu_mask);
-@@ -539,15 +683,22 @@ struct pending_irq *irq_to_pending(struct vcpu *v, un=
-signed int irq)
-     else if ( is_lpi(irq) )
-         n =3D v->domain->arch.vgic.handler->lpi_to_pending(v->domain, irq)=
-;
-     else
--        n =3D &v->domain->arch.vgic.pending_irqs[irq - 32];
-+        n =3D spi_to_pending(v->domain, irq);
-     return n;
- }
-=20
- struct pending_irq *spi_to_pending(struct domain *d, unsigned int irq)
- {
-+    unsigned int idx;
-+
-     ASSERT(irq >=3D NR_LOCAL_IRQS);
-=20
--    return &d->arch.vgic.pending_irqs[irq - 32];
-+    if ( is_espi(irq) )
-+        idx =3D espi_intid_to_idx(irq) + d->arch.vgic.nr_spis;
-+    else
-+        idx =3D irq - NR_LOCAL_IRQS;
-+
-+    return &d->arch.vgic.pending_irqs[idx];
- }
-=20
- void vgic_clear_pending_irqs(struct vcpu *v)
-@@ -665,10 +816,15 @@ bool vgic_emulate(struct cpu_user_regs *regs, union h=
-sr hsr)
-=20
- bool vgic_reserve_virq(struct domain *d, unsigned int virq)
- {
-+    unsigned int idx =3D virq;
-+
-     if ( !vgic_is_valid_line(d, virq) )
-         return false;
-=20
--    return !test_and_set_bit(virq, d->arch.vgic.allocated_irqs);
-+    if ( is_espi(virq) )
-+        idx =3D espi_intid_to_idx(virq) + vgic_num_irqs(d);
-+
-+    return !test_and_set_bit(idx, d->arch.vgic.allocated_irqs);
- }
-=20
- int vgic_allocate_virq(struct domain *d, bool spi)
-@@ -685,7 +841,7 @@ int vgic_allocate_virq(struct domain *d, bool spi)
-     else
-     {
-         first =3D 32;
--        end =3D vgic_num_irqs(d);
-+        end =3D vgic_num_alloc_irqs(d);
-     }
-=20
-     /*
-@@ -700,7 +856,7 @@ int vgic_allocate_virq(struct domain *d, bool spi)
-     }
-     while ( test_and_set_bit(virq, d->arch.vgic.allocated_irqs) );
-=20
--    return virq;
-+    return idx_to_virq(d, virq);
- }
-=20
- void vgic_free_virq(struct domain *d, unsigned int virq)
---=20
-2.34.1
+         for_each_vcpu(d, v)
+             vcpu_switch_to_aarch32_mode(v);
+
+
+>>   
+>>       return 0;
+>>   }
+>> @@ -38,7 +43,7 @@ static long set_address_size(struct domain *d, uint32_t address_size)
+>>       switch ( address_size )
+>>       {
+>>       case 32:
+>> -        if ( !cpu_has_el1_32 )
+>> +        if ( !is_aarch32_enabled() )
+>>               return -EINVAL;
+>>           /* SVE is not supported for 32 bit domain */
+>>           if ( is_sve_domain(d) )
+>> @@ -58,7 +63,6 @@ long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+>>       {
+>>       case XEN_DOMCTL_set_address_size:
+>>           return set_address_size(d, domctl->u.address_size.size);
+>> -
+> 
+> Stray change?
+
+ok
+
+> 
+>>       default:
+>>           return -ENOSYS;
+>>       }
+>> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
+>> index d14258290ff0..9f7e735c9b74 100644
+>> --- a/xen/arch/arm/arm64/vsysreg.c
+>> +++ b/xen/arch/arm/arm64/vsysreg.c
+>> @@ -330,6 +330,15 @@ void do_sysreg(struct cpu_user_regs *regs,
+>>       {
+>>           register_t guest_reg_value = domain_cpuinfo.pfr64.bits[0];
+>>   
+>> +        if ( !is_aarch32_enabled() )
+>> +        {
+>> +            /* do not expose EL1 AArch32 support if disabled */
+>> +            register_t mask = GENMASK(ID_AA64PFR0_EL1_SHIFT + 4 - 1,
+>> +                                      ID_AA64PFR0_EL1_SHIFT);
+>> +            guest_reg_value &= ~mask;
+>> +            guest_reg_value |= (1 << ID_AA64PFR0_EL1_SHIFT) & mask;
+> 
+> Why do you need to apply mask here?
+
+will drop
+
+> 
+>> +        }
+>> +
+>>           if ( is_sve_domain(v->domain) )
+>>           {
+>>               /* 4 is the SVE field width in id_aa64pfr0_el1 */
+>> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+>> index 310c5789096d..544d1422a793 100644
+>> --- a/xen/arch/arm/domain.c
+>> +++ b/xen/arch/arm/domain.c
+>> @@ -791,6 +791,15 @@ int arch_domain_create(struct domain *d,
+>>       d->arch.sve_vl = config->arch.sve_vl;
+>>   #endif
+>>   
+>> +#ifdef CONFIG_ARM_64
+>> +    /*
+>> +     * Set default Execution State to AArch64 (64bit)
+>> +     * - Xen will reconfigure it properly at boot time
+>> +     * - toolstack will reconfigure it properly by XEN_DOMCTL_set_address_size
+>> +     */
+>> +    d->arch.type = DOMAIN_64BIT;
+>> +#endif
+>> +
+>>       return 0;
+>>   
+>>   fail:
+>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>> index 47ba920fc6b0..c616127e8da5 100644
+>> --- a/xen/arch/arm/domain_build.c
+>> +++ b/xen/arch/arm/domain_build.c
+>> @@ -1873,19 +1873,6 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+>>       BUG_ON(v->is_initialised);
+>>   
+>>   #ifdef CONFIG_ARM_64
+>> -    /* if aarch32 mode is not supported at EL1 do not allow 32-bit domain */
+>> -    if ( !(cpu_has_el1_32) && kinfo->arch.type == DOMAIN_32BIT )
+>> -    {
+>> -        printk("Platform does not support 32-bit domain\n");
+>> -        return -EINVAL;
+>> -    }
+>> -
+>> -    if ( is_sve_domain(d) && (kinfo->arch.type == DOMAIN_32BIT) )
+>> -    {
+>> -        printk("SVE is not available for 32-bit domain\n");
+>> -        return -EINVAL;
+>> -    }
+>> -
+>>       if ( is_64bit_domain(d) )
+>>           vcpu_switch_to_aarch64_mode(v);
+>>   
+>> @@ -1983,6 +1970,10 @@ static int __init construct_dom0(struct domain *d)
+>>       if ( rc < 0 )
+>>           return rc;
+>>   
+>> +    rc = arm64_set_domain_type(&kinfo);
+>> +    if ( rc < 0 )
+>> +        return rc;
+>> +
+>>       return construct_hwdom(&kinfo, NULL);
+>>   }
+>>   
+>> @@ -1994,10 +1985,6 @@ int __init construct_hwdom(struct kernel_info *kinfo,
+>>   
+>>       iommu_hwdom_init(d);
+>>   
+>> -#ifdef CONFIG_ARM_64
+>> -    /* type must be set before allocate_memory */
+>> -    d->arch.type = kinfo->arch.type;
+>> -#endif
+>>       find_gnttab_region(d, kinfo);
+>>       if ( is_domain_direct_mapped(d) )
+>>           allocate_memory_11(d, kinfo);
+>> diff --git a/xen/arch/arm/include/asm/arm32/domain.h b/xen/arch/arm/include/asm/arm32/domain.h
+>> index 1bd0735c9194..30e8818ff2ae 100644
+>> --- a/xen/arch/arm/include/asm/arm32/domain.h
+>> +++ b/xen/arch/arm/include/asm/arm32/domain.h
+>> @@ -3,11 +3,23 @@
+>>   #ifndef ARM_ARM32_DOMAIN_H
+>>   #define ARM_ARM32_DOMAIN_H
+>>   
+>> +struct kernel_info;
+>> +
+>>   /* Arm32 always runs guests in AArch32 mode */
+>>   
+>>   #define is_32bit_domain(d) ((void)(d), 1)
+>>   #define is_64bit_domain(d) ((void)(d), 0)
+>>   
+>> +static inline bool is_aarch32_enabled(void)
+>> +{
+>> +    return true;
+>> +}
+>> +
+>> +static inline int arm64_set_domain_type(struct kernel_info *kinfo)
+>> +{
+>> +    return 0;
+>> +}
+>> +
+>>   #endif /* ARM_ARM32_DOMAIN_H */
+>>   
+>>   /*
+>> diff --git a/xen/arch/arm/include/asm/arm64/domain.h b/xen/arch/arm/include/asm/arm64/domain.h
+>> index 1a2d73950bf0..bebcbc582f97 100644
+>> --- a/xen/arch/arm/include/asm/arm64/domain.h
+>> +++ b/xen/arch/arm/include/asm/arm64/domain.h
+>> @@ -3,6 +3,10 @@
+>>   #ifndef ARM_ARM64_DOMAIN_H
+>>   #define ARM_ARM64_DOMAIN_H
+>>   
+>> +#include <asm/cpufeature.h>
+>> +
+>> +struct kernel_info;
+>> +
+>>   /*
+>>    * Returns true if guest execution state is AArch32
+>>    *
+>> @@ -17,6 +21,25 @@
+>>    */
+>>   #define is_64bit_domain(d) ((d)->arch.type == DOMAIN_64BIT)
+>>   
+>> +/*
+>> + * Arm64 declares AArch32 (32bit) Execution State support in the
+>> + * Processor Feature Registers (PFR0), but also can be disabled manually.
+>> + */
+>> +static inline bool is_aarch32_enabled(void)
+>> +{
+>> +    return IS_ENABLED(CONFIG_ARM64_AARCH32) && cpu_has_el1_32;
+>> +}
+>> +
+>> +/*
+>> + * Set domain type from struct kernel_info which defines guest Execution
+>> + * State AArch32/AArch64 during regular dom0 or predefined (dom0less)
+>> + * domains creation .
+> 
+> Extra space before full stop
+
+ok
+
+> 
+>> + * Type must be set before allocate_memory or create vcpus.
+>> + *
+>> + * @kinfo: pointer to the kinfo structure.
+>> + */
+>> +int arm64_set_domain_type(struct kernel_info *kinfo);
+>> +
+>>   #endif /* ARM_ARM64_DOMAIN_H */
+>>   
+>>   /*
+>> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+>> index bb35afe56cec..c29573f0ffec 100644
+>> --- a/xen/arch/arm/setup.c
+>> +++ b/xen/arch/arm/setup.c
+>> @@ -530,7 +530,7 @@ static int __init init_xen_cap_info(void)
+>>   #ifdef CONFIG_ARM_64
+>>       safe_strcat(xen_cap_info, "xen-3.0-aarch64 ");
+>>   #endif
+>> -    if ( cpu_has_aarch32 )
+>> +    if ( is_aarch32_enabled() )
+>>           safe_strcat(xen_cap_info, "xen-3.0-armv7l ");
+>>   
+>>       return 0;
+> 
+
+-- 
+Best regards,
+-grygorii
+
 
