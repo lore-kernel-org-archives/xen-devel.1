@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B9FCA101F
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 13:04:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1110052.1459427 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC29CA101C
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Sep 2025 13:04:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1110043.1459386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu9dZ-0006Jr-7r; Thu, 04 Sep 2025 13:04:25 +0000
+	id 1uu9dW-0005T4-VS; Thu, 04 Sep 2025 13:04:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1110052.1459427; Thu, 04 Sep 2025 13:04:25 +0000
+Received: by outflank-mailman (output) from mailman id 1110043.1459386; Thu, 04 Sep 2025 13:04:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uu9dZ-0006Ir-0x; Thu, 04 Sep 2025 13:04:25 +0000
-Received: by outflank-mailman (input) for mailman id 1110052;
- Thu, 04 Sep 2025 12:58:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uu9dW-0005Sx-Sp; Thu, 04 Sep 2025 13:04:22 +0000
+Received: by outflank-mailman (input) for mailman id 1110043;
+ Thu, 04 Sep 2025 12:58:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DBMC=3P=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1uu9Y2-0003uI-4h
- for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 12:58:42 +0000
+ id 1uu9Xl-0003eE-4R
+ for xen-devel@lists.xenproject.org; Thu, 04 Sep 2025 12:58:25 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id e17c05a8-898e-11f0-9d12-b5c5bf9af7f9;
- Thu, 04 Sep 2025 14:58:41 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id d5df21f3-898e-11f0-9809-7dc792cee155;
+ Thu, 04 Sep 2025 14:58:22 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2267F2ECB;
- Thu,  4 Sep 2025 05:58:32 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9F7181756;
+ Thu,  4 Sep 2025 05:58:12 -0700 (PDT)
 Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
  [10.1.194.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E64E73F6A8;
- Thu,  4 Sep 2025 05:58:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 684763F6A8;
+ Thu,  4 Sep 2025 05:58:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e17c05a8-898e-11f0-9d12-b5c5bf9af7f9
+X-Inumbo-ID: d5df21f3-898e-11f0-9809-7dc792cee155
 From: Kevin Brodsky <kevin.brodsky@arm.com>
 To: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org,
@@ -81,110 +81,144 @@ Cc: linux-kernel@vger.kernel.org,
 	linuxppc-dev@lists.ozlabs.org,
 	sparclinux@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 4/7] x86/xen: support nested lazy_mmu sections (again)
-Date: Thu,  4 Sep 2025 13:57:33 +0100
-Message-ID: <20250904125736.3918646-5-kevin.brodsky@arm.com>
+Subject: [PATCH 0/7] Nesting support for lazy MMU mode
+Date: Thu,  4 Sep 2025 13:57:29 +0100
+Message-ID: <20250904125736.3918646-1-kevin.brodsky@arm.com>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250904125736.3918646-1-kevin.brodsky@arm.com>
-References: <20250904125736.3918646-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit 49147beb0ccb ("x86/xen: allow nesting of same lazy mode")
-originally introduced support for nested lazy sections (LAZY_MMU and
-LAZY_CPU). It later got reverted by commit c36549ff8d84 as its
-implementation turned out to be intolerant to preemption.
+When the lazy MMU mode was introduced eons ago, it wasn't made clear
+whether such a sequence was legal:
 
-Now that the lazy_mmu API allows enter() to pass through a state to
-the matching leave() call, we can support nesting again for the
-LAZY_MMU mode in a preemption-safe manner. If xen_enter_lazy_mmu() is
-called inside an active lazy_mmu section, xen_lazy_mode will already
-be set to XEN_LAZY_MMU and we can then return LAZY_MMU_NESTED to
-instruct the matching xen_leave_lazy_mmu() call to leave
-xen_lazy_mode unchanged.
+	arch_enter_lazy_mmu_mode()
+	...
+		arch_enter_lazy_mmu_mode()
+		...
+		arch_leave_lazy_mmu_mode()
+	...
+	arch_leave_lazy_mmu_mode()
 
-The only effect of this patch is to ensure that xen_lazy_mode
-remains set to XEN_LAZY_MMU until the outermost lazy_mmu section
-ends. xen_leave_lazy_mmu() still calls xen_mc_flush()
-unconditionally.
+It seems fair to say that nested calls to
+arch_{enter,leave}_lazy_mmu_mode() were not expected, and most
+architectures never explicitly supported it.
 
-Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
+Ryan Roberts' series from March [1] attempted to prevent nesting from
+ever occurring, and mostly succeeded. Unfortunately, a corner case
+(DEBUG_PAGEALLOC) may still cause nesting to occur on arm64. Ryan
+proposed [2] to address that corner case at the generic level but this
+approach received pushback; [3] then attempted to solve the issue on
+arm64 only, but it was deemed too fragile.
+
+It feels generally fragile to rely on lazy_mmu sections not to nest,
+because callers of various standard mm functions do not know if the
+function uses lazy_mmu itself. This series therefore performs a U-turn
+and adds support for nested lazy_mmu sections, on all architectures.
+
+The main change enabling nesting is patch 2, following the approach
+suggested by Catalin Marinas [4]: have enter() return some state and
+the matching leave() take that state. In this series, the state is only
+used to handle nesting, but it could be used for other purposes such as
+restoring context modified by enter(); the proposed kpkeys framework
+would be an immediate user [5].
+
+Patch overview:
+
+* Patch 1: general cleanup - not directly related, but avoids any doubt
+  regarding the expected behaviour of arch_flush_lazy_mmu_mode() outside
+  x86
+
+* Patch 2: main API change, no functional change
+
+* Patch 3-6: nesting support for all architectures that support lazy_mmu
+
+* Patch 7: clarification that nesting is supported in the documentation
+
+Patch 4-6 are technically not required at this stage since nesting is
+only observed on arm64, but they ensure future correctness in case
+nesting is (re)introduced in generic paths. For instance, it could be
+beneficial in some configurations to enter lazy_mmu set_ptes() once
+again.
+
+This series has been tested by running the mm kselfetsts on arm64 with
+DEBUG_PAGEALLOC and KFENCE. It was also build-tested on other
+architectures (with and without XEN_PV on x86).
+
+- Kevin
+
+[1] https://lore.kernel.org/all/20250303141542.3371656-1-ryan.roberts@arm.com/
+[2] https://lore.kernel.org/all/20250530140446.2387131-1-ryan.roberts@arm.com/
+[3] https://lore.kernel.org/all/20250606135654.178300-1-ryan.roberts@arm.com/
+[4] https://lore.kernel.org/all/aEhKSq0zVaUJkomX@arm.com/
+[5] https://lore.kernel.org/linux-hardening/20250815085512.2182322-19-kevin.brodsky@arm.com/
 ---
- arch/x86/include/asm/paravirt.h       |  6 ++----
- arch/x86/include/asm/paravirt_types.h |  4 ++--
- arch/x86/xen/mmu_pv.c                 | 11 ++++++++---
- 3 files changed, 12 insertions(+), 9 deletions(-)
+Cc: Alexander Gordeev <agordeev@linux.ibm.com>
+Cc: Andreas Larsson <andreas@gaisler.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: Dave Hansen <dave.hansen@linux.intel.com>
+Cc: David Hildenbrand <david@redhat.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Jann Horn <jannh@google.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>
+Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Cc: Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Mike Rapoport <rppt@kernel.org>
+Cc: Nicholas Piggin <npiggin@gmail.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Ryan Roberts <ryan.roberts@arm.com>
+Cc: Suren Baghdasaryan <surenb@google.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Will Deacon <will@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: sparclinux@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org
+---
+Kevin Brodsky (7):
+  mm: remove arch_flush_lazy_mmu_mode()
+  mm: introduce local state for lazy_mmu sections
+  arm64: mm: fully support nested lazy_mmu sections
+  x86/xen: support nested lazy_mmu sections (again)
+  powerpc/mm: support nested lazy_mmu sections
+  sparc/mm: support nested lazy_mmu sections
+  mm: update lazy_mmu documentation
 
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 65a0d394fba1..4ecd3a6b1dea 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -529,14 +529,12 @@ static inline void arch_end_context_switch(struct task_struct *next)
- #define  __HAVE_ARCH_ENTER_LAZY_MMU_MODE
- static inline lazy_mmu_state_t arch_enter_lazy_mmu_mode(void)
- {
--	PVOP_VCALL0(mmu.lazy_mode.enter);
--
--	return LAZY_MMU_DEFAULT;
-+	return PVOP_CALL0(lazy_mmu_state_t, mmu.lazy_mode.enter);
- }
- 
- static inline void arch_leave_lazy_mmu_mode(lazy_mmu_state_t state)
- {
--	PVOP_VCALL0(mmu.lazy_mode.leave);
-+	PVOP_VCALL1(mmu.lazy_mode.leave, state);
- }
- 
- static inline void arch_flush_lazy_mmu_mode(void)
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index bc1af86868a3..b7c567ccbf32 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -45,8 +45,8 @@ typedef int lazy_mmu_state_t;
- 
- struct pv_lazy_ops {
- 	/* Set deferred update mode, used for batching operations. */
--	void (*enter)(void);
--	void (*leave)(void);
-+	lazy_mmu_state_t (*enter)(void);
-+	void (*leave)(lazy_mmu_state_t);
- 	void (*flush)(void);
- } __no_randomize_layout;
- #endif
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index 2039d5132ca3..6e5390ff06a5 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -2130,9 +2130,13 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
- #endif
- }
- 
--static void xen_enter_lazy_mmu(void)
-+static lazy_mmu_state_t xen_enter_lazy_mmu(void)
- {
-+	if (this_cpu_read(xen_lazy_mode) == XEN_LAZY_MMU)
-+		return LAZY_MMU_NESTED;
-+
- 	enter_lazy(XEN_LAZY_MMU);
-+	return LAZY_MMU_DEFAULT;
- }
- 
- static void xen_flush_lazy_mmu(void)
-@@ -2167,11 +2171,12 @@ static void __init xen_post_allocator_init(void)
- 	pv_ops.mmu.write_cr3 = &xen_write_cr3;
- }
- 
--static void xen_leave_lazy_mmu(void)
-+static void xen_leave_lazy_mmu(lazy_mmu_state_t state)
- {
- 	preempt_disable();
- 	xen_mc_flush();
--	leave_lazy(XEN_LAZY_MMU);
-+	if (state != LAZY_MMU_NESTED)
-+		leave_lazy(XEN_LAZY_MMU);
- 	preempt_enable();
- }
- 
+ arch/arm64/include/asm/pgtable.h              | 34 ++++++-------------
+ .../include/asm/book3s/64/tlbflush-hash.h     | 24 +++++++++----
+ arch/powerpc/mm/book3s64/hash_tlb.c           | 10 +++---
+ arch/powerpc/mm/book3s64/subpage_prot.c       |  5 +--
+ arch/sparc/include/asm/tlbflush_64.h          |  6 ++--
+ arch/sparc/mm/tlb.c                           | 19 ++++++++---
+ arch/x86/include/asm/paravirt.h               |  8 ++---
+ arch/x86/include/asm/paravirt_types.h         |  6 ++--
+ arch/x86/include/asm/pgtable.h                |  3 +-
+ arch/x86/xen/enlighten_pv.c                   |  2 +-
+ arch/x86/xen/mmu_pv.c                         | 13 ++++---
+ fs/proc/task_mmu.c                            |  5 +--
+ include/linux/mm_types.h                      |  3 ++
+ include/linux/pgtable.h                       | 21 +++++++++---
+ mm/madvise.c                                  | 20 ++++++-----
+ mm/memory.c                                   | 20 ++++++-----
+ mm/migrate_device.c                           |  5 +--
+ mm/mprotect.c                                 |  5 +--
+ mm/mremap.c                                   |  5 +--
+ mm/vmalloc.c                                  | 15 ++++----
+ mm/vmscan.c                                   | 15 ++++----
+ 21 files changed, 147 insertions(+), 97 deletions(-)
+
+
+base-commit: b320789d6883cc00ac78ce83bccbfe7ed58afcf0
 -- 
 2.47.0
 
