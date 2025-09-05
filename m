@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 104D4CAC581
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Sep 2025 23:27:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1112632.1460863 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19888CAC582
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Sep 2025 23:27:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1112630.1460840 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uufq1-00029o-O9; Fri, 05 Sep 2025 23:27:25 +0000
+	id 1uufpz-0001Ue-4M; Fri, 05 Sep 2025 23:27:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1112632.1460863; Fri, 05 Sep 2025 23:27:25 +0000
+Received: by outflank-mailman (output) from mailman id 1112630.1460840; Fri, 05 Sep 2025 23:27:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uufq1-00029Z-Jb; Fri, 05 Sep 2025 23:27:25 +0000
-Received: by outflank-mailman (input) for mailman id 1112632;
- Fri, 05 Sep 2025 23:27:23 +0000
+	id 1uufpy-0001Tp-T2; Fri, 05 Sep 2025 23:27:22 +0000
+Received: by outflank-mailman (input) for mailman id 1112630;
+ Fri, 05 Sep 2025 23:27:21 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uufpz-0001hz-GU
- for xen-devel@lists.xenproject.org; Fri, 05 Sep 2025 23:27:23 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uufpx-0001Qb-93
+ for xen-devel@lists.xenproject.org; Fri, 05 Sep 2025 23:27:21 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uufpy-008AAw-2t;
- Fri, 05 Sep 2025 23:27:23 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uufpw-008AAa-28;
+ Fri, 05 Sep 2025 23:27:20 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uufpy-0005D2-2q;
- Fri, 05 Sep 2025 23:27:23 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uufpw-0005Cu-1y;
+ Fri, 05 Sep 2025 23:27:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=euQ/8vNf5GpufgF2TZgbk8vUuC32iTlLIUaYRtS1M14=; b=boyOdTz8V0yH9S5Ab4iNInZzSA
-	CvM6uB7BqGhXl6uRwbofX+8i5Abqh/O+kx3PDbg5zVMPYdI/w7SXC1OXkHUnN+h49RX9LlFtdLwzJ
-	6VCPJ5lmiF+XDvV7gOEc8zqLSEkQl5KLVeW9A8u/sR0Rq6wiPulswMuVKG/p3eikRi2A=;
+	bh=BLpK09VTDg88f7evdVDCZeeMR5D19RIklWweqNvteTE=; b=B3yHWL2D8KrVQOzUca14u0fQ/r
+	Z1XbAhgdfMP6xZpMdCJlLmAjoxj5x5Z4dqTvA9M8L8nXzsv607MCjND/0YJsUeHjwzewx6pRzEdP2
+	/T5rxeeTKKAmDQxoQ/CUdp4tKjJjtTMqm6xRcnWyl6YGaSfha8bnydcDo7Y4A3XQouSU=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v6 04/15] emul/ns16x50: implement DLL/DLM registers
-Date: Fri,  5 Sep 2025 16:27:03 -0700
-Message-ID: <20250905232715.440758-5-dmukhin@ford.com>
+Subject: [PATCH v6 02/15] xen/8250-uart: update definitions
+Date: Fri,  5 Sep 2025 16:27:01 -0700
+Message-ID: <20250905232715.440758-3-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250905232715.440758-1-dmukhin@ford.com>
 References: <20250905232715.440758-1-dmukhin@ford.com>
@@ -68,102 +68,156 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add DLL/DLM registers emulation.
+Added missing definitions needed for NS16550 UART emulator.
 
-DLL/DLM registers report hardcoded 115200 baud rate to the guest OS.
+Newly introduced MSR definitions re-used in the existing ns16550 driver.
 
-Add stub for ns16x50_dlab_get() helper.
+Also, corrected FCR DMA definition bit#3 (0x08) as per:
+  https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
+See "7.7.2 FIFO Control Register (FCR)".
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v5:
-- dropped ns16x50_dlab_get() hunk (moved to emulator stub)
-- Link to v5: https://lore.kernel.org/xen-devel/20250828235409.2835815-5-dmukhin@ford.com/
+- fixed commentaries
+- Link to v5: https://lore.kernel.org/xen-devel/20250828235409.2835815-3-dmukhin@ford.com/
 ---
- xen/common/emul/vuart/ns16x50.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ xen/drivers/char/ns16550.c  | 16 ++++++------
+ xen/include/xen/8250-uart.h | 50 ++++++++++++++++++++++++++++++-------
+ 2 files changed, 49 insertions(+), 17 deletions(-)
 
-diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-index 0462a961e785..7f479a5be4a2 100644
---- a/xen/common/emul/vuart/ns16x50.c
-+++ b/xen/common/emul/vuart/ns16x50.c
-@@ -97,8 +97,13 @@ static uint8_t ns16x50_dlab_get(const struct vuart_ns16x50 *vdev)
- static int ns16x50_io_write8(
-     struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
- {
-+    uint8_t *regs = vdev->regs;
-+    uint8_t val = *data;
-     int rc = 0;
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index df7fff7f81df..0e80fadbb894 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -388,7 +388,7 @@ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
  
-+    if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
-+        regs[NS16X50_REGS_NUM + reg] = val;
-+
-     return rc;
+     /* Check this really is a 16550+. Otherwise we have no FIFOs. */
+     if ( uart->fifo_size <= 1 &&
+-         ((ns_read_reg(uart, UART_IIR) & 0xc0) == 0xc0) &&
++         ((ns_read_reg(uart, UART_IIR) & UART_IIR_FE) == UART_IIR_FE) &&
+          ((ns_read_reg(uart, UART_FCR) & UART_FCR_TRG14) == UART_FCR_TRG14) )
+         uart->fifo_size = 16;
+ }
+@@ -728,20 +728,20 @@ static int __init check_existence(struct ns16550 *uart)
+      * Mask out IER[7:4] bits for test as some UARTs (e.g. TL
+      * 16C754B) allow only to modify them if an EFR bit is set.
+      */
+-    scratch2 = ns_read_reg(uart, UART_IER) & 0x0f;
+-    ns_write_reg(uart,UART_IER, 0x0F);
+-    scratch3 = ns_read_reg(uart, UART_IER) & 0x0f;
++    scratch2 = ns_read_reg(uart, UART_IER) & UART_IER_MASK;
++    ns_write_reg(uart, UART_IER, UART_IER_MASK);
++    scratch3 = ns_read_reg(uart, UART_IER) & UART_IER_MASK;
+     ns_write_reg(uart, UART_IER, scratch);
+-    if ( (scratch2 != 0) || (scratch3 != 0x0F) )
++    if ( (scratch2 != 0) || (scratch3 != UART_IER_MASK) )
+         return 0;
+ 
+     /*
+      * Check to see if a UART is really there.
+      * Use loopback test mode.
+      */
+-    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | 0x0A);
+-    status = ns_read_reg(uart, UART_MSR) & 0xF0;
+-    return (status == 0x90);
++    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | UART_MCR_RTS | UART_MCR_OUT2);
++    status = ns_read_reg(uart, UART_MSR) & UART_MSR_STATUS;
++    return (status == (UART_MSR_CTS | UART_MSR_DCD));
  }
  
-@@ -109,8 +114,16 @@ static int ns16x50_io_write8(
- static int ns16x50_io_write16(
-     struct vuart_ns16x50 *vdev, uint32_t reg, uint16_t *data)
- {
-+    uint16_t val = *data;
-     int rc = -EINVAL;
+ #ifdef CONFIG_HAS_PCI
+diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
+index d13352940c13..bbbffb14d320 100644
+--- a/xen/include/xen/8250-uart.h
++++ b/xen/include/xen/8250-uart.h
+@@ -32,6 +32,7 @@
+ #define UART_MCR          0x04    /* Modem control        */
+ #define UART_LSR          0x05    /* line status          */
+ #define UART_MSR          0x06    /* Modem status         */
++#define UART_SCR          0x07    /* Scratch pad          */
+ #define UART_USR          0x1f    /* Status register (DW) */
+ #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=1) */
+ #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=1) */
+@@ -42,6 +43,8 @@
+ #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
+ #define UART_IER_ELSI     0x04    /* rx line status       */
+ #define UART_IER_EMSI     0x08    /* MODEM status         */
++#define UART_IER_MASK \
++    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
  
-+    if ( ns16x50_dlab_get(vdev) && reg == UART_DLL )
-+    {
-+        vdev->regs[NS16X50_REGS_NUM + UART_DLL] = val & 0xff;
-+        vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (val >> 8) & 0xff;
-+        rc = 0;
-+    }
+ /* Interrupt Identification Register */
+ #define UART_IIR_NOINT    0x01    /* no interrupt pending */
+@@ -51,12 +54,19 @@
+ #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
+ #define UART_IIR_MSI      0x00    /*  - MODEM status      */
+ #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
++#define UART_IIR_FE       0xc0    /* FIFO enabled (2 bits) */
+ 
+ /* FIFO Control Register */
+-#define UART_FCR_ENABLE   0x01    /* enable FIFO          */
+-#define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
+-#define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
+-#define UART_FCR_DMA      0x10    /* enter DMA mode       */
++#define UART_FCR_ENABLE     BIT(0, U)   /* enable FIFO          */
++#define UART_FCR_CLRX       BIT(1, U)   /* clear Rx FIFO        */
++#define UART_FCR_CLTX       BIT(2, U)   /* clear Tx FIFO        */
++#define UART_FCR_DMA        BIT(3, U)   /* enter DMA mode       */
++#define UART_FCR_RESERVED0  BIT(4, U)   /* reserved; always 0   */
++#define UART_FCR_RESERVED1  BIT(5, U)   /* reserved; always 0   */
++#define UART_FCR_RTB0       BIT(6, U)   /* receiver trigger bit #0 */
++#define UART_FCR_RTB1       BIT(7, U)   /* receiver trigger bit #1 */
++#define UART_FCR_TRG_MASK   (UART_FCR_RTB0 | UART_FCR_RTB1)
 +
-     return rc;
- }
+ #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
+ #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
+ #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
+@@ -96,11 +106,32 @@
+ #define UART_LCR_CONF_MODE_B	0xBF		/* Configuration mode B */
  
-@@ -146,9 +159,13 @@ static int ns16x50_io_write(
- static int ns16x50_io_read8(
-     struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
- {
-+    uint8_t *regs = vdev->regs;
-     uint8_t val = 0xff;
-     int rc = 0;
- 
-+    if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
-+        val = regs[NS16X50_REGS_NUM + reg];
+ /* Modem Control Register */
+-#define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
+-#define UART_MCR_RTS      0x02    /* Request to Send      */
+-#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
+-#define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
+-#define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=1) */
++#define UART_MCR_DTR            BIT(0, U)   /* Data Terminal Ready  */
++#define UART_MCR_RTS            BIT(1, U)   /* Request to Send      */
++#define UART_MCR_OUT1           BIT(2, U)   /* Output #1 */
++#define UART_MCR_OUT2           BIT(3, U)   /* Output #2 */
++#define UART_MCR_LOOP           BIT(4, U)   /* Enable loopback test mode */
++#define UART_MCR_RESERVED0      BIT(5, U)   /* Reserved #0 */
++#define UART_MCR_TCRTLR         BIT(6, U)   /* Access TCR/TLR (TI16C752, EFR[4]=1) */
++#define UART_MCR_RESERVED1      BIT(7, U)   /* Reserved #1 */
++#define UART_MCR_MASK \
++    (UART_MCR_DTR | UART_MCR_RTS | \
++     UART_MCR_OUT1 | UART_MCR_OUT2 | \
++     UART_MCR_LOOP | UART_MCR_TCRTLR)
 +
-     *data = val;
++/* Modem Status Register */
++#define UART_MSR_DCTS           BIT(0, U)   /* Change in CTS */
++#define UART_MSR_DDSR           BIT(1, U)   /* Change in DSR */
++#define UART_MSR_TERI           BIT(2, U)   /* Change in RI */
++#define UART_MSR_DDCD           BIT(3, U)   /* Change in DCD */
++#define UART_MSR_CTS            BIT(4, U)
++#define UART_MSR_DSR            BIT(5, U)
++#define UART_MSR_RI             BIT(6, U)
++#define UART_MSR_DCD            BIT(7, U)
++#define UART_MSR_CHANGE \
++    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
++#define UART_MSR_STATUS \
++    (UART_MSR_CTS | UART_MSR_DSR | UART_MSR_RI | UART_MSR_DCD)
  
-     return rc;
-@@ -163,6 +180,13 @@ static int ns16x50_io_read16(
-     uint16_t val = 0xffff;
-     int rc = -EINVAL;
+ /* Line Status Register */
+ #define UART_LSR_DR       0x01    /* Data ready           */
+@@ -111,6 +142,7 @@
+ #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
+ #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
+ #define UART_LSR_ERR      0x80    /* Error                */
++#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
  
-+    if ( ns16x50_dlab_get(vdev) && reg == UART_DLL )
-+    {
-+        val = vdev->regs[NS16X50_REGS_NUM + UART_DLM] << 8 |
-+              vdev->regs[NS16X50_REGS_NUM + UART_DLL];
-+        rc = 0;
-+    }
-+
-     *data = val;
- 
-     return rc;
-@@ -280,12 +304,17 @@ out:
- 
- static int ns16x50_init(void *arg)
- {
-+    const uint16_t divisor = (UART_CLOCK_HZ / 115200) >> 4;
-     struct vuart_ns16x50 *vdev = arg;
-     const struct vuart_info *info = vdev->info;
-     struct domain *d = vdev->owner;
- 
-     ASSERT(vdev);
- 
-+    /* NB: report 115200 baud rate. */
-+    vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & 0xff;
-+    vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (divisor >> 8) & 0xff;
-+
-     register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
- 
-     return 0;
+ /* These parity settings can be ORed directly into the LCR. */
+ #define UART_PARITY_NONE  (0<<3)
 -- 
 2.51.0
 
