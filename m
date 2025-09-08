@@ -4,33 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB0E8CAC581
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 09:36:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1114953.1461740 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A471DCA1013
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 09:36:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1114960.1461751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvYI7-0007hM-Fs; Mon, 08 Sep 2025 09:36:03 +0000
+	id 1uvYIF-00086C-N2; Mon, 08 Sep 2025 09:36:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1114953.1461740; Mon, 08 Sep 2025 09:36:03 +0000
+Received: by outflank-mailman (output) from mailman id 1114960.1461751; Mon, 08 Sep 2025 09:36:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvYI7-0007hD-DQ; Mon, 08 Sep 2025 09:36:03 +0000
-Received: by outflank-mailman (input) for mailman id 1114953;
- Mon, 08 Sep 2025 09:36:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uvYIF-000863-K9; Mon, 08 Sep 2025 09:36:11 +0000
+Received: by outflank-mailman (input) for mailman id 1114960;
+ Mon, 08 Sep 2025 09:36:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zbUz=3T=cloud.com=gerald.elder-vass@srs-se1.protection.inumbo.net>)
- id 1uvYI5-0007dH-OP
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 09:36:01 +0000
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [2607:f8b0:4864:20::b31])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38669b95-8c97-11f0-9809-7dc792cee155;
- Mon, 08 Sep 2025 11:35:56 +0200 (CEST)
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e9d5e41c670so3911386276.0
- for <xen-devel@lists.xenproject.org>; Mon, 08 Sep 2025 02:35:56 -0700 (PDT)
+ <SRS0=5BVI=3T=arm.com=YeoReum.Yun@srs-se1.protection.inumbo.net>)
+ id 1uvYDo-0005Ke-Is
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 09:31:36 +0000
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [2a01:111:f403:c201::6])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9d130a47-8c96-11f0-9d13-b5c5bf9af7f9;
+ Mon, 08 Sep 2025 11:31:35 +0200 (CEST)
+Received: from AS4P189CA0038.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5dd::10)
+ by GVXPR08MB11319.eurprd08.prod.outlook.com (2603:10a6:150:2c0::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.19; Mon, 8 Sep
+ 2025 09:31:30 +0000
+Received: from AM2PEPF0001C70A.eurprd05.prod.outlook.com
+ (2603:10a6:20b:5dd:cafe::6b) by AS4P189CA0038.outlook.office365.com
+ (2603:10a6:20b:5dd::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.22 via Frontend Transport; Mon,
+ 8 Sep 2025 09:31:29 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AM2PEPF0001C70A.mail.protection.outlook.com (10.167.16.198) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.13
+ via Frontend Transport; Mon, 8 Sep 2025 09:31:28 +0000
+Received: from GV1PR08MB10521.eurprd08.prod.outlook.com
+ (2603:10a6:150:163::20) by DB5PR08MB10163.eurprd08.prod.outlook.com
+ (2603:10a6:10:4a2::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.19; Mon, 8 Sep
+ 2025 09:30:46 +0000
+Received: from GV1PR08MB10521.eurprd08.prod.outlook.com
+ ([fe80::d430:4ef9:b30b:c739]) by GV1PR08MB10521.eurprd08.prod.outlook.com
+ ([fe80::d430:4ef9:b30b:c739%7]) with mapi id 15.20.9094.018; Mon, 8 Sep 2025
+ 09:30:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,250 +63,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38669b95-8c97-11f0-9809-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1757324156; x=1757928956; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=VmNQj5CvzMm3+mVyvgID5aOJAeNFb9zTblKtJiTor2I=;
-        b=TL/HRPCeqDoz1b2MdPMpufnUbAIv3Ttqn0LtlNJoiatk7gNRIqaos6hA8C5QG5nyox
-         qZv6A3lC/ipDOjgFRJkGVFLfM1GSqOOdqp9/fYiT07P9kf1u43YTQ8RfCWIyXq3UBfYg
-         d1R89Jh0ACaYi+GoeliPz23ImtxhmZfpwHguk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757324156; x=1757928956;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VmNQj5CvzMm3+mVyvgID5aOJAeNFb9zTblKtJiTor2I=;
-        b=Q8UbIjVPELZcbXGh2CLMT/u+HvK2aNzlFnfwHWLlm5zKkTu4P8tFXUcgXQ+KU7yIXU
-         L7SsBBYd4Pj0OrY7uUBJMWIzmg46HV3/m08oNwvYlC5dtluNfEmMETTCg0kcjHeupOfN
-         xBXZVuU9hQ/BeaaUQr2jE2zkZSRNbJ1sGYcQYZdLnRUKlo4gSgObXZlyIebKtMNqaWHh
-         0WBGym9kdVDV8AVFgFVF6Hcy2I4mKpe9LNrYeOYgiPQynfjM8v/pNeQ9BA/bdE08R5hz
-         lxW4lj20Sq+aBUPgZH/BfVF15Ny2vAOQAwQ0rL4QW2vYFk8dq5OT/Hm5JA60uz027ZGr
-         SL+Q==
-X-Forwarded-Encrypted: i=1; AJvYcCX9Arbwu60m0S3v5KTIflrCZVf5v60EaZoghynZPaBiArPVw/8ImDx2J0BPBTHRTyaMJ/C2ELjICzI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwLS1n92nG2xsX3oODFSu2Ke+oNA/znMvUYGE2FRdqeAtfkm5Bc
-	OupgQm16jK0bjqOnGOmxaViEZ0PstRHN/2gT1X2i4wHGNCcNCcv72dZYNUdZtzmsoKXrRRFcBho
-	RynrkwvI4oM/Z4faG/aEzk6E8VSz3Gm8h/AsyYeXMvA==
-X-Gm-Gg: ASbGncumZ8MWCC7kI+qk/PQTcmCymSiW4vmhPcX4RCrk/SLIZ7Vf52jhJ1QKj5nIxEo
-	yH/dLgMgZ6G1zabiwLrfwchtR8S2kvR27xdbv7sOB/BBRqo/SbIlHg6xMoQQUsiIkr5NcOkEReG
-	LoTdAOZHX0cjpKHa1cyCZJ9qqZqN6Be0WkSBNlz2WldDNKEX7dajZvLZhXTg0T1u8UAf4Tsd5JG
-	sXZc2xR9NoY+zR6b98x07bCnMRIlPOoS9XBvLLq
-X-Google-Smtp-Source: AGHT+IElmatWT17jYWsW+gUSp/ZDRToxQ2dIgLj9ktdeVpGM1UhetYGY2AJ4XLEcUtbelrsOzoa+UhGMz7Rt+Fqp+ko=
-X-Received: by 2002:a05:6902:2304:b0:e97:b32:fa5c with SMTP id
- 3f1490d57ef6-e9f685ad47bmr6332215276.49.1757324155607; Mon, 08 Sep 2025
- 02:35:55 -0700 (PDT)
+X-Inumbo-ID: 9d130a47-8c96-11f0-9d13-b5c5bf9af7f9
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=UvOwiHbBnOmW354gh9MfuzVl9m+dVZNamvM/jJBSe9xwP17V4DLACbCQQMl/G9AHUBMD4oOAqxApOciJNIyxmpRj790aMCbxAHS7NtvgXm5Hgc6hXf7TSH+a+C8AYpq4ToYul8bXHby53dytu0Ke83ZxAIAzHxOdoIa5wOajJTnEEEThgqU90kq7tumL+kdK5Y4kAxPS6HRvTVJYXLlymVUodqG62f74iMLbuO1FVxudeRZLmnJZieP9Vu8Ru4vNpZdFcA+9ur/0yC1L8FG/bAfXOPu2NIwz0p2wStFC0FmmSHBzbTpmulX1C4RLrERMFJylYemT70wFu6PiIQpo8Q==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9ca+HaUjALnyCJht2ic4lnms/jl5V6Hbxrc4FeHuxbs=;
+ b=Bz48cn1uFO6w4D//XSm27KqDG1xYH0uv4qRhmH9jYyCtlQHmPfHMsEumWory/Xeia5JuWRA+hCKCfJai32JI3pOCMJ7Yl98O/rCxBeMHnmXBcO+6WjS4krbmcOXdRnAskTwdJITXIAAih7O286fWSjYxjR0pBr0ATDiN7CPs/JSXaJCb+vUc6OxRJ3+5/VK9HHieKtEILcwUCEgL8LOUhpxjfP7mqEmesB3V5nKrqS8pnSKYmYCUkeb13JJ2OEpp0V0qYP3c4m7WJ/+zuZ9Oc/UEZz8YnNAQDPO8VTLttD5Ck04ymkm8zghzjj5nxlM/dsaDywc8ex/qOVWTFulzeQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=kvack.org smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9ca+HaUjALnyCJht2ic4lnms/jl5V6Hbxrc4FeHuxbs=;
+ b=i2y6ickjg+BBy46UgPnTXqLouzMa5P0nREgbgRVdgxF3m6V0l9nWs2HisbdG2Qx497sMUm1qL6MIGuczu9g1hWaIGroCs9VsGcWmjPhPQh3SiW/knxTlMOnzcWrajXrGJFdstQoviKZnjrgXOyASLacyaxp5U0mnhYP9MIj7Yr8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GzcY3S/NwHk8YU5gaMzhhD43VmzVbu70esFVbh4NJIWCf6AAeQODSri1HTzaDoXIGK4E6BVCjH6jKTFquvzLkqDSgnBWBM7pUbsbEw0ZK7VVhl4Etv2/xBKkZjpyQwmt/ZFcqFH3942Yo4DTkt36cCLWuw1UMLxN+sDJPW3lPJbdtCMu/WT9ty3mzLl2RcNVZ4qx0x1JC2N/kpI6e3p/VV6qVctkSCuyQPV8wbUO3NOeErgGAOwvjU/N1cIsiRwHzWfDl+Dpi4Z+N7O5B9vGg5YxzZZWWNw5AS5umljUdCXr2ytoKyY67GVUv0CunOxgOCIwSsRYZZMZo1Yrscsr7g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9ca+HaUjALnyCJht2ic4lnms/jl5V6Hbxrc4FeHuxbs=;
+ b=w3/A5pq11Dv4TfL+I1HTtYpi6gfV4BAbolYwPzZ82nQqrJ46Hci4tKNw+9sDqjvI1A8RCIFl5s4rfQnxKQ1hVc60+6UCvqLoVYk0Oc6Qkpp1qQLBBVlwTCDjMP2c85hQ/FE+rkloofVCSaonDUVCLZT9iWQ8sKJKTS7DK9QZ0TF1ekk748/rvbz17kXESVtFklxtTbYZc1l8gupbQl0qwCF9266ClFBZIzl2uow2AZsDyiAgsypmJHJ6tt0Ji5uKJ6VX/SfBCdEG+/cWNSjcEZebTyYp+PXCIK22WB79ZtIsFfToSahGcygIOn32pP7DvinmVzqqbBLcVo9vOM/1hQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9ca+HaUjALnyCJht2ic4lnms/jl5V6Hbxrc4FeHuxbs=;
+ b=i2y6ickjg+BBy46UgPnTXqLouzMa5P0nREgbgRVdgxF3m6V0l9nWs2HisbdG2Qx497sMUm1qL6MIGuczu9g1hWaIGroCs9VsGcWmjPhPQh3SiW/knxTlMOnzcWrajXrGJFdstQoviKZnjrgXOyASLacyaxp5U0mnhYP9MIj7Yr8=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Date: Mon, 8 Sep 2025 10:30:42 +0100
+From: Yeoreum Yun <yeoreum.yun@arm.com>
+To: Kevin Brodsky <kevin.brodsky@arm.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Andreas Larsson <andreas@gaisler.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	"H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+	Jann Horn <jannh@google.com>, Juergen Gross <jgross@suse.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Michal Hocko <mhocko@suse.com>, Mike Rapoport <rppt@kernel.org>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Vlastimil Babka <vbabka@suse.cz>, Will Deacon <will@kernel.org>,
+	linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
+	sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2 7/7] mm: update lazy_mmu documentation
+Message-ID: <aL6iQh9HSzSNweta@e129823.arm.com>
+References: <20250908073931.4159362-1-kevin.brodsky@arm.com>
+ <20250908073931.4159362-8-kevin.brodsky@arm.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250908073931.4159362-8-kevin.brodsky@arm.com>
+X-ClientProxiedBy: LO0P123CA0001.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:354::10) To GV1PR08MB10521.eurprd08.prod.outlook.com
+ (2603:10a6:150:163::20)
 MIME-Version: 1.0
-References: <cover.1757071716.git.gerald.elder-vass@cloud.com>
- <8d66f9ce2c9c352794c0c144f6e00d0a9d465dbe.1757071716.git.gerald.elder-vass@cloud.com>
- <ed2e2406-bfab-4111-a9d0-025c85b51bdb@suse.com>
-In-Reply-To: <ed2e2406-bfab-4111-a9d0-025c85b51bdb@suse.com>
-From: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
-Date: Mon, 8 Sep 2025 10:35:44 +0100
-X-Gm-Features: AS18NWDOw7R2YJ1ONaLccNozwnaHV0Wy5EqpPDFZJL9g1LnuJ7Z2Srq8_BrT58Y
-Message-ID: <CAOJ+D-UkSveZ4LdYK5GA3VucxxSbQgBv5m9jfZ0H_MyuHP-UZQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] efi: Add a function to check if Secure Boot mode
- is enabled
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: multipart/alternative; boundary="0000000000000cfec2063e46ea56"
+X-MS-TrafficTypeDiagnostic:
+	GV1PR08MB10521:EE_|DB5PR08MB10163:EE_|AM2PEPF0001C70A:EE_|GVXPR08MB11319:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7fb38d49-76cb-44c8-0ea8-08ddeeba7cf2
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?us-ascii?Q?mc/DZxczjZ5Tw2y2bRBKf0jJHfY+1cMA183gNizjtcemH+ZB6krdHoCtKs9R?=
+ =?us-ascii?Q?rEJZs/LC5FySiZNsw3OEze6JaYBGi0ZCo5Y1i+wUqAxrxi/xLg0+b2PW0Gan?=
+ =?us-ascii?Q?Hu/+9PDxEcA77rBe/Yh7D/Az17HYKu40TcOSRu1P+US5HSyCfQoOvi5ELPRq?=
+ =?us-ascii?Q?5eZeUGNgNMkn/ZFX0b/UZiwiOJxyeBoHNR6n2mjRMx2Flr5aZ7V2fn6EwsXg?=
+ =?us-ascii?Q?dvOpVtROyIAbWwS5fLKl1j0EOvJEjrK4auYck66gcxAPyT5Y6tPl2g66UJsj?=
+ =?us-ascii?Q?Z2fJYGN1+lbSrhHwQTY6EVbjuaZxGTzNc5n0nUsAPp13uW/w/JgGL3mI7ifw?=
+ =?us-ascii?Q?7OMQ2ua7VlYXlN2MyEqT0h96Lju0H5zfEX3qa/RAkU11sek6lCiemA0VuNPl?=
+ =?us-ascii?Q?NuDR6Yln525bAPXGEeMySiMCrnAzqOy3MQtW+cLPZl1uUlFXm79ls38/EVxf?=
+ =?us-ascii?Q?+8985IkQv4MwD0DNH/810b63nObzJTpG8mCsfoM7NoI3Y2xEHjXJ4UWCyFmw?=
+ =?us-ascii?Q?n3Lf5n0u97GnsoY1ZWsQRT3A3kwfX2UiQ/JxjDsL1/HV/1GCd2D5fTwJyxje?=
+ =?us-ascii?Q?r+UdHO34piBXqaDHtUrD9WJ9X2Te1LpCZWRrkLmirVg7TF8SD1C586L2faBE?=
+ =?us-ascii?Q?s8MYWY+q/+wAtCm5r/LR1G2subFbmR6YBERC3NkG1AjC4EtkqHCrWbIpDFqK?=
+ =?us-ascii?Q?Yp0kv4+CbLK1qrcmI3TrXsoYf60aI1eWziINMLyV7aaGzJr9dH01VqqvJgHd?=
+ =?us-ascii?Q?GI2fBNpbd3z2ox8ki8ZB56AJrbs480Lve32YosjzL4HGtswerOjeenSABtOf?=
+ =?us-ascii?Q?WBl6unX6bePwxK4Nyf2zDhwq9ofO8k/pOPab68TPd4FgEO/lA6+8pOxcVcC6?=
+ =?us-ascii?Q?nH78oMLuowaLLtIXM+IoPLqRl9peIcogbwjmYUxCHmBLrDJrrT6+8dFwEMs7?=
+ =?us-ascii?Q?xOIvat6w/nNGERI4HOUjfhc6im/VEYmpMAJhKkh/ltgnbQqGCdZouyTFOQgW?=
+ =?us-ascii?Q?s3J0cA4fqHVrIS4SJwPevCqg+iuYqMUSSxHA1qQrePuEPuAeodE9uX10tZnR?=
+ =?us-ascii?Q?9WvNrlYf0fiIoON6+9hJWzDaa8EDhDE4ZdPuLXWD2vQIzaFklWrjyTrYLNtu?=
+ =?us-ascii?Q?TT78A/By49svFpkhHxJZO/7jMSkcKgxCRaA/luU/uYr9a801PnD0E257pvHS?=
+ =?us-ascii?Q?DJ4KK6Qd+NcRDVeM2oEMdCKngB4DYGjsVxdAuxAcPcve6w2BsoAs6WQ3Tky0?=
+ =?us-ascii?Q?2Bn/tBJteswJYy5tOUPIdsP4xbVCbB8AXSlXf8NxSvSIWcC+D34DnphRjFUR?=
+ =?us-ascii?Q?cg0P1/M//myZDtL3vDQhP85m5gCoFPifWkrCBHVxIWGN4HvWiGzEZFG0bu2L?=
+ =?us-ascii?Q?Q6Ik/xyCfc/tylrShjryeRisEg3lMfj0ExlOKia3+jqeDHXqWlB++yhQWpcM?=
+ =?us-ascii?Q?6WSLbvrg5cM=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR08MB10521.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR08MB10163
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM2PEPF0001C70A.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	6d139c24-8f97-4caf-4e9c-08ddeeba63f9
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|1800799024|14060799003|82310400026|35042699022|376014|7416014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?neAHsbAqzGVc+6f1QfzwFSYXmgTFhynXySmqSOUOfWAEVwIUmXC0nNW3/pph?=
+ =?us-ascii?Q?g2QffH8PQ6rsZauFr72jEs7DSijJGKF86Ppxg4pZZPFNI7WKH9+X+rnoZ9KX?=
+ =?us-ascii?Q?yjsN08UDNuDMGSIF66rUFI5Ik89737JO/y88Ou6FFToRL3XoBFIt0yWtoLx8?=
+ =?us-ascii?Q?8Zp4SVzaYhBismrLCQEP1ckRaZ1xWnKejd4z/r6CmV+KnWU7yRvLcvxHOhaF?=
+ =?us-ascii?Q?mD1265XStw5+KXZ3FcAFWqeLY6OdOnHw9XK8jL+kI3zGWWZFHUW13WSfBtPc?=
+ =?us-ascii?Q?HZyhkxLeNtMFstzOatYrXjuSb7mYOjcMDpVKOo4TkaBjc61jv+85C3oGlyny?=
+ =?us-ascii?Q?uLQSxFSUeWxQY2Z6CoA5FhvACIGH6XYh9QPLQ7tLm4xTIoEpFRRn7TxE8J8S?=
+ =?us-ascii?Q?Zga0w5tdla8rXWTuPwLj/+oL68N9sSohs1AVSgBpGl6shyIYKeYMczcWWjpf?=
+ =?us-ascii?Q?gFdb1oXHkzy349XLyb7/P4Zl34QpR8GE94DII5E498Kk2xgKuUlBIYa9/DUN?=
+ =?us-ascii?Q?F/gBuwiOiZQyfOQqvVWrh4SZ4HeXVFwT97ZKIubI6H5NKVJ0nzbeadpTftf2?=
+ =?us-ascii?Q?JLAMwPbSCR01iwbw6w6ubmBqv6AHMNkaXGqjOUqo1p7W/gb4AOUrBEyxxwxM?=
+ =?us-ascii?Q?D+31RaFA+HeXm+wB9qFMpL9XEgGSseA6d7sBz4sfRKA/43JygfXGLZ65IGNB?=
+ =?us-ascii?Q?qj84vNOIX1ZxAj0y1go4tX7tR47/Uj5zXfDMePdSt6wUEkoWmiLFHh2zwpPx?=
+ =?us-ascii?Q?S8iHAHC9cLk8BMu4BzsnP7orbYQJcI7RQhMYS9ZwSjU5oyuyraFX2ps3aIKd?=
+ =?us-ascii?Q?gYwCkZdpzUizRXxbGnR/q2hCGiASYVhSNrdLK5/ohfM9LWEsi/MscoD6VeZ7?=
+ =?us-ascii?Q?v+2zYRPhEz/ZFfw8VwPr9Gyy0rJUef09se3IFnjfKDAFPbhDQRUoOjv6SAC5?=
+ =?us-ascii?Q?5QvL0mdbE61uTsEy2UzP4NpF7DLMRQWZFguYU3PBphjIwhHPECfM9efzm53s?=
+ =?us-ascii?Q?v+2SC5xbeq8nj6umOGZ2CcFn/qQEjPiOkk6mF3vC6eXT9rHE36HrQsgCF/gI?=
+ =?us-ascii?Q?SNNQCcq9DUOO8ZDf19nBL4U6h3pCDWXOyt+vu43Op1tI1LBkx2+qsB4CoHa0?=
+ =?us-ascii?Q?Wbww+E6aPS3ljau0xTW00ez6I1nsUoHud1Z27o1MZHUGcq/stZzS8liDgX6t?=
+ =?us-ascii?Q?1nA9Xyj86K0/lkmsGLhYGKHpgvs3qCHgZms//M2XcYbrsWiZJEp4abVyCi3z?=
+ =?us-ascii?Q?u+snfaYEaOGuU/cBW2aJc/NXRkP0Sb1QXbZnLCaX3yXTP9Gv7POCgyFyVyqj?=
+ =?us-ascii?Q?9N2I7vpHRQ6i1JNK+KioENRtKhudHbDARCZvVmdi47TKZobIuENzAj37wWpy?=
+ =?us-ascii?Q?FDx7Y/ZLmBNGCUlZx/C04X6Pu1xxFiy4m6PMAoP2tYkmOwFmEAAg4lIBV3M3?=
+ =?us-ascii?Q?H5Z7XSt8amoqOPD3uLm+p3dCjjJbP2SKk5HVoDzomHKO1WsZ7ybBrotmNVUJ?=
+ =?us-ascii?Q?KBv3UuvOgymoWvm+Uy0OdW1Hr77qDqT07sbO?=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(14060799003)(82310400026)(35042699022)(376014)(7416014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2025 09:31:28.3034
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7fb38d49-76cb-44c8-0ea8-08ddeeba7cf2
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM2PEPF0001C70A.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB11319
 
---0000000000000cfec2063e46ea56
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Yeoreum Yun <yeoreum.yun@arm.com>
 
->> +          size =3D=3D 1 && data =3D=3D 0) )
+On Mon, Sep 08, 2025 at 08:39:31AM +0100, Kevin Brodsky wrote:
+> We now support nested lazy_mmu sections on all architectures
+> implementing the API. Update the API comment accordingly.
 >
->... any reason it's literal 1 here?
-
-The size variable is also used as output from GetVariable and we should
-verify that the size of the returned data is as expected, it is simply one
-byte so probably not worth defining any macros to make it clearer
-
-
-*Gerald Elder-Vass*
-Senior Software Engineer
-
-XenServer
-Cambridge, UK
-
-On Mon, Sep 8, 2025 at 9:49=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wrot=
-e:
-
-> On 05.09.2025 14:10, Gerald Elder-Vass wrote:
-> > From: Ross Lagerwall <ross.lagerwall@citrix.com>
-> >
-> > Also cache it to avoid needing to repeatedly ask the firmware.
-> >
-> > Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-> > Signed-off-by: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
-> > ---
-> > CC: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-> > CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-> > CC: Jan Beulich <jbeulich@suse.com>
-> > CC: Andrew Cooper <andrew.cooper3@citrix.com>
-> > CC: Anthony PERARD <anthony.perard@vates.tech>
-> > CC: Michal Orzel <michal.orzel@amd.com>
-> > CC: Julien Grall <julien@xen.org>
-> > CC: "Roger Pau Monn=C3=A9" <roger.pau@citrix.com>
-> > CC: Stefano Stabellini <sstabellini@kernel.org>
-> >
-> > v4:
-> > - Fix MISRA warning regarding SecureBoot string
-> > v3:
-> > - Fix build on ARM
-> > ---
-> >  xen/common/efi/boot.c    | 24 ++++++++++++++++++++++++
-> >  xen/common/efi/runtime.c |  1 +
-> >  xen/include/xen/efi.h    |  2 ++
-> >  3 files changed, 27 insertions(+)
-> >
-> > diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-> > index e12fa1a7ec04..ccbfc401f7ba 100644
-> > --- a/xen/common/efi/boot.c
-> > +++ b/xen/common/efi/boot.c
-> > @@ -901,6 +901,28 @@ static void __init pre_parse(const struct file
-> *file)
-> >                     " last line will be ignored.\r\n");
-> >  }
-> >
-> > +static void __init init_secure_boot_mode(void)
-> > +{
-> > +    static EFI_GUID __initdata gv_uuid =3D EFI_GLOBAL_VARIABLE;
-> > +    static CHAR16 __initdata str_SecureBoot[] =3D L"SecureBoot";
-> > +    EFI_STATUS status;
-> > +    uint8_t data =3D 0;
-> > +    UINTN size =3D sizeof(data);
+> Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+> Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
+> ---
+>  include/linux/pgtable.h | 14 ++++++++++++--
+>  1 file changed, 12 insertions(+), 2 deletions(-)
 >
-> Unlike here, ...
+> diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+> index df0eb898b3fc..85cd1fdb914f 100644
+> --- a/include/linux/pgtable.h
+> +++ b/include/linux/pgtable.h
+> @@ -228,8 +228,18 @@ static inline int pmd_dirty(pmd_t pmd)
+>   * of the lazy mode. So the implementation must assume preemption may be enabled
+>   * and cpu migration is possible; it must take steps to be robust against this.
+>   * (In practice, for user PTE updates, the appropriate page table lock(s) are
+> - * held, but for kernel PTE updates, no lock is held). Nesting is not permitted
+> - * and the mode cannot be used in interrupt context.
+> + * held, but for kernel PTE updates, no lock is held). The mode cannot be used
+> + * in interrupt context.
+> + *
+> + * Calls may be nested: an arch_{enter,leave}_lazy_mmu_mode() pair may be called
+> + * while the lazy MMU mode has already been enabled. An implementation should
+> + * handle this using the state returned by enter() and taken by the matching
+> + * leave() call; the LAZY_MMU_{DEFAULT,NESTED} flags can be used to indicate
+> + * whether this enter/leave pair is nested inside another or not. (It is up to
+> + * the implementation to track whether the lazy MMU mode is enabled at any point
+> + * in time.) The expectation is that leave() will flush any batched state
+> + * unconditionally, but only leave the lazy MMU mode if the passed state is not
+> + * LAZY_MMU_NESTED.
+>   */
+>  #ifndef __HAVE_ARCH_ENTER_LAZY_MMU_MODE
+>  typedef int lazy_mmu_state_t;
+> --
+> 2.47.0
 >
-> > +    UINT32 attr =3D 0;
-> > +
-> > +    status =3D efi_rs->GetVariable(str_SecureBoot, &gv_uuid, &attr,
-> &size, &data);
-> > +
-> > +    if ( status =3D=3D EFI_NOT_FOUND ||
-> > +         (status =3D=3D EFI_SUCCESS &&
-> > +          attr =3D=3D (EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> EFI_VARIABLE_RUNTIME_ACCESS) &&
->
-> (Nit: Overlong line.)
->
-> > +          size =3D=3D 1 && data =3D=3D 0) )
->
-> ... any reason it's literal 1 here?
->
-> Jan
 >
 
---0000000000000cfec2063e46ea56
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span class=3D"gmail-im">&gt;&gt; +=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 size =3D=3D 1 &amp;&amp; data =3D=3D 0) )<br>&gt;<br></sp=
-an>&gt;... any reason it&#39;s literal 1 here?<font color=3D"#888888" style=
-=3D"--darkreader-inline-color: var(--darkreader-text-888888, #9d9488);"><br=
-></font></div><div><br></div><div>The size variable is also used as output =
-from GetVariable and we should verify that the size of the returned data is=
- as expected, it is simply one byte so probably not worth defining any macr=
-os to make it clearer</div><div><br></div><div><div dir=3D"ltr" class=3D"gm=
-ail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div><b>=
-<br></b></div><div><b>Gerald Elder-Vass</b></div><div>Senior Software Engin=
-eer</div><div><br></div><div>XenServer</div><div>Cambridge, UK</div></div><=
-/div></div></div><br><div class=3D"gmail_quote gmail_quote_container"><div =
-dir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 8, 2025 at 9:49=E2=80=AFAM Jan=
- Beulich &lt;<a href=3D"mailto:jbeulich@suse.com">jbeulich@suse.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 05.09=
-.2025 14:10, Gerald Elder-Vass wrote:<br>
-&gt; From: Ross Lagerwall &lt;<a href=3D"mailto:ross.lagerwall@citrix.com" =
-target=3D"_blank">ross.lagerwall@citrix.com</a>&gt;<br>
-&gt; <br>
-&gt; Also cache it to avoid needing to repeatedly ask the firmware.<br>
-&gt; <br>
-&gt; Signed-off-by: Ross Lagerwall &lt;<a href=3D"mailto:ross.lagerwall@cit=
-rix.com" target=3D"_blank">ross.lagerwall@citrix.com</a>&gt;<br>
-&gt; Signed-off-by: Gerald Elder-Vass &lt;<a href=3D"mailto:gerald.elder-va=
-ss@cloud.com" target=3D"_blank">gerald.elder-vass@cloud.com</a>&gt;<br>
-&gt; ---<br>
-&gt; CC: Marek Marczykowski-G=C3=B3recki &lt;<a href=3D"mailto:marmarek@inv=
-isiblethingslab.com" target=3D"_blank">marmarek@invisiblethingslab.com</a>&=
-gt;<br>
-&gt; CC: &quot;Daniel P. Smith&quot; &lt;<a href=3D"mailto:dpsmith@apertuss=
-olutions.com" target=3D"_blank">dpsmith@apertussolutions.com</a>&gt;<br>
-&gt; CC: Jan Beulich &lt;<a href=3D"mailto:jbeulich@suse.com" target=3D"_bl=
-ank">jbeulich@suse.com</a>&gt;<br>
-&gt; CC: Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" tar=
-get=3D"_blank">andrew.cooper3@citrix.com</a>&gt;<br>
-&gt; CC: Anthony PERARD &lt;anthony.perard@vates.tech&gt;<br>
-&gt; CC: Michal Orzel &lt;<a href=3D"mailto:michal.orzel@amd.com" target=3D=
-"_blank">michal.orzel@amd.com</a>&gt;<br>
-&gt; CC: Julien Grall &lt;<a href=3D"mailto:julien@xen.org" target=3D"_blan=
-k">julien@xen.org</a>&gt;<br>
-&gt; CC: &quot;Roger Pau Monn=C3=A9&quot; &lt;<a href=3D"mailto:roger.pau@c=
-itrix.com" target=3D"_blank">roger.pau@citrix.com</a>&gt;<br>
-&gt; CC: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" t=
-arget=3D"_blank">sstabellini@kernel.org</a>&gt;<br>
-&gt; <br>
-&gt; v4:<br>
-&gt; - Fix MISRA warning regarding SecureBoot string<br>
-&gt; v3:<br>
-&gt; - Fix build on ARM<br>
-&gt; ---<br>
-&gt;=C2=A0 xen/common/efi/boot.c=C2=A0 =C2=A0 | 24 ++++++++++++++++++++++++=
-<br>
-&gt;=C2=A0 xen/common/efi/runtime.c |=C2=A0 1 +<br>
-&gt;=C2=A0 xen/include/xen/efi.h=C2=A0 =C2=A0 |=C2=A0 2 ++<br>
-&gt;=C2=A0 3 files changed, 27 insertions(+)<br>
-&gt; <br>
-&gt; diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c<br>
-&gt; index e12fa1a7ec04..ccbfc401f7ba 100644<br>
-&gt; --- a/xen/common/efi/boot.c<br>
-&gt; +++ b/xen/common/efi/boot.c<br>
-&gt; @@ -901,6 +901,28 @@ static void __init pre_parse(const struct file *f=
-ile)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0&quot; last line will be ignored.\r\n&quot;);<br>
-&gt;=C2=A0 }<br>
-&gt;=C2=A0 <br>
-&gt; +static void __init init_secure_boot_mode(void)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 static EFI_GUID __initdata gv_uuid =3D EFI_GLOBAL_VARIA=
-BLE;<br>
-&gt; +=C2=A0 =C2=A0 static CHAR16 __initdata str_SecureBoot[] =3D L&quot;Se=
-cureBoot&quot;;<br>
-&gt; +=C2=A0 =C2=A0 EFI_STATUS status;<br>
-&gt; +=C2=A0 =C2=A0 uint8_t data =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 UINTN size =3D sizeof(data);<br>
-<br>
-Unlike here, ...<br>
-<br>
-&gt; +=C2=A0 =C2=A0 UINT32 attr =3D 0;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 status =3D efi_rs-&gt;GetVariable(str_SecureBoot, &amp;=
-gv_uuid, &amp;attr, &amp;size, &amp;data);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if ( status =3D=3D EFI_NOT_FOUND ||<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(status =3D=3D EFI_SUCCESS &amp;&am=
-p;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 attr =3D=3D (EFI_VARIABLE_BOOTSERV=
-ICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS) &amp;&amp;<br>
-<br>
-(Nit: Overlong line.)<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 size =3D=3D 1 &amp;&amp; data =3D=
-=3D 0) )<br>
-<br>
-... any reason it&#39;s literal 1 here?<br>
-<br>
-Jan<br>
-</blockquote></div>
-
---0000000000000cfec2063e46ea56--
+--
+Sincerely,
+Yeoreum Yun
 
