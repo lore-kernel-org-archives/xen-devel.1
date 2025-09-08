@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF96CAC582
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1115539.1462131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 230C2CAC588
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1115554.1462214 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9b-0000Mq-Sq; Mon, 08 Sep 2025 21:11:59 +0000
+	id 1uvj9o-00033Z-Jd; Mon, 08 Sep 2025 21:12:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1115539.1462131; Mon, 08 Sep 2025 21:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 1115554.1462214; Mon, 08 Sep 2025 21:12:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9b-0000Kl-Mq; Mon, 08 Sep 2025 21:11:59 +0000
-Received: by outflank-mailman (input) for mailman id 1115539;
- Mon, 08 Sep 2025 21:11:59 +0000
+	id 1uvj9n-00030o-No; Mon, 08 Sep 2025 21:12:11 +0000
+Received: by outflank-mailman (input) for mailman id 1115554;
+ Mon, 08 Sep 2025 21:12:09 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uvj9a-0000E8-Vi
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:11:58 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9k-0002L2-Ng
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9a-000FTE-26;
- Mon, 08 Sep 2025 21:11:58 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9k-000FVM-1s;
+ Mon, 08 Sep 2025 21:12:08 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9a-000gMH-2K;
- Mon, 08 Sep 2025 21:11:58 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9k-000gNe-27;
+ Mon, 08 Sep 2025 21:12:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=UpqDmrURqhicTlP+xGJnrT1Wd61lJrVuEW9MZuV9LUw=; b=QJ+W5RoOargplJeMWgu+XCccUz
-	wZJBB6qyLmwA6PakBbMOh8500+D+mgMfVMPDgHPZa+OZ+1SGo2fo3OIGrZuQUuI5j7qmTXKN26yCk
-	91RDoRYIJxLN6G66S7CZlRJkXeYy3HRRx+GeUjjYcAXXbOLUFQ8ld2hXjiPr35WrAJP8=;
+	bh=2EIgKUJ6qf0RiPOYjpi3onfm0JU2Yq54wzXSyn3SuHQ=; b=pT7tt06uHlD/3fRZmHZr8/lEaY
+	srf21/NDSqLw48HMOMSwwra/+LUhoZr+aPDqKD/SyDl0W3l+sg8mynD7jKEVCoIyZ78vUyditFcwx
+	YQ3w1tZXpHzrQyZRMfbZjlpUXzb1p3mk4THrznmJuE2+ESWTwoi0giJk08ZrJFDNjZsw=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v7 06/16] emul/ns16x50: implement IER/IIR registers
-Date: Mon,  8 Sep 2025 14:11:39 -0700
-Message-ID: <20250908211149.279143-7-dmukhin@ford.com>
+Subject: [PATCH v7 15/16] xen/domain: allocate d->irq_caps before arch-specific initialization
+Date: Mon,  8 Sep 2025 14:11:48 -0700
+Message-ID: <20250908211149.279143-16-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250908211149.279143-1-dmukhin@ford.com>
 References: <20250908211149.279143-1-dmukhin@ford.com>
@@ -68,208 +68,144 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add interrupt enable register emulation (IER) and interrupt identity reason
-(IIR) register emulation to the I/O port handler.
+Make sure that NS16550 emulator does not share virtual device IRQ with the
+physical one. This is needed for enabling NS16550 emulator for PVH hwdom
+(dom0).
 
-Also add routines for asserting/deasserting the virtual ns16x50 interrupt
-line as a dependent on IIR code. vPIC case is implemented (HVM), vIOAPIC
-case is stubbed out (for follow on PVH).
-
-Poke ns16x50_irq_check() on every I/O register access because the emulator
-does not have clock emulation anyway (e.g. for baud rate emulation).
+To do that, move per-domain interrupt rangeset allocation before arch-specific
+code. Add irqs_setup_access() to setup the initial rangeset.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v6:
-- removed asserts for !has_vpic() paths
+- n/a
 ---
- xen/common/emul/vuart/ns16x50.c | 138 ++++++++++++++++++++++++++++++++
- 1 file changed, 138 insertions(+)
+ xen/arch/x86/dom0_build.c       | 1 -
+ xen/arch/x86/hvm/dom0_build.c   | 7 +++++++
+ xen/arch/x86/include/asm/irq.h  | 2 ++
+ xen/arch/x86/irq.c              | 8 ++++++++
+ xen/arch/x86/pv/dom0_build.c    | 3 +++
+ xen/common/domain.c             | 8 ++++++--
+ xen/common/emul/vuart/ns16x50.c | 9 +++++++++
+ 7 files changed, 35 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index 26202b33345c..9dc87efbf3e8 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -442,7 +442,6 @@ int __init dom0_setup_permissions(struct domain *d)
+ 
+     rc |= iomem_permit_access(d, 0UL,
+                               PFN_DOWN(1UL << domain_max_paddr_bits(d)) - 1);
+-    rc |= irqs_permit_access(d, 1, nr_irqs_gsi - 1);
+ 
+     /* Local APIC. */
+     if ( mp_lapic_addr != 0 )
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index 5551f9044836..245a42dec9aa 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -1348,6 +1348,13 @@ int __init dom0_construct_pvh(const struct boot_domain *bd)
+          */
+         pvh_setup_mmcfg(d);
+ 
++        rc = irqs_setup_access(d);
++        if ( rc )
++        {
++            printk("%pd unable to setup IRQ rangeset: %d\n", d, rc);
++            return rc;
++        }
++
+         /*
+          * Setup permissions early so that calls to add MMIO regions to the
+          * p2m as part of vPCI setup don't fail due to permission checks.
+diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
+index 8c81f66434a8..8bffec3bbfee 100644
+--- a/xen/arch/x86/include/asm/irq.h
++++ b/xen/arch/x86/include/asm/irq.h
+@@ -231,4 +231,6 @@ int allocate_and_map_gsi_pirq(struct domain *d, int index, int *pirq_p);
+ int allocate_and_map_msi_pirq(struct domain *d, int index, int *pirq_p,
+                               int type, struct msi_info *msi);
+ 
++int irqs_setup_access(struct domain *d);
++
+ #endif /* _ASM_HW_IRQ_H */
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 556134f85aa0..079277be719d 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -3046,3 +3046,11 @@ int allocate_and_map_msi_pirq(struct domain *d, int index, int *pirq_p,
+ 
+     return ret;
+ }
++
++int irqs_setup_access(struct domain *d)
++{
++    if ( is_hardware_domain(d) )
++        return irqs_permit_access(d, 1, nr_irqs_gsi - 1);
++
++    return 0;
++}
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 2b8b4d869ee7..1a092b802833 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -1037,6 +1037,9 @@ static int __init dom0_construct(const struct boot_domain *bd)
+     rc = ioports_setup_access(d);
+     BUG_ON(rc != 0);
+ 
++    rc = irqs_setup_access(d);
++    BUG_ON(rc != 0);
++
+     rc = dom0_setup_permissions(d);
+     BUG_ON(rc != 0);
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 775c33928585..edf76b02e1a1 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -952,6 +952,11 @@ struct domain *domain_create(domid_t domid,
+     radix_tree_init(&d->pirq_tree);
+ #endif
+ 
++    err = -ENOMEM;
++    d->irq_caps = rangeset_new(d, "Interrupts", 0);
++    if ( !d->irq_caps )
++        goto fail;
++
+     if ( (err = arch_domain_create(d, config, flags)) != 0 )
+         goto fail;
+     init_status |= INIT_arch;
+@@ -961,8 +966,7 @@ struct domain *domain_create(domid_t domid,
+ 
+     err = -ENOMEM;
+     d->iomem_caps = rangeset_new(d, "I/O Memory", RANGESETF_prettyprint_hex);
+-    d->irq_caps   = rangeset_new(d, "Interrupts", 0);
+-    if ( !d->iomem_caps || !d->irq_caps )
++    if ( !d->iomem_caps )
+         goto fail;
+ 
+     if ( (err = xsm_domain_create(XSM_HOOK, d, config->ssidref)) != 0 )
 diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-index 5643ef4cc01e..664d799ddaee 100644
+index ea34c3ae598a..6bd58ba5540b 100644
 --- a/xen/common/emul/vuart/ns16x50.c
 +++ b/xen/common/emul/vuart/ns16x50.c
-@@ -90,6 +90,124 @@ static uint8_t ns16x50_dlab_get(const struct vuart_ns16x50 *vdev)
-     return 0;
- }
+@@ -797,6 +797,15 @@ static int ns16x50_init(void *arg)
+         return rc;
+     }
  
-+static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
-+{
-+    return false;
-+}
-+
-+static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
-+{
-+    return false;
-+}
-+
-+static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
-+{
-+    return false;
-+}
-+
-+static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *vdev)
-+{
-+    return false;
-+}
-+
-+/*
-+ * Get the interrupt identity reason.
-+ *
-+ * IIR is re-calculated once called, because ns16x50 always reports high
-+ * priority events first.
-+ */
-+static uint8_t ns16x50_iir_get(const struct vuart_ns16x50 *vdev)
-+{
-+    /*
-+     * Interrupt identity reasons by priority.
-+     * NB: high priority are at lower indexes below.
-+     */
-+    static const struct {
-+        bool (*check)(const struct vuart_ns16x50 *vdev);
-+        uint8_t ier;
-+        uint8_t iir;
-+    } iir_by_prio[] = {
-+        [0] = { ns16x50_iir_check_lsi, UART_IER_ELSI,   UART_IIR_LSI },
-+        [1] = { ns16x50_iir_check_rda, UART_IER_ERDAI,  UART_IIR_RDA },
-+        [2] = { ns16x50_iir_check_thr, UART_IER_ETHREI, UART_IIR_THR },
-+        [3] = { ns16x50_iir_check_msi, UART_IER_EMSI,   UART_IIR_MSI },
-+    };
-+    const uint8_t *regs = vdev->regs;
-+    uint8_t iir = 0;
-+    unsigned int i;
-+
-+    /*
-+     * NB: every interaction w/ ns16x50 registers (except DLAB=1) goes
-+     * through that call.
-+     */
-+    ASSERT(spin_is_locked(&vdev->lock));
-+
-+    for ( i = 0; i < ARRAY_SIZE(iir_by_prio); i++ )
++    /* Disallow sharing physical IRQ */
++    rc = irq_deny_access(d, info->irq);
++    if ( rc )
 +    {
-+        if ( (regs[UART_IER] & iir_by_prio[i].ier) &&
-+             iir_by_prio[i].check(vdev) )
-+            break;
-+
++        ns16x50_err(info, "virtual IRQ#%d: conflict w/ physical IRQ: %d\n",
++                    info->irq, rc);
++        return rc;
 +    }
-+    if ( i == ARRAY_SIZE(iir_by_prio) )
-+        iir |= UART_IIR_NOINT;
-+    else
-+        iir |= iir_by_prio[i].iir;
 +
-+    if ( regs[UART_FCR] & UART_FCR_ENABLE )
-+        iir |= UART_IIR_FE;
-+
-+    return iir;
-+}
-+
-+static void ns16x50_irq_assert(const struct vuart_ns16x50 *vdev)
-+{
-+    struct domain *d = vdev->owner;
-+    const struct vuart_info *info = vdev->info;
-+    int vector;
-+
-+    if ( has_vpic(d) )
-+        vector = hvm_isa_irq_assert(d, info->irq, vioapic_get_vector);
-+    else if ( has_vioapic(d) )
-+        /* TODO */
-+    else
-+        ASSERT_UNREACHABLE();
-+
-+    ns16x50_debug(vdev, "IRQ#%d vector %d assert\n", info->irq, vector);
-+}
-+
-+static void ns16x50_irq_deassert(const struct vuart_ns16x50 *vdev)
-+{
-+    struct domain *d = vdev->owner;
-+    const struct vuart_info *info = vdev->info;
-+
-+    if ( has_vpic(d) )
-+        hvm_isa_irq_deassert(d, info->irq);
-+    else if ( has_vioapic(d) )
-+        /* TODO */
-+    else
-+        ASSERT_UNREACHABLE();
-+
-+    ns16x50_debug(vdev, "IRQ#%d deassert\n", info->irq);
-+}
-+
-+/*
-+ * Assert/deassert virtual ns16x50 interrupt line.
-+ */
-+static void ns16x50_irq_check(const struct vuart_ns16x50 *vdev)
-+{
-+    uint8_t iir = ns16x50_iir_get(vdev);
-+    const struct vuart_info *info = vdev->info;
-+
-+    if ( iir & UART_IIR_NOINT )
-+        ns16x50_irq_deassert(vdev);
-+    else
-+        ns16x50_irq_assert(vdev);
-+
-+    ns16x50_debug(vdev, "IRQ#%d IIR 0x%02x %s\n", info->irq, iir,
-+                  (iir & UART_IIR_NOINT) ? "deassert" : "assert");
-+}
-+
- /*
-  * Emulate 8-bit write access to ns16x50 register.
-  */
-@@ -106,6 +224,10 @@ static int ns16x50_io_write8(
-     {
-         switch ( reg )
-         {
-+        case UART_IER:
-+            regs[UART_IER] = val & UART_IER_MASK;
-+            break;
-+
-         /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
-         case UART_SCR:
-             regs[UART_SCR] = val;
-@@ -115,6 +237,8 @@ static int ns16x50_io_write8(
-             rc = -EINVAL;
-             break;
-         }
-+
-+        ns16x50_irq_check(vdev);
-     }
- 
-     return rc;
-@@ -182,6 +306,14 @@ static int ns16x50_io_read8(
-     {
-         switch ( reg )
-         {
-+        case UART_IER:
-+            val = regs[UART_IER];
-+            break;
-+
-+        case UART_IIR: /* RO */
-+            val = ns16x50_iir_get(vdev);
-+            break;
-+
-         case UART_SCR:
-             val = regs[UART_SCR];
-             break;
-@@ -190,6 +322,8 @@ static int ns16x50_io_read8(
-             rc = -EINVAL;
-             break;
-         }
-+
-+        ns16x50_irq_check(vdev);
-     }
- 
-     *data = val;
-@@ -342,6 +476,10 @@ static int ns16x50_init(void *arg)
- 
-     register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
- 
-+    spin_lock(&vdev->lock);
-+    ns16x50_irq_check(vdev);
-+    spin_unlock(&vdev->lock);
-+
-     return 0;
- }
- 
+     /* NB: report 115200 baud rate. */
+     vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & UINT8_MAX;
+     vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (divisor >> 8) & UINT8_MAX;
 -- 
 2.51.0
 
