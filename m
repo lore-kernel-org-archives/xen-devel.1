@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA98CA1016
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB3ECAC586
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1115538.1462124 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1115537.1462115 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9b-0000FT-AL; Mon, 08 Sep 2025 21:11:59 +0000
+	id 1uvj9a-0008QR-3e; Mon, 08 Sep 2025 21:11:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1115538.1462124; Mon, 08 Sep 2025 21:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 1115537.1462115; Mon, 08 Sep 2025 21:11:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9b-0000FG-5Z; Mon, 08 Sep 2025 21:11:59 +0000
-Received: by outflank-mailman (input) for mailman id 1115538;
- Mon, 08 Sep 2025 21:11:58 +0000
+	id 1uvj9Z-0008QI-To; Mon, 08 Sep 2025 21:11:57 +0000
+Received: by outflank-mailman (input) for mailman id 1115537;
+ Mon, 08 Sep 2025 21:11:56 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uvj9Z-0008QT-Um
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:11:57 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9Y-0008DO-Su
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:11:56 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9Z-000FT2-1m;
- Mon, 08 Sep 2025 21:11:57 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9Y-000FSp-1Q;
+ Mon, 08 Sep 2025 21:11:56 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9Z-000gMD-1x;
- Mon, 08 Sep 2025 21:11:57 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9Y-000gKu-1d;
+ Mon, 08 Sep 2025 21:11:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=TefMi+8qYWJ3sWp2Jmhd2ppEtx/E0etNYFj1pW73ooo=; b=RMrlGjVZwWJhwisdIpfyGQezh/
-	j8FyprAHyc3RVkYgK75iO9XUlEb0qzIUafCBitw5W9uK7ove5z4B8g4I+/xloaXFZRIK3umNtUu+E
-	+yxga2J46i5Km9ti7PzcwdCiKZq84Az/cyKeO9LM4mSWQid53qBKYoNulhHaA1gR4vSI=;
+	bh=NWRpmqJhOTOIY3zhSnhQ9LFHXgJeUqzoWYVvV58DwuQ=; b=QfQCzboiEv5kPwQ8hac1qgJUSu
+	WVT/GvMWfIpHz9k78XZcH5ZjiWa0/w3fE0w+ifdBNX1vYlvmkYN8zxvgnmrnS2TiEmvpU/jAlGYK/
+	b9CiyvuZljKoLIOkOO2Gpspcp9y58R1u42i8fEpj4L12/LRDZvmH5oK4A7FCJrLVpx8Q=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v7 05/16] emul/ns16x50: implement SCR register
-Date: Mon,  8 Sep 2025 14:11:38 -0700
-Message-ID: <20250908211149.279143-6-dmukhin@ford.com>
+Subject: [PATCH v7 04/16] emul/ns16x50: implement DLL/DLM registers
+Date: Mon,  8 Sep 2025 14:11:37 -0700
+Message-ID: <20250908211149.279143-5-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250908211149.279143-1-dmukhin@ford.com>
 References: <20250908211149.279143-1-dmukhin@ford.com>
@@ -68,44 +68,120 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add SCR register emulation to the I/O port handler.
-Firmware (e.g. OVMF) may use SCR during the guest OS boot.
+Add DLL/DLM registers emulation.
+
+DLL/DLM registers report hardcoded 115200 baud rate to the guest OS.
+
+Add stub for ns16x50_dlab_get() helper.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v6:
-- default handling of non-DLL/DLM registers moved to the previous patch
+- added default registers handling for non-DLL/DLM accesses
+- used UINT8_MAX
 ---
- xen/common/emul/vuart/ns16x50.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ xen/common/emul/vuart/ns16x50.c | 47 +++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
 diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-index da8583a1dc93..5643ef4cc01e 100644
+index a3bdf9f415ca..da8583a1dc93 100644
 --- a/xen/common/emul/vuart/ns16x50.c
 +++ b/xen/common/emul/vuart/ns16x50.c
-@@ -106,6 +106,11 @@ static int ns16x50_io_write8(
-     {
-         switch ( reg )
-         {
-+        /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
-+        case UART_SCR:
-+            regs[UART_SCR] = val;
+@@ -96,8 +96,22 @@ static uint8_t ns16x50_dlab_get(const struct vuart_ns16x50 *vdev)
+ static int ns16x50_io_write8(
+     struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
+ {
++    uint8_t *regs = vdev->regs;
++    uint8_t val = *data;
+     int rc = 0;
+ 
++    if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
++        regs[NS16X50_REGS_NUM + reg] = val;
++    else
++    {
++        switch ( reg )
++        {
++        default:
++            rc = -EINVAL;
 +            break;
++        }
++    }
 +
-         default:
-             rc = -EINVAL;
-             break;
-@@ -177,6 +182,10 @@ static int ns16x50_io_read8(
-     {
-         switch ( reg )
-         {
-+        case UART_SCR:
-+            val = regs[UART_SCR];
+     return rc;
+ }
+ 
+@@ -108,8 +122,16 @@ static int ns16x50_io_write8(
+ static int ns16x50_io_write16(
+     struct vuart_ns16x50 *vdev, uint32_t reg, uint16_t *data)
+ {
++    uint16_t val = *data;
+     int rc = -EINVAL;
+ 
++    if ( ns16x50_dlab_get(vdev) && reg == UART_DLL )
++    {
++        vdev->regs[NS16X50_REGS_NUM + UART_DLL] = val & UINT8_MAX;
++        vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (val >> 8) & UINT8_MAX;
++        rc = 0;
++    }
++
+     return rc;
+ }
+ 
+@@ -145,9 +167,22 @@ static int ns16x50_io_write(
+ static int ns16x50_io_read8(
+     struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
+ {
++    uint8_t *regs = vdev->regs;
+     uint8_t val = UINT8_MAX;
+     int rc = 0;
+ 
++    if ( ns16x50_dlab_get(vdev) && (reg == UART_DLL || reg == UART_DLM) )
++        val = regs[NS16X50_REGS_NUM + reg];
++    else
++    {
++        switch ( reg )
++        {
++        default:
++            rc = -EINVAL;
 +            break;
++        }
++    }
 +
-         default:
-             rc = -EINVAL;
-             break;
+     *data = val;
+ 
+     return rc;
+@@ -162,6 +197,13 @@ static int ns16x50_io_read16(
+     uint16_t val = UINT16_MAX;
+     int rc = -EINVAL;
+ 
++    if ( ns16x50_dlab_get(vdev) && reg == UART_DLL )
++    {
++        val = vdev->regs[NS16X50_REGS_NUM + UART_DLM] << 8 |
++              vdev->regs[NS16X50_REGS_NUM + UART_DLL];
++        rc = 0;
++    }
++
+     *data = val;
+ 
+     return rc;
+@@ -278,12 +320,17 @@ out:
+ 
+ static int ns16x50_init(void *arg)
+ {
++    const uint16_t divisor = (UART_CLOCK_HZ / 115200) >> 4;
+     struct vuart_ns16x50 *vdev = arg;
+     const struct vuart_info *info = vdev->info;
+     struct domain *d = vdev->owner;
+ 
+     ASSERT(vdev);
+ 
++    /* NB: report 115200 baud rate. */
++    vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & UINT8_MAX;
++    vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (divisor >> 8) & UINT8_MAX;
++
+     register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
+ 
+     return 0;
 -- 
 2.51.0
 
