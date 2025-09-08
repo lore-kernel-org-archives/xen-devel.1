@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD000CAC587
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1115535.1462091 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B76F4CA1016
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1115541.1462154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9X-0007qp-K2; Mon, 08 Sep 2025 21:11:55 +0000
+	id 1uvj9f-00016g-FO; Mon, 08 Sep 2025 21:12:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1115535.1462091; Mon, 08 Sep 2025 21:11:55 +0000
+Received: by outflank-mailman (output) from mailman id 1115541.1462154; Mon, 08 Sep 2025 21:12:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9X-0007pP-Ed; Mon, 08 Sep 2025 21:11:55 +0000
-Received: by outflank-mailman (input) for mailman id 1115535;
- Mon, 08 Sep 2025 21:11:54 +0000
+	id 1uvj9f-00016P-AW; Mon, 08 Sep 2025 21:12:03 +0000
+Received: by outflank-mailman (input) for mailman id 1115541;
+ Mon, 08 Sep 2025 21:12:01 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uvj9W-0007g9-Hb
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:11:54 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9d-0000kF-4U
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:01 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9W-000FSM-0J;
- Mon, 08 Sep 2025 21:11:54 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9c-000FTf-2g;
+ Mon, 08 Sep 2025 21:12:00 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9W-000gK2-0U;
- Mon, 08 Sep 2025 21:11:54 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9c-000gMQ-2t;
+ Mon, 08 Sep 2025 21:12:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=ScRE3g8jVmbQQYHS5u6EzEGBByXpDzH+16MqZDTV2QA=; b=SHNIZw8PuWMOdsmDTnYETDo1QS
-	klbIfNDdyd+svI1DElYh8m7wO2zafd0+hnHN+ivmRyfphzI5KoDyTumkeIVue0muN6BuTNHLQf5mj
-	0tJ6p3QPKnAbVVqqvYCA7BqNSyI1/fRkOKjOQ+Xw9HykDa6PhfJMk1U56Cfil547TY+w=;
+	bh=mgBIXJuIz84mlcqZHiPSZTYiEqMID1sT7aaSFn+Fx+Y=; b=63xdtqy6k03JSFof0Lbgh4XeuR
+	ULTNEZGFh9DRKh7kf/CV7uOWmckNLYqbfkwDzXbCazUMUk42eF6sj6K5LvvtVvUwlHiCQgQDNsQnR
+	hnW1ip1rPrqyA/aH4vExgy6ojzr9wcL6kWpLurWwYJpmyfPVbstN+o1QGdFHZftj+NWE=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v7 02/16] xen/8250-uart: update definitions
-Date: Mon,  8 Sep 2025 14:11:35 -0700
-Message-ID: <20250908211149.279143-3-dmukhin@ford.com>
+Subject: [PATCH v7 08/16] emul/ns16x50: implement MCR/MSR registers
+Date: Mon,  8 Sep 2025 14:11:41 -0700
+Message-ID: <20250908211149.279143-9-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250908211149.279143-1-dmukhin@ford.com>
 References: <20250908211149.279143-1-dmukhin@ford.com>
@@ -68,146 +68,116 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Added missing definitions needed for NS16550 UART emulator.
+Add MCR/MSR registers emulation to the I/O port handler.
 
-Newly introduced MSR definitions re-used in the existing ns16550 driver.
-
-Also, corrected FCR DMA definition bit#3 (0x08) as per:
-  https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
-See "7.7.2 FIFO Control Register (FCR)".
+Add implementation of ns16x50_iir_check_msi().
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v6:
-- used raw bitmasks instead of BIT() for consistency
+- fixed UART_MSR_TERI handling
 ---
- xen/drivers/char/ns16550.c  | 16 ++++++++--------
- xen/include/xen/8250-uart.h | 36 ++++++++++++++++++++++++++++++++++--
- 2 files changed, 42 insertions(+), 10 deletions(-)
+ xen/common/emul/vuart/ns16x50.c | 62 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 61 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index df7fff7f81df..0e80fadbb894 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -388,7 +388,7 @@ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
+diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+index 0831a576cd9e..fdc20124d4c9 100644
+--- a/xen/common/emul/vuart/ns16x50.c
++++ b/xen/common/emul/vuart/ns16x50.c
+@@ -107,7 +107,7 @@ static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
  
-     /* Check this really is a 16550+. Otherwise we have no FIFOs. */
-     if ( uart->fifo_size <= 1 &&
--         ((ns_read_reg(uart, UART_IIR) & 0xc0) == 0xc0) &&
-+         ((ns_read_reg(uart, UART_IIR) & UART_IIR_FE) == UART_IIR_FE) &&
-          ((ns_read_reg(uart, UART_FCR) & UART_FCR_TRG14) == UART_FCR_TRG14) )
-         uart->fifo_size = 16;
- }
-@@ -728,20 +728,20 @@ static int __init check_existence(struct ns16550 *uart)
-      * Mask out IER[7:4] bits for test as some UARTs (e.g. TL
-      * 16C754B) allow only to modify them if an EFR bit is set.
-      */
--    scratch2 = ns_read_reg(uart, UART_IER) & 0x0f;
--    ns_write_reg(uart,UART_IER, 0x0F);
--    scratch3 = ns_read_reg(uart, UART_IER) & 0x0f;
-+    scratch2 = ns_read_reg(uart, UART_IER) & UART_IER_MASK;
-+    ns_write_reg(uart, UART_IER, UART_IER_MASK);
-+    scratch3 = ns_read_reg(uart, UART_IER) & UART_IER_MASK;
-     ns_write_reg(uart, UART_IER, scratch);
--    if ( (scratch2 != 0) || (scratch3 != 0x0F) )
-+    if ( (scratch2 != 0) || (scratch3 != UART_IER_MASK) )
-         return 0;
- 
-     /*
-      * Check to see if a UART is really there.
-      * Use loopback test mode.
-      */
--    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | 0x0A);
--    status = ns_read_reg(uart, UART_MSR) & 0xF0;
--    return (status == 0x90);
-+    ns_write_reg(uart, UART_MCR, UART_MCR_LOOP | UART_MCR_RTS | UART_MCR_OUT2);
-+    status = ns_read_reg(uart, UART_MSR) & UART_MSR_STATUS;
-+    return (status == (UART_MSR_CTS | UART_MSR_DCD));
+ static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *vdev)
+ {
+-    return false;
++    return vdev->regs[UART_MSR] & UART_MSR_CHANGE;
  }
  
- #ifdef CONFIG_HAS_PCI
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c13..a8a26b64689e 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -32,6 +32,7 @@
- #define UART_MCR          0x04    /* Modem control        */
- #define UART_LSR          0x05    /* line status          */
- #define UART_MSR          0x06    /* Modem status         */
-+#define UART_SCR          0x07    /* Scratch pad          */
- #define UART_USR          0x1f    /* Status register (DW) */
- #define UART_DLL          0x00    /* divisor latch (ls) (DLAB=1) */
- #define UART_DLM          0x01    /* divisor latch (ms) (DLAB=1) */
-@@ -42,6 +43,8 @@
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_MASK \
-+    (UART_IER_ERDAI | UART_IER_ETHREI | UART_IER_ELSI | UART_IER_EMSI)
+ /*
+@@ -232,12 +232,63 @@ static int ns16x50_io_write8(
+             regs[UART_LCR] = val;
+             break;
  
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
-@@ -51,12 +54,19 @@
- #define UART_IIR_THR      0x02    /*  - tx reg. empty     */
- #define UART_IIR_MSI      0x00    /*  - MODEM status      */
- #define UART_IIR_BSY      0x07    /*  - busy detect (DW) */
-+#define UART_IIR_FE       0xc0    /* FIFO enabled (2 bits) */
- 
- /* FIFO Control Register */
- #define UART_FCR_ENABLE   0x01    /* enable FIFO          */
- #define UART_FCR_CLRX     0x02    /* clear Rx FIFO        */
- #define UART_FCR_CLTX     0x04    /* clear Tx FIFO        */
--#define UART_FCR_DMA      0x10    /* enter DMA mode       */
-+#define UART_FCR_DMA      0x08    /* enter DMA mode       */
-+#define UART_FCR_RSRVD0   0x10    /* reserved; always 0   */
-+#define UART_FCR_RSRVD1   0x20    /* reserved; always 0   */
-+#define UART_FCR_RTB0     0x40    /* receiver trigger bit #0 */
-+#define UART_FCR_RTB1     0x80    /* receiver trigger bit #1 */
-+#define UART_FCR_TRG_MASK (UART_FCR_RTB0 | UART_FCR_RTB1)
++        case UART_MCR: {
++            uint8_t msr_curr, msr_next, msr_delta;
 +
- #define UART_FCR_TRG1     0x00    /* Rx FIFO trig lev 1   */
- #define UART_FCR_TRG4     0x40    /* Rx FIFO trig lev 4   */
- #define UART_FCR_TRG8     0x80    /* Rx FIFO trig lev 8   */
-@@ -98,9 +108,30 @@
- /* Modem Control Register */
- #define UART_MCR_DTR      0x01    /* Data Terminal Ready  */
- #define UART_MCR_RTS      0x02    /* Request to Send      */
--#define UART_MCR_OUT2     0x08    /* OUT2: interrupt mask */
-+#define UART_MCR_OUT1     0x04    /* Output #1 */
-+#define UART_MCR_OUT2     0x08    /* Output #2 */
- #define UART_MCR_LOOP     0x10    /* Enable loopback test mode */
-+#define UART_MCR_RSRVD0   0x20    /* Reserved #0 */
- #define UART_MCR_TCRTLR   0x40    /* Access TCR/TLR (TI16C752, EFR[4]=1) */
-+#define UART_MCR_RSRVD1   0x80    /* Reserved #1 */
-+#define UART_MCR_MASK \
-+    (UART_MCR_DTR | UART_MCR_RTS | \
-+     UART_MCR_OUT1 | UART_MCR_OUT2 | \
-+     UART_MCR_LOOP | UART_MCR_TCRTLR)
++            msr_curr = regs[UART_MSR];
++            msr_next = 0;
++            msr_delta = 0;
 +
-+/* Modem Status Register */
-+#define UART_MSR_DCTS     0x01    /* Change in CTS */
-+#define UART_MSR_DDSR     0x02    /* Change in DSR */
-+#define UART_MSR_TERI     0x04    /* Change in RI */
-+#define UART_MSR_DDCD     0x08    /* Change in DCD */
-+#define UART_MSR_CTS      0x10
-+#define UART_MSR_DSR      0x20
-+#define UART_MSR_RI       0x40
-+#define UART_MSR_DCD      0x80
-+#define UART_MSR_CHANGE \
-+    (UART_MSR_DCTS | UART_MSR_DDSR | UART_MSR_TERI | UART_MSR_DDCD)
-+#define UART_MSR_STATUS \
-+    (UART_MSR_CTS | UART_MSR_DSR | UART_MSR_RI | UART_MSR_DCD)
++            if ( val & UART_MCR_RSRVD0 )
++                ns16x50_warn(vdev, "MCR: attempt to set reserved bit: %x\n",
++                             UART_MCR_RSRVD0);
++
++            if ( val & UART_MCR_TCRTLR )
++                ns16x50_warn(vdev, "MCR: not supported: %x\n",
++                             UART_MCR_TCRTLR);
++
++            if ( val & UART_MCR_RSRVD1 )
++                ns16x50_warn(vdev, "MCR: attempt to set reserved bit: %x\n",
++                             UART_MCR_RSRVD1);
++
++            /* Set modem status */
++            if ( val & UART_MCR_LOOP )
++            {
++                if ( val & UART_MCR_DTR )
++                    msr_next |= UART_MSR_DSR;
++                if ( val & UART_MCR_RTS )
++                    msr_next |= UART_MSR_CTS;
++                if ( val & UART_MCR_OUT1 )
++                    msr_next |= UART_MSR_RI;
++                if ( val & UART_MCR_OUT2 )
++                    msr_next |= UART_MSR_DCD;
++            }
++            else
++                msr_next |= UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS;
++
++            /* Calculate changes in modem status */
++            if ( (msr_curr & UART_MSR_CTS) ^ (msr_next & UART_MSR_CTS) )
++                msr_delta |= UART_MSR_DCTS;
++            if ( (msr_curr & UART_MSR_DSR) ^ (msr_next & UART_MSR_DSR) )
++                msr_delta |= UART_MSR_DDSR;
++            if ( !(msr_curr & UART_MSR_RI) && (msr_next & UART_MSR_RI) )
++                msr_delta |= UART_MSR_TERI;
++            if ( (msr_curr & UART_MSR_DCD) ^ (msr_next & UART_MSR_DCD) )
++                msr_delta |= UART_MSR_DDCD;
++
++            regs[UART_MCR] = val & UART_MCR_MASK;
++            regs[UART_MSR] = msr_next | msr_delta;
++
++            break;
++        }
++
+         /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
+         case UART_SCR:
+             regs[UART_SCR] = val;
+             break;
  
- /* Line Status Register */
- #define UART_LSR_DR       0x01    /* Data ready           */
-@@ -111,6 +142,7 @@
- #define UART_LSR_THRE     0x20    /* Xmit hold reg empty  */
- #define UART_LSR_TEMT     0x40    /* Xmitter empty        */
- #define UART_LSR_ERR      0x80    /* Error                */
-+#define UART_LSR_MASK     (UART_LSR_OE | UART_LSR_BI)
+         case UART_LSR: /* RO */
++        case UART_MSR: /* RO */
+         default:
+             rc = -EINVAL;
+             break;
+@@ -323,11 +374,20 @@ static int ns16x50_io_read8(
+             val = regs[UART_LCR];
+             break;
  
- /* These parity settings can be ORed directly into the LCR. */
- #define UART_PARITY_NONE  (0<<3)
++        case UART_MCR:
++            val = regs[UART_MCR];
++            break;
++
+         case UART_LSR:
+             val = regs[UART_LSR] | UART_LSR_THRE | UART_LSR_TEMT;
+             regs[UART_LSR] = val & ~UART_LSR_MASK;
+             break;
+ 
++        case UART_MSR:
++            val = regs[UART_MSR];
++            regs[UART_MSR] &= ~UART_MSR_CHANGE;
++            break;
++
+         case UART_SCR:
+             val = regs[UART_SCR];
+             break;
 -- 
 2.51.0
 
