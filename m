@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7666CAC588
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9945CA1016
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1115549.1462196 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1115545.1462180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9k-0002Kn-Qs; Mon, 08 Sep 2025 21:12:08 +0000
+	id 1uvj9i-0001mh-FE; Mon, 08 Sep 2025 21:12:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1115549.1462196; Mon, 08 Sep 2025 21:12:08 +0000
+Received: by outflank-mailman (output) from mailman id 1115545.1462180; Mon, 08 Sep 2025 21:12:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9k-0002Io-LB; Mon, 08 Sep 2025 21:12:08 +0000
-Received: by outflank-mailman (input) for mailman id 1115549;
- Mon, 08 Sep 2025 21:12:06 +0000
+	id 1uvj9i-0001ke-4k; Mon, 08 Sep 2025 21:12:06 +0000
+Received: by outflank-mailman (input) for mailman id 1115545;
+ Mon, 08 Sep 2025 21:12:04 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uvj9i-0001qT-Hl
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:06 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9g-0001J0-Dc
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:04 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9i-000FUt-0w;
- Mon, 08 Sep 2025 21:12:06 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9g-000FUS-0K;
+ Mon, 08 Sep 2025 21:12:04 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9i-000gNQ-1A;
- Mon, 08 Sep 2025 21:12:06 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9g-000gNA-0Y;
+ Mon, 08 Sep 2025 21:12:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=KkUN0OllhKW27ZmsCBHTtMD+F/9dKnn+1KTiUiwT17c=; b=GbGd+yPlZZoKbzzS07p93lgEKd
-	/XZqka49ao5ewWmTypg9sYU4phrlCfNqN+m1E/I6ATWtAkUxLj73rA7X57HPCylyyr9Q9vb4PkpWo
-	2PbzxoE11vg7Quxvny1g5Fn3hvcYiiFttggU2fx6GUYMhvyFlbejQLc3Qz3JyREeIsV8=;
+	bh=jOrpkPK6Y2sHbIx1Zg9cP39ItjKVIpi7DD14BHDTv7c=; b=Lfpk1ztSq/H6d4MF6OefdVvZPK
+	w0S23FSr2I7VTRlJ3WqXyhnrHSQi6Wi0Y/eYi7ID25udDhzcaU1A1ii4O4KYNs1HreBVQL10atV0S
+	RVOISIqsZ1fyb1yANVnZij9IYm/AxoGDn1JaMyvOvMfocfx3+pwVU04CBFB9HkNw0QBQ=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v7 13/16] emul/ns16x50: add Kconfig options
-Date: Mon,  8 Sep 2025 14:11:46 -0700
-Message-ID: <20250908211149.279143-14-dmukhin@ford.com>
+Subject: [PATCH v7 11/16] emul/ns16x50: implement FCR register (write-only)
+Date: Mon,  8 Sep 2025 14:11:44 -0700
+Message-ID: <20250908211149.279143-12-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250908211149.279143-1-dmukhin@ford.com>
 References: <20250908211149.279143-1-dmukhin@ford.com>
@@ -68,44 +68,57 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add initial Kconfig options configure NS16550-capable emulator.
+Add emulation logic for FCR register.
+
+Note, that does not hook FIFO interrupt moderation to the FIFO management
+code for simplicity.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v6:
-- new patch
+- dropped UART_IIR_THR handling from UART_FCR_CLTX case
 ---
- xen/common/emul/vuart/Kconfig | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ xen/common/emul/vuart/ns16x50.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/xen/common/emul/vuart/Kconfig b/xen/common/emul/vuart/Kconfig
-index ce1b976b7da7..9a49a6528b5a 100644
---- a/xen/common/emul/vuart/Kconfig
-+++ b/xen/common/emul/vuart/Kconfig
-@@ -3,4 +3,23 @@ config VUART_FRAMEWORK
+diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+index 137ce08f4e1d..a92df6923aa5 100644
+--- a/xen/common/emul/vuart/ns16x50.c
++++ b/xen/common/emul/vuart/ns16x50.c
+@@ -374,6 +374,33 @@ static int ns16x50_io_write8(
+             regs[UART_IER] = val & UART_IER_MASK;
+             break;
  
- menu "UART Emulation"
- 
-+config VUART_NS16X50
-+	bool "NS16550-compatible UART Emulator" if EXPERT
-+	depends on X86 && HVM
-+	select VUART_FRAMEWORK
-+	help
-+	  In-hypervisor NS16550-compatible UART emulation.
++        case UART_FCR: /* WO */
++            if ( val & UART_FCR_RSRVD0 )
++                ns16x50_warn(vdev, "FCR: attempt to set reserved bit: %x\n",
++                             UART_FCR_RSRVD0);
 +
-+	  Only one legacy PC COM port is emulated for domain with a certain ID
-+	  (set via 'vuart-domid=' command line setting).
++            if ( val & UART_FCR_RSRVD1 )
++                ns16x50_warn(vdev, "FCR: attempt to set reserved bit: %x\n",
++                             UART_FCR_RSRVD1);
 +
-+	  This is strictly for testing purposes (such as early HVM guest console),
-+	  and not appropriate for use in production.
++            if ( val & UART_FCR_CLRX )
++            {
++                ns16x50_fifo_rx_reset(vdev);
++                regs[UART_LSR] &= ~UART_LSR_DR;
++            }
 +
-+config VUART_NS16X50_DEBUG
-+	bool "Development: NS16550-compatible UART Emulator Debugging"
-+	depends on VUART_NS16X50 && DEBUG
-+	help
-+	  Enable development debugging.
++            if ( val & UART_FCR_CLTX )
++                ns16x50_fifo_tx_reset(vdev);
 +
- endmenu
++            if ( val & UART_FCR_ENABLE )
++                val &= UART_FCR_ENABLE | UART_FCR_DMA | UART_FCR_TRG_MASK;
++            else
++                val = 0;
++
++            regs[UART_FCR] = val;
++
++            break;
++
+         case UART_LCR:
+             regs[UART_LCR] = val;
+             break;
 -- 
 2.51.0
 
