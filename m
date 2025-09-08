@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2BECAC586
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 329E2CAC589
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Sep 2025 21:12:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1115548.1462186 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1115543.1462166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9j-0001w4-DY; Mon, 08 Sep 2025 21:12:07 +0000
+	id 1uvj9g-0001Iy-Rh; Mon, 08 Sep 2025 21:12:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1115548.1462186; Mon, 08 Sep 2025 21:12:07 +0000
+Received: by outflank-mailman (output) from mailman id 1115543.1462166; Mon, 08 Sep 2025 21:12:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvj9i-0001u1-R9; Mon, 08 Sep 2025 21:12:06 +0000
-Received: by outflank-mailman (input) for mailman id 1115548;
- Mon, 08 Sep 2025 21:12:05 +0000
+	id 1uvj9g-0001Fi-8N; Mon, 08 Sep 2025 21:12:04 +0000
+Received: by outflank-mailman (input) for mailman id 1115543;
+ Mon, 08 Sep 2025 21:12:03 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1uvj9h-0001ZP-Eu
- for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9f-000164-7u
+ for xen-devel@lists.xenproject.org; Mon, 08 Sep 2025 21:12:03 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9h-000FUh-0d;
- Mon, 08 Sep 2025 21:12:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9f-000FUE-01;
+ Mon, 08 Sep 2025 21:12:03 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1uvj9h-000gNK-0r;
- Mon, 08 Sep 2025 21:12:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1uvj9f-000gN1-0G;
+ Mon, 08 Sep 2025 21:12:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,9 +44,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=QW9I8ZuXBd/H3nKRB+tcF6FvOZaI6qXJPw/5aA/9wEw=; b=IJaIKbhghKRi/SM12NScR/FphI
-	s/Rly6SBlOFXqgntn1c8D5VaEMrgqlSxjqF6UixnMd4Y2mt+ybpVS+vI7Qy0NJ2PMX5odVIlUUjES
-	yNIZQQehjJoDscx1Jv3fuKaGu6reRySzIVv7T/QgjjY1wDgZuwzQ8NMnlhh6eA1/y+P8=;
+	bh=b4hUxqYghrvWW5yLlDTNdgPS7IjF5GT2QqKNV0EctlI=; b=JkzGM+cpJE/hIL99ZEjDEJcHoH
+	vkoNQIP/dyxrYsu5nhCithcAwxfUYQLUS7gngL77ITVYpL0r+M1SqzjE6QnVVZIQp29ciVAqT7iTp
+	QMgUIJvFNj8p0PQBzJIiBeCA44D8O/i8+r2E15UUxTxNIp0am0JLwQ0DTYvO2mWJ5W1Q=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,9 +57,9 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v7 12/16] emul/ns16550: implement dump_state() hook
-Date: Mon,  8 Sep 2025 14:11:45 -0700
-Message-ID: <20250908211149.279143-13-dmukhin@ford.com>
+Subject: [PATCH v7 10/16] emul/ns16x50: implement THR register
+Date: Mon,  8 Sep 2025 14:11:43 -0700
+Message-ID: <20250908211149.279143-11-dmukhin@ford.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250908211149.279143-1-dmukhin@ford.com>
 References: <20250908211149.279143-1-dmukhin@ford.com>
@@ -68,109 +68,148 @@ Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Implement dump_state() vUART hook for debugging UART state machine over Xen
-console. dump_state() prints state of all emulated registers (including
-state-less IIR) and state of RX/TX FIFOs.
+Add THR register emulation to the I/O port handlder.
+
+Add TX FIFO management code since THR depends on TX FIFO.
+
+TX FIFOs is not emulated as per UART specs for simplicity (not need to emulate
+baud rate). Emulator does not emulate NS8250 (no FIFO), NS16550a (16 bytes) or
+NS16750 (64 bytes).
+
+TX FIFOs is emulated by using xencons_interface which conveniently provides
+primitives for buffer management and later can be used for inter-domain
+communication similarly to vpl011.
+
+Account for DLL == 0: in this case, disable transmitter.
+
+Add UART_IIR_THR interrupt reason handling since it depends on THR register
+access.
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v6:
-- n/a
+- added DLL == 0 case handling as per Mykola's suggestion
+- dropped UART_IIR_THR clearing in UART_IIR register emulation in ns16x50_io_write8()
+- simplified UART_IIR_THR handling
+- updated ns16x50_iir_check_thr()
 ---
- xen/common/emul/vuart/ns16x50.c | 59 ++++++++++++++++++++++++++++++++-
- 1 file changed, 58 insertions(+), 1 deletion(-)
+ xen/common/emul/vuart/ns16x50.c | 82 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 81 insertions(+), 1 deletion(-)
 
 diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-index a92df6923aa5..c341f012d005 100644
+index 250411e0a7d8..137ce08f4e1d 100644
 --- a/xen/common/emul/vuart/ns16x50.c
 +++ b/xen/common/emul/vuart/ns16x50.c
-@@ -640,6 +640,58 @@ static int ns16x50_io_read(
+@@ -149,6 +149,66 @@ static int ns16x50_fifo_rx_putchar(struct vuart_ns16x50 *vdev, char c)
      return rc;
  }
  
-+static void cf_check ns16x50_dump_state(void *arg)
++static bool ns16x50_fifo_tx_full(const struct vuart_ns16x50 *vdev)
 +{
-+#ifdef CONFIG_VUART_NS16X50_DEBUG
-+    struct vuart_ns16x50 *vdev = arg;
-+    const struct domain *d = vdev->owner;
-+    const struct vuart_info *info = vdev->info;
-+    const struct xencons_interface *cons;
-+    const uint8_t *regs;
++    const struct xencons_interface *cons = &vdev->cons;
 +
-+    if ( !vdev )
-+        return;
-+
-+    /* Allow printing state in case of a deadlock. */
-+    if ( !spin_trylock(&vdev->lock) )
-+        return;
-+
-+    cons = &vdev->cons;
-+    regs = &vdev->regs[0];
-+
-+    printk("Virtual " pr_prefix " (%s) I/O port 0x%04x IRQ#%d owner %pd\n",
-+            vdev->name, info->base_addr, info->irq, d);
-+
-+    printk("  RX FIFO size %ld in_prod %d in_cons %d used %d\n",
-+            ARRAY_SIZE(cons->in), cons->in_prod, cons->in_cons,
-+            cons->in_prod - cons->in_cons);
-+
-+    printk("  TX FIFO size %ld out_prod %d out_cons %d used %d\n",
-+            ARRAY_SIZE(cons->out), cons->out_prod, cons->out_cons,
-+            cons->out_prod - cons->out_cons);
-+
-+    printk("  %02"PRIx8" RBR %02"PRIx8" THR %02"PRIx8" DLL %02"PRIx8" DLM %02"PRIx8"\n",
-+            UART_RBR,
-+            cons->in[MASK_XENCONS_IDX(cons->in_prod, cons)],
-+            cons->out[MASK_XENCONS_IDX(cons->out_prod, cons)],
-+            regs[NS16X50_REGS_NUM + UART_DLL],
-+            regs[NS16X50_REGS_NUM + UART_DLM]);
-+
-+    printk("  %02"PRIx8" IER %02"PRIx8"\n", UART_IER, regs[UART_IER]);
-+
-+    printk("  %02"PRIx8" FCR %02"PRIx8" IIR %02"PRIx8"\n",
-+            UART_FCR, regs[UART_FCR], ns16x50_iir_get(vdev));
-+
-+    printk("  %02"PRIx8" LCR %02"PRIx8"\n", UART_LCR, regs[UART_LCR]);
-+    printk("  %02"PRIx8" MCR %02"PRIx8"\n", UART_MCR, regs[UART_MCR]);
-+    printk("  %02"PRIx8" LSR %02"PRIx8"\n", UART_LSR, regs[UART_LSR]);
-+    printk("  %02"PRIx8" MSR %02"PRIx8"\n", UART_MSR, regs[UART_MSR]);
-+    printk("  %02"PRIx8" SCR %02"PRIx8"\n", UART_SCR, regs[UART_SCR]);
-+
-+    spin_unlock(&vdev->lock);
-+#endif /* CONFIG_VUART_NS16X50_DEBUG */
++    return cons->out_prod - cons->out_cons == ARRAY_SIZE(cons->out);
 +}
 +
- /*
-  * Emulate I/O access to ns16x50 register.
-  * Note, emulation always returns X86EMUL_OKAY, once I/O port trap is enabled.
-@@ -709,6 +761,9 @@ static int cf_check ns16x50_io_handle(
- 
-     spin_unlock(&vdev->lock);
- 
-+    if ( ns16x50_log_level >= 3 )
-+        ns16x50_dump_state(vdev);
++static void ns16x50_fifo_tx_reset(struct vuart_ns16x50 *vdev)
++{
++    struct xencons_interface *cons = &vdev->cons;
 +
-     if ( rc == 0 )
-         ns16x50_debug(vdev, "%c 0x%04x %d: DLAB=%d %02"PRIx32" 0x%08"PRIx32"\n",
-                       op, addr, size, dlab, reg, *data);
-@@ -844,6 +899,8 @@ static int cf_check ns16x50_put_rx(void *arg, char ch)
-     }
++    cons->out_cons = cons->out_prod;
++}
++
++/*
++ * Flush cached output to Xen console.
++ */
++static void ns16x50_fifo_tx_flush(struct vuart_ns16x50 *vdev)
++{
++    struct xencons_interface *cons = &vdev->cons;
++    struct domain *d = vdev->owner;
++    XENCONS_RING_IDX i, n, len = cons->out_prod - cons->out_cons;
++
++    ASSERT(len <= ARRAY_SIZE(cons->out));
++    if ( !len )
++        return;
++
++    i = MASK_XENCONS_IDX(cons->out_cons, cons->out);
++    n = min_t(XENCONS_RING_IDX, len, ARRAY_SIZE(cons->out) - i);
++    if ( n )
++        guest_printk(d, guest_prefix "%.*s", n, &cons->out[i]);
++
++    i = 0;
++    n = len - n;
++    if ( n )
++        guest_printk(d, guest_prefix "%.*s", n, &cons->out[i]);
++
++    cons->out_cons += len;
++}
++
++/*
++ * Accumulate guest OS output before sending to Xen console.
++ */
++static void ns16x50_fifo_tx_putchar(struct vuart_ns16x50 *vdev, char ch)
++{
++    struct xencons_interface *cons = &vdev->cons;
++
++    if ( !is_console_printable(ch) )
++        return;
++
++    if ( !ns16x50_fifo_tx_full(vdev) )
++    {
++        cons->out[MASK_XENCONS_IDX(cons->out_prod, cons->out)] = ch;
++        cons->out_prod++;
++    }
++
++    if ( ch == '\n' || ch == '\0' || ns16x50_fifo_tx_full(vdev) )
++        ns16x50_fifo_tx_flush(vdev);
++}
++
+ static bool ns16x50_is_running(const struct vuart_ns16x50 *vdev)
+ {
+     /* DLL set to 0 disables serial communication. */
+@@ -172,7 +232,7 @@ static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
  
-     spin_unlock(&vdev->lock);
-+    if ( ns16x50_log_level >= 3 )
-+        ns16x50_dump_state(vdev);
- 
-     return rc;
+ static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
+ {
+-    return false;
++    return !ns16x50_fifo_tx_full(vdev);
  }
-@@ -853,7 +910,7 @@ static int cf_check ns16x50_put_rx(void *arg, char ch)
-     .compatible = "ns16550",            \
-     .alloc      = ns16x50_alloc,        \
-     .free       = ns16x50_free,         \
--    .dump_state = NULL,                 \
-+    .dump_state = ns16x50_dump_state,   \
-     .put_rx     = ns16x50_put_rx,       \
+ 
+ static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *vdev)
+@@ -294,6 +354,22 @@ static int ns16x50_io_write8(
+     {
+         switch ( reg )
+         {
++        case UART_THR:
++            if ( !ns16x50_is_running(vdev) )
++                break;
++
++            if ( regs[UART_MCR] & UART_MCR_LOOP )
++            {
++                if ( ns16x50_fifo_rx_putchar(vdev, val) )
++                    regs[UART_LSR] |= UART_LSR_OE;
++
++                regs[UART_LSR] |= UART_LSR_DR;
++            }
++            else
++                ns16x50_fifo_tx_putchar(vdev, val);
++
++            break;
++
+         case UART_IER:
+             regs[UART_IER] = val & UART_IER_MASK;
+             break;
+@@ -646,6 +722,10 @@ static void cf_check ns16x50_deinit(void *arg)
+     struct vuart_ns16x50 *vdev = arg;
+ 
+     ASSERT(vdev);
++
++    spin_lock(&vdev->lock);
++    ns16x50_fifo_tx_flush(vdev);
++    spin_unlock(&vdev->lock);
  }
  
+ static void * cf_check ns16x50_alloc(struct domain *d, const struct vuart_info *info)
 -- 
 2.51.0
 
