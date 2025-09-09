@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D384FCA0FED
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 13:36:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1116847.1463101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF257CA0FED
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 13:40:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1116866.1463110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvyVv-0003Gn-7s; Tue, 09 Sep 2025 13:36:03 +0000
+	id 1uvyaD-0004rK-OZ; Tue, 09 Sep 2025 13:40:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1116847.1463101; Tue, 09 Sep 2025 13:36:03 +0000
+Received: by outflank-mailman (output) from mailman id 1116866.1463110; Tue, 09 Sep 2025 13:40:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvyVv-0003Gg-4e; Tue, 09 Sep 2025 13:36:03 +0000
-Received: by outflank-mailman (input) for mailman id 1116847;
- Tue, 09 Sep 2025 13:36:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uvyaD-0004rD-LH; Tue, 09 Sep 2025 13:40:29 +0000
+Received: by outflank-mailman (input) for mailman id 1116866;
+ Tue, 09 Sep 2025 13:40:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XOGe=3U=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uvyPM-00067u-5j
- for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 13:29:16 +0000
+ id 1uvyPE-0005uM-Fb
+ for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 13:29:08 +0000
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fa21209f-8d80-11f0-9d13-b5c5bf9af7f9;
- Tue, 09 Sep 2025 15:29:14 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f568605c-8d80-11f0-9809-7dc792cee155;
+ Tue, 09 Sep 2025 15:29:06 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C541260226;
- Tue,  9 Sep 2025 13:29:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 946BBC4CEF7;
- Tue,  9 Sep 2025 13:29:12 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D79DA601AB;
+ Tue,  9 Sep 2025 13:29:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE671C4CEF4;
+ Tue,  9 Sep 2025 13:29:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa21209f-8d80-11f0-9d13-b5c5bf9af7f9
+X-Inumbo-ID: f568605c-8d80-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757424553;
-	bh=XSpIlPt4jLS+CRWTwe4PmKBEGcwSmMFNT5/+aafmf9o=;
+	s=k20201202; t=1757424545;
+	bh=ThC+GnSzG3vqrBq8iTzTPlcPa91tU2BQkMRg6ndRAuA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=tD4BnfmgL7nSjP8jarOPnF1Kn1BC45TmtpUEyk4UgzRF9j3xxWUtgCJasGtD1cEYW
-	 wsKbMmoN0mLlTVmqVsUCjuHU9MFeENKol/15l9I7px1JVOo67vHUW2X/x6NNJaO3go
-	 B89Nkj4jb11BZXb69fWJg+iH7a9i4JMVdRx6HuizamFiINp/Xht6wzw2NrsRjzGEFg
-	 uU2y5hSynA8hokL2y95P+N9k99ZCfT1r+u27f/8u3ug+IG812ekDMVu/nbK3l8aJ7T
-	 OFODjRzmkmI1kisdeS4BJ0OXrhmGCoh7t8HbiKHptbJxGSed9WkruGW5w4iBDhJELY
-	 ntNW51a5dmJaQ==
+	b=tnTViotBzgzX8VJMiUdP1iBUBwTcHGl4cXP5/xMCQJd3NuJ+v83PZRp+IV4I6m6Oo
+	 rii0+a9xxI6kUod6ywO0FDmoTZ6nHn1Sm9TRhAhDLtUAwTh72wrfQLc04U7MeCpJP7
+	 S+VB1HVBG2J4AB5r/4HEc/HDCNwV9/HfLsWB9aqhPOk5wvZ5OXodZEfSrk5TQI0YSe
+	 2rgbYngdJVyQWuu3KtxqmyHFWhVGXg7iRlR+oGtwNzAeTNGHstyq5kW2vRrVG1sC4O
+	 sQLrmM3sgvgI/IElfjSWQ/akyQs02UZyEB+0KaMdypAsViiUDxdz4nCkmXQU4JWJEG
+	 mVUoTlUsHhrUw==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>,
@@ -93,9 +93,9 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	Will Deacon <will@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v6 15/16] block-dma: properly take MMIO path
-Date: Tue,  9 Sep 2025 16:27:43 +0300
-Message-ID: <1d0b07d0f1a5ce7f2b80e3c0aa06c7df56680ed8.1757423202.git.leonro@nvidia.com>
+Subject: [PATCH v6 13/16] mm/hmm: properly take MMIO path
+Date: Tue,  9 Sep 2025 16:27:41 +0300
+Message-ID: <998251caf3f9d1a3f6f8205f1f494c707fb4d8fa.1757423202.git.leonro@nvidia.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1757423202.git.leonro@nvidia.com>
 References: <cover.1757423202.git.leonro@nvidia.com>
@@ -104,105 +104,67 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-Make sure that CPU is not synced and IOMMU is configured to take
-MMIO path by providing newly introduced DMA_ATTR_MMIO attribute.
+In case peer-to-peer transaction traverses through host bridge,
+the IOMMU needs to have IOMMU_MMIO flag, together with skip of
+CPU sync.
 
-Reviewed-by: Keith Busch <kbusch@kernel.org>
+The latter was handled by provided DMA_ATTR_SKIP_CPU_SYNC flag,
+but IOMMU flag was missed, due to assumption that such memory
+can be treated as regular one.
+
+Reuse newly introduced DMA attribute to properly take MMIO path.
+
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- block/blk-mq-dma.c         | 13 +++++++++++--
- include/linux/blk-mq-dma.h |  6 +++++-
- include/linux/blk_types.h  |  2 ++
- 3 files changed, 18 insertions(+), 3 deletions(-)
+ mm/hmm.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/block/blk-mq-dma.c b/block/blk-mq-dma.c
-index 37e2142be4f7d..d415088ed9fd2 100644
---- a/block/blk-mq-dma.c
-+++ b/block/blk-mq-dma.c
-@@ -87,8 +87,13 @@ static bool blk_dma_map_bus(struct blk_dma_iter *iter, struct phys_vec *vec)
- static bool blk_dma_map_direct(struct request *req, struct device *dma_dev,
- 		struct blk_dma_iter *iter, struct phys_vec *vec)
- {
-+	unsigned int attrs = 0;
-+
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
-+
- 	iter->addr = dma_map_phys(dma_dev, vec->paddr, vec->len,
--			rq_dma_dir(req), 0);
-+			rq_dma_dir(req), attrs);
- 	if (dma_mapping_error(dma_dev, iter->addr)) {
- 		iter->status = BLK_STS_RESOURCE;
+diff --git a/mm/hmm.c b/mm/hmm.c
+index 015ab243f0813..6556c0e074ba8 100644
+--- a/mm/hmm.c
++++ b/mm/hmm.c
+@@ -746,7 +746,7 @@ dma_addr_t hmm_dma_map_pfn(struct device *dev, struct hmm_dma_map *map,
+ 	case PCI_P2PDMA_MAP_NONE:
+ 		break;
+ 	case PCI_P2PDMA_MAP_THRU_HOST_BRIDGE:
+-		attrs |= DMA_ATTR_SKIP_CPU_SYNC;
++		attrs |= DMA_ATTR_MMIO;
+ 		pfns[idx] |= HMM_PFN_P2PDMA;
+ 		break;
+ 	case PCI_P2PDMA_MAP_BUS_ADDR:
+@@ -776,7 +776,7 @@ dma_addr_t hmm_dma_map_pfn(struct device *dev, struct hmm_dma_map *map,
+ 			goto error;
+ 
+ 		dma_addr = dma_map_phys(dev, paddr, map->dma_entry_size,
+-					DMA_BIDIRECTIONAL, 0);
++					DMA_BIDIRECTIONAL, attrs);
+ 		if (dma_mapping_error(dev, dma_addr))
+ 			goto error;
+ 
+@@ -811,16 +811,17 @@ bool hmm_dma_unmap_pfn(struct device *dev, struct hmm_dma_map *map, size_t idx)
+ 	if ((pfns[idx] & valid_dma) != valid_dma)
  		return false;
-@@ -103,14 +108,17 @@ static bool blk_rq_dma_map_iova(struct request *req, struct device *dma_dev,
- {
- 	enum dma_data_direction dir = rq_dma_dir(req);
- 	unsigned int mapped = 0;
-+	unsigned int attrs = 0;
- 	int error;
  
- 	iter->addr = state->addr;
- 	iter->len = dma_iova_size(state);
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
- 
- 	do {
- 		error = dma_iova_link(dma_dev, state, vec->paddr, mapped,
--				vec->len, dir, 0);
-+				vec->len, dir, attrs);
- 		if (error)
- 			break;
- 		mapped += vec->len;
-@@ -176,6 +184,7 @@ bool blk_rq_dma_map_iter_start(struct request *req, struct device *dma_dev,
- 			 * same as non-P2P transfers below and during unmap.
- 			 */
- 			req->cmd_flags &= ~REQ_P2PDMA;
-+			req->cmd_flags |= REQ_MMIO;
- 			break;
- 		default:
- 			iter->status = BLK_STS_INVAL;
-diff --git a/include/linux/blk-mq-dma.h b/include/linux/blk-mq-dma.h
-index c26a01aeae006..6c55f5e585116 100644
---- a/include/linux/blk-mq-dma.h
-+++ b/include/linux/blk-mq-dma.h
-@@ -48,12 +48,16 @@ static inline bool blk_rq_dma_map_coalesce(struct dma_iova_state *state)
- static inline bool blk_rq_dma_unmap(struct request *req, struct device *dma_dev,
- 		struct dma_iova_state *state, size_t mapped_len)
- {
-+	unsigned int attrs = 0;
++	if (pfns[idx] & HMM_PFN_P2PDMA)
++		attrs |= DMA_ATTR_MMIO;
 +
- 	if (req->cmd_flags & REQ_P2PDMA)
- 		return true;
+ 	if (pfns[idx] & HMM_PFN_P2PDMA_BUS)
+ 		; /* no need to unmap bus address P2P mappings */
+-	else if (dma_use_iova(state)) {
+-		if (pfns[idx] & HMM_PFN_P2PDMA)
+-			attrs |= DMA_ATTR_SKIP_CPU_SYNC;
++	else if (dma_use_iova(state))
+ 		dma_iova_unlink(dev, state, idx * map->dma_entry_size,
+ 				map->dma_entry_size, DMA_BIDIRECTIONAL, attrs);
+-	} else if (dma_need_unmap(dev))
++	else if (dma_need_unmap(dev))
+ 		dma_unmap_phys(dev, dma_addrs[idx], map->dma_entry_size,
+-			       DMA_BIDIRECTIONAL, 0);
++			       DMA_BIDIRECTIONAL, attrs);
  
- 	if (dma_use_iova(state)) {
-+		if (req->cmd_flags & REQ_MMIO)
-+			attrs = DMA_ATTR_MMIO;
- 		dma_iova_destroy(dma_dev, state, mapped_len, rq_dma_dir(req),
--				 0);
-+				 attrs);
- 		return true;
- 	}
- 
-diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
-index 09b99d52fd365..283058bcb5b14 100644
---- a/include/linux/blk_types.h
-+++ b/include/linux/blk_types.h
-@@ -387,6 +387,7 @@ enum req_flag_bits {
- 	__REQ_FS_PRIVATE,	/* for file system (submitter) use */
- 	__REQ_ATOMIC,		/* for atomic write operations */
- 	__REQ_P2PDMA,		/* contains P2P DMA pages */
-+	__REQ_MMIO,		/* contains MMIO memory */
- 	/*
- 	 * Command specific flags, keep last:
- 	 */
-@@ -420,6 +421,7 @@ enum req_flag_bits {
- #define REQ_FS_PRIVATE	(__force blk_opf_t)(1ULL << __REQ_FS_PRIVATE)
- #define REQ_ATOMIC	(__force blk_opf_t)(1ULL << __REQ_ATOMIC)
- #define REQ_P2PDMA	(__force blk_opf_t)(1ULL << __REQ_P2PDMA)
-+#define REQ_MMIO	(__force blk_opf_t)(1ULL << __REQ_MMIO)
- 
- #define REQ_NOUNMAP	(__force blk_opf_t)(1ULL << __REQ_NOUNMAP)
- 
+ 	pfns[idx] &=
+ 		~(HMM_PFN_DMA_MAPPED | HMM_PFN_P2PDMA | HMM_PFN_P2PDMA_BUS);
 -- 
 2.51.0
 
