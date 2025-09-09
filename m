@@ -4,67 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C89CCA0FED
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 14:40:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1117079.1463291 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E685CAC583
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 14:52:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1117090.1463311 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvzVd-00076w-Nr; Tue, 09 Sep 2025 14:39:49 +0000
+	id 1uvziA-0002Aq-0a; Tue, 09 Sep 2025 14:52:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1117079.1463291; Tue, 09 Sep 2025 14:39:49 +0000
+Received: by outflank-mailman (output) from mailman id 1117090.1463311; Tue, 09 Sep 2025 14:52:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvzVd-00076p-Kw; Tue, 09 Sep 2025 14:39:49 +0000
-Received: by outflank-mailman (input) for mailman id 1117079;
- Tue, 09 Sep 2025 14:39:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uvzi9-0002Aj-Tr; Tue, 09 Sep 2025 14:52:45 +0000
+Received: by outflank-mailman (input) for mailman id 1117090;
+ Tue, 09 Sep 2025 14:52:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QZzH=3U=linux.ibm.com=agordeev@srs-se1.protection.inumbo.net>)
- id 1uvzVb-00075u-F1
- for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 14:39:47 +0000
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d324d9c2-8d8a-11f0-9809-7dc792cee155;
- Tue, 09 Sep 2025 16:39:44 +0200 (CEST)
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 589BBEbn028671;
- Tue, 9 Sep 2025 14:38:53 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 490xycw9r8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Sep 2025 14:38:52 +0000 (GMT)
-Received: from m0356517.ppops.net (m0356517.ppops.net [127.0.0.1])
- by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 589EUjFv007959;
- Tue, 9 Sep 2025 14:38:52 GMT
-Received: from ppma13.dal12v.mail.ibm.com
- (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 490xycw9r3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Sep 2025 14:38:51 +0000 (GMT)
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
- by ppma13.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 589AvumM017218;
- Tue, 9 Sep 2025 14:38:50 GMT
-Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
- by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4911gmbdxs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Sep 2025 14:38:50 +0000
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
- [10.20.54.104])
- by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 589EcnS049545616
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 9 Sep 2025 14:38:49 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0279320043;
- Tue,  9 Sep 2025 14:38:49 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2791F2004B;
- Tue,  9 Sep 2025 14:38:48 +0000 (GMT)
-Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
- [9.155.204.135])
- by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Tue,  9 Sep 2025 14:38:48 +0000 (GMT)
+ <SRS0=wvTB=3U=cloud.com=gerald.elder-vass@srs-se1.protection.inumbo.net>)
+ id 1uvzi8-0001x1-Iq
+ for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 14:52:44 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a3f94728-8d8c-11f0-9d13-b5c5bf9af7f9;
+ Tue, 09 Sep 2025 16:52:43 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-61d143aa4acso9172109a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Sep 2025 07:52:43 -0700 (PDT)
+Received: from eddie5.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-62c018f663asm1414898a12.43.2025.09.09.07.52.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Sep 2025 07:52:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,196 +47,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d324d9c2-8d8a-11f0-9809-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=PZxnEl
-	gXfWNXHVRkPVUlwCfE0YEzKBATAK/iNRyCHno=; b=eAw85XMTzWR9vGa1/hE9vj
-	mydHz5ZGmT77GHt0U64/1YAtQ+lSFTmIp9CIEXj9AqCB1xpfIW94Ks0mq2SdgDpJ
-	0FPArRwybEixPfZaOslsDAe44oIe3Tm1gRsGZY/RLa+8mT3lM30D87vp64U0OPcE
-	AyEhpKjxohjXf8zMTSl45uNLe+xdcC+WMRvNiK8F4OVX4+mUboi1o5W9xWOJyuG4
-	YBGbdgCpU8wPxsq98ebD9TZKO89s1xp8D5BcFUSvtxMjUPUOH9oIgZBJ+OTTT7hW
-	3ZKsxlOOkqxL4/35WGGIhaGdo6h3UOz5oPnEPsFraOl5KI9HlFyrZTNClQjrf38A
-	==
-Date: Tue, 9 Sep 2025 16:38:46 +0200
-From: Alexander Gordeev <agordeev@linux.ibm.com>
-To: Kevin Brodsky <kevin.brodsky@arm.com>
-Cc: David Hildenbrand <david@redhat.com>, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, Andreas Larsson <andreas@gaisler.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christophe Leroy <christophe.leroy@csgroup.eu>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-        Jann Horn <jannh@google.com>, Juergen Gross <jgross@suse.com>,
-        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
-        Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
-        Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>, Michal Hocko <mhocko@suse.com>,
-        Mike Rapoport <rppt@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ryan Roberts <ryan.roberts@arm.com>,
-        Suren Baghdasaryan <surenb@google.com>,
-        Thomas Gleixner <tglx@linutronix.de>, Vlastimil Babka <vbabka@suse.cz>,
-        Will Deacon <will@kernel.org>, Yeoreum Yun <yeoreum.yun@arm.com>,
-        linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-        sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2 2/7] mm: introduce local state for lazy_mmu sections
-Message-ID: <b2e52967-7ca1-411e-9c66-8d3483624ca7-agordeev@linux.ibm.com>
-References: <20250908073931.4159362-1-kevin.brodsky@arm.com>
- <20250908073931.4159362-3-kevin.brodsky@arm.com>
- <d23ea683-cca4-4973-88b1-4f6fd9b22314@redhat.com>
- <ca2054ad-b163-4e61-8ec4-6f2e36461628-agordeev@linux.ibm.com>
- <e7acb889-1fe9-4db3-acf4-39f4960e8ccd@redhat.com>
- <2fecfae7-1140-4a23-a352-9fd339fcbae5-agordeev@linux.ibm.com>
- <e521b1f4-3f2b-48cd-9568-b9a4cf4c4830@redhat.com>
- <47ee1df7-1602-4200-af94-475f84ca8d80@arm.com>
+X-Inumbo-ID: a3f94728-8d8c-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1757429563; x=1758034363; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N/zX6oZGR3iPEmqzxrgqeby+Y3izMNsOvFj5VzGCrp4=;
+        b=C0cD0DRw+lSGrx/Q1ev/NPSh9PXRdyH5B365otD3VZMtqHRSrIq2TcRMX0Sxw6wDMa
+         BTx54PkYToRFXxYf4DytWt6y4u1Z8k8M2H2D8xAAsFRMLbVGB6RKw9dAvztn0c0rT6WI
+         Z4wrABGcTnn6RtRnYoZJv5DdrJVOq5vB8o/j0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757429563; x=1758034363;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=N/zX6oZGR3iPEmqzxrgqeby+Y3izMNsOvFj5VzGCrp4=;
+        b=cCirkcZJP0F79prGXpUA0ORjP4JGj6ZfEQswr2otFanVie4cFGxmsCXqmGtFdmTtpN
+         gEX7s4fjeHsIC9l/IAyUvEEjLYg5GXaEL+YK/utiDN7Jwg3zNc9Xrfoa7zzEyN51L9Qm
+         pqep0w4vItzQoaYN6BeI7wv0yhBQWKGaknrFWPBGPMVIbeDpcANwkNeevcOHMx2wGLQS
+         fnxCv5MQpxmYFBX6qk6qrblG+zuFFTn/Y66Je7VESYhlgNSb2G+jJOauudyNuT4kXycS
+         ClmXbAtHE16EuOZ8wuUwIrqmU39o7V2znmsn3k5axePCKYDDj1mJXUfTxqqNXDQJQC6f
+         NW/Q==
+X-Gm-Message-State: AOJu0Ywk9ymeMftQ6WPnq/wbwJawlfHn3iS+At6L8xyxoPbyCW83c3K7
+	OshcHFbHe6s0AfGA8GYBd+9eKZyAjUVC+R4rMQtOywL2x/rX7TumrloaLRsYqHAV+NbRGToX/Tn
+	2uCZmYXE=
+X-Gm-Gg: ASbGncse9uZasfLCZ/aiKisLFNiRFliK+MnlH5NrT5NPdbHjov7NbU12an8jcyibolI
+	3RdqR7fMs8RqBAkszZGCgAKpTqZLVpMwTWTRxCq/+iO54BWdwbt3JBz4k1ZE5C+yQ20wvs/0ciI
+	mM3tI3pT8ecemBELHttw9dCqctgSx8FPa1DEmpus0uYUajR+Z0BQQaeNeydKpkJzLshQQ9rq3XE
+	CIJVVv7hz+2hXTvENpkD9XgPMTb0lJph9781LP99E02wlpXcn+T/yc5r0knhG4pxd7w3/tb5TEA
+	DzkLgv+MhimH503wrmN21oCJWJtj7aFffgCAM6G5qemHPpSBsMomFKT+vfwztWprO0BFkBMBLl0
+	DINkHoIGiGk/4y2Y5WfFAlcEnQC3K/yYrSVMUcZ769ddkwA==
+X-Google-Smtp-Source: AGHT+IE0TeY5ImlbPGw6G6DSZO46aVvnvk3NMNB5XQANqprPUgE4HQU1QcU3a8pNUeO2PSFuIwlBXA==
+X-Received: by 2002:a05:6402:3814:b0:620:1030:138d with SMTP id 4fb4d7f45d1cf-6237edb1ca2mr10899206a12.22.1757429562713;
+        Tue, 09 Sep 2025 07:52:42 -0700 (PDT)
+From: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Gerald Elder-Vass <gerald.elder-vass@cloud.com>,
+	Kevin Lampis <kevin.lampis@cloud.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 2/2] efi: Support using Shim's LoadImage protocol
+Date: Tue,  9 Sep 2025 14:52:33 +0000
+Message-ID: <c28c49929fc0bdf3ee45dff151a7f1b7f4f178f9.1757421999.git.gerald.elder-vass@cloud.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <cover.1757421999.git.gerald.elder-vass@cloud.com>
+References: <cover.1757421999.git.gerald.elder-vass@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <47ee1df7-1602-4200-af94-475f84ca8d80@arm.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: w3un9YJFAnj-nx4lP2drAL9l1yJOP1En
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA2MDIzNSBTYWx0ZWRfX5AD3L9SkswSm
- yrVgoGtIISKP604rm8z2wlBI+9ePIXNFYQAYLSzjXIjHlXrJz/N5CyEoKiLBFH0S6cAaacNg8MI
- /uqSqt+AyIfCoA2W1PycTsyoA9dnPphhk2M6Dy7RNUKN5o43iFF9IXyIGVBQKdc5LYc5Tqn/OPM
- HPGZJ2R+BrI/nWN/OrWkeMYz3esjc3UK9kdBknkAwa1vw44DfXe2kcF7OMH8RK37Zmyzfk8ftAT
- Mah9tj2mXv8ZZFGcLXNuNYIctcCpzvNgMf9Y+RDBJM2AEQkCBcXflTuYScwL6Aa0Fdpz3OLg/9L
- oof/OuMSKGRkSalY70FlPW8UQK4wZ6ys9K9DbelwH72mhkNMfgbwQ1G8LikJGVg3ZsfCHBBKKvz
- o+6LVfHA
-X-Proofpoint-GUID: kEu557zaNP3aZma9JIWXWvvSIckTRd-u
-X-Authority-Analysis: v=2.4 cv=F59XdrhN c=1 sm=1 tr=0 ts=68c03bfc cx=c_pps
- a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
- a=8nJEP1OIZ-IA:10 a=yJojWOMRYYMA:10 a=0nQrape7h3WL6H1kZSkA:9
- a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-09_02,2025-09-08_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0 clxscore=1015
- impostorscore=0 bulkscore=0 adultscore=0 spamscore=0 classifier=typeunknown
- authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2507300000 definitions=main-2509060235
 
-On Tue, Sep 09, 2025 at 03:49:46PM +0200, Kevin Brodsky wrote:
-> On 09/09/2025 13:54, David Hildenbrand wrote:
-> > On 09.09.25 13:45, Alexander Gordeev wrote:
-> >> On Tue, Sep 09, 2025 at 12:09:48PM +0200, David Hildenbrand wrote:
-> >>> On 09.09.25 11:40, Alexander Gordeev wrote:
-> >>>> On Tue, Sep 09, 2025 at 11:07:36AM +0200, David Hildenbrand wrote:
-> >>>>> On 08.09.25 09:39, Kevin Brodsky wrote:
-> >>>>>> arch_{enter,leave}_lazy_mmu_mode() currently have a stateless API
-> >>>>>> (taking and returning no value). This is proving problematic in
-> >>>>>> situations where leave() needs to restore some context back to its
-> >>>>>> original state (before enter() was called). In particular, this
-> >>>>>> makes it difficult to support the nesting of lazy_mmu sections -
-> >>>>>> leave() does not know whether the matching enter() call occurred
-> >>>>>> while lazy_mmu was already enabled, and whether to disable it or
-> >>>>>> not.
-> >>>>>>
-> >>>>>> This patch gives all architectures the chance to store local state
-> >>>>>> while inside a lazy_mmu section by making enter() return some value,
-> >>>>>> storing it in a local variable, and having leave() take that value.
-> >>>>>> That value is typed lazy_mmu_state_t - each architecture defining
-> >>>>>> __HAVE_ARCH_ENTER_LAZY_MMU_MODE is free to define it as it sees fit.
-> >>>>>> For now we define it as int everywhere, which is sufficient to
-> >>>>>> support nesting.
-> >>>> ...
-> >>>>>> {
-> >>>>>> + lazy_mmu_state_t lazy_mmu_state;
-> >>>>>> ...
-> >>>>>> - arch_enter_lazy_mmu_mode();
-> >>>>>> + lazy_mmu_state = arch_enter_lazy_mmu_mode();
-> >>>>>> ...
-> >>>>>> - arch_leave_lazy_mmu_mode();
-> >>>>>> + arch_leave_lazy_mmu_mode(lazy_mmu_state);
-> >>>>>> ...
-> >>>>>> }
-> >>>>>>
-> >>>>>> * In a few cases (e.g. xen_flush_lazy_mmu()), a function knows that
-> >>>>>> †††† lazy_mmu is already enabled, and it temporarily disables it by
-> >>>>>> †††† calling leave() and then enter() again. Here we want to ensure
-> >>>>>> †††† that any operation between the leave() and enter() calls is
-> >>>>>> †††† completed immediately; for that reason we pass
-> >>>>>> LAZY_MMU_DEFAULT to
-> >>>>>> †††† leave() to fully disable lazy_mmu. enter() will then
-> >>>>>> re-enable it
-> >>>>>> †††† - this achieves the expected behaviour, whether nesting
-> >>>>>> occurred
-> >>>>>> †††† before that function was called or not.
-> >>>>>>
-> >>>>>> Note: it is difficult to provide a default definition of
-> >>>>>> lazy_mmu_state_t for architectures implementing lazy_mmu, because
-> >>>>>> that definition would need to be available in
-> >>>>>> arch/x86/include/asm/paravirt_types.h and adding a new generic
-> >>>>>> ††† #include there is very tricky due to the existing header soup.
-> >>>>>
-> >>>>> Yeah, I was wondering about exactly that.
-> >>>>>
-> >>>>> In particular because LAZY_MMU_DEFAULT etc resides somewehere
-> >>>>> compeltely
-> >>>>> different.
-> >>>>>
-> >>>>> Which raises the question: is using a new type really of any
-> >>>>> benefit here?
-> >>>>>
-> >>>>> Can't we just use an "enum lazy_mmu_state" and call it a day?
-> >>>>
-> >>>> I could envision something completely different for this type on s390,
-> >>>> e.g. a pointer to a per-cpu structure. So I would really ask to stick
-> >>>> with the current approach.
-> 
-> This is indeed the motivation - let every arch do whatever it sees fit.
-> lazy_mmu_state_t is basically an opaque type as far as generic code is
-> concerned, which also means that this API change is the first and last
-> one we need (famous last words, I know).†
-> 
-> I mentioned in the cover letter that the pkeys-based page table
-> protection series [1] would have an immediate use for lazy_mmu_state_t.
-> In that proposal, any helper writing to pgtables needs to modify the
-> pkey register and then restore it. To reduce the overhead, lazy_mmu is
-> used to set the pkey register only once in enter(), and then restore it
-> in leave() [2]. This currently relies on storing the original pkey
-> register value in thread_struct, which is suboptimal and most
-> importantly doesn't work if lazy_mmu sections nest. With this series, we
-> could instead store the pkey register value in lazy_mmu_state_t
-> (enlarging it to 64 bits or more).
-> 
-> I also considered going further and making lazy_mmu_state_t a pointer as
-> Alexander suggested - more complex to manage, but also a lot more flexible.
-> 
-> >>> Would that integrate well with LAZY_MMU_DEFAULT etc?
-> >>
-> >> Hmm... I though the idea is to use LAZY_MMU_* by architectures that
-> >> want to use it - at least that is how I read the description above.
-> >>
-> >> It is only kasan_populate|depopulate_vmalloc_pte() in generic code
-> >> that do not follow this pattern, and it looks as a problem to me.
-> 
-> This discussion also made me realise that this is problematic, as the
-> LAZY_MMU_{DEFAULT,NESTED} macros were meant only for architectures'
-> convenience, not for generic code (where lazy_mmu_state_t should ideally
-> be an opaque type as mentioned above). It almost feels like the kasan
-> case deserves a different API, because this is not how enter() and
-> leave() are meant to be used. This would mean quite a bit of churn
-> though, so maybe just introduce another arch-defined value to pass to
-> leave() for such a situation - for instance,
-> arch_leave_lazy_mmu_mode(LAZY_MMU_FLUSH)?
+The existing Verify functionality of the Shim lock protocol is
+deprecated and will be removed, the alternative it to use the LoadImage
+interface to perform the verification.
 
-What about to adjust the semantics of apply_to_page_range() instead?
+When the loading is successful we won't be using the newly loaded image
+(as of yet) so we must then immediately unload the image to clean up.
 
-It currently assumes any caller is fine with apply_to_pte_range() to
-enter the lazy mode. By contrast, kasan_(de)populate_vmalloc_pte() are
-not fine at all and must leave the lazy mode. That literally suggests
-the original assumption is incorrect.
+If the LoadImage protocol isn't available then fall back to the Shim
+Lock (Verify) interface.
 
-We could change int apply_to_pte_range(..., bool create, ...) to e.g.
-apply_to_pte_range(..., unsigned int flags, ...) and introduce a flag
-that simply skips entering the lazy mmu mode.
+Log when the kernel is not verified and fail if this occurs
+when secure boot mode is enabled.
 
-Thanks!
+Signed-off-by: Gerald Elder-Vass <gerald.elder-vass@cloud.com>
+Signed-off-by: Kevin Lampis <kevin.lampis@cloud.com>
+---
+CC: Marek Marczykowski-G√≥recki <marmarek@invisiblethingslab.com>
+CC: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Julien Grall <julien@xen.org>
+CC: "Roger Pau Monn√©" <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+
+v5:
+- Expand comment to add more clarity on need for unloading the image
+- Check for EFI_SUCCESS from Verify to account for possible warnings,
+  this matches the original behaviour
+v4:
+- Updated error message when failing due to lack of verification
+v3:
+- Use Shim Image by default, fall back to Shim Lock
+---
+ xen/common/efi/boot.c | 62 +++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 54 insertions(+), 8 deletions(-)
+
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 5eb0394e2937..76cccb03aa42 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -38,6 +38,8 @@
+   { 0xf2fd1544U, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94} }
+ #define SHIM_LOCK_PROTOCOL_GUID \
+   { 0x605dab50U, 0xe046, 0x4300, {0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23} }
++#define SHIM_IMAGE_LOADER_GUID \
++  { 0x1f492041U, 0xfadb, 0x4e59, {0x9e, 0x57, 0x7c, 0xaf, 0xe7, 0x3a, 0x55, 0xab} }
+ #define APPLE_PROPERTIES_PROTOCOL_GUID \
+   { 0x91bd12feU, 0xf6c3, 0x44fb, {0xa5, 0xb7, 0x51, 0x22, 0xab, 0x30, 0x3a, 0xe0} }
+ #define EFI_SYSTEM_RESOURCE_TABLE_GUID    \
+@@ -70,6 +72,13 @@ typedef struct {
+     EFI_SHIM_LOCK_VERIFY Verify;
+ } EFI_SHIM_LOCK_PROTOCOL;
+ 
++typedef struct _SHIM_IMAGE_LOADER {
++    EFI_IMAGE_LOAD LoadImage;
++    EFI_IMAGE_START StartImage;
++    EFI_EXIT Exit;
++    EFI_IMAGE_UNLOAD UnloadImage;
++} SHIM_IMAGE_LOADER;
++
+ struct _EFI_APPLE_PROPERTIES;
+ 
+ typedef EFI_STATUS
+@@ -1048,6 +1057,49 @@ static UINTN __init efi_find_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
+     return gop_mode;
+ }
+ 
++static void __init efi_verify_kernel(EFI_HANDLE ImageHandle)
++{
++    static EFI_GUID __initdata shim_image_guid = SHIM_IMAGE_LOADER_GUID;
++    static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
++    SHIM_IMAGE_LOADER *shim_loader;
++    EFI_HANDLE loaded_kernel;
++    EFI_SHIM_LOCK_PROTOCOL *shim_lock;
++    EFI_STATUS status;
++    bool verified = false;
++
++    /* Look for LoadImage first */
++    if ( !EFI_ERROR(efi_bs->LocateProtocol(&shim_image_guid, NULL,
++                                           (void **)&shim_loader)) )
++    {
++        status = shim_loader->LoadImage(false, ImageHandle, NULL,
++                                        (void *)kernel.ptr, kernel.size,
++                                        &loaded_kernel);
++        if ( !EFI_ERROR(status) )
++            verified = true;
++
++        /* Always unload the image. We only wanted LoadImage to perform
++         * verification, in the case of a failure there may still be cleanup
++         * needing to be performed.
++         */
++        shim_loader->UnloadImage(loaded_kernel);
++    }
++
++    /* else fall back to Shim Lock */
++    if ( !verified &&
++         !EFI_ERROR(efi_bs->LocateProtocol(&shim_lock_guid, NULL,
++                                           (void **)&shim_lock)) &&
++         shim_lock->Verify(kernel.ptr, kernel.size) == EFI_SUCCESS )
++        verified = true;
++
++    if ( !verified )
++    {
++        PrintStr(L"Kernel was not verified\n");
++
++        if ( efi_secure_boot )
++            blexit(L"Refusing to boot unverified kernel with UEFI SecureBoot enabled");
++    }
++}
++
+ static void __init efi_tables(void)
+ {
+     unsigned int i;
+@@ -1335,13 +1387,11 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
+                                       EFI_SYSTEM_TABLE *SystemTable)
+ {
+     static EFI_GUID __initdata loaded_image_guid = LOADED_IMAGE_PROTOCOL;
+-    static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
+     EFI_LOADED_IMAGE *loaded_image;
+     EFI_STATUS status;
+     unsigned int i;
+     CHAR16 *file_name, *cfg_file_name = NULL, *options = NULL;
+     UINTN gop_mode = ~0;
+-    EFI_SHIM_LOCK_PROTOCOL *shim_lock;
+     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop = NULL;
+     union string section = { NULL }, name;
+     bool base_video = false;
+@@ -1592,12 +1642,8 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
+      * device tree through the efi_check_dt_boot function, in this stage
+      * verify it.
+      */
+-    if ( kernel.ptr &&
+-         !kernel_verified &&
+-         !EFI_ERROR(efi_bs->LocateProtocol(&shim_lock_guid, NULL,
+-                                           (void **)&shim_lock)) &&
+-         (status = shim_lock->Verify(kernel.ptr, kernel.size)) != EFI_SUCCESS )
+-        PrintErrMesg(L"Dom0 kernel image could not be verified", status);
++    if ( kernel.ptr && !kernel_verified )
++        efi_verify_kernel(ImageHandle);
+ 
+     efi_arch_edd();
+ 
+-- 
+2.47.3
+
 
