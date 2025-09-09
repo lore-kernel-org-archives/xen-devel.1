@@ -4,34 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CB0ECAC58E
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 13:28:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1116787.1463080 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E22CAC583
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Sep 2025 13:33:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1116832.1463092 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvyOv-0008GD-0j; Tue, 09 Sep 2025 13:28:49 +0000
+	id 1uvyTV-0002hy-SY; Tue, 09 Sep 2025 13:33:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1116787.1463080; Tue, 09 Sep 2025 13:28:48 +0000
+Received: by outflank-mailman (output) from mailman id 1116832.1463092; Tue, 09 Sep 2025 13:33:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uvyOu-0008G1-TL; Tue, 09 Sep 2025 13:28:48 +0000
-Received: by outflank-mailman (input) for mailman id 1116787;
- Tue, 09 Sep 2025 13:28:47 +0000
+	id 1uvyTV-0002hr-O3; Tue, 09 Sep 2025 13:33:33 +0000
+Received: by outflank-mailman (input) for mailman id 1116832;
+ Tue, 09 Sep 2025 13:33:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XOGe=3U=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uvyOt-00067u-S9
- for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 13:28:47 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=FOFH=3U=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1uvyTU-0002hE-Em
+ for xen-devel@lists.xenproject.org; Tue, 09 Sep 2025 13:33:32 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061d.outbound.protection.outlook.com
+ [2a01:111:f403:200a::61d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e88a6c20-8d80-11f0-9d13-b5c5bf9af7f9;
- Tue, 09 Sep 2025 15:28:45 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5024C433EF;
- Tue,  9 Sep 2025 13:28:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66D52C4CEF4;
- Tue,  9 Sep 2025 13:28:43 +0000 (UTC)
+ id 929866f9-8d81-11f0-9d13-b5c5bf9af7f9;
+ Tue, 09 Sep 2025 15:33:31 +0200 (CEST)
+Received: from SN7P222CA0016.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:124::16)
+ by IA1PR12MB8079.namprd12.prod.outlook.com (2603:10b6:208:3fb::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
+ 2025 13:33:25 +0000
+Received: from SN1PEPF0002529E.namprd05.prod.outlook.com
+ (2603:10b6:806:124:cafe::a8) by SN7P222CA0016.outlook.office365.com
+ (2603:10b6:806:124::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.23 via Frontend Transport; Tue,
+ 9 Sep 2025 13:33:23 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SN1PEPF0002529E.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9115.13 via Frontend Transport; Tue, 9 Sep 2025 13:33:23 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Tue, 9 Sep
+ 2025 06:32:22 -0700
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 9 Sep
+ 2025 08:31:12 -0500
+Received: from [192.168.29.198] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Tue, 9 Sep 2025 06:31:11 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,194 +65,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e88a6c20-8d80-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757424524;
-	bh=az1vV9FS2ijQFCe2KnlGsCUm5py+7cz5M/t0oqZVEe0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jgpKjl3Wzr18vmUsgRZQtN4//p8yXvKe2bqbeBF+tjCU7DiPUojq+IdDByulqXWaT
-	 RoAAZFNISIIUjdOgETkxJvzlEMu06VIXfR7n+SDYVJ7snL//aFTqN5/n+wjwc9CKce
-	 hgPzq2wz22D/FrFpA1h8MaExay5bJUjRXKU9I9qYxPPzy5vQjh6WVr5wv9ZdJETnxa
-	 +RSkDK4c0tSR4Jg25A6+k+Nj48PdiVEpZ97m9rNszJ8IkgL9HIE++EJgXm7HweKW2n
-	 Z/eO4I7jE8ssv546fCTIjcxZvbt+sSyTCV9kntGrGqjk4RietJ966th5LAGixlLyUg
-	 ACSDJ7U85NKEQ==
-From: Leon Romanovsky <leon@kernel.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Alexander Potapenko <glider@google.com>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>,
-	Danilo Krummrich <dakr@kernel.org>,
-	David Hildenbrand <david@redhat.com>,
-	iommu@lists.linux.dev,
-	Jason Wang <jasowang@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Joerg Roedel <joro@8bytes.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Juergen Gross <jgross@suse.com>,
-	kasan-dev@googlegroups.com,
-	Keith Busch <kbusch@kernel.org>,
-	linux-block@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-nvme@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-trace-kernel@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	rust-for-linux@vger.kernel.org,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev,
-	Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v6 08/16] kmsan: convert kmsan_handle_dma to use physical addresses
-Date: Tue,  9 Sep 2025 16:27:36 +0300
-Message-ID: <3557cbaf66e935bc794f37d2b891ef75cbf2c80c.1757423202.git.leonro@nvidia.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1757423202.git.leonro@nvidia.com>
-References: <cover.1757423202.git.leonro@nvidia.com>
+X-Inumbo-ID: 929866f9-8d81-11f0-9d13-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e0zjae1l2BA3qh+VcpRkQ92Q0WrIHsPNHwJcDn3R5siqkz/Y0JnFpMzyPrZxzpTdv6kVlL3vzs9vFy7QpxGlNKK5poL7JK4Z0hOUWJpXqHgODwtCxSOUaY6Gec8Zo521Q/veDQqTGgUnAHk7hg4y2CWkD7I+BvOFg6017zydHLV5cbiz0vraiz6qfVqItad8uzp+WcpAhS2YadxwfrjabcJ9v92tfKnipHmnyKgo0Pd56V5qMNb5d5yvh4fJSuTi67gccqgQtEM/VbCIHUH/9KOy3g5BgMU2p9bohd+lHuHwd30bKOhCsFJn1PNIk8waDS0vHwcgsF32COEjrWo+Ig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DtLJLBmdDdGL28ifw2udY+Oia7vhLHnRXYJaPTwSAnI=;
+ b=hmdguGs11btJb+66GVokjgmu0I/ig+SRGa9t36OGk8Rnvil+S/WkdvzvNRVOw2rhrFb2myxPguWYK3g+FVb6Rh5ixM9XiSnp57Zl8snr6WZfBS5i9u3wJ+oahBpEkQXIWV//uuE2n6d964FQvWvxUVurdGmRDUPejnRZfMEyO71x/woD4J5P/X/FDy6p+Bh3ntGRIlAyHm0RCnk+Dc/3crvLQ0TbMMXahcVUq05EzMFvX17jmtHAZKvWyvSs/EWyaPQNTvPZhBIIoNIWNEczrMLDDf38dBK/QDbM6bkfaJqACBC/8gwpex/I7EefYH0EV1v+sKcyGnm/5l4vFIkJ0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DtLJLBmdDdGL28ifw2udY+Oia7vhLHnRXYJaPTwSAnI=;
+ b=Ddg7CL19oRyB3tEDGN04pW6NKYMVpznt0X2BFf0ZaR1XCOcBIQwsmy0srHZJREhALW8TDZUFQz/yOM7uUad/SlmjuYuiOY+kJM9fqAzY0c2FWkBM1FrMARod8T0zJNqt4Rta9PyUhQMeNsPQ2vyd9KtIeqpOw80h+PHt5GTIzOo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <593b0524-879c-4cca-afb9-516af613c5af@amd.com>
+Date: Tue, 9 Sep 2025 09:31:12 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] x86/IO-APIC: drop setup_ioapic_ids_from_mpc()
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+	"consulting@bugseng.com" <consulting@bugseng.com>
+References: <e2e54b68-1521-4bf6-9cb9-5703ed2a69fc@suse.com>
+ <034dd6dd-4e3f-4353-9a11-7a0ebda9a664@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <034dd6dd-4e3f-4353-9a11-7a0ebda9a664@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: None (SATLEXMB04.amd.com: jason.andryuk@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529E:EE_|IA1PR12MB8079:EE_
+X-MS-Office365-Filtering-Correlation-Id: 295d7fdc-9a19-4c5e-4023-08ddefa5733b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?V093U3daOGNWdDM4dVNzaWZaV3p4bUlRbFdaeFU2OWdvdWFXczVNMWlCQnQv?=
+ =?utf-8?B?ZnlTRVJ0Y1pXT1ZFL1gxZUt5S0lIMm5tVnMwcVNOaE9iM2thVFl1QXV0WWlt?=
+ =?utf-8?B?eHI5ZllzK0E0MlhUOHpJZmd6cGtVK0RtVUxmNlN0ZTgxK0x1aTNpbkQ3blcr?=
+ =?utf-8?B?aGZTeHYyWHNxVmY5MmJRL3JMZ1dXcU5jSGh2QTBYeEVyam84VzZNVGFKOW0r?=
+ =?utf-8?B?bTFZYzJMZThza01mNWFUS3JXVXNqbHhxVWRDY0RSd3ljMnZvSnJOTjB3Q3M5?=
+ =?utf-8?B?NHd0L2Z0NDhKQ3B5bGdaTUswaDBNMkZlVnBRWnJiQUJQby9BS3RyTlZvaUZu?=
+ =?utf-8?B?V3lxajFZekVqVExNU1kzMG9YelM4eEhaTEJ6WW9GaWljSmlTbm82Z1RwV2V6?=
+ =?utf-8?B?ZDMwMUxmNXUrK3gxTGNUck1CbjRjQ2RuOW56bGJaTHpOakl5U1dMZnFEbVpT?=
+ =?utf-8?B?Vjg2cmdmY3NGYVp5eFFLbnRIdzhLRmhDMENDWjVNVFFIS0FRTTQreHlscUFp?=
+ =?utf-8?B?QjhuTHBjWGIwazNWTGMwK3U2NUM1eldzQ1VJL1NaOW9wQ2dWbzROZFN3cXh4?=
+ =?utf-8?B?NGZWOERaQmJOS3B4bzd5bkFqVGdLYjduaHA5Nmttb08zbGhJWXNoV1hUVUtz?=
+ =?utf-8?B?ZHp1Rk40dEsyOHFSZWZiWnlNZ3BPaGp6K3JuZ1hoMlg5OWI1bzdqZ0hFZTBM?=
+ =?utf-8?B?cW5QT2hSblBkc1VacWJFbFN5ZjFzU09TRHpzM1FjWHk1U2lRVTNZbDVHaDZG?=
+ =?utf-8?B?c1d2dGxJSThuQ0ZsOVF0SG44UlAyVTg5T2dlcTBOWVBaNks3bnlMbDVvRmtH?=
+ =?utf-8?B?RmRLYXI2Z1hrU251SDhxdGFHc3RrWjEzUTRlbm5lT0l5NU84K3h0K0wwNks5?=
+ =?utf-8?B?RnVkS3FSV2NINmM2THFjbW1KM2hrOWY2YVdXMC8vQ002NWNudzJIS2p2UXdG?=
+ =?utf-8?B?ZjN2VXZmaThBeDRWNUpQaHg2aFNzZDZsN01lOCs1Unp4UEdpS3dXZzV2VGNI?=
+ =?utf-8?B?dUw0K0NONGt4cUZ2Y2VkZ0p5TWVRL1RQdFdGekpSS2cxZGJRM3M2Ykl1NUlN?=
+ =?utf-8?B?Z2hIWkdVRE82QW9CWmVRamkzRHpWVlAzZkErdUpCUklFRzNESURRWTQwSjZm?=
+ =?utf-8?B?cWRJNlllbi83SUQ0dkcyUElvcUlISlJVWGxCYTYreUNhT1NiN3p1Znhqa2ZO?=
+ =?utf-8?B?dVVzNjJqWXZNVld0SFZ4T3ZYZXhlWnlUblZ1SDZQM2I4VWQ2VUFyVlY0Z1ZN?=
+ =?utf-8?B?VXZINFRiWkRwckhYa2s4L0wrUy9hVCtYWkZsZVRHOWtnUWZkRnVYdkVxRWFt?=
+ =?utf-8?B?Qkk0UG9QaUdQRFNuVEVOSGNxRVdvOW5Dd3JTekM4Rm94UFBwdnNpdm13NHlk?=
+ =?utf-8?B?eTlIL0hjWExPVDliaTJNTlpiamc5UHJjTXp3RXlvVWNDeXBldm92b0ZtTXhG?=
+ =?utf-8?B?NlM4eXJFbFQwMHB5QXFwVERETlBoUlNnMzdha3hObHgxbHVNV2lOV1NmYW05?=
+ =?utf-8?B?bGYzcGlxMkdTWTVSZENVOU5Fbmd0eEwrd2lOZ2RBdWdhRG40M3Z6aWNVOW0v?=
+ =?utf-8?B?L09kaVBhU0FsUERMbDVBaDNiRm1ZSlBhVys1TFlBQXMzaXBJRE9XZTJRSDZp?=
+ =?utf-8?B?akZhcThRenU2Nlp6bkpaMVJvT1dQYXlScXM2ZlkrdW9NMVBBTTlScWhvbG1x?=
+ =?utf-8?B?TzFMM0tuS0F6SzdMejRkNG5Bd3p3RDlwOGh3Mi9vOURla0RBaDFxNkVNYUJu?=
+ =?utf-8?B?QVNpVnBHNjJvdXdSdm95dUpkTlIvT01hblpkNzhuV1IrM1ZXcmMvRUx0SVc0?=
+ =?utf-8?B?eThsRVZaK0M3dlU1djRMamtIL2JDVDR1QWRSUTRHOXdmMUVMcGVVQnhWMGkv?=
+ =?utf-8?B?Y2JPK0JNYVRwV2VYRGl2N2RXQ3IxaGhPb1oxRXJOK0lBK0dTc1BKRFdtVnpV?=
+ =?utf-8?B?c21hWnhiUzF5Y2ZkVUp0a3RyWjZHUTlSK1FUU3lTOEVwbERCbTdKdWIxMFhS?=
+ =?utf-8?B?VmJlS2dkUy8zSkFOeEJUV0FTR09QS2xqLzV4QzRNSGhMamhPMW9BZE14UWdp?=
+ =?utf-8?Q?KB/K8d?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 13:33:23.7778
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 295d7fdc-9a19-4c5e-4023-08ddefa5733b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF0002529E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8079
 
-From: Leon Romanovsky <leonro@nvidia.com>
+On 2025-09-03 03:55, Jan Beulich wrote:
+> Along the lines of what b89f8f054f96 ("x86/apic: Drop sync_Arb_IDs()")
+> said, the function is dead logic as well: All 64-bit capable Intel systems
+> have (at least) xAPIC (if not x2APIC).
+> 
+> Even if Eclair can't know it, such code is violating Misra rule 2.2 (dead
+> code; we didn't accept that yet, but - where possible - we probably would
+> better follow it). Depending on one's reading, this code may actually be a
+> violation of rule 2.1 (unreachable), which we did accept:
+> 
+> "Code is unreachable if, ..., there is no combination of program inputs
+>   that can cause it to be executed."
+> 
+> Otoh it's "only" __init code.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Convert the KMSAN DMA handling function from page-based to physical
-address-based interface.
-
-The refactoring renames kmsan_handle_dma() parameters from accepting
-(struct page *page, size_t offset, size_t size) to (phys_addr_t phys,
-size_t size). The existing semantics where callers are expected to
-provide only kmap memory is continued here.
-
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/virtio/virtio_ring.c |  4 ++--
- include/linux/kmsan.h        |  9 ++++-----
- kernel/dma/mapping.c         |  3 ++-
- mm/kmsan/hooks.c             | 10 ++++++----
- tools/virtio/linux/kmsan.h   |  2 +-
- 5 files changed, 15 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index f5062061c4084..c147145a65930 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -378,7 +378,7 @@ static int vring_map_one_sg(const struct vring_virtqueue *vq, struct scatterlist
- 		 * is initialized by the hardware. Explicitly check/unpoison it
- 		 * depending on the direction.
- 		 */
--		kmsan_handle_dma(sg_page(sg), sg->offset, sg->length, direction);
-+		kmsan_handle_dma(sg_phys(sg), sg->length, direction);
- 		*addr = (dma_addr_t)sg_phys(sg);
- 		return 0;
- 	}
-@@ -3157,7 +3157,7 @@ dma_addr_t virtqueue_dma_map_single_attrs(struct virtqueue *_vq, void *ptr,
- 	struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	if (!vq->use_dma_api) {
--		kmsan_handle_dma(virt_to_page(ptr), offset_in_page(ptr), size, dir);
-+		kmsan_handle_dma(virt_to_phys(ptr), size, dir);
- 		return (dma_addr_t)virt_to_phys(ptr);
- 	}
- 
-diff --git a/include/linux/kmsan.h b/include/linux/kmsan.h
-index 2b1432cc16d59..f2fd221107bba 100644
---- a/include/linux/kmsan.h
-+++ b/include/linux/kmsan.h
-@@ -182,8 +182,7 @@ void kmsan_iounmap_page_range(unsigned long start, unsigned long end);
- 
- /**
-  * kmsan_handle_dma() - Handle a DMA data transfer.
-- * @page:   first page of the buffer.
-- * @offset: offset of the buffer within the first page.
-+ * @phys:   physical address of the buffer.
-  * @size:   buffer size.
-  * @dir:    one of possible dma_data_direction values.
-  *
-@@ -192,7 +191,7 @@ void kmsan_iounmap_page_range(unsigned long start, unsigned long end);
-  * * initializes the buffer, if it is copied from device;
-  * * does both, if this is a DMA_BIDIRECTIONAL transfer.
-  */
--void kmsan_handle_dma(struct page *page, size_t offset, size_t size,
-+void kmsan_handle_dma(phys_addr_t phys, size_t size,
- 		      enum dma_data_direction dir);
- 
- /**
-@@ -372,8 +371,8 @@ static inline void kmsan_iounmap_page_range(unsigned long start,
- {
- }
- 
--static inline void kmsan_handle_dma(struct page *page, size_t offset,
--				    size_t size, enum dma_data_direction dir)
-+static inline void kmsan_handle_dma(phys_addr_t phys, size_t size,
-+				    enum dma_data_direction dir)
- {
- }
- 
-diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
-index 3ac7d15e095f9..e47bcf7cc43d7 100644
---- a/kernel/dma/mapping.c
-+++ b/kernel/dma/mapping.c
-@@ -172,7 +172,8 @@ dma_addr_t dma_map_page_attrs(struct device *dev, struct page *page,
- 		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
- 	else
- 		addr = ops->map_page(dev, page, offset, size, dir, attrs);
--	kmsan_handle_dma(page, offset, size, dir);
-+
-+	kmsan_handle_dma(phys, size, dir);
- 	trace_dma_map_phys(dev, phys, addr, size, dir, attrs);
- 	debug_dma_map_phys(dev, phys, size, dir, addr, attrs);
- 
-diff --git a/mm/kmsan/hooks.c b/mm/kmsan/hooks.c
-index 97de3d6194f07..fa9475e5ec4e9 100644
---- a/mm/kmsan/hooks.c
-+++ b/mm/kmsan/hooks.c
-@@ -336,14 +336,16 @@ static void kmsan_handle_dma_page(const void *addr, size_t size,
- }
- 
- /* Helper function to handle DMA data transfers. */
--void kmsan_handle_dma(struct page *page, size_t offset, size_t size,
-+void kmsan_handle_dma(phys_addr_t phys, size_t size,
- 		      enum dma_data_direction dir)
- {
--	u64 page_offset, to_go, addr;
-+	struct page *page = phys_to_page(phys);
-+	u64 page_offset, to_go;
-+	void *addr;
- 
--	if (PageHighMem(page))
-+	if (PhysHighMem(phys))
- 		return;
--	addr = (u64)page_address(page) + offset;
-+	addr = page_to_virt(page);
- 	/*
- 	 * The kernel may occasionally give us adjacent DMA pages not belonging
- 	 * to the same allocation. Process them separately to avoid triggering
-diff --git a/tools/virtio/linux/kmsan.h b/tools/virtio/linux/kmsan.h
-index 272b5aa285d5a..6cd2e3efd03dc 100644
---- a/tools/virtio/linux/kmsan.h
-+++ b/tools/virtio/linux/kmsan.h
-@@ -4,7 +4,7 @@
- 
- #include <linux/gfp.h>
- 
--inline void kmsan_handle_dma(struct page *page, size_t offset, size_t size,
-+inline void kmsan_handle_dma(phys_addr_t phys, size_t size,
- 			     enum dma_data_direction dir)
- {
- }
--- 
-2.51.0
-
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
