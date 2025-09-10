@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF66ACA101F
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 07:40:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1117607.1463745 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B23CA0FED
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 07:46:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1117664.1463755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwFQi-00015P-Ts; Wed, 10 Sep 2025 07:39:48 +0000
+	id 1uwFWl-0004RL-P5; Wed, 10 Sep 2025 07:46:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1117607.1463745; Wed, 10 Sep 2025 07:39:48 +0000
+Received: by outflank-mailman (output) from mailman id 1117664.1463755; Wed, 10 Sep 2025 07:46:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwFQi-00015B-PK; Wed, 10 Sep 2025 07:39:48 +0000
-Received: by outflank-mailman (input) for mailman id 1117607;
- Wed, 10 Sep 2025 07:39:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uwFWl-0004RE-MA; Wed, 10 Sep 2025 07:46:03 +0000
+Received: by outflank-mailman (input) for mailman id 1117664;
+ Wed, 10 Sep 2025 07:46:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T+uy=3V=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1uwFQh-0005yt-4V
- for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 07:39:47 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20627.outbound.protection.outlook.com
- [2a01:111:f403:2413::627])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5131ef70-8e19-11f0-9d13-b5c5bf9af7f9;
- Wed, 10 Sep 2025 09:39:44 +0200 (CEST)
-Received: from BYAPR11CA0058.namprd11.prod.outlook.com (2603:10b6:a03:80::35)
- by MN0PR12MB6269.namprd12.prod.outlook.com (2603:10b6:208:3c3::14)
+ id 1uwFRG-0005yo-Qx
+ for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 07:40:22 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20608.outbound.protection.outlook.com
+ [2a01:111:f403:2417::608])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 66ce359c-8e19-11f0-9809-7dc792cee155;
+ Wed, 10 Sep 2025 09:40:20 +0200 (CEST)
+Received: from BYAPR11CA0082.namprd11.prod.outlook.com (2603:10b6:a03:f4::23)
+ by IA0PR12MB8645.namprd12.prod.outlook.com (2603:10b6:208:48f::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Wed, 10 Sep
- 2025 07:39:37 +0000
-Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
- (2603:10b6:a03:80:cafe::7e) by BYAPR11CA0058.outlook.office365.com
- (2603:10b6:a03:80::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.15 via Frontend Transport; Wed,
- 10 Sep 2025 07:39:37 +0000
+ 2025 07:40:15 +0000
+Received: from SN1PEPF0002529E.namprd05.prod.outlook.com
+ (2603:10b6:a03:f4:cafe::91) by BYAPR11CA0082.outlook.office365.com
+ (2603:10b6:a03:f4::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.22 via Frontend Transport; Wed,
+ 10 Sep 2025 07:40:14 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ SN1PEPF0002529E.mail.protection.outlook.com (10.167.242.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.13 via Frontend Transport; Wed, 10 Sep 2025 07:39:36 +0000
+ 15.20.9115.13 via Frontend Transport; Wed, 10 Sep 2025 07:40:14 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Wed, 10 Sep 2025 00:39:24 -0700
+ 15.2.2562.17; Wed, 10 Sep 2025 00:40:04 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5131ef70-8e19-11f0-9d13-b5c5bf9af7f9
+X-Inumbo-ID: 66ce359c-8e19-11f0-9809-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TC4uUqyltw5vGItxPZ/zqEYWGhRZHIW8EK7/YP+IrMIHIiT3ftUzhy5em5ZawxvEyp7Z4SIfAbDx30DGK2sl1dyD46hPg6LF9OpS1OrFSwRBHKppMjuqYzpk7YR98eX1JW2o/ZgGLVEpPhAzxT2o+tk/VmQ54AeFv1PGdOlzJOSDGo8r0qZTRq9rBTD2ps59f7EDuq6rDORjoiRZzze/dnCGBA2lnoXl7gceUH3q8MZ4zqaf/+bQzQ5KEfnglMcOa8L0qd6a0boTJudUeNDu1rN3SfGsVW3/Cxozd7r9yumvru83s9twKQcyCoyQhr3TaN6y+bC6AxuU0nvHQN3Tpw==
+ b=ps8wEh1u+KGi+t09RPAtHWmZRRNbgiW4Z+dWSJbExQRZL8APK6owBNqnFi3XfBYPxeSeMyUcpLzeIuOog7js9yuR8ClvmBaFumu5vp8zLeMEju7vQIk4Wbh6ph6RLaeke8DbIFPz3tTND79cvgKOrUWF7BkM19FgnmbP+m9KXEvzGALNJAxDYcnF+TJuLRgiS/Tdf1QRcxY0n3OgB1LoEB6q9aGWLvrg8reY7eCx89F51gbctUcCmE1BOFxKp0F/GZXvPJ8XZ6vXUSHaDndRY5nx/OMrwaeflYUued1ogBsn5VTQfSAE0ZHrdalJ2swZb/Svuopvt+mbcj+W9OA8CQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tq+CA+zLJhXvuE0ShxLvIZ5qcSI/7xz/3Fi/Dd8+moA=;
- b=qZec2R9DBjkcd4vezsazPqBZgbF2liD9S35kgCa6ycTNzlbwFh0GGazQvUPLB5QwlxvqlLXaBlYSL4MzTq+3RWdNN74O9LDtn9YCvxEer1KhzJv6sXXAZ/gx4Cw+q1GCG28vWoEJccRPEVc//9rIlTmmeYUjRG31RqCli6s/k6YcH5RnKocgEwQ0VKf1jY9CBq8F9nQs0KKauKgGUpNnWivhoVT3zli8mUYGwUN19liDTw3JH7n7EMIoo0Wwvh4WmIhbuFtHSu8XO5o4f/rD6aSTk6cRch8NvxPRnAYP5BrNamQO7jM4xz5+HyvexToUG+O5+uwQNoGOd4H6fZNODQ==
+ bh=hWuX102tq8N0iGW1Xc/rVxB+j69uluf4R+r4Cnb/XwU=;
+ b=iKv5W3CgikRHbc9XWII0F+gSF9sZDdLpHgqYlepAsVROQQRaMHhGfjxpYj/tZvIxNs9YDEAusjY9v4AvgF/jZ3OVA6reZaGv6wSDF4YBk+CIOvFVbRoWB6N/uOC8FqT15U8JIKOiJdhkz0NDG7QhgoYPwAiWjpLz1VxPXmLm0ImcFUAXD8eBesDhDCBoZdt/rQCyJOOKpU+KrJpkYV1zZtr5LWioTnGUCT7y1716EzmW6DWwFkx8lq3Gkq1qz1ydRtYbOsz04GLJQvCZRkLPoK3DuronUBANdcEsP/Wn1Kz2Ed59KvRoew4nQcrBiSmoni8R/nn3QGmN2W5MJBQzzQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tq+CA+zLJhXvuE0ShxLvIZ5qcSI/7xz/3Fi/Dd8+moA=;
- b=ty/x+WBkoeJ15Ip2ZTSDEHU3e5nChCBt7wbRXCDoBWb6HiXOvjmD2Cch0NT/PbMrjFy7iFg8/Ru3IO43J8se2kxMfwdTI7Xhyg8RMAFAiddxjt529gTsfm1bMHowylw1c1nW7xb46y6SZTONwpHUWHSDpCUzGWndAd4AMRvc9fU=
+ bh=hWuX102tq8N0iGW1Xc/rVxB+j69uluf4R+r4Cnb/XwU=;
+ b=fvGfr/0tX9Uz3aOqC9LAhPG8N5q8lc1dak5VQgBM8u81m+OlmV7Ltqh0eXbYWYt4zf80zj668sSN+B47eUWmEur4teh8FmhdxyV6LZnRtAFe0D7dn/37adQolkEUfXMFfTdZNQa5ZlSeBZC5SJGmtDb2tGwD1wRS2tIxBrJUDpk=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,16 +82,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v2 10/26] xen/domctl: wrap domain_kill() with CONFIG_MGMT_HYPERCALLS
-Date: Wed, 10 Sep 2025 15:38:11 +0800
-Message-ID: <20250910073827.3622177-11-Penny.Zheng@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [PATCH v2 25/26] xen/xsm: wrap xsm functions with CONFIG_MGMT_HYPERCALLS
+Date: Wed, 10 Sep 2025 15:38:26 +0800
+Message-ID: <20250910073827.3622177-26-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250910073827.3622177-1-Penny.Zheng@amd.com>
 References: <20250910073827.3622177-1-Penny.Zheng@amd.com>
@@ -103,470 +98,272 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|MN0PR12MB6269:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2316dd43-d060-4201-2487-08ddf03d3149
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529E:EE_|IA0PR12MB8645:EE_
+X-MS-Office365-Filtering-Correlation-Id: e8af2545-45c3-4072-4ecb-08ddf03d47d2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024|7416014;
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?fObpvZwNLj+LjZmgBHhLmcdAi2r1N+RFqoUcqT9V5kyPt7V9b5gmM9hGlcNx?=
- =?us-ascii?Q?pN/QCF/qD+mPETgUOJhFBDxahRnyx/KXqowKNQIPnJ34U2Co7XPMxRbI7sCR?=
- =?us-ascii?Q?ctiLlcJagsrNNmFS4EUcL+7EU5LFRfxPdoPwlBROsolA8BkOvbWsGq6IdpQZ?=
- =?us-ascii?Q?Zq12/hPKoX/klFUZDH6v3bx2G6sWp1jMdR6hBXsKK21ktnIXJ3KD4dW9HXZ6?=
- =?us-ascii?Q?5ZO0Vdh0ss53BAfO5miythUV95Ll0FAV08iL4CLmGkYXNIvFA3hNEuNbpBlh?=
- =?us-ascii?Q?wQrGuYcGGQKEjphDGipN8h3h+x/rwSS0x4jnv6yexXlxVIvuSuawpd60+5RZ?=
- =?us-ascii?Q?TRx3YGbSsAT0hC+V1lsBPeEo54vUO7Ihtu3dVeM14tP5hnSlJJb61kpMh3Wt?=
- =?us-ascii?Q?nyMC6cbkEYLAmuw9o8dcpxBBVN8lGaa4TNXuGlDmdNtgOfgmfggJMra+eRiQ?=
- =?us-ascii?Q?dzKmVLVNVJ9N0hwdD/t7Bpsa+PMcx1w7sQG7FmP5tzqw3xZKSe1/ssJdhNvT?=
- =?us-ascii?Q?ifcgIAor04qMs6lEoDoRwoGIjsQ8uAbdu8BME5KXHET1cnLwSNN6j+1MEjUb?=
- =?us-ascii?Q?MVFvYJTUXrwePqCQZnwORU/RWxcTV/DK5e5gtHmiZYWLdwNDxtTgGqi8PAyJ?=
- =?us-ascii?Q?bYuk+dqHbFqycIrxvEmmQKbxVdP+hb56hnzdSHYj0VDHOXCc2BcQXl03DNcx?=
- =?us-ascii?Q?u+6UhxxZm1lEc1SBw68guk3PUVnbeKabNL1JtkOnxUV3jL88iwV3quFnQdtp?=
- =?us-ascii?Q?IyyYnN/D+MWpxP+V2c88hxE4OQOgRZ1l0+QbU+MNu5SZTd16WLqJ6ErP4+VO?=
- =?us-ascii?Q?3A6+rDfJnKm7mtJEwlVxpBBq+gFwPD678yOB//y1kM0HP0nvs3ktf7FeOnKU?=
- =?us-ascii?Q?l5WjpIfeXmnd6e3g643/6KIsxoCv8BoKdu5pYbST7tRUt3K7KYfeieDaubwf?=
- =?us-ascii?Q?JTgidCY3HW5vdohFcOpMVzIHAB9zhb4e4GkidtsZowkO2d+zI1PuPBUHEd7y?=
- =?us-ascii?Q?Y8Csa3Hga3uu7qShfVINXdzuEWdLmYacLRi85BEIyEInci+5Bcjuoqk6Nwit?=
- =?us-ascii?Q?hOI59Er06sZpzGge69LhJG7L6PL9jlRehrPhSbMHwbN9lGWnjHfnTOANv3/q?=
- =?us-ascii?Q?mDDUecP1ywQGUgGwiIVItF01FsOQatD97nt1EH5J7X6vd3SOnWUB2tgYAdwm?=
- =?us-ascii?Q?SF2pYwRxWDO1GcNIvzWbEbvu2O19D9jRGWNVQrG7ki9WysI38tjTJRPjZsTl?=
- =?us-ascii?Q?vpUyD/KZ/ADwH/etXmNOsgXeDHK45K8Iv9t57BH2j8lFKyR8NysMgExtNKpf?=
- =?us-ascii?Q?C95QFQpCMWr0IJ6bZ9Z/YIUbbJNkwEisd74QshNqj1MdYzfP/CiOJL+A4HQ4?=
- =?us-ascii?Q?TFXX4BkpZXxd8fH18IRdLW72md3WXPka86i+JrHtPtCDzYco7yPWaWw5ejxH?=
- =?us-ascii?Q?ACZUgn3l8X0tIIrk4Vi98m8ERiHPehvjSoJGFMJemBLW5DjHdaq7G6gyKMu4?=
- =?us-ascii?Q?dZkBLRjFI29OjqQgmyuaT5R5gTJPlcDczKLw?=
+	=?us-ascii?Q?uYgqoPTuaLZ9fVwkGZSjOlr9byLe1Bzai8rMquUZPLD5J4ILNARx2aAMfCsI?=
+ =?us-ascii?Q?7vIhOjaPGFdZUNgh8dj0TH8t9+9wCiqMP43ZjeOB7ztVfJOiYOcRZIUPbrCA?=
+ =?us-ascii?Q?mY/+CRhzxw6CwQ3WWKd7e4dTglB4jq6qJl0yVNCTjKtwVOVWwnnVEvCfIDFy?=
+ =?us-ascii?Q?NrLPipS+QpZHyEaykhfLV0DIlAO57KiFmJxjRRlATQhR/syWoDOaEBTkvkEm?=
+ =?us-ascii?Q?yu2dyyWL3mH7SyZKc0tLO+Cc2NaqqWjONqkWsw+TAybXSSYOQchy6ZV3fFnB?=
+ =?us-ascii?Q?NCwDk7syRnpx+HUJWgk9cvCOK2E0yt7WFIO4toaBdHZKQF9SMTGXBgPy+s8c?=
+ =?us-ascii?Q?I+TZWQQ7//nGOcAeJZQUjL5V9ENqlp+rOugpPB00vzZnPFvVZM8a7S2AcOzu?=
+ =?us-ascii?Q?KHMXw4E1xBS0TOFpKidyr9sQ/FhpeMNy3m9s2ttEcYJJOBagYp2JHTIAiLbm?=
+ =?us-ascii?Q?oaJBDSqq6R53Ko9wLRImQA5O8FoInWTY+qVYf8PwnNJ7ZNEzyUOKY8BpR50j?=
+ =?us-ascii?Q?mXxndP4IrpurepQ1DW082mhOSKHUBKUL7FBvYIjv/Ux7hJqPMm2Er8N+IYpj?=
+ =?us-ascii?Q?xphy8GxwO2YoFElrN98+6/5KaEDCM119ON/EtT5f1GOTBFo+73NzEAMr/sG2?=
+ =?us-ascii?Q?AIHzOVEm/YV2eaX1mz+3ReQGr/PiEjyPdWOb4Kd+IZYwZ0VLd9j3JJw5lmBe?=
+ =?us-ascii?Q?N/vUMp5fO2BrOEReFymZyTRWg426xXnDEmBKkbWn5KRZu/rKx4qD/qRnGLp4?=
+ =?us-ascii?Q?QMUVgjy+jERryBQIfvlDNb9CoKcZxU527WGoCpjWdi/VbxMNxPZ2znM3Dyub?=
+ =?us-ascii?Q?nDdm/bhnYMN9s5TqDAHRM1vhubBKfpxyWgD6q+ivorxX2guU8Uzfxq+GTnJ7?=
+ =?us-ascii?Q?zfr1QEl9Br5KvXn7IvWSV/e99sHBPOmEQw6Dn5XGanuuDJlDqiWEQWT7MZJd?=
+ =?us-ascii?Q?qiLJU+P/tBBVxGUyDqRGqWMANhSe8ISSS6cDFIhqFPPj+McxMLsoKCH5Hm8P?=
+ =?us-ascii?Q?zCu/jge+NjK5QCNWVGn+DThzwtQ5/SdGp9duuOqlm1A1sfvFevVBGQ7UTn58?=
+ =?us-ascii?Q?XSTUrBZG+QpQpJoeRcOxYu6wrwlkcpnnlvErr8nBhqvnWbYh2KK/nE6HByvH?=
+ =?us-ascii?Q?NpBrYmjSqqeWzyt3DyeATZmFEUw3eIW7InNxU/Mlo5mnFxQBQRTs8M5fuBXR?=
+ =?us-ascii?Q?Isy79lE/kWwDt3c1OlaQR6VwF1dOaErBdunK46I1+df8NERKndf9xsSSoxzP?=
+ =?us-ascii?Q?/16ZgSroMy8HHWrvso3xRqMqt/0sQCIE7URYY+XjDXAanh8Eprv240qKVe9Q?=
+ =?us-ascii?Q?zABGHlusZggs1QeMEwU18iiAj6nxsSWj92Y2IJ7Eki/7O39Yed0lODc4h2fY?=
+ =?us-ascii?Q?SjMgOZhsZncuGWUrurKl8xaySIeWyNo6Azm2M22Mq2Jt252C5RYSoe2BshC0?=
+ =?us-ascii?Q?GBMOl5hjPyoQ8cUCRFrDlVS0Psaug6YHNlpemonARu8zgYrCOTZkZVCfhKry?=
+ =?us-ascii?Q?brB9eocZf8nbXMgwz2x0fL8WGLISz4jSg+Db?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(7416014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2025 07:39:36.6289
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2025 07:40:14.4513
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2316dd43-d060-4201-2487-08ddf03d3149
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8af2545-45c3-4072-4ecb-08ddf03d47d2
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF000252A1.namprd05.prod.outlook.com
+	SN1PEPF0002529E.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6269
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8645
 
-Function domain_kill() is responsible for killing domain and relinquish
-domain-held resources. and it is only invoked under
-XEN_DOMCTL_destroydomain-case. So it shall be wrapped with
-CONFIG_MGMT_HYPERCALLS.
-Tracking its calling chain, the following functions could also be wrapped with
-CONFIG_MGMT_HYPERCALLS:
-- domain_relinquish_resource
-  - pci_release_device
-  - relinquish_shared_pages
-  - paging_teardown
-    - p2m_pod_empty_cache
-  - relinquish_memory
-  - pit_deinit
-  - iommu_release_dt_devices
-  - tee_relinquish_resources
-    - ffa_relinquish_resources/optee_relinquish_resources
-  - relinquish_p2m_mapping
-  - p2m_clear_root_pages
-Wrap XEN_DOMCTL_destroydomain-case transiently with CONFIG_MGMT_HYPERCALLS,
-and it will be removed when introducing CONFIG_MGMT_HYPERCALLS on the
-common/domctl.c in the last.
+The following functions are xsm-related and only invoked under arch-specific
+domctl-op, so they shall all be wrapped with CONFIG_MGMT_HYPERCALLS:
+- xsm_domctl
+- xsm_{bind,unbind}_pt_irq
+- xsm_ioport_permission
+- xsm_ioport_mapping
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
 v1 -> v2:
-- adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
-- wrap XEN_DOMCTL_destroydomain-case transiently
+- new commit
 ---
- xen/arch/arm/domain.c                 | 3 +++
- xen/arch/arm/include/asm/tee/tee.h    | 2 ++
- xen/arch/arm/mmu/p2m.c                | 4 ++++
- xen/arch/arm/mpu/p2m.c                | 2 ++
- xen/arch/arm/tee/ffa.c                | 4 ++++
- xen/arch/arm/tee/optee.c              | 4 ++++
- xen/arch/arm/tee/tee.c                | 2 ++
- xen/arch/x86/domain.c                 | 2 ++
- xen/arch/x86/emul-i8254.c             | 2 ++
- xen/arch/x86/mm/mem_sharing.c         | 2 ++
- xen/arch/x86/mm/p2m-pod.c             | 2 ++
- xen/arch/x86/mm/p2m.c                 | 2 ++
- xen/arch/x86/mm/paging.c              | 2 ++
- xen/common/domain.c                   | 2 ++
- xen/common/domctl.c                   | 2 +-
- xen/drivers/passthrough/device_tree.c | 2 ++
- xen/drivers/passthrough/pci.c         | 2 ++
- 17 files changed, 40 insertions(+), 1 deletion(-)
+ xen/include/xsm/xsm.h | 14 ++++++++++++--
+ xen/xsm/dummy.c       |  6 +++---
+ xen/xsm/flask/hooks.c | 12 ++++++------
+ 3 files changed, 21 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 30ff9dac46..3e7f40ab01 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -995,6 +995,7 @@ int arch_vcpu_reset(struct vcpu *v)
-     return 0;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int relinquish_memory(struct domain *d, struct page_list_head *list)
- {
-     struct page_info *page, *tmp;
-@@ -1145,6 +1146,8 @@ int domain_relinquish_resources(struct domain *d)
- 
- #undef PROGRESS
- 
-+#endif /* CONFIG_MGMT_HYPERCALLS */
-+
- void arch_dump_domain_info(struct domain *d)
- {
-     p2m_dump_info(d);
-diff --git a/xen/arch/arm/include/asm/tee/tee.h b/xen/arch/arm/include/asm/tee/tee.h
-index 15d664e28d..f4187c5dc3 100644
---- a/xen/arch/arm/include/asm/tee/tee.h
-+++ b/xen/arch/arm/include/asm/tee/tee.h
-@@ -40,12 +40,14 @@ struct tee_mediator_ops {
-     int (*domain_teardown)(struct domain *d);
-     void (*free_domain_ctx)(struct domain *d);
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     /*
-      * Called during domain destruction to relinquish resources used
-      * by mediator itself. This function can return -ERESTART to indicate
-      * that it does not finished work and should be called again.
-      */
-     int (*relinquish_resources)(struct domain *d);
+diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
+index 542488bd44..0539e3bf10 100644
+--- a/xen/include/xsm/xsm.h
++++ b/xen/include/xsm/xsm.h
+@@ -60,8 +60,8 @@ struct xsm_ops {
+     int (*domctl_scheduler_op)(struct domain *d, int op);
+     int (*sysctl_scheduler_op)(int op);
+     int (*set_target)(struct domain *d, struct domain *e);
+-#endif
+     int (*domctl)(struct domain *d, unsigned int cmd, uint32_t ssidref);
 +#endif
+     int (*sysctl)(int cmd);
+     int (*readconsole)(uint32_t clear);
  
-     /* Handle SMCCC call for current domain. */
-     bool (*handle_call)(struct cpu_user_regs *regs);
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 51abf3504f..30d6071e91 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -1243,6 +1243,7 @@ static void p2m_invalidate_table(struct p2m_domain *p2m, mfn_t mfn)
-     p2m->need_flush = true;
- }
- 
+@@ -111,9 +111,9 @@ struct xsm_ops {
+     int (*map_domain_irq)(struct domain *d, int irq, const void *data);
+     int (*unmap_domain_pirq)(struct domain *d);
+     int (*unmap_domain_irq)(struct domain *d, int irq, const void *data);
 +#ifdef CONFIG_MGMT_HYPERCALLS
- /*
-  * The domain will not be scheduled anymore, so in theory we should
-  * not need to flush the TLBs. Do it for safety purpose.
-@@ -1262,6 +1263,7 @@ void p2m_clear_root_pages(struct p2m_domain *p2m)
- 
-     p2m_write_unlock(p2m);
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /*
-  * Invalidate all entries in the root page-tables. This is
-@@ -1556,6 +1558,7 @@ int p2m_init(struct domain *d)
-     return 0;
- }
- 
+     int (*bind_pt_irq)(struct domain *d, struct xen_domctl_bind_pt_irq *bind);
+     int (*unbind_pt_irq)(struct domain *d, struct xen_domctl_bind_pt_irq *bind);
+-#ifdef CONFIG_MGMT_HYPERCALLS
+     int (*irq_permission)(struct domain *d, int pirq, uint8_t allow);
+     int (*iomem_permission)(struct domain *d, uint64_t s, uint64_t e,
+                             uint8_t allow);
+@@ -190,10 +190,12 @@ struct xsm_ops {
+     int (*update_va_mapping)(struct domain *d, struct domain *f,
+                              l1_pgentry_t pte);
+     int (*priv_mapping)(struct domain *d, struct domain *t);
 +#ifdef CONFIG_MGMT_HYPERCALLS
- /*
-  * The function will go through the p2m and remove page reference when it
-  * is required. The mapping will be removed from the p2m.
-@@ -1626,6 +1629,7 @@ int relinquish_p2m_mapping(struct domain *d)
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /*
-  * Clean & invalidate RAM associated to the guest vCPU.
-diff --git a/xen/arch/arm/mpu/p2m.c b/xen/arch/arm/mpu/p2m.c
-index f7fb58ab6a..c44297a9e3 100644
---- a/xen/arch/arm/mpu/p2m.c
-+++ b/xen/arch/arm/mpu/p2m.c
-@@ -57,10 +57,12 @@ bool p2m_resolve_translation_fault(struct domain *d, gfn_t gfn)
- 
- void p2m_flush_vm(struct vcpu *v) {}
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int relinquish_p2m_mapping(struct domain *d)
- {
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- void p2m_domain_creation_finished(struct domain *d) {}
- 
-diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 1d0239cf69..f9ba9b60bf 100644
---- a/xen/arch/arm/tee/ffa.c
-+++ b/xen/arch/arm/tee/ffa.c
-@@ -469,10 +469,12 @@ static void ffa_free_domain_ctx(struct domain *d)
-     XFREE(d->arch.tee);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int ffa_relinquish_resources(struct domain *d)
- {
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static void ffa_init_secondary(void)
- {
-@@ -623,7 +625,9 @@ static const struct tee_mediator_ops ffa_ops =
-     .domain_init = ffa_domain_init,
-     .domain_teardown = ffa_domain_teardown,
-     .free_domain_ctx = ffa_free_domain_ctx,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .relinquish_resources = ffa_relinquish_resources,
+     int (*ioport_permission)(struct domain *d, uint32_t s, uint32_t e,
+                              uint8_t allow);
+     int (*ioport_mapping)(struct domain *d, uint32_t s, uint32_t e,
+                           uint8_t allow);
 +#endif
-     .handle_call = ffa_handle_call,
- };
- 
-diff --git a/xen/arch/arm/tee/optee.c b/xen/arch/arm/tee/optee.c
-index 5151bd90ed..1ed0fd231d 100644
---- a/xen/arch/arm/tee/optee.c
-+++ b/xen/arch/arm/tee/optee.c
-@@ -632,6 +632,7 @@ static void free_optee_shm_buf_pg_list(struct optee_domain *ctx,
-                  cookie);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int optee_relinquish_resources(struct domain *d)
+     int (*pmu_op)(struct domain *d, unsigned int op);
+ #endif
+     int (*dm_op)(struct domain *d);
+@@ -272,7 +274,11 @@ static inline int xsm_set_target(
+ static inline int xsm_domctl(xsm_default_t def, struct domain *d,
+                              unsigned int cmd, uint32_t ssidref)
  {
-     struct arm_smccc_res resp;
-@@ -693,6 +694,7 @@ static int optee_relinquish_resources(struct domain *d)
- 
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- #define PAGELIST_ENTRIES_PER_PAGE                       \
-     ((OPTEE_MSG_NONCONTIG_PAGE_SIZE / sizeof(u64)) - 1)
-@@ -1727,7 +1729,9 @@ static const struct tee_mediator_ops optee_ops =
-     .probe = optee_probe,
-     .domain_init = optee_domain_init,
-     .domain_teardown = optee_domain_teardown,
 +#ifdef CONFIG_MGMT_HYPERCALLS
-     .relinquish_resources = optee_relinquish_resources,
+     return alternative_call(xsm_ops.domctl, d, cmd, ssidref);
++#else
++    return -EOPNOTSUPP;
 +#endif
-     .handle_call = optee_handle_call,
- };
+ }
  
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 8501443c8e..a8e160700f 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -65,6 +65,7 @@ int tee_domain_teardown(struct domain *d)
-     return cur_mediator->ops->domain_teardown(d);
+ static inline int xsm_sysctl(xsm_default_t def, int cmd)
+@@ -503,6 +509,7 @@ static inline int xsm_unmap_domain_irq(
+     return alternative_call(xsm_ops.unmap_domain_irq, d, irq, data);
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- int tee_relinquish_resources(struct domain *d)
+ static inline int xsm_bind_pt_irq(
+     xsm_default_t def, struct domain *d, struct xen_domctl_bind_pt_irq *bind)
  {
-     if ( !cur_mediator )
-@@ -72,6 +73,7 @@ int tee_relinquish_resources(struct domain *d)
- 
-     return cur_mediator->ops->relinquish_resources(d);
+@@ -514,6 +521,7 @@ static inline int xsm_unbind_pt_irq(
+ {
+     return alternative_call(xsm_ops.unbind_pt_irq, d, bind);
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- uint16_t tee_get_type(void)
- {
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 5b3c5e8caf..314de75d8e 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2298,6 +2298,7 @@ void sync_vcpu_execstate(struct vcpu *v)
-            read_atomic(&v->dirty_cpu) != dirty_cpu);
+ static inline int xsm_irq_permission(
+     xsm_default_t def, struct domain *d, int pirq, uint8_t allow)
+@@ -757,6 +765,7 @@ static inline int xsm_priv_mapping(
+     return alternative_call(xsm_ops.priv_mapping, d, t);
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- static int relinquish_memory(
-     struct domain *d, struct page_list_head *list, unsigned long type)
+ static inline int xsm_ioport_permission(
+     xsm_default_t def, struct domain *d, uint32_t s, uint32_t e, uint8_t allow)
  {
-@@ -2622,6 +2623,7 @@ int domain_relinquish_resources(struct domain *d)
- 
-     return 0;
+@@ -768,6 +777,7 @@ static inline int xsm_ioport_mapping(
+ {
+     return alternative_call(xsm_ops.ioport_mapping, d, s, e, allow);
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- void arch_dump_domain_info(struct domain *d)
- {
-diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
-index 144aa168a3..f106ab794c 100644
---- a/xen/arch/x86/emul-i8254.c
-+++ b/xen/arch/x86/emul-i8254.c
-@@ -651,6 +651,7 @@ void pit_init(struct domain *d)
-     pit_reset(d);
- }
- 
+ static inline int xsm_pmu_op(
+     xsm_default_t def, struct domain *d, unsigned int op)
+diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
+index 2c8e0725b6..48ed724f86 100644
+--- a/xen/xsm/dummy.c
++++ b/xen/xsm/dummy.c
+@@ -22,9 +22,7 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .domctl_scheduler_op           = xsm_domctl_scheduler_op,
+     .sysctl_scheduler_op           = xsm_sysctl_scheduler_op,
+     .set_target                    = xsm_set_target,
+-#endif
+     .domctl                        = xsm_domctl,
+-#ifdef CONFIG_MGMT_HYPERCALLS
+     .sysctl                        = xsm_sysctl,
+     .readconsole                   = xsm_readconsole,
+ #endif
+@@ -71,9 +69,9 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .map_domain_irq                = xsm_map_domain_irq,
+     .unmap_domain_pirq             = xsm_unmap_domain_pirq,
+     .unmap_domain_irq              = xsm_unmap_domain_irq,
 +#ifdef CONFIG_MGMT_HYPERCALLS
- void pit_deinit(struct domain *d)
- {
-     PITState *pit = domain_vpit(d);
-@@ -664,6 +665,7 @@ void pit_deinit(struct domain *d)
-         destroy_periodic_time(&pit->pt0);
-     }
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index 4787b27964..d7cbf2047b 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1393,6 +1393,7 @@ int __mem_sharing_unshare_page(struct domain *d,
+     .bind_pt_irq                   = xsm_bind_pt_irq,
+     .unbind_pt_irq                 = xsm_unbind_pt_irq,
+-#ifdef CONFIG_MGMT_HYPERCALLS
+     .irq_permission                = xsm_irq_permission,
+     .iomem_permission              = xsm_iomem_permission,
+ #endif
+@@ -143,8 +141,10 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+     .mmuext_op                     = xsm_mmuext_op,
+     .update_va_mapping             = xsm_update_va_mapping,
+     .priv_mapping                  = xsm_priv_mapping,
++#ifdef CONFIG_MGMT_HYPERCALLS
+     .ioport_permission             = xsm_ioport_permission,
+     .ioport_mapping                = xsm_ioport_mapping,
++#endif
+     .pmu_op                        = xsm_pmu_op,
+ #endif
+     .dm_op                         = xsm_dm_op,
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 66d8bfda3a..76bf1b5240 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -665,7 +665,6 @@ static int cf_check flask_set_target(struct domain *d, struct domain *t)
+                                  &dsec->target_sid);
      return rc;
  }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int relinquish_shared_pages(struct domain *d)
- {
-     int rc = 0;
-@@ -1449,6 +1450,7 @@ int relinquish_shared_pages(struct domain *d)
-     p2m_unlock(p2m);
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int range_share(struct domain *d, struct domain *cd,
-                        struct mem_sharing_op_range *range)
-diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
-index 05633fe2ac..4e915808f4 100644
---- a/xen/arch/x86/mm/p2m-pod.c
-+++ b/xen/arch/x86/mm/p2m-pod.c
-@@ -366,6 +366,7 @@ void p2m_pod_get_mem_target(const struct domain *d, xen_pod_target_t *target)
-     pod_unlock(p2m);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int p2m_pod_empty_cache(struct domain *d)
- {
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
-@@ -409,6 +410,7 @@ int p2m_pod_empty_cache(struct domain *d)
-     unlock_page_alloc(p2m);
-     return p2m->pod.count ? -ERESTART : 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- int
- p2m_pod_offline_or_broken_hit(struct page_info *p)
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index e2a00a0efd..c1a87cde27 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -2097,6 +2097,7 @@ int xenmem_add_to_physmap_one(
-     return rc;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- /*
-  * Remove foreign mappings from the p2m, as that drops the page reference taken
-  * when mapped.
-@@ -2160,6 +2161,7 @@ int relinquish_p2m_mapping(struct domain *d)
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- void p2m_log_dirty_range(struct domain *d, unsigned long begin_pfn,
-                          unsigned long nr, uint8_t *dirty_bitmap)
-diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-index 65455a6867..116389d4e9 100644
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -768,6 +768,7 @@ void paging_vcpu_teardown(struct vcpu *v)
-         shadow_vcpu_teardown(v);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- /* Call when destroying a domain */
- int paging_teardown(struct domain *d)
- {
-@@ -794,6 +795,7 @@ int paging_teardown(struct domain *d)
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /* Call once all of the references to the domain have gone away */
- void paging_final_teardown(struct domain *d)
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 34e2e501dc..5d81ab3045 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1230,6 +1230,7 @@ int rcu_lock_live_remote_domain_by_id(domid_t dom, struct domain **d)
-     return 0;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int domain_kill(struct domain *d)
- {
-     int rc = 0;
-@@ -1280,6 +1281,7 @@ int domain_kill(struct domain *d)
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- 
- void __domain_crash(struct domain *d)
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 278a00b141..0f20e8941b 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -488,7 +488,6 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-                 ret = -EFAULT;
-         }
-         break;
 -#endif /* CONFIG_MGMT_HYPERCALLS */
  
-     case XEN_DOMCTL_destroydomain:
-         ret = domain_kill(d);
-@@ -496,6 +495,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-             ret = hypercall_create_continuation(
-                 __HYPERVISOR_domctl, "h", u_domctl);
-         break;
-+#endif /* CONFIG_MGMT_HYPERCALLS */
+ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
+                                  uint32_t ssidref)
+@@ -858,7 +857,6 @@ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
+     }
+ }
  
-     case XEN_DOMCTL_setnodeaffinity:
-     {
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index f5850a2607..015ffa15d4 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -108,6 +108,7 @@ int iommu_dt_domain_init(struct domain *d)
-     return 0;
+-#ifdef CONFIG_MGMT_HYPERCALLS
+ static int cf_check flask_sysctl(int cmd)
+ {
+     switch ( cmd )
+@@ -1078,6 +1076,7 @@ static int cf_check flask_unmap_domain_irq(
+     return rc;
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_release_dt_devices(struct domain *d)
+ static int cf_check flask_bind_pt_irq(
+     struct domain *d, struct xen_domctl_bind_pt_irq *bind)
  {
-     const struct domain_iommu *hd = dom_iommu(d);
-@@ -136,6 +137,7 @@ int iommu_release_dt_devices(struct domain *d)
- 
-     return 0;
+@@ -1111,7 +1110,6 @@ static int cf_check flask_unbind_pt_irq(
+     return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
  }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
  
- static int iommu_dt_xlate(struct device *dev,
-                           const struct dt_phandle_args *iommu_spec,
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 3edcfa8a04..cd855108c2 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -945,6 +945,7 @@ static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
-     return ret;
+-#ifdef CONFIG_MGMT_HYPERCALLS
+ static int cf_check flask_irq_permission(
+     struct domain *d, int pirq, uint8_t access)
+ {
+@@ -1634,6 +1632,7 @@ static int cf_check flask_shadow_control(struct domain *d, uint32_t op)
+     return current_has_perm(d, SECCLASS_SHADOW, perm);
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- int pci_release_devices(struct domain *d)
+ struct ioport_has_perm_data {
+     uint32_t ssid;
+     uint32_t dsid;
+@@ -1689,6 +1688,7 @@ static int cf_check flask_ioport_mapping(
  {
-     int combined_ret;
-@@ -1003,6 +1004,7 @@ int pci_release_devices(struct domain *d)
- 
-     return combined_ret;
+     return flask_ioport_permission(d, start, end, access);
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- #define PCI_CLASS_BRIDGE_HOST    0x0600
- #define PCI_CLASS_BRIDGE_PCI     0x0604
+ static int cf_check flask_mem_sharing_op(
+     struct domain *d, struct domain *cd, int op)
+@@ -1894,9 +1894,7 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .domctl_scheduler_op = flask_domctl_scheduler_op,
+     .sysctl_scheduler_op = flask_sysctl_scheduler_op,
+     .set_target = flask_set_target,
+-#endif
+     .domctl = flask_domctl,
+-#ifdef CONFIG_MGMT_HYPERCALLS
+     .sysctl = flask_sysctl,
+     .readconsole = flask_readconsole,
+ #endif
+@@ -1943,9 +1941,9 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .map_domain_irq = flask_map_domain_irq,
+     .unmap_domain_pirq = flask_unmap_domain_pirq,
+     .unmap_domain_irq = flask_unmap_domain_irq,
++#ifdef CONFIG_MGMT_HYPERCALLS
+     .bind_pt_irq = flask_bind_pt_irq,
+     .unbind_pt_irq = flask_unbind_pt_irq,
+-#ifdef CONFIG_MGMT_HYPERCALLS
+     .irq_permission = flask_irq_permission,
+     .iomem_permission = flask_iomem_permission,
+ #endif
+@@ -2016,8 +2014,10 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+     .mmuext_op = flask_mmuext_op,
+     .update_va_mapping = flask_update_va_mapping,
+     .priv_mapping = flask_priv_mapping,
++#ifdef CONFIG_MGMT_HYPERCALLS
+     .ioport_permission = flask_ioport_permission,
+     .ioport_mapping = flask_ioport_mapping,
++#endif
+     .pmu_op = flask_pmu_op,
+ #endif
+     .dm_op = flask_dm_op,
 -- 
 2.34.1
 
