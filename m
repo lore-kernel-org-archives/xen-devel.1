@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D11CA0FED
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 22:23:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1118862.1464523 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C9AECAC583
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 22:23:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1118861.1464508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwTDm-0001wo-Ic; Wed, 10 Sep 2025 22:23:22 +0000
+	id 1uwTDl-0001XG-Bc; Wed, 10 Sep 2025 22:23:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1118862.1464523; Wed, 10 Sep 2025 22:23:22 +0000
+Received: by outflank-mailman (output) from mailman id 1118861.1464508; Wed, 10 Sep 2025 22:23:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwTDm-0001wg-Ew; Wed, 10 Sep 2025 22:23:22 +0000
-Received: by outflank-mailman (input) for mailman id 1118862;
- Wed, 10 Sep 2025 22:23:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1uwTDl-0001Wr-54; Wed, 10 Sep 2025 22:23:21 +0000
+Received: by outflank-mailman (input) for mailman id 1118861;
+ Wed, 10 Sep 2025 22:23:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kMwI=3V=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1uwTDl-0001V7-2r
- for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 22:23:21 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c102a923-8e94-11f0-9d13-b5c5bf9af7f9;
- Thu, 11 Sep 2025 00:23:19 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-45df0cde41bso537105e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Sep 2025 15:23:19 -0700 (PDT)
+ id 1uwTDk-0001Ut-9z
+ for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 22:23:20 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c03a574f-8e94-11f0-9809-7dc792cee155;
+ Thu, 11 Sep 2025 00:23:18 +0200 (CEST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-45cb6428c46so1117565e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Sep 2025 15:23:18 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45e01ba9601sm2452195e9.23.2025.09.10.15.23.18
+ 5b1f17b1804b1-45e01ba9601sm2452195e9.23.2025.09.10.15.23.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 15:23:18 -0700 (PDT)
+ Wed, 10 Sep 2025 15:23:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c102a923-8e94-11f0-9d13-b5c5bf9af7f9
+X-Inumbo-ID: c03a574f-8e94-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1757542999; x=1758147799; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1757542997; x=1758147797; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Be6iKna05Jm3M6YBcH7sSksx9f/N4umOF44zDD8ok3Q=;
-        b=kb6PcxXuEs07xUpRD3TaEfa+2GU6L+WsovhpcWX+mZ9hvsvft2IcKLGmYOFUqKzAOa
-         W3yMcvD3OIzYNv9Ha24PjHA2bq7wES5BC+whH7ArvHrHh7IQuyl4o060u653Xp7OmXyM
-         TEMNBGwAprXYyBtNkwOgwuuJzJf/OBRBiO4NA=
+        bh=tCzfIeejqWxnyYgYr5WylmGRYjOyeO6wPE1ifH2pzDk=;
+        b=cG2WcpxU+mSZ8D1o7i8+XYZQKoYbobmrVjFmICHBrWKLwKuHe0zFU1l6RfBFW9jobR
+         JE0MzZxCoxgCjzfrumO55yRJZERHzbD2khO9+yVF/jeVohOzWm/NxetzIDO4MdJIjU+9
+         BGSMOw/9x/k49dJX5yZrf1CdmYRFyz8ov21yM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757542999; x=1758147799;
+        d=1e100.net; s=20230601; t=1757542997; x=1758147797;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Be6iKna05Jm3M6YBcH7sSksx9f/N4umOF44zDD8ok3Q=;
-        b=Ek0tWgwCyclQpBkZswL4wvsfM8qIr9OWVOA9R+WNEpmdR4HfEDlAleBknuqKytHWWR
-         DkkfMxWiNs+jcxxfpPKsdPc/sJEOVDtUVzuVbvunux69NkmlQ4YC0RxmGxnZOi7Q70ft
-         4NYHt7mdOlKze40yENSn8JfdNN/VQdp+lF/HoclreevP5ywnjPbYbK34ylTpAHQgVREQ
-         u4Z+IBx5NZ/rvB2HGdW5o9+HOwn/ouVBCednFhd9/HjDHR100p3Un93nIUmDkDr1Uusw
-         tWHQvm/NrEcavZ4QIMa8zH5lCiKZraZX9wd15s3o8cnS5HwMHseqqm4/ziKnEKHJOtx2
-         Wp+Q==
-X-Gm-Message-State: AOJu0Yy9NhH5tG+57z95B3+flB+IR3XhZ38bVcIKJVF61qUzwUZLu3CU
-	XhGUce6jCQhc0OSAe7GhfpQ3aiczSTlevkAv9hiG376qgFxM2m2lxOyWEbz9Ffil6DRiAPWss2i
-	puTFe
-X-Gm-Gg: ASbGncvfaogfA1NJm1pFO1LKw6brIdFurtkGQ0cxxx5InpUn6HU2xqWh2pPb2b+6ZvZ
-	KRUdweCsfbqPNSx+AL+LGjOLVlNGsjEYaz9m4gfmH0JtVqqkFwCeMWU3YOaqXfPlIgqSnmrQZ7E
-	M2qwDICqV3+FRcxLp4YTzUuS13kmsH1chiLhU/Y3KcxKX8ft8yNWpmutnoEXmCwtp8xzNelRgpM
-	qXQubVi7fsItUzJPYX5oZNBCytzxtHIIjUGYWMW/cou4D9cuJrqWPZmj3wbz4S/Aq0LP1Bqi4vU
-	0hNB+rpN1j837WSaTdJN1YwwDe/l6jqofkfLkY1yI8Lalf5Yayv4w0evlAfcKQVfzTkw9FipZWm
-	oR2NaGniBa+BHY3ILyHJ50y4apE1z4YWx4ijX/t97IxOl5IiB1NiII0PuA2MqiGFLuDM+WfPJE3
-	MKUHLLol/JLQE=
-X-Google-Smtp-Source: AGHT+IGMDJKbOmww8BMqXwVLHBklHv2GzHyGwx53WGJ6C77VFn6KmUcRjq7Gpd0R2KmIH5+jdOZZxQ==
-X-Received: by 2002:a05:600c:4ed2:b0:45d:f7e4:bf61 with SMTP id 5b1f17b1804b1-45dfe9e81d3mr8822055e9.4.1757542999038;
-        Wed, 10 Sep 2025 15:23:19 -0700 (PDT)
+        bh=tCzfIeejqWxnyYgYr5WylmGRYjOyeO6wPE1ifH2pzDk=;
+        b=fULvJk+DlWMTF7GhOOput0wXr1y4ALGPYMDiMKxTlBLCsRSq5zbVaH2/+220mZqWxE
+         t2CU1t1Zk7vJuwWbKP9HTcqtpDFG3CHtPTUZe54ENGU7IcpH5OGPy6w7NN6tS4rBd9PC
+         QH2LCeGPbQgiB59jVIUdBQIEtVslcYiTObDtWmnKuWPl2M/mcSFlvzidxesHfxdX96qt
+         jc5I6QNKC0U5Pa6WnSOxSsf4u/S1uBycBB/S6FeKf3hB8HOmFRT/WKs5zTvXu26Zpred
+         EdWByurlYirECtflSddSXgYQ76Hwy4+8kxMAFT9R6YxodMKFt1z/NRm5NBAT/SjhLR0h
+         YO7A==
+X-Gm-Message-State: AOJu0YzhtSXKMhtAvnv2x05lLMt5tuo96oWaFgiyNymkZ4SJpLD68SDD
+	6muY7seeC92aptCXarNxHLxvbJp/vNuqDZArSmjekuVD01n6/wfAhSrovUn6fx3WT584Xt8I7F5
+	sleHJ
+X-Gm-Gg: ASbGncsXy85rWcyFSbRL3wN10HIQfe3HjVilG7GnIAVYxMJQ2rF3vUWhCZulQMxmoOS
+	7c/wzZaSkfmyuJ784WH5RwkoR72Ncs+R3cVlpr/WNVKuo5IKiiKE0BYJ6QSuZX2jtlSgWPIlLxG
+	k1lXma9QxVIQf3APP5/JZm50FBHvt6J1BkgrZnZERvinr9JkfrGWpdLzMWtgPgxVxaP38yXDTgL
+	9jyoLKeuHgYTxId7jhnxeXU1vygiV8SkxUGCthpglmf99F39KqRGZpz2Uacr2k8w3sTR/BxTTOf
+	HXrx9SglsNZ6owb5OcYqgE19lVWXSvossYdp02iya9rv+cvs42azHUtflw42/0BDB2vWsvdKVGY
+	PElW/uiiuXxQrwQKaRuVdlOX1VS+IwcmwHVzYqZ1/0bQk1sr1tYOnGGZPwHD+mYnHKaWHalIqdi
+	mKlXhdT092D78=
+X-Google-Smtp-Source: AGHT+IFgVhsIV3sjv5Jkm8zI+KkmH5A4l49zYAjHw9/YXYcTvAF0Aaw5P7ixTUXv+K+i4dJCqKq/1w==
+X-Received: by 2002:a05:600c:6305:b0:45d:5c71:76a9 with SMTP id 5b1f17b1804b1-45ddded7652mr171254285e9.24.1757542997319;
+        Wed, 10 Sep 2025 15:23:17 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -91,10 +91,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH v2 3/3] CHANGELOG: Notes about distro changes in CI
-Date: Wed, 10 Sep 2025 23:23:13 +0100
-Message-Id: <20250910222313.1858941-4-andrew.cooper3@citrix.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v2 1/3] CI: Update ppc64 to use Debian Trixie
+Date: Wed, 10 Sep 2025 23:23:11 +0100
+Message-Id: <20250910222313.1858941-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250910222313.1858941-1-andrew.cooper3@citrix.com>
 References: <20250910222313.1858941-1-andrew.cooper3@citrix.com>
@@ -102,8 +103,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Also state the RISC-V baseline now it's been set, as it's the reason why
-RISC-V Bullseye got dropped.
+Everything works fine with Debian 13.  Provide two new build jobs (for a total
+of 6), and update the test job.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -114,27 +115,123 @@ CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
 v2:
- * New
----
- CHANGELOG.md | 3 +++
- 1 file changed, 3 insertions(+)
+ * Update containerize
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 7bd96ac09d14..ca1b43b940d2 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-  - The minimum toolchain requirements have increased for some architectures:
-    - For x86, GCC 5.1 and Binutils 2.25, or Clang/LLVM 11
-    - For ARM32 and ARM64, GCC 5.1 and Binutils 2.25
-+   - For RISC-V, GCC 12.2 and Binutils 2.39
-+ - Debian Trixie added to CI.  Debian Bullseye retired from CI for RISC-V due
-+   to the baseline change.
-  - Linux based device model stubdomains are now fully supported.
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2032972883
+---
+ automation/build/debian/13-ppc64le.dockerfile | 37 +++++++++++++++++++
+ automation/gitlab-ci/build.yaml               | 18 ++++++++-
+ automation/gitlab-ci/test.yaml                |  2 +-
+ automation/scripts/containerize               |  1 +
+ 4 files changed, 55 insertions(+), 3 deletions(-)
+ create mode 100644 automation/build/debian/13-ppc64le.dockerfile
+
+diff --git a/automation/build/debian/13-ppc64le.dockerfile b/automation/build/debian/13-ppc64le.dockerfile
+new file mode 100644
+index 000000000000..5b22a4545842
+--- /dev/null
++++ b/automation/build/debian/13-ppc64le.dockerfile
+@@ -0,0 +1,37 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 debian:trixie-slim
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++ENV CROSS_COMPILE=powerpc64le-linux-gnu-
++ENV XEN_TARGET_ARCH=ppc64
++
++RUN <<EOF
++#!/bin/bash
++    set -e
++
++    useradd --create-home user
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        flex
++        gcc-powerpc64le-linux-gnu
++        python3-minimal
++
++        # Qemu for test phase
++        qemu-system-ppc
++        expect
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++    rm -rf /var/lib/apt/lists/*
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index c0728e58c48b..f8e45f3467c8 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -319,10 +319,10 @@ debian-12-x86_64-clang-debug:
+   variables:
+     CONTAINER: debian:12-x86_64
  
-  - On x86:
+-debian-12-ppc64le-gcc-debug:
++debian-13-ppc64le-gcc-debug:
+   extends: .gcc-ppc64le-cross-build-debug
+   variables:
+-    CONTAINER: debian:12-ppc64le
++    CONTAINER: debian:13-ppc64le
+     KBUILD_DEFCONFIG: ppc64_defconfig
+     HYPERVISOR_ONLY: y
+     EXTRA_XEN_CONFIG: |
+@@ -705,6 +705,20 @@ debian-12-ppc64le-gcc:
+     KBUILD_DEFCONFIG: ppc64_defconfig
+     HYPERVISOR_ONLY: y
+ 
++debian-12-ppc64le-gcc-debug:
++  extends: .gcc-ppc64le-cross-build-debug
++  variables:
++    CONTAINER: debian:12-ppc64le
++    KBUILD_DEFCONFIG: ppc64_defconfig
++    HYPERVISOR_ONLY: y
++
++debian-13-ppc64le-gcc:
++  extends: .gcc-ppc64le-cross-build
++  variables:
++    CONTAINER: debian:13-ppc64le
++    KBUILD_DEFCONFIG: ppc64_defconfig
++    HYPERVISOR_ONLY: y
++
+ # RISC-V 64 cross-build
+ debian-12-riscv64-gcc:
+   extends: .gcc-riscv64-cross-build
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 95b883b32bb6..9acd984d294c 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -712,4 +712,4 @@ qemu-smoke-ppc64le-powernv9-gcc:
+   script:
+     - ./automation/scripts/qemu-smoke-ppc64le.sh powernv9 2>&1 | tee ${LOGFILE}
+   needs:
+-    - debian-12-ppc64le-gcc-debug
++    - debian-13-ppc64le-gcc-debug
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index 340b6caaab44..65c8804ce5f3 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -31,6 +31,7 @@ case "_${CONTAINER}" in
+     _fedora) CONTAINER="${BASE}/fedora:41-x86_64";;
+     _bullseye-ppc64le) CONTAINER="${BASE}/debian:11-ppc64le" ;;
+     _bookworm-ppc64le) CONTAINER="${BASE}/debian:12-ppc64le" ;;
++    _trixie-ppc64le) CONTAINER="${BASE}/debian:13-ppc64le" ;;
+     _bookworm-riscv64) CONTAINER="${BASE}/debian:12-riscv64" ;;
+     _trixie-riscv64) CONTAINER="${BASE}/debian:13-riscv64" ;;
+     _bookworm-x86_64-gcc-ibt) CONTAINER="${BASE}/debian:12-x86_64-gcc-ibt" ;;
 -- 
 2.39.5
 
