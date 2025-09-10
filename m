@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE61CA0FED
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 14:50:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1118380.1464181 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0491FCA101F
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Sep 2025 14:57:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1118401.1464190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwM91-00020Z-5r; Wed, 10 Sep 2025 14:49:59 +0000
+	id 1uwMFs-0003u6-TF; Wed, 10 Sep 2025 14:57:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1118380.1464181; Wed, 10 Sep 2025 14:49:59 +0000
+Received: by outflank-mailman (output) from mailman id 1118401.1464190; Wed, 10 Sep 2025 14:57:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwM91-00020S-2x; Wed, 10 Sep 2025 14:49:59 +0000
-Received: by outflank-mailman (input) for mailman id 1118380;
- Wed, 10 Sep 2025 14:49:57 +0000
+	id 1uwMFs-0003tz-QQ; Wed, 10 Sep 2025 14:57:04 +0000
+Received: by outflank-mailman (input) for mailman id 1118401;
+ Wed, 10 Sep 2025 14:57:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9Ly7=3V=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1uwM8z-0001xf-Kb
- for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 14:49:57 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20615.outbound.protection.outlook.com
- [2a01:111:f403:2405::615])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8l2o=3V=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uwMFq-0003tr-Qi
+ for xen-devel@lists.xenproject.org; Wed, 10 Sep 2025 14:57:02 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6a3facdb-8e55-11f0-9d13-b5c5bf9af7f9;
- Wed, 10 Sep 2025 16:49:56 +0200 (CEST)
-Received: from SA1P222CA0104.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c5::14)
- by MW3PR12MB4443.namprd12.prod.outlook.com (2603:10b6:303:2d::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Wed, 10 Sep
- 2025 14:49:52 +0000
-Received: from SA2PEPF0000150A.namprd04.prod.outlook.com
- (2603:10b6:806:3c5:cafe::d2) by SA1P222CA0104.outlook.office365.com
- (2603:10b6:806:3c5::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.16 via Frontend Transport; Wed,
- 10 Sep 2025 14:49:52 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF0000150A.mail.protection.outlook.com (10.167.242.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.13 via Frontend Transport; Wed, 10 Sep 2025 14:49:51 +0000
-Received: from xcbagarciav01.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 10 Sep
- 2025 07:49:49 -0700
+ id 67c3b860-8e56-11f0-9d13-b5c5bf9af7f9;
+ Wed, 10 Sep 2025 16:57:01 +0200 (CEST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b0418f6fc27so1148310166b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Sep 2025 07:57:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b0783047b9bsm179425366b.13.2025.09.10.07.56.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Sep 2025 07:56:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,142 +47,407 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a3facdb-8e55-11f0-9d13-b5c5bf9af7f9
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=elqao55GizjVRhD6LwPwXOYeTnrIId4m11jM+lqnf64IRXB/19ot8mnZ7Mgm6A6Il8eKKEdInJqrCk1AqGI5z8MEVc6HRmk/iKqfP7TO4CZauL95JviXAQU5Su8ETM22KcBmt7m4igqYFSObiD076HyhTKKzpjV5mf6HbtFggQcRQps00zrxeByZ1OADtP1ZpPWHZni2d/SrluvscrQBwJwdI98wbKxhvzJ98R/4SwVcB7GolKn9JQmKbpK0mH5bdFiYqd+vgqKaZ6U34uaIAAF2RX7OjPkOfb0FRxnNJhT2LQYsgS0OI2iADL0bCzzYOAZ+of/wCtggwwiRLFygHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nRHcQao7ZcT1dOkugFqWSPo4ks4CXn7x1yCILxjr+R4=;
- b=HYTuGEhO51RUOxmfCHHlYBXEvbezKTBn7FvM3U6aZM1ihRve5/3/i4VC0IRJNM/sdJnaunEgPe+Lew/4POoqPd+Y26w7HA5VP0Wp3ZtBE9s/zDhBjpNTaHeI604Udp8dhy+feAtiiOvu/A52bGBgi3N8FBNVEU2kEBH5whDR7Ew1byZoc+mgHvHFi/A18wvo1QcSosqJngx5clC0hk0vdwGklCz+vYbIoV0SyWWzgGerbmg/7YUtkK36sT/1/dvkpLN+y0eG05wbyBJso9ckSvuKyfbjGqnKxBDK787olN/9EMHGobKFGcUpVTCYAgQwyOkMSq6XliiMztELHaqHNQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nRHcQao7ZcT1dOkugFqWSPo4ks4CXn7x1yCILxjr+R4=;
- b=dO+DnS+XnZR93WpXppeXP8vTfHjO7x9BOEnoVGCuqLDD4zC1z3wUqerXqqol6ERYEIhbZMUqBIUiIj3toCsm+OXwQUwuBWmTp6REpdaQQd1WRvMHlc5M8SAruHl5qDbQsHCgi11RCAjR5Di+XGb8cqkkwq6xg5Ncl7LmN6FqQuU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>, "Grygorii
- Strashko" <grygorii_strashko@epam.com>, Roger Pau Monne
-	<roger.pau@citrix.com>
-Subject: [PATCH] libacpi: Remove CPU hotplug and GPE handling from PVH DSDTs
-Date: Wed, 10 Sep 2025 16:49:19 +0200
-Message-ID: <20250910144921.29048-1-alejandro.garciavallejo@amd.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 67c3b860-8e56-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1757516220; x=1758121020; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=15cYQVjB6Bko11Is5/dYR/Umn5ijIKC3kxDHPdxDkiM=;
+        b=DwQD8XijE3CnVlzG0MLzzgIMHzSaaxSWPYIisVYRjQlxQp4lwUFkIDCawRCba+1CzS
+         xpCENmCHqtYOBk2N5IEI/Kp7YXKVbYFSE2qhjzCoRNeOqqdHtQ+6jhfE2vN4CV124IQB
+         H1kWpLSi3NFvZ2YOWwAPzpNP2aokeuYBcRgHCN3UFTb6wBtZWd+QBarxe8sukD9f2ris
+         07xZLemC5YkN0qBSI7SgHPwST/Tw6ce0Hjmd8rAdKf18tNkIIfKDU42N+2SHwfewvo3w
+         VxA8kOrrzfjispa4FtgeHwxECSw9Py26ljX5s62zVDL6r7eiBLjkvQYugi9+lnRJsLLe
+         xEHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757516220; x=1758121020;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=15cYQVjB6Bko11Is5/dYR/Umn5ijIKC3kxDHPdxDkiM=;
+        b=WG7/fyuCT/0Dkd1X5pe4gdunZ/Lu3GKcXukOF8I4JvyzEMEaw6VGqDx5YCJ/jP5PpK
+         Cc0ROcwfV1q4FmPDrJUi9JB+d/Agmdh8/vjxTxoWp5YHZNqCfnRHmz2rrryGCHFOo3sv
+         6lWlR4DMhEcojYXXKurR5v7y7o/R1M0HhwMjYW1o//84M6ICZfUm2b4q2FQqUJf/+xWH
+         Cs95dZ11QlAar+uci7n3pHXqNqCUa7wkt8kDfUf5UnXy/md/Y1g7i4RJMqAHmPII0h4+
+         5yNpo29G+4+WNVcTPwYXpz9Nwk71PAra9sxNRcalPz06EwKPTGQL20dK0z3FeRmeoI6M
+         eXjQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVY0G8RBFqtR69DnZN9VgEK3NwSm68gY1oy96t5eOIn1m2N/ERJ2GWjNLmES42xkgimImsNw4hX478=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyOw27fRcoJFjjXuuP0tiQGdS19dNAEQdCTReebxDfdb+32PiUP
+	Ge5IXK6cisB59ufDwQPvCBmubX5ijm0u5S19OEd55Iow8AQjLsk7/Y+sUtVQABnfbA==
+X-Gm-Gg: ASbGncsiGE3OpmGDfPVcnZ/nFAFoRa9R0ziNmOLbgM5EYoWoePYFvuuq7HLFnZjRmtl
+	MWktm0afCDBYgKZ/LhHRQGqYybSk8sBrQy5Ld0l55mqs2QxHkSCUMeXYFM/i7s6Vj+mrREaYI1J
+	KHzmYf+dVZKvMo+AN41hEe0sUkjfJUT/VHbFUfJ3v+cs+LPb+ocMCG98hWOXToLgRhHtxQ8WDL4
+	IyXEG1QamPWhJzPBQUhfjQWvuUr2ay0LvpVdLb3wAAfhpIYiJng7Y7bX4tkDsCzn6qXAwMlWJFG
+	U2jfcC+Bzv0vZ5LqTYNxGkQblTrtuYOmcf1rS5NdmdaGSBlWb581R8GcTM69QI36/ZiVDR8oSA4
+	KnLQHnz2bqoEOLDfAoyEq/Ao4QSoL8yFHx2sz2ao1/LOzgQQv7byAFzFguipF8IWatr6b/013kw
+	571yAwBOHamrjaCIYnnw==
+X-Google-Smtp-Source: AGHT+IFr09DYlgXsLIVaZOvNGub5Ek7Opv2Xbme58zhVraW4jrG3tuyMHtAqrksVw3G4Vlg1fTmang==
+X-Received: by 2002:a17:906:456:b0:b07:6214:79f9 with SMTP id a640c23a62f3a-b0762148115mr734727866b.19.1757516220138;
+        Wed, 10 Sep 2025 07:57:00 -0700 (PDT)
+Message-ID: <b8430631-f857-426a-a144-c6b8fbf94ee9@suse.com>
+Date: Wed, 10 Sep 2025 16:56:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF0000150A:EE_|MW3PR12MB4443:EE_
-X-MS-Office365-Filtering-Correlation-Id: 83ab215c-3840-4880-2aac-08ddf0794c20
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?PKEqfgAvE+vJPo4l+VFsorJBEbEFsO4Y2OiNGSrm+MMabL7xhmuNNaPfrkUN?=
- =?us-ascii?Q?uceX3h5uIFSi8z99DSGUQEH4hhj9B9+fV28/fhGkBuDPbNt9ejbTZuqftDrj?=
- =?us-ascii?Q?Z3oLHEYLCb6j8duuLRSmQHn9MSC3e8uyYHcKhlLVetPQRpzT00vl1bLSAyC2?=
- =?us-ascii?Q?KnPYIeEcHnjXQalJ3h2yWRYpW51Q31xcq+Q0hE9YyFNcVyI+ZNNbeuTGq7mS?=
- =?us-ascii?Q?jicZhJLGpBE2P8cE33OAlDdenDflDOi8nutJctZwx1po+7Fy5XpFnc0fvoWt?=
- =?us-ascii?Q?U1od/T4jOKCZQoJ/lIsn5vzcWMbAK/Gj92reORFg2QZEy9cR8WO1kbydjens?=
- =?us-ascii?Q?FqNWoccdhNO+s2I3rUscTatCqHDV322cXTttUhRT+aMmxl/dB9wesamy4b+H?=
- =?us-ascii?Q?lR2EUN0gs5Y5XrNkrWjRMODGIIy88JitXWvZT/kOLqi9OzerhFsQkPswCZy0?=
- =?us-ascii?Q?JhGAOLWR0rD0tMEzrF7Uc64sGv3I6aXmVq/+19Mg+rGD6JTZdyq4QlOgCrNE?=
- =?us-ascii?Q?s++lHzioYuG9scuSkDWAHaiPsWXZecYOQ1o21+MHxbJsfzArf9gVfarrgM96?=
- =?us-ascii?Q?6FiByOX2HzA55r89jDR67oybvtnxaRw9sPVYL5vorgTdQGA6yUFDRlO1bosg?=
- =?us-ascii?Q?lRm5dQ8X3TNXjSdXko17reYiumS+n7rpuCHYTtsyIbnsShLmg5874zzd4tnA?=
- =?us-ascii?Q?ypaW4HIk+ccVHih4eY6eNDRj4/EzlTIJGFqGwSSkXCzIqPaiHb2BNyyAtRCT?=
- =?us-ascii?Q?8K4vCToUYi924rV4FjeQqqzwT3CgepbPKCwSXLhjUkCbO44wXmlTo3394CO9?=
- =?us-ascii?Q?TWTBvEr1bpVaQMotuBa0eRIhsyhTt12fY9oYvt91YKP14J9MWWM0ryk0qz49?=
- =?us-ascii?Q?G8k822rVPNGvC8jrmahzJRLYA9Y09RAQQ66aIvgGa2BzKcpXo84X4JQd7u29?=
- =?us-ascii?Q?qUIQkuyeeeLSEkxTssamPqZiCvN4KGqy1mGQqmbnQWNkZPXUiKKcQuZDDttn?=
- =?us-ascii?Q?lZVyC8EW3ef/3fG6Unp/1PexX5iXYgN2s0iflesporg6jSS7FwDrsH0zizEI?=
- =?us-ascii?Q?8VUviPZtlrQdGkj8CZo5nZVuR7slFQKRgJ+hVsJ2ggvaKau00trr1rFNQjxV?=
- =?us-ascii?Q?0uSExdO+gNMUuVMvhu3q8HSzE/xnIsvNfzXFIVKcAS/t8gfy6U1w9fyxDL/O?=
- =?us-ascii?Q?r45+xO9eaYDbMSnnf28BFw3igDeE/SC3tEmKPfAAPhvNsfaRD1+EsolI5rJS?=
- =?us-ascii?Q?Orjy3sEFg1WZapBOmd99NTGH0eEJW72Bfa43VjQJJ44p/J8Uq0pIEC1xg3BR?=
- =?us-ascii?Q?7ZKo4FpbYXHlRthF2dleYa26F0SZhNrfPUrS5BH5rMN316Pb0UKDF1hfr0CL?=
- =?us-ascii?Q?SliazDn5nvrf+04oH376lniH3lqbSaGe7J1yQYvddj/cSRm1sxuz9lS8Y9lK?=
- =?us-ascii?Q?5pI352DgSuVXzkXcSWhtJ5KHXzjnF0fezvMwOJvxUdz5fsh/Dfvc6U16t7Nb?=
- =?us-ascii?Q?BLMvOBWQGOG6QBN/wVNzqxxvDrsXnYoUXHS/?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2025 14:49:51.4716
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 83ab215c-3840-4880-2aac-08ddf0794c20
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF0000150A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4443
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/26] xen: consolidate CONFIG_VM_EVENT
+To: Penny Zheng <Penny.Zheng@amd.com>, Tamas K Lengyel <tamas@tklengyel.com>
+Cc: ray.huang@amd.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <20250910073827.3622177-1-Penny.Zheng@amd.com>
+ <20250910073827.3622177-5-Penny.Zheng@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250910073827.3622177-5-Penny.Zheng@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-CPU hotplug relies on the guest having access to the legacy online CPU
-bitmap that QEMU provides at PIO 0xAF00. But PVH guests have no DM, so
-this causes the MADT to get corrupted due to spurious modifications of
-the "online" flag in MADT entries and the table checksum during the
-initial acpica passes.
+On 10.09.2025 09:38, Penny Zheng wrote:
+> @@ -2456,9 +2460,13 @@ static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
+>      .fpu_dirty_intercept  = svm_fpu_dirty_intercept,
+>      .msr_read_intercept   = svm_msr_read_intercept,
+>      .msr_write_intercept  = svm_msr_write_intercept,
+> +#ifdef CONFIG_VM_EVENT
+>      .enable_msr_interception = svm_enable_msr_interception,
+> +#endif
+>      .set_rdtsc_exiting    = svm_set_rdtsc_exiting,
+> +#ifdef CONFIG_VM_EVENT
+>      .set_descriptor_access_exiting = svm_set_descriptor_access_exiting,
+> +#endif
 
-Seeing how ACPI CPU hotplug is the only event delivered via GPE, remove
-the GPE handler too.
+I think in such a case it would be preferable to move one of the existing
+lines, so we can get away with just a single #ifdef.
 
-This shrinks PVH's DSDT substantially and fixes the MADT corruption
-problem.
+> --- a/xen/arch/x86/include/asm/hvm/hvm.h
+> +++ b/xen/arch/x86/include/asm/hvm/hvm.h
+> @@ -192,7 +192,9 @@ struct hvm_function_table {
+>      void (*handle_cd)(struct vcpu *v, unsigned long value);
+>      void (*set_info_guest)(struct vcpu *v);
+>      void (*set_rdtsc_exiting)(struct vcpu *v, bool enable);
+> +#ifdef CONFIG_VM_EVENT
+>      void (*set_descriptor_access_exiting)(struct vcpu *v, bool enable);
+> +#endif
+>  
+>      /* Nested HVM */
+>      int (*nhvm_vcpu_initialise)(struct vcpu *v);
+> @@ -224,7 +226,9 @@ struct hvm_function_table {
+>                                  paddr_t *L1_gpa, unsigned int *page_order,
+>                                  uint8_t *p2m_acc, struct npfec npfec);
+>  
+> +#ifdef CONFIG_VM_EVENT
+>      void (*enable_msr_interception)(struct domain *d, uint32_t msr);
+> +#endif
 
-Fixes: e9a8dc050f9a("libacpi: Build DSDT for PVH guests")
-Reported-by: Grygorii Strashko <grygorii_strashko@epam.com>
-Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
----
- tools/libacpi/mk_dsdt.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+Possibly same here.
 
-diff --git a/tools/libacpi/mk_dsdt.c b/tools/libacpi/mk_dsdt.c
-index 8ac4f9d0b4..f71de6c8c6 100644
---- a/tools/libacpi/mk_dsdt.c
-+++ b/tools/libacpi/mk_dsdt.c
-@@ -218,6 +218,11 @@ int main(int argc, char **argv)
-     pop_block();
-     /**** Processor end ****/
- #else
-+    if (dm_version == QEMU_NONE) {
-+        pop_block();
-+        pop_block();
-+        return 0;
-+    }
- 
-     /* Operation Region 'PRST': bitmask of online CPUs. */
-     stmt("OperationRegion", "PRST, SystemIO, %#x, %d",
-@@ -264,10 +269,6 @@ int main(int argc, char **argv)
-     pop_block();
-     pop_block();
- 
--    if (dm_version == QEMU_NONE) {
--        pop_block();
--        return 0;
--    }
-     /**** Processor end ****/
- 
- 
+> @@ -435,7 +439,11 @@ static inline bool using_svm(void)
+>  
+>  static inline bool hvm_has_set_descriptor_access_exiting(void)
+>  {
+> +#ifdef CONFIG_VM_EVENT
+>      return hvm_funcs.set_descriptor_access_exiting;
+> +#else
+> +    return false;
+> +#endif
+>  }
 
-base-commit: 53c599cc33b61ae70d59572f3c1d843a3def84e2
--- 
-2.43.0
+This is actively wrong. It being only monitor.[ch] which use the function,
+I don't see why it can't just be wrapped in an #ifdef. With what you do,
+some new caller might function fine until run in a VM_EVENT=n build.
 
+> @@ -681,7 +689,9 @@ static inline int nhvm_hap_walk_L1_p2m(
+>  
+>  static inline void hvm_enable_msr_interception(struct domain *d, uint32_t msr)
+>  {
+> +#ifdef CONFIG_VM_EVENT
+>      alternative_vcall(hvm_funcs.enable_msr_interception, d, msr);
+> +#endif
+>  }
+
+Mostly the same here.
+
+> --- a/xen/arch/x86/include/asm/hvm/monitor.h
+> +++ b/xen/arch/x86/include/asm/hvm/monitor.h
+> @@ -17,14 +17,16 @@ enum hvm_monitor_debug_type
+>      HVM_MONITOR_DEBUG_EXCEPTION,
+>  };
+>  
+> +#define hvm_monitor_crX(cr, new, old) \
+> +                        hvm_monitor_cr(VM_EVENT_X86_##cr, new, old)
+> +
+> +#ifdef CONFIG_VM_EVENT
+>  /*
+>   * Called for current VCPU on crX/MSR changes by guest. Bool return signals
+>   * whether emulation should be postponed.
+>   */
+>  bool hvm_monitor_cr(unsigned int index, unsigned long value,
+>                      unsigned long old);
+> -#define hvm_monitor_crX(cr, new, old) \
+> -                        hvm_monitor_cr(VM_EVENT_X86_##cr, new, old)
+>  bool hvm_monitor_msr(unsigned int msr, uint64_t new_value, uint64_t old_value);
+>  void hvm_monitor_descriptor_access(uint64_t exit_info,
+>                                     uint64_t vmx_exit_qualification,
+> @@ -45,6 +47,65 @@ int hvm_monitor_vmexit(unsigned long exit_reason,
+>  
+>  int hvm_monitor_io(unsigned int port, unsigned int bytes,
+>                     bool in, bool str);
+> +#else
+> +static inline bool hvm_monitor_cr(unsigned int index, unsigned long value,
+> +                                  unsigned long old)
+> +{
+> +    return false;
+> +}
+> +
+> +static inline bool hvm_monitor_msr(unsigned int msr, uint64_t new_value,
+> +                                   uint64_t old_value)
+> +{
+> +    return false;
+> +}
+> +
+> +static inline void hvm_monitor_descriptor_access(uint64_t exit_info,
+> +                                        uint64_t vmx_exit_qualification,
+> +                                        uint8_t descriptor, bool is_write) {}
+> +
+> +static inline int hvm_monitor_debug(unsigned long rip,
+> +                                    enum hvm_monitor_debug_type type,
+> +                                    unsigned int trap_type,
+> +                                    unsigned int insn_length,
+> +                                    unsigned int pending_dbg)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +
+> +static inline int hvm_monitor_cpuid(unsigned long insn_length,
+> +                                    unsigned int leaf, unsigned int subleaf)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +
+> +static inline void hvm_monitor_interrupt(unsigned int vector,
+> +                                         unsigned int type,
+> +                                         unsigned int err, uint64_t cr2) {}
+> +
+> +static inline bool hvm_monitor_emul_unimplemented(void)
+> +{
+> +    return false;
+> +}
+> +
+> +static inline bool hvm_monitor_check_p2m(unsigned long gla, gfn_t gfn,
+> +                                         uint32_t pfec, uint16_t kind)
+> +{
+> +    return false;
+> +}
+> +
+> +static inline int hvm_monitor_vmexit(unsigned long exit_reason,
+> +                                     unsigned long exit_qualification)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +
+> +static inline int hvm_monitor_io(unsigned int port, unsigned int bytes,
+> +                                 bool in, bool str)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+
+For this one it's perhaps easiest to see that -EOPNOTSUPP (or in fact any
+negative value) is wrong to return from the stub: Just go look at both
+use sites. Guests wouldn't be able to use I/O insns anymore for intercepted
+ports. Others look to have similar issues, while the ones returning "false"
+look okay.
+
+> --- a/xen/include/xen/mem_access.h
+> +++ b/xen/include/xen/mem_access.h
+> @@ -33,9 +33,7 @@
+>   */
+>  struct vm_event_st;
+>  
+> -#ifdef CONFIG_VM_EVENT
+>  #include <asm/mem_access.h>
+> -#endif
+
+Aiui this breaks the build on PPC and RISC-V, which don't have such a
+header. If this change is really needed (which I'm not convinced of, as
+x86's hvm/hvm.c could as well include asm/mem_access.h directly), you'll
+need to use has_include() here.
+
+> @@ -74,6 +72,7 @@ typedef enum {
+>  } p2m_access_t;
+>  
+>  struct p2m_domain;
+> +#ifdef CONFIG_VM_EVENT
+>  bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
+>                                   xenmem_access_t xaccess,
+>                                   p2m_access_t *paccess);
+> @@ -99,10 +98,40 @@ long p2m_set_mem_access_multi(struct domain *d,
+>  int p2m_get_mem_access(struct domain *d, gfn_t gfn, xenmem_access_t *access,
+>                         unsigned int altp2m_idx);
+>  
+> -#ifdef CONFIG_VM_EVENT
+>  int mem_access_memop(unsigned long cmd,
+>                       XEN_GUEST_HANDLE_PARAM(xen_mem_access_op_t) arg);
+>  #else
+> +static inline bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
+> +                                               xenmem_access_t xaccess,
+> +                                               p2m_access_t *paccess)
+> +{
+> +    return false;
+> +}
+
+So this is needed when VM_EVENT=n and ALTP2M=y. Tamas, is this a configuration
+which makes sense?
+
+> +static inline long p2m_set_mem_access(struct domain *d, gfn_t gfn, uint32_t nr,
+> +                                      uint32_t start, uint32_t mask,
+> +                                      xenmem_access_t access,
+> +                                      unsigned int altp2m_idx)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +
+> +static inline long p2m_set_mem_access_multi(struct domain *d,
+> +                            const XEN_GUEST_HANDLE(const_uint64) pfn_list,
+> +                            const XEN_GUEST_HANDLE(const_uint8) access_list,
+> +                            uint32_t nr, uint32_t start, uint32_t mask,
+> +                            unsigned int altp2m_idx)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+> +
+> +static inline int p2m_get_mem_access(struct domain *d, gfn_t gfn,
+> +                                     xenmem_access_t *access,
+> +                                     unsigned int altp2m_idx)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+
+Instead of these, I wonder whether a single #ifdef in do_altp2m_op()
+wouldn't be more appropriate (assuming the above config makes some sense
+in the first place). Actually, it would need to be two #ifdef-s, one in
+each of the two switch() blocks.
+
+> --- a/xen/include/xen/monitor.h
+> +++ b/xen/include/xen/monitor.h
+> @@ -30,6 +30,7 @@ struct xen_domctl_monitor_op;
+>  #ifdef CONFIG_VM_EVENT
+>  int monitor_domctl(struct domain *d, struct xen_domctl_monitor_op *mop);
+>  void monitor_guest_request(void);
+> +int monitor_traps(struct vcpu *v, bool sync, vm_event_request_t *req);
+>  #else /* !CONFIG_VM_EVENT */
+>  static inline int monitor_domctl(struct domain *d,
+>                                   struct xen_domctl_monitor_op *mop)
+> @@ -37,8 +38,11 @@ static inline int monitor_domctl(struct domain *d,
+>      return -EOPNOTSUPP;
+>  }
+>  static inline void monitor_guest_request(void) {}
+> +static inline int monitor_traps(struct vcpu *v, bool sync,
+> +                                vm_event_request_t *req)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+
+Is this needed? There's only one call that needs taking care of afaics,
+in hvm_hap_nested_page_fault(). That's gated on "req_ptr" being non-NULL
+though, which isn't possible when p2m_mem_access_check() also is a stub.
+Hence the compiler ought to be able to DCE the call.
+
+> --- a/xen/include/xen/vm_event.h
+> +++ b/xen/include/xen/vm_event.h
+> @@ -50,6 +50,7 @@ struct vm_event_domain
+>      unsigned int last_vcpu_wake_up;
+>  };
+>  
+> +#ifdef CONFIG_VM_EVENT
+>  /* Returns whether a ring has been set up */
+>  bool vm_event_check_ring(struct vm_event_domain *ved);
+>  
+> @@ -68,6 +69,20 @@ bool vm_event_check_ring(struct vm_event_domain *ved);
+>   */
+>  int __vm_event_claim_slot(struct domain *d, struct vm_event_domain *ved,
+>                            bool allow_sleep);
+> +#else
+> +static inline bool vm_event_check_ring(struct vm_event_domain *ved)
+> +{
+> +    return false;
+> +}
+
+Which call site is in need of this stub? I was first considering
+mem_paging_enabled(), but MEM_PAGING already now depends on VM_EVENT.
+
+> +static inline int __vm_event_claim_slot(struct domain *d,
+> +                                        struct vm_event_domain *ved,
+> +                                        bool allow_sleep)
+> +{
+> +    return -EOPNOTSUPP;
+> +}
+
+Sadly this looks to be needed when MEM_SHARING=y and VM_EVENT=n.
+
+> @@ -82,23 +97,28 @@ static inline int vm_event_claim_slot_nosleep(struct domain *d,
+>  
+>  void vm_event_cancel_slot(struct domain *d, struct vm_event_domain *ved);
+>  
+> +#ifdef CONFIG_VM_EVENT
+>  void vm_event_put_request(struct domain *d, struct vm_event_domain *ved,
+>                            vm_event_request_t *req);
+>  
+> -#ifdef CONFIG_VM_EVENT
+>  /* Clean up on domain destruction */
+>  void vm_event_cleanup(struct domain *d);
+>  int vm_event_domctl(struct domain *d, struct xen_domctl_vm_event_op *vec);
+> +
+> +void vm_event_vcpu_pause(struct vcpu *v);
+>  #else /* !CONFIG_VM_EVENT */
+> +static inline void vm_event_put_request(struct domain *d,
+> +                                        struct vm_event_domain *ved,
+> +                                        vm_event_request_t *req) {}
+
+Same here and ...
+
+>  static inline void vm_event_cleanup(struct domain *d) {}
+>  static inline int vm_event_domctl(struct domain *d,
+>                                    struct xen_domctl_vm_event_op *vec)
+>  {
+>      return -EOPNOTSUPP;
+>  }
+> +static inline void vm_event_vcpu_pause(struct vcpu *v) {};
+
+... here.
+
+>  #endif /* !CONFIG_VM_EVENT */
+>  
+> -void vm_event_vcpu_pause(struct vcpu *v);
+>  void vm_event_vcpu_unpause(struct vcpu *v);
+
+Please move vm_event_vcpu_unpause() as well (without adding a stub). The
+two would better stay together.
+
+Jan
 
