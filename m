@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08C2CAC587
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 07:45:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1119467.1464812 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF53CA1016
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 07:48:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1119493.1464823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwbzg-0001jf-Hw; Thu, 11 Sep 2025 07:45:24 +0000
+	id 1uwc2j-0002YJ-0Y; Thu, 11 Sep 2025 07:48:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1119467.1464812; Thu, 11 Sep 2025 07:45:24 +0000
+Received: by outflank-mailman (output) from mailman id 1119493.1464823; Thu, 11 Sep 2025 07:48:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwbzg-0001jY-FN; Thu, 11 Sep 2025 07:45:24 +0000
-Received: by outflank-mailman (input) for mailman id 1119467;
- Thu, 11 Sep 2025 07:45:23 +0000
+	id 1uwc2i-0002YC-T1; Thu, 11 Sep 2025 07:48:32 +0000
+Received: by outflank-mailman (input) for mailman id 1119493;
+ Thu, 11 Sep 2025 07:48:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=g8rd=3W=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1uwbzf-0001WI-F3
- for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 07:45:23 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1uwc2h-0002Y3-TT
+ for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 07:48:31 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 447366c8-8ee3-11f0-9809-7dc792cee155;
- Thu, 11 Sep 2025 09:45:21 +0200 (CEST)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b0787fc3008so52522766b.3
- for <xen-devel@lists.xenproject.org>; Thu, 11 Sep 2025 00:45:20 -0700 (PDT)
+ id b4ee4953-8ee3-11f0-9809-7dc792cee155;
+ Thu, 11 Sep 2025 09:48:29 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b04271cfc3eso49158666b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Sep 2025 00:48:29 -0700 (PDT)
 Received: from [192.168.1.5] (user-109-243-64-38.play-internet.pl.
  [109.243.64.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b07b30da43esm73482166b.14.2025.09.11.00.45.18
+ a640c23a62f3a-b07b32dd47bsm74004666b.58.2025.09.11.00.48.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Sep 2025 00:45:19 -0700 (PDT)
+ Thu, 11 Sep 2025 00:48:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,120 +47,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 447366c8-8ee3-11f0-9809-7dc792cee155
+X-Inumbo-ID: b4ee4953-8ee3-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757576720; x=1758181520; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1757576909; x=1758181709; darn=lists.xenproject.org;
         h=in-reply-to:from:content-language:references:cc:to:subject
          :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xmGPRKp7wyDkMZLVbkuaXn9JmpRopky+vuOQLMD+HII=;
-        b=aOQDNYz5jMSa7ccq6OwfK7GOeLH7PHMHcml8VjuCTQHSg4hPGxUYq6lDeh5mhb/UmZ
-         yCwaC09/2EnG9XMW1chdy5A7JC6Wan6ApTfuZNoxsKqoWDlnqrdYn0cXQlzGm45Mnn+F
-         aeIjJ8yqbMxPtcQZ4C7ByUF/wlCFYbFCSTUfSGtF/C4hy4yOdqLvGOOImK71QcRu8J1R
-         huDPgVTva7sV0yFyPqixJC/4GJFt2mEcbPawE2DlHysC8K2oKzVkNvfyK7AirItSf+7h
-         c8EbC+A6Fq36hzPxDAncUThKyrdXiK7wCiSP8dIjO0GKy1iWYs48o74QSuWOQd8mkpDI
-         aMeA==
+        bh=3OiiKyOJFvu6X5z3RLlId/CdIpqvtrIsJnYhRupUhuc=;
+        b=jt9nMAYZep88oDS9pFHT0qwLDvmEJ9riyLavdvb7Fc6BhHOUnqyXBjfxHEuHmGK5HB
+         X4g8Bf3QN27Ya6D9Ldu7527MxkcOelOmxu1XR6ckJAR/q0kCzc1BFge3q4CpTgkknVSt
+         wMeEhm3Ib2kKOh+Gw8F3pi5SaUqw/4vdDI//x5QI1YoS9llepvL1EeQlxTpRU4BIRJuM
+         WzP2e1P6iKsSB0dpzoGyWjj9B1Sjwdd/AjZM2Sib1mSxlMA98j/XVjMfQ3cFNgb69+dY
+         mLOxkDY82EdWWssPeuGoy2TDyOi/hYAXDALRbzlHTJK+VydtGUvzoOtPXvO5ri9KPPms
+         eTzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757576720; x=1758181520;
+        d=1e100.net; s=20230601; t=1757576909; x=1758181709;
         h=in-reply-to:from:content-language:references:cc:to:subject
          :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=xmGPRKp7wyDkMZLVbkuaXn9JmpRopky+vuOQLMD+HII=;
-        b=VMV92RqjVIWTj3YxAF8Zo+lKzEewLdOG/OodFXLy1duYtugJyGZ1KC42uvwd7xKi6y
-         31XooZJvbEupeH0RbXSFZACsDfPJ2Z3QVlUX5mqB+ANkXe9v1TkC/otdCiUaiZYMti+S
-         3fnY2kfZ7t/lMAIsqlyf5+Sw1wqAan0oSiq01cbWnS1ggeFt03K6Cfr/rdjse5MLDkoc
-         tTXW7pFmxhnfiKfCItWP4LkCQoGaq1yORupdFh6SKo0Uv5FKKx4nttfTno4hSnOmr6hx
-         FO0U1P+E9KMhfcBxFCErDfZj3K07HD8KsVQPdeXAhibRe0zIJ2xuy0dvYppuhxCeOwCj
-         p0FA==
-X-Forwarded-Encrypted: i=1; AJvYcCUiaslQhGREfETf8qI5/YOGevaZcxU1inU9+7H2+5ljnrG1kGO02MErOvk0+j+E7n582vH/Ur1Dszw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyxi5U1Koz+Lew6Ly2XAXLicTTEduI5+1e343DDJdot1e11rQXG
-	inmU1gtYbGIAcgeG0//htmd3weVD2jwYTfMwUKBvf/CmoiRGNf6dL6Vw
-X-Gm-Gg: ASbGnctb0wQ9jgjKhGLcAHDY4vszJXV9lOfwzIWOYm53cX6k6B/52yItiv30dnh5YGF
-	Q/s3LLuKsnm8ZuO4eBqTVn9oTby4qWtG1ZWxJh9zCUHOPAJP4aHOziCq017+gV/jOSmrV2Sqoum
-	85Os1FsdwxK64yEKoi/mY5ixWqh6EHd3oVFLtMIzQCfmMHlp+Zk1NYATnZWnqtvdydpsjahVAmU
-	Y8hScJcKWWLqA43Thx8SO11kIME+9zClQLo+MLj4HoLfGt/a3HbwjjAsoJElKXHHVn7yAyk6cYh
-	MYz7S1a+Qt4ZfJJFOh/nfEIUcIql/7FN1o1xtOb51/lqi9w1PuhOAA8N+07HxHNF78reQ72poF9
-	dH5KvrVkS+vCrxGN+1pKX47TP9bEGEOUSk9mAjuMl0A9EHLcvsAxe8s3/wm1BodoR9TB94oig
-X-Google-Smtp-Source: AGHT+IGesPJpsrn25kj+9GrTGFTO0cu3anl96ByXKb+08bSpeNLljpU8H38EYhDEXdXAWLMhfRZ73g==
-X-Received: by 2002:a17:907:728c:b0:b07:88ef:fe1a with SMTP id a640c23a62f3a-b0788f004c2mr545448066b.40.1757576719847;
-        Thu, 11 Sep 2025 00:45:19 -0700 (PDT)
+        bh=3OiiKyOJFvu6X5z3RLlId/CdIpqvtrIsJnYhRupUhuc=;
+        b=Qh64NiNGiqeveIDdm/OcVOGQNQIgoels+nM/me4Z8afMIB7TQIJ2dRumCgrzhlFQfI
+         c5aMb4iVWVA51GS8MT246HMoNVnjXbCbEtb6N98/Fi/UBboVixu5ZIm/h71ZmWXHOvru
+         OPgS8kTYJ1r7WnTT+oiY9CwSeuH/fgVx+CqqHMtkDb/Ty3hP8P6u6+3BXgmH63KzZLX6
+         UccIG7WfuEQf4G5OXjXbp7xSX3CUJs7uCa4jl5LKshFsJI8YwYCcuElXX53p83yXndKc
+         ak9DSCbjlEsgq/mbz4sRadU6EDe8b3o8K2Qh7oL65NEbqjemLTM4HJ4X+Um8JPeHGIAs
+         GNfw==
+X-Forwarded-Encrypted: i=1; AJvYcCWKIccyCGnmZ+DtLg7OwFgxsHjvPPVCaJ+VKjzbmUro6+mEfea93b8YyGGZWYP0n73g9tzAGnGcTDs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxhh8eJ4KP+uuO0zDFWhrk/R7Y0mI8jBi/Enjq2YumjTJUHWK3E
+	a/gBen/A/oW0qgrsgBhZZF/uAF2iu6NwKtsk4/bYHJ6FLMOgeHbeh9kE
+X-Gm-Gg: ASbGncs9DmMTdhADw5KZxIenANxuD5PrC4T1JSnrPh5LAyVQnEmqkcQqJy6ENt5POnV
+	IT4aqmoJLlZKoQ+wj8iLCyMFiojzAbtkVnF3fLvQUXlI4lEUNXtLXtMAhesh12ncnO/++rMhCo1
+	292TZ16+ReQF8cEHp5QY2rKX/pXTPY24f3SmrzqYZMmyTrAJXqX89Rxp3fEYPV5lQZdrqN3qqW5
+	HTxCir27YlMI58s9NaY3kNUUZJmHmG++ePqo79vnjvQte41yCmblOBzCEnovpVtM6pUcwzeQLU2
+	Sk4IWFetgn2OHM5FdUoSxVjFHMcOG/CygerFAE14LQ65zcs7LeOqi4aAGFiE8lgl5kPPZJdjRCX
+	8WuuZGgv9XG4GH1g/YHmcbdvdlbIYNKGTfytaPG0jjoZ+0hWnR56m7l70gQy7DXASd0FumCc+Ev
+	xFcUVarZI=
+X-Google-Smtp-Source: AGHT+IGk8SQOHJgNbkyjJVrzJcbajCl74dCdOvXFBC/bfymBLqk8YIRaQjtESD1XgTI3lS3LgdLEqw==
+X-Received: by 2002:a17:907:9810:b0:b04:a1ec:d073 with SMTP id a640c23a62f3a-b04b1437db2mr1808993766b.18.1757576908567;
+        Thu, 11 Sep 2025 00:48:28 -0700 (PDT)
 Content-Type: multipart/alternative;
- boundary="------------nh800EQ0QKFzbDBJVeyaxtB7"
-Message-ID: <95737e6b-0834-45e0-b8a4-f3f9cd2717ae@gmail.com>
-Date: Thu, 11 Sep 2025 09:45:18 +0200
+ boundary="------------tBtFFG0xJgK5YRGK3Yb0Ut2a"
+Message-ID: <f114731c-7a67-4b24-a6bb-12575733cc9b@gmail.com>
+Date: Thu, 11 Sep 2025 09:48:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] x86/IO-APIC: drop setup_ioapic_ids_from_mpc()
-To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "consulting@bugseng.com" <consulting@bugseng.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <e2e54b68-1521-4bf6-9cb9-5703ed2a69fc@suse.com>
- <034dd6dd-4e3f-4353-9a11-7a0ebda9a664@suse.com>
- <bbe33d31-949c-4bf1-96f5-598b21faf149@citrix.com>
- <3c678b60-4e1d-4c51-bfe4-efe3acee4e8f@suse.com>
+Subject: Re: [PATCH for-4.21 0/5] CI: Add Debian Trixie
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Shawn Anastasio <sanastasio@raptorengineering.com>,
+ Doug Goldstein <cardoe@cardoe.com>, Victor Lira <victorm.lira@amd.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Juergen Gross <jgross@suse.com>
+References: <20250809221206.1260861-1-andrew.cooper3@citrix.com>
+ <aMAUJehaWkYyyM-E@mail-itl>
+ <alpine.DEB.2.22.394.2509091452200.1405870@ubuntu-linux-20-04-desktop>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <3c678b60-4e1d-4c51-bfe4-efe3acee4e8f@suse.com>
+In-Reply-To: <alpine.DEB.2.22.394.2509091452200.1405870@ubuntu-linux-20-04-desktop>
 
 This is a multi-part message in MIME format.
---------------nh800EQ0QKFzbDBJVeyaxtB7
+--------------tBtFFG0xJgK5YRGK3Yb0Ut2a
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
-On 9/10/25 3:36 PM, Jan Beulich wrote:
-> On 10.09.2025 15:26, Andrew Cooper wrote:
->> On 03/09/2025 8:55 am, Jan Beulich wrote:
->>> Along the lines of what b89f8f054f96 ("x86/apic: Drop sync_Arb_IDs()")
->>> said, the function is dead logic as well: All 64-bit capable Intel systems
->>> have (at least) xAPIC (if not x2APIC).
+On 9/9/25 11:53 PM, Stefano Stabellini wrote:
+> On Tue, 9 Sep 2025, Marek Marczykowski-Górecki wrote:
+>> On Sat, Aug 09, 2025 at 11:12:01PM +0100, Andrew Cooper wrote:
+>>> I know it's past the last-post deadline, but Trixie was only released today.
 >>>
->>> Even if Eclair can't know it, such code is violating Misra rule 2.2 (dead
->>> code; we didn't accept that yet, but - where possible - we probably would
->>> better follow it). Depending on one's reading, this code may actually be a
->>> violation of rule 2.1 (unreachable), which we did accept:
->>>
->>> "Code is unreachable if, ..., there is no combination of program inputs
->>>   that can cause it to be executed."
->>>
->>> Otoh it's "only" __init code.
->>>
->>> Signed-off-by: Jan Beulich<jbeulich@suse.com>
->> The code change is fine, but the commit message should be first
->> paragraph only.
->>
->> The first paragraph is plenty of justification to make the change,
->> irrespective of anything else.
-> Well. I wouldn't have added the other parts if we weren't where we are in
-> the release cycle. Strictly speaking, with them dropped I can't put these
-> two patches in right now. Oleksii, may I ask for your view please (on
-> both of the patches, as they're both similar in this regard)?
+>>> In terms of backports, we should at least go back to the bugfix branches.
+>> What is the state of this series? I'm preparing refresh of my various CI
+>> series and some add more jobs on debian-12 - I wonder if I should make
+>> them debian-13 already - but for this I need this series committed...
+> I have been too busy reviewing the non-gitlab patch series for the
+> feature freeze last Friday and we have a couple of series still to
+> process.
+>
+> Maybe gitlab-related series could be committed also past the feature
+> freeze.
 
-For both patches, I think it would still be useful to retain the explanation
-about the MISRA Rule 2.2 violation in the commit message. While I agree that
-the first paragraph provides sufficient justification on its own, the additional
-context helps clarify why we're committing this change now, rather than waiting
-until after the release. It also highlights the additional benefit of improving
-MISRA compliance by removing this dead code.
-
-Anyway, I am okay with having these patches merged now:
-  Release-Acked-by: Oleksii Kurochko<oleksii.kurochko@gmail.com>
+It makes sense to me. And I think we had such conversation somewhere else.
 
 ~ Oleksii
 
->
->> The other 3 paragraphs are musings on an area of MISRA where which is
->> unclear, or even disputed.  The code here is statically reachable,
->> dynamically unreachable, and trying to argue this in terms of dead or
->> unreachability detracts from an otherwise clear patch.
->>
->> With a very strong preference to have the commit message be only the
->> first paragraph, Reviewed-by: Andrew Cooper<andrew.cooper3@citrix.com>
-> Thanks (also for the one for patch 2).
->
-> Jan
---------------nh800EQ0QKFzbDBJVeyaxtB7
+--------------tBtFFG0xJgK5YRGK3Yb0Ut2a
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -172,82 +148,42 @@ Content-Transfer-Encoding: 8bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 9/10/25 3:36 PM, Jan Beulich wrote:<br>
+    <div class="moz-cite-prefix">On 9/9/25 11:53 PM, Stefano Stabellini
+      wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:3c678b60-4e1d-4c51-bfe4-efe3acee4e8f@suse.com">
-      <pre wrap="" class="moz-quote-pre">On 10.09.2025 15:26, Andrew Cooper wrote:
+cite="mid:alpine.DEB.2.22.394.2509091452200.1405870@ubuntu-linux-20-04-desktop">
+      <pre wrap="" class="moz-quote-pre">On Tue, 9 Sep 2025, Marek Marczykowski-Górecki wrote:
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">On 03/09/2025 8:55 am, Jan Beulich wrote:
+        <pre wrap="" class="moz-quote-pre">On Sat, Aug 09, 2025 at 11:12:01PM +0100, Andrew Cooper wrote:
 </pre>
         <blockquote type="cite">
-          <pre wrap="" class="moz-quote-pre">Along the lines of what b89f8f054f96 ("x86/apic: Drop sync_Arb_IDs()")
-said, the function is dead logic as well: All 64-bit capable Intel systems
-have (at least) xAPIC (if not x2APIC).
+          <pre wrap="" class="moz-quote-pre">I know it's past the last-post deadline, but Trixie was only released today.
 
-Even if Eclair can't know it, such code is violating Misra rule 2.2 (dead
-code; we didn't accept that yet, but - where possible - we probably would
-better follow it). Depending on one's reading, this code may actually be a
-violation of rule 2.1 (unreachable), which we did accept:
-
-"Code is unreachable if, ..., there is no combination of program inputs
- that can cause it to be executed."
-
-Otoh it's "only" __init code.
-
-Signed-off-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a>
+In terms of backports, we should at least go back to the bugfix branches.
 </pre>
         </blockquote>
         <pre wrap="" class="moz-quote-pre">
-The code change is fine, but the commit message should be first
-paragraph only.
-
-The first paragraph is plenty of justification to make the change,
-irrespective of anything else.
+What is the state of this series? I'm preparing refresh of my various CI
+series and some add more jobs on debian-12 - I wonder if I should make
+them debian-13 already - but for this I need this series committed...
 </pre>
       </blockquote>
       <pre wrap="" class="moz-quote-pre">
-Well. I wouldn't have added the other parts if we weren't where we are in
-the release cycle. Strictly speaking, with them dropped I can't put these
-two patches in right now. Oleksii, may I ask for your view please (on
-both of the patches, as they're both similar in this regard)?</pre>
-    </blockquote>
-    <pre dir="auto" style="white-space: pre-wrap;">For both patches, I think it would still be useful to retain the explanation
-about the MISRA Rule 2.2 violation in the commit message. While I agree that
-the first paragraph provides sufficient justification on its own, the additional
-context helps clarify why we're committing this change now, rather than waiting
-until after the release. It also highlights the additional benefit of improving
-MISRA compliance by removing this dead code.
+I have been too busy reviewing the non-gitlab patch series for the
+feature freeze last Friday and we have a couple of series still to
+process.
 
-Anyway, I am okay with having these patches merged now:
- Release-Acked-by: Oleksii Kurochko <a class="moz-txt-link-rfc2396E" href="mailto:oleksii.kurochko@gmail.com">&lt;oleksii.kurochko@gmail.com&gt;</a>
+Maybe gitlab-related series could be committed also past the feature
+freeze.</pre>
+    </blockquote>
+    <pre>It makes sense to me. And I think we had such conversation somewhere else.
 
 ~ Oleksii
 </pre>
-    <blockquote type="cite"
-      cite="mid:3c678b60-4e1d-4c51-bfe4-efe3acee4e8f@suse.com">
-      <pre wrap="" class="moz-quote-pre">
-
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">The other 3 paragraphs are musings on an area of MISRA where which is
-unclear, or even disputed.  The code here is statically reachable,
-dynamically unreachable, and trying to argue this in terms of dead or
-unreachability detracts from an otherwise clear patch.
-
-With a very strong preference to have the commit message be only the
-first paragraph, Reviewed-by: Andrew Cooper <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a>
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-Thanks (also for the one for patch 2).
-
-Jan
-</pre>
-    </blockquote>
   </body>
 </html>
 
---------------nh800EQ0QKFzbDBJVeyaxtB7--
+--------------tBtFFG0xJgK5YRGK3Yb0Ut2a--
 
