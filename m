@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3923ECA1016
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 11:53:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1120054.1465155 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32703CA1016
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 11:59:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1120092.1465174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwfrp-0001Yz-SJ; Thu, 11 Sep 2025 11:53:33 +0000
+	id 1uwfwv-0003Cw-Nm; Thu, 11 Sep 2025 11:58:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1120054.1465155; Thu, 11 Sep 2025 11:53:33 +0000
+Received: by outflank-mailman (output) from mailman id 1120092.1465174; Thu, 11 Sep 2025 11:58:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwfrp-0001Ys-P4; Thu, 11 Sep 2025 11:53:33 +0000
-Received: by outflank-mailman (input) for mailman id 1120054;
- Thu, 11 Sep 2025 11:53:31 +0000
+	id 1uwfwv-0003Cp-Kv; Thu, 11 Sep 2025 11:58:49 +0000
+Received: by outflank-mailman (input) for mailman id 1120092;
+ Thu, 11 Sep 2025 11:58:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QF+R=3W=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1uwfrn-0001L8-RG
- for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 11:53:31 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20606.outbound.protection.outlook.com
- [2a01:111:f403:2009::606])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dUpj=3W=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1uwfwv-0003Cj-30
+ for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 11:58:49 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eecf0432-8f05-11f0-9d13-b5c5bf9af7f9;
- Thu, 11 Sep 2025 13:53:30 +0200 (CEST)
-Received: from DS7PR03CA0192.namprd03.prod.outlook.com (2603:10b6:5:3b6::17)
- by BL1PR12MB5828.namprd12.prod.outlook.com (2603:10b6:208:397::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Thu, 11 Sep
- 2025 11:53:24 +0000
-Received: from DS2PEPF0000343F.namprd02.prod.outlook.com
- (2603:10b6:5:3b6:cafe::3d) by DS7PR03CA0192.outlook.office365.com
- (2603:10b6:5:3b6::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.16 via Frontend Transport; Thu,
- 11 Sep 2025 11:53:24 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- DS2PEPF0000343F.mail.protection.outlook.com (10.167.18.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 11:53:24 +0000
-Received: from xcbagarciav01.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 11 Sep
- 2025 04:53:22 -0700
+ id aca06238-8f06-11f0-9d13-b5c5bf9af7f9;
+ Thu, 11 Sep 2025 13:58:47 +0200 (CEST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b042eb09948so128806166b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Sep 2025 04:58:47 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b07b33478e4sm114444966b.96.2025.09.11.04.58.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Sep 2025 04:58:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,143 +47,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eecf0432-8f05-11f0-9d13-b5c5bf9af7f9
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Xp7qzRQlLvcftuLGSkY3eT37iOoRkWkWm7K08Ocuu6QZYcY1CaaI0Ic4xKPNlu5GI0B9I1VtvSpj39SnAtz2Dk/NGHDR1zyheES2WeHPA2SguVYeMIGJ9h9Z2jIIKWKHtgzfy3zP9dHIQqu01v5nAmkUEasGmmrq6DBqOSsW+n0LZ8Xsa07z6ak1yfxXlwhgYkuITuRUOPN8yKzfUvdx32cumdOJRBBAfsHedaXMEFiUDDFQsGGPJAragjCI0ESYLiWK+WWsMT/hE4qJu2uSkTaq9TBICDM9TRyGRQ9/amOBQ+UYZnnMsr6M0t/IgJGI6/G4b7VYNm+OKkqUpElZGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zkDMZW5IAo1eBCGEcen5eEzeBVV+iCXu9QaTMqlJeYQ=;
- b=GbVoN3eWlH5RMTmVxxyk8zCFxVSDvEC0iuBVJ0pNJiJGXUDcYlVjS0kInnhkDiz+rhnCgGD6FJDQ8Jli3lFJjmV8pEz5yroRAeVQmKahIhfAK67nHd3SaBIQIVS/3T6fJ5eUBTO6ZCxap29baaU8ULx/qgR6ftaMNxVTOpQ5Phv6Fx+qP/HJm865+nruZA+DEzj2PIag2oFgebUBdUdGBtGWj2c2BEKvCHy0ZblciUQv98iA2EVVOoD7Pkr8VJYjbLjRrsnk3Zu9QYMtHdccAgx2maWQhvkeHup8I9OTHfGIEK7HLKG70tkI28VRsB8bbnNz1mXHwL5lIar8zjjTQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zkDMZW5IAo1eBCGEcen5eEzeBVV+iCXu9QaTMqlJeYQ=;
- b=h88Vlp/b9AqrdvljtiNUifMRsKYUNu/9aEU8MTc4ZpbyCZ0QRASaYoDKUyYEwZCzmo9l3BkpC2tf9wxrQ57FNf7XFvQUVMxV5xsG03x3uqZuEnYMMfcFwnSHpE2D2dygmLdDlRm2j1oLPedpq39Lli0X7Q7WsTiare+k43lwamE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>, "Grygorii
- Strashko" <grygorii_strashko@epam.com>
-Subject: [PATCH v2 1/2] libacpi: Prevent CPU hotplug AML from corrupting memory
-Date: Thu, 11 Sep 2025 13:53:02 +0200
-Message-ID: <20250911115308.16580-2-alejandro.garciavallejo@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250911115308.16580-1-alejandro.garciavallejo@amd.com>
-References: <20250911115308.16580-1-alejandro.garciavallejo@amd.com>
+X-Inumbo-ID: aca06238-8f06-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1757591927; x=1758196727; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ypJXWGy4zGKZEm6L6+M44/YFGkPLMs03nR2P4e+tGzU=;
+        b=CmClvW6HNeUoMvTt1nTA/Hl+ZbXrJTd3mySiFm6OQCPkwMwiB3XboieLUMsv1T6Si5
+         quGnWcwzJdqYurfcVYbObzg5+AAN+xCd6zSQ3f0pwaXFFYCXtARt5U+IpaILTat1l2Aa
+         HFWEsP5MsXPzg/pBkRYDkkPXfYeRCs4c1Tv0fClMrEe/vTsQAnOjoKEtkImaxYhxV1YE
+         jwvqOVTcLQ6yi/XLX6ju3ChImbyxNZ3BqnslFKQPpEGn1VfiFa10MCWmjfnJAnUK+PfA
+         wF35WW3jgRCW5OOdEk9qUn2BQnAMzFLKsdWxLTb08eGu3hgL2y4fol/NTPhtxqBFdvPF
+         mcCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757591927; x=1758196727;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ypJXWGy4zGKZEm6L6+M44/YFGkPLMs03nR2P4e+tGzU=;
+        b=BWwlDV3Nn9zeKhxDlJSKy/JjKT+oqj/7l3spi+AnClng+lfBdV9O5IjNw4ALOh4xYF
+         N3ZO6KFwfLyVuNzh8Crg+RC26sgCGOCfrcD/r4oqCBqscDGp2Iug5dtVwLKq1v5MrZf2
+         WIA+j7vhQR2FCj3oANRw8tZmM5k9d/VwISi0CD/of3gYmVvuwgFOTsxH3Pt0tHVsusCV
+         DFpM2/eqYXkXV/ttQHocTXHhfxlpQsEwqyHUPVVre5r5xQETweuimfmB/nHkIlSq9Qbu
+         8H4S6uasQafQPtUjuOzmfMt0h2nL6G+aN9+pjYtNZ+AfziR4KfahjQaIk4i3XaS2vXAl
+         sflg==
+X-Forwarded-Encrypted: i=1; AJvYcCWkBbAlaqFAIg+rE/P3KQgqDN6mbMpqRx7O5bjY1KPWaKnSnbHUd2O92Wt4bMs2ywh7+JVgRlv7fD8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwdykQxCzNOnL+OC2PiIjqhTyvcNZxBLrUCZp8m4b/eDyJDYfQb
+	WEtPiQzobG+3jCx8thVS5mGypLMdexdSkscjuBVMwNGAaIRIe7c66L8oCaNvIzFjeQ==
+X-Gm-Gg: ASbGncsMwb37yubMX7PQalH0+QRgSUHrgq0Fpwmb4rPZcGhrxYnhF4Pj3sWb+5ZKuk/
+	e8TGshgbTMwDyubarB5JBGLQV3cZGU9NTKtYUVifUML8Rl+jo30TrOJX9PXvzNxxhw4GSy6kSxI
+	deDiE/de66uGze5G9WFXGqCppKwL78NA8X1hZTI7D/5cX5bUWQWHdMU65L9dl5zvUhsu/k0g00h
+	kCmU+dp71cZRMMPamrvYsTow1N4J4Tv6+yzn8zOaKVzBh3gVroJSYADGQc9Oibn8mtQaN76I4Qb
+	+GthLtO0HtmCC447KIWYObsIWmp/s5k4U++W7NIlNosmnEeTsyredVpGXkmHHyG+DOl8urhOrxo
+	ai8s9Et65K24XvR+lti3Pi49rOPZvbBZmqQnscRDBhIeD1D7BATXXwMYYHw+PvNcyIuodaxKlMp
+	JWWqwYoKPYgJgM/Ozquw==
+X-Google-Smtp-Source: AGHT+IFCDzCthNPJUSi2K9wmpOK9kYw8IA/ZAdccooK858tHScEc6r6kKI4Z2o9VyagOar30EN2oBQ==
+X-Received: by 2002:a17:907:e98b:b0:afe:d62a:f038 with SMTP id a640c23a62f3a-b04b13fe73bmr1673487666b.8.1757591927225;
+        Thu, 11 Sep 2025 04:58:47 -0700 (PDT)
+Message-ID: <0af66ec5-a53e-4f09-96bd-3cedb7419006@suse.com>
+Date: Thu, 11 Sep 2025 13:58:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343F:EE_|BL1PR12MB5828:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a345029-02ba-45fe-be20-08ddf129d049
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?7i+FXEWLKV/oQn9sb+cV4wh4zsbuVkrYSabzXjjuDQXYF6f+1yFJqNnShgrP?=
- =?us-ascii?Q?lXw5RzPF7iw/W3PghY49cIHVICGKoCk/LWF2ERspt1mtcnClUZvYoLnu+K1Y?=
- =?us-ascii?Q?Gg2Xar3MyJX9+QQURGWO3n+MrGEjTJrT3fSe1WEREfLqVroHJ8fHYntdQu/q?=
- =?us-ascii?Q?uPJPXXi1VgCH2eUW4uXwnKW4K4+N5rEybowOxI//t80cecU6gD0zwE7Y7ruH?=
- =?us-ascii?Q?ffsMD7uVHXjoSPqyPtHIVV3gNqi+U4qaZ0jE3iU5Js9crynUOS5VQrDzGN0D?=
- =?us-ascii?Q?aiSb3C90gxQ0k//3ioieywT67aKv5sXG8mJogbY8nwhbcp5luHOAEaeV2BnN?=
- =?us-ascii?Q?uWVTX+eH/evn+03JouQ+fhJMThcD0bS/Tmb9vxy7g+6sK07o7WmwuoPlmcpX?=
- =?us-ascii?Q?pPDYKPOhlQz8VCyFiwqeSC/SgSkmzIE66pHNSXOkasK1v4R75F3RwiS9EApU?=
- =?us-ascii?Q?0VFf+ls6wWhcc7Nnq+jsQshHFaoq/sag7p8q5SmO6d/HYggAaoQ9MCKielNZ?=
- =?us-ascii?Q?DK3h9YmlS6d7RHkhSGn+u3NhhT0O8aiK+uLVqG8yflN3oXhA7rjB2GTbcNab?=
- =?us-ascii?Q?FHRNxnXobel+SDXgnqxfQ0WKhq5MB+0pklNs1W10hl/o20oOjn2LZ7yb2z9H?=
- =?us-ascii?Q?aMChC2M3Ai2qnevg1a+nzNgRMKbXOnpa2B/Dz67BlEKJ4AY7a0YYs+Vuwtjg?=
- =?us-ascii?Q?pYGQ5HfcDnAlIt4hZSFvYMPmW8ig40hIKEBqHWL894//DrqWNQlOS+EMa9dC?=
- =?us-ascii?Q?jj8NSMbEQ2eRMt1IHMtkq2FUjdqynD0foI0mJ03UUv8koBgiTCHT/msZ8quP?=
- =?us-ascii?Q?BXwFdwEIKrFeDOwEAiXR1hawRy5U+OjfnaYEijjMuIX+51bb4pSkyGSQB3Oz?=
- =?us-ascii?Q?IemKXASoRZpUtWc9jit1RCUrf6o9m17VA95XCKfII6pHb6P8UkLrQ514H4fu?=
- =?us-ascii?Q?lt5YNeuaKKPV6kGiwU8Km5BevtI01yIZrYiNPYGrurtmQTx0nyfJrnvYp/QK?=
- =?us-ascii?Q?zSU3v15Re1rrihXLBXspE1CZRnPc5bUysXcpx+VHdkYHrlP4s2Rz/9eCwRhX?=
- =?us-ascii?Q?nDGZc1IliFRnQCLqYBh3IBO0GQby7fJ/kngksEa3Smf7XFojCrG15xKVZ2Iy?=
- =?us-ascii?Q?vh+teu7VWgYtXQmF3dQOXKf7RS/AHqPNct21dljfqftVadm3Op6qm3oKv/zI?=
- =?us-ascii?Q?RMtKYbltt80mKHwxvuu0QMmYzSu1G1y0shpRLZ37QEvrtUEyo3NaZWh5wMZi?=
- =?us-ascii?Q?DA0gS7SdytzPisiSR+Lyv94yUNFqr6WNHm4f9KBQ350ecc9nUeSsVLtRnueb?=
- =?us-ascii?Q?OXDyufH0blRh8pQfr5olFpatz9vq9l2ymEoL2nJeBsvSTGPsHUWrZp28+DQK?=
- =?us-ascii?Q?lOiTU241Oj3XInoPql+slqcch1ECye0zlZHpSsATMxf1OghVgsxHr2FmiKnA?=
- =?us-ascii?Q?+Bjivn7VGRNDEANYfHugVQm86oDBCemTZYYh74ecrZfsxVL5O1h4kIAUmjpT?=
- =?us-ascii?Q?Gub95bC9/pdRt5mMTYV5tsP9RTKBPAaGp5mr?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 11:53:24.6123
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a345029-02ba-45fe-be20-08ddf129d049
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS2PEPF0000343F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5828
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 20/26] xen/domctl: wrap iommu-related domctl op with
+ CONFIG_MGMT_HYPERCALLS
+To: Penny Zheng <Penny.Zheng@amd.com>
+Cc: ray.huang@amd.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+References: <20250910073827.3622177-1-Penny.Zheng@amd.com>
+ <20250910073827.3622177-21-Penny.Zheng@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20250910073827.3622177-21-Penny.Zheng@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-CPU hotplug relies on the online CPU bitmap being provided on PIO 0xaf00
-by the device model. The GPE handler checks this and compares it against
-the "online" flag on each MADT LAPIC entry, setting the flag to its
-related bit in the bitmap and adjusting the table's checksum.
+On 10.09.2025 09:38, Penny Zheng wrote:
+> Function iommu_do_domctl() is the main entry for all iommu-related domctl-op,
+> and shall be wrapped with CONFIG_MGMT_HYPERCALLS.
+> Tracking its calling chain, the following functions shall all be wrapped
+> with CONFIG_MGMT_HYPERCALLS:
+> - iommu_do_pci_domctl
+>   - iommu_get_device_group
+>     - amd_iommu_group_id/intel_iommu_group_id
+>   - device_assigned
+>   - assign_device
+>     - intel_iommu_assign_device/amd_iommu_assign_device
+>   - deassign_device
+>     - reassign_device_ownership/reassign_device
+> - iommu_do_dt_domctl
+>   - iommu_deassign_dt_device
+>     - arm_smmu_reassign_dev/arm_smmu_reassign_dev
+>     - ipmmu_reassign_dev
+>       - ipmmu_deassign_dev
+>         - ipmmu_detach_dev
+>   - dt_find_node_by_gpath
+> Wrap XEN_DOMCTL_assign_device{test_assign_device,deassign_device,
+> get_device_group}-case transiently with CONFIG_MGMT_HYPERCALLS,
+> and it will be removed when introducing CONFIG_MGMT_HYPERCALLS on the whole
+> domctl.c in the last.
+> 
+> Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 
-The bytecode doesn't, however, stop at NCPUS. It keeps comparing until it
-reaches 128, even if that overflows the MADT into some other (hopefully
-mapped) memory. The reading isn't as problematic as the writing though.
+Apart from all of the above another aspect becomes apparent here: Some code is
+called at boot time only once management hypercalls are compiled out. Such
+code should then move to .init.text, so we may need to gain something like
+__init_or_mgmt. Imo that would want dealing with right here, but I can imagine
+opinions to differ on this.
 
-If an "entry" outside the MADT is deemed to disagree with the CPU bitmap
-then the bit where the "online" flag would be is flipped, thus
-corrupting that memory. And the MADT checksum gets adjusted for a flip
-that happened outside its range. It's all terrible.
+Furthermore, while looking around, I noticed that there's dt_overlay_sysctl(),
+entirely unguarded despite the earlier sysctl series. Yet if that work (and
+Misra checking) assumed OVERLAY_DTB=n, then there's iommu_remove_dt_device()
+which is only used when OVERLAY_DTB=y.
 
-Note that this corruption happens regardless of the device-model being
-present or not, because even if the bitmap holds 0s, the overflowed
-memory might not at the bits corresponding to the "online" flag.
-
-This patch adjusts the DSDT so entries >=NCPUS are skipped.
-
-Fixes: c70ad37a1f7c("HVM vcpu add/remove: setup dsdt infrastructure...")
-Reported-by: Grygorii Strashko <grygorii_strashko@epam.com>
-Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
----
-Half RFC. Not thoroughly untested. Pipeline is green, but none of this is tested
-there.
-
-v2:
-  * New patch with the general fix for HVM too. Turns out the correction
-    logic was buggy after all.
----
- tools/libacpi/mk_dsdt.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/tools/libacpi/mk_dsdt.c b/tools/libacpi/mk_dsdt.c
-index 8ac4f9d0b4..06a229e2e9 100644
---- a/tools/libacpi/mk_dsdt.c
-+++ b/tools/libacpi/mk_dsdt.c
-@@ -239,7 +239,8 @@ int main(int argc, char **argv)
-         /* Extract current CPU's status: 0=offline; 1=online. */
-         stmt("And", "Local1, 1, Local2");
-         /* Check if status is up-to-date in the relevant MADT LAPIC entry... */
--        push_block("If", "LNotEqual(Local2, \\_SB.PR%02X.FLG)", cpu);
-+        push_block("If", "And(LLess(%d, NCPU), LNotEqual(Local2, \\_SB.PR%02X.FLG))",
-+                   cpu, cpu);
-         /* ...If not, update it and the MADT checksum, and notify OSPM. */
-         stmt("Store", "Local2, \\_SB.PR%02X.FLG", cpu);
-         push_block("If", "LEqual(Local2, 1)");
--- 
-2.43.0
-
+Jan
 
