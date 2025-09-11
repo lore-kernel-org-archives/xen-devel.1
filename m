@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB6CCAC58E
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 11:34:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1120024.1465126 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FCB0CAC58D
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Sep 2025 11:53:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1120055.1465160 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwfYn-0006ap-1u; Thu, 11 Sep 2025 11:33:53 +0000
+	id 1uwfrq-0001c7-3k; Thu, 11 Sep 2025 11:53:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1120024.1465126; Thu, 11 Sep 2025 11:33:53 +0000
+Received: by outflank-mailman (output) from mailman id 1120055.1465160; Thu, 11 Sep 2025 11:53:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwfYm-0006ai-VG; Thu, 11 Sep 2025 11:33:52 +0000
-Received: by outflank-mailman (input) for mailman id 1120024;
- Thu, 11 Sep 2025 11:33:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dUpj=3W=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1uwfYm-0006ac-8v
- for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 11:33:52 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3070dbb5-8f03-11f0-9d13-b5c5bf9af7f9;
- Thu, 11 Sep 2025 13:33:51 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b07883a5feeso105415666b.1
- for <xen-devel@lists.xenproject.org>; Thu, 11 Sep 2025 04:33:51 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b07b30da289sm114200166b.17.2025.09.11.04.33.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Sep 2025 04:33:50 -0700 (PDT)
+	id 1uwfrp-0001aY-VU; Thu, 11 Sep 2025 11:53:33 +0000
+Received: by outflank-mailman (input) for mailman id 1120055;
+ Thu, 11 Sep 2025 11:53:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=QF+R=3W=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1uwfro-0001L2-OK
+ for xen-devel@lists.xenproject.org; Thu, 11 Sep 2025 11:53:32 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2062b.outbound.protection.outlook.com
+ [2a01:111:f403:2009::62b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ef42a230-8f05-11f0-9809-7dc792cee155;
+ Thu, 11 Sep 2025 13:53:31 +0200 (CEST)
+Received: from DS7PR03CA0184.namprd03.prod.outlook.com (2603:10b6:5:3b6::9) by
+ SN7PR12MB7834.namprd12.prod.outlook.com (2603:10b6:806:34d::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Thu, 11 Sep
+ 2025 11:53:25 +0000
+Received: from DS2PEPF0000343F.namprd02.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::ea) by DS7PR03CA0184.outlook.office365.com
+ (2603:10b6:5:3b6::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.17 via Frontend Transport; Thu,
+ 11 Sep 2025 11:53:25 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS2PEPF0000343F.mail.protection.outlook.com (10.167.18.42) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 11:53:25 +0000
+Received: from xcbagarciav01.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 11 Sep
+ 2025 04:53:23 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +58,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3070dbb5-8f03-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1757590430; x=1758195230; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=TeRftCh6CmvexS9+5z6TL7fW/ZDSwEmG+WJ1MAF1Li8=;
-        b=CsD7WK3s9dTPNE1BMRHrsHWRVo7Gom8hLDkjeQ/Sj720iuF+1IrEk/8Kq9WVnou9zR
-         VHk5xhVgkI+lCMrwnzyU8pUNWCaHrCmm2pXW25GqvT8Ulb3XY3b/LgprmdX+EuRHV3Te
-         EXNUsNqdgw2NT83V6XmDy/awfWtD8sUd38u9EgmdPjCcrCWS+nhz6m0dhnxisoVsozVo
-         vNZsg5kQhwITxbGNxQ1MMPkciANbWX1CqIG1OVLN/6pKu2u293BsRiBDvPuahXp47UOx
-         UpgYBA5QKpUBM+ow11TYMIcK4c9hniSFSgcKeVvuYESP3NNqtRAuTJALaeAWiTyxigjg
-         Tvaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757590430; x=1758195230;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TeRftCh6CmvexS9+5z6TL7fW/ZDSwEmG+WJ1MAF1Li8=;
-        b=YnaN43o/9RGOMoNjYEIYkIIkJRXpo4sWMa6ogQW9QIH5eV6FVaiKa0+6r564X5ChS6
-         fTMjNb71yOhIoQX+rCUXXNNn0Pq3jaLrDeqrDlgJBM1mi3S8zpTLC9Z2gE7tzQO/g6Zl
-         NCWxbd63YwD5bJUKmZ4W+H1MD4+m30iWtd+Phj0t41Fd0Q515nI0+Vc5IjxVdHhkqjq5
-         phMTytutyN/qELdKc1SmMGvgVL9ZTUtPF7w4FcN2cW1BFxNK7SDV6AD+UKkzi4X2pzj1
-         upG6SVuHLN9pdL7WckZxXlv8YlDT/5EohsPEV9n3hprFyd+n0q3w7a0d0XmWmiioU7u/
-         nnOw==
-X-Gm-Message-State: AOJu0YzBMUFWVrASzu6reZ7y8VInM158MJ1aQbTj3oXTVjwrY/CTlAo3
-	k/S2sE5ySEPattum4R2sWB6M4wM4kcXWPsgfJbeUI+uQM5sz/ddlYrQFbp3ijATjjw==
-X-Gm-Gg: ASbGncv9fvkwvwXLLGNsbvjw7X5AL2jEshSwURmmfNkoqTFHwM4H3R6yUYYaGLQsqfm
-	NpK5rq1MzmVFhIc9aaCEMH+EJbgQGdrMWYEzYGFnsGlD4WK9wRhGcSPR6FJ8vy9PtbVMa1TA8+5
-	1kAWsBMAcVuXOpJYNwNQAJwrO19r2wNB95exuD4Xz/+qY65Sqt2xvRQ5r5F/GKjnD8MnlORhjxf
-	Co5MzPtjVijtuIR4HcpdCinKUE+0ue+25sMjC5A7i33Wv17K04JFe2QYU51FHWGXCR1gK0EBKz+
-	3yYO2bCJbyYzlRPquaPhVtV9ZUc8Bstluo8QXx2uTLYiJgM2aHftKYI4oFvBErIM9s5KNqZeGnx
-	UL4Z9FpS+KiO9Z+z39GC3T57jI0lnNYcXLs63huybiJC2oBizGqH2CFKXztkpIyGs+yY7Kkty6C
-	MvX1JUqo0=
-X-Google-Smtp-Source: AGHT+IEcd8/XntfiHd7x0vWf9fdavgBOdbJ3MF5Fl95o9WchJO93pj3zk+bLiwsOyTeIn0DyneqY6w==
-X-Received: by 2002:a17:907:9612:b0:b04:70f8:d454 with SMTP id a640c23a62f3a-b04b167e38fmr1815371666b.51.1757590430318;
-        Thu, 11 Sep 2025 04:33:50 -0700 (PDT)
-Message-ID: <62c80f82-d85d-4d11-a7f2-4193bc882911@suse.com>
-Date: Thu, 11 Sep 2025 13:33:48 +0200
+X-Inumbo-ID: ef42a230-8f05-11f0-9809-7dc792cee155
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=y8jXL90Mj1dKfsAu1tQhYtMmhJhK0bnMWtZW0/pldbw/+j9jvsHWzH4lOO9MiskOD0pGZt97JLhY6xOrhMt1ohEdB3X4mck8ofsn+TsqxOwECs8bRfrtNj1nUjgaFBCTi9GRbs2pTz1NS++J5unk2vA1VPhqCRTys0U74tkepjk2DIEIKwxblfQ8Uf/EADLEwd37VzZzlOmKXFErfi7Iz4iJZKDPqLv5+pqVRGOoDFWJD63V3ESM1N17/+W9RuyUL6G+tdY7TfBrqrJwCQZ2Wjcw2PColzBGUsfJRYfMfdTaovtaPFtOQAwAkkqyRHm0HZqkTbEZFrAwu3B/0k0Jrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cwmMyqpJdahiFQT+aq+YWQtIG3NlD4esX8arqlLAnZU=;
+ b=xZZ5rti0GlYmofwyZAGsR1tRRdBK6P7UykS6KUDRAnsFvCJDOe7hSIehVgikypD+rzWP7ZxgsL+Qk6WYpHql2fpxTJU4jSW3Ng7oxT/4UhLUMD4b6CxqOJwgwXJnDY+CpS3wcokZtThEl9rIFjUJGquxiYDy0DpujfyvGE+XjU4QxBr3j4SoHHpbuAeJ5a+FLyb2NYYuU9vVnxeyQu0dQ1nCEEm83hcV1RBioA/B0f24yDMFMX1jGqFUX3VsQgN6YeM98CHB2XH5bA3Ay0v/l243C4hUZD0Nc6nYBJCfex1Lng7pxg+P/4QUgb0lR4PTXqpKWegfQGilR1S5j5lFhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cwmMyqpJdahiFQT+aq+YWQtIG3NlD4esX8arqlLAnZU=;
+ b=qkzwdikVYvUa6KzHwNHkQcMI7vVz5EY2vTik81VYFzJmzwEX/FVTi8TtgTYYggNk5VHRuYcbWBVwoyhNISDQl29sDPQiDOD67lj44wl6EyYa201PYyrjlYPk74xQ0Lvc15QYob9HiStLUCDRaCCRUhULWDkrJr51di/ay0T49+g=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 2/2] libacpi: Remove CPU hotplug and GPE handling from PVH DSDTs
+Date: Thu, 11 Sep 2025 13:53:03 +0200
+Message-ID: <20250911115308.16580-3-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250911115308.16580-1-alejandro.garciavallejo@amd.com>
+References: <20250911115308.16580-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 17/26] xen/domctl: wrap xsm_set_target() with
- CONFIG_MGMT_HYPERCALLS
-To: Penny Zheng <Penny.Zheng@amd.com>
-Cc: xen-devel@lists.xenproject.org, ray.huang@amd.com,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20250910073827.3622177-1-Penny.Zheng@amd.com>
- <20250910073827.3622177-18-Penny.Zheng@amd.com>
- <alpine.DEB.2.22.394.2509101937040.52703@ubuntu-linux-20-04-desktop>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <alpine.DEB.2.22.394.2509101937040.52703@ubuntu-linux-20-04-desktop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF0000343F:EE_|SN7PR12MB7834:EE_
+X-MS-Office365-Filtering-Correlation-Id: aa27fa81-f89c-45bd-296b-08ddf129d0ac
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?K7i+cOfacqlXJDM8MmdSaxOUQcXqCAIjB4SJXVOshgWwcx7IBme7C/p2yIcF?=
+ =?us-ascii?Q?sA0/arwjTxa25GiGhuQO8xXgBS9QjaW862ty+AHtWuSS+6WOdLoAidmRhpKk?=
+ =?us-ascii?Q?bVyC+x/nWvfztcZRnMPUHhXYO9GqNUoe1JwOAaoj9JWI1nf3sj0cd0CQ7gYo?=
+ =?us-ascii?Q?HcyUGDutlX+ZM+UtbgOJ5LbSWXYyJW45Fd2QUK7RI3nllfM9NKF6LA7KAc9V?=
+ =?us-ascii?Q?aL6KV3YJRYvwea6K3eFEMgqD+YpRoBLoJNvup/8giz5JP3ZVeEq4rxswq5TH?=
+ =?us-ascii?Q?Z+uJLaadstWKgqbxQFfg0Y7tGClDTvgdIJ3HdVeQEbJyzL2AxfgiRyyymSej?=
+ =?us-ascii?Q?hxfVvpsZj9rJ10nktfcx4m0zwEsB6iS7f0upFrVjbgkacW2ecxFTG1z8j/Xk?=
+ =?us-ascii?Q?5SZEwvka5Ggbm9nSZQvyDn8rP7zyiT2203yCDwKx8NG/xifpWEilHxt53fi2?=
+ =?us-ascii?Q?KaEPCU01GY+Rsb/w29lh4+sTJOfQxKM6TIYhhVahKmMlw4Zw/HRnr9vw6FK3?=
+ =?us-ascii?Q?Ggm02RTIU8xhEcNTL2ia5eCYh8k/Uqxeq00ibwrgJfhG1ahpHoHh8CKe9RIY?=
+ =?us-ascii?Q?dem4qqoKH7bE+ZnrmdolsgiaBfoZ2oCELGB212H8m3nsAUmqWTxKz9tZJ9Ik?=
+ =?us-ascii?Q?JZawWQ4GyLcPsOfXBycHDmcydrSSusGhPT8fMAl+uRqPgGpu4J6oFvU4s7U6?=
+ =?us-ascii?Q?wLEuStcTMlH8hUS3A2Anxb+0DX3gTBL07zvI6JFR0WQALys66eSjBTSk5rD6?=
+ =?us-ascii?Q?3WNwhIB+x1cSrHEDofh7qIYkB3yT1xaDch9BKcQ18BfYpwkigh2XfmJHAQnk?=
+ =?us-ascii?Q?EXoZvKYXoXSDIKX8lUrMjo61W+uDYTQb+1IBZdS/m8ujva82Tm6Xs5EtUYtg?=
+ =?us-ascii?Q?uIfy6kSZvWxxFOnB26wv3EU/0hke/tjT1uMs0PUY8M/tq4h26dZFvKpJ9AFo?=
+ =?us-ascii?Q?xtteOXHat5WIyrhvzmePSHIrO75b+jtmb2q6oTCXLORPQ7Z8g4ZtK7g+dsVn?=
+ =?us-ascii?Q?6EthjpJplDl9fC66MTUcp9TIA6lc4ehRW2Uyv5pZTav+0kPW/OKTWeCkK03c?=
+ =?us-ascii?Q?/ckJas9Ig/WpNFj52mShCy8EIsQ87SQnGqdudQsvMn+JKotx2+3mRQADecra?=
+ =?us-ascii?Q?WudMZz/xDFDRSBBFZuWzv+yUU2o2pqlfzUN4knJ5K0RTJmeVp4zjDiXljOop?=
+ =?us-ascii?Q?TArH6OPpF/Z9O8hbQYBLbqepudV94UUV97QJTLdNfN7dTYf/gpOKNJQrPeiw?=
+ =?us-ascii?Q?hYNNzEeSm7Epy3GwTClc+GBIvazue5FHctdXoQJFvqECT1n1VWeE9SZyDYzc?=
+ =?us-ascii?Q?YaFvrUlcytFSVHKEO5c6h4D6i587JzJdgV8uoVW7AlknzI0EPFeFLlz71+Wo?=
+ =?us-ascii?Q?p0hMjAhJu5Z5wxIY3j5CkMdA7CZ1f1nWeWU6J/KwgV0moEvFlTfffDWQbhpy?=
+ =?us-ascii?Q?Fl8K0mPv5MdNVGtc+7mK7peqWpDi5yjgCdf2+3O/kfhD4RuMF5tDlr+CdGJo?=
+ =?us-ascii?Q?AkEP+tXvZpcG5gIHoIxSPi9xgFug2LO9HPoN?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 11:53:25.2576
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa27fa81-f89c-45bd-296b-08ddf129d0ac
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS2PEPF0000343F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7834
 
-On 11.09.2025 04:37, Stefano Stabellini wrote:
-> On Wed, 10 Sep 2025, Penny Zheng wrote:
->> Function xsm_set_target() is only invoked under XEN_DOMCTL_set_target
->> domctl-op, and shall be wrapped with CONFIG_MGMT_HYPERCALLS.
->>
->> Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
->> ---
->> v1 -> v2:
->> - adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
->> ---
->>  xen/include/xsm/xsm.h | 6 +++++-
->>  xen/xsm/dummy.c       | 2 +-
->>  xen/xsm/flask/hooks.c | 4 ++--
->>  3 files changed, 8 insertions(+), 4 deletions(-)
-> 
-> No change to domctl.c ?
+PVH guests have no DM, so this causes the guest to fetch the online CPU
+bitmap from an unbacked 0xaf00 PIO port when executing the GPE handler.
 
-And xsm/dummy.h ?
+Seeing how ACPI CPU hotplug is the only event delivered via GPE, remove
+the GPE handler in addition to anything ACPI CPU hotplug related.
 
->> --- a/xen/include/xsm/xsm.h
->> +++ b/xen/include/xsm/xsm.h
->> @@ -59,8 +59,8 @@ struct xsm_ops {
->>  #ifdef CONFIG_MGMT_HYPERCALLS
->>      int (*domctl_scheduler_op)(struct domain *d, int op);
->>      int (*sysctl_scheduler_op)(int op);
->> -#endif
->>      int (*set_target)(struct domain *d, struct domain *e);
->> +#endif
->>      int (*domctl)(struct domain *d, unsigned int cmd, uint32_t ssidref);
->>      int (*sysctl)(int cmd);
->>      int (*readconsole)(uint32_t clear);
->> @@ -258,7 +258,11 @@ static inline int xsm_sysctl_scheduler_op(xsm_default_t def, int cmd)
->>  static inline int xsm_set_target(
->>      xsm_default_t def, struct domain *d, struct domain *e)
->>  {
->> +#ifdef CONFIG_MGMT_HYPERCALLS
->>      return alternative_call(xsm_ops.set_target, d, e);
->> +#else
->> +    return -EOPNOTSUPP;
->> +#endif
->>  }
+This shrinks PVH's DSDT substantially and prevents spuriously executing
+a large amount of AML with no purpose at all.
 
-Again I would have expected for this inline function to be wrapped as a whole;
-the title says exactly that, imo.
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+v2:
+  * Adjusted commit message
+  * All other tags except S-by moved to patch 1.
+---
+ tools/libacpi/mk_dsdt.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Jan
+diff --git a/tools/libacpi/mk_dsdt.c b/tools/libacpi/mk_dsdt.c
+index 06a229e2e9..cc4ed3961c 100644
+--- a/tools/libacpi/mk_dsdt.c
++++ b/tools/libacpi/mk_dsdt.c
+@@ -218,6 +218,11 @@ int main(int argc, char **argv)
+     pop_block();
+     /**** Processor end ****/
+ #else
++    if (dm_version == QEMU_NONE) {
++        pop_block();
++        pop_block();
++        return 0;
++    }
+ 
+     /* Operation Region 'PRST': bitmask of online CPUs. */
+     stmt("OperationRegion", "PRST, SystemIO, %#x, %d",
+@@ -265,10 +270,6 @@ int main(int argc, char **argv)
+     pop_block();
+     pop_block();
+ 
+-    if (dm_version == QEMU_NONE) {
+-        pop_block();
+-        return 0;
+-    }
+     /**** Processor end ****/
+ 
+ 
+-- 
+2.43.0
+
 
