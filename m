@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0865CAC58F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B51CAC582
 	for <xen-devel@archiver.kernel.org>; Fri, 12 Sep 2025 14:44:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1122090.1466008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1122091.1466013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ux50w-00058v-GB; Fri, 12 Sep 2025 14:44:38 +0000
+	id 1ux50w-0005E0-Pw; Fri, 12 Sep 2025 14:44:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1122090.1466008; Fri, 12 Sep 2025 14:44:38 +0000
+Received: by outflank-mailman (output) from mailman id 1122091.1466013; Fri, 12 Sep 2025 14:44:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ux50w-00057T-68; Fri, 12 Sep 2025 14:44:38 +0000
-Received: by outflank-mailman (input) for mailman id 1122090;
- Fri, 12 Sep 2025 14:44:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ux50w-0005CT-HU; Fri, 12 Sep 2025 14:44:38 +0000
+Received: by outflank-mailman (input) for mailman id 1122091;
+ Fri, 12 Sep 2025 14:44:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yT3b=3X=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ux50u-0004JZ-Hg
- for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 14:44:36 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fe17845e-8fe6-11f0-9809-7dc792cee155;
- Fri, 12 Sep 2025 16:44:31 +0200 (CEST)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-45dcff2f313so14441275e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Sep 2025 07:44:31 -0700 (PDT)
+ id 1ux50v-0004JT-3Z
+ for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 14:44:37 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 00eb5423-8fe7-11f0-9d13-b5c5bf9af7f9;
+ Fri, 12 Sep 2025 16:44:36 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3e8123c07d7so47009f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Sep 2025 07:44:36 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45e015784c3sm72070045e9.10.2025.09.12.07.44.30
+ 5b1f17b1804b1-45e015784c3sm72070045e9.10.2025.09.12.07.44.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Sep 2025 07:44:30 -0700 (PDT)
+ Fri, 12 Sep 2025 07:44:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,102 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fe17845e-8fe6-11f0-9809-7dc792cee155
+X-Inumbo-ID: 00eb5423-8fe7-11f0-9d13-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1757688271; x=1758293071; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4RGHXqBNJI6tQy2M8/bIoPq23nxzoU9POG3ZkPJ6xPE=;
-        b=FfspcdjfLBaKcWWVsI1Q3ClaNBwxqBK/tzRdy8ECYHKIwS5pgvryd3uoxPr6j5nIn7
-         EjlB9Y5+USoWSbcJKf18zLV1zOx69D8k+lHLixeml5Q4jurNalQillP3CmESLJXQA5TQ
-         JCC5dp6NgVZMDHu/YH0ttDvZ2aXhDDGyQi+1k=
+        d=citrix.com; s=google; t=1757688276; x=1758293076; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Y8OCJ00B7SiN+TcNJnXk15Q6BMK+dvW43SxAcU8PxzY=;
+        b=qOApSUJ2J2lP50EF0B0Qn0GB2bcMi0LNEcHrK8LJ1FGZdjtu0wRI3y23Zq4iNC85Kv
+         GN62hvouCLSb/yHXIESafON9UhylSMaFvqf+8O5TIj/2k6ti5ns+BsFuEJC671X/4nKA
+         JogoNkThGmBy0FnoyYDdlj71qiHODsDTatQ9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757688271; x=1758293071;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4RGHXqBNJI6tQy2M8/bIoPq23nxzoU9POG3ZkPJ6xPE=;
-        b=wu362P/AbJ0x2VQDyNe+ebHKAd9cBav4wyBNCy8C0yAi+dUzr0AfXpdTnufK9IsSFd
-         iDScbMQJrIQkWroHvsE5C1BrgjoWXWPS5/p9kjPUw7yPpMRSekqXmzlhvEOLtUhpcW8F
-         cDsONQZxOXZhOxp/zfg0+/iBuc6MbyUjy3yupbr6aSQTo/MUsb8p2bUF/RrLOv2crU9R
-         SR4ECgUnxvHOksrJHYxsFIwOGDRpzeg4mYMx3/IG1N4ut81kETt6DoSVAcIGaPtKKE/H
-         bAxga6vgJaILDtBxGmbgOiBQc0aisCrwKB16xGit1wRiMBqXxkvfEG0KU5oIS49yCyuF
-         M4bQ==
-X-Gm-Message-State: AOJu0YxvLjxteXzOnwtDm3HwT65aO9lRkIHrSEykd8tSsoI57JApnJiM
-	68YklgUw4kgfPjERsmpkmY98f5XyDSnrbCq5+COQU0rgf3fRAkDY2+lkcfWleMcs/NPYCIeb6ai
-	tSl7D
-X-Gm-Gg: ASbGncu1mTPOf45HT1syW8k83sphqY0U7FlDuWLwsVwyDjSA0ojbwSLe2M9KY8f1aXV
-	1vREbK7slL69P0Ud2GoavdvuuX6CYAIJNVBsK8Sn3f7bC0ND+baoVfiQS2c79O29fbvqyWqyDc5
-	xGCInreip28EFUMIMLNGlQDznKxm38OALyrLqwGHw5iTffDBz4Ox/vyq26V42EvqQVCHXvzWBWI
-	/RIxDRW+0u3gmuwr7tWJDWbGKFGw1Xv+OIbRooP0OYhOzA3i/7y+CEGjWJi74rmdy+sn5dcFpmR
-	tFhKCb8DVrRNPt3PPD/BHlM1a1O4Gr2OqSIZGLvLdL6haUDgE5HVvyAX6o+N0pTfYDvA6VNyYuB
-	7qpZNKH7WRzO9QR1PR/X6hoZL26I5JgQxo6qbGCiiCZnH0SFcGWy520GXgq+RfmPuMAIv4TBaCL
-	DTCqow3m9RlOM=
-X-Google-Smtp-Source: AGHT+IFJ7tXD7Isvqk1AB812PnDe847/r4b57QBBoUDIiIyAvhZ5Nt7pq5LCYCt72xrfxmZwaeJUVw==
-X-Received: by 2002:a05:600c:6288:b0:45d:e326:96fb with SMTP id 5b1f17b1804b1-45f211ff89emr39879115e9.30.1757688270944;
-        Fri, 12 Sep 2025 07:44:30 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1757688276; x=1758293076;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Y8OCJ00B7SiN+TcNJnXk15Q6BMK+dvW43SxAcU8PxzY=;
+        b=LnKkQNGn8R4tNXDdXp2MAoJeuLXsJerJBSGVLgu9nOOcmByAPEiksQbCGULCSB7bOZ
+         ZtZ8HYZObFPWf86IjdivW6IedpU+imwtP98sU9ByQ6Yvro3dFOv+1aWsp3RgQJDKptT6
+         w0g/haKmHH3juO6jDxKgDjmw71b9ccOFgZPS73bWJ2+LOsDWF++au5jGmu5X5o6n4VMH
+         ZaWNDNODC+0Wo0gOIoAMIEU6dHtisREFD0b+CjSFJ6480eMWT9ellvSPJEJA/js3DQdf
+         VuU7FiLOXYkqxRWYV6rQo7RDt1O+byOwtdxpeDzE0N1zwWs3ydDvA1WJUOu+clkfH53q
+         M/fQ==
+X-Gm-Message-State: AOJu0YyR6OzIm1O40opV7GLgEcSywZVmnEcaNSiysbJIzAIE2kRLaNGF
+	urlW2V1Ci54oGO/uhqVE7CClGJiz6L7eIfBUM2gSn1XPOqzPzT0s4wVJwAYInh/MjVXo+/f8q99
+	WjSXm
+X-Gm-Gg: ASbGncuMLrq6bRna5eujs3jxe+Q0U0fhZkXD3nru0W9iagCHK8v+K206ARAN2yehUt5
+	v4OnekE2Ir63UjcyvdVBgPwebxkLdzs6KdcIYuOwkCoTjPt67Zz59v3Eb6WFIT6M7GAiogmwSAV
+	sH6a2DmW4ZlqzWl4PBQsyDkfSQpIdNMUniBWCY0/9CrwglVLt3oTrbul2z6oeDopINsnV8a3TVo
+	jbMEzGyN/TCU/BmuQfrw3KK25Noc0csm++8FanjBEkahI80AZ1b2DZiLZoVUKVRM+6AvNknljz6
+	lb5pz2feqhD2apKxEPzmFU6xVNk/1NLADOzcwYKrFY3GjIKe670U0wp8sLSWoL5dcxnOMc2ZKO/
+	C1PWbTI+WUGAX3TGQVlyZYYvHNiuiu5lOQTFKswBXI+lrFImgC3MvSLRFq0avirYssktdXNDKak
+	Dd
+X-Google-Smtp-Source: AGHT+IFI+H0LGobGeE9zijNwuP0LN6Roi39UE0X8oThdZYHVRwFL4CZw2IWIM5DfdjrGcyGIMiEbCw==
+X-Received: by 2002:a05:6000:26cb:b0:3e2:e851:7f93 with SMTP id ffacd0b85a97d-3e75e0fc32bmr6897230f8f.7.1757688275709;
+        Fri, 12 Sep 2025 07:44:35 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 0/8] CI: Add Debian Trixie
-Date: Fri, 12 Sep 2025 15:44:19 +0100
-Message-Id: <20250912144427.1905141-1-andrew.cooper3@citrix.com>
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Subject: [PATCH v4 5/8] x86/emul: Make condition coverage warning non-fatal
+Date: Fri, 12 Sep 2025 15:44:24 +0100
+Message-Id: <20250912144427.1905141-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250912144427.1905141-1-andrew.cooper3@citrix.com>
+References: <20250912144427.1905141-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Refresh the Trixie series.  A few more bugfixes found by randconfig and log
-inspection.
+Randconfig with GCC-14 (Debian Trixie) found:
 
-These containers are already built and deployed for people to test with.
+  In file included from arch/x86/x86_emulate/x86_emulate.c:11,
+                   from arch/x86/x86_emulate.c:27:
+  arch/x86/x86_emulate/x86_emulate.c: In function 'x86_emulate':
+  arch/x86/x86_emulate/private.h:482:8: error: Too many conditions (found 826); giving up coverage [-Werror=coverage-too-many-conditions]
+    482 | ({  if ( (p) ) {                                                          \
+        |        ^
+  arch/x86/x86_emulate/x86_emulate.c:1283:5: note: in expansion of macro 'generate_exception_if'
+   1283 |     generate_exception_if((mode_vif() &&
+        |     ^~~~~~~~~~~~~~~~~~~~~
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2036687955
+which is a consequence of having a new enough compiler to allow
+CONFIG_CONDITIONAL_COVERAGE in to the mix.
 
-Andrew Cooper (8):
-  CI: Use the Debian Trixie container for RISC-V test jobs
-  CI: Update ppc64 to use Debian Trixie
-  CI: Merge categories in debian/12-x86_64.dockerfile
-  CI: Make qemu-smoke-x86-64-gcc-efi compatible with Debian Trixie
-  x86/emul: Make condition coverage warning non-fatal
-  CI: Use pipefail in scripts/build
-  CI: Update x86 to use Debian Trixie
-  CHANGELOG: Notes about distro changes in CI
+In the short term make warning non-fatal.
 
- CHANGELOG.md                                  |  3 +
- automation/build/archlinux/current.dockerfile |  1 +
- automation/build/debian/12-x86_32.dockerfile  |  1 +
- automation/build/debian/12-x86_64.dockerfile  | 12 ++--
- ...c64le.dockerfile => 13-ppc64le.dockerfile} |  2 +-
- ...x86_32.dockerfile => 13-x86_32.dockerfile} |  3 +-
- ...x86_64.dockerfile => 13-x86_64.dockerfile} | 14 ++--
- automation/build/fedora/41-x86_64.dockerfile  |  1 +
- .../opensuse/leap-15.6-x86_64.dockerfile      |  1 +
- .../opensuse/tumbleweed-x86_64.dockerfile     |  1 +
- .../build/ubuntu/16.04-x86_64.dockerfile      |  1 +
- .../build/ubuntu/18.04-x86_64.dockerfile      |  1 +
- .../build/ubuntu/20.04-x86_64.dockerfile      |  1 +
- .../build/ubuntu/22.04-x86_64.dockerfile      |  1 +
- .../build/ubuntu/24.04-x86_64.dockerfile      |  1 +
- automation/gitlab-ci/build.yaml               | 72 +++++++++++++++----
- automation/gitlab-ci/test.yaml                | 18 ++---
- automation/scripts/build                      |  2 +
- automation/scripts/containerize               |  4 +-
- automation/scripts/include/xtf-x86-64-efi     | 12 +++-
- xen/arch/x86/Makefile                         |  3 +
- 21 files changed, 109 insertions(+), 46 deletions(-)
- copy automation/build/debian/{12-ppc64le.dockerfile => 13-ppc64le.dockerfile} (93%)
- copy automation/build/debian/{12-x86_32.dockerfile => 13-x86_32.dockerfile} (93%)
- copy automation/build/debian/{12-x86_64.dockerfile => 13-x86_64.dockerfile} (89%)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
+v4:
+ * New
+
+Full failure logs:
+  https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/11331286819
+---
+ xen/arch/x86/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index d7aed7d92c15..a0bba5d9085e 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -98,6 +98,9 @@ $(obj)/usercopy.o: CFLAGS-y += -iquote .
+ ifneq ($(CONFIG_HVM),y)
+ $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+ endif
++ifneq ($(CONFIG_CONDITION_COVERAGE),y)
++$(obj)/x86_emulate.o: CFLAGS-y += $(call cc-option,$(CC),-Wno-error=coverage-too-many-conditions)
++endif
+ 
+ efi-y := $(shell if [ ! -r $(objtree)/include/xen/compile.h -o \
+                       -O $(objtree)/include/xen/compile.h ]; then \
 -- 
 2.39.5
 
