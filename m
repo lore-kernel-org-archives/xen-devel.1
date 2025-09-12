@@ -4,44 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73ABCCAC582
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Sep 2025 08:56:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1121649.1465818 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A75B8CAC582
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Sep 2025 09:33:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1121692.1465827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwzZY-0004Tr-BR; Fri, 12 Sep 2025 08:56:00 +0000
+	id 1ux09G-0001FV-Vh; Fri, 12 Sep 2025 09:32:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1121649.1465818; Fri, 12 Sep 2025 08:56:00 +0000
+Received: by outflank-mailman (output) from mailman id 1121692.1465827; Fri, 12 Sep 2025 09:32:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uwzZY-0004Tk-8U; Fri, 12 Sep 2025 08:56:00 +0000
-Received: by outflank-mailman (input) for mailman id 1121649;
- Fri, 12 Sep 2025 08:55:59 +0000
+	id 1ux09G-0001FO-Sj; Fri, 12 Sep 2025 09:32:54 +0000
+Received: by outflank-mailman (input) for mailman id 1121692;
+ Fri, 12 Sep 2025 09:32:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2Cg5=3X=redhat.com=david@srs-se1.protection.inumbo.net>)
- id 1uwzZX-0004TO-9F
- for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 08:55:59 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4xbX=3X=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1ux09G-0001FI-5Q
+ for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 09:32:54 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2061f.outbound.protection.outlook.com
+ [2a01:111:f403:2009::61f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b8e255c-8fb6-11f0-9d13-b5c5bf9af7f9;
- Fri, 12 Sep 2025 10:55:57 +0200 (CEST)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-513-WZd0XfxAPsCGU7gPlgZL-A-1; Fri, 12 Sep 2025 04:55:54 -0400
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-45de27bf706so7924275e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Sep 2025 01:55:54 -0700 (PDT)
-Received: from ?IPV6:2003:d8:2f20:da00:b70a:d502:3b51:1f2d?
- (p200300d82f20da00b70ad5023b511f2d.dip0.t-ipconnect.de.
- [2003:d8:2f20:da00:b70a:d502:3b51:1f2d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45e037c3ce5sm54255495e9.16.2025.09.12.01.55.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Sep 2025 01:55:52 -0700 (PDT)
+ id 73ee666f-8fbb-11f0-9d13-b5c5bf9af7f9;
+ Fri, 12 Sep 2025 11:32:52 +0200 (CEST)
+Received: from DS7PR03CA0020.namprd03.prod.outlook.com (2603:10b6:5:3b8::25)
+ by DM6PR12MB4204.namprd12.prod.outlook.com (2603:10b6:5:212::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Fri, 12 Sep
+ 2025 09:32:49 +0000
+Received: from CY4PEPF0000E9D7.namprd05.prod.outlook.com
+ (2603:10b6:5:3b8:cafe::b8) by DS7PR03CA0020.outlook.office365.com
+ (2603:10b6:5:3b8::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.18 via Frontend Transport; Fri,
+ 12 Sep 2025 09:32:48 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D7.mail.protection.outlook.com (10.167.241.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9115.13 via Frontend Transport; Fri, 12 Sep 2025 09:32:48 +0000
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 12 Sep
+ 2025 02:32:47 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,157 +58,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b8e255c-8fb6-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1757667356;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=yhSXL+2pa9oDbDGRuQ4gQlpl18vQ+30/sPKc3K6z7Uo=;
-	b=IveBiTgu6K6wb46I3mtmTdpkQZdEaqeL7kwT/a8yxdSlKW8E78iZo7pxHlYZUQtPHxFiux
-	ab9FzjtoPCb2eSDilf1UonpvzWM9HIJYBUUXLpll/e4fZlMu3/EBp+6NQjhHgc7kmlbz7v
-	K1OjrPcQbN3bxuuhO2kLH+8V/cZFQEk=
-X-MC-Unique: WZd0XfxAPsCGU7gPlgZL-A-1
-X-Mimecast-MFC-AGG-ID: WZd0XfxAPsCGU7gPlgZL-A_1757667353
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757667353; x=1758272153;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yhSXL+2pa9oDbDGRuQ4gQlpl18vQ+30/sPKc3K6z7Uo=;
-        b=BWdEALMPGS2lPFKun9hMdy43tT1FhHpZs5UFWrV+U6ldI0AVUiQp/x34LWrkqw00UJ
-         Huv04Zzy5TtlWGuFHBqTCCqGThJQf37HKgCagxpOPVuSQhzy3byU9pH0vxYmVVZIMiIC
-         BKGf1PCuVv/4CPK5M3XCCo0QJBF2T0WXIh/+i+KpG7D+FSiyMqrP2ntO9R6MjefmLAl8
-         qcG1mg2XGKXsULv3EuwWnew11+IM/gzauclw6DksMwA/Mdr/EECIhfQk4OCuAizLc8kA
-         CsySt9zRfbVURqEfdbkN8G2Mc22PTRhstN5U3RF7fBXnevNwrvrpQ0xYyX/k50cmH/MJ
-         C1GA==
-X-Forwarded-Encrypted: i=1; AJvYcCXhZ1xy/vCdSZ+qUwrnAbzEBABXub/dTeNE/EhtIJzpwZwBuBRtfEHQ6dlBPgQIV0ELtzijsL7dKmQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxmmPaWawYityUDX77VkfldYAGnKM8bvze0eyFhbZmOee95G0bW
-	AyF8qQX3iCTLRmqrhCUh82LqIWjteMQFLeWsnrgl/gkem6QTYKSweOeC5v2SB2xKULdPlvU8HUx
-	SmtBkmoDh8aKW4+B1uAaieEcA6UnW7khGZZbt8nEgGtGAbEnGNqCz5mJkTbq8V+wgAOk2
-X-Gm-Gg: ASbGncum2hdRW7q0E/wDqtIIxQMDVsNvPkyOKDhVc02TuMdSHiGX1iOk5xqk5bzpGgw
-	v4BRL64p55QBus2xyrDkMB/YOa/vb0Z9MDvrQ7s7cEGhFx2iS2gaI8De+QwKmJm2Tviv39Fkp84
-	TE2MC1ieylXYs+BxuWijbDG92A9YnUhlpQRZPw1ymgP7wxhjkx+QmXnQweSoVgYpkhTxXbiA1c5
-	fQqIAmVOF9HPEu5qIjCe/A9+mg1YpLQukFF+2ewyCU3q9Ln8/JQHGf3btY7xGl5cVQC3PQnofir
-	ZjoOp/gavOVmduUrOZetuVNfQ7eQjMhpy9UDS8GkGwrhSFHjVV0rUXmkUaSfESxgBH5KATFZz8S
-	FQm1B3soLFBaRVTAj+hg36UlEA7CJD3fmvDfAFz2ndkiuUbV1RT/GKVA6DxFoaKEMw08=
-X-Received: by 2002:a05:600c:228f:b0:45b:6743:2242 with SMTP id 5b1f17b1804b1-45f211f86c5mr15325655e9.22.1757667353212;
-        Fri, 12 Sep 2025 01:55:53 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGWDKbJzbJR4/u84XZSgPwx14/k9hN3sfQaLT2TQm5sKZh16Dp+Cgzni1IYyZJBI43U7rR/8A==
-X-Received: by 2002:a05:600c:228f:b0:45b:6743:2242 with SMTP id 5b1f17b1804b1-45f211f86c5mr15325425e9.22.1757667352826;
-        Fri, 12 Sep 2025 01:55:52 -0700 (PDT)
-Message-ID: <a17ab4e3-627a-4989-a5a5-d430eadabb86@redhat.com>
-Date: Fri, 12 Sep 2025 10:55:50 +0200
+X-Inumbo-ID: 73ee666f-8fbb-11f0-9d13-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ERzt3ygZZ+3B+prWgvsEEeI1SCNuR+J8AlBxMbw7pPXKd5EYZZsYXcrLHxOhtf6KGkbcTy6lNqIPTvJrx5BImkZRWA4tHsuvtmuNXYtG5XRg8ne49UsVY009JZH9R0SFVNBuFifW0sjISdAb5TyoXnf9nvoksNW+gRvGv2GpC0/8giZSKXCF/n0u9YVMAVplNECGYrk/Igt5lQbNojXFq1cBCuRGKXhWwbVEP8wu1KfcNmCPNmYCyz7AE7Ayq5pFJkhjciJMjPr/9gbFLXzprLPa+bO6RJLhMslzgcikqfTwhze60U0sc+lbMmDeXXe98/qVcbfWUTMdwxab3fIP+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dCyprfv3sjr3a6DlPE2wBcwa510YmRrToiggLr1oa5E=;
+ b=cjZWiQ3xKEL8Y+8V83DD75UY/1UYw+e0CVo9otlJdgVrR121vdgF8fyxuHqaUAICRWk6y09oJ6k8EcNbRf10OLerI0BgEtU5BDdJKG6gb1Gf1oXFtuYbcGvqA70NnGtaAmMB+yXp7Q1k5p7QXebKi9QvmUzSxxzVzkqZsFE1Kj8gDbg1AJhTYT0VN3DLVJeFLvQTiY6RmR0e1sPmnQNXiaEFEHD/vVSskze5tmRgDi79olvXJ6fWt04X9VFtemx39xGcj3kn89/6phRw8FD5n3rLfLNiULJip9/pSn/EBII+gZ6l7+yArwq59hUQ+ir+ibHbRk29Fkpro0EJEjmYzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dCyprfv3sjr3a6DlPE2wBcwa510YmRrToiggLr1oa5E=;
+ b=4RYQWMm/Wzr1yv+AXhVFezJVjyd+woOaAW8WxdaeCbjR+rlx9qwoTqT92tIr2unROg8vIRq7z8jiDHebqJCtsmLdWaseo4yhAA9ME7WUIDQFaunml7k7yMRSE+vQWzG1wHOREiPxAcrlIHfM7+l2FyabghSxcXh7DC3rPW2+yns=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/7] mm: introduce local state for lazy_mmu sections
-To: Kevin Brodsky <kevin.brodsky@arm.com>,
- Alexander Gordeev <agordeev@linux.ibm.com>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- Andreas Larsson <andreas@gaisler.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Borislav Petkov
- <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- "David S. Miller" <davem@davemloft.net>, "H. Peter Anvin" <hpa@zytor.com>,
- Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
- Juergen Gross <jgross@suse.com>, "Liam R. Howlett"
- <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Michal Hocko <mhocko@suse.com>,
- Mike Rapoport <rppt@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
- Peter Zijlstra <peterz@infradead.org>, Ryan Roberts <ryan.roberts@arm.com>,
- Suren Baghdasaryan <surenb@google.com>, Thomas Gleixner
- <tglx@linutronix.de>, Vlastimil Babka <vbabka@suse.cz>,
- Will Deacon <will@kernel.org>, Yeoreum Yun <yeoreum.yun@arm.com>,
- linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
- sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org,
- Mark Rutland <Mark.Rutland@arm.com>
-References: <20250908073931.4159362-1-kevin.brodsky@arm.com>
- <20250908073931.4159362-3-kevin.brodsky@arm.com>
- <d23ea683-cca4-4973-88b1-4f6fd9b22314@redhat.com>
- <ca2054ad-b163-4e61-8ec4-6f2e36461628-agordeev@linux.ibm.com>
- <e7acb889-1fe9-4db3-acf4-39f4960e8ccd@redhat.com>
- <2fecfae7-1140-4a23-a352-9fd339fcbae5-agordeev@linux.ibm.com>
- <e521b1f4-3f2b-48cd-9568-b9a4cf4c4830@redhat.com>
- <47ee1df7-1602-4200-af94-475f84ca8d80@arm.com>
- <29383ee2-d6d6-4435-9052-d75a263a5c45@redhat.com>
- <9de08024-adfc-421b-8799-62653468cf63@arm.com>
- <ef343405-c394-4763-a79f-21381f217b6c@redhat.com>
- <4b4971fd-0445-4d86-8f3a-6ba3d68d15b7@arm.com>
- <4aa28016-5678-4c66-8104-8dcc3fa2f5ce@redhat.com>
- <15d01c8b-5475-442e-9df5-ca37b0d5dc04@arm.com>
- <7953a735-6129-4d22-be65-ce736630d539@redhat.com>
- <781a6450-1c0b-4603-91cf-49f16cd78c28@arm.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- qIws/H2t
-In-Reply-To: <781a6450-1c0b-4603-91cf-49f16cd78c28@arm.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: S2oBC5TC8OPOVXYJvwtK0_523Yf68u42krkOQnsYllY_1757667353
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 12 Sep 2025 11:32:45 +0200
+Message-ID: <DCQPUZE9QUU9.1R2NRUOT3952H@amd.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>, Grygorii Strashko
+	<grygorii_strashko@epam.com>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v2 1/2] libacpi: Prevent CPU hotplug AML from corrupting
+ memory
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: Jan Beulich <jbeulich@suse.com>
+X-Mailer: aerc 0.20.1
+References: <20250911162336.23887-1-alejandro.garciavallejo@amd.com>
+ <20250911162336.23887-2-alejandro.garciavallejo@amd.com>
+ <4b958afe-dfcd-4ac0-bc09-468e2b9b2710@suse.com>
+In-Reply-To: <4b958afe-dfcd-4ac0-bc09-468e2b9b2710@suse.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D7:EE_|DM6PR12MB4204:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3958e738-bd22-42d5-fc23-08ddf1df5631
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WDdFa0pza1pRbmNwbFd6ekZiOTNSVFBwN21Fa2o5bHc5cThpNWdjMjVSTzhy?=
+ =?utf-8?B?aFhkQnNBVmpqVUkvQi9KWmNXOUJjbUxSZW5tcmJjc0YxSHVHbHpINkRwc21h?=
+ =?utf-8?B?dXZmaVdsUFlsanROSnA1cXhXd1ZWdVdheGRyVHVaeUw1SC90TzM5MjM3aFpG?=
+ =?utf-8?B?OHFKU28xa0g1TWxIazFoMjJhaWxHRlZZVzhId2hpMlN0cHR2SkJlSjk5NEJE?=
+ =?utf-8?B?ejhqNnhmWnpyUjRCMzBkcktndDFRWDRUbVlHVkI2akd0dzV6ekEzSENva3lm?=
+ =?utf-8?B?SEZqK1JtRWc0cWNHUklnL0plTjhPSGhleERCcUl1c3JJalNUR0xQb3A2Y0My?=
+ =?utf-8?B?N1hla3k1NjhZbC93d08xT0s0cXdrYWJkYmM3UjJUMERsOW8rekpSM09VdTNP?=
+ =?utf-8?B?dEQ2WmlkTkwxcmZJeC9EYkV0Qm9LQmtmUXpybnhNTk1jVk1CZUVQWFpGWm02?=
+ =?utf-8?B?ZnhDcGVzdUJzK1NBZXpVK05TcmYvTlJXZ3JnTk1KNlRKUW94eVBOSzFnKzUr?=
+ =?utf-8?B?K2FScm5tQzNPTWp6SDBlZlVITG1jQnRwVG1pWGZvaWFnMEJ5N2dMTEw2aXla?=
+ =?utf-8?B?NHIxWE5QeE5IQlNzTWxTS1FmdlhJUFVWRUI4RjdoQmpOZGF0Q2p0Skt1dmVr?=
+ =?utf-8?B?RXhTVk4reUlpSWR5QjZ3NG9nazQ0cEtaQ2g5cWRCcnFSMDcycUQyY1FyaFcx?=
+ =?utf-8?B?ZC9LQzVVTVBwcEMvYTE3ZGVjWmE3Q2VncWFEcGRYclJhcTA2SzcvNWFha3FW?=
+ =?utf-8?B?Q3NmeUZtcmcwdWRxdjhkUTlYTXZOUDlUNVZsb0VtanpiN0Y1U1NDQWlKcWVl?=
+ =?utf-8?B?a2ExK2JMSkxpUk9zZXBLV0taQVlrenRSY3ZXYk40UStTL3ZHNDZaSG1kTldW?=
+ =?utf-8?B?QkhBL0J6L2FBeWw1UHJweG45Q3RxamJTTGNSNXNvb2N1bWVlQmhCK3hWRXNt?=
+ =?utf-8?B?UGd0UlFsTTNEaGRFbkVFaHoxNkkwNndLb2NEcWx4RVFpVC9nbnByck1aenNl?=
+ =?utf-8?B?U1kzZUxYQjlxb0kxZEp3Q1VaOG9OcVc2YVhZU1FkS1NDbUFTUjZQdnp0ZVdH?=
+ =?utf-8?B?djl2RzQzZXNqczNqQStXWUR5RkZoTGEyVkQzWXVqV3JoL2NnZXZzWHkwRE1D?=
+ =?utf-8?B?MkxZZE4zMy8ybW9WZy9UZ2pHdHgrejZCVkl4MnZINnlqL2JrY1pIcW1VTzZp?=
+ =?utf-8?B?WXBFOFBIaVdaSXZGWC9jZXVsaFdYbGNxLzVibXE1NzZ3d3AyYnFLM0lzeFVB?=
+ =?utf-8?B?WFVSaExmOURpRWNtTlFNU3dlNUgvMlU1c3Axc1ZVOFY4Nk1Od0ZHU2xkY3dH?=
+ =?utf-8?B?b2JHNHNBa2VhUUx3SlJ6TGE5OUJoRG94YWRROTJrc0tsZnZ3SXJ6Qm9sZkFq?=
+ =?utf-8?B?dkkxb2krMnBzQnpXQXFZM3UrRytESERNN0s4VHlpL1pGOXdZaER4azl2RWdE?=
+ =?utf-8?B?R1N6THdRS04rNHZFSzUvWHo1SmJvRVo4cHpyS2F3WC85WWJQNm9ibStmc3hL?=
+ =?utf-8?B?R0R2ZlgwSElpdFBVRHZ5dmtlQTRNZ2I1c0RSejR6Tjh0aWt3ZDVhZjRGWGtq?=
+ =?utf-8?B?aUtpYWFTR3B1cmxQWFQ1VW1Ud2FjUjRmNU9iUlZFSHlEczl6cVFZZDEwRW42?=
+ =?utf-8?B?eUZaajZ0d1hoaU80eS9TdW9FN1Z5TFZGRDlhc1BiVzBBK0xFWjhzZnRFMGtM?=
+ =?utf-8?B?VTFuMnFsUExrV2NkcWc5SmpJWUFqVC92WUpVNHpHaXQyaENKK2EyampadzBT?=
+ =?utf-8?B?QlphVjI2SUpYTzQ5TUZsazR0U0l6d09wVnpuU1RjeGNDSVluRVNrNUZhbEtw?=
+ =?utf-8?B?VkF6VlZhcGlrdndTV0ZWK2pRb0NCdDhGcE9JaUdPN2x2VG1wWXpvQ3hleksr?=
+ =?utf-8?B?dmVldGF6V1dMTTJXVUJTNTBxZC9VT0xVL0VEWG1UaUFVOTRtYXJvdFgrYnlq?=
+ =?utf-8?B?SEY4QjI3NkZhVjZYWGF2VnJoLzN1SFNKcytwUHdZTVBEcHRpMFozRjhZanJj?=
+ =?utf-8?B?SWp2VVpQaGs0RGpzd1RzQlJRbmlzOFEyS29iamo1ejRMeWhRbHB3c3lvdnlk?=
+ =?utf-8?Q?w/tGRG?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Sep 2025 09:32:48.1731
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3958e738-bd22-42d5-fc23-08ddf1df5631
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9D7.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4204
 
+On Fri Sep 12, 2025 at 8:40 AM CEST, Jan Beulich wrote:
+> On 11.09.2025 18:23, Alejandro Vallejo wrote:
+>> CPU hotplug relies on the online CPU bitmap being provided on PIO 0xaf00
+>> by the device model. The GPE handler checks this and compares it against
+>> the "online" flag on each MADT LAPIC entry, setting the flag to its
+>> related bit in the bitmap and adjusting the table's checksum.
+>>=20
+>> The bytecode doesn't, however, stop at NCPUS. It keeps comparing until i=
+t
+>> reaches 128, even if that overflows the MADT into some other (hopefully
+>> mapped) memory. The reading isn't as problematic as the writing though.
+>>=20
+>> If an "entry" outside the MADT is deemed to disagree with the CPU bitmap
+>> then the bit where the "online" flag would be is flipped, thus
+>> corrupting that memory. And the MADT checksum gets adjusted for a flip
+>> that happened outside its range. It's all terrible.
+>>=20
+>> Note that this corruption happens regardless of the device-model being
+>> present or not, because even if the bitmap holds 0s, the overflowed
+>> memory might not at the bits corresponding to the "online" flag.
+>>=20
+>> This patch adjusts the DSDT so entries >=3DNCPUS are skipped.
+>>=20
+>> Fixes: 087543338924("hvmloader: limit CPUs exposed to guests")
+>> Reported-by: Grygorii Strashko <grygorii_strashko@epam.com>
+>> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+>
+> In principle:
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-> I also wondered about that. I think the safest is to make them
-> respectively arch_leave() and arch_enter() - the flushing entailed by
-> arch_leave() might not be required, but it is safer. Additionally,
-> powerpc/sparc disable preemption while in lazy_mmu, so it seems like a
-> good idea to re-enable it while paused (by calling arch_leave()).
+Cheers,
 
-Great, looking forward to seeing this all getting cleaned up and done 
-properly for good.
+>
+> However, ...
+>
+>> --- a/tools/libacpi/mk_dsdt.c
+>> +++ b/tools/libacpi/mk_dsdt.c
+>> @@ -231,6 +231,20 @@ int main(int argc, char **argv)
+>>      stmt("Store", "ToBuffer(PRS), Local0");
+>>      for ( cpu =3D 0; cpu < max_cpus; cpu++ )
+>>      {
+>> +        if ( cpu )
+>> +        {
+>> +            /*
+>> +             * Check if we're still within the MADT bounds
+>> +             *
+>> +             * LLess() takes one byte, but LLessEqual() takes two. Incr=
+ease
+>> +             * `cpu` by 1, so we can avoid it. It does add up once you =
+do it
+>> +             * 127 times!
+>> +             */
+>> +            push_block("If", "LLess(\\_SB.NCPU, %d)", 1 + cpu);
+>> +            stmt("Return", "One");
+>
+> ... if you already care about size bloat in the conditional, why are the =
+two
+> bytes per instance that this extra return requires not relevant? They too
+> add up, and they can be avoided by wrapping the If around the rest of the
+> code. I didn't count it, but I expect the If encoding to grow by at most =
+one
+> byte, perhaps none at all.
 
--- 
-Cheers
+I don't mind either way. Removing the "return" statement and the pop_block(=
+)
+would save 254 bytes in tota at most. I don't think the conditional would g=
+row
+because the there wouldn't be that much contained within, but regardless th=
+e
+early return is in the spirit of not going through 127 conditionals on ever=
+y
+GPE handle when you typically only have a handful of CPUs. The sooner we dr=
+op
+out of AML, the better.
 
-David / dhildenb
+In due time I want to shrink this to be an AML loop in dsdt.asl so it can
+be taken out of mk_dsdt.c. That will both shrink the DSDT (a ton) and accel=
+erate
+GPE handling, but I don't have time to do it at the moment.
 
+Do you have a preference in table size vs execution-time?
+
+Cheers,
+Alejandro
 
