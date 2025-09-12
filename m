@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3767DCAC598
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Sep 2025 14:44:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1122089.1465987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAE8CAC582
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Sep 2025 14:44:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1122095.1466047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ux50v-0004Y4-61; Fri, 12 Sep 2025 14:44:37 +0000
+	id 1ux510-0006Du-HG; Fri, 12 Sep 2025 14:44:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1122089.1465987; Fri, 12 Sep 2025 14:44:37 +0000
+Received: by outflank-mailman (output) from mailman id 1122095.1466047; Fri, 12 Sep 2025 14:44:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ux50u-0004XK-TX; Fri, 12 Sep 2025 14:44:36 +0000
-Received: by outflank-mailman (input) for mailman id 1122089;
- Fri, 12 Sep 2025 14:44:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ux510-0006DR-BZ; Fri, 12 Sep 2025 14:44:42 +0000
+Received: by outflank-mailman (input) for mailman id 1122095;
+ Fri, 12 Sep 2025 14:44:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yT3b=3X=cloud.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1ux50u-0004JT-3J
- for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 14:44:36 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 005952d6-8fe7-11f0-9d13-b5c5bf9af7f9;
- Fri, 12 Sep 2025 16:44:35 +0200 (CEST)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-45dfb6cadf3so18049445e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 12 Sep 2025 07:44:35 -0700 (PDT)
+ id 1ux50z-0004JZ-6X
+ for xen-devel@lists.xenproject.org; Fri, 12 Sep 2025 14:44:41 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 02be5f71-8fe7-11f0-9809-7dc792cee155;
+ Fri, 12 Sep 2025 16:44:39 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-45b9814efbcso19519135e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Sep 2025 07:44:39 -0700 (PDT)
 Received: from localhost.localdomain (host-195-149-20-212.as13285.net.
  [195.149.20.212]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45e015784c3sm72070045e9.10.2025.09.12.07.44.33
+ 5b1f17b1804b1-45e015784c3sm72070045e9.10.2025.09.12.07.44.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Sep 2025 07:44:34 -0700 (PDT)
+ Fri, 12 Sep 2025 07:44:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,59 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 005952d6-8fe7-11f0-9d13-b5c5bf9af7f9
+X-Inumbo-ID: 02be5f71-8fe7-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1757688275; x=1758293075; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1757688279; x=1758293079; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fz6A5Gve9VSC84pT6xrA0HURFM9BjgbSCbypdn93KKc=;
-        b=cfp6jlUjJWXSaNVCOdvJcFTmcXZwyCnAifNeM0Ul7zdyxgYpgLoxyDdg3mzmnjOTQe
-         ASW9ZMIq2UDhGFPh+8Pq8Q4aFxz3q+KCNJYq6NnnPjVKHQrjU7oeFRt7EczS//JjkwEQ
-         Qtbe7UkaIL0d5ALbQIQFdi6RPOJuRh8cgWf7o=
+        bh=qEVGh+hBiy0tcYl95EH1DJJNtCx14TTBNUGE0bJJUpQ=;
+        b=WyP6a/ulZBhazQu9MuUso7Kb8WSJBlyVuz1sTMw7z9TR5RXfJpLSxc9XnrNEW+DBiT
+         Qunr7ejzEiyO9Fnj2UPOm9Kvhy8UDdfsM+c/KMmnS2i0Mt29yjNui1ztHR1d/xV2Glo0
+         uDWvz9KtiM2RM/ImnDFFbH6tNfLmXwFLI0irw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757688275; x=1758293075;
+        d=1e100.net; s=20230601; t=1757688279; x=1758293079;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=fz6A5Gve9VSC84pT6xrA0HURFM9BjgbSCbypdn93KKc=;
-        b=I/sxy3wJPM15MFBQPyfRFUZgE1wsNU3dNgffkPqgr6W4q7dfXUztzik9m9uPSE/G7B
-         5nPSiuFtGZCCLx0KRg4/nraZR2bzpiGSh9wpAkFJtGwRqQfVaHS33R95zzIznDPU//hs
-         cECKsimmfGJZV33oVC0lzGAIdr3oM1GPg/0ZJ/MRNDcxkKQmRfpoCvmWi9Fc/FDF0WWw
-         2eLU6hG7ODaSIttUoj1vxcdobcfOjGMN1n8uaPMEGlUa4XWVuY7F5oCpZHV9nnhvSCh7
-         TU0VleqIC3pSyT6kE0oH+2GBgjy3rjj9wURPKVHDqT8HDKe02X9cSltSu7L0UX1Q07x2
-         ke8g==
-X-Gm-Message-State: AOJu0YzuZEqJEoDH6mNNWhc/Dno/MkFE55e/eq3bx2hoO/U/3JtdIMH+
-	1rh4EMsBc6wePGqV358oBekHCte9QDIZpbJbeULq3QkbJKJ//AtgJF6SwO25yonuxGwIH14z4Fg
-	KPOir
-X-Gm-Gg: ASbGncvZMo/H/Jy10Nolj8BY5de90FuZfLTnGcMVEgOzvM2oMYesN2Ys6KMZ+cHsI/3
-	zVy+jRfJ+DrCKM36/YrgVNl+43w8CNaY6OgbM7dIZPZ9qwYj+p3+QQ4UJFgpmNr+8d3IiFILGB4
-	gM0S6t42b6zMGoA32rRfyISjYnfk40bfY+JLEFx/tU82kVzI9i2c8LB6j/fY3zkaqygfST1Fq05
-	IsdtFOdvpKS2f94CJSBlodCCQ2Lnb9/LcQNMk08sy+Q0EpF6owKqx3MiYlgkkUPGLqcOCOsir81
-	B/H0I45ScJcGhfs1K2bxheBcppH03LdAkTxHnJC5CFBeNUcNZEV8VPxlvvUgulZZ9R5t8k/mIw2
-	XzIsGAqgXsZqd/vbrkvGhPn6xDIlYDi5WvGrSrRZyH88NUTmTeXQjDajZLPLUaF481xHWZDmhcV
-	j6
-X-Google-Smtp-Source: AGHT+IFnlcxvKSZ/oFXXCOvd+e4AN+6ez3oru+DjhUoktXsiu1T1iIjZmKpAXTDS+cm5jeMmUwDl7g==
-X-Received: by 2002:a05:600c:5254:b0:45d:f55d:3478 with SMTP id 5b1f17b1804b1-45f211e610fmr37983115e9.17.1757688274714;
-        Fri, 12 Sep 2025 07:44:34 -0700 (PDT)
+        bh=qEVGh+hBiy0tcYl95EH1DJJNtCx14TTBNUGE0bJJUpQ=;
+        b=HDGtrmbDXA33LgrQd4dLf86WcP3ke4rziRQ2kOk72Gno/GYfNxgUYJaKge3zVvBDAH
+         460s+1DBWjclRs2p85iS0BNjVyA+3q7ulxlidAfZvQ8zcSVUzDZDZAHQRu7pFZvBI8vi
+         eleu1NnZmnP8uiR9J/IE60HOTT52K1sS8h4T80SyyFed5YIxGcYauo6wYPS5KejWCx8i
+         PD3ShztYiP5txHzrL1iwjLY9Uu/14ryS7v73fcMx9POqm2+cV/NSPsu1XmR2gS9zXUVg
+         DZKscdk4LRJTdqd9C6ftqGo0i2VknJ0/LeSI1o13iN0cVJKrX7qpq5ulggS0MTo/4vKx
+         G2lQ==
+X-Gm-Message-State: AOJu0YxGW5hQO/9RVNkBDiO0hY1mja8qMvVE8Re9PRH6qBvrQ+PiOJja
+	WAyf/kWFTsZcQ0a+PEUjzs/Wd7XgtqFQIFbCsj7tLcpQwMy5dG6rUHISQYQU0g4pskWvsMzTm4P
+	RsbGv
+X-Gm-Gg: ASbGncvoBJNxpgE175qZbvGD2eWbhMZKeZG9GTE1JWpnZ6fOp6Y3+3zvAl4KoIrbcQt
+	y5sqSBO+uto4QV7dsu14YS4w7lrqfQ1RUEPG6PSC9H6FZg4wZblzVIVcl3pj48xIy30b2+pfHml
+	OBbiSUaFQ6cVqGap1E7FzcAAaWFlJ1x/2ZS1izuWjRWLFlz5N7Aw2Js+P5zzoJNqn/9T9SkE9u3
+	V+HHXwlytNBCm06foOmSQieRvFBYVQOBULWBiSpvFs1RFNTbjE0f8ITKHk/UYXrJPM8vOguv6Hh
+	erDIn3r8oYQBgbE33z+obgKH6zZT047wRbcNa0qLybuFxS1DlvxVzHCBYGq8ISuFGR99+/NP6kN
+	UyNU1FVBBpILeC4c7UmA5vTBx/B2gLp7jBmsMY6+f7wC6S3byRRNFatjReqtcfZp9WBewftr1Uv
+	wBPbV0VZtLWdw=
+X-Google-Smtp-Source: AGHT+IHbTNMNvOgl9nb7GA+1YNnbAV3yQpRDlAuoAvo8j6kYhG8i+CyDFWOLgim1UcuhTXGEWTEPOQ==
+X-Received: by 2002:a05:600c:8886:b0:45c:b642:87a6 with SMTP id 5b1f17b1804b1-45dfd54ac60mr57713025e9.0.1757688278699;
+        Fri, 12 Sep 2025 07:44:38 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Denis Mukhin <dmukhin@ford.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Victor Lira <victorm.lira@amd.com>
-Subject: [PATCH v4 4/8] CI: Make qemu-smoke-x86-64-gcc-efi compatible with Debian Trixie
-Date: Fri, 12 Sep 2025 15:44:23 +0100
-Message-Id: <20250912144427.1905141-5-andrew.cooper3@citrix.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 8/8] CHANGELOG: Notes about distro changes in CI
+Date: Fri, 12 Sep 2025 15:44:27 +0100
+Message-Id: <20250912144427.1905141-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250912144427.1905141-1-andrew.cooper3@citrix.com>
 References: <20250912144427.1905141-1-andrew.cooper3@citrix.com>
@@ -107,11 +103,11 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The OVMF package in Debian Trixie has _4M suffixes on the files.  Have
-scripts/include/xtf-x86-64-efi check for this before falling back to no
-suffix.
+Also state the RISC-V baseline now it's been set, as it's the reason why
+RISC-V Bullseye got dropped.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Reviewed-by: Denis Mukhin <dmukhin@ford.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
@@ -120,59 +116,28 @@ CC: Jan Beulich <jbeulich@suse.com>
 CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-CC: Victor Lira <victorm.lira@amd.com>
-CC: Denis Mukhin <dmukhin@ford.com>
 
-v4:
+v2:
  * New
-
-https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/11334759836
 ---
- automation/scripts/include/xtf-x86-64-efi | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ CHANGELOG.md | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/automation/scripts/include/xtf-x86-64-efi b/automation/scripts/include/xtf-x86-64-efi
-index e0d821b3f6fd..8340c745dbf4 100644
---- a/automation/scripts/include/xtf-x86-64-efi
-+++ b/automation/scripts/include/xtf-x86-64-efi
-@@ -20,6 +20,7 @@ function xtf_arch_setup()
- {
-     local esp_dir="${WORKDIR}/boot-esp"
-     local efi_dir="${esp_dir}/EFI/BOOT"
-+    local suff=
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7bd96ac09d14..ca1b43b940d2 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+  - The minimum toolchain requirements have increased for some architectures:
+    - For x86, GCC 5.1 and Binutils 2.25, or Clang/LLVM 11
+    - For ARM32 and ARM64, GCC 5.1 and Binutils 2.25
++   - For RISC-V, GCC 12.2 and Binutils 2.39
++ - Debian Trixie added to CI.  Debian Bullseye retired from CI for RISC-V due
++   to the baseline change.
+  - Linux based device model stubdomains are now fully supported.
  
-     # Generate EFI boot environment
-     mkdir -p ${efi_dir}
-@@ -35,8 +36,13 @@ options=${XEN_CMDLINE}
- kernel=kernel
- EOF
- 
-+    # Vs older versions, Debian Trixie names the OVMF files with a _4M suffix.
-+    if [[ -e ${FW_PREFIX}/OVMF_VARS_4M.fd ]]; then
-+        suff=_4M
-+    fi
-+
-     # NB: OVMF_CODE.fd is read-only, no need to copy
--    cp ${FW_PREFIX}OVMF_VARS.fd ${WORKDIR}
-+    cp ${FW_PREFIX}OVMF_VARS${suff}.fd ${WORKDIR}
- 
-     export TEST_CMD="${QEMU_PREFIX}qemu-system-x86_64 \
-         -no-reboot \
-@@ -45,8 +51,8 @@ EOF
-         -serial stdio \
-         -m 512 \
-         -M q35,kernel-irqchip=split \
--        -drive if=pflash,format=raw,readonly=on,file=${FW_PREFIX}OVMF_CODE.fd \
--        -drive if=pflash,format=raw,file=${WORKDIR}/OVMF_VARS.fd \
-+        -drive if=pflash,format=raw,readonly=on,file=${FW_PREFIX}OVMF_CODE${suff}.fd \
-+        -drive if=pflash,format=raw,file=${WORKDIR}/OVMF_VARS${suff}.fd \
-         -drive file=fat:rw:${esp_dir},media=disk,index=0,format=raw \
-     "
- }
+  - On x86:
 -- 
 2.39.5
 
