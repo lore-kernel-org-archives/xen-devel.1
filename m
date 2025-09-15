@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C93CAC58E
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Sep 2025 06:01:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124157.1466660 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 596AECA101F
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Sep 2025 06:01:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1124161.1466670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uy2Gp-0001Tf-8b; Mon, 15 Sep 2025 06:00:59 +0000
+	id 1uy2H0-0001qQ-HW; Mon, 15 Sep 2025 06:01:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124157.1466660; Mon, 15 Sep 2025 06:00:59 +0000
+Received: by outflank-mailman (output) from mailman id 1124161.1466670; Mon, 15 Sep 2025 06:01:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uy2Gp-0001TY-5L; Mon, 15 Sep 2025 06:00:59 +0000
-Received: by outflank-mailman (input) for mailman id 1124157;
- Mon, 15 Sep 2025 06:00:57 +0000
+	id 1uy2H0-0001qJ-EO; Mon, 15 Sep 2025 06:01:10 +0000
+Received: by outflank-mailman (input) for mailman id 1124161;
+ Mon, 15 Sep 2025 06:01:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yszo=32=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1uy2Gn-00011Y-9V
- for xen-devel@lists.xenproject.org; Mon, 15 Sep 2025 06:00:57 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
+ id 1uy2Gz-00011Y-73
+ for xen-devel@lists.xenproject.org; Mon, 15 Sep 2025 06:01:09 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 57ef27e3-91f9-11f0-9809-7dc792cee155;
- Mon, 15 Sep 2025 08:00:55 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-355739c7fc8so7951381fa.1
- for <xen-devel@lists.xenproject.org>; Sun, 14 Sep 2025 23:00:55 -0700 (PDT)
+ id 5f06444e-91f9-11f0-9809-7dc792cee155;
+ Mon, 15 Sep 2025 08:01:07 +0200 (CEST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55f78e3cdf9so4333296e87.1
+ for <xen-devel@lists.xenproject.org>; Sun, 14 Sep 2025 23:01:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,50 +42,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57ef27e3-91f9-11f0-9809-7dc792cee155
+X-Inumbo-ID: 5f06444e-91f9-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757916055; x=1758520855; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1757916067; x=1758520867; darn=lists.xenproject.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Nf5BgwxyPouvItWKO9mTHtFoYvHKxPMjCLUlJIi3GSM=;
-        b=fUmT79vzUYaKU3dEhpltSVDv5DYe06IepttC7mqhiHISSV0DYfsF11vEzwc7N6oJfi
-         3aohdycqP5sTcDWbz1Lje3YBzNCCe37rUtwapZMdAiGj9SfuLGKEjetOQV/qpxgYyJCH
-         j//M0Eun6+3sow1Yf8zZQrC5PpnOrs761fZS0Aj/2sDTzOqYAyZa0R1dluzHbHKSuLbS
-         aq1eooZLfYOu4UMa+MLdAaHNrNvP45hovJsjN2Jxzl7vfGsJnzJqjNS8OXmcMqYq4tAn
-         lwPUE2DnsrTLN5db0Rbj9+OLx//85nsQyjWzKen7vCucibK/aCCjgl4YFBb/X2NL90Ck
-         Hn2A==
+        bh=iImlh/71Mnv5AjhQqadSQLy2vbzq1b5PoMNI95mShAw=;
+        b=YH207ptCl7setXUMSLpoHLBLMvFKkGSSA0TkfK84akYxr/8GBb+B5lxk3eUlAO7+1Q
+         h9A0KjeUhO7ZFTTboatG2rSIEr9sZCAfxDjmMvR6NF6QlMJUqoktxORlJ7voXrY2cenr
+         lIf0dOBYaUuoVw2aQrHVCGatxqoI5fyAZ2Q7fyVDhCpvw/RnGkUA/HL4hm1I1727SgOY
+         Sja5pCukvoszFh0LYS9YZhdS7NASjweYFj3aZGiVxlrT7+Zd63Lz9nHfcOnfVhQe94Cf
+         BeMqJc5VPjevKCvPgWXpLv59Rhm9l6GO/i+bZl278lXdIqZo17DZHSPB+WFI/fbCJjym
+         oUag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757916055; x=1758520855;
+        d=1e100.net; s=20230601; t=1757916067; x=1758520867;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Nf5BgwxyPouvItWKO9mTHtFoYvHKxPMjCLUlJIi3GSM=;
-        b=Nb6sjsqVe4ShgIEov7faEYL8aPkz6JlI1I35svqyAjglQKKwrA5uGAAx079jhRHf2d
-         MrvilyYUiEHe1IXcPlIwQmQxV8wopERElSnMkG8ZIjJ7/APD7T8j6iogOzxMH4Uvsepo
-         YbICumH5oGVA418d5PZ4cIoo4rhtOuojmAekYa8q7OIS3liEQzjMiTS34xxxjSwtt2v/
-         5XA//3gi/mgme+lSZEdxBfBZvToDhMbbPsZVz2B5Mcc++XBmxeDReGxvKvNFxCx0+7iR
-         opZVGjROLtyaebRgewBeig0aDsal+WX5e9eg4l+b52UrZEbwfQ1rKKuGElO383JPbuct
-         hhfA==
-X-Gm-Message-State: AOJu0YwXNf6OwHYnyUTOhmaTND5OITOXcAxg4vnV1pf62ur1bN2QmJL5
-	BDjTH3qeoiCb5+U0JpLDt93V4PAauQv99s3E77Ki6L4qg813wKUppsVEUpTxOl0Aq9cokvsHt3E
-	yhKACv7uzvSrtzTrj7uu0WlOMO2IBhng=
-X-Gm-Gg: ASbGncu7E4GhmXmM6lWhhmP4XFpovSMh5MP6yymijfGKRRpTdoARYM9v6cpyVg+wdia
-	ilSX9pTBfoJ4AhKieHbdGS4uL8rRX3in4iYIQyWFJoC4TRr6WWWJuAGi91db7Z/11+U9njLG8o2
-	DNSfmRohQWzi5kbbRznvCw6b26xz1mjThHyHHPZsWu8s6FwekVEXhuPlMXb4s0mYKI4HrncM5uO
-	uQ0Uw==
-X-Google-Smtp-Source: AGHT+IH6oEq6KcuOeriJ1q5kNa8zylqQAHLc3b8zGq6vnqNEgyqfCEcTK2Hmkb/I80968+Il0BB+x3NrGa8dVLgBe0c=
-X-Received: by 2002:a05:651c:23c2:20b0:338:beb:88c8 with SMTP id
- 38308e7fff4ca-3513b484841mr24908501fa.19.1757916054931; Sun, 14 Sep 2025
- 23:00:54 -0700 (PDT)
+        bh=iImlh/71Mnv5AjhQqadSQLy2vbzq1b5PoMNI95mShAw=;
+        b=CVMLrwDH8hJNhgSKQzsaOQPbrNGnigcbJu6DuNBa3WJF3K2IgyowBWQf/jX4sHzySy
+         3w0Vp4HkInU9UJND9cDLoampK5QuseY4QqRen1aJpV1N2SPwOjAhmLNdtBRdp6Bl0sCf
+         EdxQ5JGv8EzbKoi3yVMnGGEtjJBSqYMpRgtxCUgpCVmsVINe+fcfVKjOPwKZ3gPYzK1q
+         IukUd87LldwESeKuiRQsmh9YpOlZu4XQe2R7eXPx3A5EZsqwXTi232jEqv06YS7uVROI
+         9aeMNYS98vp6wBxnLFC+iUBhaOAGFnA36RdKrCfCe15ZQcuXG4I3wid3PSRGyRamHbM+
+         At3A==
+X-Gm-Message-State: AOJu0YziqoiffGOlAHa+d9ympuM2t6KvtvZrRFKFQrZ9CwOn+i+NW28z
+	FWY/x1bFIzZ2coPMMFJcGs7beRn6yUCn2BwmOdSoDh6PUwWrANPc8OeibVHllh9ivacu093btGJ
+	fRKJY8h7HYMZlDuNfqpnAJyEefiNpWzE=
+X-Gm-Gg: ASbGncvDwS10tjKNnTYM7CpZ4tdqKs1HZ76bfu+1cxomWWXKviNx1Pfba3DcC0mUeER
+	LimjlhnEg7DykJMuGJwWCW9zvcFmYHXwi/Qhiqzgq8ZCHYtPSuohK8FLsaTZmhB6hB3MaVvaE5b
+	0vHNA2nHd4k3miF+gFVnssbxLEwHi7sQNSYPpWvIqCGr+wp4fouBgzkdOjYzgcSTh1TwK4DtkTx
+	QypFeLxgR2hr5K01/J1KjnuP7I=
+X-Google-Smtp-Source: AGHT+IFxrEzlLs++lPK5cYh0EJpAsaWR8l3JW7V/LWvCS5UuTUZ6YfzvxbY8woACJM1rt+gBeDWDuGLLE1lH3Aea1eo=
+X-Received: by 2002:a05:651c:4397:20b0:337:e4cd:b2df with SMTP id
+ 38308e7fff4ca-3513db5a478mr30085001fa.20.1757916066689; Sun, 14 Sep 2025
+ 23:01:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250908211149.279143-1-dmukhin@ford.com> <20250908211149.279143-8-dmukhin@ford.com>
-In-Reply-To: <20250908211149.279143-8-dmukhin@ford.com>
+References: <20250908211149.279143-1-dmukhin@ford.com> <20250908211149.279143-9-dmukhin@ford.com>
+In-Reply-To: <20250908211149.279143-9-dmukhin@ford.com>
 From: Mykola Kvach <xakep.amatop@gmail.com>
 Date: Mon, 15 Sep 2025 09:00:00 +0300
-X-Gm-Features: Ac12FXzqB87rPykqNLyXEIl1CERp8BxXK2CNufCeBhdrk1iaQg7cVuce44qz0H8
-Message-ID: <CAGeoDV_ALHF7hMc-ZEtAyag==4kX5+XJw7AieqrAXyO1vXDYYQ@mail.gmail.com>
-Subject: Re: [PATCH v7 07/16] emul/ns16x50: implement LCR/LSR registers
+X-Gm-Features: Ac12FXxQEVkBwcBctz-HGni0BeJU20yZFWmJwjNkTkRavWrkyzm1CjbwgBfuX1s
+Message-ID: <CAGeoDV8iL374T7n=f_AQTA5VPfKThcEq-fN4X3kzWLzbjCzjew@mail.gmail.com>
+Subject: Re: [PATCH v7 08/16] emul/ns16x50: implement MCR/MSR registers
 To: dmukhin@xen.org
 Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, 
 	anthony.perard@vates.tech, jbeulich@suse.com, julien@xen.org, 
@@ -98,96 +98,145 @@ Hi Denis,
 
 Thank you for the patch.
 
-On Tue, Sep 9, 2025 at 1:16=E2=80=AFAM <dmukhin@xen.org> wrote:
+On Tue, Sep 9, 2025 at 12:12=E2=80=AFAM <dmukhin@xen.org> wrote:
 >
 > From: Denis Mukhin <dmukhin@ford.com>
 >
-> Add LCR/LSR registers implementation to the I/O port handler.
+> Add MCR/MSR registers emulation to the I/O port handler.
 >
-> Add implementation of ns16x50_dlab_get() and ns16x50_iir_check_lsi().
+> Add implementation of ns16x50_iir_check_msi().
 >
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 > ---
 > Changes since v6:
-> - n/a
+> - fixed UART_MSR_TERI handling
 > ---
->  xen/common/emul/vuart/ns16x50.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+>  xen/common/emul/vuart/ns16x50.c | 62 ++++++++++++++++++++++++++++++++-
+>  1 file changed, 61 insertions(+), 1 deletion(-)
 >
 > diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16=
 x50.c
-> index 664d799ddaee..0831a576cd9e 100644
+> index 0831a576cd9e..fdc20124d4c9 100644
 > --- a/xen/common/emul/vuart/ns16x50.c
 > +++ b/xen/common/emul/vuart/ns16x50.c
-> @@ -87,12 +87,12 @@ struct vuart_ns16x50 {
+> @@ -107,7 +107,7 @@ static bool cf_check ns16x50_iir_check_thr(const stru=
+ct vuart_ns16x50 *vdev)
 >
->  static uint8_t ns16x50_dlab_get(const struct vuart_ns16x50 *vdev)
->  {
-> -    return 0;
-> +    return vdev->regs[UART_LCR] & UART_LCR_DLAB ? 1 : 0;
->  }
->
->  static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *v=
+>  static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *v=
 dev)
 >  {
 > -    return false;
-> +    return vdev->regs[UART_LSR] & UART_LSR_MASK;
+> +    return vdev->regs[UART_MSR] & UART_MSR_CHANGE;
 >  }
 >
->  static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *v=
-dev)
-> @@ -228,11 +228,16 @@ static int ns16x50_io_write8(
->              regs[UART_IER] =3D val & UART_IER_MASK;
+>  /*
+> @@ -232,12 +232,63 @@ static int ns16x50_io_write8(
+>              regs[UART_LCR] =3D val;
 >              break;
 >
-> +        case UART_LCR:
-> +            regs[UART_LCR] =3D val;
+> +        case UART_MCR: {
 
-I understand that this register is mostly used to control the hardware
-behavior, but I think we should pay attention to Bit 7 in this register:
+Probably the opening brace should be moved to the next line.
+See CODING_STYLE:
 
-    Bit 7: Divisor Latch Access Bit (DLAB). It must be set high (logic 1)
-    to access the Divisor Latches of the Baud Generator during a read or
-    write operation. It must be set low (logic 0) to access the Receiver
-    Buffer, the Transmitter Holding Register, or the Interrupt Enable
-    Register.
+Braces ('{' and '}') are usually placed on a line of their own, except
+for:
 
-I know that you are checking it before accessing DLAB registers, but what
-about accesses to RBR, THR, and IER?
+- the do/while loop
+- the opening brace in definitions of enum, struct, and union
+- the opening brace in initializers
+- compound literals
 
+> +            uint8_t msr_curr, msr_next, msr_delta;
+> +
+> +            msr_curr =3D regs[UART_MSR];
+> +            msr_next =3D 0;
+> +            msr_delta =3D 0;
+> +
+> +            if ( val & UART_MCR_RSRVD0 )
+> +                ns16x50_warn(vdev, "MCR: attempt to set reserved bit: %x=
+\n",
+> +                             UART_MCR_RSRVD0);
+> +
+> +            if ( val & UART_MCR_TCRTLR )
+> +                ns16x50_warn(vdev, "MCR: not supported: %x\n",
+> +                             UART_MCR_TCRTLR);
+> +
+> +            if ( val & UART_MCR_RSRVD1 )
+> +                ns16x50_warn(vdev, "MCR: attempt to set reserved bit: %x=
+\n",
+> +                             UART_MCR_RSRVD1);
+> +
+> +            /* Set modem status */
+> +            if ( val & UART_MCR_LOOP )
+> +            {
+> +                if ( val & UART_MCR_DTR )
+> +                    msr_next |=3D UART_MSR_DSR;
+> +                if ( val & UART_MCR_RTS )
+> +                    msr_next |=3D UART_MSR_CTS;
+> +                if ( val & UART_MCR_OUT1 )
+> +                    msr_next |=3D UART_MSR_RI;
+> +                if ( val & UART_MCR_OUT2 )
+> +                    msr_next |=3D UART_MSR_DCD;
+> +            }
+> +            else
+> +                msr_next |=3D UART_MSR_DCD | UART_MSR_DSR | UART_MSR_CTS=
+;
+> +
+> +            /* Calculate changes in modem status */
+> +            if ( (msr_curr & UART_MSR_CTS) ^ (msr_next & UART_MSR_CTS) )
+> +                msr_delta |=3D UART_MSR_DCTS;
+> +            if ( (msr_curr & UART_MSR_DSR) ^ (msr_next & UART_MSR_DSR) )
+> +                msr_delta |=3D UART_MSR_DDSR;
+> +            if ( !(msr_curr & UART_MSR_RI) && (msr_next & UART_MSR_RI) )
+> +                msr_delta |=3D UART_MSR_TERI;
+> +            if ( (msr_curr & UART_MSR_DCD) ^ (msr_next & UART_MSR_DCD) )
+> +                msr_delta |=3D UART_MSR_DDCD;
+
+It looks like this could be simplified to something like:
+    msr_delta =3D ((regs[UART_MSR] ^ msr_next) >> 4);
+
+> +
+> +            regs[UART_MCR] =3D val & UART_MCR_MASK;
+> +            regs[UART_MSR] =3D msr_next | msr_delta;
+
+Does this description for the first four bits of MSR:
+    "... input to the chip has changed state since the last time it was
+    read by the CPU"
+
+mean that we shouldn't modify bits that are already set but have not yet
+been read by the CPU?
+
+> +
 > +            break;
+> +        }
 > +
 >          /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
 >          case UART_SCR:
 >              regs[UART_SCR] =3D val;
 >              break;
 >
-> +        case UART_LSR: /* RO */
-
-Is there a reason we cannot simply leave this unchanged?
-
+>          case UART_LSR: /* RO */
+> +        case UART_MSR: /* RO */
 >          default:
 >              rc =3D -EINVAL;
 >              break;
-> @@ -314,6 +319,15 @@ static int ns16x50_io_read8(
->              val =3D ns16x50_iir_get(vdev);
+> @@ -323,11 +374,20 @@ static int ns16x50_io_read8(
+>              val =3D regs[UART_LCR];
 >              break;
 >
-> +        case UART_LCR:
-> +            val =3D regs[UART_LCR];
+> +        case UART_MCR:
+> +            val =3D regs[UART_MCR];
 > +            break;
 > +
-> +        case UART_LSR:
-> +            val =3D regs[UART_LSR] | UART_LSR_THRE | UART_LSR_TEMT;
-
-Why are UART_LSR_THRE and UART_LSR_TEMT set unconditionally?
-What about UART_LSR_DR?
-
-> +            regs[UART_LSR] =3D val & ~UART_LSR_MASK;
-
-Maybe it would be good to mention why we are not resetting
-UART_LSR_PE and UART_LSR_FE on read.
-
+>          case UART_LSR:
+>              val =3D regs[UART_LSR] | UART_LSR_THRE | UART_LSR_TEMT;
+>              regs[UART_LSR] =3D val & ~UART_LSR_MASK;
+>              break;
+>
+> +        case UART_MSR:
+> +            val =3D regs[UART_MSR];
+> +            regs[UART_MSR] &=3D ~UART_MSR_CHANGE;
 > +            break;
 > +
 >          case UART_SCR:
