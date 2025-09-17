@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1BFCA0EE8
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124979.1467082 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B938CCAC599
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1124980.1467087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypde-0000x4-TX; Wed, 17 Sep 2025 10:43:50 +0000
+	id 1uypdf-0000zg-4o; Wed, 17 Sep 2025 10:43:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124979.1467082; Wed, 17 Sep 2025 10:43:50 +0000
+Received: by outflank-mailman (output) from mailman id 1124980.1467087; Wed, 17 Sep 2025 10:43:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypde-0000wx-QN; Wed, 17 Sep 2025 10:43:50 +0000
-Received: by outflank-mailman (input) for mailman id 1124979;
+	id 1uypdf-0000yt-1M; Wed, 17 Sep 2025 10:43:51 +0000
+Received: by outflank-mailman (input) for mailman id 1124980;
  Wed, 17 Sep 2025 10:15:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1BlG=34=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1uypCg-00062y-IM
+ id 1uypCf-00062x-UP
  for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:15:59 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b878f45-93af-11f0-9d13-b5c5bf9af7f9;
- Wed, 17 Sep 2025 12:15:56 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4a5d253a-93af-11f0-9809-7dc792cee155;
+ Wed, 17 Sep 2025 12:15:54 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sD093528
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sA093528
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 19:14:24 +0900 (JST)
+ Wed, 17 Sep 2025 19:14:22 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,24 +44,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b878f45-93af-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: a=rsa-sha256; bh=hrFeIYsdveoSw39gLf38PDAGKQ7lahlpxgxSM3Eq+7Y=;
+X-Inumbo-ID: 4a5d253a-93af-11f0-9809-7dc792cee155
+DKIM-Signature: a=rsa-sha256; bh=feDbk9J/yWdV06ehpX8rW3/wvLj8rzMauO12ghjmdGI=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758104065; v=1;
-        b=DdLzysLdoItNX02agwRNTGyUnTrzx20tFWGfsRm6Kj1Bcgto7jzT6NanLKz/sw54
-         c+SFhhHxg7ZxwyzOUB5Y41jcQzG0ftXjCYbd7tD7stmwz9Yec0hIiAHCjVEYefqo
-         Me1eK3UKWbYxbezILi9fy2VOf4+KEZ0NQ+rdsHcRn5ADw2w01gtn/7p1u4GAwcZp
-         WUKHC47iY8/4AYK3RupRXpz8oDrep/DTUEkGUxzHWz4bCKSw+EvzspWajKbxAsT6
-         HwzYNR5qw2df5gfWZ1Rbu4esPyUm1QZ7oE2EIWvch8aXE6l+SM2RfSA9WQWmc+1c
-         RTagV4R6EmSTMQMcY55uCQ==
+        s=rs20250326; t=1758104063; v=1;
+        b=lK4jroglAeXdT8FGOvw97ekqlK6fKLYxyxeyuadhi9q7col6rF4pdBsdhaFzZNTY
+         3h0H0sctUoxgojDBKvuiDt1AR4/GsNyAnceAlgUPo8uNXm+ZEoRqTv3bHyHBTYWC
+         gVGoNGn5VyyBTGuN1/FoivEOtIWURfHGw6f615Qp48pzMMcdwhCDFcYSPw1sPL6h
+         rcNxvucJRYybjOE104+B4033Zpl2MsP7qvBHUXgqad2nkJu2yRwQ54lqbWb3+O9W
+         3zoe7dP/ozhNgpc93IefFxgFYjQ6K0S9K024DbgYpu1NhTd1E2iyI2SpUUduT9NW
+         4IZWPcKBp3sYVux+zGxD0w==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 19:13:30 +0900
-Subject: [PATCH v3 5/7] hw/sd/sdhci: Do not unparent in instance_finalize()
+Date: Wed, 17 Sep 2025 19:13:27 +0900
+Subject: [PATCH v3 2/7] vfio/pci: Do not unparent in instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-use-v3-5-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-use-v3-2-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -113,31 +113,38 @@ X-Mailer: b4 0.15-dev-179e8
 Children are automatically unparented so manually unparenting is
 unnecessary.
 
-Worse, automatic unparenting happens before the instance_finalize()
+Worse, automatic unparenting happens before the insntance_finalize()
 callback of the parent gets called, so object_unparent() calls in
 the callback will refer to objects that are already unparented, which
 is semantically incorrect.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/sd/sdhci.c | 4 ----
+ hw/vfio/pci.c | 4 ----
  1 file changed, 4 deletions(-)
 
-diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
-index 3c897e54b721..89b595ce4a5a 100644
---- a/hw/sd/sdhci.c
-+++ b/hw/sd/sdhci.c
-@@ -1578,10 +1578,6 @@ static void sdhci_sysbus_finalize(Object *obj)
- {
-     SDHCIState *s = SYSBUS_SDHCI(obj);
+diff --git a/hw/vfio/pci.c b/hw/vfio/pci.c
+index 07257d0fa049..2e909c190f86 100644
+--- a/hw/vfio/pci.c
++++ b/hw/vfio/pci.c
+@@ -2000,7 +2000,6 @@ static void vfio_bars_finalize(VFIOPCIDevice *vdev)
+         vfio_region_finalize(&bar->region);
+         if (bar->mr) {
+             assert(bar->size);
+-            object_unparent(OBJECT(bar->mr));
+             g_free(bar->mr);
+             bar->mr = NULL;
+         }
+@@ -2008,9 +2007,6 @@ static void vfio_bars_finalize(VFIOPCIDevice *vdev)
  
--    if (s->dma_mr) {
--        object_unparent(OBJECT(s->dma_mr));
--    }
--
-     sdhci_uninitfn(s);
+     if (vdev->vga) {
+         vfio_vga_quirk_finalize(vdev);
+-        for (i = 0; i < ARRAY_SIZE(vdev->vga->region); i++) {
+-            object_unparent(OBJECT(&vdev->vga->region[i].mem));
+-        }
+         g_free(vdev->vga);
+     }
  }
- 
 
 -- 
 2.51.0
