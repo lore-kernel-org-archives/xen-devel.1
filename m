@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA976CAC598
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124981.1467092 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B25CAC598
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1124993.1467133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdf-00012e-DE; Wed, 17 Sep 2025 10:43:51 +0000
+	id 1uypdh-0001i2-AA; Wed, 17 Sep 2025 10:43:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124981.1467092; Wed, 17 Sep 2025 10:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 1124993.1467133; Wed, 17 Sep 2025 10:43:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdf-00011D-7d; Wed, 17 Sep 2025 10:43:51 +0000
-Received: by outflank-mailman (input) for mailman id 1124981;
- Wed, 17 Sep 2025 10:15:59 +0000
+	id 1uypdg-0001f7-S8; Wed, 17 Sep 2025 10:43:52 +0000
+Received: by outflank-mailman (input) for mailman id 1124993;
+ Wed, 17 Sep 2025 10:20:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1BlG=34=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1uypCh-00062x-JJ
- for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:15:59 +0000
+ id 1uypHL-00076j-TS
+ for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:20:47 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4a7b1545-93af-11f0-9809-7dc792cee155;
- Wed, 17 Sep 2025 12:15:54 +0200 (CEST)
+ id f80102fe-93af-11f0-9809-7dc792cee155;
+ Wed, 17 Sep 2025 12:20:45 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sF093528
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sB093528
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 19:14:25 +0900 (JST)
+ Wed, 17 Sep 2025 19:14:23 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,24 +44,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a7b1545-93af-11f0-9809-7dc792cee155
-DKIM-Signature: a=rsa-sha256; bh=v+Xb+1QVJw0wOnTS9Jio3e/jbQ2BZQtVgu226l6UV38=;
+X-Inumbo-ID: f80102fe-93af-11f0-9809-7dc792cee155
+DKIM-Signature: a=rsa-sha256; bh=Nb2IXk8Wd06JvJLljjYiPCsN3a3uINbunrK794JTiso=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758104066; v=1;
-        b=qEQfSTKEA4U78rKYzbed5g3KZSs3bTwJOaCeJ0jPTsX31Ok70JSdTMTDcNjaYAEK
-         Nfsgl2Dk7WOqvjUUENqOPvbH6iVwIn4nzFaJ0CGqkwCyumf4XFQ3dQppxlr20jUb
-         hcL+CvT2eXiYoMXuG+wpRdCW2AdceSZ0KuYI7j7Nk/QFY5kiql35cWMEt/PTX/t6
-         HSPUn0+O4YgMOCUfQc9KhgV/fKpdSK2ijVaiB21ZrNjIZ9RGrzApRNV+guTZWjUw
-         S0IT30OulcQ/p2axRplunesPLlsNUN8r96/kgDZQOuZ1AfqYRaBUQLDCAAIZ84hH
-         DMwHkZqV4rdHT966UikOww==
+        s=rs20250326; t=1758104063; v=1;
+        b=Oo5GWWtwzsWYxzsGXA+JY0CJMcCICiVhaS9y1lRGW6PO5yUYUtN7uDfQqIA+lXRU
+         Mo+ydn8Pe1RE5VeibUxfmj5y5G6MG0wUf+OtIDjTsYV9r5RXrrMAjWDMp8dKz3yj
+         ht41kegl/A3FFKssuK+aJknlqAd3KHu7LRAYDxciSex2hne/1KdIqOXAeuVX1Caj
+         Edp+fiXbGzHVqbrHbuqVUH+WZlV97MmCbLcuPv1auKXr0wlmF9c0GsAy+ueVvcIO
+         rO3wR19/WdYoURQwly6sr4aZMC4Oj5OmcBHc+GKDta9yK+7chuS/LRxIONFhkHEz
+         mhj736rzwMlM6d3TKkXjzw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 19:13:32 +0900
-Subject: [PATCH v3 7/7] hw/xen: Do not unparent in instance_finalize()
+Date: Wed, 17 Sep 2025 19:13:28 +0900
+Subject: [PATCH v3 3/7] hw/core/register: Do not unparent in
+ instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-use-v3-7-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-use-v3-3-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -120,28 +121,20 @@ is semantically incorrect.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/xen/xen_pt_msi.c | 11 +----------
- 1 file changed, 1 insertion(+), 10 deletions(-)
+ hw/core/register.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/xen/xen_pt_msi.c b/hw/xen/xen_pt_msi.c
-index 09cca4eecb1c..e9ba17317aba 100644
---- a/hw/xen/xen_pt_msi.c
-+++ b/hw/xen/xen_pt_msi.c
-@@ -637,14 +637,5 @@ void xen_pt_msix_unmap(XenPCIPassthroughState *s)
+diff --git a/hw/core/register.c b/hw/core/register.c
+index 8f63d9f227c4..3340df70b06e 100644
+--- a/hw/core/register.c
++++ b/hw/core/register.c
+@@ -314,7 +314,6 @@ RegisterInfoArray *register_init_block64(DeviceState *owner,
  
- void xen_pt_msix_delete(XenPCIPassthroughState *s)
+ void register_finalize_block(RegisterInfoArray *r_array)
  {
--    XenPTMSIX *msix = s->msix;
--
--    if (!msix) {
--        return;
--    }
--
--    object_unparent(OBJECT(&msix->mmio));
--
--    g_free(s->msix);
--    s->msix = NULL;
-+    g_clear_pointer(&s->msix, g_free);
+-    object_unparent(OBJECT(&r_array->mem));
+     g_free(r_array->r);
+     g_free(r_array);
  }
 
 -- 
