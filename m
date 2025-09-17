@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7CCCA0EE8
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124989.1467115 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9582CAC598
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1124982.1467101 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdg-0001R9-CF; Wed, 17 Sep 2025 10:43:52 +0000
+	id 1uypdf-0001Aa-N4; Wed, 17 Sep 2025 10:43:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124989.1467115; Wed, 17 Sep 2025 10:43:52 +0000
+Received: by outflank-mailman (output) from mailman id 1124982.1467101; Wed, 17 Sep 2025 10:43:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdg-0001Q2-6x; Wed, 17 Sep 2025 10:43:52 +0000
-Received: by outflank-mailman (input) for mailman id 1124989;
- Wed, 17 Sep 2025 10:16:15 +0000
+	id 1uypdf-00018O-Ge; Wed, 17 Sep 2025 10:43:51 +0000
+Received: by outflank-mailman (input) for mailman id 1124982;
+ Wed, 17 Sep 2025 10:15:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1BlG=34=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1uypCx-00062y-9z
- for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:16:15 +0000
+ id 1uypCh-00062y-Jb
+ for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:15:59 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4feb3452-93af-11f0-9d13-b5c5bf9af7f9;
- Wed, 17 Sep 2025 12:16:03 +0200 (CEST)
+ id 4ccd3f76-93af-11f0-9d13-b5c5bf9af7f9;
+ Wed, 17 Sep 2025 12:15:58 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sC093528
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sE093528
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 19:14:23 +0900 (JST)
+ Wed, 17 Sep 2025 19:14:25 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,25 +44,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4feb3452-93af-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: a=rsa-sha256; bh=iR0pDnfR/s67erqtJ5ANa4aW2wGgB9XJZzw7HSfqAKs=;
+X-Inumbo-ID: 4ccd3f76-93af-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: a=rsa-sha256; bh=Uu80FK/yXlnI37NFgIYNtl95VwZCqRjIMZXhhdmhF1M=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758104064; v=1;
-        b=MxBH9GHNOqphNoMQVv2olt8dlKdOl9TJMNu7YMMgr89UjH08Y9n0qPtjUWRc7iYq
-         lo7wdEMxdC51APmdrm9UPh8CfZxb3bk+jspaOXoFRl5jsFlh6Iz5JA9w2KafJbjm
-         7G2zQ9gkzbjamjM1dqhH0/0nsPahh7J4IDgAed9rbI3oyhk7UzkHTWGxuXpedIms
-         eqX+B0rhLWWiY57QUZbZwVnPuXe+RMKAPemNLSI17uEjFA6zuOduO6K8J8pmjS1W
-         venp0dEs+bSLGpYzaBiPhnMbLZv4JIJq1cQxmf71sy3DiC4pu5Z+JvHlF0C65El5
-         KJfzqTlQGN/u7Qqj1H6bhQ==
+        s=rs20250326; t=1758104065; v=1;
+        b=QyJv3vZ248Y7SoZ7rWNS++L+0DfaUm9g8fSVALB9v7pLAf6X4hVbSWM39ZMC9y+o
+         nOzP1T/LsuuGh8RtkTQzS3ljsikW0nElI4Yo2D9rD3eVoBHS1Fdf58ScQ53giRdt
+         GyV3UUD/8nwtM0mYcYMSexmWNGunMYLNOPx8WmKqf0NGjoFzA+gGCyXcWSSDZOKi
+         foJw4RAQDbQSw0zLGGJFN1cJ3mryRFuAJWcbDEPv8cvKl2bSK/wxto7+8UgfK8ik
+         KyA0vPyq94V9GlrknshqaUrPH5yuJ2W01fFM//XxlJtr8gNFDrwEIYGq0O3B4HlB
+         iryWMp26qm5r6DWLySwslA==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 19:13:29 +0900
-Subject: [PATCH v3 4/7] hv-balloon: hw/core/register: Do not unparent in
- instance_finalize()
+Date: Wed, 17 Sep 2025 19:13:31 +0900
+Subject: [PATCH v3 6/7] vfio: Do not unparent in instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-use-v3-4-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-use-v3-6-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -121,39 +120,63 @@ is semantically incorrect.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/hyperv/hv-balloon.c | 12 +-----------
- 1 file changed, 1 insertion(+), 11 deletions(-)
+ hw/vfio/pci-quirks.c | 9 +--------
+ hw/vfio/region.c     | 3 ---
+ 2 files changed, 1 insertion(+), 11 deletions(-)
 
-diff --git a/hw/hyperv/hv-balloon.c b/hw/hyperv/hv-balloon.c
-index 6dbcb2d9a29d..2d6d7db4ee0e 100644
---- a/hw/hyperv/hv-balloon.c
-+++ b/hw/hyperv/hv-balloon.c
-@@ -1475,16 +1475,6 @@ static void hv_balloon_ensure_mr(HvBalloon *balloon)
-     balloon->mr->align = memory_region_get_alignment(hostmem_mr);
- }
+diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
+index 3f002252acfb..83419b1ab58d 100644
+--- a/hw/vfio/pci-quirks.c
++++ b/hw/vfio/pci-quirks.c
+@@ -1150,15 +1150,12 @@ void vfio_vga_quirk_exit(VFIOPCIDevice *vdev)
  
--static void hv_balloon_free_mr(HvBalloon *balloon)
--{
--    if (!balloon->mr) {
--        return;
--    }
--
--    object_unparent(OBJECT(balloon->mr));
--    g_clear_pointer(&balloon->mr, g_free);
--}
--
- static void hv_balloon_vmdev_realize(VMBusDevice *vdev, Error **errp)
+ void vfio_vga_quirk_finalize(VFIOPCIDevice *vdev)
  {
-     ERRP_GUARD();
-@@ -1580,7 +1570,7 @@ static void hv_balloon_vmdev_reset(VMBusDevice *vdev)
-  */
- static void hv_balloon_unrealize_finalize_common(HvBalloon *balloon)
- {
--    hv_balloon_free_mr(balloon);
-+    g_clear_pointer(&balloon->mr, g_free);
-     balloon->addr = 0;
+-    int i, j;
++    int i;
  
-     balloon->memslot_count = 0;
+     for (i = 0; i < ARRAY_SIZE(vdev->vga->region); i++) {
+         while (!QLIST_EMPTY(&vdev->vga->region[i].quirks)) {
+             VFIOQuirk *quirk = QLIST_FIRST(&vdev->vga->region[i].quirks);
+             QLIST_REMOVE(quirk, next);
+-            for (j = 0; j < quirk->nr_mem; j++) {
+-                object_unparent(OBJECT(&quirk->mem[j]));
+-            }
+             g_free(quirk->mem);
+             g_free(quirk->data);
+             g_free(quirk);
+@@ -1198,14 +1195,10 @@ void vfio_bar_quirk_exit(VFIOPCIDevice *vdev, int nr)
+ void vfio_bar_quirk_finalize(VFIOPCIDevice *vdev, int nr)
+ {
+     VFIOBAR *bar = &vdev->bars[nr];
+-    int i;
+ 
+     while (!QLIST_EMPTY(&bar->quirks)) {
+         VFIOQuirk *quirk = QLIST_FIRST(&bar->quirks);
+         QLIST_REMOVE(quirk, next);
+-        for (i = 0; i < quirk->nr_mem; i++) {
+-            object_unparent(OBJECT(&quirk->mem[i]));
+-        }
+         g_free(quirk->mem);
+         g_free(quirk->data);
+         g_free(quirk);
+diff --git a/hw/vfio/region.c b/hw/vfio/region.c
+index d04c57db630f..b165ab0b9378 100644
+--- a/hw/vfio/region.c
++++ b/hw/vfio/region.c
+@@ -365,12 +365,9 @@ void vfio_region_finalize(VFIORegion *region)
+     for (i = 0; i < region->nr_mmaps; i++) {
+         if (region->mmaps[i].mmap) {
+             munmap(region->mmaps[i].mmap, region->mmaps[i].size);
+-            object_unparent(OBJECT(&region->mmaps[i].mem));
+         }
+     }
+ 
+-    object_unparent(OBJECT(region->mem));
+-
+     g_free(region->mem);
+     g_free(region->mmaps);
+ 
 
 -- 
 2.51.0
