@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED06CAC59A
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 14:53:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1125267.1467273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EB1CAC599
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 14:53:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1125283.1467282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uytWw-0005yN-Vj; Wed, 17 Sep 2025 14:53:10 +0000
+	id 1uytXP-0006iL-BK; Wed, 17 Sep 2025 14:53:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1125267.1467273; Wed, 17 Sep 2025 14:53:10 +0000
+Received: by outflank-mailman (output) from mailman id 1125283.1467282; Wed, 17 Sep 2025 14:53:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uytWw-0005yG-T6; Wed, 17 Sep 2025 14:53:10 +0000
-Received: by outflank-mailman (input) for mailman id 1125267;
- Wed, 17 Sep 2025 14:53:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uytXP-0006iE-8r; Wed, 17 Sep 2025 14:53:39 +0000
+Received: by outflank-mailman (input) for mailman id 1125283;
+ Wed, 17 Sep 2025 14:53:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Fd1X=34=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1uytWv-0004xi-2x
- for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 14:53:09 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 05814902-93d6-11f0-9809-7dc792cee155;
- Wed, 17 Sep 2025 16:53:07 +0200 (CEST)
+ id 1uytXO-0004jI-AA
+ for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 14:53:38 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1733c5c7-93d6-11f0-9d13-b5c5bf9af7f9;
+ Wed, 17 Sep 2025 16:53:37 +0200 (CEST)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0728E33833;
- Wed, 17 Sep 2025 14:53:07 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B86E520725;
+ Wed, 17 Sep 2025 14:53:36 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9CF991368D;
- Wed, 17 Sep 2025 14:53:06 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 065F21368D;
+ Wed, 17 Sep 2025 14:53:35 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id /8zUJFLLymgbEwAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 17 Sep 2025 14:53:06 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ykCaOm/LymhREwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 17 Sep 2025 14:53:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,44 +53,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05814902-93d6-11f0-9809-7dc792cee155
+X-Inumbo-ID: 1733c5c7-93d6-11f0-9d13-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1758120787; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1758120816; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CqneFVXXIihK/cVOgMtk2arFvsOlazBtH0foGD0C9bU=;
-	b=oUQz6O6EV51Jq/gWYRMorwIox2GETSg1CIbqsPIlwrmki8/cZeuszbk8hXfgdnXaJJN23x
-	rJPR2By3XCpNT8fnDd+W/uFILyOnkssjb2JYBIhjMgQkl79qXC22gFcZ8QTzw0BJmG364q
-	h1OyVgiWT+hN4EPy2E69FZ6pkN8Rvqc=
-Authentication-Results: smtp-out1.suse.de;
+	bh=gztxpq9DX+nPOLwjlXTO5zTcC6KXOoTlESO5Ptm2kQY=;
+	b=DjHHRNFlyxPa5V7hkd/f7bmc7195g1GjRLuYDDswEVlLP5Nx1z73ZQygsSLzkDHTWbSgZN
+	PgiZRfmQBbt5R6HSFhFXCmsudbl2C/uhCuhWpJiA/KitXqfOAS4RSLKiti3aiqhZoKgpZF
+	2jhCs/l+46nohVfezAUN3NsLp8Pd2q8=
+Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1758120787; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1758120816; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CqneFVXXIihK/cVOgMtk2arFvsOlazBtH0foGD0C9bU=;
-	b=oUQz6O6EV51Jq/gWYRMorwIox2GETSg1CIbqsPIlwrmki8/cZeuszbk8hXfgdnXaJJN23x
-	rJPR2By3XCpNT8fnDd+W/uFILyOnkssjb2JYBIhjMgQkl79qXC22gFcZ8QTzw0BJmG364q
-	h1OyVgiWT+hN4EPy2E69FZ6pkN8Rvqc=
+	bh=gztxpq9DX+nPOLwjlXTO5zTcC6KXOoTlESO5Ptm2kQY=;
+	b=DjHHRNFlyxPa5V7hkd/f7bmc7195g1GjRLuYDDswEVlLP5Nx1z73ZQygsSLzkDHTWbSgZN
+	PgiZRfmQBbt5R6HSFhFXCmsudbl2C/uhCuhWpJiA/KitXqfOAS4RSLKiti3aiqhZoKgpZF
+	2jhCs/l+46nohVfezAUN3NsLp8Pd2q8=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
 	virtualization@lists.linux.dev,
-	x86@kernel.org
+	kvm@vger.kernel.org,
+	linux-hyperv@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Russell King <linux@armlinux.org.uk>,
 	Ajay Kaher <ajay.kaher@broadcom.com>,
 	Alexey Makhalov <alexey.makhalov@broadcom.com>,
 	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	linux-arm-kernel@lists.infradead.org,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	"Peter Zijlstra (Intel)" <peterz@infradead.org>
-Subject: [PATCH v2 07/21] arm/paravirt: Use common code for paravirt_steal_clock()
-Date: Wed, 17 Sep 2025 16:52:06 +0200
-Message-ID: <20250917145220.31064-8-jgross@suse.com>
+Subject: [PATCH v2 12/21] x86/paravirt: Move paravirt_sched_clock() related code into tsc.c
+Date: Wed, 17 Sep 2025 16:52:11 +0200
+Message-ID: <20250917145220.31064-13-jgross@suse.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250917145220.31064-1-jgross@suse.com>
 References: <20250917145220.31064-1-jgross@suse.com>
@@ -99,135 +110,166 @@ Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-6.80 / 50.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
 	NEURAL_HAM_SHORT(-0.20)[-0.999];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	R_RATELIMIT(0.00)[to_ip_from(RLfdszjqhz8kzzb9uwpzdm8png)];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	RCVD_TLS_ALL(0.00)[]
 
-Remove the arch specific variant of paravirt_steal_clock() and use
-the common one instead.
-
-This allows to remove paravirt.c and paravirt.h from arch/arm.
-
-Until all archs supporting Xen have been switched to the common code
-of paravirt_steal_clock(), drivers/xen/time.c needs to include
-asm/paravirt.h for those archs, while this is not necessary for arm
-any longer.
+The only user of paravirt_sched_clock() is in tsc.c, so move the code
+from paravirt.c and paravirt.h to tsc.c.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/arm/Kconfig                |  1 +
- arch/arm/include/asm/paravirt.h | 18 ------------------
- arch/arm/kernel/Makefile        |  1 -
- arch/arm/kernel/paravirt.c      | 20 --------------------
- drivers/xen/time.c              |  2 ++
- 5 files changed, 3 insertions(+), 39 deletions(-)
- delete mode 100644 arch/arm/include/asm/paravirt.h
- delete mode 100644 arch/arm/kernel/paravirt.c
+ arch/x86/include/asm/paravirt.h    | 12 ------------
+ arch/x86/include/asm/timer.h       |  1 +
+ arch/x86/kernel/kvmclock.c         |  1 +
+ arch/x86/kernel/paravirt.c         |  7 -------
+ arch/x86/kernel/tsc.c              | 10 +++++++++-
+ arch/x86/xen/time.c                |  1 +
+ drivers/clocksource/hyperv_timer.c |  2 ++
+ 7 files changed, 14 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index b1f3df39ed40..48c3a36a63f8 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1338,6 +1338,7 @@ config UACCESS_WITH_MEMCPY
- 
- config PARAVIRT
- 	bool "Enable paravirtualization code"
-+	select HAVE_PV_STEAL_CLOCK_GEN
- 	help
- 	  This changes the kernel so it can modify itself when it is run
- 	  under a hypervisor, potentially improving performance significantly
-diff --git a/arch/arm/include/asm/paravirt.h b/arch/arm/include/asm/paravirt.h
-deleted file mode 100644
-index 69da4bdcf856..000000000000
---- a/arch/arm/include/asm/paravirt.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef _ASM_ARM_PARAVIRT_H
--#define _ASM_ARM_PARAVIRT_H
--
--#ifdef CONFIG_PARAVIRT
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 766a7cee3d64..b69e75a5c872 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -14,20 +14,8 @@
+ #ifndef __ASSEMBLER__
+ #include <linux/types.h>
+ #include <linux/cpumask.h>
 -#include <linux/static_call_types.h>
--
--u64 dummy_steal_clock(int cpu);
--
--DECLARE_STATIC_CALL(pv_steal_clock, dummy_steal_clock);
--
--static inline u64 paravirt_steal_clock(int cpu)
--{
--	return static_call(pv_steal_clock)(cpu);
--}
--#endif
--
--#endif
-diff --git a/arch/arm/kernel/Makefile b/arch/arm/kernel/Makefile
-index afc9de7ef9a1..b36cf0cfd4a7 100644
---- a/arch/arm/kernel/Makefile
-+++ b/arch/arm/kernel/Makefile
-@@ -83,7 +83,6 @@ AFLAGS_iwmmxt.o			:= -Wa,-mcpu=iwmmxt
- obj-$(CONFIG_ARM_CPU_TOPOLOGY)  += topology.o
- obj-$(CONFIG_VDSO)		+= vdso.o
- obj-$(CONFIG_EFI)		+= efi.o
--obj-$(CONFIG_PARAVIRT)	+= paravirt.o
+ #include <asm/frame.h>
  
- obj-y			+= head$(MMUEXT).o
- obj-$(CONFIG_DEBUG_LL)	+= debug.o
-diff --git a/arch/arm/kernel/paravirt.c b/arch/arm/kernel/paravirt.c
-deleted file mode 100644
-index 3895a5578852..000000000000
---- a/arch/arm/kernel/paravirt.c
-+++ /dev/null
-@@ -1,20 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- *
-- * Copyright (C) 2013 Citrix Systems
-- *
-- * Author: Stefano Stabellini <stefano.stabellini@eu.citrix.com>
-- */
+-u64 dummy_sched_clock(void);
 -
--#include <linux/export.h>
--#include <linux/jump_label.h>
--#include <linux/types.h>
--#include <linux/static_call.h>
--#include <asm/paravirt.h>
+-DECLARE_STATIC_CALL(pv_sched_clock, dummy_sched_clock);
 -
--static u64 native_steal_clock(int cpu)
+-void paravirt_set_sched_clock(u64 (*func)(void));
+-
+-static __always_inline u64 paravirt_sched_clock(void)
 -{
--	return 0;
+-	return static_call(pv_sched_clock)();
 -}
 -
--DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
-diff --git a/drivers/xen/time.c b/drivers/xen/time.c
-index d360ded2ef39..53b12f5ac465 100644
---- a/drivers/xen/time.c
-+++ b/drivers/xen/time.c
-@@ -10,7 +10,9 @@
- #include <linux/static_call.h>
+ __visible void __native_queued_spin_unlock(struct qspinlock *lock);
+ bool pv_is_native_spin_unlock(void);
+ __visible bool __native_vcpu_is_preempted(long cpu);
+diff --git a/arch/x86/include/asm/timer.h b/arch/x86/include/asm/timer.h
+index 23baf8c9b34c..fda18bcb19b4 100644
+--- a/arch/x86/include/asm/timer.h
++++ b/arch/x86/include/asm/timer.h
+@@ -12,6 +12,7 @@ extern void recalibrate_cpu_khz(void);
+ extern int no_timer_check;
+ 
+ extern bool using_native_sched_clock(void);
++void paravirt_set_sched_clock(u64 (*func)(void));
+ 
+ /*
+  * We use the full linear equation: f(x) = a + b*x, in order to allow
+diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
+index ca0a49eeac4a..b5991d53fc0e 100644
+--- a/arch/x86/kernel/kvmclock.c
++++ b/arch/x86/kernel/kvmclock.c
+@@ -19,6 +19,7 @@
+ #include <linux/cc_platform.h>
+ 
+ #include <asm/hypervisor.h>
++#include <asm/timer.h>
+ #include <asm/x86_init.h>
+ #include <asm/kvmclock.h>
+ 
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 42991d471bf3..4e37db8073f9 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -60,13 +60,6 @@ void __init native_pv_lock_init(void)
+ 		static_branch_enable(&virt_spin_lock_key);
+ }
+ 
+-DEFINE_STATIC_CALL(pv_sched_clock, native_sched_clock);
+-
+-void paravirt_set_sched_clock(u64 (*func)(void))
+-{
+-	static_call_update(pv_sched_clock, func);
+-}
+-
+ static noinstr void pv_native_safe_halt(void)
+ {
+ 	native_safe_halt();
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 87e749106dda..554b54783a04 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -266,19 +266,27 @@ u64 native_sched_clock_from_tsc(u64 tsc)
+ /* We need to define a real function for sched_clock, to override the
+    weak default version */
+ #ifdef CONFIG_PARAVIRT
++DEFINE_STATIC_CALL(pv_sched_clock, native_sched_clock);
++
+ noinstr u64 sched_clock_noinstr(void)
+ {
+-	return paravirt_sched_clock();
++	return static_call(pv_sched_clock)();
+ }
+ 
+ bool using_native_sched_clock(void)
+ {
+ 	return static_call_query(pv_sched_clock) == native_sched_clock;
+ }
++
++void paravirt_set_sched_clock(u64 (*func)(void))
++{
++	static_call_update(pv_sched_clock, func);
++}
+ #else
+ u64 sched_clock_noinstr(void) __attribute__((alias("native_sched_clock")));
+ 
+ bool using_native_sched_clock(void) { return true; }
++void paravirt_set_sched_clock(u64 (*func)(void)) { }
+ #endif
+ 
+ notrace u64 sched_clock(void)
+diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
+index e4754b2fa900..6f9f665bb7ae 100644
+--- a/arch/x86/xen/time.c
++++ b/arch/x86/xen/time.c
+@@ -19,6 +19,7 @@
  #include <linux/sched/cputime.h>
  
-+#ifndef CONFIG_HAVE_PV_STEAL_CLOCK_GEN
- #include <asm/paravirt.h>
-+#endif
+ #include <asm/pvclock.h>
++#include <asm/timer.h>
  #include <asm/xen/hypervisor.h>
  #include <asm/xen/hypercall.h>
- 
+ #include <asm/xen/cpuid.h>
+diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyperv_timer.c
+index 2edc13ca184e..6397a7ba4a98 100644
+--- a/drivers/clocksource/hyperv_timer.c
++++ b/drivers/clocksource/hyperv_timer.c
+@@ -535,6 +535,8 @@ static __always_inline void hv_setup_sched_clock(void *sched_clock)
+ 	sched_clock_register(sched_clock, 64, NSEC_PER_SEC);
+ }
+ #elif defined CONFIG_PARAVIRT
++#include <asm/timer.h>
++
+ static __always_inline void hv_setup_sched_clock(void *sched_clock)
+ {
+ 	/* We're on x86/x64 *and* using PV ops */
 -- 
 2.51.0
 
