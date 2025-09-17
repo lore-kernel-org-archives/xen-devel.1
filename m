@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9582CAC598
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124982.1467101 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9950ACAC59F
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1124990.1467125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdf-0001Aa-N4; Wed, 17 Sep 2025 10:43:51 +0000
+	id 1uypdg-0001bM-UF; Wed, 17 Sep 2025 10:43:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124982.1467101; Wed, 17 Sep 2025 10:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 1124990.1467125; Wed, 17 Sep 2025 10:43:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdf-00018O-Ge; Wed, 17 Sep 2025 10:43:51 +0000
-Received: by outflank-mailman (input) for mailman id 1124982;
- Wed, 17 Sep 2025 10:15:59 +0000
+	id 1uypdg-0001XQ-GH; Wed, 17 Sep 2025 10:43:52 +0000
+Received: by outflank-mailman (input) for mailman id 1124990;
+ Wed, 17 Sep 2025 10:16:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1BlG=34=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1uypCh-00062y-Jb
- for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:15:59 +0000
+ id 1uypCy-00062y-AH
+ for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:16:16 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4ccd3f76-93af-11f0-9d13-b5c5bf9af7f9;
- Wed, 17 Sep 2025 12:15:58 +0200 (CEST)
+ id 53db5649-93af-11f0-9d13-b5c5bf9af7f9;
+ Wed, 17 Sep 2025 12:16:10 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sE093528
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8s8093528
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 19:14:25 +0900 (JST)
+ Wed, 17 Sep 2025 19:14:21 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,26 +44,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ccd3f76-93af-11f0-9d13-b5c5bf9af7f9
-DKIM-Signature: a=rsa-sha256; bh=Uu80FK/yXlnI37NFgIYNtl95VwZCqRjIMZXhhdmhF1M=;
+X-Inumbo-ID: 53db5649-93af-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: a=rsa-sha256; bh=lJRKJLkUtQVuwFEISLl+dhYLnOkVsl4daLaMLN8WUus=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
-        h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758104065; v=1;
-        b=QyJv3vZ248Y7SoZ7rWNS++L+0DfaUm9g8fSVALB9v7pLAf6X4hVbSWM39ZMC9y+o
-         nOzP1T/LsuuGh8RtkTQzS3ljsikW0nElI4Yo2D9rD3eVoBHS1Fdf58ScQ53giRdt
-         GyV3UUD/8nwtM0mYcYMSexmWNGunMYLNOPx8WmKqf0NGjoFzA+gGCyXcWSSDZOKi
-         foJw4RAQDbQSw0zLGGJFN1cJ3mryRFuAJWcbDEPv8cvKl2bSK/wxto7+8UgfK8ik
-         KyA0vPyq94V9GlrknshqaUrPH5yuJ2W01fFM//XxlJtr8gNFDrwEIYGq0O3B4HlB
-         iryWMp26qm5r6DWLySwslA==
+        h=From:Subject:Date:Message-Id:To;
+        s=rs20250326; t=1758104062; v=1;
+        b=oSwItlPy6eUaF3lh0yljm0+YCQBLTh6nG41CDwERnyNvvOnjQMl7mGXP+YZv2tHG
+         cQ85oqb0YLQ+StopBgfveBRpVYJohzqiHNNR2JdhLymCdpqUr6t6VXy8GRFHTT9R
+         cIb8YmgQYR6vHa7S+mPZP9ORB5wu0etavueW/B/ziXBrRzZpESHRoKJwd8fWH5HF
+         PtOMtXTi0fLWCW7X5lvU9RjXpf6e6h0rF+AGzgDO4rbZEcArb5JDrw9/xuhAQlbz
+         ITpfxxz0BxXfnbauuAqKB2w9aQQgYlR/uCg4Xs6+Tl+oAD9GziK/hKFkTcd2l0eL
+         SCbnL+KlTAWECgXyrOaWzQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 19:13:31 +0900
-Subject: [PATCH v3 6/7] vfio: Do not unparent in instance_finalize()
+Subject: [PATCH v3 0/7] Do not unparent in instance_finalize()
+Date: Wed, 17 Sep 2025 19:13:25 +0900
+Message-Id: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-use-v3-6-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
-References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+X-B4-Tracking: v=1; b=H4sIAMWJymgC/3XMTQ6CMBCG4auQrm3TH5HUlfcwLsowhdFESAuNh
+ HB3C2504fKdzPcsLGIgjOxcLCxgokj9M4c5FAw692yRU5ObaalLaeWJTxG5qRDASuMsSpY/h4C
+ eXrtyveXuKI59mHc0qe36u0+KSw6lAud8o7CuLiG2AkiQmPjYP+ZeOBD3gW1Y0l+AKj+AzoA/Q
+ uW9MrVH+xdY1/UN5gLO0eQAAAA=
+X-Change-ID: 20250906-use-37ecc903a9e0
 To: qemu-devel@nongnu.org
 Cc: Alex Williamson <alex.williamson@redhat.com>,
         =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>,
@@ -110,6 +113,12 @@ Cc: Alex Williamson <alex.williamson@redhat.com>,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.15-dev-179e8
 
+Based-on: <cover.1751493467.git.balaton@eik.bme.hu>
+("[PATCH v2 00/14] hw/pci-host/raven clean ups")
+
+Supersedes: <20240829-memory-v1-1-ac07af2f4fa5@daynix.com>
+("[PATCH] docs/devel: Prohibit calling object_unparent() for memory region")
+
 Children are automatically unparented so manually unparenting is
 unnecessary.
 
@@ -120,65 +129,56 @@ is semantically incorrect.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/vfio/pci-quirks.c | 9 +--------
- hw/vfio/region.c     | 3 ---
- 2 files changed, 1 insertion(+), 11 deletions(-)
+Changes in v3:
+- Added patches to remove other object_unparent() calls in
+  instance_finalize().
+- Dropped patch "qdev: Automatically delete memory subregions" and the
+  succeeding patches to avoid Ccing many.
+- Link to v2: https://lore.kernel.org/qemu-devel/20250915-use-v2-0-f4c7ff13bfe9@rsg.ci.i.u-tokyo.ac.jp
 
-diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
-index 3f002252acfb..83419b1ab58d 100644
---- a/hw/vfio/pci-quirks.c
-+++ b/hw/vfio/pci-quirks.c
-@@ -1150,15 +1150,12 @@ void vfio_vga_quirk_exit(VFIOPCIDevice *vdev)
- 
- void vfio_vga_quirk_finalize(VFIOPCIDevice *vdev)
- {
--    int i, j;
-+    int i;
- 
-     for (i = 0; i < ARRAY_SIZE(vdev->vga->region); i++) {
-         while (!QLIST_EMPTY(&vdev->vga->region[i].quirks)) {
-             VFIOQuirk *quirk = QLIST_FIRST(&vdev->vga->region[i].quirks);
-             QLIST_REMOVE(quirk, next);
--            for (j = 0; j < quirk->nr_mem; j++) {
--                object_unparent(OBJECT(&quirk->mem[j]));
--            }
-             g_free(quirk->mem);
-             g_free(quirk->data);
-             g_free(quirk);
-@@ -1198,14 +1195,10 @@ void vfio_bar_quirk_exit(VFIOPCIDevice *vdev, int nr)
- void vfio_bar_quirk_finalize(VFIOPCIDevice *vdev, int nr)
- {
-     VFIOBAR *bar = &vdev->bars[nr];
--    int i;
- 
-     while (!QLIST_EMPTY(&bar->quirks)) {
-         VFIOQuirk *quirk = QLIST_FIRST(&bar->quirks);
-         QLIST_REMOVE(quirk, next);
--        for (i = 0; i < quirk->nr_mem; i++) {
--            object_unparent(OBJECT(&quirk->mem[i]));
--        }
-         g_free(quirk->mem);
-         g_free(quirk->data);
-         g_free(quirk);
-diff --git a/hw/vfio/region.c b/hw/vfio/region.c
-index d04c57db630f..b165ab0b9378 100644
---- a/hw/vfio/region.c
-+++ b/hw/vfio/region.c
-@@ -365,12 +365,9 @@ void vfio_region_finalize(VFIORegion *region)
-     for (i = 0; i < region->nr_mmaps; i++) {
-         if (region->mmaps[i].mmap) {
-             munmap(region->mmaps[i].mmap, region->mmaps[i].size);
--            object_unparent(OBJECT(&region->mmaps[i].mem));
-         }
-     }
- 
--    object_unparent(OBJECT(region->mem));
--
-     g_free(region->mem);
-     g_free(region->mmaps);
- 
+Changes in v2:
+- Added a reference to "[PATCH] docs/devel: Prohibit calling
+  object_unparent() for memory region", which does something similar to
+  patch "docs/devel: Do not unparent in instance_finalize()" but I
+  forgot I sent it in the past.
+- Fixed a typo in patch
+  "docs/devel: Do not unparent in instance_finalize()" and
+  "[PATCH 02/22] vfio/pci: Do not unparent in instance_finalize()".
+- Dropped patches to move address_space_init() calls; I intend to
+  QOM-ify to fix memory leaks automatically as discussed in the
+  following thread:
+  https://lore.kernel.org/qemu-devel/cd21698f-db77-eb75-6966-d559fdcab835@eik.bme.hu/
+  But the QOM-ification will be big so I'll send it as a separate
+  series.
+- Rebased on top of "[PATCH v2 00/14] hw/pci-host/raven clean ups".
+  https://lore.kernel.org/qemu-devel/cover.1751493467.git.balaton@eik.bme.hu/
+- Link to v1: https://lore.kernel.org/qemu-devel/20250906-use-v1-0-c51caafd1eb7@rsg.ci.i.u-tokyo.ac.jp
 
--- 
-2.51.0
+---
+Akihiko Odaki (7):
+      docs/devel: Do not unparent in instance_finalize()
+      vfio/pci: Do not unparent in instance_finalize()
+      hw/core/register: Do not unparent in instance_finalize()
+      hv-balloon: hw/core/register: Do not unparent in instance_finalize()
+      hw/sd/sdhci: Do not unparent in instance_finalize()
+      vfio: Do not unparent in instance_finalize()
+      hw/xen: Do not unparent in instance_finalize()
+
+ docs/devel/memory.rst  | 19 ++++++-------------
+ hw/core/register.c     |  1 -
+ hw/hyperv/hv-balloon.c | 12 +-----------
+ hw/sd/sdhci.c          |  4 ----
+ hw/vfio/pci-quirks.c   |  9 +--------
+ hw/vfio/pci.c          |  4 ----
+ hw/vfio/region.c       |  3 ---
+ hw/xen/xen_pt_msi.c    | 11 +----------
+ 8 files changed, 9 insertions(+), 54 deletions(-)
+---
+base-commit: e101d33792530093fa0b0a6e5f43e4d8cfe4581e
+change-id: 20250906-use-37ecc903a9e0
+
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
 
