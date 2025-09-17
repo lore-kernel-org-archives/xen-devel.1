@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B25CAC598
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1BFCA0EE8
 	for <xen-devel@archiver.kernel.org>; Wed, 17 Sep 2025 10:44:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1124993.1467133 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1124979.1467082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdh-0001i2-AA; Wed, 17 Sep 2025 10:43:53 +0000
+	id 1uypde-0000x4-TX; Wed, 17 Sep 2025 10:43:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1124993.1467133; Wed, 17 Sep 2025 10:43:53 +0000
+Received: by outflank-mailman (output) from mailman id 1124979.1467082; Wed, 17 Sep 2025 10:43:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uypdg-0001f7-S8; Wed, 17 Sep 2025 10:43:52 +0000
-Received: by outflank-mailman (input) for mailman id 1124993;
- Wed, 17 Sep 2025 10:20:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uypde-0000wx-QN; Wed, 17 Sep 2025 10:43:50 +0000
+Received: by outflank-mailman (input) for mailman id 1124979;
+ Wed, 17 Sep 2025 10:15:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1BlG=34=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1uypHL-00076j-TS
- for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:20:47 +0000
+ id 1uypCg-00062y-IM
+ for xen-devel@lists.xenproject.org; Wed, 17 Sep 2025 10:15:59 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f80102fe-93af-11f0-9809-7dc792cee155;
- Wed, 17 Sep 2025 12:20:45 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4b878f45-93af-11f0-9d13-b5c5bf9af7f9;
+ Wed, 17 Sep 2025 12:15:56 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sB093528
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HAE8sD093528
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 19:14:23 +0900 (JST)
+ Wed, 17 Sep 2025 19:14:24 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,25 +44,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f80102fe-93af-11f0-9809-7dc792cee155
-DKIM-Signature: a=rsa-sha256; bh=Nb2IXk8Wd06JvJLljjYiPCsN3a3uINbunrK794JTiso=;
+X-Inumbo-ID: 4b878f45-93af-11f0-9d13-b5c5bf9af7f9
+DKIM-Signature: a=rsa-sha256; bh=hrFeIYsdveoSw39gLf38PDAGKQ7lahlpxgxSM3Eq+7Y=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758104063; v=1;
-        b=Oo5GWWtwzsWYxzsGXA+JY0CJMcCICiVhaS9y1lRGW6PO5yUYUtN7uDfQqIA+lXRU
-         Mo+ydn8Pe1RE5VeibUxfmj5y5G6MG0wUf+OtIDjTsYV9r5RXrrMAjWDMp8dKz3yj
-         ht41kegl/A3FFKssuK+aJknlqAd3KHu7LRAYDxciSex2hne/1KdIqOXAeuVX1Caj
-         Edp+fiXbGzHVqbrHbuqVUH+WZlV97MmCbLcuPv1auKXr0wlmF9c0GsAy+ueVvcIO
-         rO3wR19/WdYoURQwly6sr4aZMC4Oj5OmcBHc+GKDta9yK+7chuS/LRxIONFhkHEz
-         mhj736rzwMlM6d3TKkXjzw==
+        s=rs20250326; t=1758104065; v=1;
+        b=DdLzysLdoItNX02agwRNTGyUnTrzx20tFWGfsRm6Kj1Bcgto7jzT6NanLKz/sw54
+         c+SFhhHxg7ZxwyzOUB5Y41jcQzG0ftXjCYbd7tD7stmwz9Yec0hIiAHCjVEYefqo
+         Me1eK3UKWbYxbezILi9fy2VOf4+KEZ0NQ+rdsHcRn5ADw2w01gtn/7p1u4GAwcZp
+         WUKHC47iY8/4AYK3RupRXpz8oDrep/DTUEkGUxzHWz4bCKSw+EvzspWajKbxAsT6
+         HwzYNR5qw2df5gfWZ1Rbu4esPyUm1QZ7oE2EIWvch8aXE6l+SM2RfSA9WQWmc+1c
+         RTagV4R6EmSTMQMcY55uCQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 19:13:28 +0900
-Subject: [PATCH v3 3/7] hw/core/register: Do not unparent in
- instance_finalize()
+Date: Wed, 17 Sep 2025 19:13:30 +0900
+Subject: [PATCH v3 5/7] hw/sd/sdhci: Do not unparent in instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-use-v3-3-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-use-v3-5-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -121,21 +120,24 @@ is semantically incorrect.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/core/register.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/sd/sdhci.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/hw/core/register.c b/hw/core/register.c
-index 8f63d9f227c4..3340df70b06e 100644
---- a/hw/core/register.c
-+++ b/hw/core/register.c
-@@ -314,7 +314,6 @@ RegisterInfoArray *register_init_block64(DeviceState *owner,
- 
- void register_finalize_block(RegisterInfoArray *r_array)
+diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
+index 3c897e54b721..89b595ce4a5a 100644
+--- a/hw/sd/sdhci.c
++++ b/hw/sd/sdhci.c
+@@ -1578,10 +1578,6 @@ static void sdhci_sysbus_finalize(Object *obj)
  {
--    object_unparent(OBJECT(&r_array->mem));
-     g_free(r_array->r);
-     g_free(r_array);
+     SDHCIState *s = SYSBUS_SDHCI(obj);
+ 
+-    if (s->dma_mr) {
+-        object_unparent(OBJECT(s->dma_mr));
+-    }
+-
+     sdhci_uninitfn(s);
  }
+ 
 
 -- 
 2.51.0
