@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDD0CAC5A7
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Sep 2025 18:46:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1126449.1468053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9AECA1013
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Sep 2025 18:46:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1126452.1468063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uzJdq-0005MW-5b; Thu, 18 Sep 2025 18:46:02 +0000
+	id 1uzJdt-0005hJ-F5; Thu, 18 Sep 2025 18:46:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1126449.1468053; Thu, 18 Sep 2025 18:46:02 +0000
+Received: by outflank-mailman (output) from mailman id 1126452.1468063; Thu, 18 Sep 2025 18:46:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uzJdq-0005LS-1d; Thu, 18 Sep 2025 18:46:02 +0000
-Received: by outflank-mailman (input) for mailman id 1126449;
- Thu, 18 Sep 2025 18:46:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1uzJdt-0005h4-Af; Thu, 18 Sep 2025 18:46:05 +0000
+Received: by outflank-mailman (input) for mailman id 1126452;
+ Thu, 18 Sep 2025 18:46:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=TAPY=35=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1uzJdp-0003Vt-Ae
- for xen-devel@lists.xenproject.org; Thu, 18 Sep 2025 18:46:01 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [2600:3c0a:e001:78e:0:1991:8:25])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b6e99914-94bf-11f0-9809-7dc792cee155;
- Thu, 18 Sep 2025 20:45:58 +0200 (CEST)
+ id 1uzJds-0003Gi-0f
+ for xen-devel@lists.xenproject.org; Thu, 18 Sep 2025 18:46:04 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b9e56101-94bf-11f0-9d14-b5c5bf9af7f9;
+ Thu, 18 Sep 2025 20:46:03 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 63592435E5;
- Thu, 18 Sep 2025 18:45:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65B01C4CEE7;
- Thu, 18 Sep 2025 18:45:56 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 4BFB160217;
+ Thu, 18 Sep 2025 18:46:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF400C4CEE7;
+ Thu, 18 Sep 2025 18:46:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b6e99914-94bf-11f0-9809-7dc792cee155
+X-Inumbo-ID: b9e56101-94bf-11f0-9d14-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758221157;
-	bh=1mDXfVNbsYLo4a+duzDpY85ZUnJWos79Vyrao8w+xkA=;
+	s=k20201202; t=1758221162;
+	bh=RuMQ11goh2JNImFK4PcuJ9yLKsyHcn6/phLR164pkzU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uJjcqkjioeaPHR3oTtovXk7XnK/pd4Dpvt6tqBF2mLVNs5Q4naZBBRjxEELRfi2+Y
-	 D4kIQlN6hJhac0eiwI3sASKq7B/5bGRMKu7BFRE0t7mA5u6NXWj4T2DNxp00i+Dz8P
-	 CDKvCCa9nHcj0qbtseSusPltdxhIdxKZ4Yl5D4KaZQNkpzvLKwIkvugBIZkuUi+n41
-	 sRDjxFx3/OcIdrXVx9M+pcPfgc0XKte5yCfdgAtR79e5ju1JRnVXErNA0tRs33R8Nz
-	 1UIUOZkvr968XteLjAHpFkZyPWqxmq1DajIw+0WZAlLFornxw8ZulfpFSWmmyNnZ69
-	 l7OvidjZ6KebQ==
+	b=Q5B3soPWe59i7AumuQAtzGCpEErxVeTC7wi+Di8G6eOVT1MVZTt/JgzUnlVjGRPoW
+	 ErCqMMeGsidHG1N+knFqgXjPEsOdPPiFQ0rIz4DZLI0HbYVEM3hq9hxORsFYl5H2fx
+	 J60n2vb7xaJx4ibgjmaY8IKcwdgAFKEXlRg60rf39+CjCdf5WsqUpjL/TGOC7MGeDk
+	 X/Ja5mBKKeU7UABgCctHcfJDW3VdXWr07H5WLSQu0NCMdcZtRlu/szIqbspA2f3jrE
+	 yZJ63F0xUTPrPP7BvjqshrVIrvOkK4Vw3omPkJrYVm7ziJdzMMMM8Sk6cOqpJu0RSX
+	 bLwC9O22I7FmA==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leonro@nvidia.com>,
@@ -87,9 +86,9 @@ Cc: Leon Romanovsky <leonro@nvidia.com>,
 	virtualization@lists.linux.dev,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 7/9] vdpa: Convert to physical address DMA mapping
-Date: Thu, 18 Sep 2025 21:45:07 +0300
-Message-ID: <517785de56c12927a782b6bc51cc84e06493958d.1758219787.git.leon@kernel.org>
+Subject: [PATCH 5/9] sparc64: Use physical address DMA mapping
+Date: Thu, 18 Sep 2025 21:45:05 +0300
+Message-ID: <b4c89b7a8e72083d75bb9c0ded105c8d6a857c0c.1758219787.git.leon@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1758219786.git.leon@kernel.org>
 References: <cover.1758219786.git.leon@kernel.org>
@@ -98,120 +97,284 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-Use physical address directly in DMA mapping flow.
+Convert sparc architecture DMA code to use .map_phys callback.
 
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- drivers/vdpa/vdpa_user/iova_domain.c | 11 +++++------
- drivers/vdpa/vdpa_user/iova_domain.h |  8 ++++----
- drivers/vdpa/vdpa_user/vduse_dev.c   | 18 ++++++++++--------
- 3 files changed, 19 insertions(+), 18 deletions(-)
+ arch/sparc/kernel/iommu.c     | 16 ++++++------
+ arch/sparc/kernel/pci_sun4v.c | 16 ++++++------
+ arch/sparc/mm/io-unit.c       | 13 +++++-----
+ arch/sparc/mm/iommu.c         | 46 ++++++++++++++++++-----------------
+ 4 files changed, 48 insertions(+), 43 deletions(-)
 
-diff --git a/drivers/vdpa/vdpa_user/iova_domain.c b/drivers/vdpa/vdpa_user/iova_domain.c
-index 58116f89d8dae..c0ecf01003cd3 100644
---- a/drivers/vdpa/vdpa_user/iova_domain.c
-+++ b/drivers/vdpa/vdpa_user/iova_domain.c
-@@ -396,17 +396,16 @@ void vduse_domain_sync_single_for_cpu(struct vduse_iova_domain *domain,
- 	read_unlock(&domain->bounce_lock);
+diff --git a/arch/sparc/kernel/iommu.c b/arch/sparc/kernel/iommu.c
+index da03636925283..72bd7519ac2ab 100644
+--- a/arch/sparc/kernel/iommu.c
++++ b/arch/sparc/kernel/iommu.c
+@@ -260,9 +260,8 @@ static void dma_4u_free_coherent(struct device *dev, size_t size,
+ 		free_pages((unsigned long)cpu, order);
  }
  
--dma_addr_t vduse_domain_map_page(struct vduse_iova_domain *domain,
--				 struct page *page, unsigned long offset,
--				 size_t size, enum dma_data_direction dir,
-+dma_addr_t vduse_domain_map_phys(struct vduse_iova_domain *domain,
-+				 phys_addr_t pa, size_t size,
-+				 enum dma_data_direction dir,
- 				 unsigned long attrs)
+-static dma_addr_t dma_4u_map_page(struct device *dev, struct page *page,
+-				  unsigned long offset, size_t sz,
+-				  enum dma_data_direction direction,
++static dma_addr_t dma_4u_map_phys(struct device *dev, phys_addr_t phys,
++				  size_t sz, enum dma_data_direction direction,
+ 				  unsigned long attrs)
  {
- 	struct iova_domain *iovad = &domain->stream_iovad;
- 	unsigned long limit = domain->bounce_size - 1;
--	phys_addr_t pa = page_to_phys(page) + offset;
- 	dma_addr_t iova = vduse_domain_alloc_iova(iovad, size, limit);
+ 	struct iommu *iommu;
+@@ -273,13 +272,16 @@ static dma_addr_t dma_4u_map_page(struct device *dev, struct page *page,
+ 	u32 bus_addr, ret;
+ 	unsigned long iopte_protection;
  
--	if (!iova)
-+	if (!iova || (attrs & DMA_ATTR_MMIO))
- 		return DMA_MAPPING_ERROR;
++	if (attrs & DMA_ATTR_MMIO)
++		goto bad;
++
+ 	iommu = dev->archdata.iommu;
+ 	strbuf = dev->archdata.stc;
  
- 	if (vduse_domain_init_bounce_map(domain))
-@@ -430,7 +429,7 @@ dma_addr_t vduse_domain_map_page(struct vduse_iova_domain *domain,
+ 	if (unlikely(direction == DMA_NONE))
+ 		goto bad_no_ctx;
+ 
+-	oaddr = (unsigned long)(page_address(page) + offset);
++	oaddr = (unsigned long)(phys_to_virt(phys));
+ 	npages = IO_PAGE_ALIGN(oaddr + sz) - (oaddr & IO_PAGE_MASK);
+ 	npages >>= IO_PAGE_SHIFT;
+ 
+@@ -383,7 +385,7 @@ static void strbuf_flush(struct strbuf *strbuf, struct iommu *iommu,
+ 		       vaddr, ctx, npages);
+ }
+ 
+-static void dma_4u_unmap_page(struct device *dev, dma_addr_t bus_addr,
++static void dma_4u_unmap_phys(struct device *dev, dma_addr_t bus_addr,
+ 			      size_t sz, enum dma_data_direction direction,
+ 			      unsigned long attrs)
+ {
+@@ -753,8 +755,8 @@ static int dma_4u_supported(struct device *dev, u64 device_mask)
+ static const struct dma_map_ops sun4u_dma_ops = {
+ 	.alloc			= dma_4u_alloc_coherent,
+ 	.free			= dma_4u_free_coherent,
+-	.map_page		= dma_4u_map_page,
+-	.unmap_page		= dma_4u_unmap_page,
++	.map_phys		= dma_4u_map_phys,
++	.unmap_phys		= dma_4u_unmap_phys,
+ 	.map_sg			= dma_4u_map_sg,
+ 	.unmap_sg		= dma_4u_unmap_sg,
+ 	.sync_single_for_cpu	= dma_4u_sync_single_for_cpu,
+diff --git a/arch/sparc/kernel/pci_sun4v.c b/arch/sparc/kernel/pci_sun4v.c
+index b720b21ccfbd8..d9d2464a948c9 100644
+--- a/arch/sparc/kernel/pci_sun4v.c
++++ b/arch/sparc/kernel/pci_sun4v.c
+@@ -352,9 +352,8 @@ static void dma_4v_free_coherent(struct device *dev, size_t size, void *cpu,
+ 		free_pages((unsigned long)cpu, order);
+ }
+ 
+-static dma_addr_t dma_4v_map_page(struct device *dev, struct page *page,
+-				  unsigned long offset, size_t sz,
+-				  enum dma_data_direction direction,
++static dma_addr_t dma_4v_map_phys(struct device *dev, phys_addr_t phys,
++				  size_t sz, enum dma_data_direction direction,
+ 				  unsigned long attrs)
+ {
+ 	struct iommu *iommu;
+@@ -367,13 +366,16 @@ static dma_addr_t dma_4v_map_page(struct device *dev, struct page *page,
+ 	dma_addr_t bus_addr, ret;
+ 	long entry;
+ 
++	if (attrs & DMA_ATTR_MMIO)
++		goto bad;
++
+ 	iommu = dev->archdata.iommu;
+ 	atu = iommu->atu;
+ 
+ 	if (unlikely(direction == DMA_NONE))
+ 		goto bad;
+ 
+-	oaddr = (unsigned long)(page_address(page) + offset);
++	oaddr = (unsigned long)(phys_to_virt(phys));
+ 	npages = IO_PAGE_ALIGN(oaddr + sz) - (oaddr & IO_PAGE_MASK);
+ 	npages >>= IO_PAGE_SHIFT;
+ 
+@@ -426,7 +428,7 @@ static dma_addr_t dma_4v_map_page(struct device *dev, struct page *page,
  	return DMA_MAPPING_ERROR;
  }
  
--void vduse_domain_unmap_page(struct vduse_iova_domain *domain,
-+void vduse_domain_unmap_phys(struct vduse_iova_domain *domain,
- 			     dma_addr_t dma_addr, size_t size,
- 			     enum dma_data_direction dir, unsigned long attrs)
+-static void dma_4v_unmap_page(struct device *dev, dma_addr_t bus_addr,
++static void dma_4v_unmap_phys(struct device *dev, dma_addr_t bus_addr,
+ 			      size_t sz, enum dma_data_direction direction,
+ 			      unsigned long attrs)
  {
-diff --git a/drivers/vdpa/vdpa_user/iova_domain.h b/drivers/vdpa/vdpa_user/iova_domain.h
-index 7f3f0928ec781..7c4546fd856ab 100644
---- a/drivers/vdpa/vdpa_user/iova_domain.h
-+++ b/drivers/vdpa/vdpa_user/iova_domain.h
-@@ -53,12 +53,12 @@ void vduse_domain_sync_single_for_cpu(struct vduse_iova_domain *domain,
- 				      dma_addr_t dma_addr, size_t size,
- 				      enum dma_data_direction dir);
- 
--dma_addr_t vduse_domain_map_page(struct vduse_iova_domain *domain,
--				 struct page *page, unsigned long offset,
--				 size_t size, enum dma_data_direction dir,
-+dma_addr_t vduse_domain_map_phys(struct vduse_iova_domain *domain,
-+				 phys_addr_t phys, size_t size,
-+				 enum dma_data_direction dir,
- 				 unsigned long attrs);
- 
--void vduse_domain_unmap_page(struct vduse_iova_domain *domain,
-+void vduse_domain_unmap_phys(struct vduse_iova_domain *domain,
- 			     dma_addr_t dma_addr, size_t size,
- 			     enum dma_data_direction dir, unsigned long attrs);
- 
-diff --git a/drivers/vdpa/vdpa_user/vduse_dev.c b/drivers/vdpa/vdpa_user/vduse_dev.c
-index 04620bb77203d..75aa3c9f83fb5 100644
---- a/drivers/vdpa/vdpa_user/vduse_dev.c
-+++ b/drivers/vdpa/vdpa_user/vduse_dev.c
-@@ -834,25 +834,27 @@ static void vduse_dev_sync_single_for_cpu(struct device *dev,
- 	vduse_domain_sync_single_for_cpu(domain, dma_addr, size, dir);
+@@ -686,8 +688,8 @@ static int dma_4v_supported(struct device *dev, u64 device_mask)
+ static const struct dma_map_ops sun4v_dma_ops = {
+ 	.alloc				= dma_4v_alloc_coherent,
+ 	.free				= dma_4v_free_coherent,
+-	.map_page			= dma_4v_map_page,
+-	.unmap_page			= dma_4v_unmap_page,
++	.map_phys			= dma_4v_map_phys,
++	.unmap_phys			= dma_4v_unmap_phys,
+ 	.map_sg				= dma_4v_map_sg,
+ 	.unmap_sg			= dma_4v_unmap_sg,
+ 	.dma_supported			= dma_4v_supported,
+diff --git a/arch/sparc/mm/io-unit.c b/arch/sparc/mm/io-unit.c
+index d8376f61b4d08..fab303cc33700 100644
+--- a/arch/sparc/mm/io-unit.c
++++ b/arch/sparc/mm/io-unit.c
+@@ -142,11 +142,10 @@ nexti:	scan = find_next_zero_bit(iounit->bmap, limit, scan);
+ 	return vaddr;
  }
  
--static dma_addr_t vduse_dev_map_page(struct device *dev, struct page *page,
--				     unsigned long offset, size_t size,
--				     enum dma_data_direction dir,
-+static dma_addr_t vduse_dev_map_phys(struct device *dev, phys_addr_t phys,
-+				     size_t size, enum dma_data_direction dir,
- 				     unsigned long attrs)
+-static dma_addr_t iounit_map_page(struct device *dev, struct page *page,
+-		unsigned long offset, size_t len, enum dma_data_direction dir,
+-		unsigned long attrs)
++static dma_addr_t iounit_map_phys(struct device *dev, phys_addr_t phys,
++		size_t len, enum dma_data_direction dir, unsigned long attrs)
  {
- 	struct vduse_dev *vdev = dev_to_vduse(dev);
- 	struct vduse_iova_domain *domain = vdev->domain;
+-	void *vaddr = page_address(page) + offset;
++	void *vaddr = phys_to_virt(phys);
+ 	struct iounit_struct *iounit = dev->archdata.iommu;
+ 	unsigned long ret, flags;
+ 	
+@@ -178,7 +177,7 @@ static int iounit_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
+ 	return nents;
+ }
  
--	return vduse_domain_map_page(domain, page, offset, size, dir, attrs);
+-static void iounit_unmap_page(struct device *dev, dma_addr_t vaddr, size_t len,
++static void iounit_unmap_phys(struct device *dev, dma_addr_t vaddr, size_t len,
+ 		enum dma_data_direction dir, unsigned long attrs)
+ {
+ 	struct iounit_struct *iounit = dev->archdata.iommu;
+@@ -279,8 +278,8 @@ static const struct dma_map_ops iounit_dma_ops = {
+ 	.alloc			= iounit_alloc,
+ 	.free			= iounit_free,
+ #endif
+-	.map_page		= iounit_map_page,
+-	.unmap_page		= iounit_unmap_page,
++	.map_phys		= iounit_map_phys,
++	.unmap_phys		= iounit_unmap_phys,
+ 	.map_sg			= iounit_map_sg,
+ 	.unmap_sg		= iounit_unmap_sg,
+ };
+diff --git a/arch/sparc/mm/iommu.c b/arch/sparc/mm/iommu.c
+index 5a5080db800f5..dfcd981fa7efc 100644
+--- a/arch/sparc/mm/iommu.c
++++ b/arch/sparc/mm/iommu.c
+@@ -181,18 +181,20 @@ static void iommu_flush_iotlb(iopte_t *iopte, unsigned int niopte)
+ 	}
+ }
+ 
+-static dma_addr_t __sbus_iommu_map_page(struct device *dev, struct page *page,
+-		unsigned long offset, size_t len, bool per_page_flush)
++static dma_addr_t __sbus_iommu_map_phys(struct device *dev, phys_addr_t paddr,
++		size_t len, bool per_page_flush, unsigned long attrs)
+ {
+ 	struct iommu_struct *iommu = dev->archdata.iommu;
+-	phys_addr_t paddr = page_to_phys(page) + offset;
+-	unsigned long off = paddr & ~PAGE_MASK;
++	unsigned long off = offset_in_page(paddr);
+ 	unsigned long npages = (off + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
+ 	unsigned long pfn = __phys_to_pfn(paddr);
+ 	unsigned int busa, busa0;
+ 	iopte_t *iopte, *iopte0;
+ 	int ioptex, i;
+ 
 +	if (attrs & DMA_ATTR_MMIO)
 +		return DMA_MAPPING_ERROR;
 +
-+	return vduse_domain_map_phys(domain, phys, size, dir, attrs);
+ 	/* XXX So what is maxphys for us and how do drivers know it? */
+ 	if (!len || len > 256 * 1024)
+ 		return DMA_MAPPING_ERROR;
+@@ -202,10 +204,10 @@ static dma_addr_t __sbus_iommu_map_page(struct device *dev, struct page *page,
+ 	 * XXX Is this a good assumption?
+ 	 * XXX What if someone else unmaps it here and races us?
+ 	 */
+-	if (per_page_flush && !PageHighMem(page)) {
++	if (per_page_flush && !PhysHighMem(paddr)) {
+ 		unsigned long vaddr, p;
+ 
+-		vaddr = (unsigned long)page_address(page) + offset;
++		vaddr = (unsigned long)phys_to_virt(paddr);
+ 		for (p = vaddr & PAGE_MASK; p < vaddr + len; p += PAGE_SIZE)
+ 			flush_page_for_dma(p);
+ 	}
+@@ -231,19 +233,19 @@ static dma_addr_t __sbus_iommu_map_page(struct device *dev, struct page *page,
+ 	return busa0 + off;
  }
  
--static void vduse_dev_unmap_page(struct device *dev, dma_addr_t dma_addr,
-+static void vduse_dev_unmap_phys(struct device *dev, dma_addr_t dma_addr,
- 				size_t size, enum dma_data_direction dir,
- 				unsigned long attrs)
+-static dma_addr_t sbus_iommu_map_page_gflush(struct device *dev,
+-		struct page *page, unsigned long offset, size_t len,
+-		enum dma_data_direction dir, unsigned long attrs)
++static dma_addr_t sbus_iommu_map_phys_gflush(struct device *dev,
++		phys_addr_t phys, size_t len, enum dma_data_direction dir,
++		unsigned long attrs)
  {
- 	struct vduse_dev *vdev = dev_to_vduse(dev);
- 	struct vduse_iova_domain *domain = vdev->domain;
- 
--	return vduse_domain_unmap_page(domain, dma_addr, size, dir, attrs);
-+	return vduse_domain_unmap_phys(domain, dma_addr, size, dir, attrs);
+ 	flush_page_for_dma(0);
+-	return __sbus_iommu_map_page(dev, page, offset, len, false);
++	return __sbus_iommu_map_phys(dev, phys, len, false, attrs);
  }
  
- static void *vduse_dev_alloc_coherent(struct device *dev, size_t size,
-@@ -896,8 +898,8 @@ static size_t vduse_dev_max_mapping_size(struct device *dev)
- static const struct dma_map_ops vduse_dev_dma_ops = {
- 	.sync_single_for_device = vduse_dev_sync_single_for_device,
- 	.sync_single_for_cpu = vduse_dev_sync_single_for_cpu,
--	.map_page = vduse_dev_map_page,
--	.unmap_page = vduse_dev_unmap_page,
-+	.map_phys = vduse_dev_map_phys,
-+	.unmap_phys = vduse_dev_unmap_phys,
- 	.alloc = vduse_dev_alloc_coherent,
- 	.free = vduse_dev_free_coherent,
- 	.max_mapping_size = vduse_dev_max_mapping_size,
+-static dma_addr_t sbus_iommu_map_page_pflush(struct device *dev,
+-		struct page *page, unsigned long offset, size_t len,
+-		enum dma_data_direction dir, unsigned long attrs)
++static dma_addr_t sbus_iommu_map_phys_pflush(struct device *dev,
++		phys_addr_t phys, size_t len, enum dma_data_direction dir,
++		unsigned long attrs)
+ {
+-	return __sbus_iommu_map_page(dev, page, offset, len, true);
++	return __sbus_iommu_map_phys(dev, phys, len, true, attrs);
+ }
+ 
+ static int __sbus_iommu_map_sg(struct device *dev, struct scatterlist *sgl,
+@@ -254,8 +256,8 @@ static int __sbus_iommu_map_sg(struct device *dev, struct scatterlist *sgl,
+ 	int j;
+ 
+ 	for_each_sg(sgl, sg, nents, j) {
+-		sg->dma_address =__sbus_iommu_map_page(dev, sg_page(sg),
+-				sg->offset, sg->length, per_page_flush);
++		sg->dma_address = __sbus_iommu_map_phys(dev, sg_phys(sg),
++				sg->length, per_page_flush, attrs);
+ 		if (sg->dma_address == DMA_MAPPING_ERROR)
+ 			return -EIO;
+ 		sg->dma_length = sg->length;
+@@ -277,7 +279,7 @@ static int sbus_iommu_map_sg_pflush(struct device *dev, struct scatterlist *sgl,
+ 	return __sbus_iommu_map_sg(dev, sgl, nents, dir, attrs, true);
+ }
+ 
+-static void sbus_iommu_unmap_page(struct device *dev, dma_addr_t dma_addr,
++static void sbus_iommu_unmap_phys(struct device *dev, dma_addr_t dma_addr,
+ 		size_t len, enum dma_data_direction dir, unsigned long attrs)
+ {
+ 	struct iommu_struct *iommu = dev->archdata.iommu;
+@@ -303,7 +305,7 @@ static void sbus_iommu_unmap_sg(struct device *dev, struct scatterlist *sgl,
+ 	int i;
+ 
+ 	for_each_sg(sgl, sg, nents, i) {
+-		sbus_iommu_unmap_page(dev, sg->dma_address, sg->length, dir,
++		sbus_iommu_unmap_phys(dev, sg->dma_address, sg->length, dir,
+ 				attrs);
+ 		sg->dma_address = 0x21212121;
+ 	}
+@@ -426,8 +428,8 @@ static const struct dma_map_ops sbus_iommu_dma_gflush_ops = {
+ 	.alloc			= sbus_iommu_alloc,
+ 	.free			= sbus_iommu_free,
+ #endif
+-	.map_page		= sbus_iommu_map_page_gflush,
+-	.unmap_page		= sbus_iommu_unmap_page,
++	.map_phys		= sbus_iommu_map_phys_gflush,
++	.unmap_phys		= sbus_iommu_unmap_phys,
+ 	.map_sg			= sbus_iommu_map_sg_gflush,
+ 	.unmap_sg		= sbus_iommu_unmap_sg,
+ };
+@@ -437,8 +439,8 @@ static const struct dma_map_ops sbus_iommu_dma_pflush_ops = {
+ 	.alloc			= sbus_iommu_alloc,
+ 	.free			= sbus_iommu_free,
+ #endif
+-	.map_page		= sbus_iommu_map_page_pflush,
+-	.unmap_page		= sbus_iommu_unmap_page,
++	.map_phys		= sbus_iommu_map_phys_pflush,
++	.unmap_phys		= sbus_iommu_unmap_phys,
+ 	.map_sg			= sbus_iommu_map_sg_pflush,
+ 	.unmap_sg		= sbus_iommu_unmap_sg,
+ };
 -- 
 2.51.0
 
