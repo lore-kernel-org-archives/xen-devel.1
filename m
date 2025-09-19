@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A594CA1013
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Sep 2025 20:21:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1126634.1468133 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF4CCAC592
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Sep 2025 10:51:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1126817.1468143 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uzL7f-0006bC-HC; Thu, 18 Sep 2025 20:20:55 +0000
+	id 1uzYi4-0000A9-84; Fri, 19 Sep 2025 10:51:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1126634.1468133; Thu, 18 Sep 2025 20:20:55 +0000
+Received: by outflank-mailman (output) from mailman id 1126817.1468143; Fri, 19 Sep 2025 10:51:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1uzL7f-0006b5-Db; Thu, 18 Sep 2025 20:20:55 +0000
-Received: by outflank-mailman (input) for mailman id 1126634;
- Thu, 18 Sep 2025 20:20:54 +0000
+	id 1uzYi4-00009j-2S; Fri, 19 Sep 2025 10:51:24 +0000
+Received: by outflank-mailman (input) for mailman id 1126817;
+ Fri, 19 Sep 2025 10:51:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/FRX=35=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
- id 1uzL7e-0006az-8J
- for xen-devel@lists.xenproject.org; Thu, 18 Sep 2025 20:20:54 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ <SRS0=BFOU=36=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
+ id 1uzYi1-00009Y-1f
+ for xen-devel@lists.xenproject.org; Fri, 19 Sep 2025 10:51:22 +0000
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f96efdab-94cc-11f0-9d14-b5c5bf9af7f9;
- Thu, 18 Sep 2025 22:20:53 +0200 (CEST)
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 880164EEBC46;
- Thu, 18 Sep 2025 22:20:52 +0200 (CEST)
+ id 91dafea5-9546-11f0-9d14-b5c5bf9af7f9;
+ Fri, 19 Sep 2025 12:51:19 +0200 (CEST)
+Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+ (authenticated bits=0)
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58JAnSkG034536
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 19 Sep 2025 19:49:28 +0900 (JST)
+ (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,196 +44,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f96efdab-94cc-11f0-9d14-b5c5bf9af7f9
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1758226852;
-	b=vjpKQbaf3xGJ4eYygWmgWWIY3Cfj5ZUQ31+14WyvhLcIrFWZ1GtT3kOHoPUOUoEyKMuy
-	 lFtji/ofr2hQhgEf5bgDYPgS7o+9adaxXUH25BomOQZ1HqDFNfnSe89Jx0D/535OQW0yO
-	 OQa/7RkOSDG0crVzIgdRuJ007nvmn7v2fmBTZwscf8k5fzDuB4p+BCtWaraaUWK/5VDs2
-	 Yk+45qB/apW6FgYEFo+TwKIzVUkFSfnAXo8y/mwayBKs+0lbmfWEtz0SNIdh8TC3nE2xE
-	 S6uS/WV7iHknGUxqe5D4A4lbVTlu0YzjjvGrFlduX2V9ZqJ5MQlMypYFFTgVqDpqDZnw6
-	 6dwkj2f+HYl3jlKS1IRF99luQWhvI0mwsDHxoOPMytkuqf6CUnGzAMJWNnh6vj/ibHcIK
-	 KeigVrG7UefiHk0XIRC9Q2na6+/zYRuCvsHQQbTrv0xFr4Gwr87wJOzYVb2MySgKHHsRD
-	 0ZsYj+6Kiehif94A2NUWKCgzEf6Pk0CsF45e8g6nvrhKhF3EzqjUxM9cxO1HzdxGH3lg2
-	 KgGRlI16P3P8mngGOQLMqGQsNN1tadFVJDhLIp00xNbXPxr+s31OeZj2ukD3PoKSwg9P2
-	 HLBbAMIx6XSZRqudG9mAn8PTmxA+GCHZkkhGs8qL/w0RZ6yHlpDvKa1d+wJGyCk=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1758226852;
-	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
-	 References:Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=24zUaynGRgP2C6h9wNbYiP2S+tmjDNyTWTI96tpvjXI=;
-	b=vc32Y/QN9mnFkyoFXJE70fiL8rQ/MzBGu/7T61F8nZ8/EvUFN6AglBWirmRzShrxOPEZ
-	 GLOJbF71vUZYvvpZLV0wbf0ZLf+3l6IXYyo+AaIGAjCMNuExx9KfV9YJNLwVn5hqY2OI5
-	 t4EygkJbZEc7Z9chw7sI90s48QWbWxbhBY1CxOx1KmQSnU8hM2Acr1G76InsspnLXUVht
-	 QIs5XvlHCm413BbOiTL6UEORBC1JtO7LkmOOF9S9q+bIpqzm5rz+yTRCOHIGbQOIUKjtQ
-	 1jIgA97ZMGMNf4BgtNMcmzv7ae8bcVS93z1/2OJ/FqVt6uoFuQnCZ75I05qFq+pt/rqcR
-	 f8RoDmIlWth17/Px5LrWBBf5Wnq+1xWvFzV9vrKBAuJ+BMR/DJC/lHRtg7wHqMNmSJpjH
-	 feevp1xPjIrTILZenKYnFJgTDNm1xFk+jN/EVymBjp0PaqoP4NqpVy436JaOwIczo4f6a
-	 voi0Eu1P0J9thJsibju/twA+e26BzvF5CgJc3VSczQTSAfs9s/CQGbKSRo03uLPwvxEe7
-	 hwGleR4Fb8yfqagKFkdtejoGfCAXbBqu2wrafs3klJJbwaKSOe3CeeCC2z+xefIvRuZeL
-	 SMe8IN9q8EDTpyAeflEuIGXGUZFVPDr8c0Hr6hrhH3STCdv5pAx94n2Stm8Lk8o=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
-	t=1758226852; bh=6iIra69cuzKV3VJWr1RJqp2ftMdT2ygbviSgAOwwgEI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=NrNpXRuHSVbhi7tVk3H2UX+FPADPefL+Lyc0SamHPBMqNS70m8ElQOMPujffbLg4C
-	 sAC9ce9QZuGoYeoN9Fk+aTIOoHO84LzU+OmoYrwonMllK6POsPabrnOJuZxhjWBq3H
-	 jLKUCwZvfRq2AV/wX+kt9EgaqKmCoyDlrbbP0Yc6K9KtE3n9DfOrlIlLJKjRvG0DlF
-	 zWpQ0hKxt9GElbRHho05xaDrG83loJ8I8X+JgPFM7vEp67zTGsK8KeQwblPaJa+wCA
-	 YNMGDSp2GZfceKTuVyPaF5FVDo8aPQVxnDl3pULSIoLEtvHNmKUWviQC+lI9Jen25Q
-	 0X9rC5VESMwwA==
+X-Inumbo-ID: 91dafea5-9546-11f0-9d14-b5c5bf9af7f9
+DKIM-Signature: a=rsa-sha256; bh=MP/aWQfL5AeteLs3iYOvs5XOjlgtCOWSBWzrwpTeLHA=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=Message-ID:Date:Subject:To:From;
+        s=rs20250326; t=1758278969; v=1;
+        b=S5fu8gfxZZiPnzD5VRHNv/uTY6iJWyIUwLazMNVUmCBeynHTUOA2iEgcOHc6KflY
+         emqbX/bQhivXM0ZJTrM3Kdix317VEnNTLuR55r4BD6CCS2KsNV+u6uR2Gu2MeHSQ
+         lBZ4MUkNXjzKLJFzzUPNWcYrBs4hFzvr5zRMtUKMo/3Etb6/jheULNi1cf88hRVF
+         09KetWzajL11CS43aTEF5Ibb+gEZWvRrpGktxAm4fHCDTmcDcDa8Ov/Q3dITg4E+
+         n588HfUKfhFonV0Thdy6AMTm3LydrhGYm0/d08ebrVqGb/oTCwq/Tj1NiNFxZ9K/
+         VBUOfiYyB4m/Du6sv1fF7Q==
+Message-ID: <10834681-260f-4727-9687-77b3eef085bb@rsg.ci.i.u-tokyo.ac.jp>
+Date: Fri, 19 Sep 2025 19:49:27 +0900
 MIME-Version: 1.0
-Date: Thu, 18 Sep 2025 22:20:52 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: victorm.lira@amd.com
-Cc: xen-devel@lists.xenproject.org, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3r?=
- =?UTF-8?Q?ecki?= <marmarek@invisiblethingslab.com>, Anthony PERARD
- <anthony.perard@vates.tech>, Doug Goldstein <cardoe@cardoe.com>, Stefano
- Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v1] automation: edit pipeline to prevent running
- non-selected jobs
-In-Reply-To: <1437334569e10b76d1d7dc4e9fca7c25606855fb.1756862843.git.victorm.lira@amd.com>
-References: <1437334569e10b76d1d7dc4e9fca7c25606855fb.1756862843.git.victorm.lira@amd.com>
-Message-ID: <bdd5b8e3711fed45325fe87bd2f68566@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] Do not unparent in instance_finalize()
+To: Peter Xu <peterx@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>
+Cc: qemu-devel@nongnu.org, Alex Williamson <alex.williamson@redhat.com>,
+        =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+        Eduardo Habkost <eduardo@habkost.net>,
+        David Hildenbrand <david@redhat.com>,
+        =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+        Richard Henderson <richard.henderson@linaro.org>,
+        Helge Deller <deller@gmx.de>,
+        =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Gerd Hoffmann <kraxel@redhat.com>, John Snow <jsnow@redhat.com>,
+        qemu-block@nongnu.org, Keith Busch <kbusch@kernel.org>,
+        Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>,
+        Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+        Nicholas Piggin <npiggin@gmail.com>, qemu-ppc@nongnu.org,
+        John Levon <john.levon@nutanix.com>,
+        Thanos Makatos <thanos.makatos@nutanix.com>,
+        Yanan Wang <wangyanan55@huawei.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Daniel Henrique Barboza <danielhb413@gmail.com>,
+        David Gibson <david@gibson.dropbear.id.au>,
+        Harsh Prateek Bora <harshpb@linux.ibm.com>,
+        Alexey Kardashevskiy <aik@ozlabs.ru>,
+        =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+        Fabiano Rosas <farosas@suse.de>, Thomas Huth <thuth@redhat.com>,
+        Laurent Vivier <lvivier@redhat.com>,
+        Peter Maydell <peter.maydell@linaro.org>,
+        Aurelien Jarno <aurelien@aurel32.net>,
+        Aleksandar Rikalo
+ <arikalo@gmail.com>,
+        Max Filippov <jcmvbkbc@gmail.com>,
+        =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+        Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+        Artyom Tarasenko <atar4qemu@gmail.com>,
+        Alistair Francis <alistair@alistair23.me>,
+        "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+        Bin Meng <bmeng.cn@gmail.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
+        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+        xen-devel@lists.xenproject.org
+References: <20250917-use-v3-0-72c2a6887c6c@rsg.ci.i.u-tokyo.ac.jp>
+ <aMwRSpezxmIwIHrU@x1.local> <f536fc18-73ab-676c-bdec-59e94a3e5408@eik.bme.hu>
+ <aMwxYY9E3QghD10K@x1.local> <aMxOM-XCamf2y8ke@x1.local>
+Content-Language: en-US
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <aMxOM-XCamf2y8ke@x1.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2025-09-03 03:49, victorm.lira@amd.com wrote:
-> From: Victor Lira <victorm.lira@amd.com>
+On 2025/09/19 3:23, Peter Xu wrote:
+> On Thu, Sep 18, 2025 at 12:20:49PM -0400, Peter Xu wrote:
+>> On Thu, Sep 18, 2025 at 05:29:34PM +0200, BALATON Zoltan wrote:
+>>> On Thu, 18 Sep 2025, Peter Xu wrote:
+>>>> On Wed, Sep 17, 2025 at 07:13:25PM +0900, Akihiko Odaki wrote:
+>>>>> Based-on: <cover.1751493467.git.balaton@eik.bme.hu>
+>>>>> ("[PATCH v2 00/14] hw/pci-host/raven clean ups")
+>>>>
+>>>> Could I ask why this is a dependency?
+>>>
+>>> It removes an address_space usage from raven so this series does not have to
+>>> change that and I don't have to rebase that series. Otherwise these are not
+>>> related. I'll check the problem reported about my series and send an updated
+>>> one.
+>>
+>> This series should be a split of a previous mixed up series that may
+>> contain address space changes while this one doesn't.  It also doesn't
+>> touch raven.c and ppc/.
+>>
+>> Can I then understand it as the dependency is simply not needed?
 > 
-> Filtering jobs using the selected jobs regex is missing for
-> qemu-export/yocto- jobs when running regular pipelines and eclair jobs
-> when running scheduled pipelines.
-> 
-> Add the missing rules to filter out those jobs, and set a default value
-> for the selected jobs regex to remove the need to always check if the
-> variable is empty.
-> 
-> Signed-off-by: Victor Lira <victorm.lira@amd.com>
+> I meant, it seems we don't need to wait for the other series to merge this
+> one, hence the there is no real dependency.
 
-Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com> # ECLAIR
+You are right. This series can be merged without the raven clean ups.
 
-If this goes in before [1] (which is likely), then I should rebase 
-because it will probably conflict
-
-[1] 
-https://lore.kernel.org/xen-devel/d4a0924c84e78b3f677b0d987c2f8e4b3f6b80a5.1758226234.git.nicola.vetrini@bugseng.com/T/#u
-
-> ---
-> example of the problem:
->   - 
-> https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/2018353899
->   - SELECTED_JOBS_ONLY=/alpine-3.18-gcc$/ should produce 1 job only
-> note:
->   - I tested only on sstabellini but the logic should work for 
-> hardware/staging
->     too
-> ---
-> Cc: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-> Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>
-> Cc: Anthony PERARD <anthony.perard@vates.tech>
-> Cc: Doug Goldstein <cardoe@cardoe.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: xen-devel@lists.xenproject.org
-> ---
->  .gitlab-ci.yml                    | 1 +
->  automation/gitlab-ci/analyze.yaml | 5 +++--
->  automation/gitlab-ci/build.yaml   | 9 ++++++---
->  3 files changed, 10 insertions(+), 5 deletions(-)
-> 
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 7974ac4e82..64bed300a6 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -2,6 +2,7 @@ variables:
->    XEN_REGISTRY: registry.gitlab.com/xen-project/xen
->    SELECTED_JOBS_ONLY:
->      description: "Regex to select only some jobs, must be enclosed 
-> with /. For example /job1|job2/"
-> +    value: "/.*/"
-> 
->  workflow:
->    name: "$CI_PIPELINE_SCHEDULE_DESCRIPTION"
-> diff --git a/automation/gitlab-ci/analyze.yaml 
-> b/automation/gitlab-ci/analyze.yaml
-> index d507210067..1f58e13cb2 100644
-> --- a/automation/gitlab-ci/analyze.yaml
-> +++ b/automation/gitlab-ci/analyze.yaml
-> @@ -31,8 +31,7 @@
->    rules:
->      - if: $CI_PIPELINE_SOURCE == "schedule"
->        when: never
-> -    - if: $SELECTED_JOBS_ONLY && $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
-> -    - if: $SELECTED_JOBS_ONLY
-> +    - if: $CI_JOB_NAME !~ $SELECTED_JOBS_ONLY
->        when: never
->      - if: $WTOKEN && $CI_PROJECT_PATH =~ /^xen-project\/people\/.*$/
->        when: manual
-> @@ -126,6 +125,8 @@ eclair-ARM64:
->    rules:
->      - if: $CI_PIPELINE_SOURCE != "schedule"
->        when: never
-> +    - if: $CI_JOB_NAME !~ $SELECTED_JOBS_ONLY
-> +      when: never
->      - !reference [.eclair-analysis, rules]
-> 
->  eclair-x86_64:on-schedule:
-> diff --git a/automation/gitlab-ci/build.yaml 
-> b/automation/gitlab-ci/build.yaml
-> index ab5211f77e..b2f96c1fe0 100644
-> --- a/automation/gitlab-ci/build.yaml
-> +++ b/automation/gitlab-ci/build.yaml
-> @@ -226,6 +226,9 @@
->        - binaries/
->      when: always
->    needs: []
-> +  rules:
-> +    - if: $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
-> +      when: manual
-> 
->  .yocto-test-arm64:
->    extends: .yocto-test
-> @@ -261,6 +264,9 @@
->  .test-jobs-artifact-common:
->    stage: build
->    needs: []
-> +  rules:
-> +    - if: $CI_JOB_NAME =~ $SELECTED_JOBS_ONLY
-> +      when: on_success
-> 
->  # Arm test artifacts
-> 
-> @@ -468,20 +474,17 @@ yocto-qemuarm64:
->    extends: .yocto-test-arm64
->    variables:
->      YOCTO_BOARD: qemuarm64
-> -  when: manual
-> 
->  yocto-qemuarm:
->    extends: .yocto-test-arm64
->    variables:
->      YOCTO_BOARD: qemuarm
->      YOCTO_OUTPUT: --copy-output
-> -  when: manual
-> 
->  yocto-qemux86-64:
->    extends: .yocto-test-x86-64
->    variables:
->      YOCTO_BOARD: qemux86-64
-> -  when: manual
-> 
->  # Cppcheck analysis jobs
-> 
-> --
-> 2.50.GIT
-
--- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+Regards,
+Akihiko Odaki
 
