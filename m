@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63302CAC5AE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AEFCAC5B3
 	for <xen-devel@archiver.kernel.org>; Wed, 24 Sep 2025 04:39:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1128837.1469053 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1128839.1469071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1HHy-0004BR-A2; Wed, 24 Sep 2025 04:39:34 +0000
+	id 1v1HHz-0004aP-99; Wed, 24 Sep 2025 04:39:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1128837.1469053; Wed, 24 Sep 2025 04:39:34 +0000
+Received: by outflank-mailman (output) from mailman id 1128839.1469071; Wed, 24 Sep 2025 04:39:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1HHy-0004At-3l; Wed, 24 Sep 2025 04:39:34 +0000
-Received: by outflank-mailman (input) for mailman id 1128837;
- Wed, 24 Sep 2025 04:39:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1v1HHz-0004XL-2I; Wed, 24 Sep 2025 04:39:35 +0000
+Received: by outflank-mailman (input) for mailman id 1128839;
+ Wed, 24 Sep 2025 04:39:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1tVB=4D=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1v1HHw-0003tj-3L
- for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 04:39:32 +0000
+ id 1v1HHx-0003tk-34
+ for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 04:39:33 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7478f1a8-9900-11f0-9d14-b5c5bf9af7f9;
- Wed, 24 Sep 2025 06:39:30 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 73fc3e63-9900-11f0-9809-7dc792cee155;
+ Wed, 24 Sep 2025 06:39:29 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58O4bSmt091795
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58O4bSmx091795
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 24 Sep 2025 13:37:39 +0900 (JST)
+ Wed, 24 Sep 2025 13:37:41 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,24 +44,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7478f1a8-9900-11f0-9d14-b5c5bf9af7f9
-DKIM-Signature: a=rsa-sha256; bh=stt1PYHjZPmmH11DgDaK1e3bftbIHLz7TmtRdVRF/9A=;
+X-Inumbo-ID: 73fc3e63-9900-11f0-9809-7dc792cee155
+DKIM-Signature: a=rsa-sha256; bh=p0MeB9ovOb3PqHuXUYX0hwqcDvAIFVXeIlzsht53Eeo=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758688659; v=1;
-        b=lKHDilw5Fq1/cnZFtWrkLQsf0wSND4A4CU0I4JhwbBbzg1lFKYlm5Q6wiWuBCtxG
-         CBRYgMu6tQ2BVB7pBZ4GKpjKjWSZFTvVUm0oTmudZfXEsN8GNwYfzHYCC7V2sEjn
-         SWwyuMCezPLlRWJoNUlfxXyyK+NclfnGNRTrHEZnjUWn2czlf+auXXMRtpwS0RGD
-         0eOCj+jtWsvogScD6U0vQbVzanTlRUywY+cLXorEA1hhfKVYP1sH1Uj43IJdxQUo
-         kvY6GCE+/eIZjhpVu+LCvIvEwMqhx+YtYzSwQh4kYV8v9fTB/B5MDHg2SQtUp3+c
-         sOnfgKokiFWh2MNIuOFJvA==
+        s=rs20250326; t=1758688662; v=1;
+        b=LTCUXD0uGPlzR8Pa60OGDZF2aSHGue6kyd2Ye2fG7uK+uilOq14/6lNS7XZ/MHqv
+         yeCEKtcHEdSgIBWEK4yEhreziwwT8hweA32gXhao6fR4WuxoVV0pwTW0YcjgGRze
+         zKqRaeiZWcNTHJ5YL/kY3ezAkhJqQKVftt29SWB+FTHQ4fmIwizwua2Wpzll4YcY
+         86gZkXM5JmqpjsvX87KMH6S7y6t4iKQsv0kklqPtbfd3AGZFovDPCWJMZhAdf3LQ
+         rog7FQrQ9kJVXn4NHY3cRcUM0z+5AIUkP+GOPIp2VghG3n3bZLeUQoo920VLYnFc
+         skkyPiU+ovb54jjVOFps8Q==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 24 Sep 2025 13:37:20 +0900
-Subject: [PATCH v4 1/7] docs/devel: Do not unparent in instance_finalize()
+Date: Wed, 24 Sep 2025 13:37:24 +0900
+Subject: [PATCH v4 5/7] hw/sd/sdhci: Do not unparent in instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250924-use-v4-1-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250924-use-v4-5-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250924-use-v4-0-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250924-use-v4-0-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -118,53 +118,27 @@ callback of the parent gets called, so object_unparent() calls in
 the callback will refer to objects that are already unparented, which
 is semantically incorrect.
 
-Remove the instruction to call object_unparent(), and the exception
-of the "do not call object_unparent()" rule for instance_finalize().
-
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- docs/devel/memory.rst | 17 ++++++-----------
- 1 file changed, 6 insertions(+), 11 deletions(-)
+ hw/sd/sdhci.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/docs/devel/memory.rst b/docs/devel/memory.rst
-index 42d3ca29c431..11858543f256 100644
---- a/docs/devel/memory.rst
-+++ b/docs/devel/memory.rst
-@@ -165,17 +165,14 @@ and finalized one by one.  The order in which memory regions will be
- finalized is not guaranteed.
+diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
+index 3c897e54b721..89b595ce4a5a 100644
+--- a/hw/sd/sdhci.c
++++ b/hw/sd/sdhci.c
+@@ -1578,10 +1578,6 @@ static void sdhci_sysbus_finalize(Object *obj)
+ {
+     SDHCIState *s = SYSBUS_SDHCI(obj);
  
- If however the memory region is part of a dynamically allocated data
--structure, you should call object_unparent() to destroy the memory region
--before the data structure is freed.  For an example see VFIOMSIXInfo
--and VFIOQuirk in hw/vfio/pci.c.
-+structure, you should free the memory region in the instance_finalize
-+callback.  For an example see VFIOMSIXInfo and VFIOQuirk in
-+hw/vfio/pci.c.
+-    if (s->dma_mr) {
+-        object_unparent(OBJECT(s->dma_mr));
+-    }
+-
+     sdhci_uninitfn(s);
+ }
  
- You must not destroy a memory region as long as it may be in use by a
- device or CPU.  In order to do this, as a general rule do not create or
--destroy memory regions dynamically during a device's lifetime, and only
--call object_unparent() in the memory region owner's instance_finalize
--callback.  The dynamically allocated data structure that contains the
--memory region then should obviously be freed in the instance_finalize
--callback as well.
-+destroy memory regions dynamically during a device's lifetime, and must
-+never call object_unparent().
- 
- If you break this rule, the following situation can happen:
- 
-@@ -201,9 +198,7 @@ this exception is rarely necessary, and therefore it is discouraged,
- but nevertheless it is used in a few places.
- 
- For regions that "have no owner" (NULL is passed at creation time), the
--machine object is actually used as the owner.  Since instance_finalize is
--never called for the machine object, you must never call object_unparent
--on regions that have no owner, unless they are aliases or containers.
-+machine object is actually used as the owner.
- 
- 
- Overlapping regions and priority
 
 -- 
 2.51.0
