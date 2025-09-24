@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD389CAC5A5
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Sep 2025 07:59:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1129031.1469163 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A80CAC5B3
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Sep 2025 07:59:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1129034.1469181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1KPR-000825-E2; Wed, 24 Sep 2025 07:59:29 +0000
+	id 1v1KPS-0008IJ-I0; Wed, 24 Sep 2025 07:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1129031.1469163; Wed, 24 Sep 2025 07:59:29 +0000
+Received: by outflank-mailman (output) from mailman id 1129034.1469181; Wed, 24 Sep 2025 07:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1KPR-00081y-9v; Wed, 24 Sep 2025 07:59:29 +0000
-Received: by outflank-mailman (input) for mailman id 1129031;
- Wed, 24 Sep 2025 07:59:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v1KPS-0008Gl-99; Wed, 24 Sep 2025 07:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 1129034;
+ Wed, 24 Sep 2025 07:59:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A4Db=4D=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1v1KPP-0007np-Ab
- for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 07:59:27 +0000
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c201::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 631d4f55-991c-11f0-9809-7dc792cee155;
- Wed, 24 Sep 2025 09:59:25 +0200 (CEST)
+ id 1v1KPQ-0007no-Ne
+ for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 07:59:28 +0000
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20f::7])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 64a08838-991c-11f0-9d14-b5c5bf9af7f9;
+ Wed, 24 Sep 2025 09:59:27 +0200 (CEST)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by AS8PR03MB8118.eurprd03.prod.outlook.com
- (2603:10a6:20b:445::19) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:102:30d::12) by DU5PR03MB10523.eurprd03.prod.outlook.com
+ (2603:10a6:10:525::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.9; Wed, 24 Sep
- 2025 07:59:20 +0000
+ 2025 07:59:24 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9137.018; Wed, 24 Sep 2025
- 07:59:19 +0000
+ 07:59:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,35 +49,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 631d4f55-991c-11f0-9809-7dc792cee155
+X-Inumbo-ID: 64a08838-991c-11f0-9d14-b5c5bf9af7f9
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sWE/BPUjP/H8ZNFgxR2g2q2ZlTAIEnW92LYsMR3FaZSNVN0w2P76P3WVs61I6/hyfsG3kdqr2EgpSh7nJi5bitAryGwC8D0ZFUKn+4uYDXvUC7zUgNguyzpPECguZ0aeCL6EJHsc+IyvnP1EQUufcm2hUo+oLGeCH64Uoh1bhNhVfjxxAy3Y5rJugTLBPU4JKkpkVCpWnn9UGcm6TS864xxjp9fx4pG9wKhbYI3WUrpsIL7l1K8aC6Y48Fkpyzn89U6GQUFsP5lqlc5yUTtVPAIlt8jeDibBlqawgJF5b/1uHX3NqSyBKernMzxgQvh0t5oHeQZoc3bZ9EDQ7loUeg==
+ b=FMnuVJZDifYgnpS9h+mWCmdkgTsbGpz1inOaM2EUWY0xtWeKVKeWFV8p0KWRdwUFD4SuW/JBu42bbPDGKGKSr8pH8LyTvWLJugRj3A+4F9X35sEjKaRpgSq67DUKkJzgcUOU5tPk0nOi2ncncvuwFp3CTcfMhG4d6T4tmxI1gt/0/em+ZlBCRgAw9aCII9o9fH0tEIHnVyapoL4juMOJfvDWRq2kiAYrvgLc1uWCuQz9W2VDn75NLfMdxtAOvqsOqV7b0CvYxEFqWzJnsC91Mr8Y3Ix4Logej3AfV5wPzHRek2nDAyHjBabNZWDC8xU2A/IJO+vcA6NMEg+3cKsEEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qTwXTNysux3iP3L58FkRp17XcK5UFJFmSy4ETHEy7e4=;
- b=Jdc/u+LXuaa+gkEE3YaMRYF2Sqy6mHkuXAfSNx83qsM7i9fCW9vPDJAJzQlcQNHCtL26EgMplmwyYPEy8dBCDlWMg8Ri9BnKtWmq22YHZwtqLa6EuFTW1jF9mQuAJQeNxN2pSi1fyL3wBT+AJip5s4x656UMfWo18+fT3gdytpy9o8vJ45/Z9HK/PAnGe23AZLLJiK++QUt5fhevwTejDzYVBdRWPnw5c+yl0sGGjIdV7W/rLgcn8Idr17AI+rl5jinPoXQQwu59UQdzD8m1XNi79tKGoU1teii+zhrStNvujWDQ/QXYWR/EJn/R7hSvny7eDdCOs8sAm//7BCczsg==
+ bh=bmIJngmNAJaHcrvOaGKlWpNmiqsAzrA72rwaTEJwhf4=;
+ b=EW+e3XunmQdPLn4KblXb1cpeM+SClHC670JtW12hX2rR2wxGITwnCKg4RDq9GaIN5leVdvxr7Z2l7a3obu8eyd2bol0h1UKVI5BEhuZ4bjf6IzGwdqxzWRZ2BySwEHzszok6uAkBUqJmmflSnpfTd+iY6d2DsEkB0j6OZFYQdL/XWysTJAxitml5+8uiQGqacb/0UGDnQ+XchHwq1YCoOv5KmfZX2t7x27aBlvvYoT1P8cBT/s/rlGKgdNqKYuyWd616TXVrNgw1P9z1i6prQ648ZpcOta69g0GqiezV6TCxBGjfqNcY8llM7e5sIFvIXmmDdTnHzsMlk6aQXyQ4nw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qTwXTNysux3iP3L58FkRp17XcK5UFJFmSy4ETHEy7e4=;
- b=Sx/tQ9w5Lmd0XeoWNpfCkVC62eBQ/03KTP2szu8o3OFjs3YApAxHFE1JOEiqBu2w9sfInC008BcaUqzQrB7XIjhmNtHJuVcGsrcPb/K7FDlx+sg1z8s4Q2JFk2DlIhA4bbFDsCzt2xRPWQcDtE6WoTGKogb432PGwxhGBOOYsFUKDG1VK68KrQC1i8BAJHrWfS6Heh6Sm9HA/wM5TusgQVIPqWtfOTAHpUT9/PYTq2USr73IaLf4HS3HUsgNCh9EpQjrch25g4Eb5Ui3HqQZcNo38F/WDa4bR0L9P/8T1iBkUZCq+JrUkaSVpGyUV5XEIh8FLEQsvZec72bB+MfVKg==
+ bh=bmIJngmNAJaHcrvOaGKlWpNmiqsAzrA72rwaTEJwhf4=;
+ b=Oy00EC29OX4zWTTdaICK8G343JRM/8CkG8ynBqxZW++hdaVzuvNtKMQHa7ezea3vs4Z6c0/rH4Gb34tueceWeT44c+LxtgGHnRclxwAUToFgjXE16IfS+4CSO8yoau92cFNjEIR3VLkwZOPvWr8FCZi+uK8WLZeLNXFIOsizA+Fg/THa7sVoIwBHhRLPL8++X2eg3SLBmiDAVcyXn/inojsFGki8yUV5TIA/azJQfOBQI4YhTtGhqck/vd7EoD3TUszjCfmcD0tLpVa2MiTDFdU4VXp24Z7GNgjhBxtO0EvWICD+sDF7TQd3cIwLgKLeE5c5U+s6i98GxQz3ha6aRg==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
- Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 0/8] Implement PCI device enumeration on Arm part 1
-Thread-Topic: [PATCH v1 0/8] Implement PCI device enumeration on Arm part 1
-Thread-Index: AQHcLSkhRXSikUEA50SGGeDzHe8jnA==
-Date: Wed, 24 Sep 2025 07:59:19 +0000
-Message-ID: <cover.1758618839.git.mykyta_poturai@epam.com>
+CC: Luca Fancellu <luca.fancellu@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stewart Hildebrand
+	<stewart.hildebrand@amd.com>, Mykyta Poturai <Mykyta_Poturai@epam.com>
+Subject: [PATCH v1 7/8] xen/pci: assign discovered devices to hwdom
+Thread-Topic: [PATCH v1 7/8] xen/pci: assign discovered devices to hwdom
+Thread-Index: AQHcLSkkWmtwb4NRmEuuI8pQV3Va3w==
+Date: Wed, 24 Sep 2025 07:59:23 +0000
+Message-ID:
+ <ee305fc5b277060a3ae3c7fb26cea6b34920048f.1758618839.git.mykyta_poturai@epam.com>
+References: <cover.1758618839.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1758618839.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -85,71 +87,72 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|AS8PR03MB8118:EE_
-x-ms-office365-filtering-correlation-id: b18ece0f-493f-4507-aa48-08ddfb404432
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DU5PR03MB10523:EE_
+x-ms-office365-filtering-correlation-id: 86aae18c-4bfd-482b-066d-08ddfb4046ce
+x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?37kzeYOjchjULRONejyV1WvlPhV7+IzF+vJK6MEmqYOnlZIn6rIWQStu/R?=
- =?iso-8859-1?Q?D8mTgdWZ5m4RwAd3Rpvkl2VQmZAO+GY5PHH0q28GQUJ787H2q6xTsZQRHL?=
- =?iso-8859-1?Q?5h9ucY5Nwo6WL/D4Ta2tKUh1TlFksDJT+HFawKd1jY4OkzWHx/syM90zdz?=
- =?iso-8859-1?Q?LPVlQLA0c24CfvBn/b7yiNX509PrsbUNEYm8lc3ulL9zJuxeP0L0zGO0xO?=
- =?iso-8859-1?Q?D04/Nt/V3nXstmY3g8VFaSSTdGV4qjzsoTZzrEUuJ93w8AktLy5R0fcieR?=
- =?iso-8859-1?Q?31QKA1k+zAidtQ5rBj0x6IakRGEXz+PWI4xagRhcqbb860Pn5rfvu+8kkn?=
- =?iso-8859-1?Q?Wtdx/tdYjk9C8ITMz4IN0UUd1EHEQtfhJAce6v5SnLgPqfGndwXh0l8bqu?=
- =?iso-8859-1?Q?6zfTGpol+o7Ycqsf5wDYkCa7bNdyKzKBTROe9ZPeVpbQkdq3fgMHtlG4Wz?=
- =?iso-8859-1?Q?OE2Lh/pw4UExC5YOOq6fpMJQLDZqj+tEvGq22ciqDvQiiqbFNwGgf/2vCg?=
- =?iso-8859-1?Q?gKvobiAZdOc6AXgprr+dDXkzaFU1l5UItjRaSwP1xMOB3pNo5Wi3Desbr0?=
- =?iso-8859-1?Q?KEyMAiLB43AOhMXOeb0GBgSOv0So3WvgKmlpkveUCaQL13JGSoKXkcWsim?=
- =?iso-8859-1?Q?U922d2cf4DYcieu1/iCZOI4vz+GpJ6wQHb8qnoKTVw0HrxzeelRz8dKwid?=
- =?iso-8859-1?Q?LiMPIwl0XCC2w18kSLyqTZqvnjgLt4ZWU2piPa1tyBESFWe2PEgG1lbgK1?=
- =?iso-8859-1?Q?dO2nuZWOD4u2U8FzboLXPaDBc24/ymQfuwtSMBHe4oaYx+ZMveF1ITRxd6?=
- =?iso-8859-1?Q?G2E5LqFNZXBZ6H7mDGBBrMGlHYJ4xKhBD1WEvMTyCRtnzDFhXrYsUyIMPw?=
- =?iso-8859-1?Q?Rshbij3iy50FsFxGO0HNMa2DhBaNUdl1VuLK8x/2VdAZ5GZuhuGIdOyah/?=
- =?iso-8859-1?Q?HAKA7wvVzJvbTtpuCZDoJKPp4n7r9E16W1DBPL8k7c3SWgOkWuFR4NRsUN?=
- =?iso-8859-1?Q?O9BB9WmiWoOiwdSIy1Oi16naBOBNrIGSS962Ms7vMfTPH6cpat6ozOCXXn?=
- =?iso-8859-1?Q?uVRE4MVRqIf9sUecEyICVgKw5I0uTNMaE6hfGrjw95B5a9o4+foOb0hBFh?=
- =?iso-8859-1?Q?cUMw+OfcqbqoxaG2SklbbV77s23fnR3J4Q5fA+SOGwsr7iSpckj4jXmizp?=
- =?iso-8859-1?Q?MfuMEswqbVRv6gfTRIV5xUUQA0o7WslFk/vnuwGamrFt9zl5+qYuWIfGnB?=
- =?iso-8859-1?Q?Tga8OAuLuWa5og1BFlWu+Fffgo2VQ4wnpzvFX9DvJsZO3ew1tBKU/1R8VA?=
- =?iso-8859-1?Q?8vXZkGYDB887XuGFPs1iVq2ogaj6iTCYQfW3h2W14jCYqJZPkI2j7i06A/?=
- =?iso-8859-1?Q?q/NqdVHy9Rcn1bXiZthYoBGutS8jsnljgGAVU3EtwK43PzN0J6j+CmU9DV?=
- =?iso-8859-1?Q?b0cSCjJhRV7aEHGOCPSZbRwH3coDeYS/0i+qJAIa/dz/shwdB6fH2UilJQ?=
- =?iso-8859-1?Q?3wPJkTI3d7N3b5xZYdIg/wz1mVOVD1wZRVXnYrHi38Bj3QEzge7R36Mj0L?=
- =?iso-8859-1?Q?kb3gd64=3D?=
+ =?iso-8859-1?Q?qxEiTwlwFFx4/qtbMvl8Ej/2UaYGeZq7aZhNpqL7VbTtFsBOrDVT7gyGrM?=
+ =?iso-8859-1?Q?TxagX6frc4BJNc7XWVvWD2w1dKMYbdJBlnQjc2RYMVRZZrjWbwa798Skrg?=
+ =?iso-8859-1?Q?R9BYjDvfJ94kd9GECb5VkIKTJvNfZfO8dD6P4fBs8etyrFsDfjr1R033l+?=
+ =?iso-8859-1?Q?hMhL/QPMz4dJz0yZ/8EnzCVWNvtbwpMVpTqBvjlBhqNi8ggFeS+IUI5Nxy?=
+ =?iso-8859-1?Q?5L4fVStZsE/7ipk5vgV87GzBBpU8zWsE5a7Pcy+IYnb6swukQMtVqyhomt?=
+ =?iso-8859-1?Q?Uh9pSCwHMhmG+KsCDJTmOb2kV1MZ4tmH2xA2QmtzpP1hz4VGWyq0vAcFp7?=
+ =?iso-8859-1?Q?R6N+0t5PJ/jARIcO61I4/EYxvhqD1EWbC00U++CNYI6NIv+3N9kiHE2vl1?=
+ =?iso-8859-1?Q?2C1T0bH/eJsJcQ6oRtag23EghcILuMPbNlAorF2MDUgX/KuwIFKxU0m5mP?=
+ =?iso-8859-1?Q?hXCuQm/o0MihOdxVS+TscEOd2RRxG7vFh5nezBEZIpX8ErtjTtWyv83N7w?=
+ =?iso-8859-1?Q?F3jX6hoR5Pyo/ml04s7cdHS0Azh0lxACGh+Y0ltd4yGCnaiJdc1t+ogcv3?=
+ =?iso-8859-1?Q?xF8F6+s7ctCA1VILUsdEwqDNPcNZovlN1NW2ewCL2/OWRAvhTreCxnZtBF?=
+ =?iso-8859-1?Q?l4zrhypJK/2xMYwCqsV8xiTPFgECBX4L3o2v72nGwxIM+dNfAAmeO1Jqew?=
+ =?iso-8859-1?Q?t2QKPAMw4yDO6TyEypFX2kzQxYGQNqdlKioGMin+B5+RsjyYleyVZ9rLL6?=
+ =?iso-8859-1?Q?twHKFWgimQXT13nDHOjMtXDlJHoif+ZOK/+ZzVoaaO7U3xgN8jdrhEH6Fb?=
+ =?iso-8859-1?Q?OnM3o4ZiLwUu7ScCKVTYrFo4FpNiI/PLgE2f1uwrdkSJ/H4yDxxJU1/JMt?=
+ =?iso-8859-1?Q?j5LPULAwe1L3E2aDM/4JH2zoGw9oOsRa8uAha74CQKkuhSE0waG6+F2lHc?=
+ =?iso-8859-1?Q?ExaZ8rHO3PESBr24vYJTeNzIa7iRL3wUv5s6sl+0IRUkolm1PmmHKT/BGt?=
+ =?iso-8859-1?Q?JHRAJsT6DSyqUSzcWgz2xWI2ad7EtaeWYikAeNwjEn4I6eq/sRFMxmXahW?=
+ =?iso-8859-1?Q?7hJn8XG9p0GeNzMjNaBIKaw0XlNZ1Rk1hYoo2VJFdxSL95DB63S+A21apD?=
+ =?iso-8859-1?Q?66JjXrHE5p2Xbt6VniP3YdZi6VcqvbD2jEBpat5TBJzPsjVBn3brjR61jy?=
+ =?iso-8859-1?Q?336djYXFAozcwgiQc/XFqSp8KHLQ7ewB2HaA6VcXR1l5+LfeTN99qmgxC8?=
+ =?iso-8859-1?Q?A2eI7LEoOZ3tFR/XNmHV8ywADCOFPMwCJjYBlRxYv/dSxYLTEeLPIKEhUl?=
+ =?iso-8859-1?Q?bmYMRiPUNh7c7eROBsfW8y/Ke/V4oX01eEXj0fiXP+60tPULGEt7A5M1cr?=
+ =?iso-8859-1?Q?kQNsL4i7YfziUgN64UMVQjcBliJNzdmyVGmvBpQUnfyJulPmHS8TjzroZZ?=
+ =?iso-8859-1?Q?4YWo5wuhjlu2Utvvb7dd6SUGXAg/TXr2fowt3+zbtRmQqwrpo22S8MMAoD?=
+ =?iso-8859-1?Q?XG3Q7hl4qRpoV8JKv2F/MYQLZuL0Jj2RiEy1y9Oy2J4vFg/ro4IEAnYAOV?=
+ =?iso-8859-1?Q?e69WhQ4=3D?=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?3Ys2MrN8Zi5k6D6jZh8yWD9WZ6HYDN/DzEz56yobt2FoMZvtizbiXbyCEC?=
- =?iso-8859-1?Q?qHIAuKgouXCA9qX+/3jhi2Z6m4Pivvr59CHxIW8fYX2ajrHWtBN9+S0lMa?=
- =?iso-8859-1?Q?eBLWy2FMbi1r4LlwpJ9TVBWyQGc0ZDLjWJoXBoD0D+wR0sgJ4KEvxclKao?=
- =?iso-8859-1?Q?+oSBpbfD2cRrmDtyPzAVE2xIWs1SPHXo/IPdCXeN3sdF7ASxQucPXA6GXM?=
- =?iso-8859-1?Q?cc9UM/6dsyvhYwwDkUzvwsyFE4tarN6UKP+4wUHPztiOBUTeV2ikEV5TtU?=
- =?iso-8859-1?Q?QhffE5SwVa++tYKmorzt/sOvSJYWH3N63J9XF3LVhOEMpO/gLJC/d5hoP2?=
- =?iso-8859-1?Q?otYjIfb7g8lw3Q7sXVn0jP1nFXaaD/7lGq78Rep2ZmacSXNr3/HuB4NfXo?=
- =?iso-8859-1?Q?Zsk+mhbO4lcBvySsF51Tk9uKmGYTy0PSur0oKQWaxcSrBUXB0SQJwGq1bQ?=
- =?iso-8859-1?Q?vbc7+w82WKU5V2L2FXxB5KrusLrSwo+bJ1CJJr5/o54C1mcdvdUQIPeCwZ?=
- =?iso-8859-1?Q?1IsnOxUgyTY9L4/wXaNHDRxziO3+zdOagD1v08B40IS1stTzB+VLU35tq7?=
- =?iso-8859-1?Q?syfVlXTXVTnHyPH3l8ewGjBO30atYmoUZ2FVLCtfe00/7Qs/eMEobx974c?=
- =?iso-8859-1?Q?CghZhQVe4Crg/Qhp0ijIJ2Yo6WWUotA3y4l2S5MBR402oIZ4BxwYAgUIhm?=
- =?iso-8859-1?Q?1P2xMwW6VngdRdCtl6a+mblZT9n98KBI6BluH8IzoR/jjuBcaeYgJEo36V?=
- =?iso-8859-1?Q?D34gLUZ71FceVOCp3PtggPijqmH9axDVYwzwp5ySmKyS42L6rmCUcMU4XH?=
- =?iso-8859-1?Q?cYJVCLiNTtIeac7azZQgQ+roV7JdGo2xq5vTevuGua/y9R1p/JZWAnndom?=
- =?iso-8859-1?Q?eWBtTqf0lgCWinjbowG/p3zjuqphWt08gYxdzmBLj7BDkvpdUi+MKUXNIs?=
- =?iso-8859-1?Q?AAjv8wx0fexxnnjMpGo5EJtjQRrl9ewpxSaHNAA87Vxq8a/J3WzCX552NO?=
- =?iso-8859-1?Q?sQYpDuT5viXMkkvYEmNANGrweTUP/YDATuxs/dF6x25NyNitAEruVtN9WY?=
- =?iso-8859-1?Q?SIxv0FE08iUG/ccdCZE4/HADHwwZwthqBp+C+Rpv8VmArYeZ1tsz+Fcrw5?=
- =?iso-8859-1?Q?UVb3r9WdwLTSECss9piPih2mJ3h1Jf0h3cwZ7hP5YltkZsuCBt1Hxh5eAZ?=
- =?iso-8859-1?Q?BSAHxUAZupzcaAxlv5rSHeI/0TkhZKPbRmLn7YEsoQ5lLmlvUkPxz46xIH?=
- =?iso-8859-1?Q?dSqwJiaRumoUODvDPFFcAFkwwZt7b21TDN7ESaFlinrf6LdQ140W8Er0G8?=
- =?iso-8859-1?Q?VpzbfHLrJ0iVQTnz66gk2SN0Naa4IM8bu1l+78SfDgEw5fK0U+m83h0Bbp?=
- =?iso-8859-1?Q?IJTKudpVhjXcyGXpTnr+rd4jmdpD6paMeS8aIpnkLDPMHAasZlqNMfRZDB?=
- =?iso-8859-1?Q?ah+m0X+dI2bcgvuMnDQ5E/1jCHBR0TvCYN+CagDbjLbMCXF3UhESBqwrm0?=
- =?iso-8859-1?Q?HoowciFakRbn1TFxnHVrmqRxri5X2j/qrzBLZ5DLxMMRpWvnYv7clEYwRm?=
- =?iso-8859-1?Q?i8Dp8gqko6QKnZGcCVuot10w0zMhNM34f2Ffs/Cubs8OHMOCs2t9zb+GNP?=
- =?iso-8859-1?Q?hZ2IEobJYVe091hGsKQCa0a97SKew4PfRKxm/6NNmudzO5Pd6vf1BKLA?=
+ =?iso-8859-1?Q?OW7bShq5XUekY0H8Re+GjVliUP1fhorve3/jzr8ww/fIYGxEtgkllFj9bv?=
+ =?iso-8859-1?Q?JGVRm/lF32lh2YC37o1GFwX+2Ta5vjdAKHXd1jgA+967xj2eiKi+HG9mgd?=
+ =?iso-8859-1?Q?iQdxvLUhMBoWIXVhAYt9YU5wcVBjQtQ5FmgeXQCsx/0G8LcSMDrU2UkMB8?=
+ =?iso-8859-1?Q?xbQSBTTGAOBUBtwDVaZcjqEajn0dTX2awsb1BuYKes33Kwmi5b5wIofEIp?=
+ =?iso-8859-1?Q?kMwPSxqUyBv2wn1arGjHNMJhPpipHYT0Hu5C2bjylVIEX6tLmbm4fS/V2n?=
+ =?iso-8859-1?Q?spdosQmJV3iUnkRTzdGbo9qb/UinIN0jAA1Kq722G8lktEG3uMfVgbW0C5?=
+ =?iso-8859-1?Q?21Xw0Q6FGm1UESbeA75HoW7Ll5uHdaVRHJH4GkFUxpeqMUq/pzqoEbaV+h?=
+ =?iso-8859-1?Q?LU7MIE0ybZApzsHhm+KSa1vqJf/woEcZmV8tb3/IsT961IrelutH+qkQ7g?=
+ =?iso-8859-1?Q?h8AIhDjKL2yTPeLY8YmOqoPXv9O49fvvTC7Llh/fIXqf+VA+WYcDWx4Xta?=
+ =?iso-8859-1?Q?d0vJZAfC4NVMSoCdE/8qe2h++/vM+omRxXPoeeM52Qf5V5Ubm9mzSph6JK?=
+ =?iso-8859-1?Q?FtM0tGGdOdJabpcLT1oqHwT5iJP69XDDBAXIeVKg0Spb7pasuf/fL2AJ8c?=
+ =?iso-8859-1?Q?HLmCyuVZqxOiP9znzCrL6EBYrp+oEBwHMCutyNPNu4+nPPtZ5H3NJVBGSK?=
+ =?iso-8859-1?Q?B+dkfwwGViKmMNqkN49sMWKMJKttnrMjS1np3zFajRkkAQKxEPD3oA2wnX?=
+ =?iso-8859-1?Q?n2S+sTEyEErSmkjSNqBefcVW2ob3qiCSNzqbkcNvgjH6h9T5SLH/gDKhWH?=
+ =?iso-8859-1?Q?qJ2UFmyCGTt1BA0Hck8oKRNEDrJlOXF/odm8S74mwETIRt1jPj3/GKUni3?=
+ =?iso-8859-1?Q?8u0Hcnm+O/pzKL3WycDt9fltKqhtGXoqX1YpjV+kooy5CEHkX0IOdO0IdX?=
+ =?iso-8859-1?Q?XiodddtMW9/LPgmWhIR9on9adDHnXz5fIFX+EjVK8MvO60WrRITThuJzKM?=
+ =?iso-8859-1?Q?4B4KgJPRnjsCpb6WrqTbRr0vySX/u8DYQAJ4Wn19UnpgyNqKRnDGd1gJxb?=
+ =?iso-8859-1?Q?yIUw9jyWeB3GK2jSL2eU0l9CR5YZ9y/zwQnd+RMyH3U2o2mqVatV08OwOK?=
+ =?iso-8859-1?Q?5u09Y3jMQMLQRUirQQmp6hXkt0FPEyd+K8lqUEOfaJWf+H4GVL8MEhOQMC?=
+ =?iso-8859-1?Q?BrPNkEoyOpcMWOW21An6l5wVtrur2zYrV2gXAv1NPL2cyTxWOHdiRaF8Le?=
+ =?iso-8859-1?Q?H4KYPYQG2+4YpiqBrLmYViE4gIbaQjr8K61h4JaUTIHemS6rgoPWozHcOP?=
+ =?iso-8859-1?Q?Fo9/qrmwPRSpspMX4nBl97n5q/ItTpl8VeHEo4Fpe6w41do1s8wUuqzOaw?=
+ =?iso-8859-1?Q?kTClq0VdSJZlKiKnskAhK0G+TCpws0ThtMwF6VzBO6SHquMiE1X+YPXA25?=
+ =?iso-8859-1?Q?rFyiM85cymOuZAeAxGnCW7VeN3jlT2Hp+U4FNaQVrxz6ysMWJE9i8a7XP7?=
+ =?iso-8859-1?Q?WHCA6k+1dUUzU8KH4CR+x/c1w5jc9BM9K0T223fYCF2XOnjjN/K9DQkQNr?=
+ =?iso-8859-1?Q?ihF8j4FpQbsLlV+sHTxt9AVXLycdStBu7LDK49KYhqX8HrxHWF21LV+Nbh?=
+ =?iso-8859-1?Q?7FTwNwmZKRT3ZCJHLb2K6qLbBFIkM2g2PRr2PZjqViTYxirt38fyH0lQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -157,78 +160,151 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b18ece0f-493f-4507-aa48-08ddfb404432
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2025 07:59:19.6428
+X-MS-Exchange-CrossTenant-Network-Message-Id: 86aae18c-4bfd-482b-066d-08ddfb4046ce
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2025 07:59:24.0356
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QaVwfiWjkts2MldqktCjTqHDhrnxUcgB1JIAxHwKUPchMMD7SUPBvgXnvcluxJmSHJNZsG1lyedcuiJvwJnVhQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB8118
+X-MS-Exchange-CrossTenant-userprincipalname: US9NGmlwluJ1fV72i9rCbwiqsP4olR6W6OaQbDwzfRL4R58Pk+CDW9/pdqneTd4e+3NBjt7V21GF638zZRBu4w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU5PR03MB10523
 
-This series adds basic PCI device enumeration in Xen on Arm. This will allo=
-w us
-to not rely on Dom0 enumeration for supported controllers, which will enabl=
-e PCI
-passthrough for dom0less setups.
+From: Luca Fancellu <luca.fancellu@arm.com>
 
-Enumeration is disabled by default and can be enabled with "pci-scan" cmdli=
-ne
-option.
+Hook up existing PCI setup routines for hwdom into Arm iommu
+initialization sequence, only assign endpoint devices.
 
-For now the discovered devices are only assigned to HW domain. To achieve t=
-his,
-several things need to be done:
-1. A VPCI node is created for HW domain device tree, and the real PCI nodes=
- are
-hidden from it.
-2. Discovered devices BARs are initialized.
-3. Register handles for VPCI are updated to change behaviour depending on
-whether or not the calling domain uses VPCI or HW PCI, instead of relying o=
-n
-is_hardware_domain()
-4. PCI physdev ops are disabled for HW domain using VPCI.
+During scanned PCI device assignment, also permit access to the BAR
+ranges if hwdom is using vpci.
 
-Edward Pickup (1):
-  arm/pci: Add pci-scan boot argument
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+---
+ xen/drivers/passthrough/arm/iommu.c |  9 +++++++
+ xen/drivers/passthrough/pci.c       | 40 ++++++++++++++++++++++++++++-
+ 2 files changed, 48 insertions(+), 1 deletion(-)
 
-Luca Fancellu (3):
-  xen/pci: update DT for hwdom when it uses vpci
-  xen/pci: disable pci_device_{add,remove} when hwdom uses vpci on arm
-  xen/pci: assign discovered devices to hwdom
-
-Mykyta Poturai (1):
-  arm/pci: enable vpci for hwdom when pci-scan is enabled
-
-Stefano Stabellini (1):
-  xen/pci: introduce has_vpci_bridge
-
-Stewart Hildebrand (2):
-  xen/dt: pass flags to callback in dt_for_each_range()
-  xen/pci: initialize BARs
-
- docs/misc/xen-command-line.pandoc       |   9 ++
- xen/arch/arm/device.c                   |   4 +-
- xen/arch/arm/domain_build.c             | 154 +++++++++++++++++++++++-
- xen/arch/arm/include/asm/domain.h       |   3 +-
- xen/arch/arm/include/asm/domain_build.h |   1 +
- xen/arch/arm/include/asm/pci.h          |  25 ++++
- xen/arch/arm/include/asm/setup.h        |   2 +-
- xen/arch/arm/pci/pci-host-common.c      |  83 ++++++++++++-
- xen/arch/arm/pci/pci.c                  |  24 +++-
- xen/arch/x86/include/asm/pci.h          |  20 +++
- xen/common/device-tree/device-tree.c    |   5 +-
- xen/common/rangeset.c                   |  35 ++++++
- xen/drivers/passthrough/arm/iommu.c     |   9 ++
- xen/drivers/passthrough/pci.c           | 119 +++++++++++++++++-
- xen/drivers/pci/physdev.c               |   6 +
- xen/drivers/vpci/header.c               |  14 +--
- xen/drivers/vpci/vpci.c                 |   4 +-
- xen/include/xen/device_tree.h           |   2 +-
- xen/include/xen/rangeset.h              |   6 +-
- xen/include/xen/vpci.h                  |   9 ++
- 20 files changed, 509 insertions(+), 25 deletions(-)
-
+diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/=
+arm/iommu.c
+index 100545e23f..d110520e0d 100644
+--- a/xen/drivers/passthrough/arm/iommu.c
++++ b/xen/drivers/passthrough/arm/iommu.c
+@@ -19,6 +19,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/iommu.h>
+ #include <xen/lib.h>
++#include <xen/sched.h>
+=20
+ #include <asm/device.h>
+=20
+@@ -133,6 +134,12 @@ void arch_iommu_domain_destroy(struct domain *d)
+ {
+ }
+=20
++static int iommu_add_hwdom_pci_device(u8 devfn, struct pci_dev *pdev)
++{
++    const struct domain_iommu *hd =3D dom_iommu(hardware_domain);
++    return iommu_call(hd->platform_ops, add_device, devfn, pci_to_dev(pdev=
+));
++}
++
+ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+ {
+     /* Set to false options not supported on ARM. */
+@@ -142,6 +149,8 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *=
+d)
+     if ( iommu_hwdom_reserved =3D=3D 1 )
+         printk(XENLOG_WARNING "map-reserved dom0-iommu option is not suppo=
+rted on ARM\n");
+     iommu_hwdom_reserved =3D 0;
++
++    setup_hwdom_pci_devices(d, iommu_add_hwdom_pci_device);
+ }
+=20
+ /*
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index 4f5de9a542..534faaaa84 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -20,6 +20,7 @@
+ #include <xen/pci_ids.h>
+ #include <xen/list.h>
+ #include <xen/prefetch.h>
++#include <xen/iocap.h>
+ #include <xen/iommu.h>
+ #include <xen/irq.h>
+ #include <xen/param.h>
+@@ -1040,6 +1041,12 @@ enum pdev_type pdev_type(u16 seg, u8 bus, u8 devfn)
+     return pos ? DEV_TYPE_PCIe_ENDPOINT : DEV_TYPE_PCI;
+ }
+=20
++static bool pdev_is_endpoint(struct pci_dev *pdev)
++{
++    enum pdev_type type =3D pdev_type(pdev->seg, pdev->bus, pdev->devfn);
++    return type =3D=3D DEV_TYPE_PCIe_ENDPOINT || type =3D=3D DEV_TYPE_PCI;
++}
++
+ /*
+  * find the upstream PCIe-to-PCI/PCIX bridge or PCI legacy bridge
+  * return 0: the device is integrated PCI device or PCIe
+@@ -1255,7 +1262,7 @@ static void __hwdom_init setup_one_hwdom_device(const=
+ struct setup_hwdom *ctxt,
+                                                 struct pci_dev *pdev)
+ {
+     u8 devfn =3D pdev->devfn;
+-    int err;
++    int err, i, rc;
+=20
+     do {
+         err =3D ctxt->handler(devfn, pdev);
+@@ -1276,6 +1283,34 @@ static void __hwdom_init setup_one_hwdom_device(cons=
+t struct setup_hwdom *ctxt,
+     if ( err )
+         printk(XENLOG_ERR "setup of vPCI for d%d failed: %d\n",
+                ctxt->d->domain_id, err);
++
++    if ( !hwdom_uses_vpci() )
++        return;
++
++    for ( i =3D 0; i < PCI_HEADER_NORMAL_NR_BARS; i +=3D rc )
++    {
++        uint64_t addr, size;
++        uint8_t reg =3D PCI_BASE_ADDRESS_0 + i * 4;
++
++        if ( (pci_conf_read32(pdev->sbdf, reg) & PCI_BASE_ADDRESS_SPACE)
++             =3D=3D PCI_BASE_ADDRESS_SPACE_IO )
++        {
++            rc =3D 1;
++            continue;
++        }
++
++        rc =3D pci_size_mem_bar(pdev->sbdf, reg, &addr, &size,
++                              (i =3D=3D PCI_HEADER_NORMAL_NR_BARS - 1)
++                                  ? PCI_BAR_LAST : 0);
++
++        if ( !size )
++            continue;
++
++        err =3D iomem_permit_access(hardware_domain, paddr_to_pfn(addr),
++                             paddr_to_pfn(PAGE_ALIGN(addr + size - 1)));
++        if ( err )
++            break;
++    }
+ }
+=20
+ static int __hwdom_init cf_check _setup_hwdom_pci_devices(
+@@ -1294,6 +1329,9 @@ static int __hwdom_init cf_check _setup_hwdom_pci_dev=
+ices(
+             if ( !pdev )
+                 continue;
+=20
++            if ( hwdom_uses_vpci() && !pdev_is_endpoint(pdev) )
++                continue;
++
+             if ( !pdev->domain )
+             {
+                 pdev->domain =3D ctxt->d;
 --=20
 2.34.1
 
