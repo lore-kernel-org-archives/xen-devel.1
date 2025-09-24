@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD771CAC59A
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Sep 2025 04:39:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1128838.1469060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E1C7CAC5A5
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Sep 2025 04:44:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1128902.1469093 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1HHy-0004LL-MI; Wed, 24 Sep 2025 04:39:34 +0000
+	id 1v1HMY-00082t-O8; Wed, 24 Sep 2025 04:44:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1128838.1469060; Wed, 24 Sep 2025 04:39:34 +0000
+Received: by outflank-mailman (output) from mailman id 1128902.1469093; Wed, 24 Sep 2025 04:44:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v1HHy-0004KW-FM; Wed, 24 Sep 2025 04:39:34 +0000
-Received: by outflank-mailman (input) for mailman id 1128838;
- Wed, 24 Sep 2025 04:39:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v1HMY-00082m-Kz; Wed, 24 Sep 2025 04:44:18 +0000
+Received: by outflank-mailman (input) for mailman id 1128902;
+ Wed, 24 Sep 2025 04:44:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1tVB=4D=rsg.ci.i.u-tokyo.ac.jp=odaki@srs-se1.protection.inumbo.net>)
- id 1v1HHw-0003tk-9s
- for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 04:39:32 +0000
+ id 1v1HMY-00082g-16
+ for xen-devel@lists.xenproject.org; Wed, 24 Sep 2025 04:44:18 +0000
 Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 737f76b0-9900-11f0-9809-7dc792cee155;
- Wed, 24 Sep 2025 06:39:28 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1f0acf47-9901-11f0-9d14-b5c5bf9af7f9;
+ Wed, 24 Sep 2025 06:44:16 +0200 (CEST)
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58O4bSn1091795
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58O4bSn0091795
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Wed, 24 Sep 2025 13:37:42 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
@@ -44,24 +44,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 737f76b0-9900-11f0-9809-7dc792cee155
-DKIM-Signature: a=rsa-sha256; bh=vi4sMCmLJjgfxvWMbOYby11DlXiXjOhpwer283mUMTs=;
+X-Inumbo-ID: 1f0acf47-9901-11f0-9d14-b5c5bf9af7f9
+DKIM-Signature: a=rsa-sha256; bh=ZLD6q50HK2lQwLzxRbQaSBBUwzyTsangDxSOgNJJx8I=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Date:Subject:Message-Id:To;
-        s=rs20250326; t=1758688663; v=1;
-        b=vMUFXDPYCmcF3lkI3BSe8blrWRLpmkSDNiuoijwb8afjg4NFFoXRVFRUcZKqSDWZ
-         UxyHm40QSJbHGmhdgwFt2tLNGNwgCN9rY3rBjQRTYhwEgeOZHxvqM8it4xuvLD2I
-         Y64/RVkv+TGrq1SHjZX01HPGzBAE1tXU/+8KZ9eiHUy+bjnBFdvJZGS56faG53Pm
-         ayjh52pqL+SyZAbZWvtUf/zdn43pa9CblMdEmFQi+w3kalRFalhT9Gcto4h5FPcD
-         kHSwZrG/MFphOqwon+RkDuWJB+7ep1P8/2N8JN+8Xus32JicITr97APzWeqPas3v
-         utrloMLlNHbmgml831WcIQ==
+        s=rs20250326; t=1758688662; v=1;
+        b=HoN1iIkjYTsHEWCTgud6NoTyf1nD5F3t22JXFPqbYILfMLp+Xrv09z7OyGyuwUSk
+         YYTcgI7g/+wZoGi91mRCqJFylcf+umFGGjaeZoaPi4MZwGG/W+j/T5X7jHjQYz6W
+         ZcIRQ+yOnar0zOtxrCDqHIvyOsXVRnI8GS8sclqgSjFxHKXsPZOliFvo2dR2qGyo
+         wwkcnvo1PhlyJ9qEjPaI+Ifqu5GIL1FKT++9yCSM6DDEEwNPND0Loz+98LE4Ta2b
+         7OfpePR7t1PFBMnbhLklDPAfrosOVAlQHA/niUjo66Ttb31aBuFGkLYkcPcWkWNW
+         jurSTzbiNvWzl9uoid98OQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 24 Sep 2025 13:37:26 +0900
-Subject: [PATCH v4 7/7] hw/xen: Do not unparent in instance_finalize()
+Date: Wed, 24 Sep 2025 13:37:25 +0900
+Subject: [PATCH v4 6/7] vfio: Do not unparent in instance_finalize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250924-use-v4-7-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250924-use-v4-6-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250924-use-v4-0-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250924-use-v4-0-07c6c598f53d@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -121,29 +121,63 @@ is semantically incorrect.
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/xen/xen_pt_msi.c | 11 +----------
- 1 file changed, 1 insertion(+), 10 deletions(-)
+ hw/vfio/pci-quirks.c | 9 +--------
+ hw/vfio/region.c     | 3 ---
+ 2 files changed, 1 insertion(+), 11 deletions(-)
 
-diff --git a/hw/xen/xen_pt_msi.c b/hw/xen/xen_pt_msi.c
-index 09cca4eecb1c..e9ba17317aba 100644
---- a/hw/xen/xen_pt_msi.c
-+++ b/hw/xen/xen_pt_msi.c
-@@ -637,14 +637,5 @@ void xen_pt_msix_unmap(XenPCIPassthroughState *s)
+diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
+index c97606dbf194..b5da6afbf5b0 100644
+--- a/hw/vfio/pci-quirks.c
++++ b/hw/vfio/pci-quirks.c
+@@ -1159,15 +1159,12 @@ void vfio_vga_quirk_exit(VFIOPCIDevice *vdev)
  
- void xen_pt_msix_delete(XenPCIPassthroughState *s)
+ void vfio_vga_quirk_finalize(VFIOPCIDevice *vdev)
  {
--    XenPTMSIX *msix = s->msix;
+-    int i, j;
++    int i;
+ 
+     for (i = 0; i < ARRAY_SIZE(vdev->vga->region); i++) {
+         while (!QLIST_EMPTY(&vdev->vga->region[i].quirks)) {
+             VFIOQuirk *quirk = QLIST_FIRST(&vdev->vga->region[i].quirks);
+             QLIST_REMOVE(quirk, next);
+-            for (j = 0; j < quirk->nr_mem; j++) {
+-                object_unparent(OBJECT(&quirk->mem[j]));
+-            }
+             g_free(quirk->mem);
+             g_free(quirk->data);
+             g_free(quirk);
+@@ -1207,14 +1204,10 @@ void vfio_bar_quirk_exit(VFIOPCIDevice *vdev, int nr)
+ void vfio_bar_quirk_finalize(VFIOPCIDevice *vdev, int nr)
+ {
+     VFIOBAR *bar = &vdev->bars[nr];
+-    int i;
+ 
+     while (!QLIST_EMPTY(&bar->quirks)) {
+         VFIOQuirk *quirk = QLIST_FIRST(&bar->quirks);
+         QLIST_REMOVE(quirk, next);
+-        for (i = 0; i < quirk->nr_mem; i++) {
+-            object_unparent(OBJECT(&quirk->mem[i]));
+-        }
+         g_free(quirk->mem);
+         g_free(quirk->data);
+         g_free(quirk);
+diff --git a/hw/vfio/region.c b/hw/vfio/region.c
+index d04c57db630f..b165ab0b9378 100644
+--- a/hw/vfio/region.c
++++ b/hw/vfio/region.c
+@@ -365,12 +365,9 @@ void vfio_region_finalize(VFIORegion *region)
+     for (i = 0; i < region->nr_mmaps; i++) {
+         if (region->mmaps[i].mmap) {
+             munmap(region->mmaps[i].mmap, region->mmaps[i].size);
+-            object_unparent(OBJECT(&region->mmaps[i].mem));
+         }
+     }
+ 
+-    object_unparent(OBJECT(region->mem));
 -
--    if (!msix) {
--        return;
--    }
--
--    object_unparent(OBJECT(&msix->mmio));
--
--    g_free(s->msix);
--    s->msix = NULL;
-+    g_clear_pointer(&s->msix, g_free);
- }
+     g_free(region->mem);
+     g_free(region->mmaps);
+ 
 
 -- 
 2.51.0
