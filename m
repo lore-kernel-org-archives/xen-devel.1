@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DDF2CCA468
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Sep 2025 12:08:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1132738.1470977 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA468CCA472
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Sep 2025 12:08:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1132741.1471008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Cfh-0007QG-Pl; Mon, 29 Sep 2025 12:08:01 +0000
+	id 1v3Cfj-00084w-Fb; Mon, 29 Sep 2025 12:08:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1132738.1470977; Mon, 29 Sep 2025 12:08:01 +0000
+Received: by outflank-mailman (output) from mailman id 1132741.1471008; Mon, 29 Sep 2025 12:08:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Cfh-0007Q9-Ml; Mon, 29 Sep 2025 12:08:01 +0000
-Received: by outflank-mailman (input) for mailman id 1132738;
- Mon, 29 Sep 2025 12:08:00 +0000
+	id 1v3Cfj-00084m-CB; Mon, 29 Sep 2025 12:08:03 +0000
+Received: by outflank-mailman (input) for mailman id 1132741;
+ Mon, 29 Sep 2025 12:08:02 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anthony@xenproject.org>) id 1v3Cfg-0007Pr-4u
- for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 12:08:00 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cfh-0007T0-W8
+ for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 12:08:01 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1v3Cff-00GXAu-2k;
- Mon, 29 Sep 2025 12:07:59 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cfh-00GXBN-2I;
+ Mon, 29 Sep 2025 12:08:01 +0000
 Received: from [2a01:cb15:80df:da00:e2a9:ff82:7bde:38cd] (helo=l14.home)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1v3Cff-004JHo-2o;
- Mon, 29 Sep 2025 12:07:59 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cfh-004JHo-2O;
+ Mon, 29 Sep 2025 12:08:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,16 +44,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=TkLeJKOy6W2+2/EbdbLvrKVsvOauvUqw0+FWVe+Qo5U=; b=KOPHVlCU3Hqbv1GIBsL7wMjXTv
-	EBRaUzQxZQgXdw61BgRWDOGSEIxKG3Ni7e1K4hs2/3tYGMc2TNr7puBHE5jNt9OjjpQNA81Lj18db
-	lC+EbSUedTHcoJd4JBhZ2E/r4fk8lkZPJotnr0B/jkn7nix9ZM20Z2njqhgFJclyZL2U=;
+	bh=j0zZ2dT1fhfsBSW2ysbdrRB/kmY03la1y9qVx0g8+RM=; b=SjVfFDflBZ610y32EMC0u0eAI6
+	mK2QfpMRNOXpBwQA3AdvIeCfnJXca8P/ioSjzurE3hO/XjNNSPXR+P415irJRrJ1UsYUb/Z7ej5/l
+	zANGZzVHg7GzNSlM697DMa5o8S8IqWiEEMUEP3vs+xeRPkI1M/0tBIGb7cnzez1Ip3JA=;
 From: Anthony PERARD <anthony@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH v2 1/8] tools/configure: Introduce deps on json-c lib for libxl
-Date: Mon, 29 Sep 2025 14:07:49 +0200
-Message-ID: <20250929120756.46075-2-anthony@xenproject.org>
+Subject: [XEN PATCH v2 3/8] libxl: convert libxl__json_object_to_yajl_gen to libxl__json_object_to_libjsonc_object
+Date: Mon, 29 Sep 2025 14:07:51 +0200
+Message-ID: <20250929120756.46075-4-anthony@xenproject.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250929120756.46075-1-anthony@xenproject.org>
 References: <20250929120756.46075-1-anthony@xenproject.org>
@@ -62,258 +63,280 @@ Content-Transfer-Encoding: 8bit
 
 From: Anthony PERARD <anthony.perard@vates.tech>
 
-To replace yajl.
+Convert yajl_gen to json_object from lib json-c.
 
-Introduce XEN_JSON_LIBS variable, to be able to remove "-lyajl" later.
-
-As a first step, the variable will have both or only -lyajl. Then
-commit "configure: Use json-c by default, fallback to yajl" will make
-a change to only have one or the other once the code is ready to build
-with only json-c.
+And make use of it in qmp_prepare_cmd(), which can be compiled with
+either lib.
 
 Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
 
 Notes:
     v2:
-    - Introduce $(XEN_JSON_LIBS) to contain either of -lyajl or -ljson-c or
-      both. At first, the variable will have both or only -lyajl, then
-      commit "configure: Use json-c by default, fallback to yajl" will make
-      a change to only have one or the other.
+    - In libxl__json_object_to_json_object(), when generating a
+      `json_object` from JSON_NUMBER, use json_object_new_double_s() instead
+      of json_object_new_string(). This way, the json-c implementation will
+      behave like the yajl one when number are bigger than int64, which is
+      very unlikely.
 
- config/Tools.mk.in        |   1 +
- tools/config.h.in         |   3 ++
- tools/configure           | 107 +++++++++++++++++++++++++++++++++++++-
- tools/configure.ac        |   6 ++-
- tools/libs/light/Makefile |   4 +-
- tools/xl/Makefile         |   2 +-
- 6 files changed, 117 insertions(+), 6 deletions(-)
+ tools/include/libxl_json.h        |   6 ++
+ tools/libs/light/libxl_internal.h |   7 +++
+ tools/libs/light/libxl_json.c     | 100 ++++++++++++++++++++++++++++++
+ tools/libs/light/libxl_qmp.c      |  53 ++++++++++++++++
+ 4 files changed, 166 insertions(+)
 
-diff --git a/config/Tools.mk.in b/config/Tools.mk.in
-index e47ac23d11..0037ad5a64 100644
---- a/config/Tools.mk.in
-+++ b/config/Tools.mk.in
-@@ -65,6 +65,7 @@ EXTFS_LIBS          := @EXTFS_LIBS@
- CURSES_LIBS         := @CURSES_LIBS@
- TINFO_LIBS          := @TINFO_LIBS@
- ARGP_LDFLAGS        := @argp_ldflags@
-+XEN_JSON_LIBS       := @YAJL_LIBS@ @libjsonc_LIBS@
+diff --git a/tools/include/libxl_json.h b/tools/include/libxl_json.h
+index f0b4871e0e..e2ef8151f0 100644
+--- a/tools/include/libxl_json.h
++++ b/tools/include/libxl_json.h
+@@ -15,12 +15,18 @@
+ #ifndef LIBXL_JSON_H
+ #define LIBXL_JSON_H
  
- FILE_OFFSET_BITS    := @FILE_OFFSET_BITS@
++#ifdef HAVE_LIBJSONC
++#include <json-c/json.h>
++#endif
++
++#ifdef HAVE_LIBYAJL
+ #include <yajl/yajl_gen.h>
+ #include <yajl/yajl_parse.h>
  
-diff --git a/tools/config.h.in b/tools/config.h.in
-index fe2a94cfc4..ed0042018d 100644
---- a/tools/config.h.in
-+++ b/tools/config.h.in
-@@ -27,6 +27,9 @@
- /* Define to 1 if you have the `fdt' library (-lfdt). */
- #undef HAVE_LIBFDT
+ #ifdef HAVE_YAJL_YAJL_VERSION_H
+ #  include <yajl/yajl_version.h>
+ #endif
++#endif
  
-+/* Use library json-c */
-+#undef HAVE_LIBJSONC
-+
- /* Define to 1 if you have the `lzma' library (-llzma). */
- #undef HAVE_LIBLZMA
+ yajl_gen_status libxl__uint64_gen_json(yajl_gen hand, uint64_t val);
+ yajl_gen_status libxl_defbool_gen_json(yajl_gen hand, libxl_defbool *p);
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index 062123eed4..5204cb8889 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -2234,9 +2234,16 @@ _hidden const libxl__json_object *libxl__json_map_get(const char *key,
+  */
+ _hidden libxl__json_object *libxl__json_object_alloc(libxl__gc *gc_opt,
+                                                      libxl__json_node_type type);
++#ifdef HAVE_LIBJSONC
++_hidden int libxl__json_object_to_json_object(libxl__gc *gc,
++                                              json_object **jso_out,
++                                              const libxl__json_object *obj);
++#endif
++#ifdef HAVE_LIBYAJL
+ _hidden yajl_status libxl__json_object_to_yajl_gen(libxl__gc *gc_opt,
+                                                    yajl_gen hand,
+                                                    const libxl__json_object *param);
++#endif
+ _hidden void libxl__json_object_free(libxl__gc *gc_opt,
+                                      libxl__json_object *obj);
  
-diff --git a/tools/configure b/tools/configure
-index 5abd44e21e..edd1701b2d 100755
---- a/tools/configure
-+++ b/tools/configure
-@@ -660,6 +660,9 @@ libnl
- LIBNL3_LIBS
- LIBNL3_CFLAGS
- argp_ldflags
-+YAJL_LIBS
-+libjsonc_LIBS
-+libjsonc_CFLAGS
- PTHREAD_LIBS
- PTHREAD_LDFLAGS
- PTHREAD_CFLAGS
-@@ -882,6 +885,8 @@ pixman_CFLAGS
- pixman_LIBS
- libzstd_CFLAGS
- libzstd_LIBS
-+libjsonc_CFLAGS
-+libjsonc_LIBS
- LIBNL3_CFLAGS
- LIBNL3_LIBS
- SYSTEMD_SLEEP_DIR'
-@@ -1633,6 +1638,10 @@ Some influential environment variables:
-               C compiler flags for libzstd, overriding pkg-config
-   libzstd_LIBS
-               linker flags for libzstd, overriding pkg-config
-+  libjsonc_CFLAGS
-+              C compiler flags for libjsonc, overriding pkg-config
-+  libjsonc_LIBS
-+              linker flags for libjsonc, overriding pkg-config
-   LIBNL3_CFLAGS
-               C compiler flags for LIBNL3, overriding pkg-config
-   LIBNL3_LIBS linker flags for LIBNL3, overriding pkg-config
-@@ -9624,6 +9633,99 @@ printf "%s\n" "$ax_cv_pthread_flags" >&6; }
+diff --git a/tools/libs/light/libxl_json.c b/tools/libs/light/libxl_json.c
+index 44ee6e213f..75b383ee14 100644
+--- a/tools/libs/light/libxl_json.c
++++ b/tools/libs/light/libxl_json.c
+@@ -631,6 +631,105 @@ const libxl__json_object *libxl__json_map_get(const char *key,
+     return NULL;
+ }
+ 
++#ifdef HAVE_LIBJSONC
++int libxl__json_object_to_json_object(libxl__gc *gc,
++                                      json_object **jso_out,
++                                      const libxl__json_object *obj)
++{
++    int idx = 0;
++    int rc, r;
++
++    switch (obj->type) {
++    case JSON_NULL:
++        *jso_out = json_object_new_null();
++        return 0;
++    case JSON_BOOL:
++        *jso_out = json_object_new_boolean(obj->u.b);
++        if (!*jso_out)
++            return ERROR_NOMEM;
++        return 0;
++    case JSON_INTEGER:
++        *jso_out = json_object_new_int64(obj->u.i);
++        if (!*jso_out)
++            return ERROR_NOMEM;
++        return 0;
++    case JSON_DOUBLE:
++        *jso_out = json_object_new_double(obj->u.d);
++        if (!*jso_out)
++            return ERROR_NOMEM;
++        return 0;
++    case JSON_NUMBER:
++        /*
++         * Use json_object_new_double_s() to rewrite the number exactly as
++         * we parsed it. When generating the JSON string the value `0` will
++         * be ignored and `obj->u.string` will be written instead.
++         */
++        *jso_out = json_object_new_double_s(0, obj->u.string);
++        if (!*jso_out)
++            return ERROR_NOMEM;
++        return 0;
++    case JSON_STRING:
++        *jso_out = json_object_new_string(obj->u.string);
++        if (!*jso_out)
++            return ERROR_NOMEM;
++        return 0;
++    case JSON_MAP: {
++        libxl__json_map_node *node = NULL;
++        json_object *map_root = json_object_new_object();
++        json_object *node_value;
++
++        for (idx = 0; idx < obj->u.map->count; idx++) {
++            if (flexarray_get(obj->u.map, idx, (void**)&node) != 0)
++                break;
++
++            rc = libxl__json_object_to_json_object(gc, &node_value, node->obj);
++            if (rc) {
++                json_object_put(map_root);
++                return rc;
++            }
++
++            r = json_object_object_add(map_root, node->map_key, node_value);
++            if (r < 0) {
++                json_object_put(node_value);
++                json_object_put(map_root);
++                return ERROR_FAIL;
++            }
++        }
++        *jso_out = map_root;
++        return 0;
++    }
++    case JSON_ARRAY: {
++        libxl__json_object *node = NULL;
++        json_object *array_root = json_object_new_array_ext(obj->u.array->count);
++        json_object *node_value;
++
++        for (idx = 0; idx < obj->u.array->count; idx++) {
++            if (flexarray_get(obj->u.array, idx, (void**)&node) != 0)
++                break;
++
++            rc = libxl__json_object_to_json_object(gc, &node_value, node);
++            if (rc) {
++                json_object_put(array_root);
++                return rc;
++            }
++            r = json_object_array_add(array_root, node_value);
++            if (r < 0) {
++                json_object_put(node_value);
++                json_object_put(array_root);
++                return ERROR_FAIL;
++            }
++        }
++        *jso_out = array_root;
++        return 0;
++    }
++    case JSON_ANY:
++    default:
++        /* JSON_ANY is not a valid value for obj->type. */
++        return ERROR_FAIL;
++    }
++}
++#endif
++#ifdef HAVE_LIBYAJL
+ yajl_status libxl__json_object_to_yajl_gen(libxl__gc *gc,
+                                            yajl_gen hand,
+                                            const libxl__json_object *obj)
+@@ -698,6 +797,7 @@ yajl_status libxl__json_object_to_yajl_gen(libxl__gc *gc,
+     abort();
+ #undef CONVERT_YAJL_GEN_TO_STATUS
+ }
++#endif
  
  
+ /*
+diff --git a/tools/libs/light/libxl_qmp.c b/tools/libs/light/libxl_qmp.c
+index 84740bd4b3..94b6fdb559 100644
+--- a/tools/libs/light/libxl_qmp.c
++++ b/tools/libs/light/libxl_qmp.c
+@@ -61,7 +61,11 @@
  
-+
-+pkg_failed=no
-+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for libjsonc" >&5
-+printf %s "checking for libjsonc... " >&6; }
-+
-+if test -n "$libjsonc_CFLAGS"; then
-+    pkg_cv_libjsonc_CFLAGS="$libjsonc_CFLAGS"
-+ elif test -n "$PKG_CONFIG"; then
-+    if test -n "$PKG_CONFIG" && \
-+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"json-c\""; } >&5
-+  ($PKG_CONFIG --exists --print-errors "json-c") 2>&5
-+  ac_status=$?
-+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-+  test $ac_status = 0; }; then
-+  pkg_cv_libjsonc_CFLAGS=`$PKG_CONFIG --cflags "json-c" 2>/dev/null`
-+		      test "x$?" != "x0" && pkg_failed=yes
-+else
-+  pkg_failed=yes
-+fi
-+ else
-+    pkg_failed=untried
-+fi
-+if test -n "$libjsonc_LIBS"; then
-+    pkg_cv_libjsonc_LIBS="$libjsonc_LIBS"
-+ elif test -n "$PKG_CONFIG"; then
-+    if test -n "$PKG_CONFIG" && \
-+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"json-c\""; } >&5
-+  ($PKG_CONFIG --exists --print-errors "json-c") 2>&5
-+  ac_status=$?
-+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-+  test $ac_status = 0; }; then
-+  pkg_cv_libjsonc_LIBS=`$PKG_CONFIG --libs "json-c" 2>/dev/null`
-+		      test "x$?" != "x0" && pkg_failed=yes
-+else
-+  pkg_failed=yes
-+fi
-+ else
-+    pkg_failed=untried
-+fi
-+
-+
-+
-+if test $pkg_failed = yes; then
-+   	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+printf "%s\n" "no" >&6; }
-+
-+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-+        _pkg_short_errors_supported=yes
-+else
-+        _pkg_short_errors_supported=no
-+fi
-+        if test $_pkg_short_errors_supported = yes; then
-+	        libjsonc_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "json-c" 2>&1`
-+        else
-+	        libjsonc_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "json-c" 2>&1`
-+        fi
-+	# Put the nasty error message in config.log where it belongs
-+	echo "$libjsonc_PKG_ERRORS" >&5
-+
-+	as_fn_error $? "Package requirements (json-c) were not met:
-+
-+$libjsonc_PKG_ERRORS
-+
-+Consider adjusting the PKG_CONFIG_PATH environment variable if you
-+installed software in a non-standard prefix.
-+
-+Alternatively, you may set the environment variables libjsonc_CFLAGS
-+and libjsonc_LIBS to avoid the need to call pkg-config.
-+See the pkg-config man page for more details." "$LINENO" 5
-+elif test $pkg_failed = untried; then
-+     	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+printf "%s\n" "no" >&6; }
-+	{ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-+printf "%s\n" "$as_me: error: in \`$ac_pwd':" >&2;}
-+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
-+is in your PATH or set the PKG_CONFIG environment variable to the full
-+path to pkg-config.
-+
-+Alternatively, you may set the environment variables libjsonc_CFLAGS
-+and libjsonc_LIBS to avoid the need to call pkg-config.
-+See the pkg-config man page for more details.
-+
-+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
-+See \`config.log' for more details" "$LINENO" 5; }
-+else
-+	libjsonc_CFLAGS=$pkg_cv_libjsonc_CFLAGS
-+	libjsonc_LIBS=$pkg_cv_libjsonc_LIBS
-+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-+printf "%s\n" "yes" >&6; }
-+
-+printf "%s\n" "#define HAVE_LIBJSONC 1" >>confdefs.h
-+
-+fi
- { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for yajl_alloc in -lyajl" >&5
- printf %s "checking for yajl_alloc in -lyajl... " >&6; }
- if test ${ac_cv_lib_yajl_yajl_alloc+y}
-@@ -9661,9 +9763,10 @@ fi
- printf "%s\n" "$ac_cv_lib_yajl_yajl_alloc" >&6; }
- if test "x$ac_cv_lib_yajl_yajl_alloc" = xyes
- then :
--  printf "%s\n" "#define HAVE_LIBYAJL 1" >>confdefs.h
-+  YAJL_LIBS=-lyajl
+ #include <sys/un.h>
  
--  LIBS="-lyajl $LIBS"
++#ifdef HAVE_LIBJSONC
++#include <json-c/json.h>
++#elif defined(HAVE_LIBYAJL)
+ #include <yajl/yajl_gen.h>
++#endif
+ 
+ #include "xen_list.h"
+ #include "libxl_internal.h"
+@@ -481,13 +485,56 @@ static char *qmp_prepare_cmd(libxl__gc *gc, const char *cmd,
+                              const libxl__json_object *args,
+                              int id)
+ {
++#ifdef HAVE_LIBJSONC
++    json_object *jso = NULL;
++    json_object *jso_value = NULL;
++    /* memory for 'buf' is owned by 'jso' */
++    const char *buf;
++    int rc, r;
++#elif defined(HAVE_LIBYAJL)
+     yajl_gen hand = NULL;
+     /* memory for 'buf' is owned by 'hand' */
+     const unsigned char *buf;
+     libxl_yajl_length len;
+     yajl_gen_status s;
++#else
++#  error Missing JSON library
++#endif
+     char *ret = NULL;
+ 
++#ifdef HAVE_LIBJSONC
++    jso = json_object_new_object();
++    if (!jso)
++        goto out;
 +
-+printf "%s\n" "#define HAVE_LIBYAJL 1" >>confdefs.h
++    jso_value = json_object_new_string(cmd);
++    if (!jso_value)
++        goto out;
++    r = json_object_object_add(jso, "execute", jso_value);
++    if (r < 0)
++        goto out;
++    jso_value = json_object_new_int(id);
++    if (!jso_value)
++        goto out;
++    r = json_object_object_add(jso, "id", jso_value);
++    if (r < 0)
++        goto out;
++    /* `jso_value` now part of `jso`, shouldn't free it anymore */
++    jso_value = NULL;
++    if (args) {
++        rc = libxl__json_object_to_json_object(gc, &jso_value, args);
++        if (rc)
++            goto out;
++        r = json_object_object_add(jso, "arguments", jso_value);
++        if (r < 0)
++            goto out;
++        jso_value = NULL;
++    }
++
++    buf = json_object_to_json_string_ext(jso, JSON_C_TO_STRING_PLAIN);
++    ret = libxl__sprintf(gc, "%s\r\n", buf);
++
++#elif defined(HAVE_LIBYAJL)
+     hand = libxl_yajl_gen_alloc(NULL);
  
- else $as_nop
-   as_fn_error $? "Could not find yajl" "$LINENO" 5
-diff --git a/tools/configure.ac b/tools/configure.ac
-index dada1c3b15..bb40b5b3f0 100644
---- a/tools/configure.ac
-+++ b/tools/configure.ac
-@@ -424,7 +424,11 @@ AC_SUBST([ZLIB_CFLAGS])
- AC_SUBST([ZLIB_LIBS])
- AX_CHECK_EXTFS
- AX_CHECK_PTHREAD
--AC_CHECK_LIB([yajl], [yajl_alloc], [],
-+PKG_CHECK_MODULES([libjsonc], [json-c],
-+    [AC_DEFINE([HAVE_LIBJSONC], [1], [Use library json-c])])
-+AC_CHECK_LIB([yajl], [yajl_alloc],
-+   [AC_SUBST([YAJL_LIBS],[-lyajl])
-+    AC_DEFINE([HAVE_LIBYAJL],[1],[Define to 1 if you have the `yajl' library (-lyajl).])],
-     [AC_MSG_ERROR([Could not find yajl])])
- AC_CHECK_LIB([z], [deflateCopy], [], [AC_MSG_ERROR([Could not find zlib])])
- AC_CHECK_HEADER([argp.h], [
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index b690d92159..c05d89db33 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -166,7 +166,7 @@ LDLIBS-$(CONFIG_Linux) += -luuid
- LDLIBS-$(CONFIG_Linux) += -lrt
- LDLIBS-$(CONFIG_ARM) += -lfdt
- LDLIBS-y += $(PTHREAD_LIBS)
--LDLIBS-y += -lyajl
-+LDLIBS-y += $(XEN_JSON_LIBS)
- LDLIBS += $(LDLIBS-y)
+     if (!hand) {
+@@ -516,9 +563,15 @@ static char *qmp_prepare_cmd(libxl__gc *gc, const char *cmd,
+         goto out;
  
- $(OBJS-y) $(PIC_OBJS) $(LIBXL_TEST_OBJS): CFLAGS += $(CFLAGS_LIBXL) -include $(XEN_ROOT)/tools/config.h
-@@ -246,7 +246,7 @@ libxenlight_test.so: $(PIC_OBJS) $(LIBXL_TEST_OBJS)
- 	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenlight.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LDLIBS) $(APPEND_LDFLAGS)
+     ret = libxl__sprintf(gc, "%*.*s\r\n", (int)len, (int)len, buf);
++#endif
  
- test_%: test_%.o test_common.o libxenlight_test.so
--	$(CC) $(LDFLAGS) -o $@ $^ $(filter-out %libxenlight.so, $(LDLIBS_libxenlight)) $(LDLIBS_libxentoollog) $(LDLIBS_libxentoolcore) -lyajl $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) -o $@ $^ $(filter-out %libxenlight.so, $(LDLIBS_libxenlight)) $(LDLIBS_libxentoollog) $(LDLIBS_libxentoolcore) $(XEN_JSON_LIBS) $(APPEND_LDFLAGS)
+ out:
++#ifdef HAVE_LIBJSONC
++    json_object_put(jso_value);
++    json_object_put(jso);
++#elif defined(HAVE_LIBYAJL)
+     yajl_gen_free(hand);
++#endif
+     return ret;
+ }
  
- libxl-save-helper: $(SAVE_HELPER_OBJS) libxenlight.so
- 	$(CC) $(LDFLAGS) -o $@ $(SAVE_HELPER_OBJS) $(LDLIBS_libxentoollog) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(APPEND_LDFLAGS)
-diff --git a/tools/xl/Makefile b/tools/xl/Makefile
-index ad577cdd70..973ff0e1a2 100644
---- a/tools/xl/Makefile
-+++ b/tools/xl/Makefile
-@@ -33,7 +33,7 @@ $(XL_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h # libxl_json.h needs i
- all: xl
- 
- xl: $(XL_OBJS)
--	$(CC) $(LDFLAGS) -o $@ $(XL_OBJS) $(LDLIBS_libxenutil) $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) -lyajl $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) -o $@ $(XL_OBJS) $(LDLIBS_libxenutil) $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(XEN_JSON_LIBS) $(APPEND_LDFLAGS)
- 
- .PHONY: install
- install: all
 -- 
 Anthony PERARD
 
