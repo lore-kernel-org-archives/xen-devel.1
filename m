@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DD4CCA468
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Sep 2025 18:36:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1133183.1471376 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4706CCAC5B0
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Sep 2025 18:36:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1133192.1471390 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3IjG-0005QX-Bl; Mon, 29 Sep 2025 18:36:06 +0000
+	id 1v3IjN-00065h-MW; Mon, 29 Sep 2025 18:36:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1133183.1471376; Mon, 29 Sep 2025 18:36:06 +0000
+Received: by outflank-mailman (output) from mailman id 1133192.1471390; Mon, 29 Sep 2025 18:36:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3IjG-0005Pi-5P; Mon, 29 Sep 2025 18:36:06 +0000
-Received: by outflank-mailman (input) for mailman id 1133183;
- Mon, 29 Sep 2025 18:36:04 +0000
+	id 1v3IjN-00065V-HY; Mon, 29 Sep 2025 18:36:13 +0000
+Received: by outflank-mailman (input) for mailman id 1133192;
+ Mon, 29 Sep 2025 18:36:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=BPw2=4I=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1v3IhC-0001U2-6k
- for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 18:33:58 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1v3Igw-0001U2-2d
+ for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 18:33:42 +0000
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [2a00:1450:4864:20::42b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc36c137-9d62-11f0-9d14-b5c5bf9af7f9;
- Mon, 29 Sep 2025 20:33:57 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-46e384dfde0so51429035e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 29 Sep 2025 11:33:57 -0700 (PDT)
+ id d2798b95-9d62-11f0-9d14-b5c5bf9af7f9;
+ Mon, 29 Sep 2025 20:33:41 +0200 (CEST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-42421b1514fso44467f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Sep 2025 11:33:41 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb9e1bd14sm20127006f8f.28.2025.09.29.11.33.55
+ 5b1f17b1804b1-46e56f3d754sm23909085e9.4.2025.09.29.11.33.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Sep 2025 11:33:56 -0700 (PDT)
+ Mon, 29 Sep 2025 11:33:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,44 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc36c137-9d62-11f0-9d14-b5c5bf9af7f9
+X-Inumbo-ID: d2798b95-9d62-11f0-9d14-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1759170837; x=1759775637; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1759170821; x=1759775621; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=U9bErLRqv9kjbdzs2kwz9FzL8C8SAPMQ12Esuz3D9Fo=;
-        b=gnvR+fdIZooHKgj7wLHK+6Bi6IpBiDx3+6WxyqhRU0GrezC5Z3bk8R07XrqirNWSMs
-         LC5IpCxvMh23eSoM3py0Bd52Hz/d6cQjulxcVCvMZa6boTQZWaumgm8yV2Bj39qBVYIv
-         +CmFRd17tTA3V11BpZXdvmEJNiGh4TKiQrBjuA0i/aOYP23NTookydPe36r4n4lOMzH/
-         d8AMZxwmgi0PequktmEH9usP21D8S0VKOhWw7ns029OTAUbyJoFSDRYyBcXyt49uRsF3
-         Zkd/+D+VuKiJZMnCuK4fn5A0Tgu71mVVxlmDDWmhpSKyxN2vubuFBPFC5TEMH7sgYMx1
-         PxIw==
+        bh=DbEYNZgIU6LqvkF49qge8kIj2C3i6K2S813tsyxbWwg=;
+        b=khWgzdBbP1CktaqF/uejPNCx9iCRhNo9MSSZxK/Xm70o/6Z3Q504TsR+Q+f82xg3No
+         lK1U+BbVCLyHazyZ3RHTsZgGkEs3R4O/ClKjuCB/Vug4O18JJ8JcNRPvBO5Vwx2cnNSn
+         p10n2Y+VczwCc/XT2tRA0WhYr+wnalpUegiS+SfvNkyxBg8IrsJXcFLIY3v7hSbqzIKF
+         gjRYuXz8auiqSzdMQGv/Oliz2FmutLPv/8efQrFXhV7XTg3QOwf7Tpl/ZyBY+ZztgVyT
+         o1K55RIYDz9+OsXj66PHKLWMwdNTeUL42tnB3FeVsw7Njzqa8g7Yzdurmn1JoLFOun1V
+         m7zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759170837; x=1759775637;
+        d=1e100.net; s=20230601; t=1759170821; x=1759775621;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=U9bErLRqv9kjbdzs2kwz9FzL8C8SAPMQ12Esuz3D9Fo=;
-        b=nL6QrLpUyt5hKVBWyTuMxBqcAZsV6QNm3/1PXnZ0saVhIO9e6pqM36JJL81nBkehOz
-         Oq+F6XLykYI/N8fDu+mJMF5GBuEYQEnAVjFp0tSk3WXHUzlCgwbH253BVFhnjwPyZsPe
-         mkT+R6GJphiM1MuLqSBDcvDm6YPRle3nTh4W2TgfeD00NXp40dLLnt2pPt7NwPrqk5//
-         OwOiBOvj70F8Aey2rRWSHdyOXshvHGb7Jr7l/lTjBBcQjDvN7iEcoXoTYqDMj3VtxmY/
-         bVTJPRyo1Wr/6zZWsavdJEP+fIL1qkSkldckaz0ld7fzXG8QvKi1M39iGwQPT+jOy7Cy
-         681A==
-X-Forwarded-Encrypted: i=1; AJvYcCXZZN60bgHwbVn2PCSY0pEdF/NHdJFySxG2eOwIJblQtS72mkgb3/zM2Rxp6+H5wK+dQa0yuyHdjhM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzZnbTUhCcduYxXvNNrQrUAE3eGH8qP7KRZoacrsibvWvk5MvET
-	q3lae2K7vBIBX5z7ZkfM3SJD78mvy3UlLNjf+INNuqienl59jZHHk8aNFLqXAjC/DMs=
-X-Gm-Gg: ASbGncte2lY0gAqumM7a/ooewSp7FBZxf3lJ3T0bmDz2u9x7v+J8e3ia8QucdZqeMTu
-	98qoLMjI8MJQe4tmLcX9uK5+Z/ZWhCdZY47zUAJtu9quHhw/lM1lfk4g8fBJ6jHNw47rykpJ5Fh
-	/z9qGzUSi77TSUfLat/MP0qjYUxil/g+nF46QhDnb8DfhmS+0Q5eOmJIwlsznN7Znm2ltlEq3gP
-	ufqdW7x3E3HUNUjo9R+RemJyE96tR6ZdlufswrEC8AP7/d/gtUwQChArnhwrQm9tW7mBsSB03xD
-	VAuFaoemvBcyjRMV+u8SjORY8iKiHG8UVFbFBr6Opk3chSr1rB4NkbyJ4CSZvmIcSgJ57u4zIQs
-	3cM+H0xDavFEFZmvembsfGLYnkmC6cgpJ/BnWEus1uENTKcPJ/y+a5tkUMa+uNJEd4GavT9DwMp
-	zO2Z7J2BU=
-X-Google-Smtp-Source: AGHT+IFV+pWpl9RpYQY3/vKNUQDjfsPx6DQqux2wn16tRZPr0u8FrK0pJwBF+V9pyB/rSvhEdc2qCg==
-X-Received: by 2002:a05:600c:4b16:b0:46e:326e:4501 with SMTP id 5b1f17b1804b1-46e329ba996mr129660275e9.10.1759170837108;
-        Mon, 29 Sep 2025 11:33:57 -0700 (PDT)
+        bh=DbEYNZgIU6LqvkF49qge8kIj2C3i6K2S813tsyxbWwg=;
+        b=dDBPxLftd/sA2Jb1f4OdKh9JaqmqIT37EMDZKuppFrRxCzVLs4cBmSGtgU1hh9dDbs
+         FtieOMINFkm65fd3mTWNLXB3aZTk2HD21xczFQODa6Xf+eoqwNESi8LDk+Z8wZ0INz4a
+         ihmreJJFSURkyH0EqDDPoJX1oZL6vdYqxMRgu5a8jvRgTAAgZoWNpCc2gf9hm2MrfV96
+         3CKIwwUwCLxlNNcypdq4RKgI0/hf5OYqNuK5X4l+x4UOC9AtaoPnrZ1lCFzQG/tznqCt
+         ECaBgVIu9Nb2RNdqeTqGidUbxSndzkP2RDAgcRdLb89QJ555oIEyUURtaU9R2vAoWQ8K
+         umAg==
+X-Forwarded-Encrypted: i=1; AJvYcCWblW1NIPTRPdOuWSc23zcXKknGsyeISmNSBDrzf79Tet0Kjeco2R3li+W4DqQwqCllUBKvU50VPAo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyWvbZ+fN2yaBg7CHbVm563D+aOsgYhAxLKUMNp58T54vv6yiKi
+	vK7mjDbiCW9Qa/zLEXqypaq0KEinF0E5b9ocl/PNM0JdpxbYLpnk4moyqr/laKvSexU=
+X-Gm-Gg: ASbGnctjMp6KJdvF/t12TMrzOMU1Qf38zQM6r6FNVSx46lSbLZRqaTlNijpEAyU0mf/
+	SGld6HLx+zhhuHawY/W+sw33PLGXcny9xqj3RvFkYS7rWycLrtYKou4419RJ95YHmqDR0cj5j+4
+	58438nRPcscbrAS/9KDgnITwm/ojklm4ISlThFudDVQdGMcvUM3FYdk2Yyh3aViApcuSqhrTfpb
+	v3zZNHrMn0HZDk+n3KOgQ0nlN2ga0bOdMUMxE53FUmJ/gk+pbo7QPQ5pvBjyWfevv2FNryjL/Jt
+	v5m+xEBcFq8eHM/6oLOLRlV/2GYLeh91y+Nv0PtEPxrCUtyat7TQNaBKirPtTc9A9Nt9nt5c3D3
+	uEgOW0xlQgk+wVlsmyxNyCPeXTW0gGc8bwCJYpQYieOX37VtXT/dtL+M3ue1lthEH1zPF/S0oMw
+	73ekKyECCPVKFGPMxuPQ==
+X-Google-Smtp-Source: AGHT+IHaOBKfpBuD9vwP/E//+ppjcdL0t+dVKZj3FJZtAkNcYom3O6PaZLYCHSxxg6LM7gcPXW/sAQ==
+X-Received: by 2002:a05:6000:2c0c:b0:405:3028:1bf2 with SMTP id ffacd0b85a97d-40e4d0372cbmr15214118f8f.62.1759170820742;
+        Mon, 29 Sep 2025 11:33:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Peter Maydell <peter.maydell@linaro.org>,
 	qemu-devel@nongnu.org
@@ -114,9 +114,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
 	Peter Xu <peterx@redhat.com>,
 	Matthew Rosato <mjrosato@linux.ibm.com>
-Subject: [PATCH 11/15] hw/xen/hvm: Inline cpu_physical_memory_rw() in rw_phys_req_item()
-Date: Mon, 29 Sep 2025 20:32:50 +0200
-Message-ID: <20250929183254.85478-12-philmd@linaro.org>
+Subject: [PATCH 08/15] target/i386/whpx: Replace legacy cpu_physical_memory_rw() call
+Date: Mon, 29 Sep 2025 20:32:47 +0200
+Message-ID: <20250929183254.85478-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250929183254.85478-1-philmd@linaro.org>
 References: <20250929183254.85478-1-philmd@linaro.org>
@@ -124,46 +124,32 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-cpu_physical_memory_rw() is legacy, replace by address_space_rw().
+Get the vCPU address space and convert the legacy
+cpu_physical_memory_rw() by address_space_rw().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/xen/xen-hvm-common.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ target/i386/whpx/whpx-all.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
-index 78e0bc8f644..52e2cce397a 100644
---- a/hw/xen/xen-hvm-common.c
-+++ b/hw/xen/xen-hvm-common.c
-@@ -12,6 +12,7 @@
- #include "hw/xen/xen-bus.h"
- #include "hw/boards.h"
- #include "hw/xen/arch_hvm.h"
-+#include "system/memory.h"
- #include "system/runstate.h"
- #include "system/system.h"
- #include "system/xen.h"
-@@ -279,8 +280,8 @@ static void do_outp(uint32_t addr,
-  * memory, as part of the implementation of an ioreq.
-  *
-  * Equivalent to
-- *   cpu_physical_memory_rw(addr + (req->df ? -1 : +1) * req->size * i,
-- *                          val, req->size, 0/1)
-+ *   address_space_rw(as, addr + (req->df ? -1 : +1) * req->size * i,
-+ *                    attrs, val, req->size, 0/1)
-  * except without the integer overflow problems.
-  */
- static void rw_phys_req_item(hwaddr addr,
-@@ -295,7 +296,8 @@ static void rw_phys_req_item(hwaddr addr,
-     } else {
-         addr += offset;
-     }
--    cpu_physical_memory_rw(addr, val, req->size, rw);
-+    address_space_rw(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-+                     val, req->size, rw);
+diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
+index 2a85168ed51..82ba177c4a5 100644
+--- a/target/i386/whpx/whpx-all.c
++++ b/target/i386/whpx/whpx-all.c
+@@ -788,8 +788,11 @@ static HRESULT CALLBACK whpx_emu_mmio_callback(
+     void *ctx,
+     WHV_EMULATOR_MEMORY_ACCESS_INFO *ma)
+ {
+-    cpu_physical_memory_rw(ma->GpaAddress, ma->Data, ma->AccessSize,
+-                           ma->Direction);
++    CPUState *cpu = (CPUState *)ctx;
++    AddressSpace *as = cpu_addressspace(cs, MEMTXATTRS_UNSPECIFIED);
++
++    address_space_rw(as, ma->GpaAddress, MEMTXATTRS_UNSPECIFIED,
++                     ma->Data, ma->AccessSize, ma->Direction);
+     return S_OK;
  }
  
- static inline void read_phys_req_item(hwaddr addr,
 -- 
 2.51.0
 
