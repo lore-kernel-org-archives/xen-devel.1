@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AA2CAC5B0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DDF2CCA468
 	for <xen-devel@archiver.kernel.org>; Mon, 29 Sep 2025 12:08:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1132744.1471034 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1132738.1470977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Cfm-0000C7-QI; Mon, 29 Sep 2025 12:08:06 +0000
+	id 1v3Cfh-0007QG-Pl; Mon, 29 Sep 2025 12:08:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1132744.1471034; Mon, 29 Sep 2025 12:08:06 +0000
+Received: by outflank-mailman (output) from mailman id 1132738.1470977; Mon, 29 Sep 2025 12:08:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Cfm-0000Bm-IP; Mon, 29 Sep 2025 12:08:06 +0000
-Received: by outflank-mailman (input) for mailman id 1132744;
- Mon, 29 Sep 2025 12:08:05 +0000
+	id 1v3Cfh-0007Q9-Ml; Mon, 29 Sep 2025 12:08:01 +0000
+Received: by outflank-mailman (input) for mailman id 1132738;
+ Mon, 29 Sep 2025 12:08:00 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anthony@xenproject.org>) id 1v3Cfk-0008MS-Uh
- for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 12:08:04 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cfg-0007Pr-4u
+ for xen-devel@lists.xenproject.org; Mon, 29 Sep 2025 12:08:00 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1v3Cfk-00GXBl-20;
- Mon, 29 Sep 2025 12:08:04 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cff-00GXAu-2k;
+ Mon, 29 Sep 2025 12:07:59 +0000
 Received: from [2a01:cb15:80df:da00:e2a9:ff82:7bde:38cd] (helo=l14.home)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <anthony@xenproject.org>) id 1v3Cfk-004JHo-27;
- Mon, 29 Sep 2025 12:08:04 +0000
+ (envelope-from <anthony@xenproject.org>) id 1v3Cff-004JHo-2o;
+ Mon, 29 Sep 2025 12:07:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=fd7IuQgDa95R64KYB4tblr0/98vW3XrqIHcr4eD97H4=; b=X203g5Yaxw9Ll+3MS5VUb9EOPi
-	w5Q0flPWQK2T15TGrMdaV33NAB4xY5urY6whyNrUQ2EvLO0pzsNQ18lYaAs2LlVUMiiewvGOZ0vpf
-	iFpihfU64n9aPKFtXy2ADhSU4ioWSLgaVSOytyYFxtZRQHhehyp2gvzm0+MaHXwJZEvk=;
+	bh=TkLeJKOy6W2+2/EbdbLvrKVsvOauvUqw0+FWVe+Qo5U=; b=KOPHVlCU3Hqbv1GIBsL7wMjXTv
+	EBRaUzQxZQgXdw61BgRWDOGSEIxKG3Ni7e1K4hs2/3tYGMc2TNr7puBHE5jNt9OjjpQNA81Lj18db
+	lC+EbSUedTHcoJd4JBhZ2E/r4fk8lkZPJotnr0B/jkn7nix9ZM20Z2njqhgFJclyZL2U=;
 From: Anthony PERARD <anthony@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Jason Andryuk <jason.andryuk@amd.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH v2 6/8] tools/libxenstat: Use json-c when available
-Date: Mon, 29 Sep 2025 14:07:54 +0200
-Message-ID: <20250929120756.46075-7-anthony@xenproject.org>
+Subject: [XEN PATCH v2 1/8] tools/configure: Introduce deps on json-c lib for libxl
+Date: Mon, 29 Sep 2025 14:07:49 +0200
+Message-ID: <20250929120756.46075-2-anthony@xenproject.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250929120756.46075-1-anthony@xenproject.org>
 References: <20250929120756.46075-1-anthony@xenproject.org>
@@ -63,241 +62,258 @@ Content-Transfer-Encoding: 8bit
 
 From: Anthony PERARD <anthony.perard@vates.tech>
 
-This is mainly a copy of the existing code in yajl and use json-c
-instead.
+To replace yajl.
+
+Introduce XEN_JSON_LIBS variable, to be able to remove "-lyajl" later.
+
+As a first step, the variable will have both or only -lyajl. Then
+commit "configure: Use json-c by default, fallback to yajl" will make
+a change to only have one or the other once the code is ready to build
+with only json-c.
 
 Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
 
 Notes:
     v2:
-    - use new $(XEN_JSON_LIBS)
+    - Introduce $(XEN_JSON_LIBS) to contain either of -lyajl or -ljson-c or
+      both. At first, the variable will have both or only -lyajl, then
+      commit "configure: Use json-c by default, fallback to yajl" will make
+      a change to only have one or the other.
 
- tools/libs/stat/Makefile      |   2 +-
- tools/libs/stat/xenstat_qmp.c | 126 ++++++++++++++++++++++++++++++++--
- 2 files changed, 120 insertions(+), 8 deletions(-)
+ config/Tools.mk.in        |   1 +
+ tools/config.h.in         |   3 ++
+ tools/configure           | 107 +++++++++++++++++++++++++++++++++++++-
+ tools/configure.ac        |   6 ++-
+ tools/libs/light/Makefile |   4 +-
+ tools/xl/Makefile         |   2 +-
+ 6 files changed, 117 insertions(+), 6 deletions(-)
 
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index a968eaff48..3151ee9f12 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -24,7 +24,7 @@ OBJS-$(CONFIG_SunOS) += xenstat_solaris.o
- OBJS-$(CONFIG_NetBSD) += xenstat_netbsd.o
- OBJS-$(CONFIG_FreeBSD) += xenstat_freebsd.o
+diff --git a/config/Tools.mk.in b/config/Tools.mk.in
+index e47ac23d11..0037ad5a64 100644
+--- a/config/Tools.mk.in
++++ b/config/Tools.mk.in
+@@ -65,6 +65,7 @@ EXTFS_LIBS          := @EXTFS_LIBS@
+ CURSES_LIBS         := @CURSES_LIBS@
+ TINFO_LIBS          := @TINFO_LIBS@
+ ARGP_LDFLAGS        := @argp_ldflags@
++XEN_JSON_LIBS       := @YAJL_LIBS@ @libjsonc_LIBS@
  
+ FILE_OFFSET_BITS    := @FILE_OFFSET_BITS@
+ 
+diff --git a/tools/config.h.in b/tools/config.h.in
+index fe2a94cfc4..ed0042018d 100644
+--- a/tools/config.h.in
++++ b/tools/config.h.in
+@@ -27,6 +27,9 @@
+ /* Define to 1 if you have the `fdt' library (-lfdt). */
+ #undef HAVE_LIBFDT
+ 
++/* Use library json-c */
++#undef HAVE_LIBJSONC
++
+ /* Define to 1 if you have the `lzma' library (-llzma). */
+ #undef HAVE_LIBLZMA
+ 
+diff --git a/tools/configure b/tools/configure
+index 5abd44e21e..edd1701b2d 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -660,6 +660,9 @@ libnl
+ LIBNL3_LIBS
+ LIBNL3_CFLAGS
+ argp_ldflags
++YAJL_LIBS
++libjsonc_LIBS
++libjsonc_CFLAGS
+ PTHREAD_LIBS
+ PTHREAD_LDFLAGS
+ PTHREAD_CFLAGS
+@@ -882,6 +885,8 @@ pixman_CFLAGS
+ pixman_LIBS
+ libzstd_CFLAGS
+ libzstd_LIBS
++libjsonc_CFLAGS
++libjsonc_LIBS
+ LIBNL3_CFLAGS
+ LIBNL3_LIBS
+ SYSTEMD_SLEEP_DIR'
+@@ -1633,6 +1638,10 @@ Some influential environment variables:
+               C compiler flags for libzstd, overriding pkg-config
+   libzstd_LIBS
+               linker flags for libzstd, overriding pkg-config
++  libjsonc_CFLAGS
++              C compiler flags for libjsonc, overriding pkg-config
++  libjsonc_LIBS
++              linker flags for libjsonc, overriding pkg-config
+   LIBNL3_CFLAGS
+               C compiler flags for LIBNL3, overriding pkg-config
+   LIBNL3_LIBS linker flags for LIBNL3, overriding pkg-config
+@@ -9624,6 +9633,99 @@ printf "%s\n" "$ax_cv_pthread_flags" >&6; }
+ 
+ 
+ 
++
++pkg_failed=no
++{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for libjsonc" >&5
++printf %s "checking for libjsonc... " >&6; }
++
++if test -n "$libjsonc_CFLAGS"; then
++    pkg_cv_libjsonc_CFLAGS="$libjsonc_CFLAGS"
++ elif test -n "$PKG_CONFIG"; then
++    if test -n "$PKG_CONFIG" && \
++    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"json-c\""; } >&5
++  ($PKG_CONFIG --exists --print-errors "json-c") 2>&5
++  ac_status=$?
++  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
++  test $ac_status = 0; }; then
++  pkg_cv_libjsonc_CFLAGS=`$PKG_CONFIG --cflags "json-c" 2>/dev/null`
++		      test "x$?" != "x0" && pkg_failed=yes
++else
++  pkg_failed=yes
++fi
++ else
++    pkg_failed=untried
++fi
++if test -n "$libjsonc_LIBS"; then
++    pkg_cv_libjsonc_LIBS="$libjsonc_LIBS"
++ elif test -n "$PKG_CONFIG"; then
++    if test -n "$PKG_CONFIG" && \
++    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"json-c\""; } >&5
++  ($PKG_CONFIG --exists --print-errors "json-c") 2>&5
++  ac_status=$?
++  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
++  test $ac_status = 0; }; then
++  pkg_cv_libjsonc_LIBS=`$PKG_CONFIG --libs "json-c" 2>/dev/null`
++		      test "x$?" != "x0" && pkg_failed=yes
++else
++  pkg_failed=yes
++fi
++ else
++    pkg_failed=untried
++fi
++
++
++
++if test $pkg_failed = yes; then
++   	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
++printf "%s\n" "no" >&6; }
++
++if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
++        _pkg_short_errors_supported=yes
++else
++        _pkg_short_errors_supported=no
++fi
++        if test $_pkg_short_errors_supported = yes; then
++	        libjsonc_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "json-c" 2>&1`
++        else
++	        libjsonc_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "json-c" 2>&1`
++        fi
++	# Put the nasty error message in config.log where it belongs
++	echo "$libjsonc_PKG_ERRORS" >&5
++
++	as_fn_error $? "Package requirements (json-c) were not met:
++
++$libjsonc_PKG_ERRORS
++
++Consider adjusting the PKG_CONFIG_PATH environment variable if you
++installed software in a non-standard prefix.
++
++Alternatively, you may set the environment variables libjsonc_CFLAGS
++and libjsonc_LIBS to avoid the need to call pkg-config.
++See the pkg-config man page for more details." "$LINENO" 5
++elif test $pkg_failed = untried; then
++     	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
++printf "%s\n" "no" >&6; }
++	{ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++printf "%s\n" "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
++is in your PATH or set the PKG_CONFIG environment variable to the full
++path to pkg-config.
++
++Alternatively, you may set the environment variables libjsonc_CFLAGS
++and libjsonc_LIBS to avoid the need to call pkg-config.
++See the pkg-config man page for more details.
++
++To get pkg-config, see <http://pkg-config.freedesktop.org/>.
++See \`config.log' for more details" "$LINENO" 5; }
++else
++	libjsonc_CFLAGS=$pkg_cv_libjsonc_CFLAGS
++	libjsonc_LIBS=$pkg_cv_libjsonc_LIBS
++        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
++printf "%s\n" "yes" >&6; }
++
++printf "%s\n" "#define HAVE_LIBJSONC 1" >>confdefs.h
++
++fi
+ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for yajl_alloc in -lyajl" >&5
+ printf %s "checking for yajl_alloc in -lyajl... " >&6; }
+ if test ${ac_cv_lib_yajl_yajl_alloc+y}
+@@ -9661,9 +9763,10 @@ fi
+ printf "%s\n" "$ac_cv_lib_yajl_yajl_alloc" >&6; }
+ if test "x$ac_cv_lib_yajl_yajl_alloc" = xyes
+ then :
+-  printf "%s\n" "#define HAVE_LIBYAJL 1" >>confdefs.h
++  YAJL_LIBS=-lyajl
+ 
+-  LIBS="-lyajl $LIBS"
++
++printf "%s\n" "#define HAVE_LIBYAJL 1" >>confdefs.h
+ 
+ else $as_nop
+   as_fn_error $? "Could not find yajl" "$LINENO" 5
+diff --git a/tools/configure.ac b/tools/configure.ac
+index dada1c3b15..bb40b5b3f0 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -424,7 +424,11 @@ AC_SUBST([ZLIB_CFLAGS])
+ AC_SUBST([ZLIB_LIBS])
+ AX_CHECK_EXTFS
+ AX_CHECK_PTHREAD
+-AC_CHECK_LIB([yajl], [yajl_alloc], [],
++PKG_CHECK_MODULES([libjsonc], [json-c],
++    [AC_DEFINE([HAVE_LIBJSONC], [1], [Use library json-c])])
++AC_CHECK_LIB([yajl], [yajl_alloc],
++   [AC_SUBST([YAJL_LIBS],[-lyajl])
++    AC_DEFINE([HAVE_LIBYAJL],[1],[Define to 1 if you have the `yajl' library (-lyajl).])],
+     [AC_MSG_ERROR([Could not find yajl])])
+ AC_CHECK_LIB([z], [deflateCopy], [], [AC_MSG_ERROR([Could not find zlib])])
+ AC_CHECK_HEADER([argp.h], [
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index b690d92159..c05d89db33 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -166,7 +166,7 @@ LDLIBS-$(CONFIG_Linux) += -luuid
+ LDLIBS-$(CONFIG_Linux) += -lrt
+ LDLIBS-$(CONFIG_ARM) += -lfdt
+ LDLIBS-y += $(PTHREAD_LIBS)
 -LDLIBS-y += -lyajl
 +LDLIBS-y += $(XEN_JSON_LIBS)
- LDLIBS-$(CONFIG_SunOS) += -lkstat
  LDLIBS += $(LDLIBS-y)
  
-diff --git a/tools/libs/stat/xenstat_qmp.c b/tools/libs/stat/xenstat_qmp.c
-index 9909b9727e..21e321fffa 100644
---- a/tools/libs/stat/xenstat_qmp.c
-+++ b/tools/libs/stat/xenstat_qmp.c
-@@ -24,6 +24,10 @@
+ $(OBJS-y) $(PIC_OBJS) $(LIBXL_TEST_OBJS): CFLAGS += $(CFLAGS_LIBXL) -include $(XEN_ROOT)/tools/config.h
+@@ -246,7 +246,7 @@ libxenlight_test.so: $(PIC_OBJS) $(LIBXL_TEST_OBJS)
+ 	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenlight.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LDLIBS) $(APPEND_LDFLAGS)
  
- #include "xenstat_priv.h"
+ test_%: test_%.o test_common.o libxenlight_test.so
+-	$(CC) $(LDFLAGS) -o $@ $^ $(filter-out %libxenlight.so, $(LDLIBS_libxenlight)) $(LDLIBS_libxentoollog) $(LDLIBS_libxentoolcore) -lyajl $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(filter-out %libxenlight.so, $(LDLIBS_libxenlight)) $(LDLIBS_libxentoollog) $(LDLIBS_libxentoolcore) $(XEN_JSON_LIBS) $(APPEND_LDFLAGS)
  
-+#ifdef HAVE_LIBJSONC
-+#include <json-c/json.h>
-+
-+#elif defined(HAVE_LIBYAJL)
- #ifdef HAVE_YAJL_YAJL_VERSION_H
- #  include <yajl/yajl_version.h>
- #endif
-@@ -32,11 +36,13 @@
- #if defined(YAJL_MAJOR) && (YAJL_MAJOR > 1)
- #  define HAVE_YAJL_V2 1
- #endif
-+#endif
+ libxl-save-helper: $(SAVE_HELPER_OBJS) libxenlight.so
+ 	$(CC) $(LDFLAGS) -o $@ $(SAVE_HELPER_OBJS) $(LDLIBS_libxentoollog) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(APPEND_LDFLAGS)
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index ad577cdd70..973ff0e1a2 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -33,7 +33,7 @@ $(XL_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h # libxl_json.h needs i
+ all: xl
  
- #ifdef HAVE_YAJL_V2
--
- #include <yajl/yajl_tree.h>
-+#endif
+ xl: $(XL_OBJS)
+-	$(CC) $(LDFLAGS) -o $@ $(XL_OBJS) $(LDLIBS_libxenutil) $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) -lyajl $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) -o $@ $(XL_OBJS) $(LDLIBS_libxenutil) $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(XEN_JSON_LIBS) $(APPEND_LDFLAGS)
  
-+#if defined(HAVE_LIBJSONC) || defined(HAVE_YAJL_V2)
- static unsigned char *qmp_query(int, const char *);
- 
- enum query_blockstats {
-@@ -76,9 +82,10 @@ enum query_block {
-             "type": 'str'
-           }]}
- */
--static char *qmp_get_block_image(xenstat_node *node, char *qmp_devname, int qfd)
-+static char *qmp_get_block_image(xenstat_node *node, const char *qmp_devname, int qfd)
- {
--	char *tmp, *file = NULL;
-+	const char *tmp;
-+	char *file = NULL;
- 	const char *query_block_cmd = "{ \"execute\": \"query-block\" }";
- 	static const char *const qblock[] = {
- 		[ QMP_BLOCK_RETURN  ] = "return",
-@@ -88,13 +95,56 @@ static char *qmp_get_block_image(xenstat_node *node, char *qmp_devname, int qfd)
- 	};
- 	const char *ptr[] = {0, 0};
- 	unsigned char *qmp_stats;
--	yajl_val info, ret_obj, dev_obj, n;
- 	int i;
- 
- 	if ((qmp_stats = qmp_query(qfd, query_block_cmd)) == NULL)
- 		return NULL;
- 
-+#ifdef HAVE_LIBJSONC
-+	json_object *jso;
-+	enum json_tokener_error error;
-+	jso = json_tokener_parse_verbose((const char *)qmp_stats, &error);
-+	free(qmp_stats);
-+	if (jso == NULL)
-+		return NULL;
-+
-+	ptr[0] = qblock[QMP_BLOCK_RETURN]; /* "return" */
-+	json_object *ret_jso = json_object_object_get(jso, ptr[0]);
-+	if (ret_jso == NULL)
-+		goto done;
-+
-+	for (i=0; i<json_object_array_length(ret_jso); i++) {
-+		json_object *n = json_object_array_get_idx(ret_jso, i);
-+
-+		ptr[0] = qblock[QMP_BLOCK_DEVICE]; /* "device" */
-+		json_object *dev_jso = json_object_object_get(n, ptr[0]);
-+		if (dev_jso) {
-+			tmp = json_object_get_string(dev_jso);
-+			if (!tmp || strcmp(qmp_devname, tmp))
-+				continue;
-+		} else {
-+			continue;
-+		}
-+
-+		ptr[0] = qblock[QMP_INSERTED]; /* "inserted" */
-+		n = json_object_object_get(n, ptr[0]);
-+		if (n) {
-+			ptr[0] = qblock[QMP_FILE]; /* "file" */
-+			n = json_object_object_get(n, ptr[0]);
-+			if (n && json_object_is_type(n, json_type_string)) {
-+				tmp = json_object_get_string(n);
-+				file = malloc(strlen(tmp)+1);
-+				if (file != NULL)
-+					strcpy(file, tmp);
-+				goto done;
-+			}
-+		}
-+	}
-+done:
-+	json_object_put(jso);
-+#elif defined(HAVE_LIBYAJL)
- 	/* Use libyajl version 2.0.3 or newer for the tree parser feature with bug fixes */
-+	yajl_val info, ret_obj, dev_obj, n;
- 	info = yajl_tree_parse((char *)qmp_stats, NULL, 0);
- 	free(qmp_stats);
- 	if (info == NULL)
-@@ -132,12 +182,13 @@ static char *qmp_get_block_image(xenstat_node *node, char *qmp_devname, int qfd)
- 	}
- done:
- 	yajl_tree_free(info);
-+#endif
- 	return file;
- }
- 
- 
- /* Given a QMP device name, lookup the associated xenstore qdisk device id */
--static void lookup_xenstore_devid(xenstat_node * node, unsigned int domid, char *qmp_devname,
-+static void lookup_xenstore_devid(xenstat_node * node, unsigned int domid, const char *qmp_devname,
- 	int qfd, unsigned int *dev, unsigned int *sector_size)
- {
- 	char **dev_ids, *tmp, *ptr, *image, path[80];
-@@ -191,7 +242,7 @@ static void lookup_xenstore_devid(xenstat_node * node, unsigned int domid, char
- /* Parse the stats buffer which contains I/O data for all the disks belonging to domid */
- static void qmp_parse_stats(xenstat_node *node, unsigned int domid, unsigned char *stats_buf, int qfd)
- {
--	char *qmp_devname;
-+	const char *qmp_devname;
- 	static const char *const qstats[] = {
- 		[ QMP_STATS_RETURN  ] = "return",
- 		[ QMP_STATS_DEVICE  ] = "device",
-@@ -202,12 +253,72 @@ static void qmp_parse_stats(xenstat_node *node, unsigned int domid, unsigned cha
- 		[ QMP_WR_OPERATIONS ] = "wr_operations",
- 	};
- 	const char *ptr[] = {0, 0};
--	yajl_val info, ret_obj, stats_obj, n;
- 	xenstat_vbd vbd;
- 	xenstat_domain *domain;
- 	unsigned int sector_size = 512;
- 	int i, j;
- 
-+#ifdef HAVE_LIBJSONC
-+	json_object *jso, *ret_jso, *stats_obj, *n;
-+	enum json_tokener_error error;
-+
-+	jso = json_tokener_parse_verbose((const char *)stats_buf, &error);
-+	if (jso == NULL)
-+		return;
-+
-+	ptr[0] = qstats[QMP_STATS_RETURN]; /* "return" */
-+	ret_jso = json_object_object_get(jso, ptr[0]);
-+	if (ret_jso == NULL)
-+		goto done;
-+
-+	/* Array of devices */
-+	for (i=0; i<json_object_array_length(ret_jso); i++) {
-+		memset(&vbd, 0, sizeof(xenstat_vbd));
-+		qmp_devname = NULL;
-+		stats_obj = json_object_array_get_idx(ret_jso, i);
-+
-+		ptr[0] = qstats[QMP_STATS_DEVICE]; /* "device" */
-+		n = json_object_object_get(stats_obj, ptr[0]);
-+		if (n)
-+			qmp_devname = json_object_get_string(n);
-+
-+		ptr[0] = qstats[QMP_STATS]; /* "stats" */
-+		stats_obj = json_object_object_get(stats_obj, ptr[0]);
-+		if (stats_obj && json_object_is_type(stats_obj, json_type_object)) {
-+			for (j=3; j<7; j++) {
-+				ptr[0] = qstats[j];
-+				n = json_object_object_get(stats_obj, ptr[0]);
-+				if (n && json_object_is_type(n, json_type_int)) {
-+					switch(j) {
-+					case QMP_RD_BYTES: /* "rd_bytes" */
-+						vbd.rd_sects = json_object_get_int64(n) / sector_size;
-+						break;
-+					case QMP_WR_BYTES: /* "wr_bytes" */
-+						vbd.wr_sects = json_object_get_int64(n) / sector_size;
-+						break;
-+					case QMP_RD_OPERATIONS: /* "rd_operations" */
-+						vbd.rd_reqs = json_object_get_int64(n);
-+						break;
-+					case QMP_WR_OPERATIONS: /* "wr_operations" */
-+						vbd.wr_reqs = json_object_get_int64(n);
-+						break;
-+					}
-+				}
-+			}
-+			/* With the QMP device name, lookup the xenstore qdisk device ID and set vdb.dev */
-+			if (qmp_devname)
-+				lookup_xenstore_devid(node, domid, qmp_devname, qfd, &vbd.dev, &sector_size);
-+			if ((domain = xenstat_node_domain(node, domid)) == NULL)
-+				continue;
-+			if ((xenstat_save_vbd(domain, &vbd)) == NULL)
-+				goto done;
-+		}
-+	}
-+done:
-+	json_object_put(jso);
-+#elif defined(HAVE_LIBYAJL)
-+	yajl_val info, ret_obj, stats_obj, n;
-+
- 	/* Use libyajl version 2.0.3 or newer for the tree parser feature */
- 	if ((info = yajl_tree_parse((char *)stats_buf, NULL, 0)) == NULL)
- 		return;
-@@ -260,6 +371,7 @@ static void qmp_parse_stats(xenstat_node *node, unsigned int domid, unsigned cha
- 	}
- done:
- 	yajl_tree_free(info);
-+#endif
- }
- 
- /* Write a command via the QMP. Returns number of bytes written */
+ .PHONY: install
+ install: all
 -- 
 Anthony PERARD
 
