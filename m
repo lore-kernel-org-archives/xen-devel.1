@@ -4,42 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9882CAC5B8
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 07:41:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1133815.1471865 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB76CAC5B9
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 08:21:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1133831.1471906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Uyy-00010S-Gj; Tue, 30 Sep 2025 07:41:08 +0000
+	id 1v3VcK-00087F-DR; Tue, 30 Sep 2025 08:21:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1133815.1471865; Tue, 30 Sep 2025 07:41:08 +0000
+Received: by outflank-mailman (output) from mailman id 1133831.1471906; Tue, 30 Sep 2025 08:21:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Uyy-00010L-Dv; Tue, 30 Sep 2025 07:41:08 +0000
-Received: by outflank-mailman (input) for mailman id 1133815;
- Tue, 30 Sep 2025 07:41:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v3VcK-000878-AP; Tue, 30 Sep 2025 08:21:48 +0000
+Received: by outflank-mailman (input) for mailman id 1133831;
+ Tue, 30 Sep 2025 08:21:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=MVVz=4J=redhat.com=thuth@srs-se1.protection.inumbo.net>)
- id 1v3Uyw-00010F-OQ
- for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 07:41:06 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d0bbcd70-9dd0-11f0-9809-7dc792cee155;
- Tue, 30 Sep 2025 09:41:03 +0200 (CEST)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-56-eOXQavCVNVWF5ZW6csUQqQ-1; Tue, 30 Sep 2025 03:41:00 -0400
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3ece14b9231so3831028f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 30 Sep 2025 00:41:00 -0700 (PDT)
-Received: from [192.168.0.7] (ltea-047-064-114-056.pools.arcor-ip.net.
- [47.64.114.56]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb74e46bcsm21596535f8f.8.2025.09.30.00.40.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 00:40:58 -0700 (PDT)
+ (envelope-from <SRS0=MDOg=4J=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1v3VcI-0007Nn-Ee
+ for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 08:21:46 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 80e55687-9dd6-11f0-9d14-b5c5bf9af7f9;
+ Tue, 30 Sep 2025 10:21:46 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-46b303f7469so38468355e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Sep 2025 01:21:45 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e5c3cad50sm8272675e9.3.2025.09.30.01.21.43
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 30 Sep 2025 01:21:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,142 +47,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d0bbcd70-9dd0-11f0-9809-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1759218062;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=j5g55fSIVioaOkOGMYUBzd3ThDPmNzBRB7wmsPOA2xg=;
-	b=S0VcLOF/oVWuyu2Ss9n/DeHy9bFPoMX9pSpTNcF2RY+F6zoZhdJxIXWWRDjbNXPxOAuJVu
-	EdnfSCNc3XSzq10rH1b37Fhw88mnZt+HZCe2rd4pS1sFZ99n24b+2iFbHwvXvz2+eYhPtE
-	FtcxHweIklSRHz4sK+Sq93YgpC5RlwA=
-X-MC-Unique: eOXQavCVNVWF5ZW6csUQqQ-1
-X-Mimecast-MFC-AGG-ID: eOXQavCVNVWF5ZW6csUQqQ_1759218060
+X-Inumbo-ID: 80e55687-9dd6-11f0-9d14-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1759220505; x=1759825305; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uVuWODNllLBcWHkHdEzk+20qcWtQ6YA1oYWBzMhXpCQ=;
+        b=oigqoUBh0Kir4Us1OzG1+OnIJdK5wmw/a9qhXj5kjyJCs5G9IlrhRS7vKrDoPU9wY8
+         Jj9jsGGShHfKuVNxLbokezI2AFcvbSdk8rhKLSNk8Ocf6E3QzAp005zVfg/Xqcpbofje
+         c4CGAJZg6ny7f6U4Qe1D0RKc4KuiTv7pLHTWWoT7S9BHJTDT/xod+ijb81nfkRplWTJi
+         IS3IXfmEH3tNY4d65xgPRQ7FAgZlKAjaDiyVJP1e2BWjuQqWwKuZfAbHSsrg6dn6T/cp
+         UNUybVYx7CFroUn/mpiFaUtgj0aX4VvaJt6Z6lbhfwG+g6ZNQAVPO0tNT4o2MiVyr1jz
+         KoUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759218059; x=1759822859;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=j5g55fSIVioaOkOGMYUBzd3ThDPmNzBRB7wmsPOA2xg=;
-        b=wBv2ZQoWQx68dT8EpENMQczttSs/cShdHVgpDiAGkb55ri+phLbvq2wLv9++8biaAS
-         mvSpZxR1hAJlM18dH6ObpZ3oGDjtufBzx7lHdqFF5q7i+Bb5Z4grfKbh0vLjkCEUW8T7
-         0nVER40JgQk2PH9Pnnvz++8zLJqoR5kdkrpBlhiNTdDoetEwe0+aEqShBiMfpGDqIlyV
-         fcyE8/3jIWBx/I2K/Zdg6hZK0x+X4m4Li7l0KG60NM8fHfhABgPfgNT0So8hjXV5zQW2
-         wY3Nf1QL7Qa/a21l+Fl22M3HyX2QO4E9vf5GiMfmldCqguFzLesYIg3lNXi1zJn2uRTu
-         pv0g==
-X-Forwarded-Encrypted: i=1; AJvYcCVLoBOnuVsUqCOLOKNXOgUhtqz6ovlDXKxovCTeIV/PexBCmASoi9hoOHecNgByHd3RcAfeSE3I6LY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyK68d7NeJ/271Iv4loNpW8YlUWrew8lsnn0hupRy+VjpnOHdWc
-	G3ziQqJMA0MGYopb30u9v0yDJcEvGWq9Tw2Go4wsEIhTQIfqsNofLxKyM2cqjLXfD1K7ABKaYpL
-	yfX9L9gS9UQwrQiBF3Vz+OF19/qhBc9FcHvtUZ+Rj/PMBmiz2pzDIySSC6yQ6ysdmL1SW
-X-Gm-Gg: ASbGncs8gvaSz7t5m4cHWZltfhQOY3jZ43V9ayuyangniHwcjvLU6YGgaqUghyaSGJs
-	mQ3Or7INj5/j5CMxx74Kj7DDZxEVtWeN8+/KEC0rLzuna7OvSti1TBaHszvqEJQUUAjLli4juxh
-	/hIAxSB32GVUjbfLAhSrQbLM7MRrIBw4Tdzaco7knCXxuvFL7bYbwyKcV+zm/5F6NaJb8ff6KhY
-	1bDjsnq/QRYpqH7IV42g0femoGvu7iVVrZsWLtUvQ2UeKyvSTe+YtkxR/+//5bfxp9Bd0Gi9Pqi
-	OU5okIMRfEKdEjb5HZ9SKElutXEitF+ZwyiRomiyQwWguo0OJ6cq1YQKmmQ1bV9pjuvBnR9WB3v
-	xsLaSvGutsA==
-X-Received: by 2002:a05:6000:2512:b0:3e7:610b:85f6 with SMTP id ffacd0b85a97d-40e4ece56f9mr18746547f8f.39.1759218059504;
-        Tue, 30 Sep 2025 00:40:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFtAakQVSr7pX6RBy8gWI/wBsZCTYsWc4ZTAkgkXM7gzrLE/6RH/bVKOjbcCuughEeAm/sEXA==
-X-Received: by 2002:a05:6000:2512:b0:3e7:610b:85f6 with SMTP id ffacd0b85a97d-40e4ece56f9mr18746511f8f.39.1759218059101;
-        Tue, 30 Sep 2025 00:40:59 -0700 (PDT)
-Message-ID: <b041eb8a-7b2e-41ec-bdfa-1867814dde36@redhat.com>
-Date: Tue, 30 Sep 2025 09:40:56 +0200
+        d=1e100.net; s=20230601; t=1759220505; x=1759825305;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uVuWODNllLBcWHkHdEzk+20qcWtQ6YA1oYWBzMhXpCQ=;
+        b=OYAtEYRnmo7fdvvYR7y51kPqDt+uoBUaNvCSOpHyjqV0AcyX7OkgKyga3R/+dXIZT+
+         oIo/cVhyH9bqb7Dt/u+k5RPet7O+siosOpGWVd5B5LOi6EyNdwCJMtyHCTAyDZA+o9F/
+         7tgFLyLitLCQTTjiC9ON7YekIeL4vDx1cKYUjCR5KTW7O5QKB1yYEX5PwQ2l9q2KboTP
+         sf12InpHReMMRmI6nP0ErRDA1vtLMbcw8wu9U+O1Z2ozyNdFz1s8ZF22xwCKS9w95eoA
+         Ib/c74mMONA3+Ul+HnIvHlohmkIrKN/kT7n8/UZc+ohNrdaiBX1yLLxzhcgGXMAkeMzR
+         B+gw==
+X-Forwarded-Encrypted: i=1; AJvYcCUDrl7Ztkck6WStfB3tNw4AbmuXb3Cr+N/dogrVQj5lsoiE3edvsaST7+88MuSlZ3aj04o9MNPlBXI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyJ5rYrOiS8i8GXCXxmtPlTfAKoeGa3wUcDM62HbvH0zkGOFH/0
+	JZkNKMaN86N3NimYiDXRArk/XVPuNO+gglQqEcrzRZ1sDfp2d5Ty8r09WfxOlklHd5c=
+X-Gm-Gg: ASbGncvEMZG92zz9unm7X0z5JVoEJ73Ani/vLBJPLWuyAClOvxxXrp6GlnwOGorplA7
+	D/7mxDGAR0LatTjrnuIOYiTQ8O5Rwa8Dwe3EFNqYf3fIRxPZE+mVgMA07Ukt2UQfdE1i6vmgOO/
+	dbjaxJm+PAprGvzeTL+vF4Ecz04/IyeCvK5yi8MO7zoUp7JrCPcEXjFMJE5m6HTXyCW+jGHmeRB
+	DFguTgaMtyop+h0OGoXvQxsSODQgKQyW5n7c42MDGmdwDWBUaVGA9BKgRVbkJNlktODPMgUfBSy
+	DSH28ZYjP/1i3kPhHfNnAGPvb0dMVSFHo3uMNeVbZ2xpELJtUUeSLhUBLHrVT8qyuXfcE7Af6iP
+	S6JtQlRAlfrLOg2m+E1Hr5aTNC1KBeAZi++VeMhU0B52oW7NI7t4LIiReTXAy7TqgpPbY8s2XkK
+	2KI4E+l/d1MiMImt2UY/QuPRa3yV6+fZY=
+X-Google-Smtp-Source: AGHT+IEnN1+Dj0G5eE22oo/LVcWK6MF1t2TvnNSxkl29p00iMJks8dqgYIqx9W0IIiNQ+maQ1TKmXg==
+X-Received: by 2002:a05:600c:1e85:b0:45d:d5df:ab2d with SMTP id 5b1f17b1804b1-46e32a03456mr188255845e9.26.1759220505370;
+        Tue, 30 Sep 2025 01:21:45 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org,
+	Peter Maydell <peter.maydell@linaro.org>
+Cc: Marcelo Tosatti <mtosatti@redhat.com>,
+	Ilya Leoshkevich <iii@linux.ibm.com>,
+	Reinoud Zandijk <reinoud@netbsd.org>,
+	Peter Xu <peterx@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Zhao Liu <zhao1.liu@intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	kvm@vger.kernel.org,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	xen-devel@lists.xenproject.org,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Sunil Muthuswamy <sunilmut@microsoft.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Matthew Rosato <mjrosato@linux.ibm.com>,
+	qemu-s390x@nongnu.org,
+	Paul Durrant <paul@xen.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Jason Herne <jjherne@linux.ibm.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Thomas Huth <thuth@redhat.com>,
+	Eric Farman <farman@linux.ibm.com>
+Subject: [PATCH v3 03/18] system/memory: Factor address_space_is_io() out
+Date: Tue, 30 Sep 2025 10:21:10 +0200
+Message-ID: <20250930082126.28618-4-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250930082126.28618-1-philmd@linaro.org>
+References: <20250930082126.28618-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/17] system/physmem: Un-inline
- cpu_physical_memory_read/write()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Cc: Jason Herne <jjherne@linux.ibm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Stefano Garzarella <sgarzare@redhat.com>, xen-devel@lists.xenproject.org,
- Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- Eric Farman <farman@linux.ibm.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Halil Pasic <pasic@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Zhao Liu <zhao1.liu@intel.com>,
- David Woodhouse <dwmw2@infradead.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, kvm@vger.kernel.org,
- "Michael S. Tsirkin" <mst@redhat.com>, Peter Xu <peterx@redhat.com>,
- qemu-s390x@nongnu.org, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>
-References: <20250930041326.6448-1-philmd@linaro.org>
- <20250930041326.6448-15-philmd@linaro.org>
- <193cd8a8-2c4c-4c2c-af22-622b74c332ee@redhat.com>
- <61c31076-5330-426a-9c28-b2400bec44f6@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <61c31076-5330-426a-9c28-b2400bec44f6@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: zXpwkDwHjcSZRGyC1YGwdishO7HPDVobwM2L7QDhzcg_1759218060
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 30/09/2025 09.23, Philippe Mathieu-Daudé wrote:
-> On 30/9/25 07:02, Thomas Huth wrote:
->> On 30/09/2025 06.13, Philippe Mathieu-Daudé wrote:
->>> Un-inline cpu_physical_memory_read() and cpu_physical_memory_write().
->>
->> What's the reasoning for this patch?
-> 
-> Remove cpu_physical_memory_rw() in the next patch without having
-> to inline the address_space_read/address_space_write() calls in
-> "exec/cpu-common.h".
-> 
-> Maybe better squashing both together?
+Factor address_space_is_io() out of cpu_physical_memory_is_io().
 
-Either squash them, or provide a proper patch description here, but just 
-repeating the patch title as description without giving a reasoning is just 
-confusing for the reviewers.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+---
+ include/system/memory.h |  9 +++++++++
+ system/physmem.c        | 21 ++++++++++++---------
+ 2 files changed, 21 insertions(+), 9 deletions(-)
 
-  Thomas
+diff --git a/include/system/memory.h b/include/system/memory.h
+index 3e5bf3ef05e..546c643961d 100644
+--- a/include/system/memory.h
++++ b/include/system/memory.h
+@@ -3030,6 +3030,15 @@ static inline MemoryRegion *address_space_translate(AddressSpace *as,
+ bool address_space_access_valid(AddressSpace *as, hwaddr addr, hwaddr len,
+                                 bool is_write, MemTxAttrs attrs);
+ 
++/**
++ * address_space_is_io: check whether an guest physical addresses
++ *                      whithin an address space is I/O memory.
++ *
++ * @as: #AddressSpace to be accessed
++ * @addr: address within that address space
++ */
++bool address_space_is_io(AddressSpace *as, hwaddr addr);
++
+ /* address_space_map: map a physical memory region into a host virtual address
+  *
+  * May map a subset of the requested range, given by and returned in @plen.
+diff --git a/system/physmem.c b/system/physmem.c
+index 86422f294e2..84d7754ccab 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -3359,6 +3359,17 @@ bool address_space_access_valid(AddressSpace *as, hwaddr addr,
+     return flatview_access_valid(fv, addr, len, is_write, attrs);
+ }
+ 
++bool address_space_is_io(AddressSpace *as, hwaddr addr)
++{
++    MemoryRegion *mr;
++
++    RCU_READ_LOCK_GUARD();
++    mr = address_space_translate(as, addr, &addr, NULL, false,
++                                 MEMTXATTRS_UNSPECIFIED);
++
++    return !(memory_region_is_ram(mr) || memory_region_is_romd(mr));
++}
++
+ static hwaddr
+ flatview_extend_translation(FlatView *fv, hwaddr addr,
+                             hwaddr target_len,
+@@ -3755,15 +3766,7 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
+ 
+ bool cpu_physical_memory_is_io(hwaddr phys_addr)
+ {
+-    MemoryRegion*mr;
+-    hwaddr l = 1;
+-
+-    RCU_READ_LOCK_GUARD();
+-    mr = address_space_translate(&address_space_memory,
+-                                 phys_addr, &phys_addr, &l, false,
+-                                 MEMTXATTRS_UNSPECIFIED);
+-
+-    return !(memory_region_is_ram(mr) || memory_region_is_romd(mr));
++    return address_space_is_io(&address_space_memory, phys_addr);
+ }
+ 
+ int qemu_ram_foreach_block(RAMBlockIterFunc func, void *opaque)
+-- 
+2.51.0
 
 
