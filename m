@@ -4,38 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81027CAC5B8
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 04:16:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1133524.1471716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA56CAC5B8
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 04:42:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1133655.1471728 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Rmk-0005Fw-PL; Tue, 30 Sep 2025 04:16:18 +0000
+	id 1v3SC4-0007Rm-Ap; Tue, 30 Sep 2025 04:42:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1133524.1471716; Tue, 30 Sep 2025 04:16:18 +0000
+Received: by outflank-mailman (output) from mailman id 1133655.1471728; Tue, 30 Sep 2025 04:42:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3Rmk-0005Ef-EI; Tue, 30 Sep 2025 04:16:18 +0000
-Received: by outflank-mailman (input) for mailman id 1133524;
- Tue, 30 Sep 2025 04:16:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1v3SC4-0007Rf-87; Tue, 30 Sep 2025 04:42:28 +0000
+Received: by outflank-mailman (input) for mailman id 1133655;
+ Tue, 30 Sep 2025 04:42:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=MDOg=4J=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1v3RlC-0006tq-FG
- for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 04:14:42 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fd2839b9-9db3-11f0-9d14-b5c5bf9af7f9;
- Tue, 30 Sep 2025 06:14:42 +0200 (CEST)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-46e30ef74b0so37706015e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 29 Sep 2025 21:14:42 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e4ab0bf62sm98607665e9.9.2025.09.29.21.14.39
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Sep 2025 21:14:40 -0700 (PDT)
+ (envelope-from <SRS0=MVVz=4J=redhat.com=thuth@srs-se1.protection.inumbo.net>)
+ id 1v3SC2-0007R6-7F
+ for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 04:42:26 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d929a01a-9db7-11f0-9809-7dc792cee155;
+ Tue, 30 Sep 2025 06:42:20 +0200 (CEST)
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-475-U0GkLpl8Mc2yP93URxHw2Q-1; Tue, 30 Sep 2025 00:42:17 -0400
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-b4544f46392so18836066b.0
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Sep 2025 21:42:17 -0700 (PDT)
+Received: from [192.168.0.7] (ltea-047-064-114-056.pools.arcor-ip.net.
+ [47.64.114.56]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b3e89655b09sm359039666b.77.2025.09.29.21.42.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Sep 2025 21:42:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,112 +51,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd2839b9-9db3-11f0-9d14-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1759205681; x=1759810481; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QtU1C0M8U0OTbHcI2E95ZD2Zrsmz5/OESKETD6NudSM=;
-        b=RoKdLh6ipvmHaQwd4kHXnJHj2+nO4HEKbbbM911eR6EDlVh+5b/0U3MNy2AHcHE9j8
-         y3FgXKvGSS28bL7lybM0dTsKJgqs7oJrNtb3BXW46aQjYho6sZOpKFIxAS89O10av6Fa
-         xtGYHk3c23IITr94wESZHN8v1e9sxiUKAhGktUHtqGZQAfKeiPmLBmgloIIphSvhUexl
-         HUxSk1LM9NUo3c5qKhQYFeZl/BOQF44qdZwJsyP2ces4J9+NjuftDZ4K7Io7OJnsrteS
-         0MW5+phjmfB1ouDmT1TllD2msTq0X+BdtazLBeyBeEW8O3SktBTBsXS4GsJZC4gP4XmL
-         XzjQ==
+X-Inumbo-ID: d929a01a-9db7-11f0-9809-7dc792cee155
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1759207339;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=tvxLjB/EsvBZ5htouvq/q3x83R6wXLK+5or1QrTnakw=;
+	b=NZcrNuNDEV+RiCbVuGjddgcNeoRWmtrnQalgxte8aZZDS5gPkEefYEchJWGNDnIij1pL0m
+	831tnulTVCoXPK/o73TeIApKtRUTTXsWKV93dekAyhC12aXGQPKZjEWPNkmAmKTzmtXiMJ
+	QWOSnBXXFX9Ghpk1MueW081ZQygjecM=
+X-MC-Unique: U0GkLpl8Mc2yP93URxHw2Q-1
+X-Mimecast-MFC-AGG-ID: U0GkLpl8Mc2yP93URxHw2Q_1759207337
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759205681; x=1759810481;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QtU1C0M8U0OTbHcI2E95ZD2Zrsmz5/OESKETD6NudSM=;
-        b=FV26vjIi4j8fUS8eMWnEE6RW2x9d0Hvh5nWhc6CvzykMr8aJ9F2BCikiETjuNqPWVC
-         ujhV8Q1XpP9G4rYSaM/z84fdAUM/IUTo2HMKHUDB8SQJvlYu9ilZj4pGyijM8N7pI75l
-         SrPcgTAV6V4/1WITdbQlD1PwObTM2TufjayR8xA5OWnvuhBvLGFe05E9nhsxVWz1bEyj
-         /jRGtrMsIud9yZWwOIPgsyTcHjbRI1UG8do2wMxkb14D2uC0N+MNoQkuTfOw+stgMvxE
-         fl9s89ZeATrsj825fLm2cXV/kxFUaPhqZIxQ8Vy47XNCuYZU1oAjId6DdgMR77PAaiyQ
-         Cv1Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWBH+9dkElga6eKuQKG12glYs0I5eqG8PTdlT7wMBsP2Gf1BLXhwxjWtriuCT4jc4mbeCa1DjasO3A=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx+Nh2rPdXRArWRlPyfK+Irvc+qlyg1JYON9o9rFMSs+T3Iw54q
-	EFmWCezA6KWLr2HXxTu3BOkos+3MlAU3/YA4A8Pwf1/0HOrnt5jHWrEqeZErp4IIuq4=
-X-Gm-Gg: ASbGnctQBT1vwIRek5RYCHqxN7/1txaJ6WYNfd+Rw+3gsurKc+SpdxcDwMmYDOsTvjN
-	ydWbC7F7+Yh/kJhUpku+gxqDZ9VVhSkSgnl0hwNp6meoLxkTPw7Mb2BopjfzAIGRIYVnLZWaxrv
-	LbLWBB6EzHn5YHW1KUuTWOAxaQdRr975NzU0JDXNFbrisS5sOan8GouTEPLUbpB0/JJkuPNwy8S
-	HwkXlS3qKYf/YkBy24ekE+ZvDz85CWDjU6yCzZDTIuNv6cMamsniTTrpAqHuO9QWBp3FE8ZMU3C
-	dLzWpKaSBYp5P2jhMJpgDyRnj82xekilp+NfHYxsc4JizXLWxFsazqccZqweUB1aGIFgmDNJ0m/
-	R3efAfWhFfB9EyfBRMG5s/Z4vEX2aDdmLBpykuvkUkdPnAYyrVU5U/ZPSGWr83YBYBOMpb9zDFl
-	mvMRtMexaY3ncJbrN5I++O
-X-Google-Smtp-Source: AGHT+IGUG79kearmVn7+9qugGuIF+Iaatq5RHrgppUdDi9qlZIXdMZGH9YdXisC+M3CCPhGM+TJyoQ==
-X-Received: by 2002:a05:600c:a00c:b0:46e:41b0:f0cb with SMTP id 5b1f17b1804b1-46e41b0f464mr152474875e9.25.1759205681405;
-        Mon, 29 Sep 2025 21:14:41 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org,
-	Peter Maydell <peter.maydell@linaro.org>
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Jason Herne <jjherne@linux.ibm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Stefano Garzarella <sgarzare@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Ilya Leoshkevich <iii@linux.ibm.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Paul Durrant <paul@xen.org>,
-	Eric Farman <farman@linux.ibm.com>,
-	Marcelo Tosatti <mtosatti@redhat.com>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	Reinoud Zandijk <reinoud@netbsd.org>,
-	Zhao Liu <zhao1.liu@intel.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Sunil Muthuswamy <sunilmut@microsoft.com>,
-	kvm@vger.kernel.org,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Peter Xu <peterx@redhat.com>,
-	Thomas Huth <thuth@redhat.com>,
-	qemu-s390x@nongnu.org,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	David Hildenbrand <david@redhat.com>
-Subject: [PATCH v2 12/17] target/i386/nvmm: Inline cpu_physical_memory_rw() in nvmm_mem_callback
-Date: Tue, 30 Sep 2025 06:13:20 +0200
-Message-ID: <20250930041326.6448-13-philmd@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250930041326.6448-1-philmd@linaro.org>
-References: <20250930041326.6448-1-philmd@linaro.org>
+        d=1e100.net; s=20230601; t=1759207337; x=1759812137;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tvxLjB/EsvBZ5htouvq/q3x83R6wXLK+5or1QrTnakw=;
+        b=PbUYUzKvddUSZAGWRkRMiUYLsKwSfeUyI0zBkobBZjgKkv9oWcuVrRd9PzRawjcGq4
+         BHsIr80k2UkIdxwYuVHUihxIDlD93hnhSR/dykkn1U8toCLWZe4Px4U2VWx9LdhwzHWc
+         L/JSZaTkR1BUQiCH1iGAvdbpB5hjdkQbr8z45SMB8M4DAQb8/DJSsaG8f0iy9UHWLHx2
+         9t15UPsDb4FkvNk9glQFArP50716PE8U41X/BW1Dq+Fqcrk4cjlrN1uhN4vNwI13XluR
+         vXCOGhw40hCZ3vxencJ6Im1X7YbAuFPqZ5Z/+Hy/yBRQ4VCI2SW6wdO6C92sAXli5yBW
+         vFcg==
+X-Forwarded-Encrypted: i=1; AJvYcCU90BsLFOA83/co2A4EHW1sfWwTSFWOwWQW9IqcPXEugDB9yXbs2JeMpIVSRurogfcdlWSw0wB4vqw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwHaZDa+qgmOkjy1C+3tj68zHkD9CjGlNMtGn7TS3XhVW3SE4Op
+	KfIYoN+RCaFwlTJMNBvxuCsCQgBlnwmUh2pskoUz1H/shaWuHH/6y7ds8jXekI+cvEvRKkcJaEz
+	+7YzRNtafcGnoxSNjf+KNxs4sd0dpL1TYCjiTdDOSuAf0Djd80kvvsYLVp7es93ZsL1nF
+X-Gm-Gg: ASbGncvlF08atln7/fWiAyJ1yPeFZdvA4DieGmvpPMlVNWcPZCho9nqDM64jox9f+3G
+	tiOanbvJBppn20VJ4ArZbafBmU4EhwqcnUkRMKGr0axHhpwoyvAxwjIMLwuiKdJY4fysNBL/c1C
+	rDicfB3cjCSWCbjHqsMP2iP3ZCdeSHT8fCMfRUGUGeSwetZOS7WMeCUdUzAuCmi0Q6FYN8NQM0P
+	MjJGj/+4RWd1nBGfXMs9Ihif8Yhfcurmqqi6bjtaQIoyhamKpa3KGGke/KuL7szY9zzBlmHyN8u
+	29fhCq03hBnDeMi11374FgI2giTpunNj5SfleDsiRWuEV7qvLlGbNPrZSRj96tH3SDXO5+vNgtZ
+	w69utNyA05w==
+X-Received: by 2002:a17:906:55d3:b0:b3a:875c:294f with SMTP id a640c23a62f3a-b3a875c2f2bmr943874566b.10.1759207336654;
+        Mon, 29 Sep 2025 21:42:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE05FwuhQMGeXmbqCfNb5OYa/tRq8eoNKOW/kmksbVHWw0wqxA34cy3qT6OjHD0nk6wgB/ziw==
+X-Received: by 2002:a17:906:55d3:b0:b3a:875c:294f with SMTP id a640c23a62f3a-b3a875c2f2bmr943870066b.10.1759207336259;
+        Mon, 29 Sep 2025 21:42:16 -0700 (PDT)
+Message-ID: <69b0255a-b6b5-46da-9940-ce1f2a18c2e6@redhat.com>
+Date: Tue, 30 Sep 2025 06:42:13 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/17] target/s390x/mmu: Replace [cpu_physical_memory
+ -> address_space]_rw()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
+Cc: Jason Herne <jjherne@linux.ibm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Stefano Garzarella <sgarzare@redhat.com>, xen-devel@lists.xenproject.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
+ Eric Farman <farman@linux.ibm.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Reinoud Zandijk <reinoud@netbsd.org>, Zhao Liu <zhao1.liu@intel.com>,
+ David Woodhouse <dwmw2@infradead.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Sunil Muthuswamy <sunilmut@microsoft.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Xu <peterx@redhat.com>,
+ qemu-s390x@nongnu.org, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@redhat.com>
+References: <20250930041326.6448-1-philmd@linaro.org>
+ <20250930041326.6448-10-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20250930041326.6448-10-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: tvwIQrXzG72lNeD8gaQjUhHE_AYTXa4oh6W9Ddda400_1759207337
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/i386/nvmm/nvmm-all.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+On 30/09/2025 06.13, Philippe Mathieu-Daudé wrote:
+> When cpu_address_space_init() isn't called during vCPU creation,
+> its single address space is the global &address_space_memory.
+> 
+> As s390x boards don't call cpu_address_space_init(),
+> cpu_get_address_space(CPU(cpu), 0) returns &address_space_memory.
+> 
+> We can then replace cpu_physical_memory_rw() by the semantically
+> equivalent address_space_rw() call.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
 
-diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
-index ed424251673..2e442baf4b7 100644
---- a/target/i386/nvmm/nvmm-all.c
-+++ b/target/i386/nvmm/nvmm-all.c
-@@ -15,6 +15,7 @@
- #include "accel/accel-ops.h"
- #include "system/nvmm.h"
- #include "system/cpus.h"
-+#include "system/memory.h"
- #include "system/runstate.h"
- #include "qemu/main-loop.h"
- #include "qemu/error-report.h"
-@@ -516,7 +517,9 @@ nvmm_io_callback(struct nvmm_io *io)
- static void
- nvmm_mem_callback(struct nvmm_mem *mem)
- {
--    cpu_physical_memory_rw(mem->gpa, mem->data, mem->size, mem->write);
-+    /* TODO: Get CPUState via mem->vcpu? */
-+    address_space_rw(&address_space_memory, mem->gpa, MEMTXATTRS_UNSPECIFIED,
-+                     mem->data, mem->size, mem->write);
- 
-     /* Needed, otherwise infinite loop. */
-     current_cpu->vcpu_dirty = false;
--- 
-2.51.0
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
