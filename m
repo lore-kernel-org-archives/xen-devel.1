@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1EA7CAC5B8
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 08:22:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1133829.1471880 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE571CAC5B9
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Sep 2025 08:22:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1133841.1471926 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3VcD-0007RA-PW; Tue, 30 Sep 2025 08:21:41 +0000
+	id 1v3VcT-0000Qv-Ub; Tue, 30 Sep 2025 08:21:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1133829.1471880; Tue, 30 Sep 2025 08:21:41 +0000
+Received: by outflank-mailman (output) from mailman id 1133841.1471926; Tue, 30 Sep 2025 08:21:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v3VcD-0007Q9-K6; Tue, 30 Sep 2025 08:21:41 +0000
-Received: by outflank-mailman (input) for mailman id 1133829;
- Tue, 30 Sep 2025 08:21:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v3VcT-0000Qk-Qb; Tue, 30 Sep 2025 08:21:57 +0000
+Received: by outflank-mailman (input) for mailman id 1133841;
+ Tue, 30 Sep 2025 08:21:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=MDOg=4J=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1v3VcB-0007Nm-SF
- for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 08:21:39 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7a6cdbe9-9dd6-11f0-9809-7dc792cee155;
- Tue, 30 Sep 2025 10:21:35 +0200 (CEST)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3ee64bc6b85so4950395f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Sep 2025 01:21:35 -0700 (PDT)
+ id 1v3VcT-0007Nn-4t
+ for xen-devel@lists.xenproject.org; Tue, 30 Sep 2025 08:21:57 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 87494397-9dd6-11f0-9d14-b5c5bf9af7f9;
+ Tue, 30 Sep 2025 10:21:56 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-46e2e6a708fso36248755e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Sep 2025 01:21:56 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb74e46bcsm21770765f8f.8.2025.09.30.01.21.33
+ 5b1f17b1804b1-46e56f65290sm44620345e9.13.2025.09.30.01.21.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 30 Sep 2025 01:21:34 -0700 (PDT)
+ Tue, 30 Sep 2025 01:21:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,44 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a6cdbe9-9dd6-11f0-9809-7dc792cee155
+X-Inumbo-ID: 87494397-9dd6-11f0-9d14-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1759220495; x=1759825295; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1759220516; x=1759825316; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=I6r7ywVdtgg6puBO7GNeh9QBn+ePwbPPQeAATrRMKjs=;
-        b=gyS8IQ83XQePL0dmCrxB+R3Bmw9kUZDIfcsteCVOK8lm6GRlqlmiw+Mf7C0Hz4I55t
-         ylbLgBdrh2JNCagOn0TJVnkcvwIQYzkrza5CkyTlLmEwcdi2gDaEQ7ngmjpfkt2hhdB6
-         SdEOejxAzSy8xMTTbQibEhl9MgIw4rrgRKMCceHyhlUt8cycWE8XLW0OY4i2JeIIddC6
-         8jxyPu4x1Qtm8w1iWQ/rVhKB/pqcQMGqN4Iek6paE5U7P2vmI8/PdlpjTpfPjIXKYZlR
-         WEDCwYVIhhTljiE7qIz6xgLk0hbvQ9Bxv/JuWZvuyVY+ygHnUuwAYsklPAGV1qubJSsX
-         U4Cw==
+        bh=TmN6KZRBDFIwLcWnEVDqbz1WHRvv8u+lRYP5Aq5aiQ8=;
+        b=Ae14vR7/JPhbxTl8racrKMnzXpba7ajvr0ekXTb9hzMu4IctZDkBAOr6vRYPyBStn7
+         47wbUiYVrPugbEaK4Qpc6m5MAJfwmnE/nOLyRpdG/3jFJOLS8LNTRIfsfC1Ou4aIYVtj
+         sgwySGDNSYT3NMv2ZDQHoYasUiMflZ4X5GUe8thvEJP0SI6jk3wXDZ2FeT8BErCTRKJt
+         KMb7Yzgze+sbJBjQj5HItt/Vm5Asb8tFfZFbbwH7M2xP8+e+QQvu2AewEg+FEFQw174C
+         wVwZMVKcAcc6I0Fe8f/OMeDFKOn2mbWmDBMRTE8fFkPcMNLgjcRqyszD+uVD2i8B8+Ip
+         MD9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759220495; x=1759825295;
+        d=1e100.net; s=20230601; t=1759220516; x=1759825316;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=I6r7ywVdtgg6puBO7GNeh9QBn+ePwbPPQeAATrRMKjs=;
-        b=DE91NMU7iWi6eyGvKkr9MCaPg6bBol+QPSdbldESQ1qoSW8JrdqUB4KzsDtMJAA4IW
-         R6pdAv42CIVug8HErxivmeR5kGMTkkmBfTkIjvY77cR4NvGpbfw0jm18g8LoV4se1vph
-         G+UvcFC9oRHWYTaNUcjo7ZOteQ//nKrlY+zNqnyTfJBjoUYlHQzuA/yI+9Rr6HyMN8+e
-         8CpbFR71WcjFZCO5VOyANQDIYXqtSXFaZQtrO7jbl3ih3GiGD0Fl/MmH1LdunhjNsz2L
-         XySksmSwGz5PGYQO6pv0g+4T7ftkTSr4mhToXM3xxfAC0rvHJdQztPy/wy13atmgYMzv
-         ApeQ==
-X-Forwarded-Encrypted: i=1; AJvYcCU2L2ueVekOZ7zkzZOc/DdIzyTUPVB+FgVdKrXFuSyEUdCkNAp7GqafVN4ckoA9bWEIKDYIv54Y2Uk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzOQgC2pCXWPuPzcrYgheJrqK01vloJpCoIdVjXVOEDAcZdnjto
-	mRFPCqcR/svm8/3aR2kw+6cqIce2CPYLLRHGXKrAnZ/eZtP+0ADqvGdLaiV1RQ/biZk=
-X-Gm-Gg: ASbGncv2LJ9yqlPCu21VYJw+gPGrK1CB6LMXNezDFKEU3RVlMiMvMlEUzQTw6C3jdLX
-	TQMXxo3S/6JUALD6PURcTEKF7iB10wQBxewzokqqmcbvHZy1zwIv05cBREq017a3GYckXBzHxGt
-	Kj6dcuiVVimBngimIjl9OuYrM/kguaBlrjkRY70ftQ4I7KPlYrnQ+g3xunwALOfKQaVgYP+9DDx
-	VouVSJy/Ei3m2P950zlb8HW/p2Y9bW7AVN9fvDUixTurJTl+JlIqVzfq/M7YBTFET3VXgb72Y+q
-	LF3oHW40a4kmSBAVCsVchYJn+YQ+4wLLx88NBE4HCeRMboVik2wMvQ4Efrnlww4NPcrDsc/Nlsy
-	pMN3rRksr10us8wReYgYrjfjlrfUlYptEd7PaRn0evOb5d62rq+yhjblA68cYHy/TaADXNEHCT4
-	1BsDkwfDjnNYO7bVgNxOBB6JX6dFa86h4=
-X-Google-Smtp-Source: AGHT+IFpI3GL5cse+8n+ih1oF0AV0V9hqADSW+14D/yEjGe7vAb5o0N9WY3TIiFao6rN6HuitLNGGw==
-X-Received: by 2002:a05:6000:2089:b0:3eb:5245:7c1f with SMTP id ffacd0b85a97d-40e429c9c58mr19095049f8f.2.1759220494580;
-        Tue, 30 Sep 2025 01:21:34 -0700 (PDT)
+        bh=TmN6KZRBDFIwLcWnEVDqbz1WHRvv8u+lRYP5Aq5aiQ8=;
+        b=HurSdeEQGng3G27bjnGZcysbVyYcK4K1ToxuTWDzlQ6L/wQcj+1+rv6A9KAVMQGrtL
+         e6/vF0a9mhh73xK/EtJIzQN3BefQ426/j/jL8ZShFWQ6fUh4EML6KcoPuUOq7RW8LXcd
+         mUld6Ww2I3C1beUw19Mp5KHbwGuOhyruZKSdPikRo2rya3W81N4nwcHp8ij3xWyDPFwd
+         +RSGECghc+kbqieVhf2ztb8ktzs1tNVRj5oEgHfc0R6d8YQ4FmNpEjkw1ODUOONeUejN
+         yeIVoMUUloBRw1Ft2qtjhNFOrOW85ro6mnAM1o+GEFDY2KAMIELz2/6INuTFmtfzetWu
+         ZJnA==
+X-Forwarded-Encrypted: i=1; AJvYcCXef4yNFiHpnBikLdU9BIn5IF8jBRoE0gQ+rinmFIQW27L9+6bYgV14d9hdqZD+HzLHZCofcvaDF7E=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzyje0AmrYxRaW5hX4G5S7I0E7ggomSn5tlm3H9zvu0zX24eiBc
+	F3P+Z3v0aMG1qC2aa1Btbkchl/PqG/6fJgzPTmD10Og3qQ5RlxeO/ddGbus0704eTZ4=
+X-Gm-Gg: ASbGncuqJbH7wkXq01IPPqCc5mqd1a3x4msKHq6ngeUo0OUClqdbc8DQ5LxTm3d9spR
+	GWr05sMC9qbPpf39DxbPgNDdQIGMKWFm6A4VT1E8xayXu5SfUiykyWRZsB+GltYg8wmLh46HIs/
+	702yhq9iPzhV8WLOrbV4larqQGsd/sJiCfzDZDHlmhmEnb8dvCVRyXTTyX1QFCpJyqo5Qr84IZM
+	xwYoxKl/FJpvyiEnwA9tLRrd+m9Jlu3gq+0KWFQJp7B3aso9RKsaEOwa51J9Iq2HIaw9/JsAjEr
+	8Cnj0wG5D7IJNde/WBf1ILDob7gAiCvVZmM/5vzMiLbNUBeZbjSsvsCRnPlflSHkdf4pD6o5iA3
+	Apd8s+68XM6PxHvL+yd87WDkxDYjRXvgKeZjAXSciECbMYwVdfmmfyjrP/nNLxpSqBcUFQDY641
+	g7VSAhkwt4Af/7uM608en7z9vQz7/Fcno=
+X-Google-Smtp-Source: AGHT+IFRoVQqdg8pFriDfOKg6AJHeYajBA5OHZoOOnjeKEw77YQUzMpfQKsIByPubJl8mIXC2txRhQ==
+X-Received: by 2002:a05:600c:8b16:b0:468:7f92:5a80 with SMTP id 5b1f17b1804b1-46e329fbd2bmr146354195e9.27.1759220516099;
+        Tue, 30 Sep 2025 01:21:56 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -114,9 +114,9 @@ Cc: Marcelo Tosatti <mtosatti@redhat.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Thomas Huth <thuth@redhat.com>,
 	Eric Farman <farman@linux.ibm.com>
-Subject: [PATCH v3 01/18] docs/devel/loads-stores: Stop mentioning cpu_physical_memory_write_rom()
-Date: Tue, 30 Sep 2025 10:21:08 +0200
-Message-ID: <20250930082126.28618-2-philmd@linaro.org>
+Subject: [PATCH v3 05/18] hw/s390x/sclp: Use address_space_memory_is_io() in sclp_service_call()
+Date: Tue, 30 Sep 2025 10:21:12 +0200
+Message-ID: <20250930082126.28618-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250930082126.28618-1-philmd@linaro.org>
 References: <20250930082126.28618-1-philmd@linaro.org>
@@ -124,28 +124,50 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Update the documentation after commit 3c8133f9737 ("Rename
-cpu_physical_memory_write_rom() to address_space_write_rom()").
+When cpu_address_space_init() isn't called during vCPU creation,
+its single address space is the global &address_space_memory.
+
+As s390x boards don't call cpu_address_space_init(),
+cpu_get_address_space(CPU(cpu), 0) returns &address_space_memory.
+
+We can then replace cpu_physical_memory_is_io() by the semantically
+equivalent address_space_memory_is_io() call.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- docs/devel/loads-stores.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/s390x/sclp.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/docs/devel/loads-stores.rst b/docs/devel/loads-stores.rst
-index 9471bac8599..f9b565da57a 100644
---- a/docs/devel/loads-stores.rst
-+++ b/docs/devel/loads-stores.rst
-@@ -474,7 +474,7 @@ This function is intended for use by the GDB stub and similar code.
- It takes a virtual address, converts it to a physical address via
- an MMU lookup using the current settings of the specified CPU,
- and then performs the access (using ``address_space_rw`` for
--reads or ``cpu_physical_memory_write_rom`` for writes).
-+reads or ``address_space_write_rom`` for writes).
- This means that if the access is a write to a ROM then this
- function will modify the contents (whereas a normal guest CPU access
- would ignore the write attempt).
+diff --git a/hw/s390x/sclp.c b/hw/s390x/sclp.c
+index 9718564fa42..f507b36cd91 100644
+--- a/hw/s390x/sclp.c
++++ b/hw/s390x/sclp.c
+@@ -16,6 +16,7 @@
+ #include "qemu/units.h"
+ #include "qapi/error.h"
+ #include "hw/boards.h"
++#include "system/memory.h"
+ #include "hw/s390x/sclp.h"
+ #include "hw/s390x/event-facility.h"
+ #include "hw/s390x/s390-pci-bus.h"
+@@ -301,6 +302,7 @@ int sclp_service_call(S390CPU *cpu, uint64_t sccb, uint32_t code)
+     CPUS390XState *env = &cpu->env;
+     SCLPDevice *sclp = get_sclp_device();
+     SCLPDeviceClass *sclp_c = SCLP_GET_CLASS(sclp);
++    AddressSpace *as = cpu_get_address_space(CPU(cpu), 0);
+     SCCBHeader header;
+     g_autofree SCCB *work_sccb = NULL;
+ 
+@@ -308,7 +310,7 @@ int sclp_service_call(S390CPU *cpu, uint64_t sccb, uint32_t code)
+     if (env->psw.mask & PSW_MASK_PSTATE) {
+         return -PGM_PRIVILEGED;
+     }
+-    if (cpu_physical_memory_is_io(sccb)) {
++    if (address_space_is_io(as, sccb)) {
+         return -PGM_ADDRESSING;
+     }
+     if ((sccb & ~0x1fffUL) == 0 || (sccb & ~0x1fffUL) == env->psa
 -- 
 2.51.0
 
