@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C387CAC5BB
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Oct 2025 01:13:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1135226.1472488 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F36CCD183
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Oct 2025 08:42:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1135391.1472508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v47sQ-0008KC-7J; Thu, 02 Oct 2025 01:12:58 +0000
+	id 1v4EtA-0008HJ-5K; Thu, 02 Oct 2025 08:42:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1135226.1472488; Thu, 02 Oct 2025 01:12:58 +0000
+Received: by outflank-mailman (output) from mailman id 1135391.1472508; Thu, 02 Oct 2025 08:42:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v47sQ-0008K5-4D; Thu, 02 Oct 2025 01:12:58 +0000
-Received: by outflank-mailman (input) for mailman id 1135226;
- Thu, 02 Oct 2025 01:12:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TuKI=4L=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1v47sP-0008Jz-Op
- for xen-devel@lists.xenproject.org; Thu, 02 Oct 2025 01:12:57 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea19e06e-9f2c-11f0-9809-7dc792cee155;
- Thu, 02 Oct 2025 03:12:51 +0200 (CEST)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 87AF841A2B;
- Thu,  2 Oct 2025 01:12:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B55D7C4CEF7;
- Thu,  2 Oct 2025 01:12:48 +0000 (UTC)
+	id 1v4EtA-0008HA-2F; Thu, 02 Oct 2025 08:42:12 +0000
+Received: by outflank-mailman (input) for mailman id 1135391;
+ Thu, 02 Oct 2025 08:42:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=9sj0=4L=linaro.org=philmd@srs-se1.protection.inumbo.net>)
+ id 1v4Et8-000821-Fy
+ for xen-devel@lists.xenproject.org; Thu, 02 Oct 2025 08:42:10 +0000
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id af3f1d74-9f6b-11f0-9d14-b5c5bf9af7f9;
+ Thu, 02 Oct 2025 10:42:10 +0200 (CEST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-42420c7de22so434632f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Oct 2025 01:42:10 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8a6b40sm2649068f8f.2.2025.10.02.01.42.08
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 02 Oct 2025 01:42:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,246 +47,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea19e06e-9f2c-11f0-9809-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1759367569;
-	bh=khlVyLO7EWTnutYERtHhUFucjYfNiHlK6/Kp/ki/lfk=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=eqQ1JyqHPl5zq7lJhTa1LvsD1sAjGd3OpTglXa7srYtfh+BxlwBEgkFehHVIqdotW
-	 ny9M0haILH1SrFlgzNe11Yq+Ca1kg/3P4Coc0nmBEnX9fjtC0bLQitd7cU1HgeRcj6
-	 KfoII8L7gIRVi08V650vRusQr4V3GKEdICYG2Zmyt7g6CEVD9pN0mLAg2+IabQPfYw
-	 mU3EsQXwbWztSqE4S0zhNJPVWxd9udE+UV+eBbug+CdJPe8LIsTRoig4K1XTkZPTrf
-	 EyPxwNAzVYakcI988cF8ZEOkX+/z86WiVe3pSxqlw6sU3R7NooE7QF8f3go4z8wMOW
-	 V2rfLV3JB/89Q==
-Date: Wed, 1 Oct 2025 18:12:47 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    Michal Orzel <michal.orzel@amd.com>, Ayan Kumar Halder <ayankuma@amd.com>, 
-    Stefano Stabellini <stefano.stabellini@amd.com>
-Subject: Re: [ImageBuilder][PATCH V2] uboot-script-gen: Add ability to
- configure static event channels
-In-Reply-To: <20250930174421.2329608-1-oleksandr_tyshchenko@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2510011812370.7465@ubuntu-linux-20-04-desktop>
-References: <20250930174421.2329608-1-oleksandr_tyshchenko@epam.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: af3f1d74-9f6b-11f0-9d14-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1759394529; x=1759999329; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=I6r7ywVdtgg6puBO7GNeh9QBn+ePwbPPQeAATrRMKjs=;
+        b=HUrg8BLEDewS7+yN7BCvek2xSFof8pnvebsVU7NUsCLdvZHaQwqaCDHRSJns/SHZlO
+         3bV9uPFh0icr8VN4/H8QvTeLhZ5Xv5t1S+Jxe5OY4VZNvzEQCsbn7hrRpiSMICtjWWvJ
+         S/dO0Z1vPHjD78p5bc1fLVkjpLp3yxxSyo/2xBJEPY2DDlXGdkAJx7fztaPL5gr2dG2F
+         o6tYbnHqQlr3/tRWY4dAC6HX4Ws6yyVGgdo+1m3rQ5DX2vh+EHm5qR8WrenwOP8Hjo0s
+         usUGOwK/VegyfIS3VzzHkcWkvf/kSDvyBjpP7i+AWZuT+VAoDVhhJUBugluZx8U+PapX
+         3SVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759394529; x=1759999329;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=I6r7ywVdtgg6puBO7GNeh9QBn+ePwbPPQeAATrRMKjs=;
+        b=drOcLM5crYpk4AOfRopXmNorXqFhmqTcMKSpqpBIvSMj4CHKomvrbvH0gF5cqtfB/C
+         vpRnLtrJzqcgIlBOIfgGoE4dveLLUqrTIGoTaxkVvAXo6dVQX+vrrtq/lj+0xDCwapfN
+         u5SAQpxqFXJ/lcVrPQkxecHBNh832aHxKUHtMcTx6tCtjAo2mL3ICaMaaKoYCkiFhotE
+         FCa3RcvR/OcbcFa5k+0KaeHXYJe7TWsXWGtoHEHzpTsghOn3EX7wwFy6TGXMGlBk5Uor
+         5OONVjiWt16x+nRhL1Vi02JTowIWvHYoDBNp4Hocy+5Sh1TzYsVhRf1nqo22fO4KVhny
+         /HWg==
+X-Forwarded-Encrypted: i=1; AJvYcCXPI1Eal9hOelf8zgruSeKYQPr7Sal4Oxp+MJJXHbB0Tod93Znlkbvei5tlMDLMpcmohpRH+6dhUq0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzsA9nF2IQ4MVGkoKeK2TAszj/i0DvyYB5QlbmYOIefJr6k9BKa
+	02TjvPwqr8HOXRCSNlgOEBizAZIrdUDSBY4xyAvOvqEvw1K2Ry6TBkh7oSxtvGJDuqQ=
+X-Gm-Gg: ASbGnctdbWg/6Sek/mdxZilfecp1oT3CoDWdnU5+FmEA4TxydrYs+VBxfW7lIBwlj5G
+	hDvyHdq+1OE0pJdpPraz/XHPAq4cWpW1qeUna9M9RDSaa3PGqt1jvrAZLgggdFXAZ56SEixJH0Q
+	wLM/c63OVcj8wjMMCdFWglTtOGE1s0lR0xudsST39sqVI24cxPR9X4iX3mKwHjm/s+3Gkj1wjbw
+	o/iA89e+b/eJc83NTHFyLXyVNrABBa1X6f9MGY7l9HZEGLZJI8/DiFRtXtzDpiizdYR7UfFrCYD
+	GXG34XOKTTvW/z14WWE1sa170fO0eUHkVOpCbKcFFyc+BMJ1EDNSBD5Znwo8BMnJTo2pPIvAqLr
+	r/gGUoyErBMaVCuDLaxpKLDHXRNgzzh0U16yViPgBVZpVB5BLcd0wiJ2sErk0dkopFrt1MSci0g
+	CfAA77+tOlUnp6+KJp9iXO6frUck3Nug==
+X-Google-Smtp-Source: AGHT+IE1u3COjNq+oE6xio5GRW1A/vqSgcySFumrJ67RNAp4nOAK/5HZJkMzy+g6L+RiVVekcEJmKw==
+X-Received: by 2002:a05:6000:400c:b0:401:5ad1:682 with SMTP id ffacd0b85a97d-42557807a65mr5230357f8f.14.1759394529461;
+        Thu, 02 Oct 2025 01:42:09 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org,
+	kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v4 01/17] docs/devel/loads-stores: Stop mentioning cpu_physical_memory_write_rom()
+Date: Thu,  2 Oct 2025 10:41:46 +0200
+Message-ID: <20251002084203.63899-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251002084203.63899-1-philmd@linaro.org>
+References: <20251002084203.63899-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, 30 Sep 2025, Oleksandr Tyshchenko wrote:
-> Add DOMU_STATIC_EVTCHNS[number]="local_port remote_dom_idx remote_port; ..."
-> configuration file string option specifying the static event channel
-> definitions for domain.
-> 
-> For the following example:
-> DOMU_STATIC_EVTCHNS[0]="10 1 11; 12 1 13"
-> DOMU_STATIC_EVTCHNS[1]="11 0 10; 13 0 12"
-> 
-> it generates:
-> fdt mknod /chosen/domU0 evtchn@10
-> fdt set /chosen/domU0/evtchn@10 phandle <0xfffffffe>
-> fdt set /chosen/domU0/evtchn@10 compatible "xen,evtchn-v1"
-> fdt set /chosen/domU0/evtchn@10 xen,evtchn <10 0xfffffffd>
-> fdt mknod /chosen/domU0 evtchn@12
-> fdt set /chosen/domU0/evtchn@12 phandle <0xfffffffc>
-> fdt set /chosen/domU0/evtchn@12 compatible "xen,evtchn-v1"
-> fdt set /chosen/domU0/evtchn@12 xen,evtchn <12 0xfffffffb>
-> ...
-> fdt mknod /chosen/domU1 evtchn@11
-> fdt set /chosen/domU1/evtchn@11 phandle <0xfffffffd>
-> fdt set /chosen/domU1/evtchn@11 compatible "xen,evtchn-v1"
-> fdt set /chosen/domU1/evtchn@11 xen,evtchn <11 0xfffffffe>
-> fdt mknod /chosen/domU1 evtchn@13
-> fdt set /chosen/domU1/evtchn@13 phandle <0xfffffffb>
-> fdt set /chosen/domU1/evtchn@13 compatible "xen,evtchn-v1"
-> fdt set /chosen/domU1/evtchn@13 xen,evtchn <13 0xfffffffc>
-> 
-> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Update the documentation after commit 3c8133f9737 ("Rename
+cpu_physical_memory_write_rom() to address_space_write_rom()").
 
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ docs/devel/loads-stores.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/docs/devel/loads-stores.rst b/docs/devel/loads-stores.rst
+index 9471bac8599..f9b565da57a 100644
+--- a/docs/devel/loads-stores.rst
++++ b/docs/devel/loads-stores.rst
+@@ -474,7 +474,7 @@ This function is intended for use by the GDB stub and similar code.
+ It takes a virtual address, converts it to a physical address via
+ an MMU lookup using the current settings of the specified CPU,
+ and then performs the access (using ``address_space_rw`` for
+-reads or ``cpu_physical_memory_write_rom`` for writes).
++reads or ``address_space_write_rom`` for writes).
+ This means that if the access is a write to a ROM then this
+ function will modify the contents (whereas a normal guest CPU access
+ would ignore the write attempt).
+-- 
+2.51.0
 
-> ---
->   V2:
->    - completely rework based on Stefano-s suggestion at:
->      https://patchew.org/Xen/20250929180746.1881872-1-oleksandr._5Ftyshchenko@epam.com/
-> ---
-> ---
->  README.md                |  21 ++++++++
->  scripts/uboot-script-gen |   7 +++
->  scripts/xen_dt_domu      | 103 +++++++++++++++++++++++++++++++++++++++
->  3 files changed, 131 insertions(+)
-> 
-> diff --git a/README.md b/README.md
-> index 7b68cf5..2efac97 100644
-> --- a/README.md
-> +++ b/README.md
-> @@ -218,6 +218,27 @@ Where:
->        DOMU_VCPU_HARD_AFFINITY[number,1]="3"
->  ```
->  
-> +- DOMU_STATIC_EVTCHNS[number]="local_port remote_dom_idx remote_port; ..."
-> +  if specified, this parameter allows the configuration of static event channels
-> +  for inter-domain communication. Each entry in DOMU_STATIC_EVTCHNS[number]
-> +  specifies one or more event channels for a particular domain.
-> +  The configuration format for each event channel definition is a set of
-> +  three values:
-> +    - local_port: The numeric port number for the local domain's endpoint.
-> +      This value must be unique within current domain.
-> +    - remote_dom_idx: The array index of the remote domain (e.g., if
-> +      connecting to DomU1, this would be `1`).
-> +    - remote_port: The numeric port number for the remote domain's endpoint.
-> +
-> +  Multiple event channel definitions for a single domain can be provided by
-> +  separating them with a semicolon (;).
-> +
-> +  Below is an example that creates two pairs of bidirectional channels between
-> +  two domains:
-> +  NUM_DOMUS=2
-> +  DOMU_STATIC_EVTCHNS[0]="10 1 11; 12 1 13"
-> +  DOMU_STATIC_EVTCHNS[1]="11 0 10; 13 0 12"
-> +
->  - DOMU_COLORS[number] specifies the colors (cache coloring) to be used
->    for the domain and is in the format startcolor-endcolor
->  
-> diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-> index 4f92610..e319de8 100755
-> --- a/scripts/uboot-script-gen
-> +++ b/scripts/uboot-script-gen
-> @@ -428,6 +428,8 @@ function xen_device_tree_editing()
->          fi
->      fi
->  
-> +    xen_dt_build_evtchns_map
-> +
->      i=0
->      while test $i -lt $NUM_DOMUS
->      do
-> @@ -512,6 +514,11 @@ function xen_device_tree_editing()
->  
->          xen_dt_domu_add_vcpu_nodes "/chosen/domU$i" $i ${DOMU_VCPUS[$i]}
->  
-> +        if test "${DOMU_STATIC_EVTCHNS[$i]}"
-> +        then
-> +            xen_dt_domu_add_evtchns "/chosen/domU$i" "$i" "${DOMU_STATIC_EVTCHNS[$i]}"
-> +        fi
-> +
->          add_device_tree_kernel "/chosen/domU$i" "domU${i}_kernel" ${domU_kernel_addr[$i]} ${domU_kernel_size[$i]} "${DOMU_CMD[$i]}"
->          if test "${domU_ramdisk_addr[$i]}"
->          then
-> diff --git a/scripts/xen_dt_domu b/scripts/xen_dt_domu
-> index 8134896..45891b3 100644
-> --- a/scripts/xen_dt_domu
-> +++ b/scripts/xen_dt_domu
-> @@ -37,3 +37,106 @@ function xen_dt_domu_add_vcpu_nodes()
->          fi
->      done
->  }
-> +
-> +declare -A EVTCHN_ENDPOINT_TO_PHANDLE_MAP
-> +
-> +function xen_dt_build_evtchns_map()
-> +{
-> +    local def
-> +    local local_dom_idx
-> +    local local_port remote_dom_idx remote_port
-> +    local new_phandle
-> +    local local_key remote_key
-> +
-> +    for (( local_dom_idx=0; local_dom_idx<$NUM_DOMUS; local_dom_idx++ ))
-> +    do
-> +        local evtchn_str=${DOMU_STATIC_EVTCHNS[$local_dom_idx]}
-> +        if test -z "$evtchn_str"
-> +        then
-> +            continue
-> +        fi
-> +
-> +        IFS=';' read -ra evtchn_defs <<< "$evtchn_str"
-> +
-> +        # Loop over each definition and process both endpoints of the connection
-> +        for def in "${evtchn_defs[@]}"
-> +        do
-> +            read -r local_port remote_dom_idx remote_port <<< "$def"
-> +            if test -z "$local_port" || test -z "$remote_dom_idx" || test -z "$remote_port"
-> +            then
-> +                echo "Malformed evtchn definition: '$def' in DOMU_STATIC_EVTCHNS[$local_dom_idx]"
-> +                cleanup_and_return_err
-> +            fi
-> +
-> +            # Define keys for both endpoints of the connection
-> +            local_key="$local_dom_idx,$local_port"
-> +            remote_key="$remote_dom_idx,$remote_port"
-> +
-> +            if [[ "$local_key" == "$remote_key" ]]; then
-> +                echo "Invalid evtchn definition: '$def' in DOMU_STATIC_EVTCHNS[$local_dom_idx]"
-> +                cleanup_and_return_err
-> +            fi
-> +
-> +            # For each key, if it is not already in our map, assign it a new phandle
-> +            if [[ ! -v EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$local_key] ]]
-> +            then
-> +                get_next_phandle new_phandle
-> +                EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$local_key]=$new_phandle
-> +                echo "Local endpoint '$local_key' is assigned phandle '$new_phandle'"
-> +            fi
-> +
-> +            if [[ ! -v EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$remote_key] ]]
-> +            then
-> +                get_next_phandle new_phandle
-> +                EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$remote_key]=$new_phandle
-> +                echo "Remote endpoint '$remote_key' is assigned phandle '$new_phandle'"
-> +            fi
-> +        done
-> +    done
-> +}
-> +
-> +function xen_dt_domu_add_evtchns()
-> +{
-> +    # $1 - dt path
-> +    local path=$1
-> +    # $2 - index of the current domain
-> +    local local_dom_idx=$2
-> +    # $3 - full event channel definition string
-> +    local evtchn_str=$3
-> +
-> +    local def
-> +    local local_port remote_dom_idx remote_port
-> +    local local_phandle remote_phandle
-> +    local local_key remote_key
-> +
-> +    IFS=';' read -ra evtchn_defs <<< "$evtchn_str"
-> +
-> +    # Loop over each definition and create a node for it
-> +    for def in "${evtchn_defs[@]}"
-> +    do
-> +        read -r local_port remote_dom_idx remote_port <<< "$def"
-> +        if test -z "$local_port" || test -z "$remote_dom_idx" || test -z "$remote_port"
-> +        then
-> +            echo "Malformed evtchn definition: '$def' in DOMU_STATIC_EVTCHNS[$local_dom_idx]"
-> +            cleanup_and_return_err
-> +        fi
-> +
-> +        # Re-create the keys for both endpoints of the connection to look up the phandles
-> +        local_key="$local_dom_idx,$local_port"
-> +        remote_key="$remote_dom_idx,$remote_port"
-> +
-> +        local_phandle=${EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$local_key]}
-> +        remote_phandle=${EVTCHN_ENDPOINT_TO_PHANDLE_MAP[$remote_key]}
-> +
-> +        if test -z "$local_phandle" || test -z "$remote_phandle"
-> +        then
-> +            echo "Could not find phandle for endpoint '$local_key' or '$remote_key'"
-> +            cleanup_and_return_err
-> +        fi
-> +
-> +        dt_mknode "${path}" "evtchn@$local_port"
-> +        dt_set "${path}/evtchn@$local_port" "phandle" "hex" "$local_phandle"
-> +        dt_set "${path}/evtchn@$local_port" "compatible" "str" "xen,evtchn-v1"
-> +        dt_set "${path}/evtchn@$local_port" "xen,evtchn" "hex" "$local_port $remote_phandle"
-> +    done
-> +}
-> -- 
-> 2.34.1
-> 
 
