@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51ACCAC5B0
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 18:00:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1136794.1473271 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 813BACAC5B0
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 20:30:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1136849.1473280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4k57-0004iU-94; Fri, 03 Oct 2025 18:00:37 +0000
+	id 1v4mPn-0004lv-IY; Fri, 03 Oct 2025 20:30:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1136794.1473271; Fri, 03 Oct 2025 18:00:37 +0000
+Received: by outflank-mailman (output) from mailman id 1136849.1473280; Fri, 03 Oct 2025 20:30:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4k57-0004iN-5f; Fri, 03 Oct 2025 18:00:37 +0000
-Received: by outflank-mailman (input) for mailman id 1136794;
- Fri, 03 Oct 2025 17:20:22 +0000
+	id 1v4mPn-0004lo-Fg; Fri, 03 Oct 2025 20:30:07 +0000
+Received: by outflank-mailman (input) for mailman id 1136849;
+ Fri, 03 Oct 2025 20:30:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4mzO=4M=bell.net=dave.anglin@srs-se1.protection.inumbo.net>)
- id 1v4jS9-0007xa-W0
- for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 17:20:22 +0000
-Received: from cmx-mtlrgo002.bell.net (mta-mtl-001.bell.net [209.71.208.11])
+ id 1v4mPl-0004dY-Rh
+ for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 20:30:05 +0000
+Received: from cmx-mtlrgo001.bell.net (mta-mtl-007.bell.net [209.71.208.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 377137c2-a07d-11f0-9d14-b5c5bf9af7f9;
- Fri, 03 Oct 2025 19:20:12 +0200 (CEST)
-Received: from [192.168.2.49] (142.126.189.246) by cmx-mtlrgo002.bell.net
+ id bdb13c9a-a097-11f0-9d14-b5c5bf9af7f9;
+ Fri, 03 Oct 2025 22:30:04 +0200 (CEST)
+Received: from [192.168.2.49] (142.126.189.246) by cmx-mtlrgo001.bell.net
  (authenticated as dave.anglin@bell.net)
- id 687D2719085236A8; Fri, 3 Oct 2025 13:18:32 -0400
+ id 68C1701503F87783; Fri, 3 Oct 2025 16:28:45 -0400
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,27 +41,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 377137c2-a07d-11f0-9d14-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bell.net; s=selector1; t=1759512012; 
-        bh=Zng9vbugJ96jo23SWsSK+sYWjXU4T6lDUgmXQbXs8jQ=;
+X-Inumbo-ID: bdb13c9a-a097-11f0-9d14-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bell.net; s=selector1; t=1759523404; 
+        bh=ZSiozYL9av6/yqYZ1ojB886S7qQBNu1kIdF3OOFiSt4=;
         h=Message-ID:Date:MIME-Version:Subject:To:References:From:In-Reply-To:Content-Type;
-        b=AJ46lFS7zFpwvHFtEB98pNf5ZtdmaQC7UIKpyi0dWxzvXD5HzKWUg0bCcxGhpNYIbnXFyrJxaBWQAPnjyeOpCfCLbjG/e86/fqHtV8FAjgtnbOi8KdHTe5jhyZbiPBV+jk/3POfKiLxS50d0VBTLrjorex7NPVT0BWJP3gL90JpZhDaMIgUoGUiOyAKcKGDz/ztiKz/HMdYaDHwdXO2E198A+a3FflgbhSFdb8Kf0jg56Pgzdwo4dhw5U32iId97sZBFuCht8ThjAYc2BwIBQxGWnDzkR1mUdjGmgdURv76bFv/f08TByBr4HKc3MZNqyNTeEsf8mNzd2FhLWOTYiA==
+        b=mTyB940Q0GfYnz21tXBKxSqulFOleIM8RqWAD1qt0T+IeVc/x7q7w2b5fRIOtNXDNYcWfwqOc1XE/8ZiQvYv9IUqrPAVyjdV9tzWazGdgV9waIoTwZuRGyJVXRyw3HdLAbMmaDwvX/DnZZMuOe/hYT2pUn/4G/pMadKa1vPmonyx06EQLMKqbIaYjm9Ywu7zbP+EeJdnUMOipDSFlERyd5QUTqvmNWXWgKC7rz71cvp5ysij7JS8K1uNHzu6XRQuvFEufyez+tkVwvh73Ft0PmeSGAn3ntwarU0fgPFWE5NCtZCcwHaDocyhTZNT6XB3+INlaDdgbnmii+pw1xYCcg==
 X-RG-SOPHOS: Clean
 X-RG-VADE-SC: 0
 X-RG-VADE: Clean
 X-Originating-IP: [142.126.189.246]
 X-RG-Env-Sender: dave.anglin@bell.net
-X-RG-Rigid: 687D2719085236A8
-X-RazorGate-Vade: dmFkZTEz5RsOfS/EjyC9+Ub2YxMQTERFV1WLvzAUX6YmdSOutxh9nRbLS04S3w48higa1O8ySU0qm+pqSRX3wt8t7qkudb+hf38O2cDVBt0Kodl0paa0HIkabXXcLE04OYO2sfJDqHB/jS8wt+02VySn6T7scpRa2/Wb/W0TedGsH+DNn2gMwBQkWLPoywlRU31ryXtBiYmXlotzDw/m9sHi6Ve2Oe4ZbS7rGoU0eMfVxQ1vdpTbvuVoBHAzbOn/HOzN2sm3iazxmdQXB2zliRM2lqfuZ84PwaM8At8uXBomYirF3V7eWOpaQHd67GeKnlALIR04/2bSPWgtsioImHLtEYMUYILOLrqzu60KxaDoJfi0jS84+pz1YHvEjCAHio3FYqB5B70FUgeLOG5tpRvdjUaDoceW5vxb8rUVFiNlIZEORiP8Ryt2DdKF/msyF/ll7HjQWR/Z37leTmRcz68buYNSLzuuzJKUIPl92lqv8sTwABSZMs3YepgBjMuPskBbPEHdnWoUKJbVe1qcVlI3GQOAXS5mf3ynF6weGnFTuZ4HZbi4HX3L30T7A7X8Qv1rTZ3rpm5EpmFtAmqDAuNKPjQAa7kjbsf/J8ObDge/LHWP85rEf+OYzINc2XvkMdaAGSz6QlO/27zkjU+6gaSl175fxf9Mjs880jgHp7z6R/5qNA
+X-RG-Rigid: 68C1701503F87783
+X-RazorGate-Vade: dmFkZTFAVSVH3SiUOFRgEpdKbxkygZJRN+wjQ3+7JLA/aHxHSm5i7/PF4mTBT8WtBn7+lxiMRPYLKXtCf7iS9x+McIrTICRECzSEsBDDmX0g+rXi4ctSksWPFcfviRm+PotPodUreZwFE6frq9b/vZEWb9zohQp8N7b1TBIv581R6bMFc3aRYEoBuh6XFu7wQcCcbyctvLBQ9AekV97lK3DUxQ9tGcTDjh44Ei8XDzNWZYGLXru/OXuyyVa7U035NNK7XE/UT2nBkRYYlTzUefAExYdm5r1AjIdGXoCVmMdRppQMDACxagJbItn+DPkJkK1D0uasAZcsSUoBAyFDdObcd9rbrkK+4MlJQXN6niRN7ztkec65gQWM7JFKddfdKIVZMsOdle3RXVrmEbYnkuZw+ClrPLYlsCYCGLNnzy9/eHGWmdlSKWKykBjq3V3P/imMdsohjOWPsu3FAU7N961cqrCS6BAleJcJRZ7cZRqO1xwU6qJPWAk1eKkeK2KmEypOTyHDN/P+DrdGdY/zckiNfWcrY1QB9SoGB7IFYrdtE99hVyEjkzjAzm/yGBJlaP3J8IBYWqFZyPtHFt6E+Ch59FlmNbZ+3GPApsc7p/7XvSOS82tfG4hA2Bu9MDLbD+hvLd4FUqQUBf0W5NH3gX5MPaP17NoqnnFOR1XFqkNnFwFm0g
 X-RazorGate-Vade-Verdict: clean 0
 X-RazorGate-Vade-Classification: clean
-Message-ID: <610b10bc-1aa2-4fad-a40b-be5fcfa04430@bell.net>
-Date: Fri, 3 Oct 2025 13:18:32 -0400
+Message-ID: <45e1dff3-aff1-4a41-ab24-6eddf6171e3a@bell.net>
+Date: Fri, 3 Oct 2025 16:28:45 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 3/9] parisc: Convert DMA map_page to map_phys interface
-To: Jason Gunthorpe <jgg@nvidia.com>, Leon Romanovsky <leon@kernel.org>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Leon Romanovsky <leon@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
  Leon Romanovsky <leonro@nvidia.com>, Andreas Larsson <andreas@gaisler.com>,
  Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
  "David S. Miller" <davem@davemloft.net>, Geoff Levand <geoff@infradead.org>,
@@ -83,6 +84,8 @@ Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
 References: <cover.1759071169.git.leon@kernel.org>
  <333ec4dabec16d3d913a93780bc6e7ddb5240fcf.1759071169.git.leon@kernel.org>
  <20251003150144.GC3360665@nvidia.com>
+ <610b10bc-1aa2-4fad-a40b-be5fcfa04430@bell.net>
+ <20251003172618.GJ3360665@nvidia.com>
 From: John David Anglin <dave.anglin@bell.net>
 Content-Language: en-US
 Autocrypt: addr=dave.anglin@bell.net; keydata=
@@ -128,31 +131,41 @@ Autocrypt: addr=dave.anglin@bell.net; keydata=
  XV2KRzaE359RgbM3pNEViXp3NclPYmeu+XI8Ls/y6tSq5e/o/egktdyJj+xvAj9ZS18b10Jp
  e67qK8wZC/+N7LGON05VcLrdZ+FXuEEojJWbabF6rJGN5X/UlH5OowVFEMhD9s31tciAvBwy
  T70V9SSrl2hiw38vRzsl
-In-Reply-To: <20251003150144.GC3360665@nvidia.com>
+In-Reply-To: <20251003172618.GJ3360665@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 2025-10-03 11:01 a.m., Jason Gunthorpe wrote:
-> This doesn't actually use the virt at all:
+On 2025-10-03 1:26 p.m., Jason Gunthorpe wrote:
+> On Fri, Oct 03, 2025 at 01:18:32PM -0400, John David Anglin wrote:
+>> On 2025-10-03 11:01 a.m., Jason Gunthorpe wrote:
+>>> This doesn't actually use the virt at all:
+>>>
+>>> 	offset = ((unsigned long) addr) & ~IOVP_MASK;
+>>> 	if((size % L1_CACHE_BYTES) || ((unsigned long)addr % L1_CACHE_BYTES))
+>>> 		ccio_io_pdir_entry(pdir_start, KERNEL_SPACE, (unsigned long)addr, hint);
+>>>
+>>> And ccio_io_pdir_entry():
+>>> 	pa = lpa(vba);
+>>>
+>>> Is a special instruction that uses virt but AI tells me that special
+>>> LPA instruction is returning phys. Not sure if that is a different
+>>> value than virt_to_phys()..
+>>
+>> ccio_io_pdir_entry currently only supports KERNEL_SPACE.  For KERNEL_SPACE, lpa() and
+>> virt_to_phys() are equivalent if page is mapped.  lpa() returns 0 if a non-access data
+>> TLB fault occurs (i.e., page isn't mapped).  Not sure if that
+>> matters.
 > 
-> 	offset = ((unsigned long) addr) & ~IOVP_MASK;
-> 	if((size % L1_CACHE_BYTES) || ((unsigned long)addr % L1_CACHE_BYTES))
-> 		ccio_io_pdir_entry(pdir_start, KERNEL_SPACE, (unsigned long)addr, hint);
+> After unfolding everything the expression is
 > 
-> And ccio_io_pdir_entry():
-> 	pa = lpa(vba);
+>   lpa(phys_to_virt(pa))
 > 
-> Is a special instruction that uses virt but AI tells me that special
-> LPA instruction is returning phys. Not sure if that is a different
-> value than virt_to_phys()..
+> So if that is always equal to pa then lets just drop it.
 
-ccio_io_pdir_entry currently only supports KERNEL_SPACE.  For KERNEL_SPACE, lpa() and
-virt_to_phys() are equivalent if page is mapped.  lpa() returns 0 if a non-access data
-TLB fault occurs (i.e., page isn't mapped).  Not sure if that matters.
-> IDK, I'm not feeling brave enough to drop the LPA but maybe include
-> this note in the commit message.
-> 
+If lpa() was replaced by virt_to_phys(), the result would always be equal to pa.  So, I think it
+can be dropped.
 
+Dave
 -- 
 John David Anglin  dave.anglin@bell.net
 
