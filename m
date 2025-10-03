@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE97CCD182
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 22:54:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1136892.1473351 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C784CCA471
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 22:54:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1136902.1473410 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4oes-0005ti-5L; Fri, 03 Oct 2025 22:53:50 +0000
+	id 1v4of0-0007do-Kz; Fri, 03 Oct 2025 22:53:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1136892.1473351; Fri, 03 Oct 2025 22:53:50 +0000
+Received: by outflank-mailman (output) from mailman id 1136902.1473410; Fri, 03 Oct 2025 22:53:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4oes-0005sE-0Y; Fri, 03 Oct 2025 22:53:50 +0000
-Received: by outflank-mailman (input) for mailman id 1136892;
- Fri, 03 Oct 2025 22:53:48 +0000
+	id 1v4of0-0007dV-Gk; Fri, 03 Oct 2025 22:53:58 +0000
+Received: by outflank-mailman (input) for mailman id 1136902;
+ Fri, 03 Oct 2025 22:53:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WVFT=4M=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1v4oeq-0004mK-P3
- for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 22:53:48 +0000
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
- [2a00:1450:4864:20::443])
+ id 1v4oey-0004mK-I2
+ for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 22:53:56 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1e9e9b5-a0ab-11f0-9809-7dc792cee155;
- Sat, 04 Oct 2025 00:53:47 +0200 (CEST)
-Received: by mail-wr1-x443.google.com with SMTP id
- ffacd0b85a97d-3f0308469a4so1487958f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 15:53:47 -0700 (PDT)
+ id d68d6d9a-a0ab-11f0-9809-7dc792cee155;
+ Sat, 04 Oct 2025 00:53:55 +0200 (CEST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-42557c5cedcso1550895f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 15:53:54 -0700 (PDT)
 Received: from localhost.localdomain (host-92-22-57-86.as13285.net.
  [92.22.57.86]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8a6bbesm9616571f8f.12.2025.10.03.15.53.45
+ ffacd0b85a97d-4255d8a6bbesm9616571f8f.12.2025.10.03.15.53.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 15:53:45 -0700 (PDT)
+ Fri, 03 Oct 2025 15:53:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1e9e9b5-a0ab-11f0-9809-7dc792cee155
+X-Inumbo-ID: d68d6d9a-a0ab-11f0-9809-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1759532026; x=1760136826; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1759532034; x=1760136834; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uU50b2CIr8z+rKB8yhDMf5NI7QoTTkkJ3hl1yF+jo5w=;
-        b=AtVI7h+KoCgniDsNAy29u6TWQqOYGYzD20lBHSAz3fAw5Nk5X0+fY5SKUhL3tThysm
-         gAmu9sVNy8zAGcDjC/VT/+yuRP97hehZM/qlgF3tyMmI6WNtOQQziEw6KEt/e1jWmh7A
-         ZqulECobhXbvdr6C/YWfyPSyssOhbuoQJOWq0=
+        bh=L9xT2e+qZfb6j1FUuBgKvZ3n+Jc6Wgtnci0H5fcXpnk=;
+        b=d/u7IctkIlWXySaM6mwf/iYi+EEgyZkPLYWtp9ecOxhcF9SE8CwZEAI37XHioYa35G
+         s38fY0Oz2H6jxXpN6B7nOL3LVFB41HrKBPbe0NdAoHT79dH4JhVEyVJWBUmlBrrDsSon
+         Vd28zFpoMfANKhLs/kaiW13eyDYQtaSHlgsfE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759532026; x=1760136826;
+        d=1e100.net; s=20230601; t=1759532034; x=1760136834;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uU50b2CIr8z+rKB8yhDMf5NI7QoTTkkJ3hl1yF+jo5w=;
-        b=gaeMC1zFy2gZ4QoZFYHpEMUzZnvF2EB/NRQ2RvgF2ItGBoTFRZESRXDLvPBwY0RM2v
-         HRAWGkbZd+7JFIz7/37tVESvpU3Sq8mwbB5lzNbiFgRcm9ICju5Kok5PUl/VlaNcXctN
-         uYO7LcHoSPXvWm/6jm9PKoLdyJyGqw1viVHnGakNShzrjWDw82PnBBgVAkByHvyrG9VB
-         NVn2Ab9MK9YMouJlfL8kOw+jr120p4psK0+rj8SlHBLRd9JgXiQYToQUxFKMM6MWNJCA
-         TwuyLJbfvErG/FMexwxVWdeiAQqiB9ZIJ16XvaFt6CWq5Qtkgja0QK9f+z5MyheC60lW
-         0ByQ==
-X-Gm-Message-State: AOJu0YxriTDGUM0qjMdUDpTSdmZpATZZT/7BnIMxL2Tj1Wzdv/JbZ6U0
-	EuKwIn3XUvpXjHy9NsyPzFQShZRRBx03E5tpKLpTs8/TauhasY1LEpEQziKwKiogHZUCVr+hhEo
-	F7ylvkjz0To6R
-X-Gm-Gg: ASbGncvPVbo/mU/UojrSTIVUWbOqiHWmEBqkEbg7UT0owgHkaGg84AKUEc3NP3/6xJh
-	1oumuSOPC3LRKsCdKzLx/HIa03gZkQxctRZA1XMEPqGGm4cu8WV73858XDaBBqZpGBrsH9cDuwt
-	oQykSbcJ4fZMIl/a1kKJH2jSaM98LRhXMGjFHRWgNx0WZiY7sXU+e3TIVR6UeB+UQXVpOvzRtnE
-	R78QzvArMIGj3TWPE/AzQY0H4PITOgUGAzNNAdFCXgH8b81WSkRVp+lUeLvpJWmFLp+vW8sTRdx
-	q7JpMuohYMdzNDKJVouXsfJKVkaqR6DWyeU9gKxfXnF4fZJV0xXH+DLKb0Ii6HL2UsvSsT0rCmP
-	SDpaF3eJKwYtdNKNMR5WScZ7WLFVbKd5P/4GsRjeObUpQg8krFQsY277qE3MksXMxEjBRahHbqz
-	EnUicxw9/w/Bu8DxOYeMoHw1+KIrjkINY=
-X-Google-Smtp-Source: AGHT+IFNgesRO9KQE+1EDzFOyGemzxgi/B/Bn2ir1u8VhCJcvbxVt8SX2TtWZgCw44x7gKMh2wvVLQ==
-X-Received: by 2002:a05:6000:40da:b0:3e0:c28a:abbb with SMTP id ffacd0b85a97d-42567158fccmr3269428f8f.13.1759532026367;
-        Fri, 03 Oct 2025 15:53:46 -0700 (PDT)
+        bh=L9xT2e+qZfb6j1FUuBgKvZ3n+Jc6Wgtnci0H5fcXpnk=;
+        b=CMRgFCjCNr2G/fw8NWO1FyoVP9Jk8aIMLNCSpUwqLmTivXeIrQZ7vA45pzSM4Fdra1
+         zYbwqRAA6ibBcuUdFxqvoAQlssb+fBW81ALPofwW47UbnoM0YNftQ6WzxsEXGUFr+hac
+         akH5bUZrUA9w18VlPaas/pSgqLGi5opCYuhWhG5e/1IyNVuTl3jcl2fbyAyIWodABq2v
+         kmZFlnlJLK4u9BeBx3c8L4uU1EOg4FEJFdqvasFpLDDgKeot/xNkcg8MdghOGWN9b4qa
+         EVCtXipmUaSQ9uJ5e/lT263EQoFkyOeNkAgVQE6A58kWbU/ZhhX9xK8rLJbf9H7ptEvY
+         2/oA==
+X-Gm-Message-State: AOJu0YwnX28bZfLRXlaM89WYDHlqWjtMrx8W1aH/g0ojuC9a5f7UTsh5
+	YKZWWC3GU8RcEQD9P46yNxIKTQMemuRdVxUDdYWMcxRpWZY3+c0bDkDCbxspYVeMdJhwrOWZG7n
+	p02k9IhfUjw==
+X-Gm-Gg: ASbGncs0eJzgktQeAEOAWfzLXJA9uo7ngTXie9tU1SnHw3X/HfdI2C3Og+PvfGfOmWG
+	+/RpwJUw33mXuWsytRbHDsfrZlJyG9FQ4cbEiMX7uyQNdPsbBgX6gHO2fdeRR1cG9SaikVBLHq6
+	fbzs49TGrAS0hREexnEooC8YKr/BvVmIc07sWJgf7vSuuzZG+v9Ye3aB4Y6FQ2lSO/2TiX+Stzf
+	ADBTaeYWGaQBdNJwPbRufLnoBAFAkK0Wrp2QM1YdHXMAwYhBdCvPbVhTDTcFD8xD2gDRahe2iE4
+	WXWGvg+kf+6sgc2SNymRdCgDUCD4eus4fg1Dz6dNZP+OQjYmcZLkt2zAZ0aCDiVykaImXG+uwwO
+	lysyG9aAX6fFZGxLTRNUHoA7oPRWKY1sj+b0vAcoP68WtS9Q4Ps5aov/sIjvptynbdG5HzubrLp
+	5SwewwCxNoGThoAdnaHChA
+X-Google-Smtp-Source: AGHT+IGi4Mtp7sUIenwEW+G9jtr4Ezc1L39uJjX80DcyCAfWrdG2uCI/4ZVImOc792lTjwRvYtIy5g==
+X-Received: by 2002:a05:6000:3113:b0:3ec:2ef7:2134 with SMTP id ffacd0b85a97d-4256714bb4dmr2598203f8f.18.1759532034126;
+        Fri, 03 Oct 2025 15:53:54 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 05/22] x86/fsgsbase: Improve code generation in read_registers()
-Date: Fri,  3 Oct 2025 23:53:17 +0100
-Message-Id: <20251003225334.2123667-6-andrew.cooper3@citrix.com>
+Subject: [PATCH v3 11/22] x86/fsgsbase: Make gskern accesses safe under FRED
+Date: Fri,  3 Oct 2025 23:53:23 +0100
+Message-Id: <20251003225334.2123667-12-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
 References: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
@@ -97,52 +98,68 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It turns out that using the higher level helpers adjacent like this leads to
-terrible code generation.  Due to -fno-strict-alising, the store into state->
-invalidates the read_cr4() address calculation (which is really cpu_info->cr4
-under the hood), meaning that it can't be hoisted.
+Under FRED, the SWAPGS instructions is disallowed.  Therefore we must use the
+MSR path instead.
 
-As a result we get "locate the top of stack block, get cr4, and see if
-FSGSBASE is set" repeated 3 times, and an unreasoanble number of basic blocks.
+read_registers() is in the show_registers() path, so this allows Xen to render
+it's current state without suffering #UD (and recursing until the stack guard
+page is hit).
 
-Hoist the calculation manually, which results in two basic blocks.
+All hardware with FRED is expected to have some kind of non-serialising access
+to these registers.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Side-by-side disassembly: https://termbin.com/9xfq
+v2:
+ * Broken out of subsequent patch.  Rebased over MSR cleanup.
 ---
- xen/arch/x86/traps.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ xen/arch/x86/include/asm/fsgsbase.h | 8 ++++++--
+ xen/arch/x86/traps.c                | 2 +-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/fsgsbase.h b/xen/arch/x86/include/asm/fsgsbase.h
+index 24862a6bfea7..5faa3a324332 100644
+--- a/xen/arch/x86/include/asm/fsgsbase.h
++++ b/xen/arch/x86/include/asm/fsgsbase.h
+@@ -79,7 +79,9 @@ static inline unsigned long read_gs_base(void)
+ 
+ static inline unsigned long read_gs_shadow(void)
+ {
+-    if ( read_cr4() & X86_CR4_FSGSBASE )
++    unsigned long cr4 = read_cr4();
++
++    if ( !(cr4 & X86_CR4_FRED) && (cr4 & X86_CR4_FSGSBASE) )
+         return __rdgs_shadow();
+     else
+         return rdmsr(MSR_SHADOW_GS_BASE);
+@@ -103,7 +105,9 @@ static inline void write_gs_base(unsigned long base)
+ 
+ static inline void write_gs_shadow(unsigned long base)
+ {
+-    if ( read_cr4() & X86_CR4_FSGSBASE )
++    unsigned long cr4 = read_cr4();
++
++    if ( !(cr4 & X86_CR4_FRED) && (cr4 & X86_CR4_FSGSBASE) )
+         __wrgs_shadow(base);
+     else
+         wrmsrns(MSR_SHADOW_GS_BASE, base);
 diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 0c5393cb2166..545c42a10862 100644
+index d42973660db0..2e3efe45edf4 100644
 --- a/xen/arch/x86/traps.c
 +++ b/xen/arch/x86/traps.c
-@@ -118,9 +118,18 @@ static void read_registers(struct extra_state *state)
+@@ -118,7 +118,7 @@ static void read_registers(struct extra_state *state)
      state->cr3 = read_cr3();
      state->cr4 = read_cr4();
  
--    state->fsb = read_fs_base();
--    state->gsb = read_gs_base();
--    state->gss = read_gs_shadow();
-+    if ( state->cr4 & X86_CR4_FSGSBASE )
-+    {
-+        state->fsb = __rdfsbase();
-+        state->gsb = __rdgsbase();
-+        state->gss = __rdgs_shadow();
-+    }
-+    else
-+    {
-+        state->fsb = rdmsr(MSR_FS_BASE);
-+        state->gsb = rdmsr(MSR_GS_BASE);
-+        state->gss = rdmsr(MSR_SHADOW_GS_BASE);
-+    }
- 
-     asm ( "mov %%ds, %0" : "=m" (state->ds) );
-     asm ( "mov %%es, %0" : "=m" (state->es) );
+-    if ( state->cr4 & X86_CR4_FSGSBASE )
++    if ( !(state->cr4 & X86_CR4_FRED) && (state->cr4 & X86_CR4_FSGSBASE) )
+     {
+         state->fsb = __rdfsbase();
+         state->gsb = __rdgsbase();
 -- 
 2.39.5
 
