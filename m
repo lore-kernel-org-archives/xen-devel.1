@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BC0CAC5B0
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 20:42:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1136860.1473290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CB1CCA471
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 22:54:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1136895.1473376 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4mbN-0006RP-IL; Fri, 03 Oct 2025 20:42:05 +0000
+	id 1v4oev-0006Tk-Af; Fri, 03 Oct 2025 22:53:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1136860.1473290; Fri, 03 Oct 2025 20:42:05 +0000
+Received: by outflank-mailman (output) from mailman id 1136895.1473376; Fri, 03 Oct 2025 22:53:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4mbN-0006RI-Fi; Fri, 03 Oct 2025 20:42:05 +0000
-Received: by outflank-mailman (input) for mailman id 1136860;
- Fri, 03 Oct 2025 20:42:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=FzWq=4M=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1v4mbM-0006RC-G4
- for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 20:42:04 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6a0d2603-a099-11f0-9809-7dc792cee155;
- Fri, 03 Oct 2025 22:42:02 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3ee130237a8so1926085f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 13:42:02 -0700 (PDT)
-Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e61a25dbcsm155655605e9.19.2025.10.03.13.42.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Oct 2025 13:42:00 -0700 (PDT)
+	id 1v4oev-0006SB-1q; Fri, 03 Oct 2025 22:53:53 +0000
+Received: by outflank-mailman (input) for mailman id 1136895;
+ Fri, 03 Oct 2025 22:53:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=WVFT=4M=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1v4oet-0004mF-JG
+ for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 22:53:51 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d45fc517-a0ab-11f0-9d14-b5c5bf9af7f9;
+ Sat, 04 Oct 2025 00:53:51 +0200 (CEST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3ee130237a8so1974940f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 15:53:51 -0700 (PDT)
+Received: from localhost.localdomain (host-92-22-57-86.as13285.net.
+ [92.22.57.86]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8a6bbesm9616571f8f.12.2025.10.03.15.53.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Oct 2025 15:53:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,81 +47,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a0d2603-a099-11f0-9809-7dc792cee155
+X-Inumbo-ID: d45fc517-a0ab-11f0-9d14-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1759524121; x=1760128921; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PW5k2zL3fmegA2ZxrF2uAnfp4SXP4L2O5lee8nx3mSc=;
-        b=GAhJ+Sglr2yu+QluaFQoc7DA0tjuSVff8O6XQYedTUvr+fG7WophdNI0vu4A9UcQxK
-         oOAkpBi88QQcLypdtZCAiHA3NTuACP9l/3PC2FPHm4HUEdKtH2B2txg0+9uj14AnjZVJ
-         omak+cQgCxekvfRJ+vh/b76yACCpPuSaLNI+R2eLf1EPQm6MLb7qfzGlLq+/2sIqOcx/
-         bSeCw6hCmULiFRRwLoeguVRiyM15Ksq/h0nPB0KV54nBgQUI12MlV5dQNvdjsn+gz7Wv
-         2rxvmSMbj85yNCFRhG7qe2Ob+pHAlWvx6qotVD6zdqAeKnS3VPSGNBtk6+XF5SMsOmjO
-         e/6A==
+        d=citrix.com; s=google; t=1759532030; x=1760136830; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LCapiM0xH65oD0m1ksMUosmI8lWBCkb+MdhiFcZvJp8=;
+        b=lg4HrcY4+B3IogBxjk5ybz1iOGRvLkOMQwQ2ocFcMuo5XGqQHSqpRJ4rzk+r4BqVP9
+         4mQ4FAc91F+T0nnjlMPc5SxpbFoAJdxD0q4gThN39uLq0PpT1LeNeSqOBS8Gf0Au6nsn
+         ReUKNyKSeb+qgYH1+paGgJ/673dvQCJKrTNVA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759524121; x=1760128921;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PW5k2zL3fmegA2ZxrF2uAnfp4SXP4L2O5lee8nx3mSc=;
-        b=Hr868lQrKED1R0zpvwvstX68o+PzWtvOn1eqmckNuxS8gjyALOkSr/w4XFd5QIsBNt
-         VI5Fkewn8KPzmta15XiUTo/zqyy8p+lI5l9kwkkOorZQ4l4qoN+5pmDzPqLu+tteDM58
-         yAFl8Owz/ieLO0Il/U9C/QgT5T1K5VycMzOfe9OarICpJdEcO6CYBKWibded2/3N6tPB
-         OHbZiuQknNau88hNwAz2mJg4sS4/QxwxGF6EVwUEVdHHjgzSIuBdFaC3XoQJnVDR4375
-         TFNX4rQO9YAlYPAc3isyJweWoNnuX7JEcWHUxtZb1o7oIKTYsaAD7iqtEtuJmc1V6p30
-         7VEw==
-X-Forwarded-Encrypted: i=1; AJvYcCU5SHeh0YxZ+tLOmviRT0v2c/AloXmpNVlHx5dNZI8+eaygrXSLXsDAQxjXvz+qJXWevx5ntGWljKI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwVWVRny/vKyw2AGwcv2lL6PYRLEJ+ZBZeb3nwMUkVR3Vjmu5X1
-	yB3GplmJj3ldcUV3BCYU7tsTH/JPRlB5T5ZD3eg6Aq4t28PbVmT0Kn6NIM+pmUyzm3o=
-X-Gm-Gg: ASbGncvx85CUqkUPD64dtc9GqwkDP+ztq+4CWfbQQnXgsm24ar6f9LphtZO+Vrd1aFU
-	BZOgpaFDUMmYEOgfnTgop6A2V8Kx8UydCfuXsLzNt8/haFRItCM2mkT7gKRT5nM+dI4vaDKbJ7G
-	9Im0hMVIB5Dv1adArb44xUmRnqXw9Ytt+nAouA3DOAbB6q2dir4xPnaDplhUprhoK3fnM8s52a5
-	eMHcKPRsfkwj+IElXai0eS+Xbs2HDytLDUDfnqQarKZk+PB96hIdLlmOchB0d3vZfdkcFoeSoYm
-	s8AqBdWkk/NDdOArSIebRxb5Vkti8Yy0w0ZrWJyUyys9AYZ0nSSKeSuoyZkD6iein1GTBnx8JmW
-	wMmNYcvUQyw49fA859IOrhXI4z0ojz8KsCLYgyVKcIraxNvYqIc47S0w52g3k5dfKTYIYWtYlGD
-	e+MdvJ2/1M/tPC+OP6keo5UlquRU0MeKCzrlzcI10=
-X-Google-Smtp-Source: AGHT+IHHpUVAOz/kW4FY5inemqoIDxzaObgtHSvRK94Nk1VfVB9QmYTxm3ZfXZPywnWOkC76eMfSUA==
-X-Received: by 2002:a05:6000:3111:b0:402:7afc:1cf5 with SMTP id ffacd0b85a97d-4256719e6cemr2721575f8f.35.1759524121296;
-        Fri, 03 Oct 2025 13:42:01 -0700 (PDT)
-Message-ID: <c80928c3-0a54-4cdc-858f-b2ac4670e38d@linaro.org>
-Date: Fri, 3 Oct 2025 22:42:00 +0200
+        d=1e100.net; s=20230601; t=1759532030; x=1760136830;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LCapiM0xH65oD0m1ksMUosmI8lWBCkb+MdhiFcZvJp8=;
+        b=pX30xfPZrfgmtZvLW6T5FICQ61b28UFODIsHPR+1FpjsnjnOtHaDN/JAqITK2XBHSu
+         PY6vyCI00Ny+sTJh0GWVRWgyT5G58UjbJ+9TMd08/aQn4PdKX8Yn0JokMedh0DyWDF9D
+         Xnts7cVjfngFU9GlUsdejsf6LvZCDpKrPjK6+qf6dHFHW+Jgn/mdo3dFVbBsE2sC1GEh
+         isXE0CXcSMvYFoirY9qtMw0jvJc+cu9i9l2FeW2w3gVstHDubtoUbXj/u/nwqIeYikNo
+         HoeL6l/a9REcWy30XtrnjNp7gokxUukvyV5cAoSq625uzYjromZALhfr1NsokDc5NeFF
+         3mKw==
+X-Gm-Message-State: AOJu0YyIpnD+jsMcd0lqd7KK/LRRbjxoRcuMDedrFx8xz1iSIC27L5JS
+	nj12JMI0h80E478pArkOnMxx0BjwdOVelYvJeoQZ0CIImJkLrT6z7cx3nUx4Ed4qlenNTuPXUIJ
+	dp+CHXw4FFg==
+X-Gm-Gg: ASbGncuql1iI/nABun244YSwSAcSECa+01sPYC1Pd2OfOVnK2tO1BAkudMfl3JgCmjS
+	5nnoQTUBJwYiXZfiU60q0wlvENeUcaoCAxm3Ohay/YWg5BMzMbJXFyOJpGaxeBXYcuaL3g/0rb5
+	EMTEmvihBU7cqkngQxJCLokPLwsaK8Ruir8TuMgTW2h+OzraflEtL64U9nb9tp1HMrd6if74I73
+	cCv03M/8Cr/ok0gfYa+SPD2a3ycr+1wF2mnmc9dflZEhUI2CEaoLig6P6a2GS2hl7JLZLjWWujh
+	C1X+HOkRPrcYR3+dSVDu9zt2ZrOZzN4AsJJPISrcsMlmA/JkOI+RitXLRAy9lKSN+4f0/jUnlJO
+	/Cbr0IXVuG0J/0LzwAJP2uY3f1P+2wzafmBnlTlXfJBoAgRID2EKarhJK7DfZYlOY2kPUIJwPA1
+	AE36raHuGE+vo60GYSeR9g
+X-Google-Smtp-Source: AGHT+IHDK5cVhEjzRuhbRNjA7VIYhVu6Tnt6vNSpbzNgDiwBKK5lWyaZUWlRFcLNL5u6vX9rhV1aSA==
+X-Received: by 2002:a05:6000:1842:b0:3ec:dd16:fc16 with SMTP id ffacd0b85a97d-425671b23bfmr2836608f8f.43.1759532030450;
+        Fri, 03 Oct 2025 15:53:50 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 08/22] x86/traps: Skip Supervisor Shadow Stack tokens in FRED mode
+Date: Fri,  3 Oct 2025 23:53:20 +0100
+Message-Id: <20251003225334.2123667-9-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
+References: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/17] system/physmem: Remove cpu_physical_memory
- _is_io() and _rw()
-Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, kvm@vger.kernel.org, xen-devel@lists.xenproject.org
-References: <20251002084203.63899-1-philmd@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251002084203.63899-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 2/10/25 10:41, Philippe Mathieu-Daudé wrote:
+FRED doesn't use Supervisor Shadow Stack tokens.  Skip setting them up.
 
-> Philippe Mathieu-Daudé (17):
->    docs/devel/loads-stores: Stop mentioning
->      cpu_physical_memory_write_rom()
->    system/memory: Factor address_space_is_io() out
->    target/i386/arch_memory_mapping: Use address_space_memory_is_io()
->    hw/s390x/sclp: Use address_space_memory_is_io() in sclp_service_call()
->    system/physmem: Remove cpu_physical_memory_is_io()
->    system/physmem: Pass address space argument to
->      cpu_flush_icache_range()
->    hw/s390x/sclp: Replace [cpu_physical_memory -> address_space]_r/w()
->    target/s390x/mmu: Replace [cpu_physical_memory -> address_space]_rw()
->    target/i386/whpx: Replace legacy cpu_physical_memory_rw() call
->    target/i386/kvm: Replace legacy cpu_physical_memory_rw() call
->    target/i386/nvmm: Inline cpu_physical_memory_rw() in nvmm_mem_callback
->    hw/xen/hvm: Inline cpu_physical_memory_rw() in rw_phys_req_item()
->    system/physmem: Un-inline cpu_physical_memory_read/write()
->    system/physmem: Avoid cpu_physical_memory_rw when is_write is constant
->    system/physmem: Remove legacy cpu_physical_memory_rw()
->    hw/virtio/vhost: Replace legacy cpu_physical_memory_*map() calls
->    hw/virtio/virtio: Replace legacy cpu_physical_memory_map() call
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Series queued, thanks.
+v3:
+ * Move further still
+
+v2:
+ * New
+---
+ xen/arch/x86/mm.c    | 12 +++++++++---
+ xen/arch/x86/setup.c |  8 ++++----
+ 2 files changed, 13 insertions(+), 7 deletions(-)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index b929d15d0050..043e6aa9d73a 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -129,6 +129,7 @@
+ #include <asm/shadow.h>
+ #include <asm/shared.h>
+ #include <asm/trampoline.h>
++#include <asm/traps.h>
+ #include <asm/x86_emulate.h>
+ 
+ #include <public/memory.h>
+@@ -6441,8 +6442,13 @@ static void write_sss_token(unsigned long *ptr)
+ 
+ void memguard_guard_stack(void *p)
+ {
+-    /* IST Shadow stacks.  4x 1k in stack page 0. */
+-    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
++    /*
++     * IST Shadow stacks.  4x 1k in stack page 0.
++     *
++     * With IDT delivery, we need Supervisor Shadow Stack tokens at the base
++     * of each stack.  With FRED delivery, these no longer exist.
++     */
++    if ( IS_ENABLED(CONFIG_XEN_SHSTK) && !opt_fred )
+     {
+         write_sss_token(p + (IST_MCE * IST_SHSTK_SIZE) - 8);
+         write_sss_token(p + (IST_NMI * IST_SHSTK_SIZE) - 8);
+@@ -6453,7 +6459,7 @@ void memguard_guard_stack(void *p)
+ 
+     /* Primary Shadow Stack.  1x 4k in stack page 5. */
+     p += PRIMARY_SHSTK_SLOT * PAGE_SIZE;
+-    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
++    if ( IS_ENABLED(CONFIG_XEN_SHSTK) && !opt_fred )
+         write_sss_token(p + PAGE_SIZE - 8);
+ 
+     map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 44da5efa1d20..160a9611f456 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1923,10 +1923,6 @@ void asmlinkage __init noreturn __start_xen(void)
+ 
+     system_state = SYS_STATE_boot;
+ 
+-    bsp_stack = cpu_alloc_stack(0);
+-    if ( !bsp_stack )
+-        panic("No memory for BSP stack\n");
+-
+     console_init_ring();
+     vesa_init();
+ 
+@@ -2111,6 +2107,10 @@ void asmlinkage __init noreturn __start_xen(void)
+ 
+     console_init_postirq();
+ 
++    bsp_stack = cpu_alloc_stack(0); /* Needs to know IDT vs FRED */
++    if ( !bsp_stack )
++        panic("No memory for BSP stack\n");
++
+     system_state = SYS_STATE_smp_boot;
+ 
+     do_presmp_initcalls();
+-- 
+2.39.5
+
 
