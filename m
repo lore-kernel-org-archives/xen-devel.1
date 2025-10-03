@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41FA7CCD185
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836E4CCD187
 	for <xen-devel@archiver.kernel.org>; Fri,  3 Oct 2025 22:54:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1136889.1473314 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1136893.1473357 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4oep-00052T-5J; Fri, 03 Oct 2025 22:53:47 +0000
+	id 1v4oes-0005xf-FW; Fri, 03 Oct 2025 22:53:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1136889.1473314; Fri, 03 Oct 2025 22:53:47 +0000
+Received: by outflank-mailman (output) from mailman id 1136893.1473357; Fri, 03 Oct 2025 22:53:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v4oep-00051Z-14; Fri, 03 Oct 2025 22:53:47 +0000
-Received: by outflank-mailman (input) for mailman id 1136889;
- Fri, 03 Oct 2025 22:53:46 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v4oes-0005ww-8g; Fri, 03 Oct 2025 22:53:50 +0000
+Received: by outflank-mailman (input) for mailman id 1136893;
+ Fri, 03 Oct 2025 22:53:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WVFT=4M=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1v4oeo-0004mK-0A
- for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 22:53:46 +0000
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [2a00:1450:4864:20::442])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cda653e9-a0ab-11f0-9809-7dc792cee155;
- Sat, 04 Oct 2025 00:53:40 +0200 (CEST)
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-3ee15505cdeso2232836f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 15:53:40 -0700 (PDT)
+ id 1v4oeq-0004mF-Ui
+ for xen-devel@lists.xenproject.org; Fri, 03 Oct 2025 22:53:48 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d2c2b48f-a0ab-11f0-9d14-b5c5bf9af7f9;
+ Sat, 04 Oct 2025 00:53:48 +0200 (CEST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-42420c7de22so1631147f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Oct 2025 15:53:48 -0700 (PDT)
 Received: from localhost.localdomain (host-92-22-57-86.as13285.net.
  [92.22.57.86]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8a6bbesm9616571f8f.12.2025.10.03.15.53.37
+ ffacd0b85a97d-4255d8a6bbesm9616571f8f.12.2025.10.03.15.53.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 15:53:38 -0700 (PDT)
+ Fri, 03 Oct 2025 15:53:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,140 +47,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cda653e9-a0ab-11f0-9809-7dc792cee155
+X-Inumbo-ID: d2c2b48f-a0ab-11f0-9d14-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1759532019; x=1760136819; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IXbXCT//JpG4DZDNCPX8AIKG+4YnmRnZVf3VPs504Jw=;
-        b=C+SQgQBzVUOQmYPJa4uaWotQ77ROJC6T8/WIn5l7OrTzjV30uVUZSi7s7TagUffBTJ
-         QZUN6PVGTONfe6mbKMP32pT4uyC6ArAiyrph2Ka9vRfSIdLOLNxm2Vc9ILa91PfMhUhN
-         fTn7ISD9dvPVyO3Cz3JRB/1niRv6UspIVH9Rs=
+        d=citrix.com; s=google; t=1759532028; x=1760136828; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CQIXxtqR5XkQfZx+k/l76E9CNQJSUSvnIl72OdWgL5Q=;
+        b=q2cHapUWMbFWui3JKptQSJlK7KxRikVwuqCHuLYBJjp/57Sxm8U2oxC1WTjYMsCRoM
+         AY4ExFVLsDfbATcf6Q68o6KMI6MiPlnBttGJvDUW14zehA4Prc1XVpoNDdQi+7HDk1w0
+         ZLmKxzL6b1u3m+Gt6f+x1XX9AOEWqYS2EnVLo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759532019; x=1760136819;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IXbXCT//JpG4DZDNCPX8AIKG+4YnmRnZVf3VPs504Jw=;
-        b=C5STH1uH37gaL9l9A2+RuWQ4hKkJN8ybukiVKLDUznHupvaT6l3yp13yem1vHJfPBf
-         LgjZ2C1rQm+WGzHp1UyUVFTimQpv66P0hESZLGt9bu/TkBJ3yrwyhxtfN7yUwoXbGNMJ
-         KbTgZHnMub/qSReud84f+ng0/hgJGzZoqsuJ7pJdVBF8klOXPYSBVHuqXZPLA8veIr/0
-         M1aJzpoHEfkBUoZ0q6+UPT2yufweN5QLC/TFEJ2iP39BO5xUOYNrh6/z7AIRvC3HNVGg
-         QSS0AxX5ATmqaHWFQJ1oyd7bw7IqFdHLcloqVshGVqyyNcqeh7ITNO3nvRrRlrVIe84Y
-         6GjQ==
-X-Gm-Message-State: AOJu0Yz4GkfE4IYl0whBzgAlL7ImHI1fQwLgjdHtiRxC55Z5ifAYV6dH
-	ektF4wE6mmjtOvBZRWYxMZMxwv5PwwOAKmwfJQCAEWKgZUKIw1uawSQ0Sw6Us0OOKG4gEVG7XUm
-	Zpau6p1oWg3t8
-X-Gm-Gg: ASbGnct2DaNQbOk5OP3XcnEF5eWejA37c3hFKAVwro3hzaCq6Tm+IiZfePimq+sbu4z
-	cC3oYYExht3fEWFHB0b2sxg89Jvu5gEW/lgv8VX1NBHrRhJpZ5ajXg4PEtPQVNx0H0IISYOpgwF
-	8HCIaPJYpAGsMdv3SYDELMT5u+kNYWSugFCvYoH/02EmnHvPvZvrS2OhlwIzQnjohEXY/KH14CR
-	odJ2SXRAzwbCGGvwcIdhBVpI0HDJiN3FlVkcCR0vdg7/Dzox7RJcyvisWYdM1nQ3OsXF2mRDPyO
-	EQBCZV4P+jClE5B9nd0blmjXLrLRw01KMd4Sz8WLokGPql2y/vXcD4lKsXHszq39+thon7clbW0
-	h0LM9GkceI+CL16A+gOAAAtYY+kwp+IWZ+UL4Ux/xlRhFsMhaJ07Nwr0mKtB7D9UjA0cKRER46p
-	vIYM51atJp2kKJJFMA7PHW
-X-Google-Smtp-Source: AGHT+IHt8Y4HD2gfh9eO9TrrCqFYjk+ME/K7TqWH5HSyVumtZcyTfGz24NEEQEDC10OjEBbB9aypcg==
-X-Received: by 2002:a05:6000:2890:b0:3ea:63d:44a8 with SMTP id ffacd0b85a97d-42566c38bdbmr3356568f8f.15.1759532019102;
-        Fri, 03 Oct 2025 15:53:39 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759532028; x=1760136828;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CQIXxtqR5XkQfZx+k/l76E9CNQJSUSvnIl72OdWgL5Q=;
+        b=ZOeZIdFKYlUTG1VeVnOQ8qbI6DLcUnTbHjZwnA35uzTdOYeu09E3PrOrJ6H1JOtWdg
+         BU8KLkQ7pwCtW1z8NJzSMZIVp3PCuuAKTsflHtu0rlqIKuuQSKL1KVWq4sWHuXKnVRzb
+         5TAjvDCMZocxFIkwisVCqXMCy6rbzo7dnNPKEokQibgcynXdMzeG11+pPL4wtto0CFx8
+         OiJJiTGNfy5Kj1E87J9xA3/RjYlNWyFov6w64SBUgYX7OlJc1zmDMp98/MNWMRR7EaW3
+         IHzScUNdY1cyUnATPdtvGC2ns0qGxt33ip+MbHP9kxq6FLlk6cgXiiLV67L7uDy0mdjj
+         zung==
+X-Gm-Message-State: AOJu0YxedHjISKtZjwEayK9sEC52yK9Jpc1FxjEJrraZfy1WPc/uzYKh
+	QbSQYDIuA3RuBML3lAqDNgti+9zwh6+fzx17nJtCBXX3MeCBX6LWFCo6HYMgGkA/pJibRJ8SA16
+	3aHY4ImXZlg==
+X-Gm-Gg: ASbGnctI2lak1wp2Re0OFSZwaEi7MoZf5dzWwD2G3zS84D3IWohrY8EgYmbymiKVk4c
+	3CzTKz+QlB9lKhhX9QmTOajT7bWlO27Y4ekkAHPX1aBdQJmrCugqNf9o59EZL1Etxr6VMhVdznE
+	sLZxmFo8ajnqNVLLLMtUaQoUUUMOiDDrszjo1TreDWA1dyMPXPiZvuI87CUQgFEOC5gVuuYfgUp
+	md5odtYay+yNjrkv9i2kZ3ivgyQv5Nr+Rsdf/z8rvp6vXGM09AS4knLhQhHwzv/U6ykvWSW53Jv
+	4AxXCvKaSCUc3v/Ez2vqkJ9zMgEA1Cc8enriwjqO4JCtH7NA4edpts1J2FwnaosSYSctoipIsZp
+	3iNDAAT3jplxuueTb5VOQc0yBZgD1bG1U6pq5Q1CBGPG/NUpxxOR6hl8smGTPrmlLvmURvvHZNZ
+	oiyOKlRHLnYR9/va9+MnhH
+X-Google-Smtp-Source: AGHT+IEAxLmgwgQ4C3244RCBELilekwp3BnZPeUStuZhMVhFE4xU0Rx/JhXlC9p6+Hns9oQEMIDE/A==
+X-Received: by 2002:a05:6000:2890:b0:405:8ef9:ee6e with SMTP id ffacd0b85a97d-4256713743fmr3442385f8f.25.1759532027752;
+        Fri, 03 Oct 2025 15:53:47 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH v3 for-4.21 00/22] x86: FRED support
-Date: Fri,  3 Oct 2025 23:53:12 +0100
-Message-Id: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 06/22] x86/boot: Use RSTORSSP to establish SSP
+Date: Fri,  3 Oct 2025 23:53:18 +0100
+Message-Id: <20251003225334.2123667-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
+References: <20251003225334.2123667-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is the combined MSR cleanup and FRED series.  Some patches of both v2's
-have already been committed.
+Under FRED, SETSSBSY is disallowed, and we want to be setting up FRED prior to
+setting up shadow stacks.  As we still need Supervisor Tokens in IDT mode, we
+need mode-specific logic to establish SSP.
 
-I have moved the MSR_IMM patch out.  It's not strictly needed for FRED, and
-really needs to go behind Jan's patch to use mergable sections for
-altinstructions which is definitely not making 4.21 at this point.
+In FRED mode, write a Restore Token, RSTORSSP it, and discard the resulting
+Previous-SSP token.
 
-I almost got access to a piece of real hardware in time, but that fell through
-at the last minute.
+No change outside of FRED mode.
 
-In terms of timing, I know we're getting very tight for 4.21, but there has
-been an awful lot of disruption with travel and holidays recently.  Half the
-patches are already acked/reviewed, but can't easily go in due to logical
-dependencies (I suspect patches 15-17 could be committed right away as they're
-pretty independent.)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Therefore I'd like to ask Oleksii whether the nominal release ack still
-stands.
+v3:
+ * Adjust the comment in reinit_bsp_stack().
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2079705485
+v2:
+ * Some logic moved into prior patch.
+---
+ xen/arch/x86/boot/x86_64.S | 23 +++++++++++++++++++++--
+ xen/arch/x86/setup.c       | 25 ++++++++++++++++++++++++-
+ 2 files changed, 45 insertions(+), 3 deletions(-)
 
-Andrew Cooper (22):
-  x86/msr: Change rdmsr() to have normal API
-  x86/msr: Change wrmsr() to take a single parameter
-  x86/fsgsbase: Split out __{rd,wr}gs_shadow() helpers
-  x86/fsgsbase: Update fs/gs helpers to use wrmsrns()
-  x86/fsgsbase: Improve code generation in read_registers()
-  x86/boot: Use RSTORSSP to establish SSP
-  x86/traps: Alter switch_stack_and_jump() for FRED mode
-  x86/traps: Skip Supervisor Shadow Stack tokens in FRED mode
-  x86/traps: Make an IDT-specific #DB helper
-  x86/traps: Make an IDT-specific #PF helper
-  x86/fsgsbase: Make gskern accesses safe under FRED
-  x86/traps: Introduce FRED entrypoints
-  x86/traps: Enable FRED when requested
-  x86/pv: Deduplicate is_canonical_address() in do_set_segment_base()
-  x86/entry: Alter how IRET faults are recognised
-  x86/entry: Drop the pre exception table infrastructure
-  x86/entry: Rework the comment about SYSCALL and DF
-  x86/pv: Adjust GS handling for FRED mode
-  x86/pv: Guest exception handling in FRED mode
-  x86/pv: ERETU error handling
-  x86/pv: System call handling in FRED mode
-  x86: Clamp reserved bits in eflags more aggressively
-
- xen/arch/x86/acpi/cpufreq/powernow.c    |  12 +-
- xen/arch/x86/boot/x86_64.S              |  23 +-
- xen/arch/x86/cpu/amd.c                  |   8 +-
- xen/arch/x86/cpu/common.c               |  20 +-
- xen/arch/x86/cpu/intel.c                |  30 +-
- xen/arch/x86/domain.c                   |  34 +-
- xen/arch/x86/extable.c                  |  14 -
- xen/arch/x86/genapic/x2apic.c           |   5 +-
- xen/arch/x86/hvm/domain.c               |   4 +-
- xen/arch/x86/hvm/vmx/vmcs.c             |  32 +-
- xen/arch/x86/hvm/vmx/vmx.c              |   4 +-
- xen/arch/x86/include/asm/asm_defns.h    |  76 +++-
- xen/arch/x86/include/asm/current.h      |   9 +-
- xen/arch/x86/include/asm/domain.h       |   2 +
- xen/arch/x86/include/asm/fsgsbase.h     |  66 +--
- xen/arch/x86/include/asm/hypercall.h    |   2 -
- xen/arch/x86/include/asm/msr.h          |  48 ++-
- xen/arch/x86/include/asm/prot-key.h     |   6 +-
- xen/arch/x86/include/asm/traps.h        |   2 +
- xen/arch/x86/include/asm/uaccess.h      |   2 -
- xen/arch/x86/include/asm/x86-defns.h    |   7 +
- xen/arch/x86/mm.c                       |  12 +-
- xen/arch/x86/nmi.c                      |  18 +-
- xen/arch/x86/oprofile/op_model_athlon.c |   2 +-
- xen/arch/x86/pv/dom0_build.c            |   2 +-
- xen/arch/x86/pv/domain.c                |  22 +-
- xen/arch/x86/pv/iret.c                  |   8 +-
- xen/arch/x86/pv/misc-hypercalls.c       |  42 +-
- xen/arch/x86/pv/traps.c                 |  39 ++
- xen/arch/x86/setup.c                    |  33 +-
- xen/arch/x86/traps-setup.c              |  83 +++-
- xen/arch/x86/traps.c                    | 519 ++++++++++++++++++++++--
- xen/arch/x86/tsx.c                      |  27 +-
- xen/arch/x86/x86_64/Makefile            |   1 +
- xen/arch/x86/x86_64/compat/entry.S      |   3 +-
- xen/arch/x86/x86_64/entry-fred.S        |  57 +++
- xen/arch/x86/x86_64/entry.S             |  46 ++-
- xen/arch/x86/xen.lds.S                  |   5 -
- 38 files changed, 1076 insertions(+), 249 deletions(-)
- create mode 100644 xen/arch/x86/x86_64/entry-fred.S
-
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 11a7e9d3bd23..9705d03f849c 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -53,17 +53,21 @@ ENTRY(__high_start)
+         mov     %rcx, STACK_CPUINFO_FIELD(cr4)(%r15)
+         mov     %rcx, %cr4
+ 
+-        /* WARNING! call/ret now fatal (iff SHSTK) until SETSSBSY loads SSP */
++        /* WARNING! CALL/RET now fatal (iff SHSTK) until SETSSBSY/RSTORSSP loads SSP */
+ 
+ #if defined(CONFIG_XEN_SHSTK)
+         test    $CET_SHSTK_EN, %al
+         jz      .L_ap_cet_done
+ 
+-        /* Derive the supervisor token address from %rsp. */
++        /* Derive the token address from %rsp. */
+         mov     %rsp, %rdx
+         and     $~(STACK_SIZE - 1), %rdx
+         or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %rdx
+ 
++        /* Establishing SSP differs between IDT or FRED mode. */
++        bt      $32 /* ilog2(X86_CR4_FRED) */, %rcx
++        jc      .L_fred_shstk
++
+         /*
+          * Write a new Supervisor Token.  It doesn't matter the first time a
+          * CPU boots, but for S3 resume or hotplug this clears the busy bit so
+@@ -71,6 +75,21 @@ ENTRY(__high_start)
+          */
+         wrssq   %rdx, (%rdx)
+         setssbsy
++        jmp     .L_ap_cet_done
++
++.L_fred_shstk:
++
++        /*
++         * Write a Restore Token, value: &token + 8 + 64BIT (bit 0) at the
++         * base of the shstk (which isn't in use yet).
++         */
++        lea     9(%rdx), %rdi
++        wrssq   %rdi, (%rdx)
++        rstorssp (%rdx)
++
++        /* Discard the Previous-SSP Token from the shstk. */
++        mov     $2, %edx
++        incsspd %edx
+ 
+ #endif /* CONFIG_XEN_SHSTK */
+ .L_ap_cet_done:
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 872a8c63f94a..44da5efa1d20 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -49,6 +49,7 @@
+ #include <asm/prot-key.h>
+ #include <asm/pv/domain.h>
+ #include <asm/setup.h>
++#include <asm/shstk.h>
+ #include <asm/smp.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
+@@ -908,7 +909,29 @@ static void __init noreturn reinit_bsp_stack(void)
+     if ( cpu_has_xen_shstk )
+     {
+         wrmsrl(MSR_S_CET, xen_msr_s_cet_value());
+-        asm volatile ("setssbsy" ::: "memory");
++
++        /*
++         * IDT and FRED differ by a Supervisor Token on the shadow stack.
++         *
++         * In IDT mode, we use SETSSBSY (itself using MSR_PL0_SSP, configured
++         * previously) to mark the Supervisor Token as Busy.  In FRED mode,
++         * there is no token, so we need to create a temporary Restore Token
++         * to establish SSP.
++         */
++        if ( opt_fred )
++        {
++            unsigned long *token =
++                (void *)stack + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8;
++
++            wrss((unsigned long)token + 9, token);
++            asm volatile ( "rstorssp %0" : "+m" (*token) );
++            /*
++             * We need to discard the resulting Previous-SSP Token, but
++             * reset_stack_and_jump() will do that for us.
++             */
++        }
++        else
++            asm volatile ( "setssbsy" ::: "memory" );
+     }
+ 
+     reset_stack_and_jump(init_done);
 -- 
 2.39.5
 
