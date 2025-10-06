@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F88CAC5B8
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Oct 2025 09:26:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1138011.1473801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84372CAC5B8
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Oct 2025 10:28:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1138040.1473820 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v5hUD-0002o3-Br; Mon, 06 Oct 2025 09:26:29 +0000
+	id 1v5iSF-00025w-Q2; Mon, 06 Oct 2025 10:28:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1138011.1473801; Mon, 06 Oct 2025 09:26:29 +0000
+Received: by outflank-mailman (output) from mailman id 1138040.1473820; Mon, 06 Oct 2025 10:28:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v5hUD-0002nw-7x; Mon, 06 Oct 2025 09:26:29 +0000
-Received: by outflank-mailman (input) for mailman id 1138011;
- Mon, 06 Oct 2025 09:26:27 +0000
+	id 1v5iSF-00025p-Mv; Mon, 06 Oct 2025 10:28:31 +0000
+Received: by outflank-mailman (input) for mailman id 1138040;
+ Mon, 06 Oct 2025 10:28:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ozxN=4P=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1v5hUB-0002nq-SC
- for xen-devel@lists.xenproject.org; Mon, 06 Oct 2025 09:26:27 +0000
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [2a00:1450:4864:20::636])
+ <SRS0=hel7=4P=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1v5iSF-0001qe-4j
+ for xen-devel@lists.xenproject.org; Mon, 06 Oct 2025 10:28:31 +0000
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [2a01:111:f403:c100::f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 885c5118-a296-11f0-9d15-b5c5bf9af7f9;
- Mon, 06 Oct 2025 11:26:26 +0200 (CEST)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-afcb7322da8so999837566b.0
- for <xen-devel@lists.xenproject.org>; Mon, 06 Oct 2025 02:26:26 -0700 (PDT)
-Received: from [192.168.1.5] (user-109-243-146-38.play-internet.pl.
- [109.243.146.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b4865a83e3dsm1087913466b.29.2025.10.06.02.26.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Oct 2025 02:26:25 -0700 (PDT)
+ id 335bf249-a29f-11f0-9d15-b5c5bf9af7f9;
+ Mon, 06 Oct 2025 12:28:30 +0200 (CEST)
+Received: from SJ0PR03CA0047.namprd03.prod.outlook.com (2603:10b6:a03:33e::22)
+ by SA5PPFE3F7EF2AE.namprd12.prod.outlook.com
+ (2603:10b6:80f:fc04::8e6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.19; Mon, 6 Oct
+ 2025 10:28:20 +0000
+Received: from MWH0EPF000971E4.namprd02.prod.outlook.com
+ (2603:10b6:a03:33e:cafe::e5) by SJ0PR03CA0047.outlook.office365.com
+ (2603:10b6:a03:33e::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.20 via Frontend Transport; Mon,
+ 6 Oct 2025 10:28:13 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MWH0EPF000971E4.mail.protection.outlook.com (10.167.243.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9203.9 via Frontend Transport; Mon, 6 Oct 2025 10:28:18 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 6 Oct
+ 2025 03:28:17 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,244 +58,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 885c5118-a296-11f0-9d15-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759742786; x=1760347586; darn=lists.xenproject.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IJgcDdyGVvTFjWv0iuE6KatfeyOjg0CB6EtsxCvVEyg=;
-        b=nRPC/TUfIUEBXqb3cMBffgIiDS+m9ClEvYZwtydnWNLGYENO4jhMcy4kkBmk0S694X
-         Y9edI7icvSzR171QEZiUNDg54QO0SI8LNcAufWJFTyl5FhX0wEiJ0+2wbGU6eQH89MFq
-         lke3hfonx5M91OW517hjputRlEaf6MV82mW4jzCcu7pTmJgHyCf/4gMqifKPFaiyzCef
-         dDdSLlV8EL1ThgoB5W+iOuThV+xnne2GSpvRKJtkEk/nM6G+0xbCU8XwrqKehnDvYMxx
-         hypyJG1k1NWFg2WotlNlbHWvqDo2l4K426CVL0RWZkQs8BsLSLFbFw1Y6k0jlY/sd/fT
-         y2gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759742786; x=1760347586;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=IJgcDdyGVvTFjWv0iuE6KatfeyOjg0CB6EtsxCvVEyg=;
-        b=ND/jbwmMwIq6DJsF6U0a7KjV0M6hdYbAPVtHy3KuZCft1NmuFSydKlOC5vfscxJHCW
-         mNeaIGhXAWAVRspXuOXxIHweC9xJoEau1pgNxDrHUL8dcBI2/V41SjZPcWmMn8kFlnb9
-         xonLIfurafjeqjmNE5GA5OavemW23Zhp5O6bcoi4Gc3fOxU1dnjxQC+F7t+OlzOpmf35
-         27Wuspbbt78wEekQGCyB8ui7N8jF+6udeoshpv4/QyH/9/YP1MePpt6+nGPzgO6kaZ1q
-         B1iVCKlvRAiYW6IxCZmSXNXd0hNrjLvaHkbYdrIjeMTMAqVgkbD7uqq5Z1Dr9bb25xys
-         nVMg==
-X-Forwarded-Encrypted: i=1; AJvYcCUYZwyVldTsu/uP+LgT18llkJZv8Kjg+Bo+ZhSlbg31/sCidvNMYnda+7u1lfbl3r9sxGbiCmKRtdI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyqIM8gGf11BEAdeHqAqnTKvmmvhqNob3/3I0xog2PnucLoR8fY
-	TJpmZSN3OtDvwAePs+cjNZvT/w2hpjqlpzv/y+Z5jKqZT9b/R0uoGGlY
-X-Gm-Gg: ASbGncue5iFLa96ynBiqHIeoOpjGUHYBc6VpHXY/e2eKsXDhS/RXckPWNHAXsQlK20i
-	WtcgaVCwpwk+PZ9MwM3kNi+EHcc3IIZKJDiQmWUwFf2h+ai6DC5IH91p5dko5l/d1on69FY59aO
-	js3nHllEU70GmvwuXGdPaWfM/pQ37zNc+W2gGCx3TrZIbY1bRJi1PkfViYcLJ7Cf7otaBPBcbIh
-	JTt1LDcTXwgDA77yr/WNuNNteSswkeFXMK1fnMeWe3c6cGbFO1NTDFJ+p6A97kZk/LY65o4kNm2
-	9WbyWCqP3CKy+i7PGQLXs3NLXETHweyzlpA5YBjXZn+CCExcE3mHm22OsoL5DGWAi1SU45nLnDf
-	2XZs4eRRtzZCATdbWiDFl5x/iJfcI6qMbTSdj0ITa2Psh1gCgYTDOkTOOIv3yrp0f97p93Um4Y6
-	bjOAtTIZrnRixOl4biGRcVYc+o1BQ=
-X-Google-Smtp-Source: AGHT+IGKa81DCOXLrASW4mqOJyGlVHRbZETH0IiikjenfFXHsixMezB+2OWvxxd4paGo69VshH3n1Q==
-X-Received: by 2002:a17:907:3e13:b0:b33:a2ef:c7 with SMTP id a640c23a62f3a-b49c42769bcmr1478770766b.55.1759742785739;
-        Mon, 06 Oct 2025 02:26:25 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------bg97jX0oY39QB76TPzt0lRjh"
-Message-ID: <832a15bd-bc54-49b1-991e-3240702a4a35@gmail.com>
-Date: Mon, 6 Oct 2025 11:26:24 +0200
+X-Inumbo-ID: 335bf249-a29f-11f0-9d15-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Yvv71YbjrflPt61bq808CArG9Za1bW8/8dXChAHkzUJX92OFcxFY6u/79QFuOBBAfO1nOXgjIN169C4F8n9IktRC0e705qvGM66qId3rHSHnZY/X/Tyq2QW7s9ys+CUN2+PQSXS7MkIZ7+3n2k5tU0UKJj1iwCwjEocqyj94S8rKfd9lOOSQ4Tt3/GbP7bTN8paTkQl8dULpP7KFU9KxigrVEJoMtXBAupM69jomTyfffZMFbAowKRzgQ6EhPK5huXn5TTuGLv8WpbYX1rYW1kRAaa2WMVoMcKTp0OjOetXtho3uNsjBTMsPQhh4KCG9ni05WuhlAcyv/pFqmJ1F1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XsMXiiGH9rBLvTUq/4/suDkB8nbjPOIgBDGiIXrKsHk=;
+ b=p9UKVgyqkaa0n5S0/CXrGRFAl2IUmq4wmR8St4I7/siXXcaR1JeN9x8UJCIMUFiaWEy/G6hJNhQ7SCBnkjrL/6TwwS9CPUPDVaq1d+IJSwTDkcSp8edzJg8LZCX3YhnNyhUAjkz30XSygfRKzxsTTPPReJ//oeCsJmkuf22jMdIWAxHzko+ygBC9ND/Ohbrn73HYHthY2JjF9LNbm6AP1MAdtfnSFZclu2xsDsNVLiVNK07MQoCr0sLjJ4ESllZMwQw85ywOLAVm6coEcJCkUr4GcTG5bPZEeZ6xtrqE186ayjc79c1FyOdj6Ic4G1M1YRQFf3SYPU40WVB4KWljXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XsMXiiGH9rBLvTUq/4/suDkB8nbjPOIgBDGiIXrKsHk=;
+ b=kT4ZJdM/FnBmYfvZ4l4i9hCoDxCoFZyPOoJ5QLK44z6Mler7oQHSMRtCrb4klcx+fYJPWTvbNvsCNq8917Ubg/mj5omt6r1g2geIXSeSbypqOIA5No7pL4+v2UMFAeiPnjOcGdVbwi8pANUMyt8wEeGLuQo2fBEgjpwBGgWlauo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+Subject: [XTF PATCH v3 3/3] x86: Poison hypercall page with `int3` rather than `ret`
+Date: Mon, 6 Oct 2025 12:25:58 +0200
+Message-ID: <20251006102743.3907-4-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251006102743.3907-1-alejandro.garciavallejo@amd.com>
+References: <20251006102743.3907-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] libs/guest: don't use unsigned long as type for PFNs
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Jason Andryuk <jason.andryuk@amd.com>, Luca Fancellu <luca.fancellu@arm.com>
-References: <20251006055939.27286-1-jgross@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <20251006055939.27286-1-jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E4:EE_|SA5PPFE3F7EF2AE:EE_
+X-MS-Office365-Filtering-Correlation-Id: a0212e3d-5bfa-4b0c-1871-08de04c31159
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?VXJsM1M5YlcvNTlYazBIdzJKUEFqY0xyOHMzTk9TWGpQbzRrZS9UQ2VzNHRD?=
+ =?utf-8?B?ZUFwQ2tzS2pFMU1HVDZDNGdVUE1oSVUzdGVUaGZ5cStSblVJSlNiS2k1SWla?=
+ =?utf-8?B?WFpoRTY5c2ZOUWJLU2tpRVFCb2lKUEtXMlFFZmMzUEtwME9MZzFOS0ZyeDRq?=
+ =?utf-8?B?cmxhS29XZmVsdWY4L2VYOWF5UTRKbTZjTno2MDZYUmtZZVNuWWw3Q0RMQTlY?=
+ =?utf-8?B?RHhzSjBqSEw2Y3U5TXdNT2g1aThOZWxxZGU5RWtTdFMyZnExQndCQWhxSUsr?=
+ =?utf-8?B?b1NFL2x1ejlMU2hDZjhoYVljbVB3Y0MreFJVZlFsbjdQMElaa2VDa25JdUp1?=
+ =?utf-8?B?NWREdlpEWG5sT1Q4S3J6Zm4xQURTT2lTb29GZldhVnRReTBwc1hPdlFRaVpt?=
+ =?utf-8?B?ZWl6L2hXSzRQVmxOM1AvQjFrZDBpNEUxeE5GcCtrUGxRdXg1NW9Td3NBVXVv?=
+ =?utf-8?B?SU03TzQzLzZDY05DTEhubTdUMjBPVlZ0eXZwbFl5Njh2Wm14TWVCZ3U2c2lw?=
+ =?utf-8?B?bFdZclBaTmEweDFYVGpiT2xzUkN6WEpXclhUT293REIwanEwZElPYVgvQmow?=
+ =?utf-8?B?Mi9jZTRreTkwM1R4OFhuTXZjQjFpV1dJbkZ3UkNMcGd1aUJ5ckhKRFR1aEZ1?=
+ =?utf-8?B?RXI2WjhScjU2d0VIYk91VWpZOCs5T3JmdktsRHNHTzFWeHowN0tzTEc5WC9y?=
+ =?utf-8?B?VHlrNURSV2IvUjFhclo0QitnNFpBRkdxOWhwUFNmWUZRdlRyV1JydGxFbit4?=
+ =?utf-8?B?T3diYis1eXVpS0YvTmpBZ3AwVU1BZE1yUXZPSWlpNEo3VDhFbnU0Z2VtWDlr?=
+ =?utf-8?B?Y3RqZGhTOE5ROW5tN2RHT1pydGlPeUpaU0ZqaDhSOHhWbmZST1FORUxxT1Bj?=
+ =?utf-8?B?OGFyQXZ3aGxlUmxZTmU2MzZkK3hBc09RcndMUmY1allUVm4rVHVMbmtRc3B1?=
+ =?utf-8?B?SVdydTJXUlViQXlPelhYaHpYbWdET2ZSWXp1TXIvcitWckFPM052UERWblFv?=
+ =?utf-8?B?LzVhZ1N0NVh2dVNGZUxSV1RJWk0vdG1aMnU2U2VjK2QvY0xlOXhUMzlIVFJy?=
+ =?utf-8?B?R2p6YlM1T1FRZHlEN1ZTVTJNYW8zUzQwUUJUUmxRT2E4SFp2MG1zZ1ZxR0FT?=
+ =?utf-8?B?c2p6QTByTFpRdTZ2VTY3QitpdUZVYlhndVQ5cS9JMmgvQ2ZrT3VITEhjbVFh?=
+ =?utf-8?B?L0hyOFhaLzlmZlFNbFI5SUJYbnJRUWh3VVlvaVBwaUZNdngxZkhJSUQ1OWRI?=
+ =?utf-8?B?NmtlNHBTT0E3Z3JUd2ZudTg2K3YxWGJxNGVhVEk1c3NVeVN1VWZvdCtZSERV?=
+ =?utf-8?B?RXplQ3pSZVRJUSs4a2dJUXN1MHNHZGJsN0JreG9Ya1pTNHpNUVlISDRoajcw?=
+ =?utf-8?B?d0V6QnhvQ2YvdEVuRzdHc0k1NFMrZWxmZDg2ZmE2V0FoZDBsNXhucHdXcTYr?=
+ =?utf-8?B?Mk43UVRVZkNxS1hNQVR0Ujk3dEpTU2FmMU1FUXhSL1FQb3ZBTlBRZXpsckc1?=
+ =?utf-8?B?b1BDRWltVVM2MVh0MWpnb2FZWmwyWk1wSEkxc05nQk91cmYvVUdialVlVjdr?=
+ =?utf-8?B?TklXRklVelpnejdFOXBOK1ZEZkh1MzJlSjBySjhITXZONzdnZ1dtZEt2SnZ2?=
+ =?utf-8?B?SUZLYkREQ3pVSlJVNHBVTTlOcERlZFdZU09nY0JoWStzekZXQ2pVMVJodzJQ?=
+ =?utf-8?B?bHB3ZnQ5Z3VOcmdRVVJPdXF3R3lBTWwrem1NK1VOSlF3VDhLRXdsWlp0QXBm?=
+ =?utf-8?B?S1F0MzNudEhncllQVTVWemFmbTRHN044WStUZkYwVS9ha3N2TkJkaU1QVjdH?=
+ =?utf-8?B?aFNORjZnUFVZeTVycWN3TW9tTU1VR0R4eVJMQmhNaXJiUEhWVzUyK3F2MzNp?=
+ =?utf-8?B?Z0JlOUxKWUw5UktRQW12Mys2QmlNTXlEVFkxeDgxWnZWbHhEc0NZaUtyaU5P?=
+ =?utf-8?B?Tkc0K2Vwc1o0RE5JWm9ORGx4cmltenVvQWFndm5EUlFjbDZoR201dXlxTEJr?=
+ =?utf-8?B?dEhZb0hGdHJQUFVnVlMwcTJ3ZlYySW90MU5SVjIwUy9WZXM3WVNrcFZ2R2Zt?=
+ =?utf-8?B?SVgrei9Vd3F4YW95Y3d4TlROaW5pYkdRdVI3Ti8rdXVXanY4R2t5VEFERUx2?=
+ =?utf-8?Q?ipJE=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2025 10:28:18.8052
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0212e3d-5bfa-4b0c-1871-08de04c31159
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000971E4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPFE3F7EF2AE
 
-This is a multi-part message in MIME format.
---------------bg97jX0oY39QB76TPzt0lRjh
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Making a hypercall with the hypercall page absent should not
+have a happy ending. At best it's just weird, but at worst it might
+allow an otherwise failing test to pass.
 
-
-On 10/6/25 7:59 AM, Juergen Gross wrote:
-> Declarations of xc_dom_console_init() and
-> xc_dom_console_set_disconnected() in libxenguest.h don't match their
-> implementation in the library.
->
-> Under arm32, xen_pfn_t is a uint64_t and wider than unsigned long.
->
-> Use xen_pfn_t for GFNs in the library to fix that. At the same time
-> change the parameter name of the implementation to console_gfn,
-> matching the interface declaration in the header and reality (it is
-> a GFN, not a PFN).
->
-> Fixes: b6fc307b0b00 ("libs/guest: Set console as disconnected on resume")
-> Fixes: 971b7d5ecbcd ("libs/guest: Set console page to disconnected")
-> Reported-by: Luca Fancellu<luca.fancellu@arm.com>
-> Signed-off-by: Juergen Gross<jgross@suse.com>
-
-Release-Acked-By: Oleksii Kurochko<oleksii.kurochko@gmail.com>
-
-Thanks.
-
-~ Oleksii
-
-> ---
-> V2:
-> - switch parameter name as well (Andrew Cooper)
-> ---
->   tools/libs/guest/xg_dom_boot.c | 14 +++++++-------
->   1 file changed, 7 insertions(+), 7 deletions(-)
->
-> diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
-> index f51b6a78c8..420222cf37 100644
-> --- a/tools/libs/guest/xg_dom_boot.c
-> +++ b/tools/libs/guest/xg_dom_boot.c
-> @@ -430,12 +430,12 @@ int xc_dom_gnttab_init(struct xc_dom_image *dom)
->   
->   static int dom_console_init(xc_interface *xch,
->                               uint32_t domid,
-> -                            unsigned long dst_pfn,
-> +                            xen_pfn_t console_gfn,
->                               bool clear)
->   {
->       const size_t size = PAGE_SIZE;
->       struct xencons_interface *xencons = xc_map_foreign_range(
-> -        xch, domid, size, PROT_WRITE, dst_pfn);
-> +        xch, domid, size, PROT_WRITE, console_gfn);
->   
->       if ( xencons == NULL )
->           return -1;
-> @@ -445,22 +445,22 @@ static int dom_console_init(xc_interface *xch,
->       xencons->connection = XENCONSOLE_DISCONNECTED;
->   
->       munmap(xencons, size);
-> -    xc_domain_cacheflush(xch, domid, dst_pfn, 1);
-> +    xc_domain_cacheflush(xch, domid, console_gfn, 1);
->       return 0;
->   }
->   
->   int xc_dom_console_init(xc_interface *xch,
->                           uint32_t domid,
-> -                        unsigned long dst_pfn)
-> +                        xen_pfn_t console_gfn)
->   {
-> -    return dom_console_init(xch, domid, dst_pfn, true);
-> +    return dom_console_init(xch, domid, console_gfn, true);
->   }
->   
->   int xc_dom_console_set_disconnected(xc_interface *xch,
->                                       uint32_t domid,
-> -                                    unsigned long dst_pfn)
-> +                                    xen_pfn_t console_gfn)
->   {
-> -    return dom_console_init(xch, domid, dst_pfn, false);
-> +    return dom_console_init(xch, domid, console_gfn, false);
->   }
->   
->   /*
---------------bg97jX0oY39QB76TPzt0lRjh
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 10/6/25 7:59 AM, Juergen Gross
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20251006055939.27286-1-jgross@suse.com">
-      <pre wrap="" class="moz-quote-pre">Declarations of xc_dom_console_init() and
-xc_dom_console_set_disconnected() in libxenguest.h don't match their
-implementation in the library.
-
-Under arm32, xen_pfn_t is a uint64_t and wider than unsigned long.
-
-Use xen_pfn_t for GFNs in the library to fix that. At the same time
-change the parameter name of the implementation to console_gfn,
-matching the interface declaration in the header and reality (it is
-a GFN, not a PFN).
-
-Fixes: b6fc307b0b00 ("libs/guest: Set console as disconnected on resume")
-Fixes: 971b7d5ecbcd ("libs/guest: Set console page to disconnected")
-Reported-by: Luca Fancellu <a class="moz-txt-link-rfc2396E" href="mailto:luca.fancellu@arm.com">&lt;luca.fancellu@arm.com&gt;</a>
-Signed-off-by: Juergen Gross <a class="moz-txt-link-rfc2396E" href="mailto:jgross@suse.com">&lt;jgross@suse.com&gt;</a></pre>
-    </blockquote>
-    <br>
-    <pre>Release-Acked-By: Oleksii Kurochko <a class="moz-txt-link-rfc2396E" href="mailto:oleksii.kurochko@gmail.com">&lt;oleksii.kurochko@gmail.com&gt;</a>
-
-Thanks.
-
-~ Oleksii
-
-</pre>
-    <blockquote type="cite"
-      cite="mid:20251006055939.27286-1-jgross@suse.com">
-      <pre wrap="" class="moz-quote-pre">
+Suggested-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
-V2:
-- switch parameter name as well (Andrew Cooper)
+`./xtf-runner -a` passes
+
+v3:
+  * New patch based on Roger's suggestion
 ---
- tools/libs/guest/xg_dom_boot.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ arch/x86/hypercall_page.S | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
-index f51b6a78c8..420222cf37 100644
---- a/tools/libs/guest/xg_dom_boot.c
-+++ b/tools/libs/guest/xg_dom_boot.c
-@@ -430,12 +430,12 @@ int xc_dom_gnttab_init(struct xc_dom_image *dom)
+diff --git a/arch/x86/hypercall_page.S b/arch/x86/hypercall_page.S
+index cc6ddc2..de0a991 100644
+--- a/arch/x86/hypercall_page.S
++++ b/arch/x86/hypercall_page.S
+@@ -6,8 +6,8 @@
+         .p2align PAGE_SHIFT
  
- static int dom_console_init(xc_interface *xch,
-                             uint32_t domid,
--                            unsigned long dst_pfn,
-+                            xen_pfn_t console_gfn,
-                             bool clear)
- {
-     const size_t size = PAGE_SIZE;
-     struct xencons_interface *xencons = xc_map_foreign_range(
--        xch, domid, size, PROT_WRITE, dst_pfn);
-+        xch, domid, size, PROT_WRITE, console_gfn);
+ GLOBAL(hypercall_page)
+-         /* Poisoned with `ret` for safety before hypercalls are set up. */
+-        .fill PAGE_SIZE, 1, 0xc3
++         /* Poisoned with `int3` so a stray hypercall is patently clear */
++        .fill PAGE_SIZE, 1, 0xcc
+         .type hypercall_page, STT_OBJECT
+         .size hypercall_page, PAGE_SIZE
  
-     if ( xencons == NULL )
-         return -1;
-@@ -445,22 +445,22 @@ static int dom_console_init(xc_interface *xch,
-     xencons-&gt;connection = XENCONSOLE_DISCONNECTED;
- 
-     munmap(xencons, size);
--    xc_domain_cacheflush(xch, domid, dst_pfn, 1);
-+    xc_domain_cacheflush(xch, domid, console_gfn, 1);
-     return 0;
- }
- 
- int xc_dom_console_init(xc_interface *xch,
-                         uint32_t domid,
--                        unsigned long dst_pfn)
-+                        xen_pfn_t console_gfn)
- {
--    return dom_console_init(xch, domid, dst_pfn, true);
-+    return dom_console_init(xch, domid, console_gfn, true);
- }
- 
- int xc_dom_console_set_disconnected(xc_interface *xch,
-                                     uint32_t domid,
--                                    unsigned long dst_pfn)
-+                                    xen_pfn_t console_gfn)
- {
--    return dom_console_init(xch, domid, dst_pfn, false);
-+    return dom_console_init(xch, domid, console_gfn, false);
- }
- 
- /*
-</pre>
-    </blockquote>
-  </body>
-</html>
+-- 
+2.43.0
 
---------------bg97jX0oY39QB76TPzt0lRjh--
 
