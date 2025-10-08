@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAEFCCA470
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Oct 2025 15:53:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1139955.1475135 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80425CAC5BB
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Oct 2025 16:04:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1139978.1475145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v6WTl-0003fU-6P; Wed, 08 Oct 2025 15:53:25 +0000
+	id 1v6Wea-0005zD-5G; Wed, 08 Oct 2025 16:04:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1139955.1475135; Wed, 08 Oct 2025 15:53:25 +0000
+Received: by outflank-mailman (output) from mailman id 1139978.1475145; Wed, 08 Oct 2025 16:04:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v6WTl-0003fN-2u; Wed, 08 Oct 2025 15:53:25 +0000
-Received: by outflank-mailman (input) for mailman id 1139955;
- Wed, 08 Oct 2025 15:53:23 +0000
+	id 1v6Wea-0005z6-1J; Wed, 08 Oct 2025 16:04:36 +0000
+Received: by outflank-mailman (input) for mailman id 1139978;
+ Wed, 08 Oct 2025 16:04:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eGu8=4R=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1v6WTj-0003fE-8q
- for xen-devel@lists.xenproject.org; Wed, 08 Oct 2025 15:53:23 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1v6WeZ-0005z0-88
+ for xen-devel@lists.xenproject.org; Wed, 08 Oct 2025 16:04:35 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eaa10ece-a45e-11f0-9d15-b5c5bf9af7f9;
- Wed, 08 Oct 2025 17:53:22 +0200 (CEST)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b4736e043f9so28378566b.0
- for <xen-devel@lists.xenproject.org>; Wed, 08 Oct 2025 08:53:22 -0700 (PDT)
+ id 7a24de92-a460-11f0-9d15-b5c5bf9af7f9;
+ Wed, 08 Oct 2025 18:04:32 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-421b93ee372so49388f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Oct 2025 09:04:32 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b48652a9ff0sm1683399766b.5.2025.10.08.08.53.20
+ a640c23a62f3a-b48652ad839sm1685547766b.1.2025.10.08.09.04.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Oct 2025 08:53:21 -0700 (PDT)
+ Wed, 08 Oct 2025 09:04:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,57 +47,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eaa10ece-a45e-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: 7a24de92-a460-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1759938801; x=1760543601; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1759939472; x=1760544272; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=WjihOiG01b3doXNVia7/ldfLICaj1ok9ctXzdnsvNeM=;
-        b=f3A4Rj1W9366/EDdg/21VKkDCjopGif53qXGbrNoN4kQSUWen2JCZGpkNkei9map/G
-         KQjB/BmE6VWHCwUlpbUfmc99X1Z3LZ10NVKcKxRFtX/31cs9BLQjP4hOPhX7J6wN2pUg
-         GGCMoMJ7YGlyEEzZ1zhW5+DaEPDeZsQ6nCqBZArxKInNDZy9C8nIIyH4oAtLU3RXmOCi
-         ok6xf/lZOgri97c1mU5G/2g++Z2+n3dktcrU7fhV68dA3t+Uf81skna3zvPS7gK3A9xd
-         44i213KaGwuWpd0JNlNy7bYydYooAAB3G/y+JR666gJY+vF7xl/1MIJpO1DhSl5PFss6
-         ihqA==
+        bh=MR+IwM0TNK+OJaN/TxLDLmqN4bJqeT8TJo4rcx3EOyQ=;
+        b=JdgIb1fjmFBCJl3Ax+AEG6c1TjFmlLHo6ZvrQ69OeVbkLhNuPquNF4sSVml99eLF75
+         Caabkex8T5Ys4rHrC3mdF1YeQa2ohsxWpz9FTZLERXGKWhOjJPEj8xTGEkWcaigy7I9g
+         GfISQXKHYBRxl23+ys27ZRcstIBtoUdEEGPD2zsCk08AFAZNWi8fV6v/xU2eBo7YMtOl
+         Uj3CZNs7O9BjmfnTINhCtR2kxAWn7K20xVfIfbwQPs51HdJaJfxDKO6JQRjFrVdLFene
+         TSWqraKLBmB2FxDGeOj47zbvJMjs83lR/OCxgsyZO/D/F2sjg3uRCxXXtHjv2w/bybcJ
+         iJ2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759938801; x=1760543601;
+        d=1e100.net; s=20230601; t=1759939472; x=1760544272;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WjihOiG01b3doXNVia7/ldfLICaj1ok9ctXzdnsvNeM=;
-        b=daouXlD//YCxtCxoqWqk7Qfsn+VZsDtNcCztN1ghdyffqfQSAOf9CTMj3t+9LRQgb/
-         FD+iP3FdbMhs1UoeyO2n8oxMn4lmZUTZC6DWdcdPxBHgTNgRrdxdVQlW9WmR+ZcKZrwU
-         ncvSNlrohtcbTpV8ITg1Tx5Fe5YDF/nU37VQV+LYNWvtv/DCD+TPNXuyHgI3+04tXW5B
-         tG4vUTo1AJ2GdPg8x697xWjOl3sOc+WXwq7KWj0JIMegRRaIRcxaPGB6MlOcNTeb5yMm
-         U0sM6O4VGoXvw8JNkOsE9K5O/Rus5eSR/rM2LwG8n8gXa0tsmaG4ZyROLihnNVR4jNnq
-         n1qg==
-X-Forwarded-Encrypted: i=1; AJvYcCXnp5OnCi4D5XSMC+PuxGsHSPIuHDWgeeTBIDPLOZlnLcn3nuruX7ZJgSkMuOSIxL74Nm1zu6UXjpg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyaYNdMJ1SW6J5sYyuxbccM/TD2rSIWYNUIO9u+XDsOdsfqMIhC
-	DJVD755CRSRbtJFLP4CBvNhcnSTqFPyqfpaw17nYFAT++rs9KIOCSLmWkd8FB1yRSw==
-X-Gm-Gg: ASbGncvPkTU16F4eCfXwBSJM1kcy7msM6yX8SVwitQ1k05xsdFdJ04PLjH4c5bZi3my
-	+LlQ7VpxVWNZjzhFOZ6GBovM1EDyf0L8SwbMuDuLTyQTfEAQjGgcvxapxj+nyjfpyQGzZW1mSuR
-	hq9khxbPAzLiuwaV15Hc4Cw8+X3ILBCS5YPRRFVeSVIBLlLrG1VnOGna3iRn9T2FgIa/mFVWkyA
-	kHTxw48KAz1tzTv1zjQyuXiADeYxpLw6+gG6KaW7ZsOU9lXVQhlrlRqow1OaEL0c5LDid6CvLN4
-	LOL05a/hEuecBGF3DC+66hBpadwEuC2B2nmxgkqrnanpNV0eKP+KZhyino+sesRlT0QaWa4Wc1b
-	tGa095JjuoLnJmA3oEd+798tg/QRUyL6CWLI7kJjoX93scGvs46eflpxupk2fH20a2agjQ3RhxT
-	ojDeYeE8uIDfA1U8nJHA3mLuFtc5nyXoDdetQU3j48BA==
-X-Google-Smtp-Source: AGHT+IG+vDGCwBnyrjzJExqH+z/bNb+4jjwXW6gVEhCgPLTHUyZS8dJFLEnPNkGomu2MN5KOc+7VNQ==
-X-Received: by 2002:a17:907:971b:b0:afe:d590:b6af with SMTP id a640c23a62f3a-b50aaa96bb0mr492183366b.20.1759938801301;
-        Wed, 08 Oct 2025 08:53:21 -0700 (PDT)
-Message-ID: <bc7f343b-b5cb-4276-a7fe-a9b599046cc3@suse.com>
-Date: Wed, 8 Oct 2025 17:53:20 +0200
+        bh=MR+IwM0TNK+OJaN/TxLDLmqN4bJqeT8TJo4rcx3EOyQ=;
+        b=d2DzClJFiZp7dVbqRLzZ7SIO0wZoaja3yJHNASiJmiYYRi+ZYD35VvynDaQ7SWKUK9
+         /FDxYuYMof+pGpBtmcLujgVju8g3IrOOBZ8CFBF5KF2eVEvI/k3k0VGERNOx7vRHUJzv
+         MlJdInmwQdoAsaxu+0iwz3KGZON1QcvfSZKIX+wPpkmo3zaUf1ps54eN1dQyTvM5OWrG
+         qP9m/ighKwkUKsv9BwDcdsC5N3vdscv8Lvi/coQDJBPXYGuyI8hcwTJhNKBfci0fSdz2
+         7CcrflDLFy9UuP8ZrXpwiyo2FfZB1jTmB8Ap2+JnqyO78FOM2G41ZL+WaC6zl+zwxCEm
+         AXgw==
+X-Forwarded-Encrypted: i=1; AJvYcCV4X7FImm8uB0eN07wrzDJQaWOlvIbIWlu/EsiJ7UrGKKb9OnMs/huQTufTIo9ZbOE78Dgr03CRyDY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzHB+X1ZYkp6ePctgntf2eDIzWcC7NE9wemJSAgQYgUGClNBAqO
+	C6IfHRI+OaW80mjlZzXMXL4baeuEO0auv1H6E6LuOVCn5iY1+jzGiF01YZlfYm3oBw==
+X-Gm-Gg: ASbGncuWDNQJsLGIYh1GmCb0uw/ZXJ75SQ22N/gaAYRDCEIK/m+e4ufWvPgJv2Pk3Ud
+	IC0YHhmHVNyeT7c5uyMC79rdT4A6GvEKxRKdPqYJ8CmBuBOaxCZfO9lUQe+Y6+KE8STl0Y1EXAr
+	FLlRfAdK9BhJaM7neA0ohSSwphW6lGxCumAbhejEr38kervZl5di6fFkrKC0xTpsHdZrG75ck8L
+	WHgKCHWATYJddISFIL4cIpimJTyT7sJENLBhW662ajiNdcM03dwUBzVCEB4Ya7BmrdSxN06cwDg
+	RGMhl8wl32ch3SR2p4ZUWUKKnh6s9EFvsGIcwc7kkjnjbtdq6ngRgu8echyTi6LykzAbPXGUkiu
+	/+Uh5t+Wl8Gd1KMD033Njmlrvuf1ybaMEYztXrC4iXpeY90teQZxqflLNiz8cgws04WD3XyMKtb
+	qx5SAAIoTz4KCBeZRmL9mwXCQZU6fw63s10Eyv2p6iWQ==
+X-Google-Smtp-Source: AGHT+IElZJNS9XNJiITX3lgrOT/8bCHSHKApfcH8iEZ0vzeYdA86JW2vLRMwC/P9Wlz7WPO5MZlkGw==
+X-Received: by 2002:a5d:5d03:0:b0:3d1:6d7a:ab24 with SMTP id ffacd0b85a97d-42667177c28mr2828438f8f.17.1759939471584;
+        Wed, 08 Oct 2025 09:04:31 -0700 (PDT)
+Message-ID: <3e4e4bc5-aa47-4357-9327-df2a9b9c9a1b@suse.com>
+Date: Wed, 8 Oct 2025 18:04:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN][PATCH] x86/hvm: revise "cpu_has_vmx" usage for
- !CONFIG_INTEL_VMX case
+Subject: Re: [PATCH v5] x86: make Viridian support optional
 To: Grygorii Strashko <grygorii_strashko@epam.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Paul Durrant <paul@xen.org>,
  Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20250924101417.229108-1-grygorii_strashko@epam.com>
+References: <20250930125215.1087214-1-grygorii_strashko@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -123,52 +124,56 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20250924101417.229108-1-grygorii_strashko@epam.com>
+In-Reply-To: <20250930125215.1087214-1-grygorii_strashko@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 24.09.2025 12:14, Grygorii Strashko wrote:
-> From: Grygorii Strashko <grygorii_strashko@epam.com>
-> 
-> Since commit b99227347230 ("x86: Fix AMD_SVM and INTEL_VMX dependency") the
-> HVM Intel VT-x support can be disabled, but it still keeps VMX
-> code partially built-in. Particularly in HVM code there are two places:
-> 
-> 1) hvm/dom0_build.c
->  dom0_construct_pvh()->pvh_populate_p2m()
->     ...
->     if ( cpu_has_vmx && paging_mode_hap(d) && !vmx_unrestricted_guest(v) )
->     {
->         ...
->         [unreachable for !cpu_has_vmx case]
->         rc = pvh_setup_vmx_realmode_helpers(d);
-> 
-> pvh_setup_vmx_realmode_helpers() allocates memory and configures
->  HVM_PARAM_VM86_TSS_SIZED
->  HVM_PARAM_IDENT_PT
-> 
-> 2) hvm/hvm.c
->  hvm_set_param()
->     ...
->     case HVM_PARAM_IDENT_PT:
-> 
->         if ( !paging_mode_hap(d) || !cpu_has_vmx )
->         {
->             d->arch.hvm.params[index] = value;
->             break;
->         }
->         [unreachable for !cpu_has_vmx case]
->         ...
-> 
-> Hence HVM_PARAM_IDENT_PT/HVM_PARAM_VM86_TSS_SIZED are used only by VMX code
-> above code become unreachable in !cpu_has_vmx case and can be optimazed
-> when !CONFIG_INTEL_VMX.
-> 
-> Replace "cpu_has_vmx" with using_vmx() to account !CONFIG_INTEL_VMX and allow
-> compiler DCE to optimize code.
-> 
-> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+On 30.09.2025 14:52, Grygorii Strashko wrote:
+> --- a/xen/arch/x86/hvm/Kconfig
+> +++ b/xen/arch/x86/hvm/Kconfig
+> @@ -62,6 +62,16 @@ config ALTP2M
+>  
+>  	  If unsure, stay with defaults.
+>  
+> +config VIRIDIAN
+> +	bool "Hyper-V enlightenments for guests" if EXPERT
+> +	default y
+> +	help
+> +	  Support optimizations for Hyper-V guests such as faster hypercalls,
+> +	  efficient timer and interrupt handling, and enhanced paravirtualized
+> +	  I/O. This is to improve performance and compatibility of Windows VMs.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+What is "paravirtualized I/O" about in this context?
 
+> --- a/xen/arch/x86/hvm/hvm.c
+> +++ b/xen/arch/x86/hvm/hvm.c
+> @@ -701,9 +701,12 @@ int hvm_domain_initialise(struct domain *d,
+>      if ( hvm_tsc_scaling_supported )
+>          d->arch.hvm.tsc_scaling_ratio = hvm_default_tsc_scaling_ratio;
+>  
+> -    rc = viridian_domain_init(d);
+> -    if ( rc )
+> -        goto fail2;
+> +    if ( is_viridian_domain(d) )
+> +    {
+> +        rc = viridian_domain_init(d);
+> +        if ( rc )
+> +            goto fail2;
+> +    }
+
+While this looks okay to me, ...
+
+> @@ -739,7 +742,8 @@ void hvm_domain_relinquish_resources(struct domain *d)
+>      if ( hvm_funcs.nhvm_domain_relinquish_resources )
+>          alternative_vcall(hvm_funcs.nhvm_domain_relinquish_resources, d);
+>  
+> -    viridian_domain_deinit(d);
+> +    if ( is_viridian_domain(d) )
+> +        viridian_domain_deinit(d);
+
+... I wonder if viridian_{domain,vcpu}_deinit() better wouldn't be tolerant
+to be called anyway, thus avoiding the need for conditionals here and below
+(and perhaps being a little more robust overall). Thoughts?
+
+Jan
 
