@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1964BCCA476
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Oct 2025 09:22:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1141095.1475727 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC37CAC5BB
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Oct 2025 09:22:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1141096.1475731 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v79K4-0007HX-7m; Fri, 10 Oct 2025 09:22:00 +0000
+	id 1v79K4-0007Kf-Hj; Fri, 10 Oct 2025 09:22:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1141095.1475727; Fri, 10 Oct 2025 09:22:00 +0000
+Received: by outflank-mailman (output) from mailman id 1141096.1475731; Fri, 10 Oct 2025 09:22:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v79K4-0007HG-2h; Fri, 10 Oct 2025 09:22:00 +0000
-Received: by outflank-mailman (input) for mailman id 1141095;
- Fri, 10 Oct 2025 09:21:58 +0000
+	id 1v79K4-0007Jt-Cu; Fri, 10 Oct 2025 09:22:00 +0000
+Received: by outflank-mailman (input) for mailman id 1141096;
+ Fri, 10 Oct 2025 09:21:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uR8D=4T=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1v79K2-0006bm-Id
- for xen-devel@lists.xenproject.org; Fri, 10 Oct 2025 09:21:58 +0000
+ id 1v79K3-0006bm-Ig
+ for xen-devel@lists.xenproject.org; Fri, 10 Oct 2025 09:21:59 +0000
 Received: from DB3PR0202CU003.outbound.protection.outlook.com
  (mail-northeuropeazlp170100001.outbound.protection.outlook.com
  [2a01:111:f403:c200::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 91436454-a5ba-11f0-9d15-b5c5bf9af7f9;
- Fri, 10 Oct 2025 11:21:56 +0200 (CEST)
+ id 918025ef-a5ba-11f0-9d15-b5c5bf9af7f9;
+ Fri, 10 Oct 2025 11:21:57 +0200 (CEST)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by DU2PR03MB10161.eurprd03.prod.outlook.com
  (2603:10a6:10:49a::5) with Microsoft SMTP Server (version=TLS1_2,
@@ -49,34 +49,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91436454-a5ba-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: 918025ef-a5ba-11f0-9d15-b5c5bf9af7f9
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QUZr/KkhrZErvd8G6tpqntmdU0n7NVIeowuMoyGxS3ymNY4gVELVPkTlVsr4vnamUCGnr2qugOFZh+vuFou0SnPup65uvmz0d79HGIZnnMcLYBdbJh0p8aj2M3WT9JtYmhdpS84oDugEP4FLla/rIpNqoSCcQs3b9fZFsHwm3azMPkCDGvnHWb8GMfHQ0bHVXInhUPu8PWbI4c2y1uCxOEajou2fFL1UeVh8w2X3Pwso0ssMcdHa+GuLfMWF+ar+oYpkhSsVjLY/wxPJ5IP5Q7Uoek//7k46GUdrnmBX7os+e2vzkcHNH7LGJcwC4gIfsQXe5Q+o2g6n6DH67++jJQ==
+ b=xbaXQVDC0I7CiTqYAsZE8+458CMyeo9cTJd+1vhGMdIU/vYasbiEnKVGiDwDBJjuAs7hD0idwMQbNacNJUBVQwDD/CJMb51MKfjsEPQAb5OveCOh8W156xI5e42brnprsZ/wq3BprqPCCkC9sbPw1qA5CM3+Ndt4gKKEgWQejzzCIHUnOrR2/+YNCr0/DOobshIZwuPpeVQFHlcZjpphEgdlOaC3eGhB5O0ZMMczIGekS7q8Q398yVdOOmH9PdnnGoy+ZNH7QfmwsegXtav21CrFFvqlmeNw7sg/+2bQ7iVS0S44mzNHESJEtOMkWKSOtUkO9yz294Lp7v//KxEeUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ap3AYvhm09sY85C0gCKMDjpM3lvCcFWVzPPdQn3ZnmY=;
- b=li5QIgJGB+lGHQSx12CLC2Qk8ZZOlRRTz+9XBW1IlPSSXyE8hsdIaX5HX8rwoOkmA/TYL2OLK7DM0mpxENYcDGA5wGoYvyKaC43oRo6HuCAO9aNC5RomdP8qVKFape2qT57CqsyiY4Gl834vGzLWHbSM2w+v+7OXobTs9CSuApDwYb81panENZ+Jz43xClMx1KWFvpdPJFH5zy5/Bsr8QRMpj8SV+ocL94cA4iYgQjxCvZo470gPYrrHmm3iaUKl7UXsus2Wg38uzTGnj/7MBUjaSIEstLF9VC/qjcKrWq8CBgU4qsJFeMblaw2hZSJm5G4FMBDNxsx9SYX61MYKqA==
+ bh=e9bNx7Ab/YiPLJtEhYi9gy233vDY+7+k7vYv5Kt1ySA=;
+ b=GB9j027nUJ/VFqirS8wEBmZYaEU19lYmc3o1+lgb7vIu3NuHdqbamBIHUdtla94+duZgvTIYD0TA5BIFuYmqBvLehvUVyTJ/GNV44AoxRpGsk0lx/3QWDZR+mFl0c+OAt1eS86RWV7KYIsJY3M1KoqH3mwezOY3IGTMqsXgFR73w0lZK0aZ8TltjvVh9JeRUur35KtLCvmKOZg6u54Z4PczzOSY+QXc4BipGMMd7mh2xCmsaGfNurrZi4ZzERz4Qrrl2O9KSRqezRv/vc6umg/diNHAygtEUdcCDD/uZmNkPMqq4N1l0cAcH/PvvjWqEY/gsd0QOKr7O+dwUlxGaJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ap3AYvhm09sY85C0gCKMDjpM3lvCcFWVzPPdQn3ZnmY=;
- b=U3MsgYGSokYkKzCL2kiwtc5sskle/PRPteJwo48Mm/SNOvC2WBUHFF19W7TDsBLGs1dGvn3lvurvAc7RTXWXgmDoEwUfAscJXQtSt66xT8IerDIEDV1W9+RIxqXHceo6GHbFJhhu7fvDWc/sNeZowLGbH47JQikdoAX2PbWKXJGRaO02re31rESIXvnLHqW12XJPxEbqbmZDQyB1GWFFLTy7Ze4dCvL8tO+s+1knCwoiaQuWAqH1vtWTovayXRecrB8dIgpLJgjOzjZnsjTvfnqwDwD2TIpqciupbmo7xJVHvMuCTNdXHm/0z1cZUhFkqOgTShbHTkR9jjrWgCzQlw==
+ bh=e9bNx7Ab/YiPLJtEhYi9gy233vDY+7+k7vYv5Kt1ySA=;
+ b=pt5sH+oX99vupClVxSP/k8W1d3QUzWQPbHwQu3raYjPw5kIezScmjfnbdzOKwj9VZemCL4jwm35s6tjcfD5Tl7dJapx7pi6yMAQ6tHRjLt5Dx8t1Ay3I1FsRgQ7rqRNr3w2asEiaJslFL46TMCt/GtoJ1oHzD9OhaR50Aj24nNudJ+CBInCosIGs+ijvTCXuwzFlGjNS5pV+hVut4L8sh8zeFacR4zGVpkBCEr6PgIDmhDRUU8VDypo4iOvkamAi5QK8+sgaSInUw8Acq77zXJeHmYBOKCNUbexKaQUrimNK9CAKzPuDxoXT6MS1lA82K61nVezwuPU7JLz2wj3hSA==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>
-Subject: [PATCH v3 3/5] arm/sysctl: Implement cpu hotplug ops
-Thread-Topic: [PATCH v3 3/5] arm/sysctl: Implement cpu hotplug ops
-Thread-Index: AQHcOcdQw+K7ttgNKka1vBPVCSBVHw==
-Date: Fri, 10 Oct 2025 09:21:52 +0000
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH v3 4/5] tools: Allow building xen-hptool without
+ CONFIG_MIGRATE
+Thread-Topic: [PATCH v3 4/5] tools: Allow building xen-hptool without
+ CONFIG_MIGRATE
+Thread-Index: AQHcOcdQwzS1cOJYwkSZT3yaMp/Z0g==
+Date: Fri, 10 Oct 2025 09:21:53 +0000
 Message-ID:
- <bbd7ebd07d80ead78106c160e4368116dae1e548.1760083684.git.mykyta_poturai@epam.com>
+ <e4f4107e54f737932904c76aa65d41d4453780df.1760083684.git.mykyta_poturai@epam.com>
 References: <cover.1760083684.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1760083684.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -87,70 +86,70 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DU2PR03MB10161:EE_
-x-ms-office365-filtering-correlation-id: a0ced386-710c-4be7-9895-08de07de7371
+x-ms-office365-filtering-correlation-id: aac7e549-82ff-4d9c-5bfb-08de07de73a3
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?NED1ohATTqPnz+VsJLcEhvv2/itS6cuXjaSHtNEbKxNQSVRR5qRoX6EEWg?=
- =?iso-8859-1?Q?BhG1BbhmXR3MqExu9nCNakmSk3z//5u1vqNKgsGNmgNcfPvu+lcVtLprYW?=
- =?iso-8859-1?Q?1AUdbsGCFTnpdDzY4S4c3nmzK8aApKsDMtqeO5RnIsihywmVKxtfhZ6jvo?=
- =?iso-8859-1?Q?Xv8Fw17kXjyXRR8FwnEgSaobk2LjQvq6yUA+/m8s4cm9gMIPtjSieexdxQ?=
- =?iso-8859-1?Q?hKTpW+ClMgNGYhDab+LcYtgpckEIgK2DmjIWIdgvNhBp7vsFif9Zt9JuBG?=
- =?iso-8859-1?Q?+Wp2mmv2dAEt5Q9N2/blkN2rX9UMU0Zd7QEtGEQQ1NqvMAd3q4y6apK4N5?=
- =?iso-8859-1?Q?IPOMiqjiSKpvp8Ukp2ZcKpNA2yuYHIiNfzXwvkM2OUbObznyZS4D89QvVd?=
- =?iso-8859-1?Q?IZ0d2epKWwKHrz7oehs46P0+TPGIBru2CJXqc16MdhB1QLNbyCFjQ66Pjg?=
- =?iso-8859-1?Q?0SCMlwOZw1lfEwi5QZxwAVRkn3cq2zT0BMmBCYzjcUz9BD+ifcye21+bGr?=
- =?iso-8859-1?Q?5XDTuMBZsiJttR9aqU2sTf/jBzhE/7P+OcbFaLUFkL7i/jHa0TGoD9Kq2K?=
- =?iso-8859-1?Q?ZgtYkh+vAXj9lqNGKYbaNicKQVcp1YBsWLvyZVueeass492D6gsAEQQb0Z?=
- =?iso-8859-1?Q?mdZOmm2nXuBFqDHH9Kz9Q4dB/NVcOoDjukzMS4MIwfeBsvz5PqKLmXoetu?=
- =?iso-8859-1?Q?sK8HQnoLLKV7PQa4YNySMMsJGzE82aUK4yctC4AB7PK5QeRKtfDKgXh3FU?=
- =?iso-8859-1?Q?VcbyGj4tWjicv16pPhTy1lzWgmekyMCLtj1A1e6NLzqleKYzf2Z+IRmefX?=
- =?iso-8859-1?Q?2lMjJMgo/Yl+RUCwR7WxUgr7JbHdsID6Gg7F2iRXJI0X4eCDx7AaM9mIu0?=
- =?iso-8859-1?Q?DGsOEVBo+/fmrSbZ1qeJZopa09JjPii+ORo7IhMYxfSzUiMgTZziGvUc8S?=
- =?iso-8859-1?Q?s1W7n1iy24ND1mPZEsE9ruKbKUpdEgY0O9tIDAEjdqoQb1ueEl+v4G+ekJ?=
- =?iso-8859-1?Q?DCIgQSubGnrvdm1zzNQRX2uiiFyZZ+rbjM20w2R1BHp2HX8kT+B4DsIiGF?=
- =?iso-8859-1?Q?LDRwI0Ub0RrJyQ8W/peb5odJBw2EQBlbPqFzulPIqkMi9vyqt+5u4XuxUG?=
- =?iso-8859-1?Q?nL5JIckcvHhAPAT6mq2PMXHv5D1W+AcfywNwJ/5UF07XSR6wR6YF4BybSo?=
- =?iso-8859-1?Q?/4M68TtmX51LonY2Ps0QrqQdA31HvfpEY1EA2Laj5RJfFdT7ku5On5DkW1?=
- =?iso-8859-1?Q?zXPrzJM4dWP+fmiBt8g80rhgN91e9SHC9HR8esCmnoUIjNoF5Cvc1LSdes?=
- =?iso-8859-1?Q?0KzsdbLkN8vs8PY18Hmp0zvUzcFC7BgxSNZjclKHZNna1RqXWbi8AgaLoN?=
- =?iso-8859-1?Q?mnDQtHrGM2Xpb5iXAvPN0JlS0p7fthkY0qWKOfM/Gn/o5BrInA5NBt5Sch?=
- =?iso-8859-1?Q?q8SJQi9LJuqEebxw3rWd02X/saiqNszrzBOcr+LfwU1yx6aYq9ZyYk98Gv?=
- =?iso-8859-1?Q?8HvWwNNWmeA6Ei+sWLLqfJslBwKLbB3tflUfLmHKQR0JYm+YY/xK2w1gbm?=
- =?iso-8859-1?Q?vTXftCoN5xeWbp/u1eImRk14q4m3?=
+ =?iso-8859-1?Q?8rz12ZDW356Er306sUsbB25qNrZ9bsoW74rVs4Fzbs8+pJ8No57DkGxWUw?=
+ =?iso-8859-1?Q?JEpMs7xHK0K3mRNoNrvVu7q68v96FSEr3ERo6cTviBs0m6zakB/GsDCxuY?=
+ =?iso-8859-1?Q?/+ccCrAAlfwsj3sdnHlIyK3eRDypwG5yQ54cpsQykNbi2uRTe83HtV1WIx?=
+ =?iso-8859-1?Q?hHG4zgBDWbeGYQyR3nsvc66kkGM2gfQWxFSzS9Tg0F6mHaTwgOePhNT+tE?=
+ =?iso-8859-1?Q?2UyaODBb1g/poreSGs+idbUdnouW/+/c+YI/6fLv7kMe73iv8/mtRMFjOU?=
+ =?iso-8859-1?Q?pq8sE10Sod2zAGanyFLUR18IwpDU9cx7roIBZ0KxNGkCRtAlOmBNGUmenj?=
+ =?iso-8859-1?Q?BdNWS9hxIJEk/+LB5MJE9wYGFtcheNDUmmV7BH0IjjFqq7PVRTHvj7sDw4?=
+ =?iso-8859-1?Q?qQTJICP1A+kmxP+1tUtR2bKoaYdEWMmafPWzKQXkRHz7uAa+fjo6ascbHI?=
+ =?iso-8859-1?Q?BLLLqtIneGittZk7CO8QBtN41rQ7mYSAcMxQhCbl3nDBF+SJTLKe0u6lv5?=
+ =?iso-8859-1?Q?5M3crrT80a1+jJG+hawlTz8NkMVv7gAaCQhJlU6Ekqs9qGhyAMopKnKkuD?=
+ =?iso-8859-1?Q?aokYR+70LgSmWfpB519vUEmdFiUI5gjS3INbU4/OxCUT3wChOE1SZNiS5J?=
+ =?iso-8859-1?Q?TWewfK3Y3f65RzSe1bJcO3IyWeCwbr4EhxCjZgaUaEOgfB0vhnN2iHw1c4?=
+ =?iso-8859-1?Q?6sTooOywwPftHSzE8DJ9Ne6Zh330rsVzf+hfueJevNd0VFaWjs9SdNVepS?=
+ =?iso-8859-1?Q?QkHZ591XEgdrvnnZBt1ejmu/OB15jEyqBf4t7ydkAhy9+tV2fqP0bp2dDd?=
+ =?iso-8859-1?Q?AcpecZtpy67J+Je0BKMgGbrNdADz8OmP8gaaU3tK+JcdesDEPr4u2I1k0F?=
+ =?iso-8859-1?Q?UoG3wiY7UIcfRI/3xZjyUh2vT8S8LTMapMiPe2gPKZeqtfvxd/HU+v0k6j?=
+ =?iso-8859-1?Q?YsgEwQIc+OJrzNE6+Jn6zGUHddY1yNF0lHBWIOdKswxw6P/N/AMRcr6TuE?=
+ =?iso-8859-1?Q?hERbV/opL6R5Qk5uyRilSSVQsWt4k9kWgo+dXjMpaBxxfxE238okqTGk+j?=
+ =?iso-8859-1?Q?Piy04noc8yDCQuAGZDseoITEtfBqtPVqJt3bYO0RNvaIwNFD67CtHWeuHv?=
+ =?iso-8859-1?Q?7cD/zoAW3WArs+4/PNjhAw0HBsVOEe4nTkQD08IfazK+3XD0DH69ALdjYa?=
+ =?iso-8859-1?Q?7LJ1VEN0ovGQMKRHk2IOOmbqwO6AUmsoB1HGAsQDLwnVOIkdw6i2o3H0hZ?=
+ =?iso-8859-1?Q?NZbevuzd9Rkzv+3MFyOUl9HpC9FknVVgEKWq48gfe+msvEpePmbHuK8vSI?=
+ =?iso-8859-1?Q?J/jXNk+4b/LMV/aLGkq4hzFyiVZ+SYGh2I0Ms8d40ei6BhzDdpDQ4jSkJQ?=
+ =?iso-8859-1?Q?k7ic6fT4wn9c1/uII1eq9yhBveQ3u2TdfhFyxO9pNoFeqx2qxRry34epYU?=
+ =?iso-8859-1?Q?w3NwgR0NQcxQVT0NmAPBOUnPcbbKSfjZR0D3lrohvnwmqlmwA7zhMXe5M8?=
+ =?iso-8859-1?Q?6j5x2qMwtSTLbnOhy+XY/WhxHxAKT/TJd9hzMkLTdTy6EZwsh0WoaYC8/3?=
+ =?iso-8859-1?Q?toVuRFjQI3H0J44EJ5H77LCeZM3y?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?FcfGlU234aMxjeTXIT4tBTq1ZL3OMTwZIwnapCifyFvr9ttkl3ysz1Q5QJ?=
- =?iso-8859-1?Q?JkuxqGwpMajkwts1wJ0YA1CmM41hOCWyWxBfiFgymBmv1SOo2cX5It6soJ?=
- =?iso-8859-1?Q?v2dWnIVNtmjgSdngg8NNRI/sjBP9LWVxvASVFXwyQKRXjXMTtn9gz/onWD?=
- =?iso-8859-1?Q?xqClsAQ89BtibfDVk1GlUlJJdSnA4dnudhjiMJAKr5PSv2CwK/qvetoUvZ?=
- =?iso-8859-1?Q?NbDhgxDkjFV/lj2F3rB+1FRiuSIWwExXkWNRBrp2PZtTer9QD9YchAmGFa?=
- =?iso-8859-1?Q?KMhmq46VYoHq8erk0IQDzm6p60KEizm6UBzdMQpnQuikLG3rHcxRT/tj3i?=
- =?iso-8859-1?Q?EuFgGzmfHF/CFfoeyRKADtfaGbK0UUtmtxMtbkdrSHLkOgDPdJfNhmRjQo?=
- =?iso-8859-1?Q?kNJ2pwiK0UtkQlz3YNz2kJ664TPvxQA84D6dyUt5KBaUFoZw7QNx2kZ7Du?=
- =?iso-8859-1?Q?k6olRslHY6DJwlLXd+T1FIvvmUr154LqSY3eg6oe5NACkyFqk+eT40ccsr?=
- =?iso-8859-1?Q?zYjaye38P/Sc1GuiGWPrjAoZhGCQn3KklYdskCAzwpLACBSPtvJtOstbSW?=
- =?iso-8859-1?Q?Ml14vs5YgfcpQVKRMaKkauxmLKBY2GGIk08e7La0wF2Ig1vY1OMbi0cjlu?=
- =?iso-8859-1?Q?2s/po2eZPfSqwOg/6vUPPRKdbndYpje9IFQ/g73y6A20RWPUOvbz2NKeD6?=
- =?iso-8859-1?Q?1ihfSKSC6S7e2seVmUsU9FAwx24Abn3V/Dsj9pQySpgsJjRJL53C0o/Twu?=
- =?iso-8859-1?Q?U+YUXNQk5AqlO570g+kZKgZkKVbyiscBmNY4oY15az2XYq9dm/Hn+vKVM3?=
- =?iso-8859-1?Q?PkCJuqSngLEhRekiPIdmYuz89lTplgfLXxp+PF+dGNfg6ypweFvXoMlIvx?=
- =?iso-8859-1?Q?xBTyhuHCDdPKsYVHPYa6vF/xnpDscJsZ05wPoLJKzbVAc1dVlftIf2UoAE?=
- =?iso-8859-1?Q?1ZYdoHklKRkxH4+84BslvUWdgr1f4xJuQKBeHp6Co1ifqF6FJrCDHxes95?=
- =?iso-8859-1?Q?A6TI5YPyy4NePsYJYruHJF1Y++I5pVvQxZBySCORkJ4rsFy4mejBbD3dT+?=
- =?iso-8859-1?Q?6u4C0PYtTAxzlxE4lUvet4tEVJ3HvpOC7Yo3Ualm2hrYaQiEO63HRYP4IM?=
- =?iso-8859-1?Q?tgVE6kKgix+dfEkMRsePVxxMnK4NZ2a9eoLCHxQ231U20UkBrRuSCXgw/6?=
- =?iso-8859-1?Q?Z98NHi6PzdAE7XltqhCMdYKVrAmuODzrwZsoWGuECOfRe56los1ye92sXr?=
- =?iso-8859-1?Q?04MOQtSDQdg7wF7M8nkA6jJwsIwtTDGaWFpUNXroSdD5XGnq0/iniKg0yr?=
- =?iso-8859-1?Q?9mfPwfCQvFGdsf0S/8T8hVEwJL6/YBKjDXAN5pXFdrNURyTLoQLe8+cOyr?=
- =?iso-8859-1?Q?WprxYbsDBSQTudmWYZBWYYtWAoqrCl0i0SIESYOFX+dDmZg6WDSW948IXF?=
- =?iso-8859-1?Q?XcJgG6tkjsyurZiBQ7wAs9rARfHfTxsEtMAC6NIuCqkAjZucZAvjp2DMNR?=
- =?iso-8859-1?Q?Yl565dh19SIhX3R75ESKk5ICZSRafT7l1ivcG1YELkH9+O1VsvGQerPXoM?=
- =?iso-8859-1?Q?BwzoyF8fx3Hea7LIexcd9o197AfYxRelRKwHHDmKrKP9ycbdXg22vVf6jl?=
- =?iso-8859-1?Q?wMd32O3YT8esR9ABDwJkuwbL9D73JsU1GfrbRQ4h+fXgr+A736Gg/BOA?=
+ =?iso-8859-1?Q?YExH6/BRPWRfS0ChK0poResVPiVBn2PQhvlX6lHENBYjOxAFndDWORqE7F?=
+ =?iso-8859-1?Q?aYMhRpANLepinNP8KrVgeFE0rcJ6/oatY5Ed1swbgj/uqJ7MVBekj3s/w6?=
+ =?iso-8859-1?Q?BMPOqBVVzfp+GeO9jnwcZQLEgqZR884iEcY1X/jlZyuLlYNNG5XL+zUIde?=
+ =?iso-8859-1?Q?esgPdiK8ajTvc/t8n1vk2a3t3QdNloKZPnL2x9Y06iBU7ruAkYXdrEJGw8?=
+ =?iso-8859-1?Q?md4NJSr6nGdlmHBDtBEn74TQZRs9wUMABupqXpGjG/q3WpymfDEE8ms26D?=
+ =?iso-8859-1?Q?3vJzdH6NLk9Km4/dy7RMun1BJHRpvHMY8BcpHNrKBRgtQLrKTTmTPsH9ug?=
+ =?iso-8859-1?Q?MAJA/7XrwBWj5fQ54iuBaMUq4yffWomIIgBUTqfTHj62Cm369VaPmUODEE?=
+ =?iso-8859-1?Q?g9vzRkOvQKn5Qy3URDFb6kLbVeMDMuARLHPBYlmb0OS25Uk9GAqguGH6SG?=
+ =?iso-8859-1?Q?FhYpL+n7u/vF0Q8Gz/Uu12qlGEXvoC88Xn/4jxwmuX0LT0F7xxEJqQzNYq?=
+ =?iso-8859-1?Q?4/Ez6kdR3FYqMIEmVyDS7BEONBXmtt/iwsncr+Bk+6yTUBrW9EtajsFbXY?=
+ =?iso-8859-1?Q?dMoCptdTHb/xVkfrd2F0yeY0YYFQd+Bk+SdQWhzc4h1mJCSFiHp6/X3fOe?=
+ =?iso-8859-1?Q?galQV+/KxKkBz8o95T9nk9NOjvRIyF0BodNjhqfwCh7WyYsMs+8R2bcxoP?=
+ =?iso-8859-1?Q?n6i3hE//YoB3qsNTuOkGSFIDvh04K/ghDFwZUVf8InkuNSYeR3MQ68TKjk?=
+ =?iso-8859-1?Q?JV8yRlpXKKoduyfDjZ16tRG9bCyOJTcXBfCqi7Cg0JJcIBMxZh0pk9xmkD?=
+ =?iso-8859-1?Q?TAVhTRAzJx4NfR1dNoP7s7T8psLnOV4Wyn4cRgMHcUv4PiGDHHgUujLsHB?=
+ =?iso-8859-1?Q?EjbCPFFD9J7o+ydXgwfOig1I2i73dIfnI8/WdKN8os/l1FNzUbRrqdHxFx?=
+ =?iso-8859-1?Q?Jlja4QUBSf8+vsyGpXJ1Yao1QZ0S89ALwivoneEq7g9iYOwmEGrDhjNb5X?=
+ =?iso-8859-1?Q?6ILlcpsAg4qeAuewQdv9g4jtp1IMqEVl5QKE9jWYVQXgrnAyqfIjBGwUj0?=
+ =?iso-8859-1?Q?Ram5Tsbl5dKE6XtmIqqLlqLup9xuv2t/NwRTjXpF05Jt/8peZkUqdiSRbH?=
+ =?iso-8859-1?Q?07mTEz8KnhhUtQO8RUHX1grohv9Gx1ef0m1K8giFn4AcYHWgsNGdWV8rDQ?=
+ =?iso-8859-1?Q?CCMNqv2vLhdpsRdSI0a8SXgAhnDf6xNGrCWXL9z5Ch9JQpZlYdp+8OvEOb?=
+ =?iso-8859-1?Q?gsP3n66a2Z07UROzx29RJQUC0eq2gcpt/2bFVYUpaX/+vraoqt2e8W17NZ?=
+ =?iso-8859-1?Q?KRNE1pecXAly2RalHaBdt9JtI+FgSs51an0l9x98WIcUpbQyaq4oqh+Cyk?=
+ =?iso-8859-1?Q?4LAWoH6KopCg0PkbDQ2tCSy/QgZhz1CnFSmEZwF9FggcvW8coqAJV7zzTE?=
+ =?iso-8859-1?Q?spDYW5X2TEaOFVFbhKtIevYdu0jzS7vVMOL1seBsUgTIaz2OsAFcxh0sbK?=
+ =?iso-8859-1?Q?T3Ex1Vvg+MXmFq4SjF1XrFrLjHdEG9EJ6hRcDHkQq4gNNqZBZJoVXNF0o2?=
+ =?iso-8859-1?Q?XbE9S+2eP6POOcZ6vYCy23d5J/DAoCc6fvu9+fk358DCHOFHgU9f9qN0N4?=
+ =?iso-8859-1?Q?tr2Ddap6PhUM/Hj6j12BLhIeI/lJaYf0MvCvLHwov7cRx3+PEr4G21wA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -158,17 +157,19 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a0ced386-710c-4be7-9895-08de07de7371
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Oct 2025 09:21:52.7830
+X-MS-Exchange-CrossTenant-Network-Message-Id: aac7e549-82ff-4d9c-5bfb-08de07de73a3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Oct 2025 09:21:53.3205
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Wob6mim3Zj4M/dW/6k1o6uerbFHr16OezCt6icFxMkSfKXkCQrNCCRiEzVHde4GlIyFWZPBU/By61PR2vVvXvA==
+X-MS-Exchange-CrossTenant-userprincipalname: i19unZ+BOtOO8LuDReKaF6uMFzu5kGddyApExR2UysWPS59K0o7JyEKGAFJ8+GdlzgRWNoLjevjX4I2Ni+ew1A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR03MB10161
 
-Implement XEN_SYSCTL_CPU_HOTPLUG_{ONLINE,OFFLINE} calls to allow for
-enabling/disabling CPU cores in runtime.
+With CPU hotplug sysctls implemented on Arm it becomes useful to have a
+tool for calling them. Introduce a new congifure option "hptool" to
+allow building hptool separately from other migration tools, and enable
+it by default.
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
@@ -176,86 +177,134 @@ v2->v3:
 * no changes
 
 v1->v2:
-* remove SMT ops
-* remove cpu =3D=3D 0 checks
-* add XSM hooks
-* only implement for 64bit Arm
+* switch to configure from legacy config
 ---
- xen/arch/arm/sysctl.c | 45 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+ config/Tools.mk.in               |  1 +
+ tools/configure                  | 30 ++++++++++++++++++++++++++++++
+ tools/configure.ac               |  1 +
+ tools/libs/guest/Makefile.common |  4 ++++
+ tools/misc/Makefile              |  2 +-
+ 5 files changed, 37 insertions(+), 1 deletion(-)
+ mode change 100755 =3D> 100644 tools/configure
 
-diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
-index 32cab4feff..fecd649db1 100644
---- a/xen/arch/arm/sysctl.c
-+++ b/xen/arch/arm/sysctl.c
-@@ -12,6 +12,8 @@
- #include <xen/dt-overlay.h>
- #include <xen/errno.h>
- #include <xen/hypercall.h>
-+#include <xen/cpu.h>
-+#include <xsm/xsm.h>
- #include <asm/arm64/sve.h>
- #include <public/sysctl.h>
+diff --git a/config/Tools.mk.in b/config/Tools.mk.in
+index e47ac23d11..eb4855d93d 100644
+--- a/config/Tools.mk.in
++++ b/config/Tools.mk.in
+@@ -49,6 +49,7 @@ CONFIG_LIBNL        :=3D @libnl@
+ CONFIG_GOLANG       :=3D @golang@
+ CONFIG_PYGRUB       :=3D @pygrub@
+ CONFIG_LIBFSIMAGE   :=3D @libfsimage@
++CONFIG_HPTOOL       :=3D @hptool@
 =20
-@@ -23,6 +25,42 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
-                                        XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
- }
+ CONFIG_SYSTEMD      :=3D @systemd@
+ XEN_SYSTEMD_DIR     :=3D @SYSTEMD_DIR@
+diff --git a/tools/configure b/tools/configure
+old mode 100755
+new mode 100644
+index 5abd44e21e..5cf5381c0a
+--- a/tools/configure
++++ b/tools/configure
+@@ -728,6 +728,7 @@ LD86
+ AS86
+ ipxe
+ LINUX_BACKEND_MODULES
++hptool
+ pygrub
+ golang
+ seabios
+@@ -834,6 +835,7 @@ enable_ovmf
+ enable_seabios
+ enable_golang
+ enable_pygrub
++enable_hptool
+ with_linux_backend_modules
+ enable_ipxe
+ with_system_ipxe
+@@ -1519,6 +1521,7 @@ Optional Features:
+   --disable-seabios       Disable SeaBIOS (default is ENABLED)
+   --disable-golang        Disable Go tools (default is ENABLED)
+   --disable-pygrub        Disable pygrub (default is ENABLED)
++  --disable-hptool        Disable hptool (default is ENABLED)
+   --enable-ipxe           Enable in-tree IPXE, (DEFAULT is off, see also
+                           --with-system-ipxe)
+   --enable-rombios        Enable ROMBIOS, (DEFAULT is on if ipxe is enable=
+d,
+@@ -4807,6 +4810,33 @@ pygrub=3D$ax_cv_pygrub
 =20
-+#ifdef CONFIG_ARM_64
-+static long cpu_up_helper(void *data)
-+{
-+    unsigned long cpu =3D (unsigned long) data;
-+    return cpu_up(cpu);
-+}
-+
-+static long cpu_down_helper(void *data)
-+{
-+    unsigned long cpu =3D (unsigned long) data;
-+    return cpu_down(cpu);
-+}
-+
-+static long cpu_hotplug_sysctl(struct xen_sysctl_cpu_hotplug *hotplug)
-+{
-+    int ret;
-+
-+    switch (hotplug->op) {
-+        case XEN_SYSCTL_CPU_HOTPLUG_ONLINE:
-+            ret =3D xsm_resource_plug_core(XSM_HOOK);
-+            if ( ret )
-+                return ret;
-+            return continue_hypercall_on_cpu(0, cpu_up_helper, _p(hotplug-=
->cpu));
-+
-+        case XEN_SYSCTL_CPU_HOTPLUG_OFFLINE:
-+            ret =3D xsm_resource_unplug_core(XSM_HOOK);
-+            if ( ret )
-+                return ret;
-+            return continue_hypercall_on_cpu(0, cpu_down_helper, _p(hotplu=
-g->cpu));
-+
-+        default:
-+            return -EOPNOTSUPP;
-+    }
-+}
-+#endif
-+
- long arch_do_sysctl(struct xen_sysctl *sysctl,
-                     XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
- {
-@@ -34,6 +72,13 @@ long arch_do_sysctl(struct xen_sysctl *sysctl,
-         ret =3D dt_overlay_sysctl(&sysctl->u.dt_overlay);
-         break;
 =20
-+/* CPU Hotplug only implemented for 64-bit Arm */
-+#ifdef CONFIG_ARM_64
-+    case XEN_SYSCTL_cpu_hotplug:
-+        ret =3D cpu_hotplug_sysctl(&sysctl->u.cpu_hotplug);
-+        break;
-+#endif
+=20
++# Check whether --enable-hptool was given.
++if test ${enable_hptool+y}
++then :
++  enableval=3D$enable_hptool;
++fi
 +
-     default:
-         ret =3D -ENOSYS;
-         break;
++
++if test "x$enable_hptool" =3D "xno"
++then :
++
++    ax_cv_hptool=3D"n"
++
++elif test "x$enable_hptool" =3D "xyes"
++then :
++
++    ax_cv_hptool=3D"y"
++
++elif test -z $ax_cv_hptool
++then :
++
++    ax_cv_hptool=3D"y"
++
++fi
++hptool=3D$ax_cv_hptool
++
++
++
+=20
+ # Check whether --with-linux-backend-modules was given.
+ if test ${with_linux_backend_modules+y}
+diff --git a/tools/configure.ac b/tools/configure.ac
+index dada1c3b15..3a0644ef89 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -90,6 +90,7 @@ AX_ARG_DEFAULT_DISABLE([ovmf], [Enable OVMF])
+ AX_ARG_DEFAULT_ENABLE([seabios], [Disable SeaBIOS])
+ AX_ARG_DEFAULT_ENABLE([golang], [Disable Go tools])
+ AX_ARG_DEFAULT_ENABLE([pygrub], [Disable pygrub])
++AX_ARG_DEFAULT_ENABLE([hptool], [Disable hptool])
+=20
+ AC_ARG_WITH([linux-backend-modules],
+     AS_HELP_STRING([--with-linux-backend-modules=3D"mod1 mod2"],
+diff --git a/tools/libs/guest/Makefile.common b/tools/libs/guest/Makefile.c=
+ommon
+index a026a2f662..774b1d5392 100644
+--- a/tools/libs/guest/Makefile.common
++++ b/tools/libs/guest/Makefile.common
+@@ -25,6 +25,10 @@ OBJS-y       +=3D xg_core.o
+ OBJS-$(CONFIG_X86) +=3D xg_core_x86.o
+ OBJS-$(CONFIG_ARM) +=3D xg_core_arm.o
+=20
++ifneq (,$(filter y,$(CONFIG_MIGRATE)$(CONFIG_HPTOOL)))
++OBJS-y +=3D xg_offline_page.o
++endif
++
+ vpath %.c ../../../xen/common/libelf
+=20
+ LIBELF_OBJS +=3D libelf-tools.o libelf-loader.o
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index c26e544e83..f783f16ae6 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -16,7 +16,7 @@ INSTALL_BIN                    +=3D xencov_split
+ INSTALL_BIN +=3D $(INSTALL_BIN-y)
+=20
+ # Everything to be installed in regular sbin/
+-INSTALL_SBIN-$(CONFIG_MIGRATE) +=3D xen-hptool
++INSTALL_SBIN-$(CONFIG_HPTOOL)  +=3D xen-hptool
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-hvmcrash
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-hvmctx
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-lowmemd
 --=20
 2.34.1
 
