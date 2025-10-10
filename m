@@ -4,33 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FF4CAC5BB
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Oct 2025 09:11:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1141081.1475683 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B100CCA476
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Oct 2025 09:22:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1141094.1475717 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v799H-0004ti-8i; Fri, 10 Oct 2025 09:10:51 +0000
+	id 1v79K2-00073G-UH; Fri, 10 Oct 2025 09:21:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1141081.1475683; Fri, 10 Oct 2025 09:10:51 +0000
+Received: by outflank-mailman (output) from mailman id 1141094.1475717; Fri, 10 Oct 2025 09:21:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v799H-0004tb-5l; Fri, 10 Oct 2025 09:10:51 +0000
-Received: by outflank-mailman (input) for mailman id 1141081;
- Fri, 10 Oct 2025 09:10:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v79K2-000739-RN; Fri, 10 Oct 2025 09:21:58 +0000
+Received: by outflank-mailman (input) for mailman id 1141094;
+ Fri, 10 Oct 2025 09:21:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tEoC=4T=gmail.com=freddy77@srs-se1.protection.inumbo.net>)
- id 1v799F-0004tV-KT
- for xen-devel@lists.xenproject.org; Fri, 10 Oct 2025 09:10:49 +0000
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [2607:f8b0:4864:20::b133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 01d8c7e7-a5b9-11f0-9809-7dc792cee155;
- Fri, 10 Oct 2025 11:10:47 +0200 (CEST)
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-635401a8f5aso2153872d50.1
- for <xen-devel@lists.xenproject.org>; Fri, 10 Oct 2025 02:10:47 -0700 (PDT)
+ <SRS0=uR8D=4T=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
+ id 1v79K1-0006bm-IJ
+ for xen-devel@lists.xenproject.org; Fri, 10 Oct 2025 09:21:57 +0000
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c200::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 910af740-a5ba-11f0-9d15-b5c5bf9af7f9;
+ Fri, 10 Oct 2025 11:21:56 +0200 (CEST)
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by DU2PR03MB10161.eurprd03.prod.outlook.com
+ (2603:10a6:10:49a::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.9; Fri, 10 Oct
+ 2025 09:21:53 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9203.009; Fri, 10 Oct 2025
+ 09:21:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,145 +49,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 01d8c7e7-a5b9-11f0-9809-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760087446; x=1760692246; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I3nRxT3OHljzrss5NC8JSQZQE+R7vCfFl9/8UGo8EvA=;
-        b=Ww4G2cE8373w9iz+hD/+gu4aTCUv0JK5w0demKe5THcJdgrJzrY4LiSZwq3bZm20DH
-         MinD0X8xBmII9y437dDzySR7B5ZI4NcYi8sYe/J4KZk333PiNFvvvCvisrGySI2j9WU5
-         U+md0MA88CdY9PMA8yT9Wnp1kvYclv1BgzyYtEPqmo1m5Emyit/JU0eeO16AzuqxCJt5
-         78z5VCFiUKGq2lqSXcNm/C6lrgZaHFPmLhTMyfjRgPfbzK/FGuaCttD2i9P8SKmFPfHq
-         aMYEo9Mg1fHx0vqVyq7vhLglANhMKz5rYYcoKig9oq0DHTMTKrSactkCKBj0f2TjktTo
-         cVYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760087446; x=1760692246;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I3nRxT3OHljzrss5NC8JSQZQE+R7vCfFl9/8UGo8EvA=;
-        b=IP6fw8pVRW3x+LXFen292mhsRwUZUHPbCh+XvutSqOXC1cTZhQtUWrBmZ3xe2SSlqt
-         VmH4NzlcXz05St5FWYllTxv+Yjgc0tuAgCaJSACN3+SuS1UMTmg4Zk0tM1PijuyiUuME
-         JMIKYe68oheK7EmY5lKBxyvJTATeCmBq4aqNSmOXgT5yGeiNiQP/JD6BkGPLZWgVNU09
-         igqB7fZXGkdLQhe0emKc0/EyhhrfXK8fWxgTHtIIgcKe+8LjAT1URX+VkGCsUDVnDG/w
-         CxR1D9x1p2IyCiaj7LWK7Wxp6k7sqcOdBD0wI+NBC+SBYsK6Wp3sgfsx8+YsZbG+7Dmt
-         ZZog==
-X-Forwarded-Encrypted: i=1; AJvYcCWFRtgJ6JDxNLqort06LWaU/ZR7C1VffNepSNCc0M4qLszMj0EWl/CxSvK5lnzKUBb34H4fDMISQqo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyg4qdBbVxPQNS4oVLSrcSHNz7ZW+Is2bjFeIzBBTrUShO/UwCT
-	1E7e7YrDku8Wshie8r2pWc35ABHz/e0VirgQPyn8MdVRQvPArkaxUinueBP8a6wCmIZy07Qvunt
-	B0XE/XxRrWfXNcgTgqzi1RQkWQkofhCQ=
-X-Gm-Gg: ASbGnct8DPD1G1aHY49hRm86Ek+6umectSGzZv/3M6x1DCG0gyT1wPv/uQsIpgDfPi3
-	ejrYKiKumsOCTjk9s2H7b2sN1jImfBpWARkMwF9JtPKnMQic0QDPrTNexPzlnp4KGoo7eeqrudL
-	+lsKObCkWac9SXlpcv12GTD+BD7PvfDjC17GMJAaHYlgtykn3SwFKvXz+eBNsv81hkoXzQfk/1X
-	fgUO11+z2qEqag+dXZ7HQWuJ3Ye7f8IpbDl
-X-Google-Smtp-Source: AGHT+IHlONdUxnKPMzR918fP5TCT6hUIXe21g6x+7aU+CsbYDUYtOl0z3OvUaeiwAsYrhNS3jtYrLUJ1Rc/RJ4DvR8Q=
-X-Received: by 2002:a53:e00e:0:b0:633:acd8:cd70 with SMTP id
- 956f58d0204a3-63ccb905443mr9326455d50.33.1760087446016; Fri, 10 Oct 2025
- 02:10:46 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250612100705.21988-1-frediano.ziglio@cloud.com>
- <586a66e5-4b11-485e-955a-da5fc3183737@citrix.com> <aN6H8dOlea2Um8y8@mail-itl>
- <1708c939-4b06-4d09-acb8-6965383d91f4@suse.com> <aOUiU86LtvsVFukW@mail-itl>
- <e3db4a71-336c-4039-a2fc-7997fadc81b3@suse.com> <aOeeMtiJEhdEiadg@mail-itl>
-In-Reply-To: <aOeeMtiJEhdEiadg@mail-itl>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 10 Oct 2025 10:10:34 +0100
-X-Gm-Features: AS18NWDAr6_E95Oeb4uDw3N3sjkQylfaY3x3K7og0Cv4AsJHhfuxXRzmfnDuMZk
-Message-ID: <CAHt6W4dDQOPZzBkD+rwYfJ6DzyWXM32NbGQwngoGrVuwyyXahg@mail.gmail.com>
-Subject: Re: [PATCH v2] xen: Strip xen.efi by default
-To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Frediano Ziglio <frediano.ziglio@cloud.com>, 
-	xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>, 
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Daniel Smith <dpsmith@apertussolutions.com>, 
-	"michal.zygowski@3mdeb.com" <michal.zygowski@3mdeb.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Inumbo-ID: 910af740-a5ba-11f0-9d15-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lY4MWScfae81zsxZz9Tpb+N5Sb+okoScGzo3tJYbgB7fwDiWgWOK/AQjopFzykROGwvaM7C0iUg55Dzhqhk0NRAdLnUQSUS7OIZG/TRprF3t0eirVBD9j9FOVGnGUxbQaVSX764xSQvjvXyyX/rjRcDOkzlJtHRDKDxSnbpbTDDt954cg7MoWdij3FO3Z7FJpXYe5f7tdz90hwFOJYHj4MbYq0oLIotSO8tYSQAu/zaEp8DSUj1ejBb9gY8elBDvImAQiH3S49N1JIvmXrqNiliXtZvrWx8fZRLk2cCb4WjbR/xXMHitS0JrhtRupju4rchDlEEakRxCH+D1a44bkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zlXSCVZNOtMQP9ErfahZxj1Ps5OJW5O34DJ583T2U3A=;
+ b=hK9sZP6gGXh+r5aZ1+QM+p9ToVz9QEpv1kU5Gm1R4gG1PufsKhelzyVA/oTcN8HvV4m9nShmvwTZaaLhe3ArVcgD8wI+Fh7mzrq1BlonODxyjZwOBq8zCe2N+cLziUmt+mOfbY6l4h5wFcdSqHbglLjdxW6tv5gH1mMWqwexQSRI56v1hqlU/A7Qzlc+f/8k8ibWjP5KMcQ47aoUy8t8pAkd0SdUfyvpjqX1VupzD/Fsaa/JysLU2n/B3/UG6sqraxEf+t45HML0zBYkn0LP6YfyShx0GrsGfj8pyhpO+WgutXcVJ3O/0BN69TT1Upt0e71HnHtGAmx59pjVhtOCeA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zlXSCVZNOtMQP9ErfahZxj1Ps5OJW5O34DJ583T2U3A=;
+ b=UEWR6YGZQIHF5zbqsCXFeb/USOqCV4qGY/SQqleaFrNhyfdA4fZG7j6leRo8OUNWbzhzt1juh6iWi3EA682k9aFqJyaFZ4M3rdVMfdlssYFCD75ZNxxg1J2xhirtIw2QFOGrboJRGxtG9IfJEs0yu44hxWFEDf9xHUumIeO/TRWu6Uk5Qph0VssPd39wQf1/8r2AtFvSeuqqj5LTHEsjA/nKqonQ1UTKI0k9AIVgLhOa1Ywkmez0A8fQxU+D7H3aNSCSgYZPNUXhdBg0fabKR0sXxnfxEVzLmNhhRjuTSHFgTT0kdypQ6ylk3NdHvOEV6iziTdlbJCZfpWLZHtsUPw==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 2/5] arm/gic: Use static irqaction
+Thread-Topic: [PATCH v3 2/5] arm/gic: Use static irqaction
+Thread-Index: AQHcOcdQEP4hwhLsJ0CWMbVHN1hrFw==
+Date: Fri, 10 Oct 2025 09:21:52 +0000
+Message-ID:
+ <7ebd435d510c88e2840ee991f8fd75f25ad66f75.1760083684.git.mykyta_poturai@epam.com>
+References: <cover.1760083684.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1760083684.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|DU2PR03MB10161:EE_
+x-ms-office365-filtering-correlation-id: b96e2a30-07ac-4043-a2e0-08de07de7338
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700021;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?jgfAZ0Ffx2jznCylQtYzAvfN3tOV644YFj6zYOW9GjzfuzMTIdgDmV3HQn?=
+ =?iso-8859-1?Q?x5PpRkIeE6DRpdM4SjyoFlHP4a2BvR4a4F+dDGk1mE+MBTtKAeAVEMEFAA?=
+ =?iso-8859-1?Q?wwk/cCsIjuEysN0V15XwaEX984zIatxnZ642xjeOHSaXPoKNPT1QrJ3j6V?=
+ =?iso-8859-1?Q?GdVJ7Kf8m2ZutD0AYHj0Ys/UTRiN3FETrMtm58yWM1ZE1CcYanutNYemMK?=
+ =?iso-8859-1?Q?jrjpfdStBP9BbWgrZNoEm3/+RczRl08Cigo2apw/WvfSpdi0i4y226P+42?=
+ =?iso-8859-1?Q?VVfu4xWBHOLipFygU7JFH96Se/ZmOLjJ6NrkhrDQt1pn5ErAsrWYhsI3h7?=
+ =?iso-8859-1?Q?JRjvQjBRGE7l5DdPYEeE3CduxGzi1Edwd17SaUXhbTGsmj0hKtTO9zxmeN?=
+ =?iso-8859-1?Q?tC92Vk+x6J1FeNk5T38iShq+caqfqCAFgMxdLClNMS4siiVrOvg09CaY1T?=
+ =?iso-8859-1?Q?722YTpdnRmvskgxmmDjPREqZVPHOtMZrkBRZmdRH8qDM6LPFpvsKSDE85Y?=
+ =?iso-8859-1?Q?mLWdGi0DsoInuUKRWrP5XqX9Ryt8jsprzXC/tvBKupLqoLGVlNCXdmJWYn?=
+ =?iso-8859-1?Q?jW3babqBEbECL611CjdK9Yesqx6dqP9F0CiSJqM5bnDo79SvnWT2pl4/1l?=
+ =?iso-8859-1?Q?QU+M9rew9cy9puNcEI20Eby1m5sp6371tYif/VEjTyGMfR4isQH5EDkxla?=
+ =?iso-8859-1?Q?SLZMHq6ok5Cd9MvarFCjE+xDJIOsFA9uZmxkf4ANLX/Hup40pDXyElpRB8?=
+ =?iso-8859-1?Q?+E4LnFc1ijm1j0CZW8M8oDWoBjZcc4DZBskMEeUnIz6yOI4hTyCRkeVoPA?=
+ =?iso-8859-1?Q?DSRyg/R5m8zQL0bmmwziwiXOkdaDOs0fpcL/ApMwGVRT2I59LfbEGhpR0k?=
+ =?iso-8859-1?Q?YMFaveUDRIBJUj4DFYQHNqhkeU6+Xi3vEATSGffMEsjz1GyPmCUCEI2fdp?=
+ =?iso-8859-1?Q?h3PIF9fJpsOiMc59WJtUsWECCLZ0T9KG7nWKjd2fNI07nDkjZOQ9GwVZY7?=
+ =?iso-8859-1?Q?bxWbsUmZoY1VlQUlnP8DXc9+ZhmnonIdBanPrS1Tvotc/iFUW49IGxaybe?=
+ =?iso-8859-1?Q?XFrJn60IBb6vMIAKpXPRN7Q0XP3dT6aa55GoA6XtqR2gnhUdo7CNIPYieQ?=
+ =?iso-8859-1?Q?gfdTENp1O4PXiYm4oaMxcmR3UkQ+RCTn+agUGBjR4DCwSUifFqjLtpFfKt?=
+ =?iso-8859-1?Q?GDw8vnN1kpE6YKOTU7KX1vxeth/kBs4pCmtvI7LsGCxGfiZLVE7CBnKSEy?=
+ =?iso-8859-1?Q?JbGdaKw3zskL5QRRpjiS0aBL2ArD8BO1b+ccyJw0mJbKgN8q/UjeHceJF5?=
+ =?iso-8859-1?Q?4r7MyDrTdqQJUU+wCCJf/luqhBvtvgQ8GIwWqz+/2VB75cVglJRmmCrrLX?=
+ =?iso-8859-1?Q?xBRZ8Y8yb+A3qhGQTnq4DkgShkqJWhLIF7b9pg1Z3h/l9of7Atcg0nz1tw?=
+ =?iso-8859-1?Q?G2NC7ZL9fKLQOeb79rxn8W6D7mgnk65VBm0eXVX7otl//JxqTzdBM3VoXu?=
+ =?iso-8859-1?Q?kavNA3PWgRU9rpofy2COPWW3cjwKiW1Z1WmOE1dL5fOvvFYoGQ7QSWJrep?=
+ =?iso-8859-1?Q?Qzo+DpiEkwz8VGNO52Q1Zpy/98zN?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?jWv/D24tG0+e+M+9cuYIB9/yJ+pXEdD/zrtiT5oRexnz2DoCYZ+jFAvD5P?=
+ =?iso-8859-1?Q?BtSWloNmowCI6/o8ETUn0On2wVEQXzNGbeAYL3Ei7N3WE4qNmTqzWTykJk?=
+ =?iso-8859-1?Q?ITz3/lEwOiDQnP2UslgFOdrb9X9M059riT8EeoxVCKKYbZw3Cdjstaa7us?=
+ =?iso-8859-1?Q?4A7xT+c+jPTagznjmvsbJ3DGIptFbXrVha4YpWHNeBVFbeh2mqvo3lSL+Z?=
+ =?iso-8859-1?Q?FQTOsG/tYvEum9kYb31jVAFCKJ1Nw4lvKBqABkzuaW5n4BYV/RH+OA84n8?=
+ =?iso-8859-1?Q?vOfqnD9fW9EmRdngPttDikyUail4si7jws2ypQ7///3GdNhFL36cM6URNQ?=
+ =?iso-8859-1?Q?kU94KFfhoo7tGuyAjrMtZucGLEutCjnmE9y177kyF3xHA6ejxN3pI+ZfeP?=
+ =?iso-8859-1?Q?K7RFrmlNvAyvJOzwgGjunFq5U/bG1TVjMXaPKgCnekPSfdEKORsczD1Jox?=
+ =?iso-8859-1?Q?kvPdFf66L/oFtOb+FRHG1BD8sNL9pOTzUADRFltIiY9a1d3UPrBsYp0ng0?=
+ =?iso-8859-1?Q?djhrm1mHhXzTzyu6qwqkdwfDflArXtrN1fWvmpSGGI088AHXeBgKt9l3cd?=
+ =?iso-8859-1?Q?4uYUDbR13R2pKAB/+WTwAVoN3vKejSc7cY6SjcOpbdWdtoX0+c6pNpv17p?=
+ =?iso-8859-1?Q?w2wzB5rPWOdblKx8E8mbwJL0kcGQoGpNm7pJs1W+8R6ktygwYVAnqK+Srs?=
+ =?iso-8859-1?Q?e3wFbdfQtuhEgpHqmq0aslu373qDimAI91kRZfWpA/+Y8JHBJ0jG2AZQIt?=
+ =?iso-8859-1?Q?FRGfA+ewHi700ADnDDcOQFCt18sQmSV0jAIO6IxWiSQUvOHBHCFlaatq72?=
+ =?iso-8859-1?Q?YJ38NGhUAkvgiYNBBqtQq9OeyMl2VIobuPqHd8KMSEjYqUn0butIZuiqZ1?=
+ =?iso-8859-1?Q?l/8XBNt7T6Vf1LCu/Hw4uyrNCJYGT+0NqR5zquL96yYRlTamjDgRveCtVy?=
+ =?iso-8859-1?Q?AdyYDtPDDswS+PEIITF2kp9BFsCcyY4ZsOM4BCYO7kkMF5n8ngynOoBBAZ?=
+ =?iso-8859-1?Q?zKdcEqcPK9u0oPjgSlPnYN390mh1K36/HsxZFbCN/CNzyGR+S21cjyIpZO?=
+ =?iso-8859-1?Q?ZmcsmXTxOQKAsd3Z9LN+hgH9UcIZGTNnwb8ZTZcw6P76e/z1NsGGpMOQMO?=
+ =?iso-8859-1?Q?6Ch6bf1SxulxT2+oafAHkmbagEMWl5YP0GjlTh0HanX3vEoV6CeoEgs4LL?=
+ =?iso-8859-1?Q?vToeh7ykGBpWNvpCiy6tZICkX+3nE+c0rrmzC1QPjJuda6K2nUun3he5Kg?=
+ =?iso-8859-1?Q?cfXJekDMDmDu0Gsrhi0qXMhtzo97CCHsbcrJycEBYWzrHshV9AwL3TQkqP?=
+ =?iso-8859-1?Q?WZ5EoaCD3ILiJ4sqwj2xm5RP0rOQeyIiDpLyOwM3fb0ucxF8gAJ1GvOz+b?=
+ =?iso-8859-1?Q?2lPkTNIeZR9ztC14G4PLevrbPAQKKdnAAppzzAmHu3GdVOXY3IzupPn3dS?=
+ =?iso-8859-1?Q?aBAc+ebdtMBfOUxo3eq91f2rme16k3S6EgdBrU3YzDYK6mEKyC/mll1X+G?=
+ =?iso-8859-1?Q?i74mpg9DaIux/nUsciTzUmCK95EiHILNAZwNOxftUBPp+CJJKLd91n+D1t?=
+ =?iso-8859-1?Q?b9JO9wM+J2RWNzQZUw7w1F77uMBY1lRSFZfekl53TbtGwxia9fzCNozUds?=
+ =?iso-8859-1?Q?RqNkMt3BJoBcMtYpr8+BATuAWuBcMYyLv6VrCh8EUOmHYwaotPRR2XHA?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b96e2a30-07ac-4043-a2e0-08de07de7338
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Oct 2025 09:21:52.1697
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: qDriBg293LrlDecHHfxhtmAI9JEMBUaCxbZKLpAxgoY0ruqef/sAMBwB6Z3yu4Q18ZYRlnKLHOmftMLcGjC4ng==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR03MB10161
 
-On Thu, Oct 9, 2025 at 12:56=E2=80=AFPM Marek Marczykowski-G=C3=B3recki
-<marmarek@invisiblethingslab.com> wrote:
->
-> On Tue, Oct 07, 2025 at 04:46:17PM +0200, Jan Beulich wrote:
-> > On 07.10.2025 16:23, Marek Marczykowski-G=C3=B3recki wrote:
-> > > On Tue, Oct 07, 2025 at 04:12:13PM +0200, Jan Beulich wrote:
-> > >> On 02.10.2025 16:10, Marek Marczykowski-G=C3=B3recki wrote:
-> > >>> On Thu, Oct 02, 2025 at 02:05:56PM +0100, Andrew Cooper wrote:
-> > >>>> On 12/06/2025 11:07 am, Frediano Ziglio wrote:
-> > >>>>> For xen.gz file we strip all symbols and have an additional
-> > >>>>> xen-syms file version with all symbols.
-> > >>>>> Make xen.efi more coherent stripping all symbols too.
-> > >>>>> xen.efi.elf can be used for debugging.
-> > >>>>>
-> > >>>>> Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
-> > >>>
-> > >>> Generally,
-> > >>> Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethi=
-ngslab.com>
-> > >>
-> > >> Just to double check: You offer this after having read (and discarde=
-d) my
-> > >> comments on v1, which v2 left largely unaddressed?
-> > >
-> > > You mean the one about objcopy result used for debugging? I didn't se=
-e
-> > > that before, since I wasn't in cc on v1...
-> > >
-> > > Anyway, are you aware of some specific objcopy issue. Or in other wor=
-ds:
-> > > would xen.efi.elf _currently_ be broken (as in - unusable for
-> > > debugging/disassembly)?
-> >
-> > I can't tell. I've seen fair parts of the code in the course of address=
-ing
-> > various issues, and I would be very surprised if all of that was workin=
-g
-> > correctly.
-> >
+When stopping a core cpu_gic_callback is called in non-alloc
+context, which causes xfree in release_irq to fail an assert.
 
-Yes, sorry about not replying to this part. At the time I was testing
-the various usages we do with that file before replying. Beside
-debugging we use it for automatic crash dump analysis and live
-patching. Unfortunately live patching was not working for reasons not
-bound to this change and it tooks a while to fix it. Once fixed live
-patching all our use cases of the ELF-translated file are working
-perfectly confirming that the file works correctly.
+To fix this, switch to a statically allocated irqaction that does not
+need to be freed in release_irq.
 
-> > > If not, then I take that relevant part of your
-> > > objection is mostly about inconsistent naming (xen.gz -> xen-syms, vs
-> > > xen.efi -> xen.efi.elf). Would xen-syms.efi.elf be better?
-> >
-> > Plus the one asking to strip only debug info, but not the symbol table.
-> > (And no, none of the suggested names look really nice to me.)
-> >
-> > Plus the one indicating that the change better wouldn't be made in the
-> > first place. As said, to deal with size issues we already have machiner=
-y
-> > in place. Not very nice machinery, but it's apparently functioning.
->
-> I'm of the opinion that defaults matter. Just having ability to build a
-> binary that works on more systems is not sufficient, if you'd need to
-> spend a day (or more...) on debugging obscure error message to figure
-> out which hidden option to use to get there. And while one could argue
-> that CONFIG_DEBUG=3Dy builds are only for people familiar with details to
-> deal with such issues, IMO just CONFIG_DEBUG_INFO=3Dy shouldn't need
-> arcane knowledge to get it working... And since that's a common option
-> to enable in distribution packages, person hitting the issue might not
-> even be the one doing the build (and thus controlling the build
-> options).
->
-> As for the details how to get there, I'm more flexible. Based on earlier
-> comments, it seems that (not stripped) xen.efi isn't very useful for
-> debugging directly, an ELF version of it is. So IMO it makes sense to
-> have the debug binary already converted. But if you say you have use for
-> xen.efi with all debug info too, I'm okay with keeping it too, maybe as
-> xen-syms.efi. It's a bit of more space (to have both efi and elf version
-> with debug info), but since it doesn't apply to the installed version,
-> only the one kept in the build directory, not a big issue IMO.
->
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
-Frediano
+v2->v3:
+* no changes
+
+v1->v2:
+* use percpu actions
+---
+ xen/arch/arm/gic.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 260ee64cca..ed6853bb32 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -386,10 +386,17 @@ void gic_dump_info(struct vcpu *v)
+     gic_hw_ops->dump_state(v);
+ }
+=20
++DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_maintenance);
++
+ void init_maintenance_interrupt(void)
+ {
+-    request_irq(gic_hw_ops->info->maintenance_irq, 0, maintenance_interrup=
+t,
+-                "irq-maintenance", NULL);
++    struct irqaction *maintenance =3D &this_cpu(irq_maintenance);
++
++    maintenance->name =3D "irq-maintenance";
++    maintenance->handler =3D maintenance_interrupt;
++    maintenance->dev_id =3D NULL;
++    maintenance->free_on_release =3D 0;
++    setup_irq(gic_hw_ops->info->maintenance_irq, 0, maintenance);
+ }
+=20
+ int gic_make_hwdom_dt_node(const struct domain *d,
+--=20
+2.34.1
 
