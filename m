@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7212CCA476
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Oct 2025 10:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1142049.1476313 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2076BCCD185
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Oct 2025 10:27:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1142052.1476322 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8Fll-0007n6-5U; Mon, 13 Oct 2025 10:27:09 +0000
+	id 1v8Flm-00089C-Km; Mon, 13 Oct 2025 10:27:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1142049.1476313; Mon, 13 Oct 2025 10:27:09 +0000
+Received: by outflank-mailman (output) from mailman id 1142052.1476322; Mon, 13 Oct 2025 10:27:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8Flk-0007mE-Uq; Mon, 13 Oct 2025 10:27:08 +0000
-Received: by outflank-mailman (input) for mailman id 1142049;
+	id 1v8Flm-00088d-Ay; Mon, 13 Oct 2025 10:27:10 +0000
+Received: by outflank-mailman (input) for mailman id 1142052;
  Mon, 13 Oct 2025 10:27:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gL+L=4W=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1v8Fcg-0004Rd-1Q
- for xen-devel@lists.xenproject.org; Mon, 13 Oct 2025 10:17:46 +0000
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [2a01:111:f403:c10d::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id db207036-a81d-11f0-980a-7dc792cee155;
- Mon, 13 Oct 2025 12:17:44 +0200 (CEST)
-Received: from BLAPR05CA0044.namprd05.prod.outlook.com (2603:10b6:208:335::27)
- by SJ1PR12MB6265.namprd12.prod.outlook.com (2603:10b6:a03:458::21)
+ id 1v8FcU-0004Hi-IE
+ for xen-devel@lists.xenproject.org; Mon, 13 Oct 2025 10:17:34 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d57c1ca8-a81d-11f0-9d15-b5c5bf9af7f9;
+ Mon, 13 Oct 2025 12:17:33 +0200 (CEST)
+Received: from BN9PR03CA0377.namprd03.prod.outlook.com (2603:10b6:408:f7::22)
+ by SN7PR12MB6741.namprd12.prod.outlook.com (2603:10b6:806:26f::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Mon, 13 Oct
- 2025 10:17:39 +0000
-Received: from BN2PEPF000055DC.namprd21.prod.outlook.com
- (2603:10b6:208:335:cafe::b) by BLAPR05CA0044.outlook.office365.com
- (2603:10b6:208:335::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.9 via Frontend Transport; Mon,
- 13 Oct 2025 10:17:39 +0000
+ 2025 10:17:29 +0000
+Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
+ (2603:10b6:408:f7:cafe::ec) by BN9PR03CA0377.outlook.office365.com
+ (2603:10b6:408:f7::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9203.13 via Frontend Transport; Mon,
+ 13 Oct 2025 10:17:29 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BN2PEPF000055DC.mail.protection.outlook.com (10.167.245.6) with Microsoft
+ BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9253.0 via Frontend Transport; Mon, 13 Oct 2025 10:17:39 +0000
+ 15.20.9253.0 via Frontend Transport; Mon, 13 Oct 2025 10:17:29 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Mon, 13 Oct 2025 03:17:36 -0700
+ 15.2.2562.17; Mon, 13 Oct 2025 03:17:26 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db207036-a81d-11f0-980a-7dc792cee155
+X-Inumbo-ID: d57c1ca8-a81d-11f0-9d15-b5c5bf9af7f9
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p1Z6kGRAtrwLzuDfy/5mih1goNEAYHVMTGmf/WkUK7j3alDgoqSp8SlrrNxfvpwmsZP2LHIDs8JMRgiZTPxvL6IZKuHdj7MLKhgc6hwYMkwZi27/TNzvcYs2679zXB37KFjmE1pjFAHPFhyOSXyDEQ2QQrb7CrioFksu6Z05FWO/dsloyhLhLMYafk0TbgP2PPAkDofAqVGMqZIZUa1Os4T3zCkAj7yHQHJZvUbhqJB5hC9lon5yYBWwczLzTIUjY/024fuEOtuFZmyTO3bpAek0xce8PAlDaSS0z6Z7bu9tTqjE5kqg4ivdRnvT8fHnJ8KMNuFTX1afAaRyDGRTGg==
+ b=vxndN7jmqCNh7N6AVpDN5wg1hpwjBMJTmZp1FHsmlC2cj8u+VMMkNDCj0+0vl5zZQwZEpm2aomgFHWUoE62ZJUd3EuLpbDIFz8HXInkC7KvDETPri7KbwKqulexzJV7zLu2+OK/YRDhc5MQtRgZSw7ziXUGYe+ubyS4VJyMtJL9/Y0hmzKpMR/Gm+okydg3RyOc0ZkvN3xmTyu5KYe3rhbd48iQfqeOKexK4UwCjuHnVy7B7tri5AInbxDkE3s71iR3YycozjuVgMq5cmrJb3LkYBrdpN9t7feKIwc43QAGHJGhTwlaQHP4B8Mfz5yX5b7yuQyoiJcucloOyMRjyJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9e+sPcq234P3COkqJfCRUTWhHt5xA+0WRfwnjxSR66M=;
- b=RiPxDQktdhCdSTFAqtLPSy3oJZ0FzdYGIVLTgfOsD63cI6pEtkLluXzkD1YMAsHTq1YGZRAGrWZWQRbCi6WNVqAJ1Sx7/zBKY6keXOMtOkbjE/mOSK+/FRTPT7A4VzQM7d/W9COpKd4qHBGLywbBSEC0wnnA5RpdASc48WVIeFdJ5sbG9U2okqbzNV3uymnk6hmO5ToyAb7105H9au5orlHdnk+R+qCoG5zaR503i1qU/XO84b0DB2EXxRF9Mq8CPT/NnyGPed95AP5HZX8Sw0UlsnqLiFeUFQzVcg7dX8bJNsqMlSpegMjc9+F3KIH25IrU7bkCbauSXelAhy3Elw==
+ bh=wwm19MfQLFYMEaHpF+50GvvhGNeqkRUXQdYfCrb3X5E=;
+ b=ETfUd4d4qDSnH9P4ykkb21/skvieCxFY6gJyGoub6uVGF9KWGhyxbh1yMvlBmz74nsvqnwlek6naXMJAkw+/+U6IZBeSYorKAsVFE9PmfsWf8mCcPQsiUB74v5SPKmLpnMi3lIBYqAPrQewmIcl22nWHpMiXmW9pUbSvEGGW6qw7G1MSkH3J4KQyCviLEPt5ML/nSMc97UaZsX5lMn8T4BScqPNiunRMteMsVgffKYiCdgkrobq3IwuMeGBBSrVusqCeGI6asgbXb3IvKlYBmcHLkHJBSHJXKGKClMefNAWjPfhsiGi8UEhlnfYCk777F59ZdlKuwAbEIY9oDHtrRA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9e+sPcq234P3COkqJfCRUTWhHt5xA+0WRfwnjxSR66M=;
- b=HLY9DG56ZE5L5UYr6Wr84J2R2HI5i+kEEfRQAFyh1tH850B39Xqh0gGXyb7P39CmmW7Wqu0cLPVztKlabj2+Phjgnr6+KrGNxp1n/b8uVE7yEE/bs09d5eLxY42zM5S+nPLVQSKHp5eqYUyn224dAiv+10ZjBUvUyFIw1XqREFc=
+ bh=wwm19MfQLFYMEaHpF+50GvvhGNeqkRUXQdYfCrb3X5E=;
+ b=LR5eixKyfGBQA4rVyswr6x7jkT7CNdnAHv8djdCdBLDBb++OlbxV6mkcYi36fCy6RR86lvTTSn4MDvAAyytOSEwhSVk5nLzXaNKAYibdKudk3kTlHYhNOVbTCZwxWYWL9prikT/25iU38ylDkPZvwO7WinWpkvaNbkBFFVIRiJ0=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -83,12 +83,10 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <ray.huang@amd.com>, <oleksii.kurochko@gmail.com>, Penny Zheng
-	<Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>
-Subject: [PATCH v3 25/28] xen/domctl: avoid unreachable codes when both MGMT_HYPERCALLS and MEM_SHARING unset
-Date: Mon, 13 Oct 2025 18:15:37 +0800
-Message-ID: <20251013101540.3502842-26-Penny.Zheng@amd.com>
+	<Penny.Zheng@amd.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v3 21/28] xen/domctl: wrap xsm_set_target() with CONFIG_MGMT_HYPERCALLS
+Date: Mon, 13 Oct 2025 18:15:33 +0800
+Message-ID: <20251013101540.3502842-22-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251013101540.3502842-1-Penny.Zheng@amd.com>
 References: <20251013101540.3502842-1-Penny.Zheng@amd.com>
@@ -100,325 +98,166 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DC:EE_|SJ1PR12MB6265:EE_
-X-MS-Office365-Filtering-Correlation-Id: b5603d38-9ff9-435b-a0d7-08de0a41bcd5
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|SN7PR12MB6741:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b38ad51-f0b4-4753-a505-08de0a41b73c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?pejuA80FjutagzWwrxZnYSVEnQcBHVUnffS2Y0EgHwzPRKKKnJDKljpO9zHy?=
- =?us-ascii?Q?p/AvIyFgH3ipm0LkhuVm05ka6ZqTUeqaMyyAvbH5GOcau7dTI6Hwp77DJ68I?=
- =?us-ascii?Q?J1pD8/9gDha27YdTihbHuGUgBwQ9JuZ03ygoJztGbJ8v1L8ozKDsMqknIySc?=
- =?us-ascii?Q?KJDfycdF6Y6fubxMizLgjxL28CSRE6vwFSePTkFQAeau01vm+85bQdAgna/8?=
- =?us-ascii?Q?w3ZDxQLiecguO2nIOJfCtijZRjpc5zPFYrGcSkUQTCgQ2KLNDAS19A8GCdYq?=
- =?us-ascii?Q?ZZlUy9ODWeu/l6F8uriWWX/U9338DscNbzA/oeqrSJDo2BKqZNkEfs/RjAvG?=
- =?us-ascii?Q?+JCWb10qtuP4IR90nnYiuJzQ6GHyzIbhW3JdzXziu8ewiP/roaatXYncGSsZ?=
- =?us-ascii?Q?EHVdutX+MaFnKaAgAqwMeT7irlvdeAKT8x8x/Ce4z6961Vx3O9zfB8o36KJD?=
- =?us-ascii?Q?mPxhaddM2vpvInoiw7HpLK1CvPzf5rToiwZlXKWaiWz2DzXJ1xEW/0cMPVEG?=
- =?us-ascii?Q?/OwOLPVwdee5T1v6wgI/IzV2Qm2BH1sQ+zpymLQTVM19ZbjojOWEUvj9BeW6?=
- =?us-ascii?Q?Yqg8KRwws37f4emrVeuGB9R3CysokqIq6iBxJ744Zlyp3lOaw37x25v+1lbN?=
- =?us-ascii?Q?4/ZjYdiD9qxWVCPB1RQpMMBTiA0ePRWdP9zksoIMf3yjTI7yCUyWKk9XQt+d?=
- =?us-ascii?Q?z7wzMY/UkbSJt+Ryth2dHJceRrADc6fLrcslrdnnPIsGcK5T4B6U2QHTkhyT?=
- =?us-ascii?Q?WzmQ4y1WdErcIXhKtePK0d90UiDz6YOKGcmNbECHIwe0sePJo2tQNm+eLEGe?=
- =?us-ascii?Q?4rt9SCbJwk1n5m+mJj2CZjqfmBvR3FCNTBMH2eSYagi/zMzJnlRYkySHzItd?=
- =?us-ascii?Q?Bo9f3Hvw/gKa9WnKXjJ31ymJGb1PO/GfMsaagDnKyVlunfhiABe3rNaGvamS?=
- =?us-ascii?Q?pDdfdICEZkaDjchrA4qZTUeAZ/iXbXAWC0LX/050yqkB1+IN1z01pc14OvZX?=
- =?us-ascii?Q?Eht6Se17lgZdkC7iQ3+L58O7HbaFA7ZYkhHqv8SboOUzc/UlFzCV47qi3LJ6?=
- =?us-ascii?Q?pFK4ecjD/k6LQsnHV2ZWtn088ErX4ORNFhPyupHBauOQsuo3N3xSgN+rOMO8?=
- =?us-ascii?Q?aZ4DaqXSRn+NCdXzwb7XgFHsMa5pFqAOqg0RlRYtICraQZmp1OsYQ0ZK7bLg?=
- =?us-ascii?Q?Rr5rPUyCnKcTazdLUdNgwWuZp0CBvJqF2n0iHtB4SG9/fnrri3U6Ed8yqyUw?=
- =?us-ascii?Q?11derbwCNW01YnLdLv1Sp/Qg5WqH7T1i9YWoWIK+H2zcRG4O9b4iwpON8VB+?=
- =?us-ascii?Q?0e9TrXTJ28if0VkvZr9BaYUjxIxir1dVr3/nokBH6zNqa3U7lZBMn3d7pFB4?=
- =?us-ascii?Q?hcomH76I6scy9rlxwiUshSyo8pLK5HRnCpB0cPjYkduH6D+0oW6k1bs3WyKV?=
- =?us-ascii?Q?jI55QurZtnCQee5GK3Fth3dBFtTocSK2BkmRj8/AT+s3UzNPc8siA19RDnvq?=
- =?us-ascii?Q?OKZaGbMLwxjDH1kSa6lqPKY+O3GYciV2wWLvYCY/fx231U3Erg5jq6eO4Fvl?=
- =?us-ascii?Q?qFs118riejKMPML9250=3D?=
+	=?us-ascii?Q?RplrwFe7MqOkNlUVFwcHdXkUXb/vCWqKh2RGErXr/qf0cpyERyE3VF/TqsUE?=
+ =?us-ascii?Q?CFn99CTQUKDvcFIB6fWZCAqzvOVw4kEcoH04gvijbJ5ICyd3SFXaV0n/tWgx?=
+ =?us-ascii?Q?YvEpyuiK0gNlGTS1h9sek+GzY1MXvAeiIOgc/Q6ViiwoNqUiV8JJ+RigGvLN?=
+ =?us-ascii?Q?Osu0EP0Vy45un4w5oSQbmz+kYOAX9iivP6I4A/NAlbOWK4hh2WWoCE5e4hAS?=
+ =?us-ascii?Q?3yCnx/0biXvl/cLxIfPADuBwtKkpMOuQ2HZ/AermS5ZsTrF8EQTHYnny9Ea7?=
+ =?us-ascii?Q?XqWsZEq8zFEEMqfDJXQZE8dz9b3fkMX+ZcMLuWgQkd/4jRZZ0jI/VekOGYpU?=
+ =?us-ascii?Q?pqb3Pwb9Prj2JY+AAr94BUGrhgeaYfjZk+8e+Vb3q739B35iRAGuYjhN99cp?=
+ =?us-ascii?Q?DJf2xQm04RKPRCFx6a1c1OG3PbDvXPsfVizkE8GtcHDEg3xhE+BTzNjw2Jia?=
+ =?us-ascii?Q?H1n/YMy1UMsYqD+5StjjuMxgTyPyAjDVi7UCRQGJ4y8606tExrXQQSe67c1W?=
+ =?us-ascii?Q?hrwiQHXlT8oGdOBJPBDESZVGMyfV/q1EItpe98gqrT4Acv89YjNSz1doFpOI?=
+ =?us-ascii?Q?aii4lJuw8StudfxvXcw0JAHruNoE3DgjrGBwN+leBohzedve5jnY2jfjHueg?=
+ =?us-ascii?Q?BO1W4hyW3iQX11xCuzweFgVeHRFAxm3HsLo3anzCXbXPhxSMnISHLzwlBjK2?=
+ =?us-ascii?Q?zfcjVrHK2Slx/0xlpJZ+j5fE76jlasynhi5gzLS9iuJbBP7r0s6BS/MBvtSY?=
+ =?us-ascii?Q?jdjl0/Fp5Dr3ZF2/rDJYRWsoC6umzAXegSJxTxsSqKDIllOOIjlEBvGtFmfX?=
+ =?us-ascii?Q?AFt9Y6EfjTOUMp/ZJJAE4KaclFa2upQO/tnl9CeeM0O9h0Cg2b9n2qMlZQew?=
+ =?us-ascii?Q?rFSnTxuGGuM4vMVy/CbaCkd9OgHMmDtNuGvrV9NumUqHG4v3dXt8RAg7V4jc?=
+ =?us-ascii?Q?7lgMyGmRahwtu+INDenwp4uBvAHAhA+k/qtvxRtU10fP4jLQWvnoxR95fPg9?=
+ =?us-ascii?Q?HThZRgIkTVatPhinE1scaS81ysZrH1OpYzIrz1PDtcYNSkPTjqN0qMZMf3/W?=
+ =?us-ascii?Q?DZb1RfwX0nof2LAcmhs2270qawOzmxqnBrbqX0URps9QzmUQOzZgY0DxEA/y?=
+ =?us-ascii?Q?OqwJQJ5ZInIKtgkxGXANPfZEsR2EBE9RTxGjNOJWX1tmiAGnQYnRySRpBZ5B?=
+ =?us-ascii?Q?JI82rOk34TLtQkVo8zfQUkr2GIn4LmJcgug+5VLLW1Xrnp9aW6Y9GTjR+jxe?=
+ =?us-ascii?Q?dCCzuXCfTw7zNEhFE4021qKgoPV0voyIm4RyURMK1kpcEFwYwHFd/Ucfjduu?=
+ =?us-ascii?Q?hF8Cf3AKuf6AznI8523HMRnVPMyiYOvT19Qx1OIj/ARpcfUIkyB3z+btxuYc?=
+ =?us-ascii?Q?o9XIm6NO/8+YCQcHrHkG8k4aGedRhEgzDjTlL/fTV44Sk1ceaBDguSGzTKJJ?=
+ =?us-ascii?Q?kBrT3F0V98YHP+RVz4Ix83mIuAkqDIRokidvXb6fkQdRJOl7gL67RBs0d5CK?=
+ =?us-ascii?Q?Ko254iBThfcJ7bi+U54Tajh5CngsiXXPwpcjdSwaRFxISYgXpfUJQEbgCxkG?=
+ =?us-ascii?Q?jOU6Dc9LXDEMBhIJv1w=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 10:17:39.0020
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 10:17:29.6114
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b5603d38-9ff9-435b-a0d7-08de0a41bcd5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b38ad51-f0b4-4753-a505-08de0a41b73c
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055DC.namprd21.prod.outlook.com
+	BN2PEPF000055DF.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6265
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6741
 
-The following functions have been referenced in places which is either guarded
-with CONFIG_MGMT_HYPERCALLS or CONFIG_MEM_SHARING:
-- arch_hvm_save
-- arch_hvm_check
-- arch_hvm_load
-- hvm_save_size
-- hvm_save
-- hvm_load
-- hvm_vmtrace_reset
-So they shall be wrapped under OR relationship, otherwise they will become
-unreachable codes when MGMT_HYPERCALLS=n && MEM_SHARING=n, and hence violating
-Misra rule 2.1.
-We move arch_hvm_save(), arch_hvm_check(), arch_hvm_load() and hvm_save_size()
-nearer to the left functions, to avoid scattered #ifdef-wrapping.
+Function xsm_set_target() is only invoked under XEN_DOMCTL_set_target
+domctl-op, and shall be wrapped with CONFIG_MGMT_HYPERCALLS. Otherwise
+it will become unreachable codes when MGMT_HYPERCALLS=n, and hence violating
+Misra 2.1.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
-v2 -> v3
-- new commit
+v1 -> v2:
+- adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
 ---
- xen/arch/x86/hvm/save.c            | 154 +++++++++++++++--------------
- xen/arch/x86/hvm/vmx/vmx.c         |   4 +
- xen/arch/x86/include/asm/hvm/hvm.h |   4 +
- 3 files changed, 86 insertions(+), 76 deletions(-)
+v2 -> v3
+- wrap the whole inline function xsm_set_target()
+- add missing wrapping in xsm/dummy.h
+- address "violating Misra rule 2.1" in commit message
+---
+ xen/include/xsm/dummy.h | 2 ++
+ xen/include/xsm/xsm.h   | 4 +++-
+ xen/xsm/dummy.c         | 2 +-
+ xen/xsm/flask/hooks.c   | 4 ++--
+ 4 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
-index 8ab6405706..47050e13b6 100644
---- a/xen/arch/x86/hvm/save.c
-+++ b/xen/arch/x86/hvm/save.c
-@@ -15,62 +15,6 @@
- 
- #include <public/hvm/save.h>
- 
--static void arch_hvm_save(struct domain *d, struct hvm_save_header *hdr)
--{
--    uint32_t eax, ebx, ecx, edx;
--
--    /* Save some CPUID bits */
--    cpuid(1, &eax, &ebx, &ecx, &edx);
--    hdr->cpuid = eax;
--
--    /* Save guest's preferred TSC. */
--    hdr->gtsc_khz = d->arch.tsc_khz;
--
--    /* Time when saving started */
--    d->arch.hvm.sync_tsc = rdtsc();
--}
--
--static int arch_hvm_check(const struct domain *d,
--                          const struct hvm_save_header *hdr)
--{
--    uint32_t eax, ebx, ecx, edx;
--
--    if ( hdr->magic != HVM_FILE_MAGIC )
--    {
--        printk(XENLOG_G_ERR "HVM%d restore: bad magic number %#"PRIx32"\n",
--               d->domain_id, hdr->magic);
--        return -EINVAL;
--    }
--
--    if ( hdr->version != HVM_FILE_VERSION )
--    {
--        printk(XENLOG_G_ERR "HVM%d restore: unsupported version %u\n",
--               d->domain_id, hdr->version);
--        return -EINVAL;
--    }
--
--    cpuid(1, &eax, &ebx, &ecx, &edx);
--    /* CPUs ought to match but with feature-masking they might not */
--    if ( (hdr->cpuid & ~0x0fUL) != (eax & ~0x0fUL) )
--        printk(XENLOG_G_INFO "HVM%d restore: VM saved on one CPU "
--               "(%#"PRIx32") and restored on another (%#"PRIx32").\n",
--               d->domain_id, hdr->cpuid, eax);
--
--    return 0;
--}
--
--static void arch_hvm_load(struct domain *d, const struct hvm_save_header *hdr)
--{
--    /* Restore guest's preferred TSC frequency. */
--    if ( hdr->gtsc_khz )
--        d->arch.tsc_khz = hdr->gtsc_khz;
--    if ( d->arch.vtsc )
--        hvm_set_rdtsc_exiting(d, 1);
--
--    /* Time when restore started  */
--    d->arch.hvm.sync_tsc = rdtsc();
--}
--
- /* List of handlers for various HVM save and restore types */
- static struct {
-     hvm_save_handler save;
-@@ -101,26 +45,6 @@ void __init hvm_register_savevm(uint16_t typecode,
-     hvm_sr_handlers[typecode].kind = kind;
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index a5deb8a975..a598d74f1f 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -158,12 +158,14 @@ static XSM_INLINE int cf_check xsm_sysctl_scheduler_op(XSM_DEFAULT_ARG int cmd)
  }
+ #endif /* CONFIG_MGMT_HYPERCALLS */
  
--size_t hvm_save_size(struct domain *d)
--{
--    struct vcpu *v;
--    size_t sz;
--    int i;
--
--    /* Basic overhead for header and footer */
--    sz = (2 * sizeof (struct hvm_save_descriptor)) + HVM_SAVE_LENGTH(HEADER);
--
--    /* Plus space for each thing we will be saving */
--    for ( i = 0; i <= HVM_SAVE_CODE_MAX; i++ )
--        if ( hvm_sr_handlers[i].kind == HVMSR_PER_VCPU )
--            for_each_vcpu(d, v)
--                sz += hvm_sr_handlers[i].size;
--        else
--            sz += hvm_sr_handlers[i].size;
--
--    return sz;
--}
--
- /*
-  * Extract a single instance of a save record, by marshalling all records of
-  * that type and copying out the one we need.
-@@ -196,6 +120,83 @@ int hvm_save_one(struct domain *d, unsigned int typecode, unsigned int instance,
-     return rv;
- }
- 
-+#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
-+static void arch_hvm_save(struct domain *d, struct hvm_save_header *hdr)
-+{
-+    uint32_t eax, ebx, ecx, edx;
-+
-+    /* Save some CPUID bits */
-+    cpuid(1, &eax, &ebx, &ecx, &edx);
-+    hdr->cpuid = eax;
-+
-+    /* Save guest's preferred TSC. */
-+    hdr->gtsc_khz = d->arch.tsc_khz;
-+
-+    /* Time when saving started */
-+    d->arch.hvm.sync_tsc = rdtsc();
-+}
-+
-+static int arch_hvm_check(const struct domain *d,
-+                          const struct hvm_save_header *hdr)
-+{
-+    uint32_t eax, ebx, ecx, edx;
-+
-+    if ( hdr->magic != HVM_FILE_MAGIC )
-+    {
-+        printk(XENLOG_G_ERR "HVM%d restore: bad magic number %#"PRIx32"\n",
-+               d->domain_id, hdr->magic);
-+        return -EINVAL;
-+    }
-+
-+    if ( hdr->version != HVM_FILE_VERSION )
-+    {
-+        printk(XENLOG_G_ERR "HVM%d restore: unsupported version %u\n",
-+               d->domain_id, hdr->version);
-+        return -EINVAL;
-+    }
-+
-+    cpuid(1, &eax, &ebx, &ecx, &edx);
-+    /* CPUs ought to match but with feature-masking they might not */
-+    if ( (hdr->cpuid & ~0x0fUL) != (eax & ~0x0fUL) )
-+        printk(XENLOG_G_INFO "HVM%d restore: VM saved on one CPU "
-+               "(%#"PRIx32") and restored on another (%#"PRIx32").\n",
-+               d->domain_id, hdr->cpuid, eax);
-+
-+    return 0;
-+}
-+
-+static void arch_hvm_load(struct domain *d, const struct hvm_save_header *hdr)
-+{
-+    /* Restore guest's preferred TSC frequency. */
-+    if ( hdr->gtsc_khz )
-+        d->arch.tsc_khz = hdr->gtsc_khz;
-+    if ( d->arch.vtsc )
-+        hvm_set_rdtsc_exiting(d, 1);
-+
-+    /* Time when restore started  */
-+    d->arch.hvm.sync_tsc = rdtsc();
-+}
-+
-+size_t hvm_save_size(struct domain *d)
-+{
-+    struct vcpu *v;
-+    size_t sz;
-+    unsigned int i;
-+
-+    /* Basic overhead for header and footer */
-+    sz = (2 * sizeof (struct hvm_save_descriptor)) + HVM_SAVE_LENGTH(HEADER);
-+
-+    /* Plus space for each thing we will be saving */
-+    for ( i = 0; i <= HVM_SAVE_CODE_MAX; i++ )
-+        if ( hvm_sr_handlers[i].kind == HVMSR_PER_VCPU )
-+            for_each_vcpu(d, v)
-+                sz += hvm_sr_handlers[i].size;
-+        else
-+            sz += hvm_sr_handlers[i].size;
-+
-+    return sz;
-+}
-+
- int hvm_save(struct domain *d, hvm_domain_context_t *h)
++#ifdef CONFIG_MGMT_HYPERCALLS
+ static XSM_INLINE int cf_check xsm_set_target(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *e)
  {
-     char *c;
-@@ -390,6 +391,7 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
- 
-     /* Not reached */
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
  }
-+#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
++#endif /* CONFIG_MGMT_HYPERCALLS */
  
- int _hvm_init_entry(struct hvm_domain_context *h, uint16_t tc, uint16_t inst,
-                     uint32_t len)
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 1996e139a0..4394990131 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2701,6 +2701,7 @@ static int cf_check vmtrace_output_position(struct vcpu *v, uint64_t *pos)
-     return v->arch.hvm.vmx.ipt_active;
- }
- 
-+#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
- static int cf_check vmtrace_reset(struct vcpu *v)
- {
-     if ( !v->arch.hvm.vmx.ipt_active )
-@@ -2710,6 +2711,7 @@ static int cf_check vmtrace_reset(struct vcpu *v)
-     v->arch.msrs->rtit.status = 0;
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
- 
- static uint64_t cf_check vmx_get_reg(struct vcpu *v, unsigned int reg)
- {
-@@ -2888,7 +2890,9 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
-     .vmtrace_output_position = vmtrace_output_position,
-     .vmtrace_set_option = vmtrace_set_option,
-     .vmtrace_get_option = vmtrace_get_option,
-+#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
-     .vmtrace_reset = vmtrace_reset,
+ static XSM_INLINE int cf_check xsm_domctl(
+     XSM_DEFAULT_ARG struct domain *d, unsigned int cmd, uint32_t ssidref)
+diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
+index ee43002fdb..154a4b8a92 100644
+--- a/xen/include/xsm/xsm.h
++++ b/xen/include/xsm/xsm.h
+@@ -59,8 +59,8 @@ struct xsm_ops {
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     int (*domctl_scheduler_op)(struct domain *d, int op);
+     int (*sysctl_scheduler_op)(int op);
+-#endif
+     int (*set_target)(struct domain *d, struct domain *e);
 +#endif
- 
-     .get_reg = vmx_get_reg,
-     .set_reg = vmx_set_reg,
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 473cf24b83..9d6cb42d48 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -240,7 +240,9 @@ struct hvm_function_table {
-     int (*vmtrace_output_position)(struct vcpu *v, uint64_t *pos);
-     int (*vmtrace_set_option)(struct vcpu *v, uint64_t key, uint64_t value);
-     int (*vmtrace_get_option)(struct vcpu *v, uint64_t key, uint64_t *value);
-+#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
-     int (*vmtrace_reset)(struct vcpu *v);
-+#endif
- 
-     uint64_t (*get_reg)(struct vcpu *v, unsigned int reg);
-     void (*set_reg)(struct vcpu *v, unsigned int reg, uint64_t val);
-@@ -775,6 +777,7 @@ static inline int hvm_vmtrace_get_option(
-     return -EOPNOTSUPP;
+     int (*domctl)(struct domain *d, unsigned int cmd, uint32_t ssidref);
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     int (*sysctl)(int cmd);
+@@ -255,11 +255,13 @@ static inline int xsm_sysctl_scheduler_op(xsm_default_t def, int cmd)
  }
+ #endif
  
-+#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
- static inline int hvm_vmtrace_reset(struct vcpu *v)
++#ifdef CONFIG_MGMT_HYPERCALLS
+ static inline int xsm_set_target(
+     xsm_default_t def, struct domain *d, struct domain *e)
  {
-     if ( hvm_funcs.vmtrace_reset )
-@@ -782,6 +785,7 @@ static inline int hvm_vmtrace_reset(struct vcpu *v)
- 
-     return -EOPNOTSUPP;
+     return alternative_call(xsm_ops.set_target, d, e);
  }
-+#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
++#endif /* CONFIG_MGMT_HYPERCALLS */
  
- /*
-  * Accessors for registers which have per-guest-type or per-vendor locations
+ static inline int xsm_domctl(xsm_default_t def, struct domain *d,
+                              unsigned int cmd, uint32_t ssidref)
+diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
+index 7cf00ce37e..9774bb3bdb 100644
+--- a/xen/xsm/dummy.c
++++ b/xen/xsm/dummy.c
+@@ -21,8 +21,8 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     .domctl_scheduler_op           = xsm_domctl_scheduler_op,
+     .sysctl_scheduler_op           = xsm_sysctl_scheduler_op,
+-#endif
+     .set_target                    = xsm_set_target,
++#endif
+     .domctl                        = xsm_domctl,
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     .sysctl                        = xsm_sysctl,
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index ca07585450..9b63c516e6 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -641,7 +641,6 @@ static int cf_check flask_sysctl_scheduler_op(int op)
+         return avc_unknown_permission("sysctl_scheduler_op", op);
+     }
+ }
+-#endif /* CONFIG_MGMT_HYPERCALLS */
+ 
+ static int cf_check flask_set_target(struct domain *d, struct domain *t)
+ {
+@@ -666,6 +665,7 @@ static int cf_check flask_set_target(struct domain *d, struct domain *t)
+                                  &dsec->target_sid);
+     return rc;
+ }
++#endif /* CONFIG_MGMT_HYPERCALLS */
+ 
+ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
+                                  uint32_t ssidref)
+@@ -1888,8 +1888,8 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     .domctl_scheduler_op = flask_domctl_scheduler_op,
+     .sysctl_scheduler_op = flask_sysctl_scheduler_op,
+-#endif
+     .set_target = flask_set_target,
++#endif
+     .domctl = flask_domctl,
+ #ifdef CONFIG_MGMT_HYPERCALLS
+     .sysctl = flask_sysctl,
 -- 
 2.34.1
 
