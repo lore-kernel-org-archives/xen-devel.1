@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1463CCD183
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Oct 2025 10:27:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1142024.1476298 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7212CCA476
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Oct 2025 10:27:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1142049.1476313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8Flg-0006dG-1K; Mon, 13 Oct 2025 10:27:04 +0000
+	id 1v8Fll-0007n6-5U; Mon, 13 Oct 2025 10:27:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1142024.1476298; Mon, 13 Oct 2025 10:27:03 +0000
+Received: by outflank-mailman (output) from mailman id 1142049.1476313; Mon, 13 Oct 2025 10:27:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8Flf-0006ax-Eh; Mon, 13 Oct 2025 10:27:03 +0000
-Received: by outflank-mailman (input) for mailman id 1142024;
- Mon, 13 Oct 2025 10:27:01 +0000
+	id 1v8Flk-0007mE-Uq; Mon, 13 Oct 2025 10:27:08 +0000
+Received: by outflank-mailman (input) for mailman id 1142049;
+ Mon, 13 Oct 2025 10:27:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gL+L=4W=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1v8FcX-0004Rd-KB
- for xen-devel@lists.xenproject.org; Mon, 13 Oct 2025 10:17:37 +0000
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [2a01:111:f403:c107::1])
+ id 1v8Fcg-0004Rd-1Q
+ for xen-devel@lists.xenproject.org; Mon, 13 Oct 2025 10:17:46 +0000
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [2a01:111:f403:c10d::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d5a7a543-a81d-11f0-980a-7dc792cee155;
- Mon, 13 Oct 2025 12:17:35 +0200 (CEST)
-Received: from MN2PR13CA0016.namprd13.prod.outlook.com (2603:10b6:208:160::29)
- by DS0PR12MB6607.namprd12.prod.outlook.com (2603:10b6:8:d1::13) with
- Microsoft SMTP Server (version=TLS1_2,
+ id db207036-a81d-11f0-980a-7dc792cee155;
+ Mon, 13 Oct 2025 12:17:44 +0200 (CEST)
+Received: from BLAPR05CA0044.namprd05.prod.outlook.com (2603:10b6:208:335::27)
+ by SJ1PR12MB6265.namprd12.prod.outlook.com (2603:10b6:a03:458::21)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Mon, 13 Oct
- 2025 10:17:31 +0000
-Received: from BN2PEPF000055DD.namprd21.prod.outlook.com
- (2603:10b6:208:160:cafe::b0) by MN2PR13CA0016.outlook.office365.com
- (2603:10b6:208:160::29) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 10:17:39 +0000
+Received: from BN2PEPF000055DC.namprd21.prod.outlook.com
+ (2603:10b6:208:335:cafe::b) by BLAPR05CA0044.outlook.office365.com
+ (2603:10b6:208:335::27) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.9 via Frontend Transport; Mon,
- 13 Oct 2025 10:17:31 +0000
+ 13 Oct 2025 10:17:39 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BN2PEPF000055DD.mail.protection.outlook.com (10.167.245.7) with Microsoft
+ BN2PEPF000055DC.mail.protection.outlook.com (10.167.245.6) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9253.0 via Frontend Transport; Mon, 13 Oct 2025 10:17:31 +0000
+ 15.20.9253.0 via Frontend Transport; Mon, 13 Oct 2025 10:17:39 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Mon, 13 Oct 2025 03:17:27 -0700
+ 15.2.2562.17; Mon, 13 Oct 2025 03:17:36 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5a7a543-a81d-11f0-980a-7dc792cee155
+X-Inumbo-ID: db207036-a81d-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PhCvGs5BrQTDL1Oefu6HET20WKJfb41JtMxaM0LQ4a11T1WTff5tGEYMPVj1M/cHMohLdlZvay5JVgSz6TKgCub+Ne/EWw/3GQiCc5Bjqa62bRD+UASM40VPvspRTZoOGBIReye8MeThpAKRM2zS+5KooVwn+AiIUwNMBDcW8raKD/LIE3Mzzsae+FGEg0YYpyUSzn3rTVGAWP3gLNi+C1mDsMKtdILwN+yTO+dFEv8fBGOV51g6Xda3nLn8xLpLGmcECTHqy6XBxz0Q1YkNtRFUWL5UZbQ3eH0b0N73w8gYnWSs6O0yCKKs01t86/RGLh3+/HhLTJeJwSoUarE9IQ==
+ b=p1Z6kGRAtrwLzuDfy/5mih1goNEAYHVMTGmf/WkUK7j3alDgoqSp8SlrrNxfvpwmsZP2LHIDs8JMRgiZTPxvL6IZKuHdj7MLKhgc6hwYMkwZi27/TNzvcYs2679zXB37KFjmE1pjFAHPFhyOSXyDEQ2QQrb7CrioFksu6Z05FWO/dsloyhLhLMYafk0TbgP2PPAkDofAqVGMqZIZUa1Os4T3zCkAj7yHQHJZvUbhqJB5hC9lon5yYBWwczLzTIUjY/024fuEOtuFZmyTO3bpAek0xce8PAlDaSS0z6Z7bu9tTqjE5kqg4ivdRnvT8fHnJ8KMNuFTX1afAaRyDGRTGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CFRNb3guwLb3dfTeVzp7r1RPYeQgPGGR5Qg6o7MJBAs=;
- b=NAtySeX8nDRlqVocRsM7OuFJmLJQTOUiJx+siyoi0BkS0100QvG6lhjBYNNzPWn+ZNUHC9Ypfrk3z72NLfIkw1YzpMS5+I5VhQfi/Sn6wTqWtjVNe6h1vCfC80jJ5IlqXMncoYipIFMEBacF6hiK/GMbz4Hytj9Nh+QNJcveucE6FK9NFdYXCJxP1dgp1bM15AiUgXrkJ+Mw1vANDMiZyVy3ZHmiSWTXviQII8k+u1X139llpeOSNWj2+ykZcLZ/kDFCb75oG6IYWmoq1wyU5KKogJKwxxX2PdP3nng8e5mZlTbLm94ulUmqNb7JFp0KOJzAuhSehx4LhEVyXHhVAA==
+ bh=9e+sPcq234P3COkqJfCRUTWhHt5xA+0WRfwnjxSR66M=;
+ b=RiPxDQktdhCdSTFAqtLPSy3oJZ0FzdYGIVLTgfOsD63cI6pEtkLluXzkD1YMAsHTq1YGZRAGrWZWQRbCi6WNVqAJ1Sx7/zBKY6keXOMtOkbjE/mOSK+/FRTPT7A4VzQM7d/W9COpKd4qHBGLywbBSEC0wnnA5RpdASc48WVIeFdJ5sbG9U2okqbzNV3uymnk6hmO5ToyAb7105H9au5orlHdnk+R+qCoG5zaR503i1qU/XO84b0DB2EXxRF9Mq8CPT/NnyGPed95AP5HZX8Sw0UlsnqLiFeUFQzVcg7dX8bJNsqMlSpegMjc9+F3KIH25IrU7bkCbauSXelAhy3Elw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CFRNb3guwLb3dfTeVzp7r1RPYeQgPGGR5Qg6o7MJBAs=;
- b=CY6AaXqIh1Lt67LpqAz/MvRB6iz1iyhSVmrl/Deqy5yH63psgeejyLtS9q1NzQrtr59oysxCPB9BG8cNKWH11xK8oW4QxIss+ZxpI2nlFP7prWV93W+92JxoSUIS3veBz658GotVenJyHWiVTUOkkaHyturpy/zVOZS4Dgf64TY=
+ bh=9e+sPcq234P3COkqJfCRUTWhHt5xA+0WRfwnjxSR66M=;
+ b=HLY9DG56ZE5L5UYr6Wr84J2R2HI5i+kEEfRQAFyh1tH850B39Xqh0gGXyb7P39CmmW7Wqu0cLPVztKlabj2+Phjgnr6+KrGNxp1n/b8uVE7yEE/bs09d5eLxY42zM5S+nPLVQSKHp5eqYUyn224dAiv+10ZjBUvUyFIw1XqREFc=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -83,16 +83,12 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Penny Zheng <Penny.Zheng@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <ray.huang@amd.com>, <oleksii.kurochko@gmail.com>, Penny Zheng
-	<Penny.Zheng@amd.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
- Grall" <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Michal
- Orzel" <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Rahul Singh <rahul.singh@arm.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>
-Subject: [PATCH v3 22/28] xen/domctl: wrap iommu-related domctl op with CONFIG_MGMT_HYPERCALLS
-Date: Mon, 13 Oct 2025 18:15:34 +0800
-Message-ID: <20251013101540.3502842-23-Penny.Zheng@amd.com>
+	<roger.pau@citrix.com>
+Subject: [PATCH v3 25/28] xen/domctl: avoid unreachable codes when both MGMT_HYPERCALLS and MEM_SHARING unset
+Date: Mon, 13 Oct 2025 18:15:37 +0800
+Message-ID: <20251013101540.3502842-26-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251013101540.3502842-1-Penny.Zheng@amd.com>
 References: <20251013101540.3502842-1-Penny.Zheng@amd.com>
@@ -104,712 +100,325 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DD:EE_|DS0PR12MB6607:EE_
-X-MS-Office365-Filtering-Correlation-Id: a8b16ba5-70c8-4fd1-cd6d-08de0a41b851
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DC:EE_|SJ1PR12MB6265:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5603d38-9ff9-435b-a0d7-08de0a41bcd5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|7416014|36860700013|1800799024;
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?xR4kgoh2yIgndoMEbeBRmuRHmTCjTdVuj2sLDTYNX0hHYHxutyZdDxyagvuA?=
- =?us-ascii?Q?iKrTmqcY3hB/UY0kelxdGVs41dzCadqQuVcSNLpcFEnRCMX9kCDmXGDE6Ood?=
- =?us-ascii?Q?lMXiMQCbH3prEQfGAYcWEKTW7gV8HnEHqSe8a9b87imt8wlWdCRMG5LUUErb?=
- =?us-ascii?Q?gWVbAV5eSO6mB5J9X5eQEpU3nvbP9B6rLGDFlWuNl7KsjpOL8cSPOn3i5x/I?=
- =?us-ascii?Q?QawasQPp+T4sOqlwN3K1ZMPKVssXKA7nThG9GpDgBU7Z9ovRfLl8PjFirvg5?=
- =?us-ascii?Q?FKUFXX5HCgqQFqCiNHnlzdqf+iaoTigFX7DKlDv30Utm508yD/cpQkXw/jw3?=
- =?us-ascii?Q?SLBmYnQ2SAWgxamXMhP6/2HcU/lldTpD8p6WVl0iYbSxEYTiOP4ZewLmtE8+?=
- =?us-ascii?Q?jmcr/v31wcjXl3IA4tiIUcyCzpJ/7hVT4ADQVHk3kRkJqmx/8eYSLS7mMSHi?=
- =?us-ascii?Q?INwrIN4ugusF0vj0DyZiD6+Rq3M28LA2wIS0fAdOX+OpQ136d7wK6LHketMR?=
- =?us-ascii?Q?wbZnfMiFcy/Rg2kfLIoBbcXQnt2Q76pGM8SWAxEub4/5XdshmFC7li72UsDl?=
- =?us-ascii?Q?YCxknfXLyeIl6ZdxhTkcgQrlDsLF8w6NEvzA9SxwG5MD9YAKFS8dP8G8UUw0?=
- =?us-ascii?Q?0n3lzyHodSpy+Ji+rWd4J6n/olrNR7l4Oh6Cu8WnYEhygU+MfpBbAgmbplzc?=
- =?us-ascii?Q?1akaimz8p+pmw3rdJZ9iz6SgIm0wsX5t338DkxsFRb3dVeenLyr0yN4SCQi+?=
- =?us-ascii?Q?ufBrxEeI3yDscQrsnQGl68+/tMQuaR7zpqVov8rDgyddOFHy0R2yVUnVvfyC?=
- =?us-ascii?Q?ceLG88PuVLL+ucxca/9i0ENfgUX/8dzO6QluBzrv+WtUjPrL8oe2gRJhqd2w?=
- =?us-ascii?Q?bJ95Gf9DO6o3hzxAs7JHDNXrvfzHbaSxGFqBSLYOmybCWouaxjvnH5m5AUeG?=
- =?us-ascii?Q?6eNuKh4wrSRolEQBvvhYq7+N5ZGJKqdNPhYGfpI4Wg53lW8xgJoOz8DyEKuf?=
- =?us-ascii?Q?3tHJXbkHQhSn/Jm6UmAIOo1iBicGnPc3suSIp4z4f5pugLVi2ssQ+vPp4EGo?=
- =?us-ascii?Q?/GyyBc0mAaSWEmkuY3wb6Xptc5k9jzXLrSrXw4Q3Oh9SeQ7hrjhQh0sQItij?=
- =?us-ascii?Q?B2AQ1byLy636NzglaQow/5DzCiseHSbkX/1ByVvp3QYzv2mMQpQPu7qy6xrV?=
- =?us-ascii?Q?FzM+dODYZBnF5PW5iXnMPlFqwfsnghbYmDJO5kpvGCKENw/OlEtaAsEbr7s1?=
- =?us-ascii?Q?fH0L+XsZ32ynSwHiWSEl24w4EXyxZj2ptpBKCP27MTOliC5kxInRG0ul+aVa?=
- =?us-ascii?Q?LJT9IAV/5gCgxsysBXSQawte1owQwXkjPskDwxLiakyZx9jJoR3Sx33JRz1v?=
- =?us-ascii?Q?Jw6N6K2mLdjXp7+6qYkgAoriZTIy6iKcuC+AOVPlpmpHu6Ju6XLXiDUHsZpZ?=
- =?us-ascii?Q?t4GasDKDlkpQt56UKRt8zKivNiKDz42lSKTHTyeTuD7xIzQ4wWZeT6vli24t?=
- =?us-ascii?Q?oIC84XBwOBGQeRAl/4P+9eC5ehognlmAZ0T6yi97nyrxPn+ZbV0a6j0rtP33?=
- =?us-ascii?Q?Qa+QUQS10s5udUQcnk8=3D?=
+	=?us-ascii?Q?pejuA80FjutagzWwrxZnYSVEnQcBHVUnffS2Y0EgHwzPRKKKnJDKljpO9zHy?=
+ =?us-ascii?Q?p/AvIyFgH3ipm0LkhuVm05ka6ZqTUeqaMyyAvbH5GOcau7dTI6Hwp77DJ68I?=
+ =?us-ascii?Q?J1pD8/9gDha27YdTihbHuGUgBwQ9JuZ03ygoJztGbJ8v1L8ozKDsMqknIySc?=
+ =?us-ascii?Q?KJDfycdF6Y6fubxMizLgjxL28CSRE6vwFSePTkFQAeau01vm+85bQdAgna/8?=
+ =?us-ascii?Q?w3ZDxQLiecguO2nIOJfCtijZRjpc5zPFYrGcSkUQTCgQ2KLNDAS19A8GCdYq?=
+ =?us-ascii?Q?ZZlUy9ODWeu/l6F8uriWWX/U9338DscNbzA/oeqrSJDo2BKqZNkEfs/RjAvG?=
+ =?us-ascii?Q?+JCWb10qtuP4IR90nnYiuJzQ6GHyzIbhW3JdzXziu8ewiP/roaatXYncGSsZ?=
+ =?us-ascii?Q?EHVdutX+MaFnKaAgAqwMeT7irlvdeAKT8x8x/Ce4z6961Vx3O9zfB8o36KJD?=
+ =?us-ascii?Q?mPxhaddM2vpvInoiw7HpLK1CvPzf5rToiwZlXKWaiWz2DzXJ1xEW/0cMPVEG?=
+ =?us-ascii?Q?/OwOLPVwdee5T1v6wgI/IzV2Qm2BH1sQ+zpymLQTVM19ZbjojOWEUvj9BeW6?=
+ =?us-ascii?Q?Yqg8KRwws37f4emrVeuGB9R3CysokqIq6iBxJ744Zlyp3lOaw37x25v+1lbN?=
+ =?us-ascii?Q?4/ZjYdiD9qxWVCPB1RQpMMBTiA0ePRWdP9zksoIMf3yjTI7yCUyWKk9XQt+d?=
+ =?us-ascii?Q?z7wzMY/UkbSJt+Ryth2dHJceRrADc6fLrcslrdnnPIsGcK5T4B6U2QHTkhyT?=
+ =?us-ascii?Q?WzmQ4y1WdErcIXhKtePK0d90UiDz6YOKGcmNbECHIwe0sePJo2tQNm+eLEGe?=
+ =?us-ascii?Q?4rt9SCbJwk1n5m+mJj2CZjqfmBvR3FCNTBMH2eSYagi/zMzJnlRYkySHzItd?=
+ =?us-ascii?Q?Bo9f3Hvw/gKa9WnKXjJ31ymJGb1PO/GfMsaagDnKyVlunfhiABe3rNaGvamS?=
+ =?us-ascii?Q?pDdfdICEZkaDjchrA4qZTUeAZ/iXbXAWC0LX/050yqkB1+IN1z01pc14OvZX?=
+ =?us-ascii?Q?Eht6Se17lgZdkC7iQ3+L58O7HbaFA7ZYkhHqv8SboOUzc/UlFzCV47qi3LJ6?=
+ =?us-ascii?Q?pFK4ecjD/k6LQsnHV2ZWtn088ErX4ORNFhPyupHBauOQsuo3N3xSgN+rOMO8?=
+ =?us-ascii?Q?aZ4DaqXSRn+NCdXzwb7XgFHsMa5pFqAOqg0RlRYtICraQZmp1OsYQ0ZK7bLg?=
+ =?us-ascii?Q?Rr5rPUyCnKcTazdLUdNgwWuZp0CBvJqF2n0iHtB4SG9/fnrri3U6Ed8yqyUw?=
+ =?us-ascii?Q?11derbwCNW01YnLdLv1Sp/Qg5WqH7T1i9YWoWIK+H2zcRG4O9b4iwpON8VB+?=
+ =?us-ascii?Q?0e9TrXTJ28if0VkvZr9BaYUjxIxir1dVr3/nokBH6zNqa3U7lZBMn3d7pFB4?=
+ =?us-ascii?Q?hcomH76I6scy9rlxwiUshSyo8pLK5HRnCpB0cPjYkduH6D+0oW6k1bs3WyKV?=
+ =?us-ascii?Q?jI55QurZtnCQee5GK3Fth3dBFtTocSK2BkmRj8/AT+s3UzNPc8siA19RDnvq?=
+ =?us-ascii?Q?OKZaGbMLwxjDH1kSa6lqPKY+O3GYciV2wWLvYCY/fx231U3Erg5jq6eO4Fvl?=
+ =?us-ascii?Q?qFs118riejKMPML9250=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(7416014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 10:17:31.4277
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2025 10:17:39.0020
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8b16ba5-70c8-4fd1-cd6d-08de0a41b851
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5603d38-9ff9-435b-a0d7-08de0a41bcd5
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000055DD.namprd21.prod.outlook.com
+	BN2PEPF000055DC.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6607
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6265
 
-Function iommu_do_domctl() is the main entry for all iommu-related domctl-op,
-and shall be wrapped with CONFIG_MGMT_HYPERCALLS.
-Tracking its calling chain, the following functions shall all be wrapped
-with CONFIG_MGMT_HYPERCALLS:
-- iommu_do_pci_domctl
-  - iommu_get_device_group
-    - amd_iommu_group_id/intel_iommu_group_id
-  - device_assigned
-  - assign_device
-    - intel_iommu_assign_device/amd_iommu_assign_device
-  - deassign_device
-    - reassign_device_ownership/reassign_device
-- make PCI_PASSTHROUGH depend on MGMT_HYPERCALLS
-- iommu_do_dt_domctl
-  - iommu_deassign_dt_device
-    - arm_smmu_reassign_dev
-      - arm_smmu_deassign_dev
-        - arm_smmu_detach_dev
-          - arm_smmu_domain_remove_master
-    - ipmmu_reassign_device
-      - ipmmu_deassign_device
-        - ipmmu_detach_device
-  - iommu_remove_dt_device
-    - iommu_dt_device_is_assigned_locked
-  - dt_find_node_by_gpath
-- xsm_get_device_group
-- xsm_assign_device
-- xsm_deassign_device
-- xsm_assign_dtdevice
-- xsm_deassign_dtdevice
-Otherwise all the functions will become unreachable when MGMT_HYPERCALLS=n,
-and hence violating Misra rule 2.1
+The following functions have been referenced in places which is either guarded
+with CONFIG_MGMT_HYPERCALLS or CONFIG_MEM_SHARING:
+- arch_hvm_save
+- arch_hvm_check
+- arch_hvm_load
+- hvm_save_size
+- hvm_save
+- hvm_load
+- hvm_vmtrace_reset
+So they shall be wrapped under OR relationship, otherwise they will become
+unreachable codes when MGMT_HYPERCALLS=n && MEM_SHARING=n, and hence violating
+Misra rule 2.1.
+We move arch_hvm_save(), arch_hvm_check(), arch_hvm_load() and hvm_save_size()
+nearer to the left functions, to avoid scattered #ifdef-wrapping.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
-v1 -> v2:
-- adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
-- wrap XEN_DOMCTL_assign_device{test_assign_device,deassign_device,
- get_device_group}-case transiently
+v2 -> v3
+- new commit
 ---
-v2 -> v3:
-- make PCI_PASSTHROUGH(, then HAS_VPCI_GUEST_SUPPORT) depend on MGMT_HYPERCALLS
-- add wrapping for iommu_remove_dt_device/iommu_dt_device_is_assigned_locked/
-arm_smmu_detach_dev/arm_smmu_domain_remove_master
-- fold commit
-"xen/xsm: wrap xsm-iommu-related functions with CONFIG_MGMT_HYPERCALLS" in
-- fix overly long #ifdef
-- add missing wrapping in xsm/dummy.h
-- address "violating Misra rule 2.1" in commit message
-- remove transient wrapping of
-XEN_DOMCTL_assign_device{test_assign_device,deassign_device,get_device_group}-case
----
- xen/arch/arm/Kconfig                        |  2 +-
- xen/common/device-tree/device-tree.c        |  2 ++
- xen/drivers/passthrough/amd/pci_amd_iommu.c |  8 ++++++++
- xen/drivers/passthrough/arm/ipmmu-vmsa.c    |  8 ++++++++
- xen/drivers/passthrough/arm/smmu-v3.c       |  4 ++++
- xen/drivers/passthrough/arm/smmu.c          | 10 ++++++++++
- xen/drivers/passthrough/device_tree.c       |  6 ++++++
- xen/drivers/passthrough/iommu.c             |  2 ++
- xen/drivers/passthrough/pci.c               |  6 +++++-
- xen/drivers/passthrough/vtd/iommu.c         |  6 ++++++
- xen/include/xsm/dummy.h                     | 12 ++++++------
- xen/include/xsm/xsm.h                       | 21 ++++++++++++---------
- xen/xsm/dummy.c                             | 10 ++++++----
- xen/xsm/flask/hooks.c                       | 20 ++++++++++++--------
- 14 files changed, 88 insertions(+), 29 deletions(-)
+ xen/arch/x86/hvm/save.c            | 154 +++++++++++++++--------------
+ xen/arch/x86/hvm/vmx/vmx.c         |   4 +
+ xen/arch/x86/include/asm/hvm/hvm.h |   4 +
+ 3 files changed, 86 insertions(+), 76 deletions(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index cf6af68299..5a5d7810c8 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -270,7 +270,7 @@ source "arch/arm/firmware/Kconfig"
+diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
+index 8ab6405706..47050e13b6 100644
+--- a/xen/arch/x86/hvm/save.c
++++ b/xen/arch/x86/hvm/save.c
+@@ -15,62 +15,6 @@
  
- config PCI_PASSTHROUGH
- 	bool "PCI passthrough" if EXPERT
--	depends on ARM_64 && HAS_PASSTHROUGH
-+	depends on ARM_64 && HAS_PASSTHROUGH && MGMT_HYPERCALLS
- 	help
- 	  This option enables PCI device passthrough
+ #include <public/hvm/save.h>
  
-diff --git a/xen/common/device-tree/device-tree.c b/xen/common/device-tree/device-tree.c
-index 0b5375f151..70bd8e7da5 100644
---- a/xen/common/device-tree/device-tree.c
-+++ b/xen/common/device-tree/device-tree.c
-@@ -371,6 +371,7 @@ struct dt_device_node *dt_find_node_by_path_from(struct dt_device_node *from,
-     return np;
+-static void arch_hvm_save(struct domain *d, struct hvm_save_header *hdr)
+-{
+-    uint32_t eax, ebx, ecx, edx;
+-
+-    /* Save some CPUID bits */
+-    cpuid(1, &eax, &ebx, &ecx, &edx);
+-    hdr->cpuid = eax;
+-
+-    /* Save guest's preferred TSC. */
+-    hdr->gtsc_khz = d->arch.tsc_khz;
+-
+-    /* Time when saving started */
+-    d->arch.hvm.sync_tsc = rdtsc();
+-}
+-
+-static int arch_hvm_check(const struct domain *d,
+-                          const struct hvm_save_header *hdr)
+-{
+-    uint32_t eax, ebx, ecx, edx;
+-
+-    if ( hdr->magic != HVM_FILE_MAGIC )
+-    {
+-        printk(XENLOG_G_ERR "HVM%d restore: bad magic number %#"PRIx32"\n",
+-               d->domain_id, hdr->magic);
+-        return -EINVAL;
+-    }
+-
+-    if ( hdr->version != HVM_FILE_VERSION )
+-    {
+-        printk(XENLOG_G_ERR "HVM%d restore: unsupported version %u\n",
+-               d->domain_id, hdr->version);
+-        return -EINVAL;
+-    }
+-
+-    cpuid(1, &eax, &ebx, &ecx, &edx);
+-    /* CPUs ought to match but with feature-masking they might not */
+-    if ( (hdr->cpuid & ~0x0fUL) != (eax & ~0x0fUL) )
+-        printk(XENLOG_G_INFO "HVM%d restore: VM saved on one CPU "
+-               "(%#"PRIx32") and restored on another (%#"PRIx32").\n",
+-               d->domain_id, hdr->cpuid, eax);
+-
+-    return 0;
+-}
+-
+-static void arch_hvm_load(struct domain *d, const struct hvm_save_header *hdr)
+-{
+-    /* Restore guest's preferred TSC frequency. */
+-    if ( hdr->gtsc_khz )
+-        d->arch.tsc_khz = hdr->gtsc_khz;
+-    if ( d->arch.vtsc )
+-        hvm_set_rdtsc_exiting(d, 1);
+-
+-    /* Time when restore started  */
+-    d->arch.hvm.sync_tsc = rdtsc();
+-}
+-
+ /* List of handlers for various HVM save and restore types */
+ static struct {
+     hvm_save_handler save;
+@@ -101,26 +45,6 @@ void __init hvm_register_savevm(uint16_t typecode,
+     hvm_sr_handlers[typecode].kind = kind;
  }
  
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int dt_find_node_by_gpath(XEN_GUEST_HANDLE(char) u_path, uint32_t u_plen,
-                           struct dt_device_node **node)
+-size_t hvm_save_size(struct domain *d)
+-{
+-    struct vcpu *v;
+-    size_t sz;
+-    int i;
+-
+-    /* Basic overhead for header and footer */
+-    sz = (2 * sizeof (struct hvm_save_descriptor)) + HVM_SAVE_LENGTH(HEADER);
+-
+-    /* Plus space for each thing we will be saving */
+-    for ( i = 0; i <= HVM_SAVE_CODE_MAX; i++ )
+-        if ( hvm_sr_handlers[i].kind == HVMSR_PER_VCPU )
+-            for_each_vcpu(d, v)
+-                sz += hvm_sr_handlers[i].size;
+-        else
+-            sz += hvm_sr_handlers[i].size;
+-
+-    return sz;
+-}
+-
+ /*
+  * Extract a single instance of a save record, by marshalling all records of
+  * that type and copying out the one we need.
+@@ -196,6 +120,83 @@ int hvm_save_one(struct domain *d, unsigned int typecode, unsigned int instance,
+     return rv;
+ }
+ 
++#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
++static void arch_hvm_save(struct domain *d, struct hvm_save_header *hdr)
++{
++    uint32_t eax, ebx, ecx, edx;
++
++    /* Save some CPUID bits */
++    cpuid(1, &eax, &ebx, &ecx, &edx);
++    hdr->cpuid = eax;
++
++    /* Save guest's preferred TSC. */
++    hdr->gtsc_khz = d->arch.tsc_khz;
++
++    /* Time when saving started */
++    d->arch.hvm.sync_tsc = rdtsc();
++}
++
++static int arch_hvm_check(const struct domain *d,
++                          const struct hvm_save_header *hdr)
++{
++    uint32_t eax, ebx, ecx, edx;
++
++    if ( hdr->magic != HVM_FILE_MAGIC )
++    {
++        printk(XENLOG_G_ERR "HVM%d restore: bad magic number %#"PRIx32"\n",
++               d->domain_id, hdr->magic);
++        return -EINVAL;
++    }
++
++    if ( hdr->version != HVM_FILE_VERSION )
++    {
++        printk(XENLOG_G_ERR "HVM%d restore: unsupported version %u\n",
++               d->domain_id, hdr->version);
++        return -EINVAL;
++    }
++
++    cpuid(1, &eax, &ebx, &ecx, &edx);
++    /* CPUs ought to match but with feature-masking they might not */
++    if ( (hdr->cpuid & ~0x0fUL) != (eax & ~0x0fUL) )
++        printk(XENLOG_G_INFO "HVM%d restore: VM saved on one CPU "
++               "(%#"PRIx32") and restored on another (%#"PRIx32").\n",
++               d->domain_id, hdr->cpuid, eax);
++
++    return 0;
++}
++
++static void arch_hvm_load(struct domain *d, const struct hvm_save_header *hdr)
++{
++    /* Restore guest's preferred TSC frequency. */
++    if ( hdr->gtsc_khz )
++        d->arch.tsc_khz = hdr->gtsc_khz;
++    if ( d->arch.vtsc )
++        hvm_set_rdtsc_exiting(d, 1);
++
++    /* Time when restore started  */
++    d->arch.hvm.sync_tsc = rdtsc();
++}
++
++size_t hvm_save_size(struct domain *d)
++{
++    struct vcpu *v;
++    size_t sz;
++    unsigned int i;
++
++    /* Basic overhead for header and footer */
++    sz = (2 * sizeof (struct hvm_save_descriptor)) + HVM_SAVE_LENGTH(HEADER);
++
++    /* Plus space for each thing we will be saving */
++    for ( i = 0; i <= HVM_SAVE_CODE_MAX; i++ )
++        if ( hvm_sr_handlers[i].kind == HVMSR_PER_VCPU )
++            for_each_vcpu(d, v)
++                sz += hvm_sr_handlers[i].size;
++        else
++            sz += hvm_sr_handlers[i].size;
++
++    return sz;
++}
++
+ int hvm_save(struct domain *d, hvm_domain_context_t *h)
  {
-@@ -386,6 +387,7 @@ int dt_find_node_by_gpath(XEN_GUEST_HANDLE(char) u_path, uint32_t u_plen,
+     char *c;
+@@ -390,6 +391,7 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
  
-     return (*node == NULL) ? -ESRCH : 0;
+     /* Not reached */
  }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
++#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
  
- struct dt_device_node *dt_find_node_by_alias(const char *alias)
+ int _hvm_init_entry(struct hvm_domain_context *h, uint16_t tc, uint16_t inst,
+                     uint32_t len)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 1996e139a0..4394990131 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2701,6 +2701,7 @@ static int cf_check vmtrace_output_position(struct vcpu *v, uint64_t *pos)
+     return v->arch.hvm.vmx.ipt_active;
+ }
+ 
++#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
+ static int cf_check vmtrace_reset(struct vcpu *v)
  {
-diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-index 3a14770855..5786bf0c59 100644
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -461,6 +461,7 @@ static void amd_iommu_disable_domain_device(const struct domain *domain,
-         spin_unlock_irqrestore(&iommu->lock, flags);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int cf_check reassign_device(
-     struct domain *source, struct domain *target, u8 devfn,
-     struct pci_dev *pdev)
-@@ -550,6 +551,7 @@ static int cf_check amd_iommu_assign_device(
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static void cf_check amd_iommu_clear_root_pgtable(struct domain *d)
- {
-@@ -698,12 +700,14 @@ static int cf_check amd_iommu_remove_device(u8 devfn, struct pci_dev *pdev)
+     if ( !v->arch.hvm.vmx.ipt_active )
+@@ -2710,6 +2711,7 @@ static int cf_check vmtrace_reset(struct vcpu *v)
+     v->arch.msrs->rtit.status = 0;
      return 0;
  }
++#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
  
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int cf_check amd_iommu_group_id(u16 seg, u8 bus, u8 devfn)
+ static uint64_t cf_check vmx_get_reg(struct vcpu *v, unsigned int reg)
  {
-     unsigned int bdf = PCI_BDF(bus, devfn);
- 
-     return (bdf < ivrs_bdf_entries) ? get_dma_requestor_id(seg, bdf) : bdf;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- #include <asm/io_apic.h>
- 
-@@ -772,14 +776,18 @@ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
-     .quarantine_init = amd_iommu_quarantine_init,
-     .add_device = amd_iommu_add_device,
-     .remove_device = amd_iommu_remove_device,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .assign_device  = amd_iommu_assign_device,
+@@ -2888,7 +2890,9 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
+     .vmtrace_output_position = vmtrace_output_position,
+     .vmtrace_set_option = vmtrace_set_option,
+     .vmtrace_get_option = vmtrace_get_option,
++#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
+     .vmtrace_reset = vmtrace_reset,
 +#endif
-     .teardown = amd_iommu_domain_destroy,
-     .clear_root_pgtable = amd_iommu_clear_root_pgtable,
-     .map_page = amd_iommu_map_page,
-     .unmap_page = amd_iommu_unmap_page,
-     .iotlb_flush = amd_iommu_flush_iotlb_pages,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = reassign_device,
-     .get_device_group_id = amd_iommu_group_id,
+ 
+     .get_reg = vmx_get_reg,
+     .set_reg = vmx_set_reg,
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index 473cf24b83..9d6cb42d48 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -240,7 +240,9 @@ struct hvm_function_table {
+     int (*vmtrace_output_position)(struct vcpu *v, uint64_t *pos);
+     int (*vmtrace_set_option)(struct vcpu *v, uint64_t key, uint64_t value);
+     int (*vmtrace_get_option)(struct vcpu *v, uint64_t key, uint64_t *value);
++#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
+     int (*vmtrace_reset)(struct vcpu *v);
 +#endif
-     .enable_x2apic = iov_enable_xt,
-     .update_ire_from_apic = amd_iommu_ioapic_update_ire,
-     .update_ire_from_msi = amd_iommu_msi_msg_update_ire,
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index ea9fa9ddf3..023febc424 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -739,6 +739,7 @@ static int ipmmu_attach_device(struct ipmmu_vmsa_domain *domain,
-     return 0;
+ 
+     uint64_t (*get_reg)(struct vcpu *v, unsigned int reg);
+     void (*set_reg)(struct vcpu *v, unsigned int reg, uint64_t val);
+@@ -775,6 +777,7 @@ static inline int hvm_vmtrace_get_option(
+     return -EOPNOTSUPP;
  }
  
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static void ipmmu_detach_device(struct ipmmu_vmsa_domain *domain,
-                                 struct device *dev)
++#if defined(CONFIG_MGMT_HYPERCALLS) || defined(CONFIG_MEM_SHARING)
+ static inline int hvm_vmtrace_reset(struct vcpu *v)
  {
-@@ -748,6 +749,7 @@ static void ipmmu_detach_device(struct ipmmu_vmsa_domain *domain,
-     for ( i = 0; i < fwspec->num_ids; ++i )
-         ipmmu_utlb_disable(domain, fwspec->ids[i]);
+     if ( hvm_funcs.vmtrace_reset )
+@@ -782,6 +785,7 @@ static inline int hvm_vmtrace_reset(struct vcpu *v)
+ 
+     return -EOPNOTSUPP;
  }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int ipmmu_init_platform_device(struct device *dev,
-                                       const struct dt_phandle_args *args)
-@@ -1138,7 +1140,9 @@ static void ipmmu_free_root_domain(struct ipmmu_vmsa_domain *domain)
-     xfree(domain);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int ipmmu_deassign_device(struct domain *d, struct device *dev);
-+#endif
- 
- static int ipmmu_assign_device(struct domain *d, u8 devfn, struct device *dev,
-                                uint32_t flag)
-@@ -1254,6 +1258,7 @@ out:
-     return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int ipmmu_deassign_device(struct domain *d, struct device *dev)
- {
-     struct ipmmu_vmsa_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
-@@ -1309,6 +1314,7 @@ static int ipmmu_reassign_device(struct domain *s, struct domain *t,
- 
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int ipmmu_dt_xlate(struct device *dev,
-                           const struct dt_phandle_args *spec)
-@@ -1487,7 +1493,9 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .teardown        = ipmmu_iommu_domain_teardown,
-     .iotlb_flush     = ipmmu_iotlb_flush,
-     .assign_device   = ipmmu_assign_device,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = ipmmu_reassign_device,
-+#endif
-     .map_page        = arm_iommu_map_page,
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index bf153227db..22def57b03 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -2759,6 +2759,7 @@ out:
- 	return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn, struct device *dev)
- {
- 	struct iommu_domain *io_domain = arm_smmu_get_domain(d, dev);
-@@ -2826,6 +2827,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
- 
- 	return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int arm_smmu_iommu_xen_domain_init(struct domain *d)
- {
-@@ -2862,7 +2864,9 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
- 	.teardown		= arm_smmu_iommu_xen_domain_teardown,
- 	.iotlb_flush		= arm_smmu_iotlb_flush,
- 	.assign_device		= arm_smmu_assign_dev,
-+#ifdef CONFIG_MGMT_HYPERCALLS
- 	.reassign_device	= arm_smmu_reassign_dev,
-+#endif
- 	.map_page		= arm_iommu_map_page,
- 	.unmap_page		= arm_iommu_unmap_page,
- 	.dt_xlate		= arm_smmu_dt_xlate,
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 22d306d0cb..51c1bf4f08 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -894,8 +894,10 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
- /* Forward declaration */
- static int arm_smmu_assign_dev(struct domain *d, u8 devfn,
- 			       struct device *dev, u32 flag);
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev);
-+#endif
++#endif /* CONFIG_MGMT_HYPERCALLS || CONFIG_MEM_SHARING */
  
  /*
-  * The driver which supports generic IOMMU DT bindings must have this
-@@ -1699,6 +1701,7 @@ static int arm_smmu_domain_add_master(struct arm_smmu_domain *smmu_domain,
- 	return 0;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static void arm_smmu_domain_remove_master(
- 				const struct arm_smmu_domain *smmu_domain,
- 				struct arm_smmu_master_cfg *cfg)
-@@ -1713,6 +1716,7 @@ static void arm_smmu_domain_remove_master(
- 		arm_smmu_write_s2cr(smmu, idx);
- 	}
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
- {
-@@ -1761,6 +1765,7 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
- 	return arm_smmu_domain_add_master(smmu_domain, cfg);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
- {
- 	struct arm_smmu_domain *smmu_domain = domain->priv;
-@@ -1770,6 +1775,7 @@ static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
- 		arm_smmu_domain_remove_master(smmu_domain, cfg);
- 
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- #if 0 /*
-        * Xen: The page table is shared with the processor, therefore
-@@ -2849,6 +2855,7 @@ out:
- 	return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev)
- {
-@@ -2918,6 +2925,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
- 
- 	return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int arm_smmu_iommu_domain_init(struct domain *d)
- {
-@@ -2956,7 +2964,9 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
-     .teardown = arm_smmu_iommu_domain_teardown,
-     .iotlb_flush = arm_smmu_iotlb_flush,
-     .assign_device = arm_smmu_assign_dev,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = arm_smmu_reassign_dev,
-+#endif
-     .map_page = arm_iommu_map_page,
-     .unmap_page = arm_iommu_unmap_page,
-     .dt_xlate = arm_smmu_dt_xlate_generic,
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index 015ffa15d4..09ac740fb2 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -59,6 +59,7 @@ fail:
-     return rc;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_deassign_dt_device(struct domain *d, struct dt_device_node *dev)
- {
-     const struct domain_iommu *hd = dom_iommu(d);
-@@ -100,6 +101,7 @@ static bool iommu_dt_device_is_assigned_locked(const struct dt_device_node *dev)
- 
-     return assigned;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- int iommu_dt_domain_init(struct domain *d)
- {
-@@ -212,6 +214,7 @@ int iommu_add_dt_pci_sideband_ids(struct pci_dev *pdev)
- }
- #endif /* CONFIG_HAS_PCI */
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_remove_dt_device(struct dt_device_node *np)
- {
-     const struct iommu_ops *ops = iommu_get_ops();
-@@ -256,6 +259,7 @@ int iommu_remove_dt_device(struct dt_device_node *np)
-     spin_unlock(&dtdevs_lock);
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- int iommu_add_dt_device(struct dt_device_node *np)
- {
-@@ -320,6 +324,7 @@ int iommu_add_dt_device(struct dt_device_node *np)
-     return rc;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-                        XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
- {
-@@ -431,3 +436,4 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
- 
-     return ret;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index c9425d6971..8812e38174 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -625,6 +625,7 @@ void iommu_resume(void)
-         iommu_vcall(iommu_get_ops(), resume);
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_do_domctl(
-     struct xen_domctl *domctl, struct domain *d,
-     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-@@ -645,6 +646,7 @@ int iommu_do_domctl(
- 
-     return ret;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- void iommu_crash_shutdown(void)
- {
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index cd855108c2..aa07a7e748 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -877,6 +877,7 @@ int pci_remove_device(u16 seg, u8 bus, u8 devfn)
-     return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- /* Caller should hold the pcidevs_lock */
- static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
-                            uint8_t devfn)
-@@ -945,7 +946,6 @@ static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
-     return ret;
- }
- 
--#ifdef CONFIG_MGMT_HYPERCALLS
- int pci_release_devices(struct domain *d)
- {
-     int combined_ret;
-@@ -1483,6 +1483,7 @@ static int iommu_remove_device(struct pci_dev *pdev)
-     return iommu_call(hd->platform_ops, remove_device, devfn, pci_to_dev(pdev));
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int device_assigned(u16 seg, u8 bus, u8 devfn)
- {
-     struct pci_dev *pdev;
-@@ -1646,6 +1647,7 @@ static int iommu_get_device_group(
- 
-     return i;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev)
- {
-@@ -1671,6 +1673,7 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev)
-     pcidevs_unlock();
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_do_pci_domctl(
-     struct xen_domctl *domctl, struct domain *d,
-     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-@@ -1804,6 +1807,7 @@ int iommu_do_pci_domctl(
- 
-     return ret;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- struct segment_iter {
-     int (*handler)(struct pci_dev *pdev, void *arg);
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index b4105163cc..8913dd4d5f 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -2731,6 +2731,7 @@ static int __init cf_check vtd_setup(void)
-     return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int cf_check reassign_device_ownership(
-     struct domain *source,
-     struct domain *target,
-@@ -2926,6 +2927,7 @@ static int cf_check intel_iommu_group_id(u16 seg, u8 bus, u8 devfn)
- 
-     return PCI_BDF(bus, devfn);
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- static int __must_check cf_check vtd_suspend(void)
- {
-@@ -3234,14 +3236,18 @@ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
-     .add_device = intel_iommu_add_device,
-     .enable_device = intel_iommu_enable_device,
-     .remove_device = intel_iommu_remove_device,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .assign_device  = intel_iommu_assign_device,
-+#endif
-     .teardown = iommu_domain_teardown,
-     .clear_root_pgtable = iommu_clear_root_pgtable,
-     .map_page = intel_iommu_map_page,
-     .unmap_page = intel_iommu_unmap_page,
-     .lookup_page = intel_iommu_lookup_page,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = reassign_device_ownership,
-     .get_device_group_id = intel_iommu_group_id,
-+#endif
-     .enable_x2apic = intel_iommu_enable_eim,
-     .disable_x2apic = intel_iommu_disable_eim,
-     .update_ire_from_apic = io_apic_write_remap_rte,
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index a598d74f1f..f53492bedc 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -407,7 +407,8 @@ static XSM_INLINE int cf_check xsm_get_vnumainfo(
-     return xsm_default_action(action, current->domain, d);
- }
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
- static XSM_INLINE int cf_check xsm_get_device_group(
-     XSM_DEFAULT_ARG uint32_t machine_bdf)
- {
-@@ -428,10 +429,9 @@ static XSM_INLINE int cf_check xsm_deassign_device(
-     XSM_ASSERT_ACTION(XSM_HOOK);
-     return xsm_default_action(action, current->domain, d);
- }
-+#endif /* CONFIG_HAS_PCI */
- 
--#endif /* HAS_PASSTHROUGH && HAS_PCI */
--
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static XSM_INLINE int cf_check xsm_assign_dtdevice(
-     XSM_DEFAULT_ARG struct domain *d, const char *dtpath)
- {
-@@ -445,8 +445,8 @@ static XSM_INLINE int cf_check xsm_deassign_dtdevice(
-     XSM_ASSERT_ACTION(XSM_HOOK);
-     return xsm_default_action(action, current->domain, d);
- }
--
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH && CONFIG_MGMT_HYPERCALLS */
- 
- static XSM_INLINE int cf_check xsm_resource_plug_core(XSM_DEFAULT_VOID)
- {
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 154a4b8a92..c9a2b895b1 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -123,16 +123,18 @@ struct xsm_ops {
-     int (*pci_config_permission)(struct domain *d, uint32_t machine_bdf,
-                                  uint16_t start, uint16_t end, uint8_t access);
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
-     int (*get_device_group)(uint32_t machine_bdf);
-     int (*assign_device)(struct domain *d, uint32_t machine_bdf);
-     int (*deassign_device)(struct domain *d, uint32_t machine_bdf);
--#endif
-+#endif /* CONFIG_HAS_PCI */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     int (*assign_dtdevice)(struct domain *d, const char *dtpath);
-     int (*deassign_dtdevice)(struct domain *d, const char *dtpath);
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH && CONFIG_MGMT_HYPERCALLS */
- 
-     int (*resource_plug_core)(void);
-     int (*resource_unplug_core)(void);
-@@ -524,7 +526,8 @@ static inline int xsm_pci_config_permission(
-     return alternative_call(xsm_ops.pci_config_permission, d, machine_bdf, start, end, access);
- }
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
- static inline int xsm_get_device_group(xsm_default_t def, uint32_t machine_bdf)
- {
-     return alternative_call(xsm_ops.get_device_group, machine_bdf);
-@@ -541,9 +544,9 @@ static inline int xsm_deassign_device(
- {
-     return alternative_call(xsm_ops.deassign_device, d, machine_bdf);
- }
--#endif /* HAS_PASSTHROUGH && HAS_PCI) */
-+#endif /* CONFIG_HAS_PCI */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static inline int xsm_assign_dtdevice(
-     xsm_default_t def, struct domain *d, const char *dtpath)
- {
-@@ -555,8 +558,8 @@ static inline int xsm_deassign_dtdevice(
- {
-     return alternative_call(xsm_ops.deassign_dtdevice, d, dtpath);
- }
--
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH && CONFIG_MGMT_HYPERCALLS */
- 
- static inline int xsm_resource_plug_pci(xsm_default_t def, uint32_t machine_bdf)
- {
-diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index 9774bb3bdb..f2a22fed92 100644
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -80,16 +80,18 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .pci_config_permission         = xsm_pci_config_permission,
-     .get_vnumainfo                 = xsm_get_vnumainfo,
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
-     .get_device_group              = xsm_get_device_group,
-     .assign_device                 = xsm_assign_device,
-     .deassign_device               = xsm_deassign_device,
--#endif
-+#endif /* CONFIG_HAS_PCI */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     .assign_dtdevice               = xsm_assign_dtdevice,
-     .deassign_dtdevice             = xsm_deassign_dtdevice,
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH && CONFIG_MGMT_HYPERCALLS */
- 
-     .resource_plug_core            = xsm_resource_plug_core,
-     .resource_unplug_core          = xsm_resource_unplug_core,
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 9b63c516e6..f761f8b384 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -1388,7 +1388,8 @@ static int cf_check flask_mem_sharing(struct domain *d)
- }
- #endif
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
- static int cf_check flask_get_device_group(uint32_t machine_bdf)
- {
-     uint32_t rsid;
-@@ -1459,9 +1460,9 @@ static int cf_check flask_deassign_device(
- 
-     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__REMOVE_DEVICE, NULL);
- }
--#endif /* HAS_PASSTHROUGH && HAS_PCI */
-+#endif /* CONFIG_HAS_PCI */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static int flask_test_assign_dtdevice(const char *dtpath)
- {
-     uint32_t rsid;
-@@ -1522,7 +1523,8 @@ static int cf_check flask_deassign_dtdevice(
-     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__REMOVE_DEVICE,
-                                 NULL);
- }
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH  && CONFIG_MGMT_HYPERCALLS */
- 
- static int cf_check flask_platform_op(uint32_t op)
- {
-@@ -1987,16 +1989,18 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .remove_from_physmap = flask_remove_from_physmap,
-     .map_gmfn_foreign = flask_map_gmfn_foreign,
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
-+#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_MGMT_HYPERCALLS)
-+#ifdef CONFIG_HAS_PCI
-     .get_device_group = flask_get_device_group,
-     .assign_device = flask_assign_device,
-     .deassign_device = flask_deassign_device,
--#endif
-+#endif /* CONFIG_HAS_PCI */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     .assign_dtdevice = flask_assign_dtdevice,
-     .deassign_dtdevice = flask_deassign_dtdevice,
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_PASSTHROUGH && CONFIG_MGMT_HYPERCALLS */
- 
-     .platform_op = flask_platform_op,
- #ifdef CONFIG_X86
+  * Accessors for registers which have per-guest-type or per-vendor locations
 -- 
 2.34.1
 
