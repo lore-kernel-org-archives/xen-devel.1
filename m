@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653CCCCD18E
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 09:13:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1143385.1477120 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34DECCD198
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 09:13:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1143392.1477150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8xZQ-0003Dd-9A; Wed, 15 Oct 2025 09:13:20 +0000
+	id 1v8xZb-0004A1-1F; Wed, 15 Oct 2025 09:13:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1143385.1477120; Wed, 15 Oct 2025 09:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 1143392.1477150; Wed, 15 Oct 2025 09:13:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8xZQ-0003DW-5Q; Wed, 15 Oct 2025 09:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 1143385;
- Wed, 15 Oct 2025 09:13:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1v8xZa-00049r-SP; Wed, 15 Oct 2025 09:13:30 +0000
+Received: by outflank-mailman (input) for mailman id 1143392;
+ Wed, 15 Oct 2025 09:13:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aLBx=4Y=kernel.org=leon@srs-se1.protection.inumbo.net>)
- id 1v8xZO-0002lR-Kt
- for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 09:13:18 +0000
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [2600:3c0a:e001:78e:0:1991:8:25])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f2fed46-a9a7-11f0-9d15-b5c5bf9af7f9;
- Wed, 15 Oct 2025 11:13:17 +0200 (CEST)
+ id 1v8xZZ-0002lL-TR
+ for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 09:13:29 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 35bc89d8-a9a7-11f0-980a-7dc792cee155;
+ Wed, 15 Oct 2025 11:13:28 +0200 (CEST)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CDBA04A2EB;
- Wed, 15 Oct 2025 09:13:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A1D2C116B1;
- Wed, 15 Oct 2025 09:13:15 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B57B563BF2;
+ Wed, 15 Oct 2025 09:13:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6168C4CEF8;
+ Wed, 15 Oct 2025 09:13:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f2fed46-a9a7-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: 35bc89d8-a9a7-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1760519595;
-	bh=5CRzqWoVfMbqVNKIxqeoLG2c9tvgUeIFTheShsK3Bpg=;
+	s=k20201202; t=1760519606;
+	bh=8N5ZxsYLVcDZve6x5HHk+A1JboM5EKxL5gdSKO7Ns2A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GfGSWwPLGtufj1swQ+n7QEGSAHQU77k7sZmwzSh3gwKsGKxwUSyhBd87hWhNEvtrl
-	 buUMXV+6O8Xu+JxlDnDhIv9r0IAD1Z0RfPmMTvm1RhyHnAh54jr/kk/B9gEmZKEBfq
-	 dyxPWuZk9aaW/5ysGOs3Lh2Xkuvkf8W36g0+yC8l1lZWgZR6XZvww3OdFVbQSeWbZ3
-	 DBSlpFZzMALBmjKmlRreacKzyXlQmKcW4asQus02qvoKR7vSSnohS8I3XGMqS/YvX5
-	 rvbOkMGDjGPOblMmmEof5eGSRnxj8+iqK6wr/OfWoF9xmDM6qaQh/HQoZtd5IhimPH
-	 5sCcW9rpImS9g==
+	b=JiSeBjBUKhVwymer3tPYHzwIFC7GJm10nXZ/10XtCNi51kg88RJS1w18W4pvJ7NeM
+	 3OwVmb0T1vu2KwfDWjx1io+HgFyPxO0MgtEwlMotfiJ179Y1QgqMPkRKjDJqt5Ao/+
+	 VjZfp9uISkci3ImI/5C8oEZdlj4Z+oNMqJTyULPa769DD302IN/VxJv7rJehAO4LNe
+	 KeIuGfTQFzyYPb83xzSoo0Sz6I9iQ3Uy0TnyhPQrAye6SrySQGjy96frRmnA4dlk+5
+	 xWdb7xuNoLeNJ5dtzrtaGqkyWLhMMmZy2qZFkbs1eHx+/CfxBpfdsutxVsk+ta+jCH
+	 50a30dGZYCtdA==
 From: Leon Romanovsky <leon@kernel.org>
 To: Marek Szyprowski <m.szyprowski@samsung.com>,
 	Robin Murphy <robin.murphy@arm.com>,
@@ -91,9 +90,9 @@ Cc: iommu@lists.linux.dev,
 	sparclinux@vger.kernel.org,
 	Jason Gunthorpe <jgg@ziepe.ca>,
 	Jason Gunthorpe <jgg@nvidia.com>
-Subject: [PATCH v5 03/14] ARM: dma-mapping: Reduce struct page exposure in arch_sync_dma*()
-Date: Wed, 15 Oct 2025 12:12:49 +0300
-Message-ID: <20251015-remove-map-page-v5-3-3bbfe3a25cdf@kernel.org>
+Subject: [PATCH v5 06/14] dma-mapping: remove unused mapping resource callbacks
+Date: Wed, 15 Oct 2025 12:12:52 +0300
+Message-ID: <20251015-remove-map-page-v5-6-3bbfe3a25cdf@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251015-remove-map-page-v5-0-3bbfe3a25cdf@kernel.org>
 References: <20251015-remove-map-page-v5-0-3bbfe3a25cdf@kernel.org>
@@ -104,236 +103,80 @@ Content-Transfer-Encoding: 8bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-As a preparation to changing from .map_page to use .map_phys DMA
-callbacks, convert arch_sync_dma*() functions to use physical addresses
-instead of struct page.
+After ARM and XEN conversions to use physical addresses for the mapping,
+there are no in-kernel users for map_resource/unmap_resource callbacks,
+so remove them.
 
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- arch/arm/mm/dma-mapping.c | 82 ++++++++++++++++++-----------------------------
- 1 file changed, 31 insertions(+), 51 deletions(-)
+ include/linux/dma-map-ops.h |  6 ------
+ kernel/dma/mapping.c        | 16 ++++------------
+ 2 files changed, 4 insertions(+), 18 deletions(-)
 
-diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
-index 08641a936394..b0310d6762d5 100644
---- a/arch/arm/mm/dma-mapping.c
-+++ b/arch/arm/mm/dma-mapping.c
-@@ -624,16 +624,14 @@ static void __arm_dma_free(struct device *dev, size_t size, void *cpu_addr,
- 	kfree(buf);
- }
- 
--static void dma_cache_maint_page(struct page *page, unsigned long offset,
--	size_t size, enum dma_data_direction dir,
-+static void dma_cache_maint_page(phys_addr_t phys, size_t size,
-+	enum dma_data_direction dir,
- 	void (*op)(const void *, size_t, int))
+diff --git a/include/linux/dma-map-ops.h b/include/linux/dma-map-ops.h
+index 79d2a74d4b49..2e98ecc313a3 100644
+--- a/include/linux/dma-map-ops.h
++++ b/include/linux/dma-map-ops.h
+@@ -53,12 +53,6 @@ struct dma_map_ops {
+ 			enum dma_data_direction dir, unsigned long attrs);
+ 	void (*unmap_sg)(struct device *dev, struct scatterlist *sg, int nents,
+ 			enum dma_data_direction dir, unsigned long attrs);
+-	dma_addr_t (*map_resource)(struct device *dev, phys_addr_t phys_addr,
+-			size_t size, enum dma_data_direction dir,
+-			unsigned long attrs);
+-	void (*unmap_resource)(struct device *dev, dma_addr_t dma_handle,
+-			size_t size, enum dma_data_direction dir,
+-			unsigned long attrs);
+ 	void (*sync_single_for_cpu)(struct device *dev, dma_addr_t dma_handle,
+ 			size_t size, enum dma_data_direction dir);
+ 	void (*sync_single_for_device)(struct device *dev,
+diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
+index 4080aebe5deb..32a85bfdf873 100644
+--- a/kernel/dma/mapping.c
++++ b/kernel/dma/mapping.c
+@@ -157,7 +157,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
  {
--	unsigned long pfn;
-+	unsigned long offset = offset_in_page(phys);
-+	unsigned long pfn = __phys_to_pfn(phys);
- 	size_t left = size;
+ 	const struct dma_map_ops *ops = get_dma_ops(dev);
+ 	bool is_mmio = attrs & DMA_ATTR_MMIO;
+-	dma_addr_t addr;
++	dma_addr_t addr = DMA_MAPPING_ERROR;
  
--	pfn = page_to_pfn(page) + offset / PAGE_SIZE;
--	offset %= PAGE_SIZE;
+ 	BUG_ON(!valid_dma_direction(dir));
+ 
+@@ -171,18 +171,13 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ 		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
+ 	else if (ops->map_phys)
+ 		addr = ops->map_phys(dev, phys, size, dir, attrs);
+-	else if (is_mmio) {
+-		if (!ops->map_resource)
+-			return DMA_MAPPING_ERROR;
 -
- 	/*
- 	 * A single sg entry may refer to multiple physically contiguous
- 	 * pages.  But we still need to process highmem pages individually.
-@@ -644,17 +642,18 @@ static void dma_cache_maint_page(struct page *page, unsigned long offset,
- 		size_t len = left;
- 		void *vaddr;
+-		addr = ops->map_resource(dev, phys, size, dir, attrs);
+-	} else {
++	else if (!is_mmio && ops->map_page) {
+ 		struct page *page = phys_to_page(phys);
+ 		size_t offset = offset_in_page(phys);
  
--		page = pfn_to_page(pfn);
--
--		if (PageHighMem(page)) {
-+		phys = __pfn_to_phys(pfn);
-+		if (PhysHighMem(phys)) {
- 			if (len + offset > PAGE_SIZE)
- 				len = PAGE_SIZE - offset;
- 
- 			if (cache_is_vipt_nonaliasing()) {
--				vaddr = kmap_atomic(page);
-+				vaddr = kmap_atomic_pfn(pfn);
- 				op(vaddr + offset, len, dir);
- 				kunmap_atomic(vaddr);
- 			} else {
-+				struct page *page = phys_to_page(phys);
-+
- 				vaddr = kmap_high_get(page);
- 				if (vaddr) {
- 					op(vaddr + offset, len, dir);
-@@ -662,7 +661,8 @@ static void dma_cache_maint_page(struct page *page, unsigned long offset,
- 				}
- 			}
- 		} else {
--			vaddr = page_address(page) + offset;
-+			phys += offset;
-+			vaddr = phys_to_virt(phys);
- 			op(vaddr, len, dir);
- 		}
- 		offset = 0;
-@@ -676,14 +676,11 @@ static void dma_cache_maint_page(struct page *page, unsigned long offset,
-  * Note: Drivers should NOT use this function directly.
-  * Use the driver DMA support - see dma-mapping.h (dma_sync_*)
-  */
--static void __dma_page_cpu_to_dev(struct page *page, unsigned long off,
--	size_t size, enum dma_data_direction dir)
-+void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
-+			      enum dma_data_direction dir)
- {
--	phys_addr_t paddr;
--
--	dma_cache_maint_page(page, off, size, dir, dmac_map_area);
-+	dma_cache_maint_page(paddr, size, dir, dmac_map_area);
- 
--	paddr = page_to_phys(page) + off;
- 	if (dir == DMA_FROM_DEVICE) {
- 		outer_inv_range(paddr, paddr + size);
- 	} else {
-@@ -692,17 +689,15 @@ static void __dma_page_cpu_to_dev(struct page *page, unsigned long off,
- 	/* FIXME: non-speculating: flush on bidirectional mappings? */
- }
- 
--static void __dma_page_dev_to_cpu(struct page *page, unsigned long off,
--	size_t size, enum dma_data_direction dir)
-+void arch_sync_dma_for_cpu(phys_addr_t paddr, size_t size,
-+			   enum dma_data_direction dir)
- {
--	phys_addr_t paddr = page_to_phys(page) + off;
--
- 	/* FIXME: non-speculating: not required */
- 	/* in any case, don't bother invalidating if DMA to device */
- 	if (dir != DMA_TO_DEVICE) {
- 		outer_inv_range(paddr, paddr + size);
- 
--		dma_cache_maint_page(page, off, size, dir, dmac_unmap_area);
-+		dma_cache_maint_page(paddr, size, dir, dmac_unmap_area);
+ 		/*
+ 		 * The dma_ops API contract for ops->map_page() requires
+-		 * kmappable memory, while ops->map_resource() does not.
++		 * kmappable memory.
+ 		 */
+ 		addr = ops->map_page(dev, page, offset, size, dir, attrs);
  	}
- 
- 	/*
-@@ -1205,7 +1200,7 @@ static int __map_sg_chunk(struct device *dev, struct scatterlist *sg,
- 		unsigned int len = PAGE_ALIGN(s->offset + s->length);
- 
- 		if (!dev->dma_coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
--			__dma_page_cpu_to_dev(sg_page(s), s->offset, s->length, dir);
-+			arch_sync_dma_for_device(sg_phys(s), s->length, dir);
- 
- 		prot = __dma_info_to_prot(dir, attrs);
- 
-@@ -1307,8 +1302,7 @@ static void arm_iommu_unmap_sg(struct device *dev,
- 			__iommu_remove_mapping(dev, sg_dma_address(s),
- 					       sg_dma_len(s));
- 		if (!dev->dma_coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
--			__dma_page_dev_to_cpu(sg_page(s), s->offset,
--					      s->length, dir);
-+			arch_sync_dma_for_cpu(sg_phys(s), s->length, dir);
- 	}
- }
- 
-@@ -1330,7 +1324,7 @@ static void arm_iommu_sync_sg_for_cpu(struct device *dev,
- 		return;
- 
- 	for_each_sg(sg, s, nents, i)
--		__dma_page_dev_to_cpu(sg_page(s), s->offset, s->length, dir);
-+		arch_sync_dma_for_cpu(sg_phys(s), s->length, dir);
- 
- }
- 
-@@ -1352,7 +1346,7 @@ static void arm_iommu_sync_sg_for_device(struct device *dev,
- 		return;
- 
- 	for_each_sg(sg, s, nents, i)
--		__dma_page_cpu_to_dev(sg_page(s), s->offset, s->length, dir);
-+		arch_sync_dma_for_device(sg_phys(s), s->length, dir);
- }
- 
- /**
-@@ -1374,7 +1368,7 @@ static dma_addr_t arm_iommu_map_page(struct device *dev, struct page *page,
- 	int ret, prot, len = PAGE_ALIGN(size + offset);
- 
- 	if (!dev->dma_coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC))
--		__dma_page_cpu_to_dev(page, offset, size, dir);
-+		arch_sync_dma_for_device(page_to_phys(page), offset, size, dir);
- 
- 	dma_addr = __alloc_iova(mapping, len);
- 	if (dma_addr == DMA_MAPPING_ERROR)
-@@ -1407,7 +1401,6 @@ static void arm_iommu_unmap_page(struct device *dev, dma_addr_t handle,
- {
- 	struct dma_iommu_mapping *mapping = to_dma_iommu_mapping(dev);
- 	dma_addr_t iova = handle & PAGE_MASK;
--	struct page *page;
- 	int offset = handle & ~PAGE_MASK;
- 	int len = PAGE_ALIGN(size + offset);
- 
-@@ -1415,8 +1408,9 @@ static void arm_iommu_unmap_page(struct device *dev, dma_addr_t handle,
- 		return;
- 
- 	if (!dev->dma_coherent && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
--		page = phys_to_page(iommu_iova_to_phys(mapping->domain, iova));
--		__dma_page_dev_to_cpu(page, offset, size, dir);
-+		phys_addr_t phys = iommu_iova_to_phys(mapping->domain, iova);
-+
-+		arch_sync_dma_for_cpu(phys + offset, size, dir);
- 	}
- 
- 	iommu_unmap(mapping->domain, iova, len);
-@@ -1485,14 +1479,14 @@ static void arm_iommu_sync_single_for_cpu(struct device *dev,
- {
- 	struct dma_iommu_mapping *mapping = to_dma_iommu_mapping(dev);
- 	dma_addr_t iova = handle & PAGE_MASK;
--	struct page *page;
- 	unsigned int offset = handle & ~PAGE_MASK;
-+	phys_addr_t phys;
- 
- 	if (dev->dma_coherent || !iova)
- 		return;
- 
--	page = phys_to_page(iommu_iova_to_phys(mapping->domain, iova));
--	__dma_page_dev_to_cpu(page, offset, size, dir);
-+	phys = iommu_iova_to_phys(mapping->domain, iova);
-+	arch_sync_dma_for_cpu(phys + offset, size, dir);
- }
- 
- static void arm_iommu_sync_single_for_device(struct device *dev,
-@@ -1500,14 +1494,14 @@ static void arm_iommu_sync_single_for_device(struct device *dev,
- {
- 	struct dma_iommu_mapping *mapping = to_dma_iommu_mapping(dev);
- 	dma_addr_t iova = handle & PAGE_MASK;
--	struct page *page;
- 	unsigned int offset = handle & ~PAGE_MASK;
-+	phys_addr_t phys;
- 
- 	if (dev->dma_coherent || !iova)
- 		return;
- 
--	page = phys_to_page(iommu_iova_to_phys(mapping->domain, iova));
--	__dma_page_cpu_to_dev(page, offset, size, dir);
-+	phys = iommu_iova_to_phys(mapping->domain, iova);
-+	arch_sync_dma_for_device(phys + offset, size, dir);
- }
- 
- static const struct dma_map_ops iommu_ops = {
-@@ -1794,20 +1788,6 @@ void arch_teardown_dma_ops(struct device *dev)
- 	set_dma_ops(dev, NULL);
- }
- 
--void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
--		enum dma_data_direction dir)
--{
--	__dma_page_cpu_to_dev(phys_to_page(paddr), paddr & (PAGE_SIZE - 1),
--			      size, dir);
--}
--
--void arch_sync_dma_for_cpu(phys_addr_t paddr, size_t size,
--		enum dma_data_direction dir)
--{
--	__dma_page_dev_to_cpu(phys_to_page(paddr), paddr & (PAGE_SIZE - 1),
--			      size, dir);
--}
--
- void *arch_dma_alloc(struct device *dev, size_t size, dma_addr_t *dma_handle,
- 		gfp_t gfp, unsigned long attrs)
- {
+@@ -227,10 +222,7 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
+ 		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
+ 	else if (ops->unmap_phys)
+ 		ops->unmap_phys(dev, addr, size, dir, attrs);
+-	else if (is_mmio) {
+-		if (ops->unmap_resource)
+-			ops->unmap_resource(dev, addr, size, dir, attrs);
+-	} else
++	else
+ 		ops->unmap_page(dev, addr, size, dir, attrs);
+ 	trace_dma_unmap_phys(dev, addr, size, dir, attrs);
+ 	debug_dma_unmap_phys(dev, addr, size, dir);
 
 -- 
 2.51.0
